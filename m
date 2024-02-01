@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD4C9C47DDB
-	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Feb 2024 12:28:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B779EC47DDF
+	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Feb 2024 12:29:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rVWBN-0007oN-RM; Thu, 01 Feb 2024 07:28:41 -0500
+	id 1rVWBS-0007rL-HR; Thu, 01 Feb 2024 07:28:46 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rVWBM-0007nT-QR
- for qemu-riscv@nongnu.org; Thu, 01 Feb 2024 07:28:41 -0500
-Received: from mail-lj1-x232.google.com ([2a00:1450:4864:20::232])
+ id 1rVWBQ-0007qA-KM
+ for qemu-riscv@nongnu.org; Thu, 01 Feb 2024 07:28:44 -0500
+Received: from mail-ed1-x532.google.com ([2a00:1450:4864:20::532])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rVWBK-0002AR-6Z
- for qemu-riscv@nongnu.org; Thu, 01 Feb 2024 07:28:40 -0500
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-2d066b532f0so12817421fa.1
- for <qemu-riscv@nongnu.org>; Thu, 01 Feb 2024 04:28:37 -0800 (PST)
+ id 1rVWBO-0002Bg-Pm
+ for qemu-riscv@nongnu.org; Thu, 01 Feb 2024 07:28:44 -0500
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-55a8fd60af0so1193226a12.1
+ for <qemu-riscv@nongnu.org>; Thu, 01 Feb 2024 04:28:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706790516; x=1707395316; darn=nongnu.org;
+ d=linaro.org; s=google; t=1706790521; x=1707395321; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JB4Epfg8EtaZj5aKH+XSQiP5F2xLNHDHewznk8QZ/uQ=;
- b=Mhf5eHhMd9726iLRgT9RJF6EXSLQojnDqkZb8e2c211DUlYi6jvHaOobEIPayuK+1e
- Kkje8KSPxT0kbWE9vX6bjuJirXQ6Ooj+K5dtWmZcKSu/OTDQ8SQzuausiIOnzVK4jFuD
- ba4i6bcLl8lYfrVl3QP7ZGgqMj9WZIfH/DgsJAqdGaA0ySMbyvOsiqT/fzozR4sSyt6I
- M4Y+e5oZQhq8WP0WGAhsCv+q/yW8Mq9FG4Jw4O53fS77j43bTDQVr3B8f578MkiYsJsA
- wOfeINeedt0DzSJfUKzqYn+u2afXlSK3KrWAmnLFBQpIhxQX6upHRiq6rA7lSEnw4VcO
- 71gg==
+ bh=j3+17aNm4Vprn5dUFdZGH0//LOKhFu0gJMaab5yZQOU=;
+ b=xIioCV5/4kypAF5I4N0sFp48lHBk+K1/3Zf1HiT7ZoZ5tddrTcYIMiJUB8etzGz1D0
+ U2VaIHAlWSEIpr5IGjwBze7BDCn5Op6HdZQZ63vCkXKN93fRAjqxeWEtNI9ua79sikTY
+ p2EqCUJBaWVSGwHnQMtSN7xcN9ZPHVWLzgfo4Cb45vOIZeF8vcldvMSHlO13EL9ZuHW/
+ vefVcwolh8CCVDzP3uXBp9da4jp8XB9MT934LS1nJ90E3LWPMuX8BX+t1sKnvoG8zaqU
+ Vfg5abR1uSov1Af7MJUWNFEHOh0uPWcHqfxYj2tt56v70Ne9oZh9Nj3EllI4Ivdw76bf
+ BTSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706790516; x=1707395316;
+ d=1e100.net; s=20230601; t=1706790521; x=1707395321;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=JB4Epfg8EtaZj5aKH+XSQiP5F2xLNHDHewznk8QZ/uQ=;
- b=o8HqliDCjqq3Zqm+JG59DYcIN+AkwDaIyWlokhun2voYohP41DWF8QqivsOixSGA1T
- lYEQ+ZRJLK3+i3U3IgK8KlbfjBT3TJ3Wu3RKiAXSIFFKxK7oo94X/xlDdlgWBqBGdC8+
- uZJBhv3D7RmywACqf49YoRHh0mlNraVXExDzJ+6DaAC1wFLQ5gsGLcviJe3S1WwsUIYr
- /Tw2rCakPy9K9r5ttgrZisbAr9LIQ+Ph4Rork40FhlGxuRNU4Qko4Ng0Gde0kKy9UJd5
- gFTeX5h8uhVBD4p1GT5ZfVf8yjvJLCUWKu/jXkLtEtMXSmiFrNfN7/3E/vAvWzP3ZQXE
- /HEw==
-X-Gm-Message-State: AOJu0YwCogYpoqlpWWkd/+bGobYhVkvBdtKotVOWHZufcOhg0tH+xW3e
- Nwi68SlN1h5zDQyLY2DM1kKjvqVsT/BuAr2ssMTz9aN4LFfXU6zN0HxL6K+t2i4=
-X-Google-Smtp-Source: AGHT+IHfQ3BAlodQIwg5MRRVv6skMju6Ub91ft3nNbR41ng8DNcgl413x6yoHbvU+Yn7FTp+gi8niw==
-X-Received: by 2002:a2e:924a:0:b0:2d0:58b9:2bf3 with SMTP id
- v10-20020a2e924a000000b002d058b92bf3mr3633384ljg.20.1706790516372; 
- Thu, 01 Feb 2024 04:28:36 -0800 (PST)
+ bh=j3+17aNm4Vprn5dUFdZGH0//LOKhFu0gJMaab5yZQOU=;
+ b=nMeI9K+juHcemDuljiSje7EQO5KxNlZ9BZW6MpQquEBaWPYW7xfFyjTjWV9htAo5d8
+ +z1wLYoat1U7cC0p+JGD0cQfw2FagVgQOyF66qiQ9S2ewHaIFOFXDHTUaDyFx6f1IvU7
+ BVrjEgkizgqinKhfG6GLjwBC4fr82GGPL0ahUT7I0f7Yvvu4LznO5FZEcSxVsjiC3N9y
+ JxRkHNt9e6gzcdPlu7S3ZkAoOa0hvy3ISMbmIwM+pj2K4WS315Xq6OWe3Z9LJi0SQ3tC
+ +dXl94xvOoV21g8iCjjz3igvWAelhgFTvxBlEX7vofjXtHol8ev6jslO0hLsRTR/l83j
+ bh9w==
+X-Gm-Message-State: AOJu0YzcSbDucRAAcxg1vywZ1kH13SwstwycK7Tqif/8fnsDESQHGsg4
+ kdcSB/Pu+KswwmabBo92iY5An4xxtbIIsECNDT4LGEUPEs+yVapnnXTd1ZXdcIk=
+X-Google-Smtp-Source: AGHT+IE518aY9Zg+eW0NfNaa71Yqv2oSN/GwSxcHSYmRth6EnOr9d0+vlls0ehMypywlOjfWcp9eSA==
+X-Received: by 2002:a05:6402:4584:b0:55f:a534:cac9 with SMTP id
+ ig4-20020a056402458400b0055fa534cac9mr2654210edb.5.1706790521395; 
+ Thu, 01 Feb 2024 04:28:41 -0800 (PST)
 X-Forwarded-Encrypted: i=0;
- AJvYcCW6RyN6yqTxhJY7XB2eZbbKlZIoLtk+r8yMdvLzY//FuqQrAuQ7u0YYnST4sLz8+61z2D8dpgSyB1g0nZ0tXJW6lRmu2IOYksW1fyeB1unTTlNhsqe8u6khODW4tPeV5Z4s8kpAVPs0gup8vF+lUi4poTgztrZxyyhsZhVUUpEiIoMAH+LY2XKySSFme6372RZy7IHmeegM9iEyRpltzlRTm+4w11T0fH6yUARFfE3WaxUP3WHqMgSHvoBqoO1EZcIbtiUF+oThrBMFchCZuGdOKF7ghEkrlnZIgxAy88D9+7Hjl0yWjVlaZw7ceJIEMYuUasajWOfOFYoSge+n/XJcAqIAbIslaDC9vguj6YihichrLEgHcEqdYVAvzAokB51wc3gUnNeG+EtFo35c9xHURio3Ia+YRdnUjBbhrIKMEvVbXJa6l3t56LIYoIEG0mjn8pninNcfgOavxm10wDTCusy6P9kwyjsYy5udPsFnm4vQ3iyx+UEnilNivv85nXmmAJ6vEX9knNoKzAICZanprhpfOitjbn2Q0YOvPHWDdvZCoCBNeAZH8aoN2Hrwbg7Y2mOk0Pan5PqXwacn1XKB6HMXAB+LEAu/ACSTxNrLZM6/zIbXDsSQnXKIhbnD/IZ6NCIntvbTsrtE4JXT1SoIECEjaHphMfRjzhIE8niZ7khzdRohSsgLcueVjA==
+ AJvYcCUnNVDM+JdlDDIQig7S6oprTdpmYSyTZijeGzcAI+jkLqJ1FqUcmr3lHzWTvaWs6+7pIaS0izkUppDkh2b5xcrOJwjXMar9S3OKr4SIIFh73tWmBrh6fX16mTRi1qGNADIFwHOjBCGcHRR/cRU0gwlhVOxJEnrgCYIQJjX2WvLkssMTzFC23h5XguiqGhzVffzcYqf6qp2+lEH/GtgZIBeyxtF1HZxqdWlJjWKMjs6ZaQNhg9ZbEvZEFFFkzCseUNIIAgsj2a7Z43uIy6vIRCUjx1dySRh21n0t133gnT9WZU+PQMxjCM8Hn5hcyhfK4yB7XgSG3NotnX8uKH4IUN4vBUPBswWwzcDGRx/Jm15pMUx/f+N3px1QajvMd+3jPz3mtL+NFm/EGQAbpoylSknRrbJyxQiPjTwVFS7mjUpdAh2UGS8KLNeAoLLfH0WaMQ6+YU7ML9ureVgUs09wHFmsa7vzskLpOnt2BKMecUwKwavtJdDKvVId/w0Gdwfy4bSKZfHCNEO5goCFJzswkNmiXfDaJEhVLTyXumJfFl+1TsgGDbFcCf5JWPnaUlI7unvtrQshkLZLPzhy5pJe+cTQLNqhNP0zP5yRcgLfhCm8KuPWdA9YX9GwxyOSx+xOK8HHkCds6LA=
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- cs10-20020a0564020c4a00b0055d37af4d20sm6621335edb.74.2024.02.01.04.28.35
+ p14-20020a056402500e00b0055c67e6454asm6815985eda.70.2024.02.01.04.28.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 Feb 2024 04:28:35 -0800 (PST)
+ Thu, 01 Feb 2024 04:28:39 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 5E4DF5F9D9;
+ by draig.lan (Postfix) with ESMTP id C67425F9DD;
  Thu,  1 Feb 2024 12:28:35 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -77,20 +77,18 @@ Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
  Beraldo Leal <bleal@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Chris Wulff <crwulff@gmail.com>, Fabiano Rosas <farosas@suse.de>,
- Andrea Bolognani <abologna@redhat.com>
-Subject: [PATCH 1/5] tests/docker: Add sqlite3 module to openSUSE Leap
- container
-Date: Thu,  1 Feb 2024 12:28:31 +0000
-Message-Id: <20240201122835.1712347-2-alex.bennee@linaro.org>
+ Chris Wulff <crwulff@gmail.com>
+Subject: [PATCH 5/5] kconfig: use "select" to enable semihosting
+Date: Thu,  1 Feb 2024 12:28:35 +0000
+Message-Id: <20240201122835.1712347-6-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240201122835.1712347-1-alex.bennee@linaro.org>
 References: <20240201122835.1712347-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::232;
- envelope-from=alex.bennee@linaro.org; helo=mail-lj1-x232.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::532;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x532.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -113,73 +111,151 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Fabiano Rosas <farosas@suse.de>
+From: Paolo Bonzini <pbonzini@redhat.com>
 
-Avocado needs sqlite3:
+Just like all other dependencies, these can be expressed in Kconfig
+files rather than in the default configurations.
 
-  Failed to load plugin from module "avocado.plugins.journal":
-  ImportError("Module 'sqlite3' is not installed.
-  Use: sudo zypper install python311 to install it")
-
->From 'zypper info python311':
-  "This package supplies rich command line features provided by
-  readline, and sqlite3 support for the interpreter core, thus forming
-  a so called "extended" runtime."
-
-Include the appropriate package in the lcitool mappings which will
-guarantee the dockerfile gets properly updated when lcitool is
-run. Also include the updated dockerfile.
-
-Signed-off-by: Fabiano Rosas <farosas@suse.de>
-Suggested-by: Andrea Bolognani <abologna@redhat.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Message-Id: <20240117164227.32143-1-farosas@suse.de>
+Signed-off-by: Paolo Bonzini <pbonzini@redhat.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Message-Id: <20240129115809.1039924-1-pbonzini@redhat.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- tests/docker/dockerfiles/opensuse-leap.docker | 1 +
- tests/lcitool/mappings.yml                    | 4 ++++
- tests/lcitool/projects/qemu.yml               | 1 +
- 3 files changed, 6 insertions(+)
+ configs/devices/m68k-softmmu/default.mak    | 2 --
+ configs/devices/mips-softmmu/common.mak     | 3 ---
+ configs/devices/nios2-softmmu/default.mak   | 2 --
+ configs/devices/riscv32-softmmu/default.mak | 2 --
+ configs/devices/riscv64-softmmu/default.mak | 2 --
+ configs/devices/xtensa-softmmu/default.mak  | 2 --
+ target/m68k/Kconfig                         | 1 +
+ target/mips/Kconfig                         | 1 +
+ target/nios2/Kconfig                        | 1 +
+ target/riscv/Kconfig                        | 2 ++
+ target/xtensa/Kconfig                       | 1 +
+ 11 files changed, 6 insertions(+), 13 deletions(-)
 
-diff --git a/tests/docker/dockerfiles/opensuse-leap.docker b/tests/docker/dockerfiles/opensuse-leap.docker
-index dc0e36ce488..cf753383a45 100644
---- a/tests/docker/dockerfiles/opensuse-leap.docker
-+++ b/tests/docker/dockerfiles/opensuse-leap.docker
-@@ -90,6 +90,7 @@ RUN zypper update -y && \
-            pcre-devel-static \
-            pipewire-devel \
-            pkgconfig \
-+           python311 \
-            python311-base \
-            python311-pip \
-            python311-setuptools \
-diff --git a/tests/lcitool/mappings.yml b/tests/lcitool/mappings.yml
-index 0b908882f1d..407c03301bf 100644
---- a/tests/lcitool/mappings.yml
-+++ b/tests/lcitool/mappings.yml
-@@ -59,6 +59,10 @@ mappings:
-     CentOSStream8:
-     OpenSUSELeap15:
+diff --git a/configs/devices/m68k-softmmu/default.mak b/configs/devices/m68k-softmmu/default.mak
+index 7f8619e4278..8dcaa28ed38 100644
+--- a/configs/devices/m68k-softmmu/default.mak
++++ b/configs/devices/m68k-softmmu/default.mak
+@@ -1,7 +1,5 @@
+ # Default configuration for m68k-softmmu
  
-+  python3-sqlite3:
-+    CentOSStream8: python38
-+    OpenSUSELeap15: python311
-+
-   python3-tomli:
-     # test using tomllib
-     apk:
-diff --git a/tests/lcitool/projects/qemu.yml b/tests/lcitool/projects/qemu.yml
-index 82092c9f175..149b15de57b 100644
---- a/tests/lcitool/projects/qemu.yml
-+++ b/tests/lcitool/projects/qemu.yml
-@@ -97,6 +97,7 @@ packages:
-  - python3-pip
-  - python3-sphinx
-  - python3-sphinx-rtd-theme
-+ - python3-sqlite3
-  - python3-tomli
-  - python3-venv
-  - rpm2cpio
+-CONFIG_SEMIHOSTING=y
+-
+ # Boards:
+ #
+ CONFIG_AN5206=y
+diff --git a/configs/devices/mips-softmmu/common.mak b/configs/devices/mips-softmmu/common.mak
+index 7da99327a77..1a853841b27 100644
+--- a/configs/devices/mips-softmmu/common.mak
++++ b/configs/devices/mips-softmmu/common.mak
+@@ -1,8 +1,5 @@
+ # Common mips*-softmmu CONFIG defines
+ 
+-# CONFIG_SEMIHOSTING is always required on this architecture
+-CONFIG_SEMIHOSTING=y
+-
+ CONFIG_ISA_BUS=y
+ CONFIG_PCI=y
+ CONFIG_PCI_DEVICES=y
+diff --git a/configs/devices/nios2-softmmu/default.mak b/configs/devices/nios2-softmmu/default.mak
+index 1bc4082ea99..e130d024e62 100644
+--- a/configs/devices/nios2-softmmu/default.mak
++++ b/configs/devices/nios2-softmmu/default.mak
+@@ -1,7 +1,5 @@
+ # Default configuration for nios2-softmmu
+ 
+-CONFIG_SEMIHOSTING=y
+-
+ # Boards:
+ #
+ CONFIG_NIOS2_10M50=y
+diff --git a/configs/devices/riscv32-softmmu/default.mak b/configs/devices/riscv32-softmmu/default.mak
+index d847bd5692e..94a236c9c25 100644
+--- a/configs/devices/riscv32-softmmu/default.mak
++++ b/configs/devices/riscv32-softmmu/default.mak
+@@ -3,8 +3,6 @@
+ # Uncomment the following lines to disable these optional devices:
+ #
+ #CONFIG_PCI_DEVICES=n
+-CONFIG_SEMIHOSTING=y
+-CONFIG_ARM_COMPATIBLE_SEMIHOSTING=y
+ 
+ # Boards:
+ #
+diff --git a/configs/devices/riscv64-softmmu/default.mak b/configs/devices/riscv64-softmmu/default.mak
+index bc69301fa4a..3f680594484 100644
+--- a/configs/devices/riscv64-softmmu/default.mak
++++ b/configs/devices/riscv64-softmmu/default.mak
+@@ -3,8 +3,6 @@
+ # Uncomment the following lines to disable these optional devices:
+ #
+ #CONFIG_PCI_DEVICES=n
+-CONFIG_SEMIHOSTING=y
+-CONFIG_ARM_COMPATIBLE_SEMIHOSTING=y
+ 
+ # Boards:
+ #
+diff --git a/configs/devices/xtensa-softmmu/default.mak b/configs/devices/xtensa-softmmu/default.mak
+index 4fe1bf00c94..49e4c9da88c 100644
+--- a/configs/devices/xtensa-softmmu/default.mak
++++ b/configs/devices/xtensa-softmmu/default.mak
+@@ -1,7 +1,5 @@
+ # Default configuration for Xtensa
+ 
+-CONFIG_SEMIHOSTING=y
+-
+ # Boards:
+ #
+ CONFIG_XTENSA_SIM=y
+diff --git a/target/m68k/Kconfig b/target/m68k/Kconfig
+index 23debad519a..9eae71486ff 100644
+--- a/target/m68k/Kconfig
++++ b/target/m68k/Kconfig
+@@ -1,2 +1,3 @@
+ config M68K
+     bool
++    select SEMIHOSTING
+diff --git a/target/mips/Kconfig b/target/mips/Kconfig
+index 6adf1453548..eb19c94c7d4 100644
+--- a/target/mips/Kconfig
++++ b/target/mips/Kconfig
+@@ -1,5 +1,6 @@
+ config MIPS
+     bool
++    select SEMIHOSTING
+ 
+ config MIPS64
+     bool
+diff --git a/target/nios2/Kconfig b/target/nios2/Kconfig
+index 1529ab8950d..c65550c861a 100644
+--- a/target/nios2/Kconfig
++++ b/target/nios2/Kconfig
+@@ -1,2 +1,3 @@
+ config NIOS2
+     bool
++    select SEMIHOSTING
+diff --git a/target/riscv/Kconfig b/target/riscv/Kconfig
+index b9e5932f13f..adb7de3f37d 100644
+--- a/target/riscv/Kconfig
++++ b/target/riscv/Kconfig
+@@ -1,5 +1,7 @@
+ config RISCV32
+     bool
++    select ARM_COMPATIBLE_SEMIHOSTING # for do_common_semihosting()
+ 
+ config RISCV64
+     bool
++    select ARM_COMPATIBLE_SEMIHOSTING # for do_common_semihosting()
+diff --git a/target/xtensa/Kconfig b/target/xtensa/Kconfig
+index a3c8dc7f6d7..5e46049262d 100644
+--- a/target/xtensa/Kconfig
++++ b/target/xtensa/Kconfig
+@@ -1,2 +1,3 @@
+ config XTENSA
+     bool
++    select SEMIHOSTING
 -- 
 2.39.2
 
