@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55080C4828D
-	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Feb 2024 15:06:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79244C4828F
+	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Feb 2024 16:07:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rVYdz-0006nd-QI; Thu, 01 Feb 2024 10:06:23 -0500
+	id 1rVZat-0005jM-0N; Thu, 01 Feb 2024 11:07:15 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1rVYdy-0006mU-KT
- for qemu-riscv@nongnu.org; Thu, 01 Feb 2024 10:06:22 -0500
-Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529])
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1rVZap-0005bM-5b
+ for qemu-riscv@nongnu.org; Thu, 01 Feb 2024 11:07:11 -0500
+Received: from mail-lj1-x233.google.com ([2a00:1450:4864:20::233])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1rVYdw-00038n-C0
- for qemu-riscv@nongnu.org; Thu, 01 Feb 2024 10:06:22 -0500
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-55fd5f67f03so342338a12.0
- for <qemu-riscv@nongnu.org>; Thu, 01 Feb 2024 07:06:18 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1rVZam-0008I8-DB
+ for qemu-riscv@nongnu.org; Thu, 01 Feb 2024 11:07:10 -0500
+Received: by mail-lj1-x233.google.com with SMTP id
+ 38308e7fff4ca-2cf588c4dbcso14435541fa.1
+ for <qemu-riscv@nongnu.org>; Thu, 01 Feb 2024 08:07:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1706799977; x=1707404777; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Ydodzi5mkvIz5Auw1VR9isoTRD7y8azWMN5eCfOjOF0=;
- b=FXRVASPJ4qucc0MmM0o9xum++FI4PZ98SYQNgwrayqulJbWNpYr5EcT6F3ZtU2DJgm
- CoAp1LpZoGj07+hFV0ubedEx6xzrdExsfg87gXv2sdvTrHNf5HYyj6YBTnLq78NnoTxF
- jiSiWDYt3oy8e50HBKxZs59lZ42ajorQYpEidmcesMVDMSQ6Q0xIdsBHt0TKIP0N1X9z
- b1iv9oqj72uWxXNYg+925DCWBN4ftJwGDb+a3H5q4rlbHEaZwiv+xYXw3hnMcehVA4Px
- rLck8wnS/4OODssWveUSqTJmbYVSPr+Rwc2rbWnY17FXg1f+zSCeDRyZp/2gGfU0aeX2
- TKgg==
+ d=linaro.org; s=google; t=1706803626; x=1707408426; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=7m4biepq+wdTrTMcPIx64LKzglwVFghTFI7I3P3BXkA=;
+ b=iCnzWQJMgNuhQm26xq9BWNeWTAT4mv4YzOXe8VQeOnaVY0TtovA6KdPTfA6lnNoFQN
+ QC9ESTyx04SkquGgEs2lqW5JuTCBdRYfoOwMfYqVd3bSuB5bFdbMJa/cfJe4PM/G5f1N
+ yGUXvJLHTTxmyVSGSiBNBUGIM1iospPxlKBjKHt+sM+HTgYpwQMIXoTB3lRDvXIRazrl
+ BgUh/pZvvcd7bceXzzV4E9VbXmXX7BLMaXgXIAFco5Ww9sirhn/W1SLCYto61fZk2G70
+ tHXmZ3xLtJysHUvq61AMIBTDx9+wtn3OKLswTJXIQjUaQBWNRgRb/O22Q67o5FvDrChj
+ dtiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706799977; x=1707404777;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Ydodzi5mkvIz5Auw1VR9isoTRD7y8azWMN5eCfOjOF0=;
- b=kbYdpp9f93SNkMnnjvlQdHAxiJpKvDvqLMk0FfXCoO8HUSM9vsdo/hIxG9zbM7aV9I
- N+puU0K1P6pFke7lewcHaKfcGsxkCFL740MuxAW8rULiUh/hLAi/Qf5asB0py+B61sE3
- wUUFQFhCxuordUSiYYgKyQvVTTqU6I9R/hPs6vuX0jUpwW8NeyEHH1u1h1/haTN9AcSN
- cX1TRObGRlP9j0LK4p5g4a4wLX3jxiYbTXq95PMoTFBR3gSLnYFrRbX7zC9AOkQTJcHO
- +IGFfnymVL7fyvHFpOFz+ga/0ld/lujEdURzqSa3jP3YZN1O3+HGRHpzD+9arF2totuR
- XeIg==
-X-Gm-Message-State: AOJu0YxNz4TG4/wz4Tfc4ceFZsF3x+X8SdIdY5pIvqXc06QagR5FZo6L
- FHfHB8G4DPTb6kJ+D6mPBJGCwbAm8pecApCANukAaJAlwy/Utkd11YfElyRZtX8=
-X-Google-Smtp-Source: AGHT+IE8sD+VdVVE7FFoCQVjCTmbbhNHmt2sqqgsRrLwvlbD7DZIaHNx6CbxE2JNh3hF3G+szMXvdA==
-X-Received: by 2002:a17:906:408b:b0:a36:3edb:aeac with SMTP id
- u11-20020a170906408b00b00a363edbaeacmr2217948ejj.17.1706799977076; 
- Thu, 01 Feb 2024 07:06:17 -0800 (PST)
-X-Forwarded-Encrypted: i=0;
- AJvYcCW3A1XS/cQlV8EzzwB6cq0s5gVWNKTEWASrx1xq41Fys63qEU7WOr8g3ICi4rl/m8f8ubbs854AUjEnTcPsKcL1Vnm13oQ=
-Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
- [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
- by smtp.gmail.com with ESMTPSA id
- vw16-20020a170907a71000b00a354f8fc19fsm5982481ejc.214.2024.02.01.07.06.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 Feb 2024 07:06:16 -0800 (PST)
-Date: Thu, 1 Feb 2024 16:06:15 +0100
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Palmer Dabbelt <palmer@rivosinc.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Subject: Re: [PATCH] RISC-V: Report the QEMU vendor/arch IDs on virtual CPUs
-Message-ID: <20240201-65329fd8836e03549298b340@orel>
-References: <20240131182430.20174-1-palmer@rivosinc.com>
+ d=1e100.net; s=20230601; t=1706803626; x=1707408426;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=7m4biepq+wdTrTMcPIx64LKzglwVFghTFI7I3P3BXkA=;
+ b=oFipZuIDknFHG/JhZKdnqQblNgMiZSOALAAav6ht5ZAATWT+XSg6rcvAHEZW0355GO
+ sm5ekOBFnL3EEzhzaQg5FwOs+IZdeqmqvwhQ2tn7aqPtn/sYl7QWDdh1DKt5TCg/4Y6x
+ 6JhTd8eMjvZ5tZe1xOSqGrfCsO7UHyIzuE428gw0SjGBpnYlDEOkQ1MbN+ZCXcHpsRxA
+ 5xQGSEEVUw62ech8X+1zRysXFSXOsP+uSW2mVrqAKybAOfuGzAzqxSsSTZyfGfs2jrHT
+ TMDEUkcXlR6vDAWbqfoTuyxthOBfNaYL1nbHGQJKvg+mVxfBizsBlacvJAubQa3ZqtNp
+ OeRw==
+X-Gm-Message-State: AOJu0YwzXs7adYHFAZFMn53S0PGCu/zzDCYzceH9Z942L1H+E8SsBWbu
+ FkCAD8y+gyo5ULfEQv6Xm3LvO9YT7RxMJi5AfCQfH16HOF36HKsMD89pINDAsYMWyP4Ke5mFu0V
+ XT12wJYCjg1yEQJwnB4PRAfAnCWvbOSE8CZtlMw==
+X-Google-Smtp-Source: AGHT+IEGvGgyabcAJqCoVxDTBnOT9GNfh18I7+ZgjDJeqSuRhNZ2cVy9hBI+UknBuLkoXyzkfo1EmyoWvyqvZ7albUU=
+X-Received: by 2002:a2e:994c:0:b0:2d0:6a10:e57e with SMTP id
+ r12-20020a2e994c000000b002d06a10e57emr4091165ljj.18.1706803626278; Thu, 01
+ Feb 2024 08:07:06 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240131182430.20174-1-palmer@rivosinc.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::529;
- envelope-from=ajones@ventanamicro.com; helo=mail-ed1-x529.google.com
+References: <20240129081423.116615-1-jeeheng.sia@starfivetech.com>
+ <20240129081423.116615-4-jeeheng.sia@starfivetech.com>
+ <20240129110823.000076df@Huawei.com>
+In-Reply-To: <20240129110823.000076df@Huawei.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Thu, 1 Feb 2024 16:06:55 +0000
+Message-ID: <CAFEAcA80VjwM=uKEXfwtg9SVzX947of1Go2c0ph-r0DeyKbpMA@mail.gmail.com>
+Subject: Re: [RFC v1 3/3] hw/arm/virt-acpi-build.c: Enable CPU cache topology
+To: Jonathan Cameron <Jonathan.Cameron@huawei.com>
+Cc: Sia Jee Heng <jeeheng.sia@starfivetech.com>, qemu-devel@nongnu.org, 
+ qemu-arm@nongnu.org, qemu-riscv@nongnu.org, mst@redhat.com, 
+ imammedo@redhat.com, anisinha@redhat.com, shannon.zhaosl@gmail.com, 
+ sunilvl@ventanamicro.com, palmer@dabbelt.com, alistair.francis@wdc.com, 
+ bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com, 
+ zhiwei_liu@linux.alibaba.com
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2a00:1450:4864:20::233;
+ envelope-from=peter.maydell@linaro.org; helo=mail-lj1-x233.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -95,141 +94,32 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Jan 31, 2024 at 10:24:30AM -0800, Palmer Dabbelt wrote:
-> Right now we just report 0 for marchid/mvendorid in QEMU.  That's legal,
-> but it's tricky for users that want to check if they're running on QEMU
-> to do so.  This sets marchid to 42, which I've proposed as the QEMU
-> architecture ID (mvendorid remains 0, just explicitly set, as that's how
-> the ISA handles open source implementations).
+On Mon, 29 Jan 2024 at 11:08, Jonathan Cameron
+<Jonathan.Cameron@huawei.com> wrote:
+>
+> On Mon, 29 Jan 2024 00:14:23 -0800
+> Sia Jee Heng <jeeheng.sia@starfivetech.com> wrote:
+>
+> > Introduced a 3-layer cache for the ARM virtual machine.
+> >
+> > Signed-off-by: Sia Jee Heng <jeeheng.sia@starfivetech.com>
+>
+> There are a bunch of CPU registers that also need updating to reflect the
+> described cache.
+> https://lore.kernel.org/qemu-devel/20230808115713.2613-3-Jonathan.Cameron@huawei.com/
+> It's called HACK for a reason ;)
+> But there is some discussion about this issue in the thread.
+>
+> The l1 etc also needs to reflect the CPU model.  This stuff needs to match.
+> Wrong information being passed to a VM is probably worse than no information.
 
-Hi Palmer,
+Yes. The ACPI table information, if we provide it, should be
+being generated from the CPU cache ID registers.
 
-marchid has this text
+But I'm a bit confused about why the ACPI table has the cache
+topology in it -- can't the guest read the cache ID registers
+and figure it out for itself?
 
-"""
-Open-source project architecture IDs are allocated globally by RISC-V
-International, and have non-zero architecture IDs with a zero
-most-significant-bit (MSB). Commercial architecture IDs are allocated
-by each commercial vendor independently, but must have the MSB set and
-cannot contain zero in the remaining MXLEN-1 bits.
-"""
-
-and mvendorid has this text
-
-"""
-...a value of 0 can be
-returned to indicate the field is not implemented or that this is a
-non-commercial implementation.
-"""
-
-We must select zero for mvendorid, since we're a non-commercial
-implementation, and that means we can't set the marchid to a commercial
-ID of our choosing, i.e. some ID with the MSB set. We also can't select
-an archid without the MSB set, though, because RVI needs to allocate
-us that ID. Long story short, I think we need to use mvendorid=0,marchid=0
-unless we ask for and receive an marchid from RVI. Now, looking at mimpid,
-I think we're free to set that to whatever we want, even if the other IDs
-must be zero, but we should probably consider if we also want some bits
-reserved for revisions or something before settling on an ID. Actually,
-my vote would be to get an official marchid from RVI and then mimpid can
-be reserved for other uses.
-
-Thanks,
-drew
-
-
-
-> 
-> Link: https://github.com/riscv/riscv-isa-manual/pull/1213
-> Signed-off-by: Palmer Dabbelt <palmer@rivosinc.com>
-> ---
->  target/riscv/cpu.c          | 16 ++++++++++++++++
->  target/riscv/cpu_vendorid.h |  3 +++
->  2 files changed, 19 insertions(+)
-> 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 8cbfc7e781..1aef186f87 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -415,6 +415,9 @@ static void riscv_any_cpu_init(Object *obj)
->      cpu->cfg.ext_zicsr = true;
->      cpu->cfg.mmu = true;
->      cpu->cfg.pmp = true;
-> +
-> +    cpu->cfg.mvendorid = QEMU_MVENDORID;
-> +    cpu->cfg.marchid = QEMU_MARCHID;
->  }
->  
->  static void riscv_max_cpu_init(Object *obj)
-> @@ -432,6 +435,8 @@ static void riscv_max_cpu_init(Object *obj)
->      set_satp_mode_max_supported(RISCV_CPU(obj), mlx == MXL_RV32 ?
->                                  VM_1_10_SV32 : VM_1_10_SV57);
->  #endif
-> +    cpu->cfg.mvendorid = QEMU_MVENDORID;
-> +    cpu->cfg.marchid = QEMU_MARCHID;
->  }
->  
->  #if defined(TARGET_RISCV64)
-> @@ -445,6 +450,8 @@ static void rv64_base_cpu_init(Object *obj)
->  #ifndef CONFIG_USER_ONLY
->      set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV57);
->  #endif
-> +    cpu->cfg.mvendorid = QEMU_MVENDORID;
-> +    cpu->cfg.marchid = QEMU_MARCHID;
->  }
->  
->  static void rv64_sifive_u_cpu_init(Object *obj)
-> @@ -569,6 +576,8 @@ static void rv128_base_cpu_init(Object *obj)
->  #ifndef CONFIG_USER_ONLY
->      set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV57);
->  #endif
-> +    cpu->cfg.mvendorid = QEMU_MVENDORID;
-> +    cpu->cfg.marchid = QEMU_MARCHID;
->  }
->  
->  static void rv64i_bare_cpu_init(Object *obj)
-> @@ -591,6 +600,8 @@ static void rv64i_bare_cpu_init(Object *obj)
->  #ifndef CONFIG_USER_ONLY
->      set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV64);
->  #endif
-> +    cpu->cfg.mvendorid = QEMU_MVENDORID;
-> +    cpu->cfg.marchid = QEMU_MARCHID;
->  }
->  #else
->  static void rv32_base_cpu_init(Object *obj)
-> @@ -603,6 +614,8 @@ static void rv32_base_cpu_init(Object *obj)
->  #ifndef CONFIG_USER_ONLY
->      set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV32);
->  #endif
-> +    cpu->cfg.mvendorid = QEMU_MVENDORID;
-> +    cpu->cfg.marchid = QEMU_MARCHID;
->  }
->  
->  static void rv32_sifive_u_cpu_init(Object *obj)
-> @@ -672,6 +685,9 @@ static void rv32_imafcu_nommu_cpu_init(Object *obj)
->      cpu->cfg.ext_zifencei = true;
->      cpu->cfg.ext_zicsr = true;
->      cpu->cfg.pmp = true;
-> +
-> +    cpu->cfg.mvendorid = QEMU_MVENDORID;
-> +    cpu->cfg.marchid = QEMU_MARCHID;
->  }
->  #endif
->  
-> diff --git a/target/riscv/cpu_vendorid.h b/target/riscv/cpu_vendorid.h
-> index 96b6b9c2cb..486832cd53 100644
-> --- a/target/riscv/cpu_vendorid.h
-> +++ b/target/riscv/cpu_vendorid.h
-> @@ -7,4 +7,7 @@
->  #define VEYRON_V1_MIMPID        0x111
->  #define VEYRON_V1_MVENDORID     0x61f
->  
-> +#define QEMU_VIRT_MVENDORID     0
-> +#define QEMU_VIRT_MARCHID       42
-> +
->  #endif /*  TARGET_RISCV_CPU_VENDORID_H */
-> -- 
-> 2.43.0
-> 
-> 
+thanks
+-- PMM
 
