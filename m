@@ -4,114 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23B8AC47DDB
-	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Feb 2024 12:14:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD4C9C47DDB
+	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Feb 2024 12:28:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rVVwi-0002Zg-DL; Thu, 01 Feb 2024 07:13:32 -0500
+	id 1rVWBN-0007oN-RM; Thu, 01 Feb 2024 07:28:41 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rVVwf-0002Yt-65
- for qemu-riscv@nongnu.org; Thu, 01 Feb 2024 07:13:29 -0500
-Received: from mail-wr1-x42f.google.com ([2a00:1450:4864:20::42f])
+ id 1rVWBM-0007nT-QR
+ for qemu-riscv@nongnu.org; Thu, 01 Feb 2024 07:28:41 -0500
+Received: from mail-lj1-x232.google.com ([2a00:1450:4864:20::232])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rVVwb-0007lP-PZ
- for qemu-riscv@nongnu.org; Thu, 01 Feb 2024 07:13:28 -0500
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-33b14a64416so297038f8f.3
- for <qemu-riscv@nongnu.org>; Thu, 01 Feb 2024 04:13:23 -0800 (PST)
+ id 1rVWBK-0002AR-6Z
+ for qemu-riscv@nongnu.org; Thu, 01 Feb 2024 07:28:40 -0500
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-2d066b532f0so12817421fa.1
+ for <qemu-riscv@nongnu.org>; Thu, 01 Feb 2024 04:28:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706789601; x=1707394401; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:user-agent
- :references:in-reply-to:subject:cc:to:from:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1706790516; x=1707395316; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Zn+/ye7RxQyRlRw4WUUebXTDcinacfZIyX6zTAbaIn4=;
- b=mN1GUcHMLJz8f9p4gtnnkCL7a2HPifNBUPrHdwz33jSNWnCpRPa/m7Ec0qGis/S+vi
- /FnFT2NU8BQ1ZJydRWoC9CjKbAppdJY8Ydw8qVXei33nj4P9ZOMQOv+ndSC/IUyt0V0T
- Mg2wazmZZ1RPQwsn6/CmTSW4FFSgXpiAq42BdbHY6yeSBSc1FfwRhPOksF5vC8zuVRAD
- vp2ZggvtvdWqVa/BRnVQQqibOsPiYuJdxjfpY0baC3JWZPdAydm3NPFYlRfmUBgS2Mvo
- ACqxW3IYzMO/bMDje/yUHvHIQGziJ9Ye6PIdfwklE2MbaSdlO2J890zBH/1WUwZTreeB
- Wrbw==
+ bh=JB4Epfg8EtaZj5aKH+XSQiP5F2xLNHDHewznk8QZ/uQ=;
+ b=Mhf5eHhMd9726iLRgT9RJF6EXSLQojnDqkZb8e2c211DUlYi6jvHaOobEIPayuK+1e
+ Kkje8KSPxT0kbWE9vX6bjuJirXQ6Ooj+K5dtWmZcKSu/OTDQ8SQzuausiIOnzVK4jFuD
+ ba4i6bcLl8lYfrVl3QP7ZGgqMj9WZIfH/DgsJAqdGaA0ySMbyvOsiqT/fzozR4sSyt6I
+ M4Y+e5oZQhq8WP0WGAhsCv+q/yW8Mq9FG4Jw4O53fS77j43bTDQVr3B8f578MkiYsJsA
+ wOfeINeedt0DzSJfUKzqYn+u2afXlSK3KrWAmnLFBQpIhxQX6upHRiq6rA7lSEnw4VcO
+ 71gg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706789601; x=1707394401;
- h=content-transfer-encoding:mime-version:message-id:date:user-agent
- :references:in-reply-to:subject:cc:to:from:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=Zn+/ye7RxQyRlRw4WUUebXTDcinacfZIyX6zTAbaIn4=;
- b=aIqu6DPQPpuadxbZbIXmg6yLrQEtiqoUfChIGfQwgLgJR9gT981PNyR05e3zNxGllZ
- PBqNvfZg13Ru5PQT27UUSWmZj5M1kypYadKwhyJ/ueu55gVNxUkdLXCmXvchZx1+cCus
- kkgIIi3LktaWwdk9WO4XTq1FGzUSLPd5xU6kTHaDAwLiYl3z5JqUck3re+eQoOHopw8K
- ciL3k6rT3u/C15rOJ88YBfxkumIhKQMASmlCfHdhBRjrns46GS+Zcipt2fL145xL/7C8
- KbZLuZOLcsnnOxRQOa5gI2b9kzbHdf/ZaJwXSG4U64d7dQ5FdwmDJfJXUm+D05YPdtCt
- gWmg==
-X-Gm-Message-State: AOJu0YysaGQgVJBtVx8wIq/j/x8wa0/9fmAVZPwJpKw5u1c1NFHySi/R
- Lh/NiuupxD4E2B0v6B35PztwqYz2MgameT9Wu9QS5LAv2Fy4MmQSK/swSU8Rkiw=
-X-Google-Smtp-Source: AGHT+IGB+c/lx7/rnRNnfJu4qEBVda7ddx4u1ulU2BJtZyQ/78w2aLdMTk84i0f+BuwBtVoebq2VoA==
-X-Received: by 2002:a5d:4447:0:b0:33b:3b3:f486 with SMTP id
- x7-20020a5d4447000000b0033b03b3f486mr1480105wrr.35.1706789601434; 
- Thu, 01 Feb 2024 04:13:21 -0800 (PST)
+ d=1e100.net; s=20230601; t=1706790516; x=1707395316;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=JB4Epfg8EtaZj5aKH+XSQiP5F2xLNHDHewznk8QZ/uQ=;
+ b=o8HqliDCjqq3Zqm+JG59DYcIN+AkwDaIyWlokhun2voYohP41DWF8QqivsOixSGA1T
+ lYEQ+ZRJLK3+i3U3IgK8KlbfjBT3TJ3Wu3RKiAXSIFFKxK7oo94X/xlDdlgWBqBGdC8+
+ uZJBhv3D7RmywACqf49YoRHh0mlNraVXExDzJ+6DaAC1wFLQ5gsGLcviJe3S1WwsUIYr
+ /Tw2rCakPy9K9r5ttgrZisbAr9LIQ+Ph4Rork40FhlGxuRNU4Qko4Ng0Gde0kKy9UJd5
+ gFTeX5h8uhVBD4p1GT5ZfVf8yjvJLCUWKu/jXkLtEtMXSmiFrNfN7/3E/vAvWzP3ZQXE
+ /HEw==
+X-Gm-Message-State: AOJu0YwCogYpoqlpWWkd/+bGobYhVkvBdtKotVOWHZufcOhg0tH+xW3e
+ Nwi68SlN1h5zDQyLY2DM1kKjvqVsT/BuAr2ssMTz9aN4LFfXU6zN0HxL6K+t2i4=
+X-Google-Smtp-Source: AGHT+IHfQ3BAlodQIwg5MRRVv6skMju6Ub91ft3nNbR41ng8DNcgl413x6yoHbvU+Yn7FTp+gi8niw==
+X-Received: by 2002:a2e:924a:0:b0:2d0:58b9:2bf3 with SMTP id
+ v10-20020a2e924a000000b002d058b92bf3mr3633384ljg.20.1706790516372; 
+ Thu, 01 Feb 2024 04:28:36 -0800 (PST)
 X-Forwarded-Encrypted: i=0;
- AJvYcCW7NpIoj1nuyTbHJHNrUV1q1+a+ZoQR0ItTb3f/oQYUUZVrgXtgpm3dkNBK5rXiaKfVm8BWuAMykidDaVGuytEQcsOmVz3tGkXSERqR4dwFZKUnUCzV73xTpbE83xBeiETdeImZKHNIH6ea+u4r6lVOZSFjWhHnzVp9uavqI3sa+2ZzA94ITDsauWVt6gD9CopbZ0pS6h8LhBE5Dwaz1HFO7jCKyf0EdxrfYQVVBBXTB8ee/iZHtx2qomM0/TuuO8QrspDq/Ztpwq+MqHo2qezd/bng15nSGVZqYvQYNb3PR4834i+tTqsm9P4SoH4PR10YH7An0ikm/TzFFu6yR0qqV5bmi3WZQfTygoiUa09D1v4g56ixhODzhl3OFwHuZOldnZKzaOQb1NYUBew36RPn5udbwnYJERL4+FHQ39t0eyJeIjq1CjBMeHkCOHWQd8lT+ECKM0BwVOgobJZ+MO5BC5F2R9WAhzYWzVw2aVjP7OypX/LJmZaiDMyl0ONRtF1pOw87XGLmtR1qnmwragJTwVAL9leH5V+n5Hj9DZIajRpdJBR/tuUbXmRLdQVbxG/BikYO6RFDZmQUfLuSVk1Bzein4A9LnBD/jncArDmdsKk94Q0RnTT996Gohnki8u6WvdJauVFrxqB2gYoTqXswVn9p6XJufLoBtCnCRA8vzHJdfUufve46X8awnnSXqr7pHZSQidZcSh0sL/FJMrw3tHKBC0HlP3kNx6GDIV8ZjTXbOgpQmMeEyB9SHxJG1eMMmtY/tRdiGEOa5LOMzkbFsPv9twF4L0Lh6y0P8bJE6LrdA21AWQ++jemdxkcjh21HGKKozF9yNEwCCJfFBdJuJWHaaNpUTR/3r+OelPo8N6aCRzO+nFCvPhFDUUv2YLtNzDrJsouhblvhfhnRNVg/Y7K3plK+Wey+gm7jyw0hfg3kAbOIR/O1MWv7BcpJeKz1iG
- bIYk94twoIFM6+aoGniZxwXfBzBiioRQSkd5j4D5FRUEeyW5f+BYSNn9Vi9A0R+u+gK0gf3uxfmLo4Z2yTaC1KSKjbsaIlxiCI+5DJCOceZnk14NZZKJVofGzfzzlNqczLaZOnw8uxrudRktM9ecWFOZvMZ6C6ZcgmvxCaqkQPYr9HzE9B7lXSZ++cy5whD3U0pdEQGuLpYZ9U17w4b22FnOeL/8OZLjS8br6ktHWkGqKhg6AKd+HxvzIpiZy2W/07Q20R/H2+tCBoNDKoNu4It9y5FrykveU=
+ AJvYcCW6RyN6yqTxhJY7XB2eZbbKlZIoLtk+r8yMdvLzY//FuqQrAuQ7u0YYnST4sLz8+61z2D8dpgSyB1g0nZ0tXJW6lRmu2IOYksW1fyeB1unTTlNhsqe8u6khODW4tPeV5Z4s8kpAVPs0gup8vF+lUi4poTgztrZxyyhsZhVUUpEiIoMAH+LY2XKySSFme6372RZy7IHmeegM9iEyRpltzlRTm+4w11T0fH6yUARFfE3WaxUP3WHqMgSHvoBqoO1EZcIbtiUF+oThrBMFchCZuGdOKF7ghEkrlnZIgxAy88D9+7Hjl0yWjVlaZw7ceJIEMYuUasajWOfOFYoSge+n/XJcAqIAbIslaDC9vguj6YihichrLEgHcEqdYVAvzAokB51wc3gUnNeG+EtFo35c9xHURio3Ia+YRdnUjBbhrIKMEvVbXJa6l3t56LIYoIEG0mjn8pninNcfgOavxm10wDTCusy6P9kwyjsYy5udPsFnm4vQ3iyx+UEnilNivv85nXmmAJ6vEX9knNoKzAICZanprhpfOitjbn2Q0YOvPHWDdvZCoCBNeAZH8aoN2Hrwbg7Y2mOk0Pan5PqXwacn1XKB6HMXAB+LEAu/ACSTxNrLZM6/zIbXDsSQnXKIhbnD/IZ6NCIntvbTsrtE4JXT1SoIECEjaHphMfRjzhIE8niZ7khzdRohSsgLcueVjA==
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- u18-20020a5d4352000000b003392b1ebf5csm15989811wrr.59.2024.02.01.04.13.20
+ cs10-20020a0564020c4a00b0055d37af4d20sm6621335edb.74.2024.02.01.04.28.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 Feb 2024 04:13:20 -0800 (PST)
-Received: from draig (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id EDD6A5F7AF;
- Thu,  1 Feb 2024 12:13:19 +0000 (GMT)
-From: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
+ Thu, 01 Feb 2024 04:28:35 -0800 (PST)
+Received: from draig.lan (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id 5E4DF5F9D9;
+ Thu,  1 Feb 2024 12:28:35 +0000 (GMT)
+From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
-Cc: Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,  "Edgar E. Iglesias"
- <edgar.iglesias@gmail.com>,  Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?=
- <philmd@linaro.org>,
- Michael Rolnik <mrolnik@gmail.com>,  =?utf-8?Q?Marc-Andr=C3=A9?= Lureau
- <marcandre.lureau@redhat.com>,  Laurent Vivier <lvivier@redhat.com>,
- kvm@vger.kernel.org,  Yoshinori Sato <ysato@users.sourceforge.jp>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>,  Palmer Dabbelt
- <palmer@dabbelt.com>,  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,  Laurent
- Vivier <laurent@vivier.eu>,  Yanan Wang <wangyanan55@huawei.com>,
- qemu-ppc@nongnu.org,  Weiwei Li <liwei1518@gmail.com>,
- qemu-s390x@nongnu.org,  =?utf-8?Q?C=C3=A9dric?= Le Goater <clg@kaod.org>,
- Peter Maydell
- <peter.maydell@linaro.org>,  Alexandre Iooss <erdnaxe@crans.org>,  John
- Snow <jsnow@redhat.com>,  Mahmoud Mandour <ma.mandourr@gmail.com>,  Wainer
- dos Santos Moschetta <wainersm@redhat.com>,  Richard Henderson
- <richard.henderson@linaro.org>,  Ilya Leoshkevich <iii@linux.ibm.com>,
- Alistair Francis <alistair.francis@wdc.com>,  David Woodhouse
- <dwmw2@infradead.org>,  Cleber Rosa <crosa@redhat.com>,  Beraldo Leal
- <bleal@redhat.com>,  Bin Meng <bin.meng@windriver.com>,  Nicholas Piggin
- <npiggin@gmail.com>,  Aurelien Jarno <aurelien@aurel32.net>,  Daniel
- Henrique Barboza <danielhb413@gmail.com>,  Daniel Henrique Barboza
- <dbarboza@ventanamicro.com>,  Thomas Huth <thuth@redhat.com>,  David
- Hildenbrand <david@redhat.com>,  qemu-riscv@nongnu.org,
- qemu-arm@nongnu.org,  Paolo Bonzini <pbonzini@redhat.com>,  Song Gao
- <gaosong@loongson.cn>,  Eduardo Habkost <eduardo@habkost.net>,  Brian Cain
- <bcain@quicinc.com>,  Paul Durrant <paul@xen.org>
-Subject: Re: [PATCH v3 00/21] plugin updates (register access) for 9.0
- (pre-PR?)
-In-Reply-To: <20240122145610.413836-1-alex.bennee@linaro.org> ("Alex
- =?utf-8?Q?Benn=C3=A9e=22's?=
- message of "Mon, 22 Jan 2024 14:55:49 +0000")
-References: <20240122145610.413836-1-alex.bennee@linaro.org>
-User-Agent: mu4e 1.11.27; emacs 29.1
-Date: Thu, 01 Feb 2024 12:13:19 +0000
-Message-ID: <871q9wmlgg.fsf@draig.linaro.org>
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Weiwei Li <liwei1518@gmail.com>, Bin Meng <bin.meng@windriver.com>,
+ Laurent Vivier <laurent@vivier.eu>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, devel@lists.libvirt.org,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Max Filippov <jcmvbkbc@gmail.com>, Marek Vasut <marex@denx.de>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Thomas Huth <thuth@redhat.com>,
+ qemu-riscv@nongnu.org, Wainer dos Santos Moschetta <wainersm@redhat.com>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Beraldo Leal <bleal@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Chris Wulff <crwulff@gmail.com>, Fabiano Rosas <farosas@suse.de>,
+ Andrea Bolognani <abologna@redhat.com>
+Subject: [PATCH 1/5] tests/docker: Add sqlite3 module to openSUSE Leap
+ container
+Date: Thu,  1 Feb 2024 12:28:31 +0000
+Message-Id: <20240201122835.1712347-2-alex.bennee@linaro.org>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240201122835.1712347-1-alex.bennee@linaro.org>
+References: <20240201122835.1712347-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::42f;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42f.google.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::232;
+ envelope-from=alex.bennee@linaro.org; helo=mail-lj1-x232.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -127,36 +113,74 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Alex Benn=C3=A9e <alex.bennee@linaro.org> writes:
+From: Fabiano Rosas <farosas@suse.de>
 
-> Akihiko requested the register support not be merged in its current
-> state so it's time for another round of review. I've made a few tweaks
-> to simplify the register and CPU tracking code in execlog and removed
-> some stale API functions. However from my point of view its ready to
-> merge.
->
-> v3
-> --
->   - split from testing bits (merged)
->   - removed unused api funcs
->   - keep CPUs in a GArray instead of doing by hand
->
-> v2
-> --
->
->  - Review feedback for register API
->  - readthedocs update
->  - add expectation docs for plugins
->
-> The following still need review:
->
->   contrib/plugins: extend execlog to track register changes
->   gdbstub: expose api to find registers
+Avocado needs sqlite3:
 
-Gentle ping. I'm ready to merge but more review was requested:
+  Failed to load plugin from module "avocado.plugins.journal":
+  ImportError("Module 'sqlite3' is not installed.
+  Use: sudo zypper install python311 to install it")
 
+>From 'zypper info python311':
+  "This package supplies rich command line features provided by
+  readline, and sqlite3 support for the interpreter core, thus forming
+  a so called "extended" runtime."
 
---=20
-Alex Benn=C3=A9e
-Virtualisation Tech Lead @ Linaro
+Include the appropriate package in the lcitool mappings which will
+guarantee the dockerfile gets properly updated when lcitool is
+run. Also include the updated dockerfile.
+
+Signed-off-by: Fabiano Rosas <farosas@suse.de>
+Suggested-by: Andrea Bolognani <abologna@redhat.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Message-Id: <20240117164227.32143-1-farosas@suse.de>
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+---
+ tests/docker/dockerfiles/opensuse-leap.docker | 1 +
+ tests/lcitool/mappings.yml                    | 4 ++++
+ tests/lcitool/projects/qemu.yml               | 1 +
+ 3 files changed, 6 insertions(+)
+
+diff --git a/tests/docker/dockerfiles/opensuse-leap.docker b/tests/docker/dockerfiles/opensuse-leap.docker
+index dc0e36ce488..cf753383a45 100644
+--- a/tests/docker/dockerfiles/opensuse-leap.docker
++++ b/tests/docker/dockerfiles/opensuse-leap.docker
+@@ -90,6 +90,7 @@ RUN zypper update -y && \
+            pcre-devel-static \
+            pipewire-devel \
+            pkgconfig \
++           python311 \
+            python311-base \
+            python311-pip \
+            python311-setuptools \
+diff --git a/tests/lcitool/mappings.yml b/tests/lcitool/mappings.yml
+index 0b908882f1d..407c03301bf 100644
+--- a/tests/lcitool/mappings.yml
++++ b/tests/lcitool/mappings.yml
+@@ -59,6 +59,10 @@ mappings:
+     CentOSStream8:
+     OpenSUSELeap15:
+ 
++  python3-sqlite3:
++    CentOSStream8: python38
++    OpenSUSELeap15: python311
++
+   python3-tomli:
+     # test using tomllib
+     apk:
+diff --git a/tests/lcitool/projects/qemu.yml b/tests/lcitool/projects/qemu.yml
+index 82092c9f175..149b15de57b 100644
+--- a/tests/lcitool/projects/qemu.yml
++++ b/tests/lcitool/projects/qemu.yml
+@@ -97,6 +97,7 @@ packages:
+  - python3-pip
+  - python3-sphinx
+  - python3-sphinx-rtd-theme
++ - python3-sqlite3
+  - python3-tomli
+  - python3-venv
+  - rpm2cpio
+-- 
+2.39.2
+
 
