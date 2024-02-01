@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC9AEC4828D
-	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Feb 2024 14:03:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55080C4828D
+	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Feb 2024 15:06:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rVXdC-0000ZJ-Se; Thu, 01 Feb 2024 09:01:30 -0500
+	id 1rVYdz-0006nd-QI; Thu, 01 Feb 2024 10:06:23 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1rVXcu-0000R5-Q5; Thu, 01 Feb 2024 09:01:12 -0500
-Received: from mail-ej1-x62b.google.com ([2a00:1450:4864:20::62b])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1rVYdy-0006mU-KT
+ for qemu-riscv@nongnu.org; Thu, 01 Feb 2024 10:06:22 -0500
+Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1rVXcq-0005Kl-Gv; Thu, 01 Feb 2024 09:01:12 -0500
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-a2f79e79f0cso123205366b.2; 
- Thu, 01 Feb 2024 06:01:06 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1rVYdw-00038n-C0
+ for qemu-riscv@nongnu.org; Thu, 01 Feb 2024 10:06:22 -0500
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-55fd5f67f03so342338a12.0
+ for <qemu-riscv@nongnu.org>; Thu, 01 Feb 2024 07:06:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706796066; x=1707400866; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=U7XjHbwwvWEkeLfzO8kMCvPK8+1IkX1iR4uHS3wTHDo=;
- b=h5ayomFL0eQ7fA/lcRucDMJWWtNIkm6WDQgPeeO0gBeXwQ42XJY4wwyFTb5UgCSnOq
- 52LoZw4dJkk8Hh4xOS8BSB5N6MyNAWSmf7Bf3OA/pd1tkActgiKspTSvtO31lNUZEisc
- 1ifPk74yuxyX+0cx3EKHbhHDzFTwoupHHH+hXCQuBgo47PMNOOh65qVALG1vsV3GXUD1
- W/DeWtxPniqlOdCOXpF+Kzu2jefI4VNWh0xhqUE/eIXaNERW2/g/5ttoWnJoJeJfiIga
- D9IoHxUaLWT/rpABKIIEo9n/JVGIHYsxHB+RGaXKPMULTt84pwRvPCYrnQVXOiYDAPNR
- cHRQ==
+ d=ventanamicro.com; s=google; t=1706799977; x=1707404777; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ydodzi5mkvIz5Auw1VR9isoTRD7y8azWMN5eCfOjOF0=;
+ b=FXRVASPJ4qucc0MmM0o9xum++FI4PZ98SYQNgwrayqulJbWNpYr5EcT6F3ZtU2DJgm
+ CoAp1LpZoGj07+hFV0ubedEx6xzrdExsfg87gXv2sdvTrHNf5HYyj6YBTnLq78NnoTxF
+ jiSiWDYt3oy8e50HBKxZs59lZ42ajorQYpEidmcesMVDMSQ6Q0xIdsBHt0TKIP0N1X9z
+ b1iv9oqj72uWxXNYg+925DCWBN4ftJwGDb+a3H5q4rlbHEaZwiv+xYXw3hnMcehVA4Px
+ rLck8wnS/4OODssWveUSqTJmbYVSPr+Rwc2rbWnY17FXg1f+zSCeDRyZp/2gGfU0aeX2
+ TKgg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706796066; x=1707400866;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=U7XjHbwwvWEkeLfzO8kMCvPK8+1IkX1iR4uHS3wTHDo=;
- b=u7jOMbGCekj5+KeVzLuIYW5mRPb+XhbMSOXROkH4ltx1EgWIjA/X3cRLsmADmsAQyE
- j/U6Ynm+6aBLUk1nTFvvim/LvFSowFmFQwjULnP7zQHZo+WjbSCa3N4mfD4XRzsVUapY
- dnfjsQEnFKhyfVMUeaT7Byd23SWEL76Hg2No3TcQXuNeFS7AKIO+51Dj70Y1rw0cWsV6
- Wb96kLprBRdm5ASJPS7i/Qz4rneXwALT2ECzySBH//j0iREtLC5EA/fdsCvn/Eryau/S
- eG18VDiQ7AWCcQLlzy+5WQylzTTO0USqt1z/eFtLcooZKe5Mkrsq/i+4NLExNxowO2tT
- Itsg==
-X-Gm-Message-State: AOJu0Yz+yMgKvq9HUfWYkfaTnglE+zWeJmts5CKuauaem5bubLiaQmhO
- i0x0+7wCYE9qRLTE7lnDfLpxUsVIQqq8XebPlmjk0uLLTCeqexhM
-X-Google-Smtp-Source: AGHT+IHRwBo+FTRI1v0U6rE5ApNlVnbyhdkseHsTT3BvavWLTlFTsq1Vd22suMjWf0cuvGDaAIB7IQ==
-X-Received: by 2002:a17:906:3b19:b0:a35:7192:1f with SMTP id
- g25-20020a1709063b1900b00a357192001fmr3724841ejf.49.1706796061091; 
- Thu, 01 Feb 2024 06:01:01 -0800 (PST)
+ d=1e100.net; s=20230601; t=1706799977; x=1707404777;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Ydodzi5mkvIz5Auw1VR9isoTRD7y8azWMN5eCfOjOF0=;
+ b=kbYdpp9f93SNkMnnjvlQdHAxiJpKvDvqLMk0FfXCoO8HUSM9vsdo/hIxG9zbM7aV9I
+ N+puU0K1P6pFke7lewcHaKfcGsxkCFL740MuxAW8rULiUh/hLAi/Qf5asB0py+B61sE3
+ wUUFQFhCxuordUSiYYgKyQvVTTqU6I9R/hPs6vuX0jUpwW8NeyEHH1u1h1/haTN9AcSN
+ cX1TRObGRlP9j0LK4p5g4a4wLX3jxiYbTXq95PMoTFBR3gSLnYFrRbX7zC9AOkQTJcHO
+ +IGFfnymVL7fyvHFpOFz+ga/0ld/lujEdURzqSa3jP3YZN1O3+HGRHpzD+9arF2totuR
+ XeIg==
+X-Gm-Message-State: AOJu0YxNz4TG4/wz4Tfc4ceFZsF3x+X8SdIdY5pIvqXc06QagR5FZo6L
+ FHfHB8G4DPTb6kJ+D6mPBJGCwbAm8pecApCANukAaJAlwy/Utkd11YfElyRZtX8=
+X-Google-Smtp-Source: AGHT+IE8sD+VdVVE7FFoCQVjCTmbbhNHmt2sqqgsRrLwvlbD7DZIaHNx6CbxE2JNh3hF3G+szMXvdA==
+X-Received: by 2002:a17:906:408b:b0:a36:3edb:aeac with SMTP id
+ u11-20020a170906408b00b00a363edbaeacmr2217948ejj.17.1706799977076; 
+ Thu, 01 Feb 2024 07:06:17 -0800 (PST)
 X-Forwarded-Encrypted: i=0;
- AJvYcCXlDpHbq7DlTy9b/4dNfR+ZoQZ3h96n0KS/ztheCBsWdf0EGcvQHFxArjD4D4t1JElDnP75BtzOJ/Ma+GhgLVmcXUCrn6i5oaAg8quyDi4DlKHuwRAZUe+1bWDBg4Wb8aXRnTt5IGpmhjKlTo5I7or/tewNEMRE+LpB8XJt7fzko8goP0ncXZg5K6VuTw/GzmyAo25PkfGXHZhdqeszXGuBsAjhTV1V9Tn06aeGDNg2773rWVRvPGV8xaWN8WkzCAGA+UWVX1f/5pTrIIn6utu4EY3bKY66HafwEPRGg0WG3o/VIpmKv1Mwe/Y1iGi5PjJpZctEwWifTjJRv9pRYiTs
-Received: from freya.midgard (broadband-188-255-126-251.ip.moscow.rt.ru.
- [188.255.126.251]) by smtp.gmail.com with ESMTPSA id
- un6-20020a170907cb8600b00a36a7f0f087sm902728ejc.222.2024.02.01.06.00.59
+ AJvYcCW3A1XS/cQlV8EzzwB6cq0s5gVWNKTEWASrx1xq41Fys63qEU7WOr8g3ICi4rl/m8f8ubbs854AUjEnTcPsKcL1Vnm13oQ=
+Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
+ [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
+ by smtp.gmail.com with ESMTPSA id
+ vw16-20020a170907a71000b00a354f8fc19fsm5982481ejc.214.2024.02.01.07.06.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 Feb 2024 06:01:00 -0800 (PST)
-From: Alexey Baturo <baturo.alexey@gmail.com>
-X-Google-Original-From: Alexey Baturo <me@deliversmonkey.space>
-To: 
-Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org,
- zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com, Alistair.Francis@wdc.com,
- sagark@eecs.berkeley.edu, kbastian@mail.uni-paderborn.de,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Subject: [PATCH v6 0/6] Pointer Masking update for Zjpm v0.8
-Date: Thu,  1 Feb 2024 14:00:41 +0000
-Message-Id: <20240201140047.3456114-1-me@deliversmonkey.space>
-X-Mailer: git-send-email 2.34.1
+ Thu, 01 Feb 2024 07:06:16 -0800 (PST)
+Date: Thu, 1 Feb 2024 16:06:15 +0100
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Palmer Dabbelt <palmer@rivosinc.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Subject: Re: [PATCH] RISC-V: Report the QEMU vendor/arch IDs on virtual CPUs
+Message-ID: <20240201-65329fd8836e03549298b340@orel>
+References: <20240131182430.20174-1-palmer@rivosinc.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::62b;
- envelope-from=baturo.alexey@gmail.com; helo=mail-ej1-x62b.google.com
-X-Spam_score_int: 11
-X-Spam_score: 1.1
-X-Spam_bar: +
-X-Spam_report: (1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240131182430.20174-1-palmer@rivosinc.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::529;
+ envelope-from=ajones@ventanamicro.com; helo=mail-ed1-x529.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- TVD_PH_BODY_ACCOUNTS_POST=0.693, TVD_PH_BODY_META_ALL=2.546,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -95,72 +95,141 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Alexey Baturo <baturo.alexey@gmail.com>
+On Wed, Jan 31, 2024 at 10:24:30AM -0800, Palmer Dabbelt wrote:
+> Right now we just report 0 for marchid/mvendorid in QEMU.  That's legal,
+> but it's tricky for users that want to check if they're running on QEMU
+> to do so.  This sets marchid to 42, which I've proposed as the QEMU
+> architecture ID (mvendorid remains 0, just explicitly set, as that's how
+> the ISA handles open source implementations).
 
-Hi,
+Hi Palmer,
 
-This patch series is rebased on https://github.com/alistair23/qemu/tree/riscv-to-apply.next 
+marchid has this text
 
-Thanks
+"""
+Open-source project architecture IDs are allocated globally by RISC-V
+International, and have non-zero architecture IDs with a zero
+most-significant-bit (MSB). Commercial architecture IDs are allocated
+by each commercial vendor independently, but must have the MSB set and
+cannot contain zero in the remaining MXLEN-1 bits.
+"""
 
-[v5]:
-This patch series targets Zjpm v0.8 extension.
-The spec itself could be found here: https://github.com/riscv/riscv-j-extension/blob/8088461d8d66a7676872b61c908cbeb7cf5c5d1d/zjpm-spec.pdf
-This patch series is updated after the suggested comments:
-- add "x-" to the extension names to indicate experimental
+and mvendorid has this text
 
-[v4]:
-Patch series updated after the suggested comments:
-- removed J-letter extension as it's unused
-- renamed and fixed function to detect if address should be sign-extended
-- zeroed unused context variables and moved computation logic to another patch
-- bumped pointer masking version_id and minimum_version_id by 1
+"""
+...a value of 0 can be
+returned to indicate the field is not implemented or that this is a
+non-commercial implementation.
+"""
 
-[v3]:
-There patches are updated after Richard's comments:
-- moved new tb flags to the end
-- used tcg_gen_(s)extract to get the final address
-- properly handle CONFIG_USER_ONLY
+We must select zero for mvendorid, since we're a non-commercial
+implementation, and that means we can't set the marchid to a commercial
+ID of our choosing, i.e. some ID with the MSB set. We also can't select
+an archid without the MSB set, though, because RVI needs to allocate
+us that ID. Long story short, I think we need to use mvendorid=0,marchid=0
+unless we ask for and receive an marchid from RVI. Now, looking at mimpid,
+I think we're free to set that to whatever we want, even if the other IDs
+must be zero, but we should probably consider if we also want some bits
+reserved for revisions or something before settling on an ID. Actually,
+my vote would be to get an official marchid from RVI and then mimpid can
+be reserved for other uses.
 
-[v2]:
-As per Richard's suggestion I made pmm field part of tb_flags.
-It allowed to get rid of global variable to store pmlen.
-Also it allowed to simplify all the machinery around it.
+Thanks,
+drew
 
-[v1]:
-It looks like Zjpm v0.8 is almost frozen and we don't expect it change drastically anymore.
-Compared to the original implementation with explicit base and mask CSRs, we now only have
-several fixed options for number of masked bits which are set using existing CSRs.
-The changes have been tested with handwritten assembly tests and LLVM HWASAN
-test suite.
 
-Alexey Baturo (6):
-  target/riscv: Remove obsolete pointer masking extension code.
-  target/riscv: Add new CSR fields for S{sn,mn,m}pm extensions as part
-    of Zjpm v0.8
-  target/riscv: Add helper functions to calculate current number of
-    masked bits for pointer masking
-  target/riscv: Add pointer masking tb flags
-  target/riscv: Update address modify functions to take into account
-    pointer masking
-  target/riscv: Enable updates for pointer masking variables and thus
-    enable pointer masking extension
 
- target/riscv/cpu.c           | 22 ++++----
- target/riscv/cpu.h           | 47 ++++++++---------
- target/riscv/cpu_bits.h      | 90 ++-------------------------------
- target/riscv/cpu_cfg.h       |  3 ++
- target/riscv/cpu_helper.c    | 97 ++++++++++++++++++++----------------
- target/riscv/csr.c           | 41 ++++-----------
- target/riscv/machine.c       | 22 +++-----
- target/riscv/pmp.c           | 13 +++--
- target/riscv/pmp.h           | 11 ++--
- target/riscv/tcg/tcg-cpu.c   |  5 +-
- target/riscv/translate.c     | 46 +++++++----------
- target/riscv/vector_helper.c | 15 +++++-
- 12 files changed, 160 insertions(+), 252 deletions(-)
-
--- 
-2.34.1
-
+> 
+> Link: https://github.com/riscv/riscv-isa-manual/pull/1213
+> Signed-off-by: Palmer Dabbelt <palmer@rivosinc.com>
+> ---
+>  target/riscv/cpu.c          | 16 ++++++++++++++++
+>  target/riscv/cpu_vendorid.h |  3 +++
+>  2 files changed, 19 insertions(+)
+> 
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 8cbfc7e781..1aef186f87 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -415,6 +415,9 @@ static void riscv_any_cpu_init(Object *obj)
+>      cpu->cfg.ext_zicsr = true;
+>      cpu->cfg.mmu = true;
+>      cpu->cfg.pmp = true;
+> +
+> +    cpu->cfg.mvendorid = QEMU_MVENDORID;
+> +    cpu->cfg.marchid = QEMU_MARCHID;
+>  }
+>  
+>  static void riscv_max_cpu_init(Object *obj)
+> @@ -432,6 +435,8 @@ static void riscv_max_cpu_init(Object *obj)
+>      set_satp_mode_max_supported(RISCV_CPU(obj), mlx == MXL_RV32 ?
+>                                  VM_1_10_SV32 : VM_1_10_SV57);
+>  #endif
+> +    cpu->cfg.mvendorid = QEMU_MVENDORID;
+> +    cpu->cfg.marchid = QEMU_MARCHID;
+>  }
+>  
+>  #if defined(TARGET_RISCV64)
+> @@ -445,6 +450,8 @@ static void rv64_base_cpu_init(Object *obj)
+>  #ifndef CONFIG_USER_ONLY
+>      set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV57);
+>  #endif
+> +    cpu->cfg.mvendorid = QEMU_MVENDORID;
+> +    cpu->cfg.marchid = QEMU_MARCHID;
+>  }
+>  
+>  static void rv64_sifive_u_cpu_init(Object *obj)
+> @@ -569,6 +576,8 @@ static void rv128_base_cpu_init(Object *obj)
+>  #ifndef CONFIG_USER_ONLY
+>      set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV57);
+>  #endif
+> +    cpu->cfg.mvendorid = QEMU_MVENDORID;
+> +    cpu->cfg.marchid = QEMU_MARCHID;
+>  }
+>  
+>  static void rv64i_bare_cpu_init(Object *obj)
+> @@ -591,6 +600,8 @@ static void rv64i_bare_cpu_init(Object *obj)
+>  #ifndef CONFIG_USER_ONLY
+>      set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV64);
+>  #endif
+> +    cpu->cfg.mvendorid = QEMU_MVENDORID;
+> +    cpu->cfg.marchid = QEMU_MARCHID;
+>  }
+>  #else
+>  static void rv32_base_cpu_init(Object *obj)
+> @@ -603,6 +614,8 @@ static void rv32_base_cpu_init(Object *obj)
+>  #ifndef CONFIG_USER_ONLY
+>      set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV32);
+>  #endif
+> +    cpu->cfg.mvendorid = QEMU_MVENDORID;
+> +    cpu->cfg.marchid = QEMU_MARCHID;
+>  }
+>  
+>  static void rv32_sifive_u_cpu_init(Object *obj)
+> @@ -672,6 +685,9 @@ static void rv32_imafcu_nommu_cpu_init(Object *obj)
+>      cpu->cfg.ext_zifencei = true;
+>      cpu->cfg.ext_zicsr = true;
+>      cpu->cfg.pmp = true;
+> +
+> +    cpu->cfg.mvendorid = QEMU_MVENDORID;
+> +    cpu->cfg.marchid = QEMU_MARCHID;
+>  }
+>  #endif
+>  
+> diff --git a/target/riscv/cpu_vendorid.h b/target/riscv/cpu_vendorid.h
+> index 96b6b9c2cb..486832cd53 100644
+> --- a/target/riscv/cpu_vendorid.h
+> +++ b/target/riscv/cpu_vendorid.h
+> @@ -7,4 +7,7 @@
+>  #define VEYRON_V1_MIMPID        0x111
+>  #define VEYRON_V1_MVENDORID     0x61f
+>  
+> +#define QEMU_VIRT_MVENDORID     0
+> +#define QEMU_VIRT_MARCHID       42
+> +
+>  #endif /*  TARGET_RISCV_CPU_VENDORID_H */
+> -- 
+> 2.43.0
+> 
+> 
 
