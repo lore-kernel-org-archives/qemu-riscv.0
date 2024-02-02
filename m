@@ -4,87 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C79ECC48291
-	for <qemu-riscv@archiver.kernel.org>; Fri,  2 Feb 2024 10:16:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D697C4828E
+	for <qemu-riscv@archiver.kernel.org>; Fri,  2 Feb 2024 11:25:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rVqZe-0001PC-Im; Fri, 02 Feb 2024 05:15:06 -0500
+	id 1rVrfd-00081H-83; Fri, 02 Feb 2024 06:25:26 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1rVqZd-0001Od-Bm; Fri, 02 Feb 2024 05:15:05 -0500
-Received: from mail-lf1-x12b.google.com ([2a00:1450:4864:20::12b])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rVrfW-0007yK-MM
+ for qemu-riscv@nongnu.org; Fri, 02 Feb 2024 06:25:15 -0500
+Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1rVqZb-00045Z-N5; Fri, 02 Feb 2024 05:15:05 -0500
-Received: by mail-lf1-x12b.google.com with SMTP id
- 2adb3069b0e04-5113a841810so111606e87.0; 
- Fri, 02 Feb 2024 02:15:02 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rVrfT-0008HG-Hi
+ for qemu-riscv@nongnu.org; Fri, 02 Feb 2024 06:25:14 -0500
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-1d731314e67so14513165ad.1
+ for <qemu-riscv@nongnu.org>; Fri, 02 Feb 2024 03:25:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706868901; x=1707473701; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=lxIvZiWXY9IKLbJ7U7yyTRtTaqakCCJzBMTW0m/QIuA=;
- b=lmtbHE5aEFJw08sdiXNOs46r+MCcD5R+I28bvhTBMwCWO7awmOi5TGFXgWFqCpcfWt
- YLADHUVtbFk+x1WbNYduyoe8knJxhzne5/uvrF8vbB+GkIhgLwLidfGPYVSZ+8/dTYWR
- xAwP5zHgZ2wHUKqVsmnb2L8HaD40zwn95q1enLMHvygmr6hzUP7Bx6ArA6QB/oTJiSYY
- NZccFh6wKIRVkDz4/wCITGx9pY2hl975z93YeG2M5G/3sP105SLynGNwQjIVKdyXPdpl
- YaGhmJGU3kJVndMMygUglSz3NNh2edFt/9ylYehRXVpvQgu2Itz1sBGhYVf/6mYJtOZT
- rZgA==
+ d=ventanamicro.com; s=google; t=1706873105; x=1707477905; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=MborO2rMcbSTqP8xRrok/OXEmozBvlokRufEJZoYoEw=;
+ b=I6gjmckEm7i9YDShTtDhHBFY51FoxiNj95yb/5rAOooHccVGrOc6GxkjSHeQ3OnZrE
+ zC5JowYstXAPW+UUoyE4LZl3FEuM+NFqMndDT1eNFiE9aKktBHgXhj3H4xMkLeh0uhRT
+ A3cQDIboKWQzeO/8nfaLjRqF9xRz6nov78GMdEHislYepwk+NZ4lwpBhCGeiK5XehiLs
+ KMy+NozetYuH3VjdrEkB8QrcCxuhwBAZ0yqVnybXM6ALty3oZcbGrI+kzXDK954UP3AD
+ DgjRVRlClWkKutUcz75xaq6RhNGqKTOw6ZePpt0b8T3I8YZdLiogejCjU1SxEJCmyiF4
+ hbLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706868901; x=1707473701;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=lxIvZiWXY9IKLbJ7U7yyTRtTaqakCCJzBMTW0m/QIuA=;
- b=r5wSo4/hQYndVNsLfP3zVigEMUy47McATo++thsYOv2vDDxvO+JB5GuVtSoIJTlJCb
- RICmzWeyLv9NIFdMUYhnfCJTxkx7Cgq+3kMT97dJAmvEu9CVkYP3d5qjr7Uebgxy8n50
- lsCsWGyfiu0HMJ2mlfWE6SoXwvhbAAivHnqbrprKTbcQL4ZBuac30WqRO09k795Whuv8
- 5NO18uy6HwahJlE1ZsFnZzdis0YcDGZbHqp95rwQ4Miqze/2U+Q4OfnuTskksnz+acdp
- dQTEMhbfCOswPOUHtcaeU2eMY/DzeKF8cyKrvl+u25wKvonfMvrRk55rhqiJVI9XMziU
- n38g==
-X-Gm-Message-State: AOJu0YwDFa5fdM5iMsXAHjbwyttFwCrOgpVnROtYAsnrMnHQ+IP4wYWF
- WOsNbj0eyDm3cCxSdzC3poS4VIPjz60A11cVHaXA1C3RUim/ZPsJ
-X-Google-Smtp-Source: AGHT+IFL7B0UBicSzEGTBJUwAxjvVI6mqfrv6XH+8PaVw/MysJRdIa39ZK9rvcbCmXAiWumkdSLAnA==
-X-Received: by 2002:ac2:4343:0:b0:511:3a8a:9fde with SMTP id
- o3-20020ac24343000000b005113a8a9fdemr171475lfl.0.1706868901513; 
- Fri, 02 Feb 2024 02:15:01 -0800 (PST)
+ d=1e100.net; s=20230601; t=1706873105; x=1707477905;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=MborO2rMcbSTqP8xRrok/OXEmozBvlokRufEJZoYoEw=;
+ b=J3GMC4V92JwXLrEazcQ2SGoVSqB+Cymg+pjA2wd9wNSMCD8HXoud6tJmuLeDn7npcK
+ 204H4t4iZXETm67MNqg7L34t/V3rGMxvPGZIIMSlPO02MMrX7orc7Z54Y9boo8ydc0gZ
+ sqAzs08qLHKsjMhS4lRR/Q89hctQAMb0lmiYsmgV30fndEylhPyDV3hNavgEZLcDTtEn
+ ZpszoZGu/17EeYgiIifONutG++DZVU4l2pJz69dLUP2UJtofDx+UVLOkjw57QtGfgu/2
+ lPXAU5+fkoTxbe/jLVwmuhPO76cNyabI7pxgiieymQ2OecZsMOqJ91oEjK5UWUNfKjjm
+ eRNA==
+X-Gm-Message-State: AOJu0Yw+X8uhu77S/V/hGRpHbWGs/K/9hxCpRP/exlP0AzKPSqhxYFpC
+ sWaCTOIue7/TgCuLakGmwzpAh+IBqzq/8DrqmoqDFb9NMmNn3qErHa3zSq1pv5A=
+X-Google-Smtp-Source: AGHT+IE0FU43neWal0G+GotsVmwgDleGyz/jNNKPBZJYLLB8f/9zNoxDOrG0GVumNZH//IfSWv6GZQ==
+X-Received: by 2002:a17:902:f7c7:b0:1d9:462f:99cf with SMTP id
+ h7-20020a170902f7c700b001d9462f99cfmr5113488plw.5.1706873105079; 
+ Fri, 02 Feb 2024 03:25:05 -0800 (PST)
 X-Forwarded-Encrypted: i=0;
- AJvYcCW6IaaSpInblOuXXFZJVCL1d6gKk8oV3q3H9NRWnNjGVk2dV+SxKqc+W9bmCM9X/b/IdQcfe1/JSQUD+oCkVTazrc11UZ4zZqrLgOw4CW/YICZhWabFt4EZe5oALFaiFS4Cs2igEigvr9kmL1cW+BllQEPM+KE6PBi8l1UdfV2T/jnjYK5yaAbDs+xujJPSYtEmJloU60hoVmbbGPAll5SL5lGPq8iDy2MCkZeC42hBss0weDaigEQ/bq+kr7aLgoqY+T4nYSa8hT/pjsIgfZgsLsdZWJHMwWFxa1YJFuV2NbUE64iVUbmvDw4EZMd+YHnH4Xmg5XZ5ugbWDYJZULSpgSH0/rfVCsSsCweaLvQx7QlF2HoxVq8ZpP4=
-Received: from freya.midgard (broadband-188-255-126-251.ip.moscow.rt.ru.
- [188.255.126.251]) by smtp.gmail.com with ESMTPSA id
- ll5-20020a170907190500b00a36fe6fe976sm579722ejc.190.2024.02.02.02.14.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Feb 2024 02:15:00 -0800 (PST)
-From: Alexey Baturo <baturo.alexey@gmail.com>
-X-Google-Original-From: Alexey Baturo <me@deliversmonkey.space>
-To: 
-Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org,
- zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com, Alistair.Francis@wdc.com,
- sagark@eecs.berkeley.edu, kbastian@mail.uni-paderborn.de,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v7 5/6] target/riscv: Update address modify functions to take
- into account pointer masking
-Date: Fri,  2 Feb 2024 10:14:38 +0000
-Message-Id: <20240202101439.3714106-6-me@deliversmonkey.space>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240202101439.3714106-1-me@deliversmonkey.space>
-References: <20240202101439.3714106-1-me@deliversmonkey.space>
+ AJvYcCWRKEs9V/tVNhDl0MhCxBrNmm+Ctn2vZ4PaQapAr116d+U8jCw4kYgNBtiyWkV7PnEd+bFkZCXpC4Lr+fFcEgpMYyUaL+Y=
+Received: from [192.168.68.110] ([177.94.15.159])
+ by smtp.gmail.com with ESMTPSA id
+ mn16-20020a1709030a5000b001d8aa88f59esm1396265plb.110.2024.02.02.03.25.03
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 02 Feb 2024 03:25:04 -0800 (PST)
+Message-ID: <3eef812a-1b64-44f2-9eea-844542b67ee0@ventanamicro.com>
+Date: Fri, 2 Feb 2024 08:25:02 -0300
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] RISC-V: Report the QEMU vendor/arch IDs on virtual CPUs
+Content-Language: en-US
+To: Palmer Dabbelt <palmer@rivosinc.com>, qemu-riscv@nongnu.org
+Cc: qemu-devel@nongnu.org
+References: <20240131182430.20174-1-palmer@rivosinc.com>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20240131182430.20174-1-palmer@rivosinc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::12b;
- envelope-from=baturo.alexey@gmail.com; helo=mail-lf1-x12b.google.com
-X-Spam_score_int: 11
-X-Spam_score: 1.1
-X-Spam_bar: +
-X-Spam_report: (1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x630.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- TVD_PH_BODY_ACCOUNTS_POST=0.693, TVD_PH_BODY_META_ALL=2.546,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,89 +97,172 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Alexey Baturo <baturo.alexey@gmail.com>
 
-Signed-off-by: Alexey Baturo <baturo.alexey@gmail.com>
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/translate.c     | 22 ++++++++++++++++------
- target/riscv/vector_helper.c | 13 +++++++++++++
- 2 files changed, 29 insertions(+), 6 deletions(-)
+On 1/31/24 15:24, Palmer Dabbelt wrote:
+> Right now we just report 0 for marchid/mvendorid in QEMU.  That's legal,
+> but it's tricky for users that want to check if they're running on QEMU
+> to do so.  This sets marchid to 42, which I've proposed as the QEMU
+> architecture ID (mvendorid remains 0, just explicitly set, as that's how
+> the ISA handles open source implementations).
+> 
+> Link: https://github.com/riscv/riscv-isa-manual/pull/1213
+> Signed-off-by: Palmer Dabbelt <palmer@rivosinc.com>
+> ---
 
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 6bc338bd1f..89f10744a2 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -579,8 +579,10 @@ static TCGv get_address(DisasContext *ctx, int rs1, int imm)
-     TCGv src1 = get_gpr(ctx, rs1, EXT_NONE);
- 
-     tcg_gen_addi_tl(addr, src1, imm);
--    if (get_address_xl(ctx) == MXL_RV32) {
--        tcg_gen_ext32u_tl(addr, addr);
-+    if (ctx->addr_signed) {
-+        tcg_gen_sextract_tl(addr, addr, 0, ctx->addr_width);
-+    } else {
-+        tcg_gen_extract_tl(addr, addr, 0, ctx->addr_width);
-     }
- 
-     return addr;
-@@ -593,8 +595,10 @@ static TCGv get_address_indexed(DisasContext *ctx, int rs1, TCGv offs)
-     TCGv src1 = get_gpr(ctx, rs1, EXT_NONE);
- 
-     tcg_gen_add_tl(addr, src1, offs);
--    if (get_xl(ctx) == MXL_RV32) {
--        tcg_gen_ext32u_tl(addr, addr);
-+    if (ctx->addr_signed) {
-+        tcg_gen_sextract_tl(addr, addr, 0, ctx->addr_width);
-+    } else {
-+        tcg_gen_extract_tl(addr, addr, 0, ctx->addr_width);
-     }
-     return addr;
- }
-@@ -1180,8 +1184,14 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
-     ctx->xl = FIELD_EX32(tb_flags, TB_FLAGS, XL);
-     ctx->address_xl = FIELD_EX32(tb_flags, TB_FLAGS, AXL);
-     ctx->cs = cs;
--    ctx->addr_width = 0;
--    ctx->addr_signed = false;
-+    if (get_xl(ctx) == MXL_RV32) {
-+        ctx->addr_width = 32;
-+        ctx->addr_signed = false;
-+    } else {
-+        int pm_pmm = FIELD_EX32(tb_flags, TB_FLAGS, PM_PMM);
-+        ctx->addr_width = 64 - riscv_pm_get_pmlen(pm_pmm);
-+        ctx->addr_signed = FIELD_EX32(tb_flags, TB_FLAGS, PM_SIGNEXTEND);
+This patch doesn't compile in my env:
+
+../target/riscv/cpu.c: In function ‘riscv_any_cpu_init’:
+../target/riscv/cpu.c:439:26: error: ‘QEMU_MVENDORID’ undeclared (first use in this function); did you mean ‘CSR_MVENDORID’?
+   439 |     cpu->cfg.mvendorid = QEMU_MVENDORID;
+       |                          ^~~~~~~~~~~~~~
+       |                          CSR_MVENDORID
+../target/riscv/cpu.c:439:26: note: each undeclared identifier is reported only once for each function it appears in
+../target/riscv/cpu.c:440:24: error: ‘QEMU_MARCHID’ undeclared (first use in this function); did you mean ‘QEMU_ARCH’?
+   440 |     cpu->cfg.marchid = QEMU_MARCHID;
+       |                        ^~~~~~~~~~~~
+       |                        QEMU_ARCH
+
+
+In the patch where I changed 'marchid' (d6a427e2c0b2) I removed the following macro:
+
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 477f8f8f97..9080d021fa 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -39,11 +39,6 @@
+  #include "tcg/tcg.h"
+  
+  /* RISC-V CPU definitions */
+-
+-#define RISCV_CPU_MARCHID   ((QEMU_VERSION_MAJOR << 16) | \
+-                             (QEMU_VERSION_MINOR << 8)  | \
+-                             (QEMU_VERSION_MICRO))
+-
+
+So I believe you can re-introduce it as '42' and use it. If you want to be really
+explicit you can also re-introduce RISCV_CPU_MVENDORID and RISCV_CPU_MIMPID and
+set them all to 0 and use them to assign all machine IDs.
+
+The macro name doesn't matter but I'd not use 'VIRT' in the name. This marchid is
+going to be used by any board that uses the CPU, not just the 'virt' board.
+
+One more thing:
+
+
+>   target/riscv/cpu.c          | 16 ++++++++++++++++
+>   target/riscv/cpu_vendorid.h |  3 +++
+>   2 files changed, 19 insertions(+)
+> 
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 8cbfc7e781..1aef186f87 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -415,6 +415,9 @@ static void riscv_any_cpu_init(Object *obj)
+>       cpu->cfg.ext_zicsr = true;
+>       cpu->cfg.mmu = true;
+>       cpu->cfg.pmp = true;
+> +
+> +    cpu->cfg.mvendorid = QEMU_MVENDORID;
+> +    cpu->cfg.marchid = QEMU_MARCHID;
+
+
+Instead of repeating this code in every cpu_init() I would just change post_init():
+
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 88e8cc8681..f6ef50bb20 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -1293,6 +1293,12 @@ static bool riscv_cpu_is_dynamic(Object *cpu_obj)
+  
+  static void riscv_cpu_post_init(Object *obj)
+  {
++    if (!riscv_cpu_is_vendor(obj)) {
++        RISCV_CPU(obj)->cfg.mvendorid = RISCV_CPU_MVENDORID;
++        RISCV_CPU(obj)->cfg.marchid = RISCV_CPU_MARCHID;
++        RISCV_CPU(obj)->cfg.mimpid = RISCV_CPU_MIMPID;
 +    }
-     ctx->itrigger = FIELD_EX32(tb_flags, TB_FLAGS, ITRIGGER);
-     ctx->zero = tcg_constant_tl(0);
-     ctx->virt_inst_excp = false;
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index f6be88dcf0..9d1d627d64 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -105,6 +105,19 @@ static inline uint32_t vext_max_elems(uint32_t desc, uint32_t log2_esz)
- 
- static inline target_ulong adjust_addr(CPURISCVState *env, target_ulong addr)
- {
-+    RISCVPmPmm pmm = riscv_pm_get_pmm(env);
-+    if (pmm == PMM_FIELD_DISABLED) {
-+        return addr;
-+    }
-+    int pmlen = riscv_pm_get_pmlen(pmm);
-+    bool signext = riscv_cpu_virt_mem_enabled(env);
-+    addr = addr << pmlen;
-+    /* sign/zero extend masked address by N-1 bit */
-+    if (signext) {
-+        addr = (target_long)addr >> pmlen;
-+    } else {
-+        addr = addr >> pmlen;
-+    }
-     return addr;
- }
- 
--- 
-2.34.1
++
+      accel_cpu_instance_init(CPU(obj));
+  }
 
+This will change the machine IDs for all CPUs that aren't vendor CPUs, which will
+retain whatever value it was set in their cpu_init().
+
+
+Thanks,
+
+
+Daniel
+
+>   }
+>   
+>   static void riscv_max_cpu_init(Object *obj)
+> @@ -432,6 +435,8 @@ static void riscv_max_cpu_init(Object *obj)
+>       set_satp_mode_max_supported(RISCV_CPU(obj), mlx == MXL_RV32 ?
+>                                   VM_1_10_SV32 : VM_1_10_SV57);
+>   #endif
+> +    cpu->cfg.mvendorid = QEMU_MVENDORID;
+> +    cpu->cfg.marchid = QEMU_MARCHID;
+>   }
+>   
+>   #if defined(TARGET_RISCV64)
+> @@ -445,6 +450,8 @@ static void rv64_base_cpu_init(Object *obj)
+>   #ifndef CONFIG_USER_ONLY
+>       set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV57);
+>   #endif
+> +    cpu->cfg.mvendorid = QEMU_MVENDORID;
+> +    cpu->cfg.marchid = QEMU_MARCHID;
+>   }
+>   
+>   static void rv64_sifive_u_cpu_init(Object *obj)
+> @@ -569,6 +576,8 @@ static void rv128_base_cpu_init(Object *obj)
+>   #ifndef CONFIG_USER_ONLY
+>       set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV57);
+>   #endif
+> +    cpu->cfg.mvendorid = QEMU_MVENDORID;
+> +    cpu->cfg.marchid = QEMU_MARCHID;
+>   }
+>   
+>   static void rv64i_bare_cpu_init(Object *obj)
+> @@ -591,6 +600,8 @@ static void rv64i_bare_cpu_init(Object *obj)
+>   #ifndef CONFIG_USER_ONLY
+>       set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV64);
+>   #endif
+> +    cpu->cfg.mvendorid = QEMU_MVENDORID;
+> +    cpu->cfg.marchid = QEMU_MARCHID;
+>   }
+>   #else
+>   static void rv32_base_cpu_init(Object *obj)
+> @@ -603,6 +614,8 @@ static void rv32_base_cpu_init(Object *obj)
+>   #ifndef CONFIG_USER_ONLY
+>       set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV32);
+>   #endif
+> +    cpu->cfg.mvendorid = QEMU_MVENDORID;
+> +    cpu->cfg.marchid = QEMU_MARCHID;
+>   }
+>   
+>   static void rv32_sifive_u_cpu_init(Object *obj)
+> @@ -672,6 +685,9 @@ static void rv32_imafcu_nommu_cpu_init(Object *obj)
+>       cpu->cfg.ext_zifencei = true;
+>       cpu->cfg.ext_zicsr = true;
+>       cpu->cfg.pmp = true;
+> +
+> +    cpu->cfg.mvendorid = QEMU_MVENDORID;
+> +    cpu->cfg.marchid = QEMU_MARCHID;
+>   }
+>   #endif
+>   
+> diff --git a/target/riscv/cpu_vendorid.h b/target/riscv/cpu_vendorid.h
+> index 96b6b9c2cb..486832cd53 100644
+> --- a/target/riscv/cpu_vendorid.h
+> +++ b/target/riscv/cpu_vendorid.h
+> @@ -7,4 +7,7 @@
+>   #define VEYRON_V1_MIMPID        0x111
+>   #define VEYRON_V1_MVENDORID     0x61f
+>   
+> +#define QEMU_VIRT_MVENDORID     0
+> +#define QEMU_VIRT_MARCHID       42
+> +
+>   #endif /*  TARGET_RISCV_CPU_VENDORID_H */
 
