@@ -4,61 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1BB7C4828F
-	for <qemu-riscv@archiver.kernel.org>; Fri,  2 Feb 2024 17:31:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D811C4828D
+	for <qemu-riscv@archiver.kernel.org>; Sat,  3 Feb 2024 10:11:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rVxNx-0001nH-0C; Fri, 02 Feb 2024 12:31:29 -0500
+	id 1rWCzX-0007y0-OZ; Sat, 03 Feb 2024 05:11:19 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jonathan.cameron@huawei.com>)
- id 1rVxNT-0001kg-66; Fri, 02 Feb 2024 12:31:01 -0500
-Received: from frasgout.his.huawei.com ([185.176.79.56])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jonathan.cameron@huawei.com>)
- id 1rVxNQ-0007p6-Ig; Fri, 02 Feb 2024 12:30:58 -0500
-Received: from mail.maildlp.com (unknown [172.18.186.31])
- by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4TRN5F4lDlz6K647;
- Sat,  3 Feb 2024 01:27:45 +0800 (CST)
-Received: from lhrpeml500005.china.huawei.com (unknown [7.191.163.240])
- by mail.maildlp.com (Postfix) with ESMTPS id BC1471400D4;
- Sat,  3 Feb 2024 01:30:48 +0800 (CST)
-Received: from localhost (10.202.227.76) by lhrpeml500005.china.huawei.com
- (7.191.163.240) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Fri, 2 Feb
- 2024 17:30:48 +0000
-Date: Fri, 2 Feb 2024 17:30:47 +0000
-To: Peter Maydell <peter.maydell@linaro.org>
-CC: Sia Jee Heng <jeeheng.sia@starfivetech.com>, <qemu-devel@nongnu.org>,
- <qemu-arm@nongnu.org>, <qemu-riscv@nongnu.org>, <mst@redhat.com>,
- <imammedo@redhat.com>, <anisinha@redhat.com>, <shannon.zhaosl@gmail.com>,
- <sunilvl@ventanamicro.com>, <palmer@dabbelt.com>, <alistair.francis@wdc.com>, 
- <bin.meng@windriver.com>, <liwei1518@gmail.com>, <dbarboza@ventanamicro.com>, 
- <zhiwei_liu@linux.alibaba.com>
-Subject: Re: [RFC v1 3/3] hw/arm/virt-acpi-build.c: Enable CPU cache topology
-Message-ID: <20240202173047.000053e9@Huawei.com>
-In-Reply-To: <CAFEAcA80VjwM=uKEXfwtg9SVzX947of1Go2c0ph-r0DeyKbpMA@mail.gmail.com>
-References: <20240129081423.116615-1-jeeheng.sia@starfivetech.com>
- <20240129081423.116615-4-jeeheng.sia@starfivetech.com>
- <20240129110823.000076df@Huawei.com>
- <CAFEAcA80VjwM=uKEXfwtg9SVzX947of1Go2c0ph-r0DeyKbpMA@mail.gmail.com>
-Organization: Huawei Technologies Research and Development (UK) Ltd.
-X-Mailer: Claws Mail 4.1.0 (GTK 3.24.33; x86_64-w64-mingw32)
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1rWCzW-0007xc-AZ
+ for qemu-riscv@nongnu.org; Sat, 03 Feb 2024 05:11:18 -0500
+Received: from mail-pf1-x42a.google.com ([2607:f8b0:4864:20::42a])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1rWCzU-0006v9-Gf
+ for qemu-riscv@nongnu.org; Sat, 03 Feb 2024 05:11:18 -0500
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-6ddb1115e82so1755479b3a.0
+ for <qemu-riscv@nongnu.org>; Sat, 03 Feb 2024 02:11:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1706955073; x=1707559873;
+ darn=nongnu.org; 
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=6WLZ2WTdsc/ueCR6cAHfOEbBL9spf0DSW49S1h7NVEI=;
+ b=r2vw3S2Bh4rcy6XENGYQmR+g6R0iA0CqAvto4e7ThFMDqf5SM93cRBHUF2Bs9+eM51
+ 8y3D2SzkDctqiNcoMMEUw0HpMARmFrX8Ofmww/Vl/W49eaaseweXD/ysTDu6cZv8oEm1
+ X9gjzJoSy52oL0Imk99PMcTB04/VwlXT1y3PTKgqsKci9yS/cjSWzfgjfnCxxVgE4hiG
+ OAR/gaLc/8fPGeNRxY68hdC5dSJIgP0oNnypB/P8n+6dm5AkdPNkKZU32e8IMqv7jydH
+ j8/DQSCKn8fCTkE8t0J6GK3hqC50rvZovYdd97O137XFUrvoEjLSHae55joBsyBy2bh7
+ J4/Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706955073; x=1707559873;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=6WLZ2WTdsc/ueCR6cAHfOEbBL9spf0DSW49S1h7NVEI=;
+ b=Ng2lzkf1OwthZPswpP7YGmSbJdd62TO20Tq7U31opGy4qel3T8fgRTCNxFCqBjvZVx
+ WD4CT0Rq0gL5qe01BkLRbNNtlUPpGwViHj7cDWnoxIfyGJ3sHwfbLLKFSpiAbfJ6IQEG
+ Qw9Ybhb+3YlnjQxzWVbv7S+X/U3oXqsBqDWUVHNgoA0jVJdgN5L5a8i2sBOIBa2UI1QX
+ EzIH84aXRNcd4U2KiC1WfyXuezjaycTPThWopfZa5DXACtEBJmL0XjrSDB8JF+1Y3ssn
+ 5iDk44tjH+KrhVJax/ACOzsjTGY/JJhANVlAX81blzsFE0Hf+f8x6HBH5khGLQ7SrCOn
+ ALvA==
+X-Gm-Message-State: AOJu0YxP5V2na5ImBrbekpUR+eK+cK36SQMhnUuZz+M3pnvKn2hAixLH
+ q/abfXfA5mOBB63MpWqMh30pWfU9yX4HOHvPa4l4u2SSTRsoFhY9HR/t68fFGEw=
+X-Google-Smtp-Source: AGHT+IFexZg7LjBVY814izMUgMBc9hImOofyVnOVzYttooNuKTonzmEWgfBOx27+PukxzJg+LRhQyw==
+X-Received: by 2002:a62:f212:0:b0:6e0:32e6:3f59 with SMTP id
+ m18-20020a62f212000000b006e032e63f59mr72792pfh.11.1706955073450; 
+ Sat, 03 Feb 2024 02:11:13 -0800 (PST)
+X-Forwarded-Encrypted: i=0;
+ AJvYcCXzSsPkFAjQ3R4ri7bA+gOtgLJesm34SHvMmxUvVz0c2Wn0w+UV4VJ6K6UukrDIkzPPyhyTjl6LNDNXmfZWppme3ftpaQ0SZ9hKQVGW1zbrx/Pn6LsIZk5vchyRxF11neheGgBSQbi8elYhfvyAK+5CXBKKkKDSHPdWfiU4FobzszVsAs6jRF1IlmEyl5l2//md4pLeKE2O/SB7Y4hsf/hze9+ZCnHLcry8QBFsmQTRcQ+kVIA7qMmF/KCbBXLafapW7lrWE+a+kESLjXa+SOR+U4MNBfRHlEWlGEIrtdFYFFZfqbdVg2lUzOz2v46RaqaqK8wImissYnaDYn9xsLjQF70bderAUOwslNoiTiuEdqZV8C84gGSSkUGeLDGiUDtj9H3sWuIvDBRQLQVFh3t0Zv7XgDy3mACZZqsyywL62ua8wkixtQb5gcsHVic1iD+XCWtSTFAeX2nrQQcZ
+Received: from localhost ([157.82.200.138])
+ by smtp.gmail.com with UTF8SMTPSA id
+ y7-20020a62b507000000b006dfef3ed2d4sm3038449pfe.110.2024.02.03.02.11.10
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 03 Feb 2024 02:11:13 -0800 (PST)
+From: Akihiko Odaki <akihiko.odaki@daynix.com>
+Subject: [PATCH v11 0/3] gdbstub and TCG plugin improvements
+Date: Sat, 03 Feb 2024 19:11:07 +0900
+Message-Id: <20240203-riscv-v11-0-a23f4848a628@daynix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="US-ASCII"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.202.227.76]
-X-ClientProxiedBy: lhrpeml500003.china.huawei.com (7.191.162.67) To
- lhrpeml500005.china.huawei.com (7.191.163.240)
-Received-SPF: pass client-ip=185.176.79.56;
- envelope-from=jonathan.cameron@huawei.com; helo=frasgout.his.huawei.com
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+X-B4-Tracking: v=1; b=H4sIADwRvmUC/2XNyw7CIBAF0F8xrMUw0PJw5X8YFxQGZWFrwJAa0
+ 3+XNqnxsbw3c+48ScYUMZP95kkSlpjj0NcAsN0Qd7H9GWn0tSCccQEcBE0xu0KDc0Y2zGjpAqm
+ 3t4QhjsvQ8VTzJeb7kB7LblFz+7tQFGXUKsmglVYIFQ7ePvo47txwJfNE0Z9Mr0xX5kwXeAet5
+ l79MbOyhgG0KzOVhQAKECx6p/8YsA/H3++AzdB32BphlETzBadpegGJb3KeQwEAAA==
+To: Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ =?utf-8?q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>, 
+ Mikhail Tyutin <m.tyutin@yadro.com>, 
+ Aleksandr Anenkov <a.anenkov@yadro.com>, 
+ =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>, 
+ Fabiano Rosas <farosas@suse.de>, Andrew Jones <ajones@ventanamicro.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ Akihiko Odaki <akihiko.odaki@daynix.com>
+X-Mailer: b4 0.12.3
+Received-SPF: none client-ip=2607:f8b0:4864:20::42a;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-pf1-x42a.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -71,71 +105,82 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-to:  Jonathan Cameron <Jonathan.Cameron@Huawei.com>
-From:  Jonathan Cameron via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, 1 Feb 2024 16:06:55 +0000
-Peter Maydell <peter.maydell@linaro.org> wrote:
+This series extracts fixes and refactorings that can be applied
+independently from "[PATCH v9 00/23] plugins: Allow to read registers".
 
-> On Mon, 29 Jan 2024 at 11:08, Jonathan Cameron
-> <Jonathan.Cameron@huawei.com> wrote:
-> >
-> > On Mon, 29 Jan 2024 00:14:23 -0800
-> > Sia Jee Heng <jeeheng.sia@starfivetech.com> wrote:
-> >  
-> > > Introduced a 3-layer cache for the ARM virtual machine.
-> > >
-> > > Signed-off-by: Sia Jee Heng <jeeheng.sia@starfivetech.com>  
-> >
-> > There are a bunch of CPU registers that also need updating to reflect the
-> > described cache.
-> > https://lore.kernel.org/qemu-devel/20230808115713.2613-3-Jonathan.Cameron@huawei.com/
-> > It's called HACK for a reason ;)
-> > But there is some discussion about this issue in the thread.
-> >
-> > The l1 etc also needs to reflect the CPU model.  This stuff needs to match.
-> > Wrong information being passed to a VM is probably worse than no information.  
-> 
-> Yes. The ACPI table information, if we provide it, should be
-> being generated from the CPU cache ID registers.
+The patch "target/riscv: Move MISA limits to class" was replaced with
+patch "target/riscv: Move misa_mxl_max to class" since I found instances
+may have different misa_ext_mask.
 
-That + some additional information I think.
+V6 -> V7:
+  Rebased.
 
-> 
-> But I'm a bit confused about why the ACPI table has the cache
-> topology in it -- can't the guest read the cache ID registers
-> and figure it out for itself?
+V5 -> V6:
+  Added patch "default-configs: Add TARGET_XML_FILES definition".
+  Rebased.
 
-That's a philosophy question for the ARM architects :)
+V4 -> V5:
+  Added patch "hw/riscv: Use misa_mxl instead of misa_mxl_max".
 
-The registers focus on correctness (so what you need to flush etc,
-where the point of coherence is and other fun)
-not all the info needed for performance tuning. There is some stuff
-on the cache type that I guess is more perf tuning related (sets etc)
+V3 -> V4:
+  Added patch "gdbstub: Check if gdb_regs is NULL".
 
+V2 -> V3:
+  Restored patch sets from the previous version.
+  Rebased to commit 800485762e6564e04e2ab315132d477069562d91.
 
-They probably could have expanded the CPU registers to provide a lot
-more information (which is what x86 effectively does). IIRC what is
-there today for ARM is pretty much useless for anything placement
-decision related (scheduling etc)  You can't tell what shares a cache
-(or more fun cluster topology structures). 
+V1 -> V2:
+  Added patch "target/riscv: Do not allow MXL_RV32 for TARGET_RISCV64".
+  Added patch "target/riscv: Initialize gdb_core_xml_file only once".
+  Dropped patch "target/riscv: Remove misa_mxl validation".
+  Dropped patch "target/riscv: Move misa_mxl_max to class".
+  Dropped patch "target/riscv: Validate misa_mxl_max only once".
 
-It is hard in registers to define a nice flexible graph where
-all sorts of fun topology of the system can be described.
-PPTT provides that opportunity for a richer description.
-Sure you could squirt out the equivalent table via registers,
-but what's the point given we have firmware tables for this
-sort of thing..
+Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+---
+Changes in v11:
+- Rebased on: https://github.com/alistair23/qemu/tree/riscv-to-apply.next
+- Link to v10: https://lore.kernel.org/r/20240128-riscv-v10-0-fdbe593976e9@daynix.com
 
-Jonathan
+Changes in v10:
+- Dropped patch "hw/riscv: Use misa_mxl instead of misa_mxl_max" due to
+  invalid assumption that the relevant code is only used for kernel
+  loading.
+- Link to v9: https://lore.kernel.org/r/20240115-riscv-v9-0-ff171e1aedc8@daynix.com
 
+Changes in v9:
+- Rebased to commit 977542ded7e6b28d2bc077bcda24568c716e393c.
+- Link to v8: https://lore.kernel.org/r/20231218-riscv-v8-0-c9bf2b1582d7@daynix.com
 
- 
+Changes in v8:
+- Added a more detailed explanation for patch "hw/riscv: Use misa_mxl
+  instead of misa_mxl_max". (Alistair Francis)
+- Link to v7: https://lore.kernel.org/r/20231213-riscv-v7-0-a760156a337f@daynix.com
 
-> 
-> thanks
-> -- PMM
+---
+Akihiko Odaki (3):
+      target/riscv: Remove misa_mxl validation
+      target/riscv: Move misa_mxl_max to class
+      target/riscv: Validate misa_mxl_max only once
+
+ target/riscv/cpu.h         |   4 +-
+ hw/riscv/boot.c            |   3 +-
+ target/riscv/cpu.c         | 181 ++++++++++++++++++++++++++-------------------
+ target/riscv/gdbstub.c     |  12 ++-
+ target/riscv/kvm/kvm-cpu.c |  10 +--
+ target/riscv/machine.c     |   7 +-
+ target/riscv/tcg/tcg-cpu.c |  44 ++---------
+ target/riscv/translate.c   |   3 +-
+ 8 files changed, 133 insertions(+), 131 deletions(-)
+---
+base-commit: 0c9d286cf791cdda76fd57e4562e2cb18d4a79e2
+change-id: 20231213-riscv-fcc9640986cf
+
+Best regards,
+-- 
+Akihiko Odaki <akihiko.odaki@daynix.com>
 
 
