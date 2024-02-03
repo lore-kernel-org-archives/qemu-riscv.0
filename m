@@ -4,92 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58247C4828F
-	for <qemu-riscv@archiver.kernel.org>; Sat,  3 Feb 2024 10:12:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F89EC4828F
+	for <qemu-riscv@archiver.kernel.org>; Sat,  3 Feb 2024 11:09:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rWCzb-0007yO-46; Sat, 03 Feb 2024 05:11:23 -0500
+	id 1rWDtC-00041e-P1; Sat, 03 Feb 2024 06:08:51 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1rWCzZ-0007y7-9W
- for qemu-riscv@nongnu.org; Sat, 03 Feb 2024 05:11:21 -0500
-Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1rWDtA-0003zl-8P
+ for qemu-riscv@nongnu.org; Sat, 03 Feb 2024 06:08:48 -0500
+Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1rWCzX-0006x4-QG
- for qemu-riscv@nongnu.org; Sat, 03 Feb 2024 05:11:20 -0500
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-1d73066880eso25315145ad.3
- for <qemu-riscv@nongnu.org>; Sat, 03 Feb 2024 02:11:19 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1rWDt6-0004Sm-Li
+ for qemu-riscv@nongnu.org; Sat, 03 Feb 2024 06:08:47 -0500
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-33b2960ff60so296172f8f.1
+ for <qemu-riscv@nongnu.org>; Sat, 03 Feb 2024 03:08:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1706955078; x=1707559878;
- darn=nongnu.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=EVFEkyD2AS6ap5J+rUntbo0ffQ6dqe1CEg6+zFuyHws=;
- b=1wgGPpPJbJgfCrg3ZPphNzRitmOkPbz3rit09jIuYgaBBYCJnVzS7CFLc4P+FJrzzP
- RwwvPlpJ/zRAeY2qSAUH07cCjciqa0tQ6NjNAevp09cVki/k7yu+TsbvllZ7XoGz2i97
- ItFc4cTOzUv2NPS2RB7rtx3z1SWcq5v4PqD4Yjid5BB0TvWQjW8bb/NgLf3UOrtiIeun
- zFNTIDWRJ285HNvamQb4cC5smOCz9QNXFR/Vk/FKYnDAJSone9qdYvrr+eUWHaVKNoP0
- 7aIJGDWS1GBCUOa3CxHgVbm7gIVQ325vj4pcmCpo/c4RqFtIHPq8ijMFmb+9cC8lJrcx
- t9HQ==
+ d=linaro.org; s=google; t=1706958515; x=1707563315; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:user-agent
+ :references:in-reply-to:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+n9/L3a+iva7ZWBXFTYcwmPL7Ovxu0paRzwqx1wXoMY=;
+ b=kSQbtC9LMTvLjTMNSX6Z+H5HRk74c1Wgj3VNqUfKeB03Z2i61/oD0gSZW5683lt1+B
+ +dVS+O23hTPB7eQ/MW0lCB4VscvudQBWXqK7yrFj01XGWlu+rXbfegXRVrxPSMFF07Qd
+ /OYDLo7ok+DZ5OHbEygs9cIuS/CB2sl28NECBrw3kd5c1Oq1ROt9UEYy63ga1cVNQmMX
+ tV+x1dhcnoniVqUWPTQHIxBMQIMhdyAty64f3IIYE2qXX7vSmozgVQ+NKHuJhKjX4+mE
+ wkmp1OOAQQQQdNMwJRWn1Bv5fRv3GD8qT8MKvE/O0XZnsdwMjO2RgyS44kkHvjJZrfJw
+ ZCTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706955078; x=1707559878;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=EVFEkyD2AS6ap5J+rUntbo0ffQ6dqe1CEg6+zFuyHws=;
- b=wBJ6pLvQeCD6MqySmEGmviAkr5qPBIzOLquoeWG6FCV1pB+xOApzcQScRgIR/TxsKZ
- +IS1IsSoWt7B9Hfawr2tM6P7Y0p4lpvN+bTXw9tU/fqyLjtHUDiqxlAwdhd+jMFE/72M
- RRwn4JhI9kWAe8n6YWo027S9mu3RVT3P1zLrhj67qhG7RSlrxWYMOiYb44d5kYJDFBJ+
- EAId79jL5uQ3jlrcjibqHpcRUWPkdTXrnnGbzWkVsB5h17IVWa/5roCq1FkgQJYmW1hO
- cuMzykOPZxJ8qgq9zdPZt95eHA9TcQBApM5KSTS23NNeEuuHfIZGMO9T73gkWb4qCofH
- UpBw==
-X-Gm-Message-State: AOJu0YzuNugdULq2HY/e4038dlF7H05ENnsbwqWULesx0qKZg+iweaov
- a4uoMGWFaYMkMCL7zCOtQsZN1QXIJ6kjihdQXegVRVJ+X4/qiw7DyClkiuKM47Y=
-X-Google-Smtp-Source: AGHT+IGCWT626+VoT1tOAowWGJ014WWWcTGCsTOXPZyZAuu+8xhPQ6fWvcRHz6/NPc4YSpQHKzft0w==
-X-Received: by 2002:a17:902:7ed6:b0:1d8:f016:cfaf with SMTP id
- p22-20020a1709027ed600b001d8f016cfafmr9017138plb.47.1706955078458; 
- Sat, 03 Feb 2024 02:11:18 -0800 (PST)
+ d=1e100.net; s=20230601; t=1706958515; x=1707563315;
+ h=content-transfer-encoding:mime-version:message-id:date:user-agent
+ :references:in-reply-to:subject:cc:to:from:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=+n9/L3a+iva7ZWBXFTYcwmPL7Ovxu0paRzwqx1wXoMY=;
+ b=RO2s5pxQwUf9pl3AqShyZMmbJWU+M4g60Xat/SREoX4mhsxinMuWJYWrGBBVFlS9+t
+ ivBb8b0lqLUJqzVBAEZt+n6rQxGNbaPaqXjaHSbLc45kYeqwY03x+gEsSYZ1CkzdOGi8
+ NB43eOp3/aiGEHAJzDKUNlHBCnV5300jYB2lDV8u+/F2Vo7ZZhkE4yDbv+2+uTYEG1K/
+ OY9GPLraH3UoPbiTth1lk7piceQW54+pMAZXa8tA3LkTaN39onepqyc3ulCWZmLdZjVO
+ 9i0EOksbICLlrazOJLYL6apzGgzoYh0/Dlx2Q1GiwmIpBDr21nAzmKdsWL8KR/WWYv63
+ M2bw==
+X-Gm-Message-State: AOJu0Yyd/85mDCgvnsVC0DOELh5Nc6xbVknLI3Yy3gYaLK9WX7GJfdFa
+ HByEql5Yu8jzH/0CZDJoLvNkui86KOwfL1wmcT75clMrewI8dnDiDuE4GQnV/6M=
+X-Google-Smtp-Source: AGHT+IF4RePuSuwNf2ovazPLTQfoY9PdPn7EG3jqRRwU12AeOmE92ftOmJLOBC9X8lyZwyD0ZSoSYA==
+X-Received: by 2002:adf:e7ce:0:b0:33b:146e:241f with SMTP id
+ e14-20020adfe7ce000000b0033b146e241fmr1035837wrn.4.1706958515009; 
+ Sat, 03 Feb 2024 03:08:35 -0800 (PST)
 X-Forwarded-Encrypted: i=0;
- AJvYcCVzENxv70mH8N3klnj30nfK9W6gQT4X2HdV3CxrWY5aDfTkY9637cQRkfwZT0pHtpqBQI6xGAQg1OvndYpp4sNV54s5BMvUNizal3U9ViMH+YYwm3X99dWxiQiGTWnthJQ1Ci1LKukx8Un74s/N6mE1Z7lfJz3u0wPpgPpD6L6YQynLox6iDuEJKPuKGM+bBODfqRQ0aZMrC7GUfVx9+lr0jiB7XmL0o2WNxcEZLKlNtqt5F7wLUQErxJScCaFEK2uUKmauJTM+d459EXGn9W3xJ3qrerSFbNHaPrZOvHmdp1XCatnuVcW/ZTbYiOJPOUbvZOoYURwwP99jzf5ey6bVCUm6mGXJD6Vg77jTUncM/L9CvjN7ULl+ZNF98UqMnmC7Jf8Ek1MU+yb/QPqIPUgKaCv1QV3glwyxiCql1614UuTzVbSO+v4t1eKj40h64aQTBclQaa1/P6stj6fR
-Received: from localhost ([157.82.200.138])
- by smtp.gmail.com with UTF8SMTPSA id
- ja5-20020a170902efc500b001d937c0f5d9sm2949071plb.191.2024.02.03.02.11.15
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 03 Feb 2024 02:11:18 -0800 (PST)
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
-Date: Sat, 03 Feb 2024 19:11:08 +0900
-Subject: [PATCH v11 1/3] target/riscv: Remove misa_mxl validation
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240203-riscv-v11-1-a23f4848a628@daynix.com>
+ AJvYcCUS5eksnhgu4lRXfF1LpbFgK3yR7mfnhrDPeg/i30k7vRzCeqlcKCf8rR5yRnS3ufT4AcBtAcYpoTKw/RERBU//g+YafszD8VzdxuH7kUdMZ4bJoJGlGiE8MS4nZP4z0KbPVGBOy4s29VFgHP6IfmaYzRhKhODKw4JV3avTDR1mMF/evnGTUvToTWCw4EVGqN85wGQNfvnyAusmtJWSRqw1muZR2knFZdEw46mT3NDLioSqL5dZzIFNiXs+NZ+XRgFm9bIBRMhCX83+JQGzUvtbyTfKEgrOn6+AhZgV9tCmd63fj0MQu8Yb8YOqb2uc9FGVyXyoltFsZI4VarnEHtxlV8MdbP3oMUWVtk5eGLxs4FCSyPglz39GSYLb4Yk8trdeUGxKmJpdM+gAwVtimedPfzAfkZSRTWBz3QMyLK6aB2jZ
+Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
+ iv15-20020a05600c548f00b0040efd192a95sm2633080wmb.1.2024.02.03.03.08.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 03 Feb 2024 03:08:34 -0800 (PST)
+Received: from draig (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id 3A0425F7A9;
+ Sat,  3 Feb 2024 11:08:34 +0000 (GMT)
+From: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: Akihiko Odaki <akihiko.odaki@daynix.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,  Alistair Francis
+ <alistair.francis@wdc.com>,  Bin Meng <bin.meng@windriver.com>,  Weiwei Li
+ <liwei1518@gmail.com>,  Daniel Henrique Barboza
+ <dbarboza@ventanamicro.com>,  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Mikhail Tyutin <m.tyutin@yadro.com>,  Aleksandr Anenkov
+ <a.anenkov@yadro.com>,  Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?=
+ <philmd@linaro.org>,
+ Fabiano Rosas <farosas@suse.de>,  Andrew Jones <ajones@ventanamicro.com>,
+ qemu-riscv@nongnu.org,  qemu-devel@nongnu.org
+Subject: Re: [PATCH v11 0/3] gdbstub and TCG plugin improvements
+In-Reply-To: <20240203-riscv-v11-0-a23f4848a628@daynix.com> (Akihiko Odaki's
+ message of "Sat, 03 Feb 2024 19:11:07 +0900")
 References: <20240203-riscv-v11-0-a23f4848a628@daynix.com>
-In-Reply-To: <20240203-riscv-v11-0-a23f4848a628@daynix.com>
-To: Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- =?utf-8?q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>, 
- Mikhail Tyutin <m.tyutin@yadro.com>, 
- Aleksandr Anenkov <a.anenkov@yadro.com>, 
- =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>, 
- Fabiano Rosas <farosas@suse.de>, Andrew Jones <ajones@ventanamicro.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
- Akihiko Odaki <akihiko.odaki@daynix.com>
-X-Mailer: b4 0.12.3
-Received-SPF: none client-ip=2607:f8b0:4864:20::635;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-pl1-x635.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+User-Agent: mu4e 1.11.27; emacs 29.1
+Date: Sat, 03 Feb 2024 11:08:34 +0000
+Message-ID: <87bk8xpzyl.fsf@draig.linaro.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::430;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x430.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,69 +107,36 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-It is initialized with a simple assignment and there is little room for
-error. In fact, the validation is even more complex.
+Akihiko Odaki <akihiko.odaki@daynix.com> writes:
 
-Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
-Acked-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/tcg/tcg-cpu.c | 15 +++------------
- 1 file changed, 3 insertions(+), 12 deletions(-)
+> This series extracts fixes and refactorings that can be applied
+> independently from "[PATCH v9 00/23] plugins: Allow to read registers".
+>
+> The patch "target/riscv: Move MISA limits to class" was replaced with
+> patch "target/riscv: Move misa_mxl_max to class" since I found instances
+> may have different misa_ext_mask.
 
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index da437975b429..94dca7e446eb 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -268,7 +268,7 @@ static void riscv_cpu_validate_misa_priv(CPURISCVState *env, Error **errp)
-     }
- }
- 
--static void riscv_cpu_validate_misa_mxl(RISCVCPU *cpu, Error **errp)
-+static void riscv_cpu_validate_misa_mxl(RISCVCPU *cpu)
- {
-     RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(cpu);
-     CPUClass *cc = CPU_CLASS(mcc);
-@@ -288,11 +288,6 @@ static void riscv_cpu_validate_misa_mxl(RISCVCPU *cpu, Error **errp)
-     default:
-         g_assert_not_reached();
-     }
--
--    if (env->misa_mxl_max != env->misa_mxl) {
--        error_setg(errp, "misa_mxl_max must be equal to misa_mxl");
--        return;
--    }
- }
- 
- static void riscv_cpu_validate_v(CPURISCVState *env, RISCVCPUConfig *cfg,
-@@ -908,7 +903,6 @@ static bool riscv_cpu_is_generic(Object *cpu_obj)
- static bool riscv_tcg_cpu_realize(CPUState *cs, Error **errp)
- {
-     RISCVCPU *cpu = RISCV_CPU(cs);
--    Error *local_err = NULL;
- 
-     if (!riscv_cpu_tcg_compatible(cpu)) {
-         g_autofree char *name = riscv_cpu_get_name(cpu);
-@@ -917,14 +911,11 @@ static bool riscv_tcg_cpu_realize(CPUState *cs, Error **errp)
-         return false;
-     }
- 
--    riscv_cpu_validate_misa_mxl(cpu, &local_err);
--    if (local_err != NULL) {
--        error_propagate(errp, local_err);
--        return false;
--    }
-+    riscv_cpu_validate_misa_mxl(cpu);
- 
- #ifndef CONFIG_USER_ONLY
-     CPURISCVState *env = &cpu->env;
-+    Error *local_err = NULL;
- 
-     CPU(cs)->tcg_cflags |= CF_PCREL;
- 
+As this is re-based on Alistair's riscv-to-apply.next tree I'll wait for
+this to go through the RiscV trees and then re-base the plugin patches
+and dropping the merged riscv patches from my tree.
 
--- 
-2.43.0
+In the meantime feel free to review:
 
+  Message-Id: <20240122145610.413836-1-alex.bennee@linaro.org>
+  Date: Mon, 22 Jan 2024 14:55:49 +0000
+  Subject: [PATCH v3 00/21] plugin updates (register access) for 9.0 (pre-P=
+R?)
+  From: =3D?UTF-8?q?Alex=3D20Benn=3DC3=3DA9e?=3D <alex.bennee@linaro.org>
+
+For:
+
+  contrib/plugins: extend execlog to track register changes
+  gdbstub: expose api to find registers
+
+So I can add this to my maintainer omnibus series for the next PR I
+send.
+
+--=20
+Alex Benn=C3=A9e
+Virtualisation Tech Lead @ Linaro
 
