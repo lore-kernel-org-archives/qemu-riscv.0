@@ -4,96 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 177F5C4828F
-	for <qemu-riscv@archiver.kernel.org>; Sat,  3 Feb 2024 13:58:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00D32C48286
+	for <qemu-riscv@archiver.kernel.org>; Sun,  4 Feb 2024 05:42:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rWGXZ-0003qd-DL; Sat, 03 Feb 2024 08:58:41 -0500
+	id 1rWVHG-0002Cp-Vk; Sun, 04 Feb 2024 00:42:51 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rWGXY-0003qV-OB
- for qemu-riscv@nongnu.org; Sat, 03 Feb 2024 08:58:40 -0500
-Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rWGXW-0000bW-AE
- for qemu-riscv@nongnu.org; Sat, 03 Feb 2024 08:58:40 -0500
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-33aea66a31cso1791606f8f.1
- for <qemu-riscv@nongnu.org>; Sat, 03 Feb 2024 05:58:36 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1rWVHE-0002CB-Mo; Sun, 04 Feb 2024 00:42:48 -0500
+Received: from out30-124.freemail.mail.aliyun.com ([115.124.30.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1rWVHC-0007h9-Gf; Sun, 04 Feb 2024 00:42:48 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706968715; x=1707573515; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:user-agent
- :references:in-reply-to:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=U9Pxu5n6m30JqSdPRav2U9PpOD+MM44CzvHTi70RuVQ=;
- b=INH724YDdAK7UkMOJsT7lyBtBd1wtyCqlZVVVwQUFUy19IyhLEpwGUzlPtIo966Jt7
- hstzbiSWnsl04kG5EeEg2KWsg5tA6pnciVllwvbMgMyUjLaoyVFhiFEv3C+A1YKBYHhM
- uEFQpPZjYyL/U3u89+0Vu4Hcj9X/3lRIELd84uQf3RfSBijY1i8EJjRzRPTm18RkMpqg
- inZEWEMTFHQ24mEcqKe01xkCzrwmHhfAshJc9xdAeUsVtucb0jWa+wdpl8c1/tETvZSa
- XcohH4dKrhfwtKN1nZf7Vuv/yJx2nd5WPJd/sOk2IPPb9HHS5UBxnfll+k7miq+AOsAI
- vAjA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706968715; x=1707573515;
- h=content-transfer-encoding:mime-version:message-id:date:user-agent
- :references:in-reply-to:subject:cc:to:from:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=U9Pxu5n6m30JqSdPRav2U9PpOD+MM44CzvHTi70RuVQ=;
- b=S5FlV3KhJ1cYPNkO7yNAQ6J1XbW7N5yXlXvmRwy3nunBtykmxqUguas24fTzigQetz
- tRAfMQSa/moTMkZThr3F+p851oyf0JyAeKmzy1SZ6Ru9ogFSPKpzDmTVU0X+r/A0y9rI
- a914KhZt5NSM8V7UhpXbBWgvF2JIWlUYvMPm+AFTwpZEUhy1q6uOGD8WPUq3uAuIkHG5
- c9EnaHZmUmQDRntv5m0uplzWP3lO3YcaPQHem+P0WEY18sGpVTlrKXhtNyAScPdZ8BRS
- ve4RmwlgzkUooi7hO0NJcQqHM3UNnp6ZyC+HT/A93sqGH/w3+0mH/OMja29DqyS7cGLV
- 4Llw==
-X-Gm-Message-State: AOJu0Yxz4he2dYPWJ/N24MOZI0pOoI1nfWHF3kyUgfT3MUdSEnAaVkmJ
- HGnod/jGnUBR0DJ4p0ZyXLCak90zofRBe4uUmiyTCVAb8uyuvgeWB6hkTcLa+Ww=
-X-Google-Smtp-Source: AGHT+IEC6YFzi7UuWTcuM/WW45NVrVE73TPqwFD87P2bF3DWCITmbKbiPyIzNnwxmMseEtHWUZe/rQ==
-X-Received: by 2002:adf:fa09:0:b0:33b:2633:b527 with SMTP id
- m9-20020adffa09000000b0033b2633b527mr2710902wrr.20.1706968715111; 
- Sat, 03 Feb 2024 05:58:35 -0800 (PST)
-X-Forwarded-Encrypted: i=0;
- AJvYcCUQNG403doS+wDD3lMqEimiBuP7SjA9YDq9jhKMLfUa8ntkzfHSne93kQ4M3vSJmnR6z1gWMcCMm+UxNlFC9OWEgUapbpxyPo0YvvcmDcBKpb8RkoqC3Y/p3oF/xWxgcFmK3MqcrHWfVX7Hgq+xErsRfzOSmr01yw6xEyEfM8dQ8UE3IXsp4SuNzn8LfYPyPbUYlQTQeMaTQMePg2bhfPmNPfZbyRDEuJogqVlBtsw4VX8lx/tMFUT3pG3pBWLz0n92SSYtKXbLHmaLmFegQgjrWVXy7/WNVUiq6to8ewQBTawuOTBzdVjoMTXbh519RAQ6bTgTtlWBsFi/WJiXdHV3yLimqM3jd/pZuqGseKOZcOndihUoDEZy1yDfuvjR3w0IrtV6YY6CQPX8u/aNCahU3o2hiTuo23PiUBdltmhK3NVa
-Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- e21-20020adfa455000000b003392b1ebf5csm4159481wra.59.2024.02.03.05.58.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 03 Feb 2024 05:58:34 -0800 (PST)
-Received: from draig (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 50CC85F7A9;
- Sat,  3 Feb 2024 13:58:34 +0000 (GMT)
-From: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: Akihiko Odaki <akihiko.odaki@daynix.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,  Alistair Francis
- <alistair.francis@wdc.com>,  Bin Meng <bin.meng@windriver.com>,  Weiwei Li
- <liwei1518@gmail.com>,  Daniel Henrique Barboza
- <dbarboza@ventanamicro.com>,  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Mikhail Tyutin <m.tyutin@yadro.com>,  Aleksandr Anenkov
- <a.anenkov@yadro.com>,  Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?=
- <philmd@linaro.org>,
- Fabiano Rosas <farosas@suse.de>,  Andrew Jones <ajones@ventanamicro.com>,
- qemu-riscv@nongnu.org,  qemu-devel@nongnu.org
-Subject: Re: [PATCH v11 0/3] gdbstub and TCG plugin improvements
-In-Reply-To: <b34c4013-1aca-466e-b94e-55d9802928b3@daynix.com> (Akihiko
- Odaki's message of "Sat, 3 Feb 2024 20:26:37 +0900")
-References: <20240203-riscv-v11-0-a23f4848a628@daynix.com>
- <87bk8xpzyl.fsf@draig.linaro.org>
- <b34c4013-1aca-466e-b94e-55d9802928b3@daynix.com>
-User-Agent: mu4e 1.11.27; emacs 29.1
-Date: Sat, 03 Feb 2024 13:58:34 +0000
-Message-ID: <87zfwhodit.fsf@draig.linaro.org>
+ d=linux.alibaba.com; s=default;
+ t=1707025359; h=From:To:Subject:Date:Message-Id:MIME-Version;
+ bh=xDYD+IGKD2fXCKy7qnheHnSq4iihbUK1cj+sAgP9Ha8=;
+ b=NpERZbz8WsKU3ddJvNeA3ROC8j3p9cC9EKRgpWU+Xey20SSsc43mp+pcfaiWuwnOv2a+P4t8blovMAogP2+X2uFBqOnfmbKt6YaKLL1mHYpuaiGwNrPoPMZ/J4Sj6NtK6oiP74bjxsSYORCDtCB0qNG/P8S7ZMCViXYFMT+GVVs=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R331e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046059;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=10; SR=0;
+ TI=SMTPD_---0W0.iu5X_1707025350; 
+Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0W0.iu5X_1707025350) by smtp.aliyun-inc.com;
+ Sun, 04 Feb 2024 13:42:37 +0800
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+To: qemu-devel@nongnu.org
+Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
+ liwei1518@gmail.com, dbarboza@ventanamicro.com, qemu-riscv@nongnu.org,
+ christoph.muellner@vrull.eu, bjorn@kernel.org,
+ LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Subject: [PATCH v2 1/2] target/riscv: Register vendors CSR
+Date: Sun,  4 Feb 2024 13:42:27 +0800
+Message-Id: <20240204054228.651-2-zhiwei_liu@linux.alibaba.com>
+X-Mailer: git-send-email 2.23.0
+In-Reply-To: <20240204054228.651-1-zhiwei_liu@linux.alibaba.com>
+References: <20240204054228.651-1-zhiwei_liu@linux.alibaba.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::429;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x429.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=115.124.30.124;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-124.freemail.mail.aliyun.com
+X-Spam_score_int: -174
+X-Spam_score: -17.5
+X-Spam_bar: -----------------
+X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01, UNPARSEABLE_RELAY=0.001,
+ USER_IN_DEF_DKIM_WL=-7.5,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -109,54 +71,73 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Akihiko Odaki <akihiko.odaki@daynix.com> writes:
+riscv specification allows custom CSRs in decode area. So we should
+register all vendor CSRs in cpu realize stage.
 
-> On 2024/02/03 20:08, Alex Benn=C3=A9e wrote:
->> Akihiko Odaki <akihiko.odaki@daynix.com> writes:
->>=20
->>> This series extracts fixes and refactorings that can be applied
->>> independently from "[PATCH v9 00/23] plugins: Allow to read registers".
->>>
->>> The patch "target/riscv: Move MISA limits to class" was replaced with
->>> patch "target/riscv: Move misa_mxl_max to class" since I found instances
->>> may have different misa_ext_mask.
->> As this is re-based on Alistair's riscv-to-apply.next tree I'll wait
->> for
->> this to go through the RiscV trees and then re-base the plugin patches
->> and dropping the merged riscv patches from my tree.
->> In the meantime feel free to review:
->>    Message-Id: <20240122145610.413836-1-alex.bennee@linaro.org>
->>    Date: Mon, 22 Jan 2024 14:55:49 +0000
->>    Subject: [PATCH v3 00/21] plugin updates (register access) for 9.0 (p=
-re-PR?)
->>    From: =3D?UTF-8?q?Alex=3D20Benn=3DC3=3DA9e?=3D <alex.bennee@linaro.or=
-g>
->> For:
->>    contrib/plugins: extend execlog to track register changes
->>    gdbstub: expose api to find registers
->> So I can add this to my maintainer omnibus series for the next PR I
->> send.
->
-> I added one trivial comment to: "gdbstub: expose api to find registers"
->
-> "contrib/plugins: extend execlog to track register changes" depends on
-> "plugins: add an API to read registers". The comments for the patch in
-> the following email are not addressed yet:
-> https://lore.kernel.org/all/4b2156ed-688d-4617-b52d-200413f01156@daynix.c=
-om/
+Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+---
+1) Use int index to quiet the  Werror for "i < 0".
+---
+ target/riscv/cpu.c         |  3 +++
+ target/riscv/tcg/tcg-cpu.c | 18 ++++++++++++++++++
+ target/riscv/tcg/tcg-cpu.h |  1 +
+ 3 files changed, 22 insertions(+)
 
-I don't think we need to serialise with the BQL as the structures are
-per-CPU (and created on vCPU creation).
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 8cbfc7e781..2dcbc9ff32 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -1113,6 +1113,9 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+         return;
+     }
+ 
++    if (tcg_enabled()) {
++        riscv_tcg_cpu_register_vendor_csr(cpu);
++    }
+     riscv_cpu_register_gdb_regs_for_features(cs);
+ 
+ #ifndef CONFIG_USER_ONLY
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index 994ca1cdf9..559bf373f3 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -871,6 +871,24 @@ static void riscv_cpu_validate_profiles(RISCVCPU *cpu)
+     }
+ }
+ 
++void riscv_tcg_cpu_register_vendor_csr(RISCVCPU *cpu)
++{
++    static const struct {
++        bool (*guard_func)(const RISCVCPUConfig *);
++        riscv_csr_operations *csr_ops;
++    } vendors[] = {
++    };
++    for (int i = 0; i < ARRAY_SIZE(vendors); ++i) {
++        if (!vendors[i].guard_func(&cpu->cfg)) {
++            continue;
++        }
++        for (size_t j = 0; j < CSR_TABLE_SIZE &&
++                           vendors[i].csr_ops[j].name; j++) {
++            csr_ops[j] = vendors[i].csr_ops[j];
++        }
++    }
++}
++
+ void riscv_tcg_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
+ {
+     CPURISCVState *env = &cpu->env;
+diff --git a/target/riscv/tcg/tcg-cpu.h b/target/riscv/tcg/tcg-cpu.h
+index f7b32417f8..3daaebf4fb 100644
+--- a/target/riscv/tcg/tcg-cpu.h
++++ b/target/riscv/tcg/tcg-cpu.h
+@@ -25,5 +25,6 @@
+ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp);
+ void riscv_tcg_cpu_finalize_features(RISCVCPU *cpu, Error **errp);
+ bool riscv_cpu_tcg_compatible(RISCVCPU *cpu);
++void riscv_tcg_cpu_register_vendor_csr(RISCVCPU *cpu);
+ 
+ #endif
+-- 
+2.25.1
 
-As far as the restructuring we can move it into gdbstub later if there
-is a need to. At the moment the structure is just housekeeping for
-plugins.
-
-
->
-> Please check them out.
-
---=20
-Alex Benn=C3=A9e
-Virtualisation Tech Lead @ Linaro
 
