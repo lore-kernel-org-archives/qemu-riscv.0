@@ -4,99 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9CD3C48291
-	for <qemu-riscv@archiver.kernel.org>; Mon,  5 Feb 2024 10:04:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBAD6C4828D
+	for <qemu-riscv@archiver.kernel.org>; Mon,  5 Feb 2024 11:20:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rWvpl-0007XT-Hn; Mon, 05 Feb 2024 05:04:13 -0500
+	id 1rWx1M-0000mr-2F; Mon, 05 Feb 2024 06:20:16 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1rWvpk-0007XA-GI
- for qemu-riscv@nongnu.org; Mon, 05 Feb 2024 05:04:12 -0500
-Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1rWx1H-0000mK-AV
+ for qemu-riscv@nongnu.org; Mon, 05 Feb 2024 06:20:12 -0500
+Received: from mail-lf1-x135.google.com ([2a00:1450:4864:20::135])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1rWvph-0000mb-TZ
- for qemu-riscv@nongnu.org; Mon, 05 Feb 2024 05:04:12 -0500
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-40fc65783aeso25649085e9.2
- for <qemu-riscv@nongnu.org>; Mon, 05 Feb 2024 02:04:09 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1rWx1E-0006Kk-Q9
+ for qemu-riscv@nongnu.org; Mon, 05 Feb 2024 06:20:11 -0500
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-51124d86022so6626632e87.0
+ for <qemu-riscv@nongnu.org>; Mon, 05 Feb 2024 03:20:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1707127447; x=1707732247; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=MkdkvJQftVnKaY82EdCy5JeXX30Cnmo5Kyr9u/FMSvk=;
- b=tR0W7v5uJiZhCC0R5DCTITdS2/H99hOKrRmZfC/SKq1GnYNcwse4dJPLo6s2uNBHYu
- vXZTg6eQeT9BzEDbyKy9qnanWfuA71jFyewELaeK5Qfh1zW7C7MFwzMA/GNQtDJQr9DW
- +AXTn+R2sK8FzK6hr5q5GdzOmZyVwuTA0JUAb0GAkDNDUozrbnvect46hhMwkG2m9QMy
- cTEYPxIzk6bExP3lpoDoikxPCH15xvPWHqTrRIYRixU04jjBWIxcSQydo+dpGxUuOHOp
- qO+rLQZ717djpfLF285P3zI+U23F43iWBFLxeO4O+0F0bmXMLwjOQn4meahOMfZOwetR
- 8EdA==
+ d=linaro.org; s=google; t=1707132007; x=1707736807; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:user-agent
+ :references:in-reply-to:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=9jbWkREPVqHkpdc8LVigTQLwlkrC5A6gQ+ZV4XNhibo=;
+ b=t95gX69Q/HnJqqaeGuYUYXqqXDQZJo7u+sbk9MMepA+KOmF8xyTVZLCjgGEcrEg44N
+ CjIikUeS3z9PxXloGbvlJc3ug6qjk/F5Mik1kOyoqxzF2rU1wkkT7izQaCTJTYndQH1B
+ 7U/SoHYGxDLdOGcw/yUmuZLG88x+bXtlTBEfVIZ8g+k1wo+qNOMg753yuVS45ZgzC6BV
+ LrhY1qb+TAQvUju3r/6SOiylarp0DAbMRCp0Sf9BZPO8CG3IkPyfBucMe6AsZ59681YP
+ zUMmYLxbXJL0mSLB8EEXgQbolEoX3wQWR1JbZihsAaAa9/NL4/CphJ29q1b1xMSr/zOj
+ Pa9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707127447; x=1707732247;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=MkdkvJQftVnKaY82EdCy5JeXX30Cnmo5Kyr9u/FMSvk=;
- b=GuDOEV82070uTGGGm3ve4rxIfwJWMu6TXq1FoXqWzn5fr9wYLQC5gOaCpNY5szS2AU
- Rj4yQehC1pjjLIn59i4OqbPmYPxqN2AQ01iSTZQPLBXrF4PKWZIrSi+PkSGpq7Jk30w2
- zLQkl6P2v+HjK3/w7fDGopCyCPOGAgwjeqShhqDhpm5yy5XBiwlIP1ovuNxWDWhXWHlZ
- FFH2BwAmUp0GsIVKdv57PyUgtzwDIETTmuNsigqrOL88hM44+umccFwGI6C7/KcddQPi
- vtm5CKs+eGp+3XFoDVqaiFeTP7yeHX78oAJtaawv+6MiWyPifOXEThv0sKmalV+DxVwN
- OXWA==
-X-Gm-Message-State: AOJu0YzHCb4JQdcU35HuMa+FfG7r9V6Rt/jFWASXljP6l3P5kSm5oE6z
- vCosRhzYnwn6PE9LRAwJjou9eQ+ARseP9A+a8n5riF64gDzAfpbt7DUK8f6awqU=
-X-Google-Smtp-Source: AGHT+IGM3ptTmB9qPfAviYIKwlw15mjRd4IbG1pf4jmWokNTmAc6WcdZEQzldUCXsBapKOEJdAx+5w==
-X-Received: by 2002:a05:600c:4ec7:b0:40e:5ed3:ccf4 with SMTP id
- g7-20020a05600c4ec700b0040e5ed3ccf4mr4398883wmq.16.1707127447199; 
- Mon, 05 Feb 2024 02:04:07 -0800 (PST)
+ d=1e100.net; s=20230601; t=1707132007; x=1707736807;
+ h=content-transfer-encoding:mime-version:message-id:date:user-agent
+ :references:in-reply-to:subject:cc:to:from:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=9jbWkREPVqHkpdc8LVigTQLwlkrC5A6gQ+ZV4XNhibo=;
+ b=c7p2RJKQkC7E9NzMtgX0mv9XtOp4b7sIhJYkzrTx27cdlI5GxXLZD9hTD+O0pZG14H
+ U2QQj4QWW2xmiD0PvX7RHpKORgQ2DKqtjnWp/Pgfny1IH2qRA6xLZS2MsbE8OInWiEd2
+ n2jj3TvM1XhLX4k5jzdUg+udTaKqVFaMAMH/WLTDHbnc5gJ7Gmj/tIg8nCJ90m/5gYTW
+ zrh5ns5PY7Z7GnqI3NjWoedxXkgu+uQ0WGyEbUeaiA/agw7Cl/m59PCZWMtxS6KnanK0
+ s9KqyOeo5vZ5ACCAt08q92fEwktmYcXq7DSgiy6hpgluRmuQUsKIjM2iTZSakONybQ9J
+ 95KA==
+X-Gm-Message-State: AOJu0YwaPDV+fWQ/Nnxrb8Q8ZH2YVNJ753wvnEA7PDzQk/D4uoYhGaVl
+ U2LWhYDw+LYS8LlkGInJiHNHX0TEtPovHrgfg+xMzhmwIt/AXG+lErXPPoZKjE4=
+X-Google-Smtp-Source: AGHT+IE6EI12X7pzCleMS+y7xlL2qwc8mmaWpwsKr1dY0g4fCBP0vrIYJQ9vrXKzloUCCjHhYG/JcQ==
+X-Received: by 2002:ac2:58cd:0:b0:511:4a19:baa7 with SMTP id
+ u13-20020ac258cd000000b005114a19baa7mr2619834lfo.50.1707132006914; 
+ Mon, 05 Feb 2024 03:20:06 -0800 (PST)
 X-Forwarded-Encrypted: i=0;
- AJvYcCUtKZUM2z/oiJ59vug8nNg6UXO9pzKBtFnJaDjZdBoFR7OnqIPMqr+lXBfyUzbdXl4V3AXDqm0lxDb91QCLZUpS+iSR97Aguyv62XIeIj2Y+SQmCA7z6NKC5JXLIbWeym+AiFzp/D3PkJ52q2Vnu6onzjQujoA718b/gQnIVsFfuFhtqc9CJ4g34Ml5vv8HmXyfha3EUhPTJ/Kad6iOl6KBKlWRQkJi5UjmFwy8m97WDCtPzJeRHf7aWaNt6Eg6mmTgT94GaD4hst87Y2MHxoBg7VkO7xjIteA0vweufM/qX6bojs4/cvonxj8awGECNmV29U+kgGev5JJXKLjUdLXBW3HMmv3p2r35761Nm/Bbo63k5jvb795acjUVONliqwlKZeWaoqfYfDtWkUnLXhxFDqfIjWNVzzLyFf5vzW/symbJrXup8e/5eCQc0hvXG7rrDqdApQVEwy6ZFRk34E9dgJyJLAUR3HULIKaQzbOS7d36zh/rQL9h5g==
-Received: from [192.168.1.24] ([102.35.208.160])
- by smtp.gmail.com with ESMTPSA id
- j18-20020adfe512000000b0033946c0f9e7sm7705992wrm.17.2024.02.05.02.04.03
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 05 Feb 2024 02:04:06 -0800 (PST)
-Message-ID: <612315ae-2132-4e41-8d16-6635dab54a1b@linaro.org>
-Date: Mon, 5 Feb 2024 14:03:59 +0400
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+ AJvYcCUK96HfZNX0CVEI84PzGBL2hE7OhihaBNsnm99fo9cz6ip2mnMAsaMI2TLlE9AtC72AbZwfO81KB0sGN5o7sa3naVyLxnfKSeKKKS2M8EleZsH134NbUVKEIN20K9OxZqV20k0U9Q8pNQJTCynLZR7o1etiJCwaiJJLZn7ukR2IuXihJwCW2j2bJuWl4X+1UPPnRljogvRVXBT+jRpF5AFD68gKu8OIPBURlMu/gIgEYZE3CF6BDTRI49bwfvIvtOKz2k4SxPb3fxTtSJZvGVcCqkY4+PFci56iz2wWZyPix+fnNTwrBL9tPyGg4BtiTXyCZyBmMbaptHcNa9XuTdGSKq3Bq1A/Yk5uWaScDVVoILnWk5xaX7jU78LUozz3R84Uo2KhOypi9BcER7xGPEddNPUUgNevvR3p5BnpOYNESmZ2LA5M2rGaml/qhz5j4aVZnB1g+ko=
+Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
+ v10-20020a05600c444a00b0040fde25f9acsm814364wmn.0.2024.02.05.03.20.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 05 Feb 2024 03:20:06 -0800 (PST)
+Received: from draig (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id 28C5E5F888;
+ Mon,  5 Feb 2024 11:20:06 +0000 (GMT)
+From: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+Cc: Akihiko Odaki <akihiko.odaki@daynix.com>,  Palmer Dabbelt
+ <palmer@dabbelt.com>,  Alistair Francis <alistair.francis@wdc.com>,  Bin
+ Meng <bin.meng@windriver.com>,  Weiwei Li <liwei1518@gmail.com>,  Daniel
+ Henrique Barboza <dbarboza@ventanamicro.com>,  Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>,  Mikhail Tyutin <m.tyutin@yadro.com>,
+ Aleksandr Anenkov <a.anenkov@yadro.com>,  Philippe =?utf-8?Q?Mathieu-Dau?=
+ =?utf-8?Q?d=C3=A9?=
+ <philmd@linaro.org>,  Fabiano Rosas <farosas@suse.de>,  Andrew Jones
+ <ajones@ventanamicro.com>,  qemu-riscv@nongnu.org,  qemu-devel@nongnu.org
 Subject: Re: [PATCH v11 0/3] gdbstub and TCG plugin improvements
-To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Akihiko Odaki <akihiko.odaki@daynix.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Mikhail Tyutin <m.tyutin@yadro.com>, Aleksandr Anenkov
- <a.anenkov@yadro.com>, =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?=
- <philmd@linaro.org>, Fabiano Rosas <farosas@suse.de>,
- Andrew Jones <ajones@ventanamicro.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
+In-Reply-To: <612315ae-2132-4e41-8d16-6635dab54a1b@linaro.org> (Pierrick
+ Bouvier's message of "Mon, 5 Feb 2024 14:03:59 +0400")
 References: <20240203-riscv-v11-0-a23f4848a628@daynix.com>
  <87bk8xpzyl.fsf@draig.linaro.org>
  <b34c4013-1aca-466e-b94e-55d9802928b3@daynix.com>
  <87zfwhodit.fsf@draig.linaro.org>
  <7fae3d1a-5af2-4557-a2b3-13b911e73382@daynix.com>
  <8734u7gsv0.fsf@draig.linaro.org>
-Content-Language: en-US
-From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-In-Reply-To: <8734u7gsv0.fsf@draig.linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
-Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-wm1-x32e.google.com
+ <612315ae-2132-4e41-8d16-6635dab54a1b@linaro.org>
+User-Agent: mu4e 1.11.27; emacs 29.1
+Date: Mon, 05 Feb 2024 11:20:06 +0000
+Message-ID: <87le7zf995.fsf@draig.linaro.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::135;
+ envelope-from=alex.bennee@linaro.org; helo=mail-lf1-x135.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -112,61 +113,88 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-T24gMi81LzI0IDEzOjMxLCBBbGV4IEJlbm7DqWUgd3JvdGU6DQo+IEFraWhpa28gT2Rha2kg
-PGFraWhpa28ub2Rha2lAZGF5bml4LmNvbT4gd3JpdGVzOg0KPiANCj4+IE9uIDIwMjQvMDIv
-MDMgMjI6NTgsIEFsZXggQmVubsOpZSB3cm90ZToNCj4+PiBBa2loaWtvIE9kYWtpIDxha2lo
-aWtvLm9kYWtpQGRheW5peC5jb20+IHdyaXRlczoNCj4+Pg0KPj4+PiBPbiAyMDI0LzAyLzAz
-IDIwOjA4LCBBbGV4IEJlbm7DqWUgd3JvdGU6DQo+Pj4+PiBBa2loaWtvIE9kYWtpIDxha2lo
-aWtvLm9kYWtpQGRheW5peC5jb20+IHdyaXRlczoNCj4+Pj4+DQo+Pj4+Pj4gVGhpcyBzZXJp
-ZXMgZXh0cmFjdHMgZml4ZXMgYW5kIHJlZmFjdG9yaW5ncyB0aGF0IGNhbiBiZSBhcHBsaWVk
-DQo+Pj4+Pj4gaW5kZXBlbmRlbnRseSBmcm9tICJbUEFUQ0ggdjkgMDAvMjNdIHBsdWdpbnM6
-IEFsbG93IHRvIHJlYWQgcmVnaXN0ZXJzIi4NCj4+Pj4+Pg0KPj4+Pj4+IFRoZSBwYXRjaCAi
-dGFyZ2V0L3Jpc2N2OiBNb3ZlIE1JU0EgbGltaXRzIHRvIGNsYXNzIiB3YXMgcmVwbGFjZWQg
-d2l0aA0KPj4+Pj4+IHBhdGNoICJ0YXJnZXQvcmlzY3Y6IE1vdmUgbWlzYV9teGxfbWF4IHRv
-IGNsYXNzIiBzaW5jZSBJIGZvdW5kIGluc3RhbmNlcw0KPj4+Pj4+IG1heSBoYXZlIGRpZmZl
-cmVudCBtaXNhX2V4dF9tYXNrLg0KPj4+Pj4gQXMgdGhpcyBpcyByZS1iYXNlZCBvbiBBbGlz
-dGFpcidzIHJpc2N2LXRvLWFwcGx5Lm5leHQgdHJlZSBJJ2xsIHdhaXQNCj4+Pj4+IGZvcg0K
-Pj4+Pj4gdGhpcyB0byBnbyB0aHJvdWdoIHRoZSBSaXNjViB0cmVlcyBhbmQgdGhlbiByZS1i
-YXNlIHRoZSBwbHVnaW4gcGF0Y2hlcw0KPj4+Pj4gYW5kIGRyb3BwaW5nIHRoZSBtZXJnZWQg
-cmlzY3YgcGF0Y2hlcyBmcm9tIG15IHRyZWUuDQo+Pj4+PiBJbiB0aGUgbWVhbnRpbWUgZmVl
-bCBmcmVlIHRvIHJldmlldzoNCj4+Pj4+ICAgICAgTWVzc2FnZS1JZDogPDIwMjQwMTIyMTQ1
-NjEwLjQxMzgzNi0xLWFsZXguYmVubmVlQGxpbmFyby5vcmc+DQo+Pj4+PiAgICAgIERhdGU6
-IE1vbiwgMjIgSmFuIDIwMjQgMTQ6NTU6NDkgKzAwMDANCj4+Pj4+ICAgICAgU3ViamVjdDog
-W1BBVENIIHYzIDAwLzIxXSBwbHVnaW4gdXBkYXRlcyAocmVnaXN0ZXIgYWNjZXNzKSBmb3Ig
-OS4wIChwcmUtUFI/KQ0KPj4+Pj4gICAgICBGcm9tOiA9P1VURi04P3E/QWxleD0yMEJlbm49
-QzM9QTllPz0gPGFsZXguYmVubmVlQGxpbmFyby5vcmc+DQo+Pj4+PiBGb3I6DQo+Pj4+PiAg
-ICAgIGNvbnRyaWIvcGx1Z2luczogZXh0ZW5kIGV4ZWNsb2cgdG8gdHJhY2sgcmVnaXN0ZXIg
-Y2hhbmdlcw0KPj4+Pj4gICAgICBnZGJzdHViOiBleHBvc2UgYXBpIHRvIGZpbmQgcmVnaXN0
-ZXJzDQo+Pj4+PiBTbyBJIGNhbiBhZGQgdGhpcyB0byBteSBtYWludGFpbmVyIG9tbmlidXMg
-c2VyaWVzIGZvciB0aGUgbmV4dCBQUiBJDQo+Pj4+PiBzZW5kLg0KPj4+Pg0KPj4+PiBJIGFk
-ZGVkIG9uZSB0cml2aWFsIGNvbW1lbnQgdG86ICJnZGJzdHViOiBleHBvc2UgYXBpIHRvIGZp
-bmQgcmVnaXN0ZXJzIg0KPj4+Pg0KPj4+PiAiY29udHJpYi9wbHVnaW5zOiBleHRlbmQgZXhl
-Y2xvZyB0byB0cmFjayByZWdpc3RlciBjaGFuZ2VzIiBkZXBlbmRzIG9uDQo+Pj4+ICJwbHVn
-aW5zOiBhZGQgYW4gQVBJIHRvIHJlYWQgcmVnaXN0ZXJzIi4gVGhlIGNvbW1lbnRzIGZvciB0
-aGUgcGF0Y2ggaW4NCj4+Pj4gdGhlIGZvbGxvd2luZyBlbWFpbCBhcmUgbm90IGFkZHJlc3Nl
-ZCB5ZXQ6DQo+Pj4+IGh0dHBzOi8vbG9yZS5rZXJuZWwub3JnL2FsbC80YjIxNTZlZC02ODhk
-LTQ2MTctYjUyZC0yMDA0MTNmMDExNTZAZGF5bml4LmNvbS8NCj4+PiBJIGRvbid0IHRoaW5r
-IHdlIG5lZWQgdG8gc2VyaWFsaXNlIHdpdGggdGhlIEJRTCBhcyB0aGUgc3RydWN0dXJlcw0K
-Pj4+IGFyZQ0KPj4+IHBlci1DUFUgKGFuZCBjcmVhdGVkIG9uIHZDUFUgY3JlYXRpb24pLg0K
-Pj4NCj4+IHFlbXVfcGx1Z2luX2dldF9yZWdpc3RlcnMoKSBoYXMgdmNwdSBwYXJhbWV0ZXIs
-IHdoaWNoIGNhbiByZWZlciB0byBhDQo+PiBkaWZmZXJlbnQgdmNwdSB0aGUgY2FsbGVyIGlz
-IG9uIChvciB0aGUgY2FsbGVyIG1heSBub3QgYmUgaW4gYSB2Y3B1DQo+PiBjb250ZXh0IGF0
-IGFsbCkuDQo+IA0KPiBJdCBzaG91bGQgb25seSBiZSBjYWxsZWQgZnJvbSB0aGUgY3VycmVu
-dCBjcHUgY29udGV4dC4gV2UgY2FuIGVpdGhlcg0KPiBhc3NlcnQgdGhhdCBvciBtYWtlIGl0
-IGltcGxpY2l0IGxpa2UgcWVtdV9wbHVnaW5faW5zbl9kaXNhcyBkb2VzLg0KPiBIb3dldmVy
-IHdlIHdpbGwgbmVlZCB0byBlbnN1cmUgY3VycmVudF9jcHUgaXMgc2V0IGJlZm9yZSB0aGUg
-dmNwdV9pbml0DQo+IGNhbGxiYWNrLg0KPiANCj4gUGllcnJpY2sgaGFzIGhhZCB0byBtb3Zl
-IHRoZXNlIGluaXRpYWxpc2F0aW9ucyBhcm91bmQgZm9yIHRoZSBzY29yZWJvYXJkDQo+IHdv
-cmsgc28gdGhleSBhcmUgbm93IHJ1biB3aXRoIHNhZmUgd29yayBvbmNlIHRoZSB0aHJlYWQg
-c3RhcnRzLg0KPiANCg0KQXMgYSBjb21wbGVtZW50LCBpbiB0aGUgc2VyaWVzIEknbGwgcG9z
-dCwgdGhlIHdvcmsgaXMgcnVuIA0KYXN5bmNocm9ub3VzbHksIGJ1dCBub3QgInNhZmVfYXN5
-bmMiLCB3aGljaCBtZWFucyBpdCdzIG5vdCB1bmRlciBhbiANCmV4Y2x1c2l2ZSBzZWN0aW9u
-Lg0KDQpJZiB5b3UgbmVlZCB0aGlzIGd1YXJhbnRlZSBmb3IgcmVnaXN0ZXJzIEFQSSwgaXQn
-cyBiZXR0ZXIgdG8gYWRkIHRoaXMuDQoNCj4+DQo+Pj4gQXMgZmFyIGFzIHRoZSByZXN0cnVj
-dHVyaW5nIHdlIGNhbiBtb3ZlIGl0IGludG8gZ2Ric3R1YiBsYXRlciBpZg0KPj4+IHRoZXJl
-DQo+Pj4gaXMgYSBuZWVkIHRvLiBBdCB0aGUgbW9tZW50IHRoZSBzdHJ1Y3R1cmUgaXMganVz
-dCBob3VzZWtlZXBpbmcgZm9yDQo+Pj4gcGx1Z2lucy4NCj4+DQo+PiBDZXJ0YWlubHkgd2Ug
-Y2FuIG1vdmUgaXQgbGF0ZXIsIGJ1dCBhZGRpbmcgdGhlIGNvZGUgaW4gdGhlIHBsdWdpbg0K
-Pj4gaW5mcmFzdHJ1Y3R1cmUgbm93IHdvbid0IGhlbHAgaW4gdGhhdCBjYXNlLg0KPiANCg==
+Pierrick Bouvier <pierrick.bouvier@linaro.org> writes:
 
+> On 2/5/24 13:31, Alex Benn=C3=A9e wrote:
+>> Akihiko Odaki <akihiko.odaki@daynix.com> writes:
+>>=20
+>>> On 2024/02/03 22:58, Alex Benn=C3=A9e wrote:
+>>>> Akihiko Odaki <akihiko.odaki@daynix.com> writes:
+>>>>
+>>>>> On 2024/02/03 20:08, Alex Benn=C3=A9e wrote:
+>>>>>> Akihiko Odaki <akihiko.odaki@daynix.com> writes:
+>>>>>>
+>>>>>>> This series extracts fixes and refactorings that can be applied
+>>>>>>> independently from "[PATCH v9 00/23] plugins: Allow to read registe=
+rs".
+>>>>>>>
+>>>>>>> The patch "target/riscv: Move MISA limits to class" was replaced wi=
+th
+>>>>>>> patch "target/riscv: Move misa_mxl_max to class" since I found inst=
+ances
+>>>>>>> may have different misa_ext_mask.
+>>>>>> As this is re-based on Alistair's riscv-to-apply.next tree I'll wait
+>>>>>> for
+>>>>>> this to go through the RiscV trees and then re-base the plugin patch=
+es
+>>>>>> and dropping the merged riscv patches from my tree.
+>>>>>> In the meantime feel free to review:
+>>>>>>      Message-Id: <20240122145610.413836-1-alex.bennee@linaro.org>
+>>>>>>      Date: Mon, 22 Jan 2024 14:55:49 +0000
+>>>>>>      Subject: [PATCH v3 00/21] plugin updates (register access) for =
+9.0 (pre-PR?)
+>>>>>>      From: =3D?UTF-8?q?Alex=3D20Benn=3DC3=3DA9e?=3D <alex.bennee@lin=
+aro.org>
+>>>>>> For:
+>>>>>>      contrib/plugins: extend execlog to track register changes
+>>>>>>      gdbstub: expose api to find registers
+>>>>>> So I can add this to my maintainer omnibus series for the next PR I
+>>>>>> send.
+>>>>>
+>>>>> I added one trivial comment to: "gdbstub: expose api to find register=
+s"
+>>>>>
+>>>>> "contrib/plugins: extend execlog to track register changes" depends on
+>>>>> "plugins: add an API to read registers". The comments for the patch in
+>>>>> the following email are not addressed yet:
+>>>>> https://lore.kernel.org/all/4b2156ed-688d-4617-b52d-200413f01156@dayn=
+ix.com/
+>>>> I don't think we need to serialise with the BQL as the structures
+>>>> are
+>>>> per-CPU (and created on vCPU creation).
+>>>
+>>> qemu_plugin_get_registers() has vcpu parameter, which can refer to a
+>>> different vcpu the caller is on (or the caller may not be in a vcpu
+>>> context at all).
+>> It should only be called from the current cpu context. We can either
+>> assert that or make it implicit like qemu_plugin_insn_disas does.
+>> However we will need to ensure current_cpu is set before the vcpu_init
+>> callback.
+>> Pierrick has had to move these initialisations around for the
+>> scoreboard
+>> work so they are now run with safe work once the thread starts.
+>>=20
+>
+> As a complement, in the series I'll post, the work is run
+> asynchronously, but not "safe_async", which means it's not under an
+> exclusive section.
+>
+> If you need this guarantee for registers API, it's better to add this.
+
+We don't. We just want to ensure they line up and are not cross-vCPU.
+
+>
+>>>
+>>>> As far as the restructuring we can move it into gdbstub later if
+>>>> there
+>>>> is a need to. At the moment the structure is just housekeeping for
+>>>> plugins.
+>>>
+>>> Certainly we can move it later, but adding the code in the plugin
+>>> infrastructure now won't help in that case.
+>>=20
+
+--=20
+Alex Benn=C3=A9e
+Virtualisation Tech Lead @ Linaro
 
