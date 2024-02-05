@@ -4,100 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBAD6C4828D
-	for <qemu-riscv@archiver.kernel.org>; Mon,  5 Feb 2024 11:20:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFFB0C48295
+	for <qemu-riscv@archiver.kernel.org>; Mon,  5 Feb 2024 12:17:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rWx1M-0000mr-2F; Mon, 05 Feb 2024 06:20:16 -0500
+	id 1rWxuY-0004Fk-Nj; Mon, 05 Feb 2024 07:17:18 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rWx1H-0000mK-AV
- for qemu-riscv@nongnu.org; Mon, 05 Feb 2024 06:20:12 -0500
-Received: from mail-lf1-x135.google.com ([2a00:1450:4864:20::135])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rWxuX-0004FS-9S
+ for qemu-riscv@nongnu.org; Mon, 05 Feb 2024 07:17:17 -0500
+Received: from mail-pg1-x529.google.com ([2607:f8b0:4864:20::529])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rWx1E-0006Kk-Q9
- for qemu-riscv@nongnu.org; Mon, 05 Feb 2024 06:20:11 -0500
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-51124d86022so6626632e87.0
- for <qemu-riscv@nongnu.org>; Mon, 05 Feb 2024 03:20:08 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rWxuV-0002KL-Jj
+ for qemu-riscv@nongnu.org; Mon, 05 Feb 2024 07:17:17 -0500
+Received: by mail-pg1-x529.google.com with SMTP id
+ 41be03b00d2f7-5cddc5455aeso3684909a12.1
+ for <qemu-riscv@nongnu.org>; Mon, 05 Feb 2024 04:17:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1707132007; x=1707736807; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:user-agent
- :references:in-reply-to:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9jbWkREPVqHkpdc8LVigTQLwlkrC5A6gQ+ZV4XNhibo=;
- b=t95gX69Q/HnJqqaeGuYUYXqqXDQZJo7u+sbk9MMepA+KOmF8xyTVZLCjgGEcrEg44N
- CjIikUeS3z9PxXloGbvlJc3ug6qjk/F5Mik1kOyoqxzF2rU1wkkT7izQaCTJTYndQH1B
- 7U/SoHYGxDLdOGcw/yUmuZLG88x+bXtlTBEfVIZ8g+k1wo+qNOMg753yuVS45ZgzC6BV
- LrhY1qb+TAQvUju3r/6SOiylarp0DAbMRCp0Sf9BZPO8CG3IkPyfBucMe6AsZ59681YP
- zUMmYLxbXJL0mSLB8EEXgQbolEoX3wQWR1JbZihsAaAa9/NL4/CphJ29q1b1xMSr/zOj
- Pa9A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707132007; x=1707736807;
- h=content-transfer-encoding:mime-version:message-id:date:user-agent
- :references:in-reply-to:subject:cc:to:from:x-gm-message-state:from
+ d=ventanamicro.com; s=google; t=1707135434; x=1707740234; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
  :to:cc:subject:date:message-id:reply-to;
- bh=9jbWkREPVqHkpdc8LVigTQLwlkrC5A6gQ+ZV4XNhibo=;
- b=c7p2RJKQkC7E9NzMtgX0mv9XtOp4b7sIhJYkzrTx27cdlI5GxXLZD9hTD+O0pZG14H
- U2QQj4QWW2xmiD0PvX7RHpKORgQ2DKqtjnWp/Pgfny1IH2qRA6xLZS2MsbE8OInWiEd2
- n2jj3TvM1XhLX4k5jzdUg+udTaKqVFaMAMH/WLTDHbnc5gJ7Gmj/tIg8nCJ90m/5gYTW
- zrh5ns5PY7Z7GnqI3NjWoedxXkgu+uQ0WGyEbUeaiA/agw7Cl/m59PCZWMtxS6KnanK0
- s9KqyOeo5vZ5ACCAt08q92fEwktmYcXq7DSgiy6hpgluRmuQUsKIjM2iTZSakONybQ9J
- 95KA==
-X-Gm-Message-State: AOJu0YwaPDV+fWQ/Nnxrb8Q8ZH2YVNJ753wvnEA7PDzQk/D4uoYhGaVl
- U2LWhYDw+LYS8LlkGInJiHNHX0TEtPovHrgfg+xMzhmwIt/AXG+lErXPPoZKjE4=
-X-Google-Smtp-Source: AGHT+IE6EI12X7pzCleMS+y7xlL2qwc8mmaWpwsKr1dY0g4fCBP0vrIYJQ9vrXKzloUCCjHhYG/JcQ==
-X-Received: by 2002:ac2:58cd:0:b0:511:4a19:baa7 with SMTP id
- u13-20020ac258cd000000b005114a19baa7mr2619834lfo.50.1707132006914; 
- Mon, 05 Feb 2024 03:20:06 -0800 (PST)
+ bh=VwssBm2shd9cdtHdK/g3snDbXeummB+FvaBW8tNM+Ko=;
+ b=TrJOAYilo8eg0pYtlw8q1nRS+GzfOwXQnd/b2N8wF/Oe6LLFBw7aQy6Q0QddKIHu9d
+ OAuj1C4p0YMNhM3Rv++VZVHZpt/GMFqHf8C/PC+qUDy3WcWEbABBOYYDKbQwHpTsEoVs
+ SWuWYMM6n+y7VerhQMEg5IL0q/NJKtHhBfTCr5NZEqLPvdUqdsKbTRCBLdNtBxm6OUC5
+ dH0QRDclwx0YqlL0mSPP1BU7o9eP2lSl8O2YhmiAZZt/MoK5qGQeO5WPJAFaVimsXyCt
+ BtIyR8IPm2i8VTVfPmaksE7PCEu/l4hAeDISvG1cvNLr5tTqCl2nVKPoSzMo0SZ9d7RM
+ jUbw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1707135434; x=1707740234;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=VwssBm2shd9cdtHdK/g3snDbXeummB+FvaBW8tNM+Ko=;
+ b=IzIihqzxLG6RdSUN/Vasy4mcJTf7z2aLWdDj+V3/jI3q1aPz6veY0Nc4xRrrs0pTiF
+ z7rSnwbPYaqqorHVkwS6PD1NCV/oHLFcgns0kqR9uNJl+yYj05fe/TQZJwr0O3Qq5uZx
+ s55OgXPdIQhoL6c9TbzdYRlpVBcE16acrDQVIRWo1S31tHHFSdzURk+BkXE5yJdT3NDm
+ 773Z/smYdPT7x54SzzeTrs/Oz0l7HQ6WsAN8JGJYuj7q2JJXLaoVfwCDp4FWIzSHwD9Y
+ BixbY8yokOy1EV5EMClmH53ByS91hwA76ptC/Sg/XS7S3TCWphfiGWI5Ytn8EicaNNVt
+ Sqhg==
+X-Gm-Message-State: AOJu0YwRnnwGMBUhnDb4uNGBrXyZtgom2GnsCH1Nrw4B0+Ia2jjaedYf
+ MEPXOHT94ZBiRUu1VUxWhlhKH/4a00okNYCwRIeI112kMIUtTBajQc/xOCmwMsM=
+X-Google-Smtp-Source: AGHT+IHaZ+Kt6V1c6fsfRR1Hz5IL3jac8YgpOr51+nyg9gTjNkzpl80Iuhu3Cv0iczZIRBsgXCfLIw==
+X-Received: by 2002:a05:6a20:d39a:b0:19e:2688:f483 with SMTP id
+ iq26-20020a056a20d39a00b0019e2688f483mr9382623pzb.43.1707135433645; 
+ Mon, 05 Feb 2024 04:17:13 -0800 (PST)
 X-Forwarded-Encrypted: i=0;
- AJvYcCUK96HfZNX0CVEI84PzGBL2hE7OhihaBNsnm99fo9cz6ip2mnMAsaMI2TLlE9AtC72AbZwfO81KB0sGN5o7sa3naVyLxnfKSeKKKS2M8EleZsH134NbUVKEIN20K9OxZqV20k0U9Q8pNQJTCynLZR7o1etiJCwaiJJLZn7ukR2IuXihJwCW2j2bJuWl4X+1UPPnRljogvRVXBT+jRpF5AFD68gKu8OIPBURlMu/gIgEYZE3CF6BDTRI49bwfvIvtOKz2k4SxPb3fxTtSJZvGVcCqkY4+PFci56iz2wWZyPix+fnNTwrBL9tPyGg4BtiTXyCZyBmMbaptHcNa9XuTdGSKq3Bq1A/Yk5uWaScDVVoILnWk5xaX7jU78LUozz3R84Uo2KhOypi9BcER7xGPEddNPUUgNevvR3p5BnpOYNESmZ2LA5M2rGaml/qhz5j4aVZnB1g+ko=
-Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- v10-20020a05600c444a00b0040fde25f9acsm814364wmn.0.2024.02.05.03.20.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 Feb 2024 03:20:06 -0800 (PST)
-Received: from draig (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 28C5E5F888;
- Mon,  5 Feb 2024 11:20:06 +0000 (GMT)
-From: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Cc: Akihiko Odaki <akihiko.odaki@daynix.com>,  Palmer Dabbelt
- <palmer@dabbelt.com>,  Alistair Francis <alistair.francis@wdc.com>,  Bin
- Meng <bin.meng@windriver.com>,  Weiwei Li <liwei1518@gmail.com>,  Daniel
- Henrique Barboza <dbarboza@ventanamicro.com>,  Liu Zhiwei
- <zhiwei_liu@linux.alibaba.com>,  Mikhail Tyutin <m.tyutin@yadro.com>,
- Aleksandr Anenkov <a.anenkov@yadro.com>,  Philippe =?utf-8?Q?Mathieu-Dau?=
- =?utf-8?Q?d=C3=A9?=
- <philmd@linaro.org>,  Fabiano Rosas <farosas@suse.de>,  Andrew Jones
- <ajones@ventanamicro.com>,  qemu-riscv@nongnu.org,  qemu-devel@nongnu.org
-Subject: Re: [PATCH v11 0/3] gdbstub and TCG plugin improvements
-In-Reply-To: <612315ae-2132-4e41-8d16-6635dab54a1b@linaro.org> (Pierrick
- Bouvier's message of "Mon, 5 Feb 2024 14:03:59 +0400")
-References: <20240203-riscv-v11-0-a23f4848a628@daynix.com>
- <87bk8xpzyl.fsf@draig.linaro.org>
- <b34c4013-1aca-466e-b94e-55d9802928b3@daynix.com>
- <87zfwhodit.fsf@draig.linaro.org>
- <7fae3d1a-5af2-4557-a2b3-13b911e73382@daynix.com>
- <8734u7gsv0.fsf@draig.linaro.org>
- <612315ae-2132-4e41-8d16-6635dab54a1b@linaro.org>
-User-Agent: mu4e 1.11.27; emacs 29.1
-Date: Mon, 05 Feb 2024 11:20:06 +0000
-Message-ID: <87le7zf995.fsf@draig.linaro.org>
+ AJvYcCXV3PsOgk8rdwKB6KkbgwVbIY6dZr/ewrNohW3t1FMbB5n1rF5kongMBPHzCXKULN228QRvaI68+xnXcvQ8EtRJYt99oR26jAmDs9jURSGV/bb8F1nPs9+xilwSZ3ESj73rxWpnMav4Kfj8SpXp1Fm9BBGSnpbgtx8XNBSSySmZrge1D/ZPBp9MlogkY5pHdYb7hV+TVTvikZcvH7uXDBOeqlxoY2wYxklSvEBIVygPgi6Aez6oE+oetEVLdwCPtpskoShinlACniGk8F1+Wq6HxUsLY8Q=
+Received: from [192.168.68.110] ([177.94.15.159])
+ by smtp.gmail.com with ESMTPSA id
+ s16-20020a056a00179000b006dd8a07696csm6499154pfg.106.2024.02.05.04.17.11
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 05 Feb 2024 04:17:13 -0800 (PST)
+Message-ID: <624964b1-d0e7-42b2-b4c2-690107882d01@ventanamicro.com>
+Date: Mon, 5 Feb 2024 09:17:09 -0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::135;
- envelope-from=alex.bennee@linaro.org; helo=mail-lf1-x135.google.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] hw: riscv: Allow large kernels to boot by moving the
+ initrd further way in RAM
+To: Alexandre Ghiti <alexghiti@rivosinc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+References: <20240205070040.367541-1-alexghiti@rivosinc.com>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20240205070040.367541-1-alexghiti@rivosinc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::529;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x529.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -113,88 +102,75 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Pierrick Bouvier <pierrick.bouvier@linaro.org> writes:
 
-> On 2/5/24 13:31, Alex Benn=C3=A9e wrote:
->> Akihiko Odaki <akihiko.odaki@daynix.com> writes:
->>=20
->>> On 2024/02/03 22:58, Alex Benn=C3=A9e wrote:
->>>> Akihiko Odaki <akihiko.odaki@daynix.com> writes:
->>>>
->>>>> On 2024/02/03 20:08, Alex Benn=C3=A9e wrote:
->>>>>> Akihiko Odaki <akihiko.odaki@daynix.com> writes:
->>>>>>
->>>>>>> This series extracts fixes and refactorings that can be applied
->>>>>>> independently from "[PATCH v9 00/23] plugins: Allow to read registe=
-rs".
->>>>>>>
->>>>>>> The patch "target/riscv: Move MISA limits to class" was replaced wi=
-th
->>>>>>> patch "target/riscv: Move misa_mxl_max to class" since I found inst=
-ances
->>>>>>> may have different misa_ext_mask.
->>>>>> As this is re-based on Alistair's riscv-to-apply.next tree I'll wait
->>>>>> for
->>>>>> this to go through the RiscV trees and then re-base the plugin patch=
-es
->>>>>> and dropping the merged riscv patches from my tree.
->>>>>> In the meantime feel free to review:
->>>>>>      Message-Id: <20240122145610.413836-1-alex.bennee@linaro.org>
->>>>>>      Date: Mon, 22 Jan 2024 14:55:49 +0000
->>>>>>      Subject: [PATCH v3 00/21] plugin updates (register access) for =
-9.0 (pre-PR?)
->>>>>>      From: =3D?UTF-8?q?Alex=3D20Benn=3DC3=3DA9e?=3D <alex.bennee@lin=
-aro.org>
->>>>>> For:
->>>>>>      contrib/plugins: extend execlog to track register changes
->>>>>>      gdbstub: expose api to find registers
->>>>>> So I can add this to my maintainer omnibus series for the next PR I
->>>>>> send.
->>>>>
->>>>> I added one trivial comment to: "gdbstub: expose api to find register=
-s"
->>>>>
->>>>> "contrib/plugins: extend execlog to track register changes" depends on
->>>>> "plugins: add an API to read registers". The comments for the patch in
->>>>> the following email are not addressed yet:
->>>>> https://lore.kernel.org/all/4b2156ed-688d-4617-b52d-200413f01156@dayn=
-ix.com/
->>>> I don't think we need to serialise with the BQL as the structures
->>>> are
->>>> per-CPU (and created on vCPU creation).
->>>
->>> qemu_plugin_get_registers() has vcpu parameter, which can refer to a
->>> different vcpu the caller is on (or the caller may not be in a vcpu
->>> context at all).
->> It should only be called from the current cpu context. We can either
->> assert that or make it implicit like qemu_plugin_insn_disas does.
->> However we will need to ensure current_cpu is set before the vcpu_init
->> callback.
->> Pierrick has had to move these initialisations around for the
->> scoreboard
->> work so they are now run with safe work once the thread starts.
->>=20
->
-> As a complement, in the series I'll post, the work is run
-> asynchronously, but not "safe_async", which means it's not under an
-> exclusive section.
->
-> If you need this guarantee for registers API, it's better to add this.
 
-We don't. We just want to ensure they line up and are not cross-vCPU.
+On 2/5/24 04:00, Alexandre Ghiti wrote:
+> Currently, the initrd is placed at 128MB, which overlaps with the kernel
+> when it is large (for example syzbot kernels are). From the kernel side,
+> there is no reason we could not push the initrd further away in memory
+> to accomodate large kernels, so move the initrd at 512MB when possible.
 
->
->>>
->>>> As far as the restructuring we can move it into gdbstub later if
->>>> there
->>>> is a need to. At the moment the structure is just housekeeping for
->>>> plugins.
->>>
->>> Certainly we can move it later, but adding the code in the plugin
->>> infrastructure now won't help in that case.
->>=20
+typo: accommodate
 
---=20
-Alex Benn=C3=A9e
-Virtualisation Tech Lead @ Linaro
+> 
+> Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
+> ---
+
+Patch looks good - just tested with an Ubuntu guest and nothing bad happened.
+
+But I wonder ... what if there's an even bigger kernel we have to deal with?
+Move initrd even further away to fit it in?
+
+Instead of making assumptions about where initrd starts, we could grab the kernel
+size loaded in the board and use it as a reference. This would be done by storing
+the return of load_elf_ram_sym/load_uimage_as/load_image_targphys_as from
+riscv_load_kernel() an passing as argument to riscv_load_initrd().
+
+initrd start would then be:
+
+     start = kernel_entry + MIN(mem_size / 2, kernel_size);
+
+However, I believe we would like to keep the existing 128Mb minimum initrd start,
+even if the kernel is smaller than 128Mb, to avoid breaking existing configs that
+might be making this assumption. initrd start would then become:
+
+
+     start = kernel_entry + MIN(mem_size / 2, MAX(kernel_size, 128 * MiB));
+
+
+
+Thanks,
+
+
+
+Daniel
+
+
+>   hw/riscv/boot.c | 12 ++++++------
+>   1 file changed, 6 insertions(+), 6 deletions(-)
+> 
+> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+> index 0ffca05189..9a367af2fa 100644
+> --- a/hw/riscv/boot.c
+> +++ b/hw/riscv/boot.c
+> @@ -188,13 +188,13 @@ static void riscv_load_initrd(MachineState *machine, uint64_t kernel_entry)
+>        * kernel is uncompressed it will not clobber the initrd. However
+>        * on boards without much RAM we must ensure that we still leave
+>        * enough room for a decent sized initrd, and on boards with large
+> -     * amounts of RAM we must avoid the initrd being so far up in RAM
+> -     * that it is outside lowmem and inaccessible to the kernel.
+> -     * So for boards with less  than 256MB of RAM we put the initrd
+> -     * halfway into RAM, and for boards with 256MB of RAM or more we put
+> -     * the initrd at 128MB.
+> +     * amounts of RAM, we put the initrd at 512MB to allow large kernels
+> +     * to boot.
+> +     * So for boards with less than 1GB of RAM we put the initrd
+> +     * halfway into RAM, and for boards with 1GB of RAM or more we put
+> +     * the initrd at 512MB.
+>        */
+> -    start = kernel_entry + MIN(mem_size / 2, 128 * MiB);
+> +    start = kernel_entry + MIN(mem_size / 2, 512 * MiB);
+>   
+>       size = load_ramdisk(filename, start, mem_size - start);
+>       if (size == -1) {
 
