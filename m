@@ -4,73 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A98F2C4828D
-	for <qemu-riscv@archiver.kernel.org>; Mon,  5 Feb 2024 04:01:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3353CC48291
+	for <qemu-riscv@archiver.kernel.org>; Mon,  5 Feb 2024 04:06:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rWqAF-0007ih-Vc; Sun, 04 Feb 2024 23:00:59 -0500
+	id 1rWqFQ-0001bN-8i; Sun, 04 Feb 2024 23:06:21 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rWqAF-0007iV-9T; Sun, 04 Feb 2024 23:00:59 -0500
-Received: from mail-vs1-xe34.google.com ([2607:f8b0:4864:20::e34])
+ id 1rWqFK-0001Wj-Hv; Sun, 04 Feb 2024 23:06:15 -0500
+Received: from mail-vk1-xa29.google.com ([2607:f8b0:4864:20::a29])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rWqAD-0008FB-PV; Sun, 04 Feb 2024 23:00:59 -0500
-Received: by mail-vs1-xe34.google.com with SMTP id
- ada2fe7eead31-46cf02b9f7eso1095166137.3; 
- Sun, 04 Feb 2024 20:00:57 -0800 (PST)
+ id 1rWqFF-0000er-8y; Sun, 04 Feb 2024 23:06:14 -0500
+Received: by mail-vk1-xa29.google.com with SMTP id
+ 71dfb90a1353d-4c021a73febso210308e0c.2; 
+ Sun, 04 Feb 2024 20:06:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1707105656; x=1707710456; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1707105967; x=1707710767; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=X/suwuPwGd1g2S3DzQvBhl3fxFObD+zlMA46G79mvjc=;
- b=k49OmPlN1TBWKtxjmpndZbYYbjXWJNpBZLZ3/qZ/2mY9u+okKDADAVpH/7jumPoURY
- 8HioOi1Wt1F3upmkheqdhh3ACAkYOvdZ8/m2nemiGzJLv7v5/JLXa0KfsxXl6FC9aARK
- LChpQeD5daik0pt/G56mXzClNchlMsXX9wxVC+OqZcNmzVUcwR/VbYa0JR9rvGCWHdDr
- ua/hpA55Nea6QZuViYappZvqQpbxGVYf9SVuFDXBHM/rczvR4YQrfDDhgKIUZBviEVkx
- kpUtI8nyGzqJe6p1rE2XPWvtzXVdFHZAUg/PU8ceivu8ETKmrizPp44n5uDMD4rQz1Kx
- i29Q==
+ bh=LJIl3R1YvulEQPprrGTaMHTYgQBIuMEMWnv83UZpR1c=;
+ b=IlTrW8SBShSYuL5zspYftjtKmYmhvZU7YFdYVo5ZIaUcOuskj62iFzCT0bX4B9v+Pc
+ usPMToApbKbr9znWqdDWyTdUMzsfYtKE2/Z35DKS+jW7yyt/9PaZ1/BG7BiwTajKzANA
+ nmMGoOstIjWLV1J5o5mdHTokXtwr0MNT0TpAMnZvm9AnK8CbjK7qKWkzzi4l5MleDeP3
+ MFXVCye9ymO9tPBd+2ByorPa4MUtPNz92gBC3HePt2cklrBhrrNKCkO3wuC00ewFXeab
+ nWaDHHSiWu1wgtaSeZFc7+ZYwjBw87zw43OmzRgFroI37pNHZGvRSGma9k3CBTCrFyRE
+ 4rQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707105656; x=1707710456;
+ d=1e100.net; s=20230601; t=1707105967; x=1707710767;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=X/suwuPwGd1g2S3DzQvBhl3fxFObD+zlMA46G79mvjc=;
- b=UaB0NEydh0YvJy9VW6rMvpU46lqu4msRQl59HygTO3vQ2+9Our+pJ+EcQmahtmNGbW
- VtZ/HnVI1EuGuujarnL59lDtNOKtkL4VRBVldSsSBM5tb1EO1UIAOW06zcGeeyUSvdwm
- D1p0EzozWN1WSSneGDrIviEKxcElKTrhrjQxSyMD2fJeffDHILZl0s3d38DUB5/ftEDU
- 3nfTXUKPd7XiIyGZa6gCkGn3xa4yxwxKF6nse4JlzkHiKcit3hFKYVuZQToQesbmAZG1
- 85JB7gPAkwghiQYEwXxPPkVZ/LW2LRGbB0KXGgEYiwiQFzA4/KLLqhtMlucuFvQylnwF
- /93w==
-X-Gm-Message-State: AOJu0YxvA1if8yqmlf1Jbt/Wpyt45HQbmrpQgbND2Soy4Npe5kIvA2LM
- PAP0xRdICaWwed9w+aIDLGwLKVkBRbHgxSXDRRP1PS7mA1zSDE9akRg2d9KB5WuN9PmDIhqJOEM
- +6CIbT+6teIrCFAUP2R4kv9/x+UI=
-X-Google-Smtp-Source: AGHT+IHW1R03u4qz0UG94fF8u5TAJywQNykGUUI0cZRF1YA5X2BHy5pIdRy08DVDvguhZAb/saLLUyBWk3C9lRem95M=
-X-Received: by 2002:a05:6102:3128:b0:46d:284c:16ee with SMTP id
- f8-20020a056102312800b0046d284c16eemr1310255vsh.18.1707105656387; Sun, 04 Feb
- 2024 20:00:56 -0800 (PST)
+ bh=LJIl3R1YvulEQPprrGTaMHTYgQBIuMEMWnv83UZpR1c=;
+ b=CdUPVruawdRbXVyFBkAEqalI2e3txwi6UuOH34PepZQ2RxZxk+fSS9KH24TnhQD1w8
+ voPsw/JiNhWCG+8SFvob755zRtRJf/YENGnCKc3S5zjnEs8F0mduvdKhMFrXDxQfr8Wo
+ siYlVQImgGVy4RHb28ZCu29P+sxamQOj38DwI7vRFRrmFyNuxUh0C0Gnrl3D/JmocatC
+ dq2DSnI+aXhYgCY90ptiGhGvku/wYo1YgI+NFVNiKACg8WlHl/bzBn50uP6H7eucLCku
+ I4/e1NmpRBcPEK7QsiqQ9DMhcxeJl9Qe5BWowQ2UdYQ097VuFYMmvaOwS/qgFqx/Pe4G
+ K4tQ==
+X-Gm-Message-State: AOJu0Yx0/4tjJNWtFRFzCE/XemR0nF2e0aT64HZLRqek3jUlhjDqpnzR
+ q3VIg8kYs+MarSDZcRDqBA51NJPAsuM1A3TCbtBgQ0D+23z48zczWH+7kmGvpNidxLSXeR5cC+h
+ qbHPhlBa6pNA9SeH48gISXzIa7IU=
+X-Google-Smtp-Source: AGHT+IFFv8IUGKNbaQcu3PlX8GiADzlZIHB/XBu7BttG+2n2mjM/hl7jYwUjt0HmFDZSoOQL/ThGtN9CqJpdpsy5+2A=
+X-Received: by 2002:a05:6122:2a0d:b0:4b6:be94:acc6 with SMTP id
+ fw13-20020a0561222a0d00b004b6be94acc6mr12990001vkb.10.1707105966650; Sun, 04
+ Feb 2024 20:06:06 -0800 (PST)
 MIME-Version: 1.0
-References: <20240124-squatting-getup-a16a8499ad73@spud>
-In-Reply-To: <20240124-squatting-getup-a16a8499ad73@spud>
+References: <20240110040203.1920924-1-hchauhan@ventanamicro.com>
+ <e2763db2-fade-482d-b433-1bfce6acf7d3@ventanamicro.com>
+ <CAKmqyKOA6OtixYoMJ_qtXj_u0t6rMdHawg0VEvq3-=mK4q6_XQ@mail.gmail.com>
+ <3c091744cd4bafeb7c1d177455fa9789822e7209.camel@rivosinc.com>
+ <CAKmqyKPkjBBo-2EAL25-3qACSv4c4naGT8V-F5e5as4D=WVa9g@mail.gmail.com>
+ <20240122-29d7d206e9ea3ecd46fad930@orel>
+In-Reply-To: <20240122-29d7d206e9ea3ecd46fad930@orel>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 5 Feb 2024 14:00:30 +1000
-Message-ID: <CAKmqyKO6q1+Tr2wahFMCHjZ4bX1fmsLSw1WdzpLqcwjVu1o=ZQ@mail.gmail.com>
-Subject: Re: [PATCH v4 0/2] riscv: support new isa extension detection
- devicetree properties
-To: Conor Dooley <conor@kernel.org>
-Cc: qemu-riscv@nongnu.org, Conor Dooley <conor.dooley@microchip.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>, 
+Date: Mon, 5 Feb 2024 14:05:40 +1000
+Message-ID: <CAKmqyKPibo3wp8mPu2+W5aGaxsPx3Ko2pcotv1H2Ddj6uhZDiw@mail.gmail.com>
+Subject: Re: Re: [PATCH 0/2] Export debug triggers as an extension
+To: Andrew Jones <ajones@ventanamicro.com>
+Cc: Rob Bradford <rbradford@rivosinc.com>, 
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Andrew Jones <ajones@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
+ Himanshu Chauhan <hchauhan@ventanamicro.com>, 
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ Alvin Chang <alvinga@andestech.com>,
+ Alistair Francis <alistair.francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e34;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe34.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a29;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa29.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -94,62 +98,115 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Jan 24, 2024 at 10:57=E2=80=AFPM Conor Dooley <conor@kernel.org> wr=
-ote:
+On Mon, Jan 22, 2024 at 7:16=E2=80=AFPM Andrew Jones <ajones@ventanamicro.c=
+om> wrote:
 >
-> From: Conor Dooley <conor.dooley@microchip.com>
+> On Mon, Jan 22, 2024 at 03:42:10PM +1000, Alistair Francis wrote:
+> > > > From memory the "debug" property is for the original debug spec:
+> > > > https://github.com/riscv/riscv-debug-spec/releases/tag/task_group_v=
+ote
+> > > >
+> > > > That was ratified and is an official extension. AFAIK this is what =
+is
+> > > > in physical hardware as well.
+> > > >
+> > > > The actual PDF says draft though, I'm not sure what's going on ther=
+e.
+> > > >
+> > > > The debug spec doesn't have a Z* name, so it's just "debug", at lea=
+st
+> > > > AFAIK.
+> > > >
+> > > > "sdtrig" seems to be a new backwards-incompatible extension doing
+> > > > basically the same thing. What a mess
+> ...
+> > >
+> > > I've done a bit of digging and I agree things are quite messy. Here a=
+re
+> > > my discoveries:
+> > >
+> > > The debug option and the code for triggers was added in these commits=
+:
+> > >
+> > > c9711bd778 target/riscv: cpu: Enable native debug feature
+> > > 38b4e781a4 target/riscv: machine: Add debug state description
+> > > b6092544fc target/riscv: csr: Hook debug CSR read/write
+> > > 1acdb3b013 target/riscv: cpu: Add a config option for native debug
+> > > 95799e36c1 target/riscv: Add initial support for the Sdtrig extension
+> > >
+> > > In March 2022 - since the commit refers to the Sdtrig extension name
+> > > and from the date this was an implementation not of the ratified 0.13
+> > > debug spec (which did not have Sdtrig as a separate extension) but
+> > > rather a version of the in development 1.0 debug spec.
+> >
+> > Yeah... We used the "stable" from master. That is our mistake there.
+> >
+> > I'm pretty sure we targeted the 0.13. The "Sdtrig" was only added in
+> > the v4 as the changelog says: "mention Sdtrig extension in the commit"
+> >
+> > >
+> > > It's not trivial to tell if it's closer to the ratified 0.13 version =
+or
+> > > the (hopefully soon to be frozen) 1.0 version.
+> > >
+> > > As the only part of the debug specification to be implemented is the
+> > > triggers then effectively the debug option is x-sdtrig.
+> > >
+> > > I don't think there is any way for code running on the machine to
+> > > identify what version of the debug is implemented - the appropriate
+> > > register is only available for external debug. Once 1.0 is frozen the=
+n
+> > > the presence of Sdtrig isa string would indicate 1.0 trigger support =
+is
+> > > available.
+> > >
+> > > According to JIRA - https://jira.riscv.org/browse/RVS-981 the debug
+> > > specification should freeze this month.
+> > >
+> > > How about considering this as a solution:
+> > >
+> > > - Add a new x-sdtrig option that defaults to false
+> > > - Deprecate debug option - but retain it with default on
+> >
+> > We can't deprecate a ratified spec. The 0.13 just seems to call it
+> > "debug" so that's what we are stuck with
+> >
+> > > - Add warning if triggers are used and x-sdtrig is not enabled
+> > > - Update the trigger implementation to match frozen spec
+> >
+> > We will need to support two versions, as there are two ratified specs.
+> >
 >
-> Making it a series to keep the standalone change to riscv_isa_string()
-> that Drew reported separate.
->
-> Changes in v4:
-> - Other than a rebase, add a helper for the mxl_max to xlen conversion
->
-> Changes in v3:
-> - g_free() isa_extensions too
-> - use misa_mxl_max rather than the compile target for the base isa
-> - add a new patch changing riscv_isa_string() to do the same
-> - drop a null check that cannot be null
-> - rebased on top of Alistair's next branch
->
-> Changes in v2:
-> - use g_strdup() for multiletter extension string copying
-> - wrap stuff in #ifndef to prevent breaking the user mode build
-> - rename riscv_isa_set_props() -> riscv_isa_write_fdt()
->
-> CC: Alistair Francis <Alistair.Francis@wdc.com>
-> CC: Bin Meng <bin.meng@windriver.com>
-> CC: Palmer Dabbelt <palmer@dabbelt.com>
-> CC: Weiwei Li <liwei1518@gmail.com>
-> CC: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> CC: Andrew Jones <ajones@ventanamicro.com>
-> CC: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-> CC: qemu-riscv@nongnu.org
-> CC: qemu-devel@nongnu.org
->
-> Conor Dooley (2):
->   target/riscv: use misa_mxl_max to populate isa string rather than
->     TARGET_LONG_BITS
->   target/riscv: support new isa extension detection devicetree
->     properties
+> We'll likely want to be allowed to deprecate ratified extensions as riscv
+> evolves. Despite best intentions, extensions may be designed and ratified
+> which ultimately fail to be of much utility, and new extensions will
+> supersede old extensions. If QEMU keeps every extension it adds, then
+> we'll slow progress on new extensions by maintaining old extension code.
+> The old extensions will also bitrot or waste CI resources getting tested
+> for no reason.
 
-Thanks!
+I agree that we might need to deprecate extensions.
 
-Applied to riscv-to-apply.next with some manual rebasing
+I'm not sure the debug extension is there though. The debug extension
+is used in current shipping hardware and has been ratified. The Sdtrig
+isn't even ratified yet
+(https://lists.riscv.org/g/tech-announce/message/320)
+
+Right now I feel that we should at least wait for hardware that
+supports Sdtrig to start to come out. Then we can look at deprecating
+debug. Deprecating it now seems a bit premature.
 
 Alistair
 
 >
->  hw/riscv/sifive_u.c    |  7 ++---
->  hw/riscv/spike.c       |  6 ++--
->  hw/riscv/virt.c        |  6 ++--
->  target/riscv/cpu.c     | 62 +++++++++++++++++++++++++++++++++++++++++-
->  target/riscv/cpu.h     |  2 ++
->  target/riscv/gdbstub.c |  2 +-
->  6 files changed, 70 insertions(+), 15 deletions(-)
+> I don't know the history of 'debug' and 'sdtrig', other than what I've
+> read above, but, to me, it looks like 'debug' might be one of the first
+> extensions which should be deprecated. Assuming we have a long enough
+> deprecation period, then I think it's always safe to attempt a
+> deprecation. If somebody shouts, then it can always be taken back off the
+> chopping block.
 >
-> --
-> 2.43.0
->
+> Thanks,
+> drew
 >
 
