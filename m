@@ -4,76 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74AF0C4828F
-	for <qemu-riscv@archiver.kernel.org>; Sun,  4 Feb 2024 23:43:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38CC8C4828F
+	for <qemu-riscv@archiver.kernel.org>; Mon,  5 Feb 2024 00:22:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rWm8q-000094-DI; Sun, 04 Feb 2024 18:43:16 -0500
+	id 1rWmkP-0006ah-O3; Sun, 04 Feb 2024 19:22:05 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rWm8n-00008Y-29; Sun, 04 Feb 2024 18:43:13 -0500
-Received: from mail-ua1-x933.google.com ([2607:f8b0:4864:20::933])
+ id 1rWmkO-0006aI-Hg; Sun, 04 Feb 2024 19:22:04 -0500
+Received: from mail-ua1-x931.google.com ([2607:f8b0:4864:20::931])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rWm8k-0004wC-On; Sun, 04 Feb 2024 18:43:12 -0500
-Received: by mail-ua1-x933.google.com with SMTP id
- a1e0cc1a2514c-7d5bbbe5844so1619803241.0; 
- Sun, 04 Feb 2024 15:43:08 -0800 (PST)
+ id 1rWmkM-0002pW-DC; Sun, 04 Feb 2024 19:22:04 -0500
+Received: by mail-ua1-x931.google.com with SMTP id
+ a1e0cc1a2514c-7d2e15193bbso1998646241.0; 
+ Sun, 04 Feb 2024 16:22:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1707090187; x=1707694987; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1707092520; x=1707697320; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0QCIMKSpSZbJRdMFqQA6BD69SxK1FJPtGRGuU6qLMHA=;
- b=iOdRsMuA97VHtu1tTvOrT6aOOOw5mvV60MH7sVx6MQ3zGmywAP0IA5TlZFFtADOdgj
- yt6LpaKa/7FlHCsPy8u5jkhRTI8gNmiB3+k0A5EfrctGKHAxSqobj5j8XvHXkgyB5sz3
- +zOw2N+15W2NnUrmPcz5Y2YFDsY3ad0cgVDq9Ok2E2LMhwnEwu0DPcK3l35YNFUzhfBc
- 8PoV0eCYh+VWC3OYqKWsdkUuVL+XZ/YyU4fwmTSzJx/T0mi470ZDpgyyJWbxxuW+9gKf
- Jg1NMt3Cp87L3zJrqCKH2+dIEnTuV9+nw8U4pCOFeJ3mNXU4YedLYSUgxbfFERKh5KCY
- XfWg==
+ bh=hw9KILQWzk0umDd3OPOGWXUnnnWHtkraqxiMosTIYfo=;
+ b=HhudK6ElM98/olDmxWu8AocgOwjkMxNFsipVAcSNt9pm0a7W4bFGZX7xOsQ52vOX1o
+ aCP0JALDfqch1wzLukwYPMRwX2LhMtdS/tcbeuYBfrPZJ2bu0ETe9X33ctC5Mp1K+tiO
+ L1pWvZXROeK1yGnAzVThqrNlE3XI9tBLLs7A01s30HHH4iU3d++F3e1OTLAZZ09GasgP
+ t212LWnVmIWm38ObqAWSn4xSuJNIk490dYsO7okq+qvK34jVZAK7NpS2jYWt/SGWJyvP
+ KrjBArwXv/QkqPY0vVqivpdReDo1AArefehPI13v1LgOuvVxiJAJhV0rktDHLh/oiJLR
+ KM/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707090187; x=1707694987;
+ d=1e100.net; s=20230601; t=1707092520; x=1707697320;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0QCIMKSpSZbJRdMFqQA6BD69SxK1FJPtGRGuU6qLMHA=;
- b=DdTiTmKl4ZakPAOZchno/oEr0A5P/dLzOs8MRIsp28+Kb6TZzVjD1CLbvI0bqFTLFr
- 1Vf607pqwaEMv5bSB+yHEdZ9oPg8boZuZaQ4NWZdokiHYXaOvSF/QJ6Zsjf15iHIiN62
- Pd/h7Wm4TkSvrvjp5cWcwLUWyPzbRHfOtG2RJShVzy1zEKNamHxab/8glbFVebvRBmHN
- LpNmVBGcrW5sDYa0yeBuZTMLONIjUDKOuFKnr5M7kxb8dS6ogB5HSpD7FoZXByiMaBHn
- xAxcDpmFAxm0qcw/Mdq/1vhiD7XWDBILLp4Cs2C82nlaPOdfWqjE5mQbUPbZ7f87/lK7
- r4Og==
-X-Gm-Message-State: AOJu0YydpJN/wFraWYHJNR6lyj37dp3acorUjTQgiALTq8MqXKMTPz7I
- U8gfD+PG31g2WW1cSNO0AO5OR6OkIbPTce3ulAy3cibIiSyOGplnOryQH/DzCzJj+eCpFKg6T/V
- ZY/uaQJR7rIDiERnhS1/ptUbUvZw=
-X-Google-Smtp-Source: AGHT+IH8Vntj7QoeBjjWd08aqAxkydYea8JxkF/DJ1iqCUG/KmrRpKS0hMCOzmZisrZUC91VzoBHdIF5EKmcN0FJ17s=
-X-Received: by 2002:a05:6102:3975:b0:46d:2d23:f500 with SMTP id
- ho21-20020a056102397500b0046d2d23f500mr759395vsb.18.1707090187633; Sun, 04
- Feb 2024 15:43:07 -0800 (PST)
+ bh=hw9KILQWzk0umDd3OPOGWXUnnnWHtkraqxiMosTIYfo=;
+ b=UcKDDbp38xO/E2T9PmKE/9mbq5rqMTdW5UbCM1FpzI1RTNRbN7uhVrbu/GP1s0OABu
+ mn+l1qHmbjk1vaVdpDGfqWPa0vLdFPBZwHqmi4Vq8MgEcf3/7aMQC07/3CI8w4FcYEox
+ LBgRC0M66GAygAlZKgp0Xk052Irg/CZVBzpp6MQbYlc3DoE0sF6fRuOHYJp9UKEXDNnx
+ NTTpFyu4OeerKjqcfAVW1XGv0RV17Wy9UGVOELGM9U3y17pPMrDh4B/5kDtGmq8/eYSC
+ cLCNO4a9H019GbQcsUC8zjYVNdwDoYUPNOn3RixtuU2a2MfNhWczzpJ4dPrE2Ct4Tx7v
+ goeQ==
+X-Gm-Message-State: AOJu0YwX1Zu/quIEXXf4JCAjwnLzJxjUBvy7E23ZbxsvWhvXsCg13WrI
+ FgVDNdnAeB1cwIDXZpNoHWlQwKR+I9cgfhI92JVpPtilIzzazTS7ISK5MTcTdMB1EH03JMu0bq+
+ Uuk4Pobkd2Tvg1bBhCijg3OB1URXOQIA/zwg=
+X-Google-Smtp-Source: AGHT+IH/Gf4mkkopBnzmJlvhlHVMhJ6NXP4YiruCxgUVVZQCXBtjVnSDy5b+/S5gvQYbjPgiLuCI5gsBpTGKEYF/cbk=
+X-Received: by 2002:a05:6102:3b91:b0:46d:310a:7c99 with SMTP id
+ z17-20020a0561023b9100b0046d310a7c99mr623587vsu.28.1707092520502; Sun, 04 Feb
+ 2024 16:22:00 -0800 (PST)
 MIME-Version: 1.0
-References: <20240203-riscv-v11-0-a23f4848a628@daynix.com>
-In-Reply-To: <20240203-riscv-v11-0-a23f4848a628@daynix.com>
+References: <20240130110945.486-1-zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20240130110945.486-1-zhiwei_liu@linux.alibaba.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 5 Feb 2024 09:42:41 +1000
-Message-ID: <CAKmqyKNTcAyZVmCOVLryZg6Q5fZEpFwQBjiMypJVmn5RSVC6kQ@mail.gmail.com>
-Subject: Re: [PATCH v11 0/3] gdbstub and TCG plugin improvements
-To: Akihiko Odaki <akihiko.odaki@daynix.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- Mikhail Tyutin <m.tyutin@yadro.com>, Aleksandr Anenkov <a.anenkov@yadro.com>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- Fabiano Rosas <farosas@suse.de>, Andrew Jones <ajones@ventanamicro.com>,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Date: Mon, 5 Feb 2024 10:21:34 +1000
+Message-ID: <CAKmqyKM2SaaKRO9VU4n43uz1jisBuyYEG9UbXyhMVi-Tx9zwcw@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: FCSR doesn't contain vxrm and vxsat
+To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Cc: qemu-devel@nongnu.org, Alistair.Francis@wdc.com, palmer@dabbelt.com, 
+ bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com, 
+ qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::933;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x933.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::931;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x931.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -97,70 +90,13 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sat, Feb 3, 2024 at 8:12=E2=80=AFPM Akihiko Odaki <akihiko.odaki@daynix.=
-com> wrote:
+On Tue, Jan 30, 2024 at 9:10=E2=80=AFPM LIU Zhiwei <zhiwei_liu@linux.alibab=
+a.com> wrote:
 >
-> This series extracts fixes and refactorings that can be applied
-> independently from "[PATCH v9 00/23] plugins: Allow to read registers".
+> vxrm and vxsat have been moved into a special register vcsr since
+> RVV v1.0. So remove them from FCSR for vector 1.0.
 >
-> The patch "target/riscv: Move MISA limits to class" was replaced with
-> patch "target/riscv: Move misa_mxl_max to class" since I found instances
-> may have different misa_ext_mask.
->
-> V6 -> V7:
->   Rebased.
->
-> V5 -> V6:
->   Added patch "default-configs: Add TARGET_XML_FILES definition".
->   Rebased.
->
-> V4 -> V5:
->   Added patch "hw/riscv: Use misa_mxl instead of misa_mxl_max".
->
-> V3 -> V4:
->   Added patch "gdbstub: Check if gdb_regs is NULL".
->
-> V2 -> V3:
->   Restored patch sets from the previous version.
->   Rebased to commit 800485762e6564e04e2ab315132d477069562d91.
->
-> V1 -> V2:
->   Added patch "target/riscv: Do not allow MXL_RV32 for TARGET_RISCV64".
->   Added patch "target/riscv: Initialize gdb_core_xml_file only once".
->   Dropped patch "target/riscv: Remove misa_mxl validation".
->   Dropped patch "target/riscv: Move misa_mxl_max to class".
->   Dropped patch "target/riscv: Validate misa_mxl_max only once".
->
-> Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
-> ---
-> Changes in v11:
-> - Rebased on: https://github.com/alistair23/qemu/tree/riscv-to-apply.next
-> - Link to v10: https://lore.kernel.org/r/20240128-riscv-v10-0-fdbe593976e=
-9@daynix.com
->
-> Changes in v10:
-> - Dropped patch "hw/riscv: Use misa_mxl instead of misa_mxl_max" due to
->   invalid assumption that the relevant code is only used for kernel
->   loading.
-> - Link to v9: https://lore.kernel.org/r/20240115-riscv-v9-0-ff171e1aedc8@=
-daynix.com
->
-> Changes in v9:
-> - Rebased to commit 977542ded7e6b28d2bc077bcda24568c716e393c.
-> - Link to v8: https://lore.kernel.org/r/20231218-riscv-v8-0-c9bf2b1582d7@=
-daynix.com
->
-> Changes in v8:
-> - Added a more detailed explanation for patch "hw/riscv: Use misa_mxl
->   instead of misa_mxl_max". (Alistair Francis)
-> - Link to v7: https://lore.kernel.org/r/20231213-riscv-v7-0-a760156a337f@=
-daynix.com
->
-> ---
-> Akihiko Odaki (3):
->       target/riscv: Remove misa_mxl validation
->       target/riscv: Move misa_mxl_max to class
->       target/riscv: Validate misa_mxl_max only once
+> Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
 Thanks!
 
@@ -168,24 +104,32 @@ Applied to riscv-to-apply.next
 
 Alistair
 
->
->  target/riscv/cpu.h         |   4 +-
->  hw/riscv/boot.c            |   3 +-
->  target/riscv/cpu.c         | 181 ++++++++++++++++++++++++++-------------=
-------
->  target/riscv/gdbstub.c     |  12 ++-
->  target/riscv/kvm/kvm-cpu.c |  10 +--
->  target/riscv/machine.c     |   7 +-
->  target/riscv/tcg/tcg-cpu.c |  44 ++---------
->  target/riscv/translate.c   |   3 +-
->  8 files changed, 133 insertions(+), 131 deletions(-)
 > ---
-> base-commit: 0c9d286cf791cdda76fd57e4562e2cb18d4a79e2
-> change-id: 20231213-riscv-fcc9640986cf
+>  target/riscv/cpu_bits.h | 8 --------
+>  1 file changed, 8 deletions(-)
 >
-> Best regards,
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index ebd7917d49..e116f6c252 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -32,14 +32,6 @@
+>  #define FSR_NXA             (FPEXC_NX << FSR_AEXC_SHIFT)
+>  #define FSR_AEXC            (FSR_NVA | FSR_OFA | FSR_UFA | FSR_DZA | FSR=
+_NXA)
+>
+> -/* Vector Fixed-Point round model */
+> -#define FSR_VXRM_SHIFT      9
+> -#define FSR_VXRM            (0x3 << FSR_VXRM_SHIFT)
+> -
+> -/* Vector Fixed-Point saturation flag */
+> -#define FSR_VXSAT_SHIFT     8
+> -#define FSR_VXSAT           (0x1 << FSR_VXSAT_SHIFT)
+> -
+>  /* Control and Status Registers */
+>
+>  /* User Trap Setup */
 > --
-> Akihiko Odaki <akihiko.odaki@daynix.com>
+> 2.25.1
 >
 >
 
