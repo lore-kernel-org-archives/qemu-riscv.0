@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B195C4828F
-	for <qemu-riscv@archiver.kernel.org>; Mon,  5 Feb 2024 00:23:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E29E2C48286
+	for <qemu-riscv@archiver.kernel.org>; Mon,  5 Feb 2024 02:34:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rWmlq-0007HH-8l; Sun, 04 Feb 2024 19:23:34 -0500
+	id 1rWonu-0000Hz-Dp; Sun, 04 Feb 2024 21:33:50 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rWmlk-0007F7-MK; Sun, 04 Feb 2024 19:23:30 -0500
-Received: from mail-ua1-x935.google.com ([2607:f8b0:4864:20::935])
+ id 1rWons-0000Gw-T6; Sun, 04 Feb 2024 21:33:48 -0500
+Received: from mail-ua1-x92a.google.com ([2607:f8b0:4864:20::92a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rWmlh-0002yT-GZ; Sun, 04 Feb 2024 19:23:27 -0500
-Received: by mail-ua1-x935.google.com with SMTP id
- a1e0cc1a2514c-7cedcea89a0so1991621241.1; 
- Sun, 04 Feb 2024 16:23:23 -0800 (PST)
+ id 1rWonq-0002ji-LR; Sun, 04 Feb 2024 21:33:48 -0500
+Received: by mail-ua1-x92a.google.com with SMTP id
+ a1e0cc1a2514c-7d5a6b1dd60so1544655241.3; 
+ Sun, 04 Feb 2024 18:33:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1707092603; x=1707697403; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1707100425; x=1707705225; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NOA/Q+UawU681ET19ArYRw+EFfInAwcv9LKE6/6659I=;
- b=isj8KG5RebesRhK+JDKZ2PkhrYiOz1QqxrkJFbjISGFLVkG41L2quPaJUpLerghI+g
- BjjK9oVw0UXFHXWgIgc3BAySBqakkljlr6gLLiBlUggFY9v8XlSBL4GSOX2kRrnvr2td
- S9GaalIKcfk6meJjdTewPRYoM8jY9grbWDYzLIZ70JZ+IOmBw+OBwiSV9NuZvo5WLjT2
- kwA5Y3K5gZIJenHjsCbgbVvTUYoyW7Ijck/1K/Q9fa1d/+rPmiM4l3P30nsXqLeEXb5i
- 1nwS99lKzG+isz035DKQCmdZZ8GW2LGMLiebRWhcqU5tUHN8bzHm0D7eK4L1BMbHP/+F
- KaEA==
+ bh=Fm9o3NYULv8cken7A4WzHkNh1LVr0DTd+dqK53x2MK4=;
+ b=hfoE5XZRzDfz/59GGbwBC/cFvvVhJBkdNN13duvracBLbbGn5A+WjCTg81DGmDuYnM
+ J4SUcDeS0AVwYrVu9NGVZtSwEicrLJFCrHUfHaNHOoTDov/2fQsN6UjYZNlITiotMmxG
+ ClTKmDu6ji7lxF0Se43GSvkQzKHtm2GNZUB7WFkqYtVYhYboShwHK1h0NbHTZ/2n6Y/f
+ 1p7QNd/UAV+oaaXYoyUZwo8Fc6OYKRrXP3irIiDXUH0FSnk+4/qy0BKpfA/X9BHQ1pUF
+ hliMN0dv2vEvwte89jkNxujKQPm+JomZlGSLkzUTrUtPXRdfbvKdTDPHD1gmD9aH9efU
+ 0uVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707092603; x=1707697403;
+ d=1e100.net; s=20230601; t=1707100425; x=1707705225;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NOA/Q+UawU681ET19ArYRw+EFfInAwcv9LKE6/6659I=;
- b=byape9oSeSm6CfSNxwajqOe9cCY8tsj/g7PkfzZc5GXR3qLfznPnWUEs3Dp/wZpSXB
- vvfRIWezCBPQ9yKl67a9pDtkwwJwcNzGG2JaMlSBqtFFyEDUbtu0+x4CGcJIoLW4L4Qq
- I6iUiwYmrmWiRGyP/NM6dCHZNbwwfOWAuyh9S6Wb9vsRMkFvcPBhid0T5aq17blC96AV
- fIpkXviNLWoi0iw8Q6XuWbaBSZHUzpmSNf3xKuPdU+frvp0VBR2sHSlw5/ilXzA4RhW/
- lBuD7l9euSESTqCpkv+kv4sZfXyxBYniRvlBt07VdMrTKBxNL3iTap5glgzO5nKe+9VA
- 6Srw==
-X-Gm-Message-State: AOJu0YzGrDyieznZU6zzBZz7O4WtMQlHvU4pFZJmbRhzccyjWV2LxLrC
- P1UxMv/yvu6tZnkte8IoVBNUOolIKNaW2jQtZrFqwGueOksqAJ/E2v/4Y9gh3uX/YQ+kHjyZclh
- 2+qaZySxhfrUR7Ehaompb+lHpkLE=
-X-Google-Smtp-Source: AGHT+IGwsmqyNRS9O8RGKSAZE275EVKb0P3KvFyccGbFGRG8jP1QEITD8rF2KNFfughbvQBSdT/kGP8MsMAk942Ftg4=
-X-Received: by 2002:a05:6122:c96:b0:4bd:355e:dec5 with SMTP id
- ba22-20020a0561220c9600b004bd355edec5mr8818039vkb.12.1707092603034; Sun, 04
- Feb 2024 16:23:23 -0800 (PST)
+ bh=Fm9o3NYULv8cken7A4WzHkNh1LVr0DTd+dqK53x2MK4=;
+ b=ijwJHkFNDbXfoZezLzsrrsiJ61pGLMehibPrTeO4DdX3CTyh2w8wajotlAep1/qYLe
+ mHLjXorknDl9c/QWFXdIpqCtKXdJYNXjhli+/Up5aMSxK1zzW2iPM1eSJUlkVcb2ocAE
+ SCCvrpIwguMHwxFSvEMUaokD49XvIUnyCd+Tmc9tF2GClfdBFk1FSLeKJUyvgPzRJun/
+ 7pla+ArjBU0BByE7Nnnr2mRYU9zQhjS5lYg8wTfTTf+B9G5LIUifkrn++hGChk2l0dKN
+ PcWx2IJyNWqF93hCbun5DAvLi8j8xIO+VkxVBAtJGABYNcZkNza69bqH/uNfFZmTO13I
+ 3iUg==
+X-Gm-Message-State: AOJu0YxvmLEj0MNZicGoWzte+6foE1l80QclColMHpQ1LZUUWFsAp3ij
+ 1gBn872qAErx2GhVrYiR9Hh9YSSCQAoM7op3GQ1I2J1YErnOUR+uLKyP7GCZCdyoiW/wJ1qRfig
+ b8q1/bO+96NnqPBgaitAAdnCiPbU=
+X-Google-Smtp-Source: AGHT+IF3f4R+UtwZRWEeasNWrcE5Q7xK4P6bZAnLvXvAKZJh4aWakJpbY7CMX5HKKQ8fIOu5mla/gBrM65onVuuuO5k=
+X-Received: by 2002:a05:6102:5f4e:b0:46d:7b3:d072 with SMTP id
+ il14-20020a0561025f4e00b0046d07b3d072mr5534126vsb.21.1707100425032; Sun, 04
+ Feb 2024 18:33:45 -0800 (PST)
 MIME-Version: 1.0
 References: <20240130110844.437-1-zhiwei_liu@linux.alibaba.com>
 In-Reply-To: <20240130110844.437-1-zhiwei_liu@linux.alibaba.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 5 Feb 2024 10:22:57 +1000
-Message-ID: <CAKmqyKMbKX+pE8PgbH8fzifnYi3-FR6zFCySGzhi044Yyx0REA@mail.gmail.com>
+Date: Mon, 5 Feb 2024 12:33:18 +1000
+Message-ID: <CAKmqyKPiwY2NMFOaHG-2ciMJxos144ZbMsHxLS_d76yf3WceAA@mail.gmail.com>
 Subject: Re: [PATCH] target/riscv: Use RISCVException as return type for all
  csr ops
 To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
@@ -66,8 +66,8 @@ Cc: qemu-devel@nongnu.org, Alistair.Francis@wdc.com, palmer@dabbelt.com,
  qemu-riscv@nongnu.org, philmd@linaro.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::935;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x935.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92a;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92a.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -100,7 +100,9 @@ On Tue, Jan 30, 2024 at 10:49=E2=80=AFPM LIU Zhiwei
 >
 > Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
