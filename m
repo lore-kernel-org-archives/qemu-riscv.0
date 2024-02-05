@@ -4,77 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 490CEC48291
-	for <qemu-riscv@archiver.kernel.org>; Mon,  5 Feb 2024 06:29:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E039EC4828D
+	for <qemu-riscv@archiver.kernel.org>; Mon,  5 Feb 2024 07:01:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rWsTk-0004Bb-AO; Mon, 05 Feb 2024 01:29:16 -0500
+	id 1rWsyI-0001VJ-No; Mon, 05 Feb 2024 02:00:51 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rWsTg-0004Ah-7P; Mon, 05 Feb 2024 01:29:12 -0500
-Received: from mail-ua1-x932.google.com ([2607:f8b0:4864:20::932])
+ (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
+ id 1rWsyF-0001UL-NO
+ for qemu-riscv@nongnu.org; Mon, 05 Feb 2024 02:00:47 -0500
+Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rWsTd-0007s3-B5; Mon, 05 Feb 2024 01:29:10 -0500
-Received: by mail-ua1-x932.google.com with SMTP id
- a1e0cc1a2514c-7d2e19120b5so2129811241.2; 
- Sun, 04 Feb 2024 22:29:08 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
+ id 1rWsyD-0005Nx-J7
+ for qemu-riscv@nongnu.org; Mon, 05 Feb 2024 02:00:47 -0500
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-40f033c2e30so36909765e9.0
+ for <qemu-riscv@nongnu.org>; Sun, 04 Feb 2024 23:00:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1707114548; x=1707719348; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=E9cURzhditccpij/QfM5l6c4qJ6F08oB5hQg0XnwkOQ=;
- b=PoirbDEE0A8Pa8ihGFkhrdBDwwZJ9b004RC3zy/iIo0fpb5pvHmZvN8b3fYZ9ITtog
- 4a21mjXzjca9t9L2kmvqyYWJOBxYOoWq/n5xl2lfmLu4JKreqnIMbaSrZxvLYP+B+6e0
- YcCiBrOap8e85zBNgxDbbNSWiTxmI+DpeaJaJ5DYi//x9dFpDvQzzbgrWaheBUrtK8EQ
- f2vs5uCRAUwpvwqu2TN1cQb2oO6LkglOzs2hVoVL/l/54Iu0BwrG9I25c+UmHRZaDYQo
- 4EUD4Li1Y7pmD1lNvqavhIO1LzkGSqQMW/D/cngCvUbsp1EQrQVltZ+JN3DrDCbxj8x9
- UdmA==
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1707116443; x=1707721243;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=q/4D/FdB2mSaR1CGvDPInqituRwVvUKq/RJUPOWouXk=;
+ b=AOO2ZKpzbi1SHAJzgORhlviimV6ELyb58+9E1fXrVJWJO+5w7B8hH20L43zIpL8g7k
+ LJn7X+cLg5Zw/JHsUXhb8+qSKfDyw573gTPRurGeyTSlhztjFqozTZBHbp+5I6Ai+gtw
+ VsmnYS1vVIViqvTD8V7kouWi1WZMSDmq/xfeLS3lrM2LKEVF9FJeGB+iAo2sod+jEmK5
+ vyBRYrQxMlCFQj63WArmq2iI5/yrh3LRNeQS6berCyKtJEnWLv31DBQPd7brQUjfS372
+ jeW5HRRcr6dpmwu8k6Ez8AcBmrtzyGiZBZ4v0VscEpL3jEW89bP2nYJvAKgoQyx2OqIR
+ ucDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707114548; x=1707719348;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=E9cURzhditccpij/QfM5l6c4qJ6F08oB5hQg0XnwkOQ=;
- b=foAiWFZeRteUNMmjq1XyQC0tsQ209TsHOKAybd4LBD0KmQ6fXzg4KanpBuZtH3XMMv
- 85FE34MnYSv3XDBDbRtFNO2DuvkYVoTFSnxvAp1ZzE+DtJ5cijJNbe5j4rVyf6wEDjJk
- UjKvvChxIIl9oJHEJkBR5Xl+kOSHJTRZYUBvuTpL7KHE3Hu0YLp4kHAiEjcNYktpFLBi
- llvsEjm48M2v/W9W4KjCYIMI4cNidgesSr5/7IzkgcpNMB6ti9/1Vf1AQPyR5gS2scsi
- a3+W0B+DCJY046hOcI1m8RKz67VMZT7VmcxcIJ1dI2U9IBrLdcNZXUKakUNLi8mY5Kk3
- Gwww==
-X-Gm-Message-State: AOJu0YygvButkDzv29FXJGZOloz17bGHuHPYQrEi/vxSK4bPxkBUSF1B
- zfnFaRAmE8UUjRsYfRZ4fjhuruqveCzmjjIO+foFW2dXYJjXIIZgjo6Go7OuKQGA3pIx3ZmOtHR
- zDkCFhcS1yPndhmKyVOgO8/zR8cY=
-X-Google-Smtp-Source: AGHT+IGWchKcMpBoQ/gw+HEvWfe2jDHy273JDgoPmrQ3nrLIkf2DrXTguiMpeS/ovYa6asvNdO06jWH3s1cy6VXIMEs=
-X-Received: by 2002:a05:6102:212d:b0:46d:36a8:af30 with SMTP id
- f13-20020a056102212d00b0046d36a8af30mr110763vsg.4.1707114547830; Sun, 04 Feb
- 2024 22:29:07 -0800 (PST)
+ d=1e100.net; s=20230601; t=1707116443; x=1707721243;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=q/4D/FdB2mSaR1CGvDPInqituRwVvUKq/RJUPOWouXk=;
+ b=Qr9sx9V+03FOzcw2+rWBtio/PjOiv0g1nnIDaZrLDgw8RwGY2NM+LN/YGz8EWR8oIo
+ U2eg5IQnOCKEIgqRMugj8vXSxkKMYpdUAyGOy6f6ckqUubtVvY7n4VMn/2CcOiuo4+UT
+ LpZQC70UpBISDZ2EN/VO4ltSWx6uT0iC+psWhKarwYzYPNbfwQztXd1i58vbUFvzSpjB
+ FRtFLGBRun5Pd6iEIADx5Ne60ftQsEor6wAsM8Z+lmyPms8N/V745xNhAEFVzIIBFOAu
+ l9a+B+dkn55r6v0U8v0p8DMnMjF6WBZOru+8Dj3ftcNeZ6JqScFnRZUCkQeF45ucr4ZI
+ DxPg==
+X-Gm-Message-State: AOJu0Yxces0KmWF9pBGR9wH2fy1qGJ1Nv27NUZkvG/tSQ/8qZSg7tQf4
+ zKLVYe66jJB52fUaivq3p8E7QbUsXLDmdchezE7/+lSiNdF9qL5ye+U5FQMh8dE=
+X-Google-Smtp-Source: AGHT+IE7VKUJtJUkitPQGQgg18Oa9/e8kiVQx3raoc8+wZhyr5fm0Y6sC4wILhKv8UY+uuJSPDXfhg==
+X-Received: by 2002:a05:600c:314c:b0:40f:dde7:b882 with SMTP id
+ h12-20020a05600c314c00b0040fdde7b882mr212946wmo.31.1707116442907; 
+ Sun, 04 Feb 2024 23:00:42 -0800 (PST)
+X-Forwarded-Encrypted: i=0;
+ AJvYcCVFHnmYUkxhu3pH20NtKaxzO94R1zr8ClBGRflc+qkVH3iNywwMICJOCf6NnXmUOra5V0G5fuK2SknYpu88H2RV8VJCN2WxjEFogf78tugn0ezLCbrp/KyzE3lSc1uROPAjTfY0tETrugrw0+ack23SoR3vujRMZIOHlZRE6bDwC4IMgI/TrcXVgJqw9mtTISKx1RxYE9tur3NRDb2A0QNO//p7Ez+CO4026SFu5/smx3lEP+Vi7i9Bxyl67R6c1t7mFUMnq+TsEHwIL/Yo0yw5zvWWt4CSDMJV8lVW
+Received: from alex-rivos.ba.rivosinc.com
+ (amontpellier-656-1-456-62.w92-145.abo.wanadoo.fr. [92.145.124.62])
+ by smtp.gmail.com with ESMTPSA id
+ o11-20020a5d58cb000000b00337d5cd0d8asm7342111wrf.90.2024.02.04.23.00.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 04 Feb 2024 23:00:42 -0800 (PST)
+From: Alexandre Ghiti <alexghiti@rivosinc.com>
+To: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: Alexandre Ghiti <alexghiti@rivosinc.com>
+Subject: [PATCH] hw: riscv: Allow large kernels to boot by moving the initrd
+ further way in RAM
+Date: Mon,  5 Feb 2024 08:00:40 +0100
+Message-Id: <20240205070040.367541-1-alexghiti@rivosinc.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-References: <20240204055228.900-1-zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20240204055228.900-1-zhiwei_liu@linux.alibaba.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 5 Feb 2024 16:28:41 +1000
-Message-ID: <CAKmqyKNA5jpddM7Htbm8aeskreh5WWN15orC7RGwEwZLd2m+tA@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Enable xtheadsync under user mode
-To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Cc: qemu-devel@nongnu.org, Alistair.Francis@wdc.com, palmer@dabbelt.com, 
- bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com, 
- qemu-riscv@nongnu.org, christoph.muellner@vrull.eu
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::932;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x932.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::331;
+ envelope-from=alexghiti@rivosinc.com; helo=mail-wm1-x331.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -90,92 +99,41 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sun, Feb 4, 2024 at 3:53=E2=80=AFPM LIU Zhiwei <zhiwei_liu@linux.alibaba=
-.com> wrote:
->
-> According to xtheadsync[1][2] documentation, it can be used in user mode =
-and
-> the behavior is same with other priviledges.
->
-> [1]:https://github.com/T-head-Semi/thead-extension-spec/blob/master/xthea=
-dsync/sync.adoc
-> [2]:https://github.com/T-head-Semi/thead-extension-spec/blob/master/xthea=
-dsync/sync_i.adoc
->
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Currently, the initrd is placed at 128MB, which overlaps with the kernel
+when it is large (for example syzbot kernels are). From the kernel side,
+there is no reason we could not push the initrd further away in memory
+to accomodate large kernels, so move the initrd at 512MB when possible.
 
-Thanks!
+Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
+---
+ hw/riscv/boot.c | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-Applied to riscv-to-apply.next
+diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+index 0ffca05189..9a367af2fa 100644
+--- a/hw/riscv/boot.c
++++ b/hw/riscv/boot.c
+@@ -188,13 +188,13 @@ static void riscv_load_initrd(MachineState *machine, uint64_t kernel_entry)
+      * kernel is uncompressed it will not clobber the initrd. However
+      * on boards without much RAM we must ensure that we still leave
+      * enough room for a decent sized initrd, and on boards with large
+-     * amounts of RAM we must avoid the initrd being so far up in RAM
+-     * that it is outside lowmem and inaccessible to the kernel.
+-     * So for boards with less  than 256MB of RAM we put the initrd
+-     * halfway into RAM, and for boards with 256MB of RAM or more we put
+-     * the initrd at 128MB.
++     * amounts of RAM, we put the initrd at 512MB to allow large kernels
++     * to boot.
++     * So for boards with less than 1GB of RAM we put the initrd
++     * halfway into RAM, and for boards with 1GB of RAM or more we put
++     * the initrd at 512MB.
+      */
+-    start = kernel_entry + MIN(mem_size / 2, 128 * MiB);
++    start = kernel_entry + MIN(mem_size / 2, 512 * MiB);
+ 
+     size = load_ramdisk(filename, start, mem_size - start);
+     if (size == -1) {
+-- 
+2.39.2
 
-Alistair
-
-> ---
->  target/riscv/insn_trans/trans_xthead.c.inc | 10 ----------
->  1 file changed, 10 deletions(-)
->
-> diff --git a/target/riscv/insn_trans/trans_xthead.c.inc b/target/riscv/in=
-sn_trans/trans_xthead.c.inc
-> index dbb6411239..22488412d4 100644
-> --- a/target/riscv/insn_trans/trans_xthead.c.inc
-> +++ b/target/riscv/insn_trans/trans_xthead.c.inc
-> @@ -992,7 +992,6 @@ static bool trans_th_sfence_vmas(DisasContext *ctx, a=
-rg_th_sfence_vmas *a)
->  #endif
->  }
->
-> -#ifndef CONFIG_USER_ONLY
->  static void gen_th_sync_local(DisasContext *ctx)
->  {
->      /*
-> @@ -1003,14 +1002,12 @@ static void gen_th_sync_local(DisasContext *ctx)
->      tcg_gen_exit_tb(NULL, 0);
->      ctx->base.is_jmp =3D DISAS_NORETURN;
->  }
-> -#endif
->
->  static bool trans_th_sync(DisasContext *ctx, arg_th_sync *a)
->  {
->      (void) a;
->      REQUIRE_XTHEADSYNC(ctx);
->
-> -#ifndef CONFIG_USER_ONLY
->      REQUIRE_PRIV_MSU(ctx);
->
->      /*
-> @@ -1019,9 +1016,6 @@ static bool trans_th_sync(DisasContext *ctx, arg_th=
-_sync *a)
->      gen_th_sync_local(ctx);
->
->      return true;
-> -#else
-> -    return false;
-> -#endif
->  }
->
->  static bool trans_th_sync_i(DisasContext *ctx, arg_th_sync_i *a)
-> @@ -1029,7 +1023,6 @@ static bool trans_th_sync_i(DisasContext *ctx, arg_=
-th_sync_i *a)
->      (void) a;
->      REQUIRE_XTHEADSYNC(ctx);
->
-> -#ifndef CONFIG_USER_ONLY
->      REQUIRE_PRIV_MSU(ctx);
->
->      /*
-> @@ -1038,9 +1031,6 @@ static bool trans_th_sync_i(DisasContext *ctx, arg_=
-th_sync_i *a)
->      gen_th_sync_local(ctx);
->
->      return true;
-> -#else
-> -    return false;
-> -#endif
->  }
->
->  static bool trans_th_sync_is(DisasContext *ctx, arg_th_sync_is *a)
-> --
-> 2.25.1
->
->
 
