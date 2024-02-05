@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3559C48291
-	for <qemu-riscv@archiver.kernel.org>; Mon,  5 Feb 2024 06:18:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 490CEC48291
+	for <qemu-riscv@archiver.kernel.org>; Mon,  5 Feb 2024 06:29:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rWsJA-0001YD-H0; Mon, 05 Feb 2024 01:18:20 -0500
+	id 1rWsTk-0004Bb-AO; Mon, 05 Feb 2024 01:29:16 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rWsJ8-0001XV-SY; Mon, 05 Feb 2024 01:18:18 -0500
-Received: from mail-vk1-xa29.google.com ([2607:f8b0:4864:20::a29])
+ id 1rWsTg-0004Ah-7P; Mon, 05 Feb 2024 01:29:12 -0500
+Received: from mail-ua1-x932.google.com ([2607:f8b0:4864:20::932])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rWsJ5-00069s-Ti; Mon, 05 Feb 2024 01:18:18 -0500
-Received: by mail-vk1-xa29.google.com with SMTP id
- 71dfb90a1353d-4b7fc7642fcso1579425e0c.0; 
- Sun, 04 Feb 2024 22:18:14 -0800 (PST)
+ id 1rWsTd-0007s3-B5; Mon, 05 Feb 2024 01:29:10 -0500
+Received: by mail-ua1-x932.google.com with SMTP id
+ a1e0cc1a2514c-7d2e19120b5so2129811241.2; 
+ Sun, 04 Feb 2024 22:29:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1707113893; x=1707718693; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1707114548; x=1707719348; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=n6NwFlfX0gCQcX8gf5Q9RoH9n8s+ep1NhbitaQ9h5Ho=;
- b=C3cogm49MJJE0BYPI0ZQAXzDOsHnY0CNeO5XfeDhvslkNaCpBrqsKGidw15iUBWXuS
- rgyymR9xi5rwIJJpkc0rSTjjDVeg1pJuZIuK9pJ32SNevSPtpcUGxaUrv7zkF0p3nKmG
- kSHd2A6QyYcLzNJdz5hrb4pGawLiTcUoJ3TGtpvDSbZDW+V9V5iLrWTEW0xxvWfHmjuh
- NXHqlp+z1stMKEBR/5Q2kZxDjEHjqLr4q4sTZatluaY6PchrwoXf3n53esmnJy+zU+F2
- xRMt4DEBCizfq+pfSEg64ty9nRaMnzvugX4X7aXnGLa8QCJ0BHzkVaxGpxzFIODLn0aX
- ykdg==
+ bh=E9cURzhditccpij/QfM5l6c4qJ6F08oB5hQg0XnwkOQ=;
+ b=PoirbDEE0A8Pa8ihGFkhrdBDwwZJ9b004RC3zy/iIo0fpb5pvHmZvN8b3fYZ9ITtog
+ 4a21mjXzjca9t9L2kmvqyYWJOBxYOoWq/n5xl2lfmLu4JKreqnIMbaSrZxvLYP+B+6e0
+ YcCiBrOap8e85zBNgxDbbNSWiTxmI+DpeaJaJ5DYi//x9dFpDvQzzbgrWaheBUrtK8EQ
+ f2vs5uCRAUwpvwqu2TN1cQb2oO6LkglOzs2hVoVL/l/54Iu0BwrG9I25c+UmHRZaDYQo
+ 4EUD4Li1Y7pmD1lNvqavhIO1LzkGSqQMW/D/cngCvUbsp1EQrQVltZ+JN3DrDCbxj8x9
+ UdmA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707113893; x=1707718693;
+ d=1e100.net; s=20230601; t=1707114548; x=1707719348;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=n6NwFlfX0gCQcX8gf5Q9RoH9n8s+ep1NhbitaQ9h5Ho=;
- b=MjeYHWkAHWG7/lKT8ySMY08XLE5XDY6xYm7fZd7j3TzeV5cDuYbsEKrK3u48iFRbx7
- eVRJsUzcpOuNJ/x4eNNGDRQ6M+kMjx1cfvaBdFRgcLvN4pN6/DTrFMKKtT4uYLrDAFpa
- i8hjsmQvYA5aCUeai5dnMFdXFnlrlWIeYlWiOu+ViH5O8Uf5LcBMbarLD0bC5ab+N/PB
- PfG0tcEd83tiA2HHR8KpnNONt58DTkMHCopyMLvrE66qk9UPzqK+vd7ko/g1jbDdAV4A
- WnT0PUJ3ySVsZ/ZGLtsnLahS+dtWgzIJYOjl6/45BIOkEPVFnQWk2wyyujB1tuGXRRy9
- dWzA==
-X-Gm-Message-State: AOJu0YxDVqB/mM/fWf9RfmX8E2JRBnjFuqePhkUU9cPL34G0/wXf+hYE
- 83gv8aCLf2m2yLwm57chhky0OcGA3Jjn3jE5ZrpAZNEG4gsIFtYkYnxVsTxtaB9AnYQzyF7Zde4
- dEJRh6InCiQXtzTS1M6jCv8vTG6w=
-X-Google-Smtp-Source: AGHT+IEB11/wuwFnIDJjSsHND56/PEX1szPvq9VTResvdCusdEvvINZKpgr8QEEpuQYAgfljbyeQk//iXcqj8gioR9g=
-X-Received: by 2002:a05:6122:201a:b0:4bd:b44c:24c1 with SMTP id
- l26-20020a056122201a00b004bdb44c24c1mr6153992vkd.11.1707113893394; Sun, 04
- Feb 2024 22:18:13 -0800 (PST)
+ bh=E9cURzhditccpij/QfM5l6c4qJ6F08oB5hQg0XnwkOQ=;
+ b=foAiWFZeRteUNMmjq1XyQC0tsQ209TsHOKAybd4LBD0KmQ6fXzg4KanpBuZtH3XMMv
+ 85FE34MnYSv3XDBDbRtFNO2DuvkYVoTFSnxvAp1ZzE+DtJ5cijJNbe5j4rVyf6wEDjJk
+ UjKvvChxIIl9oJHEJkBR5Xl+kOSHJTRZYUBvuTpL7KHE3Hu0YLp4kHAiEjcNYktpFLBi
+ llvsEjm48M2v/W9W4KjCYIMI4cNidgesSr5/7IzkgcpNMB6ti9/1Vf1AQPyR5gS2scsi
+ a3+W0B+DCJY046hOcI1m8RKz67VMZT7VmcxcIJ1dI2U9IBrLdcNZXUKakUNLi8mY5Kk3
+ Gwww==
+X-Gm-Message-State: AOJu0YygvButkDzv29FXJGZOloz17bGHuHPYQrEi/vxSK4bPxkBUSF1B
+ zfnFaRAmE8UUjRsYfRZ4fjhuruqveCzmjjIO+foFW2dXYJjXIIZgjo6Go7OuKQGA3pIx3ZmOtHR
+ zDkCFhcS1yPndhmKyVOgO8/zR8cY=
+X-Google-Smtp-Source: AGHT+IGWchKcMpBoQ/gw+HEvWfe2jDHy273JDgoPmrQ3nrLIkf2DrXTguiMpeS/ovYa6asvNdO06jWH3s1cy6VXIMEs=
+X-Received: by 2002:a05:6102:212d:b0:46d:36a8:af30 with SMTP id
+ f13-20020a056102212d00b0046d36a8af30mr110763vsg.4.1707114547830; Sun, 04 Feb
+ 2024 22:29:07 -0800 (PST)
 MIME-Version: 1.0
 References: <20240204055228.900-1-zhiwei_liu@linux.alibaba.com>
 In-Reply-To: <20240204055228.900-1-zhiwei_liu@linux.alibaba.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 5 Feb 2024 16:17:47 +1000
-Message-ID: <CAKmqyKMAWSTwbqNrLxH+jfWcxLUXM1XA_Verg+=uRpCdQxzPnA@mail.gmail.com>
+Date: Mon, 5 Feb 2024 16:28:41 +1000
+Message-ID: <CAKmqyKNA5jpddM7Htbm8aeskreh5WWN15orC7RGwEwZLd2m+tA@mail.gmail.com>
 Subject: Re: [PATCH] target/riscv: Enable xtheadsync under user mode
 To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 Cc: qemu-devel@nongnu.org, Alistair.Francis@wdc.com, palmer@dabbelt.com, 
@@ -65,8 +65,8 @@ Cc: qemu-devel@nongnu.org, Alistair.Francis@wdc.com, palmer@dabbelt.com,
  qemu-riscv@nongnu.org, christoph.muellner@vrull.eu
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a29;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa29.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::932;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x932.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -104,7 +104,9 @@ dsync/sync_i.adoc
 >
 > Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
