@@ -4,69 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAFA6C4828F
-	for <qemu-riscv@archiver.kernel.org>; Mon,  5 Feb 2024 03:17:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F777C48291
+	for <qemu-riscv@archiver.kernel.org>; Mon,  5 Feb 2024 03:45:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rWpUA-0005m3-7R; Sun, 04 Feb 2024 22:17:30 -0500
+	id 1rWpur-0005gu-OO; Sun, 04 Feb 2024 22:45:05 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rWpU7-0005lA-1a; Sun, 04 Feb 2024 22:17:27 -0500
-Received: from mail-ua1-x934.google.com ([2607:f8b0:4864:20::934])
+ id 1rWpuq-0005gf-D3; Sun, 04 Feb 2024 22:45:04 -0500
+Received: from mail-ua1-x935.google.com ([2607:f8b0:4864:20::935])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rWpU4-00013i-4N; Sun, 04 Feb 2024 22:17:26 -0500
-Received: by mail-ua1-x934.google.com with SMTP id
- a1e0cc1a2514c-7d6024b181bso1633639241.2; 
- Sun, 04 Feb 2024 19:17:23 -0800 (PST)
+ id 1rWpuo-0005wT-Hw; Sun, 04 Feb 2024 22:45:04 -0500
+Received: by mail-ua1-x935.google.com with SMTP id
+ a1e0cc1a2514c-7d5c514944fso2742404241.1; 
+ Sun, 04 Feb 2024 19:45:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1707103042; x=1707707842; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1707104701; x=1707709501; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lg+O/1jVtaCJ+RF5VCezLc+6UWjGS+drNB7RquN1z10=;
- b=M93Ke0RfdrxKTBoaCoqh4C1IwFWo4Ipulg9/izGvzx1pXUj6EGjW+fNkgLcjKGSTJ/
- 2j1Y9BIDBYZS87TkwaQ0ViCEC4eNdZp7l/PotrJPwgZJvL4Gh7yS2KPEyi4Tc2AO8G/p
- hAWIwweBh5g7kbFy3qwANcT/SXdGqcgiKXgW/aGu+rrzEotElfIZSocTxRnmd6e2hIqy
- 6qyaXYQMUFn3rgSDIAA2+YQC8ydngQukLUTxLvPVa1E6V/WweefMDKwfQr+TOzNXif0A
- IiPvmKAHOIJFa5wXkxFZD0hMbYu97GIAY4qj8SLh1aVQgl314oQ4RDX8//FGEspH1y8V
- NurA==
+ bh=dwZJ8g3H8jf92vVV68XSO/qe/RJMIgagMBO/0VPXpAA=;
+ b=XMGz3ZvW57f20TETTJHM1LK3G02LnUiL50ZvdIlT/t+3y3Y3brH2CjZgckF6uesM6w
+ KbSou2VMGMG+TXZ2N1zRroaV4TcabdiKic8SKn7gPGNW+swKiWyPj1Roh0GW1+xkWEj9
+ FBVcpZDLDpDGIEXppWS/v6fqJa7iDCikUlrhDIFi8m+EmNh9A3M5Tfwqo2EC26Jz9soD
+ GLOVDrtp87Blj1127DGyGfSBiasNIgiUEgEfdUkhm+bRmYg3zlXfrGr0XXtgkml2CDn8
+ RwX0GL5etOt6Brm3kgIxs/AezdJYMlGne/1fnk4OeUakWmdsaUy8VZqNyuvJfG3PELDJ
+ aaow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707103042; x=1707707842;
+ d=1e100.net; s=20230601; t=1707104701; x=1707709501;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lg+O/1jVtaCJ+RF5VCezLc+6UWjGS+drNB7RquN1z10=;
- b=UuTJI+JHZ2sOTS9eV3FSi4u0MbolVMIEYvwZM/OwwjHjBZVht+bxNcfJGCQm3qAFuF
- 3jpvwL32BlqewA4/Z/fVVWovS5GV9DaRLsDASQBdFjqgP/FrN1DK1HUNPV4iVUiiRKiF
- 1LhRQPfqf4xUWh2j2HSQu96N4f0yUGdD0zIQP89QAaNOxRNBCmn3cf3oQJaFBGw2nT9q
- GSnAyYNDjty9wQBSXyaAlteVaow9hfr6cQl2lsbGHTosY2Mi8nJPVpstuCcNk1lmmxMk
- 1afcQDtrSqJpTcJuS9hUe5gHgkmy8uhqKrDA4aGA2dfd0gbzbL5P7IntzjeNVNlmFb73
- EvGw==
-X-Gm-Message-State: AOJu0Yz1v9P7tPILyywk+uDWAq5i+/oOdzIWAIKfIHhi5WZtK2acpPbk
- R4v/CCZH9wCQlgyz3girL2x4Q10Hdn+wLWrRcWm9JttbejUeMHEApDElY1+b2L3otiBOdhqbfQP
- 2nuCwr9xGf8/SqzDxIuj1yIgsIDk=
-X-Google-Smtp-Source: AGHT+IEymLrqDuF3BVCUrJV5vgO+A2ur91Y0f7OUYRYgsfp3YLSzR1ijjZmwI8r+iL5Y5vO0Km/l2XtXSWI7V9koa8o=
-X-Received: by 2002:a05:6102:1886:b0:46d:1d8a:5ebf with SMTP id
- ji6-20020a056102188600b0046d1d8a5ebfmr3143601vsb.27.1707103042335; Sun, 04
- Feb 2024 19:17:22 -0800 (PST)
+ bh=dwZJ8g3H8jf92vVV68XSO/qe/RJMIgagMBO/0VPXpAA=;
+ b=W/8zo9UQ2HVbHBCD2rwBVVTyL12R7Mhn7uiX1/BbqvTdp/E5zAj+Lwy6s0cUCufjL8
+ hLs/3xwgV1ZhTRyNgZp3WbA6ZJcZBKk2sFG78L6gqq78RFUB4TooYBAGLOxIPTFBUyCQ
+ QdzpIvYUM3mmHGP9KamWkMvkTu64lxMXyP2f9si66x0CSbCNa4tb2xHWweGDf7KKvYP2
+ GHdcfRJ+5+YWM6cewU6PpGl/PjC0oemfZkTt/IIrhAIEjK0SAj9s+GzOezs6AoI4akrV
+ 6Vhs5bKpjYZ49wldAR1JUTJSgm0cBwJEg+BWIRLwY52aoPN1D9zBYR12+iqs9PrDHvdK
+ sxbg==
+X-Gm-Message-State: AOJu0Yw59Ug7ZiCFWzIpYT8LYgDLhX4hBxplehGmS9z+Qt021t/ofbjG
+ fFEfwLkNXCGSPq5NveomUoTHBjh4ivXxA6+l5YmIlcdbwmamUYUk/UHFmSPmq18kyIXIakh1ZuY
+ U+eB3s61cRVrslMmTQcch3la/dbY=
+X-Google-Smtp-Source: AGHT+IFx/wUFRUZtXFPZPFHmUecj9d+sT+drqf9st2l3wLCXhizx4KD6Kycj3t2whOeHkkUqCUNCPrOTjhGw3gch/jM=
+X-Received: by 2002:a05:6102:515:b0:46d:210a:78a0 with SMTP id
+ l21-20020a056102051500b0046d210a78a0mr1976295vsa.0.1707104699942; Sun, 04 Feb
+ 2024 19:44:59 -0800 (PST)
 MIME-Version: 1.0
-References: <20240122221529.86562-1-dbarboza@ventanamicro.com>
-In-Reply-To: <20240122221529.86562-1-dbarboza@ventanamicro.com>
+References: <20240124-squatting-getup-a16a8499ad73@spud>
+ <20240124-swear-monthly-56c281f809a6@spud>
+In-Reply-To: <20240124-swear-monthly-56c281f809a6@spud>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 5 Feb 2024 13:16:56 +1000
-Message-ID: <CAKmqyKMYvxOVZ_jPtvgmsZLxr-9ht0si7wR3SdvgiAP6B2ePgg@mail.gmail.com>
-Subject: Re: [PATCH 0/7] hw/riscv: fix leak, add more g_autofree
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com
+Date: Mon, 5 Feb 2024 13:44:33 +1000
+Message-ID: <CAKmqyKNuT-46MpHN4LmoYD1H4PJPRzFTqOp27Jv18=BB+2abFg@mail.gmail.com>
+Subject: Re: [PATCH v4 1/2] target/riscv: use misa_mxl_max to populate isa
+ string rather than TARGET_LONG_BITS
+To: Conor Dooley <conor@kernel.org>
+Cc: qemu-riscv@nongnu.org, Conor Dooley <conor.dooley@microchip.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Andrew Jones <ajones@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::934;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x934.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::935;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x935.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -90,58 +95,90 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jan 23, 2024 at 9:39=E2=80=AFAM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+On Thu, Jan 25, 2024 at 12:04=E2=80=AFAM Conor Dooley <conor@kernel.org> wr=
+ote:
 >
-> Hi,
+> From: Conor Dooley <conor.dooley@microchip.com>
 >
-> First patch fixes a leak found when using Valgrind. The root cause is a
-> missing g_free() in a string.
+> A cpu may not have the same xlen as the compile time target, and
+> misa_mxl_max is the source of truth for what the hart supports.
 >
-> In fact, I found while doing reviews that we keep repeating the same
-> pattern:
+> The conversion from misa_mxl_max to xlen already has one user, so
+> introduce a helper and use that to populate the isa string.
 >
-> =3D=3D=3D=3D
-> char *name;
-> name =3D g_strdup_printf(...);
-> (...)
-> g_free(name);
-> =3D=3D=3D=3D
->
-> With this in mind, I ended up making this rather trivial series to
-> introduce more string/array autocleaning in the 'virt' machine code. The
-> advantage of doing 'g_autofree' is that we'll guarantee that we'll clean
-> ourselves up when the variable goes out of scope, avoiding leaks like
-> the one patch 1 fixes. We want to enforce this autoclean style in
-> reviews, and for that we need to get rid of at least some of the uses we
-> do it right now.
->
-> I didn't bother changing the 'spike' and the 'sifive' boards for now
-> because the bulk of new patches is done on top of the 'virt' machine,
-> so it's more important to tidy this board first.
->
->
-> Daniel Henrique Barboza (7):
->   hw/riscv/virt-acpi-build.c: fix leak in build_rhct()
->   hw/riscv/numa.c: use g_autofree in socket_fdt_write_distance_matrix()
->   hw/riscv/virt.c: use g_autofree in create_fdt_socket_cpus()
->   hw/riscv/virt.c: use g_autofree in create_fdt_sockets()
->   hw/riscv/virt.c: use g_autofree in create_fdt_virtio()
->   hw/riscv/virt.c: use g_autofree in virt_machine_init()
->   hw/riscv/virt.c: use g_autofree in create_fdt_*
+> Link: https://lore.kernel.org/qemu-riscv/20240108-efa3f83dcd3997dc0af458d=
+7@orel/
+> Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
+> I dropped the tags since I added the helper
+> ---
+>  target/riscv/cpu.c     | 9 ++++++++-
+>  target/riscv/cpu.h     | 1 +
+>  target/riscv/gdbstub.c | 2 +-
+>  3 files changed, 10 insertions(+), 2 deletions(-)
 >
->  hw/riscv/numa.c            |   4 +-
->  hw/riscv/virt-acpi-build.c |   2 +-
->  hw/riscv/virt.c            | 109 ++++++++++++-------------------------
->  3 files changed, 37 insertions(+), 78 deletions(-)
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index ad1df2318b..4aa4b2e988 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -307,6 +307,11 @@ void riscv_cpu_set_misa(CPURISCVState *env, RISCVMXL=
+ mxl, uint32_t ext)
+>      env->misa_ext_mask =3D env->misa_ext =3D ext;
+>  }
 >
+> +int riscv_cpu_max_xlen(CPURISCVState env)
+> +{
+> +    return 16 << env.misa_mxl_max;
+> +}
+> +
+>  #ifndef CONFIG_USER_ONLY
+>  static uint8_t satp_mode_from_str(const char *satp_mode_str)
+>  {
+> @@ -2332,7 +2337,9 @@ char *riscv_isa_string(RISCVCPU *cpu)
+>      int i;
+>      const size_t maxlen =3D sizeof("rv128") + sizeof(riscv_single_letter=
+_exts);
+>      char *isa_str =3D g_new(char, maxlen);
+> -    char *p =3D isa_str + snprintf(isa_str, maxlen, "rv%d", TARGET_LONG_=
+BITS);
+> +    int xlen =3D riscv_cpu_max_xlen(cpu->env);
+> +    char *p =3D isa_str + snprintf(isa_str, maxlen, "rv%d", xlen);
+> +
+>      for (i =3D 0; i < sizeof(riscv_single_letter_exts) - 1; i++) {
+>          if (cpu->env.misa_ext & RV(riscv_single_letter_exts[i])) {
+>              *p++ =3D qemu_tolower(riscv_single_letter_exts[i]);
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 05e83c4ac9..aacc031397 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -511,6 +511,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, =
+int size,
+>                          MMUAccessType access_type, int mmu_idx,
+>                          bool probe, uintptr_t retaddr);
+>  char *riscv_isa_string(RISCVCPU *cpu);
+> +int riscv_cpu_max_xlen(CPURISCVState env);
+>  bool riscv_cpu_option_set(const char *optname);
+>
+>  #define cpu_mmu_index riscv_cpu_mmu_index
+> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+> index 58b3ace0fe..f15980fdcf 100644
+> --- a/target/riscv/gdbstub.c
+> +++ b/target/riscv/gdbstub.c
+> @@ -218,7 +218,7 @@ static int riscv_gen_dynamic_csr_xml(CPUState *cs, in=
+t base_reg)
+>      CPURISCVState *env =3D &cpu->env;
+>      GString *s =3D g_string_new(NULL);
+>      riscv_csr_predicate_fn predicate;
+> -    int bitsize =3D 16 << env->misa_mxl_max;
+> +    int bitsize =3D riscv_cpu_max_xlen(*env);
+>      int i;
+>
+>  #if !defined(CONFIG_USER_ONLY)
 > --
 > 2.43.0
 >
