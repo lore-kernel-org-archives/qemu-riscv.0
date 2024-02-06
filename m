@@ -4,77 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69E2BC4828D
-	for <qemu-riscv@archiver.kernel.org>; Mon,  5 Feb 2024 23:41:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 228F7C48286
+	for <qemu-riscv@archiver.kernel.org>; Tue,  6 Feb 2024 08:36:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rX8aX-0003jT-Jz; Mon, 05 Feb 2024 18:41:21 -0500
+	id 1rXGwR-000313-0d; Tue, 06 Feb 2024 03:36:31 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rX8aV-0003ik-FP; Mon, 05 Feb 2024 18:41:19 -0500
-Received: from mail-vk1-xa32.google.com ([2607:f8b0:4864:20::a32])
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1rXGwP-00030b-UN
+ for qemu-riscv@nongnu.org; Tue, 06 Feb 2024 03:36:29 -0500
+Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rX8aT-0005VO-Rd; Mon, 05 Feb 2024 18:41:19 -0500
-Received: by mail-vk1-xa32.google.com with SMTP id
- 71dfb90a1353d-4c025d5329dso685518e0c.1; 
- Mon, 05 Feb 2024 15:41:17 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1rXGwM-0003ZC-WF
+ for qemu-riscv@nongnu.org; Tue, 06 Feb 2024 03:36:29 -0500
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-6de3141f041so3703113b3a.0
+ for <qemu-riscv@nongnu.org>; Tue, 06 Feb 2024 00:36:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1707176476; x=1707781276; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=l631vf8xZS1+JW9c5VmJSrqI0rgAHOnJ7cf/Hlkog+g=;
- b=Mkud4UupQqY8l28Hqi2DEniiJaHvEvYS9y35mQXAvdVJxEbfV/BLM0xrn/oeEgC2Rb
- K3s9AKj584xrN1nKLL/ixPiRR3utrnSULpseJ/7c2VtNaD9WtBOLzQj6vf+Ac8SFEvWV
- 0izW07aehrCJdF32mwM8RbGWN5ROhVs7UG8GVYeeDrAH9mFlmdKYj2Y/LNtRgwE/i3GT
- CUJlzr3Cij3keqTvml+bGBl7JhjwU6M+HCPysctvGm9AETQcT6PpKqkBeJq4T/scnn+k
- gGVLvFAgDzWzR+9yEfyGGIgRRgiBzHjbdhI/F4UUDHNmR0bsNoVM4JWyOIoiTD+Vl5i5
- BMcA==
+ d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1707208585; x=1707813385;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=XtM2teapT+8H3TtHYJzAZGEad4e2YOvlPlxXSHiZTuw=;
+ b=QKRPfmdQxO5+mUNnsTJWnxCCThW6EztBpfXD4OmpJmvepxxe6OuBPSG3T14TACKkse
+ rd3nyptyi8dzO2YFHptM7D9/9PsSAl0nErWKO0KX4M+ZpEWccqQqmhPxCMjpOG/Zwrza
+ T4rmnMNsX+/9grhfVisQawYtEJSAAlGDl3zhk3CUzKRuaEPXNjtHJgzVFey+PHwAzM8A
+ +tUfzWLiVAYCIk3NRgoVdInMQV3s2pj2/A0nOYTJ0axNdcX0yAdVTBTqK0dpu/nP4gr9
+ T50McLlc4ETsgo+tKYtm1DzifD+rmWenGwIcB+2OOBBzLRXMcAyaAsbOzU3yn4GvHdfF
+ GX+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707176476; x=1707781276;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=l631vf8xZS1+JW9c5VmJSrqI0rgAHOnJ7cf/Hlkog+g=;
- b=Vf73TthZMAQHXs7hiXSYcVG3l51rgicknpZ5928NQmKEKlaKC2SYxNKYTuJXBNPPJd
- cl9ayrnwu89q9c9NcSjRbpoabwedyJwxB0eRwctK9LU6WZ38x4/GRfSZIrN02rOqG8KK
- Em6Ebp//b7SMqfLhsSlZsya7bZxeSpoxM/C23a8RNCfVlRJyfIGAYmrMegv4CkxOcn1U
- 4jckmKkNeXu7M6uQWyi0pBMRbSv9jhScRZ8SnqNC/C5yC5gmIi3vsz9EJ6IFeDzTrMqF
- Q0K716iD1l0AE8GF46ZaePibZGMLwyUjOhbP853PihjRB7HJQkhj85R/fC/MQCTIpLbE
- TdIw==
-X-Gm-Message-State: AOJu0YxlHHUMPP86hsRwTxbXTheDNR6amqTzUdXd1LsADXH1osoVfvBj
- +WEpeKlQAYq6UPWicwQpRrA1orSWHX20KjNujTpdRGOVRjrjFT+IeGGrK2KH4ql0ewh36IeI9mL
- vCsGg8XEXmpw1w1534ebBd6nehQQ=
-X-Google-Smtp-Source: AGHT+IF6FrWh0g2p8t1oJ3c31X+JtH6/XPdDs0YYsolz3Oe/vrU+wAWVZ9YR2uAK9Ta/DVISsG1La2H3oVMhW8i+G0E=
-X-Received: by 2002:a05:6122:a0c:b0:4c0:3d4e:774b with SMTP id
- 12-20020a0561220a0c00b004c03d4e774bmr626747vkn.9.1707176476056; Mon, 05 Feb
- 2024 15:41:16 -0800 (PST)
+ d=1e100.net; s=20230601; t=1707208585; x=1707813385;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=XtM2teapT+8H3TtHYJzAZGEad4e2YOvlPlxXSHiZTuw=;
+ b=Ki0SUriwrcPNV4TcRtoMzGI/pcJ4KrPOwBLTq6avMHGNMzqF7Nrdy6kvaQZvoTKdZ5
+ XIlivN0jT8ImKJND5tbPJlRblEprQNRFC4iE36gMHzTE7uLp1lFMwQm25AKakuIBjqPN
+ LVWXEuE9XBtepadqVl1zTTCStISxrH39ornH+LAlgg+RgC61PA64EPLMCYjA6RGKWfhL
+ SRI8HlSJOQB23N9jxYBjyqMlgL/ZCK1uOm4N/ShBnEh0pZ8ITVZOwVUKa1zYLGy0DG7b
+ HJm+VRIP0lgn2CcgkkYqa/DTL733+eaY83iPMO/dd1i9Fu3ZXk3F4Q/5hEspZ5V3cl6R
+ 8q5Q==
+X-Gm-Message-State: AOJu0YwciCY9sO0ji5J0CJOmKzz5Zs1+ZNadRroZ15asV+jHvpkEFeiA
+ cdYQEQq/1J3CtYxxxuk+GiIOCuOzpBZGYXx4bgFbrZDxVhY4wVa68pC6isKrfb0=
+X-Google-Smtp-Source: AGHT+IGdtl/gQ/3zR3nzyMJ0HIsDpu8aUDKqugpKyxhQl8lzLCOY330miHo9NCXYJ6QHzRq9+1JM/g==
+X-Received: by 2002:a05:6a00:4bb5:b0:6df:f641:8462 with SMTP id
+ kt21-20020a056a004bb500b006dff6418462mr1771779pfb.0.1707208585232; 
+ Tue, 06 Feb 2024 00:36:25 -0800 (PST)
+X-Forwarded-Encrypted: i=0;
+ AJvYcCXtHYg5DQHdGPuoRSCBvrGdfykcwhKlAx4+8kUyLVjm2YRH3ZO286PmpD4gwS39xRtCL7ozv1voeOyqt94reFXn3WuhESs0EWlp/q6vfC4M1nyF/bdiwYBqJ3IBmsjBeBUj22g5b2yyqmm6qnPjhc6PnIvpAM4x1FH6OneDQM2JRkhE8rftJ2UfKX5hsrIo22QbwPMTTxUrbT1IVulgHrlBYNQ3a+ElrnRmy0sQFC9N8Q0U2WrKLCD2oi/AS+mK+dtZrHwadJi4/+0MZRugDiyxtgrzImc8mmbJ424aCkmkdat51LaQrbdpS98WA8Ne50XTyXD6luN2osK3WrGDu7dvgsVsUaWht7m9PeJUHeN7F9l4FVD+mGNWErDuql6Zlf2KS+fiEMKxWD6LzDVrGpWpyHNyl4/WlUv+6nWJMPbxSyg5rwKIjaIrrs64PbNMz+u57JsJlVmZkWWSdlyJL0Y=
+Received: from [157.82.200.138] ([157.82.200.138])
+ by smtp.gmail.com with ESMTPSA id
+ u11-20020a056a00098b00b006e042e15589sm1259676pfg.133.2024.02.06.00.36.22
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 06 Feb 2024 00:36:24 -0800 (PST)
+Message-ID: <0ce6ef8c-1ea3-4f24-9998-c76ed6016cb4@daynix.com>
+Date: Tue, 6 Feb 2024 17:36:20 +0900
 MIME-Version: 1.0
-References: <20240122123348.973288-1-dbarboza@ventanamicro.com>
-In-Reply-To: <20240122123348.973288-1-dbarboza@ventanamicro.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 6 Feb 2024 09:40:49 +1000
-Message-ID: <CAKmqyKO3=CdPSSMcpf8NBEiFzxTTU-dSdtpWiMUwNs3iZ2OXQg@mail.gmail.com>
-Subject: Re: [PATCH v3 0/2] riscv: add rv32i,rv32e and rv64e CPUs
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a32;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa32.google.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v11 0/3] gdbstub and TCG plugin improvements
+Content-Language: en-US
+To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Mikhail Tyutin <m.tyutin@yadro.com>, Aleksandr Anenkov
+ <a.anenkov@yadro.com>, =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?=
+ <philmd@linaro.org>, Fabiano Rosas <farosas@suse.de>,
+ Andrew Jones <ajones@ventanamicro.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, Pierrick Bouvier <pierrick.bouvier@linaro.org>
+References: <20240203-riscv-v11-0-a23f4848a628@daynix.com>
+ <87bk8xpzyl.fsf@draig.linaro.org>
+ <b34c4013-1aca-466e-b94e-55d9802928b3@daynix.com>
+ <87zfwhodit.fsf@draig.linaro.org>
+ <7fae3d1a-5af2-4557-a2b3-13b911e73382@daynix.com>
+ <8734u7gsv0.fsf@draig.linaro.org>
+From: Akihiko Odaki <akihiko.odaki@daynix.com>
+In-Reply-To: <8734u7gsv0.fsf@draig.linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: none client-ip=2607:f8b0:4864:20::429;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-pf1-x429.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -90,36 +111,57 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Jan 22, 2024 at 10:34=E2=80=AFPM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
->
-> Hi,
->
-> This v3 has the same patches from v2 rebased with a newer
-> riscv-to-apply.next branch (@ 096b6b07298).
->
-> No other changes made. All patches acked.
->
-> v2 link: https://lore.kernel.org/qemu-riscv/20240108161903.353648-1-dbarb=
-oza@ventanamicro.com/
->
-> Daniel Henrique Barboza (2):
->   target/riscv/cpu.c: add riscv_bare_cpu_init()
->   target/riscv: add rv32i, rv32e and rv64e CPUs
 
-Thanks!
 
-Applied to riscv-to-apply.next
+On 2024/02/05 18:31, Alex Bennée wrote:
+> Akihiko Odaki <akihiko.odaki@daynix.com> writes:
+> 
+>> On 2024/02/03 22:58, Alex Bennée wrote:
+>>> Akihiko Odaki <akihiko.odaki@daynix.com> writes:
+>>>
+>>>> On 2024/02/03 20:08, Alex Bennée wrote:
+>>>>> Akihiko Odaki <akihiko.odaki@daynix.com> writes:
+>>>>>
+>>>>>> This series extracts fixes and refactorings that can be applied
+>>>>>> independently from "[PATCH v9 00/23] plugins: Allow to read registers".
+>>>>>>
+>>>>>> The patch "target/riscv: Move MISA limits to class" was replaced with
+>>>>>> patch "target/riscv: Move misa_mxl_max to class" since I found instances
+>>>>>> may have different misa_ext_mask.
+>>>>> As this is re-based on Alistair's riscv-to-apply.next tree I'll wait
+>>>>> for
+>>>>> this to go through the RiscV trees and then re-base the plugin patches
+>>>>> and dropping the merged riscv patches from my tree.
+>>>>> In the meantime feel free to review:
+>>>>>      Message-Id: <20240122145610.413836-1-alex.bennee@linaro.org>
+>>>>>      Date: Mon, 22 Jan 2024 14:55:49 +0000
+>>>>>      Subject: [PATCH v3 00/21] plugin updates (register access) for 9.0 (pre-PR?)
+>>>>>      From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+>>>>> For:
+>>>>>      contrib/plugins: extend execlog to track register changes
+>>>>>      gdbstub: expose api to find registers
+>>>>> So I can add this to my maintainer omnibus series for the next PR I
+>>>>> send.
+>>>>
+>>>> I added one trivial comment to: "gdbstub: expose api to find registers"
+>>>>
+>>>> "contrib/plugins: extend execlog to track register changes" depends on
+>>>> "plugins: add an API to read registers". The comments for the patch in
+>>>> the following email are not addressed yet:
+>>>> https://lore.kernel.org/all/4b2156ed-688d-4617-b52d-200413f01156@daynix.com/
+>>> I don't think we need to serialise with the BQL as the structures
+>>> are
+>>> per-CPU (and created on vCPU creation).
+>>
+>> qemu_plugin_get_registers() has vcpu parameter, which can refer to a
+>> different vcpu the caller is on (or the caller may not be in a vcpu
+>> context at all).
+> 
+> It should only be called from the current cpu context. We can either
+> assert that or make it implicit like qemu_plugin_insn_disas does.
+> However we will need to ensure current_cpu is set before the vcpu_init
+> callback.
 
-Alistair
-
->
->  target/riscv/cpu-qom.h |  3 ++
->  target/riscv/cpu.c     | 64 ++++++++++++++++++++++++++++++++----------
->  2 files changed, 52 insertions(+), 15 deletions(-)
->
-> --
-> 2.43.0
->
->
+Then that should be documented and the vcpu_index parameter should be 
+deleted.
 
