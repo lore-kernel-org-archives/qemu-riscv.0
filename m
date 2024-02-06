@@ -4,91 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B0B8C4828D
-	for <qemu-riscv@archiver.kernel.org>; Tue,  6 Feb 2024 20:24:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6182C48297
+	for <qemu-riscv@archiver.kernel.org>; Tue,  6 Feb 2024 20:39:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rXRzP-0006g2-CC; Tue, 06 Feb 2024 15:24:19 -0500
+	id 1rXSEF-0002US-Ut; Tue, 06 Feb 2024 15:39:41 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rXRzN-0006fZ-J3
- for qemu-riscv@nongnu.org; Tue, 06 Feb 2024 15:24:17 -0500
-Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rXSEE-0002UE-AP
+ for qemu-riscv@nongnu.org; Tue, 06 Feb 2024 15:39:38 -0500
+Received: from mail-pg1-x531.google.com ([2607:f8b0:4864:20::531])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rXRzL-0005kW-9h
- for qemu-riscv@nongnu.org; Tue, 06 Feb 2024 15:24:17 -0500
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-1d8ef977f1eso46118515ad.0
- for <qemu-riscv@nongnu.org>; Tue, 06 Feb 2024 12:24:14 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rXSEC-00006U-Jm
+ for qemu-riscv@nongnu.org; Tue, 06 Feb 2024 15:39:38 -0500
+Received: by mail-pg1-x531.google.com with SMTP id
+ 41be03b00d2f7-5cdbc4334edso4782753a12.3
+ for <qemu-riscv@nongnu.org>; Tue, 06 Feb 2024 12:39:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1707251053; x=1707855853; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ d=ventanamicro.com; s=google; t=1707251974; x=1707856774; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=xMLnpEwC/pwWC/ZQ1056pXNvkQfDivNGGlGItWvvw54=;
- b=uqBw+dfsdzCqXeTFRwxDrk5LX+ig0fUeAth0QTjMWIYuj07P/A+GDzJzb1X864dV6q
- /pNx9mIgyJFW/FK3TRkEx3E5J6u3NSb2APYWKS7jBOsKXQe+VhIW5XIoeAMH1Jwqmqpr
- O50xU2FAC7fluQ7l79xFcbPB3Nk95sXJSciqKuuodUXS4hsgkZ2uPQ1m2gMQrzlJxuFq
- XXHoNUTDSzyZO1pCBkoY7KrQVf3yI1ByQBd0QpGWyewHso9d4pzTEFCn1/07Xp6ZTPIg
- 8j6zZBQG8+HOksQMmlHRiLiS0miGsfVuuL1gvHU4M1nWVa16mOBCDgfbuDKQQV0fhJJg
- TKcA==
+ bh=3ArV/Gr5QDyfv+upyNqCWqRxvsU7ykcJKNSQH7JGZY8=;
+ b=oNQXiF8EznifiTthpYZ77K9zBiH2tWi2UD86g+lcqV2ObOpkLa6Jrh0yG4LXaXAHHK
+ 871KhAQCNaduRDHaYLKc41oAKjOTNzSu6CCwJOx/tQAI+hqH7P+a5iM/oqcWjCKUlznI
+ JYtCM9KmI77ZoZElrbPdDaUwl5sksVn8nu+ZTqHW8P17qXT+zfpWQrCdocu3cbLTzQJt
+ EIeenTR/rA98jBpTZ/gk8DGX8UlrkMy/wAhMGIJNkeqNQ+egghYAK0c0lg8yEGO439Ol
+ chKdeVoHGPV/pMhn5x7I45zQvJNPj6OA2fPqaWZbbNKQfZ08NbYkmzv4kCTIz2omxkB+
+ /jpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707251053; x=1707855853;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ d=1e100.net; s=20230601; t=1707251974; x=1707856774;
+ h=content-transfer-encoding:in-reply-to:from:references:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=xMLnpEwC/pwWC/ZQ1056pXNvkQfDivNGGlGItWvvw54=;
- b=QEbpqL5fY1+BQX28FIS6gyK2VDS1l3XkO9/zmIzJwxcJ0rttuFTRfemIRIHmrOrd9I
- DvSzTmBi31rru1Rn3noBBtST3N+9tq+C+g+lrJrzBRjSwi95USFHI77WitVmsa7VaN6d
- CWMft0YDPkbF5hZy3yyRhv6oi+tCjiJDA/IIqFjNzI6mPf/Yq6T0nyLrghxZcNybWzcd
- M1iVYyA5ftx2RY6c6prAjRzf3Dxel7Waj+LSTnkzluURDUeOWDYlAiwzD6W8+CGNovh3
- PP7/IWGWcrhGxGTqTx4oe05AjRlrev/Ap72iSTXY5NxAaWx5Zgefrzx7meYIssuwhViB
- GgOg==
-X-Gm-Message-State: AOJu0Yw7Px9hEi9Lxe+LKh8ygBxB4GVY1Uj+9MMkj0mc5QtoKpgXGosg
- wGUE5/iSv/pMpOh08KuXeD4ngT76nMtrMNs0IfHsrNWjWvTRVAiAeZFGg7F+H0Y=
-X-Google-Smtp-Source: AGHT+IH2ii7CJ/bROgsLUKKmwF76pavKC2AAX5TiE/wZwLxVKnE2mf1HQEyD/I+4zcXmRiF5XnuX7Q==
-X-Received: by 2002:a17:902:f7c3:b0:1d9:855a:3130 with SMTP id
- h3-20020a170902f7c300b001d9855a3130mr2175024plw.33.1707251053582; 
- Tue, 06 Feb 2024 12:24:13 -0800 (PST)
+ bh=3ArV/Gr5QDyfv+upyNqCWqRxvsU7ykcJKNSQH7JGZY8=;
+ b=ptEDJ3tdNJXqqWZ1E/piLrl0Xo4vKTtQm9o/ZDhqm35eli0KoHXs7ml77d+bDXYPu1
+ 1yF+peB1QfG5rOq7GPiV+VlM3fVGa6HoRIE2yAJINLtJgS0AFAz005X07Lcln36NazBH
+ 0YTNJgdjrAj65J8Izbyimx5u/3VJAHx/LDrW7aYiA/OHNdiDDvalA9rI2d4CdexVE/1Y
+ Og72cKaBojp6amlrnsTIVVkbCxeNbXbid2gMZV+zjdnPP8KYvxUnKwmTf7fq7TdQtsUO
+ NIKNU09O7tJjeawQqHYaLPL3Lb2CyYAWV2UptYQCkSs0QwkBHip8ZKgza0rMZLXiiejg
+ hS1Q==
+X-Gm-Message-State: AOJu0YxklNchGBprCMD1vGihi3WEeSfErRaTyT4eH8RaSTk24RYb2USW
+ /fDCGP59D6GY5Gog4qqr2UEoOmLfAmS8HTodz2C2wRG2GK8Xz+2nZSU8J26nokU=
+X-Google-Smtp-Source: AGHT+IGeNjdrZrSwQRsy3xK8PXv4h04LW2rrPrrsLhbz3vjcgwFoRPhSSlVIY0IglEGZYsS+OTXKlg==
+X-Received: by 2002:a05:6a20:e607:b0:19c:7560:e7d6 with SMTP id
+ my7-20020a056a20e60700b0019c7560e7d6mr2650971pzb.1.1707251974441; 
+ Tue, 06 Feb 2024 12:39:34 -0800 (PST)
 X-Forwarded-Encrypted: i=0;
- AJvYcCVLaJy2q/k3ku6tuhzLL/E5aTXZ/QdwFz3wh1+/2eTqd7AN7W+OkxrWo6kmPOAKQm15rLY8KYbJZ9KGZ020zlXCXwtSH29A7wxZPi4S20iGAHnu3Q9qfTbavKjdSkZcCLBANACJACVoF3aI9uTd3aWm0by9XhNLxux9asRaBKFReLniT/42nOTcRo+YRS+zfgYWVQ6pTaXtF5S15L9WkSh/2qLLpHB7H0L+tHVyMkA5GYC+3qEYLpGj4PDEB33HEbLWwbHArwqnen+cYPIVi2mOYe/ZaaLiuc5OKK9TFOPm3TPfUUKTJbXWE2tcPPIVp8tr+Ci5JUh9
-Received: from [192.168.0.100] ([43.252.112.200])
+ AJvYcCUEi9yk5EZVpQt9s+z9RuaO943/oXoZ/b58Qcgr7g54ayKjpwIt8YKitAGWmJirElGn1GY+MP9VVGOUDSANJn3L90CoqOuK4EGyg7mzG4DOE1BItAEPOo7U8h8v04BQvC560b3wciVyXzetSRUXer07V7j6PgR0OCxmv2o/A16Z/73jZgG/FNhL78y0pWelcgpCr/UicdwJ30fKxFldMBxSeaQ4SHE8XKybbWcNtfa1YsAiEBOvftWa/VkjRh2K9Co0AXM+hOTgitw5UfLgH4kgzc00WhE=
+Received: from [192.168.68.110] ([177.94.15.159])
  by smtp.gmail.com with ESMTPSA id
- mq8-20020a170902fd4800b001d9ba3b2b33sm2303677plb.163.2024.02.06.12.24.09
+ 27-20020a63115b000000b005cd821a01d4sm2625230pgr.28.2024.02.06.12.39.31
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 06 Feb 2024 12:24:13 -0800 (PST)
-Message-ID: <162e0b5c-ed98-4e84-af6e-9fdaea0dcc04@linaro.org>
-Date: Wed, 7 Feb 2024 06:24:06 +1000
+ Tue, 06 Feb 2024 12:39:33 -0800 (PST)
+Message-ID: <c8817977-a8ad-4f94-9847-a43d08c5b4df@ventanamicro.com>
+Date: Tue, 6 Feb 2024 17:39:27 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] target/riscv: Update $pc after linking to $ra in
- trans_cm_jalt()
+Subject: Re: [PATCH v2] hw: riscv: Allow large kernels to boot by moving the
+ initrd further away in RAM
 Content-Language: en-US
-To: Jason Chien <jason.chien@sifive.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+To: Alexandre Ghiti <alexghiti@rivosinc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Junqiang Wang <wangjunqiang@iscas.ac.cn>
-References: <20240206131911.10998-1-jason.chien@sifive.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240206131911.10998-1-jason.chien@sifive.com>
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+References: <20240206154042.514698-1-alexghiti@rivosinc.com>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20240206154042.514698-1-alexghiti@rivosinc.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x636.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::531;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x531.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,42 +102,55 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2/6/24 23:18, Jason Chien wrote:
-> The original implementation sets $pc to the address read from the jump
-> vector table first and links $ra with the address of the next instruction
-> after the updated $pc. After jumping to the updated $pc and executing the
-> next ret instruction, the program jumps to $ra, which is in the same
-> function currently executing, which results in an infinite loop.
-> This commit reverses the two action. Firstly, $ra is updated with the
-> address of the next instruction after $pc, and sets $pc to the address
-> read from the jump vector table.
 
-This is unlikely to be correct in the case the vector table read faults,
-leaving $ra updated.
 
-I guess this got broken with CF_PCREL.  Anyway, the solution is to use a temporary...
+On 2/6/24 12:40, Alexandre Ghiti wrote:
+> Currently, the initrd is placed at 128MB, which overlaps with the kernel
+> when it is large (for example syzbot kernels are). From the kernel side,
+> there is no reason we could not push the initrd further away in memory
+> to accommodate large kernels, so move the initrd at 512MB when possible.
+> 
+> The ideal solution would have been to place the initrd based on the
+> kernel size but we actually can't since the bss size is not known when
+> the image is loaded by load_image_targphys_as() and the initrd would
+> then overlap with this section.
+> 
+> Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
+> ---
 
-> -    /*
-> -     * Update pc to current for the non-unwinding exception
-> -     * that might come from cpu_ld*_code() in the helper.
-> -     */
-> -    gen_update_pc(ctx, 0);
-> -    gen_helper_cm_jalt(cpu_pc, cpu_env, tcg_constant_i32(a->index));
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-... here and then ...
-
-> @@ -307,6 +300,13 @@ static bool trans_cm_jalt(DisasContext *ctx, arg_cm_jalt *a)
->           gen_set_gpr(ctx, xRA, succ_pc);
->       }
+> 
+> Changes in v2:
+> - Fix typos in commit log (Daniel) and title
+> - Added to the commit log why using the kernel size does not work
+>    (Daniel)
+> 
+>   hw/riscv/boot.c | 12 ++++++------
+>   1 file changed, 6 insertions(+), 6 deletions(-)
+> 
+> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+> index 0ffca05189..9a367af2fa 100644
+> --- a/hw/riscv/boot.c
+> +++ b/hw/riscv/boot.c
+> @@ -188,13 +188,13 @@ static void riscv_load_initrd(MachineState *machine, uint64_t kernel_entry)
+>        * kernel is uncompressed it will not clobber the initrd. However
+>        * on boards without much RAM we must ensure that we still leave
+>        * enough room for a decent sized initrd, and on boards with large
+> -     * amounts of RAM we must avoid the initrd being so far up in RAM
+> -     * that it is outside lowmem and inaccessible to the kernel.
+> -     * So for boards with less  than 256MB of RAM we put the initrd
+> -     * halfway into RAM, and for boards with 256MB of RAM or more we put
+> -     * the initrd at 128MB.
+> +     * amounts of RAM, we put the initrd at 512MB to allow large kernels
+> +     * to boot.
+> +     * So for boards with less than 1GB of RAM we put the initrd
+> +     * halfway into RAM, and for boards with 1GB of RAM or more we put
+> +     * the initrd at 512MB.
+>        */
+> -    start = kernel_entry + MIN(mem_size / 2, 128 * MiB);
+> +    start = kernel_entry + MIN(mem_size / 2, 512 * MiB);
 >   
-
-... copy the temp to cpu_pc here.
-
->       tcg_gen_lookup_and_goto_ptr();
->       ctx->base.is_jmp = DISAS_NORETURN;
->       return true;
-
-
-
-r~
+>       size = load_ramdisk(filename, start, mem_size - start);
+>       if (size == -1) {
 
