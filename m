@@ -4,87 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F195BC4828D
-	for <qemu-riscv@archiver.kernel.org>; Tue,  6 Feb 2024 15:41:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69ED7C48297
+	for <qemu-riscv@archiver.kernel.org>; Tue,  6 Feb 2024 16:29:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rXNZ7-0003OR-Sf; Tue, 06 Feb 2024 10:40:53 -0500
+	id 1rXOKC-0002Av-SJ; Tue, 06 Feb 2024 11:29:32 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
- id 1rXNZ4-0003Ns-D3
- for qemu-riscv@nongnu.org; Tue, 06 Feb 2024 10:40:51 -0500
-Received: from mail-qk1-x72f.google.com ([2607:f8b0:4864:20::72f])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1rXOKB-0002AW-T4
+ for qemu-riscv@nongnu.org; Tue, 06 Feb 2024 11:29:32 -0500
+Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
- id 1rXNZ2-0000wZ-CX
- for qemu-riscv@nongnu.org; Tue, 06 Feb 2024 10:40:49 -0500
-Received: by mail-qk1-x72f.google.com with SMTP id
- af79cd13be357-783f49812aeso221723385a.2
- for <qemu-riscv@nongnu.org>; Tue, 06 Feb 2024 07:40:47 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1rXOKA-0001hc-5K
+ for qemu-riscv@nongnu.org; Tue, 06 Feb 2024 11:29:31 -0500
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-33b4b0a3bddso235921f8f.2
+ for <qemu-riscv@nongnu.org>; Tue, 06 Feb 2024 08:29:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1707234047; x=1707838847;
- darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=hLbg+SEBXldc/aM928IlX5UZSpp0lFtjrNh1hEw18hw=;
- b=XATGJ2Q5au0IZjtKL1YBb6d9P8fOIDgvRodeFBbzCQSuLT4hukienprLNuJZxam/TR
- N7/DlOgU4C7yXWzJPEvcHwX8Iqf8obMziFGFD9foYots/uGbn+rPQJdjTf/elVzKz+8U
- nFRWFp+SbBuU9WHw7hVKrqC4SKI233CIBZMgknI9aocJYUPbvXDtjKRorSyN0NkfcuFg
- OsV3uBsp78GsmPur2qRXWJdzPZ62/WFfmfnrCrvnZ1ysg4qnj5g2WIDrRD1iVkBBo0zC
- t+dYao2r+ZQF+0E1Petp0ItzqjwWrmYX/lvL0Rap2omueWuF92MKxFiepekmlFce3u66
- aYxQ==
+ d=ventanamicro.com; s=google; t=1707236968; x=1707841768; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=S0uANY8i4xWI7Qyl8WOf3ZMO6SrEUqaO4OLMFDJI5qM=;
+ b=RkWWbDGxED5hm4UzcEwYbxIuk3YHBtF+Oz7wKGbe5Twmnf87EZS1EqO29zYCDxgc+N
+ m3baaG9HroHWgUeD2PWooAI67OlMh1/VjbGfr1TVSA+wYtp21tXqqrYG3U3BX5ULKq17
+ 8nLdt9fLBW/PUQh16u5AitW7y+x1PBUm0NzlCMQq8SFXphwKYEeCNsHN9oq88eZqHfaZ
+ 39uJq05tgZW/pYdnvM1b9bJohxuTm8XjfVGGsBGWhmeWTTqEY/taCIehKxnsK+uR3EC9
+ 4IHDAVhgpaEOblxtwARnSoEUwyQY8tDsQpYaNVwwPZb14HsqAiU/+G3zNkejMeESHn9h
+ eotw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707234047; x=1707838847;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=hLbg+SEBXldc/aM928IlX5UZSpp0lFtjrNh1hEw18hw=;
- b=h45uH5dyHfEoCCQ0bPxtzEwmCzLeRGvnpb5HFUmNoQi+8HnoS0wVQK9/MZQ3zYYkaj
- M3WWOv91fBhDmaOXas1GIwA6IvLQxhj/7wYgZkyVlvNaG7F5vo+0W2mqf0MaBA2bwuGb
- HXwJlOkVklJAOjGYy5BeyyNV1yPioSzGydx5/FB+Mr1e5nBlLiwt7sdOL8cMwoeMVG8d
- hvFYKGd5PpocfAYPRmUSFo3+TqIl+VEt5VnkNdc4OPNuV4St6MdJPclI9yvth9zCdtjm
- /xQzy/tSWxhoQRHopTEkGRkAxh7DqO8n+trTgKAkr+LpYFe9se3cuioUg71N+oRirNjV
- 3Iyw==
-X-Gm-Message-State: AOJu0Yy6qTcoYXvFV9+dCdRwcmlHnOcMYuIR/F8NMkMXCDOCaobvRXxg
- JBAklUohlV9LtiE9VD9Bc3j67WrW09NM6WM5KxGk/mv6sGm9QRom6Wt0xNdwFqc=
-X-Google-Smtp-Source: AGHT+IGI+EFmfb9CyK33aqTkOXtXjLRcG8Zutmqjv9tQ3kvgCqBcPphV04XvPCN2DxRNNQ+QyNDjWg==
-X-Received: by 2002:a05:620a:4550:b0:783:d83b:f588 with SMTP id
- u16-20020a05620a455000b00783d83bf588mr4023642qkp.17.1707234046953; 
- Tue, 06 Feb 2024 07:40:46 -0800 (PST)
+ d=1e100.net; s=20230601; t=1707236968; x=1707841768;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=S0uANY8i4xWI7Qyl8WOf3ZMO6SrEUqaO4OLMFDJI5qM=;
+ b=EqRzsmd0c25e2ABJUMppy0UIsJLwX9t6llu9NawXOwGEbl4l2ltsAtIob1Ji8NZpZN
+ 0LoGCZcVoGyh2WPnG3Us0NVQE5kufZ/U4z3+L2chBCbMbfbw+FHnBvPgrY6K4UXw9rCk
+ 94rXAsmh8MMx7KxVuug0S4KTNIuccjiI0+MDKpuOTmdBemWqIzZB9Oko/9WzRL2Su60o
+ kNdL+5DiGL9xEuj5oUIVOA63aEeTyXrOUJjHHVzGb+pxJgpR/6lPWsERPqZumO65jLYi
+ AhzCaH5d6K8Ldf+Tuj/1vgnn4FuB1M8L8ZnEIRoo+E9CtH5WrlDWQTib2Q2qD1wGbmYo
+ 8g9Q==
+X-Gm-Message-State: AOJu0YyUuSbfGQBbRk8TCC73OZO+WVO4W+pJx9pG27f8Ho4R2yfunZRb
+ NoXEMRBLImNIM1ycfAGxkoK/DMfbAvRfQCucQUYSczozLv5uJw7+QGdvb0arS4Y=
+X-Google-Smtp-Source: AGHT+IE/TGcbPIDkltKC28VL4OQV74M0wTVgt9NvGt1DPDuLfll/CQgB8WmXtqRk0yaVPNG3sPQLdQ==
+X-Received: by 2002:a05:6000:183:b0:33a:fe30:b8b4 with SMTP id
+ p3-20020a056000018300b0033afe30b8b4mr1801054wrx.39.1707236968014; 
+ Tue, 06 Feb 2024 08:29:28 -0800 (PST)
 X-Forwarded-Encrypted: i=0;
- AJvYcCUjcqmQvqXFp/Ti14xA9qhvhu/iwP4t90OjzoCcR92GLqBjMl2zHYsbozbvvELtRNhpb5D9h91XtvahO55ZIVB9fCS31YZCp6qUoorJZFW7pwHYnHl8XoQjpCCRFZ18WinNmzLIoOo1C2Ymaby9dlRCSG6lGNx1VXHkd+O5B4zVDBA9CRh82HiFQ0qklKym/0ZDftClRO6FH3difuw79fchjKg/rvhHGeUMQSB03O4VHtvpHdgh+1iWi9wcDPSTquuQDmYDdZ7w3YcSLdtSWN+2y5g4/g66nJcmMRtw
-Received: from alex-rivos.ba.rivosinc.com
- (amontpellier-656-1-456-62.w92-145.abo.wanadoo.fr. [92.145.124.62])
+ AJvYcCWxjHydBf9l1vvAphjTmX8w8aSLI3V77ChNrF82Fsac84ztPSJyNhC9vA871r+/zdMLJBZ1VmNsayoEuxzWKYScuUinS6JrNeAPNT8B8zjYhmkE6yUwIAoM580cViBBLtKSV27uPf9mBreO1uoE0sMu5jWkJjbRNbQU3jrcClyNEI/7pZwH6SYBX7kx3E3wuSQ/jea0lQg8TpzaUUKaukdcscBYI70b+ArJmQPDoxYsFXs2qmvykFKJIp9IP6vkzb1gYv+GHOf/pRbbEPRaFFx7Ju/Jd6D/aS1p
+Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
+ [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
  by smtp.gmail.com with ESMTPSA id
- w25-20020a05620a095900b0078445f63dc4sm994875qkw.60.2024.02.06.07.40.45
+ j3-20020a5d4523000000b0033b17880eacsm2473722wra.56.2024.02.06.08.29.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Feb 2024 07:40:46 -0800 (PST)
-From: Alexandre Ghiti <alexghiti@rivosinc.com>
-To: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: Alexandre Ghiti <alexghiti@rivosinc.com>
-Subject: [PATCH v2] hw: riscv: Allow large kernels to boot by moving the
- initrd further away in RAM
-Date: Tue,  6 Feb 2024 16:40:42 +0100
-Message-Id: <20240206154042.514698-1-alexghiti@rivosinc.com>
-X-Mailer: git-send-email 2.39.2
+ Tue, 06 Feb 2024 08:29:27 -0800 (PST)
+Date: Tue, 6 Feb 2024 17:29:26 +0100
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Vadim Shakirov <vadim.shakirov@syntacore.com>
+Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org
+Subject: Re: [PATCH v4] target/riscv: mcountinhibit, mcounteren, scounteren,
+ hcounteren is 32-bit
+Message-ID: <20240206-f53ed33cab0ae364e10d9b6b@orel>
+References: <20240202113919.18236-1-vadim.shakirov@syntacore.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::72f;
- envelope-from=alexghiti@rivosinc.com; helo=mail-qk1-x72f.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240202113919.18236-1-vadim.shakirov@syntacore.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::42e;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x42e.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,52 +100,101 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Currently, the initrd is placed at 128MB, which overlaps with the kernel
-when it is large (for example syzbot kernels are). From the kernel side,
-there is no reason we could not push the initrd further away in memory
-to accommodate large kernels, so move the initrd at 512MB when possible.
+On Fri, Feb 02, 2024 at 02:39:19PM +0300, Vadim Shakirov wrote:
+> mcountinhibit, mcounteren, scounteren and hcounteren must always be 32-bit
+> by privileged spec
+> 
+> Signed-off-by: Vadim Shakirov <vadim.shakirov@syntacore.com>
 
-The ideal solution would have been to place the initrd based on the
-kernel size but we actually can't since the bss size is not known when
-the image is loaded by load_image_targphys_as() and the initrd would
-then overlap with this section.
+You should have added my and Alistair's tags when reposting.
+And you should CC previous reviewers.
 
-Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
----
+Anyway, here's mine again
 
-Changes in v2:
-- Fix typos in commit log (Daniel) and title
-- Added to the commit log why using the kernel size does not work
-  (Daniel)
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 
- hw/riscv/boot.c | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+drew
 
-diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-index 0ffca05189..9a367af2fa 100644
---- a/hw/riscv/boot.c
-+++ b/hw/riscv/boot.c
-@@ -188,13 +188,13 @@ static void riscv_load_initrd(MachineState *machine, uint64_t kernel_entry)
-      * kernel is uncompressed it will not clobber the initrd. However
-      * on boards without much RAM we must ensure that we still leave
-      * enough room for a decent sized initrd, and on boards with large
--     * amounts of RAM we must avoid the initrd being so far up in RAM
--     * that it is outside lowmem and inaccessible to the kernel.
--     * So for boards with less  than 256MB of RAM we put the initrd
--     * halfway into RAM, and for boards with 256MB of RAM or more we put
--     * the initrd at 128MB.
-+     * amounts of RAM, we put the initrd at 512MB to allow large kernels
-+     * to boot.
-+     * So for boards with less than 1GB of RAM we put the initrd
-+     * halfway into RAM, and for boards with 1GB of RAM or more we put
-+     * the initrd at 512MB.
-      */
--    start = kernel_entry + MIN(mem_size / 2, 128 * MiB);
-+    start = kernel_entry + MIN(mem_size / 2, 512 * MiB);
- 
-     size = load_ramdisk(filename, start, mem_size - start);
-     if (size == -1) {
--- 
-2.39.2
-
+> ---
+>  target/riscv/cpu.h     |  8 ++++----
+>  target/riscv/machine.c | 16 ++++++++--------
+>  2 files changed, 12 insertions(+), 12 deletions(-)
+> 
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 5138187727..cf1867a6e2 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -271,7 +271,7 @@ struct CPUArchState {
+>      target_ulong hstatus;
+>      target_ulong hedeleg;
+>      uint64_t hideleg;
+> -    target_ulong hcounteren;
+> +    uint32_t hcounteren;
+>      target_ulong htval;
+>      target_ulong htinst;
+>      target_ulong hgatp;
+> @@ -334,10 +334,10 @@ struct CPUArchState {
+>       */
+>      bool two_stage_indirect_lookup;
+>  
+> -    target_ulong scounteren;
+> -    target_ulong mcounteren;
+> +    uint32_t scounteren;
+> +    uint32_t mcounteren;
+>  
+> -    target_ulong mcountinhibit;
+> +    uint32_t mcountinhibit;
+>  
+>      /* PMU counter state */
+>      PMUCTRState pmu_ctrs[RV_MAX_MHPMCOUNTERS];
+> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+> index 72fe2374dc..a4d47ec17e 100644
+> --- a/target/riscv/machine.c
+> +++ b/target/riscv/machine.c
+> @@ -79,14 +79,14 @@ static bool hyper_needed(void *opaque)
+>  
+>  static const VMStateDescription vmstate_hyper = {
+>      .name = "cpu/hyper",
+> -    .version_id = 3,
+> -    .minimum_version_id = 3,
+> +    .version_id = 4,
+> +    .minimum_version_id = 4,
+>      .needed = hyper_needed,
+>      .fields = (const VMStateField[]) {
+>          VMSTATE_UINTTL(env.hstatus, RISCVCPU),
+>          VMSTATE_UINTTL(env.hedeleg, RISCVCPU),
+>          VMSTATE_UINT64(env.hideleg, RISCVCPU),
+> -        VMSTATE_UINTTL(env.hcounteren, RISCVCPU),
+> +        VMSTATE_UINT32(env.hcounteren, RISCVCPU),
+>          VMSTATE_UINTTL(env.htval, RISCVCPU),
+>          VMSTATE_UINTTL(env.htinst, RISCVCPU),
+>          VMSTATE_UINTTL(env.hgatp, RISCVCPU),
+> @@ -354,8 +354,8 @@ static const VMStateDescription vmstate_jvt = {
+>  
+>  const VMStateDescription vmstate_riscv_cpu = {
+>      .name = "cpu",
+> -    .version_id = 9,
+> -    .minimum_version_id = 9,
+> +    .version_id = 10,
+> +    .minimum_version_id = 10,
+>      .post_load = riscv_cpu_post_load,
+>      .fields = (const VMStateField[]) {
+>          VMSTATE_UINTTL_ARRAY(env.gpr, RISCVCPU, 32),
+> @@ -398,9 +398,9 @@ const VMStateDescription vmstate_riscv_cpu = {
+>          VMSTATE_UINTTL(env.mtval, RISCVCPU),
+>          VMSTATE_UINTTL(env.miselect, RISCVCPU),
+>          VMSTATE_UINTTL(env.siselect, RISCVCPU),
+> -        VMSTATE_UINTTL(env.scounteren, RISCVCPU),
+> -        VMSTATE_UINTTL(env.mcounteren, RISCVCPU),
+> -        VMSTATE_UINTTL(env.mcountinhibit, RISCVCPU),
+> +        VMSTATE_UINT32(env.scounteren, RISCVCPU),
+> +        VMSTATE_UINT32(env.mcounteren, RISCVCPU),
+> +        VMSTATE_UINT32(env.mcountinhibit, RISCVCPU),
+>          VMSTATE_STRUCT_ARRAY(env.pmu_ctrs, RISCVCPU, RV_MAX_MHPMCOUNTERS, 0,
+>                               vmstate_pmu_ctr_state, PMUCTRState),
+>          VMSTATE_UINTTL_ARRAY(env.mhpmevent_val, RISCVCPU, RV_MAX_MHPMEVENTS),
+> -- 
+> 2.34.1
+> 
+> 
 
