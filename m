@@ -4,92 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA00AC48297
-	for <qemu-riscv@archiver.kernel.org>; Tue,  6 Feb 2024 11:35:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8452AC4828D
+	for <qemu-riscv@archiver.kernel.org>; Tue,  6 Feb 2024 13:19:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rXJjU-0005XX-Ry; Tue, 06 Feb 2024 06:35:21 -0500
+	id 1rXLMQ-0003gB-G7; Tue, 06 Feb 2024 08:19:39 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rXJjS-0005X0-Kh
- for qemu-riscv@nongnu.org; Tue, 06 Feb 2024 06:35:18 -0500
-Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
+ (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
+ id 1rXLMO-0003fX-18
+ for qemu-riscv@nongnu.org; Tue, 06 Feb 2024 08:19:36 -0500
+Received: from mail-pg1-x52d.google.com ([2607:f8b0:4864:20::52d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rXJjQ-00012K-Na
- for qemu-riscv@nongnu.org; Tue, 06 Feb 2024 06:35:18 -0500
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-1d73066880eso47318695ad.3
- for <qemu-riscv@nongnu.org>; Tue, 06 Feb 2024 03:35:16 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
+ id 1rXLMH-0005y5-Lu
+ for qemu-riscv@nongnu.org; Tue, 06 Feb 2024 08:19:35 -0500
+Received: by mail-pg1-x52d.google.com with SMTP id
+ 41be03b00d2f7-5d3912c9a83so4259176a12.3
+ for <qemu-riscv@nongnu.org>; Tue, 06 Feb 2024 05:19:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1707219315; x=1707824115; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=viOxfD0JcNPJSOpjzRoxX1cSnRwbLRV5nd1z0L0MWGE=;
- b=cxbGo1EyBfmYWD5Vj7kvSuCzxviNXWcK4IQp1QNOQIN/LzzoZi0sb9uPAHzncDx8rv
- nn4vUrkpqtTdNpEQD9BGl7cQ8bncuXwjWsZC56RX8hx7zNhgDsO4MfPMmEKHn8o2nmL+
- KmaJ7M32nTvSf9FV+9LazMQ2OXKVZ3+4kAfT1Q+Jtrw3pSi3rWW/WVGPpQiBjhHxqYQR
- t0ipeBcY5WEfy8dLarqQaEULWTtWZ3XUEWDykiEPlVuf0xny8TOfvVvxtdA3taLlg7Kq
- kiax63WF36hEd8GHtA0MHrxI3Q8sBVurcVbrUOEc+EDlDUm2b4mKwHEmo1nUQBNVPgbk
- wAVA==
+ d=sifive.com; s=google; t=1707225567; x=1707830367; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=GMvi22rkrBmsZVwZknytn23922K4Y1Z689E1EhIiGOc=;
+ b=Hcqr4uCGAGuDP70DhZPuPQaTfMGcqFW90vsvqtVLOKqsatxnEtgxZIUxKK0VvLzabL
+ 5fYypeN2fPq2SOx4PIjdQ8gXfKkpn5Doo9UDR/Ft9pIeQz2/VCDluhZ7v7JUmbhoOJPX
+ 1CFf2GyfaCXeQKmKxcrmJ7K6FuL+hFXxwIKeD7WbraYOLFBusE+LZM/XjmB/2/Y0MbEh
+ 2RVhmbQtTvkLoCeTxuMPmSzq2OM54h0LvtTNlcA0/4Rx1CPVPfyvUKQm4D7lmqfy6sjH
+ lq7juArQT2wJ2ZmfMMhTkDBotj3P9VkULOFOjHD9B/VU6O3uqu7MXfrEsGfmw/BTcVob
+ lwng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707219315; x=1707824115;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=viOxfD0JcNPJSOpjzRoxX1cSnRwbLRV5nd1z0L0MWGE=;
- b=gO4C4PSD7IMWdDhxnq6W6SPhMXo/euyOQQdVU+Uzkd7Yf9VVckfeC1KqsaoqvsxMFW
- Pcgow+s4wCN/dFAnDiLLI+jss3E4k9CwxGRqlJz2NtV6R1m0pb4OlhV+uxBNBhEebCKC
- RT+44a4Cx24Mz1GPjp/bfCWR4lCewzrlTPp+UVDJz5ZjdcC/WDIbzp6nSV3MldB7mCbc
- 93uh2Hb2Bkf5yi66PizEWsq8IMGHknGo7Wz5uGPa+OOAhStNPMf3u0z1FkvL4MWgGnTT
- eNdBig1tyFTm0/pZGX/QIq2RapcZoOeqI5K0msLeY06jT2Gp++pC6eD2Xloo0ED9T9ZS
- ryLw==
-X-Gm-Message-State: AOJu0Yy4ej4Ly59bWzQIg1Lg0g3Y7MWbpudij/pfpWbRobxfPMeCbqqt
- QaaFe9meVmAmcbBMvDq6HzDQxR/7BINELWfeeTNwgza0VZMjSioj5B+z+35HpaY=
-X-Google-Smtp-Source: AGHT+IEVYidMT2gA1ZsliW7LUxCyOWXEPh+dRSU5aLlrSpJdP4WrWewqnjmGmDIhpgBZv6GLdvF43A==
-X-Received: by 2002:a17:902:c101:b0:1d9:464b:688d with SMTP id
- 1-20020a170902c10100b001d9464b688dmr1109570pli.25.1707219315071; 
- Tue, 06 Feb 2024 03:35:15 -0800 (PST)
+ d=1e100.net; s=20230601; t=1707225567; x=1707830367;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=GMvi22rkrBmsZVwZknytn23922K4Y1Z689E1EhIiGOc=;
+ b=Plutj5+L/VhmYTRQcN6Z5JjCbD6RmDM9F22H+J4YeiU7JlnuTNp9ynbV2b4sSqUUsz
+ 3xQrtzgQk6jpq7M6PLJT+VEgF1mafC5tZdJUK4lIPx4OHql2kJdZE10hSe5N79Fox74i
+ xT7vS6tRWzr8jpQrdsakysc+7lUEHnRBve4hNn16HaQ6ONvH10tNNInpdPXlp8VeU9TU
+ hOfLYA65wOJ0y67XLe3oOp+dpqYPlaOb5WIqCL/zmG9WMukWsKwDZCp58k078eK+Qvhx
+ fOrEbLpLrbN2RADJxd/61YkcFvolgp9ykplb5oXBMfkSNYGWfg2gLcSmIt6w+pnVfSXa
+ a0lw==
+X-Gm-Message-State: AOJu0YwPv3w+tgvl5WrpeZaupI58r3wJxat0ma4sbXYciyiUEyNyXog5
+ QbumAXXLXLAKJGsbNeyPnATAO55t1SjeL2LgS1qkAEwwJY2ogOopiEFMN3cHIeY=
+X-Google-Smtp-Source: AGHT+IGK05hxnLosC4RZVktCIsUlf65XRFm/EGNDcVQpcrKir8UrYZ5T/PAeDySXuKiGn46NSVD+mg==
+X-Received: by 2002:a05:6a00:9a0:b0:6db:d59c:a5b7 with SMTP id
+ u32-20020a056a0009a000b006dbd59ca5b7mr3317383pfg.20.1707225567203; 
+ Tue, 06 Feb 2024 05:19:27 -0800 (PST)
 X-Forwarded-Encrypted: i=0;
- AJvYcCX+/Q+NvWODeGevEeqnhvR9l4GYZKs5pBtsIjpxkKMBbgaDmL/7BccgQdMi/Us6aTbWoapCsgQABp/X2XLuLQvUHCxQfM6Dr/nLDFw5fcgZAiaAAC9TS6xhJdQUz4VRvhmCbjFRdnwPrUYSOFuyqlpMzQUSIBzwtlAIo9eYycMlwtaCF9OJJoKYW8yXx/y8suiuIpcEs3gNvN+SlPjV9moOUa3hYhH6IEGxrpS39VnRhckPJzGjj/bDTypg2WwEMiRG
-Received: from [192.168.68.110] ([177.94.15.159])
+ AJvYcCUjUImBatw7bAKJ5cUfYtKwc2S7NnfFZOd0Pl5sDSdoys1vyScsAAHFP0A5s6j1zuwi2yuetV9kv2mU3ujsrptfE2UwCeF/DgTMdMLk05GQhM078Be248qo/y+U2FXvE02ufdi+WO9BKzq54ZPiTQ88q1u4KHW/PhqeY45ehLHTOTdklpD2Fz7IC0imdQ+b3zxmASjgmzbg2jmHeHt6CUAEptRkpQz1ply0YFg+FHxyZ6zMYITHrHEcnYSwoqeLQE6nYDLbWWVhDzB6HWWK9qnxYsRG+ZN2Q1nIPt7Qxw6z4s4lkmHgAxleFuOzaL/awwfDz0wscDDLKGnzTkxljkA2KD5XQThDZ2VjBqTJrvEaRyNT
+Received: from hsinchu16.internal.sifive.com
+ (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
  by smtp.gmail.com with ESMTPSA id
- v11-20020a170902d08b00b001d8dbb867b1sm1645643plv.179.2024.02.06.03.35.12
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 06 Feb 2024 03:35:14 -0800 (PST)
-Message-ID: <e170e285-9e53-4e73-9179-4c40854177e5@ventanamicro.com>
-Date: Tue, 6 Feb 2024 08:35:10 -0300
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] hw: riscv: Allow large kernels to boot by moving the
- initrd further way in RAM
-To: Alexandre Ghiti <alexghiti@rivosinc.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ e11-20020aa798cb000000b006e04ddf97f7sm1837105pfm.107.2024.02.06.05.19.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 06 Feb 2024 05:19:26 -0800 (PST)
+From: Jason Chien <jason.chien@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Jason Chien <jason.chien@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-References: <20240205070040.367541-1-alexghiti@rivosinc.com>
- <624964b1-d0e7-42b2-b4c2-690107882d01@ventanamicro.com>
- <CAHVXubicir4xetoFxmESNW=jjM7gUrkwwaeLyEiSGrB7m1nyTQ@mail.gmail.com>
- <CAHVXubixZe9RfCow7t6Xq4T+62sj7-AGKmwG2K8JZUD2TfFmkA@mail.gmail.com>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <CAHVXubixZe9RfCow7t6Xq4T+62sj7-AGKmwG2K8JZUD2TfFmkA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Junqiang Wang <wangjunqiang@iscas.ac.cn>,
+ Richard Henderson <richard.henderson@linaro.org>
+Subject: [PATCH] target/riscv: Update $pc after linking to $ra in
+ trans_cm_jalt()
+Date: Tue,  6 Feb 2024 21:18:42 +0800
+Message-ID: <20240206131911.10998-1-jason.chien@sifive.com>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52d;
+ envelope-from=jason.chien@sifive.com; helo=mail-pg1-x52d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01,
+ T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,133 +101,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+The original implementation sets $pc to the address read from the jump
+vector table first and links $ra with the address of the next instruction
+after the updated $pc. After jumping to the updated $pc and executing the
+next ret instruction, the program jumps to $ra, which is in the same
+function currently executing, which results in an infinite loop.
+This commit reverses the two action. Firstly, $ra is updated with the
+address of the next instruction after $pc, and sets $pc to the address
+read from the jump vector table.
 
+Signed-off-by: Jason Chien <jason.chien@sifive.com>
+---
+ target/riscv/insn_trans/trans_rvzce.c.inc | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
-On 2/6/24 06:41, Alexandre Ghiti wrote:
-> Hi Daniel,
-> 
-> On Mon, Feb 5, 2024 at 2:36 PM Alexandre Ghiti <alexghiti@rivosinc.com> wrote:
->>
->> Hi Daniel,
->>
->> On Mon, Feb 5, 2024 at 1:17 PM Daniel Henrique Barboza
->> <dbarboza@ventanamicro.com> wrote:
->>>
->>>
->>>
->>> On 2/5/24 04:00, Alexandre Ghiti wrote:
->>>> Currently, the initrd is placed at 128MB, which overlaps with the kernel
->>>> when it is large (for example syzbot kernels are). From the kernel side,
->>>> there is no reason we could not push the initrd further away in memory
->>>> to accomodate large kernels, so move the initrd at 512MB when possible.
->>>
->>> typo: accommodate
->>>
->>>>
->>>> Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
->>>> ---
->>>
->>> Patch looks good - just tested with an Ubuntu guest and nothing bad happened.
->>>
->>> But I wonder ... what if there's an even bigger kernel we have to deal with?
->>> Move initrd even further away to fit it in?
->>>
->>> Instead of making assumptions about where initrd starts, we could grab the kernel
->>> size loaded in the board and use it as a reference. This would be done by storing
->>> the return of load_elf_ram_sym/load_uimage_as/load_image_targphys_as from
->>> riscv_load_kernel() an passing as argument to riscv_load_initrd().
-> 
-> So this does not work because the size returned by
-> load_image_targphys_as() does not take into account the size of the
-> BSS sections (and I guess other NOBITS sections) and then we end up
-> loading the initrd there. I'm a bit surprised though because arm64
-> does just that https://elixir.bootlin.com/qemu/latest/source/hw/arm/boot.c#L1034.
-> I also tried using the highaddr parameter, but that gives the same
-> result. We could parse the Image header (a PE header) to get the
-> "Virtual Size" of the .data section, but I did not find any PE header
-> parser in qemu, so that would be overkill?
-> 
-> Any idea?
+diff --git a/target/riscv/insn_trans/trans_rvzce.c.inc b/target/riscv/insn_trans/trans_rvzce.c.inc
+index 8d8a64f493..a185e2315f 100644
+--- a/target/riscv/insn_trans/trans_rvzce.c.inc
++++ b/target/riscv/insn_trans/trans_rvzce.c.inc
+@@ -293,13 +293,6 @@ static bool trans_cm_jalt(DisasContext *ctx, arg_cm_jalt *a)
+ {
+     REQUIRE_ZCMT(ctx);
+ 
+-    /*
+-     * Update pc to current for the non-unwinding exception
+-     * that might come from cpu_ld*_code() in the helper.
+-     */
+-    gen_update_pc(ctx, 0);
+-    gen_helper_cm_jalt(cpu_pc, cpu_env, tcg_constant_i32(a->index));
+-
+     /* c.jt vs c.jalt depends on the index. */
+     if (a->index >= 32) {
+         TCGv succ_pc = dest_gpr(ctx, xRA);
+@@ -307,6 +300,13 @@ static bool trans_cm_jalt(DisasContext *ctx, arg_cm_jalt *a)
+         gen_set_gpr(ctx, xRA, succ_pc);
+     }
+ 
++    /*
++     * Update pc to current for the non-unwinding exception
++     * that might come from cpu_ld*_code() in the helper.
++     */
++    gen_update_pc(ctx, 0);
++    gen_helper_cm_jalt(cpu_pc, cpu_env, tcg_constant_i32(a->index));
++
+     tcg_gen_lookup_and_goto_ptr();
+     ctx->base.is_jmp = DISAS_NORETURN;
+     return true;
+-- 
+2.43.0
 
-
-hmm that's unfortunate. The size retrieval in these cases might have to do with
-missing information from the image header, and we can't control that because we're
-not generating the images. It would be better if they return '0' in these cases
-(then we could special case them in the math), but if it's a non-zero return then
-there's not much we can do.
-
-If we can't reliably get the kernel size in RAM then I believe your patch is going
-to make it do (until we want to load an even bigger kernel hehe). Can you please
-document these findings (i.e. we can't retrieve the kernel size reliably) in the
-commit msg?
-
-
-Thanks,
-
-Daniel
-
-> 
-> Thanks,
-> 
-> Alex
-> 
->>>
->>> initrd start would then be:
->>>
->>>       start = kernel_entry + MIN(mem_size / 2, kernel_size);
->>>
->>> However, I believe we would like to keep the existing 128Mb minimum initrd start,
->>> even if the kernel is smaller than 128Mb, to avoid breaking existing configs that
->>> might be making this assumption. initrd start would then become:
->>>
->>>
->>>       start = kernel_entry + MIN(mem_size / 2, MAX(kernel_size, 128 * MiB));
->>
->> Great, I agree with you, thanks for the pointers. I'll just align the
->> size on a 2MB boundary to make sure the kernel mapping (which in the
->> case of Linux uses PMD) does not overlap with the initrd.
->>
->> I'll get back soon with a v2.
->>
->> Thanks again,
->>
->> Alex
->>
->>>
->>>
->>>
->>> Thanks,
->>>
->>>
->>>
->>> Daniel
->>>
->>>
->>>>    hw/riscv/boot.c | 12 ++++++------
->>>>    1 file changed, 6 insertions(+), 6 deletions(-)
->>>>
->>>> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
->>>> index 0ffca05189..9a367af2fa 100644
->>>> --- a/hw/riscv/boot.c
->>>> +++ b/hw/riscv/boot.c
->>>> @@ -188,13 +188,13 @@ static void riscv_load_initrd(MachineState *machine, uint64_t kernel_entry)
->>>>         * kernel is uncompressed it will not clobber the initrd. However
->>>>         * on boards without much RAM we must ensure that we still leave
->>>>         * enough room for a decent sized initrd, and on boards with large
->>>> -     * amounts of RAM we must avoid the initrd being so far up in RAM
->>>> -     * that it is outside lowmem and inaccessible to the kernel.
->>>> -     * So for boards with less  than 256MB of RAM we put the initrd
->>>> -     * halfway into RAM, and for boards with 256MB of RAM or more we put
->>>> -     * the initrd at 128MB.
->>>> +     * amounts of RAM, we put the initrd at 512MB to allow large kernels
->>>> +     * to boot.
->>>> +     * So for boards with less than 1GB of RAM we put the initrd
->>>> +     * halfway into RAM, and for boards with 1GB of RAM or more we put
->>>> +     * the initrd at 512MB.
->>>>         */
->>>> -    start = kernel_entry + MIN(mem_size / 2, 128 * MiB);
->>>> +    start = kernel_entry + MIN(mem_size / 2, 512 * MiB);
->>>>
->>>>        size = load_ramdisk(filename, start, mem_size - start);
->>>>        if (size == -1) {
 
