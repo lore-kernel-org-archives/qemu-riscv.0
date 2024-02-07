@@ -4,64 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE1B2C4828F
-	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Feb 2024 16:39:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EE9EC4829C
+	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Feb 2024 16:39:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rXkwL-0002tK-Jo; Wed, 07 Feb 2024 11:38:25 -0500
+	id 1rXkwS-0002ze-0d; Wed, 07 Feb 2024 11:38:32 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rXkwI-0002q3-V3
- for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 11:38:22 -0500
-Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
+ id 1rXkwQ-0002xO-5Z
+ for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 11:38:30 -0500
+Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rXkwB-00066Y-6E
- for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 11:38:22 -0500
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-40f033c2e30so7443625e9.0
- for <qemu-riscv@nongnu.org>; Wed, 07 Feb 2024 08:38:14 -0800 (PST)
+ id 1rXkwO-0006Bc-Bm
+ for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 11:38:29 -0500
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-33b535c5d0fso175453f8f.0
+ for <qemu-riscv@nongnu.org>; Wed, 07 Feb 2024 08:38:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1707323893; x=1707928693; darn=nongnu.org;
+ d=linaro.org; s=google; t=1707323905; x=1707928705; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JB4Epfg8EtaZj5aKH+XSQiP5F2xLNHDHewznk8QZ/uQ=;
- b=S1/XuH9hhVCF17vL09deGuOPCEvDKTUWFGonrGvtfAQlnfYnDHLG9gurWZBPzu93JD
- mMAXEk2QzuU5g7qovS1sxb/IBZ38/UqeF9nPK1QvnqmtebkjusizrjWaC3L0/E9mnNdw
- VeCqeIMY1IwdvbmhNq+IEuepGT3YFZhiEBqcjGonyt8Cf8c5DiThSG960t3535KkT6ZX
- oUqg3s5Sf69QHoZYUJfAYXdTCceHa9Zb1qKP+aRGGDBwMUWmMDdXrO0n5Jq2lcCMj2OT
- l/oI0C6M00Jy7PhVkz5w/3fZ6eK1TMXVY+m6CXeok28/NPp+KiiDDit+ny4jDf4vHEA7
- XLtw==
+ bh=5KJnAd/m0KGguzc/ly2OcxGET3ckYILVYJ7JRk/PTxI=;
+ b=s6PDiUegFVlSnXH8YTlwNfbdqhWilqYNpzqCzBuNhDAuDdZ361PB+GxrBaJ+Bf0NCK
+ +Jx2dqdVkf+sZSyH84ucV4gmrk8/ZJb1vnyEOI9RM/Z+kk8Au2i8fibQZ11u/D1dDHLi
+ CRsntqg3/qeYd0mEb/Nw+vEUqu3Af4yGqf9zsYF5xpnMjNB9zVyWwI/PA0wT8jz20IPy
+ OV/k2NwtOsrYpfaMLKXUgoX7UM6AEkEm3wEyoRmKbU+xmtsWL+Gsp0ST71XB2swr0wBb
+ WtWTyTRFAfcAkKBOyMMOADVlzrkRq4XMSQAszDePWd3I23YdZuwOTcj5dqxScCW22yAK
+ G42Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707323893; x=1707928693;
+ d=1e100.net; s=20230601; t=1707323906; x=1707928706;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=JB4Epfg8EtaZj5aKH+XSQiP5F2xLNHDHewznk8QZ/uQ=;
- b=DuLTjj7/a9KYTLb9jR3fKcXF5+p6YbVU6AHGHLGXG/PhIq0sgoikYok8Ip32A8fw/o
- ZIDkFBzWtXwIT2t8ymzXjt2V1UWkgqmv6z/w8tlomTNXqlO2buhBuBEy637n4eZpanC1
- pPKGC869ONq8u+74xEPGOh4C0jPHMGtfe0+Qm0AxCMkAEFDfkDSOhaDRuTuc9qNnD4BK
- kB/uA1a9r7HmCxp1WtdJrN/9xPF0D79VCV7oCiRkAPRZ8Q1mEx6aiQXDsBpOcPGM1QzD
- Q1/HMsGnoea5/0dPx56uhYraSGuNq0gz2bcALM3Z3Qgj9Ga57dwJzFMt0XowDm10lepC
- 0RIw==
-X-Gm-Message-State: AOJu0Yx83KgSKRjXr7Ug1UcvHlMSQlLRIccSpRmuWrNGBtkcutwNht+G
- PvZTFaBej0NmZn2B9L9LOj9AZi1WD5lD2jh5YLIeUY6FmJmxTJPf6+h5v8W8bkA=
-X-Google-Smtp-Source: AGHT+IEvPFJ9AiHPXUgrQGtYUNZtWpPgdfAya6MNHNQ9hp7Y4s+Nd6cMYbuiU69XSt7x4kxOo+adjQ==
-X-Received: by 2002:a05:600c:19c7:b0:40e:fc29:f503 with SMTP id
- u7-20020a05600c19c700b0040efc29f503mr5405118wmq.2.1707323893503; 
- Wed, 07 Feb 2024 08:38:13 -0800 (PST)
+ bh=5KJnAd/m0KGguzc/ly2OcxGET3ckYILVYJ7JRk/PTxI=;
+ b=MspSXBPbaoGiSpMQSKDps+Rt2QGCS6YWkKP3MJnrC35jM4Jt3TrixdfVW2LOCaHeBM
+ bSUeXJCunLYdOZPbULItHfJL7GskydGVOqlI9DQtaPEmCnSryl74IXqdTnN18L93/bw4
+ 1fQVqkUXZIm3vAOGf/2aplpeW9eETXQsI5winN3wtIg4ZZiPoU4Aw3mK0s/8bCPsGKIt
+ PYKSY2PTT2KiT8JmmAXHov0tolvyBqviak5u7yCPtNrytIvQZYSw+M+vAPF7tEnYMIre
+ DFz6pVaDxCM8WU712br1xqmNECWXIRmFlwsLaiOEFapyMY68dEiJtJ7DA+sA1SOXJWx8
+ k5WQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVp0oEbxQlW6lhYbqyiSfzsKgCLMiomGRKPA033C3MhkCfL8fILFps9xeAf/6Yl8ainmRYQ53W2P/oK0WJuCXotuRRzakC+kxGpY0oivDFJktSNHlI/GOKq0HFQqAf6ivyjx/yD5XhIln1qOPA0t088I5s+/ISRLlRpXigdaq/ZyZd2ewr+s+gZ7mN/1+ScxGBj7UW5NLdxFOjXjQCIYSTIHJmwMNji7mHrOVp9kvt4PHtXI6wl8DAP1uf7MrAFa80LAeuuqxk3sN8OLjP2iRmjimMiUjdaz1B8+oRWV5GOWKykDSpUPSlEl9W0goLRkS+7/aiiAwtwmGTQWqCwOfJy0zGX2gE1NskLgNPSh8fS+M9jL+TDNdeQUEq6B2GFA2bopBKOYQoF4EeVYwpbIa+w2BZ2bPYTQpUZsqyFhxgGfanNibpUyLBTDzBQ+ut45Kn7BtsJd7ZDWb7mjngI+UrOE2z14Y9Kg+cTMXGD2MSNiKKgnP85b+Y4hG7CL1jpCg6xK8EdnWrM52cQQsg2uRTRtqHcW55CNuk1ySQV+EbsG8808OgzUmzL5OxEMJFTA34TyywR+brmx9ZCjrfgpOxwiYIL5I/AaDS0PxiUE+Q9bnA93AHzIfKCdhRU/k19eLE0B4+HE9mxO7lsh+Kt0DumFz9JqtwrsvotX4SkwWQiBFf5pzNe6JxCMfZJsskUMIP6O3ezSpIUEDiG3XKp4Me/bCMZn/8gjs/7XR8WpTYt1iYqTLNsiJg9pbcixbGpyDVQeV99ED66J0F1fwi+H1iQt/2glPfy8PHUACCjuhTUoF0Et4gCJR2/nD4DQmrC7jiMn08JZ8ForUt/A3EijVwHLmEYmD4k6Nn+1rRsnJWnsg87Bbs7sOjME0VlwNvRYw==
+ AJvYcCVjs3kDehCRdS8ieeagJtlhIByeVqjPMeRdazkLGy4bGIDmuSgya+ph0C4feLHzPkqkWLQPJexTbMb+OQcDZgcameoSvG8=
+X-Gm-Message-State: AOJu0YwQCHR0i5sf7Va+ksmpMkCILq2fbYhwGiryOiI8ceueKpJo0ogt
+ x7qT4AfftuObcvYcqHGtoPKQj5FJQSLKXgExl3EfwVu3g8oBOeBHYEceGzpgdfM=
+X-Google-Smtp-Source: AGHT+IF9VickhyecZOJwME0QBAJAMHWcwaQQF970D9Gx+XhaMtGVndh8N+3ffgzOPMo3aKT0qGuCZw==
+X-Received: by 2002:adf:ecc3:0:b0:33b:37f6:2388 with SMTP id
+ s3-20020adfecc3000000b0033b37f62388mr4149932wro.58.1707323905659; 
+ Wed, 07 Feb 2024 08:38:25 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV4xwNCVOQMPGULI/JYjc6IgG/O8Um2nQJ+6HOUuNEu2CqPr5Rj+E8wUXYIkPZTciNs9c6zu7wk7b8BE2gYNUeRQi0ZpqinY9LeYQ7f83qubpvSdlIu4Er9c43b/1nFBYCM5uBx6UMWHFSO9EbAFxMjAU3KjnCOKXhT6JwUqyyXyqItny7G4xcN3oyD2w4vXkzSWYukbrABOzyoD2VYXmRe7eocIEZJ14esXqKuhT/4fDVJ2XdF7bxQj2nTHOfK08IGGqzhC34hwmpx+DpERXic05oZzvHGRBWBMGGlxt9Sr5HcVfSh5jQgoK5Qj/AfvI5N6Tt335AWI1K2SyhF51uvBHVkPUPGpIe9kEHk+hN7M973woNexzYMWktqqpO9txLjplLtesr/nzEHBZf7S+tUnfdt+aYovEuC4lKqczw9DhRRgxJVwImupnAO39r/lYxdmedXtua0tcXmCF/gkjc+ePOLNzs14abo1bARa9jeV0LHUHak1eoB/PDKmhrMMHeAVTXPQnNPTtXAW5ihNlWsiH6KHEk90HU5Eihr3J6yqk7tDHnaqMMBMCtqr7JGCrd2FFOMQZQ9q8t0pIghRiQnqM+a2dbNc3ApnqdwqEerI+cNLV5BUwCd951FCc8nJeQ1ekXFUzYaSJqiBwicOedgCbsh/xoPjamBV91MGC3uZ+oLrqi3SRzEkIhmPpNU4br0gz6Qw/PcD1fBigdQTYLeBdenL07LrjJTOng7k/CPm/x1eiIryBHf6hcebcGYDNALygoWTxWKqeaOMN5FkfY6Tzv9sZBeiTRoZl7dWHm34KP1eUyzZDbUEmGxW6tsn7rSXWr1Tgmrj89eRduEMcg8ewcDfIEZ25MfklRv
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- p22-20020a05600c359600b0040ffe1ca25bsm2621880wmq.21.2024.02.07.08.38.12
+ d11-20020adff2cb000000b0033b278cf5fesm1852996wrp.102.2024.02.07.08.38.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Feb 2024 08:38:13 -0800 (PST)
+ Wed, 07 Feb 2024 08:38:24 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 3C8BB5F7D3;
- Wed,  7 Feb 2024 16:38:12 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 761775F9CF;
+ Wed,  7 Feb 2024 16:38:13 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: devel@lists.libvirt.org, Jiaxun Yang <jiaxun.yang@flygoat.com>,
@@ -83,27 +85,25 @@ Cc: devel@lists.libvirt.org, Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Li-Wen Hsu <lwhsu@freebsd.org>, Laurent Vivier <laurent@vivier.eu>,
  Kyle Evans <kevans@freebsd.org>,
  Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Riku Voipio <riku.voipio@iki.fi>, Fabiano Rosas <farosas@suse.de>,
- Andrea Bolognani <abologna@redhat.com>
-Subject: [PATCH v2 01/14] tests/docker: Add sqlite3 module to openSUSE Leap
- container
-Date: Wed,  7 Feb 2024 16:37:59 +0000
-Message-Id: <20240207163812.3231697-2-alex.bennee@linaro.org>
+ Riku Voipio <riku.voipio@iki.fi>, Ilya Leoshkevich <iii@linux.ibm.com>
+Subject: [PATCH v2 14/14] tests/tcg: Add the syscall catchpoint gdbstub test
+Date: Wed,  7 Feb 2024 16:38:12 +0000
+Message-Id: <20240207163812.3231697-15-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240207163812.3231697-1-alex.bennee@linaro.org>
 References: <20240207163812.3231697-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::330;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x330.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42e;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -119,73 +119,165 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Fabiano Rosas <farosas@suse.de>
+From: Ilya Leoshkevich <iii@linux.ibm.com>
 
-Avocado needs sqlite3:
+Check that adding/removing syscall catchpoints works.
 
-  Failed to load plugin from module "avocado.plugins.journal":
-  ImportError("Module 'sqlite3' is not installed.
-  Use: sudo zypper install python311 to install it")
-
->From 'zypper info python311':
-  "This package supplies rich command line features provided by
-  readline, and sqlite3 support for the interpreter core, thus forming
-  a so called "extended" runtime."
-
-Include the appropriate package in the lcitool mappings which will
-guarantee the dockerfile gets properly updated when lcitool is
-run. Also include the updated dockerfile.
-
-Signed-off-by: Fabiano Rosas <farosas@suse.de>
-Suggested-by: Andrea Bolognani <abologna@redhat.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Message-Id: <20240117164227.32143-1-farosas@suse.de>
+Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
+Signed-off-by: Ilya Leoshkevich <iii@linux.ibm.com>
+Message-Id: <20240202152506.279476-6-iii@linux.ibm.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- tests/docker/dockerfiles/opensuse-leap.docker | 1 +
- tests/lcitool/mappings.yml                    | 4 ++++
- tests/lcitool/projects/qemu.yml               | 1 +
- 3 files changed, 6 insertions(+)
+ tests/tcg/multiarch/catch-syscalls.c          | 51 ++++++++++++++++++
+ tests/tcg/multiarch/Makefile.target           | 10 +++-
+ tests/tcg/multiarch/gdbstub/catch-syscalls.py | 53 +++++++++++++++++++
+ 3 files changed, 113 insertions(+), 1 deletion(-)
+ create mode 100644 tests/tcg/multiarch/catch-syscalls.c
+ create mode 100644 tests/tcg/multiarch/gdbstub/catch-syscalls.py
 
-diff --git a/tests/docker/dockerfiles/opensuse-leap.docker b/tests/docker/dockerfiles/opensuse-leap.docker
-index dc0e36ce488..cf753383a45 100644
---- a/tests/docker/dockerfiles/opensuse-leap.docker
-+++ b/tests/docker/dockerfiles/opensuse-leap.docker
-@@ -90,6 +90,7 @@ RUN zypper update -y && \
-            pcre-devel-static \
-            pipewire-devel \
-            pkgconfig \
-+           python311 \
-            python311-base \
-            python311-pip \
-            python311-setuptools \
-diff --git a/tests/lcitool/mappings.yml b/tests/lcitool/mappings.yml
-index 0b908882f1d..407c03301bf 100644
---- a/tests/lcitool/mappings.yml
-+++ b/tests/lcitool/mappings.yml
-@@ -59,6 +59,10 @@ mappings:
-     CentOSStream8:
-     OpenSUSELeap15:
- 
-+  python3-sqlite3:
-+    CentOSStream8: python38
-+    OpenSUSELeap15: python311
+diff --git a/tests/tcg/multiarch/catch-syscalls.c b/tests/tcg/multiarch/catch-syscalls.c
+new file mode 100644
+index 00000000000..d1ff1936a7a
+--- /dev/null
++++ b/tests/tcg/multiarch/catch-syscalls.c
+@@ -0,0 +1,51 @@
++/*
++ * Test GDB syscall catchpoints.
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++#define _GNU_SOURCE
++#include <stdlib.h>
++#include <unistd.h>
 +
-   python3-tomli:
-     # test using tomllib
-     apk:
-diff --git a/tests/lcitool/projects/qemu.yml b/tests/lcitool/projects/qemu.yml
-index 82092c9f175..149b15de57b 100644
---- a/tests/lcitool/projects/qemu.yml
-+++ b/tests/lcitool/projects/qemu.yml
-@@ -97,6 +97,7 @@ packages:
-  - python3-pip
-  - python3-sphinx
-  - python3-sphinx-rtd-theme
-+ - python3-sqlite3
-  - python3-tomli
-  - python3-venv
-  - rpm2cpio
++const char *catch_syscalls_state = "start";
++
++void end_of_main(void)
++{
++}
++
++int main(void)
++{
++    int ret = EXIT_FAILURE;
++    char c0 = 'A', c1;
++    int fd[2];
++
++    catch_syscalls_state = "pipe2";
++    if (pipe2(fd, 0)) {
++        goto out;
++    }
++
++    catch_syscalls_state = "write";
++    if (write(fd[1], &c0, sizeof(c0)) != sizeof(c0)) {
++        goto out_close;
++    }
++
++    catch_syscalls_state = "read";
++    if (read(fd[0], &c1, sizeof(c1)) != sizeof(c1)) {
++        goto out_close;
++    }
++
++    catch_syscalls_state = "check";
++    if (c0 == c1) {
++        ret = EXIT_SUCCESS;
++    }
++
++out_close:
++    catch_syscalls_state = "close";
++    close(fd[0]);
++    close(fd[1]);
++
++out:
++    catch_syscalls_state = "end";
++    end_of_main();
++    return ret;
++}
+diff --git a/tests/tcg/multiarch/Makefile.target b/tests/tcg/multiarch/Makefile.target
+index 315a2e13588..e10951a8016 100644
+--- a/tests/tcg/multiarch/Makefile.target
++++ b/tests/tcg/multiarch/Makefile.target
+@@ -108,13 +108,21 @@ run-gdbstub-prot-none: prot-none
+ 		--bin $< --test $(MULTIARCH_SRC)/gdbstub/prot-none.py, \
+ 	accessing PROT_NONE memory)
+ 
++run-gdbstub-catch-syscalls: catch-syscalls
++	$(call run-test, $@, $(GDB_SCRIPT) \
++		--gdb $(GDB) \
++		--qemu $(QEMU) --qargs "$(QEMU_OPTS)" \
++		--bin $< --test $(MULTIARCH_SRC)/gdbstub/catch-syscalls.py, \
++	hitting a syscall catchpoint)
++
+ else
+ run-gdbstub-%:
+ 	$(call skip-test, "gdbstub test $*", "need working gdb with $(patsubst -%,,$(TARGET_NAME)) support")
+ endif
+ EXTRA_RUNS += run-gdbstub-sha1 run-gdbstub-qxfer-auxv-read \
+ 	      run-gdbstub-proc-mappings run-gdbstub-thread-breakpoint \
+-	      run-gdbstub-registers run-gdbstub-prot-none
++	      run-gdbstub-registers run-gdbstub-prot-none \
++	      run-gdbstub-catch-syscalls
+ 
+ # ARM Compatible Semi Hosting Tests
+ #
+diff --git a/tests/tcg/multiarch/gdbstub/catch-syscalls.py b/tests/tcg/multiarch/gdbstub/catch-syscalls.py
+new file mode 100644
+index 00000000000..ccce35902fb
+--- /dev/null
++++ b/tests/tcg/multiarch/gdbstub/catch-syscalls.py
+@@ -0,0 +1,53 @@
++"""Test GDB syscall catchpoints.
++
++SPDX-License-Identifier: GPL-2.0-or-later
++"""
++from test_gdbstub import main, report
++
++
++def check_state(expected):
++    """Check the catch_syscalls_state value"""
++    actual = gdb.parse_and_eval("catch_syscalls_state").string()
++    report(actual == expected, "{} == {}".format(actual, expected))
++
++
++def run_test():
++    """Run through the tests one by one"""
++    gdb.Breakpoint("main")
++    gdb.execute("continue")
++
++    # Check that GDB stops for pipe2/read calls/returns, but not for write.
++    gdb.execute("delete")
++    try:
++        gdb.execute("catch syscall pipe2 read")
++    except gdb.error as exc:
++        exc_str = str(exc)
++        if "not supported on this architecture" in exc_str:
++            print("SKIP: {}".format(exc_str))
++            return
++        raise
++    for _ in range(2):
++        gdb.execute("continue")
++        check_state("pipe2")
++    for _ in range(2):
++        gdb.execute("continue")
++        check_state("read")
++
++    # Check that deletion works.
++    gdb.execute("delete")
++    gdb.Breakpoint("end_of_main")
++    gdb.execute("continue")
++    check_state("end")
++
++    # Check that catch-all works (libc should at least call exit).
++    gdb.execute("delete")
++    gdb.execute("catch syscall")
++    gdb.execute("continue")
++    gdb.execute("delete")
++    gdb.execute("continue")
++
++    exitcode = int(gdb.parse_and_eval("$_exitcode"))
++    report(exitcode == 0, "{} == 0".format(exitcode))
++
++
++main(run_test)
 -- 
 2.39.2
 
