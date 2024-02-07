@@ -4,65 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EE9EC4829C
-	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Feb 2024 16:39:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F059C4828D
+	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Feb 2024 16:39:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rXkwS-0002ze-0d; Wed, 07 Feb 2024 11:38:32 -0500
+	id 1rXkwS-0002zf-0i; Wed, 07 Feb 2024 11:38:32 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rXkwQ-0002xO-5Z
+ id 1rXkwQ-0002yU-ON
  for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 11:38:30 -0500
-Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e])
+Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rXkwO-0006Bc-Bm
- for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 11:38:29 -0500
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-33b535c5d0fso175453f8f.0
- for <qemu-riscv@nongnu.org>; Wed, 07 Feb 2024 08:38:26 -0800 (PST)
+ id 1rXkwO-0006CF-T7
+ for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 11:38:30 -0500
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-40ff28388a6so7630575e9.1
+ for <qemu-riscv@nongnu.org>; Wed, 07 Feb 2024 08:38:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1707323905; x=1707928705; darn=nongnu.org;
+ d=linaro.org; s=google; t=1707323907; x=1707928707; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5KJnAd/m0KGguzc/ly2OcxGET3ckYILVYJ7JRk/PTxI=;
- b=s6PDiUegFVlSnXH8YTlwNfbdqhWilqYNpzqCzBuNhDAuDdZ361PB+GxrBaJ+Bf0NCK
- +Jx2dqdVkf+sZSyH84ucV4gmrk8/ZJb1vnyEOI9RM/Z+kk8Au2i8fibQZ11u/D1dDHLi
- CRsntqg3/qeYd0mEb/Nw+vEUqu3Af4yGqf9zsYF5xpnMjNB9zVyWwI/PA0wT8jz20IPy
- OV/k2NwtOsrYpfaMLKXUgoX7UM6AEkEm3wEyoRmKbU+xmtsWL+Gsp0ST71XB2swr0wBb
- WtWTyTRFAfcAkKBOyMMOADVlzrkRq4XMSQAszDePWd3I23YdZuwOTcj5dqxScCW22yAK
- G42Q==
+ bh=NZEnJqnRtjHTYADU54FKGw8u/qLIoqp7a6/Lc+0JhOI=;
+ b=gfcUw6FdsXwGE1FD/EB8khiaSdJWBLoVSCkCwzub66Pt9ORycJw6qomC4Ax0KEkTg+
+ 5pVXQwcuZxwr4HBP0vFIKWf02jbs/vDZ/Zslg+EyWGXoLuhpbBJKR+FfnTBc/Iy09MqB
+ k/Vcl8lSdoG0koikOSBl1HNosyZTkED0pKCUY1qxahZoTCMCb2U/r674Y+v+ezb32kxA
+ Wv3ZbEnZTGYFd8YxQqRerN5ELJR8so8nNUZyVAXvQme0IwOzHt/gvhgM1YSxXmJD/f3Y
+ 4ECXlDQGaprGub9HHWStS46XBRUGsOZQxJYk/Pv+Va8NX25tYLSK3oC3y1sK9dTqk/pV
+ 352A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707323906; x=1707928706;
+ d=1e100.net; s=20230601; t=1707323907; x=1707928707;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5KJnAd/m0KGguzc/ly2OcxGET3ckYILVYJ7JRk/PTxI=;
- b=MspSXBPbaoGiSpMQSKDps+Rt2QGCS6YWkKP3MJnrC35jM4Jt3TrixdfVW2LOCaHeBM
- bSUeXJCunLYdOZPbULItHfJL7GskydGVOqlI9DQtaPEmCnSryl74IXqdTnN18L93/bw4
- 1fQVqkUXZIm3vAOGf/2aplpeW9eETXQsI5winN3wtIg4ZZiPoU4Aw3mK0s/8bCPsGKIt
- PYKSY2PTT2KiT8JmmAXHov0tolvyBqviak5u7yCPtNrytIvQZYSw+M+vAPF7tEnYMIre
- DFz6pVaDxCM8WU712br1xqmNECWXIRmFlwsLaiOEFapyMY68dEiJtJ7DA+sA1SOXJWx8
- k5WQ==
+ bh=NZEnJqnRtjHTYADU54FKGw8u/qLIoqp7a6/Lc+0JhOI=;
+ b=KvOqjf36XfMieTALR8w0UfwbEyzB70PXOOZnqxkydKbAHljZss1515e4dxx7tmvtJv
+ 7IjUyYfEO3rQG6vAorAnQU3W+9fXnDiZBO+dblEN2lP61vt4VmxqIUo84U0iGjRkBBxG
+ lUjKWAJJty5pPXnZeG770gPP9lxSMCwjqebZdmG/e2wKRHm2grqsFvJ+sMaYGo9Z0xW5
+ J9k8dtxplemo4UmcJUoVpG7+QmezaYlsnAcMkAOsKdrAkl9c1UtmIZwc0Yd4U6ZDoJ9N
+ zEkBuxO7+VN3XgRsi2sVyfham3rqQX9Jy8KqDM+B7JyxD/t4gYT2UVvJsFm5wJ4eMfnT
+ bu6Q==
+X-Gm-Message-State: AOJu0YxZ1usatfVMRMDzYIMV9HGpb/FIfJFjDuyAu/YnXa/M1Bu2NS9I
+ 2pGQFaJGBrIOLr508+qNaGbLr1DiL33Shn9mg4FZyKkycXCsK33wuJTC9UR+kLU=
+X-Google-Smtp-Source: AGHT+IEs5VzykUrPZZ/a8E0suhAGYeAe+JVPGaxzI2YNKpjCClE233UfaCR0f5RWvU2Zj+QL6HW2hg==
+X-Received: by 2002:a05:600c:1553:b0:410:2496:ccdd with SMTP id
+ f19-20020a05600c155300b004102496ccddmr522761wmg.27.1707323907446; 
+ Wed, 07 Feb 2024 08:38:27 -0800 (PST)
 X-Forwarded-Encrypted: i=1;
- AJvYcCVjs3kDehCRdS8ieeagJtlhIByeVqjPMeRdazkLGy4bGIDmuSgya+ph0C4feLHzPkqkWLQPJexTbMb+OQcDZgcameoSvG8=
-X-Gm-Message-State: AOJu0YwQCHR0i5sf7Va+ksmpMkCILq2fbYhwGiryOiI8ceueKpJo0ogt
- x7qT4AfftuObcvYcqHGtoPKQj5FJQSLKXgExl3EfwVu3g8oBOeBHYEceGzpgdfM=
-X-Google-Smtp-Source: AGHT+IF9VickhyecZOJwME0QBAJAMHWcwaQQF970D9Gx+XhaMtGVndh8N+3ffgzOPMo3aKT0qGuCZw==
-X-Received: by 2002:adf:ecc3:0:b0:33b:37f6:2388 with SMTP id
- s3-20020adfecc3000000b0033b37f62388mr4149932wro.58.1707323905659; 
- Wed, 07 Feb 2024 08:38:25 -0800 (PST)
-X-Forwarded-Encrypted: i=1;
- AJvYcCV4xwNCVOQMPGULI/JYjc6IgG/O8Um2nQJ+6HOUuNEu2CqPr5Rj+E8wUXYIkPZTciNs9c6zu7wk7b8BE2gYNUeRQi0ZpqinY9LeYQ7f83qubpvSdlIu4Er9c43b/1nFBYCM5uBx6UMWHFSO9EbAFxMjAU3KjnCOKXhT6JwUqyyXyqItny7G4xcN3oyD2w4vXkzSWYukbrABOzyoD2VYXmRe7eocIEZJ14esXqKuhT/4fDVJ2XdF7bxQj2nTHOfK08IGGqzhC34hwmpx+DpERXic05oZzvHGRBWBMGGlxt9Sr5HcVfSh5jQgoK5Qj/AfvI5N6Tt335AWI1K2SyhF51uvBHVkPUPGpIe9kEHk+hN7M973woNexzYMWktqqpO9txLjplLtesr/nzEHBZf7S+tUnfdt+aYovEuC4lKqczw9DhRRgxJVwImupnAO39r/lYxdmedXtua0tcXmCF/gkjc+ePOLNzs14abo1bARa9jeV0LHUHak1eoB/PDKmhrMMHeAVTXPQnNPTtXAW5ihNlWsiH6KHEk90HU5Eihr3J6yqk7tDHnaqMMBMCtqr7JGCrd2FFOMQZQ9q8t0pIghRiQnqM+a2dbNc3ApnqdwqEerI+cNLV5BUwCd951FCc8nJeQ1ekXFUzYaSJqiBwicOedgCbsh/xoPjamBV91MGC3uZ+oLrqi3SRzEkIhmPpNU4br0gz6Qw/PcD1fBigdQTYLeBdenL07LrjJTOng7k/CPm/x1eiIryBHf6hcebcGYDNALygoWTxWKqeaOMN5FkfY6Tzv9sZBeiTRoZl7dWHm34KP1eUyzZDbUEmGxW6tsn7rSXWr1Tgmrj89eRduEMcg8ewcDfIEZ25MfklRv
+ AJvYcCX2twQPA/imKU8TXnjh8RXEOe87TDnJV7LjaUystw7Iipdfu4tRqFIR6jmxZLiZvq8iJJbbUyUtf4zHNMB+e5LW+khol3VhtpuFOqOUoMbF+Ko03I6/r0pPjSAi88ffV7sVliFGwb/eZPufsf8tCuUYnjAh3OSskNSFkveT6EDZnMUBxAVjRlepPxNHnShJRn4PAxzXvomj4+CEuuqmNKkaZ2xJGAkNDuCj+6E2siTpTHVmlmd803nIe2OOGdGmF2q6lvmZ6r6bkk62g8fNRCw4JlH14azS1pNP8cC8mQf7FwSN9zcG4lLVKf5B9Ekhrv+o+Itxh1PI5Jro2/byTmwEGc5FRkH1Eb6B6cqzY701LO6UFFaFuh17a86Z3T8+0E8nrrxERyZ8pXL29bE8FYLrqY25Hy8kdElo/ajUHWuovys/uUIbtFVhhUtGBd/3XtAtNgPBlI0Q5X/Md9xsDm60zH/AOhMRye27qoo6Fiprj6T9WjnolNhmvELVKO+G9TFQKJKh0BCWSfjdZbNOIZLZ+4zHTshILfRU+VUcd5VWRuvow+/9w9pbyt4NFOY3hspWqanUGC0lnuDKrrSufHDhu74Xccrhvx9w9mQl0PCYa+HjGCS3rn2RouU7i28kQCH49irLXqLCiB0ewuQHIvGHN6YuNk5xk5chcipTG/0xgjy1P3t/iWKx704X1yCDuwB0yOHbmaA8twCpazeb8Kt0Fe+ReQ8FNk6t6h3dlkV91fTvdgdtSu1Po+NKixtglHHqO+TqKeueteFkLYiJwFWA1gEkgfp+hrHfo4g/YQOFp0Lp+7HiD3yqsny4W6jiFe4qAnoFonlWW4OQwdl+U+pi1MNw8g7pAT5JgiL8
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- d11-20020adff2cb000000b0033b278cf5fesm1852996wrp.102.2024.02.07.08.38.17
+ b15-20020a05600010cf00b0033b4e58746asm1809148wrx.69.2024.02.07.08.38.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Wed, 07 Feb 2024 08:38:24 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 761775F9CF;
+ by draig.lan (Postfix) with ESMTP id 292D85F7B1;
  Wed,  7 Feb 2024 16:38:13 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -86,17 +84,17 @@ Cc: devel@lists.libvirt.org, Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Kyle Evans <kevans@freebsd.org>,
  Wainer dos Santos Moschetta <wainersm@redhat.com>,
  Riku Voipio <riku.voipio@iki.fi>, Ilya Leoshkevich <iii@linux.ibm.com>
-Subject: [PATCH v2 14/14] tests/tcg: Add the syscall catchpoint gdbstub test
-Date: Wed,  7 Feb 2024 16:38:12 +0000
-Message-Id: <20240207163812.3231697-15-alex.bennee@linaro.org>
+Subject: [PATCH v2 11/14] gdbstub: Allow specifying a reason in stop packets
+Date: Wed,  7 Feb 2024 16:38:09 +0000
+Message-Id: <20240207163812.3231697-12-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240207163812.3231697-1-alex.bennee@linaro.org>
 References: <20240207163812.3231697-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42e;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -121,163 +119,78 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Ilya Leoshkevich <iii@linux.ibm.com>
 
-Check that adding/removing syscall catchpoints works.
+The upcoming syscall catchpoint support needs to send stop packets with
+an associated reason to GDB. Add an extra parameter to gdb_handlesig()
+for that, and rename it to gdb_handlesig_reason(). Provide a
+compatibility wrapper with an old name.
 
-Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
 Signed-off-by: Ilya Leoshkevich <iii@linux.ibm.com>
-Message-Id: <20240202152506.279476-6-iii@linux.ibm.com>
+Message-Id: <20240202152506.279476-3-iii@linux.ibm.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- tests/tcg/multiarch/catch-syscalls.c          | 51 ++++++++++++++++++
- tests/tcg/multiarch/Makefile.target           | 10 +++-
- tests/tcg/multiarch/gdbstub/catch-syscalls.py | 53 +++++++++++++++++++
- 3 files changed, 113 insertions(+), 1 deletion(-)
- create mode 100644 tests/tcg/multiarch/catch-syscalls.c
- create mode 100644 tests/tcg/multiarch/gdbstub/catch-syscalls.py
+ include/gdbstub/user.h | 16 ++++++++++++++--
+ gdbstub/user.c         |  5 ++++-
+ 2 files changed, 18 insertions(+), 3 deletions(-)
 
-diff --git a/tests/tcg/multiarch/catch-syscalls.c b/tests/tcg/multiarch/catch-syscalls.c
-new file mode 100644
-index 00000000000..d1ff1936a7a
---- /dev/null
-+++ b/tests/tcg/multiarch/catch-syscalls.c
-@@ -0,0 +1,51 @@
-+/*
-+ * Test GDB syscall catchpoints.
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
+diff --git a/include/gdbstub/user.h b/include/gdbstub/user.h
+index d392e510c59..1fc43e04af5 100644
+--- a/include/gdbstub/user.h
++++ b/include/gdbstub/user.h
+@@ -10,9 +10,10 @@
+ #define GDBSTUB_USER_H
+ 
+ /**
+- * gdb_handlesig() - yield control to gdb
++ * gdb_handlesig_reason() - yield control to gdb
+  * @cpu: CPU
+  * @sig: if non-zero, the signal number which caused us to stop
++ * @reason: stop reason for stop reply packet or NULL
+  *
+  * This function yields control to gdb, when a user-mode-only target
+  * needs to stop execution. If @sig is non-zero, then we will send a
+@@ -24,7 +25,18 @@
+  * or 0 if no signal should be delivered, ie the signal that caused
+  * us to stop should be ignored.
+  */
+-int gdb_handlesig(CPUState *, int);
++int gdb_handlesig_reason(CPUState *, int, const char *);
++
++/**
++ * gdb_handlesig() - yield control to gdb
++ * @cpu CPU
++ * @sig: if non-zero, the signal number which caused us to stop
++ * @see gdb_handlesig_reason()
 + */
-+#define _GNU_SOURCE
-+#include <stdlib.h>
-+#include <unistd.h>
-+
-+const char *catch_syscalls_state = "start";
-+
-+void end_of_main(void)
++static inline int gdb_handlesig(CPUState *cpu, int sig)
 +{
++    return gdb_handlesig_reason(cpu, sig, NULL);
 +}
-+
-+int main(void)
-+{
-+    int ret = EXIT_FAILURE;
-+    char c0 = 'A', c1;
-+    int fd[2];
-+
-+    catch_syscalls_state = "pipe2";
-+    if (pipe2(fd, 0)) {
-+        goto out;
-+    }
-+
-+    catch_syscalls_state = "write";
-+    if (write(fd[1], &c0, sizeof(c0)) != sizeof(c0)) {
-+        goto out_close;
-+    }
-+
-+    catch_syscalls_state = "read";
-+    if (read(fd[0], &c1, sizeof(c1)) != sizeof(c1)) {
-+        goto out_close;
-+    }
-+
-+    catch_syscalls_state = "check";
-+    if (c0 == c1) {
-+        ret = EXIT_SUCCESS;
-+    }
-+
-+out_close:
-+    catch_syscalls_state = "close";
-+    close(fd[0]);
-+    close(fd[1]);
-+
-+out:
-+    catch_syscalls_state = "end";
-+    end_of_main();
-+    return ret;
-+}
-diff --git a/tests/tcg/multiarch/Makefile.target b/tests/tcg/multiarch/Makefile.target
-index 315a2e13588..e10951a8016 100644
---- a/tests/tcg/multiarch/Makefile.target
-+++ b/tests/tcg/multiarch/Makefile.target
-@@ -108,13 +108,21 @@ run-gdbstub-prot-none: prot-none
- 		--bin $< --test $(MULTIARCH_SRC)/gdbstub/prot-none.py, \
- 	accessing PROT_NONE memory)
  
-+run-gdbstub-catch-syscalls: catch-syscalls
-+	$(call run-test, $@, $(GDB_SCRIPT) \
-+		--gdb $(GDB) \
-+		--qemu $(QEMU) --qargs "$(QEMU_OPTS)" \
-+		--bin $< --test $(MULTIARCH_SRC)/gdbstub/catch-syscalls.py, \
-+	hitting a syscall catchpoint)
-+
- else
- run-gdbstub-%:
- 	$(call skip-test, "gdbstub test $*", "need working gdb with $(patsubst -%,,$(TARGET_NAME)) support")
- endif
- EXTRA_RUNS += run-gdbstub-sha1 run-gdbstub-qxfer-auxv-read \
- 	      run-gdbstub-proc-mappings run-gdbstub-thread-breakpoint \
--	      run-gdbstub-registers run-gdbstub-prot-none
-+	      run-gdbstub-registers run-gdbstub-prot-none \
-+	      run-gdbstub-catch-syscalls
+ /**
+  * gdb_signalled() - inform remote gdb of sig exit
+diff --git a/gdbstub/user.c b/gdbstub/user.c
+index dbe1d9b8875..63edca131ab 100644
+--- a/gdbstub/user.c
++++ b/gdbstub/user.c
+@@ -121,7 +121,7 @@ void gdb_qemu_exit(int code)
+     exit(code);
+ }
  
- # ARM Compatible Semi Hosting Tests
- #
-diff --git a/tests/tcg/multiarch/gdbstub/catch-syscalls.py b/tests/tcg/multiarch/gdbstub/catch-syscalls.py
-new file mode 100644
-index 00000000000..ccce35902fb
---- /dev/null
-+++ b/tests/tcg/multiarch/gdbstub/catch-syscalls.py
-@@ -0,0 +1,53 @@
-+"""Test GDB syscall catchpoints.
-+
-+SPDX-License-Identifier: GPL-2.0-or-later
-+"""
-+from test_gdbstub import main, report
-+
-+
-+def check_state(expected):
-+    """Check the catch_syscalls_state value"""
-+    actual = gdb.parse_and_eval("catch_syscalls_state").string()
-+    report(actual == expected, "{} == {}".format(actual, expected))
-+
-+
-+def run_test():
-+    """Run through the tests one by one"""
-+    gdb.Breakpoint("main")
-+    gdb.execute("continue")
-+
-+    # Check that GDB stops for pipe2/read calls/returns, but not for write.
-+    gdb.execute("delete")
-+    try:
-+        gdb.execute("catch syscall pipe2 read")
-+    except gdb.error as exc:
-+        exc_str = str(exc)
-+        if "not supported on this architecture" in exc_str:
-+            print("SKIP: {}".format(exc_str))
-+            return
-+        raise
-+    for _ in range(2):
-+        gdb.execute("continue")
-+        check_state("pipe2")
-+    for _ in range(2):
-+        gdb.execute("continue")
-+        check_state("read")
-+
-+    # Check that deletion works.
-+    gdb.execute("delete")
-+    gdb.Breakpoint("end_of_main")
-+    gdb.execute("continue")
-+    check_state("end")
-+
-+    # Check that catch-all works (libc should at least call exit).
-+    gdb.execute("delete")
-+    gdb.execute("catch syscall")
-+    gdb.execute("continue")
-+    gdb.execute("delete")
-+    gdb.execute("continue")
-+
-+    exitcode = int(gdb.parse_and_eval("$_exitcode"))
-+    report(exitcode == 0, "{} == 0".format(exitcode))
-+
-+
-+main(run_test)
+-int gdb_handlesig(CPUState *cpu, int sig)
++int gdb_handlesig_reason(CPUState *cpu, int sig, const char *reason)
+ {
+     char buf[256];
+     int n;
+@@ -141,6 +141,9 @@ int gdb_handlesig(CPUState *cpu, int sig)
+                             "T%02xthread:", gdb_target_signal_to_gdb(sig));
+             gdb_append_thread_id(cpu, gdbserver_state.str_buf);
+             g_string_append_c(gdbserver_state.str_buf, ';');
++            if (reason) {
++                g_string_append(gdbserver_state.str_buf, reason);
++            }
+             gdb_put_strbuf();
+             gdbserver_state.allow_stop_reply = false;
+         }
 -- 
 2.39.2
 
