@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55875C4828F
-	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Feb 2024 12:23:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21898C4829A
+	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Feb 2024 12:24:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rXgxH-0006uM-Ko; Wed, 07 Feb 2024 07:23:07 -0500
+	id 1rXgxM-0006vl-Vj; Wed, 07 Feb 2024 07:23:13 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1rXgxF-0006tD-5R
- for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 07:23:05 -0500
-Received: from mail-lf1-x136.google.com ([2a00:1450:4864:20::136])
+ id 1rXgxG-0006tW-99
+ for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 07:23:06 -0500
+Received: from mail-ej1-x62c.google.com ([2a00:1450:4864:20::62c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1rXgxD-0007Cg-A6
- for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 07:23:04 -0500
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-51032e62171so991252e87.3
- for <qemu-riscv@nongnu.org>; Wed, 07 Feb 2024 04:23:02 -0800 (PST)
+ id 1rXgxE-0007DG-In
+ for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 07:23:05 -0500
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-a34c5ca2537so80461466b.0
+ for <qemu-riscv@nongnu.org>; Wed, 07 Feb 2024 04:23:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=vrull.eu; s=google; t=1707308581; x=1707913381; darn=nongnu.org;
+ d=vrull.eu; s=google; t=1707308583; x=1707913383; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yqXN7kP1hctkf0dzKT9GxG/h8OL9Zq0Ugm+1HgJ+nt4=;
- b=iCBfTRMSqYLuk3KBgu05pjo21HhQmAHgKCpZ/Ox6OgRoLou2BXbDy2Am9EZJ/eR1Q9
- 4s3i2pLqoepkRjJDNEPbBB7jM+IA8hq8WV1YvQVVeJfqXkr7GAqFHPtac9vnJGl9iVAe
- dP7Z5B5I8KOPDCERYDfhiWt8DE2lDeX+uNWdPj8yMlOq7cUsXmXRnxY8bIjHqu5KjdAn
- rTGmDvnU1OrskEZdIYMvqLhLNWWfP+p85FUfcqU4tARytFXhL3UG1w/grHWxNIq+Wvpj
- B4kb2cCrTskT0FhKHbOLwctMRmhZc2I5gUDHPy5c223aTD344nSItHaW9Y8vkOBbvzwk
- DmYQ==
+ bh=M2mD/C0rP4kd3MQb0al+PrLOXSiBVfqFrpY8FsaZgMg=;
+ b=UrOV9EvVV8SfVt0s8WrFJUaEgAOY9Di1s+kTtzM265271gQqD+jnL34F6LfZIS4j7j
+ sSgS4nNaLq5EVDoCj+yLkOpUXX1V93Igak4Ci0FVNd7Gdx9GioAbkqKM8Ly/mCBp74/2
+ 9kbH5TsdvaLk2ARaFMRZ8lpzme4auuRkGi4IE3GcZUgjn3X6uTWfqlYrg2bnuBQn4yxb
+ 8KI1BuM7kaOqfifvs/0DtfYlTMJrGQWpxhQfQZRdr0hx5Lnk5CkUmJEGALH2Yzd/x33K
+ rTL8+bPuBRN5TXjVbuYt/9rvJcQ+zDeHufBdy+XVbtBdqkyx1Dc+m3bKmSuyG1AgszlR
+ bBaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707308581; x=1707913381;
+ d=1e100.net; s=20230601; t=1707308583; x=1707913383;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yqXN7kP1hctkf0dzKT9GxG/h8OL9Zq0Ugm+1HgJ+nt4=;
- b=bemNE1dNPqPTp7wlBSBTs80EZBzRuC6hnY6Z1rYF1C3Ydq2FUZenJASNIjS1I2YiMg
- +KN1814+7dh88s4OYquxf9+onhop/rK0h+6AV4i5bhCxYofBvHIss0I22xjep5c/MFAP
- 8LvkXC5SGwDGYIiHvklM/fyoFWCeyb5W1sbXG2w3Ss83gaz4iVjd/Wx6munsXXQVEujq
- nzPu/5OtZPefzlc5UEOzKH7c2LhJYaBuq9u3pSjzSTWzLD5CTIJLlDa9TbJlcxyIByXc
- +PqAcMR3RuZrC1536cxqNlb7LrVRuN5AS2Jzs9LBN8k054a3i0Kbm4t1fjV91CyOs3i2
- R5Yw==
-X-Gm-Message-State: AOJu0Yyxwdq6mSbtwGCsb/eCP1eSC6Lin1qN5D2FSP9WYVsAuNXpHxLv
- wzexIYMHAsZaM2p7Dy2blU78WMwivU7vS7RG+DkOg8q2JJwJjfXEfdlh0Ip+ojciIxFlBist08q
- iG1Q=
-X-Google-Smtp-Source: AGHT+IFFBB0SRgcniQOnugEhExpT2pSJTnPazCTWJ5zZSz6Am93L+piFzh2Z4SvrCpsEm2K+T6lCHg==
-X-Received: by 2002:a05:6512:3e01:b0:511:577d:10de with SMTP id
- i1-20020a0565123e0100b00511577d10demr5031414lfv.37.1707308581096; 
- Wed, 07 Feb 2024 04:23:01 -0800 (PST)
+ bh=M2mD/C0rP4kd3MQb0al+PrLOXSiBVfqFrpY8FsaZgMg=;
+ b=Bytyjg8hHQ+GsoCNsauxbOD7aG3JFPKzAdRWkowilmhfeZGh26dfGyCaAAMsfu7v+N
+ B9aVjOd4jU+SnPchSlOLEtTt7s/p8zMiNB030hfa27ei5Pp9LiJkWn0S9zEHhFKcDzge
+ J6Ft/irvooWanxYfKDCRKKYfd3JGQSwofpmtUnASKtxAjpQTagxNX6FWTblT/4rKqM10
+ cgnynouJ/bzNm2ifyG2pnQWdJFPNLouEAAZPz3rFHsG34U2u3uqLfHrOUIgPkZpMPH4c
+ HYeJ8vnySQ2ncuPE5uKcChoqH1IQw/tuIz6jvLRA8kozoPi7FovukI+XLBrXoZiJRXg0
+ cFgg==
+X-Gm-Message-State: AOJu0YwXDkRKFJKFG6DQyVai8/RaWcbJ0td7HP5zNGh5odEZ/RftArMW
+ BPh5DyQSigQomVWnmrc1hfCYu3tvUv5TUhukwRkJzYBCosIULNuDrNJdlvVFpSi/r2XNiao8nTQ
+ lLao=
+X-Google-Smtp-Source: AGHT+IEHBp53ZrCFbzZuHyFoLtmbx8iGa7isZd3ykvcx85ipWHcZuS3hIybueK33p/8scZl1T4QuZw==
+X-Received: by 2002:a17:906:b208:b0:a38:71e8:3182 with SMTP id
+ p8-20020a170906b20800b00a3871e83182mr1243037ejz.23.1707308582807; 
+ Wed, 07 Feb 2024 04:23:02 -0800 (PST)
 X-Forwarded-Encrypted: i=1;
- AJvYcCXOdJc7rgpLQkz92BuDWuM+J+PVREOGSDid42I63YE6Py5MtQF5JDzOGw++eB8OVXEBMFsXfD3rtDBz269RhX1qGMzKVZ4vytN4eeCbFpSNzaal8/p/yRfaKJsSI74AMVS6hculrU7T95FNmUMV2wZvu7b4MYEad2pxjSQEN9ZAlI2oczhg45TO+t9y3W1Nb/Ab9IWS8MUI7F7WLL/Sw8tFZLLo5Z4pccqwLukrHanuL/1LdSwdaGIi82HUblYVFRqmjgadFUv8+7Wea1C5CD4Ylg9+it6ZGtecWO08DwKOGeMiV6tSMMUemkLjGv6dIq4VXsq91rIE9UhGNpOnw26earFY869gsd2mhKMnWqoW/OZSXDd7juGRx3Age6qAhox+GFlJ58CyPsunyvBAoLbubZmlGZbAXDQvmGsS0VTIuF2m6ampNX4=
+ AJvYcCU0CEO29wy8m+7RRggoIrYxQ95Si4c5bMfx+JnQn3ez138hfzzJmV86vC/E+DEJH6YsAXdwNpB+LHWiM/54FDg2bikB/2tPA4xq6mPlt0+HDEufoJ3158y8Oi5hhV77qFu02O9oAtOLixBNdUuPYflG0aKzjFm5M1Fgq05nxOoUC0JmWLIVtUmY0SlsRlsAZNdCShzONF1dEQnk72cY+cpSWzqof0tjnaDCSG9zTE3LmosizhB4z3cI9D0QCcnc/5ee4IfVJ+RH9tIR9kg2Mv8PuVXhnTxV6GWomqoXrAc5xuM3g2rYDFFcjt6gkD/k5PZYprOT0DYrxdh/QtHzivm1V8FIfyViQdiwIA==
 Received: from beast.fritz.box (62-178-148-172.cable.dynamic.surfer.at.
  [62.178.148.172]) by smtp.gmail.com with ESMTPSA id
- v8-20020a1709063bc800b00a3515b35be4sm702284ejf.104.2024.02.07.04.22.59
+ v8-20020a1709063bc800b00a3515b35be4sm702284ejf.104.2024.02.07.04.23.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Feb 2024 04:23:00 -0800 (PST)
+ Wed, 07 Feb 2024 04:23:01 -0800 (PST)
 From: =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>
 To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Alistair Francis <alistair.francis@wdc.com>,
@@ -70,20 +70,19 @@ To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Richard Henderson <richard.henderson@linaro.org>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Andrew Jones <ajones@ventanamicro.com>
-Cc: Palmer Dabbelt <palmer@rivosinc.com>,
- =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH 1/2] RISC-V: Add support for Ztso
-Date: Wed,  7 Feb 2024 13:22:54 +0100
-Message-ID: <20240207122256.902627-2-christoph.muellner@vrull.eu>
+Cc: =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>,
+ Laurent Vivier <laurent@vivier.eu>
+Subject: [PATCH 2/2] linux-user/riscv: Add Ztso extension to hwprobe
+Date: Wed,  7 Feb 2024 13:22:55 +0100
+Message-ID: <20240207122256.902627-3-christoph.muellner@vrull.eu>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240207122256.902627-1-christoph.muellner@vrull.eu>
 References: <20240207122256.902627-1-christoph.muellner@vrull.eu>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::136;
- envelope-from=christoph.muellner@vrull.eu; helo=mail-lf1-x136.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62c;
+ envelope-from=christoph.muellner@vrull.eu; helo=mail-ej1-x62c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -106,182 +105,34 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Palmer Dabbelt <palmer@rivosinc.com>
+This patch exposes Ztso via hwprobe in QEMU's user space emulator.
 
-The Ztso extension is already ratified, this adds it as a CPU property
-and adds various fences throughout the port in order to allow TSO
-targets to function on weaker hosts.  We need no fences for AMOs as
-they're already SC, the places we need barriers are described.
-These fences are placed in the RISC-V backend rather than TCG as is
-planned for x86-on-arm64 because RISC-V allows heterogeneous (and
-likely soon dynamic) hart memory models.
-
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Signed-off-by: Palmer Dabbelt <palmer@rivosinc.com>
 Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
 ---
- target/riscv/cpu.c                      |  2 ++
- target/riscv/cpu_cfg.h                  |  1 +
- target/riscv/insn_trans/trans_rva.c.inc | 11 ++++++++---
- target/riscv/insn_trans/trans_rvi.c.inc | 16 ++++++++++++++--
- target/riscv/insn_trans/trans_rvv.c.inc | 20 ++++++++++++++++++++
- target/riscv/translate.c                |  3 +++
- 6 files changed, 48 insertions(+), 5 deletions(-)
+ linux-user/syscall.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 1b8d001d23..b679ecd8c7 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -143,6 +143,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(zksed, PRIV_VERSION_1_12_0, ext_zksed),
-     ISA_EXT_DATA_ENTRY(zksh, PRIV_VERSION_1_12_0, ext_zksh),
-     ISA_EXT_DATA_ENTRY(zkt, PRIV_VERSION_1_12_0, ext_zkt),
-+    ISA_EXT_DATA_ENTRY(ztso, PRIV_VERSION_1_12_0, ext_ztso),
-     ISA_EXT_DATA_ENTRY(zvbb, PRIV_VERSION_1_12_0, ext_zvbb),
-     ISA_EXT_DATA_ENTRY(zvbc, PRIV_VERSION_1_12_0, ext_zvbc),
-     ISA_EXT_DATA_ENTRY(zve32f, PRIV_VERSION_1_10_0, ext_zve32f),
-@@ -1488,6 +1489,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
-     MULTI_EXT_CFG_BOOL("zksed", ext_zksed, false),
-     MULTI_EXT_CFG_BOOL("zksh", ext_zksh, false),
-     MULTI_EXT_CFG_BOOL("zkt", ext_zkt, false),
-+    MULTI_EXT_CFG_BOOL("ztso", ext_ztso, false),
+diff --git a/linux-user/syscall.c b/linux-user/syscall.c
+index 3ba20f99ad..24fa11d946 100644
+--- a/linux-user/syscall.c
++++ b/linux-user/syscall.c
+@@ -8826,6 +8826,7 @@ static int do_getdents64(abi_long dirfd, abi_long arg2, abi_long count)
+ #define		RISCV_HWPROBE_EXT_ZVFH		(1 << 30)
+ #define		RISCV_HWPROBE_EXT_ZVFHMIN	(1 << 31)
+ #define		RISCV_HWPROBE_EXT_ZFA		(1ULL << 32)
++#define		RISCV_HWPROBE_EXT_ZTSO		(1ULL << 33)
+ #define		RISCV_HWPROBE_EXT_ZACAS		(1ULL << 34)
+ #define		RISCV_HWPROBE_EXT_ZICOND	(1ULL << 35)
  
-     MULTI_EXT_CFG_BOOL("zdinx", ext_zdinx, false),
-     MULTI_EXT_CFG_BOOL("zfinx", ext_zfinx, false),
-diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-index 833bf58217..afba8ed0b2 100644
---- a/target/riscv/cpu_cfg.h
-+++ b/target/riscv/cpu_cfg.h
-@@ -71,6 +71,7 @@ struct RISCVCPUConfig {
-     bool ext_zihintntl;
-     bool ext_zihintpause;
-     bool ext_zihpm;
-+    bool ext_ztso;
-     bool ext_smstateen;
-     bool ext_sstc;
-     bool ext_svadu;
-diff --git a/target/riscv/insn_trans/trans_rva.c.inc b/target/riscv/insn_trans/trans_rva.c.inc
-index 267930e5bc..4a9e4591d1 100644
---- a/target/riscv/insn_trans/trans_rva.c.inc
-+++ b/target/riscv/insn_trans/trans_rva.c.inc
-@@ -40,7 +40,11 @@ static bool gen_lr(DisasContext *ctx, arg_atomic *a, MemOp mop)
-         tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL);
-     }
-     tcg_gen_qemu_ld_tl(load_val, src1, ctx->mem_idx, mop);
--    if (a->aq) {
-+    /*
-+     * TSO defines AMOs as acquire+release-RCsc, but does not define LR/SC as
-+     * AMOs.  Instead treat them like loads.
-+     */
-+    if (a->aq || ctx->ztso) {
-         tcg_gen_mb(TCG_MO_ALL | TCG_BAR_LDAQ);
-     }
- 
-@@ -76,9 +80,10 @@ static bool gen_sc(DisasContext *ctx, arg_atomic *a, MemOp mop)
-     gen_set_label(l1);
-     /*
-      * Address comparison failure.  However, we still need to
--     * provide the memory barrier implied by AQ/RL.
-+     * provide the memory barrier implied by AQ/RL/TSO.
-      */
--    tcg_gen_mb(TCG_MO_ALL + a->aq * TCG_BAR_LDAQ + a->rl * TCG_BAR_STRL);
-+    TCGBar bar_strl = (ctx->ztso || a->rl) ? TCG_BAR_STRL : 0;
-+    tcg_gen_mb(TCG_MO_ALL + a->aq * TCG_BAR_LDAQ + bar_strl);
-     gen_set_gpr(ctx, a->rd, tcg_constant_tl(1));
- 
-     gen_set_label(l2);
-diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-index faf6d65064..ad40d3e87f 100644
---- a/target/riscv/insn_trans/trans_rvi.c.inc
-+++ b/target/riscv/insn_trans/trans_rvi.c.inc
-@@ -266,12 +266,20 @@ static bool gen_load_i128(DisasContext *ctx, arg_lb *a, MemOp memop)
- 
- static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
- {
-+    bool out;
-+
-     decode_save_opc(ctx);
-     if (get_xl(ctx) == MXL_RV128) {
--        return gen_load_i128(ctx, a, memop);
-+        out = gen_load_i128(ctx, a, memop);
-     } else {
--        return gen_load_tl(ctx, a, memop);
-+        out = gen_load_tl(ctx, a, memop);
-+    }
-+
-+    if (ctx->ztso) {
-+        tcg_gen_mb(TCG_MO_ALL | TCG_BAR_LDAQ);
-     }
-+
-+    return out;
- }
- 
- static bool trans_lb(DisasContext *ctx, arg_lb *a)
-@@ -328,6 +336,10 @@ static bool gen_store_tl(DisasContext *ctx, arg_sb *a, MemOp memop)
-     TCGv addr = get_address(ctx, a->rs1, a->imm);
-     TCGv data = get_gpr(ctx, a->rs2, EXT_NONE);
- 
-+    if (ctx->ztso) {
-+        tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL);
-+    }
-+
-     tcg_gen_qemu_st_tl(data, addr, ctx->mem_idx, memop);
-     return true;
- }
-diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index 9e101ab434..742008f58b 100644
---- a/target/riscv/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -636,8 +636,28 @@ static bool ldst_us_trans(uint32_t vd, uint32_t rs1, uint32_t data,
-     tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, vd));
-     tcg_gen_addi_ptr(mask, tcg_env, vreg_ofs(s, 0));
- 
-+    /*
-+     * According to the specification
-+     *
-+     *   Additionally, if the Ztso extension is implemented, then vector memory
-+     *   instructions in the V extension and Zve family of extensions follow
-+     *   RVTSO at the instruction level.  The Ztso extension does not
-+     *   strengthen the ordering of intra-instruction element accesses.
-+     *
-+     * as a result neither ordered nor unordered accesses from the V
-+     * instructions need ordering within the loop but we do still need barriers
-+     * around the loop.
-+     */
-+    if (is_store && s->ztso) {
-+        tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL);
-+    }
-+
-     fn(dest, mask, base, tcg_env, desc);
- 
-+    if (!is_store && s->ztso) {
-+        tcg_gen_mb(TCG_MO_ALL | TCG_BAR_LDAQ);
-+    }
-+
-     if (!is_store) {
-         mark_vs_dirty(s);
-     }
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 177418b2b9..ea5d52b2ef 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -109,6 +109,8 @@ typedef struct DisasContext {
-     /* PointerMasking extension */
-     bool pm_mask_enabled;
-     bool pm_base_enabled;
-+    /* Ztso */
-+    bool ztso;
-     /* Use icount trigger for native debug */
-     bool itrigger;
-     /* FRM is known to contain a valid value. */
-@@ -1196,6 +1198,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
-     ctx->cs = cs;
-     ctx->pm_mask_enabled = FIELD_EX32(tb_flags, TB_FLAGS, PM_MASK_ENABLED);
-     ctx->pm_base_enabled = FIELD_EX32(tb_flags, TB_FLAGS, PM_BASE_ENABLED);
-+    ctx->ztso = cpu->cfg.ext_ztso;
-     ctx->itrigger = FIELD_EX32(tb_flags, TB_FLAGS, ITRIGGER);
-     ctx->zero = tcg_constant_tl(0);
-     ctx->virt_inst_excp = false;
+@@ -8940,6 +8941,8 @@ static void risc_hwprobe_fill_pairs(CPURISCVState *env,
+                      RISCV_HWPROBE_EXT_ZVFHMIN : 0;
+             value |= cfg->ext_zfa ?
+                      RISCV_HWPROBE_EXT_ZFA : 0;
++            value |= cfg->ext_ztso ?
++                     RISCV_HWPROBE_EXT_ZTSO : 0;
+             value |= cfg->ext_zacas ?
+                      RISCV_HWPROBE_EXT_ZACAS : 0;
+             value |= cfg->ext_zicond ?
 -- 
 2.43.0
 
