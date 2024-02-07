@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD2AEC4828D
-	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Feb 2024 16:39:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AE78C4829D
+	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Feb 2024 16:39:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rXkwJ-0002rn-KI; Wed, 07 Feb 2024 11:38:24 -0500
+	id 1rXkwO-0002w9-HV; Wed, 07 Feb 2024 11:38:28 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rXkwH-0002pP-Jw
- for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 11:38:21 -0500
-Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
+ id 1rXkwM-0002uG-KQ
+ for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 11:38:26 -0500
+Received: from mail-wr1-x433.google.com ([2a00:1450:4864:20::433])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rXkwE-00067J-Kj
- for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 11:38:21 -0500
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-4101da33362so4327585e9.3
- for <qemu-riscv@nongnu.org>; Wed, 07 Feb 2024 08:38:18 -0800 (PST)
+ id 1rXkwK-00068Q-Bm
+ for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 11:38:26 -0500
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-33b28aadb28so640382f8f.3
+ for <qemu-riscv@nongnu.org>; Wed, 07 Feb 2024 08:38:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1707323897; x=1707928697; darn=nongnu.org;
+ d=linaro.org; s=google; t=1707323902; x=1707928702; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4XrdlyPxX7fzqYNhg32fjbzatjpy7oOVQl+tyM0KqaA=;
- b=snotOtLvwVpKbWPhm7wpatKLekwNvlVPtoYKSumMcrk+pBT4HZoElHixY+sDIio6sk
- QnG2BGi4uYqeGxNlYT+6hiC5qdI+iaVg3kIBkZID22k0/nI6nTSPLpari4EoTz4w04yy
- JLq9QxYNkt0sGli1lt5yDZxoO9ubF4aVzfQksEUXNtg5Zy8XkEPZFymzQ1ED3L9VfTOd
- mRgCBhT9D9vc8vqgLDpxC+6NQhV/Rs5lXFTMx6MUSGhN9qQiSRSGua9eE+Uggp8lhbbO
- yBGm0MyW7HLMZBEayr2MDgNz2hPyoAb5IEx7QBfKOwKWTcaDp//OJviUlzy3rM19T1tQ
- 1ciA==
+ bh=fM5vrN0Mlz2zZCFNsOvOH4Md1jU+CHoqT++QO5pSQvE=;
+ b=Dv8Ut1t3diR6G97LfsvjCNnKcaKw/2qnmaaGSUtBpzlbQBrOYuISqhFjmmlW2JCer3
+ Hfyt8rdvVB9SvNtKES7wp8WLph9VNq+MDBfOL52xoWagGAVVFTsZRiNEuNAL05vgraAc
+ vSbs16hXE0z8+x5bNeOJYV+EAqkMqTm+yO6ZByMWmd9AojdUHXHxjdCHw5EymUHlWaP6
+ tm+xnQqA/0Ur2OCLphxhwj3+NX97JPrLdoiklpdZHpUn27QEt+hJqJA7jDcO8I+cI6D1
+ z/vN51HKtnfYvvxL5CpIlgrboSNBRJVgjHBds/W0tm4rCkF1xZX+N7SFCbH8/APLz2Tb
+ aEng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707323897; x=1707928697;
+ d=1e100.net; s=20230601; t=1707323902; x=1707928702;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4XrdlyPxX7fzqYNhg32fjbzatjpy7oOVQl+tyM0KqaA=;
- b=NGVARXIliaDj8wvYWMnDQvpGkO+hB+zfQgzKAxtoeuYoDKQzCosQFlYtbw8s1no6Wv
- eukxF7EH6om7LTmodcchTjV7EYyC7BIZ2WpY161fEGMelGXf6Mn4LHKHwqOiRgBJIaQ9
- Hug2WTHkLewvJHuqRMIfjlRWjlmQkw+SrtNtAlXfrunCrjGbpzzRw7HOcjW+Q/PBsQDf
- mJYmvm2PMFslQP8dgpULU2LPXaD/rVyzzZpn+aoG6DcFTrFdmqvXH9/SgWhhLD3DxAli
- OTg6Sy2D4mbaXO1fDSmEvfFR9o03EPAyo6yoAvJe+m8Tpa6+DbA19hERCEcBa/ilwhug
- jI7w==
-X-Gm-Message-State: AOJu0Yx6SiesOC5YIY03i/FAFQ7RUOppnizSR83nAF6yw884p8FTA7KN
- YTgRP1SDHMkiSQTd2KtCW8EXETqUnqHQConhMzxyJxzu2njpfEh79Mu+jejV08A=
-X-Google-Smtp-Source: AGHT+IFQGxvwZitCIjiQ+EVKzNxoWSscx1eHsi9FZHJMvO9a1UWD6FjNkLw5mRtQ0nFveN87wXl8Rg==
-X-Received: by 2002:a05:600c:a08:b0:40e:fb8f:debe with SMTP id
- z8-20020a05600c0a0800b0040efb8fdebemr4884119wmp.38.1707323897182; 
- Wed, 07 Feb 2024 08:38:17 -0800 (PST)
+ bh=fM5vrN0Mlz2zZCFNsOvOH4Md1jU+CHoqT++QO5pSQvE=;
+ b=f1oIFDx6Xu7kCxDyeKtlKCYDKugV4UeQh4pYA3hV8wmtQ5v2H7vPdu/eHPb6sHXnC5
+ eDskmNHvuycIOxkf+InmCHw8/AgQ5uHv1gVikM/drH68HfdJRj2l14hiIzJK8FUE9iZZ
+ P4MQsB/j7Ubr3hg6Pnm25c84y0dDoMXwc8u0xloJIIjhFYyh5kcOyo1yrwJw9w6NG3/Z
+ r2LQCiIxVSg5rsXkHpH/iD/d97hB+G9i0SdDhkF4eG5PzeF4WXcDMkcu+awICPPOaFNB
+ 6OOTpL1eIkxmbIXp1YwVbiZfEkLBapeXusIJ30DhNQ/od8nAXWjX6+8zwJcIniiO+ojK
+ t9Fw==
+X-Gm-Message-State: AOJu0Yx168Nx8xzosq/JP1LvIcA3TUE06SggJhGJSEqoAzAqiQ5p9oJ+
+ iM+xBZWlD6MFVDMa1yHXHw7v2ml+lDMRd68jOtZDWWC6eNcMzn8+rw/0CPj/O+8=
+X-Google-Smtp-Source: AGHT+IGRn8o+3PguwBMQKbgAfAf68TmGaanFkxmhOOIUWDE6pq12LGO9dPZ4sbxX968w/g0y+Ao1ug==
+X-Received: by 2002:a05:6000:1887:b0:33a:e9dd:5b6b with SMTP id
+ a7-20020a056000188700b0033ae9dd5b6bmr5051977wri.9.1707323902065; 
+ Wed, 07 Feb 2024 08:38:22 -0800 (PST)
 X-Forwarded-Encrypted: i=1;
- AJvYcCXyZ5+acAuDUHb7TgMFnMsuwKsw3ljUwkqM34AK+NfpZnr7sWoJ37vTqNMlT1oRbxzAZOXObeySLPXnLBK7+4hzxOGV2pbYvkRU+sowfGEvZbY6aqidNUk8fVvW2KQGFs3kKfE6p/sY1/2l5mzRGqbhjAj21EMKolfmnAIPcYVXX8VZO/XbsJOc3cIQNYZFzw6rkI63QKcaSHkdLMvfLUIGi9pRbvmSCvYSsRlihLYfCv3WaWJ6jS3bQKc64tmMfPjmU+0bqWOIq+I3IHi7Rojsc5T4rHxJ74mWv6AuGsoJw+/rnonLz5Oo9zxHmv6NrT9t6LeC4mM2u4DoBYu/6aCCH5px7EbarTR8XqjuWUgn7rfGwCWyUuZajUNE+osp+wqcMkrgTDL2ABxQR548Tmnxxps3NRqiiC/xfL/a3yMzM636ZaI13s4luhrUDNuR6FY7gJXAvzl30CyFgmiiZK3I+LHmic0L6m6Bnn/EeaYhGr+MekZ3bjWr9Mq4Pyl/MdeO7nCThrQ4ApEctS2cTBexPqPptuap2rJZWGDBX7xGUpB48c/KrYFxrI4wWFOhXbJOvk2uQNtTjUtMNoRQas/h8l4HXXKEb30Vr4FlN5MCDmWBB2nIUMcvM2GqDtSGxp/40tV0lZ24FdgRHkOAoK5NvCOjiHotlyip61IC5ouFPjAt+OlmDaAVUDDh7aEET9fF0NhPw9SkSTu51am1736A44qTe7P8u/zqTDe+1NepefJO+stZyz/AvkJuM2QZm92D1oZ+VAfmIl8uXxxBZivTK2jqRJ5Opag2YoPl7tbEO+7kRSi+deJudFTkqWFlpeb2p1j9NVayvws=
+ AJvYcCUYag4D21fnS+Nt3Iaa0dWG4qWZq8iz7hwR054Tieh1RJruin5WpYjIvfHJUsbaIMXvRT0a8w0Y7xumZ62eTYqyk7M5dHRcd073VKqaempqxzU3NI3jMnLLMX1ouaZmTgS0y4gs6vgHt0JUXgU1HhOWnRQqW6XWyDDVCHNRid5ugUdq3Ex3o8zdgCEjQmyF51CVoJvMlwQSgBWFm1BJYnCZWfqQgVYVEvtShNto7qBgyNpXMV3ekxzMuGiuD/qRXcOCmfFIp/j7QuXexWYapukhaXU0c72UkvOlVP9HNrm7f4xJnS0IkJAg7k7+EDxbnQLlFpljISxnfi57XteE8g3ZHhqtGQPWqKD/A6YU+NCPq8rm45SzXwj7F7TL+3YI4/Ce4bk8V+Eu+PZFqfQuEh01tf3UQO0oKp8rFWUMnLpuLFijLiTv7g3GAun9BJA3IZLiHlYmdUAF3odWSigqf84aWgLHBo0pFBTbh9qb5ZQIjh2BHHLdseZbzvCGf8Rl+lyMdNcz0gyidQEUkamYgzJTBLmY072NCWj4BNad/X1FEseVZ1NhdnUleZ2WCBDQQYh/HQeppZzdUFnpmER0xxOzIPlsf8m6BHUaAE4W/C8PxNNK+Fef37M207yUmyNHrEN6B2tsa0+4vmttFuAp6q8/HNzQT9hwpLAwy4/sbChqabDwQjRU1WfBdFQnPEE/CytfnqGzqtLXTfGBYi0MR1jqktR/vCFBnQwS2W/D3uXbawLY9zAqUVTmaPrMTPxip9PXtfUkV+5xeheXSM1lV73AEO07XIZBL5g7TyZLT5JI+X+XjdHBAnIZXpvSDzIjunEZZrbnoMxWl75nXctY3GGHgdn1TVv7ZqYf+a6R
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- p22-20020a05600c359600b0040ffe1ca25bsm2621888wmq.21.2024.02.07.08.38.12
+ dr9-20020a5d5f89000000b0033b14f22180sm1931991wrb.20.2024.02.07.08.38.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Feb 2024 08:38:13 -0800 (PST)
+ Wed, 07 Feb 2024 08:38:17 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 6709C5F890;
+ by draig.lan (Postfix) with ESMTP id D06AA5F936;
  Wed,  7 Feb 2024 16:38:12 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -83,25 +83,25 @@ Cc: devel@lists.libvirt.org, Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Li-Wen Hsu <lwhsu@freebsd.org>, Laurent Vivier <laurent@vivier.eu>,
  Kyle Evans <kevans@freebsd.org>,
  Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Riku Voipio <riku.voipio@iki.fi>
-Subject: [PATCH v2 03/14] configure: run plugin TCG tests again
-Date: Wed,  7 Feb 2024 16:38:01 +0000
-Message-Id: <20240207163812.3231697-4-alex.bennee@linaro.org>
+ Riku Voipio <riku.voipio@iki.fi>, Ilya Leoshkevich <iii@linux.ibm.com>
+Subject: [PATCH v2 08/14] meson: Link with libinotify on FreeBSD
+Date: Wed,  7 Feb 2024 16:38:06 +0000
+Message-Id: <20240207163812.3231697-9-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240207163812.3231697-1-alex.bennee@linaro.org>
 References: <20240207163812.3231697-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32b.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::433;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x433.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -117,39 +117,91 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Paolo Bonzini <pbonzini@redhat.com>
+From: Ilya Leoshkevich <iii@linux.ibm.com>
 
-Commit 39fb3cfc28b ("configure: clean up plugin option handling", 2023-10-18)
-dropped the CONFIG_PLUGIN line from tests/tcg/config-host.mak, due to confusion
-caused by the shadowing of $config_host_mak.  However, TCG tests were still
-expecting it.  Oops.
+make vm-build-freebsd fails with:
 
-Put it back, in the meanwhile the shadowing is gone so it's clear that it goes
-in the tests/tcg configuration.
+    ld: error: undefined symbol: inotify_init1
+    >>> referenced by filemonitor-inotify.c:183 (../src/util/filemonitor-inotify.c:183)
+    >>>               util_filemonitor-inotify.c.o:(qemu_file_monitor_new) in archive libqemuutil.a
 
-Cc:  <alex.bennee@linaro.org>
-Fixes: 39fb3cfc28b ("configure: clean up plugin option handling", 2023-10-18)
-Signed-off-by: Paolo Bonzini <pbonzini@redhat.com>
-Message-Id: <20240124115332.612162-1-pbonzini@redhat.com>
+On FreeBSD the inotify functions are defined in libinotify.so. Add it
+to the dependencies.
+
+Signed-off-by: Ilya Leoshkevich <iii@linux.ibm.com>
+Reviewed-by: Thomas Huth <thuth@redhat.com>
+Message-Id: <20240206002344.12372-5-iii@linux.ibm.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- configure | 3 +++
- 1 file changed, 3 insertions(+)
+ meson.build      | 23 +++++++++++++++++++----
+ util/meson.build |  6 +++++-
+ 2 files changed, 24 insertions(+), 5 deletions(-)
 
-diff --git a/configure b/configure
-index 3d8e24ae011..ff058d6c486 100755
---- a/configure
-+++ b/configure
-@@ -1644,6 +1644,9 @@ fi
- mkdir -p tests/tcg
- echo "# Automatically generated by configure - do not modify" > tests/tcg/$config_host_mak
- echo "SRC_PATH=$source_path" >> tests/tcg/$config_host_mak
-+if test "$plugins" = "yes" ; then
-+    echo "CONFIG_PLUGIN=y" >> tests/tcg/$config_host_mak
-+fi
+diff --git a/meson.build b/meson.build
+index b5d6dc94a83..e5d6f2d057e 100644
+--- a/meson.build
++++ b/meson.build
+@@ -2384,6 +2384,22 @@ else
+ endif
+ config_host_data.set('CONFIG_ASAN_IFACE_FIBER', have_asan_fiber)
  
- tcg_tests_targets=
- for target in $target_list; do
++have_inotify_init = cc.has_header_symbol('sys/inotify.h', 'inotify_init')
++have_inotify_init1 = cc.has_header_symbol('sys/inotify.h', 'inotify_init1')
++inotify = not_found
++if (have_inotify_init or have_inotify_init1) and host_os == 'freebsd'
++  # libinotify-kqueue
++  inotify = cc.find_library('inotify')
++  if have_inotify_init
++    have_inotify_init = inotify.found()
++  endif
++  if have_inotify_init1
++    have_inotify_init1 = inotify.found()
++  endif
++endif
++config_host_data.set('CONFIG_INOTIFY', have_inotify_init)
++config_host_data.set('CONFIG_INOTIFY1', have_inotify_init1)
++
+ # has_header_symbol
+ config_host_data.set('CONFIG_BLKZONED',
+                      cc.has_header_symbol('linux/blkzoned.h', 'BLKOPENZONE'))
+@@ -2400,10 +2416,6 @@ config_host_data.set('CONFIG_FIEMAP',
+ config_host_data.set('CONFIG_GETRANDOM',
+                      cc.has_function('getrandom') and
+                      cc.has_header_symbol('sys/random.h', 'GRND_NONBLOCK'))
+-config_host_data.set('CONFIG_INOTIFY',
+-                     cc.has_header_symbol('sys/inotify.h', 'inotify_init'))
+-config_host_data.set('CONFIG_INOTIFY1',
+-                     cc.has_header_symbol('sys/inotify.h', 'inotify_init1'))
+ config_host_data.set('CONFIG_PRCTL_PR_SET_TIMERSLACK',
+                      cc.has_header_symbol('sys/prctl.h', 'PR_SET_TIMERSLACK'))
+ config_host_data.set('CONFIG_RTNETLINK',
+@@ -4407,6 +4419,9 @@ summary_info += {'libudev':           libudev}
+ summary_info += {'FUSE lseek':        fuse_lseek.found()}
+ summary_info += {'selinux':           selinux}
+ summary_info += {'libdw':             libdw}
++if host_os == 'freebsd'
++  summary_info += {'libinotify-kqueue': inotify}
++endif
+ summary(summary_info, bool_yn: true, section: 'Dependencies')
+ 
+ if host_arch == 'unknown'
+diff --git a/util/meson.build b/util/meson.build
+index af3bf5692d8..0ef9886be04 100644
+--- a/util/meson.build
++++ b/util/meson.build
+@@ -104,7 +104,11 @@ if have_block
+   util_ss.add(files('throttle.c'))
+   util_ss.add(files('timed-average.c'))
+   if config_host_data.get('CONFIG_INOTIFY1')
+-    util_ss.add(files('filemonitor-inotify.c'))
++    freebsd_dep = []
++    if host_os == 'freebsd'
++      freebsd_dep = inotify
++    endif
++    util_ss.add(files('filemonitor-inotify.c'), freebsd_dep)
+   else
+     util_ss.add(files('filemonitor-stub.c'))
+   endif
 -- 
 2.39.2
 
