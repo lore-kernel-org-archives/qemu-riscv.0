@@ -4,80 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D69A5C48297
-	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Feb 2024 03:33:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A142C4828D
+	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Feb 2024 08:18:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rXYg2-0003ii-2j; Tue, 06 Feb 2024 22:32:46 -0500
+	id 1rXd8a-0007P5-A5; Wed, 07 Feb 2024 03:18:32 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
- id 1rXYfz-0003iA-U9
- for qemu-riscv@nongnu.org; Tue, 06 Feb 2024 22:32:43 -0500
-Received: from mail-lf1-x12f.google.com ([2a00:1450:4864:20::12f])
+ id 1rXd8Z-0007Ol-61
+ for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 03:18:31 -0500
+Received: from mail-oi1-x235.google.com ([2607:f8b0:4864:20::235])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
- id 1rXYfy-00011u-7D
- for qemu-riscv@nongnu.org; Tue, 06 Feb 2024 22:32:43 -0500
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-511344235c6so302410e87.0
- for <qemu-riscv@nongnu.org>; Tue, 06 Feb 2024 19:32:40 -0800 (PST)
+ id 1rXd8X-0005oM-H6
+ for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 03:18:30 -0500
+Received: by mail-oi1-x235.google.com with SMTP id
+ 5614622812f47-3be78c26850so251866b6e.0
+ for <qemu-riscv@nongnu.org>; Wed, 07 Feb 2024 00:18:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1707276759; x=1707881559; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=H+7mfik/qsuw26YTNv+4TvESFtvaUC1lE+jZpdxOzls=;
- b=fijRlVxV98ItqS9Lz+LqPkY3HKo/X/UGhVbi32fSXspjKQnVbvZbg5z+eS/hvxEswm
- K8emz4dpcA2d1JrV6384DSvrhqm07S8vVuDSWiq5xMf+Id6k/TWXo9JHscxZnVqa3sNJ
- Iwl0rq9djCWD+89beMVK6/xfzzC5DzNwiCJ6/U/q64uUzSaYhrNQ8PfbFxx2NYfe134p
- 0JhRtnqwOPw0QCcZI1KEAKjj1M02sXxfZ+lmJmz35Hmkh7Nvx3E03w2IibsXRuxKZS43
- zjHl13SVyf213ILVktqSrw4KWSEcDzO7DWGJPtKJrP6wdFLe13Ufm1TFvRmt/ay1FEIR
- JgBA==
+ d=sifive.com; s=google; t=1707293908; x=1707898708; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=aicKXpUQO39cEI4kVtjxvQ6+IcJ9GZuamadBnr6FUGA=;
+ b=Bw48r2g/LjuWWyJzog7Q1noWpmyCK+apxIb1oXj15BDPmeMd10vkcVRwwGU1OMDVb/
+ j1s6xUZDQC2yaOdOPeAwJNsPQRhsemN+9mFvzbc3Pm89mwLIYUr7POsClznadrhvAT/V
+ /tLXNWEg2vtnj1f4OBCdT/FmFis2Hn5NXDpzO+SXl0wALZbtuk0uPYcJbhRCYg/akWw+
+ B2ZDMTC67Wk5BzfxD6h/imHAhqZ+5CDDoLe4oBDnfEoato68FN2xA3vypdLILf+Vqitf
+ 01J85syw+/TCGlEAKPXmemt1nCL1ZF7V8oh+6ezigZJUvjemjStbU8o7px17L8ucaHoY
+ NjnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707276759; x=1707881559;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1707293908; x=1707898708;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=H+7mfik/qsuw26YTNv+4TvESFtvaUC1lE+jZpdxOzls=;
- b=Zm99Vmo4btQ1xKvOtakDfS/Cf0wIE2DEsASR6wTpaUvaSxJLLleXj6AVr0HQoteDl6
- 1dTS26uNETYa9G0oSAidkQCtGy86ThBvqKUTrUcwjkwrnBx7sC4Jijv6BpEMMrEgtkJD
- Gnq3KLP/x7GekRhWZ59jjC7/NIeztOwFSejZ4dEURuItFw5hDeu9CK2x648cgbyr3POh
- ToSiOgA27bs/ilrgmHmINuinKxhC6gZoBr7cUwIgN1LHSmQkqh1Hh1UG0HHtp5JhshZg
- II/i8k/qOUdKffJhOu+AqUN7h9M7Z9/xnOnwzWL3y/iGJXEPB2YB52qKZIOl/D/T0KUD
- C3Mw==
-X-Gm-Message-State: AOJu0YwhXgSwBIOu9NzIoHtO9it8w4m9PoACbISg36fgDkvv9Igs7IND
- BDabrSAkjjzxMRjl0RBiOuC1D0wVsAKiGB908YQcLI0UPi1Jr3+uG9PKGwgaMhns3TFc7jkdUUV
- 0M8mEZrb49JJJ8pzBAVnbBFvEaGmHm2NyDXps8MXMsYjcewqjT//XJA==
-X-Google-Smtp-Source: AGHT+IEUdmb6+p590P7Mry4Ht6TF87xhmUv4ge9FUaS15f1pCfZ4xEEK8oELgmznHbJcHmDevI64owvK8UpVyhqXSMQ=
-X-Received: by 2002:a05:651c:624:b0:2d0:a56f:95b5 with SMTP id
- k36-20020a05651c062400b002d0a56f95b5mr2547187lje.37.1707276759421; Tue, 06
- Feb 2024 19:32:39 -0800 (PST)
-MIME-Version: 1.0
-References: <20240206131911.10998-1-jason.chien@sifive.com>
- <162e0b5c-ed98-4e84-af6e-9fdaea0dcc04@linaro.org>
-In-Reply-To: <162e0b5c-ed98-4e84-af6e-9fdaea0dcc04@linaro.org>
+ bh=aicKXpUQO39cEI4kVtjxvQ6+IcJ9GZuamadBnr6FUGA=;
+ b=ZwctnnFQ96iZh+X/jKzS9v03B/S10HFgHWxXjtU90wcx0On2IcIWFeVyH1UDmUe1uS
+ ddajChWPudBpiYTRIWjOsHjO+p7w+fjRBvs3M0gQpEmufw9OetEJz2M0QlI+OlNHm6cg
+ 0i9+7aoGyOtRNK67jXEecWpyeh+kTqGoPhbaKGSADNwJs1e1hxX/omEAFqwPbjl2SU57
+ aaTwXO/GpWcF6E6Uigo2HrcyIBujpVCxwtEOXV55f3fY0eSHoV0zLjhl25EKyqSrv8pz
+ u1iSrG9icyVD8VpGREHsWGok+CTGAqSSax+7EFqngEyFKpp1f7NBHcyuMqWc+HC77V8D
+ GLOw==
+X-Gm-Message-State: AOJu0YzYblMKl17lErKaoQ/hDOOZ8NzoT6H3Zk5211Kw/WnJs4vaMper
+ Wlo+Z+DbdFs5fHrQfwlf7BUscg+eqwWUyVxJOMRYA3Or0Jvo7ycIwRVEzPvsGbQ=
+X-Google-Smtp-Source: AGHT+IGTBn8o9y+pTeqTANSczOYbrrMndwzzgx9b9kvnq0knaxfs19z9Uwlxu9xZ5Cz64YUUct/Ifw==
+X-Received: by 2002:a05:6359:2382:b0:178:9756:34c4 with SMTP id
+ lm2-20020a056359238200b00178975634c4mr1831354rwb.30.1707293908016; 
+ Wed, 07 Feb 2024 00:18:28 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWGV/lMBmSg9cZcmBtWy7aayQUnsbilK6p0HqNrfMfx22PChgoEwbRWQTX0Rkx7IdPML8754oSPX+DNQc5tRMpfa52G7ukxOgr9MWnpDBaCcLz2vM7xDknKmW3VbYZ0Wtj0NkDVN6TQBdB44bm1o1f/RujoKBAA7/UtVIIjSq/ccMT0WOeE3qf2vEJ1TNx9PPGcCKRxdBfLxNr4qtP4JzQMErz1XE4wAOlvSeNcSnjwVNYsQh9lcjlfG3aBiVw5IaVuKT6m/R7bGS5kWLk+RpIs0QsOvYGCjCf6sIrOP17EZUAiZ3TsNmwVgSWLNmb4BG6hkgNVPTrSuUQLm2A65MtZvrJAbM/umo72tQqnLHKEGeh0rP/SqZpEldN5ESUUnI/UmpnwywIRnHxYEKKu1YrU1+OmxCXV7zAolEjB
+Received: from hsinchu16.internal.sifive.com
+ (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
+ by smtp.gmail.com with ESMTPSA id
+ cl13-20020a056a02098d00b005d34cf68664sm772294pgb.25.2024.02.07.00.18.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 07 Feb 2024 00:18:27 -0800 (PST)
 From: Jason Chien <jason.chien@sifive.com>
-Date: Wed, 7 Feb 2024 11:33:51 +0800
-Message-ID: <CADr__8rwLz7=FvkCwncRy4fGsHYxe0BXEstB_1o_P14p37ZmYA@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Update $pc after linking to $ra in
- trans_cm_jalt()
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Jason Chien <jason.chien@sifive.com>, Frank Chang <frank.chang@sifive.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Junqiang Wang <wangjunqiang@iscas.ac.cn>
-Content-Type: multipart/alternative; boundary="000000000000c7739a0610c258c6"
-Received-SPF: pass client-ip=2a00:1450:4864:20::12f;
- envelope-from=jason.chien@sifive.com; helo=mail-lf1-x12f.google.com
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Junqiang Wang <wangjunqiang@iscas.ac.cn>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH v2] target/riscv: Update $ra with current $pc in
+ trans_cm_jalt()
+Date: Wed,  7 Feb 2024 16:18:08 +0800
+Message-ID: <20240207081820.28559-1-jason.chien@sifive.com>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::235;
+ envelope-from=jason.chien@sifive.com; helo=mail-oi1-x235.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -95,123 +103,50 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---000000000000c7739a0610c258c6
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+The original implementation sets $pc to the address read from the jump
+vector table first and links $ra with the address of the next instruction
+after the updated $pc. After jumping to the updated $pc and executing the
+next ret instruction, the program jumps to $ra, which is in the same
+function currently executing, which results in an infinite loop.
+This commit stores the jump address in a temporary, updates $ra with the
+current $pc, and copies the temporary to $pc.
 
-You are right. I'll send patch v2 shortly. Thank you for the reply.
+Signed-off-by: Jason Chien <jason.chien@sifive.com>
+Reviewed-by: Frank Chang <frank.chang@sifive.com>
+---
+ target/riscv/insn_trans/trans_rvzce.c.inc | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-Richard Henderson <richard.henderson@linaro.org> =E6=96=BC 2024=E5=B9=B42=
-=E6=9C=887=E6=97=A5 =E9=80=B1=E4=B8=89 =E4=B8=8A=E5=8D=884:24=E5=AF=AB=E9=
-=81=93=EF=BC=9A
+diff --git a/target/riscv/insn_trans/trans_rvzce.c.inc b/target/riscv/insn_trans/trans_rvzce.c.inc
+index 2d992e14c4..cd234ad960 100644
+--- a/target/riscv/insn_trans/trans_rvzce.c.inc
++++ b/target/riscv/insn_trans/trans_rvzce.c.inc
+@@ -293,12 +293,14 @@ static bool trans_cm_jalt(DisasContext *ctx, arg_cm_jalt *a)
+ {
+     REQUIRE_ZCMT(ctx);
+ 
++    TCGv addr = tcg_temp_new();
++
+     /*
+      * Update pc to current for the non-unwinding exception
+      * that might come from cpu_ld*_code() in the helper.
+      */
+     gen_update_pc(ctx, 0);
+-    gen_helper_cm_jalt(cpu_pc, tcg_env, tcg_constant_i32(a->index));
++    gen_helper_cm_jalt(addr, tcg_env, tcg_constant_i32(a->index));
+ 
+     /* c.jt vs c.jalt depends on the index. */
+     if (a->index >= 32) {
+@@ -307,6 +309,8 @@ static bool trans_cm_jalt(DisasContext *ctx, arg_cm_jalt *a)
+         gen_set_gpr(ctx, xRA, succ_pc);
+     }
+ 
++    tcg_gen_mov_tl(cpu_pc, addr);
++
+     tcg_gen_lookup_and_goto_ptr();
+     ctx->base.is_jmp = DISAS_NORETURN;
+     return true;
+-- 
+2.43.0
 
-> On 2/6/24 23:18, Jason Chien wrote:
-> > The original implementation sets $pc to the address read from the jump
-> > vector table first and links $ra with the address of the next instructi=
-on
-> > after the updated $pc. After jumping to the updated $pc and executing t=
-he
-> > next ret instruction, the program jumps to $ra, which is in the same
-> > function currently executing, which results in an infinite loop.
-> > This commit reverses the two action. Firstly, $ra is updated with the
-> > address of the next instruction after $pc, and sets $pc to the address
-> > read from the jump vector table.
->
-> This is unlikely to be correct in the case the vector table read faults,
-> leaving $ra updated.
->
-> I guess this got broken with CF_PCREL.  Anyway, the solution is to use a
-> temporary...
->
-> > -    /*
-> > -     * Update pc to current for the non-unwinding exception
-> > -     * that might come from cpu_ld*_code() in the helper.
-> > -     */
-> > -    gen_update_pc(ctx, 0);
-> > -    gen_helper_cm_jalt(cpu_pc, cpu_env, tcg_constant_i32(a->index));
->
-> ... here and then ...
->
-> > @@ -307,6 +300,13 @@ static bool trans_cm_jalt(DisasContext *ctx,
-> arg_cm_jalt *a)
-> >           gen_set_gpr(ctx, xRA, succ_pc);
-> >       }
-> >
->
-> ... copy the temp to cpu_pc here.
->
-> >       tcg_gen_lookup_and_goto_ptr();
-> >       ctx->base.is_jmp =3D DISAS_NORETURN;
-> >       return true;
->
->
->
-> r~
->
-
---000000000000c7739a0610c258c6
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">You are=C2=A0right. I&#39;ll send patch v2 shortly. Thank =
-you for the reply.=C2=A0</div><br><div class=3D"gmail_quote"><div dir=3D"lt=
-r" class=3D"gmail_attr">Richard Henderson &lt;<a href=3D"mailto:richard.hen=
-derson@linaro.org">richard.henderson@linaro.org</a>&gt; =E6=96=BC 2024=E5=
-=B9=B42=E6=9C=887=E6=97=A5 =E9=80=B1=E4=B8=89 =E4=B8=8A=E5=8D=884:24=E5=AF=
-=AB=E9=81=93=EF=BC=9A<br></div><blockquote class=3D"gmail_quote" style=3D"m=
-argin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left=
-:1ex">On 2/6/24 23:18, Jason Chien wrote:<br>
-&gt; The original implementation sets $pc to the address read from the jump=
-<br>
-&gt; vector table first and links $ra with the address of the next instruct=
-ion<br>
-&gt; after the updated $pc. After jumping to the updated $pc and executing =
-the<br>
-&gt; next ret instruction, the program jumps to $ra, which is in the same<b=
-r>
-&gt; function currently executing, which results in an infinite loop.<br>
-&gt; This commit reverses the two action. Firstly, $ra is updated with the<=
-br>
-&gt; address of the next instruction after $pc, and sets $pc to the address=
-<br>
-&gt; read from the jump vector table.<br>
-<br>
-This is unlikely to be correct in the case the vector table read faults,<br=
->
-leaving $ra updated.<br>
-<br>
-I guess this got broken with CF_PCREL.=C2=A0 Anyway, the solution is to use=
- a temporary...<br>
-<br>
-&gt; -=C2=A0 =C2=A0 /*<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0* Update pc to current for the non-unwinding exce=
-ption<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0* that might come from cpu_ld*_code() in the help=
-er.<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0*/<br>
-&gt; -=C2=A0 =C2=A0 gen_update_pc(ctx, 0);<br>
-&gt; -=C2=A0 =C2=A0 gen_helper_cm_jalt(cpu_pc, cpu_env, tcg_constant_i32(a-=
-&gt;index));<br>
-<br>
-... here and then ...<br>
-<br>
-&gt; @@ -307,6 +300,13 @@ static bool trans_cm_jalt(DisasContext *ctx, arg_=
-cm_jalt *a)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0gen_set_gpr(ctx, xRA, succ_pc)=
-;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-&gt;=C2=A0 =C2=A0<br>
-<br>
-... copy the temp to cpu_pc here.<br>
-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0tcg_gen_lookup_and_goto_ptr();<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0ctx-&gt;base.is_jmp =3D DISAS_NORETURN;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0return true;<br>
-<br>
-<br>
-<br>
-r~<br>
-</blockquote></div>
-
---000000000000c7739a0610c258c6--
 
