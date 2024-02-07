@@ -4,65 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46BADC4828D
-	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Feb 2024 16:40:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63A21C4828F
+	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Feb 2024 16:40:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rXkwE-0002o9-6Y; Wed, 07 Feb 2024 11:38:18 -0500
+	id 1rXkwR-0002zS-OE; Wed, 07 Feb 2024 11:38:31 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rXkwC-0002nb-GY
- for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 11:38:16 -0500
-Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333])
+ id 1rXkwO-0002wQ-Ol
+ for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 11:38:28 -0500
+Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rXkwA-00066U-Nm
- for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 11:38:16 -0500
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-410177e41a8so5433425e9.2
- for <qemu-riscv@nongnu.org>; Wed, 07 Feb 2024 08:38:14 -0800 (PST)
+ id 1rXkwM-0006BM-SA
+ for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 11:38:28 -0500
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-40fc22f372cso7350355e9.1
+ for <qemu-riscv@nongnu.org>; Wed, 07 Feb 2024 08:38:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1707323893; x=1707928693; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=WlKp9d70XQ8fXpBt0YxGjxqCi1DdUKUDYda3Sj9Zt2k=;
- b=C/RsNRJiVBuOF78HAvFAsmjrxXzWVo+nYc539HHZ8X8pJ4Evc2dwWMHdSfhtPX8pm4
- UErdumWr6NC+bMrXXD6EozFEavKqoQuD/4Y87D7dApuEmJ4E6ZVCZSZXJeGalgChGLgY
- KSuNMXbP3+8zf0WXkbju5DtMqHHLt4FNKkrolnbOV5+fN8woaeKI1878WfL8QvyWk99l
- Hqr+EmIpgrs/sQ4UpV9cwglzh8o2Q/vJo3Erod8QCdb5phERjMc69ALGechVUzG6jXj/
- 2HHNELpK0zM7YxdqwnSd+9UtcV8psu7KpB3oIFdss2cknD68QUEqGSOHIQibGCwV9grd
- NDXw==
+ d=linaro.org; s=google; t=1707323905; x=1707928705; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nUnXcCSSh6U29fLbXe/wbWbJ/XTPO8jPvZXYeKxJYts=;
+ b=dYPKpNZat1kg7Bzk79dTrSh7xTWlZIFoV++5iZaestZEIoNvUJVpF5OK1mRVtEVluy
+ rLdi0lYkpY7PPq0pyN4utdzDI0zI6n8ofDCsmQRYN8CpSh8My1m99ShWnuRkcIe7W8EQ
+ fj+QxCv0eIAq1fNAmj4djbNJSKFiYyTRXPMFd45TpZ3fiZriYiNb/fXsF+Wn+bJIggzD
+ syxZdBWg9TJkIxqvwAq9nK11Xk4jMjX/D0vxV9EfntcdwSZmkA2n/bQibSt82FVWLU1+
+ rp2ZiRYH47yn6IyVRRkzlwYXoL8cYieQw4uuE56IzO1hlDM9/yZAmmS/5XwuCrWgjsZn
+ IHMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707323893; x=1707928693;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=WlKp9d70XQ8fXpBt0YxGjxqCi1DdUKUDYda3Sj9Zt2k=;
- b=mDwLBgnyJezV9MNIQSb4QgTVLFVphFMJJroL1KYGKj49X4tMmvkZMUbHiguIONVdN4
- 2YcmJuLfPY3vhkwPnSyhDCglOG1uQ7chsxWcC0ZGSKIOkUF4nIgkisqUR61Y7lnDiSKS
- qNs/cC1jGC23aBWBqgPtwzYk4rhkoNPvgTEvX+lxeDeR6PRJ8T/ggnPTrgSfOg7Kz8kJ
- SNdrW5B4OEUyFFL5CyXY4r4A3nf0EiWEBQtSm+mn97jtPo+G7Ky/deRdXqs2znW74oDD
- RWyGIA8VXUKwLqrsWvIvIh8ULK+SzvMiNo2ben5GijMSugFQXA3RVWHE29UcsTtuXB/m
- 81og==
+ d=1e100.net; s=20230601; t=1707323905; x=1707928705;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=nUnXcCSSh6U29fLbXe/wbWbJ/XTPO8jPvZXYeKxJYts=;
+ b=OaiDb2PzfGg80LCv6VAmfLOSj6NCMFQgVrNbUpS4hXalrWgQmznUQm+WapE+nGW0Vp
+ EnVijbDWEfcH3VZf7V6z6ejVRH2rrDqj7pOuKNCpwZY8QKPXjTRN+5cYOZQzSB00/pet
+ aIryVvc/rWQeUqpI9S3ylcHl+BHeao+wHqgzKQQBVgVxeYprCeEL806o/qIoek5N05WN
+ jh7rXTDGzRcBQSrDBl9rsF90IQTRIjfJH4QDld1rshJy+HtB9LuqONyiFGKHARov7GZf
+ bZwMxVo4aoDQ2gkRJ62J1lfbrXuXQ2s+2mYh9174shdgBlT2ICseq/8Dw7JQgQMa+bC4
+ cPXw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWZBrZ480nVnTj8beFbXdoEtIKm8sLw594DnGTefIeXzlychRNCwNqrvi44KTBvsKuVtzJps/mzBeT/v0PvdXVu/nz+LvM=
-X-Gm-Message-State: AOJu0YzCEAYYeDwfdxwTYs0DWNkFyEFPRL2Two0bfzbYMHuSwfjfrhOg
- o4eRPMtuyERm0vy9hMyoURgTe6G0WRtTmdGHmQY+nx41drIBMp66mW4v3ibZT/s=
-X-Google-Smtp-Source: AGHT+IG9ZsuE8Kac17CgEZosUatIAWfcA5HG129aTLlLVj14HE4KxHZMdVKgaa2zjkm/ypsPzXXesg==
-X-Received: by 2002:a05:600c:46c7:b0:40e:b29c:7103 with SMTP id
- q7-20020a05600c46c700b0040eb29c7103mr4518974wmo.8.1707323892997; 
- Wed, 07 Feb 2024 08:38:12 -0800 (PST)
+ AJvYcCXaBeyZoJ8GH9Im1ghWJ2KFA3LcBsAWaUXvo3AaBpFWXxiK/ZQ5p9z/7WI6wLXX0DMepoQ/wC9WZ9v43CWBPLOuT+vIBts=
+X-Gm-Message-State: AOJu0Yz2GCcA5vfworrD+FTvfLE0ZOyAkPhLWZ9x3H43t/vWUpCjZCFJ
+ 3lsdqz2aqkCKUiOtdY+jYNYi6h15A9hn4zJRoa48IkBewlxUQyuB0czUTia+Fgo=
+X-Google-Smtp-Source: AGHT+IHWOH3+Y6dzVMWPSwfE1ua+TKP+nXGejC30x3sF+o/N8E89jj4nClzW6MEa8GwnWbdEZrfvoA==
+X-Received: by 2002:a05:600c:1910:b0:40e:c6a6:5111 with SMTP id
+ j16-20020a05600c191000b0040ec6a65111mr4417992wmq.11.1707323905332; 
+ Wed, 07 Feb 2024 08:38:25 -0800 (PST)
 X-Forwarded-Encrypted: i=1;
- AJvYcCXVVD88JpHiK2idhRmUo7scVVxDeoiUY7Mzi58y7mzTVCUgK6rObnzakvMQNvNKKJzRhcc61r4pDoMwe3a5GwJxHGrpGBJI573Rt7dbsw5PNEpO6/rjOnhFroHiPuB72yu0Pom1kjUZrGKE7hKmRYJs7pqvHIrtP3m5EBac1czrux3Npa+OX7kLbVJonUt8LpgotKN98BX3ef7KKjxdvge68lkUGLJC7du283U2/4xK9d8RmQxXdpl1WDH2YsIXv/9wqO4Y3gns8jpdPlCwC5ggqK1bJkuNuAtgt4hDcPpMyLJACoUqcZYKfv4osCT8ZtMkPS83Sxa42tjwMDfDIfSl8oqD7ObU9UmAw1LMkHESL2LaYMSIstE4F1xqxsB6Ql8ts4hxAno+BHKRXH4Byw/se5rb+N5oXLn+SbUvklu8k1psTRdPeT+pEHFFFybYYS8kpFYbLik7pvY8qNTMDrRrBrQjg3gr99IC7rF1UKOkOOmiYJ0aZ2IqMs8l5DdODTzaeJZVaQKMPGgbQbl32qncqxYWLgwowss8nIIBjdY1U7Cp4bxEecNRnFcxFBzH3IYWt3T0nwKi26SH/xq/FA8neCXwZs7zfm+3j4C+p1q/XafpAUZsVba76mbREde9o9UscIjMoHc1kZ/8Fkc3EcDeKyxR1mTJ722gVcN6dzo4FzXWOuqi5dbr6Oj9JTvNtCEVDYODB1C01mQ/sUhTcCW5cme1NZHdvPzuloZn4hLThFERNkdBI7Q6yu5SOY/NyAedgx+Em0s097lWa672m4LRn9PrejIQIZDbKW+tTW7KDs6aXBaitTAFelUpjyiSttBjeG3nhmZOt0A=
+ AJvYcCWhyaD1vupT/FNfVmORb9ZE7cv2foxFCinjPT9uXP8f9AAyFqzRcblYR8DkLUd4MRMpU80Kh9knP9Xp/N34knFALV1YwEDmfa7ufQFAswE8J+cey7zgurjX40sWDb76CMmQcWtgjhFid5dPrZ5F2JaYOv/gOeuJsNN+t0mwV+O98nDgqrr3vwyLp32/1OFZSInOM2CG9HHeV2CTPvZdVgjiruo0DPrSV3mKh/zx2iI1QWEZtR/RHTvC2exI9SZ1vivntZkp/LBWNESzL1xpg0XskBO1mkpcDf4N6XHvg6plb46ZKMlqtC+7x9yodxM8lUmdOMvZSB4cioBZlM4vXpWRmDkDM8Z03bdZYU4ueKRd0YCkV4kdotAwoSOZ7NmhY+B4cBlQSsnO+8VeVCJw3VKwELEOfjAdIPU3E4S47HZYsUAoGierf4mcmpttDPyD3Gqe601N75ZrTi9RiFD0zbekxRnK9NhLq3KjxF8RgGi5Cc9vN1+JgXylYaf0RY+0ivn1hx3SKXnE3cbJo4BNiArQ4JEGvoa8XfYBg2LTky/dTVCUfFQU2j4OK/l4cWDJCty0CONgxKRZxHLPhbCY+kDxa7u/FLQCjkXlzixFKruSeGJ+4y2acbF7QQxx7zPkkp63gM2cQZQzT0lexbqWcJ/hRVXfkM9kxgT4d3jlzF9O70i9EB728P9UP87Ok2RdcRE59YC02MTk3hW5QDMs/8cKlKdjfP06gRSarINiDPiiOd1mwPBx8oawc1HxlAPqZPcZo1pjaqesKNLItT6FGKhoi2IKFo6lDgaM5VOZVMhJxzwSlNvFs0+wBuDqIMJa9j49ehzX0nmZN0MBRaZr8MmTuLCaswIYsTk3GI1l
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- g16-20020adfa490000000b0033b50ed5f98sm1154188wrb.72.2024.02.07.08.38.12
+ w8-20020a05600c474800b00410219f126bsm779121wmo.37.2024.02.07.08.38.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Feb 2024 08:38:12 -0800 (PST)
+ Wed, 07 Feb 2024 08:38:22 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 26D785F7B1;
- Wed,  7 Feb 2024 16:38:12 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 424755F94A;
+ Wed,  7 Feb 2024 16:38:13 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: devel@lists.libvirt.org, Jiaxun Yang <jiaxun.yang@flygoat.com>,
@@ -84,17 +85,18 @@ Cc: devel@lists.libvirt.org, Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Li-Wen Hsu <lwhsu@freebsd.org>, Laurent Vivier <laurent@vivier.eu>,
  Kyle Evans <kevans@freebsd.org>,
  Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Riku Voipio <riku.voipio@iki.fi>
-Subject: [PATCH v2 00/14] maintainer updates for 9.0 pre-PR (docker,
- plugin tests, deprecation, elf, semihosting, gdbstub)
-Date: Wed,  7 Feb 2024 16:37:58 +0000
-Message-Id: <20240207163812.3231697-1-alex.bennee@linaro.org>
+ Riku Voipio <riku.voipio@iki.fi>, Ilya Leoshkevich <iii@linux.ibm.com>
+Subject: [PATCH v2 12/14] gdbstub: Add syscall entry/return hooks
+Date: Wed,  7 Feb 2024 16:38:10 +0000
+Message-Id: <20240207163812.3231697-13-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240207163812.3231697-1-alex.bennee@linaro.org>
+References: <20240207163812.3231697-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::333;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x333.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -117,75 +119,96 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-A fairly random collection of fixes in this tree. I've still got a
-report of openbsd rebuilding which is confusing me (something triggers
-it but calling again works as expected).
+From: Ilya Leoshkevich <iii@linux.ibm.com>
 
-v2
-  - added Ilya's vm-build and gdbstub patches
+The upcoming syscall catchpoint support needs to get control on syscall
+entry and return. Provide the necessary hooks for that, which are
+no-ops for now.
 
-Everything is reviewed now so baring objections I intend to post the
-PR on Friday afternoon.
+Signed-off-by: Ilya Leoshkevich <iii@linux.ibm.com>
+Message-Id: <20240202152506.279476-4-iii@linux.ibm.com>
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+---
+ include/gdbstub/user.h       | 13 +++++++++++++
+ include/user/syscall-trace.h |  7 +++++--
+ gdbstub/user.c               |  8 ++++++++
+ 3 files changed, 26 insertions(+), 2 deletions(-)
 
-Alex.
-
-Alex Bennée (2):
-  docs: mark CRIS support as deprecated
-  Revert "hw/elf_ops: Ignore loadable segments with zero size"
-
-Fabiano Rosas (1):
-  tests/docker: Add sqlite3 module to openSUSE Leap container
-
-Ilya Leoshkevich (9):
-  tests/vm: Set UseDNS=no in the sshd configuration
-  tests/vm/freebsd: Reload the sshd configuration
-  test-util-filemonitor: Adapt to the FreeBSD inotify rename semantics
-  meson: Link with libinotify on FreeBSD
-  gdbstub: Expose TARGET_SIGTRAP in a target-agnostic way
-  gdbstub: Allow specifying a reason in stop packets
-  gdbstub: Add syscall entry/return hooks
-  gdbstub: Implement catching syscalls
-  tests/tcg: Add the syscall catchpoint gdbstub test
-
-Paolo Bonzini (2):
-  configure: run plugin TCG tests again
-  kconfig: use "select" to enable semihosting
-
- docs/about/deprecated.rst                     |   8 ++
- configure                                     |   3 +
- configs/devices/m68k-softmmu/default.mak      |   2 -
- configs/devices/mips-softmmu/common.mak       |   3 -
- configs/devices/nios2-softmmu/default.mak     |   2 -
- configs/devices/riscv32-softmmu/default.mak   |   2 -
- configs/devices/riscv64-softmmu/default.mak   |   2 -
- configs/devices/xtensa-softmmu/default.mak    |   2 -
- meson.build                                   |  23 +++-
- gdbstub/internals.h                           |   2 +
- include/gdbstub/user.h                        |  29 ++++-
- include/hw/elf_ops.h                          |  75 ++++++-------
- include/user/syscall-trace.h                  |   7 +-
- gdbstub/gdbstub.c                             |   9 ++
- gdbstub/user-target.c                         |   5 +
- gdbstub/user.c                                | 104 +++++++++++++++++-
- tests/tcg/multiarch/catch-syscalls.c          |  51 +++++++++
- tests/unit/test-util-filemonitor.c            |   8 ++
- target/m68k/Kconfig                           |   1 +
- target/mips/Kconfig                           |   1 +
- target/nios2/Kconfig                          |   1 +
- target/riscv/Kconfig                          |   2 +
- target/xtensa/Kconfig                         |   1 +
- tests/docker/dockerfiles/opensuse-leap.docker |   1 +
- tests/lcitool/mappings.yml                    |   4 +
- tests/lcitool/projects/qemu.yml               |   1 +
- tests/tcg/multiarch/Makefile.target           |  10 +-
- tests/tcg/multiarch/gdbstub/catch-syscalls.py |  53 +++++++++
- tests/vm/basevm.py                            |   2 +
- tests/vm/freebsd                              |   1 +
- util/meson.build                              |   6 +-
- 31 files changed, 358 insertions(+), 63 deletions(-)
- create mode 100644 tests/tcg/multiarch/catch-syscalls.c
- create mode 100644 tests/tcg/multiarch/gdbstub/catch-syscalls.py
-
+diff --git a/include/gdbstub/user.h b/include/gdbstub/user.h
+index 1fc43e04af5..68b6534130c 100644
+--- a/include/gdbstub/user.h
++++ b/include/gdbstub/user.h
+@@ -51,5 +51,18 @@ void gdb_signalled(CPUArchState *as, int sig);
+  */
+ void gdbserver_fork(CPUState *cs);
+ 
++/**
++ * gdb_syscall_entry() - inform gdb of syscall entry and yield control to it
++ * @cs: CPU
++ * @num: syscall number
++ */
++void gdb_syscall_entry(CPUState *cs, int num);
++
++/**
++ * gdb_syscall_entry() - inform gdb of syscall return and yield control to it
++ * @cs: CPU
++ * @num: syscall number
++ */
++void gdb_syscall_return(CPUState *cs, int num);
+ 
+ #endif /* GDBSTUB_USER_H */
+diff --git a/include/user/syscall-trace.h b/include/user/syscall-trace.h
+index 557f881a79b..b48b2b2d0ae 100644
+--- a/include/user/syscall-trace.h
++++ b/include/user/syscall-trace.h
+@@ -11,6 +11,7 @@
+ #define SYSCALL_TRACE_H
+ 
+ #include "exec/user/abitypes.h"
++#include "gdbstub/user.h"
+ #include "qemu/plugin.h"
+ #include "trace/trace-root.h"
+ 
+@@ -20,7 +21,7 @@
+  * could potentially unify the -strace code here as well.
+  */
+ 
+-static inline void record_syscall_start(void *cpu, int num,
++static inline void record_syscall_start(CPUState *cpu, int num,
+                                         abi_long arg1, abi_long arg2,
+                                         abi_long arg3, abi_long arg4,
+                                         abi_long arg5, abi_long arg6,
+@@ -29,11 +30,13 @@ static inline void record_syscall_start(void *cpu, int num,
+     qemu_plugin_vcpu_syscall(cpu, num,
+                              arg1, arg2, arg3, arg4,
+                              arg5, arg6, arg7, arg8);
++    gdb_syscall_entry(cpu, num);
+ }
+ 
+-static inline void record_syscall_return(void *cpu, int num, abi_long ret)
++static inline void record_syscall_return(CPUState *cpu, int num, abi_long ret)
+ {
+     qemu_plugin_vcpu_syscall_ret(cpu, num, ret);
++    gdb_syscall_return(cpu, num);
+ }
+ 
+ 
+diff --git a/gdbstub/user.c b/gdbstub/user.c
+index 63edca131ab..2ba01c17faf 100644
+--- a/gdbstub/user.c
++++ b/gdbstub/user.c
+@@ -502,3 +502,11 @@ void gdb_syscall_handling(const char *syscall_packet)
+     gdb_put_packet(syscall_packet);
+     gdb_handlesig(gdbserver_state.c_cpu, 0);
+ }
++
++void gdb_syscall_entry(CPUState *cs, int num)
++{
++}
++
++void gdb_syscall_return(CPUState *cs, int num)
++{
++}
 -- 
 2.39.2
 
