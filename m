@@ -4,64 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D976C4828D
-	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Feb 2024 16:39:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2ADA4C4828D
+	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Feb 2024 16:39:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rXkwP-0002wr-ML; Wed, 07 Feb 2024 11:38:29 -0500
+	id 1rXkwM-0002uU-Qz; Wed, 07 Feb 2024 11:38:26 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rXkwM-0002tR-28
- for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 11:38:26 -0500
-Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
+ id 1rXkwK-0002sB-HC
+ for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 11:38:24 -0500
+Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rXkwK-00068g-B0
- for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 11:38:25 -0500
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-40fdc63f4feso7868065e9.3
- for <qemu-riscv@nongnu.org>; Wed, 07 Feb 2024 08:38:23 -0800 (PST)
+ id 1rXkwG-00067j-AJ
+ for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 11:38:23 -0500
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-4100826df08so7366645e9.2
+ for <qemu-riscv@nongnu.org>; Wed, 07 Feb 2024 08:38:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1707323902; x=1707928702; darn=nongnu.org;
+ d=linaro.org; s=google; t=1707323899; x=1707928699; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oWoGzkk5jlTntsP9Fp0ezGwzMskb1JgO0OTcfpG0rf4=;
- b=mCvzwygqxhve/FdYw7vM+UBP6w6qu/Tz7WK/foIeEyrQVW6k/i4Ydkb9gF9Qt+WT4W
- ZY+OwC1/9TBVMyJzGILuzy3eG6GdfU2obtNtfUgM3kJwqmCqO3QL+8Zi6G+Bt10t4MxO
- uhKQxhRJZZ+42XRpdAVF3IN43nBvmecRovbPNOlnS0yszWLs0PRHwsdndJLWfQK0Ol6E
- 24x9UiLhmUgPe2vTpvwHQaXuBMbpzTcB37XU3qhkjF/Jg4k6xkFg4Fbh1RFFZGl1uqnG
- Bu/xlEid0XNNnp0iZAqf/10Il2gEJll+T6o1DKJrWjTGrKEV4IyVJHKuA7WW53cr25xq
- qZvQ==
+ bh=7r6TD7yChzqzHwHFrhbxu1OMWzC/pBSk9CaZVccyvoc=;
+ b=Webde1KBBClplMJ+bl1neUR16AmGXLdFw6H5h6AnTcH9ipW3nNqLuqYG/pasDzxle5
+ SqV3z9B9hhqI10xYzNqjBWJo4smyCxx0oJD6pdTSWLG6qffWN4KCH65cTNYmku8lY2qV
+ XOSchj+cUvNkx+8hpzpql/8CqmSwNJtkRvEF7D429U/0Cg+j55rbAswl6JvoEKw1n+T8
+ SRFdyzSoJOYhkbcpTdTJN8rvrhk4VhQWl3cscCvCUb5FZaJO8T1YH5fIvOsZmTkcnC0Z
+ kxVgXDHmfm8M75hhq0nVV6nQIXCATMnaihOv6bV6wfZ/dmwTkVBDCNgysOz0qzn+K2Is
+ Hs2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707323902; x=1707928702;
+ d=1e100.net; s=20230601; t=1707323899; x=1707928699;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oWoGzkk5jlTntsP9Fp0ezGwzMskb1JgO0OTcfpG0rf4=;
- b=W+kAXOA9L7hkKvKaOxnhV6ryR8gdMfMyhkY+NmL99Rb+n+q2conYPMkTBMCfc0WvfA
- MxthSKcRGWLOfPVcKLY2t2qHQ1XYW3b0JP2KwuCeuWK0otZ6cgvnXMvbBpLJAgUgKsCy
- ZOVlkqiN/uLZjuwaQvvy8DqG4nhrpgCeWCOs0sNQKZ+qJIUQOygKG/DlBUVPneeE0tyA
- uKMbe++M/wx7sUjkRc1ZREX1n3v4s2o89z4QCEF92bz8jLnA2426A4M8DVJ3y49RXvE3
- vgpfofEjoTu7B/wV74wBmJVEEf7oWYm/g6QwNL8cqoI3UYLVhk6L8AbqbWPKrqqO3rgn
- tRrg==
-X-Gm-Message-State: AOJu0YzCNG2LklY4yK9BEGUuvo9cYBF/X3FD69VCr8ApxGpJWOW2EV6a
- AkGshZ79mq9DDS60H7zRNfvR9m7jxaQ5QadEXNtnos6iNq5EPap+kEG7bHG+j5o=
-X-Google-Smtp-Source: AGHT+IFKZDWPp/Oeqr5xIx+FWTBf9UOkRI8o5K1IWgBIDljwhDfnmXTooMPXmAX57B0O5y42TgwpXA==
-X-Received: by 2002:a05:600c:4691:b0:40e:f154:752 with SMTP id
- p17-20020a05600c469100b0040ef1540752mr5391678wmo.20.1707323902442; 
- Wed, 07 Feb 2024 08:38:22 -0800 (PST)
+ bh=7r6TD7yChzqzHwHFrhbxu1OMWzC/pBSk9CaZVccyvoc=;
+ b=Y1f+oLxrn/aGf4D+w7E527WxDyYR+AJa5jUHb/2+4CStXEa8Pb9w4ewgb8ohVoiwN8
+ /lwLgab1lOi94Av5RKzKmKHlZJBfcgr4DZxxJrKjyRhzo0RbfoLb9VwGZ42uUOgCnrVx
+ 4vIQ0lE9jtQGJsy7ZNSMYWnLz7/BIRFDoIrRstxsdjBiN3RgFgF8ECPASOoqE0UhfqXh
+ gROmmxUQMTY5cge9CGgDFIZ+9lCdqDYZYB9kBL2tAo5ms4sXL2XV0mVjvb1WgX7ABSKS
+ ZUsS/6IgLYDYWYmAjk9Z3NWauqT9Puh4xsfN+J3C3a0LcbxIp/wdmuB/Y4C2XQ3QcH0+
+ U5EQ==
+X-Gm-Message-State: AOJu0YxcJA2wxabm6zf0TW97Rtp3gd5QmRWTS5MErvXYiT3e358DOD2q
+ qr0NuIv+M/jOwt/67PG8SPe3zmk9cI/PKUkedJyti/yUxalxkspeytsBlLI57oasG2u2jRMoMYY
+ C
+X-Google-Smtp-Source: AGHT+IGHwl3tW2nUX2wfBLHUrlSOM6cjxqlwmBBgVdwDbJmr/R/vGDi2c3wnvq3QzxKL6BY7CYBQug==
+X-Received: by 2002:a05:600c:4509:b0:40e:61d4:5d3b with SMTP id
+ t9-20020a05600c450900b0040e61d45d3bmr5501081wmo.20.1707323898707; 
+ Wed, 07 Feb 2024 08:38:18 -0800 (PST)
 X-Forwarded-Encrypted: i=1;
- AJvYcCWOTJ4esVaJckcJFrE2pkVh9RazJTeGt3av8oiPaGyDUIvMc4VJ5oqaZ5tCa3BM8uZeFYMPxrQ1xyVLHqFEn6qa5SARefa9pJ5qL555GzP5dh9DKCE1zeJQ47UzXpPEYVLaFCDA/smQoWpD+GHLMZguXFhoZSXuPMsBW3j4JCQ3n8J0SbbSVTktdMHmWTRj9cyAtm/QpON5VaD7RYqy4AC8n0RrRqrxS4ux4is6eApPuPkuCIy3ucmZ1k6bHnLFbYoPFIIrp24fNRF4XjExn/s7eZRZAdiNl8fwLbV3VI34ry3MosOI5SmU8V14cGJaS2sL1voYPm8z4BQiod08YKblO37LwlInE+j+DIhiFInFmHe+cjT79vgauLX3H6DKPlkicMxuXIy6nvgOIl99r9I5kWsib7cLX7XXhm0itfdcnwmu4aNBh+YqVb0EvyAbsuzzw61/YN9POghP1NBE5l34ClIzTyoi5lZJ00p+Hf3xCk9CSjIIs5LOxmkrPD7gGZGYlF49qJRTL6XnBqoMvUbSaMlg8mn5OlcQK+Q1aUUKD9v81sfmcGM0tr69WnUKVkLHsYDTCfU373ZIsWDxVtcZf+0jP30FWAbHfHyH0bP/cLJsUqgjLjw1r8Wb1xPuTgHwi1LgbOHm8O4DOGxP1hvaNaTHGM6dG2EfOLgySUQo5vYtBXQvbNLNvN7TGqnvsLsH22U/WLGATVK7jNwQ4GQHQiCJ/4Wmbr3FK9dbwciDQL3bW+yVZa6GlmQeeYv8C2P0LDavkCzuNoGq/eq0hYwXk3c1uUExTvH5UNUAlUjbM5jlQSu+2hLinU/D75agOpn+Iy5geOmZJgCsqovJUhKt+juyNPkjOzKL922q
+ AJvYcCU85CmzezWXYjs7d04q56iflk3XNrfO92Z/yFqfgWD8aHJHO0wKepHAKyLrXeM78NoyCem0hOqWjs//+iigpEwll3DGDCdotjlWHO9Vlii+1KZoYVv4UpRFTx4A9R1nWwBtPU6gkjW11JZpfg5QBcgJe/6k/KSCeNC/iTnLyYKckSeBQ4HBPXTiueMLYb9mXjJhcR08zAVu9VQxQp4UkWD/Xmmx0pjD+hoCVsRyIkIcFpuuK7pZVh3pUSkzB7MeuCtIQPARuUOrv4Krsd7lbteVU5RKdCfZF1q2ZAB0/lUlAQM68BJ6yfqiKfguHEjv5H6v1K5vzuLBzuwVT7Fk8iQQGYB8d7RMIFQ42UGsF3eUJCGD0Fz7MqH/+nhApqx4R6q2CMxmsOY/Lln/3x46LUWky2QZYHduRTqcBgkrUnLALtczONlSCTSdAYDy43qlUacDkffDWuflJ/HDF8LzeGvOqlArR9A13QYSQRuVgNGRgmBmIU2et8X6Q1qrKoJyJ1xZ27+fdqzaRMHwb85Pc2Z/g5KF6w15ZAzvFGzkzkMaDqFdPISrK5NpaGsHUC2YvZzzrJ/P6hHgYj+NzcGVT0mGSpUlzBPPP5kOpByjGwBfDGAzacgRz00mH+/E5QZrAIin44MdlWRsuBR0NGXi2EhjfLgRpfXNK6g1Ju5cyXCbfdmi3dmu8ldCMNNuL0P2c1uwLAthHHpcXA6uDiewoiFDufeM/G6Gnea/RyV9lXjjx7Xw8TxSKgQsbLrQHw4TBTVG4gOVTpoXlrE8ZiXUKZLj5FEnzYe5m4JHpWdhXJ7MPZgECXZFVgEP9aImd0lCwLjtf2hMMjLQW71uDBcRTCMdlG2MjzdGj8XHOg3c
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- fl16-20020a05600c0b9000b004101f27737asm1077895wmb.29.2024.02.07.08.38.15
+ m14-20020a05600c3b0e00b004100826da82sm2653264wms.21.2024.02.07.08.38.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Wed, 07 Feb 2024 08:38:17 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 13B8A5F949;
- Wed,  7 Feb 2024 16:38:13 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 8F7AA5F8DA;
+ Wed,  7 Feb 2024 16:38:12 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: devel@lists.libvirt.org, Jiaxun Yang <jiaxun.yang@flygoat.com>,
@@ -84,25 +85,24 @@ Cc: devel@lists.libvirt.org, Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Kyle Evans <kevans@freebsd.org>,
  Wainer dos Santos Moschetta <wainersm@redhat.com>,
  Riku Voipio <riku.voipio@iki.fi>, Ilya Leoshkevich <iii@linux.ibm.com>
-Subject: [PATCH v2 10/14] gdbstub: Expose TARGET_SIGTRAP in a target-agnostic
- way
-Date: Wed,  7 Feb 2024 16:38:08 +0000
-Message-Id: <20240207163812.3231697-11-alex.bennee@linaro.org>
+Subject: [PATCH v2 05/14] tests/vm: Set UseDNS=no in the sshd configuration
+Date: Wed,  7 Feb 2024 16:38:03 +0000
+Message-Id: <20240207163812.3231697-6-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240207163812.3231697-1-alex.bennee@linaro.org>
 References: <20240207163812.3231697-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::331;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x331.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::332;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x332.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -120,44 +120,51 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Ilya Leoshkevich <iii@linux.ibm.com>
 
-The upcoming syscall catchpoint support needs to send SIGTRAP stop
-packets to GDB. Being able to compile this support only once for all
-targets is a good thing, and it requires hiding TARGET_SIGTRAP behind
-a function call.
+make vm-build-freebsd sometimes fails with "Connection timed out during
+banner exchange". The client strace shows:
 
+    13:59:30 write(3, "SSH-2.0-OpenSSH_9.3\r\n", 21) = 21
+    13:59:30 getpid()                       = 252655
+    13:59:30 poll([{fd=3, events=POLLIN}], 1, 5000) = 1 ([{fd=3, revents=POLLIN}])
+    13:59:32 read(3, "S", 1)                = 1
+    13:59:32 poll([{fd=3, events=POLLIN}], 1, 3625) = 1 ([{fd=3, revents=POLLIN}])
+    13:59:32 read(3, "S", 1)                = 1
+    13:59:32 poll([{fd=3, events=POLLIN}], 1, 3625) = 1 ([{fd=3, revents=POLLIN}])
+    13:59:32 read(3, "H", 1)                = 1
+
+There is a 2s delay during connection, and ConnectTimeout is set to 1.
+Raising it makes the issue go away, but we can do better. The server
+truss shows:
+
+    888: 27.811414714 socket(PF_INET,SOCK_DGRAM|SOCK_CLOEXEC,0) = 5 (0x5)
+    888: 27.811765030 connect(5,{ AF_INET 10.0.2.3:53 },16) = 0 (0x0)
+    888: 27.812166941 sendto(5,"\^Z/\^A\0\0\^A\0\0\0\0\0\0\^A2"...,39,0,NULL,0) = 39 (0x27)
+    888: 29.363970743 poll({ 5/POLLRDNORM },1,5000) = 1 (0x1)
+
+So the delay is due to a DNS query. Disable DNS queries in the server
+config.
+
+Reviewed-by: Thomas Huth <thuth@redhat.com>
 Signed-off-by: Ilya Leoshkevich <iii@linux.ibm.com>
-Message-Id: <20240202152506.279476-2-iii@linux.ibm.com>
+Message-Id: <20240206002344.12372-2-iii@linux.ibm.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- gdbstub/internals.h   | 1 +
- gdbstub/user-target.c | 5 +++++
- 2 files changed, 6 insertions(+)
+ tests/vm/basevm.py | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/gdbstub/internals.h b/gdbstub/internals.h
-index 5c0c725e54c..aeb0d9b5377 100644
---- a/gdbstub/internals.h
-+++ b/gdbstub/internals.h
-@@ -136,6 +136,7 @@ void gdb_append_thread_id(CPUState *cpu, GString *buf);
- int gdb_get_cpu_index(CPUState *cpu);
- unsigned int gdb_get_max_cpus(void); /* both */
- bool gdb_can_reverse(void); /* softmmu, stub for user */
-+int gdb_target_sigtrap(void); /* user */
- 
- void gdb_create_default_process(GDBState *s);
- 
-diff --git a/gdbstub/user-target.c b/gdbstub/user-target.c
-index c4bba4c72c7..b7d4c37cd81 100644
---- a/gdbstub/user-target.c
-+++ b/gdbstub/user-target.c
-@@ -418,3 +418,8 @@ void gdb_handle_query_xfer_exec_file(GArray *params, void *user_ctx)
-                     ts->bprm->filename + offset);
-     gdb_put_strbuf();
- }
-+
-+int gdb_target_sigtrap(void)
-+{
-+    return TARGET_SIGTRAP;
-+}
+diff --git a/tests/vm/basevm.py b/tests/vm/basevm.py
+index 61725b83254..c0d62c08031 100644
+--- a/tests/vm/basevm.py
++++ b/tests/vm/basevm.py
+@@ -423,6 +423,8 @@ def console_ssh_init(self, prompt, user, pw):
+     def console_sshd_config(self, prompt):
+         self.console_wait(prompt)
+         self.console_send("echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config\n")
++        self.console_wait(prompt)
++        self.console_send("echo 'UseDNS no' >> /etc/ssh/sshd_config\n")
+         for var in self.envvars:
+             self.console_wait(prompt)
+             self.console_send("echo 'AcceptEnv %s' >> /etc/ssh/sshd_config\n" % var)
 -- 
 2.39.2
 
