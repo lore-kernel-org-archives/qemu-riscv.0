@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85284C4829C
-	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Feb 2024 16:40:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 944E0C4828F
+	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Feb 2024 16:40:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rXkwO-0002vQ-1f; Wed, 07 Feb 2024 11:38:28 -0500
+	id 1rXkwM-0002tV-1z; Wed, 07 Feb 2024 11:38:26 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rXkwL-0002sy-B8
- for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 11:38:25 -0500
-Received: from mail-wr1-x42f.google.com ([2a00:1450:4864:20::42f])
+ id 1rXkwK-0002sE-Ho
+ for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 11:38:24 -0500
+Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rXkwC-00066q-Vm
- for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 11:38:25 -0500
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-33b0f36b808so658299f8f.3
- for <qemu-riscv@nongnu.org>; Wed, 07 Feb 2024 08:38:16 -0800 (PST)
+ id 1rXkwG-00067o-Ef
+ for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 11:38:24 -0500
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-40fe3141e1cso8097425e9.0
+ for <qemu-riscv@nongnu.org>; Wed, 07 Feb 2024 08:38:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1707323895; x=1707928695; darn=nongnu.org;
+ d=linaro.org; s=google; t=1707323899; x=1707928699; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LXky2CMDdzuIC8PBdEAHx/6nddz6mi+8QtS2LPbBGiM=;
- b=NAQQcfYHLL2BKX1Gdad3Jl6EucdWuXbq/UfjbsidFzBrd1PKuGRMfjnysWETedfrUg
- 3Oc4fNpGRe/pMo8itUwclDP80nX8gXUg5gem3m6oJ2rE3+zwUhSOFpgZ2sGPcXaWGZol
- NdM0OsJLi5ekbqetvtjzZbFU0gfEVMGbihbhamKOiPdSkKrE8i0Wix3doJu4jjkgB8bS
- 6yqJEkWguOfuAe0KBB+BPbG5Anxseje8hEAdOWHQCc7l7f8KCQ4TRGDYhJ8wfPS1E0XO
- z6JA05PDz2Guw4Q6AfNQ+K6BCEsIyZBWKZzgy4ycS3xkFFA8jEx3szwy2+rCJCmckjW8
- UUlg==
+ bh=9IbvextsUKhbDQgPyuaeoL3jSODZ/hWaknGrv+i1g18=;
+ b=CuiGozEyOhm69oPTra3QbwGv1ujJrl7spKqq1nSc9Soav9a4jHRHJlqaBWGo9w52tu
+ xwNgzbgaIO9v5og1jX4xokyT9SHeMFF/UvdrLDY4zLS78DkjAEBJsM3Atr3v4Iod9Esu
+ httmM1D6pO6ISUTmPqaipHDpcVjWIzneqnPrNfdAQjWMAF3AYvAR1sOUXD42Qb/APhJV
+ 57uxaPfYhB3aneVqtu1eMT0aONloQ95zygqGf6grqAgd4Nodf+XtZsNccGWk0aXy/2tN
+ PT3XYD4GU503dhPQcPxniiGMMVfzJTWbYi33jbKGHsVRrztdl5SLQh65JNKXWmGdUutb
+ 48pg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707323895; x=1707928695;
+ d=1e100.net; s=20230601; t=1707323899; x=1707928699;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=LXky2CMDdzuIC8PBdEAHx/6nddz6mi+8QtS2LPbBGiM=;
- b=vGSfH64VQd2AcdgUxAVBMTUua2/HFvs9yX2QYyKpfJ+B0OPIzwwveSeTNOLzMKa/Kl
- lf7l5lAKeBKaOI1bD3A7M1tuUJ+MrOcxi7iQRV0+4cHXuj1OYvt97aLTSh1uqInKGwnU
- 9nyYUscytW/k0eIQD5tn6X2sb4BQRkQwK2pzgZ/8d5EfdN5+nPRW9h7gpWTbuo8Nll/h
- lEnSfEWBSyerzW6QIVWj8lXYQ3RvJIMixhYHHXSlzpeXgFQ78jr0B/HxVd2t7seq6mVm
- xztmbBkOsHppDHii8m3HXKxzVvJKmE9lMNREfVv7AyaGG3UyNyLT5STtkn7qlqzpHob/
- 8MPQ==
-X-Gm-Message-State: AOJu0YxBJwfe+I/y66Px/iPlsGLG1dHq/ZOfbF4yEAw+THNzzpm6e/40
- Pn8fjurUvH5z9dDqdneNmAl6lo5C7L52wI+2vwh2iSawKSUwOh/qqHaCmZZsbQI=
-X-Google-Smtp-Source: AGHT+IHGEvKiiXfJtsUpanJg17mF2fKs5Eih1K368Ch8Oz/fe7APF/YeZkinCz0RuMWhMjnGU/oXyQ==
-X-Received: by 2002:adf:cf10:0:b0:33b:10ca:d190 with SMTP id
- o16-20020adfcf10000000b0033b10cad190mr4595531wrj.24.1707323895429; 
- Wed, 07 Feb 2024 08:38:15 -0800 (PST)
+ bh=9IbvextsUKhbDQgPyuaeoL3jSODZ/hWaknGrv+i1g18=;
+ b=cnQmlTjeXtGmWZhzswUOcSivc/wiWElluryYnP3anP3DLQbnuEXyZmfp4U8hBzIZD/
+ jayi+QxncsdCcWaLNRQv5G0cFu/QERpZQQJ7FJ74GjfR4pii7TaeIYD0KwjMs5fv6BaD
+ yEUbVDzJo7eH43LkmUE7kqu4XtH2/QOgHBo/Omnca36nk4yWvKdOQyvyr1n6x0GimQQ/
+ leWv+My378KeP+M5lJcYYj7mt+wLzA0eLhaytbm1UzaQKL9vmTVCnaZY+62JlFIENTyq
+ E6vrtcgOXIWDzcKa2CHNXz5PQKfCmtsE332EQD0VZas8qlepxz27fBnaPXvlu+RGeDat
+ mmQA==
+X-Gm-Message-State: AOJu0YzitGPqwpv9jdRH4+woIldX5F2x2RDyA09O1+zYhNv23/ZgpM4W
+ 9UtYh84Z0pQ591O3qilT8HI4tltr/zmeZmvBmk9tuSLtJsqK5RFHc3u7PXIa/RM=
+X-Google-Smtp-Source: AGHT+IFjRUT+msrD2SiPps3yoAGzJKkJykfls7gYzHMq8saSuGNCfpdBwg7XDW7/VHQ/a/4boJir1w==
+X-Received: by 2002:a05:600c:a08:b0:40e:fb8f:debe with SMTP id
+ z8-20020a05600c0a0800b0040efb8fdebemr4884205wmp.38.1707323899069; 
+ Wed, 07 Feb 2024 08:38:19 -0800 (PST)
 X-Forwarded-Encrypted: i=1;
- AJvYcCURBABIzhGa29GJYD85vS1JlzBfwWWDBHDHNWOOt+PDigk4w90BZ3LBumxAS0OFVAuoaDI4+lsk7CucyNvPbqBGgPHFsYFinOKkl294O8mFv60MgGCuy4cfDNpwcESvls/IDaLuI0xLuZGQBlceyDOcm1BtQsPS3DwPIKG1pJsY0CKXE85vkiCOC5bpv4NqsMvXlrNiH+66D4FXPhJwcAaludYFlGuXZOBw8TS5+hXHog7Y9RvVH9w+9ELXoC1WmIsTIIes1CL2f2PVsHhPrehOAtvLgyFiLJ2TY2Au27b6J3g+JqvLZ29ub+POWomgB+PZvRRHUiSMWJiyV79xsffnIeTMqpLKA7cpDE5F4FwGPreWAvQbOuURwQGIJJt1Szu/NdSEP+c66Esr/qN5KpgFBPNDAtz2lT/9snhtUuKUZGBDouVjzKZ3L24RVJMjGPfAGsbUJIBnLdIz8UTJBulXVxcHdpkKhoCz/wU0/v8QURznRA80nUFgw+iTHn8HJXQ+GALLM6tJtV6J3Eq1FOR6CBYU8TDS5Ice2wJYpkCDnciaCM8auI6l87jUoAKQ9ijqTHUjyOIuJb/fnbF5oHr/NTGKJENwmXEqPi2JCDMfzZHw7tC3nAxnjspSOP4VmYMenExo7E9CqLgFJ6OfWMMXy+uUSZIoeiPjYfH9aXhr0iVCaPTp6xPhD0ekVcwPDdT4Ju7JZ2HrqpS+p0WCKKGRKcWIioHe+C+jF7GnI/U7wwvYe604yr8Fu/G6KWhADhDIp7olwjkaVRbtCIMzmVry3dZKHrQcfb01tIExhqMdxWWhgKVOoteIuxjpO6C3GNgjB/GfazFo1yAIcZE4dgqfXCDvW2sOAczAePfKxKSSoNi6AC6DpL6QxjaITmtrmNZYo2pC
+ AJvYcCUhimZaeVtx0FbFGdLUmex+udSHN5v6slNAzSoXl1zK5iRAUFOlXiGyxUEPsIAB2Iw6yrfJpfy9JuFtECw1ez1I0fM0OiUxhmSd3VsQ4a4FINLxD3LzvA5fA1t+hj0BEY8du8uGuKhPI7FhZv1gYWRBNA0gytf/ZLiiHhvuIi630KxG2wUx8oxHpTPP7yfgjuAN+lESvm3k5gMaj/V3/k/8HpebV8NR99nt8a2ZpDXFYU1JfeqQMymopOj5ui5UpnALi4+keqhcBbhDM3dVbVlWYq+MlpFJntUv6+SzSkvQq3pd0IMPH14/kYspXRxw/PDoQSYld6+FO8CQe18ThwbpgTQbS9WELPTpMxBe0/OSO8iBB0cdtPpT/9m1ce1xzOg6dVSBYwsncfpClFmb3fzcZ/VK9CUxmlD2QMDSOaehe8Oan5kePrC8ceZYrbqY4pymxdAacVIPvqhRnN1MLewenZhTCXDQ8oE7WQluSJtMCxlwoEySZWbjm2ZcOAlZyXlRF8a2bYrYhaxIcdbN17/Ptn25JYTZabClpR1woxuDKVy7F+892PF2HEOhcvjMtwys8eJOgLa10bBxoA0d+TcGYPAdPJmsiRiWyTjytbeLi4eXgIZvxq/MP7qxsipagt88zTduIPWtmccczuTW6b9JDQniuRoZRNNLkfmZkEIShnrZNSWR5Jo+8Fl2/qUchSYk5IaiX6D0TQ5WhKU4hl1rlW1l4x3tmemdhrT57yHmdlrulASpAS4OaCJVuo8/r3LLkP44c8kSDWfBFPdkSW9TEAOpFXxncX69MHkzxjrjQFpyXrZT4TsV14ihoP032F7GgOv6KL1GwJbTPVEwAz33ICZ+e+rpZKqOwtQF
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- d11-20020adff2cb000000b0033b278cf5fesm1852878wrp.102.2024.02.07.08.38.12
+ w14-20020a05600c474e00b00410232ffb2csm642397wmo.25.2024.02.07.08.38.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Feb 2024 08:38:13 -0800 (PST)
+ Wed, 07 Feb 2024 08:38:17 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 510C05F88E;
+ by draig.lan (Postfix) with ESMTP id B8E675F8E3;
  Wed,  7 Feb 2024 16:38:12 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -83,19 +83,19 @@ Cc: devel@lists.libvirt.org, Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Li-Wen Hsu <lwhsu@freebsd.org>, Laurent Vivier <laurent@vivier.eu>,
  Kyle Evans <kevans@freebsd.org>,
  Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Riku Voipio <riku.voipio@iki.fi>, Rabin Vincent <rabinv@axis.com>,
- "Edgar E . Iglesias" <edgar.iglesias@gmail.com>
-Subject: [PATCH v2 02/14] docs: mark CRIS support as deprecated
-Date: Wed,  7 Feb 2024 16:38:00 +0000
-Message-Id: <20240207163812.3231697-3-alex.bennee@linaro.org>
+ Riku Voipio <riku.voipio@iki.fi>, Ilya Leoshkevich <iii@linux.ibm.com>
+Subject: [PATCH v2 07/14] test-util-filemonitor: Adapt to the FreeBSD inotify
+ rename semantics
+Date: Wed,  7 Feb 2024 16:38:05 +0000
+Message-Id: <20240207163812.3231697-8-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240207163812.3231697-1-alex.bennee@linaro.org>
 References: <20240207163812.3231697-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42f;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -118,42 +118,52 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This might be premature but while streamlining the avocado tests I
-realised the only tests we have are "check-tcg" ones. The ageing
-fedora-cris-cross image works well enough for developers but can't be
-used in CI as we need supported build platforms to build QEMU.
+From: Ilya Leoshkevich <iii@linux.ibm.com>
 
-Does this mean the writing is on the wall for this architecture?
+Unlike on Linux, on FreeBSD renaming a file when the destination
+already exists results in an IN_DELETE event for that existing file:
 
+    $ FILEMONITOR_DEBUG=1 build/tests/unit/test-util-filemonitor
+    Rename /tmp/test-util-filemonitor-K13LI2/fish/one.txt -> /tmp/test-util-filemonitor-K13LI2/two.txt
+    Event id=200000000 event=2 file=one.txt
+    Queue event id 200000000 event 2 file one.txt
+    Queue event id 100000000 event 2 file two.txt
+    Queue event id 100000002 event 2 file two.txt
+    Queue event id 100000000 event 0 file two.txt
+    Queue event id 100000002 event 0 file two.txt
+    Event id=100000000 event=0 file=two.txt
+    Expected event 0 but got 2
+
+This difference in behavior is not expected to break the real users, so
+teach the test to accept it.
+
+Suggested-by: Daniel P. Berrange <berrange@redhat.com>
+Signed-off-by: Ilya Leoshkevich <iii@linux.ibm.com>
+Message-Id: <20240206002344.12372-4-iii@linux.ibm.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Cc: Rabin Vincent <rabinv@axis.com>
-Reviewed-by: Thomas Huth <thuth@redhat.com>
-Acked-by: Edgar E. Iglesias <edgar.iglesias@gmail.com>
-Reviewed-by: Thomas Huth <thuth@redhat.com>
-Message-Id: <20230925144854.1872513-5-alex.bennee@linaro.org>
 ---
- docs/about/deprecated.rst | 8 ++++++++
+ tests/unit/test-util-filemonitor.c | 8 ++++++++
  1 file changed, 8 insertions(+)
 
-diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
-index d4492b94604..82922476d72 100644
---- a/docs/about/deprecated.rst
-+++ b/docs/about/deprecated.rst
-@@ -183,6 +183,14 @@ Nios II CPU (since 8.2)
- The Nios II architecture is orphan. The ``nios2`` guest CPU support is
- deprecated and will be removed in a future version of QEMU.
- 
-+CRIS CPU architecture (since 9.0)
-+'''''''''''''''''''''''''''''''''
-+
-+The CRIS architecture was pulled from Linux in 4.17 and the compiler
-+is no longer packaged in any distro making it harder to run the
-+``check-tcg`` tests. Unless we can improve the testing situation there
-+is a chance the code will bitrot without anyone noticing.
-+
- 
- System emulator machines
- ------------------------
+diff --git a/tests/unit/test-util-filemonitor.c b/tests/unit/test-util-filemonitor.c
+index a22de275955..02e67fc96ac 100644
+--- a/tests/unit/test-util-filemonitor.c
++++ b/tests/unit/test-util-filemonitor.c
+@@ -360,6 +360,14 @@ test_file_monitor_events(void)
+         { .type = QFILE_MONITOR_TEST_OP_EVENT,
+           .filesrc = "one.txt", .watchid = &watch4,
+           .eventid = QFILE_MONITOR_EVENT_DELETED },
++#ifdef __FreeBSD__
++        { .type = QFILE_MONITOR_TEST_OP_EVENT,
++          .filesrc = "two.txt", .watchid = &watch0,
++          .eventid = QFILE_MONITOR_EVENT_DELETED },
++        { .type = QFILE_MONITOR_TEST_OP_EVENT,
++          .filesrc = "two.txt", .watchid = &watch2,
++          .eventid = QFILE_MONITOR_EVENT_DELETED },
++#endif
+         { .type = QFILE_MONITOR_TEST_OP_EVENT,
+           .filesrc = "two.txt", .watchid = &watch0,
+           .eventid = QFILE_MONITOR_EVENT_CREATED },
 -- 
 2.39.2
 
