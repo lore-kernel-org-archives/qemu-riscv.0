@@ -4,104 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9427C4828F
-	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Feb 2024 20:06:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8986DC4828D
+	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Feb 2024 21:07:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rXoBK-0005yP-GR; Wed, 07 Feb 2024 15:06:06 -0500
+	id 1rXp84-0004VO-Iq; Wed, 07 Feb 2024 16:06:48 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rXoBE-0005tn-Oh
- for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 15:06:02 -0500
-Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
+ (Exim 4.90_1) (envelope-from <wlosh@bsdimp.com>) id 1rXp80-0004TT-VV
+ for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 16:06:46 -0500
+Received: from mail-ed1-x536.google.com ([2a00:1450:4864:20::536])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rXoBB-0004Fi-Sj
- for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 15:06:00 -0500
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-33b436dbdcfso818011f8f.0
- for <qemu-riscv@nongnu.org>; Wed, 07 Feb 2024 12:05:57 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <wlosh@bsdimp.com>) id 1rXp7u-0007hT-Ej
+ for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 16:06:43 -0500
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-56061ad3d3dso465839a12.1
+ for <qemu-riscv@nongnu.org>; Wed, 07 Feb 2024 13:06:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1707336356; x=1707941156; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=N37tJ00VgGFI2022Rb5MhedKmpx3N6qNEfBSYXO6aIg=;
- b=goip1U7ouwGHgIQtDXvd7U1K1Vcl8wkgju93n3CghXdl0hRS31DE+dbp/dO9TWbWFI
- d+rL/0+mIs3/KWHddFEbXR2v61ztXhOPpWp0rXdy2UAKUGxi37Np/+uv0ad8dzh3QM7j
- gIr39aHVoLaMy3SV4gILOfekKr+dHVfGOLb8BfmpAVQcbG2/ZqZeJJW7D/XWQ01VU1RJ
- RtJ7H2b2TVfxDPDNbGdAW6T1zRSM6DlF4iBNKCHLCZbh4TRlpClqD2T/uRA5a1bWyAV0
- YgPDKk5vu5uSW7pxO0WuWNGyXnX/RJ+kxRJM0N6EqHuI6tuJhprmApWcuzd6iUCOWlbv
- EOmA==
+ d=bsdimp-com.20230601.gappssmtp.com; s=20230601; t=1707339996; x=1707944796;
+ darn=nongnu.org; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=gh5NF6YhaHOWiRc2S6jbyUGr9y31fomAyBbbtNeJX3c=;
+ b=LDOhY6AZF+xmxMyeSgoxT4VKkYU/+8XX8J6Pnj6UntlC4wnxwFWZdFfLvDWPniJr9O
+ UWDfo9E2YpBmNY5JhMsJbF+zK8LnXyY+epslDUHXPSS3f4D3jfnubri5qlgUqmG8Jyey
+ GXNMFAgYWxO6toHb7E1/pOVVQiPADXo8KdOWYPQcXVyE7i7Ddb80hVpWopgksY8FXpbj
+ tk95S3KxB9ON2ftTRL+EHuJPszkzpL8HBthCnD2/cI1mZDK4+BsyGj3qR6QFmwE13opX
+ zhb/YxJgGD4jXJ+ykKGQbdzagGNyXdLdYHaZPz1idhutVrTaRt818/YlG2Q7CTmZt6Ei
+ fRlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707336356; x=1707941156;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=N37tJ00VgGFI2022Rb5MhedKmpx3N6qNEfBSYXO6aIg=;
- b=Wfxq02GlEJYXRvNYFNfSLtizzjnpJl33IO7EjL9uRKPJ/NPdm6nTAYtciC75iTRMWF
- +OX16NUJZ7nC5jkU3Oxp9UQI1preaYZ5oYnQT/uGAGOmas1/z2kkwk42ZW3Fahu7eKYY
- mjg2vS/bA/FurJpq4yJbuUPLcI6BkcNmEArXvjzRJYx+nepYmvIqVGMy1YCgafM0LBs8
- EJtAcFzLa61A75keo/G1EVqIJFCnAQjcOFeVlzTsZpxjn9uWtf8om6BrPekiLer+38ns
- N3Oni//ljL2qa/VcYqr+bGos5BGyaCf/2/ToPTTsGlvxGoxGgv8yKS3JmgwPfClJd30D
- TZFQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUiBN5ZTgPsdz10dX8uv9CL7jNtanC2lNkACMB8cW9HhyZCK7u+1atdVbjb+stviVUDVImALjBlSTsjQdYp5A8NeQhUl/8=
-X-Gm-Message-State: AOJu0YxNL/m5zBqBMgDjOvNAdUyFAVMHTfaIdFKFjgy2lyMnfFFaPEl/
- Uwp1m4V9gmUqsseKkUPxoGUqrwN7nlZfFFLzFuk3DX8R8NQX6TVY/bp22N6CB+Q=
-X-Google-Smtp-Source: AGHT+IH2Phbmh9ji3XBtWp0SxypZwyrnxN4wclobVGUOTQ60Lti6h6bx32WiwTfHHZlyMCiHOoeMfg==
-X-Received: by 2002:a5d:5f44:0:b0:33b:3d35:1ee9 with SMTP id
- cm4-20020a5d5f44000000b0033b3d351ee9mr4781374wrb.37.1707336356137; 
- Wed, 07 Feb 2024 12:05:56 -0800 (PST)
-X-Forwarded-Encrypted: i=1;
- AJvYcCUJVJR0bOJSTtz0S8XeGI5oeSDg2FJ3FNQQjaH2ZNeNhEa3w9Clv8ZbA8JrLTQ6fzjP2D0q/6Nxun0B9w4MxeumKK/N/jjy7MDqiShG8ssHlbq9u0nBKpHLN6DRqugmymOsCxxlz5YqdpkWY4hT86R7OHqO412vyhdffRhFbR0DN7G0+zLkdqhh1IFJfW2DavMUANPIPjtZZ0OJQ4ocvql34Iz1uXJcBZ4hGDrrR5ew0RapRbgBmMBmtUoZ5VdhI4qAy6TXJBo4hpfXNt35+erPtox+GXCUH9zL39yx1U3wsmc7BliwtlMIXqaE5jD4GoPigpFQRe4RUlUapXuQXN78dImjl/YbS0cFKhAt02ajU8hlHxN5V/BvfT0C6Uirkj+OLruaBDhZFPzEb5Tf+CWCi90/jkx13P5O3n7Fh5VAfj54I95xFZ5isVY7MA23uyYHC4uSJQJ9eaFSchhUHpqP03RWqrEYml8Eql4Ich4+KMkZBiw4UobCGd6N5RKEwpUXTYbTBdlZYJC5aZYJRSR5dLRblQtL/kgBP6m25QE/NO3Tazn38haKXjs7Rv2KcCAEXNiJLfiL+/wSWt6Dqj8h5R5lrrunxKv2HwkumckvJ6WchC/mmIlmYj5p6SrdSafbmqN4q4L2gzDaI3yQC/k36bGlN0uJogKbP2DXMDd+R8uG2EjAHzaPdj6/h/Uxp7hDBesznxfpdICafFWfhjfBcKV/5Iip0PeqEUBC9Dw7eQvdO7SU3OpRNuNkr/vsi1R8FlEK8ql1RtbmuxxWbEUPUCo5hoLq7dgpH46N7rdZOeLL9lfp7jqEmBNbBpoPxSqsY0ABQ8JhmhR/GTkDsyY9GfCnkeg=
-Received: from [192.168.69.100] ([176.187.214.82])
- by smtp.gmail.com with ESMTPSA id
- e11-20020adffd0b000000b0033b47ee01f1sm2174954wrr.49.2024.02.07.12.05.53
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 07 Feb 2024 12:05:55 -0800 (PST)
-Message-ID: <3f911aae-542c-45ba-a8c6-eed0626baacd@linaro.org>
-Date: Wed, 7 Feb 2024 21:05:52 +0100
+ d=1e100.net; s=20230601; t=1707339996; x=1707944796;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=gh5NF6YhaHOWiRc2S6jbyUGr9y31fomAyBbbtNeJX3c=;
+ b=i96Ifr751+w/wrw/qqYrgdYnldRtbWS6Usonql9M0yDHEu78u1VT9b7cFSdNi0kefL
+ N9gr1a2BJcBSYszNrLRx0wU6UfnoOIvdB3VACFr9wTi/ZSGCLD06kp6oCAnDmj9QF+wE
+ B6ldSHjY5m1kRybN37cgf8QyvzTAyYX3NeNWGQErQcMmta019Y6YDggtCdWDcdIFQLPA
+ oTqFEAingaNjh62Z1HffmhLUyDWwg7l0pPRBc2SNlYZS1brBoqP+v75dN3HDTIQWtilp
+ N5cdi7cYPIC7RCAMoGJHhXIL74IDAjeDZ7eRe5qxZFfxLu++KFQ+3Iw7pySrjTE4v9cH
+ Xr9Q==
+X-Gm-Message-State: AOJu0Yxq4b2F62fwKNM/BLETYGVjQr5hAqMh39KKdgvwAN3fDYRL2ZtN
+ Y9392oIDfca1lTa8niynp46xZGKA/x1AtCAipiLFRhkhvmVAGOJpILTgSgDznEDkPzhH8fV4NUP
+ 5MC1wdhSVVZuM4JAZBscfF+eI4lpMKTazYKyKbA==
+X-Google-Smtp-Source: AGHT+IGmIkQ9BPOMs4p0CXeiI67xhhDx0pv1MFVXJPeBOMCo6gvXBlh48GntaipIr7Qlo8M3XuTs1BkWDr5ABb3CLGI=
+X-Received: by 2002:a05:6402:180a:b0:560:24d8:d2d1 with SMTP id
+ g10-20020a056402180a00b0056024d8d2d1mr636398edy.11.1707339996233; Wed, 07 Feb
+ 2024 13:06:36 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 10/14] gdbstub: Expose TARGET_SIGTRAP in a
- target-agnostic way
-Content-Language: en-US
-To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
- qemu-devel@nongnu.org
-Cc: devel@lists.libvirt.org, Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Chris Wulff <crwulff@gmail.com>, Weiwei Li <liwei1518@gmail.com>,
- Bin Meng <bin.meng@windriver.com>, Thomas Huth <thuth@redhat.com>,
- qemu-riscv@nongnu.org, Marek Vasut <marex@denx.de>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
- Alistair Francis <alistair.francis@wdc.com>, Warner Losh <imp@bsdimp.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>,
- Beraldo Leal <bleal@redhat.com>, =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?=
- <berrange@redhat.com>, Max Filippov <jcmvbkbc@gmail.com>,
- Ed Maste <emaste@freebsd.org>, Palmer Dabbelt <palmer@dabbelt.com>,
- Li-Wen Hsu <lwhsu@freebsd.org>, Laurent Vivier <laurent@vivier.eu>,
- Kyle Evans <kevans@freebsd.org>,
- Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Riku Voipio <riku.voipio@iki.fi>, Ilya Leoshkevich <iii@linux.ibm.com>,
- Anton Johansson <anjo@rev.ng>
-References: <20240207163812.3231697-1-alex.bennee@linaro.org>
- <20240207163812.3231697-11-alex.bennee@linaro.org>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20240207163812.3231697-11-alex.bennee@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42c.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+References: <20240129164514.73104-1-philmd@linaro.org>
+ <20240129164514.73104-30-philmd@linaro.org>
+In-Reply-To: <20240129164514.73104-30-philmd@linaro.org>
+From: Warner Losh <imp@bsdimp.com>
+Date: Wed, 7 Feb 2024 14:06:25 -0700
+Message-ID: <CANCZdfoEAbV9cTg3R4RMD8PV6s0NAMvg1xhgspp-cX310uaF2Q@mail.gmail.com>
+Subject: Re: [PATCH v3 29/29] user: Prefer fast cpu_env() over slower CPU QOM
+ cast macro
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org, 
+ Paolo Bonzini <pbonzini@redhat.com>, kvm@vger.kernel.org, qemu-ppc@nongnu.org, 
+ qemu-arm@nongnu.org, Richard Henderson <richard.henderson@linaro.org>, 
+ Kyle Evans <kevans@freebsd.org>, Laurent Vivier <laurent@vivier.eu>
+Content-Type: multipart/alternative; boundary="000000000000fc97cb0610d111a8"
+Received-SPF: none client-ip=2a00:1450:4864:20::536;
+ envelope-from=wlosh@bsdimp.com; helo=mail-ed1-x536.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SPF_NONE=0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -117,48 +91,182 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 7/2/24 17:38, Alex Bennée wrote:
-> From: Ilya Leoshkevich <iii@linux.ibm.com>
-> 
-> The upcoming syscall catchpoint support needs to send SIGTRAP stop
-> packets to GDB. Being able to compile this support only once for all
-> targets is a good thing, and it requires hiding TARGET_SIGTRAP behind
-> a function call.
-> 
-> Signed-off-by: Ilya Leoshkevich <iii@linux.ibm.com>
-> Message-Id: <20240202152506.279476-2-iii@linux.ibm.com>
-> Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+--000000000000fc97cb0610d111a8
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+[[ I dont know if it's too late ]]
+
+On Mon, Jan 29, 2024 at 9:48=E2=80=AFAM Philippe Mathieu-Daud=C3=A9 <philmd=
+@linaro.org>
+wrote:
+
+> Mechanical patch produced running the command documented
+> in scripts/coccinelle/cpu_env.cocci_template header.
+>
+> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
 > ---
->   gdbstub/internals.h   | 1 +
->   gdbstub/user-target.c | 5 +++++
->   2 files changed, 6 insertions(+)
-> 
-> diff --git a/gdbstub/internals.h b/gdbstub/internals.h
-> index 5c0c725e54c..aeb0d9b5377 100644
-> --- a/gdbstub/internals.h
-> +++ b/gdbstub/internals.h
-> @@ -136,6 +136,7 @@ void gdb_append_thread_id(CPUState *cpu, GString *buf);
->   int gdb_get_cpu_index(CPUState *cpu);
->   unsigned int gdb_get_max_cpus(void); /* both */
->   bool gdb_can_reverse(void); /* softmmu, stub for user */
-> +int gdb_target_sigtrap(void); /* user */
->   
->   void gdb_create_default_process(GDBState *s);
->   
-> diff --git a/gdbstub/user-target.c b/gdbstub/user-target.c
-> index c4bba4c72c7..b7d4c37cd81 100644
-> --- a/gdbstub/user-target.c
-> +++ b/gdbstub/user-target.c
-> @@ -418,3 +418,8 @@ void gdb_handle_query_xfer_exec_file(GArray *params, void *user_ctx)
->                       ts->bprm->filename + offset);
->       gdb_put_strbuf();
->   }
-> +
-> +int gdb_target_sigtrap(void)
-> +{
-> +    return TARGET_SIGTRAP;
-> +}
+>  bsd-user/signal.c   | 3 +--
+>  linux-user/signal.c | 6 ++----
+>  2 files changed, 3 insertions(+), 6 deletions(-)
+>
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Warner Losh <imp@bsdimp.com>
 
+
+> diff --git a/bsd-user/signal.c b/bsd-user/signal.c
+> index ca31470772..c6f0b1be38 100644
+> --- a/bsd-user/signal.c
+> +++ b/bsd-user/signal.c
+> @@ -463,14 +463,13 @@ static int fatal_signal(int sig)
+>  void force_sig_fault(int sig, int code, abi_ulong addr)
+>  {
+>      CPUState *cpu =3D thread_cpu;
+> -    CPUArchState *env =3D cpu_env(cpu);
+>      target_siginfo_t info =3D {};
+>
+>      info.si_signo =3D sig;
+>      info.si_errno =3D 0;
+>      info.si_code =3D code;
+>      info.si_addr =3D addr;
+> -    queue_signal(env, sig, QEMU_SI_FAULT, &info);
+> +    queue_signal(cpu_env(cpu), sig, QEMU_SI_FAULT, &info);
+>  }
+>
+>  static void host_signal_handler(int host_sig, siginfo_t *info, void *puc=
+)
+> diff --git a/linux-user/signal.c b/linux-user/signal.c
+> index c9527adfa3..f78f7fc476 100644
+> --- a/linux-user/signal.c
+> +++ b/linux-user/signal.c
+> @@ -623,7 +623,6 @@ void signal_init(void)
+>  void force_sig(int sig)
+>  {
+>      CPUState *cpu =3D thread_cpu;
+> -    CPUArchState *env =3D cpu_env(cpu);
+>      target_siginfo_t info =3D {};
+>
+>      info.si_signo =3D sig;
+> @@ -631,7 +630,7 @@ void force_sig(int sig)
+>      info.si_code =3D TARGET_SI_KERNEL;
+>      info._sifields._kill._pid =3D 0;
+>      info._sifields._kill._uid =3D 0;
+> -    queue_signal(env, info.si_signo, QEMU_SI_KILL, &info);
+> +    queue_signal(cpu_env(cpu), info.si_signo, QEMU_SI_KILL, &info);
+>  }
+>
+>  /*
+> @@ -641,14 +640,13 @@ void force_sig(int sig)
+>  void force_sig_fault(int sig, int code, abi_ulong addr)
+>  {
+>      CPUState *cpu =3D thread_cpu;
+> -    CPUArchState *env =3D cpu_env(cpu);
+>      target_siginfo_t info =3D {};
+>
+>      info.si_signo =3D sig;
+>      info.si_errno =3D 0;
+>      info.si_code =3D code;
+>      info._sifields._sigfault._addr =3D addr;
+> -    queue_signal(env, sig, QEMU_SI_FAULT, &info);
+> +    queue_signal(cpu_env(cpu), sig, QEMU_SI_FAULT, &info);
+>  }
+>
+>  /* Force a SIGSEGV if we couldn't write to memory trying to set
+> --
+> 2.41.0
+>
+>
+
+--000000000000fc97cb0610d111a8
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr">[[ I dont=C2=A0know if it&#39;s too late =
+]]</div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr=
+">On Mon, Jan 29, 2024 at 9:48=E2=80=AFAM Philippe Mathieu-Daud=C3=A9 &lt;<=
+a href=3D"mailto:philmd@linaro.org">philmd@linaro.org</a>&gt; wrote:<br></d=
+iv><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bord=
+er-left:1px solid rgb(204,204,204);padding-left:1ex">Mechanical patch produ=
+ced running the command documented<br>
+in scripts/coccinelle/cpu_env.cocci_template header.<br>
+<br>
+Signed-off-by: Philippe Mathieu-Daud=C3=A9 &lt;<a href=3D"mailto:philmd@lin=
+aro.org" target=3D"_blank">philmd@linaro.org</a>&gt;<br>
+---<br>
+=C2=A0bsd-user/signal.c=C2=A0 =C2=A0| 3 +--<br>
+=C2=A0linux-user/signal.c | 6 ++----<br>
+=C2=A02 files changed, 3 insertions(+), 6 deletions(-)<br></blockquote><div=
+><br></div><div>Reviewed-by: Warner Losh &lt;<a href=3D"mailto:imp@bsdimp.c=
+om">imp@bsdimp.com</a>&gt;</div><div>=C2=A0</div><blockquote class=3D"gmail=
+_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204=
+,204);padding-left:1ex">
+diff --git a/bsd-user/signal.c b/bsd-user/signal.c<br>
+index ca31470772..c6f0b1be38 100644<br>
+--- a/bsd-user/signal.c<br>
++++ b/bsd-user/signal.c<br>
+@@ -463,14 +463,13 @@ static int fatal_signal(int sig)<br>
+=C2=A0void force_sig_fault(int sig, int code, abi_ulong addr)<br>
+=C2=A0{<br>
+=C2=A0 =C2=A0 =C2=A0CPUState *cpu =3D thread_cpu;<br>
+-=C2=A0 =C2=A0 CPUArchState *env =3D cpu_env(cpu);<br>
+=C2=A0 =C2=A0 =C2=A0target_siginfo_t info =3D {};<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0info.si_signo =3D sig;<br>
+=C2=A0 =C2=A0 =C2=A0info.si_errno =3D 0;<br>
+=C2=A0 =C2=A0 =C2=A0info.si_code =3D code;<br>
+=C2=A0 =C2=A0 =C2=A0info.si_addr =3D addr;<br>
+-=C2=A0 =C2=A0 queue_signal(env, sig, QEMU_SI_FAULT, &amp;info);<br>
++=C2=A0 =C2=A0 queue_signal(cpu_env(cpu), sig, QEMU_SI_FAULT, &amp;info);<b=
+r>
+=C2=A0}<br>
+<br>
+=C2=A0static void host_signal_handler(int host_sig, siginfo_t *info, void *=
+puc)<br>
+diff --git a/linux-user/signal.c b/linux-user/signal.c<br>
+index c9527adfa3..f78f7fc476 100644<br>
+--- a/linux-user/signal.c<br>
++++ b/linux-user/signal.c<br>
+@@ -623,7 +623,6 @@ void signal_init(void)<br>
+=C2=A0void force_sig(int sig)<br>
+=C2=A0{<br>
+=C2=A0 =C2=A0 =C2=A0CPUState *cpu =3D thread_cpu;<br>
+-=C2=A0 =C2=A0 CPUArchState *env =3D cpu_env(cpu);<br>
+=C2=A0 =C2=A0 =C2=A0target_siginfo_t info =3D {};<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0info.si_signo =3D sig;<br>
+@@ -631,7 +630,7 @@ void force_sig(int sig)<br>
+=C2=A0 =C2=A0 =C2=A0info.si_code =3D TARGET_SI_KERNEL;<br>
+=C2=A0 =C2=A0 =C2=A0info._sifields._kill._pid =3D 0;<br>
+=C2=A0 =C2=A0 =C2=A0info._sifields._kill._uid =3D 0;<br>
+-=C2=A0 =C2=A0 queue_signal(env, info.si_signo, QEMU_SI_KILL, &amp;info);<b=
+r>
++=C2=A0 =C2=A0 queue_signal(cpu_env(cpu), info.si_signo, QEMU_SI_KILL, &amp=
+;info);<br>
+=C2=A0}<br>
+<br>
+=C2=A0/*<br>
+@@ -641,14 +640,13 @@ void force_sig(int sig)<br>
+=C2=A0void force_sig_fault(int sig, int code, abi_ulong addr)<br>
+=C2=A0{<br>
+=C2=A0 =C2=A0 =C2=A0CPUState *cpu =3D thread_cpu;<br>
+-=C2=A0 =C2=A0 CPUArchState *env =3D cpu_env(cpu);<br>
+=C2=A0 =C2=A0 =C2=A0target_siginfo_t info =3D {};<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0info.si_signo =3D sig;<br>
+=C2=A0 =C2=A0 =C2=A0info.si_errno =3D 0;<br>
+=C2=A0 =C2=A0 =C2=A0info.si_code =3D code;<br>
+=C2=A0 =C2=A0 =C2=A0info._sifields._sigfault._addr =3D addr;<br>
+-=C2=A0 =C2=A0 queue_signal(env, sig, QEMU_SI_FAULT, &amp;info);<br>
++=C2=A0 =C2=A0 queue_signal(cpu_env(cpu), sig, QEMU_SI_FAULT, &amp;info);<b=
+r>
+=C2=A0}<br>
+<br>
+=C2=A0/* Force a SIGSEGV if we couldn&#39;t write to memory trying to set<b=
+r>
+-- <br>
+2.41.0<br>
+<br>
+</blockquote></div></div>
+
+--000000000000fc97cb0610d111a8--
 
