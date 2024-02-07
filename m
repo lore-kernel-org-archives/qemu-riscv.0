@@ -4,63 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 944E0C4828F
-	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Feb 2024 16:40:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46BADC4828D
+	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Feb 2024 16:40:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rXkwM-0002tV-1z; Wed, 07 Feb 2024 11:38:26 -0500
+	id 1rXkwE-0002o9-6Y; Wed, 07 Feb 2024 11:38:18 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rXkwK-0002sE-Ho
- for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 11:38:24 -0500
-Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
+ id 1rXkwC-0002nb-GY
+ for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 11:38:16 -0500
+Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rXkwG-00067o-Ef
- for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 11:38:24 -0500
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-40fe3141e1cso8097425e9.0
- for <qemu-riscv@nongnu.org>; Wed, 07 Feb 2024 08:38:20 -0800 (PST)
+ id 1rXkwA-00066U-Nm
+ for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 11:38:16 -0500
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-410177e41a8so5433425e9.2
+ for <qemu-riscv@nongnu.org>; Wed, 07 Feb 2024 08:38:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1707323899; x=1707928699; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9IbvextsUKhbDQgPyuaeoL3jSODZ/hWaknGrv+i1g18=;
- b=CuiGozEyOhm69oPTra3QbwGv1ujJrl7spKqq1nSc9Soav9a4jHRHJlqaBWGo9w52tu
- xwNgzbgaIO9v5og1jX4xokyT9SHeMFF/UvdrLDY4zLS78DkjAEBJsM3Atr3v4Iod9Esu
- httmM1D6pO6ISUTmPqaipHDpcVjWIzneqnPrNfdAQjWMAF3AYvAR1sOUXD42Qb/APhJV
- 57uxaPfYhB3aneVqtu1eMT0aONloQ95zygqGf6grqAgd4Nodf+XtZsNccGWk0aXy/2tN
- PT3XYD4GU503dhPQcPxniiGMMVfzJTWbYi33jbKGHsVRrztdl5SLQh65JNKXWmGdUutb
- 48pg==
+ d=linaro.org; s=google; t=1707323893; x=1707928693; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=WlKp9d70XQ8fXpBt0YxGjxqCi1DdUKUDYda3Sj9Zt2k=;
+ b=C/RsNRJiVBuOF78HAvFAsmjrxXzWVo+nYc539HHZ8X8pJ4Evc2dwWMHdSfhtPX8pm4
+ UErdumWr6NC+bMrXXD6EozFEavKqoQuD/4Y87D7dApuEmJ4E6ZVCZSZXJeGalgChGLgY
+ KSuNMXbP3+8zf0WXkbju5DtMqHHLt4FNKkrolnbOV5+fN8woaeKI1878WfL8QvyWk99l
+ Hqr+EmIpgrs/sQ4UpV9cwglzh8o2Q/vJo3Erod8QCdb5phERjMc69ALGechVUzG6jXj/
+ 2HHNELpK0zM7YxdqwnSd+9UtcV8psu7KpB3oIFdss2cknD68QUEqGSOHIQibGCwV9grd
+ NDXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707323899; x=1707928699;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=9IbvextsUKhbDQgPyuaeoL3jSODZ/hWaknGrv+i1g18=;
- b=cnQmlTjeXtGmWZhzswUOcSivc/wiWElluryYnP3anP3DLQbnuEXyZmfp4U8hBzIZD/
- jayi+QxncsdCcWaLNRQv5G0cFu/QERpZQQJ7FJ74GjfR4pii7TaeIYD0KwjMs5fv6BaD
- yEUbVDzJo7eH43LkmUE7kqu4XtH2/QOgHBo/Omnca36nk4yWvKdOQyvyr1n6x0GimQQ/
- leWv+My378KeP+M5lJcYYj7mt+wLzA0eLhaytbm1UzaQKL9vmTVCnaZY+62JlFIENTyq
- E6vrtcgOXIWDzcKa2CHNXz5PQKfCmtsE332EQD0VZas8qlepxz27fBnaPXvlu+RGeDat
- mmQA==
-X-Gm-Message-State: AOJu0YzitGPqwpv9jdRH4+woIldX5F2x2RDyA09O1+zYhNv23/ZgpM4W
- 9UtYh84Z0pQ591O3qilT8HI4tltr/zmeZmvBmk9tuSLtJsqK5RFHc3u7PXIa/RM=
-X-Google-Smtp-Source: AGHT+IFjRUT+msrD2SiPps3yoAGzJKkJykfls7gYzHMq8saSuGNCfpdBwg7XDW7/VHQ/a/4boJir1w==
-X-Received: by 2002:a05:600c:a08:b0:40e:fb8f:debe with SMTP id
- z8-20020a05600c0a0800b0040efb8fdebemr4884205wmp.38.1707323899069; 
- Wed, 07 Feb 2024 08:38:19 -0800 (PST)
+ d=1e100.net; s=20230601; t=1707323893; x=1707928693;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=WlKp9d70XQ8fXpBt0YxGjxqCi1DdUKUDYda3Sj9Zt2k=;
+ b=mDwLBgnyJezV9MNIQSb4QgTVLFVphFMJJroL1KYGKj49X4tMmvkZMUbHiguIONVdN4
+ 2YcmJuLfPY3vhkwPnSyhDCglOG1uQ7chsxWcC0ZGSKIOkUF4nIgkisqUR61Y7lnDiSKS
+ qNs/cC1jGC23aBWBqgPtwzYk4rhkoNPvgTEvX+lxeDeR6PRJ8T/ggnPTrgSfOg7Kz8kJ
+ SNdrW5B4OEUyFFL5CyXY4r4A3nf0EiWEBQtSm+mn97jtPo+G7Ky/deRdXqs2znW74oDD
+ RWyGIA8VXUKwLqrsWvIvIh8ULK+SzvMiNo2ben5GijMSugFQXA3RVWHE29UcsTtuXB/m
+ 81og==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUhimZaeVtx0FbFGdLUmex+udSHN5v6slNAzSoXl1zK5iRAUFOlXiGyxUEPsIAB2Iw6yrfJpfy9JuFtECw1ez1I0fM0OiUxhmSd3VsQ4a4FINLxD3LzvA5fA1t+hj0BEY8du8uGuKhPI7FhZv1gYWRBNA0gytf/ZLiiHhvuIi630KxG2wUx8oxHpTPP7yfgjuAN+lESvm3k5gMaj/V3/k/8HpebV8NR99nt8a2ZpDXFYU1JfeqQMymopOj5ui5UpnALi4+keqhcBbhDM3dVbVlWYq+MlpFJntUv6+SzSkvQq3pd0IMPH14/kYspXRxw/PDoQSYld6+FO8CQe18ThwbpgTQbS9WELPTpMxBe0/OSO8iBB0cdtPpT/9m1ce1xzOg6dVSBYwsncfpClFmb3fzcZ/VK9CUxmlD2QMDSOaehe8Oan5kePrC8ceZYrbqY4pymxdAacVIPvqhRnN1MLewenZhTCXDQ8oE7WQluSJtMCxlwoEySZWbjm2ZcOAlZyXlRF8a2bYrYhaxIcdbN17/Ptn25JYTZabClpR1woxuDKVy7F+892PF2HEOhcvjMtwys8eJOgLa10bBxoA0d+TcGYPAdPJmsiRiWyTjytbeLi4eXgIZvxq/MP7qxsipagt88zTduIPWtmccczuTW6b9JDQniuRoZRNNLkfmZkEIShnrZNSWR5Jo+8Fl2/qUchSYk5IaiX6D0TQ5WhKU4hl1rlW1l4x3tmemdhrT57yHmdlrulASpAS4OaCJVuo8/r3LLkP44c8kSDWfBFPdkSW9TEAOpFXxncX69MHkzxjrjQFpyXrZT4TsV14ihoP032F7GgOv6KL1GwJbTPVEwAz33ICZ+e+rpZKqOwtQF
+ AJvYcCWZBrZ480nVnTj8beFbXdoEtIKm8sLw594DnGTefIeXzlychRNCwNqrvi44KTBvsKuVtzJps/mzBeT/v0PvdXVu/nz+LvM=
+X-Gm-Message-State: AOJu0YzCEAYYeDwfdxwTYs0DWNkFyEFPRL2Two0bfzbYMHuSwfjfrhOg
+ o4eRPMtuyERm0vy9hMyoURgTe6G0WRtTmdGHmQY+nx41drIBMp66mW4v3ibZT/s=
+X-Google-Smtp-Source: AGHT+IG9ZsuE8Kac17CgEZosUatIAWfcA5HG129aTLlLVj14HE4KxHZMdVKgaa2zjkm/ypsPzXXesg==
+X-Received: by 2002:a05:600c:46c7:b0:40e:b29c:7103 with SMTP id
+ q7-20020a05600c46c700b0040eb29c7103mr4518974wmo.8.1707323892997; 
+ Wed, 07 Feb 2024 08:38:12 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXVVD88JpHiK2idhRmUo7scVVxDeoiUY7Mzi58y7mzTVCUgK6rObnzakvMQNvNKKJzRhcc61r4pDoMwe3a5GwJxHGrpGBJI573Rt7dbsw5PNEpO6/rjOnhFroHiPuB72yu0Pom1kjUZrGKE7hKmRYJs7pqvHIrtP3m5EBac1czrux3Npa+OX7kLbVJonUt8LpgotKN98BX3ef7KKjxdvge68lkUGLJC7du283U2/4xK9d8RmQxXdpl1WDH2YsIXv/9wqO4Y3gns8jpdPlCwC5ggqK1bJkuNuAtgt4hDcPpMyLJACoUqcZYKfv4osCT8ZtMkPS83Sxa42tjwMDfDIfSl8oqD7ObU9UmAw1LMkHESL2LaYMSIstE4F1xqxsB6Ql8ts4hxAno+BHKRXH4Byw/se5rb+N5oXLn+SbUvklu8k1psTRdPeT+pEHFFFybYYS8kpFYbLik7pvY8qNTMDrRrBrQjg3gr99IC7rF1UKOkOOmiYJ0aZ2IqMs8l5DdODTzaeJZVaQKMPGgbQbl32qncqxYWLgwowss8nIIBjdY1U7Cp4bxEecNRnFcxFBzH3IYWt3T0nwKi26SH/xq/FA8neCXwZs7zfm+3j4C+p1q/XafpAUZsVba76mbREde9o9UscIjMoHc1kZ/8Fkc3EcDeKyxR1mTJ722gVcN6dzo4FzXWOuqi5dbr6Oj9JTvNtCEVDYODB1C01mQ/sUhTcCW5cme1NZHdvPzuloZn4hLThFERNkdBI7Q6yu5SOY/NyAedgx+Em0s097lWa672m4LRn9PrejIQIZDbKW+tTW7KDs6aXBaitTAFelUpjyiSttBjeG3nhmZOt0A=
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- w14-20020a05600c474e00b00410232ffb2csm642397wmo.25.2024.02.07.08.38.13
+ g16-20020adfa490000000b0033b50ed5f98sm1154188wrb.72.2024.02.07.08.38.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Feb 2024 08:38:17 -0800 (PST)
+ Wed, 07 Feb 2024 08:38:12 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id B8E675F8E3;
+ by draig.lan (Postfix) with ESMTP id 26D785F7B1;
  Wed,  7 Feb 2024 16:38:12 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -83,26 +84,24 @@ Cc: devel@lists.libvirt.org, Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Li-Wen Hsu <lwhsu@freebsd.org>, Laurent Vivier <laurent@vivier.eu>,
  Kyle Evans <kevans@freebsd.org>,
  Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Riku Voipio <riku.voipio@iki.fi>, Ilya Leoshkevich <iii@linux.ibm.com>
-Subject: [PATCH v2 07/14] test-util-filemonitor: Adapt to the FreeBSD inotify
- rename semantics
-Date: Wed,  7 Feb 2024 16:38:05 +0000
-Message-Id: <20240207163812.3231697-8-alex.bennee@linaro.org>
+ Riku Voipio <riku.voipio@iki.fi>
+Subject: [PATCH v2 00/14] maintainer updates for 9.0 pre-PR (docker,
+ plugin tests, deprecation, elf, semihosting, gdbstub)
+Date: Wed,  7 Feb 2024 16:37:58 +0000
+Message-Id: <20240207163812.3231697-1-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240207163812.3231697-1-alex.bennee@linaro.org>
-References: <20240207163812.3231697-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::333;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x333.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -118,52 +117,75 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Ilya Leoshkevich <iii@linux.ibm.com>
+A fairly random collection of fixes in this tree. I've still got a
+report of openbsd rebuilding which is confusing me (something triggers
+it but calling again works as expected).
 
-Unlike on Linux, on FreeBSD renaming a file when the destination
-already exists results in an IN_DELETE event for that existing file:
+v2
+  - added Ilya's vm-build and gdbstub patches
 
-    $ FILEMONITOR_DEBUG=1 build/tests/unit/test-util-filemonitor
-    Rename /tmp/test-util-filemonitor-K13LI2/fish/one.txt -> /tmp/test-util-filemonitor-K13LI2/two.txt
-    Event id=200000000 event=2 file=one.txt
-    Queue event id 200000000 event 2 file one.txt
-    Queue event id 100000000 event 2 file two.txt
-    Queue event id 100000002 event 2 file two.txt
-    Queue event id 100000000 event 0 file two.txt
-    Queue event id 100000002 event 0 file two.txt
-    Event id=100000000 event=0 file=two.txt
-    Expected event 0 but got 2
+Everything is reviewed now so baring objections I intend to post the
+PR on Friday afternoon.
 
-This difference in behavior is not expected to break the real users, so
-teach the test to accept it.
+Alex.
 
-Suggested-by: Daniel P. Berrange <berrange@redhat.com>
-Signed-off-by: Ilya Leoshkevich <iii@linux.ibm.com>
-Message-Id: <20240206002344.12372-4-iii@linux.ibm.com>
-Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
----
- tests/unit/test-util-filemonitor.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+Alex Bennée (2):
+  docs: mark CRIS support as deprecated
+  Revert "hw/elf_ops: Ignore loadable segments with zero size"
 
-diff --git a/tests/unit/test-util-filemonitor.c b/tests/unit/test-util-filemonitor.c
-index a22de275955..02e67fc96ac 100644
---- a/tests/unit/test-util-filemonitor.c
-+++ b/tests/unit/test-util-filemonitor.c
-@@ -360,6 +360,14 @@ test_file_monitor_events(void)
-         { .type = QFILE_MONITOR_TEST_OP_EVENT,
-           .filesrc = "one.txt", .watchid = &watch4,
-           .eventid = QFILE_MONITOR_EVENT_DELETED },
-+#ifdef __FreeBSD__
-+        { .type = QFILE_MONITOR_TEST_OP_EVENT,
-+          .filesrc = "two.txt", .watchid = &watch0,
-+          .eventid = QFILE_MONITOR_EVENT_DELETED },
-+        { .type = QFILE_MONITOR_TEST_OP_EVENT,
-+          .filesrc = "two.txt", .watchid = &watch2,
-+          .eventid = QFILE_MONITOR_EVENT_DELETED },
-+#endif
-         { .type = QFILE_MONITOR_TEST_OP_EVENT,
-           .filesrc = "two.txt", .watchid = &watch0,
-           .eventid = QFILE_MONITOR_EVENT_CREATED },
+Fabiano Rosas (1):
+  tests/docker: Add sqlite3 module to openSUSE Leap container
+
+Ilya Leoshkevich (9):
+  tests/vm: Set UseDNS=no in the sshd configuration
+  tests/vm/freebsd: Reload the sshd configuration
+  test-util-filemonitor: Adapt to the FreeBSD inotify rename semantics
+  meson: Link with libinotify on FreeBSD
+  gdbstub: Expose TARGET_SIGTRAP in a target-agnostic way
+  gdbstub: Allow specifying a reason in stop packets
+  gdbstub: Add syscall entry/return hooks
+  gdbstub: Implement catching syscalls
+  tests/tcg: Add the syscall catchpoint gdbstub test
+
+Paolo Bonzini (2):
+  configure: run plugin TCG tests again
+  kconfig: use "select" to enable semihosting
+
+ docs/about/deprecated.rst                     |   8 ++
+ configure                                     |   3 +
+ configs/devices/m68k-softmmu/default.mak      |   2 -
+ configs/devices/mips-softmmu/common.mak       |   3 -
+ configs/devices/nios2-softmmu/default.mak     |   2 -
+ configs/devices/riscv32-softmmu/default.mak   |   2 -
+ configs/devices/riscv64-softmmu/default.mak   |   2 -
+ configs/devices/xtensa-softmmu/default.mak    |   2 -
+ meson.build                                   |  23 +++-
+ gdbstub/internals.h                           |   2 +
+ include/gdbstub/user.h                        |  29 ++++-
+ include/hw/elf_ops.h                          |  75 ++++++-------
+ include/user/syscall-trace.h                  |   7 +-
+ gdbstub/gdbstub.c                             |   9 ++
+ gdbstub/user-target.c                         |   5 +
+ gdbstub/user.c                                | 104 +++++++++++++++++-
+ tests/tcg/multiarch/catch-syscalls.c          |  51 +++++++++
+ tests/unit/test-util-filemonitor.c            |   8 ++
+ target/m68k/Kconfig                           |   1 +
+ target/mips/Kconfig                           |   1 +
+ target/nios2/Kconfig                          |   1 +
+ target/riscv/Kconfig                          |   2 +
+ target/xtensa/Kconfig                         |   1 +
+ tests/docker/dockerfiles/opensuse-leap.docker |   1 +
+ tests/lcitool/mappings.yml                    |   4 +
+ tests/lcitool/projects/qemu.yml               |   1 +
+ tests/tcg/multiarch/Makefile.target           |  10 +-
+ tests/tcg/multiarch/gdbstub/catch-syscalls.py |  53 +++++++++
+ tests/vm/basevm.py                            |   2 +
+ tests/vm/freebsd                              |   1 +
+ util/meson.build                              |   6 +-
+ 31 files changed, 358 insertions(+), 63 deletions(-)
+ create mode 100644 tests/tcg/multiarch/catch-syscalls.c
+ create mode 100644 tests/tcg/multiarch/gdbstub/catch-syscalls.py
+
 -- 
 2.39.2
 
