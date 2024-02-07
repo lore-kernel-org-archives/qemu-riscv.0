@@ -4,93 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 663E1C4828D
-	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Feb 2024 19:59:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9427C4828F
+	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Feb 2024 20:06:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rXo4s-0000pJ-5d; Wed, 07 Feb 2024 14:59:26 -0500
+	id 1rXoBK-0005yP-GR; Wed, 07 Feb 2024 15:06:06 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <wlosh@bsdimp.com>) id 1rXo4r-0000p2-8X
- for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 14:59:25 -0500
-Received: from mail-ed1-x52d.google.com ([2a00:1450:4864:20::52d])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rXoBE-0005tn-Oh
+ for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 15:06:02 -0500
+Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <wlosh@bsdimp.com>) id 1rXo4p-0002od-8k
- for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 14:59:24 -0500
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-56061ad3d3dso357488a12.1
- for <qemu-riscv@nongnu.org>; Wed, 07 Feb 2024 11:59:22 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rXoBB-0004Fi-Sj
+ for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 15:06:00 -0500
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-33b436dbdcfso818011f8f.0
+ for <qemu-riscv@nongnu.org>; Wed, 07 Feb 2024 12:05:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=bsdimp-com.20230601.gappssmtp.com; s=20230601; t=1707335962; x=1707940762;
- darn=nongnu.org; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=rdm1ISFzJpNXI93O9dFvZl8pbSopkyWIRj/AFKO4vKs=;
- b=Vdu44+ei5nqsjyqPzX0Vyp31ZoPfeKvWVujSLzDwLVm9bbJjbhgfs9q6wbTfJHrK6G
- XE8hZzRLzWCj3pJDilAk9qE94MObI6gLreZz9On4o7Ni7LJB2UBS1c+7DZ+JeTgxzCNt
- NCOpyAgWLVkL8L2Nwe0m887fidGJZ3zSJ6KQjRyVXAVEQ36d8PuYcv4vOBcZiD1vqWPp
- h/5khmOtox2+lytakL54chkKO/F6Gf9P0THxI6rcqeMbpF+aiD+lzcVY0gIu8HvbWo/3
- anYV26N/spQ5G00znZ0B1+wnIv2+JUw0no1kA9+eh3HfA8gH6MwgyMnTXLa4W+sdC5pm
- TWng==
+ d=linaro.org; s=google; t=1707336356; x=1707941156; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=N37tJ00VgGFI2022Rb5MhedKmpx3N6qNEfBSYXO6aIg=;
+ b=goip1U7ouwGHgIQtDXvd7U1K1Vcl8wkgju93n3CghXdl0hRS31DE+dbp/dO9TWbWFI
+ d+rL/0+mIs3/KWHddFEbXR2v61ztXhOPpWp0rXdy2UAKUGxi37Np/+uv0ad8dzh3QM7j
+ gIr39aHVoLaMy3SV4gILOfekKr+dHVfGOLb8BfmpAVQcbG2/ZqZeJJW7D/XWQ01VU1RJ
+ RtJ7H2b2TVfxDPDNbGdAW6T1zRSM6DlF4iBNKCHLCZbh4TRlpClqD2T/uRA5a1bWyAV0
+ YgPDKk5vu5uSW7pxO0WuWNGyXnX/RJ+kxRJM0N6EqHuI6tuJhprmApWcuzd6iUCOWlbv
+ EOmA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707335962; x=1707940762;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=rdm1ISFzJpNXI93O9dFvZl8pbSopkyWIRj/AFKO4vKs=;
- b=WkwzuSVXsvfhsMi5uD9aVk0ZGR1mcqP/DGtOWwaTpgpMh7pH3vQMBwz9xKc1c9Qw4L
- ok7xdLdWPbjEX1PL29LHRH1qFRduP+cH43k+h8Z/64c1/Rqzeg7FKmt4P8xNbcIk/l1o
- t8dOu4RDa9EYop8dS1Vf4QnIiH8wpF3RzCZtw0KriSF905w0Gdv0BdEcphPS55RrrAOD
- 9WzeJzzm+RDEwxBdJxd4sQoMTUGHnpCnUEtP3IMR/2mXCCvVDk4Plx8SNIAOXsWHqtIA
- 6a563vLS2ADGQvFZ4EoyIIkV1o9HFJqIb0ViwzZVHxkB9JKUh++WOqlj4K5PfaOMig02
- Hc6Q==
+ d=1e100.net; s=20230601; t=1707336356; x=1707941156;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=N37tJ00VgGFI2022Rb5MhedKmpx3N6qNEfBSYXO6aIg=;
+ b=Wfxq02GlEJYXRvNYFNfSLtizzjnpJl33IO7EjL9uRKPJ/NPdm6nTAYtciC75iTRMWF
+ +OX16NUJZ7nC5jkU3Oxp9UQI1preaYZ5oYnQT/uGAGOmas1/z2kkwk42ZW3Fahu7eKYY
+ mjg2vS/bA/FurJpq4yJbuUPLcI6BkcNmEArXvjzRJYx+nepYmvIqVGMy1YCgafM0LBs8
+ EJtAcFzLa61A75keo/G1EVqIJFCnAQjcOFeVlzTsZpxjn9uWtf8om6BrPekiLer+38ns
+ N3Oni//ljL2qa/VcYqr+bGos5BGyaCf/2/ToPTTsGlvxGoxGgv8yKS3JmgwPfClJd30D
+ TZFQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCULpzJyrBwYk0dX5UQdpVLDSxDjye40LBbZ27158ZDl+EK9JRVzdQMIV8LEaOMM51iH2hD9ndTci7wntiJNwfQSHh8SpGM=
-X-Gm-Message-State: AOJu0YxAb7Nly5Jv7UM0PkJP5HztsoQ8Azy9Osx6TMHilcKqEQSkyCEN
- jb+j6P8oZ3ardWt0ZzsxHev8TrhpXNilMFykJSncDV9HeL8jYBHBaAPcTxReuBzGIGRfXlaSj/+
- rlMR4qr8uSnjyfLG0uHIfzuY+EIFAVtKY7cuS3g==
-X-Google-Smtp-Source: AGHT+IEyG6w8ZFMR5QbBoIT3Ll+ytqHaPKaaE0fP025U1cA0KOAFdobmHiR3RvKFwuhQO911Lk4J4F60PtTxBKr876M=
-X-Received: by 2002:a05:6402:180a:b0:560:24d8:d2d1 with SMTP id
- g10-20020a056402180a00b0056024d8d2d1mr499927edy.11.1707335961835; Wed, 07 Feb
- 2024 11:59:21 -0800 (PST)
+ AJvYcCUiBN5ZTgPsdz10dX8uv9CL7jNtanC2lNkACMB8cW9HhyZCK7u+1atdVbjb+stviVUDVImALjBlSTsjQdYp5A8NeQhUl/8=
+X-Gm-Message-State: AOJu0YxNL/m5zBqBMgDjOvNAdUyFAVMHTfaIdFKFjgy2lyMnfFFaPEl/
+ Uwp1m4V9gmUqsseKkUPxoGUqrwN7nlZfFFLzFuk3DX8R8NQX6TVY/bp22N6CB+Q=
+X-Google-Smtp-Source: AGHT+IH2Phbmh9ji3XBtWp0SxypZwyrnxN4wclobVGUOTQ60Lti6h6bx32WiwTfHHZlyMCiHOoeMfg==
+X-Received: by 2002:a5d:5f44:0:b0:33b:3d35:1ee9 with SMTP id
+ cm4-20020a5d5f44000000b0033b3d351ee9mr4781374wrb.37.1707336356137; 
+ Wed, 07 Feb 2024 12:05:56 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUJVJR0bOJSTtz0S8XeGI5oeSDg2FJ3FNQQjaH2ZNeNhEa3w9Clv8ZbA8JrLTQ6fzjP2D0q/6Nxun0B9w4MxeumKK/N/jjy7MDqiShG8ssHlbq9u0nBKpHLN6DRqugmymOsCxxlz5YqdpkWY4hT86R7OHqO412vyhdffRhFbR0DN7G0+zLkdqhh1IFJfW2DavMUANPIPjtZZ0OJQ4ocvql34Iz1uXJcBZ4hGDrrR5ew0RapRbgBmMBmtUoZ5VdhI4qAy6TXJBo4hpfXNt35+erPtox+GXCUH9zL39yx1U3wsmc7BliwtlMIXqaE5jD4GoPigpFQRe4RUlUapXuQXN78dImjl/YbS0cFKhAt02ajU8hlHxN5V/BvfT0C6Uirkj+OLruaBDhZFPzEb5Tf+CWCi90/jkx13P5O3n7Fh5VAfj54I95xFZ5isVY7MA23uyYHC4uSJQJ9eaFSchhUHpqP03RWqrEYml8Eql4Ich4+KMkZBiw4UobCGd6N5RKEwpUXTYbTBdlZYJC5aZYJRSR5dLRblQtL/kgBP6m25QE/NO3Tazn38haKXjs7Rv2KcCAEXNiJLfiL+/wSWt6Dqj8h5R5lrrunxKv2HwkumckvJ6WchC/mmIlmYj5p6SrdSafbmqN4q4L2gzDaI3yQC/k36bGlN0uJogKbP2DXMDd+R8uG2EjAHzaPdj6/h/Uxp7hDBesznxfpdICafFWfhjfBcKV/5Iip0PeqEUBC9Dw7eQvdO7SU3OpRNuNkr/vsi1R8FlEK8ql1RtbmuxxWbEUPUCo5hoLq7dgpH46N7rdZOeLL9lfp7jqEmBNbBpoPxSqsY0ABQ8JhmhR/GTkDsyY9GfCnkeg=
+Received: from [192.168.69.100] ([176.187.214.82])
+ by smtp.gmail.com with ESMTPSA id
+ e11-20020adffd0b000000b0033b47ee01f1sm2174954wrr.49.2024.02.07.12.05.53
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 07 Feb 2024 12:05:55 -0800 (PST)
+Message-ID: <3f911aae-542c-45ba-a8c6-eed0626baacd@linaro.org>
+Date: Wed, 7 Feb 2024 21:05:52 +0100
 MIME-Version: 1.0
-References: <20240207163812.3231697-1-alex.bennee@linaro.org>
- <20240207163812.3231697-9-alex.bennee@linaro.org>
-In-Reply-To: <20240207163812.3231697-9-alex.bennee@linaro.org>
-From: Warner Losh <imp@bsdimp.com>
-Date: Wed, 7 Feb 2024 12:59:10 -0700
-Message-ID: <CANCZdfq+V9tV1H1fKUacLNCpGkJ43S3vTgORQwqX3MhrCMsSeQ@mail.gmail.com>
-Subject: Re: [PATCH v2 08/14] meson: Link with libinotify on FreeBSD
-To: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
-Cc: qemu-devel@nongnu.org, devel@lists.libvirt.org, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 10/14] gdbstub: Expose TARGET_SIGTRAP in a
+ target-agnostic way
+Content-Language: en-US
+To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: devel@lists.libvirt.org, Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Chris Wulff <crwulff@gmail.com>, 
- Weiwei Li <liwei1518@gmail.com>, Bin Meng <bin.meng@windriver.com>, 
- Thomas Huth <thuth@redhat.com>, qemu-riscv@nongnu.org,
- Marek Vasut <marex@denx.de>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>, 
- =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- Alistair Francis <alistair.francis@wdc.com>,
- Paolo Bonzini <pbonzini@redhat.com>, 
- Aurelien Jarno <aurelien@aurel32.net>, Beraldo Leal <bleal@redhat.com>, 
- =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
- Max Filippov <jcmvbkbc@gmail.com>, Ed Maste <emaste@freebsd.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Li-Wen Hsu <lwhsu@freebsd.org>, 
- Laurent Vivier <laurent@vivier.eu>, Kyle Evans <kevans@freebsd.org>, 
+ Chris Wulff <crwulff@gmail.com>, Weiwei Li <liwei1518@gmail.com>,
+ Bin Meng <bin.meng@windriver.com>, Thomas Huth <thuth@redhat.com>,
+ qemu-riscv@nongnu.org, Marek Vasut <marex@denx.de>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Warner Losh <imp@bsdimp.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>,
+ Beraldo Leal <bleal@redhat.com>, =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?=
+ <berrange@redhat.com>, Max Filippov <jcmvbkbc@gmail.com>,
+ Ed Maste <emaste@freebsd.org>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Li-Wen Hsu <lwhsu@freebsd.org>, Laurent Vivier <laurent@vivier.eu>,
+ Kyle Evans <kevans@freebsd.org>,
  Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Riku Voipio <riku.voipio@iki.fi>, Ilya Leoshkevich <iii@linux.ibm.com>
-Content-Type: multipart/alternative; boundary="000000000000848efc0610d0213b"
-Received-SPF: none client-ip=2a00:1450:4864:20::52d;
- envelope-from=wlosh@bsdimp.com; helo=mail-ed1-x52d.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_NONE=0.001,
+ Riku Voipio <riku.voipio@iki.fi>, Ilya Leoshkevich <iii@linux.ibm.com>,
+ Anton Johansson <anjo@rev.ng>
+References: <20240207163812.3231697-1-alex.bennee@linaro.org>
+ <20240207163812.3231697-11-alex.bennee@linaro.org>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20240207163812.3231697-11-alex.bennee@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42c.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -107,249 +117,48 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---000000000000848efc0610d0213b
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, Feb 7, 2024 at 9:38=E2=80=AFAM Alex Benn=C3=A9e <alex.bennee@linaro=
-.org> wrote:
-
+On 7/2/24 17:38, Alex Bennée wrote:
 > From: Ilya Leoshkevich <iii@linux.ibm.com>
->
-> make vm-build-freebsd fails with:
->
->     ld: error: undefined symbol: inotify_init1
->     >>> referenced by filemonitor-inotify.c:183
-> (../src/util/filemonitor-inotify.c:183)
->     >>>               util_filemonitor-inotify.c.o:(qemu_file_monitor_new=
-)
-> in archive libqemuutil.a
->
-> On FreeBSD the inotify functions are defined in libinotify.so. Add it
-> to the dependencies.
->
+> 
+> The upcoming syscall catchpoint support needs to send SIGTRAP stop
+> packets to GDB. Being able to compile this support only once for all
+> targets is a good thing, and it requires hiding TARGET_SIGTRAP behind
+> a function call.
+> 
 > Signed-off-by: Ilya Leoshkevich <iii@linux.ibm.com>
-> Reviewed-by: Thomas Huth <thuth@redhat.com>
-> Message-Id: <20240206002344.12372-5-iii@linux.ibm.com>
-> Signed-off-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
+> Message-Id: <20240202152506.279476-2-iii@linux.ibm.com>
+> Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 > ---
->  meson.build      | 23 +++++++++++++++++++----
->  util/meson.build |  6 +++++-
->  2 files changed, 24 insertions(+), 5 deletions(-)
->
-
-Reviewed-by: Warner Losh <imp@bsdimp.com>
-
-
-
-> diff --git a/meson.build b/meson.build
-> index b5d6dc94a83..e5d6f2d057e 100644
-> --- a/meson.build
-> +++ b/meson.build
-> @@ -2384,6 +2384,22 @@ else
->  endif
->  config_host_data.set('CONFIG_ASAN_IFACE_FIBER', have_asan_fiber)
->
-> +have_inotify_init =3D cc.has_header_symbol('sys/inotify.h', 'inotify_ini=
-t')
-> +have_inotify_init1 =3D cc.has_header_symbol('sys/inotify.h',
-> 'inotify_init1')
-> +inotify =3D not_found
-> +if (have_inotify_init or have_inotify_init1) and host_os =3D=3D 'freebsd=
-'
-> +  # libinotify-kqueue
-> +  inotify =3D cc.find_library('inotify')
-> +  if have_inotify_init
-> +    have_inotify_init =3D inotify.found()
-> +  endif
-> +  if have_inotify_init1
-> +    have_inotify_init1 =3D inotify.found()
-> +  endif
-> +endif
-> +config_host_data.set('CONFIG_INOTIFY', have_inotify_init)
-> +config_host_data.set('CONFIG_INOTIFY1', have_inotify_init1)
+>   gdbstub/internals.h   | 1 +
+>   gdbstub/user-target.c | 5 +++++
+>   2 files changed, 6 insertions(+)
+> 
+> diff --git a/gdbstub/internals.h b/gdbstub/internals.h
+> index 5c0c725e54c..aeb0d9b5377 100644
+> --- a/gdbstub/internals.h
+> +++ b/gdbstub/internals.h
+> @@ -136,6 +136,7 @@ void gdb_append_thread_id(CPUState *cpu, GString *buf);
+>   int gdb_get_cpu_index(CPUState *cpu);
+>   unsigned int gdb_get_max_cpus(void); /* both */
+>   bool gdb_can_reverse(void); /* softmmu, stub for user */
+> +int gdb_target_sigtrap(void); /* user */
+>   
+>   void gdb_create_default_process(GDBState *s);
+>   
+> diff --git a/gdbstub/user-target.c b/gdbstub/user-target.c
+> index c4bba4c72c7..b7d4c37cd81 100644
+> --- a/gdbstub/user-target.c
+> +++ b/gdbstub/user-target.c
+> @@ -418,3 +418,8 @@ void gdb_handle_query_xfer_exec_file(GArray *params, void *user_ctx)
+>                       ts->bprm->filename + offset);
+>       gdb_put_strbuf();
+>   }
 > +
->  # has_header_symbol
->  config_host_data.set('CONFIG_BLKZONED',
->                       cc.has_header_symbol('linux/blkzoned.h',
-> 'BLKOPENZONE'))
-> @@ -2400,10 +2416,6 @@ config_host_data.set('CONFIG_FIEMAP',
->  config_host_data.set('CONFIG_GETRANDOM',
->                       cc.has_function('getrandom') and
->                       cc.has_header_symbol('sys/random.h',
-> 'GRND_NONBLOCK'))
-> -config_host_data.set('CONFIG_INOTIFY',
-> -                     cc.has_header_symbol('sys/inotify.h',
-> 'inotify_init'))
-> -config_host_data.set('CONFIG_INOTIFY1',
-> -                     cc.has_header_symbol('sys/inotify.h',
-> 'inotify_init1'))
->  config_host_data.set('CONFIG_PRCTL_PR_SET_TIMERSLACK',
->                       cc.has_header_symbol('sys/prctl.h',
-> 'PR_SET_TIMERSLACK'))
->  config_host_data.set('CONFIG_RTNETLINK',
-> @@ -4407,6 +4419,9 @@ summary_info +=3D {'libudev':           libudev}
->  summary_info +=3D {'FUSE lseek':        fuse_lseek.found()}
->  summary_info +=3D {'selinux':           selinux}
->  summary_info +=3D {'libdw':             libdw}
-> +if host_os =3D=3D 'freebsd'
-> +  summary_info +=3D {'libinotify-kqueue': inotify}
-> +endif
->  summary(summary_info, bool_yn: true, section: 'Dependencies')
->
->  if host_arch =3D=3D 'unknown'
-> diff --git a/util/meson.build b/util/meson.build
-> index af3bf5692d8..0ef9886be04 100644
-> --- a/util/meson.build
-> +++ b/util/meson.build
-> @@ -104,7 +104,11 @@ if have_block
->    util_ss.add(files('throttle.c'))
->    util_ss.add(files('timed-average.c'))
->    if config_host_data.get('CONFIG_INOTIFY1')
-> -    util_ss.add(files('filemonitor-inotify.c'))
-> +    freebsd_dep =3D []
-> +    if host_os =3D=3D 'freebsd'
-> +      freebsd_dep =3D inotify
-> +    endif
-> +    util_ss.add(files('filemonitor-inotify.c'), freebsd_dep)
->    else
->      util_ss.add(files('filemonitor-stub.c'))
->    endif
-> --
-> 2.39.2
->
->
+> +int gdb_target_sigtrap(void)
+> +{
+> +    return TARGET_SIGTRAP;
+> +}
 
---000000000000848efc0610d0213b
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Wed, Feb 7, 2024 at 9:38=E2=80=AFA=
-M Alex Benn=C3=A9e &lt;<a href=3D"mailto:alex.bennee@linaro.org">alex.benne=
-e@linaro.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" styl=
-e=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);paddin=
-g-left:1ex">From: Ilya Leoshkevich &lt;<a href=3D"mailto:iii@linux.ibm.com"=
- target=3D"_blank">iii@linux.ibm.com</a>&gt;<br>
-<br>
-make vm-build-freebsd fails with:<br>
-<br>
-=C2=A0 =C2=A0 ld: error: undefined symbol: inotify_init1<br>
-=C2=A0 =C2=A0 &gt;&gt;&gt; referenced by filemonitor-inotify.c:183 (../src/=
-util/filemonitor-inotify.c:183)<br>
-=C2=A0 =C2=A0 &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0util_filemonitor-inotify.c.o:(qemu_file_monitor_new) in archive libqe=
-muutil.a<br>
-<br>
-On FreeBSD the inotify functions are defined in libinotify.so. Add it<br>
-to the dependencies.<br>
-<br>
-Signed-off-by: Ilya Leoshkevich &lt;<a href=3D"mailto:iii@linux.ibm.com" ta=
-rget=3D"_blank">iii@linux.ibm.com</a>&gt;<br>
-Reviewed-by: Thomas Huth &lt;<a href=3D"mailto:thuth@redhat.com" target=3D"=
-_blank">thuth@redhat.com</a>&gt;<br>
-Message-Id: &lt;<a href=3D"mailto:20240206002344.12372-5-iii@linux.ibm.com"=
- target=3D"_blank">20240206002344.12372-5-iii@linux.ibm.com</a>&gt;<br>
-Signed-off-by: Alex Benn=C3=A9e &lt;<a href=3D"mailto:alex.bennee@linaro.or=
-g" target=3D"_blank">alex.bennee@linaro.org</a>&gt;<br>
----<br>
-=C2=A0meson.build=C2=A0 =C2=A0 =C2=A0 | 23 +++++++++++++++++++----<br>
-=C2=A0util/meson.build |=C2=A0 6 +++++-<br>
-=C2=A02 files changed, 24 insertions(+), 5 deletions(-)<br></blockquote><di=
-v><br></div><div>Reviewed-by: Warner Losh &lt;<a href=3D"mailto:imp@bsdimp.=
-com">imp@bsdimp.com</a>&gt;</div><div><br></div><div>=C2=A0</div><blockquot=
-e class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px s=
-olid rgb(204,204,204);padding-left:1ex">
-diff --git a/meson.build b/meson.build<br>
-index b5d6dc94a83..e5d6f2d057e 100644<br>
---- a/meson.build<br>
-+++ b/meson.build<br>
-@@ -2384,6 +2384,22 @@ else<br>
-=C2=A0endif<br>
-=C2=A0config_host_data.set(&#39;CONFIG_ASAN_IFACE_FIBER&#39;, have_asan_fib=
-er)<br>
-<br>
-+have_inotify_init =3D cc.has_header_symbol(&#39;sys/inotify.h&#39;, &#39;i=
-notify_init&#39;)<br>
-+have_inotify_init1 =3D cc.has_header_symbol(&#39;sys/inotify.h&#39;, &#39;=
-inotify_init1&#39;)<br>
-+inotify =3D not_found<br>
-+if (have_inotify_init or have_inotify_init1) and host_os =3D=3D &#39;freeb=
-sd&#39;<br>
-+=C2=A0 # libinotify-kqueue<br>
-+=C2=A0 inotify =3D cc.find_library(&#39;inotify&#39;)<br>
-+=C2=A0 if have_inotify_init<br>
-+=C2=A0 =C2=A0 have_inotify_init =3D inotify.found()<br>
-+=C2=A0 endif<br>
-+=C2=A0 if have_inotify_init1<br>
-+=C2=A0 =C2=A0 have_inotify_init1 =3D inotify.found()<br>
-+=C2=A0 endif<br>
-+endif<br>
-+config_host_data.set(&#39;CONFIG_INOTIFY&#39;, have_inotify_init)<br>
-+config_host_data.set(&#39;CONFIG_INOTIFY1&#39;, have_inotify_init1)<br>
-+<br>
-=C2=A0# has_header_symbol<br>
-=C2=A0config_host_data.set(&#39;CONFIG_BLKZONED&#39;,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 cc.has_header_symbol(&#39;linux/blkzoned.h&#39;, &#39;BLKOPENZONE&#39;)=
-)<br>
-@@ -2400,10 +2416,6 @@ config_host_data.set(&#39;CONFIG_FIEMAP&#39;,<br>
-=C2=A0config_host_data.set(&#39;CONFIG_GETRANDOM&#39;,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 cc.has_function(&#39;getrandom&#39;) and<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 cc.has_header_symbol(&#39;sys/random.h&#39;, &#39;GRND_NONBLOCK&#39;))<=
-br>
--config_host_data.set(&#39;CONFIG_INOTIFY&#39;,<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0cc.has_header_symbol(&#39;sys/inotify.h&#39;, &#39;inotify_init&#39;))<b=
-r>
--config_host_data.set(&#39;CONFIG_INOTIFY1&#39;,<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0cc.has_header_symbol(&#39;sys/inotify.h&#39;, &#39;inotify_init1&#39;))<=
-br>
-=C2=A0config_host_data.set(&#39;CONFIG_PRCTL_PR_SET_TIMERSLACK&#39;,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 cc.has_header_symbol(&#39;sys/prctl.h&#39;, &#39;PR_SET_TIMERSLACK&#39;=
-))<br>
-=C2=A0config_host_data.set(&#39;CONFIG_RTNETLINK&#39;,<br>
-@@ -4407,6 +4419,9 @@ summary_info +=3D {&#39;libudev&#39;:=C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0libudev}<br>
-=C2=A0summary_info +=3D {&#39;FUSE lseek&#39;:=C2=A0 =C2=A0 =C2=A0 =C2=A0 f=
-use_lseek.found()}<br>
-=C2=A0summary_info +=3D {&#39;selinux&#39;:=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0selinux}<br>
-=C2=A0summary_info +=3D {&#39;libdw&#39;:=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0libdw}<br>
-+if host_os =3D=3D &#39;freebsd&#39;<br>
-+=C2=A0 summary_info +=3D {&#39;libinotify-kqueue&#39;: inotify}<br>
-+endif<br>
-=C2=A0summary(summary_info, bool_yn: true, section: &#39;Dependencies&#39;)=
-<br>
-<br>
-=C2=A0if host_arch =3D=3D &#39;unknown&#39;<br>
-diff --git a/util/meson.build b/util/meson.build<br>
-index af3bf5692d8..0ef9886be04 100644<br>
---- a/util/meson.build<br>
-+++ b/util/meson.build<br>
-@@ -104,7 +104,11 @@ if have_block<br>
-=C2=A0 =C2=A0util_ss.add(files(&#39;throttle.c&#39;))<br>
-=C2=A0 =C2=A0util_ss.add(files(&#39;timed-average.c&#39;))<br>
-=C2=A0 =C2=A0if config_host_data.get(&#39;CONFIG_INOTIFY1&#39;)<br>
--=C2=A0 =C2=A0 util_ss.add(files(&#39;filemonitor-inotify.c&#39;))<br>
-+=C2=A0 =C2=A0 freebsd_dep =3D []<br>
-+=C2=A0 =C2=A0 if host_os =3D=3D &#39;freebsd&#39;<br>
-+=C2=A0 =C2=A0 =C2=A0 freebsd_dep =3D inotify<br>
-+=C2=A0 =C2=A0 endif<br>
-+=C2=A0 =C2=A0 util_ss.add(files(&#39;filemonitor-inotify.c&#39;), freebsd_=
-dep)<br>
-=C2=A0 =C2=A0else<br>
-=C2=A0 =C2=A0 =C2=A0util_ss.add(files(&#39;filemonitor-stub.c&#39;))<br>
-=C2=A0 =C2=A0endif<br>
--- <br>
-2.39.2<br>
-<br>
-</blockquote></div></div>
-
---000000000000848efc0610d0213b--
 
