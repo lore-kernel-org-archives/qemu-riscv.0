@@ -4,104 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3FD0C4828D
-	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Feb 2024 16:40:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B70A2C4828F
+	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Feb 2024 19:58:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rXkwU-00030t-17; Wed, 07 Feb 2024 11:38:34 -0500
+	id 1rXo3b-0007yS-0O; Wed, 07 Feb 2024 14:58:07 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rXkwS-0002zq-EQ
- for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 11:38:32 -0500
-Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
+ (Exim 4.90_1) (envelope-from <wlosh@bsdimp.com>) id 1rXo3Z-0007xw-Qa
+ for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 14:58:05 -0500
+Received: from mail-lj1-x22d.google.com ([2a00:1450:4864:20::22d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rXkwP-0006CN-Ai
- for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 11:38:32 -0500
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-33b0e5d1e89so735566f8f.0
- for <qemu-riscv@nongnu.org>; Wed, 07 Feb 2024 08:38:28 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <wlosh@bsdimp.com>) id 1rXo3X-0002hf-Py
+ for qemu-riscv@nongnu.org; Wed, 07 Feb 2024 14:58:05 -0500
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-2cf4fafa386so13620051fa.1
+ for <qemu-riscv@nongnu.org>; Wed, 07 Feb 2024 11:58:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1707323908; x=1707928708; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=z2vgt/WjJf2HA0KugTv1vBfaaG9X3Kl8endzGiNtDT8=;
- b=Rger1u/EA5hB/OPg2o7wlBnAcehbs/KAx/zLTduzfZafJEs6DB9/oc8qVhdW8kvV7c
- KO4UugWVRYcku7q5HwRZBENFfyD/LVMqFzpXexKtfs71rZn5fihPz8IC1TyqRORti0Yu
- GuQWU37dV0Qs2X54ore7gJp83PJ3El/56+ZJnSzuf32SSsKuUR0+S7X1lceR6qHTq33n
- LXGhlzfW7YTHqYqdvVsCQtBnZJ48NSfNTbv38GRYVZ7Maw7+84S2Pie1pmkgWLHfGZ+G
- 8K0kBlcaBP/yVnH5KDcFpZ5nIex+ZaQS5EJhBuA+L/bRjDy3iS1krD+fvFv3WvbG7S/y
- RYZw==
+ d=bsdimp-com.20230601.gappssmtp.com; s=20230601; t=1707335881; x=1707940681;
+ darn=nongnu.org; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=e2r8ewQ3GKlhxv+VAGTlsx90mzqAeYJV/OC68iAZzz4=;
+ b=s6S3YJLh8k4uFPDmldHjfLlM+ObEIwvjRaMipPypVnCa2k/2oDt1E3ID0yoh8Sqr6w
+ gP5/EBBJRB1Rl+xwo7R1kF7dLaZtzJhEdXx5iAJwIm7pCl3BTEzYhmHDCxtECzo6L4nY
+ PXTERke6q3sOzoGTuKKDPXbLk7rr0RvsqYT1b4IFuAJHBjLcQ1agLNqR6W5Ac0JCR5ms
+ tTYN3I+B/WqZqv2K0XFN5jPT8lHPpHRh36Thqj58DbessAp8NVTcqyradzrVaB1WRt+B
+ W6UXa+dpben2mx13ipshZ/um0xBV6s8C27QuArMkOmSu4uGWrNWP7zuvoBIJWwjEuR0x
+ RWqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707323908; x=1707928708;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=z2vgt/WjJf2HA0KugTv1vBfaaG9X3Kl8endzGiNtDT8=;
- b=PnBbNXXm9AquAWQO8Maqlt3a7YFKdWk0r/QKVo94xRg/J/ZPM2PpNvs+MLM7DCLXTu
- EFUknyJBcmETrzl4JUAYeVzUo7ED6nq6PCmVDm83COslgFz0+u0Ag4Yzuust1Ij8kDim
- ygKSFhfT7/uSY08EGXT7Ynf8kMbRVzHCNvf9dCLKu7jLwOchsDYXq9kUxswxPdU3xbsj
- YSonxxm6DRiggdeuZ3r0eZ+cOAvGMRjeuU5nUasNa6xdabwueDkk+BmTbdY6n6w7Byx9
- yo1GKrheu8tCfTJ6faFiaYxD/3rqDJhTekVgwqga0hk5hkIygeh2UCf/eypjPcMx9nEu
- 9dLg==
-X-Gm-Message-State: AOJu0YxK3Sp010DNxyRUCpeiNdrH3n4YUyp0UhjeI4eaQiVmhVEOZkRw
- ocwtxWGqkXNhLpV0VpJNRCJbsDsoUjS0XnxcXOfDHRix6yrn4Q8TFwXccdzSW30=
-X-Google-Smtp-Source: AGHT+IEKKrSH9TvE15V4DeeR704L/Bk2TeAzEHO0Yq3f62/MiSfujIaWP0z45XJEoBodYKePZS99pQ==
-X-Received: by 2002:a5d:4523:0:b0:33b:1ac8:aebe with SMTP id
- j3-20020a5d4523000000b0033b1ac8aebemr4863574wra.44.1707323907793; 
- Wed, 07 Feb 2024 08:38:27 -0800 (PST)
+ d=1e100.net; s=20230601; t=1707335881; x=1707940681;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=e2r8ewQ3GKlhxv+VAGTlsx90mzqAeYJV/OC68iAZzz4=;
+ b=M6CWsahNzWv1IcQKXEpDMufFd3ds4GKfSgrHj6ZdHHk6YiA+ihnl5Y3YuQfs0lmTdL
+ 3Hk1vDSbq/4YQLrUQPlOSMvWKAcRv8rs9mEFvYVj6mQ3yBpiAiX0DZLFJQDw7IxSmIkI
+ eUkR+TIqJ6+Zk05KZfYSP5EUXNzaDiwg8zvLRvE+EBdlmep6WDKkDDPKWh3geOX8fn38
+ nP6StkwQHAGFlCy64iNKoGZUi2o6Bz/f0UDSpXu03dzzH+3HeAJvDK4d3qQmPYL5Nse/
+ LlVH93eNX39avlrVFPZ73teypS6ZzRaqAuI5U43ghCLUq7hLDxCErDde79Nc02yfodut
+ +ftw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUgaPKcBeGwVcF6F+SJ0hnc3uIR62pO2+ap1TjSypdzohrcatPumrhMX0akevBZfKLOfqcrDRzsQIQjrFGyyNlrG7SAcJZXQMoDCcMReckIaeAV8Z//SGrX0AHMjt7RW7q2xOws8W5fKApdCc4o9woSEsq8F98zbeBAUtxWMcBOVjK3rHrxSd2ueaOT6AzEOcpkGhcBUdXtH2uy8Mo82p0Z9SJ/yivEjR5YWtfcJ2M6hnR+SBQ4YhsFWJwurXcSXeJto8KRGLlqZBuaQmLqklmhaJ128nbNu/UomVUd+29BYe9aBe9EfCaL3DL2WiOjeJUEQQ5jbddFRfsWWBWdWvDuV0fm3SqajHpb/1uNbU3NktxQVK8j4aZ+9z+H8PeNPVUytM14riF1MpNEQbs4DLmDJsNTyefVQm9VOfCjZcNBJ5Qrh/NNx8sXqn1F5QLzP/lopJCu0pkqVx/GMmeSHmBOjc//pqStLNe8s2JBtdK43q+2lLwsOvFpL4RZnG6N2X8fd5cvLUIhHyGvGm1aYvC6Wb6a27UoNoCHwmaK89VH/AST6QuZubu2FNFT31j5L9I9+bvV9CxJxZgwrt8MfuQvY2OoFqids2x2v0q1tpzyGmMX6KWNJao940ZKguac0uKBZ0+YKhKQjPS5mlM7/9vC3pXZzU+Z3GgFL9xQ+mf+OF5DxTyciLF/82OZkJ3sM6TU2CSQ4ojpE78WblY33uOt/l3Mr6k/YwoTSDlJ+ZhXBvAb5AgVBFUbBlMVyixS7wCfqP6PRnqeB77Mfm0ZbEX2YugAcUrqEnr+YccYcsthugdgLC4Q/+jBOptYfFbOktfRhhnFwW1P/JlgCtK/QJk4+tPJ1srbDPQ2k61Y
-Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- y16-20020a5d6150000000b0033b443a7aa7sm1829371wrt.97.2024.02.07.08.38.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Feb 2024 08:38:24 -0800 (PST)
-Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 5A4ED5F951;
- Wed,  7 Feb 2024 16:38:13 +0000 (GMT)
-From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: devel@lists.libvirt.org, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ AJvYcCVnLOIMBK4L3+hCqnHpNN3TtacPreQTuEv+xvZ4An04UJn43ubFwdWFhv0wOQaQ7n8nN4e60r3lQblX03mH/Zw5vaUa+BA=
+X-Gm-Message-State: AOJu0YzDDKbV7HlxU0PEo8G0s/zKcAx80iCMKBzNQ16EEjtUDEQr6NF2
+ yvFp6Gs34jrWAb9UdCh51GVqieMgdVKYfw0lCtC7K9VerXIiSYMDSrZKhT0e6NGXCkqp3AIb3iD
+ g670wzzAUUUXY3mteMleO1DqrhbRJXS03y98QPw==
+X-Google-Smtp-Source: AGHT+IEnNiIp7DVMeTEf9W8ZiZ9tV3spxV7ZvP/tnsMsVWy67rLQQ5oRCp/mcLdONHaHaessZ2oh0z9kRSR+uHtFTl8=
+X-Received: by 2002:a05:651c:388:b0:2d0:7b53:9330 with SMTP id
+ e8-20020a05651c038800b002d07b539330mr3915736ljp.14.1707335881131; Wed, 07 Feb
+ 2024 11:58:01 -0800 (PST)
+MIME-Version: 1.0
+References: <20240207163812.3231697-1-alex.bennee@linaro.org>
+ <20240207163812.3231697-8-alex.bennee@linaro.org>
+In-Reply-To: <20240207163812.3231697-8-alex.bennee@linaro.org>
+From: Warner Losh <imp@bsdimp.com>
+Date: Wed, 7 Feb 2024 12:57:50 -0700
+Message-ID: <CANCZdfqNka9Ro50BcGAXhVU00bjUpsSjNSe8F00-053cBHmrzA@mail.gmail.com>
+Subject: Re: [PATCH v2 07/14] test-util-filemonitor: Adapt to the FreeBSD
+ inotify rename semantics
+To: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
+Cc: qemu-devel@nongnu.org, devel@lists.libvirt.org, 
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, 
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Chris Wulff <crwulff@gmail.com>, Weiwei Li <liwei1518@gmail.com>,
- Bin Meng <bin.meng@windriver.com>, Thomas Huth <thuth@redhat.com>,
- qemu-riscv@nongnu.org, Marek Vasut <marex@denx.de>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Alistair Francis <alistair.francis@wdc.com>, Warner Losh <imp@bsdimp.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>,
- Beraldo Leal <bleal@redhat.com>,
- =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
- Max Filippov <jcmvbkbc@gmail.com>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Ed Maste <emaste@freebsd.org>, Palmer Dabbelt <palmer@dabbelt.com>,
- Li-Wen Hsu <lwhsu@freebsd.org>, Laurent Vivier <laurent@vivier.eu>,
- Kyle Evans <kevans@freebsd.org>,
+ Chris Wulff <crwulff@gmail.com>, 
+ Weiwei Li <liwei1518@gmail.com>, Bin Meng <bin.meng@windriver.com>, 
+ Thomas Huth <thuth@redhat.com>, qemu-riscv@nongnu.org,
+ Marek Vasut <marex@denx.de>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>, 
+ =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, 
+ Aurelien Jarno <aurelien@aurel32.net>, Beraldo Leal <bleal@redhat.com>, 
+ =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
+ Max Filippov <jcmvbkbc@gmail.com>, Ed Maste <emaste@freebsd.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Li-Wen Hsu <lwhsu@freebsd.org>, 
+ Laurent Vivier <laurent@vivier.eu>, Kyle Evans <kevans@freebsd.org>, 
  Wainer dos Santos Moschetta <wainersm@redhat.com>,
  Riku Voipio <riku.voipio@iki.fi>, Ilya Leoshkevich <iii@linux.ibm.com>
-Subject: [PATCH v2 13/14] gdbstub: Implement catching syscalls
-Date: Wed,  7 Feb 2024 16:38:11 +0000
-Message-Id: <20240207163812.3231697-14-alex.bennee@linaro.org>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240207163812.3231697-1-alex.bennee@linaro.org>
-References: <20240207163812.3231697-1-alex.bennee@linaro.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42c.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+Content-Type: multipart/alternative; boundary="000000000000b5201a0610d01c93"
+Received-SPF: none client-ip=2a00:1450:4864:20::22d;
+ envelope-from=wlosh@bsdimp.com; helo=mail-lj1-x22d.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SPF_NONE=0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -117,197 +108,150 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Ilya Leoshkevich <iii@linux.ibm.com>
+--000000000000b5201a0610d01c93
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-GDB supports stopping on syscall entry and exit using the "catch
-syscall" command. It relies on 3 packets, which are currently not
-supported by QEMU:
+On Wed, Feb 7, 2024 at 9:38=E2=80=AFAM Alex Benn=C3=A9e <alex.bennee@linaro=
+.org> wrote:
 
-* qSupported:QCatchSyscalls+ [1]
-* QCatchSyscalls: [2]
-* T05syscall_entry: and T05syscall_return: [3]
+> From: Ilya Leoshkevich <iii@linux.ibm.com>
+>
+> Unlike on Linux, on FreeBSD renaming a file when the destination
+> already exists results in an IN_DELETE event for that existing file:
+>
+>     $ FILEMONITOR_DEBUG=3D1 build/tests/unit/test-util-filemonitor
+>     Rename /tmp/test-util-filemonitor-K13LI2/fish/one.txt ->
+> /tmp/test-util-filemonitor-K13LI2/two.txt
+>     Event id=3D200000000 event=3D2 file=3Done.txt
+>     Queue event id 200000000 event 2 file one.txt
+>     Queue event id 100000000 event 2 file two.txt
+>     Queue event id 100000002 event 2 file two.txt
+>     Queue event id 100000000 event 0 file two.txt
+>     Queue event id 100000002 event 0 file two.txt
+>     Event id=3D100000000 event=3D0 file=3Dtwo.txt
+>     Expected event 0 but got 2
+>
+> This difference in behavior is not expected to break the real users, so
+> teach the test to accept it.
+>
 
-Implement generation and handling of these packets.
+Reviewed-by: Warner Losh <imp@bsdimp.com>
 
-[1] https://sourceware.org/gdb/current/onlinedocs/gdb.html/General-Query-Packets.html#qSupported
-[2] https://sourceware.org/gdb/current/onlinedocs/gdb.html/General-Query-Packets.html#QCatchSyscalls
-[3] https://sourceware.org/gdb/current/onlinedocs/gdb.html/Stop-Reply-Packets.html
 
-Signed-off-by: Ilya Leoshkevich <iii@linux.ibm.com>
-Message-Id: <20240202152506.279476-5-iii@linux.ibm.com>
-[AJB: GString -> g_strdup_printf]
-Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
----
- gdbstub/internals.h |  1 +
- gdbstub/gdbstub.c   |  9 +++++
- gdbstub/user.c      | 91 +++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 101 insertions(+)
+Suggested-by: Daniel P. Berrange <berrange@redhat.com>
+> Signed-off-by: Ilya Leoshkevich <iii@linux.ibm.com>
+> Message-Id: <20240206002344.12372-4-iii@linux.ibm.com>
+> Signed-off-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
+> ---
+>  tests/unit/test-util-filemonitor.c | 8 ++++++++
+>  1 file changed, 8 insertions(+)
+>
+> diff --git a/tests/unit/test-util-filemonitor.c
+> b/tests/unit/test-util-filemonitor.c
+> index a22de275955..02e67fc96ac 100644
+> --- a/tests/unit/test-util-filemonitor.c
+> +++ b/tests/unit/test-util-filemonitor.c
+> @@ -360,6 +360,14 @@ test_file_monitor_events(void)
+>          { .type =3D QFILE_MONITOR_TEST_OP_EVENT,
+>            .filesrc =3D "one.txt", .watchid =3D &watch4,
+>            .eventid =3D QFILE_MONITOR_EVENT_DELETED },
+> +#ifdef __FreeBSD__
+> +        { .type =3D QFILE_MONITOR_TEST_OP_EVENT,
+> +          .filesrc =3D "two.txt", .watchid =3D &watch0,
+> +          .eventid =3D QFILE_MONITOR_EVENT_DELETED },
+> +        { .type =3D QFILE_MONITOR_TEST_OP_EVENT,
+> +          .filesrc =3D "two.txt", .watchid =3D &watch2,
+> +          .eventid =3D QFILE_MONITOR_EVENT_DELETED },
+> +#endif
+>          { .type =3D QFILE_MONITOR_TEST_OP_EVENT,
+>            .filesrc =3D "two.txt", .watchid =3D &watch0,
+>            .eventid =3D QFILE_MONITOR_EVENT_CREATED },
+> --
+> 2.39.2
+>
+>
 
-diff --git a/gdbstub/internals.h b/gdbstub/internals.h
-index aeb0d9b5377..56b7c13b750 100644
---- a/gdbstub/internals.h
-+++ b/gdbstub/internals.h
-@@ -195,6 +195,7 @@ void gdb_handle_v_file_close(GArray *params, void *user_ctx); /* user */
- void gdb_handle_v_file_pread(GArray *params, void *user_ctx); /* user */
- void gdb_handle_v_file_readlink(GArray *params, void *user_ctx); /* user */
- void gdb_handle_query_xfer_exec_file(GArray *params, void *user_ctx); /* user */
-+void gdb_handle_set_catch_syscalls(GArray *params, void *user_ctx); /* user */
- 
- void gdb_handle_query_attached(GArray *params, void *user_ctx); /* both */
- 
-diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
-index 46d752bbc2c..7e73e916bdc 100644
---- a/gdbstub/gdbstub.c
-+++ b/gdbstub/gdbstub.c
-@@ -1617,6 +1617,7 @@ static void handle_query_supported(GArray *params, void *user_ctx)
-     if (gdbserver_state.c_cpu->opaque) {
-         g_string_append(gdbserver_state.str_buf, ";qXfer:auxv:read+");
-     }
-+    g_string_append(gdbserver_state.str_buf, ";QCatchSyscalls+");
- #endif
-     g_string_append(gdbserver_state.str_buf, ";qXfer:exec-file:read+");
- #endif
-@@ -1810,6 +1811,14 @@ static const GdbCmdParseEntry gdb_gen_set_table[] = {
-         .schema = "l0"
-     },
- #endif
-+#if defined(CONFIG_USER_ONLY)
-+    {
-+        .handler = gdb_handle_set_catch_syscalls,
-+        .cmd = "CatchSyscalls:",
-+        .cmd_startswith = 1,
-+        .schema = "s0",
-+    },
-+#endif
- };
- 
- static void handle_gen_query(GArray *params, void *user_ctx)
-diff --git a/gdbstub/user.c b/gdbstub/user.c
-index 2ba01c17faf..14918d1a217 100644
---- a/gdbstub/user.c
-+++ b/gdbstub/user.c
-@@ -10,6 +10,7 @@
-  */
- 
- #include "qemu/osdep.h"
-+#include "qemu/bitops.h"
- #include "qemu/cutils.h"
- #include "qemu/sockets.h"
- #include "exec/hwaddr.h"
-@@ -21,11 +22,20 @@
- #include "trace.h"
- #include "internals.h"
- 
-+#define GDB_NR_SYSCALLS 1024
-+typedef unsigned long GDBSyscallsMask[BITS_TO_LONGS(GDB_NR_SYSCALLS)];
-+
- /* User-mode specific state */
- typedef struct {
-     int fd;
-     char *socket_path;
-     int running_state;
-+    /*
-+     * Store syscalls mask without memory allocation in order to avoid
-+     * implementing synchronization.
-+     */
-+    bool catch_all_syscalls;
-+    GDBSyscallsMask catch_syscalls_mask;
- } GDBUserState;
- 
- static GDBUserState gdbserver_user_state;
-@@ -503,10 +513,91 @@ void gdb_syscall_handling(const char *syscall_packet)
-     gdb_handlesig(gdbserver_state.c_cpu, 0);
- }
- 
-+static bool should_catch_syscall(int num)
-+{
-+    if (gdbserver_user_state.catch_all_syscalls) {
-+        return true;
-+    }
-+    if (num < 0 || num >= GDB_NR_SYSCALLS) {
-+        return false;
-+    }
-+    return test_bit(num, gdbserver_user_state.catch_syscalls_mask);
-+}
-+
- void gdb_syscall_entry(CPUState *cs, int num)
- {
-+    if (should_catch_syscall(num)) {
-+        g_autofree char *reason = g_strdup_printf("syscall_entry:%x;", num);
-+        gdb_handlesig_reason(cs, gdb_target_sigtrap(), reason);
-+    }
- }
- 
- void gdb_syscall_return(CPUState *cs, int num)
- {
-+    if (should_catch_syscall(num)) {
-+        g_autofree char *reason = g_strdup_printf("syscall_return:%x;", num);
-+        gdb_handlesig_reason(cs, gdb_target_sigtrap(), reason);
-+    }
-+}
-+
-+void gdb_handle_set_catch_syscalls(GArray *params, void *user_ctx)
-+{
-+    const char *param = get_param(params, 0)->data;
-+    GDBSyscallsMask catch_syscalls_mask;
-+    bool catch_all_syscalls;
-+    unsigned int num;
-+    const char *p;
-+
-+    /* "0" means not catching any syscalls. */
-+    if (strcmp(param, "0") == 0) {
-+        gdbserver_user_state.catch_all_syscalls = false;
-+        memset(gdbserver_user_state.catch_syscalls_mask, 0,
-+               sizeof(gdbserver_user_state.catch_syscalls_mask));
-+        gdb_put_packet("OK");
-+        return;
-+    }
-+
-+    /* "1" means catching all syscalls. */
-+    if (strcmp(param, "1") == 0) {
-+        gdbserver_user_state.catch_all_syscalls = true;
-+        gdb_put_packet("OK");
-+        return;
-+    }
-+
-+    /*
-+     * "1;..." means catching only the specified syscalls.
-+     * The syscall list must not be empty.
-+     */
-+    if (param[0] == '1' && param[1] == ';') {
-+        catch_all_syscalls = false;
-+        memset(catch_syscalls_mask, 0, sizeof(catch_syscalls_mask));
-+        for (p = &param[2];; p++) {
-+            if (qemu_strtoui(p, &p, 16, &num) || (*p && *p != ';')) {
-+                goto err;
-+            }
-+            if (num >= GDB_NR_SYSCALLS) {
-+                /*
-+                 * Fall back to reporting all syscalls. Reporting extra
-+                 * syscalls is inefficient, but the spec explicitly allows it.
-+                 * Keep parsing in case there is a syntax error ahead.
-+                 */
-+                catch_all_syscalls = true;
-+            } else {
-+                set_bit(num, catch_syscalls_mask);
-+            }
-+            if (!*p) {
-+                break;
-+            }
-+        }
-+        gdbserver_user_state.catch_all_syscalls = catch_all_syscalls;
-+        if (!catch_all_syscalls) {
-+            memcpy(gdbserver_user_state.catch_syscalls_mask,
-+                   catch_syscalls_mask, sizeof(catch_syscalls_mask));
-+        }
-+        gdb_put_packet("OK");
-+        return;
-+    }
-+
-+err:
-+    gdb_put_packet("E00");
- }
--- 
-2.39.2
+--000000000000b5201a0610d01c93
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
+<div dir=3D"ltr" class=3D"gmail_attr">On Wed, Feb 7, 2024 at 9:38=E2=80=AFA=
+M Alex Benn=C3=A9e &lt;<a href=3D"mailto:alex.bennee@linaro.org">alex.benne=
+e@linaro.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" styl=
+e=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);paddin=
+g-left:1ex">From: Ilya Leoshkevich &lt;<a href=3D"mailto:iii@linux.ibm.com"=
+ target=3D"_blank">iii@linux.ibm.com</a>&gt;<br>
+<br>
+Unlike on Linux, on FreeBSD renaming a file when the destination<br>
+already exists results in an IN_DELETE event for that existing file:<br>
+<br>
+=C2=A0 =C2=A0 $ FILEMONITOR_DEBUG=3D1 build/tests/unit/test-util-filemonito=
+r<br>
+=C2=A0 =C2=A0 Rename /tmp/test-util-filemonitor-K13LI2/fish/one.txt -&gt; /=
+tmp/test-util-filemonitor-K13LI2/two.txt<br>
+=C2=A0 =C2=A0 Event id=3D200000000 event=3D2 file=3Done.txt<br>
+=C2=A0 =C2=A0 Queue event id 200000000 event 2 file one.txt<br>
+=C2=A0 =C2=A0 Queue event id 100000000 event 2 file two.txt<br>
+=C2=A0 =C2=A0 Queue event id 100000002 event 2 file two.txt<br>
+=C2=A0 =C2=A0 Queue event id 100000000 event 0 file two.txt<br>
+=C2=A0 =C2=A0 Queue event id 100000002 event 0 file two.txt<br>
+=C2=A0 =C2=A0 Event id=3D100000000 event=3D0 file=3Dtwo.txt<br>
+=C2=A0 =C2=A0 Expected event 0 but got 2<br>
+<br>
+This difference in behavior is not expected to break the real users, so<br>
+teach the test to accept it.<br></blockquote><div><br></div><div>Reviewed-b=
+y: Warner Losh &lt;<a href=3D"mailto:imp@bsdimp.com">imp@bsdimp.com</a>&gt;=
+</div><div><br></div><div><br></div><blockquote class=3D"gmail_quote" style=
+=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
+-left:1ex">
+Suggested-by: Daniel P. Berrange &lt;<a href=3D"mailto:berrange@redhat.com"=
+ target=3D"_blank">berrange@redhat.com</a>&gt;<br>
+Signed-off-by: Ilya Leoshkevich &lt;<a href=3D"mailto:iii@linux.ibm.com" ta=
+rget=3D"_blank">iii@linux.ibm.com</a>&gt;<br>
+Message-Id: &lt;<a href=3D"mailto:20240206002344.12372-4-iii@linux.ibm.com"=
+ target=3D"_blank">20240206002344.12372-4-iii@linux.ibm.com</a>&gt;<br>
+Signed-off-by: Alex Benn=C3=A9e &lt;<a href=3D"mailto:alex.bennee@linaro.or=
+g" target=3D"_blank">alex.bennee@linaro.org</a>&gt;<br>
+---<br>
+=C2=A0tests/unit/test-util-filemonitor.c | 8 ++++++++<br>
+=C2=A01 file changed, 8 insertions(+)<br>
+<br>
+diff --git a/tests/unit/test-util-filemonitor.c b/tests/unit/test-util-file=
+monitor.c<br>
+index a22de275955..02e67fc96ac 100644<br>
+--- a/tests/unit/test-util-filemonitor.c<br>
++++ b/tests/unit/test-util-filemonitor.c<br>
+@@ -360,6 +360,14 @@ test_file_monitor_events(void)<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0{ .type =3D QFILE_MONITOR_TEST_OP_EVENT,<=
+br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0.filesrc =3D &quot;one.txt&quot;, =
+.watchid =3D &amp;watch4,<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0.eventid =3D QFILE_MONITOR_EVENT_D=
+ELETED },<br>
++#ifdef __FreeBSD__<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 { .type =3D QFILE_MONITOR_TEST_OP_EVENT,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 .filesrc =3D &quot;two.txt&quot;, .watc=
+hid =3D &amp;watch0,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 .eventid =3D QFILE_MONITOR_EVENT_DELETE=
+D },<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 { .type =3D QFILE_MONITOR_TEST_OP_EVENT,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 .filesrc =3D &quot;two.txt&quot;, .watc=
+hid =3D &amp;watch2,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 .eventid =3D QFILE_MONITOR_EVENT_DELETE=
+D },<br>
++#endif<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0{ .type =3D QFILE_MONITOR_TEST_OP_EVENT,<=
+br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0.filesrc =3D &quot;two.txt&quot;, =
+.watchid =3D &amp;watch0,<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0.eventid =3D QFILE_MONITOR_EVENT_C=
+REATED },<br>
+-- <br>
+2.39.2<br>
+<br>
+</blockquote></div></div>
+
+--000000000000b5201a0610d01c93--
 
