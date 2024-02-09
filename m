@@ -4,86 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0E50C48297
-	for <qemu-riscv@archiver.kernel.org>; Fri,  9 Feb 2024 06:42:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C90FC4829C
+	for <qemu-riscv@archiver.kernel.org>; Fri,  9 Feb 2024 19:49:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rYKZs-0005uL-KQ; Fri, 09 Feb 2024 01:41:36 -0500
+	id 1rYWr8-00064z-Kp; Fri, 09 Feb 2024 14:48:18 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1rYKZo-0005nD-TT
- for qemu-riscv@nongnu.org; Fri, 09 Feb 2024 01:41:34 -0500
-Received: from mail-ed1-x52a.google.com ([2a00:1450:4864:20::52a])
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1rYWqd-0005Vr-Gv
+ for qemu-riscv@nongnu.org; Fri, 09 Feb 2024 14:47:43 -0500
+Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1rYKZn-0002Oe-64
- for qemu-riscv@nongnu.org; Fri, 09 Feb 2024 01:41:32 -0500
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-55f50cf2021so984259a12.1
- for <qemu-riscv@nongnu.org>; Thu, 08 Feb 2024 22:41:30 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1rYWqa-0005BH-M6
+ for qemu-riscv@nongnu.org; Fri, 09 Feb 2024 14:47:43 -0500
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-33b0e5d1e89so830170f8f.0
+ for <qemu-riscv@nongnu.org>; Fri, 09 Feb 2024 11:47:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=vrull.eu; s=google; t=1707460889; x=1708065689; darn=nongnu.org;
+ d=linaro.org; s=google; t=1707508059; x=1708112859; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ytTPrgvmcSAVYKXxwo9D3fPgoAujr29L9BQ2PXjBjJU=;
- b=GUwlIrfMJLi+m0QhrP+rDM9csRnx8WhKzdvziezTCKCl4/Hyzfg0oJHXxvsLPa6UkC
- vw+2g7YcD9C9XE2W5RliUMejAb5qA4cabirr2q1i87/P9t0VCiFdo2YMcWHUGpBe4/oD
- 4WbQFiUKMqjI6Urq6VaTBQ/mn7QXz178lismOKkYi9l8/1c51AHOdzC5z16sW+VR1eF+
- gbxMtxadjIGI5BI1Kt03UFRQKJbNcN6cDeCNyeJ3vQ0aKSfW9Iatyp97h5N/PBR8DIM0
- r3A7Ie+83zib4EhQk0CwDkxyVEOrm0n5HIr0u15Cmr64mJ9rw4EvffXAe5+wCTwfM3+1
- MKMQ==
+ bh=A5tqpuQsjOSCV46teFHGbLfU2/LuhZbJZLNOyxR8wfM=;
+ b=z3c6egYOaZFh8YSHsVkcTglBB5WjWD13xmWt54tLDQvPsW4gUWCJqzQxawPqgyT4Vf
+ jpTwWJzWWYExQw1596CVLTntsuAIFz7qUU5VKUjDrcDhDfnWXH0/pO2iIqgl6ZlTUVwk
+ 4LuipOysoPGNLWL8QeEd7zUSw3pUEjBpTFinwghFhZa78w6yEzLwDjOC9u5G+dDCzBA7
+ i5C2eqLH3S1/ndxRim9M/tzD25/NCx8U3iau9KAUYPQv+W/sWzino+JNF9UK8w8gYvlS
+ ej1gcIljvN4SIqY9mP8Y+Fm9XMx9qxtanMwZ+LLC4e/j5B+BNlc+FnejEvrN+luP+yAQ
+ j5sg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707460889; x=1708065689;
+ d=1e100.net; s=20230601; t=1707508059; x=1708112859;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ytTPrgvmcSAVYKXxwo9D3fPgoAujr29L9BQ2PXjBjJU=;
- b=HYZkm34DPNL3vWNR52oICGmwrOU59PEMq07LfanDE/HFYQlOmHetwOmqP3i8xCNBav
- p3Yv7y8ow7hTRnSSgNmnAXy88vgkFvJnCtuSQ0iAZ/O9k52cIjz8I+vbuwrGR3z0AjqT
- LhnNCBOTl5ukAjuxbn2HbFU8joOahX911aIhp6SfpEFgK3vzIaqDKTj6JukoChjztvjs
- TYdLKrjMV/hc6XFo96LIhEeo2zTl0oeJ1j+29JdBDH9yHnrp1ckvMBPRu4bz1r0u7yz3
- 3xyd0FumAsaeLuZqFSmW6cE0M7fJ36CQP6r6xuAbOfnTUN3hLM63SZ1pYt1uHp550q1y
- CjnA==
-X-Gm-Message-State: AOJu0Yy4skpxEbh3xt3wsBKM9ammSOzGtU27w14uxMQSAaLjznpxsUOG
- IL/u4nXU44RvTPXB3+YflnGY0gegrga+k07EYxKT/jfQV9o0PkSSF4KaiGzktR+uxPfDcLE3TGa
- F1Mg=
-X-Google-Smtp-Source: AGHT+IFVg4lO8zkHhRZCGeDc2MDr2YQcPD8It/U0CsIDnPbxPJxfIBzw6pOBCu/rKHCc+ukuID9cwQ==
-X-Received: by 2002:a17:906:3b5a:b0:a3b:721a:9162 with SMTP id
- h26-20020a1709063b5a00b00a3b721a9162mr409548ejf.66.1707460889359; 
- Thu, 08 Feb 2024 22:41:29 -0800 (PST)
+ bh=A5tqpuQsjOSCV46teFHGbLfU2/LuhZbJZLNOyxR8wfM=;
+ b=QfJ9sz/W2pFsJrh25/To19X2cw09kMHz5DQDgryu7RNnhGLVmA5334ATb8dBfq7nbs
+ Q1o/d1nI3puNlZWGKsoLeWhAoEoTaiSpVe55fTXm8EcVdq20MQjkJRTbNgl+s8vYSc2d
+ nKFYCz1tZasxze1t6WS2DqYeI6UZMB84PZlF1kDhBvMrvaTEPucJuqbDYwyOHX5FjG3o
+ AYf2N7RRLkHb5xqYZvJm3ycxYx07qiKijewdwYUWyFL1C49yFc0TkV0Xv84tweSaHtQu
+ SLMWxF8hhTdW27gm7YPaimWTMsrI/caHCfga0bs235r+r/S25BClF5YcarmfPNBPErRA
+ mVpQ==
+X-Gm-Message-State: AOJu0YyzFqDHOcOlNP2/dAj9srTiFU7bxSUxtjwZ9ex/3+JkJxc1u/2e
+ Me9Y3TgKLwPui2AQU52bFUtnXqVhAwsHGeCJIsZFZ5xiRcO+zu4OIghhlSLd5cU=
+X-Google-Smtp-Source: AGHT+IHkLnwY1nKtl9ZnfzHH2zcQXhtxFBh/PGdnQaCkZTVKoHePlz+d7CCDMuTFrAp17YnI5B4kfQ==
+X-Received: by 2002:adf:e7c7:0:b0:33a:ff90:77ca with SMTP id
+ e7-20020adfe7c7000000b0033aff9077camr11062wrn.29.1707508059299; 
+ Fri, 09 Feb 2024 11:47:39 -0800 (PST)
 X-Forwarded-Encrypted: i=1;
- AJvYcCWR+BGDglxI4JrKwy7PM9PtB7wk/zlH9clO2KU+SaMEc5HYGP6818LRYYzni3w9RdJNoXM91X8rVEr5nFYgjOIIoZB0f99OlA4LQ3LGVCpO6eqW7bv9lj+ElVSDNGrEE1uJcq9QvOJhO2C43pMYwn7oP3VU/SCF0Gs45ZvTINicfDhEItIi1K6p7xy0HLGlWL/JsInD6RN5f17TlbR2Oom/RpL1VjEQRnwWD1gr5KxC14yPlp+TYobLea7Lz4QsCNP2Alo0GyMQgr6g8qhycZvbs7o4AxOUBVem2ahTmphQf7Y6VI/0kK4lIo/2R2ytHRhv3iz9bpVHsWxJLi2CoA8jgZxakVm4JK1KHg==
-Received: from beast.fritz.box (62-178-148-172.cable.dynamic.surfer.at.
- [62.178.148.172]) by smtp.gmail.com with ESMTPSA id
- vk9-20020a170907cbc900b00a36c499c935sm450575ejc.43.2024.02.08.22.41.28
+ AJvYcCXtYP2yMbUmNpzljPhpPogBDIDrVhr3RrjB4JGeXC29ZnDUGyVQHl39yAAhaEZ6tK0PkiV+eUlMxhW2/97+V3mEQqdW9h770RZxPLNd6Q4i5WXuE4vYoNAAPLOg9KQUCKdAlrgNamNtln06nHTEcDPZxIRd2IcES3Ade6lna3tYxPQvvJuR+mwGVHt6gloBF2YCjJrd9evixN9REsM0kgnp1B0RW2xVEiDzLxr4uaA2vbgMQZ00xY0HTyGVceusHpBgBQmvfaATz0RNLncFhEwCK6Bnwd3fofjX37PiIg5rHQ8z0D0/rDfMz3IazIBh5Rtd6KODrNPEByvT5KvuO+zdfvI2gPm6bMaBzoAcRYpQgTMHjRvjpS7ou15V4ESjfFsmMP+MWn2PVSzF092NUChFO8EDnuESsDCPAxjCLW1tEgWagLWMA5nly/wPX9M58hlen8dBytLGmWMQBAW0Xfi/WeCY2PhXb6OgqK9n40zzbRaZxicphz8Q5kMYfGKvY8wlHRgn3X6ITbigi+ZIROWwxz1d2RfgjcwjBqKdrwL21cugdmsLtppJ30wvWQ==
+Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
+ i19-20020a05600c355300b0040ff2933959sm1550368wmq.7.2024.02.09.11.47.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 Feb 2024 22:41:28 -0800 (PST)
-From: =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>
-To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Fri, 09 Feb 2024 11:47:37 -0800 (PST)
+Received: from draig.lan (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id 2CFCA5F8A9;
+ Fri,  9 Feb 2024 19:47:35 +0000 (GMT)
+From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Paolo Bonzini <pbonzini@redhat.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Richard Henderson <richard.henderson@linaro.org>,
+ Thomas Huth <thuth@redhat.com>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Chris Wulff <crwulff@gmail.com>, Marek Vasut <marex@denx.de>,
+ Max Filippov <jcmvbkbc@gmail.com>, Laurent Vivier <laurent@vivier.eu>,
+ Aurelien Jarno <aurelien@aurel32.net>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>,
+ Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Andrew Jones <ajones@ventanamicro.com>
-Cc: =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>,
- Laurent Vivier <laurent@vivier.eu>
-Subject: [RFC PATCH v2 3/4] linux-user/prctl: Add dynamic memory consistency
- model prctl API
-Date: Fri,  9 Feb 2024 07:41:16 +0100
-Message-ID: <20240209064117.2746701-4-christoph.muellner@vrull.eu>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240209064117.2746701-1-christoph.muellner@vrull.eu>
-References: <20240209064117.2746701-1-christoph.muellner@vrull.eu>
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
+Subject: [PULL 05/10] kconfig: use "select" to enable semihosting
+Date: Fri,  9 Feb 2024 19:47:29 +0000
+Message-Id: <20240209194734.3424785-6-alex.bennee@linaro.org>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240209194734.3424785-1-alex.bennee@linaro.org>
+References: <20240209194734.3424785-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::52a;
- envelope-from=christoph.muellner@vrull.eu; helo=mail-ed1-x52a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::431;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x431.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -106,58 +112,141 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This patch implements the prctl calls to set and get the current memory
-consistency model. This patch does not implement any real functionality
-but just defines the relevant hooks, where target code take over.
+From: Paolo Bonzini <pbonzini@redhat.com>
 
-Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
----
- linux-user/syscall.c | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
+Just like all other dependencies, these can be expressed in Kconfig
+files rather than in the default configurations.
 
-diff --git a/linux-user/syscall.c b/linux-user/syscall.c
-index bf0d66b8a8..cf0845a074 100644
---- a/linux-user/syscall.c
-+++ b/linux-user/syscall.c
-@@ -6309,6 +6309,12 @@ abi_long do_arch_prctl(CPUX86State *env, int code, abi_ulong addr)
- # define PR_SME_VL_LEN_MASK  0xffff
- # define PR_SME_VL_INHERIT   (1 << 17)
- #endif
-+#ifndef PR_SET_MEMORY_CONSISTENCY_MODEL
-+# define PR_SET_MEMORY_CONSISTENCY_MODEL        71
-+# define PR_GET_MEMORY_CONSISTENCY_MODEL        72
-+# define PR_MEMORY_CONSISTENCY_MODEL_RISCV_WMO  1
-+# define PR_MEMORY_CONSISTENCY_MODEL_RISCV_TSO  2
-+#endif
+Signed-off-by: Paolo Bonzini <pbonzini@redhat.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Thomas Huth <thuth@redhat.com>
+Message-Id: <20240129115809.1039924-1-pbonzini@redhat.com>
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Message-Id: <20240207163812.3231697-10-alex.bennee@linaro.org>
+
+diff --git a/configs/devices/m68k-softmmu/default.mak b/configs/devices/m68k-softmmu/default.mak
+index 7f8619e4278..8dcaa28ed38 100644
+--- a/configs/devices/m68k-softmmu/default.mak
++++ b/configs/devices/m68k-softmmu/default.mak
+@@ -1,7 +1,5 @@
+ # Default configuration for m68k-softmmu
  
- #include "target_prctl.h"
+-CONFIG_SEMIHOSTING=y
+-
+ # Boards:
+ #
+ CONFIG_AN5206=y
+diff --git a/configs/devices/mips-softmmu/common.mak b/configs/devices/mips-softmmu/common.mak
+index 7da99327a77..1a853841b27 100644
+--- a/configs/devices/mips-softmmu/common.mak
++++ b/configs/devices/mips-softmmu/common.mak
+@@ -1,8 +1,5 @@
+ # Common mips*-softmmu CONFIG defines
  
-@@ -6355,6 +6361,12 @@ static abi_long do_prctl_inval1(CPUArchState *env, abi_long arg2)
- #ifndef do_prctl_sme_set_vl
- #define do_prctl_sme_set_vl do_prctl_inval1
- #endif
-+#ifndef do_prctl_set_memory_consistency_model
-+#define do_prctl_set_memory_consistency_model do_prctl_inval1
-+#endif
-+#ifndef do_prctl_get_memory_consistency_model
-+#define do_prctl_get_memory_consistency_model do_prctl_inval0
-+#endif
+-# CONFIG_SEMIHOSTING is always required on this architecture
+-CONFIG_SEMIHOSTING=y
+-
+ CONFIG_ISA_BUS=y
+ CONFIG_PCI=y
+ CONFIG_PCI_DEVICES=y
+diff --git a/configs/devices/nios2-softmmu/default.mak b/configs/devices/nios2-softmmu/default.mak
+index 1bc4082ea99..e130d024e62 100644
+--- a/configs/devices/nios2-softmmu/default.mak
++++ b/configs/devices/nios2-softmmu/default.mak
+@@ -1,7 +1,5 @@
+ # Default configuration for nios2-softmmu
  
- static abi_long do_prctl(CPUArchState *env, abi_long option, abi_long arg2,
-                          abi_long arg3, abi_long arg4, abi_long arg5)
-@@ -6481,6 +6493,11 @@ static abi_long do_prctl(CPUArchState *env, abi_long option, abi_long arg2,
-         /* Disable to prevent the target disabling stuff we need. */
-         return -TARGET_EINVAL;
+-CONFIG_SEMIHOSTING=y
+-
+ # Boards:
+ #
+ CONFIG_NIOS2_10M50=y
+diff --git a/configs/devices/riscv32-softmmu/default.mak b/configs/devices/riscv32-softmmu/default.mak
+index d847bd5692e..94a236c9c25 100644
+--- a/configs/devices/riscv32-softmmu/default.mak
++++ b/configs/devices/riscv32-softmmu/default.mak
+@@ -3,8 +3,6 @@
+ # Uncomment the following lines to disable these optional devices:
+ #
+ #CONFIG_PCI_DEVICES=n
+-CONFIG_SEMIHOSTING=y
+-CONFIG_ARM_COMPATIBLE_SEMIHOSTING=y
  
-+    case PR_SET_MEMORY_CONSISTENCY_MODEL:
-+        return do_prctl_set_memory_consistency_model(env, arg2);
-+    case PR_GET_MEMORY_CONSISTENCY_MODEL:
-+	return do_prctl_get_memory_consistency_model(env);
-+
-     default:
-         qemu_log_mask(LOG_UNIMP, "Unsupported prctl: " TARGET_ABI_FMT_ld "\n",
-                       option);
+ # Boards:
+ #
+diff --git a/configs/devices/riscv64-softmmu/default.mak b/configs/devices/riscv64-softmmu/default.mak
+index bc69301fa4a..3f680594484 100644
+--- a/configs/devices/riscv64-softmmu/default.mak
++++ b/configs/devices/riscv64-softmmu/default.mak
+@@ -3,8 +3,6 @@
+ # Uncomment the following lines to disable these optional devices:
+ #
+ #CONFIG_PCI_DEVICES=n
+-CONFIG_SEMIHOSTING=y
+-CONFIG_ARM_COMPATIBLE_SEMIHOSTING=y
+ 
+ # Boards:
+ #
+diff --git a/configs/devices/xtensa-softmmu/default.mak b/configs/devices/xtensa-softmmu/default.mak
+index 4fe1bf00c94..49e4c9da88c 100644
+--- a/configs/devices/xtensa-softmmu/default.mak
++++ b/configs/devices/xtensa-softmmu/default.mak
+@@ -1,7 +1,5 @@
+ # Default configuration for Xtensa
+ 
+-CONFIG_SEMIHOSTING=y
+-
+ # Boards:
+ #
+ CONFIG_XTENSA_SIM=y
+diff --git a/target/m68k/Kconfig b/target/m68k/Kconfig
+index 23debad519a..9eae71486ff 100644
+--- a/target/m68k/Kconfig
++++ b/target/m68k/Kconfig
+@@ -1,2 +1,3 @@
+ config M68K
+     bool
++    select SEMIHOSTING
+diff --git a/target/mips/Kconfig b/target/mips/Kconfig
+index 6adf1453548..eb19c94c7d4 100644
+--- a/target/mips/Kconfig
++++ b/target/mips/Kconfig
+@@ -1,5 +1,6 @@
+ config MIPS
+     bool
++    select SEMIHOSTING
+ 
+ config MIPS64
+     bool
+diff --git a/target/nios2/Kconfig b/target/nios2/Kconfig
+index 1529ab8950d..c65550c861a 100644
+--- a/target/nios2/Kconfig
++++ b/target/nios2/Kconfig
+@@ -1,2 +1,3 @@
+ config NIOS2
+     bool
++    select SEMIHOSTING
+diff --git a/target/riscv/Kconfig b/target/riscv/Kconfig
+index b9e5932f13f..adb7de3f37d 100644
+--- a/target/riscv/Kconfig
++++ b/target/riscv/Kconfig
+@@ -1,5 +1,7 @@
+ config RISCV32
+     bool
++    select ARM_COMPATIBLE_SEMIHOSTING # for do_common_semihosting()
+ 
+ config RISCV64
+     bool
++    select ARM_COMPATIBLE_SEMIHOSTING # for do_common_semihosting()
+diff --git a/target/xtensa/Kconfig b/target/xtensa/Kconfig
+index a3c8dc7f6d7..5e46049262d 100644
+--- a/target/xtensa/Kconfig
++++ b/target/xtensa/Kconfig
+@@ -1,2 +1,3 @@
+ config XTENSA
+     bool
++    select SEMIHOSTING
 -- 
-2.43.0
+2.39.2
 
 
