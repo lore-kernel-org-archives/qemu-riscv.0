@@ -4,92 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BF7FC4828F
-	for <qemu-riscv@archiver.kernel.org>; Thu,  8 Feb 2024 19:31:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB698C4828F
+	for <qemu-riscv@archiver.kernel.org>; Fri,  9 Feb 2024 06:41:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rYA7b-0005kP-07; Thu, 08 Feb 2024 14:31:43 -0500
+	id 1rYKZp-0005nJ-9P; Fri, 09 Feb 2024 01:41:34 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rYA7Z-0005jv-MR
- for qemu-riscv@nongnu.org; Thu, 08 Feb 2024 14:31:41 -0500
-Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e])
+ (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
+ id 1rYKZn-0005kp-SC
+ for qemu-riscv@nongnu.org; Fri, 09 Feb 2024 01:41:32 -0500
+Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rYA7Y-0004S3-4h
- for qemu-riscv@nongnu.org; Thu, 08 Feb 2024 14:31:41 -0500
-Received: by mail-pf1-x42e.google.com with SMTP id
- d2e1a72fcca58-6e055baec89so158651b3a.1
- for <qemu-riscv@nongnu.org>; Thu, 08 Feb 2024 11:31:39 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
+ id 1rYKZm-0002OT-D1
+ for qemu-riscv@nongnu.org; Fri, 09 Feb 2024 01:41:31 -0500
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-55a90a0a1a1so959691a12.0
+ for <qemu-riscv@nongnu.org>; Thu, 08 Feb 2024 22:41:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1707420698; x=1708025498; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=8QT7kCXOTifYU7mxRxXV5m/JtFcsZsEIRolTsYJp0Ns=;
- b=a9/3o9X10FsKMHE30yA6ygCNzM+GVG9NTZvAMNdTIF3c/0ny+nL9Mx5//PFdrTRSPW
- iyyDgiQ5r9LzANJuokV+z6dZqQnm/6rvY6sBYJy5MsrE8+y2Xz1sisbPzsJ2K+IKt0OT
- YiaP3Bi5/r7shdImWLhohd0Of9rJbE4T3MeuCBQieKgE//H1GMORRJipsIzfDGtVSCPB
- 3ox3I9miHoYJrigJOWEG72s90LlM6q/GWQL2BbkIdJWuXzqbc4fdywJVPPOci/LXR2hD
- y10YiFIZMfASrnK4/F8MRp1zFQpGL7x7GhzPcA9tGrBdxzHs/2JrdM0HQrLhPR1trCL9
- wsDQ==
+ d=vrull.eu; s=google; t=1707460888; x=1708065688; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=EUtumchVWAjnFsnLqrfLNxKYwp3IzTxvepBmSvQHMis=;
+ b=USnNRk/B5IDja+g17J+m/dD/Xk7l7RxMTxxANfYgv69tquNdeLLa1tSesk3dRJkD3A
+ KbY5BeaRYI+wXV9haQVmNI4bqhwOJ75jztvdvQnDBv7Q91DWigz+NugdGMzkgSvTws6p
+ TlVjmw1CgQVizz+EPPRKci4hwjbvkiQJFtH4BhIOPTZ35kDHuZKc23UCCNI2sn3680It
+ PaBkLF3tYq66LtwQsjIL8QHejva6H74NCYtbX9bV6LAjhWPE1cFSp4gneZiA7KQUfv7A
+ Oi2zgKUWH9axdyMi7QY3+Dijla2ItL4Ctm0prtovtG4ZDc2F/uFQzohWrIBVuvLkWyoS
+ IQMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707420698; x=1708025498;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=8QT7kCXOTifYU7mxRxXV5m/JtFcsZsEIRolTsYJp0Ns=;
- b=WVfbIPVtSb/T8lurqUowu+IAuH23vkpClcjO8+dGaYYAMsygYZWRzaordlRI3ibMOz
- XS5yFC2ycB8Vg7tm38Bj+V05+aeFOKXe+gaQZ6ueueuso8zioDFv8MFf5oo5VuiHKnrm
- EZNMt0c6rdZVeslkEvt7QVdrBsNcZD5hDCQI+6A7kiL62h46G6luu8VWoY6vh5e1X4jG
- NmurnLx+1fzTCZs00GTg1+PCyD0E5mMo1m/qnWWQwuK7D0jmI+gHN+6sn4NI/3VZ0pfs
- LOO0d7WJkMHYE86Owjj3VGVvQ72avrsZV8HQ1jx0I/xHRbToeptVdiJeC5MWuOudsEN6
- FrvA==
-X-Gm-Message-State: AOJu0YwrggB6cCMfPyVukpp8CiLxi14YfdhNFpyaEivdkAKfRRSSa9Sl
- 2+2Pkl+RyiZW2POjjio5nfztoybndqZBrtY01Kf147ufi9cAjUXdWzJnJj6ZvBA=
-X-Google-Smtp-Source: AGHT+IEaCaHGWSFq6zIwTQD8kiZ/LugApan5XnM+2vyWMYUdYq3dvCRw5Ti9qAbyAUrSCRxKQzGC6g==
-X-Received: by 2002:a05:6a00:27a1:b0:6e0:5cb7:168c with SMTP id
- bd33-20020a056a0027a100b006e05cb7168cmr5963228pfb.17.1707420696666; 
- Thu, 08 Feb 2024 11:31:36 -0800 (PST)
+ d=1e100.net; s=20230601; t=1707460888; x=1708065688;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=EUtumchVWAjnFsnLqrfLNxKYwp3IzTxvepBmSvQHMis=;
+ b=n8yVsGUWZhKH8bYiq3YU5G23tcnyu5n+d0cmSa40QKwsFonC3XLF82UbLeyVV1uui2
+ QaVow7327nFHtvEpFlyvkUFGTReUoI3GIZtRs1oo0Xcxd97MSPvrROzrVPkuamwQhaS1
+ jWONjq7fATpxOaH7AxKMU4WRkIxuvRSyUnboLxj4byIiWZizGNmUtzjoDGxy39DRlteg
+ L6Gn2GfEqFR5CadZ1q/q+ThdCjhjSQ6UOgnkmkKltQGTJ/mY+pvZ1lecFpthfxuVxnuQ
+ MUcuolbtvbJ8c0L+B6QZ02NxmerLkYWKQTXs9pvR4pQ/v3hETKwft5v4IcBK0SkrB+TJ
+ JeqQ==
+X-Gm-Message-State: AOJu0Yx6itfbrana4b5u/M/fOATKmBVVLzEkx6v7kRa7yJElpDJWkRdD
+ E+OgqBtTW7uIuOyWBCv8Out3nva1AcjIDXv9/nOithdickdRB6Gd6ejyfILOj/eIleldDmFjL/G
+ UnF8=
+X-Google-Smtp-Source: AGHT+IGsK3WqE/n5HdtWollG/0f1PKEWUQcdsSUUHRmuIs1eIfzrw80IAhDLp9C+l4mUaBLJRqeiSQ==
+X-Received: by 2002:a17:906:b2c9:b0:a37:76df:be40 with SMTP id
+ cf9-20020a170906b2c900b00a3776dfbe40mr469668ejb.36.1707460887941; 
+ Thu, 08 Feb 2024 22:41:27 -0800 (PST)
 X-Forwarded-Encrypted: i=1;
- AJvYcCXVuh0jxqYrKmUVfLpPSM+H8L9yAfPYRYKOr1ap4YJ7dgtt3nmP0m/JAbxXsG5gnsR9PCKelWaPIPr3qzz3TlSu+7vvpm9Ox44Yfjv1RblBQdXVddfApLhjdVugVj5WGz1KPASa1L4YAbpIXPYHRHoHOtQXpdlDI5kMvvINBLNAV/jWIIkF9Nnbrk5aTC+2rmH86nRHq7l3oqZUpIDDB925YRnPm4uIgb5MYQ/uYxDSQruRtYQBoQBrJEHL0Ri5IDulrLskqRMJ503em0U+mQ2o5nWoBDy5F8PiQdaiibbPHYY4rfM9qm8GYcDwofeFtHqqRmBGG2UBzlNR4AiTFKyjDr7L4N3/4/9GVQ8nzIAR2SMZcDbS3NCs2Z0L3LI=
-Received: from [192.168.4.112] (066-027-223-101.inf.spectrum.com.
- [66.27.223.101]) by smtp.gmail.com with ESMTPSA id
- z29-20020a637e1d000000b005c2420fb198sm205629pgc.37.2024.02.08.11.31.34
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 08 Feb 2024 11:31:36 -0800 (PST)
-Message-ID: <512e3adf-5879-44a4-9adb-04cdcf06579b@linaro.org>
-Date: Thu, 8 Feb 2024 09:31:32 -1000
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] target/riscv: Update $ra with current $pc in
- trans_cm_jalt()
-To: Jason Chien <jason.chien@sifive.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt
- <palmer@dabbelt.com>, Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ AJvYcCWmMnpgfP7SL9AMOeYk/4RPOp12RZO/c3RGu+ogxsjxT/R3WKCdoR2U6r0eKrwFHykbSSVctB0wHpjiQsbytjigZrYZ3ifQwbGm/9K6bl33U8UTUSM/lKaoLPbJVCNPmBnQrqHCpDpPBwkPM7LR0e6Xa593sWHnoscIDAc1MlEU82JfzACVm9SPJ+s6ISMCyjSuIa3kQ/Rb7Oo7UyudanXpaXYWhjh6gmKzVrHW6yyzMljVtHc6C/a8LdrHQ5aa3WK0dNF8/FMUB6B1AJruAFcJWUvC1SUSyCy2WblzBKoQF1Af5Vi0RJYFD+/ttLFdfGzjQfQMjmjQc7HZ5JIsHJxRn1pZQDHqNZrujw==
+Received: from beast.fritz.box (62-178-148-172.cable.dynamic.surfer.at.
+ [62.178.148.172]) by smtp.gmail.com with ESMTPSA id
+ vk9-20020a170907cbc900b00a36c499c935sm450575ejc.43.2024.02.08.22.41.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 08 Feb 2024 22:41:27 -0800 (PST)
+From: =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>
+To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Junqiang Wang <wangjunqiang@iscas.ac.cn>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-References: <20240207081820.28559-1-jason.chien@sifive.com>
-Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240207081820.28559-1-jason.chien@sifive.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42e;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x42e.google.com
+ Andrew Jones <ajones@ventanamicro.com>
+Cc: =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>,
+ Laurent Vivier <laurent@vivier.eu>
+Subject: [RFC PATCH v2 2/4] linux-user/riscv: Add Ssdtso extension to hwprobe
+Date: Fri,  9 Feb 2024 07:41:15 +0100
+Message-ID: <20240209064117.2746701-3-christoph.muellner@vrull.eu>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240209064117.2746701-1-christoph.muellner@vrull.eu>
+References: <20240209064117.2746701-1-christoph.muellner@vrull.eu>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::530;
+ envelope-from=christoph.muellner@vrull.eu; helo=mail-ed1-x530.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,55 +105,35 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2/6/24 22:18, Jason Chien wrote:
-> The original implementation sets $pc to the address read from the jump
-> vector table first and links $ra with the address of the next instruction
-> after the updated $pc. After jumping to the updated $pc and executing the
-> next ret instruction, the program jumps to $ra, which is in the same
-> function currently executing, which results in an infinite loop.
-> This commit stores the jump address in a temporary, updates $ra with the
-> current $pc, and copies the temporary to $pc.
-> 
-> Signed-off-by: Jason Chien <jason.chien@sifive.com>
-> Reviewed-by: Frank Chang <frank.chang@sifive.com>
-> ---
->   target/riscv/insn_trans/trans_rvzce.c.inc | 6 +++++-
->   1 file changed, 5 insertions(+), 1 deletion(-)
+This patch exposes Ssdtso via hwprobe in QEMU's user space emulator.
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
+---
+ linux-user/syscall.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-
-r~
-
-> 
-> diff --git a/target/riscv/insn_trans/trans_rvzce.c.inc b/target/riscv/insn_trans/trans_rvzce.c.inc
-> index 2d992e14c4..cd234ad960 100644
-> --- a/target/riscv/insn_trans/trans_rvzce.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvzce.c.inc
-> @@ -293,12 +293,14 @@ static bool trans_cm_jalt(DisasContext *ctx, arg_cm_jalt *a)
->   {
->       REQUIRE_ZCMT(ctx);
->   
-> +    TCGv addr = tcg_temp_new();
-> +
->       /*
->        * Update pc to current for the non-unwinding exception
->        * that might come from cpu_ld*_code() in the helper.
->        */
->       gen_update_pc(ctx, 0);
-> -    gen_helper_cm_jalt(cpu_pc, tcg_env, tcg_constant_i32(a->index));
-> +    gen_helper_cm_jalt(addr, tcg_env, tcg_constant_i32(a->index));
->   
->       /* c.jt vs c.jalt depends on the index. */
->       if (a->index >= 32) {
-> @@ -307,6 +309,8 @@ static bool trans_cm_jalt(DisasContext *ctx, arg_cm_jalt *a)
->           gen_set_gpr(ctx, xRA, succ_pc);
->       }
->   
-> +    tcg_gen_mov_tl(cpu_pc, addr);
-> +
->       tcg_gen_lookup_and_goto_ptr();
->       ctx->base.is_jmp = DISAS_NORETURN;
->       return true;
+diff --git a/linux-user/syscall.c b/linux-user/syscall.c
+index 24fa11d946..bf0d66b8a8 100644
+--- a/linux-user/syscall.c
++++ b/linux-user/syscall.c
+@@ -8829,6 +8829,7 @@ static int do_getdents64(abi_long dirfd, abi_long arg2, abi_long count)
+ #define		RISCV_HWPROBE_EXT_ZTSO		(1ULL << 33)
+ #define		RISCV_HWPROBE_EXT_ZACAS		(1ULL << 34)
+ #define		RISCV_HWPROBE_EXT_ZICOND	(1ULL << 35)
++#define		RISCV_HWPROBE_EXT_SSDTSO	(1ULL << 36)
+ 
+ #define RISCV_HWPROBE_KEY_CPUPERF_0     5
+ #define     RISCV_HWPROBE_MISALIGNED_UNKNOWN     (0 << 0)
+@@ -8947,6 +8948,8 @@ static void risc_hwprobe_fill_pairs(CPURISCVState *env,
+                      RISCV_HWPROBE_EXT_ZACAS : 0;
+             value |= cfg->ext_zicond ?
+                      RISCV_HWPROBE_EXT_ZICOND : 0;
++            value |= cfg->ext_ssdtso ?
++                     RISCV_HWPROBE_EXT_SSDTSO : 0;
+             __put_user(value, &pair->value);
+             break;
+         case RISCV_HWPROBE_KEY_CPUPERF_0:
+-- 
+2.43.0
 
 
