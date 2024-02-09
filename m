@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04B89C4828F
-	for <qemu-riscv@archiver.kernel.org>; Fri,  9 Feb 2024 06:42:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D987C4828F
+	for <qemu-riscv@archiver.kernel.org>; Fri,  9 Feb 2024 06:42:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rYKa0-00060L-PG; Fri, 09 Feb 2024 01:41:44 -0500
+	id 1rYKZw-0005v5-Fw; Fri, 09 Feb 2024 01:41:40 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1rYKZq-0005o0-SP
- for qemu-riscv@nongnu.org; Fri, 09 Feb 2024 01:41:34 -0500
-Received: from mail-ej1-x636.google.com ([2a00:1450:4864:20::636])
+ id 1rYKZm-0005kO-B4
+ for qemu-riscv@nongnu.org; Fri, 09 Feb 2024 01:41:30 -0500
+Received: from mail-ej1-x629.google.com ([2a00:1450:4864:20::629])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1rYKZo-0002P7-CZ
- for qemu-riscv@nongnu.org; Fri, 09 Feb 2024 01:41:33 -0500
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-a2f79e79f0cso81095266b.2
- for <qemu-riscv@nongnu.org>; Thu, 08 Feb 2024 22:41:31 -0800 (PST)
+ id 1rYKZk-0002O5-8a
+ for qemu-riscv@nongnu.org; Fri, 09 Feb 2024 01:41:30 -0500
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-a3850ce741bso54250666b.3
+ for <qemu-riscv@nongnu.org>; Thu, 08 Feb 2024 22:41:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=vrull.eu; s=google; t=1707460890; x=1708065690; darn=nongnu.org;
+ d=vrull.eu; s=google; t=1707460886; x=1708065686; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/nJiaJKCuzUzPChMbWkGwMdFArNUhgZ5ZSPilG6i32Y=;
- b=L18zqnmRJprRX6etLHTSu+b+1+a0S8nO8BxVQqlYTurrpwXJlR/JYn+Bb1sbINWqva
- /0/bWN5sXbKN14iH6+uhB839YbfDTbmReS+XlnWKBJwTNI+HmF8pL9+QNr/S2/tdFKjc
- IZQug9fgYr5ZHFknCNoGsSm5ltBHxEDmOEuEwnx7R7wZ5v8R9O61cp6PeuwQc7EdVWhN
- UA+5qGj7K0GffMIgKs0rrzejEhukyNb7rqBRgLWXaJen3xiBI2PvuP8wcSY5WF38tX1C
- WWwBpMFo7ChQLzmLKxPDwHHKD2Zz2d7gM71mYy66XT4lUE9XenCDb2rFooQzwncVZ7qK
- i9QA==
+ bh=lyx14WO2VlxFkhc1a5xMd2hg19LxPHSwC4OsD7s+Vd8=;
+ b=NzMhSE9msZDHbxldU396Xmv+bK9o1SE7Vn+UNkf3Yf5SNpz3lC9w2uZ1aBz1HMBks9
+ 1chXiYk/hvCe3WqnaYD36tJN6cSohU6QprG+9oAFrYJ5FncQDQidS/QAtyu5dp2m/pB/
+ rQ5StWyv7s9M/JciJoUONTb9N6p8ewcSn5VmspKjwVnYJvLgJJr6k72oJLm5Q0ztmtsJ
+ CYuf+N5yuXynPZTaPY07D9vwRXMMnD5lsJ95e0RRS0fvu7/g9vJlW78j0jLd4FNbYPeO
+ 6kriThiYQxvIJ+cvQkR5ySkBR9kigxJfGync32j9nScYQzTVAdDYPC/Aq0yOTQS7Pekk
+ nBbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707460890; x=1708065690;
+ d=1e100.net; s=20230601; t=1707460886; x=1708065686;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/nJiaJKCuzUzPChMbWkGwMdFArNUhgZ5ZSPilG6i32Y=;
- b=g2XsuYl0fHByp6stxEsjQiQUOfK5FF1liNs7Ahikm5+jcvi6xaJCb40OCCdZEXjlIa
- Txo4oSjpa0TL2YRtvLAPGFohclrmV6IlXmFxTSeuQECqSR/otNEgCywIEJ84CvEewpaB
- 29ncmgc8KOoFTNinxO1JrLWme4yMzAqw46u5Qxcab2vDNTPfPtcXjtXhUJX8NwtJL+Pz
- dJO9UsXAUNXFu211l9Ci1jedIYx5nUoKHecYDsruUXslF4ynhNWPCpMAroSr3OKy6d5y
- XpUzNm1VBdha1Eutq8N/oOtLY9ZVHdZjLxx33Exn73BqPGCDYjlcem1Omc9GGRau0kZ/
- N2Cg==
-X-Gm-Message-State: AOJu0YzFWy/q0YtVxUO3WNzcYGzqrxxX9uO2wIQ5CEjFFx0WFWymxX+b
- TQvqEgU3Q7ArqPtIeFnQoReeusDVHu/ODRCYdSVTH9PLZfrbb51MJwvxkU1XrxVjOUtdoR3Iub9
- ADLQ=
-X-Google-Smtp-Source: AGHT+IFB6zbDt8USaW4Fygr3gycFlYc5raNVU0XxxE2AGBqm/iK0fLZo6dSrSq4P4mhQz/mhYpHKWQ==
-X-Received: by 2002:a17:906:407:b0:a38:421c:876c with SMTP id
- d7-20020a170906040700b00a38421c876cmr449361eja.19.1707460890727; 
- Thu, 08 Feb 2024 22:41:30 -0800 (PST)
+ bh=lyx14WO2VlxFkhc1a5xMd2hg19LxPHSwC4OsD7s+Vd8=;
+ b=UparL8sfVZNksj1evQAQS1bBqtAAHQ98C8gUo8+1ue08aO58z0UJkOi2pJ2XkxcRLj
+ b6K/PlNo3QbN4Ci4dw8FcHhm1cbVkim7Uz6lEziiwct5WkQKAtsTZ3zMSiL364Oegf+a
+ 1L8V+gANy3oBXuReVj7I6HJYS3gifAjiBSdjTupsm/Ue723g/otsVb/T2MCmNCZUvkgl
+ 2RlM5JsRpsNCsYqnJRy41vUlWKL9lP8oYqU4HlCIlS7CA9ir3eyRtgvLVJAZ8YWbfQNW
+ CoTJnm9jzmuMgYkx0hSdfoRJEO4kE4GxhRUNKnIK7T2APdVc6ONbw3JW1ei64eVIrNyb
+ ZMWQ==
+X-Gm-Message-State: AOJu0YznP3XobuBkKCsKCDnw4F40v09ldC1W2Q79jYATpOliwXBRCeVr
+ mi7VMEHPdR7ZNzVQd9/REh/oGu9Dpf+2qqUAVJfMAYKeNdLJ8hz+DbntAISczUD6VAmOJg0bN4l
+ m4MU=
+X-Google-Smtp-Source: AGHT+IHTlnTiRjjIG5iGqID+1N5AGA7ugO/4dpu/2pphdV/WOEERYZ6slSefSrUbEV5/MAug6BYlpg==
+X-Received: by 2002:a17:906:56ce:b0:a36:f811:1050 with SMTP id
+ an14-20020a17090656ce00b00a36f8111050mr377077ejc.45.1707460886618; 
+ Thu, 08 Feb 2024 22:41:26 -0800 (PST)
 X-Forwarded-Encrypted: i=1;
- AJvYcCWXFfFzEpbv5Ch2UC92cQCDa2zHx/3tdtlK6A8FVdI7yPzKl8rdHrd2Bnw/HKp1ikdfErtTDOJQ5MucBZCrzk3ww5GSdWtIrd9K5U1Rks0RQ3TSvicTEqocH/EOoPe11ABThfFQ5ZIEVL8n1tH6HcOtAdxUst7fiq36nqH59Pbx5ayy0Huq1sLUqj7qhCHUxiP187tt20JBWunGQBRWlEQOb44YLHuEneXdLu4GKVj4/Oulnxpj3wISzkdbGRpZv+QMYDq8e0yMavreAaD+S2VkawSCXgi+FBHwXkf2Rf+e8MqVGrTdwHttK9nY90l02N8MVSsLvhYStc2XTTSoQmGMJEMU1Ne+aYJPOHhCPi4jnK29EFHXRLXDmIMVo9RpMF2/MyiV1jF33DJoj+iS5BgjwN+KkWbmTugJoRdhug==
+ AJvYcCXUwEhrfC72X16CSzyz1KVZWQwv3mhhZWfeaVUmJg50H2aBK/VDI9pn+dFr0LGOGT3cOpaCNZuHyekGu0T0UW2lm2mERLxF223s0oDQRoFxhANu5dU7P58RoPZeS37DbK2w5MyHVMJR211UcO2O+CuVCP1JSJIm+r247uK+CcTqZXbnNDEh5CWZ4YUyEVC8MXjb6am+xOCbt9ZHQuxXHZaT1OEIfDiMAjvPk5FWoCC4p38hApCB+rdhWhSOlIJz+rHcdkJKaqgvF0v5Zx/8xvwSd9Bxhx0wKYxujukXrWpl3PSicWpW5Tzg8VePm28nigea1GaqLR29JnM1owD/PHHfX9tW6gPOr9h8RONASqeIjmWPcJ2+29tl8rHO6ajB5iK01KEg/Vc3rjnt
 Received: from beast.fritz.box (62-178-148-172.cable.dynamic.surfer.at.
  [62.178.148.172]) by smtp.gmail.com with ESMTPSA id
- vk9-20020a170907cbc900b00a36c499c935sm450575ejc.43.2024.02.08.22.41.29
+ vk9-20020a170907cbc900b00a36c499c935sm450575ejc.43.2024.02.08.22.41.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 Feb 2024 22:41:30 -0800 (PST)
+ Thu, 08 Feb 2024 22:41:26 -0800 (PST)
 From: =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>
 To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Alistair Francis <alistair.francis@wdc.com>,
@@ -71,27 +71,25 @@ To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Andrew Jones <ajones@ventanamicro.com>
 Cc: =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>,
- Laurent Vivier <laurent@vivier.eu>, Weiwei Li <liwei1518@gmail.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [RFC PATCH v2 4/4] linux-user/riscv: Implement dynamic memory
- consistency model support
-Date: Fri,  9 Feb 2024 07:41:17 +0100
-Message-ID: <20240209064117.2746701-5-christoph.muellner@vrull.eu>
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Subject: [RFC PATCH v2 1/4] RISC-V: Add support for Ssdtso
+Date: Fri,  9 Feb 2024 07:41:14 +0100
+Message-ID: <20240209064117.2746701-2-christoph.muellner@vrull.eu>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240209064117.2746701-1-christoph.muellner@vrull.eu>
 References: <20240209064117.2746701-1-christoph.muellner@vrull.eu>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::636;
- envelope-from=christoph.muellner@vrull.eu; helo=mail-ej1-x636.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::629;
+ envelope-from=christoph.muellner@vrull.eu; helo=mail-ej1-x629.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,126 +105,151 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This patch implements the dynamic memory consistency model prctl calls
-for RISC-V. The implementation introduces a single boolean variable to
-keep the DTSO state.
+The Ssdtso extension introduces a DTSO field to the {m,s,h}envcfg
+register to enable TSO at run-time.  Building on top of Ztso support,
+this patch treats Ssdtso just like Ztso (always execute in TSO mode),
+which should be fine from a correctness perspective.
+
+Similar like Ztso, this is expected to have little overhead on
+host machines that operate in TSO mode (e.g. x86).
+However, executing the TSO fences on guests without TSO, will
+have a negative performance impact, regardless if TSO is enabled
+in the guest or not (e.g. running a RV guest with Ssdtso and disabled
+DTSO bit on an aarch64 host).
 
 Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
 ---
- linux-user/riscv/target_prctl.h | 76 ++++++++++++++++++++++++++++++++-
- target/riscv/cpu.c              |  5 +++
- target/riscv/cpu.h              |  1 +
- 3 files changed, 81 insertions(+), 1 deletion(-)
+ target/riscv/cpu.c       |  8 ++++++--
+ target/riscv/cpu_bits.h  |  3 +++
+ target/riscv/cpu_cfg.h   |  1 +
+ target/riscv/csr.c       | 14 +++++++++++---
+ target/riscv/translate.c |  2 +-
+ 5 files changed, 22 insertions(+), 6 deletions(-)
 
-diff --git a/linux-user/riscv/target_prctl.h b/linux-user/riscv/target_prctl.h
-index eb53b31ad5..e54321d872 100644
---- a/linux-user/riscv/target_prctl.h
-+++ b/linux-user/riscv/target_prctl.h
-@@ -1 +1,75 @@
--/* No special prctl support required. */
-+/*
-+ * RISC-V specific prctl functions for linux-user
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+#ifndef RISCV_TARGET_PRCTL_H
-+#define RISCV_TARGET_PRCTL_H
-+
-+static inline void riscv_dtso_set_enable(CPURISCVState *env, bool enable)
-+{
-+    env->dtso_ena = enable;
-+}
-+
-+static inline bool riscv_dtso_is_enabled(CPURISCVState *env)
-+{
-+    return env->dtso_ena;
-+}
-+
-+static abi_long do_prctl_set_memory_consistency_model(CPUArchState *cpu_env,
-+                                                      abi_long arg2)
-+{
-+    RISCVCPU *cpu = env_archcpu(cpu_env);
-+    bool dtso_ena_old = riscv_dtso_is_enabled(cpu_env);
-+    bool dtso_ena_new;
-+    bool has_dtso = cpu->cfg.ext_ssdtso;
-+
-+    switch (arg2) {
-+        case PR_MEMORY_CONSISTENCY_MODEL_RISCV_WMO:
-+            dtso_ena_new = false;
-+            break;
-+        case PR_MEMORY_CONSISTENCY_MODEL_RISCV_TSO:
-+	    dtso_ena_new = true;
-+            break;
-+        default:
-+            return -TARGET_EINVAL;
-+    }
-+
-+    /* No change requested. */
-+    if (dtso_ena_old == dtso_ena_new)
-+	    return 0;
-+
-+    /* Enabling TSO only works if DTSO is available. */
-+    if (dtso_ena_new && !has_dtso)
-+	    return -TARGET_EINVAL;
-+
-+    /* Switchin TSO->WMO is not allowed. */
-+    if (!dtso_ena_new)
-+	    return -TARGET_EINVAL;
-+
-+    riscv_dtso_set_enable(cpu_env, dtso_ena_new);
-+
-+    /*
-+     * No need to reschedule other threads, because the emulation
-+     * of DTSO is fine (from a memory model view) if they are out
-+     * of sync until they will eventually reschedule.
-+     */
-+
-+    return 0;
-+}
-+
-+#define do_prctl_set_memory_consistency_model \
-+        do_prctl_set_memory_consistency_model
-+
-+static abi_long do_prctl_get_memory_consistency_model(CPUArchState *cpu_env)
-+{
-+    if (riscv_dtso_is_enabled(cpu_env))
-+	    return PR_MEMORY_CONSISTENCY_MODEL_RISCV_TSO;
-+
-+    return PR_MEMORY_CONSISTENCY_MODEL_RISCV_WMO;
-+}
-+
-+#define do_prctl_get_memory_consistency_model \
-+        do_prctl_get_memory_consistency_model
-+
-+#endif /* RISCV_TARGET_PRCTL_H */
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index ee90c09600..2e2aac73dc 100644
+index b679ecd8c7..ee90c09600 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -922,6 +922,11 @@ static void riscv_cpu_reset_hold(Object *obj)
-     if (mcc->parent_phases.hold) {
-         mcc->parent_phases.hold(obj);
-     }
-+#ifdef CONFIG_USER_ONLY
-+    /* Default is true if Ztso is enabled, false otherwise. */
-+    env->dtso_ena = cpu->cfg.ext_ztso;
-+#endif
-+
- #ifndef CONFIG_USER_ONLY
-     env->misa_mxl = mcc->misa_mxl_max;
-     env->priv = PRV_M;
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index f52dce78ba..69420b2ae3 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -200,6 +200,7 @@ struct CPUArchState {
+@@ -174,6 +174,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(smstateen, PRIV_VERSION_1_12_0, ext_smstateen),
+     ISA_EXT_DATA_ENTRY(ssaia, PRIV_VERSION_1_12_0, ext_ssaia),
+     ISA_EXT_DATA_ENTRY(sscofpmf, PRIV_VERSION_1_12_0, ext_sscofpmf),
++    ISA_EXT_DATA_ENTRY(ssdtso, PRIV_VERSION_1_12_0, ext_ssdtso),
+     ISA_EXT_DATA_ENTRY(sstc, PRIV_VERSION_1_12_0, ext_sstc),
+     ISA_EXT_DATA_ENTRY(svadu, PRIV_VERSION_1_12_0, ext_svadu),
+     ISA_EXT_DATA_ENTRY(svinval, PRIV_VERSION_1_12_0, ext_svinval),
+@@ -950,9 +951,11 @@ static void riscv_cpu_reset_hold(Object *obj)
+     env->two_stage_lookup = false;
  
- #ifdef CONFIG_USER_ONLY
-     uint32_t elf_flags;
-+    bool dtso_ena; /* Dynamic TSO enable */
- #endif
+     env->menvcfg = (cpu->cfg.ext_svpbmt ? MENVCFG_PBMTE : 0) |
+-                   (cpu->cfg.ext_svadu ? MENVCFG_ADUE : 0);
++                   (cpu->cfg.ext_svadu ? MENVCFG_ADUE : 0) |
++                   (cpu->cfg.ext_ztso && cpu->cfg.ext_ssdtso ? MENVCFG_DTSO : 0);
+     env->henvcfg = (cpu->cfg.ext_svpbmt ? HENVCFG_PBMTE : 0) |
+-                   (cpu->cfg.ext_svadu ? HENVCFG_ADUE : 0);
++                   (cpu->cfg.ext_svadu ? HENVCFG_ADUE : 0) |
++                   (cpu->cfg.ext_ztso && cpu->cfg.ext_ssdtso ? HENVCFG_DTSO : 0);
  
- #ifndef CONFIG_USER_ONLY
+     /* Initialized default priorities of local interrupts. */
+     for (i = 0; i < ARRAY_SIZE(env->miprio); i++) {
+@@ -1460,6 +1463,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
+     MULTI_EXT_CFG_BOOL("zve32f", ext_zve32f, false),
+     MULTI_EXT_CFG_BOOL("zve64f", ext_zve64f, false),
+     MULTI_EXT_CFG_BOOL("zve64d", ext_zve64d, false),
++    MULTI_EXT_CFG_BOOL("ssdtso", ext_ssdtso, false),
+     MULTI_EXT_CFG_BOOL("sstc", ext_sstc, true),
+ 
+     MULTI_EXT_CFG_BOOL("smepmp", ext_smepmp, false),
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index fc2068ee4d..e11191977d 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -744,6 +744,7 @@ typedef enum RISCVException {
+ #define MENVCFG_CBIE                       (3UL << 4)
+ #define MENVCFG_CBCFE                      BIT(6)
+ #define MENVCFG_CBZE                       BIT(7)
++#define MENVCFG_DTSO                       BIT(8)
+ #define MENVCFG_ADUE                       (1ULL << 61)
+ #define MENVCFG_PBMTE                      (1ULL << 62)
+ #define MENVCFG_STCE                       (1ULL << 63)
+@@ -757,11 +758,13 @@ typedef enum RISCVException {
+ #define SENVCFG_CBIE                       MENVCFG_CBIE
+ #define SENVCFG_CBCFE                      MENVCFG_CBCFE
+ #define SENVCFG_CBZE                       MENVCFG_CBZE
++#define SENVCFG_DTSO                       MENVCFG_DTSO
+ 
+ #define HENVCFG_FIOM                       MENVCFG_FIOM
+ #define HENVCFG_CBIE                       MENVCFG_CBIE
+ #define HENVCFG_CBCFE                      MENVCFG_CBCFE
+ #define HENVCFG_CBZE                       MENVCFG_CBZE
++#define HENVCFG_DTSO                       MENVCFG_DTSO
+ #define HENVCFG_ADUE                       MENVCFG_ADUE
+ #define HENVCFG_PBMTE                      MENVCFG_PBMTE
+ #define HENVCFG_STCE                       MENVCFG_STCE
+diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+index afba8ed0b2..606ae5a120 100644
+--- a/target/riscv/cpu_cfg.h
++++ b/target/riscv/cpu_cfg.h
+@@ -73,6 +73,7 @@ struct RISCVCPUConfig {
+     bool ext_zihpm;
+     bool ext_ztso;
+     bool ext_smstateen;
++    bool ext_ssdtso;
+     bool ext_sstc;
+     bool ext_svadu;
+     bool ext_svinval;
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index d4e8ac13b9..c06b674994 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -2058,7 +2058,9 @@ static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
+                                     target_ulong val)
+ {
+     const RISCVCPUConfig *cfg = riscv_cpu_cfg(env);
+-    uint64_t mask = MENVCFG_FIOM | MENVCFG_CBIE | MENVCFG_CBCFE | MENVCFG_CBZE;
++    uint64_t mask = MENVCFG_FIOM | MENVCFG_CBIE | MENVCFG_CBCFE |
++                    MENVCFG_CBZE |
++		    (cfg->ext_ssdtso && !cfg->ext_ztso ? MENVCFG_DTSO : 0);
+ 
+     if (riscv_cpu_mxl(env) == MXL_RV64) {
+         mask |= (cfg->ext_svpbmt ? MENVCFG_PBMTE : 0) |
+@@ -2108,7 +2110,10 @@ static RISCVException read_senvcfg(CPURISCVState *env, int csrno,
+ static RISCVException write_senvcfg(CPURISCVState *env, int csrno,
+                                     target_ulong val)
+ {
+-    uint64_t mask = SENVCFG_FIOM | SENVCFG_CBIE | SENVCFG_CBCFE | SENVCFG_CBZE;
++    const RISCVCPUConfig *cfg = riscv_cpu_cfg(env);
++    uint64_t mask = SENVCFG_FIOM | SENVCFG_CBIE | SENVCFG_CBCFE |
++                    SENVCFG_CBZE |
++		    (cfg->ext_ssdtso && !cfg->ext_ztso ? SENVCFG_DTSO : 0);
+     RISCVException ret;
+ 
+     ret = smstateen_acc_ok(env, 0, SMSTATEEN0_HSENVCFG);
+@@ -2143,7 +2148,10 @@ static RISCVException read_henvcfg(CPURISCVState *env, int csrno,
+ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
+                                     target_ulong val)
+ {
+-    uint64_t mask = HENVCFG_FIOM | HENVCFG_CBIE | HENVCFG_CBCFE | HENVCFG_CBZE;
++    const RISCVCPUConfig *cfg = riscv_cpu_cfg(env);
++    uint64_t mask = HENVCFG_FIOM | HENVCFG_CBIE | HENVCFG_CBCFE |
++                    HENVCFG_CBZE |
++		    (cfg->ext_ssdtso && !cfg->ext_ztso ? HENVCFG_DTSO : 0);
+     RISCVException ret;
+ 
+     ret = smstateen_acc_ok(env, 0, SMSTATEEN0_HSENVCFG);
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index ea5d52b2ef..f0d4db0b64 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -1198,7 +1198,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+     ctx->cs = cs;
+     ctx->pm_mask_enabled = FIELD_EX32(tb_flags, TB_FLAGS, PM_MASK_ENABLED);
+     ctx->pm_base_enabled = FIELD_EX32(tb_flags, TB_FLAGS, PM_BASE_ENABLED);
+-    ctx->ztso = cpu->cfg.ext_ztso;
++    ctx->ztso = cpu->cfg.ext_ztso || cpu->cfg.ext_ssdtso;
+     ctx->itrigger = FIELD_EX32(tb_flags, TB_FLAGS, ITRIGGER);
+     ctx->zero = tcg_constant_tl(0);
+     ctx->virt_inst_excp = false;
 -- 
 2.43.0
 
