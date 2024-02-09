@@ -4,62 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41244C4828F
-	for <qemu-riscv@archiver.kernel.org>; Fri,  9 Feb 2024 06:42:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0E50C48297
+	for <qemu-riscv@archiver.kernel.org>; Fri,  9 Feb 2024 06:42:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rYKZs-0005tx-HX; Fri, 09 Feb 2024 01:41:36 -0500
+	id 1rYKZs-0005uL-KQ; Fri, 09 Feb 2024 01:41:36 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1rYKZq-0005oM-T5
+ id 1rYKZo-0005nD-TT
  for qemu-riscv@nongnu.org; Fri, 09 Feb 2024 01:41:34 -0500
-Received: from mail-ej1-x632.google.com ([2a00:1450:4864:20::632])
+Received: from mail-ed1-x52a.google.com ([2a00:1450:4864:20::52a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1rYKZj-0002Nr-6q
- for qemu-riscv@nongnu.org; Fri, 09 Feb 2024 01:41:34 -0500
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-a3916c1f9b0so73541266b.1
- for <qemu-riscv@nongnu.org>; Thu, 08 Feb 2024 22:41:26 -0800 (PST)
+ id 1rYKZn-0002Oe-64
+ for qemu-riscv@nongnu.org; Fri, 09 Feb 2024 01:41:32 -0500
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-55f50cf2021so984259a12.1
+ for <qemu-riscv@nongnu.org>; Thu, 08 Feb 2024 22:41:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=vrull.eu; s=google; t=1707460885; x=1708065685; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=wCp09nmol1A0rQ+1AAJRGnnUH/HLplW+t7xnlcRb0ac=;
- b=V9h4aoTzg24X6PiebIHVGjkVzEnLJGLFx74GoFUhzrNnnFzCerHRuxnMphlaijeovj
- QnuqxqmQsp8SST+soZfJjndBfYlTWvOHFZLWafq611KjwTZJYCKmnDBQDX9AIVMy8dpC
- 5cFiRI70tUOFqurhAFKjDoGG1V2bThp3WmCU3vMY0XU2J3b9CZKkzQShuBKFpg2hHr1o
- o8AKnMSSAarkcBUlbE+7lWljQ94OPJZvI/DkaBAm0ZZyH8o8zfpD096KmlTG/9PPC1Rj
- rlundkDtJ2BEIA4jxFCk9Y6x95/u+ytCLbwlsJlsEW7cw6hS5G8zYLSfO7HdNRAv66sC
- e+uA==
+ d=vrull.eu; s=google; t=1707460889; x=1708065689; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ytTPrgvmcSAVYKXxwo9D3fPgoAujr29L9BQ2PXjBjJU=;
+ b=GUwlIrfMJLi+m0QhrP+rDM9csRnx8WhKzdvziezTCKCl4/Hyzfg0oJHXxvsLPa6UkC
+ vw+2g7YcD9C9XE2W5RliUMejAb5qA4cabirr2q1i87/P9t0VCiFdo2YMcWHUGpBe4/oD
+ 4WbQFiUKMqjI6Urq6VaTBQ/mn7QXz178lismOKkYi9l8/1c51AHOdzC5z16sW+VR1eF+
+ gbxMtxadjIGI5BI1Kt03UFRQKJbNcN6cDeCNyeJ3vQ0aKSfW9Iatyp97h5N/PBR8DIM0
+ r3A7Ie+83zib4EhQk0CwDkxyVEOrm0n5HIr0u15Cmr64mJ9rw4EvffXAe5+wCTwfM3+1
+ MKMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707460885; x=1708065685;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=wCp09nmol1A0rQ+1AAJRGnnUH/HLplW+t7xnlcRb0ac=;
- b=s3UlUKDZwkUYH9L9AFdeRPLEiJXUK45BD4ZbtBue4NAF0O4Mgzkhxwmw6/JCvEP73n
- Dy9FtLjPvHuqrhSWhkxqnwBoXLcbRAEJHCOGtCqRQ5b4rhx8wVuKrae2Z2BZxzLARpBk
- eqCr3ZY4KiWOnuXU6u/VeZ1UPVIUaMqSJN8kyIItn65g38aW5NLgvkCRXt86YqN3IhXA
- 7Kf322Il6nI9IzAMvvP+YzOL1G30aT8WBnpsc+hcMs6ZACUVnJ/Sy3Pi0q1j0FsJ62RW
- AsWSNcA/H7N6ZN2NN/3ihKU1y4jix2i0uqfnbDDz4W2o8+Po7hWosRDyVDKv2uz+jMAr
- KOSg==
-X-Gm-Message-State: AOJu0Yzbt19is8SJJB9QYDXMAnSKQg2p1Xz9ASXUwxT7mIRqRjE44kDe
- EUAJs9EHFPtSU0eUmZbC1SObUOr046nyy2WzZU7FGNFniYfH7ZNYPEWHcuO3DkFR//j74gdblav
- Zwf8=
-X-Google-Smtp-Source: AGHT+IEKBg84nr86SYmfxNqoXAD34hyHtxhB8cxJKFZpaTsrrfakCv5vqznlBtQggwkFRbs/7fVgVw==
-X-Received: by 2002:a17:906:57d7:b0:a38:3db5:a846 with SMTP id
- u23-20020a17090657d700b00a383db5a846mr361765ejr.67.1707460885121; 
- Thu, 08 Feb 2024 22:41:25 -0800 (PST)
+ d=1e100.net; s=20230601; t=1707460889; x=1708065689;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ytTPrgvmcSAVYKXxwo9D3fPgoAujr29L9BQ2PXjBjJU=;
+ b=HYZkm34DPNL3vWNR52oICGmwrOU59PEMq07LfanDE/HFYQlOmHetwOmqP3i8xCNBav
+ p3Yv7y8ow7hTRnSSgNmnAXy88vgkFvJnCtuSQ0iAZ/O9k52cIjz8I+vbuwrGR3z0AjqT
+ LhnNCBOTl5ukAjuxbn2HbFU8joOahX911aIhp6SfpEFgK3vzIaqDKTj6JukoChjztvjs
+ TYdLKrjMV/hc6XFo96LIhEeo2zTl0oeJ1j+29JdBDH9yHnrp1ckvMBPRu4bz1r0u7yz3
+ 3xyd0FumAsaeLuZqFSmW6cE0M7fJ36CQP6r6xuAbOfnTUN3hLM63SZ1pYt1uHp550q1y
+ CjnA==
+X-Gm-Message-State: AOJu0Yy4skpxEbh3xt3wsBKM9ammSOzGtU27w14uxMQSAaLjznpxsUOG
+ IL/u4nXU44RvTPXB3+YflnGY0gegrga+k07EYxKT/jfQV9o0PkSSF4KaiGzktR+uxPfDcLE3TGa
+ F1Mg=
+X-Google-Smtp-Source: AGHT+IFVg4lO8zkHhRZCGeDc2MDr2YQcPD8It/U0CsIDnPbxPJxfIBzw6pOBCu/rKHCc+ukuID9cwQ==
+X-Received: by 2002:a17:906:3b5a:b0:a3b:721a:9162 with SMTP id
+ h26-20020a1709063b5a00b00a3b721a9162mr409548ejf.66.1707460889359; 
+ Thu, 08 Feb 2024 22:41:29 -0800 (PST)
 X-Forwarded-Encrypted: i=1;
- AJvYcCV4isIeG8UQExqmyp1L07xw4L4UZM31Nnk//Z2gXTK6zEakr2NfMBcqENw58acmy58Yt2CPQXFvvxLTkw+oDV8VdltqOXwhebR2Uch1ScJ8Hlr5CsRy3o1rspcMQhPLuqXit0sjFf3uT8WhKNTSohbxDjWdbgk0zmS2lhsIRA1Lcf4F2I5Wiywnh9SmgKpJO76GDRaxu+vtVo6JcWf/5ZM7q564Stfto31OOAf/HKBrQ9hpIynglS/9302GX4mpUHZiDQbuN14SZXjeZ3PD9okJCXZ2q8RfK//2KuCGoAMMMR9ja0x00TWOOE5e5JMpSPGyzKYQXgYH
+ AJvYcCWR+BGDglxI4JrKwy7PM9PtB7wk/zlH9clO2KU+SaMEc5HYGP6818LRYYzni3w9RdJNoXM91X8rVEr5nFYgjOIIoZB0f99OlA4LQ3LGVCpO6eqW7bv9lj+ElVSDNGrEE1uJcq9QvOJhO2C43pMYwn7oP3VU/SCF0Gs45ZvTINicfDhEItIi1K6p7xy0HLGlWL/JsInD6RN5f17TlbR2Oom/RpL1VjEQRnwWD1gr5KxC14yPlp+TYobLea7Lz4QsCNP2Alo0GyMQgr6g8qhycZvbs7o4AxOUBVem2ahTmphQf7Y6VI/0kK4lIo/2R2ytHRhv3iz9bpVHsWxJLi2CoA8jgZxakVm4JK1KHg==
 Received: from beast.fritz.box (62-178-148-172.cable.dynamic.surfer.at.
  [62.178.148.172]) by smtp.gmail.com with ESMTPSA id
- vk9-20020a170907cbc900b00a36c499c935sm450575ejc.43.2024.02.08.22.41.23
+ vk9-20020a170907cbc900b00a36c499c935sm450575ejc.43.2024.02.08.22.41.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 Feb 2024 22:41:24 -0800 (PST)
+ Thu, 08 Feb 2024 22:41:28 -0800 (PST)
 From: =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>
 To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Alistair Francis <alistair.francis@wdc.com>,
@@ -69,16 +70,20 @@ To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Richard Henderson <richard.henderson@linaro.org>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Andrew Jones <ajones@ventanamicro.com>
-Cc: =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>
-Subject: [RFC PATCH v2 0/4] RISC-V: Add dynamic TSO support
-Date: Fri,  9 Feb 2024 07:41:13 +0100
-Message-ID: <20240209064117.2746701-1-christoph.muellner@vrull.eu>
+Cc: =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>,
+ Laurent Vivier <laurent@vivier.eu>
+Subject: [RFC PATCH v2 3/4] linux-user/prctl: Add dynamic memory consistency
+ model prctl API
+Date: Fri,  9 Feb 2024 07:41:16 +0100
+Message-ID: <20240209064117.2746701-4-christoph.muellner@vrull.eu>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240209064117.2746701-1-christoph.muellner@vrull.eu>
+References: <20240209064117.2746701-1-christoph.muellner@vrull.eu>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::632;
- envelope-from=christoph.muellner@vrull.eu; helo=mail-ej1-x632.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52a;
+ envelope-from=christoph.muellner@vrull.eu; helo=mail-ed1-x52a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -101,59 +106,57 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The upcoming RISC-V Ssdtso specification introduces a bit in the senvcfg
-CSR to switch the memory consistency model of user mode at run-time from
-RVWMO to TSO. The active consistency model can therefore be switched on a
-per-hart base and managed by the kernel on a per-process base.
+This patch implements the prctl calls to set and get the current memory
+consistency model. This patch does not implement any real functionality
+but just defines the relevant hooks, where target code take over.
 
-This patch treats Ssdtso similar to TSO, i.e., the guest is always being
-executed in TSO mode, which simplifies the implementation a lot while
-still being correct. The downside is, that we have a performance penalty
-on hosts that don't run with TSO.
+Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
+---
+ linux-user/syscall.c | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
 
-This patch implements basic Ssdtso support and adds a prctl API on top
-so that user-space processes can switch to a stronger memory consistency
-model (than the kernel was written for) at run-time.
-
-This series is based on the third draft of the Ssdtso specification
-which can be found here:
-  https://github.com/riscv/riscv-ssdtso/releases/tag/v1.0-draft3
-Note, that the Ssdtso specification is in development state
-(i.e., not frozen or even ratified) which is also the reason
-why this series is marked as RFC.
-
-This series saw the following changes since v1:
-* Adding compatibility with Ztso (spec change in draft 3)
-* Use PR_MEMORY_CONSISTENCY_MODEL* instead of numeric constants
-
-This series is based on riscv-to-apply.next with two series on top:
-* Sync hwprobe keys with kernel
-  https://lists.gnu.org/archive/html/qemu-devel/2024-02/msg01293.html
-* Add Ztso extension
-  https://lists.gnu.org/archive/html/qemu-devel/2024-02/msg01296.html
-
-This patchset can also be found in this GitHub branch:
-  https://github.com/cmuellner/qemu/tree/ssdtso-v2
-
-A Linux implementation of DTSO can be found in this GitHub branch:
-  https://github.com/cmuellner/linux/tree/ssdtso-v2
-
-Christoph Müllner (4):
-  RISC-V: Add support for Ssdtso
-  linux-user/riscv: Add Ssdtso extension to hwprobe
-  linux-user/prctl: Add dynamic memory consistency model prctl API
-  linux-user/riscv: Implement dynamic memory consistency model support
-
- linux-user/riscv/target_prctl.h | 76 ++++++++++++++++++++++++++++++++-
- linux-user/syscall.c            | 20 +++++++++
- target/riscv/cpu.c              | 13 +++++-
- target/riscv/cpu.h              |  1 +
- target/riscv/cpu_bits.h         |  3 ++
- target/riscv/cpu_cfg.h          |  1 +
- target/riscv/csr.c              | 14 ++++--
- target/riscv/translate.c        |  2 +-
- 8 files changed, 123 insertions(+), 7 deletions(-)
-
+diff --git a/linux-user/syscall.c b/linux-user/syscall.c
+index bf0d66b8a8..cf0845a074 100644
+--- a/linux-user/syscall.c
++++ b/linux-user/syscall.c
+@@ -6309,6 +6309,12 @@ abi_long do_arch_prctl(CPUX86State *env, int code, abi_ulong addr)
+ # define PR_SME_VL_LEN_MASK  0xffff
+ # define PR_SME_VL_INHERIT   (1 << 17)
+ #endif
++#ifndef PR_SET_MEMORY_CONSISTENCY_MODEL
++# define PR_SET_MEMORY_CONSISTENCY_MODEL        71
++# define PR_GET_MEMORY_CONSISTENCY_MODEL        72
++# define PR_MEMORY_CONSISTENCY_MODEL_RISCV_WMO  1
++# define PR_MEMORY_CONSISTENCY_MODEL_RISCV_TSO  2
++#endif
+ 
+ #include "target_prctl.h"
+ 
+@@ -6355,6 +6361,12 @@ static abi_long do_prctl_inval1(CPUArchState *env, abi_long arg2)
+ #ifndef do_prctl_sme_set_vl
+ #define do_prctl_sme_set_vl do_prctl_inval1
+ #endif
++#ifndef do_prctl_set_memory_consistency_model
++#define do_prctl_set_memory_consistency_model do_prctl_inval1
++#endif
++#ifndef do_prctl_get_memory_consistency_model
++#define do_prctl_get_memory_consistency_model do_prctl_inval0
++#endif
+ 
+ static abi_long do_prctl(CPUArchState *env, abi_long option, abi_long arg2,
+                          abi_long arg3, abi_long arg4, abi_long arg5)
+@@ -6481,6 +6493,11 @@ static abi_long do_prctl(CPUArchState *env, abi_long option, abi_long arg2,
+         /* Disable to prevent the target disabling stuff we need. */
+         return -TARGET_EINVAL;
+ 
++    case PR_SET_MEMORY_CONSISTENCY_MODEL:
++        return do_prctl_set_memory_consistency_model(env, arg2);
++    case PR_GET_MEMORY_CONSISTENCY_MODEL:
++	return do_prctl_get_memory_consistency_model(env);
++
+     default:
+         qemu_log_mask(LOG_UNIMP, "Unsupported prctl: " TARGET_ABI_FMT_ld "\n",
+                       option);
 -- 
 2.43.0
 
