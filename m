@@ -4,82 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5730C48260
-	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Feb 2024 15:34:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B607FC48260
+	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Feb 2024 19:18:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rZuml-0001m8-Kk; Tue, 13 Feb 2024 10:33:27 -0500
+	id 1rZyHy-0000tx-Fn; Tue, 13 Feb 2024 14:17:54 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1rZumj-0001lg-Sh
- for qemu-riscv@nongnu.org; Tue, 13 Feb 2024 10:33:25 -0500
-Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rZyHx-0000to-OO
+ for qemu-riscv@nongnu.org; Tue, 13 Feb 2024 14:17:53 -0500
+Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1rZumi-0002J4-8B
- for qemu-riscv@nongnu.org; Tue, 13 Feb 2024 10:33:25 -0500
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-410ed9f8621so15088645e9.1
- for <qemu-riscv@nongnu.org>; Tue, 13 Feb 2024 07:33:23 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rZyHw-0001qs-5m
+ for qemu-riscv@nongnu.org; Tue, 13 Feb 2024 14:17:53 -0500
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-1d731314e67so9147895ad.1
+ for <qemu-riscv@nongnu.org>; Tue, 13 Feb 2024 11:17:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1707838402; x=1708443202; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=bwbqkvzZStAy77BzBXccQCCkv+7bHKDBf+Owhox8aSM=;
- b=KZgXjcbQ2yw09d8dzc69bjE+bO5foocWxASTDoJ51V36KRhdzqdlruV/iQuIvdktbc
- OeZpUYpWGL6PKp33UP3qk/MTUOCklMbYROi2QVKWsaedMjlpqS0GG2t6Ul90Y7Y0af95
- K2GZwHa2mLxVXApfdGy42b2gMXhw5swIqt2idbk7zc/76KbXpFk+1wXP0nfJpeGqfx4a
- VdwgTT6GIfza43zWDzhBVJ9bQuoZFHsUIlbszNh4xHMHgwg14lcYA/I/LgjYuRJROii0
- u/ybjx0v3hInRL7KItpWkRZu7H1RU7VfHYB/yIktVwa+YTIUmsf43abxw6TRYrDOk6pu
- yfVQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707838402; x=1708443202;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=ventanamicro.com; s=google; t=1707851871; x=1708456671; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bwbqkvzZStAy77BzBXccQCCkv+7bHKDBf+Owhox8aSM=;
- b=STu7yiyD0Fkf67rHKFrfxs3cUUIlUAdoh/K30/F0tQ6+8W563l4eySmnEMHq4E1cVp
- qXfTEwultDkpI+teD3JbM1SgmRsj+BDZtDBzCElqrDVXr2nr8k/GY3R2nrOPZLjbPh/3
- JY/8OdBxrDLdXPy5dxy7M2qC7NCzDYSuIBpN5hiaMIMjDoihgvFi/2Moxp0hajA0wuIT
- hUN9Qwxz9du5waoh5emXvuNYnp5CTFCHEkhg8g1UTppJV/EO9o6YoaSGKd4oiIzRFU7D
- h3dkms8jpyZ8CGaYEgCd7czWfambzCtJ7Vhj1kFNr4Y5V67OByPYtztJYatfNF5afo2k
- qoMw==
+ bh=0NfV0ZdO4ska8d0dsnAqTwhguIzOtODkIfXJtGYHdT8=;
+ b=ik/B70AN9bslhIOtlYkkWD4xYBPxtn0ZwRQx0BNjZWOkQRKChSArhYnb/UF47CVFUY
+ EezRgnMMLKQnRhdBIEWd23VZHJG6j20ICHUGS9hjHrpWmRxlXe70nJ9jkhtHAc/bTIpC
+ +2bl9GwBCNiUp+Sju8VuMgJUXhYo/KefJRNGB+/PtV+djs1EGSXbpQKr0I9sbkXVIomB
+ QU/qzlXyCvZhBIVf5qBdPxVe1IKMW2p9rdCyTfs1JJTW3c8oFt/p87jYKe7yA+VvJQR2
+ ncommGTusUpRz80VyPGqmA5ePtl38a8XOJgX1LJY8+6GpbT7BZkjbfowJ7mMkZh7SUgL
+ rFBA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1707851871; x=1708456671;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=0NfV0ZdO4ska8d0dsnAqTwhguIzOtODkIfXJtGYHdT8=;
+ b=ncymUAfO+onuf0whkkvPjqrQhKyWo1on3+HUO4y+4WA2udOrca0IrcpTjYHVIZvuS6
+ KUnC4hnFSigc7gVkX20ibVw+OCttOzldSHijpFY/Y4WasUiGxQDiYyuEedWPD4hBDy+A
+ /2rrikeh4SVLMxTRSBA+Ms+M3KG7DnMhCuT3t+LNIlppD3vb7Udnc12lpMunljGw8BW1
+ DWUZhfcs1LZK8tjraFHDIVMdLg9qZs2McQO7g148uvTUwd8CtKYegIp7rVFq3LcyUw5A
+ vy9cx4jfjpg2deDVXIPHpxqAc6a6oXdBXiDXnA96+Kk9aRwR5kmnHZT8wwCBJStdxUrk
+ Me9A==
+X-Gm-Message-State: AOJu0YyuIhb4A6RAElsq+3amOjfjLDPNhEe24N4jRVCs19NPB5g5YPKN
+ hC7O1HnUsVKHtkHvbU1VAEeW6AQfo+X+MCW/sZ5s9msCGMdVrOykdODmx53tU9U=
+X-Google-Smtp-Source: AGHT+IGp/JLczilwROpQt2HN2opbWXubTj0QtQCISnw2mKbHLE5TBD5mispS6L6yFZe6aerFy1NmEA==
+X-Received: by 2002:a17:903:1211:b0:1d9:fc3f:5081 with SMTP id
+ l17-20020a170903121100b001d9fc3f5081mr597638plh.33.1707851870960; 
+ Tue, 13 Feb 2024 11:17:50 -0800 (PST)
 X-Forwarded-Encrypted: i=1;
- AJvYcCUQVHI28+4StX+VfIwvDZciXzbSvYUwUe3/Wdv1XyOEnbyLtv3SaAB2UaZHv21avfyNdGaBzmK9HIVZ9CLTDYFXsnZGJ+8=
-X-Gm-Message-State: AOJu0YwGwS9zX7Zqac4Nl5c/bajyJzLzS1A7nZD+zVvMhZD0zjmQesKI
- zXmcRzgMizKvek+Ffwf12HGCaLtlJTzyz00gSsmYxhLNA66Is73iMbKC+xmV7YI=
-X-Google-Smtp-Source: AGHT+IHLuessQln5KXmW90xkpC9pjyN9ysRkfmVjNOajmqQH26sKGuzogdNdv3bBaAz8kz330rA2hA==
-X-Received: by 2002:a05:600c:46c9:b0:410:7980:72a3 with SMTP id
- q9-20020a05600c46c900b00410798072a3mr7698836wmo.35.1707838402293; 
- Tue, 13 Feb 2024 07:33:22 -0800 (PST)
-X-Forwarded-Encrypted: i=1;
- AJvYcCW8JbHnCfvISp/LNGA9ertrOUL0fa3Whq41gZJHKjREr4jetFRlKEbyjAgc+ae5KPwLIBYTxNwXRro8qxGBImY6KnrNPkWsERiTD8IUyB3PNYglv9OrMm8ZS5gRABabvArurRLVgVKzHDynKBvHqFSeHpFHMHcQaW++TBw4rQof0DFY0FRqFBMsdgstj13NLjhMvyeQQgdK4RJtUp7VHbGcxqNVWBr94kEwV8P1sho+VDEs/LoJMEc/aw/7JjfGoWBlrKSDJ+e3ZqY6MB+Nt/LKfGhhHNurSUWpBhCt
-Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
- [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
+ AJvYcCVk4Lp/HtZQs71C8KTcWkksSToD+9Geq3ZSiuIXR83KvKkeXYfd1Sh+Pib3fv9Eo9qn3JBf7CN8fq29rDjKKhXeZS083U9wIw8rCgtB8QKz5gez25gxXjxrznOMTencChU2kdJ7yOe3PBzWaV5yelFQOsbwFAH4soLVnXPiuvullB8KXoTeiMuO/a5ePdDkb/KBq/b7F97GBCaBsZKyXTwbZ6i+jgkP72NbRBp7f6rkMugNHIs+oDuE5Mjrwi+zdUsFulR8imQ/hNA6C88KZ9PsqAId5A8qyY/aZ0KPmtZdIgokNrQuOEOFRpmC9Ufz/n7U0I1hDTjp8XGxuFxaVEnzTSab+gUETnqPAqpsv2agIR8qFvbBQ2fQD+Ywd0JmCH4G/0ffHaoSc/do
+Received: from grind.dc1.ventanamicro.com ([177.94.15.159])
  by smtp.gmail.com with ESMTPSA id
- jr6-20020a05600c560600b0041079d336c7sm12069464wmb.39.2024.02.13.07.33.21
+ b5-20020a170902d60500b001d8f81ecea1sm2416335plp.172.2024.02.13.11.17.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 13 Feb 2024 07:33:21 -0800 (PST)
-Date: Tue, 13 Feb 2024 16:33:21 +0100
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Alexandre Ghiti <alexghiti@rivosinc.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Subject: Re: [PATCH RFC] target: riscv: Add Svvptc extension support
-Message-ID: <20240213-87d669a3bd421a1b2bc30fc2@orel>
-References: <20240213145308.869874-1-alexghiti@rivosinc.com>
+ Tue, 13 Feb 2024 11:17:50 -0800 (PST)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ thuth@redhat.com, lvivier@redhat.com, pbonzini@redhat.com,
+ ajones@ventanamicro.com, alex.bennee@linaro.org,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH 2/6] libqos/virtio.c: fix 'avail_event' offset in qvring_init()
+Date: Tue, 13 Feb 2024 16:17:32 -0300
+Message-ID: <20240213191736.733334-3-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240213191736.733334-1-dbarboza@ventanamicro.com>
+References: <20240213191736.733334-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240213145308.869874-1-alexghiti@rivosinc.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
- envelope-from=ajones@ventanamicro.com; helo=mail-wm1-x32d.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x629.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -102,66 +99,62 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Feb 13, 2024 at 03:53:08PM +0100, Alexandre Ghiti wrote:
-> The Svvptc extension describes a uarch that does not cache invalid TLB
-> entries: that's the case for qemu so there is nothing particular to
-> implement other than the introduction of this extension, which is done
-> here.
-> 
-> Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
-> ---
-> 
-> That's an RFC since the extension has not been ratified yet.
+In qvring_init() we're writing vq->used->avail_event at "vq->used + 2 +
+array_size".  The struct pointed by vq->used is, from virtio_ring.h
+Linux header):
 
-Hi Alex,
+ *	// A ring of used descriptor heads with free-running index.
+ *	__virtio16 used_flags;
+ *	__virtio16 used_idx;
+ *	struct vring_used_elem used[num];
+ *	__virtio16 avail_event_idx;
 
-No need for the RFC tag. You can add not-yet-ratified extension support
-to QEMU as long as the CPU property is off by default (as you've done)
-and you add it to the riscv_cpu_experimental_exts[] array with an "x-"
-prefix on its property name.
+So 'flags' is the word right at vq->used. 'idx' is vq->used + 2. We need
+to skip 'used_idx' by adding + 2 bytes, and then sum the vector size, to
+reach avail_event_idx. An example on how to properly access this field
+can be found in qvirtqueue_kick():
 
-Thanks,
-drew
+avail_event = qvirtio_readw(d, qts, vq->used + 4 +
+                            sizeof(struct vring_used_elem) * vq->size);
 
-> 
->  target/riscv/cpu.c     | 2 ++
->  target/riscv/cpu_cfg.h | 1 +
->  2 files changed, 3 insertions(+)
-> 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 1b8d001d23..4beb5d0350 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -178,6 +178,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
->      ISA_EXT_DATA_ENTRY(svinval, PRIV_VERSION_1_12_0, ext_svinval),
->      ISA_EXT_DATA_ENTRY(svnapot, PRIV_VERSION_1_12_0, ext_svnapot),
->      ISA_EXT_DATA_ENTRY(svpbmt, PRIV_VERSION_1_12_0, ext_svpbmt),
-> +    ISA_EXT_DATA_ENTRY(svvptc, PRIV_VERSION_1_12_0, ext_svvptc),
->      ISA_EXT_DATA_ENTRY(xtheadba, PRIV_VERSION_1_11_0, ext_xtheadba),
->      ISA_EXT_DATA_ENTRY(xtheadbb, PRIV_VERSION_1_11_0, ext_xtheadbb),
->      ISA_EXT_DATA_ENTRY(xtheadbs, PRIV_VERSION_1_11_0, ext_xtheadbs),
-> @@ -1467,6 +1468,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
->      MULTI_EXT_CFG_BOOL("svinval", ext_svinval, false),
->      MULTI_EXT_CFG_BOOL("svnapot", ext_svnapot, false),
->      MULTI_EXT_CFG_BOOL("svpbmt", ext_svpbmt, false),
-> +    MULTI_EXT_CFG_BOOL("svvptc", ext_svvptc, false),
->  
->      MULTI_EXT_CFG_BOOL("zicntr", ext_zicntr, true),
->      MULTI_EXT_CFG_BOOL("zihpm", ext_zihpm, true),
-> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-> index 833bf58217..c973693b6e 100644
-> --- a/target/riscv/cpu_cfg.h
-> +++ b/target/riscv/cpu_cfg.h
-> @@ -77,6 +77,7 @@ struct RISCVCPUConfig {
->      bool ext_svinval;
->      bool ext_svnapot;
->      bool ext_svpbmt;
-> +    bool ext_svvptc;
->      bool ext_zdinx;
->      bool ext_zaamo;
->      bool ext_zacas;
-> -- 
-> 2.39.2
-> 
-> 
+This error was detected when enabling the RISC-V 'virt' libqos machine.
+The 'idx' test from vhost-user-blk-test.c errors out with a timeout in
+qvirtio_wait_used_elem(). The timeout happens because when processing
+the first element, 'avail_event' is read in qvirtqueue_kick() as non-zero
+because we didn't initialize it properly (and the memory at that point
+happened to be non-zero). 'idx' is 0.
+
+All of this makes this condition fail because "idx - avail_event" will
+overflow and be non-zero:
+
+/* < 1 because we add elements to avail queue one by one */
+if ((flags & VRING_USED_F_NO_NOTIFY) == 0 &&
+                        (!vq->event || (uint16_t)(idx-avail_event) < 1)) {
+    d->bus->virtqueue_kick(d, vq);
+}
+
+As a result the virtqueue is never kicked and we'll timeout waiting for it.
+
+Fixes: 1053587c3f ("libqos: Added EVENT_IDX support")
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+---
+ tests/qtest/libqos/virtio.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tests/qtest/libqos/virtio.c b/tests/qtest/libqos/virtio.c
+index 4f39124eba..82a6e122bf 100644
+--- a/tests/qtest/libqos/virtio.c
++++ b/tests/qtest/libqos/virtio.c
+@@ -265,7 +265,7 @@ void qvring_init(QTestState *qts, const QGuestAllocator *alloc, QVirtQueue *vq,
+     /* vq->used->idx */
+     qvirtio_writew(vq->vdev, qts, vq->used + 2, 0);
+     /* vq->used->avail_event */
+-    qvirtio_writew(vq->vdev, qts, vq->used + 2 +
++    qvirtio_writew(vq->vdev, qts, vq->used + 4 +
+                    sizeof(struct vring_used_elem) * vq->size, 0);
+ }
+ 
+-- 
+2.43.0
+
 
