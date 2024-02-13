@@ -4,62 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE072C4829F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Feb 2024 19:18:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2DA7C4829A
+	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Feb 2024 19:18:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rZyI2-0000vF-Oh; Tue, 13 Feb 2024 14:17:58 -0500
+	id 1rZyHs-0000qK-2w; Tue, 13 Feb 2024 14:17:48 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rZyI1-0000ux-MZ
- for qemu-riscv@nongnu.org; Tue, 13 Feb 2024 14:17:57 -0500
-Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629])
+ id 1rZyHq-0000py-Mo
+ for qemu-riscv@nongnu.org; Tue, 13 Feb 2024 14:17:46 -0500
+Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rZyI0-0001rK-43
- for qemu-riscv@nongnu.org; Tue, 13 Feb 2024 14:17:57 -0500
-Received: by mail-pl1-x629.google.com with SMTP id
- d9443c01a7336-1d72f71f222so37221845ad.1
- for <qemu-riscv@nongnu.org>; Tue, 13 Feb 2024 11:17:55 -0800 (PST)
+ id 1rZyHo-0001oZ-Ua
+ for qemu-riscv@nongnu.org; Tue, 13 Feb 2024 14:17:46 -0500
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-1d73066880eso43437535ad.3
+ for <qemu-riscv@nongnu.org>; Tue, 13 Feb 2024 11:17:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1707851875; x=1708456675; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=SpHMplEVi3XeQv4jaff9gVGYse9F3EmQGoAF7pGdYRM=;
- b=RD9JYQFiNtpO0qrWmXv0K4bAsNg9bJxGJcHry502FwdVYiJBTA9gzibdQnpdIbAj+r
- ntRHJTWznxTJBr3fD57ihUJTmp9jpmwfWqAj1vI7E/AtyaxofemOk8Zz8HS0+8ZSZf3+
- yZUzum4PkTG0gD6XpWaS7hj0u9lpE+kkge8ha1Eqx1lb/SyLebvfzBLU4yYMZ99MQd8R
- IYOHub/EIAziEZf5iASIwOMVmUTguFPo7bqTF2CC9OHvabDEhGyGX4J60wa65Mfrctek
- ren/WtOqmyUqxwkB/a4poMg4yq5KHDJGDO+TQl8aQ7oDPUk2yvdlNr/WXT+D8XNT7qDv
- yqpg==
+ d=ventanamicro.com; s=google; t=1707851863; x=1708456663; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=gHIAZI9o1OCE/syn5pPgOS3SyjRfI90qPN8Z11/8n7g=;
+ b=cAXxMTf5LimL1DDllbKGnyv/p9RWIhjN6WBfrDxXpJv/JOiRw+QQPy4mEdKZWjft+g
+ hI5umoRxjD3NEaMWh2D+HgRKJzonKeI6vWDxEoXgmaWiBm5TwNtE6B9+MoyW1S/R0LTm
+ VWTHmmz1Y5A/jA1CVFJRNwhcATXj8GvUNhaRTyWGgrwGJnKrOkI8XkstoT4j76m1+vkz
+ oOv1F/+43DOOo4xf/7gDyHsBWNJg2G5p5nSrYAUNCD7XszsPJQTLFTsvAVp9rBQ91gTr
+ U/L7laeO0TtRl7OX0o3QRxaUsT5EkzwJlPC3UulHAydGdDQvRdUr1W2MeOBIUve5Lf4v
+ jp+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707851875; x=1708456675;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=SpHMplEVi3XeQv4jaff9gVGYse9F3EmQGoAF7pGdYRM=;
- b=VDi4Rxe+Rz8rP7mGnPei5Ao2MDC6rmZ5E3D5XWCzU+VV2eh9eUwe30z0PeFBU/5LCc
- BqOWoEFe8K/IzA12hJlYaYM2SN14VH0Kq3fGfYd25JhojPZqhfeMTMC9RfQh3RLdasO2
- CyJqapL4nDAbcBCKy2BLi+sH1UAsPth5U9DnEz217hNpB2LJ2Gkny/5WrJv7hXp3halC
- g3PquRmp1ngErKQG33IcEfHIw/TeVtZyEmib1aBgatVZd5ADhhgOGZs8BcgQTqjRu5Qp
- qMYp8FIV5OlXrAeDNCqyNF4dc2qNTTXl7dhh/Wc8si+3uOwu2JH1lLIYLWOBJEXL2yj+
- Rmrw==
-X-Gm-Message-State: AOJu0YyYVDH02Y7cquFgYpWzbFBspHhGLadhEMrLtxGmwrinyO+6asda
- eL+c2aP6wV+K5F83EIQw3xa0a6MDZXty1vQRNTtPybazxmxa8C3EuoVNmk3aFNw=
-X-Google-Smtp-Source: AGHT+IHtAM/5hs9UnoSNyxHIPAwBRZ/cHvzNBxCmjypF1Ll8ROT+nZzACAFJvRasRfQt4U/fenxBwQ==
-X-Received: by 2002:a17:902:ecc5:b0:1d9:2cda:afe5 with SMTP id
- a5-20020a170902ecc500b001d92cdaafe5mr603825plh.31.1707851874989; 
- Tue, 13 Feb 2024 11:17:54 -0800 (PST)
+ d=1e100.net; s=20230601; t=1707851863; x=1708456663;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=gHIAZI9o1OCE/syn5pPgOS3SyjRfI90qPN8Z11/8n7g=;
+ b=IENzQWNnYiLfFwpWoBuCunEY4d8uouOru3f+lpazA/bRxuq9KaVoMPFhbpCeejILWX
+ up4EG+fRLG3uyTrrdcCSv2FV27bGPngPyqIAw0hhZqv3PZpVC8ghV1po7yaGrIXXPIFT
+ VNF5kp1qkewMvCyzA3xSqmiF7QnHd/KsBNKxl0izL/PfpzMChY45EfYr7oijg03q3MaM
+ /kN6/TQDXA7yyNIduhhp3bEozr17i2D2tkT3U+kt1pIXf61mamychvRzcYg6OfKUxIni
+ b5VLzRRtgsGSKmJzgfunAeNJm5sDkEPYbodJINRcTCOIIV2UXenqt9yjuv+DDcDCRum5
+ LsOg==
+X-Gm-Message-State: AOJu0YyZ6hgou5efosigpiDogNLtFz7q2PC8ivpR26cbbWk+lv9lILSx
+ y6vnPyKjUAAY6SlttUugO+j9nydq+NVfdZjbB7YudJrfKMZaRoXQFN4SHrF8+rw=
+X-Google-Smtp-Source: AGHT+IEKBQ+kAL2F+iB+LdmA16ho/2qukqsm6OR+ulOfofv/XiY03gHl6Q4gPDvt0LKVpyd45KknCA==
+X-Received: by 2002:a17:902:f68b:b0:1d9:9f86:3c77 with SMTP id
+ l11-20020a170902f68b00b001d99f863c77mr549830plg.14.1707851863127; 
+ Tue, 13 Feb 2024 11:17:43 -0800 (PST)
 X-Forwarded-Encrypted: i=1;
- AJvYcCVGJPD9Ccz9XmA/btMroaSlIcpHpRwx53YpW6ZUN8tGRV6m5u0IATq3cbSqbt/5Zo0Cl+82EQjKk3FHGVTDSHi91U0vbFY52W5cReQCNWVscCHM9w6iK5TuO7S1mLFmdhNgCH8cp/tfzMLLgyR6m3h1McrNbYenLcklEGT2qsW6OOnKfKHVTF7OnmMpbh1seCzkzW5YseaZ+esEN7JDhZWQtt8bj5cBMzJ36gBtSgi3PCV6SIAMfwTNgEF9J7elRx6eQ5eR2I6Hxb2IRAIxaGTYsyaVmo5BoOWX5su5YdOCrhlLivfLKLUMkoc8ialm1ZdOV1H+gUWFSQ3tMfxaKKssINuYFfFazTN+aetcsC1XjoUj38oaJsokyk5pJ2eDM8UoiAVdEUooJSP3
+ AJvYcCU26pHfczMl7awKCV8mDW/RWNGtX2FceqidnD5E77EoTMYUlRd5R1AyE44XvUTQMJ/L+QIiqkn9z58539zi/VlmPu1w0JQO2xQ0PiotRIY24fo2QkFtb+60hwmbrZbXSQ6h4TPVs7GBP7F42Y9uz62PWT4hd3CmuJO5PDveO5Jy06Ttf6X3kVhASNEAwTnQLJHODQli7ZxRmkDZuuNu/66cEnBLqjh6vO0XBafzlKuu+Hnqt2Z4duRp6pvQqQBgwNbI4p77zyW/0DDgraF/jsW37R+pDdHxCz4OjGBOJPo7nTv55Hxu7PWJSxSaXVE6m5X0lzKnUxrjxLAwjUVMX1KpuAr8F16VL4kjLf8BiJyCJxfXsBJK8K8it/2WMZdzmb4APSz/8MkKr9Lj
 Received: from grind.dc1.ventanamicro.com ([177.94.15.159])
  by smtp.gmail.com with ESMTPSA id
- b5-20020a170902d60500b001d8f81ecea1sm2416335plp.172.2024.02.13.11.17.51
+ b5-20020a170902d60500b001d8f81ecea1sm2416335plp.172.2024.02.13.11.17.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 13 Feb 2024 11:17:54 -0800 (PST)
+ Tue, 13 Feb 2024 11:17:42 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
@@ -67,16 +66,14 @@ Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  thuth@redhat.com, lvivier@redhat.com, pbonzini@redhat.com,
  ajones@ventanamicro.com, alex.bennee@linaro.org,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH 3/6] hw/riscv/virt.c: create '/soc/pci@...' fdt node earlier
-Date: Tue, 13 Feb 2024 16:17:33 -0300
-Message-ID: <20240213191736.733334-4-dbarboza@ventanamicro.com>
+Subject: [PATCH 0/6] libqos, riscv: libqos fixes, add riscv machine
+Date: Tue, 13 Feb 2024 16:17:30 -0300
+Message-ID: <20240213191736.733334-1-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240213191736.733334-1-dbarboza@ventanamicro.com>
-References: <20240213191736.733334-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x629.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -99,51 +96,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hotplugged FDT nodes will attempt to write this node that, at this
-moment, is being created only in create_fdt_pcie() during
-finalize_fdt().
+Hi,
 
-Create it earlier.
+This series adds a RISC-V 'virt' libqos machine. It's copied from the
+existing ARM machine in arm-virt-machine.c.
 
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- hw/riscv/virt.c | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+Due to the increase of test coverage I found out 2 bugs in the virtio
+layer of libqos. Patch 1 is a bug related to unintialized guest pages
+from guest_alloc() being used, patch 2 is an error in an offset of a
+struct. My educated guess on why other boards don't fail these tests
+is that either their guest pages happens to be zeroed or happens to have
+a certain value that doesn't affect the tests. 
 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index fd35c74781..b540f4d3da 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -826,7 +826,6 @@ static void create_fdt_pcie(RISCVVirtState *s, const MemMapEntry *memmap,
+Patches 3, 4 and 5 are changes in the RISC-V 'virt' machine required to
+make all tests pass.
+
+Patch 6 adds the RISC-V virt machine nodes. As I said, it's a declared
+copy of arm-virt-machine.c with extra steps. One of them is to edit the
+attributes of the generic-pcihost liqos driver to fit RISC-V needs,
+since some of its attributes (ecam, pio_base and so on) are hardcoded to
+the values that the ARM 'virt' machine uses. If desired, we can change
+generic-pcihost to be more flexible and not hardcode any machine/arch
+specific value.
  
-     name = g_strdup_printf("/soc/pci@%lx",
-         (long) memmap[VIRT_PCIE_ECAM].base);
--    qemu_fdt_add_subnode(ms->fdt, name);
-     qemu_fdt_setprop_cell(ms->fdt, name, "#address-cells",
-         FDT_PCI_ADDR_CELLS);
-     qemu_fdt_setprop_cell(ms->fdt, name, "#interrupt-cells",
-@@ -996,6 +995,7 @@ static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap)
- {
-     MachineState *ms = MACHINE(s);
-     uint8_t rng_seed[32];
-+    g_autofree char *name = NULL;
- 
-     ms->fdt = create_device_tree(&s->fdt_size);
-     if (!ms->fdt) {
-@@ -1014,6 +1014,13 @@ static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap)
-     qemu_fdt_setprop_cell(ms->fdt, "/soc", "#size-cells", 0x2);
-     qemu_fdt_setprop_cell(ms->fdt, "/soc", "#address-cells", 0x2);
- 
-+    /*
-+     * The "/soc/pci@..." node is needed for PCIE hotplugs
-+     * that might happen before finalize_fdt().
-+     */
-+    name = g_strdup_printf("/soc/pci@%lx", (long) memmap[VIRT_PCIE_ECAM].base);
-+    qemu_fdt_add_subnode(ms->fdt, name);
-+
-     qemu_fdt_add_subnode(ms->fdt, "/chosen");
- 
-     /* Pass seed to RNG */
+
+Alex: I'm CCing you because I noticed that you reviewed bug fixes in
+libqos/virtio in the past, figured you have some expertise to share
+here.
+
+
+Patches based on master.
+
+
+Daniel Henrique Barboza (6):
+  libqos/virtio.c: init all elems in qvring_indirect_desc_setup()
+  libqos/virtio.c: fix 'avail_event' offset in qvring_init()
+  hw/riscv/virt.c: create '/soc/pci@...' fdt node earlier
+  hw/riscv/virt.c: add virtio-iommu-pci hotplug support
+  hw/riscv/virt.c: make aclint compatible with 'qtest' accel
+  tests/libqos: add riscv/virt machine nodes
+
+ hw/riscv/virt.c                         |  97 ++++++++++++-----
+ tests/qtest/libqos/meson.build          |   1 +
+ tests/qtest/libqos/riscv-virt-machine.c | 137 ++++++++++++++++++++++++
+ tests/qtest/libqos/virtio.c             |  27 +++--
+ 4 files changed, 228 insertions(+), 34 deletions(-)
+ create mode 100644 tests/qtest/libqos/riscv-virt-machine.c
+
 -- 
 2.43.0
 
