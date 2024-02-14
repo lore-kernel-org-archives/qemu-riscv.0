@@ -4,86 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47E5AC48260
-	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Feb 2024 19:19:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3833CC48BC1
+	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Feb 2024 13:27:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rZyI8-0000wb-4T; Tue, 13 Feb 2024 14:18:04 -0500
+	id 1raFHp-0005Uy-Ep; Wed, 14 Feb 2024 08:26:53 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rZyI6-0000wB-5g
- for qemu-riscv@nongnu.org; Tue, 13 Feb 2024 14:18:02 -0500
-Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
+ id 1raFHn-0005UW-Oc
+ for qemu-riscv@nongnu.org; Wed, 14 Feb 2024 08:26:51 -0500
+Received: from mail-pg1-x52c.google.com ([2607:f8b0:4864:20::52c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rZyI4-0001ri-KB
- for qemu-riscv@nongnu.org; Tue, 13 Feb 2024 14:18:01 -0500
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-1d7881b1843so42925495ad.3
- for <qemu-riscv@nongnu.org>; Tue, 13 Feb 2024 11:18:00 -0800 (PST)
+ id 1raFHl-0005wg-7d
+ for qemu-riscv@nongnu.org; Wed, 14 Feb 2024 08:26:51 -0500
+Received: by mail-pg1-x52c.google.com with SMTP id
+ 41be03b00d2f7-5dc816e4affso1631007a12.2
+ for <qemu-riscv@nongnu.org>; Wed, 14 Feb 2024 05:26:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1707851879; x=1708456679; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=7cY4ikSKCxmC+6uAkCnxF29PkaA1kZnfjTko29Y6DKw=;
- b=JD8uPbGbtVDFK7g4RX7OYvoZMTCl8g9O1lFN+EIfCExHleiOSMsFq2CCmO5KQPNeo6
- 9ySVH9aCR4WFsjOP7kC76ayQJoZ427P0BP8xtGRaCPwHrt+euzqKDaiB8pthVF/YcYd1
- nJ5/kUTkdxALjiVc5D0pkFy9go1IHQq7JCaMIovSV2bp+ftMbg9B1l7VarOYQMlXlOMs
- NGxZyWm28Z/Y3AhfLNl6PSSpCL+Mw7t/vPV/MUJGPRVQpSH34rVpswDe1r5oesRwqTVg
- QmvX8V/1bim3wjhrK0fRwBAXMvQHO/U+98oG2fphTI0gNU+wh+5/+JiFcdMIy6FowlBa
- KKqA==
+ d=ventanamicro.com; s=google; t=1707917207; x=1708522007; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=JUH6yU1PblzidNSmOOdLIwRJdms6r64ppT3R6wX7CRQ=;
+ b=HIxg7C5O4jxzAvVDhVBumSj7gtCG/0/Xn3RW0A2JambB7M+dW0LhWUPe6kQsyGZRPv
+ IVMRNapq0TyKyXaMYRfc6z6StrjWE1JtzUPYlJ0y5Zmfz+Pe+Dbp6clQ/OOoPeUZYHT5
+ q2TePtJE8zoAmnvKSgjoWnRzhcyH9J6XdobgboEsfgNQTPJGAjW0uEsw/CcPEOh6tMao
+ VOkhMNmt+5xED4b4vyiHamj5u1wgTlUXX0kSsT6Ywd7hT+DVRAdfhkHWsBDJSCE9kpfp
+ LVzQmYlHw+cVT3Wqm1AxYrr3NOyoDVyREBOFuDXIojfwCiJ9p6gz1uNyTdqwnu6xetAR
+ C6og==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707851879; x=1708456679;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=7cY4ikSKCxmC+6uAkCnxF29PkaA1kZnfjTko29Y6DKw=;
- b=gGq/Cr3gndBTubhsMdZ1WJBlUQSBB+1UgMFxu7x1bpbJ+HCAFp69B3SXwRLmlDujYc
- iuiuG2KoUWwjcs2qLujpfhzpc/o7nCGRjxyiox/QG8CpAnoss7uZmx5HGiVZ/rP3rI7F
- kXFgxzsJEyvmOiLqEeM+E1e2j3Mn+6jnQzqL/Wwk/crvqPaL1LlT7Ahvao/gcb/rSbsH
- eD7J/bFvbl75CfBgUicFo4hbJl3oIyQ/6a976tqvK3Uy2vXNJBStw2RbudetnoUBmBC2
- ZqWBJOcNWR1gKREovsXeeih4iSM9jXHBSiNvkw6nIvTHsqHaiKM5J5xP55GiQ0acDCRo
- 2ARg==
-X-Gm-Message-State: AOJu0YzBLVQWbV9YeyTKoWYaE/6HZZVB032ObqJhwW5Ws2jNR6sqZHZ8
- Ewmuop4mm9BZrsXYCj9w7ELA3jXCHuHmWyensEddaDzwoDAhJGhTY/UK5GWgb8M=
-X-Google-Smtp-Source: AGHT+IEk+QOkvNBkpHOBHLtndJ4/ttaGauXQdxAWIHbUblo2pPz/8KKw1YD77/xSYra9Hl/bq9TFog==
-X-Received: by 2002:a17:903:25c9:b0:1da:105d:6a88 with SMTP id
- jc9-20020a17090325c900b001da105d6a88mr366567plb.56.1707851879080; 
- Tue, 13 Feb 2024 11:17:59 -0800 (PST)
+ d=1e100.net; s=20230601; t=1707917207; x=1708522007;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=JUH6yU1PblzidNSmOOdLIwRJdms6r64ppT3R6wX7CRQ=;
+ b=d9CsW86moV/P3fevBBJturEys/55YLsjeVZYsHr5sP5hX6ftYj1AuX0DbUu4bnYsNH
+ xDc7v3pt2Hzn8ko34ucSfqhIw7P9fNTfQi2rrJUnB+Slsj+rrkvz7K+iD2pH9X7IpRXs
+ U2euT6+GQtJNeTP1J3WnFNyimEdKw6DQ1TM43BQaryaymBvNwDOCVO49/jjvRNjbtnsg
+ qE50eHzGOalNBeZ3MHHwHcYYAbbjiKgQlYipV39FXj7bvxeYc9+YuVRdo2IgPRY7AsL8
+ RAaCM8c6VghGeudaxxE85ngTc6gseovfyVEvISXCWRx755svl9R7WLR85vqtpORDD34Y
+ EuNg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVmuwCM/ZWDScKMGJ4XSWw/V2n5oALQWpJhd0GPgmLA7HTgB+wYFubhhj6HtG19rIChPvTvo1jeVfoPSKcvU7VJkPgErzWiGGNw+5w1gyr1pYQij7qmf6Ha+qOHw0ogrkeyiao0++vitCJKosCrrVoeyWQJI2bI2g2RiqXW5lFJAN0URtgh29lF5rv/0nWvTmcrleEMKEwlOVzt5EId095DRWUhedqnE3WtR96eDqY2bM71+B8kZyDo5G57dCgZF3G+xFGMrZA77IxcIDFCsmalZMzLJ/opBamPKDZGJDpnCnm7bhdQOwN40j4f6ExW/E474SK7Cxr35cVQERg3GevaD3q2UoqxZj5OtHNtEgr0t/KUtIwPDxASj0Y5C5Oic8MH98yXC9VPm8Wi
-Received: from grind.dc1.ventanamicro.com ([177.94.15.159])
+ AJvYcCUvRBjYVfGNA/DyYdGB7BL/xr3E/I/wNhsIt5Mryngcml6BBMwbA2JD+1G9wxjZ0ZDJkBgWHf5Y4HpLGS5kC5y9ARm0PXk=
+X-Gm-Message-State: AOJu0Ywr+g2YsrsZmyWVIX/IYZPV3qn+lDeEeiwqIz36yYHAe6TuAwse
+ Ujcp0bedXqqY1oijyvH2ZeQYRYBjZeGYPjrQvyKxMlv+v7etT45c9KWWeSOgvlg=
+X-Google-Smtp-Source: AGHT+IF7VpCjZ32uM3BKyzgFc4NxZ5X3kWFTqIqT6tYma2KquLsj84lsagq8gCG3Z7zjz5Jjo/Ixvg==
+X-Received: by 2002:a05:6a20:c907:b0:19e:b192:1daf with SMTP id
+ gx7-20020a056a20c90700b0019eb1921dafmr3689415pzb.56.1707917207423; 
+ Wed, 14 Feb 2024 05:26:47 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWKQra75WAGOAkGrlN+a1Fj5tdaMS3L9H07Py770YkMRUzZlgbqdLJm50Wz/HtHWRy0ejQiniKpoiyw/C3uMZUgD1oC3nLrESY/hyKmvXghoX7t2+GCgaP1VjSyiGkL3d8Bt4FAl7uap8KO4DZj97nlCfMCi8cfuW+WKumoCtL1AMcRK9HA8EI7Iz//Izi/ANDPIiZNlOf16AMTjavv73vTPqremfz0kUVNhRcM7ISI9QDtO1pqwZWAEz7Aed6etYvae6uWITyO5N1P/TbURlnUfN52K4QapZOIj707os7RpqrzCs6nDs1/UoiOI/Du03V63ks=
+Received: from [192.168.68.110] ([177.94.15.159])
  by smtp.gmail.com with ESMTPSA id
- b5-20020a170902d60500b001d8f81ecea1sm2416335plp.172.2024.02.13.11.17.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 13 Feb 2024 11:17:58 -0800 (PST)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- thuth@redhat.com, lvivier@redhat.com, pbonzini@redhat.com,
- ajones@ventanamicro.com, alex.bennee@linaro.org,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH 4/6] hw/riscv/virt.c: add virtio-iommu-pci hotplug support
-Date: Tue, 13 Feb 2024 16:17:34 -0300
-Message-ID: <20240213191736.733334-5-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240213191736.733334-1-dbarboza@ventanamicro.com>
-References: <20240213191736.733334-1-dbarboza@ventanamicro.com>
+ u16-20020a056a00099000b006e054704c7dsm1388142pfg.123.2024.02.14.05.26.43
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 14 Feb 2024 05:26:46 -0800 (PST)
+Message-ID: <f1843cb3-2faf-4a21-b484-5e6b836bd974@ventanamicro.com>
+Date: Wed, 14 Feb 2024 10:26:41 -0300
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] linux-user/riscv: Add Zicboz extensions to hwprobe
+Content-Language: en-US
+To: =?UTF-8?Q?Christoph_M=C3=BCllner?= <christoph.muellner@vrull.eu>,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Andrew Jones <ajones@ventanamicro.com>
+Cc: Laurent Vivier <laurent@vivier.eu>
+References: <20240207115926.887816-1-christoph.muellner@vrull.eu>
+ <20240207115926.887816-2-christoph.muellner@vrull.eu>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20240207115926.887816-2-christoph.muellner@vrull.eu>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x632.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52c;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x52c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,86 +106,39 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-We want to add a RISC-V 'virt' libqos machine to increase our test
-coverage. Some of the tests will try to plug a virtio-iommu-pci
-device into the board and do some tests with it.
 
-Enable virtio-iommu-pci in the 'virt' machine.
 
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- hw/riscv/virt.c | 36 +++++++++++++++++++++++++++++++++++-
- 1 file changed, 35 insertions(+), 1 deletion(-)
+On 2/7/24 08:59, Christoph Müllner wrote:
+> Upstream Linux recently added RISC-V Zicboz support to the hwprobe API.
+> This patch introduces this for QEMU's user space emulator.
+> 
+> Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
+> ---
 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index b540f4d3da..54ad809b44 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -53,6 +53,7 @@
- #include "hw/display/ramfb.h"
- #include "hw/acpi/aml-build.h"
- #include "qapi/qapi-visit-common.h"
-+#include "hw/virtio/virtio-iommu.h"
- 
- /* KVM AIA only supports APLIC MSI. APLIC Wired is always emulated by QEMU. */
- static bool virt_use_kvm_aia(RISCVVirtState *s)
-@@ -971,6 +972,34 @@ static void create_fdt_fw_cfg(RISCVVirtState *s, const MemMapEntry *memmap)
-     qemu_fdt_setprop(ms->fdt, nodename, "dma-coherent", NULL, 0);
- }
- 
-+static void create_fdt_virtio_iommu(RISCVVirtState *s, uint16_t bdf)
-+{
-+    const char compat[] = "virtio,pci-iommu\0pci1af4,1057";
-+    void *fdt = MACHINE(s)->fdt;
-+    uint32_t iommu_phandle;
-+    g_autofree char *iommu_node = NULL;
-+    g_autofree char *pci_node = NULL;
-+
-+    pci_node = g_strdup_printf("/soc/pci@%lx",
-+                               (long) virt_memmap[VIRT_PCIE_ECAM].base);
-+    iommu_node = g_strdup_printf("%s/virtio_iommu@%x,%x", pci_node,
-+                                 PCI_SLOT(bdf), PCI_FUNC(bdf));
-+    iommu_phandle = qemu_fdt_alloc_phandle(fdt);
-+
-+    qemu_fdt_add_subnode(fdt, iommu_node);
-+
-+    qemu_fdt_setprop(fdt, iommu_node, "compatible", compat, sizeof(compat));
-+    qemu_fdt_setprop_sized_cells(fdt, iommu_node, "reg",
-+                                 1, bdf << 8, 1, 0, 1, 0,
-+                                 1, 0, 1, 0);
-+    qemu_fdt_setprop_cell(fdt, iommu_node, "#iommu-cells", 1);
-+    qemu_fdt_setprop_cell(fdt, iommu_node, "phandle", iommu_phandle);
-+
-+    qemu_fdt_setprop_cells(fdt, pci_node, "iommu-map",
-+                           0, iommu_phandle, 0, bdf,
-+                           bdf + 1, iommu_phandle, bdf + 1, 0xffff - bdf);
-+}
-+
- static void finalize_fdt(RISCVVirtState *s)
- {
-     uint32_t phandle = 1, irq_mmio_phandle = 1, msi_pcie_phandle = 1;
-@@ -1680,7 +1709,8 @@ static HotplugHandler *virt_machine_get_hotplug_handler(MachineState *machine,
- {
-     MachineClass *mc = MACHINE_GET_CLASS(machine);
- 
--    if (device_is_dynamic_sysbus(mc, dev)) {
-+    if (device_is_dynamic_sysbus(mc, dev) ||
-+        object_dynamic_cast(OBJECT(dev), TYPE_VIRTIO_IOMMU_PCI)) {
-         return HOTPLUG_HANDLER(machine);
-     }
-     return NULL;
-@@ -1699,6 +1729,10 @@ static void virt_machine_device_plug_cb(HotplugHandler *hotplug_dev,
-                                      SYS_BUS_DEVICE(dev));
-         }
-     }
-+
-+    if (object_dynamic_cast(OBJECT(dev), TYPE_VIRTIO_IOMMU_PCI)) {
-+        create_fdt_virtio_iommu(s, pci_get_bdf(PCI_DEVICE(dev)));
-+    }
- }
- 
- static void virt_machine_class_init(ObjectClass *oc, void *data)
--- 
-2.43.0
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
+>   linux-user/syscall.c | 3 +++
+>   1 file changed, 3 insertions(+)
+> 
+> diff --git a/linux-user/syscall.c b/linux-user/syscall.c
+> index e384e14248..43467c9707 100644
+> --- a/linux-user/syscall.c
+> +++ b/linux-user/syscall.c
+> @@ -8799,6 +8799,7 @@ static int do_getdents64(abi_long dirfd, abi_long arg2, abi_long count)
+>   #define     RISCV_HWPROBE_EXT_ZBA      (1 << 3)
+>   #define     RISCV_HWPROBE_EXT_ZBB      (1 << 4)
+>   #define     RISCV_HWPROBE_EXT_ZBS      (1 << 5)
+> +#define     RISCV_HWPROBE_EXT_ZICBOZ   (1 << 6)
+>   
+>   #define RISCV_HWPROBE_KEY_CPUPERF_0     5
+>   #define     RISCV_HWPROBE_MISALIGNED_UNKNOWN     (0 << 0)
+> @@ -8857,6 +8858,8 @@ static void risc_hwprobe_fill_pairs(CPURISCVState *env,
+>                        RISCV_HWPROBE_EXT_ZBB : 0;
+>               value |= cfg->ext_zbs ?
+>                        RISCV_HWPROBE_EXT_ZBS : 0;
+> +            value |= cfg->ext_zicboz ?
+> +                     RISCV_HWPROBE_EXT_ZICBOZ : 0;
+>               __put_user(value, &pair->value);
+>               break;
+>           case RISCV_HWPROBE_KEY_CPUPERF_0:
 
