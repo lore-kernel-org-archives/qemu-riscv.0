@@ -4,80 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E6BAC48BC4
-	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Feb 2024 21:28:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2032CC4829E
+	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Feb 2024 22:40:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rajH9-0006pU-L8; Thu, 15 Feb 2024 16:28:11 -0500
+	id 1rakPK-0005k2-FK; Thu, 15 Feb 2024 17:40:42 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rajH8-0006oS-6v
- for qemu-riscv@nongnu.org; Thu, 15 Feb 2024 16:28:10 -0500
-Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
+ id 1rakPJ-0005jH-4h
+ for qemu-riscv@nongnu.org; Thu, 15 Feb 2024 17:40:41 -0500
+Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rajH6-0002bI-Hv
- for qemu-riscv@nongnu.org; Thu, 15 Feb 2024 16:28:09 -0500
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-1d7393de183so11695715ad.3
- for <qemu-riscv@nongnu.org>; Thu, 15 Feb 2024 13:28:08 -0800 (PST)
+ id 1rakPH-0006C5-I7
+ for qemu-riscv@nongnu.org; Thu, 15 Feb 2024 17:40:40 -0500
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-1d8ef977f1eso12363695ad.0
+ for <qemu-riscv@nongnu.org>; Thu, 15 Feb 2024 14:40:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1708032487; x=1708637287; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=u7/HDZ1eKbOlVvi62l3szYM6weqK5/jj7KQZeEDO4wY=;
- b=Z8RZtunbQRSlDWP/gT5BCtgrNde5FSbs83co1OE+/8lAjDjgMoyuy7aEIrFwCABWte
- TLJ+shPWLjEa5O87NLTnrqcA/TNlDNBjpN1V815CXfDR9Xx2FQHFhj3Zyuvk1ajfzobe
- aeXJVNnc13qwxeBOB/U7QywEs5ZFC/lMtSMzxhGW3LDZ13LMIs51skFK17plhcFTTeWe
- A/6+ZI+ZYNLrQe1dyYB9JoaDGFOIisRbUYSV1ZmgMaUWCDEBzM9U7d7Jn3RDunJBqMOq
- n5H7xd8VOqu4Sq2Qy1ccuuMOqej7SrSMOs3iuuOiOnpjlcQpET90OzhIh+Y3cRX1SZbh
- sm2w==
+ d=ventanamicro.com; s=google; t=1708036838; x=1708641638; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lTTNcK59UiSXYalt2ktdHl6kS2NT43afEsYVYkGvX6k=;
+ b=Rk29nn/hg2m2WiO+S1DOschvUmvIXi3Y/oPtfUozkXpzlzF6pK/8kzo++RbsqUi4iR
+ SN8d5VMvCYB4RRXJZrzgfvUi05X/hKAyIyc+1HKoW7259h9C7tpXjwGwks9Oic/QQEuP
+ wQY8rLKR0ZeMabKL8vQPmxS2nDUhLHUP0hmncRG6rnD1+atpYgXL0nvH3NZqCtQJr0hD
+ tUkOeRAsO0OS2Dp8isNwC5luaCIzsSt4ClWlyR6qOHTwxnMHrJifxAWuxXpG/7zJwF8m
+ 4KptHUINlTEuKWUJrLDFZH9kpoc8/Wwx6V2cKvBStQZjUs2O4XWh8rcbi28DOQgUZKoW
+ vIrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708032487; x=1708637287;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=u7/HDZ1eKbOlVvi62l3szYM6weqK5/jj7KQZeEDO4wY=;
- b=wAZZ9VlU8wHtwNur2W1kpiZWH7sNEYhKwkVwcDX4a55nT/i1Nx+g/CEkz0c2l2NASx
- ujkm5QRynE/uJhoobRJBhmhYQkL+9fcbdwgaaZAgbujUGpC75Y+b/ayAcEBPnNjx9rlp
- xJelBNJ99g6Ye8S+GeTT7q6HeYrH7Vf3eOrc3ZuQuWP+ZUnkHkJW7JuRU+/MwsaqOGIa
- xOrGZyxCKgmQ/1vT2HKvXH0vcGdMHKP3JumbEue67Z2IlsEHNZadMsuFl9FE0nspK9Fu
- Tvya9QTxq/v+gqhnf/2BYFw+MlGRKPXx5K896uV56fYujPiaFvLWZ4bVE7tIsiw0Q1Ut
- 54Uw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVY6jMrwEdxT6rDI9ve6kBdP65Vyuefm1GQ+EGpx3hFm9oQnXnqUYyEs/Up8aWjB2fuJA7Sy2MwhKyfEI0cIWYIixwukMs=
-X-Gm-Message-State: AOJu0YzMKKb3FSNQNLAeEFXipNFhrPOWCKqQzTY17vYPJi2U6HUPoLqW
- RCTK62A9b3nmQ9KDg6KiLgTuL3ioEID6yAu5uU8h5WdQbdKj+QwIiC54VrQgY7M=
-X-Google-Smtp-Source: AGHT+IFmyZs0ivzRSwZXIPUaWtokwI7xVE3KlSX4ePG5ikKmY5nNk4nNF3g1uTt18AvurUGaQf82PA==
-X-Received: by 2002:a17:902:c40e:b0:1db:5b41:c5ac with SMTP id
- k14-20020a170902c40e00b001db5b41c5acmr3596598plk.68.1708032487113; 
- Thu, 15 Feb 2024 13:28:07 -0800 (PST)
-Received: from [192.168.68.110] ([177.94.15.159])
- by smtp.gmail.com with ESMTPSA id
- ka16-20020a170903335000b001d9ef367c85sm61122plb.104.2024.02.15.13.28.03
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 15 Feb 2024 13:28:06 -0800 (PST)
-Message-ID: <3713703c-7b60-42cf-92a3-198616382022@ventanamicro.com>
-Date: Thu, 15 Feb 2024 18:28:02 -0300
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/6] riscv: named features riscv,isa, 'svade' rework
-Content-Language: en-US
-To: Alistair Francis <alistair23@gmail.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
- palmer@rivosinc.com, ajones@ventanamicro.com
-References: <20240202152154.773253-1-dbarboza@ventanamicro.com>
- <CAKmqyKN0UX_PK5Xiar-PdzJrV=S6+LaX8a3So8uahuqC04Wpvw@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1708036838; x=1708641638;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=lTTNcK59UiSXYalt2ktdHl6kS2NT43afEsYVYkGvX6k=;
+ b=MsjXj09zMLJ0/vtx9J/eAqPp3HYrzKslEpnRFgZx0Q6gUSdX3wdBRVXcgOjA+ATbBI
+ iRovH5Hla4NbSI+RQDZDt/R8Jm6Mqm4wCpkJSyBLGOiDRuJ7ZYhkQREJ2J+yMNX1UyDA
+ UpN9IimpUWUq7gsAlYiCgbaTMh09VSjkKmzTT4aFLHS9KlhGvDpqRwGjJac12KvMKYiE
+ 6XnqgNGoOvPSKiVpWGJY3lLQFII/S9Nay6zQz3D12lz0oDWfRgd3QhxgIOuQ6m/n6VMI
+ 45z+O9l+qi/prZ0bETI07uJ+hlCOlfNo9od7OTgut4+geZdUHdya9Kan7Mq+DRXcVFtJ
+ VLJQ==
+X-Gm-Message-State: AOJu0YwtLVELJFsXeZkJHSBfdzi5z2ojGGvZMt//yKHcQCPeSxk2oHTp
+ OviL7U+KBByOmD9LUkXBlFTf7omVc/QflycBgzYQPbjP9ImpbfC5mUzJ3Qnmx3w=
+X-Google-Smtp-Source: AGHT+IFXEYRKewXhM2hkRWrQtboAGIpmiggQRYIqQJWX1FL7856E0gtqEBWF4t+maF1E9Tn2jdDRLg==
+X-Received: by 2002:a17:902:650e:b0:1d9:7046:fbcd with SMTP id
+ b14-20020a170902650e00b001d97046fbcdmr2734641plk.3.1708036838141; 
+ Thu, 15 Feb 2024 14:40:38 -0800 (PST)
+Received: from grind.. ([177.94.15.159]) by smtp.gmail.com with ESMTPSA id
+ j2-20020a170902758200b001db40866e25sm1733679pll.308.2024.02.15.14.40.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 15 Feb 2024 14:40:37 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <CAKmqyKN0UX_PK5Xiar-PdzJrV=S6+LaX8a3So8uahuqC04Wpvw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ Andrew Jones <ajones@ventanamicro.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH v4 4/6] target/riscv: Reset henvcfg to zero
+Date: Thu, 15 Feb 2024 19:39:53 -0300
+Message-ID: <20240215223955.969568-5-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240215223955.969568-1-dbarboza@ventanamicro.com>
+References: <20240215223955.969568-1-dbarboza@ventanamicro.com>
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x634.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x636.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -100,65 +95,52 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+From: Andrew Jones <ajones@ventanamicro.com>
 
+The hypervisor should decide what it wants to enable. Zero all
+configuration enable bits on reset.
 
-On 2/15/24 06:52, Alistair Francis wrote:
-> On Sat, Feb 3, 2024 at 1:23 AM Daniel Henrique Barboza
-> <dbarboza@ventanamicro.com> wrote:
->>
->> Hi,
->>
->> In this new version we changed patch 3 as suggested by Alistair in v1
->> [1]. Instead of creating individual always-true bool for each named
->> feature, create a bool flag will be always 'true' to be used as config
->> offset for these named extensions.
->>
->> Patches based on riscv-to-apply.next.
->>
->> Patches missing acks: patch 3.
->>
->> Changes from v2:
->> - patch 3:
->>    - 'ext_always_enabled' bool added
->>    - individual always-enabled named features bools removed
->> - v2 link: https://lore.kernel.org/qemu-riscv/20240126133101.61344-8-ajones@ventanamicro.com/
->>
->>
->> [1] https://lore.kernel.org/qemu-riscv/20240125195319.329181-1-dbarboza@ventanamicro.com/
->>
->> Andrew Jones (3):
->>    target/riscv: Reset henvcfg to zero
->>    target/riscv: Gate hardware A/D PTE bit updating
->>    target/riscv: Promote svade to a normal extension
->>
->> Daniel Henrique Barboza (3):
->>    target/riscv/tcg: set 'mmu' with 'satp' in cpu_set_profile()
->>    target/riscv: add riscv,isa to named features
->>    target/riscv: add remaining named features
-> 
-> Do you mind rebasing? I feel bad always asking, but I think it's your
-> patches that cause the conflicts :P
+Also, commit ed67d63798f2 ("target/riscv: Update CSR bits name for
+svadu extension") missed one reference to 'hade'. Change it now.
 
-:)
+Fixes: 0af3f115e68e ("target/riscv: Add *envcfg.HADE related check in address translation")
+Fixes: ed67d63798f2 ("target/riscv: Update CSR bits name for svadu extension")
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Signed-off-by: Andrew Jones <ajones@ventanamicro.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/cpu.c | 3 +--
+ target/riscv/csr.c | 2 +-
+ 2 files changed, 2 insertions(+), 3 deletions(-)
 
-I'll re-send based on current riscv-to-apply.next. Thanks,
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index f424751962..e5eef3a4de 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -961,8 +961,7 @@ static void riscv_cpu_reset_hold(Object *obj)
+ 
+     env->menvcfg = (cpu->cfg.ext_svpbmt ? MENVCFG_PBMTE : 0) |
+                    (cpu->cfg.ext_svadu ? MENVCFG_ADUE : 0);
+-    env->henvcfg = (cpu->cfg.ext_svpbmt ? HENVCFG_PBMTE : 0) |
+-                   (cpu->cfg.ext_svadu ? HENVCFG_ADUE : 0);
++    env->henvcfg = 0;
+ 
+     /* Initialized default priorities of local interrupts. */
+     for (i = 0; i < ARRAY_SIZE(env->miprio); i++) {
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index d4e8ac13b9..cc9cef3d85 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -2133,7 +2133,7 @@ static RISCVException read_henvcfg(CPURISCVState *env, int csrno,
+     /*
+      * henvcfg.pbmte is read_only 0 when menvcfg.pbmte = 0
+      * henvcfg.stce is read_only 0 when menvcfg.stce = 0
+-     * henvcfg.hade is read_only 0 when menvcfg.hade = 0
++     * henvcfg.adue is read_only 0 when menvcfg.adue = 0
+      */
+     *val = env->henvcfg & (~(HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE) |
+                            env->menvcfg);
+-- 
+2.43.0
 
-
-Daniel
-
-> 
-> Alistair
-> 
->>
->>   target/riscv/cpu.c         | 70 +++++++++++++++++++++++++++-----------
->>   target/riscv/cpu_cfg.h     | 12 +++++--
->>   target/riscv/cpu_helper.c  | 19 ++++++++---
->>   target/riscv/csr.c         |  2 +-
->>   target/riscv/tcg/tcg-cpu.c | 34 +++++++++---------
->>   5 files changed, 94 insertions(+), 43 deletions(-)
->>
->> --
->> 2.43.0
->>
->>
 
