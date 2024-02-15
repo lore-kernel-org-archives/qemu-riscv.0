@@ -4,74 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2FCFC4829E
-	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Feb 2024 03:30:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88302C4829E
+	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Feb 2024 03:44:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1raSRy-0001dx-A9; Wed, 14 Feb 2024 22:30:14 -0500
+	id 1raSfi-00071b-TI; Wed, 14 Feb 2024 22:44:26 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1raSRw-0001dH-BK; Wed, 14 Feb 2024 22:30:12 -0500
-Received: from mail-vk1-xa2d.google.com ([2607:f8b0:4864:20::a2d])
+ id 1raSfh-0006zW-9p; Wed, 14 Feb 2024 22:44:25 -0500
+Received: from mail-vk1-xa33.google.com ([2607:f8b0:4864:20::a33])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1raSRu-0001Cd-Sh; Wed, 14 Feb 2024 22:30:12 -0500
-Received: by mail-vk1-xa2d.google.com with SMTP id
- 71dfb90a1353d-4c02be905beso161658e0c.0; 
- Wed, 14 Feb 2024 19:30:09 -0800 (PST)
+ id 1raSff-00054U-R7; Wed, 14 Feb 2024 22:44:25 -0500
+Received: by mail-vk1-xa33.google.com with SMTP id
+ 71dfb90a1353d-4c03beb85f4so136312e0c.3; 
+ Wed, 14 Feb 2024 19:44:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1707967808; x=1708572608; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1707968662; x=1708573462; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RNGomPDX6/n0GPJQ2om3EaZPlyvRLiZOS+MVM+WRFv0=;
- b=LV1YdWHSBotaS4iOrtqCHquFaCqloVASduAMXBjb1KEOAn5kAV8Esssdnd9oXgkhuD
- KVz+SjnYaGdLY2vOYQjg2yH6e9RDfUrGYpHsdIzmt/PbFqetNIZEW/VEmww7hl57swAH
- Lezotm9HkCQjdLB1WzltqgKPhI4uAnpi/Hm40cy/k+hRvrj5BBINUO/2Zo+Jn6+QFVrF
- +GSrlP9gH3t0CSVX6zql4nOcmeu4nP6YgPONK9ORHUB3aC3ycuU4wNppj+zm5KX4uKye
- heG/5xatGJrf1Bd2iTm9lPZQpkFfCkUhSDlVE04zfqDFqqUH3zNrbgz1NxmiP/LY2HCE
- qTgQ==
+ bh=Xg45U+LGB/3Z91KOOKjGOKytTJWOljhWEztTKfhaMWQ=;
+ b=KnhZOX+6e7gGwPEbMvWrA6XnBG3SPmOpuSwMQiKCMg7jJWDFWn/ic7NGDN+gUq+/uP
+ Ni+fLFfNMl0iI4x9bTA44n6zc5JwklJYWDjmj+cQrBag/Y4dAgIjof4/dOfcqgtfjwUj
+ E9UnPJzgA1CYFaQqoLNvzOmk9o8khaScA725Y/iFXKY15JZyR76K3yByTxUlYR5tIcmr
+ A4wE28DpmdzIRYX+5q4cCwUsCmdTh2PCRDF2shma4x5W7Vit+MezAUkWfIw4/zHKXv7P
+ WOiUmNOULE+uNukAo8t/YFxLbmFDEpMe5ivVdKEM8nygZXKbslHt2XM4LX6RWnl7usui
+ Mm/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707967808; x=1708572608;
+ d=1e100.net; s=20230601; t=1707968662; x=1708573462;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RNGomPDX6/n0GPJQ2om3EaZPlyvRLiZOS+MVM+WRFv0=;
- b=B6hJvjBhoGqb42DrgwofKQ4Pm+FJSjWXA0rem2TBvdwrxIM6H4/LyirGYJ80taKMd7
- JoFuqv+RbFm3iIxJ0+O/LJvtefcy/KcShLHA1jVnlI5SQdpDmioMriMQ34v2Zc1LWXlc
- 0tyZZcaoLbXs5Gdf/ru2j+x2WjVXjHKkRSSyyNzVTyWLYCp5emGKIyQplshyCgaZPefg
- XyUbKvr6LJCa2U3S/7iy8yD15fOcEGGEabfI6mvcG2NHRI2ttTJhtcnMWtv9laQIPAHO
- NQoYFwyF+sqYVo4j0AVVinn3it/BlhI0ZN0pOWbKWq2KEm4WHmuPSay8KuZ1vcS8w8uh
- pU9Q==
+ bh=Xg45U+LGB/3Z91KOOKjGOKytTJWOljhWEztTKfhaMWQ=;
+ b=FdMW8pGdEcCpPM4XXLI6iVCww32x3sIvR4aIsnSeeuZ578DeI/81S84Mv/wMxrvW/L
+ SbIAAncrCHgA/F6anwEH2B0nwp5QpHD39yVOBGokCXkYKPLl1wE2fwox81+MpBjF0xCQ
+ QOCgpEAgczOT/WkWQ9nLbSx8xYlCCULkYRvYdGCDY10KlEjyeRqyU6m8tqszvam0e4H0
+ kwmicVrCR/uAxgLS0PI9M9fOEQGnz2Jyo79v2VjrIWhpGaWcWkXyYFDcpW7u0orksStT
+ DNgXfdTXBn0U3REjeV5oNljW/oEFdapiRLJR19wSQmV3TqgS/M/mooyL2f+z5GmalWEf
+ /jyw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXroDL8mFwhAiCBJh3rg0oDeSOvBEhriYeFTFDNCUD2kXaPe3SIkRgaekuFhbF+dPurWLQvPU+UNlrbahaYjb4ZA0smHjMWlPi5JHz/dad9gyJhfpAHs+tijPksSQ==
-X-Gm-Message-State: AOJu0Yxv/ILeICMpItSsnVuAgxnhki/rK7ycZ274WEGSojPDoDHHioSY
- Vx18Sqm7Vvf0pIVBsznDixUWJ6l20Hc8G7KA+RtNHnrS40GJF75MCMiEkXuZ3JbqhibklqpTAOW
- AxWu3i2v/jHAx+jRh5LGCHmusAAU=
-X-Google-Smtp-Source: AGHT+IFZ8hMSNz4RfFWqoGGFdjxly4BAsGYUNRrNST7jzI3O7M8+hAi5i/0dBaSisSFlBRbgtqbGYmJ+Bl4ICF4cMX4=
-X-Received: by 2002:a1f:ccc7:0:b0:4c0:21c4:3a9b with SMTP id
- c190-20020a1fccc7000000b004c021c43a9bmr371309vkg.15.1707967808536; Wed, 14
- Feb 2024 19:30:08 -0800 (PST)
+ AJvYcCUli0fmHFIIX7YHwhtFnK5BweysLjWm0Q2eY+kDZbpK+WFciBhWQbrfmhiWxUs7puWy96l1C/S2WNDgUrNJRPyBZxZro8E=
+X-Gm-Message-State: AOJu0YyxqOy6aMd+aG2xnrqawMx+XfLbXHcWE3bmj5ynVUldXVglpz+G
+ ERaeyVeNrMWgJg1OHdNrrSY6Zlm1iO9H5FMbmm7Oj/eyS1kVK/8isb6ij+qSYITY+2fpy8pK40J
+ gb1aLu305Vu+O4wtDWiSjycWdafE=
+X-Google-Smtp-Source: AGHT+IHow7+H5AKYpRNy/Gjnqj7UqYbammXezmkE7A9/5EEoluQdFhHJDBTjDcQysJ05riRi+huNr/U38ZTTsctGQTw=
+X-Received: by 2002:a1f:dd02:0:b0:4c0:1937:d29d with SMTP id
+ u2-20020a1fdd02000000b004c01937d29dmr516374vkg.6.1707968662269; Wed, 14 Feb
+ 2024 19:44:22 -0800 (PST)
 MIME-Version: 1.0
-References: <20240116010930.43433-1-jeeheng.sia@starfivetech.com>
- <20240116010930.43433-3-jeeheng.sia@starfivetech.com>
-In-Reply-To: <20240116010930.43433-3-jeeheng.sia@starfivetech.com>
+References: <20240109145923.37893-1-irina.ryapolova@syntacore.com>
+In-Reply-To: <20240109145923.37893-1-irina.ryapolova@syntacore.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 15 Feb 2024 13:29:42 +1000
-Message-ID: <CAKmqyKMNma6GM6xBMH7Ywbb1CxkbyACK0yx+8jYoGqdGd=4AzQ@mail.gmail.com>
-Subject: Re: [PATCH v2 2/2] hw/riscv/virt-acpi-build.c: Generate SPCR table
-To: Sia Jee Heng <jeeheng.sia@starfivetech.com>
-Cc: qemu-arm@nongnu.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- mst@redhat.com, imammedo@redhat.com, anisinha@redhat.com, 
- peter.maydell@linaro.org, shannon.zhaosl@gmail.com, sunilvl@ventanamicro.com, 
- palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
- liwei1518@gmail.com, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com
+Date: Thu, 15 Feb 2024 13:43:56 +1000
+Message-ID: <CAKmqyKMpdk0p7g_MYANKNy_O5kTqO1j-cwqtxGq4Fftkdpta=g@mail.gmail.com>
+Subject: Re: [PATCH v3 1/2] target/riscv: FIX xATP_MODE validation
+To: Irina Ryapolova <irina.ryapolova@syntacore.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com, 
+ alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com, 
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2d;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a33;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa33.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -95,13 +92,22 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jan 16, 2024 at 11:11=E2=80=AFAM Sia Jee Heng
-<jeeheng.sia@starfivetech.com> wrote:
+On Wed, Jan 10, 2024 at 1:00=E2=80=AFAM Irina Ryapolova
+<irina.ryapolova@syntacore.com> wrote:
 >
-> Generate Serial Port Console Redirection Table (SPCR) for RISC-V
-> virtual machine.
+> The SATP register is an SXLEN-bit read/write WARL register. It means that=
+ CSR fields are only defined
+> for a subset of bit encodings, but allow any value to be written while gu=
+aranteeing to return a legal
+> value whenever read (See riscv-privileged-20211203, SATP CSR).
 >
-> Signed-off-by: Sia Jee Heng <jeeheng.sia@starfivetech.com>
+> For example on rv64 we are trying to write to SATP CSR val =3D 0x10000000=
+00000000 (SATP_MODE =3D 1 - Reserved for standard use)
+> and after that we are trying to read SATP_CSR. We read from the SATP CSR =
+value =3D 0x1000000000000000, which is not a correct
+> operation (return illegal value).
+>
+> Signed-off-by: Irina Ryapolova <irina.ryapolova@syntacore.com>
 > Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
@@ -109,71 +115,33 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  hw/riscv/virt-acpi-build.c | 39 ++++++++++++++++++++++++++++++++++++++
->  1 file changed, 39 insertions(+)
+> Changes for v2:
+>   -used satp_mode.map instead of satp_mode.supported
+> Changes for v3:
+>   -patch formatting corrected
+> ---
+>  target/riscv/csr.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 >
-> diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
-> index 26c7e4482d..7fc5071c84 100644
-> --- a/hw/riscv/virt-acpi-build.c
-> +++ b/hw/riscv/virt-acpi-build.c
-> @@ -174,6 +174,42 @@ acpi_dsdt_add_uart(Aml *scope, const MemMapEntry *ua=
-rt_memmap,
->      aml_append(scope, dev);
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index fde7ce1a53..735fb27be7 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -1278,8 +1278,8 @@ static RISCVException read_mstatus(CPURISCVState *e=
+nv, int csrno,
+>
+>  static bool validate_vm(CPURISCVState *env, target_ulong vm)
+>  {
+> -    return (vm & 0xf) <=3D
+> -           satp_mode_max_from_map(riscv_cpu_cfg(env)->satp_mode.map);
+> +    uint64_t mode_supported =3D riscv_cpu_cfg(env)->satp_mode.map;
+> +    return get_field(mode_supported, (1 << vm));
 >  }
 >
-> +/*
-> + * Serial Port Console Redirection Table (SPCR)
-> + * Rev: 1.07
-> + */
-> +
-> +static void
-> +spcr_setup(GArray *table_data, BIOSLinker *linker, RISCVVirtState *s)
-> +{
-> +    AcpiSpcrData serial =3D {
-> +        .interface_type =3D 0,       /* 16550 compatible */
-> +        .base_addr.id =3D AML_AS_SYSTEM_MEMORY,
-> +        .base_addr.width =3D 32,
-> +        .base_addr.offset =3D 0,
-> +        .base_addr.size =3D 1,
-> +        .base_addr.addr =3D s->memmap[VIRT_UART0].base,
-> +        .interrupt_type =3D (1 << 4),/* Bit[4] RISC-V PLIC/APLIC */
-> +        .pc_interrupt =3D 0,
-> +        .interrupt =3D UART0_IRQ,
-> +        .baud_rate =3D 7,            /* 15200 */
-> +        .parity =3D 0,
-> +        .stop_bits =3D 1,
-> +        .flow_control =3D 0,
-> +        .terminal_type =3D 3,        /* ANSI */
-> +        .language =3D 0,             /* Language */
-> +        .pci_device_id =3D 0xffff,   /* not a PCI device*/
-> +        .pci_vendor_id =3D 0xffff,   /* not a PCI device*/
-> +        .pci_bus =3D 0,
-> +        .pci_device =3D 0,
-> +        .pci_function =3D 0,
-> +        .pci_flags =3D 0,
-> +        .pci_segment =3D 0,
-> +    };
-> +
-> +    build_spcr(table_data, linker, &serial, 2, s->oem_id, s->oem_table_i=
-d);
-> +}
-> +
->  /* RHCT Node[N] starts at offset 56 */
->  #define RHCT_NODE_ARRAY_OFFSET 56
->
-> @@ -555,6 +591,9 @@ static void virt_acpi_build(RISCVVirtState *s, AcpiBu=
-ildTables *tables)
->      acpi_add_table(table_offsets, tables_blob);
->      build_rhct(tables_blob, tables->linker, s);
->
-> +    acpi_add_table(table_offsets, tables_blob);
-> +    spcr_setup(tables_blob, tables->linker, s);
-> +
->      acpi_add_table(table_offsets, tables_blob);
->      {
->          AcpiMcfgInfo mcfg =3D {
+>  static target_ulong legalize_mpp(CPURISCVState *env, target_ulong old_mp=
+p,
 > --
-> 2.34.1
+> 2.25.1
 >
 >
 
