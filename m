@@ -4,92 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6B53C4829E
-	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Feb 2024 20:07:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F135CC4829E
+	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Feb 2024 20:09:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rai0r-00060S-Qg; Thu, 15 Feb 2024 15:07:17 -0500
+	id 1rai2o-0007aK-Um; Thu, 15 Feb 2024 15:09:18 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rai0q-0005t8-KS
- for qemu-riscv@nongnu.org; Thu, 15 Feb 2024 15:07:16 -0500
-Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1rai2o-0007a7-3w
+ for qemu-riscv@nongnu.org; Thu, 15 Feb 2024 15:09:18 -0500
+Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rai0o-00043l-Kb
- for qemu-riscv@nongnu.org; Thu, 15 Feb 2024 15:07:16 -0500
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-561587ce966so2492971a12.1
- for <qemu-riscv@nongnu.org>; Thu, 15 Feb 2024 12:07:14 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1rai2m-0004Ds-Lk
+ for qemu-riscv@nongnu.org; Thu, 15 Feb 2024 15:09:17 -0500
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-1d7232dcb3eso10441085ad.2
+ for <qemu-riscv@nongnu.org>; Thu, 15 Feb 2024 12:09:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708027632; x=1708632432; darn=nongnu.org;
+ d=linaro.org; s=google; t=1708027755; x=1708632555; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=ZmI/qXqvBC4G+5ykIK4JRiBXGGdwJnEinXFvnol2i/M=;
- b=gXcJeQ4YspBSbq31sEGjl9FQ3nw3KiVx2nDpxBLl6t6YANgWQlgka4lMUmFbZkTxs1
- iPJo/kNys+6XFj5bAEjY0ipG/GYnurEMd/x4NXj2/GeqmgJgGMBJXh4IaAcgY1883j+z
- J+Z0/dfc0474EpJ1BC54OGrSveCbWXaleaDNs8k5ornKOf3+Pwpc9w41nNGmymTV02x0
- UEWkGpcarR+iemyD2qWH9wi75vFPqayDUHF1r49iJw4kQ5ilQBQ7JfgDZrdDG3m9tQVo
- 9I9thSOrgTRRJk3C7X4hUT4ZXtC68GrgKTvHempsz6xtnCf+gm3CECWx+iowTbUqTYZT
- 0yLw==
+ bh=0FEc4bzySbDLp/Zv8hWKPlmHTGgcWjeDSlRGZ8d4Glw=;
+ b=z4NfhzhPixNxUp8p1rHbKVB4OZTfTn3FYDzWQv9DYfdvYvFYnO+hdS3llpUZB3l1rj
+ 8mt+iMFPcAC9aYD10gS5jO//WbGtNTMuVcx1BqbQTT9k29dVaHmsykwBNOuESFuL3j/r
+ kM4i1Y5j6WhmSGslLex+JusaUHiyRMG0pZBLO6ANGLSv5jAl1I+jJMAlstU7vmMp8XeL
+ i/6ckeByc72UvNz9c45VIhUGYltzXe0DlB0PnIK3sSI0btPBMUIl3iSsDRD1Cw9Agg08
+ mLiXmDLzLy9HMTD3waOKg5EawKps3eczTGA1IA4HIMQO4xpMH7cYKB3SbAiSOlTUQyOa
+ 2Y6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708027632; x=1708632432;
+ d=1e100.net; s=20230601; t=1708027755; x=1708632555;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ZmI/qXqvBC4G+5ykIK4JRiBXGGdwJnEinXFvnol2i/M=;
- b=l5KwhhXVWycO1xo7y+rKqbfeurcwi9rzM/Pi2ajhwPhglZ4hjux9KGchl3FTbKMVns
- Ummwyl6orxMVBidNbU0kf/lcQ6lbkfbg65Fym4oGUxaqiM5o5gXxeh2C+I8roWooAn47
- TXbN5bArqqbKTpstxDYBqvF17k0+zk4SYiHpWmW8RocV5DsBaTIDytjdIzbqGmlQqzsw
- sX6Od/9TZFVCoboMc+K3gQjDhoic+6nf2EdIvdlkrDmJdCPXDzU6dz3iYCTHxr7dNzrb
- WsdcRB2HTd4j9cco17B2glshHgykR/lukLsWzvW8d366GdqVN0QHY4GMdCmI2BaBl4gj
- I+Hg==
+ bh=0FEc4bzySbDLp/Zv8hWKPlmHTGgcWjeDSlRGZ8d4Glw=;
+ b=tVeCiNpQhdpQzjwdlY2MsMOqRsnHH4ppXqF65fLYNdhTIqXy1uxd/e8CNMjyDyTJsH
+ u5gX6I4dUyq9geDQ97qhkndbQIIA+/ml0B8wfUUnQfB0iwOMu2y9VY0gswGo/zCgp7hU
+ J3HD5ot5dWRp3uJxewYH7t7qx299Bjm3XoPRnch0KQDgsNtHSzQHTaBi2ANtOpxvPqpH
+ /ANTKoOMYE6TvLYH3LBEV4fIb6adec/o1hT0a1cLUVab2BjZYjpkcoy6x8+kabHZmBub
+ 1Uc1SIheihICp1OQgzaLr4Eke6ZkN+OFWfbWcpETQ+1fflAkRtqSRgFcMwGo3UYnbLpk
+ AgHw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVQnOp4EmVpBHVJxqAJ9WYSPYBUtLWBBeid9Dq7fKX9yZZlLCAgBQ2ZaCSkTrgoAx8nJMoRlrjVcKg1aI51NRMeeCQZnvI=
-X-Gm-Message-State: AOJu0YxGqW38MqCD6MLQnOOPR3SpLcFDICHCe/tLImYQNfO5tl/L0H7f
- iCDucbdEsCPaa3tl6VOpRsP7S8HXbTupJO1gq/heUPT3PjNy6U/vkcFvbFMh4eo=
-X-Google-Smtp-Source: AGHT+IEavLD2jtewehmuf2W4DDIOilRaPboL+020362tIU3AfHzgmWYC5Iu8gk8XRBYnRS7N7cndkA==
-X-Received: by 2002:a05:6402:24a1:b0:561:3b53:d0af with SMTP id
- q33-20020a05640224a100b005613b53d0afmr5748283eda.12.1708027632203; 
- Thu, 15 Feb 2024 12:07:12 -0800 (PST)
-Received: from [192.168.69.100] ([176.187.193.50])
- by smtp.gmail.com with ESMTPSA id
- x6-20020a056402414600b00563c179b993sm557345eda.11.2024.02.15.12.07.10
+ AJvYcCVG3Th7tmnZZZZlMub2uZ0MCgPF5dAhbSIP4KGhNaKgPnbN/2qAsFy4Jz94md4BtO57utEcECJwGFyQhC4wARpky+uZvbk=
+X-Gm-Message-State: AOJu0Yzcgi2DOvjoHWKYrVgYnkA7/gmfIv9fqtI0rERigJT4Nvm23nqp
+ gZY1xIet623QUNQ8iSuDR7aJBHnZvtauV6DxebuiGdPJ3QyaHHKPjaRz1O1ch1o=
+X-Google-Smtp-Source: AGHT+IGBb1xFfV1hpqCVcmSQEuvagjMs5RLboDbkCIkltu4TdPrkHz4NN/jJw+OOrHlNxwhqXunbvA==
+X-Received: by 2002:a17:902:e5d1:b0:1d7:17e6:44df with SMTP id
+ u17-20020a170902e5d100b001d717e644dfmr3703178plf.14.1708027755182; 
+ Thu, 15 Feb 2024 12:09:15 -0800 (PST)
+Received: from [172.20.1.19] (173-197-098-125.biz.spectrum.com.
+ [173.197.98.125]) by smtp.gmail.com with ESMTPSA id
+ d23-20020a170902729700b001d8a93fa5b1sm1634176pll.131.2024.02.15.12.09.13
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 15 Feb 2024 12:07:11 -0800 (PST)
-Message-ID: <98a45842-0ce4-4271-b503-f96ef7f0777b@linaro.org>
-Date: Thu, 15 Feb 2024 21:07:09 +0100
+ Thu, 15 Feb 2024 12:09:14 -0800 (PST)
+Message-ID: <ffd49534-9080-4f86-b0a7-b3b9e2e4e361@linaro.org>
+Date: Thu, 15 Feb 2024 10:09:11 -1000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH] tests/tcg: update licenses to GPLv2 as intended
+Subject: Re: [RFC PATCH 3/6] target/riscv: Inline vext_ldst_us and
+ coressponding function for performance
 Content-Language: en-US
-To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
- qemu-devel@nongnu.org
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Eduardo Habkost <eduardo@habkost.net>, Palmer Dabbelt <palmer@dabbelt.com>,
+To: Max Chou <max.chou@sifive.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: dbarboza@ventanamicro.com, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- "open list:ARM TCG CPUs" <qemu-arm@nongnu.org>,
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
-References: <20240215184036.214065-1-alex.bennee@linaro.org>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20240215184036.214065-1-alex.bennee@linaro.org>
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+References: <20240215192823.729209-1-max.chou@sifive.com>
+ <20240215192823.729209-4-max.chou@sifive.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20240215192823.729209-4-max.chou@sifive.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::530;
- envelope-from=philmd@linaro.org; helo=mail-ed1-x530.google.com
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x635.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,31 +103,18 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 15/2/24 19:40, Alex Bennée wrote:
-> My default header template is GPLv3 but for QEMU code we really should
-> stick to GPLv2-or-later (allowing others to up-license it if they
-> wish). While this is test code we should still be consistent on the
-> source distribution.
-> 
-> I wrote all of this code so its not a problem. However there remains
-> one GPLv3 file left which is the crt0-tc2x.S for TriCore.
-> 
-> Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-> ---
->   tests/tcg/aarch64/semicall.h                      | 4 ++--
->   tests/tcg/arm/semicall.h                          | 4 ++--
->   tests/tcg/multiarch/float_helpers.h               | 4 ++--
->   tests/tcg/riscv64/semicall.h                      | 4 ++--
->   tests/tcg/multiarch/arm-compat-semi/semiconsole.c | 4 ++--
->   tests/tcg/multiarch/arm-compat-semi/semihosting.c | 4 ++--
->   tests/tcg/multiarch/float_convd.c                 | 4 ++--
->   tests/tcg/multiarch/float_convs.c                 | 4 ++--
->   tests/tcg/multiarch/float_madds.c                 | 4 ++--
->   tests/tcg/multiarch/libs/float_helpers.c          | 4 ++--
->   tests/tcg/i386/system/boot.S                      | 6 +++---
->   tests/tcg/x86_64/system/boot.S                    | 6 +++---
->   12 files changed, 26 insertions(+), 26 deletions(-)
+On 2/15/24 09:28, Max Chou wrote:
+>   /* unmasked unit-stride load and store operation */
+> -static void
+> +static inline QEMU_ALWAYS_INLINE void
+>   vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
+>                vext_ldst_elem_fn *ldst_elem, uint32_t log2_esz, uint32_t evl,
+>                uintptr_t ra)
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Yes, this is important so that ldst_elem itself can always be inlined.
 
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+
+
+r~
 
