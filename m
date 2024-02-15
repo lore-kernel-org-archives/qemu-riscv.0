@@ -4,87 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C8A7C4829E
-	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Feb 2024 20:03:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6B53C4829E
+	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Feb 2024 20:07:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rahx5-0002iV-G3; Thu, 15 Feb 2024 15:03:23 -0500
+	id 1rai0r-00060S-Qg; Thu, 15 Feb 2024 15:07:17 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rahx3-0002fR-D2
- for qemu-riscv@nongnu.org; Thu, 15 Feb 2024 15:03:21 -0500
-Received: from mail-il1-x133.google.com ([2607:f8b0:4864:20::133])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rai0q-0005t8-KS
+ for qemu-riscv@nongnu.org; Thu, 15 Feb 2024 15:07:16 -0500
+Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rahx1-0003SJ-W8
- for qemu-riscv@nongnu.org; Thu, 15 Feb 2024 15:03:21 -0500
-Received: by mail-il1-x133.google.com with SMTP id
- e9e14a558f8ab-364e819fe93so4635025ab.1
- for <qemu-riscv@nongnu.org>; Thu, 15 Feb 2024 12:03:19 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rai0o-00043l-Kb
+ for qemu-riscv@nongnu.org; Thu, 15 Feb 2024 15:07:16 -0500
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-561587ce966so2492971a12.1
+ for <qemu-riscv@nongnu.org>; Thu, 15 Feb 2024 12:07:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708027397; x=1708632197; darn=nongnu.org;
+ d=linaro.org; s=google; t=1708027632; x=1708632432; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=hV7m/yFuhhEeiyh28P6oKjcSbDOB+OMGn198eFDqX0Q=;
- b=wjix1vFwMabeFxsLnTeCTMtEgTY6KorBzTrbWaq5n70iJCmLPg6rUPB3cFa2RbXkw8
- DmnoWgBzwooG0uAC68QwOkqw3Pf5tr19ozUV9r7aIRzisS2qtv0pgqBAVbBsPpjEUM+c
- dYstyGHsQLq9s21+ZHcXzsiaSXak6lO6vymE8XcAFk8hQ7+V4ncFbfAz9HFSHYLwWVNO
- oi9pX2MQZHZKZaiSKNdMY21xZbvfDHL69/ypejSK2chFvtx1dx35fgDe/jmW7jOIE2f3
- 9J2KZGrM1P+2V2vsciZ8zuf/znRkkZEkcXqxH6CTUPBCxHO1o/kwDFM6eh0Jkz2Hslv3
- MTyA==
+ bh=ZmI/qXqvBC4G+5ykIK4JRiBXGGdwJnEinXFvnol2i/M=;
+ b=gXcJeQ4YspBSbq31sEGjl9FQ3nw3KiVx2nDpxBLl6t6YANgWQlgka4lMUmFbZkTxs1
+ iPJo/kNys+6XFj5bAEjY0ipG/GYnurEMd/x4NXj2/GeqmgJgGMBJXh4IaAcgY1883j+z
+ J+Z0/dfc0474EpJ1BC54OGrSveCbWXaleaDNs8k5ornKOf3+Pwpc9w41nNGmymTV02x0
+ UEWkGpcarR+iemyD2qWH9wi75vFPqayDUHF1r49iJw4kQ5ilQBQ7JfgDZrdDG3m9tQVo
+ 9I9thSOrgTRRJk3C7X4hUT4ZXtC68GrgKTvHempsz6xtnCf+gm3CECWx+iowTbUqTYZT
+ 0yLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708027397; x=1708632197;
+ d=1e100.net; s=20230601; t=1708027632; x=1708632432;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=hV7m/yFuhhEeiyh28P6oKjcSbDOB+OMGn198eFDqX0Q=;
- b=YXNmu3QJ4oKXpk++q98qSKiQT+tTR1q9ZjW6wysESyNqr6snGaKZWBy+IB6C63Ptpy
- UDFXu8Z7LeYdO5V2ppvulC4gmR1S4A35lHWrJeKR4hioyx8VF28MRc9Wh2FdvqugcqPg
- Ys3u/wvnpmGdbQQFNE7Qz4f9fuIX2DKZ/x6wQXDHDK1NAABTBLTe1GkJxFqL6YAKhsdZ
- y6armXKyJKLs8iNoP2+6hw1FT62Y6NvYJRgiICt8XFE1U6zpfcdjPJSvUGsVrOKv554S
- rw2eo3rlVJeX5CU4gVdOi2RJNm5HTA0/FrO+VMxLYth1nvC2emRmSmZeo6vhM0Yq9/FU
- KQcA==
+ bh=ZmI/qXqvBC4G+5ykIK4JRiBXGGdwJnEinXFvnol2i/M=;
+ b=l5KwhhXVWycO1xo7y+rKqbfeurcwi9rzM/Pi2ajhwPhglZ4hjux9KGchl3FTbKMVns
+ Ummwyl6orxMVBidNbU0kf/lcQ6lbkfbg65Fym4oGUxaqiM5o5gXxeh2C+I8roWooAn47
+ TXbN5bArqqbKTpstxDYBqvF17k0+zk4SYiHpWmW8RocV5DsBaTIDytjdIzbqGmlQqzsw
+ sX6Od/9TZFVCoboMc+K3gQjDhoic+6nf2EdIvdlkrDmJdCPXDzU6dz3iYCTHxr7dNzrb
+ WsdcRB2HTd4j9cco17B2glshHgykR/lukLsWzvW8d366GdqVN0QHY4GMdCmI2BaBl4gj
+ I+Hg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWptPIISahQeFfk46kBQ5EvbT6tC2XN6Hfx95jcMubZPfghHLdZ67vDBPVravv66pM4ffFsAr2pLnOTKkbLdlcv4cavmmQ=
-X-Gm-Message-State: AOJu0YyJ2VSAIrV04IwJ+gna2v/3sS11AheyC4LTlk7tMAYfnx/xWAyT
- wsiRUI08lnPVDR5r3BBSLmwmRb3MuoMFn5DJd1rBFNbDf9IbC7YBgjWRlatBJV8=
-X-Google-Smtp-Source: AGHT+IHZurs5p0OmYiI073GJyf1yzmHbWc6xLDhpUaE+zam/D6rfRFO3otxjzl3MQ9hxHMn0fiqGIA==
-X-Received: by 2002:a05:6e02:13ef:b0:363:c5c9:deb4 with SMTP id
- w15-20020a056e0213ef00b00363c5c9deb4mr2819417ilj.14.1708027397526; 
- Thu, 15 Feb 2024 12:03:17 -0800 (PST)
-Received: from [172.20.1.19] (173-197-098-125.biz.spectrum.com.
- [173.197.98.125]) by smtp.gmail.com with ESMTPSA id
- w4-20020a636204000000b005cfbf96c733sm1769301pgb.30.2024.02.15.12.03.16
+ AJvYcCVQnOp4EmVpBHVJxqAJ9WYSPYBUtLWBBeid9Dq7fKX9yZZlLCAgBQ2ZaCSkTrgoAx8nJMoRlrjVcKg1aI51NRMeeCQZnvI=
+X-Gm-Message-State: AOJu0YxGqW38MqCD6MLQnOOPR3SpLcFDICHCe/tLImYQNfO5tl/L0H7f
+ iCDucbdEsCPaa3tl6VOpRsP7S8HXbTupJO1gq/heUPT3PjNy6U/vkcFvbFMh4eo=
+X-Google-Smtp-Source: AGHT+IEavLD2jtewehmuf2W4DDIOilRaPboL+020362tIU3AfHzgmWYC5Iu8gk8XRBYnRS7N7cndkA==
+X-Received: by 2002:a05:6402:24a1:b0:561:3b53:d0af with SMTP id
+ q33-20020a05640224a100b005613b53d0afmr5748283eda.12.1708027632203; 
+ Thu, 15 Feb 2024 12:07:12 -0800 (PST)
+Received: from [192.168.69.100] ([176.187.193.50])
+ by smtp.gmail.com with ESMTPSA id
+ x6-20020a056402414600b00563c179b993sm557345eda.11.2024.02.15.12.07.10
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 15 Feb 2024 12:03:17 -0800 (PST)
-Message-ID: <0d95525a-8307-4c89-9045-68130b44f095@linaro.org>
-Date: Thu, 15 Feb 2024 10:03:13 -1000
+ Thu, 15 Feb 2024 12:07:11 -0800 (PST)
+Message-ID: <98a45842-0ce4-4271-b503-f96ef7f0777b@linaro.org>
+Date: Thu, 15 Feb 2024 21:07:09 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 2/6] accel/tcg: Avoid uncessary call overhead from
- qemu_plugin_vcpu_mem_cb
+Subject: Re: [RFC PATCH] tests/tcg: update licenses to GPLv2 as intended
 Content-Language: en-US
-To: Max Chou <max.chou@sifive.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: dbarboza@ventanamicro.com, Paolo Bonzini <pbonzini@redhat.com>
-References: <20240215192823.729209-1-max.chou@sifive.com>
- <20240215192823.729209-3-max.chou@sifive.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240215192823.729209-3-max.chou@sifive.com>
+To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Eduardo Habkost <eduardo@habkost.net>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ "open list:ARM TCG CPUs" <qemu-arm@nongnu.org>,
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
+References: <20240215184036.214065-1-alex.bennee@linaro.org>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20240215184036.214065-1-alex.bennee@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::133;
- envelope-from=richard.henderson@linaro.org; helo=mail-il1-x133.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::530;
+ envelope-from=philmd@linaro.org; helo=mail-ed1-x530.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,35 +105,31 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2/15/24 09:28, Max Chou wrote:
-> If there are not any QEMU plugin memory callback functions, checking
-> before calling the qemu_plugin_vcpu_mem_cb function can reduce the
-> function call overhead.
+On 15/2/24 19:40, Alex Bennée wrote:
+> My default header template is GPLv3 but for QEMU code we really should
+> stick to GPLv2-or-later (allowing others to up-license it if they
+> wish). While this is test code we should still be consistent on the
+> source distribution.
 > 
-> Signed-off-by: Max Chou <max.chou@sifive.com>
+> I wrote all of this code so its not a problem. However there remains
+> one GPLv3 file left which is the crt0-tc2x.S for TriCore.
+> 
+> Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 > ---
->   accel/tcg/ldst_common.c.inc | 40 +++++++++++++++++++++++++++----------
->   1 file changed, 30 insertions(+), 10 deletions(-)
-> 
-> diff --git a/accel/tcg/ldst_common.c.inc b/accel/tcg/ldst_common.c.inc
-> index c82048e377e..bf24986c562 100644
-> --- a/accel/tcg/ldst_common.c.inc
-> +++ b/accel/tcg/ldst_common.c.inc
-> @@ -134,7 +134,9 @@ uint8_t cpu_ldb_mmu(CPUArchState *env, abi_ptr addr, MemOpIdx oi, uintptr_t ra)
->   
->       tcg_debug_assert((get_memop(oi) & MO_SIZE) == MO_UB);
->       ret = do_ld1_mmu(env_cpu(env), addr, oi, ra, MMU_DATA_LOAD);
-> -    plugin_load_cb(env, addr, oi);
-> +    if (cpu_plugin_mem_cbs_enabled(env_cpu(env))) {
-> +        plugin_load_cb(env, addr, oi);
-> +    }
->       return ret;
->   }
+>   tests/tcg/aarch64/semicall.h                      | 4 ++--
+>   tests/tcg/arm/semicall.h                          | 4 ++--
+>   tests/tcg/multiarch/float_helpers.h               | 4 ++--
+>   tests/tcg/riscv64/semicall.h                      | 4 ++--
+>   tests/tcg/multiarch/arm-compat-semi/semiconsole.c | 4 ++--
+>   tests/tcg/multiarch/arm-compat-semi/semihosting.c | 4 ++--
+>   tests/tcg/multiarch/float_convd.c                 | 4 ++--
+>   tests/tcg/multiarch/float_convs.c                 | 4 ++--
+>   tests/tcg/multiarch/float_madds.c                 | 4 ++--
+>   tests/tcg/multiarch/libs/float_helpers.c          | 4 ++--
+>   tests/tcg/i386/system/boot.S                      | 6 +++---
+>   tests/tcg/x86_64/system/boot.S                    | 6 +++---
+>   12 files changed, 26 insertions(+), 26 deletions(-)
 
-Rather than repeating N times, modify plugin_load_cb and plugin_store_cb just above to 
-avoid the call to cpu_plugin_mem_cbs_enabled().  I expect the compiler is inlining those 
-functions already.
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
-
-r~
 
