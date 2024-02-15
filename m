@@ -4,87 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF3EAC4829E
-	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Feb 2024 14:40:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8710FC4829E
+	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Feb 2024 16:35:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ractu-0004Dx-8N; Thu, 15 Feb 2024 09:39:46 -0500
+	id 1raeh7-0006iI-Vs; Thu, 15 Feb 2024 11:34:42 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1racti-0004D8-Nz
- for qemu-riscv@nongnu.org; Thu, 15 Feb 2024 09:39:37 -0500
-Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1ractV-0004g5-9N
- for qemu-riscv@nongnu.org; Thu, 15 Feb 2024 09:39:22 -0500
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-561587ce966so1821052a12.1
- for <qemu-riscv@nongnu.org>; Thu, 15 Feb 2024 06:39:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1708007959; x=1708612759; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=HFr7FApZYLQRYuCgSuuloiuEEUdNJbVYh1Z1LoYtLFs=;
- b=OxKi5nI+1qvev+C6jP0/q8cgTGHh0s0LTDYeUn83R4CGlxHEUcFcIDQWQPtlFTUmMT
- DExNCsOd7ZLh6+kLVzP/NeG6p04sTF8/0d/U3svQM2qKDRtxNcJ3aWbDM3OLbHpdVKAe
- mnwJUKSjrkWpc5gSTAJ7Ywc8Okx0duZzUScDz6Gfdq72xp/aOUu93k6KvBj4K+t5DuNs
- WCRG50+ITHnyv8HVWV9IN9LxMFy1btVbuacjAv8kUp1Dj3+dbx8KprSDiOy6hbT0lqsf
- ginX7F7jR/Cg+1Ax1TTUTtzwfybeStFRhcgNCi5xKNX7uf2Zm4NX3lsNTf/1woV40qWs
- SuTQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708007959; x=1708612759;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=HFr7FApZYLQRYuCgSuuloiuEEUdNJbVYh1Z1LoYtLFs=;
- b=TAh5eS7hj47ii1f4mZs11eC+G5AjpddIgOSFZ6OpJLk7N/Op6HvpUDlVxfNmeVqbUG
- vL9uoiPpdoUVxkV6UyLusgqnFmn3aQZp0YSthVUs5A1XB9O7iq70zMoPGCTq1Rj75rMG
- JkSdBXiiuNlBomR+9LuGSNKPuzTfVSKDYWWx04AeZXQQXPtsrvnNNugSeXbbmKurmVKW
- 9FUEC0KALukFtEpAqT8n44ZBCJY0+t1UJKBAWsSvGYA+MPVReZVdRiHCxEV2oyz3FYLf
- KOcouE4LB2AM/Ci9u/TN2MOydBicf+H8q5aNFVfsdICIVJ1tQ+hG+STAyiB/L59KRn3I
- YC1g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXUzQFSnVyTzobWaxDe31HdJmphoLZjJ+h0WlvlB/p6y+9oMHKQ4C2+qqpm4q7xOXe6VORQwi/Qk77dlvPDduidKqFOA4Q=
-X-Gm-Message-State: AOJu0YwbcEtxj2G5kpjorW4cEZERQFYTarY1E/KiOa8YdWu0+LcYd+gz
- KT6DvUdPXnSiJmGO3jP+h56hrWnkqNcoYl6HH/XKqnJ7FethJ78PXD4wW8HbrMg=
-X-Google-Smtp-Source: AGHT+IEII9ZKI1s3tNnGsjuieKqxLhqlQOfxAhQ4yGp3aQzk1rkdDCjpx4zpYcFk5FOrNjGkw1D5bQ==
-X-Received: by 2002:a05:6402:4285:b0:563:c88b:68b5 with SMTP id
- g5-20020a056402428500b00563c88b68b5mr799964edc.14.1708007959587; 
- Thu, 15 Feb 2024 06:39:19 -0800 (PST)
-Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
- [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
- by smtp.gmail.com with ESMTPSA id
- d5-20020a50f685000000b0056384b26771sm630310edn.91.2024.02.15.06.39.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Feb 2024 06:39:19 -0800 (PST)
-Date: Thu, 15 Feb 2024 15:39:18 +0100
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: Conor Dooley <conor@kernel.org>, qemu-devel@nongnu.org, 
- qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
+ (Exim 4.90_1) (envelope-from <conor@kernel.org>)
+ id 1raeh6-0006hn-9s; Thu, 15 Feb 2024 11:34:40 -0500
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <conor@kernel.org>)
+ id 1raeh4-0000u3-ED; Thu, 15 Feb 2024 11:34:40 -0500
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id AD77761351;
+ Thu, 15 Feb 2024 16:34:36 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6EA93C433F1;
+ Thu, 15 Feb 2024 16:34:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1708014876;
+ bh=byeTgDdq1/a+n5XW0NesRfgbMgGQVHNLPJin4IqxtnA=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=IBaDD9DLVggZ6k/GohQAAf41SeylBZmaX/IcmAcSq/RtEPwgSDF2uYnWDW+H5Vze7
+ cb5EaHjKxYDUsMh+JVUYTArJj5gaDHL7ZZiNgc34yQiX8yRGD//xEp7iOhAvvX15f6
+ clxJRUXlcp+P/YlTT0y1v+7SRgpxU21WMAYDFF3Hjc09u1td602MCUm4g/8Bq0vn4P
+ fBb5Vtxw9ylHoGO+XnwqShJ+hf7VJ4D+he2KivavB6pGZVQUctR27UXqr4EnumL1NT
+ v/FlMcGkxLxkgrw2gwIIXtg3vDM7/KKdMQ1EZvlbn9zYksBSVXIKu6AN1HXyZu2vqJ
+ WlqgIoMca7e0Q==
+Date: Thu, 15 Feb 2024 16:34:32 +0000
+From: Conor Dooley <conor@kernel.org>
+To: Andrew Jones <ajones@ventanamicro.com>
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ alistair.francis@wdc.com, bmeng@tinylab.org, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
 Subject: Re: [PATCH v3 3/6] target/riscv: add remaining named features
-Message-ID: <20240215-e18cdd6d9c622bcaeea2c8f4@orel>
+Message-ID: <20240215-overhear-paycheck-8c70c17bd151@spud>
 References: <20240202152154.773253-1-dbarboza@ventanamicro.com>
  <20240202152154.773253-4-dbarboza@ventanamicro.com>
  <20240215-alkaline-saturday-275cd8e3aa39@spud>
- <cb84b02b-eb4b-43e9-82e5-2367ee2a2789@ventanamicro.com>
+ <20240215-55440212b4d6cde9feab5d94@orel>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="aumy3XeCt8vTEnU+"
 Content-Disposition: inline
-In-Reply-To: <cb84b02b-eb4b-43e9-82e5-2367ee2a2789@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::529;
- envelope-from=ajones@ventanamicro.com; helo=mail-ed1-x529.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+In-Reply-To: <20240215-55440212b4d6cde9feab5d94@orel>
+Received-SPF: pass client-ip=139.178.84.217; envelope-from=conor@kernel.org;
+ helo=dfw.source.kernel.org
+X-Spam_score_int: -78
+X-Spam_score: -7.9
+X-Spam_bar: -------
+X-Spam_report: (-7.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.772,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_HI=-5, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,39 +75,128 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Feb 15, 2024 at 11:13:51AM -0300, Daniel Henrique Barboza wrote:
-...
+
+--aumy3XeCt8vTEnU+
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Feb 15, 2024 at 03:26:18PM +0100, Andrew Jones wrote:
+> On Thu, Feb 15, 2024 at 01:33:47PM +0000, Conor Dooley wrote:
+> > On Fri, Feb 02, 2024 at 12:21:51PM -0300, Daniel Henrique Barboza wrote:
+> > > The RVA22U64 and RVA22S64 profiles mandates certain extensions that,
+> > > until now, we were implying that they were available.
+> > >=20
+> > > We can't do this anymore since named features also has a riscv,isa
+> > > entry. Let's add them to riscv_cpu_named_features[].
+> > >=20
+> > > Instead of adding one bool for each named feature that we'll always
+> > > implement, i.e. can't be turned off, add a 'ext_always_enabled' bool =
+in
+> > > cpu->cfg. This bool will be set to 'true' in TCG accel init, and all
+> > > named features will point to it. This also means that KVM won't see
+> > > these features as always enable, which is our intention.
+> > >=20
+> > > If any accelerator adds support to disable one of these features, we'=
+ll
+> > > have to promote them to regular extensions and allow users to disable=
+ it
+> > > via command line.
+> > >=20
+> > > After this patch, here's the riscv,isa from a buildroot using the
+> > > 'rva22s64' CPU:
+> >=20
+> > Why does an "rva22s64" cpu have "zicclsm" in it? Isn't zicclsm only
+> > present in "u" profiles?
+>=20
+> "s" profiles mandate all the "u" profile mandatory extensions. For example
+> 6.2.2 says
+>=20
+> """
+> The RVA22S64 mandatory unprivileged extensions include all the mandatory =
+unprivileged
+> extensions in RVA22U64.
+> """
+
+Doesn't that rule out emulating misaligned access in s-mode if you want
+to be profile compliant?
+
+> > >  # cat /proc/device-tree/cpus/cpu@0/riscv,isa
+> > > rv64imafdc_zic64b_zicbom_zicbop_zicboz_ziccamoa_ziccif_zicclsm_ziccrs=
+e_
+> > > zicntr_zicsr_zifencei_zihintpause_zihpm_za64rs_zfhmin_zca_zcd_zba_zbb_
+> > > zbs_zkt_ssccptr_sscounterenw_sstvala_sstvecd_svade_svinval_svpbmt#
+> >=20
 > > I want to raise my frustration with the crock we've been given here by
 > > RVI. Any "named feature" that just creates a name for something that
 > > already is assumed is completely useless, and DT property that is used
 > > to communicate it's presence cannot be used - instead the property needs
 > > to be inverted - indicating the absence of that named feature.
-> 
-> Let's say that I'm not the biggest fan of how these profile extensions are being
-> dealt with in the spec :) the text is vague w.r.t whether zicclsm and others
-> are actual extensions, or a 'named feature'( like we're calling here in QEMU)
->
+> >=20
+> > Without the inversion, software that parses "riscv,isa" cannot make any
+> > determination based on the absence of the property - it could be parsing
+> > an old DT that does not have the property or it could be parsing the DT
+> > of a system that does not support the extension.
+>=20
+> I'm guessing any platform which wants to advertise that it's compliant
+> with a profile will update its hardware descriptions to ensure all the
+> profile's mandatory extensions are presented. But, I think I understand
+> your concern. If somebody is parsing the ISA string as way to determine
+> if the platform is compliant with a profile, then they may get a false
+> negative due to the ISA string missing a newly named feature.
 
-The text is vague, I certainly didn't get it at first, but it's been
-clarified that these "named features" are considered extensions with
-the given names and those extensions are ratified at the time the profile
-in which they first appear is ratified. As I said in my other reply, I
-hope the need to name old features is behind us now that the first
-profiles are done.
+Nah, you misunderstand me. I don't care at all about profiles or
+checking for compliance with one. I'm only interested in how my software
+can check that some feature is (or is not) supported. This creating a name
+for something implicit business is not a problem in and of itself, but
+putting then into "riscv,isa" is a pointless activity as it communicates
+nothing.
 
-> that is just a glorified way of saying, for example, "zic64b" instead of "all
-> cache blocks have 64 bytes".
+> I'm not
+> sure how much of a problem that will be in practice, though, since testing
+> for profile compliance, just for the sake of it, doesn't seem very useful.
+> Software really only needs to know which extensions are available and if
+> it's an old feature that got newly named, then software likely already
+> has another way of detecting it.
 
-The note that accompanies "Zic64b" also states that the cache blocks may
-be larger or smaller than 64 bytes. So, when a platform includes this
-"Zic64b" extension in its DT it doesn't mean all blocks are 64 bytes, it
-means they're all compatible with 64 bytes by either using 64-byte sub-
-blocks (when they're bigger) or by sequencing cache ops across multiple
-blocks (when they're smaller). So, while we can derive 'zic64b' from a
-platform which does have all blocks of size 64, some platforms will need
-to explicitly add it to the ISA string when they know they're compatible,
-since they'll be putting other block sizes in the block size descriptions.
+Right. That part is fine, but creating extensions for these things we
+previously assumed present gives me the impression that creating systems
+that do not support these features is valid. IFF that does happen,
+removing the string from "riscv,isa" isn't going to be able to
+communicate that the feature is unsupported. The commit message here
+says:
+> > > If any accelerator adds support to disable one of these features, we'=
+ll
+> > > have to promote them to regular extensions and allow users to disable=
+ it
+> > > via command line.
 
-Thanks,
-drew
+Which is part of what prompted me here, since they cannot be handled in
+the same way that "regular extensions" are.
+
+> > This is part of why I deprecated `riscv,isa`. It's the same problem as
+> > with "zifencei" et al - does a system with `riscv,isa =3D "rv64imac"`
+> > support fence.i?
+>=20
+> Yes, there's a handful of these messy things and the first profiles
+> expose them since they're trying to define them. Fingers crossed that
+> the next profiles won't have to name old features. FWIW, I at least
+> don't see any "This is a new extension name for this feature" notes in
+> the RVA23 profile.
+>=20
+> Thanks,
+> drew
+
+--aumy3XeCt8vTEnU+
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZc49FAAKCRB4tDGHoIJi
+0nAYAQCmUaLBp8TI0UwxQnX37P/aVNDgTgcMxz579Hkv9r0G2QD8DSttPpndorMm
+Tzd7s6wwhRXg1KEAbFe/5evwQO3YYQ0=
+=nH1U
+-----END PGP SIGNATURE-----
+
+--aumy3XeCt8vTEnU+--
 
