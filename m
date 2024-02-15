@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFE1CC4829E
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EA7EC48BC4
 	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Feb 2024 19:32:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rahPp-0001cs-OV; Thu, 15 Feb 2024 14:29:01 -0500
+	id 1rahQ0-0001ip-M5; Thu, 15 Feb 2024 14:29:12 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1rahPg-0001bx-O7
- for qemu-riscv@nongnu.org; Thu, 15 Feb 2024 14:28:52 -0500
-Received: from mail-pl1-x641.google.com ([2607:f8b0:4864:20::641])
+ id 1rahPy-0001iZ-Bd
+ for qemu-riscv@nongnu.org; Thu, 15 Feb 2024 14:29:10 -0500
+Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1rahPR-0004gW-Fm
- for qemu-riscv@nongnu.org; Thu, 15 Feb 2024 14:28:50 -0500
-Received: by mail-pl1-x641.google.com with SMTP id
- d9443c01a7336-1d780a392fdso11093045ad.3
- for <qemu-riscv@nongnu.org>; Thu, 15 Feb 2024 11:28:32 -0800 (PST)
+ id 1rahPa-0004hD-BM
+ for qemu-riscv@nongnu.org; Thu, 15 Feb 2024 14:29:09 -0500
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-1d70b0e521eso10134195ad.1
+ for <qemu-riscv@nongnu.org>; Thu, 15 Feb 2024 11:28:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1708025308; x=1708630108; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Oa8+9JzyW2AXOuQAQT/XowweMVndm3ihCRFuRjvbNSU=;
- b=R20kshwuCgnkTEMT0DKg34Eu3zXJAuMKWJc2JmEerE92tg34I46WAYmk5H6CRw5YMk
- xm7dNHyp1ZX2k6A0V1Kan9R+Lb0lR9fzbiVnHFYtOWYcG2uuVhsVWnwEnsOGQL17ujA3
- wUmwDzRLstId/V6IAjbgNsmzDnABNW6ox+qZxjD6bL59736F3yoKuFoEouoZZJxiocSd
- brObl/dYaeWGTaKCisZIse6HpWWdQx/KM8xBQ0ctDGwSD8QuQK0eyk71huCuKfePCZBy
- uUFFjY8g2iuYXy20ISl5SlzQC03P6KZtK+sXEhdoIuXCllqhJTdOxj/DC0NvZ5+t9hIX
- r2Jw==
+ d=sifive.com; s=google; t=1708025318; x=1708630118; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3KR/e7xd2t/WfUhq1nU3nYx+Y5DrBWOVXBN9h9UKvfc=;
+ b=RjVJwxAdZRI1wo40etlhF1Ffh0FaC5Eutzl9iHNbDcox3hjElCl5OZdAnojTDOU93c
+ i2STawdRueljR01Pttx+pztyy1Ddx8yf2aAHvyp80wvlkRBtZ8e55jYJH8yguGS1015p
+ ZCne2UufDLVif8tHNbMSMDseCE6TGmjuuBqJtNa9cynltNPN/nmzSIFC4TwoOxxOjQKt
+ aIKMYdrjTFVFiv2mltNIXVzwUhRPOvhu5C7jRTebUnVRCrGPlMGeTZRgpsoWPuGDWosC
+ 1IfEO8K7+MFrfF1WOUu3ZYWnQSOGb7/lP7LBoW0PWe9o6Rg4DGMH5mIy8GPSR7bJfFyZ
+ xhJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708025308; x=1708630108;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Oa8+9JzyW2AXOuQAQT/XowweMVndm3ihCRFuRjvbNSU=;
- b=T1/sovlLjZWkFV+n+wqUidFm+3FSqH4+/qE4zn9FYi1pwcPy88nW23l3LoKc+LGe1c
- pn/wUV6tF65mHXj6hWmeTeWJJZb6NEs+10JkRSYZVKdkSt0oj+pbvQ28wfYpNf9WuFR0
- CBZ71VWcO0SVQpXikqDZAnJBbk0n6nwfvmeRXTvQwc/I6MveuZUz5R1VbCT+sPnynaaS
- ajL6IX8TnB/w9o8PmO/8Q04spkTaU4OnwVwsTkB4P2j5g7aqAIBGdAOoHz3LumgXWy18
- sFW0QR9Zh/m5cAD83JZY/8ixhVA1uQpKr0Atow8rt/uBIlpvZigcT9T9jOCOARNOFJuM
- p+mQ==
+ d=1e100.net; s=20230601; t=1708025318; x=1708630118;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=3KR/e7xd2t/WfUhq1nU3nYx+Y5DrBWOVXBN9h9UKvfc=;
+ b=jcow1ZsXGL1ZIoXZrIguT475hYZD07ROE5ae5CiMSBY0FtUBHuUOuyho6Yac4YULlr
+ crK8yEEpi0T9+YHEMGwU0QQ+nkJkthqJflo5OIfNk3lT2uiZgzCmkSn9Bu6tDHVA+Eq2
+ nNOAP8QrEZLlqZZKuv98f2J1aNcEfrK0vWSRJpoA3a/ooTLsc1HiwJqpwpwqFbY3FxER
+ gWIIh9KcZW1TW1Oz1oMZ4c/kHm9hgf60QDBQ7EzUPiJM/vcNlRD9MDQlMf0HSjpNvQr5
+ MzyBvkegweT30Y8BynWj2kEJhhtHytU3puWvWt8+u6Z7F7Ak/lsoBCdK+nfsr2mJvODY
+ O4ow==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXRJWOOelQTo9m9tj1DdVb5BxqxybwGS/rNP1vUxS3Ibrdy5V6GZ5UUdwzqaaGEHCjn5kMGmx/f4U6KnuVcpIQ0dPNeeSg=
-X-Gm-Message-State: AOJu0YxoTx/TSs6DZnaVBCGfxOqpiOx6e4+PcKkm9TeiiTm9QTa+HwyA
- cOO78HIvWaFcFURaAkUBu5TtnPtjr82H013OCS2SbGAKkVccJxjZgnr98idRnyxmnp8kira9CJW
- 0Df6x+Gc6
-X-Google-Smtp-Source: AGHT+IH+ef7TpzK13R9moXThf+5dAP11DtUE2qop2zpVzcqepZa7/ef7qHMVckUfXYNDXteKzLruaQ==
-X-Received: by 2002:a17:902:e810:b0:1db:4c96:b578 with SMTP id
- u16-20020a170902e81000b001db4c96b578mr3433658plg.59.1708025308092; 
- Thu, 15 Feb 2024 11:28:28 -0800 (PST)
+ AJvYcCUa7xTZbnwKJcWsvhJwWPkXNfpnO1ssuMcP/BC1VSuzhzNt2VRYQ669+ym0KNwS4bCHtApwqVqL0mZlElDhHPs5AnhyZhQ=
+X-Gm-Message-State: AOJu0Yx9dw+ZWcjpo+MDSUUsM763qL4DyOsmrI+LF3pIBJu6NQJjjfDR
+ 4OhUkM3O/hj4GXbCAnDFD+RPcR0AwiVUcwpPI4W/RuKdDO3rgSVRx/7eetYWRfo=
+X-Google-Smtp-Source: AGHT+IHH07zKpvDk6lvEZgaiG7tRGZgTkNUFnN8TiRSiVQbRRAR2azynSv/UhmuI4NuIotPhoe4okg==
+X-Received: by 2002:a17:902:8218:b0:1db:5eaa:e9a2 with SMTP id
+ x24-20020a170902821800b001db5eaae9a2mr2529567pln.64.1708025317939; 
+ Thu, 15 Feb 2024 11:28:37 -0800 (PST)
 Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
  [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
- u8-20020a170902a60800b001db5ee73fe9sm1618653plq.114.2024.02.15.11.28.27
+ u8-20020a170902a60800b001db5ee73fe9sm1618653plq.114.2024.02.15.11.28.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Feb 2024 11:28:27 -0800 (PST)
+ Thu, 15 Feb 2024 11:28:37 -0800 (PST)
 From: Max Chou <max.chou@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Cc: dbarboza@ventanamicro.com,
-	Max Chou <max.chou@sifive.com>
-Subject: [RFC PATCH 0/6] Improve the performance of RISC-V vector unit-stride
- ld/st instructions
-Date: Fri, 16 Feb 2024 03:28:11 +0800
-Message-Id: <20240215192823.729209-1-max.chou@sifive.com>
+Cc: dbarboza@ventanamicro.com, Max Chou <max.chou@sifive.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>
+Subject: [RFC PATCH 2/6] accel/tcg: Avoid uncessary call overhead from
+ qemu_plugin_vcpu_mem_cb
+Date: Fri, 16 Feb 2024 03:28:13 +0800
+Message-Id: <20240215192823.729209-3-max.chou@sifive.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240215192823.729209-1-max.chou@sifive.com>
+References: <20240215192823.729209-1-max.chou@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::641;
- envelope-from=max.chou@sifive.com; helo=mail-pl1-x641.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
+ envelope-from=max.chou@sifive.com; helo=mail-pl1-x62a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -96,62 +99,129 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi all,
+If there are not any QEMU plugin memory callback functions, checking
+before calling the qemu_plugin_vcpu_mem_cb function can reduce the
+function call overhead.
 
-When glibc with RVV support [1], the memcpy benchmark will run 2x to 60x
-slower than the scalar equivalent on QEMU and it hurts developer
-productivity.
+Signed-off-by: Max Chou <max.chou@sifive.com>
+---
+ accel/tcg/ldst_common.c.inc | 40 +++++++++++++++++++++++++++----------
+ 1 file changed, 30 insertions(+), 10 deletions(-)
 
-From the performance analysis result, we can observe that the glibc
-memcpy spends most of the time in the vector unit-stride load/store
-helper functions.
-
-Samples: 465K of event 'cycles:u', Event count (approx.): 1707645730664
-  Children      Self  Command       Shared Object            Symbol
-+   28.46%    27.85%  qemu-riscv64  qemu-riscv64             [.] vext_ldst_us
-+   26.92%     0.00%  qemu-riscv64  [unknown]                [.] 0x00000000000000ff
-+   14.41%    14.41%  qemu-riscv64  qemu-riscv64             [.] qemu_plugin_vcpu_mem_cb
-+   13.85%    13.85%  qemu-riscv64  qemu-riscv64             [.] lde_b
-+   13.64%    13.64%  qemu-riscv64  qemu-riscv64             [.] cpu_stb_mmu
-+    9.25%     9.19%  qemu-riscv64  qemu-riscv64             [.] cpu_ldb_mmu
-+    7.81%     7.81%  qemu-riscv64  qemu-riscv64             [.] cpu_mmu_lookup
-+    7.70%     7.70%  qemu-riscv64  qemu-riscv64             [.] ste_b
-+    5.53%     0.00%  qemu-riscv64  qemu-riscv64             [.] adjust_addr (inlined)   
-
-
-So this patchset tries to improve the performance of the RVV version of
-glibc memcpy on QEMU by improving the corresponding helper function
-quality.
-
-The overall performance improvement can achieve following numbers
-(depending on the size).
-Average: 2.86X / Smallest: 1.15X / Largest: 4.49X
-
-PS: This RFC patchset only focuses on the vle8.v & vse8.v instructions,
-the next version or next serious will complete other vector ld/st part.
-
-Regards,
-Max.
-
-[1] https://inbox.sourceware.org/libc-alpha/20230504074851.38763-1-hau.hsu@sifive.com
-
-Max Chou (6):
-  target/riscv: Seperate vector segment ld/st instructions
-  accel/tcg: Avoid uncessary call overhead from qemu_plugin_vcpu_mem_cb
-  target/riscv: Inline vext_ldst_us and coressponding function for
-    performance
-  accel/tcg: Inline cpu_mmu_lookup function
-  accel/tcg: Inline do_ld1_mmu function
-  accel/tcg: Inline do_st1_mmu function
-
- accel/tcg/ldst_common.c.inc             |  40 ++++++--
- accel/tcg/user-exec.c                   |  17 ++--
- target/riscv/helper.h                   |   4 +
- target/riscv/insn32.decode              |  11 +-
- target/riscv/insn_trans/trans_rvv.c.inc |  61 +++++++++++
- target/riscv/vector_helper.c            | 130 +++++++++++++++++++-----
- 6 files changed, 221 insertions(+), 42 deletions(-)
-
+diff --git a/accel/tcg/ldst_common.c.inc b/accel/tcg/ldst_common.c.inc
+index c82048e377e..bf24986c562 100644
+--- a/accel/tcg/ldst_common.c.inc
++++ b/accel/tcg/ldst_common.c.inc
+@@ -134,7 +134,9 @@ uint8_t cpu_ldb_mmu(CPUArchState *env, abi_ptr addr, MemOpIdx oi, uintptr_t ra)
+ 
+     tcg_debug_assert((get_memop(oi) & MO_SIZE) == MO_UB);
+     ret = do_ld1_mmu(env_cpu(env), addr, oi, ra, MMU_DATA_LOAD);
+-    plugin_load_cb(env, addr, oi);
++    if (cpu_plugin_mem_cbs_enabled(env_cpu(env))) {
++        plugin_load_cb(env, addr, oi);
++    }
+     return ret;
+ }
+ 
+@@ -145,7 +147,9 @@ uint16_t cpu_ldw_mmu(CPUArchState *env, abi_ptr addr,
+ 
+     tcg_debug_assert((get_memop(oi) & MO_SIZE) == MO_16);
+     ret = do_ld2_mmu(env_cpu(env), addr, oi, ra, MMU_DATA_LOAD);
+-    plugin_load_cb(env, addr, oi);
++    if (cpu_plugin_mem_cbs_enabled(env_cpu(env))) {
++        plugin_load_cb(env, addr, oi);
++    }
+     return ret;
+ }
+ 
+@@ -156,7 +160,9 @@ uint32_t cpu_ldl_mmu(CPUArchState *env, abi_ptr addr,
+ 
+     tcg_debug_assert((get_memop(oi) & MO_SIZE) == MO_32);
+     ret = do_ld4_mmu(env_cpu(env), addr, oi, ra, MMU_DATA_LOAD);
+-    plugin_load_cb(env, addr, oi);
++    if (cpu_plugin_mem_cbs_enabled(env_cpu(env))) {
++        plugin_load_cb(env, addr, oi);
++    }
+     return ret;
+ }
+ 
+@@ -167,7 +173,9 @@ uint64_t cpu_ldq_mmu(CPUArchState *env, abi_ptr addr,
+ 
+     tcg_debug_assert((get_memop(oi) & MO_SIZE) == MO_64);
+     ret = do_ld8_mmu(env_cpu(env), addr, oi, ra, MMU_DATA_LOAD);
+-    plugin_load_cb(env, addr, oi);
++    if (cpu_plugin_mem_cbs_enabled(env_cpu(env))) {
++        plugin_load_cb(env, addr, oi);
++    }
+     return ret;
+ }
+ 
+@@ -178,7 +186,9 @@ Int128 cpu_ld16_mmu(CPUArchState *env, abi_ptr addr,
+ 
+     tcg_debug_assert((get_memop(oi) & MO_SIZE) == MO_128);
+     ret = do_ld16_mmu(env_cpu(env), addr, oi, ra);
+-    plugin_load_cb(env, addr, oi);
++    if (cpu_plugin_mem_cbs_enabled(env_cpu(env))) {
++        plugin_load_cb(env, addr, oi);
++    }
+     return ret;
+ }
+ 
+@@ -195,7 +205,9 @@ void cpu_stb_mmu(CPUArchState *env, abi_ptr addr, uint8_t val,
+                  MemOpIdx oi, uintptr_t retaddr)
+ {
+     helper_stb_mmu(env, addr, val, oi, retaddr);
+-    plugin_store_cb(env, addr, oi);
++    if (cpu_plugin_mem_cbs_enabled(env_cpu(env))) {
++        plugin_store_cb(env, addr, oi);
++    }
+ }
+ 
+ void cpu_stw_mmu(CPUArchState *env, abi_ptr addr, uint16_t val,
+@@ -203,7 +215,9 @@ void cpu_stw_mmu(CPUArchState *env, abi_ptr addr, uint16_t val,
+ {
+     tcg_debug_assert((get_memop(oi) & MO_SIZE) == MO_16);
+     do_st2_mmu(env_cpu(env), addr, val, oi, retaddr);
+-    plugin_store_cb(env, addr, oi);
++    if (cpu_plugin_mem_cbs_enabled(env_cpu(env))) {
++        plugin_store_cb(env, addr, oi);
++    }
+ }
+ 
+ void cpu_stl_mmu(CPUArchState *env, abi_ptr addr, uint32_t val,
+@@ -211,7 +225,9 @@ void cpu_stl_mmu(CPUArchState *env, abi_ptr addr, uint32_t val,
+ {
+     tcg_debug_assert((get_memop(oi) & MO_SIZE) == MO_32);
+     do_st4_mmu(env_cpu(env), addr, val, oi, retaddr);
+-    plugin_store_cb(env, addr, oi);
++    if (cpu_plugin_mem_cbs_enabled(env_cpu(env))) {
++        plugin_store_cb(env, addr, oi);
++    }
+ }
+ 
+ void cpu_stq_mmu(CPUArchState *env, abi_ptr addr, uint64_t val,
+@@ -219,7 +235,9 @@ void cpu_stq_mmu(CPUArchState *env, abi_ptr addr, uint64_t val,
+ {
+     tcg_debug_assert((get_memop(oi) & MO_SIZE) == MO_64);
+     do_st8_mmu(env_cpu(env), addr, val, oi, retaddr);
+-    plugin_store_cb(env, addr, oi);
++    if (cpu_plugin_mem_cbs_enabled(env_cpu(env))) {
++        plugin_store_cb(env, addr, oi);
++    }
+ }
+ 
+ void cpu_st16_mmu(CPUArchState *env, abi_ptr addr, Int128 val,
+@@ -227,7 +245,9 @@ void cpu_st16_mmu(CPUArchState *env, abi_ptr addr, Int128 val,
+ {
+     tcg_debug_assert((get_memop(oi) & MO_SIZE) == MO_128);
+     do_st16_mmu(env_cpu(env), addr, val, oi, retaddr);
+-    plugin_store_cb(env, addr, oi);
++    if (cpu_plugin_mem_cbs_enabled(env_cpu(env))) {
++        plugin_store_cb(env, addr, oi);
++    }
+ }
+ 
+ /*
 -- 
 2.34.1
 
