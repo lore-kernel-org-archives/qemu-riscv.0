@@ -4,73 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE1C3C48BEB
-	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Feb 2024 09:54:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0F9CC4829E
+	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Feb 2024 09:55:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1raYRz-0002tr-91; Thu, 15 Feb 2024 04:54:39 -0500
+	id 1raYS8-0003WV-2a; Thu, 15 Feb 2024 04:54:48 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1raYRq-0002bQ-IU; Thu, 15 Feb 2024 04:54:32 -0500
-Received: from mail-vs1-xe2f.google.com ([2607:f8b0:4864:20::e2f])
+ id 1raYS5-0003Pu-FA; Thu, 15 Feb 2024 04:54:45 -0500
+Received: from mail-ua1-x92a.google.com ([2607:f8b0:4864:20::92a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1raYRo-0001Qi-Ua; Thu, 15 Feb 2024 04:54:30 -0500
-Received: by mail-vs1-xe2f.google.com with SMTP id
- ada2fe7eead31-467e4a04086so221874137.3; 
- Thu, 15 Feb 2024 01:54:26 -0800 (PST)
+ id 1raYS3-0001UL-Rg; Thu, 15 Feb 2024 04:54:45 -0500
+Received: by mail-ua1-x92a.google.com with SMTP id
+ a1e0cc1a2514c-7d2a67daa25so429289241.0; 
+ Thu, 15 Feb 2024 01:54:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1707990866; x=1708595666; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1707990882; x=1708595682; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UK3WtQ1qFUGeEMjDPu9dS0e8tiOTBzkH6/cmRz+LEO0=;
- b=IEgKLTpyO2SrzDUHA1wVweYvdIBfkVzlcxr9DECfikg1u7nSdNbS3qIXIYGiSntvp8
- qdRZfIChq18eKl+cUTI/cg753XnXyfSuo5ZPbTB7RP/Ml1r90C9wHn55jeX8+x5IMcLf
- ZeMJN2HOw9jQMpZiTISHe09XXB/2d9lGfCpR6KFnC+UZEG7arWgwLplBeNK7OVg1H3+E
- P+Vn9XuRX8bgtgDrTesVJCT1eu7trEg1KJkwAY/u6TSjPtOlmoSWG0XqGp7kkwWjYrlW
- WRFOE6oFuk2wEPFpHypyVs5UFyrTLUP8Hr7Kp4yPObFcpyszMCFO3qLqt3dCU3d3a+Fd
- cI3A==
+ bh=DBdT5BqffG5DnFq9lgMYbao4Njc9Ip28TVJhmpzvVto=;
+ b=DLAE0LyEPDYrd+dzlQBFSy6jwaN8Zu9mRcOnVNjU2ccjMEZNoUjjJDuQUuH5uWbhkT
+ ifISO4bflY3bhhvYb14TS82Hr6+YK8AsIm4hhRav3i5MOApjU8OjZvotjdRjRx0ahBfd
+ gNGYcGsdtN7FDsZsH0SwwqfTxZ8tQ8cPUZjq+yGzhlmMLpj4WWIX0b/FSYbfHSuOmepR
+ bnblnUmsQt7uf88SzDDXwVTONOC5tqUtHg3TOuo814My9Auwvljn3B9NTjC2A8R0zEFf
+ Rv92lg6qTjsCoEpK6utevEtmFNsMoQ/qz/hPGmvyl2UInahIBEU5Jr3kNyh+6Xrb1LgJ
+ CmmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707990866; x=1708595666;
+ d=1e100.net; s=20230601; t=1707990882; x=1708595682;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UK3WtQ1qFUGeEMjDPu9dS0e8tiOTBzkH6/cmRz+LEO0=;
- b=JXV5tk+BgL7TZAGReG+0Yg3q6qrKCn5o++yeqm4HMyHhLdmUP2SDXH0fEqxDXkzhPw
- rP5m1oz2WPwyw7dp59UT7IBdewPEcrryPxVMWscfWId+R0iKmJ/0Mj0jywLkR8oJl12J
- QxQFOrsKUyfwgMYeblOEdykhVmLLpTINkkv0kGtU/LTjAx7roHFocV43FmsdsJiOzxZ3
- rA2HAYKtAAUz2Xj5sdDYMj7+B4wyC/6zsjzGsxZ0pOTnwx+MmpM2CgQx1Tte+k0hZGGG
- ycILcn8A9C8Qv3NJ38a4tuy0Li1706Bp+6UXw1rMV2IFZweM77hYDRDlxMM4IBAxd9sk
- eCAg==
+ bh=DBdT5BqffG5DnFq9lgMYbao4Njc9Ip28TVJhmpzvVto=;
+ b=s31TtPWyB3rcHjmOyeApw9ZLsyAbCsR3aGwHE3a7jh2qIN/Gj/TSGkEhEGa8x3LQ0+
+ Ml3rfu1sI3fY7YtH+ft0/+xj8FfZrN0pzVXm+HEfy2ZIjaVOWdWxie5tvA3ZBl2DjofX
+ D3QmJwwGI2CSleFD0G+0x3vXdPYPnzc41IlQyaMPkqGsFrtB4usyUr1QLRR0ZzGodfgK
+ CU1Cv6aGyt8mTBr3gQM8i/EM1uLBMmyErtHcHeSfzbmeGtPmVdUJcHsyyF3dKBdEto2N
+ k/kv9Kx4bOSE27X0g5IQoRwmmvj83qUzuQGjPdTl0U4ZXXdR+2UcR89/9jZ9ypqpTv4e
+ nw1Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUfC7vCxbqMbdzC30n8Skupe0JEh1YWKM7S4s4URS/mSOyLgVKZUUjZoT60tc+5dTkC+nL3pLP4r266T3I7mSPYdMMOgmYD3n4Mu6UE/8BAQ9enROxVMj6jjbTiPw==
-X-Gm-Message-State: AOJu0YymY1OL/WiGrMby2szaSCU5RYR5vB4wvIjPS3hKfXXEei/qBwM6
- DR0meT2/A41bmh9OqtLhnDO/hrMiTqlPSQLD5eN2nNeAINAtbXK0COCfznsx+pNG38PFCfFfxgX
- hHKikUrtL5BDjb1V0QOdx1Q9+hgc=
-X-Google-Smtp-Source: AGHT+IEhKDmQXwAHkrVaV9pGWX9IxDEW8QdNh4HzmEJPa/CplRra83CklUkIZWSAWj8J6+WCo7mDzLdb3t/5VcB9DKc=
-X-Received: by 2002:a67:c598:0:b0:46e:c42c:e24a with SMTP id
- h24-20020a67c598000000b0046ec42ce24amr937099vsk.14.1707990866323; Thu, 15 Feb
- 2024 01:54:26 -0800 (PST)
+ AJvYcCWfy3sg2x2WjobKuq9fzLEl/4oexLl6g5BoKbZpQvxXFxQp65TWwTC7d0mHeAC56U01l2c8DUFMw/GtfSSYcjuTBy87wvRdeZ8GGMxQr2Otn2Tz8uTKsvK7WgYuDg==
+X-Gm-Message-State: AOJu0YwDJpfoXCJQbXe3+gmOybgbrpWHCQb599pGH/S4XqcXJB2TMDqD
+ mWlpZrniks4ZTti7gZQ4ztwDPMkotBMU7CtuBKVnej0PlpAo1oLQLY17aubwnDjLWa8YRKqxvV8
+ Q3ttt43gaLaA37ourNRlF5nWGqz4=
+X-Google-Smtp-Source: AGHT+IFQ2wq9IuILews622C8SauqEd05mzZHCeHSO+oXANfNPo0OjFMRvqaOqydaXwulpgY9op85+gLkzw49d3sv0DA=
+X-Received: by 2002:a1f:df04:0:b0:4c0:240b:89de with SMTP id
+ w4-20020a1fdf04000000b004c0240b89demr997930vkg.7.1707990882367; Thu, 15 Feb
+ 2024 01:54:42 -0800 (PST)
 MIME-Version: 1.0
-References: <20240116010930.43433-1-jeeheng.sia@starfivetech.com>
-In-Reply-To: <20240116010930.43433-1-jeeheng.sia@starfivetech.com>
+References: <20240206154042.514698-1-alexghiti@rivosinc.com>
+In-Reply-To: <20240206154042.514698-1-alexghiti@rivosinc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 15 Feb 2024 19:54:00 +1000
-Message-ID: <CAKmqyKOsX+QYRsb9+DfeYC5hkzUakOC8M1h4JCssHQPu4zG8gw@mail.gmail.com>
-Subject: Re: [PATCH v2 0/2] RISC-V: ACPI: Enable SPCR
-To: Sia Jee Heng <jeeheng.sia@starfivetech.com>
-Cc: qemu-arm@nongnu.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- mst@redhat.com, imammedo@redhat.com, anisinha@redhat.com, 
- peter.maydell@linaro.org, shannon.zhaosl@gmail.com, sunilvl@ventanamicro.com, 
- palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
- liwei1518@gmail.com, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com
+Date: Thu, 15 Feb 2024 19:54:16 +1000
+Message-ID: <CAKmqyKM8ycQnpqQdr5Bv5AYUvjuiynmkwD-1L0Hp0oEktbqr2A@mail.gmail.com>
+Subject: Re: [PATCH v2] hw: riscv: Allow large kernels to boot by moving the
+ initrd further away in RAM
+To: Alexandre Ghiti <alexghiti@rivosinc.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2f;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92a;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92a.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -94,39 +96,20 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jan 16, 2024 at 11:11=E2=80=AFAM Sia Jee Heng
-<jeeheng.sia@starfivetech.com> wrote:
+On Wed, Feb 7, 2024 at 1:42=E2=80=AFAM Alexandre Ghiti <alexghiti@rivosinc.=
+com> wrote:
 >
-> This series focuses on enabling the Serial Port Console Redirection (SPCR=
-)
-> table for the RISC-V virt platform. Considering that ARM utilizes the sam=
-e
-> function, the initial patch involves migrating the build_spcr function to
-> common code. This consolidation ensures that RISC-V avoids duplicating th=
-e
-> function.
+> Currently, the initrd is placed at 128MB, which overlaps with the kernel
+> when it is large (for example syzbot kernels are). From the kernel side,
+> there is no reason we could not push the initrd further away in memory
+> to accommodate large kernels, so move the initrd at 512MB when possible.
 >
-> The patch set is built upon Alistair's riscv-to-apply.next branch
+> The ideal solution would have been to place the initrd based on the
+> kernel size but we actually can't since the bss size is not known when
+> the image is loaded by load_image_targphys_as() and the initrd would
+> then overlap with this section.
 >
-> Changes in v2:
-> - Renamed the build_spcr_rev2() function to spcr_setup().
-> - SPCR table version is passed from spcr_setup() to the common
->   build_spcr() function.
-> - Added "Reviewed-by" from Daniel for patch 2.
-> - The term 'RFC' has been removed from this series, as the dependency cod=
-e
->   from [1] has been merged into Alistair's riscv-to-apply.next branch. Th=
-e
->   first series of this patch can be found at [2].
->
-> [1] https://lore.kernel.org/qemu-devel/20231218150247.466427-1-sunilvl@ve=
-ntanamicro.com/
-> [2] https://lore.kernel.org/qemu-devel/20240105090608.5745-1-jeeheng.sia@=
-starfivetech.com/
->
-> Sia Jee Heng (2):
->   hw/arm/virt-acpi-build.c: Migrate SPCR creation to common location
->   hw/riscv/virt-acpi-build.c: Generate SPCR table
+> Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
 
 Thanks!
 
@@ -134,16 +117,43 @@ Applied to riscv-to-apply.next
 
 Alistair
 
+> ---
 >
->  hw/acpi/aml-build.c         | 51 ++++++++++++++++++++++++++++
->  hw/arm/virt-acpi-build.c    | 68 +++++++++++++++----------------------
->  hw/riscv/virt-acpi-build.c  | 39 +++++++++++++++++++++
->  include/hw/acpi/acpi-defs.h | 33 ++++++++++++++++++
->  include/hw/acpi/aml-build.h |  4 +++
->  5 files changed, 154 insertions(+), 41 deletions(-)
+> Changes in v2:
+> - Fix typos in commit log (Daniel) and title
+> - Added to the commit log why using the kernel size does not work
+>   (Daniel)
 >
+>  hw/riscv/boot.c | 12 ++++++------
+>  1 file changed, 6 insertions(+), 6 deletions(-)
+>
+> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+> index 0ffca05189..9a367af2fa 100644
+> --- a/hw/riscv/boot.c
+> +++ b/hw/riscv/boot.c
+> @@ -188,13 +188,13 @@ static void riscv_load_initrd(MachineState *machine=
+, uint64_t kernel_entry)
+>       * kernel is uncompressed it will not clobber the initrd. However
+>       * on boards without much RAM we must ensure that we still leave
+>       * enough room for a decent sized initrd, and on boards with large
+> -     * amounts of RAM we must avoid the initrd being so far up in RAM
+> -     * that it is outside lowmem and inaccessible to the kernel.
+> -     * So for boards with less  than 256MB of RAM we put the initrd
+> -     * halfway into RAM, and for boards with 256MB of RAM or more we put
+> -     * the initrd at 128MB.
+> +     * amounts of RAM, we put the initrd at 512MB to allow large kernels
+> +     * to boot.
+> +     * So for boards with less than 1GB of RAM we put the initrd
+> +     * halfway into RAM, and for boards with 1GB of RAM or more we put
+> +     * the initrd at 512MB.
+>       */
+> -    start =3D kernel_entry + MIN(mem_size / 2, 128 * MiB);
+> +    start =3D kernel_entry + MIN(mem_size / 2, 512 * MiB);
+>
+>      size =3D load_ramdisk(filename, start, mem_size - start);
+>      if (size =3D=3D -1) {
 > --
-> 2.34.1
+> 2.39.2
 >
 >
 
