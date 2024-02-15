@@ -4,81 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CEDAC48BC4
-	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Feb 2024 22:42:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1005C48BC4
+	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Feb 2024 23:50:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rakPH-0005iu-Qu; Thu, 15 Feb 2024 17:40:39 -0500
+	id 1ralTy-0001As-Nd; Thu, 15 Feb 2024 18:49:34 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rakPG-0005iZ-98
- for qemu-riscv@nongnu.org; Thu, 15 Feb 2024 17:40:38 -0500
-Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1ralTx-0001Ad-Q9; Thu, 15 Feb 2024 18:49:33 -0500
+Received: from mail-vk1-xa2f.google.com ([2607:f8b0:4864:20::a2f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rakPE-0006Af-GF
- for qemu-riscv@nongnu.org; Thu, 15 Feb 2024 17:40:38 -0500
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-6e0a4823881so1024400b3a.0
- for <qemu-riscv@nongnu.org>; Thu, 15 Feb 2024 14:40:36 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1ralTw-0002RU-5a; Thu, 15 Feb 2024 18:49:33 -0500
+Received: by mail-vk1-xa2f.google.com with SMTP id
+ 71dfb90a1353d-4c02af5c0b6so409949e0c.0; 
+ Thu, 15 Feb 2024 15:49:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1708036835; x=1708641635; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1708040971; x=1708645771; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+CsWvOXHpBr1HttAj6uXJd5rnav59pXwvFvHFD69ko4=;
- b=oN4OeITkuNoXZzF0wCfgv5qGmsS2ewzb92mc2xFjaPebHCtbXBGTOMsHSNUNsIFkLM
- DfkQca7LGP8zKA57O9zOlf5h8kC6w+VqBJfUKb+uQ7M4bIJNWpCN91AFjjiAXqNhSBXo
- pK8Qyykz7vl1/17gGVtaY2m4wZZIUUjLJzLJXqmRGB1fzVRG7zpVtZNqz+nWtHSgiWFm
- B16UmEkza9nQnowkY05Gi4u6stTaoTKx91HOruDmHA+GsM/ewRrIXukr2ir820Mx5VbV
- +Cyh6F6IJPJ6lSsxTKjTGXLbrwCxRvahZfLHdtNtUd5RMMrhn3aWIYkeN6Qwe/3IlNp6
- 0nEQ==
+ bh=n2oTvT+/x3P3mlS6j7UxKbrN+dT373fr/0EQFk9nnxw=;
+ b=M5UWNqGwKxDrfbsLggexN8+u3Vmw01adEDRCHur2W8fO8PC1aGPvajW89jKCI+brUO
+ pQAVBmbEOV3MFQDhRNQcdKS9fLZ4kreYH07QhezHNICyDJZuNkXP1N0N6V+UH+7KIlab
+ hUN4hNe7nCdCGI/PxLo2xaBywPfo1NbuqKItiV0HgzgAPYeGOA1Eg5pfBDR+PBI7oik9
+ syaGEZL9WqbJ07e6kM9j1pAlMo4yy7VogBVRhoYuplz9/45RV54G6fHt1aOPobyXAc+j
+ 5dR20yOtNOiVabVGUMc3WWKXWbro5NIS8UEP8a+KfVrwuuLkoWbsAtmVa3snD/6tdGqT
+ O01g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708036835; x=1708641635;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1708040971; x=1708645771;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+CsWvOXHpBr1HttAj6uXJd5rnav59pXwvFvHFD69ko4=;
- b=YqVlvKqwshJIWXNDkT/hiSPNm8OW44twIOkPwM4uOysaZ0l6XzvCDBk86DD1Nxd6UX
- 0ao0jh//evfnD5G87eqbQY/+xirF/3FITbn54axYXUEVGOs+XBr6+4XJIOMR2ptyQqCQ
- ERX3QVgfsEBlnnAD20kzRBo4NL8GXV+JdZG4WkRfKiGYhvGW9MI8KccAGbXW4y6QvmiP
- q1WaKO6p9qm7icm2d1m2aEARe/Hx+ZpFTOa8A+U+Zo0v5q/sFfr6rU9j2L5biH8jj1ch
- VY5bVSqNxk17qD+OSJNH4VFrl+pIfmpwFhf1ZQk2rroqtEAp5ye1U6wjc8OuncBvAq6E
- paHw==
-X-Gm-Message-State: AOJu0Yx1ovQBGrSeA7lKWHx/8KvVwNVzT7FULKhx63MofwVF+/hEi6KN
- QBsJkdJfQ5O+aYfQcKfPyOmpcXS6sBi+D6yVYdWNLy6Asce0taZFIR1y4PQbLBc+MIZVQZl7tm3
- l
-X-Google-Smtp-Source: AGHT+IHez7m/a/eYG0URWGpoKTJYiySOdUc8WJ+eK8KJzwktIFJ7N3anedypP4R11z2PXi9e15bIvw==
-X-Received: by 2002:a05:6a21:9212:b0:19e:9b8e:8bda with SMTP id
- tl18-20020a056a21921200b0019e9b8e8bdamr3813873pzb.42.1708036835119; 
- Thu, 15 Feb 2024 14:40:35 -0800 (PST)
-Received: from grind.. ([177.94.15.159]) by smtp.gmail.com with ESMTPSA id
- j2-20020a170902758200b001db40866e25sm1733679pll.308.2024.02.15.14.40.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Feb 2024 14:40:34 -0800 (PST)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Andrew Jones <ajones@ventanamicro.com>
-Subject: [PATCH v4 3/6] target/riscv: add remaining named features
-Date: Thu, 15 Feb 2024 19:39:52 -0300
-Message-ID: <20240215223955.969568-4-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240215223955.969568-1-dbarboza@ventanamicro.com>
-References: <20240215223955.969568-1-dbarboza@ventanamicro.com>
+ bh=n2oTvT+/x3P3mlS6j7UxKbrN+dT373fr/0EQFk9nnxw=;
+ b=GtOy12edtVQlo6hFtOPmRwrZqS2T/RKmtTR/YCy6f/0LGr5z94wMVyU9kj2G1lhr4e
+ EbNgb35dSQiLOQyN0jhTSFYikXmL1PMVEmePCfXS651SLN4JjzhxpuJGyI009JcSihg7
+ TSh72bLCqwmd6C/7Pazmp5nFnJCAzmPyLUYWLG8WozzBxp9d8ixUXzy3T1ZGpnIqsz/1
+ SVjvN1Rw1SG3aQbU+cQM2INF7uS5i54OeSqvDh+Zu3X8Hjf5MboXXQMRYIveokziCFSu
+ e5l5faaRgHUh8AsnZMUcN5ldOXGTqlrI73A/ehDDmJnFJZ76cHhnem1MWObWgQFQ2dmz
+ kJ2Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW1k+/r0eckuY+/lfgnNrsLE4jXbyhaF6T0Njg8nJiFCPiEDIRrZ1hd1ZhXkVLco/NevRYn+pIBCklHigrEFQr2WVmVHyk=
+X-Gm-Message-State: AOJu0YxwBScW+MSeUEtjgy6lANEOOuankzdeVfA/8wAo6Z+OKjnX8Uwi
+ nTaJVYmv0CLnOPpoVYsVj9sFoLGPxvN2RWULfzU5HNwgi0GbzRXQ5Wd1VsD5D+fzRas/L6kMqCc
+ vBrgQ/fdqC60R+Yr4Y9Dbl2EgrAU=
+X-Google-Smtp-Source: AGHT+IEfC+1i+TROqGxuZCiFCS12AMoJF++hZqdvy2KupDUE10DswU0kI8uswyhMwMqs9Fg36KAygbOIkRjVHqIEuC0=
+X-Received: by 2002:a1f:4b87:0:b0:4c0:29e5:d31f with SMTP id
+ y129-20020a1f4b87000000b004c029e5d31fmr3294614vka.2.1708040970728; Thu, 15
+ Feb 2024 15:49:30 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x432.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20240215223955.969568-1-dbarboza@ventanamicro.com>
+In-Reply-To: <20240215223955.969568-1-dbarboza@ventanamicro.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 16 Feb 2024 09:49:04 +1000
+Message-ID: <CAKmqyKM_MOOQ-SU12yxDmZiE1Go=KOe0T8JRm75-+WgKhBizSA@mail.gmail.com>
+Subject: Re: [PATCH v4 0/6] riscv: named features riscv,isa, 'svade' rework
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2f;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2f.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -96,160 +92,47 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The RVA22U64 and RVA22S64 profiles mandates certain extensions that,
-until now, we were implying that they were available.
+On Fri, Feb 16, 2024 at 8:41=E2=80=AFAM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
+>
+> Hi,
+>
+> This new version is rebased with alistair/riscv-to-apply.next and with
+> more acks added.
+>
+> No other changes made.
+>
+> Changes from v3:
+> - rebased with alistair/riscv-to-apply.next @ c93c42a273
+> - v3 link: https://lore.kernel.org/qemu-riscv/20240202152154.773253-1-dba=
+rboza@ventanamicro.com/
+>
+> Andrew Jones (3):
+>   target/riscv: Reset henvcfg to zero
+>   target/riscv: Gate hardware A/D PTE bit updating
+>   target/riscv: Promote svade to a normal extension
+>
+> Daniel Henrique Barboza (3):
+>   target/riscv/tcg: set 'mmu' with 'satp' in cpu_set_profile()
+>   target/riscv: add riscv,isa to named features
+>   target/riscv: add remaining named features
 
-We can't do this anymore since named features also has a riscv,isa
-entry. Let's add them to riscv_cpu_named_features[].
+Thanks!
 
-Instead of adding one bool for each named feature that we'll always
-implement, i.e. can't be turned off, add a 'ext_always_enabled' bool in
-cpu->cfg. This bool will be set to 'true' in TCG accel init, and all
-named features will point to it. This also means that KVM won't see
-these features as always enable, which is our intention.
+Applied to riscv-to-apply.next
 
-If any accelerator adds support to disable one of these features, we'll
-have to promote them to regular extensions and allow users to disable it
-via command line.
+Alistair
 
-After this patch, here's the riscv,isa from a buildroot using the
-'rva22s64' CPU:
-
- # cat /proc/device-tree/cpus/cpu@0/riscv,isa
-rv64imafdc_zic64b_zicbom_zicbop_zicboz_ziccamoa_ziccif_zicclsm_ziccrse_
-zicntr_zicsr_zifencei_zihintpause_zihpm_za64rs_zfhmin_zca_zcd_zba_zbb_
-zbs_zkt_ssccptr_sscounterenw_sstvala_sstvecd_svade_svinval_svpbmt#
-
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
----
- target/riscv/cpu.c         | 42 +++++++++++++++++++++++++++++++-------
- target/riscv/cpu_cfg.h     |  6 ++++++
- target/riscv/tcg/tcg-cpu.c |  2 ++
- 3 files changed, 43 insertions(+), 7 deletions(-)
-
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 9e66eb61fd..f424751962 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -102,6 +102,10 @@ const RISCVIsaExtData isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(zicbom, PRIV_VERSION_1_12_0, ext_zicbom),
-     ISA_EXT_DATA_ENTRY(zicbop, PRIV_VERSION_1_12_0, ext_zicbop),
-     ISA_EXT_DATA_ENTRY(zicboz, PRIV_VERSION_1_12_0, ext_zicboz),
-+    ISA_EXT_DATA_ENTRY(ziccamoa, PRIV_VERSION_1_11_0, ext_always_enabled),
-+    ISA_EXT_DATA_ENTRY(ziccif, PRIV_VERSION_1_11_0, ext_always_enabled),
-+    ISA_EXT_DATA_ENTRY(zicclsm, PRIV_VERSION_1_11_0, ext_always_enabled),
-+    ISA_EXT_DATA_ENTRY(ziccrse, PRIV_VERSION_1_11_0, ext_always_enabled),
-     ISA_EXT_DATA_ENTRY(zicond, PRIV_VERSION_1_12_0, ext_zicond),
-     ISA_EXT_DATA_ENTRY(zicntr, PRIV_VERSION_1_12_0, ext_zicntr),
-     ISA_EXT_DATA_ENTRY(zicsr, PRIV_VERSION_1_10_0, ext_zicsr),
-@@ -110,6 +114,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(zihintpause, PRIV_VERSION_1_10_0, ext_zihintpause),
-     ISA_EXT_DATA_ENTRY(zihpm, PRIV_VERSION_1_12_0, ext_zihpm),
-     ISA_EXT_DATA_ENTRY(zmmul, PRIV_VERSION_1_12_0, ext_zmmul),
-+    ISA_EXT_DATA_ENTRY(za64rs, PRIV_VERSION_1_12_0, ext_always_enabled),
-     ISA_EXT_DATA_ENTRY(zaamo, PRIV_VERSION_1_12_0, ext_zaamo),
-     ISA_EXT_DATA_ENTRY(zacas, PRIV_VERSION_1_12_0, ext_zacas),
-     ISA_EXT_DATA_ENTRY(zalrsc, PRIV_VERSION_1_12_0, ext_zalrsc),
-@@ -173,8 +178,12 @@ const RISCVIsaExtData isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(smepmp, PRIV_VERSION_1_12_0, ext_smepmp),
-     ISA_EXT_DATA_ENTRY(smstateen, PRIV_VERSION_1_12_0, ext_smstateen),
-     ISA_EXT_DATA_ENTRY(ssaia, PRIV_VERSION_1_12_0, ext_ssaia),
-+    ISA_EXT_DATA_ENTRY(ssccptr, PRIV_VERSION_1_11_0, ext_always_enabled),
-     ISA_EXT_DATA_ENTRY(sscofpmf, PRIV_VERSION_1_12_0, ext_sscofpmf),
-+    ISA_EXT_DATA_ENTRY(sscounterenw, PRIV_VERSION_1_12_0, ext_always_enabled),
-     ISA_EXT_DATA_ENTRY(sstc, PRIV_VERSION_1_12_0, ext_sstc),
-+    ISA_EXT_DATA_ENTRY(sstvala, PRIV_VERSION_1_12_0, ext_always_enabled),
-+    ISA_EXT_DATA_ENTRY(sstvecd, PRIV_VERSION_1_12_0, ext_always_enabled),
-     ISA_EXT_DATA_ENTRY(svade, PRIV_VERSION_1_11_0, ext_svade),
-     ISA_EXT_DATA_ENTRY(svadu, PRIV_VERSION_1_12_0, ext_svadu),
-     ISA_EXT_DATA_ENTRY(svinval, PRIV_VERSION_1_12_0, ext_svinval),
-@@ -1567,6 +1576,11 @@ const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[] = {
-     DEFINE_PROP_END_OF_LIST(),
- };
- 
-+#define ALWAYS_ENABLED_FEATURE(_name) \
-+    {.name = _name, \
-+     .offset = CPU_CFG_OFFSET(ext_always_enabled), \
-+     .enabled = true}
-+
- /*
-  * 'Named features' is the name we give to extensions that we
-  * don't want to expose to users. They are either immutable
-@@ -1578,6 +1592,23 @@ const RISCVCPUMultiExtConfig riscv_cpu_named_features[] = {
-     MULTI_EXT_CFG_BOOL("svade", ext_svade, true),
-     MULTI_EXT_CFG_BOOL("zic64b", ext_zic64b, true),
- 
-+    /*
-+     * cache-related extensions that are always enabled
-+     * in TCG since QEMU RISC-V does not have a cache
-+     * model.
-+     */
-+    ALWAYS_ENABLED_FEATURE("za64rs"),
-+    ALWAYS_ENABLED_FEATURE("ziccif"),
-+    ALWAYS_ENABLED_FEATURE("ziccrse"),
-+    ALWAYS_ENABLED_FEATURE("ziccamoa"),
-+    ALWAYS_ENABLED_FEATURE("zicclsm"),
-+    ALWAYS_ENABLED_FEATURE("ssccptr"),
-+
-+    /* Other named features that TCG always implements */
-+    ALWAYS_ENABLED_FEATURE("sstvecd"),
-+    ALWAYS_ENABLED_FEATURE("sstvala"),
-+    ALWAYS_ENABLED_FEATURE("sscounterenw"),
-+
-     DEFINE_PROP_END_OF_LIST(),
- };
- 
-@@ -2171,13 +2202,10 @@ static const PropertyInfo prop_marchid = {
- };
- 
- /*
-- * RVA22U64 defines some 'named features' or 'synthetic extensions'
-- * that are cache related: Za64rs, Zic64b, Ziccif, Ziccrse, Ziccamoa
-- * and Zicclsm. We do not implement caching in QEMU so we'll consider
-- * all these named features as always enabled.
-- *
-- * There's no riscv,isa update for them (nor for zic64b, despite it
-- * having a cfg offset) at this moment.
-+ * RVA22U64 defines some 'named features' that are cache
-+ * related: Za64rs, Zic64b, Ziccif, Ziccrse, Ziccamoa
-+ * and Zicclsm. They are always implemented in TCG and
-+ * doesn't need to be manually enabled by the profile.
-  */
- static RISCVCPUProfile RVA22U64 = {
-     .parent = NULL,
-diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-index e68a4ddb92..be39870691 100644
---- a/target/riscv/cpu_cfg.h
-+++ b/target/riscv/cpu_cfg.h
-@@ -128,6 +128,12 @@ struct RISCVCPUConfig {
-     bool ext_svade;
-     bool ext_zic64b;
- 
-+    /*
-+     * Always 'true' boolean for named features
-+     * TCG always implement/can't be disabled.
-+     */
-+    bool ext_always_enabled;
-+
-     /* Vendor-specific custom extensions */
-     bool ext_xtheadba;
-     bool ext_xtheadbb;
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index 2307999387..ea763abb31 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -1315,6 +1315,8 @@ static void riscv_tcg_cpu_instance_init(CPUState *cs)
-     RISCVCPU *cpu = RISCV_CPU(cs);
-     Object *obj = OBJECT(cpu);
- 
-+    cpu->cfg.ext_always_enabled = true;
-+
-     misa_ext_user_opts = g_hash_table_new(NULL, g_direct_equal);
-     multi_ext_user_opts = g_hash_table_new(NULL, g_direct_equal);
-     riscv_cpu_add_user_properties(obj);
--- 
-2.43.0
-
+>
+>  target/riscv/cpu.c         | 70 +++++++++++++++++++++++++++-----------
+>  target/riscv/cpu_cfg.h     | 12 +++++--
+>  target/riscv/cpu_helper.c  | 19 ++++++++---
+>  target/riscv/csr.c         |  2 +-
+>  target/riscv/tcg/tcg-cpu.c | 34 +++++++++---------
+>  5 files changed, 94 insertions(+), 43 deletions(-)
+>
+> --
+> 2.43.0
+>
+>
 
