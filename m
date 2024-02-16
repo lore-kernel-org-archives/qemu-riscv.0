@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BB56C48260
-	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Feb 2024 16:37:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88319C48BC4
+	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Feb 2024 16:38:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rb1DX-0001BL-4z; Fri, 16 Feb 2024 11:37:39 -0500
+	id 1rb1Dl-0001S2-69; Fri, 16 Feb 2024 11:37:53 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rb1DV-0001Aa-DT
- for qemu-riscv@nongnu.org; Fri, 16 Feb 2024 11:37:37 -0500
-Received: from mail-lj1-x231.google.com ([2a00:1450:4864:20::231])
+ id 1rb1Dj-0001PT-QP
+ for qemu-riscv@nongnu.org; Fri, 16 Feb 2024 11:37:51 -0500
+Received: from mail-lj1-x232.google.com ([2a00:1450:4864:20::232])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rb1DT-00042N-7J
- for qemu-riscv@nongnu.org; Fri, 16 Feb 2024 11:37:36 -0500
-Received: by mail-lj1-x231.google.com with SMTP id
- 38308e7fff4ca-2d107900457so31499571fa.1
- for <qemu-riscv@nongnu.org>; Fri, 16 Feb 2024 08:37:33 -0800 (PST)
+ id 1rb1DX-00045e-JB
+ for qemu-riscv@nongnu.org; Fri, 16 Feb 2024 11:37:51 -0500
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-2d0f7585d89so10950731fa.3
+ for <qemu-riscv@nongnu.org>; Fri, 16 Feb 2024 08:37:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708101452; x=1708706252; darn=nongnu.org;
+ d=linaro.org; s=google; t=1708101458; x=1708706258; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zMZ+pFdg1P4n/cHnfp4DZXoxUsYEnk+lXnRUtGdShK8=;
- b=pvBb/hxoCHkAAvCXqmkSa0i8ubAqg/YL+N2TO74XCC5A01sh7H4YEbYRVJn5fzH0Yg
- DJvDtuqqiCeuamroWavYdWhydR3emPvbK35OPjRUNF2psGPWh84Aybo8H0DO9SWt90L9
- LsVFv9e2EJzTZ+ckTcv929QOUMUWHyXDYnYZ+qkxIucAfBX3XuhTI6ogTRchOpqEAMhe
- CHyTvmnhHEAVY++RU+qWdG2K89cNukuvVOOcmDkCCpFOvDUFtLexQ7cmr6DzYViIMznt
- FjRCPSh9aR7Oyxjyd0mTxGjmTFJCPcdTbTn5h84WiZnKWNkIKooXcTmtH6VGNPdnnW60
- ChzQ==
+ bh=LY87PsqI5CseL6bunSV/a+wwJBYv7wofoTM3s0oA7jk=;
+ b=bm5u2WkxjWABIl4Qi9ppMd0tfyhyPJKZ5C4f1IyNzLW/OaW/Vq1CVPFV/6UEhIjYC1
+ +feNHv7SWHbr2wR/4k32fpLeQWPozHBPQRVs+Nn55q/3gvjfDxkrfftRC6VOv7vq2ozR
+ 8kVClczcl2ccSCYszYyquIXzCpQEcrszjaz2no2vbroFu2JGe89iOLjg66ZdeWdtowSR
+ vHtv0y7j2YVaOZSlStq8M2CvkybrtIiiCPjmulWkbEdSPDFhzTJSYhmj2MsHJlG7+Giq
+ +k577WuwH2J7a756Ze/QlNcedikQJdjPDrmTynVK4DgKC8koicOuihXDPqftOKdt1xTA
+ VtNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708101452; x=1708706252;
+ d=1e100.net; s=20230601; t=1708101458; x=1708706258;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zMZ+pFdg1P4n/cHnfp4DZXoxUsYEnk+lXnRUtGdShK8=;
- b=bVgLQRQewphzYKfjsB7ix1cGGR/VUnqjzhuIwsHsv9gBWrWURXQnXhOPprHXYqekz1
- BCmSbflZDLJoaT2E2PbLm3vDykSFO5AVXWmJ3SQyljuMUyENPR47XeYQzIBEpm211hyX
- HpInQBPrK0/lKQv+es+xD0h8Tsd4M0O0/Y2Geum/x8Vpu/LkAKxJmcNEdQv6hE5gfhTI
- p0sbX+vC3M1vdmo5dC9mTxaST8yvsV1FVSEk/V0RrLS2+bKipIKDfpOvOD+f4BvRXsvf
- K4iGDDjem0XzrIiGE2jZhRaOn8OJWFnxIhQa2Sr0DZM90ggYkYHK5X9u497uLFBIcSg+
- hotQ==
+ bh=LY87PsqI5CseL6bunSV/a+wwJBYv7wofoTM3s0oA7jk=;
+ b=HeXztt43FS5DQG9ZxRLp2wIV5EWUZ8Pk4CePULxx524A/q5+v+6S3HBBM3GzaAjXoY
+ OYfFp+X4wmTJbMi48e4UfTToFCA/LJNec4O+Ukl2nrNeAEAHcNOoZlDnT84XXPL7aKBk
+ sHcycjzsbFsFT8PKP76THPGSpUpl4+c0+IJn9c5D0K6lVg2AhXhgRobnYan2QOQitZO7
+ XM55cFaKkwGHLb8OJwFo7xFjumOYdDGiP/BBsfravbtgWurTJ3fat/txrCVlGClshkMA
+ /vr9gY5SsDyE4qv3mRT52HgOrEZbx/slUdDSqiUHO+/+jmVnRVrTsE1xZ3Q9O5n1D+QQ
+ LXNw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXjTw3APCXl899vV3Fz5h6zQL0bEaIPdS+IOENB+42EVyF2Trk8ZV2m4/K0bzhyGakikqDRrjsA8sPRCOecLX4vvmVmnt4=
-X-Gm-Message-State: AOJu0YxlkDeq5i8TC1dWeAjBFnrn9PUN/L6koppamDkt5i10hlPA81fj
- JEfVAobQt2vTuM+EuZhmlyrD51BWOBVWCmd0mjFaNtJYq3PRBVq6J/fLKqKv4xk=
-X-Google-Smtp-Source: AGHT+IEs18XUXWJPj7u/naFmox40F8EKAaTo4bM8a/Jg+AqEKtytLtB2G2K8MwxsAjvGLb6S2l0Ghw==
-X-Received: by 2002:a05:651c:2046:b0:2d0:4ef8:347a with SMTP id
- t6-20020a05651c204600b002d04ef8347amr3340354ljo.18.1708101452538; 
- Fri, 16 Feb 2024 08:37:32 -0800 (PST)
+ AJvYcCVKPu7iEc7PVCNsGxi6HXZ2Hyowhf4UMwoBM9p8Tx/Wi9PKmIiCEfxaiMZGgfJiL0HHPUScPNgzWknn3aR0zSDi7iYP+Vk=
+X-Gm-Message-State: AOJu0YzA8Y9k2C6BlgCLFIK0hvkMca1Lu4hbyfYMle4uAop+O548Tx1e
+ ONz4ZcDFKSieSJea9H0YBYYQurYqlQIY7WpoVBcABTzceqRLizufTxj9KByED8o=
+X-Google-Smtp-Source: AGHT+IE8pPyveV8Vlvza90Z4Lj4siM18NVcQPXJ9rGlAiKbbc7Qdjn+CleszgmQwhp7VrHZJgm577g==
+X-Received: by 2002:a2e:9607:0:b0:2d2:1107:3a3 with SMTP id
+ v7-20020a2e9607000000b002d2110703a3mr3184316ljh.10.1708101457868; 
+ Fri, 16 Feb 2024 08:37:37 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- i6-20020a05600c354600b004107686650esm2850704wmq.36.2024.02.16.08.37.32
+ m4-20020a05600c280400b0040fe308ff25sm2733004wmb.24.2024.02.16.08.37.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Feb 2024 08:37:32 -0800 (PST)
+ Fri, 16 Feb 2024 08:37:35 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 857F65F9E8;
- Fri, 16 Feb 2024 16:30:28 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id C73195F9E1;
+ Fri, 16 Feb 2024 16:30:27 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Yoshinori Sato <ysato@users.sourceforge.jp>,
@@ -89,24 +89,24 @@ Cc: Yoshinori Sato <ysato@users.sourceforge.jp>,
  Eduardo Habkost <eduardo@habkost.net>,
  Alistair Francis <alistair.francis@wdc.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH 22/23] docs/devel: document some plugin assumptions
-Date: Fri, 16 Feb 2024 16:30:24 +0000
-Message-Id: <20240216163025.424857-23-alex.bennee@linaro.org>
+Subject: [PATCH 15/23] cpu: call plugin init hook asynchronously
+Date: Fri, 16 Feb 2024 16:30:17 +0000
+Message-Id: <20240216163025.424857-16-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240216163025.424857-1-alex.bennee@linaro.org>
 References: <20240216163025.424857-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::231;
- envelope-from=alex.bennee@linaro.org; helo=mail-lj1-x231.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::232;
+ envelope-from=alex.bennee@linaro.org; helo=mail-lj1-x232.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -122,77 +122,54 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-While we attempt to hide implementation details from the plugin we
-shouldn't be totally obtuse. Let the user know what they can and can't
-expect with the various instrumentation options.
+From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 
-Message-Id: <20240103173349.398526-44-alex.bennee@linaro.org>
-Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+This ensures we run during a cpu_exec, which allows to call start/end
+exclusive from this init hook (needed for new scoreboard API introduced
+later).
+
+async work is run before any tb is translated/executed, so we can
+guarantee plugin init will be called before any other hook.
+
+The previous change made sure that any idle/resume cb call will not be
+done before initializing plugin for a given vcpu.
+
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+Message-Id: <20240213094009.150349-5-pierrick.bouvier@linaro.org>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- docs/devel/tcg-plugins.rst | 49 ++++++++++++++++++++++++++++++++++++++
- 1 file changed, 49 insertions(+)
+ hw/core/cpu-common.c | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
-diff --git a/docs/devel/tcg-plugins.rst b/docs/devel/tcg-plugins.rst
-index 535a74684c5..9cc09d8c3da 100644
---- a/docs/devel/tcg-plugins.rst
-+++ b/docs/devel/tcg-plugins.rst
-@@ -112,6 +112,55 @@ details are opaque to plugins. The plugin is able to query select
- details of instructions and system configuration only through the
- exported *qemu_plugin* functions.
+diff --git a/hw/core/cpu-common.c b/hw/core/cpu-common.c
+index fe16d0d9df8..68786360ea5 100644
+--- a/hw/core/cpu-common.c
++++ b/hw/core/cpu-common.c
+@@ -194,6 +194,11 @@ static void cpu_common_parse_features(const char *typename, char *features,
+     }
+ }
  
-+However the following assumptions can be made:
++static void qemu_plugin_vcpu_init__async(CPUState *cpu, run_on_cpu_data unused)
++{
++    qemu_plugin_vcpu_init_hook(cpu);
++}
 +
-+Translation Blocks
-+++++++++++++++++++
-+
-+All code will go through a translation phase although not all
-+translations will be necessarily be executed. You need to instrument
-+actual executions to track what is happening.
-+
-+It is quite normal to see the same address translated multiple times.
-+If you want to track the code in system emulation you should examine
-+the underlying physical address (``qemu_plugin_insn_haddr``) to take
-+into account the effects of virtual memory although if the system does
-+paging this will change too.
-+
-+Not all instructions in a block will always execute so if its
-+important to track individual instruction execution you need to
-+instrument them directly. However asynchronous interrupts will not
-+change control flow mid-block.
-+
-+Instructions
-+++++++++++++
-+
-+Instruction instrumentation runs before the instruction executes. You
-+can be can be sure the instruction will be dispatched, but you can't
-+be sure it will complete. Generally this will be because of a
-+synchronous exception (e.g. SIGILL) triggered by the instruction
-+attempting to execute. If you want to be sure you will need to
-+instrument the next instruction as well. See the ``execlog.c`` plugin
-+for examples of how to track this and finalise details after execution.
-+
-+Memory Accesses
-++++++++++++++++
-+
-+Memory callbacks are called after a successful load or store.
-+Unsuccessful operations (i.e. faults) will not be visible to memory
-+instrumentation although the execution side effects can be observed
-+(e.g. entering a exception handler).
-+
-+System Idle and Resume States
-++++++++++++++++++++++++++++++
-+
-+The ``qemu_plugin_register_vcpu_idle_cb`` and
-+``qemu_plugin_register_vcpu_resume_cb`` functions can be used to track
-+when CPUs go into and return from sleep states when waiting for
-+external I/O. Be aware though that these may occur less frequently
-+than in real HW due to the inefficiencies of emulation giving less
-+chance for the CPU to idle.
-+
- Internals
- ---------
+ static void cpu_common_realizefn(DeviceState *dev, Error **errp)
+ {
+     CPUState *cpu = CPU(dev);
+@@ -217,9 +222,9 @@ static void cpu_common_realizefn(DeviceState *dev, Error **errp)
+         cpu_resume(cpu);
+     }
  
+-    /* Plugin initialization must wait until the cpu is fully realized. */
++    /* Plugin initialization must wait until the cpu start executing code */
+     if (tcg_enabled()) {
+-        qemu_plugin_vcpu_init_hook(cpu);
++        async_run_on_cpu(cpu, qemu_plugin_vcpu_init__async, RUN_ON_CPU_NULL);
+     }
+ 
+     /* NOTE: latest generic point where the cpu is fully realized */
 -- 
 2.39.2
 
