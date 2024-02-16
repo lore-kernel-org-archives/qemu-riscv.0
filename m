@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C60AC48260
-	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Feb 2024 16:33:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC1D5C48260
+	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Feb 2024 16:33:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rb17K-00053d-4P; Fri, 16 Feb 2024 11:31:14 -0500
+	id 1rb16n-0004Y6-Nr; Fri, 16 Feb 2024 11:30:41 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rb178-0004rx-6H
- for qemu-riscv@nongnu.org; Fri, 16 Feb 2024 11:31:04 -0500
-Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
+ id 1rb16l-0004Vb-3r
+ for qemu-riscv@nongnu.org; Fri, 16 Feb 2024 11:30:39 -0500
+Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rb16m-0002G9-DG
- for qemu-riscv@nongnu.org; Fri, 16 Feb 2024 11:31:01 -0500
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-41244cc3d67so6044555e9.2
- for <qemu-riscv@nongnu.org>; Fri, 16 Feb 2024 08:30:39 -0800 (PST)
+ id 1rb16c-0002AU-Vy
+ for qemu-riscv@nongnu.org; Fri, 16 Feb 2024 11:30:38 -0500
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-40fd2f7ef55so19069515e9.0
+ for <qemu-riscv@nongnu.org>; Fri, 16 Feb 2024 08:30:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708101039; x=1708705839; darn=nongnu.org;
+ d=linaro.org; s=google; t=1708101029; x=1708705829; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=O9WREwsMrt85roF9DpcRAV7U4Bq5TV/wSmpsUdovSGg=;
- b=l4+Y5CZloaevBoepk4VwH/cDgOY0nWHE0k9EmTIrmNjhfUJXAb+ZwC+RXZE18bUOWA
- Fc54PZgp7R79d2L5xsbNnj4n7ewE2+F8hWaSnJAzXVndiSgnZgXX/f4Fx2btQtaxqdpT
- o74paxbqKo8AM6EdBT+eHfmoW8883gzf9kFgpcmkZ4k70Ajukaew6oNs8NdRsXsS++fZ
- e3nVl4QyD/vnL5Zu2uwnXNK7dKVYA9QijSyoqueIkf1J/VE6MJLCJLKngVOfCYEIfGE/
- qs+KlOJdBzfMVAvHnkFMpSTheaxLCht88byKo6cTv4ajshqMbZj2aKZDhZ8hzAdCBZRT
- 0i5w==
+ bh=LdcVDf8Ux5HUL43SJs6bcSDbxjQQY72FOgDdjsf9tWM=;
+ b=x6cSbXcxHKFyTf7w3bTy4M9azncNxYqcWzi5tLxrBqebDjXRg3GCve9XEsF0x0qqxp
+ ARa52BnqRdhyOaPXtghCKzJiwD5zK1Kf+fdkAxzkKSEuQInR4X1kT3nqO6NfEXw4xtrI
+ b6fJNar7z3duuMaFm9jxC6K7eCaha23vrRmz9cOg8KIPrcZwEeXJ/O9dmKKVRP1HQpxg
+ ck/IXUv24oRVWLA0DpWDbblQy8+J1rz0F2N+BR06vqnVaKLR8b3ytbOEPAZsjlqYN6XM
+ Dfvl3Nhidq2wLnqENfh99jQ/jTdFYQ2dkKepW0aBhHRNSsoAA/5Ry+jGW2NGDZjI5v87
+ JIig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708101039; x=1708705839;
+ d=1e100.net; s=20230601; t=1708101029; x=1708705829;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=O9WREwsMrt85roF9DpcRAV7U4Bq5TV/wSmpsUdovSGg=;
- b=SA48lYpxCwxVzlH/IJzZ4d8RRBj6VKC1L+A8FKU5RDzC65fOBMzRhx1PI1vaF8nVmg
- VltG9oaOnlFeiHhgVZkp/6imHcrj3QZjOSxBk11qPjFe5RXEXNNhg/fhGUjGF0MMiMN7
- F8e2jn+no8vm4NBJ5W6qgDG83h8/T7oyL1e9Qx6DAHaPywT+h3Nuy/1feTXNSiixM6fp
- XCmb+zancCryIAgCA4AuS/+AaMw6oYEJADnTAzWooXVdOym58LS2I7eBrJjYEuzoBVbf
- GhkEhesbcAmfhFPAaGyZGx3BYYqOBikByf3uRUwb8fAB+q2OVAwbg9Dqa8KI/I8An1ji
- l0fA==
+ bh=LdcVDf8Ux5HUL43SJs6bcSDbxjQQY72FOgDdjsf9tWM=;
+ b=mmOPAfP0P9i4aNTx4o3z3+vWLza8UPoeCBMvhRSWp9UqlMTK1P3eyYRRsyv0HCKBoz
+ tsriq1ErUiooWeG4vZEeB4b+wsr8NGR5QRgCc9PKKyZGLUG0lErHcIJXg1VY9/Nbfkun
+ T/R7eJS5CuR+9rCTcs7qhRVLm2je3RFPzlvkHA077u5UfmMc6EZjxHBAZmrz6/quUMEA
+ 4a72mCi+otPdrXTxPsz1zhjbvtV7Y/EN9NdYydnQ1sXmeio3KgBrhWhormQ/K+Fi+UY0
+ GDC24+EcZpaHoEATOAZ1LYr/eDP0BP6ZsIHZCfeG1orvho/Fbs2C7BD8KBT9cyfSlt8x
+ sttg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVCJBwkKs+toTykRHZ1xVJe7XcgGYuMJCLk9O4uukDc0OTJamhpoqx4ppzNtAWg6rE5Bxk846Y9I45q0r06j2d/sF4MI64=
-X-Gm-Message-State: AOJu0YwslPbKJrywXhCYqEcJ3KfrFC0N1XrdryI+JwSmsbXNnhU3rppR
- j0XA0gIgEq1l29cZvPDHItxEZ0XWwbHcl5CRl7vRqARt8DuAQf+IuvIn1TZM25w=
-X-Google-Smtp-Source: AGHT+IFLIbtAa0c9RNa/u/6gGY87Xq8Y0z3xpX0SDTf4Ogo77+0XcqOZxX9qWtU5mITWFkzmTyq8Ag==
-X-Received: by 2002:adf:ee8b:0:b0:33d:174b:6a3c with SMTP id
- b11-20020adfee8b000000b0033d174b6a3cmr1734119wro.59.1708101039019; 
- Fri, 16 Feb 2024 08:30:39 -0800 (PST)
+ AJvYcCWM4nSURrO6CQkYaKYJT+s6l0teV8zK01e5Zb8Tuz5p6BweJZbjocTMN338wmEhUws7LTrwQSL2lvljtT3h6XRuM5rM5xc=
+X-Gm-Message-State: AOJu0Yx6P71iy7ympqaOLcwLxYGOfTmuXiMC94tvKeJqkfBcuiPJSVTz
+ P1SAy5zfQ6mwjsAmod0utyvBpj7n7kWSmiSrfNt0Sx9MN0hapkpfkJE1sAiCd7Y=
+X-Google-Smtp-Source: AGHT+IHySOoIcYkHi/lL2dejM81P99Bsg38dTDYXlIB6YzrCLkEp2oanjxR76bC5xfXanF91JAnCug==
+X-Received: by 2002:a05:600c:19c7:b0:412:5296:9737 with SMTP id
+ u7-20020a05600c19c700b0041252969737mr1544501wmq.12.1708101029554; 
+ Fri, 16 Feb 2024 08:30:29 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- n14-20020a5d420e000000b0033d282c7537sm18879wrq.23.2024.02.16.08.30.30
+ m4-20020a05600c280400b0040fe308ff25sm2716578wmb.24.2024.02.16.08.30.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Feb 2024 08:30:32 -0800 (PST)
+ Fri, 16 Feb 2024 08:30:27 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 972985F9DF;
- Fri, 16 Feb 2024 16:30:27 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 6D5E45F9D0;
+ Fri, 16 Feb 2024 16:30:26 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Yoshinori Sato <ysato@users.sourceforge.jp>,
@@ -88,25 +88,26 @@ Cc: Yoshinori Sato <ysato@users.sourceforge.jp>,
  Daniel Henrique Barboza <danielhb413@gmail.com>,
  Eduardo Habkost <eduardo@habkost.net>,
  Alistair Francis <alistair.francis@wdc.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH 13/23] plugins: add qemu_plugin_num_vcpus function
-Date: Fri, 16 Feb 2024 16:30:15 +0000
-Message-Id: <20240216163025.424857-14-alex.bennee@linaro.org>
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Akihiko Odaki <akihiko.odaki@daynix.com>
+Subject: [PATCH 04/23] target/riscv: Use GDBFeature for dynamic XML
+Date: Fri, 16 Feb 2024 16:30:06 +0000
+Message-Id: <20240216163025.424857-5-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240216163025.424857-1-alex.bennee@linaro.org>
 References: <20240216163025.424857-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::332;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x332.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -122,107 +123,220 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+From: Akihiko Odaki <akihiko.odaki@daynix.com>
 
-We now keep track of how many vcpus were started. This way, a plugin can
-easily query number of any vcpus at any point of execution, which
-unifies user and system mode workflows.
+In preparation for a change to use GDBFeature as a parameter of
+gdb_register_coprocessor(), convert the internal representation of
+dynamic feature from plain XML to GDBFeature.
 
-Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Message-Id: <20240213094009.150349-3-pierrick.bouvier@linaro.org>
+Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+Message-Id: <20240103173349.398526-29-alex.bennee@linaro.org>
+Message-Id: <20231213-gdb-v17-3-777047380591@daynix.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- include/qemu/qemu-plugin.h   | 3 +++
- plugins/plugin.h             | 4 ++++
- plugins/api.c                | 5 +++++
- plugins/core.c               | 6 ++++++
- plugins/qemu-plugins.symbols | 1 +
- 5 files changed, 19 insertions(+)
+ target/riscv/cpu.h     |  5 +--
+ target/riscv/cpu.c     |  4 +--
+ target/riscv/gdbstub.c | 81 +++++++++++++++++++-----------------------
+ 3 files changed, 41 insertions(+), 49 deletions(-)
 
-diff --git a/include/qemu/qemu-plugin.h b/include/qemu/qemu-plugin.h
-index e45181c793c..93981f8f89f 100644
---- a/include/qemu/qemu-plugin.h
-+++ b/include/qemu/qemu-plugin.h
-@@ -645,6 +645,9 @@ QEMU_PLUGIN_API
- void qemu_plugin_register_atexit_cb(qemu_plugin_id_t id,
-                                     qemu_plugin_udata_cb_t cb, void *userdata);
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index f52dce78baa..5d291a70925 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -24,6 +24,7 @@
+ #include "hw/registerfields.h"
+ #include "hw/qdev-properties.h"
+ #include "exec/cpu-defs.h"
++#include "exec/gdbstub.h"
+ #include "qemu/cpu-float.h"
+ #include "qom/object.h"
+ #include "qemu/int128.h"
+@@ -445,8 +446,8 @@ struct ArchCPU {
  
-+/* returns how many vcpus were started at this point */
-+int qemu_plugin_num_vcpus(void);
+     CPURISCVState env;
+ 
+-    char *dyn_csr_xml;
+-    char *dyn_vreg_xml;
++    GDBFeature dyn_csr_feature;
++    GDBFeature dyn_vreg_feature;
+ 
+     /* Configuration Settings */
+     RISCVCPUConfig cfg;
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 1b8d001d237..1b62e269b90 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -2305,9 +2305,9 @@ static const char *riscv_gdb_get_dynamic_xml(CPUState *cs, const char *xmlname)
+     RISCVCPU *cpu = RISCV_CPU(cs);
+ 
+     if (strcmp(xmlname, "riscv-csr.xml") == 0) {
+-        return cpu->dyn_csr_xml;
++        return cpu->dyn_csr_feature.xml;
+     } else if (strcmp(xmlname, "riscv-vector.xml") == 0) {
+-        return cpu->dyn_vreg_xml;
++        return cpu->dyn_vreg_feature.xml;
+     }
+ 
+     return NULL;
+diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+index ca9b71f7bbc..d8da84fa52e 100644
+--- a/target/riscv/gdbstub.c
++++ b/target/riscv/gdbstub.c
+@@ -214,14 +214,15 @@ static int riscv_gdb_set_virtual(CPURISCVState *cs, uint8_t *mem_buf, int n)
+     return 0;
+ }
+ 
+-static int riscv_gen_dynamic_csr_xml(CPUState *cs, int base_reg)
++static GDBFeature *riscv_gen_dynamic_csr_feature(CPUState *cs, int base_reg)
+ {
+     RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(cs);
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     CPURISCVState *env = &cpu->env;
+-    GString *s = g_string_new(NULL);
++    GDBFeatureBuilder builder;
+     riscv_csr_predicate_fn predicate;
+     int bitsize = riscv_cpu_max_xlen(mcc);
++    const char *name;
+     int i;
+ 
+ #if !defined(CONFIG_USER_ONLY)
+@@ -233,9 +234,9 @@ static int riscv_gen_dynamic_csr_xml(CPUState *cs, int base_reg)
+         bitsize = 64;
+     }
+ 
+-    g_string_printf(s, "<?xml version=\"1.0\"?>");
+-    g_string_append_printf(s, "<!DOCTYPE feature SYSTEM \"gdb-target.dtd\">");
+-    g_string_append_printf(s, "<feature name=\"org.gnu.gdb.riscv.csr\">");
++    gdb_feature_builder_init(&builder, &cpu->dyn_csr_feature,
++                             "org.gnu.gdb.riscv.csr", "riscv-csr.xml",
++                             base_reg);
+ 
+     for (i = 0; i < CSR_TABLE_SIZE; i++) {
+         if (env->priv_ver < csr_ops[i].min_priv_ver) {
+@@ -243,72 +244,64 @@ static int riscv_gen_dynamic_csr_xml(CPUState *cs, int base_reg)
+         }
+         predicate = csr_ops[i].predicate;
+         if (predicate && (predicate(env, i) == RISCV_EXCP_NONE)) {
+-            if (csr_ops[i].name) {
+-                g_string_append_printf(s, "<reg name=\"%s\"", csr_ops[i].name);
+-            } else {
+-                g_string_append_printf(s, "<reg name=\"csr%03x\"", i);
++            g_autofree char *dynamic_name = NULL;
++            name = csr_ops[i].name;
++            if (!name) {
++                dynamic_name = g_strdup_printf("csr%03x", i);
++                name = dynamic_name;
+             }
+-            g_string_append_printf(s, " bitsize=\"%d\"", bitsize);
+-            g_string_append_printf(s, " regnum=\"%d\"/>", base_reg + i);
 +
- /**
-  * qemu_plugin_outs() - output string via QEMU's logging system
-  * @string: a string
-diff --git a/plugins/plugin.h b/plugins/plugin.h
-index 90f3f324ab6..00b3509f708 100644
---- a/plugins/plugin.h
-+++ b/plugins/plugin.h
-@@ -44,6 +44,8 @@ struct qemu_plugin_state {
-      * the code cache is flushed.
-      */
-     struct qht dyn_cb_arr_ht;
-+    /* How many vcpus were started */
-+    int num_vcpus;
- };
++            gdb_feature_builder_append_reg(&builder, name, bitsize, i,
++                                           "int", NULL);
+         }
+     }
  
+-    g_string_append_printf(s, "</feature>");
+-
+-    cpu->dyn_csr_xml = g_string_free(s, false);
++    gdb_feature_builder_end(&builder);
  
-@@ -97,4 +99,6 @@ void plugin_register_vcpu_mem_cb(GArray **arr,
- 
- void exec_inline_op(struct qemu_plugin_dyn_cb *cb);
- 
-+int plugin_num_vcpus(void);
-+
- #endif /* PLUGIN_H */
-diff --git a/plugins/api.c b/plugins/api.c
-index 2926b1961a8..116b8bd603c 100644
---- a/plugins/api.c
-+++ b/plugins/api.c
-@@ -342,6 +342,11 @@ const char *qemu_plugin_hwaddr_device_name(const struct qemu_plugin_hwaddr *h)
+ #if !defined(CONFIG_USER_ONLY)
+     env->debugger = false;
  #endif
+ 
+-    return CSR_TABLE_SIZE;
++    return &cpu->dyn_csr_feature;
  }
  
-+int qemu_plugin_num_vcpus(void)
-+{
-+    return plugin_num_vcpus();
-+}
-+
- /*
-  * Plugin output
-  */
-diff --git a/plugins/core.c b/plugins/core.c
-index ee2fa41af9e..caa66311351 100644
---- a/plugins/core.c
-+++ b/plugins/core.c
-@@ -213,6 +213,7 @@ void qemu_plugin_vcpu_init_hook(CPUState *cpu)
-     bool success;
+-static int ricsv_gen_dynamic_vector_xml(CPUState *cs, int base_reg)
++static GDBFeature *ricsv_gen_dynamic_vector_feature(CPUState *cs, int base_reg)
+ {
+     RISCVCPU *cpu = RISCV_CPU(cs);
+-    GString *s = g_string_new(NULL);
+-    g_autoptr(GString) ts = g_string_new("");
+-    int reg_width = cpu->cfg.vlenb << 3;
+-    int num_regs = 0;
++    int reg_width = cpu->cfg.vlenb;
++    GDBFeatureBuilder builder;
+     int i;
  
-     qemu_rec_mutex_lock(&plugin.lock);
-+    plugin.num_vcpus = MAX(plugin.num_vcpus, cpu->cpu_index + 1);
-     plugin_cpu_update__locked(&cpu->cpu_index, NULL, NULL);
-     success = g_hash_table_insert(plugin.cpu_ht, &cpu->cpu_index,
-                                   &cpu->cpu_index);
-@@ -570,3 +571,8 @@ static void __attribute__((__constructor__)) plugin_init(void)
-              QHT_MODE_AUTO_RESIZE);
-     atexit(qemu_plugin_atexit_cb);
+-    g_string_printf(s, "<?xml version=\"1.0\"?>");
+-    g_string_append_printf(s, "<!DOCTYPE target SYSTEM \"gdb-target.dtd\">");
+-    g_string_append_printf(s, "<feature name=\"org.gnu.gdb.riscv.vector\">");
++    gdb_feature_builder_init(&builder, &cpu->dyn_vreg_feature,
++                             "org.gnu.gdb.riscv.vector", "riscv-vector.xml",
++                             base_reg);
+ 
+     /* First define types and totals in a whole VL */
+     for (i = 0; i < ARRAY_SIZE(vec_lanes); i++) {
+         int count = reg_width / vec_lanes[i].size;
+-        g_string_printf(ts, "%s", vec_lanes[i].id);
+-        g_string_append_printf(s,
+-                               "<vector id=\"%s\" type=\"%s\" count=\"%d\"/>",
+-                               ts->str, vec_lanes[i].gdb_type, count);
++        gdb_feature_builder_append_tag(
++            &builder, "<vector id=\"%s\" type=\"%s\" count=\"%d\"/>",
++            vec_lanes[i].id, vec_lanes[i].gdb_type, count);
+     }
+ 
+     /* Define unions */
+-    g_string_append_printf(s, "<union id=\"riscv_vector\">");
++    gdb_feature_builder_append_tag(&builder, "<union id=\"riscv_vector\">");
+     for (i = 0; i < ARRAY_SIZE(vec_lanes); i++) {
+-        g_string_append_printf(s, "<field name=\"%c\" type=\"%s\"/>",
+-                               vec_lanes[i].suffix,
+-                               vec_lanes[i].id);
++        gdb_feature_builder_append_tag(&builder,
++                                       "<field name=\"%c\" type=\"%s\"/>",
++                                       vec_lanes[i].suffix, vec_lanes[i].id);
+     }
+-    g_string_append(s, "</union>");
++    gdb_feature_builder_append_tag(&builder, "</union>");
+ 
+     /* Define vector registers */
+     for (i = 0; i < 32; i++) {
+-        g_string_append_printf(s,
+-                               "<reg name=\"v%d\" bitsize=\"%d\""
+-                               " regnum=\"%d\" group=\"vector\""
+-                               " type=\"riscv_vector\"/>",
+-                               i, reg_width, base_reg++);
+-        num_regs++;
++        gdb_feature_builder_append_reg(&builder, g_strdup_printf("v%d", i),
++                                       reg_width, i, "riscv_vector", "vector");
+     }
+ 
+-    g_string_append_printf(s, "</feature>");
++    gdb_feature_builder_end(&builder);
+ 
+-    cpu->dyn_vreg_xml = g_string_free(s, false);
+-    return num_regs;
++    return &cpu->dyn_vreg_feature;
  }
-+
-+int plugin_num_vcpus(void)
-+{
-+    return plugin.num_vcpus;
-+}
-diff --git a/plugins/qemu-plugins.symbols b/plugins/qemu-plugins.symbols
-index ca806000d54..adb67608598 100644
---- a/plugins/qemu-plugins.symbols
-+++ b/plugins/qemu-plugins.symbols
-@@ -16,6 +16,7 @@
-   qemu_plugin_mem_is_sign_extended;
-   qemu_plugin_mem_is_store;
-   qemu_plugin_mem_size_shift;
-+  qemu_plugin_num_vcpus;
-   qemu_plugin_outs;
-   qemu_plugin_path_to_binary;
-   qemu_plugin_register_atexit_cb;
+ 
+ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+@@ -324,10 +317,9 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+                                  32, "riscv-32bit-fpu.xml", 0);
+     }
+     if (env->misa_ext & RVV) {
+-        int base_reg = cs->gdb_num_regs;
+         gdb_register_coprocessor(cs, riscv_gdb_get_vector,
+                                  riscv_gdb_set_vector,
+-                                 ricsv_gen_dynamic_vector_xml(cs, base_reg),
++                                 ricsv_gen_dynamic_vector_feature(cs, cs->gdb_num_regs)->num_regs,
+                                  "riscv-vector.xml", 0);
+     }
+     switch (mcc->misa_mxl_max) {
+@@ -347,9 +339,8 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+     }
+ 
+     if (cpu->cfg.ext_zicsr) {
+-        int base_reg = cs->gdb_num_regs;
+         gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
+-                                 riscv_gen_dynamic_csr_xml(cs, base_reg),
++                                 riscv_gen_dynamic_csr_feature(cs, cs->gdb_num_regs)->num_regs,
+                                  "riscv-csr.xml", 0);
+     }
+ }
 -- 
 2.39.2
 
