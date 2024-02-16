@@ -4,63 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A442C48260
-	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Feb 2024 16:34:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE55BC48BC4
+	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Feb 2024 16:35:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rb16h-0004SC-KZ; Fri, 16 Feb 2024 11:30:35 -0500
+	id 1rb16l-0004VL-1q; Fri, 16 Feb 2024 11:30:39 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rb16e-0004Pz-FG
- for qemu-riscv@nongnu.org; Fri, 16 Feb 2024 11:30:32 -0500
-Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d])
+ id 1rb16i-0004TH-W7
+ for qemu-riscv@nongnu.org; Fri, 16 Feb 2024 11:30:37 -0500
+Received: from mail-lj1-x22c.google.com ([2a00:1450:4864:20::22c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rb16a-000290-HX
- for qemu-riscv@nongnu.org; Fri, 16 Feb 2024 11:30:32 -0500
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-33cddf4b4b5so1662820f8f.0
+ id 1rb16b-000297-UR
+ for qemu-riscv@nongnu.org; Fri, 16 Feb 2024 11:30:36 -0500
+Received: by mail-lj1-x22c.google.com with SMTP id
+ 38308e7fff4ca-2d11d17dddeso13031811fa.3
  for <qemu-riscv@nongnu.org>; Fri, 16 Feb 2024 08:30:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1708101027; x=1708705827; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=1QZylUdoK1CPpHNhgsAqnHF8U+9dY96/ygWB3FaVuLE=;
- b=OyiWrtEeaFqtwNfcwG6CIpE3AAwPxXOwFvnui+G7BgxOrNCAHGVQwTpC+JkRHZ6CwB
- u1+PB+ImlvSpcc3oo2QG8jF/aqT+iSP25jU+cWF0Oi8VhWiAT62BMneJPvolvflFUZb2
- hrX7EvxtbSpw+2VOysCcq/ekYmOYBuvPUCT/hDMQ0qQZROFtXT76IJmq6nAvgIrkbNzl
- ZDslhCDwInh0uf/R8SdrOmyg9b6wRSxXFKomkzj9tzU/q2ld/RXI1ZDmmhRdJss+h4wO
- mPcjHorLExfwfaQZi3ThPDm37Hz4gYOJ8Fw87y3MR2T8p+YUK2PGmZj1eB46ugP9UvK6
- SCuw==
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=eLoCVfGQA0B56KJFSLQeHKi/nYPeRXMDk6OZ3NrpqZo=;
+ b=vQIGZEQ/afk3o4wTzuZgUpVfZZlxhFbu247JVosB89Omlt1wuFn3Utd/HeNoWkRwu4
+ stLsISBe8RsbIfJYPIIBeRe+oBdI2xS8GdHpMmpT6v0ajQjIBQeMAk4AB310N+NJisVj
+ WoomyDPoHxI8JLBu3g5hHYN3AXAsF49ui4fMX08KxGSUUUpYCdLFyUAyldvTLNWnOhqB
+ HmRymsSxtyoFFYpOnI94ojbjfEJpnUE4lsWYraeoUFbAf+F1WD6tBoIhGfMh2Pkobu7v
+ +n9xPb7Havk5bpeZjzmGSktmcRlpAkWpZYMvnaOSTMUZt4C24sVIx5NpJwCVNNiHvu/q
+ t0+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1708101027; x=1708705827;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=1QZylUdoK1CPpHNhgsAqnHF8U+9dY96/ygWB3FaVuLE=;
- b=Pu6XMjfMtq1VUZYzxcDOXrG1t5052eFLP0kxAR4DwRoEjajt1VvadvKc8yz2gOiJqk
- yJbH2lngoqTwRnaJ8IEIsAuTtsioHL6bjZPrgRYxbRoNIgg3DJYGuD+3NViMy0snobTx
- UeD7XZKVeus91hAzh4662zEXfKcFIRdULWjKjNqTHkQjO4iPEXT92t1Sq6uLRAegPzHk
- FB9bhuS/7QPe18CZ6FekPyT02cPmtWg/Rtvgcvw0yVuf9soue8kd9hMiwDxatAi71ZhS
- 30ISN6W/nz+y6r2harUDG2eLqfrwMIeetZCR9eanyFkoBb8zuRIQF2GkOZsYZ4GWiyNu
- 2yKg==
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=eLoCVfGQA0B56KJFSLQeHKi/nYPeRXMDk6OZ3NrpqZo=;
+ b=H3RPYy26/JFYz7hf6iC4pcCFLhei4XN9P3FoXvfPNZG1G9eYgBYTB70M2X/x1zdnQO
+ lyuUwwDQYcfv8QA2RHjwvLWyg8BZE0pZj+VQ+zv4Q5okofASDUuFBAsz+IMgvPJslmGC
+ ACpGJTECMm6XXUBBc3+74C4tFL2PM2LdQ6h0U7k23bRa3+yiUGRlmXgejRTVZnRfuOyd
+ 6aI4aBWCYYT41raaaTGM/WdrBKtSaEERefC9NE6kAO4F/8V4LxpHB+PGVMtNLC31nt5D
+ J6STmnCQ3kFDbeJcBX1iVuZameOELmURxgovBQk/lMSUr7QYfd74guS9zic4AAvsdX+A
+ 0Tdw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVitlzLNpBQKFSbypRXSBZBpijV1/RS4BuRJY1XXYtLl7k6eF15Oxn+fU/Vf+G9guHwnREnwKdZvl4dsVAYsVAgtIXsqCQ=
-X-Gm-Message-State: AOJu0Yztgba0sNtbdDRQXleGc2fxwA+iY0zFnuJNDbOwIWIP8iTAumjH
- pJojkdR0gMMcVJDqan0xlod8U4uSdKXPV5h4/LLtd61p4gRZykQQY+p5FDxFXUI=
-X-Google-Smtp-Source: AGHT+IGfQbBI/6bGngCEopMdkEfBzEr6z1ZD/jSgME7olQ7jS4tO6fHe6dxc5sPDaZfTZ8pA+lVqGw==
-X-Received: by 2002:adf:a199:0:b0:33b:353f:6b8f with SMTP id
- u25-20020adfa199000000b0033b353f6b8fmr3801365wru.20.1708101026681; 
+ AJvYcCWIYs6yv0fmhPZ8IMJlKzy63J7Lui1Dqnk47SuUn3f9pgMreZt59zUQrcGjdGEVkLGtEPgeiA1aiT3zAbfMOiUjBb4R4P8=
+X-Gm-Message-State: AOJu0Yz+qSDo6hc6iuQjYWfaWpg/jUPN4hJqeBpbrAZz9PVzAA2H8l+H
+ LXOw60HE4CufEo0/36Ge/BfHF3yzWtZl5RY2emls6sTB3/m4+yVA3Amp9xC59sc=
+X-Google-Smtp-Source: AGHT+IFW/2nkYA779l67QqtUqQlHTLBU0quq+PlCaG0QS6jNcvCDvCzaTlyQER6pCaGDWmW5/cIVgQ==
+X-Received: by 2002:a2e:8019:0:b0:2d0:a47c:d544 with SMTP id
+ j25-20020a2e8019000000b002d0a47cd544mr3588961ljg.53.1708101026969; 
  Fri, 16 Feb 2024 08:30:26 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- u10-20020a5d6daa000000b0033d170a5d6dsm2642195wrs.98.2024.02.16.08.30.26
+ u5-20020a056000038500b0033b66ce7ae9sm2694532wrf.84.2024.02.16.08.30.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Fri, 16 Feb 2024 08:30:26 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id EB44F5F83F;
- Fri, 16 Feb 2024 16:30:25 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 1B4615F8AF;
+ Fri, 16 Feb 2024 16:30:26 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Yoshinori Sato <ysato@users.sourceforge.jp>,
@@ -88,16 +89,17 @@ Cc: Yoshinori Sato <ysato@users.sourceforge.jp>,
  Eduardo Habkost <eduardo@habkost.net>,
  Alistair Francis <alistair.francis@wdc.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH 00/23] maintainer updates for 9.0 pre-PR (tests,
- plugin register support)
-Date: Fri, 16 Feb 2024 16:30:02 +0000
-Message-Id: <20240216163025.424857-1-alex.bennee@linaro.org>
+Subject: [PATCH 01/23] tests/tcg: update licenses to GPLv2 as intended
+Date: Fri, 16 Feb 2024 16:30:03 +0000
+Message-Id: <20240216163025.424857-2-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240216163025.424857-1-alex.bennee@linaro.org>
+References: <20240216163025.424857-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42d;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::22c;
+ envelope-from=alex.bennee@linaro.org; helo=mail-lj1-x22c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -120,119 +122,241 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The test patch is a simple house keeping one to clean up some
-inadvertent GPLv3 tagging to GPLv2-or-later.
+My default header template is GPLv3 but for QEMU code we really should
+stick to GPLv2-or-later (allowing others to up-license it if they
+wish). While this is test code we should still be consistent on the
+source distribution.
 
-The main bulk of this series is register reading support for TCG
-plugins. The main change to the API is that the get/read_register
-functions are now implicitly vCPU context only so have dropped the
-vcpu index parameter and use current_cpu instead. This avoids the need
-for locking the gdbstub structures in case there is a cross-vCPU
-access.
+I wrote all of this code so its not a problem. However there remains
+one GPLv3 file left which is the crt0-tc2x.S for TriCore.
 
-I've pulled in some patches from Pierrick's inline enhancement series
-that allow this to happen (making sure the init callback is in the
-vCPU context).
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Message-Id: <20240215184036.214065-1-alex.bennee@linaro.org>
+---
+ tests/tcg/aarch64/semicall.h                      | 4 ++--
+ tests/tcg/arm/semicall.h                          | 4 ++--
+ tests/tcg/multiarch/float_helpers.h               | 4 ++--
+ tests/tcg/riscv64/semicall.h                      | 4 ++--
+ tests/tcg/multiarch/arm-compat-semi/semiconsole.c | 4 ++--
+ tests/tcg/multiarch/arm-compat-semi/semihosting.c | 4 ++--
+ tests/tcg/multiarch/float_convd.c                 | 4 ++--
+ tests/tcg/multiarch/float_convs.c                 | 4 ++--
+ tests/tcg/multiarch/float_madds.c                 | 4 ++--
+ tests/tcg/multiarch/libs/float_helpers.c          | 4 ++--
+ tests/tcg/i386/system/boot.S                      | 6 +++---
+ tests/tcg/x86_64/system/boot.S                    | 6 +++---
+ 12 files changed, 26 insertions(+), 26 deletions(-)
 
-The following still need review:
-
-  contrib/plugins: extend execlog to track register changes
-  gdbstub: expose api to find registers
-
-But I'd like to get this merged soon so its not a mad rush before soft
-freeze and so we can get the new inline support stabilised and merged.
-
-Alex.
-
-Akihiko Odaki (11):
-  target/arm: Use GDBFeature for dynamic XML
-  target/ppc: Use GDBFeature for dynamic XML
-  target/riscv: Use GDBFeature for dynamic XML
-  gdbstub: Use GDBFeature for gdb_register_coprocessor
-  gdbstub: Use GDBFeature for GDBRegisterState
-  gdbstub: Change gdb_get_reg_cb and gdb_set_reg_cb
-  gdbstub: Simplify XML lookup
-  gdbstub: Infer number of core registers from XML
-  hw/core/cpu: Remove gdb_get_dynamic_xml member
-  gdbstub: Add members to identify registers to GDBFeature
-  plugins: Use different helpers when reading registers
-
-Alex Bennée (7):
-  tests/tcg: update licenses to GPLv2 as intended
-  gdbstub: expose api to find registers
-  plugins: add an API to read registers
-  contrib/plugins: fix imatch
-  contrib/plugins: extend execlog to track register changes
-  docs/devel: lift example and plugin API sections up
-  docs/devel: document some plugin assumptions
-
-Pierrick Bouvier (5):
-  plugins: remove previous n_vcpus functions from API
-  plugins: add qemu_plugin_num_vcpus function
-  plugins: fix order of init/idle/resume callback
-  cpu: call plugin init hook asynchronously
-  docs/devel: plugins can trigger a tb flush
-
- docs/devel/multi-thread-tcg.rst               |   1 +
- docs/devel/tcg-plugins.rst                    |  72 +++-
- accel/tcg/plugin-helpers.h                    |   3 +-
- include/exec/gdbstub.h                        |  43 ++-
- include/hw/core/cpu.h                         |   7 +-
- include/qemu/plugin.h                         |   1 +
- include/qemu/qemu-plugin.h                    |  59 +++-
- plugins/plugin.h                              |   6 +-
- target/arm/cpu.h                              |  27 +-
- target/arm/internals.h                        |  14 +-
- target/hexagon/internal.h                     |   4 +-
- target/microblaze/cpu.h                       |   4 +-
- target/ppc/cpu-qom.h                          |   1 +
- target/ppc/cpu.h                              |   5 +-
- target/riscv/cpu.h                            |   5 +-
- target/s390x/cpu.h                            |   2 -
- tests/tcg/aarch64/semicall.h                  |   4 +-
- tests/tcg/arm/semicall.h                      |   4 +-
- tests/tcg/multiarch/float_helpers.h           |   4 +-
- tests/tcg/riscv64/semicall.h                  |   4 +-
- accel/tcg/plugin-gen.c                        |  43 ++-
- contrib/plugins/cache.c                       |   2 +-
- contrib/plugins/execlog.c                     | 318 +++++++++++++++---
- gdbstub/gdbstub.c                             | 169 ++++++----
- hw/core/cpu-common.c                          |  14 +-
- plugins/api.c                                 | 148 ++++++--
- plugins/core.c                                |  15 +-
- target/arm/cpu.c                              |   2 -
- target/arm/cpu64.c                            |   1 -
- target/arm/gdbstub.c                          | 230 ++++++-------
- target/arm/gdbstub64.c                        | 122 +++----
- target/avr/cpu.c                              |   1 -
- target/hexagon/cpu.c                          |   4 +-
- target/hexagon/gdbstub.c                      |  10 +-
- target/i386/cpu.c                             |   2 -
- target/loongarch/cpu.c                        |   2 -
- target/loongarch/gdbstub.c                    |  13 +-
- target/m68k/cpu.c                             |   1 -
- target/m68k/helper.c                          |  26 +-
- target/microblaze/cpu.c                       |   6 +-
- target/microblaze/gdbstub.c                   |   9 +-
- target/ppc/cpu_init.c                         |   7 -
- target/ppc/gdbstub.c                          | 114 ++++---
- target/riscv/cpu.c                            |  15 -
- target/riscv/gdbstub.c                        | 145 ++++----
- target/rx/cpu.c                               |   1 -
- target/s390x/cpu.c                            |   1 -
- target/s390x/gdbstub.c                        | 105 +++---
- .../multiarch/arm-compat-semi/semiconsole.c   |   4 +-
- .../multiarch/arm-compat-semi/semihosting.c   |   4 +-
- tests/tcg/multiarch/float_convd.c             |   4 +-
- tests/tcg/multiarch/float_convs.c             |   4 +-
- tests/tcg/multiarch/float_madds.c             |   4 +-
- tests/tcg/multiarch/libs/float_helpers.c      |   4 +-
- plugins/qemu-plugins.symbols                  |   5 +-
- scripts/feature_to_c.py                       |  14 +-
- tests/tcg/i386/system/boot.S                  |   6 +-
- tests/tcg/x86_64/system/boot.S                |   6 +-
- 58 files changed, 1216 insertions(+), 635 deletions(-)
-
+diff --git a/tests/tcg/aarch64/semicall.h b/tests/tcg/aarch64/semicall.h
+index 8a3fce35c5f..30d4de9a549 100644
+--- a/tests/tcg/aarch64/semicall.h
++++ b/tests/tcg/aarch64/semicall.h
+@@ -1,10 +1,10 @@
+ /*
+  * Semihosting Tests - AArch64 helper
+  *
+- * Copyright (c) 2019
++ * Copyright (c) 2019, 2024
+  * Written by Alex Bennée <alex.bennee@linaro.org>
+  *
+- * SPDX-License-Identifier: GPL-3.0-or-later
++ * SPDX-License-Identifier: GPL-2.0-or-later
+  */
+ 
+ uintptr_t __semi_call(uintptr_t type, uintptr_t arg0)
+diff --git a/tests/tcg/arm/semicall.h b/tests/tcg/arm/semicall.h
+index ad8ac51310b..624937c5577 100644
+--- a/tests/tcg/arm/semicall.h
++++ b/tests/tcg/arm/semicall.h
+@@ -1,10 +1,10 @@
+ /*
+  * Semihosting Tests - ARM Helper
+  *
+- * Copyright (c) 2019
++ * Copyright (c) 2019, 2024
+  * Written by Alex Bennée <alex.bennee@linaro.org>
+  *
+- * SPDX-License-Identifier: GPL-3.0-or-later
++ * SPDX-License-Identifier: GPL-2.0-or-later
+  */
+ 
+ uintptr_t __semi_call(uintptr_t type, uintptr_t arg0)
+diff --git a/tests/tcg/multiarch/float_helpers.h b/tests/tcg/multiarch/float_helpers.h
+index 309f3f4bf10..c42ebe64b9e 100644
+--- a/tests/tcg/multiarch/float_helpers.h
++++ b/tests/tcg/multiarch/float_helpers.h
+@@ -1,9 +1,9 @@
+ /*
+  * Common Float Helpers
+  *
+- * Copyright (c) 2019 Linaro
++ * Copyright (c) 2019, 2024 Linaro
+  *
+- * SPDX-License-Identifier: GPL-3.0-or-later
++ * SPDX-License-Identifier: GPL-2.0-or-later
+  */
+ 
+ #include <inttypes.h>
+diff --git a/tests/tcg/riscv64/semicall.h b/tests/tcg/riscv64/semicall.h
+index f8c88f32dc5..11d0650cb06 100644
+--- a/tests/tcg/riscv64/semicall.h
++++ b/tests/tcg/riscv64/semicall.h
+@@ -1,10 +1,10 @@
+ /*
+  * Semihosting Tests - RiscV64 Helper
+  *
+- * Copyright (c) 2021
++ * Copyright (c) 2021, 2024
+  * Written by Alex Bennée <alex.bennee@linaro.org>
+  *
+- * SPDX-License-Identifier: GPL-3.0-or-later
++ * SPDX-License-Identifier: GPL-2.0-or-later
+  */
+ 
+ uintptr_t __semi_call(uintptr_t type, uintptr_t arg0)
+diff --git a/tests/tcg/multiarch/arm-compat-semi/semiconsole.c b/tests/tcg/multiarch/arm-compat-semi/semiconsole.c
+index 1d82efc589d..1e2268f4b75 100644
+--- a/tests/tcg/multiarch/arm-compat-semi/semiconsole.c
++++ b/tests/tcg/multiarch/arm-compat-semi/semiconsole.c
+@@ -1,10 +1,10 @@
+ /*
+  * linux-user semihosting console
+  *
+- * Copyright (c) 2019
++ * Copyright (c) 2024
+  * Written by Alex Bennée <alex.bennee@linaro.org>
+  *
+- * SPDX-License-Identifier: GPL-3.0-or-later
++ * SPDX-License-Identifier: GPL-2.0-or-later
+  */
+ 
+ #define SYS_READC       0x07
+diff --git a/tests/tcg/multiarch/arm-compat-semi/semihosting.c b/tests/tcg/multiarch/arm-compat-semi/semihosting.c
+index 8627eee3cf7..f609c01341a 100644
+--- a/tests/tcg/multiarch/arm-compat-semi/semihosting.c
++++ b/tests/tcg/multiarch/arm-compat-semi/semihosting.c
+@@ -1,10 +1,10 @@
+ /*
+  * linux-user semihosting checks
+  *
+- * Copyright (c) 2019
++ * Copyright (c) 2019, 2024
+  * Written by Alex Bennée <alex.bennee@linaro.org>
+  *
+- * SPDX-License-Identifier: GPL-3.0-or-later
++ * SPDX-License-Identifier: GPL-2.0-or-later
+  */
+ 
+ #define SYS_WRITE0      0x04
+diff --git a/tests/tcg/multiarch/float_convd.c b/tests/tcg/multiarch/float_convd.c
+index 0a1f0f93dc5..58d7f8b4c58 100644
+--- a/tests/tcg/multiarch/float_convd.c
++++ b/tests/tcg/multiarch/float_convd.c
+@@ -1,9 +1,9 @@
+ /*
+  * Floating Point Convert Doubles to Various
+  *
+- * Copyright (c) 2019 Linaro
++ * Copyright (c) 2019, 2024 Linaro
+  *
+- * SPDX-License-Identifier: GPL-3.0-or-later
++ * SPDX-License-Identifier: GPL-2.0-or-later
+  */
+ 
+ #include <stdio.h>
+diff --git a/tests/tcg/multiarch/float_convs.c b/tests/tcg/multiarch/float_convs.c
+index 2e4fa55324d..cb1fdd439e3 100644
+--- a/tests/tcg/multiarch/float_convs.c
++++ b/tests/tcg/multiarch/float_convs.c
+@@ -1,9 +1,9 @@
+ /*
+  * Floating Point Convert Single to Various
+  *
+- * Copyright (c) 2019 Linaro
++ * Copyright (c) 2019, 2024 Linaro
+  *
+- * SPDX-License-Identifier: GPL-3.0-or-later
++ * SPDX-License-Identifier: GPL-2.0-or-later
+  */
+ 
+ #include <stdio.h>
+diff --git a/tests/tcg/multiarch/float_madds.c b/tests/tcg/multiarch/float_madds.c
+index 4888f8641f4..a692e052d5b 100644
+--- a/tests/tcg/multiarch/float_madds.c
++++ b/tests/tcg/multiarch/float_madds.c
+@@ -1,9 +1,9 @@
+ /*
+  * Fused Multiply Add (Single)
+  *
+- * Copyright (c) 2019 Linaro
++ * Copyright (c) 2019, 2024 Linaro
+  *
+- * SPDX-License-Identifier: GPL-3.0-or-later
++ * SPDX-License-Identifier: GPL-2.0-or-later
+  */
+ 
+ #include <stdio.h>
+diff --git a/tests/tcg/multiarch/libs/float_helpers.c b/tests/tcg/multiarch/libs/float_helpers.c
+index 4e68d2b6598..fad5fc98933 100644
+--- a/tests/tcg/multiarch/libs/float_helpers.c
++++ b/tests/tcg/multiarch/libs/float_helpers.c
+@@ -5,9 +5,9 @@
+  * floating point constants useful for exercising the edge cases in
+  * floating point tests.
+  *
+- * Copyright (c) 2019 Linaro
++ * Copyright (c) 2019, 2024 Linaro
+  *
+- * SPDX-License-Identifier: GPL-3.0-or-later
++ * SPDX-License-Identifier: GPL-2.0-or-later
+  */
+ 
+ /* we want additional float type definitions */
+diff --git a/tests/tcg/i386/system/boot.S b/tests/tcg/i386/system/boot.S
+index 9e8920cbfe0..28902c400d8 100644
+--- a/tests/tcg/i386/system/boot.S
++++ b/tests/tcg/i386/system/boot.S
+@@ -2,12 +2,12 @@
+  * i386 boot code, based on  qemu-bmibug.
+  *
+  * Copyright 2019 Doug Gale
+- * Copyright 2019 Linaro
++ * Copyright 2019, 2024 Linaro
+  *
+- * This work is licensed under the terms of the GNU GPL, version 3 or later.
++ * This work is licensed under the terms of the GNU GPL, version 2 or later.
+  * See the COPYING file in the top-level directory.
+  *
+- * SPDX-License-Identifier: GPL-3.0-or-later
++ * SPDX-License-Identifier: GPL-2.0-or-later
+  */
+ 
+         .section .head
+diff --git a/tests/tcg/x86_64/system/boot.S b/tests/tcg/x86_64/system/boot.S
+index dac9bd534d7..7213aec63b2 100644
+--- a/tests/tcg/x86_64/system/boot.S
++++ b/tests/tcg/x86_64/system/boot.S
+@@ -1,16 +1,16 @@
+ /*
+  * x86_64 boot and support code
+  *
+- * Copyright 2019 Linaro
++ * Copyright 2019, 2024 Linaro
+  *
+- * This work is licensed under the terms of the GNU GPL, version 3 or later.
++ * This work is licensed under the terms of the GNU GPL, version 2 or later.
+  * See the COPYING file in the top-level directory.
+  *
+  * Unlike the i386 version we instead use Xen's PVHVM booting header
+  * which should drop us automatically into 32 bit mode ready to go. I've
+  * nabbed bits of the Linux kernel setup to achieve this.
+  *
+- * SPDX-License-Identifier: GPL-3.0-or-later
++ * SPDX-License-Identifier: GPL-2.0-or-later
+  */
+ 
+         .section .head
 -- 
 2.39.2
 
