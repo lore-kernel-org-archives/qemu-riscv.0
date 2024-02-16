@@ -4,44 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 057F2C48260
-	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Feb 2024 06:14:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48222C48BC4
+	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Feb 2024 06:14:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rarU4-0001GO-1P; Fri, 16 Feb 2024 01:14:04 -0500
+	id 1rarUQ-0001LE-Nl; Fri, 16 Feb 2024 01:14:26 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alvinga@andestech.com>)
- id 1rarU2-0001Fv-1e
- for qemu-riscv@nongnu.org; Fri, 16 Feb 2024 01:14:02 -0500
+ id 1rarUO-0001Kr-S8
+ for qemu-riscv@nongnu.org; Fri, 16 Feb 2024 01:14:24 -0500
 Received: from 60-248-80-70.hinet-ip.hinet.net ([60.248.80.70]
  helo=Atcsqr.andestech.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alvinga@andestech.com>)
- id 1rarTz-0006I4-EE
- for qemu-riscv@nongnu.org; Fri, 16 Feb 2024 01:14:01 -0500
+ id 1rarUM-0006Kz-Id
+ for qemu-riscv@nongnu.org; Fri, 16 Feb 2024 01:14:24 -0500
 Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 41G6Dgvm007632;
- Fri, 16 Feb 2024 14:13:42 +0800 (+08)
+ by Atcsqr.andestech.com with ESMTP id 41G6ECCa007728;
+ Fri, 16 Feb 2024 14:14:12 +0800 (+08)
  (envelope-from alvinga@andestech.com)
 Received: from alvinga-VirtualBox.andestech.com (10.0.13.68) by
  ATCPCS16.andestech.com (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0; 
- Fri, 16 Feb 2024 14:13:39 +0800
+ Fri, 16 Feb 2024 14:14:10 +0800
 To: <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>
 CC: <alistair.francis@wdc.com>, <bin.meng@windriver.com>,
  <liwei1518@gmail.com>, <dbarboza@ventanamicro.com>,
  <zhiwei_liu@linux.alibaba.com>, Alvin Chang <alvinga@andestech.com>
-Subject: [PATCH 0/4] RISC-V: Implement CSR tcontrol in debug spec
-Date: Fri, 16 Feb 2024 14:13:28 +0800
-Message-ID: <20240216061332.50229-1-alvinga@andestech.com>
+Subject: [PATCH 2/4] target/riscv: Reset CSR tcontrol when the trigger module
+ resets
+Date: Fri, 16 Feb 2024 14:13:30 +0800
+Message-ID: <20240216061332.50229-3-alvinga@andestech.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240216061332.50229-1-alvinga@andestech.com>
+References: <20240216061332.50229-1-alvinga@andestech.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [10.0.13.68]
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 41G6Dgvm007632
+X-MAIL: Atcsqr.andestech.com 41G6ECCa007728
 Received-SPF: pass client-ip=60.248.80.70; envelope-from=alvinga@andestech.com;
  helo=Atcsqr.andestech.com
 X-Spam_score_int: -8
@@ -67,26 +70,24 @@ From:  Alvin Chang via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The RISC-V Debug specification defines CSR "tcontrol" in the trigger
-module:
-  https://github.com/riscv/riscv-debug-spec
+When the trigger module resets, reset the value of CSR tcontrol as zero.
 
-This series implements it and the related operations.
+Signed-off-by: Alvin Chang <alvinga@andestech.com>
+---
+ target/riscv/debug.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-Alvin Chang (4):
-  target/riscv: Add CSR tcontrol of debug trigger module
-  target/riscv: Reset CSR tcontrol when the trigger module resets
-  target/riscv: Set the value of CSR tcontrol when trapping to M-mode
-  target/riscv: Set the value of CSR tcontrol when mret is executed
-
- target/riscv/cpu.h        |  1 +
- target/riscv/cpu_bits.h   |  3 +++
- target/riscv/cpu_helper.c |  6 ++++++
- target/riscv/csr.c        | 15 +++++++++++++++
- target/riscv/debug.c      |  1 +
- target/riscv/op_helper.c  |  6 ++++++
- 6 files changed, 32 insertions(+)
-
+diff --git a/target/riscv/debug.c b/target/riscv/debug.c
+index e30d99cc2f..e3832a643e 100644
+--- a/target/riscv/debug.c
++++ b/target/riscv/debug.c
+@@ -941,5 +941,6 @@ void riscv_trigger_reset_hold(CPURISCVState *env)
+         timer_del(env->itrigger_timer[i]);
+     }
+ 
++    env->tcontrol = 0;
+     env->mcontext = 0;
+ }
 -- 
 2.34.1
 
