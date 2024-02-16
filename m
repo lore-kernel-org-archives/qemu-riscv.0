@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB558C48BEB
-	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Feb 2024 10:48:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53704C48260
+	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Feb 2024 10:58:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ravl3-0006vL-7B; Fri, 16 Feb 2024 05:47:53 -0500
+	id 1ravvQ-00042y-79; Fri, 16 Feb 2024 05:58:36 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1ravl2-0006v2-19
- for qemu-riscv@nongnu.org; Fri, 16 Feb 2024 05:47:52 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1ravvO-00040k-OR
+ for qemu-riscv@nongnu.org; Fri, 16 Feb 2024 05:58:34 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1ravl0-0006NT-Fu
- for qemu-riscv@nongnu.org; Fri, 16 Feb 2024 05:47:51 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1ravvN-0008Gx-B4
+ for qemu-riscv@nongnu.org; Fri, 16 Feb 2024 05:58:34 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1708080468;
+ s=mimecast20190719; t=1708081112;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=2eyk6FUh6FdEWzMoTjkZIIKhXTRzNxjdaI+ZyxDfbfQ=;
- b=UR+WDleq98SUenrbqkEScWXbH9qXQI6Zbpx5gdYd6M+xK2qkaPhycK+1Om18LofYi4kbP/
- Vz9X2jXIiG+IAGNDhYvtd2GDsHYowOzOXGWqmN5TKC4+P0gEWpjxVpxgNtPVgoLaAOhZ7S
- oyPAS7Ob+ksiGiyjvogzT2hT7eBvyDE=
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
- [209.85.222.199]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=6ro7c/vwY9pgUvrG45ADSZ6YzGbLyGwfoNsVZJoOGWw=;
+ b=ZbjQ20TIDwXYxvoSbaHHwxTPlmc83y3bvDFlZeyWFxmNvgggyOE85uic1jMSMus+kjLNgN
+ QTGVUZgmD17D9Vqu0GDfVEuH4t0zdBd9vk4z33q8Waw5YZsJJaCJXexrW8zes6hAKgoh6H
+ A03i4BMjPxQr1/gV22laBoOi+9xmaqc=
+Received: from mail-oi1-f197.google.com (mail-oi1-f197.google.com
+ [209.85.167.197]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-529-pzOaR1MJNOWISyTDQg9rgg-1; Fri, 16 Feb 2024 05:47:47 -0500
-X-MC-Unique: pzOaR1MJNOWISyTDQg9rgg-1
-Received: by mail-qk1-f199.google.com with SMTP id
- af79cd13be357-7872ef032c6so320690685a.0
- for <qemu-riscv@nongnu.org>; Fri, 16 Feb 2024 02:47:47 -0800 (PST)
+ us-mta-203-1ZOQum61OQ68UjgYiLec1w-1; Fri, 16 Feb 2024 05:58:29 -0500
+X-MC-Unique: 1ZOQum61OQ68UjgYiLec1w-1
+Received: by mail-oi1-f197.google.com with SMTP id
+ 5614622812f47-3c1377191acso715990b6e.1
+ for <qemu-riscv@nongnu.org>; Fri, 16 Feb 2024 02:58:29 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708080466; x=1708685266;
+ d=1e100.net; s=20230601; t=1708081108; x=1708685908;
  h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
  :to:content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=2eyk6FUh6FdEWzMoTjkZIIKhXTRzNxjdaI+ZyxDfbfQ=;
- b=wy4tlLLujt+BUjMLcu0zK0ALFgSHQ3/CiafEj57/DcJFhln0KfxrdTTz5FflSyKANt
- f6ECjQTqfskI1O9PeDwSDRSpSVUAUqqcGVGj2yAhXosqsc7mo02sMLpDC8ZlYFgrXOvh
- Wabf0wmP1buBO6TbB79JVnMG1Jef+DEoQTRG4x9irge8Tqa2r1Wdu/EaFQfa65qiUjBd
- ObWbbP/l1+l9/Rc+Spf0iHd00AvLtKXSyouZYGQsNMbBIYX3Mj3zihSiZDfhk+OcSI0y
- qLQPSAZYc6+QgYmsrRhn7fr1KYdPYnXxPnAyIqmuWAa23T6rahv6c4n+nyhMqeaYjRVd
- JgKw==
-X-Gm-Message-State: AOJu0YxkFgaA4MECmKTXjNNTySemrOXRCCYhUwWQLBcqhhpRIvkTz734
- 3rc/FkWeY5l2L0ho+4buGQmC4Fl2tkqXVkGROXVMdD5fSdvPwAsqO78yKV5cWzIy71JbK7MBsNf
- fOWXZ6jyut+vQWLKYM9/t01Gyd8ff5Ce9SgpiJmc06KCfv/qvisbe
-X-Received: by 2002:a05:620a:562d:b0:785:b189:d486 with SMTP id
- vv13-20020a05620a562d00b00785b189d486mr13711646qkn.17.1708080466642; 
- Fri, 16 Feb 2024 02:47:46 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IF/ave/c+YNb/A1KKW32NCUtCkTnHj9nQIwYEcAyuqXm8S2xi4mnB8UjHeYq5x6vYCUd8CpJg==
-X-Received: by 2002:a05:620a:562d:b0:785:b189:d486 with SMTP id
- vv13-20020a05620a562d00b00785b189d486mr13711620qkn.17.1708080466376; 
- Fri, 16 Feb 2024 02:47:46 -0800 (PST)
+ bh=6ro7c/vwY9pgUvrG45ADSZ6YzGbLyGwfoNsVZJoOGWw=;
+ b=G3o4ZBTtihakuIt8ShtSQOKXo1BTywu/+NjGDeRGGYz4MU2xeglQFJI4ZrzLwBn6ry
+ M/+Q4t1Dxn+PIXaDB1i1HplMU4Z8LpMELJd5/Rp+x1Ur9i7MI2mggj9g0Pa66F3TuY7z
+ tmM3TSrmSYzhziJOvLZAIWOjN8d5aZoC2VuDH4WkVD/3BKxHjTiaJ/n009H4fL4n3GpU
+ DG6oz3M8UfvogAM+HjqzMwnnBenbHNnuPX6E+UGDs1gEVfhqVFI6jxjIS8+o5CQnhOVs
+ F+H+kHN9D+cZl7uwlgRy0ftz5hkh7BQE9FNtRxbK8nx7ZUV6TyrgjsvUEFQ8fWhDeLSK
+ SRuQ==
+X-Gm-Message-State: AOJu0YxW/VmH1aymNQfe17ad2zneErfKJ2K+o+qvnNb/5Tv44EbcsKWD
+ twFqFHcGrhNfLC7LGmpnGwqWae4W5aFLbgK2m22h3ByvfWToCJHmRLBtS3Bzaf0iZKBuexUiKbg
+ arRyjzrFwv/cGoaMRPqvrVm1FqGdqdr1kZ5F6iL03xxaEpwHSGxyP
+X-Received: by 2002:a05:6808:1b0e:b0:3bf:ed3e:da64 with SMTP id
+ bx14-20020a0568081b0e00b003bfed3eda64mr4850146oib.31.1708081108578; 
+ Fri, 16 Feb 2024 02:58:28 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHfq1nL1rfFu83rbDtxiqXoq+v29nnDNIC9+FXBoWqkpFSvcBNC/ZO+le+Og1/vT8fTEIsfZQ==
+X-Received: by 2002:a05:6808:1b0e:b0:3bf:ed3e:da64 with SMTP id
+ bx14-20020a0568081b0e00b003bfed3eda64mr4850128oib.31.1708081108323; 
+ Fri, 16 Feb 2024 02:58:28 -0800 (PST)
 Received: from [192.168.0.9] (ip-109-43-177-178.web.vodafone.de.
  [109.43.177.178]) by smtp.gmail.com with ESMTPSA id
- u10-20020ae9c00a000000b00787214b33fdsm1398844qkk.128.2024.02.16.02.47.43
+ oo6-20020a056214450600b0068f2c9d2f95sm1002616qvb.116.2024.02.16.02.58.25
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 16 Feb 2024 02:47:45 -0800 (PST)
-Message-ID: <271ef7a1-aeff-4edd-bd2f-38586399530b@redhat.com>
-Date: Fri, 16 Feb 2024 11:47:41 +0100
+ Fri, 16 Feb 2024 02:58:27 -0800 (PST)
+Message-ID: <db2557b4-31d8-49e1-a2e6-7258ff56c487@redhat.com>
+Date: Fri, 16 Feb 2024 11:58:24 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/6] libqos/virtio.c: fix 'avail_event' offset in
- qvring_init()
+Subject: Re: [PATCH 6/6] tests/libqos: add riscv/virt machine nodes
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  lvivier@redhat.com, pbonzini@redhat.com, ajones@ventanamicro.com,
  alex.bennee@linaro.org
 References: <20240213191736.733334-1-dbarboza@ventanamicro.com>
- <20240213191736.733334-3-dbarboza@ventanamicro.com>
+ <20240213191736.733334-7-dbarboza@ventanamicro.com>
 From: Thomas Huth <thuth@redhat.com>
 Autocrypt: addr=thuth@redhat.com; keydata=
  xsFNBFH7eUwBEACzyOXKU+5Pcs6wNpKzrlJwzRl3VGZt95VCdb+FgoU9g11m7FWcOafrVRwU
@@ -119,7 +118,7 @@ Autocrypt: addr=thuth@redhat.com; keydata=
  oiT+z+/E59qj/EKfyce3sbC9XLjXv3mHMrq1tKX4G7IJGnS989E/fg6crv6NHae9Ckm7+lSs
  IQu4bBP2GxiRQ+NV3iV/KU3ebMRzqIC//DCOxzQNFNJAKldPe/bKZMCxEqtVoRkuJtNdp/5a
  yXFZ6TfE1hGKrDBYAm4vrnZ4CXFSBDllL59cFFOJCkn4Xboj/aVxxJxF30bn
-In-Reply-To: <20240213191736.733334-3-dbarboza@ventanamicro.com>
+In-Reply-To: <20240213191736.733334-7-dbarboza@ventanamicro.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
@@ -151,62 +150,24 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 13/02/2024 20.17, Daniel Henrique Barboza wrote:
-> In qvring_init() we're writing vq->used->avail_event at "vq->used + 2 +
-> array_size".  The struct pointed by vq->used is, from virtio_ring.h
-> Linux header):
+> Add a RISC-V 'virt' machine to the graph. This implementation is a
+> modified copy of the existing arm machine in arm-virt-machine.c
 > 
->   *	// A ring of used descriptor heads with free-running index.
->   *	__virtio16 used_flags;
->   *	__virtio16 used_idx;
->   *	struct vring_used_elem used[num];
->   *	__virtio16 avail_event_idx;
+> It contains a virtio-mmio and a generic-pcihost controller. The
+> generic-pcihost controller hardcodes assumptions from the ARM 'virt'
+> machine, like ecam and pio_base addresses, so we'll add an extra step to
+> set its parameters after creating it.
 > 
-> So 'flags' is the word right at vq->used. 'idx' is vq->used + 2. We need
-> to skip 'used_idx' by adding + 2 bytes, and then sum the vector size, to
-> reach avail_event_idx. An example on how to properly access this field
-> can be found in qvirtqueue_kick():
+> Our command line is incremented with 'aclint' parameters to allow the
+> machine to run MSI tests.
 > 
-> avail_event = qvirtio_readw(d, qts, vq->used + 4 +
->                              sizeof(struct vring_used_elem) * vq->size);
-> 
-> This error was detected when enabling the RISC-V 'virt' libqos machine.
-> The 'idx' test from vhost-user-blk-test.c errors out with a timeout in
-> qvirtio_wait_used_elem(). The timeout happens because when processing
-> the first element, 'avail_event' is read in qvirtqueue_kick() as non-zero
-> because we didn't initialize it properly (and the memory at that point
-> happened to be non-zero). 'idx' is 0.
-> 
-> All of this makes this condition fail because "idx - avail_event" will
-> overflow and be non-zero:
-> 
-> /* < 1 because we add elements to avail queue one by one */
-> if ((flags & VRING_USED_F_NO_NOTIFY) == 0 &&
->                          (!vq->event || (uint16_t)(idx-avail_event) < 1)) {
->      d->bus->virtqueue_kick(d, vq);
-> }
-> 
-> As a result the virtqueue is never kicked and we'll timeout waiting for it.
-> 
-> Fixes: 1053587c3f ("libqos: Added EVENT_IDX support")
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 > ---
->   tests/qtest/libqos/virtio.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/tests/qtest/libqos/virtio.c b/tests/qtest/libqos/virtio.c
-> index 4f39124eba..82a6e122bf 100644
-> --- a/tests/qtest/libqos/virtio.c
-> +++ b/tests/qtest/libqos/virtio.c
-> @@ -265,7 +265,7 @@ void qvring_init(QTestState *qts, const QGuestAllocator *alloc, QVirtQueue *vq,
->       /* vq->used->idx */
->       qvirtio_writew(vq->vdev, qts, vq->used + 2, 0);
->       /* vq->used->avail_event */
-> -    qvirtio_writew(vq->vdev, qts, vq->used + 2 +
-> +    qvirtio_writew(vq->vdev, qts, vq->used + 4 +
->                      sizeof(struct vring_used_elem) * vq->size, 0);
->   }
->   
+>   tests/qtest/libqos/meson.build          |   1 +
+>   tests/qtest/libqos/riscv-virt-machine.c | 137 ++++++++++++++++++++++++
+>   2 files changed, 138 insertions(+)
+>   create mode 100644 tests/qtest/libqos/riscv-virt-machine.c
 
-Reviewed-by: Thomas Huth <thuth@redhat.com>
+Acked-by: Thomas Huth <thuth@redhat.com>
 
 
