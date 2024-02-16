@@ -4,87 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED41CC48260
-	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Feb 2024 12:51:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B0E7C48260
+	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Feb 2024 13:22:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1raxgV-0001Qp-92; Fri, 16 Feb 2024 07:51:19 -0500
+	id 1rayB3-0003jf-3M; Fri, 16 Feb 2024 08:22:53 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1raxgQ-0001QG-VA
- for qemu-riscv@nongnu.org; Fri, 16 Feb 2024 07:51:16 -0500
-Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
+ id 1rayB1-0003jO-TL
+ for qemu-riscv@nongnu.org; Fri, 16 Feb 2024 08:22:51 -0500
+Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1raxgP-0005v9-3g
- for qemu-riscv@nongnu.org; Fri, 16 Feb 2024 07:51:14 -0500
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-1dbb47852cdso1408265ad.1
- for <qemu-riscv@nongnu.org>; Fri, 16 Feb 2024 04:51:12 -0800 (PST)
+ id 1rayAw-0004LC-Q7
+ for qemu-riscv@nongnu.org; Fri, 16 Feb 2024 08:22:51 -0500
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-6e141a24ba1so245887b3a.2
+ for <qemu-riscv@nongnu.org>; Fri, 16 Feb 2024 05:22:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1708087871; x=1708692671; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1708089765; x=1708694565; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=uvMDsR+HQYL/mnTd2qTEbsZ+UmxidYMbybuxyE8uhyE=;
- b=kHxgGAfdL/wZq71FccT2niAEiIfccd7vBWLrLq+cWuHB9QtzerCDFIK+zNFghRj66T
- hg7prP+8qyxcCIQFDrpw1UkmU3iwvJLyH+vyfOxekVnuteoQx++5L4+ARsvJjiQuMQ1Z
- KdCjdZnBtx/bvVTPLo80CkYn3To3P0/Ks4ApMI2YUQLVMuB98OTIrufzGTGH65qD31uY
- euriTNbv9U6AB4y8WcEC2FS6llomfvcQu0zKARKvy0n31EdfkRmaQzr5DMVzZny0vNk/
- gjcWKPz3SRdpZbM8Irw4Z9GVBkCAKRKZ1ynheEz5ypIzsM01iwjrzLp7SjE7bViQ7JLt
- +KSA==
+ bh=Za5F62vP2mvSbCc4pjCqygeGWbZ1PJZK5hh8fylHmO0=;
+ b=CjnHDfp2PSTyKqZTyYESMT9Mo2e8Nzghbir4i3jcVye80+6cC0sRtMJAP+J2kF/ZG9
+ w8dih85Jl3bRYptgFjXMzeZ/qPucKwl78v9bBc/0m8EOkZ0azaGSNdY+z5Fngsi2Lzuj
+ ub4B0OJjaV1gFvINHXMaevtEbWq5+EiFQNJw8b6BXgKnbYg0uf6FlIlC0ZFcaEN7EAa8
+ YD1ZqSLV5eXX2DJOOTKsLJXeNFdhT+W9jtGJ1ApNlRUPwlMlpohPHYnLrMHVwvUkLKoL
+ OIxynJ2xu0bC5H2/uUuloOg5afeFKqs1l8Ua/82s/NC/va/I5caLnPG0/2xXGrz1bYJA
+ vKoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708087871; x=1708692671;
+ d=1e100.net; s=20230601; t=1708089765; x=1708694565;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=uvMDsR+HQYL/mnTd2qTEbsZ+UmxidYMbybuxyE8uhyE=;
- b=QDadBbAl2VEnpw+kP2ToVjN7Y/p/HxyDpMj7QPf91hfEU2mlR6XvB3c7Uw7iYudk1b
- B4ukO5zKVh8NQLgRdaG9zezMPj6sRM2YWsFfzbLi/+IBpGHchem0EaCAAs4KCmlRopWy
- kDIueaGd8ltNnjLqBmZADuHuIw6M5RP4Tc7HNH3sK5nxDkdrzwcmqcUOl0nAPLLr5Rpb
- 0eAVhKtgf+ad8m1JHnAYPLx9l5ejXCd0syVdmWs/E7P+6XyaeP7vQXLyxQX8iWmcBr5m
- Zd/QDGygDBmOFySZjSk1UJniamoSrWIVvmcumzdMPTbjC6CB/uVz4T7E8jHnIFAfJqaK
- 3UfA==
+ bh=Za5F62vP2mvSbCc4pjCqygeGWbZ1PJZK5hh8fylHmO0=;
+ b=ZbRiEQuSHDBjZ5Lo/XHGcdsdLwxGtynuN8x1VijAQINX+RMlsnawM3/1obbdsXCCZE
+ rnaa3W/ne/g31ImN0S/5yfZhm6Qd7pTWwgOn8jo1qLNc2DlIwdqaCSE0s24F0Tlz4Ach
+ 5WfftZGrrKwJQ2eQVvoOWVMdApm1E8sNJwmqI0q6bWF2W9BaWAc8dtceYK7yUiw8tWgv
+ TJL0nesATpI4JxxLNuZjKvzxLv2no6ce7L97chIjGFbi++SHgHvM3ppd2h+uRlqpcBuI
+ hqE1JPuO7Shgmn2XM8RYqWbzCrnpZQId07kDTIutBSKoAtDFSWys5nAcv8qk9JdwDiew
+ YZwQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVwCvMoBkb6PYA0c3jWiU5QbBF8J0/edcfBz5b/e9BX4M6/uaUTwr9ayFBwoBcfLwYnK5DssHV+z6q4fZaKfkfG/UNH6co=
-X-Gm-Message-State: AOJu0YwS8W6DUBeK1URjMnr72DBmFCDVW2pqpLgdjdcHndLuDh8Umo45
- uWK1y+zsjaBE+Cr3itpW4Y7oxt268ABql0uoDjQEMoj87r5STrArxrTUAjkBU6s=
-X-Google-Smtp-Source: AGHT+IF4tTB0G+GeD+geCcObqCj65gjtw0JQrpqYjNDO5v0PRhvei813CARp5YZt/qsRdRvjHjaj7A==
-X-Received: by 2002:a17:902:b7c6:b0:1d9:5b8b:f70 with SMTP id
- v6-20020a170902b7c600b001d95b8b0f70mr4351448plz.29.1708087871054; 
- Fri, 16 Feb 2024 04:51:11 -0800 (PST)
+ AJvYcCUCrFozDgn44wcdZ0JzvAoa82H6mU1ewODGn3iBAOeDdNwYIs4TSYxvHKuZAu4Yh0xIE7TyDzaGNztMBkWmL0q9dQtqbK8=
+X-Gm-Message-State: AOJu0Ywp0+PKpckM+sgTsl0vfdjerhIFSIHNlkd1tFbyjPZn6ZitMGku
+ kHm3MZnqwPDOdRMIZDpwVKuJd7YRvdidqC4UavJmraotxu6kHUKTt6nxWT3Oc60=
+X-Google-Smtp-Source: AGHT+IEyfuax8z66JPgBNZNwr8pyrt/Ei2A+wTb3wbRcLuCcNwVGFX+SPVdbFlrlTPtKZAQTYc2INA==
+X-Received: by 2002:aa7:87d3:0:b0:6e1:2b1:54eb with SMTP id
+ i19-20020aa787d3000000b006e102b154ebmr4301370pfo.9.1708089765155; 
+ Fri, 16 Feb 2024 05:22:45 -0800 (PST)
 Received: from [192.168.68.110] ([177.94.15.159])
  by smtp.gmail.com with ESMTPSA id
- w19-20020a1709029a9300b001db5ea825b2sm2908344plp.123.2024.02.16.04.51.08
+ o26-20020a056a001b5a00b006e0e35c1e55sm3054626pfv.79.2024.02.16.05.22.42
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 16 Feb 2024 04:51:10 -0800 (PST)
-Message-ID: <164280dd-0899-42c5-b6a0-eb561f257591@ventanamicro.com>
-Date: Fri, 16 Feb 2024 09:51:07 -0300
+ Fri, 16 Feb 2024 05:22:44 -0800 (PST)
+Message-ID: <4428f5b0-b2fb-4520-9e8f-b17ba09fd076@ventanamicro.com>
+Date: Fri, 16 Feb 2024 10:22:08 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] target/riscv: Add CSR tcontrol of debug trigger module
+Subject: Re: [PATCH 2/4] target/riscv: Reset CSR tcontrol when the trigger
+ module resets
 Content-Language: en-US
 To: Alvin Chang <alvinga@andestech.com>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
 Cc: alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com
 References: <20240216061332.50229-1-alvinga@andestech.com>
- <20240216061332.50229-2-alvinga@andestech.com>
+ <20240216061332.50229-3-alvinga@andestech.com>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240216061332.50229-2-alvinga@andestech.com>
+In-Reply-To: <20240216061332.50229-3-alvinga@andestech.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x630.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x42d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01,
+ T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,126 +104,25 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 On 2/16/24 03:13, Alvin Chang wrote:
-> The RISC-V debug specification defines an optional CSR "tcontrol" within
-> the trigger module. This commit adds its read/write operations and
-> related bit-field definitions.
+> When the trigger module resets, reset the value of CSR tcontrol as zero.
 > 
 > Signed-off-by: Alvin Chang <alvinga@andestech.com>
 > ---
->   target/riscv/cpu.h      |  1 +
->   target/riscv/cpu_bits.h |  3 +++
->   target/riscv/csr.c      | 15 +++++++++++++++
->   3 files changed, 19 insertions(+)
+
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+>   target/riscv/debug.c | 1 +
+>   1 file changed, 1 insertion(+)
 > 
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index f52dce78ba..f9ae3e3025 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -364,6 +364,7 @@ struct CPUArchState {
->       target_ulong tdata1[RV_MAX_TRIGGERS];
->       target_ulong tdata2[RV_MAX_TRIGGERS];
->       target_ulong tdata3[RV_MAX_TRIGGERS];
-> +    target_ulong tcontrol;
->       target_ulong mcontext;
->       struct CPUBreakpoint *cpu_breakpoint[RV_MAX_TRIGGERS];
->       struct CPUWatchpoint *cpu_watchpoint[RV_MAX_TRIGGERS];
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index fc2068ee4d..3b3a7a0fa4 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -353,6 +353,7 @@
->   #define CSR_TDATA2          0x7a2
->   #define CSR_TDATA3          0x7a3
->   #define CSR_TINFO           0x7a4
-> +#define CSR_TCONTROL        0x7a5
->   #define CSR_MCONTEXT        0x7a8
+> diff --git a/target/riscv/debug.c b/target/riscv/debug.c
+> index e30d99cc2f..e3832a643e 100644
+> --- a/target/riscv/debug.c
+> +++ b/target/riscv/debug.c
+> @@ -941,5 +941,6 @@ void riscv_trigger_reset_hold(CPURISCVState *env)
+>           timer_del(env->itrigger_timer[i]);
+>       }
 >   
->   /* Debug Mode Registers */
-> @@ -900,6 +901,8 @@ typedef enum RISCVException {
->   #define JVT_BASE                           (~0x3F)
->   
->   /* Debug Sdtrig CSR masks */
-> +#define TCONTROL_MTE                       BIT(3)
-> +#define TCONTROL_MPTE                      BIT(7)
->   #define MCONTEXT32                         0x0000003F
->   #define MCONTEXT64                         0x0000000000001FFFULL
->   #define MCONTEXT32_HCONTEXT                0x0000007F
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index d4e8ac13b9..816c530481 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -3937,6 +3937,20 @@ static RISCVException read_tinfo(CPURISCVState *env, int csrno,
->       return RISCV_EXCP_NONE;
+> +    env->tcontrol = 0;
+>       env->mcontext = 0;
 >   }
->   
-> +static RISCVException read_tcontrol(CPURISCVState *env, int csrno,
-> +                                    target_ulong *val)
-> +{
-> +    *val = env->tcontrol;
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static RISCVException write_tcontrol(CPURISCVState *env, int csrno,
-> +                                     target_ulong val)
-> +{
-> +    env->tcontrol = val & (TCONTROL_MPTE | TCONTROL_MTE);
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
->   static RISCVException read_mcontext(CPURISCVState *env, int csrno,
->                                       target_ulong *val)
->   {
-> @@ -4861,6 +4875,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->       [CSR_TDATA2]    =  { "tdata2",   debug, read_tdata,    write_tdata    },
->       [CSR_TDATA3]    =  { "tdata3",   debug, read_tdata,    write_tdata    },
->       [CSR_TINFO]     =  { "tinfo",    debug, read_tinfo,    write_ignore   },
-> +    [CSR_TCONTROL]  =  { "tcontrol", debug, read_tcontrol, write_tcontrol },
-
-The spec reads:
-
-"This optional register is only accessible in M-mode and Debug Mode and provides
-  various control bits related to triggers."
-
-"debug()" is checking only if we have the 'debug' cpu option enabled:
-
-
-static RISCVException debug(CPURISCVState *env, int csrno)
-{
-     if (riscv_cpu_cfg(env)->debug) {
-         return RISCV_EXCP_NONE;
-     }
-
-     return RISCV_EXCP_ILLEGAL_INST;
-}
-
-
-It looks like we don't have a "Debug Mode" model.
-
-Section 4.1 of the spec mentions the following about "Debug Mode":
-
-"1. All implemented instructions operate just as they do in M-mode, unless an
-  exception is mentioned in this list.
-  2. All operations are executed with machine mode privilege, except that additional
-  Debug Mode CSRs are accessible and MPRV in mstatus may be ignored according to
-  mprven. Full permission checks, or a relaxed set of permission checks, will apply
-  according to relaxedpriv (...)"
-
-
-So, if the operations are "executed with machine mode privilege" then can we expect
-env->priv == PRV_M ? As it is now tcontrol will execute in any mode, so checking
-for PRV_M seems reasonable.
-
-
-Thanks,
-
-
-Daniel
-
-
-
-
-
->       [CSR_MCONTEXT]  =  { "mcontext", debug, read_mcontext, write_mcontext },
->   
->       /* User Pointer Masking */
 
