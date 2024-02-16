@@ -4,87 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 694D4C48BC4
-	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Feb 2024 15:05:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB053C48260
+	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Feb 2024 15:08:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1razmb-0001fP-Ai; Fri, 16 Feb 2024 10:05:45 -0500
+	id 1razpU-00044O-NL; Fri, 16 Feb 2024 10:08:44 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1razmF-0001QW-6l
- for qemu-riscv@nongnu.org; Fri, 16 Feb 2024 10:05:23 -0500
-Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1razmD-000167-3r
- for qemu-riscv@nongnu.org; Fri, 16 Feb 2024 10:05:22 -0500
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-1d7858a469aso18672215ad.2
- for <qemu-riscv@nongnu.org>; Fri, 16 Feb 2024 07:05:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1708095919; x=1708700719; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=zItzZE+8VFPxucbXvrzht6cgzQM/wiZTpdu4plEgS4U=;
- b=VRoCed6B6w8H9IT0pybeYNXt1pmiXmrY2wj8RFP0orq2Nvaq9SPloIMCZUwDmWd2UL
- uBtvYW75WE94kjgbV6r96f6GB1qK7MaZ3V9pYjZRmx/mqt/t2PwnotuvsHXIO69PuNgF
- qyTQw67ks4HE8kvljm9WUFEPuz50kMmn5mIyLXWJibCLEh+4kVRUsAH2oD6IytIYTXLY
- yUBZR59aMaKYcPY0zKRWiYzuOVCch3pACH3hD1NgQJMUAauIxG7FuK2S5PyYIpX/3Otm
- kWNXT5SiiKC+ay33cyPbyIAWkME2IL7H2Ig3zx898zDAFx9MFWmmtMnC/tbu4ghSf5i8
- +IwA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708095919; x=1708700719;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=zItzZE+8VFPxucbXvrzht6cgzQM/wiZTpdu4plEgS4U=;
- b=qf3p1omu9krfOr/kuWjH89XQSlaoirBMcmOThU9zV64QatpoD8cFEpbTY/2isRctlk
- sVozfS1qgIQvo5dxVdPAgs/wwbSPG+CsDYiGtazGNlU+pJ1f+aNhDKM8W4pZVueZ/CWA
- 1ASqHanvOfrkm0WYgEdIPngUTlKS4y364s0wcQFXjVZWwWWw/1ZmludK39W1fQ0cM48b
- 67JUENx9cKis0FLfWsW133BLWkSKuYQYgXiQIczPWietuSYLB1W7YqYTgCJmld0Onsuz
- e7tL1FcHUdbgd2pqCASRJOBbmgIHZYvByFNL3u7ENeTc4tadPNz8/fIYuFA0LhPCw+SU
- vWZw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWBVrdgD3Ec2jy1vzfkGzj8yAsQSDHuYW0wzulWYJq2ZVVgNaVbcG+Gxcn4WsVzAbNNd9GOeioiBoPR3Cx+FJ1yV+mFes8=
-X-Gm-Message-State: AOJu0Yz6BqCl3I1cZD5mLooDKol8HGJjQswVgyhzCz3EKm/6S/rMVeX6
- 9522iWZ+3BxKhmHzN0ExC6BIdDFfJz8BkMqkdMcsnui9Z4+3S8qk+EbHFzdmeoY=
-X-Google-Smtp-Source: AGHT+IFE0byytz3npLaHPmQKj4DSQYmeqhUA2ENyVvbKGLMgMbqT38itvH52UVcv0tbfdgN+gQn/Yg==
-X-Received: by 2002:a17:902:8c98:b0:1db:5468:20d9 with SMTP id
- t24-20020a1709028c9800b001db546820d9mr4745571plo.44.1708095919582; 
- Fri, 16 Feb 2024 07:05:19 -0800 (PST)
-Received: from [192.168.68.110] ([177.94.15.159])
- by smtp.gmail.com with ESMTPSA id
- q7-20020a170902a3c700b001db90df1283sm2889442plb.4.2024.02.16.07.05.17
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 16 Feb 2024 07:05:19 -0800 (PST)
-Message-ID: <015d2d76-3903-4b18-8845-77001ac786b1@ventanamicro.com>
-Date: Fri, 16 Feb 2024 12:05:16 -0300
+ (Exim 4.90_1) (envelope-from <conor@kernel.org>)
+ id 1razpS-00040w-2h; Fri, 16 Feb 2024 10:08:42 -0500
+Received: from dfw.source.kernel.org ([2604:1380:4641:c500::1])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <conor@kernel.org>)
+ id 1razpQ-0001kk-Ay; Fri, 16 Feb 2024 10:08:41 -0500
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 4E1C260C6C;
+ Fri, 16 Feb 2024 15:08:30 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EA336C433C7;
+ Fri, 16 Feb 2024 15:08:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1708096110;
+ bh=gCnaKCztZ+aD+uXJOWghdDjln68u/ZHD9+aTBKnA/dM=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=kemfZ1ZlyFQnDqhz3jpdtiEnY01a60TAAJ5RTL2fjmcecdl+WK/FZAuQ0R57elesE
+ aa+XYHkriMQ1g0UseCHLTrVm6Pb/Eeed2CYatXu+xqrsmRV6dib7t/RiYKEiRyjhky
+ /GCVBBQFa24jALguttMI8XUwOzin4PCOZ5keDaO/er4IeTVz96e0fEvBFt1Gs/TPFu
+ xkhZW2ZzEG0wHIIPQqL1zXh5Kea98PQvKQzgl0xE1mS5z9Znw4LtHcH6Zmfl4PLj7E
+ k1ZWFSs6d7DOw7bhy/7pltuDYmZy5kvqONzzetjTCK8mmt++i6cnYR0PUMTICyV7eB
+ isFW4Y5hdSeyA==
+Date: Fri, 16 Feb 2024 15:08:25 +0000
+From: Conor Dooley <conor@kernel.org>
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Andrew Jones <ajones@ventanamicro.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ alistair.francis@wdc.com, bmeng@tinylab.org, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
+Subject: Re: [PATCH v3 3/6] target/riscv: add remaining named features
+Message-ID: <20240216-fabulous-eraser-ffc4c2ed080f@spud>
+References: <20240202152154.773253-1-dbarboza@ventanamicro.com>
+ <20240202152154.773253-4-dbarboza@ventanamicro.com>
+ <20240215-alkaline-saturday-275cd8e3aa39@spud>
+ <20240215-55440212b4d6cde9feab5d94@orel>
+ <20240215-overhear-paycheck-8c70c17bd151@spud>
+ <20240215-8e556e6029ee11ee7317db8b@orel>
+ <20240215-landfall-clamp-34ce9760d4cd@spud>
+ <CAKmqyKPy8C9fz2c7RMnFL1bG1XHZf9kdduGOjgTGP+O6PB_fSg@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] target/riscv: Add CSR tcontrol of debug trigger module
-Content-Language: en-US
-To: Alvin Chang <alvinga@andestech.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com
-References: <20240216061332.50229-1-alvinga@andestech.com>
- <20240216061332.50229-2-alvinga@andestech.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240216061332.50229-2-alvinga@andestech.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62f.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="R32YE83afCNpLIxc"
+Content-Disposition: inline
+In-Reply-To: <CAKmqyKPy8C9fz2c7RMnFL1bG1XHZf9kdduGOjgTGP+O6PB_fSg@mail.gmail.com>
+Received-SPF: pass client-ip=2604:1380:4641:c500::1;
+ envelope-from=conor@kernel.org; helo=dfw.source.kernel.org
+X-Spam_score_int: -47
+X-Spam_score: -4.8
+X-Spam_bar: ----
+X-Spam_report: (-4.8 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.364,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,86 +81,101 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
+--R32YE83afCNpLIxc
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 2/16/24 03:13, Alvin Chang wrote:
-> The RISC-V debug specification defines an optional CSR "tcontrol" within
-> the trigger module. This commit adds its read/write operations and
-> related bit-field definitions.
-> 
-> Signed-off-by: Alvin Chang <alvinga@andestech.com>
-> ---
+> > No they can't. For a "regular extension" you populate the DT with the
+> > extension. For these extensions it has to put negated properties in the
+> > DT, otherwise it is incorrectly describing the hardware it is emulating.
+> > That is handling them differently in my book! If QEMU generates an
+> > incorrect DT representation of the hardware it is emulating, that's a
+> > QEMU bug.
+>=20
+> QEMU listing the extensions that it supports seems to me to be the
+> correct approach.
+>=20
+> It's clunky that the list of "extensions" are constantly changing.
+> There isn't much we can do about that from a QEMU perspective though.
+>=20
+> Listing the hardware and what it supports is the job of the DT.
+>=20
+> I see your concern about what happens if the "extensions" are disabled
+> though. Realislity they probably never will be.
 
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Yeah, it's something we can sweep under the rug unless/until someone
+wants to disable these things.
 
->   target/riscv/cpu.h      |  1 +
->   target/riscv/cpu_bits.h |  3 +++
->   target/riscv/csr.c      | 15 +++++++++++++++
->   3 files changed, 19 insertions(+)
-> 
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index f52dce78ba..f9ae3e3025 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -364,6 +364,7 @@ struct CPUArchState {
->       target_ulong tdata1[RV_MAX_TRIGGERS];
->       target_ulong tdata2[RV_MAX_TRIGGERS];
->       target_ulong tdata3[RV_MAX_TRIGGERS];
-> +    target_ulong tcontrol;
->       target_ulong mcontext;
->       struct CPUBreakpoint *cpu_breakpoint[RV_MAX_TRIGGERS];
->       struct CPUWatchpoint *cpu_watchpoint[RV_MAX_TRIGGERS];
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index fc2068ee4d..3b3a7a0fa4 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -353,6 +353,7 @@
->   #define CSR_TDATA2          0x7a2
->   #define CSR_TDATA3          0x7a3
->   #define CSR_TINFO           0x7a4
-> +#define CSR_TCONTROL        0x7a5
->   #define CSR_MCONTEXT        0x7a8
->   
->   /* Debug Mode Registers */
-> @@ -900,6 +901,8 @@ typedef enum RISCVException {
->   #define JVT_BASE                           (~0x3F)
->   
->   /* Debug Sdtrig CSR masks */
-> +#define TCONTROL_MTE                       BIT(3)
-> +#define TCONTROL_MPTE                      BIT(7)
->   #define MCONTEXT32                         0x0000003F
->   #define MCONTEXT64                         0x0000000000001FFFULL
->   #define MCONTEXT32_HCONTEXT                0x0000007F
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index d4e8ac13b9..816c530481 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -3937,6 +3937,20 @@ static RISCVException read_tinfo(CPURISCVState *env, int csrno,
->       return RISCV_EXCP_NONE;
->   }
->   
-> +static RISCVException read_tcontrol(CPURISCVState *env, int csrno,
-> +                                    target_ulong *val)
-> +{
-> +    *val = env->tcontrol;
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static RISCVException write_tcontrol(CPURISCVState *env, int csrno,
-> +                                     target_ulong val)
-> +{
-> +    env->tcontrol = val & (TCONTROL_MPTE | TCONTROL_MTE);
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
->   static RISCVException read_mcontext(CPURISCVState *env, int csrno,
->                                       target_ulong *val)
->   {
-> @@ -4861,6 +4875,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->       [CSR_TDATA2]    =  { "tdata2",   debug, read_tdata,    write_tdata    },
->       [CSR_TDATA3]    =  { "tdata3",   debug, read_tdata,    write_tdata    },
->       [CSR_TINFO]     =  { "tinfo",    debug, read_tinfo,    write_ignore   },
-> +    [CSR_TCONTROL]  =  { "tcontrol", debug, read_tcontrol, write_tcontrol },
->       [CSR_MCONTEXT]  =  { "mcontext", debug, read_mcontext, write_mcontext },
->   
->       /* User Pointer Masking */
+> > > Linux or whatever software consuming
+> > > the hardware descriptions may want to distrust the absence of newly
+> > > named feature extensions and do their own checks, but that's not QEMU=
+'s
+> > > concern.
+> >
+> > Software should be able to trust that the DT describes the system
+> > correctly. I can only speak for Linux here, but validating the DT is not
+> > the job of the running kernel - it should be a correct description.
+>=20
+> AFAIK the DT is correct. We are describing the hardware within the
+> scope of the DT spec.
+>=20
+> If a new node exists that describes what the hardware does not support
+> we can update to support that as well.
+
+It won't be a new node property, it'll just be negated properties - eg
+riscv,isa-extensions =3D ..., "no-zicclsm";
+That's what I mean when I say that these will not be able to be treated
+in the same way as any other extension, but it only applies iff someone
+wants to disable them. This isn't just a QEMU problem, but QEMU is the
+bleeding edge of "hardware" support, so it's cropping up here first (or
+maybe only :))
+
+> > > Actually, being able to disable these newly named features allows
+> > > Linux and other software to test how they behave when the feature goes
+> > > away.
+> >
+> > That's helpful sure, but it doesn't absolve QEMU of having to correctly
+> > generate a DT.
+>=20
+> I'm pretty sure there isn't anything for us to do differently here
+> right? It's just a bad situation that we are trying to support.
+
+Until someone wants to turn them off, you can avoid doing anything
+differently, just like this amazing ascii art I found:
+
+                _,-\/-,_
+                \      /
+                 \_.._/
+               _,/    \,_
+              / \      / \
+             ,\  )    (  /,
+             (__/ .''. \__)
+                \,_||   /
+                |  ||\ |
+                | /|| \|
+                () || ()
+                // || ||
+               //  || ||
+              //   || ||
+             //    || /\
+ -- '' -'-' ^^'    )( '^^-- '' -'-'   miK
+                  (=3D=3D)
+                   `~`
+
+Hopefully posting ostriches on the QEMU list isn't grounds for a ban,
+Conor.
+
+--R32YE83afCNpLIxc
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZc96aQAKCRB4tDGHoIJi
+0nJNAQCNPVcftYNWpE3Q7HB6nixeHO3Ew9afcv+enPMmEsuxXQEAnUYcqY9fWGvL
+jwEXGpinzCh+0UGEE+cSxUxM+DEpLAg=
+=Ma6n
+-----END PGP SIGNATURE-----
+
+--R32YE83afCNpLIxc--
 
