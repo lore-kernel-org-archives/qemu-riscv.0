@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A78B6C48BC4
-	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Feb 2024 19:12:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E733C48260
+	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Feb 2024 22:40:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rb3cV-0005Fw-9e; Fri, 16 Feb 2024 14:11:36 -0500
+	id 1rb6sW-0004WZ-7f; Fri, 16 Feb 2024 17:40:20 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rb3cT-0005Fb-Dm
- for qemu-riscv@nongnu.org; Fri, 16 Feb 2024 14:11:33 -0500
-Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rb6sV-0004WF-JM
+ for qemu-riscv@nongnu.org; Fri, 16 Feb 2024 17:40:19 -0500
+Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rb3cR-00008P-Vq
- for qemu-riscv@nongnu.org; Fri, 16 Feb 2024 14:11:33 -0500
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-1d731314e67so19113795ad.1
- for <qemu-riscv@nongnu.org>; Fri, 16 Feb 2024 11:11:31 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rb6sT-00078L-S3
+ for qemu-riscv@nongnu.org; Fri, 16 Feb 2024 17:40:19 -0500
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-1d7858a469aso22318195ad.2
+ for <qemu-riscv@nongnu.org>; Fri, 16 Feb 2024 14:40:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708110690; x=1708715490; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1708123216; x=1708728016; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=bBISSJit/N4hh3ww4hIBwFXSFEh9tHvcj9GTccyFBa4=;
- b=dylO7WDavE6WALdoOeeT2GsTsAqyiQFjkAaZMqAMG9mYKTeeUoA3b2pl5S3gw0hC9s
- n0Y44VjusSZrvS84pLkiTUluMnz7TErUfYuB++V06o6cPO9f6AyUtlmn+b4naoBu4f/0
- yOEwY9a2J7PnUTiZmw16BrhVwduZ3c3/jdGL3be+Cv1pfDU+7ujzACbRjM2WRAJrVS+Z
- nNCiFGa0Hfa2D8lj/2XD19BF5v8Dskp8A6rED5FyR6p0Q1sLUEtbwDfYjxd5tkj4uOLd
- qlQSJVL0BGikMN6ZV5rKV9JhIXKgnu9viTu8YDHeDkS9+P5WxepFSr3PuriM2Gr7fnbS
- Ywkg==
+ bh=dqgERea+htXK7qX7a99Ltj1QSsoxR8UCIOOOAjOcIGs=;
+ b=bySEM+PDpti0O4OcnNzgEby4losLdn1EfZbIcYAo+1ilzLUpmAKg3oqG1+4My9CoCY
+ oFF1QwlCdmF/Gdvk2hp8nKZ+49LZ4vygpBS6lamzqpu5Qg9yuVf4urR7JzyS2cKV9xHr
+ gjv7Ilx1zzXUj3eBWn0VrjeMaadkQax5eTth98MwERDopZvWQQWmfeDPGRKD9IOmMNn4
+ GoEZx8J5kZ/Diok/0icgClhdi2D9kO22tfhQWIfcVc1nZ80IbP1brdYfXKy9SMQkC8Md
+ zjBmi9ZiNyCTeX8NjLhvTLBDZOJumOPRT8TjrvTTGERg1QJO5WrWJWOCbtETmDaFHkl7
+ VLnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708110690; x=1708715490;
+ d=1e100.net; s=20230601; t=1708123216; x=1708728016;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=bBISSJit/N4hh3ww4hIBwFXSFEh9tHvcj9GTccyFBa4=;
- b=j+3hTsHfkxnp2jg4EGUwN4xab+LR9pxgJHZQbz7mG3duj26skZ4wKMN/aSqT99TN90
- FvKrOHhGIStnAdOsQ4JP67HZpncXGV+QZ+G6FwSfpzwKyz3z89bu/niO4vXK+omltQCJ
- MOoyshW7onbYUstpWR1FLbNAWW/vvE7M7wqxj1ylm9dnU2KdEMvzbxsVmYtJXnqgPcki
- fkV3PcRfI8O5qtzFF610aJ0nK3sEMzRkxu1v+zd4LSQiv9p4rV5ogVFAygc1RZ26FEMm
- atX/+EyPYSPgQoX19r51nRmStwPeQubnraX9vhBtzzCLSEhMIuwAplhTwJxuBlhTt1ag
- Ey7w==
-X-Gm-Message-State: AOJu0YzKw48S9QLXWmupThLgaDcFGnY3D6Nuobvwdr/2vmaLNpNBIWEy
- uc0oWZMjzkdEgDW5qmEUmXZlgb0ZQ0a1R5KKNDyuFVpHya/Sn7giqSEPaZ89aDc=
-X-Google-Smtp-Source: AGHT+IEtpzGHwBt+MmradEVt9d6icCk1dOM9aQ+NzuazR0ozaQsOcvLJBg07a8EEE5nXCiAfmZCWcQ==
-X-Received: by 2002:a17:903:264e:b0:1db:94a9:f9f7 with SMTP id
- je14-20020a170903264e00b001db94a9f9f7mr4130132plb.20.1708110690222; 
- Fri, 16 Feb 2024 11:11:30 -0800 (PST)
-Received: from [172.20.1.19] (173-197-098-125.biz.spectrum.com.
- [173.197.98.125]) by smtp.gmail.com with ESMTPSA id
- h4-20020a170902eec400b001d9fc826522sm200826plb.239.2024.02.16.11.11.27
+ bh=dqgERea+htXK7qX7a99Ltj1QSsoxR8UCIOOOAjOcIGs=;
+ b=xNKmxtZ0XxaHVXaRs/4frftY5uqI81hycsIDrQKyfZQV/j/xe20CBYlVJde5XNr/BR
+ tz2iE6DmInRJV4D825IVFamlijU54fSBnpQ+d4ptGJWB5HA/r+IxEqii1qh2IDdVdCJ/
+ mewUvixayOMZdNP07ykf1JjhehCQCcUwyrs0/jD4MoDJ6CcOLE5FOl/S0zE6x1Ta4Ld+
+ 8XhhLam56NOMNVk3GsPuCKHjpuIKHBG7UbqYHy8e0QJsihyxk4daf8EmeTLLRke9os1/
+ 1sFr7Mzp3vPtHyweZ8scXrEHX1rw8aDun0t/T7qhXsGprRgsBQgPTLYsRnqwNoKlAKvd
+ 3O5A==
+X-Gm-Message-State: AOJu0YzHpzQHaEYwPi8PORiCXbh1agxpEoRJWAB2B0GYHq7Q1ZxorjDu
+ lWWFxGPloTvsi6h12eP/xbuJODkN2hI+wRYCwdNtA98L5jye79EaYmuUT8rh/oI=
+X-Google-Smtp-Source: AGHT+IG2WY0D5VYjTOVCO3cKqojuERdIv4QZ5P3LSgyT9eZniZgq+p84XpGdZdGCUoNzGCK5mMvhQQ==
+X-Received: by 2002:a17:902:f7d1:b0:1db:5c84:9523 with SMTP id
+ h17-20020a170902f7d100b001db5c849523mr5281478plw.67.1708123216084; 
+ Fri, 16 Feb 2024 14:40:16 -0800 (PST)
+Received: from [192.168.68.110] ([177.94.15.159])
+ by smtp.gmail.com with ESMTPSA id
+ sb5-20020a17090b50c500b0029724370ea9sm501774pjb.47.2024.02.16.14.40.12
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 16 Feb 2024 11:11:29 -0800 (PST)
-Message-ID: <f9ab9e5d-4a52-42e0-93df-924cafd900ad@linaro.org>
-Date: Fri, 16 Feb 2024 09:06:45 -1000
+ Fri, 16 Feb 2024 14:40:15 -0800 (PST)
+Message-ID: <04a3c3d3-fc2f-4b1e-9845-f5345e062c7b@ventanamicro.com>
+Date: Fri, 16 Feb 2024 19:40:11 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/3] trans_rvv.c.inc: write CSRs must call
- mark_vs_dirty() too
+Subject: Re: [PATCH v2 3/3] target/riscv/translate.c: set vstart_eq_zero in
+ mark_vs_dirty()
 Content-Language: en-US
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- max.chou@sifive.com
+ max.chou@sifive.com, Ivan Klokov <ivan.klokov@syntacore.com>
 References: <20240216135719.1034289-1-dbarboza@ventanamicro.com>
- <20240216135719.1034289-2-dbarboza@ventanamicro.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240216135719.1034289-2-dbarboza@ventanamicro.com>
+ <20240216135719.1034289-4-dbarboza@ventanamicro.com>
+ <16087154-b3d2-4cab-938f-4a04fc8dd166@linaro.org>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <16087154-b3d2-4cab-938f-4a04fc8dd166@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62d.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x630.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -99,28 +100,130 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2/16/24 03:57, Daniel Henrique Barboza wrote:
-> In the Vector spec section 3.2 [1]:
+
+
+On 2/16/24 15:56, Richard Henderson wrote:
+> On 2/16/24 03:57, Daniel Henrique Barboza wrote:
+>> The 'vstart_eq_zero' flag which is used to determine if some insns, like
+>> vector reductor operations, should SIGILL. At this moment the flag is
+>> being updated only during cpu_get_tb_cpu_state(), at the start of each
+>> translation block.
+>>
+>> This cadence isn't enough and we're facing situations where a vector
+>> instruction successfully updated 'vstart' to zero, but the flag was
+>> still marked as 'false', resulting in a SIGILL because instructions are
+>> checking the flag.
+>>
+>> mark_vs_dirty() is called after any instruction changes Vector CSR
+>> state, making it a good place to update 'vstart_eq_zero'.
+>>
+>> Fixes: 8e1ee1fb57 ("target/riscv: rvv-1.0: add translation-time vector context status")
+>> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1976
+>> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>> ---
+>>   target/riscv/translate.c | 20 ++++++++++++++++++++
+>>   1 file changed, 20 insertions(+)
+>>
+>> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+>> index 177418b2b9..f9ff7b6173 100644
+>> --- a/target/riscv/translate.c
+>> +++ b/target/riscv/translate.c
+>> @@ -652,6 +652,8 @@ static inline void mark_fs_dirty(DisasContext *ctx) { }
+>>    */
+>>   static void mark_vs_dirty(DisasContext *ctx)
+>>   {
+>> +    TCGLabel *vstart_zero = gen_new_label();
+>> +    TCGLabel *done = gen_new_label();
+>>       TCGv tmp;
+>>       if (ctx->mstatus_vs != EXT_STATUS_DIRTY) {
+>> @@ -669,6 +671,24 @@ static void mark_vs_dirty(DisasContext *ctx)
+>>               tcg_gen_st_tl(tmp, tcg_env, offsetof(CPURISCVState, mstatus_hs));
+>>           }
+>>       }
+>> +
+>> +    /*
+>> +     * We can safely make 'vl_eq_vlmax = false' if we marked
+>> +     * VS as dirty with non-zero 'vstart', i.e. there's a fault
+>> +     * to be handled. If 'vstart' is zero then we should retain
+>> +     * the existing 'vl_eq_vlmax' - it'll be recalculated on the
+>> +     * start of the next TB or during vset{i}vl{i} (that forces a
+>> +     * TB end).
+>> +     */
+>> +    tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vstart, 0, vstart_zero);
+>> +    ctx->vstart_eq_zero = false;
+>> +    ctx->vl_eq_vlmax = false;
+>> +    tcg_gen_br(done);
+>> +
+>> +    gen_set_label(vstart_zero);
+>> +    ctx->vstart_eq_zero = true;
+>> +
+>> +    gen_set_label(done);
 > 
-> "When mstatus.VS is set to Initial or Clean, executing any instruction
->   that changes vector state, including the vector CSRs, will change
->   mstatus.VS to Dirty."
+> This is very confused, apparently generating code to test vstart at runtime, and then set some translation time variables in the branches.
 > 
-> ldst_us_trans(), ldst_stride_trans(), ldst_index_trans() and
-> ldst_whole_trans() will change vector state regardless of being a store
-> op or not. Stores will set env->vstart to zero after execution (see
-> vext_ldst_us() in vector_helper.c), and this is vector CSR state change.
+> Afaik, the only way vstart != 0 is an explicit set to the CSR or exiting a load via exception.  Therefore you have no need to have any sort of brcond here -- just set
+> ctx->vstart_eq_zero = true.
+> 
+> Also, you need to move the ifdefs from around mark_vs_dirty, because it is now relevant to user-only.
+> 
+> It may be worth a rename, because it does more than mark vs dirty, and therefore is different than mark_fs_dirty.
+> 
+> You need to review all instances of
+> 
+>      TCGLabel *over = gen_new_label();
+>      tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+> ...
+>      gen_set_label(over);
+>      return true;
+> 
+> because this *should have* set vstart = 0.  With vstart < vl, this is done in the helper function, but every place using a conditional branch needs attention.
 
-In Initial or Clean state, it could be argued that vstart is already zero, so is there 
-really a change to state?
+After reading the reviews of patches 1 and 3 what I'm considering here is:
 
-OTOH, on the exception path out of a vector store, where we *do* set vstart != 0, we do 
-not also set vs dirty.
+1 - drop patch 1;
 
-Therefore I think that loads and stores need to manage dirty within the helper, alongside 
-the management of vstart, or perhaps move the mark_vs_dirty call to *before* the call to 
-the helper.
+2 - there's a patch from Ivan Klokov sent 2 months ago:
+
+"[PATCH 1/1] target/riscv: Clear vstart_qe_zero flag"
+https://lore.kernel.org/qemu-riscv/20231214111851.142532-1-ivan.klokov@syntacore.com/
+
+His patch is closer to what you suggested than mine. He already renamed mark_vs_dirty()
+to finalize_rvv_inst() and made it set start_eq_zero unconditionally. It needs a
+little work (i.e. remove the ifds from the function) that I'll do myself.
+
+3 - I'll keep patch 2 to reduce the redundant calls to the now finalize_rvv_inst();
+
+4 - Add another patch to through all "gen_set_label(over)" cond branches and set
+vstart = 0 && vstart_eq_zero manually when we're doing the jump.
+
+In fact, shouldn't we return earlier if we're not taking the branch? Otherwise
+we'll set vstart twice in case we didn't get the branch. E.g:
+
+       TCGLabel *over = gen_new_label();
+       tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+       (...)
+       finalize_rvv_insn();
+       return true;
+
+       gen_set_label(over);
+       /* some TCG ops to set cpu_vstart to zero. Perhaps a helper?  */
+       s->vstart_eq_zero = true;
+       return true;
 
 
-r~
+
+
+Thanks,
+
+Daniel
+
+
+
+
+
+
+
+> 
+> 
+> r~
 
