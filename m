@@ -4,90 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22227C48BC3
-	for <qemu-riscv@archiver.kernel.org>; Sat, 17 Feb 2024 10:10:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B11B4C48BC3
+	for <qemu-riscv@archiver.kernel.org>; Sat, 17 Feb 2024 10:53:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rbHeM-0008FL-D2; Sat, 17 Feb 2024 05:10:27 -0500
+	id 1rbIKJ-00014q-GX; Sat, 17 Feb 2024 05:53:47 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1rbHeK-0008Ew-Hn
- for qemu-riscv@nongnu.org; Sat, 17 Feb 2024 05:10:24 -0500
-Received: from mail-ot1-x343.google.com ([2607:f8b0:4864:20::343])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rbIKH-000149-BK
+ for qemu-riscv@nongnu.org; Sat, 17 Feb 2024 05:53:45 -0500
+Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1rbHeI-0007KE-Ba
- for qemu-riscv@nongnu.org; Sat, 17 Feb 2024 05:10:24 -0500
-Received: by mail-ot1-x343.google.com with SMTP id
- 46e09a7af769-6e2dfc98664so1478346a34.2
- for <qemu-riscv@nongnu.org>; Sat, 17 Feb 2024 02:10:21 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rbIKE-0006vA-LA
+ for qemu-riscv@nongnu.org; Sat, 17 Feb 2024 05:53:45 -0500
+Received: by mail-pf1-x432.google.com with SMTP id
+ d2e1a72fcca58-6e141a24ba1so788109b3a.2
+ for <qemu-riscv@nongnu.org>; Sat, 17 Feb 2024 02:53:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1708164620; x=1708769420; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1708167221; x=1708772021; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=fEg0kiUMPVpFNQ2jnfDUipTODBk8+lx/5Pn6EqiSHLw=;
- b=lj/yIyErjRVSdp+fR9UZBm21uNUXljwR9QgZT0g9fHpot2a66cSBQz2QCYtsTZ8Cfi
- NC07a4R1ycZyrq+kVzSGADoxc9MoGQdXOfLxAOCFjBievixYDsKp2oM32Es7/gkqlwtt
- A4SSEK1Aelr60SsMG3Xela4bhVg6BN2nlR/VP3xnj5WbvRboQZDFv0vTzM9zFAQPnJma
- N4rsUjpxkICT2zdvyn4zDfjP5NMtERU2Sf3T5zY7qxyTU5e7134WVyh0Hs/ftitk6sv8
- nfxONziuGgaxm8nD2oi+ctna+rQPDHjoa+D1yAza15Yo8FkxUZ9u+7oaIyZ1N6Phixnd
- VwPA==
+ bh=R3t0v/KvYt/g89KKsD7e0iCfIL9nVNWjNBL8eJBUIEo=;
+ b=RciosnAL1EtgyjmyLpvyYAoofRx1yFqD+2iXzRslc47x2TY0K9sPLen7cuyRwcZtPP
+ lMITsucJYLKnbd9nT6/1TyfElcPV2Rax/+FHLp9emNqiJuVPwE4VxAAOwOVRLb13xDt+
+ TREGUH5/1gY9ZQG8azhEzcNQuvMD0vJ71hb32GmsPBcMdQSklZucUYouSNwJhp0UwrZG
+ EK1vSuOBnx6mf1iPgTU1CcOE80QusOk26DnRQX8jzGZerlG7R8uTB2vzGT0M+A9FoENv
+ yvjm91S9B0mbTiSUOaYTXnbjFyrHrz8X3pLAMGwDwcZkJT+RlnF02GBcakeW+VMTFwMO
+ /k+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708164620; x=1708769420;
+ d=1e100.net; s=20230601; t=1708167221; x=1708772021;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=fEg0kiUMPVpFNQ2jnfDUipTODBk8+lx/5Pn6EqiSHLw=;
- b=VXJfaOVZRgzqJOM9PppleTa9td5EzHAkDlmYC+Tyxuv81GECnWTftnOJ1E4pTh1Kfu
- fSsuBlFQ1gUsO1At+teNP+GhZvbImz/rOxSV18Z47IYB5DGmD82//CVUSf4GTSXDrSSq
- AyItf4Ox3DkBU7kRFrnIXPExLkOMMnzDkXUDNL2oTagM8COdxF+Ose/nNxyeXH0Czkk2
- 5HXmf5B6Z8xWEty3MwSpJawekJqD5NGjMj7uT0DMctT10/0JCYzoREqFNlgsWQ6j6nLV
- QnaoARL9K1uPf40ROVKrW2v8NdmqpAIpeWpBPkBqMxbuuO7w12lT5XSnpVQNKCGiB7On
- CdLg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU1fj1sFS0x48h84aWgF2NhEdHWST8dgj8QMVqGaCLcx8AIqZwe2P3tYz+JS4rvmfmHZHVc0QwH3E3OQTuNxSzVpo6Ml5U=
-X-Gm-Message-State: AOJu0YxbgP6q7RMsJzl2LoVgnIn9r965JKbpAOKeRUktvd/LwnPHJLLg
- RxiX2IHwIPP3Kow1FluvkcWUCmcVjfdLvQUaH4wOzxj+2Hr4NAyGDq/2j2i0Ogs=
-X-Google-Smtp-Source: AGHT+IGc11M61aBlcSv69c21hBxsTi0G2epduZVn2YcjeIbimA/Sq/oe4RXYd5OI4ZEHLoVVZnvk3w==
-X-Received: by 2002:a05:6359:4597:b0:178:95b6:f87c with SMTP id
- no23-20020a056359459700b0017895b6f87cmr6098518rwb.11.1708164620293; 
- Sat, 17 Feb 2024 02:10:20 -0800 (PST)
-Received: from [100.64.0.1] ([136.226.240.197])
+ bh=R3t0v/KvYt/g89KKsD7e0iCfIL9nVNWjNBL8eJBUIEo=;
+ b=xEn2+a2Ya2IQr0YrlaBDo+9tlELzzvkG6G4sOcPSwma5EZEgw+VFompc+D7Hbxw9BO
+ illqC2FMS+h2qpTzbFVo80ODZ1tqJ4oCXIgDVPFHcPFL7GfMXFt8An3Tdh2BrHM3L1KE
+ +NiHcjnUmT2ijG3h7+ulB1a88nvPonXP22I1jxDCbJ0EP2VdHezM0iq10lZ9q8egUQOo
+ WflmVHBfwtsYJ7fryNL5TJFDrmFMeccfMhiUpXfrtA8X7o9JgAUHZgZ2urcl08/kRlxT
+ s3P6BbtAQ5TWNbKSIGq0Dx6b9R3BYaVKwc8SI2CyQpgt8ugjVsoaK0v3uBlon7q1HrRx
+ kiiQ==
+X-Gm-Message-State: AOJu0YwZizUSrPwSi35eRmdKOOAv2fOYTJPHLPXU3xs1mrmti+tjKpJs
+ ZRTRVJrcxGbmY25rXdqn/sOKOAPeA71Y5KC0MPMO5+Iq6oiHlhjmYqCt88ZTiVs=
+X-Google-Smtp-Source: AGHT+IFAE/Jaz9h0zvkSshNJxpr71Dtw+4u9Vzo7NmB1LSGdbjUYe/ftvbW6EbKkorQ5JlnXF/zy/Q==
+X-Received: by 2002:a05:6a21:3941:b0:1a0:86af:510b with SMTP id
+ ac1-20020a056a21394100b001a086af510bmr6041987pzc.32.1708167220841; 
+ Sat, 17 Feb 2024 02:53:40 -0800 (PST)
+Received: from [192.168.68.110] ([177.94.15.159])
  by smtp.gmail.com with ESMTPSA id
- ph12-20020a17090b3bcc00b0029696f7f443sm1451569pjb.50.2024.02.17.02.10.18
+ p1-20020a17090adf8100b00298d203d359sm1506706pjv.24.2024.02.17.02.53.37
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 17 Feb 2024 02:10:19 -0800 (PST)
-Message-ID: <8c626d62-85b4-c940-a544-09fcc496b19d@sifive.com>
-Date: Sat, 17 Feb 2024 18:10:17 +0800
+ Sat, 17 Feb 2024 02:53:40 -0800 (PST)
+Message-ID: <3d76be6d-e3a2-4730-a54f-2893ab4ed72e@ventanamicro.com>
+Date: Sat, 17 Feb 2024 07:53:36 -0300
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.14.0
-Subject: Re: [RFC PATCH 3/6] target/riscv: Inline vext_ldst_us and
- coressponding function for performance
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/1] target/riscv: Clear vstart_qe_zero flag
 Content-Language: en-US
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-References: <20240215192823.729209-1-max.chou@sifive.com>
- <20240215192823.729209-4-max.chou@sifive.com>
- <2701c3a3-d9ab-4058-99f6-d542baf293ec@ventanamicro.com>
-From: Max Chou <max.chou@sifive.com>
-In-Reply-To: <2701c3a3-d9ab-4058-99f6-d542baf293ec@ventanamicro.com>
+To: Ivan Klokov <ivan.klokov@syntacore.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ bin.meng@windriver.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
+ richard.henderson@linaro.org
+References: <20231214111851.142532-1-ivan.klokov@syntacore.com>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20231214111851.142532-1-ivan.klokov@syntacore.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::343;
- envelope-from=max.chou@sifive.com; helo=mail-ot1-x343.google.com
-X-Spam_score_int: -44
-X-Spam_score: -4.5
-X-Spam_bar: ----
-X-Spam_report: (-4.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-2.399,
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x432.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -105,127 +97,560 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Daniel,
+Richard,
 
-Thank you for the information and suggestion.
-Yes, we can do it better if we load/store more bytes at a time.
-I'll try to improve the RFC on this way.
 
-Thanks,
+On 12/14/23 08:18, Ivan Klokov wrote:
+> The vstart_qe_zero flag is set at the beginning of the translation
+> phase from the env->vstart variable. During the execution phase, some
+> instructions may change env->vstart, but the flag remains the same as
+> at the start of the block. With some combinations of instructions this
+> causes an illegal instruction exception. This patch simultaneously
+> updates flag and env->vstart and to avoid inconsistency.
+> 
+> Signed-off-by: Ivan Klokov <ivan.klokov@syntacore.com>
+> ---
+>   target/riscv/insn_trans/trans_rvbf16.c.inc |  6 +-
+>   target/riscv/insn_trans/trans_rvv.c.inc    | 88 +++++++++++-----------
+>   target/riscv/insn_trans/trans_rvvk.c.inc   | 12 +--
+>   target/riscv/translate.c                   | 12 ++-
+>   4 files changed, 64 insertions(+), 54 deletions(-)
+> 
+> diff --git a/target/riscv/insn_trans/trans_rvbf16.c.inc b/target/riscv/insn_trans/trans_rvbf16.c.inc
+> index 4e39c00884..2867bbc2bb 100644
+> --- a/target/riscv/insn_trans/trans_rvbf16.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvbf16.c.inc
+> @@ -86,7 +86,7 @@ static bool trans_vfncvtbf16_f_f_w(DisasContext *ctx, arg_vfncvtbf16_f_f_w *a)
+>                              ctx->cfg_ptr->vlen / 8,
+>                              ctx->cfg_ptr->vlen / 8, data,
+>                              gen_helper_vfncvtbf16_f_f_w);
+> -        mark_vs_dirty(ctx);
+> +        finalize_rvv_inst(ctx);
+>           gen_set_label(over);
+>           return true;
+>       }
+> @@ -115,7 +115,7 @@ static bool trans_vfwcvtbf16_f_f_v(DisasContext *ctx, arg_vfwcvtbf16_f_f_v *a)
+>                              ctx->cfg_ptr->vlen / 8,
+>                              ctx->cfg_ptr->vlen / 8, data,
+>                              gen_helper_vfwcvtbf16_f_f_v);
+> -        mark_vs_dirty(ctx);
+> +        finalize_rvv_inst(ctx);
+>           gen_set_label(over);
+>           return true;
+>       }
+> @@ -146,7 +146,7 @@ static bool trans_vfwmaccbf16_vv(DisasContext *ctx, arg_vfwmaccbf16_vv *a)
+>                              ctx->cfg_ptr->vlen / 8,
+>                              ctx->cfg_ptr->vlen / 8, data,
+>                              gen_helper_vfwmaccbf16_vv);
+> -        mark_vs_dirty(ctx);
+> +        finalize_rvv_inst(ctx);
+>           gen_set_label(over);
+>           return true;
+>       }
+> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+> index 78bd363310..fcf49f7352 100644
+> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+> @@ -167,7 +167,7 @@ static bool do_vsetvl(DisasContext *s, int rd, int rs1, TCGv s2)
+>   
+>       gen_helper_vsetvl(dst, tcg_env, s1, s2);
+>       gen_set_gpr(s, rd, dst);
+> -    mark_vs_dirty(s);
+> +    finalize_rvv_inst(s);
+>   
+>       gen_update_pc(s, s->cur_insn_len);
+>       lookup_and_goto_ptr(s);
+> @@ -187,7 +187,7 @@ static bool do_vsetivli(DisasContext *s, int rd, TCGv s1, TCGv s2)
+>   
+>       gen_helper_vsetvl(dst, tcg_env, s1, s2);
+>       gen_set_gpr(s, rd, dst);
+> -    mark_vs_dirty(s);
+> +    finalize_rvv_inst(s);
+>       gen_update_pc(s, s->cur_insn_len);
+>       lookup_and_goto_ptr(s);
+>       s->base.is_jmp = DISAS_NORETURN;
+> @@ -639,7 +639,7 @@ static bool ldst_us_trans(uint32_t vd, uint32_t rs1, uint32_t data,
+>       fn(dest, mask, base, tcg_env, desc);
+>   
+>       if (!is_store) {
+> -        mark_vs_dirty(s);
+> +        finalize_rvv_inst(s);
+>       }
+>   
+>       gen_set_label(over);
 
-Max
 
-On 2024/2/16 5:11 AM, Daniel Henrique Barboza wrote:
->
->
-> On 2/15/24 16:28, Max Chou wrote:
->> In the vector unit-stride load/store helper functions. the vext_ldst_us
->> function corresponding most of the execution time. Inline the functions
->> can avoid the function call overhead to imperove the helper function
->> performance.
->>
->> Signed-off-by: Max Chou <max.chou@sifive.com>
->> ---
->
-> The inline is a good idea but I think we can do better. I mentioned in 
-> a thread
-> last year [1] about the time we're spending in single byte 
-> loads/stores, even
-> for strided instructions.
->
-> E.g. in vext_ldst_stride():
->
->
->     for (i = env->vstart; i < env->vl; i++, env->vstart++) {
->         k = 0;
->         while (k < nf) {
->             if (!vm && !vext_elem_mask(v0, i)) {
->                 /* set masked-off elements to 1s */
->                 vext_set_elems_1s(vd, vma, (i + k * max_elems) * esz,
->                                   (i + k * max_elems + 1) * esz);
->                 k++;
->                 continue;
->             }
->             target_ulong addr = base + stride * i + (k << log2_esz);
->             ldst_elem(env, adjust_addr(env, addr), i + k * max_elems, 
-> vd, ra);
->             k++;
->         }
->     }
->
-> We're doing single byte load/stores in ldst_elem() when, in this case, 
-> we could do
-> it in a whole block only once. ARM does something similar in SVE.
->
-> I update the gitlab bug 
-> https://gitlab.com/qemu-project/qemu/-/issues/2137 with this
-> additional info too.
->
->
->
-> Thanks,
->
-> Daniel
->
->
-> [1] 
-> https://lore.kernel.org/qemu-riscv/0e54c6c1-2903-7942-eff2-2b8c5e21187e@ventanamicro.com/
->
->
->>   target/riscv/vector_helper.c | 30 ++++++++++++++++--------------
->>   1 file changed, 16 insertions(+), 14 deletions(-)
->>
->> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
->> index e8fbb921449..866f77d321d 100644
->> --- a/target/riscv/vector_helper.c
->> +++ b/target/riscv/vector_helper.c
->> @@ -149,25 +149,27 @@ static inline void vext_set_elem_mask(void *v0, 
->> int index,
->>   typedef void vext_ldst_elem_fn(CPURISCVState *env, abi_ptr addr,
->>                                  uint32_t idx, void *vd, uintptr_t 
->> retaddr);
->>   -#define GEN_VEXT_LD_ELEM(NAME, ETYPE, H, LDSUF)            \
->> -static void NAME(CPURISCVState *env, abi_ptr addr,         \
->> -                 uint32_t idx, void *vd, uintptr_t retaddr)\
->> -{                                                          \
->> -    ETYPE *cur = ((ETYPE *)vd + H(idx));                   \
->> -    *cur = cpu_##LDSUF##_data_ra(env, addr, retaddr);      \
->> -}                                                          \
->> +#define GEN_VEXT_LD_ELEM(NAME, ETYPE, H, LDSUF)         \
->> +static inline QEMU_ALWAYS_INLINE                        \
->> +void NAME(CPURISCVState *env, abi_ptr addr,             \
->> +          uint32_t idx, void *vd, uintptr_t retaddr)    \
->> +{                                                       \
->> +    ETYPE *cur = ((ETYPE *)vd + H(idx));                \
->> +    *cur = cpu_##LDSUF##_data_ra(env, addr, retaddr);   \
->> +}                                                       \
->>     GEN_VEXT_LD_ELEM(lde_b, int8_t,  H1, ldsb)
->>   GEN_VEXT_LD_ELEM(lde_h, int16_t, H2, ldsw)
->>   GEN_VEXT_LD_ELEM(lde_w, int32_t, H4, ldl)
->>   GEN_VEXT_LD_ELEM(lde_d, int64_t, H8, ldq)
->>   -#define GEN_VEXT_ST_ELEM(NAME, ETYPE, H, STSUF)            \
->> -static void NAME(CPURISCVState *env, abi_ptr addr,         \
->> -                 uint32_t idx, void *vd, uintptr_t retaddr)\
->> -{                                                          \
->> -    ETYPE data = *((ETYPE *)vd + H(idx));                  \
->> -    cpu_##STSUF##_data_ra(env, addr, data, retaddr);       \
->> +#define GEN_VEXT_ST_ELEM(NAME, ETYPE, H, STSUF)         \
->> +static inline QEMU_ALWAYS_INLINE                        \
->> +void NAME(CPURISCVState *env, abi_ptr addr,             \
->> +          uint32_t idx, void *vd, uintptr_t retaddr)    \
->> +{                                                       \
->> +    ETYPE data = *((ETYPE *)vd + H(idx));               \
->> +    cpu_##STSUF##_data_ra(env, addr, data, retaddr);    \
->>   }
->>     GEN_VEXT_ST_ELEM(ste_b, int8_t,  H1, stb)
->> @@ -289,7 +291,7 @@ GEN_VEXT_ST_STRIDE(vsse64_v, int64_t, ste_d)
->>    */
->>     /* unmasked unit-stride load and store operation */
->> -static void
->> +static inline QEMU_ALWAYS_INLINE void
->>   vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, 
->> uint32_t desc,
->>                vext_ldst_elem_fn *ldst_elem, uint32_t log2_esz, 
->> uint32_t evl,
->>                uintptr_t ra)
+This patch is replacing mark_vs_dirty() with finalize(), that does call mark_vs_dirty() and
+set start_eq_zero = true, but it's missing the start_eq_zero update for store functions
+because of these ifs.
+
+We could just remove these ifs and finalize() all the time. To keep the existing logic
+(i.e. not set vs_dirty for writes) I would do, in this same patch:
+
+
+>       if (!is_store) {
+>           mark_vs_dirty(s);
+>       }
+> +     s->start_eq_zero = true;
+
+
+This would make these load/stores functions different from the rest, without a finalize()
+call, but given that they're already difference sine vs_dirty() is conditional I guess
+it's fine.
+
+
+What do you think?
+
+
+Daniel
+
+> @@ -800,7 +800,7 @@ static bool ldst_stride_trans(uint32_t vd, uint32_t rs1, uint32_t rs2,
+>       fn(dest, mask, base, stride, tcg_env, desc);
+>   
+>       if (!is_store) {
+> -        mark_vs_dirty(s);
+> +        finalize_rvv_inst(s);
+>       }
+>   
+>       gen_set_label(over);
+> @@ -907,7 +907,7 @@ static bool ldst_index_trans(uint32_t vd, uint32_t rs1, uint32_t vs2,
+>       fn(dest, mask, base, index, tcg_env, desc);
+>   
+>       if (!is_store) {
+> -        mark_vs_dirty(s);
+> +        finalize_rvv_inst(s);
+>       }
+>   
+>       gen_set_label(over);
+> @@ -1044,7 +1044,7 @@ static bool ldff_trans(uint32_t vd, uint32_t rs1, uint32_t data,
+>   
+>       fn(dest, mask, base, tcg_env, desc);
+>   
+> -    mark_vs_dirty(s);
+> +    finalize_rvv_inst(s);
+>       gen_set_label(over);
+>       return true;
+>   }
+> @@ -1105,7 +1105,7 @@ static bool ldst_whole_trans(uint32_t vd, uint32_t rs1, uint32_t nf,
+>       fn(dest, base, tcg_env, desc);
+>   
+>       if (!is_store) {
+> -        mark_vs_dirty(s);
+> +        finalize_rvv_inst(s);
+>       }
+>       gen_set_label(over);
+>   
+> @@ -1202,7 +1202,7 @@ do_opivv_gvec(DisasContext *s, arg_rmrr *a, GVecGen3Fn *gvec_fn,
+>                              tcg_env, s->cfg_ptr->vlen / 8,
+>                              s->cfg_ptr->vlen / 8, data, fn);
+>       }
+> -    mark_vs_dirty(s);
+> +    finalize_rvv_inst(s);
+>       gen_set_label(over);
+>       return true;
+>   }
+> @@ -1257,7 +1257,7 @@ static bool opivx_trans(uint32_t vd, uint32_t rs1, uint32_t vs2, uint32_t vm,
+>   
+>       fn(dest, mask, src1, src2, tcg_env, desc);
+>   
+> -    mark_vs_dirty(s);
+> +    finalize_rvv_inst(s);
+>       gen_set_label(over);
+>       return true;
+>   }
+> @@ -1283,7 +1283,7 @@ do_opivx_gvec(DisasContext *s, arg_rmrr *a, GVecGen2sFn *gvec_fn,
+>           gvec_fn(s->sew, vreg_ofs(s, a->rd), vreg_ofs(s, a->rs2),
+>                   src1, MAXSZ(s), MAXSZ(s));
+>   
+> -        mark_vs_dirty(s);
+> +        finalize_rvv_inst(s);
+>           return true;
+>       }
+>       return opivx_trans(a->rd, a->rs1, a->rs2, a->vm, fn, s);
+> @@ -1419,7 +1419,7 @@ static bool opivi_trans(uint32_t vd, uint32_t imm, uint32_t vs2, uint32_t vm,
+>   
+>       fn(dest, mask, src1, src2, tcg_env, desc);
+>   
+> -    mark_vs_dirty(s);
+> +    finalize_rvv_inst(s);
+>       gen_set_label(over);
+>       return true;
+>   }
+> @@ -1434,7 +1434,7 @@ do_opivi_gvec(DisasContext *s, arg_rmrr *a, GVecGen2iFn *gvec_fn,
+>       if (a->vm && s->vl_eq_vlmax && !(s->vta && s->lmul < 0)) {
+>           gvec_fn(s->sew, vreg_ofs(s, a->rd), vreg_ofs(s, a->rs2),
+>                   extract_imm(s, a->rs1, imm_mode), MAXSZ(s), MAXSZ(s));
+> -        mark_vs_dirty(s);
+> +        finalize_rvv_inst(s);
+>           return true;
+>       }
+>       return opivi_trans(a->rd, a->rs1, a->rs2, a->vm, fn, s, imm_mode);
+> @@ -1495,7 +1495,7 @@ static bool do_opivv_widen(DisasContext *s, arg_rmrr *a,
+>                              tcg_env, s->cfg_ptr->vlen / 8,
+>                              s->cfg_ptr->vlen / 8,
+>                              data, fn);
+> -        mark_vs_dirty(s);
+> +        finalize_rvv_inst(s);
+>           gen_set_label(over);
+>           return true;
+>       }
+> @@ -1570,7 +1570,7 @@ static bool do_opiwv_widen(DisasContext *s, arg_rmrr *a,
+>                              vreg_ofs(s, a->rs2),
+>                              tcg_env, s->cfg_ptr->vlen / 8,
+>                              s->cfg_ptr->vlen / 8, data, fn);
+> -        mark_vs_dirty(s);
+> +        finalize_rvv_inst(s);
+>           gen_set_label(over);
+>           return true;
+>       }
+> @@ -1641,7 +1641,7 @@ static bool opivv_trans(uint32_t vd, uint32_t vs1, uint32_t vs2, uint32_t vm,
+>       tcg_gen_gvec_4_ptr(vreg_ofs(s, vd), vreg_ofs(s, 0), vreg_ofs(s, vs1),
+>                          vreg_ofs(s, vs2), tcg_env, s->cfg_ptr->vlen / 8,
+>                          s->cfg_ptr->vlen / 8, data, fn);
+> -    mark_vs_dirty(s);
+> +    finalize_rvv_inst(s);
+>       gen_set_label(over);
+>       return true;
+>   }
+> @@ -1775,7 +1775,7 @@ do_opivx_gvec_shift(DisasContext *s, arg_rmrr *a, GVecGen2sFn32 *gvec_fn,
+>           gvec_fn(s->sew, vreg_ofs(s, a->rd), vreg_ofs(s, a->rs2),
+>                   src1, MAXSZ(s), MAXSZ(s));
+>   
+> -        mark_vs_dirty(s);
+> +        finalize_rvv_inst(s);
+>           return true;
+>       }
+>       return opivx_trans(a->rd, a->rs1, a->rs2, a->vm, fn, s);
+> @@ -1834,7 +1834,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)             \
+>                              s->cfg_ptr->vlen / 8,                   \
+>                              s->cfg_ptr->vlen / 8, data,             \
+>                              fns[s->sew]);                           \
+> -        mark_vs_dirty(s);                                          \
+> +        finalize_rvv_inst(s);                                          \
+>           gen_set_label(over);                                       \
+>           return true;                                               \
+>       }                                                              \
+> @@ -2041,7 +2041,7 @@ static bool trans_vmv_v_v(DisasContext *s, arg_vmv_v_v *a)
+>                                  fns[s->sew]);
+>               gen_set_label(over);
+>           }
+> -        mark_vs_dirty(s);
+> +        finalize_rvv_inst(s);
+>           return true;
+>       }
+>       return false;
+> @@ -2088,7 +2088,7 @@ static bool trans_vmv_v_x(DisasContext *s, arg_vmv_v_x *a)
+>               fns[s->sew](dest, s1_i64, tcg_env, desc);
+>           }
+>   
+> -        mark_vs_dirty(s);
+> +        finalize_rvv_inst(s);
+>           gen_set_label(over);
+>           return true;
+>       }
+> @@ -2105,7 +2105,7 @@ static bool trans_vmv_v_i(DisasContext *s, arg_vmv_v_i *a)
+>           if (s->vl_eq_vlmax && !(s->vta && s->lmul < 0)) {
+>               tcg_gen_gvec_dup_imm(s->sew, vreg_ofs(s, a->rd),
+>                                    MAXSZ(s), MAXSZ(s), simm);
+> -            mark_vs_dirty(s);
+> +            finalize_rvv_inst(s);
+>           } else {
+>               TCGv_i32 desc;
+>               TCGv_i64 s1;
+> @@ -2126,7 +2126,7 @@ static bool trans_vmv_v_i(DisasContext *s, arg_vmv_v_i *a)
+>               tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, a->rd));
+>               fns[s->sew](dest, s1, tcg_env, desc);
+>   
+> -            mark_vs_dirty(s);
+> +            finalize_rvv_inst(s);
+>               gen_set_label(over);
+>           }
+>           return true;
+> @@ -2278,7 +2278,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)             \
+>                              s->cfg_ptr->vlen / 8,                   \
+>                              s->cfg_ptr->vlen / 8, data,             \
+>                              fns[s->sew - 1]);                       \
+> -        mark_vs_dirty(s);                                          \
+> +        finalize_rvv_inst(s);                                          \
+>           gen_set_label(over);                                       \
+>           return true;                                               \
+>       }                                                              \
+> @@ -2316,7 +2316,7 @@ static bool opfvf_trans(uint32_t vd, uint32_t rs1, uint32_t vs2,
+>   
+>       fn(dest, mask, t1, src2, tcg_env, desc);
+>   
+> -    mark_vs_dirty(s);
+> +    finalize_rvv_inst(s);
+>       gen_set_label(over);
+>       return true;
+>   }
+> @@ -2394,7 +2394,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)           \
+>                              s->cfg_ptr->vlen / 8,                 \
+>                              s->cfg_ptr->vlen / 8, data,           \
+>                              fns[s->sew - 1]);                     \
+> -        mark_vs_dirty(s);                                        \
+> +        finalize_rvv_inst(s);                                        \
+>           gen_set_label(over);                                     \
+>           return true;                                             \
+>       }                                                            \
+> @@ -2468,7 +2468,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)             \
+>                              s->cfg_ptr->vlen / 8,                   \
+>                              s->cfg_ptr->vlen / 8, data,             \
+>                              fns[s->sew - 1]);                       \
+> -        mark_vs_dirty(s);                                          \
+> +        finalize_rvv_inst(s);                                          \
+>           gen_set_label(over);                                       \
+>           return true;                                               \
+>       }                                                              \
+> @@ -2583,7 +2583,7 @@ static bool do_opfv(DisasContext *s, arg_rmr *a,
+>                              vreg_ofs(s, a->rs2), tcg_env,
+>                              s->cfg_ptr->vlen / 8,
+>                              s->cfg_ptr->vlen / 8, data, fn);
+> -        mark_vs_dirty(s);
+> +        finalize_rvv_inst(s);
+>           gen_set_label(over);
+>           return true;
+>       }
+> @@ -2671,7 +2671,7 @@ static bool trans_vfmv_v_f(DisasContext *s, arg_vfmv_v_f *a)
+>   
+>               tcg_gen_gvec_dup_i64(s->sew, vreg_ofs(s, a->rd),
+>                                    MAXSZ(s), MAXSZ(s), t1);
+> -            mark_vs_dirty(s);
+> +            finalize_rvv_inst(s);
+>           } else {
+>               TCGv_ptr dest;
+>               TCGv_i32 desc;
+> @@ -2697,7 +2697,7 @@ static bool trans_vfmv_v_f(DisasContext *s, arg_vfmv_v_f *a)
+>   
+>               fns[s->sew - 1](dest, t1, tcg_env, desc);
+>   
+> -            mark_vs_dirty(s);
+> +            finalize_rvv_inst(s);
+>               gen_set_label(over);
+>           }
+>           return true;
+> @@ -2773,7 +2773,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
+>                              s->cfg_ptr->vlen / 8,                   \
+>                              s->cfg_ptr->vlen / 8, data,             \
+>                              fns[s->sew - 1]);                       \
+> -        mark_vs_dirty(s);                                          \
+> +        finalize_rvv_inst(s);                                          \
+>           gen_set_label(over);                                       \
+>           return true;                                               \
+>       }                                                              \
+> @@ -2824,7 +2824,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
+>                              s->cfg_ptr->vlen / 8,                   \
+>                              s->cfg_ptr->vlen / 8, data,             \
+>                              fns[s->sew]);                           \
+> -        mark_vs_dirty(s);                                          \
+> +        finalize_rvv_inst(s);                                          \
+>           gen_set_label(over);                                       \
+>           return true;                                               \
+>       }                                                              \
+> @@ -2891,7 +2891,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
+>                              s->cfg_ptr->vlen / 8,                   \
+>                              s->cfg_ptr->vlen / 8, data,             \
+>                              fns[s->sew - 1]);                       \
+> -        mark_vs_dirty(s);                                          \
+> +        finalize_rvv_inst(s);                                          \
+>           gen_set_label(over);                                       \
+>           return true;                                               \
+>       }                                                              \
+> @@ -2940,7 +2940,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
+>                              s->cfg_ptr->vlen / 8,                   \
+>                              s->cfg_ptr->vlen / 8, data,             \
+>                              fns[s->sew]);                           \
+> -        mark_vs_dirty(s);                                          \
+> +        finalize_rvv_inst(s);                                          \
+>           gen_set_label(over);                                       \
+>           return true;                                               \
+>       }                                                              \
+> @@ -3029,7 +3029,7 @@ static bool trans_##NAME(DisasContext *s, arg_r *a)                \
+>                              vreg_ofs(s, a->rs2), tcg_env,           \
+>                              s->cfg_ptr->vlen / 8,                   \
+>                              s->cfg_ptr->vlen / 8, data, fn);        \
+> -        mark_vs_dirty(s);                                          \
+> +        finalize_rvv_inst(s);                                          \
+>           gen_set_label(over);                                       \
+>           return true;                                               \
+>       }                                                              \
+> @@ -3131,7 +3131,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
+>                              tcg_env, s->cfg_ptr->vlen / 8,          \
+>                              s->cfg_ptr->vlen / 8,                   \
+>                              data, fn);                              \
+> -        mark_vs_dirty(s);                                          \
+> +        finalize_rvv_inst(s);                                          \
+>           gen_set_label(over);                                       \
+>           return true;                                               \
+>       }                                                              \
+> @@ -3173,7 +3173,7 @@ static bool trans_viota_m(DisasContext *s, arg_viota_m *a)
+>                              vreg_ofs(s, a->rs2), tcg_env,
+>                              s->cfg_ptr->vlen / 8,
+>                              s->cfg_ptr->vlen / 8, data, fns[s->sew]);
+> -        mark_vs_dirty(s);
+> +        finalize_rvv_inst(s);
+>           gen_set_label(over);
+>           return true;
+>       }
+> @@ -3203,7 +3203,7 @@ static bool trans_vid_v(DisasContext *s, arg_vid_v *a)
+>                              tcg_env, s->cfg_ptr->vlen / 8,
+>                              s->cfg_ptr->vlen / 8,
+>                              data, fns[s->sew]);
+> -        mark_vs_dirty(s);
+> +        finalize_rvv_inst(s);
+>           gen_set_label(over);
+>           return true;
+>       }
+> @@ -3386,7 +3386,7 @@ static bool trans_vmv_s_x(DisasContext *s, arg_vmv_s_x *a)
+>           s1 = get_gpr(s, a->rs1, EXT_NONE);
+>           tcg_gen_ext_tl_i64(t1, s1);
+>           vec_element_storei(s, a->rd, 0, t1);
+> -        mark_vs_dirty(s);
+> +        finalize_rvv_inst(s);
+>           gen_set_label(over);
+>           return true;
+>       }
+> @@ -3439,7 +3439,7 @@ static bool trans_vfmv_s_f(DisasContext *s, arg_vfmv_s_f *a)
+>           do_nanbox(s, t1, cpu_fpr[a->rs1]);
+>   
+>           vec_element_storei(s, a->rd, 0, t1);
+> -        mark_vs_dirty(s);
+> +        finalize_rvv_inst(s);
+>           gen_set_label(over);
+>           return true;
+>       }
+> @@ -3547,7 +3547,7 @@ static bool trans_vrgather_vx(DisasContext *s, arg_rmrr *a)
+>   
+>           tcg_gen_gvec_dup_i64(s->sew, vreg_ofs(s, a->rd),
+>                                MAXSZ(s), MAXSZ(s), dest);
+> -        mark_vs_dirty(s);
+> +        finalize_rvv_inst(s);
+>       } else {
+>           static gen_helper_opivx * const fns[4] = {
+>               gen_helper_vrgather_vx_b, gen_helper_vrgather_vx_h,
+> @@ -3576,7 +3576,7 @@ static bool trans_vrgather_vi(DisasContext *s, arg_rmrr *a)
+>                                    endian_ofs(s, a->rs2, a->rs1),
+>                                    MAXSZ(s), MAXSZ(s));
+>           }
+> -        mark_vs_dirty(s);
+> +        finalize_rvv_inst(s);
+>       } else {
+>           static gen_helper_opivx * const fns[4] = {
+>               gen_helper_vrgather_vx_b, gen_helper_vrgather_vx_h,
+> @@ -3623,7 +3623,7 @@ static bool trans_vcompress_vm(DisasContext *s, arg_r *a)
+>                              tcg_env, s->cfg_ptr->vlen / 8,
+>                              s->cfg_ptr->vlen / 8, data,
+>                              fns[s->sew]);
+> -        mark_vs_dirty(s);
+> +        finalize_rvv_inst(s);
+>           gen_set_label(over);
+>           return true;
+>       }
+> @@ -3645,13 +3645,13 @@ static bool trans_##NAME(DisasContext *s, arg_##NAME * a)               \
+>               /* EEW = 8 */                                               \
+>               tcg_gen_gvec_mov(MO_8, vreg_ofs(s, a->rd),                  \
+>                                vreg_ofs(s, a->rs2), maxsz, maxsz);        \
+> -            mark_vs_dirty(s);                                           \
+> +            finalize_rvv_inst(s);                                           \
+>           } else {                                                        \
+>               TCGLabel *over = gen_new_label();                           \
+>               tcg_gen_brcondi_tl(TCG_COND_GEU, cpu_vstart, maxsz, over);  \
+>               tcg_gen_gvec_2_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, a->rs2), \
+>                                  tcg_env, maxsz, maxsz, 0, gen_helper_vmvr_v); \
+> -            mark_vs_dirty(s);                                           \
+> +            finalize_rvv_inst(s);                                           \
+>               gen_set_label(over);                                        \
+>           }                                                               \
+>           return true;                                                    \
+> @@ -3726,7 +3726,7 @@ static bool int_ext_op(DisasContext *s, arg_rmr *a, uint8_t seq)
+>                          s->cfg_ptr->vlen / 8,
+>                          s->cfg_ptr->vlen / 8, data, fn);
+>   
+> -    mark_vs_dirty(s);
+> +    finalize_rvv_inst(s);
+>       gen_set_label(over);
+>       return true;
+>   }
+> diff --git a/target/riscv/insn_trans/trans_rvvk.c.inc b/target/riscv/insn_trans/trans_rvvk.c.inc
+> index 3801c16829..1662cbdec4 100644
+> --- a/target/riscv/insn_trans/trans_rvvk.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvvk.c.inc
+> @@ -176,7 +176,7 @@ GEN_OPIVX_GVEC_TRANS_CHECK(vandn_vx, andcs, zvkb_vx_check)
+>                                  vreg_ofs(s, a->rs2), tcg_env,               \
+>                                  s->cfg_ptr->vlen / 8, s->cfg_ptr->vlen / 8, \
+>                                  data, fns[s->sew]);                         \
+> -            mark_vs_dirty(s);                                              \
+> +            finalize_rrv_inst(s);                                              \
+>               gen_set_label(over);                                           \
+>               return true;                                                   \
+>           }                                                                  \
+> @@ -271,7 +271,7 @@ GEN_OPIVI_WIDEN_TRANS(vwsll_vi, IMM_ZX, vwsll_vx, vwsll_vx_check)
+>               tcg_gen_addi_ptr(rd_v, tcg_env, vreg_ofs(s, a->rd));              \
+>               tcg_gen_addi_ptr(rs2_v, tcg_env, vreg_ofs(s, a->rs2));            \
+>               gen_helper_##NAME(rd_v, rs2_v, tcg_env, desc);                    \
+> -            mark_vs_dirty(s);                                                 \
+> +            finalize_rrv_inst(s);                                                 \
+>               gen_set_label(over);                                              \
+>               return true;                                                      \
+>           }                                                                     \
+> @@ -349,7 +349,7 @@ GEN_V_UNMASKED_TRANS(vaesem_vs, vaes_check_vs, ZVKNED_EGS)
+>               tcg_gen_addi_ptr(rd_v, tcg_env, vreg_ofs(s, a->rd));              \
+>               tcg_gen_addi_ptr(rs2_v, tcg_env, vreg_ofs(s, a->rs2));            \
+>               gen_helper_##NAME(rd_v, rs2_v, uimm_v, tcg_env, desc);            \
+> -            mark_vs_dirty(s);                                                 \
+> +            finalize_rrv_inst(s);                                                 \
+>               gen_set_label(over);                                              \
+>               return true;                                                      \
+>           }                                                                     \
+> @@ -416,7 +416,7 @@ GEN_VI_UNMASKED_TRANS(vaeskf2_vi, vaeskf2_check, ZVKNED_EGS)
+>                                  s->cfg_ptr->vlen / 8, s->cfg_ptr->vlen / 8,    \
+>                                  data, gen_helper_##NAME);                      \
+>                                                                                 \
+> -            mark_vs_dirty(s);                                                 \
+> +            finalize_rrv_inst(s);                                                 \
+>               gen_set_label(over);                                              \
+>               return true;                                                      \
+>           }                                                                     \
+> @@ -471,7 +471,7 @@ static bool trans_vsha2cl_vv(DisasContext *s, arg_rmrr *a)
+>               s->sew == MO_32 ?
+>                   gen_helper_vsha2cl32_vv : gen_helper_vsha2cl64_vv);
+>   
+> -        mark_vs_dirty(s);
+> +        finalize_rrv_inst(s);
+>           gen_set_label(over);
+>           return true;
+>       }
+> @@ -505,7 +505,7 @@ static bool trans_vsha2ch_vv(DisasContext *s, arg_rmrr *a)
+>               s->sew == MO_32 ?
+>                   gen_helper_vsha2ch32_vv : gen_helper_vsha2ch64_vv);
+>   
+> -        mark_vs_dirty(s);
+> +        finalize_rrv_inst(s);
+>           gen_set_label(over);
+>           return true;
+>       }
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index f0be79bb16..d4147e2dd7 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -670,8 +670,18 @@ static void mark_vs_dirty(DisasContext *ctx)
+>           }
+>       }
+>   }
+> +static void set_vstart_eq_zero(DisasContext *ctx)
+> +{
+> +    ctx->vstart_eq_zero = true;
+> +}
+> +
+> +static void finalize_rvv_inst(DisasContext *ctx)
+> +{
+> +    mark_vs_dirty(ctx);
+> +    set_vstart_eq_zero(ctx);
+> +}
+>   #else
+> -static inline void mark_vs_dirty(DisasContext *ctx) { }
+> +static inline void finalize_rvv_inst(DisasContext *ctx){ }
+>   #endif
+>   
+>   static void gen_set_rm(DisasContext *ctx, int rm)
 
