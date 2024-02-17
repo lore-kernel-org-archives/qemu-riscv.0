@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15613C48BC3
-	for <qemu-riscv@archiver.kernel.org>; Sat, 17 Feb 2024 19:27:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B7D7C48BC4
+	for <qemu-riscv@archiver.kernel.org>; Sat, 17 Feb 2024 19:35:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rbQKW-0001mm-QF; Sat, 17 Feb 2024 14:26:32 -0500
+	id 1rbQSk-0000Nu-W8; Sat, 17 Feb 2024 14:35:03 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rbQKU-0001m9-W0
- for qemu-riscv@nongnu.org; Sat, 17 Feb 2024 14:26:31 -0500
-Received: from mail-pg1-x534.google.com ([2607:f8b0:4864:20::534])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1rbQSi-0000G9-Tj
+ for qemu-riscv@nongnu.org; Sat, 17 Feb 2024 14:35:00 -0500
+Received: from mail-il1-x12c.google.com ([2607:f8b0:4864:20::12c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rbQKT-0004QF-FC
- for qemu-riscv@nongnu.org; Sat, 17 Feb 2024 14:26:30 -0500
-Received: by mail-pg1-x534.google.com with SMTP id
- 41be03b00d2f7-5dbf7b74402so2477732a12.0
- for <qemu-riscv@nongnu.org>; Sat, 17 Feb 2024 11:26:29 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1rbQSh-0005XA-B1
+ for qemu-riscv@nongnu.org; Sat, 17 Feb 2024 14:35:00 -0500
+Received: by mail-il1-x12c.google.com with SMTP id
+ e9e14a558f8ab-365253c52aaso155015ab.2
+ for <qemu-riscv@nongnu.org>; Sat, 17 Feb 2024 11:34:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1708197988; x=1708802788; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Uz3CofM05BSE21m08IOk5vQLqDk13O/XdOJBk/QRHeo=;
- b=L/X4zXwTObTkcuYI9QVXWjzlW+OFiUZxC7MSPYvQPk780A042h+Csv1Lfr2u4PS+Ez
- QuVYsMUQZfF74p3cN3D33biPuB/reDQnxN2R+MftzYAO615YS5c7KYWcim8/rozXe2LN
- OVcqNTMfhoYWC0DP16PhrBfcUVitrfoUnjO/9buFPhK9tWXniHD7A/3f9ZdEn1VXVF2/
- gNVZePsgdZIRhDQNrM8WarZt4SyeIbiS1rpm0/u/nwTcmgH3dfmO/5++FqAUcMIEke/Y
- sw4J8b5FJuYqz05rpADIgPxUxZ9FSOXNMlGSshz2+2kjqfzCedzC/U94d54rLRpt28lZ
- VOMg==
+ d=linaro.org; s=google; t=1708198498; x=1708803298; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=smTnTvwdcZ4IBQM4tyaBNlSpJCcXDQsLAicupidlo50=;
+ b=cRVTjMf5iqGI+ipincaZRCAyEtJU0qEm6rBhXq+NRDPLCOisowQsK/JcDyCa3QJXmM
+ Dkiz/8/eL/CWusN6NO6IznUb+PoAovj4Nd6FmzYuwW6InL2dVypnYukjvN2Lx8KDebRq
+ 8gHQHrx8R2wvN81OI4+l4CE2uZ4+nnts/yK1ImQoh0TQoaQ18Y81F+KlIxA3yJARXHNf
+ Q6shFPYOpEy8vuZd4PxRBCi02bn7MNqo/veCqvyVO+1thWLU69bTI62nenIH/W721Qll
+ cJ3kulmKn+1jhooGsJPduAZU9zqxLrYry3BDwu5ADLE2/BM2YX+PJvFZPeQicI7hs8Ht
+ H9cQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708197988; x=1708802788;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Uz3CofM05BSE21m08IOk5vQLqDk13O/XdOJBk/QRHeo=;
- b=YNcBZ/JnzCZ57jzwVNwOz5Z9R3RqSL0pUOurRdUsBxwUJjz4+6LsRwZztQRbAqC1bi
- euG7uPmbKsQPbTZLhfd+ewf+FHJDYTGVDO63XUdjJnvrDFcOtIc563N28+Ee9YGDauMn
- e+g0R4oUyUhcqZ6BSvKKNR1Pu/tZmHB1Aw+U+MTBLw137jgVYy9NSNR8W5rXFc/9q7gw
- tFWYw4je2MNKcy09IHTOcA7LqbNMnz4Fn0rlV+HXvcXkz+TjXKQ4N9nsW2RwFzQtzAzq
- 8MSsFQscAoiTtDserd5bU9dkSwsSQq7DrGQ1eDF/+JVi6CS3NFq0s3CSgnTRUBO++Dty
- q+WA==
-X-Gm-Message-State: AOJu0Yy80Q8k2yF8D1hyd4QnGOPNc98FcsGEbSrMaK/Pl+tv6fe6s5cy
- 3UQM3XhnFnvVhuMMjWYKboJdIifXw+WRX1j7oBns7HwqlpZz1khPiPcU2NvzTqk=
-X-Google-Smtp-Source: AGHT+IERfmhacNIJXbxXhGTimw6Ng50QduZO98lWsXsDEUw0Dt4jnF9GIjDod1rICY4bSxVA5h2TNw==
-X-Received: by 2002:a17:902:b686:b0:1d9:8f6e:86e8 with SMTP id
- c6-20020a170902b68600b001d98f6e86e8mr7395064pls.69.1708197988009; 
- Sat, 17 Feb 2024 11:26:28 -0800 (PST)
-Received: from grind.. ([177.94.15.159]) by smtp.gmail.com with ESMTPSA id
- p3-20020a170902c70300b001db86c48221sm1770927plp.22.2024.02.17.11.26.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 17 Feb 2024 11:26:27 -0800 (PST)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- thuth@redhat.com, lvivier@redhat.com, pbonzini@redhat.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v2 4/6] hw/riscv/virt.c: add virtio-iommu-pci hotplug support
-Date: Sat, 17 Feb 2024 16:26:05 -0300
-Message-ID: <20240217192607.32565-5-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.43.2
-In-Reply-To: <20240217192607.32565-1-dbarboza@ventanamicro.com>
-References: <20240217192607.32565-1-dbarboza@ventanamicro.com>
+ d=1e100.net; s=20230601; t=1708198498; x=1708803298;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=smTnTvwdcZ4IBQM4tyaBNlSpJCcXDQsLAicupidlo50=;
+ b=thcfG+HFCnchzALwfLLEsM8165KGqYlNOSTmdL+I8MUkdTVOedfjy9Q5AiGjuODi86
+ uEyhZR49AbT4vF69Z+H5C6dWUfcCE3zkJInplIq1Rejm/81btTDPcoQrmmnLKzADJpFr
+ M/n6VRxKiTbz7i8iXZPWH3eSrz2GWFpQOEpGU9qABGANNVeouAqTsHspM6MXNYXBGDwx
+ G4mKZQePit8a/zBsqvkdizZ7sWZXxwQTw8nUKv49mpNYxEcbd7pLSg2tinkFwpPm1lzJ
+ /lzJDeLl4RCuEo0Q+sCOnm7DZtLYWqpPQd4Ay2yE8iIfJ+pMPVFFvaAvYoVkk74xu5zW
+ a6PQ==
+X-Gm-Message-State: AOJu0Yxu4UW97Z2SS5K3jvPgMtEbIyDNIqrtwSKPncXQFrvEWYoT+vzP
+ CIj+vwlFsXOkbmJB6K086klnJhpmn0ljN2pXBY1PrmDrdcWE1N7Sn27TzJeLgjw=
+X-Google-Smtp-Source: AGHT+IHDP1p1MH6nfHZ/uugrvlWCHHowaKZ8GZ8UhTXhlhbrwGiYZrD1V1wMq+9HK0a+FctpPJmCHQ==
+X-Received: by 2002:a05:6e02:13e2:b0:363:c63a:7975 with SMTP id
+ w2-20020a056e0213e200b00363c63a7975mr8212005ilj.24.1708198498161; 
+ Sat, 17 Feb 2024 11:34:58 -0800 (PST)
+Received: from [172.20.1.19] (173-197-098-125.biz.spectrum.com.
+ [173.197.98.125]) by smtp.gmail.com with ESMTPSA id
+ c5-20020a63d505000000b005cf5bf78b74sm1942520pgg.17.2024.02.17.11.34.56
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 17 Feb 2024 11:34:57 -0800 (PST)
+Message-ID: <72c7503b-0f43-44b8-aa82-fbafed2aac0c@linaro.org>
+Date: Sat, 17 Feb 2024 09:34:54 -1000
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/1] target/riscv: Clear vstart_qe_zero flag
+Content-Language: en-US
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Ivan Klokov <ivan.klokov@syntacore.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ bin.meng@windriver.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com
+References: <20231214111851.142532-1-ivan.klokov@syntacore.com>
+ <3d76be6d-e3a2-4730-a54f-2893ab4ed72e@ventanamicro.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <3d76be6d-e3a2-4730-a54f-2893ab4ed72e@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::534;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x534.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12c;
+ envelope-from=richard.henderson@linaro.org; helo=mail-il1-x12c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -95,87 +98,36 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-We want to add a RISC-V 'virt' libqos machine to increase our test
-coverage. Some of the tests will try to plug a virtio-iommu-pci
-device into the board and do some tests with it.
+On 2/17/24 00:53, Daniel Henrique Barboza wrote:
+> This patch is replacing mark_vs_dirty() with finalize(), that does call mark_vs_dirty() and
+> set start_eq_zero = true, but it's missing the start_eq_zero update for store functions
+> because of these ifs.
+> 
+> We could just remove these ifs and finalize() all the time. To keep the existing logic
+> (i.e. not set vs_dirty for writes) I would do, in this same patch:
+> 
+> 
+>>       if (!is_store) {
+>>           mark_vs_dirty(s);
+>>       }
+>> +     s->start_eq_zero = true;
+> 
+> 
+> This would make these load/stores functions different from the rest, without a finalize()
+> call, but given that they're already difference sine vs_dirty() is conditional I guess
+> it's fine.
+> 
+> 
+> What do you think?
 
-Enable virtio-iommu-pci in the 'virt' machine.
+I think it's required to have stores set dirty unconditionally, before the operation.
 
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
----
- hw/riscv/virt.c | 36 +++++++++++++++++++++++++++++++++++-
- 1 file changed, 35 insertions(+), 1 deletion(-)
+Consider a store that traps on the 2nd element, leaving vstart = 2, and exiting to the 
+main loop via exception.  The exception enters the kernel page fault handler.  The kernel 
+may need to fault in the page for the process, and in the meantime task switch.
 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index b540f4d3da..54ad809b44 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -53,6 +53,7 @@
- #include "hw/display/ramfb.h"
- #include "hw/acpi/aml-build.h"
- #include "qapi/qapi-visit-common.h"
-+#include "hw/virtio/virtio-iommu.h"
- 
- /* KVM AIA only supports APLIC MSI. APLIC Wired is always emulated by QEMU. */
- static bool virt_use_kvm_aia(RISCVVirtState *s)
-@@ -971,6 +972,34 @@ static void create_fdt_fw_cfg(RISCVVirtState *s, const MemMapEntry *memmap)
-     qemu_fdt_setprop(ms->fdt, nodename, "dma-coherent", NULL, 0);
- }
- 
-+static void create_fdt_virtio_iommu(RISCVVirtState *s, uint16_t bdf)
-+{
-+    const char compat[] = "virtio,pci-iommu\0pci1af4,1057";
-+    void *fdt = MACHINE(s)->fdt;
-+    uint32_t iommu_phandle;
-+    g_autofree char *iommu_node = NULL;
-+    g_autofree char *pci_node = NULL;
-+
-+    pci_node = g_strdup_printf("/soc/pci@%lx",
-+                               (long) virt_memmap[VIRT_PCIE_ECAM].base);
-+    iommu_node = g_strdup_printf("%s/virtio_iommu@%x,%x", pci_node,
-+                                 PCI_SLOT(bdf), PCI_FUNC(bdf));
-+    iommu_phandle = qemu_fdt_alloc_phandle(fdt);
-+
-+    qemu_fdt_add_subnode(fdt, iommu_node);
-+
-+    qemu_fdt_setprop(fdt, iommu_node, "compatible", compat, sizeof(compat));
-+    qemu_fdt_setprop_sized_cells(fdt, iommu_node, "reg",
-+                                 1, bdf << 8, 1, 0, 1, 0,
-+                                 1, 0, 1, 0);
-+    qemu_fdt_setprop_cell(fdt, iommu_node, "#iommu-cells", 1);
-+    qemu_fdt_setprop_cell(fdt, iommu_node, "phandle", iommu_phandle);
-+
-+    qemu_fdt_setprop_cells(fdt, pci_node, "iommu-map",
-+                           0, iommu_phandle, 0, bdf,
-+                           bdf + 1, iommu_phandle, bdf + 1, 0xffff - bdf);
-+}
-+
- static void finalize_fdt(RISCVVirtState *s)
- {
-     uint32_t phandle = 1, irq_mmio_phandle = 1, msi_pcie_phandle = 1;
-@@ -1680,7 +1709,8 @@ static HotplugHandler *virt_machine_get_hotplug_handler(MachineState *machine,
- {
-     MachineClass *mc = MACHINE_GET_CLASS(machine);
- 
--    if (device_is_dynamic_sysbus(mc, dev)) {
-+    if (device_is_dynamic_sysbus(mc, dev) ||
-+        object_dynamic_cast(OBJECT(dev), TYPE_VIRTIO_IOMMU_PCI)) {
-         return HOTPLUG_HANDLER(machine);
-     }
-     return NULL;
-@@ -1699,6 +1729,10 @@ static void virt_machine_device_plug_cb(HotplugHandler *hotplug_dev,
-                                      SYS_BUS_DEVICE(dev));
-         }
-     }
-+
-+    if (object_dynamic_cast(OBJECT(dev), TYPE_VIRTIO_IOMMU_PCI)) {
-+        create_fdt_virtio_iommu(s, pci_get_bdf(PCI_DEVICE(dev)));
-+    }
- }
- 
- static void virt_machine_class_init(ObjectClass *oc, void *data)
--- 
-2.43.2
+If vs dirty is not already set, the kernel won't know to save vector state on task switch.
 
+
+r~
 
