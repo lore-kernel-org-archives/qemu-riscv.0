@@ -4,84 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B28F3C48BC3
-	for <qemu-riscv@archiver.kernel.org>; Sat, 17 Feb 2024 19:27:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FA04C54764
+	for <qemu-riscv@archiver.kernel.org>; Sat, 17 Feb 2024 19:27:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rbQKZ-0001nH-DT; Sat, 17 Feb 2024 14:26:35 -0500
+	id 1rbQKQ-0001kT-1i; Sat, 17 Feb 2024 14:26:26 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rbQKY-0001n5-IQ
- for qemu-riscv@nongnu.org; Sat, 17 Feb 2024 14:26:34 -0500
-Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035])
+ id 1rbQKO-0001jM-AZ
+ for qemu-riscv@nongnu.org; Sat, 17 Feb 2024 14:26:24 -0500
+Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rbQKW-0004TI-Tc
- for qemu-riscv@nongnu.org; Sat, 17 Feb 2024 14:26:34 -0500
-Received: by mail-pj1-x1035.google.com with SMTP id
- 98e67ed59e1d1-2997c5fe6abso72948a91.1
- for <qemu-riscv@nongnu.org>; Sat, 17 Feb 2024 11:26:32 -0800 (PST)
+ id 1rbQKL-0004Mr-JM
+ for qemu-riscv@nongnu.org; Sat, 17 Feb 2024 14:26:24 -0500
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-1d746856d85so15479065ad.0
+ for <qemu-riscv@nongnu.org>; Sat, 17 Feb 2024 11:26:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1708197991; x=1708802791; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1708197977; x=1708802777; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gR5TAmgSzQFJFOtcv3cbUPr42X0QHhVS5in91w/+tnY=;
- b=oXvWst9w1c6e0g+5TxONsxuUAYwYizQAM+5C871W8eRtjmUFI4fuTxbWPdiLB3bdyP
- +CQfc/z1DyLvye8iwLdSCKfV/Xz6MEUidjupSwPM5HBjsdQ3xfyYAuSnWfmNOVCsWumh
- jrdQPIAfhfNbRGDYe64xL/0FrWeVKRL4Aw8f9I840zkV4jhwx1rPfB00nRE2soTROFMx
- 2JwC6D1YZq677tBQ6iXKRP6rOIzDZU0jQjd5moxfAVVbnbbqNOF6QPsgdFCzBF4HWyqz
- G8oKc1wBGwdViwlBkNWwOign0jNuYHqO7nmZkHPu4biCC2QkJhHFJsf/lNhW/ktk7nW2
- 7EeQ==
+ bh=kXJ67KfZkR1b8csu18xtWZdHrYCpHs0OoNjUSahRgdo=;
+ b=m037wpwleDhrjc2F1p0DfZ2Jkrwusl3lFcgrz4wIcdPOj+9xeyVOpcgNyDFbXJawlo
+ cvOsJLQt0YtcSLMF6pKnGSQPwNn7kzb5KqAyRhQecP9yJ0CRkz44OOmQgYSJ6TOU55xx
+ aM+/YIugKjhVEB7apyJxGfBA3K7rqheP02aDZrtXhk0SmG4bhWUYWeek466n0i6UR3MQ
+ bdKARrBeuiwcaJYHj0n3rfTLWfC0pgTc3VknWCScMHZD3DSjmvoLMIcDCOX3IepT7tTN
+ vpYzkzmjBYGHLaHkjWHZ6BjQjodschYJHlH5+2NDRcMGsLHcc450O3idvKY0jgW8+Ws6
+ a1uQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708197991; x=1708802791;
+ d=1e100.net; s=20230601; t=1708197977; x=1708802777;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=gR5TAmgSzQFJFOtcv3cbUPr42X0QHhVS5in91w/+tnY=;
- b=CaLxveo+50nnCZ4jSHK9h+6A+xIVVksFzMAb3b/7n1QkZuCpZqh2bSPhXO4peWb+kd
- qoogHHM3bRkDSEB06TIBSKeFqscv9z9f4YE9oQd0MFk7LnLV1+VoQG3BkjV/fXcd1Y18
- NXZr144Bru0ghKOUD7nZojoSQoYv2OVvTVt9De2HZD/TN7gf+s8vWttQS38Wq8/gML1i
- kwJ6ZXhYfZi95YMqPL1UD11WT0tLnG43NylhZBlVCcp9fr5TcfIqai6G0qR4rK8u/R6E
- PA9GsqGk+bEixOJdXhA5sgmQYjNt7p04CqZzl5zwQanC+QTrCKJXzXoeL875GAXwufCj
- OktA==
-X-Gm-Message-State: AOJu0YzPsNyVe63T/dvUrxZmrKWQtLha9dXY1vn9SdpYZ1ZdVEHMyKCZ
- eCSfza9GJIbu/jVDrX7RkTBKlOVtsZn07fRfh5LUJRrXWNLbn7XHKrzMl2zXzZH1wJU4IGSF65h
- 9
-X-Google-Smtp-Source: AGHT+IEGGWF1PlEge4fYXRYH2xE70OR1I9BlqXLMSuRe6p9W3jdMo8m313rRtMUcILE/D5Zf55/BXQ==
-X-Received: by 2002:a17:903:244f:b0:1db:cf94:9ba with SMTP id
- l15-20020a170903244f00b001dbcf9409bamr2236925pls.59.1708197991539; 
- Sat, 17 Feb 2024 11:26:31 -0800 (PST)
+ bh=kXJ67KfZkR1b8csu18xtWZdHrYCpHs0OoNjUSahRgdo=;
+ b=VIOlNhGNpJtz4ANAhO4E1X7zRtqrEiO1/WQ+6s0y8VpCfW2EJFF2ueyAHUZMfZAzAo
+ P5kHM4J7mgB1fP2z/Q+WWRjbkGMCC6EUzGqjl73vgQA4O1KyCp5NDdyxZ2SAXvs2qAYG
+ IFVMSZtQ/MyFhTFgXPMrhTnvifrzINb76jen/+ExVEa4xc+VViyy4Ht6tzpXd/0XEfSK
+ kIbEJ9/LOhrYED6dGOUXMDOh/iWBwehVrutMfawukdAmhQWbCFTdgfsqG1YXCI//KB+U
+ snHhMQC4rAcCeYLFZsITtBWC7VtFOsPtOaDqEb3EguyLf7ldlOWa6dZrE4qpcjXW9vEi
+ cEbg==
+X-Gm-Message-State: AOJu0YzlatQx8gUaLhn6WcYc/KSe1eHBsTuzJIlXwo5/H3CS1w+IwgJ4
+ 1UZ+gEsP1OF+/UbC4Gi0xhozITyNj0DuOer40j/PTyeBQxNz8nTrjwmv/0/4qxM=
+X-Google-Smtp-Source: AGHT+IFOoZ332VHewATcQCjca7jvcRx5IVzsA/6pl5hP16uUtGaxlNWG5Lij6rg7SgbirnJHvJeilA==
+X-Received: by 2002:a17:902:7c01:b0:1d9:f495:cfa4 with SMTP id
+ x1-20020a1709027c0100b001d9f495cfa4mr7676082pll.62.1708197977443; 
+ Sat, 17 Feb 2024 11:26:17 -0800 (PST)
 Received: from grind.. ([177.94.15.159]) by smtp.gmail.com with ESMTPSA id
- p3-20020a170902c70300b001db86c48221sm1770927plp.22.2024.02.17.11.26.28
+ p3-20020a170902c70300b001db86c48221sm1770927plp.22.2024.02.17.11.26.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 17 Feb 2024 11:26:31 -0800 (PST)
+ Sat, 17 Feb 2024 11:26:16 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  thuth@redhat.com, lvivier@redhat.com, pbonzini@redhat.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v2 5/6] hw/riscv/virt.c: make aclint compatible with 'qtest'
- accel
-Date: Sat, 17 Feb 2024 16:26:06 -0300
-Message-ID: <20240217192607.32565-6-dbarboza@ventanamicro.com>
+Subject: [PATCH v2 1/6] libqos/virtio.c: init all elems in
+ qvring_indirect_desc_setup()
+Date: Sat, 17 Feb 2024 16:26:02 -0300
+Message-ID: <20240217192607.32565-2-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240217192607.32565-1-dbarboza@ventanamicro.com>
 References: <20240217192607.32565-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x1035.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,154 +96,86 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The 'virt' machine makes assumptions on the Advanced Core-Local
-Interruptor, or aclint, based on 'tcg_enabled()' conditionals.  This
-will impact MSI related tests support when adding a RISC-V 'virt' libqos
-machine. The accelerator used in that case, 'qtest', isn't being
-accounted for and we'll error out if we try to enable aclint.
+The loop isn't setting the values for the last element. Every other
+element is being initialized with addr = 0, flags = VRING_DESC_F_NEXT
+and next = i + 1. The last elem is never touched.
 
-Create a new virt_aclint_allowed() helper to gate the aclint code
-considering both TCG and 'qtest' accelerators. The error message is
-left untouched, mentioning TCG only, because we don't expect the
-regular user to be aware of 'qtest'.
+This became a problem when enabling a RISC-V 'virt' libqos machine in
+the 'indirect' test of virti-blk-test.c. The 'flags' for the last
+element will end up being an odd number (since we didn't touch it).
+Being an odd number it will be mistaken by VRING_DESC_F_NEXT, which
+happens to be 1.
 
-We want to add 'qtest' support for aclint only, leaving the TCG specific
-bits out of it. This is done by changing the current format we use
-today:
+Deep into hw/virt/virtio.c, in virtqueue_split_pop(), into
+virtqueue_split_read_next_desc(), a check for VRING_DESC_F_NEXT will be
+made to see if we're supposed to chain. The code will keep up chaining
+in the last element because the uninitialized value happens to be odd.
+We'll error out right after that because desc->next (which is also
+uninitialized) will be >= max. A VIRTQUEUE_READ_DESC_ERROR will be
+returned, with an error message like this in the stderr:
 
-if (tcg_enabled()) {
-   if (s->have_aclint) { - aclint logic - }
-   else { - non-aclint, TCG logic - }
-}
+qemu-system-riscv64: Desc next is 49391
 
-into:
+Since we never returned, we'll end up timing out at qvirtio_wait_used_elem():
 
-if (virt_aclint_allowed() && s->have_aclint) {
- - aclint logic -
-} else if (tcg_enabled()) {
- - non-aclint, TCG logic -
-}
+ERROR:../tests/qtest/libqos/virtio.c:236:qvirtio_wait_used_elem:
+    assertion failed: (g_get_monotonic_time() - start_time <= timeout_us)
 
+The root cause is using uninitialized values from guest_alloc() in
+qvring_indirect_desc_setup(). There's no guarantee that the memory pages
+retrieved will be zeroed, so we can't make assumptions. In fact, commit
+5b4f72f5e8 ("tests/qtest: properly initialise the vring used idx") fixed a
+similar problem stating "It is probably not wise to assume guest memory
+is zeroed anyway". I concur.
+
+Initialize all elems in qvring_indirect_desc_setup().
+
+Fixes: f294b029aa ("libqos: Added indirect descriptor support to virtio implementation")
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Thomas Huth <thuth@redhat.com>
 ---
- hw/riscv/virt.c | 52 +++++++++++++++++++++++++------------------------
- 1 file changed, 27 insertions(+), 25 deletions(-)
+ tests/qtest/libqos/virtio.c | 25 +++++++++++++++++++------
+ 1 file changed, 19 insertions(+), 6 deletions(-)
 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 54ad809b44..a094af97c3 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -48,6 +48,7 @@
- #include "sysemu/tcg.h"
- #include "sysemu/kvm.h"
- #include "sysemu/tpm.h"
-+#include "sysemu/qtest.h"
- #include "hw/pci/pci.h"
- #include "hw/pci-host/gpex.h"
- #include "hw/display/ramfb.h"
-@@ -61,6 +62,11 @@ static bool virt_use_kvm_aia(RISCVVirtState *s)
-     return kvm_irqchip_in_kernel() && s->aia_type == VIRT_AIA_TYPE_APLIC_IMSIC;
- }
+diff --git a/tests/qtest/libqos/virtio.c b/tests/qtest/libqos/virtio.c
+index 410513225f..4f39124eba 100644
+--- a/tests/qtest/libqos/virtio.c
++++ b/tests/qtest/libqos/virtio.c
+@@ -280,14 +280,27 @@ QVRingIndirectDesc *qvring_indirect_desc_setup(QTestState *qs, QVirtioDevice *d,
+     indirect->elem = elem;
+     indirect->desc = guest_alloc(alloc, sizeof(struct vring_desc) * elem);
  
-+static bool virt_aclint_allowed(void)
-+{
-+    return tcg_enabled() || qtest_enabled();
-+}
+-    for (i = 0; i < elem - 1; ++i) {
++    for (i = 0; i < elem; ++i) {
+         /* indirect->desc[i].addr */
+         qvirtio_writeq(d, qs, indirect->desc + (16 * i), 0);
+-        /* indirect->desc[i].flags */
+-        qvirtio_writew(d, qs, indirect->desc + (16 * i) + 12,
+-                       VRING_DESC_F_NEXT);
+-        /* indirect->desc[i].next */
+-        qvirtio_writew(d, qs, indirect->desc + (16 * i) + 14, i + 1);
 +
- static const MemMapEntry virt_memmap[] = {
-     [VIRT_DEBUG] =        {        0x0,         0x100 },
-     [VIRT_MROM] =         {     0x1000,        0xf000 },
-@@ -725,14 +731,12 @@ static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *memmap,
- 
-         create_fdt_socket_memory(s, memmap, socket);
- 
--        if (tcg_enabled()) {
--            if (s->have_aclint) {
--                create_fdt_socket_aclint(s, memmap, socket,
--                    &intc_phandles[phandle_pos]);
--            } else {
--                create_fdt_socket_clint(s, memmap, socket,
--                    &intc_phandles[phandle_pos]);
--            }
-+        if (virt_aclint_allowed() && s->have_aclint) {
-+            create_fdt_socket_aclint(s, memmap, socket,
-+                                     &intc_phandles[phandle_pos]);
-+        } else if (tcg_enabled()) {
-+            create_fdt_socket_clint(s, memmap, socket,
-+                                    &intc_phandles[phandle_pos]);
-         }
++        /*
++         * If it's not the last element of the ring, set
++         * the chain (VRING_DESC_F_NEXT) flag and
++         * desc->next. Clear the last element - there's
++         * no guarantee that guest_alloc() will do it.
++         */
++        if (i != elem - 1) {
++            /* indirect->desc[i].flags */
++            qvirtio_writew(d, qs, indirect->desc + (16 * i) + 12,
++                           VRING_DESC_F_NEXT);
++
++            /* indirect->desc[i].next */
++            qvirtio_writew(d, qs, indirect->desc + (16 * i) + 14, i + 1);
++        } else {
++            qvirtio_writew(d, qs, indirect->desc + (16 * i) + 12, 0);
++            qvirtio_writew(d, qs, indirect->desc + (16 * i) + 14, 0);
++        }
      }
  
-@@ -1409,7 +1413,7 @@ static void virt_machine_init(MachineState *machine)
-         exit(1);
-     }
- 
--    if (!tcg_enabled() && s->have_aclint) {
-+    if (!virt_aclint_allowed() && s->have_aclint) {
-         error_report("'aclint' is only available with TCG acceleration");
-         exit(1);
-     }
-@@ -1446,23 +1450,22 @@ static void virt_machine_init(MachineState *machine)
-                                 hart_count, &error_abort);
-         sysbus_realize(SYS_BUS_DEVICE(&s->soc[i]), &error_fatal);
- 
--        if (tcg_enabled()) {
--            if (s->have_aclint) {
--                if (s->aia_type == VIRT_AIA_TYPE_APLIC_IMSIC) {
--                    /* Per-socket ACLINT MTIMER */
--                    riscv_aclint_mtimer_create(memmap[VIRT_CLINT].base +
-+        if (virt_aclint_allowed() && s->have_aclint) {
-+            if (s->aia_type == VIRT_AIA_TYPE_APLIC_IMSIC) {
-+                /* Per-socket ACLINT MTIMER */
-+                riscv_aclint_mtimer_create(memmap[VIRT_CLINT].base +
-                             i * RISCV_ACLINT_DEFAULT_MTIMER_SIZE,
-                         RISCV_ACLINT_DEFAULT_MTIMER_SIZE,
-                         base_hartid, hart_count,
-                         RISCV_ACLINT_DEFAULT_MTIMECMP,
-                         RISCV_ACLINT_DEFAULT_MTIME,
-                         RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ, true);
--                } else {
--                    /* Per-socket ACLINT MSWI, MTIMER, and SSWI */
--                    riscv_aclint_swi_create(memmap[VIRT_CLINT].base +
-+            } else {
-+                /* Per-socket ACLINT MSWI, MTIMER, and SSWI */
-+                riscv_aclint_swi_create(memmap[VIRT_CLINT].base +
-                             i * memmap[VIRT_CLINT].size,
-                         base_hartid, hart_count, false);
--                    riscv_aclint_mtimer_create(memmap[VIRT_CLINT].base +
-+                riscv_aclint_mtimer_create(memmap[VIRT_CLINT].base +
-                             i * memmap[VIRT_CLINT].size +
-                             RISCV_ACLINT_SWI_SIZE,
-                         RISCV_ACLINT_DEFAULT_MTIMER_SIZE,
-@@ -1470,21 +1473,20 @@ static void virt_machine_init(MachineState *machine)
-                         RISCV_ACLINT_DEFAULT_MTIMECMP,
-                         RISCV_ACLINT_DEFAULT_MTIME,
-                         RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ, true);
--                    riscv_aclint_swi_create(memmap[VIRT_ACLINT_SSWI].base +
-+                riscv_aclint_swi_create(memmap[VIRT_ACLINT_SSWI].base +
-                             i * memmap[VIRT_ACLINT_SSWI].size,
-                         base_hartid, hart_count, true);
--                }
--            } else {
--                /* Per-socket SiFive CLINT */
--                riscv_aclint_swi_create(
-+            }
-+        } else if (tcg_enabled()) {
-+            /* Per-socket SiFive CLINT */
-+            riscv_aclint_swi_create(
-                     memmap[VIRT_CLINT].base + i * memmap[VIRT_CLINT].size,
-                     base_hartid, hart_count, false);
--                riscv_aclint_mtimer_create(memmap[VIRT_CLINT].base +
-+            riscv_aclint_mtimer_create(memmap[VIRT_CLINT].base +
-                         i * memmap[VIRT_CLINT].size + RISCV_ACLINT_SWI_SIZE,
-                     RISCV_ACLINT_DEFAULT_MTIMER_SIZE, base_hartid, hart_count,
-                     RISCV_ACLINT_DEFAULT_MTIMECMP, RISCV_ACLINT_DEFAULT_MTIME,
-                     RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ, true);
--            }
-         }
- 
-         /* Per-socket interrupt controller */
+     return indirect;
 -- 
 2.43.2
 
