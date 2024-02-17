@@ -4,89 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BF8EC48BC3
-	for <qemu-riscv@archiver.kernel.org>; Sat, 17 Feb 2024 17:28:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B6BAC48BC4
+	for <qemu-riscv@archiver.kernel.org>; Sat, 17 Feb 2024 19:27:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rbOTq-0008PO-Bt; Sat, 17 Feb 2024 12:28:02 -0500
+	id 1rbQKd-0001oU-F0; Sat, 17 Feb 2024 14:26:39 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1rbOTo-0008Ow-EW
- for qemu-riscv@nongnu.org; Sat, 17 Feb 2024 12:28:00 -0500
-Received: from mail-pj1-x1041.google.com ([2607:f8b0:4864:20::1041])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rbQKc-0001o6-Cd
+ for qemu-riscv@nongnu.org; Sat, 17 Feb 2024 14:26:38 -0500
+Received: from mail-pg1-x52e.google.com ([2607:f8b0:4864:20::52e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1rbOTl-0001Ky-AE
- for qemu-riscv@nongnu.org; Sat, 17 Feb 2024 12:28:00 -0500
-Received: by mail-pj1-x1041.google.com with SMTP id
- 98e67ed59e1d1-2995185dbbbso708054a91.3
- for <qemu-riscv@nongnu.org>; Sat, 17 Feb 2024 09:27:56 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rbQKa-0004U8-J6
+ for qemu-riscv@nongnu.org; Sat, 17 Feb 2024 14:26:38 -0500
+Received: by mail-pg1-x52e.google.com with SMTP id
+ 41be03b00d2f7-5dca1efad59so2794074a12.2
+ for <qemu-riscv@nongnu.org>; Sat, 17 Feb 2024 11:26:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1708190876; x=1708795676; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=YZ7fOpUHNbJKvjI94vWeCJeJ6Gt6HFQtT5Uk1QodXSc=;
- b=cXjhZNk8qcBSQB+oaMQM6ghJ17bQiaAIQ+KC+lXY+3smdmlv8RlGqzd8K648Jst3lC
- 3fDhHdBEl2DwKNOGX85tyrtbjds9Lnu9GJYgT8wbEM5MTSPvcNoQOVuFy/3zMhXT0QtD
- VcqfSLQ59zd/XbwVerp7q9JDMf4ie0OGmu/nsdjFb8gxWygqhXR3OaZHj+XQsVNQDNm6
- n5XgGDGEJ+PwAB1hUOIRA7D8/VLco37ZX6SWfpwS7YexiJRfJ6+NLrQ+sVZt/40aSKR9
- RZ1+l2Hf4UTWZrjXObzrA64wSxCJxHgVUqWZd/2XAfd2uTHv0EruS+5xTeaRLy08QYqC
- t5YA==
+ d=ventanamicro.com; s=google; t=1708197995; x=1708802795; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=UUNIfOBkHjYLuvOH/rpRmRcQF/okub2SyllhTNRVXOo=;
+ b=DK8Q50L1fVjV0EihpgZ7L8RAhXKVWrBQREyYd1/+DA+Ihfj6zJCf5JvN2bHivb6whF
+ RdZByP6OwNpHDCrwBV5GT2WgvMc+KTBl2kq/wPJXUFeuqmbj6vqHxGKmp96SK6bWgXfB
+ dACTqxDBzCcka4IbBYEOeTrFrUJoEtYLslRM08XofW3Kg/sYyXf9e1SBYhCxcMioJl6v
+ DHNHc6QzC+2qmCDMEaHdgY8c/N8FBVCVoja5TAjCMtV7xhVSvyXt8vsCCTPSA2/stefY
+ udfc/NQK7CD1VnUvwbburr2KIoA8AMoKJ5giplsYvnlSv2rIt8uokSyIJl+g06LtoGkk
+ Kc3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708190876; x=1708795676;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=YZ7fOpUHNbJKvjI94vWeCJeJ6Gt6HFQtT5Uk1QodXSc=;
- b=COfkQ7rSkBMZLik21l4gMpcvvbK/F3V9O5MW8fAfwAEBoEH5ODJ+BM0IzmluvinhXT
- RFdIdex6TjBBdnQE7SH7X4KNhtB6uaB99IYVDUZs4jSb0xRHXETSzU2xDWNX8DbNa3mY
- L7eC3OfS2osVu0xdXWDIofI8MPhrQhLJL6L++oLda9ATwzkQvxg8nLDGdPKeV4Buc1QA
- Eyby7/1i1/UdKpsPQKvisCR5cWwlp6299KsbUYgxsDs2jxcVfP6JgeXHc6zcSb4ii0c+
- qAQVCI4Nn5TCFGESVHkpw+XHOnEpmYG1aIFO7i7HYt28mhqblxd9SJSbVapY6pcKZ4ke
- PXZw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWSL7s4GK44cD2MSlOIx4qbAodTPe1lJI+IqG+sD8HuFUdiMsE3cSI27OSnEkaI+nUwbJQxVy87yAlJah3vJh1xXhs0Ak8=
-X-Gm-Message-State: AOJu0YyRfiH/Bmbiwm5YiGMrnoRrcVQVeXotyF5zw61yyvrlk6jjX3/r
- tvRBaFM1FQUggxUQTZ+GK/Ppwbfzcyd+W/IF+2jRiPjrQN25Jdgo0VdCQKuJwW4=
-X-Google-Smtp-Source: AGHT+IEZUZsm5r0AusWrz/jMFABl/7vkvFyDDC08uvqkpYema6yfDysh32fBFMe4rfRhZ26XazM3xQ==
-X-Received: by 2002:a17:90a:4ce1:b0:298:d301:db69 with SMTP id
- k88-20020a17090a4ce100b00298d301db69mr7528402pjh.33.1708190875590; 
- Sat, 17 Feb 2024 09:27:55 -0800 (PST)
-Received: from [100.64.0.1] ([136.226.240.169])
- by smtp.gmail.com with ESMTPSA id
- li13-20020a17090b48cd00b00297317e5e04sm2088476pjb.52.2024.02.17.09.27.53
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 17 Feb 2024 09:27:55 -0800 (PST)
-Message-ID: <79830f29-485c-4755-1ba7-57aa76ccc9d7@sifive.com>
-Date: Sun, 18 Feb 2024 01:27:53 +0800
+ d=1e100.net; s=20230601; t=1708197995; x=1708802795;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=UUNIfOBkHjYLuvOH/rpRmRcQF/okub2SyllhTNRVXOo=;
+ b=wVvIOuE+8xNtJplnc+Mv2+weaHcOrnLBtcGGFQtoyO5IMClDnw+96+0+mXjKUHiwoV
+ E7L/v1g5jry89E7aQToCvALehd/N/kHbLQ19K5fluIrMT4EiF/ilRx/MxrMgA8aU3F+f
+ d0QzwXV5bS+2On6o79z/EV2W6SR7Y/9gh/DK7NRUf1oyENLTGGeP7yLcNhnH1AN5rsII
+ hL9E52YAJMyOrDK61rdgL3ny5rUJpr3vTWm0pJPlpqBPsuUqtCKPxGPxudqphMrMEyIt
+ r9Y3QrchT8mOXykawQGhAUJrfp/7GZQFa4KNijKMI7LUb0xaNcLkXCn/uFvzN2vqtXwh
+ 7IYQ==
+X-Gm-Message-State: AOJu0YzctPEzMGZpQTJl7936grseCFrB9ILFPJU/koOlLGuyKSs9sxov
+ h8HtG2agwZdwcotDhEnPiXhtfXWM+9Cyb18zi8L6lT/uTgKuttmSnZ65d9wWTx0=
+X-Google-Smtp-Source: AGHT+IEaBmVD3Mc5pIFt4cmzTnKlv3giDxE/iZEdbB3jshNXbNpyUoi/FNe4KVjpn0lHRJwnSubRUQ==
+X-Received: by 2002:a17:902:c40e:b0:1db:5b41:c5ac with SMTP id
+ k14-20020a170902c40e00b001db5b41c5acmr10309421plk.68.1708197995018; 
+ Sat, 17 Feb 2024 11:26:35 -0800 (PST)
+Received: from grind.. ([177.94.15.159]) by smtp.gmail.com with ESMTPSA id
+ p3-20020a170902c70300b001db86c48221sm1770927plp.22.2024.02.17.11.26.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 17 Feb 2024 11:26:34 -0800 (PST)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ thuth@redhat.com, lvivier@redhat.com, pbonzini@redhat.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH v2 6/6] tests/libqos: add riscv/virt machine nodes
+Date: Sat, 17 Feb 2024 16:26:07 -0300
+Message-ID: <20240217192607.32565-7-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.43.2
+In-Reply-To: <20240217192607.32565-1-dbarboza@ventanamicro.com>
+References: <20240217192607.32565-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.14.0
-Subject: Re: [RFC PATCH 4/6] accel/tcg: Inline cpu_mmu_lookup function
-Content-Language: en-US
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: dbarboza@ventanamicro.com, Riku Voipio <riku.voipio@iki.fi>,
- Paolo Bonzini <pbonzini@redhat.com>
-References: <20240215192823.729209-1-max.chou@sifive.com>
- <20240215192823.729209-5-max.chou@sifive.com>
- <4a2b1c91-0f25-4474-ad5c-13d9993a16f5@linaro.org>
-From: Max Chou <max.chou@sifive.com>
-In-Reply-To: <4a2b1c91-0f25-4474-ad5c-13d9993a16f5@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1041;
- envelope-from=max.chou@sifive.com; helo=mail-pj1-x1041.google.com
-X-Spam_score_int: -44
-X-Spam_score: -4.5
-X-Spam_bar: ----
-X-Spam_report: (-4.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-2.405,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52e;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x52e.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,274 +95,182 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Richard,
+Add a RISC-V 'virt' machine to the graph. This implementation is a
+modified copy of the existing arm machine in arm-virt-machine.c
 
-After I tried to reduce the overhead of unnecessary segment flow and 
-memory plugin callbacks, I observed that there several functions consume 
-most of runtime from perf report.
-So these three inline patches and previous patch were created to reduce 
-the overhead without modifying the functions.
+It contains a virtio-mmio and a generic-pcihost controller. The
+generic-pcihost controller hardcodes assumptions from the ARM 'virt'
+machine, like ecam and pio_base addresses, so we'll add an extra step to
+set its parameters after creating it.
 
-The following are the experiment results.
-The benchmark target is the bench-memcpy executable generated from the 
-glibc repository (release 2.38 with RVV support patch [1]).
+Our command line is incremented with 'aclint' parameters to allow the
+machine to run MSI tests.
 
-- Execution command
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Acked-by: Thomas Huth <thuth@redhat.com>
+---
+ tests/qtest/libqos/meson.build          |   1 +
+ tests/qtest/libqos/riscv-virt-machine.c | 137 ++++++++++++++++++++++++
+ 2 files changed, 138 insertions(+)
+ create mode 100644 tests/qtest/libqos/riscv-virt-machine.c
 
-`qemu-riscv64 -E TIMEOUTFACTOR=10 -R 1G -L {glibc build folder}/rootfs 
--cpu 
-rv64,zba=true,zbb=true,v=true,vlen=256,vext_spec=v1.0,rvv_ta_all_1s=true,rvv_ma_all_1s=true 
-bench-memcpy`
+diff --git a/tests/qtest/libqos/meson.build b/tests/qtest/libqos/meson.build
+index 90aae42a22..3aed6efcb8 100644
+--- a/tests/qtest/libqos/meson.build
++++ b/tests/qtest/libqos/meson.build
+@@ -60,6 +60,7 @@ libqos_srcs = files(
+         'arm-xilinx-zynq-a9-machine.c',
+         'ppc64_pseries-machine.c',
+         'x86_64_pc-machine.c',
++        'riscv-virt-machine.c',
+ )
+ 
+ if have_virtfs
+diff --git a/tests/qtest/libqos/riscv-virt-machine.c b/tests/qtest/libqos/riscv-virt-machine.c
+new file mode 100644
+index 0000000000..c4364c9c5d
+--- /dev/null
++++ b/tests/qtest/libqos/riscv-virt-machine.c
+@@ -0,0 +1,137 @@
++/*
++ * libqos driver framework for risc-v
++ *
++ * Initial version based on arm-virt-machine.c
++ *
++ * Copyright (c) 2024 Ventana Micro
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public
++ * License version 2.1 as published by the Free Software Foundation.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General Public
++ * License along with this library; if not, see <http://www.gnu.org/licenses/>
++ */
++
++#include "qemu/osdep.h"
++#include "../libqtest.h"
++#include "qemu/module.h"
++#include "libqos-malloc.h"
++#include "qgraph.h"
++#include "virtio-mmio.h"
++#include "generic-pcihost.h"
++#include "hw/pci/pci_regs.h"
++
++#define RISCV_PAGE_SIZE            4096
++
++/* VIRT_DRAM */
++#define RISCV_VIRT_RAM_ADDR        0x80000000
++#define RISCV_VIRT_RAM_SIZE        0x20000000
++
++/*
++ * VIRT_VIRTIO. BASE_ADDR  points to the last
++ * virtio_mmio device.
++ */
++#define VIRTIO_MMIO_BASE_ADDR      0x10008000
++#define VIRTIO_MMIO_SIZE           0x00001000
++
++/* VIRT_PCIE_PIO  */
++#define RISCV_GPEX_PIO_BASE        0x3000000
++#define RISCV_BUS_PIO_LIMIT        0x10000
++
++/* VIRT_PCIE_MMIO */
++#define RISCV_BUS_MMIO_ALLOC_PTR   0x40000000
++#define RISCV_BUS_MMIO_LIMIT       0x80000000
++
++/* VIRT_PCIE_ECAM */
++#define RISCV_ECAM_ALLOC_PTR   0x30000000
++
++typedef struct QVirtMachine QVirtMachine;
++
++struct QVirtMachine {
++    QOSGraphObject obj;
++    QGuestAllocator alloc;
++    QVirtioMMIODevice virtio_mmio;
++    QGenericPCIHost bridge;
++};
++
++static void virt_destructor(QOSGraphObject *obj)
++{
++    QVirtMachine *machine = (QVirtMachine *) obj;
++    alloc_destroy(&machine->alloc);
++}
++
++static void *virt_get_driver(void *object, const char *interface)
++{
++    QVirtMachine *machine = object;
++    if (!g_strcmp0(interface, "memory")) {
++        return &machine->alloc;
++    }
++
++    fprintf(stderr, "%s not present in riscv/virtio\n", interface);
++    g_assert_not_reached();
++}
++
++static QOSGraphObject *virt_get_device(void *obj, const char *device)
++{
++    QVirtMachine *machine = obj;
++    if (!g_strcmp0(device, "generic-pcihost")) {
++        return &machine->bridge.obj;
++    } else if (!g_strcmp0(device, "virtio-mmio")) {
++        return &machine->virtio_mmio.obj;
++    }
++
++    fprintf(stderr, "%s not present in riscv/virt\n", device);
++    g_assert_not_reached();
++}
++
++static void riscv_config_qpci_bus(QGenericPCIBus *qpci)
++{
++    qpci->gpex_pio_base = RISCV_GPEX_PIO_BASE;
++    qpci->bus.pio_limit = RISCV_BUS_PIO_LIMIT;
++
++    qpci->bus.mmio_alloc_ptr = RISCV_BUS_MMIO_ALLOC_PTR;
++    qpci->bus.mmio_limit = RISCV_BUS_MMIO_LIMIT;
++
++    qpci->ecam_alloc_ptr = RISCV_ECAM_ALLOC_PTR;
++}
++
++static void *qos_create_machine_riscv_virt(QTestState *qts)
++{
++    QVirtMachine *machine = g_new0(QVirtMachine, 1);
++
++    alloc_init(&machine->alloc, 0,
++               RISCV_VIRT_RAM_ADDR,
++               RISCV_VIRT_RAM_ADDR + RISCV_VIRT_RAM_SIZE,
++               RISCV_PAGE_SIZE);
++    qvirtio_mmio_init_device(&machine->virtio_mmio, qts, VIRTIO_MMIO_BASE_ADDR,
++                              VIRTIO_MMIO_SIZE);
++
++    qos_create_generic_pcihost(&machine->bridge, qts, &machine->alloc);
++    riscv_config_qpci_bus(&machine->bridge.pci);
++
++    machine->obj.get_device = virt_get_device;
++    machine->obj.get_driver = virt_get_driver;
++    machine->obj.destructor = virt_destructor;
++    return machine;
++}
++
++static void virt_machine_register_nodes(void)
++{
++    qos_node_create_machine_args("riscv32/virt", qos_create_machine_riscv_virt,
++                                 "aclint=on,aia=aplic-imsic");
++    qos_node_contains("riscv32/virt", "virtio-mmio", NULL);
++    qos_node_contains("riscv32/virt", "generic-pcihost", NULL);
++
++    qos_node_create_machine_args("riscv64/virt", qos_create_machine_riscv_virt,
++                                 "aclint=on,aia=aplic-imsic");
++    qos_node_contains("riscv64/virt", "virtio-mmio", NULL);
++    qos_node_contains("riscv64/virt", "generic-pcihost", NULL);
++}
++
++libqos_init(virt_machine_register_nodes);
+-- 
+2.43.2
 
-
-- Total  runtime
-
-0. Original riscv-to-apply.next branch (commit ID: deb0ff0)
-     - Total execution time: ~383 sec.
-1. Cherry pick PATCH 4 to riscv-to-apply.next branch (commit ID: deb0ff0)
-     - Total execution time: ~375 sec.
-2. Cherry pick PATCH 4+5+6 to riscv-to-apply.next branch (commit ID: 
-deb0ff0)
-     - Total execution time: ~342 sec.
-
-
-- Perf report (cycles)
-
-0. Original riscv-to-apply.next branch (commit ID: deb0ff0)
-
-# Samples: 385K of event 'cycles:u'
-# Event count (approx.): 1411574690539
-#
-# Children      Self  Command       Shared Object Symbol
-# ........  ........  ............  ....................... 
-............................................
-#
-     47.54%    31.35%  qemu-riscv64  qemu-riscv64             [.] 
-vext_ldst_us
-     25.60%     0.03%  qemu-riscv64  qemu-riscv64             [.] 
-helper_vse8_v
-     18.87%    13.29%  qemu-riscv64  qemu-riscv64             [.] 
-cpu_ldb_mmu
-     17.40%     0.04%  qemu-riscv64  qemu-riscv64             [.] 
-helper_vle8_v
-     17.39%    15.71%  qemu-riscv64  qemu-riscv64             [.] 
-cpu_stb_mmu
-     17.17%    17.17%  qemu-riscv64  qemu-riscv64             [.] 
-qemu_plugin_vcpu_mem_cb
-     12.25%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-helper_stb_mmu (inlined)
-      8.18%     4.08%  qemu-riscv64  qemu-riscv64             [.] lde_b
-      8.17%     8.17%  qemu-riscv64  qemu-riscv64             [.] 
-cpu_mmu_lookup
-      7.45%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-plugin_load_cb (inlined)
-      7.32%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-do_st1_mmu (inlined)
-      6.79%     0.00%  qemu-riscv64  [unknown]                [.] 
-0x00000000000000ff
-      5.91%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-adjust_addr (inlined)
-      5.70%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-do_ld1_mmu (inlined)
-      5.58%     0.00%  qemu-riscv64  [unknown]                [.] 
-0x00000000000001fe
-      5.23%     4.25%  qemu-riscv64  qemu-riscv64             [.] 
-cpu_ldsb_data_ra
-      4.93%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-get_memop (inlined)
-      4.11%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-cpu_ldub_data_ra (inlined)
-      4.11%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-cpu_ldub_mmuidx_ra (inlined)
-      2.88%     2.88%  qemu-riscv64  qemu-riscv64             [.] 
-cpu_stb_data_ra
-      2.88%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-cpu_stb_mmuidx_ra (inlined)
-      2.75%     0.00%  qemu-riscv64  qemu-riscv64             [.] stb_p 
-(inlined)
-      2.66%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-get_alignment_bits (inlined)
-      1.79%     0.00%  qemu-riscv64  [unknown]                [.] 
-0x00000000e40203bf
-      1.68%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-plugin_store_cb (inlined)
-      1.60%     0.00%  qemu-riscv64  [unknown]                [.] 
-0x00000000e403733f
-      1.13%     0.00%  qemu-riscv64  qemu-riscv64             [.] ldub_p 
-(inlined)
-      0.73%     0.73%  qemu-riscv64  qemu-riscv64             [.] ste_b
-      0.53%     0.21%  qemu-riscv64  qemu-riscv64             [.] 
-helper_lookup_tb_ptr
-
-1. Cherry pick PATCH 4 to riscv-to-apply.next branch (commit ID: deb0ff0)
-
-# Samples: 378K of event 'cycles:u'
-# Event count (approx.): 1381912775966
-#
-# Children      Self  Command       Shared Object Symbol
-# ........  ........  ............  ....................... 
-.......................................
-#
-     63.30%    29.62%  qemu-riscv64  qemu-riscv64             [.] 
-vext_ldst_us
-     30.77%     0.04%  qemu-riscv64  qemu-riscv64             [.] 
-helper_vle8_v
-     28.59%     0.02%  qemu-riscv64  qemu-riscv64             [.] 
-helper_vse8_v
-     22.78%    22.78%  qemu-riscv64  qemu-riscv64             [.] 
-qemu_plugin_vcpu_mem_cb
-     21.40%     5.26%  qemu-riscv64  qemu-riscv64             [.] lde_b
-     20.69%    10.40%  qemu-riscv64  qemu-riscv64             [.] 
-cpu_ldb_mmu
-     20.06%     3.91%  qemu-riscv64  qemu-riscv64             [.] 
-cpu_ldsb_data_ra
-     19.16%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-cpu_ldub_data_ra (inlined)
-     19.16%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-cpu_ldub_mmuidx_ra (inlined)
-     12.65%     9.36%  qemu-riscv64  qemu-riscv64             [.] 
-cpu_stb_mmu
-      8.60%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-plugin_load_cb (inlined)
-      6.73%     6.73%  qemu-riscv64  qemu-riscv64             [.] 
-do_ld1_mmu.constprop.23
-      6.73%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-do_ld1_mmu (inlined)
-      6.31%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-helper_stb_mmu (inlined)
-      6.20%     6.20%  qemu-riscv64  qemu-riscv64             [.] do_st1_mmu
-      6.20%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-adjust_addr (inlined)
-      5.49%     0.00%  qemu-riscv64  [unknown]                [.] 
-0x00000000000001fe
-      3.82%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-plugin_store_cb (inlined)
-      3.01%     0.00%  qemu-riscv64  qemu-riscv64             [.] ldub_p 
-(inlined)
-      2.94%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-cpu_mmu_lookup (inlined)
-      2.94%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-get_alignment_bits (inlined)
-      2.91%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-clear_helper_retaddr (inlined)
-      2.91%     2.91%  qemu-riscv64  qemu-riscv64             [.] ste_b
-      2.90%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-cpu_mmu_lookup (inlined)
-      2.90%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-get_alignment_bits (inlined)
-      0.59%     0.24%  qemu-riscv64  qemu-riscv64             [.] 
-helper_lookup_tb_ptr
-
-2. Cherry pick PATCH 4+5+6 to riscv-to-apply.next branch (commit ID: 
-deb0ff0)
-
-# Samples: 343K of event 'cycles:u'
-# Event count (approx.): 1259748868940
-#
-# Children      Self  Command       Shared Object Symbol
-# ........  ........  ............  ....................... 
-.......................................
-#
-     64.16%    35.81%  qemu-riscv64  qemu-riscv64             [.] 
-vext_ldst_us
-     30.96%     0.02%  qemu-riscv64  qemu-riscv64             [.] 
-helper_vse8_v
-     27.44%     0.05%  qemu-riscv64  qemu-riscv64             [.] 
-helper_vle8_v
-     18.37%    18.37%  qemu-riscv64  qemu-riscv64             [.] 
-qemu_plugin_vcpu_mem_cb
-     17.33%     7.45%  qemu-riscv64  qemu-riscv64             [.] 
-cpu_ldsb_data_ra
-     14.90%     5.02%  qemu-riscv64  qemu-riscv64             [.] lde_b
-     14.83%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-cpu_ldub_data_ra (inlined)
-     14.83%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-cpu_ldub_mmuidx_ra (inlined)
-     14.15%    10.33%  qemu-riscv64  qemu-riscv64             [.] 
-cpu_stb_mmu
-     11.25%     9.62%  qemu-riscv64  qemu-riscv64             [.] 
-cpu_ldb_mmu
-      7.22%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-adjust_addr (inlined)
-      6.99%     6.99%  qemu-riscv64  qemu-riscv64             [.] 
-helper_stb_mmu
-      6.99%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-do_st1_mmu (inlined)
-      5.96%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-do_ld1_mmu (inlined)
-      5.95%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-cpu_mmu_lookup (inlined)
-      5.30%     0.00%  qemu-riscv64  [unknown]                [.] 
-0x00000000000001fe
-      4.18%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-plugin_store_cb (inlined)
-      3.22%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-cpu_mmu_lookup (inlined)
-      3.22%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-get_alignment_bits (inlined)
-      3.22%     3.22%  qemu-riscv64  qemu-riscv64             [.] ste_b
-      3.19%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-get_alignment_bits (inlined)
-      3.16%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-clear_helper_retaddr (inlined)
-      2.76%     0.00%  qemu-riscv64  qemu-riscv64             [.] g2h 
-(inlined)
-      2.76%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-g2h_untagged (inlined)
-      2.30%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-env_cpu (inlined)
-      2.21%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-plugin_load_cb (inlined)
-      0.99%     0.00%  qemu-riscv64  qemu-riscv64             [.] 
-env_cpu (inlined)
-
-
-I agree that these functions are large functions to inline and I didn't 
-test these patches on all combinations (different guest architecture + 
-different host architecture).
-So I think that we can drop these three patches until we can make sure 
-that these patches can get benefit on all combinations without side effect.
-I'll focus on avoiding over-use of the full out-of-line load/store 
-routines for the next version.
-
-
-Thanks for the suggestion and question,
-
-Max
-
-[1] 
-https://inbox.sourceware.org/libc-alpha/20230504074851.38763-1-hau.hsu@sifive.com
-
-On 2024/2/16 4:10 AM, Richard Henderson wrote:
-> On 2/15/24 09:28, Max Chou wrote:
->> Signed-off-by: Max Chou <max.chou@sifive.com>
->> ---
->>   accel/tcg/user-exec.c | 7 +++++--
->>   1 file changed, 5 insertions(+), 2 deletions(-)
->>
->> diff --git a/accel/tcg/user-exec.c b/accel/tcg/user-exec.c
->> index 68b252cb8e8..c5453810eee 100644
->> --- a/accel/tcg/user-exec.c
->> +++ b/accel/tcg/user-exec.c
->> @@ -942,8 +942,11 @@ void page_reset_target_data(target_ulong start, 
->> target_ulong last) { }
->>     /* The system-mode versions of these helpers are in cputlb.c.  */
->>   -static void *cpu_mmu_lookup(CPUState *cpu, vaddr addr,
->> -                            MemOp mop, uintptr_t ra, MMUAccessType 
->> type)
->> +static inline QEMU_ALWAYS_INLINE void *cpu_mmu_lookup(CPUState *cpu,
->> +                                                      vaddr addr,
->> +                                                      MemOp mop,
->> +                                                      uintptr_t ra,
->> + MMUAccessType type)
->>   {
->>       int a_bits = get_alignment_bits(mop);
->>       void *ret;
->
-> This is a large function.  Why does it need to be inlined?
-> For this and the next two patches I require evidence, because I don't 
-> believe you are attacking the problem correctly.
->
->
-> r~
 
