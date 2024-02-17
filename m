@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF9FBC48BF5
-	for <qemu-riscv@archiver.kernel.org>; Sat, 17 Feb 2024 00:02:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A5DDC48260
+	for <qemu-riscv@archiver.kernel.org>; Sat, 17 Feb 2024 00:03:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rb89i-0003QS-Ek; Fri, 16 Feb 2024 19:02:10 -0500
+	id 1rb89k-0003SF-A1; Fri, 16 Feb 2024 19:02:12 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1rb89e-0003P5-H3
- for qemu-riscv@nongnu.org; Fri, 16 Feb 2024 19:02:06 -0500
-Received: from mail-pg1-x529.google.com ([2607:f8b0:4864:20::529])
+ id 1rb89g-0003PW-5H
+ for qemu-riscv@nongnu.org; Fri, 16 Feb 2024 19:02:08 -0500
+Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1rb89O-0007vW-RZ
- for qemu-riscv@nongnu.org; Fri, 16 Feb 2024 19:02:06 -0500
-Received: by mail-pg1-x529.google.com with SMTP id
- 41be03b00d2f7-5cedfc32250so2072328a12.0
- for <qemu-riscv@nongnu.org>; Fri, 16 Feb 2024 16:01:49 -0800 (PST)
+ id 1rb89Q-0007wB-TF
+ for qemu-riscv@nongnu.org; Fri, 16 Feb 2024 19:02:07 -0500
+Received: by mail-pf1-x42b.google.com with SMTP id
+ d2e1a72fcca58-6da9c834646so2380035b3a.3
+ for <qemu-riscv@nongnu.org>; Fri, 16 Feb 2024 16:01:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1708128108; x=1708732908;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1708128111; x=1708732911;
  darn=nongnu.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xvIpWUym5/yIAwAbNTwXXgkxED4xulVwom9cPTjrKJ4=;
- b=SjhbR00bfl8Plq2UbIAEUpPX7rwoFo6HBES9q1tQmO2nMw/rbdOZXJGg46PuhxqBp7
- nNp0pjqSPKz7/tGzllKfnWfsyjOa669c86XryrO+z22E+f4s4Ar15GScRnMe0qJ1KiJ9
- oY1F6QorVtj60O3OYTzNPD8bv3HvoZxwLtY6k8EMXX+gymyhwu434zyLlMx/2JKho/Q9
- g1c0FeWlkitxZxCfOc2cZ1j9CoprSfg3Ph7Al/TGuVsg3k9JUmwAoNgJDnoEPTNaktcx
- pj2OuvIAHJ2PzmCqNSZGMnoA37a/xJHLnEt06QmT1yrBw6xU/sngKDDzn9uuQCDxGZcR
- fGqw==
+ bh=v6zQL2CTLDv8SMjYyqrJ65mcDbZjwYbAqZ3AZWMYm0I=;
+ b=iMVSkC4Z+Y86c5LO3L7DmJ9+wcvLVillD/22X9vi/x/9b5etEa9yays+UMrbUQqvIN
+ +OkjyNpU8ZKgHSN5O4DZ8UFFjWL5ASSBTASXVGivw58GA8wbcAcAn1PNrDfGGQ05aCkY
+ gOVKAcTKdRNfy0XLYBft21FBH919PV1dHoUJnUULt2hkObpnJLGR2J8hjJ0VvhrV3Y0a
+ TM7hAHsTnNCzkwnSaV2D/QuXO/Ihv+yozGrEBc2mWfmvcec1NYa+6Br8LaZR5ZIsYjbO
+ ABGoCZT8cylDq8/WFRPR3KwzJ8zs5p4hPWRuFEe1nj4P7kYMmt1khAsXFdQgVUyVSex+
+ pHGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708128108; x=1708732908;
+ d=1e100.net; s=20230601; t=1708128111; x=1708732911;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=xvIpWUym5/yIAwAbNTwXXgkxED4xulVwom9cPTjrKJ4=;
- b=ArfoRVQwMrJvISXp6ygSPj4DkI5a9ytiMRgE5Jxgpd5aVUhR+6+89ZnwbPDI8IocB4
- ZLewCtXO/fYwrtp/Yo+2jcbyL2gO23QPK9SQNgc4TJZNOBAIv7UHd86lgRs71DTPssjp
- VszgsYBh8I5tyhkBKfb7yqaHcJcAJ9cKri7i4lkYU4MsW1sHJTB9NI0QSpTOT5kHDK4t
- WvL6DoQTE8rcFH5YLFwMWw6vYo7r/5/rFXPR4Hr8qKzUJ/48RjySMUvx0c/e5csuEpMB
- jeJ3PrTB2Il0AvpONxff/fnGRxfZbnwHW7rfWvl5YxJ46Yg/gO8V3vETduCdMsp1SZde
- 0Hbw==
+ bh=v6zQL2CTLDv8SMjYyqrJ65mcDbZjwYbAqZ3AZWMYm0I=;
+ b=fAOjFlpEVH44l4wj6uMBTrRDXU0m7Lu9AaQDgOxRgLtl1reKVXiG5wP2OcIf7L8Dqj
+ wxlnLHFDfsTPiwiQZDV8r2SyI7P7gfUPbMvnmI7+2BRT0JbcJN23htnTW+Xoziyzju91
+ J9+1JCfW1ZufjWDYuF6aq10+QBvrzReUzVYrOykb6ctr1QB09ciQi+7DEqVVWaNnq8qi
+ xLVqCYBMM6NOr98nHVfv9e42/hZ+mEGwZ3FPips+/3CBa01kL3m6Ngh1yjpxN3akKgiY
+ 0svmAFcCe+bYnOTRERPBZJTJsbyzCMYFRyA84H7ZLNTdH/YVPcrrPcg3AzEOMPbAstNx
+ Fqdw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVIdgUSFvJzkwpKpmePiThEoBf5YY4h88GzaTDePmKmkOgW16ZNw1QISFBo5JD97UwZJaeCRv6EQ702NPxeZntCXSFb5i8=
-X-Gm-Message-State: AOJu0Yxf9R9aQ615K7TjrWdTXQCtc2LAKm4KRH1ceD4n8ySMuix18/6C
- ZReH+zBBnME5jhQjNM5ucPJUELcjQZinx1h+njzcW/176b7BqNIzAzF6rTnB368=
-X-Google-Smtp-Source: AGHT+IFLMFB8jhSbfcmfKL0QIyU57lbaWYaONsPj+bEK5TxuHi9z3yTbnM8oXL8tfN4P84+IrZrLaQ==
-X-Received: by 2002:a05:6a21:9212:b0:19e:9b8e:8bda with SMTP id
- tl18-20020a056a21921200b0019e9b8e8bdamr7871306pzb.42.1708128108587; 
- Fri, 16 Feb 2024 16:01:48 -0800 (PST)
+ AJvYcCXEXW9rnPg1w18vdK/Ec0iSlyHjw4MjhJ7InMfyTAPEZAMsrV/xW2KrDZHFFJjb+fwC1ogGVUng49QZsu2ox00RwxV9B3w=
+X-Gm-Message-State: AOJu0YyF7HttLA3ZDaKPQZ/cePmKwpExmUofzVIXeYghI2FJs6NOlJEh
+ oi6BH0snqygct6FA0CU53FpBN8U1Zq5Jf9gfXtQBIQn5P+d6tTYKyQY2oKgf/Bk=
+X-Google-Smtp-Source: AGHT+IFAdH143+J+/qP1H9D5UdgM1UyRrOXMNcjxe/AllWBLHaXFalFchRrbPEwA3PXtIsBUMovneg==
+X-Received: by 2002:a05:6a00:2e24:b0:6e1:4836:629c with SMTP id
+ fc36-20020a056a002e2400b006e14836629cmr2333672pfb.11.1708128111556; 
+ Fri, 16 Feb 2024 16:01:51 -0800 (PST)
 Received: from atishp.ba.rivosinc.com ([64.71.180.162])
  by smtp.gmail.com with ESMTPSA id
- p13-20020a635b0d000000b005d66caee3d0sm464015pgb.22.2024.02.16.16.01.47
+ p13-20020a635b0d000000b005d66caee3d0sm464015pgb.22.2024.02.16.16.01.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Feb 2024 16:01:48 -0800 (PST)
+ Fri, 16 Feb 2024 16:01:50 -0800 (PST)
 From: Atish Patra <atishp@rivosinc.com>
 To: qemu-devel@nongnu.org
 Cc: Atish Patra <atishp@rivosinc.com>,
@@ -70,22 +70,23 @@ Cc: Atish Patra <atishp@rivosinc.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
  Weiwei Li <liwei1518@gmail.com>, kaiwenxue1@gmail.com
-Subject: [PATCH RFC 3/8] target/riscv: Enable S*stateen bits for AIA
-Date: Fri, 16 Feb 2024 16:01:29 -0800
-Message-Id: <20240217000134.3634191-4-atishp@rivosinc.com>
+Subject: [PATCH RFC 5/8] target/riscv: Add smcdeleg/ssccfg properties
+Date: Fri, 16 Feb 2024 16:01:31 -0800
+Message-Id: <20240217000134.3634191-6-atishp@rivosinc.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240217000134.3634191-1-atishp@rivosinc.com>
 References: <20240217000134.3634191-1-atishp@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::529;
- envelope-from=atishp@rivosinc.com; helo=mail-pg1-x529.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42b;
+ envelope-from=atishp@rivosinc.com; helo=mail-pf1-x42b.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, SPF_HELO_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01,
- T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01,
+ T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,177 +102,58 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-As per the ratified AIA spec v1.0, three stateen bits control AIA CSR
-access.
+From: Kaiwen Xue <kaiwenx@rivosinc.com>
 
-Bit 60 controls the indirect CSRs
-Bit 59 controls the most AIA CSR state
-Bit 58 controls the IMSIC state such as stopei and vstopei
-
-Enable the corresponding bits in [m|h]stateen and enable corresponding
-checks in the CSR accessor functions.
+This adds the properties of smcdeleg/ssccfg. Implementation will be in
+future patches.
 
 Signed-off-by: Atish Patra <atishp@rivosinc.com>
+Signed-off-by: Kaiwen Xue <kaiwenx@rivosinc.com>
 ---
- target/riscv/csr.c | 89 +++++++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 88 insertions(+), 1 deletion(-)
+ target/riscv/cpu.c     | 4 ++++
+ target/riscv/cpu_cfg.h | 2 ++
+ 2 files changed, 6 insertions(+)
 
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 1af0c8890a2b..89a1325a02a5 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -316,19 +316,42 @@ static int smode32(CPURISCVState *env, int csrno)
- 
- static int aia_smode(CPURISCVState *env, int csrno)
- {
-+    int ret;
-+
-     if (!riscv_cpu_cfg(env)->ext_ssaia) {
-         return RISCV_EXCP_ILLEGAL_INST;
-     }
- 
-+    if (csrno == CSR_STOPEI) {
-+        ret = smstateen_acc_ok(env, 0, SMSTATEEN0_IMSIC);
-+    } else {
-+        ret = smstateen_acc_ok(env, 0, SMSTATEEN0_AIA);
-+    }
-+
-+    if (ret != RISCV_EXCP_NONE) {
-+        return ret;
-+    }
-+
-     return smode(env, csrno);
- }
- 
- static int aia_smode32(CPURISCVState *env, int csrno)
- {
-+    int ret;
-+
-     if (!riscv_cpu_cfg(env)->ext_ssaia) {
-         return RISCV_EXCP_ILLEGAL_INST;
-     }
- 
-+    ret = smstateen_acc_ok(env, 0, SMSTATEEN0_AIA);
-+    if (ret != RISCV_EXCP_NONE) {
-+        return ret;
-+    }
-+
-+    if (ret != RISCV_EXCP_NONE) {
-+        return ret;
-+    }
-+
-     return smode32(env, csrno);
- }
- 
-@@ -552,15 +575,38 @@ static RISCVException pointer_masking(CPURISCVState *env, int csrno)
- 
- static int aia_hmode(CPURISCVState *env, int csrno)
- {
-+    int ret;
-+
-     if (!riscv_cpu_cfg(env)->ext_ssaia) {
-         return RISCV_EXCP_ILLEGAL_INST;
-      }
- 
--     return hmode(env, csrno);
-+    if (csrno == CSR_VSTOPEI) {
-+        ret = smstateen_acc_ok(env, 0, SMSTATEEN0_IMSIC);
-+    } else {
-+        ret = smstateen_acc_ok(env, 0, SMSTATEEN0_AIA);
-+    }
-+
-+    if (ret != RISCV_EXCP_NONE) {
-+        return ret;
-+    }
-+
-+    return hmode(env, csrno);
- }
- 
- static int aia_hmode32(CPURISCVState *env, int csrno)
- {
-+    int ret;
-+
-+    if (!riscv_cpu_cfg(env)->ext_ssaia) {
-+        return RISCV_EXCP_ILLEGAL_INST;
-+     }
-+
-+    ret = smstateen_acc_ok(env, 0, SMSTATEEN0_AIA);
-+    if (ret != RISCV_EXCP_NONE) {
-+        return ret;
-+    }
-+
-     if (!riscv_cpu_cfg(env)->ext_ssaia) {
-         return RISCV_EXCP_ILLEGAL_INST;
-     }
-@@ -1851,6 +1897,12 @@ static int rmw_xiselect(CPURISCVState *env, int csrno, target_ulong *val,
-                         target_ulong new_val, target_ulong wr_mask)
- {
-     target_ulong *iselect;
-+    int ret;
-+
-+    ret = smstateen_acc_ok(env, 0, SMSTATEEN0_SVSLCT);
-+    if (ret != RISCV_EXCP_NONE) {
-+        return ret;
-+    }
- 
-     /* Translate CSR number for VS-mode */
-     csrno = sxcsrind_xlate_vs_csrno(env, csrno);
-@@ -2020,6 +2072,11 @@ static int rmw_xireg(CPURISCVState *env, int csrno, target_ulong *val,
-     int ret = -EINVAL;
-     target_ulong isel;
- 
-+    ret = smstateen_acc_ok(env, 0, SMSTATEEN0_SVSLCT);
-+    if (ret != RISCV_EXCP_NONE) {
-+        return ret;
-+    }
-+
-     /* Translate CSR number for VS-mode */
-     csrno = sxcsrind_xlate_vs_csrno(env, csrno);
- 
-@@ -2419,6 +2476,23 @@ static RISCVException write_mstateen0(CPURISCVState *env, int csrno,
-         wr_mask |= SMSTATEEN0_FCSR;
-     }
- 
-+    /*
-+     * TODO: Do we need to check ssaia as well ? Can we enable ssaia without
-+     * smaia ?
-+     */
-+    if (riscv_cpu_cfg(env)->ext_smaia) {
-+        wr_mask |= SMSTATEEN0_SVSLCT;
-+    }
-+
-+    /*
-+     * As per the AIA specification, SMSTATEEN0_IMSIC is valid only if IMSIC is
-+     * implemented. However, that information is with MachineState and we can't
-+     * figure that out in csr.c. Just enable if Smaia is available.
-+     */
-+    if (riscv_cpu_cfg(env)->ext_smaia) {
-+        wr_mask |= (SMSTATEEN0_AIA | SMSTATEEN0_IMSIC);
-+    }
-+
-     return write_mstateen(env, csrno, wr_mask, new_val);
- }
- 
-@@ -2495,6 +2569,19 @@ static RISCVException write_hstateen0(CPURISCVState *env, int csrno,
-         wr_mask |= SMSTATEEN0_FCSR;
-     }
- 
-+    if (riscv_cpu_cfg(env)->ext_ssaia) {
-+        wr_mask |= SMSTATEEN0_SVSLCT;
-+    }
-+
-+    /*
-+     * As per the AIA specification, SMSTATEEN0_IMSIC is valid only if IMSIC is
-+     * implemented. However, that information is with MachineState and we can't
-+     * figure that out in csr.c. Just enable if Ssaia is available.
-+     */
-+    if (riscv_cpu_cfg(env)->ext_ssaia) {
-+        wr_mask |= (SMSTATEEN0_AIA | SMSTATEEN0_IMSIC);
-+    }
-+
-     return write_hstateen(env, csrno, wr_mask, new_val);
- }
- 
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index ff7c6c7c380e..c5ec203fb8fd 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -151,11 +151,13 @@ const RISCVIsaExtData isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(zhinx, PRIV_VERSION_1_12_0, ext_zhinx),
+     ISA_EXT_DATA_ENTRY(zhinxmin, PRIV_VERSION_1_12_0, ext_zhinxmin),
+     ISA_EXT_DATA_ENTRY(smaia, PRIV_VERSION_1_12_0, ext_smaia),
++    ISA_EXT_DATA_ENTRY(smcdeleg, PRIV_VERSION_1_12_0, ext_smcdeleg),
+     ISA_EXT_DATA_ENTRY(smcntrpmf, PRIV_VERSION_1_12_0, ext_smcntrpmf),
+     ISA_EXT_DATA_ENTRY(smcsrind, PRIV_VERSION_1_12_0, ext_smcsrind),
+     ISA_EXT_DATA_ENTRY(smepmp, PRIV_VERSION_1_12_0, ext_smepmp),
+     ISA_EXT_DATA_ENTRY(smstateen, PRIV_VERSION_1_12_0, ext_smstateen),
+     ISA_EXT_DATA_ENTRY(ssaia, PRIV_VERSION_1_12_0, ext_ssaia),
++    ISA_EXT_DATA_ENTRY(ssccfg, PRIV_VERSION_1_12_0, ext_ssccfg),
+     ISA_EXT_DATA_ENTRY(sscofpmf, PRIV_VERSION_1_12_0, ext_sscofpmf),
+     ISA_EXT_DATA_ENTRY(sscsrind, PRIV_VERSION_1_12_0, ext_sscsrind),
+     ISA_EXT_DATA_ENTRY(sstc, PRIV_VERSION_1_12_0, ext_sstc),
+@@ -1352,6 +1354,8 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
+     MULTI_EXT_CFG_BOOL("smcntrpmf", ext_smcntrpmf, false),
+     MULTI_EXT_CFG_BOOL("smcsrind", ext_smcsrind, false),
+     MULTI_EXT_CFG_BOOL("sscsrind", ext_sscsrind, false),
++    MULTI_EXT_CFG_BOOL("smcdeleg", ext_smcdeleg, false),
++    MULTI_EXT_CFG_BOOL("ssccfg", ext_ssccfg, false),
+     MULTI_EXT_CFG_BOOL("zifencei", ext_zifencei, true),
+     MULTI_EXT_CFG_BOOL("zicsr", ext_zicsr, true),
+     MULTI_EXT_CFG_BOOL("zihintntl", ext_zihintntl, true),
+diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+index b9086464752e..a3be34c88ef0 100644
+--- a/target/riscv/cpu_cfg.h
++++ b/target/riscv/cpu_cfg.h
+@@ -76,6 +76,8 @@ struct RISCVCPUConfig {
+     bool ext_smcntrpmf;
+     bool ext_smcsrind;
+     bool ext_sscsrind;
++    bool ext_smcdeleg;
++    bool ext_ssccfg;
+     bool ext_svadu;
+     bool ext_svinval;
+     bool ext_svnapot;
 -- 
 2.34.1
 
