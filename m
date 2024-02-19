@@ -4,85 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B7D7C48BC4
-	for <qemu-riscv@archiver.kernel.org>; Sat, 17 Feb 2024 19:35:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B36CC48BC4
+	for <qemu-riscv@archiver.kernel.org>; Mon, 19 Feb 2024 03:26:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rbQSk-0000Nu-W8; Sat, 17 Feb 2024 14:35:03 -0500
+	id 1rbuIV-0005At-GD; Sun, 18 Feb 2024 22:26:27 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rbQSi-0000G9-Tj
- for qemu-riscv@nongnu.org; Sat, 17 Feb 2024 14:35:00 -0500
-Received: from mail-il1-x12c.google.com ([2607:f8b0:4864:20::12c])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rbQSh-0005XA-B1
- for qemu-riscv@nongnu.org; Sat, 17 Feb 2024 14:35:00 -0500
-Received: by mail-il1-x12c.google.com with SMTP id
- e9e14a558f8ab-365253c52aaso155015ab.2
- for <qemu-riscv@nongnu.org>; Sat, 17 Feb 2024 11:34:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708198498; x=1708803298; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=smTnTvwdcZ4IBQM4tyaBNlSpJCcXDQsLAicupidlo50=;
- b=cRVTjMf5iqGI+ipincaZRCAyEtJU0qEm6rBhXq+NRDPLCOisowQsK/JcDyCa3QJXmM
- Dkiz/8/eL/CWusN6NO6IznUb+PoAovj4Nd6FmzYuwW6InL2dVypnYukjvN2Lx8KDebRq
- 8gHQHrx8R2wvN81OI4+l4CE2uZ4+nnts/yK1ImQoh0TQoaQ18Y81F+KlIxA3yJARXHNf
- Q6shFPYOpEy8vuZd4PxRBCi02bn7MNqo/veCqvyVO+1thWLU69bTI62nenIH/W721Qll
- cJ3kulmKn+1jhooGsJPduAZU9zqxLrYry3BDwu5ADLE2/BM2YX+PJvFZPeQicI7hs8Ht
- H9cQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708198498; x=1708803298;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=smTnTvwdcZ4IBQM4tyaBNlSpJCcXDQsLAicupidlo50=;
- b=thcfG+HFCnchzALwfLLEsM8165KGqYlNOSTmdL+I8MUkdTVOedfjy9Q5AiGjuODi86
- uEyhZR49AbT4vF69Z+H5C6dWUfcCE3zkJInplIq1Rejm/81btTDPcoQrmmnLKzADJpFr
- M/n6VRxKiTbz7i8iXZPWH3eSrz2GWFpQOEpGU9qABGANNVeouAqTsHspM6MXNYXBGDwx
- G4mKZQePit8a/zBsqvkdizZ7sWZXxwQTw8nUKv49mpNYxEcbd7pLSg2tinkFwpPm1lzJ
- /lzJDeLl4RCuEo0Q+sCOnm7DZtLYWqpPQd4Ay2yE8iIfJ+pMPVFFvaAvYoVkk74xu5zW
- a6PQ==
-X-Gm-Message-State: AOJu0Yxu4UW97Z2SS5K3jvPgMtEbIyDNIqrtwSKPncXQFrvEWYoT+vzP
- CIj+vwlFsXOkbmJB6K086klnJhpmn0ljN2pXBY1PrmDrdcWE1N7Sn27TzJeLgjw=
-X-Google-Smtp-Source: AGHT+IHDP1p1MH6nfHZ/uugrvlWCHHowaKZ8GZ8UhTXhlhbrwGiYZrD1V1wMq+9HK0a+FctpPJmCHQ==
-X-Received: by 2002:a05:6e02:13e2:b0:363:c63a:7975 with SMTP id
- w2-20020a056e0213e200b00363c63a7975mr8212005ilj.24.1708198498161; 
- Sat, 17 Feb 2024 11:34:58 -0800 (PST)
-Received: from [172.20.1.19] (173-197-098-125.biz.spectrum.com.
- [173.197.98.125]) by smtp.gmail.com with ESMTPSA id
- c5-20020a63d505000000b005cf5bf78b74sm1942520pgg.17.2024.02.17.11.34.56
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 17 Feb 2024 11:34:57 -0800 (PST)
-Message-ID: <72c7503b-0f43-44b8-aa82-fbafed2aac0c@linaro.org>
-Date: Sat, 17 Feb 2024 09:34:54 -1000
+ (Exim 4.90_1) (envelope-from <alvinga@andestech.com>)
+ id 1rbuIT-0005AP-E2
+ for qemu-riscv@nongnu.org; Sun, 18 Feb 2024 22:26:25 -0500
+Received: from 60-248-80-70.hinet-ip.hinet.net ([60.248.80.70]
+ helo=Atcsqr.andestech.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <alvinga@andestech.com>)
+ id 1rbuIQ-0000SF-A3
+ for qemu-riscv@nongnu.org; Sun, 18 Feb 2024 22:26:25 -0500
+Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
+ by Atcsqr.andestech.com with ESMTP id 41J3QB2j008306;
+ Mon, 19 Feb 2024 11:26:11 +0800 (+08)
+ (envelope-from alvinga@andestech.com)
+Received: from alvinga-VirtualBox.andestech.com (10.0.13.68) by
+ ATCPCS16.andestech.com (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0; 
+ Mon, 19 Feb 2024 11:26:09 +0800
+To: <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>
+CC: <alistair.francis@wdc.com>, <bin.meng@windriver.com>,
+ <liwei1518@gmail.com>, <dbarboza@ventanamicro.com>,
+ <zhiwei_liu@linux.alibaba.com>, Alvin Chang <alvinga@andestech.com>
+Subject: [PATCH 1/4] target/riscv: Add functions for common matching
+ conditions of trigger
+Date: Mon, 19 Feb 2024 11:25:56 +0800
+Message-ID: <20240219032559.79665-2-alvinga@andestech.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240219032559.79665-1-alvinga@andestech.com>
+References: <20240219032559.79665-1-alvinga@andestech.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] target/riscv: Clear vstart_qe_zero flag
-Content-Language: en-US
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Ivan Klokov <ivan.klokov@syntacore.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- bin.meng@windriver.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com
-References: <20231214111851.142532-1-ivan.klokov@syntacore.com>
- <3d76be6d-e3a2-4730-a54f-2893ab4ed72e@ventanamicro.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <3d76be6d-e3a2-4730-a54f-2893ab4ed72e@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12c;
- envelope-from=richard.henderson@linaro.org; helo=mail-il1-x12c.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Content-Type: text/plain
+X-Originating-IP: [10.0.13.68]
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 41J3QB2j008306
+Received-SPF: pass client-ip=60.248.80.70; envelope-from=alvinga@andestech.com;
+ helo=Atcsqr.andestech.com
+X-Spam_score_int: -8
+X-Spam_score: -0.9
+X-Spam_bar: /
+X-Spam_report: (-0.9 / 5.0 requ) BAYES_00=-1.9, RDNS_DYNAMIC=0.982,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001, TVD_RCVD_IP=0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -95,39 +65,107 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-to:  Alvin Chang <alvinga@andestech.com>
+From:  Alvin Chang via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2/17/24 00:53, Daniel Henrique Barboza wrote:
-> This patch is replacing mark_vs_dirty() with finalize(), that does call mark_vs_dirty() and
-> set start_eq_zero = true, but it's missing the start_eq_zero update for store functions
-> because of these ifs.
-> 
-> We could just remove these ifs and finalize() all the time. To keep the existing logic
-> (i.e. not set vs_dirty for writes) I would do, in this same patch:
-> 
-> 
->>       if (!is_store) {
->>           mark_vs_dirty(s);
->>       }
->> +     s->start_eq_zero = true;
-> 
-> 
-> This would make these load/stores functions different from the rest, without a finalize()
-> call, but given that they're already difference sine vs_dirty() is conditional I guess
-> it's fine.
-> 
-> 
-> What do you think?
+According to RISC-V Debug specification, there are several common
+matching conditions before firing a trigger, including the enabled
+privilege levels of the trigger.
 
-I think it's required to have stores set dirty unconditionally, before the operation.
+This commit adds trigger_common_match() to prepare the common matching
+conditions for the type 2/3/6 triggers. For now, we just implement
+trigger_priv_match() to check if the enabled privilege levels of the
+trigger match CPU's current privilege level.
 
-Consider a store that traps on the 2nd element, leaving vstart = 2, and exiting to the 
-main loop via exception.  The exception enters the kernel page fault handler.  The kernel 
-may need to fault in the page for the process, and in the meantime task switch.
+Signed-off-by: Alvin Chang <alvinga@andestech.com>
+---
+ target/riscv/debug.c | 70 ++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 70 insertions(+)
 
-If vs dirty is not already set, the kernel won't know to save vector state on task switch.
+diff --git a/target/riscv/debug.c b/target/riscv/debug.c
+index e30d99cc2f..7932233073 100644
+--- a/target/riscv/debug.c
++++ b/target/riscv/debug.c
+@@ -241,6 +241,76 @@ static void do_trigger_action(CPURISCVState *env, target_ulong trigger_index)
+     }
+ }
+ 
++/*
++ * Check the privilege level of specific trigger matches CPU's current privilege
++ * level.
++ */
++static bool trigger_priv_match(CPURISCVState *env, trigger_type_t type,
++                               int trigger_index)
++{
++    target_ulong ctrl = env->tdata1[trigger_index];
++
++    switch (type) {
++    case TRIGGER_TYPE_AD_MATCH:
++        /* type 2 trigger cannot be fired in VU/VS mode */
++        if (env->virt_enabled) {
++            return false;
++        }
++        /* check U/S/M bit against current privilege level */
++        if ((ctrl >> 3) & BIT(env->priv)) {
++            return true;
++        }
++        break;
++    case TRIGGER_TYPE_AD_MATCH6:
++        if (env->virt_enabled) {
++            /* check VU/VS bit against current privilege level */
++            if ((ctrl >> 23) & BIT(env->priv)) {
++                return true;
++            }
++        } else {
++            /* check U/S/M bit against current privilege level */
++            if ((ctrl >> 3) & BIT(env->priv)) {
++                return true;
++            }
++        }
++        break;
++    case TRIGGER_TYPE_INST_CNT:
++        if (env->virt_enabled) {
++            /* check VU/VS bit against current privilege level */
++            if ((ctrl >> 25) & BIT(env->priv)) {
++                return true;
++            }
++        } else {
++            /* check U/S/M bit against current privilege level */
++            if ((ctrl >> 6) & BIT(env->priv)) {
++                return true;
++            }
++        }
++        break;
++    case TRIGGER_TYPE_INT:
++    case TRIGGER_TYPE_EXCP:
++    case TRIGGER_TYPE_EXT_SRC:
++        qemu_log_mask(LOG_UNIMP, "trigger type: %d is not supported\n", type);
++        break;
++    case TRIGGER_TYPE_NO_EXIST:
++    case TRIGGER_TYPE_UNAVAIL:
++        qemu_log_mask(LOG_GUEST_ERROR, "trigger type: %d does not exit\n",
++                      type);
++        break;
++    default:
++        g_assert_not_reached();
++    }
++
++    return false;
++}
++
++/* Common matching conditions for all types of the triggers. */
++static bool trigger_common_match(CPURISCVState *env, trigger_type_t type,
++                                 int trigger_index)
++{
++    return trigger_priv_match(env, type, trigger_index);
++}
++
+ /* type 2 trigger */
+ 
+ static uint32_t type2_breakpoint_size(CPURISCVState *env, target_ulong ctrl)
+-- 
+2.34.1
 
-
-r~
 
