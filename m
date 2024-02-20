@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB1C7C48BC3
-	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Feb 2024 22:27:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 375CCC48BC3
+	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Feb 2024 23:50:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rcYZz-0003jM-QO; Tue, 20 Feb 2024 17:27:11 -0500
+	id 1rcZsG-0001p8-EN; Tue, 20 Feb 2024 18:50:08 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rcYYR-0002SC-E8
- for qemu-riscv@nongnu.org; Tue, 20 Feb 2024 17:25:37 -0500
-Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1rcZsD-0001op-OS
+ for qemu-riscv@nongnu.org; Tue, 20 Feb 2024 18:50:05 -0500
+Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rcYYO-0003Yu-H9
- for qemu-riscv@nongnu.org; Tue, 20 Feb 2024 17:25:34 -0500
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-1d911c2103aso34061025ad.0
- for <qemu-riscv@nongnu.org>; Tue, 20 Feb 2024 14:25:32 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1rcZsB-0000zc-OV
+ for qemu-riscv@nongnu.org; Tue, 20 Feb 2024 18:50:05 -0500
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-6e45bd5014dso1185047b3a.1
+ for <qemu-riscv@nongnu.org>; Tue, 20 Feb 2024 15:50:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1708467931; x=1709072731; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=AbjV56HSNPOfq6zJHSiyHtAr0YbtPcePp6SnmecF8j8=;
- b=U1p4l1u8DwxCp6mIQQkSUInxPufulHlZSxgqaWgN/gVEUN2T6zpuuHyVUyHuR8+M+V
- /XLrGvVbHGbFX1KZmf0M1YaEUTnscRLHcx2kQiITjggrwBem0eTCOO4cqJ2Ho670OkIr
- 24rZB+JzqRundzG90azDWKCJrZ1PPRlYnMdsYk9UuAYYhqkI3uyRmrBQpLJmAUiFHZwx
- bdBbUA0EW0o0dBY0gziN0t0ZCFgBC1lx8jwokcWmAr9frp5JKRx8yp7+8PgoJpdUG4mI
- EGlqoPyU6eTBJlgZelEGRKRInbHAQKw67s6/3qqjYNYKoBM2QVw6I+yT0lHoe0GncUl4
- dciQ==
+ d=linaro.org; s=google; t=1708473001; x=1709077801; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=xlywUXRiZth4Y9UaD707yyWHwY/b1gf8xdgz+YzbwlM=;
+ b=RJoGSQsfMzyNxWgQ6KOMoABeP1RIfGSg9QQEbHx4FK5vwPSmSCGjN5cEx68exPsTPH
+ 4hCP+1DLBwIyqppJhi6HSHLEFM4WWR/FVaShCrdFWF8PgG1DJID+AKVwnFyGMFShMKGp
+ NjZjYU10ihyw9TcA8mAcYyufs26SAhq50uV288Dad/Qs2f3gT2JIXWhqp+re1WPKbzAE
+ Jgmsmvi2Uh4kVb/EnLWjWGkhjnogAJLU/stO5l1wh9gUSYq3IO6+RWoF4wZFW+afR+Jz
+ h+i2h+JABm/1SKV2Q0Vj9CR4jF8anl17COHIoRFqRlHYBz0svUlcuoXSUazJx3JhZsnc
+ OSkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708467931; x=1709072731;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=AbjV56HSNPOfq6zJHSiyHtAr0YbtPcePp6SnmecF8j8=;
- b=FO+IrmInhm3x3SdOfZ5FloLNZi/Ho8URN8VDLWbaeZKK0TcyZgsdbMREby7jjbaQTw
- SGlpnoIXyeLTiljfGyWQxOYCk3dsH1d8yMSOKrs3C7oR0vPSRmj76jqsGKsHFZe2lW9N
- bl4ICmrvJkiIydkHneQ7UUSE1lh6997bc3ZMDJJSeIV84ricPFlfvBRN0LvnThdk/6BT
- s/BWrh5FEeuzRhl1RCzKPrCnAjRtp9CiblSRpXaBwlXxyRn8Z5WTYxq/lagpvDBrR9eX
- uVgslXYNvsFrnJOJIKrQsRJBWKkEIT9oWdM+EKsXL/jX7IHfo8UD5njfAMVGETT8c3aA
- D+Lw==
-X-Gm-Message-State: AOJu0YzUoB49WNQ1oZoZCJaLb8aGkC0TI+yjliXSceFOL3evNU/56OrB
- NOnsOJdGPqeWz9ZG2k+WoY9cAr1+80V+qlYmYCn4u/VgcAg7ElMozLO+5u6bxB8=
-X-Google-Smtp-Source: AGHT+IEDra0zM6Ku0YS2LD7n6JfqWROrcg3/OP/2XuVoKm57CrjFPDwT21G3oHjjHWr9XmHth3X2HQ==
-X-Received: by 2002:a17:902:da87:b0:1d9:2158:1308 with SMTP id
- j7-20020a170902da8700b001d921581308mr20498966plx.28.1708467931147; 
- Tue, 20 Feb 2024 14:25:31 -0800 (PST)
-Received: from grind.dc1.ventanamicro.com ([177.94.15.159])
- by smtp.gmail.com with ESMTPSA id
- iw20-20020a170903045400b001dbb86b88e5sm6761044plb.124.2024.02.20.14.25.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Feb 2024 14:25:30 -0800 (PST)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
+ d=1e100.net; s=20230601; t=1708473001; x=1709077801;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=xlywUXRiZth4Y9UaD707yyWHwY/b1gf8xdgz+YzbwlM=;
+ b=RFecc2qAW3ujs30rFgkonzDdy9a96Ck5QjJ13TzYOPRfKRe4h0bIEsQKADJroiT2mT
+ 7FZLGZdHVN6emA6bLTcrgbURPJC/8gr6WFw7gHLAfy89nFzMdnOcheLR5mTIviNrXVze
+ +loC6e97BJyoyDDZLozq7ftLdap6557w7rSJSnpEoqx4dmCMJSA5Ddka5abs/IYMMnXE
+ y8F1qQl2dbfomDDd3pq7QKtpjYKeFBWw9vg04Fi3jLIz6CrJdGzsaMKijLW0LKckrGid
+ rEQbxLrqk8CQ3Cyyd2kfvEqrpmJ8TB54cp8mqPv1suMM5lItuCHxptEV8vPaD953e8vH
+ q0WQ==
+X-Gm-Message-State: AOJu0Yx8026t7FTq3/m1wj48A35qE5ukhzjTuJjrdNt0rHXJX6apiekl
+ w0weoJ5PnieDsUowaMKhD/scLv5ci+YiqrNFtVxNk+nA5hAM3Fp+jpNxznYBG5E=
+X-Google-Smtp-Source: AGHT+IHKLu8oY6ug1NnsVvE02rYTlFzKnZ9z2Ro3UyLYOryWQXxLsjzpTfLZ0VxVxeOte5CLcnfWqA==
+X-Received: by 2002:a05:6a00:93a7:b0:6e4:6c3f:d769 with SMTP id
+ ka39-20020a056a0093a700b006e46c3fd769mr6866356pfb.29.1708473001433; 
+ Tue, 20 Feb 2024 15:50:01 -0800 (PST)
+Received: from [172.20.1.19] (173-197-098-125.biz.spectrum.com.
+ [173.197.98.125]) by smtp.gmail.com with ESMTPSA id
+ w2-20020a62c702000000b006e089bb3619sm7817082pfg.112.2024.02.20.15.49.58
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 20 Feb 2024 15:50:00 -0800 (PST)
+Message-ID: <f5d3ea8b-8aa5-4ee5-b895-67eec6d140ee@linaro.org>
+Date: Tue, 20 Feb 2024 13:49:56 -1000
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 1/6] trans_rvv.c.inc: mark_vs_dirty() before loads and
+ stores
+Content-Language: en-US
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- richard.henderson@linaro.org, max.chou@sifive.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v4 4/6] target/riscv/vector_helper.c: set vstart = 0 in
- GEN_VEXT_VSLIDEUP_VX()
-Date: Tue, 20 Feb 2024 19:25:08 -0300
-Message-ID: <20240220222510.209448-5-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.43.2
-In-Reply-To: <20240220222510.209448-1-dbarboza@ventanamicro.com>
+ max.chou@sifive.com
 References: <20240220222510.209448-1-dbarboza@ventanamicro.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x630.google.com
+ <20240220222510.209448-2-dbarboza@ventanamicro.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20240220222510.209448-2-dbarboza@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::429;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x429.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -97,28 +99,33 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The helper isn't setting env->vstart = 0 after its execution, as it is
-expected from every vector instruction that completes successfully.
+On 2/20/24 12:25, Daniel Henrique Barboza wrote:
+> While discussing a problem with how we're (not) setting vstart_eq_zero
+> Richard had the following to say w.r.t the conditional mark_vs_dirty()
+> calls on load/store functions [1]:
+> 
+> "I think it's required to have stores set dirty unconditionally, before
+> the operation.
+> 
+> Consider a store that traps on the 2nd element, leaving vstart = 2, and
+> exiting to the main loop via exception. The exception enters the kernel
+> page fault handler. The kernel may need to fault in the page for the
+> process, and in the meantime task switch.
+> 
+> If vs dirty is not already set, the kernel won't know to save vector
+> state on task switch."
+> 
+> Do a mark_vs_dirty() before both loads and stores.
+> 
+> [1]https://lore.kernel.org/qemu-riscv/72c7503b-0f43-44b8-aa82-fbafed2aac0c@linaro.org/
+> 
+> Suggested-by: Richard Henderson<richard.henderson@linaro.org>
+> Signed-off-by: Daniel Henrique Barboza<dbarboza@ventanamicro.com>
+> ---
+>   target/riscv/insn_trans/trans_rvv.c.inc | 23 ++++++++---------------
+>   1 file changed, 8 insertions(+), 15 deletions(-)
 
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
----
- target/riscv/vector_helper.c | 1 +
- 1 file changed, 1 insertion(+)
 
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 84cec73eb2..cc7290a1bb 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -4782,6 +4782,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
-         }                                                                 \
-         *((ETYPE *)vd + H(i)) = *((ETYPE *)vs2 + H(i - offset));          \
-     }                                                                     \
-+    env->vstart = 0;                                                      \
-     /* set tail elements to 1s */                                         \
-     vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);              \
- }
--- 
-2.43.2
-
+r~
 
