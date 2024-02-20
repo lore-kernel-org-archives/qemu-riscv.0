@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2A26C54764
-	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Feb 2024 09:12:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 038CEC48BC3
+	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Feb 2024 09:13:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rcMAq-0000sO-Hm; Tue, 20 Feb 2024 04:12:24 -0500
+	id 1rcMAO-0000fx-Ff; Tue, 20 Feb 2024 04:11:56 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1rcMAn-0000rT-5y; Tue, 20 Feb 2024 04:12:22 -0500
+ id 1rcMAM-0000ex-HF; Tue, 20 Feb 2024 04:11:54 -0500
 Received: from mgamail.intel.com ([192.198.163.17])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1rcMAl-0003Nd-Ay; Tue, 20 Feb 2024 04:12:20 -0500
+ id 1rcMAK-0003Km-NL; Tue, 20 Feb 2024 04:11:54 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1708420339; x=1739956339;
+ t=1708420313; x=1739956313;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=sh2QkQ5wss3HOjZ8fhY8YalRgTw6t25jX5kKa/RtD7I=;
- b=BgM+jP6b0g3VoqDecxvtYsczNbqZ2Ev/g3KHu+9ioOkwlhyVugh6/TjP
- g9QmMH04g+JICvPWE6Xh0vpzZyzCUoIHlyrToxHNIrl3z9NJOT8AX0DTt
- ghHFfMBzgC/o3EjodkoJEqLLKav+9tB8+uHIcWygw3vKGDAOQuo+KIloh
- 4FuYRvl/owqBosg5t7z6VIw2MWxVnf2ZRcztBIav7oVC0wACLGhttSi3h
- /gitxlMQnR86yhuB2Mgw9cqMFisRfSm185EL4wtOVfyCXV13yJV3tB+Jk
- triCOQ+dqY31oUgvWlzcLTIvRJROFF9IrqTkON5M99CuOkFEtTUmQLkh5 g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10989"; a="2375017"
+ bh=f72SFWwq+PohiF2H5sIw0CnPQG3e0SkCa+ntNndt4BU=;
+ b=CYFkUtdvqtkF2iTN5WRcDRgTEmqz7XZYy/SWLfZRQjqA8ppNbSJlWd1v
+ Dj2tkOopIy92IftTwS1XW4crgriEmS2ZGancmZHFiE42GFLB5mAXHCSUU
+ kVip0229cjiCAdv0bSz87roOz4NgOK0oG8DC4NtJ33C+H3UJXYNcFm61Y
+ 0WmIVxuh2wgeJg/Us2hzP9405z1CmAyJG/+XlAUs3s1Ac8B4voBDIH8Nn
+ o4la0iWk+xcbSLZwyDWQA5sh6xTkOarv9ravPiLQ2wAc6BJ1a0D5MC0Fp
+ L7oZmQXOESMiOSEez08dksSt/SExsbPi1d6JjF4W2yraF0hiu/wU2rWHE w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10989"; a="2374958"
 X-IronPort-AV: E=Sophos;i="6.06,172,1705392000"; 
-   d="scan'208";a="2375017"
+   d="scan'208";a="2374958"
 Received: from orviesa007.jf.intel.com ([10.64.159.147])
  by fmvoesa111.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 20 Feb 2024 01:12:17 -0800
+ 20 Feb 2024 01:11:50 -0800
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.06,172,1705392000"; 
-   d="scan'208";a="5013057"
+   d="scan'208";a="5012851"
 Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
- by orviesa007.jf.intel.com with ESMTP; 20 Feb 2024 01:12:11 -0800
+ by orviesa007.jf.intel.com with ESMTP; 20 Feb 2024 01:11:45 -0800
 From: Zhao Liu <zhao1.liu@linux.intel.com>
 To: =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
  Eduardo Habkost <eduardo@habkost.net>,
@@ -60,9 +60,9 @@ Cc: qemu-devel@nongnu.org, kvm@vger.kernel.org, qemu-riscv@nongnu.org,
  qemu-arm@nongnu.org, Zhenyu Wang <zhenyu.z.wang@intel.com>,
  Dapeng Mi <dapeng1.mi@linux.intel.com>, Yongwei Ma <yongwei.ma@intel.com>,
  Zhao Liu <zhao1.liu@intel.com>
-Subject: [RFC 6/8] i386/cpu: Update cache topology with machine's configuration
-Date: Tue, 20 Feb 2024 17:25:02 +0800
-Message-Id: <20240220092504.726064-7-zhao1.liu@linux.intel.com>
+Subject: [RFC 1/8] hw/core: Rename CpuTopology to CPUTopology
+Date: Tue, 20 Feb 2024 17:24:57 +0800
+Message-Id: <20240220092504.726064-2-zhao1.liu@linux.intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240220092504.726064-1-zhao1.liu@linux.intel.com>
 References: <20240220092504.726064-1-zhao1.liu@linux.intel.com>
@@ -93,48 +93,170 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Zhao Liu <zhao1.liu@intel.com>
 
-User will configure SMP cache topology via -smp.
-
-For this case, update the x86 CPUs' cache topology with user's
-configuration in MachineState.
+Use CPUTopology to honor the generic style of CPU capitalization
+abbreviations.
 
 Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- target/i386/cpu.c | 21 +++++++++++++++++++++
- 1 file changed, 21 insertions(+)
+ hw/s390x/cpu-topology.c         |  6 +++---
+ include/hw/boards.h             |  8 ++++----
+ include/hw/s390x/cpu-topology.h |  6 +++---
+ tests/unit/test-smp-parse.c     | 14 +++++++-------
+ 4 files changed, 17 insertions(+), 17 deletions(-)
 
-diff --git a/target/i386/cpu.c b/target/i386/cpu.c
-index d7cb0f1e49b4..4b5c551fe7f0 100644
---- a/target/i386/cpu.c
-+++ b/target/i386/cpu.c
-@@ -7582,6 +7582,27 @@ static void x86_cpu_realizefn(DeviceState *dev, Error **errp)
+diff --git a/hw/s390x/cpu-topology.c b/hw/s390x/cpu-topology.c
+index f16bdf65faa0..016f6c1c15ac 100644
+--- a/hw/s390x/cpu-topology.c
++++ b/hw/s390x/cpu-topology.c
+@@ -86,7 +86,7 @@ bool s390_has_topology(void)
+  */
+ static void s390_topology_init(MachineState *ms)
+ {
+-    CpuTopology *smp = &ms->smp;
++    CPUTopology *smp = &ms->smp;
  
- #ifndef CONFIG_USER_ONLY
-     MachineState *ms = MACHINE(qdev_get_machine());
-+
-+    if (ms->smp_cache.l1d != CPU_TOPO_LEVEL_INVALID) {
-+        env->cache_info_cpuid4.l1d_cache->share_level = ms->smp_cache.l1d;
-+        env->cache_info_amd.l1d_cache->share_level = ms->smp_cache.l1d;
-+    }
-+
-+    if (ms->smp_cache.l1i != CPU_TOPO_LEVEL_INVALID) {
-+        env->cache_info_cpuid4.l1i_cache->share_level = ms->smp_cache.l1i;
-+        env->cache_info_amd.l1i_cache->share_level = ms->smp_cache.l1i;
-+    }
-+
-+    if (ms->smp_cache.l2 != CPU_TOPO_LEVEL_INVALID) {
-+        env->cache_info_cpuid4.l2_cache->share_level = ms->smp_cache.l2;
-+        env->cache_info_amd.l2_cache->share_level = ms->smp_cache.l2;
-+    }
-+
-+    if (ms->smp_cache.l3 != CPU_TOPO_LEVEL_INVALID) {
-+        env->cache_info_cpuid4.l3_cache->share_level = ms->smp_cache.l3;
-+        env->cache_info_amd.l3_cache->share_level = ms->smp_cache.l3;
-+    }
-+
-     qemu_register_reset(x86_cpu_machine_reset_cb, cpu);
+     s390_topology.cores_per_socket = g_new0(uint8_t, smp->sockets *
+                                             smp->books * smp->drawers);
+@@ -181,7 +181,7 @@ void s390_topology_reset(void)
+  */
+ static bool s390_topology_cpu_default(S390CPU *cpu, Error **errp)
+ {
+-    CpuTopology *smp = &current_machine->smp;
++    CPUTopology *smp = &current_machine->smp;
+     CPUS390XState *env = &cpu->env;
  
-     if (cpu->env.features[FEAT_1_EDX] & CPUID_APIC || ms->smp.cpus > 1) {
+     /* All geometry topology attributes must be set or all unset */
+@@ -234,7 +234,7 @@ static bool s390_topology_check(uint16_t socket_id, uint16_t book_id,
+                                 uint16_t drawer_id, uint16_t entitlement,
+                                 bool dedicated, Error **errp)
+ {
+-    CpuTopology *smp = &current_machine->smp;
++    CPUTopology *smp = &current_machine->smp;
+ 
+     if (socket_id >= smp->sockets) {
+         error_setg(errp, "Unavailable socket: %d", socket_id);
+diff --git a/include/hw/boards.h b/include/hw/boards.h
+index 78dea50054a1..e63dec919da2 100644
+--- a/include/hw/boards.h
++++ b/include/hw/boards.h
+@@ -333,7 +333,7 @@ typedef struct DeviceMemoryState {
+ } DeviceMemoryState;
+ 
+ /**
+- * CpuTopology:
++ * CPUTopology:
+  * @cpus: the number of present logical processors on the machine
+  * @drawers: the number of drawers on the machine
+  * @books: the number of books in one drawer
+@@ -345,7 +345,7 @@ typedef struct DeviceMemoryState {
+  * @threads: the number of threads in one core
+  * @max_cpus: the maximum number of logical processors on the machine
+  */
+-typedef struct CpuTopology {
++typedef struct CPUTopology {
+     unsigned int cpus;
+     unsigned int drawers;
+     unsigned int books;
+@@ -356,7 +356,7 @@ typedef struct CpuTopology {
+     unsigned int cores;
+     unsigned int threads;
+     unsigned int max_cpus;
+-} CpuTopology;
++} CPUTopology;
+ 
+ /**
+  * MachineState:
+@@ -407,7 +407,7 @@ struct MachineState {
+     const char *cpu_type;
+     AccelState *accelerator;
+     CPUArchIdList *possible_cpus;
+-    CpuTopology smp;
++    CPUTopology smp;
+     struct NVDIMMState *nvdimms_state;
+     struct NumaState *numa_state;
+ };
+diff --git a/include/hw/s390x/cpu-topology.h b/include/hw/s390x/cpu-topology.h
+index c064f427e948..ff09c57a4428 100644
+--- a/include/hw/s390x/cpu-topology.h
++++ b/include/hw/s390x/cpu-topology.h
+@@ -63,17 +63,17 @@ static inline void s390_topology_reset(void)
+ 
+ extern S390Topology s390_topology;
+ 
+-static inline int s390_std_socket(int n, CpuTopology *smp)
++static inline int s390_std_socket(int n, CPUTopology *smp)
+ {
+     return (n / smp->cores) % smp->sockets;
+ }
+ 
+-static inline int s390_std_book(int n, CpuTopology *smp)
++static inline int s390_std_book(int n, CPUTopology *smp)
+ {
+     return (n / (smp->cores * smp->sockets)) % smp->books;
+ }
+ 
+-static inline int s390_std_drawer(int n, CpuTopology *smp)
++static inline int s390_std_drawer(int n, CPUTopology *smp)
+ {
+     return (n / (smp->cores * smp->sockets * smp->books)) % smp->drawers;
+ }
+diff --git a/tests/unit/test-smp-parse.c b/tests/unit/test-smp-parse.c
+index 24972666a74d..f660d6b0df45 100644
+--- a/tests/unit/test-smp-parse.c
++++ b/tests/unit/test-smp-parse.c
+@@ -86,8 +86,8 @@
+  */
+ typedef struct SMPTestData {
+     SMPConfiguration config;
+-    CpuTopology expect_prefer_sockets;
+-    CpuTopology expect_prefer_cores;
++    CPUTopology expect_prefer_sockets;
++    CPUTopology expect_prefer_cores;
+     const char *expect_error;
+ } SMPTestData;
+ 
+@@ -395,7 +395,7 @@ static char *smp_config_to_string(const SMPConfiguration *config)
+ }
+ 
+ /* Use the different calculation than machine_topo_get_threads_per_socket(). */
+-static unsigned int cpu_topology_get_threads_per_socket(const CpuTopology *topo)
++static unsigned int cpu_topology_get_threads_per_socket(const CPUTopology *topo)
+ {
+     /* Check the divisor to avoid invalid topology examples causing SIGFPE. */
+     if (!topo->sockets) {
+@@ -406,7 +406,7 @@ static unsigned int cpu_topology_get_threads_per_socket(const CpuTopology *topo)
+ }
+ 
+ /* Use the different calculation than machine_topo_get_cores_per_socket(). */
+-static unsigned int cpu_topology_get_cores_per_socket(const CpuTopology *topo)
++static unsigned int cpu_topology_get_cores_per_socket(const CPUTopology *topo)
+ {
+     /* Check the divisor to avoid invalid topology examples causing SIGFPE. */
+     if (!topo->threads) {
+@@ -416,12 +416,12 @@ static unsigned int cpu_topology_get_cores_per_socket(const CpuTopology *topo)
+     }
+ }
+ 
+-static char *cpu_topology_to_string(const CpuTopology *topo,
++static char *cpu_topology_to_string(const CPUTopology *topo,
+                                     unsigned int threads_per_socket,
+                                     unsigned int cores_per_socket)
+ {
+     return g_strdup_printf(
+-        "(CpuTopology) {\n"
++        "(CPUTopology) {\n"
+         "    .cpus               = %u,\n"
+         "    .sockets            = %u,\n"
+         "    .dies               = %u,\n"
+@@ -438,7 +438,7 @@ static char *cpu_topology_to_string(const CpuTopology *topo,
+ }
+ 
+ static void check_parse(MachineState *ms, const SMPConfiguration *config,
+-                        const CpuTopology *expect_topo, const char *expect_err,
++                        const CPUTopology *expect_topo, const char *expect_err,
+                         bool is_valid)
+ {
+     g_autofree char *config_str = smp_config_to_string(config);
 -- 
 2.34.1
 
