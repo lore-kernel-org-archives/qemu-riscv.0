@@ -4,86 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E204C48BC3
-	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Feb 2024 21:10:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DCB3C48BC4
+	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Feb 2024 22:05:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rcXNi-0003V1-QF; Tue, 20 Feb 2024 16:10:26 -0500
+	id 1rcYEs-0004o0-2I; Tue, 20 Feb 2024 17:05:22 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rcXNh-0003Us-4b
- for qemu-riscv@nongnu.org; Tue, 20 Feb 2024 16:10:25 -0500
-Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
+ (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
+ id 1rcYEq-0004nb-Nf
+ for qemu-riscv@nongnu.org; Tue, 20 Feb 2024 17:05:20 -0500
+Received: from mail-lf1-x130.google.com ([2a00:1450:4864:20::130])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rcXNX-0008M5-RT
- for qemu-riscv@nongnu.org; Tue, 20 Feb 2024 16:10:23 -0500
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-1dc09556599so16463995ad.1
- for <qemu-riscv@nongnu.org>; Tue, 20 Feb 2024 13:10:14 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
+ id 1rcYEo-0000BY-TW
+ for qemu-riscv@nongnu.org; Tue, 20 Feb 2024 17:05:20 -0500
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-512b4388dafso3227974e87.2
+ for <qemu-riscv@nongnu.org>; Tue, 20 Feb 2024 14:05:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1708463413; x=1709068213; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=hrYafVmPknXj6OBu45DwwkQ8cyY3M2/gxdad8UKpldU=;
- b=LtBoh11iNxKaPDbewQvuUOjiHgWRjAO0y6CKQP+FGfoiiAuiGGKWj4zOWD2lYA2/5H
- kXYWeFkSWpAiYshKSYtRl+CQUTVLuCIS12kiySFRHVT+FhqdB3o/Y9CLXJYlkiecG1z7
- 4/BnNrz9SWyPSUMuarf/34p2sP2rsMANkrXvavmWl92Ywwdbbw9+ycCjbEgXkuiy/n+6
- 6GFgNHCfNt2fg4HMUhsChyIpQxxpwQOWb3rOt5BG22vfQMHQMsAROh+z8z7kP5PXX/XN
- EpAe9lIxuF5teAvJX7TUjZQ41on4SHytno4lfXCxNet558n7rBYoIZFGQsve66wYT3W6
- tu4g==
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1708466716; x=1709071516;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=c+CX6VXTmBh09QBbs/GeIlvXtA5ox2lt2Ixx9L9mYbM=;
+ b=oiUx4CGOZ1RRHiIUVXjywjl52ZcRv+s/WyHl3GSWO685mt4a0Vj9sC9/4xzOsMHwea
+ IJz0vBgedtUqBgNHwyoRByqNQsFii9YHnHcc3gmILTCQmzOVAcctX1cJFZc9HZNzhXLM
+ NoVQKOyQOE/MlC0uUycJWjbXtNJ0EeKFxaI1dDbKe67UuJHo/nsEb9+QfHX4cb1QQR2h
+ il9aUMKpeGiMrl0oVEr9qVxdSYla7zwKg/Ijrh3aXTE1ihSRWiTJib9tBEiPUE1npWDQ
+ IqLiaMz43NmqTVREJK7m/qGrbXoodpIKC/nhJj6FOQoPdJ2MPuybqbsCDHAj12HN6rgb
+ EXAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708463413; x=1709068213;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=hrYafVmPknXj6OBu45DwwkQ8cyY3M2/gxdad8UKpldU=;
- b=qqPjZK6ld4jHqrdwGjbefwKw4Rae303IxAWje0IEIr5Ms0t08hEiF1g+Ju/l+9DO8d
- vFYe+zBE1PLhmAEp0iONaw7Bj2qG+9sS89HbOqyRROm07y2pgehgufezBG3orHJA5ri7
- VUqo7aSqWTBXj9DKqUGny3BS1NIljp715i4cUQ/DSh0kgZfPxs6WI1aJPTPYLsC7YflY
- xwZEy3BsajVni4jCQrZMrvwS5JFV6+gTmvP8PjEiv0URCccMRu340XXvN7vRgaVBFkx1
- 9QVlInycDX4UrOebDrZSXdfdJ7u4e5J1rmYwXLpZscnCUHzksLZfqCUMzNCXIzWGwhWU
- tXmg==
-X-Gm-Message-State: AOJu0YxlAZ4mhrjaWzr1DEmN10kkyyWmD3njSZkwPOlZV71lwozX5fLK
- oi9Zn+A3/affxSyrQvP/QbwwDaqyO2htMKcYKepXfkST9m5yhMmm5aMxrkZxDoA=
-X-Google-Smtp-Source: AGHT+IHRyCetltwcDJCkO1OoMegCcPaLDBoyLyGML8zd3rnNQtDskxvwirMX1wxF7V+etVxkR4LR/g==
-X-Received: by 2002:a17:903:41ce:b0:1db:dd57:d56 with SMTP id
- u14-20020a17090341ce00b001dbdd570d56mr14112090ple.23.1708463413162; 
- Tue, 20 Feb 2024 13:10:13 -0800 (PST)
-Received: from [192.168.68.110] ([177.94.15.159])
- by smtp.gmail.com with ESMTPSA id
- j6-20020a17090276c600b001da1ecb05f9sm6643377plt.240.2024.02.20.13.10.10
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 20 Feb 2024 13:10:12 -0800 (PST)
-Message-ID: <ad667881-f55c-468e-b6a1-8138147f71ef@ventanamicro.com>
-Date: Tue, 20 Feb 2024 18:10:08 -0300
+ d=1e100.net; s=20230601; t=1708466716; x=1709071516;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=c+CX6VXTmBh09QBbs/GeIlvXtA5ox2lt2Ixx9L9mYbM=;
+ b=i5USFRoBp83ObHmhe2S3tmTuYUZXOT6DUuH9TNNE7ZiqAxCO1sZ4ZqGljnGcggtYR5
+ JoDv1MPYMOi3sgGWapAEajPUMVsPlyP2Uqz8aG8NoirdlUPXGVftkECV9oKI8JRIg/Vj
+ 66DOtVv39G0jZ2Kh2nYDx9mjBExRUFeq6ZUeQMMlKZg5vTdh1NTSBYzur9nFCJUWo+eG
+ X5o+hDrwaWkNzgVmNZY908HwDabIZ05QhmDmBcI+IZCk+UJQgsNMwv3oDVuUsO8gDsMN
+ qoIJuErgzx2Bx+gwhJnyyHUMqVyEPmXAGtaOSkz74hElWOuu7bveLVT+fVeH99XDpDoj
+ OiUg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXD3KWNnANPR707rTFnO37BPBG9r+1yDrvj/hyzGikt5BEqaluiHo5opXtUCXJxVfgvqxAHAg2aG6sPsHrgItTTT7G9wj8=
+X-Gm-Message-State: AOJu0YzVKf9P1kyAwNbgqogKQwA8D98ZxeqsjUlxye5lzyNTxBFVRea7
+ BllEBwHtOhkrDXMEMThQZwZFW5TeAQa1CM0yvTwzkWZbYd6R4z6h9NcWjAi0tBF78lLxFaobEEa
+ asm1Rbjo/rMh6XHLPvetmYkJQbuzIPpD71Vvugg==
+X-Google-Smtp-Source: AGHT+IHIenxUNHodkG0h3rrBkK5cXQQK/y2NPMGKgA8WbyMofzulixGllVX0bUyLIfHTRk8vUyXTc+KOWg+Pro9zSrk=
+X-Received: by 2002:a05:6512:691:b0:512:ccd2:5cb0 with SMTP id
+ t17-20020a056512069100b00512ccd25cb0mr1248296lfe.29.1708466716259; Tue, 20
+ Feb 2024 14:05:16 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/5] trans_rvv.c.inc: mark_vs_dirty() before stores
-Content-Language: en-US
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- max.chou@sifive.com
-References: <20240220192607.141880-1-dbarboza@ventanamicro.com>
- <20240220192607.141880-2-dbarboza@ventanamicro.com>
- <32df58bf-cf71-4825-8b56-67108c81944d@linaro.org>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <32df58bf-cf71-4825-8b56-67108c81944d@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x632.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01,
- T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
+References: <20240213145308.869874-1-alexghiti@rivosinc.com>
+ <20240213-87d669a3bd421a1b2bc30fc2@orel>
+In-Reply-To: <20240213-87d669a3bd421a1b2bc30fc2@orel>
+From: Alexandre Ghiti <alexghiti@rivosinc.com>
+Date: Tue, 20 Feb 2024 23:05:05 +0100
+Message-ID: <CAHVXubjs87Tqqyx=BSBm3RqiwvsYGSG_Nn0F-XAH2coQJLtr1A@mail.gmail.com>
+Subject: Re: [PATCH RFC] target: riscv: Add Svvptc extension support
+To: Andrew Jones <ajones@ventanamicro.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::130;
+ envelope-from=alexghiti@rivosinc.com; helo=mail-lf1-x130.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,76 +97,81 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Hi Andrew,
 
+Sorry for the very late reply, I was (and still am) off!
 
-On 2/20/24 17:17, Richard Henderson wrote:
-> On 2/20/24 09:26, Daniel Henrique Barboza wrote:
->> While discussing a problem with how we're (not) setting vstart_eq_zero
->> Richard had the following to say w.r.t the conditional mark_vs_dirty()
->> calls on load/store functions [1]:
->>
->> "I think it's required to have stores set dirty unconditionally, before
->> the operation.
->>
->> Consider a store that traps on the 2nd element, leaving vstart = 2, and
->> exiting to the main loop via exception. The exception enters the kernel
->> page fault handler. The kernel may need to fault in the page for the
->> process, and in the meantime task switch.
->>
->> If vs dirty is not already set, the kernel won't know to save vector
->> state on task switch."
->>
->> Do a mark_vs_dirty() before store operations. Keep the mark_vs_dirty()
->> call at the end for loads - the function is a no-op if mstatus_vs is
->> already set to EXT_STATUS_DIRTY so there's no hurt in store functions
->> calling it twice.
->>
->> [1] https://lore.kernel.org/qemu-riscv/72c7503b-0f43-44b8-aa82-fbafed2aac0c@linaro.org/
->>
->> Suggested-by: Richard Henderson <richard.henderson@linaro.org>
->> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->> ---
->>   target/riscv/insn_trans/trans_rvv.c.inc | 29 +++++++++++++++----------
->>   1 file changed, 17 insertions(+), 12 deletions(-)
->>
->> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
->> index 9e101ab434..2065e9064e 100644
->> --- a/target/riscv/insn_trans/trans_rvv.c.inc
->> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
->> @@ -636,12 +636,13 @@ static bool ldst_us_trans(uint32_t vd, uint32_t rs1, uint32_t data,
->>       tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, vd));
->>       tcg_gen_addi_ptr(mask, tcg_env, vreg_ofs(s, 0));
->> -    fn(dest, mask, base, tcg_env, desc);
->> -
->> -    if (!is_store) {
->> +    if (is_store) {
->>           mark_vs_dirty(s);
->>       }
->> +    fn(dest, mask, base, tcg_env, desc);
->> +
->> +    mark_vs_dirty(s);
-> 
-> You misunderstood here, I think.
-> Both loads and stores need to set dirty early, before any exit via exception path.
-> 
-> I see that I did say only stores in the quoted mail, but I believe that was merely in reference to stores not setting dirty *at all* beforehand.
+On Tue, Feb 13, 2024 at 4:33=E2=80=AFPM Andrew Jones <ajones@ventanamicro.c=
+om> wrote:
+>
+> On Tue, Feb 13, 2024 at 03:53:08PM +0100, Alexandre Ghiti wrote:
+> > The Svvptc extension describes a uarch that does not cache invalid TLB
+> > entries: that's the case for qemu so there is nothing particular to
+> > implement other than the introduction of this extension, which is done
+> > here.
+> >
+> > Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
+> > ---
+> >
+> > That's an RFC since the extension has not been ratified yet.
+>
+> Hi Alex,
+>
+> No need for the RFC tag. You can add not-yet-ratified extension support
+> to QEMU as long as the CPU property is off by default (as you've done)
+> and you add it to the riscv_cpu_experimental_exts[] array with an "x-"
+> prefix on its property name.
+>
 
-hmmm it made sense when I read your reply to set just for stores because I thought
-that loads wouldn't trigger page context switches in the kernel. TBH I got too
-caught up by the existing "if (!is_store)" in the code, trying to figure it out
-why it was there.
+I'll do that next week then,
 
-In another read in the spec there's nothing that indicates that stores needs
-additional handling, which means that we can treat both equally in this regard.
+Thanks,
 
+Alex
 
-I'll change it for v4. Thanks,
-
-
-Daniel
-
-
-> 
-> 
-> r~
+> Thanks,
+> drew
+>
+> >
+> >  target/riscv/cpu.c     | 2 ++
+> >  target/riscv/cpu_cfg.h | 1 +
+> >  2 files changed, 3 insertions(+)
+> >
+> > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> > index 1b8d001d23..4beb5d0350 100644
+> > --- a/target/riscv/cpu.c
+> > +++ b/target/riscv/cpu.c
+> > @@ -178,6 +178,7 @@ const RISCVIsaExtData isa_edata_arr[] =3D {
+> >      ISA_EXT_DATA_ENTRY(svinval, PRIV_VERSION_1_12_0, ext_svinval),
+> >      ISA_EXT_DATA_ENTRY(svnapot, PRIV_VERSION_1_12_0, ext_svnapot),
+> >      ISA_EXT_DATA_ENTRY(svpbmt, PRIV_VERSION_1_12_0, ext_svpbmt),
+> > +    ISA_EXT_DATA_ENTRY(svvptc, PRIV_VERSION_1_12_0, ext_svvptc),
+> >      ISA_EXT_DATA_ENTRY(xtheadba, PRIV_VERSION_1_11_0, ext_xtheadba),
+> >      ISA_EXT_DATA_ENTRY(xtheadbb, PRIV_VERSION_1_11_0, ext_xtheadbb),
+> >      ISA_EXT_DATA_ENTRY(xtheadbs, PRIV_VERSION_1_11_0, ext_xtheadbs),
+> > @@ -1467,6 +1468,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions=
+[] =3D {
+> >      MULTI_EXT_CFG_BOOL("svinval", ext_svinval, false),
+> >      MULTI_EXT_CFG_BOOL("svnapot", ext_svnapot, false),
+> >      MULTI_EXT_CFG_BOOL("svpbmt", ext_svpbmt, false),
+> > +    MULTI_EXT_CFG_BOOL("svvptc", ext_svvptc, false),
+> >
+> >      MULTI_EXT_CFG_BOOL("zicntr", ext_zicntr, true),
+> >      MULTI_EXT_CFG_BOOL("zihpm", ext_zihpm, true),
+> > diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+> > index 833bf58217..c973693b6e 100644
+> > --- a/target/riscv/cpu_cfg.h
+> > +++ b/target/riscv/cpu_cfg.h
+> > @@ -77,6 +77,7 @@ struct RISCVCPUConfig {
+> >      bool ext_svinval;
+> >      bool ext_svnapot;
+> >      bool ext_svpbmt;
+> > +    bool ext_svvptc;
+> >      bool ext_zdinx;
+> >      bool ext_zaamo;
+> >      bool ext_zacas;
+> > --
+> > 2.39.2
+> >
+> >
 
