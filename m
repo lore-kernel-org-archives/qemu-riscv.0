@@ -4,85 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67B8EC48BC3
-	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Feb 2024 20:22:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E204C48BC3
+	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Feb 2024 21:10:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rcWd5-0005U0-Vp; Tue, 20 Feb 2024 15:22:16 -0500
+	id 1rcXNi-0003V1-QF; Tue, 20 Feb 2024 16:10:26 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rcWd4-0005TU-KP
- for qemu-riscv@nongnu.org; Tue, 20 Feb 2024 15:22:14 -0500
-Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rcXNh-0003Us-4b
+ for qemu-riscv@nongnu.org; Tue, 20 Feb 2024 16:10:25 -0500
+Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rcWd3-0008IS-7h
- for qemu-riscv@nongnu.org; Tue, 20 Feb 2024 15:22:14 -0500
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-1dc1ff697f9so6487895ad.0
- for <qemu-riscv@nongnu.org>; Tue, 20 Feb 2024 12:22:12 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rcXNX-0008M5-RT
+ for qemu-riscv@nongnu.org; Tue, 20 Feb 2024 16:10:23 -0500
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-1dc09556599so16463995ad.1
+ for <qemu-riscv@nongnu.org>; Tue, 20 Feb 2024 13:10:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708460532; x=1709065332; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1708463413; x=1709068213; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=CUVmSc2R9xawkZPYrE0PtPf9cLztRLyt8j5XJwpeuL4=;
- b=lT3lENIVlOwBASWqLhL7/AgDUMDLhgt9zfR3/hN5EYfVs+22ekZ1QaaPEHZmldvg+3
- FPJ4xH2OJXtcJY/V9wZpI+ygMZe2yt2fdhUrrzv/7dR3aJ2rGTXwkSkNlUTv5RK2OnkY
- rvGePR4u4Sz93WlMZI7lJQ77KpVJHnOgbAMxZIile0SWFFGV+8lOJCNOdJwzh9XjT5pQ
- NFQ8E4TyQoxPEJwmE5loJDlVzRpcLawWH7aFT2kRYd8x4vL181TQeeF0KGdVwcl/ZX+x
- e+Can2W7iTjsYwFsXy4bo3yY8Met3XVqke8j/TXxbUpo0m7VH6Nzt8diu/GKJ7B6Atcu
- 1Q7Q==
+ bh=hrYafVmPknXj6OBu45DwwkQ8cyY3M2/gxdad8UKpldU=;
+ b=LtBoh11iNxKaPDbewQvuUOjiHgWRjAO0y6CKQP+FGfoiiAuiGGKWj4zOWD2lYA2/5H
+ kXYWeFkSWpAiYshKSYtRl+CQUTVLuCIS12kiySFRHVT+FhqdB3o/Y9CLXJYlkiecG1z7
+ 4/BnNrz9SWyPSUMuarf/34p2sP2rsMANkrXvavmWl92Ywwdbbw9+ycCjbEgXkuiy/n+6
+ 6GFgNHCfNt2fg4HMUhsChyIpQxxpwQOWb3rOt5BG22vfQMHQMsAROh+z8z7kP5PXX/XN
+ EpAe9lIxuF5teAvJX7TUjZQ41on4SHytno4lfXCxNet558n7rBYoIZFGQsve66wYT3W6
+ tu4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708460532; x=1709065332;
+ d=1e100.net; s=20230601; t=1708463413; x=1709068213;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=CUVmSc2R9xawkZPYrE0PtPf9cLztRLyt8j5XJwpeuL4=;
- b=cAj+QDWY20V8OKt6IKa+nCLS6K8c1Q9HhMNOkr/PPqMenHf9UgkPJxxKd+g4B8W03b
- xwt7qPtfpDzLI0rNaaNNp1ZERB1Bx2f/wofbokh0E7FWgPbbxH6Z9JKKwVcuQkkf6hbM
- EKkz7WQrTM0ORQuaTr3j/tIwfEWEsnse/YH/HumrlfmetiDLO19HMihZxhus61DSq4FE
- ssGKECalgzT+a555a+NIuSviRjpL9gXh5itY/jQCgHCF+3n0nCQjIS/d8GZoADd7OPO8
- wC2s/QdBEsHK3P2l+l28TbqNEZ49gz/RMe++YMLjIpDKTTS3Th01KQGeggkH0ubJw56J
- 9aqg==
-X-Gm-Message-State: AOJu0YyE98fgH8i1cNtPDwRzAxe0xF07BIDO+jdf0uSHDG8tt6G66AkH
- CUu3nJiwKh7B85B8/aLq1bhVVCStWkLIlB5onA0x9DdOqzAuLeavYFlHlQfksrc=
-X-Google-Smtp-Source: AGHT+IH9sgEWcOGURNt2laqCsZ3Ig2VOuOnMmNPASKOzyJBSOZVveHNWf/pXpWYdY15xoKCVVjY4zg==
-X-Received: by 2002:a17:902:7846:b0:1dc:3e:2721 with SMTP id
- e6-20020a170902784600b001dc003e2721mr3745857pln.52.1708460531839; 
- Tue, 20 Feb 2024 12:22:11 -0800 (PST)
-Received: from [172.20.1.19] (173-197-098-125.biz.spectrum.com.
- [173.197.98.125]) by smtp.gmail.com with ESMTPSA id
- 6-20020a170902e9c600b001db45b65e13sm6580544plk.279.2024.02.20.12.22.09
+ bh=hrYafVmPknXj6OBu45DwwkQ8cyY3M2/gxdad8UKpldU=;
+ b=qqPjZK6ld4jHqrdwGjbefwKw4Rae303IxAWje0IEIr5Ms0t08hEiF1g+Ju/l+9DO8d
+ vFYe+zBE1PLhmAEp0iONaw7Bj2qG+9sS89HbOqyRROm07y2pgehgufezBG3orHJA5ri7
+ VUqo7aSqWTBXj9DKqUGny3BS1NIljp715i4cUQ/DSh0kgZfPxs6WI1aJPTPYLsC7YflY
+ xwZEy3BsajVni4jCQrZMrvwS5JFV6+gTmvP8PjEiv0URCccMRu340XXvN7vRgaVBFkx1
+ 9QVlInycDX4UrOebDrZSXdfdJ7u4e5J1rmYwXLpZscnCUHzksLZfqCUMzNCXIzWGwhWU
+ tXmg==
+X-Gm-Message-State: AOJu0YxlAZ4mhrjaWzr1DEmN10kkyyWmD3njSZkwPOlZV71lwozX5fLK
+ oi9Zn+A3/affxSyrQvP/QbwwDaqyO2htMKcYKepXfkST9m5yhMmm5aMxrkZxDoA=
+X-Google-Smtp-Source: AGHT+IHRyCetltwcDJCkO1OoMegCcPaLDBoyLyGML8zd3rnNQtDskxvwirMX1wxF7V+etVxkR4LR/g==
+X-Received: by 2002:a17:903:41ce:b0:1db:dd57:d56 with SMTP id
+ u14-20020a17090341ce00b001dbdd570d56mr14112090ple.23.1708463413162; 
+ Tue, 20 Feb 2024 13:10:13 -0800 (PST)
+Received: from [192.168.68.110] ([177.94.15.159])
+ by smtp.gmail.com with ESMTPSA id
+ j6-20020a17090276c600b001da1ecb05f9sm6643377plt.240.2024.02.20.13.10.10
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 20 Feb 2024 12:22:11 -0800 (PST)
-Message-ID: <2dbadbf5-3e2a-4bcb-8e45-f80885e37dfc@linaro.org>
-Date: Tue, 20 Feb 2024 10:22:08 -1000
+ Tue, 20 Feb 2024 13:10:12 -0800 (PST)
+Message-ID: <ad667881-f55c-468e-b6a1-8138147f71ef@ventanamicro.com>
+Date: Tue, 20 Feb 2024 18:10:08 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 5/5] target/riscv: Clear vstart_qe_zero flag
+Subject: Re: [PATCH v3 1/5] trans_rvv.c.inc: mark_vs_dirty() before stores
 Content-Language: en-US
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- max.chou@sifive.com, Ivan Klokov <ivan.klokov@syntacore.com>
+ max.chou@sifive.com
 References: <20240220192607.141880-1-dbarboza@ventanamicro.com>
- <20240220192607.141880-6-dbarboza@ventanamicro.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240220192607.141880-6-dbarboza@ventanamicro.com>
+ <20240220192607.141880-2-dbarboza@ventanamicro.com>
+ <32df58bf-cf71-4825-8b56-67108c81944d@linaro.org>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <32df58bf-cf71-4825-8b56-67108c81944d@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x636.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x632.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01,
+ T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,20 +99,76 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2/20/24 09:26, Daniel Henrique Barboza wrote:
-> From: Ivan Klokov <ivan.klokov@syntacore.com>
+
+
+On 2/20/24 17:17, Richard Henderson wrote:
+> On 2/20/24 09:26, Daniel Henrique Barboza wrote:
+>> While discussing a problem with how we're (not) setting vstart_eq_zero
+>> Richard had the following to say w.r.t the conditional mark_vs_dirty()
+>> calls on load/store functions [1]:
+>>
+>> "I think it's required to have stores set dirty unconditionally, before
+>> the operation.
+>>
+>> Consider a store that traps on the 2nd element, leaving vstart = 2, and
+>> exiting to the main loop via exception. The exception enters the kernel
+>> page fault handler. The kernel may need to fault in the page for the
+>> process, and in the meantime task switch.
+>>
+>> If vs dirty is not already set, the kernel won't know to save vector
+>> state on task switch."
+>>
+>> Do a mark_vs_dirty() before store operations. Keep the mark_vs_dirty()
+>> call at the end for loads - the function is a no-op if mstatus_vs is
+>> already set to EXT_STATUS_DIRTY so there's no hurt in store functions
+>> calling it twice.
+>>
+>> [1] https://lore.kernel.org/qemu-riscv/72c7503b-0f43-44b8-aa82-fbafed2aac0c@linaro.org/
+>>
+>> Suggested-by: Richard Henderson <richard.henderson@linaro.org>
+>> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>> ---
+>>   target/riscv/insn_trans/trans_rvv.c.inc | 29 +++++++++++++++----------
+>>   1 file changed, 17 insertions(+), 12 deletions(-)
+>>
+>> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+>> index 9e101ab434..2065e9064e 100644
+>> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+>> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+>> @@ -636,12 +636,13 @@ static bool ldst_us_trans(uint32_t vd, uint32_t rs1, uint32_t data,
+>>       tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, vd));
+>>       tcg_gen_addi_ptr(mask, tcg_env, vreg_ofs(s, 0));
+>> -    fn(dest, mask, base, tcg_env, desc);
+>> -
+>> -    if (!is_store) {
+>> +    if (is_store) {
+>>           mark_vs_dirty(s);
+>>       }
+>> +    fn(dest, mask, base, tcg_env, desc);
+>> +
+>> +    mark_vs_dirty(s);
 > 
-> The vstart_qe_zero flag is set at the beginning of the translation
-> phase from the env->vstart variable. During the execution phase, some
-> instructions may change env->vstart, but the flag remains the same as
-> at the start of the block. With some combinations of instructions this
-> causes an illegal instruction exception. This patch simultaneously
-> updates flag and env->vstart and to avoid inconsistency.
+> You misunderstood here, I think.
+> Both loads and stores need to set dirty early, before any exit via exception path.
+> 
+> I see that I did say only stores in the quoted mail, but I believe that was merely in reference to stores not setting dirty *at all* beforehand.
 
-It does not update env->vstart.  With the commit message fixed,
+hmmm it made sense when I read your reply to set just for stores because I thought
+that loads wouldn't trigger page context switches in the kernel. TBH I got too
+caught up by the existing "if (!is_store)" in the code, trying to figure it out
+why it was there.
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+In another read in the spec there's nothing that indicates that stores needs
+additional handling, which means that we can treat both equally in this regard.
 
 
-r~
+I'll change it for v4. Thanks,
+
+
+Daniel
+
+
+> 
+> 
+> r~
 
