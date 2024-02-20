@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5E4AC48BC4
-	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Feb 2024 09:12:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F71CC48BC4
+	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Feb 2024 09:12:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rcMAz-0001D7-Va; Tue, 20 Feb 2024 04:12:34 -0500
+	id 1rcMAU-0000hV-FA; Tue, 20 Feb 2024 04:12:02 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1rcMAy-00012Z-2d; Tue, 20 Feb 2024 04:12:32 -0500
+ id 1rcMAT-0000gy-7r; Tue, 20 Feb 2024 04:12:01 -0500
 Received: from mgamail.intel.com ([192.198.163.17])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1rcMAw-0003Tv-0l; Tue, 20 Feb 2024 04:12:31 -0500
+ id 1rcMAQ-0003Nd-S5; Tue, 20 Feb 2024 04:12:00 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1708420350; x=1739956350;
+ t=1708420319; x=1739956319;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=L0AbdOq+EtfWgzb7EW1UTRtjP/6zXcB3r698FBuEvgE=;
- b=GotJBlCOWiDbORUrFW9FJJP0MFSK+B1f7F/ibCay2WDFrsCEYfL7Lu5Q
- Se71/DNobx7db5OmZ4L0NsuLWLnY4VFS13qRPSd7cNZ6MSn+QhfoGAnbD
- MXm8Je/oAlVQuC6zHwsKn43f+y1c8syzoXjAEnbx65JU/GWMx8Dg3ygRx
- lgdj8WuCplKH+7UXhD8PhWiyXy0A26GZeyOgkdfSL/oYx5TXcO2WP+XjA
- ca87IWVT/J7yFJH22wkwuSonvWg3z0wjd+d5EzCIAmHkkV/hLpHj/aQ5z
- QdCxAx6DWBH7zcQKoyS0t5dlRcsjaYbWR1AeE94/eVgOtPHf6vvVaPVBl A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10989"; a="2375048"
+ bh=nXvdPraIKnI4AFbDZfobt0iujTMEBz7nDxXX+7ZH9uk=;
+ b=UJ/7NA1KfbmAjgOheCdA/GdD08YsSQuzZanI8XZ7wt5wPG3BjBod6S9Y
+ 66M8ix0wJ8jk3eXAWuaWCiHsIgmfPwm7J96dIN9zjXZa2hPGFuCl8UEeD
+ izE4bHiJRSEROx44iNCF/ZshlyXIVfcPNIQ3Gj/dEu5tUJBpAPOucPVYy
+ hggEXffiaPUy7d5fdhME8bB1CCOk8r2R2eaUxx6yJKKOvY2MmJYLWfwct
+ m6T7fr8W9aHczHFhk0v2T8/t5P3QXapjYEouXSQHJfxkITiJ8GrKXwZhh
+ aKgLZtpYFr7cpxcnI4Rb7/SyrlAipTrEIfcSAeyI01CLeugUAnoco52Xs g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10989"; a="2374972"
 X-IronPort-AV: E=Sophos;i="6.06,172,1705392000"; 
-   d="scan'208";a="2375048"
+   d="scan'208";a="2374972"
 Received: from orviesa007.jf.intel.com ([10.64.159.147])
  by fmvoesa111.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 20 Feb 2024 01:12:28 -0800
+ 20 Feb 2024 01:11:56 -0800
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.06,172,1705392000"; 
-   d="scan'208";a="5013156"
+   d="scan'208";a="5012880"
 Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
- by orviesa007.jf.intel.com with ESMTP; 20 Feb 2024 01:12:23 -0800
+ by orviesa007.jf.intel.com with ESMTP; 20 Feb 2024 01:11:50 -0800
 From: Zhao Liu <zhao1.liu@linux.intel.com>
 To: =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
  Eduardo Habkost <eduardo@habkost.net>,
@@ -60,9 +60,10 @@ Cc: qemu-devel@nongnu.org, kvm@vger.kernel.org, qemu-riscv@nongnu.org,
  qemu-arm@nongnu.org, Zhenyu Wang <zhenyu.z.wang@intel.com>,
  Dapeng Mi <dapeng1.mi@linux.intel.com>, Yongwei Ma <yongwei.ma@intel.com>,
  Zhao Liu <zhao1.liu@intel.com>
-Subject: [RFC 8/8] qemu-options: Add the cache topology description of -smp
-Date: Tue, 20 Feb 2024 17:25:04 +0800
-Message-Id: <20240220092504.726064-9-zhao1.liu@linux.intel.com>
+Subject: [RFC 2/8] hw/core: Move CPU topology enumeration into arch-agnostic
+ file
+Date: Tue, 20 Feb 2024 17:24:58 +0800
+Message-Id: <20240220092504.726064-3-zhao1.liu@linux.intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240220092504.726064-1-zhao1.liu@linux.intel.com>
 References: <20240220092504.726064-1-zhao1.liu@linux.intel.com>
@@ -93,111 +94,339 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Zhao Liu <zhao1.liu@intel.com>
 
+Cache topology needs to be defined based on CPU topology levels. Thus,
+move CPU topology enumeration into a common header.
+
+To match the general topology naming style, rename CPU_TOPO_LEVEL_SMT
+and CPU_TOPO_LEVEL_PACKAGE to CPU_TOPO_LEVEL_THREAD and
+CPU_TOPO_LEVEL_SOCKET.
+
+Also, enumerate additional topology levels for non-i386 arches, and add
+helpers for topology enumeration and string conversion.
+
 Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- qemu-options.hx | 54 ++++++++++++++++++++++++++++++++++++++++++-------
- 1 file changed, 47 insertions(+), 7 deletions(-)
+ MAINTAINERS                    |  2 ++
+ hw/core/cpu-topology.c         | 56 ++++++++++++++++++++++++++++++++++
+ hw/core/meson.build            |  1 +
+ include/hw/core/cpu-topology.h | 40 ++++++++++++++++++++++++
+ include/hw/i386/topology.h     | 18 +----------
+ target/i386/cpu.c              | 24 +++++++--------
+ target/i386/cpu.h              |  2 +-
+ tests/unit/meson.build         |  3 +-
+ 8 files changed, 115 insertions(+), 31 deletions(-)
+ create mode 100644 hw/core/cpu-topology.c
+ create mode 100644 include/hw/core/cpu-topology.h
 
-diff --git a/qemu-options.hx b/qemu-options.hx
-index 70eaf3256685..85c78c99a3b0 100644
---- a/qemu-options.hx
-+++ b/qemu-options.hx
-@@ -281,7 +281,9 @@ ERST
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 7d61fb93194b..4b1cce938915 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1871,6 +1871,7 @@ R: Yanan Wang <wangyanan55@huawei.com>
+ S: Supported
+ F: hw/core/cpu-common.c
+ F: hw/core/cpu-sysemu.c
++F: hw/core/cpu-topology.c
+ F: hw/core/machine-qmp-cmds.c
+ F: hw/core/machine.c
+ F: hw/core/machine-smp.c
+@@ -1882,6 +1883,7 @@ F: qapi/machine-common.json
+ F: qapi/machine-target.json
+ F: include/hw/boards.h
+ F: include/hw/core/cpu.h
++F: include/hw/core/cpu-topology.h
+ F: include/hw/cpu/cluster.h
+ F: include/sysemu/numa.h
+ F: tests/unit/test-smp-parse.c
+diff --git a/hw/core/cpu-topology.c b/hw/core/cpu-topology.c
+new file mode 100644
+index 000000000000..ca1361d13c16
+--- /dev/null
++++ b/hw/core/cpu-topology.c
+@@ -0,0 +1,56 @@
++/*
++ * QEMU CPU Topology Representation
++ *
++ * Copyright (c) 2024 Intel Corporation
++ * Author: Zhao Liu <zhao1.liu@intel.com>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License,
++ * or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, see <http://www.gnu.org/licenses/>.
++ */
++
++#include "qemu/osdep.h"
++#include "hw/core/cpu-topology.h"
++
++typedef struct CPUTopoInfo {
++    const char *name;
++} CPUTopoInfo;
++
++CPUTopoInfo cpu_topo_descriptors[] = {
++    [CPU_TOPO_LEVEL_INVALID] = { .name = "invalid", },
++    [CPU_TOPO_LEVEL_THREAD]  = { .name = "thread",  },
++    [CPU_TOPO_LEVEL_CORE]    = { .name = "core",    },
++    [CPU_TOPO_LEVEL_MODULE]  = { .name = "module",  },
++    [CPU_TOPO_LEVEL_CLUSTER] = { .name = "cluster", },
++    [CPU_TOPO_LEVEL_DIE]     = { .name = "die",     },
++    [CPU_TOPO_LEVEL_SOCKET]  = { .name = "socket",  },
++    [CPU_TOPO_LEVEL_BOOK]    = { .name = "book",    },
++    [CPU_TOPO_LEVEL_DRAWER]  = { .name = "drawer",  },
++    [CPU_TOPO_LEVEL_MAX]     = { .name = NULL,      },
++};
++
++const char *cpu_topo_to_string(CPUTopoLevel topo)
++{
++    return cpu_topo_descriptors[topo].name;
++}
++
++CPUTopoLevel string_to_cpu_topo(char *str)
++{
++    for (int i = 0; i < ARRAY_SIZE(cpu_topo_descriptors); i++) {
++        CPUTopoInfo *info = &cpu_topo_descriptors[i];
++
++        if (!strcmp(info->name, str)) {
++            return (CPUTopoLevel)i;
++        }
++    }
++    return CPU_TOPO_LEVEL_MAX;
++}
+diff --git a/hw/core/meson.build b/hw/core/meson.build
+index 67dad04de559..3b1d5ffab3e3 100644
+--- a/hw/core/meson.build
++++ b/hw/core/meson.build
+@@ -23,6 +23,7 @@ else
+ endif
  
- DEF("smp", HAS_ARG, QEMU_OPTION_smp,
-     "-smp [[cpus=]n][,maxcpus=maxcpus][,drawers=drawers][,books=books][,sockets=sockets]\n"
--    "               [,dies=dies][,clusters=clusters][,cores=cores][,threads=threads]\n"
-+    "               [,dies=dies][,clusters=clusters][,modules=modules][,cores=cores]\n"
-+    "               [,threads=threads][,l1d-cache=level][,l1i-cache=level][,l2-cache=level]\n"
-+    "               [,l3-cache=level]\n"
-     "                set the number of initial CPUs to 'n' [default=1]\n"
-     "                maxcpus= maximum number of total CPUs, including\n"
-     "                offline CPUs for hotplug, etc\n"
-@@ -290,9 +292,14 @@ DEF("smp", HAS_ARG, QEMU_OPTION_smp,
-     "                sockets= number of sockets in one book\n"
-     "                dies= number of dies in one socket\n"
-     "                clusters= number of clusters in one die\n"
--    "                cores= number of cores in one cluster\n"
-+    "                modules= number of modules in one cluster\n"
-+    "                cores= number of cores in one module\n"
-     "                threads= number of threads in one core\n"
--    "Note: Different machines may have different subsets of the CPU topology\n"
-+    "                l1d-cache= topology level of L1 D-cache\n"
-+    "                l1i-cache= topology level of L1 I-cache\n"
-+    "                l2-cache= topology level of L2 cache\n"
-+    "                l3-cache= topology level of L3 cache\n"
-+    "Note: Different machines may have different subsets of the CPU and cache topology\n"
-     "      parameters supported, so the actual meaning of the supported parameters\n"
-     "      will vary accordingly. For example, for a machine type that supports a\n"
-     "      three-level CPU hierarchy of sockets/cores/threads, the parameters will\n"
-@@ -306,7 +313,7 @@ DEF("smp", HAS_ARG, QEMU_OPTION_smp,
-     "      must be set as 1 in the purpose of correct parsing.\n",
-     QEMU_ARCH_ALL)
- SRST
--``-smp [[cpus=]n][,maxcpus=maxcpus][,sockets=sockets][,dies=dies][,clusters=clusters][,cores=cores][,threads=threads]``
-+``-smp [[cpus=]n][,maxcpus=maxcpus][,drawers=drawers][,books=books][,sockets=sockets][,dies=dies][,clusters=clusters][,modules=modules][,cores=cores][,threads=threads][,l1d-cache=level][,l1i-cache=level][,l2-cache=level][,l3-cache=level]``
-     Simulate a SMP system with '\ ``n``\ ' CPUs initially present on
-     the machine type board. On boards supporting CPU hotplug, the optional
-     '\ ``maxcpus``\ ' parameter can be set to enable further CPUs to be
-@@ -320,15 +327,34 @@ SRST
-     Both parameters are subject to an upper limit that is determined by
-     the specific machine type chosen.
+ common_ss.add(files('cpu-common.c'))
++common_ss.add(files('cpu-topology.c'))
+ common_ss.add(files('machine-smp.c'))
+ system_ss.add(when: 'CONFIG_FITLOADER', if_true: files('loader-fit.c'))
+ system_ss.add(when: 'CONFIG_GENERIC_LOADER', if_true: files('generic-loader.c'))
+diff --git a/include/hw/core/cpu-topology.h b/include/hw/core/cpu-topology.h
+new file mode 100644
+index 000000000000..cc6ca186ce3f
+--- /dev/null
++++ b/include/hw/core/cpu-topology.h
+@@ -0,0 +1,40 @@
++/*
++ * QEMU CPU Topology Representation Header
++ *
++ * Copyright (c) 2024 Intel Corporation
++ * Author: Zhao Liu <zhao1.liu@intel.com>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License,
++ * or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, see <http://www.gnu.org/licenses/>.
++ */
++
++#ifndef CPU_TOPOLOGY_H
++#define CPU_TOPOLOGY_H
++
++typedef enum CPUTopoLevel {
++    CPU_TOPO_LEVEL_INVALID,
++    CPU_TOPO_LEVEL_THREAD,
++    CPU_TOPO_LEVEL_CORE,
++    CPU_TOPO_LEVEL_MODULE,
++    CPU_TOPO_LEVEL_CLUSTER,
++    CPU_TOPO_LEVEL_DIE,
++    CPU_TOPO_LEVEL_SOCKET,
++    CPU_TOPO_LEVEL_BOOK,
++    CPU_TOPO_LEVEL_DRAWER,
++    CPU_TOPO_LEVEL_MAX,
++} CPUTopoLevel;
++
++const char *cpu_topo_to_string(CPUTopoLevel topo);
++CPUTopoLevel string_to_cpu_topo(char *str);
++
++#endif /* CPU_TOPOLOGY_H */
+diff --git a/include/hw/i386/topology.h b/include/hw/i386/topology.h
+index dff49fce1154..c6ff75f23991 100644
+--- a/include/hw/i386/topology.h
++++ b/include/hw/i386/topology.h
+@@ -39,7 +39,7 @@
+  *  CPUID Fn8000_0008_ECX[ApicIdCoreIdSize[3:0]] is set to apicid_core_width().
+  */
  
-+    CPU topology parameters include '\ ``drawers``\ ', '\ ``books``\ ',
-+    '\ ``sockets``\ ', '\ ``dies``\ ', '\ ``clusters``\ ', '\ ``modules``\ ',
-+    '\ ``cores``\ ' and '\ ``threads``\ '. These CPU parameters accept only
-+    integers and are used to specify the number of specific topology domains
-+    under the corresponding topology level.
-+
-     To control reporting of CPU topology information, values of the topology
-     parameters can be specified. Machines may only support a subset of the
--    parameters and different machines may have different subsets supported
--    which vary depending on capacity of the corresponding CPU targets. So
--    for a particular machine type board, an expected topology hierarchy can
-+    CPU topology parameters and different machines may have different subsets
-+    supported which vary depending on capacity of the corresponding CPU targets.
-+    So for a particular machine type board, an expected topology hierarchy can
-     be defined through the supported sub-option. Unsupported parameters can
-     also be provided in addition to the sub-option, but their values must be
-     set as 1 in the purpose of correct parsing.
+-
++#include "hw/core/cpu-topology.h"
+ #include "qemu/bitops.h"
  
-+    Cache topology parameters include '\ ``l1d-cache``\ ', '\ ``l1i-cache``\ ',
-+    '\ ``l2-cache``\ ' and '\ ``l3-cache``\ '. These cache topology parameters
-+    accept the strings of CPU topology levels (such as '\ ``drawer``\ ', '\ ``book``\ ',
-+    '\ ``socket``\ ', '\ ``die``\ ', '\ ``cluster``\ ', '\ ``module``\ ',
-+    '\ ``core``\ ' or '\ ``thread``\ '). Exactly which topology level strings
-+    could be accepted as the parameter depends on the machine's support for the
-+    corresponding CPU topology level.
-+
-+    Machines may also only support a subset of the cache topology parameters.
-+    Unsupported cache topology parameters will be omitted, and correspondingly,
-+    the target CPU's cache topology will use the its default cache topology
-+    setting.
-+
-     Either the initial CPU count, or at least one of the topology parameters
-     must be specified. The specified parameters must be greater than zero,
-     explicit configuration like "cpus=0" is not allowed. Values for any
-@@ -354,6 +380,20 @@ SRST
+ /*
+@@ -62,22 +62,6 @@ typedef struct X86CPUTopoInfo {
+     unsigned threads_per_core;
+ } X86CPUTopoInfo;
  
-         -smp 32,sockets=2,dies=2,modules=2,cores=2,threads=2,maxcpus=32
+-/*
+- * CPUTopoLevel is the general i386 topology hierarchical representation,
+- * ordered by increasing hierarchical relationship.
+- * Its enumeration value is not bound to the type value of Intel (CPUID[0x1F])
+- * or AMD (CPUID[0x80000026]).
+- */
+-enum CPUTopoLevel {
+-    CPU_TOPO_LEVEL_INVALID,
+-    CPU_TOPO_LEVEL_SMT,
+-    CPU_TOPO_LEVEL_CORE,
+-    CPU_TOPO_LEVEL_MODULE,
+-    CPU_TOPO_LEVEL_DIE,
+-    CPU_TOPO_LEVEL_PACKAGE,
+-    CPU_TOPO_LEVEL_MAX,
+-};
+-
+ /* Return the bit width needed for 'count' IDs */
+ static unsigned apicid_bitwidth_for_count(unsigned count)
+ {
+diff --git a/target/i386/cpu.c b/target/i386/cpu.c
+index ac0a10abd45f..725d7e70182d 100644
+--- a/target/i386/cpu.c
++++ b/target/i386/cpu.c
+@@ -247,7 +247,7 @@ static uint32_t max_thread_ids_for_cache(X86CPUTopoInfo *topo_info,
+     case CPU_TOPO_LEVEL_DIE:
+         num_ids = 1 << apicid_die_offset(topo_info);
+         break;
+-    case CPU_TOPO_LEVEL_PACKAGE:
++    case CPU_TOPO_LEVEL_SOCKET:
+         num_ids = 1 << apicid_pkg_offset(topo_info);
+         break;
+     default:
+@@ -304,7 +304,7 @@ static uint32_t num_threads_by_topo_level(X86CPUTopoInfo *topo_info,
+                                           enum CPUTopoLevel topo_level)
+ {
+     switch (topo_level) {
+-    case CPU_TOPO_LEVEL_SMT:
++    case CPU_TOPO_LEVEL_THREAD:
+         return 1;
+     case CPU_TOPO_LEVEL_CORE:
+         return topo_info->threads_per_core;
+@@ -313,7 +313,7 @@ static uint32_t num_threads_by_topo_level(X86CPUTopoInfo *topo_info,
+     case CPU_TOPO_LEVEL_DIE:
+         return topo_info->threads_per_core * topo_info->cores_per_module *
+                topo_info->modules_per_die;
+-    case CPU_TOPO_LEVEL_PACKAGE:
++    case CPU_TOPO_LEVEL_SOCKET:
+         return topo_info->threads_per_core * topo_info->cores_per_module *
+                topo_info->modules_per_die * topo_info->dies_per_pkg;
+     default:
+@@ -326,7 +326,7 @@ static uint32_t apicid_offset_by_topo_level(X86CPUTopoInfo *topo_info,
+                                             enum CPUTopoLevel topo_level)
+ {
+     switch (topo_level) {
+-    case CPU_TOPO_LEVEL_SMT:
++    case CPU_TOPO_LEVEL_THREAD:
+         return 0;
+     case CPU_TOPO_LEVEL_CORE:
+         return apicid_core_offset(topo_info);
+@@ -334,7 +334,7 @@ static uint32_t apicid_offset_by_topo_level(X86CPUTopoInfo *topo_info,
+         return apicid_module_offset(topo_info);
+     case CPU_TOPO_LEVEL_DIE:
+         return apicid_die_offset(topo_info);
+-    case CPU_TOPO_LEVEL_PACKAGE:
++    case CPU_TOPO_LEVEL_SOCKET:
+         return apicid_pkg_offset(topo_info);
+     default:
+         g_assert_not_reached();
+@@ -347,7 +347,7 @@ static uint32_t cpuid1f_topo_type(enum CPUTopoLevel topo_level)
+     switch (topo_level) {
+     case CPU_TOPO_LEVEL_INVALID:
+         return CPUID_1F_ECX_TOPO_LEVEL_INVALID;
+-    case CPU_TOPO_LEVEL_SMT:
++    case CPU_TOPO_LEVEL_THREAD:
+         return CPUID_1F_ECX_TOPO_LEVEL_SMT;
+     case CPU_TOPO_LEVEL_CORE:
+         return CPUID_1F_ECX_TOPO_LEVEL_CORE;
+@@ -380,7 +380,7 @@ static void encode_topo_cpuid1f(CPUX86State *env, uint32_t count,
+     level = CPU_TOPO_LEVEL_INVALID;
+     for (int i = 0; i <= count; i++) {
+         level = find_next_bit(env->avail_cpu_topo,
+-                              CPU_TOPO_LEVEL_PACKAGE,
++                              CPU_TOPO_LEVEL_SOCKET,
+                               level + 1);
  
-+    The following sub-option defines a CPU topology hierarchy (2 sockets
-+    totally on the machine, 2 dies per socket, 2 modules per die, 2 cores per
-+    module, 2 threads per core) with 3-level cache topology hierarchy (L1
-+    D-cache per core, L1 I-cache per core, L2 cache per core and L3 cache per
-+    die) for PC machines which support sockets/dies/modules/cores/threads.
-+    Some members of the CPU topology option can be omitted but their values
-+    will be automatically computed. Some members of the cache topology
-+    option can also be omitted and target CPU will use the default topology.:
-+
-+    ::
-+
-+        -smp 32,sockets=2,dies=2,modules=2,cores=2,threads=2,maxcpus=32,\
-+             l1d-cache=core,l1i-cache=core,l2-cache=core,l3-cache=die
-+
-     The following sub-option defines a CPU topology hierarchy (2 sockets
-     totally on the machine, 2 clusters per socket, 2 cores per cluster,
-     2 threads per core) for ARM virt machines which support sockets/clusters
+         /*
+@@ -388,7 +388,7 @@ static void encode_topo_cpuid1f(CPUX86State *env, uint32_t count,
+          * and it just encode the invalid level (all fields are 0)
+          * into the last subleaf of 0x1f.
+          */
+-        if (level == CPU_TOPO_LEVEL_PACKAGE) {
++        if (level == CPU_TOPO_LEVEL_SOCKET) {
+             level = CPU_TOPO_LEVEL_INVALID;
+             break;
+         }
+@@ -401,7 +401,7 @@ static void encode_topo_cpuid1f(CPUX86State *env, uint32_t count,
+         unsigned long next_level;
+ 
+         next_level = find_next_bit(env->avail_cpu_topo,
+-                                   CPU_TOPO_LEVEL_PACKAGE,
++                                   CPU_TOPO_LEVEL_SOCKET,
+                                    level + 1);
+         num_threads_next_level = num_threads_by_topo_level(topo_info,
+                                                            next_level);
+@@ -6290,7 +6290,7 @@ void cpu_x86_cpuid(CPUX86State *env, uint32_t index, uint32_t count,
+ 
+                     /* Share the cache at package level. */
+                     *eax |= max_thread_ids_for_cache(&topo_info,
+-                                CPU_TOPO_LEVEL_PACKAGE) << 14;
++                                CPU_TOPO_LEVEL_SOCKET) << 14;
+                 }
+             }
+         } else if (cpu->vendor_cpuid_only && IS_AMD_CPU(env)) {
+@@ -7756,9 +7756,9 @@ static void x86_cpu_init_default_topo(X86CPU *cpu)
+     env->nr_dies = 1;
+ 
+     /* SMT, core and package levels are set by default. */
+-    set_bit(CPU_TOPO_LEVEL_SMT, env->avail_cpu_topo);
++    set_bit(CPU_TOPO_LEVEL_THREAD, env->avail_cpu_topo);
+     set_bit(CPU_TOPO_LEVEL_CORE, env->avail_cpu_topo);
+-    set_bit(CPU_TOPO_LEVEL_PACKAGE, env->avail_cpu_topo);
++    set_bit(CPU_TOPO_LEVEL_SOCKET, env->avail_cpu_topo);
+ }
+ 
+ static void x86_cpu_initfn(Object *obj)
+diff --git a/target/i386/cpu.h b/target/i386/cpu.h
+index 4b4cc70c8859..fcbf278b49e6 100644
+--- a/target/i386/cpu.h
++++ b/target/i386/cpu.h
+@@ -1596,7 +1596,7 @@ typedef struct CPUCacheInfo {
+      * Used to encode CPUID[4].EAX[bits 25:14] or
+      * CPUID[0x8000001D].EAX[bits 25:14].
+      */
+-    enum CPUTopoLevel share_level;
++    CPUTopoLevel share_level;
+ } CPUCacheInfo;
+ 
+ 
+diff --git a/tests/unit/meson.build b/tests/unit/meson.build
+index cae925c13259..4fe0aaff3a5e 100644
+--- a/tests/unit/meson.build
++++ b/tests/unit/meson.build
+@@ -138,7 +138,8 @@ if have_system
+     'test-util-sockets': ['socket-helpers.c'],
+     'test-base64': [],
+     'test-bufferiszero': [],
+-    'test-smp-parse': [qom, meson.project_source_root() / 'hw/core/machine-smp.c'],
++    'test-smp-parse': [qom, meson.project_source_root() / 'hw/core/machine-smp.c',
++                       meson.project_source_root() / 'hw/core/cpu-topology.c'],
+     'test-vmstate': [migration, io],
+     'test-yank': ['socket-helpers.c', qom, io, chardev]
+   }
 -- 
 2.34.1
 
