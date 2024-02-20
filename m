@@ -4,80 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD5CDC54764
-	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Feb 2024 06:51:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26007C54764
+	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Feb 2024 08:55:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rcJxO-0002gH-Mq; Tue, 20 Feb 2024 01:50:22 -0500
+	id 1rcLsa-0000SG-V3; Tue, 20 Feb 2024 03:53:32 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <xiaobo55x@gmail.com>)
- id 1rcJxM-0002fk-VC; Tue, 20 Feb 2024 01:50:20 -0500
-Received: from mail-lj1-x22a.google.com ([2a00:1450:4864:20::22a])
+ (Exim 4.90_1) (envelope-from <manos.pitsidianakis@linaro.org>)
+ id 1rcLsX-0000Ma-A7
+ for qemu-riscv@nongnu.org; Tue, 20 Feb 2024 03:53:29 -0500
+Received: from mail-lf1-x12f.google.com ([2a00:1450:4864:20::12f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <xiaobo55x@gmail.com>)
- id 1rcJxK-0004t2-T0; Tue, 20 Feb 2024 01:50:20 -0500
-Received: by mail-lj1-x22a.google.com with SMTP id
- 38308e7fff4ca-2d21a68dd3bso47669961fa.1; 
- Mon, 19 Feb 2024 22:50:15 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <manos.pitsidianakis@linaro.org>)
+ id 1rcLsU-0008EC-32
+ for qemu-riscv@nongnu.org; Tue, 20 Feb 2024 03:53:29 -0500
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-512a65cd2c7so3257150e87.0
+ for <qemu-riscv@nongnu.org>; Tue, 20 Feb 2024 00:53:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1708411814; x=1709016614; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1708419204; x=1709024004; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jerEFqeV8dlegpb7wXd2GUyRoRNtR5Zj2wny2aiCEz8=;
- b=DUzn6RRWLtDBEJ5xSPz1cdKRoPnRAZWoWhu9g6gNX1LCcedfnNOnxOgGI5KWmKuKkP
- sg8bTpG2ko8bCedSzaIoaV6PW8xEH34BBFR00UgQQM5c5N1fmZnnKdqKX8FbnwCRSw+p
- x4XOPpZ96EP8tSuAQstEuaeBc35ckDgZACPPZCuor2PX7F9bLQIhaVoJc+PSiigz9sgc
- PXzdNADLeN64rc81yu6wVT1qMEJhZKP0wYP6IqDWrM+TXHHgLcUqn0yYiRVZ41eu3SuE
- v4FvaZ0IbKoVxv59q0Uioarig7lhvu1YAQmYWw+Uzhry3UNw6rjI1DPp2HmCC8d9o0Kj
- VqsA==
+ bh=MvdV9IUyScfXO/aRp9jIGXOMeWvG9ot2GraQaMTkQfY=;
+ b=dzV2vMc+QOtvV4BfBPrvWTL0rxE2c/3icEwOm4Eb3FH6vRY8mHK7xCWxbPr9GP3+iL
+ L2YfUb1SmyEiHeE9Ow7NznSHyAW9pBrVIakFC3riGnWz4n2xwKKX6ojhPx3FNut7zh3M
+ Dfrf1hMejt8KL+yR4erlSq/vjeWw+zGDerrAaSyfiIKA4rs7fQit4RjYxzuT6BQzM90l
+ ku/04+CzZMRPw2gcLQR1f+/EiRZR9Vnxh5/Fy2Wg8LfqFGGdmsGLWE/6vdwD1+gA0zxL
+ k/eX2V4hUANz2nlM0KRtZVcVPmQbUsMPLlcIRD/L2Z3HCppa/FwaNxGYO0LF2a5tM7D/
+ aaZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708411814; x=1709016614;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1708419204; x=1709024004;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jerEFqeV8dlegpb7wXd2GUyRoRNtR5Zj2wny2aiCEz8=;
- b=Ss9x2o5bf/U5M8AFoX8fnNumyo3m2nzLgwexfm2Go1Xb0S/zGZKD0Wq9hYWdbwgKUH
- VVS2k9tMeKiGFDHPHwhrm/pFcCJ+x/bcsVZi/9N41Ea+mz4zOTQQbdWdpbbwHE6oEnzD
- 7JuZUWHax5e9wIoggHabPouO7/XNumLq73GfT5VY/4sA7S8YYSZXtAXFclqSqP3n6rTH
- PpDsaF6ChYhN/43cViti8YaUqtWCJJE3Gi2Z8jj0Crj/ayllNeSol/+ikxdMiZRlPHT3
- Av5n/Y01dCVab4JUFcp4wpxayaQSYLUefYORphdBUVPctzrUkF0edJviXdV+TJiwyuF/
- KP9A==
+ bh=MvdV9IUyScfXO/aRp9jIGXOMeWvG9ot2GraQaMTkQfY=;
+ b=GNjgwF3mFXD/KoiSybpzaOLKmwa17rTdlJRP8eoMeUGAQ2kJw0+HfilCpf9ME4KTvI
+ wWOlMdp3rse8FmDgojTJk3QlJcrGxxs/jibAwEqFWqWHva5fJbKCmAnYDePy66ruDQQy
+ +dPQuhcKu3nJJkn1UgErJ47yW8/jrWLqQQ9lKeOJPNfo4FrzxAI/aul1chVn375pAYgA
+ XzPbskroh4AqWuMCIgnUO/A9tO8bJpH1lTKGts4UHOdiVv05cSmLKpvLx8O1oqMOXibX
+ FrNuxrhO+AFyrHm0JLDBHtqvFM+KW+10fpTW7BXMptjTWSLT2d9CnayEedmiJloMeXRs
+ jUZw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWK0UXOPRZioE62DowZaa1IfUkLCq9FzGs5OTmlYvPvllgWHgzZn7m3t26l/0D4N2DxxWnmvi/LMOC0gO8WQIRWl1hJ6o+V3TKwHdQMnlyoTMGs6IoAd9C8BlQOcg==
-X-Gm-Message-State: AOJu0YydlRLWMEhTqIpUPuNV56TBguEaLuPjPTyoiLxRoXIDVJ8dhxwc
- iZ2YPn83V9d3S+NORdNuzymIUQPBQAE7ODA+frxlY43TmKySSvZvJgABEA/BCyFVBO6BuUW/AuT
- hwgyT2+6AMkkEliuVjbPe4nQlK8M=
-X-Google-Smtp-Source: AGHT+IEM4BgDbXD68XOHYEmQa7kX5zqJ4ZYWEDmZULvjDApSBpS7FACKXhbstN3sI6W0tZzgPc6srKotMOEbJtUkpgk=
-X-Received: by 2002:a2e:a54a:0:b0:2d2:4cb2:59e4 with SMTP id
- e10-20020a2ea54a000000b002d24cb259e4mr360965ljn.31.1708411813798; Mon, 19 Feb
- 2024 22:50:13 -0800 (PST)
+ AJvYcCUBv/jOqSGKQOZLfpBYUNZ930hZUKWM1abfB9XlkDJvtDQoCXmPM1u4JYPPgm9t5tvuUYXZ+IGpEh/4g8lo/+WhU56vmn0=
+X-Gm-Message-State: AOJu0YykyrMBD/KqJJCm9P0ox15mhCVzdFBQOcbNwSDDG19RyaAVGSwh
+ dPSJ7zLxEXvgMz3OfzPctWbviE/IB1gOyCEfLk2E/nzM5upx+KL4FX1MeH2wsaA=
+X-Google-Smtp-Source: AGHT+IEbySSjHls8NAbeQTB2ZfhggNPAIhoEucwffA6V5Q2r6kGdNic7nNDc9SWPtQ5Y0X9uH6FaMg==
+X-Received: by 2002:ac2:5dee:0:b0:512:a987:13ee with SMTP id
+ z14-20020ac25dee000000b00512a98713eemr4549873lfq.50.1708419204300; 
+ Tue, 20 Feb 2024 00:53:24 -0800 (PST)
+Received: from localhost.localdomain (adsl-245.37.6.163.tellas.gr.
+ [37.6.163.245]) by smtp.gmail.com with ESMTPSA id
+ cu3-20020a170906ba8300b00a3d014fa12esm3747876ejd.196.2024.02.20.00.53.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 20 Feb 2024 00:53:24 -0800 (PST)
+From: Manos Pitsidianakis <manos.pitsidianakis@linaro.org>
+To: qemu-trivial@nongnu.org
+Cc: qemu-devel@nongnu.org, Michael Tokarev <mjt@tls.msk.ru>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org
+Subject: [PATCH v1 13/21] hw/riscv/virt.h: correct typos
+Date: Tue, 20 Feb 2024 10:52:20 +0200
+Message-Id: <c391076e9958561b3294ba922e69e38d36b8a9b5.1708419115.git.manos.pitsidianakis@linaro.org>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <cover.1708419115.git.manos.pitsidianakis@linaro.org>
+References: <cover.1708419115.git.manos.pitsidianakis@linaro.org>
 MIME-Version: 1.0
-References: <20240129094200.3581037-1-haibo1.xu@intel.com>
- <20240129-57c26b01f7115ac2706d7c8d@orel>
- <CAJve8onHNCDx_QZKi=AtvpAJjnEWu+X==GrmXb30a=+e=WOLbg@mail.gmail.com>
-In-Reply-To: <CAJve8onHNCDx_QZKi=AtvpAJjnEWu+X==GrmXb30a=+e=WOLbg@mail.gmail.com>
-From: Haibo Xu <xiaobo55x@gmail.com>
-Date: Tue, 20 Feb 2024 14:50:02 +0800
-Message-ID: <CAJve8o=kxLck5qJVXi_WDf2QYM8H=7CFDc11WdYnGyyGD+TuAw@mail.gmail.com>
-Subject: Re: [PATCH] hw/riscv/virt-acpi-build.c: Add SRAT and SLIT ACPI tables
-To: Andrew Jones <ajones@ventanamicro.com>
-Cc: Haibo Xu <haibo1.xu@intel.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, 
- sunilvl@ventanamicro.com, palmer@dabbelt.com, bin.meng@windriver.com, 
- liwei1518@gmail.com, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
- alistair.francis@wdc.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::22a;
- envelope-from=xiaobo55x@gmail.com; helo=mail-lj1-x22a.google.com
+Content-Type: text/plain; charset=UTF8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::12f;
+ envelope-from=manos.pitsidianakis@linaro.org; helo=mail-lf1-x12f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -95,143 +101,35 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-++Alistair.
+Correct typos automatically found with the `typos` tool
+<https://crates.io/crates/typos>
 
-Sorry for that! It seems some typo or paste issue occurred when
-pushing the patch.
+Signed-off-by: Manos Pitsidianakis <manos.pitsidianakis@linaro.org>
+---
+ include/hw/riscv/virt.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Hi Alistair,
+diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+index f89790fd58..3db839160f 100644
+--- a/include/hw/riscv/virt.h
++++ b/include/hw/riscv/virt.h
+@@ -144,13 +144,13 @@ uint32_t imsic_num_bits(uint32_t count);
+ #define VIRT_IMSIC_GROUP_MAX_SIZE      (1U << IMSIC_MMIO_GROUP_MIN_SHIFT)
+ #if VIRT_IMSIC_GROUP_MAX_SIZE < \
+     IMSIC_GROUP_SIZE(VIRT_CPUS_MAX_BITS, VIRT_IRQCHIP_MAX_GUESTS_BITS)
+-#error "Can't accomodate single IMSIC group in address space"
++#error "Can't accommodate single IMSIC group in address space"
+ #endif
+ 
+ #define VIRT_IMSIC_MAX_SIZE            (VIRT_SOCKETS_MAX * \
+                                         VIRT_IMSIC_GROUP_MAX_SIZE)
+ #if 0x4000000 < VIRT_IMSIC_MAX_SIZE
+-#error "Can't accomodate all IMSIC groups in address space"
++#error "Can't accommodate all IMSIC groups in address space"
+ #endif
+ 
+ #endif
+-- 
+γαῖα πυρί μιχθήτω
 
-Could you help review this patch?
-
-Thanks,
-Haibo
-
-On Mon, Jan 29, 2024 at 7:37=E2=80=AFPM Haibo Xu <xiaobo55x@gmail.com> wrot=
-e:
->
-> On Mon, Jan 29, 2024 at 5:47=E2=80=AFPM Andrew Jones <ajones@ventanamicro=
-.com> wrote:
-> >
-> > On Mon, Jan 29, 2024 at 05:42:00PM +0800, Haibo Xu wrote:
-> > > Enable ACPI NUMA support by adding the following 2 ACPI tables:
-> > > SRAT: provides the association for memory/Harts and Proximity Domains
-> > > SLIT: provides the relative distance between Proximity Domains
-> > >
-> > > The SRAT RINTC Affinity Structure definition[1] was based on the rece=
-ntly
-> > > approved ACPI CodeFirst ECR[2].
-> > >
-> > > [1] https://github.com/riscv-non-isa/riscv-acpi/issues/25
-> > > [2] https://mantis.uefi.org/mantis/view.php?id=3D2433
-> > >
-> > > Signed-off-by: Haibo Xu <haibo1.xu@intel.com>
-> > > ---
-> > >  hw/riscv/virt-acpi-build.c | 60 ++++++++++++++++++++++++++++++++++++=
-++
-> > >  1 file changed, 60 insertions(+)
-> > >
-> > > diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
-> > > index 26c7e4482d..f0a6b61747 100644
-> > > --- a/hw/riscv/virt-acpi-build.c
-> > > +++ b/hw/riscv/virt-acpi-build.c
-> > > @@ -528,11 +528,61 @@ static void build_madt(GArray *table_data,
-> > >      acpi_table_end(linker, &table);
-> > >  }
-> > >
-> > > +/*
-> > > + * ACPI spec, Revision 6.5+
-> > > + * 5.2.16 System Resource Affinity Table (SRAT)
-> > > + * REF: https://github.com/riscv-non-isa/riscv-acpi/issues/25
-> > > + *      https://drive.google.com/file/d/1YTdDx2IPm5IeZjAW932EYU-tUtg=
-S08tX/view
-> > > + */
-> > > +static void
-> > > +build_srat(GArray *table_data, BIOSLinker *linker, RISCVVirtState *v=
-ms)
-> > > +{
-> > > +    int i;
-> > > +    uint64_t mem_base;
-> > > +    MachineClass *mc =3D MACHINE_GET_CLASS(vms);
-> > > +    MachineState *ms =3D MACHINE(vms);
-> > > +    const CPUArchIdList *cpu_list =3D mc->possible_cpu_arch_ids(ms);
-> > > +    AcpiTable table =3D { .sig =3D "SRAT", .rev =3D 3, .oem_id =3D v=
-ms->oem_id,
-> > > +                        .oem_table_id =3D vms->oem_table_id };
-> > > +
-> > > +    acpi_table_begin(&table, table_data);
-> > > +    build_append_int_noprefix(table_data, 1, 4); /* Reserved */
-> > > +    build_append_int_noprefix(table_data, 0, 8); /* Reserved */
-> > > +
-> > > +    for (i =3D 0; i < cpu_list->len; ++i) {
-> > > +        uint32_t nodeid =3D cpu_list->cpus[i].props.node_id;
-> > > +        /*
-> > > +         * 5.2.16.8 RINTC Affinity Structure
-> > > +         */
-> > > +        build_append_int_noprefix(table_data, 7, 1);      /* Type */
-> > > +        build_append_int_noprefix(table_data, 20, 1);     /* Length =
-*/
-> > > +        build_append_int_noprefix(table_data, 0, 2);        /* Reser=
-ved */
-> > > +        build_append_int_noprefix(table_data, nodeid, 4); /* Proximi=
-ty Domain */
-> > > +        build_append_int_noprefix(table_data, i, 4); /* ACPI Process=
-or UID */
-> > > +        /* Flags, Table 5-70 */
-> > > +        build_append_int_noprefix(table_data, 1 /* Flags: Enabled */=
-, 4);
-> > > +        build_append_int_noprefix(table_data, 0, 4); /* Clock Domain=
- */
-> > > +    }
-> > > +
-> > > +    mem_base =3D vms->memmap[VIRT_DRAM].base;
-> > > +    for (i =3D 0; i < ms->numa_state->num_nodes; ++i) {
-> > > +        if (ms->numa_state->nodes[i].node_mem > 0) {
-> > > +            build_srat_memory(table_data, mem_base,
-> > > +                              ms->numa_state->nodes[i].node_mem, i,
-> > > +                              MEM_AFFINITY_ENABLED);
-> > > +            mem_base +=3D ms->numa_state->nodes[i].node_mem;
-> > > +        }
-> > > +    }
-> > > +
-> > > +    acpi_table_end(linker, &table);
-> > > +}
-> > > +
-> > >  static void virt_acpi_build(RISCVVirtState *s, AcpiBuildTables *tabl=
-es)
-> > >  {
-> > >      GArray *table_offsets;
-> > >      unsigned dsdt, xsdt;
-> > >      GArray *tables_blob =3D tables->table_data;
-> > > +    MachineState *ms =3D MACHINE(s);
-> > >
-> > >      table_offsets =3D g_array_new(false, true,
-> > >                                  sizeof(uint32_t));
-> > > @@ -565,6 +615,16 @@ static void virt_acpi_build(RISCVVirtState *s, A=
-cpiBuildTables *tables)
-> > >                     s->oem_table_id);
-> > >      }
-> > >
-> > > +    if (ms->numa_state->num_nodes > 0) {
-> > > +        acpi_add_table(table_offsets, tables_blob);
-> > > +        build_srat(tables_blob, tables->linker, s);
-> > > +        if (ms->numa_state->have_numa_distance) {
-> > > +            acpi_add_table(table_offsets, tables_blob);
-> > > +            build_slit(tables_blob, tables->linker, ms, s->oem_id,
-> > > +                       s->oem_table_id);
-> > > +        }
-> > > +    }
-> > > +
-> > >      /* XSDT is pointed to by RSDP */
-> > >      xsdt =3D tables_blob->len;
-> > >      build_xsdt(tables_blob, tables->linker, table_offsets, s->oem_id=
-,
-> > > --
-> > > 2.34.1
-> > >
-> > >
-> >
-> > Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
->
-> Thanks for the review, Andrew!
 
