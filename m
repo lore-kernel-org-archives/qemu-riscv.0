@@ -4,89 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EF70C5478A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Feb 2024 17:10:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB9DFC48BEB
+	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Feb 2024 17:26:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rcq6M-0002Hm-6T; Wed, 21 Feb 2024 12:09:46 -0500
+	id 1rcqM2-0008F8-2K; Wed, 21 Feb 2024 12:25:58 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rcq6K-0002Aq-51
- for qemu-riscv@nongnu.org; Wed, 21 Feb 2024 12:09:44 -0500
-Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
+ id 1rcqM0-0008CC-JZ
+ for qemu-riscv@nongnu.org; Wed, 21 Feb 2024 12:25:56 -0500
+Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rcq6H-0005kA-3e
- for qemu-riscv@nongnu.org; Wed, 21 Feb 2024 12:09:43 -0500
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-1d8da50bffaso35449465ad.2
- for <qemu-riscv@nongnu.org>; Wed, 21 Feb 2024 09:09:38 -0800 (PST)
+ id 1rcqLx-0001Bi-LK
+ for qemu-riscv@nongnu.org; Wed, 21 Feb 2024 12:25:56 -0500
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-1d953fa3286so46725195ad.2
+ for <qemu-riscv@nongnu.org>; Wed, 21 Feb 2024 09:25:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1708535377; x=1709140177; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1708536351; x=1709141151; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=YfL7cBA2MxklBcazFZ6/g0zy0GOnL3nvfP1PZytwtv0=;
- b=k7HtaUTL8kxe9fjyFijCnABaktMmtXrDJKy0zUQD4tWSF9Fe/3uiMtA2PvchqbsWvH
- Q9r6YqXnu9Tipny3qcq8Aoi1gS/FMnONU3Bz5A27GDjwlBZaqtSjDT0CIjK069af/Kzz
- /s6X4Q6MO6adOKbIfKHoTmpJC2eLnXo4JPfNacEvoRv4Z5UE4sMiUBKeFaHpoWooaLQV
- XO3SQhsT/scOS3tXw53snvBSoKYTk6WpmTvmByIDEMjj6sXF/Hqs+zNLVfnm9aq8Ikuh
- 3EUL7MZ8rm8NCAd3f+Thr6sZ0r9D7vemAf7gdjMPN8IcrqYlHjikif8ukoWNQjPEEQyF
- G6Tw==
+ bh=/XwhC+KfPAJsGVSX29D1cLKRWy6NmiBSvHsmRxAD9qU=;
+ b=AhtLQIA+GvxjdG/i365/VUHO1osrzNxkzIJoF1+B8/Hp2kzJA6bVTh+apu0NCO3VR1
+ FtUUsZ7BcuEnH68Fd/YEzPvH9g7XNxSfWMGvV70GYE54H4OrEOWdlVxpW/9s8aSKG8EQ
+ QufHr+hpCg3ZnFTLthIV3qKpfeMqdspW33kxSm1lky+Y9Ql5ZIl1onmPeChgrIy7+A/+
+ WHyVGKQ9VoH2B5Erl+Or2MgOdJ5biIDnslBJjNSXTPMOPF73XUcOOIbUZoUVnp1azQiS
+ pWzYgajo2jRAleL4/G+rD9ED08rKGInoTm1UDknuD1BF5KbqbHO/Om5re0yt1Y1OS1j6
+ jfcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708535377; x=1709140177;
+ d=1e100.net; s=20230601; t=1708536351; x=1709141151;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=YfL7cBA2MxklBcazFZ6/g0zy0GOnL3nvfP1PZytwtv0=;
- b=wutLTdy7sXnFZDod+kYxBjz8T5iyTyOgfJQobXg8s/r0Pt9wWD96adWQp88I0R7H2c
- qkNJ9VSj93Lt3rI0IDLjxr5Kn6VYalRUcDkOQ+/Jx08RvFnteg8glbfxuL46lFv5s7mn
- G6oyTKGD3jOCRrrl5sS3+NCdkAIJ6euxM4OuRyGqphfw8Vkl5TZv+Vwbtz0bMU7Yq6Sr
- xl+PCjvffelhrpvrYU1LIVPcCx8OpARhk7dvDe4zHPlDTEwZaoWnC3mfrK0NOcKbwjIZ
- 9EjLay/bc6nInCYxPP6Ct3NhuT7+N0pgVVADz6BIY4fyHQ76qQQYX8zyAzhUSz2vuSRy
- sZ5g==
+ bh=/XwhC+KfPAJsGVSX29D1cLKRWy6NmiBSvHsmRxAD9qU=;
+ b=S9XKbqYv4SPBmdkhY8IBEnvmNHJH+WGIrQbeeHj1PiCHRgRdCIH5v8NRd47Gu0Z4/a
+ 2DJL+8e1DXi1i/P1ATCLZ+vFHPu41b6EHfUNpgo19PVGnq6u9gNtUi4jkGRKCKPu2BaO
+ iUDVJunivuK2WxG0c8yp4Zb/6fvBMBr/5hX+GMkfPLaer+4nEUStNhQad8w5mx4Uoo1o
+ h0O6z4OipVbJrN4kC5zJmiv389QmOVjW2WrqfZjZ6m8BZyOCO/8bmSvb1Q0B1CK7FBay
+ 3iaQx2DUTYaXFRHGFbKXp+5+L3JFkqbaScnT8ChsCN4ec2WqkEwXU+9ASVVdGeviuGRj
+ xiAw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW2lE38/bTLEAzQ5N79nQY8fLRSkzJdfFt67RGAYDzuaQnaC1pVm4XI+HeHwp7fAR/pZfmB2iq4OwE8yNK9iqh/ILvyluQ=
-X-Gm-Message-State: AOJu0Yxuhp7HTYS0RYN988BZB3aGGEeZM6mV0lo+coym3Qz0IUwNs/Wl
- HbEgBpM7k08tyJ+P8yxyS3JULAat0bI1BdaVc1gWHK1H7M5mLBKswScqxhSffBqQhQBE3PzkRnr
- t
-X-Google-Smtp-Source: AGHT+IF+CtVmmDfxlCOhZzD0tZ5s4tvqNCYHmTEvQHeBr033MQLY6vO3rj+oHw7rlaEZuQeNqg8Hgg==
-X-Received: by 2002:a17:903:2b0d:b0:1dc:7ca:36de with SMTP id
- mc13-20020a1709032b0d00b001dc07ca36demr8909838plb.9.1708535377135; 
- Wed, 21 Feb 2024 09:09:37 -0800 (PST)
+ AJvYcCUIqat5cBggp0KbnkNrdIFo6noTjDPZxN77Lyliy99Yk8Rwu/d2P272ssNguTuC331YZJ+zF+FX1cUP5CsUxLceVT6eZqs=
+X-Gm-Message-State: AOJu0YziVtPdRP1KtJQwFuMTqYF9KUsBJmB/uGdS3ytfWxafNWLFIgDW
+ N4CHKfosTyDI+YdbfHOR8oCquGB7G5qsknUOPCGg/b7l/hJZ2il4VApm8D5zcSU=
+X-Google-Smtp-Source: AGHT+IFpYltHIzGvdA943cqGDYZA9E7lmr9ynlKv3jtrv5tiFJLjupfiiIthKkdRAm7RvWCOvH3YWw==
+X-Received: by 2002:a17:903:2cd:b0:1dc:3e49:6795 with SMTP id
+ s13-20020a17090302cd00b001dc3e496795mr1309079plk.47.1708536351071; 
+ Wed, 21 Feb 2024 09:25:51 -0800 (PST)
 Received: from [192.168.68.110] ([177.94.15.159])
  by smtp.gmail.com with ESMTPSA id
- jd20-20020a170903261400b001d94a3f3987sm8290329plb.184.2024.02.21.09.09.34
+ j6-20020a17090276c600b001db693d89fdsm8310055plt.179.2024.02.21.09.25.48
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 21 Feb 2024 09:09:36 -0800 (PST)
-Message-ID: <eff4982a-2952-4979-af88-303e49ae837f@ventanamicro.com>
-Date: Wed, 21 Feb 2024 14:09:32 -0300
+ Wed, 21 Feb 2024 09:25:50 -0800 (PST)
+Message-ID: <801fb2e4-bb09-47e9-b7f6-899de574c4a3@ventanamicro.com>
+Date: Wed, 21 Feb 2024 14:25:46 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] target/riscv: Add functions for common matching
- conditions of trigger
+Subject: Re: [PATCH 2/4] target/riscv: Apply modularized matching conditions
+ for breakpoint
 Content-Language: en-US
 To: Alvin Chang <alvinga@andestech.com>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
 Cc: alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com
 References: <20240219032559.79665-1-alvinga@andestech.com>
- <20240219032559.79665-2-alvinga@andestech.com>
+ <20240219032559.79665-3-alvinga@andestech.com>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240219032559.79665-2-alvinga@andestech.com>
+In-Reply-To: <20240219032559.79665-3-alvinga@andestech.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x633.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x634.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,107 +104,92 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 On 2/19/24 00:25, Alvin Chang wrote:
-> According to RISC-V Debug specification, there are several common
-> matching conditions before firing a trigger, including the enabled
-> privilege levels of the trigger.
+> We have implemented trigger_common_match(), which checks if the enabled
+> privilege levels of the trigger match CPU's current privilege level.
+> Remove the related code in riscv_cpu_debug_check_breakpoint() and invoke
+> trigger_common_match() to check the privilege levels of the type 2 and
+> type 6 triggers for the breakpoints.
 > 
-> This commit adds trigger_common_match() to prepare the common matching
-> conditions for the type 2/3/6 triggers. For now, we just implement
-> trigger_priv_match() to check if the enabled privilege levels of the
-> trigger match CPU's current privilege level.
+> Only the execution bit and the executed PC should be futher checked in
+
+typo: further
+
+> riscv_cpu_debug_check_breakpoint().
 > 
 > Signed-off-by: Alvin Chang <alvinga@andestech.com>
 > ---
->   target/riscv/debug.c | 70 ++++++++++++++++++++++++++++++++++++++++++++
->   1 file changed, 70 insertions(+)
+>   target/riscv/debug.c | 26 ++++++--------------------
+>   1 file changed, 6 insertions(+), 20 deletions(-)
 > 
 > diff --git a/target/riscv/debug.c b/target/riscv/debug.c
-> index e30d99cc2f..7932233073 100644
+> index 7932233073..b971ed5d7a 100644
 > --- a/target/riscv/debug.c
 > +++ b/target/riscv/debug.c
-> @@ -241,6 +241,76 @@ static void do_trigger_action(CPURISCVState *env, target_ulong trigger_index)
->       }
->   }
+> @@ -855,21 +855,17 @@ bool riscv_cpu_debug_check_breakpoint(CPUState *cs)
+>           for (i = 0; i < RV_MAX_TRIGGERS; i++) {
+>               trigger_type = get_trigger_type(env, i);
 >   
-> +/*
-> + * Check the privilege level of specific trigger matches CPU's current privilege
-> + * level.
-> + */
-> +static bool trigger_priv_match(CPURISCVState *env, trigger_type_t type,
-> +                               int trigger_index)
-> +{
-> +    target_ulong ctrl = env->tdata1[trigger_index];
+> +            if (!trigger_common_match(env, trigger_type, i)) {
+> +                continue;
+> +            }
 > +
-> +    switch (type) {
-> +    case TRIGGER_TYPE_AD_MATCH:
-> +        /* type 2 trigger cannot be fired in VU/VS mode */
-> +        if (env->virt_enabled) {
-> +            return false;
-> +        }
-> +        /* check U/S/M bit against current privilege level */
-> +        if ((ctrl >> 3) & BIT(env->priv)) {
-> +            return true;
-> +        }
-> +        break;
-> +    case TRIGGER_TYPE_AD_MATCH6:
-> +        if (env->virt_enabled) {
-> +            /* check VU/VS bit against current privilege level */
-> +            if ((ctrl >> 23) & BIT(env->priv)) {
-> +                return true;
-> +            }
-> +        } else {
-> +            /* check U/S/M bit against current privilege level */
-> +            if ((ctrl >> 3) & BIT(env->priv)) {
-> +                return true;
-> +            }
-> +        }
-> +        break;
-> +    case TRIGGER_TYPE_INST_CNT:
-> +        if (env->virt_enabled) {
-> +            /* check VU/VS bit against current privilege level */
-> +            if ((ctrl >> 25) & BIT(env->priv)) {
-> +                return true;
-> +            }
-> +        } else {
-> +            /* check U/S/M bit against current privilege level */
-> +            if ((ctrl >> 6) & BIT(env->priv)) {
-> +                return true;
-> +            }
-> +        }
-> +        break;
-> +    case TRIGGER_TYPE_INT:
-> +    case TRIGGER_TYPE_EXCP:
-> +    case TRIGGER_TYPE_EXT_SRC:
-> +        qemu_log_mask(LOG_UNIMP, "trigger type: %d is not supported\n", type);
-> +        break;
-> +    case TRIGGER_TYPE_NO_EXIST:
-> +    case TRIGGER_TYPE_UNAVAIL:
-> +        qemu_log_mask(LOG_GUEST_ERROR, "trigger type: %d does not exit\n",
-> +                      type);
 
-I believe you meant 'does not exist'.
+I believe this will change how the function behaves. Before this patch, we would
+'return false' if we have a TRIGGER_TYPE_AD_MATCH and env->virt_enabled is true.
 
+Now, for the same case, we'll keep looping until we found a match, or return 'false'
+if we run out of triggers.
 
-Thanks,
+This seems ok to do, but we should state in the commit msg that we're intentionally
+change how the function works. If that's not the idea and we want to preserve the existing
+behavior, we would need to do:
+
+>   
+> +            if (!trigger_common_match(env, trigger_type, i)) {
+> +                return false;
+> +            }
+
+Instead of just continue looping. Thanks,
+
 
 Daniel
 
-> +        break;
-> +    default:
-> +        g_assert_not_reached();
-> +    }
-> +
-> +    return false;
-> +}
-> +
-> +/* Common matching conditions for all types of the triggers. */
-> +static bool trigger_common_match(CPURISCVState *env, trigger_type_t type,
-> +                                 int trigger_index)
-> +{
-> +    return trigger_priv_match(env, type, trigger_index);
-> +}
-> +
->   /* type 2 trigger */
+>               switch (trigger_type) {
+>               case TRIGGER_TYPE_AD_MATCH:
+> -                /* type 2 trigger cannot be fired in VU/VS mode */
+> -                if (env->virt_enabled) {
+> -                    return false;
+> -                }
+> -
+>                   ctrl = env->tdata1[i];
+>                   pc = env->tdata2[i];
 >   
->   static uint32_t type2_breakpoint_size(CPURISCVState *env, target_ulong ctrl)
+>                   if ((ctrl & TYPE2_EXEC) && (bp->pc == pc)) {
+> -                    /* check U/S/M bit against current privilege level */
+> -                    if ((ctrl >> 3) & BIT(env->priv)) {
+> -                        return true;
+> -                    }
+> +                    return true;
+>                   }
+>                   break;
+>               case TRIGGER_TYPE_AD_MATCH6:
+> @@ -877,17 +873,7 @@ bool riscv_cpu_debug_check_breakpoint(CPUState *cs)
+>                   pc = env->tdata2[i];
+>   
+>                   if ((ctrl & TYPE6_EXEC) && (bp->pc == pc)) {
+> -                    if (env->virt_enabled) {
+> -                        /* check VU/VS bit against current privilege level */
+> -                        if ((ctrl >> 23) & BIT(env->priv)) {
+> -                            return true;
+> -                        }
+> -                    } else {
+> -                        /* check U/S/M bit against current privilege level */
+> -                        if ((ctrl >> 3) & BIT(env->priv)) {
+> -                            return true;
+> -                        }
+> -                    }
+> +                    return true;
+>                   }
+>                   break;
+>               default:
 
