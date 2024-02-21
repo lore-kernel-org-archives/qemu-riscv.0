@@ -4,89 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4D38C48BEB
-	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Feb 2024 17:31:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76E5BC48BEB
+	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Feb 2024 18:06:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rcqRP-0004LM-6w; Wed, 21 Feb 2024 12:31:31 -0500
+	id 1rcqyb-0001mh-Kp; Wed, 21 Feb 2024 13:05:49 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rcqRL-0004HS-Px
- for qemu-riscv@nongnu.org; Wed, 21 Feb 2024 12:31:30 -0500
-Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
+ id 1rcqyY-0001dG-W7
+ for qemu-riscv@nongnu.org; Wed, 21 Feb 2024 13:05:47 -0500
+Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rcqRI-00025u-QU
- for qemu-riscv@nongnu.org; Wed, 21 Feb 2024 12:31:27 -0500
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-1dc13fb0133so7576065ad.3
- for <qemu-riscv@nongnu.org>; Wed, 21 Feb 2024 09:31:23 -0800 (PST)
+ id 1rcqyX-0000FU-1m
+ for qemu-riscv@nongnu.org; Wed, 21 Feb 2024 13:05:46 -0500
+Received: by mail-pf1-x430.google.com with SMTP id
+ d2e1a72fcca58-6e08dd0fa0bso28810b3a.1
+ for <qemu-riscv@nongnu.org>; Wed, 21 Feb 2024 10:05:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1708536682; x=1709141482; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1708538743; x=1709143543; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=+V3z5cUg6GqXrunSorOWYDeSme866E99CGieQ/1mVy4=;
- b=dbOoW06AKy6JCfSJumAzqkiKMbxG0Zd7GHiT457Z+2nnKvQfIbEzqKxtWSHlEehmT3
- 3t19MXuhz6PJgYAyeIgCEajxCRLVjhDbnh9UKS2xKklfOiBGhVDyeAb9BM0YF8XvzV6e
- LKTq0A9KzYEUfy/bBXS8Azy+s8nVn55aTVpxU4vVx+crmS/dRzWvzHwP4gXR1ctTV7jY
- mdPKaKe0RNo7zFOqz5u3Tu+riAeD6WZy0Tg+mTnCj0NxCg2RSVW6UOyqiu/BR56iQQvO
- RRxwSTxtvjyCFpYz2NCZq2hypyPsKIB1EkIpMKRUIkucrliA0t6fwGRk66TrB95oc4Fi
- TLxA==
+ bh=nKKLptDSdqzkckguYJTH6juMz0piBQqZbgHWd2D7gsc=;
+ b=RzU5/pVzMsjqeUpxBRgmUfb2puIyUSB7o6MqtedeCxcA+mpJtaUxH0lfBKzrltGVKU
+ UGq43NdMOWNhxllI2FEWPE4U+JIG5FHh70Tqf/I2sCqFyRNX5t/ZtFaDTfHVkg+u1PoH
+ x8fydQ4hVB8KMuikE4jN6C0jfNsFw6WZdXRpTz5oqHl+KjN1Dzc3C7f3yO9Ibc/r1E1d
+ FJTWiVCBcKQRQuv+Ube12uxqiGCv7CmR6YmSSt+y9V/C5Ko55/hxgc3k7pKIOqeyUcBV
+ LKPhLdqjJQZfPVSDnGJCCAeqpvlk/uIefzllLZlYRMStmuzSrEjF8bntEochMQoR7IXn
+ zj4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708536682; x=1709141482;
+ d=1e100.net; s=20230601; t=1708538743; x=1709143543;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=+V3z5cUg6GqXrunSorOWYDeSme866E99CGieQ/1mVy4=;
- b=WtLVyY1AuOhZ4tL3bk7hEfSX+jOy68Oho+YqziTZf80Bg+4zTF2hAw4e8sYyKRUSO0
- fak2S6ekfCmGns4Qyth7k0lb3tBn92TKJtEBoUjX+m0VjG7zXuBIvE/td6iL0Zsmm+/S
- s7XJdl1TSwOYhJBHpE9rqCC8Da7Owo91YF1wSY0LM0aGqtaUA6MmENL1BbGLZIy0GKtO
- JfMpauNwZTRy56DARySh8PzaSDEGgUrhtnMDh3k3voiE0a5jeFkCP5i7s9UMmQPLxWcd
- 8A0O8/umeVhQqRPfmOo28THiLwDwAB7wykReLxX4dyasjmXKklWbKUI1sEO+OQYprvIW
- 7L1w==
+ bh=nKKLptDSdqzkckguYJTH6juMz0piBQqZbgHWd2D7gsc=;
+ b=Di7+hnIodIq+0FFjQ+Sk7OZwZyZ7lu8a37T51dGmMJq2A9f5cilsl0+jGpLNMw9OKh
+ ugHp24VJWkiAmjCBQo2oX7uX+epj2i7dzHWdWvPXU55vVFoFgd/7hLFG9fGFCoATOp1O
+ RE1jRVpgV0WmVXXCxxDT51V4KaR4X/4qB+9OKOn/xydINNH2lWrKYbOQ9TyzM9jpWZzd
+ AcLH+b02DeS0Ztb3PHJJFjs0Z2dCS93rIurpTU8tykudcxsA60msUoJHcOf2E/h1R7iF
+ M0cYJRFMMCx8voqQAMzTal2Vek3nDTIe4l809VXzaYYuTnowir6jWm86yu6jpU5nWTgm
+ rV5w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWGCU+4iGLkQAnoDPgKZe1TN/Cm7s15J12VjsJoc8278J3/S+FQDnt+yRxUiV8EgbVwpJ3D59wLaEi92yXh7rPNQhkvMbg=
-X-Gm-Message-State: AOJu0Yz212fck/odqb526gQN6225WzJYvS1o52YrqeKGzQpO8QNM4Q5L
- cYb9VK1LuqHEUvTIig3v0kqNIDVPYs5gGCF1cMoverLtnDQF0SVQwuDbOERduPkRFeNBl0RCbph
- w
-X-Google-Smtp-Source: AGHT+IG3a7YYfeYH5E/Ok+hMAVkPc5mYlmwHWfAmoDTPlaqe66HZZ65Y5K/9hZl4/jLOuqnaSV7LDg==
-X-Received: by 2002:a17:903:11c8:b0:1d9:a91b:778 with SMTP id
- q8-20020a17090311c800b001d9a91b0778mr21077356plh.30.1708536682070; 
- Wed, 21 Feb 2024 09:31:22 -0800 (PST)
+ AJvYcCUZFtvZq9lryD9ekWDDNCzdsme0Qqkb5FVYfwLGEOLF/ZWrT2gBp7NqSkOM2+mirO303xRe5iHzt4f52NX2Unf5PWvIkIo=
+X-Gm-Message-State: AOJu0YxTrO7QeWvNhPFim4reUW3xMeaEtPw80UbuNPR4S0UKGS9+VLws
+ +XVv5pVVLVLaMctOO3oAmz+I8f/6/WBUrx0A719kC3I3KVaptkHl7nfJ3fTYBz4=
+X-Google-Smtp-Source: AGHT+IFV8Zft/HEd0ZZ0Sqs3GE02GOjtOYWps9GcAdWCAGezCPoGChys0Cq19iS0rzx9cDKs4tYtUA==
+X-Received: by 2002:a05:6a00:4585:b0:6e4:bc7f:ba39 with SMTP id
+ it5-20020a056a00458500b006e4bc7fba39mr277365pfb.17.1708538743337; 
+ Wed, 21 Feb 2024 10:05:43 -0800 (PST)
 Received: from [192.168.68.110] ([177.94.15.159])
  by smtp.gmail.com with ESMTPSA id
- q18-20020a170902c9d200b001db90df1283sm8318708pld.4.2024.02.21.09.31.19
+ s6-20020a62e706000000b006e3f09fd6a5sm7571751pfh.163.2024.02.21.10.05.40
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 21 Feb 2024 09:31:21 -0800 (PST)
-Message-ID: <ec025245-ed62-4c8b-8110-0eb996280bde@ventanamicro.com>
-Date: Wed, 21 Feb 2024 14:31:18 -0300
+ Wed, 21 Feb 2024 10:05:42 -0800 (PST)
+Message-ID: <094d7589-09f6-4515-ae8d-72acbd3ade58@ventanamicro.com>
+Date: Wed, 21 Feb 2024 15:05:39 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/4] target/riscv: Apply modularized matching conditions
- for watchpoint
+Subject: Re: [PATCH 4/4] target/riscv: Apply modularized matching conditions
+ for icount trigger
 Content-Language: en-US
 To: Alvin Chang <alvinga@andestech.com>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
 Cc: alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com
 References: <20240219032559.79665-1-alvinga@andestech.com>
- <20240219032559.79665-4-alvinga@andestech.com>
+ <20240219032559.79665-5-alvinga@andestech.com>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240219032559.79665-4-alvinga@andestech.com>
+In-Reply-To: <20240219032559.79665-5-alvinga@andestech.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x634.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::430;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x430.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -106,81 +105,42 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 2/19/24 00:25, Alvin Chang wrote:
 > We have implemented trigger_common_match(), which checks if the enabled
-> privilege levels of the trigger match CPU's current privilege level.
-> Remove the related code in riscv_cpu_debug_check_watchpoint() and invoke
-> trigger_common_match() to check the privilege levels of the type 2 and
-> type 6 triggers for the watchpoints.
-> 
-> Only load/store bits and loaded/stored address should be further checked
-> in riscv_cpu_debug_check_watchpoint().
+> privilege levels of the trigger match CPU's current privilege level. We
+> can invoke trigger_common_match() to check the privilege levels of the
+> type 3 triggers.
 > 
 > Signed-off-by: Alvin Chang <alvinga@andestech.com>
 > ---
->   target/riscv/debug.c | 26 ++++++--------------------
->   1 file changed, 6 insertions(+), 20 deletions(-)
+>   target/riscv/debug.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
 > diff --git a/target/riscv/debug.c b/target/riscv/debug.c
-> index b971ed5d7a..67ba19c966 100644
+> index 67ba19c966..de996a393c 100644
 > --- a/target/riscv/debug.c
 > +++ b/target/riscv/debug.c
-> @@ -899,13 +899,12 @@ bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp)
->       for (i = 0; i < RV_MAX_TRIGGERS; i++) {
->           trigger_type = get_trigger_type(env, i);
->   
-> +        if (!trigger_common_match(env, trigger_type, i)) {
-> +            continue;
-> +        }
-> +
+> @@ -624,7 +624,7 @@ void helper_itrigger_match(CPURISCVState *env)
+>           if (get_trigger_type(env, i) != TRIGGER_TYPE_INST_CNT) {
+>               continue;
+>           }
+> -        if (check_itrigger_priv(env, i)) {
+> +        if (!trigger_common_match(env, TRIGGER_TYPE_INST_CNT, i)) {
+>               continue;
+>           }
 
-The same comments I made in patch 2 also applies here. It's ok to change
-how the function behaves as long as we're doing it on purpose and explaining
-why in the commit message. Otherwise this if (!trigger_common_match()"
-conditional should "return false" instead of keep looping to maintain
-the existing behavior.
+
+Looks good. Shouldn't we also change riscv_itrigger_enabled() to also use
+trigger_common_match()? riscv_itrigger_enabled() is remarkably similar to
+helper_itrigger_match() so I believe we can also use the new function
+there.
+
 
 Thanks,
 
 Daniel
 
->           switch (trigger_type) {
->           case TRIGGER_TYPE_AD_MATCH:
-> -            /* type 2 trigger cannot be fired in VU/VS mode */
-> -            if (env->virt_enabled) {
-> -                return false;
-> -            }
-> -
->               ctrl = env->tdata1[i];
->               addr = env->tdata2[i];
->               flags = 0;
-> @@ -918,10 +917,7 @@ bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp)
->               }
->   
->               if ((wp->flags & flags) && (wp->vaddr == addr)) {
-> -                /* check U/S/M bit against current privilege level */
-> -                if ((ctrl >> 3) & BIT(env->priv)) {
-> -                    return true;
-> -                }
-> +                return true;
->               }
->               break;
->           case TRIGGER_TYPE_AD_MATCH6:
-> @@ -937,17 +933,7 @@ bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp)
->               }
->   
->               if ((wp->flags & flags) && (wp->vaddr == addr)) {
-> -                if (env->virt_enabled) {
-> -                    /* check VU/VS bit against current privilege level */
-> -                    if ((ctrl >> 23) & BIT(env->priv)) {
-> -                        return true;
-> -                    }
-> -                } else {
-> -                    /* check U/S/M bit against current privilege level */
-> -                    if ((ctrl >> 3) & BIT(env->priv)) {
-> -                        return true;
-> -                    }
-> -                }
-> +                return true;
->               }
->               break;
->           default:
+
+
+
+
+>           count = itrigger_get_count(env, i);
 
