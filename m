@@ -4,84 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A68F0C48BC3
-	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Feb 2024 15:30:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F108C48BC3
+	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Feb 2024 15:34:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rcoOo-0003EQ-6N; Wed, 21 Feb 2024 10:20:42 -0500
+	id 1rcoRy-0002z1-5u; Wed, 21 Feb 2024 10:24:04 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1rcoL0-0000wk-Tg
- for qemu-riscv@nongnu.org; Wed, 21 Feb 2024 10:16:50 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1rclzZ-0000so-HF
- for qemu-riscv@nongnu.org; Wed, 21 Feb 2024 07:46:32 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1708519588;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=5+iFDGsoywuH5+H7Hd1QIQz6/y36MS3F778kGZSKiq0=;
- b=b5ga8dRobYsb7jVc2QigVN3nQiCB0l31GiQv23CVBq08QAKot43IOaz34AfZ2u65/D1PG8
- 54bNbaDCIkK9zhxLzv/DcdVtmQ3XG2/Eyi+uu2l0kAQfHHKtjqpmbX84r5Zb2tMt1nnREy
- Q13gf3bolXn4M9RKCav4LiL4RbB4DH8=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-611-guzpp1vhOniCWJKEZF_cKg-1; Wed, 21 Feb 2024 07:46:23 -0500
-X-MC-Unique: guzpp1vhOniCWJKEZF_cKg-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com
- [10.11.54.5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id F3E28845E61;
- Wed, 21 Feb 2024 12:46:22 +0000 (UTC)
-Received: from blackfin.pond.sub.org (unknown [10.39.192.55])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 7533210800;
- Wed, 21 Feb 2024 12:46:22 +0000 (UTC)
-Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 67A6421E6740; Wed, 21 Feb 2024 13:46:21 +0100 (CET)
-From: Markus Armbruster <armbru@redhat.com>
-To: Zhao Liu <zhao1.liu@linux.intel.com>
-Cc: Daniel P . =?utf-8?Q?Berrang=C3=A9?= <berrange@redhat.com>,  Eduardo
- Habkost
- <eduardo@habkost.net>,  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,  Yanan Wang
- <wangyanan55@huawei.com>,  "Michael S . Tsirkin" <mst@redhat.com>,  Paolo
- Bonzini <pbonzini@redhat.com>,  Richard Henderson
- <richard.henderson@linaro.org>,  Eric Blake <eblake@redhat.com>,  Marcelo
- Tosatti <mtosatti@redhat.com>,  Alex =?utf-8?Q?Benn=C3=A9e?=
- <alex.bennee@linaro.org>,
- Peter Maydell <peter.maydell@linaro.org>,  Jonathan Cameron
- <Jonathan.Cameron@huawei.com>,  Sia Jee Heng
- <jeeheng.sia@starfivetech.com>,  qemu-devel@nongnu.org,
- kvm@vger.kernel.org,  qemu-riscv@nongnu.org,  qemu-arm@nongnu.org,
- Zhenyu Wang <zhenyu.z.wang@intel.com>,  Dapeng Mi
- <dapeng1.mi@linux.intel.com>,  Yongwei Ma <yongwei.ma@intel.com>,  Zhao
- Liu <zhao1.liu@intel.com>
-Subject: Re: [RFC 4/8] hw/core: Add cache topology options in -smp
-In-Reply-To: <20240220092504.726064-5-zhao1.liu@linux.intel.com> (Zhao Liu's
- message of "Tue, 20 Feb 2024 17:25:00 +0800")
-References: <20240220092504.726064-1-zhao1.liu@linux.intel.com>
- <20240220092504.726064-5-zhao1.liu@linux.intel.com>
-Date: Wed, 21 Feb 2024 13:46:21 +0100
-Message-ID: <871q9656jm.fsf@pond.sub.org>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1rcoMW-0004a7-NY
+ for qemu-riscv@nongnu.org; Wed, 21 Feb 2024 10:18:24 -0500
+Received: from mail-io1-xd2c.google.com ([2607:f8b0:4864:20::d2c])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1rcjZL-0001lu-9S
+ for qemu-riscv@nongnu.org; Wed, 21 Feb 2024 05:11:18 -0500
+Received: by mail-io1-xd2c.google.com with SMTP id
+ ca18e2360f4ac-7bc332d3a8cso336056839f.2
+ for <qemu-riscv@nongnu.org>; Wed, 21 Feb 2024 02:11:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1708510274; x=1709115074;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=XPD8jhIbDSZIaggwaCTJVQeh546LjhKhNB7LZ3iOLyU=;
+ b=ZEvWmFlffp1ZU+kNYIADFJnRD1GI4LTJw1IsWC1mvtHYTr3Xg0Cx7EJOEGix2DsIae
+ ZDz+OWhzF3AcNhdeZUJCeRcC6WSTgA0khhlhxJZjt+8YLI9bLZGm7NHZDHzSBi8rDG0S
+ 34OXHnFsOeqmQkT8GUrzKZWdbMtB+B++X93Y477520ivfCXHxQX3GT0pl0Vu6Txshzdl
+ +0vhzZED/eaVpZrMcID1BFGgwU9nKhQVuFGHc3c4hAoo5kD6ttVy28gMo/VN2rsNsxdf
+ KurISf8WToib+6/crW46tj/JJYE4HnE4VMIKK9DBJXQ5bvpFMU9dkPaYGPG5EW7LIWbz
+ YC4w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1708510274; x=1709115074;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=XPD8jhIbDSZIaggwaCTJVQeh546LjhKhNB7LZ3iOLyU=;
+ b=c/VlxDF0pk4aRxFEPdIFAq1E5766zAhYD9INANb9Xa5jHwohph99jDIXlFrxLsct37
+ 56fzj9ZOB4FHbPrAuZSDaBAXYDqFAXEAMO8fu2+LzdRWIdBzVJrYNp7OMS0R4yOdixXW
+ K53Clqon61HzNk+GZJbxdVxZ8XrF43Ui1PMz+MHImHOpzSIdoRAGrQlRQ1rknAQFHQKz
+ /edPxK6evvUVOX3QA81uagGZiHpnZdY9A0Q5fxEh9M3+TyTX0+A24ujkZrCKhOmylTDC
+ w5uBqmq6LIE+ZTBF12Kq3xHWKc8EXmbydDycdQJZwNIsDM6JqCsjlgf3kzx9jFJyM1CL
+ lBsg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV20/yC6QTQRepskkVudmEFvxWDfaPFNXH91c1c7fJziL5HdE4TM101KZdGyghpyhBvwgDmK2DPIxrZr1Jte4dT+8873Qc=
+X-Gm-Message-State: AOJu0YwYf5h61tAlxno/CeiggDa4gDL+mPcV43vzTwJuPWbASHYHTmzK
+ vz7t6+RGhSWDjjAuZ5k/IHtuRLtyk7PY0FZPuQz3a83YR3y80ok9/HYh8o6N9Ds=
+X-Google-Smtp-Source: AGHT+IE7unUuLCbAK2t/Rvu+pMjVTIQBGYWgnPs3uyfsRXfNtlQE9xB+W0G6Wq5Jmoc53U6R0JsUzA==
+X-Received: by 2002:a05:6e02:214e:b0:364:2239:a89b with SMTP id
+ d14-20020a056e02214e00b003642239a89bmr19188267ilv.11.1708510273879; 
+ Wed, 21 Feb 2024 02:11:13 -0800 (PST)
+Received: from [157.82.203.206] ([157.82.203.206])
+ by smtp.gmail.com with ESMTPSA id
+ d188-20020a6336c5000000b005dc89957e06sm8034185pga.71.2024.02.21.02.11.07
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 21 Feb 2024 02:11:13 -0800 (PST)
+Message-ID: <bf5e9471-c09f-47f2-a5a3-83713255c47a@daynix.com>
+Date: Wed, 21 Feb 2024 19:11:05 +0900
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.5
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
-X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.05,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 18/23] plugins: add an API to read registers
+To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
+Cc: qemu-devel@nongnu.org, Yoshinori Sato <ysato@users.sourceforge.jp>,
+ David Hildenbrand <david@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Michael Rolnik <mrolnik@gmail.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
+ Peter Maydell <peter.maydell@linaro.org>, qemu-ppc@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>, qemu-riscv@nongnu.org,
+ Cleber Rosa <crosa@redhat.com>, Thomas Huth <thuth@redhat.com>,
+ Song Gao <gaosong@loongson.cn>, qemu-arm@nongnu.org,
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>, John Snow
+ <jsnow@redhat.com>, =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
+ Nicholas Piggin <npiggin@gmail.com>, qemu-s390x@nongnu.org,
+ Laurent Vivier <laurent@vivier.eu>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Yanan Wang <wangyanan55@huawei.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, Brian Cain
+ <bcain@quicinc.com>, Mahmoud Mandour <ma.mandourr@gmail.com>,
+ Alexandre Iooss <erdnaxe@crans.org>, Bin Meng <bin.meng@windriver.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Eduardo Habkost <eduardo@habkost.net>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+References: <20240216163025.424857-1-alex.bennee@linaro.org>
+ <20240216163025.424857-19-alex.bennee@linaro.org>
+ <c38a22b5-01e8-40f1-bfc4-4bba9bf7b516@daynix.com>
+ <87il2jcje8.fsf@draig.linaro.org>
+ <bf31a250-9539-448c-9c64-4168ab8741f1@daynix.com>
+ <87bk8ab0f4.fsf@draig.linaro.org>
+Content-Language: en-US
+From: Akihiko Odaki <akihiko.odaki@daynix.com>
+In-Reply-To: <87bk8ab0f4.fsf@draig.linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: none client-ip=2607:f8b0:4864:20::d2c;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-io1-xd2c.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,53 +125,84 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Zhao Liu <zhao1.liu@linux.intel.com> writes:
+On 2024/02/21 19:02, Alex Bennée wrote:
+> Akihiko Odaki <akihiko.odaki@daynix.com> writes:
+> 
+>> On 2024/02/20 23:14, Alex Bennée wrote:
+>>> Akihiko Odaki <akihiko.odaki@daynix.com> writes:
+>>>
+>>>> On 2024/02/17 1:30, Alex Bennée wrote:
+>>>>> We can only request a list of registers once the vCPU has been
+>>>>> initialised so the user needs to use either call the get function on
+>>>>> vCPU initialisation or during the translation phase.
+>>>>> We don't expose the reg number to the plugin instead hiding it
+>>>>> behind
+>>>>> an opaque handle. This allows for a bit of future proofing should the
+>>>>> internals need to be changed while also being hashed against the
+>>>>> CPUClass so we can handle different register sets per-vCPU in
+>>>>> hetrogenous situations.
+>>>>> Having an internal state within the plugins also allows us to expand
+>>>>> the interface in future (for example providing callbacks on register
+>>>>> change if the translator can track changes).
+>>>>> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1706
+>>>>> Cc: Akihiko Odaki <akihiko.odaki@daynix.com>
+>>>>> Message-Id: <20240103173349.398526-39-alex.bennee@linaro.org>
+>>>>> Based-on: <20231025093128.33116-18-akihiko.odaki@daynix.com>
+>>>>> Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+>>>>> Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+>>> <snip>
+>>>>> +/*
+>>>>> + * Register handles
+>>>>> + *
+>>>>> + * The plugin infrastructure keeps hold of these internal data
+>>>>> + * structures which are presented to plugins as opaque handles. They
+>>>>> + * are global to the system and therefor additions to the hash table
+>>>>> + * must be protected by the @reg_handle_lock.
+>>>>> + *
+>>>>> + * In order to future proof for up-coming heterogeneous work we want
+>>>>> + * different entries for each CPU type while sharing them in the
+>>>>> + * common case of multiple cores of the same type.
+>>>>> + */
+>>>>> +
+>>>>> +static QemuMutex reg_handle_lock;
+>>>>> +
+>>>>> +struct qemu_plugin_register {
+>>>>> +    const char *name;
+>>>>> +    int gdb_reg_num;
+>>>>> +};
+>>>>> +
+>>>>> +static GHashTable *reg_handles; /* hash table of PluginReg */
+>>>>> +
+>>>>> +/* Generate a stable key - would xxhash be overkill? */
+>>>>> +static gpointer cpu_plus_reg_to_key(CPUState *cs, int gdb_regnum)
+>>>>> +{
+>>>>> +    uintptr_t key = (uintptr_t) cs->cc;
+>>>>> +    key ^= gdb_regnum;
+>>>>> +    return GUINT_TO_POINTER(key);
+>>>>> +}
+>>>>
+>>>> I have pointed out this is theoretically prone to collisions and
+>>>> unsafe.
+>>> How is it unsafe? The aim is to share handles for the same CPUClass
+>>> rather than having a unique handle per register/cpu combo.
+>>
+>> THe intention is legitimate, but the implementation is not safe. It
+>> assumes (uintptr)cs->cc ^ gdb_regnum is unique, but there is no such
+>> guarantee. The key of GHashTable must be unique; generating hashes of
+>> keys should be done with hash_func given to g_hash_table_new().
+> 
+> This isn't a hash its a non-unique key. It is however unique for
+> the same register on the same class of CPU so for each vCPU in a system
+> can share the same opaque handles.
+> 
+> The hashing is done internally by glib. We would assert if there was a
+> duplicate key referring to a different register.
+> 
+> I'm unsure what you want here? Do you have a suggestion for the key
+> generation algorithm? As the comment notes I did consider a more complex
+> mixing algorithm using xxhash but that wouldn't guarantee no clash
+> either.
 
-> From: Zhao Liu <zhao1.liu@intel.com>
->
-> Add "l1d-cache", "l1i-cache". "l2-cache", and "l3-cache" options in
-> -smp to define the cache topology for SMP system.
->
-> Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
-
-[...]
-
-> diff --git a/qapi/machine.json b/qapi/machine.json
-> index d0e7f1f615f3..0a923ac38803 100644
-> --- a/qapi/machine.json
-> +++ b/qapi/machine.json
-> @@ -1650,6 +1650,14 @@
->  #
->  # @threads: number of threads per core
->  #
-> +# @l1d-cache: topology hierarchy of L1 data cache (since 9.0)
-> +#
-> +# @l1i-cache: topology hierarchy of L1 instruction cache (since 9.0)
-> +#
-> +# @l2-cache: topology hierarchy of L2 unified cache (since 9.0)
-> +#
-> +# @l3-cache: topology hierarchy of L3 unified cache (since 9.0)
-> +#
-
-Too terse, just like my review ;-P
-
->  # Since: 6.1
->  ##
->  { 'struct': 'SMPConfiguration', 'data': {
-> @@ -1662,7 +1670,11 @@
->       '*modules': 'int',
->       '*cores': 'int',
->       '*threads': 'int',
-> -     '*maxcpus': 'int' } }
-> +     '*maxcpus': 'int',
-> +     '*l1d-cache': 'str',
-> +     '*l1i-cache': 'str',
-> +     '*l2-cache': 'str',
-> +     '*l3-cache': 'str' } }
->  
->  ##
->  # @x-query-irq:
-
-[...]
-
+I suggest using a struct that holds both of cs->cc and gdb_regnum, and 
+pass g_direct_equal() and g_direct_hash() to g_hash_table_new().
 
