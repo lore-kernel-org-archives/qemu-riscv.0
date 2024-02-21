@@ -4,87 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B902C48BEB
-	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Feb 2024 15:40:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74CB7C48BC3
+	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Feb 2024 15:46:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rcodN-0001Hw-6x; Wed, 21 Feb 2024 10:35:46 -0500
+	id 1rcocx-0008EF-9q; Wed, 21 Feb 2024 10:35:19 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rcoZQ-0001O6-HS
- for qemu-riscv@nongnu.org; Wed, 21 Feb 2024 10:31:41 -0500
-Received: from mail-pj1-x102e.google.com ([2607:f8b0:4864:20::102e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rco3U-0007ep-5l
- for qemu-riscv@nongnu.org; Wed, 21 Feb 2024 09:58:41 -0500
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-29a32815452so200065a91.2
- for <qemu-riscv@nongnu.org>; Wed, 21 Feb 2024 06:58:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1708527518; x=1709132318; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=wyKGb7aupxH/I0YN4RmuhGFBq+ozkV6FJIxca5nyg/k=;
- b=HhCj3tixCGk2bvfX2lRpPK2NNsRInzH/uB+nAFJCox6YwhEJ+3RszJnjCHF2ijKHPG
- 9DpkOX0iRZ5elEWPEjlxDnBQ798Ik0n0aUwplBTcIQhGUQ1YuGiw2EpGHYSHSIeEc00m
- VPXzrEeVPBn6T70lHn67RRR0OndoaBnTuosw06LGK7a/q5CENqHCxLcmO4dxMXC4SrYd
- jW6gvCIGJPYKHAdCFrYVTrErFLPhNeKxwkWH8I/q+WgkX4A1UkufMDnb1sNCkyOBtYv7
- po6spcF1ts+d3iYOxRtbMtQ670hKUfDdbQ3UFRsyogZFfBiLexXy/VhSfPcoIPYAd6Hg
- /VSw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708527518; x=1709132318;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=wyKGb7aupxH/I0YN4RmuhGFBq+ozkV6FJIxca5nyg/k=;
- b=F+lVRkJjufCDyoRmaml7ibUqULSg1vyLtmwtmvr0J9RG1RA9nlQHdKDJsbLyDDCsWa
- ox+qBHW4eKz+XdY3zE/IHY3CSX0NuVB46nJ/odlYjScYFJlFpJz5su1J0H0GILJ9OxbS
- qumkqnWck1iVdPxo2RgKvzvah4+p9tqdHia/ptqju2hDRdegf/YhvCFBmm9haAV0WfbE
- XIjUPOhyLEmFQAAvRhDJv5Hq4oZ6IIiT3A/PcGHTEDc2kelr4qrxAt5xNHOmKpNC6eOU
- ql1ljAccdQ/85i2E5tiSJcl8RZOSeXfhDYgVlr9mzCTwRs7oHnob+SxEKKte/MjctFK1
- KzGw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWuZ1VCjiRsIQYvcwWw7lFdLDpivePcSI4AGKE6rBXbLetmM102RBJtTV5ltK+dYdkxaG3hldppDsdLxePqeNUOr4wAhw0=
-X-Gm-Message-State: AOJu0Yy4v2RfLvyVW60/EZCZDSrgqVixH8DcWb7/Lf2De9yuBnwI76nO
- eW2e2WRRKa2vToA6dr4UHH/GC2C7zBDbDb+Coatx2xSxqIjcrLlpDCFNYKHA4g4=
-X-Google-Smtp-Source: AGHT+IHXPSxlJG1PoMSsxFPcDXh152TtsRHepouoWKmixxeuSLmiw6R5hnrCEaLVg4OiaBdQ2ccqHA==
-X-Received: by 2002:a17:90b:33d1:b0:299:592a:7d19 with SMTP id
- lk17-20020a17090b33d100b00299592a7d19mr10191947pjb.3.1708527518581; 
- Wed, 21 Feb 2024 06:58:38 -0800 (PST)
-Received: from [192.168.68.110] ([177.94.15.159])
- by smtp.gmail.com with ESMTPSA id
- q69-20020a17090a17cb00b0029954a48c38sm10199016pja.38.2024.02.21.06.58.35
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 21 Feb 2024 06:58:38 -0800 (PST)
-Message-ID: <35a4d40c-9d0d-4a0a-a2c9-5d5f7def9b9c@ventanamicro.com>
-Date: Wed, 21 Feb 2024 11:58:33 -0300
+ (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
+ id 1rcoYF-0005hy-Ei; Wed, 21 Feb 2024 10:30:27 -0500
+Received: from mgamail.intel.com ([192.198.163.7])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
+ id 1rco8T-0000Gw-BX; Wed, 21 Feb 2024 10:03:50 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1708527829; x=1740063829;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=icf79m790ezLNPPZJLTw/l5EOQt2t+L55q4q0lXCEZI=;
+ b=mKfo/Uud4EzOF4JnHaVLJY89PkcnOecrcA/CoatX965BXGTSQK9fsmvJ
+ DjdSfUg4IeeQ6jagbnTFFxrlQw+3reHt/7DE9YATnu4CNI1k1b63Hq1lH
+ UYUK0ABwsL5SKEPmZOPONfxDCh7EUq8k2PNszaBLsDxRPUONxYe8KPfQE
+ FWsU28rMyKs4QoQZlUqHcj+TFVMkYU+ChI4I586AqK66FenLpg96TIZuq
+ OEG0gxcaooQP3jbzRcbNzXAA/Z4QzvLGPrljMwkcxEqu7bdZTou2Quvjq
+ z/3zbnFwyUdFtq4pVudfgdCUjk7q2bF8B3q5JEtaR+3NLuRt3R94FKJtE Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10990"; a="28131335"
+X-IronPort-AV: E=Sophos;i="6.06,175,1705392000"; d="scan'208";a="28131335"
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+ by fmvoesa101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 21 Feb 2024 07:03:37 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10990"; a="827362818"
+X-IronPort-AV: E=Sophos;i="6.06,175,1705392000"; d="scan'208";a="827362818"
+Received: from liuzhao-optiplex-7080.sh.intel.com (HELO localhost)
+ ([10.239.160.36])
+ by orsmga001.jf.intel.com with ESMTP; 21 Feb 2024 07:03:31 -0800
+Date: Wed, 21 Feb 2024 23:17:11 +0800
+From: Zhao Liu <zhao1.liu@linux.intel.com>
+To: Markus Armbruster <armbru@redhat.com>
+Cc: Daniel P =?iso-8859-1?Q?=2E_Berrang=E9?= <berrange@redhat.com>,
+ Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>,
+ Yanan Wang <wangyanan55@huawei.com>,
+ "Michael S . Tsirkin" <mst@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Eric Blake <eblake@redhat.com>, Marcelo Tosatti <mtosatti@redhat.com>,
+ Alex =?iso-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+ Sia Jee Heng <jeeheng.sia@starfivetech.com>, qemu-devel@nongnu.org,
+ kvm@vger.kernel.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
+ Zhenyu Wang <zhenyu.z.wang@intel.com>,
+ Dapeng Mi <dapeng1.mi@linux.intel.com>,
+ Yongwei Ma <yongwei.ma@intel.com>, Zhao Liu <zhao1.liu@intel.com>
+Subject: Re: [RFC 4/8] hw/core: Add cache topology options in -smp
+Message-ID: <ZdYT94zKGTgG/ipH@intel.com>
+References: <20240220092504.726064-1-zhao1.liu@linux.intel.com>
+ <20240220092504.726064-5-zhao1.liu@linux.intel.com>
+ <871q9656jm.fsf@pond.sub.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC 0/8] Add Counter delegation ISA extension support
-To: Atish Patra <atishp@rivosinc.com>, qemu-devel@nongnu.org
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Liu Zhiwei
- <zhiwei_liu@linux.alibaba.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- qemu-riscv@nongnu.org, Weiwei Li <liwei1518@gmail.com>, kaiwenxue1@gmail.com
-References: <20240217000134.3634191-1-atishp@rivosinc.com>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240217000134.3634191-1-atishp@rivosinc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102e;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x102e.google.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <871q9656jm.fsf@pond.sub.org>
+Received-SPF: none client-ip=192.198.163.7;
+ envelope-from=zhao1.liu@linux.intel.com; helo=mgamail.intel.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.05,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,118 +93,65 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Atish,
-
-This series and its dependency, which I assume it's
-
-"[PATCH v4 0/5] Add ISA extension smcntrpmf support"
-
-Doesn't apply in neither master nor riscv-to-apply.next because of this patch:
-
-"target/riscv: Use RISCVException as return type for all csr ops"
-
-That changed some functions from 'int' to "RISCVException" type. The conflicts
-from the v4 series are rather trivial but the conflicts for this RFC are annoying
-to deal with. It would be better if you could re-send both series rebased with
-the latest changes.
-
-One more thing:
-
-On 2/16/24 21:01, Atish Patra wrote:
-> This series adds the counter delegation extension support. The counter
-> delegation ISA extension(Smcdeleg/Ssccfg) actually depends on multiple ISA
-> extensions.
+On Wed, Feb 21, 2024 at 01:46:21PM +0100, Markus Armbruster wrote:
+> Date: Wed, 21 Feb 2024 13:46:21 +0100
+> From: Markus Armbruster <armbru@redhat.com>
+> Subject: Re: [RFC 4/8] hw/core: Add cache topology options in -smp
 > 
-> 1. S[m|s]csrind : The indirect CSR extension[1] which defines additional
->     5 ([M|S|VS]IREG2-[M|S|VS]IREG6) register to address size limitation of
->     RISC-V CSR address space.
-> 2. Smstateen: The stateen bit[60] controls the access to the registers
->     indirectly via the above indirect registers.
-> 3. Smcdeleg/Ssccfg: The counter delegation extensions[2]
+> Zhao Liu <zhao1.liu@linux.intel.com> writes:
 > 
-> The counter delegation extension allows Supervisor mode to program the
-> hpmevent and hpmcounters directly without needing the assistance from the
-> M-mode via SBI calls. This results in a faster perf profiling and very
-> few traps. This extension also introduces a scountinhibit CSR which allows
-> to stop/start any counter directly from the S-mode. As the counter
-> delegation extension potentially can have more than 100 CSRs, the specificaiton
-> leverages the indirect CSR extension to save the precious CSR address range.
+> > From: Zhao Liu <zhao1.liu@intel.com>
+> >
+> > Add "l1d-cache", "l1i-cache". "l2-cache", and "l3-cache" options in
+> > -smp to define the cache topology for SMP system.
+> >
+> > Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
 > 
-> Due to the dependancy of these extensions, the following extensions must be
-> enabled to use the counter delegation feature in S-mode.
+> [...]
 > 
-> "smstateen=true,sscofpmf=true,ssccfg=true,smcdeleg=true,smcsrind=true,sscsrind=true"
+> > diff --git a/qapi/machine.json b/qapi/machine.json
+> > index d0e7f1f615f3..0a923ac38803 100644
+> > --- a/qapi/machine.json
+> > +++ b/qapi/machine.json
+> > @@ -1650,6 +1650,14 @@
+> >  #
+> >  # @threads: number of threads per core
+> >  #
+> > +# @l1d-cache: topology hierarchy of L1 data cache (since 9.0)
+> > +#
+> > +# @l1i-cache: topology hierarchy of L1 instruction cache (since 9.0)
+> > +#
+> > +# @l2-cache: topology hierarchy of L2 unified cache (since 9.0)
+> > +#
+> > +# @l3-cache: topology hierarchy of L3 unified cache (since 9.0)
+> > +#
 > 
-> This makes the qemu command line quite tedious. In stead of that, I think we
-> can enable these features by default if there is no objection.
+> Too terse, just like my review ;-P
 
-It wasn't need so far but, if needed, we can add specialized setters for extensions
-that has multiple dependencies. Instead of the usual setter we would do something
-like:
-
-cpu_set_ssccfg() {
-
-     if (enabled) {
-         smstateen=true
-         sscofpmf=true
-         smcdeleg=true
-         smcsrind=true
-         sscsrind=true
-     }
-}
-
-
-The advantage is that this setter would also work for CPUs that doesn't inherit defaults,
-like bare-cps and profile CPUs.
-
-That doesn't mean we can't add defaults for rv64, but for this particular case I wonder if
-the 'max' CPU wouldn't be better.
-
+;-) Yes, I'll add more information to improve the readability of the
+code and comments.
 
 Thanks,
-
-
-Daniel
+Zhao
 
 > 
-> The first 2 patches decouple the indirect CSR usage from AIA implementation
-> while patch3 adds stateen bits validation for AIA.
-> The PATCH4 implements indirect CSR extensions while remaining patches
-> implement the counter delegation extensions.
+> >  # Since: 6.1
+> >  ##
+> >  { 'struct': 'SMPConfiguration', 'data': {
+> > @@ -1662,7 +1670,11 @@
+> >       '*modules': 'int',
+> >       '*cores': 'int',
+> >       '*threads': 'int',
+> > -     '*maxcpus': 'int' } }
+> > +     '*maxcpus': 'int',
+> > +     '*l1d-cache': 'str',
+> > +     '*l1i-cache': 'str',
+> > +     '*l2-cache': 'str',
+> > +     '*l3-cache': 'str' } }
+> >  
+> >  ##
+> >  # @x-query-irq:
 > 
-> The Qemu patches can be found here:
-> https://github.com/atishp04/qemu/tree/counter_delegation_rfc
-> 
-> The opensbi patch can be found here:
-> https://github.com/atishp04/opensbi/tree/counter_delegation_v1
-> 
-> The Linux kernel patches can be found here:
-> https://github.com/atishp04/linux/tree/counter_delegation_rfc
-> 
-> [1] https://github.com/riscv/riscv-indirect-csr-access
-> [2] https://github.com/riscv/riscv-smcdeleg-ssccfg
-> 
-> Atish Patra (1):
-> target/riscv: Enable S*stateen bits for AIA
-> 
-> Kaiwen Xue (7):
-> target/riscv: Add properties for Indirect CSR Access extension
-> target/riscv: Decouple AIA processing from xiselect and xireg
-> target/riscv: Support generic CSR indirect access
-> target/riscv: Add smcdeleg/ssccfg properties
-> target/riscv: Add counter delegation definitions
-> target/riscv: Add select value range check for counter delegation
-> target/riscv: Add counter delegation/configuration support
-> 
-> target/riscv/cpu.c      |   8 +
-> target/riscv/cpu.h      |   1 +
-> target/riscv/cpu_bits.h |  34 +-
-> target/riscv/cpu_cfg.h  |   4 +
-> target/riscv/csr.c      | 713 +++++++++++++++++++++++++++++++++++++---
-> target/riscv/machine.c  |   1 +
-> 6 files changed, 722 insertions(+), 39 deletions(-)
-> 
-> --
-> 2.34.1
+> [...]
 > 
 
