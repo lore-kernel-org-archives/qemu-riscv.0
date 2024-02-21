@@ -4,77 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4712AC48BC4
-	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Feb 2024 02:23:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67430C48BC4
+	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Feb 2024 02:23:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rccGJ-00033m-0V; Tue, 20 Feb 2024 21:23:07 -0500
+	id 1rccGF-00032e-QS; Tue, 20 Feb 2024 21:23:03 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rccGH-00032z-FS
- for qemu-riscv@nongnu.org; Tue, 20 Feb 2024 21:23:05 -0500
-Received: from mail-pf1-x434.google.com ([2607:f8b0:4864:20::434])
+ id 1rccGE-000322-Id
+ for qemu-riscv@nongnu.org; Tue, 20 Feb 2024 21:23:02 -0500
+Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rccGF-0001Fg-TX
- for qemu-riscv@nongnu.org; Tue, 20 Feb 2024 21:23:05 -0500
-Received: by mail-pf1-x434.google.com with SMTP id
- d2e1a72fcca58-6e45d0c9676so1987493b3a.0
- for <qemu-riscv@nongnu.org>; Tue, 20 Feb 2024 18:23:03 -0800 (PST)
+ id 1rccGC-0001FA-T3
+ for qemu-riscv@nongnu.org; Tue, 20 Feb 2024 21:23:02 -0500
+Received: by mail-pf1-x430.google.com with SMTP id
+ d2e1a72fcca58-6e466a679bfso114575b3a.1
+ for <qemu-riscv@nongnu.org>; Tue, 20 Feb 2024 18:23:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1708482182; x=1709086982; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=c06cdweMSPa1lLgHj48cX17VsakRjktLirNDmTiTsUo=;
- b=Qa1qozLVrPpNvT9f8NckECsWDFT7LgUB95vLlw1hg/XbCaxoWXdBJspd5dSAqP3ZlC
- 6N+4p8OAr4mZJBh3eMM+H8ARkcT2Npfw2s0rsZgL+0uXWxq20Hizck332MDFSkxqvlDW
- TNM/msvapnHmTB8G9izIgvtfYXdqTqrI0Rw39DlzZyE9QSRVxzzbOPsSEKFc/E0BXyXM
- RQMCTdPOXbzTEZ8rYuKJ+IbALX4mjyTT62GHofBWxRt9sZ77heghJ0JPreWyaeNybJZF
- 4Ev05YYdBYEilsYQcct/xi81VnEO5M52Kzfmk5iGeg+MXBMT3f5p/EgKRhJZtOny0B5A
- Fxlw==
+ d=ventanamicro.com; s=google; t=1708482179; x=1709086979; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ehkq9tIAF8xs+P+vh+e2YJT5nFJW1cB1NMu2/G9UKOA=;
+ b=ROUGvzXLtEx+jycyJPGKnio6+TjZinoJ/gZSgMxlb/gEXp1LMoNGcI0laZHp4K21w4
+ CnSRDaY/slHWUgPJZzGMoaDFibpTORuhgi5mvVqpyoiv5q9W5S0CmhENdIeRepdoJjnQ
+ zT/dNE8nU6fg532npDJIj+U9IRwIFPu8qCU0Cnr6veQRpJVU/TGNim9tSowk52aZp/Mn
+ izfRHUMmSE6W2nNEPy1QA7ajyFv/Yt/yl0dFdua5ZCSMXxfh6yAfjoiD9avrJ14kNv1M
+ +EFp/o6WwPU4ZTHCs0Rg5gI5iOl6eq5u5yp2dUcF+q/n4hA373O9bY+dpqbxpR0N2TOv
+ nWfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708482182; x=1709086982;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=c06cdweMSPa1lLgHj48cX17VsakRjktLirNDmTiTsUo=;
- b=wTO9eTmSXyb0zk/8V92+vTAjm4RNgQmKOq4tWZg9aIp15bcJmAwSnu7GoirALxpFtv
- hIZ6bCbn1wPp1GxwrFOTJ+ppTFYohNo5SWXC6BVoPb3qI4OTZPmrC44ERUyC85k+qZnr
- PjWyFhlD6deBBieXlnnCQpIXmihQ2OrXxl30UsHREjnYa39V5bXYLxaGWdwdGnfMXdUX
- zSBEUom0TMqVNzODY2svIGzyrmZeh7rv8vHyQqLnF/MxF5xeIgAqq4mZGRNzLQ0lD/+0
- sydXpLqN5jkQ1xT0tnOoaMhyE081xXDpF5xfmTPaMppRpOQ6dtZaZJa2Tr/6uUdDvoxg
- RKnw==
-X-Gm-Message-State: AOJu0YxOkJ5Lv4puOirqy096Au+JqhOxT0RPqx+a+cHHdgE0LE6K0L7r
- cqdpQCLal35ulBEbbKqOIAWayZvB6vwGsv3xz8JmncS1Pkt7zRIGHBGQDFg67GY=
-X-Google-Smtp-Source: AGHT+IHqRKW6XfvwHdq8pSClVFfirIz/R/cz/fUiCSRSxqWgT+mC2Lo9YY+/0KmeXjpgVvVUmA6D5g==
-X-Received: by 2002:a05:6a21:3409:b0:19e:92cf:77f4 with SMTP id
- yn9-20020a056a21340900b0019e92cf77f4mr25651850pzb.0.1708482182587; 
- Tue, 20 Feb 2024 18:23:02 -0800 (PST)
+ d=1e100.net; s=20230601; t=1708482179; x=1709086979;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ehkq9tIAF8xs+P+vh+e2YJT5nFJW1cB1NMu2/G9UKOA=;
+ b=jUNgMF2bMydmvK1EWGYR8GVC8muWleKp6ig0szpvlP2V+y/TavT3pXJz8T/226+YFP
+ A1n3rGc8+F9YKln77BriCdYQniM6Qf2Bh/Z5HMOVBNLjOEzixKnPVAxH23yuXiZ/95ke
+ /zHBZoGDMi9MrvgNpMxefCHc1XodyOfVGPi/ipN80Zqaws/3eqDk3T61f1V2rJJjsqCS
+ RsU1UIXFDo8SkZq3yNnBEgL1nRHVX1gWMZNK5jThCJeD4wOrSyxSZ8zU8WWPSnCEDvqn
+ FNzQjGqF/J5zmpjF/s/NSnHpzMsCe6kZ6yHTiqSR3+lf0blZwB5TkXKvfh0aLc0gSllC
+ jlBg==
+X-Gm-Message-State: AOJu0YwVnqQuEKYF21TUofIe2L2BWLUmaSaiGtoXPm/DXjoz1/h9NbKH
+ +9hFy0FHorYR7M8L+dEojOrEzCw2ng1FYSj8QAAIRQlvKU1LIaGO/WG9mLfsI6M=
+X-Google-Smtp-Source: AGHT+IFmO7Ct6NdZo8qcrd4WsvKpTOaQp2ApAPVYmJFwFrKY4ml52zAcLecsSTGXMXSTXO0a3bA+RQ==
+X-Received: by 2002:a62:8185:0:b0:6e4:870c:19b0 with SMTP id
+ t127-20020a628185000000b006e4870c19b0mr2223060pfd.24.1708482179326; 
+ Tue, 20 Feb 2024 18:22:59 -0800 (PST)
 Received: from grind.dc1.ventanamicro.com ([177.94.15.159])
  by smtp.gmail.com with ESMTPSA id
- y5-20020a634945000000b005dc48e56191sm7183355pgk.11.2024.02.20.18.22.59
+ y5-20020a634945000000b005dc48e56191sm7183355pgk.11.2024.02.20.18.22.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Feb 2024 18:23:02 -0800 (PST)
+ Tue, 20 Feb 2024 18:22:58 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  richard.henderson@linaro.org, max.chou@sifive.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v5 1/7] trans_rvv.c.inc: mark_vs_dirty() before loads and
- stores
-Date: Tue, 20 Feb 2024 23:22:46 -0300
-Message-ID: <20240221022252.252872-2-dbarboza@ventanamicro.com>
+Subject: [PATCH v5 0/7] riscv: set vstart_eq_zero on mark_vs_dirty
+Date: Tue, 20 Feb 2024 23:22:45 -0300
+Message-ID: <20240221022252.252872-1-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.43.2
-In-Reply-To: <20240221022252.252872-1-dbarboza@ventanamicro.com>
-References: <20240221022252.252872-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::434;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x434.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::430;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x430.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -97,91 +93,45 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-While discussing a problem with how we're (not) setting vstart_eq_zero
-Richard had the following to say w.r.t the conditional mark_vs_dirty()
-calls on load/store functions [1]:
+Hi,
 
-"I think it's required to have stores set dirty unconditionally, before
-the operation.
+In this new version we removed the remaining brconds() from
+trans_rvbf16.c.inc like Richard suggested in patch 3. Richard, I kept
+your ack in that patch.
 
-Consider a store that traps on the 2nd element, leaving vstart = 2, and
-exiting to the main loop via exception. The exception enters the kernel
-page fault handler. The kernel may need to fault in the page for the
-process, and in the meantime task switch.
+This change caused the 'cpu_vstart' global to be unused. A new patch (4)
+was added to remove it.
 
-If vs dirty is not already set, the kernel won't know to save vector
-state on task switch."
+Series based on alistair/riscv-to-apply.next.
 
-Do a mark_vs_dirty() before both loads and stores.
+Patches missing acks: patch 4.
 
-[1] https://lore.kernel.org/qemu-riscv/72c7503b-0f43-44b8-aa82-fbafed2aac0c@linaro.org/
+Changes from v4:
+- patch 3:
+  - remove vstart >= vl and vl = 0 brconds from trans_fvbf16.c.inc
+- patch 4 (new):
+  - remove cpu_vstart
+- v4 link: https://lore.kernel.org/qemu-riscv/20240220222510.209448-1-dbarboza@ventanamicro.com/
 
-Suggested-by: Richard Henderson <richard.henderson@linaro.org>
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- target/riscv/insn_trans/trans_rvv.c.inc | 23 ++++++++---------------
- 1 file changed, 8 insertions(+), 15 deletions(-)
 
-diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index 9e101ab434..7a98f1caa6 100644
---- a/target/riscv/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -636,11 +636,9 @@ static bool ldst_us_trans(uint32_t vd, uint32_t rs1, uint32_t data,
-     tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, vd));
-     tcg_gen_addi_ptr(mask, tcg_env, vreg_ofs(s, 0));
- 
--    fn(dest, mask, base, tcg_env, desc);
-+    mark_vs_dirty(s);
- 
--    if (!is_store) {
--        mark_vs_dirty(s);
--    }
-+    fn(dest, mask, base, tcg_env, desc);
- 
-     gen_set_label(over);
-     return true;
-@@ -797,11 +795,9 @@ static bool ldst_stride_trans(uint32_t vd, uint32_t rs1, uint32_t rs2,
-     tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, vd));
-     tcg_gen_addi_ptr(mask, tcg_env, vreg_ofs(s, 0));
- 
--    fn(dest, mask, base, stride, tcg_env, desc);
-+    mark_vs_dirty(s);
- 
--    if (!is_store) {
--        mark_vs_dirty(s);
--    }
-+    fn(dest, mask, base, stride, tcg_env, desc);
- 
-     gen_set_label(over);
-     return true;
-@@ -904,11 +900,9 @@ static bool ldst_index_trans(uint32_t vd, uint32_t rs1, uint32_t vs2,
-     tcg_gen_addi_ptr(index, tcg_env, vreg_ofs(s, vs2));
-     tcg_gen_addi_ptr(mask, tcg_env, vreg_ofs(s, 0));
- 
--    fn(dest, mask, base, index, tcg_env, desc);
-+    mark_vs_dirty(s);
- 
--    if (!is_store) {
--        mark_vs_dirty(s);
--    }
-+    fn(dest, mask, base, index, tcg_env, desc);
- 
-     gen_set_label(over);
-     return true;
-@@ -1102,11 +1096,10 @@ static bool ldst_whole_trans(uint32_t vd, uint32_t rs1, uint32_t nf,
-     base = get_gpr(s, rs1, EXT_NONE);
-     tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, vd));
- 
-+    mark_vs_dirty(s);
-+
-     fn(dest, base, tcg_env, desc);
- 
--    if (!is_store) {
--        mark_vs_dirty(s);
--    }
-     gen_set_label(over);
- 
-     return true;
+Daniel Henrique Barboza (6):
+  trans_rvv.c.inc: mark_vs_dirty() before loads and stores
+  trans_rvv.c.inc: remove 'is_store' bool from load/store fns
+  target/riscv: remove 'over' brconds from vector trans
+  target/riscv/translate.c: remove 'cpu_vstart' global
+  target/riscv/vector_helper.c: set vstart = 0 in GEN_VEXT_VSLIDEUP_VX()
+  trans_rvv.c.inc: remove redundant mark_vs_dirty() calls
+
+Ivan Klokov (1):
+  target/riscv: Clear vstart_qe_zero flag
+
+ target/riscv/insn_trans/trans_rvbf16.c.inc |  18 +-
+ target/riscv/insn_trans/trans_rvv.c.inc    | 292 ++++++---------------
+ target/riscv/insn_trans/trans_rvvk.c.inc   |  30 +--
+ target/riscv/translate.c                   |  10 +-
+ target/riscv/vector_helper.c               |   1 +
+ 5 files changed, 100 insertions(+), 251 deletions(-)
+
 -- 
 2.43.2
 
