@@ -4,112 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F108C48BC3
-	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Feb 2024 15:34:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B902C48BEB
+	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Feb 2024 15:40:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rcoRy-0002z1-5u; Wed, 21 Feb 2024 10:24:04 -0500
+	id 1rcodN-0001Hw-6x; Wed, 21 Feb 2024 10:35:46 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1rcoMW-0004a7-NY
- for qemu-riscv@nongnu.org; Wed, 21 Feb 2024 10:18:24 -0500
-Received: from mail-io1-xd2c.google.com ([2607:f8b0:4864:20::d2c])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rcoZQ-0001O6-HS
+ for qemu-riscv@nongnu.org; Wed, 21 Feb 2024 10:31:41 -0500
+Received: from mail-pj1-x102e.google.com ([2607:f8b0:4864:20::102e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1rcjZL-0001lu-9S
- for qemu-riscv@nongnu.org; Wed, 21 Feb 2024 05:11:18 -0500
-Received: by mail-io1-xd2c.google.com with SMTP id
- ca18e2360f4ac-7bc332d3a8cso336056839f.2
- for <qemu-riscv@nongnu.org>; Wed, 21 Feb 2024 02:11:14 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rco3U-0007ep-5l
+ for qemu-riscv@nongnu.org; Wed, 21 Feb 2024 09:58:41 -0500
+Received: by mail-pj1-x102e.google.com with SMTP id
+ 98e67ed59e1d1-29a32815452so200065a91.2
+ for <qemu-riscv@nongnu.org>; Wed, 21 Feb 2024 06:58:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1708510274; x=1709115074;
- darn=nongnu.org; 
+ d=ventanamicro.com; s=google; t=1708527518; x=1709132318; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=XPD8jhIbDSZIaggwaCTJVQeh546LjhKhNB7LZ3iOLyU=;
- b=ZEvWmFlffp1ZU+kNYIADFJnRD1GI4LTJw1IsWC1mvtHYTr3Xg0Cx7EJOEGix2DsIae
- ZDz+OWhzF3AcNhdeZUJCeRcC6WSTgA0khhlhxJZjt+8YLI9bLZGm7NHZDHzSBi8rDG0S
- 34OXHnFsOeqmQkT8GUrzKZWdbMtB+B++X93Y477520ivfCXHxQX3GT0pl0Vu6Txshzdl
- +0vhzZED/eaVpZrMcID1BFGgwU9nKhQVuFGHc3c4hAoo5kD6ttVy28gMo/VN2rsNsxdf
- KurISf8WToib+6/crW46tj/JJYE4HnE4VMIKK9DBJXQ5bvpFMU9dkPaYGPG5EW7LIWbz
- YC4w==
+ bh=wyKGb7aupxH/I0YN4RmuhGFBq+ozkV6FJIxca5nyg/k=;
+ b=HhCj3tixCGk2bvfX2lRpPK2NNsRInzH/uB+nAFJCox6YwhEJ+3RszJnjCHF2ijKHPG
+ 9DpkOX0iRZ5elEWPEjlxDnBQ798Ik0n0aUwplBTcIQhGUQ1YuGiw2EpGHYSHSIeEc00m
+ VPXzrEeVPBn6T70lHn67RRR0OndoaBnTuosw06LGK7a/q5CENqHCxLcmO4dxMXC4SrYd
+ jW6gvCIGJPYKHAdCFrYVTrErFLPhNeKxwkWH8I/q+WgkX4A1UkufMDnb1sNCkyOBtYv7
+ po6spcF1ts+d3iYOxRtbMtQ670hKUfDdbQ3UFRsyogZFfBiLexXy/VhSfPcoIPYAd6Hg
+ /VSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708510274; x=1709115074;
+ d=1e100.net; s=20230601; t=1708527518; x=1709132318;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=XPD8jhIbDSZIaggwaCTJVQeh546LjhKhNB7LZ3iOLyU=;
- b=c/VlxDF0pk4aRxFEPdIFAq1E5766zAhYD9INANb9Xa5jHwohph99jDIXlFrxLsct37
- 56fzj9ZOB4FHbPrAuZSDaBAXYDqFAXEAMO8fu2+LzdRWIdBzVJrYNp7OMS0R4yOdixXW
- K53Clqon61HzNk+GZJbxdVxZ8XrF43Ui1PMz+MHImHOpzSIdoRAGrQlRQ1rknAQFHQKz
- /edPxK6evvUVOX3QA81uagGZiHpnZdY9A0Q5fxEh9M3+TyTX0+A24ujkZrCKhOmylTDC
- w5uBqmq6LIE+ZTBF12Kq3xHWKc8EXmbydDycdQJZwNIsDM6JqCsjlgf3kzx9jFJyM1CL
- lBsg==
+ bh=wyKGb7aupxH/I0YN4RmuhGFBq+ozkV6FJIxca5nyg/k=;
+ b=F+lVRkJjufCDyoRmaml7ibUqULSg1vyLtmwtmvr0J9RG1RA9nlQHdKDJsbLyDDCsWa
+ ox+qBHW4eKz+XdY3zE/IHY3CSX0NuVB46nJ/odlYjScYFJlFpJz5su1J0H0GILJ9OxbS
+ qumkqnWck1iVdPxo2RgKvzvah4+p9tqdHia/ptqju2hDRdegf/YhvCFBmm9haAV0WfbE
+ XIjUPOhyLEmFQAAvRhDJv5Hq4oZ6IIiT3A/PcGHTEDc2kelr4qrxAt5xNHOmKpNC6eOU
+ ql1ljAccdQ/85i2E5tiSJcl8RZOSeXfhDYgVlr9mzCTwRs7oHnob+SxEKKte/MjctFK1
+ KzGw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV20/yC6QTQRepskkVudmEFvxWDfaPFNXH91c1c7fJziL5HdE4TM101KZdGyghpyhBvwgDmK2DPIxrZr1Jte4dT+8873Qc=
-X-Gm-Message-State: AOJu0YwYf5h61tAlxno/CeiggDa4gDL+mPcV43vzTwJuPWbASHYHTmzK
- vz7t6+RGhSWDjjAuZ5k/IHtuRLtyk7PY0FZPuQz3a83YR3y80ok9/HYh8o6N9Ds=
-X-Google-Smtp-Source: AGHT+IE7unUuLCbAK2t/Rvu+pMjVTIQBGYWgnPs3uyfsRXfNtlQE9xB+W0G6Wq5Jmoc53U6R0JsUzA==
-X-Received: by 2002:a05:6e02:214e:b0:364:2239:a89b with SMTP id
- d14-20020a056e02214e00b003642239a89bmr19188267ilv.11.1708510273879; 
- Wed, 21 Feb 2024 02:11:13 -0800 (PST)
-Received: from [157.82.203.206] ([157.82.203.206])
+ AJvYcCWuZ1VCjiRsIQYvcwWw7lFdLDpivePcSI4AGKE6rBXbLetmM102RBJtTV5ltK+dYdkxaG3hldppDsdLxePqeNUOr4wAhw0=
+X-Gm-Message-State: AOJu0Yy4v2RfLvyVW60/EZCZDSrgqVixH8DcWb7/Lf2De9yuBnwI76nO
+ eW2e2WRRKa2vToA6dr4UHH/GC2C7zBDbDb+Coatx2xSxqIjcrLlpDCFNYKHA4g4=
+X-Google-Smtp-Source: AGHT+IHXPSxlJG1PoMSsxFPcDXh152TtsRHepouoWKmixxeuSLmiw6R5hnrCEaLVg4OiaBdQ2ccqHA==
+X-Received: by 2002:a17:90b:33d1:b0:299:592a:7d19 with SMTP id
+ lk17-20020a17090b33d100b00299592a7d19mr10191947pjb.3.1708527518581; 
+ Wed, 21 Feb 2024 06:58:38 -0800 (PST)
+Received: from [192.168.68.110] ([177.94.15.159])
  by smtp.gmail.com with ESMTPSA id
- d188-20020a6336c5000000b005dc89957e06sm8034185pga.71.2024.02.21.02.11.07
+ q69-20020a17090a17cb00b0029954a48c38sm10199016pja.38.2024.02.21.06.58.35
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 21 Feb 2024 02:11:13 -0800 (PST)
-Message-ID: <bf5e9471-c09f-47f2-a5a3-83713255c47a@daynix.com>
-Date: Wed, 21 Feb 2024 19:11:05 +0900
+ Wed, 21 Feb 2024 06:58:38 -0800 (PST)
+Message-ID: <35a4d40c-9d0d-4a0a-a2c9-5d5f7def9b9c@ventanamicro.com>
+Date: Wed, 21 Feb 2024 11:58:33 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 18/23] plugins: add an API to read registers
-To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
-Cc: qemu-devel@nongnu.org, Yoshinori Sato <ysato@users.sourceforge.jp>,
- David Hildenbrand <david@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Michael Rolnik <mrolnik@gmail.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
- Peter Maydell <peter.maydell@linaro.org>, qemu-ppc@nongnu.org,
- Paolo Bonzini <pbonzini@redhat.com>, qemu-riscv@nongnu.org,
- Cleber Rosa <crosa@redhat.com>, Thomas Huth <thuth@redhat.com>,
- Song Gao <gaosong@loongson.cn>, qemu-arm@nongnu.org,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>, John Snow
- <jsnow@redhat.com>, =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
- Nicholas Piggin <npiggin@gmail.com>, qemu-s390x@nongnu.org,
- Laurent Vivier <laurent@vivier.eu>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Yanan Wang <wangyanan55@huawei.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, Brian Cain
- <bcain@quicinc.com>, Mahmoud Mandour <ma.mandourr@gmail.com>,
- Alexandre Iooss <erdnaxe@crans.org>, Bin Meng <bin.meng@windriver.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- Eduardo Habkost <eduardo@habkost.net>,
- Alistair Francis <alistair.francis@wdc.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-References: <20240216163025.424857-1-alex.bennee@linaro.org>
- <20240216163025.424857-19-alex.bennee@linaro.org>
- <c38a22b5-01e8-40f1-bfc4-4bba9bf7b516@daynix.com>
- <87il2jcje8.fsf@draig.linaro.org>
- <bf31a250-9539-448c-9c64-4168ab8741f1@daynix.com>
- <87bk8ab0f4.fsf@draig.linaro.org>
+Subject: Re: [PATCH RFC 0/8] Add Counter delegation ISA extension support
+To: Atish Patra <atishp@rivosinc.com>, qemu-devel@nongnu.org
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ qemu-riscv@nongnu.org, Weiwei Li <liwei1518@gmail.com>, kaiwenxue1@gmail.com
+References: <20240217000134.3634191-1-atishp@rivosinc.com>
 Content-Language: en-US
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
-In-Reply-To: <87bk8ab0f4.fsf@draig.linaro.org>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20240217000134.3634191-1-atishp@rivosinc.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=2607:f8b0:4864:20::d2c;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-io1-xd2c.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102e;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x102e.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -125,84 +100,118 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2024/02/21 19:02, Alex Bennée wrote:
-> Akihiko Odaki <akihiko.odaki@daynix.com> writes:
-> 
->> On 2024/02/20 23:14, Alex Bennée wrote:
->>> Akihiko Odaki <akihiko.odaki@daynix.com> writes:
->>>
->>>> On 2024/02/17 1:30, Alex Bennée wrote:
->>>>> We can only request a list of registers once the vCPU has been
->>>>> initialised so the user needs to use either call the get function on
->>>>> vCPU initialisation or during the translation phase.
->>>>> We don't expose the reg number to the plugin instead hiding it
->>>>> behind
->>>>> an opaque handle. This allows for a bit of future proofing should the
->>>>> internals need to be changed while also being hashed against the
->>>>> CPUClass so we can handle different register sets per-vCPU in
->>>>> hetrogenous situations.
->>>>> Having an internal state within the plugins also allows us to expand
->>>>> the interface in future (for example providing callbacks on register
->>>>> change if the translator can track changes).
->>>>> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1706
->>>>> Cc: Akihiko Odaki <akihiko.odaki@daynix.com>
->>>>> Message-Id: <20240103173349.398526-39-alex.bennee@linaro.org>
->>>>> Based-on: <20231025093128.33116-18-akihiko.odaki@daynix.com>
->>>>> Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
->>>>> Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
->>> <snip>
->>>>> +/*
->>>>> + * Register handles
->>>>> + *
->>>>> + * The plugin infrastructure keeps hold of these internal data
->>>>> + * structures which are presented to plugins as opaque handles. They
->>>>> + * are global to the system and therefor additions to the hash table
->>>>> + * must be protected by the @reg_handle_lock.
->>>>> + *
->>>>> + * In order to future proof for up-coming heterogeneous work we want
->>>>> + * different entries for each CPU type while sharing them in the
->>>>> + * common case of multiple cores of the same type.
->>>>> + */
->>>>> +
->>>>> +static QemuMutex reg_handle_lock;
->>>>> +
->>>>> +struct qemu_plugin_register {
->>>>> +    const char *name;
->>>>> +    int gdb_reg_num;
->>>>> +};
->>>>> +
->>>>> +static GHashTable *reg_handles; /* hash table of PluginReg */
->>>>> +
->>>>> +/* Generate a stable key - would xxhash be overkill? */
->>>>> +static gpointer cpu_plus_reg_to_key(CPUState *cs, int gdb_regnum)
->>>>> +{
->>>>> +    uintptr_t key = (uintptr_t) cs->cc;
->>>>> +    key ^= gdb_regnum;
->>>>> +    return GUINT_TO_POINTER(key);
->>>>> +}
->>>>
->>>> I have pointed out this is theoretically prone to collisions and
->>>> unsafe.
->>> How is it unsafe? The aim is to share handles for the same CPUClass
->>> rather than having a unique handle per register/cpu combo.
->>
->> THe intention is legitimate, but the implementation is not safe. It
->> assumes (uintptr)cs->cc ^ gdb_regnum is unique, but there is no such
->> guarantee. The key of GHashTable must be unique; generating hashes of
->> keys should be done with hash_func given to g_hash_table_new().
-> 
-> This isn't a hash its a non-unique key. It is however unique for
-> the same register on the same class of CPU so for each vCPU in a system
-> can share the same opaque handles.
-> 
-> The hashing is done internally by glib. We would assert if there was a
-> duplicate key referring to a different register.
-> 
-> I'm unsure what you want here? Do you have a suggestion for the key
-> generation algorithm? As the comment notes I did consider a more complex
-> mixing algorithm using xxhash but that wouldn't guarantee no clash
-> either.
+Hi Atish,
 
-I suggest using a struct that holds both of cs->cc and gdb_regnum, and 
-pass g_direct_equal() and g_direct_hash() to g_hash_table_new().
+This series and its dependency, which I assume it's
+
+"[PATCH v4 0/5] Add ISA extension smcntrpmf support"
+
+Doesn't apply in neither master nor riscv-to-apply.next because of this patch:
+
+"target/riscv: Use RISCVException as return type for all csr ops"
+
+That changed some functions from 'int' to "RISCVException" type. The conflicts
+from the v4 series are rather trivial but the conflicts for this RFC are annoying
+to deal with. It would be better if you could re-send both series rebased with
+the latest changes.
+
+One more thing:
+
+On 2/16/24 21:01, Atish Patra wrote:
+> This series adds the counter delegation extension support. The counter
+> delegation ISA extension(Smcdeleg/Ssccfg) actually depends on multiple ISA
+> extensions.
+> 
+> 1. S[m|s]csrind : The indirect CSR extension[1] which defines additional
+>     5 ([M|S|VS]IREG2-[M|S|VS]IREG6) register to address size limitation of
+>     RISC-V CSR address space.
+> 2. Smstateen: The stateen bit[60] controls the access to the registers
+>     indirectly via the above indirect registers.
+> 3. Smcdeleg/Ssccfg: The counter delegation extensions[2]
+> 
+> The counter delegation extension allows Supervisor mode to program the
+> hpmevent and hpmcounters directly without needing the assistance from the
+> M-mode via SBI calls. This results in a faster perf profiling and very
+> few traps. This extension also introduces a scountinhibit CSR which allows
+> to stop/start any counter directly from the S-mode. As the counter
+> delegation extension potentially can have more than 100 CSRs, the specificaiton
+> leverages the indirect CSR extension to save the precious CSR address range.
+> 
+> Due to the dependancy of these extensions, the following extensions must be
+> enabled to use the counter delegation feature in S-mode.
+> 
+> "smstateen=true,sscofpmf=true,ssccfg=true,smcdeleg=true,smcsrind=true,sscsrind=true"
+> 
+> This makes the qemu command line quite tedious. In stead of that, I think we
+> can enable these features by default if there is no objection.
+
+It wasn't need so far but, if needed, we can add specialized setters for extensions
+that has multiple dependencies. Instead of the usual setter we would do something
+like:
+
+cpu_set_ssccfg() {
+
+     if (enabled) {
+         smstateen=true
+         sscofpmf=true
+         smcdeleg=true
+         smcsrind=true
+         sscsrind=true
+     }
+}
+
+
+The advantage is that this setter would also work for CPUs that doesn't inherit defaults,
+like bare-cps and profile CPUs.
+
+That doesn't mean we can't add defaults for rv64, but for this particular case I wonder if
+the 'max' CPU wouldn't be better.
+
+
+Thanks,
+
+
+Daniel
+
+> 
+> The first 2 patches decouple the indirect CSR usage from AIA implementation
+> while patch3 adds stateen bits validation for AIA.
+> The PATCH4 implements indirect CSR extensions while remaining patches
+> implement the counter delegation extensions.
+> 
+> The Qemu patches can be found here:
+> https://github.com/atishp04/qemu/tree/counter_delegation_rfc
+> 
+> The opensbi patch can be found here:
+> https://github.com/atishp04/opensbi/tree/counter_delegation_v1
+> 
+> The Linux kernel patches can be found here:
+> https://github.com/atishp04/linux/tree/counter_delegation_rfc
+> 
+> [1] https://github.com/riscv/riscv-indirect-csr-access
+> [2] https://github.com/riscv/riscv-smcdeleg-ssccfg
+> 
+> Atish Patra (1):
+> target/riscv: Enable S*stateen bits for AIA
+> 
+> Kaiwen Xue (7):
+> target/riscv: Add properties for Indirect CSR Access extension
+> target/riscv: Decouple AIA processing from xiselect and xireg
+> target/riscv: Support generic CSR indirect access
+> target/riscv: Add smcdeleg/ssccfg properties
+> target/riscv: Add counter delegation definitions
+> target/riscv: Add select value range check for counter delegation
+> target/riscv: Add counter delegation/configuration support
+> 
+> target/riscv/cpu.c      |   8 +
+> target/riscv/cpu.h      |   1 +
+> target/riscv/cpu_bits.h |  34 +-
+> target/riscv/cpu_cfg.h  |   4 +
+> target/riscv/csr.c      | 713 +++++++++++++++++++++++++++++++++++++---
+> target/riscv/machine.c  |   1 +
+> 6 files changed, 722 insertions(+), 39 deletions(-)
+> 
+> --
+> 2.34.1
+> 
 
