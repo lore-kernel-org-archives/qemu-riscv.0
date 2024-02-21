@@ -4,88 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76E5BC48BEB
-	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Feb 2024 18:06:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1A8DC48BEB
+	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Feb 2024 18:27:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rcqyb-0001mh-Kp; Wed, 21 Feb 2024 13:05:49 -0500
+	id 1rcrIv-0007vp-9N; Wed, 21 Feb 2024 13:26:49 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rcqyY-0001dG-W7
- for qemu-riscv@nongnu.org; Wed, 21 Feb 2024 13:05:47 -0500
-Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430])
+ id 1rcrIr-0007v9-79
+ for qemu-riscv@nongnu.org; Wed, 21 Feb 2024 13:26:45 -0500
+Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rcqyX-0000FU-1m
- for qemu-riscv@nongnu.org; Wed, 21 Feb 2024 13:05:46 -0500
-Received: by mail-pf1-x430.google.com with SMTP id
- d2e1a72fcca58-6e08dd0fa0bso28810b3a.1
- for <qemu-riscv@nongnu.org>; Wed, 21 Feb 2024 10:05:44 -0800 (PST)
+ id 1rcrIo-0004HV-F3
+ for qemu-riscv@nongnu.org; Wed, 21 Feb 2024 13:26:44 -0500
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-6e471f5f1a5so2052003b3a.1
+ for <qemu-riscv@nongnu.org>; Wed, 21 Feb 2024 10:26:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1708538743; x=1709143543; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1708539999; x=1709144799; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=nKKLptDSdqzkckguYJTH6juMz0piBQqZbgHWd2D7gsc=;
- b=RzU5/pVzMsjqeUpxBRgmUfb2puIyUSB7o6MqtedeCxcA+mpJtaUxH0lfBKzrltGVKU
- UGq43NdMOWNhxllI2FEWPE4U+JIG5FHh70Tqf/I2sCqFyRNX5t/ZtFaDTfHVkg+u1PoH
- x8fydQ4hVB8KMuikE4jN6C0jfNsFw6WZdXRpTz5oqHl+KjN1Dzc3C7f3yO9Ibc/r1E1d
- FJTWiVCBcKQRQuv+Ube12uxqiGCv7CmR6YmSSt+y9V/C5Ko55/hxgc3k7pKIOqeyUcBV
- LKPhLdqjJQZfPVSDnGJCCAeqpvlk/uIefzllLZlYRMStmuzSrEjF8bntEochMQoR7IXn
- zj4A==
+ bh=5JhbzFWxHmHILiNel/9+wU2VgMZPucheU/HjlzzLBGc=;
+ b=Uc60EGO8XXNDxC1vC3RCX4wi7TduPv4QEdZsNwQa8V7veTFgq4gOpQbfivCEHll9tI
+ ITz28dy6DigEug/b115T0bI6a6dmfIL6Re9Li464SAY+YgD8gDpmKDGPoKC6N5DFntUb
+ al4PnHqQBmmY2BddtATZmapRdOIGqHgC+fdg4SSs/UtRtaeezh4kaPCnyyQL5m7WrhvU
+ z+Tbazq6MTq6iiRo8ExygSj1TXwph8OC2COQ+9o1+bZyeOkgC1ByNCsT06BVVfoJ+6Kf
+ Wnt2ml+wpzJFlQTW1VjIveK95pes2i3p323Xq3t8jV/G9k3UndsKCOZyemQXitZPpdfi
+ sYIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708538743; x=1709143543;
+ d=1e100.net; s=20230601; t=1708539999; x=1709144799;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=nKKLptDSdqzkckguYJTH6juMz0piBQqZbgHWd2D7gsc=;
- b=Di7+hnIodIq+0FFjQ+Sk7OZwZyZ7lu8a37T51dGmMJq2A9f5cilsl0+jGpLNMw9OKh
- ugHp24VJWkiAmjCBQo2oX7uX+epj2i7dzHWdWvPXU55vVFoFgd/7hLFG9fGFCoATOp1O
- RE1jRVpgV0WmVXXCxxDT51V4KaR4X/4qB+9OKOn/xydINNH2lWrKYbOQ9TyzM9jpWZzd
- AcLH+b02DeS0Ztb3PHJJFjs0Z2dCS93rIurpTU8tykudcxsA60msUoJHcOf2E/h1R7iF
- M0cYJRFMMCx8voqQAMzTal2Vek3nDTIe4l809VXzaYYuTnowir6jWm86yu6jpU5nWTgm
- rV5w==
+ bh=5JhbzFWxHmHILiNel/9+wU2VgMZPucheU/HjlzzLBGc=;
+ b=JvkbFiAq7ovs1VnK8np3JeluS6dLnG5qbggjzJObU3DWakqri1sB5u82Of3qmHpCiR
+ 8c5aAsG0/DzuPi5ukNUMR9ixBBkGf2P+1IlXtPUqjI/qzwbo5KWbBCxlvGXaecQZ0Ks8
+ Y5rLV3S7O4XOCL8beXPtYrD3b3LgFjtvu8ot1G9TV3zqbonOOf/wvxSgCNrSukW8gEPT
+ 6sKrNR9031bZcXBV79+FFyK8jwKJnc4TloJNEDzKkXECKb95TJX0tEdLEz9qIMTHIskc
+ IcyIWZabDh+k0ERTDQD5i9eA4QjSnRPET/QfuMijeu/1l8PxVLACCm/lDpwAfQFOEXD/
+ IYYQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUZFtvZq9lryD9ekWDDNCzdsme0Qqkb5FVYfwLGEOLF/ZWrT2gBp7NqSkOM2+mirO303xRe5iHzt4f52NX2Unf5PWvIkIo=
-X-Gm-Message-State: AOJu0YxTrO7QeWvNhPFim4reUW3xMeaEtPw80UbuNPR4S0UKGS9+VLws
- +XVv5pVVLVLaMctOO3oAmz+I8f/6/WBUrx0A719kC3I3KVaptkHl7nfJ3fTYBz4=
-X-Google-Smtp-Source: AGHT+IFV8Zft/HEd0ZZ0Sqs3GE02GOjtOYWps9GcAdWCAGezCPoGChys0Cq19iS0rzx9cDKs4tYtUA==
-X-Received: by 2002:a05:6a00:4585:b0:6e4:bc7f:ba39 with SMTP id
- it5-20020a056a00458500b006e4bc7fba39mr277365pfb.17.1708538743337; 
- Wed, 21 Feb 2024 10:05:43 -0800 (PST)
+ AJvYcCWYJFGxKxNR/PZCAa0olX0pXgEqlqJEGjOpAgOSjFMCf1uEzZaYHX4HRBgqiQOxgo1WD1UtsE3hQw7Xd80csPlD3udGh5w=
+X-Gm-Message-State: AOJu0YzLxRkK4u99NB2mbzCkE+q4cq+1gdtwogNjMdU+tbOGDlzGBcU0
+ gSAoqKksRr+DVBZS9p1IcqQpYzXKhG1EJlMwSe4eqWaRy6NwoYsQs/HF+LC+ak8=
+X-Google-Smtp-Source: AGHT+IE4Yf6LMBhZoZFF3UVUrH1Y9mrB8eamGwA5xUefQ9A+JQmaMVRsi9fKexQA3DHe31Jo3FKHaQ==
+X-Received: by 2002:a05:6a20:93aa:b0:1a0:7fa2:305 with SMTP id
+ x42-20020a056a2093aa00b001a07fa20305mr20569579pzh.47.1708539998955; 
+ Wed, 21 Feb 2024 10:26:38 -0800 (PST)
 Received: from [192.168.68.110] ([177.94.15.159])
  by smtp.gmail.com with ESMTPSA id
- s6-20020a62e706000000b006e3f09fd6a5sm7571751pfh.163.2024.02.21.10.05.40
+ y3-20020a62f243000000b006e45e20e3ecsm6784003pfl.60.2024.02.21.10.26.34
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 21 Feb 2024 10:05:42 -0800 (PST)
-Message-ID: <094d7589-09f6-4515-ae8d-72acbd3ade58@ventanamicro.com>
-Date: Wed, 21 Feb 2024 15:05:39 -0300
+ Wed, 21 Feb 2024 10:26:38 -0800 (PST)
+Message-ID: <de514d34-b0e3-4776-890d-3d5dc738785c@ventanamicro.com>
+Date: Wed, 21 Feb 2024 15:26:33 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/4] target/riscv: Apply modularized matching conditions
- for icount trigger
+Subject: Re: [PATCH RFC 0/8] Add Counter delegation ISA extension support
 Content-Language: en-US
-To: Alvin Chang <alvinga@andestech.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com
-References: <20240219032559.79665-1-alvinga@andestech.com>
- <20240219032559.79665-5-alvinga@andestech.com>
+To: Atish Kumar Patra <atishp@rivosinc.com>
+Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ qemu-riscv@nongnu.org, Weiwei Li <liwei1518@gmail.com>,
+ kaiwenxue1@gmail.com, Andrew Jones <ajones@ventanamicro.com>
+References: <20240217000134.3634191-1-atishp@rivosinc.com>
+ <35a4d40c-9d0d-4a0a-a2c9-5d5f7def9b9c@ventanamicro.com>
+ <CAHBxVyEnRcvB5iGDv8rE6oJ6L+yvM12ia+T0ZtsAx73TW5PfrQ@mail.gmail.com>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240219032559.79665-5-alvinga@andestech.com>
+In-Reply-To: <CAHBxVyEnRcvB5iGDv8rE6oJ6L+yvM12ia+T0ZtsAx73TW5PfrQ@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::430;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x430.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x42d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,44 +105,169 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 2/19/24 00:25, Alvin Chang wrote:
-> We have implemented trigger_common_match(), which checks if the enabled
-> privilege levels of the trigger match CPU's current privilege level. We
-> can invoke trigger_common_match() to check the privilege levels of the
-> type 3 triggers.
+On 2/21/24 14:06, Atish Kumar Patra wrote:
 > 
-> Signed-off-by: Alvin Chang <alvinga@andestech.com>
-> ---
->   target/riscv/debug.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/target/riscv/debug.c b/target/riscv/debug.c
-> index 67ba19c966..de996a393c 100644
-> --- a/target/riscv/debug.c
-> +++ b/target/riscv/debug.c
-> @@ -624,7 +624,7 @@ void helper_itrigger_match(CPURISCVState *env)
->           if (get_trigger_type(env, i) != TRIGGER_TYPE_INST_CNT) {
->               continue;
->           }
-> -        if (check_itrigger_priv(env, i)) {
-> +        if (!trigger_common_match(env, TRIGGER_TYPE_INST_CNT, i)) {
->               continue;
->           }
+> On Wed, Feb 21, 2024 at 6:58 AM Daniel Henrique Barboza <dbarboza@ventanamicro.com <mailto:dbarboza@ventanamicro.com>> wrote:
+> 
+>     Hi Atish,
+> 
+>     This series and its dependency, which I assume it's
+> 
+>     "[PATCH v4 0/5] Add ISA extension smcntrpmf support"
+> 
+>     Doesn't apply in neither master nor riscv-to-apply.next because of this patch:
+> 
+>     "target/riscv: Use RISCVException as return type for all csr ops"
+> 
+>     That changed some functions from 'int' to "RISCVException" type. The conflicts
+>     from the v4 series are rather trivial but the conflicts for this RFC are annoying
+>     to deal with. It would be better if you could re-send both series rebased with
+>     the latest changes.
+> 
+> 
+> I was waiting for Alistair's ACK on the smcntrpmf series as he had some comments. It looks like he is okay
+> with the series now (no further questions).  Let me respin both the series.
+> 
+>     One more thing:
+> 
+>     On 2/16/24 21:01, Atish Patra wrote:
+>      > This series adds the counter delegation extension support. The counter
+>      > delegation ISA extension(Smcdeleg/Ssccfg) actually depends on multiple ISA
+>      > extensions.
+>      >
+>      > 1. S[m|s]csrind : The indirect CSR extension[1] which defines additional
+>      >     5 ([M|S|VS]IREG2-[M|S|VS]IREG6) register to address size limitation of
+>      >     RISC-V CSR address space.
+>      > 2. Smstateen: The stateen bit[60] controls the access to the registers
+>      >     indirectly via the above indirect registers.
+>      > 3. Smcdeleg/Ssccfg: The counter delegation extensions[2]
+>      >
+>      > The counter delegation extension allows Supervisor mode to program the
+>      > hpmevent and hpmcounters directly without needing the assistance from the
+>      > M-mode via SBI calls. This results in a faster perf profiling and very
+>      > few traps. This extension also introduces a scountinhibit CSR which allows
+>      > to stop/start any counter directly from the S-mode. As the counter
+>      > delegation extension potentially can have more than 100 CSRs, the specificaiton
+>      > leverages the indirect CSR extension to save the precious CSR address range.
+>      >
+>      > Due to the dependancy of these extensions, the following extensions must be
+>      > enabled to use the counter delegation feature in S-mode.
+>      >
+>      > "smstateen=true,sscofpmf=true,ssccfg=true,smcdeleg=true,smcsrind=true,sscsrind=true"
+>      >
+>      > This makes the qemu command line quite tedious. In stead of that, I think we
+>      > can enable these features by default if there is no objection.
+> 
+>     It wasn't need so far but, if needed, we can add specialized setters for extensions
+>     that has multiple dependencies. Instead of the usual setter we would do something
+>     like:
+> 
+>     cpu_set_ssccfg() {
+> 
+>           if (enabled) {
+>               smstateen=true
+>               sscofpmf=true
+>               smcdeleg=true
+>               smcsrind=true
+>               sscsrind=true
+>           }
+>     }
+> 
+> 
+>     The advantage is that this setter would also work for CPUs that doesn't inherit defaults,
+>     like bare-cps and profile CPUs.
+> 
+> 
+> Your suggested approach looks good to me. But I was asking about concerns about enabling these extensions
+> by default rather than the actual mechanism to implement it. Few of the extensions listed here such as smstateen,smcsrind
+> sscsrind are independent ISA extensions which are used for other ISA extensions as well.
+> 
+> It looks like you are okay with the use case also ?
+
+I don't mind setting new defaults in rv64.
+
+> 
+>     That doesn't mean we can't add defaults for rv64, but for this particular case I wonder if
+>     the 'max' CPU wouldn't be better.
+> 
+> 
+> Not sure what you mean here. What does 'max' cpu have to do with pmu extensions ?
 
 
-Looks good. Shouldn't we also change riscv_itrigger_enabled() to also use
-trigger_common_match()? riscv_itrigger_enabled() is remarkably similar to
-helper_itrigger_match() so I believe we can also use the new function
-there.
+Save a few exceptions, all the extensions declared in riscv_cpu_extensions[]
+will be enabled in the 'max' CPU, regardless of their default value for the
+rv64 CPU (see riscv_init_max_cpu_extensions() in tcg-cpu.c).
+
+If we count both the v4 and this RFC, the following extensions were added in
+riscv_cpu_extensions[]:
+
++    MULTI_EXT_CFG_BOOL("smcntrpmf", ext_smcntrpmf, false),
+
++    MULTI_EXT_CFG_BOOL("smcsrind", ext_smcsrind, false),
++    MULTI_EXT_CFG_BOOL("sscsrind", ext_sscsrind, false),
+
++    MULTI_EXT_CFG_BOOL("smcdeleg", ext_smcdeleg, false),
++    MULTI_EXT_CFG_BOOL("ssccfg", ext_ssccfg, false),
+
+
+All of them will be enabled by default in the 'max' CPU.
+
+This is what I was referring to. We can just use the 'max' CPU and don't worry about
+enabling defaults in rv64.
 
 
 Thanks,
 
 Daniel
 
-
-
-
-
->           count = itrigger_get_count(env, i);
+> 
+> 
+>     Thanks,
+> 
+> 
+>     Daniel
+> 
+>      >
+>      > The first 2 patches decouple the indirect CSR usage from AIA implementation
+>      > while patch3 adds stateen bits validation for AIA.
+>      > The PATCH4 implements indirect CSR extensions while remaining patches
+>      > implement the counter delegation extensions.
+>      >
+>      > The Qemu patches can be found here:
+>      > https://github.com/atishp04/qemu/tree/counter_delegation_rfc <https://github.com/atishp04/qemu/tree/counter_delegation_rfc>
+>      >
+>      > The opensbi patch can be found here:
+>      > https://github.com/atishp04/opensbi/tree/counter_delegation_v1 <https://github.com/atishp04/opensbi/tree/counter_delegation_v1>
+>      >
+>      > The Linux kernel patches can be found here:
+>      > https://github.com/atishp04/linux/tree/counter_delegation_rfc <https://github.com/atishp04/linux/tree/counter_delegation_rfc>
+>      >
+>      > [1] https://github.com/riscv/riscv-indirect-csr-access <https://github.com/riscv/riscv-indirect-csr-access>
+>      > [2] https://github.com/riscv/riscv-smcdeleg-ssccfg <https://github.com/riscv/riscv-smcdeleg-ssccfg>
+>      >
+>      > Atish Patra (1):
+>      > target/riscv: Enable S*stateen bits for AIA
+>      >
+>      > Kaiwen Xue (7):
+>      > target/riscv: Add properties for Indirect CSR Access extension
+>      > target/riscv: Decouple AIA processing from xiselect and xireg
+>      > target/riscv: Support generic CSR indirect access
+>      > target/riscv: Add smcdeleg/ssccfg properties
+>      > target/riscv: Add counter delegation definitions
+>      > target/riscv: Add select value range check for counter delegation
+>      > target/riscv: Add counter delegation/configuration support
+>      >
+>      > target/riscv/cpu.c      |   8 +
+>      > target/riscv/cpu.h      |   1 +
+>      > target/riscv/cpu_bits.h |  34 +-
+>      > target/riscv/cpu_cfg.h  |   4 +
+>      > target/riscv/csr.c      | 713 +++++++++++++++++++++++++++++++++++++---
+>      > target/riscv/machine.c  |   1 +
+>      > 6 files changed, 722 insertions(+), 39 deletions(-)
+>      >
+>      > --
+>      > 2.34.1
+>      >
+> 
 
