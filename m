@@ -4,84 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3D13C54788
-	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Feb 2024 21:26:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EB8AC54788
+	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Feb 2024 21:31:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rcu5j-0007ca-5m; Wed, 21 Feb 2024 16:25:23 -0500
+	id 1rcu7t-0006hA-RB; Wed, 21 Feb 2024 16:27:37 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rcu5T-0007Qu-0C
- for qemu-riscv@nongnu.org; Wed, 21 Feb 2024 16:25:08 -0500
-Received: from mail-il1-x12d.google.com ([2607:f8b0:4864:20::12d])
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1rcu7m-0006QY-4t
+ for qemu-riscv@nongnu.org; Wed, 21 Feb 2024 16:27:31 -0500
+Received: from mail-pg1-x52e.google.com ([2607:f8b0:4864:20::52e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rcu5Q-0002we-L1
- for qemu-riscv@nongnu.org; Wed, 21 Feb 2024 16:25:06 -0500
-Received: by mail-il1-x12d.google.com with SMTP id
- e9e14a558f8ab-364efe11f6aso34880585ab.1
- for <qemu-riscv@nongnu.org>; Wed, 21 Feb 2024 13:25:04 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1rcu7j-0003GI-GU
+ for qemu-riscv@nongnu.org; Wed, 21 Feb 2024 16:27:29 -0500
+Received: by mail-pg1-x52e.google.com with SMTP id
+ 41be03b00d2f7-5d81b08d6f2so5633124a12.0
+ for <qemu-riscv@nongnu.org>; Wed, 21 Feb 2024 13:27:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1708550703; x=1709155503; darn=nongnu.org;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1708550846; x=1709155646;
+ darn=nongnu.org; 
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=ly+eHYKQZikrFS/T0BXws43a/vi7lieY+J3mVy2jsZA=;
- b=cKpfn2OF7PG9IWt7MZR/tCp+InOVmwZkddvfBAhX/Iw7w6eNUiigKKsrLeRKkpXKj+
- q/8DlEXG/g/seGicKLJ2UzHfuY1GGOCkQU3s2zj9QZciwhNtDqW0x37qNdBeKG9KJl0n
- z42v3gyxGZQkQ+z2LTBmyo+FlWBhZ4dy3SPNHbSgd9tvmzrmCwH8Mgx22FvlX6opfojM
- K2ecqnNtx13QNmPjGHlsbTvMqNT9pCsD+9+H4e5lPVj9NtNQImAOJK10giYmvRhpEmmE
- DsF36KJnGZ4CeLpDZXaUTJkFsniVe5hU8pdgP4Y6Wllzh+y6x757mYigrbRtRAXtEZ5H
- geJQ==
+ bh=mjv4bxLkrZRB4FbQtX61briJZD7pgF7JlPE3YnVgUAc=;
+ b=S/CrLG6na+tJ+N2XvKUoLL41dDIu0eJdbtjNIfjrcPPeeoe5jfAOiwFBNVLelxUEc7
+ z9u+G7evtXvVIZoHOjH+SGjmo2iS3t4FQJ9jielUt0WzqQP326D59uQy8ONLCK9II8f5
+ an+4YRRaJVzstBAP4C7uZpf/fqdRwzOiHvSjvgzMplLRreIecpfaWd+JJXlrGMCgXMMU
+ pgtZrXixeHhvUwbWhzQQM7qO6ZPIDaYtvzBH9R0h7309ENST7uoVOG3pwHJnVFd7HshA
+ A9ujArLC/LzU1/cCuyahwQr7sTZG08g6UyP7My+0X0gxQbc5ubSDycykCz5doGGts7o5
+ MF3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708550703; x=1709155503;
+ d=1e100.net; s=20230601; t=1708550846; x=1709155646;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ly+eHYKQZikrFS/T0BXws43a/vi7lieY+J3mVy2jsZA=;
- b=NCJHvhZlfSmxiZvDyO3lmgsrTu/x1+q8P8uROqJrpDRmw8zqhRA3NN0/A76+mmNbVc
- YF1G1NSxp7uytT0xyYf9u5CHirGLi2Fjh+dWUS1DLsGB1W4V/xCCc9g671ebCAQlromo
- 3JcZgJtmfuWyH6i8Go2I3ocOUSQ7ESiONaKMB/MmHOmFlKlf2M94ID2bOdIPNbQo2vhy
- qqMdRwCFivHu+sj1cbDgjgkZqMpGvi1g9dbh7C0WMprXfiqi/nlr8p3RdRw0L21R6bSM
- nNZ3vFQ2FOiYptPG20dlBPJIy9rYD8RtwO5HMoMibcYlsT40gEbQBWULIasFcirdAd83
- cMgg==
-X-Gm-Message-State: AOJu0YyLcnD5x1YPaaJqJeOc9YNvHcUO2fWRxYsoIA8Z7DH9NloLtawf
- FO8whkDJMpJi5EHQUecseUBGuGkftLveuGQXBqKqJz3O1Ry62MfGqzOQUxwXZx4=
-X-Google-Smtp-Source: AGHT+IGK6pT3x21ohZeqqOWJP2Rl/lBGvx8tHnhd/lf68oxWonH5oSiywYNblf/BsErpk5NMJhmLfA==
-X-Received: by 2002:a92:db4b:0:b0:365:2575:6d3 with SMTP id
- w11-20020a92db4b000000b00365257506d3mr12339494ilq.30.1708550703268; 
- Wed, 21 Feb 2024 13:25:03 -0800 (PST)
-Received: from [192.168.68.110] ([177.94.15.159])
+ bh=mjv4bxLkrZRB4FbQtX61briJZD7pgF7JlPE3YnVgUAc=;
+ b=qPZZiKkmsbnwT9ABIJO3zWshCsiZJva7N/gcXytSGFEqwFZ7+16sKX3SfFRbCFj8AS
+ e6pygl6qlwF5Vt3qEctpb/aRJBeJE3SStq9vJSBDr3CzlhwXipssLZ1LlFmQ8SeEbots
+ +BLPqCzh96yygasunOOmXAIpysRpTNVWT0FkiW5vAhGl0asbZAvm3p/wE/tK0VBgdZeN
+ vptFZceFl5t/DgJIv/tVYxzeAdgqvHiopaLmmhkIIz5NtpU//gqQmNqYlT5j5RVuozBl
+ bJLnDypYasqU9i1WlosvF73huPeQhwIWrnxo7x+pB61+j2I11CqiD6U9rWDCcQtw1tux
+ kPUg==
+X-Gm-Message-State: AOJu0Ywt5FsbBDQP4b7+LScKwYS62B8fosPoicyOPe5WP1lU5ZKYLx4X
+ QviSKGpeowZJmKViLRwotFLY/ryaWWCJ33BHzW3pvk2hAdHmKQQhf+kpI+aoVp4=
+X-Google-Smtp-Source: AGHT+IEdxUqiZXt5mSpIZK6c/fbmXmAsdWH9qFobV1eGVFmlkMaxcimpweODCsMRe1vgThEmW3fn5g==
+X-Received: by 2002:a17:90a:4381:b0:298:c136:2ffc with SMTP id
+ r1-20020a17090a438100b00298c1362ffcmr14648869pjg.45.1708550846133; 
+ Wed, 21 Feb 2024 13:27:26 -0800 (PST)
+Received: from [172.16.0.69] (c-67-188-2-18.hsd1.ca.comcast.net. [67.188.2.18])
  by smtp.gmail.com with ESMTPSA id
- h17-20020a63e151000000b005dc884e9f5bsm9138691pgk.38.2024.02.21.13.25.00
+ o2-20020a17090a5b0200b00298ca131c75sm2310792pji.24.2024.02.21.13.27.24
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 21 Feb 2024 13:25:02 -0800 (PST)
-Message-ID: <401679a5-ff0e-4911-acef-5774681f2e1d@ventanamicro.com>
-Date: Wed, 21 Feb 2024 18:24:58 -0300
+ Wed, 21 Feb 2024 13:27:25 -0800 (PST)
+Message-ID: <56f06a67-3e8a-42e6-a828-f2c833c74ec4@rivosinc.com>
+Date: Wed, 21 Feb 2024 13:27:24 -0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 0/7] riscv: set vstart_eq_zero on mark_vs_dirty
+Subject: Re: [PATCH] target/riscv: Add missing include guard in pmu.h
 Content-Language: en-US
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- richard.henderson@linaro.org, max.chou@sifive.com
-References: <20240221022252.252872-1-dbarboza@ventanamicro.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240221022252.252872-1-dbarboza@ventanamicro.com>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ frank.chang@sifive.com, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+References: <20240220110907.10479-1-frank.chang@sifive.com>
+ <9df86826-44c2-4816-ae59-189773c51d95@ventanamicro.com>
+From: Atish Patra <atishp@rivosinc.com>
+In-Reply-To: <9df86826-44c2-4816-ae59-189773c51d95@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12d;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-il1-x12d.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52e;
+ envelope-from=atishp@rivosinc.com; helo=mail-pg1-x52e.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,57 +100,46 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Richard,
+On 2/20/24 08:20, Daniel Henrique Barboza wrote:
+> 
+> 
+> On 2/20/24 08:08, frank.chang@sifive.com wrote:
+>> From: Frank Chang <frank.chang@sifive.com>
+>>
+>> Add missing include guard in pmu.h to avoid the problem of double
+>> inclusion.
+>>
+>> Signed-off-by: Frank Chang <frank.chang@sifive.com>
+>> ---
+> 
+> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> 
+>>   target/riscv/pmu.h | 5 +++++
+>>   1 file changed, 5 insertions(+)
+>>
+>> diff --git a/target/riscv/pmu.h b/target/riscv/pmu.h
+>> index 505fc850d3..7c0ad661e0 100644
+>> --- a/target/riscv/pmu.h
+>> +++ b/target/riscv/pmu.h
+>> @@ -16,6 +16,9 @@
+>>    * this program.  If not, see <http://www.gnu.org/licenses/>.
+>>    */
+>> +#ifndef RISCV_PMU_H
+>> +#define RISCV_PMU_H
+>> +
+>>   #include "cpu.h"
+>>   #include "qapi/error.h"
+>> @@ -31,3 +34,5 @@ int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum 
+>> riscv_pmu_event_idx event_idx);
+>>   void riscv_pmu_generate_fdt_node(void *fdt, uint32_t cmask, char 
+>> *pmu_name);
+>>   int riscv_pmu_setup_timer(CPURISCVState *env, uint64_t value,
+>>                             uint32_t ctr_idx);
+>> +
+>> +#endif /* RISCV_PMU_H */
+> 
 
-On 2/20/24 23:22, Daniel Henrique Barboza wrote:
-> Hi,
-> 
-> In this new version we removed the remaining brconds() from
-> trans_rvbf16.c.inc like Richard suggested in patch 3. Richard, I kept
-> your ack in that patch.
-> 
-> This change caused the 'cpu_vstart' global to be unused. A new patch (4)
-> was added to remove it.
-> 
-> Series based on alistair/riscv-to-apply.next.
-> 
-> Patches missing acks: patch 4.
+Oops. Thanks for the fix.
 
-
-I missed your acks from v4 in patches 1 and 2 . I'll add them back in the next
-version.
-
-
-Thanks,
-
-
-Daniel
-
-> 
-> Changes from v4:
-> - patch 3:
->    - remove vstart >= vl and vl = 0 brconds from trans_fvbf16.c.inc
-> - patch 4 (new):
->    - remove cpu_vstart
-> - v4 link: https://lore.kernel.org/qemu-riscv/20240220222510.209448-1-dbarboza@ventanamicro.com/
-> 
-> 
-> Daniel Henrique Barboza (6):
->    trans_rvv.c.inc: mark_vs_dirty() before loads and stores
->    trans_rvv.c.inc: remove 'is_store' bool from load/store fns
->    target/riscv: remove 'over' brconds from vector trans
->    target/riscv/translate.c: remove 'cpu_vstart' global
->    target/riscv/vector_helper.c: set vstart = 0 in GEN_VEXT_VSLIDEUP_VX()
->    trans_rvv.c.inc: remove redundant mark_vs_dirty() calls
-> 
-> Ivan Klokov (1):
->    target/riscv: Clear vstart_qe_zero flag
-> 
->   target/riscv/insn_trans/trans_rvbf16.c.inc |  18 +-
->   target/riscv/insn_trans/trans_rvv.c.inc    | 292 ++++++---------------
->   target/riscv/insn_trans/trans_rvvk.c.inc   |  30 +--
->   target/riscv/translate.c                   |  10 +-
->   target/riscv/vector_helper.c               |   1 +
->   5 files changed, 100 insertions(+), 251 deletions(-)
-> 
+Reviewed-by: Atish Patra <atishp@rivosinc.com>
 
