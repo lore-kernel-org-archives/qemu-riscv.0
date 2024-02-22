@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F0B8C48BF8
-	for <qemu-riscv@archiver.kernel.org>; Thu, 22 Feb 2024 07:59:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27DFDC48BF8
+	for <qemu-riscv@archiver.kernel.org>; Thu, 22 Feb 2024 07:59:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rd3zH-00031B-4N; Thu, 22 Feb 2024 02:59:23 -0500
+	id 1rd3zY-0003Ti-MC; Thu, 22 Feb 2024 02:59:40 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rd3zF-00030Y-3s
- for qemu-riscv@nongnu.org; Thu, 22 Feb 2024 02:59:21 -0500
-Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rd3zV-0003OV-0d
+ for qemu-riscv@nongnu.org; Thu, 22 Feb 2024 02:59:37 -0500
+Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rd3zD-0005bx-LO
- for qemu-riscv@nongnu.org; Thu, 22 Feb 2024 02:59:20 -0500
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-33d6bd39470so714221f8f.3
- for <qemu-riscv@nongnu.org>; Wed, 21 Feb 2024 23:59:18 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rd3zS-0005e7-8l
+ for qemu-riscv@nongnu.org; Thu, 22 Feb 2024 02:59:36 -0500
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-33d36736d4eso3307889f8f.1
+ for <qemu-riscv@nongnu.org>; Wed, 21 Feb 2024 23:59:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708588757; x=1709193557; darn=nongnu.org;
+ d=linaro.org; s=google; t=1708588772; x=1709193572; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=PTfd0q6IlCbhp+wnxdg6xPabhiUdh+fzFjNpq8Gg0Jg=;
- b=Sz1QNdoY06/FXbBReZopveCHZ032xtJvUCBcFb/Bjv+0XJE9c9IHRn/PfUpfus7AUW
- 93ocM4+FYNXsvL0ebL0KX8mY4yaWPBQw4T5Jjp7uqema7T02+jqLxK1V1jgw6K693/sl
- 3WQktBWgcSsk2WRB4mnc2siQBlNHSyPCMZJEDSoCAZuscYszn5mLvz6sk5wQS/BYkIOY
- dJOjIULE95M/uskPQfyqXIsdiBUfo1QduPdALVgecC2LvDjc1N/uq5jCv3AzoH9DeqUj
- 5xz9+5pRxBn1tt9LJ71k5IBhxB2FhtA+7AEOalqCPM2bEGUmf5ArLrZgPiyjWAlhZ6QG
- Oe3Q==
+ bh=U+qskoK6ZgMX8Z+7ktDl6pHmeJ2x8kH1X9ToHpBL90w=;
+ b=F5fs3wWQGR5CPh6Ya+vWRBHKinoB3ONSND1do200Fo/21DsygSUrOBOgXOT1nIxMIU
+ f2/oZgjGarRluIA+4TJFo56b4+bx2VH0PuJ831F+Ud/UcsQJ3LXSR01Vu18EyVPNS7+j
+ TmVb4T+NU4hq8ogt2xKqmD8oeiUxwXYYt2ycaDBilKiPWwK9v3slcBFWc9gyGDSE9Dg7
+ XxMFGY12Z85moU6E0EusO+1gzcTk1sCiAD6kC/TjAgfnfTdlkTf5iLeWhmi5gCGBdMOE
+ VpFIH5404AryA9KNgR6npO8n6fEiJVexpzGjUdS8+l/mLDZSgjCDIbPjeqqlFPLAw4rC
+ HBww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708588757; x=1709193557;
+ d=1e100.net; s=20230601; t=1708588772; x=1709193572;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=PTfd0q6IlCbhp+wnxdg6xPabhiUdh+fzFjNpq8Gg0Jg=;
- b=pmZvFs3ft+v7KIeCee8I87Lq503rFVFP6HsspKB5Qa/yCqwx4WgkbwHqhMlQX+LrJW
- x1o+U3MESbhTUZV7bQyJK2DOGyvSVCGzrhIX/Lop1pCLerGGR/H6hjBfiGYHRKkjNng4
- /KUPtSkrlkeszRCX0HXwv9prAfocWQLxtsYy895qeZ55/t3XyrdYRr19GzSgNa9VpvVY
- zHv3cnm78eyT9q2SuAWi0udyST9nWx0elm2nAMj6zT19ufe1PT11TT2PIX0j2rOkWd0f
- zdjxq+axO+pJcVbGGWRMAe0p4JVTVQSO0hERau6qYY7Mt3OxY6jvUre2eYjelQ9t5t84
- 4XGg==
-X-Gm-Message-State: AOJu0Yxs2ZcRNZTKCNa8xImX72jb376wb2WrYkgNTT60r+S6QeN9sbut
- B0G7epMxb9/hCohn3JHZqXMSmiwrF4IuHRT7J2l6xH5wPG2DsOljyTDP2zABZew=
-X-Google-Smtp-Source: AGHT+IHzB8VoMt3cAxDtjwsEpkK95SKUfcG3x58INcGfH1eh+liIVK6mMSxh5gTiiGwSnnZqslsOIw==
-X-Received: by 2002:a05:6000:1546:b0:33d:5a6f:a856 with SMTP id
- 6-20020a056000154600b0033d5a6fa856mr8084976wry.30.1708588757478; 
- Wed, 21 Feb 2024 23:59:17 -0800 (PST)
+ bh=U+qskoK6ZgMX8Z+7ktDl6pHmeJ2x8kH1X9ToHpBL90w=;
+ b=sPDm+XnlEh1wDdk2vzsRXy2qm/SKVDS4lXJQ51SPDxs9RJgK5nNvURMTVOqV/8PtHi
+ rCAnStiqfiM/KafU1xhQr/pBY27NLmNjV1HxdRSGqJDF/wUt+D99A2wDwn9ZIIe/DgVK
+ vS2NoCLrye8yYGC5ikMZfP7ta2vPrwaVZQ5wHrIKuauiVDlskMmtxVcmec0xNQaieuL0
+ L4vdyjLNbL0AgrOlv8lPDY63BDA6m+C04mQHJi8wo0xvAtMRHWwXpvZ/+pT2YNrDsFCm
+ j908QKQtH6uKJlANBqP+Wx8LAQd7peWo4HUVHmIAgIawx9ZXQIamQZygWaKssskVbdeL
+ ll3Q==
+X-Gm-Message-State: AOJu0YyC/LpMM4hlDxe2uqd7VsJyIMJ85fGFiucHJHZIDYSY8s/TBNFt
+ RpqbkC0OOYQ8QR6OkGc9Vsict3hMEu0PpNablY/c9XkGwpByWygmn2TBUW7Yepw=
+X-Google-Smtp-Source: AGHT+IHiM0C0xu70BefCR+yCPzwKOuFGKnWdAzvMXlIepI6pBZbz+ciuk553kmuIRCG8EyYLYUgq5g==
+X-Received: by 2002:a5d:4a0c:0:b0:33d:1bc8:b169 with SMTP id
+ m12-20020a5d4a0c000000b0033d1bc8b169mr11379865wrq.61.1708588772516; 
+ Wed, 21 Feb 2024 23:59:32 -0800 (PST)
 Received: from [192.168.184.175] (41.red-95-127-32.staticip.rima-tde.net.
  [95.127.32.41]) by smtp.gmail.com with ESMTPSA id
- ba20-20020a0560001c1400b0033d640c8942sm9188080wrb.10.2024.02.21.23.59.15
+ ba20-20020a0560001c1400b0033d640c8942sm9188080wrb.10.2024.02.21.23.59.29
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 21 Feb 2024 23:59:17 -0800 (PST)
-Message-ID: <6ca85567-c941-42b3-a7d8-3de5a9cbd22c@linaro.org>
-Date: Thu, 22 Feb 2024 08:59:13 +0100
+ Wed, 21 Feb 2024 23:59:32 -0800 (PST)
+Message-ID: <a0d09fa7-1867-4dc7-8484-a2f8648b0242@linaro.org>
+Date: Thu, 22 Feb 2024 08:59:29 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 5/9] target/riscv: remove 'cpu_vl' global
+Subject: Re: [PATCH v6 4/9] target/riscv/translate.c: remove 'cpu_vstart'
+ global
 Content-Language: en-US
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  richard.henderson@linaro.org, max.chou@sifive.com
 References: <20240221213140.365232-1-dbarboza@ventanamicro.com>
- <20240221213140.365232-6-dbarboza@ventanamicro.com>
+ <20240221213140.365232-5-dbarboza@ventanamicro.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20240221213140.365232-6-dbarboza@ventanamicro.com>
+In-Reply-To: <20240221213140.365232-5-dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::430;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x430.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -97,18 +98,13 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 21/2/24 22:31, Daniel Henrique Barboza wrote:
-> At this moment the global is used only in do_vsetvl(). Do a direct env
-> load in do_vsetvl() to read 'vl' and remove the global.
+> The global is unused after recent changes.
 > 
-> Suggested-by: Richard Henderson <richard.henderson@linaro.org>
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
->   target/riscv/insn_trans/trans_rvv.c.inc | 2 +-
->   target/riscv/translate.c                | 3 +--
->   2 files changed, 2 insertions(+), 3 deletions(-)
-
-I was expecting this to be squashed in previous patch, but it
-is indeed clearer as a separate one.
+>   target/riscv/translate.c | 4 +---
+>   1 file changed, 1 insertion(+), 3 deletions(-)
 
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
