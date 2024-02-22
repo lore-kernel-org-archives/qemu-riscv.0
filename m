@@ -4,93 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65DCBC54788
-	for <qemu-riscv@archiver.kernel.org>; Thu, 22 Feb 2024 12:38:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83A51C48BF8
+	for <qemu-riscv@archiver.kernel.org>; Thu, 22 Feb 2024 13:23:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rd8Kk-0003sA-3M; Thu, 22 Feb 2024 07:37:50 -0500
+	id 1rd92I-0007WY-8W; Thu, 22 Feb 2024 08:22:50 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rd8Ki-0003rV-IV
- for qemu-riscv@nongnu.org; Thu, 22 Feb 2024 07:37:48 -0500
-Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629])
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1rd92G-0007VN-Ro
+ for qemu-riscv@nongnu.org; Thu, 22 Feb 2024 08:22:48 -0500
+Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rd8Kg-0002D9-Ir
- for qemu-riscv@nongnu.org; Thu, 22 Feb 2024 07:37:48 -0500
-Received: by mail-pl1-x629.google.com with SMTP id
- d9443c01a7336-1dbf1fe91fcso38342235ad.3
- for <qemu-riscv@nongnu.org>; Thu, 22 Feb 2024 04:37:45 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1rd92C-0002TZ-OV
+ for qemu-riscv@nongnu.org; Thu, 22 Feb 2024 08:22:48 -0500
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-1d51ba18e1bso18502445ad.0
+ for <qemu-riscv@nongnu.org>; Thu, 22 Feb 2024 05:22:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1708605465; x=1709210265; darn=nongnu.org;
+ d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1708608163; x=1709212963;
+ darn=nongnu.org; 
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=xrvwjP0Hb+b3w8KG0wWYxs30wNfruxhjAgPCKAwfW6E=;
- b=O7g18gEwL6b/mD6zMaGZoXldLWiNmvipi9EKwKdT6hjrenRUyaathrWT9s6Vmx6Iig
- RZ6Yrfm4V+S/YIGlW3REEyxeR+SyV1ckQDoQwXIBm5eBNqhQJicIpk0F09zwSvi9RZz8
- lhZtKJ+3wl1xedrZUK4ZyYGZ2meHwjMfhAIJE8kEhqu7NUYvvx4Cldf4+AGKcG3SRGBQ
- Y+Ba86wtYmACNxLM7ayjbL9I+po6XbEPb6MUKsPqBy/K3zyXwvUMyGQPrRE/Yk217+0j
- rqpQCVwjLxREadxdw2NRL3gywr6UbNR/+wJVnS80A7rz6VVWAv6n4aA1N3wybahMRIF1
- iBlg==
+ bh=B3S3Bpb421BlK3Vq+EDzCtqJrCcNQN5oK9MmjMf9Dgw=;
+ b=b8p9fa/8IlZPo4we6IurQadge/56IcFuekW354R0g7y5l6L063oVT2TcdEhG080h04
+ fTz9SgM4dUjgXHsOOxj+IW3jLXH1pGTxwuotYH7G7b2W9ACSlMdVaHtDl+PVy0bRFFxx
+ UCKMZIOJApw1fithLPYf68v30mHCM7midEdoAH3PAwKjvj5DAhIFAjDrkiWYOhWrOi5G
+ 1RqDZEMpHFTP818erYninFveVwQ18iTJz1mSU4ixSbcTHA1bWalkL2NQnuIrLHBpYiVM
+ xNY+OZtp9/6t9CmOGk0s7jjUHJhzUscOH1sUeIS9EseTLRYRBLBOJ0UF12X0NW3i5lFg
+ o1mA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708605465; x=1709210265;
+ d=1e100.net; s=20230601; t=1708608163; x=1709212963;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=xrvwjP0Hb+b3w8KG0wWYxs30wNfruxhjAgPCKAwfW6E=;
- b=mKAWly78mOwEsSKdKKv3SqZPNf5Yn1ugapGZ0PywVsLSB0BdsGxaGN/SuaQHp2tuqH
- B6PMRREOo+KTbC+bgviYE29jmeeUFfj/RpInSAh4tLh79o1FwS0EW7QC+TbPp1Fy8P+3
- JoIEDP4tRTRsMzShfF64XWnZ4/ffz5iC805MTkeLEomf11K1xGhxvCtWXx0Tm9YL9Pci
- DsGcp5vOmwJUDNo12VDF2MDoDIYhJAaqefjERzPPJFf7rFYNHPmwYw9CWmiAg/1xkZlB
- tf22wps+9C+BNqLWHp7UxAKMVNdREVJZ+itFfBEUa8gOy0B7ospQgTieaUwM/0WqH2Im
- GVzw==
+ bh=B3S3Bpb421BlK3Vq+EDzCtqJrCcNQN5oK9MmjMf9Dgw=;
+ b=rsJnr3niOIVaHR+1lINJp2kNnQnBQzs44vBqXM5k9Y2mJhnUEZ3/V3fhEI66bBoDwa
+ O0Wm4fy+A1dVCDqh2nkP6ITAbqrH/GYhsI+MhqYFTJLKBq2bq6CAWjvaTUCb9QndyvAB
+ hiaH97Zk9TYVPV2em3vs4LgvutKTXlVr0dOQCh9dKL7OTlSkr7m9hCK8owpwtNsktTj7
+ 0sMT7azVvRDNqntajlWJeF+cyyfN+B4Z6eUOMf2/ai01me9I5154eVyHy/aqDUoGsqoE
+ 1hUsXv6ldI+kl76LqRtahCu4bJu35tc3p59L1B5duQsPJXbWUaCdEF/zmFkf/DKalHch
+ ZTeg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVJ/g1q6hnLWUg4Ew4Xee+IBOueEzYKTwvrfYe6Bd0OOmGihsfugriQZ3TlUIvsXNc1EpMT69J8ofOZhQFT/AkIJznmkpo=
-X-Gm-Message-State: AOJu0YwRvL8+MclwlAuLAh8GgTzg/aOAyCJx9BiZq66FfYBJ0DwVCr4v
- Fb40mIYuMoxhlLf6Zmd3kXuolYwrwj9xh3TNRbktOtxDAvROFv8DYxRW/797OGQ=
-X-Google-Smtp-Source: AGHT+IG2x8eVxDs3qzDoDDyqa0omePT+X5AfKsvlLi3BkihsMpijGHTBF//qkDYYqfuB7ukNJIwAtg==
-X-Received: by 2002:a17:902:bc86:b0:1d9:7ab0:5e20 with SMTP id
- bb6-20020a170902bc8600b001d97ab05e20mr22278224plb.69.1708605464695; 
- Thu, 22 Feb 2024 04:37:44 -0800 (PST)
-Received: from [192.168.68.110] ([177.94.15.159])
+ AJvYcCWhCJJoz4itVtTZeHL6fwn6MnH5rcQKTSP2+TmaRIPOiAn2mVlSA4Ne2RiTjhYX7F+3Dv20giwvvn2k1s+D5F03AcL2bTY=
+X-Gm-Message-State: AOJu0Ywq+b0zidUuvW7hDX0y7q5geNMQ66bnConKyRT04que7OhS7nTe
+ o25SHnu43HxWcUgfaXjTehtooWPb93Fc8djh/ZVZez29R8GufKUdZjeh2vN1F+c=
+X-Google-Smtp-Source: AGHT+IENTkBmQg0olIk0ilHX/sAMRTJBq14FrztFn4Wr4bbHecyeeBVSssBP0UmZaWhYwEN/dAnNBg==
+X-Received: by 2002:a17:903:32c3:b0:1dc:b64:13c8 with SMTP id
+ i3-20020a17090332c300b001dc0b6413c8mr12147274plr.56.1708608163115; 
+ Thu, 22 Feb 2024 05:22:43 -0800 (PST)
+Received: from ?IPV6:2400:4050:a840:1e00:9ac7:6d57:2b16:6932?
+ ([2400:4050:a840:1e00:9ac7:6d57:2b16:6932])
  by smtp.gmail.com with ESMTPSA id
- e2-20020a170902d38200b001da0a698095sm9865684pld.282.2024.02.22.04.37.42
+ jh18-20020a170903329200b001db3a0c52b1sm9937675plb.88.2024.02.22.05.22.36
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 22 Feb 2024 04:37:44 -0800 (PST)
-Message-ID: <eb13a04e-420a-4db7-a324-25520bcc32ea@ventanamicro.com>
-Date: Thu, 22 Feb 2024 09:37:39 -0300
+ Thu, 22 Feb 2024 05:22:42 -0800 (PST)
+Message-ID: <f4b0b535-9e2b-47c7-a84b-afd851deb88a@daynix.com>
+Date: Thu, 22 Feb 2024 22:22:35 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/4] target/riscv: Apply modularized matching conditions
- for breakpoint
-To: =?UTF-8?B?QWx2aW4gQ2hlLUNoaWEgQ2hhbmco5by15ZOy5ZiJKQ==?=
- <alvinga@andestech.com>, "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
-Cc: "alistair.francis@wdc.com" <alistair.francis@wdc.com>,
- "bin.meng@windriver.com" <bin.meng@windriver.com>,
- "liwei1518@gmail.com" <liwei1518@gmail.com>,
- "zhiwei_liu@linux.alibaba.com" <zhiwei_liu@linux.alibaba.com>
-References: <20240219032559.79665-1-alvinga@andestech.com>
- <20240219032559.79665-3-alvinga@andestech.com>
- <801fb2e4-bb09-47e9-b7f6-899de574c4a3@ventanamicro.com>
- <SEYPR03MB6700A34DA4F22756C3C72CF0A8562@SEYPR03MB6700.apcprd03.prod.outlook.com>
+Subject: Re: [PATCH 18/23] plugins: add an API to read registers
+To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
+Cc: qemu-devel@nongnu.org, Yoshinori Sato <ysato@users.sourceforge.jp>,
+ David Hildenbrand <david@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Michael Rolnik <mrolnik@gmail.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
+ Peter Maydell <peter.maydell@linaro.org>, qemu-ppc@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>, qemu-riscv@nongnu.org,
+ Cleber Rosa <crosa@redhat.com>, Thomas Huth <thuth@redhat.com>,
+ Song Gao <gaosong@loongson.cn>, qemu-arm@nongnu.org,
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>, John Snow
+ <jsnow@redhat.com>, =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
+ Nicholas Piggin <npiggin@gmail.com>, qemu-s390x@nongnu.org,
+ Laurent Vivier <laurent@vivier.eu>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Yanan Wang <wangyanan55@huawei.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, Brian Cain
+ <bcain@quicinc.com>, Mahmoud Mandour <ma.mandourr@gmail.com>,
+ Alexandre Iooss <erdnaxe@crans.org>, Bin Meng <bin.meng@windriver.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Eduardo Habkost <eduardo@habkost.net>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+References: <20240216163025.424857-1-alex.bennee@linaro.org>
+ <20240216163025.424857-19-alex.bennee@linaro.org>
+ <c38a22b5-01e8-40f1-bfc4-4bba9bf7b516@daynix.com>
+ <87il2jcje8.fsf@draig.linaro.org>
+ <bf31a250-9539-448c-9c64-4168ab8741f1@daynix.com>
+ <87bk8ab0f4.fsf@draig.linaro.org>
+ <bf5e9471-c09f-47f2-a5a3-83713255c47a@daynix.com>
+ <87zfvtaoqq.fsf@draig.linaro.org>
+ <7e4b4ba6-3683-464f-ac37-3b7f19455643@daynix.com>
+ <87cysoajhl.fsf@draig.linaro.org>
 Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <SEYPR03MB6700A34DA4F22756C3C72CF0A8562@SEYPR03MB6700.apcprd03.prod.outlook.com>
+From: Akihiko Odaki <akihiko.odaki@daynix.com>
+In-Reply-To: <87cysoajhl.fsf@draig.linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x629.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Received-SPF: none client-ip=2607:f8b0:4864:20::632;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-pl1-x632.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -106,144 +130,143 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
-
-On 2/21/24 22:46, Alvin Che-Chia Chang(張哲嘉) wrote:
-> Hi Daniel,
+On 2024/02/22 19:20, Alex Bennée wrote:
+> Akihiko Odaki <akihiko.odaki@daynix.com> writes:
 > 
->> -----Original Message-----
->> From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->> Sent: Thursday, February 22, 2024 1:26 AM
->> To: Alvin Che-Chia Chang(張哲嘉) <alvinga@andestech.com>;
->> qemu-riscv@nongnu.org; qemu-devel@nongnu.org
->> Cc: alistair.francis@wdc.com; bin.meng@windriver.com;
->> liwei1518@gmail.com; zhiwei_liu@linux.alibaba.com
->> Subject: Re: [PATCH 2/4] target/riscv: Apply modularized matching conditions
->> for breakpoint
->>
->>
->>
->> On 2/19/24 00:25, Alvin Chang wrote:
->>> We have implemented trigger_common_match(), which checks if the
->>> enabled privilege levels of the trigger match CPU's current privilege level.
->>> Remove the related code in riscv_cpu_debug_check_breakpoint() and
->>> invoke
->>> trigger_common_match() to check the privilege levels of the type 2 and
->>> type 6 triggers for the breakpoints.
+>> On 2024/02/21 23:14, Alex Bennée wrote:
+>>> Akihiko Odaki <akihiko.odaki@daynix.com> writes:
 >>>
->>> Only the execution bit and the executed PC should be futher checked in
+>>>> On 2024/02/21 19:02, Alex Bennée wrote:
+>>>>> Akihiko Odaki <akihiko.odaki@daynix.com> writes:
+>>>>>
+>>>>>> On 2024/02/20 23:14, Alex Bennée wrote:
+>>>>>>> Akihiko Odaki <akihiko.odaki@daynix.com> writes:
+>>>>>>>
+>>>>>>>> On 2024/02/17 1:30, Alex Bennée wrote:
+>>>>>>>>> We can only request a list of registers once the vCPU has been
+>>>>>>>>> initialised so the user needs to use either call the get function on
+>>>>>>>>> vCPU initialisation or during the translation phase.
+>>>>>>>>> We don't expose the reg number to the plugin instead hiding it
+>>>>>>>>> behind
+>>>>>>>>> an opaque handle. This allows for a bit of future proofing should the
+>>>>>>>>> internals need to be changed while also being hashed against the
+>>>>>>>>> CPUClass so we can handle different register sets per-vCPU in
+>>>>>>>>> hetrogenous situations.
+>>>>>>>>> Having an internal state within the plugins also allows us to expand
+>>>>>>>>> the interface in future (for example providing callbacks on register
+>>>>>>>>> change if the translator can track changes).
+>>>>>>>>> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1706
+>>>>>>>>> Cc: Akihiko Odaki <akihiko.odaki@daynix.com>
+>>>>>>>>> Message-Id: <20240103173349.398526-39-alex.bennee@linaro.org>
+>>>>>>>>> Based-on: <20231025093128.33116-18-akihiko.odaki@daynix.com>
+>>>>>>>>> Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+>>>>>>>>> Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+>>>>>>> <snip>
+>>>>>>>>> +/*
+>>>>>>>>> + * Register handles
+>>>>>>>>> + *
+>>>>>>>>> + * The plugin infrastructure keeps hold of these internal data
+>>>>>>>>> + * structures which are presented to plugins as opaque handles. They
+>>>>>>>>> + * are global to the system and therefor additions to the hash table
+>>>>>>>>> + * must be protected by the @reg_handle_lock.
+>>>>>>>>> + *
+>>>>>>>>> + * In order to future proof for up-coming heterogeneous work we want
+>>>>>>>>> + * different entries for each CPU type while sharing them in the
+>>>>>>>>> + * common case of multiple cores of the same type.
+>>>>>>>>> + */
+>>>>>>>>> +
+>>>>>>>>> +static QemuMutex reg_handle_lock;
+>>>>>>>>> +
+>>>>>>>>> +struct qemu_plugin_register {
+>>>>>>>>> +    const char *name;
+>>>>>>>>> +    int gdb_reg_num;
+>>>>>>>>> +};
+>>>>>>>>> +
+>>>>>>>>> +static GHashTable *reg_handles; /* hash table of PluginReg */
+>>>>>>>>> +
+>>>>>>>>> +/* Generate a stable key - would xxhash be overkill? */
+>>>>>>>>> +static gpointer cpu_plus_reg_to_key(CPUState *cs, int gdb_regnum)
+>>>>>>>>> +{
+>>>>>>>>> +    uintptr_t key = (uintptr_t) cs->cc;
+>>>>>>>>> +    key ^= gdb_regnum;
+>>>>>>>>> +    return GUINT_TO_POINTER(key);
+>>>>>>>>> +}
+>>>>>>>>
+>>>>>>>> I have pointed out this is theoretically prone to collisions and
+>>>>>>>> unsafe.
+>>>>>>> How is it unsafe? The aim is to share handles for the same CPUClass
+>>>>>>> rather than having a unique handle per register/cpu combo.
+>>>>>>
+>>>>>> THe intention is legitimate, but the implementation is not safe. It
+>>>>>> assumes (uintptr)cs->cc ^ gdb_regnum is unique, but there is no such
+>>>>>> guarantee. The key of GHashTable must be unique; generating hashes of
+>>>>>> keys should be done with hash_func given to g_hash_table_new().
+>>>>> This isn't a hash its a non-unique key. It is however unique for
+>>>>> the same register on the same class of CPU so for each vCPU in a system
+>>>>> can share the same opaque handles.
+>>>>> The hashing is done internally by glib. We would assert if there was
+>>>>> a
+>>>>> duplicate key referring to a different register.
+>>>>> I'm unsure what you want here? Do you have a suggestion for the key
+>>>>> generation algorithm? As the comment notes I did consider a more complex
+>>>>> mixing algorithm using xxhash but that wouldn't guarantee no clash
+>>>>> either.
+>>>>
+>>>> I suggest using a struct that holds both of cs->cc and gdb_regnum, and
+>>>> pass g_direct_equal() and g_direct_hash() to g_hash_table_new().
+>>> We already do:
+>>>           if (!reg_handles) {
+>>>               reg_handles = g_hash_table_new(g_direct_hash, g_direct_equal);
+>>>           }
+>>> But we can't use g_direct_equal with something that exceeds the
+>>> width of
+>>> gpointer as it is a straight equality test of the key. What you are
+>>> suggesting requires allocating memory for each key and de-referencing
+>>> with a custom GEqualFunc.
 >>
->> typo: further
-> 
-> Thanks! Will fix it.
-> 
+>> My bad. I wrongly remembered g_direct_equal() and g_direct_hash(). It
+>> indeed seems to need a more complicated solution.
 >>
->>> riscv_cpu_debug_check_breakpoint().
->>>
->>> Signed-off-by: Alvin Chang <alvinga@andestech.com>
->>> ---
->>>    target/riscv/debug.c | 26 ++++++--------------------
->>>    1 file changed, 6 insertions(+), 20 deletions(-)
->>>
->>> diff --git a/target/riscv/debug.c b/target/riscv/debug.c index
->>> 7932233073..b971ed5d7a 100644
->>> --- a/target/riscv/debug.c
->>> +++ b/target/riscv/debug.c
->>> @@ -855,21 +855,17 @@ bool riscv_cpu_debug_check_breakpoint(CPUState
->> *cs)
->>>            for (i = 0; i < RV_MAX_TRIGGERS; i++) {
->>>                trigger_type = get_trigger_type(env, i);
->>>
->>> +            if (!trigger_common_match(env, trigger_type, i)) {
->>> +                continue;
->>> +            }
->>> +
->>
->> I believe this will change how the function behaves. Before this patch, we
->> would 'return false' if we have a TRIGGER_TYPE_AD_MATCH and
->> env->virt_enabled is true.
->>
->> Now, for the same case, we'll keep looping until we found a match, or return
->> 'false'
->> if we run out of triggers.
+>> It is possible to write a GEqualFunc and a GHashFunc that consumes a
+>> struct but it is a chore. How about having a two-level GHashTable?
+>> reg_handles will be a GHashTable keyed with cs->cc, and another
+>> GHashTable will be keyed with gdb_regnum.
 > 
-> Oh! I didn't notice that the behavior is changed.. thank you.
+> That still seems overkill for a clash that can't happen. What do you
+> think about the following:
 > 
-> Image that CPU supports both type 2 and type 6 triggers, and the debugger sets two identical breakpoints.(this should be a mistake, but we should not restrict the debugger)
-> One of them is type 2 breakpoint at trigger index 0, and the other is type 6 breakpoint at trigger index 1.
-> Now if the system runs in VS/VU modes, it could match type 6 breakpoint, so the looping is necessary.
-> If the system runs in M/HS/U modes, it could match type 2 breakpoint.
-> Is my understanding correct?
+>    /*
+>     * Generate a stable key shared across CPUs of the same class
+>     *
+>     * In order to future proof for up-coming heterogeneous work we want
+>     * different entries for each CPU type while sharing them in the
+>     * common case of multiple cores of the same type. This makes the
+>     * assumption you won't see two CPUClass pointers that are similar
+>     * enough that the low bits mixed with different registers numbers
+>     * will give you the same key.
+>     *
+>     * The build time assert will fire if CPUClass goes on a sudden diet
+>     * and we assert further down if we detect two keys representing
+>     * different regnums. In practice allocations of CPUClass are much
+>     * farther apart making clashes practically impossible.
+>     */
+>    static gpointer cpu_plus_reg_to_key(CPUState *cs, int gdb_regnum)
+>    {
+>        uintptr_t key = (uintptr_t) cs->cc;
+> 
+>        /* this protects some of the assumptions above */
+>        qemu_build_assert(sizeof(*cs->cc) >= 256);
+> 
+>        key ^= gdb_regnum;
+>        return GUINT_TO_POINTER(key);
+>    }
 
-It looks correct to me. We just need to mention in the commit msg that the behavior
-change is intentional, not an accident.
 
+I think the assertion and comments are overkill. Doesn't having a nested 
+GHashTable save some words you have to wrote for the assumption?
 
-Thanks,
-
-Daniel
-
-
-> 
-> 
-> Sincerely,
-> Alvin
-> 
->>
->> This seems ok to do, but we should state in the commit msg that we're
->> intentionally change how the function works. If that's not the idea and we want
->> to preserve the existing behavior, we would need to do:
->>
->>>
->>> +            if (!trigger_common_match(env, trigger_type, i)) {
->>> +                return false;
->>> +            }
->>
->> Instead of just continue looping. Thanks,
->>
->>
->> Daniel
->>
->>>                switch (trigger_type) {
->>>                case TRIGGER_TYPE_AD_MATCH:
->>> -                /* type 2 trigger cannot be fired in VU/VS mode */
->>> -                if (env->virt_enabled) {
->>> -                    return false;
->>> -                }
->>> -
->>>                    ctrl = env->tdata1[i];
->>>                    pc = env->tdata2[i];
->>>
->>>                    if ((ctrl & TYPE2_EXEC) && (bp->pc == pc)) {
->>> -                    /* check U/S/M bit against current privilege level
->> */
->>> -                    if ((ctrl >> 3) & BIT(env->priv)) {
->>> -                        return true;
->>> -                    }
->>> +                    return true;
->>>                    }
->>>                    break;
->>>                case TRIGGER_TYPE_AD_MATCH6:
->>> @@ -877,17 +873,7 @@ bool riscv_cpu_debug_check_breakpoint(CPUState
->> *cs)
->>>                    pc = env->tdata2[i];
->>>
->>>                    if ((ctrl & TYPE6_EXEC) && (bp->pc == pc)) {
->>> -                    if (env->virt_enabled) {
->>> -                        /* check VU/VS bit against current privilege
->> level */
->>> -                        if ((ctrl >> 23) & BIT(env->priv)) {
->>> -                            return true;
->>> -                        }
->>> -                    } else {
->>> -                        /* check U/S/M bit against current privilege
->> level */
->>> -                        if ((ctrl >> 3) & BIT(env->priv)) {
->>> -                            return true;
->>> -                        }
->>> -                    }
->>> +                    return true;
->>>                    }
->>>                    break;
->>>                default:
+I'm also not quite convinced that the comments and assertions are enough 
+to say this hack is safe; what if some sort of pointer authentication is 
+added and shuffles bits? Will this hack be compatible with static and 
+dynamic checkers we may have in the future?
 
