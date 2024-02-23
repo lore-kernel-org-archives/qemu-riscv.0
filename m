@@ -4,82 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59DCDC54798
-	for <qemu-riscv@archiver.kernel.org>; Fri, 23 Feb 2024 04:44:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0A5CC48BC4
+	for <qemu-riscv@archiver.kernel.org>; Fri, 23 Feb 2024 05:03:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rdNQ8-00058M-Ry; Thu, 22 Feb 2024 23:44:24 -0500
+	id 1rdNho-0008PM-Ja; Fri, 23 Feb 2024 00:02:40 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rdNQ5-00055x-NE; Thu, 22 Feb 2024 23:44:21 -0500
+ id 1rdNhn-0008P5-FJ; Fri, 23 Feb 2024 00:02:39 -0500
 Received: from mail-ua1-x936.google.com ([2607:f8b0:4864:20::936])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rdNQ0-0002hU-Cc; Thu, 22 Feb 2024 23:44:21 -0500
+ id 1rdNhl-00086m-99; Fri, 23 Feb 2024 00:02:39 -0500
 Received: by mail-ua1-x936.google.com with SMTP id
- a1e0cc1a2514c-7d2940ad0e1so307826241.1; 
- Thu, 22 Feb 2024 20:44:15 -0800 (PST)
+ a1e0cc1a2514c-7d698a8d93cso243930241.3; 
+ Thu, 22 Feb 2024 21:02:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1708663454; x=1709268254; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1708664555; x=1709269355; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=R2qyJU4UFichwZizbV1c6YZASRQP684XsW5OD9lTT/Q=;
- b=X8swepFMNj4PvaAIOe2sjkj54wEelSN3tCgWljAZwUTLliL1k4ydUXjot1C+HhjNyP
- 16QJgOnuvKz5rwzXV+oL1wVPo3Re1klAzK0YpShI8iM/X9Kh8Xm6vnrG7a/1fi1mh/KB
- oRBrx9mgJrxfWJxs1c3q8Ngr+L4WXgMbJ3pYj3yuaTiegMvUeFKeOCzkowK1jCbfuKMF
- Wz0W4ioXWwxhStjUJmt1dnpXXAVJmo6sN+nLV46bQPOJ3aZqlPMppj6LG79LA46LBQNP
- scZl9yzjutsDFGdGiWiT2bcQP6U6S8FL7kgIIXXGV9CapzzESLRzLxmyu5WYLxL3wb53
- q+mA==
+ bh=7Bhr4Lnn6M1GXFmf87eK649RhlULSBlPbmKNI0yHS+s=;
+ b=NdDyK89NrXmSrj4RIKUFDL+pvyqwIQuN7rR4zx+kN61aZYgxfHho5ZgZTSgYf96nr0
+ 4X58uce8Yz8DWT1Moz0CEdjiHswNyL1h9Rmtq8Zd9mPhGCpwlTeyyzolu6buuCLya3YS
+ gImySIcVH/UoMMvDYHwWOny6amLS/hCIxQ/jEStfHsz3lNghBGqMJ+/DG1L6nnMnoACS
+ hs30KV3wFp62irkp/zkv8H/TaXXgUj6JN3RHGfNv+Zxy2pvUDLW5ZAgUHwY49E6mOe8Y
+ whCp9wOk2O/wPB5Kzr6AeqHpeaR+ykdSiPesgA1nU+Xh/pD9drxNyi6h1m7c/ua9aFcB
+ JY6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708663454; x=1709268254;
+ d=1e100.net; s=20230601; t=1708664555; x=1709269355;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=R2qyJU4UFichwZizbV1c6YZASRQP684XsW5OD9lTT/Q=;
- b=NDFFO/vsbpbq/qQbectgbF4v3E0UKr2bI1UVRRS/4hYjKTed666HY3kqRgMoGnRI93
- 6sLZm+wZDOpJH3HGJyE4kV/cXS34XfFpwpiN6taGM932x8gmM0Tps60bRS89V+8XqYp+
- 1fzU9TxPURTz20b5SIavNv/I6Knm28BK2BT/vinVYHk73ee+K+UroF5XSPjSiuXh+LzU
- NchIeHFUrrN2tLrGIORhuksFkKiyvrgw+/vuT6K/oJnZvGJkUHYKNPt2Fk+jvBXqVdKA
- 6BMy++ch4ywKYlH6vEdl28ZicZaCT0r4elyASOM+eew10tiBQFZ88KDeZksdysF0kZp6
- MVig==
+ bh=7Bhr4Lnn6M1GXFmf87eK649RhlULSBlPbmKNI0yHS+s=;
+ b=TZfSt6O5LLZQSdE93C4WW+Ln8tHb6utwXcu5X7hMqsFKkXOkjUM/+r3cOMEzdiY6nC
+ ej5P4c1LOxWrymRLxgXY8KYmSB/fr+9Kvxs8c6ffcuN5x2q4wnD6E68qW2aEyuIwwZn3
+ fBnmRoG0ZPV/SqwJdWUOOW0JxPbGeFldVV/B5Tfkq5gZiOfnIM6ZYfyuzrm4JtyWGsyH
+ XtL4akXA4M3cgDech/E+jhvPbVB9TG0e090GjIqwZrL2HZ7gtKGpC2C5NLl1fCyLB20r
+ fnCGzh7WOt67Dns5i8+85ZxNqdvWC8Rtv+Yy+YK8UvgWShY/ZOVd6mmVzWO6cPmV3Qne
+ nszg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVGCZ7NQWBg+UV+DmtwYJea+OIKIyw0zUVgkgVleZCPxCJ/y1RwfGf+CaE0ig6vA8zoGesKlpey7Ze7RUb9avfIpPebPSU=
-X-Gm-Message-State: AOJu0Yx7AxACzeupo1QLLr+W5BnLWnva03OvhjiIPhASrF6OpXDdUD9e
- F3u9jm4npdUp5zu12aumD+LW3LExrH7h0yoUufAE/2A1+V2klJIropSxVPe5aHoQ129UTA7PW7L
- OrOkzWDgIBrTtJpokVqiKEAurpVGq9gGDAS0=
-X-Google-Smtp-Source: AGHT+IEYeaz6pkcdGgp6AP1LJKKCjHbw8UXny0c8k2zOZUuhEb8s2Pps4I9zCsNsTJH9tXDUzSJqsGLs30xeHdRptX8=
-X-Received: by 2002:a1f:ea44:0:b0:4d0:36e3:40c3 with SMTP id
- i65-20020a1fea44000000b004d036e340c3mr990577vkh.13.1708663453998; Thu, 22 Feb
- 2024 20:44:13 -0800 (PST)
+ AJvYcCWINB4PaKE6PQr8E7tC3sMK6Io/wl3xcYy2Mf1xCkXGYbvB29zVrvXRBzmCKoJFsWknePMrGbM4CfnVmHf+Lm0b0PML9qM=
+X-Gm-Message-State: AOJu0YwC21tXlT4JcXlNhpQgqlCI2R+kXLFavASoyS31LigQEa7hBug2
+ tqUSXladaKet2JKnRtBqhh6k+KTjEUEyA3aEVgToQ2lawf8cH9OKVGj/xZlzJuLq9VjJZq50jyk
+ sCN1Qf7MupQrIt3HewCvNPNRLvRw=
+X-Google-Smtp-Source: AGHT+IG7uNZNet8vgt9Wg17reeNwfCBJhnEfRYqn18j5UkgX4ETHny58lQFL6cZ8oUgH//qMCNXqwTL3modX8KoQ2NA=
+X-Received: by 2002:a05:6102:30ac:b0:470:489c:5a29 with SMTP id
+ y12-20020a05610230ac00b00470489c5a29mr1004537vsd.2.1708664555607; Thu, 22 Feb
+ 2024 21:02:35 -0800 (PST)
 MIME-Version: 1.0
-References: <20240220110907.10479-1-frank.chang@sifive.com>
-In-Reply-To: <20240220110907.10479-1-frank.chang@sifive.com>
+References: <20240129094200.3581037-1-haibo1.xu@intel.com>
+In-Reply-To: <20240129094200.3581037-1-haibo1.xu@intel.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 23 Feb 2024 14:43:47 +1000
-Message-ID: <CAKmqyKPrC6QR8k_PSENwkWiW2=Dyf2-gN=xaqecN5u7-q6ON-A@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Add missing include guard in pmu.h
-To: frank.chang@sifive.com
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Date: Fri, 23 Feb 2024 15:02:08 +1000
+Message-ID: <CAKmqyKOfojvnVxBHk82M86Sd-SJrNFweE_UE=AL6wG_cvgu6yA@mail.gmail.com>
+Subject: Re: [PATCH] hw/riscv/virt-acpi-build.c: Add SRAT and SLIT ACPI tables
+To: Haibo Xu <haibo1.xu@intel.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, sunilvl@ventanamicro.com, 
+ palmer@dabbelt.com, bin.meng@windriver.com, liwei1518@gmail.com, 
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, xiaobo55x@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 Received-SPF: pass client-ip=2607:f8b0:4864:20::936;
  envelope-from=alistair23@gmail.com; helo=mail-ua1-x936.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01,
- T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -95,14 +92,20 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Feb 20, 2024 at 9:09=E2=80=AFPM <frank.chang@sifive.com> wrote:
+On Tue, Jan 30, 2024 at 12:05=E2=80=AFAM Haibo Xu <haibo1.xu@intel.com> wro=
+te:
 >
-> From: Frank Chang <frank.chang@sifive.com>
+> Enable ACPI NUMA support by adding the following 2 ACPI tables:
+> SRAT: provides the association for memory/Harts and Proximity Domains
+> SLIT: provides the relative distance between Proximity Domains
 >
-> Add missing include guard in pmu.h to avoid the problem of double
-> inclusion.
+> The SRAT RINTC Affinity Structure definition[1] was based on the recently
+> approved ACPI CodeFirst ECR[2].
 >
-> Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> [1] https://github.com/riscv-non-isa/riscv-acpi/issues/25
+> [2] https://mantis.uefi.org/mantis/view.php?id=3D2433
+>
+> Signed-off-by: Haibo Xu <haibo1.xu@intel.com>
 
 Thanks!
 
@@ -111,33 +114,101 @@ Applied to riscv-to-apply.next
 Alistair
 
 > ---
->  target/riscv/pmu.h | 5 +++++
->  1 file changed, 5 insertions(+)
+>  hw/riscv/virt-acpi-build.c | 60 ++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 60 insertions(+)
 >
-> diff --git a/target/riscv/pmu.h b/target/riscv/pmu.h
-> index 505fc850d3..7c0ad661e0 100644
-> --- a/target/riscv/pmu.h
-> +++ b/target/riscv/pmu.h
-> @@ -16,6 +16,9 @@
->   * this program.  If not, see <http://www.gnu.org/licenses/>.
->   */
+> diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
+> index 26c7e4482d..f0a6b61747 100644
+> --- a/hw/riscv/virt-acpi-build.c
+> +++ b/hw/riscv/virt-acpi-build.c
+> @@ -528,11 +528,61 @@ static void build_madt(GArray *table_data,
+>      acpi_table_end(linker, &table);
+>  }
 >
-> +#ifndef RISCV_PMU_H
-> +#define RISCV_PMU_H
+> +/*
+> + * ACPI spec, Revision 6.5+
+> + * 5.2.16 System Resource Affinity Table (SRAT)
+> + * REF: https://github.com/riscv-non-isa/riscv-acpi/issues/25
+> + *      https://drive.google.com/file/d/1YTdDx2IPm5IeZjAW932EYU-tUtgS08t=
+X/view
+> + */
+> +static void
+> +build_srat(GArray *table_data, BIOSLinker *linker, RISCVVirtState *vms)
+> +{
+> +    int i;
+> +    uint64_t mem_base;
+> +    MachineClass *mc =3D MACHINE_GET_CLASS(vms);
+> +    MachineState *ms =3D MACHINE(vms);
+> +    const CPUArchIdList *cpu_list =3D mc->possible_cpu_arch_ids(ms);
+> +    AcpiTable table =3D { .sig =3D "SRAT", .rev =3D 3, .oem_id =3D vms->=
+oem_id,
+> +                        .oem_table_id =3D vms->oem_table_id };
 > +
->  #include "cpu.h"
->  #include "qapi/error.h"
->
-> @@ -31,3 +34,5 @@ int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_ev=
-ent_idx event_idx);
->  void riscv_pmu_generate_fdt_node(void *fdt, uint32_t cmask, char *pmu_na=
-me);
->  int riscv_pmu_setup_timer(CPURISCVState *env, uint64_t value,
->                            uint32_t ctr_idx);
+> +    acpi_table_begin(&table, table_data);
+> +    build_append_int_noprefix(table_data, 1, 4); /* Reserved */
+> +    build_append_int_noprefix(table_data, 0, 8); /* Reserved */
 > +
-> +#endif /* RISCV_PMU_H */
+> +    for (i =3D 0; i < cpu_list->len; ++i) {
+> +        uint32_t nodeid =3D cpu_list->cpus[i].props.node_id;
+> +        /*
+> +         * 5.2.16.8 RINTC Affinity Structure
+> +         */
+> +        build_append_int_noprefix(table_data, 7, 1);      /* Type */
+> +        build_append_int_noprefix(table_data, 20, 1);     /* Length */
+> +        build_append_int_noprefix(table_data, 0, 2);        /* Reserved =
+*/
+> +        build_append_int_noprefix(table_data, nodeid, 4); /* Proximity D=
+omain */
+> +        build_append_int_noprefix(table_data, i, 4); /* ACPI Processor U=
+ID */
+> +        /* Flags, Table 5-70 */
+> +        build_append_int_noprefix(table_data, 1 /* Flags: Enabled */, 4)=
+;
+> +        build_append_int_noprefix(table_data, 0, 4); /* Clock Domain */
+> +    }
+> +
+> +    mem_base =3D vms->memmap[VIRT_DRAM].base;
+> +    for (i =3D 0; i < ms->numa_state->num_nodes; ++i) {
+> +        if (ms->numa_state->nodes[i].node_mem > 0) {
+> +            build_srat_memory(table_data, mem_base,
+> +                              ms->numa_state->nodes[i].node_mem, i,
+> +                              MEM_AFFINITY_ENABLED);
+> +            mem_base +=3D ms->numa_state->nodes[i].node_mem;
+> +        }
+> +    }
+> +
+> +    acpi_table_end(linker, &table);
+> +}
+> +
+>  static void virt_acpi_build(RISCVVirtState *s, AcpiBuildTables *tables)
+>  {
+>      GArray *table_offsets;
+>      unsigned dsdt, xsdt;
+>      GArray *tables_blob =3D tables->table_data;
+> +    MachineState *ms =3D MACHINE(s);
+>
+>      table_offsets =3D g_array_new(false, true,
+>                                  sizeof(uint32_t));
+> @@ -565,6 +615,16 @@ static void virt_acpi_build(RISCVVirtState *s, AcpiB=
+uildTables *tables)
+>                     s->oem_table_id);
+>      }
+>
+> +    if (ms->numa_state->num_nodes > 0) {
+> +        acpi_add_table(table_offsets, tables_blob);
+> +        build_srat(tables_blob, tables->linker, s);
+> +        if (ms->numa_state->have_numa_distance) {
+> +            acpi_add_table(table_offsets, tables_blob);
+> +            build_slit(tables_blob, tables->linker, ms, s->oem_id,
+> +                       s->oem_table_id);
+> +        }
+> +    }
+> +
+>      /* XSDT is pointed to by RSDP */
+>      xsdt =3D tables_blob->len;
+>      build_xsdt(tables_blob, tables->linker, table_offsets, s->oem_id,
 > --
-> 2.43.0
+> 2.34.1
 >
 >
 
