@@ -4,80 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6390EC5478C
-	for <qemu-riscv@archiver.kernel.org>; Fri, 23 Feb 2024 05:39:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D25FC5478C
+	for <qemu-riscv@archiver.kernel.org>; Fri, 23 Feb 2024 10:59:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rdOGl-0002wK-0f; Fri, 23 Feb 2024 00:38:47 -0500
+	id 1rdTGa-00059u-Ny; Fri, 23 Feb 2024 05:58:56 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rdOGi-0002vu-Si; Fri, 23 Feb 2024 00:38:44 -0500
-Received: from mail-vk1-xa2b.google.com ([2607:f8b0:4864:20::a2b])
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1rdTGY-000590-Ks
+ for qemu-riscv@nongnu.org; Fri, 23 Feb 2024 05:58:54 -0500
+Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rdOGh-0000wW-7i; Fri, 23 Feb 2024 00:38:44 -0500
-Received: by mail-vk1-xa2b.google.com with SMTP id
- 71dfb90a1353d-4b978e5e240so269614e0c.0; 
- Thu, 22 Feb 2024 21:38:42 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1rdTGU-0006R9-Oi
+ for qemu-riscv@nongnu.org; Fri, 23 Feb 2024 05:58:54 -0500
+Received: by mail-pf1-x433.google.com with SMTP id
+ d2e1a72fcca58-6e47a104c2eso375590b3a.2
+ for <qemu-riscv@nongnu.org>; Fri, 23 Feb 2024 02:58:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1708666721; x=1709271521; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LQyWEa2faigACBvbN3uc3QDRR3mRPc2U4I5Ftz5Ysa4=;
- b=LFpSTCKBbNqjG+iIm9N2UVsxxFSSWerUOeV0HFYljKC9cjFVolUJ3F1phlYda10305
- tCwxN+12fPgLOfijZNWtCAv7p2RvDgQ68a0jR/TKZ7++EANMbqpk6PYyRQ4Nen/J1nDg
- t1/k8j61o/9qwStUmed0Okip9G70YAbOn8pETqOyCW2qWZj1fHfFnH5iV8xeydD87LEg
- ktgeqOb/qZG7esJUE4avhcv86fLh5h2DK89zbl+2ZFCcedbKWWHgUB/yqBgaxyA5TPv1
- gL6uLRI43lp/JbFcSwWIIv5y3xJ+bJ4n6Hoj/2dhTKRbPefgZyt80ZpTelO22+WIaYXr
- 9l/Q==
+ d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1708685928; x=1709290728;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=EpbXx+7haH1GYOtKVl30UsM+arK0qNuLz1pHozXP9pQ=;
+ b=XFQ+vsixofb4tYAqH7HridwdNjy2UY+oasGbMTlUdV9wFu1HXPrS47XGxt2N5vC0ZU
+ PdT625O+p+jNga4z8JmjRmuxEkog2ayzfq46F0VP4rsRFyMHAh+mSpzkUA1v5dnzalw7
+ zgE1wP0oFhDDQ+uAuKLXSgsBVTqvLOnZ0j1HgbeOzQYcDzWfLploQUNpOCrAJ9FbIAzK
+ ycTLzQ7PhWdgyyuID8ELat3mmi2B0CZVUPUTltyovXTh1bZaHhszEc3BX8rsQWoooh/1
+ FgdlhuNaYX9wrwMNv52zTjlfQoW/9yjPTWnO/vfUU3HswDEVzEItvPlF+9dAt5QHV8f2
+ 82wg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708666721; x=1709271521;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=LQyWEa2faigACBvbN3uc3QDRR3mRPc2U4I5Ftz5Ysa4=;
- b=KKyJFh6ACfh3YgaL24am/n28weR0dF4dOr/zEMjYRVRM4zwcqxrugsjUkQCEqH/gg/
- EuBb0osoR7XXVboLB0Vn/5LfmsvGnqJFx3xEsh5CrF9UDhwXTTQGS/G9XyWy/LlMAmTd
- /usJ3ckv4vxXZ50WCHvJY6tYyvVWu5VxsvYpin+YOWGkb8U0lOxQRTNxS2nia+pMdmp1
- OAkgdEnDJxT1D3xIkhiT2aGgkAQQ7xy6kBjqtFaEFU3YnVL+VM7D6UV/t18nejWkmrqr
- 33fNO1w/FdS3jXA166ZtvSJ2cLJdANbKYY8d89LLB4oPnZfSNfuUr/D/+3j8riTLDDqr
- 1V/A==
+ d=1e100.net; s=20230601; t=1708685928; x=1709290728;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=EpbXx+7haH1GYOtKVl30UsM+arK0qNuLz1pHozXP9pQ=;
+ b=QNVSmqPRJiXq7LhNkwgciJhdmfbIz/U+U9K0Dv7aPs/GfvjwL+QE6YCw6SBRqTJsmd
+ 7tARCh+nnM5O7so3lWrlVP5iFvKqpetmqyJFnY5ulk9UN9qcdGAfRlhdOM6JNR7MhZnt
+ clrMpVKgWe+wnPNytxiuUuz+msDKZzts+gk55uc/wsCx9/BXaaPVEbe9LQ3844LemtYS
+ WulNffE9Cgy+wF+kQAy7EZaTQNuEipkZbdaeYIJJ2D/hv1SAopx63pY7rWT9N6vIq+O5
+ JLzYfqkm/H+inu/aEE8KRu9KA4bgK+bF8KwnUkpMw4fwUxDUMxT3k99UwSsyetARjUgX
+ sBOQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXI8UsW8XRkUzsp5toGa5Crr3N58m6R7Ij5wJBsWo43L6hCMpMTeBWr9S8pBrSyY78tXa16qXV2V+dAVoH1GaAcZe/k9xU=
-X-Gm-Message-State: AOJu0YwVEikyPVw2oGVJY6Slw8krTKc3F7k/8lOzHFthMSxJrLVzJWvE
- BzK3ymWfb4tKP6c/mkE9Gh23FyvNmrTKi3SXYTmC/PODbbTI5llcA6X4Vki4bcBozOUFLR1PZWr
- +xuz3bzAxUYYc2IWKB07TFKrvdRw=
-X-Google-Smtp-Source: AGHT+IHfCYFacKUGRfe4nGSnpfjFB3Qm7maSDuP0UTVnjsEof4+qVuwroEcRUfVpTdo+vsYvQ5qDsuPykY9fWG6X90c=
-X-Received: by 2002:a1f:6d03:0:b0:4c8:e834:6ce2 with SMTP id
- i3-20020a1f6d03000000b004c8e8346ce2mr1172296vkc.5.1708666721489; Thu, 22 Feb
- 2024 21:38:41 -0800 (PST)
+ AJvYcCU8zfht2dZFtkIE6zEj40Wpct5KzcM0cMNsadxvVIzS0cMbPHaIPOgY3MvCsGiohKcmAXZfO82jFj8gu/dmiTndIWwaMq8=
+X-Gm-Message-State: AOJu0YyqGF3OV7LF7tvzb0mgnpiFlQJk3VURn1Ay/RxxCtUlBTcLWE3Q
+ 2eSLPBxlP9TeteHjI3Z9LcWZkv2UzVFMep/q1T74caxOwqMjTilaRFy3J1evR+g=
+X-Google-Smtp-Source: AGHT+IGmOSVfIxGx7+Z7RRI6jAHl8gSIFO1wqOIRw0QKk3OFe1CHU5caYalbZ42k9eQo6qTyqZfugA==
+X-Received: by 2002:a62:d459:0:b0:6e4:df65:8335 with SMTP id
+ u25-20020a62d459000000b006e4df658335mr1045740pfl.16.1708685928499; 
+ Fri, 23 Feb 2024 02:58:48 -0800 (PST)
+Received: from [157.82.203.206] ([157.82.203.206])
+ by smtp.gmail.com with ESMTPSA id
+ x3-20020aa79a43000000b006e4dad633e1sm1534666pfj.177.2024.02.23.02.58.41
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 23 Feb 2024 02:58:48 -0800 (PST)
+Message-ID: <308de8f7-5871-4d3d-847c-f4f55fb6f790@daynix.com>
+Date: Fri, 23 Feb 2024 19:58:40 +0900
 MIME-Version: 1.0
-References: <20240217192607.32565-1-dbarboza@ventanamicro.com>
-In-Reply-To: <20240217192607.32565-1-dbarboza@ventanamicro.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 23 Feb 2024 15:38:15 +1000
-Message-ID: <CAKmqyKO9-r0GCuH=LeS=vLMiaBuF2uvrsNysOvZf3ghgSStzrw@mail.gmail.com>
-Subject: Re: [PATCH v2 0/6] libqos, riscv: libqos fixes, add riscv machine
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com, thuth@redhat.com, lvivier@redhat.com, 
- pbonzini@redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2b;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2b.google.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 18/23] plugins: add an API to read registers
+To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
+Cc: qemu-devel@nongnu.org, Yoshinori Sato <ysato@users.sourceforge.jp>,
+ David Hildenbrand <david@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Michael Rolnik <mrolnik@gmail.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
+ Peter Maydell <peter.maydell@linaro.org>, qemu-ppc@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>, qemu-riscv@nongnu.org,
+ Cleber Rosa <crosa@redhat.com>, Thomas Huth <thuth@redhat.com>,
+ Song Gao <gaosong@loongson.cn>, qemu-arm@nongnu.org,
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>, John Snow
+ <jsnow@redhat.com>, =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
+ Nicholas Piggin <npiggin@gmail.com>, qemu-s390x@nongnu.org,
+ Laurent Vivier <laurent@vivier.eu>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Yanan Wang <wangyanan55@huawei.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, Brian Cain
+ <bcain@quicinc.com>, Mahmoud Mandour <ma.mandourr@gmail.com>,
+ Alexandre Iooss <erdnaxe@crans.org>, Bin Meng <bin.meng@windriver.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Eduardo Habkost <eduardo@habkost.net>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+References: <20240216163025.424857-1-alex.bennee@linaro.org>
+ <20240216163025.424857-19-alex.bennee@linaro.org>
+ <c38a22b5-01e8-40f1-bfc4-4bba9bf7b516@daynix.com>
+ <87il2jcje8.fsf@draig.linaro.org>
+ <bf31a250-9539-448c-9c64-4168ab8741f1@daynix.com>
+ <87bk8ab0f4.fsf@draig.linaro.org>
+ <bf5e9471-c09f-47f2-a5a3-83713255c47a@daynix.com>
+ <87zfvtaoqq.fsf@draig.linaro.org>
+ <7e4b4ba6-3683-464f-ac37-3b7f19455643@daynix.com>
+ <87cysoajhl.fsf@draig.linaro.org>
+ <f4b0b535-9e2b-47c7-a84b-afd851deb88a@daynix.com>
+ <87plwo8l56.fsf@draig.linaro.org>
+Content-Language: en-US
+From: Akihiko Odaki <akihiko.odaki@daynix.com>
+In-Reply-To: <87plwo8l56.fsf@draig.linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: none client-ip=2607:f8b0:4864:20::433;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-pf1-x433.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -93,46 +131,172 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sun, Feb 18, 2024 at 5:27=E2=80=AFAM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
->
-> Hi,
->
-> This second version was rebased with current
-> alistair/riscv.to.apply-next and has typo fixes in patch 1. No other
-> changes were made.
->
-> All patches reviewed/acked.
->
-> Changes from v1:
-> - patch 1: typos in the commit message fixed
-> - v1 link: https://lore.kernel.org/qemu-riscv/20240213191736.733334-1-dba=
-rboza@ventanamicro.com/
->
-> Daniel Henrique Barboza (6):
->   libqos/virtio.c: init all elems in qvring_indirect_desc_setup()
->   libqos/virtio.c: fix 'avail_event' offset in qvring_init()
->   hw/riscv/virt.c: create '/soc/pci@...' fdt node earlier
->   hw/riscv/virt.c: add virtio-iommu-pci hotplug support
->   hw/riscv/virt.c: make aclint compatible with 'qtest' accel
->   tests/libqos: add riscv/virt machine nodes
+On 2024/02/23 2:27, Alex Bennée wrote:
+> Akihiko Odaki <akihiko.odaki@daynix.com> writes:
+> 
+>> On 2024/02/22 19:20, Alex Bennée wrote:
+>>> Akihiko Odaki <akihiko.odaki@daynix.com> writes:
+>>>
+>>>> On 2024/02/21 23:14, Alex Bennée wrote:
+>>>>> Akihiko Odaki <akihiko.odaki@daynix.com> writes:
+>>>>>
+>>>>>> On 2024/02/21 19:02, Alex Bennée wrote:
+>>>>>>> Akihiko Odaki <akihiko.odaki@daynix.com> writes:
+>>>>>>>
+>>>>>>>> On 2024/02/20 23:14, Alex Bennée wrote:
+>>>>>>>>> Akihiko Odaki <akihiko.odaki@daynix.com> writes:
+>>>>>>>>>
+>>>>>>>>>> On 2024/02/17 1:30, Alex Bennée wrote:
+>>>>>>>>>>> We can only request a list of registers once the vCPU has been
+>>>>>>>>>>> initialised so the user needs to use either call the get function on
+>>>>>>>>>>> vCPU initialisation or during the translation phase.
+>>>>>>>>>>> We don't expose the reg number to the plugin instead hiding it
+>>>>>>>>>>> behind
+>>>>>>>>>>> an opaque handle. This allows for a bit of future proofing should the
+>>>>>>>>>>> internals need to be changed while also being hashed against the
+>>>>>>>>>>> CPUClass so we can handle different register sets per-vCPU in
+>>>>>>>>>>> hetrogenous situations.
+>>>>>>>>>>> Having an internal state within the plugins also allows us to expand
+>>>>>>>>>>> the interface in future (for example providing callbacks on register
+>>>>>>>>>>> change if the translator can track changes).
+>>>>>>>>>>> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1706
+>>>>>>>>>>> Cc: Akihiko Odaki <akihiko.odaki@daynix.com>
+>>>>>>>>>>> Message-Id: <20240103173349.398526-39-alex.bennee@linaro.org>
+>>>>>>>>>>> Based-on: <20231025093128.33116-18-akihiko.odaki@daynix.com>
+>>>>>>>>>>> Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+>>>>>>>>>>> Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+>>>>>>>>> <snip>
+>>>>>>>>>>> +/*
+>>>>>>>>>>> + * Register handles
+>>>>>>>>>>> + *
+>>>>>>>>>>> + * The plugin infrastructure keeps hold of these internal data
+>>>>>>>>>>> + * structures which are presented to plugins as opaque handles. They
+>>>>>>>>>>> + * are global to the system and therefor additions to the hash table
+>>>>>>>>>>> + * must be protected by the @reg_handle_lock.
+>>>>>>>>>>> + *
+>>>>>>>>>>> + * In order to future proof for up-coming heterogeneous work we want
+>>>>>>>>>>> + * different entries for each CPU type while sharing them in the
+>>>>>>>>>>> + * common case of multiple cores of the same type.
+>>>>>>>>>>> + */
+>>>>>>>>>>> +
+>>>>>>>>>>> +static QemuMutex reg_handle_lock;
+>>>>>>>>>>> +
+>>>>>>>>>>> +struct qemu_plugin_register {
+>>>>>>>>>>> +    const char *name;
+>>>>>>>>>>> +    int gdb_reg_num;
+>>>>>>>>>>> +};
+>>>>>>>>>>> +
+>>>>>>>>>>> +static GHashTable *reg_handles; /* hash table of PluginReg */
+>>>>>>>>>>> +
+>>>>>>>>>>> +/* Generate a stable key - would xxhash be overkill? */
+>>>>>>>>>>> +static gpointer cpu_plus_reg_to_key(CPUState *cs, int gdb_regnum)
+>>>>>>>>>>> +{
+>>>>>>>>>>> +    uintptr_t key = (uintptr_t) cs->cc;
+>>>>>>>>>>> +    key ^= gdb_regnum;
+>>>>>>>>>>> +    return GUINT_TO_POINTER(key);
+>>>>>>>>>>> +}
+>>>>>>>>>>
+>>>>>>>>>> I have pointed out this is theoretically prone to collisions and
+>>>>>>>>>> unsafe.
+>>>>>>>>> How is it unsafe? The aim is to share handles for the same CPUClass
+>>>>>>>>> rather than having a unique handle per register/cpu combo.
+>>>>>>>>
+>>>>>>>> THe intention is legitimate, but the implementation is not safe. It
+>>>>>>>> assumes (uintptr)cs->cc ^ gdb_regnum is unique, but there is no such
+>>>>>>>> guarantee. The key of GHashTable must be unique; generating hashes of
+>>>>>>>> keys should be done with hash_func given to g_hash_table_new().
+>>>>>>> This isn't a hash its a non-unique key. It is however unique for
+>>>>>>> the same register on the same class of CPU so for each vCPU in a system
+>>>>>>> can share the same opaque handles.
+>>>>>>> The hashing is done internally by glib. We would assert if there was
+>>>>>>> a
+>>>>>>> duplicate key referring to a different register.
+>>>>>>> I'm unsure what you want here? Do you have a suggestion for the key
+>>>>>>> generation algorithm? As the comment notes I did consider a more complex
+>>>>>>> mixing algorithm using xxhash but that wouldn't guarantee no clash
+>>>>>>> either.
+>>>>>>
+>>>>>> I suggest using a struct that holds both of cs->cc and gdb_regnum, and
+>>>>>> pass g_direct_equal() and g_direct_hash() to g_hash_table_new().
+>>>>> We already do:
+>>>>>            if (!reg_handles) {
+>>>>>                reg_handles = g_hash_table_new(g_direct_hash, g_direct_equal);
+>>>>>            }
+>>>>> But we can't use g_direct_equal with something that exceeds the
+>>>>> width of
+>>>>> gpointer as it is a straight equality test of the key. What you are
+>>>>> suggesting requires allocating memory for each key and de-referencing
+>>>>> with a custom GEqualFunc.
+>>>>
+>>>> My bad. I wrongly remembered g_direct_equal() and g_direct_hash(). It
+>>>> indeed seems to need a more complicated solution.
+>>>>
+>>>> It is possible to write a GEqualFunc and a GHashFunc that consumes a
+>>>> struct but it is a chore. How about having a two-level GHashTable?
+>>>> reg_handles will be a GHashTable keyed with cs->cc, and another
+>>>> GHashTable will be keyed with gdb_regnum.
+>>> That still seems overkill for a clash that can't happen. What do you
+>>> think about the following:
+>>>     /*
+>>>      * Generate a stable key shared across CPUs of the same class
+>>>      *
+>>>      * In order to future proof for up-coming heterogeneous work we want
+>>>      * different entries for each CPU type while sharing them in the
+>>>      * common case of multiple cores of the same type. This makes the
+>>>      * assumption you won't see two CPUClass pointers that are similar
+>>>      * enough that the low bits mixed with different registers numbers
+>>>      * will give you the same key.
+>>>      *
+>>>      * The build time assert will fire if CPUClass goes on a sudden diet
+>>>      * and we assert further down if we detect two keys representing
+>>>      * different regnums. In practice allocations of CPUClass are much
+>>>      * farther apart making clashes practically impossible.
+>>>      */
+>>>     static gpointer cpu_plus_reg_to_key(CPUState *cs, int gdb_regnum)
+>>>     {
+>>>         uintptr_t key = (uintptr_t) cs->cc;
+>>>         /* this protects some of the assumptions above */
+>>>         qemu_build_assert(sizeof(*cs->cc) >= 256);
+>>>         key ^= gdb_regnum;
+>>>         return GUINT_TO_POINTER(key);
+>>>     }
+>>
+>>
+>> I think the assertion and comments are overkill. Doesn't having a
+>> nested GHashTable save some words you have to wrote for the
+>> assumption?
+> 
+> A nested hash table for a single entry is overkill.
 
-Thanks!
+You mean that the first level will be indexed by only one CPUClass (or 
+few if we support a heterogeneous system).
 
-Applied to riscv-to-apply.next
+I think it's still OK though. It's not like we will need more code when 
+having few entries.
 
-Alistair
+> 
+>> I'm also not quite convinced that the comments and assertions are
+>> enough to say this hack is safe; what if some sort of pointer
+>> authentication is added and shuffles bits? Will this hack be
+>> compatible with static and dynamic checkers we may have in the future?
+> 
+> We are not using the value as a pointer so that should be irrelevant
+> although generally those bits tend to be at the top of pointers so they
+> can be masked off.
+> 
+> I'm not sure what we are trying to achieve here. I've got something that
+> works, doesn't fail any tests and has some guards in for potential
+> future problems. At the same time I'm not prepared to over-engineer the
+> solution for a theoretical future problem we haven't got yet.
+> 
+> What about if I just key based of gdb_regnum and we accept that that
+> might break the one heterogeneous system we model today?
+> 
 
->
->  hw/riscv/virt.c                         |  97 ++++++++++++-----
->  tests/qtest/libqos/meson.build          |   1 +
->  tests/qtest/libqos/riscv-virt-machine.c | 137 ++++++++++++++++++++++++
->  tests/qtest/libqos/virtio.c             |  27 +++--
->  4 files changed, 228 insertions(+), 34 deletions(-)
->  create mode 100644 tests/qtest/libqos/riscv-virt-machine.c
->
-> --
-> 2.43.2
->
->
+That's the best option in my opinion. gdbstub won't work well with such 
+a system anyway, and fixing it will need something similar to 
+GHashTable. But if I would fix gdbstub for a heterogeneous system, I 
+would add a field to CPUClass instead of having a GHashTable keyed with 
+tuples of CPUClass pointers and register numbers. It should be fine 
+considering that CPUState already has gdbstub-specific fields like gdb_regs.
 
