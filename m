@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C130DC54798
-	for <qemu-riscv@archiver.kernel.org>; Fri, 23 Feb 2024 16:36:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56EF5C5478C
+	for <qemu-riscv@archiver.kernel.org>; Fri, 23 Feb 2024 16:38:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rdYVo-0000co-8e; Fri, 23 Feb 2024 11:35:00 -0500
+	id 1rdYVm-0000Zo-EF; Fri, 23 Feb 2024 11:34:58 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rdYJg-00045p-U0
- for qemu-riscv@nongnu.org; Fri, 23 Feb 2024 11:22:30 -0500
-Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a])
+ id 1rdYJY-00042A-2n
+ for qemu-riscv@nongnu.org; Fri, 23 Feb 2024 11:22:21 -0500
+Received: from mail-lj1-x22b.google.com ([2a00:1450:4864:20::22b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rdYJO-00065A-Ie
- for qemu-riscv@nongnu.org; Fri, 23 Feb 2024 11:22:28 -0500
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-41297377abeso2934165e9.2
- for <qemu-riscv@nongnu.org>; Fri, 23 Feb 2024 08:22:10 -0800 (PST)
+ id 1rdYJN-00064X-2H
+ for qemu-riscv@nongnu.org; Fri, 23 Feb 2024 11:22:19 -0500
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-2d23d301452so13446851fa.1
+ for <qemu-riscv@nongnu.org>; Fri, 23 Feb 2024 08:22:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708705329; x=1709310129; darn=nongnu.org;
+ d=linaro.org; s=google; t=1708705327; x=1709310127; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zkXiF54Supy42kUSUNwcrLqCaotpRPSpuKydB/cG2qA=;
- b=pdBnydNA1NsZZZJbrFRv5WddQ9V/jFd054FDk35YwVRz/hSoLw+4xArbVsBpE1o0qO
- g+E5AWPQnnNqR19hCExyMSTC5EhjQKe/dncq2wmuX0xai6oxtpBaATP26iVmtA35TNOy
- imNqUN2wH5g11m3z7mRBZsSSMP90kZqw1YVbaMHzlj85+hn7WiBUnZNBq+4LXwCNGVjE
- +7NdzesTM2M+dmnDMhYKLDY2Cpa/TIVqZ2TCxwzfUx8IW89O1fAanY8tD6GwTayERbWZ
- cMa4lsqlBeoK5NAfSaj+nWZgimXuw4tpnj3RUBiWRv6uNF+o95os11u6mxjR0Y7cBdm8
- pZpw==
+ bh=rmH3A6oyXZRSyv0FlgeXXNzbTzs2PoDjMnFFS+ZsoEs=;
+ b=zo7148q4VkJxdrSuBRoA8jqI5j35lV16/2v3ZI0k4nxV/SQku3402eaRgRO4xGVNps
+ JejdVf5GoXJWxQAVqyDi5nRf4lxH0Nt3St6LtavEkcs5D4yhg6linQ+zhy61cqfe8xYn
+ pMvNXViEPPraF44mxDOpJimJdONqsaUMX4ncgUzIy7kYsGPhZKsyfCILRR+hXC0PcGEY
+ Ze1q2ioAtbyGiWjWWKm66g4YUNAfWzSc1iaboFzQI62bqQbxRQJM2iA86n0STy+thNBz
+ XbBRVKu3J6pbJnI+AgsPeH4NgcJwcNBvriv2EdCni/Ik1BR97pUT+GsVrRE/hab770RT
+ qyVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708705329; x=1709310129;
+ d=1e100.net; s=20230601; t=1708705327; x=1709310127;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zkXiF54Supy42kUSUNwcrLqCaotpRPSpuKydB/cG2qA=;
- b=Z4S7nkFTviU7+I9BQeOgDDOqsrhnqIS0n3vhpBjNVWsDDCbnKWDeakCVwN2a4TI6cM
- ty65B1GtR8sTka1gGhJo5np8zg6jLDRwNOo/voR2cHGGOCi7Ge3edmtoC8WCdrxu3cpC
- rcvOUCeaNLy8vl8E5uJLgLKM50WwGeGBj9wSuob2q1E9iuXjGeU0Nyr04TiXvUkCqbbV
- qGYjAfE8znCA6CNOREOU5ncyA6N25UCbDwokH26x5avN7SncZha3ii1TxWzcU1W/+b+1
- g+Z7QsQt6dEyUuzcVq2Y7babaJJ5HeKbXUmslEsCPee6RSvtBBxgBVeEzm5FF/V8r/IN
- ZPog==
+ bh=rmH3A6oyXZRSyv0FlgeXXNzbTzs2PoDjMnFFS+ZsoEs=;
+ b=pLem+CaocipvSQcfvj6WqrZU+PylY7WJ4rnXGZ6z+FXYo3sO1fFAs9dY5CEv8ZUVJu
+ HcrK1P9peUf+8+QWPiaP3YZ7vpvJHUoNjWbhcaKuVhMt8qDbRe0y6NX77AHeW1LY9Nsk
+ YprmYGCtVE5doF38iyHIa+hEqm7ky6UhTV+f1PbXbrfE9vgPdPj8Y6C0Rv2cuHFnHiQ4
+ O2EiYrTbHtQsFlHekkKbCJSaCjzvUzC7q5FJF6ufqA2mkqnY54TcRh/DeRSmCRJ+PHy9
+ JEPiPkBId9dUK4ASSAlGc8NKAT/K+XuC3KKcwlH3JtD30OpfF333cXPFglSYGv6jxV/1
+ 9hLA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX2MOtKgsijFBq+3+t+GAIO4jo33qDUOviLsXB63F3IrSkNAVsNsQ+gsmRRllsO4tutzUxhz27zw0SNtVfxOLVt2BqHWsA=
-X-Gm-Message-State: AOJu0Yy7qG4c3nBK2zmmEB9YSdbSryZeaWeoX0Aj4TxKepExq14PAvTm
- 1/zn9+IKVwhEwugekm7ScH5S+ltbDI1kPxJmX1N69WK2MB1ksNHPMTxbeyS4lwE=
-X-Google-Smtp-Source: AGHT+IFqatz0mGGAcRPYioyfvh6J117k3tX9mgW4cT11VmHiQRIql5s5GCxZzZnwdLH+eTWr9caVuQ==
-X-Received: by 2002:a05:600c:4e87:b0:412:94a9:eaa8 with SMTP id
- f7-20020a05600c4e8700b0041294a9eaa8mr195488wmq.19.1708705328767; 
- Fri, 23 Feb 2024 08:22:08 -0800 (PST)
+ AJvYcCU0aiNlX5X1JACYb8xe+Rq78B20pDSQs8fZoLj0BRhA7DY8rfEQiO30Gb30ZLmva0kvBPKjY/wRsNJAe8sts+AOHCdOSnY=
+X-Gm-Message-State: AOJu0YzzE+Sn8fWqn35uGzr1XaUenSZhGkSOSNTyQ2l+Va7kc2WG7wDx
+ PtJtsKI/SIRJ5RGDf208BaBdm6tQdyXLms78SG4qwamNHB/z0voHDuUI0NukSLg=
+X-Google-Smtp-Source: AGHT+IE6RHGe8V5I3NP4IK6i/jJ4jW3hbMMEj7S7eZpB+qvYHLhthQtdxEHKg8e6D2dbMiWuB9wz3A==
+X-Received: by 2002:a2e:7c17:0:b0:2d2:4429:34c4 with SMTP id
+ x23-20020a2e7c17000000b002d2442934c4mr233156ljc.8.1708705327096; 
+ Fri, 23 Feb 2024 08:22:07 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- p11-20020a05600c468b00b004128812dcb6sm2976921wmo.28.2024.02.23.08.22.04
+ l28-20020a05600c1d1c00b0041276d96351sm3029729wms.3.2024.02.23.08.22.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Fri, 23 Feb 2024 08:22:06 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 849975F92D;
- Fri, 23 Feb 2024 16:22:03 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 9E1915F90B;
+ Fri, 23 Feb 2024 16:22:02 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Song Gao <gaosong@loongson.cn>, qemu-s390x@nongnu.org,
@@ -90,26 +90,25 @@ Cc: Song Gao <gaosong@loongson.cn>, qemu-s390x@nongnu.org,
  Yoshinori Sato <ysato@users.sourceforge.jp>,
  Brian Cain <bcain@quicinc.com>, Paolo Bonzini <pbonzini@redhat.com>,
  "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Michael Rolnik <mrolnik@gmail.com>,
- Akihiko Odaki <akihiko.odaki@daynix.com>
-Subject: [PATCH v2 10/27] gdbstub: Infer number of core registers from XML
-Date: Fri, 23 Feb 2024 16:21:45 +0000
-Message-Id: <20240223162202.1936541-11-alex.bennee@linaro.org>
+ Michael Rolnik <mrolnik@gmail.com>
+Subject: [PATCH v2 02/27] tests/tcg: bump TCG test timeout to 120s
+Date: Fri, 23 Feb 2024 16:21:37 +0000
+Message-Id: <20240223162202.1936541-3-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240223162202.1936541-1-alex.bennee@linaro.org>
 References: <20240223162202.1936541-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::22b;
+ envelope-from=alex.bennee@linaro.org; helo=mail-lj1-x22b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -125,241 +124,34 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
+This is less than ideal but easier than making sure we get all the
+iterations of the memory test. Update the comment accordingly.
 
-GDBFeature has the num_regs member so use it where applicable to
-remove magic numbers.
-
-Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
-Message-Id: <20240103173349.398526-34-alex.bennee@linaro.org>
-Message-Id: <20231213-gdb-v17-8-777047380591@daynix.com>
-[AJB: remove core reg check from microblaze read reg]
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- include/hw/core/cpu.h       | 3 ++-
- target/s390x/cpu.h          | 2 --
- gdbstub/gdbstub.c           | 5 ++++-
- target/arm/cpu.c            | 1 -
- target/arm/cpu64.c          | 1 -
- target/avr/cpu.c            | 1 -
- target/hexagon/cpu.c        | 1 -
- target/i386/cpu.c           | 2 --
- target/loongarch/cpu.c      | 2 --
- target/m68k/cpu.c           | 1 -
- target/microblaze/cpu.c     | 1 -
- target/microblaze/gdbstub.c | 5 -----
- target/riscv/cpu.c          | 1 -
- target/rx/cpu.c             | 1 -
- target/s390x/cpu.c          | 1 -
- 15 files changed, 6 insertions(+), 22 deletions(-)
+ tests/tcg/Makefile.target | 9 +++------
+ 1 file changed, 3 insertions(+), 6 deletions(-)
 
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index 4385ce54c99..1bbf21b2201 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -126,7 +126,8 @@ struct SysemuCPUOps;
-  * @gdb_adjust_breakpoint: Callback for adjusting the address of a
-  *       breakpoint.  Used by AVR to handle a gdb mis-feature with
-  *       its Harvard architecture split code and data.
-- * @gdb_num_core_regs: Number of core registers accessible to GDB.
-+ * @gdb_num_core_regs: Number of core registers accessible to GDB or 0 to infer
-+ *                     from @gdb_core_xml_file.
-  * @gdb_core_xml_file: File name for core registers GDB XML description.
-  * @gdb_stop_before_watchpoint: Indicates whether GDB expects the CPU to stop
-  *           before the insn which triggers a watchpoint rather than after it.
-diff --git a/target/s390x/cpu.h b/target/s390x/cpu.h
-index d37a49b4d92..43a46a5a068 100644
---- a/target/s390x/cpu.h
-+++ b/target/s390x/cpu.h
-@@ -491,8 +491,6 @@ static inline void cpu_get_tb_cpu_state(CPUS390XState *env, vaddr *pc,
- #define S390_R13_REGNUM 15
- #define S390_R14_REGNUM 16
- #define S390_R15_REGNUM 17
--/* Total Core Registers. */
--#define S390_NUM_CORE_REGS 18
+diff --git a/tests/tcg/Makefile.target b/tests/tcg/Makefile.target
+index 8cf65f68dd8..a4c25908fb7 100644
+--- a/tests/tcg/Makefile.target
++++ b/tests/tcg/Makefile.target
+@@ -93,12 +93,9 @@ QEMU_OPTS=
  
- static inline void setcc(S390CPU *cpu, uint64_t cc)
- {
-diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
-index d573f808d2e..f766ee277a0 100644
---- a/gdbstub/gdbstub.c
-+++ b/gdbstub/gdbstub.c
-@@ -546,9 +546,12 @@ void gdb_init_cpu(CPUState *cpu)
-         gdb_register_feature(cpu, 0,
-                              cc->gdb_read_register, cc->gdb_write_register,
-                              feature);
-+        cpu->gdb_num_regs = cpu->gdb_num_g_regs = feature->num_regs;
-     }
  
--    cpu->gdb_num_regs = cpu->gdb_num_g_regs = cc->gdb_num_core_regs;
-+    if (cc->gdb_num_core_regs) {
-+        cpu->gdb_num_regs = cpu->gdb_num_g_regs = cc->gdb_num_core_regs;
-+    }
- }
+ # If TCG debugging, or TCI is enabled things are a lot slower
+-# ??? Makefile no longer has any indication that TCI is enabled,
+-# but for the record:
+-#   15s    original default
+-#   60s    with --enable-debug
+-#   90s    with --enable-tcg-interpreter
+-TIMEOUT=90
++# so we have to set our timeout for that. The current worst case
++# offender is the system memory test running under TCI.
++TIMEOUT=120
  
- void gdb_register_coprocessor(CPUState *cpu,
-diff --git a/target/arm/cpu.c b/target/arm/cpu.c
-index 5fa86bc8d55..84887084d95 100644
---- a/target/arm/cpu.c
-+++ b/target/arm/cpu.c
-@@ -2515,7 +2515,6 @@ static void arm_cpu_class_init(ObjectClass *oc, void *data)
- #ifndef CONFIG_USER_ONLY
-     cc->sysemu_ops = &arm_sysemu_ops;
- #endif
--    cc->gdb_num_core_regs = 26;
-     cc->gdb_arch_name = arm_gdb_arch_name;
-     cc->gdb_get_dynamic_xml = arm_gdb_get_dynamic_xml;
-     cc->gdb_stop_before_watchpoint = true;
-diff --git a/target/arm/cpu64.c b/target/arm/cpu64.c
-index 8e30a7993ea..869d8dd24ee 100644
---- a/target/arm/cpu64.c
-+++ b/target/arm/cpu64.c
-@@ -793,7 +793,6 @@ static void aarch64_cpu_class_init(ObjectClass *oc, void *data)
- 
-     cc->gdb_read_register = aarch64_cpu_gdb_read_register;
-     cc->gdb_write_register = aarch64_cpu_gdb_write_register;
--    cc->gdb_num_core_regs = 34;
-     cc->gdb_core_xml_file = "aarch64-core.xml";
-     cc->gdb_arch_name = aarch64_gdb_arch_name;
- 
-diff --git a/target/avr/cpu.c b/target/avr/cpu.c
-index a40f445af21..a50170bc69a 100644
---- a/target/avr/cpu.c
-+++ b/target/avr/cpu.c
-@@ -251,7 +251,6 @@ static void avr_cpu_class_init(ObjectClass *oc, void *data)
-     cc->gdb_read_register = avr_cpu_gdb_read_register;
-     cc->gdb_write_register = avr_cpu_gdb_write_register;
-     cc->gdb_adjust_breakpoint = avr_cpu_gdb_adjust_breakpoint;
--    cc->gdb_num_core_regs = 35;
-     cc->gdb_core_xml_file = "avr-cpu.xml";
-     cc->tcg_ops = &avr_tcg_ops;
- }
-diff --git a/target/hexagon/cpu.c b/target/hexagon/cpu.c
-index ebe804e2931..a10d87b8220 100644
---- a/target/hexagon/cpu.c
-+++ b/target/hexagon/cpu.c
-@@ -362,7 +362,6 @@ static void hexagon_cpu_class_init(ObjectClass *c, void *data)
-     cc->get_pc = hexagon_cpu_get_pc;
-     cc->gdb_read_register = hexagon_gdb_read_register;
-     cc->gdb_write_register = hexagon_gdb_write_register;
--    cc->gdb_num_core_regs = TOTAL_PER_THREAD_REGS;
-     cc->gdb_stop_before_watchpoint = true;
-     cc->gdb_core_xml_file = "hexagon-core.xml";
-     cc->disas_set_info = hexagon_cpu_disas_set_info;
-diff --git a/target/i386/cpu.c b/target/i386/cpu.c
-index bca776e1fe9..f0ccad3bf98 100644
---- a/target/i386/cpu.c
-+++ b/target/i386/cpu.c
-@@ -7981,10 +7981,8 @@ static void x86_cpu_common_class_init(ObjectClass *oc, void *data)
-     cc->gdb_arch_name = x86_gdb_arch_name;
- #ifdef TARGET_X86_64
-     cc->gdb_core_xml_file = "i386-64bit.xml";
--    cc->gdb_num_core_regs = 66;
- #else
-     cc->gdb_core_xml_file = "i386-32bit.xml";
--    cc->gdb_num_core_regs = 50;
- #endif
-     cc->disas_set_info = x86_disas_set_info;
- 
-diff --git a/target/loongarch/cpu.c b/target/loongarch/cpu.c
-index 7dc50bf35fc..bc2684179f2 100644
---- a/target/loongarch/cpu.c
-+++ b/target/loongarch/cpu.c
-@@ -815,7 +815,6 @@ static void loongarch32_cpu_class_init(ObjectClass *c, void *data)
- {
-     CPUClass *cc = CPU_CLASS(c);
- 
--    cc->gdb_num_core_regs = 35;
-     cc->gdb_core_xml_file = "loongarch-base32.xml";
-     cc->gdb_arch_name = loongarch32_gdb_arch_name;
- }
-@@ -829,7 +828,6 @@ static void loongarch64_cpu_class_init(ObjectClass *c, void *data)
- {
-     CPUClass *cc = CPU_CLASS(c);
- 
--    cc->gdb_num_core_regs = 35;
-     cc->gdb_core_xml_file = "loongarch-base64.xml";
-     cc->gdb_arch_name = loongarch64_gdb_arch_name;
- }
-diff --git a/target/m68k/cpu.c b/target/m68k/cpu.c
-index 8a8392e6945..e228a0b18b2 100644
---- a/target/m68k/cpu.c
-+++ b/target/m68k/cpu.c
-@@ -568,7 +568,6 @@ static void m68k_cpu_class_init(ObjectClass *c, void *data)
- #endif
-     cc->disas_set_info = m68k_cpu_disas_set_info;
- 
--    cc->gdb_num_core_regs = 18;
-     cc->tcg_ops = &m68k_tcg_ops;
- }
- 
-diff --git a/target/microblaze/cpu.c b/target/microblaze/cpu.c
-index 2c62cf048c2..e533e7a95ec 100644
---- a/target/microblaze/cpu.c
-+++ b/target/microblaze/cpu.c
-@@ -444,7 +444,6 @@ static void mb_cpu_class_init(ObjectClass *oc, void *data)
-     cc->sysemu_ops = &mb_sysemu_ops;
- #endif
-     device_class_set_props(dc, mb_properties);
--    cc->gdb_num_core_regs = 32 + 25;
-     cc->gdb_core_xml_file = "microblaze-core.xml";
- 
-     cc->disas_set_info = mb_disas_set_info;
-diff --git a/target/microblaze/gdbstub.c b/target/microblaze/gdbstub.c
-index 6ffc5ad0752..eb168d10070 100644
---- a/target/microblaze/gdbstub.c
-+++ b/target/microblaze/gdbstub.c
-@@ -49,14 +49,9 @@ enum {
- int mb_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
- {
-     MicroBlazeCPU *cpu = MICROBLAZE_CPU(cs);
--    CPUClass *cc = CPU_GET_CLASS(cs);
-     CPUMBState *env = &cpu->env;
-     uint32_t val;
- 
--    if (n > cc->gdb_num_core_regs) {
--        return 0;
--    }
--
-     switch (n) {
-     case 1 ... 31:
-         val = env->regs[n];
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 1b62e269b90..dd8a0e94897 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -2352,7 +2352,6 @@ static void riscv_cpu_common_class_init(ObjectClass *c, void *data)
-     cc->get_pc = riscv_cpu_get_pc;
-     cc->gdb_read_register = riscv_cpu_gdb_read_register;
-     cc->gdb_write_register = riscv_cpu_gdb_write_register;
--    cc->gdb_num_core_regs = 33;
-     cc->gdb_stop_before_watchpoint = true;
-     cc->disas_set_info = riscv_cpu_disas_set_info;
- #ifndef CONFIG_USER_ONLY
-diff --git a/target/rx/cpu.c b/target/rx/cpu.c
-index 5205167da17..2f878d08d6d 100644
---- a/target/rx/cpu.c
-+++ b/target/rx/cpu.c
-@@ -221,7 +221,6 @@ static void rx_cpu_class_init(ObjectClass *klass, void *data)
-     cc->gdb_write_register = rx_cpu_gdb_write_register;
-     cc->disas_set_info = rx_cpu_disas_set_info;
- 
--    cc->gdb_num_core_regs = 26;
-     cc->gdb_core_xml_file = "rx-core.xml";
-     cc->tcg_ops = &rx_tcg_ops;
- }
-diff --git a/target/s390x/cpu.c b/target/s390x/cpu.c
-index 49a2341accf..f7194534aeb 100644
---- a/target/s390x/cpu.c
-+++ b/target/s390x/cpu.c
-@@ -368,7 +368,6 @@ static void s390_cpu_class_init(ObjectClass *oc, void *data)
-     s390_cpu_class_init_sysemu(cc);
- #endif
-     cc->disas_set_info = s390_cpu_disas_set_info;
--    cc->gdb_num_core_regs = S390_NUM_CORE_REGS;
-     cc->gdb_core_xml_file = "s390x-core64.xml";
-     cc->gdb_arch_name = s390_gdb_arch_name;
- 
+ ifeq ($(filter %-softmmu, $(TARGET)),)
+ # The order we include is important. We include multiarch first and
 -- 
 2.39.2
 
