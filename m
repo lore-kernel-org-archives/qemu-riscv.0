@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61BCBC54798
-	for <qemu-riscv@archiver.kernel.org>; Fri, 23 Feb 2024 16:43:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DA42C54798
+	for <qemu-riscv@archiver.kernel.org>; Fri, 23 Feb 2024 16:43:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rdYdJ-0003g3-AX; Fri, 23 Feb 2024 11:42:45 -0500
+	id 1rdYdh-0004B9-5b; Fri, 23 Feb 2024 11:43:09 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rdYJW-0003zV-Sg
- for qemu-riscv@nongnu.org; Fri, 23 Feb 2024 11:22:18 -0500
-Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
+ id 1rdYQU-00064s-QC
+ for qemu-riscv@nongnu.org; Fri, 23 Feb 2024 11:29:31 -0500
+Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rdYJL-00063A-9f
- for qemu-riscv@nongnu.org; Fri, 23 Feb 2024 11:22:18 -0500
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-40fd72f7125so8119645e9.1
- for <qemu-riscv@nongnu.org>; Fri, 23 Feb 2024 08:22:06 -0800 (PST)
+ id 1rdYQ3-0007IP-89
+ for qemu-riscv@nongnu.org; Fri, 23 Feb 2024 11:29:27 -0500
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-33aeb088324so353915f8f.2
+ for <qemu-riscv@nongnu.org>; Fri, 23 Feb 2024 08:28:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708705323; x=1709310123; darn=nongnu.org;
+ d=linaro.org; s=google; t=1708705734; x=1709310534; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=E8QhIidXtm1KWUMz6R6/HNvg/qk4Sel77EmOGwDTHnU=;
- b=TzmtFulpNLuTt5Ffb7HeJP5QlkgsRwP2LUWPefHurHcgLm6hDg7ihCT2I8IbgaPOpp
- dMIFf4Z5SOci9pE/dBh7Y8egttZ3Wh/bQRdCnBchw7GLCqzYeiGuEx024IlLV6uNj2is
- RZG/nv3MfpcEl6Etcw4O+xjRC7EOGuTO8SjTn+sQ5O1pH7nEdUtylCTYCB4lVG+CCEyo
- aeZLQLMclQVRue75IH+G2rWZGYaE/GL4UlMP64GDZmh3Cc8xhb4tpfx2coa3Z/dtUsK9
- gvh2b1nV8be/DwEVNL7V95rYa6U6zk3jtfdi7n+kiaRlwo/hPLc1QbAOYRZmCpOk4t9n
- BY/Q==
+ bh=eZ1nEd8NJNCNQAO45v/M0dXLXOT0Wd7jVxF+jov+Saw=;
+ b=yKn5FcBQCRN/OpHpz80dhP9+jk7/ojGub8BfV/rLd8ovcp4NyG5JL10QwzwoLcEKPJ
+ FrE0n2DjY6YzOkdO01P0B+DMg3F5Nw5UFlygWImzP2m0BhEsOy6n11OIqWUI5couFjgr
+ pgXoeFx0IUt+vG1OXiZ9YYhcJ12LHBVhjvjeBLxc0nvQyxeNOmeCvOK7aD4CoSS8tGFR
+ 726NI3HpoDSOwUpCe57WbZUXy7whwyrYn9pNFkumeAfwCZopoyMtrgrAYIxqDiBTJo5x
+ 0eZCDRU0805sCOHV2PL0zQx8x+gKbTruYBEsb2py+9OLMJAt0dinmQONWMOuWQ7bPMrF
+ 6Geg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708705323; x=1709310123;
+ d=1e100.net; s=20230601; t=1708705734; x=1709310534;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=E8QhIidXtm1KWUMz6R6/HNvg/qk4Sel77EmOGwDTHnU=;
- b=sCOWvRHvQktaWgb1XkFgCAwUyvbaPZqO7vKUSCDH5e1Em3eTta6sUMYfljdN9hlBNY
- c6EVCBW6nwCamBGkcvQX2uN89wpxWU8B+qROXPG2zb0OGIzs0vdgGJxEwZnYd5gN8U5c
- bGoOUZzvY6wcR/yfC16/gUEP8Yo6DJL9JvViy0scDUAVRFvH5kTYCP5v172cxYn4D5yX
- 4lcT/aLftt3E6sBaElyIhVf4HUytBNKd7H/zjUjgnswxdnDcKAWvV/pnbZ/sNTtz3I6k
- lpC+zmxhjyCHh125C+NXGfbW5Kb/BAJaM1jLt/T3+UReWociOAOPLdTUqe+sQWZy8NOe
- k2FA==
+ bh=eZ1nEd8NJNCNQAO45v/M0dXLXOT0Wd7jVxF+jov+Saw=;
+ b=sXmfSmwhSjpafKvqHcEOUtULaY6ZU6yTIs17QDiRBHqpqPuiLbWveNetWS4UeyAlfd
+ N1cOZNuuf4KPt3Yn99DiGDSlFFiLbnUB6sM6kqLIlspsLBp9zSknf6NbqNk1lAYXrsxO
+ pNzoq0CvTgeHfm4wukWMGhhC29SpL2/KyYuYX37h/m92W/pgr2TmQa58zxYODBdwwOi1
+ WzZqkcLmn/P4o11xhwRmEVNKFAmNgSObTwYRTe7elU8/TCGhdmKeT3sEiZdDSyl8WYkY
+ apNmRNBBlUrPWA5MpGwGcC76oeKLVsCdu/0Xs6PT4VLq16kul4qDEivXZzDoLGv1ei9p
+ mP7g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWwm6AKeSoAJ6xisFm8eVvUXp7eyQQ99Pcllnf4B12g3gAIsxVXAPW9N9M94JU2GznEQeXqKNBHs7WAQkHG+M9pRrNCGI0=
-X-Gm-Message-State: AOJu0Yz4QSGzGwOq9reTk98jM25/rYmgC3t3/8ZEXMUgK5vH/1DHXq5L
- jvusISE6m+YcUMmyvGPf9+yhE6bEKS4dKzQZRTlyI0kQ6NcDZxkWRmlbg7MSgKA=
-X-Google-Smtp-Source: AGHT+IEvxkgvfzNX2X6pOcfIN18WXTCrDKLyDxLgu+uXH9pSbM2ej1bPgiHh8KVfQuOX/VDybmcmaQ==
-X-Received: by 2002:adf:fd87:0:b0:33d:b2d7:6264 with SMTP id
- d7-20020adffd87000000b0033db2d76264mr170159wrr.51.1708705323687; 
- Fri, 23 Feb 2024 08:22:03 -0800 (PST)
+ AJvYcCW6FTLoqjEyycrFCg4syCl/78LIaEDIrRnJY+2jU6iEviqP6YrhJqT8bynubMXQ5V5HnAtuQmwTLdhwlQs/L4Mn+XrNokE=
+X-Gm-Message-State: AOJu0YyQWGcdFC6tt7TD9QrPlEUbtMo9xcMRo/aiQL5cw48jshlNJmaD
+ rSdvBpX31FNf2SCeVEpX79QgctuGTYuKB6ObSRymFYmNQKztUpU9/MxRp5d0M+w=
+X-Google-Smtp-Source: AGHT+IGtQ7r+PsKiN7TTDfFNVR/l3E2+GQnUhzQCfFD7k86T7A/+480H+Ge5hS5H5cOB3CjUQo3ZCQ==
+X-Received: by 2002:a5d:64c9:0:b0:33d:3ff4:1047 with SMTP id
+ f9-20020a5d64c9000000b0033d3ff41047mr234085wri.58.1708705734493; 
+ Fri, 23 Feb 2024 08:28:54 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- bt19-20020a056000081300b0033d1f25b798sm3474276wrb.82.2024.02.23.08.22.03
+ f11-20020adfe90b000000b0033b43a5f53csm3297803wrm.103.2024.02.23.08.28.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 Feb 2024 08:22:03 -0800 (PST)
+ Fri, 23 Feb 2024 08:28:52 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id CD2CB5F928;
- Fri, 23 Feb 2024 16:22:02 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id AF2685F939;
+ Fri, 23 Feb 2024 16:22:04 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Song Gao <gaosong@loongson.cn>, qemu-s390x@nongnu.org,
@@ -90,19 +90,18 @@ Cc: Song Gao <gaosong@loongson.cn>, qemu-s390x@nongnu.org,
  Yoshinori Sato <ysato@users.sourceforge.jp>,
  Brian Cain <bcain@quicinc.com>, Paolo Bonzini <pbonzini@redhat.com>,
  "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Michael Rolnik <mrolnik@gmail.com>,
- Akihiko Odaki <akihiko.odaki@daynix.com>
-Subject: [PATCH v2 04/27] target/ppc: Use GDBFeature for dynamic XML
-Date: Fri, 23 Feb 2024 16:21:39 +0000
-Message-Id: <20240223162202.1936541-5-alex.bennee@linaro.org>
+ Michael Rolnik <mrolnik@gmail.com>
+Subject: [PATCH v2 23/27] contrib/plugins: fix imatch
+Date: Fri, 23 Feb 2024 16:21:58 +0000
+Message-Id: <20240223162202.1936541-24-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240223162202.1936541-1-alex.bennee@linaro.org>
 References: <20240223162202.1936541-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::332;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x332.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::434;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x434.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -125,164 +124,30 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
+We can't directly save the ephemeral imatch from argv as that memory
+will get recycled.
 
-In preparation for a change to use GDBFeature as a parameter of
-gdb_register_coprocessor(), convert the internal representation of
-dynamic feature from plain XML to GDBFeature.
-
-Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Message-Id: <20240103173349.398526-28-alex.bennee@linaro.org>
-Message-Id: <20231213-gdb-v17-2-777047380591@daynix.com>
+Message-Id: <20240103173349.398526-40-alex.bennee@linaro.org>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/ppc/cpu-qom.h  |  1 +
- target/ppc/cpu.h      |  4 +---
- target/ppc/cpu_init.c |  4 ----
- target/ppc/gdbstub.c  | 51 ++++++++++++++++---------------------------
- 4 files changed, 21 insertions(+), 39 deletions(-)
+ contrib/plugins/execlog.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/target/ppc/cpu-qom.h b/target/ppc/cpu-qom.h
-index 0241609efef..8247fa23367 100644
---- a/target/ppc/cpu-qom.h
-+++ b/target/ppc/cpu-qom.h
-@@ -20,6 +20,7 @@
- #ifndef QEMU_PPC_CPU_QOM_H
- #define QEMU_PPC_CPU_QOM_H
- 
-+#include "exec/gdbstub.h"
- #include "hw/core/cpu.h"
- 
- #ifdef TARGET_PPC64
-diff --git a/target/ppc/cpu.h b/target/ppc/cpu.h
-index a44de22ca4a..200652e2c87 100644
---- a/target/ppc/cpu.h
-+++ b/target/ppc/cpu.h
-@@ -1471,8 +1471,7 @@ struct PowerPCCPUClass {
-     int bfd_mach;
-     uint32_t l1_dcache_size, l1_icache_size;
- #ifndef CONFIG_USER_ONLY
--    unsigned int gdb_num_sprs;
--    const char *gdb_spr_xml;
-+    GDBFeature gdb_spr;
- #endif
-     const PPCHash64Options *hash64_opts;
-     struct ppc_radix_page_info *radix_page_info;
-@@ -1525,7 +1524,6 @@ int ppc_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
- int ppc_cpu_gdb_write_register_apple(CPUState *cpu, uint8_t *buf, int reg);
- #ifndef CONFIG_USER_ONLY
- hwaddr ppc_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
--void ppc_gdb_gen_spr_xml(PowerPCCPU *cpu);
- const char *ppc_gdb_get_dynamic_xml(CPUState *cs, const char *xml_name);
- #endif
- int ppc64_cpu_write_elf64_note(WriteCoreDumpFunction f, CPUState *cs,
-diff --git a/target/ppc/cpu_init.c b/target/ppc/cpu_init.c
-index 9931372a08a..4f6903d3f16 100644
---- a/target/ppc/cpu_init.c
-+++ b/target/ppc/cpu_init.c
-@@ -6682,10 +6682,6 @@ static void init_ppc_proc(PowerPCCPU *cpu)
-     /* PowerPC implementation specific initialisations (SPRs, timers, ...) */
-     (*pcc->init_proc)(env);
- 
--#if !defined(CONFIG_USER_ONLY)
--    ppc_gdb_gen_spr_xml(cpu);
--#endif
--
-     /* MSR bits & flags consistency checks */
-     if (env->msr_mask & (1 << 25)) {
-         switch (env->flags & (POWERPC_FLAG_SPE | POWERPC_FLAG_VRE)) {
-diff --git a/target/ppc/gdbstub.c b/target/ppc/gdbstub.c
-index ec5731e5d67..e3be3dbd109 100644
---- a/target/ppc/gdbstub.c
-+++ b/target/ppc/gdbstub.c
-@@ -300,15 +300,23 @@ int ppc_cpu_gdb_write_register_apple(CPUState *cs, uint8_t *mem_buf, int n)
- }
- 
- #ifndef CONFIG_USER_ONLY
--void ppc_gdb_gen_spr_xml(PowerPCCPU *cpu)
-+static void gdb_gen_spr_feature(CPUState *cs)
- {
--    PowerPCCPUClass *pcc = POWERPC_CPU_GET_CLASS(cpu);
-+    PowerPCCPUClass *pcc = POWERPC_CPU_GET_CLASS(cs);
-+    PowerPCCPU *cpu = POWERPC_CPU(cs);
-     CPUPPCState *env = &cpu->env;
--    GString *xml;
--    char *spr_name;
-+    GDBFeatureBuilder builder;
-     unsigned int num_regs = 0;
-     int i;
- 
-+    if (pcc->gdb_spr.xml) {
-+        return;
-+    }
-+
-+    gdb_feature_builder_init(&builder, &pcc->gdb_spr,
-+                             "org.qemu.power.spr", "power-spr.xml",
-+                             cs->gdb_num_regs);
-+
-     for (i = 0; i < ARRAY_SIZE(env->spr_cb); i++) {
-         ppc_spr_t *spr = &env->spr_cb[i];
- 
-@@ -326,35 +334,13 @@ void ppc_gdb_gen_spr_xml(PowerPCCPU *cpu)
-          */
-         spr->gdb_id = num_regs;
-         num_regs++;
--    }
--
--    if (pcc->gdb_spr_xml) {
--        return;
--    }
- 
--    xml = g_string_new("<?xml version=\"1.0\"?>");
--    g_string_append(xml, "<!DOCTYPE target SYSTEM \"gdb-target.dtd\">");
--    g_string_append(xml, "<feature name=\"org.qemu.power.spr\">");
--
--    for (i = 0; i < ARRAY_SIZE(env->spr_cb); i++) {
--        ppc_spr_t *spr = &env->spr_cb[i];
--
--        if (!spr->name) {
--            continue;
--        }
--
--        spr_name = g_ascii_strdown(spr->name, -1);
--        g_string_append_printf(xml, "<reg name=\"%s\"", spr_name);
--        g_free(spr_name);
--
--        g_string_append_printf(xml, " bitsize=\"%d\"", TARGET_LONG_BITS);
--        g_string_append(xml, " group=\"spr\"/>");
-+        gdb_feature_builder_append_reg(&builder, g_ascii_strdown(spr->name, -1),
-+                                       TARGET_LONG_BITS, num_regs,
-+                                       "int", "spr");
+diff --git a/contrib/plugins/execlog.c b/contrib/plugins/execlog.c
+index 82dc2f584e2..f262e5555eb 100644
+--- a/contrib/plugins/execlog.c
++++ b/contrib/plugins/execlog.c
+@@ -199,7 +199,7 @@ static void parse_insn_match(char *match)
+     if (!imatches) {
+         imatches = g_ptr_array_new();
      }
- 
--    g_string_append(xml, "</feature>");
--
--    pcc->gdb_num_sprs = num_regs;
--    pcc->gdb_spr_xml = g_string_free(xml, false);
-+    gdb_feature_builder_end(&builder);
+-    g_ptr_array_add(imatches, match);
++    g_ptr_array_add(imatches, g_strdup(match));
  }
  
- const char *ppc_gdb_get_dynamic_xml(CPUState *cs, const char *xml_name)
-@@ -362,7 +348,7 @@ const char *ppc_gdb_get_dynamic_xml(CPUState *cs, const char *xml_name)
-     PowerPCCPUClass *pcc = POWERPC_CPU_GET_CLASS(cs);
- 
-     if (strcmp(xml_name, "power-spr.xml") == 0) {
--        return pcc->gdb_spr_xml;
-+        return pcc->gdb_spr.xml;
-     }
-     return NULL;
- }
-@@ -599,7 +585,8 @@ void ppc_gdb_init(CPUState *cs, PowerPCCPUClass *pcc)
-                                  32, "power-vsx.xml", 0);
-     }
- #ifndef CONFIG_USER_ONLY
-+    gdb_gen_spr_feature(cs);
-     gdb_register_coprocessor(cs, gdb_get_spr_reg, gdb_set_spr_reg,
--                             pcc->gdb_num_sprs, "power-spr.xml", 0);
-+                             pcc->gdb_spr.num_regs, "power-spr.xml", 0);
- #endif
- }
+ static void parse_vaddr_match(char *match)
 -- 
 2.39.2
 
