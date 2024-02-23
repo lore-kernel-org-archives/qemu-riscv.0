@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFD79C54798
-	for <qemu-riscv@archiver.kernel.org>; Fri, 23 Feb 2024 16:36:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94BDDC5478C
+	for <qemu-riscv@archiver.kernel.org>; Fri, 23 Feb 2024 16:36:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rdYVn-0000bx-5C; Fri, 23 Feb 2024 11:34:59 -0500
+	id 1rdYVo-0000cx-JQ; Fri, 23 Feb 2024 11:35:00 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rdYJU-0003xO-O9
- for qemu-riscv@nongnu.org; Fri, 23 Feb 2024 11:22:16 -0500
-Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
+ id 1rdYJn-000485-AV
+ for qemu-riscv@nongnu.org; Fri, 23 Feb 2024 11:22:36 -0500
+Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rdYJJ-000636-9b
- for qemu-riscv@nongnu.org; Fri, 23 Feb 2024 11:22:16 -0500
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-4127190ad83so6971255e9.0
- for <qemu-riscv@nongnu.org>; Fri, 23 Feb 2024 08:22:04 -0800 (PST)
+ id 1rdYJQ-00066p-UH
+ for qemu-riscv@nongnu.org; Fri, 23 Feb 2024 11:22:35 -0500
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-4127190ad83so6972395e9.0
+ for <qemu-riscv@nongnu.org>; Fri, 23 Feb 2024 08:22:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708705323; x=1709310123; darn=nongnu.org;
+ d=linaro.org; s=google; t=1708705331; x=1709310131; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=eLoCVfGQA0B56KJFSLQeHKi/nYPeRXMDk6OZ3NrpqZo=;
- b=AuEij2KrfDXJQJPOiZrvW102piFeCYe4ETGij+XBsFqskIfYc7SBWRVtQ4FhDGTZOM
- cY4w/dz4MtYLT0HGjOydVtPck9JPrwtEWWgzTsmuAU23ZuUtQy+BICC6sUwvQdAXZuf1
- og20PKe2qqEAjYuixcMctF94jI6mr7buEOuWaWr9Uv9M/B6Svewme2XXtwV7MozfywOC
- wtkSMFIqsi42Auf17Rk2xd9OWrGlu42aFzz7DoX8WRc3gf3QygVXGD8eKBghZ+moCE5T
- 5E15hG6+EzX3DLpxHB2iteDpXAxw08qObSkfUmY7tDWpeSXb6hw7XlsgWLanUkOw27pa
- 1HyA==
+ bh=hxDVqDXi3LGJSJYkq05RZi8ehgH06PAsi/NzuX8UMrA=;
+ b=reN9Cpk1BIEZuw72t0dvk9DUSCaeBOJ+BBVDm0zhCeL2gIp1ETRcoRp/AKqFMUNEpn
+ XuwKgEwIAGRe0/iHoANY/ZQRcdIUVZWSGl06MIyqqZ5iSWhcJMuFtWRBx4oWqm89srLC
+ m+Oxfp3lijhJa/4xZZETlWNBbLlnnXJ0naN0gV612uUZCHEzcdgX7XjH4sRAo3U/Pk1w
+ PhDTUAFgtqBd1qekqzG9Vwr0xxrgD9jB6LBYJlfCbC83+1+nL9W9TxvuZFjHhBdcU23t
+ /OnFpGt5jiTGh0ehMTRAncnG1+Ipf5iM/as2Uixk5P/BdG8sd3Pn4JaKHAmbIaW8g/56
+ Q2rQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708705323; x=1709310123;
+ d=1e100.net; s=20230601; t=1708705331; x=1709310131;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=eLoCVfGQA0B56KJFSLQeHKi/nYPeRXMDk6OZ3NrpqZo=;
- b=nTQB7YPDqsDo/LYXS7m8GV0ZgyOi7mNLfcPrXJjpjmLRg5Vj4OWOHlwxuAmL5lEmDp
- D5qC3bOs4h547pzqNlbetZRpfbIyBAf8h4s1r+4LqqLLa1CkDcIUBssCOrcVJpxv2IA5
- WNDb8DGGoi02zLcQFujDT3KDf43Erpi7pI5kw8sxuIMgO5n1OVrUsJl6NMZ93iTpnsBu
- Og3UtniWj8pR0LnzCj4cN9WduVtanJwpV0VvYM6Ln+cD9ypnVZ624yWiujhzoy+VCOCg
- aQIENLoZNJKcGvgKMYQ25EJXNMH2O7QgKYPJJAqW2p6ktdxLq3GlBuaVao28ET5SS4Ho
- Keiw==
+ bh=hxDVqDXi3LGJSJYkq05RZi8ehgH06PAsi/NzuX8UMrA=;
+ b=JVkhWpovNzQkWcVMmTpJEpMZZGLoxlFsZPPR9+uztoze+BD89unfKCQoqLW4eSBPCI
+ TAb1SIGmFnI+G4OjwADRe4qwESt6OhcqzEHAdpvWsUr4GsCIEowslqfDEYoLk8KYoCnk
+ 1CyAiii5S6StkKs+/s6xsYrfTOgYHUDEXZBcTsalw5/Y6y0DCacKpYEqka5V0Z+XYqvc
+ r4ni+NY5z45wY3gVbTAzoO9JYoA0dbUTSH6XPa+xpyFjwEsmfVVDjUBiq0GlOyZ8Dsr1
+ KO4FGcodVk7vV+UkycwrJqcao1SXbAVWgOMtImfTF14/1ycxwzKI8iUpmjoRVWDw52Ej
+ 6I2Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW085As3DOsLXh9yLKqeWNdcc2JyMsaHAthgmPngsnqGPRKLXMRAzz2wwITEjyJ2rhAMn4ICEkhJeYnw4XagwYZTjJQj7Y=
-X-Gm-Message-State: AOJu0Yx3lnr6UWlOE2nFSnK1r1ZKt3/ULPZlxS+m8uGWLBH5hXHLxJaP
- 8B2V+Xl6A8EWAw+nqLl8jpoGQOv/z2KctNYh0ccWDT+v4MO/3zuQX/gvM1FG8WA=
-X-Google-Smtp-Source: AGHT+IGcUCoViou239QibPBSUvZhRPwseyFY+ZLxBgrbA4mLNafh0ojegHnvH2Bd1uTDTYMGa7Nn/w==
-X-Received: by 2002:a05:600c:3548:b0:412:96d7:c4d6 with SMTP id
- i8-20020a05600c354800b0041296d7c4d6mr249661wmq.41.1708705323413; 
- Fri, 23 Feb 2024 08:22:03 -0800 (PST)
+ AJvYcCX/JSw6muuny1DyIO+0ZbUxML+WpHF8RLYuKld+3rfRm5Hia97ETSgoBAEF0LSGdqTUwv8qPkzFEMkdCg/9vz6ONv8+I9c=
+X-Gm-Message-State: AOJu0Yytxem0RKX0DW0MxT4kk0izVroe70rTlQxunnQgeFEeBhul+YXR
+ cpA8EUBoDju06Wfj+tiUU4Sg4t6a5I2RoZVeYvQDpBb0xl9hnMVCLZu5jJm/wc8=
+X-Google-Smtp-Source: AGHT+IEuSDv5hGefTKvAlHyk/MGBKGazfzuFy6/XTYfjnbsJjKrse8g000IeKYtWbwmkQtEzsDwF9Q==
+X-Received: by 2002:a05:600c:a3a4:b0:412:78bd:c087 with SMTP id
+ hn36-20020a05600ca3a400b0041278bdc087mr255071wmb.9.1708705331497; 
+ Fri, 23 Feb 2024 08:22:11 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- t15-20020a5d49cf000000b0033d282c7537sm3313119wrs.23.2024.02.23.08.22.02
+ s15-20020a05600c45cf00b0041279707ffbsm2869838wmo.15.2024.02.23.08.22.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 Feb 2024 08:22:03 -0800 (PST)
+ Fri, 23 Feb 2024 08:22:06 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 883225F904;
- Fri, 23 Feb 2024 16:22:02 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 603335F92C;
+ Fri, 23 Feb 2024 16:22:03 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Song Gao <gaosong@loongson.cn>, qemu-s390x@nongnu.org,
@@ -90,25 +90,26 @@ Cc: Song Gao <gaosong@loongson.cn>, qemu-s390x@nongnu.org,
  Yoshinori Sato <ysato@users.sourceforge.jp>,
  Brian Cain <bcain@quicinc.com>, Paolo Bonzini <pbonzini@redhat.com>,
  "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Michael Rolnik <mrolnik@gmail.com>
-Subject: [PATCH v2 01/27] tests/tcg: update licenses to GPLv2 as intended
-Date: Fri, 23 Feb 2024 16:21:36 +0000
-Message-Id: <20240223162202.1936541-2-alex.bennee@linaro.org>
+ Michael Rolnik <mrolnik@gmail.com>,
+ Akihiko Odaki <akihiko.odaki@daynix.com>
+Subject: [PATCH v2 09/27] gdbstub: Simplify XML lookup
+Date: Fri, 23 Feb 2024 16:21:44 +0000
+Message-Id: <20240223162202.1936541-10-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240223162202.1936541-1-alex.bennee@linaro.org>
 References: <20240223162202.1936541-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::335;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x335.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01,
- T_SPF_HELO_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -124,241 +125,257 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-My default header template is GPLv3 but for QEMU code we really should
-stick to GPLv2-or-later (allowing others to up-license it if they
-wish). While this is test code we should still be consistent on the
-source distribution.
+From: Akihiko Odaki <akihiko.odaki@daynix.com>
 
-I wrote all of this code so its not a problem. However there remains
-one GPLv3 file left which is the crt0-tc2x.S for TriCore.
+Now we know all instances of GDBFeature that is used in CPU so we can
+traverse them to find XML. This removes the need for a CPU-specific
+lookup function for dynamic XMLs.
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
+Message-Id: <20240103173349.398526-33-alex.bennee@linaro.org>
+Message-Id: <20231213-gdb-v17-7-777047380591@daynix.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Message-Id: <20240215184036.214065-1-alex.bennee@linaro.org>
 ---
- tests/tcg/aarch64/semicall.h                      | 4 ++--
- tests/tcg/arm/semicall.h                          | 4 ++--
- tests/tcg/multiarch/float_helpers.h               | 4 ++--
- tests/tcg/riscv64/semicall.h                      | 4 ++--
- tests/tcg/multiarch/arm-compat-semi/semiconsole.c | 4 ++--
- tests/tcg/multiarch/arm-compat-semi/semihosting.c | 4 ++--
- tests/tcg/multiarch/float_convd.c                 | 4 ++--
- tests/tcg/multiarch/float_convs.c                 | 4 ++--
- tests/tcg/multiarch/float_madds.c                 | 4 ++--
- tests/tcg/multiarch/libs/float_helpers.c          | 4 ++--
- tests/tcg/i386/system/boot.S                      | 6 +++---
- tests/tcg/x86_64/system/boot.S                    | 6 +++---
- 12 files changed, 26 insertions(+), 26 deletions(-)
+ include/exec/gdbstub.h |   6 +++
+ gdbstub/gdbstub.c      | 118 +++++++++++++++++++++--------------------
+ hw/core/cpu-common.c   |   5 +-
+ 3 files changed, 69 insertions(+), 60 deletions(-)
 
-diff --git a/tests/tcg/aarch64/semicall.h b/tests/tcg/aarch64/semicall.h
-index 8a3fce35c5f..30d4de9a549 100644
---- a/tests/tcg/aarch64/semicall.h
-+++ b/tests/tcg/aarch64/semicall.h
-@@ -1,10 +1,10 @@
- /*
-  * Semihosting Tests - AArch64 helper
-  *
-- * Copyright (c) 2019
-+ * Copyright (c) 2019, 2024
-  * Written by Alex Bennée <alex.bennee@linaro.org>
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-  */
+diff --git a/include/exec/gdbstub.h b/include/exec/gdbstub.h
+index bcaab1bc750..82a8afa237f 100644
+--- a/include/exec/gdbstub.h
++++ b/include/exec/gdbstub.h
+@@ -27,6 +27,12 @@ typedef struct GDBFeatureBuilder {
+ typedef int (*gdb_get_reg_cb)(CPUState *cpu, GByteArray *buf, int reg);
+ typedef int (*gdb_set_reg_cb)(CPUState *cpu, uint8_t *buf, int reg);
  
- uintptr_t __semi_call(uintptr_t type, uintptr_t arg0)
-diff --git a/tests/tcg/arm/semicall.h b/tests/tcg/arm/semicall.h
-index ad8ac51310b..624937c5577 100644
---- a/tests/tcg/arm/semicall.h
-+++ b/tests/tcg/arm/semicall.h
-@@ -1,10 +1,10 @@
- /*
-  * Semihosting Tests - ARM Helper
-  *
-- * Copyright (c) 2019
-+ * Copyright (c) 2019, 2024
-  * Written by Alex Bennée <alex.bennee@linaro.org>
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-  */
++/**
++ * gdb_init_cpu(): Initialize the CPU for gdbstub.
++ * @cpu: The CPU to be initialized.
++ */
++void gdb_init_cpu(CPUState *cpu);
++
+ /**
+  * gdb_register_coprocessor() - register a supplemental set of registers
+  * @cpu - the CPU associated with registers
+diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
+index 486ceb52d2e..d573f808d2e 100644
+--- a/gdbstub/gdbstub.c
++++ b/gdbstub/gdbstub.c
+@@ -352,6 +352,7 @@ static const char *get_feature_xml(const char *p, const char **newp,
+ {
+     CPUState *cpu = gdb_get_first_cpu_in_process(process);
+     CPUClass *cc = CPU_GET_CLASS(cpu);
++    GDBRegisterState *r;
+     size_t len;
  
- uintptr_t __semi_call(uintptr_t type, uintptr_t arg0)
-diff --git a/tests/tcg/multiarch/float_helpers.h b/tests/tcg/multiarch/float_helpers.h
-index 309f3f4bf10..c42ebe64b9e 100644
---- a/tests/tcg/multiarch/float_helpers.h
-+++ b/tests/tcg/multiarch/float_helpers.h
-@@ -1,9 +1,9 @@
- /*
-  * Common Float Helpers
-  *
-- * Copyright (c) 2019 Linaro
-+ * Copyright (c) 2019, 2024 Linaro
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-  */
+     /*
+@@ -365,7 +366,6 @@ static const char *get_feature_xml(const char *p, const char **newp,
+     /* Is it the main target xml? */
+     if (strncmp(p, "target.xml", len) == 0) {
+         if (!process->target_xml) {
+-            GDBRegisterState *r;
+             g_autoptr(GPtrArray) xml = g_ptr_array_new_with_free_func(g_free);
  
- #include <inttypes.h>
-diff --git a/tests/tcg/riscv64/semicall.h b/tests/tcg/riscv64/semicall.h
-index f8c88f32dc5..11d0650cb06 100644
---- a/tests/tcg/riscv64/semicall.h
-+++ b/tests/tcg/riscv64/semicall.h
-@@ -1,10 +1,10 @@
- /*
-  * Semihosting Tests - RiscV64 Helper
-  *
-- * Copyright (c) 2021
-+ * Copyright (c) 2021, 2024
-  * Written by Alex Bennée <alex.bennee@linaro.org>
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-  */
+             g_ptr_array_add(
+@@ -380,18 +380,12 @@ static const char *get_feature_xml(const char *p, const char **newp,
+                     g_markup_printf_escaped("<architecture>%s</architecture>",
+                                             cc->gdb_arch_name(cpu)));
+             }
+-            g_ptr_array_add(
+-                xml,
+-                g_markup_printf_escaped("<xi:include href=\"%s\"/>",
+-                                        cc->gdb_core_xml_file));
+-            if (cpu->gdb_regs) {
+-                for (guint i = 0; i < cpu->gdb_regs->len; i++) {
+-                    r = &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
+-                    g_ptr_array_add(
+-                        xml,
+-                        g_markup_printf_escaped("<xi:include href=\"%s\"/>",
+-                                                r->feature->xmlname));
+-                }
++            for (guint i = 0; i < cpu->gdb_regs->len; i++) {
++                r = &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
++                g_ptr_array_add(
++                    xml,
++                    g_markup_printf_escaped("<xi:include href=\"%s\"/>",
++                                            r->feature->xmlname));
+             }
+             g_ptr_array_add(xml, g_strdup("</target>"));
+             g_ptr_array_add(xml, NULL);
+@@ -400,20 +394,11 @@ static const char *get_feature_xml(const char *p, const char **newp,
+         }
+         return process->target_xml;
+     }
+-    /* Is it dynamically generated by the target? */
+-    if (cc->gdb_get_dynamic_xml) {
+-        g_autofree char *xmlname = g_strndup(p, len);
+-        const char *xml = cc->gdb_get_dynamic_xml(cpu, xmlname);
+-        if (xml) {
+-            return xml;
+-        }
+-    }
+-    /* Is it one of the encoded gdb-xml/ files? */
+-    for (int i = 0; gdb_static_features[i].xmlname; i++) {
+-        const char *name = gdb_static_features[i].xmlname;
+-        if ((strncmp(name, p, len) == 0) &&
+-            strlen(name) == len) {
+-            return gdb_static_features[i].xml;
++    /* Is it one of the features? */
++    for (guint i = 0; i < cpu->gdb_regs->len; i++) {
++        r = &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
++        if (strncmp(p, r->feature->xmlname, len) == 0) {
++            return r->feature->xml;
+         }
+     }
  
- uintptr_t __semi_call(uintptr_t type, uintptr_t arg0)
-diff --git a/tests/tcg/multiarch/arm-compat-semi/semiconsole.c b/tests/tcg/multiarch/arm-compat-semi/semiconsole.c
-index 1d82efc589d..1e2268f4b75 100644
---- a/tests/tcg/multiarch/arm-compat-semi/semiconsole.c
-+++ b/tests/tcg/multiarch/arm-compat-semi/semiconsole.c
-@@ -1,10 +1,10 @@
- /*
-  * linux-user semihosting console
-  *
-- * Copyright (c) 2019
-+ * Copyright (c) 2024
-  * Written by Alex Bennée <alex.bennee@linaro.org>
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-  */
+@@ -508,12 +493,10 @@ static int gdb_read_register(CPUState *cpu, GByteArray *buf, int reg)
+         return cc->gdb_read_register(cpu, buf, reg);
+     }
  
- #define SYS_READC       0x07
-diff --git a/tests/tcg/multiarch/arm-compat-semi/semihosting.c b/tests/tcg/multiarch/arm-compat-semi/semihosting.c
-index 8627eee3cf7..f609c01341a 100644
---- a/tests/tcg/multiarch/arm-compat-semi/semihosting.c
-+++ b/tests/tcg/multiarch/arm-compat-semi/semihosting.c
-@@ -1,10 +1,10 @@
- /*
-  * linux-user semihosting checks
-  *
-- * Copyright (c) 2019
-+ * Copyright (c) 2019, 2024
-  * Written by Alex Bennée <alex.bennee@linaro.org>
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-  */
+-    if (cpu->gdb_regs) {
+-        for (guint i = 0; i < cpu->gdb_regs->len; i++) {
+-            r = &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
+-            if (r->base_reg <= reg && reg < r->base_reg + r->feature->num_regs) {
+-                return r->get_reg(cpu, buf, reg - r->base_reg);
+-            }
++    for (guint i = 0; i < cpu->gdb_regs->len; i++) {
++        r = &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
++        if (r->base_reg <= reg && reg < r->base_reg + r->feature->num_regs) {
++            return r->get_reg(cpu, buf, reg - r->base_reg);
+         }
+     }
+     return 0;
+@@ -528,51 +511,70 @@ static int gdb_write_register(CPUState *cpu, uint8_t *mem_buf, int reg)
+         return cc->gdb_write_register(cpu, mem_buf, reg);
+     }
  
- #define SYS_WRITE0      0x04
-diff --git a/tests/tcg/multiarch/float_convd.c b/tests/tcg/multiarch/float_convd.c
-index 0a1f0f93dc5..58d7f8b4c58 100644
---- a/tests/tcg/multiarch/float_convd.c
-+++ b/tests/tcg/multiarch/float_convd.c
-@@ -1,9 +1,9 @@
- /*
-  * Floating Point Convert Doubles to Various
-  *
-- * Copyright (c) 2019 Linaro
-+ * Copyright (c) 2019, 2024 Linaro
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-  */
+-    if (cpu->gdb_regs) {
+-        for (guint i = 0; i < cpu->gdb_regs->len; i++) {
+-            r =  &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
+-            if (r->base_reg <= reg && reg < r->base_reg + r->feature->num_regs) {
+-                return r->set_reg(cpu, mem_buf, reg - r->base_reg);
+-            }
++    for (guint i = 0; i < cpu->gdb_regs->len; i++) {
++        r =  &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
++        if (r->base_reg <= reg && reg < r->base_reg + r->feature->num_regs) {
++            return r->set_reg(cpu, mem_buf, reg - r->base_reg);
+         }
+     }
+     return 0;
+ }
  
- #include <stdio.h>
-diff --git a/tests/tcg/multiarch/float_convs.c b/tests/tcg/multiarch/float_convs.c
-index 2e4fa55324d..cb1fdd439e3 100644
---- a/tests/tcg/multiarch/float_convs.c
-+++ b/tests/tcg/multiarch/float_convs.c
-@@ -1,9 +1,9 @@
- /*
-  * Floating Point Convert Single to Various
-  *
-- * Copyright (c) 2019 Linaro
-+ * Copyright (c) 2019, 2024 Linaro
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-  */
++static void gdb_register_feature(CPUState *cpu, int base_reg,
++                                 gdb_get_reg_cb get_reg, gdb_set_reg_cb set_reg,
++                                 const GDBFeature *feature)
++{
++    GDBRegisterState s = {
++        .base_reg = base_reg,
++        .get_reg = get_reg,
++        .set_reg = set_reg,
++        .feature = feature
++    };
++
++    g_array_append_val(cpu->gdb_regs, s);
++}
++
++void gdb_init_cpu(CPUState *cpu)
++{
++    CPUClass *cc = CPU_GET_CLASS(cpu);
++    const GDBFeature *feature;
++
++    cpu->gdb_regs = g_array_new(false, false, sizeof(GDBRegisterState));
++
++    if (cc->gdb_core_xml_file) {
++        feature = gdb_find_static_feature(cc->gdb_core_xml_file);
++        gdb_register_feature(cpu, 0,
++                             cc->gdb_read_register, cc->gdb_write_register,
++                             feature);
++    }
++
++    cpu->gdb_num_regs = cpu->gdb_num_g_regs = cc->gdb_num_core_regs;
++}
++
+ void gdb_register_coprocessor(CPUState *cpu,
+                               gdb_get_reg_cb get_reg, gdb_set_reg_cb set_reg,
+                               const GDBFeature *feature, int g_pos)
+ {
+     GDBRegisterState *s;
+     guint i;
++    int base_reg = cpu->gdb_num_regs;
  
- #include <stdio.h>
-diff --git a/tests/tcg/multiarch/float_madds.c b/tests/tcg/multiarch/float_madds.c
-index 4888f8641f4..a692e052d5b 100644
---- a/tests/tcg/multiarch/float_madds.c
-+++ b/tests/tcg/multiarch/float_madds.c
-@@ -1,9 +1,9 @@
- /*
-  * Fused Multiply Add (Single)
-  *
-- * Copyright (c) 2019 Linaro
-+ * Copyright (c) 2019, 2024 Linaro
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-  */
+-    if (cpu->gdb_regs) {
+-        for (i = 0; i < cpu->gdb_regs->len; i++) {
+-            /* Check for duplicates.  */
+-            s = &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
+-            if (s->feature == feature) {
+-                return;
+-            }
++    for (i = 0; i < cpu->gdb_regs->len; i++) {
++        /* Check for duplicates.  */
++        s = &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
++        if (s->feature == feature) {
++            return;
+         }
+-    } else {
+-        cpu->gdb_regs = g_array_new(false, false, sizeof(GDBRegisterState));
+-        i = 0;
+     }
  
- #include <stdio.h>
-diff --git a/tests/tcg/multiarch/libs/float_helpers.c b/tests/tcg/multiarch/libs/float_helpers.c
-index 4e68d2b6598..fad5fc98933 100644
---- a/tests/tcg/multiarch/libs/float_helpers.c
-+++ b/tests/tcg/multiarch/libs/float_helpers.c
-@@ -5,9 +5,9 @@
-  * floating point constants useful for exercising the edge cases in
-  * floating point tests.
-  *
-- * Copyright (c) 2019 Linaro
-+ * Copyright (c) 2019, 2024 Linaro
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-  */
+-    g_array_set_size(cpu->gdb_regs, i + 1);
+-    s = &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
+-    s->base_reg = cpu->gdb_num_regs;
+-    s->get_reg = get_reg;
+-    s->set_reg = set_reg;
+-    s->feature = feature;
++    gdb_register_feature(cpu, base_reg, get_reg, set_reg, feature);
  
- /* we want additional float type definitions */
-diff --git a/tests/tcg/i386/system/boot.S b/tests/tcg/i386/system/boot.S
-index 9e8920cbfe0..28902c400d8 100644
---- a/tests/tcg/i386/system/boot.S
-+++ b/tests/tcg/i386/system/boot.S
-@@ -2,12 +2,12 @@
-  * i386 boot code, based on  qemu-bmibug.
-  *
-  * Copyright 2019 Doug Gale
-- * Copyright 2019 Linaro
-+ * Copyright 2019, 2024 Linaro
-  *
-- * This work is licensed under the terms of the GNU GPL, version 3 or later.
-+ * This work is licensed under the terms of the GNU GPL, version 2 or later.
-  * See the COPYING file in the top-level directory.
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-  */
+     /* Add to end of list.  */
+     cpu->gdb_num_regs += feature->num_regs;
+     if (g_pos) {
+-        if (g_pos != s->base_reg) {
++        if (g_pos != base_reg) {
+             error_report("Error: Bad gdb register numbering for '%s', "
+-                         "expected %d got %d", feature->xml,
+-                         g_pos, s->base_reg);
++                         "expected %d got %d", feature->xml, g_pos, base_reg);
+         } else {
+             cpu->gdb_num_g_regs = cpu->gdb_num_regs;
+         }
+diff --git a/hw/core/cpu-common.c b/hw/core/cpu-common.c
+index 67db07741d7..fe16d0d9df8 100644
+--- a/hw/core/cpu-common.c
++++ b/hw/core/cpu-common.c
+@@ -27,6 +27,7 @@
+ #include "qemu/main-loop.h"
+ #include "exec/log.h"
+ #include "exec/cpu-common.h"
++#include "exec/gdbstub.h"
+ #include "qemu/error-report.h"
+ #include "qemu/qemu-print.h"
+ #include "sysemu/tcg.h"
+@@ -240,11 +241,10 @@ static void cpu_common_unrealizefn(DeviceState *dev)
+ static void cpu_common_initfn(Object *obj)
+ {
+     CPUState *cpu = CPU(obj);
+-    CPUClass *cc = CPU_GET_CLASS(obj);
  
-         .section .head
-diff --git a/tests/tcg/x86_64/system/boot.S b/tests/tcg/x86_64/system/boot.S
-index dac9bd534d7..7213aec63b2 100644
---- a/tests/tcg/x86_64/system/boot.S
-+++ b/tests/tcg/x86_64/system/boot.S
-@@ -1,16 +1,16 @@
- /*
-  * x86_64 boot and support code
-  *
-- * Copyright 2019 Linaro
-+ * Copyright 2019, 2024 Linaro
-  *
-- * This work is licensed under the terms of the GNU GPL, version 3 or later.
-+ * This work is licensed under the terms of the GNU GPL, version 2 or later.
-  * See the COPYING file in the top-level directory.
-  *
-  * Unlike the i386 version we instead use Xen's PVHVM booting header
-  * which should drop us automatically into 32 bit mode ready to go. I've
-  * nabbed bits of the Linux kernel setup to achieve this.
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-  */
++    gdb_init_cpu(cpu);
+     cpu->cpu_index = UNASSIGNED_CPU_INDEX;
+     cpu->cluster_index = UNASSIGNED_CLUSTER_INDEX;
+-    cpu->gdb_num_regs = cpu->gdb_num_g_regs = cc->gdb_num_core_regs;
+     /* user-mode doesn't have configurable SMP topology */
+     /* the default value is changed by qemu_init_vcpu() for system-mode */
+     cpu->nr_cores = 1;
+@@ -264,6 +264,7 @@ static void cpu_common_finalize(Object *obj)
+ {
+     CPUState *cpu = CPU(obj);
  
-         .section .head
++    g_array_free(cpu->gdb_regs, TRUE);
+     qemu_lockcnt_destroy(&cpu->in_ioctl_lock);
+     qemu_mutex_destroy(&cpu->work_mutex);
+ }
 -- 
 2.39.2
 
