@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3249C54798
-	for <qemu-riscv@archiver.kernel.org>; Fri, 23 Feb 2024 16:47:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9D4AC54798
+	for <qemu-riscv@archiver.kernel.org>; Fri, 23 Feb 2024 16:47:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rdYfn-0000bg-KH; Fri, 23 Feb 2024 11:45:19 -0500
+	id 1rdYh9-0005Gh-Rm; Fri, 23 Feb 2024 11:46:55 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rdYQ6-000603-SN
- for qemu-riscv@nongnu.org; Fri, 23 Feb 2024 11:29:06 -0500
-Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
+ id 1rdYQ4-0005zJ-Qa
+ for qemu-riscv@nongnu.org; Fri, 23 Feb 2024 11:29:04 -0500
+Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rdYPo-0007GD-W7
- for qemu-riscv@nongnu.org; Fri, 23 Feb 2024 11:29:06 -0500
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-4127700a384so3854915e9.3
+ id 1rdYPo-0007GT-Ux
+ for qemu-riscv@nongnu.org; Fri, 23 Feb 2024 11:29:04 -0500
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-4128cfb6b6fso3945635e9.0
  for <qemu-riscv@nongnu.org>; Fri, 23 Feb 2024 08:28:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1708705727; x=1709310527; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=v93sjlrKGHF/8PcF+jkx1JshiyYwDWnn08uJwR8C/sE=;
- b=P5wmz2KXmq5DA/Wn7dvF6QOh+RJ2/ESv+NFrOJQh/K1/q9lqqqSH4BQ5QgRl+YtqBY
- oOUfQk14A+luaim8vTihVlpqlyZtT+V+lUzE5GDfmvud+Qw5HY+di7ANX9wWDgveG4en
- JFi8KAr2DlsD4zA82DTbA2swHQjmjPyinqs/fQQCJ71BPx8ZA1LvH0m+TfFWRRloeeRE
- NqQkCTZxgKkbqKOq46Oe7b2HECfQD2/JanlB+XZPAsijqm5tJuOcJCDzda9r7D28Hh9x
- 5arcZfUxH11PH9y+/M+AGBbnhMW8ahB4FE7NJlWReWOrXckHWGjwtu3ejCP3XIdVN8gU
- rrPg==
+ bh=c62pHsDpP+3tvJg69QO5ZTVqtvkEN32UvVvL0uQMeec=;
+ b=QDHQe06D/ZApvzZTM4YqK02AaYhfcTuA0RCh8q0m9IGhjP+GTEV8LQ6rnAeGd8QyhR
+ 61A2fh9ZVvawSGEWIEC6TU5GgDnBTsvMK6g1VCkItTL4vRlKv9pw0IOSZ7JrGvjmunUm
+ clZCkpPd7WClluPrmHGl83Ae26uKeuKIJ0YZ8lG6y2xEULNgG68Y3ZqMilqzY8OLcqY7
+ ZEb8vJDwRwMPifZgnNnXQaz3FZqmvDIMpPAQYb/pVUSgglvxHbYprqU+yq3Kn/9gdA9/
+ 0Xx1My/T8VALtwZF5vUL7fYEozLYaIpSffN9ctD1eIip7XkOwGHUmhaY6RxVZmTpRNIr
+ d6JA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1708705727; x=1709310527;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=v93sjlrKGHF/8PcF+jkx1JshiyYwDWnn08uJwR8C/sE=;
- b=Ah34V07ChADxivBx99SHmiPoRu26EYM3m6Br+L6TMBtt2K+YVTPtd8WvptTXw5hKwn
- ULZTt43PZWo2enN1umi5hnfoL+4EtsYWinr3Y/ipyHbBwJh0NBfUcbCiXwyqgsbnE2jd
- E5+HrsOChsa26c0njcJrZwfgKyaBfxH251ldmPqAsOojBN9wSSY7tCqZ8Sx9ahtBP3yJ
- HBJXAs7qc/AjL/FWHTINswzKYHtaS+6fAcOhZlJ7J+B8AvbWMlz0MrXc6eEARc5tfZxo
- xDVGZlC/+66LG//N3roEmTF9YhW1TIJyAztzDxHydaglYs+Vj4NEfkBy2V+A1xE3vUie
- 7ROQ==
+ bh=c62pHsDpP+3tvJg69QO5ZTVqtvkEN32UvVvL0uQMeec=;
+ b=heEOCMb4Pm+mmVQC+XaP0j/Yy4ja5m2zWCBMuTxs/ff3ydUtZ06XN+TkE7NAGYWjqb
+ aee+DPrE6NwOH6gkGKTDvDfcRBuZxwyP4MduCU4H72Lxo+Ef61crAO+PaYmKeAsV9kmd
+ tXCAvX1L/0g1cexYSCluUm6ibiuvrCiY7Vhr1LynIlBXdOwROgzUPsyN8fZXKg11hw7b
+ P607PSbSNCfd1mN+SENI8hshwBRxkteX9sVFq4Rkqs9Emdoo1UH8/0n1DHRi4XtoG+6k
+ ymIe+sQsSsejmlWV8ThzXcZKVn37ddGHS0pWHDA+9HmNGuPrHQ2LJ9W5Pgblbkqg8WIM
+ sxIw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWxgDBIkQuP5HDUiTk0VlE3oq3xM5T0tDlWbjUuiNfhIjDy+OpmROZmVSFb8GnOW1ShvWSeiO4D6QKA/KoLdLJdjnFh3sw=
-X-Gm-Message-State: AOJu0Ywyba0V2XdS3zzxEUo4MIqqvkPJyMyrwn/3ZMGCJoleW5gZN9NM
- IGrxCNRanKEBJPU7KphB+qGARuKcByTpzB9rPwj/384dHsL/RM1TYTl6QlaefXo=
-X-Google-Smtp-Source: AGHT+IFJX3j8WNIiG37f+6z4x20vf6Wilkp11q2CNT6aXatRexEkzJ6uHcRfvDn3gmt2JRDHSg37mw==
-X-Received: by 2002:a05:600c:4e11:b0:410:55a:5458 with SMTP id
- b17-20020a05600c4e1100b00410055a5458mr205838wmq.31.1708705727123; 
+ AJvYcCXqROL5q8QWl97WL2o2n2xTMtHduO7hu/tHvAp8FvnMVSBS9Ajh8382MFkNpUiQIuZeUGNt3WGcz6ajzRFA94b45aZ1Oys=
+X-Gm-Message-State: AOJu0Yy5Jv3d0lJ4oq1z6N+ZYOiRbfvFaSt/oPNZ8Imv06UCn8zjLt/B
+ 6YCgl3kaDbvJDmNEC+1DYsWSrKGH+uzBojn1DFDchQhVTiE6DxUTAHtsYIXmcrI=
+X-Google-Smtp-Source: AGHT+IHA/BxI0yOOqZ9c6ndMS0vbqAyE5u4uMUWcDkPA3DUcuBlme78LC1DRrTWxsx3lBYCmmhpGbw==
+X-Received: by 2002:a05:600c:524c:b0:410:c5a9:a24a with SMTP id
+ fc12-20020a05600c524c00b00410c5a9a24amr231933wmb.20.1708705727458; 
  Fri, 23 Feb 2024 08:28:47 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- z6-20020a05600c0a0600b0041266f5b041sm2984923wmp.34.2024.02.23.08.28.46
+ s15-20020a05600c45cf00b0041279707ffbsm2885876wmo.15.2024.02.23.08.28.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Fri, 23 Feb 2024 08:28:46 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 9C7235F938;
- Fri, 23 Feb 2024 16:22:04 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 0D2815F93D;
+ Fri, 23 Feb 2024 16:22:05 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Song Gao <gaosong@loongson.cn>, qemu-s390x@nongnu.org,
@@ -91,18 +91,17 @@ Cc: Song Gao <gaosong@loongson.cn>, qemu-s390x@nongnu.org,
  Brian Cain <bcain@quicinc.com>, Paolo Bonzini <pbonzini@redhat.com>,
  "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
  Michael Rolnik <mrolnik@gmail.com>
-Subject: [PATCH v2 22/27] tests/tcg: expand insn test case to exercise
- register API
-Date: Fri, 23 Feb 2024 16:21:57 +0000
-Message-Id: <20240223162202.1936541-23-alex.bennee@linaro.org>
+Subject: [PATCH v2 27/27] docs/devel: plugins can trigger a tb flush
+Date: Fri, 23 Feb 2024 16:22:02 +0000
+Message-Id: <20240223162202.1936541-28-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240223162202.1936541-1-alex.bennee@linaro.org>
 References: <20240223162202.1936541-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::334;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x334.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::329;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x329.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -125,53 +124,30 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This ensure we at least read every register the plugin API reports at
-least once during the check-tcg checks.
+From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 
+When scoreboards need to be reallocated.
+
+Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Message-Id: <20240213094009.150349-8-pierrick.bouvier@linaro.org>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- tests/plugin/insn.c | 21 +++++++++++++++++++++
- 1 file changed, 21 insertions(+)
+ docs/devel/multi-thread-tcg.rst | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/tests/plugin/insn.c b/tests/plugin/insn.c
-index 5fd3017c2b3..54da06fcf26 100644
---- a/tests/plugin/insn.c
-+++ b/tests/plugin/insn.c
-@@ -46,6 +46,25 @@ typedef struct {
-     char *disas;
- } Instruction;
+diff --git a/docs/devel/multi-thread-tcg.rst b/docs/devel/multi-thread-tcg.rst
+index 7302c3bf534..1420789fff3 100644
+--- a/docs/devel/multi-thread-tcg.rst
++++ b/docs/devel/multi-thread-tcg.rst
+@@ -109,6 +109,7 @@ including:
+   - debugging operations (breakpoint insertion/removal)
+   - some CPU helper functions
+   - linux-user spawning its first thread
++  - operations related to TCG Plugins
  
-+/*
-+ * Initialise a new vcpu with reading the register list
-+ */
-+static void vcpu_init(qemu_plugin_id_t id, unsigned int vcpu_index)
-+{
-+    g_autoptr(GArray) reg_list = qemu_plugin_get_registers();
-+    g_autoptr(GByteArray) reg_value = g_byte_array_new();
-+
-+    if (reg_list) {
-+        for (int i = 0; i < reg_list->len; i++) {
-+            qemu_plugin_reg_descriptor *rd = &g_array_index(
-+                reg_list, qemu_plugin_reg_descriptor, i);
-+            int count = qemu_plugin_read_register(rd->handle, reg_value);
-+            g_assert(count > 0);
-+        }
-+    }
-+}
-+
-+
- static void vcpu_insn_exec_before(unsigned int cpu_index, void *udata)
- {
-     unsigned int i = cpu_index % MAX_CPUS;
-@@ -212,6 +231,8 @@ QEMU_PLUGIN_EXPORT int qemu_plugin_install(qemu_plugin_id_t id,
-         sizes = g_array_new(true, true, sizeof(unsigned long));
-     }
- 
-+    /* Register init, translation block and exit callbacks */
-+    qemu_plugin_register_vcpu_init_cb(id, vcpu_init);
-     qemu_plugin_register_vcpu_tb_trans_cb(id, vcpu_tb_trans);
-     qemu_plugin_register_atexit_cb(id, plugin_exit, NULL);
-     return 0;
+ This is done with the async_safe_run_on_cpu() mechanism to ensure all
+ vCPUs are quiescent when changes are being made to shared global
 -- 
 2.39.2
 
