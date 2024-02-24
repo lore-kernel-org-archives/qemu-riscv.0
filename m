@@ -4,110 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D017DC48BF6
-	for <qemu-riscv@archiver.kernel.org>; Sat, 24 Feb 2024 08:35:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 272F3C48BF6
+	for <qemu-riscv@archiver.kernel.org>; Sat, 24 Feb 2024 14:23:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rdnUA-0005xx-9L; Sat, 24 Feb 2024 03:34:18 -0500
+	id 1rdsvd-0001Sp-Kq; Sat, 24 Feb 2024 09:23:01 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1rdnU8-0005xY-D4
- for qemu-riscv@nongnu.org; Sat, 24 Feb 2024 03:34:16 -0500
-Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1rdnU5-0007nq-Ua
- for qemu-riscv@nongnu.org; Sat, 24 Feb 2024 03:34:16 -0500
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-6da9c834646so1510659b3a.3
- for <qemu-riscv@nongnu.org>; Sat, 24 Feb 2024 00:34:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1708763652; x=1709368452;
- darn=nongnu.org; 
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=UVQsYrZNkkg5HHx+0cO2XWXKJlv+JJfjFrAQSba2qeA=;
- b=lvIrzIkPUONBxL1w+O82bqng1e4FDEDoKnUGDwMEPrdaTZmBxg8+zam1UyyZrtoNpw
- Cw18RKbEvVdJsFY/JFfPFHmc+iZbKoLDSbFS+tMcweMOWIXdXepPJe63mHooHJBunEeF
- tGlj55RhvDuzFrSJ11IQzFgHo/WLIK5mBYmj7I1D19AbxCRbzrKkwmqesK02+QlzoBdi
- KnVYq53q7ep+DF0kpWObxA6+Z3g3r+w5eg9iraOjlCshyhan3fcCBBLzEEG6tDYxdwFT
- oviWDgBrv/HNvXPVAn/3afs2GdO8TfOHIeK/hSEIZvBNzeoX/jGoMWl42d5yzSeQNCWo
- HorA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708763652; x=1709368452;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=UVQsYrZNkkg5HHx+0cO2XWXKJlv+JJfjFrAQSba2qeA=;
- b=NWtNzBRXfEAnhJAvW5KnFpeJKfy4B19xtR2CvQNxeii0nRXongKIe5W8AKAViG+JDO
- Nyal4eQeVWpsgBHsKBgGL7gTS3gNjwsPjfd9eLHhdKO/PQRWpMNEmpqZM1+Hf0cY3U+L
- q+d8HIdeaoDIR0f+iKkz75EO4XVQX/6bKyQ5Z0YDL2k0pvBlDBHSt9g1EhVz5PQXsX5n
- xBR2dVotwNFCJU6gJxPDuLTXjIOPaq0RM+Oiqx4eT0aI+k6RdfPQs6YltD3B4QanNtSM
- z/fYA4AoVLA8TUAU1gjCaccDxu4YWtSM4+rc+3YQagItTzRRlFiIfRt9HmATBrRNOcZO
- SY/g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVzcTmenHNUCF88HQphF2b/c8NOGXFpVU/2/QwP/ZbS2ToFejR6CI3m/QFvuO0uX86eZ2Js1LZNZjZBNMLcotaZ4B/3Vyo=
-X-Gm-Message-State: AOJu0Yz8iNsEtc6eHTnf3VWIcXTSM+FeYvDoKFlhcbjQxsrTlsi4AkJm
- vHgfcv3ZLKrXM43acWgHLCFpZmtwRPvM13EJGBo6/sjjjfOaT93WTqHD+xTyC60=
-X-Google-Smtp-Source: AGHT+IGOMRyeGWv0vDO5ZC2EKlsdbl+BAk5gh5f5cBrdNyh/zeeySIZqCwIU6jphPD1G1gEuGwKrig==
-X-Received: by 2002:a05:6a20:9d92:b0:1a0:6496:84c1 with SMTP id
- mu18-20020a056a209d9200b001a0649684c1mr2458976pzb.37.1708763652314; 
- Sat, 24 Feb 2024 00:34:12 -0800 (PST)
-Received: from [157.82.203.206] ([157.82.203.206])
- by smtp.gmail.com with ESMTPSA id
- w191-20020a6382c8000000b005c6617b52e6sm686202pgd.5.2024.02.24.00.34.05
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 24 Feb 2024 00:34:11 -0800 (PST)
-Message-ID: <2a7f0e06-0bc9-4fad-add7-9675a4cc2a0a@daynix.com>
-Date: Sat, 24 Feb 2024 17:34:03 +0900
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 21/27] plugins: add an API to read registers
-Content-Language: en-US
-To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
- qemu-devel@nongnu.org
-Cc: Song Gao <gaosong@loongson.cn>, qemu-s390x@nongnu.org,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>,
- Thomas Huth <thuth@redhat.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Bin Meng <bin.meng@windriver.com>, Yanan Wang <wangyanan55@huawei.com>,
- Laurent Vivier <laurent@vivier.eu>, qemu-ppc@nongnu.org,
- David Hildenbrand <david@redhat.com>, =?UTF-8?Q?C=C3=A9dric_Le_Goater?=
- <clg@kaod.org>, Ilya Leoshkevich <iii@linux.ibm.com>,
- Cleber Rosa <crosa@redhat.com>, Nicholas Piggin <npiggin@gmail.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Eduardo Habkost <eduardo@habkost.net>,
- Richard Henderson <richard.henderson@linaro.org>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Alexandre Iooss <erdnaxe@crans.org>, Peter Maydell
- <peter.maydell@linaro.org>, Daniel Henrique Barboza <danielhb413@gmail.com>,
- qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
- Palmer Dabbelt <palmer@dabbelt.com>, Mahmoud Mandour
- <ma.mandourr@gmail.com>, John Snow <jsnow@redhat.com>,
- Weiwei Li <liwei1518@gmail.com>, Alistair Francis
- <alistair.francis@wdc.com>, Yoshinori Sato <ysato@users.sourceforge.jp>,
- Brian Cain <bcain@quicinc.com>, Paolo Bonzini <pbonzini@redhat.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Michael Rolnik <mrolnik@gmail.com>
-References: <20240223162202.1936541-1-alex.bennee@linaro.org>
- <20240223162202.1936541-22-alex.bennee@linaro.org>
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
-In-Reply-To: <20240223162202.1936541-22-alex.bennee@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ (Exim 4.90_1) (envelope-from <demin.han@starfivetech.com>)
+ id 1rdrgA-0002wY-6d; Sat, 24 Feb 2024 08:02:58 -0500
+Received: from mail-sh0chn02on20711.outbound.protection.partner.outlook.cn
+ ([2406:e500:4420:2::711]
+ helo=CHN02-SH0-obe.outbound.protection.partner.outlook.cn)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <demin.han@starfivetech.com>)
+ id 1rdrg8-0001VP-1w; Sat, 24 Feb 2024 08:02:57 -0500
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Uf6WtkmWpu9Ohem9XfTM1NhO/5Q5wz9OxY0rVk39prpNyXcSAx3ZjI8OoJIZo55KLGs8Z3/ttXjV/t65MiEiynnO5m2Mn3eadu3YYwMloDpSib6XfKCXyV/VUEQFtri4rkDFs6Jy0v13chGthxHpET32VFQQZFk5BcGIu14GE9F/TQJcaGhHGm7rObayoSm3HUIYz4+0IM/EOOuTZKaG0a5nJMrLutI5uugbqDDkWWHGOvcgFY1ZTw+5Nv2ttFlLTzm+ZH/LcWbdEyK/p1hSdAvYC2ZlRV22Epts+VydAg9vnOdAPV6LoxS2VcCFXac1yKdTJjCPByObSTGLoatd3Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=cWauh5qbR7+5H40NhmX90nMlGZMSJkHhCWDRtBrFsaQ=;
+ b=HmKx9NkTm5qU2oKyXhcwSYVCD4VA3KXWIkm6oi6B6KUDetvFztwDU/PKBhSEm0IqQPqZP7DVd9I1V2nYjp4uuw+y8pxOGeuegZijvzinG5YNbWz2+q9q5nmyMlWO2NskY55W9PLZX/4gO+RmeDngtIXIF9z+BUHTztXYQPAo0mffWRACOySf3ArOKS4nB4U9zMmjdHo8IguH9vpFJRjYup+aoAOjcpZZ0cR4UDJ0Ra7Fg7ZQC9VwDzs5Dfni3qf70mZ5m4yk/452x9S2/vAd+9V8ZzEMInAAOeNfbkj4YsoYAyE/RZmBma2O6xpo/k85wMOastadBmag03FV6dR1hA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=starfivetech.com; dmarc=pass action=none
+ header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=starfivetech.com;
+Received: from ZQ0PR01MB1063.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c550:d::13) by ZQ0PR01MB1319.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c550:1c::10) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7270.47; Sat, 24 Feb
+ 2024 13:02:43 +0000
+Received: from ZQ0PR01MB1063.CHNPR01.prod.partner.outlook.cn
+ ([fe80::21d1:48e1:7ca0:1d76]) by
+ ZQ0PR01MB1063.CHNPR01.prod.partner.outlook.cn ([fe80::21d1:48e1:7ca0:1d76%4])
+ with mapi id 15.20.7270.047; Sat, 24 Feb 2024 13:02:43 +0000
+From: "demin.han" <demin.han@starfivetech.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, dbarboza@ventanamicro.com, alistair.francis@wdc.com
+Subject: [PATCH] target/riscv: Fix shift count overflow
+Date: Sat, 24 Feb 2024 21:02:35 +0800
+Message-ID: <20240224130235.340584-1-demin.han@starfivetech.com>
+X-Mailer: git-send-email 2.43.2
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=2607:f8b0:4864:20::432;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-pf1-x432.google.com
+Content-Type: text/plain
+X-ClientProxiedBy: NT0PR01CA0027.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c510:c::20) To ZQ0PR01MB1063.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c550:d::13)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: ZQ0PR01MB1063:EE_|ZQ0PR01MB1319:EE_
+X-MS-Office365-Filtering-Correlation-Id: 13792232-4dff-4275-0093-08dc3538e393
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: RFhmKHqpxBsnSEWqt/oPJwIL9231b+dYKGSlcneo0aiOM/qAYeTBVyfV+jOk6gAtY3Wbi+TuPzsvPDxJizaL2YFRawz3+aetCi8ShelRsfWKNF5JSv1uvyFKyNrx0ersQHm0q1qhEekkDzsaZWjwztf+rt+BsafUupao50k0h1JLLPAmsalb06dH21tdRkggckp34H02mNgC8ymbf7toq2X5VA+5Rf7kTt+Afa0yr7y/3rbpmasjlP9ZBXdESPpf2B34EXOqt/OaFrzRjyFbTrOQDQR+DG2eh+ITxLQalA9c3oNqagv7uQcF2RjHvzx1XIjAWRugVYCTbtz2el0C+SdmCBDTJrW7IJkoFK3hPWahoL+3yadE+Wvkkh8AyyE7vEc9ylNodvj7H3/XePkbPDRqf/IOjxp/e1MZiLBKLAbvTKfTZ9pIk87SzEkh6RtPN2JoQJP+Y6xqbCoQzqx8xodA/qCROerPZUA+ee1AztrxxN9yngPHSenZm4kqt8wT9osXHHE7QMllzHU8Aiqih3zCPY206O6n9bYcN2qJ6+lU70VwLaHFiQZqS6+goVYN
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:ZQ0PR01MB1063.CHNPR01.prod.partner.outlook.cn; PTR:;
+ CAT:NONE; SFS:(13230031)(38350700005); DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?yQL57qfIPNp7kp+8wfsKIlPlkJI0zn5jRWKvX+yS+VhZM1q5EBrub5Rhdkm4?=
+ =?us-ascii?Q?Me8rJINI2wr3//vvgg5qRMAkEYSKOUkxuX0B9UDpLskoRZ/hRJFt6X7JGEnw?=
+ =?us-ascii?Q?qEiQ2otn5Yyy5kxHytIOf4TC/o2F6wm23wDQJl2TRFI5dN0kk67FRNNX7GxN?=
+ =?us-ascii?Q?xzkCjDcpiMlovHRJE6fy/0xE78Hwitb42lbpfZn+MISreEcFXwT8/2PovVgf?=
+ =?us-ascii?Q?TPE/1BkFZS/Fb9924u3UvjmXwVVtLPV5jeMYCI07HwafXHGBAHJRufRUIpi/?=
+ =?us-ascii?Q?r1QdBgfhR3lYJtkIT6mta/n1Ab8R+ZczR/oOHnYFl9JBAVuKIKY35ZSdaLBY?=
+ =?us-ascii?Q?r8arSYUjR/SQPciUMmaFus8aykCCW3l7BCy6atx8GJLKVzUiE8Z5SNhOQxT+?=
+ =?us-ascii?Q?FaJqJSIwWKuqNBRu/Spbtr/rBrNErj0M8wtyQK1+nMrLsaxUhQ/HXp6kVHz0?=
+ =?us-ascii?Q?RJyC7rLctpmzFFG4K2i8dGOgsnNAdeXhZNTcKXBFHgsS0npbc+KujSYTVArY?=
+ =?us-ascii?Q?l047dIBbuoOd+SFmaY80SaB70wXgZFnjR+T9Cdm6neVneKWTs5j9JfDrEp28?=
+ =?us-ascii?Q?oQSRZZ82t9xdCoVhuvLvKLtAXojADfr8aIW6qP2xXs22sh3zANMc93qW1iTN?=
+ =?us-ascii?Q?OJ9cNCtvs9SswMzf4h3+sYyL8kuPjJf3WJOUuNCgkJ6fSlb2YmwJsqqV6ISd?=
+ =?us-ascii?Q?FJOo4NUwb4j6UP910OOXDTqwHDtgES1q8T7uey1bRYlLPQD8lUs5STqIZYtP?=
+ =?us-ascii?Q?W5kUUfGq4QXPfWbW9TI63sH9iRwJc1jL5MUPqLwGCehmhJ5bBpikU10TUAwf?=
+ =?us-ascii?Q?DLv53KBzAOK1aKhLJfEqbhXafWjiOAUpA5XQS4ps28BJZrkuNUq3rlIV3D1k?=
+ =?us-ascii?Q?vAdi0MFYk4C7S6L/J49HSg/CNicbd7m3rYPoy6CGUZ/+wm9IxejmHsX8AhgC?=
+ =?us-ascii?Q?LRKmooVVvJL/FxezTWJSTEG14zNUP3JT1YIZWkx5DdDkQwJFoFWMd+YQfg9/?=
+ =?us-ascii?Q?7lOAVLtvAyD8mWUYcdO/m9RhXfXdS9J61iMn4/M7m/regdRu/KzzqFOthaX+?=
+ =?us-ascii?Q?+OmzA6sFV4QVopZWVPRe/YN2yl45hnDlaAESd3BU724CuBkUnEkZO1wsH0h4?=
+ =?us-ascii?Q?KbXJDi8WuxPkQha5jUA7VCeiqB41uS4bG4q0YhIFu1I0JHe32DU2Hyy4wwU6?=
+ =?us-ascii?Q?jQXVL3KCr5tgLjQGkYIXb8huRTQk2C+v4yGbx0gcYwpC1VFMEJTmoK2n/WHZ?=
+ =?us-ascii?Q?p5+DLwiQeUdKY96kdxM1Oxp6deF3g/ThDKEVkEpemSbldUqOLkXlE/NsD3qu?=
+ =?us-ascii?Q?IDqiygZwJBcaxf2fbp+XU0tE8MQWNeqRpUbbDD8yOaJQ8nAVKBeZFfAzdLYd?=
+ =?us-ascii?Q?UXqU6enAm84fWnw9jZ6KQh36TEyTCb0CI60bKaxbxd7MAjRUtdWihd0yFMEY?=
+ =?us-ascii?Q?O/A08xDU/3o4oZu91xm14HgEFwYp0Zk49KGcyCB9bTudbRhwBmbrE0gHauvF?=
+ =?us-ascii?Q?40cfHMPxQIZkD2U2q9spa8JwBX2+KAYfIOYmloqY5mSExeUwLMzBgYDKPkl8?=
+ =?us-ascii?Q?S31dXZ50Z6QMEEc9EbZqNmpkqXRXUzvu7pZw09sHrlDC5a5qRcVAwivKVjP1?=
+ =?us-ascii?Q?AQ=3D=3D?=
+X-OriginatorOrg: starfivetech.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 13792232-4dff-4275-0093-08dc3538e393
+X-MS-Exchange-CrossTenant-AuthSource: ZQ0PR01MB1063.CHNPR01.prod.partner.outlook.cn
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Feb 2024 13:02:43.5363 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: D6EI5SbmX0bAdmoduyoME5NqCdijP0s8SQogQr2QTPmLuXhCOjhDuQPp1MCKvyRw71Mb927bqC4VceghIpG3TWXii1+cSou4sQ7j+LTmXGs=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZQ0PR01MB1319
+Received-SPF: pass client-ip=2406:e500:4420:2::711;
+ envelope-from=demin.han@starfivetech.com;
+ helo=CHN02-SH0-obe.outbound.protection.partner.outlook.cn
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Sat, 24 Feb 2024 09:22:53 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -122,266 +126,31 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2024/02/24 1:21, Alex Bennée wrote:
-> We can only request a list of registers once the vCPU has been
-> initialised so the user needs to use either call the get function on
-> vCPU initialisation or during the translation phase.
-> 
-> We don't expose the reg number to the plugin instead hiding it behind
-> an opaque handle. As the register set is potentially different for
-> each vCPU we store a separate set of handles for each vCPU. This will
-> become more important if we are able to emulate more heterogeneous
-> systems.
-> 
-> Having an internal state within the plugins also allows us to expand
-> the interface in future (for example providing callbacks on register
-> change if the translator can track changes).
-> 
-> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1706
-> Cc: Akihiko Odaki <akihiko.odaki@daynix.com>
-> Message-Id: <20240103173349.398526-39-alex.bennee@linaro.org>
-> Based-on: <20231025093128.33116-18-akihiko.odaki@daynix.com>
-> Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-> Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-> 
-> ---
-> v4
->    - the get/read_registers functions are now implicitly for current
->    vCPU only to accidental cpu != current_cpu uses.
-> v5
->    - make reg_handles as per-CPUPluginState variable.
-> ---
->   include/qemu/plugin.h        |  2 +
->   include/qemu/qemu-plugin.h   | 48 +++++++++++++++++++-
->   plugins/api.c                | 88 ++++++++++++++++++++++++++++++++++++
->   plugins/qemu-plugins.symbols |  2 +
->   4 files changed, 138 insertions(+), 2 deletions(-)
-> 
-> diff --git a/include/qemu/plugin.h b/include/qemu/plugin.h
-> index 0e7b9693d80..64fb425fb0b 100644
-> --- a/include/qemu/plugin.h
-> +++ b/include/qemu/plugin.h
-> @@ -189,9 +189,11 @@ struct qemu_plugin_insn *qemu_plugin_tb_insn_get(struct qemu_plugin_tb *tb,
->   /**
->    * struct CPUPluginState - per-CPU state for plugins
->    * @event_mask: plugin event bitmap. Modified only via async work.
-> + * @reg_handles: hash table of register handles.
->    */
->   struct CPUPluginState {
->       DECLARE_BITMAP(event_mask, QEMU_PLUGIN_EV_MAX);
-> +    GHashTable *reg_handles;
->   };
->   
->   /**
-> diff --git a/include/qemu/qemu-plugin.h b/include/qemu/qemu-plugin.h
-> index 93981f8f89f..3b6b18058d2 100644
-> --- a/include/qemu/qemu-plugin.h
-> +++ b/include/qemu/qemu-plugin.h
-> @@ -11,6 +11,7 @@
->   #ifndef QEMU_QEMU_PLUGIN_H
->   #define QEMU_QEMU_PLUGIN_H
->   
-> +#include <glib.h>
->   #include <inttypes.h>
->   #include <stdbool.h>
->   #include <stddef.h>
-> @@ -229,8 +230,8 @@ struct qemu_plugin_insn;
->    * @QEMU_PLUGIN_CB_R_REGS: callback reads the CPU's regs
->    * @QEMU_PLUGIN_CB_RW_REGS: callback reads and writes the CPU's regs
->    *
-> - * Note: currently unused, plugins cannot read or change system
-> - * register state.
-> + * Note: currently QEMU_PLUGIN_CB_RW_REGS is unused, plugins cannot change
-> + * system register state.
->    */
->   enum qemu_plugin_cb_flags {
->       QEMU_PLUGIN_CB_NO_REGS,
-> @@ -707,4 +708,47 @@ uint64_t qemu_plugin_end_code(void);
->   QEMU_PLUGIN_API
->   uint64_t qemu_plugin_entry_code(void);
->   
-> +/** struct qemu_plugin_register - Opaque handle for register access */
-> +struct qemu_plugin_register;
-> +
-> +/**
-> + * typedef qemu_plugin_reg_descriptor - register descriptions
-> + *
-> + * @handle: opaque handle for retrieving value with qemu_plugin_read_register
-> + * @name: register name
-> + * @feature: optional feature descriptor, can be NULL
-> + */
-> +typedef struct {
-> +    struct qemu_plugin_register *handle;
-> +    const char *name;
-> +    const char *feature;
-> +} qemu_plugin_reg_descriptor;
-> +
-> +/**
-> + * qemu_plugin_get_registers() - return register list for current vCPU
-> + *
-> + * Returns a GArray of qemu_plugin_reg_descriptor or NULL. Caller
-> + * frees the array (but not the const strings).
-> + *
-> + * Should be used from a qemu_plugin_register_vcpu_init_cb() callback
-> + * after the vCPU is initialised, i.e. in the vCPU context.
-> + */
-> +GArray *qemu_plugin_get_registers(void);
-> +
-> +/**
-> + * qemu_plugin_read_register() - read register for current vCPU
-> + *
-> + * @handle: a @qemu_plugin_reg_handle handle
-> + * @buf: A GByteArray for the data owned by the plugin
-> + *
-> + * This function is only available in a context that register read access is
-> + * explicitly requested via the QEMU_PLUGIN_CB_R_REGS flag.
-> + *
-> + * Returns the size of the read register. The content of @buf is in target byte
-> + * order. On failure returns -1
-> + */
-> +int qemu_plugin_read_register(struct qemu_plugin_register *handle,
-> +                              GByteArray *buf);
-> +
-> +
->   #endif /* QEMU_QEMU_PLUGIN_H */
-> diff --git a/plugins/api.c b/plugins/api.c
-> index 54df72c1c00..f6c3ba2366f 100644
-> --- a/plugins/api.c
-> +++ b/plugins/api.c
-> @@ -8,6 +8,7 @@
->    *
->    *  qemu_plugin_tb
->    *  qemu_plugin_insn
-> + *  qemu_plugin_register
->    *
->    * Which can then be passed back into the API to do additional things.
->    * As such all the public functions in here are exported in
-> @@ -35,10 +36,12 @@
->    */
->   
->   #include "qemu/osdep.h"
-> +#include "qemu/main-loop.h"
->   #include "qemu/plugin.h"
->   #include "qemu/log.h"
->   #include "tcg/tcg.h"
->   #include "exec/exec-all.h"
-> +#include "exec/gdbstub.h"
->   #include "exec/ram_addr.h"
->   #include "disas/disas.h"
->   #include "plugin.h"
-> @@ -410,3 +413,88 @@ uint64_t qemu_plugin_entry_code(void)
->   #endif
->       return entry;
->   }
-> +
-> +/*
-> + * Register handles
-> + *
-> + * The plugin infrastructure keeps hold of these internal data
-> + * structures which are presented to plugins as opaque handles. They
-> + * are local to each vCPU as there can be slight variations for each
-> + * vCPU depending on enabled features. We track this in
-> + * CPUPluginState.
-> + */
+The result of (8 - 3 - vlmul) is negtive when vlmul >= 6,
+and results in wrong vill.
 
-Since we do no longer coalesce registers for different classes, I need 
-to bring my old question back: Why don't you just cast register numbers 
-into pointers and use it as handles? You can even just expose 
-gdb_reg_num with the interface.
+Signed-off-by: demin.han <demin.han@starfivetech.com>
+---
+ target/riscv/vector_helper.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-> +
-> +struct qemu_plugin_register {
-> +    const char *name;
-> +    int gdb_reg_num;
-> +};
-> +
-> +/*
-> + * Create register handles.
-> + *
-> + * We need to create a handle for each register so the plugin
-> + * infrastructure can call gdbstub to read a register. We also
-> + * construct a result array with those handles and some ancillary data
-> + * the plugin might find useful.
-> + */
-> +
-> +static GArray *create_register_handles(CPUState *cs, GArray *gdbstub_regs)
-> +{
-> +    GArray *find_data = g_array_new(true, true,
-> +                                    sizeof(qemu_plugin_reg_descriptor));
-> +
-> +    if (!cs->plugin_state->reg_handles) {
-> +        cs->plugin_state->reg_handles = g_hash_table_new(g_direct_hash,
-> +                                                         g_direct_equal);
-> +    }
-> +
-> +    for (int i = 0; i < gdbstub_regs->len; i++) {
-> +        GDBRegDesc *grd = &g_array_index(gdbstub_regs, GDBRegDesc, i);
-> +        gpointer key = GINT_TO_POINTER(grd->gdb_reg);
-> +        struct qemu_plugin_register *val
-> +            = g_hash_table_lookup(cs->plugin_state->reg_handles,
-> +                                  key);
-> +
-> +        /* skip "un-named" regs */
-> +        if (!grd->name) {
-> +            continue;
-> +        }
-> +
-> +        /* Doesn't exist, create one */
-> +        if (!val) {
-> +            val = g_new0(struct qemu_plugin_register, 1);
-> +            val->gdb_reg_num = grd->gdb_reg;
-> +            val->name = g_intern_string(grd->name);
-> +
-> +            g_hash_table_insert(cs->plugin_state->reg_handles, key, val);
-> +        } else {
-> +            /* make sure we are not seeing a key clash */
-> +            g_assert(val->gdb_reg_num == grd->gdb_reg);
-> +        }
-> +
-> +        /* Create a record for the plugin */
-> +        qemu_plugin_reg_descriptor desc = {
-> +            .handle = val,
-> +            .name = val->name,
-> +            .feature = g_intern_string(grd->feature_name)
-> +        };
-> +        g_array_append_val(find_data, desc);
-> +    }
-> +
-> +    return find_data;
-> +}
-> +
-> +GArray *qemu_plugin_get_registers(void)
-> +{
-> +    g_assert(current_cpu);
-> +
-> +    g_autoptr(GArray) regs = gdb_get_register_list(current_cpu);
-> +    return regs->len ? create_register_handles(current_cpu, regs) : NULL;
-> +}
-> +
-> +int qemu_plugin_read_register(struct qemu_plugin_register *reg, GByteArray *buf)
-> +{
-> +    g_assert(current_cpu);
-> +
-> +    return gdb_read_register(current_cpu, buf, reg->gdb_reg_num);
-> +}
-> diff --git a/plugins/qemu-plugins.symbols b/plugins/qemu-plugins.symbols
-> index adb67608598..27fe97239be 100644
-> --- a/plugins/qemu-plugins.symbols
-> +++ b/plugins/qemu-plugins.symbols
-> @@ -3,6 +3,7 @@
->     qemu_plugin_end_code;
->     qemu_plugin_entry_code;
->     qemu_plugin_get_hwaddr;
-> +  qemu_plugin_get_registers;
->     qemu_plugin_hwaddr_device_name;
->     qemu_plugin_hwaddr_is_io;
->     qemu_plugin_hwaddr_phys_addr;
-> @@ -19,6 +20,7 @@
->     qemu_plugin_num_vcpus;
->     qemu_plugin_outs;
->     qemu_plugin_path_to_binary;
-> +  qemu_plugin_read_register;
->     qemu_plugin_register_atexit_cb;
->     qemu_plugin_register_flush_cb;
->     qemu_plugin_register_vcpu_exit_cb;
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index 84cec73eb2..ced0aca633 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -53,10 +53,9 @@ target_ulong HELPER(vsetvl)(CPURISCVState *env, target_ulong s1,
+          * VLEN * LMUL >= SEW
+          * VLEN >> (8 - lmul) >= sew
+          * (vlenb << 3) >> (8 - lmul) >= sew
+-         * vlenb >> (8 - 3 - lmul) >= sew
+          */
+         if (vlmul == 4 ||
+-            cpu->cfg.vlenb >> (8 - 3 - vlmul) < sew) {
++            (cpu->cfg.vlenb << 3) >> (8 - vlmul) < sew) {
+             vill = true;
+         }
+     }
+-- 
+2.43.2
+
 
