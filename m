@@ -4,109 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72B96C5478C
-	for <qemu-riscv@archiver.kernel.org>; Mon, 26 Feb 2024 17:12:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83088C48BF6
+	for <qemu-riscv@archiver.kernel.org>; Mon, 26 Feb 2024 23:51:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1reeIK-00065d-Te; Mon, 26 Feb 2024 11:57:36 -0500
+	id 1rekkU-0000yh-1w; Mon, 26 Feb 2024 18:51:06 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1reeHv-0005cA-6p
- for qemu-riscv@nongnu.org; Mon, 26 Feb 2024 11:57:11 -0500
-Received: from mail-lf1-x12f.google.com ([2a00:1450:4864:20::12f])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1rekkR-0000wd-79; Mon, 26 Feb 2024 18:51:04 -0500
+Received: from mail-vk1-xa2e.google.com ([2607:f8b0:4864:20::a2e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1reeHb-0007bt-Q0
- for qemu-riscv@nongnu.org; Mon, 26 Feb 2024 11:57:10 -0500
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-512e39226efso4491065e87.0
- for <qemu-riscv@nongnu.org>; Mon, 26 Feb 2024 08:56:51 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1rekkP-0001fB-LS; Mon, 26 Feb 2024 18:51:02 -0500
+Received: by mail-vk1-xa2e.google.com with SMTP id
+ 71dfb90a1353d-4cba3807eedso2036486e0c.0; 
+ Mon, 26 Feb 2024 15:51:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708966610; x=1709571410; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1708991460; x=1709596260; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3AL8+zOsLCpeNoayTmXUJHUL825fMKeEAoMnkSikBrE=;
- b=W7+H/XPLXQlWOdkGvv/d+TSfyJuT4rNb9gtl7pNjaA03KnfGUauzCzShlLKtmRYwBe
- 1FsoRllr5WK0vDsUroxBJrrQUahxgeY5iSKyVJK9AoP42ecxYDTdIaEMIiJijv0KdjDs
- 7KPHXC/2l9xL2sWLROoSibZaS0embiA4vU/gsaZSVUVhwA4kkMX59Y0wjCL8R9XJ/WG/
- /4ZCHtDR0dY/3/4Ojm43zKZc27A4BVNPug2iyQru9jd0hdqkwcSXewPuyNY6gAtgn72Z
- 8KPn3SAj6hJjoXC2prE2HQZWa4OmA7/eHAX77VTPisbZ2Kng3xoUkSlRqkc573iMOS/B
- k6qQ==
+ bh=4DJ8hDST936qlG7SpGQXIZYT/clARaw7J9RWmqp/CQk=;
+ b=L5MRpQSvarWp7m51lU5TqBv92v1brcLnV4KsLQwOsCuMElOVfJzhF5CA7CReJm+pnz
+ 9IWoQzwSxSfS55MTC56bXw2H+VswWTQxJ52s3PtVJi7bIO38iJLgpUHUljykwopbUGqC
+ 9Mh9AJYZ2MLJ9FG21zWJUw+qDivPHIoiibJzssxSdJ527NXp2Mwsn3DsTXj6fapRaSDt
+ 1J0bW77pcFGPg5DOABFlAvLCV7jVEQHAGeWCtq5kbiacrAf4juJLwZHaH2yxIfx6+SFB
+ yJfjrwbcaDpZsQPoUM14QDB8uVyzWesie21vDIj7NBpFgtVanBT7dQMbTL9cJyT+vOsJ
+ wE9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708966610; x=1709571410;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1708991460; x=1709596260;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3AL8+zOsLCpeNoayTmXUJHUL825fMKeEAoMnkSikBrE=;
- b=J/0zKfnYQ2X9Nr6Zl4PNfOygx/NFkC5n9MdB5Gex+owytJMieDomopw2dUGvVpawsT
- jFSgHfqC6nl+5YGKUrIZLAwEF+AvcgeG96WyzVkT0sGV8/xs+NzoJW9QI3lZSuIgbIp/
- NFwrx1EqFdbhKyVOHnufaaMEmL7ewgloEhIuk7DveEx9BK5MI22fjFiYeDPAsQdykTpm
- jP8/m1kp0ICZ47SWYnpSPB89ppM3CM1YAOUdTTyUJyKUClRBUFqKweFP+Blt3T1YMcJd
- eEfu32EgNHP+FQiHcZK9OKNn+qPeAse2Zlyzpvzgscv9QMv3JInUO5nfE9ZPJZlm2/ln
- uAww==
+ bh=4DJ8hDST936qlG7SpGQXIZYT/clARaw7J9RWmqp/CQk=;
+ b=A1EP+U4O7hqe/rLFyVfVYCrj4T3aFC1ciAdvpYUMWIGtsIZQS3JhXWYyaq/Tw+ONO1
+ MFDbO0rQmqFGjfo59SkHgJxY1eCJzmyWorU+GuzAo7fWU8iIO2LbsSQoU/2Nf1wzDNor
+ UxGu8COYGs0vvXKCpILIyt/zH5POG4EXiDG0I7Lxk82FksGaXY0esvhMN1g2kOckTbdR
+ 06blnEbF6sz6RYYt6OWAIrclu+Tb6aFd/9sxnZW3qmWcWGbfozmNMwKh3FR8VErumYf4
+ hiqhViLtf/tRztvRzl08rLd5HEULsv/F/6rjvNLFKbRkMTuvZQpRRfj6p0UN8C7JDvhh
+ Y7oQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUAe48QwScHmNFOxs/bpB28UCMXyGVOMYII4ml5q3dMoAc27GftNizrr/XgUN8F1DNnCzRzIKArf0cGYec6bpYJG71GCaw=
-X-Gm-Message-State: AOJu0Yxvmq6gYKXxBTbqxugAQI34nK4O12Tj8iMazXPcvFSsXuMapl/o
- CK3I5Y9VdXtHC5JBQ/YgxS2Gu/lz7knKjKzAdPpb9GamYz1feevhOI1jbESWstk=
-X-Google-Smtp-Source: AGHT+IFykQNOfrweVnl2YPAOSLpNNQkfWgFq1ISOM6wuDUgGzdtUCJwp/jvhhBHssTrSkvJpnVSdcw==
-X-Received: by 2002:a05:6512:110c:b0:512:f5b8:8912 with SMTP id
- l12-20020a056512110c00b00512f5b88912mr4294057lfg.16.1708966609856; 
- Mon, 26 Feb 2024 08:56:49 -0800 (PST)
-Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- hg26-20020a05600c539a00b0041297d7e181sm8898584wmb.6.2024.02.26.08.56.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Feb 2024 08:56:47 -0800 (PST)
-Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id DAA115F900;
- Mon, 26 Feb 2024 16:56:46 +0000 (GMT)
-From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: Nicholas Piggin <npiggin@gmail.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
- Peter Maydell <peter.maydell@linaro.org>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- qemu-riscv@nongnu.org, Michael Rolnik <mrolnik@gmail.com>,
- Song Gao <gaosong@loongson.cn>, Alexandre Iooss <erdnaxe@crans.org>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- David Hildenbrand <david@redhat.com>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>,
- John Snow <jsnow@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
- Mahmoud Mandour <ma.mandourr@gmail.com>, qemu-arm@nongnu.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>, Cleber Rosa <crosa@redhat.com>,
- qemu-ppc@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
- qemu-s390x@nongnu.org, Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Thomas Huth <thuth@redhat.com>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Yanan Wang <wangyanan55@huawei.com>, Brian Cain <bcain@quicinc.com>,
- Ilya Leoshkevich <iii@linux.ibm.com>, Weiwei Li <liwei1518@gmail.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Bin Meng <bin.meng@windriver.com>, Laurent Vivier <laurent@vivier.eu>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v3 02/27] tests/tcg: bump TCG test timeout to 120s
-Date: Mon, 26 Feb 2024 16:56:21 +0000
-Message-Id: <20240226165646.425600-3-alex.bennee@linaro.org>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240226165646.425600-1-alex.bennee@linaro.org>
-References: <20240226165646.425600-1-alex.bennee@linaro.org>
+ AJvYcCUOH6N9RNz7HdqorjqPSrCtTuwJPvOrDMm2VU+2bkA9GCd34GflFp7fz1df0LM+oXo+9IczcjANsi8ntEfg4jT1pAjNo+M=
+X-Gm-Message-State: AOJu0YwZ38KErOv+XsWreNe6D3hIgHW8dh1dFDeRfrfpW6QqXuKGSMSN
+ NWRRfa/kvJwHaN/PoFf89Zu2CuyQY19DmgNHINFno/4kkz1/BwGCXD+TgJf1Faacpv3O1jXymB/
+ baitOc1ehitsqfckhlH0bxdOn15g=
+X-Google-Smtp-Source: AGHT+IGdOFkW1pc8WaGFqGbILcl6CNRP/62b+qmufIeNz3JpNDakaCcWrDNkpMKDh5SUbQ3ihoejCmFuLNbu4sOzhJ4=
+X-Received: by 2002:a1f:dfc4:0:b0:4c8:a2c6:c2be with SMTP id
+ w187-20020a1fdfc4000000b004c8a2c6c2bemr6213691vkg.8.1708991460007; Mon, 26
+ Feb 2024 15:51:00 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::12f;
- envelope-from=alex.bennee@linaro.org; helo=mail-lf1-x12f.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20240223022119.41255-1-alvinga@andestech.com>
+ <20240223022119.41255-3-alvinga@andestech.com>
+In-Reply-To: <20240223022119.41255-3-alvinga@andestech.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 27 Feb 2024 09:50:32 +1000
+Message-ID: <CAKmqyKPci0SngGhcanZ8tZDkDETv2yzo_+MOqbc8-o6xqt1V+Q@mail.gmail.com>
+Subject: Re: [PATCH v2 2/4] target/riscv: Apply modularized matching
+ conditions for breakpoint
+To: Alvin Chang <alvinga@andestech.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, alistair.francis@wdc.com, 
+ bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com, 
+ zhiwei_liu@linux.alibaba.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2e;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2e.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -122,37 +94,88 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This is less than ideal but easier than making sure we get all the
-iterations of the memory test. Update the comment accordingly.
+On Fri, Feb 23, 2024 at 12:22=E2=80=AFPM Alvin Chang via <qemu-devel@nongnu=
+.org> wrote:
+>
+> We have implemented trigger_common_match(), which checks if the enabled
+> privilege levels of the trigger match CPU's current privilege level.
+> Remove the related code in riscv_cpu_debug_check_breakpoint() and invoke
+> trigger_common_match() to check the privilege levels of the type 2 and
+> type 6 triggers for the breakpoints.
+>
+> This commit also changes the behavior of looping the triggers. In
+> previous implementation, if we have a type 2 trigger and
+> env->virt_enabled is true, we directly return false to stop the loop.
+> Now we keep looping all the triggers until we find a matched trigger.
+>
+> Only the execution bit and the executed PC should be futher checked in
+> riscv_cpu_debug_check_breakpoint().
+>
+> Signed-off-by: Alvin Chang <alvinga@andestech.com>
 
-Message-Id: <20240223162202.1936541-3-alex.bennee@linaro.org>
-Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Reviewed-by: Thomas Huth <thuth@redhat.com>
----
- tests/tcg/Makefile.target | 9 +++------
- 1 file changed, 3 insertions(+), 6 deletions(-)
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-diff --git a/tests/tcg/Makefile.target b/tests/tcg/Makefile.target
-index 8cf65f68dd8..a4c25908fb7 100644
---- a/tests/tcg/Makefile.target
-+++ b/tests/tcg/Makefile.target
-@@ -93,12 +93,9 @@ QEMU_OPTS=
- 
- 
- # If TCG debugging, or TCI is enabled things are a lot slower
--# ??? Makefile no longer has any indication that TCI is enabled,
--# but for the record:
--#   15s    original default
--#   60s    with --enable-debug
--#   90s    with --enable-tcg-interpreter
--TIMEOUT=90
-+# so we have to set our timeout for that. The current worst case
-+# offender is the system memory test running under TCI.
-+TIMEOUT=120
- 
- ifeq ($(filter %-softmmu, $(TARGET)),)
- # The order we include is important. We include multiarch first and
--- 
-2.39.2
+Alistair
 
+> ---
+>  target/riscv/debug.c | 26 ++++++--------------------
+>  1 file changed, 6 insertions(+), 20 deletions(-)
+>
+> diff --git a/target/riscv/debug.c b/target/riscv/debug.c
+> index 3891236b82..b7b0fa8945 100644
+> --- a/target/riscv/debug.c
+> +++ b/target/riscv/debug.c
+> @@ -855,21 +855,17 @@ bool riscv_cpu_debug_check_breakpoint(CPUState *cs)
+>          for (i =3D 0; i < RV_MAX_TRIGGERS; i++) {
+>              trigger_type =3D get_trigger_type(env, i);
+>
+> +            if (!trigger_common_match(env, trigger_type, i)) {
+> +                continue;
+> +            }
+> +
+>              switch (trigger_type) {
+>              case TRIGGER_TYPE_AD_MATCH:
+> -                /* type 2 trigger cannot be fired in VU/VS mode */
+> -                if (env->virt_enabled) {
+> -                    return false;
+> -                }
+> -
+>                  ctrl =3D env->tdata1[i];
+>                  pc =3D env->tdata2[i];
+>
+>                  if ((ctrl & TYPE2_EXEC) && (bp->pc =3D=3D pc)) {
+> -                    /* check U/S/M bit against current privilege level *=
+/
+> -                    if ((ctrl >> 3) & BIT(env->priv)) {
+> -                        return true;
+> -                    }
+> +                    return true;
+>                  }
+>                  break;
+>              case TRIGGER_TYPE_AD_MATCH6:
+> @@ -877,17 +873,7 @@ bool riscv_cpu_debug_check_breakpoint(CPUState *cs)
+>                  pc =3D env->tdata2[i];
+>
+>                  if ((ctrl & TYPE6_EXEC) && (bp->pc =3D=3D pc)) {
+> -                    if (env->virt_enabled) {
+> -                        /* check VU/VS bit against current privilege lev=
+el */
+> -                        if ((ctrl >> 23) & BIT(env->priv)) {
+> -                            return true;
+> -                        }
+> -                    } else {
+> -                        /* check U/S/M bit against current privilege lev=
+el */
+> -                        if ((ctrl >> 3) & BIT(env->priv)) {
+> -                            return true;
+> -                        }
+> -                    }
+> +                    return true;
+>                  }
+>                  break;
+>              default:
+> --
+> 2.34.1
+>
+>
 
