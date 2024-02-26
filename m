@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA842C5478C
-	for <qemu-riscv@archiver.kernel.org>; Mon, 26 Feb 2024 17:04:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 491C6C5478C
+	for <qemu-riscv@archiver.kernel.org>; Mon, 26 Feb 2024 17:04:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1reeHv-0005cP-Ch; Mon, 26 Feb 2024 11:57:11 -0500
+	id 1reeIY-0006Nj-Hw; Mon, 26 Feb 2024 11:57:50 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1reeHl-0005Y7-Sl
- for qemu-riscv@nongnu.org; Mon, 26 Feb 2024 11:57:02 -0500
-Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a])
+ id 1reeIX-0006Lp-1f
+ for qemu-riscv@nongnu.org; Mon, 26 Feb 2024 11:57:49 -0500
+Received: from mail-lj1-x235.google.com ([2a00:1450:4864:20::235])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1reeHZ-0007bL-Cs
- for qemu-riscv@nongnu.org; Mon, 26 Feb 2024 11:57:01 -0500
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-412a9457b2eso3278965e9.1
- for <qemu-riscv@nongnu.org>; Mon, 26 Feb 2024 08:56:48 -0800 (PST)
+ id 1reeHm-0007gN-KY
+ for qemu-riscv@nongnu.org; Mon, 26 Feb 2024 11:57:47 -0500
+Received: by mail-lj1-x235.google.com with SMTP id
+ 38308e7fff4ca-2d2533089f6so39645451fa.1
+ for <qemu-riscv@nongnu.org>; Mon, 26 Feb 2024 08:57:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708966608; x=1709571408; darn=nongnu.org;
+ d=linaro.org; s=google; t=1708966620; x=1709571420; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=eLoCVfGQA0B56KJFSLQeHKi/nYPeRXMDk6OZ3NrpqZo=;
- b=a5ZvxxCS094D6uOY89D7AdQdsEiBOZG4zGut89/a43897cpllxc4OTjXUft4ZSgHF2
- cORZ3/T3jKc3CR5AEftqIfzQJo2Mf9PUgWHNxNJzct75f8+QvX4WFFwioA2WLVt5pxD1
- aDsPfnmPDm4PunQupwrrFkEUsLWcc+6AQXgU2oR6G/OzwJbKQvrdGH1yQms0TuEnfqBi
- EdFEmu6o1BlR6MQjy7r8nZDoBTTiw+akBqcbPG+dYwhyxEqFskWvm551o1XuQy+ljd7u
- MX/dvz5wAzOyfZHd/hjQWsrgPBVKSfUR+Ifak0uJXcy4ZY/ZBQ3g2N4dddfNGcaqFtqE
- pmxg==
+ bh=O9WREwsMrt85roF9DpcRAV7U4Bq5TV/wSmpsUdovSGg=;
+ b=HuD1Xi12pMD0H6lU0yxbN0Jw85z3ziZHBhyDahD1I933mYa0+WbuLfBX2lNyNx0CGq
+ 1nwnIRwDzt6RxcupnOL8uAufaK2S8s18bpFsv5239F4wkBzq1VeXe7c2234r8LFKB9x1
+ KJGwu9F+3rc4X4F8O5V/u5uFvglPGKEF+d1BAQrNzze/Zw1YAZE8uqSc2SkqlM6IpvqK
+ jM4x3qcpK6SuAYYyl1VtN22W/iv1h/hjEgAWthHfgXRNDgdV6VQk1Qnhj4y4US9Z+3lo
+ 8V/frVbXiyc+VV3r6ytL0fxgAUKQMN59xKq2FUymd7FZnXKUzT0YFMrMdGKl2JI8ZbJL
+ 3VKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708966608; x=1709571408;
+ d=1e100.net; s=20230601; t=1708966620; x=1709571420;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=eLoCVfGQA0B56KJFSLQeHKi/nYPeRXMDk6OZ3NrpqZo=;
- b=IsY+eDN3uubjI3wQxupq3bUoBwmvLJHxv57kbk568jvbH2Nu+zJxmwHCvOc7pU5etu
- jd3MwJf1yn6lTtp6fBNHNsIiMB/sfL5wHIihYfPHH/aKQ7BoRGrEE+TRjxi5BvvRzTAj
- Eo9PdxFAq1codMZ/GA5QPlcTvwAhQnNQ0074rXhF3Mpqm4xsk6UsgkpxcSLA5mkm6b8A
- BPGK5NWD/IEGRjP+NglscAOMeuQXZj/vciADLipBpxezUpAXkukCfYlazN+SIqGYIeQo
- llj4a7iBtYojRH2YpryHuZ2U1iq1fH8p4ygk4dybSursV/u3xJe6ac/HxvGhgNKvgZEB
- CTbQ==
+ bh=O9WREwsMrt85roF9DpcRAV7U4Bq5TV/wSmpsUdovSGg=;
+ b=TMiVqhaFBiMEfM+TJTGSoFxouJ5Dw+PXGCUg+Bgfv208xE4PYGR/0uM0kwHtkY5r0i
+ ZoRn9g7n+eWscPSt+NX8SQVq+pAbhu7eTaEhx+wuds0X/0uLF9NblCi7pPhAjQC78zbu
+ aSYmy1lxzWn7RYluGh8C0eZCsfvfKue7dt6bWKutBa3+pbnG/GZhQEAbcXfCV4FnraNw
+ H3DRtI3TGYhLnZtXbtr5dbjud7tZmHE7N2wf0Ladl0zMb0ytv1aTsboBLJ7HrzR9+JjI
+ ieE3xZN4AERYx5M4vMWoUE0XCmqiNlNZoLyAeNIpkOSE/ciO3J8PrUJzBLhSe4IwUdto
+ NQ4g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWYm0u6Ibc7SseHYbssW9KNPin4mUZtYk0DeMKgH9fvBWhMgSJMVWrr7YOxI31AnwGeZ2oa1ObGYWfK/f16BwMV3Sa1pQg=
-X-Gm-Message-State: AOJu0Ywm5kaHbLXXJj3bQnwvYHRNZIP46lSJQa1ZdlhhtWK8Mv3+VUgr
- j6rnPaPF6LTYt878di1zgZa9wskbbGF85Gd+TN+RoqP35ztyrvohC2KbMJ0VibU=
-X-Google-Smtp-Source: AGHT+IGmcY3Ce29dNrVQ784BjiSgBmkWenUq81DrrLQZuy7rHIWX+6TO7PAfOu6kPIMavyEPeEwXDg==
-X-Received: by 2002:a05:600c:4f46:b0:412:9434:fa38 with SMTP id
- m6-20020a05600c4f4600b004129434fa38mr6089623wmq.7.1708966607691; 
- Mon, 26 Feb 2024 08:56:47 -0800 (PST)
+ AJvYcCWM6nFXw9jOGcLJqavlD+4q6N228HtPHWG+eX50u8CmSY1TN+QuHL3CpCpfD5YZhxQTOq1j41vV46/SsyiJ28PsohnkkYE=
+X-Gm-Message-State: AOJu0Yyka0eas3EJFi9svf6VAJwbgJjcmYBMWQ8f4KutVDi6nQowsbT0
+ 5jZ919fB+plmTVflQfxDIMY8hUYMLF/Fe+yNm+qquTuANhoGkHe74udNMWxPYDA=
+X-Google-Smtp-Source: AGHT+IEGKNgu9DpHzi/KJwI3xE6CV13aAy2RsSN+TadP2TD7hu/h3L5xVf8ZvoxlraIENMTTEhY6gg==
+X-Received: by 2002:a2e:801a:0:b0:2d2:61e8:44eb with SMTP id
+ j26-20020a2e801a000000b002d261e844ebmr4692112ljg.33.1708966620332; 
+ Mon, 26 Feb 2024 08:57:00 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- hi17-20020a05600c535100b0041290251dc2sm12252480wmb.14.2024.02.26.08.56.47
+ bi27-20020a05600c3d9b00b00412a9a60f83sm666277wmb.3.2024.02.26.08.56.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Feb 2024 08:56:47 -0800 (PST)
+ Mon, 26 Feb 2024 08:56:56 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id C4D915F8A4;
- Mon, 26 Feb 2024 16:56:46 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 3340D5F924;
+ Mon, 26 Feb 2024 16:56:48 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Nicholas Piggin <npiggin@gmail.com>,
@@ -89,24 +89,24 @@ Cc: Nicholas Piggin <npiggin@gmail.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Daniel Henrique Barboza <danielhb413@gmail.com>,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v3 01/27] tests/tcg: update licenses to GPLv2 as intended
-Date: Mon, 26 Feb 2024 16:56:20 +0000
-Message-Id: <20240226165646.425600-2-alex.bennee@linaro.org>
+Subject: [PATCH v3 14/27] plugins: add qemu_plugin_num_vcpus function
+Date: Mon, 26 Feb 2024 16:56:33 +0000
+Message-Id: <20240226165646.425600-15-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240226165646.425600-1-alex.bennee@linaro.org>
 References: <20240226165646.425600-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::235;
+ envelope-from=alex.bennee@linaro.org; helo=mail-lj1-x235.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -122,241 +122,107 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-My default header template is GPLv3 but for QEMU code we really should
-stick to GPLv2-or-later (allowing others to up-license it if they
-wish). While this is test code we should still be consistent on the
-source distribution.
+From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 
-I wrote all of this code so its not a problem. However there remains
-one GPLv3 file left which is the crt0-tc2x.S for TriCore.
+We now keep track of how many vcpus were started. This way, a plugin can
+easily query number of any vcpus at any point of execution, which
+unifies user and system mode workflows.
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Message-Id: <20240213094009.150349-3-pierrick.bouvier@linaro.org>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Message-Id: <20240215184036.214065-1-alex.bennee@linaro.org>
 ---
- tests/tcg/aarch64/semicall.h                      | 4 ++--
- tests/tcg/arm/semicall.h                          | 4 ++--
- tests/tcg/multiarch/float_helpers.h               | 4 ++--
- tests/tcg/riscv64/semicall.h                      | 4 ++--
- tests/tcg/multiarch/arm-compat-semi/semiconsole.c | 4 ++--
- tests/tcg/multiarch/arm-compat-semi/semihosting.c | 4 ++--
- tests/tcg/multiarch/float_convd.c                 | 4 ++--
- tests/tcg/multiarch/float_convs.c                 | 4 ++--
- tests/tcg/multiarch/float_madds.c                 | 4 ++--
- tests/tcg/multiarch/libs/float_helpers.c          | 4 ++--
- tests/tcg/i386/system/boot.S                      | 6 +++---
- tests/tcg/x86_64/system/boot.S                    | 6 +++---
- 12 files changed, 26 insertions(+), 26 deletions(-)
+ include/qemu/qemu-plugin.h   | 3 +++
+ plugins/plugin.h             | 4 ++++
+ plugins/api.c                | 5 +++++
+ plugins/core.c               | 6 ++++++
+ plugins/qemu-plugins.symbols | 1 +
+ 5 files changed, 19 insertions(+)
 
-diff --git a/tests/tcg/aarch64/semicall.h b/tests/tcg/aarch64/semicall.h
-index 8a3fce35c5f..30d4de9a549 100644
---- a/tests/tcg/aarch64/semicall.h
-+++ b/tests/tcg/aarch64/semicall.h
-@@ -1,10 +1,10 @@
+diff --git a/include/qemu/qemu-plugin.h b/include/qemu/qemu-plugin.h
+index e45181c793c..93981f8f89f 100644
+--- a/include/qemu/qemu-plugin.h
++++ b/include/qemu/qemu-plugin.h
+@@ -645,6 +645,9 @@ QEMU_PLUGIN_API
+ void qemu_plugin_register_atexit_cb(qemu_plugin_id_t id,
+                                     qemu_plugin_udata_cb_t cb, void *userdata);
+ 
++/* returns how many vcpus were started at this point */
++int qemu_plugin_num_vcpus(void);
++
+ /**
+  * qemu_plugin_outs() - output string via QEMU's logging system
+  * @string: a string
+diff --git a/plugins/plugin.h b/plugins/plugin.h
+index 90f3f324ab6..00b3509f708 100644
+--- a/plugins/plugin.h
++++ b/plugins/plugin.h
+@@ -44,6 +44,8 @@ struct qemu_plugin_state {
+      * the code cache is flushed.
+      */
+     struct qht dyn_cb_arr_ht;
++    /* How many vcpus were started */
++    int num_vcpus;
+ };
+ 
+ 
+@@ -97,4 +99,6 @@ void plugin_register_vcpu_mem_cb(GArray **arr,
+ 
+ void exec_inline_op(struct qemu_plugin_dyn_cb *cb);
+ 
++int plugin_num_vcpus(void);
++
+ #endif /* PLUGIN_H */
+diff --git a/plugins/api.c b/plugins/api.c
+index 2926b1961a8..116b8bd603c 100644
+--- a/plugins/api.c
++++ b/plugins/api.c
+@@ -342,6 +342,11 @@ const char *qemu_plugin_hwaddr_device_name(const struct qemu_plugin_hwaddr *h)
+ #endif
+ }
+ 
++int qemu_plugin_num_vcpus(void)
++{
++    return plugin_num_vcpus();
++}
++
  /*
-  * Semihosting Tests - AArch64 helper
-  *
-- * Copyright (c) 2019
-+ * Copyright (c) 2019, 2024
-  * Written by Alex Bennée <alex.bennee@linaro.org>
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
+  * Plugin output
   */
+diff --git a/plugins/core.c b/plugins/core.c
+index ee2fa41af9e..caa66311351 100644
+--- a/plugins/core.c
++++ b/plugins/core.c
+@@ -213,6 +213,7 @@ void qemu_plugin_vcpu_init_hook(CPUState *cpu)
+     bool success;
  
- uintptr_t __semi_call(uintptr_t type, uintptr_t arg0)
-diff --git a/tests/tcg/arm/semicall.h b/tests/tcg/arm/semicall.h
-index ad8ac51310b..624937c5577 100644
---- a/tests/tcg/arm/semicall.h
-+++ b/tests/tcg/arm/semicall.h
-@@ -1,10 +1,10 @@
- /*
-  * Semihosting Tests - ARM Helper
-  *
-- * Copyright (c) 2019
-+ * Copyright (c) 2019, 2024
-  * Written by Alex Bennée <alex.bennee@linaro.org>
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-  */
- 
- uintptr_t __semi_call(uintptr_t type, uintptr_t arg0)
-diff --git a/tests/tcg/multiarch/float_helpers.h b/tests/tcg/multiarch/float_helpers.h
-index 309f3f4bf10..c42ebe64b9e 100644
---- a/tests/tcg/multiarch/float_helpers.h
-+++ b/tests/tcg/multiarch/float_helpers.h
-@@ -1,9 +1,9 @@
- /*
-  * Common Float Helpers
-  *
-- * Copyright (c) 2019 Linaro
-+ * Copyright (c) 2019, 2024 Linaro
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-  */
- 
- #include <inttypes.h>
-diff --git a/tests/tcg/riscv64/semicall.h b/tests/tcg/riscv64/semicall.h
-index f8c88f32dc5..11d0650cb06 100644
---- a/tests/tcg/riscv64/semicall.h
-+++ b/tests/tcg/riscv64/semicall.h
-@@ -1,10 +1,10 @@
- /*
-  * Semihosting Tests - RiscV64 Helper
-  *
-- * Copyright (c) 2021
-+ * Copyright (c) 2021, 2024
-  * Written by Alex Bennée <alex.bennee@linaro.org>
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-  */
- 
- uintptr_t __semi_call(uintptr_t type, uintptr_t arg0)
-diff --git a/tests/tcg/multiarch/arm-compat-semi/semiconsole.c b/tests/tcg/multiarch/arm-compat-semi/semiconsole.c
-index 1d82efc589d..1e2268f4b75 100644
---- a/tests/tcg/multiarch/arm-compat-semi/semiconsole.c
-+++ b/tests/tcg/multiarch/arm-compat-semi/semiconsole.c
-@@ -1,10 +1,10 @@
- /*
-  * linux-user semihosting console
-  *
-- * Copyright (c) 2019
-+ * Copyright (c) 2024
-  * Written by Alex Bennée <alex.bennee@linaro.org>
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-  */
- 
- #define SYS_READC       0x07
-diff --git a/tests/tcg/multiarch/arm-compat-semi/semihosting.c b/tests/tcg/multiarch/arm-compat-semi/semihosting.c
-index 8627eee3cf7..f609c01341a 100644
---- a/tests/tcg/multiarch/arm-compat-semi/semihosting.c
-+++ b/tests/tcg/multiarch/arm-compat-semi/semihosting.c
-@@ -1,10 +1,10 @@
- /*
-  * linux-user semihosting checks
-  *
-- * Copyright (c) 2019
-+ * Copyright (c) 2019, 2024
-  * Written by Alex Bennée <alex.bennee@linaro.org>
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-  */
- 
- #define SYS_WRITE0      0x04
-diff --git a/tests/tcg/multiarch/float_convd.c b/tests/tcg/multiarch/float_convd.c
-index 0a1f0f93dc5..58d7f8b4c58 100644
---- a/tests/tcg/multiarch/float_convd.c
-+++ b/tests/tcg/multiarch/float_convd.c
-@@ -1,9 +1,9 @@
- /*
-  * Floating Point Convert Doubles to Various
-  *
-- * Copyright (c) 2019 Linaro
-+ * Copyright (c) 2019, 2024 Linaro
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-  */
- 
- #include <stdio.h>
-diff --git a/tests/tcg/multiarch/float_convs.c b/tests/tcg/multiarch/float_convs.c
-index 2e4fa55324d..cb1fdd439e3 100644
---- a/tests/tcg/multiarch/float_convs.c
-+++ b/tests/tcg/multiarch/float_convs.c
-@@ -1,9 +1,9 @@
- /*
-  * Floating Point Convert Single to Various
-  *
-- * Copyright (c) 2019 Linaro
-+ * Copyright (c) 2019, 2024 Linaro
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-  */
- 
- #include <stdio.h>
-diff --git a/tests/tcg/multiarch/float_madds.c b/tests/tcg/multiarch/float_madds.c
-index 4888f8641f4..a692e052d5b 100644
---- a/tests/tcg/multiarch/float_madds.c
-+++ b/tests/tcg/multiarch/float_madds.c
-@@ -1,9 +1,9 @@
- /*
-  * Fused Multiply Add (Single)
-  *
-- * Copyright (c) 2019 Linaro
-+ * Copyright (c) 2019, 2024 Linaro
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-  */
- 
- #include <stdio.h>
-diff --git a/tests/tcg/multiarch/libs/float_helpers.c b/tests/tcg/multiarch/libs/float_helpers.c
-index 4e68d2b6598..fad5fc98933 100644
---- a/tests/tcg/multiarch/libs/float_helpers.c
-+++ b/tests/tcg/multiarch/libs/float_helpers.c
-@@ -5,9 +5,9 @@
-  * floating point constants useful for exercising the edge cases in
-  * floating point tests.
-  *
-- * Copyright (c) 2019 Linaro
-+ * Copyright (c) 2019, 2024 Linaro
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-  */
- 
- /* we want additional float type definitions */
-diff --git a/tests/tcg/i386/system/boot.S b/tests/tcg/i386/system/boot.S
-index 9e8920cbfe0..28902c400d8 100644
---- a/tests/tcg/i386/system/boot.S
-+++ b/tests/tcg/i386/system/boot.S
-@@ -2,12 +2,12 @@
-  * i386 boot code, based on  qemu-bmibug.
-  *
-  * Copyright 2019 Doug Gale
-- * Copyright 2019 Linaro
-+ * Copyright 2019, 2024 Linaro
-  *
-- * This work is licensed under the terms of the GNU GPL, version 3 or later.
-+ * This work is licensed under the terms of the GNU GPL, version 2 or later.
-  * See the COPYING file in the top-level directory.
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-  */
- 
-         .section .head
-diff --git a/tests/tcg/x86_64/system/boot.S b/tests/tcg/x86_64/system/boot.S
-index dac9bd534d7..7213aec63b2 100644
---- a/tests/tcg/x86_64/system/boot.S
-+++ b/tests/tcg/x86_64/system/boot.S
-@@ -1,16 +1,16 @@
- /*
-  * x86_64 boot and support code
-  *
-- * Copyright 2019 Linaro
-+ * Copyright 2019, 2024 Linaro
-  *
-- * This work is licensed under the terms of the GNU GPL, version 3 or later.
-+ * This work is licensed under the terms of the GNU GPL, version 2 or later.
-  * See the COPYING file in the top-level directory.
-  *
-  * Unlike the i386 version we instead use Xen's PVHVM booting header
-  * which should drop us automatically into 32 bit mode ready to go. I've
-  * nabbed bits of the Linux kernel setup to achieve this.
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-  */
- 
-         .section .head
+     qemu_rec_mutex_lock(&plugin.lock);
++    plugin.num_vcpus = MAX(plugin.num_vcpus, cpu->cpu_index + 1);
+     plugin_cpu_update__locked(&cpu->cpu_index, NULL, NULL);
+     success = g_hash_table_insert(plugin.cpu_ht, &cpu->cpu_index,
+                                   &cpu->cpu_index);
+@@ -570,3 +571,8 @@ static void __attribute__((__constructor__)) plugin_init(void)
+              QHT_MODE_AUTO_RESIZE);
+     atexit(qemu_plugin_atexit_cb);
+ }
++
++int plugin_num_vcpus(void)
++{
++    return plugin.num_vcpus;
++}
+diff --git a/plugins/qemu-plugins.symbols b/plugins/qemu-plugins.symbols
+index ca806000d54..adb67608598 100644
+--- a/plugins/qemu-plugins.symbols
++++ b/plugins/qemu-plugins.symbols
+@@ -16,6 +16,7 @@
+   qemu_plugin_mem_is_sign_extended;
+   qemu_plugin_mem_is_store;
+   qemu_plugin_mem_size_shift;
++  qemu_plugin_num_vcpus;
+   qemu_plugin_outs;
+   qemu_plugin_path_to_binary;
+   qemu_plugin_register_atexit_cb;
 -- 
 2.39.2
 
