@@ -4,112 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF1B1C54E49
-	for <qemu-riscv@archiver.kernel.org>; Mon, 26 Feb 2024 12:23:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 373D6C48BF6
+	for <qemu-riscv@archiver.kernel.org>; Mon, 26 Feb 2024 15:40:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rea07-0005J3-SI; Mon, 26 Feb 2024 07:22:31 -0500
+	id 1red5a-0003MC-S1; Mon, 26 Feb 2024 10:40:22 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1rea05-0005Ca-7c
- for qemu-riscv@nongnu.org; Mon, 26 Feb 2024 07:22:29 -0500
-Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1rea01-00065w-Cr
- for qemu-riscv@nongnu.org; Mon, 26 Feb 2024 07:22:28 -0500
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-1dc1e7c0e29so11770565ad.1
- for <qemu-riscv@nongnu.org>; Mon, 26 Feb 2024 04:22:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1708950142; x=1709554942;
- darn=nongnu.org; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=cDlHDrC2sXx/wFIpF7ENRE5ZHGFJqcpEgzRWGY9SY5M=;
- b=RBVZlXCxkwQnBKa/et4HcGrvdfuArIpp4qrLDuF46Ivbnx6J8VK2i1Ou0t+2EythtV
- 6qVFTIg8WGBirhASrYASK5rkrYlPmRog4BewSqcagSTADeEb7Rc5ua98YeMQq5BwgN7s
- Oi0oUjgbxbO2CduFjHA46q/mkeK3UEPQb5ECfRiuEiHY1vwQyVJZ0gCzcKUbli9+KxjU
- Wo7LRfLAT81vS4EtAaxncfu23ShMcHjKTICvl354/RtKc0q2WLwbyQxWXqTXKR+r/XeH
- coq8pZzDluTc1/Vn6WbXN1/PemDpOksnjiuIQkQyMQMspvLlENMP+7R0YL3zRiFw2kQT
- TVRw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708950142; x=1709554942;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=cDlHDrC2sXx/wFIpF7ENRE5ZHGFJqcpEgzRWGY9SY5M=;
- b=Cl5/669lp2X3+8Mce8v2ocbinQ1s88itMlGwEQKWIFwGyVej+yz/VL/zWOhdGtU3Hn
- 7xTK2bxuoaQqnKcPYiVu7exNvCPTkEGqEjXDocqcVDyKRAW+9LFJutqtNBY2oU3d0dLc
- eLhlB85TftfeUEWo2NYJLYiYJQogfnDkX6jXX4JUKf07iqbFSsVDML1TGm2EO0yZv5gh
- QXwpCg31zMdeMCbX5O637lskKD1LvxCkZ6h8bt5xfBNVfD4/BwUe28KB5qZi3vDwFRdb
- Sudr1fx/c9iyyg2GLggvTEN3Dord2Cd4ltkcC6OY9hbIRPYQQznvKv3fxj2zc2e3LG3l
- Z+zg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXJpivQY+sTisBQ4SRptw2rsdJI5y0jgyV16tkgwrR1tncCawlBH7qMNCg5Yj8sexJ3Rtan8YBABQIMWWwl3NSNGnTwvX4=
-X-Gm-Message-State: AOJu0Yy1AdbaXQqvwhImWzYwtnPUPIgy9P24Xsl9tISHLV6jQRWsezkg
- fcWcxHFt9g0qJdsW0kOOlH3vEKxV+O16YHEa1hpfdvk+kECr7FSRmARNMY+qOVo=
-X-Google-Smtp-Source: AGHT+IGujwpUcOVein8hvIc4zxJU7gkmldLs7Wdd8XjfOVtMmR3NGgwcvrIXettxCaZdoiq1724PjQ==
-X-Received: by 2002:a17:902:aa81:b0:1d9:3843:3f07 with SMTP id
- d1-20020a170902aa8100b001d938433f07mr6396069plr.61.1708950142073; 
- Mon, 26 Feb 2024 04:22:22 -0800 (PST)
-Received: from ?IPV6:2400:4050:a840:1e00:9ac7:6d57:2b16:6932?
- ([2400:4050:a840:1e00:9ac7:6d57:2b16:6932])
- by smtp.gmail.com with ESMTPSA id
- j5-20020a170902c3c500b001d5f1005096sm3801042plj.55.2024.02.26.04.22.15
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 26 Feb 2024 04:22:21 -0800 (PST)
-Message-ID: <691af6af-bc4f-45ce-b017-7a82269e9381@daynix.com>
-Date: Mon, 26 Feb 2024 21:22:14 +0900
+ (Exim 4.90_1) (envelope-from <jonathan.cameron@huawei.com>)
+ id 1red5Y-0003La-5L; Mon, 26 Feb 2024 10:40:20 -0500
+Received: from frasgout.his.huawei.com ([185.176.79.56])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <jonathan.cameron@huawei.com>)
+ id 1red5S-0001ES-3m; Mon, 26 Feb 2024 10:40:18 -0500
+Received: from mail.maildlp.com (unknown [172.18.186.31])
+ by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4Tk4Sg116Hz6K6VK;
+ Mon, 26 Feb 2024 23:35:31 +0800 (CST)
+Received: from lhrpeml500005.china.huawei.com (unknown [7.191.163.240])
+ by mail.maildlp.com (Postfix) with ESMTPS id 1708B140A08;
+ Mon, 26 Feb 2024 23:39:50 +0800 (CST)
+Received: from localhost (10.202.227.76) by lhrpeml500005.china.huawei.com
+ (7.191.163.240) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.1.2507.35; Mon, 26 Feb
+ 2024 15:39:49 +0000
+Date: Mon, 26 Feb 2024 15:39:47 +0000
+To: Zhao Liu <zhao1.liu@linux.intel.com>
+CC: "Daniel P . =?ISO-8859-1?Q?Berrang=E9?=" <berrange@redhat.com>, "Eduardo
+ Habkost" <eduardo@habkost.net>, Marcel Apfelbaum
+ <marcel.apfelbaum@gmail.com>, Philippe =?ISO-8859-1?Q?Mathieu-Daud=E9?=
+ <philmd@linaro.org>, Yanan Wang <wangyanan55@huawei.com>, "Michael S .
+ Tsirkin" <mst@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, "Richard
+ Henderson" <richard.henderson@linaro.org>, Eric Blake <eblake@redhat.com>,
+ Markus Armbruster <armbru@redhat.com>, Marcelo Tosatti <mtosatti@redhat.com>, 
+ Alex =?ISO-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>, Peter Maydell
+ <peter.maydell@linaro.org>, "Sia Jee Heng" <jeeheng.sia@starfivetech.com>,
+ <qemu-devel@nongnu.org>, <kvm@vger.kernel.org>, <qemu-riscv@nongnu.org>,
+ <qemu-arm@nongnu.org>, "Zhenyu Wang" <zhenyu.z.wang@intel.com>, Dapeng Mi
+ <dapeng1.mi@linux.intel.com>, Yongwei Ma <yongwei.ma@intel.com>, Zhao Liu
+ <zhao1.liu@intel.com>
+Subject: Re: [RFC 4/8] hw/core: Add cache topology options in -smp
+Message-ID: <20240226153947.00006fd6@Huawei.com>
+In-Reply-To: <20240220092504.726064-5-zhao1.liu@linux.intel.com>
+References: <20240220092504.726064-1-zhao1.liu@linux.intel.com>
+ <20240220092504.726064-5-zhao1.liu@linux.intel.com>
+Organization: Huawei Technologies Research and Development (UK) Ltd.
+X-Mailer: Claws Mail 4.1.0 (GTK 3.24.33; x86_64-w64-mingw32)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 21/27] plugins: add an API to read registers
-To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
-Cc: qemu-devel@nongnu.org, Song Gao <gaosong@loongson.cn>,
- qemu-s390x@nongnu.org, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>,
- Thomas Huth <thuth@redhat.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Bin Meng <bin.meng@windriver.com>, Yanan Wang <wangyanan55@huawei.com>,
- Laurent Vivier <laurent@vivier.eu>, qemu-ppc@nongnu.org,
- David Hildenbrand <david@redhat.com>, =?UTF-8?Q?C=C3=A9dric_Le_Goater?=
- <clg@kaod.org>, Ilya Leoshkevich <iii@linux.ibm.com>,
- Cleber Rosa <crosa@redhat.com>, Nicholas Piggin <npiggin@gmail.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Eduardo Habkost <eduardo@habkost.net>,
- Richard Henderson <richard.henderson@linaro.org>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Alexandre Iooss <erdnaxe@crans.org>, Peter Maydell
- <peter.maydell@linaro.org>, Daniel Henrique Barboza <danielhb413@gmail.com>,
- qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
- Palmer Dabbelt <palmer@dabbelt.com>, Mahmoud Mandour
- <ma.mandourr@gmail.com>, John Snow <jsnow@redhat.com>,
- Weiwei Li <liwei1518@gmail.com>, Alistair Francis
- <alistair.francis@wdc.com>, Yoshinori Sato <ysato@users.sourceforge.jp>,
- Brian Cain <bcain@quicinc.com>, Paolo Bonzini <pbonzini@redhat.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Michael Rolnik <mrolnik@gmail.com>
-References: <20240223162202.1936541-1-alex.bennee@linaro.org>
- <20240223162202.1936541-22-alex.bennee@linaro.org>
- <2a7f0e06-0bc9-4fad-add7-9675a4cc2a0a@daynix.com>
- <87y1b7eay6.fsf@draig.linaro.org>
-Content-Language: en-US
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
-In-Reply-To: <87y1b7eay6.fsf@draig.linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=2607:f8b0:4864:20::62d;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-pl1-x62d.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+Content-Type: text/plain; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.202.227.76]
+X-ClientProxiedBy: lhrpeml100002.china.huawei.com (7.191.160.241) To
+ lhrpeml500005.china.huawei.com (7.191.163.240)
+Received-SPF: pass client-ip=185.176.79.56;
+ envelope-from=jonathan.cameron@huawei.com; helo=frasgout.his.huawei.com
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -122,67 +76,135 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-to:  Jonathan Cameron <Jonathan.Cameron@Huawei.com>
+From:  Jonathan Cameron via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2024/02/26 20:12, Alex Bennée wrote:
-> Akihiko Odaki <akihiko.odaki@daynix.com> writes:
+On Tue, 20 Feb 2024 17:25:00 +0800
+Zhao Liu <zhao1.liu@linux.intel.com> wrote:
+
+> From: Zhao Liu <zhao1.liu@intel.com>
 > 
->> On 2024/02/24 1:21, Alex Bennée wrote:
->>> We can only request a list of registers once the vCPU has been
->>> initialised so the user needs to use either call the get function on
->>> vCPU initialisation or during the translation phase.
->>> We don't expose the reg number to the plugin instead hiding it
->>> behind
->>> an opaque handle. As the register set is potentially different for
->>> each vCPU we store a separate set of handles for each vCPU. This will
->>> become more important if we are able to emulate more heterogeneous
->>> systems.
->>> Having an internal state within the plugins also allows us to expand
->>> the interface in future (for example providing callbacks on register
->>> change if the translator can track changes).
-> <snip>
->>> +
->>> +/*
->>> + * Register handles
->>> + *
->>> + * The plugin infrastructure keeps hold of these internal data
->>> + * structures which are presented to plugins as opaque handles. They
->>> + * are local to each vCPU as there can be slight variations for each
->>> + * vCPU depending on enabled features. We track this in
->>> + * CPUPluginState.
->>> + */
->>
->> Since we do no longer coalesce registers for different classes, I need
->> to bring my old question back: Why don't you just cast register
->> numbers into pointers and use it as handles?
+> Add "l1d-cache", "l1i-cache". "l2-cache", and "l3-cache" options in
+> -smp to define the cache topology for SMP system.
 > 
-> In the interest of getting this merged before the fast approaching
-> soft-freeze I shall do this for now. However once the plugin system has
-> knowledge of individual registers exposed by TCG it will need to track
-> internal state so will need some sort of container for that.
+> Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
+Hi Zhao Liu
 
-Indeed it's likely that we would have containers for registers, but we 
-don't know who would own them yet.
+I like the scheme.  Strikes a good balance between complexity of description
+and systems that actually exist. Sure there are systems with more cache
+levels etc but they are rare and support can be easily added later
+if people want to model them.
 
-These containers may not be held by vCPU classes as you previously 
-proposed because we may support different configurations of one vCPU class.
+A few minor comments inline.
 
-The current proposal to allocate handles for each vCPU may not be what 
-we would want to do in the future either. To support SMP debugging with 
-gdbstub, gdbstub must know sets of vCPUs that have identical registers, 
-and once it does, it's better to allocate handles for each of such sets, 
-not each of vCPUs.
-
-Let's figure out how we should manage containers when a need arises.
-
+Jonathan
+> ---
+>  hw/core/machine-smp.c | 128 ++++++++++++++++++++++++++++++++++++++++++
+>  hw/core/machine.c     |   4 ++
+>  qapi/machine.json     |  14 ++++-
+>  system/vl.c           |  15 +++++
+>  4 files changed, 160 insertions(+), 1 deletion(-)
 > 
->> You can even just expose gdb_reg_num with the interface.
-> 
-> As I have explained before I don't want plugins to treat the handle as
-> a pure index in case they start providing numbers that aren't in the
-> list provided by qemu_plugin_get_registers.
-> 
+> diff --git a/hw/core/machine-smp.c b/hw/core/machine-smp.c
+> index 8a8296b0d05b..2cbd19f4aa57 100644
+> --- a/hw/core/machine-smp.c
+> +++ b/hw/core/machine-smp.c
+> @@ -61,6 +61,132 @@ static char *cpu_hierarchy_to_string(MachineState *ms)
+>      return g_string_free(s, false);
+>  }
+>  
+> +static bool machine_check_topo_support(MachineState *ms,
+> +                                       CPUTopoLevel topo)
+> +{
+> +    MachineClass *mc = MACHINE_GET_CLASS(ms);
+> +
+> +    if (topo == CPU_TOPO_LEVEL_MODULE && !mc->smp_props.modules_supported) {
+> +        return false;
+> +    }
+> +
+> +    if (topo == CPU_TOPO_LEVEL_CLUSTER && !mc->smp_props.clusters_supported) {
+> +        return false;
+> +    }
+> +
+> +    if (topo == CPU_TOPO_LEVEL_DIE && !mc->smp_props.dies_supported) {
+> +        return false;
+> +    }
+> +
+> +    if (topo == CPU_TOPO_LEVEL_BOOK && !mc->smp_props.books_supported) {
+> +        return false;
+> +    }
+> +
+> +    if (topo == CPU_TOPO_LEVEL_DRAWER && !mc->smp_props.drawers_supported) {
+> +        return false;
+> +    }
+> +
+> +    return true;
+> +}
+> +
+> +static int smp_cache_string_to_topology(MachineState *ms,
 
-You can assert the given number has an associated name.
+Not a good name for a function that does rather more than that.
+
+> +                                        char *topo_str,
+> +                                        CPUTopoLevel *topo,
+> +                                        Error **errp)
+> +{
+> +    *topo = string_to_cpu_topo(topo_str);
+> +
+> +    if (*topo == CPU_TOPO_LEVEL_MAX || *topo == CPU_TOPO_LEVEL_INVALID) {
+> +        error_setg(errp, "Invalid cache topology level: %s. The cache "
+> +                   "topology should match the CPU topology level", topo_str);
+> +        return -1;
+> +    }
+> +
+> +    if (!machine_check_topo_support(ms, *topo)) {
+> +        error_setg(errp, "Invalid cache topology level: %s. The topology "
+> +                   "level is not supported by this machine", topo_str);
+> +        return -1;
+> +    }
+> +
+> +    return 0;
+> +}
+> +
+> +static void machine_parse_smp_cache_config(MachineState *ms,
+> +                                           const SMPConfiguration *config,
+> +                                           Error **errp)
+> +{
+> +    MachineClass *mc = MACHINE_GET_CLASS(ms);
+> +
+> +    if (config->l1d_cache) {
+> +        if (!mc->smp_props.l1_separated_cache_supported) {
+> +            error_setg(errp, "L1 D-cache topology not "
+> +                       "supported by this machine");
+> +            return;
+> +        }
+> +
+> +        if (smp_cache_string_to_topology(ms, config->l1d_cache,
+> +            &ms->smp_cache.l1d, errp)) {
+
+Indent is to wrong opening bracket.
+Same for other cases.
+
+
+> +            return;
+> +        }
+> +    }
+
+> +}
+> +
+>  /*
+>   * machine_parse_smp_config: Generic function used to parse the given
+>   *                           SMP configuration
+> @@ -249,6 +375,8 @@ void machine_parse_smp_config(MachineState *ms,
+>                     mc->name, mc->max_cpus);
+>          return;
+>      }
+> +
+> +    machine_parse_smp_cache_config(ms, config, errp);
+>  }
+>  
+>  unsigned int machine_topo_get_cores_per_socket(const MachineState *ms)
+
 
