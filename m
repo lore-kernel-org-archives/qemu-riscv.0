@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C35E9C48BF6
-	for <qemu-riscv@archiver.kernel.org>; Mon, 26 Feb 2024 17:10:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72B96C5478C
+	for <qemu-riscv@archiver.kernel.org>; Mon, 26 Feb 2024 17:12:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1reeP9-0007c0-Do; Mon, 26 Feb 2024 12:04:39 -0500
+	id 1reeIK-00065d-Te; Mon, 26 Feb 2024 11:57:36 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1reeNk-0004Qo-Pf
- for qemu-riscv@nongnu.org; Mon, 26 Feb 2024 12:03:13 -0500
-Received: from mail-lj1-x234.google.com ([2a00:1450:4864:20::234])
+ id 1reeHv-0005cA-6p
+ for qemu-riscv@nongnu.org; Mon, 26 Feb 2024 11:57:11 -0500
+Received: from mail-lf1-x12f.google.com ([2a00:1450:4864:20::12f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1reeNQ-0000qP-OS
- for qemu-riscv@nongnu.org; Mon, 26 Feb 2024 12:03:10 -0500
-Received: by mail-lj1-x234.google.com with SMTP id
- 38308e7fff4ca-2d109e82bd0so39635781fa.3
- for <qemu-riscv@nongnu.org>; Mon, 26 Feb 2024 09:02:51 -0800 (PST)
+ id 1reeHb-0007bt-Q0
+ for qemu-riscv@nongnu.org; Mon, 26 Feb 2024 11:57:10 -0500
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-512e39226efso4491065e87.0
+ for <qemu-riscv@nongnu.org>; Mon, 26 Feb 2024 08:56:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708966970; x=1709571770; darn=nongnu.org;
+ d=linaro.org; s=google; t=1708966610; x=1709571410; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8hOXbfu/nXLHoYxNUs7OKcODvxrO8P+IU2hzsr1jsV4=;
- b=Zs61vla1vqsp5l7MOzQuyf6dBy7jK/iYyAKI36DdFUPRsq8vg0j95zJKqc/iB6u09/
- PZGKiqgkEMvd/7UlgkVHNb1IBV1ZMfCtoT1e1pxvI/jn93CaCoCb975GROGO00VDP2V/
- OPl/vxHinYfsnlA5xb96DjBeoE4wn6fBTRoOrWSLwum9kLKJNoQ25DdWlmWP62OPGUku
- E0RDT9OeFrSQ4bhT0A36+A1TSHnV8ivu5zvu/RaFFQ+lHztVJZi30VTBZSu4I97bS6fm
- xC1r2O5dpksQmfaqyUv73ltR5JRWraoszB5/XmgoYCcx7sGwUUP1Yhx2wraRKed9I7SK
- 8uFA==
+ bh=3AL8+zOsLCpeNoayTmXUJHUL825fMKeEAoMnkSikBrE=;
+ b=W7+H/XPLXQlWOdkGvv/d+TSfyJuT4rNb9gtl7pNjaA03KnfGUauzCzShlLKtmRYwBe
+ 1FsoRllr5WK0vDsUroxBJrrQUahxgeY5iSKyVJK9AoP42ecxYDTdIaEMIiJijv0KdjDs
+ 7KPHXC/2l9xL2sWLROoSibZaS0embiA4vU/gsaZSVUVhwA4kkMX59Y0wjCL8R9XJ/WG/
+ /4ZCHtDR0dY/3/4Ojm43zKZc27A4BVNPug2iyQru9jd0hdqkwcSXewPuyNY6gAtgn72Z
+ 8KPn3SAj6hJjoXC2prE2HQZWa4OmA7/eHAX77VTPisbZ2Kng3xoUkSlRqkc573iMOS/B
+ k6qQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708966970; x=1709571770;
+ d=1e100.net; s=20230601; t=1708966610; x=1709571410;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8hOXbfu/nXLHoYxNUs7OKcODvxrO8P+IU2hzsr1jsV4=;
- b=TT4tUYX/MY9GCCEa+CsQFnqqu7mL8l9v4fGK9HPHbM6gFmqBW+o4vx8dZWy1A6o+h1
- FwBmsR90JmdYO3ruwfwTPipAiSNswRdu8NfAsbveaMTDRw2YjZNVpbCKAOaLUYgjHmA9
- XL8bfI28cRE6gBGM2FZzywnWDXbPOiHFNVWXGzBbWQ5MmvBCykYEng+QPgNBDtEPzYRF
- +61kTNz5/1wHlZlcAM9e0cfSIw6TcfL2vsrOuUwkxnazBjZ9w4ozQKjt3099P237pkGW
- jDPv12VWi3oUO9js/9Ziek9PBnzr9vI0xpm4RILgQV+OcFYTPn7fSy9+zWcImGwhL8x0
- ltnA==
+ bh=3AL8+zOsLCpeNoayTmXUJHUL825fMKeEAoMnkSikBrE=;
+ b=J/0zKfnYQ2X9Nr6Zl4PNfOygx/NFkC5n9MdB5Gex+owytJMieDomopw2dUGvVpawsT
+ jFSgHfqC6nl+5YGKUrIZLAwEF+AvcgeG96WyzVkT0sGV8/xs+NzoJW9QI3lZSuIgbIp/
+ NFwrx1EqFdbhKyVOHnufaaMEmL7ewgloEhIuk7DveEx9BK5MI22fjFiYeDPAsQdykTpm
+ jP8/m1kp0ICZ47SWYnpSPB89ppM3CM1YAOUdTTyUJyKUClRBUFqKweFP+Blt3T1YMcJd
+ eEfu32EgNHP+FQiHcZK9OKNn+qPeAse2Zlyzpvzgscv9QMv3JInUO5nfE9ZPJZlm2/ln
+ uAww==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWWt4SLJx/mcBHXw5uN5Q5NPbvU6qj8QIISZVByYqYPy8WtQJNvrloaN808gBzub3cBWg5zzBZaGxgHZC5sfpRdUGB7Fuw=
-X-Gm-Message-State: AOJu0YxcIpFffzSCV67QzpUYHx+DTt/54G/qjSQ02Y+Ue9UbCvrxFdkZ
- nhZYbReg1p/NwxrD5gDnd/2j/dGBlRYBCOF0HVDUFzjusewPLHaPiQIb9BM6Bxw=
-X-Google-Smtp-Source: AGHT+IEGzYAjGA7j0mUDhu530zJmESbicjNt2T58XfE00sN4sdskvhszkxXtAM4BMEY0YD4t0ry37w==
-X-Received: by 2002:a2e:3308:0:b0:2d2:438a:1207 with SMTP id
- d8-20020a2e3308000000b002d2438a1207mr4367007ljc.37.1708966970330; 
- Mon, 26 Feb 2024 09:02:50 -0800 (PST)
+ AJvYcCUAe48QwScHmNFOxs/bpB28UCMXyGVOMYII4ml5q3dMoAc27GftNizrr/XgUN8F1DNnCzRzIKArf0cGYec6bpYJG71GCaw=
+X-Gm-Message-State: AOJu0Yxvmq6gYKXxBTbqxugAQI34nK4O12Tj8iMazXPcvFSsXuMapl/o
+ CK3I5Y9VdXtHC5JBQ/YgxS2Gu/lz7knKjKzAdPpb9GamYz1feevhOI1jbESWstk=
+X-Google-Smtp-Source: AGHT+IFykQNOfrweVnl2YPAOSLpNNQkfWgFq1ISOM6wuDUgGzdtUCJwp/jvhhBHssTrSkvJpnVSdcw==
+X-Received: by 2002:a05:6512:110c:b0:512:f5b8:8912 with SMTP id
+ l12-20020a056512110c00b00512f5b88912mr4294057lfg.16.1708966609856; 
+ Mon, 26 Feb 2024 08:56:49 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- cc13-20020a5d5c0d000000b0033b66c2d61esm9009518wrb.48.2024.02.26.09.02.42
+ hg26-20020a05600c539a00b0041297d7e181sm8898584wmb.6.2024.02.26.08.56.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Feb 2024 09:02:45 -0800 (PST)
+ Mon, 26 Feb 2024 08:56:47 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id CA8B95F92E;
- Mon, 26 Feb 2024 16:56:48 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id DAA115F900;
+ Mon, 26 Feb 2024 16:56:46 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Nicholas Piggin <npiggin@gmail.com>,
@@ -88,26 +88,25 @@ Cc: Nicholas Piggin <npiggin@gmail.com>,
  Bin Meng <bin.meng@windriver.com>, Laurent Vivier <laurent@vivier.eu>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Daniel Henrique Barboza <danielhb413@gmail.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Akihiko Odaki <akihiko.odaki@daynix.com>
-Subject: [PATCH v3 21/27] plugins: add an API to read registers
-Date: Mon, 26 Feb 2024 16:56:40 +0000
-Message-Id: <20240226165646.425600-22-alex.bennee@linaro.org>
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH v3 02/27] tests/tcg: bump TCG test timeout to 120s
+Date: Mon, 26 Feb 2024 16:56:21 +0000
+Message-Id: <20240226165646.425600-3-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240226165646.425600-1-alex.bennee@linaro.org>
 References: <20240226165646.425600-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::234;
- envelope-from=alex.bennee@linaro.org; helo=mail-lj1-x234.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::12f;
+ envelope-from=alex.bennee@linaro.org; helo=mail-lf1-x12f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01,
- T_SPF_HELO_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -123,209 +122,36 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-We can only request a list of registers once the vCPU has been
-initialised so the user needs to use either call the get function on
-vCPU initialisation or during the translation phase.
+This is less than ideal but easier than making sure we get all the
+iterations of the memory test. Update the comment accordingly.
 
-We don't expose the reg number to the plugin instead hiding it behind
-an opaque handle. For now this is just the gdb_regnum encapsulated in
-an anonymous GPOINTER but in future as we add more state for plugins
-to track we can expand it.
-
-Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1706
-Cc: Akihiko Odaki <akihiko.odaki@daynix.com>
-Message-Id: <20240103173349.398526-39-alex.bennee@linaro.org>
-Based-on: <20231025093128.33116-18-akihiko.odaki@daynix.com>
+Message-Id: <20240223162202.1936541-3-alex.bennee@linaro.org>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-
+Reviewed-by: Thomas Huth <thuth@redhat.com>
 ---
-v4
-  - the get/read_registers functions are now implicitly for current
-  vCPU only to accidental cpu != current_cpu uses.
-v5
-  - make reg_handles as per-CPUPluginState variable.
-v6
-  - for now just wrap gdb_regnum
----
- include/qemu/qemu-plugin.h   | 48 +++++++++++++++++++++++++++++--
- plugins/api.c                | 56 ++++++++++++++++++++++++++++++++++++
- plugins/qemu-plugins.symbols |  2 ++
- 3 files changed, 104 insertions(+), 2 deletions(-)
+ tests/tcg/Makefile.target | 9 +++------
+ 1 file changed, 3 insertions(+), 6 deletions(-)
 
-diff --git a/include/qemu/qemu-plugin.h b/include/qemu/qemu-plugin.h
-index 93981f8f89f..3b6b18058d2 100644
---- a/include/qemu/qemu-plugin.h
-+++ b/include/qemu/qemu-plugin.h
-@@ -11,6 +11,7 @@
- #ifndef QEMU_QEMU_PLUGIN_H
- #define QEMU_QEMU_PLUGIN_H
+diff --git a/tests/tcg/Makefile.target b/tests/tcg/Makefile.target
+index 8cf65f68dd8..a4c25908fb7 100644
+--- a/tests/tcg/Makefile.target
++++ b/tests/tcg/Makefile.target
+@@ -93,12 +93,9 @@ QEMU_OPTS=
  
-+#include <glib.h>
- #include <inttypes.h>
- #include <stdbool.h>
- #include <stddef.h>
-@@ -229,8 +230,8 @@ struct qemu_plugin_insn;
-  * @QEMU_PLUGIN_CB_R_REGS: callback reads the CPU's regs
-  * @QEMU_PLUGIN_CB_RW_REGS: callback reads and writes the CPU's regs
-  *
-- * Note: currently unused, plugins cannot read or change system
-- * register state.
-+ * Note: currently QEMU_PLUGIN_CB_RW_REGS is unused, plugins cannot change
-+ * system register state.
-  */
- enum qemu_plugin_cb_flags {
-     QEMU_PLUGIN_CB_NO_REGS,
-@@ -707,4 +708,47 @@ uint64_t qemu_plugin_end_code(void);
- QEMU_PLUGIN_API
- uint64_t qemu_plugin_entry_code(void);
  
-+/** struct qemu_plugin_register - Opaque handle for register access */
-+struct qemu_plugin_register;
-+
-+/**
-+ * typedef qemu_plugin_reg_descriptor - register descriptions
-+ *
-+ * @handle: opaque handle for retrieving value with qemu_plugin_read_register
-+ * @name: register name
-+ * @feature: optional feature descriptor, can be NULL
-+ */
-+typedef struct {
-+    struct qemu_plugin_register *handle;
-+    const char *name;
-+    const char *feature;
-+} qemu_plugin_reg_descriptor;
-+
-+/**
-+ * qemu_plugin_get_registers() - return register list for current vCPU
-+ *
-+ * Returns a GArray of qemu_plugin_reg_descriptor or NULL. Caller
-+ * frees the array (but not the const strings).
-+ *
-+ * Should be used from a qemu_plugin_register_vcpu_init_cb() callback
-+ * after the vCPU is initialised, i.e. in the vCPU context.
-+ */
-+GArray *qemu_plugin_get_registers(void);
-+
-+/**
-+ * qemu_plugin_read_register() - read register for current vCPU
-+ *
-+ * @handle: a @qemu_plugin_reg_handle handle
-+ * @buf: A GByteArray for the data owned by the plugin
-+ *
-+ * This function is only available in a context that register read access is
-+ * explicitly requested via the QEMU_PLUGIN_CB_R_REGS flag.
-+ *
-+ * Returns the size of the read register. The content of @buf is in target byte
-+ * order. On failure returns -1
-+ */
-+int qemu_plugin_read_register(struct qemu_plugin_register *handle,
-+                              GByteArray *buf);
-+
-+
- #endif /* QEMU_QEMU_PLUGIN_H */
-diff --git a/plugins/api.c b/plugins/api.c
-index 54df72c1c00..03412598047 100644
---- a/plugins/api.c
-+++ b/plugins/api.c
-@@ -8,6 +8,7 @@
-  *
-  *  qemu_plugin_tb
-  *  qemu_plugin_insn
-+ *  qemu_plugin_register
-  *
-  * Which can then be passed back into the API to do additional things.
-  * As such all the public functions in here are exported in
-@@ -35,10 +36,12 @@
-  */
+ # If TCG debugging, or TCI is enabled things are a lot slower
+-# ??? Makefile no longer has any indication that TCI is enabled,
+-# but for the record:
+-#   15s    original default
+-#   60s    with --enable-debug
+-#   90s    with --enable-tcg-interpreter
+-TIMEOUT=90
++# so we have to set our timeout for that. The current worst case
++# offender is the system memory test running under TCI.
++TIMEOUT=120
  
- #include "qemu/osdep.h"
-+#include "qemu/main-loop.h"
- #include "qemu/plugin.h"
- #include "qemu/log.h"
- #include "tcg/tcg.h"
- #include "exec/exec-all.h"
-+#include "exec/gdbstub.h"
- #include "exec/ram_addr.h"
- #include "disas/disas.h"
- #include "plugin.h"
-@@ -410,3 +413,56 @@ uint64_t qemu_plugin_entry_code(void)
- #endif
-     return entry;
- }
-+
-+/*
-+ * Create register handles.
-+ *
-+ * We need to create a handle for each register so the plugin
-+ * infrastructure can call gdbstub to read a register. They are
-+ * currently just a pointer encapsulation of the gdb_regnum but in
-+ * future may hold internal plugin state so its important plugin
-+ * authors are not tempted to treat them as numbers.
-+ *
-+ * We also construct a result array with those handles and some
-+ * ancillary data the plugin might find useful.
-+ */
-+
-+static GArray *create_register_handles(CPUState *cs, GArray *gdbstub_regs)
-+{
-+    GArray *find_data = g_array_new(true, true,
-+                                    sizeof(qemu_plugin_reg_descriptor));
-+
-+    for (int i = 0; i < gdbstub_regs->len; i++) {
-+        GDBRegDesc *grd = &g_array_index(gdbstub_regs, GDBRegDesc, i);
-+
-+        /* skip "un-named" regs */
-+        if (!grd->name) {
-+            continue;
-+        }
-+
-+        /* Create a record for the plugin */
-+        qemu_plugin_reg_descriptor desc = {
-+            .handle = GINT_TO_POINTER(grd->gdb_reg),
-+            .name = g_intern_string(grd->name),
-+            .feature = g_intern_string(grd->feature_name)
-+        };
-+        g_array_append_val(find_data, desc);
-+    }
-+
-+    return find_data;
-+}
-+
-+GArray *qemu_plugin_get_registers(void)
-+{
-+    g_assert(current_cpu);
-+
-+    g_autoptr(GArray) regs = gdb_get_register_list(current_cpu);
-+    return regs->len ? create_register_handles(current_cpu, regs) : NULL;
-+}
-+
-+int qemu_plugin_read_register(struct qemu_plugin_register *reg, GByteArray *buf)
-+{
-+    g_assert(current_cpu);
-+
-+    return gdb_read_register(current_cpu, buf, GPOINTER_TO_INT(reg));
-+}
-diff --git a/plugins/qemu-plugins.symbols b/plugins/qemu-plugins.symbols
-index adb67608598..27fe97239be 100644
---- a/plugins/qemu-plugins.symbols
-+++ b/plugins/qemu-plugins.symbols
-@@ -3,6 +3,7 @@
-   qemu_plugin_end_code;
-   qemu_plugin_entry_code;
-   qemu_plugin_get_hwaddr;
-+  qemu_plugin_get_registers;
-   qemu_plugin_hwaddr_device_name;
-   qemu_plugin_hwaddr_is_io;
-   qemu_plugin_hwaddr_phys_addr;
-@@ -19,6 +20,7 @@
-   qemu_plugin_num_vcpus;
-   qemu_plugin_outs;
-   qemu_plugin_path_to_binary;
-+  qemu_plugin_read_register;
-   qemu_plugin_register_atexit_cb;
-   qemu_plugin_register_flush_cb;
-   qemu_plugin_register_vcpu_exit_cb;
+ ifeq ($(filter %-softmmu, $(TARGET)),)
+ # The order we include is important. We include multiarch first and
 -- 
 2.39.2
 
