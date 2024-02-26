@@ -4,75 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCE93C54E49
-	for <qemu-riscv@archiver.kernel.org>; Mon, 26 Feb 2024 09:32:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A762C48BF6
+	for <qemu-riscv@archiver.kernel.org>; Mon, 26 Feb 2024 11:13:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1reXLE-0002M2-RS; Mon, 26 Feb 2024 04:32:10 -0500
+	id 1reYuX-0007Ih-Nr; Mon, 26 Feb 2024 06:12:41 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1reXL6-0002LJ-0t
- for qemu-riscv@nongnu.org; Mon, 26 Feb 2024 04:32:01 -0500
-Received: from mail-oi1-x229.google.com ([2607:f8b0:4864:20::229])
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1reYuF-0007DE-Ia
+ for qemu-riscv@nongnu.org; Mon, 26 Feb 2024 06:12:24 -0500
+Received: from mail-lj1-x22e.google.com ([2a00:1450:4864:20::22e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1reXL3-000864-IQ
- for qemu-riscv@nongnu.org; Mon, 26 Feb 2024 04:31:59 -0500
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-3c1a2f7e302so253519b6e.0
- for <qemu-riscv@nongnu.org>; Mon, 26 Feb 2024 01:31:56 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1reYuC-00084W-Ie
+ for qemu-riscv@nongnu.org; Mon, 26 Feb 2024 06:12:23 -0500
+Received: by mail-lj1-x22e.google.com with SMTP id
+ 38308e7fff4ca-2d28e3c0fe0so6614721fa.2
+ for <qemu-riscv@nongnu.org>; Mon, 26 Feb 2024 03:12:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1708939916; x=1709544716; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=ccZ5bJcvobWlI1SRGear5DT3BclbrKPFW9Nrv/yIA+o=;
- b=fX71Z4HSzbyHJEsJ7DzcjOy1UTe5qEwNJRJhkbdDHzne7YJRNetne1lFuR0aezSWbB
- I+arRxlYtRaRrHmEs8dPlqF3O8Mf8S9pONyuJFUQwLfvBg4RFHLbg/DcT3FTPCK48sgH
- 9GmPGj0gUckxnFH2mt5kyn36DL/8i9B+Ng31L0mTYsW6SAlCT7NRhKYcO3opV6s5faxz
- yku69MLcXdV5tXmldylZP7hSgWXnH/Hla6+IpqwCXFRwdkUViZvs9u9ynVvucDK2F55b
- QfjBG9ZBUkA0TvFQkeV7ksh7MJuqljRhmHPxr/+BlYs78+igKyB5MMSnnatfd8rahh7g
- artA==
+ d=linaro.org; s=google; t=1708945938; x=1709550738; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:user-agent
+ :references:in-reply-to:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=wDeVF4/UfnlJ3NsN5RfwhK/kIlH3bfHrXai+CNxTm1M=;
+ b=o4gOXFLpzsq6UyR5c8aznCze4zWYpVugDSH42rB/jqveS25x8i6ms7Qj8mnOkMoHnQ
+ h/ikV7Ia5PrQT/7RqqVA7ICDuO4F2+QIoqfnkS3uf69SjHek3t9OsewGp538o3chkObj
+ S9madrAWUSrLrKgA0maf7H/nNnOD/vmZN8CEjqi2Rp0Szp17+714OAVc6yh8U+B3KLIf
+ 0TXG1Jq8AhPmAa6QDMAuXpaehBYHxukvJAuCPJOLVjjEpJm+Uuh9wcosHRzsZcqin2NG
+ j3yYJMavCkhD+7zzhm9a3QotFV+/DJIy7pR9Xw/Es0AJ5AE7rMBpxu2BsoIjRisjHR8o
+ sc9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708939916; x=1709544716;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ccZ5bJcvobWlI1SRGear5DT3BclbrKPFW9Nrv/yIA+o=;
- b=CBsEoQFX+g8Ic/xRapSHF07Vs/Drjlui1uQlbGKQW+8NZs4GPSIhp9apwd2Y2By+zz
- G9fyVQ+WxyRnanp8n7FH7rE2pF042AMzgiXXH4w4la+89q9pFGR9SqjWd0kJ4sE4Umth
- RSXeMXyAowK6l3S28qVCY5S0R3wibwFx0L6dGKB9fSu8YByykZiq0ah3f/F1suAmlzCT
- fzS0lk9aGSZL+vPYCsXJqpYS14sSmlUSb3aUTkHZUtC/Y1W8gCrP5mo8wNXKJ1mo3SZQ
- lnNAyZ9cY+pq2chor9WdfCSw5aIdp4aijKjF7lLjfQlG/l3Eb2fxRFVv2KurpFRepW7w
- 2Xtw==
-X-Gm-Message-State: AOJu0YyYJ9/isZI6Afoj14Obcfcj6PzsDvLLqqGhagiT15Wr6j1UuCQB
- nhkcqbQXSGC+aGwkw9wbUQtKH1w/5v1ATV+Oxzy3n1qwltRkHG7eEGFg5vyWQxM=
-X-Google-Smtp-Source: AGHT+IEvomSh8BiTiQXsCCTh6c2BFQcQV8J9lpWQTX5ECSpHY6y4C4ru0NuIySJ/uZ+FS+TKvztwRQ==
-X-Received: by 2002:a05:6358:6422:b0:178:6211:871 with SMTP id
- f34-20020a056358642200b0017862110871mr9532487rwh.0.1708939915808; 
- Mon, 26 Feb 2024 01:31:55 -0800 (PST)
-Received: from [192.168.68.110] ([177.94.15.159])
- by smtp.gmail.com with ESMTPSA id
- v34-20020a634822000000b005dc816b2369sm3489594pga.28.2024.02.26.01.31.53
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 26 Feb 2024 01:31:54 -0800 (PST)
-Message-ID: <a5c8ed1b-0b67-449a-83b9-accf0754c562@ventanamicro.com>
-Date: Mon, 26 Feb 2024 06:31:51 -0300
+ d=1e100.net; s=20230601; t=1708945938; x=1709550738;
+ h=content-transfer-encoding:mime-version:message-id:date:user-agent
+ :references:in-reply-to:subject:cc:to:from:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=wDeVF4/UfnlJ3NsN5RfwhK/kIlH3bfHrXai+CNxTm1M=;
+ b=tj4uIVcHNTiwRZ0SGceRF54Z4EfX1XLnC8yE5dRctpnomu0dnn7J3TAVw7Um/MlWOu
+ C+TLa8m3q7wHiELAR/yIKw5mAcqHT/NfF7sq8hR6iIq/K86S1N07+fZOX7g4KJBIvn5k
+ YGOtDe6OYFYaVWTnK8KIGR+cKAXmGJOObG4ELpns5qENwYwe2xGJkKty6yjQzumBlsXh
+ 74u2l9CTn2HlkXFYgClCz9b1cJOdVx9dpObToLk7S+NssbbQ+7qv8HtgeP4ABPiGF8Wx
+ s/Erj00kjx5LTgA50OWKe9sTYo562srz5aASEuW1jXeolySh7PjvfvmjWh8IxUbHoFo8
+ ZgEw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVTP5nJmkSDjwcf33orgmEy178u2zcDWw6ChYBuhTXqoND9vNX0sDp5Vi/z6aU9hkPN8chbsuEhHgUoV3Tu9CB2T0+0hB0=
+X-Gm-Message-State: AOJu0Yze+MjWEmRxtmf3AeNqgrlvgIfS7KFMjK0eh/6pBazm8tx8CpSR
+ AhUat/QmNcn/puqVH7yl8PXzBc2/UaSbLJKTgVLDag7+d52RmIqpZ1WmNYck9nI=
+X-Google-Smtp-Source: AGHT+IG3jDDSh0z6NbwyaUafoSUIxwRRCLob6nvkp0JpP1A/eofb3XJnf/N+0mfBoWuchPZjxy+nwA==
+X-Received: by 2002:a2e:2285:0:b0:2d2:3256:6582 with SMTP id
+ i127-20020a2e2285000000b002d232566582mr3458154lji.45.1708945938152; 
+ Mon, 26 Feb 2024 03:12:18 -0800 (PST)
+Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
+ e3-20020a5d4e83000000b0033d12895cfdsm7965045wru.61.2024.02.26.03.12.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 26 Feb 2024 03:12:17 -0800 (PST)
+Received: from draig (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id 221805F7A7;
+ Mon, 26 Feb 2024 11:12:17 +0000 (GMT)
+From: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: Akihiko Odaki <akihiko.odaki@daynix.com>
+Cc: qemu-devel@nongnu.org,  Song Gao <gaosong@loongson.cn>,
+ qemu-s390x@nongnu.org,  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>,  Thomas Huth
+ <thuth@redhat.com>,  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Bin Meng <bin.meng@windriver.com>,  Yanan Wang <wangyanan55@huawei.com>,
+ Laurent Vivier <laurent@vivier.eu>,  qemu-ppc@nongnu.org,  David
+ Hildenbrand <david@redhat.com>,  =?utf-8?Q?C=C3=A9dric?= Le Goater
+ <clg@kaod.org>,  Ilya
+ Leoshkevich <iii@linux.ibm.com>,  Cleber Rosa <crosa@redhat.com>,
+ Nicholas Piggin <npiggin@gmail.com>,  Marcel Apfelbaum
+ <marcel.apfelbaum@gmail.com>,  Eduardo Habkost <eduardo@habkost.net>,
+ Richard Henderson <richard.henderson@linaro.org>,  Philippe =?utf-8?Q?Ma?=
+ =?utf-8?Q?thieu-Daud=C3=A9?=
+ <philmd@linaro.org>,  Alexandre Iooss <erdnaxe@crans.org>,  Peter Maydell
+ <peter.maydell@linaro.org>,  Daniel Henrique Barboza
+ <danielhb413@gmail.com>,  qemu-arm@nongnu.org,  qemu-riscv@nongnu.org,
+ Palmer Dabbelt <palmer@dabbelt.com>,  Mahmoud Mandour
+ <ma.mandourr@gmail.com>,  John Snow <jsnow@redhat.com>,  Weiwei Li
+ <liwei1518@gmail.com>,  Alistair Francis <alistair.francis@wdc.com>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>,  Brian Cain
+ <bcain@quicinc.com>,  Paolo Bonzini <pbonzini@redhat.com>,  "Edgar E.
+ Iglesias" <edgar.iglesias@gmail.com>,  Michael Rolnik <mrolnik@gmail.com>
+Subject: Re: [PATCH v2 21/27] plugins: add an API to read registers
+In-Reply-To: <2a7f0e06-0bc9-4fad-add7-9675a4cc2a0a@daynix.com> (Akihiko
+ Odaki's message of "Sat, 24 Feb 2024 17:34:03 +0900")
+References: <20240223162202.1936541-1-alex.bennee@linaro.org>
+ <20240223162202.1936541-22-alex.bennee@linaro.org>
+ <2a7f0e06-0bc9-4fad-add7-9675a4cc2a0a@daynix.com>
+User-Agent: mu4e 1.12.0; emacs 29.1
+Date: Mon, 26 Feb 2024 11:12:17 +0000
+Message-ID: <87y1b7eay6.fsf@draig.linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] target/riscv: Fix shift count overflow
-To: "demin.han" <demin.han@starfivetech.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, philmd@linaro.org
-References: <20240225174114.5298-1-demin.han@starfivetech.com>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240225174114.5298-1-demin.han@starfivetech.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::229;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x229.google.com
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::22e;
+ envelope-from=alex.bennee@linaro.org; helo=mail-lj1-x22e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -95,48 +122,49 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Akihiko Odaki <akihiko.odaki@daynix.com> writes:
 
+> On 2024/02/24 1:21, Alex Benn=C3=A9e wrote:
+>> We can only request a list of registers once the vCPU has been
+>> initialised so the user needs to use either call the get function on
+>> vCPU initialisation or during the translation phase.
+>> We don't expose the reg number to the plugin instead hiding it
+>> behind
+>> an opaque handle. As the register set is potentially different for
+>> each vCPU we store a separate set of handles for each vCPU. This will
+>> become more important if we are able to emulate more heterogeneous
+>> systems.
+>> Having an internal state within the plugins also allows us to expand
+>> the interface in future (for example providing callbacks on register
+>> change if the translator can track changes).
+<snip>
+>> +
+>> +/*
+>> + * Register handles
+>> + *
+>> + * The plugin infrastructure keeps hold of these internal data
+>> + * structures which are presented to plugins as opaque handles. They
+>> + * are local to each vCPU as there can be slight variations for each
+>> + * vCPU depending on enabled features. We track this in
+>> + * CPUPluginState.
+>> + */
+>
+> Since we do no longer coalesce registers for different classes, I need
+> to bring my old question back: Why don't you just cast register
+> numbers into pointers and use it as handles?
 
-On 2/25/24 14:41, demin.han wrote:
-> The result of (8 - 3 - vlmul) is negative when vlmul >= 6,
-> and results in wrong vill.
-> 
-> Signed-off-by: demin.han <demin.han@starfivetech.com>
-> ---
+In the interest of getting this merged before the fast approaching
+soft-freeze I shall do this for now. However once the plugin system has
+knowledge of individual registers exposed by TCG it will need to track
+internal state so will need some sort of container for that.
 
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> You can even just expose gdb_reg_num with the interface.
 
-> Changes in v2:
-> - Add vlen var
-> 
-> Changes in v3:
-> - Fix commit msg typo
-> 
->   target/riscv/vector_helper.c | 5 ++---
->   1 file changed, 2 insertions(+), 3 deletions(-)
-> 
-> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index 84cec73eb2..fe56c007d5 100644
-> --- a/target/riscv/vector_helper.c
-> +++ b/target/riscv/vector_helper.c
-> @@ -44,6 +44,7 @@ target_ulong HELPER(vsetvl)(CPURISCVState *env, target_ulong s1,
->       target_ulong reserved = s2 &
->                               MAKE_64BIT_MASK(R_VTYPE_RESERVED_SHIFT,
->                                               xlen - 1 - R_VTYPE_RESERVED_SHIFT);
-> +    uint16_t vlen = cpu->cfg.vlenb << 3;
->       int8_t lmul;
->   
->       if (vlmul & 4) {
-> @@ -53,10 +54,8 @@ target_ulong HELPER(vsetvl)(CPURISCVState *env, target_ulong s1,
->            * VLEN * LMUL >= SEW
->            * VLEN >> (8 - lmul) >= sew
->            * (vlenb << 3) >> (8 - lmul) >= sew
-> -         * vlenb >> (8 - 3 - lmul) >= sew
->            */
-> -        if (vlmul == 4 ||
-> -            cpu->cfg.vlenb >> (8 - 3 - vlmul) < sew) {
-> +        if (vlmul == 4 || (vlen >> (8 - vlmul)) < sew) {
->               vill = true;
->           }
->       }
+As I have explained before I don't want plugins to treat the handle as
+a pure index in case they start providing numbers that aren't in the
+list provided by qemu_plugin_get_registers.
+
+--=20
+Alex Benn=C3=A9e
+Virtualisation Tech Lead @ Linaro
 
