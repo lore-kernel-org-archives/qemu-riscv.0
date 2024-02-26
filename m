@@ -4,113 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B9B5C47DD9
-	for <qemu-riscv@archiver.kernel.org>; Sun, 25 Feb 2024 17:42:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47DD8C47DD9
+	for <qemu-riscv@archiver.kernel.org>; Mon, 26 Feb 2024 00:25:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1reIVW-0003Y9-DL; Sun, 25 Feb 2024 12:41:46 -0500
+	id 1reOoT-0007Js-LJ; Sun, 25 Feb 2024 19:25:45 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <demin.han@starfivetech.com>)
- id 1reIVU-0003Xe-AH; Sun, 25 Feb 2024 12:41:44 -0500
-Received: from mail-bjschn02on20721.outbound.protection.partner.outlook.cn
- ([2406:e500:4440:2::721]
- helo=CHN02-BJS-obe.outbound.protection.partner.outlook.cn)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <demin.han@starfivetech.com>)
- id 1reIVR-0007vW-Lx; Sun, 25 Feb 2024 12:41:43 -0500
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=V9964d3OXOiLk/5QVq+wN0sZF8mcZiR9aIjRH9fdGBHayckf3zCbaraqjRSdFnn2YGeHoBwiXx5C2GLj8otvpp/rI6Z+AGaS59BXMMSd89iPQJnfNOvdIz0xUVeUcHdJS/r6nb/aHF7BgZJzi8aaYn5SBjLFhlJQqxLq9ikiqT7GuipBGw4pZUQVX3xL2SrBh2JCgkYpGx0a1YjOyBPEUw6MOfc74h6GF05SdOElsPM74DBXFWN2NCj1t8+BRn/M54UvUwsOzKOiC36+KhG49DNe9wscmuuOMY3eO9XNCM9zCs8EiOmTPDcGYxEu/Ne0QSKJmM93y6+rhkpa/shNEQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=uf3389rY33uXWIzVMnuwj0pGKqXqGuzNB8dBSizBsII=;
- b=BCDqZ7ADGMcUGbIOra3HWnvSaubsHKVnxk90hKquL1Dwjxg9tbcS+lq0bdu78mv14snIjwPtdRrqrOtR4n7bJG72O9M9AceMiJTWHhzZRq2AMslw6JvTT7awYCu0lfhKngAwEqp1r5YhVyZ7ei6e2ziDxNk//KtEabo+qHkPEg4ZSXLQ7XS6ZOefbRvuUiRpgyZg+MNneVn39jGQdsazgGgczRkIDgGq7RTbz7ybrbI7uGLtD2TWqoaZkmMcNE2NEnD1PWabcCkl0ES2s/FiPz2puH/u0ePgaazBvJo/XU4WRbeADcRsvxGee9o5fmEwAg/vi0jJIAwm2sa7D3Oifw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=starfivetech.com; dmarc=pass action=none
- header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=starfivetech.com;
-Received: from ZQ0PR01MB1063.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c550:d::13) by ZQ0PR01MB1304.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c550:19::10) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7270.47; Sun, 25 Feb
- 2024 17:41:24 +0000
-Received: from ZQ0PR01MB1063.CHNPR01.prod.partner.outlook.cn
- ([fe80::21d1:48e1:7ca0:1d76]) by
- ZQ0PR01MB1063.CHNPR01.prod.partner.outlook.cn ([fe80::21d1:48e1:7ca0:1d76%4])
- with mapi id 15.20.7270.047; Sun, 25 Feb 2024 17:41:24 +0000
-From: "demin.han" <demin.han@starfivetech.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, dbarboza@ventanamicro.com, alistair.francis@wdc.com,
- philmd@linaro.org
-Subject: [PATCH v3] target/riscv: Fix shift count overflow
-Date: Mon, 26 Feb 2024 01:41:14 +0800
-Message-ID: <20240225174114.5298-1-demin.han@starfivetech.com>
-X-Mailer: git-send-email 2.43.2
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SH0PR01CA0024.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c311:5::36) To ZQ0PR01MB1063.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c550:d::13)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1reOoR-0007JG-90; Sun, 25 Feb 2024 19:25:43 -0500
+Received: from mail-ua1-x92d.google.com ([2607:f8b0:4864:20::92d])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1reOoP-0008F7-Lw; Sun, 25 Feb 2024 19:25:42 -0500
+Received: by mail-ua1-x92d.google.com with SMTP id
+ a1e0cc1a2514c-7d5c890c67fso1109665241.0; 
+ Sun, 25 Feb 2024 16:25:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1708907140; x=1709511940; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=KZaJb3Kb5BwuK5vKs/Nf8G0JioWW2HPTga24JGkluiw=;
+ b=fbmT9/O7kdE5vgh9Y0y2e5/Yc7mlKP9Xw9cKpX/phK/a91C+Rd2S6NisyJ3U1npq6h
+ 1Q0zlATWaptYmCQmB97ryZRSUo0tnySGLIBnD3u7YPqxNJ+4kow1qjaUrWQyVnUP+GAF
+ M+6ljxS+SHBf+zNEds2dNjRMdsawyKUyHlNJtGon6wl4Zed47zTIJOwHsfw916P3naZv
+ 50Is01gVEiApMRgKXVQOdAa3lNuGeUIOA4cMarcmEohcht41kkVzV7J6hjQXvfsJy4ub
+ BdXXx6qM1Ufyj8JFHpvIyo6zZCrciMzH4uYgd/ap/Aq205SKamzkLybZq4aJSX68bUrG
+ vkiA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1708907140; x=1709511940;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=KZaJb3Kb5BwuK5vKs/Nf8G0JioWW2HPTga24JGkluiw=;
+ b=JPe9yxe4aAwHD2BPZ3oA6N2OlJwtg9TS46LHePOwpSz+3MwmqwL1gFCAh5BqswDOZg
+ /klSDIPZgwKoPw8S0EBUL7wa413tlo5FxR/FyJbyaBq88JFQBiBhAbymUTcHuAWTBPT4
+ aMulRBcWgaNk+8eG2KSL91VqpaVYk4/g8askqvAPZ+cuL6J+vDwLTrqMWBJ+gtJd53sN
+ s7jOZhfWhDdbinFw5t2ZTtehk6ASv12GeN60nXo+cfbyVhx+E+TkDj7qVlesg9FpyLjq
+ HR8ZsTJKnBbeWBaAKjrb/RflW4h+S1QJ7Bsmsc6Yj408yrmwB7+oQZZf1BfKlzVt3laj
+ dzfQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV2zDaKGOKtCAh6lw+lTiSCnN+r8ksxb0K192TPAeMt+52T2Pajy4z35ei9YUzTcBOHcK+oGwqqvgw9BrywT43X+KAUicM=
+X-Gm-Message-State: AOJu0YxbW3doHeNvXe/UwMzsCuKyqVSprsaZoCBEkRzxMLLXn9NLKkbR
+ rgkzWIZ97P1D4LOhzCIyHrUTTZuU/4U8l2VBCXab8ppv5wH5javGGPBUenEtgKKLWOOHqVWREtq
+ S9S81caA9oJeTfhl+IOsSlxeUUmA=
+X-Google-Smtp-Source: AGHT+IE5YPPk4V0f9yA4fdcBCHUSvMp1RdHOHol+uRBAJLhM9oXpmFgINRj9PGXLwVwtl0OhGiMkr5QDd9Lhw43C1wg=
+X-Received: by 2002:a67:f508:0:b0:471:e032:75e2 with SMTP id
+ u8-20020a67f508000000b00471e03275e2mr1402358vsn.5.1708907139981; Sun, 25 Feb
+ 2024 16:25:39 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: ZQ0PR01MB1063:EE_|ZQ0PR01MB1304:EE_
-X-MS-Office365-Filtering-Correlation-Id: 739d89d5-f71e-4e4f-26ad-08dc3628fc4f
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 3y7mBQcHiLa5spDVfj0w2cMMvS4zIWSocXhZYTy/Wf70q4kaHuaIZDtK7mPKAMbS2T+dN1c/R9wqFyqPcGS9Y+pTrxtuO8kWpiY78FjkNausthcLwoa+A5Oi2sTI+QvE9bS2vMgq3373UgyMaGSDNPaMnMs+ThCgX+lvlg3HTcg6EKECMlyjteqkrkiu54LXylRRLQb1SniBzgvA6Y7fcrsNnqeT0AYrI34VD56vBjYSQjPr8+CZYOYZMiYY/UiPjidu+v2SvL43o/Z0H9wdPjR7isEnsD5OUKXXqikYKbhpCKRqL63dyFApdpksyExmMqCD3Yx9J0bM7dzDOOfeI4TvDD/Y40cII2rjkvKvwSV6xgKNvN5qRpq6tYwQYTQtnuqJQLTDJMfbxfYUqWrJsZERMoU0nUpt+PAXczuw67a4Q8F+JsjsdmMm543ZBUsx6taGuBOgU7ZHV2PC5dCxbjXHWctA8H9kGKfbzAp0WMnvUCI2QTevxGM9vck8w9/mClA5a4Bf2ojCq0kCmgivXlDdjOr9hDKsmOKSoT8h/7Ga/5qU90psY7M7/TFXV+Ba
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:ZQ0PR01MB1063.CHNPR01.prod.partner.outlook.cn; PTR:;
- CAT:NONE; SFS:(13230031)(38350700005); DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?14Mc+5an48YemeIj1yVVnY76u7krYNYAXhQfQpM/fprwI4lSkXYHLuNoyXaB?=
- =?us-ascii?Q?hSTPpWfVgYp/k2ep3MGinTXQGyU5lm25TJOdbCGRCdhpGSrIXMqREiPCkZV7?=
- =?us-ascii?Q?7rnqkX53AbSzzAfaNRl8o1skN4aw3F8ahPTfxKNvaAv/hkhU1ptjiEu0M0cg?=
- =?us-ascii?Q?rzbc6qBeJ/Fk2OV+7YKI/6GxmFdqp/e9kXEk9hAQQEODmUDg/q2cYOuu7V0u?=
- =?us-ascii?Q?nwCZaGmo50z8DSbvqqLBLfmc7K8rSUdykh7c5sucKfN39/AqkhKiGoaJIjzx?=
- =?us-ascii?Q?mFp4sqw322zVi08TfJpM4OA1WHwoTia3ut723+HIYwvZ7EPoL40v3/klyt6X?=
- =?us-ascii?Q?pJ1tfckyWPfaLGk6vziixTRraiJMxaP37CBjPu/AHvvnh6RKJFUtKcxWBIGF?=
- =?us-ascii?Q?GIrUfSz1+FcmFsDH+gEMjqYvq+8/52GiLjRguRzybHhzTQCtvktxkniPnf3e?=
- =?us-ascii?Q?+2GEWVgsIxGE9YkBewNOsnaRCPQ1supgbwhjLmgf6NKee3GEsqSmnJ1mg8ny?=
- =?us-ascii?Q?8uKX05wd8f6lgIbV41cRBBs3NmnkHvOd10Y292IDJlR2to34QOTvPOdG5Acb?=
- =?us-ascii?Q?f178ujr/2UTC7uSedYLM7sNcWWnyuWebtxIls197/4tujlBl/NQx+bc6WPKh?=
- =?us-ascii?Q?Flec9nyJFnPu30C3ox7fSwh4LAHqxfBlN2C9TaipuU9T7uxMPP1vXyOagJyL?=
- =?us-ascii?Q?ph5tigrj4rQOD9vscBrv9/b64GG9rwzNDLmr8hjHXlQ2ZVVPMl5Jz91Kvq53?=
- =?us-ascii?Q?gDnxLH6C26oOjMbV/CAZgykQN+oa6p2l4OyYRnnCopG3KTmQp4btxTYzbNOW?=
- =?us-ascii?Q?ZvR5wmKAm7W88odN6L02caSO9bfaU3i2xF5Mhc/HVNx0IEDwRh6CmLKvLJt6?=
- =?us-ascii?Q?FwNQtyav7ssewLgQc0lWGZVzFo9cdfROsvymfhhBsg8BGoaOqHwJISvzWnkJ?=
- =?us-ascii?Q?dfowmTwoh/ogIbwwhY+nHUqdj8cSfyIAdWLj5uukCdFQU6Jp9zKs4rb4pnTb?=
- =?us-ascii?Q?8IGCJy4C8e93B+oczn0WuEXtlD+YtTWNHRwmNPE+TBrfi9caof8F4LPJhGTG?=
- =?us-ascii?Q?ci/mxXiPQ5xeCoyVkwWrIBJcq2sWphvaQBA4lLD9q2CyUWyyq5IzgCTeWo5M?=
- =?us-ascii?Q?ZGcoogYkhT+XQES71Tx5+gEmbt9HhJDj0oEb9u8Hz1JvNKQ7fLL8xeSyTjMe?=
- =?us-ascii?Q?A67sHHaikE9+I6uvxMvwqXhWKIMjpbRZJrQui4uwYWZCZiEQqWwKaWm0oVZM?=
- =?us-ascii?Q?LHeLuSckyX869Bbkn/+7p63o5UKAZRrxWnSoq0oz7RGegkDic6RWR6VOJ9ml?=
- =?us-ascii?Q?3gG9NYNndlitpkuD4xBJ2Hf9pAmOQo5MyKK/Sb4nXs8l2/ATosXQWdnwcKbT?=
- =?us-ascii?Q?U3eHDvnV5tdi5QPPAXcoisQRTicqF2aMWn9Wlw2qmNZ1LOrOmNDSvBbxadoK?=
- =?us-ascii?Q?RptHjqYPwEdv1k2Z6tEa/4nS0xmM75ScEsNxf/S2SSZuaRmmntZVSHSQyRVW?=
- =?us-ascii?Q?ZKpMXGsonJQNqX+Qbm8oM9dsBrlnsoHa1S5JGQM+haIuan8xPzLsyp4P8q8J?=
- =?us-ascii?Q?5N/imoyEWzJHfmLTdBQ3ZOfwkTiDkVjYHX8ctk46v8/IwzsxuB+tys6bqHAH?=
- =?us-ascii?Q?kQ=3D=3D?=
-X-OriginatorOrg: starfivetech.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 739d89d5-f71e-4e4f-26ad-08dc3628fc4f
-X-MS-Exchange-CrossTenant-AuthSource: ZQ0PR01MB1063.CHNPR01.prod.partner.outlook.cn
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Feb 2024 17:41:24.1868 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 7mtCpX1h16vQ8Gfnw8ZdtoCmP6V4m6XDg/+oiHw5XVVLOkmnyeK7V9UHTybBBGk5g+U9ewiO4Jnsi03Oj0ekHci3ZORJHADZRa/iJyJL6hc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZQ0PR01MB1304
-Received-SPF: pass client-ip=2406:e500:4440:2::721;
- envelope-from=demin.han@starfivetech.com;
- helo=CHN02-BJS-obe.outbound.protection.partner.outlook.cn
+References: <20240223022119.41255-1-alvinga@andestech.com>
+In-Reply-To: <20240223022119.41255-1-alvinga@andestech.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 26 Feb 2024 10:25:14 +1000
+Message-ID: <CAKmqyKMkXf8mJvwh2vDEGh2fq-5AP2yz2Y9k-UH1D6MuW6CgTA@mail.gmail.com>
+Subject: Re: [PATCH v2 0/4] RISC-V: Modularize common match conditions for
+ trigger
+To: Alvin Chang <alvinga@andestech.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, alistair.francis@wdc.com, 
+ bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com, 
+ zhiwei_liu@linux.alibaba.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92d;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92d.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -126,45 +93,42 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The result of (8 - 3 - vlmul) is negative when vlmul >= 6,
-and results in wrong vill.
+On Fri, Feb 23, 2024 at 12:22=E2=80=AFPM Alvin Chang via <qemu-devel@nongnu=
+.org> wrote:
+>
+> According to RISC-V Debug specification, the enabled privilege levels of
 
-Signed-off-by: demin.han <demin.han@starfivetech.com>
----
-Changes in v2:
-- Add vlen var
+Can you specify what version of the debug spec?
 
-Changes in v3:
-- Fix commit msg typo
+Ideally if you can link directly to the PDF that would be very useful.
+There are multiple versions so it's hard to keep track of.
 
- target/riscv/vector_helper.c | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+Alistair
 
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 84cec73eb2..fe56c007d5 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -44,6 +44,7 @@ target_ulong HELPER(vsetvl)(CPURISCVState *env, target_ulong s1,
-     target_ulong reserved = s2 &
-                             MAKE_64BIT_MASK(R_VTYPE_RESERVED_SHIFT,
-                                             xlen - 1 - R_VTYPE_RESERVED_SHIFT);
-+    uint16_t vlen = cpu->cfg.vlenb << 3;
-     int8_t lmul;
- 
-     if (vlmul & 4) {
-@@ -53,10 +54,8 @@ target_ulong HELPER(vsetvl)(CPURISCVState *env, target_ulong s1,
-          * VLEN * LMUL >= SEW
-          * VLEN >> (8 - lmul) >= sew
-          * (vlenb << 3) >> (8 - lmul) >= sew
--         * vlenb >> (8 - 3 - lmul) >= sew
-          */
--        if (vlmul == 4 ||
--            cpu->cfg.vlenb >> (8 - 3 - vlmul) < sew) {
-+        if (vlmul == 4 || (vlen >> (8 - vlmul)) < sew) {
-             vill = true;
-         }
-     }
--- 
-2.43.2
-
+> the trigger is common match conditions for all the types of the trigger.
+> This series modularize the code for checking the privilege levels of
+> type 2/3/6 triggers by implementing functions trigger_common_match()
+> and trigger_priv_match().
+>
+> Additional match conditions, such as CSR tcontrol and textra, can be
+> further implemented into trigger_common_match() in the future.
+>
+> Changes from v1:
+> - Fix typo
+> - Add commit description for changing behavior of looping the triggers
+>   when we check type 2 triggers.
+>
+> Alvin Chang (4):
+>   target/riscv: Add functions for common matching conditions of trigger
+>   target/riscv: Apply modularized matching conditions for breakpoint
+>   target/riscv: Apply modularized matching conditions for watchpoint
+>   target/riscv: Apply modularized matching conditions for icount trigger
+>
+>  target/riscv/debug.c | 124 +++++++++++++++++++++++++++++--------------
+>  1 file changed, 83 insertions(+), 41 deletions(-)
+>
+> --
+> 2.34.1
+>
+>
 
