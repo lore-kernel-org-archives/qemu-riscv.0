@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8A8AC5478C
-	for <qemu-riscv@archiver.kernel.org>; Mon, 26 Feb 2024 17:01:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F948C5478C
+	for <qemu-riscv@archiver.kernel.org>; Mon, 26 Feb 2024 17:01:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1reeIl-0007HS-Fx; Mon, 26 Feb 2024 11:58:03 -0500
+	id 1reeIO-0006D0-UA; Mon, 26 Feb 2024 11:57:40 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1reeIk-00075i-72
- for qemu-riscv@nongnu.org; Mon, 26 Feb 2024 11:58:02 -0500
-Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
+ id 1reeIH-0005ww-IU
+ for qemu-riscv@nongnu.org; Mon, 26 Feb 2024 11:57:33 -0500
+Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1reeHv-0007lt-3Y
- for qemu-riscv@nongnu.org; Mon, 26 Feb 2024 11:58:01 -0500
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-412a9a3dba2so2854705e9.2
- for <qemu-riscv@nongnu.org>; Mon, 26 Feb 2024 08:57:05 -0800 (PST)
+ id 1reeHl-0007dV-9l
+ for qemu-riscv@nongnu.org; Mon, 26 Feb 2024 11:57:33 -0500
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-412a87f0d8eso4459085e9.2
+ for <qemu-riscv@nongnu.org>; Mon, 26 Feb 2024 08:56:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708966624; x=1709571424; darn=nongnu.org;
+ d=linaro.org; s=google; t=1708966613; x=1709571413; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DS/EGY2tGxoW2u4p636lnzJLhbzW+SUrMSj5Qfa0kZY=;
- b=ZV3vCPUtz1IeVn0WCT7JjlsxfmyT+rLn56AsodqWxsmELVOOarHX5b/7flJMVjledJ
- HHccpSD/WPShDLKdWSc5e9XVvQppGW1lJ2F2+TCLR6Sox+tnTEkc22hpxyP23x6CpS24
- p71u8GoCevZdhAFfvQYUFQ5je1lzrVKAwtl7MZ+46T5pIrKyUmSIHaXHwYQ7VfyMVJtU
- WuRWyc+b1FKz2TkQp5X8cCif8G1lN15WiCx5b/Vl4T8u+HFz8YF7g2RthKILErzijpDk
- bAhTC+5YwzM2Rkn3nqgxN7M7I9MeUj3EkRxAtfYMfKTl4Lz/cLruXQsloziMLyxx8+ld
- 2G6Q==
+ bh=sYddgSiv4TdBqJm1PnHuh0lKMNJczxN97MFaER3IoIY=;
+ b=Dgk5iUk2BDMljYerivm3CcAoB6/L8l/Kc3uMX8Xigwp+SIlRCjUMLAhShyC3EhtOOF
+ vWo4zIXNG3blrjZNiVbaSdzs+yT7/JVYdiPM9GFEs2h0EszmCgaVVEE1l8gZKiCwEuNi
+ VOvSKlD8paS6J0RtKZPt4ribhNYyN+9eAp8hn9kIWEqMYdbXGrlSlUH7q2JnHD5cDb1L
+ ix31azRI0aZjWcQ+mRG9GsLD32JerJMkd887VPTW43sZon7pjnn58qvbIsPB1rETOWLr
+ wXEiBptM47QNiHC1ASfYBk7mOrWG42EP/PTfWK6KxuVfADc84aHDyaWKBfRsPDH/1v9q
+ ImkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708966624; x=1709571424;
+ d=1e100.net; s=20230601; t=1708966613; x=1709571413;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DS/EGY2tGxoW2u4p636lnzJLhbzW+SUrMSj5Qfa0kZY=;
- b=GOFNK9/YHJlxn1rYO4TSRNACEkDH2UzleWVR2lLoFVbEw/lpsp3fuOoevkD1lUKP8P
- y5eMlaw2eUbp+0XlQkIF91jbcQmbzHJhbh+8NhmhrgS9I/s+uKTOLuuLajWZSu4GC++o
- ELf+eQuBElIo+wmz78oV9wWKNxQVbFW4B0whZ5UEVF2o02j3k8BKQFla0Y1low9CEgRI
- s+WUuDB5yOiH9po52J+Cs7TiKY85dBgTvTDJFajBbnd/5XUYtFIbgSvl5WLsadzI20YU
- p2lgwdfn7EI5iSYCe6ZwDe89GVuDvNxX3DqyCMPI6fbXoVd+hYdGUGzQQ/1GQG5VezKJ
- BV3w==
+ bh=sYddgSiv4TdBqJm1PnHuh0lKMNJczxN97MFaER3IoIY=;
+ b=QYYcxeRD0rqtrI7Y/7oemdTLFDJDkBPbZN6uwOFhrhlEET7w+BkhPF6yxFqhp2tVea
+ 6+z677d9b7lvayen71mnZg0OlNDmYsIRTS7PN+75WgzQV3IB29dZ/YsgdMELlIUvXCls
+ E3H9t9zdGZKm1dCJb9GfDpeYHCvo6bkyqNwkaofHF7/z2oVwxvVst10FC4ODkpl/Zn19
+ rsfIVDQ7R5re2//WMAlkxvrm0Kr+NQaP/IDCn+06iD4/7M+3KLDC6Nvc9CVymdMNL0zh
+ gyIaRv0d3khcMKj1i4nukk2siLYjXLZehf/8LMkB1mQMpySczADXpE8QcRFcPnEVgibm
+ NpIQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXsZavRGdVZD/olWNHdgGm/5u2QzlBfyf8gWu5CDbujPLOAz17FAySCrb7hk1VW+cC2CKPkIWaYFS1+Xdefbji1odPnVnw=
-X-Gm-Message-State: AOJu0YzqBnxCFCjlhTWdwlz/Io+dWUQUhR3xzpTiIVW/nDYePhOvoxPN
- +L5zKoux1WfKAyLU3V1Zj/ht4gPgHdfaizJTQZ6dowlb+2L+0JQ1fSq9MOyAlqg=
-X-Google-Smtp-Source: AGHT+IHvzDyWOlzzxecmLxmVnIW5FpI5JNQnMKK3T+9/7uHGxXBtbdsVFcilr0cJVNl+VjOUoiVfZg==
-X-Received: by 2002:a05:600c:5198:b0:412:a9e1:ed8b with SMTP id
- fa24-20020a05600c519800b00412a9e1ed8bmr286685wmb.27.1708966624207; 
- Mon, 26 Feb 2024 08:57:04 -0800 (PST)
+ AJvYcCVxRB9x3nzAXaNAVdKv0OoUwdiRJJM/lx1pzd27EfnRX4nEpiiWRw8y9AmwMrsRsZKsuLY/sN/oiev1BMsQ06IcfgC7fEk=
+X-Gm-Message-State: AOJu0Yx7rz97AC8DDgaEx+bOLpzg6V9oJQd4DTo0Ovx+H+uwzuOD9Cdj
+ OTLHWb2kQK1L/sLW5LN8HHbrfvDxzL7/lgHmhEdW2tJYt0wjK6emxj/wMB0wzzg=
+X-Google-Smtp-Source: AGHT+IF4Kzq2+aaetRXNsGrKPIJjub2/ifnXaEdfPS5tH9Uw3PDc5YKG/1jaZ06zcJk84SR8HECcGg==
+X-Received: by 2002:a05:600c:c17:b0:412:a482:cd75 with SMTP id
+ fm23-20020a05600c0c1700b00412a482cd75mr2722211wmb.7.1708966613463; 
+ Mon, 26 Feb 2024 08:56:53 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- q8-20020a7bce88000000b004101543e843sm12440932wmj.10.2024.02.26.08.56.53
+ be13-20020a05600c1e8d00b004129ed6f9cbsm8101711wmb.4.2024.02.26.08.56.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Feb 2024 08:56:59 -0800 (PST)
+ Mon, 26 Feb 2024 08:56:50 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 5A0285F929;
- Mon, 26 Feb 2024 16:56:48 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 5F59E5F90D;
+ Mon, 26 Feb 2024 16:56:47 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Nicholas Piggin <npiggin@gmail.com>,
@@ -88,18 +88,19 @@ Cc: Nicholas Piggin <npiggin@gmail.com>,
  Bin Meng <bin.meng@windriver.com>, Laurent Vivier <laurent@vivier.eu>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Daniel Henrique Barboza <danielhb413@gmail.com>,
- Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v3 16/27] linux-user: ensure nios2 processes queued work
-Date: Mon, 26 Feb 2024 16:56:35 +0000
-Message-Id: <20240226165646.425600-17-alex.bennee@linaro.org>
+ Alistair Francis <alistair.francis@wdc.com>,
+ Akihiko Odaki <akihiko.odaki@daynix.com>
+Subject: [PATCH v3 07/27] gdbstub: Use GDBFeature for GDBRegisterState
+Date: Mon, 26 Feb 2024 16:56:26 +0000
+Message-Id: <20240226165646.425600-8-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240226165646.425600-1-alex.bennee@linaro.org>
 References: <20240226165646.425600-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::330;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x330.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -122,32 +123,85 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-While async processes are rare for linux-user we do use them from time
-to time. The most obvious one is tb_flush when we run out of
-translation space. We will also need this when we move plugin
-vcpu_init to an async task.
+From: Akihiko Odaki <akihiko.odaki@daynix.com>
 
-Fix nios2 to follow its older, wiser and more stable siblings.
+Simplify GDBRegisterState by replacing num_regs and xml members with
+one member that points to GDBFeature.
 
-Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Message-Id: <20240103173349.398526-31-alex.bennee@linaro.org>
+Message-Id: <20231213-gdb-v17-5-777047380591@daynix.com>
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- linux-user/nios2/cpu_loop.c | 1 +
- 1 file changed, 1 insertion(+)
+ gdbstub/gdbstub.c | 14 ++++++--------
+ 1 file changed, 6 insertions(+), 8 deletions(-)
 
-diff --git a/linux-user/nios2/cpu_loop.c b/linux-user/nios2/cpu_loop.c
-index da77ede76bd..7fe08c87501 100644
---- a/linux-user/nios2/cpu_loop.c
-+++ b/linux-user/nios2/cpu_loop.c
-@@ -32,6 +32,7 @@ void cpu_loop(CPUNios2State *env)
-         cpu_exec_start(cs);
-         trapnr = cpu_exec(cs);
-         cpu_exec_end(cs);
-+        process_queued_cpu_work(cs);
+diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
+index 256599c8dfb..0ea417b2c9a 100644
+--- a/gdbstub/gdbstub.c
++++ b/gdbstub/gdbstub.c
+@@ -47,10 +47,9 @@
  
-         switch (trapnr) {
-         case EXCP_INTERRUPT:
+ typedef struct GDBRegisterState {
+     int base_reg;
+-    int num_regs;
+     gdb_get_reg_cb get_reg;
+     gdb_set_reg_cb set_reg;
+-    const char *xml;
++    const GDBFeature *feature;
+ } GDBRegisterState;
+ 
+ GDBState gdbserver_state;
+@@ -391,7 +390,7 @@ static const char *get_feature_xml(const char *p, const char **newp,
+                     g_ptr_array_add(
+                         xml,
+                         g_markup_printf_escaped("<xi:include href=\"%s\"/>",
+-                                                r->xml));
++                                                r->feature->xmlname));
+                 }
+             }
+             g_ptr_array_add(xml, g_strdup("</target>"));
+@@ -513,7 +512,7 @@ static int gdb_read_register(CPUState *cpu, GByteArray *buf, int reg)
+     if (cpu->gdb_regs) {
+         for (guint i = 0; i < cpu->gdb_regs->len; i++) {
+             r = &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
+-            if (r->base_reg <= reg && reg < r->base_reg + r->num_regs) {
++            if (r->base_reg <= reg && reg < r->base_reg + r->feature->num_regs) {
+                 return r->get_reg(env, buf, reg - r->base_reg);
+             }
+         }
+@@ -534,7 +533,7 @@ static int gdb_write_register(CPUState *cpu, uint8_t *mem_buf, int reg)
+     if (cpu->gdb_regs) {
+         for (guint i = 0; i < cpu->gdb_regs->len; i++) {
+             r =  &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
+-            if (r->base_reg <= reg && reg < r->base_reg + r->num_regs) {
++            if (r->base_reg <= reg && reg < r->base_reg + r->feature->num_regs) {
+                 return r->set_reg(env, mem_buf, reg - r->base_reg);
+             }
+         }
+@@ -553,7 +552,7 @@ void gdb_register_coprocessor(CPUState *cpu,
+         for (i = 0; i < cpu->gdb_regs->len; i++) {
+             /* Check for duplicates.  */
+             s = &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
+-            if (strcmp(s->xml, feature->xmlname) == 0) {
++            if (s->feature == feature) {
+                 return;
+             }
+         }
+@@ -565,10 +564,9 @@ void gdb_register_coprocessor(CPUState *cpu,
+     g_array_set_size(cpu->gdb_regs, i + 1);
+     s = &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
+     s->base_reg = cpu->gdb_num_regs;
+-    s->num_regs = feature->num_regs;
+     s->get_reg = get_reg;
+     s->set_reg = set_reg;
+-    s->xml = feature->xml;
++    s->feature = feature;
+ 
+     /* Add to end of list.  */
+     cpu->gdb_num_regs += feature->num_regs;
 -- 
 2.39.2
 
