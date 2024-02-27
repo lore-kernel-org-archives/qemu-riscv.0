@@ -4,110 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 674DDC54798
-	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Feb 2024 10:59:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB3D9C54798
+	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Feb 2024 14:44:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1revAt-0002Mp-NE; Tue, 27 Feb 2024 05:59:04 -0500
+	id 1reygf-0005Sd-AD; Tue, 27 Feb 2024 09:44:05 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1revAp-0002Km-89
- for qemu-riscv@nongnu.org; Tue, 27 Feb 2024 05:58:59 -0500
-Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a])
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1reygZ-0005Pl-G9
+ for qemu-riscv@nongnu.org; Tue, 27 Feb 2024 09:44:00 -0500
+Received: from mail-lj1-x22c.google.com ([2a00:1450:4864:20::22c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1revAl-0004cw-BJ
- for qemu-riscv@nongnu.org; Tue, 27 Feb 2024 05:58:59 -0500
-Received: by mail-pj1-x102a.google.com with SMTP id
- 98e67ed59e1d1-29ab7073dd2so1478336a91.0
- for <qemu-riscv@nongnu.org>; Tue, 27 Feb 2024 02:58:53 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1reygF-0001x3-HC
+ for qemu-riscv@nongnu.org; Tue, 27 Feb 2024 09:43:59 -0500
+Received: by mail-lj1-x22c.google.com with SMTP id
+ 38308e7fff4ca-2d28464c554so37514171fa.3
+ for <qemu-riscv@nongnu.org>; Tue, 27 Feb 2024 06:43:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1709031532; x=1709636332;
- darn=nongnu.org; 
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=TsDmIcNCrVwkgpZ3Rq+Sniy+ldkymAQlv95cwgKc05Q=;
- b=SnwFljKyC+A7tup8a1RwtjQ4D6/sUBTMkAqoUeaOT4MrHzYE/xhinXtGbZINfB2D/6
- jSOvvI6H4nHBvky58zATnXlfMv5PiZJHwJd4AW7aOMNpJUQeOX1kbhoyAaQzVu1s89pE
- n+jchiVa9gGRJMpNxBoyTXOx9pWKULVSQGsnIy81wG7ctXKCItXbXAQMBzxcPKnNe//S
- zeqoilKymCo6IOWFA6/jBGfiHv/0TTlEKi3aa+216gXIPJAtg6UeGv8+luj3SQskQ9Xn
- gvrgvL4Yt1/ptp8LapkUYQn3YrETppmvwaax7TesYmOdC5ynBN7HJTAR9xp6y9Nn+EHn
- gzCg==
+ d=linaro.org; s=google; t=1709045016; x=1709649816; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=gWUgYgGbBq0Rftb97XkjY8209ZR6PASvKOfa7J1VRq0=;
+ b=DsEusL3mp+pNDNgSdfIXipYTEHMwIv1C5wv+x6tYby4+6Z6oTuRIBmYCbEPnhVnQbp
+ vl2d8JKa5sXyKEXX60tkipRD30kIV3DYiA3hwZvembxZrB3cF2QE+K5QXGub2Izf8x2/
+ wBXWolq+TG5VNirEHyNkwtW2uOhiQ0l4E6bvin842+U8HYBOXm7Qli7OMsnHpagxzSf6
+ AG1EbaEZ8o5AAtXCwCeUwowCSlcV4MApJyzH2JLyKkQ2J6B0/3zcpSOLV8xuqwMLM3Ux
+ nWHNPiSwih9ILpiMpxhruUA4+4AtjP5RAiaTc7RwqsrPqbcnSpYTjO4GzOLCI9QHAiar
+ gEeg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709031532; x=1709636332;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=TsDmIcNCrVwkgpZ3Rq+Sniy+ldkymAQlv95cwgKc05Q=;
- b=iEBj5LSpWWZTOie0sS7FTgzNcHNLb4ys/fzubdxeeaF/zmYM7DwgRxHjoP1Jylo8+m
- QqS3KO/qxY2cNFCAI9gVzjCir9lhP29geWeaysASAM7Q1WjtMVkI6m82Z/okUmrD3Ee1
- 85oHKDj9RrH0S6V7egcVb/EJ5QVEafc/NELQE00tXZwaU8Wjx3CE1czZl1h163jdCR21
- Jw80010kUZ5/d0wZSDDA0N7nNLCZEdwDcyAkTUAbnFvqJq9wwI7hUawG3WmaBaSWCvGW
- VGTjOHyS3PXlRH+wM7b6i7CltIL6fVZ13TWtIV4j01bDGlnhc1Z1Qylp6+94VsxaFOec
- 7YgA==
+ d=1e100.net; s=20230601; t=1709045016; x=1709649816;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=gWUgYgGbBq0Rftb97XkjY8209ZR6PASvKOfa7J1VRq0=;
+ b=DOIym3hN5A/Dtj4kD/YR5KygYAtt4EVuUMfVg3XzyGhRcaWquheUTIJIdoocT2aJyk
+ edTOD+TOvuzLITC5djV0MplqbOXEDfUF4NfsFUCSGgL/wPCItoJaeWrjsbAfsRg7d+uX
+ vw2F0uWoTerh49xN9TEOFfhAvYdMdVS5OXalg/Ix82w0/jhCD7LFeXEasyKFcAZzkZsf
+ 6OwASust3YvqI71xtho9pjjU4oS/SpP4diyiEDbTrreKesbTZKn2z3sOPXH1vYo6p7lV
+ a9d47eTw1WTibIWAviziw15mH9lrghfCJdafertpsBcIwDK/lYqRZS1kzuYZ9vFbVyPH
+ ijYg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUOg9Qc9C0y4wS56CpvYrHA9JcLAwq+VB4adOvSB4/qQ4TH6C1RIhyQk2wYErs7K+ATmDMPjkmex1kkpa9e/2tzbsUG/BQ=
-X-Gm-Message-State: AOJu0YxM14uJN6HWbfz+2SmDFiQBt7McNEQynYBAPYONTGXVGeTW8L3t
- bchqf7Wv+NRfsGtnhBY3OS04cq3wl61C4SiQmrLKIOuaOOybRMwD56+7OIp2cPI=
-X-Google-Smtp-Source: AGHT+IE/xiDOvK/3wPL4R00Ude4nZVASCnxuRQ+do4oShLbadK9+gnNEMWTWVVSbYfenFG/UxyRKTw==
-X-Received: by 2002:a17:90b:4a03:b0:298:b9e3:691f with SMTP id
- kk3-20020a17090b4a0300b00298b9e3691fmr7038770pjb.23.1709031532662; 
- Tue, 27 Feb 2024 02:58:52 -0800 (PST)
-Received: from [157.82.203.206] ([157.82.203.206])
- by smtp.gmail.com with ESMTPSA id
- u3-20020a17090ac88300b0029a4db713b9sm8183679pjt.39.2024.02.27.02.58.45
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 27 Feb 2024 02:58:52 -0800 (PST)
-Message-ID: <20e4981d-6378-4293-8625-7c24bb499f41@daynix.com>
-Date: Tue, 27 Feb 2024 19:58:43 +0900
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 21/27] plugins: add an API to read registers
-Content-Language: en-US
-To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
-Cc: qemu-devel@nongnu.org, Nicholas Piggin <npiggin@gmail.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, =?UTF-8?Q?C=C3=A9dric_Le_Goater?=
- <clg@kaod.org>, Peter Maydell <peter.maydell@linaro.org>,
- qemu-riscv@nongnu.org, Michael Rolnik <mrolnik@gmail.com>,
- Song Gao <gaosong@loongson.cn>, Alexandre Iooss <erdnaxe@crans.org>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- David Hildenbrand <david@redhat.com>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>, John Snow
- <jsnow@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
- Mahmoud Mandour <ma.mandourr@gmail.com>, qemu-arm@nongnu.org,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>, Cleber Rosa <crosa@redhat.com>,
- qemu-ppc@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
- qemu-s390x@nongnu.org, Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Thomas Huth <thuth@redhat.com>, Yoshinori Sato <ysato@users.sourceforge.jp>,
- Yanan Wang <wangyanan55@huawei.com>, Brian Cain <bcain@quicinc.com>,
- Ilya Leoshkevich <iii@linux.ibm.com>, Weiwei Li <liwei1518@gmail.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Bin Meng <bin.meng@windriver.com>, Laurent Vivier <laurent@vivier.eu>,
- Palmer Dabbelt <palmer@dabbelt.com>,
+ AJvYcCXmNtiGyWg0HWbk6o9RdRXUfE5vE2p1LiUPx/WkHq9nt/XXB4gu+LBl+iOyUs6CCdu0Qnf/xlIgSawlgd9c5rAo9hrGhL4=
+X-Gm-Message-State: AOJu0Yw4wGavcTDLC4o9/50W4m5UbGfrMPa44cNUZIdiesOaXgPD18FQ
+ QbVsDwsj3cSy5Gcp1zijOYT+cz0Rxa5U9PrSkxgIX7xogrs2rQYt+kMJEiAe9jw=
+X-Google-Smtp-Source: AGHT+IHiWkm0zLvHy0VujHECXA+/T4fBxoW067Z6kPSf83rVULgXuztBLmC3PPGLPkr26yR47wOHkw==
+X-Received: by 2002:a2e:a9a6:0:b0:2d2:4348:766 with SMTP id
+ x38-20020a2ea9a6000000b002d243480766mr3771768ljq.19.1709045016097; 
+ Tue, 27 Feb 2024 06:43:36 -0800 (PST)
+Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
+ q14-20020a05600c46ce00b00411a6ce0f99sm11515764wmo.24.2024.02.27.06.43.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 27 Feb 2024 06:43:35 -0800 (PST)
+Received: from draig.lan (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id 641355F753;
+ Tue, 27 Feb 2024 14:43:35 +0000 (GMT)
+From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: qemu-ppc@nongnu.org, Yoshinori Sato <ysato@users.sourceforge.jp>,
+ qemu-arm@nongnu.org, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Michael Rolnik <mrolnik@gmail.com>, Yanan Wang <wangyanan55@huawei.com>,
+ Eduardo Habkost <eduardo@habkost.net>,
+ Wainer dos Santos Moschetta <wainersm@redhat.com>,
+ Beraldo Leal <bleal@redhat.com>, Cleber Rosa <crosa@redhat.com>,
+ David Hildenbrand <david@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>, Song Gao <gaosong@loongson.cn>,
  Daniel Henrique Barboza <danielhb413@gmail.com>,
- Alistair Francis <alistair.francis@wdc.com>
-References: <20240226165646.425600-1-alex.bennee@linaro.org>
- <20240226165646.425600-22-alex.bennee@linaro.org>
- <b7aac53e-cde5-4596-b0fc-d39f52d4ceb8@daynix.com>
- <878r36dxsv.fsf@draig.linaro.org>
- <485e6093-54e9-4ce4-ae01-c44525b202ef@daynix.com>
- <8734tedwun.fsf@draig.linaro.org>
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
-In-Reply-To: <8734tedwun.fsf@draig.linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ Laurent Vivier <laurent@vivier.eu>, Warner Losh <imp@bsdimp.com>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Alexandre Iooss <erdnaxe@crans.org>, Ilya Leoshkevich <iii@linux.ibm.com>,
+ =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
+ qemu-s390x@nongnu.org, Kyle Evans <kevans@freebsd.org>,
+ Brad Smith <brad@comstyle.com>, Nicholas Piggin <npiggin@gmail.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>,
+ John Snow <jsnow@redhat.com>, Alistair Francis <alistair.francis@wdc.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Brian Cain <bcain@quicinc.com>, Thomas Huth <thuth@redhat.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ qemu-riscv@nongnu.org, Bin Meng <bin.meng@windriver.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Mahmoud Mandour <ma.mandourr@gmail.com>
+Subject: [PATCH v4 00/29] maintainer updates for 9.0 pre-PR (tests,
+ plugin register support)
+Date: Tue, 27 Feb 2024 14:43:06 +0000
+Message-Id: <20240227144335.1196131-1-alex.bennee@linaro.org>
+X-Mailer: git-send-email 2.39.2
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=2607:f8b0:4864:20::102a;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-pj1-x102a.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001,
+Received-SPF: pass client-ip=2a00:1450:4864:20::22c;
+ envelope-from=alex.bennee@linaro.org; helo=mail-lj1-x22c.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -124,65 +122,147 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2024/02/27 19:29, Alex Bennée wrote:
-> Akihiko Odaki <akihiko.odaki@daynix.com> writes:
-> 
->> On 2024/02/27 19:08, Alex Bennée wrote:
->>> Akihiko Odaki <akihiko.odaki@daynix.com> writes:
->>>
->>>> On 2024/02/27 1:56, Alex Bennée wrote:
->>>>> We can only request a list of registers once the vCPU has been
->>>>> initialised so the user needs to use either call the get function on
->>>>> vCPU initialisation or during the translation phase.
->>>>> We don't expose the reg number to the plugin instead hiding it
->>>>> behind
->>>>> an opaque handle. For now this is just the gdb_regnum encapsulated in
->>>>> an anonymous GPOINTER but in future as we add more state for plugins
->>>>> to track we can expand it.
->>>>> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1706
->>>>> Cc: Akihiko Odaki <akihiko.odaki@daynix.com>
->>>>> Message-Id: <20240103173349.398526-39-alex.bennee@linaro.org>
->>>>> Based-on: <20231025093128.33116-18-akihiko.odaki@daynix.com>
->>>>> Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
->>>>> Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
->>>>
->>>> Hi,
->>>>
->>>> Mostly looks good. I have a few trivial comments so please have a look
->>>> at them.
->>> Done
->>> <snip>
->>>>> +        g_array_append_val(find_data, desc);
->>>>> +    }
->>>>> +
->>>>> +    return find_data;
->>>>> +}
->>>>> +
->>>>> +GArray *qemu_plugin_get_registers(void)
->>>>> +{
->>>>> +    g_assert(current_cpu);
->>>>> +
->>>>> +    g_autoptr(GArray) regs = gdb_get_register_list(current_cpu);
->>>>> +    return regs->len ? create_register_handles(current_cpu, regs) : NULL;
->>>>
->>>> Why do you need regs->len check?
->>> Not all guests expose register to gdb so we need to catch that:
->>>     TEST    catch-syscalls-with-libinsn.so on alpha
->>> **
->>> ERROR:../../plugins/api.c:459:qemu_plugin_get_registers: assertion failed: (regs->len)
->>> Aborted
->> Certainly regs->len can be 0, but why do you need to return NULL in
->> that case? Can't qemu_plugin_get_registers() return an empty array
->> just as gdb_get_register_list() does?
-> 
-> That seems more troublesome to handle the other end. NULL is nothing is
-> a fairly common pattern here which makes short-circuiting the array
-> iteration simple.
+The test patch is a simple house keeping one to clean up some
+inadvertent GPLv3 tagging to GPLv2-or-later. I've also increased the
+timeout for check-tcg due to TCI timeouts.
 
-I'm not sure why you would want to short-circuiting array iteration. 
-Iterating an empty array is often simpler.
+The main bulk of this series is register reading support for TCG
+plugins. The main change to the API is that the get/read_register
+functions are now implicitly vCPU context only so have dropped the
+vcpu index parameter and use current_cpu instead. This avoids the need
+for locking the gdbstub structures in case there is a cross-vCPU
+access.
 
-In any case, the same logic also applies to gdb_get_register_list(), so 
-you should change gdb_get_register_list() to return NULL instead of an 
-empty array if you think that's more reasonable.
+I've pulled in some patches from Pierrick's inline enhancement series
+that allow this to happen (making sure the init callback is in the
+vCPU context).
+
+Changes for v4
+
+Addressed final comments from Akihiko
+Added BSD changes
+
+Changes for v3:
+
+Now we just use GINT_TO_POINTER to wrap the gdb_regnum with a comment
+this might become and opaque structure later. Either way the plugin
+shouldn't treat it like anything other than an anonymous handle.
+
+The following still need review:
+
+  tests/tcg: expand insn test case to exercise register API
+  gdbstub: expose api to find registers
+  tests/vm: update openbsd image to 7.4 (0 acks, 1 sobs, 1 tbs)
+  tests/vm: avoid re-building the VM images all the time
+
+But I'd like to get this merged soon so its not a mad rush before soft
+freeze and so we can get the new inline support stabilised and merged.
+
+Alex.
+
+Akihiko Odaki (11):
+  target/arm: Use GDBFeature for dynamic XML
+  target/ppc: Use GDBFeature for dynamic XML
+  target/riscv: Use GDBFeature for dynamic XML
+  gdbstub: Use GDBFeature for gdb_register_coprocessor
+  gdbstub: Use GDBFeature for GDBRegisterState
+  gdbstub: Change gdb_get_reg_cb and gdb_set_reg_cb
+  gdbstub: Simplify XML lookup
+  gdbstub: Infer number of core registers from XML
+  hw/core/cpu: Remove gdb_get_dynamic_xml member
+  gdbstub: Add members to identify registers to GDBFeature
+  plugins: Use different helpers when reading registers
+
+Alex Bennée (13):
+  tests/tcg: update licenses to GPLv2 as intended
+  tests/tcg: bump TCG test timeout to 120s
+  tests/vm: avoid re-building the VM images all the time
+  tests/vm: update openbsd image to 7.4
+  linux-user: ensure nios2 processes queued work
+  gdbstub: expose api to find registers
+  plugins: create CPUPluginState and migrate plugin_mask
+  plugins: add an API to read registers
+  tests/tcg: expand insn test case to exercise register API
+  contrib/plugins: fix imatch
+  contrib/plugins: extend execlog to track register changes
+  docs/devel: lift example and plugin API sections up
+  docs/devel: document some plugin assumptions
+
+Pierrick Bouvier (5):
+  plugins: remove previous n_vcpus functions from API
+  plugins: add qemu_plugin_num_vcpus function
+  plugins: fix order of init/idle/resume callback
+  cpu: call plugin init hook asynchronously
+  docs/devel: plugins can trigger a tb flush
+
+ docs/devel/multi-thread-tcg.rst               |   1 +
+ docs/devel/tcg-plugins.rst                    |  72 +++-
+ accel/tcg/plugin-helpers.h                    |   3 +-
+ include/exec/gdbstub.h                        |  43 ++-
+ include/hw/core/cpu.h                         |  18 +-
+ include/qemu/plugin.h                         |  14 +
+ include/qemu/qemu-plugin.h                    |  59 +++-
+ include/qemu/typedefs.h                       |   1 +
+ plugins/plugin.h                              |   6 +-
+ target/arm/cpu.h                              |  27 +-
+ target/arm/internals.h                        |  14 +-
+ target/hexagon/internal.h                     |   4 +-
+ target/microblaze/cpu.h                       |   4 +-
+ target/ppc/cpu-qom.h                          |   1 +
+ target/ppc/cpu.h                              |   5 +-
+ target/riscv/cpu.h                            |   5 +-
+ target/s390x/cpu.h                            |   2 -
+ tests/tcg/aarch64/semicall.h                  |   4 +-
+ tests/tcg/arm/semicall.h                      |   4 +-
+ tests/tcg/multiarch/float_helpers.h           |   4 +-
+ tests/tcg/riscv64/semicall.h                  |   4 +-
+ accel/tcg/plugin-gen.c                        |  46 ++-
+ contrib/plugins/cache.c                       |   2 +-
+ contrib/plugins/execlog.c                     | 318 +++++++++++++++---
+ gdbstub/gdbstub.c                             | 169 ++++++----
+ hw/core/cpu-common.c                          |  19 +-
+ linux-user/nios2/cpu_loop.c                   |   1 +
+ plugins/api.c                                 |  96 ++++--
+ plugins/core.c                                |  28 +-
+ target/arm/cpu.c                              |   2 -
+ target/arm/cpu64.c                            |   1 -
+ target/arm/gdbstub.c                          | 230 ++++++-------
+ target/arm/gdbstub64.c                        | 122 +++----
+ target/avr/cpu.c                              |   1 -
+ target/hexagon/cpu.c                          |   4 +-
+ target/hexagon/gdbstub.c                      |  10 +-
+ target/i386/cpu.c                             |   2 -
+ target/loongarch/cpu.c                        |   2 -
+ target/loongarch/gdbstub.c                    |  13 +-
+ target/m68k/cpu.c                             |   1 -
+ target/m68k/helper.c                          |  26 +-
+ target/microblaze/cpu.c                       |   6 +-
+ target/microblaze/gdbstub.c                   |  14 +-
+ target/ppc/cpu_init.c                         |   7 -
+ target/ppc/gdbstub.c                          | 114 ++++---
+ target/riscv/cpu.c                            |  15 -
+ target/riscv/gdbstub.c                        | 145 ++++----
+ target/rx/cpu.c                               |   1 -
+ target/s390x/cpu.c                            |   1 -
+ target/s390x/gdbstub.c                        | 105 +++---
+ tests/plugin/insn.c                           |  21 ++
+ .../multiarch/arm-compat-semi/semiconsole.c   |   4 +-
+ .../multiarch/arm-compat-semi/semihosting.c   |   4 +-
+ tests/tcg/multiarch/float_convd.c             |   4 +-
+ tests/tcg/multiarch/float_convs.c             |   4 +-
+ tests/tcg/multiarch/float_madds.c             |   4 +-
+ tests/tcg/multiarch/libs/float_helpers.c      |   4 +-
+ plugins/qemu-plugins.symbols                  |   5 +-
+ scripts/feature_to_c.py                       |  14 +-
+ tests/tcg/Makefile.target                     |   9 +-
+ tests/tcg/i386/system/boot.S                  |   6 +-
+ tests/tcg/x86_64/system/boot.S                |   6 +-
+ tests/vm/Makefile.include                     |   2 +-
+ tests/vm/basevm.py                            |   4 +-
+ tests/vm/openbsd                              |   9 +-
+ 65 files changed, 1235 insertions(+), 661 deletions(-)
+
+-- 
+2.39.2
+
 
