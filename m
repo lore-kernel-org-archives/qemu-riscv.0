@@ -4,44 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 577BEC5478C
-	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Feb 2024 01:24:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7904C54E41
+	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Feb 2024 01:25:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1remCx-0003wD-Sp; Mon, 26 Feb 2024 20:24:36 -0500
+	id 1remD3-0003xi-Fu; Mon, 26 Feb 2024 20:24:41 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alvinga@andestech.com>)
- id 1remCv-0003vk-20
- for qemu-riscv@nongnu.org; Mon, 26 Feb 2024 20:24:33 -0500
+ id 1remD1-0003x3-7b
+ for qemu-riscv@nongnu.org; Mon, 26 Feb 2024 20:24:40 -0500
 Received: from 60-248-80-70.hinet-ip.hinet.net ([60.248.80.70]
  helo=Atcsqr.andestech.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alvinga@andestech.com>)
- id 1remCr-0000Cv-J6
- for qemu-riscv@nongnu.org; Mon, 26 Feb 2024 20:24:31 -0500
+ id 1remCz-0000Da-I6
+ for qemu-riscv@nongnu.org; Mon, 26 Feb 2024 20:24:39 -0500
 Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 41R1OE3q023303;
- Tue, 27 Feb 2024 09:24:14 +0800 (+08)
+ by Atcsqr.andestech.com with ESMTP id 41R1OOTH023360;
+ Tue, 27 Feb 2024 09:24:24 +0800 (+08)
  (envelope-from alvinga@andestech.com)
 Received: from alvinga-VirtualBox.andestech.com (10.0.13.68) by
  ATCPCS16.andestech.com (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0; 
- Tue, 27 Feb 2024 09:24:09 +0800
+ Tue, 27 Feb 2024 09:24:20 +0800
 To: <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>
 CC: <alistair.francis@wdc.com>, <bin.meng@windriver.com>,
  <liwei1518@gmail.com>, <dbarboza@ventanamicro.com>,
  <zhiwei_liu@linux.alibaba.com>, Alvin Chang <alvinga@andestech.com>
-Subject: [PATCH v4 0/4] RISC-V: Modularize common match conditions for trigger
-Date: Tue, 27 Feb 2024 09:24:01 +0800
-Message-ID: <20240227012405.71650-1-alvinga@andestech.com>
+Subject: [PATCH v4 2/4] target/riscv: Apply modularized matching conditions
+ for breakpoint
+Date: Tue, 27 Feb 2024 09:24:03 +0800
+Message-ID: <20240227012405.71650-3-alvinga@andestech.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240227012405.71650-1-alvinga@andestech.com>
+References: <20240227012405.71650-1-alvinga@andestech.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [10.0.13.68]
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 41R1OE3q023303
+X-MAIL: Atcsqr.andestech.com 41R1OOTH023360
 Received-SPF: pass client-ip=60.248.80.70; envelope-from=alvinga@andestech.com;
  helo=Atcsqr.andestech.com
 X-Spam_score_int: -8
@@ -67,41 +70,76 @@ From:  Alvin Chang via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-According to RISC-V Debug specification ratified version 0.13 [1]
-(also applied to version 1.0 [2] but it has not been ratified yet), the
-enabled privilege levels of the trigger is common match conditions for
-all the types of the trigger.
+We have implemented trigger_common_match(), which checks if the enabled
+privilege levels of the trigger match CPU's current privilege level.
+Remove the related code in riscv_cpu_debug_check_breakpoint() and invoke
+trigger_common_match() to check the privilege levels of the type 2 and
+type 6 triggers for the breakpoints.
 
-This series modularize the code for checking the privilege levels of
-type 2/3/6 triggers by implementing functions trigger_common_match()
-and trigger_priv_match().
+This commit also changes the behavior of looping the triggers. In
+previous implementation, if we have a type 2 trigger and
+env->virt_enabled is true, we directly return false to stop the loop.
+Now we keep looping all the triggers until we find a matched trigger.
 
-Additional match conditions, such as CSR tcontrol and textra, can be
-further implemented into trigger_common_match() in the future.
+Only the execution bit and the executed PC should be futher checked in
+riscv_cpu_debug_check_breakpoint().
 
-[1]: https://github.com/riscv/riscv-debug-spec/releases/tag/task_group_vote
-[2]: https://github.com/riscv/riscv-debug-spec/releases/tag/1.0.0-rc1-asciidoc
+Signed-off-by: Alvin Chang <alvinga@andestech.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/debug.c | 26 ++++++--------------------
+ 1 file changed, 6 insertions(+), 20 deletions(-)
 
-Changes from v3:
-- Change this series to target Debug Spec. version 0.13
-
-Changes from v2:
-- Explicitly mention the targeting version of RISC-V Debug Spec.
-
-Changes from v1:
-- Fix typo
-- Add commit description for changing behavior of looping the triggers
-  when we check type 2 triggers.
-
-Alvin Chang (4):
-  target/riscv: Add functions for common matching conditions of trigger
-  target/riscv: Apply modularized matching conditions for breakpoint
-  target/riscv: Apply modularized matching conditions for watchpoint
-  target/riscv: Apply modularized matching conditions for icount trigger
-
- target/riscv/debug.c | 124 +++++++++++++++++++++++++++++--------------
- 1 file changed, 83 insertions(+), 41 deletions(-)
-
+diff --git a/target/riscv/debug.c b/target/riscv/debug.c
+index 3891236b82..b7b0fa8945 100644
+--- a/target/riscv/debug.c
++++ b/target/riscv/debug.c
+@@ -855,21 +855,17 @@ bool riscv_cpu_debug_check_breakpoint(CPUState *cs)
+         for (i = 0; i < RV_MAX_TRIGGERS; i++) {
+             trigger_type = get_trigger_type(env, i);
+ 
++            if (!trigger_common_match(env, trigger_type, i)) {
++                continue;
++            }
++
+             switch (trigger_type) {
+             case TRIGGER_TYPE_AD_MATCH:
+-                /* type 2 trigger cannot be fired in VU/VS mode */
+-                if (env->virt_enabled) {
+-                    return false;
+-                }
+-
+                 ctrl = env->tdata1[i];
+                 pc = env->tdata2[i];
+ 
+                 if ((ctrl & TYPE2_EXEC) && (bp->pc == pc)) {
+-                    /* check U/S/M bit against current privilege level */
+-                    if ((ctrl >> 3) & BIT(env->priv)) {
+-                        return true;
+-                    }
++                    return true;
+                 }
+                 break;
+             case TRIGGER_TYPE_AD_MATCH6:
+@@ -877,17 +873,7 @@ bool riscv_cpu_debug_check_breakpoint(CPUState *cs)
+                 pc = env->tdata2[i];
+ 
+                 if ((ctrl & TYPE6_EXEC) && (bp->pc == pc)) {
+-                    if (env->virt_enabled) {
+-                        /* check VU/VS bit against current privilege level */
+-                        if ((ctrl >> 23) & BIT(env->priv)) {
+-                            return true;
+-                        }
+-                    } else {
+-                        /* check U/S/M bit against current privilege level */
+-                        if ((ctrl >> 3) & BIT(env->priv)) {
+-                            return true;
+-                        }
+-                    }
++                    return true;
+                 }
+                 break;
+             default:
 -- 
 2.34.1
 
