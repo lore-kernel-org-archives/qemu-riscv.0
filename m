@@ -4,110 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACC5BC54798
-	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Feb 2024 14:56:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9F7EC5478C
+	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Feb 2024 15:42:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1reypL-00031a-8I; Tue, 27 Feb 2024 09:53:03 -0500
+	id 1rezb8-0002i6-1W; Tue, 27 Feb 2024 10:42:26 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1reypH-0002tk-T0
- for qemu-riscv@nongnu.org; Tue, 27 Feb 2024 09:53:00 -0500
-Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1reypD-0004mu-1E
- for qemu-riscv@nongnu.org; Tue, 27 Feb 2024 09:52:59 -0500
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-412af2c7902so3834975e9.3
- for <qemu-riscv@nongnu.org>; Tue, 27 Feb 2024 06:52:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709045571; x=1709650371; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LY87PsqI5CseL6bunSV/a+wwJBYv7wofoTM3s0oA7jk=;
- b=WpE3xPi+wpaqIEdhOzo5JmMHLxtVyQ+fI4mWd0vJVyu4f70mJQeMd06BPOqVss4UT8
- YSmo82IEC/z/jLWQOrebAdtdwu1l0m9mfzYsX5mN+rKvVOncRZAQzgEKnPX/ACcE1eRt
- E/x8YZ7B3dbj8FhorCCVHQLH91+n9H0eChPuDuTUEqYIDN/kojz7eaSoAdF+WPX93T6e
- LCb5IKrnk+EJEk8DpNn2hMvAUGL30oNxsh3pFHe6DzZJ2+dlTQTtA8EPC/n1tefwgiFI
- nuuGG5SOKlAabK5/TNe4avv3aErFWmaHhkcSYzeH6rc3L2z8KsqCEJV9jWGGG5SF7NA7
- MgGg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709045571; x=1709650371;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=LY87PsqI5CseL6bunSV/a+wwJBYv7wofoTM3s0oA7jk=;
- b=rxMgm3PbuyJiUp122qQn+ovjbs6bAkQNhu0PYi7CjtvVp7pi6SZIRMy3F0SD5PeUuc
- gr1r5icA4grBmw2Upu2c6h1yWcnv2r18Cwzax2Txlrfeo5gaAPlgeHYRCmKckc0tFsxR
- 3oNCyeuZmOK8yd8FsjggWBrnYEbMPpiZyjb/mNWelRO3GENxqquj+JHhYJIkRZqIeZr8
- pPELpCxP3LGIvLDAeeiA0JLLp7sRVbWfbqxRHylsfTxYpWuF1b6MLfZDodwgzFDaycG2
- 5mQYh7zmhZFIGchrlu6XefMAYAF8GDiwofWvSq3EcIBIx+jNbRCkYruWnRbB+Lr7jb5R
- 7Mug==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV7Bovn5o3PaXQO0UNVux00wKbL8udTkNFKz2GzMgTTNVJCmjjwTPkKcI/53FKuw4voQe4lExM6VHYGQfkp//6wDNRWLl4=
-X-Gm-Message-State: AOJu0YxbICuQ6hMpW//dOQtd9nTkfKZ+M3/Fe54U5qjv5wTtCkrCLxR3
- ZsQJT3/cckScetqIap35RiEcXu7xVwLbOaQDc2TQI4y5t4TOKGofTl42BhGCeAM=
-X-Google-Smtp-Source: AGHT+IHbvfRK+W3sbbX597Xd664p4Zgx2ror9Jp92I+pRQYcvikt8w0hNQFgUIQxsFqNpf4Gton/9g==
-X-Received: by 2002:a05:600c:5021:b0:412:a451:d32f with SMTP id
- n33-20020a05600c502100b00412a451d32fmr4857772wmr.20.1709045571014; 
- Tue, 27 Feb 2024 06:52:51 -0800 (PST)
-Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- co2-20020a0560000a0200b0033d70dd0e04sm11964404wrb.8.2024.02.27.06.52.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 Feb 2024 06:52:50 -0800 (PST)
-Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 5B1915F923;
- Tue, 27 Feb 2024 14:43:37 +0000 (GMT)
-From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: qemu-ppc@nongnu.org, Yoshinori Sato <ysato@users.sourceforge.jp>,
- qemu-arm@nongnu.org, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Michael Rolnik <mrolnik@gmail.com>, Yanan Wang <wangyanan55@huawei.com>,
+ (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
+ id 1rezb4-0002gB-Hf; Tue, 27 Feb 2024 10:42:22 -0500
+Received: from mgamail.intel.com ([198.175.65.18])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
+ id 1rezaw-00076i-Ok; Tue, 27 Feb 2024 10:42:22 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1709048535; x=1740584535;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=PpopX1xgqsSGu+ibkHdRkgrvQaMYRWvsytFX1WWOZtI=;
+ b=CtDFgnHDJdtfOdlSn9C1p1uoqg4PMLDW0uQrVwnZu9uIKuLijRvvT/iW
+ OMH8huDa1opt3Xl/KOgXPGkSA90rz4gznV//WhSBIKRPPTJo0G6PP9w2A
+ eJh3jzFdhrU3Q3x2micsFHA8SBWuviNHoqIrlv++MuXDP1gikTqtl8TBS
+ 2XYX/Nx8BXoPyGlpL/WbXdokqLNBb+Ktu8m3GSbtVKF99zuyoNAi2/tc4
+ pbnega3IVbchXwgHcbHe05eCCAgp7XS0dm1Y2yJuXCJwdoqJM3PWOzhlt
+ 5DL1TFZY5z4OzBUCceu2Ovlg7YneT2wS1Qr+3rsvOWEgBxToZi/PeJfa3 A==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10996"; a="3513684"
+X-IronPort-AV: E=Sophos;i="6.06,188,1705392000"; 
+   d="scan'208";a="3513684"
+Received: from fmviesa004.fm.intel.com ([10.60.135.144])
+ by orvoesa110.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 27 Feb 2024 07:42:09 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.06,188,1705392000"; d="scan'208";a="11697786"
+Received: from liuzhao-optiplex-7080.sh.intel.com (HELO localhost)
+ ([10.239.160.36])
+ by fmviesa004.fm.intel.com with ESMTP; 27 Feb 2024 07:42:04 -0800
+Date: Tue, 27 Feb 2024 23:55:46 +0800
+From: Zhao Liu <zhao1.liu@linux.intel.com>
+To: Jonathan Cameron <Jonathan.Cameron@huawei.com>
+Cc: Daniel P =?utf-8?B?LiBCZXJyYW5n77+9?= <berrange@redhat.com>,
  Eduardo Habkost <eduardo@habkost.net>,
- Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Beraldo Leal <bleal@redhat.com>, Cleber Rosa <crosa@redhat.com>,
- David Hildenbrand <david@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>, Song Gao <gaosong@loongson.cn>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- Laurent Vivier <laurent@vivier.eu>, Warner Losh <imp@bsdimp.com>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Alexandre Iooss <erdnaxe@crans.org>, Ilya Leoshkevich <iii@linux.ibm.com>,
- =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
- qemu-s390x@nongnu.org, Kyle Evans <kevans@freebsd.org>,
- Brad Smith <brad@comstyle.com>, Nicholas Piggin <npiggin@gmail.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>,
- John Snow <jsnow@redhat.com>, Alistair Francis <alistair.francis@wdc.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Brian Cain <bcain@quicinc.com>, Thomas Huth <thuth@redhat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-riscv@nongnu.org, Bin Meng <bin.meng@windriver.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Weiwei Li <liwei1518@gmail.com>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Mahmoud Mandour <ma.mandourr@gmail.com>
-Subject: [PATCH v4 19/29] cpu: call plugin init hook asynchronously
-Date: Tue, 27 Feb 2024 14:43:25 +0000
-Message-Id: <20240227144335.1196131-20-alex.bennee@linaro.org>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240227144335.1196131-1-alex.bennee@linaro.org>
-References: <20240227144335.1196131-1-alex.bennee@linaro.org>
+ Philippe =?utf-8?B?TWF0aGlldS1EYXVk77+9?= <philmd@linaro.org>,
+ Yanan Wang <wangyanan55@huawei.com>,
+ "Michael S . Tsirkin" <mst@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Eric Blake <eblake@redhat.com>, Markus Armbruster <armbru@redhat.com>,
+ Marcelo Tosatti <mtosatti@redhat.com>,
+ Alex =?utf-8?B?QmVubu+/vWU=?= <alex.bennee@linaro.org>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Sia Jee Heng <jeeheng.sia@starfivetech.com>, qemu-devel@nongnu.org,
+ kvm@vger.kernel.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
+ Zhenyu Wang <zhenyu.z.wang@intel.com>,
+ Dapeng Mi <dapeng1.mi@linux.intel.com>,
+ Yongwei Ma <yongwei.ma@intel.com>, Zhao Liu <zhao1.liu@intel.com>
+Subject: Re: [RFC 4/8] hw/core: Add cache topology options in -smp
+Message-ID: <Zd4GAhwpw/w0QUth@intel.com>
+References: <20240220092504.726064-1-zhao1.liu@linux.intel.com>
+ <20240220092504.726064-5-zhao1.liu@linux.intel.com>
+ <20240226153947.00006fd6@Huawei.com> <Zd2pWVH4/eo3HM8j@intel.com>
+ <20240227105145.0000106d@Huawei.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32c.google.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240227105145.0000106d@Huawei.com>
+Received-SPF: none client-ip=198.175.65.18;
+ envelope-from=zhao1.liu@linux.intel.com; helo=mgamail.intel.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.088,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -123,55 +94,69 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+On Tue, Feb 27, 2024 at 10:51:45AM +0000, Jonathan Cameron wrote:
+> Date: Tue, 27 Feb 2024 10:51:45 +0000
+> From: Jonathan Cameron <Jonathan.Cameron@Huawei.com>
+> Subject: Re: [RFC 4/8] hw/core: Add cache topology options in -smp
+> X-Mailer: Claws Mail 4.1.0 (GTK 3.24.33; x86_64-w64-mingw32)
+> 
+> On Tue, 27 Feb 2024 17:20:25 +0800
+> Zhao Liu <zhao1.liu@linux.intel.com> wrote:
+> 
+> > Hi Jonathan,
+> > 
+> > > Hi Zhao Liu
+> > > 
+> > > I like the scheme.  Strikes a good balance between complexity of description
+> > > and systems that actually exist. Sure there are systems with more cache
+> > > levels etc but they are rare and support can be easily added later
+> > > if people want to model them.  
+> > 
+> > Thanks for your support!
+> > 
+> > [snip]
+> > 
+> > > > +static int smp_cache_string_to_topology(MachineState *ms,  
+> > > 
+> > > Not a good name for a function that does rather more than that.  
+> > 
+> > What about "smp_cache_get_valid_topology()"?
+> 
+> Looking again, could we return the CPUTopoLevel? I think returning
+> CPU_TOPO_LEVEL_INVALID will replace -1/0 returns and this can just
+> be smp_cache_string_to_topology() as you have it in this version.
+> 
+> The check on the return value becomes a little more more complex
+> and I think you want to squash CPU_TOPO_LEVEL_MAX down so we only
+> have one invalid value to check at callers..  E.g.
+> 
+> static CPUTopoLevel smp_cache_string_to_topolgy(MachineState *ms,
+>                                                 char *top_str,
+>                                                 Error **errp)
+> {
+>     CPUTopoLevel topo = string_to_cpu_topo(topo_str);
+> 
+>     if (topo == CPU_TOPO_LEVEL_MAX || topo == CPU_TOP?O_LEVEL_INVALID) {
+>         return CPU_TOPO_LEVEL_INVALID;
+>     }
+> 
+>     if (!machine_check_topo_support(ms, topo) {
+>         error_setg(errp,
+>                    "Invalid cache topology level: %s. "
+>                    "The cache topology should match the CPU topology level",
+> //Break string like this to make it as grep-able as possible!
+>                    topo_str);
+>         return CPU_TOPO_LEVEL_INVALID;
+>     }
+> 
+>     return topo;
+> 
+> }                
+> 
+> 
+> The checks then become != CPU_TOPO_LEVEL_INVALID at each callsite.
+>
 
-This ensures we run during a cpu_exec, which allows to call start/end
-exclusive from this init hook (needed for new scoreboard API introduced
-later).
-
-async work is run before any tb is translated/executed, so we can
-guarantee plugin init will be called before any other hook.
-
-The previous change made sure that any idle/resume cb call will not be
-done before initializing plugin for a given vcpu.
-
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Message-Id: <20240213094009.150349-5-pierrick.bouvier@linaro.org>
-Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
----
- hw/core/cpu-common.c | 9 +++++++--
- 1 file changed, 7 insertions(+), 2 deletions(-)
-
-diff --git a/hw/core/cpu-common.c b/hw/core/cpu-common.c
-index fe16d0d9df8..68786360ea5 100644
---- a/hw/core/cpu-common.c
-+++ b/hw/core/cpu-common.c
-@@ -194,6 +194,11 @@ static void cpu_common_parse_features(const char *typename, char *features,
-     }
- }
- 
-+static void qemu_plugin_vcpu_init__async(CPUState *cpu, run_on_cpu_data unused)
-+{
-+    qemu_plugin_vcpu_init_hook(cpu);
-+}
-+
- static void cpu_common_realizefn(DeviceState *dev, Error **errp)
- {
-     CPUState *cpu = CPU(dev);
-@@ -217,9 +222,9 @@ static void cpu_common_realizefn(DeviceState *dev, Error **errp)
-         cpu_resume(cpu);
-     }
- 
--    /* Plugin initialization must wait until the cpu is fully realized. */
-+    /* Plugin initialization must wait until the cpu start executing code */
-     if (tcg_enabled()) {
--        qemu_plugin_vcpu_init_hook(cpu);
-+        async_run_on_cpu(cpu, qemu_plugin_vcpu_init__async, RUN_ON_CPU_NULL);
-     }
- 
-     /* NOTE: latest generic point where the cpu is fully realized */
--- 
-2.39.2
+Good idea! This makes the code clearer. Let me try this way. Thanks!
 
 
