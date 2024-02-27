@@ -4,67 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96FE9C54798
-	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Feb 2024 10:52:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 674DDC54798
+	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Feb 2024 10:59:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rev40-0007OQ-Fo; Tue, 27 Feb 2024 05:51:56 -0500
+	id 1revAt-0002Mp-NE; Tue, 27 Feb 2024 05:59:04 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jonathan.cameron@huawei.com>)
- id 1rev3x-0007Nj-QL; Tue, 27 Feb 2024 05:51:53 -0500
-Received: from frasgout.his.huawei.com ([185.176.79.56])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jonathan.cameron@huawei.com>)
- id 1rev3v-0002n3-EP; Tue, 27 Feb 2024 05:51:53 -0500
-Received: from mail.maildlp.com (unknown [172.18.186.31])
- by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4TkZ1V5Kwjz6J9xv;
- Tue, 27 Feb 2024 18:47:10 +0800 (CST)
-Received: from lhrpeml500005.china.huawei.com (unknown [7.191.163.240])
- by mail.maildlp.com (Postfix) with ESMTPS id 0695A140F4E;
- Tue, 27 Feb 2024 18:51:47 +0800 (CST)
-Received: from localhost (10.202.227.76) by lhrpeml500005.china.huawei.com
- (7.191.163.240) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.1.2507.35; Tue, 27 Feb
- 2024 10:51:46 +0000
-Date: Tue, 27 Feb 2024 10:51:45 +0000
-To: Zhao Liu <zhao1.liu@linux.intel.com>
-CC: "Daniel P . =?UTF-8?Q?Berrang=EF=BF=BD?=" <berrange@redhat.com>, "Eduardo
- Habkost" <eduardo@habkost.net>, Marcel Apfelbaum
- <marcel.apfelbaum@gmail.com>, Philippe =?UTF-8?Q?Mathieu-Daud=EF=BF=BD?=
- <philmd@linaro.org>, Yanan Wang <wangyanan55@huawei.com>, "Michael S .
- Tsirkin" <mst@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, "Richard
- Henderson" <richard.henderson@linaro.org>, Eric Blake <eblake@redhat.com>,
- Markus Armbruster <armbru@redhat.com>, Marcelo Tosatti <mtosatti@redhat.com>, 
- Alex =?UTF-8?Q?Benn=EF=BF=BDe?= <alex.bennee@linaro.org>, Peter Maydell
- <peter.maydell@linaro.org>, "Sia Jee Heng" <jeeheng.sia@starfivetech.com>,
- <qemu-devel@nongnu.org>, <kvm@vger.kernel.org>, <qemu-riscv@nongnu.org>,
- <qemu-arm@nongnu.org>, "Zhenyu Wang" <zhenyu.z.wang@intel.com>, Dapeng Mi
- <dapeng1.mi@linux.intel.com>, Yongwei Ma <yongwei.ma@intel.com>, Zhao Liu
- <zhao1.liu@intel.com>
-Subject: Re: [RFC 4/8] hw/core: Add cache topology options in -smp
-Message-ID: <20240227105145.0000106d@Huawei.com>
-In-Reply-To: <Zd2pWVH4/eo3HM8j@intel.com>
-References: <20240220092504.726064-1-zhao1.liu@linux.intel.com>
- <20240220092504.726064-5-zhao1.liu@linux.intel.com>
- <20240226153947.00006fd6@Huawei.com> <Zd2pWVH4/eo3HM8j@intel.com>
-Organization: Huawei Technologies Research and Development (UK) Ltd.
-X-Mailer: Claws Mail 4.1.0 (GTK 3.24.33; x86_64-w64-mingw32)
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1revAp-0002Km-89
+ for qemu-riscv@nongnu.org; Tue, 27 Feb 2024 05:58:59 -0500
+Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1revAl-0004cw-BJ
+ for qemu-riscv@nongnu.org; Tue, 27 Feb 2024 05:58:59 -0500
+Received: by mail-pj1-x102a.google.com with SMTP id
+ 98e67ed59e1d1-29ab7073dd2so1478336a91.0
+ for <qemu-riscv@nongnu.org>; Tue, 27 Feb 2024 02:58:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1709031532; x=1709636332;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=TsDmIcNCrVwkgpZ3Rq+Sniy+ldkymAQlv95cwgKc05Q=;
+ b=SnwFljKyC+A7tup8a1RwtjQ4D6/sUBTMkAqoUeaOT4MrHzYE/xhinXtGbZINfB2D/6
+ jSOvvI6H4nHBvky58zATnXlfMv5PiZJHwJd4AW7aOMNpJUQeOX1kbhoyAaQzVu1s89pE
+ n+jchiVa9gGRJMpNxBoyTXOx9pWKULVSQGsnIy81wG7ctXKCItXbXAQMBzxcPKnNe//S
+ zeqoilKymCo6IOWFA6/jBGfiHv/0TTlEKi3aa+216gXIPJAtg6UeGv8+luj3SQskQ9Xn
+ gvrgvL4Yt1/ptp8LapkUYQn3YrETppmvwaax7TesYmOdC5ynBN7HJTAR9xp6y9Nn+EHn
+ gzCg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1709031532; x=1709636332;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=TsDmIcNCrVwkgpZ3Rq+Sniy+ldkymAQlv95cwgKc05Q=;
+ b=iEBj5LSpWWZTOie0sS7FTgzNcHNLb4ys/fzubdxeeaF/zmYM7DwgRxHjoP1Jylo8+m
+ QqS3KO/qxY2cNFCAI9gVzjCir9lhP29geWeaysASAM7Q1WjtMVkI6m82Z/okUmrD3Ee1
+ 85oHKDj9RrH0S6V7egcVb/EJ5QVEafc/NELQE00tXZwaU8Wjx3CE1czZl1h163jdCR21
+ Jw80010kUZ5/d0wZSDDA0N7nNLCZEdwDcyAkTUAbnFvqJq9wwI7hUawG3WmaBaSWCvGW
+ VGTjOHyS3PXlRH+wM7b6i7CltIL6fVZ13TWtIV4j01bDGlnhc1Z1Qylp6+94VsxaFOec
+ 7YgA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUOg9Qc9C0y4wS56CpvYrHA9JcLAwq+VB4adOvSB4/qQ4TH6C1RIhyQk2wYErs7K+ATmDMPjkmex1kkpa9e/2tzbsUG/BQ=
+X-Gm-Message-State: AOJu0YxM14uJN6HWbfz+2SmDFiQBt7McNEQynYBAPYONTGXVGeTW8L3t
+ bchqf7Wv+NRfsGtnhBY3OS04cq3wl61C4SiQmrLKIOuaOOybRMwD56+7OIp2cPI=
+X-Google-Smtp-Source: AGHT+IE/xiDOvK/3wPL4R00Ude4nZVASCnxuRQ+do4oShLbadK9+gnNEMWTWVVSbYfenFG/UxyRKTw==
+X-Received: by 2002:a17:90b:4a03:b0:298:b9e3:691f with SMTP id
+ kk3-20020a17090b4a0300b00298b9e3691fmr7038770pjb.23.1709031532662; 
+ Tue, 27 Feb 2024 02:58:52 -0800 (PST)
+Received: from [157.82.203.206] ([157.82.203.206])
+ by smtp.gmail.com with ESMTPSA id
+ u3-20020a17090ac88300b0029a4db713b9sm8183679pjt.39.2024.02.27.02.58.45
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 27 Feb 2024 02:58:52 -0800 (PST)
+Message-ID: <20e4981d-6378-4293-8625-7c24bb499f41@daynix.com>
+Date: Tue, 27 Feb 2024 19:58:43 +0900
 MIME-Version: 1.0
-Content-Type: text/plain; charset="US-ASCII"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.202.227.76]
-X-ClientProxiedBy: lhrpeml500002.china.huawei.com (7.191.160.78) To
- lhrpeml500005.china.huawei.com (7.191.163.240)
-Received-SPF: pass client-ip=185.176.79.56;
- envelope-from=jonathan.cameron@huawei.com; helo=frasgout.his.huawei.com
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 21/27] plugins: add an API to read registers
+Content-Language: en-US
+To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
+Cc: qemu-devel@nongnu.org, Nicholas Piggin <npiggin@gmail.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, =?UTF-8?Q?C=C3=A9dric_Le_Goater?=
+ <clg@kaod.org>, Peter Maydell <peter.maydell@linaro.org>,
+ qemu-riscv@nongnu.org, Michael Rolnik <mrolnik@gmail.com>,
+ Song Gao <gaosong@loongson.cn>, Alexandre Iooss <erdnaxe@crans.org>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ David Hildenbrand <david@redhat.com>,
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>, John Snow
+ <jsnow@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
+ Mahmoud Mandour <ma.mandourr@gmail.com>, qemu-arm@nongnu.org,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>, Cleber Rosa <crosa@redhat.com>,
+ qemu-ppc@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
+ qemu-s390x@nongnu.org, Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Thomas Huth <thuth@redhat.com>, Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Yanan Wang <wangyanan55@huawei.com>, Brian Cain <bcain@quicinc.com>,
+ Ilya Leoshkevich <iii@linux.ibm.com>, Weiwei Li <liwei1518@gmail.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Bin Meng <bin.meng@windriver.com>, Laurent Vivier <laurent@vivier.eu>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+References: <20240226165646.425600-1-alex.bennee@linaro.org>
+ <20240226165646.425600-22-alex.bennee@linaro.org>
+ <b7aac53e-cde5-4596-b0fc-d39f52d4ceb8@daynix.com>
+ <878r36dxsv.fsf@draig.linaro.org>
+ <485e6093-54e9-4ce4-ae01-c44525b202ef@daynix.com>
+ <8734tedwun.fsf@draig.linaro.org>
+From: Akihiko Odaki <akihiko.odaki@daynix.com>
+In-Reply-To: <8734tedwun.fsf@draig.linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: none client-ip=2607:f8b0:4864:20::102a;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-pj1-x102a.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -77,68 +121,68 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-to:  Jonathan Cameron <Jonathan.Cameron@Huawei.com>
-From:  Jonathan Cameron via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, 27 Feb 2024 17:20:25 +0800
-Zhao Liu <zhao1.liu@linux.intel.com> wrote:
-
-> Hi Jonathan,
+On 2024/02/27 19:29, Alex Bennée wrote:
+> Akihiko Odaki <akihiko.odaki@daynix.com> writes:
 > 
-> > Hi Zhao Liu
-> > 
-> > I like the scheme.  Strikes a good balance between complexity of description
-> > and systems that actually exist. Sure there are systems with more cache
-> > levels etc but they are rare and support can be easily added later
-> > if people want to model them.  
+>> On 2024/02/27 19:08, Alex Bennée wrote:
+>>> Akihiko Odaki <akihiko.odaki@daynix.com> writes:
+>>>
+>>>> On 2024/02/27 1:56, Alex Bennée wrote:
+>>>>> We can only request a list of registers once the vCPU has been
+>>>>> initialised so the user needs to use either call the get function on
+>>>>> vCPU initialisation or during the translation phase.
+>>>>> We don't expose the reg number to the plugin instead hiding it
+>>>>> behind
+>>>>> an opaque handle. For now this is just the gdb_regnum encapsulated in
+>>>>> an anonymous GPOINTER but in future as we add more state for plugins
+>>>>> to track we can expand it.
+>>>>> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1706
+>>>>> Cc: Akihiko Odaki <akihiko.odaki@daynix.com>
+>>>>> Message-Id: <20240103173349.398526-39-alex.bennee@linaro.org>
+>>>>> Based-on: <20231025093128.33116-18-akihiko.odaki@daynix.com>
+>>>>> Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+>>>>> Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+>>>>
+>>>> Hi,
+>>>>
+>>>> Mostly looks good. I have a few trivial comments so please have a look
+>>>> at them.
+>>> Done
+>>> <snip>
+>>>>> +        g_array_append_val(find_data, desc);
+>>>>> +    }
+>>>>> +
+>>>>> +    return find_data;
+>>>>> +}
+>>>>> +
+>>>>> +GArray *qemu_plugin_get_registers(void)
+>>>>> +{
+>>>>> +    g_assert(current_cpu);
+>>>>> +
+>>>>> +    g_autoptr(GArray) regs = gdb_get_register_list(current_cpu);
+>>>>> +    return regs->len ? create_register_handles(current_cpu, regs) : NULL;
+>>>>
+>>>> Why do you need regs->len check?
+>>> Not all guests expose register to gdb so we need to catch that:
+>>>     TEST    catch-syscalls-with-libinsn.so on alpha
+>>> **
+>>> ERROR:../../plugins/api.c:459:qemu_plugin_get_registers: assertion failed: (regs->len)
+>>> Aborted
+>> Certainly regs->len can be 0, but why do you need to return NULL in
+>> that case? Can't qemu_plugin_get_registers() return an empty array
+>> just as gdb_get_register_list() does?
 > 
-> Thanks for your support!
-> 
-> [snip]
-> 
-> > > +static int smp_cache_string_to_topology(MachineState *ms,  
-> > 
-> > Not a good name for a function that does rather more than that.  
-> 
-> What about "smp_cache_get_valid_topology()"?
+> That seems more troublesome to handle the other end. NULL is nothing is
+> a fairly common pattern here which makes short-circuiting the array
+> iteration simple.
 
-Looking again, could we return the CPUTopoLevel? I think returning
-CPU_TOPO_LEVEL_INVALID will replace -1/0 returns and this can just
-be smp_cache_string_to_topology() as you have it in this version.
+I'm not sure why you would want to short-circuiting array iteration. 
+Iterating an empty array is often simpler.
 
-The check on the return value becomes a little more more complex
-and I think you want to squash CPU_TOPO_LEVEL_MAX down so we only
-have one invalid value to check at callers..  E.g.
-
-static CPUTopoLevel smp_cache_string_to_topolgy(MachineState *ms,
-                                                char *top_str,
-                                                Error **errp)
-{
-    CPUTopoLevel topo = string_to_cpu_topo(topo_str);
-
-    if (topo == CPU_TOPO_LEVEL_MAX || topo == CPU_TOP?O_LEVEL_INVALID) {
-        return CPU_TOPO_LEVEL_INVALID;
-    }
-
-    if (!machine_check_topo_support(ms, topo) {
-        error_setg(errp,
-                   "Invalid cache topology level: %s. "
-                   "The cache topology should match the CPU topology level",
-//Break string like this to make it as grep-able as possible!
-                   topo_str);
-        return CPU_TOPO_LEVEL_INVALID;
-    }
-
-    return topo;
-
-}                
-
-
-The checks then become != CPU_TOPO_LEVEL_INVALID at each callsite.
-
-Jonathan
-
-
+In any case, the same logic also applies to gdb_get_register_list(), so 
+you should change gdb_get_register_list() to return NULL instead of an 
+empty array if you think that's more reasonable.
 
