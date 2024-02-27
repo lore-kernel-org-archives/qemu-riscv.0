@@ -4,48 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FE26C5478C
-	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Feb 2024 15:49:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BD8AC54798
+	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Feb 2024 15:49:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rezgy-0005cT-Ss; Tue, 27 Feb 2024 10:48:28 -0500
+	id 1rezh9-0005jE-9n; Tue, 27 Feb 2024 10:48:39 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1rezgx-0005c4-9q
- for qemu-riscv@nongnu.org; Tue, 27 Feb 2024 10:48:27 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ id 1rezh6-0005ik-Pa
+ for qemu-riscv@nongnu.org; Tue, 27 Feb 2024 10:48:36 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1rezgf-0008No-4X
- for qemu-riscv@nongnu.org; Tue, 27 Feb 2024 10:48:27 -0500
+ id 1rezgp-0008Po-ER
+ for qemu-riscv@nongnu.org; Tue, 27 Feb 2024 10:48:36 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1709048888;
+ s=mimecast20190719; t=1709048898;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=JFOJUVRdNtzkyhJWiVfb1nhavyg0/7pyWLIP6eA0jdk=;
- b=AAsbz2KBPGwCaa0tO/dymh92lz5xWks/Z7RU+bMJkUCO3HwA0HN5ewpzrRJvh1zxQYOc0S
- H6+z1WLB2tSqSVCT2QlZSEnK8LwOmBIuTVsnsFsLhqGvy09Q01ukYLU9kQGBsYkZG7IjL9
- 37EZZVYY9+Y5OadXIkD3iTFgXdDtOD4=
+ bh=d+BQTpn0bp8pXGO7NT5wHbJA+LOgaLbwGOLQf9cPlEA=;
+ b=IaE5H9x5vb9E/9lnbodBOPjnOSbUjw7TpTCTCw5qBoG9VgQVZKrEvpd2ah92rkFRuObosR
+ QtbTQCJahOUpob/rbYGfqVoqG9KNQPQRFbSLZk9BIQ3UKou1vuXSeg+7sUzW4pUU8blTbP
+ ReHdYMoL8djZEMTT3FfsJuy9dg7lnBw=
 Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
  by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-110-8BqCI_jZMIaqyArdz5SJEA-1; Tue,
- 27 Feb 2024 10:48:04 -0500
-X-MC-Unique: 8BqCI_jZMIaqyArdz5SJEA-1
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-647-mBMWMcpvONW9_LhRjVwo1w-1; Tue,
+ 27 Feb 2024 10:48:12 -0500
+X-MC-Unique: mBMWMcpvONW9_LhRjVwo1w-1
 Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com
  [10.11.54.6])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id BBFFE1C0BA42;
- Tue, 27 Feb 2024 15:48:03 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 06E3F3C11C69;
+ Tue, 27 Feb 2024 15:48:12 +0000 (UTC)
 Received: from dell-r430-03.lab.eng.brq2.redhat.com
  (dell-r430-03.lab.eng.brq2.redhat.com [10.37.153.18])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 386C42166B5E;
- Tue, 27 Feb 2024 15:48:01 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 75CB62166AE4;
+ Tue, 27 Feb 2024 15:48:09 +0000 (UTC)
 From: Igor Mammedov <imammedo@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: peter.maydell@linaro.org, pbonzini@redhat.com, mst@redhat.com,
@@ -55,24 +55,24 @@ Cc: peter.maydell@linaro.org, pbonzini@redhat.com, mst@redhat.com,
  philmd@linaro.org, wangyanan55@huawei.com, eblake@redhat.com,
  armbru@redhat.com, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
  f.ebner@proxmox.com
-Subject: [PATCH 03/19] tests: smbios: add test for legacy mode CLI options
-Date: Tue, 27 Feb 2024 16:47:33 +0100
-Message-Id: <20240227154749.1818189-4-imammedo@redhat.com>
+Subject: [PATCH 06/19] smbios: get rid of smbios_legacy global
+Date: Tue, 27 Feb 2024 16:47:36 +0100
+Message-Id: <20240227154749.1818189-7-imammedo@redhat.com>
 In-Reply-To: <20240227154749.1818189-1-imammedo@redhat.com>
 References: <20240227154749.1818189-1-imammedo@redhat.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.6
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=imammedo@redhat.com;
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=imammedo@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -21
 X-Spam_score: -2.2
 X-Spam_bar: --
 X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.088,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- SPF_HELO_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01,
- T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -88,65 +88,175 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Unfortunately having 2.0 machine type deprecated is not enough
-to get rid of legacy SMBIOS handling since 'isapc' also uses
-that and it's staying around.
-
-Hence add test for CLI options handling to be sure that it
-ain't broken during SMBIOS code refactoring.
+clean up smbios_set_defaults() which is reused by legacy
+and non legacy machines from being aware of 'legacy' notion
+and need to turn it off. And push legacy handling up to
+PC machine code where it's relevant.
 
 Signed-off-by: Igor Mammedov <imammedo@redhat.com>
 ---
- tests/data/smbios/type11_blob.legacy | Bin 0 -> 10 bytes
- tests/qtest/bios-tables-test.c       |  17 +++++++++++++++++
- 2 files changed, 17 insertions(+)
- create mode 100644 tests/data/smbios/type11_blob.legacy
+PS: I've moved/kept legacy smbios_entries to smbios_get_tables()
+but it at least is not visible to API users. To get rid of it
+as well, it would be necessary to change how '-smbios' CLI
+option is processed. Which is done later in the series.
+---
+ include/hw/firmware/smbios.h |  2 +-
+ hw/arm/virt.c                |  2 +-
+ hw/i386/fw_cfg.c             |  7 ++++---
+ hw/loongarch/virt.c          |  2 +-
+ hw/riscv/virt.c              |  2 +-
+ hw/smbios/smbios.c           | 35 +++++++++++++++--------------------
+ 6 files changed, 23 insertions(+), 27 deletions(-)
 
-diff --git a/tests/data/smbios/type11_blob.legacy b/tests/data/smbios/type11_blob.legacy
-new file mode 100644
-index 0000000000000000000000000000000000000000..aef463aab903405958b0a85f85c5980671c08bee
-GIT binary patch
-literal 10
-Rcmd;PW!S(N;u;*n000Tp0s;U4
-
-literal 0
-HcmV?d00001
-
-diff --git a/tests/qtest/bios-tables-test.c b/tests/qtest/bios-tables-test.c
-index a116f88e1d..d1ff4db7a2 100644
---- a/tests/qtest/bios-tables-test.c
-+++ b/tests/qtest/bios-tables-test.c
-@@ -2106,6 +2106,21 @@ static void test_acpi_pc_smbios_blob(void)
-     free_test_data(&data);
+diff --git a/include/hw/firmware/smbios.h b/include/hw/firmware/smbios.h
+index a187fbbd3d..0818184834 100644
+--- a/include/hw/firmware/smbios.h
++++ b/include/hw/firmware/smbios.h
+@@ -293,7 +293,7 @@ struct smbios_type_127 {
+ void smbios_entry_add(QemuOpts *opts, Error **errp);
+ void smbios_set_cpuid(uint32_t version, uint32_t features);
+ void smbios_set_defaults(const char *manufacturer, const char *product,
+-                         const char *version, bool legacy_mode,
++                         const char *version,
+                          bool uuid_encoded, SmbiosEntryPointType ep_type);
+ void smbios_set_default_processor_family(uint16_t processor_family);
+ uint8_t *smbios_get_table_legacy(uint32_t expected_t4_count, size_t *length);
+diff --git a/hw/arm/virt.c b/hw/arm/virt.c
+index 0af1943697..8588681f27 100644
+--- a/hw/arm/virt.c
++++ b/hw/arm/virt.c
+@@ -1633,7 +1633,7 @@ static void virt_build_smbios(VirtMachineState *vms)
+     }
+ 
+     smbios_set_defaults("QEMU", product,
+-                        vmc->smbios_old_sys_ver ? "1.0" : mc->name, false,
++                        vmc->smbios_old_sys_ver ? "1.0" : mc->name,
+                         true, SMBIOS_ENTRY_POINT_TYPE_64);
+ 
+     /* build the array of physical mem area from base_memmap */
+diff --git a/hw/i386/fw_cfg.c b/hw/i386/fw_cfg.c
+index fcb4fb0769..c1e9c0fd9c 100644
+--- a/hw/i386/fw_cfg.c
++++ b/hw/i386/fw_cfg.c
+@@ -63,15 +63,16 @@ void fw_cfg_build_smbios(PCMachineState *pcms, FWCfgState *fw_cfg)
+     if (pcmc->smbios_defaults) {
+         /* These values are guest ABI, do not change */
+         smbios_set_defaults("QEMU", mc->desc, mc->name,
+-                            pcmc->smbios_legacy_mode, pcmc->smbios_uuid_encoded,
++                            pcmc->smbios_uuid_encoded,
+                             pcms->smbios_entry_point_type);
+     }
+ 
+     /* tell smbios about cpuid version and features */
+     smbios_set_cpuid(cpu->env.cpuid_version, cpu->env.features[FEAT_1_EDX]);
+ 
+-    smbios_tables = smbios_get_table_legacy(ms->smp.cpus, &smbios_tables_len);
+-    if (smbios_tables) {
++    if (pcmc->smbios_legacy_mode) {
++        smbios_tables = smbios_get_table_legacy(ms->smp.cpus,
++                                                &smbios_tables_len);
+         fw_cfg_add_bytes(fw_cfg, FW_CFG_SMBIOS_ENTRIES,
+                          smbios_tables, smbios_tables_len);
+         return;
+diff --git a/hw/loongarch/virt.c b/hw/loongarch/virt.c
+index 0ad7d8c887..73fb3522ba 100644
+--- a/hw/loongarch/virt.c
++++ b/hw/loongarch/virt.c
+@@ -320,7 +320,7 @@ static void virt_build_smbios(LoongArchMachineState *lams)
+         return;
+     }
+ 
+-    smbios_set_defaults("QEMU", product, mc->name, false,
++    smbios_set_defaults("QEMU", product, mc->name,
+                         true, SMBIOS_ENTRY_POINT_TYPE_64);
+ 
+     smbios_get_tables(ms, NULL, 0, &smbios_tables, &smbios_tables_len,
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index fd35c74781..e2c9529df2 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -1235,7 +1235,7 @@ static void virt_build_smbios(RISCVVirtState *s)
+         product = "KVM Virtual Machine";
+     }
+ 
+-    smbios_set_defaults("QEMU", product, mc->name, false,
++    smbios_set_defaults("QEMU", product, mc->name,
+                         true, SMBIOS_ENTRY_POINT_TYPE_64);
+ 
+     if (riscv_is_32bit(&s->soc[0])) {
+diff --git a/hw/smbios/smbios.c b/hw/smbios/smbios.c
+index 15339d8dbe..c46fc93357 100644
+--- a/hw/smbios/smbios.c
++++ b/hw/smbios/smbios.c
+@@ -54,7 +54,6 @@ struct smbios_table {
+ 
+ static uint8_t *smbios_entries;
+ static size_t smbios_entries_len;
+-static bool smbios_legacy = true;
+ static bool smbios_uuid_encoded = true;
+ /* end: legacy structures & constants for <= 2.0 machines */
+ 
+@@ -570,9 +569,16 @@ static void smbios_build_type_1_fields(void)
+ 
+ uint8_t *smbios_get_table_legacy(uint32_t expected_t4_count, size_t *length)
+ {
+-    if (!smbios_legacy) {
+-        *length = 0;
+-        return NULL;
++    /* drop unwanted version of command-line file blob(s) */
++    g_free(smbios_tables);
++    smbios_tables = NULL;
++
++    /* also complain if fields were given for types > 1 */
++    if (find_next_bit(have_fields_bitmap,
++                      SMBIOS_MAX_TYPE + 1, 2) < SMBIOS_MAX_TYPE + 1) {
++        error_report("can't process fields for smbios "
++                     "types > 1 on machine versions < 2.1!");
++        exit(1);
+     }
+ 
+     if (!smbios_immutable) {
+@@ -1006,28 +1012,13 @@ void smbios_set_default_processor_family(uint16_t processor_family)
  }
  
-+static void test_acpi_isapc_smbios_legacy(void)
-+{
-+    uint8_t req_type11[] = { 1, 11 };
-+    test_data data = {
-+        .machine = "isapc",
-+        .variant = ".pc_smbios_legacy",
-+        .required_struct_types = req_type11,
-+        .required_struct_types_len = ARRAY_SIZE(req_type11),
-+    };
-+
-+    test_smbios("-smbios file=tests/data/smbios/type11_blob.legacy "
-+                "-smbios type=1,family=TEST", &data);
-+    free_test_data(&data);
-+}
-+
- static void test_oem_fields(test_data *data)
+ void smbios_set_defaults(const char *manufacturer, const char *product,
+-                         const char *version, bool legacy_mode,
++                         const char *version,
+                          bool uuid_encoded, SmbiosEntryPointType ep_type)
  {
-     int i;
-@@ -2261,6 +2276,8 @@ int main(int argc, char *argv[])
-                            test_acpi_pc_smbios_options);
-             qtest_add_func("acpi/piix4/smbios-blob",
-                            test_acpi_pc_smbios_blob);
-+            qtest_add_func("acpi/piix4/smbios-legacy",
-+                           test_acpi_isapc_smbios_legacy);
-         }
-         if (qtest_has_machine(MACHINE_Q35)) {
-             qtest_add_func("acpi/q35", test_acpi_q35_tcg);
+     smbios_have_defaults = true;
+-    smbios_legacy = legacy_mode;
+     smbios_uuid_encoded = uuid_encoded;
+     smbios_ep_type = ep_type;
+ 
+-    /* drop unwanted version of command-line file blob(s) */
+-    if (smbios_legacy) {
+-        g_free(smbios_tables);
+-        /* in legacy mode, also complain if fields were given for types > 1 */
+-        if (find_next_bit(have_fields_bitmap,
+-                          SMBIOS_MAX_TYPE+1, 2) < SMBIOS_MAX_TYPE+1) {
+-            error_report("can't process fields for smbios "
+-                         "types > 1 on machine versions < 2.1!");
+-            exit(1);
+-        }
+-    } else {
+-        g_free(smbios_entries);
+-    }
+-
+     SMBIOS_SET_DEFAULT(type1.manufacturer, manufacturer);
+     SMBIOS_SET_DEFAULT(type1.product, product);
+     SMBIOS_SET_DEFAULT(type1.version, version);
+@@ -1103,6 +1094,10 @@ void smbios_get_tables(MachineState *ms,
+ {
+     unsigned i, dimm_cnt, offset;
+ 
++    /* drop unwanted (legacy) version of command-line file blob(s) */
++    g_free(smbios_entries);
++    smbios_entries = NULL;
++
+     if (!smbios_immutable) {
+         smbios_build_type_0_table();
+         smbios_build_type_1_table();
 -- 
 2.39.3
 
