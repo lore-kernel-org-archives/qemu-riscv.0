@@ -4,81 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9F7EC5478C
-	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Feb 2024 15:42:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7967BC5478C
+	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Feb 2024 15:48:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rezb8-0002i6-1W; Tue, 27 Feb 2024 10:42:26 -0500
+	id 1rezga-0005Pl-NX; Tue, 27 Feb 2024 10:48:04 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1rezb4-0002gB-Hf; Tue, 27 Feb 2024 10:42:22 -0500
-Received: from mgamail.intel.com ([198.175.65.18])
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1rezgZ-0005Ov-HP
+ for qemu-riscv@nongnu.org; Tue, 27 Feb 2024 10:48:03 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1rezaw-00076i-Ok; Tue, 27 Feb 2024 10:42:22 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1709048535; x=1740584535;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=PpopX1xgqsSGu+ibkHdRkgrvQaMYRWvsytFX1WWOZtI=;
- b=CtDFgnHDJdtfOdlSn9C1p1uoqg4PMLDW0uQrVwnZu9uIKuLijRvvT/iW
- OMH8huDa1opt3Xl/KOgXPGkSA90rz4gznV//WhSBIKRPPTJo0G6PP9w2A
- eJh3jzFdhrU3Q3x2micsFHA8SBWuviNHoqIrlv++MuXDP1gikTqtl8TBS
- 2XYX/Nx8BXoPyGlpL/WbXdokqLNBb+Ktu8m3GSbtVKF99zuyoNAi2/tc4
- pbnega3IVbchXwgHcbHe05eCCAgp7XS0dm1Y2yJuXCJwdoqJM3PWOzhlt
- 5DL1TFZY5z4OzBUCceu2Ovlg7YneT2wS1Qr+3rsvOWEgBxToZi/PeJfa3 A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10996"; a="3513684"
-X-IronPort-AV: E=Sophos;i="6.06,188,1705392000"; 
-   d="scan'208";a="3513684"
-Received: from fmviesa004.fm.intel.com ([10.60.135.144])
- by orvoesa110.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 27 Feb 2024 07:42:09 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.06,188,1705392000"; d="scan'208";a="11697786"
-Received: from liuzhao-optiplex-7080.sh.intel.com (HELO localhost)
- ([10.239.160.36])
- by fmviesa004.fm.intel.com with ESMTP; 27 Feb 2024 07:42:04 -0800
-Date: Tue, 27 Feb 2024 23:55:46 +0800
-From: Zhao Liu <zhao1.liu@linux.intel.com>
-To: Jonathan Cameron <Jonathan.Cameron@huawei.com>
-Cc: Daniel P =?utf-8?B?LiBCZXJyYW5n77+9?= <berrange@redhat.com>,
- Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Philippe =?utf-8?B?TWF0aGlldS1EYXVk77+9?= <philmd@linaro.org>,
- Yanan Wang <wangyanan55@huawei.com>,
- "Michael S . Tsirkin" <mst@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Eric Blake <eblake@redhat.com>, Markus Armbruster <armbru@redhat.com>,
- Marcelo Tosatti <mtosatti@redhat.com>,
- Alex =?utf-8?B?QmVubu+/vWU=?= <alex.bennee@linaro.org>,
- Peter Maydell <peter.maydell@linaro.org>,
- Sia Jee Heng <jeeheng.sia@starfivetech.com>, qemu-devel@nongnu.org,
- kvm@vger.kernel.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
- Zhenyu Wang <zhenyu.z.wang@intel.com>,
- Dapeng Mi <dapeng1.mi@linux.intel.com>,
- Yongwei Ma <yongwei.ma@intel.com>, Zhao Liu <zhao1.liu@intel.com>
-Subject: Re: [RFC 4/8] hw/core: Add cache topology options in -smp
-Message-ID: <Zd4GAhwpw/w0QUth@intel.com>
-References: <20240220092504.726064-1-zhao1.liu@linux.intel.com>
- <20240220092504.726064-5-zhao1.liu@linux.intel.com>
- <20240226153947.00006fd6@Huawei.com> <Zd2pWVH4/eo3HM8j@intel.com>
- <20240227105145.0000106d@Huawei.com>
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1rezgY-0008LK-2d
+ for qemu-riscv@nongnu.org; Tue, 27 Feb 2024 10:48:03 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1709048881;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=vr4yvNAhzduGFNs/Hn1cSdPqILagqMcQ2I0fv32aiHU=;
+ b=iZCPK/oM+TEcz8cSFG0SF+TA7W8iutRu83YFauEFeFgShvw++Zi/M0CDiAdgFau3veFPbA
+ Z0339Lpsh1KJuoHKseuziF2BppW+PWQ8jt+pSPUZE/OsWl/s5lpbVaD9icsd34UObS1ZLt
+ CgrtBWTOx4SxpMFI3soVtb3uBsX0IoY=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-608-1ewVVXUgM3-Q7_leaNEkvg-1; Tue, 27 Feb 2024 10:47:59 -0500
+X-MC-Unique: 1ewVVXUgM3-Q7_leaNEkvg-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.6])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 4727C832C09;
+ Tue, 27 Feb 2024 15:47:58 +0000 (UTC)
+Received: from dell-r430-03.lab.eng.brq2.redhat.com
+ (dell-r430-03.lab.eng.brq2.redhat.com [10.37.153.18])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id B8B5B2166B5D;
+ Tue, 27 Feb 2024 15:47:54 +0000 (UTC)
+From: Igor Mammedov <imammedo@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: peter.maydell@linaro.org, pbonzini@redhat.com, mst@redhat.com,
+ gaosong@loongson.cn, alistair.francis@wdc.com, palmer@dabbelt.com,
+ bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, imammedo@redhat.com, anisinha@redhat.com,
+ philmd@linaro.org, wangyanan55@huawei.com, eblake@redhat.com,
+ armbru@redhat.com, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
+ f.ebner@proxmox.com
+Subject: [PATCH 01/19] tests: smbios: make it possible to write SMBIOS only
+ test
+Date: Tue, 27 Feb 2024 16:47:31 +0100
+Message-Id: <20240227154749.1818189-2-imammedo@redhat.com>
+In-Reply-To: <20240227154749.1818189-1-imammedo@redhat.com>
+References: <20240227154749.1818189-1-imammedo@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240227105145.0000106d@Huawei.com>
-Received-SPF: none client-ip=198.175.65.18;
- envelope-from=zhao1.liu@linux.intel.com; helo=mgamail.intel.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.6
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=imammedo@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -21
+X-Spam_score: -2.2
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.088,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.088,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -94,69 +90,100 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Feb 27, 2024 at 10:51:45AM +0000, Jonathan Cameron wrote:
-> Date: Tue, 27 Feb 2024 10:51:45 +0000
-> From: Jonathan Cameron <Jonathan.Cameron@Huawei.com>
-> Subject: Re: [RFC 4/8] hw/core: Add cache topology options in -smp
-> X-Mailer: Claws Mail 4.1.0 (GTK 3.24.33; x86_64-w64-mingw32)
-> 
-> On Tue, 27 Feb 2024 17:20:25 +0800
-> Zhao Liu <zhao1.liu@linux.intel.com> wrote:
-> 
-> > Hi Jonathan,
-> > 
-> > > Hi Zhao Liu
-> > > 
-> > > I like the scheme.  Strikes a good balance between complexity of description
-> > > and systems that actually exist. Sure there are systems with more cache
-> > > levels etc but they are rare and support can be easily added later
-> > > if people want to model them.  
-> > 
-> > Thanks for your support!
-> > 
-> > [snip]
-> > 
-> > > > +static int smp_cache_string_to_topology(MachineState *ms,  
-> > > 
-> > > Not a good name for a function that does rather more than that.  
-> > 
-> > What about "smp_cache_get_valid_topology()"?
-> 
-> Looking again, could we return the CPUTopoLevel? I think returning
-> CPU_TOPO_LEVEL_INVALID will replace -1/0 returns and this can just
-> be smp_cache_string_to_topology() as you have it in this version.
-> 
-> The check on the return value becomes a little more more complex
-> and I think you want to squash CPU_TOPO_LEVEL_MAX down so we only
-> have one invalid value to check at callers..  E.g.
-> 
-> static CPUTopoLevel smp_cache_string_to_topolgy(MachineState *ms,
->                                                 char *top_str,
->                                                 Error **errp)
-> {
->     CPUTopoLevel topo = string_to_cpu_topo(topo_str);
-> 
->     if (topo == CPU_TOPO_LEVEL_MAX || topo == CPU_TOP?O_LEVEL_INVALID) {
->         return CPU_TOPO_LEVEL_INVALID;
->     }
-> 
->     if (!machine_check_topo_support(ms, topo) {
->         error_setg(errp,
->                    "Invalid cache topology level: %s. "
->                    "The cache topology should match the CPU topology level",
-> //Break string like this to make it as grep-able as possible!
->                    topo_str);
->         return CPU_TOPO_LEVEL_INVALID;
->     }
-> 
->     return topo;
-> 
-> }                
-> 
-> 
-> The checks then become != CPU_TOPO_LEVEL_INVALID at each callsite.
->
+Cureently it not possible to run SMBIOS test without ACPI one,
+which gets into the way when testing ACPI-less configs.
 
-Good idea! This makes the code clearer. Let me try this way. Thanks!
+Extract SMBIOS testing into separate routines that could also
+be run without ACPI dependency and use that for testing SMBIOS.
+
+As the 1st user add "acpi/piix4/smbios-options" test case.
+
+Signed-off-by: Igor Mammedov <imammedo@redhat.com>
+---
+ tests/qtest/bios-tables-test.c | 47 +++++++++++++++++++++++++++-------
+ 1 file changed, 38 insertions(+), 9 deletions(-)
+
+diff --git a/tests/qtest/bios-tables-test.c b/tests/qtest/bios-tables-test.c
+index 21811a1ab5..b2992bafa8 100644
+--- a/tests/qtest/bios-tables-test.c
++++ b/tests/qtest/bios-tables-test.c
+@@ -858,16 +858,8 @@ static void test_vm_prepare(const char *params, test_data *data)
+     g_free(args);
+ }
+ 
+-static void process_acpi_tables_noexit(test_data *data)
++static void process_smbios_tables_noexit(test_data *data)
+ {
+-    test_acpi_load_tables(data);
+-
+-    if (getenv(ACPI_REBUILD_EXPECTED_AML)) {
+-        dump_aml_files(data, true);
+-    } else {
+-        test_acpi_asl(data);
+-    }
+-
+     /*
+      * TODO: make SMBIOS tests work with UEFI firmware,
+      * Bug on uefi-test-tools to provide entry point:
+@@ -879,6 +871,27 @@ static void process_acpi_tables_noexit(test_data *data)
+     }
+ }
+ 
++static void test_smbios(const char *params, test_data *data)
++{
++    test_vm_prepare(params, data);
++    boot_sector_test(data->qts);
++    process_smbios_tables_noexit(data);
++    qtest_quit(data->qts);
++}
++
++static void process_acpi_tables_noexit(test_data *data)
++{
++    test_acpi_load_tables(data);
++
++    if (getenv(ACPI_REBUILD_EXPECTED_AML)) {
++        dump_aml_files(data, true);
++    } else {
++        test_acpi_asl(data);
++    }
++
++    process_smbios_tables_noexit(data);
++}
++
+ static void process_acpi_tables(test_data *data)
+ {
+     process_acpi_tables_noexit(data);
+@@ -2064,6 +2077,20 @@ static void test_acpi_q35_pvpanic_isa(void)
+     free_test_data(&data);
+ }
+ 
++static void test_acpi_pc_smbios_options(void)
++{
++    uint8_t req_type11[] = { 11 };
++    test_data data = {
++        .machine = MACHINE_PC,
++        .variant = ".pc_smbios_options",
++        .required_struct_types = req_type11,
++        .required_struct_types_len = ARRAY_SIZE(req_type11),
++    };
++
++    test_smbios("-smbios type=11,value=TEST", &data);
++    free_test_data(&data);
++}
++
+ static void test_oem_fields(test_data *data)
+ {
+     int i;
+@@ -2215,6 +2242,8 @@ int main(int argc, char *argv[])
+ #ifdef CONFIG_POSIX
+             qtest_add_func("acpi/piix4/acpierst", test_acpi_piix4_acpi_erst);
+ #endif
++            qtest_add_func("acpi/piix4/smbios-options",
++                           test_acpi_pc_smbios_options);
+         }
+         if (qtest_has_machine(MACHINE_Q35)) {
+             qtest_add_func("acpi/q35", test_acpi_q35_tcg);
+-- 
+2.39.3
 
 
