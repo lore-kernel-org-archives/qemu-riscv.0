@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB330C54E4A
-	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Feb 2024 14:49:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58E3DC54798
+	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Feb 2024 14:49:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1reyhf-0007Ql-Ev; Tue, 27 Feb 2024 09:45:07 -0500
+	id 1reygm-0005aN-P9; Tue, 27 Feb 2024 09:44:12 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1reyhG-0006Ov-Ai
- for qemu-riscv@nongnu.org; Tue, 27 Feb 2024 09:44:45 -0500
-Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
+ id 1reygi-0005VH-0U
+ for qemu-riscv@nongnu.org; Tue, 27 Feb 2024 09:44:08 -0500
+Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1reygQ-00025O-K3
- for qemu-riscv@nongnu.org; Tue, 27 Feb 2024 09:44:40 -0500
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-412a9e9c776so7197505e9.0
- for <qemu-riscv@nongnu.org>; Tue, 27 Feb 2024 06:43:50 -0800 (PST)
+ id 1reygK-00020P-9Y
+ for qemu-riscv@nongnu.org; Tue, 27 Feb 2024 09:44:07 -0500
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-33d754746c3so2920882f8f.1
+ for <qemu-riscv@nongnu.org>; Tue, 27 Feb 2024 06:43:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709045029; x=1709649829; darn=nongnu.org;
+ d=linaro.org; s=google; t=1709045022; x=1709649822; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Xq3bg3O489fduJkQRD4v3a7EWyBdeXHXm96vjazL+zo=;
- b=L3J5VTxOC6jMoyQJ0Kkk2Z1Z4/v6tyTaBJkuSAudOgKY9DGK0MBDbHh8FXceOnlAsW
- z+L2nD+oedCwz7A0DHpgaYwsKXG699Vrk0pc9mWF3nFUUn82eNMBXO2SI/AFwPgon2OF
- KCOmP+jC4+rvNoFVAMi5YMRmARisqBMss04jhbLoswJQRBy+FjucxLIlpplMpg9JYZYE
- sEj0ING/vRxulvlhr9aXDRORWPAArzZiFZa8wJsnooz32YWxv40DAZptBrau1fSqi3YX
- Zv8t3P6FHQu3AknMF7w3QkXcMwdDJSY/AYUUhb1b5O930GxY38V4xTYQAQYJTJtp17aG
- Kt4g==
+ bh=hxDVqDXi3LGJSJYkq05RZi8ehgH06PAsi/NzuX8UMrA=;
+ b=ugwl+HgRfQh7bL7L0lBDQyRpjUE7qomkfF2LbCJ2wNetpEq3uCSPNdW8xm1PFnhIlV
+ lYWUVM2fcYU5Zt9qUq/HlGsnfYrpJtQ2cVnOePVRFJFgDuq56R2Uv/uTP6tkJChc3+Qr
+ 8ydTCcSX4uW1+D/Bz08yA3yNJTOwxNOfsBRxc0vk1i6n6esykdw7JCvVeezoZ6Ha2AQa
+ Lnf6RWeGWzVbLUJghezzJ/ssWQidMJ96/ticvh8dUtWQvqYxsNQeL0z+2Ci7vxqNSWSq
+ 4ruIt8yzTU0xmXx9M0Okt3PtDvZvNx1nK9cztSyP671LMRb6KZtnlyY44ejNMg3jCsMg
+ YBnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709045029; x=1709649829;
+ d=1e100.net; s=20230601; t=1709045022; x=1709649822;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Xq3bg3O489fduJkQRD4v3a7EWyBdeXHXm96vjazL+zo=;
- b=Ks1b0ncihn95cCvCj/BD7p2Sy72lU/al0ffBjqlee1BQ8vwne8haeQDVls3RlCr9nZ
- RRWHF3l8LjgPE5L1jmJxne61oNBK75MuvrfqRNrSONmes9xrki79wVB6297ELIIl9LcR
- L9dASKSLDCO1wx6MMbUpiLAljiNkPuG5uzLfbTeF1eUV9YOG5ZOFg+w+HNSlYzFSXtX8
- qzhps5tPGpaXd6NYPXNwuwEYVSat+iAJOr/qsG8imJ7Z/FgFDGXIKW/6iua461fG7Yie
- DsON3O7MEWn+U2z0L5DOjVGkTXkTsypyYgoTamODnrpNXWJPc9ViKfx6ZybLQX6U68jj
- pinQ==
+ bh=hxDVqDXi3LGJSJYkq05RZi8ehgH06PAsi/NzuX8UMrA=;
+ b=aC+n+2ND3JBT/EKOYjjMmiQ0NVw6X7ejKWGeJM4TZdN/CXlC0ciss1Gn7LaVQI+6Ax
+ bNkKRJQYfH5QvnJpspQxWzI4pZ9QB60KR3x1BDvA5KFtwpnIVBI0UqDCCSisAQULhyoy
+ N0zJJBlx5ztwWAEwIia1Y6o7OIDEGtKQ0Am9irU8CVPB0s167l/Crq4QveTgA+xM3HK7
+ zihPJdeyfUiT6G0hq1H74TumyjdNEmVSsAuXSVOXlBaPZVy4DXoZm23lOuQTBVV2tzSb
+ 8sAN4UfYsQw7FutbzRYhrnOYOWb1iB6el5HRHR+yg/K3GMYhFqfoIqhfPiYDgh/6RkjQ
+ wfWw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUH/8ANv1vZA3zc71nO4aWvi5ziBBclmMU6EbOgas0c5Ua12i1pb1eRd5Hhd7rp6HK848ktCTCpB14i50G/Zguu9+rav24=
-X-Gm-Message-State: AOJu0YyjvbHsAhix49wgxytFhG79lK/t7WNp/NfyNEpv1z7KhVKTUnw7
- su5VeFhI9wTeWXx+pDhM71mQYIITLwAthFLDh3lMOi62SMnbANdQxMfl7yryIlA=
-X-Google-Smtp-Source: AGHT+IHAP/lXe8u8rlHOfjZw5wX2x+OUcDl7++VcvhLOhxgjU7nMjI2JgtSrKQ9SQcBK+dkjg9AeQQ==
-X-Received: by 2002:a05:600c:35c6:b0:412:a3f2:d641 with SMTP id
- r6-20020a05600c35c600b00412a3f2d641mr6178315wmq.19.1709045029237; 
- Tue, 27 Feb 2024 06:43:49 -0800 (PST)
+ AJvYcCWf80oOAyC6uZ9XjIS/bxytPwHYoADdU/a06Hr2icCHM8j6TF6zTr7ZfUfugIq+o+nIDXL8ewVsPvTzz3kw/o0OdCsKW1k=
+X-Gm-Message-State: AOJu0YygKGrFOLfeiqlcVYUhWQ5DHm7cqUxYiLyWRDTEkkSoFKGqXZWB
+ lP7C5n8ru/cZ34Pr4QR8V5rGvIFix64+H0N3LD/6sYOvIbckvgG0cwLUdw527uM=
+X-Google-Smtp-Source: AGHT+IEacG6jW3pkVUqXRpBiljitqFwKN4RhVp1BxiQrkK9uyPw+9aYn2eOY4WuGvU4uG/rtrDLgXA==
+X-Received: by 2002:adf:ef87:0:b0:33d:a011:ae42 with SMTP id
+ d7-20020adfef87000000b0033da011ae42mr6990698wro.38.1709045022399; 
+ Tue, 27 Feb 2024 06:43:42 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- fm6-20020a05600c0c0600b00412a5b6ac5csm5958110wmb.36.2024.02.27.06.43.42
+ d14-20020a5d538e000000b0033d4deb2356sm11489452wrv.56.2024.02.27.06.43.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 Feb 2024 06:43:47 -0800 (PST)
+ Tue, 27 Feb 2024 06:43:40 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 333CD5F911;
- Tue, 27 Feb 2024 14:43:37 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 88BCC5F90B;
+ Tue, 27 Feb 2024 14:43:36 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-ppc@nongnu.org, Yoshinori Sato <ysato@users.sourceforge.jp>,
@@ -90,18 +90,19 @@ Cc: qemu-ppc@nongnu.org, Yoshinori Sato <ysato@users.sourceforge.jp>,
  Weiwei Li <liwei1518@gmail.com>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
- Mahmoud Mandour <ma.mandourr@gmail.com>
-Subject: [PATCH v4 17/29] plugins: fix order of init/idle/resume callback
-Date: Tue, 27 Feb 2024 14:43:23 +0000
-Message-Id: <20240227144335.1196131-18-alex.bennee@linaro.org>
+ Mahmoud Mandour <ma.mandourr@gmail.com>,
+ Akihiko Odaki <akihiko.odaki@daynix.com>
+Subject: [PATCH v4 11/29] gdbstub: Simplify XML lookup
+Date: Tue, 27 Feb 2024 14:43:17 +0000
+Message-Id: <20240227144335.1196131-12-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240227144335.1196131-1-alex.bennee@linaro.org>
 References: <20240227144335.1196131-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::330;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x330.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::436;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x436.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -124,50 +125,257 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+From: Akihiko Odaki <akihiko.odaki@daynix.com>
 
-We found that vcpu_init_hook was called *after* idle callback.
-vcpu_init is called from cpu_realize_fn, while idle/resume cb are called
-from qemu_wait_io_event (in vcpu thread).
+Now we know all instances of GDBFeature that is used in CPU so we can
+traverse them to find XML. This removes the need for a CPU-specific
+lookup function for dynamic XMLs.
 
-This change ensures we only call idle and resume cb only once a plugin
-was init for a given vcpu.
-
-Next change in the series will run vcpu_init asynchronously, which will
-make it run *after* resume callback as well. So we fix this now.
-
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Message-Id: <20240213094009.150349-4-pierrick.bouvier@linaro.org>
+Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
+Message-Id: <20240103173349.398526-33-alex.bennee@linaro.org>
+Message-Id: <20231213-gdb-v17-7-777047380591@daynix.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- plugins/core.c | 9 +++++++--
- 1 file changed, 7 insertions(+), 2 deletions(-)
+ include/exec/gdbstub.h |   6 +++
+ gdbstub/gdbstub.c      | 118 +++++++++++++++++++++--------------------
+ hw/core/cpu-common.c   |   5 +-
+ 3 files changed, 69 insertions(+), 60 deletions(-)
 
-diff --git a/plugins/core.c b/plugins/core.c
-index caa66311351..2392bbb8889 100644
---- a/plugins/core.c
-+++ b/plugins/core.c
-@@ -391,12 +391,17 @@ void qemu_plugin_vcpu_syscall_ret(CPUState *cpu, int64_t num, int64_t ret)
+diff --git a/include/exec/gdbstub.h b/include/exec/gdbstub.h
+index bcaab1bc750..82a8afa237f 100644
+--- a/include/exec/gdbstub.h
++++ b/include/exec/gdbstub.h
+@@ -27,6 +27,12 @@ typedef struct GDBFeatureBuilder {
+ typedef int (*gdb_get_reg_cb)(CPUState *cpu, GByteArray *buf, int reg);
+ typedef int (*gdb_set_reg_cb)(CPUState *cpu, uint8_t *buf, int reg);
  
- void qemu_plugin_vcpu_idle_cb(CPUState *cpu)
++/**
++ * gdb_init_cpu(): Initialize the CPU for gdbstub.
++ * @cpu: The CPU to be initialized.
++ */
++void gdb_init_cpu(CPUState *cpu);
++
+ /**
+  * gdb_register_coprocessor() - register a supplemental set of registers
+  * @cpu - the CPU associated with registers
+diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
+index 486ceb52d2e..d573f808d2e 100644
+--- a/gdbstub/gdbstub.c
++++ b/gdbstub/gdbstub.c
+@@ -352,6 +352,7 @@ static const char *get_feature_xml(const char *p, const char **newp,
  {
--    plugin_vcpu_cb__simple(cpu, QEMU_PLUGIN_EV_VCPU_IDLE);
-+    /* idle and resume cb may be called before init, ignore in this case */
-+    if (cpu->cpu_index < plugin.num_vcpus) {
-+        plugin_vcpu_cb__simple(cpu, QEMU_PLUGIN_EV_VCPU_IDLE);
-+    }
+     CPUState *cpu = gdb_get_first_cpu_in_process(process);
+     CPUClass *cc = CPU_GET_CLASS(cpu);
++    GDBRegisterState *r;
+     size_t len;
+ 
+     /*
+@@ -365,7 +366,6 @@ static const char *get_feature_xml(const char *p, const char **newp,
+     /* Is it the main target xml? */
+     if (strncmp(p, "target.xml", len) == 0) {
+         if (!process->target_xml) {
+-            GDBRegisterState *r;
+             g_autoptr(GPtrArray) xml = g_ptr_array_new_with_free_func(g_free);
+ 
+             g_ptr_array_add(
+@@ -380,18 +380,12 @@ static const char *get_feature_xml(const char *p, const char **newp,
+                     g_markup_printf_escaped("<architecture>%s</architecture>",
+                                             cc->gdb_arch_name(cpu)));
+             }
+-            g_ptr_array_add(
+-                xml,
+-                g_markup_printf_escaped("<xi:include href=\"%s\"/>",
+-                                        cc->gdb_core_xml_file));
+-            if (cpu->gdb_regs) {
+-                for (guint i = 0; i < cpu->gdb_regs->len; i++) {
+-                    r = &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
+-                    g_ptr_array_add(
+-                        xml,
+-                        g_markup_printf_escaped("<xi:include href=\"%s\"/>",
+-                                                r->feature->xmlname));
+-                }
++            for (guint i = 0; i < cpu->gdb_regs->len; i++) {
++                r = &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
++                g_ptr_array_add(
++                    xml,
++                    g_markup_printf_escaped("<xi:include href=\"%s\"/>",
++                                            r->feature->xmlname));
+             }
+             g_ptr_array_add(xml, g_strdup("</target>"));
+             g_ptr_array_add(xml, NULL);
+@@ -400,20 +394,11 @@ static const char *get_feature_xml(const char *p, const char **newp,
+         }
+         return process->target_xml;
+     }
+-    /* Is it dynamically generated by the target? */
+-    if (cc->gdb_get_dynamic_xml) {
+-        g_autofree char *xmlname = g_strndup(p, len);
+-        const char *xml = cc->gdb_get_dynamic_xml(cpu, xmlname);
+-        if (xml) {
+-            return xml;
+-        }
+-    }
+-    /* Is it one of the encoded gdb-xml/ files? */
+-    for (int i = 0; gdb_static_features[i].xmlname; i++) {
+-        const char *name = gdb_static_features[i].xmlname;
+-        if ((strncmp(name, p, len) == 0) &&
+-            strlen(name) == len) {
+-            return gdb_static_features[i].xml;
++    /* Is it one of the features? */
++    for (guint i = 0; i < cpu->gdb_regs->len; i++) {
++        r = &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
++        if (strncmp(p, r->feature->xmlname, len) == 0) {
++            return r->feature->xml;
+         }
+     }
+ 
+@@ -508,12 +493,10 @@ static int gdb_read_register(CPUState *cpu, GByteArray *buf, int reg)
+         return cc->gdb_read_register(cpu, buf, reg);
+     }
+ 
+-    if (cpu->gdb_regs) {
+-        for (guint i = 0; i < cpu->gdb_regs->len; i++) {
+-            r = &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
+-            if (r->base_reg <= reg && reg < r->base_reg + r->feature->num_regs) {
+-                return r->get_reg(cpu, buf, reg - r->base_reg);
+-            }
++    for (guint i = 0; i < cpu->gdb_regs->len; i++) {
++        r = &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
++        if (r->base_reg <= reg && reg < r->base_reg + r->feature->num_regs) {
++            return r->get_reg(cpu, buf, reg - r->base_reg);
+         }
+     }
+     return 0;
+@@ -528,51 +511,70 @@ static int gdb_write_register(CPUState *cpu, uint8_t *mem_buf, int reg)
+         return cc->gdb_write_register(cpu, mem_buf, reg);
+     }
+ 
+-    if (cpu->gdb_regs) {
+-        for (guint i = 0; i < cpu->gdb_regs->len; i++) {
+-            r =  &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
+-            if (r->base_reg <= reg && reg < r->base_reg + r->feature->num_regs) {
+-                return r->set_reg(cpu, mem_buf, reg - r->base_reg);
+-            }
++    for (guint i = 0; i < cpu->gdb_regs->len; i++) {
++        r =  &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
++        if (r->base_reg <= reg && reg < r->base_reg + r->feature->num_regs) {
++            return r->set_reg(cpu, mem_buf, reg - r->base_reg);
+         }
+     }
+     return 0;
  }
  
- void qemu_plugin_vcpu_resume_cb(CPUState *cpu)
- {
--    plugin_vcpu_cb__simple(cpu, QEMU_PLUGIN_EV_VCPU_RESUME);
-+    if (cpu->cpu_index < plugin.num_vcpus) {
-+        plugin_vcpu_cb__simple(cpu, QEMU_PLUGIN_EV_VCPU_RESUME);
++static void gdb_register_feature(CPUState *cpu, int base_reg,
++                                 gdb_get_reg_cb get_reg, gdb_set_reg_cb set_reg,
++                                 const GDBFeature *feature)
++{
++    GDBRegisterState s = {
++        .base_reg = base_reg,
++        .get_reg = get_reg,
++        .set_reg = set_reg,
++        .feature = feature
++    };
++
++    g_array_append_val(cpu->gdb_regs, s);
++}
++
++void gdb_init_cpu(CPUState *cpu)
++{
++    CPUClass *cc = CPU_GET_CLASS(cpu);
++    const GDBFeature *feature;
++
++    cpu->gdb_regs = g_array_new(false, false, sizeof(GDBRegisterState));
++
++    if (cc->gdb_core_xml_file) {
++        feature = gdb_find_static_feature(cc->gdb_core_xml_file);
++        gdb_register_feature(cpu, 0,
++                             cc->gdb_read_register, cc->gdb_write_register,
++                             feature);
 +    }
- }
++
++    cpu->gdb_num_regs = cpu->gdb_num_g_regs = cc->gdb_num_core_regs;
++}
++
+ void gdb_register_coprocessor(CPUState *cpu,
+                               gdb_get_reg_cb get_reg, gdb_set_reg_cb set_reg,
+                               const GDBFeature *feature, int g_pos)
+ {
+     GDBRegisterState *s;
+     guint i;
++    int base_reg = cpu->gdb_num_regs;
  
- void qemu_plugin_register_vcpu_idle_cb(qemu_plugin_id_t id,
+-    if (cpu->gdb_regs) {
+-        for (i = 0; i < cpu->gdb_regs->len; i++) {
+-            /* Check for duplicates.  */
+-            s = &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
+-            if (s->feature == feature) {
+-                return;
+-            }
++    for (i = 0; i < cpu->gdb_regs->len; i++) {
++        /* Check for duplicates.  */
++        s = &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
++        if (s->feature == feature) {
++            return;
+         }
+-    } else {
+-        cpu->gdb_regs = g_array_new(false, false, sizeof(GDBRegisterState));
+-        i = 0;
+     }
+ 
+-    g_array_set_size(cpu->gdb_regs, i + 1);
+-    s = &g_array_index(cpu->gdb_regs, GDBRegisterState, i);
+-    s->base_reg = cpu->gdb_num_regs;
+-    s->get_reg = get_reg;
+-    s->set_reg = set_reg;
+-    s->feature = feature;
++    gdb_register_feature(cpu, base_reg, get_reg, set_reg, feature);
+ 
+     /* Add to end of list.  */
+     cpu->gdb_num_regs += feature->num_regs;
+     if (g_pos) {
+-        if (g_pos != s->base_reg) {
++        if (g_pos != base_reg) {
+             error_report("Error: Bad gdb register numbering for '%s', "
+-                         "expected %d got %d", feature->xml,
+-                         g_pos, s->base_reg);
++                         "expected %d got %d", feature->xml, g_pos, base_reg);
+         } else {
+             cpu->gdb_num_g_regs = cpu->gdb_num_regs;
+         }
+diff --git a/hw/core/cpu-common.c b/hw/core/cpu-common.c
+index 67db07741d7..fe16d0d9df8 100644
+--- a/hw/core/cpu-common.c
++++ b/hw/core/cpu-common.c
+@@ -27,6 +27,7 @@
+ #include "qemu/main-loop.h"
+ #include "exec/log.h"
+ #include "exec/cpu-common.h"
++#include "exec/gdbstub.h"
+ #include "qemu/error-report.h"
+ #include "qemu/qemu-print.h"
+ #include "sysemu/tcg.h"
+@@ -240,11 +241,10 @@ static void cpu_common_unrealizefn(DeviceState *dev)
+ static void cpu_common_initfn(Object *obj)
+ {
+     CPUState *cpu = CPU(obj);
+-    CPUClass *cc = CPU_GET_CLASS(obj);
+ 
++    gdb_init_cpu(cpu);
+     cpu->cpu_index = UNASSIGNED_CPU_INDEX;
+     cpu->cluster_index = UNASSIGNED_CLUSTER_INDEX;
+-    cpu->gdb_num_regs = cpu->gdb_num_g_regs = cc->gdb_num_core_regs;
+     /* user-mode doesn't have configurable SMP topology */
+     /* the default value is changed by qemu_init_vcpu() for system-mode */
+     cpu->nr_cores = 1;
+@@ -264,6 +264,7 @@ static void cpu_common_finalize(Object *obj)
+ {
+     CPUState *cpu = CPU(obj);
+ 
++    g_array_free(cpu->gdb_regs, TRUE);
+     qemu_lockcnt_destroy(&cpu->in_ioctl_lock);
+     qemu_mutex_destroy(&cpu->work_mutex);
+ }
 -- 
 2.39.2
 
