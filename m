@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C54F9C54798
-	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Feb 2024 14:56:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20E41C54798
+	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Feb 2024 14:56:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1reypj-00050Q-9a; Tue, 27 Feb 2024 09:53:27 -0500
+	id 1reype-0004XD-1y; Tue, 27 Feb 2024 09:53:22 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1reypc-0004Rk-SW
- for qemu-riscv@nongnu.org; Tue, 27 Feb 2024 09:53:21 -0500
-Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
+ id 1reypY-00047o-3k
+ for qemu-riscv@nongnu.org; Tue, 27 Feb 2024 09:53:16 -0500
+Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1reypJ-0004rl-FL
- for qemu-riscv@nongnu.org; Tue, 27 Feb 2024 09:53:20 -0500
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-41241f64c6bso33994365e9.0
- for <qemu-riscv@nongnu.org>; Tue, 27 Feb 2024 06:53:00 -0800 (PST)
+ id 1reypH-0004qr-NS
+ for qemu-riscv@nongnu.org; Tue, 27 Feb 2024 09:53:15 -0500
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-412ad927275so4819895e9.3
+ for <qemu-riscv@nongnu.org>; Tue, 27 Feb 2024 06:52:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709045580; x=1709650380; darn=nongnu.org;
+ d=linaro.org; s=google; t=1709045578; x=1709650378; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DS/EGY2tGxoW2u4p636lnzJLhbzW+SUrMSj5Qfa0kZY=;
- b=l8FQOhMDo1lm41CiXYfdGTQNHNVSgqtKbLGr9K+9kIRB6RIZ9675k6Y1CePVXD4VXW
- UBRT5jNVhuhI6R7c9OIBE1ssWO8gSG2XCuqxHWTq6wm/t1RwOpGsYFktsa7E7HxFbRGP
- +lAuS+zO8kxpNwHDdgNGb0FC+qj4ubLjQhyMGwi2iz3ZHYHOXIlpPuQWMd4tWgg5cKJN
- RVkvIoIj9lqtVHrFuw9UWB4+bej2/DGZ3IPJAUkzhz5MCPvvwVjHsprrdCxmGsF6dBk4
- xisrt+9QRYFBCVw3YmU2Hu61s4CdXmVqnOucB8btjvQY2ffDK6r47ENRDPubg8I/yx2e
- f7bQ==
+ bh=v93sjlrKGHF/8PcF+jkx1JshiyYwDWnn08uJwR8C/sE=;
+ b=n67yYNZgRu7SyBFr96vQwfAKOmTJnWpfSginPOSNtGfyVbdo2DlKkUbU1wlDSxy0UD
+ get9yHYDfUGcSi1q1B8gsES1eWaXDrpPsoEZb0JAwGJ3nV0u3m3GkQUL+G1+7iSJpwHS
+ Vl1SYi64rcLrPecZWY69Ea59a2bOySIEDV+HvWPq+CorPDd+thB5AQcE9g4FSpOpwh9D
+ 9J8R5hP9OqNWNFkGPnukkia7K4DCJVJAc7FMyFiyhnwmKf0d4FN7jvWZdW4grqF7cDOG
+ oXttc6XGlVl/oaAcLD2x6dOVCqBl+w3Kqc82yk2spdOvUhrBUyYcsuKRrQQ5O7zUbmOP
+ eGQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709045580; x=1709650380;
+ d=1e100.net; s=20230601; t=1709045578; x=1709650378;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DS/EGY2tGxoW2u4p636lnzJLhbzW+SUrMSj5Qfa0kZY=;
- b=Ir/0QtZ8wp2LNsnMJfFDBJT42CEVwtlbbhotI3LI/wlc+JjsvmDa7bTwIcRpCliJVG
- 26p+iFzEjR7rOfG5I8ldVMVBg9daz3i2Fywd1X+MvIZX2x3rryODPLw1yaPM2AGTIKzx
- y4Allint8eAiEMFVs/51qogYZEoY5f9yIwESUwvdIUfv6efdftdsbzyg6UBM6xS8Bbv+
- gBeFqzzH0zSRpUKyT4oOVFfdV4DHP4qfnUG8ylZcC+7QtVJekmnUWcVI+Q9A7eDPnb3L
- yrJnjQEI6yaDf9NbiUYyghKyeAcBBsNdSbSTuw4GpcPT8SIN/DmjfKqsghXp8HAODSDF
- ed7g==
+ bh=v93sjlrKGHF/8PcF+jkx1JshiyYwDWnn08uJwR8C/sE=;
+ b=UTjsgqNRrT7pM25O7gQFSNXaFy5HPS5js4NTT8H2Fa4CwOo6UatxNax+dDVLMfKXrR
+ WKABkI+JpLeeNVKXot8WnIsxyft2BS+DCDLSrbxg+d0AkbxEg2avhDVRgha7Tjw3Tcu2
+ /glw5J9UVUVzAFqVtwaCgEurzgfGlmZu5oSkr4W765i6igAGKqsAfqqkqeeFhqJEU3u4
+ 45Ax/CsYds2TNL/ndvsxd01XupgaLmcTI7V3HW3e0AQRpar2XKRWO/kTEvQkikaLcW7S
+ bm3S4bAdhpIyAfFAtx/4n2hhl9aYEjwxGhI0ykU7/j283zDDkSXITkBhy/b65IDMHxXe
+ jT7w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVapSRoU0DPNzDIbf9OTkXIUEa4Ppf67vEKpdMMR0QMo1Gjb+9aD+Jo272QAj3EJOmTdMrqDKmzXyw07GdR6v6h3tXvUMM=
-X-Gm-Message-State: AOJu0YxKqsGqPDgihduzqI/y23oVCB0dAKOza/gyX5ZARFDMfUp+MhcB
- K/BekI55rgDjZBdDeUZp3kVX+uOACrRSTLFiuBU8IQlTxWDXDE+GTOMP8IkSPRk=
-X-Google-Smtp-Source: AGHT+IFp2qY1yTh7nKe5J3lMjvBCga2j9Q4uCpSn8lGlJYyYv0WrUhHFgAWJOyBSxlFBOVTJrrh/+g==
-X-Received: by 2002:a05:600c:1e1f:b0:412:a9b1:148a with SMTP id
- ay31-20020a05600c1e1f00b00412a9b1148amr1993642wmb.23.1709045580107; 
- Tue, 27 Feb 2024 06:53:00 -0800 (PST)
+ AJvYcCWHoaP4e0s0vqCEHTe4DgFeFJ3/iwX4XtKJh2qzwXk7KpwXRJfS96mnXg6AIh2j6l9mH6mTxSN+4jIH1cwq98eAns/prrw=
+X-Gm-Message-State: AOJu0Yw/3MeVK6X/Xy6qqlW0VZOHvs7hLGtjKG6SxxqgPFMLj8/QVBO2
+ 7VV5y8ef6eVIUz8QYhiTfhowsFd+ji/XPg9p+KosbJsg5FTQfUXeASNqQDltQvo=
+X-Google-Smtp-Source: AGHT+IH020MKj8UmggWp8hYqds1m+lcpudmih5CLvijKgTE+IPybjsbU9+azdI/oD3UgPB86vaZqRQ==
+X-Received: by 2002:a05:600c:4453:b0:412:9450:fe19 with SMTP id
+ v19-20020a05600c445300b004129450fe19mr6959954wmn.39.1709045578218; 
+ Tue, 27 Feb 2024 06:52:58 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- m9-20020a05600c4f4900b00412a013817esm9639489wmq.7.2024.02.27.06.52.51
+ m24-20020a7bca58000000b0041298c75ae8sm449380wml.1.2024.02.27.06.52.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Tue, 27 Feb 2024 06:52:53 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 489D95F920;
+ by draig.lan (Postfix) with ESMTP id CA7B25F92B;
  Tue, 27 Feb 2024 14:43:37 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -91,24 +91,25 @@ Cc: qemu-ppc@nongnu.org, Yoshinori Sato <ysato@users.sourceforge.jp>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Mahmoud Mandour <ma.mandourr@gmail.com>
-Subject: [PATCH v4 18/29] linux-user: ensure nios2 processes queued work
-Date: Tue, 27 Feb 2024 14:43:24 +0000
-Message-Id: <20240227144335.1196131-19-alex.bennee@linaro.org>
+Subject: [PATCH v4 24/29] tests/tcg: expand insn test case to exercise
+ register API
+Date: Tue, 27 Feb 2024 14:43:30 +0000
+Message-Id: <20240227144335.1196131-25-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240227144335.1196131-1-alex.bennee@linaro.org>
 References: <20240227144335.1196131-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::330;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x330.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -124,32 +125,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-While async processes are rare for linux-user we do use them from time
-to time. The most obvious one is tb_flush when we run out of
-translation space. We will also need this when we move plugin
-vcpu_init to an async task.
-
-Fix nios2 to follow its older, wiser and more stable siblings.
+This ensure we at least read every register the plugin API reports at
+least once during the check-tcg checks.
 
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- linux-user/nios2/cpu_loop.c | 1 +
- 1 file changed, 1 insertion(+)
+ tests/plugin/insn.c | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
 
-diff --git a/linux-user/nios2/cpu_loop.c b/linux-user/nios2/cpu_loop.c
-index da77ede76bd..7fe08c87501 100644
---- a/linux-user/nios2/cpu_loop.c
-+++ b/linux-user/nios2/cpu_loop.c
-@@ -32,6 +32,7 @@ void cpu_loop(CPUNios2State *env)
-         cpu_exec_start(cs);
-         trapnr = cpu_exec(cs);
-         cpu_exec_end(cs);
-+        process_queued_cpu_work(cs);
+diff --git a/tests/plugin/insn.c b/tests/plugin/insn.c
+index 5fd3017c2b3..54da06fcf26 100644
+--- a/tests/plugin/insn.c
++++ b/tests/plugin/insn.c
+@@ -46,6 +46,25 @@ typedef struct {
+     char *disas;
+ } Instruction;
  
-         switch (trapnr) {
-         case EXCP_INTERRUPT:
++/*
++ * Initialise a new vcpu with reading the register list
++ */
++static void vcpu_init(qemu_plugin_id_t id, unsigned int vcpu_index)
++{
++    g_autoptr(GArray) reg_list = qemu_plugin_get_registers();
++    g_autoptr(GByteArray) reg_value = g_byte_array_new();
++
++    if (reg_list) {
++        for (int i = 0; i < reg_list->len; i++) {
++            qemu_plugin_reg_descriptor *rd = &g_array_index(
++                reg_list, qemu_plugin_reg_descriptor, i);
++            int count = qemu_plugin_read_register(rd->handle, reg_value);
++            g_assert(count > 0);
++        }
++    }
++}
++
++
+ static void vcpu_insn_exec_before(unsigned int cpu_index, void *udata)
+ {
+     unsigned int i = cpu_index % MAX_CPUS;
+@@ -212,6 +231,8 @@ QEMU_PLUGIN_EXPORT int qemu_plugin_install(qemu_plugin_id_t id,
+         sizes = g_array_new(true, true, sizeof(unsigned long));
+     }
+ 
++    /* Register init, translation block and exit callbacks */
++    qemu_plugin_register_vcpu_init_cb(id, vcpu_init);
+     qemu_plugin_register_vcpu_tb_trans_cb(id, vcpu_tb_trans);
+     qemu_plugin_register_atexit_cb(id, plugin_exit, NULL);
+     return 0;
 -- 
 2.39.2
 
