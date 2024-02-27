@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3285BC54798
-	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Feb 2024 14:46:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22FD6C5478C
+	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Feb 2024 14:46:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1reyh5-00068m-TV; Tue, 27 Feb 2024 09:44:31 -0500
+	id 1reyga-0005PY-3d; Tue, 27 Feb 2024 09:44:00 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1reyh1-00065P-O4
- for qemu-riscv@nongnu.org; Tue, 27 Feb 2024 09:44:27 -0500
-Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a])
+ id 1reygS-0005Lg-8c
+ for qemu-riscv@nongnu.org; Tue, 27 Feb 2024 09:43:52 -0500
+Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1reygM-00021o-OH
- for qemu-riscv@nongnu.org; Tue, 27 Feb 2024 09:44:27 -0500
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-412af2c7902so3744825e9.3
- for <qemu-riscv@nongnu.org>; Tue, 27 Feb 2024 06:43:45 -0800 (PST)
+ id 1reygF-0001x8-Jg
+ for qemu-riscv@nongnu.org; Tue, 27 Feb 2024 09:43:51 -0500
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-412949fd224so23004165e9.1
+ for <qemu-riscv@nongnu.org>; Tue, 27 Feb 2024 06:43:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709045024; x=1709649824; darn=nongnu.org;
+ d=linaro.org; s=google; t=1709045016; x=1709649816; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bDjjTqMhYKHCzkLVMWR5TnRDxMdOCstiIUzTCMYj9VU=;
- b=WKvCDqEj873VlxGMmasluT6QWjIlPX3Xe3u0B743mLkH4caWX6mLHD3D3nbngv7hXt
- DtR0B0bT3nbmJ687LGXjIaZGKk1BoDE1rvcaYVC+5vI/d5eENk+5FI5XsBWklBC2f9Ev
- 45W9BJA3XxSMJvzgGzt+zwK8FlSA18m/7v0KpdTQXlTD82W7m56QBZmBrk4HiNlBrWNB
- fs6Q/XR8k2zvtuhSLCInRFTP7e60KnA8mWc2shsJK0nmIh/XsXwe4n5CSgs1wzjmfRg7
- oDZXiauxKOV91636Kc3X+TvJfJUM0QPaxFN8yP0BxEJePoD+949T/WoIKfmjI8GeTR/s
- LVug==
+ bh=Ij5ZdnIJjaB2d5j9f+EAx/syvnIPQ+iaNJFFiZwFn30=;
+ b=vJchKstrVNiNk53ZAd2oONmiMJyS/I5gLDGVsQwqyRj7Dx7OQ198eqyjtNxc0Q/mNP
+ Oy9boSu84k1WlnBhS1uECN+JT7VlxyH2eepUg/q9AnTwc4buaWAFsYpBzusPWE5wqbKD
+ ASTAJ7aQTxpOnrKcYsi7F0BQc6+A8be/MJjs4om6Vu41Q6drmKqs3O5GEi9xZPI9tKA1
+ XAlk3VMHUrc7Iclt3a1CM/cxpVjfdyDUp2qhYfCpentnFXQuRL2SOknhjfjBI1Qy014O
+ i+pJVoeqFQlIwzXJ1mcmO85gWWYtOoxi0T04WPHCoJHYlnShdhH2a25cKz5t+AJhqzEM
+ bKoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709045024; x=1709649824;
+ d=1e100.net; s=20230601; t=1709045016; x=1709649816;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bDjjTqMhYKHCzkLVMWR5TnRDxMdOCstiIUzTCMYj9VU=;
- b=d4auMPRy7ssvVZsBhGpnCbfHhi65pFaLFXlM7/UX+WdeUQkKE/+6KHfAJ9gaWGHe8q
- NKKF5DdvONJeGInPMdWGQAI1gb9ACipAGCLN/fi66Dqpuc5o8YuOwpUiE6WvOSDTAvfZ
- cZBgOSe5UirTyM/HoEDtNj7vyjohJWoJAUpit3Wp9dT0tWRQDuedaUUZyh91sz5ED9XX
- hnSry8fs56FZmc6HwZvs8urOxIEn+5sbzuWZD2K/0zj/7YlG9rhhi20BWscn7RkUqL+n
- M5+3cOQa1Opf8BqJSjNqscMJi7Asci30Z9utcRiCwy0/ui9LKfcAO/AM3ub+BOLasotQ
- 0Y8g==
+ bh=Ij5ZdnIJjaB2d5j9f+EAx/syvnIPQ+iaNJFFiZwFn30=;
+ b=vfBhZfGM6m/+RcCKbXFs/EKOq+T4de/lrFXxd2cLX28XX1p8s0zHYcaODYci0qrFtH
+ J4I+0saxNuLMeXh50Om9HJIol4yI+8Cj7OGxNfqCJotrzZcaXKEgTx/6qcD9VvkD3IAc
+ y6LYXbhMCYKf3DIazmJBPgHcA6lEtigjk4941Gc+sVDgZhIVzUg042AxSZcl+MjH/fhn
+ Aib+6g0oh4Frd1hUhSln0jjdRhONU2M4vxCfbei4QIZK5pIwQIQpLITXbgA28d/xFfzO
+ bsK0Ux8/I054qyV3LQZJU3I5Q3G4fLnbYagJcG4CZLy4f/Mg3nncoYL5d9aUG0UkKyjG
+ oQQw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVTvGgPDt7sa83Rj+j/pqkKw4ascERu2ozBIlgthTnAyKHvTCQHhvV2nz0nehxgRtE2oHsBG6Qpk7MrmC7eHSiM/gwXhng=
-X-Gm-Message-State: AOJu0YyPQM6Hwuw+SFjqbGDmEW/N2b430rnA8pI9wc7HbiUprKjwlG34
- 8PHefbjFLzIE29YcyxhcU4wKSGc3ZFng3+EoHe2xAqmVBEjkjiX/7Ne6z1rUQhM=
-X-Google-Smtp-Source: AGHT+IHsA5Bz/phvju6tzTpA7Td3fqaLqq/dwwrSnQInb9Zk43rrXTSyRsUGn9mWuS0Mk4ipHtX2zg==
-X-Received: by 2002:a05:600c:5021:b0:412:a451:d32f with SMTP id
- n33-20020a05600c502100b00412a451d32fmr4837977wmr.20.1709045024263; 
- Tue, 27 Feb 2024 06:43:44 -0800 (PST)
+ AJvYcCUACVJ37NwqP9MvZSHxq4e4jMdIyxqAMuJaH1L9DmLVzCHdwwohPykIDRRkG9il/hMOcSYTECoaZEnR8udl7oy0TmUsyeA=
+X-Gm-Message-State: AOJu0Yw07x0+Gwc4x0Fj3WwPJqFftMmom+2hySFX1iptjIcut/4allfi
+ aKL0mbe03KEBrTBR4IZG1OQqPVxBeg5/56RVlkt68bzivWMKiG5wROIX87mJjew=
+X-Google-Smtp-Source: AGHT+IEGS2vftHGUTYkCBG6KHKkHoYCekFxa+LvbTXnZSRBpQQ3AZilviHOmiwHXb7kn03s57jN0vg==
+X-Received: by 2002:a05:600c:4591:b0:412:a332:e1cf with SMTP id
+ r17-20020a05600c459100b00412a332e1cfmr6651963wmo.1.1709045016391; 
+ Tue, 27 Feb 2024 06:43:36 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- y9-20020a7bcd89000000b00412706c3ddasm14924278wmj.18.2024.02.27.06.43.37
+ l20-20020a7bc454000000b0041249ea88b9sm11378267wmi.16.2024.02.27.06.43.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 Feb 2024 06:43:40 -0800 (PST)
+ Tue, 27 Feb 2024 06:43:36 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id ADD4C5F8FC;
- Tue, 27 Feb 2024 14:43:36 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id C47C05F8FC;
+ Tue, 27 Feb 2024 14:43:35 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-ppc@nongnu.org, Yoshinori Sato <ysato@users.sourceforge.jp>,
@@ -90,19 +90,18 @@ Cc: qemu-ppc@nongnu.org, Yoshinori Sato <ysato@users.sourceforge.jp>,
  Weiwei Li <liwei1518@gmail.com>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
- Mahmoud Mandour <ma.mandourr@gmail.com>,
- Akihiko Odaki <akihiko.odaki@daynix.com>
-Subject: [PATCH v4 12/29] gdbstub: Infer number of core registers from XML
-Date: Tue, 27 Feb 2024 14:43:18 +0000
-Message-Id: <20240227144335.1196131-13-alex.bennee@linaro.org>
+ Mahmoud Mandour <ma.mandourr@gmail.com>
+Subject: [PATCH v4 04/29] tests/vm: update openbsd image to 7.4
+Date: Tue, 27 Feb 2024 14:43:10 +0000
+Message-Id: <20240227144335.1196131-5-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240227144335.1196131-1-alex.bennee@linaro.org>
 References: <20240227144335.1196131-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -125,240 +124,52 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
+The old links are dead so even if we have the ISO cached we can't
+finish the install. Update to the current stable and tweak the install
+strings.
 
-GDBFeature has the num_regs member so use it where applicable to
-remove magic numbers.
-
-Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
-Message-Id: <20240103173349.398526-34-alex.bennee@linaro.org>
-Message-Id: <20231213-gdb-v17-8-777047380591@daynix.com>
-[AJB: remove core reg check from microblaze read reg]
+Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2192
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Tested-by: Thomas Huth <thuth@redhat.com>
 ---
- include/hw/core/cpu.h       | 3 ++-
- target/s390x/cpu.h          | 2 --
- gdbstub/gdbstub.c           | 5 ++++-
- target/arm/cpu.c            | 1 -
- target/arm/cpu64.c          | 1 -
- target/avr/cpu.c            | 1 -
- target/hexagon/cpu.c        | 1 -
- target/i386/cpu.c           | 2 --
- target/loongarch/cpu.c      | 2 --
- target/m68k/cpu.c           | 1 -
- target/microblaze/cpu.c     | 1 -
- target/microblaze/gdbstub.c | 5 -----
- target/riscv/cpu.c          | 1 -
- target/rx/cpu.c             | 1 -
- target/s390x/cpu.c          | 1 -
- 15 files changed, 6 insertions(+), 22 deletions(-)
+ tests/vm/openbsd | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index 4385ce54c99..1bbf21b2201 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -126,7 +126,8 @@ struct SysemuCPUOps;
-  * @gdb_adjust_breakpoint: Callback for adjusting the address of a
-  *       breakpoint.  Used by AVR to handle a gdb mis-feature with
-  *       its Harvard architecture split code and data.
-- * @gdb_num_core_regs: Number of core registers accessible to GDB.
-+ * @gdb_num_core_regs: Number of core registers accessible to GDB or 0 to infer
-+ *                     from @gdb_core_xml_file.
-  * @gdb_core_xml_file: File name for core registers GDB XML description.
-  * @gdb_stop_before_watchpoint: Indicates whether GDB expects the CPU to stop
-  *           before the insn which triggers a watchpoint rather than after it.
-diff --git a/target/s390x/cpu.h b/target/s390x/cpu.h
-index d37a49b4d92..43a46a5a068 100644
---- a/target/s390x/cpu.h
-+++ b/target/s390x/cpu.h
-@@ -491,8 +491,6 @@ static inline void cpu_get_tb_cpu_state(CPUS390XState *env, vaddr *pc,
- #define S390_R13_REGNUM 15
- #define S390_R14_REGNUM 16
- #define S390_R15_REGNUM 17
--/* Total Core Registers. */
--#define S390_NUM_CORE_REGS 18
+diff --git a/tests/vm/openbsd b/tests/vm/openbsd
+index 85c5bb3536c..85c98636332 100755
+--- a/tests/vm/openbsd
++++ b/tests/vm/openbsd
+@@ -22,8 +22,8 @@ class OpenBSDVM(basevm.BaseVM):
+     name = "openbsd"
+     arch = "x86_64"
  
- static inline void setcc(S390CPU *cpu, uint64_t cc)
- {
-diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
-index d573f808d2e..f766ee277a0 100644
---- a/gdbstub/gdbstub.c
-+++ b/gdbstub/gdbstub.c
-@@ -546,9 +546,12 @@ void gdb_init_cpu(CPUState *cpu)
-         gdb_register_feature(cpu, 0,
-                              cc->gdb_read_register, cc->gdb_write_register,
-                              feature);
-+        cpu->gdb_num_regs = cpu->gdb_num_g_regs = feature->num_regs;
-     }
- 
--    cpu->gdb_num_regs = cpu->gdb_num_g_regs = cc->gdb_num_core_regs;
-+    if (cc->gdb_num_core_regs) {
-+        cpu->gdb_num_regs = cpu->gdb_num_g_regs = cc->gdb_num_core_regs;
-+    }
- }
- 
- void gdb_register_coprocessor(CPUState *cpu,
-diff --git a/target/arm/cpu.c b/target/arm/cpu.c
-index 5fa86bc8d55..84887084d95 100644
---- a/target/arm/cpu.c
-+++ b/target/arm/cpu.c
-@@ -2515,7 +2515,6 @@ static void arm_cpu_class_init(ObjectClass *oc, void *data)
- #ifndef CONFIG_USER_ONLY
-     cc->sysemu_ops = &arm_sysemu_ops;
- #endif
--    cc->gdb_num_core_regs = 26;
-     cc->gdb_arch_name = arm_gdb_arch_name;
-     cc->gdb_get_dynamic_xml = arm_gdb_get_dynamic_xml;
-     cc->gdb_stop_before_watchpoint = true;
-diff --git a/target/arm/cpu64.c b/target/arm/cpu64.c
-index 8e30a7993ea..869d8dd24ee 100644
---- a/target/arm/cpu64.c
-+++ b/target/arm/cpu64.c
-@@ -793,7 +793,6 @@ static void aarch64_cpu_class_init(ObjectClass *oc, void *data)
- 
-     cc->gdb_read_register = aarch64_cpu_gdb_read_register;
-     cc->gdb_write_register = aarch64_cpu_gdb_write_register;
--    cc->gdb_num_core_regs = 34;
-     cc->gdb_core_xml_file = "aarch64-core.xml";
-     cc->gdb_arch_name = aarch64_gdb_arch_name;
- 
-diff --git a/target/avr/cpu.c b/target/avr/cpu.c
-index a40f445af21..a50170bc69a 100644
---- a/target/avr/cpu.c
-+++ b/target/avr/cpu.c
-@@ -251,7 +251,6 @@ static void avr_cpu_class_init(ObjectClass *oc, void *data)
-     cc->gdb_read_register = avr_cpu_gdb_read_register;
-     cc->gdb_write_register = avr_cpu_gdb_write_register;
-     cc->gdb_adjust_breakpoint = avr_cpu_gdb_adjust_breakpoint;
--    cc->gdb_num_core_regs = 35;
-     cc->gdb_core_xml_file = "avr-cpu.xml";
-     cc->tcg_ops = &avr_tcg_ops;
- }
-diff --git a/target/hexagon/cpu.c b/target/hexagon/cpu.c
-index ebe804e2931..a10d87b8220 100644
---- a/target/hexagon/cpu.c
-+++ b/target/hexagon/cpu.c
-@@ -362,7 +362,6 @@ static void hexagon_cpu_class_init(ObjectClass *c, void *data)
-     cc->get_pc = hexagon_cpu_get_pc;
-     cc->gdb_read_register = hexagon_gdb_read_register;
-     cc->gdb_write_register = hexagon_gdb_write_register;
--    cc->gdb_num_core_regs = TOTAL_PER_THREAD_REGS;
-     cc->gdb_stop_before_watchpoint = true;
-     cc->gdb_core_xml_file = "hexagon-core.xml";
-     cc->disas_set_info = hexagon_cpu_disas_set_info;
-diff --git a/target/i386/cpu.c b/target/i386/cpu.c
-index 7f908236767..733254fab57 100644
---- a/target/i386/cpu.c
-+++ b/target/i386/cpu.c
-@@ -7990,10 +7990,8 @@ static void x86_cpu_common_class_init(ObjectClass *oc, void *data)
-     cc->gdb_arch_name = x86_gdb_arch_name;
- #ifdef TARGET_X86_64
-     cc->gdb_core_xml_file = "i386-64bit.xml";
--    cc->gdb_num_core_regs = 66;
- #else
-     cc->gdb_core_xml_file = "i386-32bit.xml";
--    cc->gdb_num_core_regs = 50;
- #endif
-     cc->disas_set_info = x86_disas_set_info;
- 
-diff --git a/target/loongarch/cpu.c b/target/loongarch/cpu.c
-index 7dc50bf35fc..bc2684179f2 100644
---- a/target/loongarch/cpu.c
-+++ b/target/loongarch/cpu.c
-@@ -815,7 +815,6 @@ static void loongarch32_cpu_class_init(ObjectClass *c, void *data)
- {
-     CPUClass *cc = CPU_CLASS(c);
- 
--    cc->gdb_num_core_regs = 35;
-     cc->gdb_core_xml_file = "loongarch-base32.xml";
-     cc->gdb_arch_name = loongarch32_gdb_arch_name;
- }
-@@ -829,7 +828,6 @@ static void loongarch64_cpu_class_init(ObjectClass *c, void *data)
- {
-     CPUClass *cc = CPU_CLASS(c);
- 
--    cc->gdb_num_core_regs = 35;
-     cc->gdb_core_xml_file = "loongarch-base64.xml";
-     cc->gdb_arch_name = loongarch64_gdb_arch_name;
- }
-diff --git a/target/m68k/cpu.c b/target/m68k/cpu.c
-index d5a71c63152..cc6e4537be5 100644
---- a/target/m68k/cpu.c
-+++ b/target/m68k/cpu.c
-@@ -570,7 +570,6 @@ static void m68k_cpu_class_init(ObjectClass *c, void *data)
- #endif
-     cc->disas_set_info = m68k_cpu_disas_set_info;
- 
--    cc->gdb_num_core_regs = 18;
-     cc->tcg_ops = &m68k_tcg_ops;
- }
- 
-diff --git a/target/microblaze/cpu.c b/target/microblaze/cpu.c
-index 2c62cf048c2..e533e7a95ec 100644
---- a/target/microblaze/cpu.c
-+++ b/target/microblaze/cpu.c
-@@ -444,7 +444,6 @@ static void mb_cpu_class_init(ObjectClass *oc, void *data)
-     cc->sysemu_ops = &mb_sysemu_ops;
- #endif
-     device_class_set_props(dc, mb_properties);
--    cc->gdb_num_core_regs = 32 + 25;
-     cc->gdb_core_xml_file = "microblaze-core.xml";
- 
-     cc->disas_set_info = mb_disas_set_info;
-diff --git a/target/microblaze/gdbstub.c b/target/microblaze/gdbstub.c
-index 6ffc5ad0752..eb168d10070 100644
---- a/target/microblaze/gdbstub.c
-+++ b/target/microblaze/gdbstub.c
-@@ -49,14 +49,9 @@ enum {
- int mb_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
- {
-     MicroBlazeCPU *cpu = MICROBLAZE_CPU(cs);
--    CPUClass *cc = CPU_GET_CLASS(cs);
-     CPUMBState *env = &cpu->env;
-     uint32_t val;
- 
--    if (n > cc->gdb_num_core_regs) {
--        return 0;
--    }
--
-     switch (n) {
-     case 1 ... 31:
-         val = env->regs[n];
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 1b62e269b90..dd8a0e94897 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -2352,7 +2352,6 @@ static void riscv_cpu_common_class_init(ObjectClass *c, void *data)
-     cc->get_pc = riscv_cpu_get_pc;
-     cc->gdb_read_register = riscv_cpu_gdb_read_register;
-     cc->gdb_write_register = riscv_cpu_gdb_write_register;
--    cc->gdb_num_core_regs = 33;
-     cc->gdb_stop_before_watchpoint = true;
-     cc->disas_set_info = riscv_cpu_disas_set_info;
- #ifndef CONFIG_USER_ONLY
-diff --git a/target/rx/cpu.c b/target/rx/cpu.c
-index 5205167da17..2f878d08d6d 100644
---- a/target/rx/cpu.c
-+++ b/target/rx/cpu.c
-@@ -221,7 +221,6 @@ static void rx_cpu_class_init(ObjectClass *klass, void *data)
-     cc->gdb_write_register = rx_cpu_gdb_write_register;
-     cc->disas_set_info = rx_cpu_disas_set_info;
- 
--    cc->gdb_num_core_regs = 26;
-     cc->gdb_core_xml_file = "rx-core.xml";
-     cc->tcg_ops = &rx_tcg_ops;
- }
-diff --git a/target/s390x/cpu.c b/target/s390x/cpu.c
-index 49a2341accf..f7194534aeb 100644
---- a/target/s390x/cpu.c
-+++ b/target/s390x/cpu.c
-@@ -368,7 +368,6 @@ static void s390_cpu_class_init(ObjectClass *oc, void *data)
-     s390_cpu_class_init_sysemu(cc);
- #endif
-     cc->disas_set_info = s390_cpu_disas_set_info;
--    cc->gdb_num_core_regs = S390_NUM_CORE_REGS;
-     cc->gdb_core_xml_file = "s390x-core64.xml";
-     cc->gdb_arch_name = s390_gdb_arch_name;
+-    link = "https://cdn.openbsd.org/pub/OpenBSD/7.2/amd64/install72.iso"
+-    csum = "0369ef40a3329efcb978c578c7fdc7bda71e502aecec930a74b44160928c91d3"
++    link = "https://cdn.openbsd.org/pub/OpenBSD/7.4/amd64/install74.iso"
++    csum = "a1001736ed9fe2307965b5fcdb426ae11f9b80d26eb21e404a705144a0a224a0"
+     size = "20G"
+     pkgs = [
+         # tools
+@@ -99,10 +99,10 @@ class OpenBSDVM(basevm.BaseVM):
+         self.console_wait_send("(I)nstall",               "i\n")
+         self.console_wait_send("Terminal type",           "xterm\n")
+         self.console_wait_send("System hostname",         "openbsd\n")
+-        self.console_wait_send("Which network interface", "vio0\n")
++        self.console_wait_send("Network interface to configure", "vio0\n")
+         self.console_wait_send("IPv4 address",            "autoconf\n")
+         self.console_wait_send("IPv6 address",            "none\n")
+-        self.console_wait_send("Which network interface", "done\n")
++        self.console_wait_send("Network interface to configure", "done\n")
+         self.console_wait("Password for root account")
+         self.console_send("%s\n" % self._config["root_pass"])
+         self.console_wait("Password for root account")
+@@ -124,6 +124,7 @@ class OpenBSDVM(basevm.BaseVM):
+         self.console_wait_send("Allow root ssh login",    "yes\n")
+         self.console_wait_send("timezone",                "UTC\n")
+         self.console_wait_send("root disk",               "\n")
++        self.console_wait_send("Encrypt the root disk with a passphrase", "no\n")
+         self.console_wait_send("(W)hole disk",            "\n")
+         self.console_wait_send("(A)uto layout",           "c\n")
  
 -- 
 2.39.2
