@@ -4,157 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4270C5478C
-	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Feb 2024 02:16:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBDF9C5478C
+	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Feb 2024 07:48:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ren0m-0007mP-Sg; Mon, 26 Feb 2024 21:16:04 -0500
+	id 1resBs-0004eU-67; Tue, 27 Feb 2024 02:47:52 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alvinga@andestech.com>)
- id 1ren0g-0007lK-A8; Mon, 26 Feb 2024 21:15:58 -0500
-Received: from 60-248-80-70.hinet-ip.hinet.net ([60.248.80.70]
- helo=Atcsqr.andestech.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alvinga@andestech.com>)
- id 1ren0c-0008Nb-A3; Mon, 26 Feb 2024 21:15:58 -0500
-Received: from mail.andestech.com (ATCPCS33.andestech.com [10.0.1.100])
- by Atcsqr.andestech.com with ESMTP id 41R2FUt0063864;
- Tue, 27 Feb 2024 10:15:30 +0800 (+08)
- (envelope-from alvinga@andestech.com)
-Received: from ATCPCS34.andestech.com (10.0.1.134) by ATCPCS33.andestech.com
- (10.0.1.100) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.7; Tue, 27 Feb
- 2024 10:15:30 +0800
-Received: from ATCPCS31.andestech.com (10.0.1.89) by ATCPCS34.andestech.com
- (10.0.1.134) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.7 via Frontend
- Transport; Tue, 27 Feb 2024 10:15:30 +0800
-Received: from APC01-TYZ-obe.outbound.protection.outlook.com (104.47.110.40)
- by mail.andestech.com (10.0.1.89) with Microsoft SMTP Server (TLS) id
- 14.3.498.0; Tue, 27 Feb 2024 10:15:23 +0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=fld59hGfVrSlg8C+6GGYLI7FTgtP1sBsNAr91SH5EUmlY58w7TxicO/pn+YvZI9FCMdO+Q5UBEz91awT0YeyxFDw+s73EL6F70E8oZnL7JmDVAdEx4ZG9Uf00vcWsmsVxbI7OR4vWgHYuAUsORkIqjSarlYTRjBjUaRkDYpn6GQF1UOVt+uhCRx+MYRah12qM8cJ/3g7LgRXkQWuAC36Iv3v5+MgGQzx3Iv5v9pDfwxQ2fPMlviHVAPtBkDsvAeWy57vcRJ3lX1MYx/XlbQR/z7RMkNfbNhWMtwE1vUS0qrJkc7rz/RgNxTZF4auwYB43ebJ+eHmhoAzOQQT9+H2tg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=BjHCq/h/8dVEPmn/3ZfdpVNf+HXylXJ4pTiUSibRRz8=;
- b=jcI7si5rUdL4EYtaPYw4khlygcr3Fkl5qbaMnbYPRutEwG5Js6NA9/BtKHDS9RLptuegQLcPHlDzWrNMEWbRzy3kS3YLaYqfob83yS+ggvsvRSjJfy9LTRJ1kIjHOJmVBOUtVoqB0L159FAGBKwwjwHS2dbyTitYdjt+V834CXemCDqElWS9uXJxylcNPQduNKGVJhlleOPprmjZHHe0P8r1qg5kHEoKaOfDIG0oNys13eqQCNWnVW4oinBzDnpZf+1p3FuroJ0ZL0V8kN4D1gu6SNX9fQ7rmDx5j21xLW+qt38itwwy7kBenkK6zCosog//aAGEOmzQ/4dn1buP5w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=andestech.com; dmarc=pass action=none
- header.from=andestech.com; dkim=pass header.d=andestech.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=andestech.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BjHCq/h/8dVEPmn/3ZfdpVNf+HXylXJ4pTiUSibRRz8=;
- b=Cwn8XGDZS7fWg81o0kU4LWQC/aNM29rhvEjW0ZPZ+649yYHKlZ5aZxSL98TEJueHjKuqh37PZ/ESyV4I0mZPxN+8kz2muuT+TjufodSswMQ5hvSv3r3r83rO2A6K1vLm8TGHXCdkHJkbNXcovV67Pn/nk/H5bFvb+6mRstMVoayWnDFKMWU0FjSU9xtyQ7Z+Fe868pu6oDsUrVksvZbGG8X7EKvRbDSmlh3Ml5UjUJwAbjy2AnQz5RTMl+5u40REhCbXoklVxr1XpIBnqoy/3vA7dr4KG7nY3NTbEWYm0iy1nyLwdOaiMhjdL0JDNEB3ogp3S/mf7R66Z8NDRTgcVg==
-Received: from SEYPR03MB6700.apcprd03.prod.outlook.com (2603:1096:101:69::14)
- by KL1PR03MB8240.apcprd03.prod.outlook.com (2603:1096:820:10c::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7316.24; Tue, 27 Feb
- 2024 02:15:20 +0000
-Received: from SEYPR03MB6700.apcprd03.prod.outlook.com
- ([fe80::9523:69b6:faf2:3b83]) by SEYPR03MB6700.apcprd03.prod.outlook.com
- ([fe80::9523:69b6:faf2:3b83%4]) with mapi id 15.20.7316.023; Tue, 27 Feb 2024
- 02:15:19 +0000
-From: =?utf-8?B?QWx2aW4gQ2hlLUNoaWEgQ2hhbmco5by15ZOy5ZiJKQ==?=
- <alvinga@andestech.com>
-To: Alistair Francis <alistair23@gmail.com>
-CC: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, "qemu-devel@nongnu.org"
- <qemu-devel@nongnu.org>, "alistair.francis@wdc.com"
- <alistair.francis@wdc.com>, "bin.meng@windriver.com"
- <bin.meng@windriver.com>, "liwei1518@gmail.com" <liwei1518@gmail.com>,
- "dbarboza@ventanamicro.com" <dbarboza@ventanamicro.com>,
- "zhiwei_liu@linux.alibaba.com" <zhiwei_liu@linux.alibaba.com>
-Subject: RE: [PATCH v3 0/4] RISC-V: Modularize common match conditions for
- trigger
-Thread-Topic: [PATCH v3 0/4] RISC-V: Modularize common match conditions for
- trigger
-Thread-Index: AQHaaIKgW+ix7nbdGUe7E6rWZDSY77EdT0yAgAAlD1A=
-Date: Tue, 27 Feb 2024 02:15:19 +0000
-Message-ID: <SEYPR03MB670054CBDAB9055D0CE7AFC2A8592@SEYPR03MB6700.apcprd03.prod.outlook.com>
-References: <20240226070825.51120-1-alvinga@andestech.com>
- <CAKmqyKM9914UJ-Fta=b-xuVoy8bQOWsZs=HqC4TsA9DUa69cXQ@mail.gmail.com>
-In-Reply-To: <CAKmqyKM9914UJ-Fta=b-xuVoy8bQOWsZs=HqC4TsA9DUa69cXQ@mail.gmail.com>
-Accept-Language: zh-TW, en-US
-Content-Language: zh-TW
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=andestech.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SEYPR03MB6700:EE_|KL1PR03MB8240:EE_
-x-ms-office365-filtering-correlation-id: 0e402d96-62fa-466d-0dcb-08dc3739f1f3
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: ihF9UbmsxklzloEKVg1qd9W2OigizKwJccR2JarHfKYffw3XjHJ03UzBI+lkDYfe/k3OyBeHZONWD0imAaLo+542z+Jha0Aocvak6Iunyg3k/aM8BMd73fvbZNsmprRX44M8QdNdNQe3+5OCWS4U2xeXspbJtULpX15riiiuQHry7AhB7hLuquUlm/2w6BUtAX772qlJD+3Jf//obUYSm9FM+SPO2Bckbvk4pNJqa16Dr/SfTVnyP6iXcckX/F4oZg90cuchn8Omd9OzbcrBhoPFNNwoHUA8ZLmfQ+YC6E183DGjtqMD2GUYqzDHLadlxJOR+In7re9sFy/tYQk7FwodTZ63CF5Xd3BitadaYdd3r5Qu4Y6yX5tUHEzj3kqHZw1RMIKkT//BzL3+kIukjJErD2KNVdsQqILqM4Vzjqf2AqeCwSuu26IVVK+KmhX6PQBxQjiaaaB8REfUC6DZwpfDM1mMlBgVolsHuCuL/aIvTnv9SVA080xMuMV42bQAn5XGLJXotlkl95lSR9ZQXwpKVV4vVbG4diZFb/X4Fo/MEK7OFw/D6QSYzOnJMeQxp91EegAbmQHzpeJgm58FiGjW+Li5E6S2lj9fsntyc/RR0kBMjYUZs8WG82hAR59V7z0+y0/B3OmG3gLv2lZCIWBZqT9ZeZXaTUk03tNVqVs=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:zh-tw; SCL:1;
- SRV:; IPV:NLI; SFV:NSPM; H:SEYPR03MB6700.apcprd03.prod.outlook.com; PTR:;
- CAT:NONE; SFS:(13230031)(230273577357003)(230473577357003)(38070700009);
- DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?N2phNUxXSkJ4YWp3ZDIxSStXNlM5dzNTenhIeTBrT0dRQXlKSFBhNm1RNm42?=
- =?utf-8?B?RmNZZm1nTFpkdXo4OU9kdVRRQzNhK1lQYUVBTi9HbWgycmt2UkRRcVE0MStO?=
- =?utf-8?B?NWt2STAzbk1EWFd0NnlyQjE0VnN1OXBGSDFXUnJFQXVVRUplQjU2cDlhSDE5?=
- =?utf-8?B?Mk9IajhRM2tHWmxmVGRZdG04L1FLTVJLb1cvNUpVcEU0aklvclYvLzJTQWl1?=
- =?utf-8?B?WHdlcWFZRWZkdHlLZDBib3UzNkFET1BXdm90b3NXK2QwLzg5dERySVBuS054?=
- =?utf-8?B?emorb3ZNUWN4SDdlcnRNZnRuWTZYVWpXamk4WXRNa1F1NENMa0VaVEdhOTJk?=
- =?utf-8?B?aUZTSUpQWEVGVDU0ZVpzNzVDSUI2YTEvdURsNHNkMkJKWXdJOGFiRDhrclZn?=
- =?utf-8?B?RDBtNkR0WXdKdG9RL2p0WXV4MksvMHNZSy9pMDFkNmc0Z1pLQVY4NFhvQTJZ?=
- =?utf-8?B?Rm44WW5HcmZzamhPM0VvcFd2NW1oeG5Wdlk2RG9YU3dnR0N5dWxnVTh3czZQ?=
- =?utf-8?B?R2dWaXNPTGtITGNVeE05YjNaVlFwNWlRWEM1R0hQdjFua3lxWjRHdFdwVmhI?=
- =?utf-8?B?Y2ttTDdvcGY2RW1iYjhnRm5xR0J2dDF1WVJ5U1VTYmRmN0syM1NXZ2UwL1hy?=
- =?utf-8?B?QnZ4dml5czVIdUhxR0Q4eEJtT2VmV0lKK3B4SzJ5VVFUNG5sbCtkVzUyK3JX?=
- =?utf-8?B?V2dVZnFGY1A4SE96Uzc5Z25DUmVna2c3d0U1dXd1cWVNcE1QRWt4S2xmNlJG?=
- =?utf-8?B?QUh0TlcyTnJuNllQT1dKK0p1aUxOaWgxOENlcU5HNVFWSUdHTlZsaWVZeXZ5?=
- =?utf-8?B?NnFLQjhFR3BvZWxBRFpsUno4SkhZYTZyR29TaWhVbHhOL2RzeTRYVExtbzc1?=
- =?utf-8?B?alFHMXkwVGZ1bFphT283K2JPR2x0OUI3QUVkRlJJSWxxUlRuUTJBQS8yU3RD?=
- =?utf-8?B?dktkTTVJVGk1YW5MYlRIR2NJd0pXdUo4NVVaRk1YU3pMY1Rvd0J3L0JQeEdt?=
- =?utf-8?B?MnRRV0ZSQjlMSFBQc3pwRm9wRlJuckR2Q0ttV3hKbHBHVWZTRlNid3orRTNM?=
- =?utf-8?B?WE5tQU9NYnJFZUxVVDIxNEtHSGZPVGJwQlpwam5BcFY5ZjlTOFhwMkhWYnZa?=
- =?utf-8?B?NmhJbW9KZ0F6Y0lRYS9QdGFCTDk1S2xNZ0RFcTJDaU9DeVpKWmpGYWR4QzJM?=
- =?utf-8?B?UldYNEZXWm9uWldtMERYeHQxQVMrWE9GeG8rMnFLdVcwNjZpd21OTVhNdXE5?=
- =?utf-8?B?NkRGMXYxeXIrWHQ1UDZzWGREUm90NktCZUMzMXk4US9ObUhNNnRUQ25FNUV4?=
- =?utf-8?B?NElOSHF2QkpobE9PL2ZiaG95QkRWV3U5RjBoQ2Jib29KNXlKeDlETDNSTVdi?=
- =?utf-8?B?RlVwalE4TlZkN0VyU3lYR20zQ056aDFLMkx1QnFjV0RGd0c1MHN5dE9mRllp?=
- =?utf-8?B?aElFZ1JaSUNuaTd6Mm03L2U0OUNFcjFhak10NEl3ZEo1M01nVHVtWHd3aW4y?=
- =?utf-8?B?R0lmWjNXVGJCU01jZmcrQ0oxQ1laQktYd1RYSkZQUGl6bGV3cFhqS2lxNjFZ?=
- =?utf-8?B?NVdndzUxRjUvL2JxdjZjWjAvYkNYcmpnblVENjhRUzl4azJuWHNnMlh0bmNz?=
- =?utf-8?B?UGZRbjB3Z1Rtendtc1BkT2JjOE9jMTlGUHdBcHV2VG9HUFlrY1BqOTlGWlFR?=
- =?utf-8?B?cmFOcHJKZHVDWSt3cEw3WnV4cHNxQnhNeG9NRFlIT2xsMXRocnlmNlpnTjkw?=
- =?utf-8?B?ejVmK1JYYnFHV3BpeEVRR1lpVG9BYzFVRDBCOXpYbUFnZXJOV05Cb3BHMHg5?=
- =?utf-8?B?di9RcUJ2Q2hLa3NKMXJ1UW5hVzR0VmhkczNucE0zdGVZRXVOS1YzSHFQdmZz?=
- =?utf-8?B?R2V5VzdiRVFzeURwUUsyOTJUVTZZS0tubm8wWTVZSEdoQUYyVCtoaWptNXlM?=
- =?utf-8?B?c1VvMStEdU03dVRiOUZObTNvRnVFWCtKVW43MENSQWNlRkdOdnFzd1hKemF1?=
- =?utf-8?B?QzlMVTFmeDJIb0d3Y1IzRS93ekI1SlUyZGRzMStUSWNucGxETjl1NWkydk1k?=
- =?utf-8?B?dnNVTFRHOWh5MFpjQUtMOUFncXBrUVhoL1g4RGttMnRvYnFuZ2ZZWkJnYkFW?=
- =?utf-8?Q?wzDfH0e6A08JY+uz1Ex73VfoV?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1resBo-0004dD-Im
+ for qemu-riscv@nongnu.org; Tue, 27 Feb 2024 02:47:48 -0500
+Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1resBd-0003al-Ru
+ for qemu-riscv@nongnu.org; Tue, 27 Feb 2024 02:47:45 -0500
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-1dca160163dso17138665ad.3
+ for <qemu-riscv@nongnu.org>; Mon, 26 Feb 2024 23:47:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1709020055; x=1709624855;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=5Va+9CpvBWB277k7Vk/5Lq5SeV6/w0TKZhR5/P0tOS8=;
+ b=XE5D407Ti789ZRTKtrPJ5Xq/wW5hvcivpjrWLiqvwYisNjJWr0hfT3xyijAIKxUw7y
+ nOLAtzr/StgFR6Q9Kpsx0+NTC54BtmQjU7kyqyWR3X6K8XzmGhvqmfP9AK8A+/yXkVb5
+ AX9Tw3hpvsLCCYFbkWdwLoC0Iux2uify+SgbqQBYnjEB5NT9tYEqMhxf6kEyLWmnsxN7
+ ooIyqGCZ+IT9ZOc7f8bGb+inb2CpD4vPqxr34NGZyVJz4h5b77lkhA32YUytddfLTnXf
+ /bQYJ9wsv6A0wmH3V18xs6k71o+AZf25LUF2ZcEunagp7So8hIKZgpQCktzd7VtcAqZu
+ 2bLg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1709020055; x=1709624855;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=5Va+9CpvBWB277k7Vk/5Lq5SeV6/w0TKZhR5/P0tOS8=;
+ b=GmRAo8g4R5LZ+2IWFI3odCM1CA1IcCEX02LKnitg8eOenz85HdS08bIF3Y3RFtvU8R
+ eAUhSl9MMWP37eHCerZm6spTszxAMafHsxg5vOBT4VmWgWv0XQLRIhvHNmz6J1gc73vI
+ wn/8YapM+r1fRVPPRLus0DpZK7wRJpwDVFIzyncPf2vfD0k/zgCq8Ui1x3Bg933OFsD/
+ ZVJZnCtVu2znryuAoToMraDroUtswS0cU20sBNY+vGfe8PPRFUD/rN4DiUmUexOq/O9N
+ +GngmccIJEzyeePTrXIFeqnEZ8gdv0INrr945uR6pz1Sy6yq69aypNLpHkK72rs49sKo
+ E3qQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW8iDkkVbd7ELbIgBmty94wSiCf3g5kPfRZO78NVu0pJanxgZl4B/aGxE4EQr4wTt1kD4kxmxt+NF418c/avg2RhKJoAhM=
+X-Gm-Message-State: AOJu0Yx3y2a/El7mNjZTlBbWRgpn/zyVJ0uS1hQA2TIWbhinSNxEm0p3
+ fdVOqLx0BPDw3eCzfVaCkqZ9bxpUSlsSyBdvjpcpB5mJ9TT6z8F6WU2oyDiwoFk=
+X-Google-Smtp-Source: AGHT+IHa5GPNZQyrh4lPjtiCaHfY4JaLVAhx3qAa4gyn6vwaRY7nzPSNlOoJIGtj3YT9SHvapxuPpQ==
+X-Received: by 2002:a17:903:244d:b0:1dc:93b:8981 with SMTP id
+ l13-20020a170903244d00b001dc093b8981mr14131905pls.14.1709020055516; 
+ Mon, 26 Feb 2024 23:47:35 -0800 (PST)
+Received: from [157.82.203.206] ([157.82.203.206])
+ by smtp.gmail.com with ESMTPSA id
+ l21-20020a170903005500b001db82fdc89asm880947pla.305.2024.02.26.23.47.28
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 26 Feb 2024 23:47:35 -0800 (PST)
+Message-ID: <b7aac53e-cde5-4596-b0fc-d39f52d4ceb8@daynix.com>
+Date: Tue, 27 Feb 2024 16:47:26 +0900
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SEYPR03MB6700.apcprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0e402d96-62fa-466d-0dcb-08dc3739f1f3
-X-MS-Exchange-CrossTenant-originalarrivaltime: 27 Feb 2024 02:15:19.1532 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: e3ec21b7-ec6c-4041-9add-61aea8171458
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: veQByyvdAii9dsHLUmK5ondRzVYhVFvSmFJegWtGWLRw24xAdiYAxYkUvlXIKdWdRQ8LBxKj4vp8aXqFbRZPPw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: KL1PR03MB8240
-X-OriginatorOrg: andestech.com
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 41R2FUt0063864
-Received-SPF: pass client-ip=60.248.80.70; envelope-from=alvinga@andestech.com;
- helo=Atcsqr.andestech.com
-X-Spam_score_int: -10
-X-Spam_score: -1.1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 21/27] plugins: add an API to read registers
+To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: Nicholas Piggin <npiggin@gmail.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, =?UTF-8?Q?C=C3=A9dric_Le_Goater?=
+ <clg@kaod.org>, Peter Maydell <peter.maydell@linaro.org>,
+ qemu-riscv@nongnu.org, Michael Rolnik <mrolnik@gmail.com>,
+ Song Gao <gaosong@loongson.cn>, Alexandre Iooss <erdnaxe@crans.org>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ David Hildenbrand <david@redhat.com>,
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>, John Snow
+ <jsnow@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
+ Mahmoud Mandour <ma.mandourr@gmail.com>, qemu-arm@nongnu.org,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>, Cleber Rosa <crosa@redhat.com>,
+ qemu-ppc@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
+ qemu-s390x@nongnu.org, Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Thomas Huth <thuth@redhat.com>, Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Yanan Wang <wangyanan55@huawei.com>, Brian Cain <bcain@quicinc.com>,
+ Ilya Leoshkevich <iii@linux.ibm.com>, Weiwei Li <liwei1518@gmail.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Bin Meng <bin.meng@windriver.com>, Laurent Vivier <laurent@vivier.eu>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+References: <20240226165646.425600-1-alex.bennee@linaro.org>
+ <20240226165646.425600-22-alex.bennee@linaro.org>
+Content-Language: en-US
+From: Akihiko Odaki <akihiko.odaki@daynix.com>
+In-Reply-To: <20240226165646.425600-22-alex.bennee@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: none client-ip=2607:f8b0:4864:20::636;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-pl1-x636.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RDNS_DYNAMIC=0.982,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001, TVD_RCVD_IP=0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_NONE=0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01,
+ T_SPF_HELO_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -170,60 +121,223 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-SGkgQWxpc3RhaXIsDQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogQWxp
-c3RhaXIgRnJhbmNpcyA8YWxpc3RhaXIyM0BnbWFpbC5jb20+DQo+IFNlbnQ6IFR1ZXNkYXksIEZl
-YnJ1YXJ5IDI3LCAyMDI0IDg6MDIgQU0NCj4gVG86IEFsdmluIENoZS1DaGlhIENoYW5nKOW8teWT
-suWYiSkgPGFsdmluZ2FAYW5kZXN0ZWNoLmNvbT4NCj4gQ2M6IHFlbXUtcmlzY3ZAbm9uZ251Lm9y
-ZzsgcWVtdS1kZXZlbEBub25nbnUub3JnOw0KPiBhbGlzdGFpci5mcmFuY2lzQHdkYy5jb207IGJp
-bi5tZW5nQHdpbmRyaXZlci5jb207IGxpd2VpMTUxOEBnbWFpbC5jb207DQo+IGRiYXJib3phQHZl
-bnRhbmFtaWNyby5jb207IHpoaXdlaV9saXVAbGludXguYWxpYmFiYS5jb20NCj4gU3ViamVjdDog
-UmU6IFtQQVRDSCB2MyAwLzRdIFJJU0MtVjogTW9kdWxhcml6ZSBjb21tb24gbWF0Y2ggY29uZGl0
-aW9ucyBmb3INCj4gdHJpZ2dlcg0KPg0KPiBbRVhURVJOQUwgTUFJTCDlpJbpg6jkv6Hku7ZdDQo+
-DQo+IE9uIE1vbiwgRmViIDI2LCAyMDI0IGF0IDU6MTDigK9QTSBBbHZpbiBDaGFuZyB2aWEgPHFl
-bXUtZGV2ZWxAbm9uZ251Lm9yZz4NCj4gd3JvdGU6DQo+ID4NCj4gPiBBY2NvcmRpbmcgdG8gbGF0
-ZXN0IFJJU0MtViBEZWJ1ZyBzcGVjaWZpY2F0aW9uIHZlcnNpb24gMS4wIFsxXSwgdGhlDQo+DQo+
-IFRoZSBpc3N1ZSBoZXJlIGlzIHRoYXQgd2UgcmVhbGx5IG9ubHkgc3VwcG9ydCB0aGUgImRlYnVn
-IiBzcGVjLiBUaGF0J3MgdGhlIDAuMTMNCj4gdmVyc2lvbiBvZiB0aGUgc3BlYy4NCj4NCj4gV2Ug
-ZG8gYWxzbyBzdXBwb3J0IGJpdHMgb2YgdGhlIDEuMCBzcGVjLCBidXQgdGhvc2Ugc2hvdWxkIGJl
-IGNoYW5nZWQgdG8gYmUNCj4gaGlkZGVuIGJlaGluZCB0aGUgbmV3IGV4dGVuc2lvbiBmbGFncyBs
-aWtlICJTZHRyaWciDQo+DQo+IEkgdGhpbmsgdGhpcyBwYXRjaCBzdGlsbCBhcHBsaWVzIHRvIHRo
-ZSAwLjEzIHZlcnNpb24gdGhvdWdoLiBEbyB5b3UgbWluZCBjaGFuZ2luZw0KPiB0aGlzIHRvIHRh
-cmdldCB0aGUgMC4xMyB2ZXJzaW9uIG9mIHRoZSBzcGVjIGluc3RlYWQ/DQoNCkkgaGF2ZSBjaGFu
-Z2VkIGl0IHRvIHRhcmdldCAwLjEzDQpQbGVhc2Ugc2VlIHBhdGNoIHY0LCB0aGFua3MhDQoNCg0K
-U2luY2VyZWx5LA0KQWx2aW4gQ2hhbmcNCg0KPg0KPiBJZGVhbGx5IHdlIGNhbiB0aGVuIHN1cHBv
-cnQgdGhlIG5ldyBTZHRyaWcgZXh0ZW5zaW9uIGluIHRoZSBmdXR1cmUNCj4NCj4gQWxpc3RhaXIN
-Cj4NCj4gPiBlbmFibGVkIHByaXZpbGVnZSBsZXZlbHMgb2YgdGhlIHRyaWdnZXIgaXMgY29tbW9u
-IG1hdGNoIGNvbmRpdGlvbnMgZm9yDQo+ID4gYWxsIHRoZSB0eXBlcyBvZiB0aGUgdHJpZ2dlci4N
-Cj4gPg0KPiA+IFRoaXMgc2VyaWVzIG1vZHVsYXJpemUgdGhlIGNvZGUgZm9yIGNoZWNraW5nIHRo
-ZSBwcml2aWxlZ2UgbGV2ZWxzIG9mDQo+ID4gdHlwZSAyLzMvNiB0cmlnZ2VycyBieSBpbXBsZW1l
-bnRpbmcgZnVuY3Rpb25zIHRyaWdnZXJfY29tbW9uX21hdGNoKCkNCj4gPiBhbmQgdHJpZ2dlcl9w
-cml2X21hdGNoKCkuDQo+ID4NCj4gPiBBZGRpdGlvbmFsIG1hdGNoIGNvbmRpdGlvbnMsIHN1Y2gg
-YXMgQ1NSIHRjb250cm9sIGFuZCB0ZXh0cmEsIGNhbiBiZQ0KPiA+IGZ1cnRoZXIgaW1wbGVtZW50
-ZWQgaW50byB0cmlnZ2VyX2NvbW1vbl9tYXRjaCgpIGluIHRoZSBmdXR1cmUuDQo+ID4NCj4gPiBb
-MV06DQo+ID4gaHR0cHM6Ly9naXRodWIuY29tL3Jpc2N2L3Jpc2N2LWRlYnVnLXNwZWMvcmVsZWFz
-ZXMvdGFnLzEuMC4wLXJjMS1hc2NpaQ0KPiA+IGRvYw0KPiA+DQo+ID4gQ2hhbmdlcyBmcm9tIHYy
-Og0KPiA+IC0gRXhwbGljaXRseSBtZW50aW9uIHRoZSB0YXJnZXRpbmcgdmVyc2lvbiBvZiBSSVND
-LVYgRGVidWcgU3BlYy4NCj4gPg0KPiA+IENoYW5nZXMgZnJvbSB2MToNCj4gPiAtIEZpeCB0eXBv
-DQo+ID4gLSBBZGQgY29tbWl0IGRlc2NyaXB0aW9uIGZvciBjaGFuZ2luZyBiZWhhdmlvciBvZiBs
-b29waW5nIHRoZSB0cmlnZ2Vycw0KPiA+ICAgd2hlbiB3ZSBjaGVjayB0eXBlIDIgdHJpZ2dlcnMu
-DQo+ID4NCj4gPiBBbHZpbiBDaGFuZyAoNCk6DQo+ID4gICB0YXJnZXQvcmlzY3Y6IEFkZCBmdW5j
-dGlvbnMgZm9yIGNvbW1vbiBtYXRjaGluZyBjb25kaXRpb25zIG9mIHRyaWdnZXINCj4gPiAgIHRh
-cmdldC9yaXNjdjogQXBwbHkgbW9kdWxhcml6ZWQgbWF0Y2hpbmcgY29uZGl0aW9ucyBmb3IgYnJl
-YWtwb2ludA0KPiA+ICAgdGFyZ2V0L3Jpc2N2OiBBcHBseSBtb2R1bGFyaXplZCBtYXRjaGluZyBj
-b25kaXRpb25zIGZvciB3YXRjaHBvaW50DQo+ID4gICB0YXJnZXQvcmlzY3Y6IEFwcGx5IG1vZHVs
-YXJpemVkIG1hdGNoaW5nIGNvbmRpdGlvbnMgZm9yIGljb3VudA0KPiA+IHRyaWdnZXINCj4gPg0K
-PiA+ICB0YXJnZXQvcmlzY3YvZGVidWcuYyB8IDEyNA0KPiA+ICsrKysrKysrKysrKysrKysrKysr
-KysrKysrKysrLS0tLS0tLS0tLS0tLS0NCj4gPiAgMSBmaWxlIGNoYW5nZWQsIDgzIGluc2VydGlv
-bnMoKyksIDQxIGRlbGV0aW9ucygtKQ0KPiA+DQo+ID4gLS0NCj4gPiAyLjM0LjENCj4gPg0KPiA+
-DQpDT05GSURFTlRJQUxJVFkgTk9USUNFOg0KDQpUaGlzIGUtbWFpbCAoYW5kIGl0cyBhdHRhY2ht
-ZW50cykgbWF5IGNvbnRhaW4gY29uZmlkZW50aWFsIGFuZCBsZWdhbGx5IHByaXZpbGVnZWQgaW5m
-b3JtYXRpb24gb3IgaW5mb3JtYXRpb24gcHJvdGVjdGVkIGZyb20gZGlzY2xvc3VyZS4gSWYgeW91
-IGFyZSBub3QgdGhlIGludGVuZGVkIHJlY2lwaWVudCwgeW91IGFyZSBoZXJlYnkgbm90aWZpZWQg
-dGhhdCBhbnkgZGlzY2xvc3VyZSwgY29weWluZywgZGlzdHJpYnV0aW9uLCBvciB1c2Ugb2YgdGhl
-IGluZm9ybWF0aW9uIGNvbnRhaW5lZCBoZXJlaW4gaXMgc3RyaWN0bHkgcHJvaGliaXRlZC4gSW4g
-dGhpcyBjYXNlLCBwbGVhc2UgaW1tZWRpYXRlbHkgbm90aWZ5IHRoZSBzZW5kZXIgYnkgcmV0dXJu
-IGUtbWFpbCwgZGVsZXRlIHRoZSBtZXNzYWdlIChhbmQgYW55IGFjY29tcGFueWluZyBkb2N1bWVu
-dHMpIGFuZCBkZXN0cm95IGFsbCBwcmludGVkIGhhcmQgY29waWVzLiBUaGFuayB5b3UgZm9yIHlv
-dXIgY29vcGVyYXRpb24uDQoNCkNvcHlyaWdodCBBTkRFUyBURUNITk9MT0dZIENPUlBPUkFUSU9O
-IC0gQWxsIFJpZ2h0cyBSZXNlcnZlZC4NCg==
+On 2024/02/27 1:56, Alex Bennée wrote:
+> We can only request a list of registers once the vCPU has been
+> initialised so the user needs to use either call the get function on
+> vCPU initialisation or during the translation phase.
+> 
+> We don't expose the reg number to the plugin instead hiding it behind
+> an opaque handle. For now this is just the gdb_regnum encapsulated in
+> an anonymous GPOINTER but in future as we add more state for plugins
+> to track we can expand it.
+> 
+> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1706
+> Cc: Akihiko Odaki <akihiko.odaki@daynix.com>
+> Message-Id: <20240103173349.398526-39-alex.bennee@linaro.org>
+> Based-on: <20231025093128.33116-18-akihiko.odaki@daynix.com>
+> Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+> Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+
+Hi,
+
+Mostly looks good. I have a few trivial comments so please have a look 
+at them.
+
+> 
+> ---
+> v4
+>    - the get/read_registers functions are now implicitly for current
+>    vCPU only to accidental cpu != current_cpu uses.
+> v5
+>    - make reg_handles as per-CPUPluginState variable.
+> v6
+>    - for now just wrap gdb_regnum
+> ---
+>   include/qemu/qemu-plugin.h   | 48 +++++++++++++++++++++++++++++--
+>   plugins/api.c                | 56 ++++++++++++++++++++++++++++++++++++
+>   plugins/qemu-plugins.symbols |  2 ++
+>   3 files changed, 104 insertions(+), 2 deletions(-)
+> 
+> diff --git a/include/qemu/qemu-plugin.h b/include/qemu/qemu-plugin.h
+> index 93981f8f89f..3b6b18058d2 100644
+> --- a/include/qemu/qemu-plugin.h
+> +++ b/include/qemu/qemu-plugin.h
+> @@ -11,6 +11,7 @@
+>   #ifndef QEMU_QEMU_PLUGIN_H
+>   #define QEMU_QEMU_PLUGIN_H
+>   
+> +#include <glib.h>
+>   #include <inttypes.h>
+>   #include <stdbool.h>
+>   #include <stddef.h>
+> @@ -229,8 +230,8 @@ struct qemu_plugin_insn;
+>    * @QEMU_PLUGIN_CB_R_REGS: callback reads the CPU's regs
+>    * @QEMU_PLUGIN_CB_RW_REGS: callback reads and writes the CPU's regs
+>    *
+> - * Note: currently unused, plugins cannot read or change system
+> - * register state.
+> + * Note: currently QEMU_PLUGIN_CB_RW_REGS is unused, plugins cannot change
+> + * system register state.
+>    */
+>   enum qemu_plugin_cb_flags {
+>       QEMU_PLUGIN_CB_NO_REGS,
+> @@ -707,4 +708,47 @@ uint64_t qemu_plugin_end_code(void);
+>   QEMU_PLUGIN_API
+>   uint64_t qemu_plugin_entry_code(void);
+>   
+> +/** struct qemu_plugin_register - Opaque handle for register access */
+> +struct qemu_plugin_register;
+> +
+> +/**
+> + * typedef qemu_plugin_reg_descriptor - register descriptions
+> + *
+> + * @handle: opaque handle for retrieving value with qemu_plugin_read_register
+> + * @name: register name
+> + * @feature: optional feature descriptor, can be NULL
+> + */
+> +typedef struct {
+> +    struct qemu_plugin_register *handle;
+> +    const char *name;
+> +    const char *feature;
+> +} qemu_plugin_reg_descriptor;
+> +
+> +/**
+> + * qemu_plugin_get_registers() - return register list for current vCPU
+> + *
+> + * Returns a GArray of qemu_plugin_reg_descriptor or NULL. Caller
+> + * frees the array (but not the const strings).
+> + *
+> + * Should be used from a qemu_plugin_register_vcpu_init_cb() callback
+> + * after the vCPU is initialised, i.e. in the vCPU context.
+> + */
+> +GArray *qemu_plugin_get_registers(void);
+> +
+> +/**
+> + * qemu_plugin_read_register() - read register for current vCPU
+> + *
+> + * @handle: a @qemu_plugin_reg_handle handle
+> + * @buf: A GByteArray for the data owned by the plugin
+> + *
+> + * This function is only available in a context that register read access is
+> + * explicitly requested via the QEMU_PLUGIN_CB_R_REGS flag.
+> + *
+> + * Returns the size of the read register. The content of @buf is in target byte
+> + * order. On failure returns -1
+> + */
+> +int qemu_plugin_read_register(struct qemu_plugin_register *handle,
+> +                              GByteArray *buf);
+> +
+> +
+>   #endif /* QEMU_QEMU_PLUGIN_H */
+> diff --git a/plugins/api.c b/plugins/api.c
+> index 54df72c1c00..03412598047 100644
+> --- a/plugins/api.c
+> +++ b/plugins/api.c
+> @@ -8,6 +8,7 @@
+>    *
+>    *  qemu_plugin_tb
+>    *  qemu_plugin_insn
+> + *  qemu_plugin_register
+>    *
+>    * Which can then be passed back into the API to do additional things.
+>    * As such all the public functions in here are exported in
+> @@ -35,10 +36,12 @@
+>    */
+>   
+>   #include "qemu/osdep.h"
+> +#include "qemu/main-loop.h"
+>   #include "qemu/plugin.h"
+>   #include "qemu/log.h"
+>   #include "tcg/tcg.h"
+>   #include "exec/exec-all.h"
+> +#include "exec/gdbstub.h"
+>   #include "exec/ram_addr.h"
+>   #include "disas/disas.h"
+>   #include "plugin.h"
+> @@ -410,3 +413,56 @@ uint64_t qemu_plugin_entry_code(void)
+>   #endif
+>       return entry;
+>   }
+> +
+> +/*
+> + * Create register handles.
+> + *
+> + * We need to create a handle for each register so the plugin
+> + * infrastructure can call gdbstub to read a register. They are
+> + * currently just a pointer encapsulation of the gdb_regnum but in
+> + * future may hold internal plugin state so its important plugin
+> + * authors are not tempted to treat them as numbers.
+> + *
+> + * We also construct a result array with those handles and some
+> + * ancillary data the plugin might find useful.
+> + */
+> +
+> +static GArray *create_register_handles(CPUState *cs, GArray *gdbstub_regs)
+> +{
+
+cs is unused.
+
+> +    GArray *find_data = g_array_new(true, true,
+> +                                    sizeof(qemu_plugin_reg_descriptor));
+> +
+> +    for (int i = 0; i < gdbstub_regs->len; i++) {
+> +        GDBRegDesc *grd = &g_array_index(gdbstub_regs, GDBRegDesc, i);
+> +
+> +        /* skip "un-named" regs */
+> +        if (!grd->name) {
+> +            continue;
+> +        }
+> +
+> +        /* Create a record for the plugin */
+> +        qemu_plugin_reg_descriptor desc = {
+> +            .handle = GINT_TO_POINTER(grd->gdb_reg),
+> +            .name = g_intern_string(grd->name),
+> +            .feature = g_intern_string(grd->feature_name)
+> +        };
+
+Please remove a mixed declaration; see: docs/devel/style.rst
+
+> +        g_array_append_val(find_data, desc);
+> +    }
+> +
+> +    return find_data;
+> +}
+> +
+> +GArray *qemu_plugin_get_registers(void)
+> +{
+> +    g_assert(current_cpu);
+> +
+> +    g_autoptr(GArray) regs = gdb_get_register_list(current_cpu);
+> +    return regs->len ? create_register_handles(current_cpu, regs) : NULL;
+
+Why do you need regs->len check?
+
+> +}
+> +
+> +int qemu_plugin_read_register(struct qemu_plugin_register *reg, GByteArray *buf)
+> +{
+> +    g_assert(current_cpu);
+> +
+> +    return gdb_read_register(current_cpu, buf, GPOINTER_TO_INT(reg));
+> +}
+> diff --git a/plugins/qemu-plugins.symbols b/plugins/qemu-plugins.symbols
+> index adb67608598..27fe97239be 100644
+> --- a/plugins/qemu-plugins.symbols
+> +++ b/plugins/qemu-plugins.symbols
+> @@ -3,6 +3,7 @@
+>     qemu_plugin_end_code;
+>     qemu_plugin_entry_code;
+>     qemu_plugin_get_hwaddr;
+> +  qemu_plugin_get_registers;
+>     qemu_plugin_hwaddr_device_name;
+>     qemu_plugin_hwaddr_is_io;
+>     qemu_plugin_hwaddr_phys_addr;
+> @@ -19,6 +20,7 @@
+>     qemu_plugin_num_vcpus;
+>     qemu_plugin_outs;
+>     qemu_plugin_path_to_binary;
+> +  qemu_plugin_read_register;
+>     qemu_plugin_register_atexit_cb;
+>     qemu_plugin_register_flush_cb;
+>     qemu_plugin_register_vcpu_exit_cb;
 
