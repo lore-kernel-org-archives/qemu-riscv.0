@@ -4,96 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A373DC5478C
-	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Feb 2024 12:00:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F167CC47DD9
+	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Feb 2024 12:00:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rfIYh-0005gp-BZ; Wed, 28 Feb 2024 06:57:11 -0500
+	id 1rfIZ1-00067v-4Y; Wed, 28 Feb 2024 06:57:31 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rfIYf-0005f5-UB
- for qemu-riscv@nongnu.org; Wed, 28 Feb 2024 06:57:09 -0500
-Received: from mail-lj1-x234.google.com ([2a00:1450:4864:20::234])
+ id 1rfIYz-000652-HE
+ for qemu-riscv@nongnu.org; Wed, 28 Feb 2024 06:57:29 -0500
+Received: from mail-lf1-x134.google.com ([2a00:1450:4864:20::134])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rfIYb-0005hY-Mf
- for qemu-riscv@nongnu.org; Wed, 28 Feb 2024 06:57:09 -0500
-Received: by mail-lj1-x234.google.com with SMTP id
- 38308e7fff4ca-2d275e63590so66622401fa.2
- for <qemu-riscv@nongnu.org>; Wed, 28 Feb 2024 03:57:04 -0800 (PST)
+ id 1rfIYr-0005oG-II
+ for qemu-riscv@nongnu.org; Wed, 28 Feb 2024 06:57:29 -0500
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-5131316693cso2149587e87.0
+ for <qemu-riscv@nongnu.org>; Wed, 28 Feb 2024 03:57:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709121423; x=1709726223; darn=nongnu.org;
+ d=linaro.org; s=google; t=1709121439; x=1709726239; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=50Y7mogdziFCvw5yBy8ZL3I2hfp9Bk8OYzXMu//+nI0=;
- b=LwHglSW7GPgdomqZcuxYzbABRWalP0zbBRg2MxiVAyw0I6DRMe+Ac7oI1WBfk9Tmyf
- 0eyuj/SqwfcviG09lbmCwhxckNZHZCLKlZIHy9DUmS2tL+ji0BylQUQnWDpJ7wXpHD38
- 2uG4ExwRs2embSVsvcorKMBny9AmbXbFl6G3sDjYgXuv8JBPteUg5rGKPY7hk3pygc8k
- i0DWki/xAyGkYgtLyMnD7wgv7WV2mLvQ9p1ZafhYOj/DkpYlAmMHJGb52JejD/jDlRce
- YLOgTSmy4pvHAkClqA7dfXjtEJfvXz02XwInOs6EdDaAjD3Ji/Umb9G4XWXxrEYoHA+t
- ZFsA==
+ bh=UXC1c6ximoGlLXBLpJrnxbihkxNcYSRT5tnOm2K+8ww=;
+ b=s0ftTTKZ9+A9srUBeFpP3gGDeENP7dN1Pus5uSdxAgxkljG2PRPIXV7YJhHbVusb05
+ 1fd08BrNXy0p/xp7Sy0voAA8NuihOqL9wOI/s8QVUldXrJzrA3DaVFyVhkfu4029+1yH
+ 9TlPn0Ts+FYZ631bJtWFKtVyaSkUbtPP21nWkfuqpY5rukgaf4Y9Utr2KdsEGa/cfyVh
+ KUdCx7cDLSnrmaY6+b6/T4Zj3K+9A8QIZ+oD8WE7m6n277a2E5XP2JZ8ND4cDFfmzGqp
+ 31ooACGQFkmIKdEDQKdqr/CVJcyZUxlguBIPPKn1Tm5uaQ1/ZqJ3L7Jq2bYW+hoSzhF9
+ 71FA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709121423; x=1709726223;
+ d=1e100.net; s=20230601; t=1709121439; x=1709726239;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=50Y7mogdziFCvw5yBy8ZL3I2hfp9Bk8OYzXMu//+nI0=;
- b=TLyPiB3l5m8rLFqhmKR6XKEO0cHuxqVDx/PHIMumoPyMW/HTn5zN6OpYgaaOyxIBRV
- vwWWbSvgJLmF9HKeuD5UXZGzxVI7J9jAeYDudk3q5KZILRxGCigM4jJRader6OItqLpE
- m8Z7/D/78tjxrtSseY+Or8G5Ct8CzCfvKR0fcwZqDDOlRKQjBWnKTWWSHvBI1YY7IbCL
- QuXdQ0jY2hfhseNuA7hfocKgg+ddC4pYGiFhETnv8I6Z8OaZtbiuHLkvFOVl/OKxrHDf
- kgRgeHAtOzKsX7F+Z8+eufTfHIwDCrPvnYUSU0H1ha6UGQt0BKwbIaVf1JEffi6e0si9
- dzYw==
+ bh=UXC1c6ximoGlLXBLpJrnxbihkxNcYSRT5tnOm2K+8ww=;
+ b=lC4kMAkOtJuDgBUwQtaiqMA1liCbEG2xK8oLu4TGN6R4TK8bBmcuxAhwMcimYjPTA2
+ 9vLXBVzUsOQKgIGzQ1CCX/0LcjZKsG2oiuo7Z9YW2Od6a2mRaUrcNocx+dGl+EWMvbTH
+ JkZB6FXRntJ81vNOJlFREwPL2AwHvJZfmHDtO+BGC28P2lqu1UV3W6Y1r6RvCcCpD8WT
+ qeasbuXnlLueugWKTp2uwtAuDPHHYmTk89SaqmOOE6VSKGS124ByGk5gRdZgCtaiq4om
+ tePkbZnCuhKI0Vnn+5eF4ps5OMEYZjhGLBeGwvoDKkinL75RhLLoEJWy0BcoD3XLpI3u
+ Tgdg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVy6/Uocyu6o4zzSthZpbMOw9eaLz6vetJDr0kh4e/QdQkOSIFS8X+28YOIkpTGxNzpcBhqSDDGpd+72tq/+JKNYeQplEk=
-X-Gm-Message-State: AOJu0YxOno3jf/dVhKMoCI/28nV78sXU19LJEzII1y1rZ2Ns3YobXlXz
- 1O5/K6gGIY7m5CaPMOS603C7IXNAmZ7ZWv8mJhEDRdtKcLtyL+GQMRmoLf4NU/0=
-X-Google-Smtp-Source: AGHT+IGksoMCrCRuP7sNHv/QBD2Kml+YCuJbFRtYp/LxX3aHeyG6hbXDbs74f77NKPOFOCSyQqrGXg==
-X-Received: by 2002:a2e:8902:0:b0:2d2:9e62:64a3 with SMTP id
- d2-20020a2e8902000000b002d29e6264a3mr3043263lji.6.1709121422775; 
- Wed, 28 Feb 2024 03:57:02 -0800 (PST)
+ AJvYcCUaCnGnTM+/EITO5dlRTNNqozS7cIiKiVhJmCxjoj15F8tei+P60L5G6g1Yr4j1rtezB2E5zy5OcRPVAMRXKJ72n4MMTeU=
+X-Gm-Message-State: AOJu0YyE/StBWmOq1TYpuQzAJrIcAqiB9r5tDspturUIH6M+Wv+QnbSt
+ HjjV37OFksjPRrCIDmWSA11nWZDed4fiaEMVCx4Laa62fuBv/fucleuHah0hDxw=
+X-Google-Smtp-Source: AGHT+IFIjXjgJ3q10NFdnlzL8vb1Dz/hoEUGiioHtiQolvG5oovlOjlUnd/5FvnD2Su8NJyYsHsFig==
+X-Received: by 2002:a05:6512:48d:b0:512:ec7b:4be6 with SMTP id
+ v13-20020a056512048d00b00512ec7b4be6mr7776364lfq.11.1709121439503; 
+ Wed, 28 Feb 2024 03:57:19 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- s28-20020a05600c319c00b00412a38e732csm1867729wmp.35.2024.02.28.03.57.02
+ bv26-20020a0560001f1a00b0033e03a6b1ecsm927560wrb.18.2024.02.28.03.57.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Feb 2024 03:57:02 -0800 (PST)
+ Wed, 28 Feb 2024 03:57:15 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 05ECF5F8CE;
- Wed, 28 Feb 2024 11:57:02 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 5ED2D5F8F9;
+ Wed, 28 Feb 2024 11:57:03 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
-Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+Cc: Akihiko Odaki <akihiko.odaki@daynix.com>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Peter Maydell <peter.maydell@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Eduardo Habkost <eduardo@habkost.net>, Palmer Dabbelt <palmer@dabbelt.com>,
+ John Snow <jsnow@redhat.com>, Cleber Rosa <crosa@redhat.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- qemu-arm@nongnu.org (open list:ARM TCG CPUs),
  qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Subject: [PULL 01/29] tests/tcg: update licenses to GPLv2 as intended
-Date: Wed, 28 Feb 2024 11:56:33 +0000
-Message-Id: <20240228115701.1416107-2-alex.bennee@linaro.org>
+Subject: [PULL 14/29] gdbstub: Add members to identify registers to GDBFeature
+Date: Wed, 28 Feb 2024 11:56:46 +0000
+Message-Id: <20240228115701.1416107-15-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240228115701.1416107-1-alex.bennee@linaro.org>
 References: <20240228115701.1416107-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::234;
- envelope-from=alex.bennee@linaro.org; helo=mail-lj1-x234.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::134;
+ envelope-from=alex.bennee@linaro.org; helo=mail-lf1-x134.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -109,227 +107,134 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-My default header template is GPLv3 but for QEMU code we really should
-stick to GPLv2-or-later (allowing others to up-license it if they
-wish). While this is test code we should still be consistent on the
-source distribution.
+From: Akihiko Odaki <akihiko.odaki@daynix.com>
 
-I wrote all of this code so its not a problem. However there remains
-one GPLv3 file left which is the crt0-tc2x.S for TriCore.
+These members will be used to help plugins to identify registers.
+The added members in instances of GDBFeature dynamically generated by
+CPUs will be filled in later changes.
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+Message-Id: <20231213-gdb-v17-10-777047380591@daynix.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Message-Id: <20240227144335.1196131-2-alex.bennee@linaro.org>
+Message-Id: <20240227144335.1196131-15-alex.bennee@linaro.org>
 
-diff --git a/tests/tcg/aarch64/semicall.h b/tests/tcg/aarch64/semicall.h
-index 8a3fce35c5f..30d4de9a549 100644
---- a/tests/tcg/aarch64/semicall.h
-+++ b/tests/tcg/aarch64/semicall.h
-@@ -1,10 +1,10 @@
- /*
-  * Semihosting Tests - AArch64 helper
-  *
-- * Copyright (c) 2019
-+ * Copyright (c) 2019, 2024
-  * Written by Alex Bennée <alex.bennee@linaro.org>
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-  */
+diff --git a/include/exec/gdbstub.h b/include/exec/gdbstub.h
+index 82a8afa237f..da9ddfe54c5 100644
+--- a/include/exec/gdbstub.h
++++ b/include/exec/gdbstub.h
+@@ -13,12 +13,15 @@
+ typedef struct GDBFeature {
+     const char *xmlname;
+     const char *xml;
++    const char *name;
++    const char * const *regs;
+     int num_regs;
+ } GDBFeature;
  
- uintptr_t __semi_call(uintptr_t type, uintptr_t arg0)
-diff --git a/tests/tcg/arm/semicall.h b/tests/tcg/arm/semicall.h
-index ad8ac51310b..624937c5577 100644
---- a/tests/tcg/arm/semicall.h
-+++ b/tests/tcg/arm/semicall.h
-@@ -1,10 +1,10 @@
- /*
-  * Semihosting Tests - ARM Helper
-  *
-- * Copyright (c) 2019
-+ * Copyright (c) 2019, 2024
-  * Written by Alex Bennée <alex.bennee@linaro.org>
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-  */
+ typedef struct GDBFeatureBuilder {
+     GDBFeature *feature;
+     GPtrArray *xml;
++    GPtrArray *regs;
+     int base_reg;
+ } GDBFeatureBuilder;
  
- uintptr_t __semi_call(uintptr_t type, uintptr_t arg0)
-diff --git a/tests/tcg/multiarch/float_helpers.h b/tests/tcg/multiarch/float_helpers.h
-index 309f3f4bf10..c42ebe64b9e 100644
---- a/tests/tcg/multiarch/float_helpers.h
-+++ b/tests/tcg/multiarch/float_helpers.h
-@@ -1,9 +1,9 @@
- /*
-  * Common Float Helpers
-  *
-- * Copyright (c) 2019 Linaro
-+ * Copyright (c) 2019, 2024 Linaro
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-  */
+diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
+index f766ee277a0..a55b5e6581a 100644
+--- a/gdbstub/gdbstub.c
++++ b/gdbstub/gdbstub.c
+@@ -419,9 +419,10 @@ void gdb_feature_builder_init(GDBFeatureBuilder *builder, GDBFeature *feature,
+     builder->feature = feature;
+     builder->xml = g_ptr_array_new();
+     g_ptr_array_add(builder->xml, header);
++    builder->regs = g_ptr_array_new();
+     builder->base_reg = base_reg;
+     feature->xmlname = xmlname;
+-    feature->num_regs = 0;
++    feature->name = name;
+ }
  
- #include <inttypes.h>
-diff --git a/tests/tcg/riscv64/semicall.h b/tests/tcg/riscv64/semicall.h
-index f8c88f32dc5..11d0650cb06 100644
---- a/tests/tcg/riscv64/semicall.h
-+++ b/tests/tcg/riscv64/semicall.h
-@@ -1,10 +1,10 @@
- /*
-  * Semihosting Tests - RiscV64 Helper
-  *
-- * Copyright (c) 2021
-+ * Copyright (c) 2021, 2024
-  * Written by Alex Bennée <alex.bennee@linaro.org>
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-  */
+ void gdb_feature_builder_append_tag(const GDBFeatureBuilder *builder,
+@@ -440,10 +441,12 @@ void gdb_feature_builder_append_reg(const GDBFeatureBuilder *builder,
+                                     const char *type,
+                                     const char *group)
+ {
+-    if (builder->feature->num_regs < regnum) {
+-        builder->feature->num_regs = regnum;
++    if (builder->regs->len <= regnum) {
++        g_ptr_array_set_size(builder->regs, regnum + 1);
+     }
  
- uintptr_t __semi_call(uintptr_t type, uintptr_t arg0)
-diff --git a/tests/tcg/multiarch/arm-compat-semi/semiconsole.c b/tests/tcg/multiarch/arm-compat-semi/semiconsole.c
-index 1d82efc589d..1e2268f4b75 100644
---- a/tests/tcg/multiarch/arm-compat-semi/semiconsole.c
-+++ b/tests/tcg/multiarch/arm-compat-semi/semiconsole.c
-@@ -1,10 +1,10 @@
- /*
-  * linux-user semihosting console
-  *
-- * Copyright (c) 2019
-+ * Copyright (c) 2024
-  * Written by Alex Bennée <alex.bennee@linaro.org>
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-  */
++    builder->regs->pdata[regnum] = (gpointer *)name;
++
+     if (group) {
+         gdb_feature_builder_append_tag(
+             builder,
+@@ -469,6 +472,9 @@ void gdb_feature_builder_end(const GDBFeatureBuilder *builder)
+     }
  
- #define SYS_READC       0x07
-diff --git a/tests/tcg/multiarch/arm-compat-semi/semihosting.c b/tests/tcg/multiarch/arm-compat-semi/semihosting.c
-index 8627eee3cf7..f609c01341a 100644
---- a/tests/tcg/multiarch/arm-compat-semi/semihosting.c
-+++ b/tests/tcg/multiarch/arm-compat-semi/semihosting.c
-@@ -1,10 +1,10 @@
- /*
-  * linux-user semihosting checks
-  *
-- * Copyright (c) 2019
-+ * Copyright (c) 2019, 2024
-  * Written by Alex Bennée <alex.bennee@linaro.org>
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-  */
+     g_ptr_array_free(builder->xml, TRUE);
++
++    builder->feature->num_regs = builder->regs->len;
++    builder->feature->regs = (void *)g_ptr_array_free(builder->regs, FALSE);
+ }
  
- #define SYS_WRITE0      0x04
-diff --git a/tests/tcg/multiarch/float_convd.c b/tests/tcg/multiarch/float_convd.c
-index 0a1f0f93dc5..58d7f8b4c58 100644
---- a/tests/tcg/multiarch/float_convd.c
-+++ b/tests/tcg/multiarch/float_convd.c
-@@ -1,9 +1,9 @@
- /*
-  * Floating Point Convert Doubles to Various
-  *
-- * Copyright (c) 2019 Linaro
-+ * Copyright (c) 2019, 2024 Linaro
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-  */
+ const GDBFeature *gdb_find_static_feature(const char *xmlname)
+diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+index 546e8692d17..be7a02cd903 100644
+--- a/target/riscv/gdbstub.c
++++ b/target/riscv/gdbstub.c
+@@ -266,11 +266,9 @@ static GDBFeature *riscv_gen_dynamic_csr_feature(CPUState *cs, int base_reg)
+         }
+         predicate = csr_ops[i].predicate;
+         if (predicate && (predicate(env, i) == RISCV_EXCP_NONE)) {
+-            g_autofree char *dynamic_name = NULL;
+             name = csr_ops[i].name;
+             if (!name) {
+-                dynamic_name = g_strdup_printf("csr%03x", i);
+-                name = dynamic_name;
++                name = g_strdup_printf("csr%03x", i);
+             }
  
- #include <stdio.h>
-diff --git a/tests/tcg/multiarch/float_convs.c b/tests/tcg/multiarch/float_convs.c
-index 2e4fa55324d..cb1fdd439e3 100644
---- a/tests/tcg/multiarch/float_convs.c
-+++ b/tests/tcg/multiarch/float_convs.c
-@@ -1,9 +1,9 @@
- /*
-  * Floating Point Convert Single to Various
-  *
-- * Copyright (c) 2019 Linaro
-+ * Copyright (c) 2019, 2024 Linaro
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-  */
+             gdb_feature_builder_append_reg(&builder, name, bitsize, i,
+diff --git a/scripts/feature_to_c.py b/scripts/feature_to_c.py
+index e04d6b2df7f..807af0e685c 100644
+--- a/scripts/feature_to_c.py
++++ b/scripts/feature_to_c.py
+@@ -50,7 +50,9 @@ def writeliteral(indent, bytes):
+         sys.stderr.write(f'unexpected start tag: {element.tag}\n')
+         exit(1)
  
- #include <stdio.h>
-diff --git a/tests/tcg/multiarch/float_madds.c b/tests/tcg/multiarch/float_madds.c
-index 4888f8641f4..a692e052d5b 100644
---- a/tests/tcg/multiarch/float_madds.c
-+++ b/tests/tcg/multiarch/float_madds.c
-@@ -1,9 +1,9 @@
- /*
-  * Fused Multiply Add (Single)
-  *
-- * Copyright (c) 2019 Linaro
-+ * Copyright (c) 2019, 2024 Linaro
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-  */
++    feature_name = element.attrib['name']
+     regnum = 0
++    regnames = []
+     regnums = []
+     tags = ['feature']
+     for event, element in events:
+@@ -67,6 +69,7 @@ def writeliteral(indent, bytes):
+                 if 'regnum' in element.attrib:
+                     regnum = int(element.attrib['regnum'])
  
- #include <stdio.h>
-diff --git a/tests/tcg/multiarch/libs/float_helpers.c b/tests/tcg/multiarch/libs/float_helpers.c
-index 4e68d2b6598..fad5fc98933 100644
---- a/tests/tcg/multiarch/libs/float_helpers.c
-+++ b/tests/tcg/multiarch/libs/float_helpers.c
-@@ -5,9 +5,9 @@
-  * floating point constants useful for exercising the edge cases in
-  * floating point tests.
-  *
-- * Copyright (c) 2019 Linaro
-+ * Copyright (c) 2019, 2024 Linaro
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-  */
++                regnames.append(element.attrib['name'])
+                 regnums.append(regnum)
+                 regnum += 1
  
- /* we want additional float type definitions */
-diff --git a/tests/tcg/i386/system/boot.S b/tests/tcg/i386/system/boot.S
-index 9e8920cbfe0..28902c400d8 100644
---- a/tests/tcg/i386/system/boot.S
-+++ b/tests/tcg/i386/system/boot.S
-@@ -2,12 +2,12 @@
-  * i386 boot code, based on  qemu-bmibug.
-  *
-  * Copyright 2019 Doug Gale
-- * Copyright 2019 Linaro
-+ * Copyright 2019, 2024 Linaro
-  *
-- * This work is licensed under the terms of the GNU GPL, version 3 or later.
-+ * This work is licensed under the terms of the GNU GPL, version 2 or later.
-  * See the COPYING file in the top-level directory.
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-  */
+@@ -85,6 +88,15 @@ def writeliteral(indent, bytes):
+     writeliteral(8, bytes(os.path.basename(input), 'utf-8'))
+     sys.stdout.write(',\n')
+     writeliteral(8, read)
+-    sys.stdout.write(f',\n        {num_regs},\n    }},\n')
++    sys.stdout.write(',\n')
++    writeliteral(8, bytes(feature_name, 'utf-8'))
++    sys.stdout.write(',\n        (const char * const []) {\n')
++
++    for index, regname in enumerate(regnames):
++        sys.stdout.write(f'            [{regnums[index] - base_reg}] =\n')
++        writeliteral(16, bytes(regname, 'utf-8'))
++        sys.stdout.write(',\n')
++
++    sys.stdout.write(f'        }},\n        {num_regs},\n    }},\n')
  
-         .section .head
-diff --git a/tests/tcg/x86_64/system/boot.S b/tests/tcg/x86_64/system/boot.S
-index dac9bd534d7..7213aec63b2 100644
---- a/tests/tcg/x86_64/system/boot.S
-+++ b/tests/tcg/x86_64/system/boot.S
-@@ -1,16 +1,16 @@
- /*
-  * x86_64 boot and support code
-  *
-- * Copyright 2019 Linaro
-+ * Copyright 2019, 2024 Linaro
-  *
-- * This work is licensed under the terms of the GNU GPL, version 3 or later.
-+ * This work is licensed under the terms of the GNU GPL, version 2 or later.
-  * See the COPYING file in the top-level directory.
-  *
-  * Unlike the i386 version we instead use Xen's PVHVM booting header
-  * which should drop us automatically into 32 bit mode ready to go. I've
-  * nabbed bits of the Linux kernel setup to achieve this.
-  *
-- * SPDX-License-Identifier: GPL-3.0-or-later
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-  */
- 
-         .section .head
+ sys.stdout.write('    { NULL }\n};\n')
 -- 
 2.39.2
 
