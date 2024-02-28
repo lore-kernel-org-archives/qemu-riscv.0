@@ -4,109 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2257C54E49
-	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Feb 2024 12:01:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 376A1C47DD9
+	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Feb 2024 12:13:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rfIYv-00060T-Jp; Wed, 28 Feb 2024 06:57:25 -0500
+	id 1rfIoJ-0007wz-RI; Wed, 28 Feb 2024 07:13:20 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rfIYt-0005yJ-7E
- for qemu-riscv@nongnu.org; Wed, 28 Feb 2024 06:57:23 -0500
-Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rfIYm-0005lS-Af
- for qemu-riscv@nongnu.org; Wed, 28 Feb 2024 06:57:22 -0500
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-412b40e023dso3999675e9.1
- for <qemu-riscv@nongnu.org>; Wed, 28 Feb 2024 03:57:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709121433; x=1709726233; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tlF67/gXODIwphY8iHQIqEehOvTtXVeIZXVLerATEz8=;
- b=Tie8XU1QhXwVHHWSGW8CUSA9mDymubuv5OSc+rSB1NiupjeW6bQ0KpNTTtpymvqgZv
- 9m1NRkGWhVkAAy5r+wkPMHs5Ybc54z3toJEao2+qqshdicLl5yxRBf+B8trVmNRM5517
- zTFXLf58JWL4V8D/i6xgQxnWpOXFW2mn0yp5FH+WacO7+z05xQ8Iqb3VHsfAUffu6ZsA
- iNhuXas/HedqtJj2jMaGHNYmkALGawIZUWYdpp28gwELvEvItwTZKxOvLPUNkx7p1Rz8
- 4XxvdHWrCfRTaiAfJr6pZ4g8URyF41PDFjdBcs0muKhd5+Qy+LBlPfBP3CXLlxAV5JRp
- kv1A==
+ (Exim 4.90_1) (envelope-from <anisinha@redhat.com>)
+ id 1rfGMP-0008TE-9W
+ for qemu-riscv@nongnu.org; Wed, 28 Feb 2024 04:36:22 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <anisinha@redhat.com>)
+ id 1rfGMM-0004q2-1w
+ for qemu-riscv@nongnu.org; Wed, 28 Feb 2024 04:36:21 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1709112975;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=GGGtT4t0V2i+limzeTuJ7ih9vgEOsjzHoZhD0Z5eInU=;
+ b=ccKjDlP/JwtX3LwZFf7aMWJUOlJoE91ygik2qQCnWg5bMQS6dyqx2eijNuCVKq3O4NBW0M
+ OzTH8HQLhBp6XxWiz+4D07EACSlPSmUG/nHrRM51UdroftzGQ/xiHnaTkCO4PfgiGRSe7y
+ d5jbAt63z0elVOWL9MAZdkx+pMjZBpw=
+Received: from mail-oo1-f69.google.com (mail-oo1-f69.google.com
+ [209.85.161.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-584-l2t72NSgNriSu1KHVHEEIw-1; Wed, 28 Feb 2024 04:36:13 -0500
+X-MC-Unique: l2t72NSgNriSu1KHVHEEIw-1
+Received: by mail-oo1-f69.google.com with SMTP id
+ 006d021491bc7-5a0312e60fbso5893214eaf.2
+ for <qemu-riscv@nongnu.org>; Wed, 28 Feb 2024 01:36:13 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709121433; x=1709726233;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1709112973; x=1709717773;
+ h=to:references:message-id:content-transfer-encoding:cc:date
+ :in-reply-to:from:subject:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=tlF67/gXODIwphY8iHQIqEehOvTtXVeIZXVLerATEz8=;
- b=XmFsYewjH7QDsqBpRc6f1iHwK4xUbm+fnWm8NKGXvtuBTJKlpua/yyl+TKLhkq+hz+
- 2zLxJ+XfA8Cb/PMrvibbQwqzHnFmFqVahmy9FCLTJlD/koFwXCrqFVJ37FBsA9vJ9JTD
- guzGYjrvh2ACI221lhgVwt9GTxdCmK7L3McU/MYu971AhKZQNYy4dwd//I9NsDk0d+We
- 4eCnzzjPkrzGA/VNje0kR040Yw3hXC6+7eBYwW0QXViiuV0orwYiWIZjtb9v3HbyFclt
- VW30umYgmfVsEBpDNasqCwLWbTWbmGWMtaD4rB52gVRjrelkLaMX9oL7ZFGsTulgm1f3
- oKnA==
+ bh=T8enEV+WSugbqmW3FMvj90KbZBFNM6QlAzJCtG9D5bY=;
+ b=ez4kwL2vMMawZlxoel8gHbT+pLCROxva5t6cS/GFbSqOmB+eINxR4et8Bjm6oTupff
+ pm3LXopXY+UA0WDVDb7i7eGOmdSP5d1xlttta1v/h6WMA3F+/1pl/Z25E0KuikRHQKMp
+ S1w0SQJkYeDAgmosrPF+YN0j+TAEcYa6vjuEm4AJMuN30ROE31wHJfHmFq6YcXbda0s4
+ 3gu1XtpLK3xllSk7XnAIt344LFWZLz9SOrtQu3Kh1m0ClujrRxOSQSzaP1Ni43Z6ljAe
+ n3SzzEsncP4kr0JTJPEEomQs4+gcSFA8WTWmaD1X2DkunS4U1Bu3xXP6TD2MkhTw43c0
+ VGaA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV7S4o59a483OeTIbNZxaVQc+Jkwawnr+oOsYCpOCem+M7Oyi7X19sjjAEbdwFNNcHUjeD1M5DJpPLUB3V61a+/V6H+C8Q=
-X-Gm-Message-State: AOJu0Yw3bTejfuGGHnODcrFl73l5TM8w2IajBeQuq/9U4EG7KL0iNw8/
- hWZX3Z7RHytvC0XCrhN641PMw148+k2dkQ8nuenFIdY7B0rkSnRDcqiKbSEVV+xLXgFzii7iNdt
- d
-X-Google-Smtp-Source: AGHT+IGfbnVxiTwouRzqAFk5s7hHitQmSrwByX6ssrq2Ny6CWil2zE9th5SmAz1dH/+frzoNytpt8Q==
-X-Received: by 2002:adf:e10f:0:b0:33d:5350:774a with SMTP id
- t15-20020adfe10f000000b0033d5350774amr9183091wrz.11.1709121432871; 
- Wed, 28 Feb 2024 03:57:12 -0800 (PST)
-Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- bw11-20020a0560001f8b00b0033da4b06632sm14694132wrb.6.2024.02.28.03.57.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Feb 2024 03:57:06 -0800 (PST)
-Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 2A6FB5F7DF;
- Wed, 28 Feb 2024 11:57:03 +0000 (GMT)
-From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: Akihiko Odaki <akihiko.odaki@daynix.com>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Yanan Wang <wangyanan55@huawei.com>,
+ AJvYcCUQA6l+sDrxeTxICq8JBZ/VIDPQHzlB0MGtxs8G4QVRMY6IMQckSROClJWS4ynk1tYt2a5OnmDzTM1TwX/zRs/yEViy+zc=
+X-Gm-Message-State: AOJu0YyC86p/CbFnRyUwoRivQzRChnKDOOwooMwANMTbF9XpZVZ6yjuq
+ VpuWYZll24u6aCXdU86TKzuqOo0ikaW4UfysCDBz6fXaouUbdgYzcPgBKYmd4QkIVjT5CVak+hH
+ ewZ0mUMQ9u17smZp6ZYERvCZiOWvDIkv7PIDwq3XoHtaPQbAHAK2E
+X-Received: by 2002:a05:6358:3a09:b0:17b:c0ca:3da9 with SMTP id
+ g9-20020a0563583a0900b0017bc0ca3da9mr5081073rwe.20.1709112973004; 
+ Wed, 28 Feb 2024 01:36:13 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEHr99nO++MDWiBh+0Aj92/YAUpDORNDhr4bga20RUDorNcZZ1W+lhuKoWNxZK9oJSIE7N01w==
+X-Received: by 2002:a05:6358:3a09:b0:17b:c0ca:3da9 with SMTP id
+ g9-20020a0563583a0900b0017bc0ca3da9mr5081045rwe.20.1709112972606; 
+ Wed, 28 Feb 2024 01:36:12 -0800 (PST)
+Received: from smtpclient.apple ([203.163.242.235])
+ by smtp.gmail.com with ESMTPSA id
+ bv193-20020a632eca000000b005dc4da2121fsm7017776pgb.6.2024.02.28.01.36.06
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Wed, 28 Feb 2024 01:36:12 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3774.400.31\))
+Subject: Re: [PATCH 01/19] tests: smbios: make it possible to write SMBIOS
+ only test
+From: Ani Sinha <anisinha@redhat.com>
+In-Reply-To: <20240227154749.1818189-2-imammedo@redhat.com>
+Date: Wed, 28 Feb 2024 15:05:53 +0530
+Cc: QEMU Developers <qemu-devel@nongnu.org>,
  Peter Maydell <peter.maydell@linaro.org>,
- Michael Rolnik <mrolnik@gmail.com>, Brian Cain <bcain@quicinc.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Song Gao <gaosong@loongson.cn>,
- Laurent Vivier <laurent@vivier.eu>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Richard Henderson <richard.henderson@linaro.org>,
- David Hildenbrand <david@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
- Thomas Huth <thuth@redhat.com>,
- qemu-arm@nongnu.org (open list:ARM TCG CPUs),
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs),
- qemu-s390x@nongnu.org (open list:S390 TCG CPUs)
-Subject: [PULL 12/29] gdbstub: Infer number of core registers from XML
-Date: Wed, 28 Feb 2024 11:56:44 +0000
-Message-Id: <20240228115701.1416107-13-alex.bennee@linaro.org>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240228115701.1416107-1-alex.bennee@linaro.org>
-References: <20240228115701.1416107-1-alex.bennee@linaro.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::334;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x334.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+ Paolo Bonzini <pbonzini@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Song Gao <gaosong@loongson.cn>,
+ Alistair Francis <alistair.francis@wdc.com>, palmer@dabbelt.com,
+ bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com,
+ =?utf-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Yanan Wang <wangyanan55@huawei.com>, Eric Blake <eblake@redhat.com>,
+ Markus Armbruster <armbru@redhat.com>, qemu-arm@nongnu.org,
+ qemu-riscv@nongnu.org, f.ebner@proxmox.com
+Message-Id: <18615A72-969A-449C-A8D9-79119CB8AD04@redhat.com>
+References: <20240227154749.1818189-1-imammedo@redhat.com>
+ <20240227154749.1818189-2-imammedo@redhat.com>
+To: Igor Mammedov <imammedo@redhat.com>
+X-Mailer: Apple Mail (2.3774.400.31)
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain;
+	charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=anisinha@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -21
+X-Spam_score: -2.2
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.088,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Wed, 28 Feb 2024 07:12:24 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -121,225 +120,112 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
 
-GDBFeature has the num_regs member so use it where applicable to
-remove magic numbers.
 
-Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
-Message-Id: <20231213-gdb-v17-8-777047380591@daynix.com>
-[AJB: remove core reg check from microblaze read reg]
-Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Message-Id: <20240227144335.1196131-13-alex.bennee@linaro.org>
+> On 27-Feb-2024, at 21:17, Igor Mammedov <imammedo@redhat.com> wrote:
+>=20
+> Cureently it not possible to run SMBIOS test without ACPI one,
+> which gets into the way when testing ACPI-less configs.
+>=20
+> Extract SMBIOS testing into separate routines that could also
+> be run without ACPI dependency and use that for testing SMBIOS.
+>=20
+> As the 1st user add "acpi/piix4/smbios-options" test case.
+>=20
+> Signed-off-by: Igor Mammedov <imammedo@redhat.com>
 
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index 4385ce54c99..1bbf21b2201 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -126,7 +126,8 @@ struct SysemuCPUOps;
-  * @gdb_adjust_breakpoint: Callback for adjusting the address of a
-  *       breakpoint.  Used by AVR to handle a gdb mis-feature with
-  *       its Harvard architecture split code and data.
-- * @gdb_num_core_regs: Number of core registers accessible to GDB.
-+ * @gdb_num_core_regs: Number of core registers accessible to GDB or 0 to infer
-+ *                     from @gdb_core_xml_file.
-  * @gdb_core_xml_file: File name for core registers GDB XML description.
-  * @gdb_stop_before_watchpoint: Indicates whether GDB expects the CPU to stop
-  *           before the insn which triggers a watchpoint rather than after it.
-diff --git a/target/s390x/cpu.h b/target/s390x/cpu.h
-index d37a49b4d92..43a46a5a068 100644
---- a/target/s390x/cpu.h
-+++ b/target/s390x/cpu.h
-@@ -491,8 +491,6 @@ static inline void cpu_get_tb_cpu_state(CPUS390XState *env, vaddr *pc,
- #define S390_R13_REGNUM 15
- #define S390_R14_REGNUM 16
- #define S390_R15_REGNUM 17
--/* Total Core Registers. */
--#define S390_NUM_CORE_REGS 18
- 
- static inline void setcc(S390CPU *cpu, uint64_t cc)
- {
-diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
-index d573f808d2e..f766ee277a0 100644
---- a/gdbstub/gdbstub.c
-+++ b/gdbstub/gdbstub.c
-@@ -546,9 +546,12 @@ void gdb_init_cpu(CPUState *cpu)
-         gdb_register_feature(cpu, 0,
-                              cc->gdb_read_register, cc->gdb_write_register,
-                              feature);
-+        cpu->gdb_num_regs = cpu->gdb_num_g_regs = feature->num_regs;
-     }
- 
--    cpu->gdb_num_regs = cpu->gdb_num_g_regs = cc->gdb_num_core_regs;
-+    if (cc->gdb_num_core_regs) {
-+        cpu->gdb_num_regs = cpu->gdb_num_g_regs = cc->gdb_num_core_regs;
-+    }
- }
- 
- void gdb_register_coprocessor(CPUState *cpu,
-diff --git a/target/arm/cpu.c b/target/arm/cpu.c
-index 5fa86bc8d55..84887084d95 100644
---- a/target/arm/cpu.c
-+++ b/target/arm/cpu.c
-@@ -2515,7 +2515,6 @@ static void arm_cpu_class_init(ObjectClass *oc, void *data)
- #ifndef CONFIG_USER_ONLY
-     cc->sysemu_ops = &arm_sysemu_ops;
- #endif
--    cc->gdb_num_core_regs = 26;
-     cc->gdb_arch_name = arm_gdb_arch_name;
-     cc->gdb_get_dynamic_xml = arm_gdb_get_dynamic_xml;
-     cc->gdb_stop_before_watchpoint = true;
-diff --git a/target/arm/cpu64.c b/target/arm/cpu64.c
-index 0f7a44a28f5..985b1efe160 100644
---- a/target/arm/cpu64.c
-+++ b/target/arm/cpu64.c
-@@ -793,7 +793,6 @@ static void aarch64_cpu_class_init(ObjectClass *oc, void *data)
- 
-     cc->gdb_read_register = aarch64_cpu_gdb_read_register;
-     cc->gdb_write_register = aarch64_cpu_gdb_write_register;
--    cc->gdb_num_core_regs = 34;
-     cc->gdb_core_xml_file = "aarch64-core.xml";
-     cc->gdb_arch_name = aarch64_gdb_arch_name;
- 
-diff --git a/target/avr/cpu.c b/target/avr/cpu.c
-index a40f445af21..a50170bc69a 100644
---- a/target/avr/cpu.c
-+++ b/target/avr/cpu.c
-@@ -251,7 +251,6 @@ static void avr_cpu_class_init(ObjectClass *oc, void *data)
-     cc->gdb_read_register = avr_cpu_gdb_read_register;
-     cc->gdb_write_register = avr_cpu_gdb_write_register;
-     cc->gdb_adjust_breakpoint = avr_cpu_gdb_adjust_breakpoint;
--    cc->gdb_num_core_regs = 35;
-     cc->gdb_core_xml_file = "avr-cpu.xml";
-     cc->tcg_ops = &avr_tcg_ops;
- }
-diff --git a/target/hexagon/cpu.c b/target/hexagon/cpu.c
-index ebe804e2931..a10d87b8220 100644
---- a/target/hexagon/cpu.c
-+++ b/target/hexagon/cpu.c
-@@ -362,7 +362,6 @@ static void hexagon_cpu_class_init(ObjectClass *c, void *data)
-     cc->get_pc = hexagon_cpu_get_pc;
-     cc->gdb_read_register = hexagon_gdb_read_register;
-     cc->gdb_write_register = hexagon_gdb_write_register;
--    cc->gdb_num_core_regs = TOTAL_PER_THREAD_REGS;
-     cc->gdb_stop_before_watchpoint = true;
-     cc->gdb_core_xml_file = "hexagon-core.xml";
-     cc->disas_set_info = hexagon_cpu_disas_set_info;
-diff --git a/target/i386/cpu.c b/target/i386/cpu.c
-index 7f908236767..733254fab57 100644
---- a/target/i386/cpu.c
-+++ b/target/i386/cpu.c
-@@ -7990,10 +7990,8 @@ static void x86_cpu_common_class_init(ObjectClass *oc, void *data)
-     cc->gdb_arch_name = x86_gdb_arch_name;
- #ifdef TARGET_X86_64
-     cc->gdb_core_xml_file = "i386-64bit.xml";
--    cc->gdb_num_core_regs = 66;
- #else
-     cc->gdb_core_xml_file = "i386-32bit.xml";
--    cc->gdb_num_core_regs = 50;
- #endif
-     cc->disas_set_info = x86_disas_set_info;
- 
-diff --git a/target/loongarch/cpu.c b/target/loongarch/cpu.c
-index 7dc50bf35fc..bc2684179f2 100644
---- a/target/loongarch/cpu.c
-+++ b/target/loongarch/cpu.c
-@@ -815,7 +815,6 @@ static void loongarch32_cpu_class_init(ObjectClass *c, void *data)
- {
-     CPUClass *cc = CPU_CLASS(c);
- 
--    cc->gdb_num_core_regs = 35;
-     cc->gdb_core_xml_file = "loongarch-base32.xml";
-     cc->gdb_arch_name = loongarch32_gdb_arch_name;
- }
-@@ -829,7 +828,6 @@ static void loongarch64_cpu_class_init(ObjectClass *c, void *data)
- {
-     CPUClass *cc = CPU_CLASS(c);
- 
--    cc->gdb_num_core_regs = 35;
-     cc->gdb_core_xml_file = "loongarch-base64.xml";
-     cc->gdb_arch_name = loongarch64_gdb_arch_name;
- }
-diff --git a/target/m68k/cpu.c b/target/m68k/cpu.c
-index d5a71c63152..cc6e4537be5 100644
---- a/target/m68k/cpu.c
-+++ b/target/m68k/cpu.c
-@@ -570,7 +570,6 @@ static void m68k_cpu_class_init(ObjectClass *c, void *data)
- #endif
-     cc->disas_set_info = m68k_cpu_disas_set_info;
- 
--    cc->gdb_num_core_regs = 18;
-     cc->tcg_ops = &m68k_tcg_ops;
- }
- 
-diff --git a/target/microblaze/cpu.c b/target/microblaze/cpu.c
-index 2c62cf048c2..e533e7a95ec 100644
---- a/target/microblaze/cpu.c
-+++ b/target/microblaze/cpu.c
-@@ -444,7 +444,6 @@ static void mb_cpu_class_init(ObjectClass *oc, void *data)
-     cc->sysemu_ops = &mb_sysemu_ops;
- #endif
-     device_class_set_props(dc, mb_properties);
--    cc->gdb_num_core_regs = 32 + 25;
-     cc->gdb_core_xml_file = "microblaze-core.xml";
- 
-     cc->disas_set_info = mb_disas_set_info;
-diff --git a/target/microblaze/gdbstub.c b/target/microblaze/gdbstub.c
-index 6ffc5ad0752..eb168d10070 100644
---- a/target/microblaze/gdbstub.c
-+++ b/target/microblaze/gdbstub.c
-@@ -49,14 +49,9 @@ enum {
- int mb_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
- {
-     MicroBlazeCPU *cpu = MICROBLAZE_CPU(cs);
--    CPUClass *cc = CPU_GET_CLASS(cs);
-     CPUMBState *env = &cpu->env;
-     uint32_t val;
- 
--    if (n > cc->gdb_num_core_regs) {
--        return 0;
--    }
--
-     switch (n) {
-     case 1 ... 31:
-         val = env->regs[n];
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 1b62e269b90..dd8a0e94897 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -2352,7 +2352,6 @@ static void riscv_cpu_common_class_init(ObjectClass *c, void *data)
-     cc->get_pc = riscv_cpu_get_pc;
-     cc->gdb_read_register = riscv_cpu_gdb_read_register;
-     cc->gdb_write_register = riscv_cpu_gdb_write_register;
--    cc->gdb_num_core_regs = 33;
-     cc->gdb_stop_before_watchpoint = true;
-     cc->disas_set_info = riscv_cpu_disas_set_info;
- #ifndef CONFIG_USER_ONLY
-diff --git a/target/rx/cpu.c b/target/rx/cpu.c
-index 5205167da17..2f878d08d6d 100644
---- a/target/rx/cpu.c
-+++ b/target/rx/cpu.c
-@@ -221,7 +221,6 @@ static void rx_cpu_class_init(ObjectClass *klass, void *data)
-     cc->gdb_write_register = rx_cpu_gdb_write_register;
-     cc->disas_set_info = rx_cpu_disas_set_info;
- 
--    cc->gdb_num_core_regs = 26;
-     cc->gdb_core_xml_file = "rx-core.xml";
-     cc->tcg_ops = &rx_tcg_ops;
- }
-diff --git a/target/s390x/cpu.c b/target/s390x/cpu.c
-index 49a2341accf..f7194534aeb 100644
---- a/target/s390x/cpu.c
-+++ b/target/s390x/cpu.c
-@@ -368,7 +368,6 @@ static void s390_cpu_class_init(ObjectClass *oc, void *data)
-     s390_cpu_class_init_sysemu(cc);
- #endif
-     cc->disas_set_info = s390_cpu_disas_set_info;
--    cc->gdb_num_core_regs = S390_NUM_CORE_REGS;
-     cc->gdb_core_xml_file = "s390x-core64.xml";
-     cc->gdb_arch_name = s390_gdb_arch_name;
- 
--- 
-2.39.2
+Reviewed-by: Ani Sinha <anisinha@redhat.com>
+
+> ---
+> tests/qtest/bios-tables-test.c | 47 +++++++++++++++++++++++++++-------
+> 1 file changed, 38 insertions(+), 9 deletions(-)
+>=20
+> diff --git a/tests/qtest/bios-tables-test.c b/tests/qtest/bios-tables-tes=
+t.c
+> index 21811a1ab5..b2992bafa8 100644
+> --- a/tests/qtest/bios-tables-test.c
+> +++ b/tests/qtest/bios-tables-test.c
+> @@ -858,16 +858,8 @@ static void test_vm_prepare(const char *params, test=
+_data *data)
+>     g_free(args);
+> }
+>=20
+> -static void process_acpi_tables_noexit(test_data *data)
+> +static void process_smbios_tables_noexit(test_data *data)
+> {
+> -    test_acpi_load_tables(data);
+> -
+> -    if (getenv(ACPI_REBUILD_EXPECTED_AML)) {
+> -        dump_aml_files(data, true);
+> -    } else {
+> -        test_acpi_asl(data);
+> -    }
+> -
+>     /*
+>      * TODO: make SMBIOS tests work with UEFI firmware,
+>      * Bug on uefi-test-tools to provide entry point:
+> @@ -879,6 +871,27 @@ static void process_acpi_tables_noexit(test_data *da=
+ta)
+>     }
+> }
+>=20
+> +static void test_smbios(const char *params, test_data *data)
+> +{
+> +    test_vm_prepare(params, data);
+> +    boot_sector_test(data->qts);
+> +    process_smbios_tables_noexit(data);
+> +    qtest_quit(data->qts);
+> +}
+> +
+> +static void process_acpi_tables_noexit(test_data *data)
+> +{
+> +    test_acpi_load_tables(data);
+> +
+> +    if (getenv(ACPI_REBUILD_EXPECTED_AML)) {
+> +        dump_aml_files(data, true);
+> +    } else {
+> +        test_acpi_asl(data);
+> +    }
+> +
+> +    process_smbios_tables_noexit(data);
+> +}
+> +
+> static void process_acpi_tables(test_data *data)
+> {
+>     process_acpi_tables_noexit(data);
+> @@ -2064,6 +2077,20 @@ static void test_acpi_q35_pvpanic_isa(void)
+>     free_test_data(&data);
+> }
+>=20
+> +static void test_acpi_pc_smbios_options(void)
+> +{
+> +    uint8_t req_type11[] =3D { 11 };
+> +    test_data data =3D {
+> +        .machine =3D MACHINE_PC,
+> +        .variant =3D ".pc_smbios_options",
+> +        .required_struct_types =3D req_type11,
+> +        .required_struct_types_len =3D ARRAY_SIZE(req_type11),
+> +    };
+> +
+> +    test_smbios("-smbios type=3D11,value=3DTEST", &data);
+> +    free_test_data(&data);
+> +}
+> +
+> static void test_oem_fields(test_data *data)
+> {
+>     int i;
+> @@ -2215,6 +2242,8 @@ int main(int argc, char *argv[])
+> #ifdef CONFIG_POSIX
+>             qtest_add_func("acpi/piix4/acpierst", test_acpi_piix4_acpi_er=
+st);
+> #endif
+> +            qtest_add_func("acpi/piix4/smbios-options",
+> +                           test_acpi_pc_smbios_options);
+>         }
+>         if (qtest_has_machine(MACHINE_Q35)) {
+>             qtest_add_func("acpi/q35", test_acpi_q35_tcg);
+> --=20
+> 2.39.3
+>=20
 
 
