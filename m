@@ -4,84 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 129DCC5478C
-	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Feb 2024 18:52:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3503C5478C
+	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Feb 2024 18:53:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rfP27-0000ob-2j; Wed, 28 Feb 2024 13:51:59 -0500
+	id 1rfP22-0000lH-HK; Wed, 28 Feb 2024 13:51:54 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1rfP24-0000mX-5v
- for qemu-riscv@nongnu.org; Wed, 28 Feb 2024 13:51:56 -0500
-Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429])
+ id 1rfP21-0000kl-5g
+ for qemu-riscv@nongnu.org; Wed, 28 Feb 2024 13:51:53 -0500
+Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1rfP22-0006ut-Is
- for qemu-riscv@nongnu.org; Wed, 28 Feb 2024 13:51:55 -0500
-Received: by mail-pf1-x429.google.com with SMTP id
- d2e1a72fcca58-6da9c834646so5606859b3a.3
- for <qemu-riscv@nongnu.org>; Wed, 28 Feb 2024 10:51:54 -0800 (PST)
+ id 1rfP1y-0006tr-Qe
+ for qemu-riscv@nongnu.org; Wed, 28 Feb 2024 13:51:52 -0500
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-6e09143c7bdso3832132b3a.3
+ for <qemu-riscv@nongnu.org>; Wed, 28 Feb 2024 10:51:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1709146313; x=1709751113;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1709146309; x=1709751109;
  darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wsd4UJgUqZBGQqVPr0loi27Ch+LSMtssoNWVgdi64OI=;
- b=N4EcU+kSWEaYnQr2WekNE5+1L5tnOOnbESdh/oFjUZBFn/cRdWEKN/tpBaNDCu/EaB
- Zx0YvH44WBuJGV1gyo22NPQU43Df5mi8ZJylKx8bIivHcOKtg01wGJ3AgBG/n4bbHESs
- RVdgBl2DAo+fRZqBQu+Giw/hXqpjy22JgBYSPMHbs8FzZukHVpqJTuBoFTLuoBSS7Dzy
- yF+/Zlp6od088jqQzkEnoYlTvWFNrg10GkMuH9GnIs/qTKKwG20FGrldXQ3AQJgETFkx
- uP27fzbDra0ID5LVucp44qDV6nI77qcjMAQBHZ+QQGQrLKhY47uhOgxB8hBrhMUaa+9Z
- qMXw==
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=wWd0V1EtOEhJfLeyDpChVNppiwn+uZf8rQF0n8RmV5E=;
+ b=Miumsc7BV5dfX4sRTM1vPB/+mEFuz2Prc3qSrZwtUHA+DavmfSSkhHIfKNB3eJWgpc
+ GELnf7qKVGor1Q7f0W6HMqJCcm0gvmwHxutVNCPEqbgcH8OLdK0XVFZTtGtSZHSCvncu
+ 0fCqsO9R7x4278nBrM7v8YReegeg9QRuOMnhPdubIcGI8SG1OHl8mtev4wTTPSM2dNYK
+ HdCpH9WFSatjV6exe/f1GuB7tLIYZmC5dEqPgwhEtEvsnsiBRUfZCIVLaiBrZALhuwVv
+ tCwmm+Y2wu9U+rZURRTVFl8k220Qz+4qp+Q//HXI8+vrpHO/vvlppLamX6FzZHZ89hXJ
+ Gstw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709146313; x=1709751113;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=wsd4UJgUqZBGQqVPr0loi27Ch+LSMtssoNWVgdi64OI=;
- b=R4jVIq8XXIUaEhsmhdCknfI7gMGoXhodoQF+TlHvknyLNnXRoSZX7rTuxNy0HFWRcn
- ikd6eh9q62Xr4j73Vyiq10OTIlWnQ763mcwSCRap9AcaOlr9Dw100g1yek06WFNnovhh
- XAFCozNBU5YhomTXK4qRGTiBltubZiUDxDFDCRkx7Fp/zZ7rhmgX81o77yZ0P/V3D6IN
- /gm7YPgXBxkgbjco2E8mRFkfUAP5RpJWr7ACFQeJVfgwtaOgDvhROH7lVZgBSi6AgGI2
- AjUlgPAdgE5yvrr+cOF5T0n9JPmfXwxF1/Mo3ScDdk3tX0aDgH/4blqY2POMnOKC0SAK
- kSJw==
+ d=1e100.net; s=20230601; t=1709146309; x=1709751109;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=wWd0V1EtOEhJfLeyDpChVNppiwn+uZf8rQF0n8RmV5E=;
+ b=wXAu1yHsXxWBFhc50iqBR2pn4EZTWpIPaA4FExwrZLuaBURZykOF1ZZUr8v2W3aRns
+ lZcfxgJr2GHlbMuDwhq/vbcMYiY7y48bYvmj6t5B+61S+eNsEROf5AzPg0QFXYf563Xw
+ K/f273igW2n56AeZV5U9ggSl/kFzGw6KreTZeC2Ijb3ljsBCMM78QmqVVIYbn6ofDi7L
+ e2XT/XBHCBOXkavS2HzLLiuACFwFRiHjXDtjHOr3lHjtvvgY4cXspUhtU50+RCQEZCbv
+ p+6HrHclv5Zc4CIlQHTc1RNPKT3e1omeW5RIw7Thsltx1C3kvPI/sL/UnWvTWNRvRQOZ
+ k6uQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU9L38+22fExjHDxNgOQjzdXi1piYVErAHXGdPc8prPc0woQgeRLGeqxGHV+b1C/YPKufWVSjKfGuqP/cyYmh3YdYvIsvM=
-X-Gm-Message-State: AOJu0Ywoy4kA8YHmW9RJ9x4WxujiHvFneLVL2kF09ja+Eh55f728s50T
- NREW9kZLAmziFq4w2U0Q0EftPulcxXrEapkB7owBoRoeyYn/vtQ4AGeFEb0/2IE=
-X-Google-Smtp-Source: AGHT+IGViUo8qyT0MguJlDC6CdWNrZuARrlncVaSm2N8N02GKmAyc8JrY2Bo1Y1nUl0KqrO1A537Hw==
-X-Received: by 2002:a05:6a21:3183:b0:1a1:1f7b:9b0f with SMTP id
- za3-20020a056a21318300b001a11f7b9b0fmr96768pzb.42.1709146313210; 
- Wed, 28 Feb 2024 10:51:53 -0800 (PST)
+ AJvYcCXjIzI3JLoCRkRkPiHD87EIDt18G3vAhuPA/qOvrcBn1dP4Sxw7qAKuSkY21N6+F6mXWdO+LynFjElFFCobu60U6j4tgbk=
+X-Gm-Message-State: AOJu0YzrDoj+NuAaHZi+12YciEHizMeJraSeK8vWu/H00Vk0iQ8KEE2n
+ yo32UunPxPxh2yPu9DNfoqPE+xndP8pEWJuU0iBw/ilL/zRG+4c3ujWrtyxl78Y=
+X-Google-Smtp-Source: AGHT+IFqoUutv1bXbDm4uJjWMlfsLwY7Tow/SsZ3UbfyzmqLO7xZ1e8VV8xDfBUthAwlAMre59XizQ==
+X-Received: by 2002:a05:6a00:997:b0:6e5:32ee:216b with SMTP id
+ u23-20020a056a00099700b006e532ee216bmr1782pfg.27.1709146307977; 
+ Wed, 28 Feb 2024 10:51:47 -0800 (PST)
 Received: from atishp.ba.rivosinc.com ([64.71.180.162])
  by smtp.gmail.com with ESMTPSA id
- o20-20020a635d54000000b005dbed0ffb10sm49562pgm.83.2024.02.28.10.51.51
+ o20-20020a635d54000000b005dbed0ffb10sm49562pgm.83.2024.02.28.10.51.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Feb 2024 10:51:52 -0800 (PST)
+ Wed, 28 Feb 2024 10:51:47 -0800 (PST)
 From: Atish Patra <atishp@rivosinc.com>
 To: 
-Cc: Atish Patra <atishp@rivosinc.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Alistair Francis <alistair.francis@wdc.com>,
+Cc: Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org, Weiwei Li <liwei1518@gmail.com>,
  kaiwenxue1@gmail.com
-Subject: [PATCH v5 4/5] target/riscv: Add cycle & instret privilege mode
- filtering support
-Date: Wed, 28 Feb 2024 10:51:15 -0800
-Message-Id: <20240228185116.1321730-5-atishp@rivosinc.com>
+Subject: [PATCH v5 0/5] Add ISA extension smcntrpmf support 
+Date: Wed, 28 Feb 2024 10:51:11 -0800
+Message-Id: <20240228185116.1321730-1-atishp@rivosinc.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240228185116.1321730-1-atishp@rivosinc.com>
-References: <20240228185116.1321730-1-atishp@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::429;
- envelope-from=atishp@rivosinc.com; helo=mail-pf1-x429.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
+ envelope-from=atishp@rivosinc.com; helo=mail-pf1-x42d.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -103,141 +98,60 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Kaiwen Xue <kaiwenx@rivosinc.com>
+This patch series adds the support for RISC-V ISA extension smcntrpmf (cycle and
+privilege mode filtering) [1]. It is based on Kevin's earlier work but improves
+it by actually implement privilege mode filtering by tracking the privilege
+mode switches. This enables the privilege mode filtering for mhpmcounters as
+well. However, Smcntrpmf/Sscofpmf must be enabled to leverage this. This series
+also modified to report the raw instruction count instead of virtual cpu time
+based on the instruction count when icount is enabled. The former seems to be
+the preferred approach for instruction count for other architectures as well.
 
-QEMU only calculates dummy cycles and instructions, so there is no
-actual means to stop the icount in QEMU. Hence this patch merely adds
-the functionality of accessing the cfg registers, and cause no actual
-effects on the counting of cycle and instret counters.
+Please let me know if anybody thinks that's incorrect.
 
-Signed-off-by: Atish Patra <atishp@rivosinc.com>
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Signed-off-by: Kaiwen Xue <kaiwenx@rivosinc.com>
----
- target/riscv/csr.c | 88 ++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 88 insertions(+)
+The series is also available at
 
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index a3d979c4c72c..ff9bac537593 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -236,6 +236,24 @@ static RISCVException sscofpmf_32(CPURISCVState *env, int csrno)
-     return sscofpmf(env, csrno);
- }
- 
-+static RISCVException smcntrpmf(CPURISCVState *env, int csrno)
-+{
-+    if (!riscv_cpu_cfg(env)->ext_smcntrpmf) {
-+        return RISCV_EXCP_ILLEGAL_INST;
-+    }
-+
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException smcntrpmf_32(CPURISCVState *env, int csrno)
-+{
-+    if (riscv_cpu_mxl(env) != MXL_RV32) {
-+        return RISCV_EXCP_ILLEGAL_INST;
-+    }
-+
-+    return smcntrpmf(env, csrno);
-+}
-+
- static RISCVException any(CPURISCVState *env, int csrno)
- {
-     return RISCV_EXCP_NONE;
-@@ -826,6 +844,62 @@ static RISCVException read_hpmcounterh(CPURISCVState *env, int csrno,
- 
- #else /* CONFIG_USER_ONLY */
- 
-+static RISCVException read_mcyclecfg(CPURISCVState *env, int csrno,
-+                                     target_ulong *val)
-+{
-+    *val = env->mcyclecfg;
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException write_mcyclecfg(CPURISCVState *env, int csrno,
-+                                      target_ulong val)
-+{
-+    env->mcyclecfg = val;
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException read_mcyclecfgh(CPURISCVState *env, int csrno,
-+                                      target_ulong *val)
-+{
-+    *val = env->mcyclecfgh;
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException write_mcyclecfgh(CPURISCVState *env, int csrno,
-+                                       target_ulong val)
-+{
-+    env->mcyclecfgh = val;
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException read_minstretcfg(CPURISCVState *env, int csrno,
-+                                       target_ulong *val)
-+{
-+    *val = env->minstretcfg;
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException write_minstretcfg(CPURISCVState *env, int csrno,
-+                                        target_ulong val)
-+{
-+    env->minstretcfg = val;
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException read_minstretcfgh(CPURISCVState *env, int csrno,
-+                                        target_ulong *val)
-+{
-+    *val = env->minstretcfgh;
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException write_minstretcfgh(CPURISCVState *env, int csrno,
-+                                         target_ulong val)
-+{
-+    env->minstretcfgh = val;
-+    return RISCV_EXCP_NONE;
-+}
-+
- static RISCVException read_mhpmevent(CPURISCVState *env, int csrno,
-                                      target_ulong *val)
- {
-@@ -4985,6 +5059,13 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-                              write_mcountinhibit,
-                              .min_priv_ver = PRIV_VERSION_1_11_0       },
- 
-+    [CSR_MCYCLECFG]      = { "mcyclecfg",   smcntrpmf, read_mcyclecfg,
-+                             write_mcyclecfg,
-+                             .min_priv_ver = PRIV_VERSION_1_12_0       },
-+    [CSR_MINSTRETCFG]    = { "minstretcfg", smcntrpmf, read_minstretcfg,
-+                             write_minstretcfg,
-+                             .min_priv_ver = PRIV_VERSION_1_12_0       },
-+
-     [CSR_MHPMEVENT3]     = { "mhpmevent3",     any,    read_mhpmevent,
-                              write_mhpmevent                           },
-     [CSR_MHPMEVENT4]     = { "mhpmevent4",     any,    read_mhpmevent,
-@@ -5044,6 +5125,13 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-     [CSR_MHPMEVENT31]    = { "mhpmevent31",    any,    read_mhpmevent,
-                              write_mhpmevent                           },
- 
-+    [CSR_MCYCLECFGH]     = { "mcyclecfgh",   smcntrpmf_32, read_mcyclecfgh,
-+                             write_mcyclecfgh,
-+                             .min_priv_ver = PRIV_VERSION_1_12_0        },
-+    [CSR_MINSTRETCFGH]   = { "minstretcfgh", smcntrpmf_32, read_minstretcfgh,
-+                             write_minstretcfgh,
-+                             .min_priv_ver = PRIV_VERSION_1_12_0        },
-+
-     [CSR_MHPMEVENT3H]    = { "mhpmevent3h",    sscofpmf_32,  read_mhpmeventh,
-                              write_mhpmeventh,
-                              .min_priv_ver = PRIV_VERSION_1_12_0        },
--- 
+Changes from v4->v5:
+1. Rebased on top of master(158a054c4d1a).
+2. Fixed a bug for VS<->HS transition.
+
+Changes from v3->v4:
+1. Fixed the ordering of the ISA extension names in isa_edata_arr.
+2. Added RB tags.
+
+Changes from v2->v3:
+1. Fixed the rebasing error in PATCH2.
+2. Added RB tags.
+3. Addressed other review comments. 
+
+Changes from v1->v2:
+1. Implemented actual mode filtering for both icount and host ticks mode.
+1. Addressed comments in v1.
+2. Added Kevin's personal email address.
+
+[1] https://github.com/riscv/riscv-smcntrpmf
+[2] https://github.com/atishp04/qemu/tree/smcntrpmf_v5
+
+Atish Patra (2):
+target/riscv: Fix the predicate functions for mhpmeventhX CSRs
+target/riscv: Implement privilege mode filtering for cycle/instret
+
+Kaiwen Xue (3):
+target/riscv: Add cycle & instret privilege mode filtering properties
+target/riscv: Add cycle & instret privilege mode filtering definitions
+target/riscv: Add cycle & instret privilege mode filtering support
+
+target/riscv/cpu.c        |   2 +
+target/riscv/cpu.h        |  17 +++
+target/riscv/cpu_bits.h   |  34 ++++++
+target/riscv/cpu_cfg.h    |   1 +
+target/riscv/cpu_helper.c |  17 ++-
+target/riscv/csr.c        | 251 ++++++++++++++++++++++++++++++--------
+target/riscv/pmu.c        |  64 ++++++++++
+target/riscv/pmu.h        |   2 +
+8 files changed, 335 insertions(+), 53 deletions(-)
+
+--
 2.34.1
 
 
