@@ -4,72 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25A41C54798
-	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Feb 2024 17:36:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46212C54E41
+	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Feb 2024 05:09:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rf1Mm-0005cc-OS; Tue, 27 Feb 2024 12:35:44 -0500
+	id 1rfCBN-00037e-IS; Wed, 28 Feb 2024 00:08:41 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rf1MP-0005Te-81
- for qemu-riscv@nongnu.org; Tue, 27 Feb 2024 12:35:24 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rf1MM-0003xs-2n
- for qemu-riscv@nongnu.org; Tue, 27 Feb 2024 12:35:20 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1709055317;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=u9Rjeknrs+RY5x8Yrgrerm6euSG7pdM8wNjDsb38uTE=;
- b=P7EScU4P0Uqz9xBIwIAC7YTsXNWBU+TtuqZhHQ5rYIrTqeo5+RULYrXiO4qeCm8f5aSxWD
- GpYCI9QxHDMDBfWuJ1STXC7Ht17umZTkjUymvedGiGDW3Ut6bvtpevuK3tXtbis3by8z27
- uXGLb0iSlX99BzLQJez31uMNCfFDBVw=
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
- [209.85.222.200]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-641-xbIf9mUuMum7UGu294IqwQ-1; Tue, 27 Feb 2024 12:35:15 -0500
-X-MC-Unique: xbIf9mUuMum7UGu294IqwQ-1
-Received: by mail-qk1-f200.google.com with SMTP id
- af79cd13be357-7876cf4554eso528658385a.3
- for <qemu-riscv@nongnu.org>; Tue, 27 Feb 2024 09:35:15 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1rfCBM-000377-9w
+ for qemu-riscv@nongnu.org; Wed, 28 Feb 2024 00:08:40 -0500
+Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1rfCBF-00059P-M6
+ for qemu-riscv@nongnu.org; Wed, 28 Feb 2024 00:08:40 -0500
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-1dc139ed11fso4212995ad.0
+ for <qemu-riscv@nongnu.org>; Tue, 27 Feb 2024 21:08:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1709096910; x=1709701710;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=DMPgVNvmzalgvHPBuzD3V/ryvEAYg9lKZEfro7Y6HD8=;
+ b=RKB+aedK9HojP/r4MQu+smK/+lIujEAekWDi9Z9iIZi9+G3QFehevDB+ZM1wROEO89
+ yKAHo6TGyXHkBmjLDWPen+zEBHsj2dPXV9hi725lHGcAFxP8Z54LLyPiJ5RkQ0QHue5f
+ 1dom2T0Rbqg4Y9jnTDZsfRu655RVTn7U41oza7bilDEgtBP19y97ypLJ71C8Os3T9o6T
+ 9glyvFKSdkoQxfu3Tjz6LMm1QgRUpgL0hgSvUoid4DIg/2ZPg5eLwiNzF0DY2R1+jOng
+ 1f474M2rIbEGKGEN6b6rabS4Sk+TXGz3JzWAriUrB7KCUydSaIm4HcoZm5gj60mblGL5
+ QMPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709055314; x=1709660114;
- h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
- :to:content-language:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1709096910; x=1709701710;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=u9Rjeknrs+RY5x8Yrgrerm6euSG7pdM8wNjDsb38uTE=;
- b=LAncvh4Cy59SSiyOhVFZ/0U0K4ZygwtxbvZVePXrb4SHCn7Ipn5gNQzmS8YassQeyV
- ikZBk9ODHz5GTu16OZ93Rgyex5nJbJ1fJN1Motq+dFVUV9vLCLBtTzta6xTPHE5ibOF0
- UrX3oyNi6GbMWZv+/9N/5aAIlfi7cCKv4bb0s4z6LY4fIlWVR16WGvC24iAKXDpR16cr
- x0KVvh1xl3ou7gC6I5Gm7oNkJ6oheSZGKeI6LU8e7oTK6k7BVTnPzFB5zvmWxwYGLEx+
- rl7+IRAJN1FWGZFa9m5WKXSBrLfRch7FXn2QTpTqSIVaweJg3UREp74TU4WrnzakpQHf
- Mc1Q==
+ bh=DMPgVNvmzalgvHPBuzD3V/ryvEAYg9lKZEfro7Y6HD8=;
+ b=jZesP7PF8xlQUMq1HlAa6AUbvH3fg63qau/T7chGd1rKL/xtsmjfjNnLampdDu42dG
+ x7rkTre3Z6kAnTnCyUztcaO6q+p7aJotbh9gPTl5tZ0jgtV0rgEtK+7E0Ir5HtAB80jC
+ CETnCRUf3AzXLrin6DyFlRjrSTrrLVqNms8nZl91USKYlhU7r9bdgJQgIa0y9torYBes
+ yirifMGMik4W41OFkjs/i5vU3EE4EwdLYLQ5He+pChEDOGcJHEWigIY6uFZVKD9BH3fF
+ RpPwdJE4ktp+kqYh53f/wRDNc8AkCH7pGSeQGam4+R3wLZ1INJ5kAfGhtcMXuC8USkpX
+ 2KUQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWSZF6DX9YgN4VIjdW7clrqQnj2czpqME09FFO5X4wn+fyYIj3gDYhmhE4/S6LSSfrok0lyfKNoCuUibghVJRvQSsqthEo=
-X-Gm-Message-State: AOJu0YyN1wTNhRW5YrTzB/8Ym1NEbsKTZ4qyTODims/cKO74TcX7R5jG
- BXLMirPq263bXbWgrekMfgzfS9adKBlLX3OfAqvadKrHdsy9GUw5+Pb/tu+KksRPcCBKcCHOVtE
- oep/IVlJh+Dr8XO5j1Vmdqy7qQ4fBSna6Qrbuv0sTI2ZdNvLmt/6q
-X-Received: by 2002:a05:620a:2a08:b0:787:76dc:652e with SMTP id
- o8-20020a05620a2a0800b0078776dc652emr3058680qkp.33.1709055314654; 
- Tue, 27 Feb 2024 09:35:14 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGNXfrEgx2TcKy4wEbbiVOPSQVsNgDlYlMu+yuG6OkeMJGo15hYP1dd2OQx+3Y9niSHuyWIuQ==
-X-Received: by 2002:a05:620a:2a08:b0:787:76dc:652e with SMTP id
- o8-20020a05620a2a0800b0078776dc652emr3058626qkp.33.1709055314320; 
- Tue, 27 Feb 2024 09:35:14 -0800 (PST)
-Received: from [192.168.0.9] (ip-109-43-178-133.web.vodafone.de.
- [109.43.178.133]) by smtp.gmail.com with ESMTPSA id
- y22-20020a05620a09d600b00787a02d31d3sm3792506qky.44.2024.02.27.09.35.08
+ AJvYcCUaBPrDw4hvlXIB6Bmgb6OjYhQ8D/CP+f9cOyc36UACMamudOHkV7hE3a8ntx8HazikjsD4NnQjHnsMfyBC0HaGPc+fZC4=
+X-Gm-Message-State: AOJu0YxsoUDLSxDVvaRPFku8e797yEktGe9rjPaUxy8SdCrvgwJv5sB6
+ 38sYvYDksYU0XKs8TfKA5wamX+TzUUWcNvhggPJx7+ZT9+Lxma7TnP0RtVV3urg=
+X-Google-Smtp-Source: AGHT+IEASog9cnsCWy8p3XNTrP9WJ0KoOIuMXN7jhz5aBYD8n85WMe6uvXvLTYvc/MQDDe+LD2m5Xw==
+X-Received: by 2002:a17:902:b682:b0:1dc:9bb5:cb5 with SMTP id
+ c2-20020a170902b68200b001dc9bb50cb5mr1541958pls.28.1709096910144; 
+ Tue, 27 Feb 2024 21:08:30 -0800 (PST)
+Received: from [157.82.203.206] ([157.82.203.206])
+ by smtp.gmail.com with ESMTPSA id
+ km13-20020a17090327cd00b001db5ecb2899sm2376359plb.162.2024.02.27.21.08.22
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 27 Feb 2024 09:35:14 -0800 (PST)
-Message-ID: <731bb838-83be-4057-aa76-4107d45f28e8@redhat.com>
-Date: Tue, 27 Feb 2024 18:35:06 +0100
+ Tue, 27 Feb 2024 21:08:29 -0800 (PST)
+Message-ID: <69da287a-90c2-46e9-b1f2-4fb899bedbbe@daynix.com>
+Date: Wed, 28 Feb 2024 14:08:21 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 04/29] tests/vm: update openbsd image to 7.4
+Subject: Re: [PATCH v4 23/29] plugins: add an API to read registers
 To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
  qemu-devel@nongnu.org
 Cc: qemu-ppc@nongnu.org, Yoshinori Sato <ysato@users.sourceforge.jp>,
@@ -90,72 +86,29 @@ Cc: qemu-ppc@nongnu.org, Yoshinori Sato <ysato@users.sourceforge.jp>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>, John Snow
  <jsnow@redhat.com>, Alistair Francis <alistair.francis@wdc.com>,
  Richard Henderson <richard.henderson@linaro.org>,
- Brian Cain <bcain@quicinc.com>, =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?=
- <philmd@linaro.org>, qemu-riscv@nongnu.org, Bin Meng
- <bin.meng@windriver.com>, Daniel Henrique Barboza
- <dbarboza@ventanamicro.com>, Weiwei Li <liwei1518@gmail.com>,
+ Brian Cain <bcain@quicinc.com>, Thomas Huth <thuth@redhat.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ qemu-riscv@nongnu.org, Bin Meng <bin.meng@windriver.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Weiwei Li <liwei1518@gmail.com>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, Mahmoud Mandour <ma.mandourr@gmail.com>
 References: <20240227144335.1196131-1-alex.bennee@linaro.org>
- <20240227144335.1196131-5-alex.bennee@linaro.org>
-From: Thomas Huth <thuth@redhat.com>
-Autocrypt: addr=thuth@redhat.com; keydata=
- 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
-In-Reply-To: <20240227144335.1196131-5-alex.bennee@linaro.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
+ <20240227144335.1196131-24-alex.bennee@linaro.org>
 Content-Language: en-US
+From: Akihiko Odaki <akihiko.odaki@daynix.com>
+In-Reply-To: <20240227144335.1196131-24-alex.bennee@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
-X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.088,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Received-SPF: none client-ip=2607:f8b0:4864:20::62c;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-pl1-x62c.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -171,20 +124,223 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 27/02/2024 15.43, Alex Bennée wrote:
-> The old links are dead so even if we have the ISO cached we can't
-> finish the install. Update to the current stable and tweak the install
-> strings.
+On 2024/02/27 23:43, Alex Bennée wrote:
+> We can only request a list of registers once the vCPU has been
+> initialised so the user needs to use either call the get function on
+> vCPU initialisation or during the translation phase.
 > 
-> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2192
+> We don't expose the reg number to the plugin instead hiding it behind
+> an opaque handle. For now this is just the gdb_regnum encapsulated in
+> an anonymous GPOINTER but in future as we add more state for plugins
+> to track we can expand it.
+> 
+> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1706
+> Cc: Akihiko Odaki <akihiko.odaki@daynix.com>
+> Message-Id: <20240103173349.398526-39-alex.bennee@linaro.org>
+> Based-on: <20231025093128.33116-18-akihiko.odaki@daynix.com>
 > Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-> Tested-by: Thomas Huth <thuth@redhat.com>
+> Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+> 
 > ---
->   tests/vm/openbsd | 9 +++++----
->   1 file changed, 5 insertions(+), 4 deletions(-)
+> v4
+>    - the get/read_registers functions are now implicitly for current
+>    vCPU only to accidental cpu != current_cpu uses.
+> v5
+>    - make reg_handles as per-CPUPluginState variable.
+> v6
+>    - for now just wrap gdb_regnum
+> v7
+>    - minor style fixes
+> ---
+>   include/qemu/qemu-plugin.h   | 48 +++++++++++++++++++++++++++++--
+>   plugins/api.c                | 55 ++++++++++++++++++++++++++++++++++++
+>   plugins/qemu-plugins.symbols |  2 ++
+>   3 files changed, 103 insertions(+), 2 deletions(-)
+> 
+> diff --git a/include/qemu/qemu-plugin.h b/include/qemu/qemu-plugin.h
+> index 93981f8f89f..6c5580f4428 100644
+> --- a/include/qemu/qemu-plugin.h
+> +++ b/include/qemu/qemu-plugin.h
+> @@ -11,6 +11,7 @@
+>   #ifndef QEMU_QEMU_PLUGIN_H
+>   #define QEMU_QEMU_PLUGIN_H
+>   
+> +#include <glib.h>
+>   #include <inttypes.h>
+>   #include <stdbool.h>
+>   #include <stddef.h>
+> @@ -229,8 +230,8 @@ struct qemu_plugin_insn;
+>    * @QEMU_PLUGIN_CB_R_REGS: callback reads the CPU's regs
+>    * @QEMU_PLUGIN_CB_RW_REGS: callback reads and writes the CPU's regs
+>    *
+> - * Note: currently unused, plugins cannot read or change system
+> - * register state.
+> + * Note: currently QEMU_PLUGIN_CB_RW_REGS is unused, plugins cannot change
+> + * system register state.
+>    */
+>   enum qemu_plugin_cb_flags {
+>       QEMU_PLUGIN_CB_NO_REGS,
+> @@ -707,4 +708,47 @@ uint64_t qemu_plugin_end_code(void);
+>   QEMU_PLUGIN_API
+>   uint64_t qemu_plugin_entry_code(void);
+>   
+> +/** struct qemu_plugin_register - Opaque handle for register access */
+> +struct qemu_plugin_register;
+> +
+> +/**
+> + * typedef qemu_plugin_reg_descriptor - register descriptions
+> + *
+> + * @handle: opaque handle for retrieving value with qemu_plugin_read_register
+> + * @name: register name
+> + * @feature: optional feature descriptor, can be NULL
+> + */
+> +typedef struct {
+> +    struct qemu_plugin_register *handle;
+> +    const char *name;
+> +    const char *feature;
+> +} qemu_plugin_reg_descriptor;
+> +
+> +/**
+> + * qemu_plugin_get_registers() - return register list for current vCPU
+> + *
+> + * Returns a potentially empty GArray of qemu_plugin_reg_descriptor.
+> + * Caller frees the array (but not the const strings).
+> + *
+> + * Should be used from a qemu_plugin_register_vcpu_init_cb() callback
+> + * after the vCPU is initialised, i.e. in the vCPU context.
+> + */
 
-FWIW, changes looks sane, so:
-Reviewed-by: Thomas Huth <thuth@redhat.com>
+Qualify with QEMU_PLUGIN_API, which was apparently added after this 
+patch was authored.
 
+> +GArray *qemu_plugin_get_registers(void);
+> +
+> +/**
+> + * qemu_plugin_read_register() - read register for current vCPU
+> + *
+> + * @handle: a @qemu_plugin_reg_handle handle
+> + * @buf: A GByteArray for the data owned by the plugin
+> + *
+> + * This function is only available in a context that register read access is
+> + * explicitly requested via the QEMU_PLUGIN_CB_R_REGS flag.
+> + *
+> + * Returns the size of the read register. The content of @buf is in target byte
+> + * order. On failure returns -1
 
+Add a period after -1.
+
+> + */
+> +int qemu_plugin_read_register(struct qemu_plugin_register *handle,
+> +                              GByteArray *buf);
+> +
+> +
+>   #endif /* QEMU_QEMU_PLUGIN_H */
+> diff --git a/plugins/api.c b/plugins/api.c
+> index 54df72c1c00..908fe7e6fa3 100644
+> --- a/plugins/api.c
+> +++ b/plugins/api.c
+> @@ -8,6 +8,7 @@
+>    *
+>    *  qemu_plugin_tb
+>    *  qemu_plugin_insn
+> + *  qemu_plugin_register
+>    *
+>    * Which can then be passed back into the API to do additional things.
+>    * As such all the public functions in here are exported in
+> @@ -35,10 +36,12 @@
+>    */
+>   
+>   #include "qemu/osdep.h"
+> +#include "qemu/main-loop.h"
+>   #include "qemu/plugin.h"
+>   #include "qemu/log.h"
+>   #include "tcg/tcg.h"
+>   #include "exec/exec-all.h"
+> +#include "exec/gdbstub.h"
+>   #include "exec/ram_addr.h"
+>   #include "disas/disas.h"
+>   #include "plugin.h"
+> @@ -410,3 +413,55 @@ uint64_t qemu_plugin_entry_code(void)
+>   #endif
+>       return entry;
+>   }
+> +
+> +/*
+> + * Create register handles.
+> + *
+> + * We need to create a handle for each register so the plugin
+> + * infrastructure can call gdbstub to read a register. They are
+> + * currently just a pointer encapsulation of the gdb_regnum but in
+
+s/gdb_regnum/gdb_reg/
+
+With all comments fixed,
+
+Reviewed-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+
+> + * future may hold internal plugin state so its important plugin
+> + * authors are not tempted to treat them as numbers.
+> + *
+> + * We also construct a result array with those handles and some
+> + * ancillary data the plugin might find useful.
+> + */
+> +
+> +static GArray *create_register_handles(GArray *gdbstub_regs)
+> +{
+> +    GArray *find_data = g_array_new(true, true,
+> +                                    sizeof(qemu_plugin_reg_descriptor));
+> +
+> +    for (int i = 0; i < gdbstub_regs->len; i++) {
+> +        GDBRegDesc *grd = &g_array_index(gdbstub_regs, GDBRegDesc, i);
+> +        qemu_plugin_reg_descriptor desc;
+> +
+> +        /* skip "un-named" regs */
+> +        if (!grd->name) {
+> +            continue;
+> +        }
+> +
+> +        /* Create a record for the plugin */
+> +        desc.handle = GINT_TO_POINTER(grd->gdb_reg);
+> +        desc.name = g_intern_string(grd->name);
+> +        desc.feature = g_intern_string(grd->feature_name);
+> +        g_array_append_val(find_data, desc);
+> +    }
+> +
+> +    return find_data;
+> +}
+> +
+> +GArray *qemu_plugin_get_registers(void)
+> +{
+> +    g_assert(current_cpu);
+> +
+> +    g_autoptr(GArray) regs = gdb_get_register_list(current_cpu);
+> +    return create_register_handles(regs);
+> +}
+> +
+> +int qemu_plugin_read_register(struct qemu_plugin_register *reg, GByteArray *buf)
+> +{
+> +    g_assert(current_cpu);
+> +
+> +    return gdb_read_register(current_cpu, buf, GPOINTER_TO_INT(reg));
+> +}
+> diff --git a/plugins/qemu-plugins.symbols b/plugins/qemu-plugins.symbols
+> index adb67608598..27fe97239be 100644
+> --- a/plugins/qemu-plugins.symbols
+> +++ b/plugins/qemu-plugins.symbols
+> @@ -3,6 +3,7 @@
+>     qemu_plugin_end_code;
+>     qemu_plugin_entry_code;
+>     qemu_plugin_get_hwaddr;
+> +  qemu_plugin_get_registers;
+>     qemu_plugin_hwaddr_device_name;
+>     qemu_plugin_hwaddr_is_io;
+>     qemu_plugin_hwaddr_phys_addr;
+> @@ -19,6 +20,7 @@
+>     qemu_plugin_num_vcpus;
+>     qemu_plugin_outs;
+>     qemu_plugin_path_to_binary;
+> +  qemu_plugin_read_register;
+>     qemu_plugin_register_atexit_cb;
+>     qemu_plugin_register_flush_cb;
+>     qemu_plugin_register_vcpu_exit_cb;
 
