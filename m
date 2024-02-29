@@ -4,91 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A980C5478C
-	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Feb 2024 18:53:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4543C48BF6
+	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Feb 2024 04:27:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rfP26-0000nG-0b; Wed, 28 Feb 2024 13:51:58 -0500
+	id 1rfY1F-0002xR-Fw; Wed, 28 Feb 2024 23:27:41 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1rfP22-0000li-MC
- for qemu-riscv@nongnu.org; Wed, 28 Feb 2024 13:51:54 -0500
-Received: from mail-pf1-x42a.google.com ([2607:f8b0:4864:20::42a])
+ (Exim 4.90_1) (envelope-from <nturtayeva@ucsb.edu>)
+ id 1rfY1E-0002x8-7F
+ for qemu-riscv@nongnu.org; Wed, 28 Feb 2024 23:27:40 -0500
+Received: from mail-lj1-x22a.google.com ([2a00:1450:4864:20::22a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1rfP21-0006uK-40
- for qemu-riscv@nongnu.org; Wed, 28 Feb 2024 13:51:54 -0500
-Received: by mail-pf1-x42a.google.com with SMTP id
- d2e1a72fcca58-6e574a98151so507496b3a.2
- for <qemu-riscv@nongnu.org>; Wed, 28 Feb 2024 10:51:52 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <nturtayeva@ucsb.edu>)
+ id 1rfY1B-0001Tq-N7
+ for qemu-riscv@nongnu.org; Wed, 28 Feb 2024 23:27:39 -0500
+Received: by mail-lj1-x22a.google.com with SMTP id
+ 38308e7fff4ca-2d28051376eso5757011fa.0
+ for <qemu-riscv@nongnu.org>; Wed, 28 Feb 2024 20:27:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1709146312; x=1709751112;
- darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=CjwCWH6yJlY4ow/brTdL6993/Qnp+9jthxWLsP3wFz4=;
- b=T0D0kA62888e8Nj02Ykg5DXlXdc4lpxKgYOkypm/K5Ia+MfqTIFn/h0JYy4Cs2PeMf
- f33lVsRhDWJhlwfcv/hcLc0ims9zDgXFuGbelH6lEX/mO5z7HvRiamVkcXmP8OGI5CVB
- fMIZvJCzGACptSZY82KwZNJZYzPd4FZuXrPnivtwn8/DhaSOWmmcIkmuwdebwfkMX3yL
- 3rAgxdTkRXxr/jgAVILGJp+1+xsiT9xVe7Cgvx//bD+rkLtbx+MhHuAghc3u8+cJ/f/F
- BRCb/9kCZ0lGbckRc9tTOcCJ+pzbZKmrY4dULkYWaw5/8kP/N5qJgP5W6JTzfdvbgrW2
- jl4A==
+ d=ucsb.edu; s=google; t=1709180854; x=1709785654; darn=nongnu.org;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=DJED82AGPpq31NouZvhbNCwp58Nct+FGorae3DF4pDs=;
+ b=FkpYhuGGOiJ1SObiIHesEyas4jKyQEi66JKR+b4TRSjqiXJajtWUuTRouRypB5aiOo
+ NUfSs6MPyRsUQX10OrmTTCqxBK9LpstQXsfDRDWXcuTHSguYATdG+ONMJHiH4h8nyQf0
+ Vqelkm4pOd2Wwkc1i2pBUby+ec+iFAJE7dmUe/FQwd0BrAnpS6QE7xSw+f6a1cDxp8Qw
+ K0e+cOJDyyCP7PaqOCNH4qQZAf185OygMazwm0rILFVshnGQnzVhPsAmmbrBUFb9nSPN
+ P15ILjhubi/S0Da+hRCiReLCXKIS/xj08hZF77gapnhohoywcDSJjG2jfLia0SSP2kvP
+ XIvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709146312; x=1709751112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=CjwCWH6yJlY4ow/brTdL6993/Qnp+9jthxWLsP3wFz4=;
- b=lHXDsf+Wf/uWtY36nZTP9xJeFMz4uti0NNLy6vk+/1+vuDH3bGII/8IKmxgrcAnS2i
- TPQJ/59qtAtU9LQ1fJYiEW57Ld7RKRTWMXgMA/Ju2bos1PgfVp7S7AdgywRRnT5amZhM
- Rh4bWmLmkKIoijiywnNwZioPmHdxEezUoZHsdzIO68ezV8H76M6mcAzA/mwJOPUW3TOb
- ffV6KtdTHPWl63AXuRRWrqkh40MOxIyg4dKL3nqHgzSd5jv4JvoWwdqbJtNvXtQCvNRO
- xzJLXtIxhh/UczXAEN4Zfzoxind9RD8t9XiTflPczC60+NZIjpy0g2N/VW8GuJ01UJbW
- rBzA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUHQwRTZA20ek/pFUqecvxFxpB/DAlJT6mY2N61rlsD1LTVBayew1GTl2VWeUciA8+DFdrAqwG5gXGH4WNBSw46NNpLDtg=
-X-Gm-Message-State: AOJu0YxIqGFcjLtIu4HL7Y0VyyEEqsiDk7R0llUconIiL+Fegs5zqCNs
- qsec2hmE7j8qySmMkn1q3bOhW+SuyIBK99Q+oARMnz4K1NwYtY0u47SDoGuRknXasZHA3CTvxV7
- B
-X-Google-Smtp-Source: AGHT+IEtq2c6/rQdDpXqK8nBQTr2A6Dv/YDqTRdYdyUcjxTe+wB4JLuT8SQfeAvvw90yr02sEYUMCg==
-X-Received: by 2002:a05:6a20:6726:b0:1a0:e3c7:963d with SMTP id
- q38-20020a056a20672600b001a0e3c7963dmr115424pzh.23.1709146311764; 
- Wed, 28 Feb 2024 10:51:51 -0800 (PST)
-Received: from atishp.ba.rivosinc.com ([64.71.180.162])
- by smtp.gmail.com with ESMTPSA id
- o20-20020a635d54000000b005dbed0ffb10sm49562pgm.83.2024.02.28.10.51.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Feb 2024 10:51:51 -0800 (PST)
-From: Atish Patra <atishp@rivosinc.com>
-To: 
-Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Atish Patra <atishp@rivosinc.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, Weiwei Li <liwei1518@gmail.com>,
- kaiwenxue1@gmail.com
-Subject: [PATCH v5 3/5] target/riscv: Add cycle & instret privilege mode
- filtering definitions
-Date: Wed, 28 Feb 2024 10:51:14 -0800
-Message-Id: <20240228185116.1321730-4-atishp@rivosinc.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240228185116.1321730-1-atishp@rivosinc.com>
-References: <20240228185116.1321730-1-atishp@rivosinc.com>
+ d=1e100.net; s=20230601; t=1709180854; x=1709785654;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=DJED82AGPpq31NouZvhbNCwp58Nct+FGorae3DF4pDs=;
+ b=fya4eLPpMUc0p/cTGYB4tSyjEbLcb2cP/d6R6kLD7u7iTtbHT2LMR7wqFB1MD9Cd72
+ VbkfrmCIb7P6WGVoFagv24Ko83e55WFCx6OiKhTJLpg0BWj5puQXnXukM9xi+hvpY99v
+ k2aWjoaT8qkwAocwTbyZ+MEmdoM6R61TtipVgRivwxrmCgg15VE8NuGE++ZEdKjniJEh
+ jRRePEPfINOgkulJ97IfDw8z72wsj9MwJXa04ThgEzK8Dzhl6aY9RhpenayuN6uRCKVT
+ F5ruO0oIYWs0DIZZ2UwhC0W1eGvXsS5sSnn+3Re9VhL7mCTkflQkH9+97cUMiHhlFDJF
+ qP2g==
+X-Gm-Message-State: AOJu0Yy8q7hJ9jlUIVPb6rl6vq4fDGOud073VJ3iB78oDA8f3fWNfbkt
+ uo+Eh1NrZ1Dp1YhLKo0N2k1Z1B/LHmbQ2D/E0UGcyno/3ERgS9O+GB/IAzy3oGnK1qE4Ryf37f+
+ b00bu5gxXCqVxM7b79YjPG1qsUPKdkQATYP8PfGacQBliO+GZ
+X-Google-Smtp-Source: AGHT+IGu8ZzXXDaOuwGcRpiL5tSf7cnOrIGsarERKgLknFbM8cNoWI13qv4JfXdE6Z+3n8CMFdUM6USW2hXvMmizbdQ=
+X-Received: by 2002:a2e:97d5:0:b0:2d3:7bd:da4e with SMTP id
+ m21-20020a2e97d5000000b002d307bdda4emr76603ljj.33.1709180854403; Wed, 28 Feb
+ 2024 20:27:34 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42a;
- envelope-from=atishp@rivosinc.com; helo=mail-pf1-x42a.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+From: Nazerke Turtayeva <nturtayeva@ucsb.edu>
+Date: Wed, 28 Feb 2024 20:27:23 -0800
+Message-ID: <CAHY78Bq6AdcZPuFRbdShDPvgmgcoB+PKLWqPuOoX3vdJ-NsZ+A@mail.gmail.com>
+Subject: What riscv tracing tools do you recommend and how are they accurate
+ for measurements?
+To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Content-Type: multipart/alternative; boundary="000000000000af561406127dad7d"
+Received-SPF: pass client-ip=2a00:1450:4864:20::22a;
+ envelope-from=nturtayeva@ucsb.edu; helo=mail-lj1-x22a.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,90 +84,74 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Kaiwen Xue <kaiwenx@rivosinc.com>
+--000000000000af561406127dad7d
+Content-Type: text/plain; charset="UTF-8"
 
-This adds the definitions for ISA extension smcntrpmf.
+Hi everyone,
 
-Signed-off-by: Kaiwen Xue <kaiwenx@rivosinc.com>
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Signed-off-by: Atish Patra <atishp@rivosinc.com>
----
- target/riscv/cpu.h      |  6 ++++++
- target/riscv/cpu_bits.h | 29 +++++++++++++++++++++++++++++
- 2 files changed, 35 insertions(+)
+Recently, I was planning to measure the performance of my application of
+interest for potential RISC-V hardware. Hence, I started my simulations
+from Spike to analyze dynamic instruction traces and instruction count,
+nevertheless given it does not support multithreading, I started using Qemu
+to test my app too. However, it seems like I cannot rely on timing results
+of Qemu for comparing different implementations. Accordingly, given I am
+brand new to the Qemu ecosystem, I was wondering whether I am missing some
+important mainstream instrumentation and tracing tools that I can use for
+performance evaluation of my target app in other ways. Particularly, I want
+to understand implications of adding custom ISA instructions to the
+performance of my application.
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index f52dce78baa0..174e8ba8e847 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -338,6 +338,12 @@ struct CPUArchState {
- 
-     target_ulong mcountinhibit;
- 
-+    /* PMU cycle & instret privilege mode filtering */
-+    target_ulong mcyclecfg;
-+    target_ulong mcyclecfgh;
-+    target_ulong minstretcfg;
-+    target_ulong minstretcfgh;
-+
-     /* PMU counter state */
-     PMUCTRState pmu_ctrs[RV_MAX_MHPMCOUNTERS];
- 
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index fc2068ee4dcf..e866c60a400c 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -394,6 +394,10 @@
- /* Machine counter-inhibit register */
- #define CSR_MCOUNTINHIBIT   0x320
- 
-+/* Machine counter configuration registers */
-+#define CSR_MCYCLECFG       0x321
-+#define CSR_MINSTRETCFG     0x322
-+
- #define CSR_MHPMEVENT3      0x323
- #define CSR_MHPMEVENT4      0x324
- #define CSR_MHPMEVENT5      0x325
-@@ -424,6 +428,9 @@
- #define CSR_MHPMEVENT30     0x33e
- #define CSR_MHPMEVENT31     0x33f
- 
-+#define CSR_MCYCLECFGH      0x721
-+#define CSR_MINSTRETCFGH    0x722
-+
- #define CSR_MHPMEVENT3H     0x723
- #define CSR_MHPMEVENT4H     0x724
- #define CSR_MHPMEVENT5H     0x725
-@@ -878,6 +885,28 @@ typedef enum RISCVException {
- /* PMU related bits */
- #define MIE_LCOFIE                         (1 << IRQ_PMU_OVF)
- 
-+#define MCYCLECFG_BIT_MINH                 BIT_ULL(62)
-+#define MCYCLECFGH_BIT_MINH                BIT(30)
-+#define MCYCLECFG_BIT_SINH                 BIT_ULL(61)
-+#define MCYCLECFGH_BIT_SINH                BIT(29)
-+#define MCYCLECFG_BIT_UINH                 BIT_ULL(60)
-+#define MCYCLECFGH_BIT_UINH                BIT(28)
-+#define MCYCLECFG_BIT_VSINH                BIT_ULL(59)
-+#define MCYCLECFGH_BIT_VSINH               BIT(27)
-+#define MCYCLECFG_BIT_VUINH                BIT_ULL(58)
-+#define MCYCLECFGH_BIT_VUINH               BIT(26)
-+
-+#define MINSTRETCFG_BIT_MINH               BIT_ULL(62)
-+#define MINSTRETCFGH_BIT_MINH              BIT(30)
-+#define MINSTRETCFG_BIT_SINH               BIT_ULL(61)
-+#define MINSTRETCFGH_BIT_SINH              BIT(29)
-+#define MINSTRETCFG_BIT_UINH               BIT_ULL(60)
-+#define MINSTRETCFGH_BIT_UINH              BIT(28)
-+#define MINSTRETCFG_BIT_VSINH              BIT_ULL(59)
-+#define MINSTRETCFGH_BIT_VSINH             BIT(27)
-+#define MINSTRETCFG_BIT_VUINH              BIT_ULL(58)
-+#define MINSTRETCFGH_BIT_VUINH             BIT(26)
-+
- #define MHPMEVENT_BIT_OF                   BIT_ULL(63)
- #define MHPMEVENTH_BIT_OF                  BIT(31)
- #define MHPMEVENT_BIT_MINH                 BIT_ULL(62)
+In this regard, do you have any recommendations on where I can look?
+
+Thanks,
+Best wishes
+
 -- 
-2.34.1
+Nazerke Turtayeva
+Graduate Student
+Electrical and Computer Engineering, Computer Science
+Email: nturtayeva@ucsb.edu
+*UC Santa Barbara*
 
+--000000000000af561406127dad7d
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hi everyone,=C2=A0<div><br></div><div>Recently, I was plan=
+ning to measure the performance of my application of interest for potential=
+ RISC-V hardware. Hence, I started my simulations from Spike to analyze dyn=
+amic instruction traces and instruction count, nevertheless given it does n=
+ot support=C2=A0multithreading, I started using Qemu to test my app too. Ho=
+wever, it seems like I cannot rely on timing results of Qemu for comparing =
+different implementations. Accordingly, given I am brand new to=C2=A0the Qe=
+mu ecosystem, I was wondering whether I am missing some important mainstrea=
+m instrumentation and tracing tools that I can use for performance evaluati=
+on of my target app in=C2=A0other ways. Particularly, I want to understand=
+=C2=A0implications of adding custom ISA instructions to the performance of =
+my=C2=A0application.=C2=A0</div><div><br></div><div>In this regard, do you =
+have any recommendations on where I can look?</div><div><br></div><div>Than=
+ks,</div><div>Best wishes<br clear=3D"all"><div><br></div><span class=3D"gm=
+ail_signature_prefix">-- </span><br><div dir=3D"ltr" class=3D"gmail_signatu=
+re" data-smartmail=3D"gmail_signature"><div dir=3D"ltr"><table width=3D"300=
+" cellspacing=3D"0" cellpadding=3D"0" border=3D"0" style=3D"color:rgb(34,34=
+,34)"><tbody><tr><td style=3D"vertical-align:top"><span style=3D"font-size:=
+16px;font-family:&quot;Century Gothic&quot;,Helvetica,sans-serif;color:rgb(=
+0,54,96)">Nazerke Turtayeva<br></span></td></tr><tr><td style=3D"vertical-a=
+lign:top"></td></tr><tr><td style=3D"vertical-align:top;padding-top:4px;pad=
+ding-bottom:4px"><span style=3D"font-size:14px;font-family:&quot;Century Go=
+thic&quot;,Helvetica,sans-serif;color:rgb(4,133,155);font-weight:600">Gradu=
+ate Student</span></td></tr><tr><td style=3D"vertical-align:top"><span styl=
+e=3D"font-size:13px;font-family:&quot;Century Gothic&quot;,Helvetica,sans-s=
+erif;color:rgb(85,85,85);letter-spacing:0.65px">Electrical and Computer Eng=
+ineering, Computer Science</span></td></tr><tr><td style=3D"vertical-align:=
+top"><span style=3D"font-size:13px;font-family:&quot;Century Gothic&quot;,H=
+elvetica,sans-serif;color:rgb(85,85,85);letter-spacing:0.65px">Email:=C2=A0=
+<a href=3D"mailto:nturtayeva@ucsb.edu" style=3D"color:rgb(17,85,204)" targe=
+t=3D"_blank">nturtayeva@ucsb.edu</a></span></td></tr><tr><td style=3D"verti=
+cal-align:top;padding-top:6px"></td></tr></tbody></table><b style=3D"color:=
+rgb(34,34,34)"><span style=3D"font-size:16px;font-family:&quot;Century Goth=
+ic&quot;,Helvetica,sans-serif;color:rgb(0,54,96)">UC Santa Barbara</span></=
+b><br style=3D"color:rgb(34,34,34)"></div></div></div></div>
+
+--000000000000af561406127dad7d--
 
