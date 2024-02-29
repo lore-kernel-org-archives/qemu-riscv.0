@@ -4,80 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14BFBC48BF6
-	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Feb 2024 16:20:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1652AC54E49
+	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Feb 2024 18:07:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rfj8D-00012w-DB; Thu, 29 Feb 2024 11:19:37 -0500
+	id 1rfkoL-0004Iv-VA; Thu, 29 Feb 2024 13:07:14 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1rfj8B-000115-9F
- for qemu-riscv@nongnu.org; Thu, 29 Feb 2024 11:19:35 -0500
-Received: from mail-il1-x131.google.com ([2607:f8b0:4864:20::131])
+ (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
+ id 1rfkoF-0004Fj-KI
+ for qemu-riscv@nongnu.org; Thu, 29 Feb 2024 13:07:09 -0500
+Received: from mail-ej1-x629.google.com ([2a00:1450:4864:20::629])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1rfj89-0004RS-95
- for qemu-riscv@nongnu.org; Thu, 29 Feb 2024 11:19:35 -0500
-Received: by mail-il1-x131.google.com with SMTP id
- e9e14a558f8ab-3651b948db6so4250195ab.0
- for <qemu-riscv@nongnu.org>; Thu, 29 Feb 2024 08:19:31 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
+ id 1rfkoC-00007v-4z
+ for qemu-riscv@nongnu.org; Thu, 29 Feb 2024 13:07:07 -0500
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-a3ddc13bbb3so399437466b.0
+ for <qemu-riscv@nongnu.org>; Thu, 29 Feb 2024 10:07:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=brainfault-org.20230601.gappssmtp.com; s=20230601; t=1709223570; x=1709828370;
- darn=nongnu.org; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=qhMwoDYvCne6enjotZwzjXE3hZDJxEtDrlqLaJ31C2c=;
- b=Cxcmsy0t8gOE6CL1cdk38JW9e9SfU57FCXIv8lWPg/SA/MOYZqcXdLYkwUxEAC/PT6
- O0iAHcW4BTaKDJBNwMLe1aEEbTadr3bouVazcVZXQtiuBI5qU1qNJSYZjxZ3XSlsVvz0
- lPYM+EAd9HnlZ5of19oSjLC63svW1VQmqMDV6kV/XXPifRPDWsiqagbVHK3eLrZiWZia
- iHZaT1f/R01DZ8RCxwxfcdz6y1LMYj7G9qOpZg97o7TsDFCLE1xIkfh3+6ocREZf8KMn
- eeHTHekDsltKzcfMNDv+QO/3b3I6/w9Dclz4q7alVIyzoHnZUpiDbXQY59x/j5ih+Kg9
- WwSA==
+ d=vrull.eu; s=google; t=1709230020; x=1709834820; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ispNcME3Fnv2/NODn686pnGKi1e4GIPoFAIakhezmas=;
+ b=OvD9aotzr1TPq1Mb4+qhtArlzoTxAYry7mqjRAK23J+lCyNKF9ER/6HnegDSVxNtNq
+ eUwA5vTNECRxJzJPxYoVd1kSxN5AOG4OGp4uNNu4pSfB5Iprccc/uT/3Azqa5J2qcgve
+ gxCy8jjQ2U/3ofEHAHPb16OvW7lwE2UTEVKR0tWELmviqlYWPSlN4wLJsMZ0+5iRF1g3
+ XQJ7G3pZujMoAmxFeZaaGLP3631D2f9nEP4eodHlSXT4UCKtaCOaHf4dp+BIncf7zs9n
+ 0N0cyDx6/Zr2mGTQ/7k1rCAV9q7t0yUXiBThQ78NeO9qzHjyTPHdFzVHfedAfMwD6Jcy
+ ++PQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709223570; x=1709828370;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=qhMwoDYvCne6enjotZwzjXE3hZDJxEtDrlqLaJ31C2c=;
- b=Nxj4CuOWxTv99Q/xAHQnfoGXrAJ3Rv2jyuneVIMb4XcanfxMhN9ZfbtUI2PVMwJ+sa
- Lb8TTp5nrjuIYrewJh5n+N0ozxVaw5q3vem+F/tOv51b48BDRI8EQ4dWAQgIzBD9CrCc
- 7Vy0hTbypBtPL69cpzqIcrTaA4mBLfcJMOX4THlvUC6yKhpsKuqvspicJ1RIE/+NYVWr
- pO/L5A+f5+22sf5eXQA3qOthjoF5XT5On3Mkw0xpbpMI1fpZ3EgvfKd1GR8zdeAW27hj
- QMNJkMYQdokGnWd2YMbPoZcaHod4pFO6ZGh4qDI+E65+0i4ioMDcEjAIdWTbB3QKSRQV
- xVTA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXcqVjtHeOM3jJW1b2xs7BW9ASind0TQUabOY1JjwE/tpTozf6u467j8QSeZYapUrGzucvHVRovSvuL48SOnqv8kFx6Y/g=
-X-Gm-Message-State: AOJu0YzaA7CDlryg4+SMQfW7qVSjGgAuzEc9WSLvSiEOQCG7nk+QLjPz
- Pt4gBUUR+2pAJimKmZkOt7YZ5t6Lt0gJxVdmyX8BX7AnaUiCmbJaCwmukevdVL1W50S/pbznpR6
- Q/mIzvqBdJh3ox5rwtZ8IQsus8JjDrGzFg2XoxQ==
-X-Google-Smtp-Source: AGHT+IEzgbAYTi+ym8//C44o6UNWMShD6UHO4ifqlAFXUhPGoZB95btd4sFaoTq+70InQjlaYOFJeATjxV6cit1Aw0k=
-X-Received: by 2002:a92:d0c4:0:b0:365:2732:8bbc with SMTP id
- y4-20020a92d0c4000000b0036527328bbcmr2695219ila.29.1709223570257; Thu, 29 Feb
- 2024 08:19:30 -0800 (PST)
+ d=1e100.net; s=20230601; t=1709230020; x=1709834820;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ispNcME3Fnv2/NODn686pnGKi1e4GIPoFAIakhezmas=;
+ b=Fo6RIks+tdlOV7gG/M/jCaIfPMmF9hX6Stl9jxLImOTLf8JDPisX6Eq5DZUx0V5sIp
+ taWX0t6W3qEjiTkYnH3J4qTMhVUlAx0YOhxKzMuKLQIY9VpM9cWFEeyKea6sxX6syOSo
+ ezO4C3s2429ipNyl/8phO5rLBLOiOm565VK3TgVHmhR1swSrg9c7Ws3wUnrsbQwt05z/
+ tZTE/suTbS5T0sD5/g64DwTI98Gd9nuO7q0HCSXV5vx4MmrGqu05sSn3oDnJRf+62pii
+ dDpf29NbyZOFAgJtHjpScxvEI8/fMlguCENVEsIqxQ7rpN/MKuJEg2327Qzx3Goeu7ZG
+ RTgw==
+X-Gm-Message-State: AOJu0Yw/6WlMHlMtLky7s2M0b+/a00ikRGh4l1Stm4ngY/zBIvw9GTJO
+ 5Z4uXCyx9yJMWxbGi+8UXOdmKfXXYSxFRA64jrLjfNXr0Ly8VObfXeK7hRnIGPNOG1S2gW8ADPF
+ L
+X-Google-Smtp-Source: AGHT+IEVTP1g8jGgKIH9oo9BrfMBuradbNfPamLEAH9WuH4JFNPzbaL49A+ddj4nyCbw7E9UXKXXlg==
+X-Received: by 2002:a17:906:a417:b0:a43:f924:d65 with SMTP id
+ l23-20020a170906a41700b00a43f9240d65mr1810605ejz.26.1709230020287; 
+ Thu, 29 Feb 2024 10:07:00 -0800 (PST)
+Received: from beast.fritz.box (62-178-148-172.cable.dynamic.surfer.at.
+ [62.178.148.172]) by smtp.gmail.com with ESMTPSA id
+ ss18-20020a170907039200b00a44230eafdfsm911960ejb.83.2024.02.29.10.06.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 29 Feb 2024 10:06:59 -0800 (PST)
+From: =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>
+To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Andrew Jones <ajones@ventanamicro.com>
+Cc: =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>,
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Subject: [PATCH] tests: riscv64: Use 'zfa' instead of 'Zfa'
+Date: Thu, 29 Feb 2024 19:06:56 +0100
+Message-ID: <20240229180656.1208881-1-christoph.muellner@vrull.eu>
+X-Mailer: git-send-email 2.43.2
 MIME-Version: 1.0
-References: <20240229133745.771154-1-hchauhan@ventanamicro.com>
- <20240229-92706c0ccb3d6a6e8b725815@orel>
-In-Reply-To: <20240229-92706c0ccb3d6a6e8b725815@orel>
-From: Anup Patel <anup@brainfault.org>
-Date: Thu, 29 Feb 2024 21:49:19 +0530
-Message-ID: <CAAhSdy1SrsU4x1V5OPRzBKmfC02qHrC09QM66WK4nUqDpONGgw@mail.gmail.com>
-Subject: Re: [PATCH v3 0/2] Export debug triggers as an extension
-To: Andrew Jones <ajones@ventanamicro.com>
-Cc: Himanshu Chauhan <hchauhan@ventanamicro.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: none client-ip=2607:f8b0:4864:20::131;
- envelope-from=anup@brainfault.org; helo=mail-il1-x131.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::629;
+ envelope-from=christoph.muellner@vrull.eu; helo=mail-ej1-x629.google.com
+X-Spam_score_int: -16
+X-Spam_score: -1.7
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
+ DKIM_SIGNED=0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -93,69 +99,26 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Feb 29, 2024 at 8:42=E2=80=AFPM Andrew Jones <ajones@ventanamicro.c=
-om> wrote:
->
-> On Thu, Feb 29, 2024 at 07:07:43PM +0530, Himanshu Chauhan wrote:
-> > All the CPUs may or may not implement the debug triggers (sdtrig)
-> > extension. The presence of it should be dynamically detectable.
-> > This patch exports the debug triggers as an extension which
-> > can be turned on or off by sdtrig=3D<true/false> option. It is
-> > turned on by default.
-> >
-> > "sdtrig" is concatenated to ISA string when it is enabled.
-> > Like so:
-> >     rv64imafdch_zicbom_*_sdtrig_*_sstc_svadu
-> >
-> > Changes from v1:
-> >    - Replaced the debug property with ext_sdtrig
-> >    - Marked it experimenatal by naming it x-sdtrig
-> >    - x-sdtrig is added to ISA string
-> >    - Reversed the patch order
-> >
-> > Changes from v2:
-> >    - Mark debug property as deprecated and replace internally with sdtr=
-ig extension
->
-> I'm getting lost in our discussions, but I thought we needed both in case
-> a machine only implements debug 0.13, since sdtrig is at least 'more than=
-'
-> debug, even if backwards compatible (which I also wasn't sure was the
-> case). If, OTOH, QEMU's debug implementation exactly implements sdtrig's
-> specification, then I'm in favor of deprecating the 'debug' extension.
+Running test-fcvtmod triggers the following deprecation warning:
+  warning: CPU property 'Zfa' is deprecated. Please use 'zfa' instead
+Let's fix that.
 
-The QEMU's debug implementation aligns more with Sdtrig v1.0 specification
-because we have mcontrol6 which was not present in debug 0.13
+Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
+---
+ tests/tcg/riscv64/Makefile.target | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-IMO, we should definitely depricate debug 0.13
+diff --git a/tests/tcg/riscv64/Makefile.target b/tests/tcg/riscv64/Makefile.target
+index a7e390c384..4da5b9a3b3 100644
+--- a/tests/tcg/riscv64/Makefile.target
++++ b/tests/tcg/riscv64/Makefile.target
+@@ -17,4 +17,4 @@ run-test-aes: QEMU_OPTS += -cpu rv64,zk=on
+ TESTS += test-fcvtmod
+ test-fcvtmod: CFLAGS += -march=rv64imafdc
+ test-fcvtmod: LDFLAGS += -static
+-run-test-fcvtmod: QEMU_OPTS += -cpu rv64,d=true,Zfa=true
++run-test-fcvtmod: QEMU_OPTS += -cpu rv64,d=true,zfa=true
+-- 
+2.43.2
 
-Regards,
-Anup
-
->
-> Thanks,
-> drew
->
->
-> >    - setting/unsetting debug property shows warning and sets/unsets ext=
-_sdtrig
-> >    - sdtrig is added to ISA string as RISC-V debug specification is fro=
-zen
-> >
-> > Himanshu Chauhan (2):
-> >   target/riscv: Mark debug property as deprecated
-> >   target/riscv: Export sdtrig in ISA string
-> >
-> >  target/riscv/cpu.c        | 38 +++++++++++++++++++++++++++++++++++---
-> >  target/riscv/cpu_cfg.h    |  2 +-
-> >  target/riscv/cpu_helper.c |  2 +-
-> >  target/riscv/csr.c        |  2 +-
-> >  target/riscv/machine.c    |  2 +-
-> >  5 files changed, 39 insertions(+), 7 deletions(-)
-> >
-> > --
-> > 2.34.1
-> >
-> >
->
 
