@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7D88C48BF6
-	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Feb 2024 06:54:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5812BC54798
+	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Feb 2024 07:06:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rfaH3-0002F2-7o; Thu, 29 Feb 2024 01:52:09 -0500
+	id 1rfaUy-0006j7-3e; Thu, 29 Feb 2024 02:06:32 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1rfaG7-00021C-5O; Thu, 29 Feb 2024 01:51:19 -0500
-Received: from mgamail.intel.com ([198.175.65.16])
+ id 1rfaUb-0006cl-H7; Thu, 29 Feb 2024 02:06:11 -0500
+Received: from mgamail.intel.com ([198.175.65.18])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1rfaG4-0006st-B5; Thu, 29 Feb 2024 01:51:10 -0500
+ id 1rfaUX-0003h6-3s; Thu, 29 Feb 2024 02:06:08 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1709189468; x=1740725468;
+ t=1709190365; x=1740726365;
  h=date:from:to:cc:subject:message-id:references:
  mime-version:in-reply-to;
- bh=GS2K/1elXcA90zDdKMXQSx9HqJcMQIF3eoynkMWLosE=;
- b=Teh29f6mSrRGK1M1EhG9Yu/b+qRBZkCLwDp3QulrnYTIOWs6Ir8Co3qn
- h3VOJ3vx8Rwqw8QB7xLymaoI3/E4BCibgKeFfboa65e75MB4O3WZELb1u
- 6BLJYFgYHn2cLtUxW9ZNRXdjBHSD8rNN1WKmYCMhqfpOqPcOj0orVZo+U
- 33g0/tt3Ic+HMKmNKNhz0RXKhG7dSQ9tGLnAwWIch6UL3rfDm8Jvm05j6
- M5Unt+b6beFQGH8PhmyODbRXqhmpHDp7CeiIKUPkqNlsA5QrcowHxrDxf
- MODxMV9HZ4iB+GvIWH54ji1s6xGGPLs0tJqsPaZtETEQDisTB4SzBPExS w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10998"; a="3755274"
+ bh=i9uq6y/awOo4nqggMPn0JAiBk7ClRoK07Pbq42o5yNE=;
+ b=BdziewIXQavscsipJggKv7w/EVB/kL4RlvGrGe+hvaBB+PZnAQEn+UoB
+ GvBRB8bKtnkkF8MH4D0hVb64bUiE0ltJJZiGOjym2+5Hwl1/uXxhTB3RI
+ jotzbTnzKQNu0U43FyGlmmj8B9LLGizXaCS5tqYnY3C0yKXqnZN2Vh0pB
+ JwkERuynzPPgtTM8D05mIqkvg7O/3zrFvrwni18moKVGeQzh0U3c2zILb
+ +BlpkzMhJbxGskUQgh7cjOuL8cCtkw148Dk5ykNtSJPAldZGyyhOw3RZ9
+ H3t9rm8OZe4uh1zQJ3kTVYM9zdYzX9CW8pcTdGIT7CRM9XGuV+l7VT5TR Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10998"; a="3764831"
 X-IronPort-AV: E=Sophos;i="6.06,192,1705392000"; 
-   d="scan'208";a="3755274"
-Received: from fmviesa009.fm.intel.com ([10.60.135.149])
- by orvoesa108.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 28 Feb 2024 22:51:04 -0800
+   d="scan'208";a="3764831"
+Received: from orviesa007.jf.intel.com ([10.64.159.147])
+ by orvoesa110.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 28 Feb 2024 23:06:02 -0800
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.06,192,1705392000"; 
-   d="scan'208";a="7638819"
+   d="scan'208";a="8082618"
 Received: from liuzhao-optiplex-7080.sh.intel.com (HELO localhost)
  ([10.239.160.36])
- by fmviesa009.fm.intel.com with ESMTP; 28 Feb 2024 22:50:58 -0800
-Date: Thu, 29 Feb 2024 15:04:42 +0800
+ by orviesa007.jf.intel.com with ESMTP; 28 Feb 2024 23:05:56 -0800
+Date: Thu, 29 Feb 2024 15:19:40 +0800
 From: Zhao Liu <zhao1.liu@linux.intel.com>
 To: JeeHeng Sia <jeeheng.sia@starfivetech.com>
 Cc: Daniel P =?utf-8?B?LiBCZXJyYW5n77+9?= <berrange@redhat.com>,
@@ -65,23 +65,25 @@ Cc: Daniel P =?utf-8?B?LiBCZXJyYW5n77+9?= <berrange@redhat.com>,
  Zhenyu Wang <zhenyu.z.wang@intel.com>,
  Dapeng Mi <dapeng1.mi@linux.intel.com>,
  Yongwei Ma <yongwei.ma@intel.com>, Zhao Liu <zhao1.liu@intel.com>
-Subject: Re: [RFC 4/8] hw/core: Add cache topology options in -smp
-Message-ID: <ZeAsijVdx6DO+1pP@intel.com>
+Subject: Re: [RFC 6/8] i386/cpu: Update cache topology with machine's
+ configuration
+Message-ID: <ZeAwDIDdJff6SiiB@intel.com>
 References: <20240220092504.726064-1-zhao1.liu@linux.intel.com>
- <20240220092504.726064-5-zhao1.liu@linux.intel.com>
- <BJSPR01MB05618A7D409C2DE3E408345C9C58A@BJSPR01MB0561.CHNPR01.prod.partner.outlook.cn>
+ <20240220092504.726064-7-zhao1.liu@linux.intel.com>
+ <BJSPR01MB0561F3D87C67D4BCCA9E9C8D9C58A@BJSPR01MB0561.CHNPR01.prod.partner.outlook.cn>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <BJSPR01MB05618A7D409C2DE3E408345C9C58A@BJSPR01MB0561.CHNPR01.prod.partner.outlook.cn>
-Received-SPF: none client-ip=198.175.65.16;
+In-Reply-To: <BJSPR01MB0561F3D87C67D4BCCA9E9C8D9C58A@BJSPR01MB0561.CHNPR01.prod.partner.outlook.cn>
+Received-SPF: none client-ip=198.175.65.18;
  envelope-from=zhao1.liu@linux.intel.com; helo=mgamail.intel.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.102,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_MSPIKE_H2=-0.001,
+ SPF_HELO_NONE=0.001, SPF_NONE=0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,90 +101,49 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 Hi JeeHeng,
 
-> > diff --git a/hw/core/machine.c b/hw/core/machine.c
-> > index 426f71770a84..cb5173927b0d 100644
-> > --- a/hw/core/machine.c
-> > +++ b/hw/core/machine.c
-> > @@ -886,6 +886,10 @@ static void machine_get_smp(Object *obj, Visitor *v, const char *name,
-> >          .has_cores = true, .cores = ms->smp.cores,
-> >          .has_threads = true, .threads = ms->smp.threads,
-> >          .has_maxcpus = true, .maxcpus = ms->smp.max_cpus,
-> > +        .l1d_cache = g_strdup(cpu_topo_to_string(ms->smp_cache.l1d)),
-> > +        .l1i_cache = g_strdup(cpu_topo_to_string(ms->smp_cache.l1i)),
-> > +        .l2_cache = g_strdup(cpu_topo_to_string(ms->smp_cache.l2)),
-> > +        .l3_cache = g_strdup(cpu_topo_to_string(ms->smp_cache.l3)),
+> > diff --git a/target/i386/cpu.c b/target/i386/cpu.c
+> > index d7cb0f1e49b4..4b5c551fe7f0 100644
+> > --- a/target/i386/cpu.c
+> > +++ b/target/i386/cpu.c
+> > @@ -7582,6 +7582,27 @@ static void x86_cpu_realizefn(DeviceState *dev, Error **errp)
+> > 
+> >  #ifndef CONFIG_USER_ONLY
+> >      MachineState *ms = MACHINE(qdev_get_machine());
+> > +
+> > +    if (ms->smp_cache.l1d != CPU_TOPO_LEVEL_INVALID) {
+> > +        env->cache_info_cpuid4.l1d_cache->share_level = ms->smp_cache.l1d;
+> > +        env->cache_info_amd.l1d_cache->share_level = ms->smp_cache.l1d;
+> > +    }
+> > +
+> > +    if (ms->smp_cache.l1i != CPU_TOPO_LEVEL_INVALID) {
+> > +        env->cache_info_cpuid4.l1i_cache->share_level = ms->smp_cache.l1i;
+> > +        env->cache_info_amd.l1i_cache->share_level = ms->smp_cache.l1i;
+> > +    }
+> > +
+> > +    if (ms->smp_cache.l2 != CPU_TOPO_LEVEL_INVALID) {
+> > +        env->cache_info_cpuid4.l2_cache->share_level = ms->smp_cache.l2;
+> > +        env->cache_info_amd.l2_cache->share_level = ms->smp_cache.l2;
+> > +    }
+> > +
+> > +    if (ms->smp_cache.l3 != CPU_TOPO_LEVEL_INVALID) {
+> > +        env->cache_info_cpuid4.l3_cache->share_level = ms->smp_cache.l3;
+> > +        env->cache_info_amd.l3_cache->share_level = ms->smp_cache.l3;
+> > +    }
+> > +
 >
-> Let's standardize the code by adding the 'has_' prefix.
+> I think this block of code can be further optimized. Maybe we can create
+> a function called updateCacheShareLevel() that takes a cache pointer and
+> a share level as arguments. This function encapsulates the common
+> pattern of updating cache share levels for different caches. You can define
+> it like this:
+> void updateCacheShareLevel(XxxCacheInfo *cache, int shareLevel) {
+>     if (shareLevel != CPU_TOPO_LEVEL_INVALID) {
+>         cache->share_level = shareLevel;
+>     }
+> }
+>
 
-SMPConfiguration is automatically generated in the compilation, and its
-prototype is defined in qapi/machine.json like the following code:
-
-
-> > diff --git a/qapi/machine.json b/qapi/machine.json
-> > index d0e7f1f615f3..0a923ac38803 100644
-> > --- a/qapi/machine.json
-> > +++ b/qapi/machine.json
-> > @@ -1650,6 +1650,14 @@
-> >  #
-> >  # @threads: number of threads per core
-> >  #
-> > +# @l1d-cache: topology hierarchy of L1 data cache (since 9.0)
-> > +#
-> > +# @l1i-cache: topology hierarchy of L1 instruction cache (since 9.0)
-> > +#
-> > +# @l2-cache: topology hierarchy of L2 unified cache (since 9.0)
-> > +#
-> > +# @l3-cache: topology hierarchy of L3 unified cache (since 9.0)
-> > +#
-> >  # Since: 6.1
-> >  ##
-> >  { 'struct': 'SMPConfiguration', 'data': {
-> > @@ -1662,7 +1670,11 @@
-> >       '*modules': 'int',
-> >       '*cores': 'int',
-> >       '*threads': 'int',
-> > -     '*maxcpus': 'int' } }
-> > +     '*maxcpus': 'int',
-> > +     '*l1d-cache': 'str',
-> > +     '*l1i-cache': 'str',
-> > +     '*l2-cache': 'str',
-> > +     '*l3-cache': 'str' } }
-> >
-
-The gnerated complete structure is (will in build/qapi/qapi-types-machine.h):
-
-struct SMPConfiguration {
-    bool has_cpus;
-    int64_t cpus;
-    bool has_drawers;
-    int64_t drawers;
-    bool has_books;
-    int64_t books;
-    bool has_sockets;
-    int64_t sockets;
-    bool has_dies;
-    int64_t dies;
-    bool has_clusters;
-    int64_t clusters;
-    bool has_modules;
-    int64_t modules;
-    bool has_cores;
-    int64_t cores;
-    bool has_threads;
-    int64_t threads;
-    bool has_maxcpus;
-    int64_t maxcpus;
-    char *l1d_cache;
-    char *l1i_cache;
-    char *l2_cache;
-    char *l3_cache;
-};
-
-The int member defined in qapi/machine.json will get their corresponding
-status fields as has_* to indicate if user sets those int fields.
-
-For str type, the status field is not needed since NULL is enough to
-indicate no user sets that.
+Good idea! Will try this way.
 
 Thanks,
 Zhao
