@@ -4,90 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59A9DC48BF6
-	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Feb 2024 18:24:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81F10C48BF6
+	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Feb 2024 19:59:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rfl4o-00065E-22; Thu, 29 Feb 2024 13:24:14 -0500
+	id 1rfmYN-00089c-FF; Thu, 29 Feb 2024 14:58:51 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rfl4l-0005zv-Uh
- for qemu-riscv@nongnu.org; Thu, 29 Feb 2024 13:24:12 -0500
-Received: from mail-pg1-x52e.google.com ([2607:f8b0:4864:20::52e])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rfmYH-00089H-Ch
+ for qemu-riscv@nongnu.org; Thu, 29 Feb 2024 14:58:45 -0500
+Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rfl4k-00047G-GQ
- for qemu-riscv@nongnu.org; Thu, 29 Feb 2024 13:24:11 -0500
-Received: by mail-pg1-x52e.google.com with SMTP id
- 41be03b00d2f7-5e152c757a5so868597a12.2
- for <qemu-riscv@nongnu.org>; Thu, 29 Feb 2024 10:24:10 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rfmYF-0008DG-Q1
+ for qemu-riscv@nongnu.org; Thu, 29 Feb 2024 14:58:45 -0500
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-1dc1ff697f9so12609615ad.0
+ for <qemu-riscv@nongnu.org>; Thu, 29 Feb 2024 11:58:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709231049; x=1709835849; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=ventanamicro.com; s=google; t=1709236721; x=1709841521; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=kkRWlFAQfwRG1ReVsWUCQxRCLdjMzhkx+wrTfZP2Gx8=;
- b=v3TeZ4i5Gf061BWAsiswVDyY5LU/uRO5wxmj3rLCC6mkN5rFIdE2vybOMe3MehA3eW
- rlCmgQFY53ajIQx90K19WJGkq3dDKFjpA6dUckcZfx4deaaVHn4J+w2lL3vccR8SImzu
- TxoMNizXu1OLzrhFPNe1stpfGFG6JLJ6RtE04oxU4taONQpAJMdYAMHE+sNkfA4UjlAJ
- evIDdDmkHts2OUH7uTDF3Sk6XZSeKVGwzSt7jVWea9dyg0lZ5rfPs8qXivXWpRx74x/S
- odJR7x/eHmk7RPjRNb9TCrOmiD0U2W3Gi/rNNPfhhzNmeVYoj2Ukan9tis0KpDBZm99R
- lA3A==
+ bh=ng4x3d5/elH3/Y2Ah/5tOIHwHPg+FbzN/pHpquuSEQI=;
+ b=NreF44HNrumdcMxZ28bGfPsv7W9mqyJyYnoqxpjDRb84XPTyJWarkOJyqgeetCk6iR
+ jFpNxakoKFhUQurWNKjyw1uUP2W4GF4r2ao3hbPec+6S8ZAXOMKQqBrPSyg6Fr/M9YDX
+ 260+0jyZakx/Fqy6gdrHifd+mLrSNrFK77nwRfwWg33A4tD3Ng08c1rhfMroiYhl31zQ
+ teUrl/GK0ru6UdrmOpgnAUV89yePPFYfN79/nxSCakdRUzR7P29Bhj1YMXb5dDIjtTU/
+ +QkabjxkUsPC6j5VCvt0FivvoJZrCvfczs2NGztR4gsajCjNsTY3y62gasotB5O3YJUa
+ MHIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709231049; x=1709835849;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1709236721; x=1709841521;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=kkRWlFAQfwRG1ReVsWUCQxRCLdjMzhkx+wrTfZP2Gx8=;
- b=iDZ+fvJAqYKqFuGT223rZzl+V6WVCFpHoZqsO6vSF+ggEpmH0NHNZ3Qd5otjFKouRy
- ao8BHGh3EvOIMwm8wTkZ2o6Kd9L2VpKYesvr+h8PPR/xa1SMif+mPOA5Ie+hpAu7cHOR
- zYywahHz5yyMc1Q9njWB3HBrSNQSSv+yyu5jWW8N7pZnx6P7qlmSGmGnDqKdYLTFbEEY
- lDucy4By/5zQBoJxKP5hpVEODfdMGg6A9J/wRyjvuK1Z0pbog5y9NphYYarPE3iURxlq
- IzbPGNe8UA12NHQfYkluGxCvUkF4MJmtRFiL2v0q8suhMU499iyfC4Ng1AB2X80+Raiu
- INwQ==
+ bh=ng4x3d5/elH3/Y2Ah/5tOIHwHPg+FbzN/pHpquuSEQI=;
+ b=rMYw1ySCIYWCwdjccxuRUERDHUMlkPXkoUHaXITgbcHTQqRwFxV3z2LK6wXmWDdl9r
+ ro0kT2MQJzYfsEyCrO1POGjZidjQmA6f7BephuPxrib5I9YN/kUvBKEFbrKjwHs2eETF
+ baKsxuQPprK4q5QxvKORTVWwq+br36/xxM3GPPJrxf712+n/y71TTp4iPEKCUonjc6w1
+ CfzimLJAS32dylSITid5S89273jsp7rtzNNe091PFfzJyaSZE/4dFfRh4E78ifNlwqvY
+ 9TEaHEbwISVDfG9Isf+UwHJy2U1pbvbjV9U34cBIpx3zasZO8ZjMrz6fxRKj72He0KBX
+ fQcQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUa8QTT0jCXhQb1Hi1HLWUgibrjlD84bf7F3CcX/UpgFevyA4YOlt5RoPtJanOzVb2R9jSeReYavTJiEoRgpYAEsUlCl1M=
-X-Gm-Message-State: AOJu0Yz0SzttYy/Im0mDz2qNiRkDHvOASUuSQKa1ZKBjpi13ffTngz6N
- 9styq3n4s9HVelVgXaMX7ZXnIxJlZeskfykWRcgC8WOp5G5mOoEEJdOg7OKehQQ=
-X-Google-Smtp-Source: AGHT+IFhDiOfbthGxE89kBRhcgrtagugcugcUq5OmjWgtuuCe52yQAb8QOT7Wi6E8qzC/jok7ljYGQ==
-X-Received: by 2002:a17:90a:4210:b0:29a:e097:50be with SMTP id
- o16-20020a17090a421000b0029ae09750bemr3172833pjg.31.1709231048993; 
- Thu, 29 Feb 2024 10:24:08 -0800 (PST)
-Received: from [192.168.6.128] (098-147-055-211.res.spectrum.com.
- [98.147.55.211]) by smtp.gmail.com with ESMTPSA id
- br16-20020a17090b0f1000b0029a8d207010sm3895756pjb.54.2024.02.29.10.24.07
+ AJvYcCX/iTr1JDXKiQ6QmhRWy1R4faDDW0GgDcLAVBRLhPM0AvC/LmfRxAEXR7p3n0QForb6M5suQBO+BAV9HCE7SeAYzNkq5Wk=
+X-Gm-Message-State: AOJu0YztIqE1DWTECQohhxZXARwOxGVGe0FCGzUHQ6WhTw68VnjB0tIH
+ aIRhk8Z70fbcThz8aNKZ2ezxDKFUyOKf3XWeqn91Qqix2EE2gHCwT8PZ12ThrEw=
+X-Google-Smtp-Source: AGHT+IF5IxF9jEuIxUV06LA9k5H1klFcU885SNieGCPZ7MHAd4tYOW1sK5Vg8lBsb6aN6hvupNZEWw==
+X-Received: by 2002:a17:902:c943:b0:1db:e245:8c35 with SMTP id
+ i3-20020a170902c94300b001dbe2458c35mr3504853pla.30.1709236721656; 
+ Thu, 29 Feb 2024 11:58:41 -0800 (PST)
+Received: from ?IPV6:2804:7f0:bdcd:fb00:6501:2693:db52:c621?
+ ([2804:7f0:bdcd:fb00:6501:2693:db52:c621])
+ by smtp.gmail.com with ESMTPSA id
+ d15-20020a170903230f00b001dc3c4e7a12sm1905338plh.14.2024.02.29.11.58.38
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 29 Feb 2024 10:24:08 -0800 (PST)
-Message-ID: <dcfa3952-0c22-46ed-b0d4-b66ca0ea5251@linaro.org>
-Date: Thu, 29 Feb 2024 08:24:04 -1000
+ Thu, 29 Feb 2024 11:58:41 -0800 (PST)
+Message-ID: <0cabb840-f440-4c36-8e35-3ecad1446082@ventanamicro.com>
+Date: Thu, 29 Feb 2024 16:58:37 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH] tests: riscv64: Use 'zfa' instead of 'Zfa'
-Content-Language: en-US
 To: =?UTF-8?Q?Christoph_M=C3=BCllner?= <christoph.muellner@vrull.eu>,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Philipp Tomsich
  <philipp.tomsich@vrull.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
  Andrew Jones <ajones@ventanamicro.com>
 Cc: Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
 References: <20240229180656.1208881-1-christoph.muellner@vrull.eu>
-From: Richard Henderson <richard.henderson@linaro.org>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 In-Reply-To: <20240229180656.1208881-1-christoph.muellner@vrull.eu>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52e;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x52e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x636.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,13 +104,18 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2/29/24 08:06, Christoph Müllner wrote:
+
+
+On 2/29/24 15:06, Christoph Müllner wrote:
 > Running test-fcvtmod triggers the following deprecation warning:
 >    warning: CPU property 'Zfa' is deprecated. Please use 'zfa' instead
 > Let's fix that.
 > 
 > Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
 > ---
+
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
 >   tests/tcg/riscv64/Makefile.target | 2 +-
 >   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
@@ -123,11 +129,4 @@ On 2/29/24 08:06, Christoph Müllner wrote:
 >   test-fcvtmod: LDFLAGS += -static
 > -run-test-fcvtmod: QEMU_OPTS += -cpu rv64,d=true,Zfa=true
 > +run-test-fcvtmod: QEMU_OPTS += -cpu rv64,d=true,zfa=true
-
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-
-I saw this myself the other day and didn't get around to sending a patch.
-
-
-r~
 
