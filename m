@@ -4,82 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A089C48BF6
-	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Feb 2024 13:39:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9D32C54E41
+	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Feb 2024 14:29:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rfgcd-0002qk-MW; Thu, 29 Feb 2024 08:38:51 -0500
+	id 1rfhPq-0002cc-LY; Thu, 29 Feb 2024 09:29:42 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <hchauhan@ventanamicro.com>)
- id 1rfgcY-0002oz-Gk
- for qemu-riscv@nongnu.org; Thu, 29 Feb 2024 08:38:46 -0500
-Received: from mail-pg1-x535.google.com ([2607:f8b0:4864:20::535])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <hchauhan@ventanamicro.com>)
- id 1rfgcW-0000Df-Nb
- for qemu-riscv@nongnu.org; Thu, 29 Feb 2024 08:38:46 -0500
-Received: by mail-pg1-x535.google.com with SMTP id
- 41be03b00d2f7-5d862e8b163so234889a12.1
- for <qemu-riscv@nongnu.org>; Thu, 29 Feb 2024 05:38:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1709213923; x=1709818723; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VYtawO62PZ7QiKIlYPihG5XQZyGfh5EpqKxdTqBdzLU=;
- b=QgopYMW2U9Lu4D0NuG0XtMQzaG8klSdIMUjERvLIT4BZ9MsiJXSeEqeooxVLI9lAht
- i4RkLdgIjjxim1/7GCPvrZ461wd0Ui1US0Pi1JF7ZIUPdppLIIQV9JF6N18C//3X6K9g
- NhQZqFhIgtZPvTVCZVuH7WQndRnUBoY0FyveVRbqa8Gmm4hAZkG5sNoMZ3ufzCu7gTMq
- BCTu/wqeKIQkR7rrNqpqXfhtQ3Zeo+FbiE+imMvs/UNHpHwcgaDFV9AWFmENDMb7KUR1
- e3VjMnQnmGJZiAF9D5S42VyU1nkccDenBQkGTywfRLw8ULeljJ2HH/Z0Lhp2uXm3Q/uV
- qphw==
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1rfhPg-0001vn-UR
+ for qemu-riscv@nongnu.org; Thu, 29 Feb 2024 09:29:36 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1rfhPd-00068h-TQ
+ for qemu-riscv@nongnu.org; Thu, 29 Feb 2024 09:29:31 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1709216968;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=StbiZXwla8vIuHHbeT4VZbIjdaKRKNSm18LQtWP/rZQ=;
+ b=K8eqRpa7JQ6Phq9D9odBnPhbAUAilzL5XUD+Ree4tS0MkCV62GTlZOwOW/rjhZBc0T1lND
+ WgHkMiWvX1rrjoA+VOuMNzQropwINsvCHvgExsch8ayr90FdMN102LGoo8W4M+uzPjbBBy
+ tf+3YMANppyfub2sr89Uu0QFZtLh6m0=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-191-heb7G-ttNvewBV2txmwJow-1; Thu, 29 Feb 2024 09:29:27 -0500
+X-MC-Unique: heb7G-ttNvewBV2txmwJow-1
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-412b2321084so3740595e9.2
+ for <qemu-riscv@nongnu.org>; Thu, 29 Feb 2024 06:29:26 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709213923; x=1709818723;
+ d=1e100.net; s=20230601; t=1709216965; x=1709821765;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=VYtawO62PZ7QiKIlYPihG5XQZyGfh5EpqKxdTqBdzLU=;
- b=Pe+Z4rQdS7jzLKX63EykLJZwgwIQbqgvMUgIE+TaD8WvR5CFCnVdj4B1OlMr9U3LOC
- mS3w9RTK1fBj7I2vC8uRUcGOVJrakMBsbe/TgFoxUQAYoAlmJ6U0dS9R/8rW0VZtI/HD
- t4skDJGIiaTrbgsaW10zdqI/ZRlc1q6tkQv+8plcjxUzc7dT12Yzf+i37Gp614wFcppt
- qjjyK3oEqrPsk1RlbskEgczAe0gqn2glzLI69yOsDeeWg2zMzSPDQF6VIX1tpDRjMkEu
- BhFLKFgHlatDCJ91DRAeMQdcwcLYgPVeAGA+T19FtxZg1vxcp3N7+CIEGGaMprC3JkPo
- gVuw==
-X-Gm-Message-State: AOJu0YwkXWGQC+PspOIRlXoGmxRgfKpd8GZzaCKdNEwz0IHbq5+lInXm
- 46k8cOvh0dnIJNdG5VpTGkEpZlQbX2sXrF9937g00rK/mhlN8uB+chZe1mRxPGgJEmUbXyaFq5t
- r
-X-Google-Smtp-Source: AGHT+IE1VzJK5SeYe+FbitQHrcbJJs2xQp8E11za1WNfOZoQ6iRS106KFQJIpUN0sOLOTbvbiHYnbw==
-X-Received: by 2002:a05:6a20:1581:b0:1a1:2d3f:c613 with SMTP id
- h1-20020a056a20158100b001a12d3fc613mr871001pzj.3.1709213922890; 
- Thu, 29 Feb 2024 05:38:42 -0800 (PST)
-Received: from localhost.localdomain ([49.37.249.67])
- by smtp.gmail.com with ESMTPSA id
- g1-20020a170902fe0100b001dc941f145dsm1454918plj.253.2024.02.29.05.38.41
+ bh=StbiZXwla8vIuHHbeT4VZbIjdaKRKNSm18LQtWP/rZQ=;
+ b=RRHl2K+QjrXNvMRopgnw4H5K3DQA1BFDaGBLUbdDHlOkul0SZ+TkYtMePhjNGVjHYk
+ dGTgRPoNbwgUN3pM7sYuJz/2sdXDQoWdBov74G7RhXhdBsxosFBOjb7U/z/8lJsNzKp9
+ 2blppkz+quLYbFXswtcWenAYz/kEtychPnWDK6g/kr5/pAaiLKfJLZ0cTC3fzNt9/+Xa
+ gud3sf/CAk85YyOhvGQ8DFbtA5ATpm5EmBkMdl7MQnmRNf3CvoYDudvYvXjRqeM3n/XC
+ R35GLq9eaQRc/+0TOzNv9XuNQL8BCjXr+rUhERZs/+dpZh0sws7GU+Q0TIkpc/BmadpR
+ g40Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXn0LnAzXCH31A3MNcpw380eEHmmuyt2puaz/lTl8i6j8LFpdU3VfDjKK+WxnaTiH9sxut4ZAWHMsKe5qeC/aHi1W7DT9U=
+X-Gm-Message-State: AOJu0Yz0PMrwd8+czmBk+dViZqvh2MXGaYTOCUe0Si8LmsZS3TA2gQAJ
+ 5Z3/igfs7IX9YaUczTpKBu767RvtuV8MJG66gYVSNtl5fRXJqNqlxKQFz7APGGywTreoFx9tnYQ
+ j9mSi0MkP4QXH3i3x1sePqMo7d8BO+VgcwV20P/EA7DQ6ocjjVLKY
+X-Received: by 2002:a05:600c:1c0d:b0:412:ace9:9d85 with SMTP id
+ j13-20020a05600c1c0d00b00412ace99d85mr2219365wms.3.1709216965740; 
+ Thu, 29 Feb 2024 06:29:25 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFF8tCz7L/WxQDM3B1qriCeSoM8c7kJ324p+93qr8j2fs1rmLR43Yjf7/+lBceVIN2D/TTzLg==
+X-Received: by 2002:a05:600c:1c0d:b0:412:ace9:9d85 with SMTP id
+ j13-20020a05600c1c0d00b00412ace99d85mr2219349wms.3.1709216965338; 
+ Thu, 29 Feb 2024 06:29:25 -0800 (PST)
+Received: from imammedo.users.ipa.redhat.com (nat-pool-brq-t.redhat.com.
+ [213.175.37.10]) by smtp.gmail.com with ESMTPSA id
+ bw1-20020a0560001f8100b0033db0c866f7sm1954508wrb.11.2024.02.29.06.29.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 29 Feb 2024 05:38:42 -0800 (PST)
-From: Himanshu Chauhan <hchauhan@ventanamicro.com>
-To: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-Cc: Himanshu Chauhan <hchauhan@ventanamicro.com>
-Subject: [PATCH v3 1/2] target/riscv: Mark debug property as deprecated
-Date: Thu, 29 Feb 2024 19:07:44 +0530
-Message-Id: <20240229133745.771154-2-hchauhan@ventanamicro.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240229133745.771154-1-hchauhan@ventanamicro.com>
-References: <20240229133745.771154-1-hchauhan@ventanamicro.com>
+ Thu, 29 Feb 2024 06:29:24 -0800 (PST)
+Date: Thu, 29 Feb 2024 15:29:23 +0100
+From: Igor Mammedov <imammedo@redhat.com>
+To: Ani Sinha <anisinha@redhat.com>
+Cc: QEMU Developers <qemu-devel@nongnu.org>, Peter Maydell
+ <peter.maydell@linaro.org>, Paolo Bonzini <pbonzini@redhat.com>, "Michael
+ S. Tsirkin" <mst@redhat.com>, Song Gao <gaosong@loongson.cn>, Alistair
+ Francis <alistair.francis@wdc.com>, palmer@dabbelt.com,
+ bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, Philippe =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?=
+ <philmd@linaro.org>, Yanan Wang <wangyanan55@huawei.com>, Eric Blake
+ <eblake@redhat.com>, Markus Armbruster <armbru@redhat.com>,
+ qemu-arm@nongnu.org, qemu-riscv@nongnu.org, f.ebner@proxmox.com
+Subject: Re: [PATCH 06/19] smbios: get rid of smbios_legacy global
+Message-ID: <20240229152923.46919312@imammedo.users.ipa.redhat.com>
+In-Reply-To: <0129FA3E-A566-481A-85A6-439E72C5594B@redhat.com>
+References: <20240227154749.1818189-1-imammedo@redhat.com>
+ <20240227154749.1818189-7-imammedo@redhat.com>
+ <0129FA3E-A566-481A-85A6-439E72C5594B@redhat.com>
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::535;
- envelope-from=hchauhan@ventanamicro.com; helo=mail-pg1-x535.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=imammedo@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -21
+X-Spam_score: -2.2
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.096,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -95,152 +115,197 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The debug property implements the ratified debug specification v0.13.
-This specification is superseded by (now frozen) RISC-V debug specification v1.0
-It defines sdtrig ISA extension which is forward and backward comptible with
-the debug specification v0.13.
+On Thu, 29 Feb 2024 16:23:21 +0530
+Ani Sinha <anisinha@redhat.com> wrote:
 
-This patch deprecates the debug property and replaces with ext_sdtrig.
-A deprecation warning is displayed if debug property is used.
+> > On 27-Feb-2024, at 21:17, Igor Mammedov <imammedo@redhat.com> wrote:
+> > 
+> > clean up smbios_set_defaults() which is reused by legacy
+> > and non legacy machines from being aware of 'legacy' notion
+> > and need to turn it off. And push legacy handling up to
+> > PC machine code where it's relevant.
+> > 
+> > Signed-off-by: Igor Mammedov <imammedo@redhat.com>
+> > ---
+> > PS: I've moved/kept legacy smbios_entries to smbios_get_tables()
+> > but it at least is not visible to API users. To get rid of it
+> > as well, it would be necessary to change how '-smbios' CLI
+> > option is processed. Which is done later in the series.
+> > ---
+> > include/hw/firmware/smbios.h |  2 +-
+> > hw/arm/virt.c                |  2 +-
+> > hw/i386/fw_cfg.c             |  7 ++++---
+> > hw/loongarch/virt.c          |  2 +-
+> > hw/riscv/virt.c              |  2 +-
+> > hw/smbios/smbios.c           | 35 +++++++++++++++--------------------
+> > 6 files changed, 23 insertions(+), 27 deletions(-)
+> > 
+> > diff --git a/include/hw/firmware/smbios.h b/include/hw/firmware/smbios.h
+> > index a187fbbd3d..0818184834 100644
+> > --- a/include/hw/firmware/smbios.h
+> > +++ b/include/hw/firmware/smbios.h
+> > @@ -293,7 +293,7 @@ struct smbios_type_127 {
+> > void smbios_entry_add(QemuOpts *opts, Error **errp);
+> > void smbios_set_cpuid(uint32_t version, uint32_t features);
+> > void smbios_set_defaults(const char *manufacturer, const char *product,
+> > -                         const char *version, bool legacy_mode,
+> > +                         const char *version,
+> >                          bool uuid_encoded, SmbiosEntryPointType ep_type);
+> > void smbios_set_default_processor_family(uint16_t processor_family);
+> > uint8_t *smbios_get_table_legacy(uint32_t expected_t4_count, size_t *length);
+> > diff --git a/hw/arm/virt.c b/hw/arm/virt.c
+> > index 0af1943697..8588681f27 100644
+> > --- a/hw/arm/virt.c
+> > +++ b/hw/arm/virt.c
+> > @@ -1633,7 +1633,7 @@ static void virt_build_smbios(VirtMachineState *vms)
+> >     }
+> > 
+> >     smbios_set_defaults("QEMU", product,
+> > -                        vmc->smbios_old_sys_ver ? "1.0" : mc->name, false,
+> > +                        vmc->smbios_old_sys_ver ? "1.0" : mc->name,
+> >                         true, SMBIOS_ENTRY_POINT_TYPE_64);
+> > 
+> >     /* build the array of physical mem area from base_memmap */
+> > diff --git a/hw/i386/fw_cfg.c b/hw/i386/fw_cfg.c
+> > index fcb4fb0769..c1e9c0fd9c 100644
+> > --- a/hw/i386/fw_cfg.c
+> > +++ b/hw/i386/fw_cfg.c
+> > @@ -63,15 +63,16 @@ void fw_cfg_build_smbios(PCMachineState *pcms, FWCfgState *fw_cfg)
+> >     if (pcmc->smbios_defaults) {
+> >         /* These values are guest ABI, do not change */
+> >         smbios_set_defaults("QEMU", mc->desc, mc->name,
+> > -                            pcmc->smbios_legacy_mode, pcmc->smbios_uuid_encoded,
+> > +                            pcmc->smbios_uuid_encoded,
+> >                             pcms->smbios_entry_point_type);
+> >     }
+> > 
+> >     /* tell smbios about cpuid version and features */
+> >     smbios_set_cpuid(cpu->env.cpuid_version, cpu->env.features[FEAT_1_EDX]);
+> > 
+> > -    smbios_tables = smbios_get_table_legacy(ms->smp.cpus, &smbios_tables_len);
+> > -    if (smbios_tables) {
+> > +    if (pcmc->smbios_legacy_mode) {
+> > +        smbios_tables = smbios_get_table_legacy(ms->smp.cpus,
+> > +                                                &smbios_tables_len);
+> >         fw_cfg_add_bytes(fw_cfg, FW_CFG_SMBIOS_ENTRIES,
+> >                          smbios_tables, smbios_tables_len);
+> >         return;
+> > diff --git a/hw/loongarch/virt.c b/hw/loongarch/virt.c
+> > index 0ad7d8c887..73fb3522ba 100644
+> > --- a/hw/loongarch/virt.c
+> > +++ b/hw/loongarch/virt.c
+> > @@ -320,7 +320,7 @@ static void virt_build_smbios(LoongArchMachineState *lams)
+> >         return;
+> >     }
+> > 
+> > -    smbios_set_defaults("QEMU", product, mc->name, false,
+> > +    smbios_set_defaults("QEMU", product, mc->name,
+> >                         true, SMBIOS_ENTRY_POINT_TYPE_64);
+> > 
+> >     smbios_get_tables(ms, NULL, 0, &smbios_tables, &smbios_tables_len,
+> > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> > index fd35c74781..e2c9529df2 100644
+> > --- a/hw/riscv/virt.c
+> > +++ b/hw/riscv/virt.c
+> > @@ -1235,7 +1235,7 @@ static void virt_build_smbios(RISCVVirtState *s)
+> >         product = "KVM Virtual Machine";
+> >     }
+> > 
+> > -    smbios_set_defaults("QEMU", product, mc->name, false,
+> > +    smbios_set_defaults("QEMU", product, mc->name,
+> >                         true, SMBIOS_ENTRY_POINT_TYPE_64);
+> > 
+> >     if (riscv_is_32bit(&s->soc[0])) {
+> > diff --git a/hw/smbios/smbios.c b/hw/smbios/smbios.c
+> > index 15339d8dbe..c46fc93357 100644
+> > --- a/hw/smbios/smbios.c
+> > +++ b/hw/smbios/smbios.c
+> > @@ -54,7 +54,6 @@ struct smbios_table {
+> > 
+> > static uint8_t *smbios_entries;
+> > static size_t smbios_entries_len;
+> > -static bool smbios_legacy = true;
+> > static bool smbios_uuid_encoded = true;
+> > /* end: legacy structures & constants for <= 2.0 machines */
+> > 
+> > @@ -570,9 +569,16 @@ static void smbios_build_type_1_fields(void)
+> > 
+> > uint8_t *smbios_get_table_legacy(uint32_t expected_t4_count, size_t *length)
+> > {
+> > -    if (!smbios_legacy) {
+> > -        *length = 0;
+> > -        return NULL;
+> > +    /* drop unwanted version of command-line file blob(s) */
+> > +    g_free(smbios_tables);
+> > +    smbios_tables = NULL;
+> > +
+> > +    /* also complain if fields were given for types > 1 */
+> > +    if (find_next_bit(have_fields_bitmap,
+> > +                      SMBIOS_MAX_TYPE + 1, 2) < SMBIOS_MAX_TYPE + 1) {
+> > +        error_report("can't process fields for smbios "
+> > +                     "types > 1 on machine versions < 2.1!");
+> > +        exit(1);
+> >     }
+> > 
+> >     if (!smbios_immutable) {
+> > @@ -1006,28 +1012,13 @@ void smbios_set_default_processor_family(uint16_t processor_family)
+> > }
+> > 
+> > void smbios_set_defaults(const char *manufacturer, const char *product,
+> > -                         const char *version, bool legacy_mode,
+> > +                         const char *version,
+> >                          bool uuid_encoded, SmbiosEntryPointType ep_type)
+> > {
+> >     smbios_have_defaults = true;
+> > -    smbios_legacy = legacy_mode;
+> >     smbios_uuid_encoded = uuid_encoded;
+> >     smbios_ep_type = ep_type;
+> > 
+> > -    /* drop unwanted version of command-line file blob(s) */
+> > -    if (smbios_legacy) {
+> > -        g_free(smbios_tables);
+> > -        /* in legacy mode, also complain if fields were given for types > 1 */
+> > -        if (find_next_bit(have_fields_bitmap,
+> > -                          SMBIOS_MAX_TYPE+1, 2) < SMBIOS_MAX_TYPE+1) {
+> > -            error_report("can't process fields for smbios "
+> > -                         "types > 1 on machine versions < 2.1!");
+> > -            exit(1);
+> > -        }
+> > -    } else {
+> > -        g_free(smbios_entries);
+> > -    }
+> > -
+> >     SMBIOS_SET_DEFAULT(type1.manufacturer, manufacturer);
+> >     SMBIOS_SET_DEFAULT(type1.product, product);
+> >     SMBIOS_SET_DEFAULT(type1.version, version);
+> > @@ -1103,6 +1094,10 @@ void smbios_get_tables(MachineState *ms,
+> > {
+> >     unsigned i, dimm_cnt, offset;
+> > 
+> > +    /* drop unwanted (legacy) version of command-line file blob(s) */
+> > +    g_free(smbios_entries);
+> > +    smbios_entries = NULL;
+> > +  
+> 
+> Can you please explain why you do this unconditionally without checking for legacy mode? Seems wrong?
 
-Signed-off-by: Himanshu Chauhan <hchauhan@ventanamicro.com>
----
- target/riscv/cpu.c        | 37 ++++++++++++++++++++++++++++++++++---
- target/riscv/cpu_cfg.h    |  2 +-
- target/riscv/cpu_helper.c |  2 +-
- target/riscv/csr.c        |  2 +-
- target/riscv/machine.c    |  2 +-
- 5 files changed, 38 insertions(+), 7 deletions(-)
+with this patch legacy tables build is moved to fw_cfg_build_smbios(),
+however at this point QEMU still has option processing that fills
+both new and legacy smbios_entries blobs. 
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 5ff0192c52..5d5d8f0375 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -996,7 +996,7 @@ static void riscv_cpu_reset_hold(Object *obj)
-     set_default_nan_mode(1, &env->fp_status);
- 
- #ifndef CONFIG_USER_ONLY
--    if (cpu->cfg.debug) {
-+    if (cpu->cfg.ext_sdtrig) {
-         riscv_trigger_reset_hold(env);
-     }
- 
-@@ -1156,7 +1156,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-     riscv_cpu_register_gdb_regs_for_features(cs);
- 
- #ifndef CONFIG_USER_ONLY
--    if (cpu->cfg.debug) {
-+    if (cpu->cfg.ext_sdtrig) {
-         riscv_trigger_realize(&cpu->env);
-     }
- #endif
-@@ -1718,6 +1718,37 @@ static const PropertyInfo prop_mmu = {
-     .set = prop_mmu_set,
- };
- 
-+static void prop_debug_set(Object *obj, Visitor *v, const char *name,
-+                           void *opaque, Error **errp)
-+{
-+    RISCVCPU *cpu = RISCV_CPU(obj);
-+    bool value;
-+
-+    warn_report("\"debug\" property is being deprecated.");
-+
-+    visit_type_bool(v, name, &value, errp);
-+
-+    if (cpu->cfg.ext_sdtrig != value && !riscv_cpu_is_dynamic(obj)) {
-+        return;
-+    }
-+
-+    cpu->cfg.ext_sdtrig = value;
-+}
-+
-+static void prop_debug_get(Object *obj, Visitor *v, const char *name,
-+                         void *opaque, Error **errp)
-+{
-+    bool value = RISCV_CPU(obj)->cfg.ext_sdtrig;
-+
-+    visit_type_bool(v, name, &value, errp);
-+}
-+
-+static const PropertyInfo prop_debug = {
-+    .name = "debug",
-+    .get = prop_debug_get,
-+    .set = prop_debug_set,
-+};
-+
- static void prop_pmp_set(Object *obj, Visitor *v, const char *name,
-                          void *opaque, Error **errp)
- {
-@@ -2229,7 +2260,7 @@ RISCVCPUProfile *riscv_profiles[] = {
- };
- 
- static Property riscv_cpu_properties[] = {
--    DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
-+    {.name = "debug", .info = &prop_debug}, /* Deprecated */
- 
-     {.name = "pmu-mask", .info = &prop_pmu_mask},
-     {.name = "pmu-num", .info = &prop_pmu_num}, /* Deprecated */
-diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-index 833bf58217..9fb4ca577f 100644
---- a/target/riscv/cpu_cfg.h
-+++ b/target/riscv/cpu_cfg.h
-@@ -113,6 +113,7 @@ struct RISCVCPUConfig {
-     bool ext_zvfbfwma;
-     bool ext_zvfh;
-     bool ext_zvfhmin;
-+    bool ext_sdtrig;
-     bool ext_smaia;
-     bool ext_ssaia;
-     bool ext_sscofpmf;
-@@ -148,7 +149,6 @@ struct RISCVCPUConfig {
-     uint16_t cboz_blocksize;
-     bool mmu;
-     bool pmp;
--    bool debug;
-     bool misa_w;
- 
-     bool short_isa_string;
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index d462d95ee1..b2ad97d601 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -129,7 +129,7 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
-              ? EXT_STATUS_DIRTY : EXT_STATUS_DISABLED;
-     }
- 
--    if (cpu->cfg.debug && !icount_enabled()) {
-+    if (cpu->cfg.ext_sdtrig && !icount_enabled()) {
-         flags = FIELD_DP32(flags, TB_FLAGS, ITRIGGER, env->itrigger_enabled);
-     }
- #endif
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index d4e8ac13b9..e60599d74e 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -546,7 +546,7 @@ static RISCVException have_mseccfg(CPURISCVState *env, int csrno)
- 
- static RISCVException debug(CPURISCVState *env, int csrno)
- {
--    if (riscv_cpu_cfg(env)->debug) {
-+    if (riscv_cpu_cfg(env)->ext_sdtrig) {
-         return RISCV_EXCP_NONE;
-     }
- 
-diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index 81cf22894e..1b775342d2 100644
---- a/target/riscv/machine.c
-+++ b/target/riscv/machine.c
-@@ -230,7 +230,7 @@ static bool debug_needed(void *opaque)
- {
-     RISCVCPU *cpu = opaque;
- 
--    return cpu->cfg.debug;
-+    return cpu->cfg.ext_sdtrig;
- }
- 
- static int debug_post_load(void *opaque, int version_id)
--- 
-2.34.1
+this hunk cleanups not needed blob smbios_entries when building
+modern tables, and smbios_get_table_legacy() has a corresponding
+smbios_tables cleanup since modern is not needed there.
+
+[7/19] removes this in favor of a single blob.
+
+> 
+> >     if (!smbios_immutable) {
+> >         smbios_build_type_0_table();
+> >         smbios_build_type_1_table();
+> > -- 
+> > 2.39.3
+> >   
+> 
 
 
