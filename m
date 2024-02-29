@@ -4,71 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4543C48BF6
-	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Feb 2024 04:27:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9FBBC54798
+	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Feb 2024 04:34:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rfY1F-0002xR-Fw; Wed, 28 Feb 2024 23:27:41 -0500
+	id 1rfY6q-0003fL-3O; Wed, 28 Feb 2024 23:33:28 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <nturtayeva@ucsb.edu>)
- id 1rfY1E-0002x8-7F
- for qemu-riscv@nongnu.org; Wed, 28 Feb 2024 23:27:40 -0500
-Received: from mail-lj1-x22a.google.com ([2a00:1450:4864:20::22a])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <nturtayeva@ucsb.edu>)
- id 1rfY1B-0001Tq-N7
- for qemu-riscv@nongnu.org; Wed, 28 Feb 2024 23:27:39 -0500
-Received: by mail-lj1-x22a.google.com with SMTP id
- 38308e7fff4ca-2d28051376eso5757011fa.0
- for <qemu-riscv@nongnu.org>; Wed, 28 Feb 2024 20:27:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ucsb.edu; s=google; t=1709180854; x=1709785654; darn=nongnu.org;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=DJED82AGPpq31NouZvhbNCwp58Nct+FGorae3DF4pDs=;
- b=FkpYhuGGOiJ1SObiIHesEyas4jKyQEi66JKR+b4TRSjqiXJajtWUuTRouRypB5aiOo
- NUfSs6MPyRsUQX10OrmTTCqxBK9LpstQXsfDRDWXcuTHSguYATdG+ONMJHiH4h8nyQf0
- Vqelkm4pOd2Wwkc1i2pBUby+ec+iFAJE7dmUe/FQwd0BrAnpS6QE7xSw+f6a1cDxp8Qw
- K0e+cOJDyyCP7PaqOCNH4qQZAf185OygMazwm0rILFVshnGQnzVhPsAmmbrBUFb9nSPN
- P15ILjhubi/S0Da+hRCiReLCXKIS/xj08hZF77gapnhohoywcDSJjG2jfLia0SSP2kvP
- XIvA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709180854; x=1709785654;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=DJED82AGPpq31NouZvhbNCwp58Nct+FGorae3DF4pDs=;
- b=fya4eLPpMUc0p/cTGYB4tSyjEbLcb2cP/d6R6kLD7u7iTtbHT2LMR7wqFB1MD9Cd72
- VbkfrmCIb7P6WGVoFagv24Ko83e55WFCx6OiKhTJLpg0BWj5puQXnXukM9xi+hvpY99v
- k2aWjoaT8qkwAocwTbyZ+MEmdoM6R61TtipVgRivwxrmCgg15VE8NuGE++ZEdKjniJEh
- jRRePEPfINOgkulJ97IfDw8z72wsj9MwJXa04ThgEzK8Dzhl6aY9RhpenayuN6uRCKVT
- F5ruO0oIYWs0DIZZ2UwhC0W1eGvXsS5sSnn+3Re9VhL7mCTkflQkH9+97cUMiHhlFDJF
- qP2g==
-X-Gm-Message-State: AOJu0Yy8q7hJ9jlUIVPb6rl6vq4fDGOud073VJ3iB78oDA8f3fWNfbkt
- uo+Eh1NrZ1Dp1YhLKo0N2k1Z1B/LHmbQ2D/E0UGcyno/3ERgS9O+GB/IAzy3oGnK1qE4Ryf37f+
- b00bu5gxXCqVxM7b79YjPG1qsUPKdkQATYP8PfGacQBliO+GZ
-X-Google-Smtp-Source: AGHT+IGu8ZzXXDaOuwGcRpiL5tSf7cnOrIGsarERKgLknFbM8cNoWI13qv4JfXdE6Z+3n8CMFdUM6USW2hXvMmizbdQ=
-X-Received: by 2002:a2e:97d5:0:b0:2d3:7bd:da4e with SMTP id
- m21-20020a2e97d5000000b002d307bdda4emr76603ljj.33.1709180854403; Wed, 28 Feb
- 2024 20:27:34 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
+ id 1rfY6o-0003eC-0d; Wed, 28 Feb 2024 23:33:26 -0500
+Received: from mgamail.intel.com ([192.198.163.9])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
+ id 1rfY6l-0003AF-O9; Wed, 28 Feb 2024 23:33:25 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1709181204; x=1740717204;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=K4P+3be7WkAmiqJGY461bGaJxoGNESikO7CzVS0rHDM=;
+ b=gw9XArsMDCztrRoM0I0+bI6hbja+Bf1vlONqpGDY7kuUWcxK9C/YhYgF
+ vq70eIqwHapdCibEhFdFu5iNgCDcYTzkCaLipTWM/JeGjkR8nbSVK5VYV
+ kavlx5rRvU4AB4pc3S2vuyJNbAwE3Mulc+WTBEtpu2sa2RBg5uZ+hE1yl
+ 4OzDzNEHqvMzp0Q9ggmISVdYhUXI2s9H/qtRZbFwDO6Ggq8ua3Fxi5zls
+ hqC1XXGuyRVzHEHYoXrfZ+2sQbw+DgYGv67DqaeKtqvr7LBXfVh6NxxsS
+ YTCEsLvOZZY+W9ub25OEYqiciL5TLGScuovyJTD05JoWgjbyNfdqiMG2a Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10998"; a="14338802"
+X-IronPort-AV: E=Sophos;i="6.06,192,1705392000"; d="scan'208";a="14338802"
+Received: from orviesa002.jf.intel.com ([10.64.159.142])
+ by fmvoesa103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 28 Feb 2024 20:33:18 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.06,192,1705392000"; d="scan'208";a="38526829"
+Received: from liuzhao-optiplex-7080.sh.intel.com (HELO localhost)
+ ([10.239.160.36])
+ by orviesa002.jf.intel.com with ESMTP; 28 Feb 2024 20:33:12 -0800
+Date: Thu, 29 Feb 2024 12:46:55 +0800
+From: Zhao Liu <zhao1.liu@linux.intel.com>
+To: JeeHeng Sia <jeeheng.sia@starfivetech.com>
+Cc: Daniel P =?utf-8?B?LiBCZXJyYW5n77+9?= <berrange@redhat.com>,
+ Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Philippe =?utf-8?B?TWF0aGlldS1EYXVk77+9?= <philmd@linaro.org>,
+ Yanan Wang <wangyanan55@huawei.com>,
+ "Michael S . Tsirkin" <mst@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Eric Blake <eblake@redhat.com>, Markus Armbruster <armbru@redhat.com>,
+ Marcelo Tosatti <mtosatti@redhat.com>,
+ Alex =?utf-8?B?QmVubu+/vWU=?= <alex.bennee@linaro.org>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
+ "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
+ "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
+ "qemu-arm@nongnu.org" <qemu-arm@nongnu.org>,
+ Zhenyu Wang <zhenyu.z.wang@intel.com>,
+ Dapeng Mi <dapeng1.mi@linux.intel.com>,
+ Yongwei Ma <yongwei.ma@intel.com>, Zhao Liu <zhao1.liu@intel.com>
+Subject: Re: [RFC 2/8] hw/core: Move CPU topology enumeration into
+ arch-agnostic file
+Message-ID: <ZeAMP7OCwWPMhpeD@intel.com>
+References: <20240220092504.726064-1-zhao1.liu@linux.intel.com>
+ <20240220092504.726064-3-zhao1.liu@linux.intel.com>
+ <BJSPR01MB05614B900DA2E93AE9F8E0BE9C58A@BJSPR01MB0561.CHNPR01.prod.partner.outlook.cn>
 MIME-Version: 1.0
-From: Nazerke Turtayeva <nturtayeva@ucsb.edu>
-Date: Wed, 28 Feb 2024 20:27:23 -0800
-Message-ID: <CAHY78Bq6AdcZPuFRbdShDPvgmgcoB+PKLWqPuOoX3vdJ-NsZ+A@mail.gmail.com>
-Subject: What riscv tracing tools do you recommend and how are they accurate
- for measurements?
-To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Content-Type: multipart/alternative; boundary="000000000000af561406127dad7d"
-Received-SPF: pass client-ip=2a00:1450:4864:20::22a;
- envelope-from=nturtayeva@ucsb.edu; helo=mail-lj1-x22a.google.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <BJSPR01MB05614B900DA2E93AE9F8E0BE9C58A@BJSPR01MB0561.CHNPR01.prod.partner.outlook.cn>
+Received-SPF: none client-ip=192.198.163.9;
+ envelope-from=zhao1.liu@linux.intel.com; helo=mgamail.intel.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.102,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -84,74 +96,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---000000000000af561406127dad7d
-Content-Type: text/plain; charset="UTF-8"
+Hi JeeHeng,
 
-Hi everyone,
+> > +const char *cpu_topo_to_string(CPUTopoLevel topo)
+> > +{
+> > +    return cpu_topo_descriptors[topo].name;
+> > +}
+> > +
+> > +CPUTopoLevel string_to_cpu_topo(char *str)
+>
+> Can use const char *str.
 
-Recently, I was planning to measure the performance of my application of
-interest for potential RISC-V hardware. Hence, I started my simulations
-from Spike to analyze dynamic instruction traces and instruction count,
-nevertheless given it does not support multithreading, I started using Qemu
-to test my app too. However, it seems like I cannot rely on timing results
-of Qemu for comparing different implementations. Accordingly, given I am
-brand new to the Qemu ecosystem, I was wondering whether I am missing some
-important mainstream instrumentation and tracing tools that I can use for
-performance evaluation of my target app in other ways. Particularly, I want
-to understand implications of adding custom ISA instructions to the
-performance of my application.
+Okay, I'll.
 
-In this regard, do you have any recommendations on where I can look?
+> > +{
+> > +    for (int i = 0; i < ARRAY_SIZE(cpu_topo_descriptors); i++) {
+> > +        CPUTopoInfo *info = &cpu_topo_descriptors[i];
+> > +
+> > +        if (!strcmp(info->name, str)) {
+>
+> Suggest to use strncmp instead.
+
+Thanks! I tries "l1i-cache=coree", and it causes Segmentation fault.
+Will fix.
+
+> > +            return (CPUTopoLevel)i;
+> > +        }
+> > +    }
+> > +    return CPU_TOPO_LEVEL_MAX;
+> > +}
+
+> > @@ -304,7 +304,7 @@ static uint32_t num_threads_by_topo_level(X86CPUTopoInfo *topo_info,
+> >                                            enum CPUTopoLevel topo_level)
+> >  {
+> >      switch (topo_level) {
+> > -    case CPU_TOPO_LEVEL_SMT:
+> > +    case CPU_TOPO_LEVEL_THREAD:
+> >          return 1;
+> Just wondering why 'return 1' is used directly for the thread, but not
+> for the rest?
+
+This helper returens how many threads in one topology domain/container
+at this level.
+
+For thread level, it calculates how many threads are in one thread
+domain, so it returns 1 directly.
 
 Thanks,
-Best wishes
+Zhao
 
--- 
-Nazerke Turtayeva
-Graduate Student
-Electrical and Computer Engineering, Computer Science
-Email: nturtayeva@ucsb.edu
-*UC Santa Barbara*
-
---000000000000af561406127dad7d
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hi everyone,=C2=A0<div><br></div><div>Recently, I was plan=
-ning to measure the performance of my application of interest for potential=
- RISC-V hardware. Hence, I started my simulations from Spike to analyze dyn=
-amic instruction traces and instruction count, nevertheless given it does n=
-ot support=C2=A0multithreading, I started using Qemu to test my app too. Ho=
-wever, it seems like I cannot rely on timing results of Qemu for comparing =
-different implementations. Accordingly, given I am brand new to=C2=A0the Qe=
-mu ecosystem, I was wondering whether I am missing some important mainstrea=
-m instrumentation and tracing tools that I can use for performance evaluati=
-on of my target app in=C2=A0other ways. Particularly, I want to understand=
-=C2=A0implications of adding custom ISA instructions to the performance of =
-my=C2=A0application.=C2=A0</div><div><br></div><div>In this regard, do you =
-have any recommendations on where I can look?</div><div><br></div><div>Than=
-ks,</div><div>Best wishes<br clear=3D"all"><div><br></div><span class=3D"gm=
-ail_signature_prefix">-- </span><br><div dir=3D"ltr" class=3D"gmail_signatu=
-re" data-smartmail=3D"gmail_signature"><div dir=3D"ltr"><table width=3D"300=
-" cellspacing=3D"0" cellpadding=3D"0" border=3D"0" style=3D"color:rgb(34,34=
-,34)"><tbody><tr><td style=3D"vertical-align:top"><span style=3D"font-size:=
-16px;font-family:&quot;Century Gothic&quot;,Helvetica,sans-serif;color:rgb(=
-0,54,96)">Nazerke Turtayeva<br></span></td></tr><tr><td style=3D"vertical-a=
-lign:top"></td></tr><tr><td style=3D"vertical-align:top;padding-top:4px;pad=
-ding-bottom:4px"><span style=3D"font-size:14px;font-family:&quot;Century Go=
-thic&quot;,Helvetica,sans-serif;color:rgb(4,133,155);font-weight:600">Gradu=
-ate Student</span></td></tr><tr><td style=3D"vertical-align:top"><span styl=
-e=3D"font-size:13px;font-family:&quot;Century Gothic&quot;,Helvetica,sans-s=
-erif;color:rgb(85,85,85);letter-spacing:0.65px">Electrical and Computer Eng=
-ineering, Computer Science</span></td></tr><tr><td style=3D"vertical-align:=
-top"><span style=3D"font-size:13px;font-family:&quot;Century Gothic&quot;,H=
-elvetica,sans-serif;color:rgb(85,85,85);letter-spacing:0.65px">Email:=C2=A0=
-<a href=3D"mailto:nturtayeva@ucsb.edu" style=3D"color:rgb(17,85,204)" targe=
-t=3D"_blank">nturtayeva@ucsb.edu</a></span></td></tr><tr><td style=3D"verti=
-cal-align:top;padding-top:6px"></td></tr></tbody></table><b style=3D"color:=
-rgb(34,34,34)"><span style=3D"font-size:16px;font-family:&quot;Century Goth=
-ic&quot;,Helvetica,sans-serif;color:rgb(0,54,96)">UC Santa Barbara</span></=
-b><br style=3D"color:rgb(34,34,34)"></div></div></div></div>
-
---000000000000af561406127dad7d--
 
