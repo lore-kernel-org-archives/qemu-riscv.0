@@ -4,80 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD16BC5478C
-	for <qemu-riscv@archiver.kernel.org>; Fri,  1 Mar 2024 14:41:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0304CC5478C
+	for <qemu-riscv@archiver.kernel.org>; Fri,  1 Mar 2024 15:51:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rg44a-00015q-Bm; Fri, 01 Mar 2024 09:41:16 -0500
+	id 1rg5AJ-0000bN-HG; Fri, 01 Mar 2024 10:51:15 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rg44Y-00012S-2R
- for qemu-riscv@nongnu.org; Fri, 01 Mar 2024 09:41:14 -0500
-Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rg5AG-0000aa-P0
+ for qemu-riscv@nongnu.org; Fri, 01 Mar 2024 10:51:12 -0500
+Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rg44L-00016w-QK
- for qemu-riscv@nongnu.org; Fri, 01 Mar 2024 09:41:13 -0500
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-6e56da425b5so1676111b3a.0
- for <qemu-riscv@nongnu.org>; Fri, 01 Mar 2024 06:41:00 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rg5AF-0006G5-5e
+ for qemu-riscv@nongnu.org; Fri, 01 Mar 2024 10:51:12 -0500
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-412cad778afso3282885e9.0
+ for <qemu-riscv@nongnu.org>; Fri, 01 Mar 2024 07:51:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1709304059; x=1709908859; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=gTgnCNejzdvoMz7ZgecInGgvDORxSraKGF/5Sf4sJH4=;
- b=cYhIrFldmMSSZwyJ1cK3KqeLLwi7xY6fetIL1xtCadLlwg9SD8sB7CTyPDI09qzwHr
- 3jZry7NWMdvP5extbrjU9Xcu3E2TE2D6BDpi84rJmzi0GFAqqByOsY5THuujk0pt6gBX
- yn+N9xCA6HHRgl6+s/8vc+9FGJ7vNuKD5hxZNXqkEVXkziOrRQaWhRpJJb4gRl/+8lEV
- H5xic0FOrLZGGVrjmy8lEVZ5yrqCLTfc3aQskC3kgRg99BJHXvX5va3PilYnq5f44GBj
- Zf5XEU2FkunCLlDUEnwr5yiiTrqZ65km8louyqu/SKjmpYYngq3gyfxJSdWTXjSwnIj6
- 4yHA==
+ d=linaro.org; s=google; t=1709308269; x=1709913069; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:cc:references:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=oDa42n1Ei544pT0WBQ9oXhFQ/0gh0b6vmnfaufFTyEQ=;
+ b=Iov5Yt4YkIUTLy9P3i3SPCHOcz5BVFJ4smKOdd6Mo1t5y+0w0lJ48nrzGSOnUd+U3G
+ TZK3S1+/AYShI1DZ9Gwjit/0eOODeBKh7mGkmikYhrSgXaFSaOphoWwQp/H/hEHB8tir
+ QZYEnvFAT+FxYlck9nzFLIL64CJZUUPX72NBVkQLwrhZpNNQMB9WeLganSjXF7ppBuV7
+ mPPUJdOSjgMVSVzPfcpJjaiQxoXKjPQMlPY/tAhOEtsHeZLuqwdevc7pTtXqZYvVXFK+
+ 1YPDDyaZXYW8KVVGIc6vvbETnK9T8n4SsVSmLRz5AD2Wv10SYyd0TRGgC06Jpildo6xV
+ xlgg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709304059; x=1709908859;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=gTgnCNejzdvoMz7ZgecInGgvDORxSraKGF/5Sf4sJH4=;
- b=XnLwBXnoJkzZAiL9Nyfoe06+wky4mA1e527uUc/drCS6fcsf4ybazKU8CcxdHnkau/
- JiBSHc68OMI0+dJi6292RrRcLC+yoTVvVPpbb6CnNVS5QLSNxmw3RBSmKueqa8dhMN8Z
- WVtRWZDEAwk5wnHi1Rkq10lfP2sVBZ0Xz2yxKOyeH1ccXg8xcfQ4OosC+sP+ihL7UV85
- 78Yb12j5fd6UZuo4KfHo4/9sUOBJbtpkh0zao2DKFVbAmOPNz82DW/B9eUzFbPhvJtQa
- KOgOaqchx7YF/1yQb+gB2b33/l20/1gtW5t7YMpL0naV2rGQ1wRNP7k7tv1EF0xdQxaF
- CWQQ==
-X-Gm-Message-State: AOJu0YzUiwLadiiWKxudvxSrVpgDsnqFBBvLFYbvilJmr5Ne+Qelr5mv
- lob0GGHZxRw9Gsp25iyWS6QL2lA3EkE8w45fRiSBncUGw8lMdxoAXNio22iIOV2REqKEq6vvWW0
- B
-X-Google-Smtp-Source: AGHT+IEhcnCzU/nQ5V+wxVnlu+5j3NhvrdnJTUsmf5EkyHmbDQCxotXo0olrKCcPPRZVpL4lA7GrMw==
-X-Received: by 2002:a17:90a:c3:b0:29a:ae40:9e10 with SMTP id
- v3-20020a17090a00c300b0029aae409e10mr1761117pjd.17.1709304059626; 
- Fri, 01 Mar 2024 06:40:59 -0800 (PST)
-Received: from grind.. ([177.94.15.159]) by smtp.gmail.com with ESMTPSA id
- sj5-20020a17090b2d8500b0029ad78306d8sm5565077pjb.3.2024.03.01.06.40.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 01 Mar 2024 06:40:59 -0800 (PST)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- ajones@ventanamicro.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH] target/riscv: move ratified/frozen exts to non-experimental
-Date: Fri,  1 Mar 2024 11:40:53 -0300
-Message-ID: <20240301144053.265964-1-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.43.2
+ d=1e100.net; s=20230601; t=1709308269; x=1709913069;
+ h=content-transfer-encoding:in-reply-to:from:cc:references:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=oDa42n1Ei544pT0WBQ9oXhFQ/0gh0b6vmnfaufFTyEQ=;
+ b=Ng2bxbIy9sXDr/oPHnFGs/cf0N3McS5CxdN0NP79mjqir2G+j8S+7ngddqlQoxWpzP
+ Q+ZHljfzdFFIMZeLPC/gVNA70CLCBUCr9pmKeDDVtysBY/hGblriSg8OwldHCmUyr7fS
+ HtcooB+S782UEgNuOZ/wSii7cvi5n6wCXKjUEQCtWs5DtNm0WKwdJh0pkZf7Xju3WgHW
+ sbKP5kRYqkDz7o6NY0/5tK34ku9L7sLgSCeoXC3XxLi4C4zw2qmRlRry740ev6naWX/V
+ 06DzX7WfjNspkoio03t4htxUDFYj+HLIZIi69i0Yd36aQ/4dtXanTzkL4zHLYFpUyZfl
+ 1TyQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWDvRWnCa6YF4SeodgzTfNDW2UTWips5SCmmZQct0s+N4tVRykr9BvWjX4gCdX1kCRqL1E2+73Yr4s0LjTXSvFyChaNAFg=
+X-Gm-Message-State: AOJu0YxPKWVj5M88A0Z3HEscIBl7nd/0JtW8ZLF2/BNnj3RaoBwqn+QC
+ H6IxE4iQsYwuTMHKWk3zmTXlIvrAAtkQOiWVxvd0UmB9r8ag0cpNqlkjXC4pPAQ=
+X-Google-Smtp-Source: AGHT+IGujuxe+gtr9lPXWCvwbYjTszypujrzlApGruG8+p6211u7l3zcARs0gf1EwTFKRW5WA0SDrg==
+X-Received: by 2002:a05:600c:35d5:b0:412:b41a:53a2 with SMTP id
+ r21-20020a05600c35d500b00412b41a53a2mr1855736wmq.2.1709308267394; 
+ Fri, 01 Mar 2024 07:51:07 -0800 (PST)
+Received: from [192.168.193.175] (232.red-88-28-18.dynamicip.rima-tde.net.
+ [88.28.18.232]) by smtp.gmail.com with ESMTPSA id
+ bg14-20020a05600c3c8e00b004122b7a680dsm5956241wmb.21.2024.03.01.07.51.05
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 01 Mar 2024 07:51:06 -0800 (PST)
+Message-ID: <4ed4b35a-659b-42d2-a0d9-9e7340b732f6@linaro.org>
+Date: Fri, 1 Mar 2024 16:51:03 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x432.google.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] Fix unexpected Illegal instruction error on RISC-V.
+Content-Language: en-US
+To: SiHuaN <liyongtai@iscas.ac.cn>, qemu-devel@nongnu.org
+References: <20240301145545.333810-2-liyongtai@iscas.ac.cn>
+Cc: "demin.han" <demin.han@starfivetech.com>,
+ qemu-riscv <qemu-riscv@nongnu.org>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20240301145545.333810-2-liyongtai@iscas.ac.cn>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -93,78 +97,35 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-smaia and ssaia were ratified in August 25th 2023 [1].
+Hi SiHuaN,
 
-zvfh and zvfhmin were ratified in August 2nd 2023 [2].
+On 1/3/24 15:55, SiHuaN wrote:
+> Avoid right-shifting by a negative number of bits when lmul is 8.
 
-zfbfmin and zvfbf(min|wma) are frozen and moved to public review since
-Dec 16th 2023 [3].
+FYI Demin posted a similar patch, see:
+https://lore.kernel.org/qemu-devel/20240225174114.5298-1-demin.han@starfivetech.com/
 
-zaamo and zalrsc are both marked as "Frozen" since January 24th 2024
-[4].
-
-[1] https://jira.riscv.org/browse/RVS-438
-[2] https://jira.riscv.org/browse/RVS-871
-[3] https://jira.riscv.org/browse/RVS-704
-[4] https://jira.riscv.org/browse/RVS-1995
-
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- target/riscv/cpu.c | 22 +++++++++-------------
- 1 file changed, 9 insertions(+), 13 deletions(-)
-
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index fd0c7efdda..f5d30510ef 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1463,17 +1463,26 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
-     MULTI_EXT_CFG_BOOL("zihintntl", ext_zihintntl, true),
-     MULTI_EXT_CFG_BOOL("zihintpause", ext_zihintpause, true),
-     MULTI_EXT_CFG_BOOL("zacas", ext_zacas, false),
-+    MULTI_EXT_CFG_BOOL("zaamo", ext_zaamo, false),
-+    MULTI_EXT_CFG_BOOL("zalrsc", ext_zalrsc, false),
-     MULTI_EXT_CFG_BOOL("zawrs", ext_zawrs, true),
-     MULTI_EXT_CFG_BOOL("zfa", ext_zfa, true),
-+    MULTI_EXT_CFG_BOOL("zfbfmin", ext_zfbfmin, false),
-     MULTI_EXT_CFG_BOOL("zfh", ext_zfh, false),
-     MULTI_EXT_CFG_BOOL("zfhmin", ext_zfhmin, false),
-     MULTI_EXT_CFG_BOOL("zve32f", ext_zve32f, false),
-     MULTI_EXT_CFG_BOOL("zve64f", ext_zve64f, false),
-     MULTI_EXT_CFG_BOOL("zve64d", ext_zve64d, false),
-+    MULTI_EXT_CFG_BOOL("zvfbfmin", ext_zvfbfmin, false),
-+    MULTI_EXT_CFG_BOOL("zvfbfwma", ext_zvfbfwma, false),
-+    MULTI_EXT_CFG_BOOL("zvfh", ext_zvfh, false),
-+    MULTI_EXT_CFG_BOOL("zvfhmin", ext_zvfhmin, false),
-     MULTI_EXT_CFG_BOOL("sstc", ext_sstc, true),
- 
-+    MULTI_EXT_CFG_BOOL("smaia", ext_smaia, false),
-     MULTI_EXT_CFG_BOOL("smepmp", ext_smepmp, false),
-     MULTI_EXT_CFG_BOOL("smstateen", ext_smstateen, false),
-+    MULTI_EXT_CFG_BOOL("ssaia", ext_ssaia, false),
-     MULTI_EXT_CFG_BOOL("svade", ext_svade, false),
-     MULTI_EXT_CFG_BOOL("svadu", ext_svadu, true),
-     MULTI_EXT_CFG_BOOL("svinval", ext_svinval, false),
-@@ -1561,19 +1570,6 @@ const RISCVCPUMultiExtConfig riscv_cpu_vendor_exts[] = {
- 
- /* These are experimental so mark with 'x-' */
- const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[] = {
--    MULTI_EXT_CFG_BOOL("x-smaia", ext_smaia, false),
--    MULTI_EXT_CFG_BOOL("x-ssaia", ext_ssaia, false),
--
--    MULTI_EXT_CFG_BOOL("x-zaamo", ext_zaamo, false),
--    MULTI_EXT_CFG_BOOL("x-zalrsc", ext_zalrsc, false),
--
--    MULTI_EXT_CFG_BOOL("x-zvfh", ext_zvfh, false),
--    MULTI_EXT_CFG_BOOL("x-zvfhmin", ext_zvfhmin, false),
--
--    MULTI_EXT_CFG_BOOL("x-zfbfmin", ext_zfbfmin, false),
--    MULTI_EXT_CFG_BOOL("x-zvfbfmin", ext_zvfbfmin, false),
--    MULTI_EXT_CFG_BOOL("x-zvfbfwma", ext_zvfbfwma, false),
--
-     DEFINE_PROP_END_OF_LIST(),
- };
- 
--- 
-2.43.2
+> Signed-off-by: SiHuaN <liyongtai@iscas.ac.cn>
+> ---
+>   target/riscv/vector_helper.c | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+> index 84cec73eb2..f0158ea237 100644
+> --- a/target/riscv/vector_helper.c
+> +++ b/target/riscv/vector_helper.c
+> @@ -53,10 +53,11 @@ target_ulong HELPER(vsetvl)(CPURISCVState *env, target_ulong s1,
+>            * VLEN * LMUL >= SEW
+>            * VLEN >> (8 - lmul) >= sew
+>            * (vlenb << 3) >> (8 - lmul) >= sew
+> +         * Considering that lmul may be 8, the following form cannot be used.
+>            * vlenb >> (8 - 3 - lmul) >= sew
+>            */
+>           if (vlmul == 4 ||
+> -            cpu->cfg.vlenb >> (8 - 3 - vlmul) < sew) {
+> +            (cpu->cfg.vlenb << 3) >> (8 - vlmul) < sew) {
+>               vill = true;
+>           }
+>       }
 
 
