@@ -4,83 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CA18C48BF6
-	for <qemu-riscv@archiver.kernel.org>; Mon,  4 Mar 2024 13:48:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B12E5C5478C
+	for <qemu-riscv@archiver.kernel.org>; Mon,  4 Mar 2024 13:53:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rh8fa-0003Cs-Bb; Mon, 04 Mar 2024 08:47:54 -0500
+	id 1rh8l7-0000yi-0X; Mon, 04 Mar 2024 08:53:37 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rh8fX-0003Bm-Qy
- for qemu-riscv@nongnu.org; Mon, 04 Mar 2024 08:47:51 -0500
-Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rh8fU-0001ZL-UY
- for qemu-riscv@nongnu.org; Mon, 04 Mar 2024 08:47:51 -0500
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-6e56787e691so3701494b3a.0
- for <qemu-riscv@nongnu.org>; Mon, 04 Mar 2024 05:47:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1709560067; x=1710164867; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=BHYc9D9CqEdlOc1mocVOUDC5Cbsy1iwrgcMBaLL0cac=;
- b=awnGAFPpfeWq/0tuSoECmGSpH1PF7ezjePJ5BdeQuzhSIn7i23y2qstVevu+AFRXe9
- C+8R20FaHW92uFB99qxoyHCBTdtXglZEXp3Sh0Rqm81GSMyQu946DY3RD312OFBkiXYZ
- uHwfbep/XwLUEE0aLjDAdCmlrq+UEWCrsjvgoDZSZTQ9FLZtBBoteClboFPJNDu695ET
- aXz4LXson8NfhYKgoDT1T27tjG2gX1vrC2iYIk1chNBesYPXGQ0dGI4Eg0TlJAdrAwOG
- Gqzq/PuPZENaPhQ+jC6dzFTSOliITV48VzAgWyGGuXaGDKRC+kAjZu68bsO9Ua8lKsrW
- g1fQ==
+ (Exim 4.90_1) (envelope-from <anisinha@redhat.com>)
+ id 1rh8l5-0000y5-Jq
+ for qemu-riscv@nongnu.org; Mon, 04 Mar 2024 08:53:35 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <anisinha@redhat.com>)
+ id 1rh8l2-0002Pb-8m
+ for qemu-riscv@nongnu.org; Mon, 04 Mar 2024 08:53:35 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1709560411;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=bQnWXMNXMk6uodDKVMzjDqeuUEGjmGGnbC9h9WakF+0=;
+ b=bilRxLbnSx7xPvxks088g2JXa+3nB+4f0dzWBM5D8h5/7SbDoLfOSuWtqKcq7MEaBUGmV+
+ AvaG3g10lZBUcxdL3SQw46XBq0lF2UUOs5AA2Ov47tVtMVHUHcdbDsweblo8Rd7lap1Dai
+ hKkE0InBzKqkGIPAT6eBIaZ8X6HapTQ=
+Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
+ [209.85.214.197]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-423-0Dy_D7uGPkymaZguzDY9FA-1; Mon, 04 Mar 2024 08:53:29 -0500
+X-MC-Unique: 0Dy_D7uGPkymaZguzDY9FA-1
+Received: by mail-pl1-f197.google.com with SMTP id
+ d9443c01a7336-1dbf8efabdeso37824565ad.3
+ for <qemu-riscv@nongnu.org>; Mon, 04 Mar 2024 05:53:29 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709560067; x=1710164867;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1709560409; x=1710165209;
+ h=to:references:message-id:content-transfer-encoding:cc:date
+ :in-reply-to:from:subject:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BHYc9D9CqEdlOc1mocVOUDC5Cbsy1iwrgcMBaLL0cac=;
- b=ruuPWL6R/Gp+VAspgoI6UM3Gktp7hXfGxkSSIxzj66EOhoTwQEpOV4nvoM9xeKjsUb
- MwvuqBfw/qbNwq5ut+AKM7BhYtptavM+XgDvXi6S6SdUoRA1Wo1/nuOjDQvDg1aesdId
- uwLPR3xs6x4k1/ludN14a4MX5Sspn1uhI40lGphwaCkq+l2AjbtMvWlhyyy+hhYrkadm
- xMHPQvJemNFokKYte5pZhm1wUH0+IVqNxVcfPeC5l3DXJe2FZQU7C/FKp/rlnPdm8xDy
- x1kempULsF9Nh07M0G6cC/gibBnCCEoiKRXdp6nURtdr8s+ne1CHEWamlI/24k9SfD9F
- r0ag==
-X-Gm-Message-State: AOJu0YzryrV0uLnFwGhep0k3bE1T8TQdrcgsU+qYZ2xrm2o5tAiuhZxc
- weyBv/sAqNCWGLQ/QQdNrW0RBmVSk4zJQzZ/s8mgQrN3qhHmcdRMgJMFBQoM5vI=
-X-Google-Smtp-Source: AGHT+IEv9lUlPZxqUiM5pDJSJ2em7B5p5dbyeSe7n64CwhGlDBsdTit1d/YQC26i9pzvSnkwwMzhTg==
-X-Received: by 2002:a05:6a20:2d0e:b0:1a0:f7d0:e680 with SMTP id
- g14-20020a056a202d0e00b001a0f7d0e680mr15543044pzl.5.1709560067556; 
- Mon, 04 Mar 2024 05:47:47 -0800 (PST)
-Received: from grind.. ([177.94.15.159]) by smtp.gmail.com with ESMTPSA id
- 23-20020a630d57000000b005dc87f5dfcfsm7285335pgn.78.2024.03.04.05.47.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Mar 2024 05:47:47 -0800 (PST)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- ajones@ventanamicro.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH 2/2] target/riscv/kvm: update KVM exts to Linux 6.8
-Date: Mon,  4 Mar 2024 10:47:32 -0300
-Message-ID: <20240304134732.386590-3-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.43.2
-In-Reply-To: <20240304134732.386590-1-dbarboza@ventanamicro.com>
-References: <20240304134732.386590-1-dbarboza@ventanamicro.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x432.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01,
- UPPERCASE_50_75=0.008 autolearn=no autolearn_force=no
+ bh=gpE1arBJ/23Mk6o6KiFCZPrL6TLdBWqWZlXccfKzExw=;
+ b=dBWRqjU4t4Nc1aSHjfCnk/SwwTt/QzivKjwS5Y5Z9Ecx95CwrFzrZFk6yY2Tf26vox
+ 8YBexWjVHWL+fKWZqMHtUcHnxqkfDvMYnweu+QzFJnp1FRUV92njELusPSOwULdeyFrj
+ gzVV3DiNagyJIIlyEm6e8izJP0Ft1qq5gLqa9r8ZE3MWpfu4VGbXPkcYdqCi1XlksefR
+ y6WqQaNAbq8aUdW/qjHwCHkzvXE4ZeXqfTN4TtjkK1ImkLCSf2xZW7vkGjiZChtg5KVd
+ YQbhuOv0+2PRbPwYfK4Kz3vMihBplx/yKdFPgE/81Xq3vP+NaFiS/lO23beBfl895K2g
+ lgFw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUXACV2lGbRO4etxRKR7LieBnHoaEqMT5g9kbgyseGIVRpX88ydbUCmiGjDf1etkK3KB1M8djJEBRQrag8Q91sIDBRtUvc=
+X-Gm-Message-State: AOJu0YwbYK88Ew1DIm6gk5A9UCuBIEx8s0cR9sa7PGrYNPBA+drbjbQ5
+ yQ9QxL/d5+4WDo2tvTO1O99s0+wgqAD4mNrWIJ2cfXhUSJBgoipbxllyZPzT85pstgVruwtR3DV
+ tzhHlnDXGqC3Ufu9mLX9Ko2Q3aHVQuom6BoOFVDKIgtOTlsUrc9SM
+X-Received: by 2002:a17:902:c155:b0:1dc:6373:3cc with SMTP id
+ 21-20020a170902c15500b001dc637303ccmr7498619plj.50.1709560408848; 
+ Mon, 04 Mar 2024 05:53:28 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEaeFHjanp9y3i4nXfc9g70GBbD1ImtIdra5jkNubu/hYTkX59SA9Z7Wpo8aabddLYgGRqvNQ==
+X-Received: by 2002:a17:902:c155:b0:1dc:6373:3cc with SMTP id
+ 21-20020a170902c15500b001dc637303ccmr7498590plj.50.1709560408415; 
+ Mon, 04 Mar 2024 05:53:28 -0800 (PST)
+Received: from smtpclient.apple ([115.96.159.226])
+ by smtp.gmail.com with ESMTPSA id
+ mn14-20020a1709030a4e00b001dcada71593sm8544922plb.273.2024.03.04.05.53.22
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Mon, 04 Mar 2024 05:53:27 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3774.400.31\))
+Subject: Re: [PATCH 10/19] smbios: handle errors consistently
+From: Ani Sinha <anisinha@redhat.com>
+In-Reply-To: <20240304143902.3685050e@imammedo.users.ipa.redhat.com>
+Date: Mon, 4 Mar 2024 19:23:10 +0530
+Cc: QEMU Developers <qemu-devel@nongnu.org>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Song Gao <gaosong@loongson.cn>,
+ Alistair Francis <alistair.francis@wdc.com>, palmer@dabbelt.com,
+ bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com,
+ =?utf-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Yanan Wang <wangyanan55@huawei.com>, Eric Blake <eblake@redhat.com>,
+ Markus Armbruster <armbru@redhat.com>, qemu-arm@nongnu.org,
+ qemu-riscv@nongnu.org, f.ebner@proxmox.com
+Message-Id: <2C51E4B1-3B7B-443E-8A84-0C98E889161F@redhat.com>
+References: <20240227154749.1818189-1-imammedo@redhat.com>
+ <20240227154749.1818189-11-imammedo@redhat.com>
+ <00c2eb0d-1667-5922-ac4b-8b11c099deef@redhat.com>
+ <20240304143902.3685050e@imammedo.users.ipa.redhat.com>
+To: Igor Mammedov <imammedo@redhat.com>
+X-Mailer: Apple Mail (2.3774.400.31)
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain;
+	charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=anisinha@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -11
+X-Spam_score: -1.2
+X-Spam_bar: -
+X-Spam_report: (-1.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.571,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_SORBS_WEB=1.5, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,61 +119,247 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The last KVM extensions added were back in 6.6. Sync them to Linux 6.8.
 
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- target/riscv/kvm/kvm-cpu.c | 29 +++++++++++++++++++++++++++++
- 1 file changed, 29 insertions(+)
 
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index 422e4f121c..c7afdb1e81 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -275,13 +275,42 @@ static KVMCPUConfig kvm_multi_ext_cfgs[] = {
-     KVM_EXT_CFG("zicbom", ext_zicbom, KVM_RISCV_ISA_EXT_ZICBOM),
-     KVM_EXT_CFG("zicboz", ext_zicboz, KVM_RISCV_ISA_EXT_ZICBOZ),
-     KVM_EXT_CFG("zicntr", ext_zicntr, KVM_RISCV_ISA_EXT_ZICNTR),
-+    KVM_EXT_CFG("zicond", ext_zicond, KVM_RISCV_ISA_EXT_ZICOND),
-     KVM_EXT_CFG("zicsr", ext_zicsr, KVM_RISCV_ISA_EXT_ZICSR),
-     KVM_EXT_CFG("zifencei", ext_zifencei, KVM_RISCV_ISA_EXT_ZIFENCEI),
-+    KVM_EXT_CFG("zihintntl", ext_zihintntl, KVM_RISCV_ISA_EXT_ZIHINTNTL),
-     KVM_EXT_CFG("zihintpause", ext_zihintpause, KVM_RISCV_ISA_EXT_ZIHINTPAUSE),
-     KVM_EXT_CFG("zihpm", ext_zihpm, KVM_RISCV_ISA_EXT_ZIHPM),
-+    KVM_EXT_CFG("zfa", ext_zfa, KVM_RISCV_ISA_EXT_ZFA),
-+    KVM_EXT_CFG("zfh", ext_zfh, KVM_RISCV_ISA_EXT_ZFH),
-+    KVM_EXT_CFG("zfhmin", ext_zfhmin, KVM_RISCV_ISA_EXT_ZFHMIN),
-     KVM_EXT_CFG("zba", ext_zba, KVM_RISCV_ISA_EXT_ZBA),
-     KVM_EXT_CFG("zbb", ext_zbb, KVM_RISCV_ISA_EXT_ZBB),
-+    KVM_EXT_CFG("zbc", ext_zbc, KVM_RISCV_ISA_EXT_ZBC),
-+    KVM_EXT_CFG("zbkb", ext_zbkb, KVM_RISCV_ISA_EXT_ZBKB),
-+    KVM_EXT_CFG("zbkc", ext_zbkc, KVM_RISCV_ISA_EXT_ZBKC),
-+    KVM_EXT_CFG("zbkx", ext_zbkx, KVM_RISCV_ISA_EXT_ZBKX),
-     KVM_EXT_CFG("zbs", ext_zbs, KVM_RISCV_ISA_EXT_ZBS),
-+    KVM_EXT_CFG("zknd", ext_zknd, KVM_RISCV_ISA_EXT_ZKND),
-+    KVM_EXT_CFG("zkne", ext_zkne, KVM_RISCV_ISA_EXT_ZKNE),
-+    KVM_EXT_CFG("zknh", ext_zknh, KVM_RISCV_ISA_EXT_ZKNH),
-+    KVM_EXT_CFG("zkr", ext_zkr, KVM_RISCV_ISA_EXT_ZKR),
-+    KVM_EXT_CFG("zksed", ext_zksed, KVM_RISCV_ISA_EXT_ZKSED),
-+    KVM_EXT_CFG("zksh", ext_zksh, KVM_RISCV_ISA_EXT_ZKSH),
-+    KVM_EXT_CFG("zkt", ext_zkt, KVM_RISCV_ISA_EXT_ZKT),
-+    KVM_EXT_CFG("zvbb", ext_zvbb, KVM_RISCV_ISA_EXT_ZVBB),
-+    KVM_EXT_CFG("zvbc", ext_zvbc, KVM_RISCV_ISA_EXT_ZVBC),
-+    KVM_EXT_CFG("zvfh", ext_zvfh, KVM_RISCV_ISA_EXT_ZVFH),
-+    KVM_EXT_CFG("zvfhmin", ext_zvfhmin, KVM_RISCV_ISA_EXT_ZVFHMIN),
-+    KVM_EXT_CFG("zvkb", ext_zvkb, KVM_RISCV_ISA_EXT_ZVKB),
-+    KVM_EXT_CFG("zvkg", ext_zvkg, KVM_RISCV_ISA_EXT_ZVKG),
-+    KVM_EXT_CFG("zvkned", ext_zvkned, KVM_RISCV_ISA_EXT_ZVKNED),
-+    KVM_EXT_CFG("zvknha", ext_zvknha, KVM_RISCV_ISA_EXT_ZVKNHA),
-+    KVM_EXT_CFG("zvknhb", ext_zvknhb, KVM_RISCV_ISA_EXT_ZVKNHB),
-+    KVM_EXT_CFG("zvksed", ext_zvksed, KVM_RISCV_ISA_EXT_ZVKSED),
-+    KVM_EXT_CFG("zvksh", ext_zvksh, KVM_RISCV_ISA_EXT_ZVKSH),
-+    KVM_EXT_CFG("zvkt", ext_zvkt, KVM_RISCV_ISA_EXT_ZVKT),
-+    KVM_EXT_CFG("smstateen", ext_smstateen, KVM_RISCV_ISA_EXT_SMSTATEEN),
-     KVM_EXT_CFG("ssaia", ext_ssaia, KVM_RISCV_ISA_EXT_SSAIA),
-     KVM_EXT_CFG("sstc", ext_sstc, KVM_RISCV_ISA_EXT_SSTC),
-     KVM_EXT_CFG("svinval", ext_svinval, KVM_RISCV_ISA_EXT_SVINVAL),
--- 
-2.43.2
+> On 04-Mar-2024, at 19:09, Igor Mammedov <imammedo@redhat.com> wrote:
+>=20
+> On Mon, 4 Mar 2024 16:44:34 +0530 (IST)
+> Ani Sinha <anisinha@redhat.com> wrote:
+>=20
+>> On Tue, 27 Feb 2024, Igor Mammedov wrote:
+>>=20
+>>> Current code uses mix of error_report()+exit(1)
+>>> and error_setg() to handle errors.
+>>> Use newer error_setg() everywhere, beside consistency
+>>> it will allow to detect error condition without killing
+>>> QEMU and attempt switch-over to SMBIOS3.x tables/entrypoint
+>>> in follow up patch.
+>>>=20
+>>> Signed-off-by: Igor Mammedov <imammedo@redhat.com> =20
+>>=20
+>> Other than the nit below,
+>>=20
+>> Reviewed-by: Ani Sinha <anisinha@redhat.com>
+>>=20
+>>> ---
+>>> include/hw/firmware/smbios.h |  4 ++--
+>>> hw/i386/fw_cfg.c             |  3 ++-
+>>> hw/smbios/smbios.c           | 32 ++++++++++++++++++++------------
+>>> hw/smbios/smbios_legacy.c    | 22 ++++++++++++++--------
+>>> 4 files changed, 38 insertions(+), 23 deletions(-)
+>>>=20
+>>> diff --git a/include/hw/firmware/smbios.h b/include/hw/firmware/smbios.=
+h
+>>> index a6d8fd6591..d1194c9cc2 100644
+>>> --- a/include/hw/firmware/smbios.h
+>>> +++ b/include/hw/firmware/smbios.h
+>>> @@ -310,7 +310,7 @@ struct smbios_type_127 {
+>>>     struct smbios_structure_header header;
+>>> } QEMU_PACKED;
+>>>=20
+>>> -void smbios_validate_table(void);
+>>> +bool smbios_validate_table(Error **errp);
+>>> void smbios_add_usr_blob_size(size_t size);
+>>> void smbios_entry_add(QemuOpts *opts, Error **errp);
+>>> void smbios_set_cpuid(uint32_t version, uint32_t features);
+>>> @@ -318,7 +318,7 @@ void smbios_set_defaults(const char *manufacturer, =
+const char *product,
+>>>                          const char *version,
+>>>                          bool uuid_encoded, SmbiosEntryPointType ep_typ=
+e);
+>>> void smbios_set_default_processor_family(uint16_t processor_family);
+>>> -uint8_t *smbios_get_table_legacy(size_t *length);
+>>> +uint8_t *smbios_get_table_legacy(size_t *length, Error **errp);
+>>> void smbios_get_tables(MachineState *ms,
+>>>                        const struct smbios_phys_mem_area *mem_array,
+>>>                        const unsigned int mem_array_size,
+>>> diff --git a/hw/i386/fw_cfg.c b/hw/i386/fw_cfg.c
+>>> index d1281066f4..e387bf50d0 100644
+>>> --- a/hw/i386/fw_cfg.c
+>>> +++ b/hw/i386/fw_cfg.c
+>>> @@ -71,7 +71,8 @@ void fw_cfg_build_smbios(PCMachineState *pcms, FWCfgS=
+tate *fw_cfg)
+>>>     smbios_set_cpuid(cpu->env.cpuid_version, cpu->env.features[FEAT_1_E=
+DX]);
+>>>=20
+>>>     if (pcmc->smbios_legacy_mode) {
+>>> -        smbios_tables =3D smbios_get_table_legacy(&smbios_tables_len);
+>>> +        smbios_tables =3D smbios_get_table_legacy(&smbios_tables_len,
+>>> +                                                &error_fatal);
+>>>         fw_cfg_add_bytes(fw_cfg, FW_CFG_SMBIOS_ENTRIES,
+>>>                          smbios_tables, smbios_tables_len);
+>>>         return;
+>>> diff --git a/hw/smbios/smbios.c b/hw/smbios/smbios.c
+>>> index fb1f05fcde..7c28b5f748 100644
+>>> --- a/hw/smbios/smbios.c
+>>> +++ b/hw/smbios/smbios.c
+>>> @@ -19,7 +19,6 @@
+>>> #include "qemu/units.h"
+>>> #include "qapi/error.h"
+>>> #include "qemu/config-file.h"
+>>> -#include "qemu/error-report.h"
+>>> #include "qemu/module.h"
+>>> #include "qemu/option.h"
+>>> #include "sysemu/sysemu.h"
+>>> @@ -448,23 +447,25 @@ opts_init(smbios_register_config);
+>>>  */
+>>> #define SMBIOS_21_MAX_TABLES_LEN 0xffff
+>>>=20
+>>> -static void smbios_check_type4_count(uint32_t expected_t4_count)
+>>> +static bool smbios_check_type4_count(uint32_t expected_t4_count, Error=
+ **errp)
+>>> {
+>>>     if (smbios_type4_count && smbios_type4_count !=3D expected_t4_count=
+) {
+>>> -        error_report("Expected %d SMBIOS Type 4 tables, got %d instead=
+",
+>>> -                     expected_t4_count, smbios_type4_count);
+>>> -        exit(1);
+>>> +        error_setg(errp, "Expected %d SMBIOS Type 4 tables, got %d ins=
+tead",
+>>> +                   expected_t4_count, smbios_type4_count);
+>>> +        return false;
+>>>     }
+>>> +    return true;
+>>> }
+>>>=20
+>>> -void smbios_validate_table(void)
+>>> +bool smbios_validate_table(Error **errp)
+>>> {
+>>>     if (smbios_ep_type =3D=3D SMBIOS_ENTRY_POINT_TYPE_32 &&
+>>>         smbios_tables_len > SMBIOS_21_MAX_TABLES_LEN) {
+>>> -        error_report("SMBIOS 2.1 table length %zu exceeds %d",
+>>> -                     smbios_tables_len, SMBIOS_21_MAX_TABLES_LEN);
+>>> -        exit(1);
+>>> +        error_setg(errp, "SMBIOS 2.1 table length %zu exceeds %d",
+>>> +                   smbios_tables_len, SMBIOS_21_MAX_TABLES_LEN);
+>>> +        return false;
+>>>     }
+>>> +    return true;
+>>> }
+>>>=20
+>>> bool smbios_skip_table(uint8_t type, bool required_table)
+>>> @@ -1027,15 +1028,18 @@ void smbios_get_tables(MachineState *ms,
+>>>     smbios_build_type_41_table(errp);
+>>>     smbios_build_type_127_table();
+>>>=20
+>>> -    smbios_check_type4_count(ms->smp.sockets);
+>>> -    smbios_validate_table();
+>>> +    if (!smbios_check_type4_count(ms->smp.sockets, errp)) { =20
+>>=20
+>> nit: I would do a gfree(smbios_tables) here ..
+>>=20
+>>> +        goto err_exit;
+>>> +    }
+>>> +    if (!smbios_validate_table(errp)) {
+>>> +        goto err_exit; =20
+>>=20
+>> and here. Then in err_exit ...
+>>=20
+>=20
+> the whole point of err_exit is to do error patch clean up
+> in one place to avoid duplicate the work.
+>=20
+>>> +    }
+>>>     smbios_entry_point_setup();
+>>>=20
+>>>     /* return tables blob and entry point (anchor), and their sizes */
+>>>     *tables =3D smbios_tables;
+>>>     *tables_len =3D smbios_tables_len;
+>>>     *anchor =3D (uint8_t *)&ep;
+>>> -
+>>>     /* calculate length based on anchor string */
+>>>     if (!strncmp((char *)&ep, "_SM_", 4)) {
+>>>         *anchor_len =3D sizeof(struct smbios_21_entry_point);
+>>> @@ -1044,6 +1048,10 @@ void smbios_get_tables(MachineState *ms,
+>>>     } else {
+>>>         abort();
+>>>     }
+>>> +
+>>> +    return;
+>>> +err_exit: =20
+>>=20
+>> I would add a return here.
+>>=20
+>> That way all paths explicitly return void.
+>>=20
+>>> +    g_free(smbios_tables); =20
+>>=20
+>> No return here?
+>=20
+> technically there is no need for at the end,
+> but I can fix it up for clarity.
+
+I think you do that in patch 11. I suggest you can squash this one with pat=
+ch 11 and I am happy then.
+
+>=20
+>>=20
+>>=20
+>>> }
+>>>=20
+>>> static void save_opt(const char **dest, QemuOpts *opts, const char *nam=
+e)
+>>> diff --git a/hw/smbios/smbios_legacy.c b/hw/smbios/smbios_legacy.c
+>>> index 21f143e738..a6544bf55a 100644
+>>> --- a/hw/smbios/smbios_legacy.c
+>>> +++ b/hw/smbios/smbios_legacy.c
+>>> @@ -19,7 +19,7 @@
+>>> #include "qemu/bswap.h"
+>>> #include "hw/firmware/smbios.h"
+>>> #include "sysemu/sysemu.h"
+>>> -#include "qemu/error-report.h"
+>>> +#include "qapi/error.h"
+>>>=20
+>>> struct smbios_header {
+>>>     uint16_t length;
+>>> @@ -128,7 +128,7 @@ static void smbios_build_type_1_fields(void)
+>>>     }
+>>> }
+>>>=20
+>>> -uint8_t *smbios_get_table_legacy(size_t *length)
+>>> +uint8_t *smbios_get_table_legacy(size_t *length, Error **errp)
+>>> {
+>>>     int i;
+>>>     size_t usr_offset;
+>>> @@ -136,15 +136,15 @@ uint8_t *smbios_get_table_legacy(size_t *length)
+>>>     /* complain if fields were given for types > 1 */
+>>>     if (find_next_bit(smbios_have_fields_bitmap,
+>>>                       SMBIOS_MAX_TYPE + 1, 2) < SMBIOS_MAX_TYPE + 1) {
+>>> -        error_report("can't process fields for smbios "
+>>> +        error_setg(errp, "can't process fields for smbios "
+>>>                      "types > 1 on machine versions < 2.1!");
+>>> -        exit(1);
+>>> +        goto err_exit;
+>>>     }
+>>>=20
+>>>     if (test_bit(4, smbios_have_binfile_bitmap)) {
+>>> -        error_report("can't process table for smbios "
+>>> -                     "type 4 on machine versions < 2.1!");
+>>> -        exit(1);
+>>> +        error_setg(errp, "can't process table for smbios "
+>>> +                   "type 4 on machine versions < 2.1!");
+>>> +        goto err_exit;
+>>>     }
+>>>=20
+>>>     g_free(smbios_entries);
+>>> @@ -173,7 +173,13 @@ uint8_t *smbios_get_table_legacy(size_t *length)
+>>>=20
+>>>     smbios_build_type_0_fields();
+>>>     smbios_build_type_1_fields();
+>>> -    smbios_validate_table();
+>>> +    if (!smbios_validate_table(errp)) {
+>>> +        goto err_exit;
+>>> +    }
+>>> +
+>>>     *length =3D smbios_entries_len;
+>>>     return smbios_entries;
+>>> +err_exit:
+>>> +    g_free(smbios_entries);
+>>> +    return NULL;
+>>> }
+>>> --
+>>> 2.39.3
+
 
 
