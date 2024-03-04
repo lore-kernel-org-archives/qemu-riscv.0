@@ -4,103 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F012C5478C
-	for <qemu-riscv@archiver.kernel.org>; Mon,  4 Mar 2024 16:43:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1900AC48BF6
+	for <qemu-riscv@archiver.kernel.org>; Mon,  4 Mar 2024 17:24:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rhBPZ-0008TG-Lx; Mon, 04 Mar 2024 11:43:33 -0500
+	id 1rhC3B-0005jl-MY; Mon, 04 Mar 2024 12:24:29 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1rhBPN-0008Rj-JM
- for qemu-riscv@nongnu.org; Mon, 04 Mar 2024 11:43:21 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1rhBPK-0006qJ-OL
- for qemu-riscv@nongnu.org; Mon, 04 Mar 2024 11:43:21 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1709570597;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=lGund8dWrWdtVg7OgtEi7Hk2WzobqDUR2vASBBvDgzs=;
- b=KFHtEIo17/Xvm5PTXbrftSja/a9NcFM/Ajv3j3KIQl5CE+gCEixBbBheDkz998YtG8HAdD
- IEpnbNoX0mm0Xc36Ev/a+oAAcSdUiE96/OkiF7yi/28QZrn2DJidOWYLoR3RT/xZI1Hx6V
- jL8yUGd07aeNAYZfy1kZ3AiMpFqnsqw=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-62-jrrQbV08OZe0tSSlPVuALQ-1; Mon, 04 Mar 2024 11:43:16 -0500
-X-MC-Unique: jrrQbV08OZe0tSSlPVuALQ-1
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-33d19ac07c5so1531486f8f.0
- for <qemu-riscv@nongnu.org>; Mon, 04 Mar 2024 08:43:16 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rhC3A-0005jR-Os
+ for qemu-riscv@nongnu.org; Mon, 04 Mar 2024 12:24:28 -0500
+Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rhC38-0007QS-Nt
+ for qemu-riscv@nongnu.org; Mon, 04 Mar 2024 12:24:28 -0500
+Received: by mail-pf1-x42b.google.com with SMTP id
+ d2e1a72fcca58-6e5a50d91b4so4523660b3a.2
+ for <qemu-riscv@nongnu.org>; Mon, 04 Mar 2024 09:24:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1709573065; x=1710177865; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=ujQZlVzwEouRsoAxeY1MiVCw9haUba1/ifiQupfzP88=;
+ b=Nv7dQc2FFA7gc+dddu8seEd6QLcIrj67q8Uc4mTStcPyGDwLKKWYQ/gYIuMpREzA6x
+ olgqf4qfiGfjMvnL2yoNy4GbInySuGnt/X77iklOP6gbl/9oX8faeCbXnIhhe2dDaO5Y
+ P2MCLWa7mXZF2yTH1w/4DTUOOHfCyVm/p3ULX5QInmFN5H+MSLMDmuQF+/SSkS3pVgZj
+ l4w1yB8ZwuL5rLZ/ZB4Ur+Sa7VZGwbMmFBND/vqRgF3o/r+6UQ2W9Q1UpQUCfGzsYsWC
+ nHxhRnWZnoFYJcxp/9OJDSUNE81ht/XdEAvD2tjlXKB6qN6kXRRrAqNUiSKYXERJHPtR
+ JKbw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709570595; x=1710175395;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=lGund8dWrWdtVg7OgtEi7Hk2WzobqDUR2vASBBvDgzs=;
- b=Ie/Ih3wkjzX3JtwiueGaHJDdOPHJyTEPHt78yGbbQfjynoeAjF+VzWaLeBPJ0WVLC/
- nH386y5A2vQyIzlFKFSPxpkq19c1f9Jejhk6tygspHF24GskToZvGWL8SeSVmmeURCnH
- CaWCr1GVaIxmkzEQHqC1yCfNN5LJR2A9MsSEpDz1Clyqyeo3CcGYHfsL2l4SXgqDNdI7
- +ztxAN6nfHwElvFE28kt9r/tEu+N5lkLpW142wk26kUNwUwvXJqyM5ZSY6rFFtY1OhRb
- VaaOH7Im2mSohc426yCQqYgmBKmBdX5eMYuhB6A+4A0UcK2zXVKo+2dHXOuXQ3Zy1yQc
- KTrg==
+ d=1e100.net; s=20230601; t=1709573065; x=1710177865;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=ujQZlVzwEouRsoAxeY1MiVCw9haUba1/ifiQupfzP88=;
+ b=YIayWMOcfDfilIu2QQXYic4gSt/npReTutAjnUlkE4clf0cVHQNfRoOwcfOOzOAmXb
+ nGuAClos/e2r8zFoONhT6hrJ57lBHhlWYH41mE3e31hxNQKNdsocfgcxnTGH8/Ue8kMh
+ EjBr02BpONFt41Un+GnbHywMu+t+RchZEnLTgjDeS9WO+rIVC9xv3hdSssUV04SzH3yt
+ DW47eOqnlKnU4jv59EPR/Vfx5+DaShdkL0XN+qgePexk5vmjxczdQwPHQN3eCrLnZjRc
+ Wyv4b6PDFfZjm8hgibXEYBhfQn9aeGstPQvFlWYrC/Cd5srr5gjr+YM30SgPCMoymI83
+ d6ew==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW24f7itpBemAfDoTgEyjkdeHIUlyVBKYe3J5fHc2xOLdpRtqAlwv760YF77vAlBkCyMsT6JDxgGTbuU5820G0mc+xVI9Q=
-X-Gm-Message-State: AOJu0YwMSviZr2tjlyZNYoyaOxgfu0dWg4H4/3x1tGAaml8ItWD+8iEc
- 9LbhQuNHJsiXaypy80Te9L8YfWy1ut0nYi7MeniZnnhJoNDc+S94xpe4oQRJ9K9loH6j0/CsSv/
- XVw+AcLtwgmrLWMzvXg1r/6W563PahWsgoVq46OOOdavZ30Iq9k+E
-X-Received: by 2002:adf:e811:0:b0:33d:3072:e38d with SMTP id
- o17-20020adfe811000000b0033d3072e38dmr5851900wrm.21.1709570595114; 
- Mon, 04 Mar 2024 08:43:15 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEHZGwkUK/Cll/ir7xtDqlHocv489+xKu6mj2vLfNWX2QnZIiE/i0QR7rNbfy64L3NQze/SpA==
-X-Received: by 2002:adf:e811:0:b0:33d:3072:e38d with SMTP id
- o17-20020adfe811000000b0033d3072e38dmr5851884wrm.21.1709570594776; 
- Mon, 04 Mar 2024 08:43:14 -0800 (PST)
-Received: from imammedo.users.ipa.redhat.com (nat-pool-brq-t.redhat.com.
- [213.175.37.10]) by smtp.gmail.com with ESMTPSA id
- p6-20020adf9d86000000b0033e0dd83be1sm12662816wre.91.2024.03.04.08.43.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Mar 2024 08:43:14 -0800 (PST)
-Date: Mon, 4 Mar 2024 17:43:13 +0100
-From: Igor Mammedov <imammedo@redhat.com>
-To: Ani Sinha <anisinha@redhat.com>
-Cc: QEMU Developers <qemu-devel@nongnu.org>, Peter Maydell
- <peter.maydell@linaro.org>, Paolo Bonzini <pbonzini@redhat.com>, "Michael
- S. Tsirkin" <mst@redhat.com>, Song Gao <gaosong@loongson.cn>, Alistair
- Francis <alistair.francis@wdc.com>, palmer@dabbelt.com,
- bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, philmd@linaro.org, wangyanan55@huawei.com,
- eblake@redhat.com, armbru@redhat.com, qemu-arm@nongnu.org,
- qemu-riscv@nongnu.org, f.ebner@proxmox.com
-Subject: Re: [PATCH 09/19] smbios: build legacy mode code only for 'pc' machine
-Message-ID: <20240304174313.5ff4dc2b@imammedo.users.ipa.redhat.com>
-In-Reply-To: <20240304152300.1be944ce@imammedo.users.ipa.redhat.com>
-References: <20240227154749.1818189-1-imammedo@redhat.com>
- <20240227154749.1818189-10-imammedo@redhat.com>
- <BB495028-FC8F-4E80-A58F-B3AC81732DFF@redhat.com>
- <20240304152300.1be944ce@imammedo.users.ipa.redhat.com>
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-redhat-linux-gnu)
+ AJvYcCVifCinKAxLr1KxJyXhSskuzsuKBV6f+EYztkPuxTxwSr9NpdpYJvAsuIErv3LTWQRpwJEwPVlHoWitth1WM44+AiYaeow=
+X-Gm-Message-State: AOJu0Ywhw8IZFNimU87v/2LAoiGyyAycICDx7aDpTvqccxKkFpRxtFfi
+ 4mILAdLW9lcU62u6pdcu7BlSaffqTFMmb+HA8sEf08iTl4R3fHh3J791kBGBtO8=
+X-Google-Smtp-Source: AGHT+IFrkuXw/iiN1aUxFBGZEApPu2LibaAmsW/EyACllCghD6kYY0sliQFSvPO1DPB5QjUty8sOEQ==
+X-Received: by 2002:a05:6a00:9084:b0:6e5:dadd:6e11 with SMTP id
+ jo4-20020a056a00908400b006e5dadd6e11mr11946711pfb.33.1709573064784; 
+ Mon, 04 Mar 2024 09:24:24 -0800 (PST)
+Received: from [192.168.68.110] ([177.94.15.159])
+ by smtp.gmail.com with ESMTPSA id
+ c2-20020a62e802000000b006e1463c18f8sm7558556pfi.37.2024.03.04.09.24.21
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 04 Mar 2024 09:24:24 -0800 (PST)
+Message-ID: <23cdc593-c394-4f45-ab83-07b6aae44047@ventanamicro.com>
+Date: Mon, 4 Mar 2024 14:24:19 -0300
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=imammedo@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -26
-X-Spam_score: -2.7
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 2/5] target/riscv: Add cycle & instret privilege mode
+ filtering properties
+To: Atish Patra <atishp@rivosinc.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org, Weiwei Li
+ <liwei1518@gmail.com>, kaiwenxue1@gmail.com
+References: <20240228185116.1321730-1-atishp@rivosinc.com>
+ <20240228185116.1321730-3-atishp@rivosinc.com>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20240228185116.1321730-3-atishp@rivosinc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42b;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x42b.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.7 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.571,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -116,42 +103,54 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, 4 Mar 2024 15:23:00 +0100
-Igor Mammedov <imammedo@redhat.com> wrote:
 
-> On Mon, 4 Mar 2024 16:25:03 +0530
-> Ani Sinha <anisinha@redhat.com> wrote:
->=20
-> > > On 27-Feb-2024, at 21:17, Igor Mammedov <imammedo@redhat.com> wrote:
-> > >=20
-> > > basically moving code around without functional change.
-> > > And exposing some symbols so that they could be shared
-> > > between smbbios.c and new smbios_legacy.c
-> > >=20
-> > > plus some meson magic to build smbios_legacy.c only
-> > > for 'pc' machine and otherwise replace it with stub
-> > > if not selected.
-> > >=20
-> > > Signed-off-by: Igor Mammedov <imammedo@redhat.com>
-> > > ---
-[...]
-> > > +        /*
-> > > +         * preserve blob size for legacy mode so it could build its
-> > > +         * blobs flavor from 'usr_blobs'
-> > > +         */
-> > > +        smbios_add_usr_blob_size(size);
-> > > +   =20
-> >=20
-> > Could this have been made as a part of a separate patch? It is extremel=
-y hard to understand why you are doing this when it=E2=80=99s a part of a l=
-arger code refactoring/modularisation. =20
->=20
-> sure, will do on respin
 
-I also has split out variables renaming into a separate patch.
-Hope it will make it easier to review.
-=20
->=20
-[...]
+On 2/28/24 15:51, Atish Patra wrote:
+> From: Kaiwen Xue <kaiwenx@rivosinc.com>
+> 
+> This adds the properties for ISA extension smcntrpmf. Patches
+> implementing it will follow.
+> 
+> Signed-off-by: Atish Patra <atishp@rivosinc.com>
+> Signed-off-by: Kaiwen Xue <kaiwenx@rivosinc.com>
+> ---
 
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+>   target/riscv/cpu.c     | 2 ++
+>   target/riscv/cpu_cfg.h | 1 +
+>   2 files changed, 3 insertions(+)
+> 
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 1b8d001d237f..f9d3c80597fc 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -169,6 +169,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
+>       ISA_EXT_DATA_ENTRY(zhinx, PRIV_VERSION_1_12_0, ext_zhinx),
+>       ISA_EXT_DATA_ENTRY(zhinxmin, PRIV_VERSION_1_12_0, ext_zhinxmin),
+>       ISA_EXT_DATA_ENTRY(smaia, PRIV_VERSION_1_12_0, ext_smaia),
+> +    ISA_EXT_DATA_ENTRY(smcntrpmf, PRIV_VERSION_1_12_0, ext_smcntrpmf),
+>       ISA_EXT_DATA_ENTRY(smepmp, PRIV_VERSION_1_12_0, ext_smepmp),
+>       ISA_EXT_DATA_ENTRY(smstateen, PRIV_VERSION_1_12_0, ext_smstateen),
+>       ISA_EXT_DATA_ENTRY(ssaia, PRIV_VERSION_1_12_0, ext_ssaia),
+> @@ -1447,6 +1448,7 @@ const char *riscv_get_misa_ext_description(uint32_t bit)
+>   const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
+>       /* Defaults for standard extensions */
+>       MULTI_EXT_CFG_BOOL("sscofpmf", ext_sscofpmf, false),
+> +    MULTI_EXT_CFG_BOOL("smcntrpmf", ext_smcntrpmf, false),
+>       MULTI_EXT_CFG_BOOL("zifencei", ext_zifencei, true),
+>       MULTI_EXT_CFG_BOOL("zicsr", ext_zicsr, true),
+>       MULTI_EXT_CFG_BOOL("zihintntl", ext_zihintntl, true),
+> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+> index 833bf5821708..0828841445c5 100644
+> --- a/target/riscv/cpu_cfg.h
+> +++ b/target/riscv/cpu_cfg.h
+> @@ -73,6 +73,7 @@ struct RISCVCPUConfig {
+>       bool ext_zihpm;
+>       bool ext_smstateen;
+>       bool ext_sstc;
+> +    bool ext_smcntrpmf;
+>       bool ext_svadu;
+>       bool ext_svinval;
+>       bool ext_svnapot;
 
