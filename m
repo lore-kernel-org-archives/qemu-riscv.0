@@ -4,62 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B553BC5478C
-	for <qemu-riscv@archiver.kernel.org>; Mon,  4 Mar 2024 19:14:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AAA2C48BF6
+	for <qemu-riscv@archiver.kernel.org>; Mon,  4 Mar 2024 19:14:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rhDl0-0003Cb-2j; Mon, 04 Mar 2024 14:13:50 -0500
+	id 1rhDkx-0003BO-Rn; Mon, 04 Mar 2024 14:13:47 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rhDkw-0003Aq-Se
- for qemu-riscv@nongnu.org; Mon, 04 Mar 2024 14:13:47 -0500
-Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d])
+ id 1rhDkw-0003An-Oc
+ for qemu-riscv@nongnu.org; Mon, 04 Mar 2024 14:13:46 -0500
+Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rhDku-0001bz-Er
+ id 1rhDkq-0001aw-FJ
  for qemu-riscv@nongnu.org; Mon, 04 Mar 2024 14:13:46 -0500
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-33e1878e357so2300491f8f.3
- for <qemu-riscv@nongnu.org>; Mon, 04 Mar 2024 11:13:44 -0800 (PST)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-33e2268ed96so2781610f8f.3
+ for <qemu-riscv@nongnu.org>; Mon, 04 Mar 2024 11:13:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709579623; x=1710184423; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=RFv1Gg6gA8Qr+9Dbaf2GkmDesAIrFACbf0XWoLRsE8I=;
- b=J4cn3dx6fZAbWYckMf16E2GYMTcGuvzP74DVuBmGGpl3kfefi4IC0EDAOt5hgk4dxh
- 5I/o9G2zQP2KK6a/ws1Yu/LjVmYIni+XTA50XzqWaoaFA35u9Eht95PahPbRLjMwJ+fm
- 1fIO0U3LXvUwyDKeR5CibE4yV3WdB5ReDYyP+CGpAXBp2SCGX7vhqtQ97W+jrTFAvVyj
- sX8DbK1vwAgEXw6LL5HIC1j51izGeGotmhkj+eUCi2yfgHH4p4GpbBcS3OKy0ovhlDWv
- zwr5uhcUspefzqEPtLxTKUloIHuBvU6r2NZvcLiHSyyilkxSoGIGg2cgvDwNHjaxU7Ye
- xBrg==
+ d=linaro.org; s=google; t=1709579618; x=1710184418; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Pa44yMkxqpNsvSncvi7ekLjG5ubx8BtC53IgoytJ5A4=;
+ b=s0FuxQtbhvpcHrrH7J0hi1jHaoo0D+IzAYFqHhI7UsncwwrGyySba9VtiyJzBbh6I9
+ LR92LN5GfRd0ItAHXJq+ApNtmmZ/Yq3HqEmjK35tY16+1aN3vRX6zx0tBMbzFb1UJZJJ
+ WhUileUo2pjr8HfBG3vAwxwhKDKFU1KpRkfPL0JtOj7/BlIsPNnlnOUZdiwz3K9+dgk4
+ NOPU4js2ejLezU9b4IU0E2nmtMbBofHX8rHxKLU93iA9IVDG+wnPMPOhTLBIa8FtWPLR
+ zx5Vnbz1+tOfsfqiNR7ylSPA4+zOkXU8v8i41aeXSVBp8ktC7jlNp23+p5oA71hps4W6
+ qNqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709579623; x=1710184423;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=RFv1Gg6gA8Qr+9Dbaf2GkmDesAIrFACbf0XWoLRsE8I=;
- b=Ui82nl3V6jrbqdOhv991Pl6F/cxoHLfCL7L/YPRHxgregKvenhYkAFtNBv2thXl+TV
- R04JUzpGovxIbt7FdE/0zmXFwEiW9FIEhpNRwyOLn9f0yOzGjPOM1vKbH2UO1li5IJMp
- ee1uWFYShdETH7dl7GwPzBR42q1gQzW0o0mqkxw3wS5f+8EIQL3iylhbtY8KRJqf27Kg
- DvUhl9SPYxM4JH9RxNuNbr86JWmroau8bx5QOoNcuGeAzT4PxTr3ikXJJa7oUSnylS2R
- jQZLet5f1jN2gdTEz6G+CmSInmSYflEJMG8LWdHAgFLe5n20nCqg4FnqI3UqD7OpsjhE
- MDtQ==
+ d=1e100.net; s=20230601; t=1709579618; x=1710184418;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Pa44yMkxqpNsvSncvi7ekLjG5ubx8BtC53IgoytJ5A4=;
+ b=lbARhBBa30PZFSBcJeKxKO57quLZEj09EOWtzLh9S1YB8vvplRzjY6cXp9/XPaNTCV
+ LpWd8HmqGWCH0fn0USHMgBusfVVFhOVdXxFEo5AjFJl3zEHF7OVeyJIV6uomfbj5BOeA
+ GnVeLl/laHdnLKzR2/fuyH5DgmGDoA1VHlV45XkjfE+2Z98eQcjXMiJB1UQkSwvEfBOF
+ 94wLIlM8RsI/+Y4YFcYdEJY8v+aUBsw9PQv1HhPpXXBOpy9lcn7HzKtZI3o7wbE9oh7M
+ nDorV59OB+LFVmXxRjY2R3xGR8waBaASvkCucKnlguHJIXAepgVf5XpDJ+VjmmRjSXbE
+ qvZQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXrgNVqIQZZDlYMTtUh+PP8Jw6/y8nBHmGabc3prz943uwr/a2eQZwounJsICI8k3BoB645kl0GHkicpZJLtw7AbKmYfgA=
-X-Gm-Message-State: AOJu0Yziatp1ZpX3OCN845psUnXwrfNa9tSimNij6/252iejBqlnayUT
- 0YSBFBDsGpJyzjL8gvOZglPWcnIdKMWGBXmw2P0ac7m2bbUulF2KLPdJdNj9tnw=
-X-Google-Smtp-Source: AGHT+IEXzN5mE96WQlQwTYzjKo/vAf4kKYmUWPHJym8ktnTOijgEa0mcI4op1ZDJXBwECVSykzHA7Q==
-X-Received: by 2002:adf:9dc3:0:b0:33e:3ec2:a22f with SMTP id
- q3-20020adf9dc3000000b0033e3ec2a22fmr2047866wre.42.1709579623041; 
- Mon, 04 Mar 2024 11:13:43 -0800 (PST)
-Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- bw1-20020a0560001f8100b0033d6bc17d0esm13241010wrb.74.2024.03.04.11.13.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ AJvYcCXOkYp4qHofPp8I/ojM+D5JGOpecLtjaCNAqlG4fNkS8HmIaHnOuSQTtd02EmG9JLAoD0eBvaOl0pytAz46rYG7hq8ZieY=
+X-Gm-Message-State: AOJu0Yyi7SLdr4UDDoNeCFwna2h5kbosaZcz0WBC2SyKhyeZvI0TgUdV
+ Jzr9FJT5APVo6fM+b65sAvv1Z04AqSACsQKYrbBtivP8GKD3JRdmjY9lj1LkwyCb3p6wiQNkCK3
+ D
+X-Google-Smtp-Source: AGHT+IH5qLvyj5YPNh5svGC1WUH+wF54sm2uSzbfzbZ3d3/vOjONZDP+JD8yUni4QOrpnvO4DrAkaQ==
+X-Received: by 2002:adf:9d83:0:b0:33d:eda5:bef7 with SMTP id
+ p3-20020adf9d83000000b0033deda5bef7mr6977181wre.59.1709579618381; 
  Mon, 04 Mar 2024 11:13:38 -0800 (PST)
+Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
+ p3-20020a5d4583000000b0033b47ee01f1sm12866317wrq.49.2024.03.04.11.13.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 04 Mar 2024 11:13:37 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 2382D5F754;
+ by draig.lan (Postfix) with ESMTP id 5B6575F950;
  Mon,  4 Mar 2024 19:13:37 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -68,22 +70,24 @@ Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  Richard Henderson <richard.henderson@linaro.org>, qemu-riscv@nongnu.org,
  Song Gao <gaosong@loongson.cn>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-Subject: [PATCH 0/4 for 9.0] Clean-up disassembler handling for plugins
-Date: Mon,  4 Mar 2024 19:13:33 +0000
-Message-Id: <20240304191337.3101411-1-alex.bennee@linaro.org>
+Subject: [PATCH 3/4] target/loongarch: honour no_raw_bytes when disassembling
+Date: Mon,  4 Mar 2024 19:13:36 +0000
+Message-Id: <20240304191337.3101411-4-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240304191337.3101411-1-alex.bennee@linaro.org>
+References: <20240304191337.3101411-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42d;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,28 +103,37 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-I was overly optimistic with my last RFC that HPPA was the only
-affected architecture by this issue. I've introduced a new flag in
-disassemble_info and fixed up those arches that include raw bytes by
-default.
+This makes the output suitable when used for plugins.
 
-It would be nice to get this in for 9.0
-
-Alex.
-
-Alex Bennée (4):
-  disas: introduce no_raw_bytes
-  disas/hppa: honour no_raw_bytes
-  target/loongarch: honour no_raw_bytes when disassembling
-  target/riscv: honour no_raw_bytes when disassembling
-
- include/disas/dis-asm.h  |  7 +++++++
- disas/disas.c            |  1 +
- disas/hppa.c             |  8 +++++---
- disas/riscv.c            | 28 +++++++++++++++-------------
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+---
  target/loongarch/disas.c | 13 +++++++++----
- 5 files changed, 37 insertions(+), 20 deletions(-)
+ 1 file changed, 9 insertions(+), 4 deletions(-)
 
+diff --git a/target/loongarch/disas.c b/target/loongarch/disas.c
+index 2040f3e44db..b9118878d97 100644
+--- a/target/loongarch/disas.c
++++ b/target/loongarch/disas.c
+@@ -120,10 +120,15 @@ static const char *get_csr_name(unsigned num)
+            csr_names[num] : "Undefined CSR";
+ }
+ 
+-#define output(C, INSN, FMT, ...)                                   \
+-{                                                                   \
+-    (C)->info->fprintf_func((C)->info->stream, "%08x   %-9s\t" FMT, \
+-                            (C)->insn, INSN, ##__VA_ARGS__);        \
++#define output(C, INSN, FMT, ...)                                      \
++ {                                                                     \
++    if ((C)->info->no_raw_bytes) {                                     \
++        (C)->info->fprintf_func((C)->info->stream, "%-9s\t" FMT,       \
++                            INSN, ##__VA_ARGS__);                      \
++    } else {                                                           \
++        (C)->info->fprintf_func((C)->info->stream, "%08x   %-9s\t" FMT,\
++                            (C)->insn, INSN, ##__VA_ARGS__);           \
++    }                                                                  \
+ }
+ 
+ #include "decode-insns.c.inc"
 -- 
 2.39.2
 
