@@ -4,84 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 456F7C5478C
-	for <qemu-riscv@archiver.kernel.org>; Mon,  4 Mar 2024 19:46:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6EAFC48BF6
+	for <qemu-riscv@archiver.kernel.org>; Mon,  4 Mar 2024 22:44:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rhEEM-0005Rq-MX; Mon, 04 Mar 2024 14:44:10 -0500
+	id 1rhH2U-0006L1-1T; Mon, 04 Mar 2024 17:44:06 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rhEEE-0005QT-HS
- for qemu-riscv@nongnu.org; Mon, 04 Mar 2024 14:44:02 -0500
-Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1rhH2R-0006Kg-FC
+ for qemu-riscv@nongnu.org; Mon, 04 Mar 2024 17:44:03 -0500
+Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rhEEC-0006uF-JM
- for qemu-riscv@nongnu.org; Mon, 04 Mar 2024 14:44:02 -0500
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-29abd02d0d9so3026867a91.0
- for <qemu-riscv@nongnu.org>; Mon, 04 Mar 2024 11:44:00 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1rhH2P-0000NE-M1
+ for qemu-riscv@nongnu.org; Mon, 04 Mar 2024 17:44:03 -0500
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-6e5c0be115aso2184421b3a.3
+ for <qemu-riscv@nongnu.org>; Mon, 04 Mar 2024 14:43:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1709581439; x=1710186239; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:to
+ d=linaro.org; s=google; t=1709592239; x=1710197039; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=aK5MEnsuNt8kOWRDjkuorH2Y+KM/6UJXdQNK5bcYjo0=;
- b=KNosJvGvpu1tqNh0M2BMlI9Lq1rxdklHPgtOaJgt0R1AAlx89erKhr0yF+i1HChDA6
- t6hZ2w34twly/92eWSOGRwoXlI7+CW7/QSpK4s5MnHbY5J2BnFsDSjx+GIiipS3O2G3P
- op1cVgPiKYSkWRN9wSxNuMuxcMZ4e9gZANcCclscC1mc/nK2O1upgeeyF9ZO3SM/0BPw
- I6z4DLZgSdnsROhsMVeKtTm8JcPvPMUO2oHLVLwfJPwdyQ91iF1TZtIgYdKs0l/K2lhE
- qrkFyU7evZgflnkqE7+aBtoLwSa3ZFo7gbAzw+Zdzpzck7r26GQHgctT9VLBG5xpUykz
- OsrQ==
+ bh=d0iV+xolL2unPr+R8/9jnjhqKyzRsT+GapGS1uJLWbc=;
+ b=fSHTQ1vscyloR2dVOhYSTSdNgwCMsM0z+CVxj0vn+A6JyA1yXWN/g3KFFbjO/SE07o
+ kjwzgf0zV29Q/R0S/SGXXJR6IwfzDSGFXXXxyI2pTGBwTbtjpYPcg8mgZ8XJKzwhiV9m
+ uLrIvu6xzx/aZ0/zhlQ2OMsHr/O1HjcMLy/nSTxxS4scmP+rFIKCQ3db5N8i0LrQ8cw/
+ 5ow5G1pqM1EXCmCSiunoCObUdkW++PEqL4YoNpzlK7FJ7Xu58krqxtm+qncAuQeDjchj
+ bDmBElERaDVOXyEgECs5aLSMTXuuy1BvhtO5fscm1+J5gVpvyw5VZjkWa7NrfYF6lYeR
+ CwJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709581439; x=1710186239;
- h=content-transfer-encoding:in-reply-to:from:references:to
+ d=1e100.net; s=20230601; t=1709592239; x=1710197039;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=aK5MEnsuNt8kOWRDjkuorH2Y+KM/6UJXdQNK5bcYjo0=;
- b=rshIQ2DY1mp8nGjSIGO1NZwowYH6WIeuh63r19QvU/Hz+s37pSdE6ZKSi+gVicE82G
- YkrXqq5oiCoSt25gxuYs69zHEVxgLAjLksbKE1jFzaHbI91qxrpWeyEi/GuGqC8UBR4I
- N/djDKIcvj+xPwhLqCMHF9J4/DP6MrgSFo5sxBROA3CyyXHfS8jE8aK8byjA727bEQ0+
- Sqkr5QD5PofBkcDozYGBvbqjreo1L4OMImM1Hlqk6WZsdeJvcdb1QtiYhUhbNUjc3K/I
- KjpZ0bc0Qt7t+PrEX3s3CM6bk1q02Egmk0H823MTXIcq+U7MsRSDKK6Ga9jLiGo7kgkS
- PBHQ==
+ bh=d0iV+xolL2unPr+R8/9jnjhqKyzRsT+GapGS1uJLWbc=;
+ b=LIWShafDQqYvefbIrPusEblkAvH1SiATTx4DhioApr4IP8mp9V2tlY16wd8xMgrG7D
+ 4K5po73+Da67eOcyxaDRPR+YUBJpJTqqgEel9GvzXk/4wbrqyeZppQU3KLPTA1Qy1UvH
+ V+C6uVif29wp7hGm1/VGA8eO31IQPxZtgqZ6kNn0le1Gbvj8BWwI4yzW1w1DnrrJ6Csp
+ 32dQhLDMblns2NsMOqtU4axgPVVX7wrC5g6Zal8Ui0JJHo3fCWB56MSHaPM43n541E3s
+ by5POpW928Ej+nG/wfgTl9Yf9p/DQFzaP7+B2E0lBcd1US1TzYPeLb+H4r0xxIUXRgTO
+ AAyg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU5bI0M2ska/eNU74grBQUTAUbfNnrkapR9UepbHCOI+20HWdYxOd2OZ1Yr1njYfOqG2wef0txSpVlc47NM9fqX0BIiOTs=
-X-Gm-Message-State: AOJu0YyPg0LxAuCOocR02jZrfkbCuKRJ+ZFK81D2/8WZGvWoums6spct
- X9a+rLXwH+I1WXacqg+c/f3AK764SJquOUfzEDYLWBZPEqv3f0GiSQlRm0nj23o=
-X-Google-Smtp-Source: AGHT+IEuYVC/BMVyeTeiUK3bampXahobefIY9pUY+jaAuuisRPZKDylQ/clZA8hbTaE5XpJm2I+kGg==
-X-Received: by 2002:a17:90b:1007:b0:29a:bb49:eb41 with SMTP id
- gm7-20020a17090b100700b0029abb49eb41mr6937237pjb.29.1709581438987; 
- Mon, 04 Mar 2024 11:43:58 -0800 (PST)
-Received: from ?IPV6:2804:7f0:bcc0:e4b8:6daf:840a:5593:a7a3?
- ([2804:7f0:bcc0:e4b8:6daf:840a:5593:a7a3])
- by smtp.gmail.com with ESMTPSA id
- r12-20020a17090ad40c00b00298d2182f1asm10363868pju.55.2024.03.04.11.43.54
+ AJvYcCUm8l7ITUf1fGEzSJBzLEkrSkBB33qTFYo125f76XtgY9J8stpLBMyoeYusFmxykQFBdacfZdUkbVqEiU+J7qzXhNeZIa4=
+X-Gm-Message-State: AOJu0Yzt6rBxal374ifCcrXeuAkW8LBQTafwoVr9JBbzBleT5Yx0i2iN
+ uEeylAqp1N0zjV4xjeHrVnha3wWHBDGPL9/i5AIX0apdF0NH927UL+YCdCFnRuY=
+X-Google-Smtp-Source: AGHT+IGGe0hJTwRYP6bgggnBkRPF0mXdkW/U8wh8C0BlDdsSGOdc1EffvD2C/KXDqgmKOZXw4AOhTg==
+X-Received: by 2002:aa7:8896:0:b0:6e4:fc2b:5f69 with SMTP id
+ z22-20020aa78896000000b006e4fc2b5f69mr12641065pfe.4.1709592238755; 
+ Mon, 04 Mar 2024 14:43:58 -0800 (PST)
+Received: from [192.168.6.128] (098-147-055-211.res.spectrum.com.
+ [98.147.55.211]) by smtp.gmail.com with ESMTPSA id
+ d23-20020aa78697000000b006e484e13454sm7736475pfo.32.2024.03.04.14.43.57
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 04 Mar 2024 11:43:58 -0800 (PST)
-Message-ID: <bd34501b-3dda-40eb-aa92-73ea289297d1@ventanamicro.com>
-Date: Mon, 4 Mar 2024 16:43:52 -0300
+ Mon, 04 Mar 2024 14:43:58 -0800 (PST)
+Message-ID: <5005bee5-34d3-47d6-8420-51559beb0222@linaro.org>
+Date: Mon, 4 Mar 2024 12:43:54 -1000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC 2/2] target/riscv: Add server platform reference cpu
+Subject: Re: [PATCH 1/4] disas: introduce no_raw_bytes
 Content-Language: en-US
-To: Fei Wu <fei2.wu@intel.com>, pbonzini@redhat.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- andrei.warkentin@intel.com, shaolin.xie@alibaba-inc.com, ved@rivosinc.com,
- sunilvl@ventanamicro.com, haibo1.xu@intel.com, evan.chai@intel.com,
- yin.wang@intel.com, tech-server-platform@lists.riscv.org,
- tech-server-soc@lists.riscv.org
-References: <20240304102540.2789225-1-fei2.wu@intel.com>
- <20240304102540.2789225-3-fei2.wu@intel.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240304102540.2789225-3-fei2.wu@intel.com>
+To: Helge Deller <deller@gmx.de>, =?UTF-8?Q?Alex_Benn=C3=A9e?=
+ <alex.bennee@linaro.org>, qemu-devel@nongnu.org
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
+ Song Gao <gaosong@loongson.cn>
+References: <20240304191337.3101411-1-alex.bennee@linaro.org>
+ <20240304191337.3101411-2-alex.bennee@linaro.org>
+ <379f2c3f-9449-47b0-977f-bf07a5b6f88a@gmx.de>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <379f2c3f-9449-47b0-977f-bf07a5b6f88a@gmx.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x1033.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x42d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -104,157 +102,45 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
-
-On 3/4/24 07:25, Fei Wu wrote:
-> The harts requirements of RISC-V server platform [1] require RVA23 ISA
-> profile support, plus Sv48, Svadu, H, Sscofmpf etc. This patch provides
-> a virt CPU type (rvsp-ref) as compliant as possible.
+On 3/4/24 09:26, Helge Deller wrote:
+> On 3/4/24 20:13, Alex Bennée wrote:
+>> For plugins we don't expect the raw bytes in the disassembly. We
+>> already deal with this by hand crafting our capstone call but for
+>> other diassemblers we need a flag.
+>>
+>> Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+>> ---
+>>   include/disas/dis-asm.h | 7 +++++++
+>>   disas/disas.c           | 1 +
+>>   2 files changed, 8 insertions(+)
+>>
+>> diff --git a/include/disas/dis-asm.h b/include/disas/dis-asm.h
+>> index 2324f6b1a46..5c32e7a310c 100644
+>> --- a/include/disas/dis-asm.h
+>> +++ b/include/disas/dis-asm.h
+>> @@ -396,6 +396,13 @@ typedef struct disassemble_info {
+>>     /* Command line options specific to the target disassembler.  */
+>>     char * disassembler_options;
+>>
+>> +  /*
+>> +   * When true instruct the disassembler to not preface opcodes with
+>> +   * raw bytes. This is mainly for the benefit of the plugin
+>> +   * interface.
+>> +   */
+>> +  bool no_raw_bytes;
 > 
-> [1] https://github.com/riscv-non-isa/riscv-server-platform/blob/main/server_platform_requirements.adoc
+> Patch in general and idea is OK, but I don't like
+> the "no_raw_bytes" naming very much.
+> In patch #2 you use "if (!info->no_raw_bytes) {.."
+> which is double-negation.
 > 
-> Signed-off-by: Fei Wu <fei2.wu@intel.com>
-> --->   hw/riscv/server_platform_ref.c |  6 +++-
->   target/riscv/cpu-qom.h         |  1 +
->   target/riscv/cpu.c             | 62 ++++++++++++++++++++++++++++++++++
->   3 files changed, 68 insertions(+), 1 deletion(-)
+> "hide_raw_bytes" is better but still double negation.
 > 
-> diff --git a/hw/riscv/server_platform_ref.c b/hw/riscv/server_platform_ref.c
-> index ae90c4b27a..52ec607cee 100644
-> --- a/hw/riscv/server_platform_ref.c
-> +++ b/hw/riscv/server_platform_ref.c
-> @@ -1205,11 +1205,15 @@ static void rvsp_ref_machine_class_init(ObjectClass *oc, void *data)
->   {
->       char str[128];
->       MachineClass *mc = MACHINE_CLASS(oc);
-> +    static const char * const valid_cpu_types[] = {
-> +        TYPE_RISCV_CPU_RVSP_REF,
-> +    };
->   
->       mc->desc = "RISC-V Server SoC Reference board";
->       mc->init = rvsp_ref_machine_init;
->       mc->max_cpus = RVSP_CPUS_MAX;
-> -    mc->default_cpu_type = TYPE_RISCV_CPU_BASE;
-> +    mc->default_cpu_type = TYPE_RISCV_CPU_RVSP_REF;
-> +    mc->valid_cpu_types = valid_cpu_types;
+> Maybe something like "show_opcodes" which defaults to "false"
+> when used with plugins is better?
 
-I suggest introducing this patch first, then the new machine type that will use it as a default
-CPU. The reason is to facilitate future bisects. If we introduce the board first, a future bisect
-might hit the previous patch, the board will be run using RV64 instead of the correct CPU, and
-we'll have different results because of it.
-
->       mc->pci_allow_0_address = true;
->       mc->default_nic = "e1000e";
->       mc->possible_cpu_arch_ids = riscv_numa_possible_cpu_arch_ids;
-> diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
-> index 3670cfe6d9..adb934d19e 100644
-> --- a/target/riscv/cpu-qom.h
-> +++ b/target/riscv/cpu-qom.h
-> @@ -49,6 +49,7 @@
->   #define TYPE_RISCV_CPU_SIFIVE_U54       RISCV_CPU_TYPE_NAME("sifive-u54")
->   #define TYPE_RISCV_CPU_THEAD_C906       RISCV_CPU_TYPE_NAME("thead-c906")
->   #define TYPE_RISCV_CPU_VEYRON_V1        RISCV_CPU_TYPE_NAME("veyron-v1")
-> +#define TYPE_RISCV_CPU_RVSP_REF         RISCV_CPU_TYPE_NAME("rvsp-ref")
->   #define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
->   
->   OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 5ff0192c52..bc91be702b 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -2282,6 +2282,67 @@ static void rva22s64_profile_cpu_init(Object *obj)
->   
->       RVA22S64.enabled = true;
->   }
-> +
-> +static void rv64_rvsp_ref_cpu_init(Object *obj)
-> +{
-> +    CPURISCVState *env = &RISCV_CPU(obj)->env;
-> +    RISCVCPU *cpu = RISCV_CPU(obj);
-> +
-> +    riscv_cpu_set_misa_ext(env, RVG | RVC | RVS | RVU | RVH | RVV);
-> +
-> +    /* FIXME: change to 1.13 */
-> +    env->priv_ver = PRIV_VERSION_1_12_0;
-> +
-> +    /* RVA22U64 */
-> +    cpu->cfg.mmu = true;
-> +    cpu->cfg.ext_zifencei = true;
-> +    cpu->cfg.ext_zicsr = true;
-> +    cpu->cfg.ext_zicntr = true;
-> +    cpu->cfg.ext_zihpm = true;
-> +    cpu->cfg.ext_zihintpause = true;
-> +    cpu->cfg.ext_zba = true;
-> +    cpu->cfg.ext_zbb = true;
-> +    cpu->cfg.ext_zbs = true;
-> +    cpu->cfg.zic64b = true;
-> +    cpu->cfg.ext_zicbom = true;
-> +    cpu->cfg.ext_zicbop = true;
-> +    cpu->cfg.ext_zicboz = true;
-> +    cpu->cfg.cbom_blocksize = 64;
-> +    cpu->cfg.cbop_blocksize = 64;
-> +    cpu->cfg.cboz_blocksize = 64;
-> +    cpu->cfg.ext_zfhmin = true;
-> +    cpu->cfg.ext_zkt = true;
-
-You can change this whole block with:
-
-RVA22U64.enabled = true;
+Agreed.
 
 
-riscv_cpu_add_profiles() will check if we have a profile enabled and, if that's the
-case, we'll enable all its extensions in the CPU.
-
-In the near future, when we implement a proper RVA23 support, we'll be able to just do
-a single RVA23S64.enabled = true in this cpu_init(). But for now we can at least declare
-RVA22U64 (perhaps RVA22S64) support for this CPU.
-
-
-Thanks,
-
-Daniel
-
-
-> +
-> +    /* RVA23U64 */
-> +    cpu->cfg.ext_zvfhmin = true;
-> +    cpu->cfg.ext_zvbb = true;
-> +    cpu->cfg.ext_zvkt = true;
-> +    cpu->cfg.ext_zihintntl = true;
-> +    cpu->cfg.ext_zicond = true;
-> +    cpu->cfg.ext_zcb = true;
-> +    cpu->cfg.ext_zfa = true;
-> +    cpu->cfg.ext_zawrs = true;
-> +
-> +    /* RVA23S64 */
-> +    cpu->cfg.ext_zifencei = true;
-> +    cpu->cfg.svade = true;
-> +    cpu->cfg.ext_svpbmt = true;
-> +    cpu->cfg.ext_svinval = true;
-> +    cpu->cfg.ext_svnapot = true;
-> +    cpu->cfg.ext_sstc = true;
-> +    cpu->cfg.ext_sscofpmf = true;
-> +    cpu->cfg.ext_smstateen = true;
-> +
-> +    cpu->cfg.ext_smaia = true;
-> +    cpu->cfg.ext_ssaia = true;
-> +
-> +    /* Server Platform */
-> +#ifndef CONFIG_USER_ONLY
-> +    set_satp_mode_max_supported(cpu, VM_1_10_SV48);
-> +#endif
-> +    cpu->cfg.ext_svadu = true;
-> +    cpu->cfg.ext_zkr = true;
-> +}
->   #endif
->   
->   static const gchar *riscv_gdb_arch_name(CPUState *cs)
-> @@ -2547,6 +2608,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
->       DEFINE_BARE_CPU(TYPE_RISCV_CPU_RV64E,        MXL_RV64,  rv64e_bare_cpu_init),
->       DEFINE_PROFILE_CPU(TYPE_RISCV_CPU_RVA22U64,  MXL_RV64,  rva22u64_profile_cpu_init),
->       DEFINE_PROFILE_CPU(TYPE_RISCV_CPU_RVA22S64,  MXL_RV64,  rva22s64_profile_cpu_init),
-> +    DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_RVSP_REF,   MXL_RV64,  rv64_rvsp_ref_cpu_init),
->   #endif
->   };
->   
+r~
 
