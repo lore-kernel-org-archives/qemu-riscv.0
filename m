@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1900AC48BF6
-	for <qemu-riscv@archiver.kernel.org>; Mon,  4 Mar 2024 17:24:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0E63C5478C
+	for <qemu-riscv@archiver.kernel.org>; Mon,  4 Mar 2024 17:39:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rhC3B-0005jl-MY; Mon, 04 Mar 2024 12:24:29 -0500
+	id 1rhCGz-0006oG-9x; Mon, 04 Mar 2024 12:38:45 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rhC3A-0005jR-Os
- for qemu-riscv@nongnu.org; Mon, 04 Mar 2024 12:24:28 -0500
-Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b])
+ id 1rhCGw-0006nh-HH
+ for qemu-riscv@nongnu.org; Mon, 04 Mar 2024 12:38:43 -0500
+Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rhC38-0007QS-Nt
- for qemu-riscv@nongnu.org; Mon, 04 Mar 2024 12:24:28 -0500
-Received: by mail-pf1-x42b.google.com with SMTP id
- d2e1a72fcca58-6e5a50d91b4so4523660b3a.2
- for <qemu-riscv@nongnu.org>; Mon, 04 Mar 2024 09:24:26 -0800 (PST)
+ id 1rhCGq-0001tU-TB
+ for qemu-riscv@nongnu.org; Mon, 04 Mar 2024 12:38:38 -0500
+Received: by mail-pf1-x436.google.com with SMTP id
+ d2e1a72fcca58-6e622b46f45so917362b3a.1
+ for <qemu-riscv@nongnu.org>; Mon, 04 Mar 2024 09:38:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1709573065; x=1710177865; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=ventanamicro.com; s=google; t=1709573915; x=1710178715; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=ujQZlVzwEouRsoAxeY1MiVCw9haUba1/ifiQupfzP88=;
- b=Nv7dQc2FFA7gc+dddu8seEd6QLcIrj67q8Uc4mTStcPyGDwLKKWYQ/gYIuMpREzA6x
- olgqf4qfiGfjMvnL2yoNy4GbInySuGnt/X77iklOP6gbl/9oX8faeCbXnIhhe2dDaO5Y
- P2MCLWa7mXZF2yTH1w/4DTUOOHfCyVm/p3ULX5QInmFN5H+MSLMDmuQF+/SSkS3pVgZj
- l4w1yB8ZwuL5rLZ/ZB4Ur+Sa7VZGwbMmFBND/vqRgF3o/r+6UQ2W9Q1UpQUCfGzsYsWC
- nHxhRnWZnoFYJcxp/9OJDSUNE81ht/XdEAvD2tjlXKB6qN6kXRRrAqNUiSKYXERJHPtR
- JKbw==
+ bh=gT9V8gf5JdyxQS9HahQsmnOnff7m4uio6mQ4X/pOT8Y=;
+ b=eKCozVwkKzsCe4hL/eFIpo1HXTq9FqB5c2qH9pZMp/fVq7qbYyWw+claDgHzI4Kpmv
+ ZK/XWe1cgnWYrsPPTguOTw/Djt+DYhGLyA/EnxaxnKoRW0ax0RgDJKgvT7JS52+QidQW
+ yOYuqa96wABAuHNqsqhb+AjWU0X1+4FJHPbeBMmjhXFH71zDVT6hxjOa/ZPFhYhbEM+i
+ y2cx2KeAv37nCqZPkScpZisdVCp3z0w7v4VJlG6diJEBdJtR76PyB+aFBh9Dv7IHDCzA
+ N/fuNotnb1SdNuuqj+670AZKcztCNXrBLuIK3m4kUrptS1Tx/BN0HsCo5JkL1tGnIfzt
+ ogCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709573065; x=1710177865;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1709573915; x=1710178715;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ujQZlVzwEouRsoAxeY1MiVCw9haUba1/ifiQupfzP88=;
- b=YIayWMOcfDfilIu2QQXYic4gSt/npReTutAjnUlkE4clf0cVHQNfRoOwcfOOzOAmXb
- nGuAClos/e2r8zFoONhT6hrJ57lBHhlWYH41mE3e31hxNQKNdsocfgcxnTGH8/Ue8kMh
- EjBr02BpONFt41Un+GnbHywMu+t+RchZEnLTgjDeS9WO+rIVC9xv3hdSssUV04SzH3yt
- DW47eOqnlKnU4jv59EPR/Vfx5+DaShdkL0XN+qgePexk5vmjxczdQwPHQN3eCrLnZjRc
- Wyv4b6PDFfZjm8hgibXEYBhfQn9aeGstPQvFlWYrC/Cd5srr5gjr+YM30SgPCMoymI83
- d6ew==
+ bh=gT9V8gf5JdyxQS9HahQsmnOnff7m4uio6mQ4X/pOT8Y=;
+ b=t1hu3ulu8JcLncTyKOU18RwSVxZsekM93teh/xM25CT3HWFbcVIePwkoN4XMK4aP6+
+ wpsuAApkcFxFuipOVKjihz5UH07uGd63q3ZoWPZgaTR5oG7s4kbtGsQqMk0+5OtEIQb7
+ 6d160CpycwWGHr2na4Ubn2+ubIRjdfmtFTgpxB1kEWQn3FtZGj+IPT8B8u7VlZDyYulM
+ zDwbd6V/dkuzfzDaRNYgN46DG5m6g5s+OK2WWLhBX25Ss4QdcM0zTOGl8vqIJYKTixAN
+ 1QNHsmKCmrxvi4EcJu6iQh6l7j3F/Xfqs1aqADcjpI0fptKCqwZNLeU5e/gfwE58lEN/
+ D2IA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVifCinKAxLr1KxJyXhSskuzsuKBV6f+EYztkPuxTxwSr9NpdpYJvAsuIErv3LTWQRpwJEwPVlHoWitth1WM44+AiYaeow=
-X-Gm-Message-State: AOJu0Ywhw8IZFNimU87v/2LAoiGyyAycICDx7aDpTvqccxKkFpRxtFfi
- 4mILAdLW9lcU62u6pdcu7BlSaffqTFMmb+HA8sEf08iTl4R3fHh3J791kBGBtO8=
-X-Google-Smtp-Source: AGHT+IFrkuXw/iiN1aUxFBGZEApPu2LibaAmsW/EyACllCghD6kYY0sliQFSvPO1DPB5QjUty8sOEQ==
-X-Received: by 2002:a05:6a00:9084:b0:6e5:dadd:6e11 with SMTP id
- jo4-20020a056a00908400b006e5dadd6e11mr11946711pfb.33.1709573064784; 
- Mon, 04 Mar 2024 09:24:24 -0800 (PST)
+ AJvYcCUhPhRAFVPZ+1a/H5e8l3kf5f856AgecauyO+C+fSA69Ms4yJE+RepTnBoVqyyZKwRxbYGLB2KoTrNS6eHxJjKi1/oX5nE=
+X-Gm-Message-State: AOJu0YyYqTCsb8Gp6vsgFcUniACc5htcAnbC5YRNUkMH342J4mLMsoO4
+ 1bepYKwU1UKTidFhPLALDsXL7wmgmF3/q96js7R0rtsUDQbezNt7xap4q9Zi6wY=
+X-Google-Smtp-Source: AGHT+IHJLTDjoy/4PEM3kTr4NXMB7A/8KUNlr/qoTk7NUpN/W5u1Y6icfwusaDgVyVYV+0LJgGJkFQ==
+X-Received: by 2002:a05:6a00:c95:b0:6e4:7a93:b627 with SMTP id
+ a21-20020a056a000c9500b006e47a93b627mr9993779pfv.15.1709573915249; 
+ Mon, 04 Mar 2024 09:38:35 -0800 (PST)
 Received: from [192.168.68.110] ([177.94.15.159])
  by smtp.gmail.com with ESMTPSA id
- c2-20020a62e802000000b006e1463c18f8sm7558556pfi.37.2024.03.04.09.24.21
+ d18-20020a056a00199200b006e56c8f572esm7765946pfl.141.2024.03.04.09.38.30
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 04 Mar 2024 09:24:24 -0800 (PST)
-Message-ID: <23cdc593-c394-4f45-ab83-07b6aae44047@ventanamicro.com>
-Date: Mon, 4 Mar 2024 14:24:19 -0300
+ Mon, 04 Mar 2024 09:38:34 -0800 (PST)
+Message-ID: <a72378d4-9d65-4b23-a566-d58c01dcf3a1@ventanamicro.com>
+Date: Mon, 4 Mar 2024 14:38:28 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 2/5] target/riscv: Add cycle & instret privilege mode
- filtering properties
-To: Atish Patra <atishp@rivosinc.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Liu Zhiwei
- <zhiwei_liu@linux.alibaba.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org, Weiwei Li
- <liwei1518@gmail.com>, kaiwenxue1@gmail.com
-References: <20240228185116.1321730-1-atishp@rivosinc.com>
- <20240228185116.1321730-3-atishp@rivosinc.com>
+Subject: Re: [PATCH 06/19] smbios: get rid of smbios_legacy global
 Content-Language: en-US
+To: Igor Mammedov <imammedo@redhat.com>, qemu-devel@nongnu.org
+Cc: peter.maydell@linaro.org, pbonzini@redhat.com, mst@redhat.com,
+ gaosong@loongson.cn, alistair.francis@wdc.com, palmer@dabbelt.com,
+ bin.meng@windriver.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
+ anisinha@redhat.com, philmd@linaro.org, wangyanan55@huawei.com,
+ eblake@redhat.com, armbru@redhat.com, qemu-arm@nongnu.org,
+ qemu-riscv@nongnu.org, f.ebner@proxmox.com
+References: <20240227154749.1818189-1-imammedo@redhat.com>
+ <20240227154749.1818189-7-imammedo@redhat.com>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240228185116.1321730-3-atishp@rivosinc.com>
+In-Reply-To: <20240227154749.1818189-7-imammedo@redhat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42b;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x42b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::436;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x436.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -105,52 +105,180 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 2/28/24 15:51, Atish Patra wrote:
-> From: Kaiwen Xue <kaiwenx@rivosinc.com>
+On 2/27/24 12:47, Igor Mammedov wrote:
+> clean up smbios_set_defaults() which is reused by legacy
+> and non legacy machines from being aware of 'legacy' notion
+> and need to turn it off. And push legacy handling up to
+> PC machine code where it's relevant.
 > 
-> This adds the properties for ISA extension smcntrpmf. Patches
-> implementing it will follow.
-> 
-> Signed-off-by: Atish Patra <atishp@rivosinc.com>
-> Signed-off-by: Kaiwen Xue <kaiwenx@rivosinc.com>
+> Signed-off-by: Igor Mammedov <imammedo@redhat.com>
 > ---
 
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+For hw/riscv/virt.c changes:
 
->   target/riscv/cpu.c     | 2 ++
->   target/riscv/cpu_cfg.h | 1 +
->   2 files changed, 3 insertions(+)
+Acked-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+
+> PS: I've moved/kept legacy smbios_entries to smbios_get_tables()
+> but it at least is not visible to API users. To get rid of it
+> as well, it would be necessary to change how '-smbios' CLI
+> option is processed. Which is done later in the series.
+> ---
+>   include/hw/firmware/smbios.h |  2 +-
+>   hw/arm/virt.c                |  2 +-
+>   hw/i386/fw_cfg.c             |  7 ++++---
+>   hw/loongarch/virt.c          |  2 +-
+>   hw/riscv/virt.c              |  2 +-
+>   hw/smbios/smbios.c           | 35 +++++++++++++++--------------------
+>   6 files changed, 23 insertions(+), 27 deletions(-)
 > 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 1b8d001d237f..f9d3c80597fc 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -169,6 +169,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
->       ISA_EXT_DATA_ENTRY(zhinx, PRIV_VERSION_1_12_0, ext_zhinx),
->       ISA_EXT_DATA_ENTRY(zhinxmin, PRIV_VERSION_1_12_0, ext_zhinxmin),
->       ISA_EXT_DATA_ENTRY(smaia, PRIV_VERSION_1_12_0, ext_smaia),
-> +    ISA_EXT_DATA_ENTRY(smcntrpmf, PRIV_VERSION_1_12_0, ext_smcntrpmf),
->       ISA_EXT_DATA_ENTRY(smepmp, PRIV_VERSION_1_12_0, ext_smepmp),
->       ISA_EXT_DATA_ENTRY(smstateen, PRIV_VERSION_1_12_0, ext_smstateen),
->       ISA_EXT_DATA_ENTRY(ssaia, PRIV_VERSION_1_12_0, ext_ssaia),
-> @@ -1447,6 +1448,7 @@ const char *riscv_get_misa_ext_description(uint32_t bit)
->   const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
->       /* Defaults for standard extensions */
->       MULTI_EXT_CFG_BOOL("sscofpmf", ext_sscofpmf, false),
-> +    MULTI_EXT_CFG_BOOL("smcntrpmf", ext_smcntrpmf, false),
->       MULTI_EXT_CFG_BOOL("zifencei", ext_zifencei, true),
->       MULTI_EXT_CFG_BOOL("zicsr", ext_zicsr, true),
->       MULTI_EXT_CFG_BOOL("zihintntl", ext_zihintntl, true),
-> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-> index 833bf5821708..0828841445c5 100644
-> --- a/target/riscv/cpu_cfg.h
-> +++ b/target/riscv/cpu_cfg.h
-> @@ -73,6 +73,7 @@ struct RISCVCPUConfig {
->       bool ext_zihpm;
->       bool ext_smstateen;
->       bool ext_sstc;
-> +    bool ext_smcntrpmf;
->       bool ext_svadu;
->       bool ext_svinval;
->       bool ext_svnapot;
+> diff --git a/include/hw/firmware/smbios.h b/include/hw/firmware/smbios.h
+> index a187fbbd3d..0818184834 100644
+> --- a/include/hw/firmware/smbios.h
+> +++ b/include/hw/firmware/smbios.h
+> @@ -293,7 +293,7 @@ struct smbios_type_127 {
+>   void smbios_entry_add(QemuOpts *opts, Error **errp);
+>   void smbios_set_cpuid(uint32_t version, uint32_t features);
+>   void smbios_set_defaults(const char *manufacturer, const char *product,
+> -                         const char *version, bool legacy_mode,
+> +                         const char *version,
+>                            bool uuid_encoded, SmbiosEntryPointType ep_type);
+>   void smbios_set_default_processor_family(uint16_t processor_family);
+>   uint8_t *smbios_get_table_legacy(uint32_t expected_t4_count, size_t *length);
+> diff --git a/hw/arm/virt.c b/hw/arm/virt.c
+> index 0af1943697..8588681f27 100644
+> --- a/hw/arm/virt.c
+> +++ b/hw/arm/virt.c
+> @@ -1633,7 +1633,7 @@ static void virt_build_smbios(VirtMachineState *vms)
+>       }
+>   
+>       smbios_set_defaults("QEMU", product,
+> -                        vmc->smbios_old_sys_ver ? "1.0" : mc->name, false,
+> +                        vmc->smbios_old_sys_ver ? "1.0" : mc->name,
+>                           true, SMBIOS_ENTRY_POINT_TYPE_64);
+>   
+>       /* build the array of physical mem area from base_memmap */
+> diff --git a/hw/i386/fw_cfg.c b/hw/i386/fw_cfg.c
+> index fcb4fb0769..c1e9c0fd9c 100644
+> --- a/hw/i386/fw_cfg.c
+> +++ b/hw/i386/fw_cfg.c
+> @@ -63,15 +63,16 @@ void fw_cfg_build_smbios(PCMachineState *pcms, FWCfgState *fw_cfg)
+>       if (pcmc->smbios_defaults) {
+>           /* These values are guest ABI, do not change */
+>           smbios_set_defaults("QEMU", mc->desc, mc->name,
+> -                            pcmc->smbios_legacy_mode, pcmc->smbios_uuid_encoded,
+> +                            pcmc->smbios_uuid_encoded,
+>                               pcms->smbios_entry_point_type);
+>       }
+>   
+>       /* tell smbios about cpuid version and features */
+>       smbios_set_cpuid(cpu->env.cpuid_version, cpu->env.features[FEAT_1_EDX]);
+>   
+> -    smbios_tables = smbios_get_table_legacy(ms->smp.cpus, &smbios_tables_len);
+> -    if (smbios_tables) {
+> +    if (pcmc->smbios_legacy_mode) {
+> +        smbios_tables = smbios_get_table_legacy(ms->smp.cpus,
+> +                                                &smbios_tables_len);
+>           fw_cfg_add_bytes(fw_cfg, FW_CFG_SMBIOS_ENTRIES,
+>                            smbios_tables, smbios_tables_len);
+>           return;
+> diff --git a/hw/loongarch/virt.c b/hw/loongarch/virt.c
+> index 0ad7d8c887..73fb3522ba 100644
+> --- a/hw/loongarch/virt.c
+> +++ b/hw/loongarch/virt.c
+> @@ -320,7 +320,7 @@ static void virt_build_smbios(LoongArchMachineState *lams)
+>           return;
+>       }
+>   
+> -    smbios_set_defaults("QEMU", product, mc->name, false,
+> +    smbios_set_defaults("QEMU", product, mc->name,
+>                           true, SMBIOS_ENTRY_POINT_TYPE_64);
+>   
+>       smbios_get_tables(ms, NULL, 0, &smbios_tables, &smbios_tables_len,
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index fd35c74781..e2c9529df2 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -1235,7 +1235,7 @@ static void virt_build_smbios(RISCVVirtState *s)
+>           product = "KVM Virtual Machine";
+>       }
+>   
+> -    smbios_set_defaults("QEMU", product, mc->name, false,
+> +    smbios_set_defaults("QEMU", product, mc->name,
+>                           true, SMBIOS_ENTRY_POINT_TYPE_64);
+>   
+>       if (riscv_is_32bit(&s->soc[0])) {
+> diff --git a/hw/smbios/smbios.c b/hw/smbios/smbios.c
+> index 15339d8dbe..c46fc93357 100644
+> --- a/hw/smbios/smbios.c
+> +++ b/hw/smbios/smbios.c
+> @@ -54,7 +54,6 @@ struct smbios_table {
+>   
+>   static uint8_t *smbios_entries;
+>   static size_t smbios_entries_len;
+> -static bool smbios_legacy = true;
+>   static bool smbios_uuid_encoded = true;
+>   /* end: legacy structures & constants for <= 2.0 machines */
+>   
+> @@ -570,9 +569,16 @@ static void smbios_build_type_1_fields(void)
+>   
+>   uint8_t *smbios_get_table_legacy(uint32_t expected_t4_count, size_t *length)
+>   {
+> -    if (!smbios_legacy) {
+> -        *length = 0;
+> -        return NULL;
+> +    /* drop unwanted version of command-line file blob(s) */
+> +    g_free(smbios_tables);
+> +    smbios_tables = NULL;
+> +
+> +    /* also complain if fields were given for types > 1 */
+> +    if (find_next_bit(have_fields_bitmap,
+> +                      SMBIOS_MAX_TYPE + 1, 2) < SMBIOS_MAX_TYPE + 1) {
+> +        error_report("can't process fields for smbios "
+> +                     "types > 1 on machine versions < 2.1!");
+> +        exit(1);
+>       }
+>   
+>       if (!smbios_immutable) {
+> @@ -1006,28 +1012,13 @@ void smbios_set_default_processor_family(uint16_t processor_family)
+>   }
+>   
+>   void smbios_set_defaults(const char *manufacturer, const char *product,
+> -                         const char *version, bool legacy_mode,
+> +                         const char *version,
+>                            bool uuid_encoded, SmbiosEntryPointType ep_type)
+>   {
+>       smbios_have_defaults = true;
+> -    smbios_legacy = legacy_mode;
+>       smbios_uuid_encoded = uuid_encoded;
+>       smbios_ep_type = ep_type;
+>   
+> -    /* drop unwanted version of command-line file blob(s) */
+> -    if (smbios_legacy) {
+> -        g_free(smbios_tables);
+> -        /* in legacy mode, also complain if fields were given for types > 1 */
+> -        if (find_next_bit(have_fields_bitmap,
+> -                          SMBIOS_MAX_TYPE+1, 2) < SMBIOS_MAX_TYPE+1) {
+> -            error_report("can't process fields for smbios "
+> -                         "types > 1 on machine versions < 2.1!");
+> -            exit(1);
+> -        }
+> -    } else {
+> -        g_free(smbios_entries);
+> -    }
+> -
+>       SMBIOS_SET_DEFAULT(type1.manufacturer, manufacturer);
+>       SMBIOS_SET_DEFAULT(type1.product, product);
+>       SMBIOS_SET_DEFAULT(type1.version, version);
+> @@ -1103,6 +1094,10 @@ void smbios_get_tables(MachineState *ms,
+>   {
+>       unsigned i, dimm_cnt, offset;
+>   
+> +    /* drop unwanted (legacy) version of command-line file blob(s) */
+> +    g_free(smbios_entries);
+> +    smbios_entries = NULL;
+> +
+>       if (!smbios_immutable) {
+>           smbios_build_type_0_table();
+>           smbios_build_type_1_table();
 
