@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDCF7C54E41
-	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Mar 2024 12:15:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76846C54798
+	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Mar 2024 12:15:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rhTeC-0003Uz-Ob; Tue, 05 Mar 2024 07:11:52 -0500
+	id 1rhTef-0004uU-PO; Tue, 05 Mar 2024 07:12:21 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rhTd4-0001iS-IS
- for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:10:53 -0500
-Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
+ id 1rhTdV-00028Z-K2
+ for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:11:09 -0500
+Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rhTcf-0001RE-CD
- for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:10:42 -0500
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-412ea23a750so6266185e9.0
- for <qemu-riscv@nongnu.org>; Tue, 05 Mar 2024 04:10:15 -0800 (PST)
+ id 1rhTcr-0001VM-FA
+ for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:11:09 -0500
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-412de18edcaso17025085e9.3
+ for <qemu-riscv@nongnu.org>; Tue, 05 Mar 2024 04:10:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709640614; x=1710245414; darn=nongnu.org;
+ d=linaro.org; s=google; t=1709640620; x=1710245420; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=h/FvadGGUwctE1IWDDn0kVOXWDaUBwNAKUX6TCu5fDg=;
- b=AALiLh2n7Byt94/QX+on1G8T0EIoEUKhThgE9yVhdNKuRyRbnRIFO/tl8BJssx0c8u
- asUD29Fe4hEODqA9pX/kUT1asUo1UN4ECNor0drAidRU64otNj06ept7Mvz7c7zA4AL6
- FRBBsU8WTHq6Ry5h0EkJCQszD6PYx1CKSuFo3WPUAeTNOGy4rVUSIrDbl7gKUg0dVJhv
- JdgmUa/YGLvB/9EGKrETofa54NBy3mDvuLruvDJWnjvFK2jHtBq0fghLUiWVvymgfZn8
- VQ7xd83VOX6EFyzsZqqpHzIHoq/FrQVa811mkadT24PZXp732DECAgcbwS8/zuHGXD08
- 5ACw==
+ bh=UqNj0COIQuCCXg0hZT7WW42rxn79Q0Rei6wd0zzibZM=;
+ b=QEiKOBRz+cu1icMi/mXn8vteHRi2/VIxGbfHCbDcSSFWUcPDqZJh/Mt2dC5fNZ9r/2
+ u5fMltc7OApY5sHa/d4FEw4GoYkRP4BlV6JRvmgRE3vMFuW4PdNL/bv2AtPyXVDasTD/
+ /ndXSaCQkh22Z1j2u94i7BJ/EuaabAZb1MajmT8oP1EOXbNtBMITTgRBeRmbgulz8SVk
+ ygJ0sX4cZ2nhi0AZ84HQUvFgNkvaiE7ijOiNJhYVP++ObuXkNx88nvdfue1mw5jvLlhC
+ o8Qy5dH1ZzyjUBGsn3wJSKPvC4HJsiC86vuoUPAtdbyRwzyfsCoYyseacCCrSB0VeH7t
+ 46rA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709640614; x=1710245414;
+ d=1e100.net; s=20230601; t=1709640620; x=1710245420;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=h/FvadGGUwctE1IWDDn0kVOXWDaUBwNAKUX6TCu5fDg=;
- b=aMdAf0JAPfnD/hFzF+h0mMiNrCbmrK8oVSO9NUHUXdH6+TSOvogsYwQHG934TQK0Hw
- M14+Nd5aLAnGtahUwbap66QGm83i1yIidIt+f8TGrCd85oXjYUL/v9SuJSbAQ7pQR5NT
- i+ZBifqtytUJzi6EKnA3hX3KtDz46e2w7CK83mAMKrwJoxF+h+sFliAiuuyAyQ0zxQbF
- yNCl/zxeo3dPxK0SqBmSj8yDYOmzTizAoBWL/CRmi9sn+96E2GngHqiPIUvsURfzCkJ3
- 1G05FMcVnEZltYOKP1PAX1k5gEECyUEzdxabSulOLLgWIHuamosRhFsUelTnknGOJAi6
- V4qA==
+ bh=UqNj0COIQuCCXg0hZT7WW42rxn79Q0Rei6wd0zzibZM=;
+ b=PrnOLbpFkwsGcQJvLcVwwV2l5EeHJWisXyhIGbozeO0KtMstLgQSa7Rew6ABoDp03J
+ NXT1LK52EWyeOUUQ4eLU3lGrQQ+ixycdpWVX0GWrrUZMbNjcPuBnNNb92Th6VmUYDR0O
+ 3xmDoY77qM0bYXae9RZCuX2bW5LkOLO9h+5bIEztURA5v+mWqbKcLTcpvzGr6sIywSd8
+ v/3mm9LnzQPqwsgZKxolAr5k8TitQu7xrvtxFVex9jgfy91mvyCtLgC4sSvLwC10aMIW
+ xQTDEAhKYlvol4QjK9llAZdgK8u9lhoDFIkcp2z6mXObt7XOSVJ4olhbwKQVZYgiu+m5
+ C5Wg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUv4Dpk2P8TT1JBtKeC/+GAIM+ktzkHmL5RongB+LY/WVBk55lOsZMZr6rzDwkV8nARXo8pUTNA0MIv1Rz3TtsngEXCjY0=
-X-Gm-Message-State: AOJu0YzWo6yPdjw64vkbh0pFKnsDy8aoPV+xLUvrmGiHzIgyl3A0Zl0y
- kgC4Do4nSqGBZSYgpMpMomGa+AoLA2sPkiYRKCIZDfdBKUgp3ghodo4GdJqQDTE=
-X-Google-Smtp-Source: AGHT+IFRlWeZuoNQT4394axMB4M5A4PeGV9EvrVU80583K6WJL53zjPB2OtrAYcpUDFxlDs/3LsTvw==
-X-Received: by 2002:a7b:cd05:0:b0:412:eaac:968a with SMTP id
- f5-20020a7bcd05000000b00412eaac968amr2114430wmj.16.1709640613787; 
- Tue, 05 Mar 2024 04:10:13 -0800 (PST)
+ AJvYcCXt04RcR9EAYs6nZSz5lOXt82TvFy9w1u0b7bsJssT3b+GvzJizRp/msHcsjHP7uq14f1CovPVEIESTZObTYfhCVo6N1JM=
+X-Gm-Message-State: AOJu0Yyh80oYBGHsKEKSDIym9NN9le9GL/3o2TOcFZKnMNkWphYxPPEE
+ BGqZtFudzfV1GKQbWqEunIKuGsZnBtjkAkBnv2cHyA+mgtrL4yx33QHzK5AwFxY=
+X-Google-Smtp-Source: AGHT+IEqVG6j+NSW1otiPJgcGPmMZvnShCR4A9sLFt8NX4RKuQuujLXaq43uqssyg5ssOHVIvgapgA==
+X-Received: by 2002:a05:600c:1546:b0:412:e7e1:b5c with SMTP id
+ f6-20020a05600c154600b00412e7e10b5cmr2930430wmg.15.1709640620050; 
+ Tue, 05 Mar 2024 04:10:20 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- hg5-20020a05600c538500b00412eeb017f0sm1196785wmb.34.2024.03.05.04.10.08
+ k40-20020a05600c1ca800b00412b643b5a3sm17627256wms.11.2024.03.05.04.10.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Mar 2024 04:10:12 -0800 (PST)
+ Tue, 05 Mar 2024 04:10:16 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 5EDF65F7B5;
+ by draig.lan (Postfix) with ESMTP id E54B75F9DF;
  Tue,  5 Mar 2024 12:10:06 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -96,17 +96,17 @@ Cc: Wainer dos Santos Moschetta <wainersm@redhat.com>,
  Paolo Bonzini <pbonzini@redhat.com>, Alexandre Iooss <erdnaxe@crans.org>,
  Warner Losh <imp@bsdimp.com>, qemu-riscv@nongnu.org,
  Ilya Leoshkevich <iii@linux.ibm.com>
-Subject: [PATCH 09/29] gdbstub: Introduce gdb_handle_query_supported_user()
-Date: Tue,  5 Mar 2024 12:09:45 +0000
-Message-Id: <20240305121005.3528075-10-alex.bennee@linaro.org>
+Subject: [PATCH 15/29] plugins: define qemu_plugin_u64
+Date: Tue,  5 Mar 2024 12:09:51 +0000
+Message-Id: <20240305121005.3528075-16-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240305121005.3528075-1-alex.bennee@linaro.org>
 References: <20240305121005.3528075-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::336;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x336.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -129,72 +129,162 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Ilya Leoshkevich <iii@linux.ibm.com>
+From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 
-The upcoming follow-fork-mode child support requires advertising the
-fork-events feature, which is user-specific. Introduce a user-specific
-hook for this.
+Additionally to the scoreboard, we define a qemu_plugin_u64, which is a
+simple struct holding a pointer to a scoreboard, and a given offset.
+This allows to have a scoreboard containing structs, without having to
+bring offset to operate on a specific field.
+
+Since most of the plugins are simply collecting a sum of per-cpu values,
+qemu_plugin_u64 directly support this operation as well.
+
+All inline operations defined later will use a qemu_plugin_u64 as input.
+
+New functions:
+- qemu_plugin_u64_add
+- qemu_plugin_u64_get
+- qemu_plugin_u64_set
+- qemu_plugin_u64_sum
+New macros:
+- qemu_plugin_scoreboard_u64
+- qemu_plugin_scoreboard_u64_in_struct
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Signed-off-by: Ilya Leoshkevich <iii@linux.ibm.com>
-Message-Id: <20240219141628.246823-9-iii@linux.ibm.com>
+Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+Message-Id: <20240304130036.124418-3-pierrick.bouvier@linaro.org>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- gdbstub/internals.h |  1 +
- gdbstub/gdbstub.c   | 12 +++++++++---
- gdbstub/user.c      |  4 ++++
- 3 files changed, 14 insertions(+), 3 deletions(-)
+ include/qemu/qemu-plugin.h   | 52 ++++++++++++++++++++++++++++++++++++
+ plugins/api.c                | 34 +++++++++++++++++++++++
+ plugins/qemu-plugins.symbols |  4 +++
+ 3 files changed, 90 insertions(+)
 
-diff --git a/gdbstub/internals.h b/gdbstub/internals.h
-index 56b7c13b750..e6063835b1f 100644
---- a/gdbstub/internals.h
-+++ b/gdbstub/internals.h
-@@ -196,6 +196,7 @@ void gdb_handle_v_file_pread(GArray *params, void *user_ctx); /* user */
- void gdb_handle_v_file_readlink(GArray *params, void *user_ctx); /* user */
- void gdb_handle_query_xfer_exec_file(GArray *params, void *user_ctx); /* user */
- void gdb_handle_set_catch_syscalls(GArray *params, void *user_ctx); /* user */
-+void gdb_handle_query_supported_user(const char *gdb_supported); /* user */
+diff --git a/include/qemu/qemu-plugin.h b/include/qemu/qemu-plugin.h
+index 31c468ddb2c..ebf9a645e15 100644
+--- a/include/qemu/qemu-plugin.h
++++ b/include/qemu/qemu-plugin.h
+@@ -225,6 +225,17 @@ struct qemu_plugin_insn;
+ /** struct qemu_plugin_scoreboard - Opaque handle for a scoreboard */
+ struct qemu_plugin_scoreboard;
  
- void gdb_handle_query_attached(GArray *params, void *user_ctx); /* both */
- 
-diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
-index 2909bc8c69f..7be4418dcb5 100644
---- a/gdbstub/gdbstub.c
-+++ b/gdbstub/gdbstub.c
-@@ -1655,9 +1655,15 @@ static void handle_query_supported(GArray *params, void *user_ctx)
-     g_string_append(gdbserver_state.str_buf, ";qXfer:exec-file:read+");
- #endif
- 
--    if (params->len &&
--        strstr(get_param(params, 0)->data, "multiprocess+")) {
--        gdbserver_state.multiprocess = true;
-+    if (params->len) {
-+        const char *gdb_supported = get_param(params, 0)->data;
++/**
++ * typedef qemu_plugin_u64 - uint64_t member of an entry in a scoreboard
++ *
++ * This field allows to access a specific uint64_t member in one given entry,
++ * located at a specified offset. Inline operations expect this as entry.
++ */
++typedef struct {
++    struct qemu_plugin_scoreboard *score;
++    size_t offset;
++} qemu_plugin_u64;
 +
-+        if (strstr(gdb_supported, "multiprocess+")) {
-+            gdbserver_state.multiprocess = true;
-+        }
-+#if defined(CONFIG_USER_ONLY)
-+        gdb_handle_query_supported_user(gdb_supported);
-+#endif
-     }
+ /**
+  * enum qemu_plugin_cb_flags - type of callback
+  *
+@@ -784,4 +795,45 @@ QEMU_PLUGIN_API
+ void *qemu_plugin_scoreboard_find(struct qemu_plugin_scoreboard *score,
+                                   unsigned int vcpu_index);
  
-     g_string_append(gdbserver_state.str_buf, ";vContSupported+;multiprocess+");
-diff --git a/gdbstub/user.c b/gdbstub/user.c
-index 866a25f9c06..c9e8b83d720 100644
---- a/gdbstub/user.c
-+++ b/gdbstub/user.c
-@@ -382,6 +382,10 @@ void gdbserver_fork_end(CPUState *cpu, pid_t pid)
-     disable_gdbstub(cpu);
++/* Macros to define a qemu_plugin_u64 */
++#define qemu_plugin_scoreboard_u64(score) \
++    (qemu_plugin_u64) {score, 0}
++#define qemu_plugin_scoreboard_u64_in_struct(score, type, member) \
++    (qemu_plugin_u64) {score, offsetof(type, member)}
++
++/**
++ * qemu_plugin_u64_add() - add a value to a qemu_plugin_u64 for a given vcpu
++ * @entry: entry to query
++ * @vcpu_index: entry index
++ * @added: value to add
++ */
++QEMU_PLUGIN_API
++void qemu_plugin_u64_add(qemu_plugin_u64 entry, unsigned int vcpu_index,
++                         uint64_t added);
++
++/**
++ * qemu_plugin_u64_get() - get value of a qemu_plugin_u64 for a given vcpu
++ * @entry: entry to query
++ * @vcpu_index: entry index
++ */
++QEMU_PLUGIN_API
++uint64_t qemu_plugin_u64_get(qemu_plugin_u64 entry, unsigned int vcpu_index);
++
++/**
++ * qemu_plugin_u64_set() - set value of a qemu_plugin_u64 for a given vcpu
++ * @entry: entry to query
++ * @vcpu_index: entry index
++ * @val: new value
++ */
++QEMU_PLUGIN_API
++void qemu_plugin_u64_set(qemu_plugin_u64 entry, unsigned int vcpu_index,
++                         uint64_t val);
++
++/**
++ * qemu_plugin_u64_sum() - return sum of all vcpu entries in a scoreboard
++ * @entry: entry to sum
++ */
++QEMU_PLUGIN_API
++uint64_t qemu_plugin_u64_sum(qemu_plugin_u64 entry);
++
+ #endif /* QEMU_QEMU_PLUGIN_H */
+diff --git a/plugins/api.c b/plugins/api.c
+index 76b2e652b9c..8910cbb2c46 100644
+--- a/plugins/api.c
++++ b/plugins/api.c
+@@ -484,3 +484,37 @@ void *qemu_plugin_scoreboard_find(struct qemu_plugin_scoreboard *score,
+     char *base_ptr = score->data->data;
+     return base_ptr + vcpu_index * g_array_get_element_size(score->data);
  }
- 
-+void gdb_handle_query_supported_user(const char *gdb_supported)
++
++static uint64_t *plugin_u64_address(qemu_plugin_u64 entry,
++                                    unsigned int vcpu_index)
 +{
++    char *ptr = qemu_plugin_scoreboard_find(entry.score, vcpu_index);
++    return (uint64_t *)(ptr + entry.offset);
 +}
 +
- /*
-  * Execution state helpers
-  */
++void qemu_plugin_u64_add(qemu_plugin_u64 entry, unsigned int vcpu_index,
++                         uint64_t added)
++{
++    *plugin_u64_address(entry, vcpu_index) += added;
++}
++
++uint64_t qemu_plugin_u64_get(qemu_plugin_u64 entry,
++                             unsigned int vcpu_index)
++{
++    return *plugin_u64_address(entry, vcpu_index);
++}
++
++void qemu_plugin_u64_set(qemu_plugin_u64 entry, unsigned int vcpu_index,
++                         uint64_t val)
++{
++    *plugin_u64_address(entry, vcpu_index) = val;
++}
++
++uint64_t qemu_plugin_u64_sum(qemu_plugin_u64 entry)
++{
++    uint64_t total = 0;
++    for (int i = 0, n = qemu_plugin_num_vcpus(); i < n; ++i) {
++        total += qemu_plugin_u64_get(entry, i);
++    }
++    return total;
++}
+diff --git a/plugins/qemu-plugins.symbols b/plugins/qemu-plugins.symbols
+index 3f93e7d6b13..6204453d0fd 100644
+--- a/plugins/qemu-plugins.symbols
++++ b/plugins/qemu-plugins.symbols
+@@ -44,6 +44,10 @@
+   qemu_plugin_tb_get_insn;
+   qemu_plugin_tb_n_insns;
+   qemu_plugin_tb_vaddr;
++  qemu_plugin_u64_add;
++  qemu_plugin_u64_get;
++  qemu_plugin_u64_set;
++  qemu_plugin_u64_sum;
+   qemu_plugin_uninstall;
+   qemu_plugin_vcpu_for_each;
+ };
 -- 
 2.39.2
 
