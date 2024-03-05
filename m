@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3165C54E58
-	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Mar 2024 12:21:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C806BC54798
+	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Mar 2024 12:21:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rhTnb-0005ym-1b; Tue, 05 Mar 2024 07:21:35 -0500
+	id 1rhTnD-0004f1-OP; Tue, 05 Mar 2024 07:21:11 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rhTlG-0000hb-0N
- for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:19:11 -0500
-Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
+ id 1rhTlI-0000lS-6j
+ for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:19:13 -0500
+Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rhTky-0003GR-8H
- for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:19:09 -0500
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-412e66bc492so11906045e9.0
+ id 1rhTky-0003Gw-JL
+ for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:19:11 -0500
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-33ddd1624beso3644248f8f.1
  for <qemu-riscv@nongnu.org>; Tue, 05 Mar 2024 04:18:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1709641129; x=1710245929; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HTlUHz/zzEA+4dY7VR66jAMvQofhd2ytbNOVYam0lP4=;
- b=seuoJ+fveKWfvkRyKiL0wojf14LWb8M/g3lbbt/immUTRNWqSbKBR6aOFak6Zj1ZmD
- i6Bs+Lg8/fjwEW+qQ+CVvDrpY8MWu3pFsU81HXcGRJZOQ0+Z4fZaLKmgzeAjWzz3gQJ/
- yuJrH3t3THpbGoe/egKXjaYClMpcDzIRyfg0xPpMAybjUduXwrbvTIy3JzHBZveRdFH3
- upha149wxeqItubtjHEE1fYS4XjSdSorPN6gewJL2C5Km2pqBgS3aqRuauFs4M1w7K2B
- GlZPEiCdmHzCOU4cTrNeVBuTEZzL/qML05BM965zI1z8G9smP9rLb/tb/v5NqJ9U0Hdd
- 7r8g==
+ bh=Jva0UhCUVM5PrwiNrRfr0W8ZD8H77VctOx99a/dGefo=;
+ b=dnl08MoI3lEFJ66xmrtGAPwl6c0WgbVa6CIGWJuFRRHJxF1T3z4H0j36DmCH+DhuNm
+ AEgeuUHHB5iKdVJ5BkD+WWrt6cbjcctNrBHVaBt0W635xLyVj83wHwKbac0dhLC4ve3p
+ RjVEVS3ufPPXtCwccmGwuVsmiL2UL3IBWVa/eEGumHQmIsS28/kHcvE9Kha2GpMVqf6B
+ 93DxPZKYDjDeLdjBkpa6YDaX610LA4crv6W0RffRydr6tsKREEMsEueHN+MYurXHqjGp
+ 7O6x+wMcJFc8xj5uVk677dESZ/8bskmaPJEDS06rF5pDIz0bQCLcIk9NEtFZfftphVta
+ HcIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1709641129; x=1710245929;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HTlUHz/zzEA+4dY7VR66jAMvQofhd2ytbNOVYam0lP4=;
- b=axYYxymWevMzNveRprNBwmqakarwcDyvK1nmXARaLCA6nG68QYzSqXDvQOgfmBXBG8
- mN32mcw9MCqSLjc3UTvqztETPl1EcYVr63mjar9l69VSEBFioUQUPPFxh7cAicJhzByX
- MTs7RgbJE43A/UOt3JtrHQUNto/KlXxh0+v0kk0ILFTFBZXNFNkPnuOVAwJytK6g3QdW
- ZRi4Ot4nvMKY/gwMbMT/ZIWIoBgXvg3+uSUUbtJCb1XjiDGIBfKasEghPDMNTsW02MHF
- j8BcmHyPEpRLXpRM+6dfUzG/VtsYrIRMHJJtPTIo3V+KxP6fIzMVj5GhsUWRmhDGwmsX
- Pomg==
+ bh=Jva0UhCUVM5PrwiNrRfr0W8ZD8H77VctOx99a/dGefo=;
+ b=j/gABQTbMeM6cDU4oV6MDqevvQ0b+jAhfNf2ecvqChgOpXtfUkiLvoHXErrZoe6tvL
+ Hvk+7oUxAeiwjEwl1pBIZVWXyyqsl1wa/jeGNK2EdB+57eC9RxiWP7QSZAPGIHeOkiA5
+ E3Wmn4FUAnNKDu/iNGcVU/4zjDmb8uWrWjlUoyahRdSOzsI34RqRhnYbNyNMeigCTJ5y
+ iMOYh+zy3DuVA2XzezhhtPPM5EF9o+nIcbrF3iiSHo71QwnatOLFDnR78Cnh8PFTUgGG
+ x4EwTHdF5+jEfCWc8aHceX/kg6xrM2GbcBz0tG8E/laZPLijrcuSvJ1uhkuKIMp0O3ap
+ v+6A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVt/3EY000Sa+ltuLmodbzJAJRiomR4L1A376NwxXeZu7HGv6ibas0jMRIdK5/MD8OrTMGMY3Tez7WZfrruViKP4ArRsLo=
-X-Gm-Message-State: AOJu0YyQXwE6O12G8QZySLFwFXQQnKLfeccw7CyejYts1xSJ78F/em9c
- Msg06o/Ct86n071BKD0/mFjhDRBIxq2keJ0XzlymCkG+bULUhY4qMV9l0EfBh5M=
-X-Google-Smtp-Source: AGHT+IGPLa83unvzaHEFRsDi8vlTQkhtloNhPgsJ1xAFKV+ZZDRwNnlPHFgxZrTxfM9gf1RWrICDzQ==
-X-Received: by 2002:a05:600c:c1a:b0:412:b8ce:fa32 with SMTP id
- fm26-20020a05600c0c1a00b00412b8cefa32mr9113006wmb.11.1709641128899; 
- Tue, 05 Mar 2024 04:18:48 -0800 (PST)
+ AJvYcCUSBOfO1/FcZ9crEcpBUOa6oC/Loi71Cj5ogQ+j34xavnlx39Eet8O0pdl3hhgBZScdGDcS03Rekel7B0YDg3wU9m0jarQ=
+X-Gm-Message-State: AOJu0YyH6zEZ1OFexeI1B1G3n0r9zrnbRc5iWBVKGtvcsQ8DotyjEcdC
+ A2UjOiSDn2ralYWEqw5I0vyFP81y6wH7lC0aPxorvM6KHiZJjFmJdJUdjBlx37U=
+X-Google-Smtp-Source: AGHT+IHTATgThPGnyM45aOi2TznZZmQxxf8YawWswvZPAvtQY/ayQcuvuoLNGIo44swjuTImztdpaA==
+X-Received: by 2002:a05:6000:1e11:b0:33e:47fa:912a with SMTP id
+ bj17-20020a0560001e1100b0033e47fa912amr2968670wrb.27.1709641129428; 
+ Tue, 05 Mar 2024 04:18:49 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- ck4-20020a5d5e84000000b0033e431950c5sm1119001wrb.97.2024.03.05.04.18.44
+ bi25-20020a05600c3d9900b00412e84e96ffsm3912412wmb.40.2024.03.05.04.18.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Tue, 05 Mar 2024 04:18:47 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id C954F5F9FA;
+ by draig.lan (Postfix) with ESMTP id 4CC305F9E6;
  Tue,  5 Mar 2024 12:10:07 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -95,18 +95,18 @@ Cc: Wainer dos Santos Moschetta <wainersm@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Paolo Bonzini <pbonzini@redhat.com>, Alexandre Iooss <erdnaxe@crans.org>,
  Warner Losh <imp@bsdimp.com>, qemu-riscv@nongnu.org,
- Ilya Leoshkevich <iii@linux.ibm.com>
-Subject: [PATCH 25/29] plugins: cleanup codepath for previous inline operation
-Date: Tue,  5 Mar 2024 12:10:01 +0000
-Message-Id: <20240305121005.3528075-26-alex.bennee@linaro.org>
+ Ilya Leoshkevich <iii@linux.ibm.com>, Luc Michel <luc.michel@amd.com>
+Subject: [PATCH 19/29] tests/plugin/mem: migrate to new per_vcpu API
+Date: Tue,  5 Mar 2024 12:09:55 +0000
+Message-Id: <20240305121005.3528075-20-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240305121005.3528075-1-alex.bennee@linaro.org>
 References: <20240305121005.3528075-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::431;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x431.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -131,104 +131,120 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
+Reviewed-by: Luc Michel <luc.michel@amd.com>
 Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Message-Id: <20240304130036.124418-13-pierrick.bouvier@linaro.org>
+Message-Id: <20240304130036.124418-7-pierrick.bouvier@linaro.org>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- plugins/plugin.h       |  5 -----
- accel/tcg/plugin-gen.c | 13 ++++---------
- plugins/core.c         | 29 ++++-------------------------
- 3 files changed, 8 insertions(+), 39 deletions(-)
+ tests/plugin/mem.c        | 46 ++++++++++++++++++++++++++-------------
+ tests/tcg/Makefile.target |  2 +-
+ 2 files changed, 32 insertions(+), 16 deletions(-)
 
-diff --git a/plugins/plugin.h b/plugins/plugin.h
-index f6fa10a0f56..7c34f23cfcb 100644
---- a/plugins/plugin.h
-+++ b/plugins/plugin.h
-@@ -68,11 +68,6 @@ struct qemu_plugin_ctx {
+diff --git a/tests/plugin/mem.c b/tests/plugin/mem.c
+index 44e91065ba7..b650dddcce1 100644
+--- a/tests/plugin/mem.c
++++ b/tests/plugin/mem.c
+@@ -16,9 +16,14 @@
  
- struct qemu_plugin_ctx *plugin_id_to_ctx_locked(qemu_plugin_id_t id);
+ QEMU_PLUGIN_EXPORT int qemu_plugin_version = QEMU_PLUGIN_VERSION;
  
--void plugin_register_inline_op(GArray **arr,
--                               enum qemu_plugin_mem_rw rw,
--                               enum qemu_plugin_op op, void *ptr,
--                               uint64_t imm);
--
- void plugin_register_inline_op_on_entry(GArray **arr,
-                                         enum qemu_plugin_mem_rw rw,
-                                         enum qemu_plugin_op op,
-diff --git a/accel/tcg/plugin-gen.c b/accel/tcg/plugin-gen.c
-index 47e05ec6347..8028786c7bb 100644
---- a/accel/tcg/plugin-gen.c
-+++ b/accel/tcg/plugin-gen.c
-@@ -440,15 +440,10 @@ static TCGOp *append_inline_cb(const struct qemu_plugin_dyn_cb *cb,
-                                TCGOp *begin_op, TCGOp *op,
-                                int *unused)
+-static uint64_t inline_mem_count;
+-static uint64_t cb_mem_count;
+-static uint64_t io_count;
++typedef struct {
++    uint64_t mem_count;
++    uint64_t io_count;
++} CPUCount;
++
++static struct qemu_plugin_scoreboard *counts;
++static qemu_plugin_u64 mem_count;
++static qemu_plugin_u64 io_count;
+ static bool do_inline, do_callback;
+ static bool do_haddr;
+ static enum qemu_plugin_mem_rw rw = QEMU_PLUGIN_MEM_RW;
+@@ -27,16 +32,16 @@ static void plugin_exit(qemu_plugin_id_t id, void *p)
  {
--    char *ptr = cb->userp;
--    size_t elem_size = 0;
--    size_t offset = 0;
--    if (!ptr) {
--        /* use inline entry */
--        ptr = cb->inline_insn.entry.score->data->data;
--        elem_size = g_array_get_element_size(cb->inline_insn.entry.score->data);
--        offset = cb->inline_insn.entry.offset;
--    }
-+    char *ptr = cb->inline_insn.entry.score->data->data;
-+    size_t elem_size = g_array_get_element_size(
-+        cb->inline_insn.entry.score->data);
-+    size_t offset = cb->inline_insn.entry.offset;
+     g_autoptr(GString) out = g_string_new("");
  
-     op = copy_ld_i32(&begin_op, op);
-     op = copy_mul_i32(&begin_op, op, elem_size);
-diff --git a/plugins/core.c b/plugins/core.c
-index 7852590da88..11ca20e6267 100644
---- a/plugins/core.c
-+++ b/plugins/core.c
-@@ -316,22 +316,6 @@ static struct qemu_plugin_dyn_cb *plugin_get_dyn_cb(GArray **arr)
-     return &g_array_index(cbs, struct qemu_plugin_dyn_cb, cbs->len - 1);
+-    if (do_inline) {
+-        g_string_printf(out, "inline mem accesses: %" PRIu64 "\n", inline_mem_count);
+-    }
+-    if (do_callback) {
+-        g_string_append_printf(out, "callback mem accesses: %" PRIu64 "\n", cb_mem_count);
++    if (do_inline || do_callback) {
++        g_string_printf(out, "mem accesses: %" PRIu64 "\n",
++                        qemu_plugin_u64_sum(mem_count));
+     }
+     if (do_haddr) {
+-        g_string_append_printf(out, "io accesses: %" PRIu64 "\n", io_count);
++        g_string_append_printf(out, "io accesses: %" PRIu64 "\n",
++                               qemu_plugin_u64_sum(io_count));
+     }
+     qemu_plugin_outs(out->str);
++    qemu_plugin_scoreboard_free(counts);
  }
  
--void plugin_register_inline_op(GArray **arr,
--                               enum qemu_plugin_mem_rw rw,
--                               enum qemu_plugin_op op,
--                               void *ptr,
--                               uint64_t imm)
--{
--    struct qemu_plugin_dyn_cb *dyn_cb;
--
--    dyn_cb = plugin_get_dyn_cb(arr);
--    dyn_cb->userp = ptr;
--    dyn_cb->type = PLUGIN_CB_INLINE;
--    dyn_cb->rw = rw;
--    dyn_cb->inline_insn.op = op;
--    dyn_cb->inline_insn.imm = imm;
--}
--
- void plugin_register_inline_op_on_entry(GArray **arr,
-                                         enum qemu_plugin_mem_rw rw,
-                                         enum qemu_plugin_op op,
-@@ -494,15 +478,10 @@ void qemu_plugin_flush_cb(void)
+ static void vcpu_mem(unsigned int cpu_index, qemu_plugin_meminfo_t meminfo,
+@@ -46,12 +51,12 @@ static void vcpu_mem(unsigned int cpu_index, qemu_plugin_meminfo_t meminfo,
+         struct qemu_plugin_hwaddr *hwaddr;
+         hwaddr = qemu_plugin_get_hwaddr(meminfo, vaddr);
+         if (qemu_plugin_hwaddr_is_io(hwaddr)) {
+-            io_count++;
++            qemu_plugin_u64_add(io_count, cpu_index, 1);
+         } else {
+-            cb_mem_count++;
++            qemu_plugin_u64_add(mem_count, cpu_index, 1);
+         }
+     } else {
+-        cb_mem_count++;
++        qemu_plugin_u64_add(mem_count, cpu_index, 1);
+     }
+ }
  
- void exec_inline_op(struct qemu_plugin_dyn_cb *cb, int cpu_index)
- {
--    char *ptr = cb->userp;
--    size_t elem_size = 0;
--    size_t offset = 0;
--    if (!ptr) {
--        /* use inline entry */
--        ptr = cb->inline_insn.entry.score->data->data;
--        elem_size = g_array_get_element_size(cb->inline_insn.entry.score->data);
--        offset = cb->inline_insn.entry.offset;
--    }
-+    char *ptr = cb->inline_insn.entry.score->data->data;
-+    size_t elem_size = g_array_get_element_size(
-+        cb->inline_insn.entry.score->data);
-+    size_t offset = cb->inline_insn.entry.offset;
-     uint64_t *val = (uint64_t *)(ptr + offset + cpu_index * elem_size);
+@@ -64,9 +69,10 @@ static void vcpu_tb_trans(qemu_plugin_id_t id, struct qemu_plugin_tb *tb)
+         struct qemu_plugin_insn *insn = qemu_plugin_tb_get_insn(tb, i);
  
-     switch (cb->inline_insn.op) {
+         if (do_inline) {
+-            qemu_plugin_register_vcpu_mem_inline(insn, rw,
+-                                                 QEMU_PLUGIN_INLINE_ADD_U64,
+-                                                 &inline_mem_count, 1);
++            qemu_plugin_register_vcpu_mem_inline_per_vcpu(
++                insn, rw,
++                QEMU_PLUGIN_INLINE_ADD_U64,
++                mem_count, 1);
+         }
+         if (do_callback) {
+             qemu_plugin_register_vcpu_mem_cb(insn, vcpu_mem,
+@@ -117,6 +123,16 @@ QEMU_PLUGIN_EXPORT int qemu_plugin_install(qemu_plugin_id_t id,
+         }
+     }
+ 
++    if (do_inline && do_callback) {
++        fprintf(stderr,
++                "can't enable inline and callback counting at the same time\n");
++        return -1;
++    }
++
++    counts = qemu_plugin_scoreboard_new(sizeof(CPUCount));
++    mem_count = qemu_plugin_scoreboard_u64_in_struct(
++        counts, CPUCount, mem_count);
++    io_count = qemu_plugin_scoreboard_u64_in_struct(counts, CPUCount, io_count);
+     qemu_plugin_register_vcpu_tb_trans_cb(id, vcpu_tb_trans);
+     qemu_plugin_register_atexit_cb(id, plugin_exit, NULL);
+     return 0;
+diff --git a/tests/tcg/Makefile.target b/tests/tcg/Makefile.target
+index a4c25908fb7..f21be50d3b2 100644
+--- a/tests/tcg/Makefile.target
++++ b/tests/tcg/Makefile.target
+@@ -168,7 +168,7 @@ RUN_TESTS+=$(EXTRA_RUNS)
+ 
+ # Some plugins need additional arguments above the default to fully
+ # exercise things. We can define them on a per-test basis here.
+-run-plugin-%-with-libmem.so: PLUGIN_ARGS=$(COMMA)inline=true$(COMMA)callback=true
++run-plugin-%-with-libmem.so: PLUGIN_ARGS=$(COMMA)inline=true
+ 
+ ifeq ($(filter %-softmmu, $(TARGET)),)
+ run-%: %
 -- 
 2.39.2
 
