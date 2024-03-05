@@ -4,103 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38F30C5478C
-	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Mar 2024 06:01:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF861C5478C
+	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Mar 2024 06:48:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rhNrG-000575-KN; Tue, 05 Mar 2024 01:00:58 -0500
+	id 1rhOb5-00088K-3H; Tue, 05 Mar 2024 01:48:19 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <anisinha@redhat.com>)
- id 1rhNrF-00056L-L4
- for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 01:00:57 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1rhOao-00086m-8f; Tue, 05 Mar 2024 01:48:08 -0500
+Received: from out30-119.freemail.mail.aliyun.com ([115.124.30.119])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <anisinha@redhat.com>)
- id 1rhNrD-0005hX-UQ
- for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 01:00:57 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1709618454;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=AwqpMbOk65B+iZwPaEhz1H6LgHjd1GdC7cUo+HYjoNI=;
- b=HmhdRR5/pdoB9YDZJILvmL+5vfXitWToDloPzgKdhMZXjasFFI0vgBqc/ZFCsZL1Xw+Cte
- VKAtmk4/Xle0KO7WH1OLpxpRBvmbwpAssEq9+uUeVMesffe2LRYSYb0pNaCE5dRlEMnTjZ
- BnYtntR8xha286NU0/NJqCT0/Qqne8E=
-Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com
- [209.85.214.200]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-267-ozJwKlrpMhmczH8fqaiXLg-1; Tue, 05 Mar 2024 01:00:52 -0500
-X-MC-Unique: ozJwKlrpMhmczH8fqaiXLg-1
-Received: by mail-pl1-f200.google.com with SMTP id
- d9443c01a7336-1dc7278d020so45992835ad.0
- for <qemu-riscv@nongnu.org>; Mon, 04 Mar 2024 22:00:52 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709618452; x=1710223252;
- h=to:references:message-id:content-transfer-encoding:cc:date
- :in-reply-to:from:subject:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=WG/8tjaYkx8u3OdWeMNWhdFumkizH8kgmlVXE9b7Voc=;
- b=QAvUnNeetUq3afdeR9cXKMTDzb+N2vCreSYCYh1SBu9Eyck8qNBuqs2R6qfneKhO6o
- m+oEQwn+uDA9LZBp58jr02f7ADLV/p6mjLHCjEdkadsLyiB8F/JNOX7iUxKJzvRhv6I2
- XQ1aSMBTH2S9O/o8/2pAfIjPq2kkpwpvMR76jZxb2ZzB1q2WwwpEc6vgoO2P4NWERn9M
- Mv1fZ2DN1lO5xrvxNCrM234L9MLfKV1KViwQ8tnCSdkKzKBfz+LCskNLjwBqrNGNDe+j
- uXCMNdfOe1iv7LVLTjTsFwsDCno9SqigOKCqENi+TCHcC6CGqZ2fkshPhp2U07A3+Oxm
- FBvw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVZuhVDj8Ic33D6DCU/9MkcpnZXtWBRjPLdQYa6P/YtQPiQ/tx8KsNnIhujg/A0tHxZn0VeQ5o7Dfgnb4/RsjF7HAMTte0=
-X-Gm-Message-State: AOJu0YxdKHFgigjCFbg+PCRkYsV2mivBnqu+JRE0fUYXMnzQalW+jpha
- WVhU9r5NlZ1wX03+/6AS/A3z71H1RIbFHXJT51ZtYFzIJB3WHW+Bp2dcJPBhQAKi5wtqCHPFyt4
- s9fl387aBRLOF6nd90cbK7a/AoNL6amC5aMGqx6+I39wxg/1u49Uf
-X-Received: by 2002:a17:902:cece:b0:1dc:6373:3cc with SMTP id
- d14-20020a170902cece00b001dc637303ccmr1126285plg.50.1709618451569; 
- Mon, 04 Mar 2024 22:00:51 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEu6t+V2j0FglZmJ4c5A4vULyC4SF/KsjFudUQnUvAI5X3mu+7/EdJUXAlw84NaFAWpaxBV9A==
-X-Received: by 2002:a17:902:cece:b0:1dc:6373:3cc with SMTP id
- d14-20020a170902cece00b001dc637303ccmr1126246plg.50.1709618451011; 
- Mon, 04 Mar 2024 22:00:51 -0800 (PST)
-Received: from smtpclient.apple ([203.163.238.152])
- by smtp.gmail.com with ESMTPSA id
- y18-20020a170902e19200b001dc95e7e191sm9559181pla.298.2024.03.04.22.00.43
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 04 Mar 2024 22:00:50 -0800 (PST)
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3774.400.31\))
-Subject: Re: [PATCH 14/19] smbios: in case of entry point is 'auto' try to
- build v2 tables 1st
-From: Ani Sinha <anisinha@redhat.com>
-In-Reply-To: <20240227154749.1818189-15-imammedo@redhat.com>
-Date: Tue, 5 Mar 2024 11:30:29 +0530
-Cc: QEMU Developers <qemu-devel@nongnu.org>,
- Peter Maydell <peter.maydell@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
- Song Gao <gaosong@loongson.cn>,
- Alistair Francis <alistair.francis@wdc.com>, palmer@dabbelt.com,
- bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, philmd@linaro.org, wangyanan55@huawei.com,
- eblake@redhat.com, armbru@redhat.com, qemu-arm@nongnu.org,
- qemu-riscv@nongnu.org, f.ebner@proxmox.com
-Message-Id: <5705CEF6-9217-41A1-8DF9-8DD74FB5E5B7@redhat.com>
-References: <20240227154749.1818189-1-imammedo@redhat.com>
- <20240227154749.1818189-15-imammedo@redhat.com>
-To: Igor Mammedov <imammedo@redhat.com>
-X-Mailer: Apple Mail (2.3774.400.31)
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=anisinha@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -26
-X-Spam_score: -2.7
-X-Spam_bar: --
-X-Spam_report: (-2.7 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.571,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1rhOag-0005qu-Ei; Tue, 05 Mar 2024 01:48:01 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linux.alibaba.com; s=default;
+ t=1709621259; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
+ bh=77iPO+RmmC0nTa9RMJ/QmIPzNxjOhN2jFl+Ela2Dz+g=;
+ b=jqTXZ47Q//fysBiEERDoMf+231vKtmNUVXYstCLElnnSmj4tQjSCKjr6NjmAJPVkXqS2PdxXM8GwizAEJCvl8CQ1mA+o5uQTkdK8WwLOKAkK1jjCueJf4BhCkRDjLVEo5PW+wupl4Oym/umP+xAfmeo1uds/QG5xU9jy3dkHNts=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R431e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046049;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
+ TI=SMTPD_---0W1tHlPI_1709621257; 
+Received: from 30.198.0.247(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0W1tHlPI_1709621257) by smtp.aliyun-inc.com;
+ Tue, 05 Mar 2024 14:47:38 +0800
+Message-ID: <165adab6-d41f-4d72-b059-b13219cd5ac9@linux.alibaba.com>
+Date: Tue, 5 Mar 2024 14:47:41 +0800
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 5/5] target/riscv: Implement privilege mode filtering
+ for cycle/instret
+To: Atish Patra <atishp@rivosinc.com>
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org, Weiwei Li
+ <liwei1518@gmail.com>, kaiwenxue1@gmail.com
+References: <20240228185116.1321730-1-atishp@rivosinc.com>
+ <20240228185116.1321730-6-atishp@rivosinc.com>
+Content-Language: en-US
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20240228185116.1321730-6-atishp@rivosinc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=115.124.30.119;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-119.freemail.mail.aliyun.com
+X-Spam_score_int: -174
+X-Spam_score: -17.5
+X-Spam_bar: -----------------
+X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -117,128 +76,344 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
-
-> On 27-Feb-2024, at 21:17, Igor Mammedov <imammedo@redhat.com> wrote:
->=20
-> QEMU for some time now uses SMBIOS 3.0 for PC/Q35 machines by
-> default, however Windows has a bug in locating SMBIOS 3.0
-> entrypoint and fails to find tables when booted on SeaBIOS
-> (on UEFI SMBIOS 3.0 tables work fine since firmware hands
-> over tables in another way)
->=20
-> Missing SMBIOS tables may lead to some issues for guest
-> though (worst are: possible reactiveation, inability to
-> get virtio drivers from 'Windows Update')
->=20
-> It's unclear  at this point if MS will fix the issue on their
-> side. So instead of it (or rather in addition) this patch
-> will try to workaround the issue.
->=20
-> aka, use smbios-entry-point-type=3Dauto to make QEMU try
-> generating conservative SMBIOS 2.0 tables and if that
-> fails (due to limits/requested configuration) fallback
-> to SMBIOS 3.0 tables.
->=20
-> With this in place majority of users will use SMBIOS 2.0
-> tables which work fine with (Windows + legacy BIOS).
-> The configurations that is not to possible to describe
-> with SMBIOS 2.0 will switch automatically to SMBIOS 3.0
-> (which will trigger Windows bug but there is nothing
-> QEMU can do here, so go and aks Microsoft to real fix).
->=20
-> Signed-off-by: Igor Mammedov <imammedo@redhat.com>
-
-Reviewed-by: Ani Sinha <anisinha@redhat.com>
-
+On 2024/2/29 2:51, Atish Patra wrote:
+> Privilege mode filtering can also be emulated for cycle/instret by
+> tracking host_ticks/icount during each privilege mode switch. This
+> patch implements that for both cycle/instret and mhpmcounters. The
+> first one requires Smcntrpmf while the other one requires Sscofpmf
+> to be enabled.
+>
+> The cycle/instret are still computed using host ticks when icount
+> is not enabled. Otherwise, they are computed using raw icount which
+> is more accurate in icount mode.
+>
+> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Signed-off-by: Atish Patra <atishp@rivosinc.com>
 > ---
-> hw/smbios/smbios.c | 52 +++++++++++++++++++++++++++++++++++++++++++---
-> 1 file changed, 49 insertions(+), 3 deletions(-)
->=20
-> diff --git a/hw/smbios/smbios.c b/hw/smbios/smbios.c
-> index 5a791fd9eb..e54a9f21e6 100644
-> --- a/hw/smbios/smbios.c
-> +++ b/hw/smbios/smbios.c
-> @@ -959,7 +959,7 @@ static void smbios_entry_point_setup(SmbiosEntryPoint=
-Type ep_type)
->     }
-> }
->=20
-> -void smbios_get_tables(MachineState *ms,
-> +static bool smbios_get_tables_ep(MachineState *ms,
->                        SmbiosEntryPointType ep_type,
->                        const struct smbios_phys_mem_area *mem_array,
->                        const unsigned int mem_array_size,
-> @@ -968,6 +968,7 @@ void smbios_get_tables(MachineState *ms,
->                        Error **errp)
-> {
->     unsigned i, dimm_cnt, offset;
-> +    ERRP_GUARD();
->=20
->     assert(ep_type =3D=3D SMBIOS_ENTRY_POINT_TYPE_32 ||
->            ep_type =3D=3D SMBIOS_ENTRY_POINT_TYPE_64);
-> @@ -1052,11 +1053,56 @@ void smbios_get_tables(MachineState *ms,
->         abort();
->     }
->=20
-> -    return;
-> +    return true;
-> err_exit:
->     g_free(smbios_tables);
->     smbios_tables =3D NULL;
-> -    return;
-> +    return false;
+>   target/riscv/cpu.h        | 11 +++++
+>   target/riscv/cpu_bits.h   |  5 ++
+>   target/riscv/cpu_helper.c | 17 ++++++-
+>   target/riscv/csr.c        | 96 ++++++++++++++++++++++++++++++---------
+>   target/riscv/pmu.c        | 64 ++++++++++++++++++++++++++
+>   target/riscv/pmu.h        |  2 +
+>   6 files changed, 171 insertions(+), 24 deletions(-)
+>
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 174e8ba8e847..9e21d7f7d635 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -157,6 +157,15 @@ typedef struct PMUCTRState {
+>       target_ulong irq_overflow_left;
+>   } PMUCTRState;
+>   
+> +typedef struct PMUFixedCtrState {
+> +        /* Track cycle and icount for each privilege mode */
+> +        uint64_t counter[4];
+> +        uint64_t counter_prev[4];
+> +        /* Track cycle and icount for each privilege mode when V = 1*/
+> +        uint64_t counter_virt[2];
+> +        uint64_t counter_virt_prev[2];
+> +} PMUFixedCtrState;
+> +
+>   struct CPUArchState {
+>       target_ulong gpr[32];
+>       target_ulong gprh[32]; /* 64 top bits of the 128-bit registers */
+> @@ -353,6 +362,8 @@ struct CPUArchState {
+>       /* PMU event selector configured values for RV32 */
+>       target_ulong mhpmeventh_val[RV_MAX_MHPMEVENTS];
+>   
+> +    PMUFixedCtrState pmu_fixed_ctrs[2];
+> +
+>       target_ulong sscratch;
+>       target_ulong mscratch;
+>   
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index e866c60a400c..5fe349e313dc 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -920,6 +920,11 @@ typedef enum RISCVException {
+>   #define MHPMEVENT_BIT_VUINH                BIT_ULL(58)
+>   #define MHPMEVENTH_BIT_VUINH               BIT(26)
+>   
+> +#define MHPMEVENT_FILTER_MASK              (MHPMEVENT_BIT_MINH  | \
+> +                                            MHPMEVENT_BIT_SINH  | \
+> +                                            MHPMEVENT_BIT_UINH  | \
+> +                                            MHPMEVENT_BIT_VSINH | \
+> +                                            MHPMEVENT_BIT_VUINH)
+>   #define MHPMEVENT_SSCOF_MASK               _ULL(0xFFFF000000000000)
+>   #define MHPMEVENT_IDX_MASK                 0xFFFFF
+>   #define MHPMEVENT_SSCOF_RESVD              16
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index d462d95ee165..33965d843d46 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -718,8 +718,21 @@ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
+>   {
+>       g_assert(newpriv <= PRV_M && newpriv != PRV_RESERVED);
+>   
+> -    if (icount_enabled() && newpriv != env->priv) {
+> -        riscv_itrigger_update_priv(env);
+> +    /*
+> +     * Invoke cycle/instret update between priv mode changes or
+> +     * VS->HS mode transition is SPV bit must be set
+> +     * HS->VS mode transition where virt_enabled must be set
+> +     * In both cases, priv will S mode only.
+> +     */
+> +    if (newpriv != env->priv ||
+> +       (env->priv == PRV_S && newpriv == PRV_S &&
+> +        (env->virt_enabled || get_field(env->hstatus, HSTATUS_SPV)))) {
+> +        if (icount_enabled()) {
+> +            riscv_itrigger_update_priv(env);
+> +            riscv_pmu_icount_update_priv(env, newpriv);
+> +        } else {
+> +            riscv_pmu_cycle_update_priv(env, newpriv);
+> +        }
+>       }
+>       /* tlb_flush is unnecessary as mode is contained in mmu_idx */
+>       env->priv = newpriv;
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index ff9bac537593..482e212c5f74 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -788,32 +788,16 @@ static RISCVException write_vcsr(CPURISCVState *env, int csrno,
+>       return RISCV_EXCP_NONE;
+>   }
+>   
+> +#if defined(CONFIG_USER_ONLY)
+>   /* User Timers and Counters */
+>   static target_ulong get_ticks(bool shift)
+>   {
+> -    int64_t val;
+> -    target_ulong result;
+> -
+> -#if !defined(CONFIG_USER_ONLY)
+> -    if (icount_enabled()) {
+> -        val = icount_get();
+> -    } else {
+> -        val = cpu_get_host_ticks();
+> -    }
+> -#else
+> -    val = cpu_get_host_ticks();
+> -#endif
+> -
+> -    if (shift) {
+> -        result = val >> 32;
+> -    } else {
+> -        result = val;
+> -    }
+> +    int64_t val = cpu_get_host_ticks();
+> +    target_ulong result = shift ? val >> 32 : val;
+>   
+>       return result;
+>   }
+>   
+> -#if defined(CONFIG_USER_ONLY)
+>   static RISCVException read_time(CPURISCVState *env, int csrno,
+>                                   target_ulong *val)
+>   {
+> @@ -952,6 +936,71 @@ static RISCVException write_mhpmeventh(CPURISCVState *env, int csrno,
+>       return RISCV_EXCP_NONE;
+>   }
+>   
+> +static target_ulong riscv_pmu_ctr_get_fixed_counters_val(CPURISCVState *env,
+> +                                                         int counter_idx,
+> +                                                         bool upper_half)
+> +{
+> +    uint64_t curr_val = 0;
+> +    target_ulong result = 0;
+> +    uint64_t *counter_arr = icount_enabled() ? env->pmu_fixed_ctrs[1].counter :
+> +                            env->pmu_fixed_ctrs[0].counter;
+> +    uint64_t *counter_arr_virt = icount_enabled() ?
+> +                                 env->pmu_fixed_ctrs[1].counter_virt :
+> +                                 env->pmu_fixed_ctrs[0].counter_virt;
+> +    uint64_t cfg_val = 0;
+> +
+> +    if (counter_idx == 0) {
+> +        cfg_val = upper_half ? ((uint64_t)env->mcyclecfgh << 32) :
+> +                  env->mcyclecfg;
+> +    } else if (counter_idx == 2) {
+> +        cfg_val = upper_half ? ((uint64_t)env->minstretcfgh << 32) :
+> +                  env->minstretcfg;
+> +    } else {
+> +        cfg_val = upper_half ?
+> +                  ((uint64_t)env->mhpmeventh_val[counter_idx] << 32) :
+> +                  env->mhpmevent_val[counter_idx];
+> +        cfg_val &= MHPMEVENT_FILTER_MASK;
+> +    }
+> +
+> +    if (!cfg_val) {
+> +        if (icount_enabled()) {
+> +            curr_val = icount_get_raw();
+> +        } else {
+> +            curr_val = cpu_get_host_ticks();
+> +        }
+> +        goto done;
+> +    }
+> +
+> +    if (!(cfg_val & MCYCLECFG_BIT_MINH)) {
+> +        curr_val += counter_arr[PRV_M];
+> +    }
+> +
+> +    if (!(cfg_val & MCYCLECFG_BIT_SINH)) {
+> +        curr_val += counter_arr[PRV_S];
+> +    }
+> +
+> +    if (!(cfg_val & MCYCLECFG_BIT_UINH)) {
+> +        curr_val += counter_arr[PRV_U];
+> +    }
+> +
+> +    if (!(cfg_val & MCYCLECFG_BIT_VSINH)) {
+> +        curr_val += counter_arr_virt[PRV_S];
+> +    }
+> +
+> +    if (!(cfg_val & MCYCLECFG_BIT_VUINH)) {
+> +        curr_val += counter_arr_virt[PRV_U];
+> +    }
+> +
+> +done:
+> +    if (riscv_cpu_mxl(env) == MXL_RV32) {
+> +        result = upper_half ? curr_val >> 32 : curr_val;
+> +    } else {
+> +        result = curr_val;
+> +    }
+> +
+> +    return result;
 > +}
 > +
-> +void smbios_get_tables(MachineState *ms,
-> +                       SmbiosEntryPointType ep_type,
-> +                       const struct smbios_phys_mem_area *mem_array,
-> +                       const unsigned int mem_array_size,
-> +                       uint8_t **tables, size_t *tables_len,
-> +                       uint8_t **anchor, size_t *anchor_len,
-> +                       Error **errp)
+>   static RISCVException write_mhpmcounter(CPURISCVState *env, int csrno,
+>                                           target_ulong val)
+>   {
+> @@ -962,7 +1011,8 @@ static RISCVException write_mhpmcounter(CPURISCVState *env, int csrno,
+>       counter->mhpmcounter_val = val;
+>       if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
+>           riscv_pmu_ctr_monitor_instructions(env, ctr_idx)) {
+> -        counter->mhpmcounter_prev = get_ticks(false);
+> +        counter->mhpmcounter_prev = riscv_pmu_ctr_get_fixed_counters_val(env,
+> +                                                                ctr_idx, false);
+>           if (ctr_idx > 2) {
+>               if (riscv_cpu_mxl(env) == MXL_RV32) {
+>                   mhpmctr_val = mhpmctr_val |
+> @@ -990,7 +1040,8 @@ static RISCVException write_mhpmcounterh(CPURISCVState *env, int csrno,
+>       mhpmctr_val = mhpmctr_val | (mhpmctrh_val << 32);
+>       if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
+>           riscv_pmu_ctr_monitor_instructions(env, ctr_idx)) {
+> -        counter->mhpmcounterh_prev = get_ticks(true);
+> +        counter->mhpmcounterh_prev = riscv_pmu_ctr_get_fixed_counters_val(env,
+> +                                                                 ctr_idx, true);
+>           if (ctr_idx > 2) {
+>               riscv_pmu_setup_timer(env, mhpmctr_val, ctr_idx);
+>           }
+> @@ -1031,7 +1082,8 @@ static RISCVException riscv_pmu_read_ctr(CPURISCVState *env, target_ulong *val,
+>        */
+>       if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
+>           riscv_pmu_ctr_monitor_instructions(env, ctr_idx)) {
+> -        *val = get_ticks(upper_half) - ctr_prev + ctr_val;
+> +        *val = riscv_pmu_ctr_get_fixed_counters_val(env, ctr_idx, upper_half) -
+> +                                                    ctr_prev + ctr_val;
+>       } else {
+>           *val = ctr_val;
+>       }
+> diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
+> index 0e7d58b8a5c2..37309ff64cb6 100644
+> --- a/target/riscv/pmu.c
+> +++ b/target/riscv/pmu.c
+> @@ -19,6 +19,7 @@
+>   #include "qemu/osdep.h"
+>   #include "qemu/log.h"
+>   #include "qemu/error-report.h"
+> +#include "qemu/timer.h"
+>   #include "cpu.h"
+>   #include "pmu.h"
+>   #include "sysemu/cpu-timers.h"
+> @@ -176,6 +177,69 @@ static int riscv_pmu_incr_ctr_rv64(RISCVCPU *cpu, uint32_t ctr_idx)
+>       return 0;
+>   }
+>   
+> +void riscv_pmu_icount_update_priv(CPURISCVState *env, target_ulong newpriv)
 > +{
-> +    Error *local_err =3D NULL;
-> +    bool is_valid;
-> +    ERRP_GUARD();
+> +    uint64_t delta;
+> +    uint64_t *counter_arr;
+> +    uint64_t *counter_arr_prev;
+> +    uint64_t current_icount = icount_get_raw();
 > +
-> +    switch (ep_type) {
-> +    case SMBIOS_ENTRY_POINT_TYPE_AUTO:
-> +    case SMBIOS_ENTRY_POINT_TYPE_32:
-> +        is_valid =3D smbios_get_tables_ep(ms, SMBIOS_ENTRY_POINT_TYPE_32=
-,
-> +                                        mem_array, mem_array_size,
-> +                                        tables, tables_len,
-> +                                        anchor, anchor_len,
-> +                                        &local_err);
-> +        if (is_valid || ep_type !=3D SMBIOS_ENTRY_POINT_TYPE_AUTO) {
-> +            break;
-> +        }
-> +        /*
-> +         * fall through in case AUTO endpoint is selected and
-> +         * SMBIOS 2.x tables can't be generated, to try if SMBIOS 3.x
-> +         * tables would work
-> +         */
-> +    case SMBIOS_ENTRY_POINT_TYPE_64:
-> +        error_free(local_err);
-> +        local_err =3D NULL;
-> +        is_valid =3D smbios_get_tables_ep(ms, SMBIOS_ENTRY_POINT_TYPE_64=
-,
-> +                                        mem_array, mem_array_size,
-> +                                        tables, tables_len,
-> +                                        anchor, anchor_len,
-> +                                        &local_err);
-> +        break;
-> +    default:
-> +        abort();
+> +    if (env->virt_enabled) {
+> +        counter_arr = env->pmu_fixed_ctrs[1].counter_virt;
+> +        counter_arr_prev = env->pmu_fixed_ctrs[1].counter_virt_prev;
+> +    } else {
+> +        counter_arr = env->pmu_fixed_ctrs[1].counter;
+> +        counter_arr_prev = env->pmu_fixed_ctrs[1].counter_prev;
 > +    }
-> +    if (!is_valid) {
-> +        error_propagate(errp, local_err);
-> +    }
-> }
->=20
-> static void save_opt(const char **dest, QemuOpts *opts, const char *name)
-> --=20
-> 2.39.3
->=20
+> +
+> +    if (newpriv != env->priv) {
+> +        delta = current_icount - counter_arr_prev[env->priv];
+> +        counter_arr_prev[newpriv] = current_icount;
+> +    } else {
+> +        delta = current_icount - counter_arr_prev[env->priv];
+> +        if (env->virt_enabled) {
+> +            /* HS->VS transition.The previous value should correspond to HS. */
 
+Hi Atish,
+
+Dose env->virt_enabled ensure HS->VS transition?
+
+I think VS->VS also keeps  env->virt_enabled to be true, where the 
+previous value should correspond to VS.
+
+Thanks,
+Zhiwei
+
+> +            env->pmu_fixed_ctrs[1].counter_prev[PRV_S] = current_icount;
+> +        } else if (get_field(env->hstatus, HSTATUS_SPV)) {
+> +            /* VS->HS transition.The previous value should correspond to VS. */
+> +            env->pmu_fixed_ctrs[1].counter_virt_prev[PRV_S] = current_icount;
+> +        }
+> +   }
+> +
+> +    counter_arr[env->priv] += delta;
+> +}
+> +
+> +void riscv_pmu_cycle_update_priv(CPURISCVState *env, target_ulong newpriv)
+> +{
+> +    uint64_t delta;
+> +    uint64_t *counter_arr;
+> +    uint64_t *counter_arr_prev;
+> +    uint64_t current_host_ticks = cpu_get_host_ticks();
+> +
+> +    if (env->virt_enabled) {
+> +        counter_arr = env->pmu_fixed_ctrs[0].counter_virt;
+> +        counter_arr_prev = env->pmu_fixed_ctrs[0].counter_virt_prev;
+> +    } else {
+> +        counter_arr = env->pmu_fixed_ctrs[0].counter;
+> +        counter_arr_prev = env->pmu_fixed_ctrs[0].counter_prev;
+> +    }
+> +
+> +    if (newpriv != env->priv) {
+> +        delta = current_host_ticks - counter_arr_prev[env->priv];
+> +        counter_arr_prev[newpriv] = current_host_ticks;
+> +    } else {
+> +        delta = current_host_ticks - counter_arr_prev[env->priv];
+> +        if (env->virt_enabled) {
+> +            env->pmu_fixed_ctrs[0].counter_prev[PRV_S] = current_host_ticks;
+> +        } else if (get_field(env->hstatus, HSTATUS_SPV)) {
+> +            env->pmu_fixed_ctrs[0].counter_virt_prev[PRV_S] =
+> +            current_host_ticks;
+> +        }
+> +   }
+> +
+> +    counter_arr[env->priv] += delta;
+> +}
+> +
+>   int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx event_idx)
+>   {
+>       uint32_t ctr_idx;
+> diff --git a/target/riscv/pmu.h b/target/riscv/pmu.h
+> index 505fc850d38e..50de6031a730 100644
+> --- a/target/riscv/pmu.h
+> +++ b/target/riscv/pmu.h
+> @@ -31,3 +31,5 @@ int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx event_idx);
+>   void riscv_pmu_generate_fdt_node(void *fdt, uint32_t cmask, char *pmu_name);
+>   int riscv_pmu_setup_timer(CPURISCVState *env, uint64_t value,
+>                             uint32_t ctr_idx);
+> +void riscv_pmu_icount_update_priv(CPURISCVState *env, target_ulong newpriv);
+> +void riscv_pmu_cycle_update_priv(CPURISCVState *env, target_ulong newpriv);
 
