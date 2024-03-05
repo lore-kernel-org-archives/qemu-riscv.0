@@ -4,100 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61929C54E41
-	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Mar 2024 10:33:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F868C54798
+	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Mar 2024 11:37:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rhS6L-0002L1-JL; Tue, 05 Mar 2024 05:32:49 -0500
+	id 1rhT6j-0000SR-LR; Tue, 05 Mar 2024 06:37:17 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1rhS6J-0002K6-8h
- for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 05:32:47 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ (Exim 4.90_1) (envelope-from <anisinha@redhat.com>)
+ id 1rhT6i-0000S0-Ft
+ for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 06:37:16 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1rhS6F-0003PL-D4
- for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 05:32:45 -0500
+ (Exim 4.90_1) (envelope-from <anisinha@redhat.com>)
+ id 1rhT6e-0002Z8-Pp
+ for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 06:37:16 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1709634762;
+ s=mimecast20190719; t=1709638627;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=2vDMOG858kwohsjaFQnfhqCCejlVxFcw1ADU0gyslJk=;
- b=PxJdcyebzLDOQBbb2It9sf1BPhRfKQPVpmPktxLOJfnqbuDSOGLdGk2XCG2E64KLGJBV3l
- PaAXaGoUNvfgameIKvcjJV5dHpyujHbuCCiDPD9XMbOZ/VURNYroyHMxLCjGllHDltYu67
- EIWj2BE6DGkVnY/Zldo1dMo4cSXM12E=
-Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com
- [209.85.210.199]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=X+XyziquYx1qV8PnNTEvXP00ge/08XPje0E6BdPBN5s=;
+ b=K9n/H5aMPqTREuHFzQubRhB3us8Nd1fLeCPKVbrTo3GuuqBthrkUCGfcKfZPnn+QWWau43
+ rvwPGh+X2hsko7CQeGcOepK8HskGuhOaRLAdTO4tHHPmHYbxsafz8Ebq8jf+xzTDfIocNn
+ 3Ujk1snRmCejJ10FcweDzh6n2PfD2VE=
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com
+ [209.85.215.197]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-124-tUpgHTzROzap4Phl7vBLyg-1; Tue, 05 Mar 2024 05:32:41 -0500
-X-MC-Unique: tUpgHTzROzap4Phl7vBLyg-1
-Received: by mail-pf1-f199.google.com with SMTP id
- d2e1a72fcca58-6e5323e15f2so5559783b3a.3
- for <qemu-riscv@nongnu.org>; Tue, 05 Mar 2024 02:32:40 -0800 (PST)
+ us-mta-385-eTkXsE6vPEidLp3iLIyzSQ-1; Tue, 05 Mar 2024 06:37:06 -0500
+X-MC-Unique: eTkXsE6vPEidLp3iLIyzSQ-1
+Received: by mail-pg1-f197.google.com with SMTP id
+ 41be03b00d2f7-5d1bffa322eso6327006a12.1
+ for <qemu-riscv@nongnu.org>; Tue, 05 Mar 2024 03:37:06 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709634760; x=1710239560;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1709638625; x=1710243425;
+ h=to:references:message-id:content-transfer-encoding:cc:date
+ :in-reply-to:from:subject:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2vDMOG858kwohsjaFQnfhqCCejlVxFcw1ADU0gyslJk=;
- b=ZVUjlOkAs6BA+/aWeIHUPRkcNNiog74uy9UoifzHL4P2AdpNqmnONZl44eFRyknDBR
- NzxigGZGAbzyDEicMda7HtuHN9QUqdwcSkR+oOPnN21RIeaJwMjrqvqJeHZ8/uBnyauC
- pfNTNwMtssyqXy/vlJjZ1Fw1Jxkx0s1/ZVEPaTawWYGu4GI1N/SSiLHY6YqEUDmOFBgH
- REk+Jx+cwzxIgUlKMH29Wj6By4Rp9bwkDYS39OA1WWWhaudNUcHlPSEbAG0V+VKhFdLP
- 3XOJU2eKqYNcaOz6dbMBVy9P0+inCBXTF3Zh5ivZBKA8v79qm3LkM1wWhiLE1fFYcDr8
- DfZg==
+ bh=lr9ZwAIZH9USXJUZ1I9mjZLUVZFZB1fODebftbuXqoI=;
+ b=AHAm39ZXBnGtFI1dA2AbT9ycyicIpDOr4+nNu1/mV/YLVJSILRnt1h+JnbFedM/1J7
+ 5y2JSAPDNcd96ETtzfiNb/TgPzKRMEkLTU6BxPBAqOGak6EHF7sMEWvoXOt2sW4IeKxa
+ WDvL1J18hwc5MmBM9n3AQ6bIN1Retf/yFlke+y7x55zq01ydPbZiDUykplduLk5dyHSQ
+ HNFGxz6s+TU+tBqryvs4DXrrF/l1mzejGgEvEtdRw3k/4j9BebXtCwn1weLNmQ1/agky
+ ITRrg/lOEKqK+F5Fp8a8yylV1TDs6uIi0iUU9Hj829Ed0DltrpOPfpskJkBqNoZK3sOB
+ grsg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUHDhGhL4KGxuFAXH8meLRnj9m9MJzGbklhJMxvJgyfb5XmcMA/+BKUT96Ad4g1gZXA84JcIPPpRw8Jlf43Z5epaSDzhaA=
-X-Gm-Message-State: AOJu0YwRCFnVTqpqPC6m+5hnpG6fo0X5009GUwFkFWFO7Dkv0dGb38ZK
- TB1nMpwfhPAA6RzVP8kzAt3E3OaIvlOMcYfAjN5ALnLmqDiAQN5OoVkF37dXTVH6zMdRSyC22Xv
- AZ07nZBfgWimfYjt/j2JluGMs/YBBj/XPzkhOOCUh07v4MRv+x1ug
-X-Received: by 2002:a05:6a00:2288:b0:6e5:fb97:ed35 with SMTP id
- f8-20020a056a00228800b006e5fb97ed35mr8011357pfe.18.1709634759907; 
- Tue, 05 Mar 2024 02:32:39 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHyz/i29xOvqC5LpAfkn519rkysFPw5L32Dxd2+STcTASTjwl2hw7012/AkBfNd5NZ95dSiwg==
-X-Received: by 2002:a05:6a00:2288:b0:6e5:fb97:ed35 with SMTP id
- f8-20020a056a00228800b006e5fb97ed35mr8011331pfe.18.1709634759542; 
- Tue, 05 Mar 2024 02:32:39 -0800 (PST)
-Received: from imammedo.users.ipa.redhat.com (nat-pool-brq-t.redhat.com.
- [213.175.37.10]) by smtp.gmail.com with ESMTPSA id
- le6-20020a056a004fc600b006e6150a5392sm3748585pfb.155.2024.03.05.02.32.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Mar 2024 02:32:38 -0800 (PST)
-Date: Tue, 5 Mar 2024 11:32:32 +0100
-From: Igor Mammedov <imammedo@redhat.com>
-To: "Michael S. Tsirkin" <mst@redhat.com>
-Cc: qemu-devel@nongnu.org, peter.maydell@linaro.org, pbonzini@redhat.com,
- gaosong@loongson.cn, alistair.francis@wdc.com, palmer@dabbelt.com,
+ AJvYcCXa4qBw6bw4UZGFID23KcnBcCmYIgfrZDw4UCbXeLUDtmPe+C3fFI3CeTYKI/iw4uxbTim7sWcNXuobcTK00oroVPeVgzM=
+X-Gm-Message-State: AOJu0Yy2pCkoRalJRZmNi4mPdrq0OzPJt6Khp3CF7rFrO6/A94FO66xx
+ gN3Ao90m+HO0cZO+p+dk9WeOrCTS9jIfwyYoDpoTR/1nq87gmpVdsrd956k4hKoFyvjQOQedd+q
+ nic8nhMvf28UwE4IgmMUi5pVleWoDVQ8qfQYeKQF255JgX/5MlXDe
+X-Received: by 2002:a05:6a20:7289:b0:1a1:20b6:bf11 with SMTP id
+ o9-20020a056a20728900b001a120b6bf11mr1597656pzk.50.1709638625360; 
+ Tue, 05 Mar 2024 03:37:05 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGLrDzEd7tyhw5iEBmY9Sh5Xobt+xuca6ATpIu5iGB9a+UuNGVvLfY2YAxmx1dF/TYs4Gw+3Q==
+X-Received: by 2002:a05:6a20:7289:b0:1a1:20b6:bf11 with SMTP id
+ o9-20020a056a20728900b001a120b6bf11mr1597629pzk.50.1709638625027; 
+ Tue, 05 Mar 2024 03:37:05 -0800 (PST)
+Received: from smtpclient.apple ([203.163.238.152])
+ by smtp.gmail.com with ESMTPSA id
+ le8-20020a170902fb0800b001dc8db3150asm10357683plb.199.2024.03.05.03.36.58
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Tue, 05 Mar 2024 03:37:04 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3774.400.31\))
+Subject: Re: [PATCH 15/19] smbios: error out when building type 4 table is not
+ possible
+From: Ani Sinha <anisinha@redhat.com>
+In-Reply-To: <20240227154749.1818189-16-imammedo@redhat.com>
+Date: Tue, 5 Mar 2024 17:06:46 +0530
+Cc: QEMU Developers <qemu-devel@nongnu.org>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Song Gao <gaosong@loongson.cn>,
+ Alistair Francis <alistair.francis@wdc.com>, palmer@dabbelt.com,
  bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, anisinha@redhat.com, philmd@linaro.org,
- wangyanan55@huawei.com, eblake@redhat.com, armbru@redhat.com,
- qemu-arm@nongnu.org, qemu-riscv@nongnu.org, f.ebner@proxmox.com
-Subject: Re: [PATCH 00/19] Workaround Windows failing to find 64bit SMBIOS
- entry point with SeaBIOS
-Message-ID: <20240305113232.791c116e@imammedo.users.ipa.redhat.com>
-In-Reply-To: <20240305050735-mutt-send-email-mst@kernel.org>
+ zhiwei_liu@linux.alibaba.com, philmd@linaro.org, wangyanan55@huawei.com,
+ eblake@redhat.com, armbru@redhat.com, qemu-arm@nongnu.org,
+ qemu-riscv@nongnu.org, f.ebner@proxmox.com
+Message-Id: <CC89DC43-048D-4C23-BF18-470BECA3140E@redhat.com>
 References: <20240227154749.1818189-1-imammedo@redhat.com>
- <20240305050735-mutt-send-email-mst@kernel.org>
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-redhat-linux-gnu)
-MIME-Version: 1.0
+ <20240227154749.1818189-16-imammedo@redhat.com>
+To: Igor Mammedov <imammedo@redhat.com>
+X-Mailer: Apple Mail (2.3774.400.31)
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=imammedo@redhat.com;
+Content-Type: text/plain;
+	charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=anisinha@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -11
 X-Spam_score: -1.2
 X-Spam_bar: -
 X-Spam_report: (-1.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.571,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_SORBS_WEB=1.5, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_SORBS_WEB=1.5, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -113,108 +116,73 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, 5 Mar 2024 05:08:05 -0500
-"Michael S. Tsirkin" <mst@redhat.com> wrote:
 
-> On Tue, Feb 27, 2024 at 04:47:30PM +0100, Igor Mammedov wrote:
-> > Windows (10) bootloader when running on top of SeaBIOS, fails to find            
-> > SMBIOSv3 entry point. Tracing it shows that it looks for v2 anchor markers       
-> > only and not v3. Tricking it into believing that entry point is found            
-> > lets Windows successfully locate and parse SMBIOSv3 tables. Whether it           
-> > will be fixed on Windows side is not clear so here goes a workaround.            
-> >                                                                                  
-> > Idea is to try build v2 tables if QEMU configuration permits,                    
-> > and fallback to v3 tables otherwise. That will mask Windows issue                
-> > form majority of users.                                                          
-> > However if VM configuration can't be described (typically large VMs)             
-> > by v2 tables, QEMU will use SMBIOSv3 and Windows will hit the issue              
-> > again. In this case complain to Microsoft and/or use UEFI instead of             
-> > SeaBIOS (requires reinstall).                                                      
-> 
-> Igor so you want to repost a version with a couple of patches squashed?
 
-requested changes where in several patches
-(style and making series easier to review),
+> On 27-Feb-2024, at 21:17, Igor Mammedov <imammedo@redhat.com> wrote:
+>=20
+> If SMBIOS v2 version is requested but number of cores/threads
+> are more than it's possible to describe with v2, error out
+> instead of silently ignoring the fact and filling core/thread
+> count with bogus values.
+>=20
+> This will help caller to decide if it should fallback to
+> SMBIOSv3 when smbios-entry-point-type=3D'auto'
+>=20
+> Signed-off-by: Igor Mammedov <imammedo@redhat.com>
 
-I'll repost series with those changes today. 
- 
+Reviewed-by: Ani Sinha <anisinha@redhat.com>
 
-> > Default compat setting of smbios-entry-point-type after series                   
-> > for pc/q35 machines:                                                             
-> >   * 9.0-newer: 'auto'                                                            
-> >   * 8.1-8.2: '64'                                                                
-> >   * 8.0-older: '32'                                                              
-> >                                                                                  
-> > Fixes: https://gitlab.com/qemu-project/qemu/-/issues/2008                        
-> > CC: peter.maydell@linaro.org                                                     
-> > CC: pbonzini@redhat.com                                                          
-> > CC: mst@redhat.com                                                               
-> > CC: gaosong@loongson.cn                                                          
-> > CC: alistair.francis@wdc.com                                                     
-> > CC: palmer@dabbelt.com                                                           
-> > CC: bin.meng@windriver.com                                                       
-> > CC: liwei1518@gmail.com                                                          
-> > CC: dbarboza@ventanamicro.com                                                    
-> > CC: zhiwei_liu@linux.alibaba.com                                                 
-> > CC: imammedo@redhat.com                                                          
-> > CC: anisinha@redhat.com                                                          
-> > CC: philmd@linaro.org                                                            
-> > CC: wangyanan55@huawei.com                                                       
-> > CC: eblake@redhat.com                                                            
-> > CC: armbru@redhat.com                                                            
-> > CC: qemu-arm@nongnu.org                                                          
-> > CC: qemu-riscv@nongnu.org                                                        
-> > CC: f.ebner@proxmox.com                                                          
-> >                           
-> > Igor Mammedov (19):
-> >   tests: smbios: make it possible to write SMBIOS only test
-> >   tests: smbios: add test for -smbios type=11 option
-> >   tests: smbios: add test for legacy mode CLI options
-> >   smbios: cleanup smbios_get_tables() from legacy handling
-> >   smbios: get rid of smbios_smp_sockets global
-> >   smbios: get rid of smbios_legacy global
-> >   smbios: avoid mangling user provided tables
-> >   smbios: don't check type4 structures in legacy mode
-> >   smbios: build legacy mode code only for 'pc' machine
-> >   smbios: handle errors consistently
-> >   smbios: clear smbios_tables pointer after freeing
-> >   get rid of global smbios_ep_type
-> >   smbios: extend smbios-entry-point-type with 'auto' value
-> >   smbios: in case of entry point is 'auto' try to build v2 tables 1st
-> >   smbios: error out when building type 4 table is not possible
-> >   smbios: clear smbios_type4_count before building tables
-> >   tests: acpi/smbios: whitelist expected blobs
-> >   pc/q35: set SMBIOS entry point type to 'auto' by default
-> >   tests: acpi: update expected SSDT.dimmpxm blob
-> > 
-> >  hw/i386/fw_cfg.h                     |   3 +-
-> >  include/hw/firmware/smbios.h         |  29 +-
-> >  hw/arm/virt.c                        |   6 +-
-> >  hw/i386/Kconfig                      |   1 +
-> >  hw/i386/fw_cfg.c                     |  14 +-
-> >  hw/i386/pc.c                         |   4 +-
-> >  hw/i386/pc_piix.c                    |   4 +
-> >  hw/i386/pc_q35.c                     |   3 +
-> >  hw/loongarch/virt.c                  |   7 +-
-> >  hw/riscv/virt.c                      |   6 +-
-> >  hw/smbios/Kconfig                    |   2 +
-> >  hw/smbios/meson.build                |   4 +
-> >  hw/smbios/smbios.c                   | 481 +++++++++++----------------
-> >  hw/smbios/smbios_legacy.c            | 185 +++++++++++
-> >  hw/smbios/smbios_legacy_stub.c       |  16 +
-> >  qapi/machine.json                    |   5 +-
-> >  tests/data/acpi/q35/SSDT.dimmpxm     | Bin 1815 -> 1815 bytes
-> >  tests/data/smbios/type11_blob        | Bin 0 -> 11 bytes
-> >  tests/data/smbios/type11_blob.legacy | Bin 0 -> 10 bytes
-> >  tests/qtest/bios-tables-test.c       |  81 ++++-
-> >  20 files changed, 535 insertions(+), 316 deletions(-)
-> >  create mode 100644 hw/smbios/smbios_legacy.c
-> >  create mode 100644 hw/smbios/smbios_legacy_stub.c
-> >  create mode 100644 tests/data/smbios/type11_blob
-> >  create mode 100644 tests/data/smbios/type11_blob.legacy
-> > 
-> > -- 
-> > 2.39.3  
-> 
+> ---
+> hw/smbios/smbios.c | 14 ++++++++++++--
+> 1 file changed, 12 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/hw/smbios/smbios.c b/hw/smbios/smbios.c
+> index e54a9f21e6..bf5c7a8885 100644
+> --- a/hw/smbios/smbios.c
+> +++ b/hw/smbios/smbios.c
+> @@ -605,7 +605,8 @@ static void smbios_build_type_3_table(void)
+> }
+>=20
+> static void smbios_build_type_4_table(MachineState *ms, unsigned instance=
+,
+> -                                      SmbiosEntryPointType ep_type)
+> +                                      SmbiosEntryPointType ep_type,
+> +                                      Error **errp)
+> {
+>     char sock_str[128];
+>     size_t tbl_len =3D SMBIOS_TYPE_4_LEN_V28;
+> @@ -659,6 +660,12 @@ static void smbios_build_type_4_table(MachineState *=
+ms, unsigned instance,
+>     if (tbl_len =3D=3D SMBIOS_TYPE_4_LEN_V30) {
+>         t->core_count2 =3D t->core_enabled2 =3D cpu_to_le16(cores_per_soc=
+ket);
+>         t->thread_count2 =3D cpu_to_le16(threads_per_socket);
+> +    } else if (t->core_count =3D=3D 0xFF || t->thread_count =3D=3D 0xFF)=
+ {
+> +        error_setg(errp, "SMBIOS 2.0 doesn't support number of processor=
+ "
+> +                         "cores/threads more than 255, use "
+> +                         "-machine smbios-entry-point-type=3D64 option t=
+o enable "
+> +                         "SMBIOS 3.0 support");
+> +        return;
+>     }
+>=20
+>     SMBIOS_BUILD_TABLE_POST;
+> @@ -987,7 +994,10 @@ static bool smbios_get_tables_ep(MachineState *ms,
+>     assert(ms->smp.sockets >=3D 1);
+>=20
+>     for (i =3D 0; i < ms->smp.sockets; i++) {
+> -        smbios_build_type_4_table(ms, i, ep_type);
+> +        smbios_build_type_4_table(ms, i, ep_type, errp);
+> +        if (*errp) {
+> +            goto err_exit;
+> +        }
+>     }
+>=20
+>     smbios_build_type_8_table();
+> --=20
+> 2.39.3
+>=20
 
 
