@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9550C54798
-	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Mar 2024 12:17:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3A95C54798
+	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Mar 2024 12:18:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rhTer-00060w-9e; Tue, 05 Mar 2024 07:12:33 -0500
+	id 1rhTeE-0003c5-Uj; Tue, 05 Mar 2024 07:11:54 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rhTdT-00023d-LH
- for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:11:08 -0500
-Received: from mail-lf1-x130.google.com ([2a00:1450:4864:20::130])
+ id 1rhTdJ-0001uT-FE
+ for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:11:01 -0500
+Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rhTcr-0001Wi-AC
- for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:11:06 -0500
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-5131c0691feso7112340e87.1
- for <qemu-riscv@nongnu.org>; Tue, 05 Mar 2024 04:10:24 -0800 (PST)
+ id 1rhTcg-0001T7-QK
+ for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:10:48 -0500
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-412e8c63f23so10146645e9.0
+ for <qemu-riscv@nongnu.org>; Tue, 05 Mar 2024 04:10:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709640623; x=1710245423; darn=nongnu.org;
+ d=linaro.org; s=google; t=1709640617; x=1710245417; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=si4aR9NfjrmIkwaCSp8Q5XtDAxgYAPx/w5B7UtqWjho=;
- b=DjAAfgbkXid8Jvq6ps+FrrYz/20f0pvH+z/1MU9sm2QKSYxp/aj83sYZPpHkcGj9zB
- jwp3PilAYwnV4fvio7ZQ49VyPPriPuOLzsPINkXrhg63/IzIzeXlEK65rF3OIZhy4IJ/
- wGa0kkCk5NWYfKbGVXX4Et0s8NEL022922HTkGXO45B4KL0nMcbf9rlqMDAhaWjacaJ+
- X75Ydri2WX42KY52i30S6GmokH2pVpHTgaZ3l9LnoAMJNX3wDzEF2kn/+COD7XubdjDD
- Zng3Au8eeJIWyplOAJ/EJZnlkxLGs2y1GPKJHBMowfEG1QuuYhH6sxhE36HO4RPZUXN6
- oZaA==
+ bh=FBFGDsBcYD+JP9yYVswciAAzuKJ4opwX8kvXoDHdqq0=;
+ b=qE5e/VwAT8kONqORRKFnYNJUHP0ghVUts/F9GxCp8d4KXkpACvADST+02ffd4OfHR2
+ 4q/gSblilrIJHw4sDpenoukNgQXVaccmh7RR7pwlbsjFrHvtoSDLbkxSv4fao7KCYJ7+
+ wihU8HVd+YjhGuaA1E2N/eSPTFV+0MzmfHU87COOJalqTlMcaLszp3aCeAocAHWyDZce
+ dYhBXcP5VFNKakt4b4gOM6p0Ng10f75viQW3Ro67MAhJl9i1Rwk2OT3p9+/dhuPn1KFP
+ IPmgst+YGORKI/TKiPYu2TGACVPOHoVGcyA7fMo1POWLc7fuXhb0WQX66tybcml4ysDg
+ qBjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709640623; x=1710245423;
+ d=1e100.net; s=20230601; t=1709640617; x=1710245417;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=si4aR9NfjrmIkwaCSp8Q5XtDAxgYAPx/w5B7UtqWjho=;
- b=hSziQJI5b39QgQwYUu3h/pm3RGrYH2C8Rk+0uaXBQ/yrv7Bv41Cr2S7jhZ+InV47cA
- uFZ0NMFeMPJP0VQzfwu44aEB4f/7HE5+uRLGLbK83ZTdQNmJGxrFwIFXyFzTSQlEFLzx
- UFlBAoX1dUAp3T+1B9DvjO0GYRrxyW/c4eWlFP5BUrH+wrhYH2qvoMpoEpVZ23I44NNQ
- I0rQAC4EIqsU4r9BXqGF8+Yv6JL+UlxeMfMCJcILf68vyIjUIQ8d80mYTfQsSoiJFwbf
- rqqGTmG7Y4HM+u/mW1IHmA2N3pMNLazXfyv/7M/zZgN0k+kpimtaQzwOqegd5v82Zczq
- ncwg==
+ bh=FBFGDsBcYD+JP9yYVswciAAzuKJ4opwX8kvXoDHdqq0=;
+ b=cay7lO63XbT1vWP4Y/k3CrAfjKtZqpFxZnzYPrAA3oAPs8lXy6ot/nJcup/hly3dtr
+ J1pcomgsuq8WsvGy4ViAANtMWWRVefmy5MvuxlcoSlCOSJ0e/4ka0vK37R/yVzm0zwqf
+ 7r/VgfAaViTEoa/+3BulIrhQzntO29XgTetnVAcs+t8u+Jp3NYCZNLTLEvBQWvRVDCms
+ K470AKIikZybEnG7HQV91aRyhGZyVzYz2f0qeaV8O62doHJLoMaO3lyaw4JYrTm640rV
+ VTqHGMYl6hEDCgv668dlRlgx51vWqbE3EgqIYCJuvrrJdQicU71ZXGZBmP7DftXbvml4
+ 4qaA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCViSmt04HXaehmNuyFzkglwSmU9IRJqWhuU4Ko9ttaha2ThgVDQ2YE+l4F/Hyz7asvodyA0Z+/Wef3+Vz7JjAUwG9TSsyw=
-X-Gm-Message-State: AOJu0YzwF7JuD+bNiEecENchOZzkDbuPRCfpFxFXXdcDw0cAcpvqzuVM
- DXZtVsxkaOYERdUEI1xAYaNc/cWw3tLGqZ2Y6v12uUKmbGEgSkbyo6eImvn9bq0=
-X-Google-Smtp-Source: AGHT+IGGF4YSwijsmfFzPsi+Kumnb9yXuKRux5ssF5J9Y8pyMD69wuVgpPZpBxiLmtDbzc66aVpc1A==
-X-Received: by 2002:a05:6512:78:b0:512:a966:eb5 with SMTP id
- i24-20020a056512007800b00512a9660eb5mr1030745lfo.21.1709640622984; 
- Tue, 05 Mar 2024 04:10:22 -0800 (PST)
+ AJvYcCU12k7Usvg+IxpJSyi3X7BCDkQH/bw971y6BeO20DLmaoQf7l1ulUJMNWI5R6+7/eoffd/hNKeLZaNap4JUtX6ag/sXhKc=
+X-Gm-Message-State: AOJu0Yx9ub/+k4jWlw3FswyMobdTGbSTswqlvu/gOA5Of9QVnEBgs4pL
+ ZNjhqErrKHs38DwerKeDPHMz+B8ttp1qFqmDh74nS39Cn7GArdTnflaJD69Rihw=
+X-Google-Smtp-Source: AGHT+IHims0YVu0GdqE5LnWHhikrSCK/ucLVqfvhymbwIXB42724DOEZ1ysUvwWkLQ7sPlQRaafPEg==
+X-Received: by 2002:a05:600c:1c9c:b0:412:e675:f807 with SMTP id
+ k28-20020a05600c1c9c00b00412e675f807mr2966432wms.31.1709640616665; 
+ Tue, 05 Mar 2024 04:10:16 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- bu16-20020a056000079000b0033dc3f3d689sm14939377wrb.93.2024.03.05.04.10.14
+ u20-20020adfcb14000000b0033b7ce8b496sm14732205wrh.108.2024.03.05.04.10.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Mar 2024 04:10:19 -0800 (PST)
+ Tue, 05 Mar 2024 04:10:12 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 9BEBA5F9F3;
- Tue,  5 Mar 2024 12:10:07 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 9FDDD5F9D3;
+ Tue,  5 Mar 2024 12:10:06 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Wainer dos Santos Moschetta <wainersm@redhat.com>,
@@ -96,24 +96,24 @@ Cc: Wainer dos Santos Moschetta <wainersm@redhat.com>,
  Paolo Bonzini <pbonzini@redhat.com>, Alexandre Iooss <erdnaxe@crans.org>,
  Warner Losh <imp@bsdimp.com>, qemu-riscv@nongnu.org,
  Ilya Leoshkevich <iii@linux.ibm.com>
-Subject: [PATCH 23/29] contrib/plugins/howvec: migrate to new per_vcpu API
-Date: Tue,  5 Mar 2024 12:09:59 +0000
-Message-Id: <20240305121005.3528075-24-alex.bennee@linaro.org>
+Subject: [PATCH 12/29] gdbstub: Implement follow-fork-mode child
+Date: Tue,  5 Mar 2024 12:09:48 +0000
+Message-Id: <20240305121005.3528075-13-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240305121005.3528075-1-alex.bennee@linaro.org>
 References: <20240305121005.3528075-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::130;
- envelope-from=alex.bennee@linaro.org; helo=mail-lf1-x130.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -129,177 +129,300 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+From: Ilya Leoshkevich <iii@linux.ibm.com>
 
-Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
-Tested-by: Alex Bennée <alex.bennee@linaro.org>
-Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Message-Id: <20240304130036.124418-11-pierrick.bouvier@linaro.org>
+Currently it's not possible to use gdbstub for debugging linux-user
+code that runs in a forked child, which is normally done using the `set
+follow-fork-mode child` GDB command. Purely on the protocol level, the
+missing piece is the fork-events feature.
+
+However, a deeper problem is supporting $Hg switching between different
+processes - right now it can do only threads. Implementing this for the
+general case would be quite complicated, but, fortunately, for the
+follow-fork-mode case there are a few factors that greatly simplify
+things: fork() happens in the exclusive section, there are only two
+processes involved, and before one of them is resumed, the second one
+is detached.
+
+This makes it possible to implement a simplified scheme: the parent and
+the child share the gdbserver socket, it's used only by one of them at
+any given time, which is coordinated through a separate socketpair. The
+processes can read from the gdbserver socket only one byte at a time,
+which is not great for performance, but, fortunately, the
+follow-fork-mode handling involves only a few messages.
+
+Advertise the fork-events support, and remember whether GDB has it
+as well. Implement the state machine that is initialized on fork(),
+decides the current owner of the gdbserver socket, and is terminated
+when one of the two processes is detached. The logic for the parent and
+the child is the same, only the initial state is different.
+
+Signed-off-by: Ilya Leoshkevich <iii@linux.ibm.com>
+Message-Id: <20240219141628.246823-12-iii@linux.ibm.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- contrib/plugins/howvec.c | 53 ++++++++++++++++++++++++++++------------
- 1 file changed, 38 insertions(+), 15 deletions(-)
+ gdbstub/user.c | 212 ++++++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 210 insertions(+), 2 deletions(-)
 
-diff --git a/contrib/plugins/howvec.c b/contrib/plugins/howvec.c
-index 644a7856bb2..2d10c87e0fb 100644
---- a/contrib/plugins/howvec.c
-+++ b/contrib/plugins/howvec.c
-@@ -43,13 +43,13 @@ typedef struct {
-     uint32_t mask;
-     uint32_t pattern;
-     CountType what;
--    uint64_t count;
-+    qemu_plugin_u64 count;
- } InsnClassExecCount;
+diff --git a/gdbstub/user.c b/gdbstub/user.c
+index 1a7b582a40d..7f9f19a1249 100644
+--- a/gdbstub/user.c
++++ b/gdbstub/user.c
+@@ -25,6 +25,61 @@
+ #define GDB_NR_SYSCALLS 1024
+ typedef unsigned long GDBSyscallsMask[BITS_TO_LONGS(GDB_NR_SYSCALLS)];
  
++/*
++ * Forked child talks to its parent in order to let GDB enforce the
++ * follow-fork-mode. This happens inside a start_exclusive() section, so that
++ * the other threads, which may be forking too, do not interfere. The
++ * implementation relies on GDB not sending $vCont until it has detached
++ * either from the parent (follow-fork-mode child) or from the child
++ * (follow-fork-mode parent).
++ *
++ * The parent and the child share the GDB socket; at any given time only one
++ * of them is allowed to use it, as is reflected in the respective fork_state.
++ * This is negotiated via the fork_sockets pair as a reaction to $Hg.
++ *
++ * Below is a short summary of the possible state transitions:
++ *
++ *     ENABLED                     : Terminal state.
++ *     DISABLED                    : Terminal state.
++ *     ACTIVE                      : Parent initial state.
++ *     INACTIVE                    : Child initial state.
++ *     ACTIVE       -> DEACTIVATING: On $Hg.
++ *     ACTIVE       -> ENABLING    : On $D.
++ *     ACTIVE       -> DISABLING   : On $D.
++ *     ACTIVE       -> DISABLED    : On communication error.
++ *     DEACTIVATING -> INACTIVE    : On gdb_read_byte() return.
++ *     DEACTIVATING -> DISABLED    : On communication error.
++ *     INACTIVE     -> ACTIVE      : On $Hg in the peer.
++ *     INACTIVE     -> ENABLE      : On $D in the peer.
++ *     INACTIVE     -> DISABLE     : On $D in the peer.
++ *     INACTIVE     -> DISABLED    : On communication error.
++ *     ENABLING     -> ENABLED     : On gdb_read_byte() return.
++ *     ENABLING     -> DISABLED    : On communication error.
++ *     DISABLING    -> DISABLED    : On gdb_read_byte() return.
++ */
++enum GDBForkState {
++    /* Fully owning the GDB socket. */
++    GDB_FORK_ENABLED,
++    /* Working with the GDB socket; the peer is inactive. */
++    GDB_FORK_ACTIVE,
++    /* Handing off the GDB socket to the peer. */
++    GDB_FORK_DEACTIVATING,
++    /* The peer is working with the GDB socket. */
++    GDB_FORK_INACTIVE,
++    /* Asking the peer to close its GDB socket fd. */
++    GDB_FORK_ENABLING,
++    /* Asking the peer to take over, closing our GDB socket fd. */
++    GDB_FORK_DISABLING,
++    /* The peer has taken over, our GDB socket fd is closed. */
++    GDB_FORK_DISABLED,
++};
++
++enum GDBForkMessage {
++    GDB_FORK_ACTIVATE = 'a',
++    GDB_FORK_ENABLE = 'e',
++    GDB_FORK_DISABLE = 'd',
++};
++
+ /* User-mode specific state */
  typedef struct {
-     char *insn;
-     uint32_t opcode;
--    uint64_t count;
-+    qemu_plugin_u64 count;
-     InsnClassExecCount *class;
- } InsnExecCount;
+     int fd;
+@@ -36,6 +91,10 @@ typedef struct {
+      */
+     bool catch_all_syscalls;
+     GDBSyscallsMask catch_syscalls_mask;
++    bool fork_events;
++    enum GDBForkState fork_state;
++    int fork_sockets[2];
++    pid_t fork_peer_pid, fork_peer_tid;
+ } GDBUserState;
  
-@@ -159,7 +159,9 @@ static gint cmp_exec_count(gconstpointer a, gconstpointer b)
+ static GDBUserState gdbserver_user_state;
+@@ -358,6 +417,18 @@ int gdbserver_start(const char *port_or_path)
+ 
+ void gdbserver_fork_start(void)
  {
-     InsnExecCount *ea = (InsnExecCount *) a;
-     InsnExecCount *eb = (InsnExecCount *) b;
--    return ea->count > eb->count ? -1 : 1;
-+    uint64_t count_a = qemu_plugin_u64_sum(ea->count);
-+    uint64_t count_b = qemu_plugin_u64_sum(eb->count);
-+    return count_a > count_b ? -1 : 1;
++    if (!gdbserver_state.init || gdbserver_user_state.fd < 0) {
++        return;
++    }
++    if (!gdbserver_user_state.fork_events ||
++            qemu_socketpair(AF_UNIX, SOCK_STREAM, 0,
++                            gdbserver_user_state.fork_sockets) < 0) {
++        gdbserver_user_state.fork_state = GDB_FORK_DISABLED;
++        return;
++    }
++    gdbserver_user_state.fork_state = GDB_FORK_INACTIVE;
++    gdbserver_user_state.fork_peer_pid = getpid();
++    gdbserver_user_state.fork_peer_tid = qemu_get_thread_id();
  }
  
- static void free_record(gpointer data)
-@@ -167,12 +169,14 @@ static void free_record(gpointer data)
-     InsnExecCount *rec = (InsnExecCount *) data;
-     g_free(rec->insn);
-     g_free(rec);
-+    qemu_plugin_scoreboard_free(rec->count.score);
- }
+ static void disable_gdbstub(CPUState *thread_cpu)
+@@ -376,23 +447,160 @@ static void disable_gdbstub(CPUState *thread_cpu)
  
- static void plugin_exit(qemu_plugin_id_t id, void *p)
+ void gdbserver_fork_end(CPUState *cpu, pid_t pid)
  {
-     g_autoptr(GString) report = g_string_new("Instruction Classes:\n");
-     int i;
-+    uint64_t total_count;
-     GList *counts;
-     InsnClassExecCount *class = NULL;
- 
-@@ -180,11 +184,12 @@ static void plugin_exit(qemu_plugin_id_t id, void *p)
-         class = &class_table[i];
-         switch (class->what) {
-         case COUNT_CLASS:
--            if (class->count || verbose) {
-+            total_count = qemu_plugin_u64_sum(class->count);
-+            if (total_count || verbose) {
-                 g_string_append_printf(report,
-                                        "Class: %-24s\t(%" PRId64 " hits)\n",
-                                        class->class,
--                                       class->count);
-+                                       total_count);
-             }
-             break;
-         case COUNT_INDIVIDUAL:
-@@ -212,7 +217,7 @@ static void plugin_exit(qemu_plugin_id_t id, void *p)
-                                    "Instr: %-24s\t(%" PRId64 " hits)"
-                                    "\t(op=0x%08x/%s)\n",
-                                    rec->insn,
--                                   rec->count,
-+                                   qemu_plugin_u64_sum(rec->count),
-                                    rec->opcode,
-                                    rec->class ?
-                                    rec->class->class : "un-categorised");
-@@ -221,6 +226,12 @@ static void plugin_exit(qemu_plugin_id_t id, void *p)
+-    if (pid != 0 || !gdbserver_state.init || gdbserver_user_state.fd < 0) {
++    char b;
++    int fd;
++
++    if (!gdbserver_state.init || gdbserver_user_state.fd < 0) {
+         return;
      }
- 
-     g_hash_table_destroy(insns);
-+    for (i = 0; i < ARRAY_SIZE(class_tables); i++) {
-+        for (int j = 0; j < class_tables[i].table_sz; ++j) {
-+            qemu_plugin_scoreboard_free(class_tables[i].table[j].count.score);
+-    disable_gdbstub(cpu);
++
++    if (pid == -1) {
++        if (gdbserver_user_state.fork_state != GDB_FORK_DISABLED) {
++            g_assert(gdbserver_user_state.fork_state == GDB_FORK_INACTIVE);
++            close(gdbserver_user_state.fork_sockets[0]);
++            close(gdbserver_user_state.fork_sockets[1]);
++        }
++        return;
++    }
++
++    if (gdbserver_user_state.fork_state == GDB_FORK_DISABLED) {
++        if (pid == 0) {
++            disable_gdbstub(cpu);
++        }
++        return;
++    }
++
++    if (pid == 0) {
++        close(gdbserver_user_state.fork_sockets[0]);
++        fd = gdbserver_user_state.fork_sockets[1];
++        g_assert(gdbserver_state.process_num == 1);
++        g_assert(gdbserver_state.processes[0].pid ==
++                     gdbserver_user_state.fork_peer_pid);
++        g_assert(gdbserver_state.processes[0].attached);
++        gdbserver_state.processes[0].pid = getpid();
++    } else {
++        close(gdbserver_user_state.fork_sockets[1]);
++        fd = gdbserver_user_state.fork_sockets[0];
++        gdbserver_user_state.fork_state = GDB_FORK_ACTIVE;
++        gdbserver_user_state.fork_peer_pid = pid;
++        gdbserver_user_state.fork_peer_tid = pid;
++
++        if (!gdbserver_state.allow_stop_reply) {
++            goto fail;
++        }
++        g_string_printf(gdbserver_state.str_buf,
++                        "T%02xfork:p%02x.%02x;thread:p%02x.%02x;",
++                        gdb_target_signal_to_gdb(gdb_target_sigtrap()),
++                        pid, pid, (int)getpid(), qemu_get_thread_id());
++        gdb_put_strbuf();
++    }
++
++    gdbserver_state.state = RS_IDLE;
++    gdbserver_state.allow_stop_reply = false;
++    gdbserver_user_state.running_state = 0;
++    for (;;) {
++        switch (gdbserver_user_state.fork_state) {
++        case GDB_FORK_ENABLED:
++            if (gdbserver_user_state.running_state) {
++                return;
++            }
++            QEMU_FALLTHROUGH;
++        case GDB_FORK_ACTIVE:
++            if (read(gdbserver_user_state.fd, &b, 1) != 1) {
++                goto fail;
++            }
++            gdb_read_byte(b);
++            break;
++        case GDB_FORK_DEACTIVATING:
++            b = GDB_FORK_ACTIVATE;
++            if (write(fd, &b, 1) != 1) {
++                goto fail;
++            }
++            gdbserver_user_state.fork_state = GDB_FORK_INACTIVE;
++            break;
++        case GDB_FORK_INACTIVE:
++            if (read(fd, &b, 1) != 1) {
++                goto fail;
++            }
++            switch (b) {
++            case GDB_FORK_ACTIVATE:
++                gdbserver_user_state.fork_state = GDB_FORK_ACTIVE;
++                break;
++            case GDB_FORK_ENABLE:
++                close(fd);
++                gdbserver_user_state.fork_state = GDB_FORK_ENABLED;
++                break;
++            case GDB_FORK_DISABLE:
++                gdbserver_user_state.fork_state = GDB_FORK_DISABLED;
++                break;
++            default:
++                g_assert_not_reached();
++            }
++            break;
++        case GDB_FORK_ENABLING:
++            b = GDB_FORK_DISABLE;
++            if (write(fd, &b, 1) != 1) {
++                goto fail;
++            }
++            close(fd);
++            gdbserver_user_state.fork_state = GDB_FORK_ENABLED;
++            break;
++        case GDB_FORK_DISABLING:
++            b = GDB_FORK_ENABLE;
++            if (write(fd, &b, 1) != 1) {
++                goto fail;
++            }
++            gdbserver_user_state.fork_state = GDB_FORK_DISABLED;
++            break;
++        case GDB_FORK_DISABLED:
++            close(fd);
++            disable_gdbstub(cpu);
++            return;
++        default:
++            g_assert_not_reached();
 +        }
 +    }
 +
- 
-     qemu_plugin_outs(report->str);
- }
-@@ -232,11 +243,12 @@ static void plugin_init(void)
- 
- static void vcpu_insn_exec_before(unsigned int cpu_index, void *udata)
- {
--    uint64_t *count = (uint64_t *) udata;
--    (*count)++;
-+    struct qemu_plugin_scoreboard *score = udata;
-+    qemu_plugin_u64_add(qemu_plugin_scoreboard_u64(score), cpu_index, 1);
++fail:
++    close(fd);
++    if (pid == 0) {
++        disable_gdbstub(cpu);
++    }
  }
  
--static uint64_t *find_counter(struct qemu_plugin_insn *insn)
-+static struct qemu_plugin_scoreboard *find_counter(
-+    struct qemu_plugin_insn *insn)
+ void gdb_handle_query_supported_user(const char *gdb_supported)
  {
-     int i;
-     uint64_t *cnt = NULL;
-@@ -265,7 +277,7 @@ static uint64_t *find_counter(struct qemu_plugin_insn *insn)
-     case COUNT_NONE:
-         return NULL;
-     case COUNT_CLASS:
--        return &class->count;
-+        return class->count.score;
-     case COUNT_INDIVIDUAL:
-     {
-         InsnExecCount *icount;
-@@ -279,13 +291,16 @@ static uint64_t *find_counter(struct qemu_plugin_insn *insn)
-             icount->opcode = opcode;
-             icount->insn = qemu_plugin_insn_disas(insn);
-             icount->class = class;
-+            struct qemu_plugin_scoreboard *score =
-+                qemu_plugin_scoreboard_new(sizeof(uint64_t));
-+            icount->count = qemu_plugin_scoreboard_u64(score);
++    if (strstr(gdb_supported, "fork-events+")) {
++        gdbserver_user_state.fork_events = true;
++    }
++    g_string_append(gdbserver_state.str_buf, ";fork-events+");
+ }
  
-             g_hash_table_insert(insns, GUINT_TO_POINTER(opcode),
-                                 (gpointer) icount);
-         }
-         g_mutex_unlock(&lock);
- 
--        return &icount->count;
-+        return icount->count.score;
-     }
-     default:
-         g_assert_not_reached();
-@@ -300,14 +315,14 @@ static void vcpu_tb_trans(qemu_plugin_id_t id, struct qemu_plugin_tb *tb)
-     size_t i;
- 
-     for (i = 0; i < n; i++) {
--        uint64_t *cnt;
-         struct qemu_plugin_insn *insn = qemu_plugin_tb_get_insn(tb, i);
--        cnt = find_counter(insn);
-+        struct qemu_plugin_scoreboard *cnt = find_counter(insn);
- 
-         if (cnt) {
-             if (do_inline) {
--                qemu_plugin_register_vcpu_insn_exec_inline(
--                    insn, QEMU_PLUGIN_INLINE_ADD_U64, cnt, 1);
-+                qemu_plugin_register_vcpu_insn_exec_inline_per_vcpu(
-+                    insn, QEMU_PLUGIN_INLINE_ADD_U64,
-+                    qemu_plugin_scoreboard_u64(cnt), 1);
-             } else {
-                 qemu_plugin_register_vcpu_insn_exec_cb(
-                     insn, vcpu_insn_exec_before, QEMU_PLUGIN_CB_NO_REGS, cnt);
-@@ -322,6 +337,14 @@ QEMU_PLUGIN_EXPORT int qemu_plugin_install(qemu_plugin_id_t id,
+ bool gdb_handle_set_thread_user(uint32_t pid, uint32_t tid)
  {
-     int i;
++    if (gdbserver_user_state.fork_state == GDB_FORK_ACTIVE &&
++            pid == gdbserver_user_state.fork_peer_pid &&
++            tid == gdbserver_user_state.fork_peer_tid) {
++        gdbserver_user_state.fork_state = GDB_FORK_DEACTIVATING;
++        gdb_put_packet("OK");
++        return true;
++    }
+     return false;
+ }
  
-+    for (i = 0; i < ARRAY_SIZE(class_tables); i++) {
-+        for (int j = 0; j < class_tables[i].table_sz; ++j) {
-+            struct qemu_plugin_scoreboard *score =
-+                qemu_plugin_scoreboard_new(sizeof(uint64_t));
-+            class_tables[i].table[j].count = qemu_plugin_scoreboard_u64(score);
+ bool gdb_handle_detach_user(uint32_t pid)
+ {
++    bool enable;
++
++    if (gdbserver_user_state.fork_state == GDB_FORK_ACTIVE) {
++        enable = pid == gdbserver_user_state.fork_peer_pid;
++        if (enable || pid == getpid()) {
++            gdbserver_user_state.fork_state = enable ? GDB_FORK_ENABLING :
++                                                       GDB_FORK_DISABLING;
++            gdb_put_packet("OK");
++            return true;
 +        }
 +    }
-+
-     /* Select a class table appropriate to the guest architecture */
-     for (i = 0; i < ARRAY_SIZE(class_tables); i++) {
-         ClassSelector *entry = &class_tables[i];
+     return false;
+ }
+ 
 -- 
 2.39.2
 
