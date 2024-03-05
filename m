@@ -4,62 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8D1CC54798
-	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Mar 2024 07:04:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1293C54798
+	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Mar 2024 08:40:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rhOq9-0003gc-BN; Tue, 05 Mar 2024 02:03:57 -0500
+	id 1rhQKu-0006V6-Gt; Tue, 05 Mar 2024 03:39:44 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1rhOpi-0003YU-1w; Tue, 05 Mar 2024 02:03:28 -0500
-Received: from out30-99.freemail.mail.aliyun.com ([115.124.30.99])
+ (Exim 4.90_1) (envelope-from <anisinha@redhat.com>)
+ id 1rhQKr-0006UP-Fy
+ for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 03:39:41 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1rhOpf-0008D1-8k; Tue, 05 Mar 2024 02:03:25 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux.alibaba.com; s=default;
- t=1709622194; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
- bh=wAJB0gI0DrdaQKO8/kRMn8lX+BKdkT4lAiJHIe0rifk=;
- b=n53sPi3ZsCluQDe4KqReTguFKh9o3PUTwrKSpeQCrF9cgA8kEDjd4Fp6sXZkIe2UoOzt0yWYfrC8tSKY8vnM56uEhw2TqajGv1kBbHKkLgtxoS6SJSmn0BOf90txfTqbXUEspXLvEcttMAnz3HHQ4SXR/1cFFES9/1IBD6u0zUc=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R211e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046049;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
- TI=SMTPD_---0W1tHqMD_1709622104; 
-Received: from 30.198.0.247(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0W1tHqMD_1709622104) by smtp.aliyun-inc.com;
- Tue, 05 Mar 2024 15:03:13 +0800
-Message-ID: <ac30eb62-1f3f-4722-abaa-3a0d6c3eb551@linux.alibaba.com>
-Date: Tue, 5 Mar 2024 15:03:17 +0800
+ (Exim 4.90_1) (envelope-from <anisinha@redhat.com>)
+ id 1rhQKo-0008Rs-RE
+ for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 03:39:41 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1709627978;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=5LcInpHYYuUiy4B3hRcWcyDRSUDFhfdYJTKi9Iv68I4=;
+ b=SdWjaPKp8XgKIhGra9Eie3pyQBpkbw/+HQmS43VuHDsuiOllXQsNZbdE70F3U7eYVpfCij
+ B6lVWWa3wOvIY+XEKInZ5X0nTj16S8snlcQxRVUaJC9pk3i5hRu7+VM4XgB9iZ57Yt05Lo
+ 5yH4ykBR33hRp5wmUrL0rDCaI5rg1m8=
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com
+ [209.85.214.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-651-Hgs8rpEhMUaxl7947m0XrA-1; Tue, 05 Mar 2024 03:39:34 -0500
+X-MC-Unique: Hgs8rpEhMUaxl7947m0XrA-1
+Received: by mail-pl1-f200.google.com with SMTP id
+ d9443c01a7336-1dc6f81c290so49140885ad.1
+ for <qemu-riscv@nongnu.org>; Tue, 05 Mar 2024 00:39:34 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1709627974; x=1710232774;
+ h=mime-version:references:message-id:in-reply-to:subject:cc:to:from
+ :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=5LcInpHYYuUiy4B3hRcWcyDRSUDFhfdYJTKi9Iv68I4=;
+ b=UpPZfkESOMBWJ5hBDxtlntsNmjhWZW5s8zK49UkHR1mBbbYLmEgmiQPoxRi/Bax1ZU
+ I/LamQ8eZDcEtyOeTfarsJZzd7/QIoVbRKJNC6ZyYKaaiHFtpxC61ehe2v4mbgF3tASb
+ bqxe69IG2aLZNKJOWZxVonOf3++uPrKEamzM4VIcNwxNqqy2VBZOhFUiMcQqvk8CYAak
+ XB4b5i5RvsYX9uqelpwnBKj3wLGMpBDJ9ChPOxtr6YbBPOn/bS/CgF97fL75qA1b2qZU
+ gg336j+V+rRvaoHmPeigl5B3AGyd0zD9W44RPvBd6EQqN2KKIKH2C70w0pEoHIOnmgD/
+ wzcA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWiHBnhWeo+fzHfG+cbfMWEM9EFy/9N/6kD0TbQr0pnlGHmN1phi4wD9f9RZ0Q6Yw3GIkqhSaa+si2GQxDfBIpsvSlb9W0=
+X-Gm-Message-State: AOJu0Yz9RyK1z+cfLylYh5z+57HVhjrW/vsABDO1jeMNfocsBPTxD5BK
+ krGvYR208hDazyNaJyQk9l/60nq7UAbHu86rIaOYfCJ0gDCQ1V//fuFO4chUuDRIHjx7+WzYVcE
+ dwLnYX90cKajbgxEkGUg41mgDWXpNTAWk3JBSN1bYuhuuiea9tzKo
+X-Received: by 2002:a17:902:e88b:b0:1db:d7a8:8508 with SMTP id
+ w11-20020a170902e88b00b001dbd7a88508mr1118569plg.52.1709627973546; 
+ Tue, 05 Mar 2024 00:39:33 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGrbbAsnRe/VAzlN+NEZk4Jzpeo9p8315L23eLDv9vpiKaFQw27Z/+TpKSdNr36qUp4dF+rNw==
+X-Received: by 2002:a17:902:e88b:b0:1db:d7a8:8508 with SMTP id
+ w11-20020a170902e88b00b001dbd7a88508mr1118541plg.52.1709627973049; 
+ Tue, 05 Mar 2024 00:39:33 -0800 (PST)
+Received: from fc37-ani ([203.163.238.152])
+ by smtp.googlemail.com with ESMTPSA id
+ i3-20020a17090332c300b001dd0c5d5227sm4136485plr.193.2024.03.05.00.39.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 05 Mar 2024 00:39:32 -0800 (PST)
+Date: Tue, 5 Mar 2024 14:09:23 +0530 (IST)
+From: Ani Sinha <anisinha@redhat.com>
+To: Igor Mammedov <imammedo@redhat.com>
+cc: qemu-devel@nongnu.org, peter.maydell@linaro.org, pbonzini@redhat.com, 
+ mst@redhat.com, gaosong@loongson.cn, alistair.francis@wdc.com, 
+ palmer@dabbelt.com, bin.meng@windriver.com, liwei1518@gmail.com, 
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, philmd@linaro.org, 
+ wangyanan55@huawei.com, eblake@redhat.com, armbru@redhat.com, 
+ qemu-arm@nongnu.org, qemu-riscv@nongnu.org, f.ebner@proxmox.com
+Subject: Re: [PATCH 12/19] get rid of global smbios_ep_type
+In-Reply-To: <20240227154749.1818189-13-imammedo@redhat.com>
+Message-ID: <4a4d45f1-2bc6-9ff0-ad9d-078a737ea244@redhat.com>
+References: <20240227154749.1818189-1-imammedo@redhat.com>
+ <20240227154749.1818189-13-imammedo@redhat.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 1/5] target/riscv: Fix the predicate functions for
- mhpmeventhX CSRs
-Content-Language: en-US
-To: Atish Patra <atishp@rivosinc.com>
-Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org, Weiwei Li
- <liwei1518@gmail.com>, kaiwenxue1@gmail.com
-References: <20240228185116.1321730-1-atishp@rivosinc.com>
- <20240228185116.1321730-2-atishp@rivosinc.com>
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20240228185116.1321730-2-atishp@rivosinc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=115.124.30.99;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-99.freemail.mail.aliyun.com
-X-Spam_score_int: -174
-X-Spam_score: -17.5
-X-Spam_bar: -----------------
-X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=US-ASCII
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=anisinha@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -26
+X-Spam_score: -2.7
+X-Spam_bar: --
+X-Spam_report: (-2.7 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.571,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -76,162 +108,300 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
-On 2024/2/29 2:51, Atish Patra wrote:
-> mhpmeventhX CSRs are available for RV32. The predicate function
-> should check that first before checking sscofpmf extension.
->
-> Fixes: 14664483457b ("target/riscv: Add sscofpmf extension support")
-> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+please add "smbios:" prefix just like your other patches in the commit
+header.
 
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+On Tue, 27 Feb 2024, Igor Mammedov wrote:
 
-Zhiwei
+> Signed-off-by: Igor Mammedov <imammedo@redhat.com>
 
-> Signed-off-by: Atish Patra <atishp@rivosinc.com>
+I have not checked all the code paths for the changed function signatures
+and left that instead for the compiler. Assuming the build is fine,
+
+Reviewed-by: Ani Sinha <anisinha@redhat.com>
+
 > ---
->   target/riscv/csr.c | 67 ++++++++++++++++++++++++++--------------------
->   1 file changed, 38 insertions(+), 29 deletions(-)
+>  hw/i386/fw_cfg.h             |  3 ++-
+>  include/hw/firmware/smbios.h |  5 +++--
+>  hw/arm/virt.c                |  4 ++--
+>  hw/i386/fw_cfg.c             |  8 ++++----
+>  hw/i386/pc.c                 |  2 +-
+>  hw/loongarch/virt.c          |  7 ++++---
+>  hw/riscv/virt.c              |  6 +++---
+>  hw/smbios/smbios.c           | 27 +++++++++++++++------------
+>  hw/smbios/smbios_legacy.c    |  2 +-
+>  9 files changed, 35 insertions(+), 29 deletions(-)
 >
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index d4e8ac13b90c..a3d979c4c72c 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -227,6 +227,15 @@ static RISCVException sscofpmf(CPURISCVState *env, int csrno)
->       return RISCV_EXCP_NONE;
->   }
->   
-> +static RISCVException sscofpmf_32(CPURISCVState *env, int csrno)
-> +{
-> +    if (riscv_cpu_mxl(env) != MXL_RV32) {
-> +        return RISCV_EXCP_ILLEGAL_INST;
-> +    }
+> diff --git a/hw/i386/fw_cfg.h b/hw/i386/fw_cfg.h
+> index 1e1de6b4a3..92e310f5fd 100644
+> --- a/hw/i386/fw_cfg.h
+> +++ b/hw/i386/fw_cfg.h
+> @@ -23,7 +23,8 @@
+>  FWCfgState *fw_cfg_arch_create(MachineState *ms,
+>                                 uint16_t boot_cpus,
+>                                 uint16_t apic_id_limit);
+> -void fw_cfg_build_smbios(PCMachineState *ms, FWCfgState *fw_cfg);
+> +void fw_cfg_build_smbios(PCMachineState *pcms, FWCfgState *fw_cfg,
+> +                         SmbiosEntryPointType ep_type);
+>  void fw_cfg_build_feature_control(MachineState *ms, FWCfgState *fw_cfg);
+>  void fw_cfg_add_acpi_dsdt(Aml *scope, FWCfgState *fw_cfg);
+>
+> diff --git a/include/hw/firmware/smbios.h b/include/hw/firmware/smbios.h
+> index d1194c9cc2..d59c2f5a13 100644
+> --- a/include/hw/firmware/smbios.h
+> +++ b/include/hw/firmware/smbios.h
+> @@ -310,16 +310,17 @@ struct smbios_type_127 {
+>      struct smbios_structure_header header;
+>  } QEMU_PACKED;
+>
+> -bool smbios_validate_table(Error **errp);
+> +bool smbios_validate_table(SmbiosEntryPointType ep_type, Error **errp);
+>  void smbios_add_usr_blob_size(size_t size);
+>  void smbios_entry_add(QemuOpts *opts, Error **errp);
+>  void smbios_set_cpuid(uint32_t version, uint32_t features);
+>  void smbios_set_defaults(const char *manufacturer, const char *product,
+>                           const char *version,
+> -                         bool uuid_encoded, SmbiosEntryPointType ep_type);
+> +                         bool uuid_encoded);
+>  void smbios_set_default_processor_family(uint16_t processor_family);
+>  uint8_t *smbios_get_table_legacy(size_t *length, Error **errp);
+>  void smbios_get_tables(MachineState *ms,
+> +                       SmbiosEntryPointType ep_type,
+>                         const struct smbios_phys_mem_area *mem_array,
+>                         const unsigned int mem_array_size,
+>                         uint8_t **tables, size_t *tables_len,
+> diff --git a/hw/arm/virt.c b/hw/arm/virt.c
+> index 8588681f27..780224ee5b 100644
+> --- a/hw/arm/virt.c
+> +++ b/hw/arm/virt.c
+> @@ -1634,13 +1634,13 @@ static void virt_build_smbios(VirtMachineState *vms)
+>
+>      smbios_set_defaults("QEMU", product,
+>                          vmc->smbios_old_sys_ver ? "1.0" : mc->name,
+> -                        true, SMBIOS_ENTRY_POINT_TYPE_64);
+> +                        true);
+>
+>      /* build the array of physical mem area from base_memmap */
+>      mem_array.address = vms->memmap[VIRT_MEM].base;
+>      mem_array.length = ms->ram_size;
+>
+> -    smbios_get_tables(ms, &mem_array, 1,
+> +    smbios_get_tables(ms, SMBIOS_ENTRY_POINT_TYPE_64, &mem_array, 1,
+>                        &smbios_tables, &smbios_tables_len,
+>                        &smbios_anchor, &smbios_anchor_len,
+>                        &error_fatal);
+> diff --git a/hw/i386/fw_cfg.c b/hw/i386/fw_cfg.c
+> index e387bf50d0..d802d2787f 100644
+> --- a/hw/i386/fw_cfg.c
+> +++ b/hw/i386/fw_cfg.c
+> @@ -48,7 +48,8 @@ const char *fw_cfg_arch_key_name(uint16_t key)
+>      return NULL;
+>  }
+>
+> -void fw_cfg_build_smbios(PCMachineState *pcms, FWCfgState *fw_cfg)
+> +void fw_cfg_build_smbios(PCMachineState *pcms, FWCfgState *fw_cfg,
+> +                         SmbiosEntryPointType ep_type)
+>  {
+>  #ifdef CONFIG_SMBIOS
+>      uint8_t *smbios_tables, *smbios_anchor;
+> @@ -63,8 +64,7 @@ void fw_cfg_build_smbios(PCMachineState *pcms, FWCfgState *fw_cfg)
+>      if (pcmc->smbios_defaults) {
+>          /* These values are guest ABI, do not change */
+>          smbios_set_defaults("QEMU", mc->desc, mc->name,
+> -                            pcmc->smbios_uuid_encoded,
+> -                            pcms->smbios_entry_point_type);
+> +                            pcmc->smbios_uuid_encoded);
+>      }
+>
+>      /* tell smbios about cpuid version and features */
+> @@ -89,7 +89,7 @@ void fw_cfg_build_smbios(PCMachineState *pcms, FWCfgState *fw_cfg)
+>              array_count++;
+>          }
+>      }
+> -    smbios_get_tables(ms, mem_array, array_count,
+> +    smbios_get_tables(ms, ep_type, mem_array, array_count,
+>                        &smbios_tables, &smbios_tables_len,
+>                        &smbios_anchor, &smbios_anchor_len,
+>                        &error_fatal);
+> diff --git a/hw/i386/pc.c b/hw/i386/pc.c
+> index f8eb684a49..56562e7d9e 100644
+> --- a/hw/i386/pc.c
+> +++ b/hw/i386/pc.c
+> @@ -689,7 +689,7 @@ void pc_machine_done(Notifier *notifier, void *data)
+>
+>      acpi_setup();
+>      if (x86ms->fw_cfg) {
+> -        fw_cfg_build_smbios(pcms, x86ms->fw_cfg);
+> +        fw_cfg_build_smbios(pcms, x86ms->fw_cfg, pcms->smbios_entry_point_type);
+>          fw_cfg_build_feature_control(MACHINE(pcms), x86ms->fw_cfg);
+>          /* update FW_CFG_NB_CPUS to account for -device added CPUs */
+>          fw_cfg_modify_i16(x86ms->fw_cfg, FW_CFG_NB_CPUS, x86ms->boot_cpus);
+> diff --git a/hw/loongarch/virt.c b/hw/loongarch/virt.c
+> index 73fb3522ba..d2ed15da75 100644
+> --- a/hw/loongarch/virt.c
+> +++ b/hw/loongarch/virt.c
+> @@ -320,10 +320,11 @@ static void virt_build_smbios(LoongArchMachineState *lams)
+>          return;
+>      }
+>
+> -    smbios_set_defaults("QEMU", product, mc->name,
+> -                        true, SMBIOS_ENTRY_POINT_TYPE_64);
+> +    smbios_set_defaults("QEMU", product, mc->name, true);
+>
+> -    smbios_get_tables(ms, NULL, 0, &smbios_tables, &smbios_tables_len,
+> +    smbios_get_tables(ms, SMBIOS_ENTRY_POINT_TYPE_64,
+> +                      NULL, 0,
+> +                      &smbios_tables, &smbios_tables_len,
+>                        &smbios_anchor, &smbios_anchor_len, &error_fatal);
+>
+>      if (smbios_anchor) {
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index e2c9529df2..b730ff2030 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -1235,8 +1235,7 @@ static void virt_build_smbios(RISCVVirtState *s)
+>          product = "KVM Virtual Machine";
+>      }
+>
+> -    smbios_set_defaults("QEMU", product, mc->name,
+> -                        true, SMBIOS_ENTRY_POINT_TYPE_64);
+> +    smbios_set_defaults("QEMU", product, mc->name, true);
+>
+>      if (riscv_is_32bit(&s->soc[0])) {
+>          smbios_set_default_processor_family(0x200);
+> @@ -1248,7 +1247,8 @@ static void virt_build_smbios(RISCVVirtState *s)
+>      mem_array.address = s->memmap[VIRT_DRAM].base;
+>      mem_array.length = ms->ram_size;
+>
+> -    smbios_get_tables(ms, &mem_array, 1,
+> +    smbios_get_tables(ms, SMBIOS_ENTRY_POINT_TYPE_64,
+> +                      &mem_array, 1,
+>                        &smbios_tables, &smbios_tables_len,
+>                        &smbios_anchor, &smbios_anchor_len,
+>                        &error_fatal);
+> diff --git a/hw/smbios/smbios.c b/hw/smbios/smbios.c
+> index d9ba2072b1..5a791fd9eb 100644
+> --- a/hw/smbios/smbios.c
+> +++ b/hw/smbios/smbios.c
+> @@ -43,7 +43,6 @@ uint8_t *smbios_tables;
+>  size_t smbios_tables_len;
+>  unsigned smbios_table_max;
+>  unsigned smbios_table_cnt;
+> -static SmbiosEntryPointType smbios_ep_type = SMBIOS_ENTRY_POINT_TYPE_32;
+>
+>  static SmbiosEntryPoint ep;
+>
+> @@ -457,9 +456,9 @@ static bool smbios_check_type4_count(uint32_t expected_t4_count, Error **errp)
+>      return true;
+>  }
+>
+> -bool smbios_validate_table(Error **errp)
+> +bool smbios_validate_table(SmbiosEntryPointType ep_type, Error **errp)
+>  {
+> -    if (smbios_ep_type == SMBIOS_ENTRY_POINT_TYPE_32 &&
+> +    if (ep_type == SMBIOS_ENTRY_POINT_TYPE_32 &&
+>          smbios_tables_len > SMBIOS_21_MAX_TABLES_LEN) {
+>          error_setg(errp, "SMBIOS 2.1 table length %zu exceeds %d",
+>                     smbios_tables_len, SMBIOS_21_MAX_TABLES_LEN);
+> @@ -605,14 +604,15 @@ static void smbios_build_type_3_table(void)
+>      SMBIOS_BUILD_TABLE_POST;
+>  }
+>
+> -static void smbios_build_type_4_table(MachineState *ms, unsigned instance)
+> +static void smbios_build_type_4_table(MachineState *ms, unsigned instance,
+> +                                      SmbiosEntryPointType ep_type)
+>  {
+>      char sock_str[128];
+>      size_t tbl_len = SMBIOS_TYPE_4_LEN_V28;
+>      unsigned threads_per_socket;
+>      unsigned cores_per_socket;
+>
+> -    if (smbios_ep_type == SMBIOS_ENTRY_POINT_TYPE_64) {
+> +    if (ep_type == SMBIOS_ENTRY_POINT_TYPE_64) {
+>          tbl_len = SMBIOS_TYPE_4_LEN_V30;
+>      }
+>
+> @@ -888,11 +888,10 @@ void smbios_set_default_processor_family(uint16_t processor_family)
+>
+>  void smbios_set_defaults(const char *manufacturer, const char *product,
+>                           const char *version,
+> -                         bool uuid_encoded, SmbiosEntryPointType ep_type)
+> +                         bool uuid_encoded)
+>  {
+>      smbios_have_defaults = true;
+>      smbios_uuid_encoded = uuid_encoded;
+> -    smbios_ep_type = ep_type;
+>
+>      SMBIOS_SET_DEFAULT(smbios_type1.manufacturer, manufacturer);
+>      SMBIOS_SET_DEFAULT(smbios_type1.product, product);
+> @@ -909,9 +908,9 @@ void smbios_set_defaults(const char *manufacturer, const char *product,
+>      SMBIOS_SET_DEFAULT(type17.manufacturer, manufacturer);
+>  }
+>
+> -static void smbios_entry_point_setup(void)
+> +static void smbios_entry_point_setup(SmbiosEntryPointType ep_type)
+>  {
+> -    switch (smbios_ep_type) {
+> +    switch (ep_type) {
+>      case SMBIOS_ENTRY_POINT_TYPE_32:
+>          memcpy(ep.ep21.anchor_string, "_SM_", 4);
+>          memcpy(ep.ep21.intermediate_anchor_string, "_DMI_", 5);
+> @@ -961,6 +960,7 @@ static void smbios_entry_point_setup(void)
+>  }
+>
+>  void smbios_get_tables(MachineState *ms,
+> +                       SmbiosEntryPointType ep_type,
+>                         const struct smbios_phys_mem_area *mem_array,
+>                         const unsigned int mem_array_size,
+>                         uint8_t **tables, size_t *tables_len,
+> @@ -969,6 +969,9 @@ void smbios_get_tables(MachineState *ms,
+>  {
+>      unsigned i, dimm_cnt, offset;
+>
+> +    assert(ep_type == SMBIOS_ENTRY_POINT_TYPE_32 ||
+> +           ep_type == SMBIOS_ENTRY_POINT_TYPE_64);
 > +
-> +    return sscofpmf(env, csrno);
-> +}
-> +
->   static RISCVException any(CPURISCVState *env, int csrno)
->   {
->       return RISCV_EXCP_NONE;
-> @@ -5035,91 +5044,91 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->       [CSR_MHPMEVENT31]    = { "mhpmevent31",    any,    read_mhpmevent,
->                                write_mhpmevent                           },
->   
-> -    [CSR_MHPMEVENT3H]    = { "mhpmevent3h",    sscofpmf,  read_mhpmeventh,
-> +    [CSR_MHPMEVENT3H]    = { "mhpmevent3h",    sscofpmf_32,  read_mhpmeventh,
->                                write_mhpmeventh,
->                                .min_priv_ver = PRIV_VERSION_1_12_0        },
-> -    [CSR_MHPMEVENT4H]    = { "mhpmevent4h",    sscofpmf,  read_mhpmeventh,
-> +    [CSR_MHPMEVENT4H]    = { "mhpmevent4h",    sscofpmf_32,  read_mhpmeventh,
->                                write_mhpmeventh,
->                                .min_priv_ver = PRIV_VERSION_1_12_0        },
-> -    [CSR_MHPMEVENT5H]    = { "mhpmevent5h",    sscofpmf,  read_mhpmeventh,
-> +    [CSR_MHPMEVENT5H]    = { "mhpmevent5h",    sscofpmf_32,  read_mhpmeventh,
->                                write_mhpmeventh,
->                                .min_priv_ver = PRIV_VERSION_1_12_0        },
-> -    [CSR_MHPMEVENT6H]    = { "mhpmevent6h",    sscofpmf,  read_mhpmeventh,
-> +    [CSR_MHPMEVENT6H]    = { "mhpmevent6h",    sscofpmf_32,  read_mhpmeventh,
->                                write_mhpmeventh,
->                                .min_priv_ver = PRIV_VERSION_1_12_0        },
-> -    [CSR_MHPMEVENT7H]    = { "mhpmevent7h",    sscofpmf,  read_mhpmeventh,
-> +    [CSR_MHPMEVENT7H]    = { "mhpmevent7h",    sscofpmf_32,  read_mhpmeventh,
->                                write_mhpmeventh,
->                                .min_priv_ver = PRIV_VERSION_1_12_0        },
-> -    [CSR_MHPMEVENT8H]    = { "mhpmevent8h",    sscofpmf,  read_mhpmeventh,
-> +    [CSR_MHPMEVENT8H]    = { "mhpmevent8h",    sscofpmf_32,  read_mhpmeventh,
->                                write_mhpmeventh,
->                                .min_priv_ver = PRIV_VERSION_1_12_0        },
-> -    [CSR_MHPMEVENT9H]    = { "mhpmevent9h",    sscofpmf,  read_mhpmeventh,
-> +    [CSR_MHPMEVENT9H]    = { "mhpmevent9h",    sscofpmf_32,  read_mhpmeventh,
->                                write_mhpmeventh,
->                                .min_priv_ver = PRIV_VERSION_1_12_0        },
-> -    [CSR_MHPMEVENT10H]   = { "mhpmevent10h",    sscofpmf,  read_mhpmeventh,
-> +    [CSR_MHPMEVENT10H]   = { "mhpmevent10h",    sscofpmf_32,  read_mhpmeventh,
->                                write_mhpmeventh,
->                                .min_priv_ver = PRIV_VERSION_1_12_0        },
-> -    [CSR_MHPMEVENT11H]   = { "mhpmevent11h",    sscofpmf,  read_mhpmeventh,
-> +    [CSR_MHPMEVENT11H]   = { "mhpmevent11h",    sscofpmf_32,  read_mhpmeventh,
->                                write_mhpmeventh,
->                                .min_priv_ver = PRIV_VERSION_1_12_0        },
-> -    [CSR_MHPMEVENT12H]   = { "mhpmevent12h",    sscofpmf,  read_mhpmeventh,
-> +    [CSR_MHPMEVENT12H]   = { "mhpmevent12h",    sscofpmf_32,  read_mhpmeventh,
->                                write_mhpmeventh,
->                                .min_priv_ver = PRIV_VERSION_1_12_0        },
-> -    [CSR_MHPMEVENT13H]   = { "mhpmevent13h",    sscofpmf,  read_mhpmeventh,
-> +    [CSR_MHPMEVENT13H]   = { "mhpmevent13h",    sscofpmf_32,  read_mhpmeventh,
->                                write_mhpmeventh,
->                                .min_priv_ver = PRIV_VERSION_1_12_0        },
-> -    [CSR_MHPMEVENT14H]   = { "mhpmevent14h",    sscofpmf,  read_mhpmeventh,
-> +    [CSR_MHPMEVENT14H]   = { "mhpmevent14h",    sscofpmf_32,  read_mhpmeventh,
->                                write_mhpmeventh,
->                                .min_priv_ver = PRIV_VERSION_1_12_0        },
-> -    [CSR_MHPMEVENT15H]   = { "mhpmevent15h",    sscofpmf,  read_mhpmeventh,
-> +    [CSR_MHPMEVENT15H]   = { "mhpmevent15h",    sscofpmf_32,  read_mhpmeventh,
->                                write_mhpmeventh,
->                                .min_priv_ver = PRIV_VERSION_1_12_0        },
-> -    [CSR_MHPMEVENT16H]   = { "mhpmevent16h",    sscofpmf,  read_mhpmeventh,
-> +    [CSR_MHPMEVENT16H]   = { "mhpmevent16h",    sscofpmf_32,  read_mhpmeventh,
->                                write_mhpmeventh,
->                                .min_priv_ver = PRIV_VERSION_1_12_0        },
-> -    [CSR_MHPMEVENT17H]   = { "mhpmevent17h",    sscofpmf,  read_mhpmeventh,
-> +    [CSR_MHPMEVENT17H]   = { "mhpmevent17h",    sscofpmf_32,  read_mhpmeventh,
->                                write_mhpmeventh,
->                                .min_priv_ver = PRIV_VERSION_1_12_0        },
-> -    [CSR_MHPMEVENT18H]   = { "mhpmevent18h",    sscofpmf,  read_mhpmeventh,
-> +    [CSR_MHPMEVENT18H]   = { "mhpmevent18h",    sscofpmf_32,  read_mhpmeventh,
->                                write_mhpmeventh,
->                                .min_priv_ver = PRIV_VERSION_1_12_0        },
-> -    [CSR_MHPMEVENT19H]   = { "mhpmevent19h",    sscofpmf,  read_mhpmeventh,
-> +    [CSR_MHPMEVENT19H]   = { "mhpmevent19h",    sscofpmf_32,  read_mhpmeventh,
->                                write_mhpmeventh,
->                                .min_priv_ver = PRIV_VERSION_1_12_0        },
-> -    [CSR_MHPMEVENT20H]   = { "mhpmevent20h",    sscofpmf,  read_mhpmeventh,
-> +    [CSR_MHPMEVENT20H]   = { "mhpmevent20h",    sscofpmf_32,  read_mhpmeventh,
->                                write_mhpmeventh,
->                                .min_priv_ver = PRIV_VERSION_1_12_0        },
-> -    [CSR_MHPMEVENT21H]   = { "mhpmevent21h",    sscofpmf,  read_mhpmeventh,
-> +    [CSR_MHPMEVENT21H]   = { "mhpmevent21h",    sscofpmf_32,  read_mhpmeventh,
->                                write_mhpmeventh,
->                                .min_priv_ver = PRIV_VERSION_1_12_0        },
-> -    [CSR_MHPMEVENT22H]   = { "mhpmevent22h",    sscofpmf,  read_mhpmeventh,
-> +    [CSR_MHPMEVENT22H]   = { "mhpmevent22h",    sscofpmf_32,  read_mhpmeventh,
->                                write_mhpmeventh,
->                                .min_priv_ver = PRIV_VERSION_1_12_0        },
-> -    [CSR_MHPMEVENT23H]   = { "mhpmevent23h",    sscofpmf,  read_mhpmeventh,
-> +    [CSR_MHPMEVENT23H]   = { "mhpmevent23h",    sscofpmf_32,  read_mhpmeventh,
->                                write_mhpmeventh,
->                                .min_priv_ver = PRIV_VERSION_1_12_0        },
-> -    [CSR_MHPMEVENT24H]   = { "mhpmevent24h",    sscofpmf,  read_mhpmeventh,
-> +    [CSR_MHPMEVENT24H]   = { "mhpmevent24h",    sscofpmf_32,  read_mhpmeventh,
->                                write_mhpmeventh,
->                                .min_priv_ver = PRIV_VERSION_1_12_0        },
-> -    [CSR_MHPMEVENT25H]   = { "mhpmevent25h",    sscofpmf,  read_mhpmeventh,
-> +    [CSR_MHPMEVENT25H]   = { "mhpmevent25h",    sscofpmf_32,  read_mhpmeventh,
->                                write_mhpmeventh,
->                                .min_priv_ver = PRIV_VERSION_1_12_0        },
-> -    [CSR_MHPMEVENT26H]   = { "mhpmevent26h",    sscofpmf,  read_mhpmeventh,
-> +    [CSR_MHPMEVENT26H]   = { "mhpmevent26h",    sscofpmf_32,  read_mhpmeventh,
->                                write_mhpmeventh,
->                                .min_priv_ver = PRIV_VERSION_1_12_0        },
-> -    [CSR_MHPMEVENT27H]   = { "mhpmevent27h",    sscofpmf,  read_mhpmeventh,
-> +    [CSR_MHPMEVENT27H]   = { "mhpmevent27h",    sscofpmf_32,  read_mhpmeventh,
->                                write_mhpmeventh,
->                                .min_priv_ver = PRIV_VERSION_1_12_0        },
-> -    [CSR_MHPMEVENT28H]   = { "mhpmevent28h",    sscofpmf,  read_mhpmeventh,
-> +    [CSR_MHPMEVENT28H]   = { "mhpmevent28h",    sscofpmf_32,  read_mhpmeventh,
->                                write_mhpmeventh,
->                                .min_priv_ver = PRIV_VERSION_1_12_0        },
-> -    [CSR_MHPMEVENT29H]   = { "mhpmevent29h",    sscofpmf,  read_mhpmeventh,
-> +    [CSR_MHPMEVENT29H]   = { "mhpmevent29h",    sscofpmf_32,  read_mhpmeventh,
->                                write_mhpmeventh,
->                                .min_priv_ver = PRIV_VERSION_1_12_0        },
-> -    [CSR_MHPMEVENT30H]   = { "mhpmevent30h",    sscofpmf,  read_mhpmeventh,
-> +    [CSR_MHPMEVENT30H]   = { "mhpmevent30h",    sscofpmf_32,  read_mhpmeventh,
->                                write_mhpmeventh,
->                                .min_priv_ver = PRIV_VERSION_1_12_0        },
-> -    [CSR_MHPMEVENT31H]   = { "mhpmevent31h",    sscofpmf,  read_mhpmeventh,
-> +    [CSR_MHPMEVENT31H]   = { "mhpmevent31h",    sscofpmf_32,  read_mhpmeventh,
->                                write_mhpmeventh,
->                                .min_priv_ver = PRIV_VERSION_1_12_0        },
->   
+>      g_free(smbios_tables);
+>      smbios_tables = g_memdup2(usr_blobs, usr_blobs_len);
+>      smbios_tables_len = usr_blobs_len;
+> @@ -983,7 +986,7 @@ void smbios_get_tables(MachineState *ms,
+>      assert(ms->smp.sockets >= 1);
+>
+>      for (i = 0; i < ms->smp.sockets; i++) {
+> -        smbios_build_type_4_table(ms, i);
+> +        smbios_build_type_4_table(ms, i, ep_type);
+>      }
+>
+>      smbios_build_type_8_table();
+> @@ -1031,10 +1034,10 @@ void smbios_get_tables(MachineState *ms,
+>      if (!smbios_check_type4_count(ms->smp.sockets, errp)) {
+>          goto err_exit;
+>      }
+> -    if (!smbios_validate_table(errp)) {
+> +    if (!smbios_validate_table(ep_type, errp)) {
+>          goto err_exit;
+>      }
+> -    smbios_entry_point_setup();
+> +    smbios_entry_point_setup(ep_type);
+>
+>      /* return tables blob and entry point (anchor), and their sizes */
+>      *tables = smbios_tables;
+> diff --git a/hw/smbios/smbios_legacy.c b/hw/smbios/smbios_legacy.c
+> index a6544bf55a..06907cd16c 100644
+> --- a/hw/smbios/smbios_legacy.c
+> +++ b/hw/smbios/smbios_legacy.c
+> @@ -173,7 +173,7 @@ uint8_t *smbios_get_table_legacy(size_t *length, Error **errp)
+>
+>      smbios_build_type_0_fields();
+>      smbios_build_type_1_fields();
+> -    if (!smbios_validate_table(errp)) {
+> +    if (!smbios_validate_table(SMBIOS_ENTRY_POINT_TYPE_32, errp)) {
+>          goto err_exit;
+>      }
+>
+> --
+> 2.39.3
+>
+>
+
 
