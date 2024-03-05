@@ -4,114 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AC90C54798
-	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Mar 2024 12:21:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FAC6C54E49
+	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Mar 2024 12:22:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rhTnY-0005e0-Lj; Tue, 05 Mar 2024 07:21:32 -0500
+	id 1rhTnt-0007yk-17; Tue, 05 Mar 2024 07:21:53 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rhTlE-0000hE-7Q
- for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:19:11 -0500
-Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rhTkx-0003Gb-5Z
- for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:19:07 -0500
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-412dda84216so20145255e9.3
- for <qemu-riscv@nongnu.org>; Tue, 05 Mar 2024 04:18:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709641129; x=1710245929; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0DbWEIw6HJ+uey+RCD8YTAnKD0TfXpa90qc4hKJ7nSE=;
- b=KWKcKfJzKqBBucjYSsJ5A2c9BXeBXRO8B+4p4RZZofN4nnAjCSxoj+vLv82yVIgZkr
- owOuhjRXoVsXi5clnFaCed2K1ej418maCJM7h25+ZQQgEt87c0cp6hhuUr4ocYZ+2evA
- 15TU9OCUiztfN+3tYfw1nxVD161AZmfqlTufR+Zy/92Dw+AraMzxgMLMTuJyOjHGUxYx
- uZ2A89U5k0RzGThrMCFE04xc5qnOzxUteqM2jq565wKee2h2zCLPjwqrk9UdybVkfjgS
- RAmyxcdkXYGYCRWqJF8Xy5FFP1hHcTPVWZh5xHs039AjsqFmYMMCjWq9tiKxQ+p4kN26
- jIvw==
+ (Exim 4.90_1) (envelope-from <anisinha@redhat.com>)
+ id 1rhTnp-0007jD-AG
+ for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:21:49 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <anisinha@redhat.com>)
+ id 1rhTnc-0004Pm-2n
+ for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:21:49 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1709641295;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=RAjdxLQTy3Ft1cFCeEt0OWnunJxMkypAizmH685dhkk=;
+ b=CyYph8Jdt5ywqxGQPnEMHPhNEj7wcrfaSM12flJKvytifi+UCMvBWS4prNDM9YljeKVC3z
+ tPs4Hm0oY6dyKVhCBwpk8pjihQOA9i9RJp7JYPWkHgI8y1lSNvkdqNx/APilxgSyQfuGXp
+ CJ/Z1maZ/t91kAP/yWQFh/C1275QxQA=
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
+ [209.85.214.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-448-M2G0frUYOmKpWS0rYejc_w-1; Tue, 05 Mar 2024 07:21:33 -0500
+X-MC-Unique: M2G0frUYOmKpWS0rYejc_w-1
+Received: by mail-pl1-f198.google.com with SMTP id
+ d9443c01a7336-1dc0cf01899so56375995ad.2
+ for <qemu-riscv@nongnu.org>; Tue, 05 Mar 2024 04:21:33 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709641129; x=1710245929;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1709641292; x=1710246092;
+ h=to:references:message-id:content-transfer-encoding:cc:date
+ :in-reply-to:from:subject:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0DbWEIw6HJ+uey+RCD8YTAnKD0TfXpa90qc4hKJ7nSE=;
- b=CrTeMo95B/R3O6rdnpiriIFVb4noN36R9t/jx/ylD1HxrAxnF/FthyI5wpmQpKpdQ/
- yATBuL+UW3DQjCbTNvZId9GYj9KKGnBPTehu9qc/rEd/2yrHhbw84s4CUp7DqcbYOle6
- JE6ezv8ZJIWyAbXqcy5Ps7J0AkDi0YDjbRINrtloN3n0/6GVWSwBf62lCveQj8gkESfF
- /10z5BRz6GkCS5dFX1zGWgHR/ldk1i1W2w/XvlTIcMs5oED8drNona2Tz+5hMOYdn/6p
- xAOfJS85bvotT3SJrrmQaNpI7NnKZLfclCBnTAhb0WAyCFVe1dZFxwnQYGryQU9uj+tB
- 32IA==
+ bh=nuCTE5dR2LeiJCLJ3DPa9+R29o0fzWp8dhviYMi5D68=;
+ b=lTLyD7yH0w+6y1yY7p1IF3/GVXsT6+m+YbCTz79dQCvNZkT4zYPItS0dDsKEYS83lx
+ N0jmqXy58ayXgbSJdh5cdAK4dyFbOtZb+oaxyF5tu/QBxGLTopkhcFjmtp/ZhNdcCBa4
+ OFwMIIhi+vWkVd7DxeQlTexxIaSSPT7ZYCEwqqpvl4i2vcKEjx5MR061A3k2nf0btVxe
+ Y2uC9pY3MNIeSoZMpOViUqayILdjTDOprSWAFoyHd18Ywa9rXESjwGaWcqSTI/9GpRbX
+ JX+0DqitRbKojC0pT/VmksqW4p2BCsU6l4tltpvbLnqQodIZQ+N3lvEGdgZY/a7aU0aj
+ I4MA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU9lMzSlA6YALIVz/ZK9R1sCQjF1r58Etz7sZ0ybIvam3li+qqGPeNtKfBwGeljNhK5GxOq0/m5whjCabyTAcPiByx+Uvc=
-X-Gm-Message-State: AOJu0YwDeHtQ/yo9P60C1LxSVmmTqXXPLRgM16c2Lx7hHBoctHNZK6JW
- 3W7wKlTT8TKQ14ZpS0UpjEC984tUX9H0K3ciLl5gsuDAvx/FzwqRmBMBA+hE1Bg=
-X-Google-Smtp-Source: AGHT+IGfyy+dD2vdSUvdl9WkKm29wASBydjUohaSp1SjKoA9U9LJjqipZCm5xHC/sVcSl1NaJU59kw==
-X-Received: by 2002:a05:600c:5253:b0:40e:d30b:6129 with SMTP id
- fc19-20020a05600c525300b0040ed30b6129mr9771561wmb.13.1709641129102; 
- Tue, 05 Mar 2024 04:18:49 -0800 (PST)
-Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- o14-20020a05600c510e00b00412aff7874esm17909157wms.48.2024.03.05.04.18.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Mar 2024 04:18:47 -0800 (PST)
-Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 745EA5F9EB;
- Tue,  5 Mar 2024 12:10:07 +0000 (GMT)
-From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Nicholas Piggin <npiggin@gmail.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Yanan Wang <wangyanan55@huawei.com>, qemu-s390x@nongnu.org,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Eduardo Habkost <eduardo@habkost.net>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Michael Rolnik <mrolnik@gmail.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Laurent Vivier <lvivier@redhat.com>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Laurent Vivier <laurent@vivier.eu>, Thomas Huth <thuth@redhat.com>,
+ AJvYcCX9KkDJlRLgfUyGa1S2q5T1E0TMlZApXpfljH+xVEBn/VJp2RY8LFWFynzm0hXkW3BRRf4Nqv6cHd/BZLWZLfKDiwbYWxQ=
+X-Gm-Message-State: AOJu0Yxg0OeTxvlcXNtYLgvxHPoFdVxFhs+3yU+Ma2XbpQyaujP0tyAZ
+ KtvYauT++mtKp1TYXt4haXLsuiFkf8WrzxHWEulSRkxrXEx5RfmmoTXpzbg+8y4j/JxC//uoUcJ
+ mx6djhUMu2amqUL2aWZ3ci1mlbtl6Nu3hfAWKIohFdtvCrfcWptdw
+X-Received: by 2002:a17:902:ec88:b0:1dd:911:19b1 with SMTP id
+ x8-20020a170902ec8800b001dd091119b1mr1886167plg.19.1709641292566; 
+ Tue, 05 Mar 2024 04:21:32 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGwPg+Fg0kv7QelL1AmYk/YA0f2QGxYXgrcM5i7ZlC0nAziu7oSs3YcNo+21RMyBCVuwYLTlw==
+X-Received: by 2002:a17:902:ec88:b0:1dd:911:19b1 with SMTP id
+ x8-20020a170902ec8800b001dd091119b1mr1886153plg.19.1709641292252; 
+ Tue, 05 Mar 2024 04:21:32 -0800 (PST)
+Received: from smtpclient.apple ([203.163.238.152])
+ by smtp.gmail.com with ESMTPSA id
+ c7-20020a170902d48700b001db5079b705sm10400830plg.36.2024.03.05.04.21.26
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Tue, 05 Mar 2024 04:21:31 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3774.400.31\))
+Subject: Re: [PATCH 18/19] pc/q35: set SMBIOS entry point type to 'auto' by
+ default
+From: Ani Sinha <anisinha@redhat.com>
+In-Reply-To: <20240227154749.1818189-19-imammedo@redhat.com>
+Date: Tue, 5 Mar 2024 17:51:14 +0530
+Cc: QEMU Developers <qemu-devel@nongnu.org>,
  Peter Maydell <peter.maydell@linaro.org>,
- Mahmoud Mandour <ma.mandourr@gmail.com>, Brad Smith <brad@comstyle.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Brian Cain <bcain@quicinc.com>, Cleber Rosa <crosa@redhat.com>,
- John Snow <jsnow@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, Riku Voipio <riku.voipio@iki.fi>,
- qemu-arm@nongnu.org, qemu-ppc@nongnu.org, Weiwei Li <liwei1518@gmail.com>,
- Bin Meng <bin.meng@windriver.com>,
- =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
- Beraldo Leal <bleal@redhat.com>, Kyle Evans <kevans@freebsd.org>,
- David Hildenbrand <david@redhat.com>, Song Gao <gaosong@loongson.cn>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>, Alexandre Iooss <erdnaxe@crans.org>,
- Warner Losh <imp@bsdimp.com>, qemu-riscv@nongnu.org,
- Ilya Leoshkevich <iii@linux.ibm.com>, Luc Michel <luc.michel@amd.com>
-Subject: [PATCH 21/29] tests/plugin/bb: migrate to new per_vcpu API
-Date: Tue,  5 Mar 2024 12:09:57 +0000
-Message-Id: <20240305121005.3528075-22-alex.bennee@linaro.org>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240305121005.3528075-1-alex.bennee@linaro.org>
-References: <20240305121005.3528075-1-alex.bennee@linaro.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::333;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x333.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+ Paolo Bonzini <pbonzini@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Song Gao <gaosong@loongson.cn>,
+ Alistair Francis <alistair.francis@wdc.com>, palmer@dabbelt.com,
+ bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, philmd@linaro.org, wangyanan55@huawei.com,
+ eblake@redhat.com, armbru@redhat.com, qemu-arm@nongnu.org,
+ qemu-riscv@nongnu.org, f.ebner@proxmox.com
+Message-Id: <B21B8627-97D5-4047-97BF-963F3CA57DCA@redhat.com>
+References: <20240227154749.1818189-1-imammedo@redhat.com>
+ <20240227154749.1818189-19-imammedo@redhat.com>
+To: Igor Mammedov <imammedo@redhat.com>
+X-Mailer: Apple Mail (2.3774.400.31)
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain;
+	charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=anisinha@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -26
+X-Spam_score: -2.7
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+X-Spam_report: (-2.7 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.568,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
@@ -129,143 +116,90 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 
-Reviewed-by: Luc Michel <luc.michel@amd.com>
-Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
-Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Message-Id: <20240304130036.124418-9-pierrick.bouvier@linaro.org>
-Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
----
- tests/plugin/bb.c | 63 +++++++++++++++++++----------------------------
- 1 file changed, 26 insertions(+), 37 deletions(-)
 
-diff --git a/tests/plugin/bb.c b/tests/plugin/bb.c
-index df50d1fd3bc..36776dee1e1 100644
---- a/tests/plugin/bb.c
-+++ b/tests/plugin/bb.c
-@@ -17,27 +17,25 @@
- QEMU_PLUGIN_EXPORT int qemu_plugin_version = QEMU_PLUGIN_VERSION;
- 
- typedef struct {
--    GMutex lock;
--    int index;
-     uint64_t bb_count;
-     uint64_t insn_count;
- } CPUCount;
- 
--/* Used by the inline & linux-user counts */
--static bool do_inline;
--static CPUCount inline_count;
-+static struct qemu_plugin_scoreboard *counts;
-+static qemu_plugin_u64 bb_count;
-+static qemu_plugin_u64 insn_count;
- 
-+static bool do_inline;
- /* Dump running CPU total on idle? */
- static bool idle_report;
--static GPtrArray *counts;
--static int max_cpus;
- 
--static void gen_one_cpu_report(CPUCount *count, GString *report)
-+static void gen_one_cpu_report(CPUCount *count, GString *report,
-+                               unsigned int cpu_index)
- {
-     if (count->bb_count) {
-         g_string_append_printf(report, "CPU%d: "
-                                "bb's: %" PRIu64", insns: %" PRIu64 "\n",
--                               count->index,
-+                               cpu_index,
-                                count->bb_count, count->insn_count);
-     }
- }
-@@ -46,20 +44,23 @@ static void plugin_exit(qemu_plugin_id_t id, void *p)
- {
-     g_autoptr(GString) report = g_string_new("");
- 
--    if (do_inline || !max_cpus) {
--        g_string_printf(report, "bb's: %" PRIu64", insns: %" PRIu64 "\n",
--                        inline_count.bb_count, inline_count.insn_count);
--    } else {
--        g_ptr_array_foreach(counts, (GFunc) gen_one_cpu_report, report);
-+    for (int i = 0; i < qemu_plugin_num_vcpus(); ++i) {
-+        CPUCount *count = qemu_plugin_scoreboard_find(counts, i);
-+        gen_one_cpu_report(count, report, i);
-     }
-+    g_string_append_printf(report, "Total: "
-+                           "bb's: %" PRIu64", insns: %" PRIu64 "\n",
-+                           qemu_plugin_u64_sum(bb_count),
-+                           qemu_plugin_u64_sum(insn_count));
-     qemu_plugin_outs(report->str);
-+    qemu_plugin_scoreboard_free(counts);
- }
- 
- static void vcpu_idle(qemu_plugin_id_t id, unsigned int cpu_index)
- {
--    CPUCount *count = g_ptr_array_index(counts, cpu_index);
-+    CPUCount *count = qemu_plugin_scoreboard_find(counts, cpu_index);
-     g_autoptr(GString) report = g_string_new("");
--    gen_one_cpu_report(count, report);
-+    gen_one_cpu_report(count, report, cpu_index);
- 
-     if (report->len > 0) {
-         g_string_prepend(report, "Idling ");
-@@ -69,14 +70,11 @@ static void vcpu_idle(qemu_plugin_id_t id, unsigned int cpu_index)
- 
- static void vcpu_tb_exec(unsigned int cpu_index, void *udata)
- {
--    CPUCount *count = max_cpus ?
--        g_ptr_array_index(counts, cpu_index) : &inline_count;
-+    CPUCount *count = qemu_plugin_scoreboard_find(counts, cpu_index);
- 
-     uintptr_t n_insns = (uintptr_t)udata;
--    g_mutex_lock(&count->lock);
-     count->insn_count += n_insns;
-     count->bb_count++;
--    g_mutex_unlock(&count->lock);
- }
- 
- static void vcpu_tb_trans(qemu_plugin_id_t id, struct qemu_plugin_tb *tb)
-@@ -84,11 +82,10 @@ static void vcpu_tb_trans(qemu_plugin_id_t id, struct qemu_plugin_tb *tb)
-     size_t n_insns = qemu_plugin_tb_n_insns(tb);
- 
-     if (do_inline) {
--        qemu_plugin_register_vcpu_tb_exec_inline(tb, QEMU_PLUGIN_INLINE_ADD_U64,
--                                                 &inline_count.bb_count, 1);
--        qemu_plugin_register_vcpu_tb_exec_inline(tb, QEMU_PLUGIN_INLINE_ADD_U64,
--                                                 &inline_count.insn_count,
--                                                 n_insns);
-+        qemu_plugin_register_vcpu_tb_exec_inline_per_vcpu(
-+            tb, QEMU_PLUGIN_INLINE_ADD_U64, bb_count, 1);
-+        qemu_plugin_register_vcpu_tb_exec_inline_per_vcpu(
-+            tb, QEMU_PLUGIN_INLINE_ADD_U64, insn_count, n_insns);
-     } else {
-         qemu_plugin_register_vcpu_tb_exec_cb(tb, vcpu_tb_exec,
-                                              QEMU_PLUGIN_CB_NO_REGS,
-@@ -121,18 +118,10 @@ QEMU_PLUGIN_EXPORT int qemu_plugin_install(qemu_plugin_id_t id,
-         }
-     }
- 
--    if (info->system_emulation && !do_inline) {
--        max_cpus = info->system.max_vcpus;
--        counts = g_ptr_array_new();
--        for (i = 0; i < max_cpus; i++) {
--            CPUCount *count = g_new0(CPUCount, 1);
--            g_mutex_init(&count->lock);
--            count->index = i;
--            g_ptr_array_add(counts, count);
--        }
--    } else if (!do_inline) {
--        g_mutex_init(&inline_count.lock);
--    }
-+    counts = qemu_plugin_scoreboard_new(sizeof(CPUCount));
-+    bb_count = qemu_plugin_scoreboard_u64_in_struct(counts, CPUCount, bb_count);
-+    insn_count = qemu_plugin_scoreboard_u64_in_struct(
-+        counts, CPUCount, insn_count);
- 
-     if (idle_report) {
-         qemu_plugin_register_vcpu_idle_cb(id, vcpu_idle);
--- 
-2.39.2
+> On 27-Feb-2024, at 21:17, Igor Mammedov <imammedo@redhat.com> wrote:
+>=20
+> Use smbios-entry-point-type=3D'auto' for newer machine types as a workaro=
+und
+> for Windows not detecting SMBIOS tables. Which makes QEMU pick SMBIOS tab=
+les
+> based on configuration (with 2.x preferred and fallback to 3.x if the for=
+mer
+> isn't compatible with configuration)
+>=20
+> Default compat setting of smbios-entry-point-type after series
+> for pc/q35 machines:
+>  * 9.0-newer: 'auto'
+>  * 8.1-8.2: '64'
+>  * 8.0-older: '32'
+>=20
+> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2008
+> Signed-off-by: Igor Mammedov <imammedo@redhat.com>
+
+Reviewed-by: Ani Sinha <anisinha@redhat.com>
+
+> ---
+> hw/i386/pc.c      | 2 +-
+> hw/i386/pc_piix.c | 4 ++++
+> hw/i386/pc_q35.c  | 3 +++
+> 3 files changed, 8 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/hw/i386/pc.c b/hw/i386/pc.c
+> index 56562e7d9e..2f69dfd0a8 100644
+> --- a/hw/i386/pc.c
+> +++ b/hw/i386/pc.c
+> @@ -1831,7 +1831,7 @@ static void pc_machine_class_init(ObjectClass *oc, =
+void *data)
+>     mc->nvdimm_supported =3D true;
+>     mc->smp_props.dies_supported =3D true;
+>     mc->default_ram_id =3D "pc.ram";
+> -    pcmc->default_smbios_ep_type =3D SMBIOS_ENTRY_POINT_TYPE_64;
+> +    pcmc->default_smbios_ep_type =3D SMBIOS_ENTRY_POINT_TYPE_AUTO;
+>=20
+>     object_class_property_add(oc, PC_MACHINE_MAX_RAM_BELOW_4G, "size",
+>         pc_machine_get_max_ram_below_4g, pc_machine_set_max_ram_below_4g,
+> diff --git a/hw/i386/pc_piix.c b/hw/i386/pc_piix.c
+> index ec7c07b362..f9da942c55 100644
+> --- a/hw/i386/pc_piix.c
+> +++ b/hw/i386/pc_piix.c
+> @@ -535,12 +535,16 @@ DEFINE_I440FX_MACHINE(v9_0, "pc-i440fx-9.0", NULL,
+>=20
+> static void pc_i440fx_8_2_machine_options(MachineClass *m)
+> {
+> +    PCMachineClass *pcmc =3D PC_MACHINE_CLASS(m);
+> +
+>     pc_i440fx_9_0_machine_options(m);
+>     m->alias =3D NULL;
+>     m->is_default =3D false;
+>=20
+>     compat_props_add(m->compat_props, hw_compat_8_2, hw_compat_8_2_len);
+>     compat_props_add(m->compat_props, pc_compat_8_2, pc_compat_8_2_len);
+> +    /* For pc-i44fx-8.2 and 8.1, use SMBIOS 3.X by default */
+> +    pcmc->default_smbios_ep_type =3D SMBIOS_ENTRY_POINT_TYPE_64;
+> }
+>=20
+> DEFINE_I440FX_MACHINE(v8_2, "pc-i440fx-8.2", NULL,
+> diff --git a/hw/i386/pc_q35.c b/hw/i386/pc_q35.c
+> index 53fb3db26d..da3f92bea7 100644
+> --- a/hw/i386/pc_q35.c
+> +++ b/hw/i386/pc_q35.c
+> @@ -371,10 +371,13 @@ DEFINE_Q35_MACHINE(v9_0, "pc-q35-9.0", NULL,
+>=20
+> static void pc_q35_8_2_machine_options(MachineClass *m)
+> {
+> +    PCMachineClass *pcmc =3D PC_MACHINE_CLASS(m);
+>     pc_q35_9_0_machine_options(m);
+>     m->alias =3D NULL;
+>     compat_props_add(m->compat_props, hw_compat_8_2, hw_compat_8_2_len);
+>     compat_props_add(m->compat_props, pc_compat_8_2, pc_compat_8_2_len);
+> +    /* For pc-q35-8.2 and 8.1, use SMBIOS 3.X by default */
+> +    pcmc->default_smbios_ep_type =3D SMBIOS_ENTRY_POINT_TYPE_64;
+> }
+>=20
+> DEFINE_Q35_MACHINE(v8_2, "pc-q35-8.2", NULL,
+> --=20
+> 2.39.3
+>=20
 
 
