@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5B49C54798
-	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Mar 2024 12:12:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F0EBC54E49
+	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Mar 2024 12:13:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rhTdn-0002sO-PE; Tue, 05 Mar 2024 07:11:27 -0500
+	id 1rhTdh-0002el-8X; Tue, 05 Mar 2024 07:11:21 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rhTd3-0001iF-8s
- for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:10:53 -0500
-Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333])
+ id 1rhTcr-0001bN-IP
+ for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:10:30 -0500
+Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rhTce-0001RN-QT
- for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:10:36 -0500
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-412f05c26e0so156775e9.0
- for <qemu-riscv@nongnu.org>; Tue, 05 Mar 2024 04:10:15 -0800 (PST)
+ id 1rhTcb-0001Ot-KX
+ for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:10:28 -0500
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-412e6bdd454so12021005e9.1
+ for <qemu-riscv@nongnu.org>; Tue, 05 Mar 2024 04:10:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709640614; x=1710245414; darn=nongnu.org;
+ d=linaro.org; s=google; t=1709640612; x=1710245412; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=eN1w3VZA32Wi8fJgCeFoCtnvrPmKwuzv+ibyU3+3o6o=;
- b=BYZvPV/POC2s7JrzoSfCGWx4C2ATR+TzSETRejEefvUV9xkw2+trUwz1DT55H2+6tt
- BebBE4fz/8Z5duJmZKK+XoVvHVBcy3DoV35pzku8nqXufhwEh3yubslIYxiUku+DVOf8
- DxZQzZD5mos9p6PYwxxvkLtyBLwRJ4mdO1G14LPClRMc30o5NDchhQRpje4t5UuiU0rb
- 1QKT+nt4usCqEuaEfiY8rAvdHgD+SxfuNtg9iykBP8ZI/6hxxqRVoGF9mbhuR3sAwj32
- dt55YwrGmhtz/Gm+UFTk9Y83tuAI0ns8WnGY9wRaSrUAIj6mgH3I0iEcJQ7kdVbykr0H
- SDUg==
+ bh=BXkKB6oKUyrrNS5PAFHEEy/nZhjQotVShPfjRJSJXXY=;
+ b=Cd0XR8YCyPXAwU7YhKdrMMPiB4LFjPYcIO/reS7phUVFI7RmFGi8QCr33diLWthxkP
+ eDeTj6AYUBUeJB1f8P7ezCWi6VkRY1MwCeap3wybZek7jWCfbdVkK/udU8CiRFWxXDkq
+ Yom+iQIxdyRLL4MQC0XXZoF4xzbQZX7CoIZffBCtK0JYS9715xO6zX3RE6WQKirvOqP+
+ bVLl4U+U0V2EyJOIE9d/y2SLC8kY0x+CV9Rgz3G1rTYIuYMrc+gQi0vDOsiUyL/NlWT5
+ wWlHc9z5SWfpCY+YRVghqokV77AvleMXMJS1UGvXMuXHBj+bQp4u1qDdqV9kky9tQtH9
+ OOSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709640614; x=1710245414;
+ d=1e100.net; s=20230601; t=1709640612; x=1710245412;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=eN1w3VZA32Wi8fJgCeFoCtnvrPmKwuzv+ibyU3+3o6o=;
- b=SaMkF2SbXqXgR27k7s+Bs/G0URTX4V/vf33OF+gbwiso/JJCmvKweFnJAP3STOwxdI
- K/cncf9uuYRZMTZEKB2z11UGKiJFi+Ic5EKNPgn3b3tkO05QD6Ua4UHWyj73fQBKqmry
- hD6evcPCzJM6vNtD40wQ3b4SoXKkTf7x3DOhopkWY6zgZ7t6xQwl7ewQeE33yT7z3OTF
- BAH8UA3PyKNNPiVuDXBml9OToF7LST3/WLLGanjhUBjVPyhge9T/8KyF+3XkBJ3dBN/P
- j5WRVE9b6WxrXu55hrIkIgFdDMJ0/kfQdLQyCHGm+5VIibyJzfdZc5pOOyOHCVRtSwOU
- ZioQ==
+ bh=BXkKB6oKUyrrNS5PAFHEEy/nZhjQotVShPfjRJSJXXY=;
+ b=bOgjocpJhvtoQwFdEMfMAzKI8gGki/kVDs5vJSNnSI7hhw20Jq8gRazwElOF0vfEJm
+ jkHCp/JOfH7QpkIKeNAxmSaFKLujmBnseUVUMyh43VLeWolPcwakKZlswSB8sKHZLcNC
+ faXyaAd538O/XVJep5dAI3XwdiMOYmKAf7ustTvY7EFTXwQgzNMCnGVr7/6uh9TCfBhw
+ 4yicDUa0f5Zq3LgYpo075bCZUXrVOoaJpI1m+bqt5qZy4JvD95EoaNuzAZwg3HL68p+5
+ S+7fuFc0Yw/p5KGSYXKkOFL7J3JMe1iWfFXS36d5j6ygP8Vnhwz7QOXTl+RJR4TGn4TC
+ zwqA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW/8ifJN/MJQGTKlbpXElZ98zKFEaE9xfg/AtLR02CErH1FMxQZqkaJ58VmKjpxL1yeP+5jtYMbhAtASDvMNc6B+VqCDZY=
-X-Gm-Message-State: AOJu0Ywjtia/GM+197lMQSfEY6AzJb0+dSNskrMiub7OXoSDLB8qrNox
- IiJbWtrCLD3P2i+KtOQu+BH5NhmAHNdzOCP6HLYkU0eSTd7DKCEfUuGjiqGdc3w=
-X-Google-Smtp-Source: AGHT+IEVuEapc/2m/rYMnypstBHkreGm3a0DZAqtHtnVmJWeGeXufNpTmF9IPZPtexy/OrRqPDeUBw==
-X-Received: by 2002:a05:600c:4fcf:b0:412:ebfe:68fe with SMTP id
- o15-20020a05600c4fcf00b00412ebfe68femr1410832wmq.35.1709640614053; 
- Tue, 05 Mar 2024 04:10:14 -0800 (PST)
+ AJvYcCXSpBH1fg3QReWu/HHAkXizP6i7DBUBgp2iNgtM0kU7kkVJSXsKiQJZeMKA8fXojU+88mu+9J/cF44RDc5jaBLV7QhacXI=
+X-Gm-Message-State: AOJu0YzodVtCdkqcxtdPKE00fQUo4XH+EMFhMLuB8p7dr7rWBNIS39NY
+ rgHd57xnvu3GxOigv2Oi1EI1i6PGsmRLHmMPhBwRmmcWYfBusetke0xvHZE0ZHE=
+X-Google-Smtp-Source: AGHT+IFihsx+QOfv8tfwnYUEolqlOO1XCnU8T0HLsKzH+rxO+pVVFFd6wvVuGPOcCe38TlOUvrZ8lQ==
+X-Received: by 2002:a05:600c:5249:b0:412:e59e:da2c with SMTP id
+ fc9-20020a05600c524900b00412e59eda2cmr3295051wmb.37.1709640611931; 
+ Tue, 05 Mar 2024 04:10:11 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- d8-20020a05600c3ac800b00412e84e59d8sm3851590wms.44.2024.03.05.04.10.09
+ fa10-20020a05600c518a00b00412e17d5f83sm7151450wmb.14.2024.03.05.04.10.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Mar 2024 04:10:12 -0800 (PST)
+ Tue, 05 Mar 2024 04:10:08 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 8A5E65F9CF;
+ by draig.lan (Postfix) with ESMTP id 1A3755F958;
  Tue,  5 Mar 2024 12:10:06 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -96,17 +96,17 @@ Cc: Wainer dos Santos Moschetta <wainersm@redhat.com>,
  Paolo Bonzini <pbonzini@redhat.com>, Alexandre Iooss <erdnaxe@crans.org>,
  Warner Losh <imp@bsdimp.com>, qemu-riscv@nongnu.org,
  Ilya Leoshkevich <iii@linux.ibm.com>
-Subject: [PATCH 11/29] gdbstub: Introduce gdb_handle_detach_user()
-Date: Tue,  5 Mar 2024 12:09:47 +0000
-Message-Id: <20240305121005.3528075-12-alex.bennee@linaro.org>
+Subject: [PATCH 06/29] {linux,bsd}-user: Pass pid to fork_end()
+Date: Tue,  5 Mar 2024 12:09:42 +0000
+Message-Id: <20240305121005.3528075-7-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240305121005.3528075-1-alex.bennee@linaro.org>
 References: <20240305121005.3528075-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::333;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x333.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::329;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x329.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -131,64 +131,136 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Ilya Leoshkevich <iii@linux.ibm.com>
 
-The upcoming follow-fork-mode child support needs to perform certain
-actions when GDB detaches from the stopped parent or the stopped child.
-Introduce a user-specific hook for this.
+The upcoming follow-fork-mode child support requires knowing the child
+pid. Pass it down.
 
+Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Ilya Leoshkevich <iii@linux.ibm.com>
-Message-Id: <20240219141628.246823-11-iii@linux.ibm.com>
+Message-Id: <20240219141628.246823-6-iii@linux.ibm.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- gdbstub/internals.h | 1 +
- gdbstub/gdbstub.c   | 6 ++++++
- gdbstub/user.c      | 5 +++++
- 3 files changed, 12 insertions(+)
+ bsd-user/freebsd/os-proc.h  | 6 +++---
+ bsd-user/qemu.h             | 2 +-
+ linux-user/user-internals.h | 2 +-
+ bsd-user/main.c             | 4 +++-
+ linux-user/main.c           | 4 +++-
+ linux-user/syscall.c        | 6 +++---
+ 6 files changed, 14 insertions(+), 10 deletions(-)
 
-diff --git a/gdbstub/internals.h b/gdbstub/internals.h
-index b4905c7181a..b4724598384 100644
---- a/gdbstub/internals.h
-+++ b/gdbstub/internals.h
-@@ -198,6 +198,7 @@ void gdb_handle_query_xfer_exec_file(GArray *params, void *user_ctx); /* user */
- void gdb_handle_set_catch_syscalls(GArray *params, void *user_ctx); /* user */
- void gdb_handle_query_supported_user(const char *gdb_supported); /* user */
- bool gdb_handle_set_thread_user(uint32_t pid, uint32_t tid); /* user */
-+bool gdb_handle_detach_user(uint32_t pid); /* user */
+diff --git a/bsd-user/freebsd/os-proc.h b/bsd-user/freebsd/os-proc.h
+index d6418780344..3003c8cb637 100644
+--- a/bsd-user/freebsd/os-proc.h
++++ b/bsd-user/freebsd/os-proc.h
+@@ -208,7 +208,7 @@ static inline abi_long do_freebsd_fork(void *cpu_env)
+      */
+     set_second_rval(cpu_env, child_flag);
  
- void gdb_handle_query_attached(GArray *params, void *user_ctx); /* both */
+-    fork_end(child_flag);
++    fork_end(ret);
  
-diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
-index 3eb93162aa8..17efcae0d0e 100644
---- a/gdbstub/gdbstub.c
-+++ b/gdbstub/gdbstub.c
-@@ -1024,6 +1024,12 @@ static void handle_detach(GArray *params, void *user_ctx)
-         pid = get_param(params, 0)->val_ul;
-     }
+     return ret;
+ }
+@@ -252,7 +252,7 @@ static inline abi_long do_freebsd_rfork(void *cpu_env, abi_long flags)
+      * value: 0 for parent process, 1 for child process.
+      */
+     set_second_rval(cpu_env, child_flag);
+-    fork_end(child_flag);
++    fork_end(ret);
  
-+#ifdef CONFIG_USER_ONLY
-+    if (gdb_handle_detach_user(pid)) {
-+        return;
-+    }
-+#endif
-+
-     process = gdb_get_process(pid);
-     gdb_process_breakpoint_remove_all(process);
-     process->attached = false;
-diff --git a/gdbstub/user.c b/gdbstub/user.c
-index b048754c4f8..1a7b582a40d 100644
---- a/gdbstub/user.c
-+++ b/gdbstub/user.c
-@@ -391,6 +391,11 @@ bool gdb_handle_set_thread_user(uint32_t pid, uint32_t tid)
-     return false;
+     return ret;
+ 
+@@ -285,7 +285,7 @@ static inline abi_long do_freebsd_pdfork(void *cpu_env, abi_ulong target_fdp,
+      * value: 0 for parent process, 1 for child process.
+      */
+     set_second_rval(cpu_env, child_flag);
+-    fork_end(child_flag);
++    fork_end(ret);
+ 
+     return ret;
+ }
+diff --git a/bsd-user/qemu.h b/bsd-user/qemu.h
+index 4adb75d19ff..1b0a591d2d2 100644
+--- a/bsd-user/qemu.h
++++ b/bsd-user/qemu.h
+@@ -192,7 +192,7 @@ void cpu_loop(CPUArchState *env);
+ char *target_strerror(int err);
+ int get_osversion(void);
+ void fork_start(void);
+-void fork_end(int child);
++void fork_end(pid_t pid);
+ 
+ #include "qemu/log.h"
+ 
+diff --git a/linux-user/user-internals.h b/linux-user/user-internals.h
+index c63ef45fc78..ce11d9e21c1 100644
+--- a/linux-user/user-internals.h
++++ b/linux-user/user-internals.h
+@@ -71,7 +71,7 @@ const char *target_strerror(int err);
+ int get_osversion(void);
+ void init_qemu_uname_release(void);
+ void fork_start(void);
+-void fork_end(int child);
++void fork_end(pid_t pid);
+ 
+ /**
+  * probe_guest_base:
+diff --git a/bsd-user/main.c b/bsd-user/main.c
+index 517c6b3ec2f..fca9b302043 100644
+--- a/bsd-user/main.c
++++ b/bsd-user/main.c
+@@ -116,8 +116,10 @@ void fork_start(void)
+     gdbserver_fork_start();
  }
  
-+bool gdb_handle_detach_user(uint32_t pid)
-+{
-+    return false;
-+}
+-void fork_end(int child)
++void fork_end(pid_t pid)
+ {
++    bool child = pid == 0;
 +
- /*
-  * Execution state helpers
-  */
+     if (child) {
+         CPUState *cpu, *next_cpu;
+         /*
+diff --git a/linux-user/main.c b/linux-user/main.c
+index 755c566d6d2..cab95f5b0aa 100644
+--- a/linux-user/main.c
++++ b/linux-user/main.c
+@@ -148,8 +148,10 @@ void fork_start(void)
+     gdbserver_fork_start();
+ }
+ 
+-void fork_end(int child)
++void fork_end(pid_t pid)
+ {
++    bool child = pid == 0;
++
+     qemu_plugin_user_postfork(child);
+     mmap_fork_end(child);
+     if (child) {
+diff --git a/linux-user/syscall.c b/linux-user/syscall.c
+index c233d4eb30a..7f30defcb13 100644
+--- a/linux-user/syscall.c
++++ b/linux-user/syscall.c
+@@ -6669,7 +6669,7 @@ static int do_fork(CPUArchState *env, unsigned int flags, abi_ulong newsp,
+         if (ret == 0) {
+             /* Child Process.  */
+             cpu_clone_regs_child(env, newsp, flags);
+-            fork_end(1);
++            fork_end(ret);
+             /* There is a race condition here.  The parent process could
+                theoretically read the TID in the child process before the child
+                tid is set.  This would require using either ptrace
+@@ -6700,8 +6700,8 @@ static int do_fork(CPUArchState *env, unsigned int flags, abi_ulong newsp,
+                 }
+ #endif
+                 put_user_u32(pid_fd, parent_tidptr);
+-                }
+-            fork_end(0);
++            }
++            fork_end(ret);
+         }
+         g_assert(!cpu_in_exclusive_context(cpu));
+     }
 -- 
 2.39.2
 
