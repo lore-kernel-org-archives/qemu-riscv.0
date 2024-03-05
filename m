@@ -4,48 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81E50C54798
-	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Mar 2024 16:02:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01326C54798
+	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Mar 2024 16:02:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rhXAr-0005Sn-S1; Tue, 05 Mar 2024 10:57:49 -0500
+	id 1rhXBq-0007jp-9W; Tue, 05 Mar 2024 10:58:50 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1rhXAm-0005Q7-Ra
- for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 10:57:44 -0500
+ id 1rhXBT-000645-Fi
+ for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 10:58:29 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1rhXAj-0000SW-Hf
- for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 10:57:44 -0500
+ id 1rhXBP-0000el-LF
+ for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 10:58:26 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1709654261;
+ s=mimecast20190719; t=1709654302;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=6tmmkz0v1gAREBV/ns3ox69HHc78tIUnrLE1mw14Ye8=;
- b=Q4kgy0/Kw5LSRMmWEPWek9mpT6BM1CHMgeY+19Lx4/Nu6CHFgNhRhUWZcdR/ujSLvVLBr+
- 9SX61XoC5uuDWbHIy/NexSr0uieqQJKFIxpRADUEdmQmp/yfswVC9WZdBimYqP9htotcaU
- BQUiXIYlFiLHGM2kXRvdJNBckfNM8Fo=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-384-y-7m2MMFOjWBT-mv8Hgh1Q-1; Tue, 05 Mar 2024 10:57:38 -0500
-X-MC-Unique: y-7m2MMFOjWBT-mv8Hgh1Q-1
+ bh=I8IUHpNhmsIeHkIzKrJMYxsXS41jmrYxg7yejlym3lk=;
+ b=gyM6lYeXrDfubE2yWnB/4RNXaue0KSygoYdTKkbn644hGEgKdpJnNG8fu2XcD41Gv8XxTF
+ HK8lpS0DxC6PQMWWvQAvNzqy4Oh8ZLJWbSTZNEuLMW9uljbmunIkZIK0kZGgQZEzvpBtKT
+ n2RpxGBiY87kBbRhUzuHT3GTOMN8VHg=
+Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
+ by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-458-h0ehi7ITOaqQRfxsrQtIXQ-1; Tue,
+ 05 Mar 2024 10:58:16 -0500
+X-MC-Unique: h0ehi7ITOaqQRfxsrQtIXQ-1
 Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com
  [10.11.54.5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 1B9CA803CF4;
- Tue,  5 Mar 2024 15:57:37 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 9BA621C05141;
+ Tue,  5 Mar 2024 15:58:15 +0000 (UTC)
 Received: from dell-r430-03.lab.eng.brq2.redhat.com
  (dell-r430-03.lab.eng.brq2.redhat.com [10.37.153.18])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 8D9B617A97;
- Tue,  5 Mar 2024 15:57:34 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 1897417A9A;
+ Tue,  5 Mar 2024 15:58:12 +0000 (UTC)
 From: Igor Mammedov <imammedo@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: peter.maydell@linaro.org, pbonzini@redhat.com, mst@redhat.com,
@@ -55,9 +55,10 @@ Cc: peter.maydell@linaro.org, pbonzini@redhat.com, mst@redhat.com,
  philmd@linaro.org, wangyanan55@huawei.com, eblake@redhat.com,
  armbru@redhat.com, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
  f.ebner@proxmox.com
-Subject: [PATCH v2 02/20] tests: smbios: add test for -smbios type=11 option
-Date: Tue,  5 Mar 2024 16:57:06 +0100
-Message-Id: <20240305155724.2047069-3-imammedo@redhat.com>
+Subject: [PATCH v2 16/20] smbios: error out when building type 4 table is not
+ possible
+Date: Tue,  5 Mar 2024 16:57:20 +0100
+Message-Id: <20240305155724.2047069-17-imammedo@redhat.com>
 In-Reply-To: <20240305155724.2047069-1-imammedo@redhat.com>
 References: <20240305155724.2047069-1-imammedo@redhat.com>
 MIME-Version: 1.0
@@ -89,60 +90,60 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+If SMBIOS v2 version is requested but number of cores/threads
+are more than it's possible to describe with v2, error out
+instead of silently ignoring the fact and filling core/thread
+count with bogus values.
+
+This will help caller to decide if it should fallback to
+SMBIOSv3 when smbios-entry-point-type='auto'
+
 Signed-off-by: Igor Mammedov <imammedo@redhat.com>
 Reviewed-by: Ani Sinha <anisinha@redhat.com>
 Tested-by: Fiona Ebner <f.ebner@proxmox.com>
 ---
- tests/data/smbios/type11_blob  | Bin 0 -> 11 bytes
- tests/qtest/bios-tables-test.c |  17 +++++++++++++++++
- 2 files changed, 17 insertions(+)
- create mode 100644 tests/data/smbios/type11_blob
+ hw/smbios/smbios.c | 14 ++++++++++++--
+ 1 file changed, 12 insertions(+), 2 deletions(-)
 
-diff --git a/tests/data/smbios/type11_blob b/tests/data/smbios/type11_blob
-new file mode 100644
-index 0000000000000000000000000000000000000000..1d8fea4b0c6f040a13ba99c3fad762538b795614
-GIT binary patch
-literal 11
-Scmd;PW!S(N;u;*nzyJUX)&c?m
-
-literal 0
-HcmV?d00001
-
-diff --git a/tests/qtest/bios-tables-test.c b/tests/qtest/bios-tables-test.c
-index b2992bafa8..a116f88e1d 100644
---- a/tests/qtest/bios-tables-test.c
-+++ b/tests/qtest/bios-tables-test.c
-@@ -2091,6 +2091,21 @@ static void test_acpi_pc_smbios_options(void)
-     free_test_data(&data);
+diff --git a/hw/smbios/smbios.c b/hw/smbios/smbios.c
+index e54a9f21e6..bf5c7a8885 100644
+--- a/hw/smbios/smbios.c
++++ b/hw/smbios/smbios.c
+@@ -605,7 +605,8 @@ static void smbios_build_type_3_table(void)
  }
  
-+static void test_acpi_pc_smbios_blob(void)
-+{
-+    uint8_t req_type11[] = { 11 };
-+    test_data data = {
-+        .machine = MACHINE_PC,
-+        .variant = ".pc_smbios_blob",
-+        .required_struct_types = req_type11,
-+        .required_struct_types_len = ARRAY_SIZE(req_type11),
-+    };
-+
-+    test_smbios("-machine smbios-entry-point-type=32 "
-+                "-smbios file=tests/data/smbios/type11_blob", &data);
-+    free_test_data(&data);
-+}
-+
- static void test_oem_fields(test_data *data)
+ static void smbios_build_type_4_table(MachineState *ms, unsigned instance,
+-                                      SmbiosEntryPointType ep_type)
++                                      SmbiosEntryPointType ep_type,
++                                      Error **errp)
  {
-     int i;
-@@ -2244,6 +2259,8 @@ int main(int argc, char *argv[])
- #endif
-             qtest_add_func("acpi/piix4/smbios-options",
-                            test_acpi_pc_smbios_options);
-+            qtest_add_func("acpi/piix4/smbios-blob",
-+                           test_acpi_pc_smbios_blob);
-         }
-         if (qtest_has_machine(MACHINE_Q35)) {
-             qtest_add_func("acpi/q35", test_acpi_q35_tcg);
+     char sock_str[128];
+     size_t tbl_len = SMBIOS_TYPE_4_LEN_V28;
+@@ -659,6 +660,12 @@ static void smbios_build_type_4_table(MachineState *ms, unsigned instance,
+     if (tbl_len == SMBIOS_TYPE_4_LEN_V30) {
+         t->core_count2 = t->core_enabled2 = cpu_to_le16(cores_per_socket);
+         t->thread_count2 = cpu_to_le16(threads_per_socket);
++    } else if (t->core_count == 0xFF || t->thread_count == 0xFF) {
++        error_setg(errp, "SMBIOS 2.0 doesn't support number of processor "
++                         "cores/threads more than 255, use "
++                         "-machine smbios-entry-point-type=64 option to enable "
++                         "SMBIOS 3.0 support");
++        return;
+     }
+ 
+     SMBIOS_BUILD_TABLE_POST;
+@@ -987,7 +994,10 @@ static bool smbios_get_tables_ep(MachineState *ms,
+     assert(ms->smp.sockets >= 1);
+ 
+     for (i = 0; i < ms->smp.sockets; i++) {
+-        smbios_build_type_4_table(ms, i, ep_type);
++        smbios_build_type_4_table(ms, i, ep_type, errp);
++        if (*errp) {
++            goto err_exit;
++        }
+     }
+ 
+     smbios_build_type_8_table();
 -- 
 2.39.3
 
