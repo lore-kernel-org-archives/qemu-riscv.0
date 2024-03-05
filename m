@@ -4,95 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FAC6C54E49
-	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Mar 2024 12:22:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EEA2C54798
+	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Mar 2024 15:00:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rhTnt-0007yk-17; Tue, 05 Mar 2024 07:21:53 -0500
+	id 1rhWGj-0003XR-Uw; Tue, 05 Mar 2024 09:59:49 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <anisinha@redhat.com>)
- id 1rhTnp-0007jD-AG
- for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:21:49 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1rhWGb-0003J9-AW
+ for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 09:59:41 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <anisinha@redhat.com>)
- id 1rhTnc-0004Pm-2n
- for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:21:49 -0500
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1rhWGN-0004Mg-Nw
+ for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 09:59:39 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1709641295;
+ s=mimecast20190719; t=1709650767;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=RAjdxLQTy3Ft1cFCeEt0OWnunJxMkypAizmH685dhkk=;
- b=CyYph8Jdt5ywqxGQPnEMHPhNEj7wcrfaSM12flJKvytifi+UCMvBWS4prNDM9YljeKVC3z
- tPs4Hm0oY6dyKVhCBwpk8pjihQOA9i9RJp7JYPWkHgI8y1lSNvkdqNx/APilxgSyQfuGXp
- CJ/Z1maZ/t91kAP/yWQFh/C1275QxQA=
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
- [209.85.214.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=ZsObEtGO0EGPs25uj/QR+XtkNGS9sHxVtQkIWny/Iio=;
+ b=XD7H1eMnbgkotOVtRM6azhztux4op0+CC+Y8TYky5qq69/mMKSiZZ3JNRDl1KPbZAQC3y2
+ dFHByb6y+KqQjM9aV9JC5fDkWMlGC19ZeXxm/jLeNNbYogro1FXwSEUz2b5Srj3/Iv6qUP
+ uFxna13VtGbvrDCimQJ/y3pdUMHgzHM=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-448-M2G0frUYOmKpWS0rYejc_w-1; Tue, 05 Mar 2024 07:21:33 -0500
-X-MC-Unique: M2G0frUYOmKpWS0rYejc_w-1
-Received: by mail-pl1-f198.google.com with SMTP id
- d9443c01a7336-1dc0cf01899so56375995ad.2
- for <qemu-riscv@nongnu.org>; Tue, 05 Mar 2024 04:21:33 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709641292; x=1710246092;
- h=to:references:message-id:content-transfer-encoding:cc:date
- :in-reply-to:from:subject:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=nuCTE5dR2LeiJCLJ3DPa9+R29o0fzWp8dhviYMi5D68=;
- b=lTLyD7yH0w+6y1yY7p1IF3/GVXsT6+m+YbCTz79dQCvNZkT4zYPItS0dDsKEYS83lx
- N0jmqXy58ayXgbSJdh5cdAK4dyFbOtZb+oaxyF5tu/QBxGLTopkhcFjmtp/ZhNdcCBa4
- OFwMIIhi+vWkVd7DxeQlTexxIaSSPT7ZYCEwqqpvl4i2vcKEjx5MR061A3k2nf0btVxe
- Y2uC9pY3MNIeSoZMpOViUqayILdjTDOprSWAFoyHd18Ywa9rXESjwGaWcqSTI/9GpRbX
- JX+0DqitRbKojC0pT/VmksqW4p2BCsU6l4tltpvbLnqQodIZQ+N3lvEGdgZY/a7aU0aj
- I4MA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX9KkDJlRLgfUyGa1S2q5T1E0TMlZApXpfljH+xVEBn/VJp2RY8LFWFynzm0hXkW3BRRf4Nqv6cHd/BZLWZLfKDiwbYWxQ=
-X-Gm-Message-State: AOJu0Yxg0OeTxvlcXNtYLgvxHPoFdVxFhs+3yU+Ma2XbpQyaujP0tyAZ
- KtvYauT++mtKp1TYXt4haXLsuiFkf8WrzxHWEulSRkxrXEx5RfmmoTXpzbg+8y4j/JxC//uoUcJ
- mx6djhUMu2amqUL2aWZ3ci1mlbtl6Nu3hfAWKIohFdtvCrfcWptdw
-X-Received: by 2002:a17:902:ec88:b0:1dd:911:19b1 with SMTP id
- x8-20020a170902ec8800b001dd091119b1mr1886167plg.19.1709641292566; 
- Tue, 05 Mar 2024 04:21:32 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGwPg+Fg0kv7QelL1AmYk/YA0f2QGxYXgrcM5i7ZlC0nAziu7oSs3YcNo+21RMyBCVuwYLTlw==
-X-Received: by 2002:a17:902:ec88:b0:1dd:911:19b1 with SMTP id
- x8-20020a170902ec8800b001dd091119b1mr1886153plg.19.1709641292252; 
- Tue, 05 Mar 2024 04:21:32 -0800 (PST)
-Received: from smtpclient.apple ([203.163.238.152])
- by smtp.gmail.com with ESMTPSA id
- c7-20020a170902d48700b001db5079b705sm10400830plg.36.2024.03.05.04.21.26
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Tue, 05 Mar 2024 04:21:31 -0800 (PST)
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3774.400.31\))
-Subject: Re: [PATCH 18/19] pc/q35: set SMBIOS entry point type to 'auto' by
- default
-From: Ani Sinha <anisinha@redhat.com>
-In-Reply-To: <20240227154749.1818189-19-imammedo@redhat.com>
-Date: Tue, 5 Mar 2024 17:51:14 +0530
-Cc: QEMU Developers <qemu-devel@nongnu.org>,
- Peter Maydell <peter.maydell@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
- Song Gao <gaosong@loongson.cn>,
- Alistair Francis <alistair.francis@wdc.com>, palmer@dabbelt.com,
- bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, philmd@linaro.org, wangyanan55@huawei.com,
- eblake@redhat.com, armbru@redhat.com, qemu-arm@nongnu.org,
- qemu-riscv@nongnu.org, f.ebner@proxmox.com
-Message-Id: <B21B8627-97D5-4047-97BF-963F3CA57DCA@redhat.com>
-References: <20240227154749.1818189-1-imammedo@redhat.com>
- <20240227154749.1818189-19-imammedo@redhat.com>
-To: Igor Mammedov <imammedo@redhat.com>
-X-Mailer: Apple Mail (2.3774.400.31)
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=anisinha@redhat.com;
+ us-mta-523-EEbhA8f_N2OypNhGCwrP1Q-1; Tue, 05 Mar 2024 09:59:21 -0500
+X-MC-Unique: EEbhA8f_N2OypNhGCwrP1Q-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id A501B80026B;
+ Tue,  5 Mar 2024 14:59:20 +0000 (UTC)
+Received: from blackfin.pond.sub.org (unknown [10.39.192.3])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 078C51121306;
+ Tue,  5 Mar 2024 14:59:20 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id 088C021E6A28; Tue,  5 Mar 2024 15:59:19 +0100 (CET)
+From: Markus Armbruster <armbru@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: peter.maydell@linaro.org, pbonzini@redhat.com, gaosong@loongson.cn,
+ palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, richard.henderson@linaro.org,
+ david@redhat.com, iii@linux.ibm.com, thuth@redhat.com, qemu-arm@nongnu.org,
+ qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
+Subject: [PATCH 1/4] target: Simplify type checks for CpuModelInfo member
+ @props
+Date: Tue,  5 Mar 2024 15:59:15 +0100
+Message-ID: <20240305145919.2186971-2-armbru@redhat.com>
+In-Reply-To: <20240305145919.2186971-1-armbru@redhat.com>
+References: <20240305145919.2186971-1-armbru@redhat.com>
+MIME-Version: 1.0
+Content-type: text/plain
+Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.3
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -26
 X-Spam_score: -2.7
@@ -116,90 +87,231 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+CpuModelInfo member @props is semantically a mapping from name to
+value, and syntactically a JSON object on the wire.  This translates
+to QDict in C.  Since the QAPI schema language lacks the means to
+express 'object', we use 'any' instead.  This is QObject in C.
+Commands taking a CpuModelInfo argument need to check the QObject is a
+QDict.
 
+For arm, riscv, and s390x, the code checks right before passing the
+QObject to visit_start_struct().  visit_start_struct() then checks
+again.
 
-> On 27-Feb-2024, at 21:17, Igor Mammedov <imammedo@redhat.com> wrote:
->=20
-> Use smbios-entry-point-type=3D'auto' for newer machine types as a workaro=
-und
-> for Windows not detecting SMBIOS tables. Which makes QEMU pick SMBIOS tab=
-les
-> based on configuration (with 2.x preferred and fallback to 3.x if the for=
-mer
-> isn't compatible with configuration)
->=20
-> Default compat setting of smbios-entry-point-type after series
-> for pc/q35 machines:
->  * 9.0-newer: 'auto'
->  * 8.1-8.2: '64'
->  * 8.0-older: '32'
->=20
-> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2008
-> Signed-off-by: Igor Mammedov <imammedo@redhat.com>
+Delete the first check.
 
-Reviewed-by: Ani Sinha <anisinha@redhat.com>
+The error message for @props that are not an object changes slightly
+to the the message we get for this kind of type error in other
+contexts.  Minor improvement.
 
-> ---
-> hw/i386/pc.c      | 2 +-
-> hw/i386/pc_piix.c | 4 ++++
-> hw/i386/pc_q35.c  | 3 +++
-> 3 files changed, 8 insertions(+), 1 deletion(-)
->=20
-> diff --git a/hw/i386/pc.c b/hw/i386/pc.c
-> index 56562e7d9e..2f69dfd0a8 100644
-> --- a/hw/i386/pc.c
-> +++ b/hw/i386/pc.c
-> @@ -1831,7 +1831,7 @@ static void pc_machine_class_init(ObjectClass *oc, =
-void *data)
->     mc->nvdimm_supported =3D true;
->     mc->smp_props.dies_supported =3D true;
->     mc->default_ram_id =3D "pc.ram";
-> -    pcmc->default_smbios_ep_type =3D SMBIOS_ENTRY_POINT_TYPE_64;
-> +    pcmc->default_smbios_ep_type =3D SMBIOS_ENTRY_POINT_TYPE_AUTO;
->=20
->     object_class_property_add(oc, PC_MACHINE_MAX_RAM_BELOW_4G, "size",
->         pc_machine_get_max_ram_below_4g, pc_machine_set_max_ram_below_4g,
-> diff --git a/hw/i386/pc_piix.c b/hw/i386/pc_piix.c
-> index ec7c07b362..f9da942c55 100644
-> --- a/hw/i386/pc_piix.c
-> +++ b/hw/i386/pc_piix.c
-> @@ -535,12 +535,16 @@ DEFINE_I440FX_MACHINE(v9_0, "pc-i440fx-9.0", NULL,
->=20
-> static void pc_i440fx_8_2_machine_options(MachineClass *m)
-> {
-> +    PCMachineClass *pcmc =3D PC_MACHINE_CLASS(m);
-> +
->     pc_i440fx_9_0_machine_options(m);
->     m->alias =3D NULL;
->     m->is_default =3D false;
->=20
->     compat_props_add(m->compat_props, hw_compat_8_2, hw_compat_8_2_len);
->     compat_props_add(m->compat_props, pc_compat_8_2, pc_compat_8_2_len);
-> +    /* For pc-i44fx-8.2 and 8.1, use SMBIOS 3.X by default */
-> +    pcmc->default_smbios_ep_type =3D SMBIOS_ENTRY_POINT_TYPE_64;
-> }
->=20
-> DEFINE_I440FX_MACHINE(v8_2, "pc-i440fx-8.2", NULL,
-> diff --git a/hw/i386/pc_q35.c b/hw/i386/pc_q35.c
-> index 53fb3db26d..da3f92bea7 100644
-> --- a/hw/i386/pc_q35.c
-> +++ b/hw/i386/pc_q35.c
-> @@ -371,10 +371,13 @@ DEFINE_Q35_MACHINE(v9_0, "pc-q35-9.0", NULL,
->=20
-> static void pc_q35_8_2_machine_options(MachineClass *m)
-> {
-> +    PCMachineClass *pcmc =3D PC_MACHINE_CLASS(m);
->     pc_q35_9_0_machine_options(m);
->     m->alias =3D NULL;
->     compat_props_add(m->compat_props, hw_compat_8_2, hw_compat_8_2_len);
->     compat_props_add(m->compat_props, pc_compat_8_2, pc_compat_8_2_len);
-> +    /* For pc-q35-8.2 and 8.1, use SMBIOS 3.X by default */
-> +    pcmc->default_smbios_ep_type =3D SMBIOS_ENTRY_POINT_TYPE_64;
-> }
->=20
-> DEFINE_Q35_MACHINE(v8_2, "pc-q35-8.2", NULL,
-> --=20
-> 2.39.3
->=20
+Additionally, error messages about members of @props now refer to
+'props.prop-name' instead of just 'prop-name'.  Another minor
+improvement.
+
+Both changes are visible in tests/qtest/arm-cpu-features.c.
+
+Signed-off-by: Markus Armbruster <armbru@redhat.com>
+---
+ target/arm/arm-qmp-cmds.c        | 15 ++++-----------
+ target/riscv/riscv-qmp-cmds.c    | 19 +++++--------------
+ target/s390x/cpu_models_sysemu.c | 15 ++++-----------
+ tests/qtest/arm-cpu-features.c   | 12 ++++++------
+ 4 files changed, 19 insertions(+), 42 deletions(-)
+
+diff --git a/target/arm/arm-qmp-cmds.c b/target/arm/arm-qmp-cmds.c
+index 2250cd7ddf..0167759730 100644
+--- a/target/arm/arm-qmp-cmds.c
++++ b/target/arm/arm-qmp-cmds.c
+@@ -104,7 +104,7 @@ CpuModelExpansionInfo *qmp_query_cpu_model_expansion(CpuModelExpansionType type,
+                                                      Error **errp)
+ {
+     CpuModelExpansionInfo *expansion_info;
+-    const QDict *qdict_in = NULL;
++    const QDict *qdict_in;
+     QDict *qdict_out;
+     ObjectClass *oc;
+     Object *obj;
+@@ -151,27 +151,20 @@ CpuModelExpansionInfo *qmp_query_cpu_model_expansion(CpuModelExpansionType type,
+         }
+     }
+ 
+-    if (model->props) {
+-        qdict_in = qobject_to(QDict, model->props);
+-        if (!qdict_in) {
+-            error_setg(errp, QERR_INVALID_PARAMETER_TYPE, "props", "dict");
+-            return NULL;
+-        }
+-    }
+-
+     obj = object_new(object_class_get_name(oc));
+ 
+-    if (qdict_in) {
++    if (model->props) {
+         Visitor *visitor;
+         Error *err = NULL;
+ 
+         visitor = qobject_input_visitor_new(model->props);
+-        if (!visit_start_struct(visitor, NULL, NULL, 0, errp)) {
++        if (!visit_start_struct(visitor, "props", NULL, 0, errp)) {
+             visit_free(visitor);
+             object_unref(obj);
+             return NULL;
+         }
+ 
++        qdict_in = qobject_to(QDict, model->props);
+         i = 0;
+         while ((name = cpu_model_advertised_features[i++]) != NULL) {
+             if (qdict_get(qdict_in, name)) {
+diff --git a/target/riscv/riscv-qmp-cmds.c b/target/riscv/riscv-qmp-cmds.c
+index c48b9cfa67..69dde0c3e7 100644
+--- a/target/riscv/riscv-qmp-cmds.c
++++ b/target/riscv/riscv-qmp-cmds.c
+@@ -129,18 +129,19 @@ static void riscv_obj_add_profiles_qdict(Object *obj, QDict *qdict_out)
+ }
+ 
+ static void riscv_cpuobj_validate_qdict_in(Object *obj, QObject *props,
+-                                           const QDict *qdict_in,
+                                            Error **errp)
+ {
++    const QDict *qdict_in;
+     const QDictEntry *qe;
+     Visitor *visitor;
+     Error *local_err = NULL;
+ 
+     visitor = qobject_input_visitor_new(props);
+-    if (!visit_start_struct(visitor, NULL, NULL, 0, &local_err)) {
++    if (!visit_start_struct(visitor, "props", NULL, 0, &local_err)) {
+         goto err;
+     }
+ 
++    qdict_in = qobject_to(QDict, props);
+     for (qe = qdict_first(qdict_in); qe; qe = qdict_next(qdict_in, qe)) {
+         object_property_find_err(obj, qe->key, &local_err);
+         if (local_err) {
+@@ -170,7 +171,6 @@ CpuModelExpansionInfo *qmp_query_cpu_model_expansion(CpuModelExpansionType type,
+                                                      Error **errp)
+ {
+     CpuModelExpansionInfo *expansion_info;
+-    const QDict *qdict_in = NULL;
+     QDict *qdict_out;
+     ObjectClass *oc;
+     Object *obj;
+@@ -188,14 +188,6 @@ CpuModelExpansionInfo *qmp_query_cpu_model_expansion(CpuModelExpansionType type,
+         return NULL;
+     }
+ 
+-    if (model->props) {
+-        qdict_in = qobject_to(QDict, model->props);
+-        if (!qdict_in) {
+-            error_setg(errp, QERR_INVALID_PARAMETER_TYPE, "props", "dict");
+-            return NULL;
+-        }
+-    }
+-
+     obj = object_new(object_class_get_name(oc));
+ 
+     riscv_check_if_cpu_available(RISCV_CPU(obj), &local_err);
+@@ -205,9 +197,8 @@ CpuModelExpansionInfo *qmp_query_cpu_model_expansion(CpuModelExpansionType type,
+         return NULL;
+     }
+ 
+-    if (qdict_in) {
+-        riscv_cpuobj_validate_qdict_in(obj, model->props, qdict_in,
+-                                       &local_err);
++    if (model->props) {
++        riscv_cpuobj_validate_qdict_in(obj, model->props, &local_err);
+         if (local_err) {
+             error_propagate(errp, local_err);
+             object_unref(obj);
+diff --git a/target/s390x/cpu_models_sysemu.c b/target/s390x/cpu_models_sysemu.c
+index 63981bf36b..ef19724888 100644
+--- a/target/s390x/cpu_models_sysemu.c
++++ b/target/s390x/cpu_models_sysemu.c
+@@ -101,21 +101,13 @@ static void cpu_model_from_info(S390CPUModel *model, const CpuModelInfo *info,
+                                 Error **errp)
+ {
+     Error *err = NULL;
+-    const QDict *qdict = NULL;
++    const QDict *qdict;
+     const QDictEntry *e;
+     Visitor *visitor;
+     ObjectClass *oc;
+     S390CPU *cpu;
+     Object *obj;
+ 
+-    if (info->props) {
+-        qdict = qobject_to(QDict, info->props);
+-        if (!qdict) {
+-            error_setg(errp, QERR_INVALID_PARAMETER_TYPE, "props", "dict");
+-            return;
+-        }
+-    }
+-
+     oc = cpu_class_by_name(TYPE_S390_CPU, info->name);
+     if (!oc) {
+         error_setg(errp, "The CPU definition \'%s\' is unknown.", info->name);
+@@ -135,13 +127,14 @@ static void cpu_model_from_info(S390CPUModel *model, const CpuModelInfo *info,
+         return;
+     }
+ 
+-    if (qdict) {
++    if (info->props) {
+         visitor = qobject_input_visitor_new(info->props);
+-        if (!visit_start_struct(visitor, NULL, NULL, 0, errp)) {
++        if (!visit_start_struct(visitor, "props", NULL, 0, errp)) {
+             visit_free(visitor);
+             object_unref(obj);
+             return;
+         }
++        qdict = qobject_to(QDict, info->props);
+         for (e = qdict_first(qdict); e; e = qdict_next(qdict, e)) {
+             if (!object_property_set(obj, e->key, visitor, &err)) {
+                 break;
+diff --git a/tests/qtest/arm-cpu-features.c b/tests/qtest/arm-cpu-features.c
+index a8a4c668ad..1daceb2e31 100644
+--- a/tests/qtest/arm-cpu-features.c
++++ b/tests/qtest/arm-cpu-features.c
+@@ -79,7 +79,7 @@ static const char *resp_get_error(QDict *resp)
+     g_assert(_resp);                                                   \
+     _error = resp_get_error(_resp);                                    \
+     g_assert(_error);                                                  \
+-    g_assert(g_str_equal(_error, expected_error));                     \
++    g_assert_cmpstr(_error, ==, expected_error);                       \
+     qobject_unref(_resp);                                              \
+ })
+ 
+@@ -194,8 +194,8 @@ static void assert_type_full(QTestState *qts)
+     g_assert(resp);
+     error = resp_get_error(resp);
+     g_assert(error);
+-    g_assert(g_str_equal(error,
+-                         "The requested expansion type is not supported"));
++    g_assert_cmpstr(error, ==,
++                    "The requested expansion type is not supported");
+     qobject_unref(resp);
+ }
+ 
+@@ -212,8 +212,8 @@ static void assert_bad_props(QTestState *qts, const char *cpu_type)
+     g_assert(resp);
+     error = resp_get_error(resp);
+     g_assert(error);
+-    g_assert(g_str_equal(error,
+-                         "Invalid parameter type for 'props', expected: dict"));
++    g_assert_cmpstr(error, ==,
++                    "Invalid parameter type for 'props', expected: object");
+     qobject_unref(resp);
+ }
+ 
+@@ -446,7 +446,7 @@ static void test_query_cpu_model_expansion(const void *data)
+     assert_bad_props(qts, "max");
+     assert_error(qts, "foo", "The CPU type 'foo' is not a recognized "
+                  "ARM CPU type", NULL);
+-    assert_error(qts, "max", "Parameter 'not-a-prop' is unexpected",
++    assert_error(qts, "max", "Parameter 'props.not-a-prop' is unexpected",
+                  "{ 'not-a-prop': false }");
+     assert_error(qts, "host", "The CPU type 'host' requires KVM", NULL);
+ 
+-- 
+2.44.0
 
 
