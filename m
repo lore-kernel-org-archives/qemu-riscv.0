@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BD8BC54E49
-	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Mar 2024 12:17:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8C0AC54798
+	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Mar 2024 12:17:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rhTef-0004uO-PK; Tue, 05 Mar 2024 07:12:21 -0500
+	id 1rhTci-0001XV-6M; Tue, 05 Mar 2024 07:10:20 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rhTdN-0001wa-6x
- for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:11:05 -0500
-Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
+ id 1rhTca-0001R6-RR
+ for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:10:12 -0500
+Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rhTci-0001UH-Bv
- for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:10:57 -0500
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-33d28468666so3725032f8f.0
- for <qemu-riscv@nongnu.org>; Tue, 05 Mar 2024 04:10:19 -0800 (PST)
+ id 1rhTcX-0001Bw-Qh
+ for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:10:12 -0500
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-412ee276dc9so3044225e9.1
+ for <qemu-riscv@nongnu.org>; Tue, 05 Mar 2024 04:10:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709640618; x=1710245418; darn=nongnu.org;
+ d=linaro.org; s=google; t=1709640608; x=1710245408; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=WooNzOV/us8bLuMeAwrWGnmqqnwveEN5CVxp1t3KKRI=;
- b=ewhbZIQa42obNozwJyQmBs70PDQ1JmFoxR5gSo0sbtIn6lbPgkTcTlhPwX7ZtuWJ6I
- aJC2+ofUmMi2iOehRDiP/6oQjS+O+4MpslM/ILkrGEXWZ2XLZeH8xiOAFYytdbM0lK2M
- eAdHfJ9DyjZsmKpnndqOQzeuW8iTxloxU4mrf2scIEQPtzLq+oBXTpVLc8UiB8IGB2lc
- EN5Hlf7JLWz62/08Ci0qbAFxdFI+TXRoBIrfnMd8U+9tlErnOJthYKT7AJAli9OUUM8L
- vt8q6nnR59cEacKeeuPRgWNLon6PWXMgZ7baZ9mDY1Ala0a4Fm7udCI+hXM3+c7iv9Mv
- /hdA==
+ bh=7ZN0Cc6U7kZmDYYmwDnkR5eJs9jrLVG4XEoadrQPyUk=;
+ b=kfpgOXLnJNQAzZuByzuLYabru7PL1RCKr4GbiOtspygcx64QLp/QYLug0cABIYYInb
+ Yx+k2iwuHaqfSDxq44p1M1/zDHiqpNLdZEASJRPSxVW/eaKV6ETE7Rhux3GqpyHxdq8J
+ dMTgAmqRREvbTaNQBjWVX+SLTsjFxZdyMy4Y2MLnbrvRmGSJzlN2gPRWfmxtGFcV3xzw
+ jH/eRQcGCJ5c0UbSUEVxCCvaxKVkgjIMFjEjOLmXKbdW4ZxnhFkJquEq5xgf/rNpWj3E
+ 4yujLsS9sViVMEdbSeufl+de4LQw6/q2OpVZ0wzdwT/MBgEU0yVL+LTZS9nNfXmZhT4k
+ j7FA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709640618; x=1710245418;
+ d=1e100.net; s=20230601; t=1709640608; x=1710245408;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=WooNzOV/us8bLuMeAwrWGnmqqnwveEN5CVxp1t3KKRI=;
- b=SXLQ64/f3DoPFbn9rUp7Dh8MMKVrbCVgXz9vfBugasVNz/7Y3XJ6ifu1OIpKloE1Ne
- sxfYT5z/rAWmRiEjyc4Fbi7+Q1/c31BOSUB1z2PQk+nrDxcYuALLpM8TshIID6epY32h
- 6R6NF4wiPpwz+Cu6s5VJWxsOBdtsPwu8BzIPF2r0NdWRBn3O51lgFnzNi+WjkVpztuRB
- 2mljAGP0IOC+Sb1vwDQh57rCMok3oBQTfE1uQ6SVAO1IGoYY+7hyacS7Y3/XUUQTbikW
- /zt4/v0pzEm3nbcmPRTiB1QXRq++WaW60EyMZXhDLzgOEsVLYtqNrxcOerAQzF5G21Dd
- b/ng==
+ bh=7ZN0Cc6U7kZmDYYmwDnkR5eJs9jrLVG4XEoadrQPyUk=;
+ b=pLcTBL/2nBqLdo6dopSMnNpTvIk56f6KhsME2NkuNQpKLdTOvWragB5UApfxu6yLyA
+ KSyUwz4DC1Sq7cW1hovo8SJiXHME2cRUb1zcoT9fnqqjLYGt4BxqMCz+vf4iMeuaDPzk
+ B3h/npfVAbIjtZj+b2VhjwHApbWF3RGZuJh9NSvVRUeQvVobYZGxlDjEPxP2oHmZO8kC
+ P1SrBIOI075d0cpVP+ynfX+gsbqod8rQsaHaewIEDYNzpxcw5FEtm9GxG7cYgTrVGCmJ
+ EgFBhEYcBA3mCYd363suFQzpnFPrOY0PcFVTWJ5LmivWlrekRf41Ozd4hZWMcHhRcJQr
+ 8Q4A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXWIi0Yg04pRHuomIAe3lzB9vg6m7t4CQfKSnogIu0FoVFFi1vdmRdcnKlO6GP7Eq7w1BZhnOxQfS1BCGqD9Pf4HMY1nMU=
-X-Gm-Message-State: AOJu0YxuPJskMuIF6wtMnqwHoWMABDHURvc5JZyGAMfvBxkwakhoKot0
- yHZisSsc/vImS7mG10FQaQqffEd2eq0zC5/Zr8wuB8dRF/dPwhu8ujloBS+qP9o=
-X-Google-Smtp-Source: AGHT+IH/bFZkJLW9C0nEA6geVUtEWC+DP7m7ABlvX9K83JZCZItT7nWbkFN3prZoThSKDfhWw1SWAw==
-X-Received: by 2002:a5d:6986:0:b0:33d:d792:c7c7 with SMTP id
- g6-20020a5d6986000000b0033dd792c7c7mr7907924wru.10.1709640618264; 
- Tue, 05 Mar 2024 04:10:18 -0800 (PST)
+ AJvYcCXQcuxQ7PKn692SvF653QYuV9T4BDo0QyDg4vscfnwEy2MaF25iMBN2014yUPmn15dqjwnJzhGeFGqRQVXWA0I96N9Egr4=
+X-Gm-Message-State: AOJu0YwtdIpZwfU9TJwy4R8lY1PW+teO5dFPah7jEj8hmxDHQFh8ZPL6
+ Wgdoqkbaejr8mM8BfVAnN8TZvEyPs52CpJBhBQNWPLWwa8z8QGA+a4apBP4fHRg=
+X-Google-Smtp-Source: AGHT+IH/W+ykW1GNkMl2JLVL3L6gE85bzXmXTMA16C/kgMcjWXhBlpstz70b2VrLWp+WgQcxWy/g/w==
+X-Received: by 2002:a05:600c:4e0c:b0:412:eddd:12c2 with SMTP id
+ b12-20020a05600c4e0c00b00412eddd12c2mr1009970wmq.6.1709640608336; 
+ Tue, 05 Mar 2024 04:10:08 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- f10-20020a5d58ea000000b0033d4cf751b2sm14731989wrd.33.2024.03.05.04.10.09
+ r15-20020a05600c35cf00b00412e3717ae6sm6193958wmq.36.2024.03.05.04.10.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Mar 2024 04:10:12 -0800 (PST)
+ Tue, 05 Mar 2024 04:10:06 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id B6EA15F9DA;
- Tue,  5 Mar 2024 12:10:06 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 7F1E45F8E5;
+ Tue,  5 Mar 2024 12:10:05 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Wainer dos Santos Moschetta <wainersm@redhat.com>,
@@ -96,24 +96,24 @@ Cc: Wainer dos Santos Moschetta <wainersm@redhat.com>,
  Paolo Bonzini <pbonzini@redhat.com>, Alexandre Iooss <erdnaxe@crans.org>,
  Warner Losh <imp@bsdimp.com>, qemu-riscv@nongnu.org,
  Ilya Leoshkevich <iii@linux.ibm.com>
-Subject: [PATCH 13/29] tests/tcg: Add two follow-fork-mode tests
-Date: Tue,  5 Mar 2024 12:09:49 +0000
-Message-Id: <20240305121005.3528075-14-alex.bennee@linaro.org>
+Subject: [PATCH 01/29] tests: bump QOS_PATH_MAX_ELEMENT_SIZE again
+Date: Tue,  5 Mar 2024 12:09:37 +0000
+Message-Id: <20240305121005.3528075-2-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240305121005.3528075-1-alex.bennee@linaro.org>
 References: <20240305121005.3528075-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::434;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x434.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::331;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x331.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -129,190 +129,38 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Ilya Leoshkevich <iii@linux.ibm.com>
+We "fixed" a bug with LTO builds with 100c459f194 (tests/qtest: bump
+up QOS_PATH_MAX_ELEMENT_SIZE) but it seems it has triggered again.
 
-Add follow-fork-mode child and and follow-fork-mode parent tests.
-Check for the obvious pitfalls, such as lingering breakpoints,
-catchpoints, and single-step mode.
+The array is sized according to the maximum anticipated length of a
+path on the graph. However, the worst case for a depth-first search is
+to push all nodes on the graph. So it's not really LTO, it depends on
+the ordering of the constructors.
 
-Signed-off-by: Ilya Leoshkevich <iii@linux.ibm.com>
-Message-Id: <20240219141628.246823-13-iii@linux.ibm.com>
+Lets be more assertive raising QOS_PATH_MAX_ELEMENT_SIZE to make it go
+away again.
+
+Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1186 (again)
+Reviewed-by: Thomas Huth <thuth@redhat.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Message-Id: <20240304193702.3195255-1-alex.bennee@linaro.org>
 ---
- tests/tcg/multiarch/follow-fork-mode.c        | 56 +++++++++++++++++++
- tests/tcg/multiarch/Makefile.target           | 17 +++++-
- .../gdbstub/follow-fork-mode-child.py         | 40 +++++++++++++
- .../gdbstub/follow-fork-mode-parent.py        | 16 ++++++
- 4 files changed, 128 insertions(+), 1 deletion(-)
- create mode 100644 tests/tcg/multiarch/follow-fork-mode.c
- create mode 100644 tests/tcg/multiarch/gdbstub/follow-fork-mode-child.py
- create mode 100644 tests/tcg/multiarch/gdbstub/follow-fork-mode-parent.py
+ tests/qtest/libqos/qgraph.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/tests/tcg/multiarch/follow-fork-mode.c b/tests/tcg/multiarch/follow-fork-mode.c
-new file mode 100644
-index 00000000000..cb6b032b388
---- /dev/null
-+++ b/tests/tcg/multiarch/follow-fork-mode.c
-@@ -0,0 +1,56 @@
-+/*
-+ * Test GDB's follow-fork-mode.
-+ *
-+ * fork() a chain of processes.
-+ * Parents sends one byte to their children, and children return their
-+ * position in the chain, in order to prove that they survived GDB's fork()
-+ * handling.
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+#include <assert.h>
-+#include <stdlib.h>
-+#include <sys/wait.h>
-+#include <unistd.h>
-+
-+void break_after_fork(void)
-+{
-+}
-+
-+int main(void)
-+{
-+    int depth = 42, err, i, fd[2], status;
-+    pid_t child, pid;
-+    ssize_t n;
-+    char b;
-+
-+    for (i = 0; i < depth; i++) {
-+        err = pipe(fd);
-+        assert(err == 0);
-+        child = fork();
-+        break_after_fork();
-+        assert(child != -1);
-+        if (child == 0) {
-+            close(fd[1]);
-+
-+            n = read(fd[0], &b, 1);
-+            close(fd[0]);
-+            assert(n == 1);
-+            assert(b == (char)i);
-+        } else {
-+            close(fd[0]);
-+
-+            b = (char)i;
-+            n = write(fd[1], &b, 1);
-+            close(fd[1]);
-+            assert(n == 1);
-+
-+            pid = waitpid(child, &status, 0);
-+            assert(pid == child);
-+            assert(WIFEXITED(status));
-+            return WEXITSTATUS(status) - 1;
-+        }
-+    }
-+
-+    return depth;
-+}
-diff --git a/tests/tcg/multiarch/Makefile.target b/tests/tcg/multiarch/Makefile.target
-index f11f3b084d7..979a0dd1bc2 100644
---- a/tests/tcg/multiarch/Makefile.target
-+++ b/tests/tcg/multiarch/Makefile.target
-@@ -106,6 +106,20 @@ run-gdbstub-catch-syscalls: catch-syscalls
- 		--bin $< --test $(MULTIARCH_SRC)/gdbstub/catch-syscalls.py, \
- 	hitting a syscall catchpoint)
+diff --git a/tests/qtest/libqos/qgraph.h b/tests/qtest/libqos/qgraph.h
+index 287022a67c1..1b5de02e7be 100644
+--- a/tests/qtest/libqos/qgraph.h
++++ b/tests/qtest/libqos/qgraph.h
+@@ -24,7 +24,7 @@
+ #include "libqos-malloc.h"
  
-+run-gdbstub-follow-fork-mode-child: follow-fork-mode
-+	$(call run-test, $@, $(GDB_SCRIPT) \
-+		--gdb $(GDB) \
-+		--qemu $(QEMU) --qargs "$(QEMU_OPTS)" \
-+		--bin $< --test $(MULTIARCH_SRC)/gdbstub/follow-fork-mode-child.py, \
-+	following children on fork)
-+
-+run-gdbstub-follow-fork-mode-parent: follow-fork-mode
-+	$(call run-test, $@, $(GDB_SCRIPT) \
-+		--gdb $(GDB) \
-+		--qemu $(QEMU) --qargs "$(QEMU_OPTS)" \
-+		--bin $< --test $(MULTIARCH_SRC)/gdbstub/follow-fork-mode-parent.py, \
-+	following parents on fork)
-+
- else
- run-gdbstub-%:
- 	$(call skip-test, "gdbstub test $*", "need working gdb with $(patsubst -%,,$(TARGET_NAME)) support")
-@@ -113,7 +127,8 @@ endif
- EXTRA_RUNS += run-gdbstub-sha1 run-gdbstub-qxfer-auxv-read \
- 	      run-gdbstub-proc-mappings run-gdbstub-thread-breakpoint \
- 	      run-gdbstub-registers run-gdbstub-prot-none \
--	      run-gdbstub-catch-syscalls
-+	      run-gdbstub-catch-syscalls run-gdbstub-follow-fork-mode-child \
-+	      run-gdbstub-follow-fork-mode-parent
+ /* maximum path length */
+-#define QOS_PATH_MAX_ELEMENT_SIZE 64
++#define QOS_PATH_MAX_ELEMENT_SIZE 128
  
- # ARM Compatible Semi Hosting Tests
- #
-diff --git a/tests/tcg/multiarch/gdbstub/follow-fork-mode-child.py b/tests/tcg/multiarch/gdbstub/follow-fork-mode-child.py
-new file mode 100644
-index 00000000000..72a6e440c08
---- /dev/null
-+++ b/tests/tcg/multiarch/gdbstub/follow-fork-mode-child.py
-@@ -0,0 +1,40 @@
-+"""Test GDB's follow-fork-mode child.
-+
-+SPDX-License-Identifier: GPL-2.0-or-later
-+"""
-+from test_gdbstub import main, report
-+
-+
-+def run_test():
-+    """Run through the tests one by one"""
-+    gdb.execute("set follow-fork-mode child")
-+    # Check that the parent breakpoints are unset.
-+    gdb.execute("break break_after_fork")
-+    # Check that the parent syscall catchpoints are unset.
-+    # Skip this check on the architectures that don't have them.
-+    have_fork_syscall = False
-+    for fork_syscall in ("fork", "clone", "clone2", "clone3"):
-+        try:
-+            gdb.execute("catch syscall {}".format(fork_syscall))
-+        except gdb.error:
-+            pass
-+        else:
-+            have_fork_syscall = True
-+    gdb.execute("continue")
-+    for i in range(42):
-+        if have_fork_syscall:
-+            # syscall entry.
-+            if i % 2 == 0:
-+                # Check that the parent single-stepping is turned off.
-+                gdb.execute("si")
-+            else:
-+                gdb.execute("continue")
-+            # syscall exit.
-+            gdb.execute("continue")
-+        # break_after_fork()
-+        gdb.execute("continue")
-+    exitcode = int(gdb.parse_and_eval("$_exitcode"))
-+    report(exitcode == 42, "{} == 42".format(exitcode))
-+
-+
-+main(run_test)
-diff --git a/tests/tcg/multiarch/gdbstub/follow-fork-mode-parent.py b/tests/tcg/multiarch/gdbstub/follow-fork-mode-parent.py
-new file mode 100644
-index 00000000000..5c2fe722088
---- /dev/null
-+++ b/tests/tcg/multiarch/gdbstub/follow-fork-mode-parent.py
-@@ -0,0 +1,16 @@
-+"""Test GDB's follow-fork-mode parent.
-+
-+SPDX-License-Identifier: GPL-2.0-or-later
-+"""
-+from test_gdbstub import main, report
-+
-+
-+def run_test():
-+    """Run through the tests one by one"""
-+    gdb.execute("set follow-fork-mode parent")
-+    gdb.execute("continue")
-+    exitcode = int(gdb.parse_and_eval("$_exitcode"))
-+    report(exitcode == 0, "{} == 0".format(exitcode))
-+
-+
-+main(run_test)
+ typedef struct QOSGraphObject QOSGraphObject;
+ typedef struct QOSGraphNode QOSGraphNode;
 -- 
 2.39.2
 
