@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E242C54798
-	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Mar 2024 12:18:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 080ACC54E41
+	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Mar 2024 12:20:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rhTdg-0002Y4-CI; Tue, 05 Mar 2024 07:11:20 -0500
+	id 1rhTln-0001zC-QW; Tue, 05 Mar 2024 07:19:43 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rhTci-0001Yk-JC
- for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:10:22 -0500
-Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
+ id 1rhTkz-0008Op-VV
+ for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:18:56 -0500
+Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rhTcZ-0001CI-6R
- for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:10:19 -0500
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-412e8c63f23so10145255e9.0
- for <qemu-riscv@nongnu.org>; Tue, 05 Mar 2024 04:10:09 -0800 (PST)
+ id 1rhTks-0003DS-BU
+ for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:18:53 -0500
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-33d118a181fso3584692f8f.1
+ for <qemu-riscv@nongnu.org>; Tue, 05 Mar 2024 04:18:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709640609; x=1710245409; darn=nongnu.org;
+ d=linaro.org; s=google; t=1709641124; x=1710245924; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9H0BMxEgsfnIN4tKkXQ7XYD/lXb/KI0pXeZKCUMOmAM=;
- b=D9I5h71KchVGxSNvPNAFdg4kSMww74Nr7tIyWcbu/hxQZRTWSpaWLZlw2c5ZRowuqm
- q3SjJOeG0MhNH8zdBTtPrsWWCB5uJBPS6WHJqusVvDghR8In+GiIj8v6R7WsLuhBGOQ1
- iRqUP4gukkT7UzG2t5kydDdEudD2cSVwH0ocBbgzAVITv3ZOiAUHrz98PV5zfbm2IAwJ
- ybgOWDS3UY7AYcwXtBKedcqF/KWoAYG7UZDHjr1qv0j5gFc8JtlvUk+Eajixj4Q2pdPz
- YDGW4UyUlJVQ3WZ5xZpJ4UzJZAjjoEVqhqUvKhO+mT/i2S5TnIx8MAxDbPsO/ZHH9g6L
- HX8g==
+ bh=gYxkfjxE/ujF2xkNpfNd0jj3/ppsExy9PCxHQTHLuH4=;
+ b=d9Ep0UtD3Gmu9ol9jrsnif8iCdyyXxMcWc5ddD4dL0W7CIXLzoXmgtIg97JrT02KOh
+ TKRc/Uu8uCe/GMa8C+IAUmz2Di3a7CEWQjT+hKAdMaJnPYH9VrcvnmEH940amKKkcPHH
+ qI83/4mRWqctxCuU8Si1kZrA3nyJI8hjWJsNl+qsLAD2wf8ECYtcmvlAq4vL0QVxprwi
+ 3YfakmRgBqIbNk2/NmWD2e2IEMr4MquzmhbDIJxUYYbDJMlzXqxpCWTc+kBxt+SQpMEP
+ +42WRjw5lXH2OuM57eqK09q4DmB7QKmzWb9YBocynuIxrX0k24A9w+vkux94DDOzepkv
+ uE8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709640609; x=1710245409;
+ d=1e100.net; s=20230601; t=1709641124; x=1710245924;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9H0BMxEgsfnIN4tKkXQ7XYD/lXb/KI0pXeZKCUMOmAM=;
- b=aYj+jLK2H4v70RaA/qcJzBzPNHOHQBfi/c5aZ/8GZ6lauNS1Mr0NqP6QscdS8lnPXi
- pQCowgIPB7Tw7/BFutUrgvhNwybuQtMDInhmfHyX+1WvH1omefaa4rx2qRw3zmRCRO6u
- eHExvEzAScpTBBNJziS8YL/9kXDxgjhpIOUqy2Ae5+erheQpSWawHhzOsL/hstcjAbCn
- P+FCqmdyw+CFWj+ozr2ll4HdKvUHxOkx7rZLY3S5a/Z1dQ7YA1/uV/GgLArhFPAVGrMT
- 0+qB6AWCtOy/rtg15n//+Hx+IaDDSHXR1kIA9xc0pSD+geW4oIsuA+PDmGDicLskfTLi
- YSWg==
+ bh=gYxkfjxE/ujF2xkNpfNd0jj3/ppsExy9PCxHQTHLuH4=;
+ b=JVYPOGY1dQOOBBduox/wl2QBQY34J2qY+v0KSX05g8l9M0dhdyK5A7gc3IagDGSP1t
+ 3rGLE3O6CFM9jqLGr8xEj6OKg8xYIlC0pOOWcBYulUQFeW7UEDmFBs+SIyI81cCuWw7T
+ jvbw9hGP/Why2hLX0NVtPhB3n9mY5z04nVKxXaHXeFS4eDRgu8yKesrHapFOzcvVW8gs
+ pDw2M1/QglS5mwfubbLRkBxBHwbXumXW4+VQsUs30Hea9KWfCWmh1e9d98/M+6VFWBeI
+ qiaK/N0TbrM/LlymCKkSR2s5NxlxM0UFG1QxKOq74UIXdl8WsLBz2WHppkB3Ente+nfN
+ hPFA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWzfj4DwQ1Baj697yD4ESyGbhZg5JCf7zvsgvpxGqCgFbBeyJ0RWkRxU30/jFxUZuG2gkSaVawDBDZWoCGXY17GN66nTWY=
-X-Gm-Message-State: AOJu0YyRoJU/vyOviEe7Tz75WoV52eGIWFkYYIeLyra2KEjNpGV+3PLp
- k+i6qO3zpDg19gzZmXYM9r60zv9EIS9UabagRDHiXldo8n4PPb4PzXTvStlk5k0=
-X-Google-Smtp-Source: AGHT+IGeU37dEB9VMX1i10U5L657uyrlThfe3V68/Dnvly41cIxf2sIZkoM4cHEMD1mOp4S6icF9MQ==
-X-Received: by 2002:a5d:674b:0:b0:33d:82a9:206e with SMTP id
- l11-20020a5d674b000000b0033d82a9206emr8033114wrw.28.1709640608641; 
- Tue, 05 Mar 2024 04:10:08 -0800 (PST)
+ AJvYcCXTD1h7+PEHNrnmscyUaPjXjYIgl+RUw8IKrG7MYTztRZbOJFt0hGSQKspUQSljlu4iKq5QvJrkBv7d8KPZNV8vXHAdZrk=
+X-Gm-Message-State: AOJu0YwP3tmoYdMf6cSevWv4vAOuxomrK1iaTCK14DX2HjV3VbD3ZI3L
+ aOC7k0lcxmy6rTDvg2Xcv7QMoY6IF3id8dKm/ZFggixJhK1YYovTmMOn/A8b2dM=
+X-Google-Smtp-Source: AGHT+IE3XgG2lbmjNAvKm7fVyZM8ZkhcVQl2Ky6f/FBuP8lHb+dy0y7ryzA9hyngqhRSbQAg49HgeA==
+X-Received: by 2002:adf:ab07:0:b0:33d:2071:9b85 with SMTP id
+ q7-20020adfab07000000b0033d20719b85mr7415109wrc.19.1709641124024; 
+ Tue, 05 Mar 2024 04:18:44 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- h3-20020adfa4c3000000b0033dd2a7167fsm14970270wrb.29.2024.03.05.04.10.06
+ bt12-20020a056000080c00b0033e3a110d7fsm6390168wrb.71.2024.03.05.04.18.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Mar 2024 04:10:08 -0800 (PST)
+ Tue, 05 Mar 2024 04:18:43 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id DC55A5F954;
- Tue,  5 Mar 2024 12:10:05 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 87D885F9ED;
+ Tue,  5 Mar 2024 12:10:07 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Wainer dos Santos Moschetta <wainersm@redhat.com>,
@@ -96,17 +96,17 @@ Cc: Wainer dos Santos Moschetta <wainersm@redhat.com>,
  Paolo Bonzini <pbonzini@redhat.com>, Alexandre Iooss <erdnaxe@crans.org>,
  Warner Losh <imp@bsdimp.com>, qemu-riscv@nongnu.org,
  Ilya Leoshkevich <iii@linux.ibm.com>
-Subject: [PATCH 04/29] {linux,bsd}-user: Update ts_tid after fork()
-Date: Tue,  5 Mar 2024 12:09:40 +0000
-Message-Id: <20240305121005.3528075-5-alex.bennee@linaro.org>
+Subject: [PATCH 22/29] contrib/plugins/hotblocks: migrate to new per_vcpu API
+Date: Tue,  5 Mar 2024 12:09:58 +0000
+Message-Id: <20240305121005.3528075-23-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240305121005.3528075-1-alex.bennee@linaro.org>
 References: <20240305121005.3528075-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::331;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x331.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -129,46 +129,126 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Ilya Leoshkevich <iii@linux.ibm.com>
+From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 
-Currently ts_tid contains the parent tid after fork(), which is not
-correct. So far it has not affected anything, but the upcoming
-follow-fork-mode child support relies on the correct value, so fix it.
-
-Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
-Signed-off-by: Ilya Leoshkevich <iii@linux.ibm.com>
-Reviewed-by: Warner Losh <imp@bsdimp.com>
-Message-Id: <20240219141628.246823-4-iii@linux.ibm.com>
+Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+Message-Id: <20240304130036.124418-10-pierrick.bouvier@linaro.org>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- bsd-user/main.c   | 1 +
- linux-user/main.c | 1 +
- 2 files changed, 2 insertions(+)
+ contrib/plugins/hotblocks.c | 50 ++++++++++++++++++++++---------------
+ 1 file changed, 30 insertions(+), 20 deletions(-)
 
-diff --git a/bsd-user/main.c b/bsd-user/main.c
-index 512d4ab69fc..e39eef3040f 100644
---- a/bsd-user/main.c
-+++ b/bsd-user/main.c
-@@ -134,6 +134,7 @@ void fork_end(int child)
-          * state, so we don't need to end_exclusive() here.
-          */
-         qemu_init_cpu_list();
-+        get_task_state(thread_cpu)->ts_tid = qemu_get_thread_id();
-         gdbserver_fork(thread_cpu);
-     } else {
-         mmap_fork_end(child);
-diff --git a/linux-user/main.c b/linux-user/main.c
-index 551acf16619..699da773714 100644
---- a/linux-user/main.c
-+++ b/linux-user/main.c
-@@ -161,6 +161,7 @@ void fork_end(int child)
-             }
+diff --git a/contrib/plugins/hotblocks.c b/contrib/plugins/hotblocks.c
+index 4de1b134944..02bc5078bdd 100644
+--- a/contrib/plugins/hotblocks.c
++++ b/contrib/plugins/hotblocks.c
+@@ -34,8 +34,8 @@ static guint64 limit = 20;
+  */
+ typedef struct {
+     uint64_t start_addr;
+-    uint64_t exec_count;
+-    int      trans_count;
++    struct qemu_plugin_scoreboard *exec_count;
++    int trans_count;
+     unsigned long insns;
+ } ExecCount;
+ 
+@@ -43,7 +43,17 @@ static gint cmp_exec_count(gconstpointer a, gconstpointer b)
+ {
+     ExecCount *ea = (ExecCount *) a;
+     ExecCount *eb = (ExecCount *) b;
+-    return ea->exec_count > eb->exec_count ? -1 : 1;
++    uint64_t count_a =
++        qemu_plugin_u64_sum(qemu_plugin_scoreboard_u64(ea->exec_count));
++    uint64_t count_b =
++        qemu_plugin_u64_sum(qemu_plugin_scoreboard_u64(eb->exec_count));
++    return count_a > count_b ? -1 : 1;
++}
++
++static void exec_count_free(gpointer key, gpointer value, gpointer user_data)
++{
++    ExecCount *cnt = value;
++    qemu_plugin_scoreboard_free(cnt->exec_count);
+ }
+ 
+ static void plugin_exit(qemu_plugin_id_t id, void *p)
+@@ -52,7 +62,6 @@ static void plugin_exit(qemu_plugin_id_t id, void *p)
+     GList *counts, *it;
+     int i;
+ 
+-    g_mutex_lock(&lock);
+     g_string_append_printf(report, "%d entries in the hash table\n",
+                            g_hash_table_size(hotblocks));
+     counts = g_hash_table_get_values(hotblocks);
+@@ -63,16 +72,21 @@ static void plugin_exit(qemu_plugin_id_t id, void *p)
+ 
+         for (i = 0; i < limit && it->next; i++, it = it->next) {
+             ExecCount *rec = (ExecCount *) it->data;
+-            g_string_append_printf(report, "0x%016"PRIx64", %d, %ld, %"PRId64"\n",
+-                                   rec->start_addr, rec->trans_count,
+-                                   rec->insns, rec->exec_count);
++            g_string_append_printf(
++                report, "0x%016"PRIx64", %d, %ld, %"PRId64"\n",
++                rec->start_addr, rec->trans_count,
++                rec->insns,
++                qemu_plugin_u64_sum(
++                    qemu_plugin_scoreboard_u64(rec->exec_count)));
          }
-         qemu_init_cpu_list();
-+        get_task_state(thread_cpu)->ts_tid = qemu_get_thread_id();
-         gdbserver_fork(thread_cpu);
+ 
+         g_list_free(it);
+     }
+-    g_mutex_unlock(&lock);
+ 
+     qemu_plugin_outs(report->str);
++
++    g_hash_table_foreach(hotblocks, exec_count_free, NULL);
++    g_hash_table_destroy(hotblocks);
+ }
+ 
+ static void plugin_init(void)
+@@ -82,15 +96,9 @@ static void plugin_init(void)
+ 
+ static void vcpu_tb_exec(unsigned int cpu_index, void *udata)
+ {
+-    ExecCount *cnt;
+-    uint64_t hash = (uint64_t) udata;
+-
+-    g_mutex_lock(&lock);
+-    cnt = (ExecCount *) g_hash_table_lookup(hotblocks, (gconstpointer) hash);
+-    /* should always succeed */
+-    g_assert(cnt);
+-    cnt->exec_count++;
+-    g_mutex_unlock(&lock);
++    ExecCount *cnt = (ExecCount *)udata;
++    qemu_plugin_u64_add(qemu_plugin_scoreboard_u64(cnt->exec_count),
++                        cpu_index, 1);
+ }
+ 
+ /*
+@@ -114,18 +122,20 @@ static void vcpu_tb_trans(qemu_plugin_id_t id, struct qemu_plugin_tb *tb)
+         cnt->start_addr = pc;
+         cnt->trans_count = 1;
+         cnt->insns = insns;
++        cnt->exec_count = qemu_plugin_scoreboard_new(sizeof(uint64_t));
+         g_hash_table_insert(hotblocks, (gpointer) hash, (gpointer) cnt);
+     }
+ 
+     g_mutex_unlock(&lock);
+ 
+     if (do_inline) {
+-        qemu_plugin_register_vcpu_tb_exec_inline(tb, QEMU_PLUGIN_INLINE_ADD_U64,
+-                                                 &cnt->exec_count, 1);
++        qemu_plugin_register_vcpu_tb_exec_inline_per_vcpu(
++            tb, QEMU_PLUGIN_INLINE_ADD_U64,
++            qemu_plugin_scoreboard_u64(cnt->exec_count), 1);
      } else {
-         cpu_list_unlock();
+         qemu_plugin_register_vcpu_tb_exec_cb(tb, vcpu_tb_exec,
+                                              QEMU_PLUGIN_CB_NO_REGS,
+-                                             (void *)hash);
++                                             (void *)cnt);
+     }
+ }
+ 
 -- 
 2.39.2
 
