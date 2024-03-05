@@ -4,103 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F868C54798
-	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Mar 2024 11:37:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FAEEC54E41
+	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Mar 2024 12:11:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rhT6j-0000SR-LR; Tue, 05 Mar 2024 06:37:17 -0500
+	id 1rhTcg-0001VI-HD; Tue, 05 Mar 2024 07:10:18 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <anisinha@redhat.com>)
- id 1rhT6i-0000S0-Ft
- for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 06:37:16 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <anisinha@redhat.com>)
- id 1rhT6e-0002Z8-Pp
- for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 06:37:16 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1709638627;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=X+XyziquYx1qV8PnNTEvXP00ge/08XPje0E6BdPBN5s=;
- b=K9n/H5aMPqTREuHFzQubRhB3us8Nd1fLeCPKVbrTo3GuuqBthrkUCGfcKfZPnn+QWWau43
- rvwPGh+X2hsko7CQeGcOepK8HskGuhOaRLAdTO4tHHPmHYbxsafz8Ebq8jf+xzTDfIocNn
- 3Ujk1snRmCejJ10FcweDzh6n2PfD2VE=
-Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com
- [209.85.215.197]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-385-eTkXsE6vPEidLp3iLIyzSQ-1; Tue, 05 Mar 2024 06:37:06 -0500
-X-MC-Unique: eTkXsE6vPEidLp3iLIyzSQ-1
-Received: by mail-pg1-f197.google.com with SMTP id
- 41be03b00d2f7-5d1bffa322eso6327006a12.1
- for <qemu-riscv@nongnu.org>; Tue, 05 Mar 2024 03:37:06 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1rhTcZ-0001QJ-9t
+ for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:10:11 -0500
+Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1rhTcW-0001BM-LU
+ for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:10:10 -0500
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-412ee78edbbso2852295e9.0
+ for <qemu-riscv@nongnu.org>; Tue, 05 Mar 2024 04:10:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1709640606; x=1710245406; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=YBobDIzjq+FEEKLq7A1VHLIqtIHgR7MyyrYSn6xZbDo=;
+ b=w7zRn/D9rx9AhfpAYQoTFcXTC8jmvkZXoNXRADP7YHVxaxHpLhiLM86INNNiRXZ6gd
+ Q2rLkbHEUhOwkMDF+uH8RKjdFQFInUTd364olch/V/DTHFyDsBCIEuauYo94pDOn9dF3
+ zOhCAwfChlaHPvVh6ThqOdT4d951Hy35NpC/qVKf5FeKNPbsE0OBBLU2cVllVr0DiJgB
+ 8ASTqh24neco4OxkY/XQ32nmRlwmkyazdHEvQ0ve8XEhmswWEQnI/1RkPqD3Fav6PUe5
+ NsWc+MAjRKJoOg4uPxCulqY8qSq8LC34COxDe4HnFXc1/ZXKBF3/VRmsWSsxJe70UsNd
+ Daxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709638625; x=1710243425;
- h=to:references:message-id:content-transfer-encoding:cc:date
- :in-reply-to:from:subject:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=lr9ZwAIZH9USXJUZ1I9mjZLUVZFZB1fODebftbuXqoI=;
- b=AHAm39ZXBnGtFI1dA2AbT9ycyicIpDOr4+nNu1/mV/YLVJSILRnt1h+JnbFedM/1J7
- 5y2JSAPDNcd96ETtzfiNb/TgPzKRMEkLTU6BxPBAqOGak6EHF7sMEWvoXOt2sW4IeKxa
- WDvL1J18hwc5MmBM9n3AQ6bIN1Retf/yFlke+y7x55zq01ydPbZiDUykplduLk5dyHSQ
- HNFGxz6s+TU+tBqryvs4DXrrF/l1mzejGgEvEtdRw3k/4j9BebXtCwn1weLNmQ1/agky
- ITRrg/lOEKqK+F5Fp8a8yylV1TDs6uIi0iUU9Hj829Ed0DltrpOPfpskJkBqNoZK3sOB
- grsg==
+ d=1e100.net; s=20230601; t=1709640606; x=1710245406;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=YBobDIzjq+FEEKLq7A1VHLIqtIHgR7MyyrYSn6xZbDo=;
+ b=X5Lj0jvjd2J8yStnm5Z+iWU9KNs1EEHXSFZf71oKl/krjumnGXqnM6nh+GtQpG4Fn+
+ R2jfw081fPOAgAXfCZ7SEOHGZOLevswCJrrCKmEv3fpl8UYTRRJNVhCqVzAdTZCX6NQs
+ bx0wXqKdZMJHIixON13Pv4QdIEQScA0KvhjNVImN2Ehr2bU8MxiimRMrJHLTc7yWGPoL
+ zEcmzebUekM5W76V1V8jpO/5FiTJdRvReqJCgivOLOV4FHHttB4CeFTCHC+dKvNpwbh9
+ UcgKUOb8mvuamQhJCJct60Iub4J7j4P+Ovdo6dvbT06O22Hf2GTCsEuR4bVK6i73Qcey
+ uY6Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXa4qBw6bw4UZGFID23KcnBcCmYIgfrZDw4UCbXeLUDtmPe+C3fFI3CeTYKI/iw4uxbTim7sWcNXuobcTK00oroVPeVgzM=
-X-Gm-Message-State: AOJu0Yy2pCkoRalJRZmNi4mPdrq0OzPJt6Khp3CF7rFrO6/A94FO66xx
- gN3Ao90m+HO0cZO+p+dk9WeOrCTS9jIfwyYoDpoTR/1nq87gmpVdsrd956k4hKoFyvjQOQedd+q
- nic8nhMvf28UwE4IgmMUi5pVleWoDVQ8qfQYeKQF255JgX/5MlXDe
-X-Received: by 2002:a05:6a20:7289:b0:1a1:20b6:bf11 with SMTP id
- o9-20020a056a20728900b001a120b6bf11mr1597656pzk.50.1709638625360; 
- Tue, 05 Mar 2024 03:37:05 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGLrDzEd7tyhw5iEBmY9Sh5Xobt+xuca6ATpIu5iGB9a+UuNGVvLfY2YAxmx1dF/TYs4Gw+3Q==
-X-Received: by 2002:a05:6a20:7289:b0:1a1:20b6:bf11 with SMTP id
- o9-20020a056a20728900b001a120b6bf11mr1597629pzk.50.1709638625027; 
- Tue, 05 Mar 2024 03:37:05 -0800 (PST)
-Received: from smtpclient.apple ([203.163.238.152])
- by smtp.gmail.com with ESMTPSA id
- le8-20020a170902fb0800b001dc8db3150asm10357683plb.199.2024.03.05.03.36.58
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Tue, 05 Mar 2024 03:37:04 -0800 (PST)
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3774.400.31\))
-Subject: Re: [PATCH 15/19] smbios: error out when building type 4 table is not
- possible
-From: Ani Sinha <anisinha@redhat.com>
-In-Reply-To: <20240227154749.1818189-16-imammedo@redhat.com>
-Date: Tue, 5 Mar 2024 17:06:46 +0530
-Cc: QEMU Developers <qemu-devel@nongnu.org>,
+ AJvYcCXMZEwtjdPcW4H7/j0mX98K6xJDmdcDshNqBtbtzwbOip8/d9cVOssnVdd2gKXKB+iaeoypbVHBJGuhlCi91xxH0jGL4II=
+X-Gm-Message-State: AOJu0YwmYX7PJoT6fbrKLCfVyxtS5jQ7p9OzsqLCQfXZydzUsQdhIHXq
+ 4IoKY/CYs1AaR2hDqH4b6Ast3myicGB7HHyXwRyapjYwBcS235xJKDOz9ZsDCr4=
+X-Google-Smtp-Source: AGHT+IFDKYE6yJWytxr9qvikD5AWAyVoktcEIDgwF1iQqXHkXh4CSMiS+ydvc2XhqXcVyR33VzWksw==
+X-Received: by 2002:a05:600c:46ce:b0:412:6c5f:d971 with SMTP id
+ q14-20020a05600c46ce00b004126c5fd971mr9104153wmo.11.1709640606285; 
+ Tue, 05 Mar 2024 04:10:06 -0800 (PST)
+Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
+ h9-20020a05600c350900b00412de55135dsm7789729wmq.41.2024.03.05.04.10.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 05 Mar 2024 04:10:05 -0800 (PST)
+Received: from draig.lan (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id 6AB685F7B5;
+ Tue,  5 Mar 2024 12:10:05 +0000 (GMT)
+From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Wainer dos Santos Moschetta <wainersm@redhat.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Nicholas Piggin <npiggin@gmail.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Yanan Wang <wangyanan55@huawei.com>, qemu-s390x@nongnu.org,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Eduardo Habkost <eduardo@habkost.net>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Michael Rolnik <mrolnik@gmail.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Laurent Vivier <lvivier@redhat.com>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Laurent Vivier <laurent@vivier.eu>, Thomas Huth <thuth@redhat.com>,
  Peter Maydell <peter.maydell@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
- Song Gao <gaosong@loongson.cn>,
- Alistair Francis <alistair.francis@wdc.com>, palmer@dabbelt.com,
- bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, philmd@linaro.org, wangyanan55@huawei.com,
- eblake@redhat.com, armbru@redhat.com, qemu-arm@nongnu.org,
- qemu-riscv@nongnu.org, f.ebner@proxmox.com
-Message-Id: <CC89DC43-048D-4C23-BF18-470BECA3140E@redhat.com>
-References: <20240227154749.1818189-1-imammedo@redhat.com>
- <20240227154749.1818189-16-imammedo@redhat.com>
-To: Igor Mammedov <imammedo@redhat.com>
-X-Mailer: Apple Mail (2.3774.400.31)
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=anisinha@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -11
-X-Spam_score: -1.2
-X-Spam_bar: -
-X-Spam_report: (-1.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.571,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_SORBS_WEB=1.5, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+ Mahmoud Mandour <ma.mandourr@gmail.com>, Brad Smith <brad@comstyle.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Brian Cain <bcain@quicinc.com>, Cleber Rosa <crosa@redhat.com>,
+ John Snow <jsnow@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Riku Voipio <riku.voipio@iki.fi>,
+ qemu-arm@nongnu.org, qemu-ppc@nongnu.org, Weiwei Li <liwei1518@gmail.com>,
+ Bin Meng <bin.meng@windriver.com>,
+ =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
+ Beraldo Leal <bleal@redhat.com>, Kyle Evans <kevans@freebsd.org>,
+ David Hildenbrand <david@redhat.com>, Song Gao <gaosong@loongson.cn>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>, Alexandre Iooss <erdnaxe@crans.org>,
+ Warner Losh <imp@bsdimp.com>, qemu-riscv@nongnu.org,
+ Ilya Leoshkevich <iii@linux.ibm.com>
+Subject: [PATCH 00/29] maintainer/next for 9.0 (testing, gdbstub, plugins,
+ disas)
+Date: Tue,  5 Mar 2024 12:09:36 +0000
+Message-Id: <20240305121005.3528075-1-alex.bennee@linaro.org>
+X-Mailer: git-send-email 2.39.2
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32b.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -116,73 +127,140 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+As I'm going to be away for most of the tree stabilisation period I'm
+trying to be proactive clearing my maintainer backlog before the
+softfreeze. With that in mind heres what is ready to go in:
 
+Testing
 
-> On 27-Feb-2024, at 21:17, Igor Mammedov <imammedo@redhat.com> wrote:
->=20
-> If SMBIOS v2 version is requested but number of cores/threads
-> are more than it's possible to describe with v2, error out
-> instead of silently ignoring the fact and filling core/thread
-> count with bogus values.
->=20
-> This will help caller to decide if it should fallback to
-> SMBIOSv3 when smbios-entry-point-type=3D'auto'
->=20
-> Signed-off-by: Igor Mammedov <imammedo@redhat.com>
+Most stuff is being directly applied as downstreams stop working (c.f.
+BSD and MacOS breakage). So all I have left is a fix for qos-tests
+that shows up when LTO is enabled.
 
-Reviewed-by: Ani Sinha <anisinha@redhat.com>
+GDBStub
 
-> ---
-> hw/smbios/smbios.c | 14 ++++++++++++--
-> 1 file changed, 12 insertions(+), 2 deletions(-)
->=20
-> diff --git a/hw/smbios/smbios.c b/hw/smbios/smbios.c
-> index e54a9f21e6..bf5c7a8885 100644
-> --- a/hw/smbios/smbios.c
-> +++ b/hw/smbios/smbios.c
-> @@ -605,7 +605,8 @@ static void smbios_build_type_3_table(void)
-> }
->=20
-> static void smbios_build_type_4_table(MachineState *ms, unsigned instance=
-,
-> -                                      SmbiosEntryPointType ep_type)
-> +                                      SmbiosEntryPointType ep_type,
-> +                                      Error **errp)
-> {
->     char sock_str[128];
->     size_t tbl_len =3D SMBIOS_TYPE_4_LEN_V28;
-> @@ -659,6 +660,12 @@ static void smbios_build_type_4_table(MachineState *=
-ms, unsigned instance,
->     if (tbl_len =3D=3D SMBIOS_TYPE_4_LEN_V30) {
->         t->core_count2 =3D t->core_enabled2 =3D cpu_to_le16(cores_per_soc=
-ket);
->         t->thread_count2 =3D cpu_to_le16(threads_per_socket);
-> +    } else if (t->core_count =3D=3D 0xFF || t->thread_count =3D=3D 0xFF)=
- {
-> +        error_setg(errp, "SMBIOS 2.0 doesn't support number of processor=
- "
-> +                         "cores/threads more than 255, use "
-> +                         "-machine smbios-entry-point-type=3D64 option t=
-o enable "
-> +                         "SMBIOS 3.0 support");
-> +        return;
->     }
->=20
->     SMBIOS_BUILD_TABLE_POST;
-> @@ -987,7 +994,10 @@ static bool smbios_get_tables_ep(MachineState *ms,
->     assert(ms->smp.sockets >=3D 1);
->=20
->     for (i =3D 0; i < ms->smp.sockets; i++) {
-> -        smbios_build_type_4_table(ms, i, ep_type);
-> +        smbios_build_type_4_table(ms, i, ep_type, errp);
-> +        if (*errp) {
-> +            goto err_exit;
-> +        }
->     }
->=20
->     smbios_build_type_8_table();
-> --=20
-> 2.39.3
->=20
+These are Ilya's fork follow mode patches for gdbstub. I hope to
+include Gustavo's signal handling stuff if it is fixed this week.
+
+Plugins
+
+This introduces Pierrick's work to have thread-safe inline counters
+via the concept of a vcpu indexed scoreboard. There will be further
+work over the next cycle to enable more efficient instrumentation and
+address more of the missing pieces people have been asking for.
+
+Finally there are a few cosmetic patches to ensure the disassembly
+that plugins get don't include opcodes which plugins can get another
+way. They are the only patches that need review:
+
+  target/riscv: honour show_opcodes when disassembling
+  target/loongarch: honour show_opcodes when disassembling
+  disas/hppa: honour show_opcodes
+  disas: introduce show_opcodes
+
+Hopefully I can get the PR for this rolled later this week.
+
+Alex.
+
+Alex Bennée (5):
+  tests: bump QOS_PATH_MAX_ELEMENT_SIZE again
+  disas: introduce show_opcodes
+  disas/hppa: honour show_opcodes
+  target/loongarch: honour show_opcodes when disassembling
+  target/riscv: honour show_opcodes when disassembling
+
+Ilya Leoshkevich (12):
+  gdbstub: Support disablement in a multi-threaded process
+  {linux,bsd}-user: Introduce get_task_state()
+  {linux,bsd}-user: Update ts_tid after fork()
+  gdbstub: Introduce gdbserver_fork_start()
+  {linux,bsd}-user: Pass pid to fork_end()
+  {linux,bsd}-user: Pass pid to gdbserver_fork()
+  gdbstub: Call gdbserver_fork() both in parent and in child
+  gdbstub: Introduce gdb_handle_query_supported_user()
+  gdbstub: Introduce gdb_handle_set_thread_user()
+  gdbstub: Introduce gdb_handle_detach_user()
+  gdbstub: Implement follow-fork-mode child
+  tests/tcg: Add two follow-fork-mode tests
+
+Pierrick Bouvier (12):
+  plugins: scoreboard API
+  plugins: define qemu_plugin_u64
+  plugins: implement inline operation relative to cpu_index
+  plugins: add inline operation per vcpu
+  tests/plugin: add test plugin for inline operations
+  tests/plugin/mem: migrate to new per_vcpu API
+  tests/plugin/insn: migrate to new per_vcpu API
+  tests/plugin/bb: migrate to new per_vcpu API
+  contrib/plugins/hotblocks: migrate to new per_vcpu API
+  contrib/plugins/howvec: migrate to new per_vcpu API
+  plugins: remove non per_vcpu inline operation from API
+  plugins: cleanup codepath for previous inline operation
+
+ bsd-user/bsd-file.h                           |   2 +-
+ bsd-user/freebsd/os-proc.h                    |   6 +-
+ bsd-user/qemu.h                               |   7 +-
+ gdbstub/internals.h                           |   3 +
+ include/disas/dis-asm.h                       |   8 +
+ include/gdbstub/user.h                        |  10 +-
+ include/qemu/plugin.h                         |   7 +
+ include/qemu/qemu-plugin.h                    | 142 +++++++---
+ include/user/safe-syscall.h                   |   2 +-
+ linux-user/m68k/target_cpu.h                  |   2 +-
+ linux-user/qemu.h                             |   5 +
+ linux-user/signal-common.h                    |   2 +-
+ linux-user/user-internals.h                   |   2 +-
+ plugins/plugin.h                              |  17 +-
+ tests/qtest/libqos/qgraph.h                   |   2 +-
+ accel/tcg/plugin-gen.c                        |  69 ++++-
+ bsd-user/main.c                               |   9 +-
+ bsd-user/signal.c                             |  20 +-
+ contrib/plugins/hotblocks.c                   |  50 ++--
+ contrib/plugins/howvec.c                      |  53 ++--
+ disas/disas.c                                 |   1 +
+ disas/hppa.c                                  |   8 +-
+ disas/riscv.c                                 |  28 +-
+ gdbstub/gdbstub.c                             |  29 ++-
+ gdbstub/user-target.c                         |   4 +-
+ gdbstub/user.c                                | 244 +++++++++++++++++-
+ linux-user/aarch64/cpu_loop.c                 |   2 +-
+ linux-user/arm/cpu_loop.c                     |   4 +-
+ linux-user/arm/signal.c                       |   2 +-
+ linux-user/cris/cpu_loop.c                    |   2 +-
+ linux-user/elfload.c                          |   2 +-
+ linux-user/hppa/signal.c                      |   2 +-
+ linux-user/linuxload.c                        |   2 +-
+ linux-user/m68k/cpu_loop.c                    |   2 +-
+ linux-user/main.c                             |   8 +-
+ linux-user/mips/cpu_loop.c                    |   2 +-
+ linux-user/ppc/signal.c                       |   4 +-
+ linux-user/riscv/cpu_loop.c                   |   2 +-
+ linux-user/signal.c                           |  30 +--
+ linux-user/syscall.c                          |  32 +--
+ linux-user/vm86.c                             |  18 +-
+ linux-user/xtensa/signal.c                    |   2 +-
+ plugins/api.c                                 | 100 +++++--
+ plugins/core.c                                |  79 +++++-
+ semihosting/arm-compat-semi.c                 |   8 +-
+ target/loongarch/disas.c                      |  13 +-
+ tests/plugin/bb.c                             |  63 ++---
+ tests/plugin/inline.c                         | 186 +++++++++++++
+ tests/plugin/insn.c                           | 106 ++++----
+ tests/plugin/mem.c                            |  46 ++--
+ tests/tcg/multiarch/follow-fork-mode.c        |  56 ++++
+ plugins/qemu-plugins.symbols                  |  13 +-
+ tests/plugin/meson.build                      |   2 +-
+ tests/tcg/Makefile.target                     |   2 +-
+ tests/tcg/multiarch/Makefile.target           |  17 +-
+ .../gdbstub/follow-fork-mode-child.py         |  40 +++
+ .../gdbstub/follow-fork-mode-parent.py        |  16 ++
+ 57 files changed, 1257 insertions(+), 338 deletions(-)
+ create mode 100644 tests/plugin/inline.c
+ create mode 100644 tests/tcg/multiarch/follow-fork-mode.c
+ create mode 100644 tests/tcg/multiarch/gdbstub/follow-fork-mode-child.py
+ create mode 100644 tests/tcg/multiarch/gdbstub/follow-fork-mode-parent.py
+
+-- 
+2.39.2
 
 
