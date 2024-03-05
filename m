@@ -4,63 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FAEEC54E41
-	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Mar 2024 12:11:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB418C54E41
+	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Mar 2024 12:12:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rhTcg-0001VI-HD; Tue, 05 Mar 2024 07:10:18 -0500
+	id 1rhTe9-0003Dx-IC; Tue, 05 Mar 2024 07:11:49 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rhTcZ-0001QJ-9t
- for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:10:11 -0500
-Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
+ id 1rhTd8-0001jf-Lw
+ for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:10:55 -0500
+Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1rhTcW-0001BM-LU
- for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:10:10 -0500
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-412ee78edbbso2852295e9.0
- for <qemu-riscv@nongnu.org>; Tue, 05 Mar 2024 04:10:07 -0800 (PST)
+ id 1rhTch-0001R7-4e
+ for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 07:10:44 -0500
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-33e27940554so2247235f8f.3
+ for <qemu-riscv@nongnu.org>; Tue, 05 Mar 2024 04:10:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709640606; x=1710245406; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=YBobDIzjq+FEEKLq7A1VHLIqtIHgR7MyyrYSn6xZbDo=;
- b=w7zRn/D9rx9AhfpAYQoTFcXTC8jmvkZXoNXRADP7YHVxaxHpLhiLM86INNNiRXZ6gd
- Q2rLkbHEUhOwkMDF+uH8RKjdFQFInUTd364olch/V/DTHFyDsBCIEuauYo94pDOn9dF3
- zOhCAwfChlaHPvVh6ThqOdT4d951Hy35NpC/qVKf5FeKNPbsE0OBBLU2cVllVr0DiJgB
- 8ASTqh24neco4OxkY/XQ32nmRlwmkyazdHEvQ0ve8XEhmswWEQnI/1RkPqD3Fav6PUe5
- NsWc+MAjRKJoOg4uPxCulqY8qSq8LC34COxDe4HnFXc1/ZXKBF3/VRmsWSsxJe70UsNd
- Daxg==
+ d=linaro.org; s=google; t=1709640613; x=1710245413; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=z3nYyAloWCoquTZDPSpE+htB2DaRlvaFvDRPXpKYUIk=;
+ b=YlFCKI8D4IjhTyxkzLiRopaNtPIX37FxRBi1OzfI+a2AT1584F69fMVJ3KKOqx7QjF
+ opGcuuKMB+fqM+Zxu14VpLoaqh5q5RwaaWRb2BewYcV48M0nbJY5cSu84AzHqw7tUxSu
+ JfHaF8T/UJ4XsAINnvuGx1JOcIOhNd+LIbx1Ssp3SzcuTKsUWScOUn49pN62ERdQtL+9
+ RjkzGORywaC+fweFJP6JvoLgSzMULbFUDolRUhNQtZv0afdCtPuO9zwhPIn4fF2iWkVz
+ Mu2OGYh23Io5P9ixAGmDNOF2kB7cYeZIkJA8Kg8rxZz1gwDq9lmq1VGYzd7msGmAlw2x
+ bQEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709640606; x=1710245406;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=YBobDIzjq+FEEKLq7A1VHLIqtIHgR7MyyrYSn6xZbDo=;
- b=X5Lj0jvjd2J8yStnm5Z+iWU9KNs1EEHXSFZf71oKl/krjumnGXqnM6nh+GtQpG4Fn+
- R2jfw081fPOAgAXfCZ7SEOHGZOLevswCJrrCKmEv3fpl8UYTRRJNVhCqVzAdTZCX6NQs
- bx0wXqKdZMJHIixON13Pv4QdIEQScA0KvhjNVImN2Ehr2bU8MxiimRMrJHLTc7yWGPoL
- zEcmzebUekM5W76V1V8jpO/5FiTJdRvReqJCgivOLOV4FHHttB4CeFTCHC+dKvNpwbh9
- UcgKUOb8mvuamQhJCJct60Iub4J7j4P+Ovdo6dvbT06O22Hf2GTCsEuR4bVK6i73Qcey
- uY6Q==
+ d=1e100.net; s=20230601; t=1709640613; x=1710245413;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=z3nYyAloWCoquTZDPSpE+htB2DaRlvaFvDRPXpKYUIk=;
+ b=PRXCv/VQv89n9ufDGhvfyT0ZDju6IZSDIsjS8Xl9lTchK4c0IUUuirFBSlKM98Jooa
+ HhjL4g+8022ft/ybeu1nr68rnqWHl05Fdt5wZyn1e6dfZPcGprJBdCdGExCiQeFIqnA8
+ KYIou3BOUkYfShis+1z71sRgcpA0L8ni0Lso7NIjiiwWPYVhEKh8/Wx0mgaybO4q0tga
+ 6jnSMWPFJ3LbwngadynGGSnMNoxXXhi9u314NYAIMd2lUKbiHw5J5QjY1zfe95MQWE61
+ yoHYuKF0fvimN0KDSWPFPRc2MuWrXkU1gbJ1VhEvnYv+gD/ACXtD8eRaAbPl0EnGqeal
+ 3f2Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXMZEwtjdPcW4H7/j0mX98K6xJDmdcDshNqBtbtzwbOip8/d9cVOssnVdd2gKXKB+iaeoypbVHBJGuhlCi91xxH0jGL4II=
-X-Gm-Message-State: AOJu0YwmYX7PJoT6fbrKLCfVyxtS5jQ7p9OzsqLCQfXZydzUsQdhIHXq
- 4IoKY/CYs1AaR2hDqH4b6Ast3myicGB7HHyXwRyapjYwBcS235xJKDOz9ZsDCr4=
-X-Google-Smtp-Source: AGHT+IFDKYE6yJWytxr9qvikD5AWAyVoktcEIDgwF1iQqXHkXh4CSMiS+ydvc2XhqXcVyR33VzWksw==
-X-Received: by 2002:a05:600c:46ce:b0:412:6c5f:d971 with SMTP id
- q14-20020a05600c46ce00b004126c5fd971mr9104153wmo.11.1709640606285; 
- Tue, 05 Mar 2024 04:10:06 -0800 (PST)
+ AJvYcCVNc/J5xOy+4LuhzhLizjDUiln8ztVdjwFzBxWNE8bHMZ1gbXE5wp+j3zzhShx8sV8i/flInParCaORK+PXr8g89xxXRuM=
+X-Gm-Message-State: AOJu0YxeVkhkMTiL4CJTnX2pKIbMgqyxo16+ecU/SC5NaCxZlgrfLhEd
+ +/mpbWYq4wHZExI2la2TRsJPo2JMB7ERRKijtuGCoKzBNVMu1gbLX7/806cB8Co=
+X-Google-Smtp-Source: AGHT+IGxzfpc7Is8XIMk/vDb0IbU6uTaw89SmYiDYHhlZ4rm1tdamaAIUJBzXb/EBdpD9hAZjm5PWQ==
+X-Received: by 2002:a5d:55c4:0:b0:33e:854:8b24 with SMTP id
+ i4-20020a5d55c4000000b0033e08548b24mr7488915wrw.12.1709640613497; 
+ Tue, 05 Mar 2024 04:10:13 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- h9-20020a05600c350900b00412de55135dsm7789729wmq.41.2024.03.05.04.10.05
+ i10-20020a05600011ca00b0033b60bad2fcsm14828243wrx.113.2024.03.05.04.10.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Mar 2024 04:10:05 -0800 (PST)
+ Tue, 05 Mar 2024 04:10:12 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 6AB685F7B5;
- Tue,  5 Mar 2024 12:10:05 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 314165F95B;
+ Tue,  5 Mar 2024 12:10:06 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Wainer dos Santos Moschetta <wainersm@redhat.com>,
@@ -95,16 +96,17 @@ Cc: Wainer dos Santos Moschetta <wainersm@redhat.com>,
  Paolo Bonzini <pbonzini@redhat.com>, Alexandre Iooss <erdnaxe@crans.org>,
  Warner Losh <imp@bsdimp.com>, qemu-riscv@nongnu.org,
  Ilya Leoshkevich <iii@linux.ibm.com>
-Subject: [PATCH 00/29] maintainer/next for 9.0 (testing, gdbstub, plugins,
- disas)
-Date: Tue,  5 Mar 2024 12:09:36 +0000
-Message-Id: <20240305121005.3528075-1-alex.bennee@linaro.org>
+Subject: [PATCH 07/29] {linux,bsd}-user: Pass pid to gdbserver_fork()
+Date: Tue,  5 Mar 2024 12:09:43 +0000
+Message-Id: <20240305121005.3528075-8-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240305121005.3528075-1-alex.bennee@linaro.org>
+References: <20240305121005.3528075-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32b.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -127,139 +129,74 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-As I'm going to be away for most of the tree stabilisation period I'm
-trying to be proactive clearing my maintainer backlog before the
-softfreeze. With that in mind heres what is ready to go in:
+From: Ilya Leoshkevich <iii@linux.ibm.com>
 
-Testing
+The upcoming follow-fork-mode child support requires knowing the child
+pid. Pass it down.
 
-Most stuff is being directly applied as downstreams stop working (c.f.
-BSD and MacOS breakage). So all I have left is a fix for qos-tests
-that shows up when LTO is enabled.
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Signed-off-by: Ilya Leoshkevich <iii@linux.ibm.com>
+Message-Id: <20240219141628.246823-7-iii@linux.ibm.com>
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+---
+ include/gdbstub/user.h | 2 +-
+ bsd-user/main.c        | 2 +-
+ gdbstub/user.c         | 2 +-
+ linux-user/main.c      | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
 
-GDBStub
-
-These are Ilya's fork follow mode patches for gdbstub. I hope to
-include Gustavo's signal handling stuff if it is fixed this week.
-
-Plugins
-
-This introduces Pierrick's work to have thread-safe inline counters
-via the concept of a vcpu indexed scoreboard. There will be further
-work over the next cycle to enable more efficient instrumentation and
-address more of the missing pieces people have been asking for.
-
-Finally there are a few cosmetic patches to ensure the disassembly
-that plugins get don't include opcodes which plugins can get another
-way. They are the only patches that need review:
-
-  target/riscv: honour show_opcodes when disassembling
-  target/loongarch: honour show_opcodes when disassembling
-  disas/hppa: honour show_opcodes
-  disas: introduce show_opcodes
-
-Hopefully I can get the PR for this rolled later this week.
-
-Alex.
-
-Alex Bennée (5):
-  tests: bump QOS_PATH_MAX_ELEMENT_SIZE again
-  disas: introduce show_opcodes
-  disas/hppa: honour show_opcodes
-  target/loongarch: honour show_opcodes when disassembling
-  target/riscv: honour show_opcodes when disassembling
-
-Ilya Leoshkevich (12):
-  gdbstub: Support disablement in a multi-threaded process
-  {linux,bsd}-user: Introduce get_task_state()
-  {linux,bsd}-user: Update ts_tid after fork()
-  gdbstub: Introduce gdbserver_fork_start()
-  {linux,bsd}-user: Pass pid to fork_end()
-  {linux,bsd}-user: Pass pid to gdbserver_fork()
-  gdbstub: Call gdbserver_fork() both in parent and in child
-  gdbstub: Introduce gdb_handle_query_supported_user()
-  gdbstub: Introduce gdb_handle_set_thread_user()
-  gdbstub: Introduce gdb_handle_detach_user()
-  gdbstub: Implement follow-fork-mode child
-  tests/tcg: Add two follow-fork-mode tests
-
-Pierrick Bouvier (12):
-  plugins: scoreboard API
-  plugins: define qemu_plugin_u64
-  plugins: implement inline operation relative to cpu_index
-  plugins: add inline operation per vcpu
-  tests/plugin: add test plugin for inline operations
-  tests/plugin/mem: migrate to new per_vcpu API
-  tests/plugin/insn: migrate to new per_vcpu API
-  tests/plugin/bb: migrate to new per_vcpu API
-  contrib/plugins/hotblocks: migrate to new per_vcpu API
-  contrib/plugins/howvec: migrate to new per_vcpu API
-  plugins: remove non per_vcpu inline operation from API
-  plugins: cleanup codepath for previous inline operation
-
- bsd-user/bsd-file.h                           |   2 +-
- bsd-user/freebsd/os-proc.h                    |   6 +-
- bsd-user/qemu.h                               |   7 +-
- gdbstub/internals.h                           |   3 +
- include/disas/dis-asm.h                       |   8 +
- include/gdbstub/user.h                        |  10 +-
- include/qemu/plugin.h                         |   7 +
- include/qemu/qemu-plugin.h                    | 142 +++++++---
- include/user/safe-syscall.h                   |   2 +-
- linux-user/m68k/target_cpu.h                  |   2 +-
- linux-user/qemu.h                             |   5 +
- linux-user/signal-common.h                    |   2 +-
- linux-user/user-internals.h                   |   2 +-
- plugins/plugin.h                              |  17 +-
- tests/qtest/libqos/qgraph.h                   |   2 +-
- accel/tcg/plugin-gen.c                        |  69 ++++-
- bsd-user/main.c                               |   9 +-
- bsd-user/signal.c                             |  20 +-
- contrib/plugins/hotblocks.c                   |  50 ++--
- contrib/plugins/howvec.c                      |  53 ++--
- disas/disas.c                                 |   1 +
- disas/hppa.c                                  |   8 +-
- disas/riscv.c                                 |  28 +-
- gdbstub/gdbstub.c                             |  29 ++-
- gdbstub/user-target.c                         |   4 +-
- gdbstub/user.c                                | 244 +++++++++++++++++-
- linux-user/aarch64/cpu_loop.c                 |   2 +-
- linux-user/arm/cpu_loop.c                     |   4 +-
- linux-user/arm/signal.c                       |   2 +-
- linux-user/cris/cpu_loop.c                    |   2 +-
- linux-user/elfload.c                          |   2 +-
- linux-user/hppa/signal.c                      |   2 +-
- linux-user/linuxload.c                        |   2 +-
- linux-user/m68k/cpu_loop.c                    |   2 +-
- linux-user/main.c                             |   8 +-
- linux-user/mips/cpu_loop.c                    |   2 +-
- linux-user/ppc/signal.c                       |   4 +-
- linux-user/riscv/cpu_loop.c                   |   2 +-
- linux-user/signal.c                           |  30 +--
- linux-user/syscall.c                          |  32 +--
- linux-user/vm86.c                             |  18 +-
- linux-user/xtensa/signal.c                    |   2 +-
- plugins/api.c                                 | 100 +++++--
- plugins/core.c                                |  79 +++++-
- semihosting/arm-compat-semi.c                 |   8 +-
- target/loongarch/disas.c                      |  13 +-
- tests/plugin/bb.c                             |  63 ++---
- tests/plugin/inline.c                         | 186 +++++++++++++
- tests/plugin/insn.c                           | 106 ++++----
- tests/plugin/mem.c                            |  46 ++--
- tests/tcg/multiarch/follow-fork-mode.c        |  56 ++++
- plugins/qemu-plugins.symbols                  |  13 +-
- tests/plugin/meson.build                      |   2 +-
- tests/tcg/Makefile.target                     |   2 +-
- tests/tcg/multiarch/Makefile.target           |  17 +-
- .../gdbstub/follow-fork-mode-child.py         |  40 +++
- .../gdbstub/follow-fork-mode-parent.py        |  16 ++
- 57 files changed, 1257 insertions(+), 338 deletions(-)
- create mode 100644 tests/plugin/inline.c
- create mode 100644 tests/tcg/multiarch/follow-fork-mode.c
- create mode 100644 tests/tcg/multiarch/gdbstub/follow-fork-mode-child.py
- create mode 100644 tests/tcg/multiarch/gdbstub/follow-fork-mode-parent.py
-
+diff --git a/include/gdbstub/user.h b/include/gdbstub/user.h
+index e33f8d9a9a6..3f9f45946e0 100644
+--- a/include/gdbstub/user.h
++++ b/include/gdbstub/user.h
+@@ -54,7 +54,7 @@ void gdbserver_fork_start(void);
+  * gdbserver_fork() - disable gdb stub for child processes.
+  * @cs: CPU
+  */
+-void gdbserver_fork(CPUState *cs);
++void gdbserver_fork(CPUState *cs, pid_t pid);
+ 
+ /**
+  * gdb_syscall_entry() - inform gdb of syscall entry and yield control to it
+diff --git a/bsd-user/main.c b/bsd-user/main.c
+index fca9b302043..0dbd1cf8801 100644
+--- a/bsd-user/main.c
++++ b/bsd-user/main.c
+@@ -138,7 +138,7 @@ void fork_end(pid_t pid)
+          */
+         qemu_init_cpu_list();
+         get_task_state(thread_cpu)->ts_tid = qemu_get_thread_id();
+-        gdbserver_fork(thread_cpu);
++        gdbserver_fork(thread_cpu, pid);
+     } else {
+         mmap_fork_end(child);
+         cpu_list_unlock();
+diff --git a/gdbstub/user.c b/gdbstub/user.c
+index 536fb43b03e..c61e1a0d1f6 100644
+--- a/gdbstub/user.c
++++ b/gdbstub/user.c
+@@ -375,7 +375,7 @@ static void disable_gdbstub(CPUState *thread_cpu)
+ }
+ 
+ /* Disable gdb stub for child processes.  */
+-void gdbserver_fork(CPUState *cpu)
++void gdbserver_fork(CPUState *cpu, pid_t pid)
+ {
+     if (!gdbserver_state.init || gdbserver_user_state.fd < 0) {
+         return;
+diff --git a/linux-user/main.c b/linux-user/main.c
+index cab95f5b0aa..70314e0ab6a 100644
+--- a/linux-user/main.c
++++ b/linux-user/main.c
+@@ -165,7 +165,7 @@ void fork_end(pid_t pid)
+         }
+         qemu_init_cpu_list();
+         get_task_state(thread_cpu)->ts_tid = qemu_get_thread_id();
+-        gdbserver_fork(thread_cpu);
++        gdbserver_fork(thread_cpu, pid);
+     } else {
+         cpu_list_unlock();
+     }
 -- 
 2.39.2
 
