@@ -4,68 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6469C54E49
-	for <qemu-riscv@archiver.kernel.org>; Wed,  6 Mar 2024 04:48:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65EA1C5475B
+	for <qemu-riscv@archiver.kernel.org>; Wed,  6 Mar 2024 04:54:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rhjCx-0008Px-Dg; Tue, 05 Mar 2024 23:48:47 -0500
+	id 1rhjHt-0001k9-GN; Tue, 05 Mar 2024 23:53:53 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rhjCv-0008Pj-Q5; Tue, 05 Mar 2024 23:48:45 -0500
+ id 1rhjHp-0001jS-MZ; Tue, 05 Mar 2024 23:53:50 -0500
 Received: from mail-ua1-x92c.google.com ([2607:f8b0:4864:20::92c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rhjCp-0000of-21; Tue, 05 Mar 2024 23:48:45 -0500
+ id 1rhjHo-0001dt-5p; Tue, 05 Mar 2024 23:53:49 -0500
 Received: by mail-ua1-x92c.google.com with SMTP id
- a1e0cc1a2514c-7d698a8d93cso3747716241.3; 
- Tue, 05 Mar 2024 20:48:38 -0800 (PST)
+ a1e0cc1a2514c-7db1a2c1f96so2603579241.0; 
+ Tue, 05 Mar 2024 20:53:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1709700517; x=1710305317; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1709700827; x=1710305627; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IzyAnx1YN+A682ycpv4XsKOHK1WzO+bUua81MOBC7Os=;
- b=QzVL5Lu62XULlrcepSNJ+1AimwmWaY+G2fBHQOMTs6a2fs+mc0UcoZIoA2ucgHTVhi
- q9KJGfJ9eZ0no8YCvV17GX2AeIkGjKX6rQDCY1Rn2lvcCeukygSptfINtPGMoUT/HWEv
- 3Vj5mWuhictDcd9/wR95mxP0scbcZCCvQ6Quhf8JI6JyUbAPmFDB2jnMScktlqjz0h01
- xkO025p38V7Kzbckx38c1kUzyjB+sJnAbwTJK5/NdbNZSwxeQgY8z0w3wcsxb2Mgt0ZE
- 5qpSOUaZssoHC0baAaKJGhw0kTr7C2SpuIkZZjWm675cs+IphaZJaEbLYzsrHpb+kPrW
- 37ww==
+ bh=KcU6HCaWlQpWFFmsyHT+rfUwZ7Ev/Z5VjFKpsFm0RlY=;
+ b=TNn8Lo2jUVBqBG2L9yZCi2+2DQvI+h92WIG2aPXE2DqOm2c8nwZs9TfKnX9nxTdzAx
+ +9Omt89i0lNTbEGJ3S0HQkjhMvey64+fJbeAB3copgCiF6FtCYd7vfiUEQCSYDgHFCQG
+ vdT0g/yKZ96XnglQGvPx2n1sxBILk7CwVWX/iiUdxcUwIMnfUBVDmMeanEoC/btDZ/nX
+ WLkhU3ufXgb39jZr9kQr+4gGRcxxiPk4j8K2mPMXzFo2GNLu/1jUk4lEU9eRG6423kil
+ jLsIhbM1FnvlwWc+Wj/Y2GVY8KctEgAEOBPieSXGYa4tf60pwK6mq9nOHLiUiG1EFNO3
+ neog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709700517; x=1710305317;
+ d=1e100.net; s=20230601; t=1709700827; x=1710305627;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=IzyAnx1YN+A682ycpv4XsKOHK1WzO+bUua81MOBC7Os=;
- b=UuYmwa8U+uN7BNJG/mAjsW0rJxUt6LzgWvRpB+kgmM/gbG+jOHvE2r6JCWZJF2HqC5
- XG1fB29Hefu4cy9P48qpbHSU5HlwrorfODKi8GFzLmwj5HAITF5zIsTxH3MzMXG7r1BF
- y9azkSzcVdEgZYEv/egRkgOQ7uXoRKK8DtgXSDK4wBCW7tBZuzI857h+npWTFUEfQoGB
- +nLGvgsHA0g6wEDQqW45DH77hWmh6JtpCD6X/ise4H3GMNtwo0MoWRpSFWYxiAqBNLbM
- VsZnhfdJK8pQjyd1v+JIWsToZiDqWHvFX3/69oqHcUrNV38P+w7vdqluZFCNJ7vaKy74
- y6Ug==
+ bh=KcU6HCaWlQpWFFmsyHT+rfUwZ7Ev/Z5VjFKpsFm0RlY=;
+ b=bkkgCjwxS46O7Cj7cTAJ2FcQtMU2O4f3L8WFBGdQu/5hv1OjHEjOwcjIrlAtQYxcAi
+ kcO4sOOjd/prQSCypwaoxf9ZxuclPn+1wjxUlAm/nCfgE4FZv2yKsfS9Tm2MuqidUz6B
+ QAwUyVYxVAYnprWPd++qnYk6nOpl844v6fCffLmG3eBjynbno9dCMUHEBNFfOgkLCbHY
+ TIUAtPW1V0MHoFhYZk6awdZofFbu1sYIH42ApKzBU96hIyjUDJc70zabJrr2P5Q9+1ai
+ w6cOhk/wk3UmSLvEbNbiyVZCg/hJPLeafQGbsFxdW5mmILDCrq0EOsb2WQkx9aSgCiU4
+ PZSw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVL2/99EwYF/l/ooFF7avy86gDe2RBdMO3wLuUyj3kkVomrL3Jsj8p9CoZNCI7BVMB7Y41PigMIlhCleo71qFDIYL4GCbo=
-X-Gm-Message-State: AOJu0YywvfGE3Ds5durNMqrgDzwqBYgULQxorAI9mnvPOWJyoSSXfZlr
- XlV8NaFeOVJD04rxLIbq3aRxIiD7lXHQneBfKfb3IkStG2hgVccC4GrJVzBafycugBKrI8TG6q1
- Ak+cyhR5W2dej7OtedEGGFOaDTeQ=
-X-Google-Smtp-Source: AGHT+IEBYMWz78ZOcCO2F0pLHZIQQYmgBu2HFNMl/fKjdrVnrPKzWs5XgutWqve1HJjkCW7MppfjKG7vHYNJNsUeN/4=
-X-Received: by 2002:a05:6102:38d2:b0:472:8d0d:1700 with SMTP id
- k18-20020a05610238d200b004728d0d1700mr4658562vst.2.1709700517571; Tue, 05 Mar
- 2024 20:48:37 -0800 (PST)
+ AJvYcCW5Yq2U67LIunox4iMW4ZP94Uu+RwqLGttcykpVtRgyRXJJFJhzyWsKIMb0kkYz3wCFsR+Nor9wXDfNvPfp1NN6uF4L8us=
+X-Gm-Message-State: AOJu0YxeOD0k3ErLwoNJDKcesbQi0UXcoGX+piMPSytdl9O0yQgNcJGV
+ mMvjyXjZ1vm/pkr4U5Ox+oTiWNd0wMQQhaOZh8sFJorKDMbQzd8692X8qhmk3A5/cwkAzl6TanX
+ k7yM/ArFY8YdScKKgehCc4N/yaWzU2EyEUGI=
+X-Google-Smtp-Source: AGHT+IFERioH7xHBrk4s4kflLEiaI0Lrc646UPSGBE9jAEJoKie4n56WQ3SabvgWllhOKMBwmeRBItnrQMtBVRRdAnY=
+X-Received: by 2002:a1f:eec2:0:b0:4ca:4a07:9006 with SMTP id
+ m185-20020a1feec2000000b004ca4a079006mr3339138vkh.0.1709700826762; Tue, 05
+ Mar 2024 20:53:46 -0800 (PST)
 MIME-Version: 1.0
-References: <20240301144053.265964-1-dbarboza@ventanamicro.com>
-In-Reply-To: <20240301144053.265964-1-dbarboza@ventanamicro.com>
+References: <20240202113919.18236-1-vadim.shakirov@syntacore.com>
+In-Reply-To: <20240202113919.18236-1-vadim.shakirov@syntacore.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 6 Mar 2024 14:48:11 +1000
-Message-ID: <CAKmqyKNGTChTAAnQ90LEw0pkxMtyZ4vQ27-Z4f4-kS8ndq7HMQ@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: move ratified/frozen exts to
- non-experimental
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com, ajones@ventanamicro.com
+Date: Wed, 6 Mar 2024 14:53:20 +1000
+Message-ID: <CAKmqyKNTmO7v=TKErGft9nkj+EDOWuzYmxXG35hh+BQjar=c3A@mail.gmail.com>
+Subject: Re: [PATCH v4] target/riscv: mcountinhibit, mcounteren, scounteren,
+ hcounteren is 32-bit
+To: Vadim Shakirov <vadim.shakirov@syntacore.com>
+Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 Received-SPF: pass client-ip=2607:f8b0:4864:20::92c;
@@ -93,91 +95,101 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sat, Mar 2, 2024 at 12:41=E2=80=AFAM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+On Fri, Feb 2, 2024 at 9:42=E2=80=AFPM Vadim Shakirov
+<vadim.shakirov@syntacore.com> wrote:
 >
-> smaia and ssaia were ratified in August 25th 2023 [1].
+> mcountinhibit, mcounteren, scounteren and hcounteren must always be 32-bi=
+t
+> by privileged spec
 >
-> zvfh and zvfhmin were ratified in August 2nd 2023 [2].
->
-> zfbfmin and zvfbf(min|wma) are frozen and moved to public review since
-> Dec 16th 2023 [3].
->
-> zaamo and zalrsc are both marked as "Frozen" since January 24th 2024
-> [4].
->
-> [1] https://jira.riscv.org/browse/RVS-438
-> [2] https://jira.riscv.org/browse/RVS-871
-> [3] https://jira.riscv.org/browse/RVS-704
-> [4] https://jira.riscv.org/browse/RVS-1995
->
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Signed-off-by: Vadim Shakirov <vadim.shakirov@syntacore.com>
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/cpu.c | 22 +++++++++-------------
->  1 file changed, 9 insertions(+), 13 deletions(-)
+>  target/riscv/cpu.h     |  8 ++++----
+>  target/riscv/machine.c | 16 ++++++++--------
+>  2 files changed, 12 insertions(+), 12 deletions(-)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index fd0c7efdda..f5d30510ef 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -1463,17 +1463,26 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions=
-[] =3D {
->      MULTI_EXT_CFG_BOOL("zihintntl", ext_zihintntl, true),
->      MULTI_EXT_CFG_BOOL("zihintpause", ext_zihintpause, true),
->      MULTI_EXT_CFG_BOOL("zacas", ext_zacas, false),
-> +    MULTI_EXT_CFG_BOOL("zaamo", ext_zaamo, false),
-> +    MULTI_EXT_CFG_BOOL("zalrsc", ext_zalrsc, false),
->      MULTI_EXT_CFG_BOOL("zawrs", ext_zawrs, true),
->      MULTI_EXT_CFG_BOOL("zfa", ext_zfa, true),
-> +    MULTI_EXT_CFG_BOOL("zfbfmin", ext_zfbfmin, false),
->      MULTI_EXT_CFG_BOOL("zfh", ext_zfh, false),
->      MULTI_EXT_CFG_BOOL("zfhmin", ext_zfhmin, false),
->      MULTI_EXT_CFG_BOOL("zve32f", ext_zve32f, false),
->      MULTI_EXT_CFG_BOOL("zve64f", ext_zve64f, false),
->      MULTI_EXT_CFG_BOOL("zve64d", ext_zve64d, false),
-> +    MULTI_EXT_CFG_BOOL("zvfbfmin", ext_zvfbfmin, false),
-> +    MULTI_EXT_CFG_BOOL("zvfbfwma", ext_zvfbfwma, false),
-> +    MULTI_EXT_CFG_BOOL("zvfh", ext_zvfh, false),
-> +    MULTI_EXT_CFG_BOOL("zvfhmin", ext_zvfhmin, false),
->      MULTI_EXT_CFG_BOOL("sstc", ext_sstc, true),
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 5138187727..cf1867a6e2 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -271,7 +271,7 @@ struct CPUArchState {
+>      target_ulong hstatus;
+>      target_ulong hedeleg;
+>      uint64_t hideleg;
+> -    target_ulong hcounteren;
+> +    uint32_t hcounteren;
+>      target_ulong htval;
+>      target_ulong htinst;
+>      target_ulong hgatp;
+> @@ -334,10 +334,10 @@ struct CPUArchState {
+>       */
+>      bool two_stage_indirect_lookup;
 >
-> +    MULTI_EXT_CFG_BOOL("smaia", ext_smaia, false),
->      MULTI_EXT_CFG_BOOL("smepmp", ext_smepmp, false),
->      MULTI_EXT_CFG_BOOL("smstateen", ext_smstateen, false),
-> +    MULTI_EXT_CFG_BOOL("ssaia", ext_ssaia, false),
->      MULTI_EXT_CFG_BOOL("svade", ext_svade, false),
->      MULTI_EXT_CFG_BOOL("svadu", ext_svadu, true),
->      MULTI_EXT_CFG_BOOL("svinval", ext_svinval, false),
-> @@ -1561,19 +1570,6 @@ const RISCVCPUMultiExtConfig riscv_cpu_vendor_exts=
-[] =3D {
+> -    target_ulong scounteren;
+> -    target_ulong mcounteren;
+> +    uint32_t scounteren;
+> +    uint32_t mcounteren;
 >
->  /* These are experimental so mark with 'x-' */
->  const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[] =3D {
-> -    MULTI_EXT_CFG_BOOL("x-smaia", ext_smaia, false),
-> -    MULTI_EXT_CFG_BOOL("x-ssaia", ext_ssaia, false),
-> -
-> -    MULTI_EXT_CFG_BOOL("x-zaamo", ext_zaamo, false),
-> -    MULTI_EXT_CFG_BOOL("x-zalrsc", ext_zalrsc, false),
-> -
-> -    MULTI_EXT_CFG_BOOL("x-zvfh", ext_zvfh, false),
-> -    MULTI_EXT_CFG_BOOL("x-zvfhmin", ext_zvfhmin, false),
-> -
-> -    MULTI_EXT_CFG_BOOL("x-zfbfmin", ext_zfbfmin, false),
-> -    MULTI_EXT_CFG_BOOL("x-zvfbfmin", ext_zvfbfmin, false),
-> -    MULTI_EXT_CFG_BOOL("x-zvfbfwma", ext_zvfbfwma, false),
-> -
->      DEFINE_PROP_END_OF_LIST(),
->  };
+> -    target_ulong mcountinhibit;
+> +    uint32_t mcountinhibit;
 >
+>      /* PMU counter state */
+>      PMUCTRState pmu_ctrs[RV_MAX_MHPMCOUNTERS];
+> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+> index 72fe2374dc..a4d47ec17e 100644
+> --- a/target/riscv/machine.c
+> +++ b/target/riscv/machine.c
+> @@ -79,14 +79,14 @@ static bool hyper_needed(void *opaque)
+>
+>  static const VMStateDescription vmstate_hyper =3D {
+>      .name =3D "cpu/hyper",
+> -    .version_id =3D 3,
+> -    .minimum_version_id =3D 3,
+> +    .version_id =3D 4,
+> +    .minimum_version_id =3D 4,
+>      .needed =3D hyper_needed,
+>      .fields =3D (const VMStateField[]) {
+>          VMSTATE_UINTTL(env.hstatus, RISCVCPU),
+>          VMSTATE_UINTTL(env.hedeleg, RISCVCPU),
+>          VMSTATE_UINT64(env.hideleg, RISCVCPU),
+> -        VMSTATE_UINTTL(env.hcounteren, RISCVCPU),
+> +        VMSTATE_UINT32(env.hcounteren, RISCVCPU),
+>          VMSTATE_UINTTL(env.htval, RISCVCPU),
+>          VMSTATE_UINTTL(env.htinst, RISCVCPU),
+>          VMSTATE_UINTTL(env.hgatp, RISCVCPU),
+> @@ -354,8 +354,8 @@ static const VMStateDescription vmstate_jvt =3D {
+>
+>  const VMStateDescription vmstate_riscv_cpu =3D {
+>      .name =3D "cpu",
+> -    .version_id =3D 9,
+> -    .minimum_version_id =3D 9,
+> +    .version_id =3D 10,
+> +    .minimum_version_id =3D 10,
+>      .post_load =3D riscv_cpu_post_load,
+>      .fields =3D (const VMStateField[]) {
+>          VMSTATE_UINTTL_ARRAY(env.gpr, RISCVCPU, 32),
+> @@ -398,9 +398,9 @@ const VMStateDescription vmstate_riscv_cpu =3D {
+>          VMSTATE_UINTTL(env.mtval, RISCVCPU),
+>          VMSTATE_UINTTL(env.miselect, RISCVCPU),
+>          VMSTATE_UINTTL(env.siselect, RISCVCPU),
+> -        VMSTATE_UINTTL(env.scounteren, RISCVCPU),
+> -        VMSTATE_UINTTL(env.mcounteren, RISCVCPU),
+> -        VMSTATE_UINTTL(env.mcountinhibit, RISCVCPU),
+> +        VMSTATE_UINT32(env.scounteren, RISCVCPU),
+> +        VMSTATE_UINT32(env.mcounteren, RISCVCPU),
+> +        VMSTATE_UINT32(env.mcountinhibit, RISCVCPU),
+>          VMSTATE_STRUCT_ARRAY(env.pmu_ctrs, RISCVCPU, RV_MAX_MHPMCOUNTERS=
+, 0,
+>                               vmstate_pmu_ctr_state, PMUCTRState),
+>          VMSTATE_UINTTL_ARRAY(env.mhpmevent_val, RISCVCPU, RV_MAX_MHPMEVE=
+NTS),
 > --
-> 2.43.2
+> 2.34.1
 >
 >
 
