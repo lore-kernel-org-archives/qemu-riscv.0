@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7545CC54E41
-	for <qemu-riscv@archiver.kernel.org>; Wed,  6 Mar 2024 13:06:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA590C5475B
+	for <qemu-riscv@archiver.kernel.org>; Wed,  6 Mar 2024 13:06:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rhqxm-0005Dz-9A; Wed, 06 Mar 2024 08:05:38 -0500
+	id 1rhqy2-0005NW-0k; Wed, 06 Mar 2024 08:05:54 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rhqxg-00058s-Ii
- for qemu-riscv@nongnu.org; Wed, 06 Mar 2024 08:05:33 -0500
-Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
+ id 1rhqy0-0005Ml-FL
+ for qemu-riscv@nongnu.org; Wed, 06 Mar 2024 08:05:52 -0500
+Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rhqxe-000179-Er
- for qemu-riscv@nongnu.org; Wed, 06 Mar 2024 08:05:32 -0500
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-1dc5d0162bcso58977755ad.0
- for <qemu-riscv@nongnu.org>; Wed, 06 Mar 2024 05:05:25 -0800 (PST)
+ id 1rhqxx-0001EG-14
+ for qemu-riscv@nongnu.org; Wed, 06 Mar 2024 08:05:52 -0500
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-1dd10ae77d8so27647645ad.0
+ for <qemu-riscv@nongnu.org>; Wed, 06 Mar 2024 05:05:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1709730325; x=1710335125; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1709730347; x=1710335147; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=rFD4UDPrAnBcU7/XlDtbguDyQsDWQshU5jozKO2xm2Q=;
- b=lcF8NhG30YR+X4Von++kbJTrupxCVhWQEq2ib3nZlNN4WwW1iOIbyU1FRzkYFj1noc
- qbC3cH8UZD8MIxdcF2+kfATqb7yCJrLAJkFzz4zmYRgOU/mVNLV6mdudwdgaohzuUeIB
- 2zcpCe+9Gk2cmpPVu/7MhIYnf/m0+tcyysOqcaaxLynL7wJNERTHIR77bTkf/uISBd3D
- b/SDLwzENKcvV56pmUpoYscZmh1vIwwfimwdO0vbWOhzM5Xrvsk4I0lH+LBPDAkRL+7v
- mCPXqcOxfqgXQcH+mGd6CS8zM7z7pY4jdqxFrSpU43/gTuihQYxneydhQ3aTt44f4iPS
- vtlA==
+ bh=35epdlKFgsUnoD10TbsRqMnZ4hleOgbRmnX4nUudU/E=;
+ b=hNMNSGUTJPdF257WXi6zOGDsmN7uKQWdV1S22lvAdvnCinwg7k7VXZB+kkuZI2nH3X
+ 2hCmEihUwFe6OoncgGwUG52uxtBqx1s51xqaGQlRoqQfkQUfB8X+6QStpw5uuuttySM+
+ 8cWgKaIqipbbc055FYUjw3LwhPAHlj7z7MDnrRKfTDeIdsZuD4Um2dEdDDtza2UESqKL
+ N4ydQ7ufDFkfVzoQxPZqmqP/fJsRdRTND3yiUxC8dPeFbhAAPcBN8LtiXYo+SxEsInAL
+ VybciFA8VC3mgRyGaOqOtRoKujQvci9vjBSfx2eIbsXFlitc8CFxQUu9XbzPsrHlzIOp
+ RsSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709730325; x=1710335125;
+ d=1e100.net; s=20230601; t=1709730347; x=1710335147;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=rFD4UDPrAnBcU7/XlDtbguDyQsDWQshU5jozKO2xm2Q=;
- b=GQTZlrUnsTaKujspAn/JgeMRMGW67HJspU9wOwfUff7gS9Aef4lATozqTg39ApwWwm
- tKj+D0oAVYXMaYm84tRay1/0HkeHjvTG6msNkc8CqQw+4R6ecPkUNCl338+uF3pddKVa
- o9MuaC62wxdzIWs54kk6y0ArDvGQ4yEd3BRkTz9po2lkdntzNaDmOyNBctCfb3HGrOQ9
- J7ml/pDydQqE/VYz/jEhDfznUgaQ2NeXm8zJlpRzGZdSx+EtuCruS+3+RY0JfoXzdca6
- hp+mUN5IDCWdHGQBA+ag6SGlPsXY2V5R9lzE+IZBCRm2V7LtmtHan65ZZKKh2ido5csp
- qRTA==
+ bh=35epdlKFgsUnoD10TbsRqMnZ4hleOgbRmnX4nUudU/E=;
+ b=XQ0Xmfdv0amBDPcPHb25VMnY4qGdwCJAOhsA11u9UJDrQGIoFEniIxS8J+yYQKwZs+
+ 6Haam0Vj5vGSa1S/mQuWmfHZOdup23StbRgeA4G42339kYnGdtzpRk9yo02uUIhIvM9o
+ xIgfsZzB5Q+T9XJ5Ld3pX1lWxVd+ksXjGtfO+ncG71D2KJb9+GAv2owLffz3CGG9pXEJ
+ zH0fNIRswovH5nwDIyLBx19/K3trhOiEQ5mGHF536Q7zO4wxgSKbnzWKL5eu5FuPoRnn
+ EDOqDXoPSIPZQ3LLhIne93gv6LQO2HwCId+F9+IMcpFg+n8CjiyIWW++tYCTU9C7/8XM
+ u1Ig==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVB4gVD++VDwTcObPyEqFLDJFQripSEuNAkFWiwynWVDOO/HGbwV6Oy1fYSqKtANNgNHC2sTqkNH22mv+rd3kBBkQniSaM=
-X-Gm-Message-State: AOJu0YxKy2rFHPF/k8bmqZvq4gJ8G3OxrFWpwuEDAOB9ddnT+yLeSfkR
- MFtpwDPD6e6va7BImkyebGbztEAuoXd2AieZpP9s6PyXRqSJ1jLb6XXkpr2gAf8=
-X-Google-Smtp-Source: AGHT+IG3gDo0UnS3XERZ/SJ64O76OgxDbohObTtd1ULlM9DeDpXMe7Z238Nge0vgzvn4AZcvO7lkAA==
-X-Received: by 2002:a17:902:e807:b0:1db:ca53:403 with SMTP id
- u7-20020a170902e80700b001dbca530403mr5901332plg.26.1709730324779; 
- Wed, 06 Mar 2024 05:05:24 -0800 (PST)
+ AJvYcCVTS79xHWsU39HQXZv+qibK+XKU4qJUKUxQ3bUBldkLio2L9UvyiLltnYYKJiKAScX90oX4CXl3arn2JlZ+ptE5k+ndXy0=
+X-Gm-Message-State: AOJu0YzHWcwsxiZppPBENRIA9rZsNWWsv8ZZrBm0V1hECa3lsL+vN/Bs
+ M0opNI3c8aM/zrxLDOBbTqm6P/AuNm2sQVYMkbXGjn7rTfK7Za7U2HtoMD8zXiE=
+X-Google-Smtp-Source: AGHT+IH14s+S/6TL2M2cc57FagjbKBI2DXtWtOH8OhdAMn6jgQlpz1z/DhQ5++pSy/kUh1zfUdirjA==
+X-Received: by 2002:a17:903:238e:b0:1dc:728d:b1de with SMTP id
+ v14-20020a170903238e00b001dc728db1demr5587523plh.56.1709730347595; 
+ Wed, 06 Mar 2024 05:05:47 -0800 (PST)
 Received: from [192.168.68.110] ([177.94.15.159])
  by smtp.gmail.com with ESMTPSA id
- ix19-20020a170902f81300b001db45b65e13sm12540439plb.279.2024.03.06.05.05.20
+ ix19-20020a170902f81300b001db45b65e13sm12540439plb.279.2024.03.06.05.05.42
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 06 Mar 2024 05:05:24 -0800 (PST)
-Message-ID: <995ee5be-882f-4ec5-90f3-2725778be078@ventanamicro.com>
-Date: Wed, 6 Mar 2024 10:05:17 -0300
+ Wed, 06 Mar 2024 05:05:47 -0800 (PST)
+Message-ID: <bf7da333-d777-4cb6-96b1-368410ba733c@ventanamicro.com>
+Date: Wed, 6 Mar 2024 10:05:42 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] target: Simplify type checks for CpuModelInfo member
- @props
+Subject: Re: [PATCH 3/4] target: Improve error reporting for CpuModelInfo
+ member @props
 Content-Language: en-US
 To: Markus Armbruster <armbru@redhat.com>, qemu-devel@nongnu.org
 Cc: peter.maydell@linaro.org, pbonzini@redhat.com, gaosong@loongson.cn,
@@ -75,20 +75,20 @@ Cc: peter.maydell@linaro.org, pbonzini@redhat.com, gaosong@loongson.cn,
  thuth@redhat.com, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org
 References: <20240305145919.2186971-1-armbru@redhat.com>
- <20240305145919.2186971-2-armbru@redhat.com>
+ <20240305145919.2186971-4-armbru@redhat.com>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240305145919.2186971-2-armbru@redhat.com>
+In-Reply-To: <20240305145919.2186971-4-armbru@redhat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x635.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x629.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,232 +107,219 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 On 3/5/24 11:59, Markus Armbruster wrote:
-> CpuModelInfo member @props is semantically a mapping from name to
-> value, and syntactically a JSON object on the wire.  This translates
-> to QDict in C.  Since the QAPI schema language lacks the means to
-> express 'object', we use 'any' instead.  This is QObject in C.
-> Commands taking a CpuModelInfo argument need to check the QObject is a
-> QDict.
+> query-cpu-model-comparison, query-cpu-model-baseline, and
+> query-cpu-model-expansion take CpuModelInfo arguments.  Errors in
+> @props members of these arguments are reported for 'props', without
+> further context.  For instance, s390x rejects
 > 
-> For arm, riscv, and s390x, the code checks right before passing the
-> QObject to visit_start_struct().  visit_start_struct() then checks
-> again.
+>      {"execute": "query-cpu-model-comparison", "arguments": {"modela": {"name": "z13", "props": {}}, "modelb": {"name": "z14", "props": []}}}
 > 
-> Delete the first check.
+> with
 > 
-> The error message for @props that are not an object changes slightly
-> to the the message we get for this kind of type error in other
-> contexts.  Minor improvement.
+>      {"error": {"class": "GenericError", "desc": "Invalid parameter type for 'props', expected: object"}}
 > 
-> Additionally, error messages about members of @props now refer to
-> 'props.prop-name' instead of just 'prop-name'.  Another minor
-> improvement.
+> This is unusual; the common QAPI unmarshaling machinery would complain
+> about 'modelb.props'.  Our hand-written code to visit the @props
+> member neglects to provide the context.
 > 
-> Both changes are visible in tests/qtest/arm-cpu-features.c.
+> Tweak it so it provides it.  The command above now fails with
+> 
+>      {"error": {"class": "GenericError", "desc": "Invalid parameter type for 'modelb.props', expected: dict"}}
 > 
 > Signed-off-by: Markus Armbruster <armbru@redhat.com>
 > ---
+
 
 For RISC-V changes:
 
 Acked-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
->   target/arm/arm-qmp-cmds.c        | 15 ++++-----------
->   target/riscv/riscv-qmp-cmds.c    | 19 +++++--------------
->   target/s390x/cpu_models_sysemu.c | 15 ++++-----------
->   tests/qtest/arm-cpu-features.c   | 12 ++++++------
->   4 files changed, 19 insertions(+), 42 deletions(-)
+>   target/arm/arm-qmp-cmds.c        |  2 +-
+>   target/i386/cpu-sysemu.c         | 11 ++++++-----
+>   target/riscv/riscv-qmp-cmds.c    |  6 ++++--
+>   target/s390x/cpu_models_sysemu.c | 17 ++++++++++-------
+>   tests/qtest/arm-cpu-features.c   |  5 +++--
+>   5 files changed, 24 insertions(+), 17 deletions(-)
 > 
 > diff --git a/target/arm/arm-qmp-cmds.c b/target/arm/arm-qmp-cmds.c
-> index 2250cd7ddf..0167759730 100644
+> index 0167759730..0efbee8af8 100644
 > --- a/target/arm/arm-qmp-cmds.c
 > +++ b/target/arm/arm-qmp-cmds.c
-> @@ -104,7 +104,7 @@ CpuModelExpansionInfo *qmp_query_cpu_model_expansion(CpuModelExpansionType type,
->                                                        Error **errp)
->   {
->       CpuModelExpansionInfo *expansion_info;
-> -    const QDict *qdict_in = NULL;
-> +    const QDict *qdict_in;
->       QDict *qdict_out;
->       ObjectClass *oc;
->       Object *obj;
-> @@ -151,27 +151,20 @@ CpuModelExpansionInfo *qmp_query_cpu_model_expansion(CpuModelExpansionType type,
->           }
->       }
->   
-> -    if (model->props) {
-> -        qdict_in = qobject_to(QDict, model->props);
-> -        if (!qdict_in) {
-> -            error_setg(errp, QERR_INVALID_PARAMETER_TYPE, "props", "dict");
-> -            return NULL;
-> -        }
-> -    }
-> -
->       obj = object_new(object_class_get_name(oc));
->   
-> -    if (qdict_in) {
-> +    if (model->props) {
->           Visitor *visitor;
+> @@ -158,7 +158,7 @@ CpuModelExpansionInfo *qmp_query_cpu_model_expansion(CpuModelExpansionType type,
 >           Error *err = NULL;
 >   
 >           visitor = qobject_input_visitor_new(model->props);
-> -        if (!visit_start_struct(visitor, NULL, NULL, 0, errp)) {
-> +        if (!visit_start_struct(visitor, "props", NULL, 0, errp)) {
+> -        if (!visit_start_struct(visitor, "props", NULL, 0, errp)) {
+> +        if (!visit_start_struct(visitor, "model.props", NULL, 0, errp)) {
 >               visit_free(visitor);
 >               object_unref(obj);
 >               return NULL;
->           }
+> diff --git a/target/i386/cpu-sysemu.c b/target/i386/cpu-sysemu.c
+> index df91f97827..3f9093d285 100644
+> --- a/target/i386/cpu-sysemu.c
+> +++ b/target/i386/cpu-sysemu.c
+> @@ -130,14 +130,15 @@ static void x86_cpu_to_dict_full(X86CPU *cpu, QDict *props)
+>       }
+>   }
 >   
-> +        qdict_in = qobject_to(QDict, model->props);
->           i = 0;
->           while ((name = cpu_model_advertised_features[i++]) != NULL) {
->               if (qdict_get(qdict_in, name)) {
+> -static void object_apply_props(Object *obj, QObject *props, Error **errp)
+> +static void object_apply_props(Object *obj, QObject *props,
+> +                               const char *props_arg_name, Error **errp)
+>   {
+>       Visitor *visitor;
+>       QDict *qdict;
+>       const QDictEntry *prop;
+>   
+>       visitor = qobject_input_visitor_new(props);
+> -    if (!visit_start_struct(visitor, "props", NULL, 0, errp)) {
+> +    if (!visit_start_struct(visitor, props_arg_name, NULL, 0, errp)) {
+>           visit_free(visitor);
+>           return;
+>       }
+> @@ -158,7 +159,7 @@ out:
+>   
+>   /* Create X86CPU object according to model+props specification */
+>   static X86CPU *x86_cpu_from_model(const char *model, QObject *props,
+> -                                  Error **errp)
+> +                                  const char *props_arg_name, Error **errp)
+>   {
+>       X86CPU *xc = NULL;
+>       X86CPUClass *xcc;
+> @@ -172,7 +173,7 @@ static X86CPU *x86_cpu_from_model(const char *model, QObject *props,
+>   
+>       xc = X86_CPU(object_new_with_class(OBJECT_CLASS(xcc)));
+>       if (props) {
+> -        object_apply_props(OBJECT(xc), props, &err);
+> +        object_apply_props(OBJECT(xc), props, props_arg_name, &err);
+>           if (err) {
+>               goto out;
+>           }
+> @@ -203,7 +204,7 @@ qmp_query_cpu_model_expansion(CpuModelExpansionType type,
+>       QDict *props = NULL;
+>       const char *base_name;
+>   
+> -    xc = x86_cpu_from_model(model->name, model->props, &err);
+> +    xc = x86_cpu_from_model(model->name, model->props, "model.props", &err);
+>       if (err) {
+>           goto out;
+>       }
 > diff --git a/target/riscv/riscv-qmp-cmds.c b/target/riscv/riscv-qmp-cmds.c
-> index c48b9cfa67..69dde0c3e7 100644
+> index 69dde0c3e7..ee7465297d 100644
 > --- a/target/riscv/riscv-qmp-cmds.c
 > +++ b/target/riscv/riscv-qmp-cmds.c
-> @@ -129,18 +129,19 @@ static void riscv_obj_add_profiles_qdict(Object *obj, QDict *qdict_out)
+> @@ -129,6 +129,7 @@ static void riscv_obj_add_profiles_qdict(Object *obj, QDict *qdict_out)
 >   }
 >   
 >   static void riscv_cpuobj_validate_qdict_in(Object *obj, QObject *props,
-> -                                           const QDict *qdict_in,
+> +                                           const char *props_arg_name,
 >                                              Error **errp)
 >   {
-> +    const QDict *qdict_in;
->       const QDictEntry *qe;
->       Visitor *visitor;
+>       const QDict *qdict_in;
+> @@ -137,7 +138,7 @@ static void riscv_cpuobj_validate_qdict_in(Object *obj, QObject *props,
 >       Error *local_err = NULL;
 >   
 >       visitor = qobject_input_visitor_new(props);
-> -    if (!visit_start_struct(visitor, NULL, NULL, 0, &local_err)) {
-> +    if (!visit_start_struct(visitor, "props", NULL, 0, &local_err)) {
+> -    if (!visit_start_struct(visitor, "props", NULL, 0, &local_err)) {
+> +    if (!visit_start_struct(visitor, props_arg_name, NULL, 0, &local_err)) {
 >           goto err;
 >       }
 >   
-> +    qdict_in = qobject_to(QDict, props);
->       for (qe = qdict_first(qdict_in); qe; qe = qdict_next(qdict_in, qe)) {
->           object_property_find_err(obj, qe->key, &local_err);
->           if (local_err) {
-> @@ -170,7 +171,6 @@ CpuModelExpansionInfo *qmp_query_cpu_model_expansion(CpuModelExpansionType type,
->                                                        Error **errp)
->   {
->       CpuModelExpansionInfo *expansion_info;
-> -    const QDict *qdict_in = NULL;
->       QDict *qdict_out;
->       ObjectClass *oc;
->       Object *obj;
-> @@ -188,14 +188,6 @@ CpuModelExpansionInfo *qmp_query_cpu_model_expansion(CpuModelExpansionType type,
->           return NULL;
+> @@ -198,7 +199,8 @@ CpuModelExpansionInfo *qmp_query_cpu_model_expansion(CpuModelExpansionType type,
 >       }
 >   
-> -    if (model->props) {
-> -        qdict_in = qobject_to(QDict, model->props);
-> -        if (!qdict_in) {
-> -            error_setg(errp, QERR_INVALID_PARAMETER_TYPE, "props", "dict");
-> -            return NULL;
-> -        }
-> -    }
-> -
->       obj = object_new(object_class_get_name(oc));
->   
->       riscv_check_if_cpu_available(RISCV_CPU(obj), &local_err);
-> @@ -205,9 +197,8 @@ CpuModelExpansionInfo *qmp_query_cpu_model_expansion(CpuModelExpansionType type,
->           return NULL;
->       }
->   
-> -    if (qdict_in) {
-> -        riscv_cpuobj_validate_qdict_in(obj, model->props, qdict_in,
-> -                                       &local_err);
-> +    if (model->props) {
-> +        riscv_cpuobj_validate_qdict_in(obj, model->props, &local_err);
+>       if (model->props) {
+> -        riscv_cpuobj_validate_qdict_in(obj, model->props, &local_err);
+> +        riscv_cpuobj_validate_qdict_in(obj, model->props, "model.props",
+> +                                       &local_err);
 >           if (local_err) {
 >               error_propagate(errp, local_err);
 >               object_unref(obj);
 > diff --git a/target/s390x/cpu_models_sysemu.c b/target/s390x/cpu_models_sysemu.c
-> index 63981bf36b..ef19724888 100644
+> index ef19724888..8338084d00 100644
 > --- a/target/s390x/cpu_models_sysemu.c
 > +++ b/target/s390x/cpu_models_sysemu.c
-> @@ -101,21 +101,13 @@ static void cpu_model_from_info(S390CPUModel *model, const CpuModelInfo *info,
->                                   Error **errp)
+> @@ -98,7 +98,7 @@ CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
+>   }
+>   
+>   static void cpu_model_from_info(S390CPUModel *model, const CpuModelInfo *info,
+> -                                Error **errp)
+> +                                const char *info_arg_name, Error **errp)
 >   {
 >       Error *err = NULL;
-> -    const QDict *qdict = NULL;
-> +    const QDict *qdict;
->       const QDictEntry *e;
->       Visitor *visitor;
->       ObjectClass *oc;
->       S390CPU *cpu;
->       Object *obj;
->   
-> -    if (info->props) {
-> -        qdict = qobject_to(QDict, info->props);
-> -        if (!qdict) {
-> -            error_setg(errp, QERR_INVALID_PARAMETER_TYPE, "props", "dict");
-> -            return;
-> -        }
-> -    }
-> -
->       oc = cpu_class_by_name(TYPE_S390_CPU, info->name);
->       if (!oc) {
->           error_setg(errp, "The CPU definition \'%s\' is unknown.", info->name);
-> @@ -135,13 +127,14 @@ static void cpu_model_from_info(S390CPUModel *model, const CpuModelInfo *info,
->           return;
+>       const QDict *qdict;
+> @@ -128,8 +128,11 @@ static void cpu_model_from_info(S390CPUModel *model, const CpuModelInfo *info,
 >       }
 >   
-> -    if (qdict) {
-> +    if (info->props) {
+>       if (info->props) {
+> +        g_autofree const char *props_name = g_strdup_printf("%s.props",
+> +                                                            info_arg_name);
+> +
 >           visitor = qobject_input_visitor_new(info->props);
-> -        if (!visit_start_struct(visitor, NULL, NULL, 0, errp)) {
-> +        if (!visit_start_struct(visitor, "props", NULL, 0, errp)) {
+> -        if (!visit_start_struct(visitor, "props", NULL, 0, errp)) {
+> +        if (!visit_start_struct(visitor, props_name, NULL, 0, errp)) {
 >               visit_free(visitor);
 >               object_unref(obj);
 >               return;
->           }
-> +        qdict = qobject_to(QDict, info->props);
->           for (e = qdict_first(qdict); e; e = qdict_next(qdict, e)) {
->               if (!object_property_set(obj, e->key, visitor, &err)) {
->                   break;
+> @@ -216,7 +219,7 @@ CpuModelExpansionInfo *qmp_query_cpu_model_expansion(CpuModelExpansionType type,
+>       bool delta_changes = false;
+>   
+>       /* convert it to our internal representation */
+> -    cpu_model_from_info(&s390_model, model, &err);
+> +    cpu_model_from_info(&s390_model, model, "model", &err);
+>       if (err) {
+>           error_propagate(errp, err);
+>           return NULL;
+> @@ -254,12 +257,12 @@ CpuModelCompareInfo *qmp_query_cpu_model_comparison(CpuModelInfo *infoa,
+>       S390CPUModel modela, modelb;
+>   
+>       /* convert both models to our internal representation */
+> -    cpu_model_from_info(&modela, infoa, &err);
+> +    cpu_model_from_info(&modela, infoa, "modela", &err);
+>       if (err) {
+>           error_propagate(errp, err);
+>           return NULL;
+>       }
+> -    cpu_model_from_info(&modelb, infob, &err);
+> +    cpu_model_from_info(&modelb, infob, "modelb", &err);
+>       if (err) {
+>           error_propagate(errp, err);
+>           return NULL;
+> @@ -331,13 +334,13 @@ CpuModelBaselineInfo *qmp_query_cpu_model_baseline(CpuModelInfo *infoa,
+>       uint8_t max_gen;
+>   
+>       /* convert both models to our internal representation */
+> -    cpu_model_from_info(&modela, infoa, &err);
+> +    cpu_model_from_info(&modela, infoa, "modela", &err);
+>       if (err) {
+>           error_propagate(errp, err);
+>           return NULL;
+>       }
+>   
+> -    cpu_model_from_info(&modelb, infob, &err);
+> +    cpu_model_from_info(&modelb, infob, "modelb", &err);
+>       if (err) {
+>           error_propagate(errp, err);
+>           return NULL;
 > diff --git a/tests/qtest/arm-cpu-features.c b/tests/qtest/arm-cpu-features.c
-> index a8a4c668ad..1daceb2e31 100644
+> index 1daceb2e31..9d6e6190d5 100644
 > --- a/tests/qtest/arm-cpu-features.c
 > +++ b/tests/qtest/arm-cpu-features.c
-> @@ -79,7 +79,7 @@ static const char *resp_get_error(QDict *resp)
->       g_assert(_resp);                                                   \
->       _error = resp_get_error(_resp);                                    \
->       g_assert(_error);                                                  \
-> -    g_assert(g_str_equal(_error, expected_error));                     \
-> +    g_assert_cmpstr(_error, ==, expected_error);                       \
->       qobject_unref(_resp);                                              \
->   })
->   
-> @@ -194,8 +194,8 @@ static void assert_type_full(QTestState *qts)
->       g_assert(resp);
+> @@ -213,7 +213,8 @@ static void assert_bad_props(QTestState *qts, const char *cpu_type)
 >       error = resp_get_error(resp);
 >       g_assert(error);
-> -    g_assert(g_str_equal(error,
-> -                         "The requested expansion type is not supported"));
-> +    g_assert_cmpstr(error, ==,
-> +                    "The requested expansion type is not supported");
+>       g_assert_cmpstr(error, ==,
+> -                    "Invalid parameter type for 'props', expected: object");
+> +                    "Invalid parameter type for 'model.props',"
+> +                    " expected: object");
 >       qobject_unref(resp);
 >   }
 >   
-> @@ -212,8 +212,8 @@ static void assert_bad_props(QTestState *qts, const char *cpu_type)
->       g_assert(resp);
->       error = resp_get_error(resp);
->       g_assert(error);
-> -    g_assert(g_str_equal(error,
-> -                         "Invalid parameter type for 'props', expected: dict"));
-> +    g_assert_cmpstr(error, ==,
-> +                    "Invalid parameter type for 'props', expected: object");
->       qobject_unref(resp);
->   }
->   
-> @@ -446,7 +446,7 @@ static void test_query_cpu_model_expansion(const void *data)
+> @@ -446,7 +447,7 @@ static void test_query_cpu_model_expansion(const void *data)
 >       assert_bad_props(qts, "max");
 >       assert_error(qts, "foo", "The CPU type 'foo' is not a recognized "
 >                    "ARM CPU type", NULL);
-> -    assert_error(qts, "max", "Parameter 'not-a-prop' is unexpected",
-> +    assert_error(qts, "max", "Parameter 'props.not-a-prop' is unexpected",
+> -    assert_error(qts, "max", "Parameter 'props.not-a-prop' is unexpected",
+> +    assert_error(qts, "max", "Parameter 'model.props.not-a-prop' is unexpected",
 >                    "{ 'not-a-prop': false }");
 >       assert_error(qts, "host", "The CPU type 'host' requires KVM", NULL);
 >   
