@@ -4,82 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E140C5475B
-	for <qemu-riscv@archiver.kernel.org>; Wed,  6 Mar 2024 04:58:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96F90C5475B
+	for <qemu-riscv@archiver.kernel.org>; Wed,  6 Mar 2024 06:41:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rhjMI-0002oZ-8m; Tue, 05 Mar 2024 23:58:26 -0500
+	id 1rhkyJ-0003XN-2i; Wed, 06 Mar 2024 01:41:49 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rhjMG-0002oI-Sx; Tue, 05 Mar 2024 23:58:24 -0500
-Received: from mail-vk1-xa31.google.com ([2607:f8b0:4864:20::a31])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rhjMF-0002of-7z; Tue, 05 Mar 2024 23:58:24 -0500
-Received: by mail-vk1-xa31.google.com with SMTP id
- 71dfb90a1353d-4cb26623dc1so560485e0c.2; 
- Tue, 05 Mar 2024 20:58:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1709701100; x=1710305900; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=41HrMy30v1IUXtbxZKNSp568/6VVI2dUQ4+0SauBPAE=;
- b=bg9rZKpfCkOhd9O0cYy7YXoxy5qhxMIIvM1s78Juh4kWBk6da1TYTALdi/CI2kMeE2
- WTi2yqhygxWqxjIicOY30Iplok0f69hKEe0+M79cO3AIRV8We1aHxHaqH05E1sejY/zR
- Hf28mApUUFNoSfLbmWvmvo9T+zujR4/AvCxhP9AfEZqNhFlBU5JZfnF1riR0yKwhAd1w
- rxSL9U1J+GLTaBQvBF/6PQSyWG99zqhxrIcmrQfGcQvvvRJGgRJRhQAauylB1LE0EjwJ
- GKpAlc1vl7QNj95Bi2iqmlGnlLfvUgvN3WftEmFAuqXlp2Yk64FXvUcTS06jyA/h8PBH
- CgcQ==
+ (Exim 4.90_1) (envelope-from <anisinha@redhat.com>)
+ id 1rhky8-0003WD-Rr
+ for qemu-riscv@nongnu.org; Wed, 06 Mar 2024 01:41:38 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <anisinha@redhat.com>)
+ id 1rhky5-0000SC-IJ
+ for qemu-riscv@nongnu.org; Wed, 06 Mar 2024 01:41:36 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1709707291;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=5x3iQ+o9MdNG+rw2Auq87crWL0YefwVSeYPIgkDiOu4=;
+ b=A1WGockeH6LqHLWh+3iMMs82LZJ5PyuI6lLOC58yFzNIAorlWAj/9nC97PavxjK6mQPPFs
+ 8Bn4+F8lMnHPQDw6+SzhbimLFw4B9rg2Li1fjlwhlk4u4eAtDMG4ah6kEl36VP/9sd4uUZ
+ kk7oyFirGWZbc3JEkTmHkmB+Ogs27wc=
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com
+ [209.85.216.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-274-v99iPx0ZN2yn7UgVaQm6-g-1; Wed, 06 Mar 2024 01:41:29 -0500
+X-MC-Unique: v99iPx0ZN2yn7UgVaQm6-g-1
+Received: by mail-pj1-f72.google.com with SMTP id
+ 98e67ed59e1d1-29935047600so5321447a91.0
+ for <qemu-riscv@nongnu.org>; Tue, 05 Mar 2024 22:41:29 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709701100; x=1710305900;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=41HrMy30v1IUXtbxZKNSp568/6VVI2dUQ4+0SauBPAE=;
- b=NnmT78VkoR7WeQiWYph2smkT+Vb+FCfvvN0w1qIMaYWEb5sas4zx7g5oRb+svQlJv3
- cuBHT+/wUpDe0QTy9sNXf5M5hGEjJtf31T/AMdwBN4ecv0XeP3GYBBULHZS8reWpvcWP
- tq7HpQvBF8tfh8UsUlkc11WoDMMtN/3O5MeUUVtWzsvzrUV14LbBo6C5i1rwS1+anmB3
- FCSLxq6hHvllm9nRPHzhMA9zmqesMbEv/hGw7DSyD8JoWkPWmYUBcHL0KVNQsykE8Oi/
- p8Jg6rnccevNXtD+kUqfWLOJSbn6LT0nYRzogmhhBsnSxdCr09SSH7H8y63kGYcFD0Ap
- lk/w==
+ d=1e100.net; s=20230601; t=1709707288; x=1710312088;
+ h=mime-version:references:message-id:in-reply-to:subject:cc:to:from
+ :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=5x3iQ+o9MdNG+rw2Auq87crWL0YefwVSeYPIgkDiOu4=;
+ b=cjWnjFUBKZRTf8KK8GmOnpSlKL035S2MzvLDBm5GfOfv/fOw6sfwnA/nS8kJ/EsKsh
+ lOyPrUAJ0PkKVKLIgqGvlxumySnoRzLKnMxic+zS7Xp1ee9aHDyzXepMqiHCq0+7qoiv
+ o4rDgTIqFu8Df2eQvoyw0Jtret5DeR/If+G2MgXBq7uXX4Xfvj21B2YI5fBXu9oNb+F8
+ FSrIwYsVdZYVnm8imhYcN4cMeaVanVObw1xaUjWA8A8EM9Zt67PEBSLQAyu4CCqoIC0D
+ zg8VxC6scBht+YbFkgt6x8iEP0SDNvuqof9GYMvcAS08Aac2IWZbIk+k2lZA1H49G19F
+ y9mQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXZ2cNey5HUGr/QksMG9pJwHL3tyj/eKCMi0O9DX3gchb2vJ9xUKWeDPqvfgs93s1Em7TsUw0R3xlzJiRCZqjKBWesusT0=
-X-Gm-Message-State: AOJu0YwmjOltCCKXwpZKYjqeOe5rddRTenMdhLfUieEbFwp85jFH/4bh
- 95v4uFSaKny1Q3LMWsh9gGwsJc7veyO2Xel2EaltenH4RTO48RNYcHSKg31yy36mD3lBNYmTvWz
- v49wKm2XKH0qH1pvHvSK7L+fABFQ=
-X-Google-Smtp-Source: AGHT+IGJsTeNeTuAtk1l2u+g7+WmsE29NO/mOMNeCoOkEWIgbcy3vMsBBlD23Ja4SVwQFRGI+VsbnHoyGXDDQ5OGaUc=
-X-Received: by 2002:a1f:fcc1:0:b0:4c7:e255:728b with SMTP id
- a184-20020a1ffcc1000000b004c7e255728bmr3392874vki.12.1709701100611; Tue, 05
- Mar 2024 20:58:20 -0800 (PST)
+ AJvYcCXJz5Yu8JglL5qrTRmSuQESEQSNERrRDtTtFRw5RD+wi77qR/Gc+M6j+izZAHLVakxBUvptbfY9Yb82le80C9v3KOUJdJQ=
+X-Gm-Message-State: AOJu0Yx6w/wFOt/ebAZy//KhfyPCNTKb9pL4RVtYny1jjul4ta17B1ea
+ gxxjpaN791qdFpsaH4LAN7JtqcjsZkScMzf8KL2S8BtdOhHukmhC04/pMi36SYx+rpZoPM+8FUO
+ D6bfosFcNOwJ2P69yQcU+c9ftJcpex37UY7X5VWgvMBkEj8k97UR7
+X-Received: by 2002:a17:90b:20c:b0:29a:9f04:fbcd with SMTP id
+ fy12-20020a17090b020c00b0029a9f04fbcdmr13293923pjb.20.1709707288562; 
+ Tue, 05 Mar 2024 22:41:28 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHiLyX/73IoA4TDKQ2eGwJHutThPRBKFcOBnZwXHvi/yeiGwUKRq/8Ek9DMv5S5tdhJcXDO3A==
+X-Received: by 2002:a17:90b:20c:b0:29a:9f04:fbcd with SMTP id
+ fy12-20020a17090b020c00b0029a9f04fbcdmr13293900pjb.20.1709707288127; 
+ Tue, 05 Mar 2024 22:41:28 -0800 (PST)
+Received: from fc37-ani ([115.96.30.47]) by smtp.googlemail.com with ESMTPSA id
+ d8-20020a170903230800b001db5bdd5e33sm11709816plh.48.2024.03.05.22.41.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 05 Mar 2024 22:41:27 -0800 (PST)
+Date: Wed, 6 Mar 2024 12:11:18 +0530 (IST)
+From: Ani Sinha <anisinha@redhat.com>
+To: Igor Mammedov <imammedo@redhat.com>
+cc: qemu-devel@nongnu.org, peter.maydell@linaro.org, pbonzini@redhat.com, 
+ mst@redhat.com, gaosong@loongson.cn, alistair.francis@wdc.com, 
+ palmer@dabbelt.com, bin.meng@windriver.com, liwei1518@gmail.com, 
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, philmd@linaro.org, 
+ wangyanan55@huawei.com, eblake@redhat.com, armbru@redhat.com, 
+ qemu-arm@nongnu.org, qemu-riscv@nongnu.org, f.ebner@proxmox.com
+Subject: Re: [PATCH v2 07/20] smbios: avoid mangling user provided tables
+In-Reply-To: <20240305155724.2047069-8-imammedo@redhat.com>
+Message-ID: <0eeed9a2-cd7b-bdde-6346-3357dc430835@redhat.com>
+References: <20240305155724.2047069-1-imammedo@redhat.com>
+ <20240305155724.2047069-8-imammedo@redhat.com>
 MIME-Version: 1.0
-References: <20240202113919.18236-1-vadim.shakirov@syntacore.com>
-In-Reply-To: <20240202113919.18236-1-vadim.shakirov@syntacore.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 6 Mar 2024 14:57:54 +1000
-Message-ID: <CAKmqyKMQ9wQ2yeQ=kiwriM-8WXpB-oBaYcXcfjc3LZWfM+YVFw@mail.gmail.com>
-Subject: Re: [PATCH v4] target/riscv: mcountinhibit, mcounteren, scounteren,
- hcounteren is 32-bit
-To: Vadim Shakirov <vadim.shakirov@syntacore.com>
-Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a31;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa31.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=US-ASCII
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=anisinha@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -26
+X-Spam_score: -2.7
+X-Spam_bar: --
+X-Spam_report: (-2.7 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.568,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -95,103 +107,316 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Feb 2, 2024 at 9:42=E2=80=AFPM Vadim Shakirov
-<vadim.shakirov@syntacore.com> wrote:
+
+
+On Tue, 5 Mar 2024, Igor Mammedov wrote:
+
+> currently smbios_entry_add() preserves internally '-smbios type='
+> options but tables provided with '-smbios file=' are stored directly
+> into blob that eventually will be exposed to VM. And then later
+> QEMU adds default/'-smbios type' entries on top into the same blob.
 >
-> mcountinhibit, mcounteren, scounteren and hcounteren must always be 32-bi=
-t
-> by privileged spec
+> It makes impossible to generate tables more than once, hence
+> 'immutable' guard was used.
+> Make it possible to regenerate final blob by storing user provided
+> blobs into a dedicated area (usr_blobs) and then copy it when
+> composing final blob. Which also makes handling of -smbios
+> options consistent.
 >
-> Signed-off-by: Vadim Shakirov <vadim.shakirov@syntacore.com>
+> As side effect of this and previous commits there is no need to
+> generate legacy smbios_entries at the time options are parsed.
+> Instead compose smbios_entries on demand from  usr_blobs like
+> it is done for non-legacy SMBIOS tables.
+>
+> Signed-off-by: Igor Mammedov <imammedo@redhat.com>
+> Tested-by: Fiona Ebner <f.ebner@proxmox.com>
 
-Thanks!
-
-Applied to riscv-to-apply.next
-
-Alistair
+Reviewed-by: Ani Sinha <anisinha@redhat.com>
 
 > ---
->  target/riscv/cpu.h     |  8 ++++----
->  target/riscv/machine.c | 16 ++++++++--------
->  2 files changed, 12 insertions(+), 12 deletions(-)
+>  hw/smbios/smbios.c | 179 +++++++++++++++++++++++----------------------
+>  1 file changed, 92 insertions(+), 87 deletions(-)
 >
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 5138187727..cf1867a6e2 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -271,7 +271,7 @@ struct CPUArchState {
->      target_ulong hstatus;
->      target_ulong hedeleg;
->      uint64_t hideleg;
-> -    target_ulong hcounteren;
-> +    uint32_t hcounteren;
->      target_ulong htval;
->      target_ulong htinst;
->      target_ulong hgatp;
-> @@ -334,10 +334,10 @@ struct CPUArchState {
->       */
->      bool two_stage_indirect_lookup;
+> diff --git a/hw/smbios/smbios.c b/hw/smbios/smbios.c
+> index c46fc93357..aa2cc5bdbd 100644
+> --- a/hw/smbios/smbios.c
+> +++ b/hw/smbios/smbios.c
+> @@ -57,6 +57,14 @@ static size_t smbios_entries_len;
+>  static bool smbios_uuid_encoded = true;
+>  /* end: legacy structures & constants for <= 2.0 machines */
 >
-> -    target_ulong scounteren;
-> -    target_ulong mcounteren;
-> +    uint32_t scounteren;
-> +    uint32_t mcounteren;
+> +/*
+> + * SMBIOS tables provided by user with '-smbios file=<foo>' option
+> + */
+> +uint8_t *usr_blobs;
+> +size_t usr_blobs_len;
+> +static GArray *usr_blobs_sizes;
+> +static unsigned usr_table_max;
+> +static unsigned usr_table_cnt;
 >
-> -    target_ulong mcountinhibit;
-> +    uint32_t mcountinhibit;
+>  uint8_t *smbios_tables;
+>  size_t smbios_tables_len;
+> @@ -67,7 +75,6 @@ static SmbiosEntryPointType smbios_ep_type = SMBIOS_ENTRY_POINT_TYPE_32;
+>  static SmbiosEntryPoint ep;
 >
->      /* PMU counter state */
->      PMUCTRState pmu_ctrs[RV_MAX_MHPMCOUNTERS];
-> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-> index 72fe2374dc..a4d47ec17e 100644
-> --- a/target/riscv/machine.c
-> +++ b/target/riscv/machine.c
-> @@ -79,14 +79,14 @@ static bool hyper_needed(void *opaque)
+>  static int smbios_type4_count = 0;
+> -static bool smbios_immutable;
+>  static bool smbios_have_defaults;
+>  static uint32_t smbios_cpuid_version, smbios_cpuid_features;
 >
->  static const VMStateDescription vmstate_hyper =3D {
->      .name =3D "cpu/hyper",
-> -    .version_id =3D 3,
-> -    .minimum_version_id =3D 3,
-> +    .version_id =3D 4,
-> +    .minimum_version_id =3D 4,
->      .needed =3D hyper_needed,
->      .fields =3D (const VMStateField[]) {
->          VMSTATE_UINTTL(env.hstatus, RISCVCPU),
->          VMSTATE_UINTTL(env.hedeleg, RISCVCPU),
->          VMSTATE_UINT64(env.hideleg, RISCVCPU),
-> -        VMSTATE_UINTTL(env.hcounteren, RISCVCPU),
-> +        VMSTATE_UINT32(env.hcounteren, RISCVCPU),
->          VMSTATE_UINTTL(env.htval, RISCVCPU),
->          VMSTATE_UINTTL(env.htinst, RISCVCPU),
->          VMSTATE_UINTTL(env.hgatp, RISCVCPU),
-> @@ -354,8 +354,8 @@ static const VMStateDescription vmstate_jvt =3D {
+> @@ -569,9 +576,8 @@ static void smbios_build_type_1_fields(void)
 >
->  const VMStateDescription vmstate_riscv_cpu =3D {
->      .name =3D "cpu",
-> -    .version_id =3D 9,
-> -    .minimum_version_id =3D 9,
-> +    .version_id =3D 10,
-> +    .minimum_version_id =3D 10,
->      .post_load =3D riscv_cpu_post_load,
->      .fields =3D (const VMStateField[]) {
->          VMSTATE_UINTTL_ARRAY(env.gpr, RISCVCPU, 32),
-> @@ -398,9 +398,9 @@ const VMStateDescription vmstate_riscv_cpu =3D {
->          VMSTATE_UINTTL(env.mtval, RISCVCPU),
->          VMSTATE_UINTTL(env.miselect, RISCVCPU),
->          VMSTATE_UINTTL(env.siselect, RISCVCPU),
-> -        VMSTATE_UINTTL(env.scounteren, RISCVCPU),
-> -        VMSTATE_UINTTL(env.mcounteren, RISCVCPU),
-> -        VMSTATE_UINTTL(env.mcountinhibit, RISCVCPU),
-> +        VMSTATE_UINT32(env.scounteren, RISCVCPU),
-> +        VMSTATE_UINT32(env.mcounteren, RISCVCPU),
-> +        VMSTATE_UINT32(env.mcountinhibit, RISCVCPU),
->          VMSTATE_STRUCT_ARRAY(env.pmu_ctrs, RISCVCPU, RV_MAX_MHPMCOUNTERS=
-, 0,
->                               vmstate_pmu_ctr_state, PMUCTRState),
->          VMSTATE_UINTTL_ARRAY(env.mhpmevent_val, RISCVCPU, RV_MAX_MHPMEVE=
-NTS),
+>  uint8_t *smbios_get_table_legacy(uint32_t expected_t4_count, size_t *length)
+>  {
+> -    /* drop unwanted version of command-line file blob(s) */
+> -    g_free(smbios_tables);
+> -    smbios_tables = NULL;
+> +    int i;
+> +    size_t usr_offset;
+>
+>      /* also complain if fields were given for types > 1 */
+>      if (find_next_bit(have_fields_bitmap,
+> @@ -581,12 +587,33 @@ uint8_t *smbios_get_table_legacy(uint32_t expected_t4_count, size_t *length)
+>          exit(1);
+>      }
+>
+> -    if (!smbios_immutable) {
+> -        smbios_build_type_0_fields();
+> -        smbios_build_type_1_fields();
+> -        smbios_validate_table(expected_t4_count);
+> -        smbios_immutable = true;
+> +    g_free(smbios_entries);
+> +    smbios_entries_len = sizeof(uint16_t);
+> +    smbios_entries = g_malloc0(smbios_entries_len);
+> +
+> +    for (i = 0, usr_offset = 0; usr_blobs_sizes && i < usr_blobs_sizes->len;
+> +         i++)
+> +    {
+> +        struct smbios_table *table;
+> +        struct smbios_structure_header *header;
+> +        size_t size = g_array_index(usr_blobs_sizes, size_t, i);
+> +
+> +        header = (struct smbios_structure_header *)(usr_blobs + usr_offset);
+> +        smbios_entries = g_realloc(smbios_entries, smbios_entries_len +
+> +                                                   size + sizeof(*table));
+> +        table = (struct smbios_table *)(smbios_entries + smbios_entries_len);
+> +        table->header.type = SMBIOS_TABLE_ENTRY;
+> +        table->header.length = cpu_to_le16(sizeof(*table) + size);
+> +        memcpy(table->data, header, size);
+> +        smbios_entries_len += sizeof(*table) + size;
+> +        (*(uint16_t *)smbios_entries) =
+> +            cpu_to_le16(le16_to_cpu(*(uint16_t *)smbios_entries) + 1);
+
+I know this comes from existing code but can you please explain why we add
+1 to it? This is confusing and a comment here would be nice.
+
+> +        usr_offset += size;
+
+It would be better if we could add a comment here describing a bit what
+this is all about.
+
+user blobs are an array of smbios_structure_header entries whereas legacy
+tables are an array of smbios_table structures where
+smbios_table->data represents the a single user provided table blob in
+smbios_structure_header.
+
+>      }
+> +
+> +    smbios_build_type_0_fields();
+> +    smbios_build_type_1_fields();
+> +    smbios_validate_table(expected_t4_count);
+>      *length = smbios_entries_len;
+>      return smbios_entries;
+>  }
+> @@ -1094,67 +1121,67 @@ void smbios_get_tables(MachineState *ms,
+>  {
+>      unsigned i, dimm_cnt, offset;
+>
+> -    /* drop unwanted (legacy) version of command-line file blob(s) */
+> -    g_free(smbios_entries);
+> -    smbios_entries = NULL;
+> +    g_free(smbios_tables);
+> +    smbios_tables = g_memdup2(usr_blobs, usr_blobs_len);
+
+Again a comment describing here would be nice as to why memdup is ok.
+
+> +    smbios_tables_len = usr_blobs_len;
+> +    smbios_table_max = usr_table_max;
+> +    smbios_table_cnt = usr_table_cnt;
+>
+> -    if (!smbios_immutable) {
+> -        smbios_build_type_0_table();
+> -        smbios_build_type_1_table();
+> -        smbios_build_type_2_table();
+> -        smbios_build_type_3_table();
+> +    smbios_build_type_0_table();
+> +    smbios_build_type_1_table();
+> +    smbios_build_type_2_table();
+> +    smbios_build_type_3_table();
+>
+> -        assert(ms->smp.sockets >= 1);
+> +    assert(ms->smp.sockets >= 1);
+>
+> -        for (i = 0; i < ms->smp.sockets; i++) {
+> -            smbios_build_type_4_table(ms, i);
+> -        }
+> +    for (i = 0; i < ms->smp.sockets; i++) {
+> +        smbios_build_type_4_table(ms, i);
+> +    }
+>
+> -        smbios_build_type_8_table();
+> -        smbios_build_type_11_table();
+> +    smbios_build_type_8_table();
+> +    smbios_build_type_11_table();
+>
+>  #define MAX_DIMM_SZ (16 * GiB)
+>  #define GET_DIMM_SZ ((i < dimm_cnt - 1) ? MAX_DIMM_SZ \
+>                                          : ((current_machine->ram_size - 1) % MAX_DIMM_SZ) + 1)
+>
+> -        dimm_cnt = QEMU_ALIGN_UP(current_machine->ram_size, MAX_DIMM_SZ) / MAX_DIMM_SZ;
+> +    dimm_cnt = QEMU_ALIGN_UP(current_machine->ram_size, MAX_DIMM_SZ) /
+> +               MAX_DIMM_SZ;
+>
+> -        /*
+> -         * The offset determines if we need to keep additional space between
+> -         * table 17 and table 19 header handle numbers so that they do
+> -         * not overlap. For example, for a VM with larger than 8 TB guest
+> -         * memory and DIMM like chunks of 16 GiB, the default space between
+> -         * the two tables (T19_BASE - T17_BASE = 512) is not enough.
+> -         */
+> -        offset = (dimm_cnt > (T19_BASE - T17_BASE)) ? \
+> -                 dimm_cnt - (T19_BASE - T17_BASE) : 0;
+> +    /*
+> +     * The offset determines if we need to keep additional space between
+> +     * table 17 and table 19 header handle numbers so that they do
+> +     * not overlap. For example, for a VM with larger than 8 TB guest
+> +     * memory and DIMM like chunks of 16 GiB, the default space between
+> +     * the two tables (T19_BASE - T17_BASE = 512) is not enough.
+> +     */
+> +    offset = (dimm_cnt > (T19_BASE - T17_BASE)) ? \
+> +             dimm_cnt - (T19_BASE - T17_BASE) : 0;
+>
+> -        smbios_build_type_16_table(dimm_cnt);
+> +    smbios_build_type_16_table(dimm_cnt);
+>
+> -        for (i = 0; i < dimm_cnt; i++) {
+> -            smbios_build_type_17_table(i, GET_DIMM_SZ);
+> -        }
+> +    for (i = 0; i < dimm_cnt; i++) {
+> +        smbios_build_type_17_table(i, GET_DIMM_SZ);
+> +    }
+>
+> -        for (i = 0; i < mem_array_size; i++) {
+> -            smbios_build_type_19_table(i, offset, mem_array[i].address,
+> -                                       mem_array[i].length);
+> -        }
+> +    for (i = 0; i < mem_array_size; i++) {
+> +        smbios_build_type_19_table(i, offset, mem_array[i].address,
+> +                                   mem_array[i].length);
+> +    }
+>
+> -        /*
+> -         * make sure 16 bit handle numbers in the headers of tables 19
+> -         * and 32 do not overlap.
+> -         */
+> -        assert((mem_array_size + offset) < (T32_BASE - T19_BASE));
+> +    /*
+> +     * make sure 16 bit handle numbers in the headers of tables 19
+> +     * and 32 do not overlap.
+> +     */
+> +    assert((mem_array_size + offset) < (T32_BASE - T19_BASE));
+>
+> -        smbios_build_type_32_table();
+> -        smbios_build_type_38_table();
+> -        smbios_build_type_41_table(errp);
+> -        smbios_build_type_127_table();
+> +    smbios_build_type_32_table();
+> +    smbios_build_type_38_table();
+> +    smbios_build_type_41_table(errp);
+> +    smbios_build_type_127_table();
+>
+> -        smbios_validate_table(ms->smp.sockets);
+> -        smbios_entry_point_setup();
+> -        smbios_immutable = true;
+> -    }
+> +    smbios_validate_table(ms->smp.sockets);
+> +    smbios_entry_point_setup();
+>
+>      /* return tables blob and entry point (anchor), and their sizes */
+>      *tables = smbios_tables;
+> @@ -1254,13 +1281,10 @@ void smbios_entry_add(QemuOpts *opts, Error **errp)
+>  {
+>      const char *val;
+>
+> -    assert(!smbios_immutable);
+> -
+>      val = qemu_opt_get(opts, "file");
+>      if (val) {
+>          struct smbios_structure_header *header;
+> -        int size;
+> -        struct smbios_table *table; /* legacy mode only */
+> +        size_t size;
+>
+>          if (!qemu_opts_validate(opts, qemu_smbios_file_opts, errp)) {
+>              return;
+> @@ -1277,9 +1301,9 @@ void smbios_entry_add(QemuOpts *opts, Error **errp)
+>           * (except in legacy mode, where the second '\0' is implicit and
+>           *  will be inserted by the BIOS).
+>           */
+> -        smbios_tables = g_realloc(smbios_tables, smbios_tables_len + size);
+> -        header = (struct smbios_structure_header *)(smbios_tables +
+> -                                                    smbios_tables_len);
+> +        usr_blobs = g_realloc(usr_blobs, usr_blobs_len + size);
+> +        header = (struct smbios_structure_header *)(usr_blobs +
+> +                                                    usr_blobs_len);
+>
+>          if (load_image_size(val, (uint8_t *)header, size) != size) {
+>              error_setg(errp, "Failed to load SMBIOS file %s", val);
+> @@ -1300,34 +1324,15 @@ void smbios_entry_add(QemuOpts *opts, Error **errp)
+>              smbios_type4_count++;
+>          }
+>
+> -        smbios_tables_len += size;
+> -        if (size > smbios_table_max) {
+> -            smbios_table_max = size;
+> +        if (!usr_blobs_sizes) {
+> +            usr_blobs_sizes = g_array_new(false, false, sizeof(size_t));
+>          }
+> -        smbios_table_cnt++;
+> -
+> -        /* add a copy of the newly loaded blob to legacy smbios_entries */
+> -        /* NOTE: This code runs before smbios_set_defaults(), so we don't
+> -         *       yet know which mode (legacy vs. aggregate-table) will be
+> -         *       required. We therefore add the binary blob to both legacy
+> -         *       (smbios_entries) and aggregate (smbios_tables) tables, and
+> -         *       delete the one we don't need from smbios_set_defaults(),
+> -         *       once we know which machine version has been requested.
+> -         */
+> -        if (!smbios_entries) {
+> -            smbios_entries_len = sizeof(uint16_t);
+> -            smbios_entries = g_malloc0(smbios_entries_len);
+> +        g_array_append_val(usr_blobs_sizes, size);
+> +        usr_blobs_len += size;
+> +        if (size > usr_table_max) {
+> +            usr_table_max = size;
+>          }
+> -        smbios_entries = g_realloc(smbios_entries, smbios_entries_len +
+> -                                                   size + sizeof(*table));
+> -        table = (struct smbios_table *)(smbios_entries + smbios_entries_len);
+> -        table->header.type = SMBIOS_TABLE_ENTRY;
+> -        table->header.length = cpu_to_le16(sizeof(*table) + size);
+> -        memcpy(table->data, header, size);
+> -        smbios_entries_len += sizeof(*table) + size;
+> -        (*(uint16_t *)smbios_entries) =
+> -                cpu_to_le16(le16_to_cpu(*(uint16_t *)smbios_entries) + 1);
+> -        /* end: add a copy of the newly loaded blob to legacy smbios_entries */
+> +        usr_table_cnt++;
+>
+>          return;
+>      }
 > --
-> 2.34.1
+> 2.39.3
 >
 >
+
 
