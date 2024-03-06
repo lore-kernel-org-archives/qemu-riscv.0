@@ -4,73 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 289B3C54E49
-	for <qemu-riscv@archiver.kernel.org>; Wed,  6 Mar 2024 03:34:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A173FC54E49
+	for <qemu-riscv@archiver.kernel.org>; Wed,  6 Mar 2024 04:45:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rhi32-0005NE-OF; Tue, 05 Mar 2024 22:34:28 -0500
+	id 1rhj97-0006ft-0Y; Tue, 05 Mar 2024 23:44:49 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rhi30-0005L6-VP; Tue, 05 Mar 2024 22:34:26 -0500
-Received: from mail-ua1-x92c.google.com ([2607:f8b0:4864:20::92c])
+ id 1rhj95-0006fO-7j; Tue, 05 Mar 2024 23:44:47 -0500
+Received: from mail-ua1-x929.google.com ([2607:f8b0:4864:20::929])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rhi2z-0007Oy-09; Tue, 05 Mar 2024 22:34:26 -0500
-Received: by mail-ua1-x92c.google.com with SMTP id
- a1e0cc1a2514c-7dadba3284cso2904827241.2; 
- Tue, 05 Mar 2024 19:34:24 -0800 (PST)
+ id 1rhj93-0007q1-HQ; Tue, 05 Mar 2024 23:44:46 -0500
+Received: by mail-ua1-x929.google.com with SMTP id
+ a1e0cc1a2514c-7cedcea89a0so3924811241.1; 
+ Tue, 05 Mar 2024 20:44:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1709696063; x=1710300863; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1709700284; x=1710305084; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tD80fAjaEDOBxbAuD5YES+SQm1yY9CWiZVdAsdaSr2A=;
- b=bdZVE6G0p6g/SjAIb7gKq/K8Mfg3SrZra/vpztbzk9gzS/h5VsiylyxckISb37YNTw
- 4JwnfuzTIGNeaUNHMJ8qbekjwEuaAuuyWUNV5CdGclkaNWg1gEaqhXNdzCoLX4KzfKv8
- Ti9z4ik1bgS4Tv7Bq2fnntpm/quJiArVmvEW4POfK9my2V8s8tqfr1LsrILLrV61qYD5
- 6Nab404okP7qFpVbwzacDyYPDzn5fxEi7Yk05hM4FVXJVBTgkHNDc1Cpc3lPWo4NVkHB
- YIyScezjujqJf8IXLzxeI/uXvs7T64oRKLx3trLuFreo9wbSBbsOwsyGCCefSNjt6cEZ
- PbXQ==
+ bh=g4KaRJF1M763yK9vQ9RbMd9SPVLZiXaWoqRbeDDSUZc=;
+ b=jABuAhEnPJhIKuqDZEPFQOBGNrxhyPzmf1Hs/waNFmYitRdcje4+BEVXnJC2/ie1sG
+ fzquEMpx5NMWSp+OI57gWjG3hHT90veQ75H8Z/6XI2WhPfsQyCyR5QEqClarJauwV73j
+ tmWPrV766xLpTizjwjhtMpZdpHHW8oumonKsd0Dwou0RnKNn9Wm02DB1U+pMLN7PEaEH
+ yYgax1HgjuKQkuHZ0GME+xSp8RIXVBmx0BHBdlerXV3pSpK2uNw0tSwvvSc0XZVyMctb
+ kfMuNpYOsCC7TlAFIarni1AzeqyThlCO060pPrH4iFM2CHBZHx4Ri4mh2h2H+xyjaVTq
+ lXCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709696063; x=1710300863;
+ d=1e100.net; s=20230601; t=1709700284; x=1710305084;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=tD80fAjaEDOBxbAuD5YES+SQm1yY9CWiZVdAsdaSr2A=;
- b=qgRwvEvXDN+XJpX3caS2+0du3FlIpB6VCtC4Iu3Orh+Budp8Augq5CBXTwYe9bQutA
- 2oQCzgc3+P0VzZ6/mC6OpOXnYUSUtLlQbmutZnOGASp4Kt23PCio7RUaz1Fsxx29J2lL
- xtFkpgXdTSeVXaTdIhLxfyAw6mRUu2eFTcC/Ix3EhMKCB1FB7om7cPNfqo2ZzykdHV2j
- fOEW50Oi2xzsELpnVRBTVuzI/SIkqh45JYtNUd4c9FN/z9xVwKMeTUEpEVM59hmNCvNc
- 6vzL98WXU26F3ofYi3Q2VHYpQDONhX7zt5xMs7J++F4pdN3QABB36hKnkO3AydwYZFg7
- MxwQ==
+ bh=g4KaRJF1M763yK9vQ9RbMd9SPVLZiXaWoqRbeDDSUZc=;
+ b=icbFvTsGghouIVrtQ2i+pRwiS84QRvhVqpNwqnVUogbpq6Kee53ZW6MsanrWmMRFxG
+ Q07OEgzDJ8Snw1xNfWE0XK9XVk2o6GydF3zp0FL9JgecM2Kmm3vg4AflAojHUOoXzAz5
+ kJZyqZSImsCW2qkdtHfVoL1o1Z67lYeL0g1JUnVil8P1rGy5QK8EIvA4DEiglD+BH4Nr
+ skVu3GKsRrCjtDzu/BMhSq/p2MYNaF/Z4vcfJK+9diKsH83yZpwYfYmNEinXWEgrGFaN
+ gUnvXP3nmn6DZsYpzn+q628q05e4gDk5zjBuSgDuIc7y6C16SDyuQXnAnk0Dnpq5XeR0
+ AQZw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXSqBIf9Ue4vsUU4tmdCNbke3D6EhWFLKy/6i/as5akyZRTzHe5rjrkZmoR9zw7mgij8umdT09jVO7RwEZXPu51JRvoL6jFEuIKSctfeF3H/cxrscE6pQGqgBPuXw==
-X-Gm-Message-State: AOJu0YxqwaQOEpmPK+w+sY9+iPNTV4N2z/KVgt+VG7Zyb6EFPQZz/hgm
- O7xknP2trOCQF5Y6X6OWGGuKrBhc5CUI90X05pwwne9wo8gnbx4BuTvdGOEHemmN3qYWfnbs2jM
- J7xaE5j8QUAXWawc19WWZl9G7C08=
-X-Google-Smtp-Source: AGHT+IGGkr4GdWmmUxO5qub5kR8M2nFLZKeObq79bwG3tgS/nRN3Rf5DhCDHCnC7BFyACDU3MkcyPOCskTwXpzH84XE=
-X-Received: by 2002:a67:f408:0:b0:471:b9ab:7bad with SMTP id
- p8-20020a67f408000000b00471b9ab7badmr3249456vsn.29.1709696063495; Tue, 05 Mar
- 2024 19:34:23 -0800 (PST)
+ AJvYcCUwoECtnjnfQgwxm0tHrXmRmPK4uEwiNoGOSbJkTQSjLDOxFvKW8UoYAcb//wwDQF7xEQz+/n3MOS/aI/oMXaHgs/dRK7M=
+X-Gm-Message-State: AOJu0Yw2/7qu142sYT1YPB5NnxhfJlPguNT1uxKVVLGGE2K3Iub2gAHW
+ 35KjSfp+xPuUwf6YeLB9EO2vR02X8glFLd6kuXJnKPIAaBYuXRIaMveqVxU6YpXNsODzPOfDfeH
+ ZU1Q5qJz0wgwqgWl6PFGLfNt+/C0=
+X-Google-Smtp-Source: AGHT+IGfvc/z0VIVbfSCujxi0LnK2vF5T7wFLmjuA2n8L/Hm0zJ41usVANXZKxrO/T8fLCYtEiAjWfgpGdBoYIv6ZSA=
+X-Received: by 2002:a05:6102:91:b0:472:63c5:64f6 with SMTP id
+ t17-20020a056102009100b0047263c564f6mr3689986vsp.11.1709700284058; Tue, 05
+ Mar 2024 20:44:44 -0800 (PST)
 MIME-Version: 1.0
-References: <20240229133745.771154-1-hchauhan@ventanamicro.com>
- <20240229-92706c0ccb3d6a6e8b725815@orel>
- <CAAhSdy1SrsU4x1V5OPRzBKmfC02qHrC09QM66WK4nUqDpONGgw@mail.gmail.com>
-In-Reply-To: <CAAhSdy1SrsU4x1V5OPRzBKmfC02qHrC09QM66WK4nUqDpONGgw@mail.gmail.com>
+References: <CAHY78Bq6AdcZPuFRbdShDPvgmgcoB+PKLWqPuOoX3vdJ-NsZ+A@mail.gmail.com>
+In-Reply-To: <CAHY78Bq6AdcZPuFRbdShDPvgmgcoB+PKLWqPuOoX3vdJ-NsZ+A@mail.gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 6 Mar 2024 13:33:57 +1000
-Message-ID: <CAKmqyKMNKb0cUYdPYEhLzR7mf2d9h5B1Fv74u3jRCvWhLLokjA@mail.gmail.com>
-Subject: Re: [PATCH v3 0/2] Export debug triggers as an extension
-To: Anup Patel <anup@brainfault.org>
-Cc: Andrew Jones <ajones@ventanamicro.com>,
- Himanshu Chauhan <hchauhan@ventanamicro.com>, 
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Date: Wed, 6 Mar 2024 14:44:18 +1000
+Message-ID: <CAKmqyKN2W+xXUKxex_HfaNgMhGd-=q0j5cA6pssp2Kh4y38rSQ@mail.gmail.com>
+Subject: Re: What riscv tracing tools do you recommend and how are they
+ accurate for measurements?
+To: Nazerke Turtayeva <nturtayeva@ucsb.edu>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92c;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::929;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x929.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -94,89 +91,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Mar 1, 2024 at 2:20=E2=80=AFAM Anup Patel <anup@brainfault.org> wro=
-te:
+On Thu, Feb 29, 2024 at 11:21=E2=80=AFPM Nazerke Turtayeva <nturtayeva@ucsb=
+.edu> wrote:
 >
-> On Thu, Feb 29, 2024 at 8:42=E2=80=AFPM Andrew Jones <ajones@ventanamicro=
-.com> wrote:
-> >
-> > On Thu, Feb 29, 2024 at 07:07:43PM +0530, Himanshu Chauhan wrote:
-> > > All the CPUs may or may not implement the debug triggers (sdtrig)
-> > > extension. The presence of it should be dynamically detectable.
-> > > This patch exports the debug triggers as an extension which
-> > > can be turned on or off by sdtrig=3D<true/false> option. It is
-> > > turned on by default.
-> > >
-> > > "sdtrig" is concatenated to ISA string when it is enabled.
-> > > Like so:
-> > >     rv64imafdch_zicbom_*_sdtrig_*_sstc_svadu
-> > >
-> > > Changes from v1:
-> > >    - Replaced the debug property with ext_sdtrig
-> > >    - Marked it experimenatal by naming it x-sdtrig
-> > >    - x-sdtrig is added to ISA string
-> > >    - Reversed the patch order
-> > >
-> > > Changes from v2:
-> > >    - Mark debug property as deprecated and replace internally with sd=
-trig extension
-> >
-> > I'm getting lost in our discussions, but I thought we needed both in ca=
-se
-> > a machine only implements debug 0.13, since sdtrig is at least 'more th=
-an'
-> > debug, even if backwards compatible (which I also wasn't sure was the
-> > case). If, OTOH, QEMU's debug implementation exactly implements sdtrig'=
-s
-> > specification, then I'm in favor of deprecating the 'debug' extension.
+> Hi everyone,
 >
-> The QEMU's debug implementation aligns more with Sdtrig v1.0 specificatio=
-n
-> because we have mcontrol6 which was not present in debug 0.13
+> Recently, I was planning to measure the performance of my application of =
+interest for potential RISC-V hardware. Hence, I started my simulations fro=
+m Spike to analyze dynamic instruction traces and instruction count, nevert=
+heless given it does not support multithreading, I started using Qemu to te=
+st my app too. However, it seems like I cannot rely on timing results of Qe=
+mu for comparing different implementations. Accordingly, given I am brand n=
+ew to the Qemu ecosystem, I was wondering whether I am missing some importa=
+nt mainstream instrumentation and tracing tools that I can use for performa=
+nce evaluation of my target app in other ways. Particularly, I want to unde=
+rstand implications of adding custom ISA instructions to the performance of=
+ my application.
 
-I'm not sure that's exactly the case. I think QEMU implements the
-debug 0.13 specification and also the mcontrol6. That's really a bug
-that we support mcontrol6, it snuck in.
+Hello,
 
-We can just support both and wrap the mcontrol6 section behind a
-sdtrig check. That seems to be the easiest option. That way we can
-support the current ratified debug spec and the experimental soon to
-be ratified sdtrig and friends spec.
+QEMU is an emulator so it isn't great at timing analysis.
+
+QEMU is useful for instruction traces though. If you use icount [1]
+you can get a deterministic-ish setup which is very useful for
+instruction counting during execution. I'm not sure what custom
+instructions you are adding, but you can test if they reduce the
+number of instructions executed. Note that QEMU doesn't model timing
+though, so it might not be an accurate representation of real life
+performance.
+
+You can use a plugin (see [2] for some examples) to generate
+instruction, memory or other more specific traces.
+
+1: https://www.qemu.org/docs/master/devel/tcg-icount.html
+2: https://www.qemu.org/docs/master/devel/tcg-plugins.html#example-plugins
 
 Alistair
 
 >
-> IMO, we should definitely depricate debug 0.13
+> In this regard, do you have any recommendations on where I can look?
 >
-> Regards,
-> Anup
+> Thanks,
+> Best wishes
 >
-> >
-> > Thanks,
-> > drew
-> >
-> >
-> > >    - setting/unsetting debug property shows warning and sets/unsets e=
-xt_sdtrig
-> > >    - sdtrig is added to ISA string as RISC-V debug specification is f=
-rozen
-> > >
-> > > Himanshu Chauhan (2):
-> > >   target/riscv: Mark debug property as deprecated
-> > >   target/riscv: Export sdtrig in ISA string
-> > >
-> > >  target/riscv/cpu.c        | 38 +++++++++++++++++++++++++++++++++++--=
--
-> > >  target/riscv/cpu_cfg.h    |  2 +-
-> > >  target/riscv/cpu_helper.c |  2 +-
-> > >  target/riscv/csr.c        |  2 +-
-> > >  target/riscv/machine.c    |  2 +-
-> > >  5 files changed, 39 insertions(+), 7 deletions(-)
-> > >
-> > > --
-> > > 2.34.1
-> > >
-> > >
-> >
->
+> --
+> Nazerke Turtayeva
+> Graduate Student
+> Electrical and Computer Engineering, Computer Science
+> Email: nturtayeva@ucsb.edu
+> UC Santa Barbara
 
