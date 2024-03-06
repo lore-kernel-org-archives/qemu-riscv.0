@@ -4,76 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 786BEC54E55
-	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Mar 2024 16:02:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80C97C54798
+	for <qemu-riscv@archiver.kernel.org>; Wed,  6 Mar 2024 00:15:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rhXBn-0007SN-3x; Tue, 05 Mar 2024 10:58:47 -0500
+	id 1rhew4-0004B6-L0; Tue, 05 Mar 2024 19:15:04 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1rhXBd-0006Ix-P4
- for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 10:58:37 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1rhXBZ-0000i0-1N
- for qemu-riscv@nongnu.org; Tue, 05 Mar 2024 10:58:36 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1709654311;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=LdqoNsfOgM1ctpAktfMXnvxfqY5U6p7jYtgcELBrb3Y=;
- b=Bvd3ostDklCalsXVjmVCdclJeKypdpxGODJGJVEKMJIlI66HE8j+NiJ8eDhUeo9EEiqv5m
- QlWTTpw85j5UKVvqn4SeFmHp/KUVUvKmkyAxQKTFegZ2AJlgX+2nFSTezxezbCvLefQbx5
- byLEumKKwxUZKqdWg0lZ7HiKuvnr0F0=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-626-wyXb7KV2MS-bx5supjNtNw-1; Tue, 05 Mar 2024 10:58:27 -0500
-X-MC-Unique: wyXb7KV2MS-bx5supjNtNw-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com
- [10.11.54.5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 8C6C7101A586;
- Tue,  5 Mar 2024 15:58:26 +0000 (UTC)
-Received: from dell-r430-03.lab.eng.brq2.redhat.com
- (dell-r430-03.lab.eng.brq2.redhat.com [10.37.153.18])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 0A80E17A97;
- Tue,  5 Mar 2024 15:58:23 +0000 (UTC)
-From: Igor Mammedov <imammedo@redhat.com>
-To: qemu-devel@nongnu.org
-Cc: peter.maydell@linaro.org, pbonzini@redhat.com, mst@redhat.com,
- gaosong@loongson.cn, alistair.francis@wdc.com, palmer@dabbelt.com,
- bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, imammedo@redhat.com, anisinha@redhat.com,
- philmd@linaro.org, wangyanan55@huawei.com, eblake@redhat.com,
- armbru@redhat.com, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
- f.ebner@proxmox.com
-Subject: [PATCH v2 20/20] tests: acpi: update expected SSDT.dimmpxm blob
-Date: Tue,  5 Mar 2024 16:57:24 +0100
-Message-Id: <20240305155724.2047069-21-imammedo@redhat.com>
-In-Reply-To: <20240305155724.2047069-1-imammedo@redhat.com>
-References: <20240305155724.2047069-1-imammedo@redhat.com>
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1rhew1-0004A1-S8; Tue, 05 Mar 2024 19:15:01 -0500
+Received: from mail-ua1-x931.google.com ([2607:f8b0:4864:20::931])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1rhew0-0000Vk-5Z; Tue, 05 Mar 2024 19:15:01 -0500
+Received: by mail-ua1-x931.google.com with SMTP id
+ a1e0cc1a2514c-7dae66def19so2410081241.0; 
+ Tue, 05 Mar 2024 16:14:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1709684098; x=1710288898; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7DdQBYrMrB8e8MCNnDxxYQ7R+aOnmnZ6e9O3nDxZdxU=;
+ b=jqJFMDUsTy6LYDaaefyr9lEIqnoqtT1snPkorijNVLai7mzNIesRKLoiTFqQcowZy1
+ 8h4a4UWp26Czb15T36cxejUvrjoblERYRgT3D9oskJar3TZpjzh9bkBTsWbzg3kGB5Mm
+ VvHhtRm2K+Dm3gQsxoczCs/U9PNl493VkzdMEUfRvOf56ArRmU2ZXtM3AUBqEhK6ynLj
+ RhDxM6W8FOr0wq6LMfwt0BAO4MYBEG09v+gNKn+H9YOBefHQDWba+dAMxaBM9wYvFis1
+ rdLfx5CANnmWLi/KstaL28uIzTic3cV8NxHeYjfMl+MbrYX0BisdtJicxdMMmgfD99Dy
+ dAHg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1709684098; x=1710288898;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=7DdQBYrMrB8e8MCNnDxxYQ7R+aOnmnZ6e9O3nDxZdxU=;
+ b=n3kredN72fe/VS0WEpySSvqL780xs9Axpape4VZMic/aNC3/Psv7bIj0NMCYF0n4i/
+ NWlzxGmcTh/HB3oyl4uvls1mv6iKoGnuEUibHNwpyUKf68QNqv3zcPGPJmXI//C8thct
+ Egc3BOFsff7NknivavBpQeZnTM23Rs0b904s0WotVvlNKXsRLUWOgcWChS18P3bLXBuk
+ 1z/DGpWzgh2aESvuRhp1rKKaamL6OvlRKH+Yu7fDPJbUpQBLzinnon537ZqbRXVcevxh
+ e0tTnU/vLt8FwJGoYydtPhPGaD3coe87aSeBPrvzZbDntDut/wrcQbyoMpkh/ltBjlK+
+ ZY0g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXCnhilFXrEraEUDNkbmUJ24FKfLT3J9sCZxBS1SfjVtxjnyhizl+zUslWqN1Oe15ZGz/9KejRO7BDZHkQK5iOYkWyl5xo=
+X-Gm-Message-State: AOJu0YxoFmbU9ylSXL7kI6Dw1WjYVV/IKeL1NMIos91/+KNwTOT5sMCn
+ T642XVjMgg4j5B9d4Mqcgwtb5uZ/WtdMWFaE71ILTHaZ9EOSYFW5b7rafRNtqHbdCqoTBqlvzX4
+ 9RDjw3/s4Zkr3w2qL2GB1NqsiymE=
+X-Google-Smtp-Source: AGHT+IFd52yFaersRW47Y4UYU4+Qk2K9EeRi4JBrEhZakESlc/m5wT65/l3F/3auQVR5m343V1tKUCY/cg1ztC/wQbY=
+X-Received: by 2002:a05:6102:190a:b0:472:6162:41c7 with SMTP id
+ jk10-20020a056102190a00b00472616241c7mr3166009vsb.9.1709684098127; Tue, 05
+ Mar 2024 16:14:58 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.5
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=imammedo@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -26
-X-Spam_score: -2.7
-X-Spam_bar: --
-X-Spam_report: (-2.7 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.568,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+References: <20240304191337.3101411-1-alex.bennee@linaro.org>
+ <20240304191337.3101411-5-alex.bennee@linaro.org>
+In-Reply-To: <20240304191337.3101411-5-alex.bennee@linaro.org>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 6 Mar 2024 10:14:31 +1000
+Message-ID: <CAKmqyKM17uFQKmV9vYQFVnwsg2athgs-2w5-O8y3ye+tsmupxA@mail.gmail.com>
+Subject: Re: [PATCH 4/4] target/riscv: honour no_raw_bytes when disassembling
+To: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
+Cc: qemu-devel@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Richard Henderson <richard.henderson@linaro.org>, qemu-riscv@nongnu.org, 
+ Song Gao <gaosong@loongson.cn>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::931;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x931.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -89,38 +94,63 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-address shift is caused by switch to 32-bit SMBIOS entry point
-which has slightly different size from 64-bit one and happens
-to trigger a bit different memory layout.
+On Tue, Mar 5, 2024 at 5:15=E2=80=AFAM Alex Benn=C3=A9e <alex.bennee@linaro=
+.org> wrote:
+>
+> This makes the output suitable when used for plugins.
+>
+> Signed-off-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
 
-Expected diff:
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
--    Name (MEMA, 0x07FFE000)
-+    Name (MEMA, 0x07FFF000)
+Alistair
 
-Signed-off-by: Igor Mammedov <imammedo@redhat.com>
----
- tests/qtest/bios-tables-test-allowed-diff.h |   1 -
- tests/data/acpi/q35/SSDT.dimmpxm            | Bin 1815 -> 1815 bytes
- 2 files changed, 1 deletion(-)
-
-diff --git a/tests/qtest/bios-tables-test-allowed-diff.h b/tests/qtest/bios-tables-test-allowed-diff.h
-index 81148a604f..dfb8523c8b 100644
---- a/tests/qtest/bios-tables-test-allowed-diff.h
-+++ b/tests/qtest/bios-tables-test-allowed-diff.h
-@@ -1,2 +1 @@
- /* List of comma-separated changed AML files to ignore */
--"tests/data/acpi/q35/SSDT.dimmpxm",
-diff --git a/tests/data/acpi/q35/SSDT.dimmpxm b/tests/data/acpi/q35/SSDT.dimmpxm
-index 70f133412f5e0aa128ab210245a8de7304eeb843..9ea4e0d0ceaa8a5cbd706afb6d49de853fafe654 100644
-GIT binary patch
-delta 23
-ecmbQvH=U0wIM^jboSlJzam_|9E_UV*|JeaVTLvQl
-
-delta 23
-ecmbQvH=U0wIM^jboSlJzanD9BE_UVz|JeaVy9Ofw
-
--- 
-2.39.3
-
+> ---
+>  disas/riscv.c | 28 +++++++++++++++-------------
+>  1 file changed, 15 insertions(+), 13 deletions(-)
+>
+> diff --git a/disas/riscv.c b/disas/riscv.c
+> index 8a546d5ea53..86028efea85 100644
+> --- a/disas/riscv.c
+> +++ b/disas/riscv.c
+> @@ -5192,19 +5192,21 @@ print_insn_riscv(bfd_vma memaddr, struct disassem=
+ble_info *info, rv_isa isa)
+>          }
+>      }
+>
+> -    switch (len) {
+> -    case 2:
+> -        (*info->fprintf_func)(info->stream, INST_FMT_2, inst);
+> -        break;
+> -    case 4:
+> -        (*info->fprintf_func)(info->stream, INST_FMT_4, inst);
+> -        break;
+> -    case 6:
+> -        (*info->fprintf_func)(info->stream, INST_FMT_6, inst);
+> -        break;
+> -    default:
+> -        (*info->fprintf_func)(info->stream, INST_FMT_8, inst);
+> -        break;
+> +    if (!info->no_raw_bytes) {
+> +        switch (len) {
+> +        case 2:
+> +            (*info->fprintf_func)(info->stream, INST_FMT_2, inst);
+> +            break;
+> +        case 4:
+> +            (*info->fprintf_func)(info->stream, INST_FMT_4, inst);
+> +            break;
+> +        case 6:
+> +            (*info->fprintf_func)(info->stream, INST_FMT_6, inst);
+> +            break;
+> +        default:
+> +            (*info->fprintf_func)(info->stream, INST_FMT_8, inst);
+> +            break;
+> +        }
+>      }
+>
+>      disasm_inst(buf, sizeof(buf), isa, memaddr, inst,
+> --
+> 2.39.2
+>
+>
 
