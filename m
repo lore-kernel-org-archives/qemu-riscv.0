@@ -4,102 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF5E2C5475B
-	for <qemu-riscv@archiver.kernel.org>; Wed,  6 Mar 2024 09:21:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB3E8C5475B
+	for <qemu-riscv@archiver.kernel.org>; Wed,  6 Mar 2024 09:38:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rhnSD-0002of-2s; Wed, 06 Mar 2024 04:20:49 -0500
+	id 1rhnij-0006SW-Ew; Wed, 06 Mar 2024 04:37:53 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <anisinha@redhat.com>)
- id 1rhnSC-0002o5-1s
- for qemu-riscv@nongnu.org; Wed, 06 Mar 2024 04:20:48 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <anisinha@redhat.com>)
- id 1rhnS8-0002oc-Nx
- for qemu-riscv@nongnu.org; Wed, 06 Mar 2024 04:20:46 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1709716840;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=f+xbs4Zv81wC/d85gwB3wyHo7HUcDcCDHGPr2UeXdwE=;
- b=UfFpwJZFf38IbUAZZHvzPZgfSFXZRjlvjZb8VhWMuT1A5punqoSi7ISQB8sjmRuBk0J11M
- gjOA0dkJnXpyd1ilqd6bZtav2kVaQby/uRw8gXSDR8qtW/tM7HTOBfF6eQ8SW/t/p4dO2O
- Nqd3kQRBWqF+JozIIMIx+ft5CFqw2Yc=
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
- [209.85.214.198]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-171-RBx8XJ4ZONOmPlmY9EH9Cw-1; Wed, 06 Mar 2024 04:20:39 -0500
-X-MC-Unique: RBx8XJ4ZONOmPlmY9EH9Cw-1
-Received: by mail-pl1-f198.google.com with SMTP id
- d9443c01a7336-1dc435b3e87so57847005ad.1
- for <qemu-riscv@nongnu.org>; Wed, 06 Mar 2024 01:20:39 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rhnif-0006Pu-5w
+ for qemu-riscv@nongnu.org; Wed, 06 Mar 2024 04:37:49 -0500
+Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rhnib-0001RN-8Z
+ for qemu-riscv@nongnu.org; Wed, 06 Mar 2024 04:37:48 -0500
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-1dc29f1956cso52115265ad.0
+ for <qemu-riscv@nongnu.org>; Wed, 06 Mar 2024 01:37:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1709717863; x=1710322663; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:references:cc:to:from
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=fNvmPfvH9W7Kwn40uZp3Qj0TVVLusroseZdtJTf9XT8=;
+ b=btDw0Ew3t1smuWbYfdJbQt4m4eebc4VzkpKTv5JnU45yFTJJCGeyzfGwwIyuBnqzXB
+ Q1szbW4tLGu855tuUwzocTwaRAQ//tV36C1xEszJfNGk8lnwlBUaMNaAPf9ZeosIBEYD
+ 3BX32c3NqIip83n6rO0MfqXw/xbTSh2X4NS1PMqtxuXEP2y5TKVGBqpKNq/ZpSSu1nWS
+ W7WzV+57EXhECx0/w6s4cVGDqeupxKEd6lnsUXryEdsLPkpUI3bwnNmZENaebsDPcZPm
+ 20ZJOgTiFOzkr5oYrpl5S89/h1CPN6Gcwmetb3yvAyhheT4RuqDJ++GgIby9RE4B2n7a
+ WoQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709716838; x=1710321638;
- h=to:references:message-id:content-transfer-encoding:cc:date
- :in-reply-to:from:subject:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=zzWX08Pqnklos6/nMIEev6rgEQxG8m1Enm3rRtbZGlk=;
- b=O9maECxdijz0r6CTp974rPnbBn2Tt/wCVjLEGrPoeMz+ceSaVHFwkbfRnMTCPCMD+c
- RVAU9TXyulMNCpFQ2VKP8qOUe3CWa0W6rYwax1KOu1pIooBfN/nK86AGJjKCzsyi5VA1
- zmhbVfQU+BbgN8yTcs7q9lgfeDwZ74aTItDCp0pCGCNCU699z5zIPC2wKS6vY2oliCef
- wmH95xtjzhrcyS4IkZZj1KtOoZynIWE6XRckZzDBEoDrq74T1Jc6NAXDxhijExz5vqt8
- xv7MzCzcYswFbYjm5zMI1jvhhKUht0ZV0DB0d6O5M52L2F4B9VPcjsMb+h1EAPPrVJJG
- gwyQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUAKn29VNSrRmWVByiWjNHC3DB9AJAmqpwy/0EUro5BZzYKHdxW11Rp1Lg5yn0JYDCKuN7B7Tvb7UQD0i+idoNFs/CDRsg=
-X-Gm-Message-State: AOJu0Ywq7l9+xp2JKUxQGOpuxr04PxiypjPyx2ELfxDEPhuXfui2g3Rv
- SwLtMtvsC0HBRAX0iJ1TLW6MQCqIgX6YRFD4d4emcVO2RQM9Hx9ertSeh27s93STOgYb2ZIBD3R
- GbfR37MaVpDkJ2jhhWzAB98UxLrJStjFQJjP1Nds8iJvAmz/H3MEB
-X-Received: by 2002:a17:902:f544:b0:1dc:c17d:6edd with SMTP id
- h4-20020a170902f54400b001dcc17d6eddmr4676868plf.20.1709716838355; 
- Wed, 06 Mar 2024 01:20:38 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IF48frTF7egD8Jc+BDzjjpexKu+NeXiXWVI4wc2wPirWW89Y6Lnv0Q5c+kj0ukkvINaFCanNw==
-X-Received: by 2002:a17:902:f544:b0:1dc:c17d:6edd with SMTP id
- h4-20020a170902f54400b001dcc17d6eddmr4676833plf.20.1709716838010; 
- Wed, 06 Mar 2024 01:20:38 -0800 (PST)
-Received: from smtpclient.apple ([115.96.30.47])
+ d=1e100.net; s=20230601; t=1709717863; x=1710322663;
+ h=content-transfer-encoding:in-reply-to:references:cc:to:from
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=fNvmPfvH9W7Kwn40uZp3Qj0TVVLusroseZdtJTf9XT8=;
+ b=s7IwOoCQO7KcyFXhO5LDSKezzXUZ8L9c+diJx3JridcIlFf1kx4wk2xYabzpvn5n9S
+ 86m9x05chiHFHWSd7WI3r1Y4N2XYryItqZ0oi1UlbMrzpnwtA0cv6UNIkRX0cyx2sxh9
+ 1igwHfxIjDN46kI2CM41ynR3eFfmaWWvrPPp3IJ6Ks3cPpQm/On2KnPVbzHmThdMm/Z0
+ GPNN/82K5pLb0UM/FLO0Ad1B+BsK/vQssSbWuOc60PV+O/x1i4RsE0f9Knc2HwpNE6Cv
+ Z9NR/4dZNrWhoVXkQpP6RVIHcX+49YGdyT8xYo9CtR3t2TlEkp0rYQpP4PfJDiUEwFHK
+ XFnQ==
+X-Gm-Message-State: AOJu0YygVDjtuzZC+BT+ACgAVuStbCdjXIqLywcXkHpezGcxDh/1YuRF
+ ltwB8R/Oodn+BtoHqfKpZr1xzYdP7N3SgSlPgVIt+oJVHeQUnql/wYjIxpfLDcIgspzLMNNDhFh
+ P
+X-Google-Smtp-Source: AGHT+IGt81MdIZX2EcH6UTdpm/R4YbgCQsmn15v4Pg+/oxq9Jk2yJ+29PHVTMnVZoTzuZq8E/kH3bA==
+X-Received: by 2002:a17:902:db86:b0:1dc:c8d3:52ba with SMTP id
+ m6-20020a170902db8600b001dcc8d352bamr4279236pld.56.1709717862902; 
+ Wed, 06 Mar 2024 01:37:42 -0800 (PST)
+Received: from [192.168.68.110] ([177.94.15.159])
  by smtp.gmail.com with ESMTPSA id
- b17-20020a170903229100b001db8a5ea0a3sm12089566plh.94.2024.03.06.01.20.31
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Wed, 06 Mar 2024 01:20:37 -0800 (PST)
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3774.400.31\))
-Subject: Re: [PATCH v2 20/20] tests: acpi: update expected SSDT.dimmpxm blob
-From: Ani Sinha <anisinha@redhat.com>
-In-Reply-To: <20240305155724.2047069-21-imammedo@redhat.com>
-Date: Wed, 6 Mar 2024 14:50:20 +0530
-Cc: QEMU Developers <qemu-devel@nongnu.org>,
- Peter Maydell <peter.maydell@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
- Song Gao <gaosong@loongson.cn>,
- Alistair Francis <alistair.francis@wdc.com>, palmer@dabbelt.com,
- bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, philmd@linaro.org, wangyanan55@huawei.com,
- eblake@redhat.com, armbru@redhat.com, qemu-arm@nongnu.org,
- qemu-riscv@nongnu.org, f.ebner@proxmox.com
-Message-Id: <9E373F64-2290-4AF7-A23D-340FB6CE86F8@redhat.com>
-References: <20240305155724.2047069-1-imammedo@redhat.com>
- <20240305155724.2047069-21-imammedo@redhat.com>
-To: Igor Mammedov <imammedo@redhat.com>
-X-Mailer: Apple Mail (2.3774.400.31)
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=anisinha@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -11
-X-Spam_score: -1.2
-X-Spam_bar: -
-X-Spam_report: (-1.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.568,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_SORBS_WEB=1.5, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+ c1-20020a170903234100b001db594c9d17sm12081686plh.254.2024.03.06.01.37.40
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 06 Mar 2024 01:37:42 -0800 (PST)
+Message-ID: <339358de-fc57-42fb-80ec-9413648ea44f@ventanamicro.com>
+Date: Wed, 6 Mar 2024 06:37:39 -0300
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] target/riscv: Fix shift count overflow
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: "demin.han" <demin.han@starfivetech.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, philmd@linaro.org
+References: <20240225174114.5298-1-demin.han@starfivetech.com>
+ <a5c8ed1b-0b67-449a-83b9-accf0754c562@ventanamicro.com>
+In-Reply-To: <a5c8ed1b-0b67-449a-83b9-accf0754c562@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62f.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -115,52 +97,56 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Hi Alistair,
 
 
-> On 05-Mar-2024, at 21:27, Igor Mammedov <imammedo@redhat.com> wrote:
->=20
-> address shift is caused by switch to 32-bit SMBIOS entry point
-> which has slightly different size from 64-bit one and happens
-> to trigger a bit different memory layout.
+Please don't forget to queue this up. Thanks,
 
-Why does it affect only q35 machines and not i440fx as well?
 
->=20
-> Expected diff:
->=20
-> -    Name (MEMA, 0x07FFE000)
-> +    Name (MEMA, 0x07FFF000)
->=20
-> Signed-off-by: Igor Mammedov <imammedo@redhat.com>
+Daniel
 
-Acked-by: Ani Sinha <anisinha@redhat.com>
-
-> ---
-> tests/qtest/bios-tables-test-allowed-diff.h |   1 -
-> tests/data/acpi/q35/SSDT.dimmpxm            | Bin 1815 -> 1815 bytes
-> 2 files changed, 1 deletion(-)
->=20
-> diff --git a/tests/qtest/bios-tables-test-allowed-diff.h b/tests/qtest/bi=
-os-tables-test-allowed-diff.h
-> index 81148a604f..dfb8523c8b 100644
-> --- a/tests/qtest/bios-tables-test-allowed-diff.h
-> +++ b/tests/qtest/bios-tables-test-allowed-diff.h
-> @@ -1,2 +1 @@
-> /* List of comma-separated changed AML files to ignore */
-> -"tests/data/acpi/q35/SSDT.dimmpxm",
-> diff --git a/tests/data/acpi/q35/SSDT.dimmpxm b/tests/data/acpi/q35/SSDT.=
-dimmpxm
-> index 70f133412f5e0aa128ab210245a8de7304eeb843..9ea4e0d0ceaa8a5cbd706afb6=
-d49de853fafe654 100644
-> GIT binary patch
-> delta 23
-> ecmbQvH=3DU0wIM^jboSlJzam_|9E_UV*|JeaVTLvQl
->=20
-> delta 23
-> ecmbQvH=3DU0wIM^jboSlJzanD9BE_UVz|JeaVy9Ofw
->=20
-> --=20
-> 2.39.3
->=20
-
+On 2/26/24 06:31, Daniel Henrique Barboza wrote:
+> 
+> 
+> On 2/25/24 14:41, demin.han wrote:
+>> The result of (8 - 3 - vlmul) is negative when vlmul >= 6,
+>> and results in wrong vill.
+>>
+>> Signed-off-by: demin.han <demin.han@starfivetech.com>
+>> ---
+> 
+> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> 
+>> Changes in v2:
+>> - Add vlen var
+>>
+>> Changes in v3:
+>> - Fix commit msg typo
+>>
+>>   target/riscv/vector_helper.c | 5 ++---
+>>   1 file changed, 2 insertions(+), 3 deletions(-)
+>>
+>> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+>> index 84cec73eb2..fe56c007d5 100644
+>> --- a/target/riscv/vector_helper.c
+>> +++ b/target/riscv/vector_helper.c
+>> @@ -44,6 +44,7 @@ target_ulong HELPER(vsetvl)(CPURISCVState *env, target_ulong s1,
+>>       target_ulong reserved = s2 &
+>>                               MAKE_64BIT_MASK(R_VTYPE_RESERVED_SHIFT,
+>>                                               xlen - 1 - R_VTYPE_RESERVED_SHIFT);
+>> +    uint16_t vlen = cpu->cfg.vlenb << 3;
+>>       int8_t lmul;
+>>       if (vlmul & 4) {
+>> @@ -53,10 +54,8 @@ target_ulong HELPER(vsetvl)(CPURISCVState *env, target_ulong s1,
+>>            * VLEN * LMUL >= SEW
+>>            * VLEN >> (8 - lmul) >= sew
+>>            * (vlenb << 3) >> (8 - lmul) >= sew
+>> -         * vlenb >> (8 - 3 - lmul) >= sew
+>>            */
+>> -        if (vlmul == 4 ||
+>> -            cpu->cfg.vlenb >> (8 - 3 - vlmul) < sew) {
+>> +        if (vlmul == 4 || (vlen >> (8 - vlmul)) < sew) {
+>>               vill = true;
+>>           }
+>>       }
 
