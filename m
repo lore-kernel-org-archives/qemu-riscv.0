@@ -4,84 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96122C5475B
-	for <qemu-riscv@archiver.kernel.org>; Wed,  6 Mar 2024 20:00:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D9A1C5475B
+	for <qemu-riscv@archiver.kernel.org>; Wed,  6 Mar 2024 20:43:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rhxRJ-0005Tl-O2; Wed, 06 Mar 2024 15:00:33 -0500
+	id 1rhy64-0004Ly-2C; Wed, 06 Mar 2024 15:42:40 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rhxRI-0005T7-FC
- for qemu-riscv@nongnu.org; Wed, 06 Mar 2024 15:00:32 -0500
-Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rhy63-0004Lk-5b
+ for qemu-riscv@nongnu.org; Wed, 06 Mar 2024 15:42:39 -0500
+Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rhxRG-000669-9y
- for qemu-riscv@nongnu.org; Wed, 06 Mar 2024 15:00:32 -0500
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-1dc0d11d1b7so1073505ad.2
- for <qemu-riscv@nongnu.org>; Wed, 06 Mar 2024 12:00:29 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rhy61-0004Ms-8s
+ for qemu-riscv@nongnu.org; Wed, 06 Mar 2024 15:42:38 -0500
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-4130e293686so883345e9.3
+ for <qemu-riscv@nongnu.org>; Wed, 06 Mar 2024 12:42:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1709755228; x=1710360028; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:references:cc:to:from
+ d=linaro.org; s=google; t=1709757755; x=1710362555; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=uE/+d8za9FOme6hIEIVOXrHDo/Jr6T++1vzl/Rw5YTs=;
- b=a3UNQ2371erCuSTED/m74bEKu40OEwahwMeVbMoodTsueKzonESP1srAPA5zamCVJi
- /GG+Xyugvyik0fC3hWTJPeRDALvDtp8N9Ml6SvCnTSTlIazOi3c/VPW6LFTQ422ZerQc
- KfgWsXZxjGCTpuLNpOLlMgwCSwTYcv5Vb6es7/zfC7nYca5/5Gh68NqB6W7WS26+CRNy
- icFsR6By88fVA6dgA+63cIzrVyTPQ58zAkNVvnjh+1Da3deFlimTVvDcO1gsVn8ttCYi
- 41JV03mc+NEeE1f826R+5466efH+cOBXbYVimaOww5bhFqMJj6goIujBPS+YARiQ3pnx
- DLSg==
+ bh=DPx0WKsr3WD8stnEbU6nk/HiuAb1e9AnM+Gm0M50IM4=;
+ b=K4jPZqftQBnscYizISbCv/2PzNvlC1kQ609Kohx8Qu9fxcLCfArls3NDw89uC1byFH
+ IH3zpfvDhGy/XokuirkLuAN+ExVTMk4bUBsvbETyTII5gGTLndkqSsp9YHz3CHTT1AFh
+ oNoypCP2js8vTHaF1IP6cMQV2TtQWekgPwkNxaHJ8sB6iv0CqGteFOP7kUQPTcSFu4Bx
+ TzLiNviBhNE81kMTNw9++X7tVWakBxic11HFf9hU6C7pdnr44z1cUUaYC80GOTzkvoOS
+ KLK8LWbsojsIrKAXXjIjtqQrQt2kz/4c5tjzIBEZXG9V6GfdV9GBwHnYIUKtwe4T2zPE
+ O/Yw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709755228; x=1710360028;
- h=content-transfer-encoding:in-reply-to:references:cc:to:from
+ d=1e100.net; s=20230601; t=1709757755; x=1710362555;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=uE/+d8za9FOme6hIEIVOXrHDo/Jr6T++1vzl/Rw5YTs=;
- b=IF8iJgNunQOYUNHw2FHd5gomvPaLSqmygOF8kKVabZU5loFihS6oaz4W2HDUfNaoF/
- qd5xzFo0PrvbyEtW27x9DLtYq0/d8QQ2IFXbCRPUtTr+zAjdSaGyPaYjrvjkD2PylpDW
- E6HarPagAulxI5A02iMZlSIidoBJqyxeloQaUVX9YpaDJwav1hY4lb1m+9qPOZZcujcS
- o/B1Ls1SjiwN91YCsoF1Pk0MfZXZe9DGeV9C2yJG/v4zN9LAt13bCWVUBoR6MKvSP8EY
- ii05wW0rpuy2urQXvza5aC2ypeMXAgvauefM0OGFXYxUFK3rNsOWay+ar7xF3A9pUef4
- CEhA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVUcMpp8ECq+JG2XcnyXpUQ2v+rp9k55cm0uZgXC8ks7csUJSY3tjHWCfkLEHdDUN4uymdX7Iylj1l/3dmNGio4tMKLJeg=
-X-Gm-Message-State: AOJu0Yzi4dAVX5UAFvGCFc41JlWTrU1A/dzqgwWZu4zJE4zYG3WL9T0f
- b/3qifiFGjzXDywpskYhW1dgu6qT62IxUbnn3c6hf0sLvTxiVj9EDCE0IL0OjUc=
-X-Google-Smtp-Source: AGHT+IF/7kV2NMp4Pu35I12HiLF09XWdrflhcKgqEX6cVvv1FuNEc3D9caY+iJxdd0C3K085MZqa2w==
-X-Received: by 2002:a17:902:f682:b0:1dc:afd1:9c37 with SMTP id
- l2-20020a170902f68200b001dcafd19c37mr6684943plg.24.1709755228142; 
- Wed, 06 Mar 2024 12:00:28 -0800 (PST)
-Received: from [192.168.68.110] ([177.94.15.159])
- by smtp.gmail.com with ESMTPSA id
- p6-20020a170902b08600b001dc30f13e6asm12953234plr.137.2024.03.06.12.00.22
+ bh=DPx0WKsr3WD8stnEbU6nk/HiuAb1e9AnM+Gm0M50IM4=;
+ b=V8Q9NOX8fCGZ/vQipBQp6mSRhbOyKpfWUH4IKkMUj3WJBE1JgfBPE++clNtAJo/lID
+ Eus1rnVcm2gPGfDnhlPfsD/fXUd9g8M3AFL+68Bj3GQ3d0kbbgxHSG5snRjq819cYWn1
+ veAapsa3JUo+cGDCTufwm4Wo3i4ieL2ILLPTSjwGAmhYRUhfWo3opNAHO0osAy5c9PYG
+ /5lGk0SfXUkgY0U9VdZSK/0a9NAs25xwhn5iLFaDqQmpOBa/QFLiBf3RVesKG9BFDtGq
+ MAe0tsI1kux52Ncj5rdYzyWZLq7J1WBp+7cG2otA/z7TszM72B4zcrdQPHzATjGdM1ul
+ IeUw==
+X-Gm-Message-State: AOJu0Yx6oxTf7xc7UoKWGmFoYDlUUHlwJeDto7lcBCWQiPLTUQ4zYoyo
+ eKDp9el3cj7Nhaeg+VAt5HvX6zMJNEKuF+mCySBujb18hzoiSm64qD4MOvpgtu8=
+X-Google-Smtp-Source: AGHT+IEJ9ILdKfidupcWR4qRrm9ea8ASr3oQgB5S3mF2qAxXsNXDlMNDxk5Csj1Ukm88AwBsFg1ApA==
+X-Received: by 2002:a05:600c:468a:b0:412:bcc9:32dc with SMTP id
+ p10-20020a05600c468a00b00412bcc932dcmr12859000wmo.31.1709757755325; 
+ Wed, 06 Mar 2024 12:42:35 -0800 (PST)
+Received: from [192.168.69.100] (vau06-h02-176-184-43-100.dsl.sta.abo.bbox.fr.
+ [176.184.43.100]) by smtp.gmail.com with ESMTPSA id
+ bg13-20020a05600c3c8d00b00412fe0eb806sm367392wmb.14.2024.03.06.12.42.33
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 06 Mar 2024 12:00:27 -0800 (PST)
-Message-ID: <3d377b25-bbab-4401-b5e7-98f6efa81ca7@ventanamicro.com>
-Date: Wed, 6 Mar 2024 17:00:21 -0300
+ Wed, 06 Mar 2024 12:42:34 -0800 (PST)
+Message-ID: <970fa729-46be-44e7-b882-34a87e328319@linaro.org>
+Date: Wed, 6 Mar 2024 21:42:32 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/2] hw/arm/virt-acpi-build.c: Migrate SPCR creation to
- common location
+Subject: Re: [PATCH v7 7/9] trans_rvv.c.inc: remove redundant mark_vs_dirty()
+ calls
 Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: Sia Jee Heng <jeeheng.sia@starfivetech.com>, qemu-arm@nongnu.org,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: mst@redhat.com, imammedo@redhat.com, anisinha@redhat.com,
- peter.maydell@linaro.org, shannon.zhaosl@gmail.com,
- sunilvl@ventanamicro.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- bin.meng@windriver.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com
-References: <20240116010930.43433-1-jeeheng.sia@starfivetech.com>
- <20240116010930.43433-2-jeeheng.sia@starfivetech.com>
- <49d0d8d3-c7fd-4039-aeed-6c31ba16557a@ventanamicro.com>
-In-Reply-To: <49d0d8d3-c7fd-4039-aeed-6c31ba16557a@ventanamicro.com>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ Richard Henderson <richard.henderson@linaro.org>
+References: <20240306171932.549549-1-dbarboza@ventanamicro.com>
+ <20240306171932.549549-8-dbarboza@ventanamicro.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20240306171932.549549-8-dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x630.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::329;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x329.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -104,20 +97,20 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On 6/3/24 18:19, Daniel Henrique Barboza wrote:
+> trans_vmv_v_i , trans_vfmv_v_f and the trans_##NAME macro from
+> GEN_VMV_WHOLE_TRANS() are calling mark_vs_dirty() in both branches of
+> their 'ifs'. conditionals.
+> 
+> Call it just once in the end like other functions are doing.
+> 
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>   target/riscv/insn_trans/trans_rvv.c.inc | 11 +++--------
+>   1 file changed, 3 insertions(+), 8 deletions(-)
 
-
-On 3/6/24 15:57, Daniel Henrique Barboza wrote:
-> As a side note, it seems like 'bios-table-test' isn't being run for RISC-V. Not sure if this
-> is intentional or a foresight.
-
-s/foresight/hindsight
-
-There's no 'make check' for what we want to say in the ML but hopefully there's
-a way to enable 'bios-table-test' for RISC-V :D
-
-
-Daniel
-
-
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
 
