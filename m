@@ -4,74 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B86A2C5475B
-	for <qemu-riscv@archiver.kernel.org>; Wed,  6 Mar 2024 17:09:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45855C5475B
+	for <qemu-riscv@archiver.kernel.org>; Wed,  6 Mar 2024 17:10:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rhulr-0006NT-IH; Wed, 06 Mar 2024 12:09:35 -0500
+	id 1rhum6-0006Pz-LY; Wed, 06 Mar 2024 12:09:51 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
- id 1rhulc-0006Jw-6M
- for qemu-riscv@nongnu.org; Wed, 06 Mar 2024 12:09:23 -0500
-Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
+ id 1rhulx-0006O2-7m
+ for qemu-riscv@nongnu.org; Wed, 06 Mar 2024 12:09:42 -0500
+Received: from mail-pg1-x534.google.com ([2607:f8b0:4864:20::534])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
- id 1rhula-0004D3-M9
- for qemu-riscv@nongnu.org; Wed, 06 Mar 2024 12:09:19 -0500
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-1dd1d9daf02so23465955ad.1
- for <qemu-riscv@nongnu.org>; Wed, 06 Mar 2024 09:09:17 -0800 (PST)
+ id 1rhulv-0004Hh-N5
+ for qemu-riscv@nongnu.org; Wed, 06 Mar 2024 12:09:40 -0500
+Received: by mail-pg1-x534.google.com with SMTP id
+ 41be03b00d2f7-517ab9a4a13so6266431a12.1
+ for <qemu-riscv@nongnu.org>; Wed, 06 Mar 2024 09:09:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1709744956; x=1710349756; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=5jiD4ngO6RXGlAuwMlJfzGW+Jl5alSTBUPN7JW336io=;
- b=ba4BxUqHvkfyzWn3aiylDMzqnyX68GuEPCM0JycfeFXPFm1PA+vd4m+f9ERMiYSzhG
- GCnpe6twyUUt35h1sQx3RSeQfDp7wq9M6EbhxX15N6q2mc1Ae/kp2Vf57sQALZRlsH4/
- +jBFVZahJthjMgszkTbRkLzMM7odf150A06W3VlO3kzEDaGmcdmNa6EMB4cJb+fswBwe
- Ji2DdFdHiIUSHAva9HHmxDd8FS2Ysi22/pjXF+qlIWKno7tZrx5DQdVWe1TFOsR0nWBR
- Y479p30nAKLlJtV9RhDMW09DofuYmApqd+w0o/QxS/d2b1+q9LVNmMxuzsMhrugvQei+
- /9tg==
+ d=sifive.com; s=google; t=1709744978; x=1710349778; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=BatQI6PUZGO1KNqgfU3RtFkXz7my1gBF9/eXeStE9J4=;
+ b=mWuWQc26f9CCMX6Wb+giTei1QIEuPFiijOJdAn9IgcO9bM/sCH5synWbrrKlwPEC87
+ 0OdA3brUo+kmIdpmztbzEs/+r8ZnE02uBXQs/by+Aa9Rqh+IhqnBzLPljVDMKVoVp2gz
+ lV+lhi3+h+x+YAA/JgNnDOVrZEbWiLTjmbM/ZKQxnBi5w3uM8tyvaA53WWUl8MrrFEaG
+ HBiww+14oe2pxOhy7dCQZFg9R23oKlEdfdAQ5Z9ZIyZX0GdX87R0QffA4v7Vd9bDAdso
+ uN2o8Zjb48Bhzu6DWTm7Di2LhdHBwhrT0uWlcEVNU+CQJ2IzNgURlCoLnIdlK48KkDRI
+ nlhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709744956; x=1710349756;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=5jiD4ngO6RXGlAuwMlJfzGW+Jl5alSTBUPN7JW336io=;
- b=SGG4dM0xANHxi3eL7clU6rK+zTX1rKGmHnYrCb4qkJ59elkvWeLrfnNxQCJx924wDX
- JHFaGsqfPDnStyB1JY1qUNslj8OwmA82kMeDrMRG4M2iGNDx/5J6mSFOv9lgS2XMstqf
- 2xNlroSrDSroHONpVmRWCDjwQDJR5FrZK92ck2+3Ec+keXG2VoVpTf0j4rnM8StPu2+t
- urGFslKGdzGCGF8oRh0TWhuSGlOM3xHJ+Rkt+8AleVywcp2fknJ0tQbc+kfhWDtzaSMK
- 7K8wFjM6K8jiJqYqeTXXpZJlkvJB9pgsETD2ITOv9xnBnyDoG5tJMAIwaaxko+votm5L
- akEw==
+ d=1e100.net; s=20230601; t=1709744978; x=1710349778;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=BatQI6PUZGO1KNqgfU3RtFkXz7my1gBF9/eXeStE9J4=;
+ b=LEBgpn+uxcYXxF0xcxMuCerXW4fKZZCiMgRm7uBnAUSqYytdRbq3VuYAlxDwrlFZhe
+ bRpUfR1zL1ILGL3qFuO8x0pvwQYp7bqj7F9ZcuAaWYuhXvp2/ORzM7NSLP3CSmUSzUhw
+ Mu3NmVhqvEu5jLvdggzKIke2MlGhmGh/Jv5ejrzuo5oWK2qrKgP6RZgRl/8xQoFrj5UJ
+ oLGUn2Qu81dSCyFj5rkJyLzEsxPF82ZK0yzgU+JQgzAlO2Irmr53TPJyTdzHk19o6Q7m
+ epiicOZu628ZbfaeW48fV0q0sxwyBeOuKP8xFfSGJvtML2DurS0ZcBgv4//uWRoaJ/l4
+ 8eNg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUTohJo4XL6b3IHxOKfle/T3VLSbn9thnKHKlwUtevv/das/xEaCRX8wiEd6mEufFPUzO+qqHDJYuPd7XaTYCdh8Vn4GjY=
-X-Gm-Message-State: AOJu0YyAGNc+Ki8dSv1RkbNkCjt/18Q5KDr+rurKdcJkYkh0392qBJPV
- /30aT4bPn6z4uj5Ka5LMLXcxFrjzGV2pFvQIKhQ7dybJPp4gQtThRYZVUnhgzKc=
-X-Google-Smtp-Source: AGHT+IEjeWFk+0aA0rZ/kWury4JfLVFI1pkLzpV/7Nl8aiYEBgafztfRDjMDpwN7eg0hPsQDRYWXUQ==
-X-Received: by 2002:a17:902:d508:b0:1dc:f91b:5e96 with SMTP id
- b8-20020a170902d50800b001dcf91b5e96mr7080893plg.59.1709744955884; 
- Wed, 06 Mar 2024 09:09:15 -0800 (PST)
+ AJvYcCUTUuHXqKT2dbB6FQ9bb/UBRwVjeDrRwArjvRil01cHx3le1M4++bjBRcBaQ0v8dGE3WIOSjN0RoSWj66k2EvQ9pJWOFvM=
+X-Gm-Message-State: AOJu0YyGQQsOfZFUEizmRNpIKXTFOOCGVc8WZDXqg+E/2o4ggXcI6Umk
+ w1WcRZEEewJ73iDLAo7xIKDrkOoYLn2TvWkhFDssZ8hGBuMMIK99PBe0JxZSdOs=
+X-Google-Smtp-Source: AGHT+IEtkaaKi/elR6F0A30iDjwvQoWOBsS5TrBwrh3CaBuhK69mfm4UGuB04bnFsfCSNYyXOVVDPg==
+X-Received: by 2002:a17:902:c40c:b0:1dc:8eba:42c3 with SMTP id
+ k12-20020a170902c40c00b001dc8eba42c3mr6891686plk.23.1709744978371; 
+ Wed, 06 Mar 2024 09:09:38 -0800 (PST)
 Received: from hsinchu16.internal.sifive.com
  (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
  by smtp.gmail.com with ESMTPSA id
- p8-20020a170902e74800b001dd091cbc4esm7230076plf.181.2024.03.06.09.09.14
+ p8-20020a170902e74800b001dd091cbc4esm7230076plf.181.2024.03.06.09.09.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 Mar 2024 09:09:15 -0800 (PST)
+ Wed, 06 Mar 2024 09:09:37 -0800 (PST)
 From: Jason Chien <jason.chien@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Cc: Jason Chien <jason.chien@sifive.com>
-Subject: [PATCH 0/5] target/riscv: Support Zve32x and Zve64x extensions
-Date: Thu,  7 Mar 2024 01:08:33 +0800
-Message-ID: <20240306170855.24341-1-jason.chien@sifive.com>
+Cc: Jason Chien <jason.chien@sifive.com>, Frank Chang <frank.chang@sifive.com>,
+ Max Chou <max.chou@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Subject: [PATCH 4/5] target/riscv: Expose Zve64x extension to users
+Date: Thu,  7 Mar 2024 01:08:37 +0800
+Message-ID: <20240306170855.24341-5-jason.chien@sifive.com>
 X-Mailer: git-send-email 2.43.2
+In-Reply-To: <20240306170855.24341-1-jason.chien@sifive.com>
+References: <20240306170855.24341-1-jason.chien@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
- envelope-from=jason.chien@sifive.com; helo=mail-pl1-x630.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::534;
+ envelope-from=jason.chien@sifive.com; helo=mail-pg1-x534.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -94,25 +102,25 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This patch series adds the support for Zve32x and Zvx64x and makes vector
-registers visible in GDB if any of the V/Zve*/Zvk* extensions is enabled.
+Signed-off-by: Jason Chien <jason.chien@sifive.com>
+Reviewed-by: Frank Chang <frank.chang@sifive.com>
+Reviewed-by: Max Chou <max.chou@sifive.com>
+---
+ target/riscv/cpu.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-Jason Chien (5):
-  target/riscv: Add support for Zve32x extension
-  target/riscv: Expose Zve32x extension to users
-  target/riscv: Add support for Zve64x extension
-  target/riscv: Expose Zve64x extension to users
-  target/riscv: Relax vector register check in RISCV gdbstub
-
- target/riscv/cpu.c                      |  4 +++
- target/riscv/cpu_cfg.h                  |  2 ++
- target/riscv/cpu_helper.c               |  2 +-
- target/riscv/csr.c                      |  2 +-
- target/riscv/gdbstub.c                  |  2 +-
- target/riscv/insn_trans/trans_rvv.c.inc |  4 +--
- target/riscv/tcg/tcg-cpu.c              | 33 ++++++++++++++-----------
- 7 files changed, 30 insertions(+), 19 deletions(-)
-
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 8b5d1eb6a8..58b2a94694 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -1473,6 +1473,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
+     MULTI_EXT_CFG_BOOL("zve32x", ext_zve32x, false),
+     MULTI_EXT_CFG_BOOL("zve64f", ext_zve64f, false),
+     MULTI_EXT_CFG_BOOL("zve64d", ext_zve64d, false),
++    MULTI_EXT_CFG_BOOL("zve64x", ext_zve64x, false),
+     MULTI_EXT_CFG_BOOL("sstc", ext_sstc, true),
+ 
+     MULTI_EXT_CFG_BOOL("smepmp", ext_smepmp, false),
 -- 
 2.43.2
 
