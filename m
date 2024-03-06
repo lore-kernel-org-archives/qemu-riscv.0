@@ -4,90 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D0DEC5475B
-	for <qemu-riscv@archiver.kernel.org>; Wed,  6 Mar 2024 18:58:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30685C5475B
+	for <qemu-riscv@archiver.kernel.org>; Wed,  6 Mar 2024 19:13:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rhwSp-0001YQ-Oy; Wed, 06 Mar 2024 13:58:03 -0500
+	id 1rhwht-0004ug-Sr; Wed, 06 Mar 2024 14:13:37 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rhwSo-0001Y0-Qp
- for qemu-riscv@nongnu.org; Wed, 06 Mar 2024 13:58:02 -0500
-Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c])
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1rhwhs-0004uW-Hx
+ for qemu-riscv@nongnu.org; Wed, 06 Mar 2024 14:13:36 -0500
+Received: from mail-lf1-x133.google.com ([2a00:1450:4864:20::133])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rhwSi-0005Ed-I9
- for qemu-riscv@nongnu.org; Wed, 06 Mar 2024 13:58:02 -0500
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-29a858a0981so5199452a91.0
- for <qemu-riscv@nongnu.org>; Wed, 06 Mar 2024 10:57:54 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1rhwhm-0004VV-Mt
+ for qemu-riscv@nongnu.org; Wed, 06 Mar 2024 14:13:36 -0500
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-51320ca689aso1533e87.2
+ for <qemu-riscv@nongnu.org>; Wed, 06 Mar 2024 11:13:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1709751474; x=1710356274; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=2YG5uMHYgXaT8wpQi0YUe9AEiblBe2sbxqY7RGp8EFU=;
- b=C+M6EZrxUmFLb58hxiGCMgcpTkdkrZh0atiy23to8LfMp0/YBMt4TTAf8RHr3nOK/8
- 4p9WfmVrPsJKC/KSQlWu/w4x3mlR/Dh7HmHXnqmHsb/M2EhUUU/LG6VyaCI6O4iKjDc9
- 3QLEonv8IHfeljz+OikUPwZbrNbw499KDLhlymjlbRnEwvL015wZNNaRMVsG/Rs2q+7i
- BDCIlCUe0P+ChYQULlvMV7xtS+q5/NkN2kcrqFzjvaRQnL8rhOZE8DqpjY3UEZbicEF2
- 833l4tjNP/5oKW2KSF495pDKzM7ealyisuwfVQ+jAqh0hzwcGIuefFS3l+Hqi8EYt3LR
- wGmA==
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1709752407; x=1710357207;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gLi+ud+SlMWsmpKsdg7v23/chJbLaxfb6R0VlxqeK+Y=;
+ b=Vd9AQiW2l5SK2KvVuWeyqXjxQf/0O3wRemlJokSPsCdbP64b43OBw5iegnBTXJgoex
+ 4JWNTVXiuZBiWUmut1KZ1exNiQL+GOXIfK5IcNNn98lSY5MxEFkAGVlFwWOP+3oCVNHM
+ J4TWQd2f7CwJTGXVeAZAAN0tyvsUH1xeLdqRwWLmffwrhe4jQrTTHOq+YgFPtgDC09O4
+ OIs4IJrn56sg0A6MjAwSQ9p5seAFYNLfOzpXspdcxlxvsDFl+OukhimdrDaVkG9D5GyI
+ KWZ6cF3BkznBfsLsahC5L3bT5codVosObtKH9dgxO1DahAyzWrGYfaywO775BHniPheB
+ Ua+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709751474; x=1710356274;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=2YG5uMHYgXaT8wpQi0YUe9AEiblBe2sbxqY7RGp8EFU=;
- b=Njb+Vd7Ax14hxi6oC7SzGxSDBUzcWJFvEQx75L3oG15dBpUulRiTkIJgp2uVAbrZRx
- b5d3AbHeqWSH0RV6kWMH/RRREs4+xZYkY9UK+FrhMQo7Fsi0U0ayaeT5fZmnDM62Fkuj
- fdAlfuFEIrFyvk5aEhTyybRDMtLYXXbuHVl08dNYSCNp+obwompM90l+ZPsRfI1yNjUH
- dqW6rz0ph7u5ZS8bFJviFNnMrx92SHHDwrd72CcKZq8sqZ7GyFgRF5IbtZ0GT41U8kWN
- JrHctEPNzRzcgwckfliOIcpJ/v1H7ue6FThSOX7hdVhJ1eFmPBApHkDV/qdeurWV/8tY
- tnvg==
+ d=1e100.net; s=20230601; t=1709752407; x=1710357207;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=gLi+ud+SlMWsmpKsdg7v23/chJbLaxfb6R0VlxqeK+Y=;
+ b=iz7rEYTHujWpel1WsRVtsTaG1Rp06mz7iVyzWVRP5Hroj9UHQM6IIkSlcR+zZT7nzx
+ VTMecIYuJUSTTapjT/Rs8AUFYq1eEYPzTnxHYuxgnYRgSeF1XFc/HsiwPdygIQQpccxy
+ ClrclcixS6ZTCY6b1NRBsETKjFpidz7Nc03epfeDwklHtGNcFw/LWuRxn6JZbQGQZDx/
+ 1zacglt15v29yi5aTlPRdH8lH6MosEh9OwEA6yV3LWqywVZMweh6YRGWysGn+/cK8aMs
+ vjZLbysHa05tiwDAosdb5iNHNqZqa3SfRXlKKbavj8CJpq9poIexul6GgIbOzIldisfY
+ wL7A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV9NXwbDUcR3CsZGUlLgrgzVu1fmQyGV3c04JzMT9cD6h/JofdfkU2xn2fgoHBZfL03bsKlGukoGMoc3DaUuqbmS1xqdRY=
-X-Gm-Message-State: AOJu0YwjbN+iBpa6Queq7cvWpS2OJBsIbQ1vlxHNows838cTJaN+w82W
- 3h0GWogDV3iXQ+dnxlYK/tNl/Q42QrH0purwvtIwPf2pZ+GZCaIeHMXFiL9bQOg=
-X-Google-Smtp-Source: AGHT+IEK/7k8iM1HsyWVuin4L0rpOStjuyhS+pM/kY/cCM7bVNzW+JB8nWkmyBqp5x2I6Q+CoG74hA==
-X-Received: by 2002:a17:90b:3585:b0:29b:f79:2b75 with SMTP id
- mm5-20020a17090b358500b0029b0f792b75mr13942442pjb.7.1709751473698; 
- Wed, 06 Mar 2024 10:57:53 -0800 (PST)
-Received: from [192.168.68.110] ([177.94.15.159])
- by smtp.gmail.com with ESMTPSA id
- ee13-20020a17090afc4d00b0029a8d207010sm56658pjb.54.2024.03.06.10.57.48
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 06 Mar 2024 10:57:52 -0800 (PST)
-Message-ID: <49d0d8d3-c7fd-4039-aeed-6c31ba16557a@ventanamicro.com>
-Date: Wed, 6 Mar 2024 15:57:47 -0300
+ AJvYcCWzcEHb+Ps5CPgmksZRI9q6wFSk0fV65AM85EPTL3N/d9cMzCzIkRI/5ES3WfvTQNcGl8Kas4yH1sOkQ3UHKql5YqPR3e8=
+X-Gm-Message-State: AOJu0Yzg786hvEOADsqVIzyWq+WGSKMuB0I5FJe8b0BNbvZqnw/go03k
+ vAZ+Qc99pM3b5Lv3PjgXX4id4Ww2oEbfunpWneE9cOMJ0Fji0jY5NME1Dh6J0cskhIUzAXZnHGz
+ ubeI3i8vt6dmT1s4862xvLel6Jf0ZEuoP+/tM/Q==
+X-Google-Smtp-Source: AGHT+IHLpqsg/w4lRaqqHgavdxJWMVBVFKSSksowKjb/KFaTRAYLTyXx11Cafj++hnxioF8HP1Sx/ExPWBL0MeaC7Dg=
+X-Received: by 2002:a05:6512:3a8:b0:512:f679:665b with SMTP id
+ v8-20020a05651203a800b00512f679665bmr15699lfp.42.1709752406840; Wed, 06 Mar
+ 2024 11:13:26 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/2] hw/arm/virt-acpi-build.c: Migrate SPCR creation to
- common location
-Content-Language: en-US
-To: Sia Jee Heng <jeeheng.sia@starfivetech.com>, qemu-arm@nongnu.org,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: mst@redhat.com, imammedo@redhat.com, anisinha@redhat.com,
- peter.maydell@linaro.org, shannon.zhaosl@gmail.com,
- sunilvl@ventanamicro.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- bin.meng@windriver.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com
-References: <20240116010930.43433-1-jeeheng.sia@starfivetech.com>
- <20240116010930.43433-2-jeeheng.sia@starfivetech.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240116010930.43433-2-jeeheng.sia@starfivetech.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x102c.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+References: <20240304102540.2789225-1-fei2.wu@intel.com>
+ <20240304102540.2789225-2-fei2.wu@intel.com>
+ <CAKmqyKMQyDjLkeo+aU58rE6_Vb84QeeZP3FUafw5GuWpk1JmZQ@mail.gmail.com>
+ <8f5d6664-c075-4d31-bf33-ce24ceeb9b13@intel.com>
+In-Reply-To: <8f5d6664-c075-4d31-bf33-ce24ceeb9b13@intel.com>
+From: Atish Kumar Patra <atishp@rivosinc.com>
+Date: Wed, 6 Mar 2024 11:13:15 -0800
+Message-ID: <CAHBxVyHP1hgGWg6EByX6XzqmTm_Tr0uw7tk65KWcytNYsKdw8w@mail.gmail.com>
+Subject: Re: [RFC 1/2] hw/riscv: Add server platform reference machine
+To: "Wu, Fei" <fei2.wu@intel.com>
+Cc: Alistair Francis <alistair23@gmail.com>, pbonzini@redhat.com,
+ palmer@dabbelt.com, 
+ alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com, 
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org, andrei.warkentin@intel.com, 
+ shaolin.xie@alibaba-inc.com, ved@rivosinc.com, sunilvl@ventanamicro.com, 
+ haibo1.xu@intel.com, evan.chai@intel.com, yin.wang@intel.com, 
+ tech-server-platform@lists.riscv.org, tech-server-soc@lists.riscv.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::133;
+ envelope-from=atishp@rivosinc.com; helo=mail-lf1-x133.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,307 +101,590 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
+On Wed, Mar 6, 2024 at 4:56=E2=80=AFAM Wu, Fei <fei2.wu@intel.com> wrote:
+>
+> On 3/6/2024 8:19 AM, Alistair Francis wrote:
+> > On Mon, Mar 4, 2024 at 8:28=E2=80=AFPM Fei Wu <fei2.wu@intel.com> wrote=
+:
+> >>
+> >> The RISC-V Server Platform specification[1] defines a standardized set
+> >> of hardware and software capabilities, that portable system software,
+> >> such as OS and hypervisors can rely on being present in a RISC-V serve=
+r
+> >> platform.
+> >>
+> >> A corresponding Qemu RISC-V server platform reference (rvsp-ref for
+> >> short) machine type is added to provide a environment for firmware/OS
+> >> development and testing. The main features included in rvsp-ref are:
+> >>
+> >>  - Based on riscv virt machine type
+> >>  - A new memory map as close as virt machine as possible
+> >>  - A new virt CPU type rvsp-ref-cpu for server platform compliance
+> >>  - AIA
+> >>  - PCIe AHCI
+> >>  - PCIe NIC
+> >>  - No virtio device
+> >>  - No fw_cfg device
+> >>  - No ACPI table provided
+> >>  - Only minimal device tree nodes
+> >>
+> >> [1] https://github.com/riscv-non-isa/riscv-server-platform
+> >
+> > + Atish
+> >
+> >>
+> >> Signed-off-by: Fei Wu <fei2.wu@intel.com>
+> >> ---
+> >>  configs/devices/riscv64-softmmu/default.mak |    1 +
+> >>  hw/riscv/Kconfig                            |   13 +
+> >>  hw/riscv/meson.build                        |    1 +
+> >>  hw/riscv/server_platform_ref.c              | 1244 ++++++++++++++++++=
++
+> >>  4 files changed, 1259 insertions(+)
+> >>  create mode 100644 hw/riscv/server_platform_ref.c
+> >>
+> >> diff --git a/configs/devices/riscv64-softmmu/default.mak b/configs/dev=
+ices/riscv64-softmmu/default.mak
+> >> index 3f68059448..a1d98e49ef 100644
+> >> --- a/configs/devices/riscv64-softmmu/default.mak
+> >> +++ b/configs/devices/riscv64-softmmu/default.mak
+> >> @@ -10,5 +10,6 @@ CONFIG_SPIKE=3Dy
+> >>  CONFIG_SIFIVE_E=3Dy
+> >>  CONFIG_SIFIVE_U=3Dy
+> >>  CONFIG_RISCV_VIRT=3Dy
+> >> +CONFIG_SERVER_PLATFORM_REF=3Dy
+> >>  CONFIG_MICROCHIP_PFSOC=3Dy
+> >>  CONFIG_SHAKTI_C=3Dy
+> >> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+> >> index 5d644eb7b1..debac5a7f5 100644
+> >> --- a/hw/riscv/Kconfig
+> >> +++ b/hw/riscv/Kconfig
+> >> @@ -48,6 +48,19 @@ config RISCV_VIRT
+> >>      select ACPI
+> >>      select ACPI_PCI
+> >>
+> >> +config SERVER_PLATFORM_REF
+> >> +    bool
+> >> +    select RISCV_NUMA
+> >> +    select GOLDFISH_RTC
+> >> +    select PCI
+> >> +    select PCI_EXPRESS_GENERIC_BRIDGE
+> >> +    select PFLASH_CFI01
+> >> +    select SERIAL
+> >> +    select RISCV_ACLINT
+> >> +    select RISCV_APLIC
+> >> +    select RISCV_IMSIC
+> >> +    select SIFIVE_TEST
+> >
+> > Do we really need SiFive Test in the server platform?
+> >
+> It's used to reset the system, is there any better choice?
+>
+> Probably I can remove the "sifive,test1 sifive,test0" from the
+> compatible list in fdt, and only keep "syscon", I see opensbi has
+> already removed that support in commit c2e602707.
+>
+> > Same with the goldfish RTC?
+> >
+> Although the spec doesn't make RTC mandatory, it should be a common
+> practice having a RTC on server, so I add a RTC here no matter it's
+> goldfish or not.
+>
 
-This patch break check-qtest, most specifically 'bios-table'test', for aarch64.
-I found this while running riscv-to-apply.next in the Gitlab pipeline.
+The platform spec says
+HPER_070 : A battery-backed RTC or analogous timekeeping mechanism
+MUST be implemented.
 
+Can we consider goldfish RTC in this category ?
 
-Here's the output:
+But I want to discuss a larger point as the server platform/SoC spec
+defines a bunch of optional requirement.
+Does this platform intend to be a platform that is a superset of all
+those options or allow optionality in
+the platform as well ?
 
-$ make -j && QTEST_QEMU_BINARY=./qemu-system-aarch64 V=1 ./tests/qtest/bios-tables-test
-TAP version 13
-# random seed: R02Sf0f2fa0a3fac5d540b1681c820621b7d
-# starting QEMU: exec ./qemu-system-aarch64 -qtest unix:/tmp/qtest-591353.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-591353.qmp,id=char0 -mon chardev=char0,mode=control -display none -audio none -machine none -accel qtest
-1..8
-# Start of aarch64 tests
-# Start of acpi tests
-# starting QEMU: exec ./qemu-system-aarch64 -qtest unix:/tmp/qtest-591353.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-591353.qmp,id=char0 -mon chardev=char0,mode=control -display none -audio none -machine virt  -accel tcg -nodefaults -nographic -drive if=pflash,format=raw,file=pc-bios/edk2-aarch64-code.fd,readonly=on -drive if=pflash,format=raw,file=pc-bios/edk2-arm-vars.fd,snapshot=on -cdrom tests/data/uefi-boot-images/bios-tables-test.aarch64.iso.qcow2 -cpu cortex-a57 -smbios type=4,max-speed=2900,current-speed=2700 -accel qtest
-acpi-test: Warning! SPCR binary file mismatch. Actual [aml:/tmp/aml-9G53J2], Expected [aml:tests/data/acpi/virt/SPCR].
-See source file tests/qtest/bios-tables-test.c for instructions on how to update expected files.
-acpi-test: Warning! SPCR mismatch. Actual [asl:/tmp/asl-SR53J2.dsl, aml:/tmp/aml-9G53J2], Expected [asl:/tmp/asl-4Z33J2.dsl, aml:tests/data/acpi/virt/SPCR].
-
-The diff is here:
-
---- /tmp/asl-4Z33J2.dsl	2024-03-06 15:40:24.879879348 -0300
-+++ /tmp/asl-SR53J2.dsl	2024-03-06 15:40:24.877879347 -0300
-@@ -1,57 +1,49 @@
-  /*
-   * Intel ACPI Component Architecture
-   * AML/ASL+ Disassembler version 20220331 (64-bit version)
-   * Copyright (c) 2000 - 2022 Intel Corporation
-
-(...)
-
-  [000h 0000   4]                    Signature : "SPCR"    [Serial Port Console Redirection Table]
--[004h 0004   4]                 Table Length : 00000050
-+[004h 0004   4]                 Table Length : 0000004F
-  [008h 0008   1]                     Revision : 02
--[009h 0009   1]                     Checksum : B1
-+[009h 0009   1]                     Checksum : B2
-  [00Ah 0010   6]                       Oem ID : "BOCHS "
-
-(...)
-
--[042h 0066   2]                PCI Vendor ID : FFFF
-+[042h 0066   2]                PCI Vendor ID : 00FF
-
-
-After inspecting the common helper and what the original ARM code was doing
-I found out that we're missing something down there:
-
-
-On 1/15/24 22:09, Sia Jee Heng wrote:
-> RISC-V should also generate the SPCR in a manner similar to ARM.
-> Therefore, instead of replicating the code, relocate this function
-> to the common AML build.
-> 
-> Signed-off-by: Sia Jee Heng <jeeheng.sia@starfivetech.com>
-> ---
->   hw/acpi/aml-build.c         | 51 ++++++++++++++++++++++++++++
->   hw/arm/virt-acpi-build.c    | 68 +++++++++++++++----------------------
->   include/hw/acpi/acpi-defs.h | 33 ++++++++++++++++++
->   include/hw/acpi/aml-build.h |  4 +++
->   4 files changed, 115 insertions(+), 41 deletions(-)
-> 
-> diff --git a/hw/acpi/aml-build.c b/hw/acpi/aml-build.c
-> index af66bde0f5..f3904650e4 100644
-> --- a/hw/acpi/aml-build.c
-> +++ b/hw/acpi/aml-build.c
-> @@ -1994,6 +1994,57 @@ static void build_processor_hierarchy_node(GArray *tbl, uint32_t flags,
->       }
->   }
->   
-> +void build_spcr(GArray *table_data, BIOSLinker *linker,
-> +                const AcpiSpcrData *f, const uint8_t rev,
-> +                const char *oem_id, const char *oem_table_id)
-> +{
-> +    AcpiTable table = { .sig = "SPCR", .rev = rev, .oem_id = oem_id,
-> +                        .oem_table_id = oem_table_id };
-> +
-> +    acpi_table_begin(&table, table_data);
-> +    /* Interface type */
-> +    build_append_int_noprefix(table_data, f->interface_type, 1);
-> +    /* Reserved */
-> +    build_append_int_noprefix(table_data, 0, 3);
-> +    /* Base Address */
-> +    build_append_gas(table_data, f->base_addr.id, f->base_addr.width,
-> +                     f->base_addr.offset, f->base_addr.size,
-> +                     f->base_addr.addr);
-> +    /* Interrupt type */
-> +    build_append_int_noprefix(table_data, f->interrupt_type, 1);
-> +    /* IRQ */
-> +    build_append_int_noprefix(table_data, f->pc_interrupt, 1);
-> +    /* Global System Interrupt */
-> +    build_append_int_noprefix(table_data, f->interrupt, 4);
-> +    /* Baud Rate */
-> +    build_append_int_noprefix(table_data, f->baud_rate, 1);
-> +    /* Parity */
-> +    build_append_int_noprefix(table_data, f->parity, 1);
-> +    /* Stop Bits */
-> +    build_append_int_noprefix(table_data, f->stop_bits, 1);
-> +    /* Flow Control */
-> +    build_append_int_noprefix(table_data, f->flow_control, 1);
-
-Here. We're missing the "Language" entry.
-
-
-This diff fixes the broken test:
-
-
-$ git diff
-diff --git a/hw/acpi/aml-build.c b/hw/acpi/aml-build.c
-index f3904650e4..6d4517cfbe 100644
---- a/hw/acpi/aml-build.c
-+++ b/hw/acpi/aml-build.c
-@@ -2024,6 +2024,8 @@ void build_spcr(GArray *table_data, BIOSLinker *linker,
-      build_append_int_noprefix(table_data, f->stop_bits, 1);
-      /* Flow Control */
-      build_append_int_noprefix(table_data, f->flow_control, 1);
-+    /* Language */
-+    build_append_int_noprefix(table_data, f->language, 1);
-      /* Terminal Type */
-      build_append_int_noprefix(table_data, f->terminal_type, 1);
-      /* PCI Device ID  */
-
-
-
-As a side note, it seems like 'bios-table-test' isn't being run for RISC-V. Not sure if this
-is intentional or a foresight.
-
-
-Thanks,
-
-Daniel
-
-
-> +    /* Terminal Type */
-> +    build_append_int_noprefix(table_data, f->terminal_type, 1);
-> +    /* PCI Device ID  */
-> +    build_append_int_noprefix(table_data, f->pci_device_id, 2);
-> +    /* PCI Vendor ID */
-> +    build_append_int_noprefix(table_data, f->pci_vendor_id, 2);
-> +    /* PCI Bus Number */
-> +    build_append_int_noprefix(table_data, f->pci_bus, 1);
-> +    /* PCI Device Number */
-> +    build_append_int_noprefix(table_data, f->pci_device, 1);
-> +    /* PCI Function Number */
-> +    build_append_int_noprefix(table_data, f->pci_function, 1);
-> +    /* PCI Flags */
-> +    build_append_int_noprefix(table_data, f->pci_flags, 4);
-> +    /* PCI Segment */
-> +    build_append_int_noprefix(table_data, f->pci_segment, 1);
-> +    /* Reserved */
-> +    build_append_int_noprefix(table_data, 0, 4);
-> +
-> +    acpi_table_end(linker, &table);
-> +}
->   /*
->    * ACPI spec, Revision 6.3
->    * 5.2.29 Processor Properties Topology Table (PPTT)
-> diff --git a/hw/arm/virt-acpi-build.c b/hw/arm/virt-acpi-build.c
-> index a22a2f43a5..195767c0f0 100644
-> --- a/hw/arm/virt-acpi-build.c
-> +++ b/hw/arm/virt-acpi-build.c
-> @@ -431,48 +431,34 @@ build_iort(GArray *table_data, BIOSLinker *linker, VirtMachineState *vms)
->    * Rev: 1.07
->    */
->   static void
-> -build_spcr(GArray *table_data, BIOSLinker *linker, VirtMachineState *vms)
-> +spcr_setup(GArray *table_data, BIOSLinker *linker, VirtMachineState *vms)
->   {
-> -    AcpiTable table = { .sig = "SPCR", .rev = 2, .oem_id = vms->oem_id,
-> -                        .oem_table_id = vms->oem_table_id };
-> -
-> -    acpi_table_begin(&table, table_data);
-> -
-> -    /* Interface Type */
-> -    build_append_int_noprefix(table_data, 3, 1); /* ARM PL011 UART */
-> -    build_append_int_noprefix(table_data, 0, 3); /* Reserved */
-> -    /* Base Address */
-> -    build_append_gas(table_data, AML_AS_SYSTEM_MEMORY, 32, 0, 3,
-> -                     vms->memmap[VIRT_UART].base);
-> -    /* Interrupt Type */
-> -    build_append_int_noprefix(table_data,
-> -        (1 << 3) /* Bit[3] ARMH GIC interrupt */, 1);
-> -    build_append_int_noprefix(table_data, 0, 1); /* IRQ */
-> -    /* Global System Interrupt */
-> -    build_append_int_noprefix(table_data,
-> -                              vms->irqmap[VIRT_UART] + ARM_SPI_BASE, 4);
-> -    build_append_int_noprefix(table_data, 3 /* 9600 */, 1); /* Baud Rate */
-> -    build_append_int_noprefix(table_data, 0 /* No Parity */, 1); /* Parity */
-> -    /* Stop Bits */
-> -    build_append_int_noprefix(table_data, 1 /* 1 Stop bit */, 1);
-> -    /* Flow Control */
-> -    build_append_int_noprefix(table_data,
-> -        (1 << 1) /* RTS/CTS hardware flow control */, 1);
-> -    /* Terminal Type */
-> -    build_append_int_noprefix(table_data, 0 /* VT100 */, 1);
-> -    build_append_int_noprefix(table_data, 0, 1); /* Language */
-> -    /* PCI Device ID  */
-> -    build_append_int_noprefix(table_data, 0xffff /* not a PCI device*/, 2);
-> -    /* PCI Vendor ID */
-> -    build_append_int_noprefix(table_data, 0xffff /* not a PCI device*/, 2);
-> -    build_append_int_noprefix(table_data, 0, 1); /* PCI Bus Number */
-> -    build_append_int_noprefix(table_data, 0, 1); /* PCI Device Number */
-> -    build_append_int_noprefix(table_data, 0, 1); /* PCI Function Number */
-> -    build_append_int_noprefix(table_data, 0, 4); /* PCI Flags */
-> -    build_append_int_noprefix(table_data, 0, 1); /* PCI Segment */
-> -    build_append_int_noprefix(table_data, 0, 4); /* Reserved */
-> +    AcpiSpcrData serial = {
-> +        .interface_type = 3,       /* ARM PL011 UART */
-> +        .base_addr.id = AML_AS_SYSTEM_MEMORY,
-> +        .base_addr.width = 32,
-> +        .base_addr.offset = 0,
-> +        .base_addr.size = 3,
-> +        .base_addr.addr = vms->memmap[VIRT_UART].base,
-> +        .interrupt_type = (1 << 3),/* Bit[3] ARMH GIC interrupt*/
-> +        .pc_interrupt = 0,         /* IRQ */
-> +        .interrupt = (vms->irqmap[VIRT_UART] + ARM_SPI_BASE),
-> +        .baud_rate = 3,            /* 9600 */
-> +        .parity = 0,               /* No Parity */
-> +        .stop_bits = 1,            /* 1 Stop bit */
-> +        .flow_control = 1 << 1,    /* RTS/CTS hardware flow control */
-> +        .terminal_type = 0,        /* VT100 */
-> +        .language = 0,             /* Language */
-> +        .pci_device_id = 0xffff,   /* not a PCI device*/
-> +        .pci_vendor_id = 0xffff,   /* not a PCI device*/
-> +        .pci_bus = 0,
-> +        .pci_device = 0,
-> +        .pci_function = 0,
-> +        .pci_flags = 0,
-> +        .pci_segment = 0,
-> +    };
->   
-> -    acpi_table_end(linker, &table);
-> +    build_spcr(table_data, linker, &serial, 2, vms->oem_id, vms->oem_table_id);
->   }
->   
->   /*
-> @@ -930,7 +916,7 @@ void virt_acpi_build(VirtMachineState *vms, AcpiBuildTables *tables)
->       }
->   
->       acpi_add_table(table_offsets, tables_blob);
-> -    build_spcr(tables_blob, tables->linker, vms);
-> +    spcr_setup(tables_blob, tables->linker, vms);
->   
->       acpi_add_table(table_offsets, tables_blob);
->       build_dbg2(tables_blob, tables->linker, vms);
-> diff --git a/include/hw/acpi/acpi-defs.h b/include/hw/acpi/acpi-defs.h
-> index 2b42e4192b..0e6e82b339 100644
-> --- a/include/hw/acpi/acpi-defs.h
-> +++ b/include/hw/acpi/acpi-defs.h
-> @@ -90,6 +90,39 @@ typedef struct AcpiFadtData {
->       unsigned *xdsdt_tbl_offset;
->   } AcpiFadtData;
->   
-> +typedef struct AcpiGas {
-> +    uint8_t id;                /* Address space ID */
-> +    uint8_t width;             /* Register bit width */
-> +    uint8_t offset;            /* Register bit offset */
-> +    uint8_t size;              /* Access size */
-> +    uint64_t addr;             /* Address */
-> +} AcpiGas;
-> +
-> +/* SPCR (Serial Port Console Redirection table) */
-> +typedef struct AcpiSpcrData {
-> +    uint8_t interface_type;
-> +    uint8_t reserved[3];
-> +    struct AcpiGas base_addr;
-> +    uint8_t interrupt_type;
-> +    uint8_t pc_interrupt;
-> +    uint32_t interrupt;        /* Global system interrupt */
-> +    uint8_t baud_rate;
-> +    uint8_t parity;
-> +    uint8_t stop_bits;
-> +    uint8_t flow_control;
-> +    uint8_t terminal_type;
-> +    uint8_t language;
-> +    uint8_t reserved1;
-> +    uint16_t pci_device_id;    /* Must be 0xffff if not PCI device */
-> +    uint16_t pci_vendor_id;    /* Must be 0xffff if not PCI device */
-> +    uint8_t pci_bus;
-> +    uint8_t pci_device;
-> +    uint8_t pci_function;
-> +    uint32_t pci_flags;
-> +    uint8_t pci_segment;
-> +    uint32_t reserved2;
-> +} AcpiSpcrData;
-> +
->   #define ACPI_FADT_ARM_PSCI_COMPLIANT  (1 << 0)
->   #define ACPI_FADT_ARM_PSCI_USE_HVC    (1 << 1)
->   
-> diff --git a/include/hw/acpi/aml-build.h b/include/hw/acpi/aml-build.h
-> index ff2a310270..a3784155cb 100644
-> --- a/include/hw/acpi/aml-build.h
-> +++ b/include/hw/acpi/aml-build.h
-> @@ -497,4 +497,8 @@ void build_fadt(GArray *tbl, BIOSLinker *linker, const AcpiFadtData *f,
->   
->   void build_tpm2(GArray *table_data, BIOSLinker *linker, GArray *tcpalog,
->                   const char *oem_id, const char *oem_table_id);
-> +
-> +void build_spcr(GArray *table_data, BIOSLinker *linker,
-> +                const AcpiSpcrData *f, const uint8_t rev,
-> +                const char *oem_id, const char *oem_table_id);
->   #endif
+> >> +
+> >>  config SHAKTI_C
+> >>      bool
+> >>      select RISCV_ACLINT
+> >> diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
+> >> index 2f7ee81be3..bb3aff91ea 100644
+> >> --- a/hw/riscv/meson.build
+> >> +++ b/hw/riscv/meson.build
+> >> @@ -4,6 +4,7 @@ riscv_ss.add(when: 'CONFIG_RISCV_NUMA', if_true: files=
+('numa.c'))
+> >>  riscv_ss.add(files('riscv_hart.c'))
+> >>  riscv_ss.add(when: 'CONFIG_OPENTITAN', if_true: files('opentitan.c'))
+> >>  riscv_ss.add(when: 'CONFIG_RISCV_VIRT', if_true: files('virt.c'))
+> >> +riscv_ss.add(when: 'CONFIG_SERVER_PLATFORM_REF', if_true: files('serv=
+er_platform_ref.c'))
+> >>  riscv_ss.add(when: 'CONFIG_SHAKTI_C', if_true: files('shakti_c.c'))
+> >>  riscv_ss.add(when: 'CONFIG_SIFIVE_E', if_true: files('sifive_e.c'))
+> >>  riscv_ss.add(when: 'CONFIG_SIFIVE_U', if_true: files('sifive_u.c'))
+> >> diff --git a/hw/riscv/server_platform_ref.c b/hw/riscv/server_platform=
+_ref.c
+> >> new file mode 100644
+> >> index 0000000000..ae90c4b27a
+> >> --- /dev/null
+> >> +++ b/hw/riscv/server_platform_ref.c
+> >> @@ -0,0 +1,1244 @@
+> >> +/*
+> >> + * QEMU RISC-V Server Platfrom (RVSP) Reference Board
+> >
+> > Platform
+> >
+> OK.
+>
+> >> +static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
+> >> +                                          DeviceState *irqchip,
+> >> +                                          RVSPMachineState *s)
+> >> +{
+> >> +    DeviceState *dev;
+> >> +    PCIHostState *pci;
+> >> +    PCIDevice *pdev_ahci;
+> >> +    AHCIPCIState *ich9;
+> >> +    DriveInfo *hd[NUM_SATA_PORTS];
+> >> +    MemoryRegion *ecam_alias, *ecam_reg;
+> >> +    MemoryRegion *mmio_alias, *high_mmio_alias, *mmio_reg;
+> >> +    hwaddr ecam_base =3D rvsp_ref_memmap[RVSP_PCIE_ECAM].base;
+> >> +    hwaddr ecam_size =3D rvsp_ref_memmap[RVSP_PCIE_ECAM].size;
+> >> +    hwaddr mmio_base =3D rvsp_ref_memmap[RVSP_PCIE_MMIO].base;
+> >> +    hwaddr mmio_size =3D rvsp_ref_memmap[RVSP_PCIE_MMIO].size;
+> >> +    hwaddr high_mmio_base =3D rvsp_ref_memmap[RVSP_PCIE_MMIO_HIGH].ba=
+se;
+> >> +    hwaddr high_mmio_size =3D rvsp_ref_memmap[RVSP_PCIE_MMIO_HIGH].si=
+ze;
+> >> +    hwaddr pio_base =3D rvsp_ref_memmap[RVSP_PCIE_PIO].base;
+> >> +    hwaddr pio_size =3D rvsp_ref_memmap[RVSP_PCIE_PIO].size;
+> >> +    MachineClass *mc =3D MACHINE_GET_CLASS(s);
+> >> +    qemu_irq irq;
+> >> +    int i;
+> >> +
+> >> +    dev =3D qdev_new(TYPE_GPEX_HOST);
+> >> +
+> >> +    /* Set GPEX object properties for the rvsp ref machine */
+> >> +    object_property_set_uint(OBJECT(GPEX_HOST(dev)), PCI_HOST_ECAM_BA=
+SE,
+> >> +                            ecam_base, NULL);
+> >> +    object_property_set_int(OBJECT(GPEX_HOST(dev)), PCI_HOST_ECAM_SIZ=
+E,
+> >> +                            ecam_size, NULL);
+> >> +    object_property_set_uint(OBJECT(GPEX_HOST(dev)),
+> >> +                             PCI_HOST_BELOW_4G_MMIO_BASE,
+> >> +                             mmio_base, NULL);
+> >> +    object_property_set_int(OBJECT(GPEX_HOST(dev)), PCI_HOST_BELOW_4G=
+_MMIO_SIZE,
+> >> +                            mmio_size, NULL);
+> >> +    object_property_set_uint(OBJECT(GPEX_HOST(dev)),
+> >> +                             PCI_HOST_ABOVE_4G_MMIO_BASE,
+> >> +                             high_mmio_base, NULL);
+> >> +    object_property_set_int(OBJECT(GPEX_HOST(dev)), PCI_HOST_ABOVE_4G=
+_MMIO_SIZE,
+> >> +                            high_mmio_size, NULL);
+> >> +    object_property_set_uint(OBJECT(GPEX_HOST(dev)), PCI_HOST_PIO_BAS=
+E,
+> >> +                            pio_base, NULL);
+> >> +    object_property_set_int(OBJECT(GPEX_HOST(dev)), PCI_HOST_PIO_SIZE=
+,
+> >> +                            pio_size, NULL);
+> >> +
+> >> +    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
+> >> +
+> >> +    ecam_alias =3D g_new0(MemoryRegion, 1);
+> >> +    ecam_reg =3D sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 0);
+> >> +    memory_region_init_alias(ecam_alias, OBJECT(dev), "pcie-ecam",
+> >> +                             ecam_reg, 0, ecam_size);
+> >> +    memory_region_add_subregion(get_system_memory(), ecam_base, ecam_=
+alias);
+> >> +
+> >> +    mmio_alias =3D g_new0(MemoryRegion, 1);
+> >> +    mmio_reg =3D sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 1);
+> >> +    memory_region_init_alias(mmio_alias, OBJECT(dev), "pcie-mmio",
+> >> +                             mmio_reg, mmio_base, mmio_size);
+> >> +    memory_region_add_subregion(get_system_memory(), mmio_base, mmio_=
+alias);
+> >> +
+> >> +    /* Map high MMIO space */
+> >> +    high_mmio_alias =3D g_new0(MemoryRegion, 1);
+> >> +    memory_region_init_alias(high_mmio_alias, OBJECT(dev), "pcie-mmio=
+-high",
+> >> +                             mmio_reg, high_mmio_base, high_mmio_size=
+);
+> >> +    memory_region_add_subregion(get_system_memory(), high_mmio_base,
+> >> +                                high_mmio_alias);
+> >> +
+> >> +    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 2, pio_base);
+> >> +
+> >> +    for (i =3D 0; i < GPEX_NUM_IRQS; i++) {
+> >> +        irq =3D qdev_get_gpio_in(irqchip, RVSP_PCIE_IRQ + i);
+> >> +
+> >> +        sysbus_connect_irq(SYS_BUS_DEVICE(dev), i, irq);
+> >> +        gpex_set_irq_num(GPEX_HOST(dev), i, RVSP_PCIE_IRQ + i);
+> >> +    }
+> >> +
+> >> +    pci =3D PCI_HOST_BRIDGE(dev);
+> >> +    pci_init_nic_devices(pci->bus, mc->default_nic);
+> >> +    /* IDE disk setup.  */
+> >> +    pdev_ahci =3D pci_create_simple(pci->bus, -1, TYPE_ICH9_AHCI);
+> >> +    ich9 =3D ICH9_AHCI(pdev_ahci);
+> >> +    g_assert(ARRAY_SIZE(hd) =3D=3D ich9->ahci.ports);
+> >> +    ide_drive_get(hd, ich9->ahci.ports);
+> >> +    ahci_ide_create_devs(&ich9->ahci, hd);
+> >> +
+> >> +    GPEX_HOST(dev)->gpex_cfg.bus =3D PCI_HOST_BRIDGE(GPEX_HOST(dev))-=
+>bus;
+> >> +    return dev;
+> >> +}
+> >
+> > We should share as much of this code as possible with the virt machine.
+> >
+> This function references multiple rvsp specific variables, some
+> refactorings are needed to group all the information of
+> ecam/mmio/high_mmio/pio/irq and pass them to virt and rvsp respectively.
+> I see arm virt/sbsa-ref are seperated clearly and no sharing between
+> them. It has the benefit there is no side effect between them. Should we
+> use the same policy?
+>
+> Thanks,
+> Fei.
+>
+> > Alistair
+> >
+> >> +
+> >> +static DeviceState *rvsp_ref_create_aia(int aia_guests,
+> >> +                                        const MemMapEntry *memmap, in=
+t socket,
+> >> +                                        int base_hartid, int hart_cou=
+nt)
+> >> +{
+> >> +    int i;
+> >> +    hwaddr addr;
+> >> +    uint32_t guest_bits;
+> >> +    DeviceState *aplic_s =3D NULL;
+> >> +    DeviceState *aplic_m =3D NULL;
+> >> +    bool msimode =3D true;
+> >> +
+> >> +    /* Per-socket M-level IMSICs */
+> >> +    addr =3D memmap[RVSP_IMSIC_M].base +
+> >> +           socket * RVSP_IMSIC_GROUP_MAX_SIZE;
+> >> +    for (i =3D 0; i < hart_count; i++) {
+> >> +        riscv_imsic_create(addr + i * IMSIC_HART_SIZE(0),
+> >> +                           base_hartid + i, true, 1,
+> >> +                           RVSP_IRQCHIP_NUM_MSIS);
+> >> +    }
+> >> +
+> >> +    /* Per-socket S-level IMSICs */
+> >> +    guest_bits =3D imsic_num_bits(aia_guests + 1);
+> >> +    addr =3D memmap[RVSP_IMSIC_S].base + socket * RVSP_IMSIC_GROUP_MA=
+X_SIZE;
+> >> +    for (i =3D 0; i < hart_count; i++) {
+> >> +        riscv_imsic_create(addr + i * IMSIC_HART_SIZE(guest_bits),
+> >> +                           base_hartid + i, false, 1 + aia_guests,
+> >> +                           RVSP_IRQCHIP_NUM_MSIS);
+> >> +    }
+> >> +
+> >> +    /* Per-socket M-level APLIC */
+> >> +    aplic_m =3D riscv_aplic_create(memmap[RVSP_APLIC_M].base +
+> >> +                                 socket * memmap[RVSP_APLIC_M].size,
+> >> +                                 memmap[RVSP_APLIC_M].size,
+> >> +                                 (msimode) ? 0 : base_hartid,
+> >> +                                 (msimode) ? 0 : hart_count,
+> >> +                                 RVSP_IRQCHIP_NUM_SOURCES,
+> >> +                                 RVSP_IRQCHIP_NUM_PRIO_BITS,
+> >> +                                 msimode, true, NULL);
+> >> +
+> >> +    /* Per-socket S-level APLIC */
+> >> +    aplic_s =3D riscv_aplic_create(memmap[RVSP_APLIC_S].base +
+> >> +                                 socket * memmap[RVSP_APLIC_S].size,
+> >> +                                 memmap[RVSP_APLIC_S].size,
+> >> +                                 (msimode) ? 0 : base_hartid,
+> >> +                                 (msimode) ? 0 : hart_count,
+> >> +                                 RVSP_IRQCHIP_NUM_SOURCES,
+> >> +                                 RVSP_IRQCHIP_NUM_PRIO_BITS,
+> >> +                                 msimode, false, aplic_m);
+> >> +
+> >> +    (void)aplic_s;
+> >> +    return aplic_m;
+> >> +}
+> >> +
+> >> +static void rvsp_ref_machine_done(Notifier *notifier, void *data)
+> >> +{
+> >> +    RVSPMachineState *s =3D container_of(notifier, RVSPMachineState,
+> >> +                                       machine_done);
+> >> +    const MemMapEntry *memmap =3D rvsp_ref_memmap;
+> >> +    MachineState *machine =3D MACHINE(s);
+> >> +    target_ulong start_addr =3D memmap[RVSP_DRAM].base;
+> >> +    target_ulong firmware_end_addr, kernel_start_addr;
+> >> +    const char *firmware_name =3D riscv_default_firmware_name(&s->soc=
+[0]);
+> >> +    uint64_t fdt_load_addr;
+> >> +    uint64_t kernel_entry =3D 0;
+> >> +    BlockBackend *pflash_blk0;
+> >> +
+> >> +    /* load/create device tree */
+> >> +    if (machine->dtb) {
+> >> +        machine->fdt =3D load_device_tree(machine->dtb, &s->fdt_size)=
+;
+> >> +        if (!machine->fdt) {
+> >> +            error_report("load_device_tree() failed");
+> >> +            exit(1);
+> >> +        }
+> >> +    } else {
+> >> +        create_fdt(s, memmap);
+> >> +    }
+> >> +
+> >> +    firmware_end_addr =3D riscv_find_and_load_firmware(machine, firmw=
+are_name,
+> >> +                                                     start_addr, NULL=
+);
+> >> +
+> >> +    pflash_blk0 =3D pflash_cfi01_get_blk(s->flash[0]);
+> >> +    if (pflash_blk0) {
+> >> +        if (machine->firmware && !strcmp(machine->firmware, "none")) =
+{
+> >> +            /*
+> >> +             * Pflash was supplied but bios is none and not KVM guest=
+,
+> >> +             * let's overwrite the address we jump to after reset to
+> >> +             * the base of the flash.
+> >> +             */
+> >> +            start_addr =3D rvsp_ref_memmap[RVSP_FLASH].base;
+> >> +        } else {
+> >> +            /*
+> >> +             * Pflash was supplied but either KVM guest or bios is no=
+t none.
+> >> +             * In this case, base of the flash would contain S-mode p=
+ayload.
+> >> +             */
+> >> +            riscv_setup_firmware_boot(machine);
+> >> +            kernel_entry =3D rvsp_ref_memmap[RVSP_FLASH].base;
+> >> +        }
+> >> +    }
+> >> +
+> >> +    if (machine->kernel_filename && !kernel_entry) {
+> >> +        kernel_start_addr =3D riscv_calc_kernel_start_addr(&s->soc[0]=
+,
+> >> +                                                         firmware_end=
+_addr);
+> >> +
+> >> +        kernel_entry =3D riscv_load_kernel(machine, &s->soc[0],
+> >> +                                         kernel_start_addr, true, NUL=
+L);
+> >> +    }
+> >> +
+> >> +    fdt_load_addr =3D riscv_compute_fdt_addr(memmap[RVSP_DRAM].base,
+> >> +                                           memmap[RVSP_DRAM].size,
+> >> +                                           machine);
+> >> +    riscv_load_fdt(fdt_load_addr, machine->fdt);
+> >> +
+> >> +    /* load the reset vector */
+> >> +    riscv_setup_rom_reset_vec(machine, &s->soc[0], start_addr,
+> >> +                              rvsp_ref_memmap[RVSP_MROM].base,
+> >> +                              rvsp_ref_memmap[RVSP_MROM].size, kernel=
+_entry,
+> >> +                              fdt_load_addr);
+> >> +
+> >> +}
+> >> +
+> >> +static void rvsp_ref_machine_init(MachineState *machine)
+> >> +{
+> >> +    const MemMapEntry *memmap =3D rvsp_ref_memmap;
+> >> +    RVSPMachineState *s =3D RVSP_REF_MACHINE(machine);
+> >> +    MemoryRegion *system_memory =3D get_system_memory();
+> >> +    MemoryRegion *mask_rom =3D g_new(MemoryRegion, 1);
+> >> +    char *soc_name;
+> >> +    DeviceState *mmio_irqchip, *pcie_irqchip;
+> >> +    int i, base_hartid, hart_count;
+> >> +    int socket_count =3D riscv_socket_count(machine);
+> >> +
+> >> +    /* Check socket count limit */
+> >> +    if (RVSP_SOCKETS_MAX < socket_count) {
+> >> +        error_report("number of sockets/nodes should be less than %d"=
+,
+> >> +            RVSP_SOCKETS_MAX);
+> >> +        exit(1);
+> >> +    }
+> >> +
+> >> +    if (!tcg_enabled()) {
+> >> +        error_report("'aclint' is only available with TCG acceleratio=
+n");
+> >> +        exit(1);
+> >> +    }
+> >> +
+> >> +    /* Initialize sockets */
+> >> +    mmio_irqchip =3D pcie_irqchip =3D NULL;
+> >> +    for (i =3D 0; i < socket_count; i++) {
+> >> +        if (!riscv_socket_check_hartids(machine, i)) {
+> >> +            error_report("discontinuous hartids in socket%d", i);
+> >> +            exit(1);
+> >> +        }
+> >> +
+> >> +        base_hartid =3D riscv_socket_first_hartid(machine, i);
+> >> +        if (base_hartid < 0) {
+> >> +            error_report("can't find hartid base for socket%d", i);
+> >> +            exit(1);
+> >> +        }
+> >> +
+> >> +        hart_count =3D riscv_socket_hart_count(machine, i);
+> >> +        if (hart_count < 0) {
+> >> +            error_report("can't find hart count for socket%d", i);
+> >> +            exit(1);
+> >> +        }
+> >> +
+> >> +        soc_name =3D g_strdup_printf("soc%d", i);
+> >> +        object_initialize_child(OBJECT(machine), soc_name, &s->soc[i]=
+,
+> >> +                                TYPE_RISCV_HART_ARRAY);
+> >> +        g_free(soc_name);
+> >> +        object_property_set_str(OBJECT(&s->soc[i]), "cpu-type",
+> >> +                                machine->cpu_type, &error_abort);
+> >> +        object_property_set_int(OBJECT(&s->soc[i]), "hartid-base",
+> >> +                                base_hartid, &error_abort);
+> >> +        object_property_set_int(OBJECT(&s->soc[i]), "num-harts",
+> >> +                                hart_count, &error_abort);
+> >> +        sysbus_realize(SYS_BUS_DEVICE(&s->soc[i]), &error_fatal);
+> >> +
+> >> +        /* Per-socket ACLINT MTIMER */
+> >> +        riscv_aclint_mtimer_create(memmap[RVSP_ACLINT].base +
+> >> +                i * RISCV_ACLINT_DEFAULT_MTIMER_SIZE,
+> >> +            RISCV_ACLINT_DEFAULT_MTIMER_SIZE,
+> >> +            base_hartid, hart_count,
+> >> +            RISCV_ACLINT_DEFAULT_MTIMECMP,
+> >> +            RISCV_ACLINT_DEFAULT_MTIME,
+> >> +            RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ, true);
+> >> +
+> >> +        /* Per-socket interrupt controller */
+> >> +        s->irqchip[i] =3D rvsp_ref_create_aia(s->aia_guests,
+> >> +                                            memmap, i, base_hartid,
+> >> +                                            hart_count);
+> >> +
+> >> +        /* Try to use different IRQCHIP instance based device type */
+> >> +        if (i =3D=3D 0) {
+> >> +            mmio_irqchip =3D s->irqchip[i];
+> >> +            pcie_irqchip =3D s->irqchip[i];
+> >> +        }
+> >> +        if (i =3D=3D 1) {
+> >> +            pcie_irqchip =3D s->irqchip[i];
+> >> +        }
+> >> +    }
+> >> +
+> >> +    s->memmap =3D rvsp_ref_memmap;
+> >> +
+> >> +    /* register system main memory (actual RAM) */
+> >> +    memory_region_add_subregion(system_memory, memmap[RVSP_DRAM].base=
+,
+> >> +        machine->ram);
+> >> +
+> >> +    /* boot rom */
+> >> +    memory_region_init_rom(mask_rom, NULL, "riscv_rvsp_ref_board.mrom=
+",
+> >> +                           memmap[RVSP_MROM].size, &error_fatal);
+> >> +    memory_region_add_subregion(system_memory, memmap[RVSP_MROM].base=
+,
+> >> +                                mask_rom);
+> >> +
+> >> +    /* SiFive Test MMIO device */
+> >> +    sifive_test_create(memmap[RVSP_TEST].base);
+> >> +
+> >> +    gpex_pcie_init(system_memory, pcie_irqchip, s);
+> >> +
+> >> +    serial_mm_init(system_memory, memmap[RVSP_UART0].base,
+> >> +        0, qdev_get_gpio_in(mmio_irqchip, RVSP_UART0_IRQ), 399193,
+> >> +        serial_hd(0), DEVICE_LITTLE_ENDIAN);
+> >> +
+> >> +    sysbus_create_simple("goldfish_rtc", memmap[RVSP_RTC].base,
+> >> +        qdev_get_gpio_in(mmio_irqchip, RVSP_RTC_IRQ));
+> >> +
+> >> +    for (i =3D 0; i < ARRAY_SIZE(s->flash); i++) {
+> >> +        /* Map legacy -drive if=3Dpflash to machine properties */
+> >> +        pflash_cfi01_legacy_drive(s->flash[i],
+> >> +                                  drive_get(IF_PFLASH, 0, i));
+> >> +    }
+> >> +    rvsp_flash_map(s, system_memory);
+> >> +
+> >> +    s->machine_done.notify =3D rvsp_ref_machine_done;
+> >> +    qemu_add_machine_init_done_notifier(&s->machine_done);
+> >> +}
+> >> +
+> >> +static void rvsp_ref_machine_instance_init(Object *obj)
+> >> +{
+> >> +    RVSPMachineState *s =3D RVSP_REF_MACHINE(obj);
+> >> +
+> >> +    rvsp_flash_create(s);
+> >> +}
+> >> +
+> >> +static char *rvsp_ref_get_aia_guests(Object *obj, Error **errp)
+> >> +{
+> >> +    RVSPMachineState *s =3D RVSP_REF_MACHINE(obj);
+> >> +    char val[32];
+> >> +
+> >> +    sprintf(val, "%d", s->aia_guests);
+> >> +    return g_strdup(val);
+> >> +}
+> >> +
+> >> +static void rvsp_ref_set_aia_guests(Object *obj, const char *val, Err=
+or **errp)
+> >> +{
+> >> +    RVSPMachineState *s =3D RVSP_REF_MACHINE(obj);
+> >> +
+> >> +    s->aia_guests =3D atoi(val);
+> >> +    if (s->aia_guests < 0 || s->aia_guests > RVSP_IRQCHIP_MAX_GUESTS)=
+ {
+> >> +        error_setg(errp, "Invalid number of AIA IMSIC guests");
+> >> +        error_append_hint(errp, "Valid values be between 0 and %d.\n"=
+,
+> >> +                          RVSP_IRQCHIP_MAX_GUESTS);
+> >> +    }
+> >> +}
+> >> +
+> >> +static void rvsp_ref_machine_class_init(ObjectClass *oc, void *data)
+> >> +{
+> >> +    char str[128];
+> >> +    MachineClass *mc =3D MACHINE_CLASS(oc);
+> >> +
+> >> +    mc->desc =3D "RISC-V Server SoC Reference board";
+> >> +    mc->init =3D rvsp_ref_machine_init;
+> >> +    mc->max_cpus =3D RVSP_CPUS_MAX;
+> >> +    mc->default_cpu_type =3D TYPE_RISCV_CPU_BASE;
+> >> +    mc->pci_allow_0_address =3D true;
+> >> +    mc->default_nic =3D "e1000e";
+> >> +    mc->possible_cpu_arch_ids =3D riscv_numa_possible_cpu_arch_ids;
+> >> +    mc->cpu_index_to_instance_props =3D riscv_numa_cpu_index_to_props=
+;
+> >> +    mc->get_default_cpu_node_id =3D riscv_numa_get_default_cpu_node_i=
+d;
+> >> +    mc->numa_mem_supported =3D true;
+> >> +    /* platform instead of architectural choice */
+> >> +    mc->cpu_cluster_has_numa_boundary =3D true;
+> >> +    mc->default_ram_id =3D "riscv_rvsp_ref_board.ram";
+> >> +
+> >> +    object_class_property_add_str(oc, "aia-guests",
+> >> +                                  rvsp_ref_get_aia_guests,
+> >> +                                  rvsp_ref_set_aia_guests);
+> >> +    sprintf(str, "Set number of guest MMIO pages for AIA IMSIC. Valid=
+ value "
+> >> +                 "should be between 0 and %d.", RVSP_IRQCHIP_MAX_GUES=
+TS);
+> >> +    object_class_property_set_description(oc, "aia-guests", str);
+> >> +}
+> >> +
+> >> +static const TypeInfo rvsp_ref_typeinfo =3D {
+> >> +    .name       =3D TYPE_RVSP_REF_MACHINE,
+> >> +    .parent     =3D TYPE_MACHINE,
+> >> +    .class_init =3D rvsp_ref_machine_class_init,
+> >> +    .instance_init =3D rvsp_ref_machine_instance_init,
+> >> +    .instance_size =3D sizeof(RVSPMachineState),
+> >> +};
+> >> +
+> >> +static void rvsp_ref_init_register_types(void)
+> >> +{
+> >> +    type_register_static(&rvsp_ref_typeinfo);
+> >> +}
+> >> +
+> >> +type_init(rvsp_ref_init_register_types)
+> >> --
+> >> 2.34.1
+> >>
+> >>
+>
 
