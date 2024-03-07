@@ -4,83 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EBB9C54798
-	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Mar 2024 16:08:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 638A0C54E4A
+	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Mar 2024 19:16:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1riGE1-0005LD-57; Thu, 07 Mar 2024 11:04:05 -0500
+	id 1riJDn-0007fj-UC; Thu, 07 Mar 2024 14:16:05 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1riGDy-0005Jw-6P
- for qemu-riscv@nongnu.org; Thu, 07 Mar 2024 11:04:02 -0500
-Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
+ id 1riJDa-0007cz-Vc
+ for qemu-riscv@nongnu.org; Thu, 07 Mar 2024 14:15:53 -0500
+Received: from mail-pg1-x52c.google.com ([2607:f8b0:4864:20::52c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1riGDv-0006Ir-IH
- for qemu-riscv@nongnu.org; Thu, 07 Mar 2024 11:04:01 -0500
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-1dd178fc492so7221915ad.2
- for <qemu-riscv@nongnu.org>; Thu, 07 Mar 2024 08:03:59 -0800 (PST)
+ id 1riJDU-00058U-Rq
+ for qemu-riscv@nongnu.org; Thu, 07 Mar 2024 14:15:50 -0500
+Received: by mail-pg1-x52c.google.com with SMTP id
+ 41be03b00d2f7-5e42b4bbfa4so5887a12.1
+ for <qemu-riscv@nongnu.org>; Thu, 07 Mar 2024 11:15:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1709827438; x=1710432238; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=cMb6NoUEmqBYjF16yAIQs0kDHoFu+HxAwpO1ohhcIj4=;
- b=GHpaLCy90k0DY0xJcMDbSzvy7kIzHJrTck3IA//zFEGyE76Yv7tznCtUKJJ7nFZ7Ea
- 9WeGyMtN6wF8FH5+tZaaScn03ZFLS6KX7gCNc43x0IPVkpxThAOe9qesMaUwTJoIHHRp
- /vCcEWaRmayaSRwTF/Fa0vYQUGFRJNN2RDRA0LE0/y5Shf0BUJ1cjzbwkAOAgf5Cz1w5
- amQ4tF88Ppx79viOmbuTp4dqax6dK8M+KheJRU1SayJQuh/5osk2frOuNFBybd9/FXfS
- /CNAJmamtBMcLqyQiTzi5nIYq74Z32GpDPwU9N8jHV8+1XorMsTH9pxqLpW9MFAvY7PT
- Hm0w==
+ d=ventanamicro.com; s=google; t=1709838938; x=1710443738; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=Yrx9JCDVRPhgaAVwYHUK4pUsrbUwGQpQP9dyduxwUbY=;
+ b=RgQ0rjp8r14LrIbXrE4uvPEXn0csfSPrX/xZeeRZVRiF55TPK7w3s41NeiKTMCpRrR
+ qwlGll1ABd7K3phBvWEc6KXwsnK4NvHGEmhmaH2RrgShB/7UuNuwqaD8I2GnxSiIZIa5
+ +NFd1XnXYYomvWysMWF+4MtfCvwhYP4Ipcj2HYdEHDIMVOBwcmO93tTeSnyMIGnZvgqW
+ NmKmL7ImyM7DLo2zlnZYKPyq7WgWtR0cHM95LhxrIoQ6BjDzyoGctniPURE3BmoKaHb0
+ oAydwYoIWV4ZSh988hMmvd5HiUZpbnpXY5GjGKZDniMc3+EGktFNCof1oJc4M0ADyock
+ s5gg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709827438; x=1710432238;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=cMb6NoUEmqBYjF16yAIQs0kDHoFu+HxAwpO1ohhcIj4=;
- b=ARCx3flerIAka9v29b1b/Qv2AT9eLyWRnfik/mY0gZDTtLUfHZpAl38KfqOlJ6FkPv
- oVBednpBPAoaZq3yMhmedQ1F8Zgz6964RDcNe3k1nu/I+/Vd5T6T8rLdTcHEE8CkR+W2
- EzvInvCACPSiw1TJiNSm9q3oDhKV0m4ymVF+47tgt0lvsFlH5wVaiCHbgMCbpO8J7m8c
- iZOZDiXJmTTlcCOreuEbFi9Gt/AdNxYKRijkE4xImaoO6upNMxwyWskynz5kC6ssgnlL
- TypwlnfgCk2sV+X6SphvVP8ITJ8ds3G2xInmABqnbbd0VkZhEnSNrDUdXVRg5PCF4im1
- NhYg==
-X-Gm-Message-State: AOJu0YxsEm7HqtnHLIjnkebTm89zOypfAg2PJLXBhHFhJ4k+cYwg0est
- WteBDfOsk/iiXjZ/03Azn/rUc1frtIOuKNOzsWwyeSeBogk4VHNtPOmihFMcB7I=
-X-Google-Smtp-Source: AGHT+IFdUNwwOlFSuUuYxM1y+cGSLf1HinsJj2K5zBtLKEFHp2PVmiQxtBDV5MpUUfAkUkKpx2zPfA==
-X-Received: by 2002:a17:902:b612:b0:1db:f941:c9a with SMTP id
- b18-20020a170902b61200b001dbf9410c9amr8610287pls.45.1709827438052; 
- Thu, 07 Mar 2024 08:03:58 -0800 (PST)
-Received: from grind.dc1.ventanamicro.com ([177.94.15.159])
+ d=1e100.net; s=20230601; t=1709838938; x=1710443738;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Yrx9JCDVRPhgaAVwYHUK4pUsrbUwGQpQP9dyduxwUbY=;
+ b=qf1Dwz++LcHSCGmskWFEfGfhVwi4Oc5f8QyiYpi1M838mI7aQscWaxrzkUS2PqQgfl
+ 8Lr8qlRsq1IWbpW0QzCiJyBCDRyAInc8WoIijYg0cs8+AEnJ98Voh4H+M4jm2uFIde3t
+ A4gce5FmLiurKr2AWUys1uhTsXLIig0iYpXW629XWIXLZZzcfzI5SustVDDLxDX2gqQb
+ yP3AQvsDm2+fXVTLsLClEx1xlpUzoo+DVtYx/Vu8G7qQmhJxgFn+WYVaTQ9VMpzLldG6
+ QuhKACYg3NBLqi26fE/oCmpzM6K/JVxow+5UPdrtj8VRYc2vQ4C+F2FLCAojSHjMe1rL
+ VGJQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUcX0wjoJsKLx7/wH3KbCSbAT2UlP16R5xI/aQ/vjAADAJlKzWaznve3aWpo4qK6Wc+WXhKXd7p/DslvH0UnIdsndzVPLM=
+X-Gm-Message-State: AOJu0YyBE5A6PPMr49+Wwhu66XhAdMkvuLI69JwrzYA/nz5etBHEysHG
+ 9Q71WkXz+SLQsPpCg58a8uTKnFhZu8ogCTEX7UFWcUrsqhuSwt+V5hcvdIFE6/A=
+X-Google-Smtp-Source: AGHT+IE+VhAU3q1jqIXMrgEE9jrggtCNTeiC1tVTkJ1TuUwXJz8usQUahXpm0cQkT51a0bKaAltMHA==
+X-Received: by 2002:a17:903:41c2:b0:1dc:ccd3:29e5 with SMTP id
+ u2-20020a17090341c200b001dcccd329e5mr11703272ple.2.1709838938052; 
+ Thu, 07 Mar 2024 11:15:38 -0800 (PST)
+Received: from [192.168.68.110] ([177.94.15.159])
  by smtp.gmail.com with ESMTPSA id
- u11-20020a170903124b00b001db2b8b2da7sm14663136plh.122.2024.03.07.08.03.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Mar 2024 08:03:57 -0800 (PST)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- ajones@ventanamicro.com, tjeznach@rivosinc.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v2 09/15] hw/riscv/riscv-iommu: add s-stage and g-stage support
-Date: Thu,  7 Mar 2024 13:03:12 -0300
-Message-ID: <20240307160319.675044-10-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.43.2
-In-Reply-To: <20240307160319.675044-1-dbarboza@ventanamicro.com>
-References: <20240307160319.675044-1-dbarboza@ventanamicro.com>
+ l13-20020a170903004d00b001dd54c4320esm12283pla.256.2024.03.07.11.15.32
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 07 Mar 2024 11:15:37 -0800 (PST)
+Message-ID: <52159cae-2f95-45e4-85c5-14b36984039c@ventanamicro.com>
+Date: Thu, 7 Mar 2024 16:15:30 -0300
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RISC-V][tech-server-soc] [RFC 2/2] target/riscv: Add server
+ platform reference cpu
+To: "Wu, Fei" <fei2.wu@intel.com>, tech-server-soc@lists.riscv.org,
+ pbonzini@redhat.com, palmer@dabbelt.com, alistair.francis@wdc.com,
+ bin.meng@windriver.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org, andrei.warkentin@intel.com,
+ shaolin.xie@alibaba-inc.com, ved@rivosinc.com, sunilvl@ventanamicro.com,
+ haibo1.xu@intel.com, evan.chai@intel.com, yin.wang@intel.com,
+ tech-server-platform@lists.riscv.org
+References: <20240304102540.2789225-1-fei2.wu@intel.com>
+ <20240304102540.2789225-3-fei2.wu@intel.com>
+ <bd34501b-3dda-40eb-aa92-73ea289297d1@ventanamicro.com>
+ <8ad091f3-c00f-4786-a89b-799304eace73@intel.com>
+ <56448108-c655-4684-bab9-b8d7747f79f7@intel.com>
+ <4e16f394-fe9b-4edf-80eb-fc3220bcf6e1@intel.com>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <4e16f394-fe9b-4edf-80eb-fc3220bcf6e1@intel.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x635.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52c;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x52c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,452 +108,300 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Tomasz Jeznach <tjeznach@rivosinc.com>
 
-Add support for s-stage (sv32, sv39, sv48, sv57 caps) and g-stage
-(sv32x4, sv39x4, sv48x4, sv57x4 caps). Most of the work is done in the
-riscv_iommu_spa_fetch() function that now has to consider how many
-translation stages we need to walk the page table.
 
-Signed-off-by: Tomasz Jeznach <tjeznach@rivosinc.com>
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- hw/riscv/riscv-iommu-bits.h |  11 ++
- hw/riscv/riscv-iommu.c      | 282 ++++++++++++++++++++++++++++++++++--
- hw/riscv/riscv-iommu.h      |   2 +
- 3 files changed, 286 insertions(+), 9 deletions(-)
+On 3/7/24 04:36, Wu, Fei wrote:
+> On 3/6/2024 9:26 PM, Wu, Fei wrote:
+>> On 3/5/2024 1:58 PM, Wu, Fei wrote:
+>>> On 3/5/2024 3:43 AM, Daniel Henrique Barboza wrote:
+>>>>
+>>>>
+>>>> On 3/4/24 07:25, Fei Wu wrote:
+>>>>> The harts requirements of RISC-V server platform [1] require RVA23 ISA
+>>>>> profile support, plus Sv48, Svadu, H, Sscofmpf etc. This patch provides
+>>>>> a virt CPU type (rvsp-ref) as compliant as possible.
+>>>>>
+>>>>> [1]
+>>>>> https://github.com/riscv-non-isa/riscv-server-platform/blob/main/server_platform_requirements.adoc
+>>>>>
+>>>>> Signed-off-by: Fei Wu <fei2.wu@intel.com>
+>>>>> --->   hw/riscv/server_platform_ref.c |  6 +++-
+>>>>>    target/riscv/cpu-qom.h         |  1 +
+>>>>>    target/riscv/cpu.c             | 62 ++++++++++++++++++++++++++++++++++
+>>>>>    3 files changed, 68 insertions(+), 1 deletion(-)
+>>>>>
+>>>>> diff --git a/hw/riscv/server_platform_ref.c
+>>>>> b/hw/riscv/server_platform_ref.c
+>>>>> index ae90c4b27a..52ec607cee 100644
+>>>>> --- a/hw/riscv/server_platform_ref.c
+>>>>> +++ b/hw/riscv/server_platform_ref.c
+>>>>> @@ -1205,11 +1205,15 @@ static void
+>>>>> rvsp_ref_machine_class_init(ObjectClass *oc, void *data)
+>>>>>    {
+>>>>>        char str[128];
+>>>>>        MachineClass *mc = MACHINE_CLASS(oc);
+>>>>> +    static const char * const valid_cpu_types[] = {
+>>>>> +        TYPE_RISCV_CPU_RVSP_REF,
+>>>>> +    };
+>>>>>          mc->desc = "RISC-V Server SoC Reference board";
+>>>>>        mc->init = rvsp_ref_machine_init;
+>>>>>        mc->max_cpus = RVSP_CPUS_MAX;
+>>>>> -    mc->default_cpu_type = TYPE_RISCV_CPU_BASE;
+>>>>> +    mc->default_cpu_type = TYPE_RISCV_CPU_RVSP_REF;
+>>>>> +    mc->valid_cpu_types = valid_cpu_types;
+>>>>
+>>>> I suggest introducing this patch first, then the new machine type that
+>>>> will use it as a default
+>>>> CPU. The reason is to facilitate future bisects. If we introduce the
+>>>> board first, a future bisect
+>>>> might hit the previous patch, the board will be run using RV64 instead
+>>>> of the correct CPU, and
+>>>> we'll have different results because of it.
+>>>>
+>>> Good suggestion.
+>>>
+>>>>>        mc->pci_allow_0_address = true;
+>>>>>        mc->default_nic = "e1000e";
+>>>>>        mc->possible_cpu_arch_ids = riscv_numa_possible_cpu_arch_ids;
+>>>>> diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
+>>>>> index 3670cfe6d9..adb934d19e 100644
+>>>>> --- a/target/riscv/cpu-qom.h
+>>>>> +++ b/target/riscv/cpu-qom.h
+>>>>> @@ -49,6 +49,7 @@
+>>>>>    #define TYPE_RISCV_CPU_SIFIVE_U54
+>>>>> RISCV_CPU_TYPE_NAME("sifive-u54")
+>>>>>    #define TYPE_RISCV_CPU_THEAD_C906
+>>>>> RISCV_CPU_TYPE_NAME("thead-c906")
+>>>>>    #define TYPE_RISCV_CPU_VEYRON_V1
+>>>>> RISCV_CPU_TYPE_NAME("veyron-v1")
+>>>>> +#define TYPE_RISCV_CPU_RVSP_REF         RISCV_CPU_TYPE_NAME("rvsp-ref")
+>>>>>    #define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
+>>>>>      OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
+>>>>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+>>>>> index 5ff0192c52..bc91be702b 100644
+>>>>> --- a/target/riscv/cpu.c
+>>>>> +++ b/target/riscv/cpu.c
+>>>>> @@ -2282,6 +2282,67 @@ static void rva22s64_profile_cpu_init(Object *obj)
+>>>>>          RVA22S64.enabled = true;
+>>>>>    }
+>>>>> +
+>>>>> +static void rv64_rvsp_ref_cpu_init(Object *obj)
+>>>>> +{
+>>>>> +    CPURISCVState *env = &RISCV_CPU(obj)->env;
+>>>>> +    RISCVCPU *cpu = RISCV_CPU(obj);
+>>>>> +
+>>>>> +    riscv_cpu_set_misa_ext(env, RVG | RVC | RVS | RVU | RVH | RVV);
+>>>>> +
+>>>>> +    /* FIXME: change to 1.13 */
+>>>>> +    env->priv_ver = PRIV_VERSION_1_12_0;
+>>>>> +
+>>>>> +    /* RVA22U64 */
+>>>>> +    cpu->cfg.mmu = true;
+>>>>> +    cpu->cfg.ext_zifencei = true;
+>>>>> +    cpu->cfg.ext_zicsr = true;
+>>>>> +    cpu->cfg.ext_zicntr = true;
+>>>>> +    cpu->cfg.ext_zihpm = true;
+>>>>> +    cpu->cfg.ext_zihintpause = true;
+>>>>> +    cpu->cfg.ext_zba = true;
+>>>>> +    cpu->cfg.ext_zbb = true;
+>>>>> +    cpu->cfg.ext_zbs = true;
+>>>>> +    cpu->cfg.zic64b = true;
+>>>>> +    cpu->cfg.ext_zicbom = true;
+>>>>> +    cpu->cfg.ext_zicbop = true;
+>>>>> +    cpu->cfg.ext_zicboz = true;
+>>>>> +    cpu->cfg.cbom_blocksize = 64;
+>>>>> +    cpu->cfg.cbop_blocksize = 64;
+>>>>> +    cpu->cfg.cboz_blocksize = 64;
+>>>>> +    cpu->cfg.ext_zfhmin = true;
+>>>>> +    cpu->cfg.ext_zkt = true;
+>>>>
+>>>> You can change this whole block with:
+>>>>
+>>>> RVA22U64.enabled = true;
+>>>>
+>>>>
+>>>> riscv_cpu_add_profiles() will check if we have a profile enabled and, if
+>>>> that's the
+>>>> case, we'll enable all its extensions in the CPU.
+>>>>
+>>>> In the near future, when we implement a proper RVA23 support, we'll be
+>>>> able to just do
+>>>> a single RVA23S64.enabled = true in this cpu_init(). But for now we can
+>>>> at least declare
+>>>> RVA22U64 (perhaps RVA22S64) support for this CPU.
+>>>>
+>>
+>> Hi Daniel,
+>>
+>> I'm not sure if it's a regression or the usage has been changed. I'm not
+>> able to use '-cpu rva22s64' on latest qemu (db596ae190).
+>>
+> I did a quick git bisect and found that commit d06f28db6 "target/riscv:
+> move 'mmu' to riscv_cpu_properties[]" disabled mmu by default, so that
+> an explicit mmu option should be added to qemu command line like '-cpu
+> rva22s64,mmu=true', I think rva22s64 should enable it by default.
+> 
 
-diff --git a/hw/riscv/riscv-iommu-bits.h b/hw/riscv/riscv-iommu-bits.h
-index 8e80b1e52a..9d645d69ea 100644
---- a/hw/riscv/riscv-iommu-bits.h
-+++ b/hw/riscv/riscv-iommu-bits.h
-@@ -71,6 +71,14 @@ struct riscv_iommu_pq_record {
- /* 5.3 IOMMU Capabilities (64bits) */
- #define RISCV_IOMMU_REG_CAP             0x0000
- #define RISCV_IOMMU_CAP_VERSION         GENMASK_ULL(7, 0)
-+#define RISCV_IOMMU_CAP_SV32            BIT_ULL(8)
-+#define RISCV_IOMMU_CAP_SV39            BIT_ULL(9)
-+#define RISCV_IOMMU_CAP_SV48            BIT_ULL(10)
-+#define RISCV_IOMMU_CAP_SV57            BIT_ULL(11)
-+#define RISCV_IOMMU_CAP_SV32X4          BIT_ULL(16)
-+#define RISCV_IOMMU_CAP_SV39X4          BIT_ULL(17)
-+#define RISCV_IOMMU_CAP_SV48X4          BIT_ULL(18)
-+#define RISCV_IOMMU_CAP_SV57X4          BIT_ULL(19)
- #define RISCV_IOMMU_CAP_MSI_FLAT        BIT_ULL(22)
- #define RISCV_IOMMU_CAP_MSI_MRIF        BIT_ULL(23)
- #define RISCV_IOMMU_CAP_IGS             GENMASK_ULL(29, 28)
-@@ -79,6 +87,7 @@ struct riscv_iommu_pq_record {
- 
- /* 5.4 Features control register (32bits) */
- #define RISCV_IOMMU_REG_FCTL            0x0008
-+#define RISCV_IOMMU_FCTL_GXL            BIT(2)
- 
- /* 5.5 Device-directory-table pointer (64bits) */
- #define RISCV_IOMMU_REG_DDTP            0x0010
-@@ -195,6 +204,8 @@ struct riscv_iommu_dc {
- #define RISCV_IOMMU_DC_TC_DTF           BIT_ULL(4)
- #define RISCV_IOMMU_DC_TC_PDTV          BIT_ULL(5)
- #define RISCV_IOMMU_DC_TC_PRPR          BIT_ULL(6)
-+#define RISCV_IOMMU_DC_TC_GADE          BIT_ULL(7)
-+#define RISCV_IOMMU_DC_TC_SADE          BIT_ULL(8)
- #define RISCV_IOMMU_DC_TC_DPE           BIT_ULL(9)
- #define RISCV_IOMMU_DC_TC_SXL           BIT_ULL(11)
- 
-diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-index 0b93146327..03a610fa75 100644
---- a/hw/riscv/riscv-iommu.c
-+++ b/hw/riscv/riscv-iommu.c
-@@ -58,6 +58,8 @@ struct RISCVIOMMUContext {
-     uint64_t __rfu:20;          /* reserved */
-     uint64_t tc;                /* Translation Control */
-     uint64_t ta;                /* Translation Attributes */
-+    uint64_t satp;              /* S-Stage address translation and protection */
-+    uint64_t gatp;              /* G-Stage address translation and protection */
-     uint64_t msi_addr_mask;     /* MSI filtering - address mask */
-     uint64_t msi_addr_pattern;  /* MSI filtering - address pattern */
-     uint64_t msiptp;            /* MSI redirection page table pointer */
-@@ -194,12 +196,46 @@ static bool riscv_iommu_msi_check(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
-     return true;
- }
- 
--/* RISCV IOMMU Address Translation Lookup - Page Table Walk */
-+/*
-+ * RISCV IOMMU Address Translation Lookup - Page Table Walk
-+ *
-+ * Note: Code is based on get_physical_address() from target/riscv/cpu_helper.c
-+ * Both implementation can be merged into single helper function in future.
-+ * Keeping them separate for now, as error reporting and flow specifics are
-+ * sufficiently different for separate implementation.
-+ *
-+ * @s        : IOMMU Device State
-+ * @ctx      : Translation context for device id and process address space id.
-+ * @iotlb    : translation data: physical address and access mode.
-+ * @gpa      : provided IOVA is a guest physical address, use G-Stage only.
-+ * @return   : success or fault cause code.
-+ */
- static int riscv_iommu_spa_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
--    IOMMUTLBEntry *iotlb)
-+    IOMMUTLBEntry *iotlb, bool gpa)
- {
-+    dma_addr_t addr, base;
-+    uint64_t satp, gatp, pte;
-+    bool en_s, en_g;
-+    struct {
-+        unsigned char step;
-+        unsigned char levels;
-+        unsigned char ptidxbits;
-+        unsigned char ptesize;
-+    } sc[2];
-+    /* Translation stage phase */
-+    enum {
-+        S_STAGE = 0,
-+        G_STAGE = 1,
-+    } pass;
-+
-+    satp = get_field(ctx->satp, RISCV_IOMMU_ATP_MODE_FIELD);
-+    gatp = get_field(ctx->gatp, RISCV_IOMMU_ATP_MODE_FIELD);
-+
-+    en_s = satp != RISCV_IOMMU_DC_FSC_MODE_BARE && !gpa;
-+    en_g = gatp != RISCV_IOMMU_DC_IOHGATP_MODE_BARE;
-+
-     /* Early check for MSI address match when IOVA == GPA */
--    if (iotlb->perm & IOMMU_WO &&
-+    if (!en_s && (iotlb->perm & IOMMU_WO) &&
-         riscv_iommu_msi_check(s, ctx, iotlb->iova)) {
-         iotlb->target_as = &s->trap_as;
-         iotlb->translated_addr = iotlb->iova;
-@@ -208,11 +244,196 @@ static int riscv_iommu_spa_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
-     }
- 
-     /* Exit early for pass-through mode. */
--    iotlb->translated_addr = iotlb->iova;
--    iotlb->addr_mask = ~TARGET_PAGE_MASK;
--    /* Allow R/W in pass-through mode */
--    iotlb->perm = IOMMU_RW;
--    return 0;
-+    if (!(en_s || en_g)) {
-+        iotlb->translated_addr = iotlb->iova;
-+        iotlb->addr_mask = ~TARGET_PAGE_MASK;
-+        /* Allow R/W in pass-through mode */
-+        iotlb->perm = IOMMU_RW;
-+        return 0;
-+    }
-+
-+    /* S/G translation parameters. */
-+    for (pass = 0; pass < 2; pass++) {
-+        uint32_t sv_mode;
-+
-+        sc[pass].step = 0;
-+        if (pass ? (s->fctl & RISCV_IOMMU_FCTL_GXL) :
-+            (ctx->tc & RISCV_IOMMU_DC_TC_SXL)) {
-+            /* 32bit mode for GXL/SXL == 1 */
-+            switch (pass ? gatp : satp) {
-+            case RISCV_IOMMU_DC_IOHGATP_MODE_BARE:
-+                sc[pass].levels    = 0;
-+                sc[pass].ptidxbits = 0;
-+                sc[pass].ptesize   = 0;
-+                break;
-+            case RISCV_IOMMU_DC_IOHGATP_MODE_SV32X4:
-+                sv_mode = pass ? RISCV_IOMMU_CAP_SV32X4 : RISCV_IOMMU_CAP_SV32;
-+                if (!(s->cap & sv_mode)) {
-+                    return RISCV_IOMMU_FQ_CAUSE_DDT_MISCONFIGURED;
-+                }
-+                sc[pass].levels    = 2;
-+                sc[pass].ptidxbits = 10;
-+                sc[pass].ptesize   = 4;
-+                break;
-+            default:
-+                return RISCV_IOMMU_FQ_CAUSE_DDT_MISCONFIGURED;
-+            }
-+        } else {
-+            /* 64bit mode for GXL/SXL == 0 */
-+            switch (pass ? gatp : satp) {
-+            case RISCV_IOMMU_DC_IOHGATP_MODE_BARE:
-+                sc[pass].levels    = 0;
-+                sc[pass].ptidxbits = 0;
-+                sc[pass].ptesize   = 0;
-+                break;
-+            case RISCV_IOMMU_DC_IOHGATP_MODE_SV39X4:
-+                sv_mode = pass ? RISCV_IOMMU_CAP_SV39X4 : RISCV_IOMMU_CAP_SV39;
-+                if (!(s->cap & sv_mode)) {
-+                    return RISCV_IOMMU_FQ_CAUSE_DDT_MISCONFIGURED;
-+                }
-+                sc[pass].levels    = 3;
-+                sc[pass].ptidxbits = 9;
-+                sc[pass].ptesize   = 8;
-+                break;
-+            case RISCV_IOMMU_DC_IOHGATP_MODE_SV48X4:
-+                sv_mode = pass ? RISCV_IOMMU_CAP_SV48X4 : RISCV_IOMMU_CAP_SV48;
-+                if (!(s->cap & sv_mode)) {
-+                    return RISCV_IOMMU_FQ_CAUSE_DDT_MISCONFIGURED;
-+                }
-+                sc[pass].levels    = 4;
-+                sc[pass].ptidxbits = 9;
-+                sc[pass].ptesize   = 8;
-+                break;
-+            case RISCV_IOMMU_DC_IOHGATP_MODE_SV57X4:
-+                sv_mode = pass ? RISCV_IOMMU_CAP_SV57X4 : RISCV_IOMMU_CAP_SV57;
-+                if (!(s->cap & sv_mode)) {
-+                    return RISCV_IOMMU_FQ_CAUSE_DDT_MISCONFIGURED;
-+                }
-+                sc[pass].levels    = 5;
-+                sc[pass].ptidxbits = 9;
-+                sc[pass].ptesize   = 8;
-+                break;
-+            default:
-+                return RISCV_IOMMU_FQ_CAUSE_DDT_MISCONFIGURED;
-+            }
-+        }
-+    };
-+
-+    /* S/G stages translation tables root pointers */
-+    gatp = PPN_PHYS(get_field(ctx->gatp, RISCV_IOMMU_ATP_PPN_FIELD));
-+    satp = PPN_PHYS(get_field(ctx->satp, RISCV_IOMMU_ATP_PPN_FIELD));
-+    addr = (en_s && en_g) ? satp : iotlb->iova;
-+    base = en_g ? gatp : satp;
-+    pass = en_g ? G_STAGE : S_STAGE;
-+
-+    do {
-+        const unsigned widened = (pass && !sc[pass].step) ? 2 : 0;
-+        const unsigned va_bits = widened + sc[pass].ptidxbits;
-+        const unsigned va_skip = TARGET_PAGE_BITS + sc[pass].ptidxbits *
-+                                 (sc[pass].levels - 1 - sc[pass].step);
-+        const unsigned idx = (addr >> va_skip) & ((1 << va_bits) - 1);
-+        const dma_addr_t pte_addr = base + idx * sc[pass].ptesize;
-+        const bool ade =
-+            ctx->tc & (pass ? RISCV_IOMMU_DC_TC_GADE : RISCV_IOMMU_DC_TC_SADE);
-+
-+        /* Address range check before first level lookup */
-+        if (!sc[pass].step) {
-+            const uint64_t va_mask = (1ULL << (va_skip + va_bits)) - 1;
-+            if ((addr & va_mask) != addr) {
-+                return RISCV_IOMMU_FQ_CAUSE_DMA_DISABLED;
-+            }
-+        }
-+
-+        /* Read page table entry */
-+        if (dma_memory_read(s->target_as, pte_addr, &pte,
-+                sc[pass].ptesize, MEMTXATTRS_UNSPECIFIED) != MEMTX_OK) {
-+            return (iotlb->perm & IOMMU_WO) ? RISCV_IOMMU_FQ_CAUSE_WR_FAULT
-+                                            : RISCV_IOMMU_FQ_CAUSE_RD_FAULT;
-+        }
-+
-+        if (sc[pass].ptesize == 4) {
-+            pte = (uint64_t) le32_to_cpu(*((uint32_t *)&pte));
-+        } else {
-+            pte = le64_to_cpu(pte);
-+        }
-+
-+        sc[pass].step++;
-+        hwaddr ppn = pte >> PTE_PPN_SHIFT;
-+
-+        if (!(pte & PTE_V)) {
-+            break;                /* Invalid PTE */
-+        } else if (!(pte & (PTE_R | PTE_W | PTE_X))) {
-+            base = PPN_PHYS(ppn); /* Inner PTE, continue walking */
-+        } else if ((pte & (PTE_R | PTE_W | PTE_X)) == PTE_W) {
-+            break;                /* Reserved leaf PTE flags: PTE_W */
-+        } else if ((pte & (PTE_R | PTE_W | PTE_X)) == (PTE_W | PTE_X)) {
-+            break;                /* Reserved leaf PTE flags: PTE_W + PTE_X */
-+        } else if (ppn & ((1ULL << (va_skip - TARGET_PAGE_BITS)) - 1)) {
-+            break;                /* Misaligned PPN */
-+        } else if ((iotlb->perm & IOMMU_RO) && !(pte & PTE_R)) {
-+            break;                /* Read access check failed */
-+        } else if ((iotlb->perm & IOMMU_WO) && !(pte & PTE_W)) {
-+            break;                /* Write access check failed */
-+        } else if ((iotlb->perm & IOMMU_RO) && !ade && !(pte & PTE_A)) {
-+            break;                /* Access bit not set */
-+        } else if ((iotlb->perm & IOMMU_WO) && !ade && !(pte & PTE_D)) {
-+            break;                /* Dirty bit not set */
-+        } else {
-+            /* Leaf PTE, translation completed. */
-+            sc[pass].step = sc[pass].levels;
-+            base = PPN_PHYS(ppn) | (addr & ((1ULL << va_skip) - 1));
-+            /* Update address mask based on smallest translation granularity */
-+            iotlb->addr_mask &= (1ULL << va_skip) - 1;
-+            /* Continue with S-Stage translation? */
-+            if (pass && sc[0].step != sc[0].levels) {
-+                pass = S_STAGE;
-+                addr = iotlb->iova;
-+                continue;
-+            }
-+            /* Translation phase completed (GPA or SPA) */
-+            iotlb->translated_addr = base;
-+            iotlb->perm = (pte & PTE_W) ? ((pte & PTE_R) ? IOMMU_RW : IOMMU_WO)
-+                                                         : IOMMU_RO;
-+
-+            /* Check MSI GPA address match */
-+            if (pass == S_STAGE && (iotlb->perm & IOMMU_WO) &&
-+                riscv_iommu_msi_check(s, ctx, base)) {
-+                /* Trap MSI writes and return GPA address. */
-+                iotlb->target_as = &s->trap_as;
-+                iotlb->addr_mask = ~TARGET_PAGE_MASK;
-+                return 0;
-+            }
-+
-+            /* Continue with G-Stage translation? */
-+            if (!pass && en_g) {
-+                pass = G_STAGE;
-+                addr = base;
-+                base = gatp;
-+                sc[pass].step = 0;
-+                continue;
-+            }
-+
-+            return 0;
-+        }
-+
-+        if (sc[pass].step == sc[pass].levels) {
-+            break; /* Can't find leaf PTE */
-+        }
-+
-+        /* Continue with G-Stage translation? */
-+        if (!pass && en_g) {
-+            pass = G_STAGE;
-+            addr = base;
-+            base = gatp;
-+            sc[pass].step = 0;
-+        }
-+    } while (1);
-+
-+    return (iotlb->perm & IOMMU_WO) ?
-+                (pass ? RISCV_IOMMU_FQ_CAUSE_WR_FAULT_VS :
-+                        RISCV_IOMMU_FQ_CAUSE_WR_FAULT_S) :
-+                (pass ? RISCV_IOMMU_FQ_CAUSE_RD_FAULT_VS :
-+                        RISCV_IOMMU_FQ_CAUSE_RD_FAULT_S);
- }
- 
- /* Redirect MSI write for given GPA. */
-@@ -351,6 +572,10 @@ static int riscv_iommu_ctx_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx)
- 
-     case RISCV_IOMMU_DDTP_MODE_BARE:
-         /* mock up pass-through translation context */
-+        ctx->gatp = set_field(0, RISCV_IOMMU_ATP_MODE_FIELD,
-+            RISCV_IOMMU_DC_IOHGATP_MODE_BARE);
-+        ctx->satp = set_field(0, RISCV_IOMMU_ATP_MODE_FIELD,
-+            RISCV_IOMMU_DC_FSC_MODE_BARE);
-         ctx->tc = RISCV_IOMMU_DC_TC_V;
-         ctx->ta = 0;
-         ctx->msiptp = 0;
-@@ -424,6 +649,8 @@ static int riscv_iommu_ctx_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx)
- 
-     /* Set translation context. */
-     ctx->tc = le64_to_cpu(dc.tc);
-+    ctx->gatp = le64_to_cpu(dc.iohgatp);
-+    ctx->satp = le64_to_cpu(dc.fsc);
-     ctx->ta = le64_to_cpu(dc.ta);
-     ctx->msiptp = le64_to_cpu(dc.msiptp);
-     ctx->msi_addr_mask = le64_to_cpu(dc.msi_addr_mask);
-@@ -433,14 +660,38 @@ static int riscv_iommu_ctx_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx)
-         return RISCV_IOMMU_FQ_CAUSE_DDT_INVALID;
-     }
- 
-+    /* FSC field checks */
-+    mode = get_field(ctx->satp, RISCV_IOMMU_DC_FSC_MODE);
-+    addr = PPN_PHYS(get_field(ctx->satp, RISCV_IOMMU_DC_FSC_PPN));
-+
-+    if (mode == RISCV_IOMMU_DC_FSC_MODE_BARE) {
-+        /* No S-Stage translation, done. */
-+        return 0;
-+    }
-+
-     if (!(ctx->tc & RISCV_IOMMU_DC_TC_PDTV)) {
-         if (ctx->pasid != RISCV_IOMMU_NOPASID) {
-             /* PASID is disabled */
-             return RISCV_IOMMU_FQ_CAUSE_TTYPE_BLOCKED;
-         }
-+        if (mode > RISCV_IOMMU_DC_FSC_IOSATP_MODE_SV57) {
-+            /* Invalid translation mode */
-+            return RISCV_IOMMU_FQ_CAUSE_DDT_INVALID;
-+        }
-         return 0;
-     }
- 
-+    if (ctx->pasid == RISCV_IOMMU_NOPASID) {
-+        if (!(ctx->tc & RISCV_IOMMU_DC_TC_DPE)) {
-+            /* No default PASID enabled, set BARE mode */
-+            ctx->satp = 0ULL;
-+            return 0;
-+        } else {
-+            /* Use default PASID #0 */
-+            ctx->pasid = 0;
-+        }
-+    }
-+
-     /* FSC.TC.PDTV enabled */
-     if (mode > RISCV_IOMMU_DC_FSC_PDTP_MODE_PD20) {
-         /* Invalid PDTP.MODE */
-@@ -474,6 +725,7 @@ static int riscv_iommu_ctx_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx)
- 
-     /* Use FSC and TA from process directory entry. */
-     ctx->ta = le64_to_cpu(dc.ta);
-+    ctx->satp = le64_to_cpu(dc.fsc);
- 
-     return 0;
- }
-@@ -710,6 +962,7 @@ static RISCVIOMMUEntry *riscv_iommu_iot_lookup(RISCVIOMMUContext *ctx,
-     GHashTable *iot_cache, hwaddr iova)
- {
-     RISCVIOMMUEntry key = {
-+        .gscid = get_field(ctx->gatp, RISCV_IOMMU_DC_IOHGATP_GSCID),
-         .pscid = get_field(ctx->ta, RISCV_IOMMU_DC_TA_PSCID),
-         .iova  = PPN_DOWN(iova),
-     };
-@@ -779,7 +1032,7 @@ static int riscv_iommu_translate(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
-     }
- 
-     /* Translate using device directory / page table information. */
--    fault = riscv_iommu_spa_fetch(s, ctx, iotlb);
-+    fault = riscv_iommu_spa_fetch(s, ctx, iotlb, false);
- 
-     if (!fault && iotlb->target_as == &s->trap_as) {
-         /* Do not cache trapped MSI translations */
-@@ -790,6 +1043,7 @@ static int riscv_iommu_translate(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
-         iot = g_new0(RISCVIOMMUEntry, 1);
-         iot->iova = PPN_DOWN(iotlb->iova);
-         iot->phys = PPN_DOWN(iotlb->translated_addr);
-+        iot->gscid = get_field(ctx->gatp, RISCV_IOMMU_DC_IOHGATP_GSCID);
-         iot->pscid = get_field(ctx->ta, RISCV_IOMMU_DC_TA_PSCID);
-         iot->perm = iotlb->perm;
-         riscv_iommu_iot_update(s, iot_cache, iot);
-@@ -1394,6 +1648,14 @@ static void riscv_iommu_realize(DeviceState *dev, Error **errp)
-     if (s->enable_msi) {
-         s->cap |= RISCV_IOMMU_CAP_MSI_FLAT | RISCV_IOMMU_CAP_MSI_MRIF;
-     }
-+    if (s->enable_s_stage) {
-+        s->cap |= RISCV_IOMMU_CAP_SV32 | RISCV_IOMMU_CAP_SV39 |
-+                  RISCV_IOMMU_CAP_SV48 | RISCV_IOMMU_CAP_SV57;
-+    }
-+    if (s->enable_g_stage) {
-+        s->cap |= RISCV_IOMMU_CAP_SV32X4 | RISCV_IOMMU_CAP_SV39X4 |
-+                  RISCV_IOMMU_CAP_SV48X4 | RISCV_IOMMU_CAP_SV57X4;
-+    }
-     /* Report QEMU target physical address space limits */
-     s->cap = set_field(s->cap, RISCV_IOMMU_CAP_PAS,
-                        TARGET_PHYS_ADDR_SPACE_BITS);
-@@ -1504,6 +1766,8 @@ static Property riscv_iommu_properties[] = {
-         LIMIT_CACHE_IOT),
-     DEFINE_PROP_BOOL("intremap", RISCVIOMMUState, enable_msi, TRUE),
-     DEFINE_PROP_BOOL("off", RISCVIOMMUState, enable_off, TRUE),
-+    DEFINE_PROP_BOOL("s-stage", RISCVIOMMUState, enable_s_stage, TRUE),
-+    DEFINE_PROP_BOOL("g-stage", RISCVIOMMUState, enable_g_stage, TRUE),
-     DEFINE_PROP_LINK("downstream-mr", RISCVIOMMUState, target_mr,
-         TYPE_MEMORY_REGION, MemoryRegion *),
-     DEFINE_PROP_END_OF_LIST(),
-diff --git a/hw/riscv/riscv-iommu.h b/hw/riscv/riscv-iommu.h
-index eea2123686..9b33fb97ef 100644
---- a/hw/riscv/riscv-iommu.h
-+++ b/hw/riscv/riscv-iommu.h
-@@ -38,6 +38,8 @@ struct RISCVIOMMUState {
- 
-     bool enable_off;      /* Enable out-of-reset OFF mode (DMA disabled) */
-     bool enable_msi;      /* Enable MSI remapping */
-+    bool enable_s_stage;  /* Enable S/VS-Stage translation */
-+    bool enable_g_stage;  /* Enable G-Stage translation */
- 
-     /* IOMMU Internal State */
-     uint64_t ddtp;        /* Validated Device Directory Tree Root Pointer */
--- 
-2.43.2
+This is fixed in alistair/riscv-to-apply.next by this commit:
 
+commit 5b8d66e6bf7904535ee277e9c70b332c4462f10a
+Author: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Date:   Thu Feb 15 19:39:50 2024 -0300
+
+     target/riscv/tcg: set 'mmu' with 'satp' in cpu_set_profile()
+     
+     Recent changes in options handling removed the 'mmu' default the bare
+     CPUs had, meaning that we must enable 'mmu' by hand when using the
+     rva22s64 profile CPU.
+     
+     Given that this profile is setting a satp mode, it already implies that
+     we need a 'mmu'. Enable the 'mmu' in this case.
+
+
+
+Thanks,
+
+Daniel
+
+
+> Thanks,
+> Fei.
+> 
+>> -- latest qemu, cannot see linux boot message and blocked
+>>
+>> $Q -machine virt -nographic -m 2G -smp 2 \
+>>    -cpu rva22s64 \
+>>    -bios /usr/lib/riscv64-linux-gnu/opensbi/generic/fw_jump.elf \
+>>    -kernel $Kernel
+>>
+>> Boot HART ID              : 1
+>> Boot HART Domain          : root
+>> Boot HART Priv Version    : v1.12
+>> Boot HART Base ISA        : rv64imafdc
+>> Boot HART ISA Extensions  : time
+>> Boot HART PMP Count       : 0
+>> Boot HART PMP Granularity : 0
+>> Boot HART PMP Address Bits: 0
+>> Boot HART MHPM Count      : 16
+>> Boot HART MIDELEG         : 0x0000000000000222
+>> Boot HART MEDELEG         : 0x000000000000b109
+>>
+>> -- latest qemu, w/o rva22s64, looks good
+>>
+>> $Q -machine virt -nographic -m 2G -smp 2 \
+>>    -bios /usr/lib/riscv64-linux-gnu/opensbi/generic/fw_jump.elf \
+>>    -kernel $Kernel
+>>
+>> Boot HART ID              : 0
+>> Boot HART Domain          : root
+>> Boot HART Priv Version    : v1.12
+>> Boot HART Base ISA        : rv64imafdch
+>> Boot HART ISA Extensions  : time,sstc
+>> Boot HART PMP Count       : 16
+>> Boot HART PMP Granularity : 4
+>> Boot HART PMP Address Bits: 54
+>> Boot HART MHPM Count      : 16
+>> Boot HART MIDELEG         : 0x0000000000001666
+>> Boot HART MEDELEG         : 0x0000000000f0b509
+>> [    0.000000] Linux version 6.8.0-rc6+ (box@riscv-sw-lvm-1)
+>> (riscv64-linux-gnu-gcc (Ubuntu 9.4.0-1ubuntu1~20.04) 9.4.0, GNU ld (GNU
+>> Binutils for Ubuntu) 2.34) #17 SMP Wed Feb 28 08:38:42 UTC 2024
+>>
+>> -- commit dfa3c4c57, patch to enable rva22s64, looks good
+>>
+>> $Q -machine virt -nographic -m 2G -smp 2 \
+>>    -cpu rva22s64 \
+>>    -bios /usr/lib/riscv64-linux-gnu/opensbi/generic/fw_jump.elf \
+>>    -kernel $Kernel
+>>
+>> Boot HART ID              : 0
+>> Boot HART Domain          : root
+>> Boot HART Priv Version    : v1.12
+>> Boot HART Base ISA        : rv64imafdc
+>> Boot HART ISA Extensions  : time
+>> Boot HART PMP Count       : 16
+>> Boot HART PMP Granularity : 4
+>> Boot HART PMP Address Bits: 54
+>> Boot HART MHPM Count      : 16
+>> Boot HART MIDELEG         : 0x0000000000000222
+>> Boot HART MEDELEG         : 0x000000000000b109
+>> [    0.000000] Linux version 6.8.0-rc6+ (box@riscv-sw-lvm-1)
+>> (riscv64-linux-gnu-gcc (Ubuntu 9.4.0-1ubuntu1~20.04) 9.4.0, GNU ld (GNU
+>> Binutils for Ubuntu) 2.34) #17 SMP Wed Feb 28 08:38:42 UTC 2024
+>>
+>> Thanks,
+>> Fei
+>>
+>>> Let me try.
+>>>
+>>> Thanks,
+>>> Fei.
+>>>
+>>>>
+>>>> Thanks,
+>>>>
+>>>> Daniel
+>>>>
+>>>>
+>>>>> +
+>>>>> +    /* RVA23U64 */
+>>>>> +    cpu->cfg.ext_zvfhmin = true;
+>>>>> +    cpu->cfg.ext_zvbb = true;
+>>>>> +    cpu->cfg.ext_zvkt = true;
+>>>>> +    cpu->cfg.ext_zihintntl = true;
+>>>>> +    cpu->cfg.ext_zicond = true;
+>>>>> +    cpu->cfg.ext_zcb = true;
+>>>>> +    cpu->cfg.ext_zfa = true;
+>>>>> +    cpu->cfg.ext_zawrs = true;
+>>>>> +
+>>>>> +    /* RVA23S64 */
+>>>>> +    cpu->cfg.ext_zifencei = true;
+>>>>> +    cpu->cfg.svade = true;
+>>>>> +    cpu->cfg.ext_svpbmt = true;
+>>>>> +    cpu->cfg.ext_svinval = true;
+>>>>> +    cpu->cfg.ext_svnapot = true;
+>>>>> +    cpu->cfg.ext_sstc = true;
+>>>>> +    cpu->cfg.ext_sscofpmf = true;
+>>>>> +    cpu->cfg.ext_smstateen = true;
+>>>>> +
+>>>>> +    cpu->cfg.ext_smaia = true;
+>>>>> +    cpu->cfg.ext_ssaia = true;
+>>>>> +
+>>>>> +    /* Server Platform */
+>>>>> +#ifndef CONFIG_USER_ONLY
+>>>>> +    set_satp_mode_max_supported(cpu, VM_1_10_SV48);
+>>>>> +#endif
+>>>>> +    cpu->cfg.ext_svadu = true;
+>>>>> +    cpu->cfg.ext_zkr = true;
+>>>>> +}
+>>>>>    #endif
+>>>>>      static const gchar *riscv_gdb_arch_name(CPUState *cs)
+>>>>> @@ -2547,6 +2608,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+>>>>>        DEFINE_BARE_CPU(TYPE_RISCV_CPU_RV64E,        MXL_RV64,
+>>>>> rv64e_bare_cpu_init),
+>>>>>        DEFINE_PROFILE_CPU(TYPE_RISCV_CPU_RVA22U64,  MXL_RV64,
+>>>>> rva22u64_profile_cpu_init),
+>>>>>        DEFINE_PROFILE_CPU(TYPE_RISCV_CPU_RVA22S64,  MXL_RV64,
+>>>>> rva22s64_profile_cpu_init),
+>>>>> +    DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_RVSP_REF,   MXL_RV64,
+>>>>> rv64_rvsp_ref_cpu_init),
+>>>>>    #endif
+>>>>>    };
+>>>>>    
+>>>>
+>>>>
+>>>> -=-=-=-=-=-=-=-=-=-=-=-
+>>>> Links: You receive all messages sent to this group.
+>>>> View/Reply Online (#125):
+>>>> https://lists.riscv.org/g/tech-server-soc/message/125
+>>>> Mute This Topic: https://lists.riscv.org/mt/104719379/7152971
+>>>> Group Owner: tech-server-soc+owner@lists.riscv.org
+>>>> Unsubscribe:
+>>>> https://lists.riscv.org/g/tech-server-soc/leave/12737993/7152971/1793629631/xyzzy [fei2.wu@intel.com]
+>>>> -=-=-=-=-=-=-=-=-=-=-=-
+>>>>
+>>>>
+>>>
+>>
+> 
 
