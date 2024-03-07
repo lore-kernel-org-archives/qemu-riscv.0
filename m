@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90EBFC54798
-	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Mar 2024 16:04:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5930FC48BF6
+	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Mar 2024 16:04:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1riGDt-0005Dj-Iz; Thu, 07 Mar 2024 11:03:57 -0500
+	id 1riGDZ-00055l-Of; Thu, 07 Mar 2024 11:03:37 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1riGDi-00056d-9z
- for qemu-riscv@nongnu.org; Thu, 07 Mar 2024 11:03:48 -0500
-Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
+ id 1riGDV-00054A-Nf
+ for qemu-riscv@nongnu.org; Thu, 07 Mar 2024 11:03:35 -0500
+Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1riGDf-0006AO-In
- for qemu-riscv@nongnu.org; Thu, 07 Mar 2024 11:03:46 -0500
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-1dc29f1956cso8059395ad.0
- for <qemu-riscv@nongnu.org>; Thu, 07 Mar 2024 08:03:43 -0800 (PST)
+ id 1riGDT-00064E-3p
+ for qemu-riscv@nongnu.org; Thu, 07 Mar 2024 11:03:33 -0500
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-1dcc7f4717fso9882055ad.0
+ for <qemu-riscv@nongnu.org>; Thu, 07 Mar 2024 08:03:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1709827422; x=1710432222; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1709827408; x=1710432208; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IAg1rDO219B0kDzGhaIIF9NH0UHu1hVK1GbBMrUiUzU=;
- b=fX6jwHNceaFy0yicTCPCIa1RX5wWGENqHIMXEJ1W0MhfQbbc1ItDe342dg8y4FPMD6
- bMC+cdpPEGpJM3K4jMBdJSs+o7+9xOJhGXqAn7YkyXKI5LX8fVLqf9Z9U0lEaOSjox+2
- L7jvVb+eBcs6PndMbDK6HdZxmRwtkYLz5AewDjQExVOwz75irIkTxWAJBKccJZmhrqRD
- UrPwRTdyiQwKjuMvYz2F1gMSxC3xOFvc2QZ1ccPqFM6AW88EmR21BlUCmPgAI76uJ7Ji
- rhundcouKsjrkW5xhZzJhsLwuw8998zO/zFEl4IAUAPAvjgNpg8cCX8EX8WTDUBQeJ+p
- Q9Ww==
+ bh=B2zdcROsQbOFiJxi4YFtPRy8krLPDKRLFmYJHbhltrk=;
+ b=SjCc9f9F1+pm6HfPJDf05vYkYpw5o7OK84U6spGz0JyUTPWX2jH2FruCBQLv/TKGLA
+ wFuvt/t03mSfrsQeGnbP0bUQoGFBf6AWf1WeA3JVmX60QVkX+1SdEezj4GQ+2zIPyZh3
+ tzVvwSbf23ESTzeEM7K6E3WueMQtwyJD97cRxj4WyJ1pCgvTr8zFz9YD84GrZ/zaYa5A
+ vmNAc+iK1QTmHX34LWXflGl1jrULrXgrWBnX5dI1sTB5ZUTYCS5pJ2mT3kqhcr7yFvk7
+ b8sTqQF8ZgGRaLPPNp7doIcs+/UoxA4+OIVHdK0Jx+/cOg8quGO75CEyBOHuP3vXLLls
+ c64g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709827422; x=1710432222;
+ d=1e100.net; s=20230601; t=1709827408; x=1710432208;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=IAg1rDO219B0kDzGhaIIF9NH0UHu1hVK1GbBMrUiUzU=;
- b=HPXPX/Jwk83DuQ93MB2SAIEsTqeYAC2ULhUFwuqy288I3glI+CMvT8ojRJRDBIr03G
- vlqpyX+uE3ipEnA8nDtP5m4GsxG6/+xjh1SmUjTxjrEMKhEjQXrBQhiKNr3QHMazlABp
- sA2AMXWzVnABfcycUaIp5zWZbjrkAka27fbXUQalH4RXqizLzAP1QkumCkw76lBlu4Zo
- Xkz95eIuQZrLgIaxvfn1l8J1NN4SodSVmoCPeN1L2NBJ39kTJexqVR2pPb+rkB/VUyeI
- 8SkmU+bMHKbmomfiRVmwoeVmWOuUxo3X4v48v+n8J0FyJCyWZDPrS0u8MbYCz4GZNMDP
- 3ILg==
-X-Gm-Message-State: AOJu0YwnT2CkajI47tEpBu1QA2z8fGPdoPofn40yHReCv3z0/vAV2KMB
- 9wzHgmCewfgl78vcObt4p96ZgEhZY9J98jIbyAskd0CsXD3zot9Z6HvN+wWCaKo=
-X-Google-Smtp-Source: AGHT+IHCQ30en2mDJm3oNzhInfm/NhDYqSrN/qFS/5XakLhZjJmeW+FFiQSzI7WVAA2sLuW3riJ4OQ==
-X-Received: by 2002:a17:902:eb8a:b0:1dc:84ab:95d with SMTP id
- q10-20020a170902eb8a00b001dc84ab095dmr11706169plg.45.1709827422260; 
- Thu, 07 Mar 2024 08:03:42 -0800 (PST)
+ bh=B2zdcROsQbOFiJxi4YFtPRy8krLPDKRLFmYJHbhltrk=;
+ b=ixUD2uOKihzBpoztO+ujyPhV19YXyMfAi+PNINRKxm4cERQppAftyyv3P7hll0XyOt
+ 4kmGK+lTMATBQeOzvl/QYO8YoZFuS+xNUR/MeWCyVkknYQPBh8P5ZeIJhWBD+S0iJrDz
+ XmeLXWofN+gcEvlZAPwywx7+bfP+Mt+nGLPZfDOSw4LwKP3L56JSXN7G1t2xOAAOhM5e
+ yGQJ1/+rISc9PH/PwKPzcKSw/OUWIOH9PSDtDGHwV6zatBdrXB+I/FZcWWqstXeUf2hP
+ VKUPdHpUZnUyfWvR2eL5qDceuXe3y3/0KmckgaVugYtWoE10TLUStACcBeUJVnBVU0V/
+ k1Zg==
+X-Gm-Message-State: AOJu0YxjI/ebO+pdS4PDCVD5Yj2UEdcoOUyz9TBHcr2FeFEg5lpFKZq+
+ 6qRFe3kQ2wQn1R3Zr8rjWRVk7wCx1OSKSpPfzC+i5q662A0zY6upD4z+uAXtOgI=
+X-Google-Smtp-Source: AGHT+IGOruu9QRefE1sWJ0Ke5tPBrLgdf6nv0d4Lcde4VeqKQ4XkxLEaAFYR+PXxHLbV8KzSc/Asxg==
+X-Received: by 2002:a17:902:f552:b0:1dd:6092:743f with SMTP id
+ h18-20020a170902f55200b001dd6092743fmr1261025plf.56.1709827408388; 
+ Thu, 07 Mar 2024 08:03:28 -0800 (PST)
 Received: from grind.dc1.ventanamicro.com ([177.94.15.159])
  by smtp.gmail.com with ESMTPSA id
- u11-20020a170903124b00b001db2b8b2da7sm14663136plh.122.2024.03.07.08.03.35
+ u11-20020a170903124b00b001db2b8b2da7sm14663136plh.122.2024.03.07.08.03.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Mar 2024 08:03:41 -0800 (PST)
+ Thu, 07 Mar 2024 08:03:28 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- ajones@ventanamicro.com, tjeznach@rivosinc.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v2 04/15] hw/riscv: add riscv-iommu-pci device
-Date: Thu,  7 Mar 2024 13:03:07 -0300
-Message-ID: <20240307160319.675044-5-dbarboza@ventanamicro.com>
+ ajones@ventanamicro.com, tjeznach@rivosinc.com
+Subject: [PATCH v2 01/15] exec/memtxattr: add process identifier to the
+ transaction attributes
+Date: Thu,  7 Mar 2024 13:03:04 -0300
+Message-ID: <20240307160319.675044-2-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240307160319.675044-1-dbarboza@ventanamicro.com>
 References: <20240307160319.675044-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x636.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -98,209 +98,31 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Tomasz Jeznach <tjeznach@rivosinc.com>
 
-The RISC-V IOMMU can be modelled as a PCIe device following the
-guidelines of the RISC-V IOMMU spec, chapter 7.1, "Integrating an IOMMU
-as a PCIe device".
+Extend memory transaction attributes with process identifier to allow
+per-request address translation logic to use requester_id / process_id
+to identify memory mapping (e.g. enabling IOMMU w/ PASID translations).
 
 Signed-off-by: Tomasz Jeznach <tjeznach@rivosinc.com>
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- hw/riscv/meson.build       |   2 +-
- hw/riscv/riscv-iommu-pci.c | 173 +++++++++++++++++++++++++++++++++++++
- 2 files changed, 174 insertions(+), 1 deletion(-)
- create mode 100644 hw/riscv/riscv-iommu-pci.c
+ include/exec/memattrs.h | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
-index ba9eebd605..4674cec6c4 100644
---- a/hw/riscv/meson.build
-+++ b/hw/riscv/meson.build
-@@ -10,6 +10,6 @@ riscv_ss.add(when: 'CONFIG_SIFIVE_U', if_true: files('sifive_u.c'))
- riscv_ss.add(when: 'CONFIG_SPIKE', if_true: files('spike.c'))
- riscv_ss.add(when: 'CONFIG_MICROCHIP_PFSOC', if_true: files('microchip_pfsoc.c'))
- riscv_ss.add(when: 'CONFIG_ACPI', if_true: files('virt-acpi-build.c'))
--riscv_ss.add(when: 'CONFIG_RISCV_IOMMU', if_true: files('riscv-iommu.c'))
-+riscv_ss.add(when: 'CONFIG_RISCV_IOMMU', if_true: files('riscv-iommu.c', 'riscv-iommu-pci.c'))
+diff --git a/include/exec/memattrs.h b/include/exec/memattrs.h
+index 14cdd8d582..46d0725416 100644
+--- a/include/exec/memattrs.h
++++ b/include/exec/memattrs.h
+@@ -52,6 +52,11 @@ typedef struct MemTxAttrs {
+     unsigned int memory:1;
+     /* Requester ID (for MSI for example) */
+     unsigned int requester_id:16;
++
++    /*
++     * PCI PASID support: Limited to 8 bits process identifier.
++     */
++    unsigned int pasid:8;
+ } MemTxAttrs;
  
- hw_arch += {'riscv': riscv_ss}
-diff --git a/hw/riscv/riscv-iommu-pci.c b/hw/riscv/riscv-iommu-pci.c
-new file mode 100644
-index 0000000000..4eb1057210
---- /dev/null
-+++ b/hw/riscv/riscv-iommu-pci.c
-@@ -0,0 +1,173 @@
-+/*
-+ * QEMU emulation of an RISC-V IOMMU (Ziommu)
-+ *
-+ * Copyright (C) 2022-2023 Rivos Inc.
-+ *
-+ * This program is free software; you can redistribute it and/or modify
-+ * it under the terms of the GNU General Public License as published by
-+ * the Free Software Foundation; either version 2 of the License.
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU General Public License for more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along
-+ * with this program; if not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "hw/pci/msi.h"
-+#include "hw/pci/msix.h"
-+#include "hw/pci/pci_bus.h"
-+#include "hw/qdev-properties.h"
-+#include "hw/riscv/riscv_hart.h"
-+#include "migration/vmstate.h"
-+#include "qapi/error.h"
-+#include "qemu/error-report.h"
-+#include "qemu/host-utils.h"
-+#include "qom/object.h"
-+
-+#include "cpu_bits.h"
-+#include "riscv-iommu.h"
-+#include "riscv-iommu-bits.h"
-+
-+#ifndef PCI_VENDOR_ID_RIVOS
-+#define PCI_VENDOR_ID_RIVOS           0x1efd
-+#endif
-+
-+#ifndef PCI_DEVICE_ID_RIVOS_IOMMU
-+#define PCI_DEVICE_ID_RIVOS_IOMMU     0xedf1
-+#endif
-+
-+/* RISC-V IOMMU PCI Device Emulation */
-+
-+typedef struct RISCVIOMMUStatePci {
-+    PCIDevice        pci;     /* Parent PCIe device state */
-+    MemoryRegion     bar0;    /* PCI BAR (including MSI-x config) */
-+    RISCVIOMMUState  iommu;   /* common IOMMU state */
-+} RISCVIOMMUStatePci;
-+
-+/* interrupt delivery callback */
-+static void riscv_iommu_pci_notify(RISCVIOMMUState *iommu, unsigned vector)
-+{
-+    RISCVIOMMUStatePci *s = container_of(iommu, RISCVIOMMUStatePci, iommu);
-+
-+    if (msix_enabled(&(s->pci))) {
-+        msix_notify(&(s->pci), vector);
-+    }
-+}
-+
-+static void riscv_iommu_pci_realize(PCIDevice *dev, Error **errp)
-+{
-+    RISCVIOMMUStatePci *s = DO_UPCAST(RISCVIOMMUStatePci, pci, dev);
-+    RISCVIOMMUState *iommu = &s->iommu;
-+    Error *err = NULL;
-+
-+    /* Set device id for trace / debug */
-+    DEVICE(iommu)->id = g_strdup_printf("%02x:%02x.%01x",
-+        pci_dev_bus_num(dev), PCI_SLOT(dev->devfn), PCI_FUNC(dev->devfn));
-+    qdev_realize(DEVICE(iommu), NULL, errp);
-+
-+    memory_region_init(&s->bar0, OBJECT(s), "riscv-iommu-bar0",
-+        QEMU_ALIGN_UP(memory_region_size(&iommu->regs_mr), TARGET_PAGE_SIZE));
-+    memory_region_add_subregion(&s->bar0, 0, &iommu->regs_mr);
-+
-+    pcie_endpoint_cap_init(dev, 0);
-+
-+    pci_register_bar(dev, 0, PCI_BASE_ADDRESS_SPACE_MEMORY |
-+                     PCI_BASE_ADDRESS_MEM_TYPE_64, &s->bar0);
-+
-+    int ret = msix_init(dev, RISCV_IOMMU_INTR_COUNT,
-+                        &s->bar0, 0, RISCV_IOMMU_REG_MSI_CONFIG,
-+                        &s->bar0, 0, RISCV_IOMMU_REG_MSI_CONFIG + 256, 0, &err);
-+
-+    if (ret == -ENOTSUP) {
-+        /*
-+         * MSI-x is not supported by the platform.
-+         * Driver should use timer/polling based notification handlers.
-+         */
-+        warn_report_err(err);
-+    } else if (ret < 0) {
-+        error_propagate(errp, err);
-+        return;
-+    } else {
-+        /* mark all allocated MSIx vectors as used. */
-+        msix_vector_use(dev, RISCV_IOMMU_INTR_CQ);
-+        msix_vector_use(dev, RISCV_IOMMU_INTR_FQ);
-+        msix_vector_use(dev, RISCV_IOMMU_INTR_PM);
-+        msix_vector_use(dev, RISCV_IOMMU_INTR_PQ);
-+        iommu->notify = riscv_iommu_pci_notify;
-+    }
-+
-+    PCIBus *bus = pci_device_root_bus(dev);
-+    if (!bus) {
-+        error_setg(errp, "can't find PCIe root port for %02x:%02x.%x",
-+            pci_bus_num(pci_get_bus(dev)), PCI_SLOT(dev->devfn),
-+            PCI_FUNC(dev->devfn));
-+        return;
-+    }
-+
-+    riscv_iommu_pci_setup_iommu(iommu, bus, errp);
-+}
-+
-+static void riscv_iommu_pci_exit(PCIDevice *pci_dev)
-+{
-+    pci_setup_iommu(pci_device_root_bus(pci_dev), NULL, NULL);
-+}
-+
-+static const VMStateDescription riscv_iommu_vmstate = {
-+    .name = "riscv-iommu",
-+    .unmigratable = 1
-+};
-+
-+static void riscv_iommu_pci_init(Object *obj)
-+{
-+    RISCVIOMMUStatePci *s = RISCV_IOMMU_PCI(obj);
-+    RISCVIOMMUState *iommu = &s->iommu;
-+
-+    object_initialize_child(obj, "iommu", iommu, TYPE_RISCV_IOMMU);
-+    qdev_alias_all_properties(DEVICE(iommu), obj);
-+}
-+
-+static Property riscv_iommu_pci_properties[] = {
-+    DEFINE_PROP_END_OF_LIST(),
-+};
-+
-+static void riscv_iommu_pci_class_init(ObjectClass *klass, void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+    PCIDeviceClass *k = PCI_DEVICE_CLASS(klass);
-+
-+    k->realize = riscv_iommu_pci_realize;
-+    k->exit = riscv_iommu_pci_exit;
-+    k->vendor_id = PCI_VENDOR_ID_RIVOS;
-+    k->device_id = PCI_DEVICE_ID_RIVOS_IOMMU;
-+    k->revision = 0;
-+    k->class_id = 0x0806;
-+    dc->desc = "RISCV-IOMMU DMA Remapping device";
-+    dc->vmsd = &riscv_iommu_vmstate;
-+    dc->hotpluggable = false;
-+    dc->user_creatable = true;
-+    set_bit(DEVICE_CATEGORY_MISC, dc->categories);
-+    device_class_set_props(dc, riscv_iommu_pci_properties);
-+}
-+
-+static const TypeInfo riscv_iommu_pci = {
-+    .name = TYPE_RISCV_IOMMU_PCI,
-+    .parent = TYPE_PCI_DEVICE,
-+    .class_init = riscv_iommu_pci_class_init,
-+    .instance_init = riscv_iommu_pci_init,
-+    .instance_size = sizeof(RISCVIOMMUStatePci),
-+    .interfaces = (InterfaceInfo[]) {
-+        { INTERFACE_PCIE_DEVICE },
-+        { },
-+    },
-+};
-+
-+static void riscv_iommu_register_pci_types(void)
-+{
-+    type_register_static(&riscv_iommu_pci);
-+}
-+
-+type_init(riscv_iommu_register_pci_types);
+ /* Bus masters which don't specify any attributes will get this,
 -- 
 2.43.2
 
