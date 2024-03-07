@@ -4,84 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D9A1C5475B
-	for <qemu-riscv@archiver.kernel.org>; Wed,  6 Mar 2024 20:43:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23CC4C5475B
+	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Mar 2024 00:38:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rhy64-0004Ly-2C; Wed, 06 Mar 2024 15:42:40 -0500
+	id 1ri1m1-00065V-7F; Wed, 06 Mar 2024 19:38:13 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rhy63-0004Lk-5b
- for qemu-riscv@nongnu.org; Wed, 06 Mar 2024 15:42:39 -0500
-Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1ri1lz-00065J-SV; Wed, 06 Mar 2024 19:38:11 -0500
+Received: from mail-vk1-xa34.google.com ([2607:f8b0:4864:20::a34])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rhy61-0004Ms-8s
- for qemu-riscv@nongnu.org; Wed, 06 Mar 2024 15:42:38 -0500
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-4130e293686so883345e9.3
- for <qemu-riscv@nongnu.org>; Wed, 06 Mar 2024 12:42:36 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1ri1ly-0000cd-5f; Wed, 06 Mar 2024 19:38:11 -0500
+Received: by mail-vk1-xa34.google.com with SMTP id
+ 71dfb90a1353d-4d346e4242fso91575e0c.3; 
+ Wed, 06 Mar 2024 16:38:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709757755; x=1710362555; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=DPx0WKsr3WD8stnEbU6nk/HiuAb1e9AnM+Gm0M50IM4=;
- b=K4jPZqftQBnscYizISbCv/2PzNvlC1kQ609Kohx8Qu9fxcLCfArls3NDw89uC1byFH
- IH3zpfvDhGy/XokuirkLuAN+ExVTMk4bUBsvbETyTII5gGTLndkqSsp9YHz3CHTT1AFh
- oNoypCP2js8vTHaF1IP6cMQV2TtQWekgPwkNxaHJ8sB6iv0CqGteFOP7kUQPTcSFu4Bx
- TzLiNviBhNE81kMTNw9++X7tVWakBxic11HFf9hU6C7pdnr44z1cUUaYC80GOTzkvoOS
- KLK8LWbsojsIrKAXXjIjtqQrQt2kz/4c5tjzIBEZXG9V6GfdV9GBwHnYIUKtwe4T2zPE
- O/Yw==
+ d=gmail.com; s=20230601; t=1709771888; x=1710376688; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+b82yz/PWPSbIk7u3wkU2gko4HUYl4EFp7HRPSeZD6A=;
+ b=OIR5xWsoTuJGaVM7HAQ/uIoe/JU/qMHjbPXXTR09uaL+595YdWXGztPyTXx6qXstQq
+ Jit5y3KyYEUm80tRzGJs8McnCgJeVEx2bts4n9MM1IvILMYWuHBab+Z931qd3obWzzqi
+ jt0LzFB/YdMgYHG4k/amBxuAhMC4bIW4dEQ58FSLncePDtvooo1q352nf7+nHv8OxJbC
+ jfxfzDv/gr2wVkIkJyjgdmI5PAPTjq1aF3DpWHzzyi4XBmF1p+CeSf8YkYmyw3ph6jkI
+ SAsyspl2LYgRrrarC/r/osAVdgrL+Ah/A+yln90yuBlfA1shuQ90hgx47aiPAl1Eljpg
+ xR3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709757755; x=1710362555;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=DPx0WKsr3WD8stnEbU6nk/HiuAb1e9AnM+Gm0M50IM4=;
- b=V8Q9NOX8fCGZ/vQipBQp6mSRhbOyKpfWUH4IKkMUj3WJBE1JgfBPE++clNtAJo/lID
- Eus1rnVcm2gPGfDnhlPfsD/fXUd9g8M3AFL+68Bj3GQ3d0kbbgxHSG5snRjq819cYWn1
- veAapsa3JUo+cGDCTufwm4Wo3i4ieL2ILLPTSjwGAmhYRUhfWo3opNAHO0osAy5c9PYG
- /5lGk0SfXUkgY0U9VdZSK/0a9NAs25xwhn5iLFaDqQmpOBa/QFLiBf3RVesKG9BFDtGq
- MAe0tsI1kux52Ncj5rdYzyWZLq7J1WBp+7cG2otA/z7TszM72B4zcrdQPHzATjGdM1ul
- IeUw==
-X-Gm-Message-State: AOJu0Yx6oxTf7xc7UoKWGmFoYDlUUHlwJeDto7lcBCWQiPLTUQ4zYoyo
- eKDp9el3cj7Nhaeg+VAt5HvX6zMJNEKuF+mCySBujb18hzoiSm64qD4MOvpgtu8=
-X-Google-Smtp-Source: AGHT+IEJ9ILdKfidupcWR4qRrm9ea8ASr3oQgB5S3mF2qAxXsNXDlMNDxk5Csj1Ukm88AwBsFg1ApA==
-X-Received: by 2002:a05:600c:468a:b0:412:bcc9:32dc with SMTP id
- p10-20020a05600c468a00b00412bcc932dcmr12859000wmo.31.1709757755325; 
- Wed, 06 Mar 2024 12:42:35 -0800 (PST)
-Received: from [192.168.69.100] (vau06-h02-176-184-43-100.dsl.sta.abo.bbox.fr.
- [176.184.43.100]) by smtp.gmail.com with ESMTPSA id
- bg13-20020a05600c3c8d00b00412fe0eb806sm367392wmb.14.2024.03.06.12.42.33
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 06 Mar 2024 12:42:34 -0800 (PST)
-Message-ID: <970fa729-46be-44e7-b882-34a87e328319@linaro.org>
-Date: Wed, 6 Mar 2024 21:42:32 +0100
+ d=1e100.net; s=20230601; t=1709771888; x=1710376688;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+b82yz/PWPSbIk7u3wkU2gko4HUYl4EFp7HRPSeZD6A=;
+ b=ZeZ5SdGyDVSbOv1E2QwH3onw+WCgRCyWX3gL1Wj1nH46pI5S7/+sl5Tnr5wQAfGKNC
+ MJG2uLx3RVufIJguZyvo3rS5nSeaxzeLDcedtN9Y1S7nltJCPJGWNYsG2IEIRdEqseFq
+ XYjQjySvFEYeJNwNoyOUVAY8m4XBT80+bcsDUxk/WhDVuzjsq6Fpjp0vCHxWPty2rT80
+ VDhSoYumtwNiNbFyjNUgnnbkadM7apI4PqGqAibypY+UhsVbxoOJnuU/kzLh5QhyAxww
+ uHJPE2CKNyRtbl14gMmXNjlYKOjADONTX01aKziq/ZafrvAtAiRgDACRjrUD5hyh8MmQ
+ fOJA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU8uiCEu3pUG3mrDn7oDkBLZeUFLhSmCG7BUoknSyZR/081bfYRjeeUm+DDqxtlDuegNpkhUSk+89OLPTMCEhS7LCiST+Q=
+X-Gm-Message-State: AOJu0YxiAxKjheDjguriGDnd6tullluf0S3lQUG4yn8LGW9jfTLA8AGi
+ LE4/3MoiZdppYXA/Ra3peerZHCp+Rf0okrUNqBolrovDCf1p1DUHszoZXLKGLjD3kfF5xViYYwr
+ c/QnMtaow5MMP8QGX90Z/jD+4gp8=
+X-Google-Smtp-Source: AGHT+IH2aDg2820AIFDOyTMgNXdzbbDVhB8RQRqlcpZS6kPPV6JDedjzjsqohqOgxEylcaMLHcbmpdHzPl/VFyjHzbA=
+X-Received: by 2002:a05:6122:2a50:b0:4cb:2930:7477 with SMTP id
+ fx16-20020a0561222a5000b004cb29307477mr7450172vkb.3.1709771888119; Wed, 06
+ Mar 2024 16:38:08 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 7/9] trans_rvv.c.inc: remove redundant mark_vs_dirty()
- calls
-Content-Language: en-US
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- Richard Henderson <richard.henderson@linaro.org>
 References: <20240306171932.549549-1-dbarboza@ventanamicro.com>
- <20240306171932.549549-8-dbarboza@ventanamicro.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20240306171932.549549-8-dbarboza@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::329;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x329.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+In-Reply-To: <20240306171932.549549-1-dbarboza@ventanamicro.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 7 Mar 2024 10:37:42 +1000
+Message-ID: <CAKmqyKM9CdC_6R9z4+QhCVS2JUY6hX0h4+ZEAsLsgttgrA0cTg@mail.gmail.com>
+Subject: Re: [PATCH v7 0/9] riscv: set vstart_eq_zero on mark_vs_dirty
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a34;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa34.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,20 +92,49 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 6/3/24 18:19, Daniel Henrique Barboza wrote:
-> trans_vmv_v_i , trans_vfmv_v_f and the trans_##NAME macro from
-> GEN_VMV_WHOLE_TRANS() are calling mark_vs_dirty() in both branches of
-> their 'ifs'. conditionals.
-> 
-> Call it just once in the end like other functions are doing.
-> 
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->   target/riscv/insn_trans/trans_rvv.c.inc | 11 +++--------
->   1 file changed, 3 insertions(+), 8 deletions(-)
+On Thu, Mar 7, 2024 at 3:20=E2=80=AFAM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
+>
+> Hi,
+>
+> This version is rebased on top of alistair/riscv-to-apply.next, fixing
+> onflicts with the Ztso changes in ldst_us_trans().
+>
+> No other changes made. All patches acked.
+>
+> v6 link: https://lore.kernel.org/qemu-riscv/20240221213140.365232-1-dbarb=
+oza@ventanamicro.com/
+>
+> Daniel Henrique Barboza (8):
+>   trans_rvv.c.inc: mark_vs_dirty() before loads and stores
+>   trans_rvv.c.inc: remove 'is_store' bool from load/store fns
+>   target/riscv: remove 'over' brconds from vector trans
+>   target/riscv/translate.c: remove 'cpu_vstart' global
+>   target/riscv: remove 'cpu_vl' global
+>   target/riscv/vector_helper.c: set vstart =3D 0 in GEN_VEXT_VSLIDEUP_VX(=
+)
+>   trans_rvv.c.inc: remove redundant mark_vs_dirty() calls
+>   target/riscv/vector_helper.c: optimize loops in ldst helpers
+>
+> Ivan Klokov (1):
+>   target/riscv: Clear vstart_qe_zero flag
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Thanks!
 
+Applied to riscv-to-apply.next
+
+Alistair
+
+>
+>  target/riscv/insn_trans/trans_rvbf16.c.inc |  18 +-
+>  target/riscv/insn_trans/trans_rvv.c.inc    | 283 ++++++---------------
+>  target/riscv/insn_trans/trans_rvvk.c.inc   |  30 +--
+>  target/riscv/translate.c                   |  11 +-
+>  target/riscv/vector_helper.c               |   7 +-
+>  5 files changed, 99 insertions(+), 250 deletions(-)
+>
+> --
+> 2.43.2
+>
+>
 
