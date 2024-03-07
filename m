@@ -4,90 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 248A5C54798
-	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Mar 2024 19:27:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60A56C54E4A
+	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Mar 2024 19:56:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1riJOu-0002e5-PW; Thu, 07 Mar 2024 14:27:32 -0500
+	id 1riJq5-0001xZ-46; Thu, 07 Mar 2024 14:55:37 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1riJOq-0002di-Ak
- for qemu-riscv@nongnu.org; Thu, 07 Mar 2024 14:27:28 -0500
-Received: from mail-oi1-x22c.google.com ([2607:f8b0:4864:20::22c])
+ id 1riJq3-0001vF-41
+ for qemu-riscv@nongnu.org; Thu, 07 Mar 2024 14:55:35 -0500
+Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1riJOk-0008Td-K5
- for qemu-riscv@nongnu.org; Thu, 07 Mar 2024 14:27:25 -0500
-Received: by mail-oi1-x22c.google.com with SMTP id
- 5614622812f47-3c1a2f7e1d2so5000b6e.1
- for <qemu-riscv@nongnu.org>; Thu, 07 Mar 2024 11:27:19 -0800 (PST)
+ id 1riJq0-0006dc-VP
+ for qemu-riscv@nongnu.org; Thu, 07 Mar 2024 14:55:34 -0500
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-6e617b39877so1095644b3a.3
+ for <qemu-riscv@nongnu.org>; Thu, 07 Mar 2024 11:55:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1709839636; x=1710444436; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1709841331; x=1710446131; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=xDDEf++BkdQj7+uDCp7A7THqFceLnTiljmVi41v8cYM=;
- b=gO0m6NsYEtOID//xBzF+tsEUlJhRKIljYkU0yV5MLtcZ6T2TGQedo/dO1T+yd8rAie
- MHge20vChCV3kWac/CYlWvDnf0sSZZUwKavb9K0gTRc+lbP6/eOLeXI/Yl2YMk34UqUY
- ZE++mHLFcR6aY8Z5UJW8OanSr9hYCDzRiTR3Q1uXG6yUDX5SjEmXpZED2nUHpgzUeas/
- D0ZVf1lbnocU7fpwu3Bb8Eo2Qe3qKrlbbhQSTEoowzuGBE2jLXWHuP5E44GRBCdhzkGf
- FbsXr0G0BK6dYhQhDNRQ1hruKmCzYxgJ3rlM0oE+tI4Vik/i4dRR4X1UoEYyX5xJ9hsm
- Vd1A==
+ bh=LAHVN4vQ3tFy3VzoY6N3j2+8oy13NiVFjjwRGu/531Q=;
+ b=iykTVupGdzniDycX7Uh3DimH60ughbW9sovEqVRK2oaV1bO9eAnkmeQbx5znnzRPO7
+ 5zDwleZT+imLkX+xb7niZa4Yuf0DKgwLCha+a3AlRuNdW2ZlS+yAO/LrmpkTL+sNO0a4
+ rRjeXjnzKRxfw+1EF9tTbj7NwNJ8B57m3yunwMTV7VfXlypDtAxhGJMQOZu6Kl1cs4jU
+ GXCkZM7egNqX/K316wFMK1fox12++oKXoqSKCty6FrHlxr3id8x2dl4QU0DqbulChFun
+ g2j1QZkE/IQUH3M1g6pYtromUJqI6E1xFQ25Y6hiwIe2iFY8NaZZI71Mr7gOAfy535Ok
+ IUfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709839636; x=1710444436;
+ d=1e100.net; s=20230601; t=1709841331; x=1710446131;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=xDDEf++BkdQj7+uDCp7A7THqFceLnTiljmVi41v8cYM=;
- b=Jowr6C9itD+LIuZBmwLfkb9U843IJeUjkIibud/8gGG76g0WdsprWn1NNROuYv+3px
- N9AhOU1Bxo5gBa05CILTz3U7z7rANLK2tR5s2pWNiJVPnvPCN/KU/L4VU9HGJxGTXryE
- ONtJvwKi345GWtihHdBfGdDiih3ZV78Nm7y1GPGdlePB4mUuOSqaPivXz9nikK0aZi8t
- 4BvcCSjGPRU4W1upPbhtNNJm4eq9+q+m1Ih0OD9XyUm0Qgl2E+ejUWXushfyY7DWPSNK
- M6qdUJ+gkSnFzAInM2R5EbRNOtE/wgYf5Qy/c+FNaAZs2ScXN5u/3sK2fcn5hTNq2DM4
- 6N7A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX3qNyMIL0nBD8CiHtRTKo9T6e4W76UNFcyAwh46NkdjBXjVUOQLzLS+LxZV0/fi9KljDhewx641Wa25tEeuGe7KGc1eCU=
-X-Gm-Message-State: AOJu0YyYteK+ZTO9kjM0jtseAbH201bcNWUSZD0Kxrtpjg+yY8YrhkFe
- AJXeP8O3x5d91ag7nehI7V6hZOpZIptSyr1jKyZ5HN0cTMeOwcYzGeZx81oTnAI=
-X-Google-Smtp-Source: AGHT+IFUap+Nxd6OoOHQgcvlzyNIhsIYQH36guqI9a7hoGffZr1yld203NFfaEVvEZ2doLIVcw+q0w==
-X-Received: by 2002:a05:6808:4408:b0:3c1:f571:f5b0 with SMTP id
- eo8-20020a056808440800b003c1f571f5b0mr8453525oib.49.1709839636465; 
- Thu, 07 Mar 2024 11:27:16 -0800 (PST)
+ bh=LAHVN4vQ3tFy3VzoY6N3j2+8oy13NiVFjjwRGu/531Q=;
+ b=kTt5/iXYoWLsXRJwE9JdqzrNaiMJ4vcZfugZrQ9q7YP6OQy7YNVBWdTUbcj7dH8FSs
+ VL/QSvkqnmJRBsCaIcKJsjNpkp9MfGjLg6fYwAj85XnYPDO5YoqraEOtyu0bJU8SaToi
+ ojA3Ysg6L/2x57j2/nbPMlqHCwxxafcPAx8wtzd6GvQZ+WIbczt451uiBj1rS2Qo/qKk
+ qMpM94CnQ9KjUEWbxBHU8N8VPVxFcHmMq9/ZrLdLIdFQsFBcI0fdZ2F/C+rguLKOi78D
+ UbcRyjyyPpP/FqFTIQsvAJobhVHzUKCw48CyE2OOR7pHdxZhedg7Mm4Ir84V80OQ2rqb
+ q3+A==
+X-Gm-Message-State: AOJu0Yyk99n487/xgeMDSOm8a5ETn+AcRhNf7YoK03k5AoowUdVzrRqG
+ Do8gM3tiYCMwPo0UfCEoNR0bEO0Dr3aZCNfLinctq7oJ9ilyrpOSH9m1yazZjDk=
+X-Google-Smtp-Source: AGHT+IFNvDZIBAQZZxRso+26FEmWvXlaUdgVwZlsdwARYlyvIevMwg33JpBxM5bVddv7tC4hxVpipw==
+X-Received: by 2002:a05:6a00:6084:b0:6e6:4e6b:5a16 with SMTP id
+ fp4-20020a056a00608400b006e64e6b5a16mr4711525pfb.4.1709841331535; 
+ Thu, 07 Mar 2024 11:55:31 -0800 (PST)
 Received: from [192.168.68.110] ([177.94.15.159])
  by smtp.gmail.com with ESMTPSA id
- r21-20020a63d915000000b005d8b89bbf20sm12717545pgg.63.2024.03.07.11.27.11
+ x20-20020a056a000bd400b006e65d66bb3csm1545166pfu.21.2024.03.07.11.55.28
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 07 Mar 2024 11:27:16 -0800 (PST)
-Message-ID: <36e03836-89d6-420d-8f8a-f93f7eabd5d5@ventanamicro.com>
-Date: Thu, 7 Mar 2024 16:27:08 -0300
+ Thu, 07 Mar 2024 11:55:31 -0800 (PST)
+Message-ID: <9b9c1af9-5dca-4270-8dfe-a62223c8cbbb@ventanamicro.com>
+Date: Thu, 7 Mar 2024 16:55:25 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RISC-V][tech-server-platform] [RISC-V][tech-server-soc] [RFC
- 2/2] target/riscv: Add server platform reference cpu
+Subject: Re: [PATCH] target/riscv: Implement dynamic establishment of custom
+ decoder
 Content-Language: en-US
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- "Wu, Fei2" <fei2.wu@intel.com>
-Cc: tech-server-soc@lists.riscv.org, pbonzini@redhat.com, palmer@dabbelt.com, 
- alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- andrei.warkentin@intel.com, shaolin.xie@alibaba-inc.com, ved@rivosinc.com,
- sunilvl@ventanamicro.com, haibo1.xu@intel.com, evan.chai@intel.com,
- yin.wang@intel.com, tech-server-platform@lists.riscv.org
-References: <20240304102540.2789225-1-fei2.wu@intel.com>
- <20240304102540.2789225-3-fei2.wu@intel.com>
- <bd34501b-3dda-40eb-aa92-73ea289297d1@ventanamicro.com>
- <8ad091f3-c00f-4786-a89b-799304eace73@intel.com>
- <56448108-c655-4684-bab9-b8d7747f79f7@intel.com>
- <4e16f394-fe9b-4edf-80eb-fc3220bcf6e1@intel.com>
- <95e45995-fb10-4c68-9937-fd9f7e032bf1@canonical.com>
+To: Huang Tao <eric.huang@linux.alibaba.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, zhiwei_liu@linux.alibaba.com, liwei1518@gmail.com, 
+ bin.meng@windriver.com, alistair.francis@wdc.com, palmer@dabbelt.com,
+ Christoph Muellner <christoph.muellner@vrull.eu>,
+ Richard Henderson <richard.henderson@linaro.org>
+References: <20240306093308.35188-1-eric.huang@linux.alibaba.com>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <95e45995-fb10-4c68-9937-fd9f7e032bf1@canonical.com>
+In-Reply-To: <20240306093308.35188-1-eric.huang@linux.alibaba.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::22c;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x22c.google.com
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x42d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -110,155 +99,212 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+(--- adding Richard ---)
 
 
-On 3/7/24 09:17, Heinrich Schuchardt wrote:
-> On 07.03.24 08:36, Wu, Fei2 wrote:
->> On 3/6/2024 9:26 PM, Wu, Fei wrote:
->>> On 3/5/2024 1:58 PM, Wu, Fei wrote:
->>>> On 3/5/2024 3:43 AM, Daniel Henrique Barboza wrote:
->>>>>
->>>>>
->>>>> On 3/4/24 07:25, Fei Wu wrote:
->>>>>> The harts requirements of RISC-V server platform [1] require RVA23 ISA
->>>>>> profile support, plus Sv48, Svadu, H, Sscofmpf etc. This patch provides
->>>>>> a virt CPU type (rvsp-ref) as compliant as possible.
->>>>>>
->>>>>> [1]
->>>>>> https://github.com/riscv-non-isa/riscv-server-platform/blob/main/server_platform_requirements.adoc
->>>>>>
->>>>>> Signed-off-by: Fei Wu <fei2.wu@intel.com>
->>>>>> --->   hw/riscv/server_platform_ref.c |  6 +++-
->>>>>>    target/riscv/cpu-qom.h         |  1 +
->>>>>>    target/riscv/cpu.c             | 62 ++++++++++++++++++++++++++++++++++
->>>>>>    3 files changed, 68 insertions(+), 1 deletion(-)
->>>>>>
->>>>>> diff --git a/hw/riscv/server_platform_ref.c
->>>>>> b/hw/riscv/server_platform_ref.c
->>>>>> index ae90c4b27a..52ec607cee 100644
->>>>>> --- a/hw/riscv/server_platform_ref.c
->>>>>> +++ b/hw/riscv/server_platform_ref.c
->>>>>> @@ -1205,11 +1205,15 @@ static void
->>>>>> rvsp_ref_machine_class_init(ObjectClass *oc, void *data)
->>>>>>    {
->>>>>>        char str[128];
->>>>>>        MachineClass *mc = MACHINE_CLASS(oc);
->>>>>> +    static const char * const valid_cpu_types[] = {
->>>>>> +        TYPE_RISCV_CPU_RVSP_REF,
->>>>>> +    };
->>>>>>          mc->desc = "RISC-V Server SoC Reference board";
->>>>>>        mc->init = rvsp_ref_machine_init;
->>>>>>        mc->max_cpus = RVSP_CPUS_MAX;
->>>>>> -    mc->default_cpu_type = TYPE_RISCV_CPU_BASE;
->>>>>> +    mc->default_cpu_type = TYPE_RISCV_CPU_RVSP_REF;
->>>>>> +    mc->valid_cpu_types = valid_cpu_types;
->>>>>
->>>>> I suggest introducing this patch first, then the new machine type that
->>>>> will use it as a default
->>>>> CPU. The reason is to facilitate future bisects. If we introduce the
->>>>> board first, a future bisect
->>>>> might hit the previous patch, the board will be run using RV64 instead
->>>>> of the correct CPU, and
->>>>> we'll have different results because of it.
->>>>>
->>>> Good suggestion.
->>>>
->>>>>>        mc->pci_allow_0_address = true;
->>>>>>        mc->default_nic = "e1000e";
->>>>>>        mc->possible_cpu_arch_ids = riscv_numa_possible_cpu_arch_ids;
->>>>>> diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
->>>>>> index 3670cfe6d9..adb934d19e 100644
->>>>>> --- a/target/riscv/cpu-qom.h
->>>>>> +++ b/target/riscv/cpu-qom.h
->>>>>> @@ -49,6 +49,7 @@
->>>>>>    #define TYPE_RISCV_CPU_SIFIVE_U54
->>>>>> RISCV_CPU_TYPE_NAME("sifive-u54")
->>>>>>    #define TYPE_RISCV_CPU_THEAD_C906
->>>>>> RISCV_CPU_TYPE_NAME("thead-c906")
->>>>>>    #define TYPE_RISCV_CPU_VEYRON_V1
->>>>>> RISCV_CPU_TYPE_NAME("veyron-v1")
->>>>>> +#define TYPE_RISCV_CPU_RVSP_REF         RISCV_CPU_TYPE_NAME("rvsp-ref")
->>>>>>    #define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
->>>>>>      OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
->>>>>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->>>>>> index 5ff0192c52..bc91be702b 100644
->>>>>> --- a/target/riscv/cpu.c
->>>>>> +++ b/target/riscv/cpu.c
->>>>>> @@ -2282,6 +2282,67 @@ static void rva22s64_profile_cpu_init(Object *obj)
->>>>>>          RVA22S64.enabled = true;
->>>>>>    }
->>>>>> +
->>>>>> +static void rv64_rvsp_ref_cpu_init(Object *obj)
->>>>>> +{
->>>>>> +    CPURISCVState *env = &RISCV_CPU(obj)->env;
->>>>>> +    RISCVCPU *cpu = RISCV_CPU(obj);
->>>>>> +
->>>>>> +    riscv_cpu_set_misa_ext(env, RVG | RVC | RVS | RVU | RVH | RVV);
->>>>>> +
->>>>>> +    /* FIXME: change to 1.13 */
->>>>>> +    env->priv_ver = PRIV_VERSION_1_12_0;
->>>>>> +
->>>>>> +    /* RVA22U64 */
->>>>>> +    cpu->cfg.mmu = true;
->>>>>> +    cpu->cfg.ext_zifencei = true;
->>>>>> +    cpu->cfg.ext_zicsr = true;
->>>>>> +    cpu->cfg.ext_zicntr = true;
->>>>>> +    cpu->cfg.ext_zihpm = true;
->>>>>> +    cpu->cfg.ext_zihintpause = true;
->>>>>> +    cpu->cfg.ext_zba = true;
->>>>>> +    cpu->cfg.ext_zbb = true;
->>>>>> +    cpu->cfg.ext_zbs = true;
->>>>>> +    cpu->cfg.zic64b = true;
->>>>>> +    cpu->cfg.ext_zicbom = true;
->>>>>> +    cpu->cfg.ext_zicbop = true;
->>>>>> +    cpu->cfg.ext_zicboz = true;
->>>>>> +    cpu->cfg.cbom_blocksize = 64;
->>>>>> +    cpu->cfg.cbop_blocksize = 64;
->>>>>> +    cpu->cfg.cboz_blocksize = 64;
->>>>>> +    cpu->cfg.ext_zfhmin = true;
->>>>>> +    cpu->cfg.ext_zkt = true;
->>>>>
->>>>> You can change this whole block with:
->>>>>
->>>>> RVA22U64.enabled = true;
->>>>>
->>>>>
->>>>> riscv_cpu_add_profiles() will check if we have a profile enabled and, if
->>>>> that's the
->>>>> case, we'll enable all its extensions in the CPU.
->>>>>
->>>>> In the near future, when we implement a proper RVA23 support, we'll be
->>>>> able to just do
->>>>> a single RVA23S64.enabled = true in this cpu_init(). But for now we can
->>>>> at least declare
->>>>> RVA22U64 (perhaps RVA22S64) support for this CPU.
->>>>>
->>>
->>> Hi Daniel,
->>>
->>> I'm not sure if it's a regression or the usage has been changed. I'm not
->>> able to use '-cpu rva22s64' on latest qemu (db596ae190).
->>>
->> I did a quick git bisect and found that commit d06f28db6 "target/riscv:
->> move 'mmu' to riscv_cpu_properties[]" disabled mmu by default, so that
->> an explicit mmu option should be added to qemu command line like '-cpu
->> rva22s64,mmu=true', I think rva22s64 should enable it by default.
->>
->> Thanks,
->> Fei.
+On 3/6/24 06:33, Huang Tao wrote:
+> In this patch, we modify the decoder to be a freely composable data
+> structure instead of a hardcoded one. It can be dynamically builded up
+> according to the extensions.
+> This approach has several benefits:
+> 1. Provides support for heterogeneous cpu architectures. As we add decoder in
+>     CPUArchState, each cpu can have their own decoder, and the decoders can be
+>     different due to cpu's features.
+> 2. Improve the decoding efficiency. We run the guard_func to see if the decoder
+>     can be added to the dynamic_decoder when building up the decoder. Therefore,
+>     there is no need to run the guard_func when decoding each instruction. It can
+>     improve the decoding efficiency
+> 3. For vendor or dynamic cpus, it allows them to customize their own decoder
+>     functions to improve decoding efficiency, especially when vendor-defined
+>     instruction sets increase. Because of dynamic building up, it can skip the other
+>     decoder guard functions when decoding.
 > 
-> It is nice that the MMU can be disabled. But is there any reason why the MMU should be disabled by default on the virt machine (which typically is used to run an operating system)?
-
-'mmu' is currently being handled as a CPU property, not a board property. So using
-the 'virt' board without a MMU is valid (albeit not that useful/common).
-
+> Signed-off-by: Huang Tao <eric.huang@linux.alibaba.com>
+> Suggested-by: Christoph Muellner <christoph.muellner@vrull.eu>
+> Co-authored-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> ---
+>   target/riscv/cpu.c         | 20 ++++++++++++++++++++
+>   target/riscv/cpu.h         |  2 ++
+>   target/riscv/cpu_decoder.h | 34 ++++++++++++++++++++++++++++++++++
+>   target/riscv/translate.c   | 28 ++++++++++++----------------
+>   4 files changed, 68 insertions(+), 16 deletions(-)
+>   create mode 100644 target/riscv/cpu_decoder.h
 > 
-> Can we add mmu=true as default to the rv64 CPU?
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 5ff0192c52..cadcd51b4f 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -38,6 +38,7 @@
+>   #include "kvm/kvm_riscv.h"
+>   #include "tcg/tcg-cpu.h"
+>   #include "tcg/tcg.h"
+> +#include "cpu_decoder.h"
+>   
+>   /* RISC-V CPU definitions */
+>   static const char riscv_single_letter_exts[] = "IEMAFDQCBPVH";
+> @@ -1102,6 +1103,23 @@ static void riscv_cpu_satp_mode_finalize(RISCVCPU *cpu, Error **errp)
+>   }
+>   #endif
+>   
+> +static void riscv_cpu_finalize_dynamic_decoder(RISCVCPU *cpu)
+> +{
+> +    CPURISCVState *env = &cpu->env;
+> +    decode_fn *dynamic_decoder;
+> +    dynamic_decoder = g_new0(decode_fn, decoder_table_size);
+> +    int j = 0;
+> +    for (size_t i = 0; i < decoder_table_size; ++i) {
+> +        if (decoder_table[i].guard_func &&
+> +            decoder_table[i].guard_func(&cpu->cfg)) {
+> +            dynamic_decoder[j] = decoder_table[i].decode_fn;
+> +            j++;
+> +        }
+> +    }
+> +
+> +    env->decoder = dynamic_decoder;
+> +}
+> +
+>   void riscv_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
+>   {
+>       Error *local_err = NULL;
+> @@ -1127,6 +1145,8 @@ void riscv_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
+>               return;
+>           }
+>       }
+> +
+> +    riscv_cpu_finalize_dynamic_decoder(cpu);
+>   }
+>   
+>   static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 5d291a7092..42bfed065c 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -30,6 +30,7 @@
+>   #include "qemu/int128.h"
+>   #include "cpu_bits.h"
+>   #include "cpu_cfg.h"
+> +#include "cpu_decoder.h"
+>   #include "qapi/qapi-types-common.h"
+>   #include "cpu-qom.h"
+>   
+> @@ -433,6 +434,7 @@ struct CPUArchState {
+>       uint64_t kvm_timer_state;
+>       uint64_t kvm_timer_frequency;
+>   #endif /* CONFIG_KVM */
+> +    const decode_fn *decoder;
+>   };
+>   
+>   /*
+> diff --git a/target/riscv/cpu_decoder.h b/target/riscv/cpu_decoder.h
+> new file mode 100644
+> index 0000000000..549414ce4c
+> --- /dev/null
+> +++ b/target/riscv/cpu_decoder.h
+> @@ -0,0 +1,34 @@
+> +/*
+> + * QEMU RISC-V CPU Decoder
+> + *
+> + * Copyright (c) 2023-2024 Alibaba Group
+> + *
+> + * This program is free software; you can redistribute it and/or modify it
+> + * under the terms and conditions of the GNU General Public License,
+> + * version 2 or later, as published by the Free Software Foundation.
+> + *
+> + * This program is distributed in the hope it will be useful, but WITHOUT
+> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+> + * more details.
+> + *
+> + * You should have received a copy of the GNU General Public License along with
+> + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> + */
+> +
+> +#ifndef RISCV_CPU_DECODER_H
+> +#define RISCV_CPU_DECODER_H
+> +
+> +struct DisasContext;
+> +struct RISCVCPUConfig;
+> +typedef struct RISCVDecoder {
+> +    bool (*guard_func)(const struct RISCVCPUConfig *);
+> +    bool (*decode_fn)(struct DisasContext *, uint32_t);
+> +} RISCVDecoder;
+> +
+> +typedef bool (*decode_fn)(struct DisasContext *, uint32_t);
+> +
+> +extern const size_t decoder_table_size;
+> +
+> +extern const RISCVDecoder decoder_table[];
+> +#endif
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index 177418b2b9..23c5321bce 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -115,6 +115,7 @@ typedef struct DisasContext {
+>       bool frm_valid;
+>       /* TCG of the current insn_start */
+>       TCGOp *insn_start;
+> +    const decode_fn *decoder;
+>   } DisasContext;
+>   
+>   static inline bool has_ext(DisasContext *ctx, uint32_t ext)
+> @@ -1118,21 +1119,16 @@ static inline int insn_len(uint16_t first_word)
+>       return (first_word & 3) == 3 ? 4 : 2;
+>   }
+>   
+> +const RISCVDecoder decoder_table[] = {
+> +    { always_true_p, decode_insn32 },
+> +    { has_xthead_p, decode_xthead},
+> +    { has_XVentanaCondOps_p, decode_XVentanaCodeOps},
+> +};
+> +
+> +const size_t decoder_table_size = ARRAY_SIZE(decoder_table);
+> +
+>   static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
+>   {
+> -    /*
+> -     * A table with predicate (i.e., guard) functions and decoder functions
+> -     * that are tested in-order until a decoder matches onto the opcode.
+> -     */
+> -    static const struct {
+> -        bool (*guard_func)(const RISCVCPUConfig *);
+> -        bool (*decode_func)(DisasContext *, uint32_t);
+> -    } decoders[] = {
+> -        { always_true_p,  decode_insn32 },
+> -        { has_xthead_p, decode_xthead },
+> -        { has_XVentanaCondOps_p,  decode_XVentanaCodeOps },
+> -    };
+> -
+>       ctx->virt_inst_excp = false;
+>       ctx->cur_insn_len = insn_len(opcode);
+>       /* Check for compressed insn */
+> @@ -1153,9 +1149,8 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
+>                                                ctx->base.pc_next + 2));
+>           ctx->opcode = opcode32;
+>   
+> -        for (size_t i = 0; i < ARRAY_SIZE(decoders); ++i) {
+> -            if (decoders[i].guard_func(ctx->cfg_ptr) &&
+> -                decoders[i].decode_func(ctx, opcode32)) {
+> +        for (size_t i = 0; i < decoder_table_size; ++i) {
+> +            if (ctx->decoder[i](ctx, opcode32)) {
+>                   return;
+>               }
+>           }
+> @@ -1199,6 +1194,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+>       ctx->itrigger = FIELD_EX32(tb_flags, TB_FLAGS, ITRIGGER);
+>       ctx->zero = tcg_constant_tl(0);
+>       ctx->virt_inst_excp = false;
+> +    ctx->decoder = env->decoder;
 
-Excluding vendor CPUs (where every vendor can do whatever they want), all CPUs that
-aren't bare (rv32i, rv64i, rv32e, rv64e) are running with mmu=true. The behavior
-described by Fei with profile CPUs is fixed in riscv-to-apply and queued to be
-merged.
+
+Up there, in riscv_cpu_finalize_dynamic_decoder(), we assigned a dynamic decoder in
+env->decoder. The DisasContext 'decoder' pointer is then assigned to env->decoder in
+every tr_init_disas_context() here.
+
+'ctx->decoder' is used in decode_opc(), that receives a CPURISCVState *env pointer as
+a parameter.
+
+Am I missing something? It seems we can just remove the ctx->decode pointer altogether
+and use env->decoder.
 
 
 Thanks,
@@ -266,8 +312,8 @@ Thanks,
 Daniel
 
 
-> 
-> Best regards
-> 
-> Heinrich
+
+>   }
+>   
+>   static void riscv_tr_tb_start(DisasContextBase *db, CPUState *cpu)
 
