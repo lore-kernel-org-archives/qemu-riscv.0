@@ -4,89 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B73B0C48BF6
-	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Mar 2024 14:55:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4571AC48BF6
+	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Mar 2024 16:03:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1riF9H-0001eE-KP; Thu, 07 Mar 2024 09:55:10 -0500
+	id 1riGDX-000546-Lb; Thu, 07 Mar 2024 11:03:35 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1riF93-0001VW-4h
- for qemu-riscv@nongnu.org; Thu, 07 Mar 2024 09:54:53 -0500
-Received: from mail-pj1-x1044.google.com ([2607:f8b0:4864:20::1044])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1riGDU-000537-A9
+ for qemu-riscv@nongnu.org; Thu, 07 Mar 2024 11:03:32 -0500
+Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1riF91-0004JI-7c
- for qemu-riscv@nongnu.org; Thu, 07 Mar 2024 09:54:52 -0500
-Received: by mail-pj1-x1044.google.com with SMTP id
- 98e67ed59e1d1-299d3b09342so666500a91.2
- for <qemu-riscv@nongnu.org>; Thu, 07 Mar 2024 06:54:50 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1riGDP-000633-U6
+ for qemu-riscv@nongnu.org; Thu, 07 Mar 2024 11:03:32 -0500
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-1dd2dca2007so8272895ad.2
+ for <qemu-riscv@nongnu.org>; Thu, 07 Mar 2024 08:03:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1709823289; x=1710428089; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Oms6NqjkzEUyYaiJ7fG+Vq3lEerqyjhlXE29cWwJoZ0=;
- b=PP5BnBjG3sjxwhEVN36G7PQoprnmLZWZnpRCYi/lI6T4zD+mVLSUo6aLGKivXWGLcz
- E0pqqQuqGX5opKpMvnrwCKo5UUbEtUvcmwRo5oXLgX6FkCi2sRI5s8l3ax10J903FfUJ
- sHkT2Rnst7oFdRp2mVo0TFPgZCOr6uoN5p82quAz9wHIVlr4qeuN69uG02W+JuRFDuAs
- DvErJ3ifCRuuVAvqtOWb7tO6knp98zc5XtxhUGxMkS1faKF039u/4coX0kZAIsqvmh0/
- hUQ3K9yDQ6mvhLCJ574BHRjaY4276ovNkUuWQaeSAHrcr+LPj1EMVhmDbpf/k/rlrOc6
- 94tg==
+ d=ventanamicro.com; s=google; t=1709827405; x=1710432205; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=XpDoYt2Qb/Km1f+I5GhoGYGwXZarW4PqGG8m8YQiDcM=;
+ b=CfO7RreE4XDloWpbUpxBKvnSVQXepvMZuJzXwhSTc27TsD4SSwJ5PelDngneUgfET8
+ wIK/kZk7kynvsWwDOKkOF/TOnm4CtjbyPV5dpNNbhfncuxNneGVZu5ZIPToXumycJRht
+ a0u55wwcgvhXKUo7M6Bblm1lnkxLNDAdhuLCPJHEZWd9yzegYEoTlja8+1lDnC46Ekpu
+ vkyL+sL79vhrpDWaNxau2ao4PyWfmp+m8uRYc0824HcMzpXQuYIXv28xdxFY/4/VpOtw
+ bUaT8Ra3O2MnSb+GcbkaYRaNUC37fIkQ4o4ZL9mkQa2oBKPtRp6HUpY86J0VjWtXz5fP
+ B1KA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709823289; x=1710428089;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Oms6NqjkzEUyYaiJ7fG+Vq3lEerqyjhlXE29cWwJoZ0=;
- b=kN4kyhYu32H0fu+1QTorCB/9kZ7C5tn09KOojzTSXs/gXG1cePJs+sUNIY8Hp3Tx74
- SI93ROd/tD1RmCx0E7upCa/LKRtvT6hAh/D9dh5LpnwgO+NMZ5EjsO73Mbb0MmHuyqBT
- nGyCPw+2x/7hcduZ7MrGPV/TVp94/ihKLE/w/yJ5hzElcjsEpfaGpjUeLIwSlXdgZx6D
- HmgrVBgg7BD/vhGQvZxofPKx9MUbOrxB4znnlvvRohJrMSVaOd40rF4SlmzTewWE2I8O
- RifB0BQ+T07NnFv8o8Xx3XQCDRAKGy1HOfvK6ETbCGLTqPsp7wNvVUijBHNEN/QgegsH
- BEXw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWgLyBwvaIwPfmLxVujZhJpF7u8Blq0s7ppjC+i+N8i1p86lYqCDcvE/D8Yk2nFJ7d19evpG19jM9++sTvRT5qmVS2IW6s=
-X-Gm-Message-State: AOJu0YzDH4mzdGuaUUA4SRqVRCneLxuy8sw63+VMeGSvJsaOOI0ZNuu0
- MuWW9uEYV8ZwAOFA1VSilsbHuqqVeo6hcsSUBcqQzJDlJdiwPlSpvvKWaNnrjp0=
-X-Google-Smtp-Source: AGHT+IGWe13Bj6DO8kJXxNG28L7AF4P0SccTo8h7CKv7i3Q57w/Kp+gxIZ706eaVo/nag6PmGJAsTw==
-X-Received: by 2002:a17:90a:d996:b0:29b:3527:8c1d with SMTP id
- d22-20020a17090ad99600b0029b35278c1dmr13279502pjv.15.1709823289576; 
- Thu, 07 Mar 2024 06:54:49 -0800 (PST)
-Received: from [100.64.0.1] ([136.226.240.169])
+ d=1e100.net; s=20230601; t=1709827405; x=1710432205;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=XpDoYt2Qb/Km1f+I5GhoGYGwXZarW4PqGG8m8YQiDcM=;
+ b=IbH97YfJnvQqSMrz4dC5kJZyEfN6W+KditlWfgO8s3ByOYVNoFXn9rqCpIBuLLnGuN
+ XGZA2gKpjw8NrtsLVmnJBnr5Nyu35xXr8k1AoA1AcfuZeZBISixOlPAMFrwl9It8Ef8h
+ dCSgs1rO4hafuPTYqQF7uFSkjT35RszjbEqJw0Km25AjeIcFBIWwCppvoFAqJ8ZBiD4V
+ TnKBkXd589YWhWgI8BebL0zVb46Bzjq9NLAKFN1Joseehmg3PtuL1nPH2pn+08Q7f4MO
+ ChD8f89BsqydBygnuuN7LMfl9Hj8HmbpsVI3BG9/y8RBzIAKjZPFORH0eNUv9/GSvOvM
+ OQFA==
+X-Gm-Message-State: AOJu0YwKafqKWQZoLN7Gcc5ayEKc2Zh9HS53Qa+iyHF/ZAqZAoxwFIg2
+ dI4vhi4ZARXDuYeh5K364maZuZZLzueX3iPJtiij7zjsK3MeCH2nC5HYBYmeW5k=
+X-Google-Smtp-Source: AGHT+IHSaCML1erTlBWTp535Xj99gR8/V4Mw6i8kmGQD/Kk3sTS0iEgIeGWWOPI29u18kD4paQphJQ==
+X-Received: by 2002:a17:902:c146:b0:1db:9a69:293d with SMTP id
+ 6-20020a170902c14600b001db9a69293dmr7412480plj.24.1709827405287; 
+ Thu, 07 Mar 2024 08:03:25 -0800 (PST)
+Received: from grind.dc1.ventanamicro.com ([177.94.15.159])
  by smtp.gmail.com with ESMTPSA id
- jj21-20020a170903049500b001d717e644e2sm14683488plb.247.2024.03.07.06.54.47
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 07 Mar 2024 06:54:49 -0800 (PST)
-Message-ID: <60931dcf-5dee-628f-f5ab-b3f148500e25@sifive.com>
-Date: Thu, 7 Mar 2024 22:54:46 +0800
+ u11-20020a170903124b00b001db2b8b2da7sm14663136plh.122.2024.03.07.08.03.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 07 Mar 2024 08:03:24 -0800 (PST)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ ajones@ventanamicro.com, tjeznach@rivosinc.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH v2 00/15] riscv: QEMU RISC-V IOMMU Support
+Date: Thu,  7 Mar 2024 13:03:03 -0300
+Message-ID: <20240307160319.675044-1-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.43.2
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.15.1
-Subject: Re: [PATCH] target/riscv/vector_helper.c: Avoid shifting negative in
- fractional LMUL checking
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-References: <20240306161036.938931-1-max.chou@sifive.com>
- <99a59762-105a-4982-9c93-ce3e3e242152@ventanamicro.com>
-Content-Language: en-US
-From: Max Chou <max.chou@sifive.com>
-In-Reply-To: <99a59762-105a-4982-9c93-ce3e3e242152@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1044;
- envelope-from=max.chou@sifive.com; helo=mail-pj1-x1044.google.com
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-2.08,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x636.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -104,54 +93,100 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Looks liked that I missed this one.
+Hi,
 
-Thank you Daniel
+This is the second version of the work Tomasz sent in July 2023 [1].
+I'll be helping Tomasz upstreaming it. 
 
-Max.
+The core emulation code is left unchanged but a few tweaks were made in
+v2:
 
-On 2024/3/7 1:17 AM, Daniel Henrique Barboza wrote:
->
->
-> On 3/6/24 13:10, Max Chou wrote:
->> When vlmul is larger than 5, the original fractional LMUL checking may
->> gets unexpected result.
->>
->> Signed-off-by: Max Chou <max.chou@sifive.com>
->> ---
->
-> There's already a fix for it in the ML:
->
-> "[PATCH v3] target/riscv: Fix shift count overflow"
->
-> https://lore.kernel.org/qemu-riscv/20240225174114.5298-1-demin.han@starfivetech.com/ 
->
->
->
-> Hopefully it'll be queued for the next PR. Thanks,
->
->
-> Daniel
->
->
->>   target/riscv/vector_helper.c | 3 +--
->>   1 file changed, 1 insertion(+), 2 deletions(-)
->>
->> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
->> index 84cec73eb20..adceec378fd 100644
->> --- a/target/riscv/vector_helper.c
->> +++ b/target/riscv/vector_helper.c
->> @@ -53,10 +53,9 @@ target_ulong HELPER(vsetvl)(CPURISCVState *env, 
->> target_ulong s1,
->>            * VLEN * LMUL >= SEW
->>            * VLEN >> (8 - lmul) >= sew
->>            * (vlenb << 3) >> (8 - lmul) >= sew
->> -         * vlenb >> (8 - 3 - lmul) >= sew
->>            */
->>           if (vlmul == 4 ||
->> -            cpu->cfg.vlenb >> (8 - 3 - vlmul) < sew) {
->> +            ((cpu->cfg.vlenb << 3) >> (8 - vlmul)) < sew) {
->>               vill = true;
->>           }
->>       }
+- The most notable difference in this version is that the code was split
+  in smaller chunks. Patch 03 is still a 1700 lines patch, which is an
+  improvement from the 3800 lines patch from v1, but we can only go so
+  far when splitting the core components of the emulation. The reality
+  is that the IOMMU emulation is a rather complex piece of software and
+  there's not much we can do to alleviate it;
+
+- I'm not contributing the HPM support that was present in v1. It shaved
+  off 600 lines of code from the series, which is already large enough
+  as is. We'll introduce HPM in later versions or as a follow-up;
+
+- The riscv-iommu-header.h header was also trimmed. I shaved it of 300
+  or so from it, all of them from definitions that the emulation isn't
+  using it. The header will be eventually be imported from the Linux
+  driver (not upstream yet), so for now we can live with a trimmed
+  header for the emulation usage alone;
+
+- I added libqos tests for the riscv-iommu-pci device. The idea of these
+  tests is to give us more confidence in the emulation code;
+
+- 'edu' device support. The support was retrieved from Tomasz EDU branch
+  [2]. This device can then be used to test PCI passthrough to exercise
+  the IOMMU.
+
+
+Patches based on alistair/riscv-to-apply.next.
+
+v1 link: https://lore.kernel.org/qemu-riscv/cover.1689819031.git.tjeznach@rivosinc.com/
+
+[1] https://lore.kernel.org/qemu-riscv/cover.1689819031.git.tjeznach@rivosinc.com/
+[2] https://github.com/tjeznach/qemu.git, branch 'riscv_iommu_edu_impl'
+
+Andrew Jones (1):
+  hw/riscv/riscv-iommu: Add another irq for mrif notifications
+
+Daniel Henrique Barboza (2):
+  test/qtest: add riscv-iommu-pci tests
+  qtest/riscv-iommu-test: add init queues test
+
+Tomasz Jeznach (12):
+  exec/memtxattr: add process identifier to the transaction attributes
+  hw/riscv: add riscv-iommu-bits.h
+  hw/riscv: add RISC-V IOMMU base emulation
+  hw/riscv: add riscv-iommu-pci device
+  hw/riscv: add riscv-iommu-sys platform device
+  hw/riscv/virt.c: support for RISC-V IOMMU PCIDevice hotplug
+  hw/riscv/riscv-iommu: add Address Translation Cache (IOATC)
+  hw/riscv/riscv-iommu: add s-stage and g-stage support
+  hw/riscv/riscv-iommu: add ATS support
+  hw/riscv/riscv-iommu: add DBG support
+  hw/misc: EDU: added PASID support
+  hw/misc: EDU: add ATS/PRI capability
+
+ hw/misc/edu.c                    |  297 ++++-
+ hw/riscv/Kconfig                 |    4 +
+ hw/riscv/meson.build             |    1 +
+ hw/riscv/riscv-iommu-bits.h      |  407 ++++++
+ hw/riscv/riscv-iommu-pci.c       |  173 +++
+ hw/riscv/riscv-iommu-sys.c       |   93 ++
+ hw/riscv/riscv-iommu.c           | 2085 ++++++++++++++++++++++++++++++
+ hw/riscv/riscv-iommu.h           |  146 +++
+ hw/riscv/trace-events            |   15 +
+ hw/riscv/trace.h                 |    2 +
+ hw/riscv/virt.c                  |   33 +-
+ include/exec/memattrs.h          |    5 +
+ include/hw/riscv/iommu.h         |   40 +
+ meson.build                      |    1 +
+ tests/qtest/libqos/meson.build   |    4 +
+ tests/qtest/libqos/riscv-iommu.c |   79 ++
+ tests/qtest/libqos/riscv-iommu.h |   96 ++
+ tests/qtest/meson.build          |    1 +
+ tests/qtest/riscv-iommu-test.c   |  234 ++++
+ 19 files changed, 3704 insertions(+), 12 deletions(-)
+ create mode 100644 hw/riscv/riscv-iommu-bits.h
+ create mode 100644 hw/riscv/riscv-iommu-pci.c
+ create mode 100644 hw/riscv/riscv-iommu-sys.c
+ create mode 100644 hw/riscv/riscv-iommu.c
+ create mode 100644 hw/riscv/riscv-iommu.h
+ create mode 100644 hw/riscv/trace-events
+ create mode 100644 hw/riscv/trace.h
+ create mode 100644 include/hw/riscv/iommu.h
+ create mode 100644 tests/qtest/libqos/riscv-iommu.c
+ create mode 100644 tests/qtest/libqos/riscv-iommu.h
+ create mode 100644 tests/qtest/riscv-iommu-test.c
+
+-- 
+2.43.2
+
 
