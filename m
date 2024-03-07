@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F543C54E49
-	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Mar 2024 16:04:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90EBFC54798
+	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Mar 2024 16:04:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1riGDk-000567-PJ; Thu, 07 Mar 2024 11:03:48 -0500
+	id 1riGDt-0005Dj-Iz; Thu, 07 Mar 2024 11:03:57 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1riGDX-00054J-LH
- for qemu-riscv@nongnu.org; Thu, 07 Mar 2024 11:03:35 -0500
+ id 1riGDi-00056d-9z
+ for qemu-riscv@nongnu.org; Thu, 07 Mar 2024 11:03:48 -0500
 Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1riGDV-00065Y-2k
- for qemu-riscv@nongnu.org; Thu, 07 Mar 2024 11:03:35 -0500
+ id 1riGDf-0006AO-In
+ for qemu-riscv@nongnu.org; Thu, 07 Mar 2024 11:03:46 -0500
 Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-1dbae7b8ff2so8985195ad.3
- for <qemu-riscv@nongnu.org>; Thu, 07 Mar 2024 08:03:32 -0800 (PST)
+ d9443c01a7336-1dc29f1956cso8059395ad.0
+ for <qemu-riscv@nongnu.org>; Thu, 07 Mar 2024 08:03:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1709827412; x=1710432212; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1709827422; x=1710432222; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=es6c9miaYNGt+xfwKAXG4vexKbZlkFBazU5yYx1dLDk=;
- b=L29uoS0Sa5fZPsDoKf5y/gL4LptXkOCMWhwvDXt7DA3g+mB4a/DQ2y1ozIYlTM2N72
- APsWrD9LuoZ0EG8vgoWxkRRlS3a+TSFtTJlfltXk6yX/Khw+LF4rokJTED5ZsMqlNRmZ
- 6rKMTF8Gysd9GlnwbZ4STFi19xte6F5WrG3/VQUUYJ6UTonQo74pkqGdk5THqb72mcaJ
- 2gWHUGRicf6Cm4eA/Z4+uulMfjFvrSsaNwnXIp2FLjmNHXUfbr6VjJU/lxcm8Faz1NvU
- KmvlXbhFFquMjgLiChqijutMERZZEGXnDWqQAD2kzPg+qjhZNsRLT9CSKYbYgiRd/pJQ
- oj/A==
+ bh=IAg1rDO219B0kDzGhaIIF9NH0UHu1hVK1GbBMrUiUzU=;
+ b=fX6jwHNceaFy0yicTCPCIa1RX5wWGENqHIMXEJ1W0MhfQbbc1ItDe342dg8y4FPMD6
+ bMC+cdpPEGpJM3K4jMBdJSs+o7+9xOJhGXqAn7YkyXKI5LX8fVLqf9Z9U0lEaOSjox+2
+ L7jvVb+eBcs6PndMbDK6HdZxmRwtkYLz5AewDjQExVOwz75irIkTxWAJBKccJZmhrqRD
+ UrPwRTdyiQwKjuMvYz2F1gMSxC3xOFvc2QZ1ccPqFM6AW88EmR21BlUCmPgAI76uJ7Ji
+ rhundcouKsjrkW5xhZzJhsLwuw8998zO/zFEl4IAUAPAvjgNpg8cCX8EX8WTDUBQeJ+p
+ Q9Ww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709827412; x=1710432212;
+ d=1e100.net; s=20230601; t=1709827422; x=1710432222;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=es6c9miaYNGt+xfwKAXG4vexKbZlkFBazU5yYx1dLDk=;
- b=BCBBiPGaR7AHN5e4E1DpM51is/2v1yoCM1h2mkjhbMgzZkUmL1nOHsOXSh5PWVLTlD
- rTDYs69MDATleAIfbKUF4yUpuozGBbcohcx6eWevoYFtshJ+l9Nk3tFeNDIBH9vevChb
- tIeFqVIe+xvTAEO0/tSI+IzaEfFWN4BRcV4hN2QBbiqNThXE8vxGxkoPYZmKw1X6thjg
- JHOYXbu2yJTazpqJtX6R0dk8CVcQL/8FXcVCM1fwb02VAV2rsqOy9mDNCSOSHYt8V3Hj
- QdS+lpnPG3PyYB3t0buBNgIXHv6isHs+McS9pMxFVtJ0+RFm1odqGpXpK9/HrzucseJW
- 3tLQ==
-X-Gm-Message-State: AOJu0YwApDNnR2xWeLbXz5VHgNQtijOh8wqmrgBxhUAkt1i5ZLEovPtM
- J4LOu26CQLB1Kiig8lku7tDx9WKXVkpSCLqWjSQgtyXlccMVXWL3v7MghoxGKAA=
-X-Google-Smtp-Source: AGHT+IHafpSGl+WSRGzxb7+Fr9YxMiljIFpTNi8gdxf+YucmluW/YLX1VDiT8o8t+iIGTU9Gaww0dQ==
-X-Received: by 2002:a17:902:c412:b0:1db:5b41:c59a with SMTP id
- k18-20020a170902c41200b001db5b41c59amr11324535plk.45.1709827411689; 
- Thu, 07 Mar 2024 08:03:31 -0800 (PST)
+ bh=IAg1rDO219B0kDzGhaIIF9NH0UHu1hVK1GbBMrUiUzU=;
+ b=HPXPX/Jwk83DuQ93MB2SAIEsTqeYAC2ULhUFwuqy288I3glI+CMvT8ojRJRDBIr03G
+ vlqpyX+uE3ipEnA8nDtP5m4GsxG6/+xjh1SmUjTxjrEMKhEjQXrBQhiKNr3QHMazlABp
+ sA2AMXWzVnABfcycUaIp5zWZbjrkAka27fbXUQalH4RXqizLzAP1QkumCkw76lBlu4Zo
+ Xkz95eIuQZrLgIaxvfn1l8J1NN4SodSVmoCPeN1L2NBJ39kTJexqVR2pPb+rkB/VUyeI
+ 8SkmU+bMHKbmomfiRVmwoeVmWOuUxo3X4v48v+n8J0FyJCyWZDPrS0u8MbYCz4GZNMDP
+ 3ILg==
+X-Gm-Message-State: AOJu0YwnT2CkajI47tEpBu1QA2z8fGPdoPofn40yHReCv3z0/vAV2KMB
+ 9wzHgmCewfgl78vcObt4p96ZgEhZY9J98jIbyAskd0CsXD3zot9Z6HvN+wWCaKo=
+X-Google-Smtp-Source: AGHT+IHCQ30en2mDJm3oNzhInfm/NhDYqSrN/qFS/5XakLhZjJmeW+FFiQSzI7WVAA2sLuW3riJ4OQ==
+X-Received: by 2002:a17:902:eb8a:b0:1dc:84ab:95d with SMTP id
+ q10-20020a170902eb8a00b001dc84ab095dmr11706169plg.45.1709827422260; 
+ Thu, 07 Mar 2024 08:03:42 -0800 (PST)
 Received: from grind.dc1.ventanamicro.com ([177.94.15.159])
  by smtp.gmail.com with ESMTPSA id
- u11-20020a170903124b00b001db2b8b2da7sm14663136plh.122.2024.03.07.08.03.28
+ u11-20020a170903124b00b001db2b8b2da7sm14663136plh.122.2024.03.07.08.03.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Mar 2024 08:03:31 -0800 (PST)
+ Thu, 07 Mar 2024 08:03:41 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  ajones@ventanamicro.com, tjeznach@rivosinc.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v2 02/15] hw/riscv: add riscv-iommu-bits.h
-Date: Thu,  7 Mar 2024 13:03:05 -0300
-Message-ID: <20240307160319.675044-3-dbarboza@ventanamicro.com>
+Subject: [PATCH v2 04/15] hw/riscv: add riscv-iommu-pci device
+Date: Thu,  7 Mar 2024 13:03:07 -0300
+Message-ID: <20240307160319.675044-5-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240307160319.675044-1-dbarboza@ventanamicro.com>
 References: <20240307160319.675044-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
  envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x636.google.com
@@ -81,8 +80,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01,
- UPPERCASE_50_75=0.008 autolearn=no autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,363 +98,209 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Tomasz Jeznach <tjeznach@rivosinc.com>
 
-This header will be used by the RISC-V IOMMU emulation to be added
-in the next patch. Due to its size it's being sent in separate for
-an easier review.
-
-One thing to notice is that this header can be replaced by the future
-Linux RISC-V IOMMU driver header, which would become a linux-header we
-would import instead of keeping our own. The Linux implementation isn't
-upstream yet so for now we'll have to manage riscv-iommu-bits.h.
+The RISC-V IOMMU can be modelled as a PCIe device following the
+guidelines of the RISC-V IOMMU spec, chapter 7.1, "Integrating an IOMMU
+as a PCIe device".
 
 Signed-off-by: Tomasz Jeznach <tjeznach@rivosinc.com>
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- hw/riscv/riscv-iommu-bits.h | 335 ++++++++++++++++++++++++++++++++++++
- 1 file changed, 335 insertions(+)
- create mode 100644 hw/riscv/riscv-iommu-bits.h
+ hw/riscv/meson.build       |   2 +-
+ hw/riscv/riscv-iommu-pci.c | 173 +++++++++++++++++++++++++++++++++++++
+ 2 files changed, 174 insertions(+), 1 deletion(-)
+ create mode 100644 hw/riscv/riscv-iommu-pci.c
 
-diff --git a/hw/riscv/riscv-iommu-bits.h b/hw/riscv/riscv-iommu-bits.h
+diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
+index ba9eebd605..4674cec6c4 100644
+--- a/hw/riscv/meson.build
++++ b/hw/riscv/meson.build
+@@ -10,6 +10,6 @@ riscv_ss.add(when: 'CONFIG_SIFIVE_U', if_true: files('sifive_u.c'))
+ riscv_ss.add(when: 'CONFIG_SPIKE', if_true: files('spike.c'))
+ riscv_ss.add(when: 'CONFIG_MICROCHIP_PFSOC', if_true: files('microchip_pfsoc.c'))
+ riscv_ss.add(when: 'CONFIG_ACPI', if_true: files('virt-acpi-build.c'))
+-riscv_ss.add(when: 'CONFIG_RISCV_IOMMU', if_true: files('riscv-iommu.c'))
++riscv_ss.add(when: 'CONFIG_RISCV_IOMMU', if_true: files('riscv-iommu.c', 'riscv-iommu-pci.c'))
+ 
+ hw_arch += {'riscv': riscv_ss}
+diff --git a/hw/riscv/riscv-iommu-pci.c b/hw/riscv/riscv-iommu-pci.c
 new file mode 100644
-index 0000000000..8e80b1e52a
+index 0000000000..4eb1057210
 --- /dev/null
-+++ b/hw/riscv/riscv-iommu-bits.h
-@@ -0,0 +1,335 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
++++ b/hw/riscv/riscv-iommu-pci.c
+@@ -0,0 +1,173 @@
 +/*
-+ * Copyright © 2022-2023 Rivos Inc.
-+ * Copyright © 2023 FORTH-ICS/CARV
-+ * Copyright © 2023 RISC-V IOMMU Task Group
++ * QEMU emulation of an RISC-V IOMMU (Ziommu)
 + *
-+ * RISC-V Ziommu - Register Layout and Data Structures.
++ * Copyright (C) 2022-2023 Rivos Inc.
 + *
-+ * Based on the IOMMU spec version 1.0, 3/2023
-+ * https://github.com/riscv-non-isa/riscv-iommu
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License along
++ * with this program; if not, see <http://www.gnu.org/licenses/>.
 + */
-+
-+#ifndef HW_RISCV_IOMMU_BITS_H
-+#define HW_RISCV_IOMMU_BITS_H
 +
 +#include "qemu/osdep.h"
++#include "hw/pci/msi.h"
++#include "hw/pci/msix.h"
++#include "hw/pci/pci_bus.h"
++#include "hw/qdev-properties.h"
++#include "hw/riscv/riscv_hart.h"
++#include "migration/vmstate.h"
++#include "qapi/error.h"
++#include "qemu/error-report.h"
++#include "qemu/host-utils.h"
++#include "qom/object.h"
 +
-+#define RISCV_IOMMU_SPEC_DOT_VER 0x010
++#include "cpu_bits.h"
++#include "riscv-iommu.h"
++#include "riscv-iommu-bits.h"
 +
-+#ifndef GENMASK_ULL
-+#define GENMASK_ULL(h, l) (((~0ULL) >> (63 - (h) + (l))) << (l))
++#ifndef PCI_VENDOR_ID_RIVOS
++#define PCI_VENDOR_ID_RIVOS           0x1efd
 +#endif
 +
-+/*
-+ * struct riscv_iommu_fq_record - Fault/Event Queue Record
-+ * See section 3.2 for more info.
-+ */
-+struct riscv_iommu_fq_record {
-+    uint64_t hdr;
-+    uint64_t _reserved;
-+    uint64_t iotval;
-+    uint64_t iotval2;
-+};
-+/* Header fields */
-+#define RISCV_IOMMU_FQ_HDR_CAUSE        GENMASK_ULL(11, 0)
-+#define RISCV_IOMMU_FQ_HDR_PID          GENMASK_ULL(31, 12)
-+#define RISCV_IOMMU_FQ_HDR_PV           BIT_ULL(32)
-+#define RISCV_IOMMU_FQ_HDR_TTYPE        GENMASK_ULL(39, 34)
-+#define RISCV_IOMMU_FQ_HDR_DID          GENMASK_ULL(63, 40)
++#ifndef PCI_DEVICE_ID_RIVOS_IOMMU
++#define PCI_DEVICE_ID_RIVOS_IOMMU     0xedf1
++#endif
 +
-+/*
-+ * struct riscv_iommu_pq_record - PCIe Page Request record
-+ * For more infos on the PCIe Page Request queue see chapter 3.3.
-+ */
-+struct riscv_iommu_pq_record {
-+      uint64_t hdr;
-+      uint64_t payload;
-+};
-+/* Header fields */
-+#define RISCV_IOMMU_PREQ_HDR_PID        GENMASK_ULL(31, 12)
-+#define RISCV_IOMMU_PREQ_HDR_PV         BIT_ULL(32)
-+#define RISCV_IOMMU_PREQ_HDR_PRIV       BIT_ULL(33)
-+#define RISCV_IOMMU_PREQ_HDR_EXEC       BIT_ULL(34)
-+#define RISCV_IOMMU_PREQ_HDR_DID        GENMASK_ULL(63, 40)
-+/* Payload fields */
-+#define RISCV_IOMMU_PREQ_PAYLOAD_M      GENMASK_ULL(2, 0)
++/* RISC-V IOMMU PCI Device Emulation */
 +
-+/* Common field positions */
-+#define RISCV_IOMMU_PPN_FIELD           GENMASK_ULL(53, 10)
-+#define RISCV_IOMMU_QUEUE_LOGSZ_FIELD   GENMASK_ULL(4, 0)
-+#define RISCV_IOMMU_QUEUE_INDEX_FIELD   GENMASK_ULL(31, 0)
-+#define RISCV_IOMMU_QUEUE_ENABLE        BIT(0)
-+#define RISCV_IOMMU_QUEUE_INTR_ENABLE   BIT(1)
-+#define RISCV_IOMMU_QUEUE_MEM_FAULT     BIT(8)
-+#define RISCV_IOMMU_QUEUE_OVERFLOW      BIT(9)
-+#define RISCV_IOMMU_QUEUE_ACTIVE        BIT(16)
-+#define RISCV_IOMMU_QUEUE_BUSY          BIT(17)
-+#define RISCV_IOMMU_ATP_PPN_FIELD       GENMASK_ULL(43, 0)
-+#define RISCV_IOMMU_ATP_MODE_FIELD      GENMASK_ULL(63, 60)
++typedef struct RISCVIOMMUStatePci {
++    PCIDevice        pci;     /* Parent PCIe device state */
++    MemoryRegion     bar0;    /* PCI BAR (including MSI-x config) */
++    RISCVIOMMUState  iommu;   /* common IOMMU state */
++} RISCVIOMMUStatePci;
 +
-+/* 5.3 IOMMU Capabilities (64bits) */
-+#define RISCV_IOMMU_REG_CAP             0x0000
-+#define RISCV_IOMMU_CAP_VERSION         GENMASK_ULL(7, 0)
-+#define RISCV_IOMMU_CAP_MSI_FLAT        BIT_ULL(22)
-+#define RISCV_IOMMU_CAP_MSI_MRIF        BIT_ULL(23)
-+#define RISCV_IOMMU_CAP_IGS             GENMASK_ULL(29, 28)
-+#define RISCV_IOMMU_CAP_PAS             GENMASK_ULL(37, 32)
-+#define RISCV_IOMMU_CAP_PD8             BIT_ULL(38)
++/* interrupt delivery callback */
++static void riscv_iommu_pci_notify(RISCVIOMMUState *iommu, unsigned vector)
++{
++    RISCVIOMMUStatePci *s = container_of(iommu, RISCVIOMMUStatePci, iommu);
 +
-+/* 5.4 Features control register (32bits) */
-+#define RISCV_IOMMU_REG_FCTL            0x0008
++    if (msix_enabled(&(s->pci))) {
++        msix_notify(&(s->pci), vector);
++    }
++}
 +
-+/* 5.5 Device-directory-table pointer (64bits) */
-+#define RISCV_IOMMU_REG_DDTP            0x0010
-+#define RISCV_IOMMU_DDTP_MODE           GENMASK_ULL(3, 0)
-+#define RISCV_IOMMU_DDTP_BUSY           BIT_ULL(4)
-+#define RISCV_IOMMU_DDTP_PPN            RISCV_IOMMU_PPN_FIELD
++static void riscv_iommu_pci_realize(PCIDevice *dev, Error **errp)
++{
++    RISCVIOMMUStatePci *s = DO_UPCAST(RISCVIOMMUStatePci, pci, dev);
++    RISCVIOMMUState *iommu = &s->iommu;
++    Error *err = NULL;
 +
-+enum riscv_iommu_ddtp_modes {
-+    RISCV_IOMMU_DDTP_MODE_OFF = 0,
-+    RISCV_IOMMU_DDTP_MODE_BARE = 1,
-+    RISCV_IOMMU_DDTP_MODE_1LVL = 2,
-+    RISCV_IOMMU_DDTP_MODE_2LVL = 3,
-+    RISCV_IOMMU_DDTP_MODE_3LVL = 4,
-+    RISCV_IOMMU_DDTP_MODE_MAX = 4
-+};
++    /* Set device id for trace / debug */
++    DEVICE(iommu)->id = g_strdup_printf("%02x:%02x.%01x",
++        pci_dev_bus_num(dev), PCI_SLOT(dev->devfn), PCI_FUNC(dev->devfn));
++    qdev_realize(DEVICE(iommu), NULL, errp);
 +
-+/* 5.6 Command Queue Base (64bits) */
-+#define RISCV_IOMMU_REG_CQB             0x0018
-+#define RISCV_IOMMU_CQB_LOG2SZ          RISCV_IOMMU_QUEUE_LOGSZ_FIELD
-+#define RISCV_IOMMU_CQB_PPN             RISCV_IOMMU_PPN_FIELD
++    memory_region_init(&s->bar0, OBJECT(s), "riscv-iommu-bar0",
++        QEMU_ALIGN_UP(memory_region_size(&iommu->regs_mr), TARGET_PAGE_SIZE));
++    memory_region_add_subregion(&s->bar0, 0, &iommu->regs_mr);
 +
-+/* 5.7 Command Queue head (32bits) */
-+#define RISCV_IOMMU_REG_CQH             0x0020
++    pcie_endpoint_cap_init(dev, 0);
 +
-+/* 5.8 Command Queue tail (32bits) */
-+#define RISCV_IOMMU_REG_CQT             0x0024
++    pci_register_bar(dev, 0, PCI_BASE_ADDRESS_SPACE_MEMORY |
++                     PCI_BASE_ADDRESS_MEM_TYPE_64, &s->bar0);
 +
-+/* 5.9 Fault Queue Base (64bits) */
-+#define RISCV_IOMMU_REG_FQB             0x0028
-+#define RISCV_IOMMU_FQB_LOG2SZ          RISCV_IOMMU_QUEUE_LOGSZ_FIELD
-+#define RISCV_IOMMU_FQB_PPN             RISCV_IOMMU_PPN_FIELD
++    int ret = msix_init(dev, RISCV_IOMMU_INTR_COUNT,
++                        &s->bar0, 0, RISCV_IOMMU_REG_MSI_CONFIG,
++                        &s->bar0, 0, RISCV_IOMMU_REG_MSI_CONFIG + 256, 0, &err);
 +
-+/* 5.10 Fault Queue Head (32bits) */
-+#define RISCV_IOMMU_REG_FQH             0x0030
++    if (ret == -ENOTSUP) {
++        /*
++         * MSI-x is not supported by the platform.
++         * Driver should use timer/polling based notification handlers.
++         */
++        warn_report_err(err);
++    } else if (ret < 0) {
++        error_propagate(errp, err);
++        return;
++    } else {
++        /* mark all allocated MSIx vectors as used. */
++        msix_vector_use(dev, RISCV_IOMMU_INTR_CQ);
++        msix_vector_use(dev, RISCV_IOMMU_INTR_FQ);
++        msix_vector_use(dev, RISCV_IOMMU_INTR_PM);
++        msix_vector_use(dev, RISCV_IOMMU_INTR_PQ);
++        iommu->notify = riscv_iommu_pci_notify;
++    }
 +
-+/* 5.11 Fault Queue tail (32bits) */
-+#define RISCV_IOMMU_REG_FQT             0x0034
++    PCIBus *bus = pci_device_root_bus(dev);
++    if (!bus) {
++        error_setg(errp, "can't find PCIe root port for %02x:%02x.%x",
++            pci_bus_num(pci_get_bus(dev)), PCI_SLOT(dev->devfn),
++            PCI_FUNC(dev->devfn));
++        return;
++    }
 +
-+/* 5.12 Page Request Queue base (64bits) */
-+#define RISCV_IOMMU_REG_PQB             0x0038
-+#define RISCV_IOMMU_PQB_LOG2SZ          RISCV_IOMMU_QUEUE_LOGSZ_FIELD
-+#define RISCV_IOMMU_PQB_PPN             RISCV_IOMMU_PPN_FIELD
++    riscv_iommu_pci_setup_iommu(iommu, bus, errp);
++}
 +
-+/* 5.13 Page Request Queue head (32bits) */
-+#define RISCV_IOMMU_REG_PQH             0x0040
++static void riscv_iommu_pci_exit(PCIDevice *pci_dev)
++{
++    pci_setup_iommu(pci_device_root_bus(pci_dev), NULL, NULL);
++}
 +
-+/* 5.14 Page Request Queue tail (32bits) */
-+#define RISCV_IOMMU_REG_PQT             0x0044
-+
-+/* 5.15 Command Queue CSR (32bits) */
-+#define RISCV_IOMMU_REG_CQCSR           0x0048
-+#define RISCV_IOMMU_CQCSR_CQEN          RISCV_IOMMU_QUEUE_ENABLE
-+#define RISCV_IOMMU_CQCSR_CIE           RISCV_IOMMU_QUEUE_INTR_ENABLE
-+#define RISCV_IOMMU_CQCSR_CQMF          RISCV_IOMMU_QUEUE_MEM_FAULT
-+#define RISCV_IOMMU_CQCSR_CMD_TO        BIT(9)
-+#define RISCV_IOMMU_CQCSR_CMD_ILL       BIT(10)
-+#define RISCV_IOMMU_CQCSR_CQON          RISCV_IOMMU_QUEUE_ACTIVE
-+#define RISCV_IOMMU_CQCSR_BUSY          RISCV_IOMMU_QUEUE_BUSY
-+
-+/* 5.16 Fault Queue CSR (32bits) */
-+#define RISCV_IOMMU_REG_FQCSR           0x004C
-+#define RISCV_IOMMU_FQCSR_FQEN          RISCV_IOMMU_QUEUE_ENABLE
-+#define RISCV_IOMMU_FQCSR_FIE           RISCV_IOMMU_QUEUE_INTR_ENABLE
-+#define RISCV_IOMMU_FQCSR_FQMF          RISCV_IOMMU_QUEUE_MEM_FAULT
-+#define RISCV_IOMMU_FQCSR_FQOF          RISCV_IOMMU_QUEUE_OVERFLOW
-+#define RISCV_IOMMU_FQCSR_FQON          RISCV_IOMMU_QUEUE_ACTIVE
-+#define RISCV_IOMMU_FQCSR_BUSY          RISCV_IOMMU_QUEUE_BUSY
-+
-+/* 5.17 Page Request Queue CSR (32bits) */
-+#define RISCV_IOMMU_REG_PQCSR           0x0050
-+#define RISCV_IOMMU_PQCSR_PQEN          RISCV_IOMMU_QUEUE_ENABLE
-+#define RISCV_IOMMU_PQCSR_PIE           RISCV_IOMMU_QUEUE_INTR_ENABLE
-+#define RISCV_IOMMU_PQCSR_PQMF          RISCV_IOMMU_QUEUE_MEM_FAULT
-+#define RISCV_IOMMU_PQCSR_PQOF          RISCV_IOMMU_QUEUE_OVERFLOW
-+#define RISCV_IOMMU_PQCSR_PQON          RISCV_IOMMU_QUEUE_ACTIVE
-+#define RISCV_IOMMU_PQCSR_BUSY          RISCV_IOMMU_QUEUE_BUSY
-+
-+/* 5.18 Interrupt Pending Status (32bits) */
-+#define RISCV_IOMMU_REG_IPSR            0x0054
-+
-+enum {
-+    RISCV_IOMMU_INTR_CQ,
-+    RISCV_IOMMU_INTR_FQ,
-+    RISCV_IOMMU_INTR_PM,
-+    RISCV_IOMMU_INTR_PQ,
-+    RISCV_IOMMU_INTR_COUNT
++static const VMStateDescription riscv_iommu_vmstate = {
++    .name = "riscv-iommu",
++    .unmigratable = 1
 +};
 +
-+/* 5.27 Interrupt cause to vector (64bits) */
-+#define RISCV_IOMMU_REG_IVEC            0x02F8
++static void riscv_iommu_pci_init(Object *obj)
++{
++    RISCVIOMMUStatePci *s = RISCV_IOMMU_PCI(obj);
++    RISCVIOMMUState *iommu = &s->iommu;
 +
-+/* 5.28 MSI Configuration table (32 * 64bits) */
-+#define RISCV_IOMMU_REG_MSI_CONFIG      0x0300
++    object_initialize_child(obj, "iommu", iommu, TYPE_RISCV_IOMMU);
++    qdev_alias_all_properties(DEVICE(iommu), obj);
++}
 +
-+#define RISCV_IOMMU_REG_SIZE           0x1000
-+
-+#define RISCV_IOMMU_DDTE_VALID          BIT_ULL(0)
-+#define RISCV_IOMMU_DDTE_PPN            RISCV_IOMMU_PPN_FIELD
-+
-+/* Struct riscv_iommu_dc - Device Context - section 2.1 */
-+struct riscv_iommu_dc {
-+      uint64_t tc;
-+      uint64_t iohgatp;
-+      uint64_t ta;
-+      uint64_t fsc;
-+      uint64_t msiptp;
-+      uint64_t msi_addr_mask;
-+      uint64_t msi_addr_pattern;
-+      uint64_t _reserved;
++static Property riscv_iommu_pci_properties[] = {
++    DEFINE_PROP_END_OF_LIST(),
 +};
 +
-+/* Translation control fields */
-+#define RISCV_IOMMU_DC_TC_V             BIT_ULL(0)
-+#define RISCV_IOMMU_DC_TC_DTF           BIT_ULL(4)
-+#define RISCV_IOMMU_DC_TC_PDTV          BIT_ULL(5)
-+#define RISCV_IOMMU_DC_TC_PRPR          BIT_ULL(6)
-+#define RISCV_IOMMU_DC_TC_DPE           BIT_ULL(9)
-+#define RISCV_IOMMU_DC_TC_SXL           BIT_ULL(11)
++static void riscv_iommu_pci_class_init(ObjectClass *klass, void *data)
++{
++    DeviceClass *dc = DEVICE_CLASS(klass);
++    PCIDeviceClass *k = PCI_DEVICE_CLASS(klass);
 +
-+/* Second-stage (aka G-stage) context fields */
-+#define RISCV_IOMMU_DC_IOHGATP_PPN      RISCV_IOMMU_ATP_PPN_FIELD
-+#define RISCV_IOMMU_DC_IOHGATP_GSCID    GENMASK_ULL(59, 44)
-+#define RISCV_IOMMU_DC_IOHGATP_MODE     RISCV_IOMMU_ATP_MODE_FIELD
++    k->realize = riscv_iommu_pci_realize;
++    k->exit = riscv_iommu_pci_exit;
++    k->vendor_id = PCI_VENDOR_ID_RIVOS;
++    k->device_id = PCI_DEVICE_ID_RIVOS_IOMMU;
++    k->revision = 0;
++    k->class_id = 0x0806;
++    dc->desc = "RISCV-IOMMU DMA Remapping device";
++    dc->vmsd = &riscv_iommu_vmstate;
++    dc->hotpluggable = false;
++    dc->user_creatable = true;
++    set_bit(DEVICE_CATEGORY_MISC, dc->categories);
++    device_class_set_props(dc, riscv_iommu_pci_properties);
++}
 +
-+enum riscv_iommu_dc_iohgatp_modes {
-+    RISCV_IOMMU_DC_IOHGATP_MODE_BARE = 0,
-+    RISCV_IOMMU_DC_IOHGATP_MODE_SV32X4 = 8,
-+    RISCV_IOMMU_DC_IOHGATP_MODE_SV39X4 = 8,
-+    RISCV_IOMMU_DC_IOHGATP_MODE_SV48X4 = 9,
-+    RISCV_IOMMU_DC_IOHGATP_MODE_SV57X4 = 10
++static const TypeInfo riscv_iommu_pci = {
++    .name = TYPE_RISCV_IOMMU_PCI,
++    .parent = TYPE_PCI_DEVICE,
++    .class_init = riscv_iommu_pci_class_init,
++    .instance_init = riscv_iommu_pci_init,
++    .instance_size = sizeof(RISCVIOMMUStatePci),
++    .interfaces = (InterfaceInfo[]) {
++        { INTERFACE_PCIE_DEVICE },
++        { },
++    },
 +};
 +
-+/* Translation attributes fields */
-+#define RISCV_IOMMU_DC_TA_PSCID         GENMASK_ULL(31, 12)
++static void riscv_iommu_register_pci_types(void)
++{
++    type_register_static(&riscv_iommu_pci);
++}
 +
-+/* First-stage context fields */
-+#define RISCV_IOMMU_DC_FSC_PPN          RISCV_IOMMU_ATP_PPN_FIELD
-+#define RISCV_IOMMU_DC_FSC_MODE         RISCV_IOMMU_ATP_MODE_FIELD
-+
-+/* Generic I/O MMU command structure - check section 3.1 */
-+struct riscv_iommu_command {
-+    uint64_t dword0;
-+    uint64_t dword1;
-+};
-+
-+#define RISCV_IOMMU_CMD_OPCODE          GENMASK_ULL(6, 0)
-+#define RISCV_IOMMU_CMD_FUNC            GENMASK_ULL(9, 7)
-+
-+#define RISCV_IOMMU_CMD_IOTINVAL_OPCODE         1
-+#define RISCV_IOMMU_CMD_IOTINVAL_FUNC_VMA       0
-+#define RISCV_IOMMU_CMD_IOTINVAL_FUNC_GVMA      1
-+#define RISCV_IOMMU_CMD_IOTINVAL_AV     BIT_ULL(10)
-+#define RISCV_IOMMU_CMD_IOTINVAL_PSCID  GENMASK_ULL(31, 12)
-+#define RISCV_IOMMU_CMD_IOTINVAL_PSCV   BIT_ULL(32)
-+#define RISCV_IOMMU_CMD_IOTINVAL_GV     BIT_ULL(33)
-+#define RISCV_IOMMU_CMD_IOTINVAL_GSCID  GENMASK_ULL(59, 44)
-+
-+#define RISCV_IOMMU_CMD_IOFENCE_OPCODE          2
-+#define RISCV_IOMMU_CMD_IOFENCE_FUNC_C          0
-+#define RISCV_IOMMU_CMD_IOFENCE_AV      BIT_ULL(10)
-+#define RISCV_IOMMU_CMD_IOFENCE_DATA    GENMASK_ULL(63, 32)
-+
-+#define RISCV_IOMMU_CMD_IODIR_OPCODE            3
-+#define RISCV_IOMMU_CMD_IODIR_FUNC_INVAL_DDT    0
-+#define RISCV_IOMMU_CMD_IODIR_FUNC_INVAL_PDT    1
-+#define RISCV_IOMMU_CMD_IODIR_PID       GENMASK_ULL(31, 12)
-+#define RISCV_IOMMU_CMD_IODIR_DV        BIT_ULL(33)
-+#define RISCV_IOMMU_CMD_IODIR_DID       GENMASK_ULL(63, 40)
-+
-+enum riscv_iommu_dc_fsc_atp_modes {
-+    RISCV_IOMMU_DC_FSC_MODE_BARE = 0,
-+    RISCV_IOMMU_DC_FSC_IOSATP_MODE_SV32 = 8,
-+    RISCV_IOMMU_DC_FSC_IOSATP_MODE_SV39 = 8,
-+    RISCV_IOMMU_DC_FSC_IOSATP_MODE_SV48 = 9,
-+    RISCV_IOMMU_DC_FSC_IOSATP_MODE_SV57 = 10,
-+    RISCV_IOMMU_DC_FSC_PDTP_MODE_PD8 = 1,
-+    RISCV_IOMMU_DC_FSC_PDTP_MODE_PD17 = 2,
-+    RISCV_IOMMU_DC_FSC_PDTP_MODE_PD20 = 3
-+};
-+
-+enum riscv_iommu_fq_causes {
-+    RISCV_IOMMU_FQ_CAUSE_INST_FAULT           = 1,
-+    RISCV_IOMMU_FQ_CAUSE_RD_ADDR_MISALIGNED   = 4,
-+    RISCV_IOMMU_FQ_CAUSE_RD_FAULT             = 5,
-+    RISCV_IOMMU_FQ_CAUSE_WR_ADDR_MISALIGNED   = 6,
-+    RISCV_IOMMU_FQ_CAUSE_WR_FAULT             = 7,
-+    RISCV_IOMMU_FQ_CAUSE_INST_FAULT_S         = 12,
-+    RISCV_IOMMU_FQ_CAUSE_RD_FAULT_S           = 13,
-+    RISCV_IOMMU_FQ_CAUSE_WR_FAULT_S           = 15,
-+    RISCV_IOMMU_FQ_CAUSE_INST_FAULT_VS        = 20,
-+    RISCV_IOMMU_FQ_CAUSE_RD_FAULT_VS          = 21,
-+    RISCV_IOMMU_FQ_CAUSE_WR_FAULT_VS          = 23,
-+    RISCV_IOMMU_FQ_CAUSE_DMA_DISABLED         = 256,
-+    RISCV_IOMMU_FQ_CAUSE_DDT_LOAD_FAULT       = 257,
-+    RISCV_IOMMU_FQ_CAUSE_DDT_INVALID          = 258,
-+    RISCV_IOMMU_FQ_CAUSE_DDT_MISCONFIGURED    = 259,
-+    RISCV_IOMMU_FQ_CAUSE_TTYPE_BLOCKED        = 260,
-+    RISCV_IOMMU_FQ_CAUSE_MSI_LOAD_FAULT       = 261,
-+    RISCV_IOMMU_FQ_CAUSE_MSI_INVALID          = 262,
-+    RISCV_IOMMU_FQ_CAUSE_MSI_MISCONFIGURED    = 263,
-+    RISCV_IOMMU_FQ_CAUSE_MRIF_FAULT           = 264,
-+    RISCV_IOMMU_FQ_CAUSE_PDT_LOAD_FAULT       = 265,
-+    RISCV_IOMMU_FQ_CAUSE_PDT_INVALID          = 266,
-+    RISCV_IOMMU_FQ_CAUSE_PDT_MISCONFIGURED    = 267,
-+    RISCV_IOMMU_FQ_CAUSE_DDT_CORRUPTED        = 268,
-+    RISCV_IOMMU_FQ_CAUSE_PDT_CORRUPTED        = 269,
-+    RISCV_IOMMU_FQ_CAUSE_MSI_PT_CORRUPTED     = 270,
-+    RISCV_IOMMU_FQ_CAUSE_MRIF_CORRUIPTED      = 271,
-+    RISCV_IOMMU_FQ_CAUSE_INTERNAL_DP_ERROR    = 272,
-+    RISCV_IOMMU_FQ_CAUSE_MSI_WR_FAULT         = 273,
-+    RISCV_IOMMU_FQ_CAUSE_PT_CORRUPTED         = 274
-+};
-+
-+/* MSI page table pointer */
-+#define RISCV_IOMMU_DC_MSIPTP_PPN       RISCV_IOMMU_ATP_PPN_FIELD
-+#define RISCV_IOMMU_DC_MSIPTP_MODE      RISCV_IOMMU_ATP_MODE_FIELD
-+#define RISCV_IOMMU_DC_MSIPTP_MODE_FLAT 1
-+
-+/* Translation attributes fields */
-+#define RISCV_IOMMU_PC_TA_V             BIT_ULL(0)
-+
-+/* First stage context fields */
-+#define RISCV_IOMMU_PC_FSC_PPN          GENMASK_ULL(43, 0)
-+
-+enum riscv_iommu_fq_ttypes {
-+    RISCV_IOMMU_FQ_TTYPE_NONE = 0,
-+    RISCV_IOMMU_FQ_TTYPE_UADDR_INST_FETCH = 1,
-+    RISCV_IOMMU_FQ_TTYPE_UADDR_RD = 2,
-+    RISCV_IOMMU_FQ_TTYPE_UADDR_WR = 3,
-+    RISCV_IOMMU_FQ_TTYPE_TADDR_INST_FETCH = 5,
-+    RISCV_IOMMU_FQ_TTYPE_TADDR_RD = 6,
-+    RISCV_IOMMU_FQ_TTYPE_TADDR_WR = 7,
-+    RISCV_IOMMU_FW_TTYPE_PCIE_MSG_REQ = 8,
-+};
-+
-+/* Fields on pte */
-+#define RISCV_IOMMU_MSI_PTE_V           BIT_ULL(0)
-+#define RISCV_IOMMU_MSI_PTE_M           GENMASK_ULL(2, 1)
-+
-+#define RISCV_IOMMU_MSI_PTE_M_MRIF      1
-+#define RISCV_IOMMU_MSI_PTE_M_BASIC     3
-+
-+/* When M == 1 (MRIF mode) */
-+#define RISCV_IOMMU_MSI_PTE_MRIF_ADDR   GENMASK_ULL(53, 7)
-+/* When M == 3 (basic mode) */
-+#define RISCV_IOMMU_MSI_PTE_PPN         RISCV_IOMMU_PPN_FIELD
-+#define RISCV_IOMMU_MSI_PTE_C           BIT_ULL(63)
-+
-+/* Fields on mrif_info */
-+#define RISCV_IOMMU_MSI_MRIF_NID        GENMASK_ULL(9, 0)
-+#define RISCV_IOMMU_MSI_MRIF_NPPN       RISCV_IOMMU_PPN_FIELD
-+#define RISCV_IOMMU_MSI_MRIF_NID_MSB    BIT_ULL(60)
-+
-+#endif /* _RISCV_IOMMU_BITS_H_ */
++type_init(riscv_iommu_register_pci_types);
 -- 
 2.43.2
 
