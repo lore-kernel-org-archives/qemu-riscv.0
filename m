@@ -4,82 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E71F7C5475B
-	for <qemu-riscv@archiver.kernel.org>; Fri,  8 Mar 2024 13:16:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CA5EC54E4A
+	for <qemu-riscv@archiver.kernel.org>; Fri,  8 Mar 2024 17:20:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ria5O-0003yG-Kn; Fri, 08 Mar 2024 08:16:30 -0500
+	id 1ridt1-0000O0-KL; Fri, 08 Mar 2024 12:19:59 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1ria5I-0003xc-RE
- for qemu-riscv@nongnu.org; Fri, 08 Mar 2024 08:16:28 -0500
-Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1ria55-00087d-T6
- for qemu-riscv@nongnu.org; Fri, 08 Mar 2024 08:16:24 -0500
-Received: by mail-pf1-x42b.google.com with SMTP id
- d2e1a72fcca58-6e56787e691so2180734b3a.0
- for <qemu-riscv@nongnu.org>; Fri, 08 Mar 2024 05:16:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=vrull.eu; s=google; t=1709903769; x=1710508569; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UDRK+4HPpXEzoHdKcxNPERnbIRLfSl3WqHvIvJ8OTJk=;
- b=Zy1D7QzJiTADE1yk61j0njYwb/4IuW2h95ICcx6IwARM+8CzULNk6ReCz3CNQbBHar
- tLYlvCFJqY/0HE15Tbogc+QNLhDmF8YBqPCoK9CFx4Aq2cI2dHtvHs1c6sl4Wmfp4VGV
- BZn1A1jLHGhGcemE91jjcMHEoqSkoiMzVz8eY9s48GjySyYaBk+lBAoIKh5WI1kxLnJV
- xyOEYdEVATeBMDqTfNX0pM7E0q+HsIaQOYJ4SqPwiTGJxzGpKOez9xacKlUnkbAskePa
- canSfXRfOfIINGUrbY1YMpyAWVq+s3+uXgWD5fj+DJkh/07Pcguvph3Cj6YE+5xV5KNg
- p3Mw==
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1ridt0-0000NR-E2
+ for qemu-riscv@nongnu.org; Fri, 08 Mar 2024 12:19:58 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1ridsx-0004Z8-Ns
+ for qemu-riscv@nongnu.org; Fri, 08 Mar 2024 12:19:58 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1709918394;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=0HK/8E6bZBmkJKB4WdspBLCTxoWKSFI3j1jbdIa8Bfo=;
+ b=dkr+mFi78/8rqQ6rId9Z86R5JEzZPOX2SnDfRGE268SmN28aPHbz39/t88mzeCbnKLmavx
+ MKFNTU8ZfRcWtn1W5e0uqW8RBOzObX4OC9YHtfQODRZk2ZQdlyTW+O4CRx7OFuxQdc+4rU
+ lwzQm55fwglcL01Bt6J/4UZ9Z/uBBWc=
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-642-MjdBlIJZN4KPbUUkxvRE6w-1; Fri, 08 Mar 2024 12:19:53 -0500
+X-MC-Unique: MjdBlIJZN4KPbUUkxvRE6w-1
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-412eeb789d9so11767415e9.3
+ for <qemu-riscv@nongnu.org>; Fri, 08 Mar 2024 09:19:52 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709903769; x=1710508569;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1709918392; x=1710523192;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UDRK+4HPpXEzoHdKcxNPERnbIRLfSl3WqHvIvJ8OTJk=;
- b=sxztQyILNrpM3vGBXz7ZsXOZyISqBJ95ZMMrMbbRE+/AnBYYgzbpoCf/s84w2mwv7/
- Mt8rnFmieava+mfdorF7vfhMTgs8qJUYwAZ1uH43FQttolSLgREB18P3kVb6VEKDIPAH
- EaCd1GK9eaw7WWFgQjd3fBYVvkIuqyqdbOczPieF5JwFUBzKzEeKwopRIIGnUzHy7jMH
- uJtYeHqcVXAPC/ai4yzRTx0HwRiltVvlYaxXwiBw4BFEDEY4B3iivXip2JV/7vE/kFkF
- F5jc27nEvmpBL67yseZCAv1CWYY84VI91vi6nyrD4B+GzI7Ga9Jf+etuESeWZrlOPICO
- pD4Q==
-X-Gm-Message-State: AOJu0YylSkj1RejKZpOG0ykSEpWl0gz+JNL/3vZxOjdrfF6td+iCWhOx
- yKK/OcPqeJlKD5F61VWoMZaD24wBD3hrLG1isoNAbGW3lzfrYPY3ChHbSWW8R+RXlqOgTXqktrG
- cCaqb9B+4C+RC83rx/vFsd+T1z7CAb8wTL3LXOg==
-X-Google-Smtp-Source: AGHT+IECWl8+S1Vc9OuxxBMvqu+oATB5t64/dZcpAB6YSw5mCFwpMVrd+k2+dpcL+Dl4SV/AZx6ExPrbCV23q4tphQ4=
-X-Received: by 2002:a17:90a:fa12:b0:29b:ab15:73ed with SMTP id
- cm18-20020a17090afa1200b0029bab1573edmr285181pjb.16.1709903769480; Fri, 08
- Mar 2024 05:16:09 -0800 (PST)
+ bh=0HK/8E6bZBmkJKB4WdspBLCTxoWKSFI3j1jbdIa8Bfo=;
+ b=ClEPWeBgybb49yDkwxF31n1u0tFNrkcmtwPgOWb2XBb6xpC6UEMXdON13vDR25DwQY
+ uqKKoXMfKC7zn4ied0xF2Zq0AAeHFK9MUfxK4l3/Z4cFaHFilkb12vaXRkGgVT0sbtaF
+ CUTV0XHdrDBlsCx/NW69eylmqjDOwp79goQRRaVtPDnOZN62c6n7X6pyPAsnzrzoCrh6
+ 936URLnlCfhFHkNRr9SLaO0puNSSMYgGfnYt75czEnsDhDlUKrmn7dJz5DEX9WRQeD1E
+ G1ER7pXIp0uDEtqDmXhaA4jyF8DSH6gV+UlAkuh0gvx9YcBSbCee3RjPv42Dqz3LERuV
+ pLtw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWM2NFVycTffcsvRXI4JuNZl3bXwX+gTQKJ8ozk/F4lo7QAuAkpu23mjNr5GIsChQpW9Ori9rZsOdwLWyr7wywD1fn7L6o=
+X-Gm-Message-State: AOJu0YzSr5pPoR69/MTDW77a2ZU9S0WUiX/CnamBnAetYjESk0G44ogx
+ vYnfe/3P/niTIOV8CmTFlCUG+laEky2PZvbXsG6bPsqruaIGo0iqHC0drByTkvbVhWw0/ETSv6b
+ fU3oLNvOCIrqXp9jG8rRAjCqIZoLjvgHQxgcurQyKrXnHZYUCNz0q
+X-Received: by 2002:a05:600c:3b1f:b0:413:1651:6bb2 with SMTP id
+ m31-20020a05600c3b1f00b0041316516bb2mr2443415wms.8.1709918391718; 
+ Fri, 08 Mar 2024 09:19:51 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHQDIas2iYIp7EOA10K+wG80uP2R5JXAXU6XImjt9sBdWqW3AVzZBJIgEQSnmSytzppDHkKTw==
+X-Received: by 2002:a05:600c:3b1f:b0:413:1651:6bb2 with SMTP id
+ m31-20020a05600c3b1f00b0041316516bb2mr2443383wms.8.1709918391265; 
+ Fri, 08 Mar 2024 09:19:51 -0800 (PST)
+Received: from imammedo.users.ipa.redhat.com (nat-pool-brq-t.redhat.com.
+ [213.175.37.10]) by smtp.gmail.com with ESMTPSA id
+ n4-20020a05600c4f8400b00412ff941abasm6504737wmq.21.2024.03.08.09.19.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 08 Mar 2024 09:19:50 -0800 (PST)
+Date: Fri, 8 Mar 2024 18:19:48 +0100
+From: Igor Mammedov <imammedo@redhat.com>
+To: Ani Sinha <anisinha@redhat.com>
+Cc: QEMU Developers <qemu-devel@nongnu.org>, Peter Maydell
+ <peter.maydell@linaro.org>, Paolo Bonzini <pbonzini@redhat.com>, "Michael
+ S. Tsirkin" <mst@redhat.com>, Song Gao <gaosong@loongson.cn>, Alistair
+ Francis <alistair.francis@wdc.com>, palmer@dabbelt.com,
+ bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, Philippe =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?=
+ <philmd@linaro.org>, Yanan Wang <wangyanan55@huawei.com>, Eric Blake
+ <eblake@redhat.com>, Markus Armbruster <armbru@redhat.com>,
+ qemu-arm@nongnu.org, qemu-riscv@nongnu.org, f.ebner@proxmox.com
+Subject: Re: [PATCH v2 07/20] smbios: avoid mangling user provided tables
+Message-ID: <20240308181948.2f42db4f@imammedo.users.ipa.redhat.com>
+In-Reply-To: <97A9187B-2BB6-4819-AB28-679C0DE04501@redhat.com>
+References: <20240305155724.2047069-1-imammedo@redhat.com>
+ <20240305155724.2047069-8-imammedo@redhat.com>
+ <0eeed9a2-cd7b-bdde-6346-3357dc430835@redhat.com>
+ <97A9187B-2BB6-4819-AB28-679C0DE04501@redhat.com>
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-References: <20240207115926.887816-1-christoph.muellner@vrull.eu>
- <20240207115926.887816-3-christoph.muellner@vrull.eu>
- <CAKmqyKMZqysJWyQULpD21LVHdHKAVHc4671sVe3hqJ9Ksz9a0Q@mail.gmail.com>
-In-Reply-To: <CAKmqyKMZqysJWyQULpD21LVHdHKAVHc4671sVe3hqJ9Ksz9a0Q@mail.gmail.com>
-From: =?UTF-8?Q?Christoph_M=C3=BCllner?= <christoph.muellner@vrull.eu>
-Date: Fri, 8 Mar 2024 14:15:58 +0100
-Message-ID: <CAEg0e7hqQ8opuNxgDx32dwQrGHX7XNiA1kQas1Urzv3aKwNgyg@mail.gmail.com>
-Subject: Re: [PATCH 2/2] linux-user/riscv: Sync hwprobe keys with Linux
-To: Alistair Francis <alistair23@gmail.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
- Richard Henderson <richard.henderson@linaro.org>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Andrew Jones <ajones@ventanamicro.com>, Laurent Vivier <laurent@vivier.eu>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42b;
- envelope-from=christoph.muellner@vrull.eu; helo=mail-pf1-x42b.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=imammedo@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -26
+X-Spam_score: -2.7
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001,
+X-Spam_report: (-2.7 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.572,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -96,150 +117,329 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Mar 8, 2024 at 5:23=E2=80=AFAM Alistair Francis <alistair23@gmail.c=
-om> wrote:
->
-> On Wed, Feb 7, 2024 at 10:00=E2=80=AFPM Christoph M=C3=BCllner
-> <christoph.muellner@vrull.eu> wrote:
-> >
-> > Upstream Linux recently added many additional keys to the hwprobe API.
-> > This patch adds support for all of them with the exception of Ztso,
-> > which is currently not supported in QEMU.
-> >
-> > Signed-off-by: Christoph M=C3=BCllner <christoph.muellner@vrull.eu>
-> > ---
-> >  linux-user/syscall.c | 98 ++++++++++++++++++++++++++++++++++++++++----
-> >  1 file changed, 91 insertions(+), 7 deletions(-)
-> >
-> > diff --git a/linux-user/syscall.c b/linux-user/syscall.c
-> > index 43467c9707..3ba20f99ad 100644
-> > --- a/linux-user/syscall.c
-> > +++ b/linux-user/syscall.c
-> > @@ -8793,13 +8793,41 @@ static int do_getdents64(abi_long dirfd, abi_lo=
-ng arg2, abi_long count)
-> >  #define     RISCV_HWPROBE_BASE_BEHAVIOR_IMA (1 << 0)
-> >
-> >  #define RISCV_HWPROBE_KEY_IMA_EXT_0     4
-> > -#define     RISCV_HWPROBE_IMA_FD       (1 << 0)
-> > -#define     RISCV_HWPROBE_IMA_C        (1 << 1)
-> > -#define     RISCV_HWPROBE_IMA_V        (1 << 2)
-> > -#define     RISCV_HWPROBE_EXT_ZBA      (1 << 3)
-> > -#define     RISCV_HWPROBE_EXT_ZBB      (1 << 4)
-> > -#define     RISCV_HWPROBE_EXT_ZBS      (1 << 5)
-> > -#define     RISCV_HWPROBE_EXT_ZICBOZ   (1 << 6)
-> > +#define                RISCV_HWPROBE_IMA_FD            (1 << 0)
-> > +#define                RISCV_HWPROBE_IMA_C             (1 << 1)
-> > +#define                RISCV_HWPROBE_IMA_V             (1 << 2)
-> > +#define                RISCV_HWPROBE_EXT_ZBA           (1 << 3)
-> > +#define                RISCV_HWPROBE_EXT_ZBB           (1 << 4)
-> > +#define                RISCV_HWPROBE_EXT_ZBS           (1 << 5)
-> > +#define                RISCV_HWPROBE_EXT_ZICBOZ        (1 << 6)
-> > +#define                RISCV_HWPROBE_EXT_ZBC           (1 << 7)
-> > +#define                RISCV_HWPROBE_EXT_ZBKB          (1 << 8)
-> > +#define                RISCV_HWPROBE_EXT_ZBKC          (1 << 9)
-> > +#define                RISCV_HWPROBE_EXT_ZBKX          (1 << 10)
-> > +#define                RISCV_HWPROBE_EXT_ZKND          (1 << 11)
-> > +#define                RISCV_HWPROBE_EXT_ZKNE          (1 << 12)
-> > +#define                RISCV_HWPROBE_EXT_ZKNH          (1 << 13)
-> > +#define                RISCV_HWPROBE_EXT_ZKSED         (1 << 14)
-> > +#define                RISCV_HWPROBE_EXT_ZKSH          (1 << 15)
-> > +#define                RISCV_HWPROBE_EXT_ZKT           (1 << 16)
-> > +#define                RISCV_HWPROBE_EXT_ZVBB          (1 << 17)
-> > +#define                RISCV_HWPROBE_EXT_ZVBC          (1 << 18)
-> > +#define                RISCV_HWPROBE_EXT_ZVKB          (1 << 19)
-> > +#define                RISCV_HWPROBE_EXT_ZVKG          (1 << 20)
-> > +#define                RISCV_HWPROBE_EXT_ZVKNED        (1 << 21)
-> > +#define                RISCV_HWPROBE_EXT_ZVKNHA        (1 << 22)
-> > +#define                RISCV_HWPROBE_EXT_ZVKNHB        (1 << 23)
-> > +#define                RISCV_HWPROBE_EXT_ZVKSED        (1 << 24)
-> > +#define                RISCV_HWPROBE_EXT_ZVKSH         (1 << 25)
-> > +#define                RISCV_HWPROBE_EXT_ZVKT          (1 << 26)
-> > +#define                RISCV_HWPROBE_EXT_ZFH           (1 << 27)
-> > +#define                RISCV_HWPROBE_EXT_ZFHMIN        (1 << 28)
-> > +#define                RISCV_HWPROBE_EXT_ZIHINTNTL     (1 << 29)
-> > +#define                RISCV_HWPROBE_EXT_ZVFH          (1 << 30)
-> > +#define                RISCV_HWPROBE_EXT_ZVFHMIN       (1 << 31)
-> > +#define                RISCV_HWPROBE_EXT_ZFA           (1ULL << 32)
-> > +#define                RISCV_HWPROBE_EXT_ZACAS         (1ULL << 34)
-> > +#define                RISCV_HWPROBE_EXT_ZICOND        (1ULL << 35)
->
-> This fails to pass checkpatch
+On Thu, 7 Mar 2024 09:33:17 +0530
+Ani Sinha <anisinha@redhat.com> wrote:
 
-I copied 1:1 from the kernel, so I guess it is the tabs.
-Sorry for this! And as you have already fixed that: thanks!
+> > On 06-Mar-2024, at 12:11, Ani Sinha <anisinha@redhat.com> wrote:
+> > 
+> > 
+> > 
+> > On Tue, 5 Mar 2024, Igor Mammedov wrote:
+> >   
+> >> currently smbios_entry_add() preserves internally '-smbios type='
+> >> options but tables provided with '-smbios file=' are stored directly
+> >> into blob that eventually will be exposed to VM. And then later
+> >> QEMU adds default/'-smbios type' entries on top into the same blob.
+> >> 
+> >> It makes impossible to generate tables more than once, hence
+> >> 'immutable' guard was used.
+> >> Make it possible to regenerate final blob by storing user provided
+> >> blobs into a dedicated area (usr_blobs) and then copy it when
+> >> composing final blob. Which also makes handling of -smbios
+> >> options consistent.
+> >> 
+> >> As side effect of this and previous commits there is no need to
+> >> generate legacy smbios_entries at the time options are parsed.
+> >> Instead compose smbios_entries on demand from  usr_blobs like
+> >> it is done for non-legacy SMBIOS tables.
+> >> 
+> >> Signed-off-by: Igor Mammedov <imammedo@redhat.com>
+> >> Tested-by: Fiona Ebner <f.ebner@proxmox.com>  
+> > 
+> > Reviewed-by: Ani Sinha <anisinha@redhat.com>
+> >   
+> >> ---
+> >> hw/smbios/smbios.c | 179 +++++++++++++++++++++++----------------------
+> >> 1 file changed, 92 insertions(+), 87 deletions(-)
+> >> 
+> >> diff --git a/hw/smbios/smbios.c b/hw/smbios/smbios.c
+> >> index c46fc93357..aa2cc5bdbd 100644
+> >> --- a/hw/smbios/smbios.c
+> >> +++ b/hw/smbios/smbios.c
+> >> @@ -57,6 +57,14 @@ static size_t smbios_entries_len;
+> >> static bool smbios_uuid_encoded = true;
+> >> /* end: legacy structures & constants for <= 2.0 machines */
+> >> 
+> >> +/*
+> >> + * SMBIOS tables provided by user with '-smbios file=<foo>' option
+> >> + */
+> >> +uint8_t *usr_blobs;
+> >> +size_t usr_blobs_len;
+> >> +static GArray *usr_blobs_sizes;
+> >> +static unsigned usr_table_max;
+> >> +static unsigned usr_table_cnt;
+> >> 
+> >> uint8_t *smbios_tables;
+> >> size_t smbios_tables_len;
+> >> @@ -67,7 +75,6 @@ static SmbiosEntryPointType smbios_ep_type = SMBIOS_ENTRY_POINT_TYPE_32;
+> >> static SmbiosEntryPoint ep;
+> >> 
+> >> static int smbios_type4_count = 0;
+> >> -static bool smbios_immutable;
+> >> static bool smbios_have_defaults;
+> >> static uint32_t smbios_cpuid_version, smbios_cpuid_features;
+> >> 
+> >> @@ -569,9 +576,8 @@ static void smbios_build_type_1_fields(void)
+> >> 
+> >> uint8_t *smbios_get_table_legacy(uint32_t expected_t4_count, size_t *length)
+> >> {
+> >> -    /* drop unwanted version of command-line file blob(s) */
+> >> -    g_free(smbios_tables);
+> >> -    smbios_tables = NULL;
+> >> +    int i;
+> >> +    size_t usr_offset;
+> >> 
+> >>     /* also complain if fields were given for types > 1 */
+> >>     if (find_next_bit(have_fields_bitmap,
+> >> @@ -581,12 +587,33 @@ uint8_t *smbios_get_table_legacy(uint32_t expected_t4_count, size_t *length)
+> >>         exit(1);
+> >>     }
+> >> 
+> >> -    if (!smbios_immutable) {
+> >> -        smbios_build_type_0_fields();
+> >> -        smbios_build_type_1_fields();
+> >> -        smbios_validate_table(expected_t4_count);
+> >> -        smbios_immutable = true;
+> >> +    g_free(smbios_entries);
+> >> +    smbios_entries_len = sizeof(uint16_t);
+> >> +    smbios_entries = g_malloc0(smbios_entries_len);
+> >> +
+> >> +    for (i = 0, usr_offset = 0; usr_blobs_sizes && i < usr_blobs_sizes->len;
+> >> +         i++)
+> >> +    {
+> >> +        struct smbios_table *table;
+> >> +        struct smbios_structure_header *header;
+> >> +        size_t size = g_array_index(usr_blobs_sizes, size_t, i);
+> >> +
+> >> +        header = (struct smbios_structure_header *)(usr_blobs + usr_offset);
+> >> +        smbios_entries = g_realloc(smbios_entries, smbios_entries_len +
+> >> +                                                   size + sizeof(*table));
+> >> +        table = (struct smbios_table *)(smbios_entries + smbios_entries_len);
+> >> +        table->header.type = SMBIOS_TABLE_ENTRY;
+> >> +        table->header.length = cpu_to_le16(sizeof(*table) + size);
+> >> +        memcpy(table->data, header, size);
+> >> +        smbios_entries_len += sizeof(*table) + size;
+> >> +        (*(uint16_t *)smbios_entries) =
+> >> +            cpu_to_le16(le16_to_cpu(*(uint16_t *)smbios_entries) + 1);  
+> > 
+> > I know this comes from existing code but can you please explain why we add
+> > 1 to it? This is confusing and a comment here would be nice.
+> >   
+> >> +        usr_offset += size;  
+> > 
+> > It would be better if we could add a comment here describing a bit what
+> > this is all about.
+> > 
+> > user blobs are an array of smbios_structure_header entries whereas legacy
+> > tables are an array of smbios_table structures where
+> > smbios_table->data represents the a single user provided table blob in
+> > smbios_structure_header.  
+> 
+> Igor, are you going to send a v3 for this with the comments added?
 
->
-> Alistair
->
-> >
-> >  #define RISCV_HWPROBE_KEY_CPUPERF_0     5
-> >  #define     RISCV_HWPROBE_MISALIGNED_UNKNOWN     (0 << 0)
-> > @@ -8860,6 +8888,62 @@ static void risc_hwprobe_fill_pairs(CPURISCVStat=
-e *env,
-> >                       RISCV_HWPROBE_EXT_ZBS : 0;
-> >              value |=3D cfg->ext_zicboz ?
-> >                       RISCV_HWPROBE_EXT_ZICBOZ : 0;
-> > +            value |=3D cfg->ext_zbc ?
-> > +                     RISCV_HWPROBE_EXT_ZBC : 0;
-> > +            value |=3D cfg->ext_zbkb ?
-> > +                     RISCV_HWPROBE_EXT_ZBKB : 0;
-> > +            value |=3D cfg->ext_zbkc ?
-> > +                     RISCV_HWPROBE_EXT_ZBKC : 0;
-> > +            value |=3D cfg->ext_zbkx ?
-> > +                     RISCV_HWPROBE_EXT_ZBKX : 0;
-> > +            value |=3D cfg->ext_zknd ?
-> > +                     RISCV_HWPROBE_EXT_ZKND : 0;
-> > +            value |=3D cfg->ext_zkne ?
-> > +                     RISCV_HWPROBE_EXT_ZKNE : 0;
-> > +            value |=3D cfg->ext_zknh ?
-> > +                     RISCV_HWPROBE_EXT_ZKNH : 0;
-> > +            value |=3D cfg->ext_zksed ?
-> > +                     RISCV_HWPROBE_EXT_ZKSED : 0;
-> > +            value |=3D cfg->ext_zksh ?
-> > +                     RISCV_HWPROBE_EXT_ZKSH : 0;
-> > +            value |=3D cfg->ext_zkt ?
-> > +                     RISCV_HWPROBE_EXT_ZKT : 0;
-> > +            value |=3D cfg->ext_zvbb ?
-> > +                     RISCV_HWPROBE_EXT_ZVBB : 0;
-> > +            value |=3D cfg->ext_zvbc ?
-> > +                     RISCV_HWPROBE_EXT_ZVBC : 0;
-> > +            value |=3D cfg->ext_zvkb ?
-> > +                     RISCV_HWPROBE_EXT_ZVKB : 0;
-> > +            value |=3D cfg->ext_zvkg ?
-> > +                     RISCV_HWPROBE_EXT_ZVKG : 0;
-> > +            value |=3D cfg->ext_zvkned ?
-> > +                     RISCV_HWPROBE_EXT_ZVKNED : 0;
-> > +            value |=3D cfg->ext_zvknha ?
-> > +                     RISCV_HWPROBE_EXT_ZVKNHA : 0;
-> > +            value |=3D cfg->ext_zvknhb ?
-> > +                     RISCV_HWPROBE_EXT_ZVKNHB : 0;
-> > +            value |=3D cfg->ext_zvksed ?
-> > +                     RISCV_HWPROBE_EXT_ZVKSED : 0;
-> > +            value |=3D cfg->ext_zvksh ?
-> > +                     RISCV_HWPROBE_EXT_ZVKSH : 0;
-> > +            value |=3D cfg->ext_zvkt ?
-> > +                     RISCV_HWPROBE_EXT_ZVKT : 0;
-> > +            value |=3D cfg->ext_zfh ?
-> > +                     RISCV_HWPROBE_EXT_ZFH : 0;
-> > +            value |=3D cfg->ext_zfhmin ?
-> > +                     RISCV_HWPROBE_EXT_ZFHMIN : 0;
-> > +            value |=3D cfg->ext_zihintntl ?
-> > +                     RISCV_HWPROBE_EXT_ZIHINTNTL : 0;
-> > +            value |=3D cfg->ext_zvfh ?
-> > +                     RISCV_HWPROBE_EXT_ZVFH : 0;
-> > +            value |=3D cfg->ext_zvfhmin ?
-> > +                     RISCV_HWPROBE_EXT_ZVFHMIN : 0;
-> > +            value |=3D cfg->ext_zfa ?
-> > +                     RISCV_HWPROBE_EXT_ZFA : 0;
-> > +            value |=3D cfg->ext_zacas ?
-> > +                     RISCV_HWPROBE_EXT_ZACAS : 0;
-> > +            value |=3D cfg->ext_zicond ?
-> > +                     RISCV_HWPROBE_EXT_ZICOND : 0;
-> >              __put_user(value, &pair->value);
-> >              break;
-> >          case RISCV_HWPROBE_KEY_CPUPERF_0:
-> > --
-> > 2.43.0
-> >
-> >
+I can add comments as a patch on top of series,
+though I'd rather prefer to deprecate all this legacy code
+(along with ISA machine) and just remove it.
+
+> 
+> >   
+> >>     }
+> >> +
+> >> +    smbios_build_type_0_fields();
+> >> +    smbios_build_type_1_fields();
+> >> +    smbios_validate_table(expected_t4_count);
+> >>     *length = smbios_entries_len;
+> >>     return smbios_entries;
+> >> }
+> >> @@ -1094,67 +1121,67 @@ void smbios_get_tables(MachineState *ms,
+> >> {
+> >>     unsigned i, dimm_cnt, offset;
+> >> 
+> >> -    /* drop unwanted (legacy) version of command-line file blob(s) */
+> >> -    g_free(smbios_entries);
+> >> -    smbios_entries = NULL;
+> >> +    g_free(smbios_tables);
+> >> +    smbios_tables = g_memdup2(usr_blobs, usr_blobs_len);  
+> > 
+> > Again a comment describing here would be nice as to why memdup is ok.
+> >   
+> >> +    smbios_tables_len = usr_blobs_len;
+> >> +    smbios_table_max = usr_table_max;
+> >> +    smbios_table_cnt = usr_table_cnt;
+> >> 
+> >> -    if (!smbios_immutable) {
+> >> -        smbios_build_type_0_table();
+> >> -        smbios_build_type_1_table();
+> >> -        smbios_build_type_2_table();
+> >> -        smbios_build_type_3_table();
+> >> +    smbios_build_type_0_table();
+> >> +    smbios_build_type_1_table();
+> >> +    smbios_build_type_2_table();
+> >> +    smbios_build_type_3_table();
+> >> 
+> >> -        assert(ms->smp.sockets >= 1);
+> >> +    assert(ms->smp.sockets >= 1);
+> >> 
+> >> -        for (i = 0; i < ms->smp.sockets; i++) {
+> >> -            smbios_build_type_4_table(ms, i);
+> >> -        }
+> >> +    for (i = 0; i < ms->smp.sockets; i++) {
+> >> +        smbios_build_type_4_table(ms, i);
+> >> +    }
+> >> 
+> >> -        smbios_build_type_8_table();
+> >> -        smbios_build_type_11_table();
+> >> +    smbios_build_type_8_table();
+> >> +    smbios_build_type_11_table();
+> >> 
+> >> #define MAX_DIMM_SZ (16 * GiB)
+> >> #define GET_DIMM_SZ ((i < dimm_cnt - 1) ? MAX_DIMM_SZ \
+> >>                                         : ((current_machine->ram_size - 1) % MAX_DIMM_SZ) + 1)
+> >> 
+> >> -        dimm_cnt = QEMU_ALIGN_UP(current_machine->ram_size, MAX_DIMM_SZ) / MAX_DIMM_SZ;
+> >> +    dimm_cnt = QEMU_ALIGN_UP(current_machine->ram_size, MAX_DIMM_SZ) /
+> >> +               MAX_DIMM_SZ;
+> >> 
+> >> -        /*
+> >> -         * The offset determines if we need to keep additional space between
+> >> -         * table 17 and table 19 header handle numbers so that they do
+> >> -         * not overlap. For example, for a VM with larger than 8 TB guest
+> >> -         * memory and DIMM like chunks of 16 GiB, the default space between
+> >> -         * the two tables (T19_BASE - T17_BASE = 512) is not enough.
+> >> -         */
+> >> -        offset = (dimm_cnt > (T19_BASE - T17_BASE)) ? \
+> >> -                 dimm_cnt - (T19_BASE - T17_BASE) : 0;
+> >> +    /*
+> >> +     * The offset determines if we need to keep additional space between
+> >> +     * table 17 and table 19 header handle numbers so that they do
+> >> +     * not overlap. For example, for a VM with larger than 8 TB guest
+> >> +     * memory and DIMM like chunks of 16 GiB, the default space between
+> >> +     * the two tables (T19_BASE - T17_BASE = 512) is not enough.
+> >> +     */
+> >> +    offset = (dimm_cnt > (T19_BASE - T17_BASE)) ? \
+> >> +             dimm_cnt - (T19_BASE - T17_BASE) : 0;
+> >> 
+> >> -        smbios_build_type_16_table(dimm_cnt);
+> >> +    smbios_build_type_16_table(dimm_cnt);
+> >> 
+> >> -        for (i = 0; i < dimm_cnt; i++) {
+> >> -            smbios_build_type_17_table(i, GET_DIMM_SZ);
+> >> -        }
+> >> +    for (i = 0; i < dimm_cnt; i++) {
+> >> +        smbios_build_type_17_table(i, GET_DIMM_SZ);
+> >> +    }
+> >> 
+> >> -        for (i = 0; i < mem_array_size; i++) {
+> >> -            smbios_build_type_19_table(i, offset, mem_array[i].address,
+> >> -                                       mem_array[i].length);
+> >> -        }
+> >> +    for (i = 0; i < mem_array_size; i++) {
+> >> +        smbios_build_type_19_table(i, offset, mem_array[i].address,
+> >> +                                   mem_array[i].length);
+> >> +    }
+> >> 
+> >> -        /*
+> >> -         * make sure 16 bit handle numbers in the headers of tables 19
+> >> -         * and 32 do not overlap.
+> >> -         */
+> >> -        assert((mem_array_size + offset) < (T32_BASE - T19_BASE));
+> >> +    /*
+> >> +     * make sure 16 bit handle numbers in the headers of tables 19
+> >> +     * and 32 do not overlap.
+> >> +     */
+> >> +    assert((mem_array_size + offset) < (T32_BASE - T19_BASE));
+> >> 
+> >> -        smbios_build_type_32_table();
+> >> -        smbios_build_type_38_table();
+> >> -        smbios_build_type_41_table(errp);
+> >> -        smbios_build_type_127_table();
+> >> +    smbios_build_type_32_table();
+> >> +    smbios_build_type_38_table();
+> >> +    smbios_build_type_41_table(errp);
+> >> +    smbios_build_type_127_table();
+> >> 
+> >> -        smbios_validate_table(ms->smp.sockets);
+> >> -        smbios_entry_point_setup();
+> >> -        smbios_immutable = true;
+> >> -    }
+> >> +    smbios_validate_table(ms->smp.sockets);
+> >> +    smbios_entry_point_setup();
+> >> 
+> >>     /* return tables blob and entry point (anchor), and their sizes */
+> >>     *tables = smbios_tables;
+> >> @@ -1254,13 +1281,10 @@ void smbios_entry_add(QemuOpts *opts, Error **errp)
+> >> {
+> >>     const char *val;
+> >> 
+> >> -    assert(!smbios_immutable);
+> >> -
+> >>     val = qemu_opt_get(opts, "file");
+> >>     if (val) {
+> >>         struct smbios_structure_header *header;
+> >> -        int size;
+> >> -        struct smbios_table *table; /* legacy mode only */
+> >> +        size_t size;
+> >> 
+> >>         if (!qemu_opts_validate(opts, qemu_smbios_file_opts, errp)) {
+> >>             return;
+> >> @@ -1277,9 +1301,9 @@ void smbios_entry_add(QemuOpts *opts, Error **errp)
+> >>          * (except in legacy mode, where the second '\0' is implicit and
+> >>          *  will be inserted by the BIOS).
+> >>          */
+> >> -        smbios_tables = g_realloc(smbios_tables, smbios_tables_len + size);
+> >> -        header = (struct smbios_structure_header *)(smbios_tables +
+> >> -                                                    smbios_tables_len);
+> >> +        usr_blobs = g_realloc(usr_blobs, usr_blobs_len + size);
+> >> +        header = (struct smbios_structure_header *)(usr_blobs +
+> >> +                                                    usr_blobs_len);
+> >> 
+> >>         if (load_image_size(val, (uint8_t *)header, size) != size) {
+> >>             error_setg(errp, "Failed to load SMBIOS file %s", val);
+> >> @@ -1300,34 +1324,15 @@ void smbios_entry_add(QemuOpts *opts, Error **errp)
+> >>             smbios_type4_count++;
+> >>         }
+> >> 
+> >> -        smbios_tables_len += size;
+> >> -        if (size > smbios_table_max) {
+> >> -            smbios_table_max = size;
+> >> +        if (!usr_blobs_sizes) {
+> >> +            usr_blobs_sizes = g_array_new(false, false, sizeof(size_t));
+> >>         }
+> >> -        smbios_table_cnt++;
+> >> -
+> >> -        /* add a copy of the newly loaded blob to legacy smbios_entries */
+> >> -        /* NOTE: This code runs before smbios_set_defaults(), so we don't
+> >> -         *       yet know which mode (legacy vs. aggregate-table) will be
+> >> -         *       required. We therefore add the binary blob to both legacy
+> >> -         *       (smbios_entries) and aggregate (smbios_tables) tables, and
+> >> -         *       delete the one we don't need from smbios_set_defaults(),
+> >> -         *       once we know which machine version has been requested.
+> >> -         */
+> >> -        if (!smbios_entries) {
+> >> -            smbios_entries_len = sizeof(uint16_t);
+> >> -            smbios_entries = g_malloc0(smbios_entries_len);
+> >> +        g_array_append_val(usr_blobs_sizes, size);
+> >> +        usr_blobs_len += size;
+> >> +        if (size > usr_table_max) {
+> >> +            usr_table_max = size;
+> >>         }
+> >> -        smbios_entries = g_realloc(smbios_entries, smbios_entries_len +
+> >> -                                                   size + sizeof(*table));
+> >> -        table = (struct smbios_table *)(smbios_entries + smbios_entries_len);
+> >> -        table->header.type = SMBIOS_TABLE_ENTRY;
+> >> -        table->header.length = cpu_to_le16(sizeof(*table) + size);
+> >> -        memcpy(table->data, header, size);
+> >> -        smbios_entries_len += sizeof(*table) + size;
+> >> -        (*(uint16_t *)smbios_entries) =
+> >> -                cpu_to_le16(le16_to_cpu(*(uint16_t *)smbios_entries) + 1);
+> >> -        /* end: add a copy of the newly loaded blob to legacy smbios_entries */
+> >> +        usr_table_cnt++;
+> >> 
+> >>         return;
+> >>     }
+> >> --
+> >> 2.39.3  
+> 
+> 
+
 
