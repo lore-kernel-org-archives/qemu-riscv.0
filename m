@@ -4,85 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56EF0C5475B
-	for <qemu-riscv@archiver.kernel.org>; Fri,  8 Mar 2024 11:57:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E71F7C5475B
+	for <qemu-riscv@archiver.kernel.org>; Fri,  8 Mar 2024 13:16:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1riYqU-0000SZ-0q; Fri, 08 Mar 2024 06:57:02 -0500
+	id 1ria5O-0003yG-Kn; Fri, 08 Mar 2024 08:16:30 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1riYqR-0000QX-RH
- for qemu-riscv@nongnu.org; Fri, 08 Mar 2024 06:56:59 -0500
-Received: from mail-pj1-x1034.google.com ([2607:f8b0:4864:20::1034])
+ id 1ria5I-0003xc-RE
+ for qemu-riscv@nongnu.org; Fri, 08 Mar 2024 08:16:28 -0500
+Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1riYqP-000880-U2
- for qemu-riscv@nongnu.org; Fri, 08 Mar 2024 06:56:59 -0500
-Received: by mail-pj1-x1034.google.com with SMTP id
- 98e67ed59e1d1-29ba8df0500so820980a91.0
- for <qemu-riscv@nongnu.org>; Fri, 08 Mar 2024 03:56:56 -0800 (PST)
+ id 1ria55-00087d-T6
+ for qemu-riscv@nongnu.org; Fri, 08 Mar 2024 08:16:24 -0500
+Received: by mail-pf1-x42b.google.com with SMTP id
+ d2e1a72fcca58-6e56787e691so2180734b3a.0
+ for <qemu-riscv@nongnu.org>; Fri, 08 Mar 2024 05:16:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=vrull.eu; s=google; t=1709899015; x=1710503815; darn=nongnu.org;
+ d=vrull.eu; s=google; t=1709903769; x=1710508569; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ciJX/JW8933uO3WRfae3QxoiJBeHecoR2sZBfpWJmWw=;
- b=NbDc82ltpSNsVgMPDofgqbVufp+8SQH7ZJOvUHAO2jM9ATkYzD3rJz5uJy94aJbBcR
- JvHfnBSs2cAE/HsdgugXBWGxktNDf7aN/GpnRjuSl/m54WjY9E5L9a4Wcuff7uzmwg5b
- yXm3crfeULx+Zh25J6zMWrxhxcmHayhIet2u0PLDhb/rvpraYIdoWQq/ER4S+urk4uvJ
- RdgcmuXN+6TzTtbC6sL8BAnSRXNgFA3Ehi1Rqnjw3IjAOWx+PKwZSYm6Gy4mn30YRV69
- C8OCDZUDgdCobEkrJWgOt6Je/SO5IurAB0vc4UuC3+yJOe9u8onlqEY7S0jENzXA+skd
- Ej6w==
+ bh=UDRK+4HPpXEzoHdKcxNPERnbIRLfSl3WqHvIvJ8OTJk=;
+ b=Zy1D7QzJiTADE1yk61j0njYwb/4IuW2h95ICcx6IwARM+8CzULNk6ReCz3CNQbBHar
+ tLYlvCFJqY/0HE15Tbogc+QNLhDmF8YBqPCoK9CFx4Aq2cI2dHtvHs1c6sl4Wmfp4VGV
+ BZn1A1jLHGhGcemE91jjcMHEoqSkoiMzVz8eY9s48GjySyYaBk+lBAoIKh5WI1kxLnJV
+ xyOEYdEVATeBMDqTfNX0pM7E0q+HsIaQOYJ4SqPwiTGJxzGpKOez9xacKlUnkbAskePa
+ canSfXRfOfIINGUrbY1YMpyAWVq+s3+uXgWD5fj+DJkh/07Pcguvph3Cj6YE+5xV5KNg
+ p3Mw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709899015; x=1710503815;
+ d=1e100.net; s=20230601; t=1709903769; x=1710508569;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ciJX/JW8933uO3WRfae3QxoiJBeHecoR2sZBfpWJmWw=;
- b=UTEazXsQ0LfYWIFwVw6cJM0UDVHbpfTLeOqCpc6e5vk4ca7dpuEwMGVgy/akxPw/Ct
- 6+SGSw0pVd7QpwpujmhxQi4Kxf1H1obu1asBYbKlSXbTqAsNqzheDdvToixxwkieazFR
- oh6Nv6HxIZqk1HHao6vlypUUpjkVOEao4V4Ki4U3/S/ZLEcG9LP2r5vo/JQ/xejwynKU
- XzdNYSFS5YDMdv7hdcZlGqBxXPRf+Cwq+zhn60bTW/aoxBoQh3QdYeQd2LfbkNmYq+6Y
- v7C8dmOMCLA/QC86FkiQx8tsB2u7ixV2GNzeyPFsRxQs9CKf+gs4k6b31QcokfaB7/UN
- AOhw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUj7Yfx5yWlrsqbziRJ4lE25ELg1WNUvKlZfn5xEQ5jWXykkNjRxgk35J4ztQf1okl1yTYA1PphXA6Ep+wv1U1D5UoPsmg=
-X-Gm-Message-State: AOJu0YyfmvJMVn6i/nFfGA6X9LzoXYnQ1Bt4ONCIKZxjW6c3d4+RfHfs
- Hok+SY3Pj4cP+lKt8I5TuYGjnVP/h/YRhy8Jwgf/UOvFC4f/ONqVHpTV+G5KJF6M4QYWdVkXHMG
- XXn7Xm5hrOxeGtWnTfaihsLK2W7rCxk1Kn0wDPQ==
-X-Google-Smtp-Source: AGHT+IHD1OBDr0rnESxh2VrIx7Vdt6udRoR+4K1F2wynQ7YWTUkt1mFRYwvP75736vCpQUldXKsinLcBjh8jBbpOyl8=
-X-Received: by 2002:a17:90a:f404:b0:29b:bd2c:7238 with SMTP id
- ch4-20020a17090af40400b0029bbd2c7238mr340750pjb.7.1709899015550; Fri, 08 Mar
- 2024 03:56:55 -0800 (PST)
+ bh=UDRK+4HPpXEzoHdKcxNPERnbIRLfSl3WqHvIvJ8OTJk=;
+ b=sxztQyILNrpM3vGBXz7ZsXOZyISqBJ95ZMMrMbbRE+/AnBYYgzbpoCf/s84w2mwv7/
+ Mt8rnFmieava+mfdorF7vfhMTgs8qJUYwAZ1uH43FQttolSLgREB18P3kVb6VEKDIPAH
+ EaCd1GK9eaw7WWFgQjd3fBYVvkIuqyqdbOczPieF5JwFUBzKzEeKwopRIIGnUzHy7jMH
+ uJtYeHqcVXAPC/ai4yzRTx0HwRiltVvlYaxXwiBw4BFEDEY4B3iivXip2JV/7vE/kFkF
+ F5jc27nEvmpBL67yseZCAv1CWYY84VI91vi6nyrD4B+GzI7Ga9Jf+etuESeWZrlOPICO
+ pD4Q==
+X-Gm-Message-State: AOJu0YylSkj1RejKZpOG0ykSEpWl0gz+JNL/3vZxOjdrfF6td+iCWhOx
+ yKK/OcPqeJlKD5F61VWoMZaD24wBD3hrLG1isoNAbGW3lzfrYPY3ChHbSWW8R+RXlqOgTXqktrG
+ cCaqb9B+4C+RC83rx/vFsd+T1z7CAb8wTL3LXOg==
+X-Google-Smtp-Source: AGHT+IECWl8+S1Vc9OuxxBMvqu+oATB5t64/dZcpAB6YSw5mCFwpMVrd+k2+dpcL+Dl4SV/AZx6ExPrbCV23q4tphQ4=
+X-Received: by 2002:a17:90a:fa12:b0:29b:ab15:73ed with SMTP id
+ cm18-20020a17090afa1200b0029bab1573edmr285181pjb.16.1709903769480; Fri, 08
+ Mar 2024 05:16:09 -0800 (PST)
 MIME-Version: 1.0
-References: <20240306093308.35188-1-eric.huang@linux.alibaba.com>
- <9b9c1af9-5dca-4270-8dfe-a62223c8cbbb@ventanamicro.com>
- <d86b22f7-e601-4bd0-9edc-88d84f572595@linaro.org>
- <dc9f673a-3f5a-4703-b171-b8599bdec22e@linaro.org>
-In-Reply-To: <dc9f673a-3f5a-4703-b171-b8599bdec22e@linaro.org>
+References: <20240207115926.887816-1-christoph.muellner@vrull.eu>
+ <20240207115926.887816-3-christoph.muellner@vrull.eu>
+ <CAKmqyKMZqysJWyQULpD21LVHdHKAVHc4671sVe3hqJ9Ksz9a0Q@mail.gmail.com>
+In-Reply-To: <CAKmqyKMZqysJWyQULpD21LVHdHKAVHc4671sVe3hqJ9Ksz9a0Q@mail.gmail.com>
 From: =?UTF-8?Q?Christoph_M=C3=BCllner?= <christoph.muellner@vrull.eu>
-Date: Fri, 8 Mar 2024 12:56:43 +0100
-Message-ID: <CAEg0e7hS+pntt75jmEREJaUoGfT6fpqS4M9E-aJ2LTXtiM78Pw@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Implement dynamic establishment of custom
- decoder
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Huang Tao <eric.huang@linux.alibaba.com>, 
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org, zhiwei_liu@linux.alibaba.com, 
- liwei1518@gmail.com, bin.meng@windriver.com, alistair.francis@wdc.com, 
- palmer@dabbelt.com, Philipp Tomsich <philipp.tomsich@vrull.eu>
+Date: Fri, 8 Mar 2024 14:15:58 +0100
+Message-ID: <CAEg0e7hqQ8opuNxgDx32dwQrGHX7XNiA1kQas1Urzv3aKwNgyg@mail.gmail.com>
+Subject: Re: [PATCH 2/2] linux-user/riscv: Sync hwprobe keys with Linux
+To: Alistair Francis <alistair23@gmail.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Andrew Jones <ajones@ventanamicro.com>, Laurent Vivier <laurent@vivier.eu>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1034;
- envelope-from=christoph.muellner@vrull.eu; helo=mail-pj1-x1034.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42b;
+ envelope-from=christoph.muellner@vrull.eu; helo=mail-pf1-x42b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -99,98 +96,150 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Mar 7, 2024 at 9:35=E2=80=AFPM Richard Henderson
-<richard.henderson@linaro.org> wrote:
+On Fri, Mar 8, 2024 at 5:23=E2=80=AFAM Alistair Francis <alistair23@gmail.c=
+om> wrote:
 >
-> >>> -        for (size_t i =3D 0; i < ARRAY_SIZE(decoders); ++i) {
-> >>> -            if (decoders[i].guard_func(ctx->cfg_ptr) &&
-> >>> -                decoders[i].decode_func(ctx, opcode32)) {
-> >>> +        for (size_t i =3D 0; i < decoder_table_size; ++i) {
-> >>> +            if (ctx->decoder[i](ctx, opcode32)) {
-> >>>                   return;
+> On Wed, Feb 7, 2024 at 10:00=E2=80=AFPM Christoph M=C3=BCllner
+> <christoph.muellner@vrull.eu> wrote:
+> >
+> > Upstream Linux recently added many additional keys to the hwprobe API.
+> > This patch adds support for all of them with the exception of Ztso,
+> > which is currently not supported in QEMU.
+> >
+> > Signed-off-by: Christoph M=C3=BCllner <christoph.muellner@vrull.eu>
+> > ---
+> >  linux-user/syscall.c | 98 ++++++++++++++++++++++++++++++++++++++++----
+> >  1 file changed, 91 insertions(+), 7 deletions(-)
+> >
+> > diff --git a/linux-user/syscall.c b/linux-user/syscall.c
+> > index 43467c9707..3ba20f99ad 100644
+> > --- a/linux-user/syscall.c
+> > +++ b/linux-user/syscall.c
+> > @@ -8793,13 +8793,41 @@ static int do_getdents64(abi_long dirfd, abi_lo=
+ng arg2, abi_long count)
+> >  #define     RISCV_HWPROBE_BASE_BEHAVIOR_IMA (1 << 0)
+> >
+> >  #define RISCV_HWPROBE_KEY_IMA_EXT_0     4
+> > -#define     RISCV_HWPROBE_IMA_FD       (1 << 0)
+> > -#define     RISCV_HWPROBE_IMA_C        (1 << 1)
+> > -#define     RISCV_HWPROBE_IMA_V        (1 << 2)
+> > -#define     RISCV_HWPROBE_EXT_ZBA      (1 << 3)
+> > -#define     RISCV_HWPROBE_EXT_ZBB      (1 << 4)
+> > -#define     RISCV_HWPROBE_EXT_ZBS      (1 << 5)
+> > -#define     RISCV_HWPROBE_EXT_ZICBOZ   (1 << 6)
+> > +#define                RISCV_HWPROBE_IMA_FD            (1 << 0)
+> > +#define                RISCV_HWPROBE_IMA_C             (1 << 1)
+> > +#define                RISCV_HWPROBE_IMA_V             (1 << 2)
+> > +#define                RISCV_HWPROBE_EXT_ZBA           (1 << 3)
+> > +#define                RISCV_HWPROBE_EXT_ZBB           (1 << 4)
+> > +#define                RISCV_HWPROBE_EXT_ZBS           (1 << 5)
+> > +#define                RISCV_HWPROBE_EXT_ZICBOZ        (1 << 6)
+> > +#define                RISCV_HWPROBE_EXT_ZBC           (1 << 7)
+> > +#define                RISCV_HWPROBE_EXT_ZBKB          (1 << 8)
+> > +#define                RISCV_HWPROBE_EXT_ZBKC          (1 << 9)
+> > +#define                RISCV_HWPROBE_EXT_ZBKX          (1 << 10)
+> > +#define                RISCV_HWPROBE_EXT_ZKND          (1 << 11)
+> > +#define                RISCV_HWPROBE_EXT_ZKNE          (1 << 12)
+> > +#define                RISCV_HWPROBE_EXT_ZKNH          (1 << 13)
+> > +#define                RISCV_HWPROBE_EXT_ZKSED         (1 << 14)
+> > +#define                RISCV_HWPROBE_EXT_ZKSH          (1 << 15)
+> > +#define                RISCV_HWPROBE_EXT_ZKT           (1 << 16)
+> > +#define                RISCV_HWPROBE_EXT_ZVBB          (1 << 17)
+> > +#define                RISCV_HWPROBE_EXT_ZVBC          (1 << 18)
+> > +#define                RISCV_HWPROBE_EXT_ZVKB          (1 << 19)
+> > +#define                RISCV_HWPROBE_EXT_ZVKG          (1 << 20)
+> > +#define                RISCV_HWPROBE_EXT_ZVKNED        (1 << 21)
+> > +#define                RISCV_HWPROBE_EXT_ZVKNHA        (1 << 22)
+> > +#define                RISCV_HWPROBE_EXT_ZVKNHB        (1 << 23)
+> > +#define                RISCV_HWPROBE_EXT_ZVKSED        (1 << 24)
+> > +#define                RISCV_HWPROBE_EXT_ZVKSH         (1 << 25)
+> > +#define                RISCV_HWPROBE_EXT_ZVKT          (1 << 26)
+> > +#define                RISCV_HWPROBE_EXT_ZFH           (1 << 27)
+> > +#define                RISCV_HWPROBE_EXT_ZFHMIN        (1 << 28)
+> > +#define                RISCV_HWPROBE_EXT_ZIHINTNTL     (1 << 29)
+> > +#define                RISCV_HWPROBE_EXT_ZVFH          (1 << 30)
+> > +#define                RISCV_HWPROBE_EXT_ZVFHMIN       (1 << 31)
+> > +#define                RISCV_HWPROBE_EXT_ZFA           (1ULL << 32)
+> > +#define                RISCV_HWPROBE_EXT_ZACAS         (1ULL << 34)
+> > +#define                RISCV_HWPROBE_EXT_ZICOND        (1ULL << 35)
 >
-> By the way, you're adding layers of pointer chasing, so I suspect you'll =
-find all of this
-> is a wash or worse, performance-wise.
->
->
-> Indeed, since some of the predicates are trivial, going the other way mig=
-ht help: allow
-> everything to be inlined:
->
->      if (decode_insn32(...)) {
->          return;
->      }
->      if (has_xthead_p(...) && decode_xthead(...)) {
->          return;
->      }
->      ...
->
->
-> Even if there are 10 entries here, so what?  All of the code has to be co=
-mpiled into QEMU.
->   You're not going to somehow add truly dynamic code that you've loaded f=
-rom a module.
+> This fails to pass checkpatch
 
-I just tested this with GCC -O2/-O3. The generated code from the
-existing decoder loop will
-result in exactly what you have listed here (loop unrolling,
-transforming the indirect calls
-to direct calls, inlining, and evaluation of statically known conditions).
-has_xthead_p() can get inlined as well, if the inlining costs are
-considered low enough
-(thank you, Richard, for giving some hints about that below).
+I copied 1:1 from the kernel, so I guess it is the tabs.
+Sorry for this! And as you have already fixed that: thanks!
 
-What the commit message is not mentioning (and what this patch was
-actually addressing and
-therefore should have been mentioned):
-Having dynamic control of the decoder order was meant to allow adding
-a vendor_decoder
-before decode_insn32() with minimal overhead (no guard_func) for users
-that don't need
-this particular vendor_decoder.
-
-Being more explicit: there is interest in supporting the
-non-conforming (conflicting) instruction
-extension XTheadVector:
-  https://github.com/T-head-Semi/thead-extension-spec/blob/master/xtheadvec=
-tor.adoc
-XTheadVector uses the RVV 0.7.1 draft encoding, which conflicts with
-the ratified RVV spec.
-The idea is to avoid these conflicts with a call to
-decode_xtheadvector() before decode_insn32().
-This implies that everyone has to call has_xtheadvector_p() before
-calling decode_insn32().
-And the intent of this patch is to provide a mechanism to reduce this overh=
-ead.
-
-When suggesting the dynamic decoder list, I was not aware that
-always_true_p() will be
-eliminated by the compiler. Since this is the case, I agree with the
-"wash or worse" for
-decode_insn32(). The elimination of following guard functions for
-vendor decoders is likely
-less performance relevant.
-
-I don't think we should discuss efficiency any further unless we have
-some data to
-justify any changes. E.g. emulating a RISC-V SPEC CPU 2017 run on x86_64 an=
-d
-looking at the runtimes could give the relevant insights for the
-following scenarios:
-* existing code on upstream/master
-* existing code + adding a new extension that comes before
-decode_insn32 in decoders[]
-* existing code + this patch (dynamic decoders)
-Related overheads that could be measured: adding 20 new instructions
-to decode_insn32(),
-which are not executed (to put the costs into perspective).
-
-> You could perhaps streamline predicates such as has_xthead_p to not test =
-11 variables by
-> adding an artificial "ext_xthead_any" configuration entry that is the sum=
- of all of those.
 >
+> Alistair
 >
-> r~
+> >
+> >  #define RISCV_HWPROBE_KEY_CPUPERF_0     5
+> >  #define     RISCV_HWPROBE_MISALIGNED_UNKNOWN     (0 << 0)
+> > @@ -8860,6 +8888,62 @@ static void risc_hwprobe_fill_pairs(CPURISCVStat=
+e *env,
+> >                       RISCV_HWPROBE_EXT_ZBS : 0;
+> >              value |=3D cfg->ext_zicboz ?
+> >                       RISCV_HWPROBE_EXT_ZICBOZ : 0;
+> > +            value |=3D cfg->ext_zbc ?
+> > +                     RISCV_HWPROBE_EXT_ZBC : 0;
+> > +            value |=3D cfg->ext_zbkb ?
+> > +                     RISCV_HWPROBE_EXT_ZBKB : 0;
+> > +            value |=3D cfg->ext_zbkc ?
+> > +                     RISCV_HWPROBE_EXT_ZBKC : 0;
+> > +            value |=3D cfg->ext_zbkx ?
+> > +                     RISCV_HWPROBE_EXT_ZBKX : 0;
+> > +            value |=3D cfg->ext_zknd ?
+> > +                     RISCV_HWPROBE_EXT_ZKND : 0;
+> > +            value |=3D cfg->ext_zkne ?
+> > +                     RISCV_HWPROBE_EXT_ZKNE : 0;
+> > +            value |=3D cfg->ext_zknh ?
+> > +                     RISCV_HWPROBE_EXT_ZKNH : 0;
+> > +            value |=3D cfg->ext_zksed ?
+> > +                     RISCV_HWPROBE_EXT_ZKSED : 0;
+> > +            value |=3D cfg->ext_zksh ?
+> > +                     RISCV_HWPROBE_EXT_ZKSH : 0;
+> > +            value |=3D cfg->ext_zkt ?
+> > +                     RISCV_HWPROBE_EXT_ZKT : 0;
+> > +            value |=3D cfg->ext_zvbb ?
+> > +                     RISCV_HWPROBE_EXT_ZVBB : 0;
+> > +            value |=3D cfg->ext_zvbc ?
+> > +                     RISCV_HWPROBE_EXT_ZVBC : 0;
+> > +            value |=3D cfg->ext_zvkb ?
+> > +                     RISCV_HWPROBE_EXT_ZVKB : 0;
+> > +            value |=3D cfg->ext_zvkg ?
+> > +                     RISCV_HWPROBE_EXT_ZVKG : 0;
+> > +            value |=3D cfg->ext_zvkned ?
+> > +                     RISCV_HWPROBE_EXT_ZVKNED : 0;
+> > +            value |=3D cfg->ext_zvknha ?
+> > +                     RISCV_HWPROBE_EXT_ZVKNHA : 0;
+> > +            value |=3D cfg->ext_zvknhb ?
+> > +                     RISCV_HWPROBE_EXT_ZVKNHB : 0;
+> > +            value |=3D cfg->ext_zvksed ?
+> > +                     RISCV_HWPROBE_EXT_ZVKSED : 0;
+> > +            value |=3D cfg->ext_zvksh ?
+> > +                     RISCV_HWPROBE_EXT_ZVKSH : 0;
+> > +            value |=3D cfg->ext_zvkt ?
+> > +                     RISCV_HWPROBE_EXT_ZVKT : 0;
+> > +            value |=3D cfg->ext_zfh ?
+> > +                     RISCV_HWPROBE_EXT_ZFH : 0;
+> > +            value |=3D cfg->ext_zfhmin ?
+> > +                     RISCV_HWPROBE_EXT_ZFHMIN : 0;
+> > +            value |=3D cfg->ext_zihintntl ?
+> > +                     RISCV_HWPROBE_EXT_ZIHINTNTL : 0;
+> > +            value |=3D cfg->ext_zvfh ?
+> > +                     RISCV_HWPROBE_EXT_ZVFH : 0;
+> > +            value |=3D cfg->ext_zvfhmin ?
+> > +                     RISCV_HWPROBE_EXT_ZVFHMIN : 0;
+> > +            value |=3D cfg->ext_zfa ?
+> > +                     RISCV_HWPROBE_EXT_ZFA : 0;
+> > +            value |=3D cfg->ext_zacas ?
+> > +                     RISCV_HWPROBE_EXT_ZACAS : 0;
+> > +            value |=3D cfg->ext_zicond ?
+> > +                     RISCV_HWPROBE_EXT_ZICOND : 0;
+> >              __put_user(value, &pair->value);
+> >              break;
+> >          case RISCV_HWPROBE_KEY_CPUPERF_0:
+> > --
+> > 2.43.0
+> >
+> >
 
