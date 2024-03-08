@@ -4,88 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08C69C54798
-	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Mar 2024 22:16:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89C6EC54798
+	for <qemu-riscv@archiver.kernel.org>; Fri,  8 Mar 2024 00:09:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1riM1l-00047h-Ao; Thu, 07 Mar 2024 17:15:49 -0500
+	id 1riNnT-0000RG-NQ; Thu, 07 Mar 2024 19:09:11 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <marcin.juszkiewicz@linaro.org>)
- id 1riM1k-00047R-DS
- for qemu-riscv@nongnu.org; Thu, 07 Mar 2024 17:15:48 -0500
-Received: from mail-ed1-x532.google.com ([2a00:1450:4864:20::532])
+ (Exim 4.90_1) (envelope-from <rbagley@ventanamicro.com>)
+ id 1riNnS-0000Qz-E6
+ for qemu-riscv@nongnu.org; Thu, 07 Mar 2024 19:09:10 -0500
+Received: from mail-ej1-x62f.google.com ([2a00:1450:4864:20::62f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <marcin.juszkiewicz@linaro.org>)
- id 1riM1i-0004lC-MF
- for qemu-riscv@nongnu.org; Thu, 07 Mar 2024 17:15:48 -0500
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-56759dc7ea6so1899950a12.1
- for <qemu-riscv@nongnu.org>; Thu, 07 Mar 2024 14:15:45 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <rbagley@ventanamicro.com>)
+ id 1riNnP-0000QG-Vw
+ for qemu-riscv@nongnu.org; Thu, 07 Mar 2024 19:09:10 -0500
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-a45b6fcd5e8so191004266b.1
+ for <qemu-riscv@nongnu.org>; Thu, 07 Mar 2024 16:09:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709849744; x=1710454544; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:organization:from:references
- :to:content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=zmjDmzPadsEgKKJ21Btsh2Sccjz80mxMZr2P9sopgO0=;
- b=QjTzJ236r+6Fhqx/nMY9O+IrV5nrekebe9q9oJJO5EW8JKZGPQ3NVD55mh2fklW2UY
- 7o5IcOF9JLN3JoDWX8Y4IFCU/T96e2aUx49EBZOt5HxMvJNjeK+28Sc+QhZY9VcRD7tn
- LzAMeRvwfIih3/DfOjX4KE/X6hzEfU+ldjPEsfOLgNs7GOTo75/Unu0alZWp+3Ak/Dmm
- 2czfvFCpBvymdZtRFGl3gGrR+iJHE72kaajvQNQFTzJaTmtJDaIGcvhLtuamkzqB/gVL
- y4c99trzJVhLnbtn0i+A6Ac0PkQGy3zkAZajx5ILvBMuV9q8mZy7jjLAF97H+E7Za3vw
- 7e3g==
+ d=ventanamicro.com; s=google; t=1709856545; x=1710461345; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=pe3TR0NwUpdg1B/TXCHJ6oHW6ND3GseWYhsREVxqMVs=;
+ b=VMCrwIEjWY0fc7FwZvfD+gKZ1oPgRSIIAPpnW1PCKlVwA0b8YtFjyfqg4zwK8UKbNN
+ AGMPvCB/rtOdkAoSKh/w0L1Usy/Wv3OAkuRjjiLlJ+dBFgB+qZBYKhqaEB/CfeGPs1cY
+ 3JDH+m+y3Dm0AiKVw8FvLGiexBpFCYJHAbwXtImyuDTacqwv5H01Ido4JhvykUQ7vHFG
+ iCg7dFHY2VixSPRPAI8SzTdyLukXYUWWn3hYKyN1vq0ekZEPXlXNqirVWroL4NvOoECq
+ 7ypEAHPl9xuAsnRL8FhEEXUoJSS5uQs+YD+asOabDyxtUimN5JkZS503MHgwUMCro+pR
+ qsTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709849744; x=1710454544;
- h=content-transfer-encoding:in-reply-to:organization:from:references
- :to:content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=zmjDmzPadsEgKKJ21Btsh2Sccjz80mxMZr2P9sopgO0=;
- b=bNJIxDvL+0P01RIev4KEdGBapcgyl0n2YJW57HXmPXWGxYcCTmUbTwmvB0fkinCrl6
- hXT++WPC9uVmeHVLjjUc/IpSbdP/2jEtmFxwjlgYeElDYAn9EUpwekj01IGfJ6ck1T+a
- LyYBrpG3qv57V1jWQItTtss7vOlxd0V1rp8QJzQLs8qOKqMKUFBrql46akrFQFJNNUFa
- 6sBP2YWeXs/tP4RnFhnc+8qRhTHWKP/5uquZekmWD5209pqXTB7U7S+a97HXRpsA21Ut
- 04VCxoI19rpXYPzRbnasPPPR0M2dCCnGwO8mCaMKNZxojJtVs3IwxQZ7MjDVQ/n1VAHd
- 9hpA==
+ d=1e100.net; s=20230601; t=1709856545; x=1710461345;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=pe3TR0NwUpdg1B/TXCHJ6oHW6ND3GseWYhsREVxqMVs=;
+ b=de5sTR0y9kMu2tYIdjChBTbLf073jKQ3YGt1us+aSPlSYS7JclBv1pX3oL7OYci1OP
+ T5MOONSBMS34hNVu0pr1LzP/SRxPaIouIptfH04fLzgixTvwAFgcfCCJ4nIem2XtWRXC
+ 7+BSLqEiOQQWNHpr+SWcmtjHsY+yo/BoJ/vGbwPiMixOAbU3aUguBuvYlcIBjFUSJ7Pt
+ KmsXyrDL7S8Je2KkjZ9BGlk6jkasFE0X00rD0Kv3KMti0LYJVpa7G3TJKGlLejRaWENb
+ 3VlpV6RM+JGBelj4qUR3XQIAmNqF9h2hLnZgl0pIlsbJLIvZCYXxRPS1QkenlVx9mRfb
+ IBRg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUly85cCJBzSzfzUPgy6EtDmWL3OroA6tJnAb+YaN3MDlhx6H0NBr/8cYNeuMshCp8pqdtrZh4d3sSjr4pd8ajXtr5X0Dk=
-X-Gm-Message-State: AOJu0YytpAFUhLwbCj0xCqneGEir7T5MXhdevh76zx24tyb2zCVNFqWu
- W2ZQdTNMxPLClteg0+qjYSJkCGQzze3/9ydGsE//RXXZv5uA5JVi9UU4XD0yPwQ=
-X-Google-Smtp-Source: AGHT+IHkQgAuL4F3lHzy+lEYugLu1Uzq7ctx9d1LLrPsX6l/nVXCE7uUsYL5k7Rj4s3Pl6Ct4/FVYg==
-X-Received: by 2002:a50:8d52:0:b0:565:dd45:48cb with SMTP id
- t18-20020a508d52000000b00565dd4548cbmr760982edt.4.1709849744278; 
- Thu, 07 Mar 2024 14:15:44 -0800 (PST)
-Received: from [192.168.200.106] (83.11.22.169.ipv4.supernova.orange.pl.
- [83.11.22.169]) by smtp.gmail.com with ESMTPSA id
- g3-20020a056402180300b00566ea8e9f38sm7001471edy.40.2024.03.07.14.15.42
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 07 Mar 2024 14:15:43 -0800 (PST)
-Message-ID: <ff1b2b2a-dc8e-4346-92de-bee9c4b4b31f@linaro.org>
-Date: Thu, 7 Mar 2024 23:15:41 +0100
+ AJvYcCXnv22Hn0vp910WSYWvK3uHq06cfCI9eGwIm4RzXXqtodBk+sHoaaoHeVdrNShoVhGLC3YdpRkpEfJ2LkWZhQBbDRF74oU=
+X-Gm-Message-State: AOJu0YxXGoPz7BbJrxlV0ORo7oydgdoQdFnk2e6bjQptme/TLFDtFoBt
+ 08UIlzECQxsVzS3v1MJgYzFvfXyUmgUjyyS/51oSEHwf7PaVfJG93JRdkDSouoEAKDmc/kZjg3d
+ wVtuj4BFvsqcLcwouU7w9fADXL+pN08MsB6Xk9Q==
+X-Google-Smtp-Source: AGHT+IHTlKbSylt3BOX+EMy7sUosgo2yeibWWdktuGUzi5ceo9yXR9oXlhe30D1pYKyGcbGOLaB6I6JwGNCdd15sqeM=
+X-Received: by 2002:a17:906:c00d:b0:a45:b75d:2e6d with SMTP id
+ e13-20020a170906c00d00b00a45b75d2e6dmr4878573ejz.14.1709856545019; Thu, 07
+ Mar 2024 16:09:05 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC 0/2] Add RISC-V Server Platform Reference Board
-Content-Language: pl-PL, en-GB, en-HK
-To: Fei Wu <fei2.wu@intel.com>, pbonzini@redhat.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org, andrei.warkentin@intel.com,
- shaolin.xie@alibaba-inc.com, ved@rivosinc.com, sunilvl@ventanamicro.com,
- haibo1.xu@intel.com, evan.chai@intel.com, yin.wang@intel.com,
- tech-server-platform@lists.riscv.org, tech-server-soc@lists.riscv.org
-References: <20240304102540.2789225-1-fei2.wu@intel.com>
-From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
-Organization: Linaro
-In-Reply-To: <20240304102540.2789225-1-fei2.wu@intel.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::532;
- envelope-from=marcin.juszkiewicz@linaro.org; helo=mail-ed1-x532.google.com
+References: <20230810-c9e1f2783168b48bc07a1aa2@orel>
+ <mhng-a6344a0c-8820-41b5-a015-b82b261b463d@palmer-ri-x1c9>
+ <20230810-e160f9edae60ded9d2606b8b@orel>
+ <20230811-bc15b48d336b79d9ec1f0936@orel>
+ <20230811-52e2c90dc3b91e108eb5e4e8@orel>
+In-Reply-To: <20230811-52e2c90dc3b91e108eb5e4e8@orel>
+From: Richard Bagley <rbagley@ventanamicro.com>
+Date: Thu, 7 Mar 2024 16:08:53 -0800
+Message-ID: <CAARkPA-P1U7xyLpdx+XD1M3Ji2NUfTb+88+GKUk8R2aFsOCMRw@mail.gmail.com>
+Subject: Re: [PATCH] disas/riscv: Further correction to LUI disassembly
+To: Andrew Jones <ajones@ventanamicro.com>
+Cc: Palmer Dabbelt <palmer@rivosinc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, 
+ Alistair Francis <Alistair.Francis@wdc.com>, bmeng@tinylab.org,
+ liweiwei@iscas.ac.cn, 
+ zhiwei_liu@linux.alibaba.com, dbarboza@ventanamicro.com
+Content-Type: multipart/alternative; boundary="000000000000fbaf1d06131afffe"
+Received-SPF: pass client-ip=2a00:1450:4864:20::62f;
+ envelope-from=rbagley@ventanamicro.com; helo=mail-ej1-x62f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -103,42 +97,269 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-W dniu 4.03.2024 o 11:25, Fei Wu pisze:
+--000000000000fbaf1d06131afffe
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-> The RISC-V Server Platform specification[1] defines a standardized
-> set of hardware and software capabilities, that portable system
-> software, such as OS and hypervisors can rely on being present in a
-> RISC-V server platform. This patchset provides a RISC-V Server
-> Platform (RVSP) reference implementation on qemu which is in
-> compliance with the spec as faithful as possible.
+NACK
 
-I am working on sbsa-ref which is AArch64 Standard Server Platform 
-implementation. Will not go through details of rvsp-ref but give some 
-potential hints from my work with our platform.
+We have established that the change is a workaround for a bug in
+the assembler.
+I withdraw the merge request.
 
+Thank you for this careful review.
 
-1. Consider versioning the platform.
+On Fri, Aug 11, 2023 at 4:55=E2=80=AFAM Andrew Jones <ajones@ventanamicro.c=
+om>
+wrote:
 
-We have 'platform_version'.'major/minor' exported in 
-DeviceTree-formatted data. This allows for firmware to know which of 
-non-discoverable hardware features exists and which not. We use it to 
-disable XHCI controller on older platform version.
+> On Fri, Aug 11, 2023 at 10:25:52AM +0200, Andrew Jones wrote:
+> > On Thu, Aug 10, 2023 at 06:27:50PM +0200, Andrew Jones wrote:
+> > > On Thu, Aug 10, 2023 at 09:12:42AM -0700, Palmer Dabbelt wrote:
+> > > > On Thu, 10 Aug 2023 08:31:46 PDT (-0700), ajones@ventanamicro.com
+> wrote:
+> > > > > On Mon, Jul 31, 2023 at 11:33:20AM -0700, Richard Bagley wrote:
+> > > > > > The recent commit 36df75a0a9 corrected one aspect of LUI
+> disassembly
+> > > > > > by recovering the immediate argument from the result of LUI wit=
+h
+> a
+> > > > > > shift right by 12. However, the shift right will left-fill with
+> the
+> > > > > > sign. By applying a mask we recover an unsigned representation
+> of the
+> > > > > > 20-bit field (which includes a sign bit).
+> > > > > >
+> > > > > > Example:
+> > > > > > 0xfffff000 >> 12 =3D 0xffffffff
+> > > > > > 0xfffff000 >> 12 & 0xfffff =3D 0x000fffff
+> > > > > >
+> > > > > > Fixes: 36df75a0a9 ("riscv/disas: Fix disas output of upper
+> immediates")
+> > > > > > Signed-off-by: Richard Bagley <rbagley@ventanamicro.com>
+> > > > > > ---
+> > > > > >  disas/riscv.c | 9 ++++++---
+> > > > > >  1 file changed, 6 insertions(+), 3 deletions(-)
+> > > > > >
+> > > > > > diff --git a/disas/riscv.c b/disas/riscv.c
+> > > > > > index 4023e3fc65..690eb4a1ac 100644
+> > > > > > --- a/disas/riscv.c
+> > > > > > +++ b/disas/riscv.c
+> > > > > > @@ -4723,9 +4723,12 @@ static void format_inst(char *buf, size_=
+t
+> buflen, size_t tab, rv_decode *dec)
+> > > > > >              break;
+> > > > > >          case 'U':
+> > > > > >              fmt++;
+> > > > > > -            snprintf(tmp, sizeof(tmp), "%d", dec->imm >> 12);
+> > > > > > -            append(buf, tmp, buflen);
+> > > > > > -            if (*fmt =3D=3D 'o') {
+> > > > > > +            if (*fmt =3D=3D 'i') {
+> > > > > > +                snprintf(tmp, sizeof(tmp), "%d", dec->imm >> 1=
+2
+> & 0xfffff);
+> > > > >
+> > > > > Why are we correcting LUI's output, but still outputting
+> sign-extended
+> > > > > values for AUIPC?
+> > > > >
+> > > > > We can't assemble 'auipc a1, 0xffffffff' or 'auipc a1, -1' withou=
+t
+> getting
+> > > > >
+> > > > >  Error: lui expression not in range 0..1048575
+> > > > >
+> > > > > (and additionally for 0xffffffff)
+> > > > >
+> > > > >  Error: value of 00000ffffffff000 too large for field of 4 bytes
+> at 0000000000000000
+> > > > >
+> > > > > either.
+> > > > >
+> > > > > (I see that the assembler's error messages state 'lui', but I was
+> trying
+> > > > > 'auipc'.)
+> > > > >
+> > > > > I'm using as from gnu binutils 2.40.0.20230214.
+> > > > >
+> > > > > (And, FWIW, I agree with Richard Henderson that these instruction=
+s
+> should
+> > > > > accept negative values.)
+> > > >
+> > > > I'm kind of lost here, and you saying binutils rejects this syntax?
+> If
+> > > > that's the case it's probably just an oversight, can you file a bug
+> in
+> > > > binutils land so folks can see?
+> > >
+> > > Will do.
+> > >
+> >
+> > https://sourceware.org/bugzilla/show_bug.cgi?id=3D30746
+> >
+>
+> But, to try to bring this thread back to the patch under review. While th=
+e
+> binutils BZ may address our preferred way of providing immediates to the
+> assembler, this patch is trying to make QEMU's output consistent with
+> objdump. Since objdump always outputs long immediate values as hex, then
+> it doesn't need to care about negative signs. QEMU seems to prefer
+> decimal, though, and so does llvm-objdump, which outputs values for these
+> instructions in the range 0..1048575. So, I guess this patch is making
+> QEMU consistent with llvm-objdump.
+>
+> Back to making suggestions for this patch...
+>
+> 1. The commit message should probably say something along the lines of
+>    what I just wrote in the preceding paragraph to better explain the
+>    motivation.
+>
+> 2. Unless I'm missing something, then this patch should also address
+>    AUIPC.
+>
+> Thanks,
+> drew
+>
 
+--000000000000fbaf1d06131afffe
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-2. If specification allows to have non-discoverable devices then add some.
+<div dir=3D"ltr">NACK<br><br>We have established that the change is a worka=
+round for a=C2=A0bug in the=C2=A0assembler.<br>I withdraw the=C2=A0merge re=
+quest.<br><br>Thank=C2=A0you for this careful review.</div><br><div class=
+=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Fri, Aug 11, 2023=
+ at 4:55=E2=80=AFAM Andrew Jones &lt;<a href=3D"mailto:ajones@ventanamicro.=
+com">ajones@ventanamicro.com</a>&gt; wrote:<br></div><blockquote class=3D"g=
+mail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204=
+,204,204);padding-left:1ex">On Fri, Aug 11, 2023 at 10:25:52AM +0200, Andre=
+w Jones wrote:<br>
+&gt; On Thu, Aug 10, 2023 at 06:27:50PM +0200, Andrew Jones wrote:<br>
+&gt; &gt; On Thu, Aug 10, 2023 at 09:12:42AM -0700, Palmer Dabbelt wrote:<b=
+r>
+&gt; &gt; &gt; On Thu, 10 Aug 2023 08:31:46 PDT (-0700), <a href=3D"mailto:=
+ajones@ventanamicro.com" target=3D"_blank">ajones@ventanamicro.com</a> wrot=
+e:<br>
+&gt; &gt; &gt; &gt; On Mon, Jul 31, 2023 at 11:33:20AM -0700, Richard Bagle=
+y wrote:<br>
+&gt; &gt; &gt; &gt; &gt; The recent commit 36df75a0a9 corrected one aspect =
+of LUI disassembly<br>
+&gt; &gt; &gt; &gt; &gt; by recovering the immediate argument from the resu=
+lt of LUI with a<br>
+&gt; &gt; &gt; &gt; &gt; shift right by 12. However, the shift right will l=
+eft-fill with the<br>
+&gt; &gt; &gt; &gt; &gt; sign. By applying a mask we recover an unsigned re=
+presentation of the<br>
+&gt; &gt; &gt; &gt; &gt; 20-bit field (which includes a sign bit).<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; &gt; Example:<br>
+&gt; &gt; &gt; &gt; &gt; 0xfffff000 &gt;&gt; 12 =3D 0xffffffff<br>
+&gt; &gt; &gt; &gt; &gt; 0xfffff000 &gt;&gt; 12 &amp; 0xfffff =3D 0x000ffff=
+f<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; &gt; Fixes: 36df75a0a9 (&quot;riscv/disas: Fix disas ou=
+tput of upper immediates&quot;)<br>
+&gt; &gt; &gt; &gt; &gt; Signed-off-by: Richard Bagley &lt;<a href=3D"mailt=
+o:rbagley@ventanamicro.com" target=3D"_blank">rbagley@ventanamicro.com</a>&=
+gt;<br>
+&gt; &gt; &gt; &gt; &gt; ---<br>
+&gt; &gt; &gt; &gt; &gt;=C2=A0 disas/riscv.c | 9 ++++++---<br>
+&gt; &gt; &gt; &gt; &gt;=C2=A0 1 file changed, 6 insertions(+), 3 deletions=
+(-)<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; &gt; diff --git a/disas/riscv.c b/disas/riscv.c<br>
+&gt; &gt; &gt; &gt; &gt; index 4023e3fc65..690eb4a1ac 100644<br>
+&gt; &gt; &gt; &gt; &gt; --- a/disas/riscv.c<br>
+&gt; &gt; &gt; &gt; &gt; +++ b/disas/riscv.c<br>
+&gt; &gt; &gt; &gt; &gt; @@ -4723,9 +4723,12 @@ static void format_inst(cha=
+r *buf, size_t buflen, size_t tab, rv_decode *dec)<br>
+&gt; &gt; &gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 br=
+eak;<br>
+&gt; &gt; &gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 case &#39;U&#39;=
+:<br>
+&gt; &gt; &gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 fm=
+t++;<br>
+&gt; &gt; &gt; &gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 snprint=
+f(tmp, sizeof(tmp), &quot;%d&quot;, dec-&gt;imm &gt;&gt; 12);<br>
+&gt; &gt; &gt; &gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 append(=
+buf, tmp, buflen);<br>
+&gt; &gt; &gt; &gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (*fm=
+t =3D=3D &#39;o&#39;) {<br>
+&gt; &gt; &gt; &gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (*fm=
+t =3D=3D &#39;i&#39;) {<br>
+&gt; &gt; &gt; &gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 snprintf(tmp, sizeof(tmp), &quot;%d&quot;, dec-&gt;imm &gt;&gt; 12 &=
+amp; 0xfffff);<br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; Why are we correcting LUI&#39;s output, but still outpu=
+tting sign-extended<br>
+&gt; &gt; &gt; &gt; values for AUIPC?<br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; We can&#39;t assemble &#39;auipc a1, 0xffffffff&#39; or=
+ &#39;auipc a1, -1&#39; without getting<br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt;=C2=A0 Error: lui expression not in range 0..1048575<br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; (and additionally for 0xffffffff)<br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt;=C2=A0 Error: value of 00000ffffffff000 too large for fi=
+eld of 4 bytes at 0000000000000000<br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; either.<br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; (I see that the assembler&#39;s error messages state &#=
+39;lui&#39;, but I was trying<br>
+&gt; &gt; &gt; &gt; &#39;auipc&#39;.)<br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; I&#39;m using as from gnu binutils 2.40.0.20230214.<br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; (And, FWIW, I agree with Richard Henderson that these i=
+nstructions should<br>
+&gt; &gt; &gt; &gt; accept negative values.)<br>
+&gt; &gt; &gt; <br>
+&gt; &gt; &gt; I&#39;m kind of lost here, and you saying binutils rejects t=
+his syntax?=C2=A0 If<br>
+&gt; &gt; &gt; that&#39;s the case it&#39;s probably just an oversight, can=
+ you file a bug in<br>
+&gt; &gt; &gt; binutils land so folks can see?<br>
+&gt; &gt; <br>
+&gt; &gt; Will do.<br>
+&gt; &gt;<br>
+&gt; <br>
+&gt; <a href=3D"https://sourceware.org/bugzilla/show_bug.cgi?id=3D30746" re=
+l=3D"noreferrer" target=3D"_blank">https://sourceware.org/bugzilla/show_bug=
+.cgi?id=3D30746</a><br>
+&gt;<br>
+<br>
+But, to try to bring this thread back to the patch under review. While the<=
+br>
+binutils BZ may address our preferred way of providing immediates to the<br=
+>
+assembler, this patch is trying to make QEMU&#39;s output consistent with<b=
+r>
+objdump. Since objdump always outputs long immediate values as hex, then<br=
+>
+it doesn&#39;t need to care about negative signs. QEMU seems to prefer<br>
+decimal, though, and so does llvm-objdump, which outputs values for these<b=
+r>
+instructions in the range 0..1048575. So, I guess this patch is making<br>
+QEMU consistent with llvm-objdump.<br>
+<br>
+Back to making suggestions for this patch...<br>
+<br>
+1. The commit message should probably say something along the lines of<br>
+=C2=A0 =C2=A0what I just wrote in the preceding paragraph to better explain=
+ the<br>
+=C2=A0 =C2=A0motivation.<br>
+<br>
+2. Unless I&#39;m missing something, then this patch should also address<br=
+>
+=C2=A0 =C2=A0AUIPC.<br>
+<br>
+Thanks,<br>
+drew<br>
+</blockquote></div>
 
-This will require you to handle them in firmware in some way. Sooner or 
-later some physical hardware will be in same situation so they can use 
-your firmware code as reference. We have AHCI and XHCI on system bus 
-(hardcoded in firmware).
-
-
-3. You are going to use EDK2 with ACPI. Hide DT from code there with 
-some hardware information library.
-
-For sbsa-ref we created SbsaHardwareInfoLib in 
-https://openfw.io/edk2-devel/20240306-no-dt-for-cpu-v6-0-acd8727a1b59@linaro.org/ 
-patchset.
-
-
+--000000000000fbaf1d06131afffe--
 
