@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7076C54E5D
-	for <qemu-riscv@archiver.kernel.org>; Sat,  9 Mar 2024 20:45:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB47CC54791
+	for <qemu-riscv@archiver.kernel.org>; Sat,  9 Mar 2024 20:46:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rj3YR-0005o8-Aq; Sat, 09 Mar 2024 15:44:27 -0500
+	id 1rj3Y7-0005hs-9K; Sat, 09 Mar 2024 15:44:07 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rj3YO-0005n2-Gz
- for qemu-riscv@nongnu.org; Sat, 09 Mar 2024 15:44:25 -0500
-Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
+ id 1rj3Y4-0005fl-Ge
+ for qemu-riscv@nongnu.org; Sat, 09 Mar 2024 15:44:04 -0500
+Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rj3YM-0006iw-LP
- for qemu-riscv@nongnu.org; Sat, 09 Mar 2024 15:44:24 -0500
-Received: by mail-pf1-x433.google.com with SMTP id
- d2e1a72fcca58-6e5760eeb7aso2415125b3a.1
- for <qemu-riscv@nongnu.org>; Sat, 09 Mar 2024 12:44:22 -0800 (PST)
+ id 1rj3Y2-0006WY-8i
+ for qemu-riscv@nongnu.org; Sat, 09 Mar 2024 15:44:04 -0500
+Received: by mail-pf1-x432.google.com with SMTP id
+ d2e1a72fcca58-6d9f94b9186so3031408b3a.0
+ for <qemu-riscv@nongnu.org>; Sat, 09 Mar 2024 12:44:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1710017061; x=1710621861; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1710017041; x=1710621841; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=M1pgxbL4ext+eLfj8GE9V3VngjTMGW2LA/FcQ0QZgQg=;
- b=BZ8KUSPgzfvzxcBIpX9wmHGhmIBRrPY3lx1aU8Co4D3Dq/aw/F7/QLcAOzxiTMSW1H
- 8vPGwune0jwapeOFMq+Yw69a9/k7XYOxuInznmmHEdrlI2RQnw9xDEbzYSjTMAm6Zm4W
- 7sZ8wvd8obj44ad+WvcXSR1DdwHtSS3MXb9tOFbAJQX9e7zPxc+0PJNSdnBSCtmRTg0Z
- iU6ajRjSLeGvPChDRQgxgSqXOW7Ti6ZvOqiNgV3PfnmGH0cT+YXw99hCpd/y018u+88F
- 1bbkqy1jM1bu6+aijjfKAvYFmpJBcM17j2grbJm/Y7n1TUj5SCjfXPFudEKGX4Cki3ig
- KDLw==
+ bh=p/ejtrzarPrG0PNfpEFunidUoSZrIjXAq7l/f+eMwmY=;
+ b=cFbb8WhLPclgiY0b7aQkGMOcggiaxreGUt5A8b1vXm8krp0GlfSXzOosTeXUvoxwZ8
+ 1CUILjg2IuiIGQEPDOVuKerILMpAJkVOb8SD671Z/G5oaAVHf3aUws71rB8J9FUIGTz6
+ JszyRD+9tk285mQQb4QEaBQgFS1oI0boD68zgluRcG2H+4IKdgIFYCmNDeJHvebq2xRX
+ TgbAf2bd0Pbg6zD7aPwnOA0RlfoBr2Bl0Cdv3NjTvI9m6vOH9oyYnd6D4ziStnQRhQPP
+ HldUKnaviVhYC85T9W0savUN0Hrkl4IvaW+yS63od2pZ3DhFrl3Jvhxq6gCFz4Q8ojUc
+ Rzgg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710017061; x=1710621861;
+ d=1e100.net; s=20230601; t=1710017041; x=1710621841;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=M1pgxbL4ext+eLfj8GE9V3VngjTMGW2LA/FcQ0QZgQg=;
- b=bNsw7xLFgNkp6DzVukIo3iqPjTLIzw8RPWE+8eDqs9i1rJhjSx6Lm9K2AKQIbXvYKY
- ZoNf10lvnJivqhDCUsdizYVumouiJSmJgk2ghGxLHFph6eTcdNetvLhYbgRQxQk37WJV
- sy11AeV87Lxc2CUfJdrjm47wiipZxgW26UuztIUNvE2hjaggzxeu5tcR6UrWYRfUVsAY
- 2Xp6dILHZR/CEIWmwlyS+QHInVGMJd0WnEqVxwmPXHxdf/ZhKByiyB3K5tzJPRTOSdVZ
- lNRQWhc5iTNF+sFJMWxho29HOPWaSENgSht9223K4+uxVXnIqeC5IDBXsYPlj386QUL1
- yacA==
-X-Gm-Message-State: AOJu0Yzc9C9qhri0uvhTdo4sf7ANArOPHYOFKzKvyz9TUBaHIygDTqts
- 50xEQ39NtLz9JFNadhnYX1e39JvMboy35+s884sRE4ZO/IWpCvOeJQZ4e2rMC1g=
-X-Google-Smtp-Source: AGHT+IFqnGUk9wWKd4jePVq2tt3U/ZFupM25OWhKgLeyRHYZirSJkVfhDyK5jIA0VWiaHCg3EJvghA==
-X-Received: by 2002:a05:6a00:6616:b0:6e6:47f6:eb30 with SMTP id
- he22-20020a056a00661600b006e647f6eb30mr2780106pfb.22.1710017061199; 
- Sat, 09 Mar 2024 12:44:21 -0800 (PST)
+ bh=p/ejtrzarPrG0PNfpEFunidUoSZrIjXAq7l/f+eMwmY=;
+ b=IFn1GENMiFjuxiZGZMkwZhWSARnkHyx1aV5AH3TcC8OlfLRVNnEd0DG/Kyt1PRvOcT
+ AZ20deIXofGFfbZysVaI6eJ+2IMudE8jfpBomBdvpNo9Qrb2THHZurhoG18dh2I5/qk8
+ HjKEhUJ6Xkp2L1mt3bFjj6f3ja4BJl0bTlqeBf0NzvpB0hPk0o5GtC8LFfxNtsZ4ueSr
+ u4FBfGo+7YLNvL7BWkkK9ew4acJObHBQFQoTksljUJNGUGiKQNCtP7MmNJCNGfT7E70U
+ G+IhtO6tyWVgD2ihtgbVL9t4wYHn2Kt5Ad/mpaJkOcjwNqqVh6S8uw2OdlPsK5zQHMRu
+ EDxQ==
+X-Gm-Message-State: AOJu0Yxk+tXub7R1SE3K0gvPQnRN1hd7frAW7pe3OTAh5VIPcJUcyIju
+ puuHkHUOPnaXcYJhsTaoYOPKYWUpXGVNIUEBshz9kjjF4BfgSM8WOuq2Gj80PQE=
+X-Google-Smtp-Source: AGHT+IGJG/Zbmsx4FW7I0WxXPOtERhpY3LKM17mZSDGmQXR1SknHDOmPMKsdYUbuuoKxsoSQXCGAQg==
+X-Received: by 2002:a05:6a00:c95:b0:6e6:3406:26d3 with SMTP id
+ a21-20020a056a000c9500b006e6340626d3mr4909450pfv.4.1710017040968; 
+ Sat, 09 Mar 2024 12:44:00 -0800 (PST)
 Received: from grind.. ([177.94.15.159]) by smtp.gmail.com with ESMTPSA id
- ey15-20020a056a0038cf00b006e647716b6esm1656270pfb.149.2024.03.09.12.44.18
+ ey15-20020a056a0038cf00b006e647716b6esm1656270pfb.149.2024.03.09.12.43.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 Mar 2024 12:44:20 -0800 (PST)
+ Sat, 09 Mar 2024 12:44:00 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  richard.henderson@linaro.org, philmd@linaro.org,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v9 08/10] trans_rvv.c.inc: remove redundant mark_vs_dirty()
- calls
-Date: Sat,  9 Mar 2024 17:43:43 -0300
-Message-ID: <20240309204347.174251-9-dbarboza@ventanamicro.com>
+Subject: [PATCH v9 02/10] target/riscv: handle vstart >= vl in
+ vext_set_tail_elems_1s()
+Date: Sat,  9 Mar 2024 17:43:37 -0300
+Message-ID: <20240309204347.174251-3-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240309204347.174251-1-dbarboza@ventanamicro.com>
 References: <20240309204347.174251-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x433.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x432.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -97,76 +97,172 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-trans_vmv_v_i , trans_vfmv_v_f and the trans_##NAME macro from
-GEN_VMV_WHOLE_TRANS() are calling mark_vs_dirty() in both branches of
-their 'ifs'. conditionals.
+We're going to make changes that will required each helper to be
+responsible for the 'vstart' management, i.e. we will relieve the
+'vstart < vl' assumption that helpers have today.
 
-Call it just once in the end like other functions are doing.
+To do that we'll need to deal with how we're updating tail elements
+first. We can't update them if vstart >= vl, but at this moment we're
+not guarding for it.
+
+We have the vext_set_tail_elems_1s() helper to update tail elements.
+Change it to accept an 'env' pointer, where we can read both vstart and
+vl, and make it a no-op if vstart >= vl. Note that callers will need to
+set env->start = 0 *after* the helper from now on.
+
+The exception are three helpers: vext_ldst_stride(), vext_ldst_us() and
+vext_ldst_index(). They are are incrementing env->vstart during
+execution and will end up with env->vstart = vl when tail updating. For
+these cases only, do an early check and exit if vstart >= vl, and set
+env->vstart = 0 before updating the tail.
+
+For everyone else we'll do vext_set_tail_elems_1s() and then clear
+env->vstart. This is the case of vext_ldff() that is already using
+set_tail_elems_1s(), and will be the case for the rest after the next
+patches.
+
+Let's also simplify the API a little by removing the 'nf' argument since
+it can be derived from 'desc'.
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/riscv/insn_trans/trans_rvv.c.inc | 11 +++--------
- 1 file changed, 3 insertions(+), 8 deletions(-)
+ target/riscv/vector_helper.c | 59 ++++++++++++++++++++++++++++++------
+ 1 file changed, 49 insertions(+), 10 deletions(-)
 
-diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index 4c1a064cf6..b0f19dcd85 100644
---- a/target/riscv/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -2065,7 +2065,6 @@ static bool trans_vmv_v_i(DisasContext *s, arg_vmv_v_i *a)
-         if (s->vl_eq_vlmax && !(s->vta && s->lmul < 0)) {
-             tcg_gen_gvec_dup_imm(s->sew, vreg_ofs(s, a->rd),
-                                  MAXSZ(s), MAXSZ(s), simm);
--            mark_vs_dirty(s);
-         } else {
-             TCGv_i32 desc;
-             TCGv_i64 s1;
-@@ -2083,9 +2082,8 @@ static bool trans_vmv_v_i(DisasContext *s, arg_vmv_v_i *a)
-                                               s->cfg_ptr->vlenb, data));
-             tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, a->rd));
-             fns[s->sew](dest, s1, tcg_env, desc);
--
--            mark_vs_dirty(s);
-         }
-+        mark_vs_dirty(s);
-         return true;
-     }
-     return false;
-@@ -2612,7 +2610,6 @@ static bool trans_vfmv_v_f(DisasContext *s, arg_vfmv_v_f *a)
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index ca79571ae2..a3b496b6e9 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -174,19 +174,32 @@ GEN_VEXT_ST_ELEM(ste_h, int16_t, H2, stw)
+ GEN_VEXT_ST_ELEM(ste_w, int32_t, H4, stl)
+ GEN_VEXT_ST_ELEM(ste_d, int64_t, H8, stq)
  
-             tcg_gen_gvec_dup_i64(s->sew, vreg_ofs(s, a->rd),
-                                  MAXSZ(s), MAXSZ(s), t1);
--            mark_vs_dirty(s);
-         } else {
-             TCGv_ptr dest;
-             TCGv_i32 desc;
-@@ -2635,9 +2632,8 @@ static bool trans_vfmv_v_f(DisasContext *s, arg_vfmv_v_f *a)
-             tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, a->rd));
+-static void vext_set_tail_elems_1s(target_ulong vl, void *vd,
+-                                   uint32_t desc, uint32_t nf,
+-                                   uint32_t esz, uint32_t max_elems)
++/*
++ * This function is sensitive to env->vstart changes since
++ * it'll be a no-op if vstart >= vl. Do not clear env->vstart
++ * before calling it unless you're certain that vstart < vl.
++ */
++static void vext_set_tail_elems_1s(CPURISCVState *env, void *vd,
++                                   uint32_t desc, uint32_t esz,
++                                   uint32_t max_elems)
+ {
+     uint32_t vta = vext_vta(desc);
++    uint32_t nf = vext_nf(desc);
+     int k;
  
-             fns[s->sew - 1](dest, t1, tcg_env, desc);
--
--            mark_vs_dirty(s);
-         }
-+        mark_vs_dirty(s);
-         return true;
+-    if (vta == 0) {
++    /*
++     * Section 5.4 of the RVV spec mentions:
++     * "When vstart ≥ vl, there are no body elements, and no
++     *  elements are updated in any destination vector register
++     *  group, including that no tail elements are updated
++     *  with agnostic values."
++     */
++    if (vta == 0 || env->vstart >= env->vl) {
+         return;
      }
-     return false;
-@@ -3560,12 +3556,11 @@ static bool trans_##NAME(DisasContext *s, arg_##NAME * a)               \
-         if (s->vstart_eq_zero) {                                        \
-             tcg_gen_gvec_mov(s->sew, vreg_ofs(s, a->rd),                \
-                              vreg_ofs(s, a->rs2), maxsz, maxsz);        \
--            mark_vs_dirty(s);                                           \
-         } else {                                                        \
-             tcg_gen_gvec_2_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, a->rs2), \
-                                tcg_env, maxsz, maxsz, 0, gen_helper_vmvr_v); \
--            mark_vs_dirty(s);                                           \
-         }                                                               \
-+        mark_vs_dirty(s);                                               \
-         return true;                                                    \
-     }                                                                   \
-     return false;                                                       \
+ 
+     for (k = 0; k < nf; ++k) {
+-        vext_set_elems_1s(vd, vta, (k * max_elems + vl) * esz,
++        vext_set_elems_1s(vd, vta, (k * max_elems + env->vl) * esz,
+                           (k * max_elems + max_elems) * esz);
+     }
+ }
+@@ -207,6 +220,11 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base,
+     uint32_t esz = 1 << log2_esz;
+     uint32_t vma = vext_vma(desc);
+ 
++    if (env->vstart >= env->vl) {
++        env->vstart = 0;
++        return;
++    }
++
+     for (i = env->vstart; i < env->vl; i++, env->vstart++) {
+         k = 0;
+         while (k < nf) {
+@@ -222,9 +240,13 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base,
+             k++;
+         }
+     }
++    /*
++     * Set vstart before tail update - vstart changed during
++     * execution and we already checked that vstart < vl.
++     */
+     env->vstart = 0;
+ 
+-    vext_set_tail_elems_1s(env->vl, vd, desc, nf, esz, max_elems);
++    vext_set_tail_elems_1s(env, vd, desc, esz, max_elems);
+ }
+ 
+ #define GEN_VEXT_LD_STRIDE(NAME, ETYPE, LOAD_FN)                        \
+@@ -272,6 +294,11 @@ vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
+     uint32_t max_elems = vext_max_elems(desc, log2_esz);
+     uint32_t esz = 1 << log2_esz;
+ 
++    if (env->vstart >= env->vl) {
++        env->vstart = 0;
++        return;
++    }
++
+     /* load bytes from guest memory */
+     for (i = env->vstart; i < evl; i++, env->vstart++) {
+         k = 0;
+@@ -281,9 +308,13 @@ vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
+             k++;
+         }
+     }
++    /*
++     * Set vstart before tail update - vstart changed during
++     * execution and we already checked that vstart < vl.
++     */
+     env->vstart = 0;
+ 
+-    vext_set_tail_elems_1s(evl, vd, desc, nf, esz, max_elems);
++    vext_set_tail_elems_1s(env, vd, desc, esz, max_elems);
+ }
+ 
+ /*
+@@ -386,6 +417,11 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
+     uint32_t esz = 1 << log2_esz;
+     uint32_t vma = vext_vma(desc);
+ 
++    if (env->vstart >= env->vl) {
++        env->vstart = 0;
++        return;
++    }
++
+     /* load bytes from guest memory */
+     for (i = env->vstart; i < env->vl; i++, env->vstart++) {
+         k = 0;
+@@ -402,9 +438,13 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
+             k++;
+         }
+     }
++    /*
++     * Set vstart before tail update - vstart changed during
++     * execution and we already checked that vstart < vl.
++     */
+     env->vstart = 0;
+ 
+-    vext_set_tail_elems_1s(env->vl, vd, desc, nf, esz, max_elems);
++    vext_set_tail_elems_1s(env, vd, desc, esz, max_elems);
+ }
+ 
+ #define GEN_VEXT_LD_INDEX(NAME, ETYPE, INDEX_FN, LOAD_FN)                  \
+@@ -532,9 +572,8 @@ ProbeSuccess:
+             k++;
+         }
+     }
++    vext_set_tail_elems_1s(env, vd, desc, esz, max_elems);
+     env->vstart = 0;
+-
+-    vext_set_tail_elems_1s(env->vl, vd, desc, nf, esz, max_elems);
+ }
+ 
+ #define GEN_VEXT_LDFF(NAME, ETYPE, LOAD_FN)               \
 -- 
 2.43.2
 
