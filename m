@@ -4,90 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F6C7C54798
-	for <qemu-riscv@archiver.kernel.org>; Sat,  9 Mar 2024 12:02:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28338C54798
+	for <qemu-riscv@archiver.kernel.org>; Sat,  9 Mar 2024 18:05:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rivOf-0006Ji-Qo; Sat, 09 Mar 2024 07:01:49 -0500
+	id 1rj14S-00039R-Hc; Sat, 09 Mar 2024 13:05:20 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1rivOd-0006Iq-KA
- for qemu-riscv@nongnu.org; Sat, 09 Mar 2024 07:01:47 -0500
-Received: from mail-ed1-x52a.google.com ([2a00:1450:4864:20::52a])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1rj14O-00038r-Sq
+ for qemu-riscv@nongnu.org; Sat, 09 Mar 2024 13:05:17 -0500
+Received: from mail-pg1-x535.google.com ([2607:f8b0:4864:20::535])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1rivOc-00031t-1e
- for qemu-riscv@nongnu.org; Sat, 09 Mar 2024 07:01:47 -0500
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-55a5e7fa471so2052912a12.1
- for <qemu-riscv@nongnu.org>; Sat, 09 Mar 2024 04:01:44 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1rj14L-0006tQ-IS
+ for qemu-riscv@nongnu.org; Sat, 09 Mar 2024 13:05:16 -0500
+Received: by mail-pg1-x535.google.com with SMTP id
+ 41be03b00d2f7-5e4f79007ffso600538a12.2
+ for <qemu-riscv@nongnu.org>; Sat, 09 Mar 2024 10:05:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1709985704; x=1710590504; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=RJqc3GVHJNhinJapfRd05vALzWAJlTFCioGI0MWgKzc=;
- b=cyLx2cEagYfZmi4mfB37w0mBr5RQLOF1gDiq+oKM/X2DZThtcuYQYDvHDpVKA/F8vn
- Pboy3pbJD/IPLuBCINL0VdaVEaUc2+Y4vup/dSkf5yrRRf0uV8t9miR4LZbL8hinFJv+
- ScjS0EsxutRa9MbqlZ6UExBeQC8DnRuyUlbt9amGHq0hx5CVRtuyM1L5uCF5uLrtuCjo
- 3A0GuRjsPzFoj8utQcxJiOixza+gbdeTq7XdK2FrnluwKoANoYCfYh85r+L5valYDDUn
- ZBRNm2M0HCtKuH46bEwOWmHbLt7iZPf4b7iEXNsnfRlkm9WPK6JeK8TyI5inplEHrVVc
- Q8Nw==
+ d=linaro.org; s=google; t=1710007509; x=1710612309; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Tni9d/HuC2dhmeHV1PA6VdgaMUsYq9VIjRAdiwF/iYI=;
+ b=r1lbADEy65KBbxucDsEFnWKUnQfIwYW/3fKuP4lYgNlOcpvjEssrEUgMMhRoBxzegs
+ 3YX4MOqAo3S0mpBeSnfm/nJiXZj7n09veV4CX8o2DvzPky4+P8mQWsSYLl1D6rw5myER
+ WKNmn/mX1IdVpBWeeAYUExPX2JWgT0IFdiEahnW1be9spuBl0+KaBcq+UjlZRee5ZjkC
+ 4fYBu3MYcs9668Ozl6O5ugIhbmvQE5knp1ZinWlfgJ9WhyH9nht38YDovsssAvrwhg2y
+ 1UitR1qxJ5fYqti26zcMFxjPCHXI2yGL3LM0ThmT6Ccup0vFGL2Vr8hVT9F+GyPFaUY2
+ jmGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709985704; x=1710590504;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RJqc3GVHJNhinJapfRd05vALzWAJlTFCioGI0MWgKzc=;
- b=wqrU9POKUijn/7ybCsjb4kYalFx+Rz5ttL27/OmSeEVXn3EY9R2D38NVgjZCiPIP34
- ipK6c7UvGWiPtYl7GVGoH0QNH3IF1vr1xYbzt8g+NN6n1lfL0iKgjfAXEj3stLTMZbeo
- Nj3WgdHJyCkWaTeeAyIDqfL0NYb3cGUPkM8l8pe5XbyhuTeE5OL5kj0d/fjW0u0ZJslc
- VmJgM5p02+92uram74fXkJ+Uzljmy2pzMId5jqKqzBo/nPSf+OK/nz3YX6qorDWEBJHi
- FdjZyYN4KlC+N33loCFmz/Z5yusW3ubnG4rVK2HoVv3tH/DYzii9e/mStfYtJ/fVnPrx
- oeaA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXY3pwekXw1cLfepwh93ZJOJsfL09c0Lb782z/QKsFr0omt1DeiJmH3fouAN09ociD0RjB601JN7VZFCBRgEPlQFJzD8pQ=
-X-Gm-Message-State: AOJu0YxkEn07A3ICncLZh8dJhR3HtsaQgWLY8fGExr2DG//aX6ZVsqox
- nByRFUNce4V6T/rna80ZHkBuJKty81UzAjxJ4lJ2tGb4T3/rmcUKjE/jxbzC3V0=
-X-Google-Smtp-Source: AGHT+IEDSOSVCuoeolmQ50TK9YE2xZ8nTwcSl3/X5EjvSAuecZAGLp4x3E9QSi1uLGwnSNCY6mn9yA==
-X-Received: by 2002:a50:f681:0:b0:566:c388:ceb4 with SMTP id
- d1-20020a50f681000000b00566c388ceb4mr1268630edn.28.1709985703676; 
- Sat, 09 Mar 2024 04:01:43 -0800 (PST)
-Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
- by smtp.gmail.com with ESMTPSA id
- 9-20020a0564021f4900b00567e27c72c4sm798372edz.62.2024.03.09.04.01.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 Mar 2024 04:01:42 -0800 (PST)
-Date: Sat, 9 Mar 2024 13:01:36 +0100
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Richard Bagley <rbagley@ventanamicro.com>
-Cc: Palmer Dabbelt <palmer@rivosinc.com>, qemu-devel@nongnu.org, 
- qemu-riscv@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>,
- bmeng@tinylab.org, 
- liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, dbarboza@ventanamicro.com
-Subject: Re: [PATCH] disas/riscv: Further correction to LUI disassembly
-Message-ID: <20240309-ee813e971e7c5850d652b295@orel>
-References: <20230810-c9e1f2783168b48bc07a1aa2@orel>
- <mhng-a6344a0c-8820-41b5-a015-b82b261b463d@palmer-ri-x1c9>
- <20230810-e160f9edae60ded9d2606b8b@orel>
- <20230811-bc15b48d336b79d9ec1f0936@orel>
- <20230811-52e2c90dc3b91e108eb5e4e8@orel>
- <CAARkPA-P1U7xyLpdx+XD1M3Ji2NUfTb+88+GKUk8R2aFsOCMRw@mail.gmail.com>
- <CAARkPA-dOxOWsR0VS+S8p4fDmNR5X5Jjmo5pQTaurWLYsc9vsw@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1710007509; x=1710612309;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Tni9d/HuC2dhmeHV1PA6VdgaMUsYq9VIjRAdiwF/iYI=;
+ b=AQsw05+GZnByOKhlvVJdXeGByZ/nFizwqDlRTz1upHiRPFA8Iufy1uTfTEzl5YQzlb
+ QmQZ6vqEMjz8jzA4L85ZebTO6QjIBhSFI36Ibzh+nL9LK4QijO5agR0ngH2MYyj8EBHF
+ Xhn2rER2MSgrxb1BsGEO2zlg4aBwKHTT58kK7qgNlBly5IrNN0OSvzuaT5A4C/siLyG3
+ HVZdyABXbQymYDVNlcUg5ElXtmXC4Hdx5DE08TVrX3nd3ADsNalPL8pGF3A6v/3Pq+/t
+ 00gJCmIN1rFbK0OyvPJ30uZ10pOK73TyTmGL/xDUm0MvLF3HS2UOsXbAdMu58YLpdggL
+ XNTw==
+X-Gm-Message-State: AOJu0YwXh9jOzHS7IHw5K16gzQkerI3FlrR38NVGGe3XLqHCpcATcZ1Z
+ sFcwxzLrvA/EsXO7ehALjRKXk7kPKlmUdJpeSK/BbRRX3AffmYB+Wje3OnyKQkc=
+X-Google-Smtp-Source: AGHT+IFZAyzgLawsBIwfLPtxqn2/PpQaNnZ97HHWp/wvlMwIyWoKC53dQbkiWustJj9e1U/RUs0f9Q==
+X-Received: by 2002:a17:90b:b15:b0:29b:2c12:6b6f with SMTP id
+ bf21-20020a17090b0b1500b0029b2c126b6fmr1866679pjb.16.1710007509150; 
+ Sat, 09 Mar 2024 10:05:09 -0800 (PST)
+Received: from [192.168.6.128] (098-147-055-211.res.spectrum.com.
+ [98.147.55.211]) by smtp.gmail.com with ESMTPSA id
+ w35-20020a17090a6ba600b0029bc319f7c9sm1777105pjj.39.2024.03.09.10.05.07
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 09 Mar 2024 10:05:08 -0800 (PST)
+Message-ID: <124ce5f8-bdb4-4086-8af8-73d20bdc33c0@linaro.org>
+Date: Sat, 9 Mar 2024 08:05:04 -1000
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAARkPA-dOxOWsR0VS+S8p4fDmNR5X5Jjmo5pQTaurWLYsc9vsw@mail.gmail.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::52a;
- envelope-from=ajones@ventanamicro.com; helo=mail-ed1-x52a.google.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] target/riscv: raise an exception when CSRRS/CSRRC writes
+ a read-only CSR
+To: Yu-Ming Chang <yumin686@andestech.com>, palmer@dabbelt.com,
+ alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+References: <20240308084014.22054-1-yumin686@andestech.com>
+Content-Language: en-US
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20240308084014.22054-1-yumin686@andestech.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::535;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x535.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,32 +98,85 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Mar 08, 2024 at 08:22:01PM -0800, Richard Bagley wrote:
-> post-nack, one further comment:
+On 3/7/24 22:40, Yu-Ming Chang via wrote:
+> Both CSRRS and CSRRC always read the addressed CSR and cause any read side
+> effects regardless of rs1 and rd fields. Note that if rs1 specifies a register
+> holding a zero value other than x0, the instruction will still attempt to write
+> the unmodified value back to the CSR and will cause any attendant side effects.
 > 
-> One could argue that this change also aligns QEMU with supporting tools (as
-> Andrew observed), and it makes sense to merge this change into QEMU until
-> those tools update to supporting signed decimal numbers with immediates.
+> So if CSRRS or CSRRC tries to write a read-only CSR with rs1 which specifies
+> a register holding a zero value, an illegal instruction exception should be
+> raised.
 > 
-> As it is, both GNU assembler and the LLVM integrated assembler (or llvm-mc)
-> throws an error with examples such as
-> auipc s0, -17
+> Signed-off-by: Yu-Ming Chang <yumin686@andestech.com>
+> ---
+>   target/riscv/cpu.h       |  3 +++
+>   target/riscv/csr.c       | 18 +++++++++++++++---
+>   target/riscv/op_helper.c |  2 +-
+>   3 files changed, 19 insertions(+), 4 deletions(-)
 > 
-> On the other hand, I have only seen this problem with the output of the
-> COLLECT plug-in, not (as yet) with QEMU execution proper.
-> If the problem is confined to COLLECT, perhaps the argument for aligning
-> with other tools is not as strong.
-> 
-> In the meantime, I have adjusted my change locally to include AUIPC, and
-> written a substantive, and I hope, clear commit description.
-> If you would like me to resubmit a patch with this updated change, please
-> let me know.
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 5d291a7092..087ef64889 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -710,6 +710,9 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
+>   void riscv_cpu_update_mask(CPURISCVState *env);
+>   bool riscv_cpu_is_32bit(RISCVCPU *cpu);
+>   
+> +RISCVException riscv_csrr(CPURISCVState *env, int csrno,
+> +                          target_ulong *ret_value,
+> +                          target_ulong new_value, target_ulong write_mask);
+>   RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
+>                              target_ulong *ret_value,
+>                              target_ulong new_value, target_ulong write_mask);
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index d4e8ac13b9..3e49cf0df1 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -4306,7 +4306,7 @@ static RISCVException rmw_seed(CPURISCVState *env, int csrno,
+>   
+>   static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
+>                                                  int csrno,
+> -                                               bool write_mask)
+> +                                               bool write)
+>   {
+>       /* check privileges and return RISCV_EXCP_ILLEGAL_INST if check fails */
+>       bool read_only = get_field(csrno, 0xC00) == 3;
+> @@ -4328,7 +4328,7 @@ static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
+>       }
+>   
+>       /* read / write check */
+> -    if (write_mask && read_only) {
+> +    if (write && read_only) {
+>           return RISCV_EXCP_ILLEGAL_INST;
+>       }
+>   
+> @@ -4415,11 +4415,23 @@ static RISCVException riscv_csrrw_do64(CPURISCVState *env, int csrno,
+>       return RISCV_EXCP_NONE;
+>   }
+>   
+> +RISCVException riscv_csrr(CPURISCVState *env, int csrno,
+> +                           target_ulong *ret_value,
+> +                           target_ulong new_value, target_ulong write_mask)
 
-Since the patch is ready for posting, then it might as well be posted
-(even if it may not get merged right away). If the issue arises again,
-then we can refer to the latest proposed patch, which will be preserved
-in the mail archives.
+Remove new_value and write_mask arguments, as they don't make sense for read.
 
-Thanks,
-drew
+> +{
+> +    RISCVException ret = riscv_csrrw_check(env, csrno, false);
+> +    if (ret != RISCV_EXCP_NONE) {
+> +        return ret;
+> +    }
+> +
+> +    return riscv_csrrw_do64(env, csrno, ret_value, new_value, write_mask);
+
+... and pass zeros ...
+
+> -    RISCVException ret = riscv_csrrw(env, csr, &val, 0, 0);
+> +    RISCVException ret = riscv_csrr(env, csr, &val, 0, 0);
+
+... like you do from the only caller.
+
+
+r~
+
 
