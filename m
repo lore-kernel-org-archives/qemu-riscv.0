@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28338C54798
-	for <qemu-riscv@archiver.kernel.org>; Sat,  9 Mar 2024 18:05:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 586B2C54791
+	for <qemu-riscv@archiver.kernel.org>; Sat,  9 Mar 2024 18:40:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rj14S-00039R-Hc; Sat, 09 Mar 2024 13:05:20 -0500
+	id 1rj1cD-0001YZ-8T; Sat, 09 Mar 2024 13:40:13 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rj14O-00038r-Sq
- for qemu-riscv@nongnu.org; Sat, 09 Mar 2024 13:05:17 -0500
-Received: from mail-pg1-x535.google.com ([2607:f8b0:4864:20::535])
+ id 1rj1cA-0001Xv-0X
+ for qemu-riscv@nongnu.org; Sat, 09 Mar 2024 13:40:10 -0500
+Received: from mail-oi1-x22c.google.com ([2607:f8b0:4864:20::22c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rj14L-0006tQ-IS
- for qemu-riscv@nongnu.org; Sat, 09 Mar 2024 13:05:16 -0500
-Received: by mail-pg1-x535.google.com with SMTP id
- 41be03b00d2f7-5e4f79007ffso600538a12.2
- for <qemu-riscv@nongnu.org>; Sat, 09 Mar 2024 10:05:10 -0800 (PST)
+ id 1rj1c7-0004SK-PS
+ for qemu-riscv@nongnu.org; Sat, 09 Mar 2024 13:40:09 -0500
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-3c1f55ba3ecso1271471b6e.3
+ for <qemu-riscv@nongnu.org>; Sat, 09 Mar 2024 10:40:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710007509; x=1710612309; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=linaro.org; s=google; t=1710009605; x=1710614405; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=Tni9d/HuC2dhmeHV1PA6VdgaMUsYq9VIjRAdiwF/iYI=;
- b=r1lbADEy65KBbxucDsEFnWKUnQfIwYW/3fKuP4lYgNlOcpvjEssrEUgMMhRoBxzegs
- 3YX4MOqAo3S0mpBeSnfm/nJiXZj7n09veV4CX8o2DvzPky4+P8mQWsSYLl1D6rw5myER
- WKNmn/mX1IdVpBWeeAYUExPX2JWgT0IFdiEahnW1be9spuBl0+KaBcq+UjlZRee5ZjkC
- 4fYBu3MYcs9668Ozl6O5ugIhbmvQE5knp1ZinWlfgJ9WhyH9nht38YDovsssAvrwhg2y
- 1UitR1qxJ5fYqti26zcMFxjPCHXI2yGL3LM0ThmT6Ccup0vFGL2Vr8hVT9F+GyPFaUY2
- jmGA==
+ bh=X1jJ8ENU4eG2Qk7hUuKetGnXnJJ8M4ZJe0brbMLOUWc=;
+ b=YuAVLVs16TruAJDv30lK3mlIdsxQmM2+zuNQHbxZGMdVjhzzjHWSdg6c/nof1eGWPX
+ yMNErCw5NV67Zk/xpgK9ZcONx4adNkhgVb8LpDP7IcorjwIhSsIydKn/HQ/EELA3D9a4
+ uCgnQO9G/KXlit/xQ/3wTiTfQA24LX/4kotGetSmA6mYlsmJ9OU/C1MVdzbonRGGygj/
+ LamuiBmxq+W2ZT0qlXRnTPCNQMP94Phz8GTSvcZrbARTPR4FMxZnd8fP2dSARY52YyHe
+ k2xGPo1uD/m3GoVeyAy9lsBArAez/vzLuYS44uSZyz6F/w98QvdmC6QJBC5ykZtxhmsp
+ vl6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710007509; x=1710612309;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1710009605; x=1710614405;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Tni9d/HuC2dhmeHV1PA6VdgaMUsYq9VIjRAdiwF/iYI=;
- b=AQsw05+GZnByOKhlvVJdXeGByZ/nFizwqDlRTz1upHiRPFA8Iufy1uTfTEzl5YQzlb
- QmQZ6vqEMjz8jzA4L85ZebTO6QjIBhSFI36Ibzh+nL9LK4QijO5agR0ngH2MYyj8EBHF
- Xhn2rER2MSgrxb1BsGEO2zlg4aBwKHTT58kK7qgNlBly5IrNN0OSvzuaT5A4C/siLyG3
- HVZdyABXbQymYDVNlcUg5ElXtmXC4Hdx5DE08TVrX3nd3ADsNalPL8pGF3A6v/3Pq+/t
- 00gJCmIN1rFbK0OyvPJ30uZ10pOK73TyTmGL/xDUm0MvLF3HS2UOsXbAdMu58YLpdggL
- XNTw==
-X-Gm-Message-State: AOJu0YwXh9jOzHS7IHw5K16gzQkerI3FlrR38NVGGe3XLqHCpcATcZ1Z
- sFcwxzLrvA/EsXO7ehALjRKXk7kPKlmUdJpeSK/BbRRX3AffmYB+Wje3OnyKQkc=
-X-Google-Smtp-Source: AGHT+IFZAyzgLawsBIwfLPtxqn2/PpQaNnZ97HHWp/wvlMwIyWoKC53dQbkiWustJj9e1U/RUs0f9Q==
-X-Received: by 2002:a17:90b:b15:b0:29b:2c12:6b6f with SMTP id
- bf21-20020a17090b0b1500b0029b2c126b6fmr1866679pjb.16.1710007509150; 
- Sat, 09 Mar 2024 10:05:09 -0800 (PST)
+ bh=X1jJ8ENU4eG2Qk7hUuKetGnXnJJ8M4ZJe0brbMLOUWc=;
+ b=rUCZDB+iIj0vVURb8pH9rHRbz+MzlHzD7UvGdbzKgP5Qubhm+LnebH2X5btWk8WGmw
+ io1o/jcWNwwcYE99MizlnlvL0qy7X3EQ9/c7WYgqFsFGOx/dqDEeVqc5Wgruh6JjULPo
+ O9elFsFMPqsauEcDGeIimutmaAlzRnUFKBR97RBCkbL2tnVXW7m6hdPzpshKs3ImLYLi
+ bWIHZ/DqZ4S6Vk52/gTjf67lEvuAN5TKq6DuEw01p4ZAfenlU1cn0NXWUoQWnn+KHCpi
+ atXEEqRIKJFTeWuDEy2sMkLR2pjv8DdJb7IlaJvYyl+EUEEiOBIKjsHbUmO9VKO5cZ3o
+ LfbQ==
+X-Gm-Message-State: AOJu0Yx4n2nyNxdswsJyvpmma51RNKIWuZclUmiYjx9NKRMioiRm31gm
+ iPOnevxsFaqoP6Jgh+SF1jwjiHL6lCF2UuL3vD2NyXFW2Wm5CHXr7jX2oYEfxcQ=
+X-Google-Smtp-Source: AGHT+IHoGkkdfgDIZOMsXaU266tFSm/S/kg6SiDlelB/vI8agXEm+aa2tV623wGR9XtO7wwkr6vYnQ==
+X-Received: by 2002:a05:6808:201a:b0:3c2:3e2b:73c7 with SMTP id
+ q26-20020a056808201a00b003c23e2b73c7mr2538640oiw.3.1710009605695; 
+ Sat, 09 Mar 2024 10:40:05 -0800 (PST)
 Received: from [192.168.6.128] (098-147-055-211.res.spectrum.com.
  [98.147.55.211]) by smtp.gmail.com with ESMTPSA id
- w35-20020a17090a6ba600b0029bc319f7c9sm1777105pjj.39.2024.03.09.10.05.07
+ n6-20020a170903110600b001db717ed294sm1602328plh.120.2024.03.09.10.40.04
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 09 Mar 2024 10:05:08 -0800 (PST)
-Message-ID: <124ce5f8-bdb4-4086-8af8-73d20bdc33c0@linaro.org>
-Date: Sat, 9 Mar 2024 08:05:04 -1000
+ Sat, 09 Mar 2024 10:40:05 -0800 (PST)
+Message-ID: <04ebf149-d735-46b0-9885-7e5972813e23@linaro.org>
+Date: Sat, 9 Mar 2024 08:40:01 -1000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] target/riscv: raise an exception when CSRRS/CSRRC writes
- a read-only CSR
-To: Yu-Ming Chang <yumin686@andestech.com>, palmer@dabbelt.com,
- alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-References: <20240308084014.22054-1-yumin686@andestech.com>
+Subject: Re: [PATCH v8 02/10] target/riscv: handle vstart >= vl in
+ vext_set_tail_elems_1s()
 Content-Language: en-US
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ philmd@linaro.org
+References: <20240308215402.117405-1-dbarboza@ventanamicro.com>
+ <20240308215402.117405-3-dbarboza@ventanamicro.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240308084014.22054-1-yumin686@andestech.com>
+In-Reply-To: <20240308215402.117405-3-dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::535;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x535.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::22c;
+ envelope-from=richard.henderson@linaro.org; helo=mail-oi1-x22c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -98,85 +99,51 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 3/7/24 22:40, Yu-Ming Chang via wrote:
-> Both CSRRS and CSRRC always read the addressed CSR and cause any read side
-> effects regardless of rs1 and rd fields. Note that if rs1 specifies a register
-> holding a zero value other than x0, the instruction will still attempt to write
-> the unmodified value back to the CSR and will cause any attendant side effects.
-> 
-> So if CSRRS or CSRRC tries to write a read-only CSR with rs1 which specifies
-> a register holding a zero value, an illegal instruction exception should be
-> raised.
-> 
-> Signed-off-by: Yu-Ming Chang <yumin686@andestech.com>
-> ---
->   target/riscv/cpu.h       |  3 +++
->   target/riscv/csr.c       | 18 +++++++++++++++---
->   target/riscv/op_helper.c |  2 +-
->   3 files changed, 19 insertions(+), 4 deletions(-)
-> 
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 5d291a7092..087ef64889 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -710,6 +710,9 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
->   void riscv_cpu_update_mask(CPURISCVState *env);
->   bool riscv_cpu_is_32bit(RISCVCPU *cpu);
->   
-> +RISCVException riscv_csrr(CPURISCVState *env, int csrno,
-> +                          target_ulong *ret_value,
-> +                          target_ulong new_value, target_ulong write_mask);
->   RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
->                              target_ulong *ret_value,
->                              target_ulong new_value, target_ulong write_mask);
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index d4e8ac13b9..3e49cf0df1 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -4306,7 +4306,7 @@ static RISCVException rmw_seed(CPURISCVState *env, int csrno,
->   
->   static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
->                                                  int csrno,
-> -                                               bool write_mask)
-> +                                               bool write)
+On 3/8/24 11:53, Daniel Henrique Barboza wrote:
+> +static void vext_set_tail_elems_1s(CPURISCVState *env, void *vd,
+> +                                   uint32_t desc, uint32_t esz,
+> +                                   uint32_t max_elems)
 >   {
->       /* check privileges and return RISCV_EXCP_ILLEGAL_INST if check fails */
->       bool read_only = get_field(csrno, 0xC00) == 3;
-> @@ -4328,7 +4328,7 @@ static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
+>       uint32_t vta = vext_vta(desc);
+> +    uint32_t nf = vext_nf(desc);
+>       int k;
+>   
+> -    if (vta == 0) {
+> +    /*
+> +     * Section 5.4 of the RVV spec mentions:
+> +     * "When vstart ≥ vl, there are no body elements, and no
+> +     *  elements are updated in any destination vector register
+> +     *  group, including that no tail elements are updated
+> +     *  with agnostic values."
+> +     */
+> +    if (vta == 0 || env->vstart >= env->vl) {
+>           return;
 >       }
->   
->       /* read / write check */
-> -    if (write_mask && read_only) {
-> +    if (write && read_only) {
->           return RISCV_EXCP_ILLEGAL_INST;
+
+This isn't going to work for ...
+
+> @@ -222,9 +230,8 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base,
+>               k++;
+>           }
 >       }
->   
-> @@ -4415,11 +4415,23 @@ static RISCVException riscv_csrrw_do64(CPURISCVState *env, int csrno,
->       return RISCV_EXCP_NONE;
->   }
->   
-> +RISCVException riscv_csrr(CPURISCVState *env, int csrno,
-> +                           target_ulong *ret_value,
-> +                           target_ulong new_value, target_ulong write_mask)
+> +    vext_set_tail_elems_1s(env, vd, desc, esz, max_elems);
+>       env->vstart = 0;
 
-Remove new_value and write_mask arguments, as they don't make sense for read.
+... ldst, because we also need to increment vstart in the load loop, for consumption by 
+the exception path.
 
-> +{
-> +    RISCVException ret = riscv_csrrw_check(env, csrno, false);
-> +    if (ret != RISCV_EXCP_NONE) {
-> +        return ret;
-> +    }
-> +
-> +    return riscv_csrrw_do64(env, csrno, ret_value, new_value, write_mask);
+You'll need to structure the helper as
 
-... and pass zeros ...
-
-> -    RISCVException ret = riscv_csrrw(env, csr, &val, 0, 0);
-> +    RISCVException ret = riscv_csrr(env, csr, &val, 0, 0);
-
-... like you do from the only caller.
+     if (vstart >= vl) {
+        vstart = 0;
+        return;
+     }
+     for (i = vstart; i < vl; vstart = ++i) {
+         ...
+     }
+     set_tail_elems(...);
+     vstart = 0;
 
 
 r~
-
 
