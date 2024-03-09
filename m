@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2501C54791
-	for <qemu-riscv@archiver.kernel.org>; Sat,  9 Mar 2024 18:52:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE8CDC54791
+	for <qemu-riscv@archiver.kernel.org>; Sat,  9 Mar 2024 20:14:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rj1nW-0004pF-Vc; Sat, 09 Mar 2024 13:51:54 -0500
+	id 1rj35c-0007my-Tj; Sat, 09 Mar 2024 15:14:40 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rj1nS-0004o9-KX
- for qemu-riscv@nongnu.org; Sat, 09 Mar 2024 13:51:50 -0500
-Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e])
+ id 1rj35b-0007mg-AB
+ for qemu-riscv@nongnu.org; Sat, 09 Mar 2024 15:14:39 -0500
+Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rj1nR-0006Vc-4g
- for qemu-riscv@nongnu.org; Sat, 09 Mar 2024 13:51:50 -0500
-Received: by mail-pf1-x42e.google.com with SMTP id
- d2e1a72fcca58-6e5b1c6daa3so1639429b3a.1
- for <qemu-riscv@nongnu.org>; Sat, 09 Mar 2024 10:51:48 -0800 (PST)
+ id 1rj35Z-0002Fi-6U
+ for qemu-riscv@nongnu.org; Sat, 09 Mar 2024 15:14:39 -0500
+Received: by mail-pf1-x432.google.com with SMTP id
+ d2e1a72fcca58-6e63e9abf6aso1511146b3a.2
+ for <qemu-riscv@nongnu.org>; Sat, 09 Mar 2024 12:14:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710010307; x=1710615107; darn=nongnu.org;
+ d=linaro.org; s=google; t=1710015271; x=1710620071; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=qT8iUAa/HsiarKSfacdT/ihvRTQvCnNoDb8cPYRBY+8=;
- b=TiUK9HW5AgMmCrPMt/8I1TusO9jd9C94IJPh5dt4BLELId2D12dn0fNzOGqU0p6n+9
- Ioh0MhmrRx6CI41qhcKGr+p9hwyF/SE1JJnIhYqbVg+KJDQDIm2QuV+DuAFKXJvrN9em
- 0yBim/hZzgvJ3p+Jb+xPfhRbybWrhJGesQuSLQvx+0KDtaHSK6eZRMLkBJ/bVnt4qNj2
- xNMXyH307N95LKvZH7ratfC1yRw5b/uFkK84fMn2ywqQiVShcRkmAu5xIp7tf/xSE+gn
- eDVqrwDEuRde3TyFKg5t0jrDfbc7oRchxTWG0WrySL79L68NM9gLJuyToB8f5ocipswv
- B2Dw==
+ bh=z5RPgNiMp469x1/xWhgYlM6vC/pxJoZgZErvDkkZA/Q=;
+ b=eZD5juPmQTAIEXXC4c4s75cwgZ8DVGreIwCN6tIE/uUyl+j6/zrvDNFaaP4OOIswMy
+ HYFJThYVIC9Wa6a1TMeomce0UePl/gSG3iFjaXd75KQNxgklEHElMJ2Y8DKHF9MV14CE
+ AJ+jSj/V+GvUf9mWc710CvAVtinKNFrxn7CqmKgqs+ZPefW8K6DezHSqmpRFmlhqneeS
+ lM/bhk7trbZyM0Nufux1IiMefdLQZPlw4DsC82g+UNuB9HAsTc52pekyjs1rjiBGuOOw
+ JSePc764G9b/r+7RbyCV+cwBNdCHplUkaDMLewPy26lr7JuNdi3DF8ql7CAwBk4qnO7E
+ dJvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710010307; x=1710615107;
+ d=1e100.net; s=20230601; t=1710015271; x=1710620071;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=qT8iUAa/HsiarKSfacdT/ihvRTQvCnNoDb8cPYRBY+8=;
- b=NEjkmdZFpijPprc0KL4v3vHyhSa+sk2Iu/0HcGYTibdteDB8gL2HqwZg8FmE0udoJL
- EVn3zA7Hz3ZGbew6MY5xH4Yw0L3xeVhTE38MDdGLpHGUihsZ5Nuj6R1I4zv3G6n68Wn2
- xpewiUpodyUuamLv77fWgMHq3ICF1mgX+xYS4owbHgHtRs1V7uKchB6iFCUkxGtnCEhq
- L6UC7FgTYKJ/ZjcOqDCsesM3/51O51p5jQpNdklI1c+dNN6R0uSoFx5hTCShyU+PTJ/b
- i9AwX+f4r3bIlv2REDDEEG2IKxf3nXz8euJi+7AJJXKCQSCKOu8psLqvQLWAR5S2thlL
- joBg==
-X-Gm-Message-State: AOJu0YwZLd8lu2ntzcpDaqku2cPLriLD9GnfakVvHGRe3tyZc6d3KzjP
- cqRbSlrJ2VLjHgpK4tO0zvIeQqhnN0hcb/r1dUJYz/dT7MkbJ3hwuzSYKtewKWk=
-X-Google-Smtp-Source: AGHT+IH5YljeZTCf29pwdec4hg5/7D/L2JhplHrZWKI8vPD7tbYuPNLNIhMew1VJ2zbT4nsQ1VlDZQ==
-X-Received: by 2002:a05:6a20:d906:b0:1a2:a596:4dce with SMTP id
- jd6-20020a056a20d90600b001a2a5964dcemr3034822pzb.58.1710010306872; 
- Sat, 09 Mar 2024 10:51:46 -0800 (PST)
+ bh=z5RPgNiMp469x1/xWhgYlM6vC/pxJoZgZErvDkkZA/Q=;
+ b=uzk38AvhE7TzfP+zDHGSRwc3dLMu7iMgo7ctmPnPrU7Cm8KUxgWUSvWutYNRTJEFm5
+ 5JVM8JuWpFw7HfAIl6JUkGEWS+1jpcI4qIm80Y30f63OtxAZrlP5+WlXHtz/lIX5fBXm
+ /wSSjFmzxph43DWj/rwYnVFLj9NAkDdj8/+vEdgxGqohPpktmeGhZHlKj6TOBGTm9a8u
+ RW/VVr0B+AaMG0BOvcHNYBjZ/Ih6sIziVCX96WlnStqm/CWwH+5FGQMHOGywyUxUTWm+
+ IDda+M5ImN1JPPrI5+USMA5EgUecRsQ/5sP4ixZT30nBlrWLi4bu+z/qKTFhBzUHgFka
+ kn4g==
+X-Gm-Message-State: AOJu0YwcV3rSqArcVdHIH3AlwN8adMJOdSpxBONnJNtOhWOiA2uOwZ00
+ 41zUhtfVMKzWJu2nruaoJjZ98CLZ1UqG5idTi2Z/ZH+XxO7WQD+iC/FCnVsfKck=
+X-Google-Smtp-Source: AGHT+IGX7pE26y0EUG62iVQVq/P/M8vr2AFnqJzV69iuFmk9+2o2rphiCt9Wm2iu61e3KRp0cVxiwQ==
+X-Received: by 2002:a05:6a00:14c4:b0:6e6:28ae:197b with SMTP id
+ w4-20020a056a0014c400b006e628ae197bmr2654871pfu.12.1710015271114; 
+ Sat, 09 Mar 2024 12:14:31 -0800 (PST)
 Received: from [192.168.6.128] (098-147-055-211.res.spectrum.com.
  [98.147.55.211]) by smtp.gmail.com with ESMTPSA id
- m14-20020a63ed4e000000b005dc816b2369sm1590261pgk.28.2024.03.09.10.51.45
+ bn22-20020a056a00325600b006e6795932a4sm1447510pfb.80.2024.03.09.12.14.29
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 09 Mar 2024 10:51:46 -0800 (PST)
-Message-ID: <22c0cbee-a6f7-48e2-9a94-47bcc92b096f@linaro.org>
-Date: Sat, 9 Mar 2024 08:51:42 -1000
+ Sat, 09 Mar 2024 12:14:30 -0800 (PST)
+Message-ID: <fe056cad-e711-445a-be26-9a0625ae0665@linaro.org>
+Date: Sat, 9 Mar 2024 10:14:26 -1000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 06/10] trans_rvv.c.inc: set vstart = 0 in int scalar
- move insns
+Subject: Re: [PATCH v8 00/10] riscv: set vstart_eq_zero on mark_vs_dirty
 Content-Language: en-US
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  philmd@linaro.org
 References: <20240308215402.117405-1-dbarboza@ventanamicro.com>
- <20240308215402.117405-7-dbarboza@ventanamicro.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240308215402.117405-7-dbarboza@ventanamicro.com>
+In-Reply-To: <20240308215402.117405-1-dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42e;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x42e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x432.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -100,36 +98,24 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 3/8/24 11:53, Daniel Henrique Barboza wrote:
-> trans_vmv_x_s, trans_vmv_s_x, trans_vfmv_f_s and trans_vfmv_s_f aren't
-> setting vstart = 0 after execution. This is usually done by a helper in
-> vector_helper.c but these functions don't use helpers.
+> - patch 7 (patch 3 from v7): do not remove brconds from scalar move
+>    insns
 > 
-> We'll set vstart after any potential 'over' brconds, and that will also
-> mandate a mark_vs_dirty() too.
+>    trans_vmv_s_x() and trans_vfmv_s_f() does not have a helper that will
+>    handle vstart >= vl for them, so they need their brcond.
 > 
-> Fixes: dedc53cbc9 ("target/riscv: rvv-1.0: integer scalar move instructions")
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> ---
->   target/riscv/insn_trans/trans_rvv.c.inc | 17 +++++++++++++++--
->   1 file changed, 15 insertions(+), 2 deletions(-)
-> 
-> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-> index e42728990e..f3caabc101 100644
-> --- a/target/riscv/insn_trans/trans_rvv.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-> @@ -3356,6 +3356,13 @@ static void vec_element_storei(DisasContext *s, int vreg,
->       store_element(val, tcg_env, endian_ofs(s, vreg, idx), s->sew);
->   }
->   
-> +static void vec_set_vstart_zero(void)
-> +{
-> +    TCGv_i32 t_zero = tcg_constant_i32(0);
-> +
-> +    tcg_gen_st_i32(t_zero, tcg_env, offsetof(CPURISCVState, vstart));
-> +}
+> - patches 4 and 5 from v7: dropped. We're not removing all brconds, so
+>    we can't get rid of cpu_vstart and cpu_vl.
 
-If you have not removed cpu_vstart, then you must use tcg_gen_movi_i32.
-You cannot write to the backing store behind tcg's back.
+Not important for the bug fix, but for future cleanup:
+
+(1) Use movcond to for these moves instead of brcond.
+
+(2) Use explicit load/store in these two places where cpu_vstart and cpu_vl are still in use.
+
+(3) Now there are no tcg globals that are modified by the vector helpers, which means that 
+they can all be marked TCG_CALL_NO_WG, and any that never exit via exception may be marked 
+TCG_CALL_NO_RWG.  This may reduce register allocator spill/fill across the affected helpers.
 
 
 r~
