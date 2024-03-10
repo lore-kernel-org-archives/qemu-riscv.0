@@ -4,84 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 560CCC54791
-	for <qemu-riscv@archiver.kernel.org>; Sun, 10 Mar 2024 11:55:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE060C54E49
+	for <qemu-riscv@archiver.kernel.org>; Sun, 10 Mar 2024 18:05:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rjHkc-0007rb-7p; Sun, 10 Mar 2024 07:53:58 -0400
+	id 1rjNXb-0007Q6-TF; Sun, 10 Mar 2024 14:04:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rjHkX-0007oM-La
- for qemu-riscv@nongnu.org; Sun, 10 Mar 2024 07:53:54 -0400
-Received: from mail-oa1-x34.google.com ([2001:4860:4864:20::34])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1rjNXY-0007L4-2H
+ for qemu-riscv@nongnu.org; Sun, 10 Mar 2024 14:04:52 -0400
+Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rjHkU-00044N-Mz
- for qemu-riscv@nongnu.org; Sun, 10 Mar 2024 07:53:53 -0400
-Received: by mail-oa1-x34.google.com with SMTP id
- 586e51a60fabf-21fed501addso1994375fac.2
- for <qemu-riscv@nongnu.org>; Sun, 10 Mar 2024 04:53:50 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1rjNXW-0006vB-Kj
+ for qemu-riscv@nongnu.org; Sun, 10 Mar 2024 14:04:51 -0400
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-1dbae7b8ff2so26098855ad.3
+ for <qemu-riscv@nongnu.org>; Sun, 10 Mar 2024 11:04:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1710071629; x=1710676429; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=M1pgxbL4ext+eLfj8GE9V3VngjTMGW2LA/FcQ0QZgQg=;
- b=hEugmHwDQrC2dGGQzRvXTrp8Eh76YPtPonsAEOoacg0JH2BGdi4rZHKZF0UqMlCfgt
- dBlB5Onm8Ia4J+qRggkNylCUV2WwSgyeuD1Octb/OgbM7MStn/3dxUNwuUJ10T5M6SOu
- T1xYNyp4no4+CmX5WJix4hvjWoDHVI4pPxauHI/BSq1qD898fYGVGk+x10HdF8u14Lkz
- iYEx0FEMxT1Fm4NP5wIvfzRnJNXbLDvD9UoiN46uTmieTv2yS9EKTK0aaTun3RFRLHOA
- JGCdNKAzmH/EJoQdIeOQK8cgBBvSF+JMKVkfkTTAWJh1xPpgcKYABsXo7hMWoiUCSd1x
- Z+1g==
+ d=linaro.org; s=google; t=1710093889; x=1710698689; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=NoGCf3sBLegSWxypsL2KaF58hSmbQznCl+fHLZDt8Ls=;
+ b=oH5SihdeCr6B4vyu5sq2Y5AEjXGYqZ4amg4XnQFmQtYuBrECB42xzAev1fDmhzwrMf
+ Nr+vXj+YO+PBZ1ylwfoZCinUwWAg4wMXl9pa8Ry5wrjP9Ls5aBzNCkmTGCpSXtPAArnC
+ NY8OEWXk8l8vfPdK15+WOGcVc39waB49QU8lMmVjlleUQmH7W1VOsLxqfC7HY1IwqMeU
+ Y3Bb1klvQ30WC6expciXH4pONRZ7oKCxSNi5wtpoimNGtiGvGDippanFNXucPNP5n7xw
+ 3W4YeWtjTdERAdViQ2s+NzgauDx76HpU6NDVuzb6q3bonjIAZpgCfXwYJ5yxrFmcfPe+
+ P2tA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710071629; x=1710676429;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=M1pgxbL4ext+eLfj8GE9V3VngjTMGW2LA/FcQ0QZgQg=;
- b=kS6PP3cfiIaaDBwd4ZPJj+TdH5FhcXE5nh9n7YLmqSU3TaXgU9kL6VH6ajGqzu/Tys
- hJajgLMKmwbKWWEB+QEIwdHm3I2Y3UHNvcbOjhs23V3BaQcCV4XOItZ4aIUIPROsPftP
- mraP61CFKeMZnwopvwGBdI3UIEfjbstjBD9D1ZWLJKOy0Dv3UqhqrKmfzgdCrIGFpfMW
- lsnDhpOMkq64pyiejL37nQtqpptiEBps8ZwAn/EF98dfahYMZEV68YjsMpKxG4a0lQ4H
- k9AK5J/0Wna8pAUzpk0mtYS5AYHXr+b/QxNZMoR0lqQiEDxpzyodLt+TJdGcbXZB5/dK
- fTww==
-X-Gm-Message-State: AOJu0YzSh6zs19jE004b8xGiWSl2UDRXirL1kpgHu1PRNdQ1VHze7EeA
- zR2XBsVVanzcRwm0RhIZI2lNMM62jOWVvtn/Hzh2ktF1PH5xLpii8rUgsbJQea8=
-X-Google-Smtp-Source: AGHT+IHR7GjVqgDg49SViK8tuD1Yc7thAOvpEzkUqGNEV0pKP/CAWw/+7uawCZy3btpSQc+Q54+o0Q==
-X-Received: by 2002:a05:6871:5c8:b0:221:acb5:7746 with SMTP id
- v8-20020a05687105c800b00221acb57746mr4486832oan.41.1710071629614; 
- Sun, 10 Mar 2024 04:53:49 -0700 (PDT)
-Received: from grind.. ([177.94.15.159]) by smtp.gmail.com with ESMTPSA id
- g22-20020aa78196000000b006e647059cccsm2449253pfi.33.2024.03.10.04.53.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 10 Mar 2024 04:53:49 -0700 (PDT)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
+ d=1e100.net; s=20230601; t=1710093889; x=1710698689;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=NoGCf3sBLegSWxypsL2KaF58hSmbQznCl+fHLZDt8Ls=;
+ b=Owq5fCsTeV7CQtA2ViYKtpPORz6HJ8HAYqduG11nwZbCqC+eV6mzaLtbt4Hm+kvS6J
+ qZRrH0ih4jOix2IXIceEYk1hfo+w+7cwz3BvARg96IrrzUHLSYyO6c75R+nI/FW1Z/IQ
+ 40B4oL2Vx0LZpuBLhzeCxVW3yMcGJHsjMAZe0SWHtG9GjNOjQeFzuzK3v+CMh37umF81
+ 7+f7U1gxqu1irYjEJ3nIVXC7a/9xsP8V+woN7bknpSvUgYro8dPoXaHborQe8Gk1DEdZ
+ JaIJXQhiXW53fYSlmPgOxc399/fuTJ2MneRddcD1M2+sNdlKxnfXQnm6WNgnJeF1lRJJ
+ kOeA==
+X-Gm-Message-State: AOJu0YxqHoCMbtbnbDbIgGnhbqL942k918mg3yLpPjPctW+53bQF4Mj8
+ 8X+SCWXCPt/V5JXO59rwvTv9e8W2hgCbDOP/4rShJS12lRSslyGE0w67RuF+bR0=
+X-Google-Smtp-Source: AGHT+IE8fQTqfpeJrV4JqHTaOD6Fq61j2HGzj/sqgxZrzr+QTnx2cC8dwqZpSyzCN1KHucpo7aaPoA==
+X-Received: by 2002:a17:903:1206:b0:1dd:76f0:4455 with SMTP id
+ l6-20020a170903120600b001dd76f04455mr4884680plh.49.1710093888772; 
+ Sun, 10 Mar 2024 11:04:48 -0700 (PDT)
+Received: from [172.20.1.19] (173-197-098-125.biz.spectrum.com.
+ [173.197.98.125]) by smtp.gmail.com with ESMTPSA id
+ x4-20020a170902a38400b001dd63e22484sm3004874pla.135.2024.03.10.11.04.46
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 10 Mar 2024 11:04:48 -0700 (PDT)
+Message-ID: <f8b57cb7-75d2-4153-81e5-d82554c6a311@linaro.org>
+Date: Sun, 10 Mar 2024 08:04:44 -1000
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v9 09/10] target/riscv: Clear vstart_qe_zero flag
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- richard.henderson@linaro.org, philmd@linaro.org,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v10 08/10] trans_rvv.c.inc: remove redundant mark_vs_dirty()
- calls
-Date: Sun, 10 Mar 2024 08:53:12 -0300
-Message-ID: <20240310115315.187283-9-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.43.2
-In-Reply-To: <20240310115315.187283-1-dbarboza@ventanamicro.com>
-References: <20240310115315.187283-1-dbarboza@ventanamicro.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+ philmd@linaro.org, Ivan Klokov <ivan.klokov@syntacore.com>
+References: <20240309204347.174251-1-dbarboza@ventanamicro.com>
+ <20240309204347.174251-10-dbarboza@ventanamicro.com>
+ <a3765207-28bb-44fd-b207-58327516a6cc@linaro.org>
+ <93e34ed6-9876-4a1c-897b-b0bc59831a01@ventanamicro.com>
+Content-Language: en-US
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <93e34ed6-9876-4a1c-897b-b0bc59831a01@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::34;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x34.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x629.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,77 +100,21 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-trans_vmv_v_i , trans_vfmv_v_f and the trans_##NAME macro from
-GEN_VMV_WHOLE_TRANS() are calling mark_vs_dirty() in both branches of
-their 'ifs'. conditionals.
+On 3/10/24 00:17, Daniel Henrique Barboza wrote:
+> 
+> 
+> On 3/10/24 04:47, Richard Henderson wrote:
+>> On 3/9/24 10:43, Daniel Henrique Barboza wrote:
+>>> From: Ivan Klokov <ivan.klokov@syntacore.com>
+>>>
+>>> The vstart_qe_zero flag is set at the beginning of the translation
+>>
+>> Here and subject, s/qe/ne/.
+> 
+> Hmmmm  ... the flag name is correct - vstart_qe_zero.
 
-Call it just once in the end like other functions are doing.
+Gah.  My mistake in pointing out the mistake, which is "qe" not "eq".
 
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
----
- target/riscv/insn_trans/trans_rvv.c.inc | 11 +++--------
- 1 file changed, 3 insertions(+), 8 deletions(-)
 
-diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index 4c1a064cf6..b0f19dcd85 100644
---- a/target/riscv/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -2065,7 +2065,6 @@ static bool trans_vmv_v_i(DisasContext *s, arg_vmv_v_i *a)
-         if (s->vl_eq_vlmax && !(s->vta && s->lmul < 0)) {
-             tcg_gen_gvec_dup_imm(s->sew, vreg_ofs(s, a->rd),
-                                  MAXSZ(s), MAXSZ(s), simm);
--            mark_vs_dirty(s);
-         } else {
-             TCGv_i32 desc;
-             TCGv_i64 s1;
-@@ -2083,9 +2082,8 @@ static bool trans_vmv_v_i(DisasContext *s, arg_vmv_v_i *a)
-                                               s->cfg_ptr->vlenb, data));
-             tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, a->rd));
-             fns[s->sew](dest, s1, tcg_env, desc);
--
--            mark_vs_dirty(s);
-         }
-+        mark_vs_dirty(s);
-         return true;
-     }
-     return false;
-@@ -2612,7 +2610,6 @@ static bool trans_vfmv_v_f(DisasContext *s, arg_vfmv_v_f *a)
- 
-             tcg_gen_gvec_dup_i64(s->sew, vreg_ofs(s, a->rd),
-                                  MAXSZ(s), MAXSZ(s), t1);
--            mark_vs_dirty(s);
-         } else {
-             TCGv_ptr dest;
-             TCGv_i32 desc;
-@@ -2635,9 +2632,8 @@ static bool trans_vfmv_v_f(DisasContext *s, arg_vfmv_v_f *a)
-             tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, a->rd));
- 
-             fns[s->sew - 1](dest, t1, tcg_env, desc);
--
--            mark_vs_dirty(s);
-         }
-+        mark_vs_dirty(s);
-         return true;
-     }
-     return false;
-@@ -3560,12 +3556,11 @@ static bool trans_##NAME(DisasContext *s, arg_##NAME * a)               \
-         if (s->vstart_eq_zero) {                                        \
-             tcg_gen_gvec_mov(s->sew, vreg_ofs(s, a->rd),                \
-                              vreg_ofs(s, a->rs2), maxsz, maxsz);        \
--            mark_vs_dirty(s);                                           \
-         } else {                                                        \
-             tcg_gen_gvec_2_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, a->rs2), \
-                                tcg_env, maxsz, maxsz, 0, gen_helper_vmvr_v); \
--            mark_vs_dirty(s);                                           \
-         }                                                               \
-+        mark_vs_dirty(s);                                               \
-         return true;                                                    \
-     }                                                                   \
-     return false;                                                       \
--- 
-2.43.2
-
+r~
 
