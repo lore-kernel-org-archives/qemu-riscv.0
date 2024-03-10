@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD996C54791
-	for <qemu-riscv@archiver.kernel.org>; Sun, 10 Mar 2024 07:45:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59C12C54791
+	for <qemu-riscv@archiver.kernel.org>; Sun, 10 Mar 2024 07:47:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rjDsA-000105-Rr; Sun, 10 Mar 2024 03:45:30 -0400
+	id 1rjDty-0001wj-UD; Sun, 10 Mar 2024 03:47:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rjDs9-0000zc-Uz
- for qemu-riscv@nongnu.org; Sun, 10 Mar 2024 03:45:30 -0400
-Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
+ id 1rjDtu-0001wL-Ol
+ for qemu-riscv@nongnu.org; Sun, 10 Mar 2024 03:47:19 -0400
+Received: from mail-oa1-x2b.google.com ([2001:4860:4864:20::2b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rjDs7-0000qt-45
- for qemu-riscv@nongnu.org; Sun, 10 Mar 2024 03:45:29 -0400
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-6da202aa138so2194934b3a.2
- for <qemu-riscv@nongnu.org>; Sat, 09 Mar 2024 23:45:26 -0800 (PST)
+ id 1rjDtr-00011c-RT
+ for qemu-riscv@nongnu.org; Sun, 10 Mar 2024 03:47:18 -0400
+Received: by mail-oa1-x2b.google.com with SMTP id
+ 586e51a60fabf-21f0c82e97fso1629925fac.2
+ for <qemu-riscv@nongnu.org>; Sat, 09 Mar 2024 23:47:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710056725; x=1710661525; darn=nongnu.org;
+ d=linaro.org; s=google; t=1710056834; x=1710661634; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=DYNSoXXZqDpmcPT9QJEfN/wtyVM9Abzp3MKNZnrOzsg=;
- b=ukMoEDOfdnvKMYgWpL5eHD4n0fX/1IEER9p3kAQcUVKHUs4qrczt0BwMEzSf3i0iGn
- aNCmAZQyds5TVOMHFeGaoD3R9CHN3X705EtO+kwQ3/d9B/BsPLxzWxy540eTbOPg0T7L
- 4CqNmBixpQGZrglecqglbANXdgbomg4LRC4YXw6QNbjizDv1jTzeqyAqbcKL2r6NPnCD
- xIV2q1dmvSIAl4KUCCEgi1KCA77LRwOrF2yIxqiQvyx7ETn7+SB+8htAgCFReTJ3Vtwb
- 0PBGMko18B07IYz5vxNKgCtTd2YoxGaYZ6O979nERL6oi0gc3sViy3LLa023v27LBkdF
- sQfQ==
+ bh=sgWzEZRwyKC1zm4r5+JNjGrUWOKMo0RclMRzkjtXYE0=;
+ b=WmppS0OQT4m0YBu23cQb1BRHZwzvtrEi9GUr4/DAh10S7DSECSrK/JQk0c5jT2kz3w
+ bcX56vQ3aYsUH6JLTq9p5yH33c3S4et0EUL+N2OZXLuE4728K6qNROCN5q84aLm0wsdy
+ CLrFrE14J6ux+l2Kpaf2QXEzyWH6b9M3zMH3rKEqmYMeBt4ybfBUuZgunEigqa78QlZz
+ j6ZoVbkxxcPmtZBFzrWrwncuHLBCRt/0LVCtOvUp4V13qStEL5jGRTTAlxxpIFYI4zXi
+ ZB3cX31mgictL95sQdLrFwppRZtdNHHsyGX+WSMtbtTO3dq0mLA1YGb/iphzEb2jC2xY
+ eBSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710056725; x=1710661525;
+ d=1e100.net; s=20230601; t=1710056834; x=1710661634;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=DYNSoXXZqDpmcPT9QJEfN/wtyVM9Abzp3MKNZnrOzsg=;
- b=gGb1aoV9flN7a0EJiQdm+9dbNyNblUncBe4uwWUnuLVlGLZDPM7pBdAMN08MRIaowY
- uyJbqlxMrzCGvphpl8yDCXCGYrOtEy5Xf5lTCaNY6P2z6YewSXrwOTMenppPDzewb4wp
- 1FgxiV7EA6ocy+1FRcF47Q8s3UevBV2vhvvJ7lYNLU2HtPBaBwzYES+eEuRdK7JBL5ZF
- qNRKwsfhh4Pm+JcnTI20iRMk/C1fW5VRkjX26jlBe7n/G1ot+3h8bKx6klTIaXGRp8rI
- T8gZjHnwokBLlcLuWFh4bZJ17enDHU0WltfdQwDi+yFG7xnjZjT9Quffodo3GKjzz1Kh
- EGMg==
-X-Gm-Message-State: AOJu0YyXuxKdPR8f2hOv8K7uQUrZGQR5rwBesDJ28W2VvaM6OKd/jE4A
- /RbT6TsM/Obu0pE4wuXNpmSOSxYuv76bBD5cyeuKlD6LftkJpwvYt4u0MLhJtm4=
-X-Google-Smtp-Source: AGHT+IH/NKhFWur9YObRzZiisxjHcAg6WACAzwos0UKZEtomaeqYLGad791QF5Sm++nqo5aTHVcFrQ==
-X-Received: by 2002:a05:6a00:1396:b0:6e6:2781:1945 with SMTP id
- t22-20020a056a00139600b006e627811945mr5429337pfg.20.1710056725556; 
- Sat, 09 Mar 2024 23:45:25 -0800 (PST)
+ bh=sgWzEZRwyKC1zm4r5+JNjGrUWOKMo0RclMRzkjtXYE0=;
+ b=TVozlj6Y987lKP1+XV3XadrZXzizGguxtfXk/DDQ2elPFzhTqxsU4q8RgfgiIEFnod
+ dNPbOBuSRhBBPETixEujxwxS/DvKYXhK9lIJ/WmhzT5Gmhb/V5i/8hJUwi2caiHxn94q
+ aR2+jYIMYkTuoCwceYh/PttFDpUZ+wSlLAt6t6BlvBjnaum8xOkgAR+iYucN8R6G5RPV
+ QKHj/EEN0JleDS3+xHD8mQS9vnemL8C2T2ZsKmmOVESfSVmMZ0uqelqj/bJaVPjglug7
+ hh0jDOFBYrF36epVn5RpqSfL8tMNp0M2kvrKq6AC/RjuX3EzaGZb33tGJJVa24EoulKl
+ MdxA==
+X-Gm-Message-State: AOJu0Yx8M0htTeT/fuPFmj7rHYuaUGKS/Qoj2i1IwssUzAwKuMSjCIOd
+ fs81eSwUVYHm9D8G/QgNFJscXnFdfsvkPUgAhktT2Wz6gMhONK0joMleYMlJTdM=
+X-Google-Smtp-Source: AGHT+IGy2KOXDwgXZhFNQrvxLLqZZ1eP+iaFOqa//6oy45jAZx5/qXpUa+t9W6RTM1Yxw14k6DkyJA==
+X-Received: by 2002:a05:6871:888:b0:21e:b50c:3e8e with SMTP id
+ r8-20020a056871088800b0021eb50c3e8emr4286899oaq.56.1710056833853; 
+ Sat, 09 Mar 2024 23:47:13 -0800 (PST)
 Received: from [172.20.1.19] (173-197-098-125.biz.spectrum.com.
  [173.197.98.125]) by smtp.gmail.com with ESMTPSA id
- w187-20020a6262c4000000b006e68984419asm547911pfb.105.2024.03.09.23.45.23
+ p1-20020a62b801000000b006e66a76d877sm2276421pfe.153.2024.03.09.23.47.11
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 09 Mar 2024 23:45:25 -0800 (PST)
-Message-ID: <27512a0d-2e43-4efd-8b4c-c261c70cbb78@linaro.org>
-Date: Sat, 9 Mar 2024 21:45:21 -1000
+ Sat, 09 Mar 2024 23:47:13 -0800 (PST)
+Message-ID: <a3765207-28bb-44fd-b207-58327516a6cc@linaro.org>
+Date: Sat, 9 Mar 2024 21:47:10 -1000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v9 06/10] trans_rvv.c.inc: set vstart = 0 in int scalar
- move insns
+Subject: Re: [PATCH v9 09/10] target/riscv: Clear vstart_qe_zero flag
 Content-Language: en-US
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- philmd@linaro.org
+ philmd@linaro.org, Ivan Klokov <ivan.klokov@syntacore.com>
 References: <20240309204347.174251-1-dbarboza@ventanamicro.com>
- <20240309204347.174251-7-dbarboza@ventanamicro.com>
+ <20240309204347.174251-10-dbarboza@ventanamicro.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240309204347.174251-7-dbarboza@ventanamicro.com>
+In-Reply-To: <20240309204347.174251-10-dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x432.google.com
+Received-SPF: pass client-ip=2001:4860:4864:20::2b;
+ envelope-from=richard.henderson@linaro.org; helo=mail-oa1-x2b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -100,20 +99,12 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 3/9/24 10:43, Daniel Henrique Barboza wrote:
-> trans_vmv_x_s, trans_vmv_s_x, trans_vfmv_f_s and trans_vfmv_s_f aren't
-> setting vstart = 0 after execution. This is usually done by a helper in
-> vector_helper.c but these functions don't use helpers.
+> From: Ivan Klokov <ivan.klokov@syntacore.com>
 > 
-> We'll set vstart after any potential 'over' brconds, and that will also
-> mandate a mark_vs_dirty() too.
-> 
-> Fixes: dedc53cbc9 ("target/riscv: rvv-1.0: integer scalar move instructions")
-> Signed-off-by: Daniel Henrique Barboza<dbarboza@ventanamicro.com>
-> ---
->   target/riscv/insn_trans/trans_rvv.c.inc | 10 ++++++++--
->   1 file changed, 8 insertions(+), 2 deletions(-)
+> The vstart_qe_zero flag is set at the beginning of the translation
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Here and subject, s/qe/ne/.
+
 
 r~
 
