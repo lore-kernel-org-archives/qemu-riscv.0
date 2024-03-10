@@ -4,66 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE060C54E49
-	for <qemu-riscv@archiver.kernel.org>; Sun, 10 Mar 2024 18:05:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4E53C54E49
+	for <qemu-riscv@archiver.kernel.org>; Sun, 10 Mar 2024 18:12:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rjNXb-0007Q6-TF; Sun, 10 Mar 2024 14:04:55 -0400
+	id 1rjNe7-0000jz-CW; Sun, 10 Mar 2024 14:11:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rjNXY-0007L4-2H
- for qemu-riscv@nongnu.org; Sun, 10 Mar 2024 14:04:52 -0400
-Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rjNe5-0000jI-3a
+ for qemu-riscv@nongnu.org; Sun, 10 Mar 2024 14:11:37 -0400
+Received: from mail-pf1-x42c.google.com ([2607:f8b0:4864:20::42c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rjNXW-0006vB-Kj
- for qemu-riscv@nongnu.org; Sun, 10 Mar 2024 14:04:51 -0400
-Received: by mail-pl1-x629.google.com with SMTP id
- d9443c01a7336-1dbae7b8ff2so26098855ad.3
- for <qemu-riscv@nongnu.org>; Sun, 10 Mar 2024 11:04:50 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rjNe3-0008OO-Ks
+ for qemu-riscv@nongnu.org; Sun, 10 Mar 2024 14:11:36 -0400
+Received: by mail-pf1-x42c.google.com with SMTP id
+ d2e1a72fcca58-6e66e8fcc2dso2113381b3a.3
+ for <qemu-riscv@nongnu.org>; Sun, 10 Mar 2024 11:11:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710093889; x=1710698689; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1710094294; x=1710699094; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=NoGCf3sBLegSWxypsL2KaF58hSmbQznCl+fHLZDt8Ls=;
- b=oH5SihdeCr6B4vyu5sq2Y5AEjXGYqZ4amg4XnQFmQtYuBrECB42xzAev1fDmhzwrMf
- Nr+vXj+YO+PBZ1ylwfoZCinUwWAg4wMXl9pa8Ry5wrjP9Ls5aBzNCkmTGCpSXtPAArnC
- NY8OEWXk8l8vfPdK15+WOGcVc39waB49QU8lMmVjlleUQmH7W1VOsLxqfC7HY1IwqMeU
- Y3Bb1klvQ30WC6expciXH4pONRZ7oKCxSNi5wtpoimNGtiGvGDippanFNXucPNP5n7xw
- 3W4YeWtjTdERAdViQ2s+NzgauDx76HpU6NDVuzb6q3bonjIAZpgCfXwYJ5yxrFmcfPe+
- P2tA==
+ bh=XfND68FBVFIdI4ZzMSHb1Ep3xpv6zc8EZZ1BvIFM8Gk=;
+ b=Ovy/6tLbwGKjvkuX4/K24PcWt7L9tpwkSmQ7iCIj7r5g1Z8JHeALxoCqrdUcwi2Pbz
+ snwg3TazT5SI8bH1g1Rp0q7F/OmdNPHafVLcSFSnXHnpzVyUvUW1uhegslyH95F55KhY
+ 2gRiD0MfZeNn/teyZpPgq8qI3cSsj3uFjX0sNJEoH8BTRT62pExRAlNK7p75pWWz4Rpn
+ HtJVbqhGWKf4wLwJVxqLa+UdcJVzSoO1GoRCuciPp2I0skEqrwHYAE1wqvS90ZIKmwUR
+ +iu7Oo/yvnYHFoXor9LcLCdvplqfG9P7mQUqTGoVC0jY9e6odpoJRi2wKIT7kcn+xNNi
+ 1Jqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710093889; x=1710698689;
+ d=1e100.net; s=20230601; t=1710094294; x=1710699094;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=NoGCf3sBLegSWxypsL2KaF58hSmbQznCl+fHLZDt8Ls=;
- b=Owq5fCsTeV7CQtA2ViYKtpPORz6HJ8HAYqduG11nwZbCqC+eV6mzaLtbt4Hm+kvS6J
- qZRrH0ih4jOix2IXIceEYk1hfo+w+7cwz3BvARg96IrrzUHLSYyO6c75R+nI/FW1Z/IQ
- 40B4oL2Vx0LZpuBLhzeCxVW3yMcGJHsjMAZe0SWHtG9GjNOjQeFzuzK3v+CMh37umF81
- 7+f7U1gxqu1irYjEJ3nIVXC7a/9xsP8V+woN7bknpSvUgYro8dPoXaHborQe8Gk1DEdZ
- JaIJXQhiXW53fYSlmPgOxc399/fuTJ2MneRddcD1M2+sNdlKxnfXQnm6WNgnJeF1lRJJ
- kOeA==
-X-Gm-Message-State: AOJu0YxqHoCMbtbnbDbIgGnhbqL942k918mg3yLpPjPctW+53bQF4Mj8
- 8X+SCWXCPt/V5JXO59rwvTv9e8W2hgCbDOP/4rShJS12lRSslyGE0w67RuF+bR0=
-X-Google-Smtp-Source: AGHT+IE8fQTqfpeJrV4JqHTaOD6Fq61j2HGzj/sqgxZrzr+QTnx2cC8dwqZpSyzCN1KHucpo7aaPoA==
-X-Received: by 2002:a17:903:1206:b0:1dd:76f0:4455 with SMTP id
- l6-20020a170903120600b001dd76f04455mr4884680plh.49.1710093888772; 
- Sun, 10 Mar 2024 11:04:48 -0700 (PDT)
-Received: from [172.20.1.19] (173-197-098-125.biz.spectrum.com.
- [173.197.98.125]) by smtp.gmail.com with ESMTPSA id
- x4-20020a170902a38400b001dd63e22484sm3004874pla.135.2024.03.10.11.04.46
+ bh=XfND68FBVFIdI4ZzMSHb1Ep3xpv6zc8EZZ1BvIFM8Gk=;
+ b=puwakVJMV9EalAnAbIcf+jv3fo/q7iRFmMecOXzgjx4fQ7ixq7uqSeYrenrTh3hvhi
+ 8pf22XwP/ufkIGtAYcaLbWJ0Z59BSOg9mDaQBNnGli2xSMB2nVH+pOgF+oPFdFI9Mms1
+ DNi2N2k2FN4IsboNjlbKEhRBuK1B/UOIMhbSrju0Lfzy6D0kcKOFSq8IQHpXVftTlig+
+ oWvkh0XH+7o9YSGFnSc0scgkTZO/ry1eG3gDZDD0Nztf3BHpuAmWfFYptRaegECdxGEZ
+ aAPaIV1R2A6jYAtPuqgYQIZ4Y17gd7elCm/k7K5zjEqEqPZR5FAfvezoncCBgK9kh9Es
+ iv3Q==
+X-Gm-Message-State: AOJu0YypMKR046OgqqQYAwOc/de7keqSM6+YP8dGFTmwH6atMxhtMkat
+ qpQfQ/6aZJmUh/7Dh+JztzXNUCQGTALPGZ9rFT1TKxeVV4naQUcXK1FvW6wcdtTfZM8preqrJq6
+ T
+X-Google-Smtp-Source: AGHT+IFsPpL6bEdz2s230T6r01WIvhRkEnOjMTMhz6R39l/o+3Z88ZBhzrRkmxbxJXqvXMrhoqn/fg==
+X-Received: by 2002:a05:6a00:3cc8:b0:6e6:42ef:ed1b with SMTP id
+ ln8-20020a056a003cc800b006e642efed1bmr5224475pfb.31.1710094294087; 
+ Sun, 10 Mar 2024 11:11:34 -0700 (PDT)
+Received: from [192.168.68.110] ([177.94.15.159])
+ by smtp.gmail.com with ESMTPSA id
+ r15-20020aa78b8f000000b006e64f75c947sm2786295pfd.46.2024.03.10.11.11.31
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 10 Mar 2024 11:04:48 -0700 (PDT)
-Message-ID: <f8b57cb7-75d2-4153-81e5-d82554c6a311@linaro.org>
-Date: Sun, 10 Mar 2024 08:04:44 -1000
+ Sun, 10 Mar 2024 11:11:33 -0700 (PDT)
+Message-ID: <b5e5cace-5b90-4576-ba2c-91d3ae86369f@ventanamicro.com>
+Date: Sun, 10 Mar 2024 15:11:29 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v9 09/10] target/riscv: Clear vstart_qe_zero flag
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  philmd@linaro.org, Ivan Klokov <ivan.klokov@syntacore.com>
@@ -71,20 +72,21 @@ References: <20240309204347.174251-1-dbarboza@ventanamicro.com>
  <20240309204347.174251-10-dbarboza@ventanamicro.com>
  <a3765207-28bb-44fd-b207-58327516a6cc@linaro.org>
  <93e34ed6-9876-4a1c-897b-b0bc59831a01@ventanamicro.com>
+ <f8b57cb7-75d2-4153-81e5-d82554c6a311@linaro.org>
 Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <93e34ed6-9876-4a1c-897b-b0bc59831a01@ventanamicro.com>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <f8b57cb7-75d2-4153-81e5-d82554c6a311@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x629.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42c;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x42c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,21 +102,36 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 3/10/24 00:17, Daniel Henrique Barboza wrote:
-> 
-> 
-> On 3/10/24 04:47, Richard Henderson wrote:
->> On 3/9/24 10:43, Daniel Henrique Barboza wrote:
->>> From: Ivan Klokov <ivan.klokov@syntacore.com>
->>>
->>> The vstart_qe_zero flag is set at the beginning of the translation
+
+
+On 3/10/24 15:04, Richard Henderson wrote:
+> On 3/10/24 00:17, Daniel Henrique Barboza wrote:
 >>
->> Here and subject, s/qe/ne/.
+>>
+>> On 3/10/24 04:47, Richard Henderson wrote:
+>>> On 3/9/24 10:43, Daniel Henrique Barboza wrote:
+>>>> From: Ivan Klokov <ivan.klokov@syntacore.com>
+>>>>
+>>>> The vstart_qe_zero flag is set at the beginning of the translation
+>>>
+>>> Here and subject, s/qe/ne/.
+>>
+>> Hmmmm  ... the flag name is correct - vstart_qe_zero.
 > 
-> Hmmmm  ... the flag name is correct - vstart_qe_zero.
+> Gah.  My mistake in pointing out the mistake, which is "qe" not "eq".
 
-Gah.  My mistake in pointing out the mistake, which is "qe" not "eq".
+Hhehe the flag is still named 'vstart_qe_zero' in v10 both the subject and
+commit msg instead of 'vstart_eq_zero' :D
+
+Alistair, can you amend the commit msg of patch 9 when queueing? Thanks,
 
 
-r~
+Daniel
+
+
+
+
+> 
+> 
+> r~
 
