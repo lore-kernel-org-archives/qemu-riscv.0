@@ -4,85 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59C12C54791
-	for <qemu-riscv@archiver.kernel.org>; Sun, 10 Mar 2024 07:47:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5075BC54791
+	for <qemu-riscv@archiver.kernel.org>; Sun, 10 Mar 2024 09:51:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rjDty-0001wj-UD; Sun, 10 Mar 2024 03:47:22 -0400
+	id 1rjFp8-0001eg-Hv; Sun, 10 Mar 2024 05:50:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rjDtu-0001wL-Ol
- for qemu-riscv@nongnu.org; Sun, 10 Mar 2024 03:47:19 -0400
-Received: from mail-oa1-x2b.google.com ([2001:4860:4864:20::2b])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rjFp5-0001eG-TZ
+ for qemu-riscv@nongnu.org; Sun, 10 Mar 2024 05:50:28 -0400
+Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rjDtr-00011c-RT
- for qemu-riscv@nongnu.org; Sun, 10 Mar 2024 03:47:18 -0400
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-21f0c82e97fso1629925fac.2
- for <qemu-riscv@nongnu.org>; Sat, 09 Mar 2024 23:47:15 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rjFp3-0002pI-Jh
+ for qemu-riscv@nongnu.org; Sun, 10 Mar 2024 05:50:27 -0400
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-1dd8f7d50c6so1406125ad.0
+ for <qemu-riscv@nongnu.org>; Sun, 10 Mar 2024 01:50:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710056834; x=1710661634; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=ventanamicro.com; s=google; t=1710064223; x=1710669023; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=sgWzEZRwyKC1zm4r5+JNjGrUWOKMo0RclMRzkjtXYE0=;
- b=WmppS0OQT4m0YBu23cQb1BRHZwzvtrEi9GUr4/DAh10S7DSECSrK/JQk0c5jT2kz3w
- bcX56vQ3aYsUH6JLTq9p5yH33c3S4et0EUL+N2OZXLuE4728K6qNROCN5q84aLm0wsdy
- CLrFrE14J6ux+l2Kpaf2QXEzyWH6b9M3zMH3rKEqmYMeBt4ybfBUuZgunEigqa78QlZz
- j6ZoVbkxxcPmtZBFzrWrwncuHLBCRt/0LVCtOvUp4V13qStEL5jGRTTAlxxpIFYI4zXi
- ZB3cX31mgictL95sQdLrFwppRZtdNHHsyGX+WSMtbtTO3dq0mLA1YGb/iphzEb2jC2xY
- eBSg==
+ bh=CwzpLY81HI4d1/yIIF7dQdqkkcfAtKxiOLFJ5W/E8fw=;
+ b=iRUDabig0BrEGLaxjanQ0UKSBJrJ2U3wFQx7Eno8MdB3/wQNhCCr3B7CxMGi6SfLKB
+ LkiHW4V4VZpBDfMjx6+3DShsOjKXuTSNtaTrY/pL+azs8fs5PdvUrZGnsCnVI2M6kiYH
+ mk+Ph9+RKBiS2tHQ7fKNeen3280zHZKVOpwkGW7ALq/Be0Al54jS92xFHjjsVJxbioAf
+ ijgsoTHrODh9G297wXMoJgFc63yAjfCYle4rn5Uw5mdmMP07uzJprXoWkya0Ml/mk/Kt
+ ehBdQtKOpYfKpK8+AZ4OE4ZL5K7j0O8smLa1fdmMEm5Fe5TVL64HoK81u7HyknWfzTGw
+ rkiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710056834; x=1710661634;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1710064223; x=1710669023;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=sgWzEZRwyKC1zm4r5+JNjGrUWOKMo0RclMRzkjtXYE0=;
- b=TVozlj6Y987lKP1+XV3XadrZXzizGguxtfXk/DDQ2elPFzhTqxsU4q8RgfgiIEFnod
- dNPbOBuSRhBBPETixEujxwxS/DvKYXhK9lIJ/WmhzT5Gmhb/V5i/8hJUwi2caiHxn94q
- aR2+jYIMYkTuoCwceYh/PttFDpUZ+wSlLAt6t6BlvBjnaum8xOkgAR+iYucN8R6G5RPV
- QKHj/EEN0JleDS3+xHD8mQS9vnemL8C2T2ZsKmmOVESfSVmMZ0uqelqj/bJaVPjglug7
- hh0jDOFBYrF36epVn5RpqSfL8tMNp0M2kvrKq6AC/RjuX3EzaGZb33tGJJVa24EoulKl
- MdxA==
-X-Gm-Message-State: AOJu0Yx8M0htTeT/fuPFmj7rHYuaUGKS/Qoj2i1IwssUzAwKuMSjCIOd
- fs81eSwUVYHm9D8G/QgNFJscXnFdfsvkPUgAhktT2Wz6gMhONK0joMleYMlJTdM=
-X-Google-Smtp-Source: AGHT+IGy2KOXDwgXZhFNQrvxLLqZZ1eP+iaFOqa//6oy45jAZx5/qXpUa+t9W6RTM1Yxw14k6DkyJA==
-X-Received: by 2002:a05:6871:888:b0:21e:b50c:3e8e with SMTP id
- r8-20020a056871088800b0021eb50c3e8emr4286899oaq.56.1710056833853; 
- Sat, 09 Mar 2024 23:47:13 -0800 (PST)
-Received: from [172.20.1.19] (173-197-098-125.biz.spectrum.com.
- [173.197.98.125]) by smtp.gmail.com with ESMTPSA id
- p1-20020a62b801000000b006e66a76d877sm2276421pfe.153.2024.03.09.23.47.11
+ bh=CwzpLY81HI4d1/yIIF7dQdqkkcfAtKxiOLFJ5W/E8fw=;
+ b=Hw5x1s3HYe8lz4mp7i4C1AzeO35cFfXCLGd03JYEk8bv15QgHgWaQpxAFGfXLoFKx8
+ RP99gmllBJmq99rI8oJcbqETxKU9B8wIP7aD136NPrkoWCYs5tAfMg1FZ88NeTIJWS0Y
+ NyTKk/2Uj8EgbbMPSwrl+b68o6ZZ8uCl5BY/PRwiMxx/mVqbeaJUP58/71VG7B+Iu/yV
+ wT3m7VLy0OIt/wrSMVDIPozGe21zG0ei42RUfJjDltF4HyT1lNFmtHYh6G0pO19Jgcwd
+ RiKv4b6Ri1JL4/w3Mfke5s0K23LlA4Wgdz75K8reBf3MF0qsbO/sE42mFU4Wptm4tH93
+ 3lUw==
+X-Gm-Message-State: AOJu0Yz4Z2LEkvisiR2b5n0/PgChoWBkflmDYn9pkscjE0YfcqxgwhQG
+ ImW1jyDIsIjwVGSaujx2tN/q0RdiVeNhZmOah9j4QDkSfZzd8B53eZzl+jL4AAk=
+X-Google-Smtp-Source: AGHT+IG4rzBicypNT9mCq5uZGIEz0Ja9E2MAdkHOrZuTjHtEt5FOZGs9g1IjFtQ5SaA25mb7+OCqhQ==
+X-Received: by 2002:a17:903:585:b0:1dd:54a6:6401 with SMTP id
+ jv5-20020a170903058500b001dd54a66401mr3756069plb.17.1710064223370; 
+ Sun, 10 Mar 2024 01:50:23 -0800 (PST)
+Received: from [192.168.68.110] ([177.94.15.159])
+ by smtp.gmail.com with ESMTPSA id
+ j8-20020a170903024800b001dcc2847655sm2436042plh.176.2024.03.10.01.50.20
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 09 Mar 2024 23:47:13 -0800 (PST)
-Message-ID: <a3765207-28bb-44fd-b207-58327516a6cc@linaro.org>
-Date: Sat, 9 Mar 2024 21:47:10 -1000
+ Sun, 10 Mar 2024 01:50:22 -0800 (PST)
+Message-ID: <fe4a7631-699c-41c2-96d4-dcc3133437e2@ventanamicro.com>
+Date: Sun, 10 Mar 2024 06:50:18 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v9 09/10] target/riscv: Clear vstart_qe_zero flag
-Content-Language: en-US
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+Subject: Re: [PATCH v9 04/10] target/riscv/vector_helper.c: update tail with
+ vext_set_tail_elems_1s()
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- philmd@linaro.org, Ivan Klokov <ivan.klokov@syntacore.com>
+ philmd@linaro.org
 References: <20240309204347.174251-1-dbarboza@ventanamicro.com>
- <20240309204347.174251-10-dbarboza@ventanamicro.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240309204347.174251-10-dbarboza@ventanamicro.com>
+ <20240309204347.174251-5-dbarboza@ventanamicro.com>
+ <888ec29d-4c93-4a3a-8882-3db690ae0f40@linaro.org>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <888ec29d-4c93-4a3a-8882-3db690ae0f40@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2001:4860:4864:20::2b;
- envelope-from=richard.henderson@linaro.org; helo=mail-oa1-x2b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x633.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,13 +100,39 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 3/9/24 10:43, Daniel Henrique Barboza wrote:
-> From: Ivan Klokov <ivan.klokov@syntacore.com>
+
+
+On 3/10/24 04:41, Richard Henderson wrote:
+> On 3/9/24 10:43, Daniel Henrique Barboza wrote:
+>> Change all code that updates tail elems to use vext_set_tail_elems_1s()
+>> instead of vext_set_elems_1s().
+>>
+>> Setting 'env->vstart=0' needs to be the very last thing a helper does
+>> because env->vstart is being checked by vext_set_tail_elems_1s().
 > 
-> The vstart_qe_zero flag is set at the beginning of the translation
-
-Here and subject, s/qe/ne/.
+> I did wonder if it would be worth doing the vstart = 0 in vext_set_tail_elems_1s, allowing that to be the very last thing in each helper, and could be tail called.
 
 
-r~
+Some insns don't update tail, e.g. vext_ldst_whole(), and we would need to
+clear vstart explicitly in them regardless. Might as well deal with clearing
+vstart in every helper to make them consistent.
+
+
+Thanks,
+
+Daniel
+
+> 
+>>
+>> A side effect of this change is that a lot of 'vta' local variables got
+>> unused. The reason is that 'vta' was being fetched to be used with
+>> vext_set_elems_1s() but vext_set_tail_elems_1s() doesn't use it - 'vta' is
+>> retrieve inside the helper using 'desc'.
+>>
+>> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> 
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+> 
+> 
+> r~
 
