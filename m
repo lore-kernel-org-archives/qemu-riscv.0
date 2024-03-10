@@ -4,83 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90420C54E69
-	for <qemu-riscv@archiver.kernel.org>; Sat,  9 Mar 2024 20:46:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 187ACC54791
+	for <qemu-riscv@archiver.kernel.org>; Sun, 10 Mar 2024 07:37:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rj3YX-0005pV-HZ; Sat, 09 Mar 2024 15:44:33 -0500
+	id 1rjDkY-0005z7-Ge; Sun, 10 Mar 2024 03:37:38 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rj3YV-0005ox-QY
- for qemu-riscv@nongnu.org; Sat, 09 Mar 2024 15:44:31 -0500
-Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1rjDkW-0005yh-PX
+ for qemu-riscv@nongnu.org; Sun, 10 Mar 2024 03:37:36 -0400
+Received: from mail-oa1-x36.google.com ([2001:4860:4864:20::36])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rj3YT-0006om-AX
- for qemu-riscv@nongnu.org; Sat, 09 Mar 2024 15:44:31 -0500
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-6e66e8fcc2dso1593165b3a.3
- for <qemu-riscv@nongnu.org>; Sat, 09 Mar 2024 12:44:28 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1rjDkT-0007d8-IZ
+ for qemu-riscv@nongnu.org; Sun, 10 Mar 2024 03:37:34 -0400
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-221e1910c3bso142279fac.1
+ for <qemu-riscv@nongnu.org>; Sat, 09 Mar 2024 23:37:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1710017068; x=1710621868; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TMn63prcVteRus1yYdprTy/N0umMjC+ArdoC3MJRmKA=;
- b=E/FDpu8QnIq+vmpgBNkwgQBHkfKJKdmGlEx6WUbWqieXHA5Wzf4q4MMPuORYdjZzci
- YMUYSdkQpAUKevDxiBW+vIb279GC4dC3QWbDpnT5wo/RrtJdYYxtZ8RxPBqGf6vkvI2y
- 4fVnoIO/kay+mEIKq0yyR7OFlKeQPgpGtlo2ENyq4j8xP97IIycCJCUw0g0GeQbTK2MY
- 1yUCiFoL+OODe9SLH8edCmIv/xCz+y+H8bpyaLYodHMGXcU9ClfnDj20X5ScDXsBfpSY
- crU9OSun/LzfypO8JPxoM1uw16BN61jJAN2EQv/wtbS/bzJphAKJyr97jUSgJISInQZK
- 1VVw==
+ d=linaro.org; s=google; t=1710056250; x=1710661050; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=+ulMc/597jVEtb8OQY6aYx97DGbMcRtpP9gNW/40li8=;
+ b=CyMTKhVh+dR53jWJ19RVZMcvRz0xSh1TGFNbW/wnzhOJtLdo8I8jIPtze/QnrGPcBz
+ lnXFO60LxGX7Yk7GSWrK044qnlrrPMeKBXKSqgCNZjDCJWpqb+iBWxEiVS/uYXFAc1yG
+ qIY4hdjz1OKn8q2nmjk2vtKOQ1Y01vU1FlL4vtdZ0iXZQV5cBrtN6/9tuy5xPY0CSgdD
+ 3ZzFjdyL6/dHQRYGuwStHZ9mVAYewHk+N+pTqgjlerHuufRBgOH37oixyf08ODU+TbfS
+ KT8ngvNsBQNUI9me8zRw0FjxnAbjNyrsXHWyiS4mKxNNKH3WTBmv7Mu9/KJtHUoQGW3D
+ rQnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710017068; x=1710621868;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=TMn63prcVteRus1yYdprTy/N0umMjC+ArdoC3MJRmKA=;
- b=iYEAXPalViAJ7+Xx0VwyntxwJrQLQkCPTeq1bZoHbViucN5Rh46fj2tbtHb0mbHgJt
- VkavVi0ULnykKqXbGeEr40Z+hurJ1biskYn3GV0kRZWm7HCoANZnVeYvmTaXjParCAOa
- pqjB5GAkW+u5dqQt2YhYgX9Pax3rE4pYsL9hQKNVpP1rDaouLrqdBXADi0EbLSOLLzW4
- 21otAFl43H4sTasjNqo+7tCOjT9Gam8D5AgI+UvqKc+aCnLjgMl1xl/Otm61Piem3+F4
- kNh+5jH9fGOubhXxrKYZ7tBH408Qm4AZdq+mUgfbHZzy/Fm/VKi4tDKzGLMNPKaKIIn6
- DpSw==
-X-Gm-Message-State: AOJu0YwwseSoDZAfwCPwns3N4lpzG8UaVXyOK3lbok9P55dL+jwQjwBd
- HF5MejGOj24Co3SJ6ox+ir3RETkJlPB+r7CbRNsU2wb55fLtYfijpR1OKnk8UeE=
-X-Google-Smtp-Source: AGHT+IGp6Ba4syf9cTtUtqMZdnk67TwHHVABdKWKTPuos8VhML59TOJ/a8xN5TDiuoUhA5cKjetrUA==
-X-Received: by 2002:aa7:88cd:0:b0:6e5:561b:4670 with SMTP id
- k13-20020aa788cd000000b006e5561b4670mr3057533pff.30.1710017067977; 
- Sat, 09 Mar 2024 12:44:27 -0800 (PST)
-Received: from grind.. ([177.94.15.159]) by smtp.gmail.com with ESMTPSA id
- ey15-20020a056a0038cf00b006e647716b6esm1656270pfb.149.2024.03.09.12.44.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 Mar 2024 12:44:27 -0800 (PST)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
+ d=1e100.net; s=20230601; t=1710056250; x=1710661050;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=+ulMc/597jVEtb8OQY6aYx97DGbMcRtpP9gNW/40li8=;
+ b=dcxZZSU/n11bpKA4/ope0oi/sokPx1HvZVnFSHiSS5JaW1agbyPFxwzz+rskbj8PEJ
+ Sof3xT8P8F/gbwRELqYLNGBIc7tOwRI8WyKWzbxWenccGotVDYBBqcwba2XoQWAgy7zW
+ 1BSUFwYUGcOB6/REeqU3QKy79qzP4V6fG3PSIuqgvloZLs9Bqn5djNZsfhkj3B8dxStz
+ c9YwEfiNu/Z2ixt7gldjzuSL6R5p4qk2qCIYSWbrhpFwrKPBKfQznCsxTqIGFqZBEAeI
+ gyXGUp8YXMgXEvr78c2dU2M+OAydJtN9/MhhFrSxiIBu7/GIuaQsAI+EXo8PA4CRlL/9
+ vR+Q==
+X-Gm-Message-State: AOJu0YzO9Hgdk6vqy4tXQzeuVXHshbyniRkIqw6YeQWyJAi80bMJXp+E
+ zMRYe4++hK2QQL9tErsDHa02D3NMB+UHhvxt/EX9fqRJ7upVKQ7uEgC6b7peguw=
+X-Google-Smtp-Source: AGHT+IEqvT8v5hRQbvMeubXTww35aSdxqoFBWAWXNcuDao/3srXcDFsNKT4g5bGBvWhyZq5MT4Bitw==
+X-Received: by 2002:a05:6871:7412:b0:21e:a47f:ec31 with SMTP id
+ nw18-20020a056871741200b0021ea47fec31mr4188540oac.43.1710056250623; 
+ Sat, 09 Mar 2024 23:37:30 -0800 (PST)
+Received: from [172.20.1.19] (173-197-098-125.biz.spectrum.com.
+ [173.197.98.125]) by smtp.gmail.com with ESMTPSA id
+ e30-20020a63745e000000b005dc832ed816sm2211455pgn.59.2024.03.09.23.37.28
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 09 Mar 2024 23:37:30 -0800 (PST)
+Message-ID: <6e82f8b3-5a3c-4bb0-8aba-94ad25da3712@linaro.org>
+Date: Sat, 9 Mar 2024 21:37:25 -1000
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v9 02/10] target/riscv: handle vstart >= vl in
+ vext_set_tail_elems_1s()
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- richard.henderson@linaro.org, philmd@linaro.org,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v9 10/10] target/riscv/vector_helper.c: optimize loops in ldst
- helpers
-Date: Sat,  9 Mar 2024 17:43:45 -0300
-Message-ID: <20240309204347.174251-11-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.43.2
-In-Reply-To: <20240309204347.174251-1-dbarboza@ventanamicro.com>
+ philmd@linaro.org
 References: <20240309204347.174251-1-dbarboza@ventanamicro.com>
-MIME-Version: 1.0
+ <20240309204347.174251-3-dbarboza@ventanamicro.com>
+Content-Language: en-US
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20240309204347.174251-3-dbarboza@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::435;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x435.google.com
+Received-SPF: pass client-ip=2001:4860:4864:20::36;
+ envelope-from=richard.henderson@linaro.org; helo=mail-oa1-x36.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,50 +99,65 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Change the for loops in ldst helpers to do a single increment in the
-counter, and assign it env->vstart, to avoid re-reading from vstart
-every time.
+On 3/9/24 10:43, Daniel Henrique Barboza wrote:
+> We're going to make changes that will required each helper to be
+> responsible for the 'vstart' management, i.e. we will relieve the
+> 'vstart < vl' assumption that helpers have today.
+> 
+> To do that we'll need to deal with how we're updating tail elements
+> first. We can't update them if vstart >= vl, but at this moment we're
+> not guarding for it.
+> 
+> We have the vext_set_tail_elems_1s() helper to update tail elements.
+> Change it to accept an 'env' pointer, where we can read both vstart and
+> vl, and make it a no-op if vstart >= vl. Note that callers will need to
+> set env->start = 0 *after* the helper from now on.
+> 
+> The exception are three helpers: vext_ldst_stride(), vext_ldst_us() and
+> vext_ldst_index(). They are are incrementing env->vstart during
+> execution and will end up with env->vstart = vl when tail updating. For
+> these cases only, do an early check and exit if vstart >= vl, and set
+> env->vstart = 0 before updating the tail.
+> 
+> For everyone else we'll do vext_set_tail_elems_1s() and then clear
+> env->vstart. This is the case of vext_ldff() that is already using
+> set_tail_elems_1s(), and will be the case for the rest after the next
+> patches.
+> 
+> Let's also simplify the API a little by removing the 'nf' argument since
+> it can be derived from 'desc'.
+> 
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> ---
+>   target/riscv/vector_helper.c | 59 ++++++++++++++++++++++++++++++------
+>   1 file changed, 49 insertions(+), 10 deletions(-)
 
-Suggested-by: Richard Henderson <richard.henderson@linaro.org>
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
----
- target/riscv/vector_helper.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 4fe8752eea..ee57300dc0 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -195,7 +195,7 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base,
-         return;
-     }
- 
--    for (i = env->vstart; i < env->vl; i++, env->vstart++) {
-+    for (i = env->vstart; i < env->vl; env->vstart = ++i) {
-         k = 0;
-         while (k < nf) {
-             if (!vm && !vext_elem_mask(v0, i)) {
-@@ -270,7 +270,7 @@ vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
-     }
- 
-     /* load bytes from guest memory */
--    for (i = env->vstart; i < evl; i++, env->vstart++) {
-+    for (i = env->vstart; i < evl; env->vstart = ++i) {
-         k = 0;
-         while (k < nf) {
-             target_ulong addr = base + ((i * nf + k) << log2_esz);
-@@ -393,7 +393,7 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
-     }
- 
-     /* load bytes from guest memory */
--    for (i = env->vstart; i < env->vl; i++, env->vstart++) {
-+    for (i = env->vstart; i < env->vl; env->vstart = ++i) {
-         k = 0;
-         while (k < nf) {
-             if (!vm && !vext_elem_mask(v0, i)) {
--- 
-2.43.2
+> +    uint32_t nf = vext_nf(desc);
+>       int k;
+>   
+> -    if (vta == 0) {
+> +    /*
+> +     * Section 5.4 of the RVV spec mentions:
+> +     * "When vstart ≥ vl, there are no body elements, and no
+> +     *  elements are updated in any destination vector register
+> +     *  group, including that no tail elements are updated
+> +     *  with agnostic values."
+> +     */
+> +    if (vta == 0 || env->vstart >= env->vl) {
+>           return;
+>       }
+>   
+>       for (k = 0; k < nf; ++k) {
 
+Existing issue, and we know nf <= 8, but bad form to mix signs on the comparison.
+
+> -        vext_set_elems_1s(vd, vta, (k * max_elems + vl) * esz,
+> +        vext_set_elems_1s(vd, vta, (k * max_elems + env->vl) * esz,
+
+You may wish to hoist vl to a local anyway.
+
+
+r~
 
