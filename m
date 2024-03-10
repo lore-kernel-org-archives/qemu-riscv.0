@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DCC2C54E58
-	for <qemu-riscv@archiver.kernel.org>; Sun, 10 Mar 2024 11:55:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3A32C54E58
+	for <qemu-riscv@archiver.kernel.org>; Sun, 10 Mar 2024 11:55:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rjHkI-0007j0-0o; Sun, 10 Mar 2024 07:53:38 -0400
+	id 1rjHkY-0007op-Tw; Sun, 10 Mar 2024 07:53:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rjHk8-0007fz-Ay
- for qemu-riscv@nongnu.org; Sun, 10 Mar 2024 07:53:31 -0400
-Received: from mail-pg1-x534.google.com ([2607:f8b0:4864:20::534])
+ id 1rjHkF-0007ib-9n
+ for qemu-riscv@nongnu.org; Sun, 10 Mar 2024 07:53:36 -0400
+Received: from mail-pg1-x530.google.com ([2607:f8b0:4864:20::530])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rjHk6-00041U-Vm
- for qemu-riscv@nongnu.org; Sun, 10 Mar 2024 07:53:28 -0400
-Received: by mail-pg1-x534.google.com with SMTP id
- 41be03b00d2f7-517ab9a4a13so3216458a12.1
- for <qemu-riscv@nongnu.org>; Sun, 10 Mar 2024 04:53:26 -0700 (PDT)
+ id 1rjHkD-00042C-OC
+ for qemu-riscv@nongnu.org; Sun, 10 Mar 2024 07:53:35 -0400
+Received: by mail-pg1-x530.google.com with SMTP id
+ 41be03b00d2f7-5dc949f998fso3235764a12.3
+ for <qemu-riscv@nongnu.org>; Sun, 10 Mar 2024 04:53:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1710071605; x=1710676405; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1710071612; x=1710676412; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8PUZYN/jxC55WgIbgr/YDIPnxwzEfC4uN3+8U/WL+Ts=;
- b=DJuFY74Ib7pRxCJOJmYWV0G/GoToKoLv9rCnKlYvsnUrzFh8qG6RiGg4okZ1VF4CtE
- 4N3dTBxI02yD2JkTUbGKIajPhvjcsMHbKNOiClh39rqyUoejNf3+LDkD4XgdYpNR0+Ef
- rX2ZlIIjJgMzeHmCTxjFdkOsSedYPYEuZqRtfnfiic2oIaOnMQnH0IMipvcFQHYrBh5y
- yLW1fvYHRn08GTa3Rc2KZISyYQZ9YRVpuvk4lbPv74bj0iJJuWJ7aWMvtVMnUg5FBdS0
- g9sUnkKGRjQhtMYq4gH2TChBOmC6t5Y8lIdw0Gp7JH6I6VVs+au/alXyUKBLV4qV1ERI
- CfOg==
+ bh=dkHaxAaccqLTSQvWjOIYNF50FjoIR0eELlfVCBEjemM=;
+ b=YnBAqt6chxfjRtD4WWayBw70WWQV7LQYcQcPHmNVEmgjc+Tt+KXfCqCH7Ndyu9NNis
+ XCbWGtiIw4hDnEkqVsd3b8EL88SBBzJZ7WyDU3lJyGw5STdkRvGptXlpEetxMCl+y9IV
+ XcVzKZfvAT+Du1Db9vq1JcVhmPO4gWBDu5ew+D6oVk+S8n5IS1qfBkJMcG12ntw0jQIl
+ gbaTvIdck8Zvp92xrNcObmk132fjlh7IqAx/paYUIoviHXIJiJDnlhlgV1Hxv0JRAdpF
+ mGitlqsglsp8XjABFyCag9bhM+WJIFEAaW9/mhvBYf4I8Ps2naeeF6HWMeNT+Xw/3Fj0
+ 2giQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710071605; x=1710676405;
+ d=1e100.net; s=20230601; t=1710071612; x=1710676412;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8PUZYN/jxC55WgIbgr/YDIPnxwzEfC4uN3+8U/WL+Ts=;
- b=rHBA8WL1JSh3+zlIYIoFyRPLyhZqfDiJFXqRF+zn0SDCJ3poHrPB9IvvmTT8vdzzqJ
- K7JnUJQGO61BOGE+bh4RU9xtzYbOJrpheQwDMisgs+mX6YWfUKKb90mpC1s/P7ix5eb8
- HOQxYKIbqHW71lf7BQPtxyrIxVO1bxZpusL4TreCyNZOR04nwiJasRiplBnICIKHT7wj
- ca1GrX7dFJmCICyyECW/VF6OmE1xBuI6oYrCDk4pCGVob/XRf4L8pPfe3qAhOQIYH/86
- qoARNIYxsy2jlL17tm33yWgsg8CltRT7NEvmpc2hm3xnPUrMKqwd1YY/kggf2PdHVK4r
- FC8g==
-X-Gm-Message-State: AOJu0YyFh2ymIXrp44B8q5QVMwH2FeqnLLASsgLBMpnXTar2et24f8pM
- lHbglGd504Lr+pC6oEvGJ1no7hDZtANDWUf1dVmUWhTqziX1QZBHlndcXXQGquc=
-X-Google-Smtp-Source: AGHT+IG4KfrazGU/f//rbpQyy9ewTUhdUY8aWZmwDc/x1u4CMpXVcc+gFv/lSI1EDGDRHxQP913xOQ==
-X-Received: by 2002:a05:6a20:e608:b0:1a3:1349:8489 with SMTP id
- my8-20020a056a20e60800b001a313498489mr1092223pzb.30.1710071605583; 
- Sun, 10 Mar 2024 04:53:25 -0700 (PDT)
+ bh=dkHaxAaccqLTSQvWjOIYNF50FjoIR0eELlfVCBEjemM=;
+ b=EmNKc0vPAsOLTKOzrOa9dUzyoi1/suCTC6UhXJLRf8ZI8gpD+5WDhGG7DbkCQSdtOD
+ fkqySXmkKVkkfrsGiIxDRhzkcUhxnt9ZyPezEKyx/f4tFAJIgaFXvo5D1BJk0PNr6Yip
+ uwxqjT1HNWrxrh39sHRPOpoQW+vi2aPxohaioyJQvGwhRazy6jPalM8PDcyNpOCgRk5w
+ J8E7ot++eX0+7mapBN7XiK02NIy14SW/wTdj2xT1XVyBmJsdlFWPdCcVIWLr9ejZ2uYq
+ mi8l0XWKzETHSLdlv/YMn3kR8y7TjPpcXFjenau9kL8fj9iO1v7z92O9E5ArapeHVCQ0
+ XoBA==
+X-Gm-Message-State: AOJu0YxoVYPIUBTGywZc9BqVdGqCD93B4Qdi3Um+1IAArMbgkUe8i7JR
+ w17lsUt4zWzLm0l8F2AOVBT9ow7fHm01lQq4Qcimq/bWSJslaQubR+ByrPL21zM=
+X-Google-Smtp-Source: AGHT+IEK82fIquQPB4PdrHH1GwDnGYrjws3X/PLHcGNNfwwo2+xWZfz4wYMEPMoKoXP6d9of2QUYUg==
+X-Received: by 2002:a05:6a00:2291:b0:6e5:7480:e5b9 with SMTP id
+ f17-20020a056a00229100b006e57480e5b9mr4116557pfe.9.1710071612270; 
+ Sun, 10 Mar 2024 04:53:32 -0700 (PDT)
 Received: from grind.. ([177.94.15.159]) by smtp.gmail.com with ESMTPSA id
- g22-20020aa78196000000b006e647059cccsm2449253pfi.33.2024.03.10.04.53.22
+ g22-20020aa78196000000b006e647059cccsm2449253pfi.33.2024.03.10.04.53.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 10 Mar 2024 04:53:25 -0700 (PDT)
+ Sun, 10 Mar 2024 04:53:31 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  richard.henderson@linaro.org, philmd@linaro.org,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v10 01/10] target/riscv/vector_helper.c: set vstart = 0 in
- GEN_VEXT_VSLIDEUP_VX()
-Date: Sun, 10 Mar 2024 08:53:05 -0300
-Message-ID: <20240310115315.187283-2-dbarboza@ventanamicro.com>
+Subject: [PATCH v10 03/10] target/riscv/vector_helper.c: do vstart=0 after
+ updating tail
+Date: Sun, 10 Mar 2024 08:53:07 -0300
+Message-ID: <20240310115315.187283-4-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240310115315.187283-1-dbarboza@ventanamicro.com>
 References: <20240310115315.187283-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::534;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x534.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::530;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x530.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -96,28 +96,57 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The helper isn't setting env->vstart = 0 after its execution, as it is
-expected from every vector instruction that completes successfully.
+vext_vv_rm_1() and vext_vv_rm_2() are setting vstart = 0 before their
+respective callers (vext_vv_rm_2 and  vext_vx_rm_2) update the tail
+elements.
+
+This is benign now, but we'll convert the tail updates to use
+vext_set_tail_elems_1s(), and this function is sensitive to vstart
+changes. Do vstart = 0 after vext_set_elems_1s() now to make the
+conversion easier.
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/vector_helper.c | 1 +
- 1 file changed, 1 insertion(+)
+ target/riscv/vector_helper.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index fe56c007d5..ca79571ae2 100644
+index a3b496b6e9..86b990ce03 100644
 --- a/target/riscv/vector_helper.c
 +++ b/target/riscv/vector_helper.c
-@@ -4781,6 +4781,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
-         }                                                                 \
-         *((ETYPE *)vd + H(i)) = *((ETYPE *)vs2 + H(i - offset));          \
-     }                                                                     \
-+    env->vstart = 0;                                                      \
-     /* set tail elements to 1s */                                         \
-     vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);              \
+@@ -1962,7 +1962,6 @@ vext_vv_rm_1(void *vd, void *v0, void *vs1, void *vs2,
+         }
+         fn(vd, vs1, vs2, i, env, vxrm);
+     }
+-    env->vstart = 0;
  }
+ 
+ static inline void
+@@ -1997,6 +1996,7 @@ vext_vv_rm_2(void *vd, void *v0, void *vs1, void *vs2,
+     }
+     /* set tail elements to 1s */
+     vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);
++    env->vstart = 0;
+ }
+ 
+ /* generate helpers for fixed point instructions with OPIVV format */
+@@ -2087,7 +2087,6 @@ vext_vx_rm_1(void *vd, void *v0, target_long s1, void *vs2,
+         }
+         fn(vd, s1, vs2, i, env, vxrm);
+     }
+-    env->vstart = 0;
+ }
+ 
+ static inline void
+@@ -2122,6 +2121,7 @@ vext_vx_rm_2(void *vd, void *v0, target_long s1, void *vs2,
+     }
+     /* set tail elements to 1s */
+     vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);
++    env->vstart = 0;
+ }
+ 
+ /* generate helpers for fixed point instructions with OPIVX format */
 -- 
 2.43.2
 
