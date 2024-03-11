@@ -4,57 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5302CC5475B
-	for <qemu-riscv@archiver.kernel.org>; Mon, 11 Mar 2024 18:57:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 327AAC54E58
+	for <qemu-riscv@archiver.kernel.org>; Mon, 11 Mar 2024 20:01:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rjkph-0007Rn-05; Mon, 11 Mar 2024 14:57:09 -0400
+	id 1rjlpc-00013t-2W; Mon, 11 Mar 2024 16:01:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <rbagley@ventanamicro.com>)
- id 1rjkpY-00076L-UZ
- for qemu-riscv@nongnu.org; Mon, 11 Mar 2024 14:57:02 -0400
-Received: from mail-ed1-x536.google.com ([2a00:1450:4864:20::536])
+ id 1rjlpM-0000oF-73
+ for qemu-riscv@nongnu.org; Mon, 11 Mar 2024 16:00:59 -0400
+Received: from mail-lf1-x130.google.com ([2a00:1450:4864:20::130])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <rbagley@ventanamicro.com>)
- id 1rjkpV-0005i8-IY
- for qemu-riscv@nongnu.org; Mon, 11 Mar 2024 14:57:00 -0400
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-56847d9b002so2656061a12.1
- for <qemu-riscv@nongnu.org>; Mon, 11 Mar 2024 11:56:55 -0700 (PDT)
+ id 1rjlpE-0000sw-Ar
+ for qemu-riscv@nongnu.org; Mon, 11 Mar 2024 16:00:49 -0400
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-5131c48055cso4900758e87.1
+ for <qemu-riscv@nongnu.org>; Mon, 11 Mar 2024 13:00:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1710183414; x=1710788214; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1710187242; x=1710792042; darn=nongnu.org;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0APSuVrlhCEdL75DcSxQTcjROoDKcEIqv9B8wfMiy+o=;
- b=EK8jWGZ+aCYG+24UZdv3SFb72D/Qt0xdqYCli95Kbvq1qeikrrTnxZjJuDUI+OcFFJ
- xwVx+GC7WnObI0UFYMzYiYVDoBWgl1+z1yL+KJJIh6OeUc++FihvFCyO+S1J1XyYbYrv
- wjtqQvgGFDw+88w4+1OKVH5VvSsGaJaIT5106csomU+seI3Epmb0a0bGdjgNU4ZCqYQ2
- WbIn+ArF65NzxP8ME+Aymu8T+FoA/Xd7Y2K5kKnIVs0z9jd4aU8VJDpcFyj6GEM+4gX+
- oFlt8nojcGnKeKzYpLmbaNyCTHwbUiIIXRTU1VmkV/EcE3CqACB6GMRrXIrH5Hnc5txB
- Xi9g==
+ bh=l+yO87h2Ei1vz2fQlzVyep68f9aqisqvE95jng9eQho=;
+ b=ixKFG6ja2ndu1qINNOY6uqiwCW3aVBjLY3bWLcbzGBNQkWTLbgZjG4zR/NddDlcC1F
+ B7t/5dRed9TJhgHTxDvpGRYn15Cdfyssgvhd00hjpT+Z8iG3RZSMI0kZWNuChkc2J3zK
+ GUM1PjJzRK/+JHgSxKVTV+vtunMduJiZHW1jIE+wAfH1/PoPxfidxrG1n0BxIoD5vGbq
+ ANoD/jhpLIGFCFBLEu7uMyYny4ZPthDU1taWibdoSlUVApaSMRlhwRyYTSj8Yeat6Dqx
+ fFWeTSUJfiIawdnxqrog2G2uVLNuuRQqbYAgeHwIywUtjGvPQti1rGV4GFaW/ou4d94j
+ UI8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710183414; x=1710788214;
+ d=1e100.net; s=20230601; t=1710187242; x=1710792042;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=0APSuVrlhCEdL75DcSxQTcjROoDKcEIqv9B8wfMiy+o=;
- b=XTBQyI/HX9On2lcBMIn/3iWC9SspbeiaINtDs0L6QRcH9ngFFbkfdXKHnh2F4grhS7
- 4r9/IcKFIdjyX8J0Dzg3+Cgq8yUTLYibWWMWFwCoJO9ZQ1FmkwCpqMYIRw8iT7fPuNAa
- LWMQmFmDTGO72VHiIbnbe8b0GiUGzVeVOK5cPyh8AZcPJ+hw/KVLAF9SUAEZHPSKSAJa
- lBd23zJN4LftWUqj8Kqqhprcdp+91jya6NmLBl80tifZcQUlazU/9WDWlJBZYZxqGVA/
- /k59UbFQ+vDjHPt5VJnOOuf8oqaLS6XB4ZXi+6rA1r6HXkoPf0YzoOa94FHbhotFvqHS
- Pu6g==
+ bh=l+yO87h2Ei1vz2fQlzVyep68f9aqisqvE95jng9eQho=;
+ b=uBqlHJFHG8qA6EjXANvQygvamt0461ijaa73ADNWPCbdo5SVx/rG9RLLApDa9SIIX9
+ dZgqGdYJvPCb7T6zydprssqMTkvCl/8/rmcFJQ4H5ixH5Ar2K1pRdpF6djTAJX3rfYNL
+ gm90sCtQ7dsM8OkRzII4Znm1pFklhY4MXfuM/jTGzp90Ba7md2a5d9vS/INu7Qt1bje2
+ WLHAAcAqkBOMzRxmcw6h8woVDbOocj+F9Gztk8lu27MAT2a1Q7eziDr0XG71SjCRiOAH
+ LGwpLAc+7Q7B2UFQXwGroftuQ0iFdjvpp/p+13aSdAnDVwTPGBVqcmh0/E11vryJrVhX
+ 8Rfw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXfPXwIx8w0iW2ZM7aWy5rlxnk9gc/eKVnGQBO6dCJEamCKd4SXT/ft/Xr7hQwO4HHX1X2Pzs78QXo7ZCx+gy5NQcZtWUc=
-X-Gm-Message-State: AOJu0Yze9fDjwiYfahodngh60G/Jk4aHZkRqJFgyeQhKcGhLyxjCqwBP
- FC+/kz9X9JcbOURTYZJtE2ylnSn4qfYV/uyaUkBBhkZOmbKE3AAslE10oSbq5tXazLUsLK60C6T
- yTgtsAxPcbnjXITfFF/JZRPy6ZZ9XYackx+HAqg==
-X-Google-Smtp-Source: AGHT+IHur+eZ0uA5K7EIEQBiOo6NOb+CNFg5Wb2OpB7Rp/TrRnpf2MOKJRnREJk/rZ41X9uSkjlH99chAE+OH9z3Pb4=
-X-Received: by 2002:a50:9f25:0:b0:565:7b61:4c82 with SMTP id
- b34-20020a509f25000000b005657b614c82mr5093009edf.5.1710183414057; Mon, 11 Mar
- 2024 11:56:54 -0700 (PDT)
+ AJvYcCULqt69u93h4lD6tuHsRPgwuGIspu/Vm/PDnhnGDVRXYWhGqQKcRtYtWE8OrdmdBjsJici+frRln+YqyS4yhtrCGBsJ5tI=
+X-Gm-Message-State: AOJu0YyKjnU4FFMtOE2HuJdhw+/uRGhN4oM4FdEcqK4wiPAUTZoO3LAG
+ 3AznQrx0iLfKsPtUBBfimBAPxjcoYSqGS8wzRJRzKUsjFQhI87NQWHBKDDlj9eJfeMfnxuo1Sje
+ GAoQqCAy/nxekp5Ez8CDi+mhwk1JWt0LnW+Wmuw==
+X-Google-Smtp-Source: AGHT+IEkWW72t3AM1ZSb0xM6OpIyO+NIXf2g7lSGAHzHxFOpDr+G0OqrycTsCYyVtOfKLhea4p6L4WHxmOi0+3zof5I=
+X-Received: by 2002:ac2:528a:0:b0:513:3f24:28d8 with SMTP id
+ q10-20020ac2528a000000b005133f2428d8mr4538449lfm.34.1710187241603; Mon, 11
+ Mar 2024 13:00:41 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230810-c9e1f2783168b48bc07a1aa2@orel>
  <mhng-a6344a0c-8820-41b5-a015-b82b261b463d@palmer-ri-x1c9>
@@ -64,10 +64,11 @@ References: <20230810-c9e1f2783168b48bc07a1aa2@orel>
  <CAARkPA-P1U7xyLpdx+XD1M3Ji2NUfTb+88+GKUk8R2aFsOCMRw@mail.gmail.com>
  <CAARkPA-dOxOWsR0VS+S8p4fDmNR5X5Jjmo5pQTaurWLYsc9vsw@mail.gmail.com>
  <20240309-ee813e971e7c5850d652b295@orel>
-In-Reply-To: <20240309-ee813e971e7c5850d652b295@orel>
+ <CAARkPA_8zSZK-4oOTcJO2KinWSadxZYZztwRP-UvNNkDjmyexw@mail.gmail.com>
+In-Reply-To: <CAARkPA_8zSZK-4oOTcJO2KinWSadxZYZztwRP-UvNNkDjmyexw@mail.gmail.com>
 From: Richard Bagley <rbagley@ventanamicro.com>
-Date: Mon, 11 Mar 2024 11:56:42 -0700
-Message-ID: <CAARkPA_8zSZK-4oOTcJO2KinWSadxZYZztwRP-UvNNkDjmyexw@mail.gmail.com>
+Date: Mon, 11 Mar 2024 13:00:28 -0700
+Message-ID: <CAARkPA_fYPQ2KXMe3nNcaKi+fTz36gTrF88-RkK7ha5vXNLgcA@mail.gmail.com>
 Subject: Re: [PATCH] disas/riscv: Further correction to LUI disassembly
 To: Andrew Jones <ajones@ventanamicro.com>
 Cc: Palmer Dabbelt <palmer@rivosinc.com>, qemu-devel@nongnu.org,
@@ -75,16 +76,16 @@ Cc: Palmer Dabbelt <palmer@rivosinc.com>, qemu-devel@nongnu.org,
  Alistair Francis <Alistair.Francis@wdc.com>, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, 
  zhiwei_liu@linux.alibaba.com, dbarboza@ventanamicro.com
-Content-Type: multipart/alternative; boundary="000000000000e5693e0613671aae"
-Received-SPF: pass client-ip=2a00:1450:4864:20::536;
- envelope-from=rbagley@ventanamicro.com; helo=mail-ed1-x536.google.com
+Content-Type: multipart/alternative; boundary="000000000000092cb2061367ff3e"
+Received-SPF: pass client-ip=2a00:1450:4864:20::130;
+ envelope-from=rbagley@ventanamicro.com; helo=mail-lf1-x130.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01,
+ T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,114 +101,136 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---000000000000e5693e0613671aae
+--000000000000092cb2061367ff3e
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-I have realized that *the patch is indeed a fix*, not a workaround.
+LUI and AUIPC would naturally be used to build an address.
+If you want to supply a signed decimal number to build an immediate, there
+is always the pseudo-instruction LI.
 
-In fact, the argument to LUI and AUIPC in assembly *must* be a number
-between [0x0, 0xfffff].
-RISC-V Assembly Programmer's Manual : Load Upper Immediate's Immediate
-<https://github.com/riscv-non-isa/riscv-asm-manual/blob/master/riscv-asm.md=
-#load-upper-immediates-immediate>
-Signed decimal numbers are programmed as their two's complement.
+On Mon, Mar 11, 2024 at 11:56=E2=80=AFAM Richard Bagley <rbagley@ventanamic=
+ro.com>
+wrote:
 
-I checked: neither GCC nor LLVM will assemble
-
-> lui x1, -4
-
-The LLVM compiled models the arguments to LUI and AUIPC as UIMM (unsigned
-immediate) or UIMM20 (20 bit unsigned immediate).
-
-I should have checked this from the start. I jumped to the conclusion that
-both formats (signed decimal, two's complement) for negative arguments
-should be supported, and that I was encountering a bug.
-I apologize to all for the unnecessary back-and-forth.
-
-I don't yet see a reason why llvm and gcc could not support a signed number
-in decimal format, perhaps requiring a pseudo-instruction.
-This might be desirable, if only in support of assembly programming.
-On the other hand, it is easy to make the conversion to a two's-complement
-number.
-
-Richard
-
-On Sat, Mar 9, 2024 at 4:01=E2=80=AFAM Andrew Jones <ajones@ventanamicro.co=
-m> wrote:
-
-> On Fri, Mar 08, 2024 at 08:22:01PM -0800, Richard Bagley wrote:
-> > post-nack, one further comment:
-> >
-> > One could argue that this change also aligns QEMU with supporting tools
-> (as
-> > Andrew observed), and it makes sense to merge this change into QEMU unt=
-il
-> > those tools update to supporting signed decimal numbers with immediates=
-.
-> >
-> > As it is, both GNU assembler and the LLVM integrated assembler (or
-> llvm-mc)
-> > throws an error with examples such as
-> > auipc s0, -17
-> >
-> > On the other hand, I have only seen this problem with the output of the
-> > COLLECT plug-in, not (as yet) with QEMU execution proper.
-> > If the problem is confined to COLLECT, perhaps the argument for alignin=
-g
-> > with other tools is not as strong.
-> >
-> > In the meantime, I have adjusted my change locally to include AUIPC, an=
-d
-> > written a substantive, and I hope, clear commit description.
-> > If you would like me to resubmit a patch with this updated change, plea=
-se
-> > let me know.
+> I have realized that *the patch is indeed a fix*, not a workaround.
 >
-> Since the patch is ready for posting, then it might as well be posted
-> (even if it may not get merged right away). If the issue arises again,
-> then we can refer to the latest proposed patch, which will be preserved
-> in the mail archives.
+> In fact, the argument to LUI and AUIPC in assembly *must* be a number
+> between [0x0, 0xfffff].
+> RISC-V Assembly Programmer's Manual : Load Upper Immediate's Immediate
+> <https://github.com/riscv-non-isa/riscv-asm-manual/blob/master/riscv-asm.=
+md#load-upper-immediates-immediate>
+> Signed decimal numbers are programmed as their two's complement.
 >
-> Thanks,
-> drew
+> I checked: neither GCC nor LLVM will assemble
+>
+>> lui x1, -4
+>
+> The LLVM compiled models the arguments to LUI and AUIPC as UIMM (unsigned
+> immediate) or UIMM20 (20 bit unsigned immediate).
+>
+> I should have checked this from the start. I jumped to the conclusion tha=
+t
+> both formats (signed decimal, two's complement) for negative arguments
+> should be supported, and that I was encountering a bug.
+> I apologize to all for the unnecessary back-and-forth.
+>
+> I don't yet see a reason why llvm and gcc could not support a signed
+> number in decimal format, perhaps requiring a pseudo-instruction.
+> This might be desirable, if only in support of assembly programming.
+> On the other hand, it is easy to make the conversion to a two's-complemen=
+t
+> number.
+>
+> Richard
+>
+> On Sat, Mar 9, 2024 at 4:01=E2=80=AFAM Andrew Jones <ajones@ventanamicro.=
+com>
+> wrote:
+>
+>> On Fri, Mar 08, 2024 at 08:22:01PM -0800, Richard Bagley wrote:
+>> > post-nack, one further comment:
+>> >
+>> > One could argue that this change also aligns QEMU with supporting tool=
+s
+>> (as
+>> > Andrew observed), and it makes sense to merge this change into QEMU
+>> until
+>> > those tools update to supporting signed decimal numbers with immediate=
+s.
+>> >
+>> > As it is, both GNU assembler and the LLVM integrated assembler (or
+>> llvm-mc)
+>> > throws an error with examples such as
+>> > auipc s0, -17
+>> >
+>> > On the other hand, I have only seen this problem with the output of th=
+e
+>> > COLLECT plug-in, not (as yet) with QEMU execution proper.
+>> > If the problem is confined to COLLECT, perhaps the argument for aligni=
+ng
+>> > with other tools is not as strong.
+>> >
+>> > In the meantime, I have adjusted my change locally to include AUIPC, a=
+nd
+>> > written a substantive, and I hope, clear commit description.
+>> > If you would like me to resubmit a patch with this updated change,
+>> please
+>> > let me know.
+>>
+>> Since the patch is ready for posting, then it might as well be posted
+>> (even if it may not get merged right away). If the issue arises again,
+>> then we can refer to the latest proposed patch, which will be preserved
+>> in the mail archives.
+>>
+>> Thanks,
+>> drew
+>>
 >
 
---000000000000e5693e0613671aae
+--000000000000092cb2061367ff3e
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><font face=3D"verdana, sans-serif">I have realized that <b=
->the patch is indeed a fix</b>, not a workaround.</font><div><font face=3D"=
-verdana, sans-serif"><br>In fact, the argument to LUI and AUIPC in assembly=
-=C2=A0<b>must</b>=C2=A0be a number between=C2=A0<span style=3D"color:rgb(31=
-,35,40)">[0x0, 0xfffff]</span><span style=3D"color:rgb(31,35,40);font-size:=
-16px">.</span><br><a href=3D"https://github.com/riscv-non-isa/riscv-asm-man=
-ual/blob/master/riscv-asm.md#load-upper-immediates-immediate">RISC-V Assemb=
-ly Programmer&#39;s Manual : Load Upper Immediate&#39;s Immediate</a><br>Si=
-gned decimal numbers are programmed as their two&#39;s complement.</font></=
-div><div><span style=3D"font-family:verdana,sans-serif"><br></span></div><d=
-iv><span style=3D"font-family:verdana,sans-serif">I checked: neither GCC no=
-r LLVM will assemble <br></span><blockquote class=3D"gmail_quote" style=3D"=
-margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-lef=
-t:1ex"><span style=3D"font-family:verdana,sans-serif">lui x1, -4</span></bl=
-ockquote><font face=3D"verdana, sans-serif">The LLVM compiled models the ar=
-guments to=C2=A0LUI and AUIPC as UIMM (unsigned immediate) or UIMM20 (20 bi=
-t unsigned immediate).<br><br>I should have checked this from the start. I =
-jumped to the conclusion that both formats (signed decimal, two&#39;s compl=
-ement) for negative arguments should be supported, and that I was encounter=
-ing=C2=A0a bug.</font></div><div><font face=3D"verdana, sans-serif">I apolo=
-gize to all for the unnecessary back-and-forth.<br><br>I don&#39;t yet see =
-a=C2=A0reason why llvm and gcc could not support a signed number in decimal=
- format, perhaps requiring a pseudo-instruction. <br>This might be desirabl=
-e, if only in support of assembly programming. <br>On the other hand, it is=
- easy to make the conversion to a two&#39;s-complement number.<br><br>Richa=
-rd</font></div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=3D"gmail_attr">On Sat, Mar 9, 2024 at 4:01=E2=80=AFAM Andrew Jones &lt;<a =
-href=3D"mailto:ajones@ventanamicro.com">ajones@ventanamicro.com</a>&gt; wro=
-te:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px =
-0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">On Fri, Mar =
-08, 2024 at 08:22:01PM -0800, Richard Bagley wrote:<br>
+<div dir=3D"ltr">LUI and AUIPC would naturally be used to build an address.=
+<br>If you want to supply a signed decimal number to build an immediate, th=
+ere is always the pseudo-instruction LI.</div><br><div class=3D"gmail_quote=
+"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, Mar 11, 2024 at 11:56=E2=80=
+=AFAM Richard Bagley &lt;<a href=3D"mailto:rbagley@ventanamicro.com">rbagle=
+y@ventanamicro.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote=
+" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);=
+padding-left:1ex"><div dir=3D"ltr"><font face=3D"verdana, sans-serif">I hav=
+e realized that <b>the patch is indeed a fix</b>, not a workaround.</font><=
+div><font face=3D"verdana, sans-serif"><br>In fact, the argument to LUI and=
+ AUIPC in assembly=C2=A0<b>must</b>=C2=A0be a number between=C2=A0<span sty=
+le=3D"color:rgb(31,35,40)">[0x0, 0xfffff]</span><span style=3D"color:rgb(31=
+,35,40);font-size:16px">.</span><br><a href=3D"https://github.com/riscv-non=
+-isa/riscv-asm-manual/blob/master/riscv-asm.md#load-upper-immediates-immedi=
+ate" target=3D"_blank">RISC-V Assembly Programmer&#39;s Manual : Load Upper=
+ Immediate&#39;s Immediate</a><br>Signed decimal numbers are programmed as =
+their two&#39;s complement.</font></div><div><span style=3D"font-family:ver=
+dana,sans-serif"><br></span></div><div><span style=3D"font-family:verdana,s=
+ans-serif">I checked: neither GCC nor LLVM will assemble <br></span><blockq=
+uote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1p=
+x solid rgb(204,204,204);padding-left:1ex"><span style=3D"font-family:verda=
+na,sans-serif">lui x1, -4</span></blockquote><font face=3D"verdana, sans-se=
+rif">The LLVM compiled models the arguments to=C2=A0LUI and AUIPC as UIMM (=
+unsigned immediate) or UIMM20 (20 bit unsigned immediate).<br><br>I should =
+have checked this from the start. I jumped to the conclusion that both form=
+ats (signed decimal, two&#39;s complement) for negative arguments should be=
+ supported, and that I was encountering=C2=A0a bug.</font></div><div><font =
+face=3D"verdana, sans-serif">I apologize to all for the unnecessary back-an=
+d-forth.<br><br>I don&#39;t yet see a=C2=A0reason why llvm and gcc could no=
+t support a signed number in decimal format, perhaps requiring a pseudo-ins=
+truction. <br>This might be desirable, if only in support of assembly progr=
+amming. <br>On the other hand, it is easy to make the conversion to a two&#=
+39;s-complement number.<br><br>Richard</font></div></div><br><div class=3D"=
+gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Sat, Mar 9, 2024 at 4=
+:01=E2=80=AFAM Andrew Jones &lt;<a href=3D"mailto:ajones@ventanamicro.com" =
+target=3D"_blank">ajones@ventanamicro.com</a>&gt; wrote:<br></div><blockquo=
+te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px =
+solid rgb(204,204,204);padding-left:1ex">On Fri, Mar 08, 2024 at 08:22:01PM=
+ -0800, Richard Bagley wrote:<br>
 &gt; post-nack, one further comment:<br>
 &gt; <br>
 &gt; One could argue that this change also aligns QEMU with supporting tool=
@@ -244,6 +267,7 @@ in the mail archives.<br>
 Thanks,<br>
 drew<br>
 </blockquote></div>
+</blockquote></div>
 
---000000000000e5693e0613671aae--
+--000000000000092cb2061367ff3e--
 
