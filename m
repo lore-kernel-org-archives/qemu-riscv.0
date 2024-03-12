@@ -4,95 +4,149 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B53BFC54E58
-	for <qemu-riscv@archiver.kernel.org>; Tue, 12 Mar 2024 11:10:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E9E9C54E58
+	for <qemu-riscv@archiver.kernel.org>; Tue, 12 Mar 2024 11:25:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rk015-0002V3-9p; Tue, 12 Mar 2024 07:09:55 -0400
+	id 1rk0Ft-00022O-1O; Tue, 12 Mar 2024 07:25:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1rk013-0002Ui-3B
- for qemu-riscv@nongnu.org; Tue, 12 Mar 2024 07:09:53 -0400
-Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1rk00z-00068k-RB
- for qemu-riscv@nongnu.org; Tue, 12 Mar 2024 07:09:52 -0400
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-4132a348546so12179345e9.1
- for <qemu-riscv@nongnu.org>; Tue, 12 Mar 2024 04:09:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1710241788; x=1710846588; darn=nongnu.org;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=PqiaaurzWNdfKOWSZkIN5iavG9IXyQNAktGYPfEgC/Q=;
- b=McKLY0fU1Cnx9+Cxto1X1RTSN/ZXr4vmfSmRJzQoNE8hHkzJiSJCbl93g/FLcwMC/U
- nLwTNaKVckvlUgbeVTKGgLYST23JzYgwtr1fVQu6t8GnOscqGRSSfBIW0TBsUypEH8jx
- yFBlpaZuSlEVexeb0vNGmgu63mZioHEN//WMhgJOVIK7w/7Up1imtlHijWHaAyGmu9QG
- 8PJVUrD9yO71yVcWAAcMcMxgPKt4FtwmCKhzuLUr36y+H45M5cxSM1VqjkR/oFyyXOnC
- xVtPzomffVdbmTC8HId/0EUjOPunZJmjqOWSbAyCP//ueFXVUUTkpVpdcKI1by1AF8+9
- 7DiA==
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rk0Fk-0001sL-LJ
+ for qemu-riscv@nongnu.org; Tue, 12 Mar 2024 07:25:06 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rk0Fi-0000KE-Pp
+ for qemu-riscv@nongnu.org; Tue, 12 Mar 2024 07:25:04 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1710242701;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=gnBoAxc43PzxlzX8NgDw1FOToc09+ltM8010JBkSnys=;
+ b=ah+XzeRaSVAbAWsyG9+MGuSB1AwPkheRyQKrsjvZEUeP6JMcKBJ93Ceywf3UqQImH5hvhB
+ PvNFKofcMWGwfVPBHwVsNZsRGU+wEkKR6zmf5Nqg2tPIhmeG53BbCCAOhKnQTrrtP9vBT9
+ 3Ssu9J5AQg/40YtbiY9AhxOz1EXrnrs=
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
+ [209.85.160.199]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-28-qr2RTEDnMyCR4aXYHnx-iQ-1; Tue, 12 Mar 2024 07:24:57 -0400
+X-MC-Unique: qr2RTEDnMyCR4aXYHnx-iQ-1
+Received: by mail-qt1-f199.google.com with SMTP id
+ d75a77b69052e-42ea54868d2so49478451cf.3
+ for <qemu-riscv@nongnu.org>; Tue, 12 Mar 2024 04:24:57 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710241788; x=1710846588;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
+ d=1e100.net; s=20230601; t=1710242696; x=1710847496;
+ h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+ :to:content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=PqiaaurzWNdfKOWSZkIN5iavG9IXyQNAktGYPfEgC/Q=;
- b=w0NDkjj66ElwhaLXqZ2XgYvsYeI72bPLTRKezmJE+puSU/eUyi48tppQf9kUiCyDjY
- RdC1Z9zp636wkgmuUMFsz4fQdphGP8G3/1DW0vt6+JchXbKF82R/lu3OwyvKfnUczmkq
- 9MG591t9khUB2TVrpP9MCSS5R+s1Vhg4MyHBVgBZZznri5PgIVTo9u2tNKKSUlmcyaTq
- 1M26juB/QVq2WvtNYTkA0+luhVJZwAns4+k7mpcf3qNOh7qZmgycGRYIZ5sOw+BT05g9
- ZzZqmcwY13KExRV33QlE+Gnv0tOSOIgG9RfFB1Ay+ACNE/SHryRUkMkRe5XfLDsK7GNo
- bo5A==
+ bh=gnBoAxc43PzxlzX8NgDw1FOToc09+ltM8010JBkSnys=;
+ b=T3XcJg4/j4lZ5CgRNmJby7AaSp6sFUVlVLWcmJKkGGNZevHIti3s/12gDlNdaeSQ8B
+ 5Sg1PZjPpTsVT/kmuR3IOzO3/wh4S3tTHtbAKHF84ldXe9kT9ZlGKv47xI1qWezap521
+ F6anQGiKUSlHjiF5JsBtAcrNT1JDZEtqTLx4onyT6UxbKUZ1lG/jFU5cJYJIZk1QaGKo
+ zzWzAHL+dqL2EwxEM16zqGLqbjof/0BPL8DlZXtr/rQSJrTYs0oHvgLj/S7IjOYYaibk
+ N+7inUNSF7LyvUJinTUP4i2n2j4AWOINW14hIpIQADJ4X37Jj5lj7ho7pNkNseW9UTN7
+ eMvA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVIy++OVI1DFMp4cL/nuJDPUBgyRsz3+vf5JaEX/ptccqLFBYPYFcWLEWHs+qJBY7rH7KvxoH6MAiVj3LL3VMxQL7u7TaM=
-X-Gm-Message-State: AOJu0YxujHqfdM6imkozALZYoqebQuRW//jEnwHfhd3EF/TgnZLG392p
- iFyrxwkTglB+NRjUQlhsyKuxeuK814xusmLuOMA+SK85gju1VGmn4VMAd1zAONM=
-X-Google-Smtp-Source: AGHT+IHPr4ZLvTxDo9A3jom7PS7mM0ZFunDgHHvFvHmfxd+mUDYPq5u5fOL/PNczDIfRVoxvkK/KXA==
-X-Received: by 2002:a05:600c:3149:b0:413:19ac:2a06 with SMTP id
- h9-20020a05600c314900b0041319ac2a06mr6608050wmo.28.1710241788128; 
- Tue, 12 Mar 2024 04:09:48 -0700 (PDT)
-Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
- [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
- by smtp.gmail.com with ESMTPSA id
- bi6-20020a05600c3d8600b004133802cf8csm1713932wmb.38.2024.03.12.04.09.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Mar 2024 04:09:47 -0700 (PDT)
-Date: Tue, 12 Mar 2024 12:09:46 +0100
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Richard Bagley <rbagley@ventanamicro.com>
-Cc: Palmer Dabbelt <palmer@rivosinc.com>, qemu-devel@nongnu.org, 
- qemu-riscv@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>,
- bmeng@tinylab.org, 
- liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, dbarboza@ventanamicro.com
-Subject: Re: [PATCH] disas/riscv: Further correction to LUI disassembly
-Message-ID: <20240312-ed806a55958fd3526ec0f01a@orel>
-References: <20230810-c9e1f2783168b48bc07a1aa2@orel>
- <mhng-a6344a0c-8820-41b5-a015-b82b261b463d@palmer-ri-x1c9>
- <20230810-e160f9edae60ded9d2606b8b@orel>
- <20230811-bc15b48d336b79d9ec1f0936@orel>
- <20230811-52e2c90dc3b91e108eb5e4e8@orel>
- <CAARkPA-P1U7xyLpdx+XD1M3Ji2NUfTb+88+GKUk8R2aFsOCMRw@mail.gmail.com>
- <CAARkPA-dOxOWsR0VS+S8p4fDmNR5X5Jjmo5pQTaurWLYsc9vsw@mail.gmail.com>
- <20240309-ee813e971e7c5850d652b295@orel>
- <CAARkPA_8zSZK-4oOTcJO2KinWSadxZYZztwRP-UvNNkDjmyexw@mail.gmail.com>
+ AJvYcCXTiHk2YO5uLPBkT5ybiUhAjFq8jpWeQBTjqKnNDvGoz6cs33OeAkLscgMcRf1QlRhmD9yoHB4MqXW9MZU3s6NBtamggjQ=
+X-Gm-Message-State: AOJu0Yz4olD5IHyFNuVUJ5OoO1qU7F59HH02m5NJ1jopYZEVM8GvwaQO
+ CEcjlnPVQu0aM4LVyRoRdBHzHe3fRFrpzV7z48ag6wHNKi/EaXQsFvfIF734UoU6eiFkXlceEb/
+ 9BOMFb5GzrWjw13PImk2NyhpZOguZIHUUgBj9DcUoHprBltlCsPal
+X-Received: by 2002:a05:622a:1454:b0:42e:8beb:325 with SMTP id
+ v20-20020a05622a145400b0042e8beb0325mr10339158qtx.31.1710242696640; 
+ Tue, 12 Mar 2024 04:24:56 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHOC3aOF+g4AMZA0grALUbHfxXPMcm4Ryayzppon2mawE44bRCtuTu2Z1s3VoohtkPfAdKV1g==
+X-Received: by 2002:a05:622a:1454:b0:42e:8beb:325 with SMTP id
+ v20-20020a05622a145400b0042e8beb0325mr10339129qtx.31.1710242696303; 
+ Tue, 12 Mar 2024 04:24:56 -0700 (PDT)
+Received: from [192.168.0.9] (ip-109-43-177-86.web.vodafone.de.
+ [109.43.177.86]) by smtp.gmail.com with ESMTPSA id
+ l11-20020a05622a050b00b0042c7d11e280sm3608889qtx.90.2024.03.12.04.24.51
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 12 Mar 2024 04:24:56 -0700 (PDT)
+Message-ID: <96422cf0-30a8-4e2a-99c5-8388ec342e36@redhat.com>
+Date: Tue, 12 Mar 2024 12:24:49 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 14/29] target/i386: Prefer fast cpu_env() over slower
+ CPU QOM cast macro
+To: Igor Mammedov <imammedo@redhat.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>, kvm@vger.kernel.org,
+ qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
+ Richard Henderson <richard.henderson@linaro.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Eduardo Habkost <eduardo@habkost.net>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
+ Cameron Esfahani <dirty@apple.com>, Roman Bolshakov <rbolshakov@ddn.com>,
+ Marcelo Tosatti <mtosatti@redhat.com>, David Woodhouse
+ <dwmw2@infradead.org>, xen-devel@lists.xenproject.org
+References: <20240129164514.73104-1-philmd@linaro.org>
+ <20240129164514.73104-15-philmd@linaro.org>
+ <20240130140115.135f533d@imammedo.users.ipa.redhat.com>
+From: Thomas Huth <thuth@redhat.com>
+Autocrypt: addr=thuth@redhat.com; keydata=
+ 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
+In-Reply-To: <20240130140115.135f533d@imammedo.users.ipa.redhat.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAARkPA_8zSZK-4oOTcJO2KinWSadxZYZztwRP-UvNNkDjmyexw@mail.gmail.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
- envelope-from=ajones@ventanamicro.com; helo=mail-wm1-x32e.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.687,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -108,80 +162,61 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Mar 11, 2024 at 11:56:42AM -0700, Richard Bagley wrote:
-> I have realized that *the patch is indeed a fix*, not a workaround.
+On 30/01/2024 14.01, Igor Mammedov wrote:
+> On Mon, 29 Jan 2024 17:44:56 +0100
+> Philippe Mathieu-Daudé <philmd@linaro.org> wrote:
 > 
-> In fact, the argument to LUI and AUIPC in assembly *must* be a number
-> between [0x0, 0xfffff].
-> RISC-V Assembly Programmer's Manual : Load Upper Immediate's Immediate
-> <https://github.com/riscv-non-isa/riscv-asm-manual/blob/master/riscv-asm.md#load-upper-immediates-immediate>
+>> Mechanical patch produced running the command documented
+>> in scripts/coccinelle/cpu_env.cocci_template header.
+> 
+> 
+> commenting here since, I'm not expert on coccinelle scripts.
+> 
+> On negative side we are permanently loosing type checking in this area.
 
-I think that's just documenting the current behavior, but the behavior
-(not accepting a signed decimal number for a signed immediate) doesn't
-appear to be justified, so I think my suggestion in [1] still stands.
-That said, I don't really have much of a horse in this race so if
-somebody comes along and closes that BZ with a simple justification of
-"we, the people that work on this stuff, agreed we prefer the range
-[0x0, 0xfffff]", then I won't argue.
+Not really that much. Have a look at cpu_env(), it has a comment saying:
 
-[1] https://sourceware.org/bugzilla/show_bug.cgi?id=30746
+  "We validate that CPUArchState follows CPUState in cpu-all.h"
 
-Thanks,
-drew
+So instead of run-time checking, the check should have already been done 
+during compile time, i.e. when you have a valid CPUState pointer, it should 
+be possible to derive a valid CPUArchState pointer from it without much 
+further checking during runtime.
 
-> Signed decimal numbers are programmed as their two's complement.
+> Is it worth it, what gains do we get with this series?
+
+It's a small optimization, but why not?
+
+> Side note,
+> QOM cast expenses you are replacing could be negated by disabling
+> CONFIG_QOM_CAST_DEBUG without killing type check code when it's enabled.
+> That way you will speed up not only cpuenv access but also all other casts
+> across the board.
+
+Yes, but that checking is enabled by default and does not have such 
+compile-time checks that could be used instead, so I think Philippe's series 
+here is still a good idea.
+
+>> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+>> ---
+> ...
+>>   static inline void vmx_clear_nmi_blocking(CPUState *cpu)
+>>   {
+>> -    X86CPU *x86_cpu = X86_CPU(cpu);
+>> -    CPUX86State *env = &x86_cpu->env;
+>> -
+>> -    env->hflags2 &= ~HF2_NMI_MASK;
 > 
-> I checked: neither GCC nor LLVM will assemble
+>> +    cpu_env(cpu)->hflags2 &= ~HF2_NMI_MASK;
 > 
-> > lui x1, -4
+> this style of de-referencing return value of macro/function
+> was discouraged in past and preferred way was 'Foo f = CAST(me); f->some_access
 > 
-> The LLVM compiled models the arguments to LUI and AUIPC as UIMM (unsigned
-> immediate) or UIMM20 (20 bit unsigned immediate).
-> 
-> I should have checked this from the start. I jumped to the conclusion that
-> both formats (signed decimal, two's complement) for negative arguments
-> should be supported, and that I was encountering a bug.
-> I apologize to all for the unnecessary back-and-forth.
-> 
-> I don't yet see a reason why llvm and gcc could not support a signed number
-> in decimal format, perhaps requiring a pseudo-instruction.
-> This might be desirable, if only in support of assembly programming.
-> On the other hand, it is easy to make the conversion to a two's-complement
-> number.
-> 
-> Richard
-> 
-> On Sat, Mar 9, 2024 at 4:01 AM Andrew Jones <ajones@ventanamicro.com> wrote:
-> 
-> > On Fri, Mar 08, 2024 at 08:22:01PM -0800, Richard Bagley wrote:
-> > > post-nack, one further comment:
-> > >
-> > > One could argue that this change also aligns QEMU with supporting tools
-> > (as
-> > > Andrew observed), and it makes sense to merge this change into QEMU until
-> > > those tools update to supporting signed decimal numbers with immediates.
-> > >
-> > > As it is, both GNU assembler and the LLVM integrated assembler (or
-> > llvm-mc)
-> > > throws an error with examples such as
-> > > auipc s0, -17
-> > >
-> > > On the other hand, I have only seen this problem with the output of the
-> > > COLLECT plug-in, not (as yet) with QEMU execution proper.
-> > > If the problem is confined to COLLECT, perhaps the argument for aligning
-> > > with other tools is not as strong.
-> > >
-> > > In the meantime, I have adjusted my change locally to include AUIPC, and
-> > > written a substantive, and I hope, clear commit description.
-> > > If you would like me to resubmit a patch with this updated change, please
-> > > let me know.
-> >
-> > Since the patch is ready for posting, then it might as well be posted
-> > (even if it may not get merged right away). If the issue arises again,
-> > then we can refer to the latest proposed patch, which will be preserved
-> > in the mail archives.
-> >
-> > Thanks,
-> > drew
-> >
+> (it's just imprint speaking, I don't recall where it comes from)
+
+I agree, though the new code is perfectly valid, it looks nicer if we'd use 
+a variable here instead.
+
+  Thomas
+
 
