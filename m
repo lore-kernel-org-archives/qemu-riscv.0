@@ -4,88 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 327AAC54E58
-	for <qemu-riscv@archiver.kernel.org>; Mon, 11 Mar 2024 20:01:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF793C54E58
+	for <qemu-riscv@archiver.kernel.org>; Tue, 12 Mar 2024 00:20:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rjlpc-00013t-2W; Mon, 11 Mar 2024 16:01:08 -0400
+	id 1rjpsR-0007uH-DW; Mon, 11 Mar 2024 20:20:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <rbagley@ventanamicro.com>)
- id 1rjlpM-0000oF-73
- for qemu-riscv@nongnu.org; Mon, 11 Mar 2024 16:00:59 -0400
-Received: from mail-lf1-x130.google.com ([2a00:1450:4864:20::130])
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1rjpsL-0007rx-J7
+ for qemu-riscv@nongnu.org; Mon, 11 Mar 2024 20:20:13 -0400
+Received: from mail-lf1-x134.google.com ([2a00:1450:4864:20::134])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <rbagley@ventanamicro.com>)
- id 1rjlpE-0000sw-Ar
- for qemu-riscv@nongnu.org; Mon, 11 Mar 2024 16:00:49 -0400
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-5131c48055cso4900758e87.1
- for <qemu-riscv@nongnu.org>; Mon, 11 Mar 2024 13:00:43 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1rjpsG-0002Ti-OD
+ for qemu-riscv@nongnu.org; Mon, 11 Mar 2024 20:20:10 -0400
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-51381021af1so4716466e87.0
+ for <qemu-riscv@nongnu.org>; Mon, 11 Mar 2024 17:20:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1710187242; x=1710792042; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=l+yO87h2Ei1vz2fQlzVyep68f9aqisqvE95jng9eQho=;
- b=ixKFG6ja2ndu1qINNOY6uqiwCW3aVBjLY3bWLcbzGBNQkWTLbgZjG4zR/NddDlcC1F
- B7t/5dRed9TJhgHTxDvpGRYn15Cdfyssgvhd00hjpT+Z8iG3RZSMI0kZWNuChkc2J3zK
- GUM1PjJzRK/+JHgSxKVTV+vtunMduJiZHW1jIE+wAfH1/PoPxfidxrG1n0BxIoD5vGbq
- ANoD/jhpLIGFCFBLEu7uMyYny4ZPthDU1taWibdoSlUVApaSMRlhwRyYTSj8Yeat6Dqx
- fFWeTSUJfiIawdnxqrog2G2uVLNuuRQqbYAgeHwIywUtjGvPQti1rGV4GFaW/ou4d94j
- UI8g==
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1710202805; x=1710807605;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=o40GaIslVQRLOr0iuKq+jLTzbzAp3uD9+opmBCASSLY=;
+ b=I1F7OOAJs0ovOjiazZajM2K5F3LwSyflf6v/b0ge0jr7/UEOj5jILHLmQ1GxpCHFh5
+ SdUyvUKKpEplqdKVXgqlVmd0cyjTgas3ZdGEo0FFb6RdsUT+2ZvHqQIQQInP0y0fWKnt
+ AUBdJEYYnXb0kDBoe0aTyMkbq9zIvN6BmX2uOlDV/6HOHYQnkvr6HQKGGDjdVJbJTCQm
+ ZMM03OH1ea7UA8eS+JoOlBgjQEwyOMKC1AwnKTPJehna8ETWhlj2hXXRrfTd73zJ7Dmj
+ KuXmUm88UlokN+BrvJbboPOvepDIc9azG3sU8kQoWbMBMKOFvAa4SHN6J77XDbep1Bmh
+ ztIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710187242; x=1710792042;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=l+yO87h2Ei1vz2fQlzVyep68f9aqisqvE95jng9eQho=;
- b=uBqlHJFHG8qA6EjXANvQygvamt0461ijaa73ADNWPCbdo5SVx/rG9RLLApDa9SIIX9
- dZgqGdYJvPCb7T6zydprssqMTkvCl/8/rmcFJQ4H5ixH5Ar2K1pRdpF6djTAJX3rfYNL
- gm90sCtQ7dsM8OkRzII4Znm1pFklhY4MXfuM/jTGzp90Ba7md2a5d9vS/INu7Qt1bje2
- WLHAAcAqkBOMzRxmcw6h8woVDbOocj+F9Gztk8lu27MAT2a1Q7eziDr0XG71SjCRiOAH
- LGwpLAc+7Q7B2UFQXwGroftuQ0iFdjvpp/p+13aSdAnDVwTPGBVqcmh0/E11vryJrVhX
- 8Rfw==
+ d=1e100.net; s=20230601; t=1710202805; x=1710807605;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=o40GaIslVQRLOr0iuKq+jLTzbzAp3uD9+opmBCASSLY=;
+ b=R87S8wchLj3UhgU/TypLvmaP4FxgTniBYU2Mla8ER1fUBlWNnzNyu6myTKu2eXD6F9
+ +kxrFwUx1ERjAULT9sMc65Tgv/5oshPtFW5Kz8owq3LMo5aJCpK66724OcD69xM6l6St
+ eB+rg3ih0Cxd4Sngm+wZluG8OEPl5q3DkwxX/bxQ94vw8nkndula50DQ3FXmMRzzNpS2
+ l0MT9PqjJXikrjHgV9H3aIJ0MWptQfvU4uCpIykKY9H4FY7PHJ4y/CauysQXmoyUezb3
+ Zw+fq3sUGa5w2DE7N6/dnLhZtoTtk+UJvg8ChbVHWCH00A4tlsrebBfRCq0CLsPyweYm
+ bA/g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCULqt69u93h4lD6tuHsRPgwuGIspu/Vm/PDnhnGDVRXYWhGqQKcRtYtWE8OrdmdBjsJici+frRln+YqyS4yhtrCGBsJ5tI=
-X-Gm-Message-State: AOJu0YyKjnU4FFMtOE2HuJdhw+/uRGhN4oM4FdEcqK4wiPAUTZoO3LAG
- 3AznQrx0iLfKsPtUBBfimBAPxjcoYSqGS8wzRJRzKUsjFQhI87NQWHBKDDlj9eJfeMfnxuo1Sje
- GAoQqCAy/nxekp5Ez8CDi+mhwk1JWt0LnW+Wmuw==
-X-Google-Smtp-Source: AGHT+IEkWW72t3AM1ZSb0xM6OpIyO+NIXf2g7lSGAHzHxFOpDr+G0OqrycTsCYyVtOfKLhea4p6L4WHxmOi0+3zof5I=
-X-Received: by 2002:ac2:528a:0:b0:513:3f24:28d8 with SMTP id
- q10-20020ac2528a000000b005133f2428d8mr4538449lfm.34.1710187241603; Mon, 11
- Mar 2024 13:00:41 -0700 (PDT)
+ AJvYcCUWHWWXaJ6O4bw/ZxUmdO3zhcqZwf/Wz8a9i0PKTws8uIYcQiVxCj4GcEZ+O7x4q+SPL5XbWV09SGgIYHKbyzCZUoV/BZ4=
+X-Gm-Message-State: AOJu0YynjC2bJNS8+avz4dHrVxa7F44KpLz2M//4NNDRRjyzTZqT0NtS
+ FXy4Pbgiow7iFawZ/riNh8E6UkASpRKD9qCQIP4K+l0khuZGyRr+ykdG+1QKoHuwVDotogq0AUn
+ ZlGEuZk0F2waF6Lbbf06eC+8g2c8uQSccAgAcDg==
+X-Google-Smtp-Source: AGHT+IFTIv4zXa5CtpQm0PkFLNap0RzKehK9YtbC2CE4SewyVRxHKzy3C/hUpxomgKZUTzEh/IrFZni7a4wN3GjwFy0=
+X-Received: by 2002:ac2:528b:0:b0:513:8c61:209f with SMTP id
+ q11-20020ac2528b000000b005138c61209fmr4558433lfm.13.1710202805147; Mon, 11
+ Mar 2024 17:20:05 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230810-c9e1f2783168b48bc07a1aa2@orel>
- <mhng-a6344a0c-8820-41b5-a015-b82b261b463d@palmer-ri-x1c9>
- <20230810-e160f9edae60ded9d2606b8b@orel>
- <20230811-bc15b48d336b79d9ec1f0936@orel>
- <20230811-52e2c90dc3b91e108eb5e4e8@orel>
- <CAARkPA-P1U7xyLpdx+XD1M3Ji2NUfTb+88+GKUk8R2aFsOCMRw@mail.gmail.com>
- <CAARkPA-dOxOWsR0VS+S8p4fDmNR5X5Jjmo5pQTaurWLYsc9vsw@mail.gmail.com>
- <20240309-ee813e971e7c5850d652b295@orel>
- <CAARkPA_8zSZK-4oOTcJO2KinWSadxZYZztwRP-UvNNkDjmyexw@mail.gmail.com>
-In-Reply-To: <CAARkPA_8zSZK-4oOTcJO2KinWSadxZYZztwRP-UvNNkDjmyexw@mail.gmail.com>
-From: Richard Bagley <rbagley@ventanamicro.com>
-Date: Mon, 11 Mar 2024 13:00:28 -0700
-Message-ID: <CAARkPA_fYPQ2KXMe3nNcaKi+fTz36gTrF88-RkK7ha5vXNLgcA@mail.gmail.com>
-Subject: Re: [PATCH] disas/riscv: Further correction to LUI disassembly
+References: <20240304102540.2789225-1-fei2.wu@intel.com>
+ <20240304102540.2789225-2-fei2.wu@intel.com>
+ <CAKmqyKMQyDjLkeo+aU58rE6_Vb84QeeZP3FUafw5GuWpk1JmZQ@mail.gmail.com>
+ <8f5d6664-c075-4d31-bf33-ce24ceeb9b13@intel.com>
+ <CAHBxVyHP1hgGWg6EByX6XzqmTm_Tr0uw7tk65KWcytNYsKdw8w@mail.gmail.com>
+ <CAKmqyKM08RwR7RybMGaN6CpmbHJrLwx0DSjz_A1w6h0AkW12rQ@mail.gmail.com>
+ <18efc373-b98b-4a9f-96c5-c6821793138f@intel.com>
+ <20240308-48ff9db3408048d387d6cfa4@orel>
+ <fee8e89a-7d87-43b8-bc87-af76a67c4317@intel.com>
+ <20240311-bef101446cc9ea2b033b417d@orel>
+In-Reply-To: <20240311-bef101446cc9ea2b033b417d@orel>
+From: Atish Kumar Patra <atishp@rivosinc.com>
+Date: Mon, 11 Mar 2024 17:19:54 -0700
+Message-ID: <CAHBxVyG8uLn=OGEHdCzoMqJ7bcaX8Jqh4JbmXRxKoobWPiEe5w@mail.gmail.com>
+Subject: Re: [RISC-V][tech-server-soc] [RISC-V][tech-server-platform] [RFC
+ 1/2] hw/riscv: Add server platform reference machine
 To: Andrew Jones <ajones@ventanamicro.com>
-Cc: Palmer Dabbelt <palmer@rivosinc.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, 
- Alistair Francis <Alistair.Francis@wdc.com>, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, 
- zhiwei_liu@linux.alibaba.com, dbarboza@ventanamicro.com
-Content-Type: multipart/alternative; boundary="000000000000092cb2061367ff3e"
-Received-SPF: pass client-ip=2a00:1450:4864:20::130;
- envelope-from=rbagley@ventanamicro.com; helo=mail-lf1-x130.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01,
- T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
+Cc: "Wu, Fei2" <fei2.wu@intel.com>, Alistair Francis <alistair23@gmail.com>,
+ pbonzini@redhat.com, 
+ palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
+ liwei1518@gmail.com, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org, andrei.warkentin@intel.com, 
+ shaolin.xie@alibaba-inc.com, ved@rivosinc.com, sunilvl@ventanamicro.com, 
+ haibo1.xu@intel.com, evan.chai@intel.com, yin.wang@intel.com, 
+ tech-server-platform@lists.riscv.org, tech-server-soc@lists.riscv.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::134;
+ envelope-from=atishp@rivosinc.com; helo=mail-lf1-x134.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,173 +108,124 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---000000000000092cb2061367ff3e
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-LUI and AUIPC would naturally be used to build an address.
-If you want to supply a signed decimal number to build an immediate, there
-is always the pseudo-instruction LI.
-
-On Mon, Mar 11, 2024 at 11:56=E2=80=AFAM Richard Bagley <rbagley@ventanamic=
-ro.com>
-wrote:
-
-> I have realized that *the patch is indeed a fix*, not a workaround.
+On Mon, Mar 11, 2024 at 7:38=E2=80=AFAM Andrew Jones <ajones@ventanamicro.c=
+om> wrote:
 >
-> In fact, the argument to LUI and AUIPC in assembly *must* be a number
-> between [0x0, 0xfffff].
-> RISC-V Assembly Programmer's Manual : Load Upper Immediate's Immediate
-> <https://github.com/riscv-non-isa/riscv-asm-manual/blob/master/riscv-asm.=
-md#load-upper-immediates-immediate>
-> Signed decimal numbers are programmed as their two's complement.
->
-> I checked: neither GCC nor LLVM will assemble
->
->> lui x1, -4
->
-> The LLVM compiled models the arguments to LUI and AUIPC as UIMM (unsigned
-> immediate) or UIMM20 (20 bit unsigned immediate).
->
-> I should have checked this from the start. I jumped to the conclusion tha=
-t
-> both formats (signed decimal, two's complement) for negative arguments
-> should be supported, and that I was encountering a bug.
-> I apologize to all for the unnecessary back-and-forth.
->
-> I don't yet see a reason why llvm and gcc could not support a signed
-> number in decimal format, perhaps requiring a pseudo-instruction.
-> This might be desirable, if only in support of assembly programming.
-> On the other hand, it is easy to make the conversion to a two's-complemen=
-t
-> number.
->
-> Richard
->
-> On Sat, Mar 9, 2024 at 4:01=E2=80=AFAM Andrew Jones <ajones@ventanamicro.=
-com>
+> On Mon, Mar 11, 2024 at 04:55:24AM -0700, Wu, Fei2 wrote:
+> > On 3/8/2024 5:20 PM, Andrew Jones wrote:
+> > > On Thu, Mar 07, 2024 at 02:26:18PM +0800, Wu, Fei wrote:
+> > >> On 3/7/2024 8:48 AM, Alistair Francis wrote:
+> > >>> On Thu, Mar 7, 2024 at 5:13=E2=80=AFAM Atish Kumar Patra <atishp@ri=
+vosinc.com> wrote:
+> > >>>>
+> > >>>> On Wed, Mar 6, 2024 at 4:56=E2=80=AFAM Wu, Fei <fei2.wu@intel.com>=
+ wrote:
+> > >>>>>
+> > >>>>> On 3/6/2024 8:19 AM, Alistair Francis wrote:
+> > >>>>>> On Mon, Mar 4, 2024 at 8:28=E2=80=AFPM Fei Wu <fei2.wu@intel.com=
 > wrote:
->
->> On Fri, Mar 08, 2024 at 08:22:01PM -0800, Richard Bagley wrote:
->> > post-nack, one further comment:
->> >
->> > One could argue that this change also aligns QEMU with supporting tool=
-s
->> (as
->> > Andrew observed), and it makes sense to merge this change into QEMU
->> until
->> > those tools update to supporting signed decimal numbers with immediate=
-s.
->> >
->> > As it is, both GNU assembler and the LLVM integrated assembler (or
->> llvm-mc)
->> > throws an error with examples such as
->> > auipc s0, -17
->> >
->> > On the other hand, I have only seen this problem with the output of th=
+> > > ...
+> > >>>>>>> +config SERVER_PLATFORM_REF
+> > >>>>>>> +    bool
+> > >>>>>>> +    select RISCV_NUMA
+> > >>>>>>> +    select GOLDFISH_RTC
+> > >>>>>>> +    select PCI
+> > >>>>>>> +    select PCI_EXPRESS_GENERIC_BRIDGE
+> > >>>>>>> +    select PFLASH_CFI01
+> > >>>>>>> +    select SERIAL
+> > >>>>>>> +    select RISCV_ACLINT
+> > >>>>>>> +    select RISCV_APLIC
+> > >>>>>>> +    select RISCV_IMSIC
+> > >>>>>>> +    select SIFIVE_TEST
+> > >>>>>>
+> > >>>>>> Do we really need SiFive Test in the server platform?
+> > >>>>>>
+> > >>>>> It's used to reset the system, is there any better choice?
+> > >>>
+> > >>> If we add this now we are stuck with it forever (or at least a long
+> > >>> time). So it'd be nice to think about these and decide if these rea=
+lly
+> > >>> are the best way to do things. We don't have to just copy the exist=
+ing
+> > >>> virt machine.
+> > >>>
+> > >> We need a solution to poweroff/reboot, and sifive test is one of the
+> > >> hardware implementations, so in general I think it's okay. But I agr=
+ee
+> > >> Sifive test looks a device for testing only.
+> > >>
+> > >>> There must be a more standard way to do this then MMIO mapped SiFiv=
+e hardware?
+> > >>>
+> > >> The mapped MMIO mechanism leveraged by Sifive test by itself is kind=
+a
+> > >> generic, the sbsa_ec for sbsa-ref is also an MMIO mapped device. The=
+se
+> > >> two devices look very similar except different encodings of the
+> > >> shutdown/reboot command.
+> > >>
+> > >> Probably we can have a generic shutdown/reboot device in QEMU for bo=
+th
+> > >> sifive test and sbsa_ec, and likely more (not in this patch series).=
+ In
+> > >> this way, sifive test device will be replaced by this more generic
+> > >> device. Any suggestions?
+> > >
+> > > Operating systems shouldn't need to implement odd-ball device drivers=
+ to
+> > > function on a reference of a standard platform. So the reference plat=
+form
+> > > should only be comprised of devices which have specifications and alr=
+eady,
+> > > or will, have DT bindings. Generic devices would be best, but I don't
+> > > think it should be a problem to use devices from multiple vendors. Th=
 e
->> > COLLECT plug-in, not (as yet) with QEMU execution proper.
->> > If the problem is confined to COLLECT, perhaps the argument for aligni=
-ng
->> > with other tools is not as strong.
->> >
->> > In the meantime, I have adjusted my change locally to include AUIPC, a=
-nd
->> > written a substantive, and I hope, clear commit description.
->> > If you would like me to resubmit a patch with this updated change,
->> please
->> > let me know.
->>
->> Since the patch is ready for posting, then it might as well be posted
->> (even if it may not get merged right away). If the issue arises again,
->> then we can refer to the latest proposed patch, which will be preserved
->> in the mail archives.
->>
->> Thanks,
->> drew
->>
+> > > devices just need to allow GPL drivers to be written. With all that i=
+n
+> > > mind, what about adding a generic GPIO controller or using SiFive's G=
+PIO
+> > > controller. Then, we could add gpio-restart and gpio-poweroff.
+> > >
+> > I agree with most of what you said. Regarding generic devices, syscon
+> > looks a better choice than gpio in the current situation.
+> >
+> > Linux kernel has these configurations enabled for virt, and I'm not
+> > going to add a new soc for this new board currently, we can use the sam=
+e
+> > syscon interface for power, and it has already well supported.
+> >
+> > config SOC_VIRT
+> >       bool "QEMU Virt Machine"
+> >       select CLINT_TIMER if RISCV_M_MODE
+> >       select POWER_RESET
+> >       select POWER_RESET_SYSCON
+> >       select POWER_RESET_SYSCON_POWEROFF
+> >       select GOLDFISH
+> >
+> > For the qemu part, we can remove device 'sifive_test' and manage that
+> > memory region directly with MemoryRegionOps, similar to what
+> > hw/mips/boston.c does.
+>
+> OK, that sounds good. Also, I guess the real concern is whether firmware
+> (e.g. OpenSBI) supports the platform's power-off device, since firmware
+> will present the SRST SBI call to Linux, so Linux doesn't need to worry
+> about it at all. However, if we want Linux to worry about it, then we
+
+Syscon devices are already supported in OpenSBI. So syscon seems to be
+the best option right now.
+
+> can't forget to ensure we can implement the syscon interface in AML for
+> ACPI too. Indeed, we should be introducing ACPI support for this referenc=
+e
+> machine type at the same time we introduce the machine in order to ensure
+> all device selections have, or will have, both DT and ACPI support.
 >
 
---000000000000092cb2061367ff3e
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Yeah. In addition to that, this reference platform also needs to
+generate minimalistic DT
+for OpenSBI even though only ACPI is required for Linux. IIRC,
+sbsa-ref also does something similar.
 
-<div dir=3D"ltr">LUI and AUIPC would naturally be used to build an address.=
-<br>If you want to supply a signed decimal number to build an immediate, th=
-ere is always the pseudo-instruction LI.</div><br><div class=3D"gmail_quote=
-"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, Mar 11, 2024 at 11:56=E2=80=
-=AFAM Richard Bagley &lt;<a href=3D"mailto:rbagley@ventanamicro.com">rbagle=
-y@ventanamicro.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote=
-" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);=
-padding-left:1ex"><div dir=3D"ltr"><font face=3D"verdana, sans-serif">I hav=
-e realized that <b>the patch is indeed a fix</b>, not a workaround.</font><=
-div><font face=3D"verdana, sans-serif"><br>In fact, the argument to LUI and=
- AUIPC in assembly=C2=A0<b>must</b>=C2=A0be a number between=C2=A0<span sty=
-le=3D"color:rgb(31,35,40)">[0x0, 0xfffff]</span><span style=3D"color:rgb(31=
-,35,40);font-size:16px">.</span><br><a href=3D"https://github.com/riscv-non=
--isa/riscv-asm-manual/blob/master/riscv-asm.md#load-upper-immediates-immedi=
-ate" target=3D"_blank">RISC-V Assembly Programmer&#39;s Manual : Load Upper=
- Immediate&#39;s Immediate</a><br>Signed decimal numbers are programmed as =
-their two&#39;s complement.</font></div><div><span style=3D"font-family:ver=
-dana,sans-serif"><br></span></div><div><span style=3D"font-family:verdana,s=
-ans-serif">I checked: neither GCC nor LLVM will assemble <br></span><blockq=
-uote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1p=
-x solid rgb(204,204,204);padding-left:1ex"><span style=3D"font-family:verda=
-na,sans-serif">lui x1, -4</span></blockquote><font face=3D"verdana, sans-se=
-rif">The LLVM compiled models the arguments to=C2=A0LUI and AUIPC as UIMM (=
-unsigned immediate) or UIMM20 (20 bit unsigned immediate).<br><br>I should =
-have checked this from the start. I jumped to the conclusion that both form=
-ats (signed decimal, two&#39;s complement) for negative arguments should be=
- supported, and that I was encountering=C2=A0a bug.</font></div><div><font =
-face=3D"verdana, sans-serif">I apologize to all for the unnecessary back-an=
-d-forth.<br><br>I don&#39;t yet see a=C2=A0reason why llvm and gcc could no=
-t support a signed number in decimal format, perhaps requiring a pseudo-ins=
-truction. <br>This might be desirable, if only in support of assembly progr=
-amming. <br>On the other hand, it is easy to make the conversion to a two&#=
-39;s-complement number.<br><br>Richard</font></div></div><br><div class=3D"=
-gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Sat, Mar 9, 2024 at 4=
-:01=E2=80=AFAM Andrew Jones &lt;<a href=3D"mailto:ajones@ventanamicro.com" =
-target=3D"_blank">ajones@ventanamicro.com</a>&gt; wrote:<br></div><blockquo=
-te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px =
-solid rgb(204,204,204);padding-left:1ex">On Fri, Mar 08, 2024 at 08:22:01PM=
- -0800, Richard Bagley wrote:<br>
-&gt; post-nack, one further comment:<br>
-&gt; <br>
-&gt; One could argue that this change also aligns QEMU with supporting tool=
-s (as<br>
-&gt; Andrew observed), and it makes sense to merge this change into QEMU un=
-til<br>
-&gt; those tools update to supporting signed decimal numbers with immediate=
-s.<br>
-&gt; <br>
-&gt; As it is, both GNU assembler and the LLVM integrated assembler (or llv=
-m-mc)<br>
-&gt; throws an error with examples such as<br>
-&gt; auipc s0, -17<br>
-&gt; <br>
-&gt; On the other hand, I have only seen this problem with the output of th=
-e<br>
-&gt; COLLECT plug-in, not (as yet) with QEMU execution proper.<br>
-&gt; If the problem is confined to COLLECT, perhaps the argument for aligni=
-ng<br>
-&gt; with other tools is not as strong.<br>
-&gt; <br>
-&gt; In the meantime, I have adjusted my change locally to include AUIPC, a=
-nd<br>
-&gt; written a substantive, and I hope, clear commit description.<br>
-&gt; If you would like me to resubmit a patch with this updated change, ple=
-ase<br>
-&gt; let me know.<br>
-<br>
-Since the patch is ready for posting, then it might as well be posted<br>
-(even if it may not get merged right away). If the issue arises again,<br>
-then we can refer to the latest proposed patch, which will be preserved<br>
-in the mail archives.<br>
-<br>
-Thanks,<br>
-drew<br>
-</blockquote></div>
-</blockquote></div>
-
---000000000000092cb2061367ff3e--
+> Thanks,
+> drew
 
