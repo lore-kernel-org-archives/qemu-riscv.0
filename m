@@ -4,89 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B38CC54E58
-	for <qemu-riscv@archiver.kernel.org>; Tue, 12 Mar 2024 09:26:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61CA4C54E58
+	for <qemu-riscv@archiver.kernel.org>; Tue, 12 Mar 2024 10:59:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rjyOl-0003Ha-Ol; Tue, 12 Mar 2024 05:26:15 -0400
+	id 1rjzq4-00049D-43; Tue, 12 Mar 2024 06:58:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rjyOj-0003Fh-D0
- for qemu-riscv@nongnu.org; Tue, 12 Mar 2024 05:26:13 -0400
-Received: from mail-oi1-x22f.google.com ([2607:f8b0:4864:20::22f])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rjyOh-0003O2-9t
- for qemu-riscv@nongnu.org; Tue, 12 Mar 2024 05:26:13 -0400
-Received: by mail-oi1-x22f.google.com with SMTP id
- 5614622812f47-3c23245ddfbso1503305b6e.2
- for <qemu-riscv@nongnu.org>; Tue, 12 Mar 2024 02:26:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1710235570; x=1710840370; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:references:cc:to:from
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=1fOhm/KsX3r5K2fqdEXWytTHtx/WjRGz1zlvAE3Dj40=;
- b=fYjGKP9pu7cPWCh5HUqts26vay77deA8wA8RWySt/R2oQVMrvp5cnWLKYlN1DAuYBc
- YZ7nTFZFdUudJjHwgrE0sqaVu+LlgYoNcNcKGOSDDCpWY4ott+R0PFi1UAAQPnQqbrIj
- /6Mm8obPAXBC1NZmvS+LHPZM41j0VwMoZ33V27TLhscAPxP08jkqIJmo85Bgc59hC+zp
- wPE8UfAfB6oVpaeYg4Lcer70oVjeh87aM+4KAypqIK/3522RdqHFSXNSSrJWkEVW3Tfq
- /qVR6BFG9GaDkqIyFjkGUcSyx0Z29wz5mzY8nFHU4dBPLoJ754gomL13A/K2GC63P84a
- me2Q==
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rjzq1-00048e-OV
+ for qemu-riscv@nongnu.org; Tue, 12 Mar 2024 06:58:29 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rjzpz-0003Ib-S9
+ for qemu-riscv@nongnu.org; Tue, 12 Mar 2024 06:58:29 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1710241107;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=t09QWsY94/iQRZOnzLkiHhhxO2pFYnVJQ15R56gTi90=;
+ b=BgyxbMxb3jQ35lmwDpAGeB357iXNYCu3OuRnaa+7+DEf/OoG9u9txdp1WDhRVNU7lhENlt
+ WkQV++jrUMEf7r1TxavP6wXQdFRqEeJzsSOp8JMOBhDn02A2FhvUMAm0x/A2tdQTMhIjSj
+ rF+iIM0qyvjr2QfGxerGm0jdfgs3Ry0=
+Received: from mail-ua1-f71.google.com (mail-ua1-f71.google.com
+ [209.85.222.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-526-iS2oj6PjO3yNePq-uYidkQ-1; Tue, 12 Mar 2024 06:58:25 -0400
+X-MC-Unique: iS2oj6PjO3yNePq-uYidkQ-1
+Received: by mail-ua1-f71.google.com with SMTP id
+ a1e0cc1a2514c-7db1c4c6df6so1851017241.1
+ for <qemu-riscv@nongnu.org>; Tue, 12 Mar 2024 03:58:25 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710235570; x=1710840370;
- h=content-transfer-encoding:in-reply-to:references:cc:to:from
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1710241105; x=1710845905;
+ h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+ :to:content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=1fOhm/KsX3r5K2fqdEXWytTHtx/WjRGz1zlvAE3Dj40=;
- b=iCEvlsItq4GCWqc+q1A9F4ABGa+cB2di0sUppO8QPncGFNnQNF6N/EEfGQa3+Eri58
- m6kl11JvD3LywYIfdnDFcknxME5q6Wt3SeqBGp3eUGS6kmhaQsxYiP0yzMR2WKAyEYc3
- 5K0WBW0ZtZzSrViILocDjEF2Jjelg/EXTfs75i7SpO5hgjZg+KRl5JMFpCYaVfaS7sNW
- YrEfbXKWobMrOQ5sGMJCxFK4RoGGE3in9Qz2kMpQi0Ak8C0ukonrHAi9W5YnDDkvBFUW
- l8j5H7YQRKhizjcXjgSM0hu0vUHYPX6MjsbNwqTBQ7bZSdQplVkV8SBv2o7PJDiHeZGT
- o/Mg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV4DD/mWn8vLi37/G90RohNr25LJp1FCxSq6ZKH7Q7yNPlpr/9CMvbM+fXkWHsTVmR6sSWGzqZBbRhtfdqKieCGxDOiFIw=
-X-Gm-Message-State: AOJu0YysuwpH6CK6v+6zWeSLzwKC3t5qD9iR4SvjogXqvH1YcR9/f6QJ
- 6vxkSbsmbv1BwwANSyFdjTpVXxRLgZnu0XaOGhXmi4fJdQHd83+Ds1wIEhcUmsw=
-X-Google-Smtp-Source: AGHT+IHYLCjF3DmypFQa/bzeswPuSDDcUL5pJK1myjT4v6m3aSYsVEq8fEkv5KJR22PeG1T+wFGU5A==
-X-Received: by 2002:a54:4884:0:b0:3c1:db9c:543b with SMTP id
- r4-20020a544884000000b003c1db9c543bmr7549481oic.16.1710235569835; 
- Tue, 12 Mar 2024 02:26:09 -0700 (PDT)
-Received: from [192.168.68.110] ([177.94.15.159])
- by smtp.gmail.com with ESMTPSA id
- v24-20020aa78098000000b006e6750de82asm5705068pff.1.2024.03.12.02.26.07
+ bh=t09QWsY94/iQRZOnzLkiHhhxO2pFYnVJQ15R56gTi90=;
+ b=G9rK9ejthXk52mIIBThElVquOtIQbkMRSWhyoWwsDmbbNSKSHaagzgPmjPL2Hbt6uo
+ CXLb01ZPy/Qs25UiKpeEvpYCvAMR3qMT+tPQt6kjMmSZ8TqKvzKFxUmS65ApGVfBHp7m
+ c+ZY2tBQ5WEZBcVOXkeqQ4//nylQWZ5vfhBr5KhNbSQnO0dkJ4F45IpdrJiYKBsG0isq
+ 4XZAppFl+pFqRZnKMoYKTGRSxnftfl+tB7C4T8DhbFnHytY2zHCF+9zPtsubFkqa+v1h
+ sy6JgWT68oj9aCJCBUJxOVbd5XqWyOixdjK5NIeI0nulDRuwFtfpKbQAOcdzwkrhYbau
+ kdEg==
+X-Gm-Message-State: AOJu0YzV/tyv2y97dyKsjteEC+kqjseigcPoYchYI7thVdxv3n7aaEb/
+ 7zBPYJv6n1XzzDD198390frZlkSBHmV1CAsCGYkif8l9VO/dKkFEYIqwzTNey6qK1Vaiph/rAmO
+ cZMq32Z7XOoQvvk3ewTRzyjYQt9GWnXvpDf86k4N4T/Eeat9rSTKT
+X-Received: by 2002:a05:6122:1689:b0:4c8:e834:6cf2 with SMTP id
+ 9-20020a056122168900b004c8e8346cf2mr5391223vkl.3.1710241105307; 
+ Tue, 12 Mar 2024 03:58:25 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGtCzZ5TA7h9HxcRxlzvWik4+loeycFPPMxtIdVzO3b5gRmM4gqXQbDLa+4sOabcSEDHwf29g==
+X-Received: by 2002:a05:6122:1689:b0:4c8:e834:6cf2 with SMTP id
+ 9-20020a056122168900b004c8e8346cf2mr5391211vkl.3.1710241104988; 
+ Tue, 12 Mar 2024 03:58:24 -0700 (PDT)
+Received: from [192.168.0.9] (ip-109-43-177-86.web.vodafone.de.
+ [109.43.177.86]) by smtp.gmail.com with ESMTPSA id
+ m14-20020ad44d4e000000b00690d26a6b20sm1893400qvm.130.2024.03.12.03.58.22
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 12 Mar 2024 02:26:09 -0700 (PDT)
-Message-ID: <c285c774-0c64-49d9-9708-35ca63e3df67@ventanamicro.com>
-Date: Tue, 12 Mar 2024 06:26:06 -0300
+ Tue, 12 Mar 2024 03:58:24 -0700 (PDT)
+Message-ID: <db5a73f5-bccc-4595-b1e9-4ed5806e3884@redhat.com>
+Date: Tue, 12 Mar 2024 11:58:16 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PULL 09/34] target/riscv: add remaining named features
+Subject: Re: [PATCH v3 00/29] hw, target: Prefer fast cpu_env() over slower
+ CPU QOM cast macro
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>, kvm@vger.kernel.org,
+ qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
+ Richard Henderson <richard.henderson@linaro.org>
+References: <20240129164514.73104-1-philmd@linaro.org>
+From: Thomas Huth <thuth@redhat.com>
+Autocrypt: addr=thuth@redhat.com; keydata=
+ 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
+In-Reply-To: <20240129164514.73104-1-philmd@linaro.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: =?UTF-8?Q?Cl=C3=A9ment_Chigot?= <chigot@adacore.com>,
- Alistair Francis <alistair23@gmail.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
- Andrew Jones <ajones@ventanamicro.com>
-References: <20240308111152.2856137-1-alistair.francis@wdc.com>
- <20240308111152.2856137-10-alistair.francis@wdc.com>
- <CAJ307EiYcXiiTKeZMgWYQNkZ2McOOOJYYGUMh1-CnuNoy7M0Gg@mail.gmail.com>
- <4d5bfb3d-d646-45bb-b8ec-300c14415d33@ventanamicro.com>
-In-Reply-To: <4d5bfb3d-d646-45bb-b8ec-300c14415d33@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::22f;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x22f.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -30
+X-Spam_score: -3.1
+X-Spam_bar: ---
+X-Spam_report: (-3.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.029,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -103,232 +150,74 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Clément, Alistair,
+On 29/01/2024 17.44, Philippe Mathieu-Daudé wrote:
+> Patches missing review: 1, 2, 5, 6, 8, 11, 14, 15, 29
+> 
+> It will be simpler if I get the whole series via my hw-cpus
+> tree once fully reviewed.
+> 
+> Since v2:
+> - Rebased
+> - bsd/linux-user
+> - Preliminary clean cpu_reset_hold
+> - Add R-b
+> 
+> Since v1:
+> - Avoid CPU() cast (Paolo)
+> - Split per targets (Thomas)
+> 
+> Use cpu_env() -- which is fast path -- when possible.
+> Bulk conversion using Coccinelle spatch (script included).
+> 
+> Philippe Mathieu-Daudé (29):
+>    bulk: Access existing variables initialized to &S->F when available
+>    hw/core: Declare CPUArchId::cpu as CPUState instead of Object
+>    hw/acpi/cpu: Use CPUState typedef
+>    bulk: Call in place single use cpu_env()
+>    scripts/coccinelle: Add cpu_env.cocci script
+>    target: Replace CPU_GET_CLASS(cpu -> obj) in cpu_reset_hold() handler
+>    target/alpha: Prefer fast cpu_env() over slower CPU QOM cast macro
+>    target/arm: Prefer fast cpu_env() over slower CPU QOM cast macro
+>    target/avr: Prefer fast cpu_env() over slower CPU QOM cast macro
+>    target/cris: Prefer fast cpu_env() over slower CPU QOM cast macro
+>    target/hexagon: Prefer fast cpu_env() over slower CPU QOM cast macro
+>    target/hppa: Prefer fast cpu_env() over slower CPU QOM cast macro
+>    target/i386/hvf: Use CPUState typedef
+>    target/i386: Prefer fast cpu_env() over slower CPU QOM cast macro
+>    target/loongarch: Prefer fast cpu_env() over slower CPU QOM cast macro
+>    target/m68k: Prefer fast cpu_env() over slower CPU QOM cast macro
+>    target/microblaze: Prefer fast cpu_env() over slower CPU QOM cast
+>      macro
+>    target/mips: Prefer fast cpu_env() over slower CPU QOM cast macro
+>    target/nios2: Prefer fast cpu_env() over slower CPU QOM cast macro
+>    target/openrisc: Prefer fast cpu_env() over slower CPU QOM cast macro
+>    target/ppc: Prefer fast cpu_env() over slower CPU QOM cast macro
+>    target/riscv: Prefer fast cpu_env() over slower CPU QOM cast macro
+>    target/rx: Prefer fast cpu_env() over slower CPU QOM cast macro
+>    target/s390x: Prefer fast cpu_env() over slower CPU QOM cast macro
+>    target/sh4: Prefer fast cpu_env() over slower CPU QOM cast macro
+>    target/sparc: Prefer fast cpu_env() over slower CPU QOM cast macro
+>    target/tricore: Prefer fast cpu_env() over slower CPU QOM cast macro
+>    target/xtensa: Prefer fast cpu_env() over slower CPU QOM cast macro
+>    user: Prefer fast cpu_env() over slower CPU QOM cast macro
 
+FYI, I'll try to queue those for my PR today except for:
 
-On 3/11/24 11:39, Daniel Henrique Barboza wrote:
-> 
-> 
-> On 3/11/24 10:47, Clément Chigot wrote:
->> Hi Alistair,
->>
->> Since this series, I'm getting warnings when using a CPU not
->> supporting the latest ISA, such as the SIFIVE_E series.
->>    | $ qemu-system-riscv32  -M sifive_e
->>    | qemu-system-riscv32: warning: disabling zic64b extension for hart
->> 0x00000000 because privilege spec version does not match
->>    | qemu-system-riscv32: warning: disabling ziccamoa extension for
->> hart 0x00000000 because privilege spec version does not match
->>
->> Those are always enabled during the initialization but
->> riscv_cpu_disable_priv_spec_isa_exts is detecting them as unsupported
->> by the CPU and thus disabling them.
->> However, are those extensions different from zicnptr and zihpm
->> extensions ? As they are not enabled by the same mean, I'm wondering
->> about that ? Or do we want to skip their ISA verification as well ?
-> 
-> Disabling zihpm and zicntr will impact the CPU because we'll remove timers from
-> the emulation. An exception was important in this case to not change existing
-> behavior.
-> 
-> Disabling 'zic64b' and 'ziccamoa' will only impact riscv,isa. We won't change
-> any cache block size when disabling zic64ba and 'ziccamoa' does nothing
-> because it's cache related and we do not implement cache.
-> 
-> All this said, I'm less than pleased with these warnings. And they'll be getting
-> worse and worse: priv_spec 1.13 is around the corner, we'll start adding profile
-> extensions that will be marked as 1.13, some of them will be mapped to something
-> that we already support, and then vendor CPUs will be getting more and more
-> warnings because they'll be running an old priv_spec.
-> 
-> My suggestion is to not send user warnings when disabling extensions for vendor
-> CPUs. Vendor CPUs don't allow extensions to be enabled, so if an extension is
-> violating priv_spec it's not the user fault. We can add a LOG_GUEST_ERROR when
-> disabling exts but user warnings will only be shown for non-vendor CPUs.
+  scripts/coccinelle: Add cpu_env.cocci script
+  --> Still needs review and you mentioned a pending change
 
-I discussed this issue with Drew and he suggested that the problem is that we're
-enabling these innate extensions without regard for the actual priv_ver of the CPU
-being used, and a better fix would be to prevent this from happening in the first
-place.
+  target/arm: Prefer fast cpu_env() over slower CPU QOM cast macro
+  --> Needs a rebase and review
 
-I'll send a patch with this approach. Thanks,
+  target/hppa: Prefer fast cpu_env() over slower CPU QOM cast macro
+  --> Needs a rebase
 
+  target/i386: Prefer fast cpu_env() over slower CPU QOM cast macro
+  --> There were unaddressed review comments from Igor
 
-Daniel
+  target/riscv: Prefer fast cpu_env() over slower CPU QOM cast macro
+  --> Needs a rebase
 
-> 
-> 
-> Thanks,
-> 
-> Daniel
-> 
-> 
-> 
->>
->> Thanks,
->> Clément
->>
->> On Fri, Mar 8, 2024 at 12:13 PM Alistair Francis <alistair23@gmail.com> wrote:
->>>
->>> From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->>>
->>> The RVA22U64 and RVA22S64 profiles mandates certain extensions that,
->>> until now, we were implying that they were available.
->>>
->>> We can't do this anymore since named features also has a riscv,isa
->>> entry. Let's add them to riscv_cpu_named_features[].
->>>
->>> Instead of adding one bool for each named feature that we'll always
->>> implement, i.e. can't be turned off, add a 'ext_always_enabled' bool in
->>> cpu->cfg. This bool will be set to 'true' in TCG accel init, and all
->>> named features will point to it. This also means that KVM won't see
->>> these features as always enable, which is our intention.
->>>
->>> If any accelerator adds support to disable one of these features, we'll
->>> have to promote them to regular extensions and allow users to disable it
->>> via command line.
->>>
->>> After this patch, here's the riscv,isa from a buildroot using the
->>> 'rva22s64' CPU:
->>>
->>>   # cat /proc/device-tree/cpus/cpu@0/riscv,isa
->>> rv64imafdc_zic64b_zicbom_zicbop_zicboz_ziccamoa_ziccif_zicclsm_ziccrse_
->>> zicntr_zicsr_zifencei_zihintpause_zihpm_za64rs_zfhmin_zca_zcd_zba_zbb_
->>> zbs_zkt_ssccptr_sscounterenw_sstvala_sstvecd_svade_svinval_svpbmt#
->>>
->>> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->>> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
->>> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
->>> Message-ID: <20240215223955.969568-4-dbarboza@ventanamicro.com>
->>> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
->>> ---
->>>   target/riscv/cpu_cfg.h     |  6 ++++++
->>>   target/riscv/cpu.c         | 42 +++++++++++++++++++++++++++++++-------
->>>   target/riscv/tcg/tcg-cpu.c |  2 ++
->>>   3 files changed, 43 insertions(+), 7 deletions(-)
->>>
->>> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
->>> index e68a4ddb92..be39870691 100644
->>> --- a/target/riscv/cpu_cfg.h
->>> +++ b/target/riscv/cpu_cfg.h
->>> @@ -128,6 +128,12 @@ struct RISCVCPUConfig {
->>>       bool ext_svade;
->>>       bool ext_zic64b;
->>>
->>> +    /*
->>> +     * Always 'true' boolean for named features
->>> +     * TCG always implement/can't be disabled.
->>> +     */
->>> +    bool ext_always_enabled;
->>> +
->>>       /* Vendor-specific custom extensions */
->>>       bool ext_xtheadba;
->>>       bool ext_xtheadbb;
->>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->>> index f0cd408237..4c4fa79145 100644
->>> --- a/target/riscv/cpu.c
->>> +++ b/target/riscv/cpu.c
->>> @@ -102,6 +102,10 @@ const RISCVIsaExtData isa_edata_arr[] = {
->>>       ISA_EXT_DATA_ENTRY(zicbom, PRIV_VERSION_1_12_0, ext_zicbom),
->>>       ISA_EXT_DATA_ENTRY(zicbop, PRIV_VERSION_1_12_0, ext_zicbop),
->>>       ISA_EXT_DATA_ENTRY(zicboz, PRIV_VERSION_1_12_0, ext_zicboz),
->>> +    ISA_EXT_DATA_ENTRY(ziccamoa, PRIV_VERSION_1_11_0, ext_always_enabled),
->>> +    ISA_EXT_DATA_ENTRY(ziccif, PRIV_VERSION_1_11_0, ext_always_enabled),
->>> +    ISA_EXT_DATA_ENTRY(zicclsm, PRIV_VERSION_1_11_0, ext_always_enabled),
->>> +    ISA_EXT_DATA_ENTRY(ziccrse, PRIV_VERSION_1_11_0, ext_always_enabled),
->>>       ISA_EXT_DATA_ENTRY(zicond, PRIV_VERSION_1_12_0, ext_zicond),
->>>       ISA_EXT_DATA_ENTRY(zicntr, PRIV_VERSION_1_12_0, ext_zicntr),
->>>       ISA_EXT_DATA_ENTRY(zicsr, PRIV_VERSION_1_10_0, ext_zicsr),
->>> @@ -110,6 +114,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
->>>       ISA_EXT_DATA_ENTRY(zihintpause, PRIV_VERSION_1_10_0, ext_zihintpause),
->>>       ISA_EXT_DATA_ENTRY(zihpm, PRIV_VERSION_1_12_0, ext_zihpm),
->>>       ISA_EXT_DATA_ENTRY(zmmul, PRIV_VERSION_1_12_0, ext_zmmul),
->>> +    ISA_EXT_DATA_ENTRY(za64rs, PRIV_VERSION_1_12_0, ext_always_enabled),
->>>       ISA_EXT_DATA_ENTRY(zaamo, PRIV_VERSION_1_12_0, ext_zaamo),
->>>       ISA_EXT_DATA_ENTRY(zacas, PRIV_VERSION_1_12_0, ext_zacas),
->>>       ISA_EXT_DATA_ENTRY(zalrsc, PRIV_VERSION_1_12_0, ext_zalrsc),
->>> @@ -173,8 +178,12 @@ const RISCVIsaExtData isa_edata_arr[] = {
->>>       ISA_EXT_DATA_ENTRY(smepmp, PRIV_VERSION_1_12_0, ext_smepmp),
->>>       ISA_EXT_DATA_ENTRY(smstateen, PRIV_VERSION_1_12_0, ext_smstateen),
->>>       ISA_EXT_DATA_ENTRY(ssaia, PRIV_VERSION_1_12_0, ext_ssaia),
->>> +    ISA_EXT_DATA_ENTRY(ssccptr, PRIV_VERSION_1_11_0, ext_always_enabled),
->>>       ISA_EXT_DATA_ENTRY(sscofpmf, PRIV_VERSION_1_12_0, ext_sscofpmf),
->>> +    ISA_EXT_DATA_ENTRY(sscounterenw, PRIV_VERSION_1_12_0, ext_always_enabled),
->>>       ISA_EXT_DATA_ENTRY(sstc, PRIV_VERSION_1_12_0, ext_sstc),
->>> +    ISA_EXT_DATA_ENTRY(sstvala, PRIV_VERSION_1_12_0, ext_always_enabled),
->>> +    ISA_EXT_DATA_ENTRY(sstvecd, PRIV_VERSION_1_12_0, ext_always_enabled),
->>>       ISA_EXT_DATA_ENTRY(svade, PRIV_VERSION_1_11_0, ext_svade),
->>>       ISA_EXT_DATA_ENTRY(svadu, PRIV_VERSION_1_12_0, ext_svadu),
->>>       ISA_EXT_DATA_ENTRY(svinval, PRIV_VERSION_1_12_0, ext_svinval),
->>> @@ -1567,6 +1576,11 @@ const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[] = {
->>>       DEFINE_PROP_END_OF_LIST(),
->>>   };
->>>
->>> +#define ALWAYS_ENABLED_FEATURE(_name) \
->>> +    {.name = _name, \
->>> +     .offset = CPU_CFG_OFFSET(ext_always_enabled), \
->>> +     .enabled = true}
->>> +
->>>   /*
->>>    * 'Named features' is the name we give to extensions that we
->>>    * don't want to expose to users. They are either immutable
->>> @@ -1578,6 +1592,23 @@ const RISCVCPUMultiExtConfig riscv_cpu_named_features[] = {
->>>       MULTI_EXT_CFG_BOOL("svade", ext_svade, true),
->>>       MULTI_EXT_CFG_BOOL("zic64b", ext_zic64b, true),
->>>
->>> +    /*
->>> +     * cache-related extensions that are always enabled
->>> +     * in TCG since QEMU RISC-V does not have a cache
->>> +     * model.
->>> +     */
->>> +    ALWAYS_ENABLED_FEATURE("za64rs"),
->>> +    ALWAYS_ENABLED_FEATURE("ziccif"),
->>> +    ALWAYS_ENABLED_FEATURE("ziccrse"),
->>> +    ALWAYS_ENABLED_FEATURE("ziccamoa"),
->>> +    ALWAYS_ENABLED_FEATURE("zicclsm"),
->>> +    ALWAYS_ENABLED_FEATURE("ssccptr"),
->>> +
->>> +    /* Other named features that TCG always implements */
->>> +    ALWAYS_ENABLED_FEATURE("sstvecd"),
->>> +    ALWAYS_ENABLED_FEATURE("sstvala"),
->>> +    ALWAYS_ENABLED_FEATURE("sscounterenw"),
->>> +
->>>       DEFINE_PROP_END_OF_LIST(),
->>>   };
->>>
->>> @@ -2171,13 +2202,10 @@ static const PropertyInfo prop_marchid = {
->>>   };
->>>
->>>   /*
->>> - * RVA22U64 defines some 'named features' or 'synthetic extensions'
->>> - * that are cache related: Za64rs, Zic64b, Ziccif, Ziccrse, Ziccamoa
->>> - * and Zicclsm. We do not implement caching in QEMU so we'll consider
->>> - * all these named features as always enabled.
->>> - *
->>> - * There's no riscv,isa update for them (nor for zic64b, despite it
->>> - * having a cfg offset) at this moment.
->>> + * RVA22U64 defines some 'named features' that are cache
->>> + * related: Za64rs, Zic64b, Ziccif, Ziccrse, Ziccamoa
->>> + * and Zicclsm. They are always implemented in TCG and
->>> + * doesn't need to be manually enabled by the profile.
->>>    */
->>>   static RISCVCPUProfile RVA22U64 = {
->>>       .parent = NULL,
->>> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
->>> index 2307999387..ea763abb31 100644
->>> --- a/target/riscv/tcg/tcg-cpu.c
->>> +++ b/target/riscv/tcg/tcg-cpu.c
->>> @@ -1315,6 +1315,8 @@ static void riscv_tcg_cpu_instance_init(CPUState *cs)
->>>       RISCVCPU *cpu = RISCV_CPU(cs);
->>>       Object *obj = OBJECT(cpu);
->>>
->>> +    cpu->cfg.ext_always_enabled = true;
->>> +
->>>       misa_ext_user_opts = g_hash_table_new(NULL, g_direct_equal);
->>>       multi_ext_user_opts = g_hash_table_new(NULL, g_direct_equal);
->>>       riscv_cpu_add_user_properties(obj);
->>> -- 
->>> 2.44.0
->>>
->>>
+  Thomas
+
 
