@@ -4,57 +4,166 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A091C54E58
-	for <qemu-riscv@archiver.kernel.org>; Tue, 12 Mar 2024 05:47:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E275C54E58
+	for <qemu-riscv@archiver.kernel.org>; Tue, 12 Mar 2024 09:00:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rjuyz-00078s-98; Tue, 12 Mar 2024 01:47:25 -0400
+	id 1rjxzo-0001bv-Cf; Tue, 12 Mar 2024 05:00:28 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <eric.huang@linux.alibaba.com>)
- id 1rjuyn-00075p-PX; Tue, 12 Mar 2024 01:47:18 -0400
-Received: from out30-97.freemail.mail.aliyun.com ([115.124.30.97])
+ (Exim 4.90_1) (envelope-from <fei2.wu@intel.com>)
+ id 1rjxzY-0001NV-P3; Tue, 12 Mar 2024 05:00:16 -0400
+Received: from mgamail.intel.com ([198.175.65.11])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <eric.huang@linux.alibaba.com>)
- id 1rjuyY-0007do-Em; Tue, 12 Mar 2024 01:47:13 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux.alibaba.com; s=default;
- t=1710222408; h=From:To:Subject:Date:Message-ID:MIME-Version;
- bh=n3lFD/Eap30yyY91QJ2Yy23T+51QoULRPSQPw9NBZrU=;
- b=n/XvU0uxMmNW0rF6sl2oSKN4Jz2uifB+GGlEtGXGbE+fE9zNWtOunXzHXJ+3r0L/cD1oliHhRDw2I5oDFns3Xg9Mu2Qu5SmFf+7VPdxQXTlI5PLPGt8fgd9T4kc/iBl4l9EqB5zumi7rwKP6FgZ1MQBs5Bh+8uL35E2b6joEjGc=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R481e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046049;
- MF=eric.huang@linux.alibaba.com; NM=1; PH=DS; RN=10; SR=0;
- TI=SMTPD_---0W2KhSFI_1710222404; 
-Received: from localhost.localdomain(mailfrom:eric.huang@linux.alibaba.com
- fp:SMTPD_---0W2KhSFI_1710222404) by smtp.aliyun-inc.com;
- Tue, 12 Mar 2024 13:46:45 +0800
-From: Huang Tao <eric.huang@linux.alibaba.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, zhiwei_liu@linux.alibaba.com,
- dbarboza@ventanamicro.com, liwei1518@gmail.com, bin.meng@windriver.com,
- alistair.francis@wdc.com, palmer@dabbelt.com,
- Huang Tao <eric.huang@linux.alibaba.com>,
- Christoph Muellner <christoph.muellner@vrull.eu>
-Subject: [PATCH v2] target/riscv: Implement dynamic establishment of custom
- decoder
-Date: Tue, 12 Mar 2024 13:45:53 +0800
-Message-ID: <20240312054553.11811-1-eric.huang@linux.alibaba.com>
-X-Mailer: git-send-email 2.41.0
+ (Exim 4.90_1) (envelope-from <fei2.wu@intel.com>)
+ id 1rjxzL-0007X2-Vc; Tue, 12 Mar 2024 05:00:11 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1710234000; x=1741770000;
+ h=message-id:date:subject:to:references:from:in-reply-to:
+ content-transfer-encoding:mime-version;
+ bh=uTMfTx8rVZqIiYLvJ/KSmG9NpVrx1mUi+YrZUWJe/2g=;
+ b=IfCnrq5/NIFE9yizj4Fq49o/mpIuidl2ERzG1isT346nCeo4dP6ZMAhf
+ 0yRvC6N2okKTQ8RJstcJ6hZuoBfDH13hLkWNTY++wej1PotlEM0ZOkUQJ
+ F6Ez4NNql5cXPwcPUvKqe+ZvopJ/cFEfIRZROrXE7+eBQJDp2DO/ZK15B
+ F3MOSMDM/z3UHj7DcqhCw/S+1mkBSGyLiXkrwJjyquKhbgIvorRS45d8Z
+ KuY4wf2sQZcMhZ7iyLqTrkDQx21SRNPrmBl3ahY4ZTOCAvrfdhWdbX5wg
+ o58Cu0Wo9BcP2k/Zj9q7pOM6ZAXREq/B5sUwX5ztXJndJKLZ5Zmzm4zG3 A==;
+X-IronPort-AV: E=McAfee;i="6600,9927,11010"; a="15491521"
+X-IronPort-AV: E=Sophos;i="6.07,118,1708416000"; d="scan'208";a="15491521"
+Received: from fmviesa004.fm.intel.com ([10.60.135.144])
+ by orvoesa103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 12 Mar 2024 01:59:57 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.07,118,1708416000"; d="scan'208";a="16065333"
+Received: from orsmsx601.amr.corp.intel.com ([10.22.229.14])
+ by fmviesa004.fm.intel.com with ESMTP/TLS/AES256-GCM-SHA384;
+ 12 Mar 2024 01:59:56 -0700
+Received: from orsmsx610.amr.corp.intel.com (10.22.229.23) by
+ ORSMSX601.amr.corp.intel.com (10.22.229.14) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.35; Tue, 12 Mar 2024 01:59:55 -0700
+Received: from ORSEDG601.ED.cps.intel.com (10.7.248.6) by
+ orsmsx610.amr.corp.intel.com (10.22.229.23) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.35 via Frontend Transport; Tue, 12 Mar 2024 01:59:55 -0700
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com (104.47.55.169)
+ by edgegateway.intel.com (134.134.137.102) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2507.35; Tue, 12 Mar 2024 01:59:55 -0700
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=OiIHvrWlZL/2jq9ECh+uQht3ulVfnaaZO7HSZGTkBbtU12B7sgoHlf9Wr6LPa9yrk59SGpWEUFAmKLZTO2Vq43clVoTdfBrwzGCJku8gqLx6R3P7vT4hzmCfD5j40MYN7Ghn3Ddxtub40kP7gKb0MgEJlnfOu0ruUPxQNkU2QXqhGz6vmOgDMyOks/RuL+tmb7eHYWbsqiodskhsOle+5R8y6PCuOXRQIrV3gIbOnTOg9EeI6m1i99XZ6hQk2phM9DApmyLYJcfh+T7qyZfTWbHzR+XeTbLhkeawyBSHlBfPQh/TaWu9CaPt2E9DcmirkioOT5dPQtZpDOseVHBmSA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=nwserGqS7kAEpb0Jjpc+WVmwiWa6If8UgoP1aaBAufY=;
+ b=ad1HX98V0L0i2TRA9jpV04KfbJ0Tij0kKpxf9qSjz4+T8/QMR7VdUm9vLJSOC+u+uTcZfhZDhBYG7/Zo+bTY6pLpEk1Cv6gszR0AYFJD6Ytpb7CdSqhsD9EDKZZf0gNo5fLseOD/TkhcHVBYiGVuSAFGOZIlK0/AqTgZChmb8iypds5iYm8XqY6aRuyhCQG9oV2ftH8e3E2WyxI7IlMmj9JtV2MawhHkBjGSqhxvrMFzrbVmVms7/yDNbM3oe/zibb7PY5uqXqzAAu4mu1JEru+orf1U11zFqawGLb/mNjkZUj2LVqlyoUJhobbtYEPDCygfvIe8EMTMm36Ldbkyig==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=intel.com;
+Received: from CH3PR11MB7895.namprd11.prod.outlook.com (2603:10b6:610:12f::12)
+ by IA1PR11MB7917.namprd11.prod.outlook.com (2603:10b6:208:3fe::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7386.16; Tue, 12 Mar
+ 2024 08:59:52 +0000
+Received: from CH3PR11MB7895.namprd11.prod.outlook.com
+ ([fe80::8ff0:84de:f95c:5261]) by CH3PR11MB7895.namprd11.prod.outlook.com
+ ([fe80::8ff0:84de:f95c:5261%4]) with mapi id 15.20.7386.015; Tue, 12 Mar 2024
+ 08:59:52 +0000
+Message-ID: <13bb6ef3-be61-4b3d-91c5-887bbcbf6e13@intel.com>
+Date: Tue, 12 Mar 2024 16:59:42 +0800
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC 0/2] Add RISC-V Server Platform Reference Board
+To: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>, <pbonzini@redhat.com>, 
+ <palmer@dabbelt.com>, <alistair.francis@wdc.com>, <bin.meng@windriver.com>,
+ <liwei1518@gmail.com>, <dbarboza@ventanamicro.com>,
+ <zhiwei_liu@linux.alibaba.com>, <qemu-devel@nongnu.org>,
+ <qemu-riscv@nongnu.org>, <andrei.warkentin@intel.com>,
+ <shaolin.xie@alibaba-inc.com>, <ved@rivosinc.com>,
+ <sunilvl@ventanamicro.com>, <haibo1.xu@intel.com>, <evan.chai@intel.com>,
+ <yin.wang@intel.com>, <tech-server-platform@lists.riscv.org>,
+ <tech-server-soc@lists.riscv.org>
+References: <20240304102540.2789225-1-fei2.wu@intel.com>
+ <ff1b2b2a-dc8e-4346-92de-bee9c4b4b31f@linaro.org>
+Content-Language: en-US
+From: "Wu, Fei" <fei2.wu@intel.com>
+In-Reply-To: <ff1b2b2a-dc8e-4346-92de-bee9c4b4b31f@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: SI1PR02CA0002.apcprd02.prod.outlook.com
+ (2603:1096:4:1f7::16) To CH3PR11MB7895.namprd11.prod.outlook.com
+ (2603:10b6:610:12f::12)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.97;
- envelope-from=eric.huang@linux.alibaba.com;
- helo=out30-97.freemail.mail.aliyun.com
-X-Spam_score_int: -174
-X-Spam_score: -17.5
-X-Spam_bar: -----------------
-X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01, T_SPF_HELO_TEMPERROR=0.01,
- UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH3PR11MB7895:EE_|IA1PR11MB7917:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0011b850-7973-4437-4600-08dc4272c792
+X-LD-Processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: x4qzUseXfNP886heQd51Llz3No9KsC0n1/QwpE42eniZutUm9hs3MpOhe4crBdsHuUNtkku12xDUL+tRZLj4vKftAxOv48nvwCIutnyPRaHwhICutZdMacCFjaH7he7zlUQGYkL6xuvgWgx/yHehYdZ5q3B5UInI1vU6Mhvvxg/UZd2vVBXC7X4TqFGnVPwIrreqM66jcHrFsKkAiuqO4bGoj+T9tVbydajdJy4SINvLyGnd6lyglYo65DSxdx6WhkFoBoSK1+0TWTOlWaaH4pYNbNbkLjGiTmv21RL43dlzoJ3rZzQN6fEIdQfuO5vaCJNEqH6HBCSZv1iOeAVOqgD5UEsEINZEldo43FfsA2EymscVfnbIBeohKEzDKqCUKzRIzgYgtwnXctryUuNVENOfQZhLOxujnRoTO+g5Ay6+fJJisegHfdF3aVqharRYnJdyU8Swl+7/o1JB/W2k5C0jWBMRDGxqrFq7KKFTDR1MwXc6daQwBJmrK4S6pxtNc5ViW9u7HS+MFH9kOFwPXkqtMl6un6u/PFTk6TK2cH5HRiytWdiVrPQ39o92mZCl9pE3VDzi5x9YcMrxJHnNCqCuTUc1mIoNQ+vmuqwFpNpeu/RlBEaaOJ49MdTC2OquUlmxyn8CQBxgw9PUflAkTg==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:CH3PR11MB7895.namprd11.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(1800799015)(7416005)(376005)(921011); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?U1orUTJDSkZsTlZGSjU3dVp5Z1RCeGdsczVYa0hHeWZVNlNDcTRRREpFeEJy?=
+ =?utf-8?B?NlFtdTJOdjB0bmRVMDVwVFZDQUtsS3dhTmhFd0dJR2NXc0lUZHJXMmkvUy9I?=
+ =?utf-8?B?MWZXY2ZEYmthNWUraUh0a2xMT0FyZDBJS25PeXZaL1hudlllczZ3ZzZsajlJ?=
+ =?utf-8?B?VjNaa0oxNDR4Q1psOHo5YmRmZ25wTldsbWhQckJMTkthZXpqSFRJVGxFSTdh?=
+ =?utf-8?B?aUd0dmFadjRPVjd6UlJTZHF3c3lHbVZ3UEFDT0pTckdYTU52dUk1L0djS0VC?=
+ =?utf-8?B?eXQ5dWhidUR4ZlZPZkh2ZWFOR01RTE1JREdPMzdISGV3WEJxYlczM3JSem0w?=
+ =?utf-8?B?b1hMSFJVbFVZL2dWdG1DczhBN1hVSmVkVGluRmVOU2dnM2JTNU9CRWFuVWpW?=
+ =?utf-8?B?LzRiTHR4OXpNV2dUM0Vwcm82WTZkdXpyZ1MybWdJeis3dkhic2hYYVpxM0xn?=
+ =?utf-8?B?TE5GSmVTL0l4Y2xiaCsyM1VlNGhsVFlSbGQ1b0NxcCtITlQ1c2x6TzZvYnND?=
+ =?utf-8?B?TkZ1TzI1UERZS1A4ekk2dzV0RWxkSGxoSUROR2t5eUUyT2k4bUZZQlFsRkND?=
+ =?utf-8?B?TDJiY1JSVWg4MkNPOHR6SGtPSjN0RklWZ0RSZlYwVm8vSEpaQlhwN1ZRWTUx?=
+ =?utf-8?B?SmkxblFGT0JUdHhzcFh6c0VWQlFvL3BvZHg3ZzVDNlJDcDRQNTFJR0oyMG8w?=
+ =?utf-8?B?QjN1SXI5WEl1VFMwSGxZbHczNTM2NG96TW1KT3p2bXpTcE9qOVIrSVBvWUcv?=
+ =?utf-8?B?cTBMMTJxQ3paa0NFS20rOC9RZEVoeVNsc3lFNkxlcTJ4NExhY25SUk5Bb1ZC?=
+ =?utf-8?B?Y3dNY1RhVjM1YURoQkNwUjRGR09VRHR2aG9CYXJuVjhwUmM4azZHTWdOWFBU?=
+ =?utf-8?B?eWh0dHpNL0FDdjV6Z2Y3NFZKdFhVZWRKVWxFSjJRMWhsTWt3bEQvbXdSZWtn?=
+ =?utf-8?B?aHBpOW1MRXdFaWo2WHlYT1pVbkFyUDQ0VlluMnR2TlErYzJtSHBZVHZPN3ZF?=
+ =?utf-8?B?Nm1oMHFHZDM1eGRzV3M0MXlOQVBCUkY5UGM5UGFUMjFyTjNrYWRxRWZKQXFz?=
+ =?utf-8?B?L1ZHMjNMcXFacVM2RE0ydWpsVS9ibTExTytmb1RkSFZMM0pYS0lrVlBETDRW?=
+ =?utf-8?B?QksvTlk4Mkk1bTVyTldoeURTOXhielJKNWo5NCtXV0pJZ1RMUkdsbmZDdExn?=
+ =?utf-8?B?T0lDRERIU2Z3T3pTWXI1eDEvYmZjTkE2YyttQUp3NlVXR2lZVHhuMHI5d3A1?=
+ =?utf-8?B?bFJleWdVclFIbmk2RUs5NE12aXJUMTlDc3ZxaUhTc3lvL2V6M0lvdGFPNmEx?=
+ =?utf-8?B?ditlUGVKWTFvMlJyZ1pqV3pkNm5FM1pHb0xUTWhRQjdzdlYwS0pCQUFCajFo?=
+ =?utf-8?B?L2ovV3VXdFc2b0tLY29FaVFUNjcrUXl3L2RGR2Z4WTllNVlKSHN2YXJlY3VL?=
+ =?utf-8?B?SmxSbDljaUQrT0w1aTBSR1NHWlVYak9FU0QzOVBSUE10SUVKamp6bmFtakd1?=
+ =?utf-8?B?bzdzQmRodWFZMytEc3ZHZlVBRkRDNnpzTHF0K1dBZFU3YmFodnlrS052RE5E?=
+ =?utf-8?B?SjZxOXNjOXgxdnBGcU84aDZxVE9jL2JoUzlvakxwRUY5c2t2V3VyMER0dWU0?=
+ =?utf-8?B?TkkyRjNMVGYxQmoyWW1ubC9SbjVkZjJwbUxDTTdrdFFaR3htU2w3a0N2Wi93?=
+ =?utf-8?B?NWhNbmg4ZG4xclk5ZG83dWxKc2pua1NaR0dkVFE5ellxNXFGczJxSTg0NFUx?=
+ =?utf-8?B?N3NiUkl6UFBnSzZLUUIxSzNVbXo1a2VrbXRwYTBBOGh5ZmNTVjE0V3ZGNjMy?=
+ =?utf-8?B?enBkQTUvVlUrRjJ1Ny91TFZqRG1lV2ZsMTgwNXRMTkFqM0dMWHZZWWFMMExm?=
+ =?utf-8?B?cWJ6ZHpma1hDWjBOR2Jzd0FoRmNrTTVDTHluM3BTck1qQ1BYNVN5R3N1TTFS?=
+ =?utf-8?B?S29kL1B6U2krcDRiVko0RURoTzhRUTE2QWNtL3h3NVVkazAwL0h1L0EraklL?=
+ =?utf-8?B?ZHVnNnZnS3NiVm5uR0twTDhKQk5tK0V1c08zTkYyL1dmZ3M3enVpdHN1QSs0?=
+ =?utf-8?B?QXhPb1lLaUhFRTVZMTdzY0kza3pwejZHOTl4SkNDY1Q5SWhPNCtiaEpuRjBo?=
+ =?utf-8?Q?6j6ngEH6HADQHRIvIfnz2utUf?=
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0011b850-7973-4437-4600-08dc4272c792
+X-MS-Exchange-CrossTenant-AuthSource: CH3PR11MB7895.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Mar 2024 08:59:52.5198 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: jInOlAk/72z3mjVWgpx7sMSUWjcQbNSQKt3xzoq587vuzmDqq6Ln4UHk1lMze32hfXSfRuZ5Y/hqc+12FbPuBw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR11MB7917
+X-OriginatorOrg: intel.com
+Received-SPF: pass client-ip=198.175.65.11; envelope-from=fei2.wu@intel.com;
+ helo=mgamail.intel.com
+X-Spam_score_int: -30
+X-Spam_score: -3.1
+X-Spam_bar: ---
+X-Spam_report: (-3.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.029,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01,
+ T_SPF_HELO_TEMPERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -70,202 +179,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-In this patch, we modify the decoder to be a freely composable data
-structure instead of a hardcoded one. It can be dynamically builded up
-according to the extensions.
-This approach has several benefits:
-1. Provides support for heterogeneous cpu architectures. As we add decoder in
-   RISCVCPU, each cpu can have their own decoder, and the decoders can be
-   different due to cpu's features.
-2. Improve the decoding efficiency. We run the guard_func to see if the decoder
-   can be added to the dynamic_decoder when building up the decoder. Therefore,
-   there is no need to run the guard_func when decoding each instruction. It can
-   improve the decoding efficiency
-3. For vendor or dynamic cpus, it allows them to customize their own decoder
-   functions to improve decoding efficiency, especially when vendor-defined
-   instruction sets increase. Because of dynamic building up, it can skip the other
-   decoder guard functions when decoding.
-4. Pre patch for allowing adding a vendor decoder before decode_insn32() with minimal
-   overhead for users that don't need this particular vendor deocder.
+On 3/8/2024 6:15 AM, Marcin Juszkiewicz wrote:
+> W dniu 4.03.2024 o 11:25, Fei Wu pisze:
+> 
+>> The RISC-V Server Platform specification[1] defines a standardized
+>> set of hardware and software capabilities, that portable system
+>> software, such as OS and hypervisors can rely on being present in a
+>> RISC-V server platform. This patchset provides a RISC-V Server
+>> Platform (RVSP) reference implementation on qemu which is in
+>> compliance with the spec as faithful as possible.
+> 
+> I am working on sbsa-ref which is AArch64 Standard Server Platform
+> implementation. Will not go through details of rvsp-ref but give some
+> potential hints from my work with our platform.
+> 
+Hi Marcin,
 
-Signed-off-by: Huang Tao <eric.huang@linux.alibaba.com>
-Suggested-by: Christoph Muellner <christoph.muellner@vrull.eu>
-Co-authored-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
----
- target/riscv/cpu.c         | 19 +++++++++++++++++++
- target/riscv/cpu.h         |  2 ++
- target/riscv/cpu_decoder.h | 34 ++++++++++++++++++++++++++++++++++
- target/riscv/translate.c   | 28 ++++++++++++----------------
- 4 files changed, 67 insertions(+), 16 deletions(-)
- create mode 100644 target/riscv/cpu_decoder.h
+Thank you for sharing this.
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 5ff0192c52..5ea5232ed8 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -38,6 +38,7 @@
- #include "kvm/kvm_riscv.h"
- #include "tcg/tcg-cpu.h"
- #include "tcg/tcg.h"
-+#include "cpu_decoder.h"
- 
- /* RISC-V CPU definitions */
- static const char riscv_single_letter_exts[] = "IEMAFDQCBPVH";
-@@ -1102,6 +1103,22 @@ static void riscv_cpu_satp_mode_finalize(RISCVCPU *cpu, Error **errp)
- }
- #endif
- 
-+static void riscv_cpu_finalize_dynamic_decoder(RISCVCPU *cpu)
-+{
-+    decode_fn *dynamic_decoders;
-+    dynamic_decoders = g_new0(decode_fn, decoder_table_size);
-+    int j = 0;
-+    for (size_t i = 0; i < decoder_table_size; ++i) {
-+        if (decoder_table[i].guard_func &&
-+            decoder_table[i].guard_func(&cpu->cfg)) {
-+            dynamic_decoders[j] = decoder_table[i].decode_fn;
-+            j++;
-+        }
-+    }
-+
-+    cpu->decoders = dynamic_decoders;
-+}
-+
- void riscv_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
- {
-     Error *local_err = NULL;
-@@ -1127,6 +1144,8 @@ void riscv_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
-             return;
-         }
-     }
-+
-+    riscv_cpu_finalize_dynamic_decoder(cpu);
- }
- 
- static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 5d291a7092..bb96af97f9 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -30,6 +30,7 @@
- #include "qemu/int128.h"
- #include "cpu_bits.h"
- #include "cpu_cfg.h"
-+#include "cpu_decoder.h"
- #include "qapi/qapi-types-common.h"
- #include "cpu-qom.h"
- 
-@@ -457,6 +458,7 @@ struct ArchCPU {
-     uint32_t pmu_avail_ctrs;
-     /* Mapping of events to counters */
-     GHashTable *pmu_event_ctr_map;
-+    const decode_fn *decoders;
- };
- 
- /**
-diff --git a/target/riscv/cpu_decoder.h b/target/riscv/cpu_decoder.h
-new file mode 100644
-index 0000000000..549414ce4c
---- /dev/null
-+++ b/target/riscv/cpu_decoder.h
-@@ -0,0 +1,34 @@
-+/*
-+ * QEMU RISC-V CPU Decoder
-+ *
-+ * Copyright (c) 2023-2024 Alibaba Group
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#ifndef RISCV_CPU_DECODER_H
-+#define RISCV_CPU_DECODER_H
-+
-+struct DisasContext;
-+struct RISCVCPUConfig;
-+typedef struct RISCVDecoder {
-+    bool (*guard_func)(const struct RISCVCPUConfig *);
-+    bool (*decode_fn)(struct DisasContext *, uint32_t);
-+} RISCVDecoder;
-+
-+typedef bool (*decode_fn)(struct DisasContext *, uint32_t);
-+
-+extern const size_t decoder_table_size;
-+
-+extern const RISCVDecoder decoder_table[];
-+#endif
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 177418b2b9..3f50737a50 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -115,6 +115,7 @@ typedef struct DisasContext {
-     bool frm_valid;
-     /* TCG of the current insn_start */
-     TCGOp *insn_start;
-+    const decode_fn *decoders;
- } DisasContext;
- 
- static inline bool has_ext(DisasContext *ctx, uint32_t ext)
-@@ -1118,21 +1119,16 @@ static inline int insn_len(uint16_t first_word)
-     return (first_word & 3) == 3 ? 4 : 2;
- }
- 
-+const RISCVDecoder decoder_table[] = {
-+    { always_true_p, decode_insn32 },
-+    { has_xthead_p, decode_xthead},
-+    { has_XVentanaCondOps_p, decode_XVentanaCodeOps},
-+};
-+
-+const size_t decoder_table_size = ARRAY_SIZE(decoder_table);
-+
- static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
- {
--    /*
--     * A table with predicate (i.e., guard) functions and decoder functions
--     * that are tested in-order until a decoder matches onto the opcode.
--     */
--    static const struct {
--        bool (*guard_func)(const RISCVCPUConfig *);
--        bool (*decode_func)(DisasContext *, uint32_t);
--    } decoders[] = {
--        { always_true_p,  decode_insn32 },
--        { has_xthead_p, decode_xthead },
--        { has_XVentanaCondOps_p,  decode_XVentanaCodeOps },
--    };
--
-     ctx->virt_inst_excp = false;
-     ctx->cur_insn_len = insn_len(opcode);
-     /* Check for compressed insn */
-@@ -1153,9 +1149,8 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
-                                              ctx->base.pc_next + 2));
-         ctx->opcode = opcode32;
- 
--        for (size_t i = 0; i < ARRAY_SIZE(decoders); ++i) {
--            if (decoders[i].guard_func(ctx->cfg_ptr) &&
--                decoders[i].decode_func(ctx, opcode32)) {
-+        for (size_t i = 0; ctx->decoders[i]; ++i) {
-+            if (ctx->decoders[i](ctx, opcode32)) {
-                 return;
-             }
-         }
-@@ -1199,6 +1194,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
-     ctx->itrigger = FIELD_EX32(tb_flags, TB_FLAGS, ITRIGGER);
-     ctx->zero = tcg_constant_tl(0);
-     ctx->virt_inst_excp = false;
-+    ctx->decoders = cpu->decoders;
- }
- 
- static void riscv_tr_tb_start(DisasContextBase *db, CPUState *cpu)
--- 
-2.41.0
+> 
+> 1. Consider versioning the platform.
+> 
+> We have 'platform_version'.'major/minor' exported in
+> DeviceTree-formatted data. This allows for firmware to know which of
+> non-discoverable hardware features exists and which not. We use it to
+> disable XHCI controller on older platform version.
+> 
+Looks good, I will add it.
 
+> 
+> 2. If specification allows to have non-discoverable devices then add some.
+> 
+> This will require you to handle them in firmware in some way. Sooner or
+> later some physical hardware will be in same situation so they can use
+> your firmware code as reference. We have AHCI and XHCI on system bus
+> (hardcoded in firmware).
+> 
+This RFC currently adds the devices like AHCI as PCI devices.
+
+> 
+> 3. You are going to use EDK2 with ACPI. Hide DT from code there with
+> some hardware information library.
+> 
+> For sbsa-ref we created SbsaHardwareInfoLib in
+> https://openfw.io/edk2-devel/20240306-no-dt-for-cpu-v6-0-acd8727a1b59@linaro.org/ patchset.
+> 
+Looks good, I will ask my colleague working on FW part to take a look.
+
+Thanks,
+Fei.
 
