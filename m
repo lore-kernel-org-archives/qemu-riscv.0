@@ -4,59 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AE33C5475B
-	for <qemu-riscv@archiver.kernel.org>; Tue, 12 Mar 2024 02:37:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A091C54E58
+	for <qemu-riscv@archiver.kernel.org>; Tue, 12 Mar 2024 05:47:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rjs0K-0000WC-Al; Mon, 11 Mar 2024 22:36:36 -0400
+	id 1rjuyz-00078s-98; Tue, 12 Mar 2024 01:47:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1rjs0F-0000Vk-Q4; Mon, 11 Mar 2024 22:36:32 -0400
-Received: from out30-100.freemail.mail.aliyun.com ([115.124.30.100])
+ (Exim 4.90_1) (envelope-from <eric.huang@linux.alibaba.com>)
+ id 1rjuyn-00075p-PX; Tue, 12 Mar 2024 01:47:18 -0400
+Received: from out30-97.freemail.mail.aliyun.com ([115.124.30.97])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1rjs09-0002SP-Kd; Mon, 11 Mar 2024 22:36:29 -0400
+ (Exim 4.90_1) (envelope-from <eric.huang@linux.alibaba.com>)
+ id 1rjuyY-0007do-Em; Tue, 12 Mar 2024 01:47:13 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1710210973; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
- bh=bj8e0iChBUvFH/+hfLkQPtJuF7Ib3Y/H7e85fmCJnBk=;
- b=dHu8uburIRmzMLOWQ6N4uiHytE9BiyvdCEaEjzwGJ/6YHyI1BAdE24B9k1eKyV7F/lR6VL5y8DIvSLoMfSEzGSO6+eLdBDP1U/9546gEzNSjM7BN4+tkXgRPbIgvBKDX6OanILzl5foymRH5ASciuS6+UkxSM2JFNeKHB2uz/9A=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R111e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045168;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=8; SR=0;
- TI=SMTPD_---0W2KElfp_1710210970; 
-Received: from 30.198.0.173(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0W2KElfp_1710210970) by smtp.aliyun-inc.com;
- Tue, 12 Mar 2024 10:36:11 +0800
-Message-ID: <c68ea7b8-5c6c-4045-a759-667ce9873efe@linux.alibaba.com>
-Date: Tue, 12 Mar 2024 10:36:13 +0800
+ t=1710222408; h=From:To:Subject:Date:Message-ID:MIME-Version;
+ bh=n3lFD/Eap30yyY91QJ2Yy23T+51QoULRPSQPw9NBZrU=;
+ b=n/XvU0uxMmNW0rF6sl2oSKN4Jz2uifB+GGlEtGXGbE+fE9zNWtOunXzHXJ+3r0L/cD1oliHhRDw2I5oDFns3Xg9Mu2Qu5SmFf+7VPdxQXTlI5PLPGt8fgd9T4kc/iBl4l9EqB5zumi7rwKP6FgZ1MQBs5Bh+8uL35E2b6joEjGc=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R481e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046049;
+ MF=eric.huang@linux.alibaba.com; NM=1; PH=DS; RN=10; SR=0;
+ TI=SMTPD_---0W2KhSFI_1710222404; 
+Received: from localhost.localdomain(mailfrom:eric.huang@linux.alibaba.com
+ fp:SMTPD_---0W2KhSFI_1710222404) by smtp.aliyun-inc.com;
+ Tue, 12 Mar 2024 13:46:45 +0800
+From: Huang Tao <eric.huang@linux.alibaba.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, zhiwei_liu@linux.alibaba.com,
+ dbarboza@ventanamicro.com, liwei1518@gmail.com, bin.meng@windriver.com,
+ alistair.francis@wdc.com, palmer@dabbelt.com,
+ Huang Tao <eric.huang@linux.alibaba.com>,
+ Christoph Muellner <christoph.muellner@vrull.eu>
+Subject: [PATCH v2] target/riscv: Implement dynamic establishment of custom
+ decoder
+Date: Tue, 12 Mar 2024 13:45:53 +0800
+Message-ID: <20240312054553.11811-1-eric.huang@linux.alibaba.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] target/riscv: raise an exception when CSRRS/CSRRC
- writes a read-only CSR
-Content-Language: en-US
-To: Yu-Ming Chang <yumin686@andestech.com>, palmer@dabbelt.com,
- alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com,
- dbarboza@ventanamicro.com
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-References: <20240311030852.53831-1-yumin686@andestech.com>
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20240311030852.53831-1-yumin686@andestech.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=115.124.30.100;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-100.freemail.mail.aliyun.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=115.124.30.97;
+ envelope-from=eric.huang@linux.alibaba.com;
+ helo=out30-97.freemail.mail.aliyun.com
 X-Spam_score_int: -174
 X-Spam_score: -17.5
 X-Spam_bar: -----------------
 X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01, UNPARSEABLE_RELAY=0.001,
- USER_IN_DEF_DKIM_WL=-7.5,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01, T_SPF_HELO_TEMPERROR=0.01,
+ UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
  USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -73,109 +70,202 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+In this patch, we modify the decoder to be a freely composable data
+structure instead of a hardcoded one. It can be dynamically builded up
+according to the extensions.
+This approach has several benefits:
+1. Provides support for heterogeneous cpu architectures. As we add decoder in
+   RISCVCPU, each cpu can have their own decoder, and the decoders can be
+   different due to cpu's features.
+2. Improve the decoding efficiency. We run the guard_func to see if the decoder
+   can be added to the dynamic_decoder when building up the decoder. Therefore,
+   there is no need to run the guard_func when decoding each instruction. It can
+   improve the decoding efficiency
+3. For vendor or dynamic cpus, it allows them to customize their own decoder
+   functions to improve decoding efficiency, especially when vendor-defined
+   instruction sets increase. Because of dynamic building up, it can skip the other
+   decoder guard functions when decoding.
+4. Pre patch for allowing adding a vendor decoder before decode_insn32() with minimal
+   overhead for users that don't need this particular vendor deocder.
 
-On 2024/3/11 11:08, Yu-Ming Chang wrote:
-> Both CSRRS and CSRRC always read the addressed CSR and cause any read side
-> effects regardless of rs1 and rd fields. Note that if rs1 specifies a register
-> holding a zero value other than x0, the instruction will still attempt to write
-> the unmodified value back to the CSR and will cause any attendant side effects.
->
-> So if CSRRS or CSRRC tries to write a read-only CSR with rs1 which specifies
-> a register holding a zero value, an illegal instruction exception should be
-> raised.
->
-> Signed-off-by: Yu-Ming Chang <yumin686@andestech.com>
-> ---
-> This incorporated the comments from Richard. Thank you.
->
->   target/riscv/cpu.h       |  2 ++
->   target/riscv/csr.c       | 17 ++++++++++++++---
->   target/riscv/op_helper.c |  2 +-
->   3 files changed, 17 insertions(+), 4 deletions(-)
->
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 5d291a7092..452841ae2f 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -710,6 +710,8 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
->   void riscv_cpu_update_mask(CPURISCVState *env);
->   bool riscv_cpu_is_32bit(RISCVCPU *cpu);
->   
-> +RISCVException riscv_csrr(CPURISCVState *env, int csrno,
-> +                          target_ulong *ret_value);
->   RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
->                              target_ulong *ret_value,
->                              target_ulong new_value, target_ulong write_mask);
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index d4e8ac13b9..0d14ba2ba5 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -4306,7 +4306,7 @@ static RISCVException rmw_seed(CPURISCVState *env, int csrno,
->   
->   static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
->                                                  int csrno,
-> -                                               bool write_mask)
-> +                                               bool write)
->   {
->       /* check privileges and return RISCV_EXCP_ILLEGAL_INST if check fails */
->       bool read_only = get_field(csrno, 0xC00) == 3;
-> @@ -4328,7 +4328,7 @@ static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
->       }
->   
->       /* read / write check */
-> -    if (write_mask && read_only) {
-> +    if (write && read_only) {
->           return RISCV_EXCP_ILLEGAL_INST;
->       }
->   
-> @@ -4415,11 +4415,22 @@ static RISCVException riscv_csrrw_do64(CPURISCVState *env, int csrno,
->       return RISCV_EXCP_NONE;
->   }
->   
-> +RISCVException riscv_csrr(CPURISCVState *env, int csrno,
-> +                           target_ulong *ret_value)
-> +{
-> +    RISCVException ret = riscv_csrrw_check(env, csrno, false);
-> +    if (ret != RISCV_EXCP_NONE) {
-> +        return ret;
-> +    }
-> +
-> +    return riscv_csrrw_do64(env, csrno, ret_value, 0, 0);
-> +}
-> +
->   RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
->                              target_ulong *ret_value,
->                              target_ulong new_value, target_ulong write_mask)
->   {
-> -    RISCVException ret = riscv_csrrw_check(env, csrno, write_mask);
-> +    RISCVException ret = riscv_csrrw_check(env, csrno, true);
->       if (ret != RISCV_EXCP_NONE) {
->           return ret;
->       }
-> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-> index f414aaebdb..f3aa705be8 100644
-> --- a/target/riscv/op_helper.c
-> +++ b/target/riscv/op_helper.c
-> @@ -51,7 +51,7 @@ target_ulong helper_csrr(CPURISCVState *env, int csr)
->       }
->   
->       target_ulong val = 0;
-> -    RISCVException ret = riscv_csrrw(env, csr, &val, 0, 0);
-> +    RISCVException ret = riscv_csrr(env, csr, &val);
->   
->       if (ret != RISCV_EXCP_NONE) {
->           riscv_raise_exception(env, ret, GETPC());
+Signed-off-by: Huang Tao <eric.huang@linux.alibaba.com>
+Suggested-by: Christoph Muellner <christoph.muellner@vrull.eu>
+Co-authored-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+---
+ target/riscv/cpu.c         | 19 +++++++++++++++++++
+ target/riscv/cpu.h         |  2 ++
+ target/riscv/cpu_decoder.h | 34 ++++++++++++++++++++++++++++++++++
+ target/riscv/translate.c   | 28 ++++++++++++----------------
+ 4 files changed, 67 insertions(+), 16 deletions(-)
+ create mode 100644 target/riscv/cpu_decoder.h
 
-Hi Yu-Ming,
-
-The 128-bit CSR operations have the similar errors. Could you solve the 
-similar bug in this patch set?
-
-Otherwise,
-
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-
-Thanks,
-Zhiwei
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 5ff0192c52..5ea5232ed8 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -38,6 +38,7 @@
+ #include "kvm/kvm_riscv.h"
+ #include "tcg/tcg-cpu.h"
+ #include "tcg/tcg.h"
++#include "cpu_decoder.h"
+ 
+ /* RISC-V CPU definitions */
+ static const char riscv_single_letter_exts[] = "IEMAFDQCBPVH";
+@@ -1102,6 +1103,22 @@ static void riscv_cpu_satp_mode_finalize(RISCVCPU *cpu, Error **errp)
+ }
+ #endif
+ 
++static void riscv_cpu_finalize_dynamic_decoder(RISCVCPU *cpu)
++{
++    decode_fn *dynamic_decoders;
++    dynamic_decoders = g_new0(decode_fn, decoder_table_size);
++    int j = 0;
++    for (size_t i = 0; i < decoder_table_size; ++i) {
++        if (decoder_table[i].guard_func &&
++            decoder_table[i].guard_func(&cpu->cfg)) {
++            dynamic_decoders[j] = decoder_table[i].decode_fn;
++            j++;
++        }
++    }
++
++    cpu->decoders = dynamic_decoders;
++}
++
+ void riscv_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
+ {
+     Error *local_err = NULL;
+@@ -1127,6 +1144,8 @@ void riscv_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
+             return;
+         }
+     }
++
++    riscv_cpu_finalize_dynamic_decoder(cpu);
+ }
+ 
+ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 5d291a7092..bb96af97f9 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -30,6 +30,7 @@
+ #include "qemu/int128.h"
+ #include "cpu_bits.h"
+ #include "cpu_cfg.h"
++#include "cpu_decoder.h"
+ #include "qapi/qapi-types-common.h"
+ #include "cpu-qom.h"
+ 
+@@ -457,6 +458,7 @@ struct ArchCPU {
+     uint32_t pmu_avail_ctrs;
+     /* Mapping of events to counters */
+     GHashTable *pmu_event_ctr_map;
++    const decode_fn *decoders;
+ };
+ 
+ /**
+diff --git a/target/riscv/cpu_decoder.h b/target/riscv/cpu_decoder.h
+new file mode 100644
+index 0000000000..549414ce4c
+--- /dev/null
++++ b/target/riscv/cpu_decoder.h
+@@ -0,0 +1,34 @@
++/*
++ * QEMU RISC-V CPU Decoder
++ *
++ * Copyright (c) 2023-2024 Alibaba Group
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#ifndef RISCV_CPU_DECODER_H
++#define RISCV_CPU_DECODER_H
++
++struct DisasContext;
++struct RISCVCPUConfig;
++typedef struct RISCVDecoder {
++    bool (*guard_func)(const struct RISCVCPUConfig *);
++    bool (*decode_fn)(struct DisasContext *, uint32_t);
++} RISCVDecoder;
++
++typedef bool (*decode_fn)(struct DisasContext *, uint32_t);
++
++extern const size_t decoder_table_size;
++
++extern const RISCVDecoder decoder_table[];
++#endif
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 177418b2b9..3f50737a50 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -115,6 +115,7 @@ typedef struct DisasContext {
+     bool frm_valid;
+     /* TCG of the current insn_start */
+     TCGOp *insn_start;
++    const decode_fn *decoders;
+ } DisasContext;
+ 
+ static inline bool has_ext(DisasContext *ctx, uint32_t ext)
+@@ -1118,21 +1119,16 @@ static inline int insn_len(uint16_t first_word)
+     return (first_word & 3) == 3 ? 4 : 2;
+ }
+ 
++const RISCVDecoder decoder_table[] = {
++    { always_true_p, decode_insn32 },
++    { has_xthead_p, decode_xthead},
++    { has_XVentanaCondOps_p, decode_XVentanaCodeOps},
++};
++
++const size_t decoder_table_size = ARRAY_SIZE(decoder_table);
++
+ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
+ {
+-    /*
+-     * A table with predicate (i.e., guard) functions and decoder functions
+-     * that are tested in-order until a decoder matches onto the opcode.
+-     */
+-    static const struct {
+-        bool (*guard_func)(const RISCVCPUConfig *);
+-        bool (*decode_func)(DisasContext *, uint32_t);
+-    } decoders[] = {
+-        { always_true_p,  decode_insn32 },
+-        { has_xthead_p, decode_xthead },
+-        { has_XVentanaCondOps_p,  decode_XVentanaCodeOps },
+-    };
+-
+     ctx->virt_inst_excp = false;
+     ctx->cur_insn_len = insn_len(opcode);
+     /* Check for compressed insn */
+@@ -1153,9 +1149,8 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
+                                              ctx->base.pc_next + 2));
+         ctx->opcode = opcode32;
+ 
+-        for (size_t i = 0; i < ARRAY_SIZE(decoders); ++i) {
+-            if (decoders[i].guard_func(ctx->cfg_ptr) &&
+-                decoders[i].decode_func(ctx, opcode32)) {
++        for (size_t i = 0; ctx->decoders[i]; ++i) {
++            if (ctx->decoders[i](ctx, opcode32)) {
+                 return;
+             }
+         }
+@@ -1199,6 +1194,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+     ctx->itrigger = FIELD_EX32(tb_flags, TB_FLAGS, ITRIGGER);
+     ctx->zero = tcg_constant_tl(0);
+     ctx->virt_inst_excp = false;
++    ctx->decoders = cpu->decoders;
+ }
+ 
+ static void riscv_tr_tb_start(DisasContextBase *db, CPUState *cpu)
+-- 
+2.41.0
 
 
