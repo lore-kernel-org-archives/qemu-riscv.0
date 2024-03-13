@@ -4,87 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04F96C54E58
-	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Mar 2024 08:14:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88189C54791
+	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Mar 2024 08:37:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rkJkc-0001OY-7P; Wed, 13 Mar 2024 04:14:14 -0400
+	id 1rkK6r-0006sp-G1; Wed, 13 Mar 2024 04:37:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
- id 1rkJka-0001No-8m
- for qemu-riscv@nongnu.org; Wed, 13 Mar 2024 04:14:12 -0400
-Received: from mail-pg1-x52f.google.com ([2607:f8b0:4864:20::52f])
+ (Exim 4.90_1) (envelope-from <chigot@adacore.com>)
+ id 1rkK6o-0006s7-Sk
+ for qemu-riscv@nongnu.org; Wed, 13 Mar 2024 04:37:11 -0400
+Received: from mail-pj1-x102e.google.com ([2607:f8b0:4864:20::102e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
- id 1rkJkX-0001lN-NZ
- for qemu-riscv@nongnu.org; Wed, 13 Mar 2024 04:14:12 -0400
-Received: by mail-pg1-x52f.google.com with SMTP id
- 41be03b00d2f7-5cedfc32250so4213996a12.0
- for <qemu-riscv@nongnu.org>; Wed, 13 Mar 2024 01:14:09 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <chigot@adacore.com>)
+ id 1rkK6m-0006Lb-Re
+ for qemu-riscv@nongnu.org; Wed, 13 Mar 2024 04:37:10 -0400
+Received: by mail-pj1-x102e.google.com with SMTP id
+ 98e67ed59e1d1-29bbff1505dso2717232a91.0
+ for <qemu-riscv@nongnu.org>; Wed, 13 Mar 2024 01:37:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1710317647; x=1710922447; darn=nongnu.org;
- h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=adacore.com; s=google; t=1710319026; x=1710923826; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Yv8wKA/KPYbFLr3DTp7mYK7V8Z+RK2NI/4+apdD1MNA=;
- b=SmZkFok0aiM6HiuH34Vps+q459YvjXLO08vjjlJW3jlFzWL+fvKOo6Le0yTQdRYudj
- gWgzS7m+eNWGETs5118LUcY0GzvvSmMMXDgXoJo0jOCuuf+6uQWPQIxlZGcB5uq9fY6N
- j85BjsqFmrFeTbbCj9fHxGB8wKgkBvIM3rro/ZHKVDg5jfU0vBOyMtx+GhC9r0Mn8nd6
- 7rY1rPZfKFzJT6jb8UMujZQeT/anJJVecO6vU6r3LMc9PYVx8uhYxks8lzzaAeH/vfqT
- JLm9+Xaw9CMS6GZ9Nf3oexTz75WZvsBJGGuBvbMRTZG2UdTpB0k31t9XBBtjQXB2SPEA
- 9anA==
+ bh=OK61FivsCBElmpmwVI6MTI8ERfhHOBNDTs4an9AI+pI=;
+ b=Jbe6E8r+/WVVhlK8Y9UFzK7ijqxCLFcsnu37fPPRMkacViY2uOcO+syFTkhL1Sq0bs
+ JTn8Bsba9lPLX+pYXk8gTTqo8hQtyVY3cFBU325R1hGbfKRS5oXP5jvGbFCvnHGfqsik
+ ulZqnUkOUDJsUq+qHYqNyWIyjr6IQ+9PnfIqWjXE43U4hqUkMBKXbI6X6ZsJArDS2hO3
+ DKbc8ACXZ4XSddEihoQuH7d4SxHv6+YIwu/XtlRaBQZAxRymQJ2qPlfha6+kJzu+sFWW
+ gTU63ksRHwQQhBYcnO1CNVKyMpkZVuqqXQF2ovypdE922blMzoBw0+CWQ+Q161UZw4az
+ lc3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710317647; x=1710922447;
- h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1710319026; x=1710923826;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Yv8wKA/KPYbFLr3DTp7mYK7V8Z+RK2NI/4+apdD1MNA=;
- b=eGtgnqG1rRKmN0KtYf1JmeE6coMa/AdxvEoOS1jnXmQO6ZHGw0ScGoEiCh4aJmoNuB
- KUuKO1nI6f55S/gXx6fnZ3J7Xo3Cx8zAeM/XYsu5Z2eHtqEuTlXto/Kg3K/1fPjg8CA3
- l0keC+hvmaPYZNsfmkmEn36xfrDJlcOQ0lae6AYtgIvVQibVHtUJtrshoCNeRiTTBIBp
- MTveJmUQPDa4tz7CVgwUUXIZTfM5XmqZUtwQPWRKvnpPj9eXQj+LDdo/rWM0FndjTAB5
- gka77UQXM4tSqNVQdyMwZ0kiL4su44Kau6SwWD99RqrtiGta0FdhJQbesx8SvLArWrVa
- YrvA==
+ bh=OK61FivsCBElmpmwVI6MTI8ERfhHOBNDTs4an9AI+pI=;
+ b=cYl/VTCy2qkzZYN2GjFvP1Lxg1tevZOc2KL5/OeowvVoam+i1nwLuK255FlrlN9s4w
+ eN4PXQI2gY61HQihY2R/n4bfhZObKSwLYSc8TUDXjtEUD34YkRWtjAvMCx1k5V1diRSx
+ HX0PozioJkL6+dp3KSqer40TBFu99l4oDjHgPxWEaPgLpZ710TYpTN1okJ8NA5IGiztr
+ y/wFUln+dWx0Qti80oXMASHsuTaH8FBoJnNDMKVC+udUZXPiZjoXcygnlteJuajE8P2N
+ H4wGjP0w7n4bo9waceMmhOeXNloViaSyakNQ7eFH9JNkARF14LBYhMs3DlaOveqt8G9V
+ 10pQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUKmYE6i4VKt8t6WihA3Smq8BgJ5Id1wFkOOWOknUWrUm3DcxZmrzu3HjjDTroQf75Fikj9fTp9wz1kJXdgxE4VWC5zKWo=
-X-Gm-Message-State: AOJu0Yy3xU+gPKlv2q4mDfvUgdTjTH4yqEFdCBNh3iecHyk1TGV29TV6
- xcGq374LSNA83yZaF2dB8JJAGDccXpokR2b7RBKdQ+kaLlihUsIi/esSaIVbWGQ=
-X-Google-Smtp-Source: AGHT+IF9dTZQ87uwf7lhAsJ5YgIK8iAnEyvliRhDcIaIeZ+oa0mzLZ7VRZ+cbLV1F2Mct8C366kgWQ==
-X-Received: by 2002:a05:6a21:6da7:b0:1a3:2b94:dbaf with SMTP id
- wl39-20020a056a216da700b001a32b94dbafmr4122449pzb.1.1710317647176; 
- Wed, 13 Mar 2024 01:14:07 -0700 (PDT)
-Received: from hsinchu26.internal.sifive.com
- (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
- by smtp.gmail.com with ESMTPSA id
- gw12-20020a17090b0a4c00b0029beb0fc60fsm820291pjb.28.2024.03.13.01.14.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Mar 2024 01:14:06 -0700 (PDT)
-From: Yong-Xuan Wang <yongxuan.wang@sifive.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: greentime.hu@sifive.com, vincent.chen@sifive.com, frank.chang@sifive.com,
- jim.shu@sifive.com, Yong-Xuan Wang <yongxuan.wang@sifive.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Andrew Jones <ajones@ventanamicro.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 1/1] target/riscv/kvm: fix timebase-frequency when using KVM
- acceleration
-Date: Wed, 13 Mar 2024 16:13:57 +0800
-Message-Id: <20240313081359.20845-1-yongxuan.wang@sifive.com>
-X-Mailer: git-send-email 2.17.1
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52f;
- envelope-from=yongxuan.wang@sifive.com; helo=mail-pg1-x52f.google.com
+ AJvYcCW838vDOlKpU0D0bUDiZZqDG5blqnWYOl7gCCGmIwjEB8N4xM5QMHzwtOYuycOyrm6hz5re3+33ZwAcWFZ2NSblTUWftSM=
+X-Gm-Message-State: AOJu0YwjJ/p/WchFSzzk+pRmYhRFnUg7kLCGv9hIpoMZmv+a7Xl6uZ2N
+ GtTZ+bYbL7LoPyc+635OUfcjFucJ8JAWzWMQuQDbQm49Q66cDejL/p+Pj4cBcMQQ1cTd2I8XOU3
+ MxtA1M0it3F2zr372qmNZ1Ky2p7ilA4ihFBde
+X-Google-Smtp-Source: AGHT+IEv95omhyPb0xTbMhrK27GyWzsnfBe8Fp6rBiKId23nRSD7GE0ZOJZ1wWDRnPlEuabQUpiGRY+NlN9gLh1sh/8=
+X-Received: by 2002:a17:90b:60f:b0:29b:af8a:d9fb with SMTP id
+ gb15-20020a17090b060f00b0029baf8ad9fbmr9046235pjb.12.1710319026564; Wed, 13
+ Mar 2024 01:37:06 -0700 (PDT)
+MIME-Version: 1.0
+References: <20240312203214.350980-1-dbarboza@ventanamicro.com>
+In-Reply-To: <20240312203214.350980-1-dbarboza@ventanamicro.com>
+From: =?UTF-8?Q?Cl=C3=A9ment_Chigot?= <chigot@adacore.com>
+Date: Wed, 13 Mar 2024 09:36:55 +0100
+Message-ID: <CAJ307Eg7rSEh0_L1pTHu+GXh0tAiY7uUbv0iDpaO=KgGx6_w2g@mail.gmail.com>
+Subject: Re: [PATCH for-9.0] target/riscv: do not enable all named features by
+ default
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com, Andrew Jones <ajones@ventanamicro.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102e;
+ envelope-from=chigot@adacore.com; helo=mail-pj1-x102e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,82 +94,52 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The timebase-frequency of guest OS should be the same with host
-machine. The timebase-frequency value in DTS should be got from
-hypervisor when using KVM acceleration.
+On Tue, Mar 12, 2024 at 9:32=E2=80=AFPM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
+>
+> Commit 3b8022269c added the capability of named features/profile
+> extensions to be added in riscv,isa. To do that we had to assign priv
+> versions for each one of them in isa_edata_arr[]. But this resulted in a
+> side-effect: vendor CPUs that aren't running priv_version_latest started
+> to experience warnings for these profile extensions [1]:
+>
+>   | $ qemu-system-riscv32  -M sifive_e
+>   | qemu-system-riscv32: warning: disabling zic64b extension for hart
+> 0x00000000 because privilege spec version does not match
+>   | qemu-system-riscv32: warning: disabling ziccamoa extension for
+> hart 0x00000000 because privilege spec version does not match
+>
+> This is benign as far as the CPU behavior is concerned since disabling
+> both extensions is a no-op (aside from riscv,isa). But the warnings are
+> unpleasant to deal with, especially because we're sending user warnings
+> for extensions that users can't enable/disable.
+>
+> Instead of enabling all named features all the time, separate them by
+> priv version. During finalize() time, after we decided which
+> priv_version the CPU is running, enable/disable all the named extensions
+> based on the priv spec chosen. This will be enough for a bug fix, but as
+> a future work we should look into how we can name these extensions in a
+> way that we don't need an explicit ext_name =3D> priv_ver as we're doing
+> here.
+>
+> The named extensions being added in isa_edata_arr[] that will be
+> enabled/disabled based solely on priv version can be removed from
+> riscv_cpu_named_features[]. 'zic64b' is an extension that can be
+> disabled based on block sizes so it'll retain its own flag and entry.
+>
+> [1] https://lists.gnu.org/archive/html/qemu-devel/2024-03/msg02592.html
+>
+> Reported-by: Cl=C3=A9ment Chigot <chigot@adacore.com>
+> Fixes: 3b8022269c ("target/riscv: add riscv,isa to named features")
+> Suggested-by: Andrew Jones <ajones@ventanamicro.com>
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> ---
+>  target/riscv/cpu.c         | 40 +++++++++-----------------------------
+>  target/riscv/cpu_cfg.h     |  8 +++++---
+>  target/riscv/tcg/tcg-cpu.c | 14 ++++++++++---
+>  3 files changed, 25 insertions(+), 37 deletions(-)
 
-Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
----
- hw/riscv/virt.c              | 11 +++++++++--
- target/riscv/kvm/kvm-cpu.c   |  9 +++++++++
- target/riscv/kvm/kvm_riscv.h | 13 +++++++++++++
- 3 files changed, 31 insertions(+), 2 deletions(-)
+Thanks for the quick patch !
 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index a094af97c32a..a7ed7fa13010 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -710,8 +710,15 @@ static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *memmap,
-     int socket_count = riscv_socket_count(ms);
- 
-     qemu_fdt_add_subnode(ms->fdt, "/cpus");
--    qemu_fdt_setprop_cell(ms->fdt, "/cpus", "timebase-frequency",
--                          RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ);
-+
-+    if (kvm_enabled()) {
-+        qemu_fdt_setprop_cell(ms->fdt, "/cpus", "timebase-frequency",
-+                              kvm_riscv_get_timebase_frequency(first_cpu));
-+    } else {
-+        qemu_fdt_setprop_cell(ms->fdt, "/cpus", "timebase-frequency",
-+                              RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ);
-+    }
-+
-     qemu_fdt_setprop_cell(ms->fdt, "/cpus", "#size-cells", 0x0);
-     qemu_fdt_setprop_cell(ms->fdt, "/cpus", "#address-cells", 0x1);
-     qemu_fdt_add_subnode(ms->fdt, "/cpus/cpu-map");
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index c7afdb1e81b7..bbb115eaa867 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -739,6 +739,15 @@ static void kvm_riscv_put_regs_timer(CPUState *cs)
-     env->kvm_timer_dirty = false;
- }
- 
-+uint64_t kvm_riscv_get_timebase_frequency(CPUState *cs)
-+{
-+    uint64_t reg;
-+
-+    KVM_RISCV_GET_TIMER(cs, frequency, reg);
-+
-+    return reg;
-+}
-+
- static int kvm_riscv_get_regs_vector(CPUState *cs)
- {
-     RISCVCPU *cpu = RISCV_CPU(cs);
-diff --git a/target/riscv/kvm/kvm_riscv.h b/target/riscv/kvm/kvm_riscv.h
-index 4bd98fddc776..130a4bde0480 100644
---- a/target/riscv/kvm/kvm_riscv.h
-+++ b/target/riscv/kvm/kvm_riscv.h
-@@ -29,4 +29,17 @@ void riscv_kvm_aplic_request(void *opaque, int irq, int level);
- int kvm_riscv_sync_mpstate_to_kvm(RISCVCPU *cpu, int state);
- void riscv_kvm_cpu_finalize_features(RISCVCPU *cpu, Error **errp);
- 
-+#ifdef CONFIG_KVM
-+
-+uint64_t kvm_riscv_get_timebase_frequency(CPUState *cs);
-+
-+#else
-+
-+static inline uint64_t kvm_riscv_get_timebase_frequency(CPUState *cs)
-+{
-+    g_assert_not_reached();
-+}
-+
-+#endif
-+
- #endif
--- 
-2.17.1
-
+Tested-by: Cl=C3=A9ment Chigot <chigot@adacore.com>
 
