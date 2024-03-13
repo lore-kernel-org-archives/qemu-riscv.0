@@ -4,84 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62CF3C54791
-	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Mar 2024 09:25:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3262C54791
+	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Mar 2024 09:53:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rkKr3-0007T0-O9; Wed, 13 Mar 2024 05:24:57 -0400
+	id 1rkLI6-0004ox-PW; Wed, 13 Mar 2024 05:52:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rkKr0-0007Ss-LQ
- for qemu-riscv@nongnu.org; Wed, 13 Mar 2024 05:24:54 -0400
-Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1rkLI5-0004od-8h
+ for qemu-riscv@nongnu.org; Wed, 13 Mar 2024 05:52:53 -0400
+Received: from mail-ej1-x636.google.com ([2a00:1450:4864:20::636])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rkKqy-0007xJ-M7
- for qemu-riscv@nongnu.org; Wed, 13 Mar 2024 05:24:54 -0400
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-29a8911d11cso481016a91.1
- for <qemu-riscv@nongnu.org>; Wed, 13 Mar 2024 02:24:52 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1rkLI3-0003bE-8Z
+ for qemu-riscv@nongnu.org; Wed, 13 Mar 2024 05:52:53 -0400
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-a45c006ab82so106013266b.3
+ for <qemu-riscv@nongnu.org>; Wed, 13 Mar 2024 02:52:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1710321891; x=1710926691; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=5DjiWaFJcCvSjAo7i+dTOYm0GzRI5Aje4xC9p0UUNfk=;
- b=Yb59kz4cg05a8URDU3Rl0zeyB5s5eo/A7Nl2cN4MYL+ZMfygG7/4S0xDFz1CZzH86z
- QZm1uNvTnf61gex+NasaWl+o9sfv9QFASWTk1vYTULpoGT+WuKg7dOrL2yiJi0zpbV3K
- 9CuEVGRwnIDKO0RTk671Tg8GFfe6wXAkvtrPHVlpLKmEuzwao+UuufWHjJ73n1JY+e+D
- nvVZLv91RP90DUElSR9S4C7GXUbYbrqoqZH7fNQytdyJlDl2MhAg2KqN1ijq5NnWQ2Iv
- D85N6M5CQpgdb0exCpYA1M/JdbxKymmRjHOtGQaVKw5goFqHP7Ra9vJCqad2Qo8DnheN
- 7w5A==
+ d=ventanamicro.com; s=google; t=1710323569; x=1710928369; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ruQFcJuHUQqZP8BhvR0EDOl0VOmtFkHUR9/tKdO75is=;
+ b=i7S21LqfYsob1gUDe4cxF6nvHnl3KYBrHJ2V3FU7YTd1lCS7YR6nnNGooLVRxtEBoB
+ QBFwAP3LdoA99h1S68KtSUyO3A/3dWvjTejNHOqVEbiDBsAdTP+fYbqyldSEUD734Uy3
+ e6aEuvQvOTgucK3aigEaQkCcK043Y4TkJDi/DswewLjdCXbVETOF4xiXY9+HQkrhB9q9
+ g5BL0bVseA1LTU//zLOZW9vEN2R0kI2Jo/BZ6ZsKx8tKvAyydrb+WGJrv3N2DrrVKIjl
+ 6Nr45+QOdc5HktqlXiiY4WP16MaVDo5LnBVY01ZWkKUh1I7CykKSqjWxia+5IAogrP/F
+ 0mLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710321891; x=1710926691;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=5DjiWaFJcCvSjAo7i+dTOYm0GzRI5Aje4xC9p0UUNfk=;
- b=MNqyfchINMZeP8rF4yRFXsephHxTEBJtFKbt23Oh3XYXVh1JCeKfIvjwBfvJ4fKIcl
- ywauQTOYU/5xd4Pa16KW3tXrnwawsHtDW/uB/af19gSn7NP+KiyUwMikuu5ia8DE8OMY
- hWYz/6NcGluKQfYzRJaubLmTVlES+FFSilLBGQ5iF7JGKvBdhC2LXGqsfAQCRzcCsrXu
- cPeg9wC+3HoPa4cOC/Ik/+Q7XMFoh4Bri45vmq4v+RRKEL9cLMOmihT35vF1sbGtLGII
- Ezh2rDlZA9o1P/WPOmw+3owJAsP0VRqL3BtMN/TE/5h3/YgRi+an5srs9ydnqduW0rxz
- E0Uw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU7UAPmcm7Oh6YipJiXNT1bzR/oV76S6ThAPvqomQic4o03yjPEjEWe/pmJKUUNWAQ+tCqQwXxbMprzlYEkILFBO5gDiy8=
-X-Gm-Message-State: AOJu0Ywd3Ej2E7SANobaNHvohMkSSR7qlc5NOert7Ih9zL6R6gPc1UZm
- N9x51T1UshbaW4QegGI0boPz08KS/1ydfxXpsqXpsAyqwDgvnZFXrnC1u+65h9Y=
-X-Google-Smtp-Source: AGHT+IFBV7Vm3WIVYAFiVeswKyBjh/4+kObY/RGN6legcT4Fsa36Woa4B/NldOEEl8JRRsVWGzAZ6g==
-X-Received: by 2002:a17:90b:4d85:b0:29b:82ee:13f with SMTP id
- oj5-20020a17090b4d8500b0029b82ee013fmr5759567pjb.11.1710321890863; 
- Wed, 13 Mar 2024 02:24:50 -0700 (PDT)
-Received: from [192.168.68.110] ([177.94.15.159])
+ d=1e100.net; s=20230601; t=1710323569; x=1710928369;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ruQFcJuHUQqZP8BhvR0EDOl0VOmtFkHUR9/tKdO75is=;
+ b=kXQbuvgx1+yySrL/ww9lkVZL48qPAgCMxNEYWg/pfN3MXPhHMIQzVZwd1T5hBDBncJ
+ tg3ZsP9rRp6ArScrIcHptkF83vkeHxpEBawdLgzxKYY/fAdTKYJWJ8c2lj+UjYzj0VlB
+ We76UYsLspt8RcK/mkCtVK9n/2+0JKECwXe7N6Uq4g3T2b6UKDX27J2ZuC/FCAWTDCKo
+ LiOm6739ZZQaVp7fCQriLf6KiSwxNiFBzre7AnXYWlOqofaQzQvK8TBsHstT4p5K408l
+ DmUwlEa6Qm1ErgW2j0TSSPxvcUAAXTrCvqeOfPIVzGpNp4taPnydYUexw0LxdHEbtYCM
+ BDlg==
+X-Gm-Message-State: AOJu0Yzh9El5fU7ZRDjN0MbWUmB5bLw22iRFEaIidUqPj0rznO5LMtJT
+ V9ZY8sTRuluaGTreXwOu4jqakyFIZrVaH3NEVDhnezlWZTJA6eAJN305tAwj6lPRuq7IyhzTQp9
+ 1
+X-Google-Smtp-Source: AGHT+IHeWdRwrWlsnX+qww/Fng+daJsY+SZQswyAFQP5z6SkmzBUxgtVbNcg7Pl8SC6b7RCrAzX8FA==
+X-Received: by 2002:a17:907:a0d2:b0:a44:277c:1683 with SMTP id
+ hw18-20020a170907a0d200b00a44277c1683mr4992771ejc.53.1710323569533; 
+ Wed, 13 Mar 2024 02:52:49 -0700 (PDT)
+Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
  by smtp.gmail.com with ESMTPSA id
- l6-20020a17090a72c600b0029c129473a8sm938588pjk.9.2024.03.13.02.24.49
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 13 Mar 2024 02:24:50 -0700 (PDT)
-Message-ID: <d78fdd0c-1faa-4863-9fbe-a8b9a7226406@ventanamicro.com>
-Date: Wed, 13 Mar 2024 06:24:46 -0300
+ l20-20020a1709067d5400b00a46224d4442sm3156887ejp.212.2024.03.13.02.52.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 13 Mar 2024 02:52:49 -0700 (PDT)
+Date: Wed, 13 Mar 2024 10:52:48 +0100
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Himanshu Chauhan <hchauhan@ventanamicro.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Subject: Re: [PATCH v4 1/3] target/riscv: Enable mcontrol6 triggers only when
+ sdtrig is selected
+Message-ID: <20240313-a62777ede69ea38aad80b882@orel>
+References: <20240313060931.242161-1-hchauhan@ventanamicro.com>
+ <20240313060931.242161-2-hchauhan@ventanamicro.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Weird behavior on RISC-V code running on QEMU
-Content-Language: en-US
-To: Alexander Pinheiro Paschoaletto <alexp@isep.ipp.pt>,
- "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
-References: <VI1PR0402MB3613CDF1B2054516974813D6F82B2@VI1PR0402MB3613.eurprd04.prod.outlook.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <VI1PR0402MB3613CDF1B2054516974813D6F82B2@VI1PR0402MB3613.eurprd04.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x102c.google.com
-X-Spam_score_int: -19
-X-Spam_score: -2.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240313060931.242161-2-hchauhan@ventanamicro.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::636;
+ envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x636.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01, URIBL_SBL_A=0.1 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,41 +95,240 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Alexander,
+On Wed, Mar 13, 2024 at 11:39:29AM +0530, Himanshu Chauhan wrote:
+> The mcontrol6 triggers are not defined in debug specification v0.13
+> These triggers are defined in sdtrig ISA extension.
+> 
+> This patch:
+>    * Adds ext_sdtrig capability which is used to select mcontrol6 triggers
+>    * Keeps the debug property. All triggers that are defined in v0.13 are
+>      exposed.
+> 
+> Signed-off-by: Himanshu Chauhan <hchauhan@ventanamicro.com>
+> ---
+>  target/riscv/cpu.c     |  4 +-
+>  target/riscv/cpu_cfg.h |  1 +
+>  target/riscv/csr.c     |  2 +-
+>  target/riscv/debug.c   | 92 +++++++++++++++++++++++++-----------------
+>  target/riscv/machine.c |  2 +-
+>  5 files changed, 60 insertions(+), 41 deletions(-)
+> 
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index c160b9216b..2602aae9f5 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -1008,7 +1008,7 @@ static void riscv_cpu_reset_hold(Object *obj)
+>      set_default_nan_mode(1, &env->fp_status);
+>  
+>  #ifndef CONFIG_USER_ONLY
+> -    if (cpu->cfg.debug) {
+> +    if (cpu->cfg.debug || cpu->cfg.ext_sdtrig) {
+>          riscv_trigger_reset_hold(env);
+>      }
+>  
+> @@ -1168,7 +1168,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>      riscv_cpu_register_gdb_regs_for_features(cs);
+>  
+>  #ifndef CONFIG_USER_ONLY
+> -    if (cpu->cfg.debug) {
+> +    if (cpu->cfg.debug || cpu->cfg.ext_sdtrig) {
+>          riscv_trigger_realize(&cpu->env);
+>      }
+>  #endif
+> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+> index 2040b90da0..0c57e1acd4 100644
+> --- a/target/riscv/cpu_cfg.h
+> +++ b/target/riscv/cpu_cfg.h
+> @@ -114,6 +114,7 @@ struct RISCVCPUConfig {
+>      bool ext_zvfbfwma;
+>      bool ext_zvfh;
+>      bool ext_zvfhmin;
+> +    bool ext_sdtrig;
+>      bool ext_smaia;
+>      bool ext_ssaia;
+>      bool ext_sscofpmf;
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 726096444f..26623d3640 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -546,7 +546,7 @@ static RISCVException have_mseccfg(CPURISCVState *env, int csrno)
+>  
+>  static RISCVException debug(CPURISCVState *env, int csrno)
+>  {
+> -    if (riscv_cpu_cfg(env)->debug) {
+> +    if (riscv_cpu_cfg(env)->debug || riscv_cpu_cfg(env)->ext_sdtrig) {
+>          return RISCV_EXCP_NONE;
+>      }
+>  
+> diff --git a/target/riscv/debug.c b/target/riscv/debug.c
+> index e30d99cc2f..c6a92ba0f7 100644
+> --- a/target/riscv/debug.c
+> +++ b/target/riscv/debug.c
+> @@ -100,13 +100,16 @@ static trigger_action_t get_trigger_action(CPURISCVState *env,
+>      target_ulong tdata1 = env->tdata1[trigger_index];
+>      int trigger_type = get_trigger_type(env, trigger_index);
+>      trigger_action_t action = DBG_ACTION_NONE;
+> +    const RISCVCPUConfig *cfg = riscv_cpu_cfg(env);
+>  
+>      switch (trigger_type) {
+>      case TRIGGER_TYPE_AD_MATCH:
+>          action = (tdata1 & TYPE2_ACTION) >> 12;
+>          break;
+>      case TRIGGER_TYPE_AD_MATCH6:
+> -        action = (tdata1 & TYPE6_ACTION) >> 12;
+> +        /* Only sdtrig ISA extension supports type 6 match */
 
-Can you please also file a bug here:
+I'd drop the comment since the if-statement says the same thing.
 
-https://gitlab.com/qemu-project/qemu/-/issues/new
+> +        if (cfg->ext_sdtrig)
+> +            action = (tdata1 & TYPE6_ACTION) >> 12;
+>          break;
+>      case TRIGGER_TYPE_INST_CNT:
+>      case TRIGGER_TYPE_INT:
+> @@ -727,7 +730,12 @@ void tdata_csr_write(CPURISCVState *env, int tdata_index, target_ulong val)
+>          type2_reg_write(env, env->trigger_cur, tdata_index, val);
+>          break;
+>      case TRIGGER_TYPE_AD_MATCH6:
+> -        type6_reg_write(env, env->trigger_cur, tdata_index, val);
+> +        if (riscv_cpu_cfg(env)->ext_sdtrig) {
+> +            type6_reg_write(env, env->trigger_cur, tdata_index, val);
+> +        } else {
+> +            qemu_log_mask(LOG_UNIMP, "trigger type: %d is not supported\n",
+> +                          trigger_type);
+> +        }
+>          break;
+>      case TRIGGER_TYPE_INST_CNT:
+>          itrigger_reg_write(env, env->trigger_cur, tdata_index, val);
+> @@ -750,9 +758,15 @@ void tdata_csr_write(CPURISCVState *env, int tdata_index, target_ulong val)
+>  
+>  target_ulong tinfo_csr_read(CPURISCVState *env)
+>  {
+> -    /* assume all triggers support the same types of triggers */
+> -    return BIT(TRIGGER_TYPE_AD_MATCH) |
+> -           BIT(TRIGGER_TYPE_AD_MATCH6);
+> +    target_ulong ts = 0;
+> +
+> +    ts = BIT(TRIGGER_TYPE_AD_MATCH);
+> +
+> +    /* sdtrig ISA extension supports type 6 match */
 
-We use Gitlab as a bug tracker. The issue will have more visibility there than
-in this mailing list.
+Also drop this comment.
 
-You did a good job describing the problem in the email already, so you can
-simply copy/paste the contents in the new Gitlab issue.
+> +    if (riscv_cpu_cfg(env)->ext_sdtrig)
+> +        ts |= BIT(TRIGGER_TYPE_AD_MATCH6);
+> +
+> +    return ts;
+>  }
+>  
+>  void riscv_cpu_debug_excp_handler(CPUState *cs)
+> @@ -803,19 +817,21 @@ bool riscv_cpu_debug_check_breakpoint(CPUState *cs)
+>                  }
+>                  break;
+>              case TRIGGER_TYPE_AD_MATCH6:
+> -                ctrl = env->tdata1[i];
+> -                pc = env->tdata2[i];
+> -
+> -                if ((ctrl & TYPE6_EXEC) && (bp->pc == pc)) {
+> -                    if (env->virt_enabled) {
+> -                        /* check VU/VS bit against current privilege level */
+> -                        if ((ctrl >> 23) & BIT(env->priv)) {
+> -                            return true;
+> -                        }
+> -                    } else {
+> -                        /* check U/S/M bit against current privilege level */
+> -                        if ((ctrl >> 3) & BIT(env->priv)) {
+> -                            return true;
+> +                if (cpu->cfg.ext_sdtrig) {
+> +                   ctrl = env->tdata1[i];
 
+Check your whitespace. Missing one space of indent in the line above.
+
+> +                    pc = env->tdata2[i];
+> +
+> +                    if ((ctrl & TYPE6_EXEC) && (bp->pc == pc)) {
+> +                        if (env->virt_enabled) {
+> +                            /* check VU/VS bit against current privilege level */
+> +                            if ((ctrl >> 23) & BIT(env->priv)) {
+> +                                return true;
+> +                            }
+> +                        } else {
+> +                            /* check U/S/M bit against current privilege level */
+> +                            if ((ctrl >> 3) & BIT(env->priv)) {
+> +                                return true;
+> +                            }
+>                          }
+>                      }
+>                  }
+> @@ -869,27 +885,29 @@ bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp)
+>              }
+>              break;
+>          case TRIGGER_TYPE_AD_MATCH6:
+> -            ctrl = env->tdata1[i];
+> -            addr = env->tdata2[i];
+> -            flags = 0;
+> +            if (cpu->cfg.ext_sdtrig) {
+> +                ctrl = env->tdata1[i];
+> +                addr = env->tdata2[i];
+> +                flags = 0;
+>  
+> -            if (ctrl & TYPE6_LOAD) {
+> -                flags |= BP_MEM_READ;
+> -            }
+> -            if (ctrl & TYPE6_STORE) {
+> -                flags |= BP_MEM_WRITE;
+> -            }
+> +                if (ctrl & TYPE6_LOAD) {
+> +                    flags |= BP_MEM_READ;
+> +                }
+> +                if (ctrl & TYPE6_STORE) {
+> +                    flags |= BP_MEM_WRITE;
+> +                }
+>  
+> -            if ((wp->flags & flags) && (wp->vaddr == addr)) {
+> -                if (env->virt_enabled) {
+> -                    /* check VU/VS bit against current privilege level */
+> -                    if ((ctrl >> 23) & BIT(env->priv)) {
+> -                        return true;
+> -                    }
+> -                } else {
+> -                    /* check U/S/M bit against current privilege level */
+> -                    if ((ctrl >> 3) & BIT(env->priv)) {
+> -                        return true;
+> +                if ((wp->flags & flags) && (wp->vaddr == addr)) {
+> +                    if (env->virt_enabled) {
+> +                        /* check VU/VS bit against current privilege level */
+> +                        if ((ctrl >> 23) & BIT(env->priv)) {
+> +                            return true;
+> +                        }
+> +                    } else {
+> +                        /* check U/S/M bit against current privilege level */
+> +                        if ((ctrl >> 3) & BIT(env->priv)) {
+> +                            return true;
+> +                        }
+>                      }
+>                  }
+>              }
+> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+> index 76f2150f78..1cb8656191 100644
+> --- a/target/riscv/machine.c
+> +++ b/target/riscv/machine.c
+> @@ -230,7 +230,7 @@ static bool debug_needed(void *opaque)
+>  {
+>      RISCVCPU *cpu = opaque;
+>  
+> -    return cpu->cfg.debug;
+> +    return (cpu->cfg.debug || cpu->cfg.ext_sdtrig);
+
+nit: Unnecssary ()
+
+>  }
+>  
+>  static int debug_post_load(void *opaque, int version_id)
+> -- 
+> 2.34.1
+> 
+>
 
 Thanks,
-
-Daniel
-
-On 3/12/24 19:06, Alexander Pinheiro Paschoaletto via wrote:
-> Hello everyone, hope you are all doing great!
-> 
-> This is my first email within this group and frankly I'm not sure if it's the right place to ask for help or report a bug, so please feel free to warn me in case I should post this elsewhere. I am currently facing some weird problems on a RISC-V project meant to run on the QEMU environment and thought that maybe someone here could give me a light on the subject.
-> 
-> I am trying to run a project built on top of one of FreeRTOS' official demo ports that target the 'virt' QEMU board. I ran across a few weird behaviors where code execution would just hang at some point (QEMU would keep execution but the expected terminal output would never come up). I don't have sufficient knowledge to tell whether the issue is with the FreeRTOS port, the RISC-V gnu toolchain or QEMU itself, hence why I am raising my hand for help on all related channels.
-> 
-> This repository <https://bitbucket.org/softcps-investigacao-risc-v/freertos-riscv-bugs/src/master/> contains more details and a sample project that illustrates well one of the problems I've been getting lately (I also give more context about it here <https://github.com/riscv-collab/riscv-gnu-toolchain/issues/1434>). It basically goes like this: the program *executes fine* when a certain code snippet is encapsulated *within a function*, but *"crashes"* (i.e. hangs) when the same snippet is placed *directly in the main code*:
-> 
-> 
-> 
-> The scope shouldn't matter at all here, since there is no local variable being used or anything like that. I have tested things like removing compiling optimization (i.e. changing -Os for -O0) and using regular malloc() instead of FreeRTOS' dynamic allocation API, but all without success.  Note that even though the project is build on top of the FreeRTOS demo port, no RTOS functionality is used within this code to make it as simple as it gets.
-> 
-> And that's basically it. If any of you have a wild guess on the likely cause or something, please let me know.
-> Thanks in advance.
-> 
-> Best regards,
-> Alexander Paschoaletto
-> 
-> 
+drew
 
