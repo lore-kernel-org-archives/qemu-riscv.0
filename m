@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3309CC54791
-	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Mar 2024 19:32:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 052F6C54E60
+	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Mar 2024 19:32:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rkUKO-0007XM-NH; Wed, 13 Mar 2024 15:31:52 -0400
+	id 1rkUKH-00078E-7f; Wed, 13 Mar 2024 15:31:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rkUK9-0006za-Tf
- for qemu-riscv@nongnu.org; Wed, 13 Mar 2024 15:31:44 -0400
-Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430])
+ id 1rkUJq-0006qn-Ug
+ for qemu-riscv@nongnu.org; Wed, 13 Mar 2024 15:31:20 -0400
+Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rkUJu-0002Rx-6a
- for qemu-riscv@nongnu.org; Wed, 13 Mar 2024 15:31:36 -0400
-Received: by mail-pf1-x430.google.com with SMTP id
- d2e1a72fcca58-6e6b3dc3564so226839b3a.2
- for <qemu-riscv@nongnu.org>; Wed, 13 Mar 2024 12:31:19 -0700 (PDT)
+ id 1rkUJm-0002Qj-TW
+ for qemu-riscv@nongnu.org; Wed, 13 Mar 2024 15:31:18 -0400
+Received: by mail-pf1-x432.google.com with SMTP id
+ d2e1a72fcca58-6e62c65865cso206328b3a.2
+ for <qemu-riscv@nongnu.org>; Wed, 13 Mar 2024 12:31:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1710358279; x=1710963079; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1710358272; x=1710963072; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ELeCOTtjUnA85j28WZcFUxsvLXuw80p1LClwDiZunOo=;
- b=HB5fk0W4DGM4cv4rrcUgPyGl59bJofbvFSq/Lln1V7kpQmbR24hlb5lqluxQlQizwF
- EO2nbw6nzi2+cM5sV0aIQxaLYbzkjc2gS8QpgLN0VzgS7NVqTI9DKLIw3G91rktguzBe
- xNiEwtJz87+77LOHhcgxt/ywCFmxpWnxn0I+Aqk55e5+xy7r/NEpN+uZcSJ7ducyuqF7
- hu4I/Qztjcyd7ojbix/hB0nw3fr4/zu3k+PQgnnlNm7qnRxdBVymYl39mINuaWhxlc06
- TZP6O8HGLAzY/3TauLYAhVvv5czoPgpsn7a2DdrXhv3U14AmIjhfzQ+l0+OeePClS/03
- W14w==
+ bh=DgCmMDQSmZuQF2R71f2SMhy+sJRtIk+zLEeTXoFqnr0=;
+ b=VRuwcT1SoIMO0CukhThqR70kKl7HrhkUVMP+0XdaF/UZ6e4TuYsIANW9gOvTAYtSw4
+ zKZxODOaoziFaUGQPQfJ56RhsXRVpArQdLRPsxIfVUYmnQxhU7B+BgZ/XG5VTI5fpeCz
+ mKalIuxEQXaus01MT7yrA0bPZQt4Au83fzGZhvGXkaS4sRSbDWwXqt0a3Sm6Opr7ljLk
+ wK7Fh8vqWSHhZFgnDXXOhQy6q0ZVGCYvdy2GCAbvf1Zd1vweQA7WKnmwCx5Eh+IYJd5i
+ wg1r+twqQma8QE2Yc94N5HFr173uNpKwPODkr5Zsl0WvrLrRNrJxwFxO2fE8ozTWFS5s
+ YA/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710358279; x=1710963079;
+ d=1e100.net; s=20230601; t=1710358272; x=1710963072;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ELeCOTtjUnA85j28WZcFUxsvLXuw80p1LClwDiZunOo=;
- b=P4wOlYo2p7S0aMso8OGYqFayV1sJ8nNz3Ia7nWxW8nn+6Mt9eKyAF8GGlYIOyPv49z
- KF/+M+NqGGDAXNlDB+BURCDEGYflA8P1RMFyttvQz+430VsS58FyOUjBXZ66o28gHlwO
- YyhpwcmAkwUik33SLaucAD0l38f3hayR1oG4PfVQqk7neIA/5BR+QzmES8ZqghNyz1ts
- G8lrWm+pkvqtM3sTAdnmB6ipgGMBR09lmd02WiD5ITmledXwPNH6m6nWXYJrfuJh9pkB
- dH2L+hLGtzkIzFg1WwrOYky1Q0DZvfCiVrPD6CgqQJGgJcb0+aexq4pxbycGBRAVMMa7
- bncA==
-X-Gm-Message-State: AOJu0YzU2vdlE4B+JkZyfKQgr6PJ9OFimNspwIWuQ0UoLP6FR+E4VwNz
- bsDWHBg+uP31OYt4oahOkxdZYtcZZQSTloONfsv/NerACaCOooopquOElZs08YU=
-X-Google-Smtp-Source: AGHT+IGUQSluHaa4uJMfMwCyWBsS/1bJOQBdG0UNqh/+k+i2zDnziTXTew1MCpaZX9WokGBrToIs6A==
-X-Received: by 2002:a05:6a20:42a6:b0:1a1:6f4f:30d0 with SMTP id
- o38-20020a056a2042a600b001a16f4f30d0mr5126681pzj.32.1710358278895; 
- Wed, 13 Mar 2024 12:31:18 -0700 (PDT)
+ bh=DgCmMDQSmZuQF2R71f2SMhy+sJRtIk+zLEeTXoFqnr0=;
+ b=cDHYzb5/HJq8ERKlddIq6PH5jevSMEcwiYAi48lGtbOt8kINX8w6KCV1NnqZDKR5oi
+ k+3RIu1TfF1FnNl3ssHM9yufWRbi/HKSC4WLu3eK4qNAJ2HM3GVrx9CmaE+aHkue77IO
+ 45jGDDN2F4pSo/5RR+oxvrB7pt+BWXnsTN1CWLpPbsrbP2onMu/ub3E6hOfT5NNHawgk
+ h7wvCHGHsNGkvSGBi9yi2y3z5hsx3bc1CZE3jvd6hFty4mAFRlQe8zIZBDoloRzpvBCn
+ I0ORHE0TZO2dG7DpE75Iv2bcZa+PaCJA4bJQ9ldnlhnXcfc8hkhmtZvtap5cf+XF4RKY
+ L1lg==
+X-Gm-Message-State: AOJu0YwrEFmn/Zw3Xf++Y7Wp0PITzuGEu1f3xAEogGst90sShq4GSftT
+ y15VuSUeYQxBmVBsi6i+vRB+CsSshXmFIHPZ3zfGY8YZtbrJdOol5UYYE+WLmHM=
+X-Google-Smtp-Source: AGHT+IEmPHZKFJSov6cRtP80/duXdMzkf9xuFSL6jvzqtUhLJ+Sm9aV3dlKHl+1HsipNSYXtKt9N5w==
+X-Received: by 2002:a05:6a00:2d17:b0:6e6:6cc8:ac9d with SMTP id
+ fa23-20020a056a002d1700b006e66cc8ac9dmr3569218pfb.28.1710358272215; 
+ Wed, 13 Mar 2024 12:31:12 -0700 (PDT)
 Received: from grind.dc1.ventanamicro.com ([177.94.15.159])
  by smtp.gmail.com with ESMTPSA id
- k10-20020a628e0a000000b006e5a915a9e7sm8912421pfe.10.2024.03.13.12.31.16
+ k10-20020a628e0a000000b006e5a915a9e7sm8912421pfe.10.2024.03.13.12.31.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Mar 2024 12:31:18 -0700 (PDT)
+ Wed, 13 Mar 2024 12:31:11 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  richard.henderson@linaro.org, philmd@linaro.org,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH for-9.0 v13 4/8] target/riscv: always clear vstart in whole
- vec move insns
-Date: Wed, 13 Mar 2024 16:30:55 -0300
-Message-ID: <20240313193059.405329-5-dbarboza@ventanamicro.com>
+Subject: [PATCH for-9.0 v13 2/8] trans_rvv.c.inc: set vstart = 0 in int scalar
+ move insns
+Date: Wed, 13 Mar 2024 16:30:53 -0300
+Message-ID: <20240313193059.405329-3-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240313193059.405329-1-dbarboza@ventanamicro.com>
 References: <20240313193059.405329-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::430;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x430.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x432.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,60 +97,64 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-These insns have 2 paths: we'll either have vstart already cleared if
-vstart_eq_zero or we'll do a brcond to check if vstart >= maxsz to call
-the 'vmvr_v' helper. The helper will clear vstart if it executes until
-the end, or if vstart >= vl.
+trans_vmv_x_s, trans_vmv_s_x, trans_vfmv_f_s and trans_vfmv_s_f aren't
+setting vstart = 0 after execution. This is usually done by a helper in
+vector_helper.c but these functions don't use helpers.
 
-However, if vstart >= maxsz, the helper will be skipped, and vstart
-won't be cleared since the helper is being responsible from doing it.
+We'll set vstart after any potential 'over' brconds, and that will also
+mandate a mark_vs_dirty() too.
 
-We want to make the helpers responsible to manage vstart, including
-these corner cases, precisely to avoid these situations. Move the vstart
->= maxsz cond to the helper, and be sure to clear vstart if that
-happens.  This way we're now 100% sure that vstart is being clearer in
-the end of the execution, regardless of the path taken.
-
-Fixes: f714361ed7 ("target/riscv: rvv-1.0: implement vstart CSR")
+Fixes: dedc53cbc9 ("target/riscv: rvv-1.0: integer scalar move instructions")
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/insn_trans/trans_rvv.c.inc | 3 ---
- target/riscv/vector_helper.c            | 5 +++++
- 2 files changed, 5 insertions(+), 3 deletions(-)
+ target/riscv/insn_trans/trans_rvv.c.inc | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
 
 diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index 8c16a9f5b3..52c26a7834 100644
+index e42728990e..8c16a9f5b3 100644
 --- a/target/riscv/insn_trans/trans_rvv.c.inc
 +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -3664,12 +3664,9 @@ static bool trans_##NAME(DisasContext *s, arg_##NAME * a)               \
-                              vreg_ofs(s, a->rs2), maxsz, maxsz);        \
-             mark_vs_dirty(s);                                           \
-         } else {                                                        \
--            TCGLabel *over = gen_new_label();                           \
--            tcg_gen_brcondi_tl(TCG_COND_GEU, cpu_vstart, maxsz, over);  \
-             tcg_gen_gvec_2_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, a->rs2), \
-                                tcg_env, maxsz, maxsz, 0, gen_helper_vmvr_v); \
-             mark_vs_dirty(s);                                           \
--            gen_set_label(over);                                        \
-         }                                                               \
-         return true;                                                    \
-     }                                                                   \
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index b4360dbd52..7260a5972b 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -5163,6 +5163,11 @@ void HELPER(vmvr_v)(void *vd, void *vs2, CPURISCVState *env, uint32_t desc)
+@@ -3373,6 +3373,8 @@ static bool trans_vmv_x_s(DisasContext *s, arg_vmv_x_s *a)
+         vec_element_loadi(s, t1, a->rs2, 0, true);
+         tcg_gen_trunc_i64_tl(dest, t1);
+         gen_set_gpr(s, a->rd, dest);
++        tcg_gen_movi_tl(cpu_vstart, 0);
++        mark_vs_dirty(s);
+         return true;
+     }
+     return false;
+@@ -3399,8 +3401,9 @@ static bool trans_vmv_s_x(DisasContext *s, arg_vmv_s_x *a)
+         s1 = get_gpr(s, a->rs1, EXT_NONE);
+         tcg_gen_ext_tl_i64(t1, s1);
+         vec_element_storei(s, a->rd, 0, t1);
+-        mark_vs_dirty(s);
+         gen_set_label(over);
++        tcg_gen_movi_tl(cpu_vstart, 0);
++        mark_vs_dirty(s);
+         return true;
+     }
+     return false;
+@@ -3427,6 +3430,8 @@ static bool trans_vfmv_f_s(DisasContext *s, arg_vfmv_f_s *a)
+         }
  
-     VSTART_CHECK_EARLY_EXIT(env);
+         mark_fs_dirty(s);
++        tcg_gen_movi_tl(cpu_vstart, 0);
++        mark_vs_dirty(s);
+         return true;
+     }
+     return false;
+@@ -3452,8 +3457,9 @@ static bool trans_vfmv_s_f(DisasContext *s, arg_vfmv_s_f *a)
+         do_nanbox(s, t1, cpu_fpr[a->rs1]);
  
-+    if (env->vstart >= maxsz) {
-+        env->vstart = 0;
-+        return;
-+    }
-+
-     memcpy((uint8_t *)vd + H1(i),
-            (uint8_t *)vs2 + H1(i),
-            maxsz - startb);
+         vec_element_storei(s, a->rd, 0, t1);
+-        mark_vs_dirty(s);
+         gen_set_label(over);
++        tcg_gen_movi_tl(cpu_vstart, 0);
++        mark_vs_dirty(s);
+         return true;
+     }
+     return false;
 -- 
 2.43.2
 
