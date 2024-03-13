@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77D0BC54791
-	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Mar 2024 10:47:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0074C54E58
+	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Mar 2024 10:59:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rkM9B-0007ms-V1; Wed, 13 Mar 2024 06:47:45 -0400
+	id 1rkMJg-0002bg-HM; Wed, 13 Mar 2024 06:58:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rkM9B-0007mc-1I
- for qemu-riscv@nongnu.org; Wed, 13 Mar 2024 06:47:45 -0400
-Received: from mail-ej1-x632.google.com ([2a00:1450:4864:20::632])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1rkMJe-0002ac-IO
+ for qemu-riscv@nongnu.org; Wed, 13 Mar 2024 06:58:34 -0400
+Received: from mail-ej1-x62d.google.com ([2a00:1450:4864:20::62d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rkM98-0005jz-Oe
- for qemu-riscv@nongnu.org; Wed, 13 Mar 2024 06:47:44 -0400
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-a465df0d648so54625566b.1
- for <qemu-riscv@nongnu.org>; Wed, 13 Mar 2024 03:47:42 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1rkMJc-0007XS-QO
+ for qemu-riscv@nongnu.org; Wed, 13 Mar 2024 06:58:34 -0400
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-a4645485da6so228629366b.1
+ for <qemu-riscv@nongnu.org>; Wed, 13 Mar 2024 03:58:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710326860; x=1710931660; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=n8fchBLUZk4r9Z/ABP0FYSgp5y3W9g67zIQxvWUWSa4=;
- b=ogsdllSksyGt2VGA/rC/SreirMd8heBQPDglSTQV9wDgC69vru3EZ2XN3YeLa60giV
- e930ZO2ZKAcXS0IjiWnEtYplveVGTnHtr+Ch1mi/M7u6EXvt3+7k92ZC9qmnaBKP39cV
- C4hy8TYMb+jX8Cu5flWa0qdZRIy6m2xNRrC8l7EOChDDzw/1cn1kVdP7OSQZKwX7uY+G
- Y6O1UmjZsKslBRSTPq2oWOArM0u9o8GLu6KtZtRc81A5mMzeNbS+0v+upHCwLNuIsUKw
- A7Nbz5pO1JVn/b5NB3d1sqXaSnIea95YN971H8Ibgk281fA2Z27983kT1LwbSv2O8eZk
- 7etQ==
+ d=ventanamicro.com; s=google; t=1710327511; x=1710932311; darn=nongnu.org;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=9lpkAjyERa4Rf3DXf4jZhptEiKJ1am8XxbTZuWnw3h4=;
+ b=dV8ovxK/m1EZRblYLyY74VgXGRsev+p0YtzFQufz9FkaMMWTk9ImT3H6chQJroHftH
+ /jinhManZBCTlLjpOC70nyFn8qFl63/dmfJaQA+mghT4GsQo8I5EJBFOYdeZYQbTLp8h
+ HoZnV045jVU0lU5JbeUAV0DGvZ/EDTRsnxB3Pujz0gWTC5jh2lte4Ch+t4BMwRL6K1Sa
+ ERIJMtSYlhKBxl4S4Rqtk7QIP2WqJ+mXGsxUcKREQQVChM3KG7VpsE6gIP4bmTMHe1eg
+ gbsHINZNWU/LAZBabjys4j4pUgNjP9GRR/UTsiz+QW80mhTrTW8M8AIzsy4/2EzzSWIL
+ SY8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710326860; x=1710931660;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1710327511; x=1710932311;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=n8fchBLUZk4r9Z/ABP0FYSgp5y3W9g67zIQxvWUWSa4=;
- b=MPp/h1++0hazasJKclej70DrkcH8P9fs2dFlx8Etq8IPXS87nIQ9IdPh14x7UiKXcJ
- ovJpezxRU2X7SotrdW0qq5IWJKX1RJ1K54xwSei02LBQ5EVyqQZyh9kORJ97DjMpQaUV
- m/snpS/sd3KXLPxfU+S6wPVFFQPsb7TRch20a+ocwiAOo7V6MAoGKFJ+4wBkXxZw845O
- 3ZGXdozahiAIVWMAymqzAKIy0YzQS8QsmZ46KLgZgoZqKlEUPzEGVFS6b9JWGetnONUh
- ZPFOSVqaW1D1WOGcEbP3tYrcEiazfTgSBHJWWgorynqUFLXa38so8PnZmMtQ5lT6haxn
- Q1jw==
-X-Gm-Message-State: AOJu0YxFRQcQtYsEyi/yitMen92GRkoqFqEXOYfvLTLziS47vzkaPwYD
- 5qaZQPzknsTajxla7NbLCiIDG0+rdgRU0Pa1U/ZzFJANlzeAiaJcFcArIzdj124=
-X-Google-Smtp-Source: AGHT+IE63TT36L/f1A2kH1itFq4SM+6ROo41uXvLaBmPB7tKGk82I8pxXrAu+u15+bUnFWBtMH4Qzg==
-X-Received: by 2002:a17:907:a0cc:b0:a46:3814:c3e6 with SMTP id
- hw12-20020a170907a0cc00b00a463814c3e6mr2788566ejc.60.1710326860144; 
- Wed, 13 Mar 2024 03:47:40 -0700 (PDT)
-Received: from [192.168.69.100] ([176.176.182.179])
+ bh=9lpkAjyERa4Rf3DXf4jZhptEiKJ1am8XxbTZuWnw3h4=;
+ b=p9evZpKJDFnIdnbNBtL1M8wuL5LuDFrSKm3rWgum5jNFXrJ7OTNbs6UST2YPlr1Lwb
+ 2w3m7ailmS2DW6di1qFI6n3z6qD1j3ombkpG28miw1i5Xzx3hM+ikJ5i+QWYOX5yBq5I
+ iKWHZorqBZ/VbQlslnc85PQ6pDxdTW7aS7Tu/Of5OlmlvJAL5lsf93imoaF2b8G9c0q2
+ +ato66Fm4LCmbpyJ+Mbtsgg2wJ4dLz/8Lz18ZEOD+uJtaceWb3l2cC2NXlQnDJNYVF2i
+ y2w9XShunUty1xsQQ8bRp+dwm0OsgijqUKPFjCUEAenO8va8QDEzvV5cqEAY8ClVwRov
+ mXhA==
+X-Gm-Message-State: AOJu0YwlR1/aBtXyNwL7laSiram/euo3CLWlqwOTrPh+T3iApOGdbcAx
+ PEVJ1LjL2rChYXojAtkSdJPWzjNUdSw1acvf92dP606x/p6v7Ge106Y4AeWtaZXY1Sm31V+7W0h
+ v
+X-Google-Smtp-Source: AGHT+IEHLudMK7edtAnSwTUUn64Pe2HSE3nYVYh/10nT+TbmI68op0IeH8WGLnA/RlgqYEVz9wHNxQ==
+X-Received: by 2002:a17:907:6a13:b0:a46:1d0a:9f17 with SMTP id
+ rf19-20020a1709076a1300b00a461d0a9f17mr7958700ejc.11.1710327511008; 
+ Wed, 13 Mar 2024 03:58:31 -0700 (PDT)
+Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
  by smtp.gmail.com with ESMTPSA id
- jx14-20020a170907760e00b00a4635a21ff0sm777960ejc.38.2024.03.13.03.47.38
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 13 Mar 2024 03:47:39 -0700 (PDT)
-Message-ID: <1ae334d6-f009-4e80-bf09-0500fa3486a9@linaro.org>
-Date: Wed, 13 Mar 2024 11:47:37 +0100
+ h20-20020a170906111400b00a46637f8fdasm179350eja.163.2024.03.13.03.58.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 13 Mar 2024 03:58:30 -0700 (PDT)
+Date: Wed, 13 Mar 2024 11:58:29 +0100
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Himanshu Chauhan <hchauhan@ventanamicro.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Subject: Re: [PATCH v4 2/3] target/riscv: Expose sdtrig ISA extension
+Message-ID: <20240313-8164061a70dafa62c8bb755b@orel>
+References: <20240313060931.242161-1-hchauhan@ventanamicro.com>
+ <20240313060931.242161-3-hchauhan@ventanamicro.com>
+ <20240313-0ac597594e930a42685aeba5@orel>
+ <CAPd4WezTTcYA5grMBrGYx5LUwF2jPT8gbL6CQWMZtsd1AJNuZQ@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] target/riscv: Implement dynamic establishment of
- custom decoder
-Content-Language: en-US
-To: Huang Tao <eric.huang@linux.alibaba.com>, qemu-devel@nongnu.org,
- dbarboza@ventanamicro.com
-Cc: qemu-riscv@nongnu.org, zhiwei_liu@linux.alibaba.com, liwei1518@gmail.com, 
- bin.meng@windriver.com, alistair.francis@wdc.com, palmer@dabbelt.com,
- Christoph Muellner <christoph.muellner@vrull.eu>
-References: <20240313095715.32811-1-eric.huang@linux.alibaba.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20240313095715.32811-1-eric.huang@linux.alibaba.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::632;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x632.google.com
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAPd4WezTTcYA5grMBrGYx5LUwF2jPT8gbL6CQWMZtsd1AJNuZQ@mail.gmail.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::62d;
+ envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x62d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -97,224 +98,74 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
-
-On 13/3/24 10:57, Huang Tao wrote:
-> In this patch, we modify the decoder to be a freely composable data
-> structure instead of a hardcoded one. It can be dynamically builded up
-> according to the extensions.
-> This approach has several benefits:
-> 1. Provides support for heterogeneous cpu architectures. As we add decoder in
->     RISCVCPU, each cpu can have their own decoder, and the decoders can be
->     different due to cpu's features.
-> 2. Improve the decoding efficiency. We run the guard_func to see if the decoder
->     can be added to the dynamic_decoder when building up the decoder. Therefore,
->     there is no need to run the guard_func when decoding each instruction. It can
->     improve the decoding efficiency
-> 3. For vendor or dynamic cpus, it allows them to customize their own decoder
->     functions to improve decoding efficiency, especially when vendor-defined
->     instruction sets increase. Because of dynamic building up, it can skip the other
->     decoder guard functions when decoding.
-> 4. Pre patch for allowing adding a vendor decoder before decode_insn32() with minimal
->     overhead for users that don't need this particular vendor deocder.
-
-Typo "decoder"
-
+On Wed, Mar 13, 2024 at 03:50:16PM +0530, Himanshu Chauhan wrote:
+> On Wed, Mar 13, 2024 at 3:24 PM Andrew Jones <ajones@ventanamicro.com>
+> wrote:
 > 
-> Signed-off-by: Huang Tao <eric.huang@linux.alibaba.com>
-> Suggested-by: Christoph Muellner <christoph.muellner@vrull.eu>
-> Co-authored-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-> ---
+> > On Wed, Mar 13, 2024 at 11:39:30AM +0530, Himanshu Chauhan wrote:
+> > > This patch adds "sdtrig" in the ISA string when sdtrig extension is
+> > enabled.
+> > > The sdtrig extension may or may not be implemented in a system.
+> > Therefore, the
+> > >            -cpu rv64,sdtrig=<true/false>
+> > > option can be used to dynamically turn sdtrig extension on or off.
+> > >
+> > > Since, the sdtrig ISA extension is a superset of debug specification,
+> > disable
+> > > the debug property when sdtrig is enabled. A warning is printed when
+> > this is
+> > > done.
+> > >
+> > > By default, the sdtrig extension is disabled and debug property enabled
+> > as usual.
+> > >
+> > > Signed-off-by: Himanshu Chauhan <hchauhan@ventanamicro.com>
+> > > ---
+> > >  target/riscv/cpu.c | 8 ++++++++
+> > >  1 file changed, 8 insertions(+)
+> > >
+> > > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> > > index 2602aae9f5..ab057a0926 100644
+> > > --- a/target/riscv/cpu.c
+> > > +++ b/target/riscv/cpu.c
+> > > @@ -175,6 +175,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
+> > >      ISA_EXT_DATA_ENTRY(zvkt, PRIV_VERSION_1_12_0, ext_zvkt),
+> > >      ISA_EXT_DATA_ENTRY(zhinx, PRIV_VERSION_1_12_0, ext_zhinx),
+> > >      ISA_EXT_DATA_ENTRY(zhinxmin, PRIV_VERSION_1_12_0, ext_zhinxmin),
+> > > +    ISA_EXT_DATA_ENTRY(sdtrig, PRIV_VERSION_1_12_0, ext_sdtrig),
+> > >      ISA_EXT_DATA_ENTRY(smaia, PRIV_VERSION_1_12_0, ext_smaia),
+> > >      ISA_EXT_DATA_ENTRY(smepmp, PRIV_VERSION_1_12_0, ext_smepmp),
+> > >      ISA_EXT_DATA_ENTRY(smstateen, PRIV_VERSION_1_12_0, ext_smstateen),
+> > > @@ -1008,6 +1009,12 @@ static void riscv_cpu_reset_hold(Object *obj)
+> > >      set_default_nan_mode(1, &env->fp_status);
+> > >
+> > >  #ifndef CONFIG_USER_ONLY
+> > > +    if (cpu->cfg.debug && cpu->cfg.ext_sdtrig) {
+> > > +         warn_report("Disabling debug property since sdtrig ISA
+> > extension "
+> > > +                     "is enabled");
+> > > +         cpu->cfg.debug = 0;
+> >
+> > If sdtrig is a superset of debug, then why do we need to disable debug?
+> >
 > 
-> Changes in v3:
-> - use GPtrArray to save decode function poionter list.
-> ---
->   target/riscv/cpu.c         | 18 ++++++++++++++++++
->   target/riscv/cpu.h         |  2 ++
->   target/riscv/cpu_decoder.h | 34 ++++++++++++++++++++++++++++++++++
->   target/riscv/translate.c   | 29 +++++++++++++----------------
->   4 files changed, 67 insertions(+), 16 deletions(-)
->   create mode 100644 target/riscv/cpu_decoder.h
-> 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 5ff0192c52..9aedd93cf6 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -38,6 +38,7 @@
->   #include "kvm/kvm_riscv.h"
->   #include "tcg/tcg-cpu.h"
->   #include "tcg/tcg.h"
-> +#include "cpu_decoder.h"
->   
->   /* RISC-V CPU definitions */
->   static const char riscv_single_letter_exts[] = "IEMAFDQCBPVH";
-> @@ -1102,6 +1103,21 @@ static void riscv_cpu_satp_mode_finalize(RISCVCPU *cpu, Error **errp)
->   }
->   #endif
->   
-> +static void riscv_cpu_finalize_dynamic_decoder(RISCVCPU *cpu)
+> "debug" is not disabled. The flag is turned off. This is for unambiguity
+> between which spec is in force currently.
+> May come handy (not now but later) in if conditions.
 
-riscv_tcg_cpu_finalize_dynamic_decoder()
+I know sdtrig/debug functionality remains enabled, but why state that the
+'debug' functionality is no longer enabled? If sdtrig is a superset, then,
+when it's enabled, both the debug functionality and the sdtrig
+functionality are enabled. Actually, sdtrig should do the opposite, it
+should ensure debug=true. The warning would look odd to users that know
+this and the debug=off would also look odd in the results of cpu model
+expansion. Keeping debug=true would also avoid needing to change all the
+if cpu->cfg.debug conditions to if cpu->cfg.debug || cpu->cfg.ext_sdtrig.
 
-> +{
-> +    GPtrArray *dynamic_decoders;
-> +    dynamic_decoders = g_ptr_array_sized_new(decoder_table_size);
-> +    for (size_t i = 0; i < decoder_table_size; ++i) {
-> +        if (decoder_table[i].guard_func &&
-> +            decoder_table[i].guard_func(&cpu->cfg)) {
-> +            g_ptr_array_add(dynamic_decoders,
-> +                            (gpointer)decoder_table[i].decode_fn);
-> +        }
-> +    }
-> +
-> +    cpu->decoders = dynamic_decoders;
-> +}
+If we deprecate 'debug' someday, then we'll add a warning for when
+there is 'debug' explicitly enabled by a user and also for 'debug'
+configs which lack 'sdtrig', but we don't need to worry about that now.
 
-Move this function to translate.c and make decoder_table[] static.
-Then we don't need the "cpu_decoder.h", it is specific to TCG and
-declarations go in "target/riscv/tcg/tcg-cpu.h".
-
-> +
->   void riscv_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
->   {
->       Error *local_err = NULL;
-> @@ -1127,6 +1143,8 @@ void riscv_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
->               return;
->           }
->       }
-> +
-> +    riscv_cpu_finalize_dynamic_decoder(cpu);
-
-Move within the 'if tcg_enabled' block.
-
->   }
->   
->   static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 5d291a7092..923721e67a 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -30,6 +30,7 @@
->   #include "qemu/int128.h"
->   #include "cpu_bits.h"
->   #include "cpu_cfg.h"
-> +#include "cpu_decoder.h"
->   #include "qapi/qapi-types-common.h"
->   #include "cpu-qom.h"
->   
-> @@ -457,6 +458,7 @@ struct ArchCPU {
->       uint32_t pmu_avail_ctrs;
->       /* Mapping of events to counters */
->       GHashTable *pmu_event_ctr_map;
-> +    const GPtrArray *decoders;
->   };
->   
->   /**
-> diff --git a/target/riscv/cpu_decoder.h b/target/riscv/cpu_decoder.h
-> new file mode 100644
-> index 0000000000..549414ce4c
-> --- /dev/null
-> +++ b/target/riscv/cpu_decoder.h
-> @@ -0,0 +1,34 @@
-> +/*
-> + * QEMU RISC-V CPU Decoder
-> + *
-> + * Copyright (c) 2023-2024 Alibaba Group
-> + *
-> + * This program is free software; you can redistribute it and/or modify it
-> + * under the terms and conditions of the GNU General Public License,
-> + * version 2 or later, as published by the Free Software Foundation.
-> + *
-> + * This program is distributed in the hope it will be useful, but WITHOUT
-> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-> + * more details.
-> + *
-> + * You should have received a copy of the GNU General Public License along with
-> + * this program.  If not, see <http://www.gnu.org/licenses/>.
-> + */
-> +
-> +#ifndef RISCV_CPU_DECODER_H
-> +#define RISCV_CPU_DECODER_H
-> +
-> +struct DisasContext;
-> +struct RISCVCPUConfig;
-> +typedef struct RISCVDecoder {
-> +    bool (*guard_func)(const struct RISCVCPUConfig *);
-> +    bool (*decode_fn)(struct DisasContext *, uint32_t);
-> +} RISCVDecoder;
-> +
-> +typedef bool (*decode_fn)(struct DisasContext *, uint32_t);
-> +
-> +extern const size_t decoder_table_size;
-> +
-> +extern const RISCVDecoder decoder_table[];
-> +#endif
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 177418b2b9..332f0bfd4e 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -115,6 +115,7 @@ typedef struct DisasContext {
->       bool frm_valid;
->       /* TCG of the current insn_start */
->       TCGOp *insn_start;
-> +    const GPtrArray *decoders;
-
-Why do we need this reference? We can use env_archcpu(env)->decoders.
-
->   } DisasContext;
->   
->   static inline bool has_ext(DisasContext *ctx, uint32_t ext)
-> @@ -1118,21 +1119,16 @@ static inline int insn_len(uint16_t first_word)
->       return (first_word & 3) == 3 ? 4 : 2;
->   }
->   
-> +const RISCVDecoder decoder_table[] = {
-> +    { always_true_p, decode_insn32 },
-> +    { has_xthead_p, decode_xthead},
-> +    { has_XVentanaCondOps_p, decode_XVentanaCodeOps},
-> +};
-> +
-> +const size_t decoder_table_size = ARRAY_SIZE(decoder_table);
-> +
->   static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
->   {
-> -    /*
-> -     * A table with predicate (i.e., guard) functions and decoder functions
-> -     * that are tested in-order until a decoder matches onto the opcode.
-> -     */
-> -    static const struct {
-> -        bool (*guard_func)(const RISCVCPUConfig *);
-> -        bool (*decode_func)(DisasContext *, uint32_t);
-> -    } decoders[] = {
-> -        { always_true_p,  decode_insn32 },
-> -        { has_xthead_p, decode_xthead },
-> -        { has_XVentanaCondOps_p,  decode_XVentanaCodeOps },
-> -    };
-> -
->       ctx->virt_inst_excp = false;
->       ctx->cur_insn_len = insn_len(opcode);
->       /* Check for compressed insn */
-> @@ -1153,9 +1149,9 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
->                                                ctx->base.pc_next + 2));
->           ctx->opcode = opcode32;
->   
-> -        for (size_t i = 0; i < ARRAY_SIZE(decoders); ++i) {
-> -            if (decoders[i].guard_func(ctx->cfg_ptr) &&
-> -                decoders[i].decode_func(ctx, opcode32)) {
-> +        for (guint i = 0; i < ctx->decoders->len; ++i) {
-> +            decode_fn func = g_ptr_array_index(ctx->decoders, i);
-> +            if (func(ctx, opcode32)) {
->                   return;
->               }
->           }
-> @@ -1199,6 +1195,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
->       ctx->itrigger = FIELD_EX32(tb_flags, TB_FLAGS, ITRIGGER);
->       ctx->zero = tcg_constant_tl(0);
->       ctx->virt_inst_excp = false;
-> +    ctx->decoders = cpu->decoders;
->   }
->   
->   static void riscv_tr_tb_start(DisasContextBase *db, CPUState *cpu)
-
+Thanks,
+drew
 
