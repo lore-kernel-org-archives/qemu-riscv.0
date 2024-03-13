@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49658C54E60
-	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Mar 2024 19:15:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2DB6C54E60
+	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Mar 2024 19:31:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rkU4l-0003Xo-Lz; Wed, 13 Mar 2024 15:15:45 -0400
+	id 1rkUJs-0006qT-HE; Wed, 13 Mar 2024 15:31:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1rkU4d-0003X8-0u
- for qemu-riscv@nongnu.org; Wed, 13 Mar 2024 15:15:36 -0400
-Received: from mail-ed1-x533.google.com ([2a00:1450:4864:20::533])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rkUJl-0006pz-85
+ for qemu-riscv@nongnu.org; Wed, 13 Mar 2024 15:31:13 -0400
+Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1rkU4b-00088P-Er
- for qemu-riscv@nongnu.org; Wed, 13 Mar 2024 15:15:34 -0400
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-563c403719cso193752a12.2
- for <qemu-riscv@nongnu.org>; Wed, 13 Mar 2024 12:15:31 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rkUJf-0002Q2-Q2
+ for qemu-riscv@nongnu.org; Wed, 13 Mar 2024 15:31:11 -0400
+Received: by mail-pf1-x436.google.com with SMTP id
+ d2e1a72fcca58-6e6aaa2f02cso211967b3a.2
+ for <qemu-riscv@nongnu.org>; Wed, 13 Mar 2024 12:31:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1710357330; x=1710962130; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=S73Ez4aLojGa5m6oGyjmaYW4vkiMXs/MYff/gasLOqk=;
- b=C98L3f/B6H5fFfqW7VH3aB7kqDyT6qcQWKBoiB2daQGITSbYEV2eKT496lk0YxP2ki
- L06CmEFIk5d0TXfuFKX6P4eqJmKC3bf4Eb0UpwW06Tz/4zcrFNyRTOQoGknijqLG/CD8
- G3yuGPyA9JjYjhZ7AI0PmFxV4K5zvjKDzNYkevHfem6cNhevB5L1GCUaiXHWTEq5aOeL
- 6syQqYxsLEToZfFsOrrykf9RIc05Fzzsz0A/SAwIrM1h056yn/wJAtRTsvlFHAZL0tZy
- BsBCO4uf5WiBhntMfeiRporReRLZBygyHEMhO9mtPUNzBbbMHJXQZdj17zf4Nj4flYwv
- ofRA==
+ d=ventanamicro.com; s=google; t=1710358265; x=1710963065; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=u49ZsHiKEZPJuB9ki+WLQrM9cRTAq7Fel6AdXa7pwl4=;
+ b=lFvca4BU4G89xX+uxnnyfWHU2hrxQ0m+safJ1xyeWhq5/TkfSlfrrBkYmL/JKU9Ywq
+ NWtTYBacWibcTWHIbdgA9APk1VX21yN/3e+jhGxjw7yxBtK68qtIL5JKrC83qSHS+41u
+ bIahh+88lFSweGJpQNNuD0aapA9sJdYqTavjMGO1esL/23V4Y21/lpb8sw8zDXwWFcM2
+ D3/ycDcYMGBzb+nPFlg84DI1iwoNtoP7rT5qIBV/fQwOICHBLgOrJMSs8VBXn85qA9x1
+ sE/h20an+kzsUbdhst0ZOEEmajseZ9Y7dUz/z8eQcBRVy/HtuyWmfF5TVwfjgF+bMB2X
+ XHGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710357330; x=1710962130;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=S73Ez4aLojGa5m6oGyjmaYW4vkiMXs/MYff/gasLOqk=;
- b=f8QkzrgWvIVlIyOBqUgu/hANd6rxy0ovVMJ1LvI9je9PkY0d6uDN8sCSyzkFPQaLJZ
- BgP2DV+EmjGTxlhx/nU1pPOcsiIopOzBDKe4ulEZ45uQL0HOdtuZfTzQO2vdqgpFbTJV
- Xmj55al7S0nj2w6xmMIUh4Fh69dGRYDY/fPxg80vN0+NclCLI23h7zwy/pHbQ6IDwpft
- KflPkkaFkOu2e8OUWDR5NgHzd3jXDk/lDQ4TtGJUWZ0w0Aw1avi4Oe3gCLn4q3ltMcKE
- zcISt4eMBZ5Uy1vTLApcNwcFDMXRKHAuuy5BxAJTf/PsK/n76d779qlmcT0UNHQicabj
- GVOg==
-X-Gm-Message-State: AOJu0YzrLwNJEf/JkaKkmxd0+Z7cKs5row8B/HUnR6eGC3zjLOkfMsvP
- XfIkd2mvz/zEVd4tSMD6KVyZcYRTCLgF0l1MObK8ZLL13HjUlaOKjd+OqiXOOffoGYOowdZOkQM
- E
-X-Google-Smtp-Source: AGHT+IHoEqtr6t1XwJmpOsv5FfPnmKNqFYeVU7ON7oEDvgOeY7RGQzWYwjUXMLlZJZv6TzmSFvy7NQ==
-X-Received: by 2002:a50:9f64:0:b0:568:231e:5e9f with SMTP id
- b91-20020a509f64000000b00568231e5e9fmr5529751edf.26.1710357330103; 
- Wed, 13 Mar 2024 12:15:30 -0700 (PDT)
-Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
+ d=1e100.net; s=20230601; t=1710358265; x=1710963065;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=u49ZsHiKEZPJuB9ki+WLQrM9cRTAq7Fel6AdXa7pwl4=;
+ b=LZIif8yPI2lxFOHl+8/hbHNBlJ4TXxEsecMJ78CQaHrm3W7y4CxvToiUyW2SGZAUSQ
+ eDPiK67tgdy+nz2Oimxf7zn9Bm5XZjQBlc+td9VJFXWhTZlaFocD+1SzeSZM+aDU5VAW
+ A3/IG3ChBf2XbnlZQ0WFQPs17SFogOHLJfzks3cPgNgu7BqbjPQjpYc+amshT8Kvv7xg
+ O0ZwDz70E/9SJvthDAchgJli3wbcqkJLI7g1oGm9A4+53LpC9UST+Dz3tdtzgEES4CYv
+ v+W3m6hmUhp3EPqtllhDI5X65M7EDBRdFk9UpAWDhED+Zfx0ql4n0DkJd+XKVVvPKlZ5
+ Nb2Q==
+X-Gm-Message-State: AOJu0Yx3CGPmq13u5mIgZz1bmVtUwyOUkkZN4GrN827EJ5rs18QXKLLU
+ 1C3zRB3I52BvB2JcZjGctAowRssfIpehiaaXwSyMcf34T/uO+pOWa/UHjagPzq0=
+X-Google-Smtp-Source: AGHT+IFKXP9ho4NSxxrUXMK9RLKbTROhSlf+f0+BYGKpx4n8EmpM8A52jiSdBPpDKQJB1f3z/emprQ==
+X-Received: by 2002:a05:6a00:189e:b0:6e6:c5d5:9195 with SMTP id
+ x30-20020a056a00189e00b006e6c5d59195mr984143pfh.28.1710358265489; 
+ Wed, 13 Mar 2024 12:31:05 -0700 (PDT)
+Received: from grind.dc1.ventanamicro.com ([177.94.15.159])
  by smtp.gmail.com with ESMTPSA id
- a3-20020a50e703000000b005661badcccesm5228509edn.87.2024.03.13.12.15.29
+ k10-20020a628e0a000000b006e5a915a9e7sm8912421pfe.10.2024.03.13.12.31.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Mar 2024 12:15:29 -0700 (PDT)
-Date: Wed, 13 Mar 2024 20:15:28 +0100
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Himanshu Chauhan <hchauhan@ventanamicro.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Subject: Re: [PATCH v5 3/3] target/riscv: Enable sdtrig for Ventana's Veyron
- CPUs
-Message-ID: <20240313-b392d97ea13635ecc7810909@orel>
-References: <20240313182009.608685-1-hchauhan@ventanamicro.com>
- <20240313182009.608685-4-hchauhan@ventanamicro.com>
+ Wed, 13 Mar 2024 12:31:05 -0700 (PDT)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ richard.henderson@linaro.org, philmd@linaro.org,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH for-9.0 v13 0/8] riscv: set vstart_eq_zero on vector insns
+Date: Wed, 13 Mar 2024 16:30:51 -0300
+Message-ID: <20240313193059.405329-1-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.43.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240313182009.608685-4-hchauhan@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::533;
- envelope-from=ajones@ventanamicro.com; helo=mail-ed1-x533.google.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::436;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x436.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -95,39 +94,45 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Mar 13, 2024 at 11:50:09PM +0530, Himanshu Chauhan wrote:
-> Ventana's Veyron CPUs support sdtrig ISA extension. By default, enable
-> the sdtrig extension and disable the debug property for these CPUs.
-> 
-> Signed-off-by: Himanshu Chauhan <hchauhan@ventanamicro.com>
-> ---
->  target/riscv/cpu.c | 2 ++
->  1 file changed, 2 insertions(+)
-> 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index e0710010f5..a7ea66c7fa 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -568,7 +568,9 @@ static void rv64_veyron_v1_cpu_init(Object *obj)
->      cpu->cfg.ext_zicbom = true;
->      cpu->cfg.cbom_blocksize = 64;
->      cpu->cfg.cboz_blocksize = 64;
-> +    cpu->cfg.debug = false;
+Hi,
 
-We don't want/need the above line. Veyron does support 'debug' since it
-supports 'sdtrig'. And removing the line above allows all the
-'|| cfg->ext_sdtrig' to also be removed.
+In this new version I added a new patch (patch 4) to handle the case
+pointed out by LIU Zhiwei in v12. I decided to do it in separate since
+it's a distinct case from what we're dealing with in patch 5.
 
-Thanks,
-drew
+No other changes made. Series based on master.
 
->      cpu->cfg.ext_zicboz = true;
-> +    cpu->cfg.ext_sdtrig = true;
->      cpu->cfg.ext_smaia = true;
->      cpu->cfg.ext_ssaia = true;
->      cpu->cfg.ext_sscofpmf = true;
-> -- 
-> 2.34.1
-> 
-> 
+Patches missing acks: patch 4.
+
+Changes from v12:
+- patch 4 (new):
+  - move vstart >= maxsz cond to the vmvr_v helper
+  - clear vstart when vstart >= maxsz
+- v12 link: https://lore.kernel.org/qemu-riscv/20240311180821.250469-1-dbarboza@ventanamicro.com/
+
+Daniel Henrique Barboza (7):
+  target/riscv/vector_helper.c: set vstart = 0 in GEN_VEXT_VSLIDEUP_VX()
+  trans_rvv.c.inc: set vstart = 0 in int scalar move insns
+  target/riscv/vector_helpers: do early exit when vstart >= vl
+  target/riscv: always clear vstart in whole vec move insns
+  target/riscv: remove 'over' brconds from vector trans
+  trans_rvv.c.inc: remove redundant mark_vs_dirty() calls
+  target/riscv/vector_helper.c: optimize loops in ldst helpers
+
+Ivan Klokov (1):
+  target/riscv: enable 'vstart_eq_zero' in the end of insns
+
+ target/riscv/insn_trans/trans_rvbf16.c.inc |  18 +-
+ target/riscv/insn_trans/trans_rvv.c.inc    | 198 +++++----------------
+ target/riscv/insn_trans/trans_rvvk.c.inc   |  30 +---
+ target/riscv/translate.c                   |   6 +
+ target/riscv/vcrypto_helper.c              |  32 ++++
+ target/riscv/vector_helper.c               | 102 ++++++++++-
+ target/riscv/vector_internals.c            |   4 +
+ target/riscv/vector_internals.h            |   9 +
+ 8 files changed, 207 insertions(+), 192 deletions(-)
+
+-- 
+2.43.2
+
 
