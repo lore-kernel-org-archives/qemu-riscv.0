@@ -4,86 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D877FC54791
-	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Mar 2024 12:49:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94B6EC54791
+	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Mar 2024 13:32:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rkO36-0000l3-CZ; Wed, 13 Mar 2024 08:49:36 -0400
+	id 1rkOhz-0000Ul-C3; Wed, 13 Mar 2024 09:31:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1rkO34-0000kh-Uk
- for qemu-riscv@nongnu.org; Wed, 13 Mar 2024 08:49:34 -0400
-Received: from mail-lf1-x136.google.com ([2a00:1450:4864:20::136])
+ (Exim 4.90_1) (envelope-from <hchauhan@ventanamicro.com>)
+ id 1rkOhx-0000T6-F9
+ for qemu-riscv@nongnu.org; Wed, 13 Mar 2024 09:31:50 -0400
+Received: from mail-oa1-x2f.google.com ([2001:4860:4864:20::2f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1rkO33-0001fw-5Y
- for qemu-riscv@nongnu.org; Wed, 13 Mar 2024 08:49:34 -0400
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-513c982a619so609395e87.2
- for <qemu-riscv@nongnu.org>; Wed, 13 Mar 2024 05:49:32 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <hchauhan@ventanamicro.com>)
+ id 1rkOhv-0005Ej-Mo
+ for qemu-riscv@nongnu.org; Wed, 13 Mar 2024 09:31:49 -0400
+Received: by mail-oa1-x2f.google.com with SMTP id
+ 586e51a60fabf-2219edd959dso1826133fac.0
+ for <qemu-riscv@nongnu.org>; Wed, 13 Mar 2024 06:31:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1710334171; x=1710938971; darn=nongnu.org;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=67IZMwEKKDGF7mCcQNP/wMYA5z/SJyIIi8fEpZu9CgA=;
- b=iDkNYrX1hQ1DaV8TXbJ6ANuIu/QqkemxBDhvnGE1kmWtbts2S3PRXyHo1o746GD1GF
- dg1F6PByBqq7GmmRBha+KnU69LYTyA4/JO23qRmSMTE/bKMC6OztPVr98v/NYkRDmP+t
- T5SVlhInpQHgBBEgwCU7SwUb6U7qXa+1s0QsNUXMgaWxG0XsAc1WEAAgN/xrbQT/9OHu
- DVWnQi9cvescn4ye/ElU0EVZ/EjeFrkd6zdYTu5ylFE1ZZVy5H9lL88jGJAMUBlSX2Tc
- zoX08EtY468xyPFfMq8yFe/Ox47SwRoNhcj73REd64K/Zkv0gKQesPEQWeYZhD9mz+LO
- KV6Q==
+ d=ventanamicro.com; s=google; t=1710336706; x=1710941506; darn=nongnu.org;
+ h=to:references:message-id:content-transfer-encoding:cc:date
+ :in-reply-to:from:subject:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nceI7oUy7H1If+uxGr/utYMTaUqHGc9BcgE3B0bTib8=;
+ b=FFqMmiGxLUQUFzEE0PmDtlJeKz8I42hlrmfx9AhihtVwn8Xx2OUf2+X3ueYNgdTvCB
+ QNEl6ejdxCQJi4x25mOgXZVNNYuSNqlWZYBnr5Hipowb/yZjsUi0aWzrULA0HN7AYWUX
+ 7a//xYuVcyzpUoZHto6HdcsFlSRPYnt25XpiyjvBsBXys52gFsECfBUEzs3JhoqGEnJG
+ rU/uNtPC8PLX5ZsQeG4rlIf9FV+ZHpt6uRi7poNYcl+ouWODHt26h00eaqUT6q+KxDCp
+ NyPUqYqyAfgAxTuohwD7TcLCQ5vCfV+nJVlrMKbnNWP0nNjNEQbPpxa4twMPZ76jCttW
+ vW2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710334171; x=1710938971;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=67IZMwEKKDGF7mCcQNP/wMYA5z/SJyIIi8fEpZu9CgA=;
- b=OFsB1raxnZIGs0MkRTjZj+16gokYtqLX+PkUCcmif+/CkBJN7E+ib/znsH/hJBLECo
- bdMxyGjDZVk08ZtpXUENo1TmOo4kRa+eX65n+ELzuS42v3Y+UssBFWpGlnSXKGV7Ki4x
- 0Sy2fviQKF1sLFXrnHfwPjiCxBwrNk+QaA1ROOBIjPjD7mp4wqSVWP9nQ9L6So/ObsL0
- KUq0xDt6R8tcZ2I8ahfTQy4yfP4ClCOP/uuM/4M6FxnyGNkL4HL965AI3JUYHLRWO4BJ
- PnhebK76iX4v4MFep1ktoS3MkuQjuGlUKJophOHyXvNQC4RsKMCVwo5xRhWB3I78rnrC
- d3ZA==
-X-Gm-Message-State: AOJu0YyUqdWHDk+J8v4s4j3fthn6nPl3nhYynKXJl/qupW9d/fxBs3yi
- RTSpEN8MR76Jra2IhsBC5hZnrYQ4/dGKltAviphrML80vtxHwSyiHpwd5xZCELg=
-X-Google-Smtp-Source: AGHT+IFN/2NxpsGdWcYL4ORLZKK6nFRJUjSqBYx0LcSiC8DipyoeVIy2BsxrEpzzaJUObJNy73qU9w==
-X-Received: by 2002:a05:6512:1251:b0:513:c47d:c070 with SMTP id
- fb17-20020a056512125100b00513c47dc070mr3204316lfb.42.1710334171418; 
- Wed, 13 Mar 2024 05:49:31 -0700 (PDT)
-Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
+ d=1e100.net; s=20230601; t=1710336706; x=1710941506;
+ h=to:references:message-id:content-transfer-encoding:cc:date
+ :in-reply-to:from:subject:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=nceI7oUy7H1If+uxGr/utYMTaUqHGc9BcgE3B0bTib8=;
+ b=UrdepX/XJ7RbsIOEGMr209EqhMaLf6IGynk4xlORKNg05cHDAvCM+j2NNp4fpk54tQ
+ yRSGHpPSOypeLGVSgGxWN6g73cXpbwfjyJK+YnEtT3Bk2DfyAxPSnW2zIAkbIIuECXFx
+ YOGHFyzNis9elKLxQC02d+6a+0RBIagAUQ7MvOBb3BgZWzWQVQaNY5QhzzSLrSr42BMi
+ lSe7UoEn47OVHlK+bsEsxxxa71nookVFB/dn7MjIRSGzOB1X+XZqMFrrOLmhNRrlXgOJ
+ crrd+hv5qyZrxt5BQyz78KZx4ztiSUsj/wD63Vd3AvcMsQcohmHUHkiWi2sJ/pGUM/pd
+ 3/8w==
+X-Gm-Message-State: AOJu0YxiJ8zdUeoOVwfIs8UJA9tTarbfxFDWiKwVg1iACblBNrQoYHdW
+ 55eChgBHFHaLuoiavJtUlYtlBaPxDmovioXFWErkmlRZEKqqrydJLJUUv+7KIlU=
+X-Google-Smtp-Source: AGHT+IEPSdTTloZIfXActvcTdersRhGhdFA2Aer7Kr0ERu25CYAFUH+uCSHoKivCDZUDske2xDn5zw==
+X-Received: by 2002:a05:6358:b256:b0:17b:61ad:1585 with SMTP id
+ lo22-20020a056358b25600b0017b61ad1585mr1754061rwc.3.1710336705463; 
+ Wed, 13 Mar 2024 06:31:45 -0700 (PDT)
+Received: from smtpclient.apple ([2405:201:d019:c0ce:90da:559f:95a1:e85b])
  by smtp.gmail.com with ESMTPSA id
- m14-20020a05600c4f4e00b00413294ddb72sm2268367wmq.20.2024.03.13.05.49.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Mar 2024 05:49:30 -0700 (PDT)
-Date: Wed, 13 Mar 2024 13:49:29 +0100
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Himanshu Chauhan <hchauhan@ventanamicro.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+ e1-20020a656881000000b005dc4fc80b21sm6840434pgt.70.2024.03.13.06.31.43
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Wed, 13 Mar 2024 06:31:45 -0700 (PDT)
+Content-Type: text/plain;
+	charset=utf-8
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3774.400.31\))
 Subject: Re: [PATCH v4 2/3] target/riscv: Expose sdtrig ISA extension
-Message-ID: <20240313-31131fe87882ea953d5aa6d4@orel>
+From: Himanshu Chauhan <hchauhan@ventanamicro.com>
+In-Reply-To: <20240313-31131fe87882ea953d5aa6d4@orel>
+Date: Wed, 13 Mar 2024 19:01:22 +0530
+Cc: qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <9487F33B-8519-4D4F-A129-94E943B5999A@ventanamicro.com>
 References: <20240313060931.242161-1-hchauhan@ventanamicro.com>
  <20240313060931.242161-3-hchauhan@ventanamicro.com>
  <20240313-0ac597594e930a42685aeba5@orel>
  <CAPd4WezTTcYA5grMBrGYx5LUwF2jPT8gbL6CQWMZtsd1AJNuZQ@mail.gmail.com>
  <20240313-8164061a70dafa62c8bb755b@orel>
  <7898E43D-AF22-4170-BEC9-BC172304F483@ventanamicro.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <7898E43D-AF22-4170-BEC9-BC172304F483@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::136;
- envelope-from=ajones@ventanamicro.com; helo=mail-lf1-x136.google.com
+ <20240313-31131fe87882ea953d5aa6d4@orel>
+To: Andrew Jones <ajones@ventanamicro.com>
+X-Mailer: Apple Mail (2.3774.400.31)
+Received-SPF: pass client-ip=2001:4860:4864:20::2f;
+ envelope-from=hchauhan@ventanamicro.com; helo=mail-oa1-x2f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,62 +102,91 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Mar 13, 2024 at 05:48:16PM +0530, Himanshu Chauhan wrote:
-...
-> >>>> #ifndef CONFIG_USER_ONLY
-> >>>> +    if (cpu->cfg.debug && cpu->cfg.ext_sdtrig) {
-> >>>> +         warn_report("Disabling debug property since sdtrig ISA
-> >>> extension "
-> >>>> +                     "is enabled");
-> >>>> +         cpu->cfg.debug = 0;
-> >>> 
-> >>> If sdtrig is a superset of debug, then why do we need to disable debug?
-> >>> 
-> >> 
-> >> "debug" is not disabled. The flag is turned off. This is for unambiguity
-> >> between which spec is in force currently.
-> >> May come handy (not now but later) in if conditions.
-> > 
-> > I know sdtrig/debug functionality remains enabled, but why state that the
-> > 'debug' functionality is no longer enabled?
-> 
-> Got it. The warning can be removed.
-> 
-> > If sdtrig is a superset, then,
-> > when it's enabled, both the debug functionality and the sdtrig
-> > functionality are enabled. Actually, sdtrig should do the opposite, it
-> > should ensure debug=true. The warning would look odd to users that know
-> 
-> I would disagree to set debug=true when sdtrig is selected. These are two different specifications and should be treated so. Sdtrig is a superset now but may have another revision not backward compatible. For two different specifications and flags should mirror the same. On the same lines, this patch (as it does) should keep (cfg->debug || cfg->sdtrig) which shows that you are dealing with two different specifications. They behave same for some triggers but are still different. Deprecation isn’t a problem now or later.
 
-sdtrig is frozen, otherwise it would require the 'x-' prefix, so it can
-no longer change in a substantial way and therefore if it's a superset of
-debug now then it always will be. If a change is made to "debug
-functionality" then it will get a new extension name which may not be
-compatible with either 'debug' or 'sdtrig', however that's not the case
-here. If a platform supports 'sdtrig', then it supports 'debug', as
-'sdtrig' is a superset of 'debug'. Pretending like they're mutually
-exclusive doesn't make sense when they completely overlap. Indeed
-platform's will likely *want* to advertise that they are compatible with
-both because software that is only compatible with 'debug' will need to
-know if it will work or not. A platform that says it's not compatible
-with 'debug', when it is, because it supports sdtrig, is limiting the
-software that will run on it for no reason.
 
-Thanks,
-drew
+> On 13-Mar-2024, at 6:19=E2=80=AFPM, Andrew Jones =
+<ajones@ventanamicro.com> wrote:
+>=20
+> On Wed, Mar 13, 2024 at 05:48:16PM +0530, Himanshu Chauhan wrote:
+> ...
+>>>>>> #ifndef CONFIG_USER_ONLY
+>>>>>> +    if (cpu->cfg.debug && cpu->cfg.ext_sdtrig) {
+>>>>>> +         warn_report("Disabling debug property since sdtrig ISA
+>>>>> extension "
+>>>>>> +                     "is enabled");
+>>>>>> +         cpu->cfg.debug =3D 0;
+>>>>>=20
+>>>>> If sdtrig is a superset of debug, then why do we need to disable =
+debug?
+>>>>>=20
+>>>>=20
+>>>> "debug" is not disabled. The flag is turned off. This is for =
+unambiguity
+>>>> between which spec is in force currently.
+>>>> May come handy (not now but later) in if conditions.
+>>>=20
+>>> I know sdtrig/debug functionality remains enabled, but why state =
+that the
+>>> 'debug' functionality is no longer enabled?
+>>=20
+>> Got it. The warning can be removed.
+>>=20
+>>> If sdtrig is a superset, then,
+>>> when it's enabled, both the debug functionality and the sdtrig
+>>> functionality are enabled. Actually, sdtrig should do the opposite, =
+it
+>>> should ensure debug=3Dtrue. The warning would look odd to users that =
+know
+>>=20
+>> I would disagree to set debug=3Dtrue when sdtrig is selected. These =
+are two different specifications and should be treated so. Sdtrig is a =
+superset now but may have another revision not backward compatible. For =
+two different specifications and flags should mirror the same. On the =
+same lines, this patch (as it does) should keep (cfg->debug || =
+cfg->sdtrig) which shows that you are dealing with two different =
+specifications. They behave same for some triggers but are still =
+different. Deprecation isn=E2=80=99t a problem now or later.
+>=20
+> sdtrig is frozen, otherwise it would require the 'x-' prefix, so it =
+can
+> no longer change in a substantial way and therefore if it's a superset =
+of
+> debug now then it always will be. If a change is made to "debug
+> functionality" then it will get a new extension name which may not be
+> compatible with either 'debug' or 'sdtrig', however that's not the =
+case
+> here. If a platform supports 'sdtrig', then it supports 'debug', as
+> 'sdtrig' is a superset of 'debug'. Pretending like they're mutually
+> exclusive doesn't make sense when they completely overlap. Indeed
+> platform's will likely *want* to advertise that they are compatible =
+with
+> both because software that is only compatible with 'debug' will need =
+to
+> know if it will work or not. A platform that says it's not compatible
+> with 'debug', when it is, because it supports sdtrig, is limiting the
+> software that will run on it for no reason.
 
-> 
-> > this and the debug=off would also look odd in the results of cpu model
-> > expansion. Keeping debug=true would also avoid needing to change all the
-> > if cpu->cfg.debug conditions to if cpu->cfg.debug || cpu->cfg.ext_sdtrig.
-> > 
-> > If we deprecate 'debug' someday, then we'll add a warning for when
-> > there is 'debug' explicitly enabled by a user and also for 'debug'
-> > configs which lack 'sdtrig', but we don't need to worry about that now.
-> > 
-> > Thanks,
-> > drew
-> 
-> 
+Got it. I will make the necessary changes.
+
+>=20
+> Thanks,
+> drew
+>=20
+>>=20
+>>> this and the debug=3Doff would also look odd in the results of cpu =
+model
+>>> expansion. Keeping debug=3Dtrue would also avoid needing to change =
+all the
+>>> if cpu->cfg.debug conditions to if cpu->cfg.debug || =
+cpu->cfg.ext_sdtrig.
+>>>=20
+>>> If we deprecate 'debug' someday, then we'll add a warning for when
+>>> there is 'debug' explicitly enabled by a user and also for 'debug'
+>>> configs which lack 'sdtrig', but we don't need to worry about that =
+now.
+>>>=20
+>>> Thanks,
+>>> drew
+
+
 
