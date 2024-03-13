@@ -4,70 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6188C54791
-	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Mar 2024 06:12:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04F96C54E58
+	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Mar 2024 08:14:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rkHp3-0000V2-81; Wed, 13 Mar 2024 02:10:41 -0400
+	id 1rkJkc-0001OY-7P; Wed, 13 Mar 2024 04:14:14 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <hchauhan@ventanamicro.com>)
- id 1rkHoo-0000UO-Vi
- for qemu-riscv@nongnu.org; Wed, 13 Mar 2024 02:10:27 -0400
-Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f])
+ (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
+ id 1rkJka-0001No-8m
+ for qemu-riscv@nongnu.org; Wed, 13 Mar 2024 04:14:12 -0400
+Received: from mail-pg1-x52f.google.com ([2607:f8b0:4864:20::52f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <hchauhan@ventanamicro.com>)
- id 1rkHof-0008Pt-Os
- for qemu-riscv@nongnu.org; Wed, 13 Mar 2024 02:10:21 -0400
-Received: by mail-pf1-x42f.google.com with SMTP id
- d2e1a72fcca58-6e6aa270d55so382696b3a.1
- for <qemu-riscv@nongnu.org>; Tue, 12 Mar 2024 23:10:16 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
+ id 1rkJkX-0001lN-NZ
+ for qemu-riscv@nongnu.org; Wed, 13 Mar 2024 04:14:12 -0400
+Received: by mail-pg1-x52f.google.com with SMTP id
+ 41be03b00d2f7-5cedfc32250so4213996a12.0
+ for <qemu-riscv@nongnu.org>; Wed, 13 Mar 2024 01:14:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1710310215; x=1710915015; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=MxHuuXQsSn/q5eGJQFnPod+0e040rSRLMxHBZ+nr8EU=;
- b=GsmfrDdja+veuCgxZYDXnDk2GxCZ2FfnaCKtRsWyWWfhSMXCktxqBCWTwO1n28MXse
- 9EpzHZVxcFN1pd8wfeRm+0pcbbY1NPCTQ8VRgyLNW9G5j2wilMlm9BWlVzd3fov/n/hO
- WOR4dfOZoEpx+nFVmJ6PfzjyxK2rj1h0H7V26E1KGlz+4ORwI04LLk3cgJaqCWYHa/RS
- 9I5De9oKp/9/hJjuO4RbkntTe68SzR19t4enlczcb63b6LrsGZhgo6rTvH6z1Cliy9MF
- 1w6ec89KIfBlbM9+kd3aeqKX4/+f34VS8mTZRFGIcCNXssw6Aoz9v+qiDyRJg4SFvs5U
- Eo5A==
+ d=sifive.com; s=google; t=1710317647; x=1710922447; darn=nongnu.org;
+ h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Yv8wKA/KPYbFLr3DTp7mYK7V8Z+RK2NI/4+apdD1MNA=;
+ b=SmZkFok0aiM6HiuH34Vps+q459YvjXLO08vjjlJW3jlFzWL+fvKOo6Le0yTQdRYudj
+ gWgzS7m+eNWGETs5118LUcY0GzvvSmMMXDgXoJo0jOCuuf+6uQWPQIxlZGcB5uq9fY6N
+ j85BjsqFmrFeTbbCj9fHxGB8wKgkBvIM3rro/ZHKVDg5jfU0vBOyMtx+GhC9r0Mn8nd6
+ 7rY1rPZfKFzJT6jb8UMujZQeT/anJJVecO6vU6r3LMc9PYVx8uhYxks8lzzaAeH/vfqT
+ JLm9+Xaw9CMS6GZ9Nf3oexTz75WZvsBJGGuBvbMRTZG2UdTpB0k31t9XBBtjQXB2SPEA
+ 9anA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710310215; x=1710915015;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=MxHuuXQsSn/q5eGJQFnPod+0e040rSRLMxHBZ+nr8EU=;
- b=ELM9pzjrRPyQqgWrerEdy+SISaU1DlK+OXlgOC76p8QzbBCqY5kmlDDAtQW03KvdA2
- eXHFmnJOAvtG95bDjXxjBhZwXfAOFmXiVgRpC7pqYgFsUXqVP1uJkqoCS+HUXHylEs3R
- 7XE9uMZWZMRamN4+vn6i4xWgdTkgt5Ln4uC8X7Vf2QCm+vw3r/wKGcFmsm4kEDDk3mmD
- ws6VVXjLbwL7HUJw2HAaKrnVGaQMU0Htqh25Es4QzZO1w8Ak86lwlJgG57NZwyHMHRZC
- U6xS4scRryg/gC47pzZoRYlXPqhaSzjRZlBPg+tJy49w+Cuccd9Om8IeB4XXa/FxNxy/
- fxTA==
-X-Gm-Message-State: AOJu0Ywuh13mtlE7mFRL1zOHuQySS2yyf47vhigNFiz8LWAT/tNbfdI5
- 9f95P3M+VjzJ5BazZxeqqg8DE/bX4XUQHisOAlhU9GHGyDvdaGYBy9Ax+v1P7xVV8fBvqqERWfl
- A
-X-Google-Smtp-Source: AGHT+IH4Fr+xxCfKD0he+0PTmrp9asZRiTU/FYBVr2JxHYkm9NpGuAD/fMcs36dbQPYjtw/nWGUrgA==
-X-Received: by 2002:a17:902:d3cd:b0:1dd:528e:9b8 with SMTP id
- w13-20020a170902d3cd00b001dd528e09b8mr699947plb.5.1710310215074; 
- Tue, 12 Mar 2024 23:10:15 -0700 (PDT)
-Received: from localhost.localdomain ([106.51.83.242])
+ d=1e100.net; s=20230601; t=1710317647; x=1710922447;
+ h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Yv8wKA/KPYbFLr3DTp7mYK7V8Z+RK2NI/4+apdD1MNA=;
+ b=eGtgnqG1rRKmN0KtYf1JmeE6coMa/AdxvEoOS1jnXmQO6ZHGw0ScGoEiCh4aJmoNuB
+ KUuKO1nI6f55S/gXx6fnZ3J7Xo3Cx8zAeM/XYsu5Z2eHtqEuTlXto/Kg3K/1fPjg8CA3
+ l0keC+hvmaPYZNsfmkmEn36xfrDJlcOQ0lae6AYtgIvVQibVHtUJtrshoCNeRiTTBIBp
+ MTveJmUQPDa4tz7CVgwUUXIZTfM5XmqZUtwQPWRKvnpPj9eXQj+LDdo/rWM0FndjTAB5
+ gka77UQXM4tSqNVQdyMwZ0kiL4su44Kau6SwWD99RqrtiGta0FdhJQbesx8SvLArWrVa
+ YrvA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUKmYE6i4VKt8t6WihA3Smq8BgJ5Id1wFkOOWOknUWrUm3DcxZmrzu3HjjDTroQf75Fikj9fTp9wz1kJXdgxE4VWC5zKWo=
+X-Gm-Message-State: AOJu0Yy3xU+gPKlv2q4mDfvUgdTjTH4yqEFdCBNh3iecHyk1TGV29TV6
+ xcGq374LSNA83yZaF2dB8JJAGDccXpokR2b7RBKdQ+kaLlihUsIi/esSaIVbWGQ=
+X-Google-Smtp-Source: AGHT+IF9dTZQ87uwf7lhAsJ5YgIK8iAnEyvliRhDcIaIeZ+oa0mzLZ7VRZ+cbLV1F2Mct8C366kgWQ==
+X-Received: by 2002:a05:6a21:6da7:b0:1a3:2b94:dbaf with SMTP id
+ wl39-20020a056a216da700b001a32b94dbafmr4122449pzb.1.1710317647176; 
+ Wed, 13 Mar 2024 01:14:07 -0700 (PDT)
+Received: from hsinchu26.internal.sifive.com
+ (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
  by smtp.gmail.com with ESMTPSA id
- kj14-20020a17090306ce00b001dd3bc79142sm7755402plb.264.2024.03.12.23.10.13
+ gw12-20020a17090b0a4c00b0029beb0fc60fsm820291pjb.28.2024.03.13.01.14.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Mar 2024 23:10:14 -0700 (PDT)
-From: Himanshu Chauhan <hchauhan@ventanamicro.com>
-To: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-Subject: [PATCH v4 0/3] Introduce sdtrig ISA extension
-Date: Wed, 13 Mar 2024 11:39:28 +0530
-Message-Id: <20240313060931.242161-1-hchauhan@ventanamicro.com>
-X-Mailer: git-send-email 2.34.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42f;
- envelope-from=hchauhan@ventanamicro.com; helo=mail-pf1-x42f.google.com
+ Wed, 13 Mar 2024 01:14:06 -0700 (PDT)
+From: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: greentime.hu@sifive.com, vincent.chen@sifive.com, frank.chang@sifive.com,
+ jim.shu@sifive.com, Yong-Xuan Wang <yongxuan.wang@sifive.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Andrew Jones <ajones@ventanamicro.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH 1/1] target/riscv/kvm: fix timebase-frequency when using KVM
+ acceleration
+Date: Wed, 13 Mar 2024 16:13:57 +0800
+Message-Id: <20240313081359.20845-1-yongxuan.wang@sifive.com>
+X-Mailer: git-send-email 2.17.1
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52f;
+ envelope-from=yongxuan.wang@sifive.com; helo=mail-pg1-x52f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -90,53 +100,82 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-All the CPUs may or may not implement the debug triggers. Some CPUs
-may implement only debug specification v0.13 and not sdtrig ISA
-extension.
+The timebase-frequency of guest OS should be the same with host
+machine. The timebase-frequency value in DTS should be got from
+hypervisor when using KVM acceleration.
 
-This patchset, adds sdtrig ISA as an extension which can be turned on or off by
-sdtrig=<true/false> option. It is turned off by default.
+Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+---
+ hw/riscv/virt.c              | 11 +++++++++--
+ target/riscv/kvm/kvm-cpu.c   |  9 +++++++++
+ target/riscv/kvm/kvm_riscv.h | 13 +++++++++++++
+ 3 files changed, 31 insertions(+), 2 deletions(-)
 
-When debug is true and sdtrig is false, the behaviour is as defined in debug
-specification v0.13. If sdtrig is turned on, the behaviour is as defined
-in the sdtrig ISA extension.
-
-The "sdtrig" string is concatenated to ISA string when debug or sdtrig is enabled.
-
-Changes from v1:
-  - Replaced the debug property with ext_sdtrig
-  - Marked it experimenatal by naming it x-sdtrig
-  - x-sdtrig is added to ISA string
-  - Reversed the patch order
-
-Changes from v2:
-  - Mark debug property as deprecated and replace internally with sdtrig extension
-  - setting/unsetting debug property shows warning and sets/unsets ext_sdtrig
-  - sdtrig is added to ISA string as RISC-V debug specification is frozen
-
-Changes from v3:
-  - debug propery is not deprecated but it is superceded by sdtrig extension
-  - Mcontrol6 support is not published when only debug property is turned
-    on as debug spec v0.13 doesn't define mcontrol6 match triggers.
-  - Enabling sdtrig extension turns of debug property and a warning is printed.
-    This doesn't break debug specification implemenation since sdtrig is
-    backward compatible with debug specification.
-  - Disable debug property and enable sdtrig by default for Ventana's Veyron
-    CPUs.
-
-Himanshu Chauhan (3):
-  target/riscv: Enable mcontrol6 triggers only when sdtrig is selected
-  target/riscv: Expose sdtrig ISA extension
-  target/riscv: Enable sdtrig for Ventana's Veyron CPUs
-
- target/riscv/cpu.c     | 14 ++++++-
- target/riscv/cpu_cfg.h |  1 +
- target/riscv/csr.c     |  2 +-
- target/riscv/debug.c   | 92 +++++++++++++++++++++++++-----------------
- target/riscv/machine.c |  2 +-
- 5 files changed, 70 insertions(+), 41 deletions(-)
-
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index a094af97c32a..a7ed7fa13010 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -710,8 +710,15 @@ static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *memmap,
+     int socket_count = riscv_socket_count(ms);
+ 
+     qemu_fdt_add_subnode(ms->fdt, "/cpus");
+-    qemu_fdt_setprop_cell(ms->fdt, "/cpus", "timebase-frequency",
+-                          RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ);
++
++    if (kvm_enabled()) {
++        qemu_fdt_setprop_cell(ms->fdt, "/cpus", "timebase-frequency",
++                              kvm_riscv_get_timebase_frequency(first_cpu));
++    } else {
++        qemu_fdt_setprop_cell(ms->fdt, "/cpus", "timebase-frequency",
++                              RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ);
++    }
++
+     qemu_fdt_setprop_cell(ms->fdt, "/cpus", "#size-cells", 0x0);
+     qemu_fdt_setprop_cell(ms->fdt, "/cpus", "#address-cells", 0x1);
+     qemu_fdt_add_subnode(ms->fdt, "/cpus/cpu-map");
+diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+index c7afdb1e81b7..bbb115eaa867 100644
+--- a/target/riscv/kvm/kvm-cpu.c
++++ b/target/riscv/kvm/kvm-cpu.c
+@@ -739,6 +739,15 @@ static void kvm_riscv_put_regs_timer(CPUState *cs)
+     env->kvm_timer_dirty = false;
+ }
+ 
++uint64_t kvm_riscv_get_timebase_frequency(CPUState *cs)
++{
++    uint64_t reg;
++
++    KVM_RISCV_GET_TIMER(cs, frequency, reg);
++
++    return reg;
++}
++
+ static int kvm_riscv_get_regs_vector(CPUState *cs)
+ {
+     RISCVCPU *cpu = RISCV_CPU(cs);
+diff --git a/target/riscv/kvm/kvm_riscv.h b/target/riscv/kvm/kvm_riscv.h
+index 4bd98fddc776..130a4bde0480 100644
+--- a/target/riscv/kvm/kvm_riscv.h
++++ b/target/riscv/kvm/kvm_riscv.h
+@@ -29,4 +29,17 @@ void riscv_kvm_aplic_request(void *opaque, int irq, int level);
+ int kvm_riscv_sync_mpstate_to_kvm(RISCVCPU *cpu, int state);
+ void riscv_kvm_cpu_finalize_features(RISCVCPU *cpu, Error **errp);
+ 
++#ifdef CONFIG_KVM
++
++uint64_t kvm_riscv_get_timebase_frequency(CPUState *cs);
++
++#else
++
++static inline uint64_t kvm_riscv_get_timebase_frequency(CPUState *cs)
++{
++    g_assert_not_reached();
++}
++
++#endif
++
+ #endif
 -- 
-2.34.1
+2.17.1
 
 
