@@ -4,60 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 415B5C54E58
-	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Mar 2024 08:39:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82A1EC54E58
+	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Mar 2024 08:57:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rkK8R-00083u-Nr; Wed, 13 Mar 2024 04:38:51 -0400
+	id 1rkKQ6-0006lE-4F; Wed, 13 Mar 2024 04:57:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <eric.huang@linux.alibaba.com>)
- id 1rkK8H-000805-0s; Wed, 13 Mar 2024 04:38:42 -0400
-Received: from out30-101.freemail.mail.aliyun.com ([115.124.30.101])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <eric.huang@linux.alibaba.com>)
- id 1rkK8D-0006U9-QL; Wed, 13 Mar 2024 04:38:40 -0400
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1rkKQ4-0006l5-QI
+ for qemu-riscv@nongnu.org; Wed, 13 Mar 2024 04:57:04 -0400
+Received: from mail-wr1-x42b.google.com ([2a00:1450:4864:20::42b])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1rkKQ0-0001wM-SY
+ for qemu-riscv@nongnu.org; Wed, 13 Mar 2024 04:57:03 -0400
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-33ddd1624beso432205f8f.1
+ for <qemu-riscv@nongnu.org>; Wed, 13 Mar 2024 01:57:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux.alibaba.com; s=default;
- t=1710319102; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
- bh=mn345pKhc48JP8shvQPWdOY1zWmG8wfRyHOjI0n2VqE=;
- b=b1ORzfEMNeScAeAZ9UW+sg9qBfgA6w1GA8yQ35hZ4A3FW4oJ/m0UKhJz5+ocZvWE7GX9xPS6zcFLZOv68KR88PvDOt08r0JND9LV4fZla3kSqwmIq1s1V9ed94Yc6W/gZkKntc2xD6GMcUj8+PavI5T/5/YpPjgPI3N/eaWAejw=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R141e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046050;
- MF=eric.huang@linux.alibaba.com; NM=1; PH=DS; RN=10; SR=0;
- TI=SMTPD_---0W2ObjtA_1710319099; 
-Received: from 30.21.185.204(mailfrom:eric.huang@linux.alibaba.com
- fp:SMTPD_---0W2ObjtA_1710319099) by smtp.aliyun-inc.com;
- Wed, 13 Mar 2024 16:38:20 +0800
-Message-ID: <b97ceb4f-e284-411c-aeb9-228ef8c92144@linux.alibaba.com>
-Date: Wed, 13 Mar 2024 16:38:19 +0800
+ d=ventanamicro.com; s=google; t=1710320219; x=1710925019; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=zzeXVOwj4j/YDqEdvW6/fBZnpKw/FuA6FRyIKZNEoVw=;
+ b=W0U38b8kM2/8/20439EwSh0IsKOi5FyeI5E3EVMvUyhJoi2iWO+31kBKi188LFm5/m
+ 6CO5VOM7MsduOw6EQKEErTO+g+pa+51BSbr+6v6CAxJgMnOJQpng150HomEQI7Y4tblg
+ 4Tvu+/MxDACSyrCIAHmYfJJJCzKNQCYa2XfbmVU8S2lCdVaYBSgsE1LGxI/ewX+akqoH
+ FMnf7IgI5XpRbGnhqhHu8Cbcwm1Xf81FKvLB5bH8OCjzfQB/AqO3RQsP9KMydVH2LkPS
+ QOcyLvKi8nGx0XmeVTiGS/964/XUtCM9c/dRsuKutgDNcDCG+2vvO7H/7s/+2rriGhJ/
+ NZzg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710320219; x=1710925019;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zzeXVOwj4j/YDqEdvW6/fBZnpKw/FuA6FRyIKZNEoVw=;
+ b=BraXn0zRNQi/3Kp7PdD5nXAvg4KPkgP8Ropinbn4ZGvmrzdf09NRlwZ1Njzb3yvCnu
+ OhiU6e//fSjKXEKYbHEeDfDUucUUVBHZCtZXW+g9ZMPqIAox02FawU9jUgLNkCHnPFPk
+ YRRAL9kZtE9mCDIHa9rtfKXpyOArBbH/jv72VM9kK4FjBNydGlguEc60pBfgKV5q+QBs
+ 4uG5CLG0jD98eNp0s+jxDMMb/T5DHT78a85pMveZ7bYQexWzqnhLiMp6B/GxVVLdN3JZ
+ EyCijtd2UMUhmzbtiH6QuHUFZwnweLNpMSYSrUKHdOJPpRMn2CprgCwlGcMut1sWkeWu
+ PnqA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWhRd4C6Xs039cdg0zBeKvzN37KjmEcrBLLSw5xgLuO+M9e+3/5R0ST6eqHyOpOUT48m8Ez/dZvx8EcZ3TGr4mfHrqmSvY=
+X-Gm-Message-State: AOJu0YxzGuJB0rlPupXUfqXsI15ZvYeUObbL6tRt9CVWtUfim7SaBHod
+ JNUW3Qk6CbdSp9+7vxs5emheYVUqEapB7et8LCNVSaYQrPuRfUt9ZvobvsYxzOc=
+X-Google-Smtp-Source: AGHT+IFsTPMYvibcG3IfeN0KXC3CUkO5eaGAhCqPOBPryOwWsAcS2CKxby7Yl3sOI3T/ShHm9e7Kyg==
+X-Received: by 2002:adf:cb92:0:b0:33d:61c7:9b2c with SMTP id
+ q18-20020adfcb92000000b0033d61c79b2cmr1411915wrh.34.1710320219272; 
+ Wed, 13 Mar 2024 01:56:59 -0700 (PDT)
+Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
+ by smtp.gmail.com with ESMTPSA id
+ n20-20020a05600c4f9400b00412f8bf2d82sm1636864wmq.28.2024.03.13.01.56.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 13 Mar 2024 01:56:58 -0700 (PDT)
+Date: Wed, 13 Mar 2024 09:56:52 +0100
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, greentime.hu@sifive.com, 
+ vincent.chen@sifive.com, frank.chang@sifive.com, jim.shu@sifive.com, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: Re: [PATCH 1/1] target/riscv/kvm: fix timebase-frequency when using
+ KVM acceleration
+Message-ID: <20240313-d11a0490609909bd354f01b2@orel>
+References: <20240313081359.20845-1-yongxuan.wang@sifive.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] target/riscv: Implement dynamic establishment of
- custom decoder
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, zhiwei_liu@linux.alibaba.com,
- dbarboza@ventanamicro.com, liwei1518@gmail.com, bin.meng@windriver.com,
- alistair.francis@wdc.com, palmer@dabbelt.com,
- Christoph Muellner <christoph.muellner@vrull.eu>
-References: <20240312054553.11811-1-eric.huang@linux.alibaba.com>
- <8f23924f-af5c-4bc1-94f1-143bc5c8184d@linaro.org>
-From: Huang Tao <eric.huang@linux.alibaba.com>
-In-Reply-To: <8f23924f-af5c-4bc1-94f1-143bc5c8184d@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.101;
- envelope-from=eric.huang@linux.alibaba.com;
- helo=out30-101.freemail.mail.aliyun.com
-X-Spam_score_int: -174
-X-Spam_score: -17.5
-X-Spam_bar: -----------------
-X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240313081359.20845-1-yongxuan.wang@sifive.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::42b;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x42b.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -73,38 +102,96 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-I'm sorry for making this mistake and thank you for your patience.
+On Wed, Mar 13, 2024 at 04:13:57PM +0800, Yong-Xuan Wang wrote:
+> The timebase-frequency of guest OS should be the same with host
+> machine. The timebase-frequency value in DTS should be got from
+> hypervisor when using KVM acceleration.
+> 
+> Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+> ---
+>  hw/riscv/virt.c              | 11 +++++++++--
+>  target/riscv/kvm/kvm-cpu.c   |  9 +++++++++
+>  target/riscv/kvm/kvm_riscv.h | 13 +++++++++++++
+>  3 files changed, 31 insertions(+), 2 deletions(-)
+> 
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index a094af97c32a..a7ed7fa13010 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -710,8 +710,15 @@ static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *memmap,
+>      int socket_count = riscv_socket_count(ms);
+>  
+>      qemu_fdt_add_subnode(ms->fdt, "/cpus");
+> -    qemu_fdt_setprop_cell(ms->fdt, "/cpus", "timebase-frequency",
+> -                          RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ);
+> +
+> +    if (kvm_enabled()) {
+> +        qemu_fdt_setprop_cell(ms->fdt, "/cpus", "timebase-frequency",
+> +                              kvm_riscv_get_timebase_frequency(first_cpu));
+> +    } else {
+> +        qemu_fdt_setprop_cell(ms->fdt, "/cpus", "timebase-frequency",
+> +                              RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ);
+> +    }
+> +
+>      qemu_fdt_setprop_cell(ms->fdt, "/cpus", "#size-cells", 0x0);
+>      qemu_fdt_setprop_cell(ms->fdt, "/cpus", "#address-cells", 0x1);
+>      qemu_fdt_add_subnode(ms->fdt, "/cpus/cpu-map");
+> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+> index c7afdb1e81b7..bbb115eaa867 100644
+> --- a/target/riscv/kvm/kvm-cpu.c
+> +++ b/target/riscv/kvm/kvm-cpu.c
+> @@ -739,6 +739,15 @@ static void kvm_riscv_put_regs_timer(CPUState *cs)
+>      env->kvm_timer_dirty = false;
+>  }
+>  
+> +uint64_t kvm_riscv_get_timebase_frequency(CPUState *cs)
+> +{
+> +    uint64_t reg;
+> +
+> +    KVM_RISCV_GET_TIMER(cs, frequency, reg);
+> +
+> +    return reg;
+> +}
+> +
+>  static int kvm_riscv_get_regs_vector(CPUState *cs)
+>  {
+>      RISCVCPU *cpu = RISCV_CPU(cs);
+> diff --git a/target/riscv/kvm/kvm_riscv.h b/target/riscv/kvm/kvm_riscv.h
+> index 4bd98fddc776..130a4bde0480 100644
+> --- a/target/riscv/kvm/kvm_riscv.h
+> +++ b/target/riscv/kvm/kvm_riscv.h
+> @@ -29,4 +29,17 @@ void riscv_kvm_aplic_request(void *opaque, int irq, int level);
+>  int kvm_riscv_sync_mpstate_to_kvm(RISCVCPU *cpu, int state);
+>  void riscv_kvm_cpu_finalize_features(RISCVCPU *cpu, Error **errp);
+>  
+> +#ifdef CONFIG_KVM
+> +
+> +uint64_t kvm_riscv_get_timebase_frequency(CPUState *cs);
+> +
+> +#else
+> +
+> +static inline uint64_t kvm_riscv_get_timebase_frequency(CPUState *cs)
+> +{
+> +    g_assert_not_reached();
+> +}
+> +
+> +#endif
+> +
 
-In the next version, I will use GPtrArray you mentioned earlier to solve 
-the problem.
+I think we've decided we don't need stubs like these since kvm_riscv_*
+functions should always be called within 'if (kvm_enabled())' blocks (as
+you have above), and then we leave it to the compile testing to point
+out kvm function calls without kvm_enabled().
+
+>  #endif
+> -- 
+> 2.17.1
+>
+
+Besides dropping the stubs,
+
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 
 Thanks,
-
-Huang Tao
-
-On 2024/3/12 21:57, Richard Henderson wrote:
-> On 3/11/24 19:45, Huang Tao wrote:
->> +static void riscv_cpu_finalize_dynamic_decoder(RISCVCPU *cpu)
->> +{
->> +    decode_fn *dynamic_decoders;
->> +    dynamic_decoders = g_new0(decode_fn, decoder_table_size);
->
-> Allocating ARRAY_SIZE(decoder_table)...
->
->> +    int j = 0;
->> +    for (size_t i = 0; i < decoder_table_size; ++i) {
->> +        if (decoder_table[i].guard_func &&
->> +            decoder_table[i].guard_func(&cpu->cfg)) {
->> +            dynamic_decoders[j] = decoder_table[i].decode_fn;
->> +            j++;
->> +        }
->
-> Potentially enabling all elements...
->
->> +        for (size_t i = 0; ctx->decoders[i]; ++i) {
->
-> Reading past the end of the array expecting an extra NULL entry.
->
->
-> r~
+drew
 
