@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAFEBC54E5D
-	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Mar 2024 19:00:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FA6AC54E60
+	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Mar 2024 19:00:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rkqJL-0000u9-4p; Thu, 14 Mar 2024 15:00:16 -0400
+	id 1rkqJF-0000qz-3g; Thu, 14 Mar 2024 15:00:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <hchauhan@ventanamicro.com>)
- id 1rkqJI-0000te-4Q
- for qemu-riscv@nongnu.org; Thu, 14 Mar 2024 15:00:12 -0400
-Received: from mail-pg1-x534.google.com ([2607:f8b0:4864:20::534])
+ id 1rkqJD-0000q0-Rl
+ for qemu-riscv@nongnu.org; Thu, 14 Mar 2024 15:00:07 -0400
+Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <hchauhan@ventanamicro.com>)
- id 1rkqJE-0001B1-MB
- for qemu-riscv@nongnu.org; Thu, 14 Mar 2024 15:00:11 -0400
-Received: by mail-pg1-x534.google.com with SMTP id
- 41be03b00d2f7-5d862e8b163so228724a12.1
- for <qemu-riscv@nongnu.org>; Thu, 14 Mar 2024 12:00:08 -0700 (PDT)
+ id 1rkqJC-0001AF-0x
+ for qemu-riscv@nongnu.org; Thu, 14 Mar 2024 15:00:07 -0400
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-1dcc0d163a1so1218515ad.0
+ for <qemu-riscv@nongnu.org>; Thu, 14 Mar 2024 12:00:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1710442806; x=1711047606; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1710442804; x=1711047604; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yWmALFGWJKqYhXbwjbmytVpu9a+2H7aO4i8AojXFIjw=;
- b=DUsFJfmGGKRBJo/p60TZc6/fURYfb/9UjYArEZvy4AQm1eXTnc5N4NkzPVd99ov+8F
- qloCwZnueSO5OhPN3bo7gA3N+d9KE8ZC013ON6f2VjoewRscySfNM6+rFLB+Dbta3yXz
- lgr9YSb0vxPLGI9IyFUvASLMqHRzkSRzBp1WulBNfgYIVj++Rxzp3ocSWeMaCkJxNwtB
- nrryBXYMpUdN3ZYXRUtasc4xZUSOWXOURYfyqI2OE96Yr2kyJI9wjZUW6KQeHv+t99vA
- ChejBJJbl+CSFp0zAamhXdiWRjUwLo3H8yxYVvGlCh2+TdGHv2H9IOJceIUi5+ZxvWZ8
- sg7A==
+ bh=PajR9BB9cA2kOKGEwVsLPH9xajp/vsDO+ObB++Rdsw4=;
+ b=cHgANEOeAAkPi8mZPkL0h4sTn6s+s3eAbWk8RWZFgoYbBwIVGEEOgat2uu1PZzeKgi
+ NthfV/uty8gsKNBZieE3xl1ukG5BsNiaWQiqe/QAHDXIA8NkYlHa4ncJgdPKQU8Ycum+
+ JcStJIYv6T3uoH1DrB8F1rMny5YAkTYfEdLnSiDpt5oFDBQHTahKjDM31jmdQ4ZGbnu/
+ pswAqPaA5WQ5wUUsFoOM/+yHF+KCHww2TogxxArvwRqEh9Lfd2K1Ool0MFbwxWQdE5le
+ SifXbiynAMDYGnfA1WLrbSGdMpChSG/RzIsfVIualmv592rGSUVAEDHTdjiSonp/oCvc
+ 005g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710442806; x=1711047606;
+ d=1e100.net; s=20230601; t=1710442804; x=1711047604;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yWmALFGWJKqYhXbwjbmytVpu9a+2H7aO4i8AojXFIjw=;
- b=VBlmRnkXgR/ydFA66hlt14MoCRrI1hZuHvwAm+/qc/MC2UGAG2B+KkbH4sIBXw1M6c
- TJqe31stMTop5xo3PVLNApLJGCB876RokwhbogfI0UtesPf9woRn2N8y9NuZswzN6f5w
- BaI1bfXSSN3322yyk2T7zzIWxw7VS8+XlxGslQEYTQLL4GfN3dvlMM8BJa6erslXiA0o
- tCmL0LtSDrpCSeJHvRN1L8HjJLY9c7sUp3/GzzvImN/OhEJiNjmYv8u5pfzq50R+pe5V
- qXjbNGkJbMcQ2oqKVYojd4MRfwdr5An2bFX2hu7ELVFdrTp0KIOSqI4W+0sn1WXbbOEp
- zSmw==
-X-Gm-Message-State: AOJu0YxjsP43BjXumuFzBssDhUIe4LIKapfdYAfeI8ILp2c6wIj9kx/r
- VByu8z6ktoZI7S0c9I0O8VGN86NDFAUaVDcnhO+11edRb51jGIHKZUdTtROhCu9k+R2N5A3+RCb
- T1jQ=
-X-Google-Smtp-Source: AGHT+IEmklMbPNblmgYzog+waxoaGUxpVNb092swQ+ts2Nq7ARiS94SzzW0hVBUStxwerJFJMq30zg==
-X-Received: by 2002:a05:6a20:958c:b0:1a1:7528:b45e with SMTP id
- iu12-20020a056a20958c00b001a17528b45emr3328579pzb.3.1710442805833; 
- Thu, 14 Mar 2024 12:00:05 -0700 (PDT)
+ bh=PajR9BB9cA2kOKGEwVsLPH9xajp/vsDO+ObB++Rdsw4=;
+ b=bJi48yK+quiqr1ATZA3MeWWGxgnTikTPu/dLH3HDRpHGHmmG6SubxpLaMfl3d/9bta
+ rgjz2YHPLxwtgjrWsxXbNXoQsaGp0v8z5o26OXLgb+xElr95GHOD0kffIjozUHudPibJ
+ FbP9vUJJnkALR2+qDSW0rl1b1kE7pWLdIvvWxsPFC7HRsikAwk3EzpUFE8rsrgiI72OY
+ A8x6nh4miHcJpNEEBDvUjQLWGPVCu8/qxOWggiE1WMRFHpwd1cWkOjc3TA13NVg8RTGl
+ 4vbBlFDtdAtRNiHSmJFyKiPv4UI4i4dGXs3yN58PVWZ16uJlO+ys040r9KgHM2lSlcf6
+ 23yA==
+X-Gm-Message-State: AOJu0YwqQawkjiC1gwcWeTOWzPlWx3sqX8DgkC4Mkf8ey78dQh1OUgJ5
+ hvSNAHBcS3VjOxU3TbCWWMazl6KVcifte7VqV0EaZM+VwhVh5zYfopfKoklGNZr5DSdugiEZ1Wk
+ 3UiA=
+X-Google-Smtp-Source: AGHT+IHltb83xf0srFhj8tUZuAZvtOZIHrv3pDrhQ9xY/neEh03nwnVoz5lGAX7bf8QjQgmFotD0Pw==
+X-Received: by 2002:a17:902:c404:b0:1dd:7c4c:c6b6 with SMTP id
+ k4-20020a170902c40400b001dd7c4cc6b6mr2969568plk.5.1710442803895; 
+ Thu, 14 Mar 2024 12:00:03 -0700 (PDT)
 Received: from aryabhatta.. ([49.37.251.185]) by smtp.gmail.com with ESMTPSA id
- e8-20020a170902784800b001dd1096e365sm2105732pln.281.2024.03.14.12.00.04
+ e8-20020a170902784800b001dd1096e365sm2105732pln.281.2024.03.14.12.00.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Mar 2024 12:00:05 -0700 (PDT)
+ Thu, 14 Mar 2024 12:00:03 -0700 (PDT)
 From: Himanshu Chauhan <hchauhan@ventanamicro.com>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
 Cc: ajones@ventanamicro.com
-Subject: [PATCH v7 2/4] target/riscv: Enable mcontrol6 triggers only when
- sdtrig is selected
-Date: Fri, 15 Mar 2024 00:29:55 +0530
-Message-Id: <20240314185957.36940-3-hchauhan@ventanamicro.com>
+Subject: [PATCH v7 1/4] target/riscv: Check for valid itimer pointer before
+ free
+Date: Fri, 15 Mar 2024 00:29:54 +0530
+Message-Id: <20240314185957.36940-2-hchauhan@ventanamicro.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240314185957.36940-1-hchauhan@ventanamicro.com>
 References: <20240314185957.36940-1-hchauhan@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::534;
- envelope-from=hchauhan@ventanamicro.com; helo=mail-pg1-x534.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
+ envelope-from=hchauhan@ventanamicro.com; helo=mail-pl1-x62b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -95,124 +95,30 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The mcontrol6 triggers are not defined in debug specification v0.13
-These triggers are defined in sdtrig ISA extension.
-
-This patch:
-   * Adds ext_sdtrig capability which is used to select mcontrol6 triggers
-   * Keeps the debug property. All triggers that are defined in v0.13 are
-     exposed.
+Check if each element of array of pointers for itimer contains a non-null
+pointer before freeing.
 
 Signed-off-by: Himanshu Chauhan <hchauhan@ventanamicro.com>
 ---
- target/riscv/cpu.c     |  5 +++++
- target/riscv/cpu_cfg.h |  1 +
- target/riscv/debug.c   | 30 +++++++++++++++++++++++++-----
- 3 files changed, 31 insertions(+), 5 deletions(-)
+ target/riscv/debug.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index c160b9216b..ab631500ac 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1008,6 +1008,11 @@ static void riscv_cpu_reset_hold(Object *obj)
-     set_default_nan_mode(1, &env->fp_status);
- 
- #ifndef CONFIG_USER_ONLY
-+    if (!cpu->cfg.debug && cpu->cfg.ext_sdtrig) {
-+        warn_report("Enabling 'debug' since 'sdtrig' is enabled.");
-+        cpu->cfg.debug = true;
-+    }
-+
-     if (cpu->cfg.debug) {
-         riscv_trigger_reset_hold(env);
-     }
-diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-index 2040b90da0..0c57e1acd4 100644
---- a/target/riscv/cpu_cfg.h
-+++ b/target/riscv/cpu_cfg.h
-@@ -114,6 +114,7 @@ struct RISCVCPUConfig {
-     bool ext_zvfbfwma;
-     bool ext_zvfh;
-     bool ext_zvfhmin;
-+    bool ext_sdtrig;
-     bool ext_smaia;
-     bool ext_ssaia;
-     bool ext_sscofpmf;
 diff --git a/target/riscv/debug.c b/target/riscv/debug.c
-index 5f14b39b06..c40e727e12 100644
+index e30d99cc2f..5f14b39b06 100644
 --- a/target/riscv/debug.c
 +++ b/target/riscv/debug.c
-@@ -100,13 +100,16 @@ static trigger_action_t get_trigger_action(CPURISCVState *env,
-     target_ulong tdata1 = env->tdata1[trigger_index];
-     int trigger_type = get_trigger_type(env, trigger_index);
-     trigger_action_t action = DBG_ACTION_NONE;
-+    const RISCVCPUConfig *cfg = riscv_cpu_cfg(env);
- 
-     switch (trigger_type) {
-     case TRIGGER_TYPE_AD_MATCH:
-         action = (tdata1 & TYPE2_ACTION) >> 12;
-         break;
-     case TRIGGER_TYPE_AD_MATCH6:
--        action = (tdata1 & TYPE6_ACTION) >> 12;
-+        if (cfg->ext_sdtrig) {
-+            action = (tdata1 & TYPE6_ACTION) >> 12;
+@@ -938,7 +938,10 @@ void riscv_trigger_reset_hold(CPURISCVState *env)
+         env->tdata3[i] = 0;
+         env->cpu_breakpoint[i] = NULL;
+         env->cpu_watchpoint[i] = NULL;
+-        timer_del(env->itrigger_timer[i]);
++        if (env->itrigger_timer[i]) {
++            timer_del(env->itrigger_timer[i]);
++            env->itrigger_timer[i] = NULL;
 +        }
-         break;
-     case TRIGGER_TYPE_INST_CNT:
-     case TRIGGER_TYPE_INT:
-@@ -727,7 +730,12 @@ void tdata_csr_write(CPURISCVState *env, int tdata_index, target_ulong val)
-         type2_reg_write(env, env->trigger_cur, tdata_index, val);
-         break;
-     case TRIGGER_TYPE_AD_MATCH6:
--        type6_reg_write(env, env->trigger_cur, tdata_index, val);
-+        if (riscv_cpu_cfg(env)->ext_sdtrig) {
-+            type6_reg_write(env, env->trigger_cur, tdata_index, val);
-+        } else {
-+            qemu_log_mask(LOG_UNIMP, "trigger type: %d is not supported\n",
-+                          trigger_type);
-+        }
-         break;
-     case TRIGGER_TYPE_INST_CNT:
-         itrigger_reg_write(env, env->trigger_cur, tdata_index, val);
-@@ -750,9 +758,13 @@ void tdata_csr_write(CPURISCVState *env, int tdata_index, target_ulong val)
+     }
  
- target_ulong tinfo_csr_read(CPURISCVState *env)
- {
--    /* assume all triggers support the same types of triggers */
--    return BIT(TRIGGER_TYPE_AD_MATCH) |
--           BIT(TRIGGER_TYPE_AD_MATCH6);
-+    target_ulong ts = BIT(TRIGGER_TYPE_AD_MATCH);
-+
-+    if (riscv_cpu_cfg(env)->ext_sdtrig) {
-+        ts |= BIT(TRIGGER_TYPE_AD_MATCH6);
-+    }
-+
-+    return ts;
- }
- 
- void riscv_cpu_debug_excp_handler(CPUState *cs)
-@@ -803,6 +815,10 @@ bool riscv_cpu_debug_check_breakpoint(CPUState *cs)
-                 }
-                 break;
-             case TRIGGER_TYPE_AD_MATCH6:
-+                if (!cpu->cfg.ext_sdtrig) {
-+                    break;
-+                }
-+
-                 ctrl = env->tdata1[i];
-                 pc = env->tdata2[i];
- 
-@@ -869,6 +885,10 @@ bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp)
-             }
-             break;
-         case TRIGGER_TYPE_AD_MATCH6:
-+            if (!cpu->cfg.ext_sdtrig) {
-+                break;
-+            }
-+
-             ctrl = env->tdata1[i];
-             addr = env->tdata2[i];
-             flags = 0;
+     env->mcontext = 0;
 -- 
 2.34.1
 
