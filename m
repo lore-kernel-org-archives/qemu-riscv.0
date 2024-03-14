@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4DF8C54E60
-	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Mar 2024 17:59:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61A69C54E5D
+	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Mar 2024 17:59:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rkpKl-0005T8-CR; Thu, 14 Mar 2024 13:57:39 -0400
+	id 1rkpKl-0005T3-CF; Thu, 14 Mar 2024 13:57:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rkpKj-0005SM-Qq
+ id 1rkpKj-0005SS-VA
  for qemu-riscv@nongnu.org; Thu, 14 Mar 2024 13:57:37 -0400
-Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
+Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rkpKg-0005Xs-Un
+ id 1rkpKh-0005Y6-2f
  for qemu-riscv@nongnu.org; Thu, 14 Mar 2024 13:57:37 -0400
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-1dd9066b7c3so8832305ad.2
- for <qemu-riscv@nongnu.org>; Thu, 14 Mar 2024 10:57:25 -0700 (PDT)
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-1ddcfe064faso9482805ad.3
+ for <qemu-riscv@nongnu.org>; Thu, 14 Mar 2024 10:57:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1710439044; x=1711043844; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1710439048; x=1711043848; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=T5A4nX3r8zSRTiumUSB8VPtRrJ7wQQkRoyZB7HA8ErE=;
- b=i6D22zG/y6VkHJ92kWo6t/gZ6Vu6zvguarRgQR5nJTBCV158YvShJJnd8RNlKo9xx2
- HRObCKKEtLtXLwMdLl5ivNhdNfKdFp0pPkUqBYM/aX1yLuPmV95w6u/ctwfFG5XLJnUO
- yobJS9/p0uF/4HExuohHPX+Fg9H/mH1kuXkS64O4ChngczVMdzZbH+csCUswmohOyoCO
- +3VDi8Lyo7BqzvKst2PlaP1z6idXFqLaFXCIgmu6ZUTLj43AhEJdN74egFvIWk5JKZQ5
- yvBix1GQ4NkDWc6tglAyocBf9WCnonS4W9X95y0cX7jmh331cVs6WIuhA/DPpmPYbK8b
- CKiQ==
+ bh=J5Gr03KDR8W8zLLO2gIJakof8sfxcHeyxFszbVTmuNg=;
+ b=aUypBBdx1BtSze8tt5HuAlmZMX7pwwXiQnaaa3pkkR9EDGGhufT8A0UJ+LT8xJsod+
+ xcLhAiDdxpgZeQJewAn11d5pBPWlSgCReY7FuArcVjajd/ZXZ5FhcQkUd7dzsPxwFwYo
+ eERAeezFPL6K82EF3BJzkwTMWU8wV6FAn60wP4jbal43GRjgyysRooUkbiDVpycE/gm9
+ tyzDAqVaPbKPFVTSu6ZMynlUPyXu1D2EzIVU/86CWBEmLuinVybOKhoJ0fe78TLx4Vwf
+ 2mS7cqPFY3w9/H6JV9spt+p5WtlLFb6EZXPyGgPnrE7G7mtmGTiKuGPfliYyRgG/NCkK
+ ujSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710439044; x=1711043844;
+ d=1e100.net; s=20230601; t=1710439048; x=1711043848;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=T5A4nX3r8zSRTiumUSB8VPtRrJ7wQQkRoyZB7HA8ErE=;
- b=puIS8IRZeZg7paJrgabiC7OPKB4NbCcogn9KaFmypULPLuAFSyn0185idggGs/JXAJ
- Rh0QA9cFyptMTcJI7fs2IvAwNyKDcvy3oW6h2ajxe6nW7E8QfWj4Jzmzo62+/rqhuquf
- JVPvc5rNyqRODbElG4McIEPWT70vxg43hqKXJIdMOSzOffrxW5Q4YzOzmThK6z29HCHJ
- zoIXDRyYM0cs6P3msVegxb9ui26WGqYRGXZaujDRyfPFFT7+3v6eTSJf/fi1vKN3pEMX
- bb4HYzVVfkbP2jvw3jQUnb+24DxvIGaACwaZ/KMzs+tCcA4JaU+ZpGkiaeCzfMKzgpCI
- QCow==
-X-Gm-Message-State: AOJu0YzTy4fGzL0uLLzYb6GNl/WsCAwLtOwIVs4ug1LMNW361snXlt7w
- CslcJ8cWW2kdWbGBPRJ+CtYyRa7WgSLBJ8FTkOzvK4/BK7bAUZ/lothqB8MuO3I=
-X-Google-Smtp-Source: AGHT+IGaybWc75PKRIoCdx42wEIfqBwBL+E7PrBZeI4zPnbYNXzRrc+gg4ShYmGmoxmHnZyJga+NPg==
-X-Received: by 2002:a17:902:e808:b0:1dd:a285:b41c with SMTP id
- u8-20020a170902e80800b001dda285b41cmr3617956plg.7.1710439044553; 
- Thu, 14 Mar 2024 10:57:24 -0700 (PDT)
+ bh=J5Gr03KDR8W8zLLO2gIJakof8sfxcHeyxFszbVTmuNg=;
+ b=Ffporhl+lVi7jql0LDQqygI5Bn5UOLgFfjGw1Ba/NXRAZwvnQ10MGm4vy4NO95kuuI
+ FFoMDFmBwDGVAreNDqHsp69f4nrXuhdXXC6soP+fohvvsQD3mPjGQVje/ukQBES824V9
+ 7pPSlV0n8cDVUl/12A/oTiKnj5wSMeUGcLgfrATFVizrPEBrqWwF8FoMicgF0C2ZSt+h
+ hxevpS2tnCA2BMASvzxj9ZdseNgvcI6dCsPpAP/sa5lFU8yG8Ac7nKJHDyABoG7nQ9ci
+ wsWZu5t0m8glNOXKpPtX7pDmmkBQiqpzzSALtWwuPaptt2E4JjIBZ+RVqTM4zBgsPWbz
+ t8Xw==
+X-Gm-Message-State: AOJu0YzT4volZIBWbZSdYQ+o2Mp9FzrXlflM4aIboVccw18q5LYMNjNJ
+ 8O++xwJ0kFjZosDw4B2kKbGi6ni0uETShGRiNyDWbOzXv7AMp21uyxHpchrrU8k=
+X-Google-Smtp-Source: AGHT+IHHk7j5PdCEgYIG5irVAbeUNAksuiAyzS4zx9M/VgqDRN9dO3Yp0t9/+tJ9A5RcY6z11kV3YA==
+X-Received: by 2002:a17:903:245:b0:1dd:a34e:84aa with SMTP id
+ j5-20020a170903024500b001dda34e84aamr2593954plh.48.1710439047713; 
+ Thu, 14 Mar 2024 10:57:27 -0700 (PDT)
 Received: from grind.dc1.ventanamicro.com ([177.94.15.159])
  by smtp.gmail.com with ESMTPSA id
- i7-20020a170902c94700b001db717d2dbbsm1991776pla.210.2024.03.14.10.57.21
+ i7-20020a170902c94700b001db717d2dbbsm1991776pla.210.2024.03.14.10.57.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Mar 2024 10:57:23 -0700 (PDT)
+ Thu, 14 Mar 2024 10:57:27 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  max.chou@sifive.com, richard.henderson@linaro.org,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH for 9.0 v15 04/10] target/riscv: always clear vstart in whole
- vec move insns
-Date: Thu, 14 Mar 2024 14:56:58 -0300
-Message-ID: <20240314175704.478276-5-dbarboza@ventanamicro.com>
+Subject: [PATCH for 9.0 v15 05/10] target/riscv: always clear vstart for
+ ldst_whole insns
+Date: Thu, 14 Mar 2024 14:56:59 -0300
+Message-ID: <20240314175704.478276-6-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.44.0
 In-Reply-To: <20240314175704.478276-1-dbarboza@ventanamicro.com>
 References: <20240314175704.478276-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x633.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,66 +97,145 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-These insns have 2 paths: we'll either have vstart already cleared if
-vstart_eq_zero or we'll do a brcond to check if vstart >= maxsz to call
-the 'vmvr_v' helper. The helper will clear vstart if it executes until
-the end, or if vstart >= vl.
+Commit 8ff8ac6329 added a conditional to guard the vext_ldst_whole()
+helper if vstart >= evl. But by skipping the helper we're also not
+setting vstart = 0 at the end of the insns, which is incorrect.
 
-For starters, the check itself is wrong: we're checking vstart >= maxsz,
-when in fact we should use vstart in bytes, or 'startb' like 'vmvr_v' is
-calling, to do the comparison. But even after fixing the comparison we'll
-still need to clear vstart in the end, which isn't happening too.
+We'll move the conditional to vext_ldst_whole(), following in line with
+the removal of all brconds vstart >= vl that the next patch will do. The
+idea is to make the helpers responsible for their own vstart management.
 
-We want to make the helpers responsible to manage vstart, including
-these corner cases, precisely to avoid these situations:
+Fix ldst_whole isns by:
 
-- remove the wrong vstart >= maxsz cond from the translation;
-- add a 'startb >= maxsz' cond in 'vmvr_v', and clear vstart if that
-  happens.
+- remove the brcond that skips the helper if vstart is >= evl;
 
-This way we're now sure that vstart is being cleared in the end of the
-execution, regardless of the path taken.
+- vext_ldst_whole() now does an early exit with the same check, where
+  evl = (vlenb * nf) >> log2_esz, but the early exit will also clear
+  vstart.
 
-Fixes: f714361ed7 ("target/riscv: rvv-1.0: implement vstart CSR")
+The 'width' param is now unneeded in ldst_whole_trans() and is also
+removed. It was used for the evl calculation for the brcond and has no
+other use now.  The 'width' is reflected in vext_ldst_whole() via
+log2_esz, which is encoded by GEN_VEXT_LD_WHOLE() as
+"ctzl(sizeof(ETYPE))".
+
+Suggested-by: Max Chou <max.chou@sifive.com>
+Fixes: 8ff8ac6329 ("target/riscv: rvv: Add missing early exit condition for whole register load/store")
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- target/riscv/insn_trans/trans_rvv.c.inc | 3 ---
- target/riscv/vector_helper.c            | 5 +++++
- 2 files changed, 5 insertions(+), 3 deletions(-)
+ target/riscv/insn_trans/trans_rvv.c.inc | 52 +++++++++++--------------
+ target/riscv/vector_helper.c            |  5 +++
+ 2 files changed, 28 insertions(+), 29 deletions(-)
 
 diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index 8c16a9f5b3..52c26a7834 100644
+index 52c26a7834..1366445e1f 100644
 --- a/target/riscv/insn_trans/trans_rvv.c.inc
 +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -3664,12 +3664,9 @@ static bool trans_##NAME(DisasContext *s, arg_##NAME * a)               \
-                              vreg_ofs(s, a->rs2), maxsz, maxsz);        \
-             mark_vs_dirty(s);                                           \
-         } else {                                                        \
--            TCGLabel *over = gen_new_label();                           \
--            tcg_gen_brcondi_tl(TCG_COND_GEU, cpu_vstart, maxsz, over);  \
-             tcg_gen_gvec_2_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, a->rs2), \
-                                tcg_env, maxsz, maxsz, 0, gen_helper_vmvr_v); \
-             mark_vs_dirty(s);                                           \
--            gen_set_label(over);                                        \
-         }                                                               \
-         return true;                                                    \
-     }                                                                   \
+@@ -1097,13 +1097,9 @@ GEN_VEXT_TRANS(vle64ff_v, MO_64, r2nfvm, ldff_op, ld_us_check)
+ typedef void gen_helper_ldst_whole(TCGv_ptr, TCGv, TCGv_env, TCGv_i32);
+ 
+ static bool ldst_whole_trans(uint32_t vd, uint32_t rs1, uint32_t nf,
+-                             uint32_t width, gen_helper_ldst_whole *fn,
++                             gen_helper_ldst_whole *fn,
+                              DisasContext *s)
+ {
+-    uint32_t evl = s->cfg_ptr->vlenb * nf / width;
+-    TCGLabel *over = gen_new_label();
+-    tcg_gen_brcondi_tl(TCG_COND_GEU, cpu_vstart, evl, over);
+-
+     TCGv_ptr dest;
+     TCGv base;
+     TCGv_i32 desc;
+@@ -1120,8 +1116,6 @@ static bool ldst_whole_trans(uint32_t vd, uint32_t rs1, uint32_t nf,
+ 
+     fn(dest, base, tcg_env, desc);
+ 
+-    gen_set_label(over);
+-
+     return true;
+ }
+ 
+@@ -1129,42 +1123,42 @@ static bool ldst_whole_trans(uint32_t vd, uint32_t rs1, uint32_t nf,
+  * load and store whole register instructions ignore vtype and vl setting.
+  * Thus, we don't need to check vill bit. (Section 7.9)
+  */
+-#define GEN_LDST_WHOLE_TRANS(NAME, ARG_NF, WIDTH)               \
++#define GEN_LDST_WHOLE_TRANS(NAME, ARG_NF)                                \
+ static bool trans_##NAME(DisasContext *s, arg_##NAME * a)                 \
+ {                                                                         \
+     if (require_rvv(s) &&                                                 \
+         QEMU_IS_ALIGNED(a->rd, ARG_NF)) {                                 \
+-        return ldst_whole_trans(a->rd, a->rs1, ARG_NF, WIDTH,             \
++        return ldst_whole_trans(a->rd, a->rs1, ARG_NF,                    \
+                                 gen_helper_##NAME, s);                    \
+     }                                                                     \
+     return false;                                                         \
+ }
+ 
+-GEN_LDST_WHOLE_TRANS(vl1re8_v,  1, 1)
+-GEN_LDST_WHOLE_TRANS(vl1re16_v, 1, 2)
+-GEN_LDST_WHOLE_TRANS(vl1re32_v, 1, 4)
+-GEN_LDST_WHOLE_TRANS(vl1re64_v, 1, 8)
+-GEN_LDST_WHOLE_TRANS(vl2re8_v,  2, 1)
+-GEN_LDST_WHOLE_TRANS(vl2re16_v, 2, 2)
+-GEN_LDST_WHOLE_TRANS(vl2re32_v, 2, 4)
+-GEN_LDST_WHOLE_TRANS(vl2re64_v, 2, 8)
+-GEN_LDST_WHOLE_TRANS(vl4re8_v,  4, 1)
+-GEN_LDST_WHOLE_TRANS(vl4re16_v, 4, 2)
+-GEN_LDST_WHOLE_TRANS(vl4re32_v, 4, 4)
+-GEN_LDST_WHOLE_TRANS(vl4re64_v, 4, 8)
+-GEN_LDST_WHOLE_TRANS(vl8re8_v,  8, 1)
+-GEN_LDST_WHOLE_TRANS(vl8re16_v, 8, 2)
+-GEN_LDST_WHOLE_TRANS(vl8re32_v, 8, 4)
+-GEN_LDST_WHOLE_TRANS(vl8re64_v, 8, 8)
++GEN_LDST_WHOLE_TRANS(vl1re8_v,  1)
++GEN_LDST_WHOLE_TRANS(vl1re16_v, 1)
++GEN_LDST_WHOLE_TRANS(vl1re32_v, 1)
++GEN_LDST_WHOLE_TRANS(vl1re64_v, 1)
++GEN_LDST_WHOLE_TRANS(vl2re8_v,  2)
++GEN_LDST_WHOLE_TRANS(vl2re16_v, 2)
++GEN_LDST_WHOLE_TRANS(vl2re32_v, 2)
++GEN_LDST_WHOLE_TRANS(vl2re64_v, 2)
++GEN_LDST_WHOLE_TRANS(vl4re8_v,  4)
++GEN_LDST_WHOLE_TRANS(vl4re16_v, 4)
++GEN_LDST_WHOLE_TRANS(vl4re32_v, 4)
++GEN_LDST_WHOLE_TRANS(vl4re64_v, 4)
++GEN_LDST_WHOLE_TRANS(vl8re8_v,  8)
++GEN_LDST_WHOLE_TRANS(vl8re16_v, 8)
++GEN_LDST_WHOLE_TRANS(vl8re32_v, 8)
++GEN_LDST_WHOLE_TRANS(vl8re64_v, 8)
+ 
+ /*
+  * The vector whole register store instructions are encoded similar to
+  * unmasked unit-stride store of elements with EEW=8.
+  */
+-GEN_LDST_WHOLE_TRANS(vs1r_v, 1, 1)
+-GEN_LDST_WHOLE_TRANS(vs2r_v, 2, 1)
+-GEN_LDST_WHOLE_TRANS(vs4r_v, 4, 1)
+-GEN_LDST_WHOLE_TRANS(vs8r_v, 8, 1)
++GEN_LDST_WHOLE_TRANS(vs1r_v, 1)
++GEN_LDST_WHOLE_TRANS(vs2r_v, 2)
++GEN_LDST_WHOLE_TRANS(vs4r_v, 4)
++GEN_LDST_WHOLE_TRANS(vs8r_v, 8)
+ 
+ /*
+  *** Vector Integer Arithmetic Instructions
 diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 34ac4aa808..bcc553c0e2 100644
+index bcc553c0e2..1f4c276b21 100644
 --- a/target/riscv/vector_helper.c
 +++ b/target/riscv/vector_helper.c
-@@ -5075,6 +5075,11 @@ void HELPER(vmvr_v)(void *vd, void *vs2, CPURISCVState *env, uint32_t desc)
-     uint32_t startb = env->vstart * sewb;
-     uint32_t i = startb;
+@@ -572,6 +572,11 @@ vext_ldst_whole(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
+     uint32_t vlenb = riscv_cpu_cfg(env)->vlenb;
+     uint32_t max_elems = vlenb >> log2_esz;
  
-+    if (startb >= maxsz) {
++    if (env->vstart >= ((vlenb * nf) >> log2_esz)) {
 +        env->vstart = 0;
 +        return;
 +    }
 +
-     if (HOST_BIG_ENDIAN && i % 8 != 0) {
-         uint32_t j = ROUND_UP(i, 8);
-         memcpy((uint8_t *)vd + H1(j - 1),
+     k = env->vstart / max_elems;
+     off = env->vstart % max_elems;
+ 
 -- 
 2.44.0
 
