@@ -4,78 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39939C54E60
-	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Mar 2024 19:01:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00FA2C54E5D
+	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Mar 2024 19:01:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rkqJG-0000ru-Rf; Thu, 14 Mar 2024 15:00:10 -0400
+	id 1rkqJY-0000wh-Os; Thu, 14 Mar 2024 15:00:28 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <hchauhan@ventanamicro.com>)
- id 1rkqJD-0000py-RM
- for qemu-riscv@nongnu.org; Thu, 14 Mar 2024 15:00:07 -0400
-Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
+ id 1rkqJJ-0000u7-RU
+ for qemu-riscv@nongnu.org; Thu, 14 Mar 2024 15:00:14 -0400
+Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <hchauhan@ventanamicro.com>)
- id 1rkqJA-00011e-QQ
- for qemu-riscv@nongnu.org; Thu, 14 Mar 2024 15:00:07 -0400
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-1dd8ee2441dso2049115ad.1
- for <qemu-riscv@nongnu.org>; Thu, 14 Mar 2024 12:00:04 -0700 (PDT)
+ id 1rkqJI-0001Bw-8n
+ for qemu-riscv@nongnu.org; Thu, 14 Mar 2024 15:00:13 -0400
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-1dde367a10aso1049945ad.0
+ for <qemu-riscv@nongnu.org>; Thu, 14 Mar 2024 12:00:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1710442802; x=1711047602; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=HHPCIYM44KkcXHE/rBdEnHoegFOSU8UID+9T1jpR0WE=;
- b=DSDrhrAdrCTtRkXwtpeiJdhZJ7qtMvZKNwcRCBVDZla3tk4CSrpGH0DVuISx55J0bu
- bgQJMwOz3gkhAPSJBCYoZetNQDZfHC77kUyEQK/5JpIxFiXY1e0JHaHcrV7DoHwg1Kn6
- ifuGgA/AzKTBYcn7cGZ90C9i2jYZmoNuUd99q3RIAnDjbTU4a5chlup+reeEwVj2wUcB
- 90Q1eGDnR0ZOqw0kSc8lSzy0sgtbe9/g6NeoHRU39SEtEuSd4SFXih9Jon7mbOFgycJB
- RMq0/ObhE5JhbqbWvaSXO2HeoPU+yXNUBRt+ZyvL/JAtoKKqK/eWLRCciv+sIdXNl/Es
- z/Sg==
+ d=ventanamicro.com; s=google; t=1710442810; x=1711047610; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7PdUtes9ZeJi0r/RaS+r6xezQWnZNbnpGDB/vC3+/Kw=;
+ b=jEEmYD4DFCU7O4aXkOZocF4O/RdqG/9+HP08Nqc2/DKcvQCpjeUaSWdMY35G0e/V8W
+ uP0rxmuJyQFrlLF7ypQXrZh++f2pqAneBLoLbrbTLQ2zf/cisQnriIFT2G44AB+Mq48Z
+ ePe4NNnFwa6zWq/rqttkPGS0HfE2SLHJjkARKOeYjfvMBXYfVJAbQntbM5rnWzMhA9vi
+ 2L9Iwj4UPVEdBlxWC0QiZlThIsB+ABJ0HWOW8dGZzeaCqDuRiTYIMOYMWtznrmmrgqFz
+ aEbrKzr6ASeT1xZS7ND8a8M+aubsk+28PPpz4Cj4k9UX1L0gpjROW7kkX+ygX3sJ5qKm
+ QWpg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710442802; x=1711047602;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=HHPCIYM44KkcXHE/rBdEnHoegFOSU8UID+9T1jpR0WE=;
- b=wseRXAyHp9XOtjrQaXkmYh8jFv1dVAAgYdoQqvrQF8fuH1ByG15FLsOaHt+WbT2RKG
- djUXMuL2oEW5jKvvaTaYnnSGQm/EoQ1FrLkCwB1LpeOkSe3SMEQqPD3ix8pqKOYYke+w
- ZNd5VEFE9e/81RJZJ+0JWftEesmfatANvpjD47yDDD4WVeGioQ2IQ4Zbku11kw+w1bSX
- U5iMzL5eszSloN2CcszwAl0TRbqtkzUWijFdhg1c8KPOIg4lXTrm0WJ7EspxterJCYhe
- WxKvBZmbn7j4QTPhDH1Eu4MP+B5KTGCd6uVnu8QxIHek4iFRZJZVLhIBqYcLeCzLmlmy
- 3fZA==
-X-Gm-Message-State: AOJu0Yyn1LHHweK8R3PX2at5pwfrNqdhONt8Dwx1E6i5qwk0vXEa+RrX
- h/ifeMIMBegOJUjKV2Xwr0uBGu1fktFI4JRP0yNws98wvty8yiyqa2FsMeSQsx3KponpsVwV5Qh
- AfLA=
-X-Google-Smtp-Source: AGHT+IFkWLwIAp45mKcewWb+uxXWoJYX00+/o/qnSdPv5ODCnMzx727kg8ZviBHRHHTtbZGSfQBl+g==
-X-Received: by 2002:a17:903:186:b0:1dd:6f1a:2106 with SMTP id
- z6-20020a170903018600b001dd6f1a2106mr2967041plg.0.1710442802008; 
- Thu, 14 Mar 2024 12:00:02 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1710442810; x=1711047610;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=7PdUtes9ZeJi0r/RaS+r6xezQWnZNbnpGDB/vC3+/Kw=;
+ b=spvKx178HaQGF4S2WI4pA0RrH7/HnNKd3S177S+MahrgKeo8IV97qNyWv1riRojVAC
+ S+DrY5m7EHbFqQHZcDs6fJsh4qD9hno1g/0Mu0jfudOtPJhiDqiVQgazC4xsXWCzQXBa
+ s1HmMumrlW7IMP7byBSVtPuXq3D6TI11n28Dp4B0FcJJxRzxiBznBC+PFBt1IRMN6HFk
+ 0/t08YT5VsEOugxA9Jo44aFLLDq81FgpNby9EQ5b7PSeFYSbnfODUhy/1AIwWtMOsDEL
+ YMT6joezKNG2V038+h2xFiRmsZKvZESn4gwyoSrca2mo18ShsiWhIRzeg9UF4ZleAiQ0
+ Z7Jw==
+X-Gm-Message-State: AOJu0YymEY5B07HBrKCCWPTMHPNVf6DeTZUtn8U+reVk5N/xCaUVFQi7
+ CdnNNTYUkSzvBDkjP3V3uA6nI6z5P+0KND5J+KFRao2EwMNejUVnIWDGriBvoJOkWx08xJGRpvx
+ YTas=
+X-Google-Smtp-Source: AGHT+IFQHmlW28X5dP8uE7vZ3eMNuwm37pY0qeYuTiWzScGee5MtyP3VzZO8uKn4iD58GGZEN/95WA==
+X-Received: by 2002:a17:903:1386:b0:1de:ddc6:27a6 with SMTP id
+ jx6-20020a170903138600b001deddc627a6mr2193638plb.2.1710442810384; 
+ Thu, 14 Mar 2024 12:00:10 -0700 (PDT)
 Received: from aryabhatta.. ([49.37.251.185]) by smtp.gmail.com with ESMTPSA id
- e8-20020a170902784800b001dd1096e365sm2105732pln.281.2024.03.14.11.59.59
+ e8-20020a170902784800b001dd1096e365sm2105732pln.281.2024.03.14.12.00.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Mar 2024 12:00:01 -0700 (PDT)
+ Thu, 14 Mar 2024 12:00:09 -0700 (PDT)
 From: Himanshu Chauhan <hchauhan@ventanamicro.com>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
 Cc: ajones@ventanamicro.com
-Subject: [PATCH v7 0/4] Introduce sdtrig ISA extension
-Date: Fri, 15 Mar 2024 00:29:53 +0530
-Message-Id: <20240314185957.36940-1-hchauhan@ventanamicro.com>
+Subject: [PATCH v7 4/4] target/riscv: Enable sdtrig for Ventana's Veyron CPUs
+Date: Fri, 15 Mar 2024 00:29:57 +0530
+Message-Id: <20240314185957.36940-5-hchauhan@ventanamicro.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240314185957.36940-1-hchauhan@ventanamicro.com>
+References: <20240314185957.36940-1-hchauhan@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
- envelope-from=hchauhan@ventanamicro.com; helo=mail-pl1-x632.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
+ envelope-from=hchauhan@ventanamicro.com; helo=mail-pl1-x630.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -91,66 +94,26 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-All the CPUs may or may not implement the debug triggers. Some CPUs
-may implement only debug specification v0.13 and not sdtrig ISA
-extension.
+Ventana's Veyron CPUs support sdtrig ISA extension. By default, enable
+the sdtrig extension and disable the debug property for these CPUs.
 
-This patchset, adds sdtrig ISA as an extension which can be turned on or off by
-sdtrig=<true/false> option. It is turned off by default.
+Signed-off-by: Himanshu Chauhan <hchauhan@ventanamicro.com>
+---
+ target/riscv/cpu.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-When debug is true and sdtrig is false, the behaviour is as defined in debug
-specification v0.13. If sdtrig is turned on, the behaviour is as defined
-in the sdtrig ISA extension.
-
-The "sdtrig" string is concatenated to ISA string when debug or sdtrig is enabled.
-
-Changes from v1:
-  - Replaced the debug property with ext_sdtrig
-  - Marked it experimenatal by naming it x-sdtrig
-  - x-sdtrig is added to ISA string
-  - Reversed the patch order
-
-Changes from v2:
-  - Mark debug property as deprecated and replace internally with sdtrig extension
-  - setting/unsetting debug property shows warning and sets/unsets ext_sdtrig
-  - sdtrig is added to ISA string as RISC-V debug specification is frozen
-
-Changes from v3:
-  - debug propery is not deprecated but it is superceded by sdtrig extension
-  - Mcontrol6 support is not published when only debug property is turned
-    on as debug spec v0.13 doesn't define mcontrol6 match triggers.
-  - Enabling sdtrig extension turns of debug property and a warning is printed.
-    This doesn't break debug specification implemenation since sdtrig is
-    backward compatible with debug specification.
-  - Disable debug property and enable sdtrig by default for Ventana's Veyron
-    CPUs.
-
-Changes from v4:
-  - Enable debug flag if sdtrig was enabled but debug was disabled.
-  - Other cosmetic changes.
-
-Changes from v5:
-  - Addressed comments from Andrew Jones
-
-Changes from v6:
-  - Cosmetic changes. All patches were run through checkpatch.pl.
-    No errors/warning.
-  - Remove all debug || ext_sdtrig references. All decisions are based on
-    debug flag alone
-  - Added null check before itimers are deleted. Without this check a
-    crash is observed.
-
-Himanshu Chauhan (4):
-  target/riscv: Check for valid itimer pointer before free
-  target/riscv: Enable mcontrol6 triggers only when sdtrig is selected
-  target/riscv: Expose sdtrig ISA extension
-  target/riscv: Enable sdtrig for Ventana's Veyron CPUs
-
- target/riscv/cpu.c     |  8 ++++++++
- target/riscv/cpu_cfg.h |  1 +
- target/riscv/debug.c   | 35 +++++++++++++++++++++++++++++------
- 3 files changed, 38 insertions(+), 6 deletions(-)
-
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 4231f36c1b..c9dda73748 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -569,6 +569,7 @@ static void rv64_veyron_v1_cpu_init(Object *obj)
+     cpu->cfg.cbom_blocksize = 64;
+     cpu->cfg.cboz_blocksize = 64;
+     cpu->cfg.ext_zicboz = true;
++    cpu->cfg.ext_sdtrig = true;
+     cpu->cfg.ext_smaia = true;
+     cpu->cfg.ext_ssaia = true;
+     cpu->cfg.ext_sscofpmf = true;
 -- 
 2.34.1
 
