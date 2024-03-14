@@ -4,60 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23C2DC5475B
-	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Mar 2024 06:25:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D206CC5475B
+	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Mar 2024 06:56:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rkeWf-0008PA-3h; Thu, 14 Mar 2024 02:25:13 -0400
+	id 1rkf0e-00051C-8d; Thu, 14 Mar 2024 02:56:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <eric.huang@linux.alibaba.com>)
- id 1rkeWQ-0008M7-D3; Thu, 14 Mar 2024 02:25:01 -0400
-Received: from out30-132.freemail.mail.aliyun.com ([115.124.30.132])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <eric.huang@linux.alibaba.com>)
- id 1rkeWL-000767-PN; Thu, 14 Mar 2024 02:24:56 -0400
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rkf0Z-000501-DK
+ for qemu-riscv@nongnu.org; Thu, 14 Mar 2024 02:56:07 -0400
+Received: from mail-ed1-x532.google.com ([2a00:1450:4864:20::532])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rkf0U-00059J-RY
+ for qemu-riscv@nongnu.org; Thu, 14 Mar 2024 02:56:07 -0400
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-56845954ffeso690696a12.2
+ for <qemu-riscv@nongnu.org>; Wed, 13 Mar 2024 23:56:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux.alibaba.com; s=default;
- t=1710397483; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
- bh=gkZ2JKgHmGfwdXaPP6ejg6e6s5RdT1YrIKO+WB+VtdE=;
- b=H420l9ZUuxGEepq+66XmL5iJk0xifmYxJrPuY22yQmGILRlY+AXmYJ9ruXcOHkJuWP/U78Vj4bpKnbKSgmbYFYv6nT15pNJ1kh2LJfYCqYSWcVVaYogplNEi0SRNgZ3F5yMiz1yrnKWoUnFcF0DMSDoRDG7bWa9+pXOxT/eZBeU=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R101e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045176;
- MF=eric.huang@linux.alibaba.com; NM=1; PH=DS; RN=10; SR=0;
- TI=SMTPD_---0W2RPoeV_1710397479; 
-Received: from 30.21.185.204(mailfrom:eric.huang@linux.alibaba.com
- fp:SMTPD_---0W2RPoeV_1710397479) by smtp.aliyun-inc.com;
- Thu, 14 Mar 2024 14:24:40 +0800
-Message-ID: <e5a3cb94-b45d-476a-9d83-04e47ace7c2b@linux.alibaba.com>
-Date: Thu, 14 Mar 2024 14:24:38 +0800
+ d=linaro.org; s=google; t=1710399359; x=1711004159; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=OoRN8P3vPwGYPfJkKxlvnqFCqIX6kQhkspBgssYnqoM=;
+ b=JmB7HbkbWXLgpitMhRXfGyR2RMVxqWZuRdVa/CSowzUT4nieBmXPJUVFqjxQSLT1wv
+ zjBd8tXABSv7Mb/h7EcqMeyna7e5SjOiqvwGp/R6xQRr/ecNg5G8NGY4GtSorBoOHEKc
+ NZg5hBtQUgYhzPpCOChSF+ZaRxzjmGWKOrq4XTA7ezk/0anJfUGr4EDrOUfw4v8WCfao
+ 7Ut+c/aNp+8SiLJy9PAsdWUGSTiju8QcjwhsjugcoAxvy7Efg68Ru/f0yuVW912ON3ZN
+ ghCx/bBQ4Hw+y0FjP2gEcs03fDxbLJH0ydWL5hzZOc4s0u2BmeGYO/9bZEaL3o3CPvPz
+ WK7g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710399359; x=1711004159;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=OoRN8P3vPwGYPfJkKxlvnqFCqIX6kQhkspBgssYnqoM=;
+ b=QOWyAwmJlvAlN6JqL9s6m3ErCpfUKMddg/JAAM09WBSFxkeouEOfhKmEU8uonMQ0zb
+ MIQCb5NlZoDrUhvRMYfPl6lsgaCytYG2JTnp/0P8GvXc6vfECaVxuSIhoE+vnF17uMf2
+ mg/xKncwTBcKMjyJRbQriO5V/n2lSFxDdCDY2+sn267VcXmMOa8gQvz7N57eBmkdMZdU
+ h5mupXQT2U7/8czPaMQChT+ZbQMibUbxDMtcrUpiSeFjkLfCnQDlD8SIeCDCAcqw3bRm
+ uZWykZQoz5IG9/A+FXIbA2MteyXpWF+YnqMm2HEliFXm2N3LQxZOmHGRAO1/mTH5LD4r
+ GjdA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWFPFLYQc6EfSObjTi6E2yuyHHvaUJDuwuv913YwrDc+lHq9Ouh0HNITAWUu5Q6CfYnLs1915Z7VJlbqkqRv2T3905m8FQ=
+X-Gm-Message-State: AOJu0YwOORWRPiY4I5a8krzMB4EcJk4cJQmMrh2ADvmSXN/jldfl8FH6
+ mBQnJi/j81yCLf3X5uD4DrDXIMQE0hwIev9ovfB9n7OGonrHFiIl1yFITrj2JKA=
+X-Google-Smtp-Source: AGHT+IEKdzTTtqBP0uQKkwakXdbDB9fVFfya0HI+F2S/Bxp99eTGmQ756JVudKC/1mIOs5CALfZ7Iw==
+X-Received: by 2002:a17:907:a4c3:b0:a44:4c7e:fc07 with SMTP id
+ vq3-20020a170907a4c300b00a444c7efc07mr468869ejc.0.1710399359166; 
+ Wed, 13 Mar 2024 23:55:59 -0700 (PDT)
+Received: from [192.168.69.100] ([176.176.175.89])
+ by smtp.gmail.com with ESMTPSA id
+ en2-20020a17090728c200b00a4674ad8ab9sm168216ejc.211.2024.03.13.23.55.56
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 13 Mar 2024 23:55:58 -0700 (PDT)
+Message-ID: <2fe169fc-1a41-44ff-b829-82b5c23f9344@linaro.org>
+Date: Thu, 14 Mar 2024 07:55:55 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] target/riscv: Implement dynamic establishment of
- custom decoder
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org, dbarboza@ventanamicro.com
-Cc: qemu-riscv@nongnu.org, zhiwei_liu@linux.alibaba.com, liwei1518@gmail.com, 
- bin.meng@windriver.com, alistair.francis@wdc.com, palmer@dabbelt.com,
- Christoph Muellner <christoph.muellner@vrull.eu>
-References: <20240313095715.32811-1-eric.huang@linux.alibaba.com>
- <1ae334d6-f009-4e80-bf09-0500fa3486a9@linaro.org>
-From: Huang Tao <eric.huang@linux.alibaba.com>
-In-Reply-To: <1ae334d6-f009-4e80-bf09-0500fa3486a9@linaro.org>
+Subject: Re: [PATCH v2 1/1] target/riscv/kvm: fix timebase-frequency when
+ using KVM acceleration
+Content-Language: en-US
+To: Yong-Xuan Wang <yongxuan.wang@sifive.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: greentime.hu@sifive.com, vincent.chen@sifive.com, frank.chang@sifive.com, 
+ jim.shu@sifive.com, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Andrew Jones <ajones@ventanamicro.com>
+References: <20240314061510.9800-1-yongxuan.wang@sifive.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20240314061510.9800-1-yongxuan.wang@sifive.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.132;
- envelope-from=eric.huang@linux.alibaba.com;
- helo=out30-132.freemail.mail.aliyun.com
-X-Spam_score_int: -174
-X-Spam_score: -17.5
-X-Spam_bar: -----------------
-X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+Received-SPF: pass client-ip=2a00:1450:4864:20::532;
+ envelope-from=philmd@linaro.org; helo=mail-ed1-x532.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -73,65 +103,29 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
+On 14/3/24 07:15, Yong-Xuan Wang wrote:
+> The timebase-frequency of guest OS should be the same with host
+> machine. The timebase-frequency value in DTS should be got from
+> hypervisor when using KVM acceleration.
+> 
+> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+> Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+> 
+> ---
+> Changelog
+> v2:
+> - update the function definition
+> - restructure if-else statement
 
-On 2024/3/13 18:47, Philippe Mathieu-Daudé wrote:
->
->> +{
->> +    GPtrArray *dynamic_decoders;
->> +    dynamic_decoders = g_ptr_array_sized_new(decoder_table_size);
->> +    for (size_t i = 0; i < decoder_table_size; ++i) {
->> +        if (decoder_table[i].guard_func &&
->> +            decoder_table[i].guard_func(&cpu->cfg)) {
->> +            g_ptr_array_add(dynamic_decoders,
->> + (gpointer)decoder_table[i].decode_fn);
->> +        }
->> +    }
->> +
->> +    cpu->decoders = dynamic_decoders;
->> +}
->
-> Move this function to translate.c and make decoder_table[] static.
-> Then we don't need the "cpu_decoder.h", it is specific to TCG and
-> declarations go in "target/riscv/tcg/tcg-cpu.h".
->
-This function is about finalizing the feature of cpu, it is not suitable 
-to move it to translate.c from the perspective of code structure and 
-readability.
+Thanks!
 
-I will try to move the function to tcg-cpu.c, and the declarations to 
-tcg-cpu.h according to your suggestion.
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
->> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
->> index 177418b2b9..332f0bfd4e 100644
->> --- a/target/riscv/translate.c
->> +++ b/target/riscv/translate.c
->> @@ -115,6 +115,7 @@ typedef struct DisasContext {
->>       bool frm_valid;
->>       /* TCG of the current insn_start */
->>       TCGOp *insn_start;
->> +    const GPtrArray *decoders;
->
-> Why do we need this reference? We can use env_archcpu(env)->decoders.
->
-As Richard said before:
-
- > We try to avoid placing env into DisasContext, so that it is much 
-harder to make the mistake of referencing env fields at 
-translation-time, when you really needed to generate tcg code to 
-reference the fields at runtime.
-
-It also applies to the ArchCPU case.
-
-
-Thanks to your review, I will adopt the other suggestions in the next 
-version.
-
-
-Thanks,
-
-Huang Tao
-
+> ---
+>   hw/riscv/virt.c              | 2 ++
+>   target/riscv/kvm/kvm-cpu.c   | 9 +++++++++
+>   target/riscv/kvm/kvm_riscv.h | 1 +
+>   3 files changed, 12 insertions(+)
 
 
 
