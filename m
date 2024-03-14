@@ -4,58 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5676DC54E5D
-	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Mar 2024 09:23:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57657C5475B
+	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Mar 2024 09:44:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rkhIG-0003mu-Jm; Thu, 14 Mar 2024 05:22:32 -0400
+	id 1rkhcn-00039P-Mc; Thu, 14 Mar 2024 05:43:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <eric.huang@linux.alibaba.com>)
- id 1rkhI9-0003kJ-UZ; Thu, 14 Mar 2024 05:22:26 -0400
-Received: from out30-118.freemail.mail.aliyun.com ([115.124.30.118])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <eric.huang@linux.alibaba.com>)
- id 1rkhI6-0007kf-Kv; Thu, 14 Mar 2024 05:22:25 -0400
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rkhcf-00038d-JX
+ for qemu-riscv@nongnu.org; Thu, 14 Mar 2024 05:43:38 -0400
+Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rkhcZ-0003F3-7S
+ for qemu-riscv@nongnu.org; Thu, 14 Mar 2024 05:43:36 -0400
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-1dd9b6098aeso5653055ad.0
+ for <qemu-riscv@nongnu.org>; Thu, 14 Mar 2024 02:43:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux.alibaba.com; s=default;
- t=1710408132; h=From:To:Subject:Date:Message-ID:MIME-Version;
- bh=8AVRS8kdGDxvhZ7lJ3E08rqjLlrzW7JeEhjy+paRXxQ=;
- b=I/RFnLuvEeG8tVAUAYNaqSvhm8G4TmZCK9pl38a4Y05pA7clPOOCl1Te+HwaPJbp2vLvpsgvIUWyqj6HMbhiK1eSlhS9am6fv12wAJBYyZjmSzU7pxmL90OoclGFMX8rlmBhK/LKRVBkzOrCA1PgipJy3X4vp+HCM4SxG+iNT5o=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R481e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046056;
- MF=eric.huang@linux.alibaba.com; NM=1; PH=DS; RN=11; SR=0;
- TI=SMTPD_---0W2S0TRv_1710408129; 
-Received: from localhost.localdomain(mailfrom:eric.huang@linux.alibaba.com
- fp:SMTPD_---0W2S0TRv_1710408129) by smtp.aliyun-inc.com;
- Thu, 14 Mar 2024 17:22:10 +0800
-From: Huang Tao <eric.huang@linux.alibaba.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, zhiwei_liu@linux.alibaba.com,
- dbarboza@ventanamicro.com, liwei1518@gmail.com, bin.meng@windriver.com,
- alistair.francis@wdc.com, palmer@dabbelt.com,
- Huang Tao <eric.huang@linux.alibaba.com>,
- Christoph Muellner <christoph.muellner@vrull.eu>,
- Richard Henderson <richard.henderson@linaro.org>
-Subject: [PATCH v4] target/riscv: Implement dynamic establishment of custom
- decoder
-Date: Thu, 14 Mar 2024 17:21:58 +0800
-Message-ID: <20240314092158.65866-1-eric.huang@linux.alibaba.com>
-X-Mailer: git-send-email 2.41.0
+ d=ventanamicro.com; s=google; t=1710409410; x=1711014210; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=gaaAbTA5tRV4gPMsmIao5ciBCQXEY+DwURHPabcNaM0=;
+ b=ZLt3Huk09/9e1b6crorO5b7ZqRwQTdVCynaBXBocChM3hY0+g5rHFVZqbQkVOYn1Fi
+ xFanOA5Q94BXWYDhBJieenMC6Vx9P7w5nZThbIvs7vpmYk0zVD6f9wLbUIR+r9ol9pJ7
+ Cg/SJKo9NpekJ7HPKqqugcEL3Vf5oXM2qnlYCQRJkBqfvaaq6ou0/L6XU588OxwXfFam
+ +39FfjIyMJV9ytyl7QGphauAFKk51z4/u0ISKcrfyyS0SiNg8dpBF6sK/ZImb6ypsJPa
+ wqDRA3QvGP89lBkHWk5/aMD+q4mJk3AsnAJbf7/A8leXkBcscH3KhDZHRIfQv38Ll6UI
+ gndg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710409410; x=1711014210;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=gaaAbTA5tRV4gPMsmIao5ciBCQXEY+DwURHPabcNaM0=;
+ b=qB7QPicMx4CVeLAgq1tL6YfKj/verYBRAweaS9n34Ki5oIzdb7kylKZot8WieoglH5
+ K/SHwvsjYmfxxthgARbwgJ+iJDIO6Di1Oec69P61cjuhnhJdanBWUhuRZXpcJRaB2Qy6
+ gpnp6T94nu54zr9knZ6tUf0ZihjgVluurVETJ4u4fJCw5asQjsk/BFczjv9Bdey+9KG8
+ j04p9X+VNDjat3azjgrKh8S81Z2RyEovrSnOwYBJgNTVsxH1GYZiOYcs6YKTr/1P4zRq
+ K7e+LNJwFPsOzpPr/H1ucMRdIi7PH8KD6PU+xMwrN3UCMYnJTxp96iWI3DThfNMqO4dv
+ ayJw==
+X-Gm-Message-State: AOJu0YwKNBeoPPtVRBO36dLDAiaEQPjXzVcPfnx5Ut/AoA1LPdamXUnB
+ To7U1dnydkbAz1vJ1Im+2uR4G4BvTfBwlesUnZ7r78YmJVOLs5COYXhAQEa5U40=
+X-Google-Smtp-Source: AGHT+IGIbT5EU5fNi33lChcBypdVgNN+LyLjxikF1yS4RNTJ/MAgwja07Jx+wneJYXHlPaL8ulpGDw==
+X-Received: by 2002:a17:902:7202:b0:1dc:d515:79c8 with SMTP id
+ ba2-20020a170902720200b001dcd51579c8mr1149710plb.23.1710409409668; 
+ Thu, 14 Mar 2024 02:43:29 -0700 (PDT)
+Received: from [192.168.68.110] ([177.94.15.159])
+ by smtp.gmail.com with ESMTPSA id
+ u11-20020a170902e5cb00b001dc01efaec2sm1218212plf.168.2024.03.14.02.43.27
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 14 Mar 2024 02:43:29 -0700 (PDT)
+Message-ID: <b16862a5-f1ea-47ce-bd6a-70c2146b9bc4@ventanamicro.com>
+Date: Thu, 14 Mar 2024 06:43:25 -0300
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH for-9.0 v14 3/8] target/riscv: always clear vstart in
+ whole vec move insns
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ philmd@linaro.org
+References: <20240313220141.427730-1-dbarboza@ventanamicro.com>
+ <20240313220141.427730-4-dbarboza@ventanamicro.com>
+ <5f882160-fdec-4f28-af23-3bda8bcb186b@linaro.org>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <5f882160-fdec-4f28-af23-3bda8bcb186b@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.118;
- envelope-from=eric.huang@linux.alibaba.com;
- helo=out30-118.freemail.mail.aliyun.com
-X-Spam_score_int: -174
-X-Spam_score: -17.5
-X-Spam_bar: -----------------
-X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x633.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -71,192 +100,91 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-In this patch, we modify the decoder to be a freely composable data
-structure instead of a hardcoded one. It can be dynamically builded up
-according to the extensions.
-This approach has several benefits:
-1. Provides support for heterogeneous cpu architectures. As we add decoder in
-   RISCVCPU, each cpu can have their own decoder, and the decoders can be
-   different due to cpu's features.
-2. Improve the decoding efficiency. We run the guard_func to see if the decoder
-   can be added to the dynamic_decoder when building up the decoder. Therefore,
-   there is no need to run the guard_func when decoding each instruction. It can
-   improve the decoding efficiency
-3. For vendor or dynamic cpus, it allows them to customize their own decoder
-   functions to improve decoding efficiency, especially when vendor-defined
-   instruction sets increase. Because of dynamic building up, it can skip the other
-   decoder guard functions when decoding.
-4. Pre patch for allowing adding a vendor decoder before decode_insn32() with minimal
-   overhead for users that don't need this particular vendor decoder.
 
-Signed-off-by: Huang Tao <eric.huang@linux.alibaba.com>
-Suggested-by: Christoph Muellner <christoph.muellner@vrull.eu>
-Co-authored-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
----
-Changes in v4:
-- fix typo
-- rename function
-- add 'if tcg_enable()'
-- move function to tcg-cpu.c and declarations to tcg-cpu.h
 
-Changes in v3:
-- use GPtrArray to save decode function poionter list.
----
- target/riscv/cpu.c         |  1 +
- target/riscv/cpu.h         |  1 +
- target/riscv/tcg/tcg-cpu.c | 15 +++++++++++++++
- target/riscv/tcg/tcg-cpu.h | 15 +++++++++++++++
- target/riscv/translate.c   | 31 +++++++++++++++----------------
- 5 files changed, 47 insertions(+), 16 deletions(-)
+On 3/13/24 19:36, Richard Henderson wrote:
+> On 3/13/24 12:01, Daniel Henrique Barboza wrote:
+>> These insns have 2 paths: we'll either have vstart already cleared if
+>> vstart_eq_zero or we'll do a brcond to check if vstart >= maxsz to call
+>> the 'vmvr_v' helper. The helper will clear vstart if it executes until
+>> the end, or if vstart >= vl.
+>>
+>> However, if vstart >= maxsz, the helper will be skipped, and vstart
+>> won't be cleared since the helper is being responsible from doing it.
+>>
+>> We want to make the helpers responsible to manage vstart, including
+>> these corner cases, precisely to avoid these situations. Move the vstart
+>>> = maxsz cond to the helper, and be sure to clear vstart if that
+>> happens. This way we're now sure that vstart is being cleared in the end
+>> of the execution, regardless of the path taken.
+>>
+>> Fixes: f714361ed7 ("target/riscv: rvv-1.0: implement vstart CSR")
+>> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>> ---
+>>   target/riscv/insn_trans/trans_rvv.c.inc | 3 ---
+>>   target/riscv/vector_helper.c            | 5 +++++
+>>   2 files changed, 5 insertions(+), 3 deletions(-)
+>>
+>> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+>> index 8c16a9f5b3..52c26a7834 100644
+>> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+>> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+>> @@ -3664,12 +3664,9 @@ static bool trans_##NAME(DisasContext *s, arg_##NAME * a)               \
+>>                                vreg_ofs(s, a->rs2), maxsz, maxsz);        \
+>>               mark_vs_dirty(s);                                           \
+>>           } else {                                                        \
+>> -            TCGLabel *over = gen_new_label();                           \
+>> -            tcg_gen_brcondi_tl(TCG_COND_GEU, cpu_vstart, maxsz, over);  \
+>>               tcg_gen_gvec_2_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, a->rs2), \
+>>                                  tcg_env, maxsz, maxsz, 0, gen_helper_vmvr_v); \
+>>               mark_vs_dirty(s);                                           \
+>> -            gen_set_label(over);                                        \
+>>           }                                                               \
+>>           return true;                                                    \
+>>       }                                                                   \
+>> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+>> index ca79571ae2..cd8235ea98 100644
+>> --- a/target/riscv/vector_helper.c
+>> +++ b/target/riscv/vector_helper.c
+>> @@ -5075,6 +5075,11 @@ void HELPER(vmvr_v)(void *vd, void *vs2, CPURISCVState *env, uint32_t desc)
+>>       uint32_t startb = env->vstart * sewb;
+>>       uint32_t i = startb;
+>> +    if (env->vstart >= maxsz) {
+>> +        env->vstart = 0;
+>> +        return;
+>> +    }
+> 
+> I think you were right to be concerned about vlmax -- you need to use startb not vstart in this comparison, otherwise you've got mixed units on the comparison.
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index c160b9216b..17070b82a7 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1132,6 +1132,7 @@ void riscv_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
-             error_propagate(errp, local_err);
-             return;
-         }
-+        riscv_tcg_cpu_finalize_dynamic_decoder(cpu);
-     } else if (kvm_enabled()) {
-         riscv_kvm_cpu_finalize_features(cpu, &local_err);
-         if (local_err != NULL) {
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 3b1a02b944..48e67410e1 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -457,6 +457,7 @@ struct ArchCPU {
-     uint32_t pmu_avail_ctrs;
-     /* Mapping of events to counters */
-     GHashTable *pmu_event_ctr_map;
-+    const GPtrArray *decoders;
- };
- 
- /**
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index ab6db817db..c9ab92ea2f 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -853,6 +853,21 @@ void riscv_tcg_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
-     }
- }
- 
-+void riscv_tcg_cpu_finalize_dynamic_decoder(RISCVCPU *cpu)
-+{
-+    GPtrArray *dynamic_decoders;
-+    dynamic_decoders = g_ptr_array_sized_new(decoder_table_size);
-+    for (size_t i = 0; i < decoder_table_size; ++i) {
-+        if (decoder_table[i].guard_func &&
-+            decoder_table[i].guard_func(&cpu->cfg)) {
-+            g_ptr_array_add(dynamic_decoders,
-+                            (gpointer)decoder_table[i].riscv_cpu_decode_fn);
-+        }
-+    }
-+
-+    cpu->decoders = dynamic_decoders;
-+}
-+
- bool riscv_cpu_tcg_compatible(RISCVCPU *cpu)
- {
-     return object_dynamic_cast(OBJECT(cpu), TYPE_RISCV_CPU_HOST) == NULL;
-diff --git a/target/riscv/tcg/tcg-cpu.h b/target/riscv/tcg/tcg-cpu.h
-index f7b32417f8..ce94253fe4 100644
---- a/target/riscv/tcg/tcg-cpu.h
-+++ b/target/riscv/tcg/tcg-cpu.h
-@@ -26,4 +26,19 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp);
- void riscv_tcg_cpu_finalize_features(RISCVCPU *cpu, Error **errp);
- bool riscv_cpu_tcg_compatible(RISCVCPU *cpu);
- 
-+struct DisasContext;
-+struct RISCVCPUConfig;
-+typedef struct RISCVDecoder {
-+    bool (*guard_func)(const struct RISCVCPUConfig *);
-+    bool (*riscv_cpu_decode_fn)(struct DisasContext *, uint32_t);
-+} RISCVDecoder;
-+
-+typedef bool (*riscv_cpu_decode_fn)(struct DisasContext *, uint32_t);
-+
-+extern const size_t decoder_table_size;
-+
-+extern const RISCVDecoder decoder_table[];
-+
-+void riscv_tcg_cpu_finalize_dynamic_decoder(RISCVCPU *cpu);
-+
- #endif
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index ea5d52b2ef..bce16d5054 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -37,6 +37,8 @@
- #include "exec/helper-info.c.inc"
- #undef  HELPER_H
- 
-+#include "tcg/tcg-cpu.h"
-+
- /* global register indices */
- static TCGv cpu_gpr[32], cpu_gprh[32], cpu_pc, cpu_vl, cpu_vstart;
- static TCGv_i64 cpu_fpr[32]; /* assume F and D extensions */
-@@ -117,6 +119,7 @@ typedef struct DisasContext {
-     bool frm_valid;
-     /* TCG of the current insn_start */
-     TCGOp *insn_start;
-+    const GPtrArray *decoders;
- } DisasContext;
- 
- static inline bool has_ext(DisasContext *ctx, uint32_t ext)
-@@ -1120,21 +1123,16 @@ static inline int insn_len(uint16_t first_word)
-     return (first_word & 3) == 3 ? 4 : 2;
- }
- 
-+const RISCVDecoder decoder_table[] = {
-+    { always_true_p, decode_insn32 },
-+    { has_xthead_p, decode_xthead},
-+    { has_XVentanaCondOps_p, decode_XVentanaCodeOps},
-+};
-+
-+const size_t decoder_table_size = ARRAY_SIZE(decoder_table);
-+
- static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
- {
--    /*
--     * A table with predicate (i.e., guard) functions and decoder functions
--     * that are tested in-order until a decoder matches onto the opcode.
--     */
--    static const struct {
--        bool (*guard_func)(const RISCVCPUConfig *);
--        bool (*decode_func)(DisasContext *, uint32_t);
--    } decoders[] = {
--        { always_true_p,  decode_insn32 },
--        { has_xthead_p, decode_xthead },
--        { has_XVentanaCondOps_p,  decode_XVentanaCodeOps },
--    };
--
-     ctx->virt_inst_excp = false;
-     ctx->cur_insn_len = insn_len(opcode);
-     /* Check for compressed insn */
-@@ -1155,9 +1153,9 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
-                                              ctx->base.pc_next + 2));
-         ctx->opcode = opcode32;
- 
--        for (size_t i = 0; i < ARRAY_SIZE(decoders); ++i) {
--            if (decoders[i].guard_func(ctx->cfg_ptr) &&
--                decoders[i].decode_func(ctx, opcode32)) {
-+        for (guint i = 0; i < ctx->decoders->len; ++i) {
-+            riscv_cpu_decode_fn func = g_ptr_array_index(ctx->decoders, i);
-+            if (func(ctx, opcode32)) {
-                 return;
-             }
-         }
-@@ -1202,6 +1200,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
-     ctx->itrigger = FIELD_EX32(tb_flags, TB_FLAGS, ITRIGGER);
-     ctx->zero = tcg_constant_tl(0);
-     ctx->virt_inst_excp = false;
-+    ctx->decoders = cpu->decoders;
- }
- 
- static void riscv_tr_tb_start(DisasContextBase *db, CPUState *cpu)
--- 
-2.41.0
+Hm, so it seems like the comparison is broken in the translation today as well ...
 
+
+> 
+>>       memcpy((uint8_t *)vd + H1(i),
+>>              (uint8_t *)vs2 + H1(i),
+>>              maxsz - startb);
+> 
+> Unrelated to this patch series, this has a big-endian host error.
+> With big-endian, the bytes to be copied may not be sequential.
+
+We're going for v15. Might as well fix this too.
+
+At this point I'll rename the series to "riscv: vector fixes" since there's
+a lot of stuff going on.
+
+> 
+>      if (HOST_BIG_ENDIAN && i % 8 != 0) {
+>          uint32_t j = ROUND_UP(i, 8);
+>          memcpy(vd + H(j - 1), vs2 + H1(j - 1), j - i);
+>          i = j;
+>      }
+>      memcpy(vd + i, vs2 + i, maxsz - i);
+
+I'll do an extra patch with it. Thanks,
+
+Daniel
+
+> 
+> 
+> r~
 
