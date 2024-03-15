@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D543C54E67
-	for <qemu-riscv@archiver.kernel.org>; Fri, 15 Mar 2024 13:06:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6369C54E69
+	for <qemu-riscv@archiver.kernel.org>; Fri, 15 Mar 2024 13:06:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rl7Fw-0002kS-ED; Fri, 15 Mar 2024 09:05:52 -0400
+	id 1rl7G0-0002mj-Ss; Fri, 15 Mar 2024 09:05:56 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1rl7Fo-0002hx-QZ
+ id 1rl7Fs-0002jx-Ma
  for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:05:48 -0400
-Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
+Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1rl7Ff-0006FU-37
- for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:05:44 -0400
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-1dde2c0f769so13789955ad.3
- for <qemu-riscv@nongnu.org>; Fri, 15 Mar 2024 06:05:33 -0700 (PDT)
+ id 1rl7Fl-0006GW-RF
+ for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:05:48 -0400
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-1dd9568fc51so18532955ad.2
+ for <qemu-riscv@nongnu.org>; Fri, 15 Mar 2024 06:05:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1710507933; x=1711112733; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1710507938; x=1711112738; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PkDt8GM6nQ3pKknMgJXpLHP0C4rfjUmHwI1ZOZTyda8=;
- b=Og4TRqs3p2gmWrajxrKotIosWBcuRAAIwMAfsiKStUU9192FIbh76gt+ebeLCHwa4B
- wAPvoUTQdO9ia1abqtXxdKKUYzSXJAFeXrQWavfdg/T4m2uQpJoQRTmSSZVToiESOdc1
- IfABs+zj7V+7Ev0Lz1k0sU2WSCLGO7vXP89OwLxft31XCtb0F2AhrQgS4xwYjQ1bPMLr
- KySfNc/YKJ4yNpqJqFBQwnkvdaB9NN2hr0GB2Alv8iUw7lrqRMiX7D2urt/Pe3MfSWVZ
- rFAd6PcerCiT7NWOknhlISXJDe5CYyoa2FUMMrsN2VqJmdXIM4PwXfAEBPjzaJ3YmKld
- vK8w==
+ bh=XJnPsHFmkVMUnscQauDvD3T+tPj+dvrsErrOjqviBzw=;
+ b=OC0REzmUwSB0rpJcWVZ9MnDz416DTkFBIs+MZjrtmU/1ac+rEQAznreadnMfIPwEWa
+ jlVJgNRg/KaTGt/1YjxLAexMdOvNXDi3EDwRgSEO4oCAQs0T4uYQaSIraD59/xUjqGRJ
+ AM4Uwy9X4c3Mly0G94f7Ci6lIcjWVPt2TgZtIoEEvjP43L+ngYydh4aJ3Q46zQNnf3Z9
+ 0OJ0QkRAZ9j1BNSkFIrLB8Jh/iIUpFd93Z6DvFsLA4ScOKDtQtJLfCbpcfN0cMuON3t3
+ tn61EPGxEd6TxchkqleXnuMUAwO0meDNUfmu38PuhEhl+v9GxkdwJ0+x+eLOso0CsOzf
+ x5UQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710507933; x=1711112733;
+ d=1e100.net; s=20230601; t=1710507938; x=1711112738;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=PkDt8GM6nQ3pKknMgJXpLHP0C4rfjUmHwI1ZOZTyda8=;
- b=XyFAt5+tqVz7rIUbxCLk1ORg0ZeLw9+qQ6iMBy3TbXC9td92ImTEugfh4Gevd43XVj
- +/+Fdgi65tBcu7JyO7LxZOHIFDIXZywGC5Rahpsd8sxDy2Nk2vt2xrEj27fAEPsIOfgi
- uR2ICcc1XEyucynlUo2GhmQttsRPlCyNWat2i/PlkQy7/A/nXhYmRmes5YOeMbgis6m1
- X3xc2zi1Ncz8Wgammhhh68/XdsxZI43ZQYeIubNAk/HF8C+XSwws444i+RS7q1BHLtJr
- ua2hFc27hbvoMsZz7AY8N88NMsSnEWvZJsiFd1W7AfwO4kp4ZnQeOvrvXsr1pf63m/Ti
- tnQQ==
+ bh=XJnPsHFmkVMUnscQauDvD3T+tPj+dvrsErrOjqviBzw=;
+ b=ZWER7TZY9xt0m+Ktbfo1VODiK66HmCogG5p+FOLI+bdjJmIWZ0LuXHXtVncjBh0yEZ
+ zqAc3ofpF1eySJtOi/AOH3Xr1F0InFOcYAXmPWIoIH+KZRYjITyerdEMxVM5qjOkT1Yd
+ 2+v8Sh2KkykTcbup8TpZrrJK1o5h/Bypj40G8LE2nGWGM28XWQhfbP+kZLtRBNSVOmQc
+ chwEaroetV6sAi7+ZRwq5ZdGzKBljA0/O0gJwR4logBwRVXquFOVpM4tqwZIta4NoGMU
+ UcSTnlHGbQUUxeHL3uAj2bwZ9d1SuLW4xVv3AWIo5TTEO+H4R8NHoc1DscXh5uNrZqxt
+ Cp6Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX8FrPW9Vfu6ck2CLW03Q8fcnGmqXT93pknbqM6zzCneA04vW0otxn2Mcp/EDIEfmJHJdjIJVDn+UHWQtHgabKdTiQcbqo=
-X-Gm-Message-State: AOJu0YwGRCE2+UGLJ7dk1+BDZ3EZCQ1LPB8no7Zf9P5F7pTgy/LafR59
- X9L9gOsV1kmKD+BnZxUtg62wML1grLc6t2OzZjqasK0Z39XWcJPKE7hv45VK8wU=
-X-Google-Smtp-Source: AGHT+IEIMC5cNvmcK/Y+GmDmj1IPVhWbnEaZoJ1dxOLBHywHX9QgZZbtjMEUZpCRXht7yQnwZ0APlw==
-X-Received: by 2002:a17:902:c401:b0:1dd:7de5:7ac4 with SMTP id
- k1-20020a170902c40100b001dd7de57ac4mr6697522plk.38.1710507932709; 
- Fri, 15 Mar 2024 06:05:32 -0700 (PDT)
+ AJvYcCUbujNKpCZZ2DhIcrkfGmM/Vs+7XOh6EQVvZx7WadOfkyDUlzISLCS/7BIesdZxIJ9ZjndtzuU7Atmt0ffYGpxqDFOX900=
+X-Gm-Message-State: AOJu0Yx5gxB4ZVM3EuaYDLezhdt/H4RQpghw8NClP9Kcy1kYoaSQ2yvs
+ YguH0Ck0pRFxYoqk1VFXQXq5lIRJg/O0m15tXVF10dJFFpZdvIYxQExZVuSvdGQ=
+X-Google-Smtp-Source: AGHT+IGR4CJNSJneoElRe2BYuJWBHbkINrQPradDMaBz000VqXmCj9c4UZ+6JL8N0B8aUL2A6RFy8Q==
+X-Received: by 2002:a17:903:503:b0:1dd:bdf6:3746 with SMTP id
+ jn3-20020a170903050300b001ddbdf63746mr4177077plb.40.1710507937931; 
+ Fri, 15 Mar 2024 06:05:37 -0700 (PDT)
 Received: from sunil-pc.Dlink ([106.51.184.12])
  by smtp.gmail.com with ESMTPSA id
- lh12-20020a170903290c00b001defd3e64d6sm182474plb.22.2024.03.15.06.05.28
+ lh12-20020a170903290c00b001defd3e64d6sm182474plb.22.2024.03.15.06.05.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Mar 2024 06:05:32 -0700 (PDT)
+ Fri, 15 Mar 2024 06:05:37 -0700 (PDT)
 From: Sunil V L <sunilvl@ventanamicro.com>
 To: qemu-devel@nongnu.org,
 	qemu-arm@nongnu.org,
@@ -77,23 +77,23 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>,
  Andrew Jones <ajones@ventanamicro.com>,
  Anup Patel <apatel@ventanamicro.com>, Haibo1 Xu <haibo1.xu@intel.com>,
  Sunil V L <sunilvl@ventanamicro.com>
-Subject: [PATCH 01/12] roms/edk2-build.py: Add --module support
-Date: Fri, 15 Mar 2024 18:35:08 +0530
-Message-Id: <20240315130519.2378765-2-sunilvl@ventanamicro.com>
+Subject: [PATCH 02/12] uefi-test-tools/UefiTestToolsPkg: Add RISC-V support
+Date: Fri, 15 Mar 2024 18:35:09 +0530
+Message-Id: <20240315130519.2378765-3-sunilvl@ventanamicro.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20240315130519.2378765-1-sunilvl@ventanamicro.com>
 References: <20240315130519.2378765-1-sunilvl@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pl1-x633.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pl1-x62e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -109,28 +109,38 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-UefiTestToolsPkg which should use edk2-build.py needs --module parameter
-support. Add this optional parameter handling.
+Enable building the test application for RISC-V with appropriate
+dependencies updated.
 
 Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
 ---
- roms/edk2-build.py | 3 +++
- 1 file changed, 3 insertions(+)
+ tests/uefi-test-tools/UefiTestToolsPkg/UefiTestToolsPkg.dsc | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/roms/edk2-build.py b/roms/edk2-build.py
-index e564765aaa..3bfe200929 100755
---- a/roms/edk2-build.py
-+++ b/roms/edk2-build.py
-@@ -192,6 +192,9 @@ def build_one(cfg, build, jobs = None, silent = False, nologs = False):
-         cmdline += [ '-n', jobs ]
-     for arch in b['arch'].split():
-         cmdline += [ '-a', arch ]
-+    if 'module' in b:
-+        for module in b['module'].split():
-+            cmdline += [ '-m', module ]
-     if 'opts' in b:
-         for name in b['opts'].split():
-             section = 'opts.' + name
+diff --git a/tests/uefi-test-tools/UefiTestToolsPkg/UefiTestToolsPkg.dsc b/tests/uefi-test-tools/UefiTestToolsPkg/UefiTestToolsPkg.dsc
+index c8511cd732..0902fd3c73 100644
+--- a/tests/uefi-test-tools/UefiTestToolsPkg/UefiTestToolsPkg.dsc
++++ b/tests/uefi-test-tools/UefiTestToolsPkg/UefiTestToolsPkg.dsc
+@@ -19,7 +19,7 @@
+   PLATFORM_VERSION        = 0.1
+   PLATFORM_NAME           = UefiTestTools
+   SKUID_IDENTIFIER        = DEFAULT
+-  SUPPORTED_ARCHITECTURES = ARM|AARCH64|IA32|X64
++  SUPPORTED_ARCHITECTURES = ARM|AARCH64|IA32|X64|RISCV64
+   BUILD_TARGETS           = DEBUG
+ 
+ [BuildOptions.IA32]
+@@ -60,6 +60,10 @@
+ 
+ [LibraryClasses.IA32, LibraryClasses.X64]
+   BaseMemoryLib|MdePkg/Library/BaseMemoryLibRepStr/BaseMemoryLibRepStr.inf
++  RegisterFilterLib|MdePkg/Library/RegisterFilterLibNull/RegisterFilterLibNull.inf
++
++[LibraryClasses.RISCV64]
++  BaseMemoryLib|MdePkg/Library/BaseMemoryLib/BaseMemoryLib.inf
+ 
+ [PcdsFixedAtBuild]
+   gEfiMdePkgTokenSpaceGuid.PcdDebugPrintErrorLevel|0x8040004F
 -- 
 2.40.1
 
