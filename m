@@ -4,94 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76BF7C54E67
-	for <qemu-riscv@archiver.kernel.org>; Fri, 15 Mar 2024 13:10:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B67BC54E67
+	for <qemu-riscv@archiver.kernel.org>; Fri, 15 Mar 2024 13:10:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rl7Jp-000641-MY; Fri, 15 Mar 2024 09:09:53 -0400
+	id 1rl7K6-0006NQ-Va; Fri, 15 Mar 2024 09:10:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rl7Jb-0005eO-SI
- for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:09:40 -0400
-Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f])
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1rl7Jj-0005rI-4z
+ for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:09:47 -0400
+Received: from mail-pf1-x431.google.com ([2607:f8b0:4864:20::431])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rl7JX-0007dO-H5
- for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:09:39 -0400
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-5658082d2c4so2805475a12.1
- for <qemu-riscv@nongnu.org>; Fri, 15 Mar 2024 06:09:35 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1rl7Jh-0007jD-Gt
+ for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:09:46 -0400
+Received: by mail-pf1-x431.google.com with SMTP id
+ d2e1a72fcca58-6e6c0098328so1814508b3a.3
+ for <qemu-riscv@nongnu.org>; Fri, 15 Mar 2024 06:09:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710508174; x=1711112974; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1710508183; x=1711112983; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=QXR+KoDyjF3DzCtPRlneMC/cDzpoxSokp1VWknBDtAc=;
- b=OIKG7UBbSegyL5K4xTc8cRKmFmd3w+Kh8zZMEqL33VJK1NazutogQCSSnilz8hXtoN
- 8Pw6pY2voj9Sz13mo4rIdXScYcCjgwc8aubTIG3mmaK8pczHsMYV/J7ER79ByRcwb0qv
- 6Md90/UyQKaN92DJttmyvCqADnE1AAygbh+hD7OOGAgULOgHDhD7sHHnpAEVmZGo7bm3
- +v3aJtumfpjULMF+NvbLRBHUnowuUSTPpnY1Iifb15rKSuNjPgdRt2r+AR24VEj6fXE6
- 02lSwobYUP7cTFMiG6hKRWknhkYwBIKf9m7NyjUW8cbX9s2+Z32h37hna6n3d59hRi52
- THdA==
+ bh=5sxhd0rb4V/HdCcNYSiwuf6DPCAi6g3IEdE6KnOG7L8=;
+ b=WkMssXfpQ72/546c6pyY8+dYrdEaCQmvalRNFzut6jAw+LNz3bNan/gotAO3MPX7Nu
+ GA64tUdLJeSuLtCzEfbg7Fz7FWvBgfRtiGiFTY9jHrGo38dxD759FsnBwUxca/CIoEVV
+ UXH5udjMpKnkN6umtNiIwDldsISyHwZ96uAbwERajHP2372iSSUMwjoU7s/5w0tzY8N+
+ K2AcTob0iMtgk6gb3NbcXrg9AbkV76qxVTzbOu/t16c5YMJdVFqkab9cNZlos+BXCCA4
+ q4mLJg9L2q4Owvtg5C44ny82k7pRaLYG/T/sP4Pya9F2Rn7Mxpttr6iF4rl3yBdYTuFh
+ z78A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710508174; x=1711112974;
+ d=1e100.net; s=20230601; t=1710508183; x=1711112983;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=QXR+KoDyjF3DzCtPRlneMC/cDzpoxSokp1VWknBDtAc=;
- b=gdyfLj6xrIdv9Bm+DOOsoETmReumQAcC1Yn/c6Qao7xDQ2ocGoPUxH9xS+VJdV5DYS
- HNyj9y1Ik7w4yleoFr4TQxXQ5HI/gkY++WrHsabkFZ2hcVj6haW8HBrVIDEDldoeq86B
- v7d14g+RWtjmAEcT9aB3uHsDpF1XPLzpignAv2CtVGmd2r2CeqVRG6wt1O0Cj4JT42U4
- 5VHQ79nDwNv7Br+RRa+gW2LhMaL2LMcxHC1qFiwnVh9brqtAM+yBgDKR8NAIXb/DZfc6
- 952Hc/kF4G//LtEShpJ+vfBWRAX/X2EMbzI5G6vqNsEeKEuFdRQw/Zvd2xWWfp08DNoy
- +tYA==
-X-Gm-Message-State: AOJu0YwZ+N58GWLapVMoQ+qyy9Ef9sAz1+5lo29YzInASdIzl81I826J
- TL3E0NDw1mzpupKuj9a3pDiqb8wKyEhtPit4yokHK9ntO5dEToUHmriGuKywmFg=
-X-Google-Smtp-Source: AGHT+IHzBClF6y3leG9X1IH7huHpryichprPqecACIGO7r5xFYMO3bWZ334I3If9L1+1vr9CkQSmGw==
-X-Received: by 2002:a17:906:c30f:b0:a46:2a85:b37b with SMTP id
- s15-20020a170906c30f00b00a462a85b37bmr2902264ejz.51.1710508173970; 
- Fri, 15 Mar 2024 06:09:33 -0700 (PDT)
-Received: from m1x-phil.lan ([176.176.145.26])
+ bh=5sxhd0rb4V/HdCcNYSiwuf6DPCAi6g3IEdE6KnOG7L8=;
+ b=SXoZG587KbLhsgX42tSYUe2OWHg1z80U46WAY6UdExq/rDipa9MwGx56Shg6LcfXoQ
+ ASxq9ZCmBKo5hq/NAcFhSH2JQjl37HoZ+vnnkWXzouGWmQA7bohTMQye0ooDHZ8RPAEE
+ 6K33850LcvuQ8wolNRAVXB9kjgKY/ipuqjVanbCK1DuyPlWE8U+2xipKRKHrouLxMc6H
+ JQs1M6Ljn33+KpTQCt9Y+TNdxt049ModpeJK3xcz/2EOJjlKCROP0swUtvbc+9SoDtKL
+ 5ry/5FFnZyHWXd+qSMnTdUH4wTmKMrUPSDkHrYICqr3Ls8r+Zld1fLbSOiUGLtt0Bn0T
+ 4/bA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVCU4p9eMDhjrgpFOnZDzaPxLaIT+lIKxMfepQlkeciEAUuY/P84ESdzuTAIHkTAU0YCFA+qfbMc0NphTKEwgQu/6S7U74=
+X-Gm-Message-State: AOJu0YzNcEuLdzO234wYT2w7CC9lT37+siG8cR8G6WVZJZ2moFJQxGV7
+ 7A+pdiaPdamrrmz2WhDtyUG8JgI48u9pPF4bUSP+0QiT6zYQIa+/VouGi2vqlDU=
+X-Google-Smtp-Source: AGHT+IHDcQxN1/MJNwNoSh49TDo40dWND/kk0IWkS9VF06tAR3byrXGl+IML3QcUiWglnJ3WuxuutA==
+X-Received: by 2002:a17:90a:e016:b0:29c:403b:ea2e with SMTP id
+ u22-20020a17090ae01600b0029c403bea2emr4309258pjy.49.1710508183338; 
+ Fri, 15 Mar 2024 06:09:43 -0700 (PDT)
+Received: from sunil-pc.Dlink ([106.51.184.12])
  by smtp.gmail.com with ESMTPSA id
- v23-20020a1709067d9700b00a461a7ba686sm1707470ejo.75.2024.03.15.06.09.31
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 15 Mar 2024 06:09:33 -0700 (PDT)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+ r3-20020a17090ad40300b0029c68206e2bsm2886663pju.0.2024.03.15.06.09.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 15 Mar 2024 06:09:42 -0700 (PDT)
+From: Sunil V L <sunilvl@ventanamicro.com>
 To: qemu-devel@nongnu.org,
-	Markus Armbruster <armbru@redhat.com>
-Cc: qemu-riscv@nongnu.org, Anton Johansson <anjo@rev.ng>,
- qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
+	qemu-arm@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Paolo Bonzini <pbonzini@redhat.com>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
  =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
- Claudio Fontana <cfontana@suse.de>,
- Richard Henderson <richard.henderson@linaro.org>,
- Peter Maydell <peter.maydell@linaro.org>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
- Zhao Liu <zhao1.liu@intel.com>, qemu-arm@nongnu.org,
  Thomas Huth <thuth@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Nicholas Piggin <npiggin@gmail.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>
-Subject: [PATCH-for-9.1 03/21] target/ppc: Declare CPU QOM types using
- DEFINE_TYPES() macro
-Date: Fri, 15 Mar 2024 14:08:51 +0100
-Message-ID: <20240315130910.15750-4-philmd@linaro.org>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20240315130910.15750-1-philmd@linaro.org>
-References: <20240315130910.15750-1-philmd@linaro.org>
+ Gerd Hoffmann <kraxel@redhat.com>, "Michael S . Tsirkin" <mst@redhat.com>,
+ Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
+ Laurent Vivier <lvivier@redhat.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Alistair Francis <alistair23@gmail.com>,
+ Andrew Jones <ajones@ventanamicro.com>,
+ Anup Patel <apatel@ventanamicro.com>, Haibo1 Xu <haibo1.xu@intel.com>,
+ Sunil V L <sunilvl@ventanamicro.com>
+Subject: [PATCH 05/12] qtest: bios-tables-test: Rename aarch64 tests with
+ aarch64 in them
+Date: Fri, 15 Mar 2024 18:39:17 +0530
+Message-Id: <20240315130924.2378849-3-sunilvl@ventanamicro.com>
+X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20240315130924.2378849-1-sunilvl@ventanamicro.com>
+References: <20240315130924.2378849-1-sunilvl@ventanamicro.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::52f;
- envelope-from=philmd@linaro.org; helo=mail-ed1-x52f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::431;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pf1-x431.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,94 +110,120 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-When multiple QOM types are registered in the same file,
-it is simpler to use the the DEFINE_TYPES() macro. In
-particular because type array declared with such macro
-are easier to review.
+Existing AARCH64 virt test functions do not have AARCH64 in their name.
+To add RISC-V virt related test cases, better to rename existing
+functions to indicate they are ARM only.
 
-In few commits we are going to add more types, so replace
-the type_register_static() to ease further reviews.
-
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Message-Id: <20231013140116.255-16-philmd@linaro.org>
+Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
 ---
- target/ppc/cpu_init.c | 52 +++++++++++++++++++------------------------
- 1 file changed, 23 insertions(+), 29 deletions(-)
+ tests/qtest/bios-tables-test.c | 35 ++++++++++++++++++----------------
+ 1 file changed, 19 insertions(+), 16 deletions(-)
 
-diff --git a/target/ppc/cpu_init.c b/target/ppc/cpu_init.c
-index 7e65f08147..d5e227a6fb 100644
---- a/target/ppc/cpu_init.c
-+++ b/target/ppc/cpu_init.c
-@@ -7432,39 +7432,34 @@ static void ppc_cpu_class_init(ObjectClass *oc, void *data)
- #endif /* CONFIG_TCG */
+diff --git a/tests/qtest/bios-tables-test.c b/tests/qtest/bios-tables-test.c
+index 21811a1ab5..ea3ba1992b 100644
+--- a/tests/qtest/bios-tables-test.c
++++ b/tests/qtest/bios-tables-test.c
+@@ -1557,7 +1557,7 @@ static void test_acpi_piix4_tcg_dimm_pxm(void)
+     test_acpi_tcg_dimm_pxm(MACHINE_PC);
  }
  
--static const TypeInfo ppc_cpu_type_info = {
--    .name = TYPE_POWERPC_CPU,
--    .parent = TYPE_CPU,
--    .instance_size = sizeof(PowerPCCPU),
--    .instance_align = __alignof__(PowerPCCPU),
--    .instance_init = ppc_cpu_instance_init,
--    .instance_finalize = ppc_cpu_instance_finalize,
--    .abstract = true,
--    .class_size = sizeof(PowerPCCPUClass),
--    .class_init = ppc_cpu_class_init,
-+static const TypeInfo ppc_cpu_types[] = {
-+    {
-+        .name           = TYPE_POWERPC_CPU,
-+        .parent         = TYPE_CPU,
-+        .abstract       = true,
-+        .instance_size  = sizeof(PowerPCCPU),
-+        .instance_align = __alignof__(PowerPCCPU),
-+        .instance_init  = ppc_cpu_instance_init,
-+        .instance_finalize = ppc_cpu_instance_finalize,
-+        .class_size     = sizeof(PowerPCCPUClass),
-+        .class_init     = ppc_cpu_class_init,
- #ifndef CONFIG_USER_ONLY
--    .interfaces = (InterfaceInfo[]) {
--          { TYPE_INTERRUPT_STATS_PROVIDER },
--          { }
-+        .interfaces     = (InterfaceInfo[]) {
-+              { TYPE_INTERRUPT_STATS_PROVIDER },
-+              { }
-+        },
-+#endif
-+    },
-+#ifndef CONFIG_USER_ONLY
-+    {
-+        .name           = TYPE_PPC_VIRTUAL_HYPERVISOR,
-+        .parent         = TYPE_INTERFACE,
-+        .class_size     = sizeof(PPCVirtualHypervisorClass),
-     },
- #endif
- };
- 
--#ifndef CONFIG_USER_ONLY
--static const TypeInfo ppc_vhyp_type_info = {
--    .name = TYPE_PPC_VIRTUAL_HYPERVISOR,
--    .parent = TYPE_INTERFACE,
--    .class_size = sizeof(PPCVirtualHypervisorClass),
--};
--#endif
--
--static void ppc_cpu_register_types(void)
--{
--    type_register_static(&ppc_cpu_type_info);
--#ifndef CONFIG_USER_ONLY
--    type_register_static(&ppc_vhyp_type_info);
--#endif
--}
-+DEFINE_TYPES(ppc_cpu_types)
- 
- void ppc_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+-static void test_acpi_virt_tcg_memhp(void)
++static void test_acpi_aarch64_virt_tcg_memhp(void)
  {
-@@ -7658,4 +7653,3 @@ void ppc_cpu_dump_state(CPUState *cs, FILE *f, int flags)
- #undef RGPL
- #undef RFPL
+     test_data data = {
+         .machine = "virt",
+@@ -1650,7 +1650,7 @@ static void test_acpi_microvm_ioapic2_tcg(void)
+     free_test_data(&data);
  }
--type_init(ppc_cpu_register_types)
+ 
+-static void test_acpi_virt_tcg_numamem(void)
++static void test_acpi_aarch64_virt_tcg_numamem(void)
+ {
+     test_data data = {
+         .machine = "virt",
+@@ -1672,7 +1672,7 @@ static void test_acpi_virt_tcg_numamem(void)
+ 
+ }
+ 
+-static void test_acpi_virt_tcg_pxb(void)
++static void test_acpi_aarch64_virt_tcg_pxb(void)
+ {
+     test_data data = {
+         .machine = "virt",
+@@ -1745,7 +1745,7 @@ static void test_acpi_piix4_tcg_acpi_hmat(void)
+     test_acpi_tcg_acpi_hmat(MACHINE_PC);
+ }
+ 
+-static void test_acpi_virt_tcg_acpi_hmat(void)
++static void test_acpi_aarch64_virt_tcg_acpi_hmat(void)
+ {
+     test_data data = {
+         .machine = "virt",
+@@ -1901,7 +1901,7 @@ static void test_acpi_microvm_acpi_erst(void)
+ }
+ #endif /* CONFIG_POSIX */
+ 
+-static void test_acpi_virt_tcg(void)
++static void test_acpi_aarch64_virt_tcg(void)
+ {
+     test_data data = {
+         .machine = "virt",
+@@ -1920,7 +1920,7 @@ static void test_acpi_virt_tcg(void)
+     free_test_data(&data);
+ }
+ 
+-static void test_acpi_virt_tcg_topology(void)
++static void test_acpi_aarch64_virt_tcg_topology(void)
+ {
+     test_data data = {
+         .machine = "virt",
+@@ -2003,7 +2003,7 @@ static void test_acpi_q35_cxl(void)
+ }
+ #endif /* CONFIG_POSIX */
+ 
+-static void test_acpi_virt_viot(void)
++static void test_acpi_aarch64_virt_viot(void)
+ {
+     test_data data = {
+         .machine = "virt",
+@@ -2135,7 +2135,7 @@ static void test_acpi_microvm_oem_fields(void)
+     g_free(args);
+ }
+ 
+-static void test_acpi_virt_oem_fields(void)
++static void test_acpi_aarch64_virt_oem_fields(void)
+ {
+     test_data data = {
+         .machine = "virt",
+@@ -2301,16 +2301,19 @@ int main(int argc, char *argv[])
+         }
+     } else if (strcmp(arch, "aarch64") == 0) {
+         if (has_tcg && qtest_has_device("virtio-blk-pci")) {
+-            qtest_add_func("acpi/virt", test_acpi_virt_tcg);
++            qtest_add_func("acpi/virt", test_acpi_aarch64_virt_tcg);
+             qtest_add_func("acpi/virt/acpihmatvirt",
+-                            test_acpi_virt_tcg_acpi_hmat);
+-            qtest_add_func("acpi/virt/topology", test_acpi_virt_tcg_topology);
+-            qtest_add_func("acpi/virt/numamem", test_acpi_virt_tcg_numamem);
+-            qtest_add_func("acpi/virt/memhp", test_acpi_virt_tcg_memhp);
+-            qtest_add_func("acpi/virt/pxb", test_acpi_virt_tcg_pxb);
+-            qtest_add_func("acpi/virt/oem-fields", test_acpi_virt_oem_fields);
++                           test_acpi_aarch64_virt_tcg_acpi_hmat);
++            qtest_add_func("acpi/virt/topology",
++                           test_acpi_aarch64_virt_tcg_topology);
++            qtest_add_func("acpi/virt/numamem",
++                           test_acpi_aarch64_virt_tcg_numamem);
++            qtest_add_func("acpi/virt/memhp", test_acpi_aarch64_virt_tcg_memhp);
++            qtest_add_func("acpi/virt/pxb", test_acpi_aarch64_virt_tcg_pxb);
++            qtest_add_func("acpi/virt/oem-fields",
++                           test_acpi_aarch64_virt_oem_fields);
+             if (qtest_has_device("virtio-iommu-pci")) {
+-                qtest_add_func("acpi/virt/viot", test_acpi_virt_viot);
++                qtest_add_func("acpi/virt/viot", test_acpi_aarch64_virt_viot);
+             }
+         }
+     }
 -- 
-2.41.0
+2.40.1
 
 
