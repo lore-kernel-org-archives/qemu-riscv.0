@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0604C54E58
-	for <qemu-riscv@archiver.kernel.org>; Fri, 15 Mar 2024 13:13:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3498CC54E58
+	for <qemu-riscv@archiver.kernel.org>; Fri, 15 Mar 2024 13:13:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rl7LY-0002Vb-Su; Fri, 15 Mar 2024 09:11:40 -0400
+	id 1rl7L9-0000iS-5Y; Fri, 15 Mar 2024 09:11:15 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rl7LJ-0001Q4-QJ
- for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:11:25 -0400
-Received: from mail-ed1-x52a.google.com ([2a00:1450:4864:20::52a])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rl7KR-00072S-31
+ for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:10:31 -0400
+Received: from mail-lf1-x130.google.com ([2a00:1450:4864:20::130])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rl7LH-00006r-Ud
- for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:11:25 -0400
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-563cb3ba9daso2384273a12.3
- for <qemu-riscv@nongnu.org>; Fri, 15 Mar 2024 06:11:23 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rl7KJ-00082l-GO
+ for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:10:30 -0400
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-513ccc70a6dso3458536e87.1
+ for <qemu-riscv@nongnu.org>; Fri, 15 Mar 2024 06:10:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710508282; x=1711113082; darn=nongnu.org;
+ d=linaro.org; s=google; t=1710508221; x=1711113021; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JlSnNkdCGhkGJY+zh070ayuUxIbMNrgyLxLLZYypnXY=;
- b=yx8CFeUcg5ujfCaMKT3THBflLS7I4ltCCOI+0Mpd+ZL8cVVLbQ431Y96W/IvF3+cf5
- m1JcXoknKpWaYT6rJrvJe+3ZS1tLB3ZnRhMTlw8UkqX2dAyOHI2P5c11g2jaMCC5iEzm
- b3zLWtqGm3H+wJtlK2mJaJAAjOydrgqNmRyWxQ57li2pUYa3xQUGWL81A2hJOOaeNhyH
- +tX9QJ36aXlA7qNGw3kQeeJ8KAe7OfNWIQ61dlMpMX9wgWtnLlOEdeVuEwLrQpNLthzD
- fR6s9+Z0eKGt9SnFXnLeHa91YINZkJad0foQ/a22J0ON/wl3EdYW+fxvoVkoFU3ilYSL
- aQdw==
+ bh=juKrFHTenueZGgaczYCixm7yTPX2XVgDuiXA1GdKgho=;
+ b=D7JEwiWqRZf2E+/JqDXANmIZlpLhqhTFqwifI5DSLOpCkBaBKHB926LnUU2mg75Pho
+ 9CDVbyFH22DU2+n3gEdwUGeXdf/19AtWSek2JSKMoz8t4bAFyHmXjBZrICtCY+ZO4miV
+ Q/mqTKKEdIafPF7CMen6j/j/8pPPoQn8yJWSXEUMWiQbV/cQOsspwEabY6dley9bKhJ2
+ 4O+kfmglfaqXvgd7hFpXWv2IQJNa5qfxcgXSuCiYSpRnkxZ08UChSJGSmVxZigF3+/Q7
+ RdwVDW08xgO73x39sdkLPyJ848KatCPBuw7B3h+Pfu+1JRMWXMVXu2+M8jrehIabC9gz
+ cTHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710508282; x=1711113082;
+ d=1e100.net; s=20230601; t=1710508221; x=1711113021;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=JlSnNkdCGhkGJY+zh070ayuUxIbMNrgyLxLLZYypnXY=;
- b=seS/E+fqfnNsQiegGAFDJ4BnBHtAXQ3+eeLRyVd+QiMYuAGo6Iybuf6TfnVXZu701n
- Zg9N3Pnx7H7o94XnoSViF4zY+Fb8+QRIsO9p1pz9uIVh1bpgtOwuRIV+gt6ZJWTpYmVt
- ZF0qWhxqpWiMTQBD9G9iS8Ycfyq3TZ1jqnj8RDJYAMADXXC+krEEqU73aNtwIgKyt+ui
- nEfa1iCcVqY+HnTOl2EDcz8Ap8WM3mG8lUyom+0wBfd1PE1TbElOxQGI8yek9BGPXZQu
- /RG8po64JND4g2RTQ1D+1cesfprW8T0s++Ot8bMgt4W7s1Ziy9ahee+tnK6ROzl3lim6
- PFMw==
-X-Gm-Message-State: AOJu0YwgigEKQ11T679qn0lOi7ElFWcDy1nXLMRUrIKzSb4PA5JmHbun
- qRbFsIq8zkaKVK3dkWDQ3sn7FJowH1wTSdzCfi99h81/3B4PEF5xicie4IUNQI4=
-X-Google-Smtp-Source: AGHT+IFr5RaqknL50rJ/ULGqKtzSQvYODwR3uxqq5WvgAEMCCYd8EWNHRLvED+eSeGFqUTaVtHbaiA==
-X-Received: by 2002:a05:6402:3819:b0:566:ff31:7974 with SMTP id
- es25-20020a056402381900b00566ff317974mr2662833edb.34.1710508282572; 
- Fri, 15 Mar 2024 06:11:22 -0700 (PDT)
+ bh=juKrFHTenueZGgaczYCixm7yTPX2XVgDuiXA1GdKgho=;
+ b=nFlhQGDL8pkyYITmAPAnNpxsskDJCvqlDZH+yAZX7DQW312hkby+QUFtAuTjN0KYom
+ c2poJWTt1dx+9X1YD9kLBNt/U4dGkmIIxUlVPKGHF+sTlySXdougYk6o9QjCC4EBpCca
+ 1G6lQQeW6Ww3KTAoStX+VcC+q95wii/I9D/ADPVWLmt9FhXIr3KJ7+10X6xiAC7MF8y9
+ SBch+8e1dny+W4ygSMmLqq6ZJEEECgYMfW+D0Z2kWR2zyQlCM0NTbTZJdjCR69Yxsuqm
+ DDKR62wvZNaWRNCzftfodQOYqErkVtdNnt7wCOhI8zaA5IgUIZLsm29OHvaco+ynG0xG
+ HJDQ==
+X-Gm-Message-State: AOJu0YxdpD6curMQnvWQ4buIYZmFekAc7Px6Jd+r65wDMV+DUOzS2fPA
+ jdnAgXvqz6cmhStkcXv+5QFj1jT+iLWhimgLVphLXJC/3o+JOLNdneMsPdmS4OM=
+X-Google-Smtp-Source: AGHT+IG/fkrm3CO2MahErI9fFc2gtBPFkzwyIu619VO5D+ezRzl3dqx8ZqO1u+VaQLLAaFAD47y0KA==
+X-Received: by 2002:a19:f807:0:b0:513:2bea:d0e0 with SMTP id
+ a7-20020a19f807000000b005132bead0e0mr2965749lff.62.1710508221669; 
+ Fri, 15 Mar 2024 06:10:21 -0700 (PDT)
 Received: from m1x-phil.lan ([176.176.145.26])
  by smtp.gmail.com with ESMTPSA id
- er18-20020a056402449200b0056899fc9a94sm1673226edb.12.2024.03.15.06.11.20
+ s11-20020a170906bc4b00b00a4671d37717sm1605908ejv.52.2024.03.15.06.10.19
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 15 Mar 2024 06:11:22 -0700 (PDT)
+ Fri, 15 Mar 2024 06:10:21 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org,
 	Markus Armbruster <armbru@redhat.com>
@@ -71,20 +71,20 @@ Cc: qemu-riscv@nongnu.org, Anton Johansson <anjo@rev.ng>,
  Zhao Liu <zhao1.liu@intel.com>, qemu-arm@nongnu.org,
  Thomas Huth <thuth@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Nicholas Piggin <npiggin@gmail.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>
-Subject: [PATCH-for-9.1 19/21] target/ppc: Factor ppc_add_alias_definitions()
- out
-Date: Fri, 15 Mar 2024 14:09:07 +0100
-Message-ID: <20240315130910.15750-20-philmd@linaro.org>
+ Eric Blake <eblake@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Yanan Wang <wangyanan55@huawei.com>
+Subject: [PATCH-for-9.1 10/21] qapi: Make CpuModel* definitions target agnostic
+Date: Fri, 15 Mar 2024 14:08:58 +0100
+Message-ID: <20240315130910.15750-11-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240315130910.15750-1-philmd@linaro.org>
 References: <20240315130910.15750-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::52a;
- envelope-from=philmd@linaro.org; helo=mail-ed1-x52a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::130;
+ envelope-from=philmd@linaro.org; helo=mail-lf1-x130.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -107,81 +107,195 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Factor ppc_add_alias_definitions() out of qmp_query_cpu_definitions()
-to clearly see the generic pattern used in all targets.
+CpuModelInfo, CpuModelExpansionType and CpuModelCompareResult
+are not restricted to any particular target. Define them in
+machine.json to generate them once.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/ppc/cpu-models.h   |  4 ++++
- target/ppc/ppc-qmp-cmds.c | 26 +++++++++++++++-----------
- 2 files changed, 19 insertions(+), 11 deletions(-)
+ qapi/machine-target.json | 78 ---------------------------------------
+ qapi/machine.json        | 79 ++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 79 insertions(+), 78 deletions(-)
 
-diff --git a/target/ppc/cpu-models.h b/target/ppc/cpu-models.h
-index 0229ef3a9a..89a5e232b7 100644
---- a/target/ppc/cpu-models.h
-+++ b/target/ppc/cpu-models.h
-@@ -21,6 +21,8 @@
- #ifndef TARGET_PPC_CPU_MODELS_H
- #define TARGET_PPC_CPU_MODELS_H
+diff --git a/qapi/machine-target.json b/qapi/machine-target.json
+index 5f17b25d50..0412400df3 100644
+--- a/qapi/machine-target.json
++++ b/qapi/machine-target.json
+@@ -6,84 +6,6 @@
  
-+#include "qapi/qapi-types-machine.h"
-+
- /**
-  * PowerPCCPUAlias:
-  * @alias: The alias name.
-@@ -480,4 +482,6 @@ enum {
-     POWERPC_SVR_8641D              = 0x80900121,
- };
+ { 'include': 'machine.json' }
  
-+void ppc_add_alias_definitions(CpuDefinitionInfoList **cpu_list);
-+
- #endif
-diff --git a/target/ppc/ppc-qmp-cmds.c b/target/ppc/ppc-qmp-cmds.c
-index a25d86a8d1..528cc3e4af 100644
---- a/target/ppc/ppc-qmp-cmds.c
-+++ b/target/ppc/ppc-qmp-cmds.c
-@@ -189,17 +189,9 @@ static void ppc_cpu_defs_entry(gpointer data, gpointer user_data)
-     QAPI_LIST_PREPEND(*first, info);
- }
- 
--CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
-+void ppc_add_alias_definitions(CpuDefinitionInfoList **cpu_list)
- {
--    CpuDefinitionInfoList *cpu_list = NULL;
--    GSList *list;
--    int i;
+-##
+-# @CpuModelInfo:
+-#
+-# Virtual CPU model.
+-#
+-# A CPU model consists of the name of a CPU definition, to which delta
+-# changes are applied (e.g. features added/removed). Most magic values
+-# that an architecture might require should be hidden behind the name.
+-# However, if required, architectures can expose relevant properties.
+-#
+-# @name: the name of the CPU definition the model is based on
+-#
+-# @props: a dictionary of QOM properties to be applied
+-#
+-# Since: 2.8
+-##
+-{ 'struct': 'CpuModelInfo',
+-  'data': { 'name': 'str',
+-            '*props': 'any' } }
 -
--    list = object_class_get_list(TYPE_POWERPC_CPU, false);
--    g_slist_foreach(list, ppc_cpu_defs_entry, &cpu_list);
--    g_slist_free(list);
+-##
+-# @CpuModelExpansionType:
+-#
+-# An enumeration of CPU model expansion types.
+-#
+-# @static: Expand to a static CPU model, a combination of a static
+-#     base model name and property delta changes.  As the static base
+-#     model will never change, the expanded CPU model will be the
+-#     same, independent of QEMU version, machine type, machine
+-#     options, and accelerator options.  Therefore, the resulting
+-#     model can be used by tooling without having to specify a
+-#     compatibility machine - e.g. when displaying the "host" model.
+-#     The @static CPU models are migration-safe.
+-#
+-# @full: Expand all properties.  The produced model is not guaranteed
+-#     to be migration-safe, but allows tooling to get an insight and
+-#     work with model details.
+-#
+-# Note: When a non-migration-safe CPU model is expanded in static
+-#     mode, some features enabled by the CPU model may be omitted,
+-#     because they can't be implemented by a static CPU model
+-#     definition (e.g. cache info passthrough and PMU passthrough in
+-#     x86). If you need an accurate representation of the features
+-#     enabled by a non-migration-safe CPU model, use @full.  If you
+-#     need a static representation that will keep ABI compatibility
+-#     even when changing QEMU version or machine-type, use @static
+-#     (but keep in mind that some features may be omitted).
+-#
+-# Since: 2.8
+-##
+-{ 'enum': 'CpuModelExpansionType',
+-  'data': [ 'static', 'full' ] }
 -
--    for (i = 0; ppc_cpu_aliases[i].alias != NULL; i++) {
-+    for (unsigned i = 0; ppc_cpu_aliases[i].alias != NULL; i++) {
-         PowerPCCPUAlias *alias = &ppc_cpu_aliases[i];
-         ObjectClass *oc;
-         CpuDefinitionInfo *info;
-@@ -213,8 +205,20 @@ CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
-         info->name = g_strdup(alias->alias);
-         info->q_typename = g_strdup(object_class_get_name(oc));
+-##
+-# @CpuModelCompareResult:
+-#
+-# An enumeration of CPU model comparison results.  The result is
+-# usually calculated using e.g. CPU features or CPU generations.
+-#
+-# @incompatible: If model A is incompatible to model B, model A is not
+-#     guaranteed to run where model B runs and the other way around.
+-#
+-# @identical: If model A is identical to model B, model A is
+-#     guaranteed to run where model B runs and the other way around.
+-#
+-# @superset: If model A is a superset of model B, model B is
+-#     guaranteed to run where model A runs.  There are no guarantees
+-#     about the other way.
+-#
+-# @subset: If model A is a subset of model B, model A is guaranteed to
+-#     run where model B runs.  There are no guarantees about the other
+-#     way.
+-#
+-# Since: 2.8
+-##
+-{ 'enum': 'CpuModelCompareResult',
+-  'data': [ 'incompatible', 'identical', 'superset', 'subset' ] }
+-
+ ##
+ # @CpuModelBaselineInfo:
+ #
+diff --git a/qapi/machine.json b/qapi/machine.json
+index 4bc38e86fd..65702c2c78 100644
+--- a/qapi/machine.json
++++ b/qapi/machine.json
+@@ -10,6 +10,85 @@
  
--        QAPI_LIST_PREPEND(cpu_list, info);
-+        QAPI_LIST_PREPEND(*cpu_list, info);
-     }
+ { 'include': 'common.json' }
+ 
++##
++# @CpuModelInfo:
++#
++# Virtual CPU model.
++#
++# A CPU model consists of the name of a CPU definition, to which delta
++# changes are applied (e.g. features added/removed). Most magic values
++# that an architecture might require should be hidden behind the name.
++# However, if required, architectures can expose relevant properties.
++#
++# @name: the name of the CPU definition the model is based on
++#
++# @props: a dictionary of QOM properties to be applied
++#
++# Since: 2.8
++##
++{ 'struct': 'CpuModelInfo',
++  'data': { 'name': 'str',
++            '*props': 'any' }
 +}
 +
-+CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
-+{
-+    CpuDefinitionInfoList *cpu_list = NULL;
-+    GSList *list;
++##
++# @CpuModelExpansionType:
++#
++# An enumeration of CPU model expansion types.
++#
++# @static: Expand to a static CPU model, a combination of a static
++#     base model name and property delta changes.  As the static base
++#     model will never change, the expanded CPU model will be the
++#     same, independent of QEMU version, machine type, machine
++#     options, and accelerator options.  Therefore, the resulting
++#     model can be used by tooling without having to specify a
++#     compatibility machine - e.g. when displaying the "host" model.
++#     The @static CPU models are migration-safe.
++#
++# @full: Expand all properties.  The produced model is not guaranteed
++#     to be migration-safe, but allows tooling to get an insight and
++#     work with model details.
++#
++# Note: When a non-migration-safe CPU model is expanded in static
++#     mode, some features enabled by the CPU model may be omitted,
++#     because they can't be implemented by a static CPU model
++#     definition (e.g. cache info passthrough and PMU passthrough in
++#     x86). If you need an accurate representation of the features
++#     enabled by a non-migration-safe CPU model, use @full.  If you
++#     need a static representation that will keep ABI compatibility
++#     even when changing QEMU version or machine-type, use @static
++#     (but keep in mind that some features may be omitted).
++#
++# Since: 2.8
++##
++{ 'enum': 'CpuModelExpansionType',
++  'data': [ 'static', 'full' ] }
 +
-+    list = object_class_get_list(TYPE_POWERPC_CPU, false);
-+    g_slist_foreach(list, ppc_cpu_defs_entry, &cpu_list);
-+    g_slist_free(list);
++##
++# @CpuModelCompareResult:
++#
++# An enumeration of CPU model comparison results.  The result is
++# usually calculated using e.g. CPU features or CPU generations.
++#
++# @incompatible: If model A is incompatible to model B, model A is not
++#     guaranteed to run where model B runs and the other way around.
++#
++# @identical: If model A is identical to model B, model A is
++#     guaranteed to run where model B runs and the other way around.
++#
++# @superset: If model A is a superset of model B, model B is
++#     guaranteed to run where model A runs.  There are no guarantees
++#     about the other way.
++#
++# @subset: If model A is a subset of model B, model A is guaranteed to
++#     run where model B runs.  There are no guarantees about the other
++#     way.
++#
++# Since: 2.8
++##
++{ 'enum': 'CpuModelCompareResult',
++  'data': [ 'incompatible', 'identical', 'superset', 'subset' ] }
 +
-+    ppc_add_alias_definitions(&cpu_list);
- 
-     return cpu_list;
- }
+ ##
+ # @SysEmuTarget:
+ #
 -- 
 2.41.0
 
