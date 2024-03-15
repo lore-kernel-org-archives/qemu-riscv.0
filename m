@@ -4,94 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A23C1C54E58
-	for <qemu-riscv@archiver.kernel.org>; Fri, 15 Mar 2024 13:19:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB62AC54E67
+	for <qemu-riscv@archiver.kernel.org>; Fri, 15 Mar 2024 14:14:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rl7Jr-00066n-A0; Fri, 15 Mar 2024 09:09:55 -0400
+	id 1rl8Js-0001RO-3y; Fri, 15 Mar 2024 10:14:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1rl7JZ-0005eF-Se
- for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:09:40 -0400
-Received: from mail-pf1-x434.google.com ([2607:f8b0:4864:20::434])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1rl7JW-0007cj-8j
- for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:09:37 -0400
-Received: by mail-pf1-x434.google.com with SMTP id
- d2e1a72fcca58-6e6ccd69ebcso1287510b3a.0
- for <qemu-riscv@nongnu.org>; Fri, 15 Mar 2024 06:09:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1710508173; x=1711112973; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Y4vX0WH0NUhjpqoGC54S3e1oXOXXObwA9DbtQ2MGi0g=;
- b=dpbDMCxEvWES4UrjeR6mWrMh7ranEAo92ypKgzMniMXuMof1fy2xgtEXXgUtGaO9vJ
- bUVgFLoXqo7fa1+Nb1MWBpG124tquYFS1TgW4RWjt4osVWjf4zir+cxxnVlLxgzhoK+K
- RphAs5sWCEA1yyhEcZAV8+r2t+nDC7w2432TGLxnPpaCDjzvhkDtqeTNjc6h+tySquFv
- PW9vSoOkZ8HSEVOI/BQ/diyif5pYEwM31SCjsPjWP330qTHDQjSQKTM2RX1fbOzeLo7V
- 6MOE6LGJVA1i6SepTyN7nbvGxlC8Q72wMg/PYlXVjtCs5VZH3fnDMbPDyNdEK9W7XJGd
- bKYA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710508173; x=1711112973;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Y4vX0WH0NUhjpqoGC54S3e1oXOXXObwA9DbtQ2MGi0g=;
- b=ESsE9fgUMMHdCQ8ADNEqQ5DV92yQ2cjE1/AOh74IizW6LlfBY5vS7mWmKN3fLBYMxr
- GXRc8qkJMxdLgC/AxjdoLJNu9EZX/jQZtBNtbYslJkn0xzDSk90cOVpUBtNAddHbWHPS
- ZYhpWq7A2d/Q1IZD76JQ5/NgIAaXbJs2Tk7Y/3KPy2IJTZBAXuGsYvsWvGtD9z7WpMHy
- Kt6yMwmKe8g2YpTQXuNCP4+rxhu5VNp5x2UEOzs/EQZu3tD3E6iRFa/jR3h/hqX/NVwR
- Y7E16HpmuqzzxSNwa7t60pnaOglxu5A1MjjFCDGcW/AcbHPOuAECmTYtKkmJscgYWLA4
- Bg/g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXzJwsy7Q0YdeaGm/8KGcEtAZgfGlaexx2wZGE+9oPlnjIdXygD/v2j5MW8uLicfyG3l0QGQk4reo1DRVxm9hoW0/nT690=
-X-Gm-Message-State: AOJu0YzZm79F76WVQ7UULoqzGXEp6vbf7WB47J+eyzD8/cKxs83wKHPf
- MvUkdpuGrJJZIEe967dlNy74JNtMrRZUiUafEQaIIFyxDwRupONrSGncCPfuQ8I=
-X-Google-Smtp-Source: AGHT+IHrOjBklu9HBEAjzciZt8OGddqy1g0WWGgBjLYwax43oKa2s5ys0rBE6kE14xLzlx8R1BE8Lw==
-X-Received: by 2002:a17:90a:ea0e:b0:29b:b15d:5353 with SMTP id
- w14-20020a17090aea0e00b0029bb15d5353mr4612835pjy.31.1710508172750; 
- Fri, 15 Mar 2024 06:09:32 -0700 (PDT)
-Received: from sunil-pc.Dlink ([106.51.184.12])
- by smtp.gmail.com with ESMTPSA id
- r3-20020a17090ad40300b0029c68206e2bsm2886663pju.0.2024.03.15.06.09.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Mar 2024 06:09:32 -0700 (PDT)
-From: Sunil V L <sunilvl@ventanamicro.com>
-To: qemu-devel@nongnu.org,
-	qemu-arm@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Paolo Bonzini <pbonzini@redhat.com>,
- =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
- Thomas Huth <thuth@redhat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Gerd Hoffmann <kraxel@redhat.com>, "Michael S . Tsirkin" <mst@redhat.com>,
- Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
+ (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1rl8Jm-0001Qk-Lf
+ for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 10:13:54 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1rl8Jl-0005P4-1I
+ for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 10:13:54 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1710512030;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=vgbIZ7eAaKGwPhksi48uy+7XiuUk0+9oJ7imPcTFphw=;
+ b=RwbCr5L0XCe6IIdjztDM2fQlgoKw8mh7GKFsrX5K64xztprkmEiZIi1lXBgQbzNrfLg7dv
+ MBnAHJWoloWXvCx9ZRgq/1wUZFlm+RMtJyscxzzaft5gKGAzmC/jh8pCgYPd2E6StwaANY
+ 5DTXPE83giwKO5rGGEtpJOJwE2Lqslc=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-687-pLlFt1PNOKOXfed6VGxjEg-1; Fri, 15 Mar 2024 10:13:47 -0400
+X-MC-Unique: pLlFt1PNOKOXfed6VGxjEg-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id D19F585A58B;
+ Fri, 15 Mar 2024 14:13:46 +0000 (UTC)
+Received: from sirius.home.kraxel.org (unknown [10.39.192.3])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 247B040C6CB1;
+ Fri, 15 Mar 2024 14:13:46 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+ id E45E01800DD4; Fri, 15 Mar 2024 15:13:44 +0100 (CET)
+Date: Fri, 15 Mar 2024 15:13:44 +0100
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: Sunil V L <sunilvl@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org, 
+ Paolo Bonzini <pbonzini@redhat.com>,
+ =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>, 
+ Daniel P =?utf-8?B?LiBCZXJyYW5nw6k=?= <berrange@redhat.com>,
+ Thomas Huth <thuth@redhat.com>, 
+ Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ "Michael S . Tsirkin" <mst@redhat.com>, 
+ Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>, 
  Laurent Vivier <lvivier@redhat.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Alistair Francis <alistair23@gmail.com>,
- Andrew Jones <ajones@ventanamicro.com>,
- Anup Patel <apatel@ventanamicro.com>, Haibo1 Xu <haibo1.xu@intel.com>,
- Sunil V L <sunilvl@ventanamicro.com>
-Subject: [PATCH 03/12] uefi-test-tools: Add support for python based build
- script
-Date: Fri, 15 Mar 2024 18:39:15 +0530
-Message-Id: <20240315130924.2378849-1-sunilvl@ventanamicro.com>
-X-Mailer: git-send-email 2.40.1
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Alistair Francis <alistair23@gmail.com>, Andrew Jones <ajones@ventanamicro.com>,
+ Anup Patel <apatel@ventanamicro.com>, Haibo1 Xu <haibo1.xu@intel.com>
+Subject: Re: [PATCH 01/12] roms/edk2-build.py: Add --module support
+Message-ID: <nvi45kbmhbzrlapysvpy7srgdzw62we5ijhxgrxpfp4m27ji67@6eftbkcku4fq>
+References: <20240315130519.2378765-1-sunilvl@ventanamicro.com>
+ <20240315130519.2378765-2-sunilvl@ventanamicro.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::434;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pf1-x434.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240315130519.2378765-2-sunilvl@ventanamicro.com>
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.2
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=kraxel@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -29
+X-Spam_score: -3.0
+X-Spam_bar: ---
+X-Spam_report: (-3.0 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.933,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,132 +93,15 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-edk2-funcs.sh which is used in this Makefile, was removed in the commit
-c28a2891f3 ("edk2: update build script"). It is replaced with a python
-based script. So, update the Makefile and add the configuration file as
-required to support the python based build script.
+On Fri, Mar 15, 2024 at 06:35:08PM +0530, Sunil V L wrote:
+> UefiTestToolsPkg which should use edk2-build.py needs --module parameter
+> support. Add this optional parameter handling.
 
-Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
----
- tests/uefi-test-tools/Makefile               | 18 +++----
- tests/uefi-test-tools/uefi-test-build.config | 57 ++++++++++++++++++++
- 2 files changed, 63 insertions(+), 12 deletions(-)
- create mode 100644 tests/uefi-test-tools/uefi-test-build.config
+I don't think this is needed.  By default everything listed in
+[Components] should be built, which is just that one module we
+have ;)
 
-diff --git a/tests/uefi-test-tools/Makefile b/tests/uefi-test-tools/Makefile
-index 0c003f2877..f94738b645 100644
---- a/tests/uefi-test-tools/Makefile
-+++ b/tests/uefi-test-tools/Makefile
-@@ -12,7 +12,7 @@
- 
- edk2_dir              := ../../roms/edk2
- images_dir            := ../data/uefi-boot-images
--emulation_targets     := arm aarch64 i386 x86_64
-+emulation_targets     := arm aarch64 i386 x86_64 riscv64
- uefi_binaries         := bios-tables-test
- intermediate_suffixes := .efi .fat .iso.raw
- 
-@@ -56,7 +56,8 @@ Build/%.iso.raw: Build/%.fat
- # stripped from, the argument.
- map_arm_to_uefi     = $(subst arm,ARM,$(1))
- map_aarch64_to_uefi = $(subst aarch64,AA64,$(call map_arm_to_uefi,$(1)))
--map_i386_to_uefi    = $(subst i386,IA32,$(call map_aarch64_to_uefi,$(1)))
-+map_riscv64_to_uefi = $(subst riscv64,RISCV64,$(call map_aarch64_to_uefi,$(1)))
-+map_i386_to_uefi    = $(subst i386,IA32,$(call map_riscv64_to_uefi,$(1)))
- map_x86_64_to_uefi  = $(subst x86_64,X64,$(call map_i386_to_uefi,$(1)))
- map_to_uefi         = $(subst .,,$(call map_x86_64_to_uefi,$(1)))
- 
-@@ -70,7 +71,7 @@ Build/%.fat: Build/%.efi
- 	uefi_bin_b=$$(stat --format=%s -- $<) && \
- 		uefi_fat_kb=$$(( (uefi_bin_b * 11 / 10 + 1023) / 1024 )) && \
- 		uefi_fat_kb=$$(( uefi_fat_kb >= 64 ? uefi_fat_kb : 64 )) && \
--		mkdosfs -C $@ -n $(basename $(@F)) -- $$uefi_fat_kb
-+		mkdosfs -C $@ -n "bios-test" -- $$uefi_fat_kb
- 	MTOOLS_SKIP_CHECK=1 mmd -i $@ ::EFI
- 	MTOOLS_SKIP_CHECK=1 mmd -i $@ ::EFI/BOOT
- 	MTOOLS_SKIP_CHECK=1 mcopy -i $@ -- $< \
-@@ -95,15 +96,8 @@ Build/%.fat: Build/%.efi
- # we must mark the recipe manually as recursive, by using the "+" indicator.
- # This way, when the inner "make" starts a parallel build of the target edk2
- # module, it can communicate with the outer "make"'s job server.
--Build/bios-tables-test.%.efi: build-edk2-tools
--	+./build.sh $(edk2_dir) BiosTablesTest $* $@
--
--build-edk2-tools:
--	cd $(edk2_dir)/BaseTools && git submodule update --init --force
--	$(MAKE) -C $(edk2_dir)/BaseTools \
--		PYTHON_COMMAND=$${EDK2_PYTHON_COMMAND:-python3} \
--		EXTRA_OPTFLAGS='$(EDK2_BASETOOLS_OPTFLAGS)' \
--		EXTRA_LDFLAGS='$(EDK2_BASETOOLS_LDFLAGS)'
-+Build/bios-tables-test.%.efi:
-+	$(PYTHON) ../../roms/edk2-build.py --config uefi-test-build.config
- 
- clean:
- 	rm -rf Build Conf log
-diff --git a/tests/uefi-test-tools/uefi-test-build.config b/tests/uefi-test-tools/uefi-test-build.config
-new file mode 100644
-index 0000000000..4fb89f7db9
---- /dev/null
-+++ b/tests/uefi-test-tools/uefi-test-build.config
-@@ -0,0 +1,57 @@
-+[global]
-+core = ../../roms/edk2
-+
-+####################################################################################
-+# arm
-+
-+[build.arm]
-+conf = UefiTestToolsPkg/UefiTestToolsPkg.dsc
-+plat = UefiTestTools
-+module = UefiTestToolsPkg/BiosTablesTest/BiosTablesTest.inf
-+dest = ./Build
-+arch = ARM
-+cpy1 = ARM/BiosTablesTest.efi  bios-tables-test.arm.efi
-+
-+####################################################################################
-+# aarch64
-+
-+[build.aarch64]
-+conf = UefiTestToolsPkg/UefiTestToolsPkg.dsc
-+plat = UefiTestTools
-+module = UefiTestToolsPkg/BiosTablesTest/BiosTablesTest.inf
-+dest = ./Build
-+arch = AARCH64
-+cpy1 = AARCH64/BiosTablesTest.efi  bios-tables-test.aarch64.efi
-+
-+####################################################################################
-+# riscv64
-+
-+[build.riscv]
-+conf = UefiTestToolsPkg/UefiTestToolsPkg.dsc
-+plat = UefiTestTools
-+module = UefiTestToolsPkg/BiosTablesTest/BiosTablesTest.inf
-+dest = ./Build
-+arch = RISCV64
-+cpy1 = RISCV64/BiosTablesTest.efi  bios-tables-test.riscv64.efi
-+
-+####################################################################################
-+# ia32
-+
-+[build.ia32]
-+conf = UefiTestToolsPkg/UefiTestToolsPkg.dsc
-+plat = UefiTestTools
-+module = UefiTestToolsPkg/BiosTablesTest/BiosTablesTest.inf
-+dest = ./Build
-+arch = IA32
-+cpy1 = IA32/BiosTablesTest.efi  bios-tables-test.i386.efi
-+
-+####################################################################################
-+# x64
-+
-+[build.x64]
-+conf = UefiTestToolsPkg/UefiTestToolsPkg.dsc
-+plat = UefiTestTools
-+module = UefiTestToolsPkg/BiosTablesTest/BiosTablesTest.inf
-+dest = ./Build
-+arch = X64
-+cpy1 = X64/BiosTablesTest.efi  bios-tables-test.x86_64.efi
--- 
-2.40.1
+take care,
+  Gerd
 
 
