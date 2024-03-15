@@ -4,86 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 251A6C54E58
-	for <qemu-riscv@archiver.kernel.org>; Fri, 15 Mar 2024 11:26:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF718C54E58
+	for <qemu-riscv@archiver.kernel.org>; Fri, 15 Mar 2024 13:05:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rl5hV-0006IU-Uj; Fri, 15 Mar 2024 07:26:13 -0400
+	id 1rl7Fk-0002g8-78; Fri, 15 Mar 2024 09:05:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1rl5hF-00065C-HJ
- for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 07:25:58 -0400
-Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1rl7Fh-0002fP-Bg
+ for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:05:38 -0400
+Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1rl5hA-0000xB-6V
- for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 07:25:56 -0400
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-1dddbe47ac1so15513495ad.1
- for <qemu-riscv@nongnu.org>; Fri, 15 Mar 2024 04:25:49 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1rl7Fa-0006EO-EF
+ for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:05:36 -0400
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-1dc3b4b9b62so14075945ad.1
+ for <qemu-riscv@nongnu.org>; Fri, 15 Mar 2024 06:05:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1710501948; x=1711106748; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=9D1A+47M8HZ4rgmE3RGvdpACQZfP2AsPr6UkrnISCPc=;
- b=JE2coyS5PoQSzw5BTvIrWX7s5W1QCBp0+VZ9F5/H1/xrJfc7NH+67MfJfHOe55rev+
- Am+6i1UCoox24XfG//8gzXZXWr082BMLaPSIdNhMKxtCEDj5y+5dx6vwUuED+TCoatN+
- FNBOoojBrhpiN3C8iI97vsRDRrAA8UkYv5HxI+UvuzQdNy4Vwa/35b8+l2lUgH0RI5mB
- vko2O2jmroGR/K+8540E0NRd48rxpFe7iVeaZbtO25MUwoaxuWvE9IQwfqgtlGXqNY8t
- soKSYs2MtWZA0Zti+UmtWXDfhT9S7VlPpNvQt/nB5J6SkH1KcQvpto3PkyxnnvJCufE8
- SkHQ==
+ d=ventanamicro.com; s=google; t=1710507928; x=1711112728; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=hb20WeTYhA/SsGlP/0Ei7qOMHbpVXkux2bFbQE0hMyc=;
+ b=AcQOebZ9QZMBKMR3MIwQ+BmYk3as6qvdzxK4fboZ5lty8VebM0MwI0elxECsXysNrA
+ IiALPXqYvEfZW6HsvlS1+w5AbPiRxccEW0ir54KYd4C8xbK/CWnpLIoeHTfb7nwO2B6/
+ 2w+OVkYjksZh8BbJf/7F1a2SLcpUds7zhsV1Rwmyb42On/l/8QQK+3tKovrWwpigJSZq
+ DuVewdpxJLk2FFSXvZFfj80N8LqmMENIPzwMF4ogW/AdYvMkKLcDJ8embHupkF1RcXLc
+ mYR05Mp6oNFoT7EdEJxxlL0QUvCYpYdzxp7BppDL5FPtazt5QaIBwrH4CJmGhZf3y9DM
+ EFkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710501948; x=1711106748;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=9D1A+47M8HZ4rgmE3RGvdpACQZfP2AsPr6UkrnISCPc=;
- b=R359SwJ2loFkJLazp0FkEi0FPb5BFzzPc1wUkQPdMhkOPSbEhfu+DsqlltUzIxxYlC
- QYedzfZDNVJPAhB8tPdvo/7NEUoM1+Ddghze1R4UcgyWEqakcO8lev4DVivytdn1/FrU
- upLGFws5g/vthdRLGaTCYSgAXcDba+ulN8S3BhntLQguJyJXEHdSdg05sZ0qCJLywnKd
- 05OlC7tb41O2MnGixzZRhkqJN4A0UviV+2dn+K+CTxrqJMjBEUN/yCDzVkAhwtgXo50u
- MMdP6YtkcPWfEMJf1nqSLu4O88puvEt0qG9X639eihQRpNggsnKBjEJGDJYpz8RFhi9h
- nUNw==
-X-Gm-Message-State: AOJu0YzqMSFtWk4gNmb6H2s5lOvFFDcFOfj0AKRUnwEZTXsPN0+gdCbs
- RiyfBZ15Nde7NNhnhiYaiGIKpcUJ3ItbNNg7nOoRdDw31GIbT5FCz0y7T01XwEI=
-X-Google-Smtp-Source: AGHT+IFoyHnXZ6rKqjRtFi46/zItbJ8LBZKtMVFyiTTAVKACSwiC06Dmm0D0Vw/7eMdfEbJ5Tf6WyQ==
-X-Received: by 2002:a17:902:bcc2:b0:1dd:8ed0:59d0 with SMTP id
- o2-20020a170902bcc200b001dd8ed059d0mr5274111pls.17.1710501948340; 
- Fri, 15 Mar 2024 04:25:48 -0700 (PDT)
-Received: from [100.64.0.1] ([136.226.240.163])
+ d=1e100.net; s=20230601; t=1710507928; x=1711112728;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=hb20WeTYhA/SsGlP/0Ei7qOMHbpVXkux2bFbQE0hMyc=;
+ b=uQlGn0XzGlY06qrN+OqXq+1s9EDgeLapki5Liq/Tz2EbC1LG0ar6bNumlq///kmHZc
+ D2fLkPBMz8DR21ELLxyTvME8+usP49CRr9jILXqPgtSX39YkgHkNyOUITgD4bg6PNNyC
+ OERJ8B4OPtd7duNQ+de2bPB2mTPSaWp5xlFWJ9yJxoq5EJX96zdQyslXd6oh9eipHjZ3
+ Y98B6OI6yp96WwNO+Vy5CFkoxmEWenc/uJPUDtKLRopyeOAAlrx7mjhpV7zpuxINZ37T
+ xh3tv+vC5r7eXnW2XUJ7XVrH3LmEQjlT1p80dhTWxwN4a+QZp/ZkFwDSq2c2V5br+foy
+ PijQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXHDKpg8RV3rHT15zYiE73P06c+ieLpaaaYNVuiBjY1rCTUcJ5dbl5PcVk7vX4U451bltiqY8iauoG2MNw99E48LKJj9/w=
+X-Gm-Message-State: AOJu0YzXDAnOZ2G7y1mNbPZjlnpX1ZhvJlbmo+lYTSqHpBTNQYt3kotg
+ V8sUwToYJpgZsWg+D4Ah6xV3GKRKqr7tY0dZevrQn+jEqWivrpMzp/ah/FBD/24=
+X-Google-Smtp-Source: AGHT+IGqdpSG1Efxac4t+cV757Nr9pQNHYPVca+1XBYs4UksqXFlUai1WJhK2h4rZdwkhq35OEWEAA==
+X-Received: by 2002:a17:902:f612:b0:1dd:c938:8f8e with SMTP id
+ n18-20020a170902f61200b001ddc9388f8emr7791631plg.10.1710507927761; 
+ Fri, 15 Mar 2024 06:05:27 -0700 (PDT)
+Received: from sunil-pc.Dlink ([106.51.184.12])
  by smtp.gmail.com with ESMTPSA id
- j1-20020a170902c3c100b001ddb57a4dffsm3555571plj.132.2024.03.15.04.25.45
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 15 Mar 2024 04:25:47 -0700 (PDT)
-Message-ID: <41084cbb-bb01-4dbc-9334-01067eb8550a@sifive.com>
-Date: Fri, 15 Mar 2024 19:25:39 +0800
+ lh12-20020a170903290c00b001defd3e64d6sm182474plb.22.2024.03.15.06.05.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 15 Mar 2024 06:05:27 -0700 (PDT)
+From: Sunil V L <sunilvl@ventanamicro.com>
+To: qemu-devel@nongnu.org,
+	qemu-arm@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Paolo Bonzini <pbonzini@redhat.com>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+ Thomas Huth <thuth@redhat.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Gerd Hoffmann <kraxel@redhat.com>, "Michael S . Tsirkin" <mst@redhat.com>,
+ Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
+ Laurent Vivier <lvivier@redhat.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Alistair Francis <alistair23@gmail.com>,
+ Andrew Jones <ajones@ventanamicro.com>,
+ Anup Patel <apatel@ventanamicro.com>, Haibo1 Xu <haibo1.xu@intel.com>,
+ Sunil V L <sunilvl@ventanamicro.com>
+Subject: [PATCH 00/12] Add support for RISC-V ACPI tests
+Date: Fri, 15 Mar 2024 18:35:07 +0530
+Message-Id: <20240315130519.2378765-1-sunilvl@ventanamicro.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH for 9.0 v15 05/10] target/riscv: always clear vstart for
- ldst_whole insns
-Content-Language: en-US
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- richard.henderson@linaro.org
-References: <20240314175704.478276-1-dbarboza@ventanamicro.com>
- <20240314175704.478276-6-dbarboza@ventanamicro.com>
-From: Max Chou <max.chou@sifive.com>
-In-Reply-To: <20240314175704.478276-6-dbarboza@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
- envelope-from=max.chou@sifive.com; helo=mail-pl1-x634.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pl1-x632.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,146 +106,127 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Reviewed-by: Max Chou <max.chou@sifive.com>
+Currently, bios-table-test doesn't support RISC-V. This series enables
+the framework changes required and basic testing. Things like NUMA
+related test cases will be added later.
 
-On 2024/3/15 1:56 AM, Daniel Henrique Barboza wrote:
-> Commit 8ff8ac6329 added a conditional to guard the vext_ldst_whole()
-> helper if vstart >= evl. But by skipping the helper we're also not
-> setting vstart = 0 at the end of the insns, which is incorrect.
->
-> We'll move the conditional to vext_ldst_whole(), following in line with
-> the removal of all brconds vstart >= vl that the next patch will do. The
-> idea is to make the helpers responsible for their own vstart management.
->
-> Fix ldst_whole isns by:
->
-> - remove the brcond that skips the helper if vstart is >= evl;
->
-> - vext_ldst_whole() now does an early exit with the same check, where
->    evl = (vlenb * nf) >> log2_esz, but the early exit will also clear
->    vstart.
->
-> The 'width' param is now unneeded in ldst_whole_trans() and is also
-> removed. It was used for the evl calculation for the brcond and has no
-> other use now.  The 'width' is reflected in vext_ldst_whole() via
-> log2_esz, which is encoded by GEN_VEXT_LD_WHOLE() as
-> "ctzl(sizeof(ETYPE))".
->
-> Suggested-by: Max Chou <max.chou@sifive.com>
-> Fixes: 8ff8ac6329 ("target/riscv: rvv: Add missing early exit condition for whole register load/store")
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> ---
->   target/riscv/insn_trans/trans_rvv.c.inc | 52 +++++++++++--------------
->   target/riscv/vector_helper.c            |  5 +++
->   2 files changed, 28 insertions(+), 29 deletions(-)
->
-> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-> index 52c26a7834..1366445e1f 100644
-> --- a/target/riscv/insn_trans/trans_rvv.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-> @@ -1097,13 +1097,9 @@ GEN_VEXT_TRANS(vle64ff_v, MO_64, r2nfvm, ldff_op, ld_us_check)
->   typedef void gen_helper_ldst_whole(TCGv_ptr, TCGv, TCGv_env, TCGv_i32);
->   
->   static bool ldst_whole_trans(uint32_t vd, uint32_t rs1, uint32_t nf,
-> -                             uint32_t width, gen_helper_ldst_whole *fn,
-> +                             gen_helper_ldst_whole *fn,
->                                DisasContext *s)
->   {
-> -    uint32_t evl = s->cfg_ptr->vlenb * nf / width;
-> -    TCGLabel *over = gen_new_label();
-> -    tcg_gen_brcondi_tl(TCG_COND_GEU, cpu_vstart, evl, over);
-> -
->       TCGv_ptr dest;
->       TCGv base;
->       TCGv_i32 desc;
-> @@ -1120,8 +1116,6 @@ static bool ldst_whole_trans(uint32_t vd, uint32_t rs1, uint32_t nf,
->   
->       fn(dest, base, tcg_env, desc);
->   
-> -    gen_set_label(over);
-> -
->       return true;
->   }
->   
-> @@ -1129,42 +1123,42 @@ static bool ldst_whole_trans(uint32_t vd, uint32_t rs1, uint32_t nf,
->    * load and store whole register instructions ignore vtype and vl setting.
->    * Thus, we don't need to check vill bit. (Section 7.9)
->    */
-> -#define GEN_LDST_WHOLE_TRANS(NAME, ARG_NF, WIDTH)               \
-> +#define GEN_LDST_WHOLE_TRANS(NAME, ARG_NF)                                \
->   static bool trans_##NAME(DisasContext *s, arg_##NAME * a)                 \
->   {                                                                         \
->       if (require_rvv(s) &&                                                 \
->           QEMU_IS_ALIGNED(a->rd, ARG_NF)) {                                 \
-> -        return ldst_whole_trans(a->rd, a->rs1, ARG_NF, WIDTH,             \
-> +        return ldst_whole_trans(a->rd, a->rs1, ARG_NF,                    \
->                                   gen_helper_##NAME, s);                    \
->       }                                                                     \
->       return false;                                                         \
->   }
->   
-> -GEN_LDST_WHOLE_TRANS(vl1re8_v,  1, 1)
-> -GEN_LDST_WHOLE_TRANS(vl1re16_v, 1, 2)
-> -GEN_LDST_WHOLE_TRANS(vl1re32_v, 1, 4)
-> -GEN_LDST_WHOLE_TRANS(vl1re64_v, 1, 8)
-> -GEN_LDST_WHOLE_TRANS(vl2re8_v,  2, 1)
-> -GEN_LDST_WHOLE_TRANS(vl2re16_v, 2, 2)
-> -GEN_LDST_WHOLE_TRANS(vl2re32_v, 2, 4)
-> -GEN_LDST_WHOLE_TRANS(vl2re64_v, 2, 8)
-> -GEN_LDST_WHOLE_TRANS(vl4re8_v,  4, 1)
-> -GEN_LDST_WHOLE_TRANS(vl4re16_v, 4, 2)
-> -GEN_LDST_WHOLE_TRANS(vl4re32_v, 4, 4)
-> -GEN_LDST_WHOLE_TRANS(vl4re64_v, 4, 8)
-> -GEN_LDST_WHOLE_TRANS(vl8re8_v,  8, 1)
-> -GEN_LDST_WHOLE_TRANS(vl8re16_v, 8, 2)
-> -GEN_LDST_WHOLE_TRANS(vl8re32_v, 8, 4)
-> -GEN_LDST_WHOLE_TRANS(vl8re64_v, 8, 8)
-> +GEN_LDST_WHOLE_TRANS(vl1re8_v,  1)
-> +GEN_LDST_WHOLE_TRANS(vl1re16_v, 1)
-> +GEN_LDST_WHOLE_TRANS(vl1re32_v, 1)
-> +GEN_LDST_WHOLE_TRANS(vl1re64_v, 1)
-> +GEN_LDST_WHOLE_TRANS(vl2re8_v,  2)
-> +GEN_LDST_WHOLE_TRANS(vl2re16_v, 2)
-> +GEN_LDST_WHOLE_TRANS(vl2re32_v, 2)
-> +GEN_LDST_WHOLE_TRANS(vl2re64_v, 2)
-> +GEN_LDST_WHOLE_TRANS(vl4re8_v,  4)
-> +GEN_LDST_WHOLE_TRANS(vl4re16_v, 4)
-> +GEN_LDST_WHOLE_TRANS(vl4re32_v, 4)
-> +GEN_LDST_WHOLE_TRANS(vl4re64_v, 4)
-> +GEN_LDST_WHOLE_TRANS(vl8re8_v,  8)
-> +GEN_LDST_WHOLE_TRANS(vl8re16_v, 8)
-> +GEN_LDST_WHOLE_TRANS(vl8re32_v, 8)
-> +GEN_LDST_WHOLE_TRANS(vl8re64_v, 8)
->   
->   /*
->    * The vector whole register store instructions are encoded similar to
->    * unmasked unit-stride store of elements with EEW=8.
->    */
-> -GEN_LDST_WHOLE_TRANS(vs1r_v, 1, 1)
-> -GEN_LDST_WHOLE_TRANS(vs2r_v, 2, 1)
-> -GEN_LDST_WHOLE_TRANS(vs4r_v, 4, 1)
-> -GEN_LDST_WHOLE_TRANS(vs8r_v, 8, 1)
-> +GEN_LDST_WHOLE_TRANS(vs1r_v, 1)
-> +GEN_LDST_WHOLE_TRANS(vs2r_v, 2)
-> +GEN_LDST_WHOLE_TRANS(vs4r_v, 4)
-> +GEN_LDST_WHOLE_TRANS(vs8r_v, 8)
->   
->   /*
->    *** Vector Integer Arithmetic Instructions
-> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index bcc553c0e2..1f4c276b21 100644
-> --- a/target/riscv/vector_helper.c
-> +++ b/target/riscv/vector_helper.c
-> @@ -572,6 +572,11 @@ vext_ldst_whole(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
->       uint32_t vlenb = riscv_cpu_cfg(env)->vlenb;
->       uint32_t max_elems = vlenb >> log2_esz;
->   
-> +    if (env->vstart >= ((vlenb * nf) >> log2_esz)) {
-> +        env->vstart = 0;
-> +        return;
-> +    }
-> +
->       k = env->vstart / max_elems;
->       off = env->vstart % max_elems;
->   
+This needs refactoring/renaming of ARM64 bios table tests. Importantly,
+the test cases now look for the expected AML files under
+tests/data/acpi/virt/aarch64 path instead of directly under
+tests/data/acpi/virt. To keep test cases not to fail because of this
+movement, they are updated to look for both paths first.
+
+As part of this effort, it is found that uefi-test-tools is currently
+broken to build. So, updated its Makefile as well to use python based
+edk2 build script.
+
+The series depends on Gerd's below series.
+https://lists.gnu.org/archive/html/qemu-devel/2024-03/msg03855.html
+
+The changes are also available at branch
+https://gitlab.com/vlsunil/qemu/-/tree/riscv_bios_table_test_v1
+
+This branch which is on top of Gerd's series completed CI tests.
+https://gitlab.com/vlsunil/qemu/-/pipelines/1214784985
+
+
+Sunil V L (12):
+  roms/edk2-build.py: Add --module support
+  uefi-test-tools/UefiTestToolsPkg: Add RISC-V support
+  uefi-test-tools: Add support for python based build script
+  tests/data/uefi-boot-images: Add RISC-V ISO image
+  qtest: bios-tables-test: Rename aarch64 tests with aarch64 in them
+  tests/qtest/bios-tables-test.c: Add support for arch in path
+  tests/data/acpi/virt: Move ACPI tables under aarch64
+  meson.build: Add RISC-V to the edk2-target list
+  pc-bios/meson.build: Add support for RISC-V in unpack_edk2_blobs
+  tests/data/acpi/rebuild-expected-aml.sh: Add RISC-V
+  tests/data/acpi/virt/riscv64: Add expected ACPI tables for RISC-V
+  tests/qtest/bios-tables-test.c: Enable basic testing for RISC-V
+
+ meson.build                                   |   2 +-
+ pc-bios/meson.build                           |   2 +
+ roms/edk2-build.py                            |   3 +
+ tests/data/acpi/rebuild-expected-aml.sh       |   5 +-
+ tests/data/acpi/virt/{ => aarch64}/APIC       | Bin
+ .../acpi/virt/{ => aarch64}/APIC.acpihmatvirt | Bin
+ .../acpi/virt/{ => aarch64}/APIC.topology     | Bin
+ tests/data/acpi/virt/{ => aarch64}/DBG2       | Bin
+ tests/data/acpi/virt/{ => aarch64}/DSDT       | Bin
+ .../acpi/virt/{ => aarch64}/DSDT.acpihmatvirt | Bin
+ tests/data/acpi/virt/{ => aarch64}/DSDT.memhp | Bin
+ tests/data/acpi/virt/{ => aarch64}/DSDT.pxb   | Bin
+ .../acpi/virt/{ => aarch64}/DSDT.topology     | Bin
+ tests/data/acpi/virt/{ => aarch64}/FACP       | Bin
+ tests/data/acpi/virt/{ => aarch64}/GTDT       | Bin
+ .../acpi/virt/{ => aarch64}/HMAT.acpihmatvirt | Bin
+ tests/data/acpi/virt/{ => aarch64}/IORT       | Bin
+ tests/data/acpi/virt/{ => aarch64}/MCFG       | Bin
+ tests/data/acpi/virt/{ => aarch64}/NFIT.memhp | Bin
+ tests/data/acpi/virt/{ => aarch64}/PPTT       | Bin
+ .../acpi/virt/{ => aarch64}/PPTT.acpihmatvirt | Bin
+ .../acpi/virt/{ => aarch64}/PPTT.topology     | Bin
+ tests/data/acpi/virt/{ => aarch64}/SLIT.memhp | Bin
+ tests/data/acpi/virt/{ => aarch64}/SPCR       | Bin
+ .../acpi/virt/{ => aarch64}/SRAT.acpihmatvirt | Bin
+ tests/data/acpi/virt/{ => aarch64}/SRAT.memhp | Bin
+ .../data/acpi/virt/{ => aarch64}/SRAT.numamem | Bin
+ tests/data/acpi/virt/{ => aarch64}/SSDT.memhp | Bin
+ tests/data/acpi/virt/{ => aarch64}/VIOT       | Bin
+ tests/data/acpi/virt/riscv64/APIC             | Bin 0 -> 116 bytes
+ tests/data/acpi/virt/riscv64/BGRT             | Bin 0 -> 56 bytes
+ tests/data/acpi/virt/riscv64/DSDT             | Bin 0 -> 3518 bytes
+ tests/data/acpi/virt/riscv64/FACP             | Bin 0 -> 276 bytes
+ tests/data/acpi/virt/riscv64/MCFG             | Bin 0 -> 60 bytes
+ tests/data/acpi/virt/riscv64/RHCT             | Bin 0 -> 314 bytes
+ tests/data/acpi/virt/riscv64/RSDP             | Bin 0 -> 36 bytes
+ tests/data/acpi/virt/riscv64/SPCR             | Bin 0 -> 80 bytes
+ tests/data/acpi/virt/riscv64/XSDT             | Bin 0 -> 84 bytes
+ .../bios-tables-test.riscv64.iso.qcow2        | Bin 0 -> 16896 bytes
+ tests/qtest/bios-tables-test.c                |  95 ++++++++++++++----
+ tests/qtest/meson.build                       |   3 +
+ tests/uefi-test-tools/Makefile                |  18 ++--
+ .../UefiTestToolsPkg/UefiTestToolsPkg.dsc     |   6 +-
+ tests/uefi-test-tools/uefi-test-build.config  |  57 +++++++++++
+ 44 files changed, 156 insertions(+), 35 deletions(-)
+ rename tests/data/acpi/virt/{ => aarch64}/APIC (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/APIC.acpihmatvirt (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/APIC.topology (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/DBG2 (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/DSDT (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/DSDT.acpihmatvirt (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/DSDT.memhp (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/DSDT.pxb (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/DSDT.topology (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/FACP (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/GTDT (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/HMAT.acpihmatvirt (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/IORT (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/MCFG (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/NFIT.memhp (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/PPTT (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/PPTT.acpihmatvirt (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/PPTT.topology (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/SLIT.memhp (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/SPCR (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/SRAT.acpihmatvirt (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/SRAT.memhp (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/SRAT.numamem (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/SSDT.memhp (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/VIOT (100%)
+ create mode 100755 tests/data/acpi/virt/riscv64/APIC
+ create mode 100755 tests/data/acpi/virt/riscv64/BGRT
+ create mode 100755 tests/data/acpi/virt/riscv64/DSDT
+ create mode 100755 tests/data/acpi/virt/riscv64/FACP
+ create mode 100755 tests/data/acpi/virt/riscv64/MCFG
+ create mode 100755 tests/data/acpi/virt/riscv64/RHCT
+ create mode 100755 tests/data/acpi/virt/riscv64/RSDP
+ create mode 100755 tests/data/acpi/virt/riscv64/SPCR
+ create mode 100755 tests/data/acpi/virt/riscv64/XSDT
+ create mode 100644 tests/data/uefi-boot-images/bios-tables-test.riscv64.iso.qcow2
+ create mode 100644 tests/uefi-test-tools/uefi-test-build.config
+
+-- 
+2.40.1
+
 
