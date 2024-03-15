@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBA4BC54E67
-	for <qemu-riscv@archiver.kernel.org>; Fri, 15 Mar 2024 13:11:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AF41C54E67
+	for <qemu-riscv@archiver.kernel.org>; Fri, 15 Mar 2024 13:11:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rl7KU-00079y-CX; Fri, 15 Mar 2024 09:10:36 -0400
+	id 1rl7Jd-0005jP-4Z; Fri, 15 Mar 2024 09:09:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rl7Jt-0006Fw-Am
- for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:09:59 -0400
-Received: from mail-ed1-x52b.google.com ([2a00:1450:4864:20::52b])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rl7JM-0005cE-RU
+ for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:09:27 -0400
+Received: from mail-ej1-x630.google.com ([2a00:1450:4864:20::630])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rl7Jr-0007oU-CQ
- for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:09:57 -0400
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5654f700705so3151197a12.1
- for <qemu-riscv@nongnu.org>; Fri, 15 Mar 2024 06:09:54 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rl7JK-0007Yb-CV
+ for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:09:24 -0400
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-a44ad785a44so239980966b.3
+ for <qemu-riscv@nongnu.org>; Fri, 15 Mar 2024 06:09:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710508194; x=1711112994; darn=nongnu.org;
+ d=linaro.org; s=google; t=1710508161; x=1711112961; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ySG/dFK2HZQD+JLMFszQWRBPaJ0ef+Mlaqjr0ZCyRnE=;
- b=tuqz9HFZlx17dZBgoNJXeIqQekDWSLeSnWaxNzUh2kPjqhh2NI6iM0awgV3ecbynib
- Bem2/FOZH82gSms8U3TLKflZIPYjNZiEQIaMGhMjt5K/ZDZi/owwQC5ZUIdNO2eWTKNj
- ba3OU8Joeq7FlwAXszCr7CR0ReNDX+lqABOKd1RORKMAry7J06OHE+hG64GmQqZpMI5R
- VzpFQynQbfNZL/bquJl7/Xez0Yr+eJ4Qru9X1jII2f0vImtEmjY9eb1XCo5XOd9i9w+T
- lUaex0zTN7ZbT1BT2f7d6RUcHsdvLQOZFYt2kATeoccRlkTkajGZoqdCGLSh67JYQuDR
- ImDw==
+ bh=NCfHsLOktJnJk/FrjkYW88SQD28CKLAyjY7rSKM5rcw=;
+ b=ODJzEgTewYBjA1vbFoVLXqCZ/dmX12nggcch+wbY2JIpDZ7la337XjSWIPaem4ny5X
+ GjBb4zdyTaBRk8GBL4lcjQHisbgN+KzSLDGEL8unHJ4/WoJJwfKbFYGgui6i+GlcsoGd
+ mJtsgMnOXDOysu8GsEcvziGvAbQt7oHQah5A0P2x99BpnJUb6VIhRcdsUv25HgIEd7by
+ FN+OdZmERQcQnCJjHSfre4uYTEAdGtK+37jzUaUnxnEu7M8E0HZM/r8OJX2djlpF6V1c
+ MzcSmoyOqp92pk2mdGlZf0pnPFiLFRGwv7vivJy7qGwhYe84ztuIs26nslSLADNrrUdf
+ cKnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710508194; x=1711112994;
+ d=1e100.net; s=20230601; t=1710508161; x=1711112961;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ySG/dFK2HZQD+JLMFszQWRBPaJ0ef+Mlaqjr0ZCyRnE=;
- b=DCGnreG91pxicq5rvDvAzPeansYv6XlTGorRdlp4XgX7Srj8evLBThAiAq8JEANxGO
- gUno7x4qnJhRZ/PEAqZirJsTj3YpxTwxCUpplbNHn1soqfo6NtsYq6tsfFigLtfeyNfN
- +ob3by2PA2hpdBqHSLC1HlcXT0tiLsDAeTqUOlf61QhoxWk/8iADB/MHGmQRVS9pSlz6
- 86unvnegBw9UusYz2FaxeEC40jv3hFfnAQ8uwU7xrTAr7wvftZhaZymDuBe/idhuet4J
- NIPXiGuR2H088lwNfJorpDB9PyFBhTIK96CY/xbdvRIApVhswa5xj9tCSOmvwXRr2pBB
- Mu7Q==
-X-Gm-Message-State: AOJu0YwS0Fs6U9917jMFwlr3l4CLtmbpvSyUWBimKYqS4YyPk2MnVhfG
- AaGFBMsdBNRlEgt/jova/ahj0aCwjs1WYXhimkaHim5kZtayF9VUDDXbWEr0TcM=
-X-Google-Smtp-Source: AGHT+IExmkLmMqoSeV72lixftAHxYOtVn4ReIk8rzurrdOHIVhJgEKO7oZjURsJA9vDI1+WjYK1UFA==
-X-Received: by 2002:a05:6402:c50:b0:568:93bb:d0c2 with SMTP id
- cs16-20020a0564020c5000b0056893bbd0c2mr4363087edb.20.1710508193742; 
- Fri, 15 Mar 2024 06:09:53 -0700 (PDT)
+ bh=NCfHsLOktJnJk/FrjkYW88SQD28CKLAyjY7rSKM5rcw=;
+ b=iBKbvl123kfpq6nPjKPjfBglekf/5H+dQ33WhNiU7hhyMMzn6BN/NRIIQv0TofvT7R
+ 9yfM2IIgajcy4nWOK6d+ONE5XYj0Vrf0GVaODrOBzDCEdol8LPmT1roTRfWHXRiZzhbq
+ CxikzbyaDRwVXSUDgXLSkhtPv5FApXpsM4aRCRI2EIxFSqgaH4K1DnPJVqtkv2XlOPDR
+ CqmG6lnx8gpP9Wms9tulcT24Dfgn/F+ZJZbMXjCippBKZy7fLq42hX/McoUjlIdhgEQO
+ AaPlYRBEqjieUS8C5qYvMNadBWoFzLQzn/1BnNvcQeX1yMItscwUSxSaBsY9B7dm6uVS
+ g83Q==
+X-Gm-Message-State: AOJu0YxQtqlnBUYEJF9YQGwVSxo6B6ZDE0AP5URoU5UHmns1D2bmfQXd
+ ntyas3Urjg9/mRKB2sUoS3zlujFJxXlkFhsxaCGbEVu7WmBRmnI3RHS1ZTyJjgA=
+X-Google-Smtp-Source: AGHT+IEIqbu+dkyYORdlV0Gte9UybiujX61BXzptaCyYsWEUuL7ULvFX0eVwlBjaCfc67LjfUoRRVg==
+X-Received: by 2002:a17:906:360a:b0:a46:9a13:362c with SMTP id
+ q10-20020a170906360a00b00a469a13362cmr291836ejb.52.1710508160915; 
+ Fri, 15 Mar 2024 06:09:20 -0700 (PDT)
 Received: from m1x-phil.lan ([176.176.145.26])
  by smtp.gmail.com with ESMTPSA id
- 6-20020a0564021f4600b005682a0e915fsm1675523edz.76.2024.03.15.06.09.51
+ g12-20020a17090613cc00b00a45ff1fe8dasm1693781ejc.115.2024.03.15.06.09.18
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 15 Mar 2024 06:09:53 -0700 (PDT)
+ Fri, 15 Mar 2024 06:09:20 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org,
 	Markus Armbruster <armbru@redhat.com>
@@ -70,20 +70,19 @@ Cc: qemu-riscv@nongnu.org, Anton Johansson <anjo@rev.ng>,
  Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
  Zhao Liu <zhao1.liu@intel.com>, qemu-arm@nongnu.org,
  Thomas Huth <thuth@redhat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Laurent Vivier <lvivier@redhat.com>
-Subject: [PATCH-for-9.1 06/21] target/i386: Make X86_CPU common to new
- I386_CPU / X86_64_CPU types
-Date: Fri, 15 Mar 2024 14:08:54 +0100
-Message-ID: <20240315130910.15750-7-philmd@linaro.org>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH-for-9.1 01/21] target/i386: Declare CPU QOM types using
+ DEFINE_TYPES() macro
+Date: Fri, 15 Mar 2024 14:08:49 +0100
+Message-ID: <20240315130910.15750-2-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240315130910.15750-1-philmd@linaro.org>
 References: <20240315130910.15750-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::52b;
- envelope-from=philmd@linaro.org; helo=mail-ed1-x52b.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::630;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x630.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -106,112 +105,106 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-"target/foo/cpu-qom.h" can not use any target specific definitions.
+When multiple QOM types are registered in the same file,
+it is simpler to use the the DEFINE_TYPES() macro. In
+particular because type array declared with such macro
+are easier to review.
 
-Currently "target/i386/cpu-qom.h" defines TYPE_X86_CPU depending
-on the i386/x86_64 build type. This doesn't scale in a heterogeneous
-context where we need to access both types concurrently.
-
-In order to do that, introduce the new I386_CPU / X86_64_CPU
-types, both inheriting a common TYPE_X86_CPU base type.
-
-Keep the current "base" and "max" CPU types as 32 or 64-bit,
-depending on the binary built.
-
-Adapt the cpu-plug-test, since the 'base' architecture is now
-common to both 32/64-bit x86 targets.
+In few commits we are going to add more types, so replace
+the type_register_static() to ease further reviews.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Acked-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
+Message-Id: <20231013140116.255-14-philmd@linaro.org>
 ---
- target/i386/cpu-qom.h       | 16 ++++++++++------
- target/i386/cpu.c           | 20 ++++++++++++++++++--
- tests/qtest/cpu-plug-test.c |  2 +-
- 3 files changed, 29 insertions(+), 9 deletions(-)
+ target/i386/cpu.c | 50 ++++++++++++++++++++++-------------------------
+ 1 file changed, 23 insertions(+), 27 deletions(-)
 
-diff --git a/target/i386/cpu-qom.h b/target/i386/cpu-qom.h
-index d4e216d000..de28d7ea20 100644
---- a/target/i386/cpu-qom.h
-+++ b/target/i386/cpu-qom.h
-@@ -1,5 +1,5 @@
- /*
-- * QEMU x86 CPU
-+ * QEMU x86 CPU QOM header (target agnostic)
-  *
-  * Copyright (c) 2012 SUSE LINUX Products GmbH
-  *
-@@ -22,14 +22,18 @@
- 
- #include "hw/core/cpu.h"
- 
--#ifdef TARGET_X86_64
--#define TYPE_X86_CPU "x86_64-cpu"
--#else
--#define TYPE_X86_CPU "i386-cpu"
--#endif
-+#define TYPE_X86_CPU    "x86-cpu"
-+#define TYPE_I386_CPU   "i386-cpu"
-+#define TYPE_X86_64_CPU "x86_64-cpu"
- 
- OBJECT_DECLARE_CPU_TYPE(X86CPU, X86CPUClass, X86_CPU)
- 
-+OBJECT_DECLARE_CPU_TYPE(I386CPU, X86CPUClass, I386_CPU)
-+OBJECT_DECLARE_CPU_TYPE(X86_64CPU, X86CPUClass, X86_64_CPU)
-+
-+#define X86_CPU_TYPE_SUFFIX "-" TYPE_X86_CPU
-+#define X86_CPU_TYPE_NAME(name) (name X86_CPU_TYPE_SUFFIX)
-+
- #define X86_CPU_TYPE_SUFFIX "-" TYPE_X86_CPU
- #define X86_CPU_TYPE_NAME(name) (name X86_CPU_TYPE_SUFFIX)
- 
 diff --git a/target/i386/cpu.c b/target/i386/cpu.c
-index ebf555f50f..07f64c1ea5 100644
+index 9a210d8d92..ebf555f50f 100644
 --- a/target/i386/cpu.c
 +++ b/target/i386/cpu.c
-@@ -8057,12 +8057,28 @@ static const TypeInfo x86_cpu_types[] = {
-         .class_size     = sizeof(X86CPUClass),
-         .class_init     = x86_cpu_common_class_init,
-     }, {
--        .name           = X86_CPU_TYPE_NAME("base"),
-+        .name           = TYPE_I386_CPU,
-         .parent         = TYPE_X86_CPU,
+@@ -4991,13 +4991,6 @@ static void max_x86_cpu_initfn(Object *obj)
+                             &error_abort);
+ }
+ 
+-static const TypeInfo max_x86_cpu_type_info = {
+-    .name = X86_CPU_TYPE_NAME("max"),
+-    .parent = TYPE_X86_CPU,
+-    .instance_init = max_x86_cpu_initfn,
+-    .class_init = max_x86_cpu_class_init,
+-};
+-
+ static char *feature_word_description(FeatureWordInfo *f, uint32_t bit)
+ {
+     assert(f->type == CPUID_FEATURE_WORD || f->type == MSR_FEATURE_WORD);
+@@ -8041,19 +8034,6 @@ static void x86_cpu_common_class_init(ObjectClass *oc, void *data)
+     }
+ }
+ 
+-static const TypeInfo x86_cpu_type_info = {
+-    .name = TYPE_X86_CPU,
+-    .parent = TYPE_CPU,
+-    .instance_size = sizeof(X86CPU),
+-    .instance_align = __alignof(X86CPU),
+-    .instance_init = x86_cpu_initfn,
+-    .instance_post_init = x86_cpu_post_initfn,
+-
+-    .abstract = true,
+-    .class_size = sizeof(X86CPUClass),
+-    .class_init = x86_cpu_common_class_init,
+-};
+-
+ /* "base" CPU model, used by query-cpu-model-expansion */
+ static void x86_cpu_base_class_init(ObjectClass *oc, void *data)
+ {
+@@ -8065,22 +8045,38 @@ static void x86_cpu_base_class_init(ObjectClass *oc, void *data)
+     xcc->ordering = 8;
+ }
+ 
+-static const TypeInfo x86_base_cpu_type_info = {
+-        .name = X86_CPU_TYPE_NAME("base"),
+-        .parent = TYPE_X86_CPU,
+-        .class_init = x86_cpu_base_class_init,
++static const TypeInfo x86_cpu_types[] = {
++    {
++        .name           = TYPE_X86_CPU,
++        .parent         = TYPE_CPU,
 +        .abstract       = true,
-+    }, {
-+        .name           = TYPE_X86_64_CPU,
-+        .parent         = TYPE_X86_CPU,
-+        .abstract       = true,
++        .instance_size  = sizeof(X86CPU),
++        .instance_align = __alignof(X86CPU),
++        .instance_init  = x86_cpu_initfn,
++        .instance_post_init = x86_cpu_post_initfn,
++        .class_size     = sizeof(X86CPUClass),
++        .class_init     = x86_cpu_common_class_init,
 +    }, {
 +        .name           = X86_CPU_TYPE_NAME("base"),
-+#ifdef TARGET_X86_64
-+        .parent         = TYPE_X86_64_CPU,
-+#else
-+        .parent         = TYPE_I386_CPU,
-+#endif
-         .class_init     = x86_cpu_base_class_init,
-     }, {
-         .name           = X86_CPU_TYPE_NAME("max"),
--        .parent         = TYPE_X86_CPU,
-+#ifdef TARGET_X86_64
-+        .parent         = TYPE_X86_64_CPU,
-+#else
-+        .parent         = TYPE_I386_CPU,
-+#endif
-         .instance_init  = max_x86_cpu_initfn,
-         .class_init     = max_x86_cpu_class_init,
++        .parent         = TYPE_X86_CPU,
++        .class_init     = x86_cpu_base_class_init,
++    }, {
++        .name           = X86_CPU_TYPE_NAME("max"),
++        .parent         = TYPE_X86_CPU,
++        .instance_init  = max_x86_cpu_initfn,
++        .class_init     = max_x86_cpu_class_init,
++    }
+ };
+ 
++DEFINE_TYPES(x86_cpu_types)
++
+ static void x86_cpu_register_types(void)
+ {
+     int i;
+ 
+-    type_register_static(&x86_cpu_type_info);
+     for (i = 0; i < ARRAY_SIZE(builtin_x86_defs); i++) {
+         x86_register_cpudef_types(&builtin_x86_defs[i]);
      }
-diff --git a/tests/qtest/cpu-plug-test.c b/tests/qtest/cpu-plug-test.c
-index 7f5dd5f85a..97316d131f 100644
---- a/tests/qtest/cpu-plug-test.c
-+++ b/tests/qtest/cpu-plug-test.c
-@@ -90,7 +90,7 @@ static void add_pc_test_case(const char *mname)
-     data->machine = g_strdup(mname);
-     data->cpu_model = "Haswell"; /* 1.3+ theoretically */
-     data->device_model = g_strdup_printf("%s-%s-cpu", data->cpu_model,
--                                         qtest_get_arch());
-+                                         qtest_get_base_arch());
-     data->sockets = 1;
-     data->cores = 3;
-     data->threads = 2;
+-    type_register_static(&max_x86_cpu_type_info);
+-    type_register_static(&x86_base_cpu_type_info);
+ }
+ 
+ type_init(x86_cpu_register_types)
 -- 
 2.41.0
 
