@@ -4,81 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97A57C54E60
-	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Mar 2024 19:31:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8769C54E66
+	for <qemu-riscv@archiver.kernel.org>; Fri, 15 Mar 2024 07:41:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rkqnX-0004b4-Vq; Thu, 14 Mar 2024 15:31:29 -0400
+	id 1rl2Bt-0007u8-G1; Fri, 15 Mar 2024 03:41:21 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1rkqnT-0004aP-P1
- for qemu-riscv@nongnu.org; Thu, 14 Mar 2024 15:31:23 -0400
-Received: from mail-ej1-x62b.google.com ([2a00:1450:4864:20::62b])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1rl2Bj-0007tG-Ew
+ for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 03:41:12 -0400
+Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1rkqnS-0006lJ-8c
- for qemu-riscv@nongnu.org; Thu, 14 Mar 2024 15:31:23 -0400
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-a461c50deccso161446066b.0
- for <qemu-riscv@nongnu.org>; Thu, 14 Mar 2024 12:31:21 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1rl2Be-0007uY-Rc
+ for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 03:41:11 -0400
+Received: by mail-pf1-x433.google.com with SMTP id
+ d2e1a72fcca58-6e6b6e000a4so1362051b3a.0
+ for <qemu-riscv@nongnu.org>; Fri, 15 Mar 2024 00:41:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1710444681; x=1711049481; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=QDm82kgs1koLHv7e0mRvTna5FDZBVGQ7ihe6nZd6rnU=;
- b=lmIEOhleEHsBLJ1PCgz2kzMhiDcGFWOC4qB78FeEqK/7/yJB5S8M3Mn9BSmUztn+PX
- iqpYIrCw1B5AbHn8woRCvB0x6fdzf89jSuwG+mCI8xPCbpsfsRUVd/6M64G02NuMXQtD
- BHcEGhwIeGW8KC9K0dASXTI3KjwQ9jqQLIGLKNGm1oaNvc+6VGA+kq6dQ3Cwfqhse9kI
- /q+SL2hjNk+XJkD9duSr7Jh3+uVawBw2gpsnN33XuaVY5HPe06BOaI16+uy7FCGcfRX8
- U9uhzDZ58NoxtsxuNEYAm+Ld5ml6IB3yHoAGH7WAGyXJ4YYo9Byl+kkSIe7EzJ7IIjLB
- IFjw==
+ d=linaro.org; s=google; t=1710488465; x=1711093265; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=x3aV8HQ4WjKEMx6NnzvwRldcXujKdgr4tOTbHzt86yk=;
+ b=TfvXYwsnWhnwWpx/F6DEBEBN4bN028hECbhQZ0s1qIsL2VB4cFch/Icru9UbwlX9FV
+ Dn8ITnh/zDINaIkv6P8p1c+68qsDb83RZj9Vs962nBmpalxOy1tCrDc2XOJzhDfUwV9N
+ 059ngfJjc4C1veaTHDZmNsiOXVszrRiepiJySeJ26HVxD9wxFRUbFVj1RgBC8zEPcrG4
+ s/kP/Rg3MBlmBrlus5uhaZOlaq+t2K3Uy4QtZjkCa3sXr0ZNLKFtRR8VzFqMI7HJgOYW
+ SZBDVb7omrEg94De8HdUAgxm7Ub6ggcW2m+tfzzpi/oDP1VU00m3iSRQQ0B2YNTTzEj1
+ 8wuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710444681; x=1711049481;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QDm82kgs1koLHv7e0mRvTna5FDZBVGQ7ihe6nZd6rnU=;
- b=fQFcNLEerbmDtyUxHxKfE6EjasXfFOJxf44bVVOnbzxM1B56XrvvGvoPZy9I0YQG/U
- ScJpUDNXc7VlhcZ7jRIe2ATeXRbPtgCH5Un6lyNlFlb9yO4mvfFWEzt0rX/X/5tDlb3w
- w4+z6cedC6z2mIe5Ascs+pYYjG5CjKpwPpDaqFBn/T2atY/L3ytuhdvDK159OG/4Y8jr
- riWQS5rZH/Lk5hR4JkwOEknA0uiHxoXsCKcSneJGDEL896vAEtp3HU2Lh+pOCPjBHaYE
- 85h5Sz6CgaxIU334U1kuLD2rW4eyihe06scjyxbQuPfWrBdPIAahIpKHD7HFd8XG6N3W
- X8mA==
-X-Gm-Message-State: AOJu0Yw3dDOkYZFESPy9DYMRP1UtbCazZd8dc2ZvGypCPRditVMvaSiO
- i1o4VFrbu7JDjoNPDTQoDUggnYAe0u6qZAGMxNfigXIe6AOiF/ZxhGJ6hTDVLTM=
-X-Google-Smtp-Source: AGHT+IHXLdyXC1PGfy+QsiimxFWYb89gJA+FbJu/zqP6bc6APuLolHG1a8IxnFQGG6LlrbM6clgIZA==
-X-Received: by 2002:a17:907:c783:b0:a46:42d4:fbd4 with SMTP id
- tz3-20020a170907c78300b00a4642d4fbd4mr2190025ejc.35.1710444680885; 
- Thu, 14 Mar 2024 12:31:20 -0700 (PDT)
-Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
- by smtp.gmail.com with ESMTPSA id
- h26-20020a17090619da00b00a4668200ba1sm961495ejd.207.2024.03.14.12.31.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Mar 2024 12:31:20 -0700 (PDT)
-Date: Thu, 14 Mar 2024 20:31:19 +0100
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Himanshu Chauhan <hchauhan@ventanamicro.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Subject: Re: [PATCH v7 4/4] target/riscv: Enable sdtrig for Ventana's Veyron
- CPUs
-Message-ID: <20240314-5963b4d688b6252d33f5b0b9@orel>
-References: <20240314185957.36940-1-hchauhan@ventanamicro.com>
- <20240314185957.36940-5-hchauhan@ventanamicro.com>
+ d=1e100.net; s=20230601; t=1710488465; x=1711093265;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=x3aV8HQ4WjKEMx6NnzvwRldcXujKdgr4tOTbHzt86yk=;
+ b=DCthoU/PJaRGl32gDrVcCXGUxqcw8PVSvDYP8MuljYsqIGywq80cIUyE2FUjlcXz3q
+ 5GWHp7YZnUHy0CwfS5dte8CUtlX3ryp20wqZSCyKRcabgxO+pbXqFYwh4P2Mcu67pOvt
+ OYqsRYj5dIsLM0WQVBHB1ZduCQWzQmUmqXkvRMf72kbkFGKtxzNK7kqdESfy8+5Gvp7c
+ 3Bj4eewl56jUyfNaXotRgwrnNcfV0JmbZPZtDnfmsNa9+KuPJtoqcwNYFblHF47hFneO
+ EcmgB7oPQUSBYzjPML1KEfMj7je0CZ65vqS5E7ddDE5S/09L0ImXeOpcUUh3AL0QMPrK
+ M+9w==
+X-Gm-Message-State: AOJu0YzAwHQFxqZR4luGoauHMhahKW4hGidfxPg0yRRkiQ3nvoV0mzWU
+ nBm7E085WJ4V7TXfnTy5wiCebCgURuDJWDqKTptmkHhPGzzxislfqzlEpSgxVHw=
+X-Google-Smtp-Source: AGHT+IHbGxM0DSSFQtgRxaDjsr0Z2kOgB9bhHRw5r3bWPAQMRUhflaBLcM7f0S/bjWpY1k6Sy+oY6Q==
+X-Received: by 2002:a05:6a21:398e:b0:1a3:4bf9:c1ad with SMTP id
+ ad14-20020a056a21398e00b001a34bf9c1admr2064429pzc.9.1710488465265; 
+ Fri, 15 Mar 2024 00:41:05 -0700 (PDT)
+Received: from [172.20.1.19] (173-197-098-125.biz.spectrum.com.
+ [173.197.98.125]) by smtp.gmail.com with ESMTPSA id
+ z8-20020a63c048000000b005c6e8fa9f24sm1926558pgi.49.2024.03.15.00.41.03
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 15 Mar 2024 00:41:04 -0700 (PDT)
+Message-ID: <db4aae50-7dd1-4960-9783-913c5b3a50ab@linaro.org>
+Date: Thu, 14 Mar 2024 21:41:01 -1000
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240314185957.36940-5-hchauhan@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::62b;
- envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x62b.google.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH for 9.0 v15 03/10] target/riscv/vector_helper.c: fix
+ 'vmvr_v' memcpy endianess
+Content-Language: en-US
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ max.chou@sifive.com
+References: <20240314175704.478276-1-dbarboza@ventanamicro.com>
+ <20240314175704.478276-4-dbarboza@ventanamicro.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20240314175704.478276-4-dbarboza@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x433.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01,
+ T_SPF_HELO_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -94,31 +99,18 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Mar 15, 2024 at 12:29:57AM +0530, Himanshu Chauhan wrote:
-> Ventana's Veyron CPUs support sdtrig ISA extension. By default, enable
-> the sdtrig extension and disable the debug property for these CPUs.
-
-You still have the 'and disable the debug property' here...
-
+On 3/14/24 07:56, Daniel Henrique Barboza wrote:
+> vmvr_v isn't handling the case where the host might be big endian and
+> the bytes to be copied aren't sequential.
 > 
-> Signed-off-by: Himanshu Chauhan <hchauhan@ventanamicro.com>
+> Suggested-by: Richard Henderson<richard.henderson@linaro.org>
+> Fixes: f714361ed7 ("target/riscv: rvv-1.0: implement vstart CSR")
+> Signed-off-by: Daniel Henrique Barboza<dbarboza@ventanamicro.com>
 > ---
->  target/riscv/cpu.c | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 4231f36c1b..c9dda73748 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -569,6 +569,7 @@ static void rv64_veyron_v1_cpu_init(Object *obj)
->      cpu->cfg.cbom_blocksize = 64;
->      cpu->cfg.cboz_blocksize = 64;
->      cpu->cfg.ext_zicboz = true;
-> +    cpu->cfg.ext_sdtrig = true;
->      cpu->cfg.ext_smaia = true;
->      cpu->cfg.ext_ssaia = true;
->      cpu->cfg.ext_sscofpmf = true;
-> -- 
-> 2.34.1
-> 
+>   target/riscv/vector_helper.c | 10 +++++++++-
+>   1 file changed, 9 insertions(+), 1 deletion(-)
+
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+
+r~
 
