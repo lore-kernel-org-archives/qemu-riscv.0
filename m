@@ -4,90 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B67BC54E67
-	for <qemu-riscv@archiver.kernel.org>; Fri, 15 Mar 2024 13:10:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EB73C54E58
+	for <qemu-riscv@archiver.kernel.org>; Fri, 15 Mar 2024 13:10:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rl7K6-0006NQ-Va; Fri, 15 Mar 2024 09:10:13 -0400
+	id 1rl7KS-00077s-BZ; Fri, 15 Mar 2024 09:10:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1rl7Jj-0005rI-4z
- for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:09:47 -0400
-Received: from mail-pf1-x431.google.com ([2607:f8b0:4864:20::431])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rl7KE-0006f1-7R
+ for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:10:18 -0400
+Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1rl7Jh-0007jD-Gt
- for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:09:46 -0400
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-6e6c0098328so1814508b3a.3
- for <qemu-riscv@nongnu.org>; Fri, 15 Mar 2024 06:09:44 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rl7K5-0007wL-NK
+ for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:10:17 -0400
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-566e869f631so2381543a12.0
+ for <qemu-riscv@nongnu.org>; Fri, 15 Mar 2024 06:10:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1710508183; x=1711112983; darn=nongnu.org;
+ d=linaro.org; s=google; t=1710508208; x=1711113008; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5sxhd0rb4V/HdCcNYSiwuf6DPCAi6g3IEdE6KnOG7L8=;
- b=WkMssXfpQ72/546c6pyY8+dYrdEaCQmvalRNFzut6jAw+LNz3bNan/gotAO3MPX7Nu
- GA64tUdLJeSuLtCzEfbg7Fz7FWvBgfRtiGiFTY9jHrGo38dxD759FsnBwUxca/CIoEVV
- UXH5udjMpKnkN6umtNiIwDldsISyHwZ96uAbwERajHP2372iSSUMwjoU7s/5w0tzY8N+
- K2AcTob0iMtgk6gb3NbcXrg9AbkV76qxVTzbOu/t16c5YMJdVFqkab9cNZlos+BXCCA4
- q4mLJg9L2q4Owvtg5C44ny82k7pRaLYG/T/sP4Pya9F2Rn7Mxpttr6iF4rl3yBdYTuFh
- z78A==
+ bh=qDIsKXjb1Jl9yBqR7T/u0FWdWtcs/rDVYwZEhcpoxew=;
+ b=nloCUCPnHdJsTMOe5mB56ubaQqAIRf8Nt8dSaGwx8ZgJNLgL4o5fs/vibYlSdxwQDu
+ 77pUt1NYKxQkxq1Rrm7sDRFClixlech/srG5DqOIi/nd/017iu8LLJ0+iKSFRs4KCZlq
+ mug7V1dobjrxLy02cXPiKoc3tzth37HV5ebQK+vCrC96s54SXJKS38dqAU9nMyMDLglG
+ zjD8vQGdL7FSIneCIPz5NYhk4SkTgKWhTDj+m9DxScoMthRTVLkSQjXugFCbyVfsjeTU
+ kaw2GVYGa+8j7am6YPiBU+E5Z12b2AhtlPRjAYjLvD/+8YflBQPRsmNcEwFhX0mhb0aD
+ spFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710508183; x=1711112983;
+ d=1e100.net; s=20230601; t=1710508208; x=1711113008;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5sxhd0rb4V/HdCcNYSiwuf6DPCAi6g3IEdE6KnOG7L8=;
- b=SXoZG587KbLhsgX42tSYUe2OWHg1z80U46WAY6UdExq/rDipa9MwGx56Shg6LcfXoQ
- ASxq9ZCmBKo5hq/NAcFhSH2JQjl37HoZ+vnnkWXzouGWmQA7bohTMQye0ooDHZ8RPAEE
- 6K33850LcvuQ8wolNRAVXB9kjgKY/ipuqjVanbCK1DuyPlWE8U+2xipKRKHrouLxMc6H
- JQs1M6Ljn33+KpTQCt9Y+TNdxt049ModpeJK3xcz/2EOJjlKCROP0swUtvbc+9SoDtKL
- 5ry/5FFnZyHWXd+qSMnTdUH4wTmKMrUPSDkHrYICqr3Ls8r+Zld1fLbSOiUGLtt0Bn0T
- 4/bA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVCU4p9eMDhjrgpFOnZDzaPxLaIT+lIKxMfepQlkeciEAUuY/P84ESdzuTAIHkTAU0YCFA+qfbMc0NphTKEwgQu/6S7U74=
-X-Gm-Message-State: AOJu0YzNcEuLdzO234wYT2w7CC9lT37+siG8cR8G6WVZJZ2moFJQxGV7
- 7A+pdiaPdamrrmz2WhDtyUG8JgI48u9pPF4bUSP+0QiT6zYQIa+/VouGi2vqlDU=
-X-Google-Smtp-Source: AGHT+IHDcQxN1/MJNwNoSh49TDo40dWND/kk0IWkS9VF06tAR3byrXGl+IML3QcUiWglnJ3WuxuutA==
-X-Received: by 2002:a17:90a:e016:b0:29c:403b:ea2e with SMTP id
- u22-20020a17090ae01600b0029c403bea2emr4309258pjy.49.1710508183338; 
- Fri, 15 Mar 2024 06:09:43 -0700 (PDT)
-Received: from sunil-pc.Dlink ([106.51.184.12])
+ bh=qDIsKXjb1Jl9yBqR7T/u0FWdWtcs/rDVYwZEhcpoxew=;
+ b=N9qM6Z4QvWCNu6Hfs/PRoYdngVLStlhVqGWY87YVYILVFvxKTHyjjvjYilE94FPK+Y
+ 5CpH8pn6F4NrUUr2slh7RnLkCHs3++Zy2Gk/Px0W96hhGrLQzx9Yz+8PGl8c/t9hw2LM
+ 09/MAD3fOQEpOqxp523RMhFPKkAl3EyPd6YRisVx1cGLH2RvHiUj9F4pSKzdUTLHvbFS
+ 0OLdRMlod7UTfQ16zXQpOmA/lvLrzTzW8zu2ZcOfTEeTLfa1WmMo/+99rZo675iyqQla
+ NS1y/FqfivfjosGyX9tjFNUflksqcQq+ip69ACgFIcz+0h01VauLI6eVdNYgp7wh+Q6h
+ NOeg==
+X-Gm-Message-State: AOJu0YwRMC/Yn5pSkzjRC6WNxRzbHmUfwhZ6iEZQ5ICFmsQrYutun2li
+ ihGaxBbiRkjcAPhCKaTh9nMFfol1nm1DSiYderjAZVEGq6sQukQ82A+VIyAEgck=
+X-Google-Smtp-Source: AGHT+IHz6vQYIeOBcjGc+xE2c8P3SUzSTmtoEr2FLDXsqrRWBjGskKgF5u0V0+3R6przXpowCYuWpA==
+X-Received: by 2002:a05:6402:5512:b0:568:9c6b:eb0f with SMTP id
+ fi18-20020a056402551200b005689c6beb0fmr3550192edb.21.1710508207999; 
+ Fri, 15 Mar 2024 06:10:07 -0700 (PDT)
+Received: from m1x-phil.lan ([176.176.145.26])
  by smtp.gmail.com with ESMTPSA id
- r3-20020a17090ad40300b0029c68206e2bsm2886663pju.0.2024.03.15.06.09.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Mar 2024 06:09:42 -0700 (PDT)
-From: Sunil V L <sunilvl@ventanamicro.com>
+ dk4-20020a0564021d8400b0056706105abesm1689843edb.33.2024.03.15.06.10.05
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Fri, 15 Mar 2024 06:10:07 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org,
-	qemu-arm@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Paolo Bonzini <pbonzini@redhat.com>,
- =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+	Markus Armbruster <armbru@redhat.com>
+Cc: qemu-riscv@nongnu.org, Anton Johansson <anjo@rev.ng>,
+ qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
  =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
+ Claudio Fontana <cfontana@suse.de>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
+ Zhao Liu <zhao1.liu@intel.com>, qemu-arm@nongnu.org,
  Thomas Huth <thuth@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Gerd Hoffmann <kraxel@redhat.com>, "Michael S . Tsirkin" <mst@redhat.com>,
- Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
- Laurent Vivier <lvivier@redhat.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Alistair Francis <alistair23@gmail.com>,
- Andrew Jones <ajones@ventanamicro.com>,
- Anup Patel <apatel@ventanamicro.com>, Haibo1 Xu <haibo1.xu@intel.com>,
- Sunil V L <sunilvl@ventanamicro.com>
-Subject: [PATCH 05/12] qtest: bios-tables-test: Rename aarch64 tests with
- aarch64 in them
-Date: Fri, 15 Mar 2024 18:39:17 +0530
-Message-Id: <20240315130924.2378849-3-sunilvl@ventanamicro.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20240315130924.2378849-1-sunilvl@ventanamicro.com>
-References: <20240315130924.2378849-1-sunilvl@ventanamicro.com>
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Artyom Tarasenko <atar4qemu@gmail.com>
+Subject: [PATCH-for-9.1 08/21] target/sparc: Make SPARC_CPU common to new
+ SPARC32_CPU/SPARC64_CPU types
+Date: Fri, 15 Mar 2024 14:08:56 +0100
+Message-ID: <20240315130910.15750-9-philmd@linaro.org>
+X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20240315130910.15750-1-philmd@linaro.org>
+References: <20240315130910.15750-1-philmd@linaro.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::431;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pf1-x431.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::534;
+ envelope-from=philmd@linaro.org; helo=mail-ed1-x534.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -110,120 +107,81 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Existing AARCH64 virt test functions do not have AARCH64 in their name.
-To add RISC-V virt related test cases, better to rename existing
-functions to indicate they are ARM only.
+"target/foo/cpu-qom.h" can not use any target specific definitions.
 
-Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+Currently "target/sparc/cpu-qom.h" defines TYPE_SPARC_CPU
+depending on the sparc(32)/sparc64 build type. This doesn't
+scale in a heterogeneous context where we need to access both
+types concurrently.
+
+In order to do that, introduce the new SPARC32_CPU / SPARC64_CPU
+types, both inheriting a common TYPE_SPARC_CPU base type.
+
+Keep the current CPU types registered in sparc_register_cpudef_type()
+as 32 or 64-bit, depending on the binary built.
+
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
 ---
- tests/qtest/bios-tables-test.c | 35 ++++++++++++++++++----------------
- 1 file changed, 19 insertions(+), 16 deletions(-)
+ target/sparc/cpu-qom.h |  9 +++++----
+ target/sparc/cpu.c     | 12 +++++++++++-
+ 2 files changed, 16 insertions(+), 5 deletions(-)
 
-diff --git a/tests/qtest/bios-tables-test.c b/tests/qtest/bios-tables-test.c
-index 21811a1ab5..ea3ba1992b 100644
---- a/tests/qtest/bios-tables-test.c
-+++ b/tests/qtest/bios-tables-test.c
-@@ -1557,7 +1557,7 @@ static void test_acpi_piix4_tcg_dimm_pxm(void)
-     test_acpi_tcg_dimm_pxm(MACHINE_PC);
- }
+diff --git a/target/sparc/cpu-qom.h b/target/sparc/cpu-qom.h
+index a86331bd58..6ad283506e 100644
+--- a/target/sparc/cpu-qom.h
++++ b/target/sparc/cpu-qom.h
+@@ -22,14 +22,15 @@
  
--static void test_acpi_virt_tcg_memhp(void)
-+static void test_acpi_aarch64_virt_tcg_memhp(void)
- {
-     test_data data = {
-         .machine = "virt",
-@@ -1650,7 +1650,7 @@ static void test_acpi_microvm_ioapic2_tcg(void)
-     free_test_data(&data);
- }
+ #include "hw/core/cpu.h"
  
--static void test_acpi_virt_tcg_numamem(void)
-+static void test_acpi_aarch64_virt_tcg_numamem(void)
- {
-     test_data data = {
-         .machine = "virt",
-@@ -1672,7 +1672,7 @@ static void test_acpi_virt_tcg_numamem(void)
+-#ifdef TARGET_SPARC64
+-#define TYPE_SPARC_CPU "sparc64-cpu"
+-#else
+ #define TYPE_SPARC_CPU "sparc-cpu"
+-#endif
++#define TYPE_SPARC32_CPU "sparc32-cpu"
++#define TYPE_SPARC64_CPU "sparc64-cpu"
  
- }
+ OBJECT_DECLARE_CPU_TYPE(SPARCCPU, SPARCCPUClass, SPARC_CPU)
  
--static void test_acpi_virt_tcg_pxb(void)
-+static void test_acpi_aarch64_virt_tcg_pxb(void)
- {
-     test_data data = {
-         .machine = "virt",
-@@ -1745,7 +1745,7 @@ static void test_acpi_piix4_tcg_acpi_hmat(void)
-     test_acpi_tcg_acpi_hmat(MACHINE_PC);
- }
++OBJECT_DECLARE_CPU_TYPE(SPARC32CPU, SPARCCPUClass, SPARC32_CPU)
++OBJECT_DECLARE_CPU_TYPE(SPARC64CPU, SPARCCPUClass, SPARC64_CPU)
++
+ #define SPARC_CPU_TYPE_SUFFIX "-" TYPE_SPARC_CPU
+ #define SPARC_CPU_TYPE_NAME(model) model SPARC_CPU_TYPE_SUFFIX
  
--static void test_acpi_virt_tcg_acpi_hmat(void)
-+static void test_acpi_aarch64_virt_tcg_acpi_hmat(void)
- {
-     test_data data = {
-         .machine = "virt",
-@@ -1901,7 +1901,7 @@ static void test_acpi_microvm_acpi_erst(void)
- }
- #endif /* CONFIG_POSIX */
- 
--static void test_acpi_virt_tcg(void)
-+static void test_acpi_aarch64_virt_tcg(void)
- {
-     test_data data = {
-         .machine = "virt",
-@@ -1920,7 +1920,7 @@ static void test_acpi_virt_tcg(void)
-     free_test_data(&data);
- }
- 
--static void test_acpi_virt_tcg_topology(void)
-+static void test_acpi_aarch64_virt_tcg_topology(void)
- {
-     test_data data = {
-         .machine = "virt",
-@@ -2003,7 +2003,7 @@ static void test_acpi_q35_cxl(void)
- }
- #endif /* CONFIG_POSIX */
- 
--static void test_acpi_virt_viot(void)
-+static void test_acpi_aarch64_virt_viot(void)
- {
-     test_data data = {
-         .machine = "virt",
-@@ -2135,7 +2135,7 @@ static void test_acpi_microvm_oem_fields(void)
-     g_free(args);
- }
- 
--static void test_acpi_virt_oem_fields(void)
-+static void test_acpi_aarch64_virt_oem_fields(void)
- {
-     test_data data = {
-         .machine = "virt",
-@@ -2301,16 +2301,19 @@ int main(int argc, char *argv[])
-         }
-     } else if (strcmp(arch, "aarch64") == 0) {
-         if (has_tcg && qtest_has_device("virtio-blk-pci")) {
--            qtest_add_func("acpi/virt", test_acpi_virt_tcg);
-+            qtest_add_func("acpi/virt", test_acpi_aarch64_virt_tcg);
-             qtest_add_func("acpi/virt/acpihmatvirt",
--                            test_acpi_virt_tcg_acpi_hmat);
--            qtest_add_func("acpi/virt/topology", test_acpi_virt_tcg_topology);
--            qtest_add_func("acpi/virt/numamem", test_acpi_virt_tcg_numamem);
--            qtest_add_func("acpi/virt/memhp", test_acpi_virt_tcg_memhp);
--            qtest_add_func("acpi/virt/pxb", test_acpi_virt_tcg_pxb);
--            qtest_add_func("acpi/virt/oem-fields", test_acpi_virt_oem_fields);
-+                           test_acpi_aarch64_virt_tcg_acpi_hmat);
-+            qtest_add_func("acpi/virt/topology",
-+                           test_acpi_aarch64_virt_tcg_topology);
-+            qtest_add_func("acpi/virt/numamem",
-+                           test_acpi_aarch64_virt_tcg_numamem);
-+            qtest_add_func("acpi/virt/memhp", test_acpi_aarch64_virt_tcg_memhp);
-+            qtest_add_func("acpi/virt/pxb", test_acpi_aarch64_virt_tcg_pxb);
-+            qtest_add_func("acpi/virt/oem-fields",
-+                           test_acpi_aarch64_virt_oem_fields);
-             if (qtest_has_device("virtio-iommu-pci")) {
--                qtest_add_func("acpi/virt/viot", test_acpi_virt_viot);
-+                qtest_add_func("acpi/virt/viot", test_acpi_aarch64_virt_viot);
-             }
-         }
+diff --git a/target/sparc/cpu.c b/target/sparc/cpu.c
+index 42b13ab63f..9e27e16b75 100644
+--- a/target/sparc/cpu.c
++++ b/target/sparc/cpu.c
+@@ -959,6 +959,12 @@ static const TypeInfo sparc_cpu_types[] = {
+         .abstract       = true,
+         .class_size     = sizeof(SPARCCPUClass),
+         .class_init     = sparc_cpu_class_init,
++    }, {
++        .name           = TYPE_SPARC32_CPU,
++        .parent         = TYPE_SPARC_CPU,
++    }, {
++        .name           = TYPE_SPARC64_CPU,
++        .parent         = TYPE_SPARC_CPU,
      }
+ };
+ 
+@@ -975,7 +981,11 @@ static void sparc_register_cpudef_type(const struct sparc_def_t *def)
+     char *typename = sparc_cpu_type_name(def->name);
+     TypeInfo ti = {
+         .name = typename,
+-        .parent = TYPE_SPARC_CPU,
++#ifdef TARGET_SPARC64
++        .parent = TYPE_SPARC64_CPU,
++#else
++        .parent = TYPE_SPARC32_CPU,
++#endif
+         .class_init = sparc_cpu_cpudef_class_init,
+         .class_data = (void *)def,
+     };
 -- 
-2.40.1
+2.41.0
 
 
