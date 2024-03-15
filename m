@@ -4,86 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8769C54E66
-	for <qemu-riscv@archiver.kernel.org>; Fri, 15 Mar 2024 07:41:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62810C54E66
+	for <qemu-riscv@archiver.kernel.org>; Fri, 15 Mar 2024 07:42:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rl2Bt-0007u8-G1; Fri, 15 Mar 2024 03:41:21 -0400
+	id 1rl2Ca-0008V7-V8; Fri, 15 Mar 2024 03:42:05 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rl2Bj-0007tG-Ew
- for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 03:41:12 -0400
-Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
+ id 1rl2CX-0008PQ-Bo
+ for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 03:42:01 -0400
+Received: from mail-ot1-x333.google.com ([2607:f8b0:4864:20::333])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rl2Be-0007uY-Rc
- for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 03:41:11 -0400
-Received: by mail-pf1-x433.google.com with SMTP id
- d2e1a72fcca58-6e6b6e000a4so1362051b3a.0
- for <qemu-riscv@nongnu.org>; Fri, 15 Mar 2024 00:41:06 -0700 (PDT)
+ id 1rl2CV-00082Z-8A
+ for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 03:42:01 -0400
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-6e4f874f958so656978a34.3
+ for <qemu-riscv@nongnu.org>; Fri, 15 Mar 2024 00:41:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710488465; x=1711093265; darn=nongnu.org;
+ d=linaro.org; s=google; t=1710488514; x=1711093314; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=x3aV8HQ4WjKEMx6NnzvwRldcXujKdgr4tOTbHzt86yk=;
- b=TfvXYwsnWhnwWpx/F6DEBEBN4bN028hECbhQZ0s1qIsL2VB4cFch/Icru9UbwlX9FV
- Dn8ITnh/zDINaIkv6P8p1c+68qsDb83RZj9Vs962nBmpalxOy1tCrDc2XOJzhDfUwV9N
- 059ngfJjc4C1veaTHDZmNsiOXVszrRiepiJySeJ26HVxD9wxFRUbFVj1RgBC8zEPcrG4
- s/kP/Rg3MBlmBrlus5uhaZOlaq+t2K3Uy4QtZjkCa3sXr0ZNLKFtRR8VzFqMI7HJgOYW
- SZBDVb7omrEg94De8HdUAgxm7Ub6ggcW2m+tfzzpi/oDP1VU00m3iSRQQ0B2YNTTzEj1
- 8wuw==
+ bh=PJw0CT3HJxC/JpAYV7HeBsnYp2hKKeEy0fQ9cCIs4mw=;
+ b=LpagDnzGnqrZb1dv9j77ZjF9DzYSlVRhkTm170ge5J5N7oKNsDA8vlIN2UCHumG1p9
+ bbGfB5UTo1fQTQMjGyxRyDDw3HZN29mkdIkw+QKHHTzYDFfDNGeZQ4slWf0GPcjCh6Ay
+ XaAa/FFjQpU1sQyBN5iwUm/sDlaIRdKneRQPOe4h1c8Gdyo+FJrhsomuinmRC0GkZcbb
+ aLYm1sT/EEX7818FQymGGi8UsMcOUWgAAL9CaVNc4PTppUlo3/6OXboe3MC9doP5/nZ6
+ pnLSRKgB8htkRy+lm6d3tbYmboryJl/8Gc2GWJ5vnaV9fRlYqEfp2klPnFhdIROiKGSn
+ hpeQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710488465; x=1711093265;
+ d=1e100.net; s=20230601; t=1710488515; x=1711093315;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=x3aV8HQ4WjKEMx6NnzvwRldcXujKdgr4tOTbHzt86yk=;
- b=DCthoU/PJaRGl32gDrVcCXGUxqcw8PVSvDYP8MuljYsqIGywq80cIUyE2FUjlcXz3q
- 5GWHp7YZnUHy0CwfS5dte8CUtlX3ryp20wqZSCyKRcabgxO+pbXqFYwh4P2Mcu67pOvt
- OYqsRYj5dIsLM0WQVBHB1ZduCQWzQmUmqXkvRMf72kbkFGKtxzNK7kqdESfy8+5Gvp7c
- 3Bj4eewl56jUyfNaXotRgwrnNcfV0JmbZPZtDnfmsNa9+KuPJtoqcwNYFblHF47hFneO
- EcmgB7oPQUSBYzjPML1KEfMj7je0CZ65vqS5E7ddDE5S/09L0ImXeOpcUUh3AL0QMPrK
- M+9w==
-X-Gm-Message-State: AOJu0YzAwHQFxqZR4luGoauHMhahKW4hGidfxPg0yRRkiQ3nvoV0mzWU
- nBm7E085WJ4V7TXfnTy5wiCebCgURuDJWDqKTptmkHhPGzzxislfqzlEpSgxVHw=
-X-Google-Smtp-Source: AGHT+IHbGxM0DSSFQtgRxaDjsr0Z2kOgB9bhHRw5r3bWPAQMRUhflaBLcM7f0S/bjWpY1k6Sy+oY6Q==
-X-Received: by 2002:a05:6a21:398e:b0:1a3:4bf9:c1ad with SMTP id
- ad14-20020a056a21398e00b001a34bf9c1admr2064429pzc.9.1710488465265; 
- Fri, 15 Mar 2024 00:41:05 -0700 (PDT)
+ bh=PJw0CT3HJxC/JpAYV7HeBsnYp2hKKeEy0fQ9cCIs4mw=;
+ b=ijLQzIqD3YdJ16sTbsSn32JS5LJwDky8JW9ETXYZu4JTNB2GXAFFhQoLwOWH/YJEON
+ yD6oTYIyvaa5XEg6kqi2TnNz/4qnchx5iwKBftf5ijfJOJlo8h3UFJFWk4jQjNM782gW
+ 9EdtA8106hjgaDrhNi+HgGJW7fhFYsi6zXL+Z5HsPUUvs7uF4vNiPP42YtlPCNOeTbx+
+ aAdN0fjpUK9btp8oZdIc51Opke9lbNNjPe9hzW1xhyOEYkRQq/srbiNh9a/ofFVn3oa3
+ b4P73tKPjcpbCxhiinzM7U48AFebg9KSM01WqguIrSS5amQDkdTUOH04kH2ED29vIqvQ
+ GtZw==
+X-Gm-Message-State: AOJu0YzDW983vv7nr9ct5a3XIi2S7kz41ZPFGINZrrD1mq6GxWKRAlA8
+ OmZqCAc1uWvAqM94fPcOP9stFM/jUYcCCjwFiOh9AsK5bmkmkyvMrRQgRbWuuyg=
+X-Google-Smtp-Source: AGHT+IFAgyEJQfsyAtxtAnDEGOXlmjK2aLcr+UI9vPHtP8JsLt9upRaRg3wZ3qadzv7BZr1Hoou/7Q==
+X-Received: by 2002:a05:6830:16d0:b0:6e5:3dc6:d84a with SMTP id
+ l16-20020a05683016d000b006e53dc6d84amr4800287otr.24.1710488514628; 
+ Fri, 15 Mar 2024 00:41:54 -0700 (PDT)
 Received: from [172.20.1.19] (173-197-098-125.biz.spectrum.com.
  [173.197.98.125]) by smtp.gmail.com with ESMTPSA id
- z8-20020a63c048000000b005c6e8fa9f24sm1926558pgi.49.2024.03.15.00.41.03
+ z8-20020a63c048000000b005c6e8fa9f24sm1926558pgi.49.2024.03.15.00.41.53
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 15 Mar 2024 00:41:04 -0700 (PDT)
-Message-ID: <db4aae50-7dd1-4960-9783-913c5b3a50ab@linaro.org>
-Date: Thu, 14 Mar 2024 21:41:01 -1000
+ Fri, 15 Mar 2024 00:41:54 -0700 (PDT)
+Message-ID: <b4d4bd8c-57ad-4bd7-9d57-d6dc90b13fda@linaro.org>
+Date: Thu, 14 Mar 2024 21:41:51 -1000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH for 9.0 v15 03/10] target/riscv/vector_helper.c: fix
- 'vmvr_v' memcpy endianess
+Subject: Re: [PATCH for 9.0 v15 04/10] target/riscv: always clear vstart in
+ whole vec move insns
 Content-Language: en-US
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  max.chou@sifive.com
 References: <20240314175704.478276-1-dbarboza@ventanamicro.com>
- <20240314175704.478276-4-dbarboza@ventanamicro.com>
+ <20240314175704.478276-5-dbarboza@ventanamicro.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240314175704.478276-4-dbarboza@ventanamicro.com>
+In-Reply-To: <20240314175704.478276-5-dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x433.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::333;
+ envelope-from=richard.henderson@linaro.org; helo=mail-ot1-x333.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01,
- T_SPF_HELO_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,15 +100,32 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 3/14/24 07:56, Daniel Henrique Barboza wrote:
-> vmvr_v isn't handling the case where the host might be big endian and
-> the bytes to be copied aren't sequential.
+> These insns have 2 paths: we'll either have vstart already cleared if
+> vstart_eq_zero or we'll do a brcond to check if vstart >= maxsz to call
+> the 'vmvr_v' helper. The helper will clear vstart if it executes until
+> the end, or if vstart >= vl.
 > 
-> Suggested-by: Richard Henderson<richard.henderson@linaro.org>
+> For starters, the check itself is wrong: we're checking vstart >= maxsz,
+> when in fact we should use vstart in bytes, or 'startb' like 'vmvr_v' is
+> calling, to do the comparison. But even after fixing the comparison we'll
+> still need to clear vstart in the end, which isn't happening too.
+> 
+> We want to make the helpers responsible to manage vstart, including
+> these corner cases, precisely to avoid these situations:
+> 
+> - remove the wrong vstart >= maxsz cond from the translation;
+> - add a 'startb >= maxsz' cond in 'vmvr_v', and clear vstart if that
+>    happens.
+> 
+> This way we're now sure that vstart is being cleared in the end of the
+> execution, regardless of the path taken.
+> 
 > Fixes: f714361ed7 ("target/riscv: rvv-1.0: implement vstart CSR")
 > Signed-off-by: Daniel Henrique Barboza<dbarboza@ventanamicro.com>
 > ---
->   target/riscv/vector_helper.c | 10 +++++++++-
->   1 file changed, 9 insertions(+), 1 deletion(-)
+>   target/riscv/insn_trans/trans_rvv.c.inc | 3 ---
+>   target/riscv/vector_helper.c            | 5 +++++
+>   2 files changed, 5 insertions(+), 3 deletions(-)
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
