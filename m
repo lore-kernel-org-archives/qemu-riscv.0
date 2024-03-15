@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47CD8C54E58
-	for <qemu-riscv@archiver.kernel.org>; Fri, 15 Mar 2024 13:10:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76BF7C54E67
+	for <qemu-riscv@archiver.kernel.org>; Fri, 15 Mar 2024 13:10:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rl7KQ-0006zs-Ek; Fri, 15 Mar 2024 09:10:30 -0400
+	id 1rl7Jp-000641-MY; Fri, 15 Mar 2024 09:09:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rl7Jn-0005xF-Pa
- for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:09:51 -0400
-Received: from mail-ej1-x636.google.com ([2a00:1450:4864:20::636])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rl7Jb-0005eO-SI
+ for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:09:40 -0400
+Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rl7Jk-0007kE-If
- for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:09:50 -0400
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-a46966e9d30so39462266b.1
- for <qemu-riscv@nongnu.org>; Fri, 15 Mar 2024 06:09:48 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rl7JX-0007dO-H5
+ for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:09:39 -0400
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-5658082d2c4so2805475a12.1
+ for <qemu-riscv@nongnu.org>; Fri, 15 Mar 2024 06:09:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710508187; x=1711112987; darn=nongnu.org;
+ d=linaro.org; s=google; t=1710508174; x=1711112974; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7ztA/s++99kJlJQVkkhi5KVYRPW5VID21TBVzyIGr2Y=;
- b=jiGT8GrZ9igAjQoCC815i0lvzx2CR+1zxy8vL2gf9kgM5JRISixm7OQ3P1GuqzBu/g
- 0b3grywW7QiWjM8vgXTcp3EaDAINKBXocmKH5Y8v0kogi5pWwHZrflfO/B32TUYMo6V+
- CMTkw5qh1pWpDfZlJc/iXBYaGBVoDWokXpiFA9W5oojGQ5u5vQ7w8aSGaJeMS/0l/B8M
- ND8Dss8NO+p3oHwxsW8N9gjSGeiRC6suG7esXapi/yKNAlsuUDkXuhfrQxlU9OGUWeCN
- yfcFuqC7VpwCTSZmWtTvNDgTK9Bc7gzyeNuTCFdwPSs6KCm/lxjJ4Zxyl8ghJ0+xrsmv
- sLMA==
+ bh=QXR+KoDyjF3DzCtPRlneMC/cDzpoxSokp1VWknBDtAc=;
+ b=OIKG7UBbSegyL5K4xTc8cRKmFmd3w+Kh8zZMEqL33VJK1NazutogQCSSnilz8hXtoN
+ 8Pw6pY2voj9Sz13mo4rIdXScYcCjgwc8aubTIG3mmaK8pczHsMYV/J7ER79ByRcwb0qv
+ 6Md90/UyQKaN92DJttmyvCqADnE1AAygbh+hD7OOGAgULOgHDhD7sHHnpAEVmZGo7bm3
+ +v3aJtumfpjULMF+NvbLRBHUnowuUSTPpnY1Iifb15rKSuNjPgdRt2r+AR24VEj6fXE6
+ 02lSwobYUP7cTFMiG6hKRWknhkYwBIKf9m7NyjUW8cbX9s2+Z32h37hna6n3d59hRi52
+ THdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710508187; x=1711112987;
+ d=1e100.net; s=20230601; t=1710508174; x=1711112974;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7ztA/s++99kJlJQVkkhi5KVYRPW5VID21TBVzyIGr2Y=;
- b=ZS01zW485mdxJVM25PJ+DD8GO1L5ypSuLUWeg/QIN3NaeHy/3garzCv+ljbfgoGaeX
- gBq4V2odMUVRVXmkwgCF3BHc7PRmxTrm0x/VdrFTjce7r2NA9bgWarkqCbhukR+QidKx
- xnSQVazVPewiFWa8NzCigUoo2fXKDfwIEZBKdnwWqDomdDPBT6B2wxrysem5DoQH2BVa
- K3AMNl1dG5JRlbYNqKaT/jaEVpYseA32g33mdiocw6JPMeVMyzE4+Z0Opchbx/fTLwi8
- CcIJr54c8PM8yeuIJs75a0vgdmfhwVkKBIGQ8nQ0cC8/xRHZIUTQzoCIP6Dpeg4PiNtT
- 18eQ==
-X-Gm-Message-State: AOJu0YwgAGhwWVTggXX8gr1jTlg/AuYCbez8HLLl22e+VBS4LDBnkc4L
- 12QWiijBBnUcV+sn15EHK1YGqDivEk22P6wXIwBossD/MAR4WZqKglSj1a2pi5s=
-X-Google-Smtp-Source: AGHT+IHGdVDgE0BV4E6ET1vnyKOiNgQutr60WkuR7/igTVB/b/2IuiYcgezn/mIAKkIya0Cm/N2Kbw==
-X-Received: by 2002:a17:906:6bc8:b0:a46:800a:6358 with SMTP id
- t8-20020a1709066bc800b00a46800a6358mr1492199ejs.15.1710508187195; 
- Fri, 15 Mar 2024 06:09:47 -0700 (PDT)
+ bh=QXR+KoDyjF3DzCtPRlneMC/cDzpoxSokp1VWknBDtAc=;
+ b=gdyfLj6xrIdv9Bm+DOOsoETmReumQAcC1Yn/c6Qao7xDQ2ocGoPUxH9xS+VJdV5DYS
+ HNyj9y1Ik7w4yleoFr4TQxXQ5HI/gkY++WrHsabkFZ2hcVj6haW8HBrVIDEDldoeq86B
+ v7d14g+RWtjmAEcT9aB3uHsDpF1XPLzpignAv2CtVGmd2r2CeqVRG6wt1O0Cj4JT42U4
+ 5VHQ79nDwNv7Br+RRa+gW2LhMaL2LMcxHC1qFiwnVh9brqtAM+yBgDKR8NAIXb/DZfc6
+ 952Hc/kF4G//LtEShpJ+vfBWRAX/X2EMbzI5G6vqNsEeKEuFdRQw/Zvd2xWWfp08DNoy
+ +tYA==
+X-Gm-Message-State: AOJu0YwZ+N58GWLapVMoQ+qyy9Ef9sAz1+5lo29YzInASdIzl81I826J
+ TL3E0NDw1mzpupKuj9a3pDiqb8wKyEhtPit4yokHK9ntO5dEToUHmriGuKywmFg=
+X-Google-Smtp-Source: AGHT+IHzBClF6y3leG9X1IH7huHpryichprPqecACIGO7r5xFYMO3bWZ334I3If9L1+1vr9CkQSmGw==
+X-Received: by 2002:a17:906:c30f:b0:a46:2a85:b37b with SMTP id
+ s15-20020a170906c30f00b00a462a85b37bmr2902264ejz.51.1710508173970; 
+ Fri, 15 Mar 2024 06:09:33 -0700 (PDT)
 Received: from m1x-phil.lan ([176.176.145.26])
  by smtp.gmail.com with ESMTPSA id
- f23-20020a1709067f9700b00a466a265ffcsm1722093ejr.145.2024.03.15.06.09.45
+ v23-20020a1709067d9700b00a461a7ba686sm1707470ejo.75.2024.03.15.06.09.31
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 15 Mar 2024 06:09:46 -0700 (PDT)
+ Fri, 15 Mar 2024 06:09:33 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org,
 	Markus Armbruster <armbru@redhat.com>
@@ -71,27 +71,27 @@ Cc: qemu-riscv@nongnu.org, Anton Johansson <anjo@rev.ng>,
  Zhao Liu <zhao1.liu@intel.com>, qemu-arm@nongnu.org,
  Thomas Huth <thuth@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Yanan Wang <wangyanan55@huawei.com>
-Subject: [PATCH-for-9.1 05/21] cpus: Open code OBJECT_DECLARE_TYPE() in
- OBJECT_DECLARE_CPU_TYPE()
-Date: Fri, 15 Mar 2024 14:08:53 +0100
-Message-ID: <20240315130910.15750-6-philmd@linaro.org>
+ Nicholas Piggin <npiggin@gmail.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>
+Subject: [PATCH-for-9.1 03/21] target/ppc: Declare CPU QOM types using
+ DEFINE_TYPES() macro
+Date: Fri, 15 Mar 2024 14:08:51 +0100
+Message-ID: <20240315130910.15750-4-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240315130910.15750-1-philmd@linaro.org>
 References: <20240315130910.15750-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::636;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x636.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52f;
+ envelope-from=philmd@linaro.org; helo=mail-ed1-x52f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,67 +107,93 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Since the OBJECT_DECLARE_CPU_TYPE() macro uses the abstract ArchCPU
-type, when declaring multiple CPUs of the same ArchCPU type we get
-an error related to the indirect G_DEFINE_AUTOPTR_CLEANUP_FUNC()
-use within OBJECT_DECLARE_TYPE():
+When multiple QOM types are registered in the same file,
+it is simpler to use the the DEFINE_TYPES() macro. In
+particular because type array declared with such macro
+are easier to review.
 
-  target/mips/cpu-qom.h:31:1: error: redefinition of 'glib_autoptr_clear_ArchCPU'
-  OBJECT_DECLARE_CPU_TYPE(MIPS64CPU, MIPSCPUClass, MIPS64_CPU)
-  ^
-  include/hw/core/cpu.h:82:5: note: expanded from macro 'OBJECT_DECLARE_CPU_TYPE'
-      OBJECT_DECLARE_TYPE(ArchCPU, CpuClassType, CPU_MODULE_OBJ_NAME);
-      ^
-  include/qom/object.h:237:5: note: expanded from macro 'OBJECT_DECLARE_TYPE'
-      G_DEFINE_AUTOPTR_CLEANUP_FUNC(InstanceType, object_unref) \
-      ^
-  /usr/include/glib-2.0/glib/gmacros.h:1371:3: note: expanded from macro 'G_DEFINE_AUTOPTR_CLEANUP_FUNC'
-    _GLIB_DEFINE_AUTOPTR_CLEANUP_FUNCS(TypeName, TypeName, func)
-    ^
-  /usr/include/glib-2.0/glib/gmacros.h:1354:36: note: expanded from macro '_GLIB_DEFINE_AUTOPTR_CLEANUP_FUNCS'
-    static G_GNUC_UNUSED inline void _GLIB_AUTOPTR_CLEAR_FUNC_NAME(TypeName) (TypeName *_ptr)                     \
-                                     ^
-  /usr/include/glib-2.0/glib/gmacros.h:1338:49: note: expanded from macro '_GLIB_AUTOPTR_CLEAR_FUNC_NAME'
-  #define _GLIB_AUTOPTR_CLEAR_FUNC_NAME(TypeName) glib_autoptr_clear_##TypeName
-                                                  ^
-  <scratch space>:54:1: note: expanded from here
-  glib_autoptr_clear_ArchCPU
-  ^
-  target/mips/cpu-qom.h:30:1: note: previous definition is here
-  OBJECT_DECLARE_CPU_TYPE(MIPS32CPU, MIPSCPUClass, MIPS32_CPU)
-  ^
-
-Avoid that problem by expanding the OBJECT_DECLARE_TYPE() macro
-within OBJECT_DECLARE_CPU_TYPE().
+In few commits we are going to add more types, so replace
+the type_register_static() to ease further reviews.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Acked-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Message-Id: <20231013140116.255-16-philmd@linaro.org>
 ---
-TODO: check rth comment:
-What about adding an OBJECT_DECLARE_CPU_SUBTYPE that omits half the stuff instead?
-We don't need another object typedef at all, for instance.
----
- include/hw/core/cpu.h | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+ target/ppc/cpu_init.c | 52 +++++++++++++++++++------------------------
+ 1 file changed, 23 insertions(+), 29 deletions(-)
 
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index ec14f74ce5..4c2e5095bf 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -78,7 +78,12 @@ DECLARE_CLASS_CHECKERS(CPUClass, CPU,
-  */
- #define OBJECT_DECLARE_CPU_TYPE(CpuInstanceType, CpuClassType, CPU_MODULE_OBJ_NAME) \
-     typedef struct ArchCPU CpuInstanceType; \
--    OBJECT_DECLARE_TYPE(ArchCPU, CpuClassType, CPU_MODULE_OBJ_NAME);
-+    typedef struct CpuClassType CpuClassType; \
-+    \
-+    G_DEFINE_AUTOPTR_CLEANUP_FUNC(CpuInstanceType, object_unref) \
-+    \
-+    DECLARE_OBJ_CHECKERS(CpuInstanceType, CpuClassType, \
-+                         CPU_MODULE_OBJ_NAME, TYPE_##CPU_MODULE_OBJ_NAME)
+diff --git a/target/ppc/cpu_init.c b/target/ppc/cpu_init.c
+index 7e65f08147..d5e227a6fb 100644
+--- a/target/ppc/cpu_init.c
++++ b/target/ppc/cpu_init.c
+@@ -7432,39 +7432,34 @@ static void ppc_cpu_class_init(ObjectClass *oc, void *data)
+ #endif /* CONFIG_TCG */
+ }
  
- typedef enum MMUAccessType {
-     MMU_DATA_LOAD  = 0,
+-static const TypeInfo ppc_cpu_type_info = {
+-    .name = TYPE_POWERPC_CPU,
+-    .parent = TYPE_CPU,
+-    .instance_size = sizeof(PowerPCCPU),
+-    .instance_align = __alignof__(PowerPCCPU),
+-    .instance_init = ppc_cpu_instance_init,
+-    .instance_finalize = ppc_cpu_instance_finalize,
+-    .abstract = true,
+-    .class_size = sizeof(PowerPCCPUClass),
+-    .class_init = ppc_cpu_class_init,
++static const TypeInfo ppc_cpu_types[] = {
++    {
++        .name           = TYPE_POWERPC_CPU,
++        .parent         = TYPE_CPU,
++        .abstract       = true,
++        .instance_size  = sizeof(PowerPCCPU),
++        .instance_align = __alignof__(PowerPCCPU),
++        .instance_init  = ppc_cpu_instance_init,
++        .instance_finalize = ppc_cpu_instance_finalize,
++        .class_size     = sizeof(PowerPCCPUClass),
++        .class_init     = ppc_cpu_class_init,
+ #ifndef CONFIG_USER_ONLY
+-    .interfaces = (InterfaceInfo[]) {
+-          { TYPE_INTERRUPT_STATS_PROVIDER },
+-          { }
++        .interfaces     = (InterfaceInfo[]) {
++              { TYPE_INTERRUPT_STATS_PROVIDER },
++              { }
++        },
++#endif
++    },
++#ifndef CONFIG_USER_ONLY
++    {
++        .name           = TYPE_PPC_VIRTUAL_HYPERVISOR,
++        .parent         = TYPE_INTERFACE,
++        .class_size     = sizeof(PPCVirtualHypervisorClass),
+     },
+ #endif
+ };
+ 
+-#ifndef CONFIG_USER_ONLY
+-static const TypeInfo ppc_vhyp_type_info = {
+-    .name = TYPE_PPC_VIRTUAL_HYPERVISOR,
+-    .parent = TYPE_INTERFACE,
+-    .class_size = sizeof(PPCVirtualHypervisorClass),
+-};
+-#endif
+-
+-static void ppc_cpu_register_types(void)
+-{
+-    type_register_static(&ppc_cpu_type_info);
+-#ifndef CONFIG_USER_ONLY
+-    type_register_static(&ppc_vhyp_type_info);
+-#endif
+-}
++DEFINE_TYPES(ppc_cpu_types)
+ 
+ void ppc_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+ {
+@@ -7658,4 +7653,3 @@ void ppc_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+ #undef RGPL
+ #undef RFPL
+ }
+-type_init(ppc_cpu_register_types)
 -- 
 2.41.0
 
