@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AF41C54E67
-	for <qemu-riscv@archiver.kernel.org>; Fri, 15 Mar 2024 13:11:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0822EC54E58
+	for <qemu-riscv@archiver.kernel.org>; Fri, 15 Mar 2024 13:11:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rl7Jd-0005jP-4Z; Fri, 15 Mar 2024 09:09:41 -0400
+	id 1rl7Ku-0008Jf-Kk; Fri, 15 Mar 2024 09:11:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rl7JM-0005cE-RU
- for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:09:27 -0400
-Received: from mail-ej1-x630.google.com ([2a00:1450:4864:20::630])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rl7KV-0007HO-Kq
+ for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:10:36 -0400
+Received: from mail-ej1-x633.google.com ([2a00:1450:4864:20::633])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rl7JK-0007Yb-CV
- for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:09:24 -0400
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-a44ad785a44so239980966b.3
- for <qemu-riscv@nongnu.org>; Fri, 15 Mar 2024 06:09:21 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rl7KQ-00088i-5O
+ for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:10:35 -0400
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-a46966e9d30so39584566b.1
+ for <qemu-riscv@nongnu.org>; Fri, 15 Mar 2024 06:10:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710508161; x=1711112961; darn=nongnu.org;
+ d=linaro.org; s=google; t=1710508228; x=1711113028; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NCfHsLOktJnJk/FrjkYW88SQD28CKLAyjY7rSKM5rcw=;
- b=ODJzEgTewYBjA1vbFoVLXqCZ/dmX12nggcch+wbY2JIpDZ7la337XjSWIPaem4ny5X
- GjBb4zdyTaBRk8GBL4lcjQHisbgN+KzSLDGEL8unHJ4/WoJJwfKbFYGgui6i+GlcsoGd
- mJtsgMnOXDOysu8GsEcvziGvAbQt7oHQah5A0P2x99BpnJUb6VIhRcdsUv25HgIEd7by
- FN+OdZmERQcQnCJjHSfre4uYTEAdGtK+37jzUaUnxnEu7M8E0HZM/r8OJX2djlpF6V1c
- MzcSmoyOqp92pk2mdGlZf0pnPFiLFRGwv7vivJy7qGwhYe84ztuIs26nslSLADNrrUdf
- cKnQ==
+ bh=3PuQ6WSEYLWnTCNPDldZo+Ppk/XGMtRnTbQuxwxDUsU=;
+ b=N8uBIKKOFTKMTS2NhbYeYgKi9oxDwQ82f1F/hTkHPOKcQrXxY2o+Ar74bgtCAG++33
+ afYmL6YtPS+Dl7GLQ1swVJ8qMN7WDvjoLCknXnWrNBuItICyvI6oC3RrDdS69t9zF/7w
+ 2F/5ROMzWcySpVTOkrpFHY/mUQrAYEWhLdMJb2a83DNE1o6NarOao0o0QVNz4YzzhtFu
+ 3PwdTOOq4Nsl6Kkyw7CS8iqgTvTJbfp0tknt5avEvdfkq3xoLnlP6WdHcQB4+iDcVopZ
+ 6MhduNeaSoNnCkgr51EDrLu0kMs5ivZ4jLFnOjCwuu2lqLWrzFNgdfrFuDVKisjEBule
+ PwbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710508161; x=1711112961;
+ d=1e100.net; s=20230601; t=1710508228; x=1711113028;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NCfHsLOktJnJk/FrjkYW88SQD28CKLAyjY7rSKM5rcw=;
- b=iBKbvl123kfpq6nPjKPjfBglekf/5H+dQ33WhNiU7hhyMMzn6BN/NRIIQv0TofvT7R
- 9yfM2IIgajcy4nWOK6d+ONE5XYj0Vrf0GVaODrOBzDCEdol8LPmT1roTRfWHXRiZzhbq
- CxikzbyaDRwVXSUDgXLSkhtPv5FApXpsM4aRCRI2EIxFSqgaH4K1DnPJVqtkv2XlOPDR
- CqmG6lnx8gpP9Wms9tulcT24Dfgn/F+ZJZbMXjCippBKZy7fLq42hX/McoUjlIdhgEQO
- AaPlYRBEqjieUS8C5qYvMNadBWoFzLQzn/1BnNvcQeX1yMItscwUSxSaBsY9B7dm6uVS
- g83Q==
-X-Gm-Message-State: AOJu0YxQtqlnBUYEJF9YQGwVSxo6B6ZDE0AP5URoU5UHmns1D2bmfQXd
- ntyas3Urjg9/mRKB2sUoS3zlujFJxXlkFhsxaCGbEVu7WmBRmnI3RHS1ZTyJjgA=
-X-Google-Smtp-Source: AGHT+IEIqbu+dkyYORdlV0Gte9UybiujX61BXzptaCyYsWEUuL7ULvFX0eVwlBjaCfc67LjfUoRRVg==
-X-Received: by 2002:a17:906:360a:b0:a46:9a13:362c with SMTP id
- q10-20020a170906360a00b00a469a13362cmr291836ejb.52.1710508160915; 
- Fri, 15 Mar 2024 06:09:20 -0700 (PDT)
+ bh=3PuQ6WSEYLWnTCNPDldZo+Ppk/XGMtRnTbQuxwxDUsU=;
+ b=ppHoSCwhSqVs5AqpRkRc8IBB/r480fv+7SppewwonBuwQiseMGyrM5mhD4z9UjLi1c
+ ZXTMWHdaSUsQdH3JbJLk3NL1uhKYS9Fqoz6coLxEUCRibc9YJQm2sB7QnWB2TGpaei3W
+ Ydka46wsiMHaR/h5KjpndLLQwj0jLoBAu8Wu80YyBbOop8D1hnwogyyUHAxnZ7D01+CO
+ 6ge0/LFgZb2rAADmDfjIuwHE6T8AnTWuW+behivNWpaKVKttqvKNSw7YLw/IfYRcAyXO
+ trmLOp4QHUSCjDg1b+6pPqUFjJkvFim18KCQ0Lp0eTCxa9eKv/5k+Lc9QHu15NexpmHe
+ cxNA==
+X-Gm-Message-State: AOJu0YzTSXLr+HAbfWkaAU+hRdzf0DgONaiKRYiIo/Il+TI9i8MIO4G/
+ Q5XFfpCdz4kiAm0C+CqIueAZ6aTf6LGIsQKXB4yqtl8JQ0e+qGOMgEYS9SfsdOI=
+X-Google-Smtp-Source: AGHT+IHgeAMf1+cGAIhix5rGRpA+zqYrLpk7WoUtK15pKAlNv3sQvH3L0f0P3bef1BLZ9RiIeTQhug==
+X-Received: by 2002:a17:906:f845:b0:a3e:8300:1af3 with SMTP id
+ ks5-20020a170906f84500b00a3e83001af3mr3107382ejb.30.1710508228508; 
+ Fri, 15 Mar 2024 06:10:28 -0700 (PDT)
 Received: from m1x-phil.lan ([176.176.145.26])
  by smtp.gmail.com with ESMTPSA id
- g12-20020a17090613cc00b00a45ff1fe8dasm1693781ejc.115.2024.03.15.06.09.18
+ jl27-20020a17090775db00b00a45c9945251sm1696627ejc.192.2024.03.15.06.10.26
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 15 Mar 2024 06:09:20 -0700 (PDT)
+ Fri, 15 Mar 2024 06:10:28 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org,
 	Markus Armbruster <armbru@redhat.com>
@@ -70,26 +70,28 @@ Cc: qemu-riscv@nongnu.org, Anton Johansson <anjo@rev.ng>,
  Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
  Zhao Liu <zhao1.liu@intel.com>, qemu-arm@nongnu.org,
  Thomas Huth <thuth@redhat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH-for-9.1 01/21] target/i386: Declare CPU QOM types using
- DEFINE_TYPES() macro
-Date: Fri, 15 Mar 2024 14:08:49 +0100
-Message-ID: <20240315130910.15750-2-philmd@linaro.org>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Eric Blake <eblake@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Yanan Wang <wangyanan55@huawei.com>
+Subject: [PATCH-for-9.1 11/21] qapi: Make CpuDefinitionInfo target agnostic
+Date: Fri, 15 Mar 2024 14:08:59 +0100
+Message-ID: <20240315130910.15750-12-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240315130910.15750-1-philmd@linaro.org>
 References: <20240315130910.15750-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::630;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x630.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::633;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x633.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,106 +107,170 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-When multiple QOM types are registered in the same file,
-it is simpler to use the the DEFINE_TYPES() macro. In
-particular because type array declared with such macro
-are easier to review.
-
-In few commits we are going to add more types, so replace
-the type_register_static() to ease further reviews.
+Generate the CpuDefinitionInfo type once for all targets.
+In few commits @query-cpu-definitions will become generic
+and all target will return their CPUs list.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
-Message-Id: <20231013140116.255-14-philmd@linaro.org>
 ---
- target/i386/cpu.c | 50 ++++++++++++++++++++++-------------------------
- 1 file changed, 23 insertions(+), 27 deletions(-)
+ qapi/machine-target.json | 69 ----------------------------------------
+ qapi/machine.json        | 63 ++++++++++++++++++++++++++++++++++++
+ 2 files changed, 63 insertions(+), 69 deletions(-)
 
-diff --git a/target/i386/cpu.c b/target/i386/cpu.c
-index 9a210d8d92..ebf555f50f 100644
---- a/target/i386/cpu.c
-+++ b/target/i386/cpu.c
-@@ -4991,13 +4991,6 @@ static void max_x86_cpu_initfn(Object *obj)
-                             &error_abort);
- }
+diff --git a/qapi/machine-target.json b/qapi/machine-target.json
+index 0412400df3..7480921d33 100644
+--- a/qapi/machine-target.json
++++ b/qapi/machine-target.json
+@@ -212,75 +212,6 @@
+                    'TARGET_LOONGARCH64',
+                    'TARGET_RISCV' ] } }
  
--static const TypeInfo max_x86_cpu_type_info = {
--    .name = X86_CPU_TYPE_NAME("max"),
--    .parent = TYPE_X86_CPU,
--    .instance_init = max_x86_cpu_initfn,
--    .class_init = max_x86_cpu_class_init,
--};
+-##
+-# @CpuDefinitionInfo:
+-#
+-# Virtual CPU definition.
+-#
+-# @name: the name of the CPU definition
+-#
+-# @migration-safe: whether a CPU definition can be safely used for
+-#     migration in combination with a QEMU compatibility machine when
+-#     migrating between different QEMU versions and between hosts with
+-#     different sets of (hardware or software) capabilities.  If not
+-#     provided, information is not available and callers should not
+-#     assume the CPU definition to be migration-safe.  (since 2.8)
+-#
+-# @static: whether a CPU definition is static and will not change
+-#     depending on QEMU version, machine type, machine options and
+-#     accelerator options.  A static model is always migration-safe.
+-#     (since 2.8)
+-#
+-# @unavailable-features: List of properties that prevent the CPU model
+-#     from running in the current host.  (since 2.8)
+-#
+-# @typename: Type name that can be used as argument to
+-#     @device-list-properties, to introspect properties configurable
+-#     using -cpu or -global.  (since 2.9)
+-#
+-# @alias-of: Name of CPU model this model is an alias for.  The target
+-#     of the CPU model alias may change depending on the machine type.
+-#     Management software is supposed to translate CPU model aliases
+-#     in the VM configuration, because aliases may stop being
+-#     migration-safe in the future (since 4.1)
+-#
+-# @deprecated: If true, this CPU model is deprecated and may be
+-#     removed in in some future version of QEMU according to the QEMU
+-#     deprecation policy.  (since 5.2)
+-#
+-# @unavailable-features is a list of QOM property names that represent
+-# CPU model attributes that prevent the CPU from running.  If the QOM
+-# property is read-only, that means there's no known way to make the
+-# CPU model run in the current host.  Implementations that choose not
+-# to provide specific information return the property name "type". If
+-# the property is read-write, it means that it MAY be possible to run
+-# the CPU model in the current host if that property is changed.
+-# Management software can use it as hints to suggest or choose an
+-# alternative for the user, or just to generate meaningful error
+-# messages explaining why the CPU model can't be used.  If
+-# @unavailable-features is an empty list, the CPU model is runnable
+-# using the current host and machine-type.  If @unavailable-features
+-# is not present, runnability information for the CPU is not
+-# available.
+-#
+-# Since: 1.2
+-##
+-{ 'struct': 'CpuDefinitionInfo',
+-  'data': { 'name': 'str',
+-            '*migration-safe': 'bool',
+-            'static': 'bool',
+-            '*unavailable-features': [ 'str' ],
+-            'typename': 'str',
+-            '*alias-of' : 'str',
+-            'deprecated' : 'bool' },
+-  'if': { 'any': [ 'TARGET_PPC',
+-                   'TARGET_ARM',
+-                   'TARGET_I386',
+-                   'TARGET_S390X',
+-                   'TARGET_MIPS',
+-                   'TARGET_LOONGARCH64',
+-                   'TARGET_RISCV' ] } }
 -
- static char *feature_word_description(FeatureWordInfo *f, uint32_t bit)
- {
-     assert(f->type == CPUID_FEATURE_WORD || f->type == MSR_FEATURE_WORD);
-@@ -8041,19 +8034,6 @@ static void x86_cpu_common_class_init(ObjectClass *oc, void *data)
-     }
- }
+ ##
+ # @query-cpu-definitions:
+ #
+diff --git a/qapi/machine.json b/qapi/machine.json
+index 65702c2c78..9c44b8fa82 100644
+--- a/qapi/machine.json
++++ b/qapi/machine.json
+@@ -10,6 +10,69 @@
  
--static const TypeInfo x86_cpu_type_info = {
--    .name = TYPE_X86_CPU,
--    .parent = TYPE_CPU,
--    .instance_size = sizeof(X86CPU),
--    .instance_align = __alignof(X86CPU),
--    .instance_init = x86_cpu_initfn,
--    .instance_post_init = x86_cpu_post_initfn,
--
--    .abstract = true,
--    .class_size = sizeof(X86CPUClass),
--    .class_init = x86_cpu_common_class_init,
--};
--
- /* "base" CPU model, used by query-cpu-model-expansion */
- static void x86_cpu_base_class_init(ObjectClass *oc, void *data)
- {
-@@ -8065,22 +8045,38 @@ static void x86_cpu_base_class_init(ObjectClass *oc, void *data)
-     xcc->ordering = 8;
- }
+ { 'include': 'common.json' }
  
--static const TypeInfo x86_base_cpu_type_info = {
--        .name = X86_CPU_TYPE_NAME("base"),
--        .parent = TYPE_X86_CPU,
--        .class_init = x86_cpu_base_class_init,
-+static const TypeInfo x86_cpu_types[] = {
-+    {
-+        .name           = TYPE_X86_CPU,
-+        .parent         = TYPE_CPU,
-+        .abstract       = true,
-+        .instance_size  = sizeof(X86CPU),
-+        .instance_align = __alignof(X86CPU),
-+        .instance_init  = x86_cpu_initfn,
-+        .instance_post_init = x86_cpu_post_initfn,
-+        .class_size     = sizeof(X86CPUClass),
-+        .class_init     = x86_cpu_common_class_init,
-+    }, {
-+        .name           = X86_CPU_TYPE_NAME("base"),
-+        .parent         = TYPE_X86_CPU,
-+        .class_init     = x86_cpu_base_class_init,
-+    }, {
-+        .name           = X86_CPU_TYPE_NAME("max"),
-+        .parent         = TYPE_X86_CPU,
-+        .instance_init  = max_x86_cpu_initfn,
-+        .class_init     = max_x86_cpu_class_init,
-+    }
- };
- 
-+DEFINE_TYPES(x86_cpu_types)
++##
++# @CpuDefinitionInfo:
++#
++# Virtual CPU definition.
++#
++# @name: the name of the CPU definition
++#
++# @migration-safe: whether a CPU definition can be safely used for
++#     migration in combination with a QEMU compatibility machine when
++#     migrating between different QEMU versions and between hosts with
++#     different sets of (hardware or software) capabilities.  If not
++#     provided, information is not available and callers should not
++#     assume the CPU definition to be migration-safe.  (since 2.8)
++#
++# @static: whether a CPU definition is static and will not change
++#     depending on QEMU version, machine type, machine options and
++#     accelerator options.  A static model is always migration-safe.
++#     (since 2.8)
++#
++# @unavailable-features: List of properties that prevent the CPU model
++#     from running in the current host.  (since 2.8)
++#
++# @typename: Type name that can be used as argument to
++#     @device-list-properties, to introspect properties configurable
++#     using -cpu or -global.  (since 2.9)
++#
++# @alias-of: Name of CPU model this model is an alias for.  The target
++#     of the CPU model alias may change depending on the machine type.
++#     Management software is supposed to translate CPU model aliases
++#     in the VM configuration, because aliases may stop being
++#     migration-safe in the future (since 4.1)
++#
++# @deprecated: If true, this CPU model is deprecated and may be
++#     removed in in some future version of QEMU according to the QEMU
++#     deprecation policy.  (since 5.2)
++#
++# @unavailable-features is a list of QOM property names that represent
++# CPU model attributes that prevent the CPU from running.  If the QOM
++# property is read-only, that means there's no known way to make the
++# CPU model run in the current host.  Implementations that choose not
++# to provide specific information return the property name "type". If
++# the property is read-write, it means that it MAY be possible to run
++# the CPU model in the current host if that property is changed.
++# Management software can use it as hints to suggest or choose an
++# alternative for the user, or just to generate meaningful error
++# messages explaining why the CPU model can't be used.  If
++# @unavailable-features is an empty list, the CPU model is runnable
++# using the current host and machine-type.  If @unavailable-features
++# is not present, runnability information for the CPU is not
++# available.
++#
++# Since: 1.2
++##
++{ 'struct': 'CpuDefinitionInfo',
++  'data': { 'name': 'str',
++            '*migration-safe': 'bool',
++            'static': 'bool',
++            '*unavailable-features': [ 'str' ],
++            'typename': 'str',
++            '*alias-of' : 'str',
++            'deprecated' : 'bool' }
++}
 +
- static void x86_cpu_register_types(void)
- {
-     int i;
- 
--    type_register_static(&x86_cpu_type_info);
-     for (i = 0; i < ARRAY_SIZE(builtin_x86_defs); i++) {
-         x86_register_cpudef_types(&builtin_x86_defs[i]);
-     }
--    type_register_static(&max_x86_cpu_type_info);
--    type_register_static(&x86_base_cpu_type_info);
- }
- 
- type_init(x86_cpu_register_types)
+ ##
+ # @CpuModelInfo:
+ #
 -- 
 2.41.0
 
