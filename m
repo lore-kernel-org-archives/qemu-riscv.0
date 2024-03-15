@@ -4,96 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3E34C54E58
-	for <qemu-riscv@archiver.kernel.org>; Fri, 15 Mar 2024 13:13:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0604C54E58
+	for <qemu-riscv@archiver.kernel.org>; Fri, 15 Mar 2024 13:13:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rl7Ku-0008Hl-Df; Fri, 15 Mar 2024 09:11:00 -0400
+	id 1rl7LY-0002Vb-Su; Fri, 15 Mar 2024 09:11:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1rl7K1-0006N9-Bk
- for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:10:07 -0400
-Received: from mail-pj1-x1034.google.com ([2607:f8b0:4864:20::1034])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rl7LJ-0001Q4-QJ
+ for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:11:25 -0400
+Received: from mail-ed1-x52a.google.com ([2a00:1450:4864:20::52a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1rl7Js-0007of-On
- for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:10:03 -0400
-Received: by mail-pj1-x1034.google.com with SMTP id
- 98e67ed59e1d1-29c731ba369so1668038a91.3
- for <qemu-riscv@nongnu.org>; Fri, 15 Mar 2024 06:09:55 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rl7LH-00006r-Ud
+ for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:11:25 -0400
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-563cb3ba9daso2384273a12.3
+ for <qemu-riscv@nongnu.org>; Fri, 15 Mar 2024 06:11:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1710508194; x=1711112994; darn=nongnu.org;
+ d=linaro.org; s=google; t=1710508282; x=1711113082; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=eP7mFS+tC1O6LUU3KM5DOGQ8e+9ow7yRP/vkR8U6RW0=;
- b=kHFx1v+44WC2DwghQQHmDRutOk/1jga+Y2zpUaGC40RqAw8E0KecBJVul/DYiMDdUg
- +g7v0en9/587hd8LqVcRJTqZWv1B+0FRTn92wwj/0R2BokUWn2PZhAdPRvTcXIAmM9Fu
- oyfYuozq/9lDVuuNi9ygggV8fMFq3jshEe+oVmFGmUBUGlOG089ryfrYPSzfbQKXete7
- DMqT0SC4njieMRQ7PjCFhQCL+ulZkcEA7b5gBSTbqILXTarTA9Clr9T24TsdNTJu2X76
- 8OnsgNSXdqSVHbkx9jXHoMhHnNQm9ZsHdO0FSNF+0TUIjLscqsmm0k6PQw06UJORIeOl
- Ld7A==
+ bh=JlSnNkdCGhkGJY+zh070ayuUxIbMNrgyLxLLZYypnXY=;
+ b=yx8CFeUcg5ujfCaMKT3THBflLS7I4ltCCOI+0Mpd+ZL8cVVLbQ431Y96W/IvF3+cf5
+ m1JcXoknKpWaYT6rJrvJe+3ZS1tLB3ZnRhMTlw8UkqX2dAyOHI2P5c11g2jaMCC5iEzm
+ b3zLWtqGm3H+wJtlK2mJaJAAjOydrgqNmRyWxQ57li2pUYa3xQUGWL81A2hJOOaeNhyH
+ +tX9QJ36aXlA7qNGw3kQeeJ8KAe7OfNWIQ61dlMpMX9wgWtnLlOEdeVuEwLrQpNLthzD
+ fR6s9+Z0eKGt9SnFXnLeHa91YINZkJad0foQ/a22J0ON/wl3EdYW+fxvoVkoFU3ilYSL
+ aQdw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710508194; x=1711112994;
+ d=1e100.net; s=20230601; t=1710508282; x=1711113082;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=eP7mFS+tC1O6LUU3KM5DOGQ8e+9ow7yRP/vkR8U6RW0=;
- b=sRHWIAt/FCV1iVw3OAjf5Fdd9EN55EELB8zXkvb0ieMMhT+OOgk+3M6vdpNu1mmiTO
- 6HtrBR1tB6PDRwTd+u4wuAT/BjZdT/YJO4vaadjL7i1jEOzsx12Zs62H2TVsQQGwI8cU
- L3YtWGhNJCMaRuIuIkAYnAr5fpmKCa1v6uxVCTzJLfhIeC/IsZExBP70oZxqHtrPvRmt
- NyqQh1rEK/XhmMqKYgiZTvhki7Krz2RPUq/UGMOPyMgXyW0h7kKP9usuwCG/ga//lpl/
- GaoaP8DOMxSDA+R3VT/STHcsxvVQNzOIxAsezWNdj/GtOk1IMC+liJrRZSUGn3gW3T8G
- VxFg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV7pH4tH9Jkd+FEwiWBU7RqYw9cMmNO+jN3zTgvRq8YOGLxC6eXnSOSREBbPsVtQyFc8B5V6dAhBBvpLoXdmB95WNzRA3o=
-X-Gm-Message-State: AOJu0YzwrCPnUpVR7+harYKj//3ntB/4zFccJb7sFxAeY2M3ZpLyEgNA
- bLsbCMGSgSFZS23d/5mj/yRO7pxp6jxDcDlqKdJWJ0ieT0gh8Y/kZ3jnNMoEZ9E=
-X-Google-Smtp-Source: AGHT+IHJUI5QIhAtaKpfx69OxdI7cz7/LP3XQ16nVgPvhbK8toooFbQMuYypeufIpKK8iP1iAevT/g==
-X-Received: by 2002:a17:90a:ce12:b0:29b:f2b1:6973 with SMTP id
- f18-20020a17090ace1200b0029bf2b16973mr4641926pju.20.1710508194137; 
- Fri, 15 Mar 2024 06:09:54 -0700 (PDT)
-Received: from sunil-pc.Dlink ([106.51.184.12])
+ bh=JlSnNkdCGhkGJY+zh070ayuUxIbMNrgyLxLLZYypnXY=;
+ b=seS/E+fqfnNsQiegGAFDJ4BnBHtAXQ3+eeLRyVd+QiMYuAGo6Iybuf6TfnVXZu701n
+ Zg9N3Pnx7H7o94XnoSViF4zY+Fb8+QRIsO9p1pz9uIVh1bpgtOwuRIV+gt6ZJWTpYmVt
+ ZF0qWhxqpWiMTQBD9G9iS8Ycfyq3TZ1jqnj8RDJYAMADXXC+krEEqU73aNtwIgKyt+ui
+ nEfa1iCcVqY+HnTOl2EDcz8Ap8WM3mG8lUyom+0wBfd1PE1TbElOxQGI8yek9BGPXZQu
+ /RG8po64JND4g2RTQ1D+1cesfprW8T0s++Ot8bMgt4W7s1Ziy9ahee+tnK6ROzl3lim6
+ PFMw==
+X-Gm-Message-State: AOJu0YwgigEKQ11T679qn0lOi7ElFWcDy1nXLMRUrIKzSb4PA5JmHbun
+ qRbFsIq8zkaKVK3dkWDQ3sn7FJowH1wTSdzCfi99h81/3B4PEF5xicie4IUNQI4=
+X-Google-Smtp-Source: AGHT+IFr5RaqknL50rJ/ULGqKtzSQvYODwR3uxqq5WvgAEMCCYd8EWNHRLvED+eSeGFqUTaVtHbaiA==
+X-Received: by 2002:a05:6402:3819:b0:566:ff31:7974 with SMTP id
+ es25-20020a056402381900b00566ff317974mr2662833edb.34.1710508282572; 
+ Fri, 15 Mar 2024 06:11:22 -0700 (PDT)
+Received: from m1x-phil.lan ([176.176.145.26])
  by smtp.gmail.com with ESMTPSA id
- r3-20020a17090ad40300b0029c68206e2bsm2886663pju.0.2024.03.15.06.09.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Mar 2024 06:09:53 -0700 (PDT)
-From: Sunil V L <sunilvl@ventanamicro.com>
+ er18-20020a056402449200b0056899fc9a94sm1673226edb.12.2024.03.15.06.11.20
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Fri, 15 Mar 2024 06:11:22 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org,
-	qemu-arm@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Paolo Bonzini <pbonzini@redhat.com>,
- =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+	Markus Armbruster <armbru@redhat.com>
+Cc: qemu-riscv@nongnu.org, Anton Johansson <anjo@rev.ng>,
+ qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
  =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
+ Claudio Fontana <cfontana@suse.de>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
+ Zhao Liu <zhao1.liu@intel.com>, qemu-arm@nongnu.org,
  Thomas Huth <thuth@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Gerd Hoffmann <kraxel@redhat.com>, "Michael S . Tsirkin" <mst@redhat.com>,
- Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
- Laurent Vivier <lvivier@redhat.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Alistair Francis <alistair23@gmail.com>,
- Andrew Jones <ajones@ventanamicro.com>,
- Anup Patel <apatel@ventanamicro.com>, Haibo1 Xu <haibo1.xu@intel.com>,
- Sunil V L <sunilvl@ventanamicro.com>
-Subject: [PATCH 07/12] tests/data/acpi/virt: Move ACPI tables under aarch64
-Date: Fri, 15 Mar 2024 18:39:19 +0530
-Message-Id: <20240315130924.2378849-5-sunilvl@ventanamicro.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20240315130924.2378849-1-sunilvl@ventanamicro.com>
-References: <20240315130924.2378849-1-sunilvl@ventanamicro.com>
+ Nicholas Piggin <npiggin@gmail.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>
+Subject: [PATCH-for-9.1 19/21] target/ppc: Factor ppc_add_alias_definitions()
+ out
+Date: Fri, 15 Mar 2024 14:09:07 +0100
+Message-ID: <20240315130910.15750-20-philmd@linaro.org>
+X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20240315130910.15750-1-philmd@linaro.org>
+References: <20240315130910.15750-1-philmd@linaro.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1034;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pj1-x1034.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52a;
+ envelope-from=philmd@linaro.org; helo=mail-ed1-x52a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01,
- T_SPF_HELO_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -109,165 +107,82 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Since virt is a common machine name across architectures like ARM64 and
-RISC-V, move existing ARM64 ACPI tables under aarch64 folder so that
-RISC-V tables can be added under riscv64 folder in future.
+Factor ppc_add_alias_definitions() out of qmp_query_cpu_definitions()
+to clearly see the generic pattern used in all targets.
 
-Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- tests/data/acpi/virt/{ => aarch64}/APIC             | Bin
- .../data/acpi/virt/{ => aarch64}/APIC.acpihmatvirt  | Bin
- tests/data/acpi/virt/{ => aarch64}/APIC.topology    | Bin
- tests/data/acpi/virt/{ => aarch64}/DBG2             | Bin
- tests/data/acpi/virt/{ => aarch64}/DSDT             | Bin
- .../data/acpi/virt/{ => aarch64}/DSDT.acpihmatvirt  | Bin
- tests/data/acpi/virt/{ => aarch64}/DSDT.memhp       | Bin
- tests/data/acpi/virt/{ => aarch64}/DSDT.pxb         | Bin
- tests/data/acpi/virt/{ => aarch64}/DSDT.topology    | Bin
- tests/data/acpi/virt/{ => aarch64}/FACP             | Bin
- tests/data/acpi/virt/{ => aarch64}/GTDT             | Bin
- .../data/acpi/virt/{ => aarch64}/HMAT.acpihmatvirt  | Bin
- tests/data/acpi/virt/{ => aarch64}/IORT             | Bin
- tests/data/acpi/virt/{ => aarch64}/MCFG             | Bin
- tests/data/acpi/virt/{ => aarch64}/NFIT.memhp       | Bin
- tests/data/acpi/virt/{ => aarch64}/PPTT             | Bin
- .../data/acpi/virt/{ => aarch64}/PPTT.acpihmatvirt  | Bin
- tests/data/acpi/virt/{ => aarch64}/PPTT.topology    | Bin
- tests/data/acpi/virt/{ => aarch64}/SLIT.memhp       | Bin
- tests/data/acpi/virt/{ => aarch64}/SPCR             | Bin
- .../data/acpi/virt/{ => aarch64}/SRAT.acpihmatvirt  | Bin
- tests/data/acpi/virt/{ => aarch64}/SRAT.memhp       | Bin
- tests/data/acpi/virt/{ => aarch64}/SRAT.numamem     | Bin
- tests/data/acpi/virt/{ => aarch64}/SSDT.memhp       | Bin
- tests/data/acpi/virt/{ => aarch64}/VIOT             | Bin
- 25 files changed, 0 insertions(+), 0 deletions(-)
- rename tests/data/acpi/virt/{ => aarch64}/APIC (100%)
- rename tests/data/acpi/virt/{ => aarch64}/APIC.acpihmatvirt (100%)
- rename tests/data/acpi/virt/{ => aarch64}/APIC.topology (100%)
- rename tests/data/acpi/virt/{ => aarch64}/DBG2 (100%)
- rename tests/data/acpi/virt/{ => aarch64}/DSDT (100%)
- rename tests/data/acpi/virt/{ => aarch64}/DSDT.acpihmatvirt (100%)
- rename tests/data/acpi/virt/{ => aarch64}/DSDT.memhp (100%)
- rename tests/data/acpi/virt/{ => aarch64}/DSDT.pxb (100%)
- rename tests/data/acpi/virt/{ => aarch64}/DSDT.topology (100%)
- rename tests/data/acpi/virt/{ => aarch64}/FACP (100%)
- rename tests/data/acpi/virt/{ => aarch64}/GTDT (100%)
- rename tests/data/acpi/virt/{ => aarch64}/HMAT.acpihmatvirt (100%)
- rename tests/data/acpi/virt/{ => aarch64}/IORT (100%)
- rename tests/data/acpi/virt/{ => aarch64}/MCFG (100%)
- rename tests/data/acpi/virt/{ => aarch64}/NFIT.memhp (100%)
- rename tests/data/acpi/virt/{ => aarch64}/PPTT (100%)
- rename tests/data/acpi/virt/{ => aarch64}/PPTT.acpihmatvirt (100%)
- rename tests/data/acpi/virt/{ => aarch64}/PPTT.topology (100%)
- rename tests/data/acpi/virt/{ => aarch64}/SLIT.memhp (100%)
- rename tests/data/acpi/virt/{ => aarch64}/SPCR (100%)
- rename tests/data/acpi/virt/{ => aarch64}/SRAT.acpihmatvirt (100%)
- rename tests/data/acpi/virt/{ => aarch64}/SRAT.memhp (100%)
- rename tests/data/acpi/virt/{ => aarch64}/SRAT.numamem (100%)
- rename tests/data/acpi/virt/{ => aarch64}/SSDT.memhp (100%)
- rename tests/data/acpi/virt/{ => aarch64}/VIOT (100%)
+ target/ppc/cpu-models.h   |  4 ++++
+ target/ppc/ppc-qmp-cmds.c | 26 +++++++++++++++-----------
+ 2 files changed, 19 insertions(+), 11 deletions(-)
 
-diff --git a/tests/data/acpi/virt/APIC b/tests/data/acpi/virt/aarch64/APIC
-similarity index 100%
-rename from tests/data/acpi/virt/APIC
-rename to tests/data/acpi/virt/aarch64/APIC
-diff --git a/tests/data/acpi/virt/APIC.acpihmatvirt b/tests/data/acpi/virt/aarch64/APIC.acpihmatvirt
-similarity index 100%
-rename from tests/data/acpi/virt/APIC.acpihmatvirt
-rename to tests/data/acpi/virt/aarch64/APIC.acpihmatvirt
-diff --git a/tests/data/acpi/virt/APIC.topology b/tests/data/acpi/virt/aarch64/APIC.topology
-similarity index 100%
-rename from tests/data/acpi/virt/APIC.topology
-rename to tests/data/acpi/virt/aarch64/APIC.topology
-diff --git a/tests/data/acpi/virt/DBG2 b/tests/data/acpi/virt/aarch64/DBG2
-similarity index 100%
-rename from tests/data/acpi/virt/DBG2
-rename to tests/data/acpi/virt/aarch64/DBG2
-diff --git a/tests/data/acpi/virt/DSDT b/tests/data/acpi/virt/aarch64/DSDT
-similarity index 100%
-rename from tests/data/acpi/virt/DSDT
-rename to tests/data/acpi/virt/aarch64/DSDT
-diff --git a/tests/data/acpi/virt/DSDT.acpihmatvirt b/tests/data/acpi/virt/aarch64/DSDT.acpihmatvirt
-similarity index 100%
-rename from tests/data/acpi/virt/DSDT.acpihmatvirt
-rename to tests/data/acpi/virt/aarch64/DSDT.acpihmatvirt
-diff --git a/tests/data/acpi/virt/DSDT.memhp b/tests/data/acpi/virt/aarch64/DSDT.memhp
-similarity index 100%
-rename from tests/data/acpi/virt/DSDT.memhp
-rename to tests/data/acpi/virt/aarch64/DSDT.memhp
-diff --git a/tests/data/acpi/virt/DSDT.pxb b/tests/data/acpi/virt/aarch64/DSDT.pxb
-similarity index 100%
-rename from tests/data/acpi/virt/DSDT.pxb
-rename to tests/data/acpi/virt/aarch64/DSDT.pxb
-diff --git a/tests/data/acpi/virt/DSDT.topology b/tests/data/acpi/virt/aarch64/DSDT.topology
-similarity index 100%
-rename from tests/data/acpi/virt/DSDT.topology
-rename to tests/data/acpi/virt/aarch64/DSDT.topology
-diff --git a/tests/data/acpi/virt/FACP b/tests/data/acpi/virt/aarch64/FACP
-similarity index 100%
-rename from tests/data/acpi/virt/FACP
-rename to tests/data/acpi/virt/aarch64/FACP
-diff --git a/tests/data/acpi/virt/GTDT b/tests/data/acpi/virt/aarch64/GTDT
-similarity index 100%
-rename from tests/data/acpi/virt/GTDT
-rename to tests/data/acpi/virt/aarch64/GTDT
-diff --git a/tests/data/acpi/virt/HMAT.acpihmatvirt b/tests/data/acpi/virt/aarch64/HMAT.acpihmatvirt
-similarity index 100%
-rename from tests/data/acpi/virt/HMAT.acpihmatvirt
-rename to tests/data/acpi/virt/aarch64/HMAT.acpihmatvirt
-diff --git a/tests/data/acpi/virt/IORT b/tests/data/acpi/virt/aarch64/IORT
-similarity index 100%
-rename from tests/data/acpi/virt/IORT
-rename to tests/data/acpi/virt/aarch64/IORT
-diff --git a/tests/data/acpi/virt/MCFG b/tests/data/acpi/virt/aarch64/MCFG
-similarity index 100%
-rename from tests/data/acpi/virt/MCFG
-rename to tests/data/acpi/virt/aarch64/MCFG
-diff --git a/tests/data/acpi/virt/NFIT.memhp b/tests/data/acpi/virt/aarch64/NFIT.memhp
-similarity index 100%
-rename from tests/data/acpi/virt/NFIT.memhp
-rename to tests/data/acpi/virt/aarch64/NFIT.memhp
-diff --git a/tests/data/acpi/virt/PPTT b/tests/data/acpi/virt/aarch64/PPTT
-similarity index 100%
-rename from tests/data/acpi/virt/PPTT
-rename to tests/data/acpi/virt/aarch64/PPTT
-diff --git a/tests/data/acpi/virt/PPTT.acpihmatvirt b/tests/data/acpi/virt/aarch64/PPTT.acpihmatvirt
-similarity index 100%
-rename from tests/data/acpi/virt/PPTT.acpihmatvirt
-rename to tests/data/acpi/virt/aarch64/PPTT.acpihmatvirt
-diff --git a/tests/data/acpi/virt/PPTT.topology b/tests/data/acpi/virt/aarch64/PPTT.topology
-similarity index 100%
-rename from tests/data/acpi/virt/PPTT.topology
-rename to tests/data/acpi/virt/aarch64/PPTT.topology
-diff --git a/tests/data/acpi/virt/SLIT.memhp b/tests/data/acpi/virt/aarch64/SLIT.memhp
-similarity index 100%
-rename from tests/data/acpi/virt/SLIT.memhp
-rename to tests/data/acpi/virt/aarch64/SLIT.memhp
-diff --git a/tests/data/acpi/virt/SPCR b/tests/data/acpi/virt/aarch64/SPCR
-similarity index 100%
-rename from tests/data/acpi/virt/SPCR
-rename to tests/data/acpi/virt/aarch64/SPCR
-diff --git a/tests/data/acpi/virt/SRAT.acpihmatvirt b/tests/data/acpi/virt/aarch64/SRAT.acpihmatvirt
-similarity index 100%
-rename from tests/data/acpi/virt/SRAT.acpihmatvirt
-rename to tests/data/acpi/virt/aarch64/SRAT.acpihmatvirt
-diff --git a/tests/data/acpi/virt/SRAT.memhp b/tests/data/acpi/virt/aarch64/SRAT.memhp
-similarity index 100%
-rename from tests/data/acpi/virt/SRAT.memhp
-rename to tests/data/acpi/virt/aarch64/SRAT.memhp
-diff --git a/tests/data/acpi/virt/SRAT.numamem b/tests/data/acpi/virt/aarch64/SRAT.numamem
-similarity index 100%
-rename from tests/data/acpi/virt/SRAT.numamem
-rename to tests/data/acpi/virt/aarch64/SRAT.numamem
-diff --git a/tests/data/acpi/virt/SSDT.memhp b/tests/data/acpi/virt/aarch64/SSDT.memhp
-similarity index 100%
-rename from tests/data/acpi/virt/SSDT.memhp
-rename to tests/data/acpi/virt/aarch64/SSDT.memhp
-diff --git a/tests/data/acpi/virt/VIOT b/tests/data/acpi/virt/aarch64/VIOT
-similarity index 100%
-rename from tests/data/acpi/virt/VIOT
-rename to tests/data/acpi/virt/aarch64/VIOT
+diff --git a/target/ppc/cpu-models.h b/target/ppc/cpu-models.h
+index 0229ef3a9a..89a5e232b7 100644
+--- a/target/ppc/cpu-models.h
++++ b/target/ppc/cpu-models.h
+@@ -21,6 +21,8 @@
+ #ifndef TARGET_PPC_CPU_MODELS_H
+ #define TARGET_PPC_CPU_MODELS_H
+ 
++#include "qapi/qapi-types-machine.h"
++
+ /**
+  * PowerPCCPUAlias:
+  * @alias: The alias name.
+@@ -480,4 +482,6 @@ enum {
+     POWERPC_SVR_8641D              = 0x80900121,
+ };
+ 
++void ppc_add_alias_definitions(CpuDefinitionInfoList **cpu_list);
++
+ #endif
+diff --git a/target/ppc/ppc-qmp-cmds.c b/target/ppc/ppc-qmp-cmds.c
+index a25d86a8d1..528cc3e4af 100644
+--- a/target/ppc/ppc-qmp-cmds.c
++++ b/target/ppc/ppc-qmp-cmds.c
+@@ -189,17 +189,9 @@ static void ppc_cpu_defs_entry(gpointer data, gpointer user_data)
+     QAPI_LIST_PREPEND(*first, info);
+ }
+ 
+-CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
++void ppc_add_alias_definitions(CpuDefinitionInfoList **cpu_list)
+ {
+-    CpuDefinitionInfoList *cpu_list = NULL;
+-    GSList *list;
+-    int i;
+-
+-    list = object_class_get_list(TYPE_POWERPC_CPU, false);
+-    g_slist_foreach(list, ppc_cpu_defs_entry, &cpu_list);
+-    g_slist_free(list);
+-
+-    for (i = 0; ppc_cpu_aliases[i].alias != NULL; i++) {
++    for (unsigned i = 0; ppc_cpu_aliases[i].alias != NULL; i++) {
+         PowerPCCPUAlias *alias = &ppc_cpu_aliases[i];
+         ObjectClass *oc;
+         CpuDefinitionInfo *info;
+@@ -213,8 +205,20 @@ CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
+         info->name = g_strdup(alias->alias);
+         info->q_typename = g_strdup(object_class_get_name(oc));
+ 
+-        QAPI_LIST_PREPEND(cpu_list, info);
++        QAPI_LIST_PREPEND(*cpu_list, info);
+     }
++}
++
++CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
++{
++    CpuDefinitionInfoList *cpu_list = NULL;
++    GSList *list;
++
++    list = object_class_get_list(TYPE_POWERPC_CPU, false);
++    g_slist_foreach(list, ppc_cpu_defs_entry, &cpu_list);
++    g_slist_free(list);
++
++    ppc_add_alias_definitions(&cpu_list);
+ 
+     return cpu_list;
+ }
 -- 
-2.40.1
+2.41.0
 
 
