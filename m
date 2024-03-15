@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB3C4C54E67
-	for <qemu-riscv@archiver.kernel.org>; Fri, 15 Mar 2024 13:13:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED5C8C54E67
+	for <qemu-riscv@archiver.kernel.org>; Fri, 15 Mar 2024 13:13:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rl7Jn-0005xD-S2; Fri, 15 Mar 2024 09:09:51 -0400
+	id 1rl7Lh-0002wM-8O; Fri, 15 Mar 2024 09:11:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rl7JW-0005e1-2V
- for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:09:37 -0400
-Received: from mail-lj1-x232.google.com ([2a00:1450:4864:20::232])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rl7LY-0002UI-Lf
+ for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:11:40 -0400
+Received: from mail-ej1-x634.google.com ([2a00:1450:4864:20::634])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rl7JS-0007bc-Sm
- for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:09:33 -0400
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-2d475b6609eso26494011fa.2
- for <qemu-riscv@nongnu.org>; Fri, 15 Mar 2024 06:09:30 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rl7LW-0000Fr-16
+ for qemu-riscv@nongnu.org; Fri, 15 Mar 2024 09:11:40 -0400
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-a468616ed70so87994166b.3
+ for <qemu-riscv@nongnu.org>; Fri, 15 Mar 2024 06:11:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710508169; x=1711112969; darn=nongnu.org;
+ d=linaro.org; s=google; t=1710508296; x=1711113096; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=38DwNqP/w4iyE7cU/eTej+AEZTmllcOjbkkM5XAd0Sw=;
- b=XB5H0U5l83wIbjQjpuYrC5o12zfap5fgJx3f06O+MSzwOlneioTk6FoIpJ4t2tDHN6
- 8t+1D5KldGYyL1Nm7TIUFScpsoHQj2+miWpenx2W8ytiCpcs++dukYTLuNdXpNCz8tJZ
- 5aB5zoFCSHB/f7ah2CmUk0ZFEYxlRpOMp+jd6fqH9S+/Ea3rk6m1qd2g/1h50qyRmmIy
- Zdzwgk5doM//rWBzrUkHlquT7/eexJnaT+NaN5BgJ7vEdZr6Ly5fcxPTkRvUvOah8ARC
- 2L8h7GCTyL6oorUJ3ceF9qnT4Pu3tz0CeNwW6uHfRqIlY0vqzOih5we19mXj2jIMqai6
- nsEA==
+ bh=vnvuw2s/qwtrAi1idHX4CvaMd4PeKiJ3xN49FEYysNQ=;
+ b=UnMhEXAzG8RRZ8GrAfBS/lVof3e8c7j2ei5T+TFbAnEIBja8XE71LyWL33mKg7lMG+
+ XnXWZAv3PiuGWLhKxYkOW7UCuInlsF1KcRA02RzMn6cOsDTOWDN5PImatMWZEbcwAGS6
+ FM2KYtHY1UO5mqb6n0yc4E2WFKdhSSZkJekbmMTSMnM7M1vKusqxmcGWdJcWLfjfXOPH
+ T7Bn4T4LCWo7uGXLhsZAD9B2A709ygXIjUVqNu0MEXnVC07Vd57EkP2/FMBbYI37MD+y
+ SwoswZi+AmaJn0Bddf/HPQtvv+c7gD3DG9SQPlg8uEhU3VUz0rTiyR1NXdRDditPnNGy
+ 4dHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710508169; x=1711112969;
+ d=1e100.net; s=20230601; t=1710508296; x=1711113096;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=38DwNqP/w4iyE7cU/eTej+AEZTmllcOjbkkM5XAd0Sw=;
- b=pBRtR3ayn3MhwZNk++mNCLooTzT1aHxFJv1nKmoK6/nrYYEseqD1CeyJJy1N8i1BXI
- Lt08QU25Zqrt0EJ+CVQwiylPapnzOtPMTx3d8dwUPmIgpnD6QJrCJm9NMpO4tA/69YR6
- mO7xRTC2ojBmADxB2xlyGS6wTAZOYaJush0xEo1m7hx6lCaJ2jg02aYErUz0h45Qbdbt
- WUlroQOA0u+5PZ/Cn1DSjxb7AMbXz2P0Blrm01Hl+fGU52KoT2wmWcqejM8mCnP7+Q+g
- psibBNM2VyEfN/NmtfwHBmUBFFOy3sqe63DlaTr1cZmRzvqVpi9T0GKTlez74SwgnBmo
- LGyA==
-X-Gm-Message-State: AOJu0YwnSq0TqLIxvC1Icx0DSs37t3DeTNJ/5wFggES0r5TugyvPgsHT
- EwwKOaReNyO3wXLq4qWs5Lo6gnoMEzvjuh1/7fRvZRua8uNuvSBIKL0Q1eDhsiY=
-X-Google-Smtp-Source: AGHT+IGUqlgwpBs0iVH+nA4YB8mpndxs+sUNctHnYtgA2NyEqcGCBN6lT+1elp7U+umu/qoGxw6VQg==
-X-Received: by 2002:a2e:9850:0:b0:2d4:7829:4d13 with SMTP id
- e16-20020a2e9850000000b002d478294d13mr2977270ljj.50.1710508167582; 
- Fri, 15 Mar 2024 06:09:27 -0700 (PDT)
+ bh=vnvuw2s/qwtrAi1idHX4CvaMd4PeKiJ3xN49FEYysNQ=;
+ b=e6RMUaD5xv5mcicFenwJGSVd1WyEkaCnrYfwlW+uFO4LY69iC0aQ0odBNrqSr8IeCi
+ vuvalzjfC2iZFVLgazDtZnXJKDHqSNpCj1o9RIhhtuCxhHlgvzGiW73xgu1SYX+cqxJo
+ NeF8rBGMbc633iRiGKXqxYLenayKslrCvopbH1VJEi1UwQbWDl3k5++UYKHYnRaErYg5
+ BV+hLv9O4Ry9exRfcco/idy329uVjtgVR3LGicIebWaOZSDkCydPzK7eTag7UP9BN+fI
+ xlPuEBluFQNEY683/O3Lwd9wEwusKHB6whEtGOH9DDo9qQnoYBFZ6z3RlY22FycKiDHv
+ W9Tg==
+X-Gm-Message-State: AOJu0YzVFfQ4hYXtJThcwJ0SWMA0TN0ApRy21ebfpYrSRbMDzAj5Ka+c
+ 8XR+GAlD8QJeOrWgHhmdYdWGwM6nSmbAL1tOnSeUCe+hZ190/PXr4pm0Fs1wLfI=
+X-Google-Smtp-Source: AGHT+IHkrsOXMB0KMEhHFjzPwy0HpwYtgpPqcJhRXSdQ9oxhn/KVwMnS7VrOrtYo7QVAmF/CxxOTZw==
+X-Received: by 2002:a17:906:a3d5:b0:a46:1f6d:2fef with SMTP id
+ ca21-20020a170906a3d500b00a461f6d2fefmr3544428ejb.42.1710508296617; 
+ Fri, 15 Mar 2024 06:11:36 -0700 (PDT)
 Received: from m1x-phil.lan ([176.176.145.26])
  by smtp.gmail.com with ESMTPSA id
- qs28-20020a170906459c00b00a45efdfdd1esm1685202ejc.40.2024.03.15.06.09.25
+ w23-20020a1709064a1700b00a462e5d8d4asm1676475eju.114.2024.03.15.06.11.33
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 15 Mar 2024 06:09:27 -0700 (PDT)
+ Fri, 15 Mar 2024 06:11:36 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org,
 	Markus Armbruster <armbru@redhat.com>
@@ -71,28 +71,37 @@ Cc: qemu-riscv@nongnu.org, Anton Johansson <anjo@rev.ng>,
  Zhao Liu <zhao1.liu@intel.com>, qemu-arm@nongnu.org,
  Thomas Huth <thuth@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Yanan Wang <wangyanan55@huawei.com>, Eric Blake <eblake@redhat.com>,
+ Song Gao <gaosong@loongson.cn>, Huacai Chen <chenhuacai@kernel.org>,
  Aurelien Jarno <aurelien@aurel32.net>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>
-Subject: [PATCH-for-9.1 02/21] target/mips: Declare CPU QOM types using
- DEFINE_TYPES() macro
-Date: Fri, 15 Mar 2024 14:08:50 +0100
-Message-ID: <20240315130910.15750-3-philmd@linaro.org>
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Nicholas Piggin <npiggin@gmail.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Subject: [RFC PATCH-for-9.1 21/21] qapi: Make @query-cpu-definitions
+ target-agnostic
+Date: Fri, 15 Mar 2024 14:09:09 +0100
+Message-ID: <20240315130910.15750-22-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240315130910.15750-1-philmd@linaro.org>
 References: <20240315130910.15750-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::232;
- envelope-from=philmd@linaro.org; helo=mail-lj1-x232.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::634;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x634.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -108,64 +117,287 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-When multiple QOM types are registered in the same file,
-it is simpler to use the the DEFINE_TYPES() macro. In
-particular because type array declared with such macro
-are easier to review.
+All targets use the generic_query_cpu_definitions() method,
+which is not target-specific. Make the command target agnostic
+by moving it to machine.json. Rename generic_query_cpu_definitions
+as qmp_query_cpu_definitions.
 
-In few commits we are going to add more types, so replace
-the type_register_static() to ease further reviews.
+This is an introspection change for the target that were not
+implementing qmp_query_cpu_definitions(): now query-cpu-definitions
+returns an their CPUs list.
+
+Example with SH4 before:
+
+  { "execute": "query-cpu-definitions" }
+
+  { "error": {"class": "CommandNotFound", "desc": "The command query-cpu-definitions has not been found"} }
+
+and after:
+
+  { "execute": "query-cpu-definitions" }
+
+  { "return": [
+          {"name": "sh7751r", "typename": "sh7751r-superh-cpu", "static": false, "deprecated": false},
+          {"name": "sh7750r", "typename": "sh7750r-superh-cpu", "static": false, "deprecated": false},
+          {"name": "sh7785", "typename": "sh7785-superh-cpu", "static": false, "deprecated": false}
+      ]
+  }
+
+However this allows heterogeneous emulation to return a correct list.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Message-Id: <20231013140116.255-15-philmd@linaro.org>
 ---
- target/mips/cpu.c | 23 +++++++++++++----------
- 1 file changed, 13 insertions(+), 10 deletions(-)
+Well, not all target got converted, I left the s390x one for later :)
+---
+ MAINTAINERS                           |  1 -
+ qapi/machine-target.json              | 18 ------------------
+ qapi/machine.json                     | 11 +++++++++++
+ include/qapi/commands-target-compat.h | 14 --------------
+ system/cpu-qmp-cmds.c                 |  4 ++--
+ target/arm/arm-qmp-cmds.c             |  6 ------
+ target/i386/cpu.c                     |  6 ------
+ target/loongarch/loongarch-qmp-cmds.c |  6 ------
+ target/mips/sysemu/mips-qmp-cmds.c    |  9 ---------
+ target/ppc/ppc-qmp-cmds.c             |  7 -------
+ target/riscv/riscv-qmp-cmds.c         |  6 ------
+ 11 files changed, 13 insertions(+), 75 deletions(-)
+ delete mode 100644 include/qapi/commands-target-compat.h
 
-diff --git a/target/mips/cpu.c b/target/mips/cpu.c
-index 8d8f690a53..c096d97fe3 100644
---- a/target/mips/cpu.c
-+++ b/target/mips/cpu.c
-@@ -594,17 +594,21 @@ static void mips_cpu_class_init(ObjectClass *c, void *data)
- #endif /* CONFIG_TCG */
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 39d7c14d98..71f446311b 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1895,7 +1895,6 @@ F: qapi/machine-target.json
+ F: include/hw/boards.h
+ F: include/hw/core/cpu.h
+ F: include/hw/cpu/cluster.h
+-F: include/qapi/commands-target-compat.h
+ F: include/sysemu/numa.h
+ F: tests/unit/test-smp-parse.c
+ T: git https://gitlab.com/ehabkost/qemu.git machine-next
+diff --git a/qapi/machine-target.json b/qapi/machine-target.json
+index 7480921d33..2065972d8a 100644
+--- a/qapi/machine-target.json
++++ b/qapi/machine-target.json
+@@ -212,24 +212,6 @@
+                    'TARGET_LOONGARCH64',
+                    'TARGET_RISCV' ] } }
+ 
+-##
+-# @query-cpu-definitions:
+-#
+-# Return a list of supported virtual CPU definitions
+-#
+-# Returns: a list of CpuDefinitionInfo
+-#
+-# Since: 1.2
+-##
+-{ 'command': 'query-cpu-definitions', 'returns': ['CpuDefinitionInfo'],
+-  'if': { 'any': [ 'TARGET_PPC',
+-                   'TARGET_ARM',
+-                   'TARGET_I386',
+-                   'TARGET_S390X',
+-                   'TARGET_MIPS',
+-                   'TARGET_LOONGARCH64',
+-                   'TARGET_RISCV' ] } }
+-
+ ##
+ # @CpuS390Polarization:
+ #
+diff --git a/qapi/machine.json b/qapi/machine.json
+index 9c44b8fa82..987c64f8e7 100644
+--- a/qapi/machine.json
++++ b/qapi/machine.json
+@@ -73,6 +73,17 @@
+             'deprecated' : 'bool' }
  }
  
--static const TypeInfo mips_cpu_type_info = {
--    .name = TYPE_MIPS_CPU,
--    .parent = TYPE_CPU,
--    .instance_size = sizeof(MIPSCPU),
--    .instance_align = __alignof(MIPSCPU),
--    .instance_init = mips_cpu_initfn,
--    .abstract = true,
--    .class_size = sizeof(MIPSCPUClass),
--    .class_init = mips_cpu_class_init,
-+static const TypeInfo mips_cpu_types[] = {
-+    {
-+        .name           = TYPE_MIPS_CPU,
-+        .parent         = TYPE_CPU,
-+        .instance_size  = sizeof(MIPSCPU),
-+        .instance_align = __alignof(MIPSCPU),
-+        .instance_init  = mips_cpu_initfn,
-+        .abstract       = true,
-+        .class_size     = sizeof(MIPSCPUClass),
-+        .class_init     = mips_cpu_class_init,
-+    }
- };
- 
-+DEFINE_TYPES(mips_cpu_types)
++##
++# @query-cpu-definitions:
++#
++# Return a list of supported virtual CPU definitions
++#
++# Returns: a list of CpuDefinitionInfo
++#
++# Since: 1.2
++##
++{ 'command': 'query-cpu-definitions', 'returns': ['CpuDefinitionInfo'] }
 +
- static void mips_cpu_cpudef_class_init(ObjectClass *oc, void *data)
- {
-     MIPSCPUClass *mcc = MIPS_CPU_CLASS(oc);
-@@ -629,7 +633,6 @@ static void mips_cpu_register_types(void)
- {
-     int i;
+ ##
+ # @CpuModelInfo:
+ #
+diff --git a/include/qapi/commands-target-compat.h b/include/qapi/commands-target-compat.h
+deleted file mode 100644
+index 86d45d8fcc..0000000000
+--- a/include/qapi/commands-target-compat.h
++++ /dev/null
+@@ -1,14 +0,0 @@
+-/*
+- * QAPI helpers for target specific QMP commands
+- *
+- * SPDX-FileCopyrightText: 2024 Linaro Ltd.
+- * SPDX-License-Identifier: GPL-2.0-or-later
+- */
+-#ifndef QAPI_COMPAT_TARGET_H
+-#define QAPI_COMPAT_TARGET_H
+-
+-#include "qapi/qapi-types-machine.h"
+-
+-CpuDefinitionInfoList *generic_query_cpu_definitions(Error **errp);
+-
+-#endif
+diff --git a/system/cpu-qmp-cmds.c b/system/cpu-qmp-cmds.c
+index daeb131159..049e8b9d35 100644
+--- a/system/cpu-qmp-cmds.c
++++ b/system/cpu-qmp-cmds.c
+@@ -7,7 +7,7 @@
  
--    type_register_static(&mips_cpu_type_info);
-     for (i = 0; i < mips_defs_number; i++) {
-         mips_register_cpudef_type(&mips_defs[i]);
+ #include "qemu/osdep.h"
+ #include "qom/object.h"
+-#include "qapi/commands-target-compat.h"
++#include "qapi/qapi-commands-machine.h"
+ #include "sysemu/arch_init.h"
+ #include "hw/core/cpu.h"
+ #include "hw/core/sysemu-cpu-ops.h"
+@@ -53,7 +53,7 @@ static void arch_add_cpu_definitions(CpuDefinitionInfoList **cpu_list,
      }
+ }
+ 
+-CpuDefinitionInfoList *generic_query_cpu_definitions(Error **errp)
++CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
+ {
+     CpuDefinitionInfoList *cpu_list = NULL;
+ 
+diff --git a/target/arm/arm-qmp-cmds.c b/target/arm/arm-qmp-cmds.c
+index c5091e64ec..ac8d890bc0 100644
+--- a/target/arm/arm-qmp-cmds.c
++++ b/target/arm/arm-qmp-cmds.c
+@@ -28,7 +28,6 @@
+ #include "qapi/qobject-input-visitor.h"
+ #include "qapi/qapi-commands-machine-target.h"
+ #include "qapi/qapi-commands-misc-target.h"
+-#include "qapi/commands-target-compat.h"
+ #include "qapi/qmp/qdict.h"
+ #include "qom/qom-qobject.h"
+ 
+@@ -220,8 +219,3 @@ CpuModelExpansionInfo *qmp_query_cpu_model_expansion(CpuModelExpansionType type,
+ 
+     return expansion_info;
+ }
+-
+-CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
+-{
+-    return generic_query_cpu_definitions(errp);
+-}
+diff --git a/target/i386/cpu.c b/target/i386/cpu.c
+index e5dbd307d8..f26adefd37 100644
+--- a/target/i386/cpu.c
++++ b/target/i386/cpu.c
+@@ -38,7 +38,6 @@
+ #ifndef CONFIG_USER_ONLY
+ #include "sysemu/reset.h"
+ #include "qapi/qapi-commands-machine-target.h"
+-#include "qapi/commands-target-compat.h"
+ #include "exec/address-spaces.h"
+ #include "hw/boards.h"
+ #include "hw/i386/sgx-epc.h"
+@@ -5666,11 +5665,6 @@ static void x86_cpu_definition_entry(gpointer data, gpointer user_data)
+     QAPI_LIST_PREPEND(*cpu_list, info);
+ }
+ 
+-CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
+-{
+-    return generic_query_cpu_definitions(errp);
+-}
+-
+ #endif /* !CONFIG_USER_ONLY */
+ 
+ uint64_t x86_cpu_get_supported_feature_word(FeatureWord w,
+diff --git a/target/loongarch/loongarch-qmp-cmds.c b/target/loongarch/loongarch-qmp-cmds.c
+index ef5aedc1cd..aaed7bbf93 100644
+--- a/target/loongarch/loongarch-qmp-cmds.c
++++ b/target/loongarch/loongarch-qmp-cmds.c
+@@ -9,17 +9,11 @@
+ #include "qemu/osdep.h"
+ #include "qapi/error.h"
+ #include "qapi/qapi-commands-machine-target.h"
+-#include "qapi/commands-target-compat.h"
+ #include "cpu.h"
+ #include "qapi/qmp/qdict.h"
+ #include "qapi/qobject-input-visitor.h"
+ #include "qom/qom-qobject.h"
+ 
+-CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
+-{
+-    return generic_query_cpu_definitions(errp);
+-}
+-
+ static const char *cpu_model_advertised_features[] = {
+     "lsx", "lasx", NULL
+ };
+diff --git a/target/mips/sysemu/mips-qmp-cmds.c b/target/mips/sysemu/mips-qmp-cmds.c
+index 329db3a028..c3c775acc6 100644
+--- a/target/mips/sysemu/mips-qmp-cmds.c
++++ b/target/mips/sysemu/mips-qmp-cmds.c
+@@ -5,12 +5,3 @@
+  *
+  * SPDX-License-Identifier: LGPL-2.1-or-later
+  */
+-
+-#include "qemu/osdep.h"
+-#include "qapi/qapi-commands-machine-target.h"
+-#include "qapi/commands-target-compat.h"
+-
+-CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
+-{
+-    return generic_query_cpu_definitions(errp);
+-}
+diff --git a/target/ppc/ppc-qmp-cmds.c b/target/ppc/ppc-qmp-cmds.c
+index 267dd84718..f85c4560f9 100644
+--- a/target/ppc/ppc-qmp-cmds.c
++++ b/target/ppc/ppc-qmp-cmds.c
+@@ -28,8 +28,6 @@
+ #include "qemu/ctype.h"
+ #include "monitor/hmp-target.h"
+ #include "monitor/hmp.h"
+-#include "qapi/qapi-commands-machine-target.h"
+-#include "qapi/commands-target-compat.h"
+ #include "cpu-models.h"
+ #include "cpu-qom.h"
+ 
+@@ -195,8 +193,3 @@ void ppc_add_alias_definitions(CpuDefinitionInfoList **cpu_list)
+         QAPI_LIST_PREPEND(*cpu_list, info);
+     }
+ }
+-
+-CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
+-{
+-    return generic_query_cpu_definitions(errp);
+-}
+diff --git a/target/riscv/riscv-qmp-cmds.c b/target/riscv/riscv-qmp-cmds.c
+index 45adc90d3b..170d720b24 100644
+--- a/target/riscv/riscv-qmp-cmds.c
++++ b/target/riscv/riscv-qmp-cmds.c
+@@ -26,7 +26,6 @@
+ 
+ #include "qapi/error.h"
+ #include "qapi/qapi-commands-machine-target.h"
+-#include "qapi/commands-target-compat.h"
+ #include "qapi/qmp/qbool.h"
+ #include "qapi/qmp/qdict.h"
+ #include "qapi/qobject-input-visitor.h"
+@@ -54,11 +53,6 @@ void riscv_cpu_add_definition(gpointer data, gpointer user_data)
+     QAPI_LIST_PREPEND(*cpu_list, info);
+ }
+ 
+-CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
+-{
+-    return generic_query_cpu_definitions(errp);
+-}
+-
+ static void riscv_check_if_cpu_available(RISCVCPU *cpu, Error **errp)
+ {
+     if (!riscv_cpu_accelerator_compatible(cpu)) {
 -- 
 2.41.0
 
