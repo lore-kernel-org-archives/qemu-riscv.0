@@ -4,44 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EED48C54E5D
-	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Mar 2024 08:03:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AD3FC54E5D
+	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Mar 2024 08:18:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rm7xK-00064D-SS; Mon, 18 Mar 2024 04:02:50 -0400
+	id 1rm8Bp-0003aw-UG; Mon, 18 Mar 2024 04:17:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1rm7xG-0005nN-BX; Mon, 18 Mar 2024 04:02:46 -0400
-Received: from mgamail.intel.com ([198.175.65.20])
+ id 1rm8Bh-0003YC-S7; Mon, 18 Mar 2024 04:17:41 -0400
+Received: from mgamail.intel.com ([192.198.163.9])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1rm7xE-0001a8-VB; Mon, 18 Mar 2024 04:02:46 -0400
+ id 1rm8Bf-0003sZ-5k; Mon, 18 Mar 2024 04:17:41 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1710748965; x=1742284965;
+ t=1710749859; x=1742285859;
  h=date:from:to:cc:subject:message-id:references:
  mime-version:content-transfer-encoding:in-reply-to;
- bh=cqJcvdL48VXuIbNfE+AI+q7sdsjFin1f18ojzEELhDk=;
- b=U3Hm0fj/w0hWOtM3ca+1zLXhzPawCVw3Kmd5fZjuUSPcXzoO4TckCeb5
- Blgx/5INvXzYzu8Cde5anmb6gg6MjPhXlaFSkIkGcy508miy0uO5hLqsh
- zgI3EqcwCCxn29a7tYI0I8gRG6BuaaQmaIWc8c0lBOEpehlvLsf2wFXUX
- IcX52OL9M9l88Ut24rhAXrQYzWgYi1Qfdf69iUk4Z5FSY52BQI+K/j3tU
- hYfTykTI+xOvS9QmeBFKSHnKmshmQtKVj5HA1XUTf2oY1WaqXGaPBDEXv
- ZJRrssSjPX92teSwShVvPUMNNCerQ1U0oZ/TYaD/QV5TZs9B+FSCwFuKC g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,11016"; a="5421379"
-X-IronPort-AV: E=Sophos;i="6.07,134,1708416000"; 
-   d="scan'208";a="5421379"
-Received: from fmviesa004.fm.intel.com ([10.60.135.144])
- by orvoesa112.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 18 Mar 2024 01:02:41 -0700
+ bh=Gp5/N3Kgd9u6t4pstjSRJF2QxivLRDeeRMPxXHWN/cY=;
+ b=IVCxkKpHRNb4HDuf8N+HNRtySCNVCFC51LNUOQUkhUBdVyyJI7KQeyS6
+ 5sPsnHd+Vj/URhSH648aPmQhF9X7mkfabVI93ZUTzeU7PdgmKYQTdfzQk
+ 8nEnW/RggBXOGqMBm303PvhcT9GQfqC7y/PLvP3pvzZ8RTdghrD+/Bl9H
+ pjnY/5/3q+wUuJTdxIMXUgHoFX+fufkHOY2lB97eayWCXBLZo3fb3nMYf
+ zOiSp9lzEPIDI1hDZnDRpAnXrgTPPSNisYtgFIv+t3inkK3zs4UOSu4mp
+ nIMN32cXjySeEmZFO3vddu4MNbe/yGprymotqF7zU5wnzyGwyHY8Wd0Un Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,11016"; a="16271090"
+X-IronPort-AV: E=Sophos;i="6.07,134,1708416000"; d="scan'208";a="16271090"
+Received: from orviesa008.jf.intel.com ([10.64.159.148])
+ by fmvoesa103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 18 Mar 2024 01:17:33 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.07,134,1708416000"; d="scan'208";a="18000418"
+X-IronPort-AV: E=Sophos;i="6.07,134,1708416000"; d="scan'208";a="14034331"
 Received: from liuzhao-optiplex-7080.sh.intel.com (HELO localhost)
  ([10.239.160.36])
- by fmviesa004.fm.intel.com with ESMTP; 18 Mar 2024 01:02:36 -0700
-Date: Mon, 18 Mar 2024 16:16:27 +0800
+ by orviesa008.jf.intel.com with ESMTP; 18 Mar 2024 01:17:28 -0700
+Date: Mon, 18 Mar 2024 16:31:19 +0800
 From: Zhao Liu <zhao1.liu@linux.intel.com>
 To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>
 Cc: qemu-devel@nongnu.org, Markus Armbruster <armbru@redhat.com>,
@@ -56,19 +55,19 @@ Cc: qemu-devel@nongnu.org, Markus Armbruster <armbru@redhat.com>,
  Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
  Zhao Liu <zhao1.liu@intel.com>, qemu-arm@nongnu.org,
  Thomas Huth <thuth@redhat.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Artyom Tarasenko <atar4qemu@gmail.com>
-Subject: Re: [PATCH-for-9.1 04/21] target/sparc: Declare CPU QOM types using
- DEFINE_TYPES() macro
-Message-ID: <Zff4WwMvwfMXLurF@intel.com>
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Yanan Wang <wangyanan55@huawei.com>
+Subject: Re: [PATCH-for-9.1 05/21] cpus: Open code OBJECT_DECLARE_TYPE() in
+ OBJECT_DECLARE_CPU_TYPE()
+Message-ID: <Zff71/46jLOGz9XO@intel.com>
 References: <20240315130910.15750-1-philmd@linaro.org>
- <20240315130910.15750-5-philmd@linaro.org>
+ <20240315130910.15750-6-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20240315130910.15750-5-philmd@linaro.org>
-Received-SPF: none client-ip=198.175.65.20;
+In-Reply-To: <20240315130910.15750-6-philmd@linaro.org>
+Received-SPF: none client-ip=192.198.163.9;
  envelope-from=zhao1.liu@linux.intel.com; helo=mgamail.intel.com
 X-Spam_score_int: -22
 X-Spam_score: -2.3
@@ -92,29 +91,104 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Mar 15, 2024 at 02:08:52PM +0100, Philippe Mathieu-Daudé wrote:
-> Date: Fri, 15 Mar 2024 14:08:52 +0100
+Hi Philippe,
+
+On Fri, Mar 15, 2024 at 02:08:53PM +0100, Philippe Mathieu-Daudé wrote:
+> Date: Fri, 15 Mar 2024 14:08:53 +0100
 > From: Philippe Mathieu-Daudé <philmd@linaro.org>
-> Subject: [PATCH-for-9.1 04/21] target/sparc: Declare CPU QOM types using
->  DEFINE_TYPES() macro
+> Subject: [PATCH-for-9.1 05/21] cpus: Open code OBJECT_DECLARE_TYPE() in
+>  OBJECT_DECLARE_CPU_TYPE()
 > X-Mailer: git-send-email 2.41.0
 > 
-> When multiple QOM types are registered in the same file,
-> it is simpler to use the the DEFINE_TYPES() macro. In
-> particular because type array declared with such macro
-> are easier to review.
+> Since the OBJECT_DECLARE_CPU_TYPE() macro uses the abstract ArchCPU
+> type, when declaring multiple CPUs of the same ArchCPU type we get
+> an error related to the indirect G_DEFINE_AUTOPTR_CLEANUP_FUNC()
+> use within OBJECT_DECLARE_TYPE():
 > 
-> In few commits we are going to add more types, so replace
-> the type_register_static() to ease further reviews.
+>   target/mips/cpu-qom.h:31:1: error: redefinition of 'glib_autoptr_clear_ArchCPU'
+>   OBJECT_DECLARE_CPU_TYPE(MIPS64CPU, MIPSCPUClass, MIPS64_CPU)
+>   ^
+>   include/hw/core/cpu.h:82:5: note: expanded from macro 'OBJECT_DECLARE_CPU_TYPE'
+>       OBJECT_DECLARE_TYPE(ArchCPU, CpuClassType, CPU_MODULE_OBJ_NAME);
+>       ^
+>   include/qom/object.h:237:5: note: expanded from macro 'OBJECT_DECLARE_TYPE'
+>       G_DEFINE_AUTOPTR_CLEANUP_FUNC(InstanceType, object_unref) \
+>       ^
+>   /usr/include/glib-2.0/glib/gmacros.h:1371:3: note: expanded from macro 'G_DEFINE_AUTOPTR_CLEANUP_FUNC'
+>     _GLIB_DEFINE_AUTOPTR_CLEANUP_FUNCS(TypeName, TypeName, func)
+>     ^
+>   /usr/include/glib-2.0/glib/gmacros.h:1354:36: note: expanded from macro '_GLIB_DEFINE_AUTOPTR_CLEANUP_FUNCS'
+>     static G_GNUC_UNUSED inline void _GLIB_AUTOPTR_CLEAR_FUNC_NAME(TypeName) (TypeName *_ptr)                     \
+>                                      ^
+>   /usr/include/glib-2.0/glib/gmacros.h:1338:49: note: expanded from macro '_GLIB_AUTOPTR_CLEAR_FUNC_NAME'
+>   #define _GLIB_AUTOPTR_CLEAR_FUNC_NAME(TypeName) glib_autoptr_clear_##TypeName
+>                                                   ^
+>   <scratch space>:54:1: note: expanded from here
+>   glib_autoptr_clear_ArchCPU
+>   ^
+>   target/mips/cpu-qom.h:30:1: note: previous definition is here
+>   OBJECT_DECLARE_CPU_TYPE(MIPS32CPU, MIPSCPUClass, MIPS32_CPU)
+>   ^
+> 
+> Avoid that problem by expanding the OBJECT_DECLARE_TYPE() macro
+> within OBJECT_DECLARE_CPU_TYPE().
 > 
 > Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-> Reviewed-by: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
-> Message-Id: <20231013140116.255-17-philmd@linaro.org>
+> Acked-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
->  target/sparc/cpu.c | 23 +++++++++++++----------
->  1 file changed, 13 insertions(+), 10 deletions(-)
+> TODO: check rth comment:
+> What about adding an OBJECT_DECLARE_CPU_SUBTYPE that omits half the stuff instead?
+> We don't need another object typedef at all, for instance.
+> ---
+>  include/hw/core/cpu.h | 7 ++++++-
+>  1 file changed, 6 insertions(+), 1 deletion(-)
+> 
+> diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
+> index ec14f74ce5..4c2e5095bf 100644
+> --- a/include/hw/core/cpu.h
+> +++ b/include/hw/core/cpu.h
+> @@ -78,7 +78,12 @@ DECLARE_CLASS_CHECKERS(CPUClass, CPU,
+>   */
+>  #define OBJECT_DECLARE_CPU_TYPE(CpuInstanceType, CpuClassType, CPU_MODULE_OBJ_NAME) \
+>      typedef struct ArchCPU CpuInstanceType; \
+> -    OBJECT_DECLARE_TYPE(ArchCPU, CpuClassType, CPU_MODULE_OBJ_NAME);
+> +    typedef struct CpuClassType CpuClassType; \
+> +    \
+> +    G_DEFINE_AUTOPTR_CLEANUP_FUNC(CpuInstanceType, object_unref) \
+> +    \
+> +    DECLARE_OBJ_CHECKERS(CpuInstanceType, CpuClassType, \
+> +                         CPU_MODULE_OBJ_NAME, TYPE_##CPU_MODULE_OBJ_NAME)
+>
 
-Reviewed-by: Zhao Liu <zhao1liu@intel.com>
+The OBJECT_DECLARE_TYPE is expaneded as the following:
+
+#define OBJECT_DECLARE_TYPE(InstanceType, ClassType, MODULE_OBJ_NAME) \
+    typedef struct InstanceType InstanceType; \
+    typedef struct ClassType ClassType; \
+    \
+    G_DEFINE_AUTOPTR_CLEANUP_FUNC(InstanceType, object_unref) \
+    \
+    DECLARE_OBJ_CHECKERS(InstanceType, ClassType, \
+                         MODULE_OBJ_NAME, TYPE_##MODULE_OBJ_NAME)
+
+So the above code change deletes a typedef:
+
+    typedef struct ArchCPU ArchCPU;
+
+Will this deletion break the direct uses of ArchCPU? e.g., in
+accel/tcg/translator.c:
+
+static void set_can_do_io(DisasContextBase *db, bool val)
+{
+    if (db->saved_can_do_io != val) {
+        ...
+        tcg_gen_st8_i32(tcg_constant_i32(val), tcg_env,
+                        offsetof(ArchCPU, parent_obj.neg.can_do_io) -
+                        offsetof(ArchCPU, env));
+    }
+}
+
+Thanks,
+Zhao
 
 
