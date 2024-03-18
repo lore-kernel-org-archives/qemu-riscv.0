@@ -4,80 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20CABC54E5D
-	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Mar 2024 09:11:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A97C2C54E5D
+	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Mar 2024 16:16:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rm90x-00065o-M2; Mon, 18 Mar 2024 05:10:39 -0400
+	id 1rmFez-0007Sx-I4; Mon, 18 Mar 2024 12:16:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rm90r-00064o-QW; Mon, 18 Mar 2024 05:10:33 -0400
-Received: from mail-vs1-xe30.google.com ([2607:f8b0:4864:20::e30])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rm90p-0004Ug-Ma; Mon, 18 Mar 2024 05:10:33 -0400
-Received: by mail-vs1-xe30.google.com with SMTP id
- ada2fe7eead31-4767bcb4ebdso349348137.0; 
- Mon, 18 Mar 2024 02:10:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1710753029; x=1711357829; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Qng+qzcHxa9AfBUC0FmA1FM/4z3ZYPTC5vPsa6YWWp4=;
- b=Rd8QWC8KnF9sklxvc7nW3jvt2Hox6WXGIgwyn5SRJTCX4VLsLn/f5AEsh6cNSCwnwX
- G5dMZyG68/Gic06hPdcOQi9Hs18slN4Xbu+vtzrygTTdegVz15gg8LKmbExH0ASq4ZIl
- j0o8xTNdyL24wHmvh/2PlUOVkV+/gWnGyuu4lglDybJaR9dpSBNc7C2x73AUuGQGhFFO
- 7wcvcVJreiZyvK8PyPRHCIyvqJG1ghYnApE6ODxFZFVyb7HhSbQ1szT5Lu28/I3O8CJf
- x/BVeOxYSmD84maR9YswhybwQq4+pq9Ny48vW+/8Re8ry6YPB83Q+ZZ9MdYwQBWTfTgW
- gdvw==
+ (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1rmFew-0007QT-3i
+ for qemu-riscv@nongnu.org; Mon, 18 Mar 2024 12:16:22 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1rmFes-0004e9-Mx
+ for qemu-riscv@nongnu.org; Mon, 18 Mar 2024 12:16:21 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1710778565;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=odPqgcRarP/qfco3bEKoj8jaqMYx3BuQ+fTJjBu4E9k=;
+ b=hWcZ6BuNrYO04zaYRl/gFUhqJR+/t1xIEidvyjpd9YFu+tXOrRtZoo0D+TOdl1Sc40XGVJ
+ 0WKE7nVvog0C5lJts/aEYXeZZsRI5i5K6y1sZzGiDVHtaZSClAX2BELHwlU30djO2qoy01
+ /JJur0fJvLcYK8t2tItQ4p0EFLmmSCY=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-563-2AEOFdjGOo2-2i2r-syx_A-1; Mon, 18 Mar 2024 12:16:03 -0400
+X-MC-Unique: 2AEOFdjGOo2-2i2r-syx_A-1
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-41401eef944so16089175e9.2
+ for <qemu-riscv@nongnu.org>; Mon, 18 Mar 2024 09:16:03 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710753029; x=1711357829;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Qng+qzcHxa9AfBUC0FmA1FM/4z3ZYPTC5vPsa6YWWp4=;
- b=JUvnSJucZhPsonSZ3Njfvw6Dis6riTLjPO4yLFqluzw2FXjVsl5cUGc+nFm8Jo7Fkv
- W9HtY/GAYShx+r5uP8K4B0NXa+Y+n0h38fmhz+t+PMMj8JKDUX4ZSynEd74VSF3wNDPB
- 1wgvQOLcl7R5AIgBgEFNEVXSwN8qpNmGMNYVGo5lvQjwMw1UWYVdauxPADG6q7eDEpFg
- GFlsDlaO8Q3fdRVAXoRoldb3V+5nbka1JA80HUG34jXNlK9kINf2en4LOf6zJ4Z9lOYm
- CwfDfIsKQRn6cjuj2QKQ7YbDsHMoFSnOOWW35/47V/GgVuixCQTckZW25ei9mLaf9YMK
- r8tA==
+ d=1e100.net; s=20230601; t=1710778562; x=1711383362;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=odPqgcRarP/qfco3bEKoj8jaqMYx3BuQ+fTJjBu4E9k=;
+ b=vdKB4YmvGgKGhEzJPFL6XElTKdA57NEX6OsVxlm+AMClDA7kJrHlDpqKvoE4OuS77r
+ /pr3A2chEvuHd3XH7t991Zcbus6l8UtFiniwYsmeOE3Bg/sCOM2/5cW7w7OlxQ+5/hEc
+ agI4u4/YBxiBbYWCEW0XXs6X0oyGC2a4Go7z2m4bIJOlNCnO8NZZZ7AsqoBph6KFSILp
+ 5qzR4taYwQyG0ClzF7Xb81xQNczKYrr2ZBqF81RbOKu6vp2A+kCqq/gh2EcWRBDky63b
+ UitXFE+qlyuMrrP9wxSXAevz+ORNEftYnJx1Wmv8iwDlNwMIpZQvfEUwwOV/zI/c9ChI
+ J5mw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUaxz5xInh+ODH9TjjT144Vj9Aue1ahE7LJEJAVh88DUO2pcfTxevPLlt3vF7ipPpNwdP++sJCZE2O0lEak6lV5nztiVrI=
-X-Gm-Message-State: AOJu0YxiczCzfcpleltVvxIdn7+o5OSMHURWUjmdv7MgE77EdDM9p4BU
- Qu1GPXbY+WBRO0LNLcxUouvVRUP9j+UVQwZF8b7j8XiMn1cYPOXuCsUmkhLjBFLYnQsUD0qw9yv
- ScxLozmbxLGFWLxqlQ41GThpRYYg=
-X-Google-Smtp-Source: AGHT+IHhkmWk8bi4dkp343D8vPi82VlxslpXTwCKgO+SnOBfdQDow/vpvVbTKMAwx0k7krMKLvEq6ZvgoIz8wWJlR/U=
-X-Received: by 2002:a67:b64b:0:b0:476:5404:5f11 with SMTP id
- e11-20020a67b64b000000b0047654045f11mr7469653vsm.25.1710753029062; Mon, 18
- Mar 2024 02:10:29 -0700 (PDT)
+ AJvYcCV4nDzHY1xjpDE1Ew2D2fZNhB3AESGlEFfbHuHal4MC71SEiNWXcPCII+uTXfv8b5pnvwCFZTAdA/VJoo2R6aWsV5NC5NU=
+X-Gm-Message-State: AOJu0YyQu61PPOOwR59USq9DErwwZ7JzfytcdjxRBKAWAK2NW9LNlQjT
+ jagDedM6LDC2wMUTwDsDKOYbuvPk5I4lC6GuH1PyhzqHtZdnSmnBHCtiKlHtfTHZDunV42c3tN7
+ xaBSaPxrhxrXo9ggQKH61Ve6IK4eSKuQSjs4FaXvrUBfnuHbQFc0p
+X-Received: by 2002:a05:600c:524c:b0:414:cd1:e46d with SMTP id
+ fc12-20020a05600c524c00b004140cd1e46dmr3307371wmb.23.1710778562236; 
+ Mon, 18 Mar 2024 09:16:02 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGYtH6+pcelhFS1te3Ktfz2rupk7YbN8zWHT/vn59oCUwf/m7Y9T0HMXw/o3XSv/GWfeQVeJQ==
+X-Received: by 2002:a05:600c:524c:b0:414:cd1:e46d with SMTP id
+ fc12-20020a05600c524c00b004140cd1e46dmr3307344wmb.23.1710778561762; 
+ Mon, 18 Mar 2024 09:16:01 -0700 (PDT)
+Received: from redhat.com ([2.52.5.113]) by smtp.gmail.com with ESMTPSA id
+ d6-20020a05600c34c600b004140837a0d4sm8222211wmq.3.2024.03.18.09.15.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 18 Mar 2024 09:16:01 -0700 (PDT)
+Date: Mon, 18 Mar 2024 12:15:57 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Fiona Ebner <f.ebner@proxmox.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Song Gao <gaosong@loongson.cn>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-arm@nongnu.org,
+ qemu-riscv@nongnu.org
+Subject: [PULL 09/24] smbios: get rid of smbios_legacy global
+Message-ID: <b3854ce8a77f14b40a59c4fcef234f4af04504d5.1710778506.git.mst@redhat.com>
+References: <cover.1710778506.git.mst@redhat.com>
 MIME-Version: 1.0
-References: <20240314175704.478276-1-dbarboza@ventanamicro.com>
- <20240314175704.478276-6-dbarboza@ventanamicro.com>
-In-Reply-To: <20240314175704.478276-6-dbarboza@ventanamicro.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 18 Mar 2024 19:10:03 +1000
-Message-ID: <CAKmqyKMDMS6gHchNbRcQOGjrA8chJqrCTObw+96hyeQyEozxsQ@mail.gmail.com>
-Subject: Re: [PATCH for 9.0 v15 05/10] target/riscv: always clear vstart for
- ldst_whole insns
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com, max.chou@sifive.com, richard.henderson@linaro.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e30;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe30.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+In-Reply-To: <cover.1710778506.git.mst@redhat.com>
+X-Mailer: git-send-email 2.27.0.106.g8ac3dc51b1
+X-Mutt-Fcc: =sent
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=mst@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -24
+X-Spam_score: -2.5
+X-Spam_bar: --
+X-Spam_report: (-2.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.374,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -94,173 +114,179 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Mar 15, 2024 at 3:57=E2=80=AFAM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
->
-> Commit 8ff8ac6329 added a conditional to guard the vext_ldst_whole()
-> helper if vstart >=3D evl. But by skipping the helper we're also not
-> setting vstart =3D 0 at the end of the insns, which is incorrect.
->
-> We'll move the conditional to vext_ldst_whole(), following in line with
-> the removal of all brconds vstart >=3D vl that the next patch will do. Th=
-e
-> idea is to make the helpers responsible for their own vstart management.
->
-> Fix ldst_whole isns by:
->
-> - remove the brcond that skips the helper if vstart is >=3D evl;
->
-> - vext_ldst_whole() now does an early exit with the same check, where
->   evl =3D (vlenb * nf) >> log2_esz, but the early exit will also clear
->   vstart.
->
-> The 'width' param is now unneeded in ldst_whole_trans() and is also
-> removed. It was used for the evl calculation for the brcond and has no
-> other use now.  The 'width' is reflected in vext_ldst_whole() via
-> log2_esz, which is encoded by GEN_VEXT_LD_WHOLE() as
-> "ctzl(sizeof(ETYPE))".
->
-> Suggested-by: Max Chou <max.chou@sifive.com>
-> Fixes: 8ff8ac6329 ("target/riscv: rvv: Add missing early exit condition f=
-or whole register load/store")
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+From: Igor Mammedov <imammedo@redhat.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+clean up smbios_set_defaults() which is reused by legacy
+and non legacy machines from being aware of 'legacy' notion
+and need to turn it off. And push legacy handling up to
+PC machine code where it's relevant.
 
-Alistair
+Signed-off-by: Igor Mammedov <imammedo@redhat.com>
+Reviewed-by: Ani Sinha <anisinha@redhat.com>
+Acked-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Tested-by: Fiona Ebner <f.ebner@proxmox.com>
+Message-Id: <20240314152302.2324164-7-imammedo@redhat.com>
+Reviewed-by: Michael S. Tsirkin <mst@redhat.com>
+Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+---
+ include/hw/firmware/smbios.h |  2 +-
+ hw/arm/virt.c                |  2 +-
+ hw/i386/fw_cfg.c             |  7 ++++---
+ hw/loongarch/virt.c          |  2 +-
+ hw/riscv/virt.c              |  2 +-
+ hw/smbios/smbios.c           | 35 +++++++++++++++--------------------
+ 6 files changed, 23 insertions(+), 27 deletions(-)
 
-> ---
->  target/riscv/insn_trans/trans_rvv.c.inc | 52 +++++++++++--------------
->  target/riscv/vector_helper.c            |  5 +++
->  2 files changed, 28 insertions(+), 29 deletions(-)
->
-> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_=
-trans/trans_rvv.c.inc
-> index 52c26a7834..1366445e1f 100644
-> --- a/target/riscv/insn_trans/trans_rvv.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-> @@ -1097,13 +1097,9 @@ GEN_VEXT_TRANS(vle64ff_v, MO_64, r2nfvm, ldff_op, =
-ld_us_check)
->  typedef void gen_helper_ldst_whole(TCGv_ptr, TCGv, TCGv_env, TCGv_i32);
->
->  static bool ldst_whole_trans(uint32_t vd, uint32_t rs1, uint32_t nf,
-> -                             uint32_t width, gen_helper_ldst_whole *fn,
-> +                             gen_helper_ldst_whole *fn,
->                               DisasContext *s)
->  {
-> -    uint32_t evl =3D s->cfg_ptr->vlenb * nf / width;
-> -    TCGLabel *over =3D gen_new_label();
-> -    tcg_gen_brcondi_tl(TCG_COND_GEU, cpu_vstart, evl, over);
-> -
->      TCGv_ptr dest;
->      TCGv base;
->      TCGv_i32 desc;
-> @@ -1120,8 +1116,6 @@ static bool ldst_whole_trans(uint32_t vd, uint32_t =
-rs1, uint32_t nf,
->
->      fn(dest, base, tcg_env, desc);
->
-> -    gen_set_label(over);
-> -
->      return true;
->  }
->
-> @@ -1129,42 +1123,42 @@ static bool ldst_whole_trans(uint32_t vd, uint32_=
-t rs1, uint32_t nf,
->   * load and store whole register instructions ignore vtype and vl settin=
-g.
->   * Thus, we don't need to check vill bit. (Section 7.9)
->   */
-> -#define GEN_LDST_WHOLE_TRANS(NAME, ARG_NF, WIDTH)               \
-> +#define GEN_LDST_WHOLE_TRANS(NAME, ARG_NF)                              =
-  \
->  static bool trans_##NAME(DisasContext *s, arg_##NAME * a)               =
-  \
->  {                                                                       =
-  \
->      if (require_rvv(s) &&                                               =
-  \
->          QEMU_IS_ALIGNED(a->rd, ARG_NF)) {                               =
-  \
-> -        return ldst_whole_trans(a->rd, a->rs1, ARG_NF, WIDTH,           =
-  \
-> +        return ldst_whole_trans(a->rd, a->rs1, ARG_NF,                  =
-  \
->                                  gen_helper_##NAME, s);                  =
-  \
->      }                                                                   =
-  \
->      return false;                                                       =
-  \
->  }
->
-> -GEN_LDST_WHOLE_TRANS(vl1re8_v,  1, 1)
-> -GEN_LDST_WHOLE_TRANS(vl1re16_v, 1, 2)
-> -GEN_LDST_WHOLE_TRANS(vl1re32_v, 1, 4)
-> -GEN_LDST_WHOLE_TRANS(vl1re64_v, 1, 8)
-> -GEN_LDST_WHOLE_TRANS(vl2re8_v,  2, 1)
-> -GEN_LDST_WHOLE_TRANS(vl2re16_v, 2, 2)
-> -GEN_LDST_WHOLE_TRANS(vl2re32_v, 2, 4)
-> -GEN_LDST_WHOLE_TRANS(vl2re64_v, 2, 8)
-> -GEN_LDST_WHOLE_TRANS(vl4re8_v,  4, 1)
-> -GEN_LDST_WHOLE_TRANS(vl4re16_v, 4, 2)
-> -GEN_LDST_WHOLE_TRANS(vl4re32_v, 4, 4)
-> -GEN_LDST_WHOLE_TRANS(vl4re64_v, 4, 8)
-> -GEN_LDST_WHOLE_TRANS(vl8re8_v,  8, 1)
-> -GEN_LDST_WHOLE_TRANS(vl8re16_v, 8, 2)
-> -GEN_LDST_WHOLE_TRANS(vl8re32_v, 8, 4)
-> -GEN_LDST_WHOLE_TRANS(vl8re64_v, 8, 8)
-> +GEN_LDST_WHOLE_TRANS(vl1re8_v,  1)
-> +GEN_LDST_WHOLE_TRANS(vl1re16_v, 1)
-> +GEN_LDST_WHOLE_TRANS(vl1re32_v, 1)
-> +GEN_LDST_WHOLE_TRANS(vl1re64_v, 1)
-> +GEN_LDST_WHOLE_TRANS(vl2re8_v,  2)
-> +GEN_LDST_WHOLE_TRANS(vl2re16_v, 2)
-> +GEN_LDST_WHOLE_TRANS(vl2re32_v, 2)
-> +GEN_LDST_WHOLE_TRANS(vl2re64_v, 2)
-> +GEN_LDST_WHOLE_TRANS(vl4re8_v,  4)
-> +GEN_LDST_WHOLE_TRANS(vl4re16_v, 4)
-> +GEN_LDST_WHOLE_TRANS(vl4re32_v, 4)
-> +GEN_LDST_WHOLE_TRANS(vl4re64_v, 4)
-> +GEN_LDST_WHOLE_TRANS(vl8re8_v,  8)
-> +GEN_LDST_WHOLE_TRANS(vl8re16_v, 8)
-> +GEN_LDST_WHOLE_TRANS(vl8re32_v, 8)
-> +GEN_LDST_WHOLE_TRANS(vl8re64_v, 8)
->
->  /*
->   * The vector whole register store instructions are encoded similar to
->   * unmasked unit-stride store of elements with EEW=3D8.
->   */
-> -GEN_LDST_WHOLE_TRANS(vs1r_v, 1, 1)
-> -GEN_LDST_WHOLE_TRANS(vs2r_v, 2, 1)
-> -GEN_LDST_WHOLE_TRANS(vs4r_v, 4, 1)
-> -GEN_LDST_WHOLE_TRANS(vs8r_v, 8, 1)
-> +GEN_LDST_WHOLE_TRANS(vs1r_v, 1)
-> +GEN_LDST_WHOLE_TRANS(vs2r_v, 2)
-> +GEN_LDST_WHOLE_TRANS(vs4r_v, 4)
-> +GEN_LDST_WHOLE_TRANS(vs8r_v, 8)
->
->  /*
->   *** Vector Integer Arithmetic Instructions
-> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index bcc553c0e2..1f4c276b21 100644
-> --- a/target/riscv/vector_helper.c
-> +++ b/target/riscv/vector_helper.c
-> @@ -572,6 +572,11 @@ vext_ldst_whole(void *vd, target_ulong base, CPURISC=
-VState *env, uint32_t desc,
->      uint32_t vlenb =3D riscv_cpu_cfg(env)->vlenb;
->      uint32_t max_elems =3D vlenb >> log2_esz;
->
-> +    if (env->vstart >=3D ((vlenb * nf) >> log2_esz)) {
-> +        env->vstart =3D 0;
-> +        return;
-> +    }
-> +
->      k =3D env->vstart / max_elems;
->      off =3D env->vstart % max_elems;
->
-> --
-> 2.44.0
->
->
+diff --git a/include/hw/firmware/smbios.h b/include/hw/firmware/smbios.h
+index 36744b6cc9..7b42e7b4ac 100644
+--- a/include/hw/firmware/smbios.h
++++ b/include/hw/firmware/smbios.h
+@@ -310,7 +310,7 @@ struct smbios_type_127 {
+ void smbios_entry_add(QemuOpts *opts, Error **errp);
+ void smbios_set_cpuid(uint32_t version, uint32_t features);
+ void smbios_set_defaults(const char *manufacturer, const char *product,
+-                         const char *version, bool legacy_mode,
++                         const char *version,
+                          bool uuid_encoded, SmbiosEntryPointType ep_type);
+ void smbios_set_default_processor_family(uint16_t processor_family);
+ uint8_t *smbios_get_table_legacy(uint32_t expected_t4_count, size_t *length);
+diff --git a/hw/arm/virt.c b/hw/arm/virt.c
+index e5cd935232..b634c908a7 100644
+--- a/hw/arm/virt.c
++++ b/hw/arm/virt.c
+@@ -1650,7 +1650,7 @@ static void virt_build_smbios(VirtMachineState *vms)
+     }
+ 
+     smbios_set_defaults("QEMU", product,
+-                        vmc->smbios_old_sys_ver ? "1.0" : mc->name, false,
++                        vmc->smbios_old_sys_ver ? "1.0" : mc->name,
+                         true, SMBIOS_ENTRY_POINT_TYPE_64);
+ 
+     /* build the array of physical mem area from base_memmap */
+diff --git a/hw/i386/fw_cfg.c b/hw/i386/fw_cfg.c
+index fcb4fb0769..c1e9c0fd9c 100644
+--- a/hw/i386/fw_cfg.c
++++ b/hw/i386/fw_cfg.c
+@@ -63,15 +63,16 @@ void fw_cfg_build_smbios(PCMachineState *pcms, FWCfgState *fw_cfg)
+     if (pcmc->smbios_defaults) {
+         /* These values are guest ABI, do not change */
+         smbios_set_defaults("QEMU", mc->desc, mc->name,
+-                            pcmc->smbios_legacy_mode, pcmc->smbios_uuid_encoded,
++                            pcmc->smbios_uuid_encoded,
+                             pcms->smbios_entry_point_type);
+     }
+ 
+     /* tell smbios about cpuid version and features */
+     smbios_set_cpuid(cpu->env.cpuid_version, cpu->env.features[FEAT_1_EDX]);
+ 
+-    smbios_tables = smbios_get_table_legacy(ms->smp.cpus, &smbios_tables_len);
+-    if (smbios_tables) {
++    if (pcmc->smbios_legacy_mode) {
++        smbios_tables = smbios_get_table_legacy(ms->smp.cpus,
++                                                &smbios_tables_len);
+         fw_cfg_add_bytes(fw_cfg, FW_CFG_SMBIOS_ENTRIES,
+                          smbios_tables, smbios_tables_len);
+         return;
+diff --git a/hw/loongarch/virt.c b/hw/loongarch/virt.c
+index efce112310..53bfdcee61 100644
+--- a/hw/loongarch/virt.c
++++ b/hw/loongarch/virt.c
+@@ -355,7 +355,7 @@ static void virt_build_smbios(LoongArchMachineState *lams)
+         return;
+     }
+ 
+-    smbios_set_defaults("QEMU", product, mc->name, false,
++    smbios_set_defaults("QEMU", product, mc->name,
+                         true, SMBIOS_ENTRY_POINT_TYPE_64);
+ 
+     smbios_get_tables(ms, NULL, 0, &smbios_tables, &smbios_tables_len,
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index a094af97c3..535fd047ba 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -1275,7 +1275,7 @@ static void virt_build_smbios(RISCVVirtState *s)
+         product = "KVM Virtual Machine";
+     }
+ 
+-    smbios_set_defaults("QEMU", product, mc->name, false,
++    smbios_set_defaults("QEMU", product, mc->name,
+                         true, SMBIOS_ENTRY_POINT_TYPE_64);
+ 
+     if (riscv_is_32bit(&s->soc[0])) {
+diff --git a/hw/smbios/smbios.c b/hw/smbios/smbios.c
+index 003c539d76..9f9087601c 100644
+--- a/hw/smbios/smbios.c
++++ b/hw/smbios/smbios.c
+@@ -54,7 +54,6 @@ struct smbios_table {
+ 
+ static uint8_t *smbios_entries;
+ static size_t smbios_entries_len;
+-static bool smbios_legacy = true;
+ static bool smbios_uuid_encoded = true;
+ /* end: legacy structures & constants for <= 2.0 machines */
+ 
+@@ -633,9 +632,16 @@ static void smbios_build_type_1_fields(void)
+ 
+ uint8_t *smbios_get_table_legacy(uint32_t expected_t4_count, size_t *length)
+ {
+-    if (!smbios_legacy) {
+-        *length = 0;
+-        return NULL;
++    /* drop unwanted version of command-line file blob(s) */
++    g_free(smbios_tables);
++    smbios_tables = NULL;
++
++    /* also complain if fields were given for types > 1 */
++    if (find_next_bit(have_fields_bitmap,
++                      SMBIOS_MAX_TYPE + 1, 2) < SMBIOS_MAX_TYPE + 1) {
++        error_report("can't process fields for smbios "
++                     "types > 1 on machine versions < 2.1!");
++        exit(1);
+     }
+ 
+     if (!smbios_immutable) {
+@@ -1129,28 +1135,13 @@ void smbios_set_default_processor_family(uint16_t processor_family)
+ }
+ 
+ void smbios_set_defaults(const char *manufacturer, const char *product,
+-                         const char *version, bool legacy_mode,
++                         const char *version,
+                          bool uuid_encoded, SmbiosEntryPointType ep_type)
+ {
+     smbios_have_defaults = true;
+-    smbios_legacy = legacy_mode;
+     smbios_uuid_encoded = uuid_encoded;
+     smbios_ep_type = ep_type;
+ 
+-    /* drop unwanted version of command-line file blob(s) */
+-    if (smbios_legacy) {
+-        g_free(smbios_tables);
+-        /* in legacy mode, also complain if fields were given for types > 1 */
+-        if (find_next_bit(have_fields_bitmap,
+-                          SMBIOS_MAX_TYPE+1, 2) < SMBIOS_MAX_TYPE+1) {
+-            error_report("can't process fields for smbios "
+-                         "types > 1 on machine versions < 2.1!");
+-            exit(1);
+-        }
+-    } else {
+-        g_free(smbios_entries);
+-    }
+-
+     SMBIOS_SET_DEFAULT(type1.manufacturer, manufacturer);
+     SMBIOS_SET_DEFAULT(type1.product, product);
+     SMBIOS_SET_DEFAULT(type1.version, version);
+@@ -1226,6 +1217,10 @@ void smbios_get_tables(MachineState *ms,
+ {
+     unsigned i, dimm_cnt, offset;
+ 
++    /* drop unwanted (legacy) version of command-line file blob(s) */
++    g_free(smbios_entries);
++    smbios_entries = NULL;
++
+     if (!smbios_immutable) {
+         smbios_build_type_0_table();
+         smbios_build_type_1_table();
+-- 
+MST
+
 
