@@ -4,77 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AD3FC54E5D
-	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Mar 2024 08:18:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97DE4C54E58
+	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Mar 2024 08:31:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rm8Bp-0003aw-UG; Mon, 18 Mar 2024 04:17:50 -0400
+	id 1rm8Ow-00089M-Vq; Mon, 18 Mar 2024 04:31:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1rm8Bh-0003YC-S7; Mon, 18 Mar 2024 04:17:41 -0400
-Received: from mgamail.intel.com ([192.198.163.9])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhao1.liu@linux.intel.com>)
- id 1rm8Bf-0003sZ-5k; Mon, 18 Mar 2024 04:17:41 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1710749859; x=1742285859;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:content-transfer-encoding:in-reply-to;
- bh=Gp5/N3Kgd9u6t4pstjSRJF2QxivLRDeeRMPxXHWN/cY=;
- b=IVCxkKpHRNb4HDuf8N+HNRtySCNVCFC51LNUOQUkhUBdVyyJI7KQeyS6
- 5sPsnHd+Vj/URhSH648aPmQhF9X7mkfabVI93ZUTzeU7PdgmKYQTdfzQk
- 8nEnW/RggBXOGqMBm303PvhcT9GQfqC7y/PLvP3pvzZ8RTdghrD+/Bl9H
- pjnY/5/3q+wUuJTdxIMXUgHoFX+fufkHOY2lB97eayWCXBLZo3fb3nMYf
- zOiSp9lzEPIDI1hDZnDRpAnXrgTPPSNisYtgFIv+t3inkK3zs4UOSu4mp
- nIMN32cXjySeEmZFO3vddu4MNbe/yGprymotqF7zU5wnzyGwyHY8Wd0Un Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,11016"; a="16271090"
-X-IronPort-AV: E=Sophos;i="6.07,134,1708416000"; d="scan'208";a="16271090"
-Received: from orviesa008.jf.intel.com ([10.64.159.148])
- by fmvoesa103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 18 Mar 2024 01:17:33 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.07,134,1708416000"; d="scan'208";a="14034331"
-Received: from liuzhao-optiplex-7080.sh.intel.com (HELO localhost)
- ([10.239.160.36])
- by orviesa008.jf.intel.com with ESMTP; 18 Mar 2024 01:17:28 -0700
-Date: Mon, 18 Mar 2024 16:31:19 +0800
-From: Zhao Liu <zhao1.liu@linux.intel.com>
-To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, Markus Armbruster <armbru@redhat.com>,
- qemu-riscv@nongnu.org, Anton Johansson <anjo@rev.ng>,
- qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
- Daniel P =?iso-8859-1?Q?=2E_Berrang=E9?= <berrange@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
- Claudio Fontana <cfontana@suse.de>,
- Richard Henderson <richard.henderson@linaro.org>,
- Peter Maydell <peter.maydell@linaro.org>,
- Alex =?iso-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>,
- Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
- Zhao Liu <zhao1.liu@intel.com>, qemu-arm@nongnu.org,
- Thomas Huth <thuth@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Yanan Wang <wangyanan55@huawei.com>
-Subject: Re: [PATCH-for-9.1 05/21] cpus: Open code OBJECT_DECLARE_TYPE() in
- OBJECT_DECLARE_CPU_TYPE()
-Message-ID: <Zff71/46jLOGz9XO@intel.com>
-References: <20240315130910.15750-1-philmd@linaro.org>
- <20240315130910.15750-6-philmd@linaro.org>
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1rm8Oo-00087k-4X; Mon, 18 Mar 2024 04:31:15 -0400
+Received: from mail-vk1-xa2c.google.com ([2607:f8b0:4864:20::a2c])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1rm8Om-0005xA-I0; Mon, 18 Mar 2024 04:31:13 -0400
+Received: by mail-vk1-xa2c.google.com with SMTP id
+ 71dfb90a1353d-4d43d602cd6so515579e0c.0; 
+ Mon, 18 Mar 2024 01:31:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1710750671; x=1711355471; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=MjPhb7w4dmQcA3V7iijrR2fatnw1z9jDT7J6T384WGw=;
+ b=J3cKXdyXkhndqejE4uGJadU9lrZ/+mVKXbAHHo3YDv/U7b9UHcZ3F8386R/AfFmpjp
+ bfKXLwSWi2m/s82LkrcwXAwsT1/pGb79kS1KIvLnHeCJnR02rdzH4rHKA0iRi1Fk7RKS
+ aYw2MX3Nx0HLFhcCEJxSrE7eAEHz8X0pyhv3mAJrX0jZqHo8JI14uU0ALlrQ1RiHyN2T
+ r6hamkMnWhNtQyAIL9FhQRLh/2ilXLuOr6n+AFTXEggPPK6Xy29EvW/w0hMSwu5N9BlH
+ Ugk9D/9G/fxWJjL2AUkHslXhToVErESGkJ+xP4fc04qwAenHf6vPAPFnoJmTCl9WqmyK
+ iAcg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710750671; x=1711355471;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=MjPhb7w4dmQcA3V7iijrR2fatnw1z9jDT7J6T384WGw=;
+ b=sI+xEK425JZKsjfK6i4/3gjH/Yu0p+mrkWGNp1ySe/EkskeB77gLYS1pZqxXcjJlwd
+ DvjPWaG4cJozoKq439iKTqV8qICacvIzuxjVSws61Ues4fRjGqfKrpu0ut0f9ZhJ03oZ
+ hZdB5U3NEVvszzqdl6vSfJDMmkii45w0TYZffMivDKZ2acjfT3Nwktq2E3ihQLBm2Fmv
+ o0213f5sYThtdQkGtsR86y5z6HFbpnGu63MG3Wb8s57HXpHIA//vJOKIbP82tYos7Mz0
+ xfvMIYhgn7zSgmVDKrXEgfp+P7hopVJRdeKKD+oJ2CYPG/3xEhMv0QMm45xfhTobmAKE
+ bV4g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVZujMTQCSlr3h2m85EEUBP5tte+PBHJPevKM9A42CJaMYO0nkfwnM/6Z8fLzZIWyQpUhD+qLuE+Zucp1yErogMlkA8QLE=
+X-Gm-Message-State: AOJu0Yywnw8Ukk/e0InljIooycdNmvPS5J/mXkBKc6EZS/DgkgGjJsEx
+ /AAhCyjzvviNeKWk9ROvBfI2rffVCIUW1hGg0eu5qLoV2/DB5KzgkiMa5GU/3/dH26Zb1H/xfuY
+ HJp7qaw8QOuMxyi/NrcFSC0dIO9M=
+X-Google-Smtp-Source: AGHT+IGFVdXCtlNlPD6ey/Lcj+xvUFfYCoK3AYAc8kI7a1rn8J95KCfDDtqC6TehasS7wG4n/PaNqH++/Flp4YT1vgg=
+X-Received: by 2002:a1f:fc42:0:b0:4c0:1bb6:322 with SMTP id
+ a63-20020a1ffc42000000b004c01bb60322mr6628430vki.15.1710750670991; Mon, 18
+ Mar 2024 01:31:10 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20240315130910.15750-6-philmd@linaro.org>
-Received-SPF: none client-ip=192.198.163.9;
- envelope-from=zhao1.liu@linux.intel.com; helo=mgamail.intel.com
-X-Spam_score_int: -22
-X-Spam_score: -2.3
-X-Spam_bar: --
-X-Spam_report: (-2.3 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.316,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_NONE=0.001,
+References: <20240314175704.478276-1-dbarboza@ventanamicro.com>
+ <20240314175704.478276-3-dbarboza@ventanamicro.com>
+In-Reply-To: <20240314175704.478276-3-dbarboza@ventanamicro.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 18 Mar 2024 18:30:44 +1000
+Message-ID: <CAKmqyKOdQ_iFpVd-RahRD_hXw8Vk7YhBqhC-dZhR-GfRn_8FeA@mail.gmail.com>
+Subject: Re: [PATCH for 9.0 v15 02/10] trans_rvv.c.inc: set vstart = 0 in int
+ scalar move insns
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com, max.chou@sifive.com, richard.henderson@linaro.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2c;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2c.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -91,104 +94,80 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Philippe,
-
-On Fri, Mar 15, 2024 at 02:08:53PM +0100, Philippe Mathieu-Daudé wrote:
-> Date: Fri, 15 Mar 2024 14:08:53 +0100
-> From: Philippe Mathieu-Daudé <philmd@linaro.org>
-> Subject: [PATCH-for-9.1 05/21] cpus: Open code OBJECT_DECLARE_TYPE() in
->  OBJECT_DECLARE_CPU_TYPE()
-> X-Mailer: git-send-email 2.41.0
-> 
-> Since the OBJECT_DECLARE_CPU_TYPE() macro uses the abstract ArchCPU
-> type, when declaring multiple CPUs of the same ArchCPU type we get
-> an error related to the indirect G_DEFINE_AUTOPTR_CLEANUP_FUNC()
-> use within OBJECT_DECLARE_TYPE():
-> 
->   target/mips/cpu-qom.h:31:1: error: redefinition of 'glib_autoptr_clear_ArchCPU'
->   OBJECT_DECLARE_CPU_TYPE(MIPS64CPU, MIPSCPUClass, MIPS64_CPU)
->   ^
->   include/hw/core/cpu.h:82:5: note: expanded from macro 'OBJECT_DECLARE_CPU_TYPE'
->       OBJECT_DECLARE_TYPE(ArchCPU, CpuClassType, CPU_MODULE_OBJ_NAME);
->       ^
->   include/qom/object.h:237:5: note: expanded from macro 'OBJECT_DECLARE_TYPE'
->       G_DEFINE_AUTOPTR_CLEANUP_FUNC(InstanceType, object_unref) \
->       ^
->   /usr/include/glib-2.0/glib/gmacros.h:1371:3: note: expanded from macro 'G_DEFINE_AUTOPTR_CLEANUP_FUNC'
->     _GLIB_DEFINE_AUTOPTR_CLEANUP_FUNCS(TypeName, TypeName, func)
->     ^
->   /usr/include/glib-2.0/glib/gmacros.h:1354:36: note: expanded from macro '_GLIB_DEFINE_AUTOPTR_CLEANUP_FUNCS'
->     static G_GNUC_UNUSED inline void _GLIB_AUTOPTR_CLEAR_FUNC_NAME(TypeName) (TypeName *_ptr)                     \
->                                      ^
->   /usr/include/glib-2.0/glib/gmacros.h:1338:49: note: expanded from macro '_GLIB_AUTOPTR_CLEAR_FUNC_NAME'
->   #define _GLIB_AUTOPTR_CLEAR_FUNC_NAME(TypeName) glib_autoptr_clear_##TypeName
->                                                   ^
->   <scratch space>:54:1: note: expanded from here
->   glib_autoptr_clear_ArchCPU
->   ^
->   target/mips/cpu-qom.h:30:1: note: previous definition is here
->   OBJECT_DECLARE_CPU_TYPE(MIPS32CPU, MIPSCPUClass, MIPS32_CPU)
->   ^
-> 
-> Avoid that problem by expanding the OBJECT_DECLARE_TYPE() macro
-> within OBJECT_DECLARE_CPU_TYPE().
-> 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-> Acked-by: Richard Henderson <richard.henderson@linaro.org>
-> ---
-> TODO: check rth comment:
-> What about adding an OBJECT_DECLARE_CPU_SUBTYPE that omits half the stuff instead?
-> We don't need another object typedef at all, for instance.
-> ---
->  include/hw/core/cpu.h | 7 ++++++-
->  1 file changed, 6 insertions(+), 1 deletion(-)
-> 
-> diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-> index ec14f74ce5..4c2e5095bf 100644
-> --- a/include/hw/core/cpu.h
-> +++ b/include/hw/core/cpu.h
-> @@ -78,7 +78,12 @@ DECLARE_CLASS_CHECKERS(CPUClass, CPU,
->   */
->  #define OBJECT_DECLARE_CPU_TYPE(CpuInstanceType, CpuClassType, CPU_MODULE_OBJ_NAME) \
->      typedef struct ArchCPU CpuInstanceType; \
-> -    OBJECT_DECLARE_TYPE(ArchCPU, CpuClassType, CPU_MODULE_OBJ_NAME);
-> +    typedef struct CpuClassType CpuClassType; \
-> +    \
-> +    G_DEFINE_AUTOPTR_CLEANUP_FUNC(CpuInstanceType, object_unref) \
-> +    \
-> +    DECLARE_OBJ_CHECKERS(CpuInstanceType, CpuClassType, \
-> +                         CPU_MODULE_OBJ_NAME, TYPE_##CPU_MODULE_OBJ_NAME)
+On Fri, Mar 15, 2024 at 3:59=E2=80=AFAM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
 >
+> trans_vmv_x_s, trans_vmv_s_x, trans_vfmv_f_s and trans_vfmv_s_f aren't
+> setting vstart =3D 0 after execution. This is usually done by a helper in
+> vector_helper.c but these functions don't use helpers.
+>
+> We'll set vstart after any potential 'over' brconds, and that will also
+> mandate a mark_vs_dirty() too.
+>
+> Fixes: dedc53cbc9 ("target/riscv: rvv-1.0: integer scalar move instructio=
+ns")
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-The OBJECT_DECLARE_TYPE is expaneded as the following:
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-#define OBJECT_DECLARE_TYPE(InstanceType, ClassType, MODULE_OBJ_NAME) \
-    typedef struct InstanceType InstanceType; \
-    typedef struct ClassType ClassType; \
-    \
-    G_DEFINE_AUTOPTR_CLEANUP_FUNC(InstanceType, object_unref) \
-    \
-    DECLARE_OBJ_CHECKERS(InstanceType, ClassType, \
-                         MODULE_OBJ_NAME, TYPE_##MODULE_OBJ_NAME)
+Alistair
 
-So the above code change deletes a typedef:
-
-    typedef struct ArchCPU ArchCPU;
-
-Will this deletion break the direct uses of ArchCPU? e.g., in
-accel/tcg/translator.c:
-
-static void set_can_do_io(DisasContextBase *db, bool val)
-{
-    if (db->saved_can_do_io != val) {
-        ...
-        tcg_gen_st8_i32(tcg_constant_i32(val), tcg_env,
-                        offsetof(ArchCPU, parent_obj.neg.can_do_io) -
-                        offsetof(ArchCPU, env));
-    }
-}
-
-Thanks,
-Zhao
-
+> ---
+>  target/riscv/insn_trans/trans_rvv.c.inc | 10 ++++++++--
+>  1 file changed, 8 insertions(+), 2 deletions(-)
+>
+> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_=
+trans/trans_rvv.c.inc
+> index e42728990e..8c16a9f5b3 100644
+> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+> @@ -3373,6 +3373,8 @@ static bool trans_vmv_x_s(DisasContext *s, arg_vmv_=
+x_s *a)
+>          vec_element_loadi(s, t1, a->rs2, 0, true);
+>          tcg_gen_trunc_i64_tl(dest, t1);
+>          gen_set_gpr(s, a->rd, dest);
+> +        tcg_gen_movi_tl(cpu_vstart, 0);
+> +        mark_vs_dirty(s);
+>          return true;
+>      }
+>      return false;
+> @@ -3399,8 +3401,9 @@ static bool trans_vmv_s_x(DisasContext *s, arg_vmv_=
+s_x *a)
+>          s1 =3D get_gpr(s, a->rs1, EXT_NONE);
+>          tcg_gen_ext_tl_i64(t1, s1);
+>          vec_element_storei(s, a->rd, 0, t1);
+> -        mark_vs_dirty(s);
+>          gen_set_label(over);
+> +        tcg_gen_movi_tl(cpu_vstart, 0);
+> +        mark_vs_dirty(s);
+>          return true;
+>      }
+>      return false;
+> @@ -3427,6 +3430,8 @@ static bool trans_vfmv_f_s(DisasContext *s, arg_vfm=
+v_f_s *a)
+>          }
+>
+>          mark_fs_dirty(s);
+> +        tcg_gen_movi_tl(cpu_vstart, 0);
+> +        mark_vs_dirty(s);
+>          return true;
+>      }
+>      return false;
+> @@ -3452,8 +3457,9 @@ static bool trans_vfmv_s_f(DisasContext *s, arg_vfm=
+v_s_f *a)
+>          do_nanbox(s, t1, cpu_fpr[a->rs1]);
+>
+>          vec_element_storei(s, a->rd, 0, t1);
+> -        mark_vs_dirty(s);
+>          gen_set_label(over);
+> +        tcg_gen_movi_tl(cpu_vstart, 0);
+> +        mark_vs_dirty(s);
+>          return true;
+>      }
+>      return false;
+> --
+> 2.44.0
+>
+>
 
