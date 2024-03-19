@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1145EC54E58
-	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Mar 2024 00:57:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18035C54E60
+	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Mar 2024 07:52:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rmNn0-0006Ou-7v; Mon, 18 Mar 2024 20:57:14 -0400
+	id 1rmUGr-0007ah-4D; Tue, 19 Mar 2024 03:52:29 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1rmNmx-0006OA-D9; Mon, 18 Mar 2024 20:57:11 -0400
-Received: from out30-98.freemail.mail.aliyun.com ([115.124.30.98])
+ id 1rmUGn-0007aR-PE; Tue, 19 Mar 2024 03:52:26 -0400
+Received: from out30-119.freemail.mail.aliyun.com ([115.124.30.119])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1rmNmv-0001z0-1x; Mon, 18 Mar 2024 20:57:11 -0400
+ id 1rmUGl-00042S-3z; Tue, 19 Mar 2024 03:52:25 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1710809817; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
- bh=6PTMi8nhkLz1MXkSbF2uHYnuB5e7giuyUeT/vwSy0d0=;
- b=VP0JHUPaZc6jFbCkTo+28tc9sFur5Jpptap2XC41cilpeBN7+1F31FeYkC1lTunUtUglciXJr/Evm8dgtrhsVQrS18KT6u3jH66Yzv2jSibMijCjN3GcLdbu0UMGCr9WmE3F1o9OlHCMvOhv8cGkfIT/meO23oyPZ+uBoJAmTx4=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R111e4; CH=green; DM=||false|;
+ t=1710834731; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
+ bh=XpDStMmscSKUsrbDqMfPXLY/L9Ji35OnClbYlj+KC4s=;
+ b=RSbrIXMUDp4iCrH0HlTvuu97fGpv0hWRy2QiRutqGZCmIa5d5YimPVZq7dxGmyJwFa4D0twzGAXS3d25Tbr8M6KDWcXFaQBWDdBLrGomuLU16+2vVHZkXuQvS3wu29M9N5azgI06dym/Ksf0kLbqYW4H/igp69kxh6Dj8or/O3s=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R901e4; CH=green; DM=||false|;
  DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046056;
  MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
- TI=SMTPD_---0W2qkEo2_1710809815; 
+ TI=SMTPD_---0W2sMRIs_1710834728; 
 Received: from 30.198.0.148(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0W2qkEo2_1710809815) by smtp.aliyun-inc.com;
- Tue, 19 Mar 2024 08:56:56 +0800
-Message-ID: <0dd04dce-5955-4b50-bc07-72165a6ec197@linux.alibaba.com>
-Date: Tue, 19 Mar 2024 08:56:53 +0800
+ fp:SMTPD_---0W2sMRIs_1710834728) by smtp.aliyun-inc.com;
+ Tue, 19 Mar 2024 15:52:09 +0800
+Message-ID: <9578e895-f4b3-4d2b-8f95-1fc07868846c@linux.alibaba.com>
+Date: Tue, 19 Mar 2024 15:52:06 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH for 9.0 v15 02/10] trans_rvv.c.inc: set vstart = 0 in int
- scalar move insns
-Content-Language: en-US
+Subject: Re: [PATCH for 9.0 v15 03/10] target/riscv/vector_helper.c: fix
+ 'vmvr_v' memcpy endianess
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, palmer@rivosinc.com, max.chou@sifive.com,
  richard.henderson@linaro.org
 References: <20240314175704.478276-1-dbarboza@ventanamicro.com>
- <20240314175704.478276-3-dbarboza@ventanamicro.com>
+ <20240314175704.478276-4-dbarboza@ventanamicro.com>
+Content-Language: en-US
 From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20240314175704.478276-3-dbarboza@ventanamicro.com>
+In-Reply-To: <20240314175704.478276-4-dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=115.124.30.98;
+Received-SPF: pass client-ip=115.124.30.119;
  envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-98.freemail.mail.aliyun.com
+ helo=out30-119.freemail.mail.aliyun.com
 X-Spam_score_int: -174
 X-Spam_score: -17.5
 X-Spam_bar: -----------------
@@ -75,67 +75,42 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 On 2024/3/15 1:56, Daniel Henrique Barboza wrote:
-> trans_vmv_x_s, trans_vmv_s_x, trans_vfmv_f_s and trans_vfmv_s_f aren't
-> setting vstart = 0 after execution. This is usually done by a helper in
-> vector_helper.c but these functions don't use helpers.
+> vmvr_v isn't handling the case where the host might be big endian and
+> the bytes to be copied aren't sequential.
 >
-> We'll set vstart after any potential 'over' brconds, and that will also
-> mandate a mark_vs_dirty() too.
->
-> Fixes: dedc53cbc9 ("target/riscv: rvv-1.0: integer scalar move instructions")
+> Suggested-by: Richard Henderson <richard.henderson@linaro.org>
+> Fixes: f714361ed7 ("target/riscv: rvv-1.0: implement vstart CSR")
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+> ---
+>   target/riscv/vector_helper.c | 10 +++++++++-
+>   1 file changed, 9 insertions(+), 1 deletion(-)
+>
+> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+> index ca79571ae2..34ac4aa808 100644
+> --- a/target/riscv/vector_helper.c
+> +++ b/target/riscv/vector_helper.c
+> @@ -5075,9 +5075,17 @@ void HELPER(vmvr_v)(void *vd, void *vs2, CPURISCVState *env, uint32_t desc)
+>       uint32_t startb = env->vstart * sewb;
+>       uint32_t i = startb;
+>   
+> +    if (HOST_BIG_ENDIAN && i % 8 != 0) {
+> +        uint32_t j = ROUND_UP(i, 8);
+> +        memcpy((uint8_t *)vd + H1(j - 1),
+> +               (uint8_t *)vs2 + H1(j - 1),
+> +               j - i);
+> +        i = j;
+> +    }
+> +
+>       memcpy((uint8_t *)vd + H1(i),
+>              (uint8_t *)vs2 + H1(i),
+> -           maxsz - startb);
+> +           maxsz - i);
 
-Reviewd-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
 Zhiwei
 
-> ---
->   target/riscv/insn_trans/trans_rvv.c.inc | 10 ++++++++--
->   1 file changed, 8 insertions(+), 2 deletions(-)
->
-> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-> index e42728990e..8c16a9f5b3 100644
-> --- a/target/riscv/insn_trans/trans_rvv.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-> @@ -3373,6 +3373,8 @@ static bool trans_vmv_x_s(DisasContext *s, arg_vmv_x_s *a)
->           vec_element_loadi(s, t1, a->rs2, 0, true);
->           tcg_gen_trunc_i64_tl(dest, t1);
->           gen_set_gpr(s, a->rd, dest);
-> +        tcg_gen_movi_tl(cpu_vstart, 0);
-> +        mark_vs_dirty(s);
->           return true;
->       }
->       return false;
-> @@ -3399,8 +3401,9 @@ static bool trans_vmv_s_x(DisasContext *s, arg_vmv_s_x *a)
->           s1 = get_gpr(s, a->rs1, EXT_NONE);
->           tcg_gen_ext_tl_i64(t1, s1);
->           vec_element_storei(s, a->rd, 0, t1);
-> -        mark_vs_dirty(s);
->           gen_set_label(over);
-> +        tcg_gen_movi_tl(cpu_vstart, 0);
-> +        mark_vs_dirty(s);
->           return true;
->       }
->       return false;
-> @@ -3427,6 +3430,8 @@ static bool trans_vfmv_f_s(DisasContext *s, arg_vfmv_f_s *a)
->           }
 >   
->           mark_fs_dirty(s);
-> +        tcg_gen_movi_tl(cpu_vstart, 0);
-> +        mark_vs_dirty(s);
->           return true;
->       }
->       return false;
-> @@ -3452,8 +3457,9 @@ static bool trans_vfmv_s_f(DisasContext *s, arg_vfmv_s_f *a)
->           do_nanbox(s, t1, cpu_fpr[a->rs1]);
->   
->           vec_element_storei(s, a->rd, 0, t1);
-> -        mark_vs_dirty(s);
->           gen_set_label(over);
-> +        tcg_gen_movi_tl(cpu_vstart, 0);
-> +        mark_vs_dirty(s);
->           return true;
->       }
->       return false;
+>       env->vstart = 0;
+>   }
 
