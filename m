@@ -4,84 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EB19C6FD1F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Mar 2024 16:24:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6153C54E71
+	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Mar 2024 18:13:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rmcG3-00048m-MT; Tue, 19 Mar 2024 12:24:11 -0400
+	id 1rmdxL-0006l5-I6; Tue, 19 Mar 2024 14:12:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
- id 1rmcG0-00044v-K8
- for qemu-riscv@nongnu.org; Tue, 19 Mar 2024 12:24:09 -0400
-Received: from mail-lj1-x22f.google.com ([2a00:1450:4864:20::22f])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rmdxJ-0006kL-5F
+ for qemu-riscv@nongnu.org; Tue, 19 Mar 2024 14:12:57 -0400
+Received: from mail-lf1-x131.google.com ([2a00:1450:4864:20::131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
- id 1rmcFy-0005Ci-Dp
- for qemu-riscv@nongnu.org; Tue, 19 Mar 2024 12:24:08 -0400
-Received: by mail-lj1-x22f.google.com with SMTP id
- 38308e7fff4ca-2d288bac3caso73031651fa.2
- for <qemu-riscv@nongnu.org>; Tue, 19 Mar 2024 09:24:04 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rmdxF-0000hC-4h
+ for qemu-riscv@nongnu.org; Tue, 19 Mar 2024 14:12:56 -0400
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-512e39226efso5036651e87.0
+ for <qemu-riscv@nongnu.org>; Tue, 19 Mar 2024 11:12:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1710865443; x=1711470243; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=H97QZ2h29BVhDMviywLLHMLCg3ZLWp6ny3RK33EvOZ0=;
- b=Pyo2b1FjmdWVzePkjwCOsVKzkawecq3mXm8ZtuuR2Dv5qVtPMVDiCnrqcD11CVK94P
- R0udZMo89wTOzZcHEgaXyfTpR9riDvv0kMZeRxWrFTttWLyuhPZujNgXucKQSDEshcvl
- u4U99JMbpLRwE7oqP8U8dAHwaY3/TMfXF1avqT5eH+Ye4lAG3vRCyrgxC1lxXlsROken
- nrItAi0mY31uf9SLKeBLP1mfMOqymXgYI+QWkkOuhFpUTgbcDSnNx2dP467QB3gD/Txb
- +GiheAEpb5K6bdKULtQC0wFDTTyLZF85dau9ffpx24U+cdd7xglwNCA/CK0Xkq2HW8yj
- T1tg==
+ d=linaro.org; s=google; t=1710871970; x=1711476770; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=FB3YqW4Uz4oF+ZT7QZKeFJc7YepbHj5rdBwBsiNNT74=;
+ b=tOeYp17dx9iQFPd1lCtxQWWEAe7HuUGTf3hqReLzMjq81nhyYW7Mj/vDoX8sBJiEye
+ bUJT+tvcfVYTLGdcitva+3TIDdOWgei9sa9KAFnTVEunGPYgttD0eTGVYWOJXrHbGIIL
+ IEVgHuy9D1e7C5LHxn5ikPVYrWzi5TH9ghOl8Q8gHrn/z/RD7eBYhCVXWIXbgyIdIhnI
+ DxFuBj08qhrtNQnpB990ceU72kef9BqLsFF77gVX+P+dqDenluFif+pqkwqbMx5yx+Ix
+ HK1S5zwWUhqAF4Tiin2iwyeIWgfu1JkgDcZz15ind+CjzqX+CBNdVPNTrMWarnjxxdTK
+ y4bg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710865443; x=1711470243;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=H97QZ2h29BVhDMviywLLHMLCg3ZLWp6ny3RK33EvOZ0=;
- b=rCssFYzVpPf1mmdHU4JaZDG1832aS77S+ftEqH6r7GwxRhvgwrbnX524Loo9acxXCq
- SIMJ51aV32OaNqMVpn9rXDWkbudP74OfYgfM+fzB0X32YE4kz1w/LqrX9Mwv/pwHhfcr
- Skf+6SFL4c5/hYO+3OyCjKuBtVMXH0h4yfwdpU7Uk4+QkalH0fjauSXkfDRtawQPvsDE
- Ptlu6E/mVeciQ84G8Z+bUPhw/LZtcW4nvOFx2+G3obzEmwmFLBDXFhl9Z3w2iwM9fovz
- VMOBHAvnBqUsv3P8UF9zSr8PlcHkHNwHTvg2EP+uWjLqeLvo45ICJZ7pfa3GXVQyf78g
- +eMA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUq+cRAbnL/iJtLTg2s2VZjjkoSqJvlflTrGXYXut47hDt7ODs2BdVOQOZ5NgKwXElba3nn6N1vh2EXTpFoGLwRp+00VFw=
-X-Gm-Message-State: AOJu0YzS4JhdYsGvx4MHSDZcaqq9vJGldqg0FGil1ynlf1C67Rv01LQi
- 1EdaJIf3NlU7SRSbXn3pnO1+Dvadeaz1VhgsTK3q9yCHRmUo1Nlc2PByoWftrregl8lAP6R8tAQ
- 9OiXmS+iBUy420pdL0bhm04z+gUw+9XeWq7NVZw==
-X-Google-Smtp-Source: AGHT+IGanRU9nHcR1jelNUTw1BVINs028Ev1R6cGg60nAg8esRtaJCfzkpzQ2gfQxUFbH+GcQ7JLP7yctUe4+T5z3eM=
-X-Received: by 2002:a2e:8552:0:b0:2d4:22d9:b015 with SMTP id
- u18-20020a2e8552000000b002d422d9b015mr10374325ljj.10.1710865443292; Tue, 19
- Mar 2024 09:24:03 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1710871970; x=1711476770;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=FB3YqW4Uz4oF+ZT7QZKeFJc7YepbHj5rdBwBsiNNT74=;
+ b=xC0/82mifEfbJylK6n65xbo1KVZA3tO9CpDb+TQ8HmztYBflP3BdlmTy2leD0yU5EQ
+ w+3N7wLjWiw+JTNvuSTeMmSBbwAh0OVeO7NKDUWWIYlps2Qo2pdOqx3JG49hsZbjAqWa
+ wrIqD/zptYZZZe7k+MuOTU2Mo0nWa+8vzhU88UClT9SBnzmXIDipUn7jpFMAUZ7LBBcg
+ jgxYvhpe+9k4Tk+qFdtD/15nj0ELKSmXyHPgS2kKgbQJgmLDugIF6seRbXWRq/QlNVD0
+ Fp08U2HBjGhw67bfSOT21k8L/HsFdSkqVhbVCB2I77bCilzpF1OZ7ywe6LFbRd6nrL7E
+ 0bSw==
+X-Gm-Message-State: AOJu0Yym3n11xV7kOjZd3qkNrjJd6+2vAue8X6MDIRsv/ppGYPRBYOCb
+ hzgAPY5dJkH6uf3dwukGbiu3qaxsMeaWBIf3UFMRKsa8nfqvrLgwnImqOcuIRi4=
+X-Google-Smtp-Source: AGHT+IHoKELfbuECkuyLTUglf/dSA5ERaIVTmAVO/Cip6Uc4c6+9VYEZkr434C24QN3zzUUzDRX9Ww==
+X-Received: by 2002:a05:6512:20c6:b0:513:bf23:ce3 with SMTP id
+ u6-20020a05651220c600b00513bf230ce3mr11096828lfr.62.1710871969986; 
+ Tue, 19 Mar 2024 11:12:49 -0700 (PDT)
+Received: from [192.168.69.100] ([176.176.166.129])
+ by smtp.gmail.com with ESMTPSA id
+ bw9-20020a170906c1c900b00a45ff821e09sm6328790ejb.150.2024.03.19.11.12.47
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 19 Mar 2024 11:12:49 -0700 (PDT)
+Message-ID: <53e1f69f-3a52-4972-b1ba-6ad07507b197@linaro.org>
+Date: Tue, 19 Mar 2024 19:12:46 +0100
 MIME-Version: 1.0
-References: <20240306170855.24341-1-jason.chien@sifive.com>
- <20240306170855.24341-2-jason.chien@sifive.com>
-In-Reply-To: <20240306170855.24341-2-jason.chien@sifive.com>
-From: Jason Chien <jason.chien@sifive.com>
-Date: Wed, 20 Mar 2024 00:23:52 +0800
-Message-ID: <CADr__8qWMHnBVnCqiEAekWj6JAkvpS6cuMmo8E8rfuRLFKCDcA@mail.gmail.com>
-Subject: Re: [PATCH 1/5] target/riscv: Add support for Zve32x extension
-To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: Frank Chang <frank.chang@sifive.com>, Max Chou <max.chou@sifive.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH-for-9.1 07/21] target/mips: Make MIPS_CPU common to new
+ MIPS32_CPU / MIPS64_CPU types
+Content-Language: en-US
+To: qemu-devel@nongnu.org, Markus Armbruster <armbru@redhat.com>
+Cc: qemu-riscv@nongnu.org, Anton Johansson <anjo@rev.ng>,
+ qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
+ =?UTF-8?Q?Daniel_P_=2E_Berrang=C3=A9?= <berrange@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
+ Claudio Fontana <cfontana@suse.de>,
  Richard Henderson <richard.henderson@linaro.org>,
- Andrew Jones <ajones@ventanamicro.com>
-Content-Type: multipart/alternative; boundary="00000000000001a1bf061405e776"
-Received-SPF: pass client-ip=2a00:1450:4864:20::22f;
- envelope-from=jason.chien@sifive.com; helo=mail-lj1-x22f.google.com
+ Peter Maydell <peter.maydell@linaro.org>,
+ =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
+ Zhao Liu <zhao1.liu@intel.com>, qemu-arm@nongnu.org,
+ Thomas Huth <thuth@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Huacai Chen <chenhuacai@kernel.org>
+References: <20240315130910.15750-1-philmd@linaro.org>
+ <20240315130910.15750-8-philmd@linaro.org>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20240315130910.15750-8-philmd@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::131;
+ envelope-from=philmd@linaro.org; helo=mail-lf1-x131.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,333 +108,129 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---00000000000001a1bf061405e776
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Ping. Can anyone review the patches please?
-
-Jason Chien <jason.chien@sifive.com> =E6=96=BC 2024=E5=B9=B43=E6=9C=887=E6=
-=97=A5 =E9=80=B1=E5=9B=9B =E4=B8=8A=E5=8D=881:09=E5=AF=AB=E9=81=93=EF=BC=9A
-
-> Add support for Zve32x extension and replace some checks for Zve32f with
-> Zve32x, since Zve32f depends on Zve32x.
->
-> Signed-off-by: Jason Chien <jason.chien@sifive.com>
-> Reviewed-by: Frank Chang <frank.chang@sifive.com>
-> Reviewed-by: Max Chou <max.chou@sifive.com>
+On 15/3/24 14:08, Philippe Mathieu-Daudé wrote:
+> "target/foo/cpu-qom.h" can not use any target specific definitions.
+> 
+> Currently "target/mips/cpu-qom.h" defines TYPE_MIPS_CPU depending
+> on the mips(32)/mips64 build type. This doesn't scale in a
+> heterogeneous context where we need to access both types concurrently.
+> 
+> In order to do that, introduce the new MIPS32_CPU / MIPS64_CPU types,
+> both inheriting a common TYPE_MIPS_CPU base type.
+> 
+> Keep the current CPU types registered in mips_register_cpudef_type()
+> as 32 or 64-bit, but instead of depending on the binary built being
+> targeting 32/64-bit, check whether the CPU is 64-bit by looking at
+> the CPU_MIPS64 bit.
+> 
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 > ---
->  target/riscv/cpu.c                      |  1 +
->  target/riscv/cpu_cfg.h                  |  1 +
->  target/riscv/cpu_helper.c               |  2 +-
->  target/riscv/csr.c                      |  2 +-
->  target/riscv/insn_trans/trans_rvv.c.inc |  4 ++--
->  target/riscv/tcg/tcg-cpu.c              | 16 ++++++++--------
->  6 files changed, 14 insertions(+), 12 deletions(-)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index fd0c7efdda..10ccae3323 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -152,6 +152,7 @@ const RISCVIsaExtData isa_edata_arr[] =3D {
->      ISA_EXT_DATA_ENTRY(zvbb, PRIV_VERSION_1_12_0, ext_zvbb),
->      ISA_EXT_DATA_ENTRY(zvbc, PRIV_VERSION_1_12_0, ext_zvbc),
->      ISA_EXT_DATA_ENTRY(zve32f, PRIV_VERSION_1_10_0, ext_zve32f),
-> +    ISA_EXT_DATA_ENTRY(zve32x, PRIV_VERSION_1_10_0, ext_zve32x),
->      ISA_EXT_DATA_ENTRY(zve64f, PRIV_VERSION_1_10_0, ext_zve64f),
->      ISA_EXT_DATA_ENTRY(zve64d, PRIV_VERSION_1_10_0, ext_zve64d),
->      ISA_EXT_DATA_ENTRY(zvfbfmin, PRIV_VERSION_1_12_0, ext_zvfbfmin),
-> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-> index be39870691..beb3d10213 100644
-> --- a/target/riscv/cpu_cfg.h
-> +++ b/target/riscv/cpu_cfg.h
-> @@ -90,6 +90,7 @@ struct RISCVCPUConfig {
->      bool ext_zhinx;
->      bool ext_zhinxmin;
->      bool ext_zve32f;
-> +    bool ext_zve32x;
->      bool ext_zve64f;
->      bool ext_zve64d;
->      bool ext_zvbb;
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index c994a72634..ebbe56d9a2 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -72,7 +72,7 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc=
-,
->      *pc =3D env->xl =3D=3D MXL_RV32 ? env->pc & UINT32_MAX : env->pc;
->      *cs_base =3D 0;
->
-> -    if (cpu->cfg.ext_zve32f) {
-> +    if (cpu->cfg.ext_zve32x) {
->          /*
->           * If env->vl equals to VLMAX, we can use generic vector operati=
-on
->           * expanders (GVEC) to accerlate the vector operations.
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 726096444f..d96feea5d3 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -93,7 +93,7 @@ static RISCVException fs(CPURISCVState *env, int csrno)
->
->  static RISCVException vs(CPURISCVState *env, int csrno)
->  {
-> -    if (riscv_cpu_cfg(env)->ext_zve32f) {
-> +    if (riscv_cpu_cfg(env)->ext_zve32x) {
->  #if !defined(CONFIG_USER_ONLY)
->          if (!env->debugger && !riscv_cpu_vector_enabled(env)) {
->              return RISCV_EXCP_ILLEGAL_INST;
-> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc
-> b/target/riscv/insn_trans/trans_rvv.c.inc
-> index 9e101ab434..f00f1ee886 100644
-> --- a/target/riscv/insn_trans/trans_rvv.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-> @@ -149,7 +149,7 @@ static bool do_vsetvl(DisasContext *s, int rd, int
-> rs1, TCGv s2)
->  {
->      TCGv s1, dst;
->
-> -    if (!require_rvv(s) || !s->cfg_ptr->ext_zve32f) {
-> +    if (!require_rvv(s) || !s->cfg_ptr->ext_zve32x) {
->          return false;
->      }
->
-> @@ -179,7 +179,7 @@ static bool do_vsetivli(DisasContext *s, int rd, TCGv
-> s1, TCGv s2)
->  {
->      TCGv dst;
->
-> -    if (!require_rvv(s) || !s->cfg_ptr->ext_zve32f) {
-> +    if (!require_rvv(s) || !s->cfg_ptr->ext_zve32x) {
->          return false;
->      }
->
-> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-> index ab6db817db..ce539528e6 100644
-> --- a/target/riscv/tcg/tcg-cpu.c
-> +++ b/target/riscv/tcg/tcg-cpu.c
-> @@ -501,9 +501,13 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu=
-,
-> Error **errp)
->          return;
->      }
->
-> -    if (cpu->cfg.ext_zve32f && !riscv_has_ext(env, RVF)) {
-> -        error_setg(errp, "Zve32f/Zve64f extensions require F extension")=
-;
-> -        return;
-> +    /* The Zve32f extension depends on the Zve32x extension */
-> +    if (cpu->cfg.ext_zve32f) {
-> +        if (!riscv_has_ext(env, RVF)) {
-> +            error_setg(errp, "Zve32f/Zve64f extensions require F
-> extension");
-> +            return;
-> +        }
-> +        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zve32x), true);
->      }
->
->      if (cpu->cfg.ext_zvfh) {
-> @@ -653,13 +657,9 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu=
-,
-> Error **errp)
->          cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvbc), true);
->      }
->
-> -    /*
-> -     * In principle Zve*x would also suffice here, were they supported
-> -     * in qemu
-> -     */
->      if ((cpu->cfg.ext_zvbb || cpu->cfg.ext_zvkb || cpu->cfg.ext_zvkg ||
->           cpu->cfg.ext_zvkned || cpu->cfg.ext_zvknha ||
-> cpu->cfg.ext_zvksed ||
-> -         cpu->cfg.ext_zvksh) && !cpu->cfg.ext_zve32f) {
-> +         cpu->cfg.ext_zvksh) && !cpu->cfg.ext_zve32x) {
->          error_setg(errp,
->                     "Vector crypto extensions require V or Zve*
-> extensions");
->          return;
-> --
-> 2.43.2
->
->
+>   target/mips/cpu-qom.h              | 13 +++++++------
+>   target/mips/cpu.c                  | 11 ++++++++++-
+>   target/mips/sysemu/mips-qmp-cmds.c | 26 ++------------------------
+>   3 files changed, 19 insertions(+), 31 deletions(-)
+> 
+> diff --git a/target/mips/cpu-qom.h b/target/mips/cpu-qom.h
+> index 0eea2a2598..bf464f16b6 100644
+> --- a/target/mips/cpu-qom.h
+> +++ b/target/mips/cpu-qom.h
+> @@ -1,5 +1,5 @@
+>   /*
+> - * QEMU MIPS CPU
+> + * QEMU MIPS CPU QOM header (target agnostic)
+>    *
+>    * Copyright (c) 2012 SUSE LINUX Products GmbH
+>    *
+> @@ -22,14 +22,15 @@
+>   
+>   #include "hw/core/cpu.h"
+>   
+> -#ifdef TARGET_MIPS64
+> -#define TYPE_MIPS_CPU "mips64-cpu"
+> -#else
+> -#define TYPE_MIPS_CPU "mips-cpu"
+> -#endif
+> +#define TYPE_MIPS_CPU   "mips-cpu"
+> +#define TYPE_MIPS32_CPU "mips32-cpu"
+> +#define TYPE_MIPS64_CPU "mips64-cpu"
+>   
+>   OBJECT_DECLARE_CPU_TYPE(MIPSCPU, MIPSCPUClass, MIPS_CPU)
+>   
+> +OBJECT_DECLARE_CPU_TYPE(MIPS32CPU, MIPSCPUClass, MIPS32_CPU)
+> +OBJECT_DECLARE_CPU_TYPE(MIPS64CPU, MIPSCPUClass, MIPS64_CPU)
+> +
+>   #define MIPS_CPU_TYPE_SUFFIX "-" TYPE_MIPS_CPU
+>   #define MIPS_CPU_TYPE_NAME(model) model MIPS_CPU_TYPE_SUFFIX
+>   
+> diff --git a/target/mips/cpu.c b/target/mips/cpu.c
+> index c096d97fe3..f3ea6175f2 100644
+> --- a/target/mips/cpu.c
+> +++ b/target/mips/cpu.c
+> @@ -604,6 +604,14 @@ static const TypeInfo mips_cpu_types[] = {
+>           .abstract       = true,
+>           .class_size     = sizeof(MIPSCPUClass),
+>           .class_init     = mips_cpu_class_init,
+> +    }, {
+> +        .name           = TYPE_MIPS32_CPU,
+> +        .parent         = TYPE_MIPS_CPU,
+> +        .abstract       = true,
+> +    }, {
+> +        .name           = TYPE_MIPS64_CPU,
+> +        .parent         = TYPE_MIPS_CPU,
+> +        .abstract       = true,
+>       }
+>   };
+>   
+> @@ -620,7 +628,8 @@ static void mips_register_cpudef_type(const struct mips_def_t *def)
+>       char *typename = mips_cpu_type_name(def->name);
+>       TypeInfo ti = {
+>           .name = typename,
+> -        .parent = TYPE_MIPS_CPU,
+> +        .parent = def->insn_flags & CPU_MIPS64
+> +                  ? TYPE_MIPS64_CPU : TYPE_MIPS32_CPU,
+>           .class_init = mips_cpu_cpudef_class_init,
+>           .class_data = (void *)def,
+>       };
 
---00000000000001a1bf061405e776
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Oops, I got 2 commits squashed by mistake here...
 
-<div dir=3D"ltr">Ping. Can anyone review the patches please?<br></div><br><=
-div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">Jason Chien=
- &lt;<a href=3D"mailto:jason.chien@sifive.com">jason.chien@sifive.com</a>&g=
-t; =E6=96=BC 2024=E5=B9=B43=E6=9C=887=E6=97=A5 =E9=80=B1=E5=9B=9B =E4=B8=8A=
-=E5=8D=881:09=E5=AF=AB=E9=81=93=EF=BC=9A<br></div><blockquote class=3D"gmai=
-l_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,20=
-4,204);padding-left:1ex">Add support for Zve32x extension and replace some =
-checks for Zve32f with<br>
-Zve32x, since Zve32f depends on Zve32x.<br>
-<br>
-Signed-off-by: Jason Chien &lt;<a href=3D"mailto:jason.chien@sifive.com" ta=
-rget=3D"_blank">jason.chien@sifive.com</a>&gt;<br>
-Reviewed-by: Frank Chang &lt;<a href=3D"mailto:frank.chang@sifive.com" targ=
-et=3D"_blank">frank.chang@sifive.com</a>&gt;<br>
-Reviewed-by: Max Chou &lt;<a href=3D"mailto:max.chou@sifive.com" target=3D"=
-_blank">max.chou@sifive.com</a>&gt;<br>
----<br>
-=C2=A0target/riscv/cpu.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 1 +<br>
-=C2=A0target/riscv/cpu_cfg.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 |=C2=A0 1 +<br>
-=C2=A0target/riscv/cpu_helper.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0|=C2=A0 2 +-<br>
-=C2=A0target/riscv/csr.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 2 +-<br>
-=C2=A0target/riscv/insn_trans/trans_rvv.c.inc |=C2=A0 4 ++--<br>
-=C2=A0target/riscv/tcg/tcg-cpu.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 | 16 ++++++++--------<br>
-=C2=A06 files changed, 14 insertions(+), 12 deletions(-)<br>
-<br>
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c<br>
-index fd0c7efdda..10ccae3323 100644<br>
---- a/target/riscv/cpu.c<br>
-+++ b/target/riscv/cpu.c<br>
-@@ -152,6 +152,7 @@ const RISCVIsaExtData isa_edata_arr[] =3D {<br>
-=C2=A0 =C2=A0 =C2=A0ISA_EXT_DATA_ENTRY(zvbb, PRIV_VERSION_1_12_0, ext_zvbb)=
-,<br>
-=C2=A0 =C2=A0 =C2=A0ISA_EXT_DATA_ENTRY(zvbc, PRIV_VERSION_1_12_0, ext_zvbc)=
-,<br>
-=C2=A0 =C2=A0 =C2=A0ISA_EXT_DATA_ENTRY(zve32f, PRIV_VERSION_1_10_0, ext_zve=
-32f),<br>
-+=C2=A0 =C2=A0 ISA_EXT_DATA_ENTRY(zve32x, PRIV_VERSION_1_10_0, ext_zve32x),=
-<br>
-=C2=A0 =C2=A0 =C2=A0ISA_EXT_DATA_ENTRY(zve64f, PRIV_VERSION_1_10_0, ext_zve=
-64f),<br>
-=C2=A0 =C2=A0 =C2=A0ISA_EXT_DATA_ENTRY(zve64d, PRIV_VERSION_1_10_0, ext_zve=
-64d),<br>
-=C2=A0 =C2=A0 =C2=A0ISA_EXT_DATA_ENTRY(zvfbfmin, PRIV_VERSION_1_12_0, ext_z=
-vfbfmin),<br>
-diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h<br>
-index be39870691..beb3d10213 100644<br>
---- a/target/riscv/cpu_cfg.h<br>
-+++ b/target/riscv/cpu_cfg.h<br>
-@@ -90,6 +90,7 @@ struct RISCVCPUConfig {<br>
-=C2=A0 =C2=A0 =C2=A0bool ext_zhinx;<br>
-=C2=A0 =C2=A0 =C2=A0bool ext_zhinxmin;<br>
-=C2=A0 =C2=A0 =C2=A0bool ext_zve32f;<br>
-+=C2=A0 =C2=A0 bool ext_zve32x;<br>
-=C2=A0 =C2=A0 =C2=A0bool ext_zve64f;<br>
-=C2=A0 =C2=A0 =C2=A0bool ext_zve64d;<br>
-=C2=A0 =C2=A0 =C2=A0bool ext_zvbb;<br>
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c<br>
-index c994a72634..ebbe56d9a2 100644<br>
---- a/target/riscv/cpu_helper.c<br>
-+++ b/target/riscv/cpu_helper.c<br>
-@@ -72,7 +72,7 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,<=
-br>
-=C2=A0 =C2=A0 =C2=A0*pc =3D env-&gt;xl =3D=3D MXL_RV32 ? env-&gt;pc &amp; U=
-INT32_MAX : env-&gt;pc;<br>
-=C2=A0 =C2=A0 =C2=A0*cs_base =3D 0;<br>
-<br>
--=C2=A0 =C2=A0 if (cpu-&gt;cfg.ext_zve32f) {<br>
-+=C2=A0 =C2=A0 if (cpu-&gt;cfg.ext_zve32x) {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0/*<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 * If env-&gt;vl equals to VLMAX, we can =
-use generic vector operation<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 * expanders (GVEC) to accerlate the vect=
-or operations.<br>
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c<br>
-index 726096444f..d96feea5d3 100644<br>
---- a/target/riscv/csr.c<br>
-+++ b/target/riscv/csr.c<br>
-@@ -93,7 +93,7 @@ static RISCVException fs(CPURISCVState *env, int csrno)<b=
-r>
-<br>
-=C2=A0static RISCVException vs(CPURISCVState *env, int csrno)<br>
-=C2=A0{<br>
--=C2=A0 =C2=A0 if (riscv_cpu_cfg(env)-&gt;ext_zve32f) {<br>
-+=C2=A0 =C2=A0 if (riscv_cpu_cfg(env)-&gt;ext_zve32x) {<br>
-=C2=A0#if !defined(CONFIG_USER_ONLY)<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (!env-&gt;debugger &amp;&amp; !riscv_c=
-pu_vector_enabled(env)) {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return RISCV_EXCP_ILLEGAL_I=
-NST;<br>
-diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_tr=
-ans/trans_rvv.c.inc<br>
-index 9e101ab434..f00f1ee886 100644<br>
---- a/target/riscv/insn_trans/trans_rvv.c.inc<br>
-+++ b/target/riscv/insn_trans/trans_rvv.c.inc<br>
-@@ -149,7 +149,7 @@ static bool do_vsetvl(DisasContext *s, int rd, int rs1,=
- TCGv s2)<br>
-=C2=A0{<br>
-=C2=A0 =C2=A0 =C2=A0TCGv s1, dst;<br>
-<br>
--=C2=A0 =C2=A0 if (!require_rvv(s) || !s-&gt;cfg_ptr-&gt;ext_zve32f) {<br>
-+=C2=A0 =C2=A0 if (!require_rvv(s) || !s-&gt;cfg_ptr-&gt;ext_zve32x) {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return false;<br>
-=C2=A0 =C2=A0 =C2=A0}<br>
-<br>
-@@ -179,7 +179,7 @@ static bool do_vsetivli(DisasContext *s, int rd, TCGv s=
-1, TCGv s2)<br>
-=C2=A0{<br>
-=C2=A0 =C2=A0 =C2=A0TCGv dst;<br>
-<br>
--=C2=A0 =C2=A0 if (!require_rvv(s) || !s-&gt;cfg_ptr-&gt;ext_zve32f) {<br>
-+=C2=A0 =C2=A0 if (!require_rvv(s) || !s-&gt;cfg_ptr-&gt;ext_zve32x) {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return false;<br>
-=C2=A0 =C2=A0 =C2=A0}<br>
-<br>
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c<br>
-index ab6db817db..ce539528e6 100644<br>
---- a/target/riscv/tcg/tcg-cpu.c<br>
-+++ b/target/riscv/tcg/tcg-cpu.c<br>
-@@ -501,9 +501,13 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, =
-Error **errp)<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return;<br>
-=C2=A0 =C2=A0 =C2=A0}<br>
-<br>
--=C2=A0 =C2=A0 if (cpu-&gt;cfg.ext_zve32f &amp;&amp; !riscv_has_ext(env, RV=
-F)) {<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 error_setg(errp, &quot;Zve32f/Zve64f extension=
-s require F extension&quot;);<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 return;<br>
-+=C2=A0 =C2=A0 /* The Zve32f extension depends on the Zve32x extension */<b=
-r>
-+=C2=A0 =C2=A0 if (cpu-&gt;cfg.ext_zve32f) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!riscv_has_ext(env, RVF)) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 error_setg(errp, &quot;Zve32f/Zv=
-e64f extensions require F extension&quot;);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ex=
-t_zve32x), true);<br>
-=C2=A0 =C2=A0 =C2=A0}<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0if (cpu-&gt;cfg.ext_zvfh) {<br>
-@@ -653,13 +657,9 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, =
-Error **errp)<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFS=
-ET(ext_zvbc), true);<br>
-=C2=A0 =C2=A0 =C2=A0}<br>
-<br>
--=C2=A0 =C2=A0 /*<br>
--=C2=A0 =C2=A0 =C2=A0* In principle Zve*x would also suffice here, were the=
-y supported<br>
--=C2=A0 =C2=A0 =C2=A0* in qemu<br>
--=C2=A0 =C2=A0 =C2=A0*/<br>
-=C2=A0 =C2=A0 =C2=A0if ((cpu-&gt;cfg.ext_zvbb || cpu-&gt;cfg.ext_zvkb || cp=
-u-&gt;cfg.ext_zvkg ||<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 cpu-&gt;cfg.ext_zvkned || cpu-&gt;cfg.ex=
-t_zvknha || cpu-&gt;cfg.ext_zvksed ||<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0cpu-&gt;cfg.ext_zvksh) &amp;&amp; !cpu-&=
-gt;cfg.ext_zve32f) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0cpu-&gt;cfg.ext_zvksh) &amp;&amp; !cpu-&=
-gt;cfg.ext_zve32x) {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0error_setg(errp,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot=
-;Vector crypto extensions require V or Zve* extensions&quot;);<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return;<br>
--- <br>
-2.43.2<br>
-<br>
-</blockquote></div>
+> diff --git a/target/mips/sysemu/mips-qmp-cmds.c b/target/mips/sysemu/mips-qmp-cmds.c
+> index 7340ac70ba..329db3a028 100644
+> --- a/target/mips/sysemu/mips-qmp-cmds.c
+> +++ b/target/mips/sysemu/mips-qmp-cmds.c
+> @@ -8,31 +8,9 @@
+>   
+>   #include "qemu/osdep.h"
+>   #include "qapi/qapi-commands-machine-target.h"
+> -#include "cpu.h"
+> -
+> -static void mips_cpu_add_definition(gpointer data, gpointer user_data)
+> -{
+> -    ObjectClass *oc = data;
+> -    CpuDefinitionInfoList **cpu_list = user_data;
+> -    CpuDefinitionInfo *info;
+> -    const char *typename;
+> -
+> -    typename = object_class_get_name(oc);
+> -    info = g_malloc0(sizeof(*info));
+> -    info->name = cpu_model_from_type(typename);
+> -    info->q_typename = g_strdup(typename);
+> -
+> -    QAPI_LIST_PREPEND(*cpu_list, info);
+> -}
+> +#include "qapi/commands-target-compat.h"
+>   
+>   CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
+>   {
+> -    CpuDefinitionInfoList *cpu_list = NULL;
+> -    GSList *list;
+> -
+> -    list = object_class_get_list(TYPE_MIPS_CPU, false);
+> -    g_slist_foreach(list, mips_cpu_add_definition, &cpu_list);
+> -    g_slist_free(list);
+> -
+> -    return cpu_list;
+> +    return generic_query_cpu_definitions(errp);
+>   }
 
---00000000000001a1bf061405e776--
 
