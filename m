@@ -4,86 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC2A8C54E71
-	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Mar 2024 21:19:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7961AC54E68
+	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Mar 2024 21:26:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rmgrk-0004hL-4Q; Tue, 19 Mar 2024 17:19:24 -0400
+	id 1rmgyY-0007aZ-JQ; Tue, 19 Mar 2024 17:26:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rmgri-0004gr-Mq
- for qemu-riscv@nongnu.org; Tue, 19 Mar 2024 17:19:22 -0400
-Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c])
+ id 1rmgyX-0007Zq-Fk
+ for qemu-riscv@nongnu.org; Tue, 19 Mar 2024 17:26:25 -0400
+Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rmgrg-0000Od-Td
- for qemu-riscv@nongnu.org; Tue, 19 Mar 2024 17:19:22 -0400
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-29c14800a7fso4578339a91.2
- for <qemu-riscv@nongnu.org>; Tue, 19 Mar 2024 14:19:19 -0700 (PDT)
+ id 1rmgyV-0001q9-9f
+ for qemu-riscv@nongnu.org; Tue, 19 Mar 2024 17:26:25 -0400
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-6e780830bdcso162431b3a.1
+ for <qemu-riscv@nongnu.org>; Tue, 19 Mar 2024 14:26:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1710883159; x=1711487959; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1710883582; x=1711488382; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=dqAlH6Fo70PFLaz/p6ZNz1h3+ZDMSNjzyqePBQl/Z/w=;
- b=DWfOfkW9yNxB3s90WYu+y61UBgjr7CeMIQFAoIn2DQy07igi2OAWl6girlagYuyTY7
- hPl1g2FIm3pyTjkFx95vP1GF9H+C/+EPXIc9Tj2YtOwCph6GZDT3P4RIDE01iRx/UrUO
- V125eVf23mqt4dyXpGEC4yXkdjkdyyw8GmDaO/t60oVo6N1sa7DAvA61EGX5wlAZ8z42
- OcgWn1WpLXtfHH2UBYSQEjyMppi6O5nWibxKd9vdPpR3yuvfktRVFNgEVvGM9gUYdaZX
- j+YucbtJTLfbsQsZr28aAP5uSNOMcX0lbTU5hRC7VW6aurBNBKfWXRc2iqe5jZeupljI
- o5IA==
+ bh=TVAvmDIhpciLflBuRwbnPdYQ1vOHfHflpIuQkAt+cPE=;
+ b=NxtjUuD73Qa92/PGYVqzd7gaPdfy+KGVQgt3irb4pkcZnr7zaXgKw9ww/WziVDnvFa
+ rVhBMahFUbZFe8XSreThPjovWYOWlzJ9CiJPAwqWT9A1FcTE9ppl+Zi7hnxYuoV/WfGd
+ OsyRdvudIyoaPgLUP7AiLFisKSq2uzKa0iFjWe2gFLyTlIlPFX42g1xWp+eO1Lj2DvdH
+ vV5DU9Q6gtvQ6dSZyrI60iK/UreNLTHUvucoOJ+2VegVTvxV1xKMN+0VgetXEDnp0NzB
+ D2ShCM6OqhHtFLc2JDw6b5Z5vb4ZCIIDDeqKF83PKMMVIiHQACgnOGnaCNC8s5AHWjSL
+ +Cfg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710883159; x=1711487959;
+ d=1e100.net; s=20230601; t=1710883582; x=1711488382;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=dqAlH6Fo70PFLaz/p6ZNz1h3+ZDMSNjzyqePBQl/Z/w=;
- b=bdXI4XQ0GHrqedRRfoxWyXlVK41bRG7b5/UMZFyKt6psNjrH1KWLhNl/Fi2nenOF3p
- Xnti7O0iyvg37GEpVi0jPYBGqgZAeAfnq9ETAd2LxkgF7O1SwTNuVxHcChkWURmL4dFz
- /pBJd0HPoUIX4WYTCUfQwkOE5jZZ2sL1h0TC6XkqCp3J/iKONOjFaivW7InqrTUeYR4H
- C8UMRdDcR7P/swnxEnUZPdHeSkM1XG58KXzbqQmDz3cq2O0OJl8D2ozv76QJjJ+Jwm9/
- JHeRHWlnkJRBOV3SuKAsIDRkjJXr/GUKQI/0rjwxbp45emoiO4aupDlHkchB5iK/taF4
- Hmvw==
+ bh=TVAvmDIhpciLflBuRwbnPdYQ1vOHfHflpIuQkAt+cPE=;
+ b=Rqwzv+VKgHtO2pwN51zRhGj31HIlj7PjcoBTnbdGuXPV6iBDeITxC4idvFajmx8VBL
+ l+j5Rjcqmm9SIcXR4gI7DHWfVCQHG1y/FDfo3ujRIILNff9MyEi8syYc5ir8aRqG5Phh
+ bHbczWLFdQeNDCGV8N1sp23wMeJdmnVy8RKWV11jNSv3l0kMqGN20hMsh12zqm4NQNfH
+ ft7mcWxEvgrAG/mDkf8Aq0aAe4oETIY/TR34UbH3CVFdHyh+IrL1C3h6+K8k1wcQoGXd
+ yTdy5QRb5KSP9YkoXWNu7wuHt2I/9gNpR2qPvnwKVh03wKtiroIC250Xg+HCOTVtXybu
+ zagg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVsENf50Nq1zPcLKKZTjWg3dE67ijxq3aKH8RpRAoJr64aild24hEUDDtQkgn3gJD0PzRV4g/6jC1qpwAuLK/VZ/Wd9l+U=
-X-Gm-Message-State: AOJu0Yw+e7Yw5kUcUxrkbWuXvCiGvIuAmaS8R72LWTsBQf2bJ4fRrW3X
- +aWD385Y99OyG/X421fmRKmoh7YwRZ7BmTP5h3sEYphM1GCRXtssj97E6wPFC7Y=
-X-Google-Smtp-Source: AGHT+IE4k78QiIKnM+/uOw5LsAJMJhdOsokZ1b3J8qhY4LiZhlKg3ToLTOJxoN78rz2VgiuTggFDvg==
-X-Received: by 2002:a17:90a:4741:b0:29c:7537:afbc with SMTP id
- y1-20020a17090a474100b0029c7537afbcmr4023045pjg.31.1710883158803; 
- Tue, 19 Mar 2024 14:19:18 -0700 (PDT)
+ AJvYcCWJ01WS+y65zobYLoCKMULyMvEWAMm+pEHVyHyVk5NyUniEig9CIkvqJjt4DkcWy/eOAQur9/MWFdphYX3b8Ztedm+C32E=
+X-Gm-Message-State: AOJu0YxmRU9k0mJkXKz7opRhznPaAWBS6ScIGx14SKvPoF2Q+8u7VXb8
+ fY0u7veV4nPtrSx+/DgCuruPVl03VAoVYqbHgtyaMWi1h4vX1CehCobLIATeSWM=
+X-Google-Smtp-Source: AGHT+IGxzOLTw2JxHWwhFRZQys6gBfvBim6IA14uajfl3i6tX0YWB5Z9I1xBNEPCcnSa6KXhYpY95Q==
+X-Received: by 2002:a05:6a21:3390:b0:1a3:5b82:dd07 with SMTP id
+ yy16-20020a056a21339000b001a35b82dd07mr945747pzb.8.1710883581754; 
+ Tue, 19 Mar 2024 14:26:21 -0700 (PDT)
 Received: from [192.168.68.110] ([177.94.15.159])
  by smtp.gmail.com with ESMTPSA id
- gb8-20020a17090b060800b0029b2e5bc1b9sm14611pjb.23.2024.03.19.14.19.15
+ b30-20020aa78ede000000b006e6ca46cfe7sm4054145pfr.12.2024.03.19.14.26.17
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 19 Mar 2024 14:19:18 -0700 (PDT)
-Message-ID: <16f08a8d-ba5b-430a-9276-2bf2f1b0d24d@ventanamicro.com>
-Date: Tue, 19 Mar 2024 18:19:13 -0300
+ Tue, 19 Mar 2024 14:26:21 -0700 (PDT)
+Message-ID: <d1d9a3b9-3c43-4cde-8aab-abb48fdd50ad@ventanamicro.com>
+Date: Tue, 19 Mar 2024 18:26:16 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/5] target/riscv: Add support for Zve32x extension
+Subject: Re: [PATCH-for-9.1 19/27] target/riscv: Convert to
+ TCGCPUOps::get_cpu_state()
 Content-Language: en-US
-To: Jason Chien <jason.chien@sifive.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: Frank Chang <frank.chang@sifive.com>, Max Chou <max.chou@sifive.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: qemu-s390x@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
+ qemu-ppc@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
+ Anton Johansson <anjo@rev.ng>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Andrew Jones <ajones@ventanamicro.com>
-References: <20240306170855.24341-1-jason.chien@sifive.com>
- <20240306170855.24341-2-jason.chien@sifive.com>
- <CADr__8qWMHnBVnCqiEAekWj6JAkvpS6cuMmo8E8rfuRLFKCDcA@mail.gmail.com>
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+References: <20240319154258.71206-1-philmd@linaro.org>
+ <20240319154258.71206-20-philmd@linaro.org>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <CADr__8qWMHnBVnCqiEAekWj6JAkvpS6cuMmo8E8rfuRLFKCDcA@mail.gmail.com>
+In-Reply-To: <20240319154258.71206-20-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x102c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x42d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -106,145 +105,280 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Jason,
-
-Care to re-send please? The patches don't apply to neither riscv-to-apply.next
-nor master.
 
 
-Thanks,
+On 3/19/24 12:42, Philippe Mathieu-Daudé wrote:
+> Convert cpu_get_tb_cpu_state() to TCGCPUOps::get_cpu_state().
+> 
+> Note, now riscv_get_cpu_state() is restricted to TCG, and
+> is declared with static scope.
+> 
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> ---
 
-Daniel
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-On 3/19/24 13:23, Jason Chien wrote:
-> Ping. Can anyone review the patches please?
+
+>   target/riscv/cpu.h                      |  3 -
+>   target/riscv/cpu.c                      |  2 +-
+>   target/riscv/cpu_helper.c               | 87 ------------------------
+>   target/riscv/tcg/tcg-cpu.c              | 88 +++++++++++++++++++++++++
+>   target/riscv/insn_trans/trans_rvv.c.inc |  2 +-
+>   5 files changed, 90 insertions(+), 92 deletions(-)
 > 
-> Jason Chien <jason.chien@sifive.com <mailto:jason.chien@sifive.com>> 於 2024年3月7日 週四 上午1:09寫道：
-> 
->     Add support for Zve32x extension and replace some checks for Zve32f with
->     Zve32x, since Zve32f depends on Zve32x.
-> 
->     Signed-off-by: Jason Chien <jason.chien@sifive.com <mailto:jason.chien@sifive.com>>
->     Reviewed-by: Frank Chang <frank.chang@sifive.com <mailto:frank.chang@sifive.com>>
->     Reviewed-by: Max Chou <max.chou@sifive.com <mailto:max.chou@sifive.com>>
->     ---
->       target/riscv/cpu.c                      |  1 +
->       target/riscv/cpu_cfg.h                  |  1 +
->       target/riscv/cpu_helper.c               |  2 +-
->       target/riscv/csr.c                      |  2 +-
->       target/riscv/insn_trans/trans_rvv.c.inc |  4 ++--
->       target/riscv/tcg/tcg-cpu.c              | 16 ++++++++--------
->       6 files changed, 14 insertions(+), 12 deletions(-)
-> 
->     diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->     index fd0c7efdda..10ccae3323 100644
->     --- a/target/riscv/cpu.c
->     +++ b/target/riscv/cpu.c
->     @@ -152,6 +152,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
->           ISA_EXT_DATA_ENTRY(zvbb, PRIV_VERSION_1_12_0, ext_zvbb),
->           ISA_EXT_DATA_ENTRY(zvbc, PRIV_VERSION_1_12_0, ext_zvbc),
->           ISA_EXT_DATA_ENTRY(zve32f, PRIV_VERSION_1_10_0, ext_zve32f),
->     +    ISA_EXT_DATA_ENTRY(zve32x, PRIV_VERSION_1_10_0, ext_zve32x),
->           ISA_EXT_DATA_ENTRY(zve64f, PRIV_VERSION_1_10_0, ext_zve64f),
->           ISA_EXT_DATA_ENTRY(zve64d, PRIV_VERSION_1_10_0, ext_zve64d),
->           ISA_EXT_DATA_ENTRY(zvfbfmin, PRIV_VERSION_1_12_0, ext_zvfbfmin),
->     diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
->     index be39870691..beb3d10213 100644
->     --- a/target/riscv/cpu_cfg.h
->     +++ b/target/riscv/cpu_cfg.h
->     @@ -90,6 +90,7 @@ struct RISCVCPUConfig {
->           bool ext_zhinx;
->           bool ext_zhinxmin;
->           bool ext_zve32f;
->     +    bool ext_zve32x;
->           bool ext_zve64f;
->           bool ext_zve64d;
->           bool ext_zvbb;
->     diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
->     index c994a72634..ebbe56d9a2 100644
->     --- a/target/riscv/cpu_helper.c
->     +++ b/target/riscv/cpu_helper.c
->     @@ -72,7 +72,7 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
->           *pc = env->xl == MXL_RV32 ? env->pc & UINT32_MAX : env->pc;
->           *cs_base = 0;
-> 
->     -    if (cpu->cfg.ext_zve32f) {
->     +    if (cpu->cfg.ext_zve32x) {
->               /*
->                * If env->vl equals to VLMAX, we can use generic vector operation
->                * expanders (GVEC) to accerlate the vector operations.
->     diff --git a/target/riscv/csr.c b/target/riscv/csr.c
->     index 726096444f..d96feea5d3 100644
->     --- a/target/riscv/csr.c
->     +++ b/target/riscv/csr.c
->     @@ -93,7 +93,7 @@ static RISCVException fs(CPURISCVState *env, int csrno)
-> 
->       static RISCVException vs(CPURISCVState *env, int csrno)
->       {
->     -    if (riscv_cpu_cfg(env)->ext_zve32f) {
->     +    if (riscv_cpu_cfg(env)->ext_zve32x) {
->       #if !defined(CONFIG_USER_ONLY)
->               if (!env->debugger && !riscv_cpu_vector_enabled(env)) {
->                   return RISCV_EXCP_ILLEGAL_INST;
->     diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
->     index 9e101ab434..f00f1ee886 100644
->     --- a/target/riscv/insn_trans/trans_rvv.c.inc
->     +++ b/target/riscv/insn_trans/trans_rvv.c.inc
->     @@ -149,7 +149,7 @@ static bool do_vsetvl(DisasContext *s, int rd, int rs1, TCGv s2)
->       {
->           TCGv s1, dst;
-> 
->     -    if (!require_rvv(s) || !s->cfg_ptr->ext_zve32f) {
->     +    if (!require_rvv(s) || !s->cfg_ptr->ext_zve32x) {
->               return false;
->           }
-> 
->     @@ -179,7 +179,7 @@ static bool do_vsetivli(DisasContext *s, int rd, TCGv s1, TCGv s2)
->       {
->           TCGv dst;
-> 
->     -    if (!require_rvv(s) || !s->cfg_ptr->ext_zve32f) {
->     +    if (!require_rvv(s) || !s->cfg_ptr->ext_zve32x) {
->               return false;
->           }
-> 
->     diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
->     index ab6db817db..ce539528e6 100644
->     --- a/target/riscv/tcg/tcg-cpu.c
->     +++ b/target/riscv/tcg/tcg-cpu.c
->     @@ -501,9 +501,13 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
->               return;
->           }
-> 
->     -    if (cpu->cfg.ext_zve32f && !riscv_has_ext(env, RVF)) {
->     -        error_setg(errp, "Zve32f/Zve64f extensions require F extension");
->     -        return;
->     +    /* The Zve32f extension depends on the Zve32x extension */
->     +    if (cpu->cfg.ext_zve32f) {
->     +        if (!riscv_has_ext(env, RVF)) {
->     +            error_setg(errp, "Zve32f/Zve64f extensions require F extension");
->     +            return;
->     +        }
->     +        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zve32x), true);
->           }
-> 
->           if (cpu->cfg.ext_zvfh) {
->     @@ -653,13 +657,9 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
->               cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvbc), true);
->           }
-> 
->     -    /*
->     -     * In principle Zve*x would also suffice here, were they supported
->     -     * in qemu
->     -     */
->           if ((cpu->cfg.ext_zvbb || cpu->cfg.ext_zvkb || cpu->cfg.ext_zvkg ||
->                cpu->cfg.ext_zvkned || cpu->cfg.ext_zvknha || cpu->cfg.ext_zvksed ||
->     -         cpu->cfg.ext_zvksh) && !cpu->cfg.ext_zve32f) {
->     +         cpu->cfg.ext_zvksh) && !cpu->cfg.ext_zve32x) {
->               error_setg(errp,
->                          "Vector crypto extensions require V or Zve* extensions");
->               return;
->     -- 
->     2.43.2
-> 
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 3b1a02b944..d00d1be235 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -704,9 +704,6 @@ static inline uint32_t vext_get_vlmax(uint32_t vlenb, uint32_t vsew,
+>       return vlen >> (vsew + 3 - lmul);
+>   }
+>   
+> -void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
+> -                          uint64_t *cs_base, uint32_t *pflags);
+> -
+>   void riscv_cpu_update_mask(CPURISCVState *env);
+>   bool riscv_cpu_is_32bit(RISCVCPU *cpu);
+>   
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index c160b9216b..ca537d0e0a 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -889,7 +889,7 @@ static vaddr riscv_cpu_get_pc(CPUState *cs)
+>       RISCVCPU *cpu = RISCV_CPU(cs);
+>       CPURISCVState *env = &cpu->env;
+>   
+> -    /* Match cpu_get_tb_cpu_state. */
+> +    /* Match riscv_get_cpu_state. */
+>       if (env->xl == MXL_RV32) {
+>           return env->pc & UINT32_MAX;
+>       }
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index ce7322011d..e18a269358 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -25,7 +25,6 @@
+>   #include "pmu.h"
+>   #include "exec/exec-all.h"
+>   #include "instmap.h"
+> -#include "tcg/tcg-op.h"
+>   #include "trace.h"
+>   #include "semihosting/common-semi.h"
+>   #include "sysemu/cpu-timers.h"
+> @@ -62,92 +61,6 @@ int riscv_env_mmu_index(CPURISCVState *env, bool ifetch)
+>   #endif
+>   }
+>   
+> -void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
+> -                          uint64_t *cs_base, uint32_t *pflags)
+> -{
+> -    RISCVCPU *cpu = env_archcpu(env);
+> -    RISCVExtStatus fs, vs;
+> -    uint32_t flags = 0;
+> -
+> -    *pc = env->xl == MXL_RV32 ? env->pc & UINT32_MAX : env->pc;
+> -    *cs_base = 0;
+> -
+> -    if (cpu->cfg.ext_zve32f) {
+> -        /*
+> -         * If env->vl equals to VLMAX, we can use generic vector operation
+> -         * expanders (GVEC) to accerlate the vector operations.
+> -         * However, as LMUL could be a fractional number. The maximum
+> -         * vector size can be operated might be less than 8 bytes,
+> -         * which is not supported by GVEC. So we set vl_eq_vlmax flag to true
+> -         * only when maxsz >= 8 bytes.
+> -         */
+> -
+> -        /* lmul encoded as in DisasContext::lmul */
+> -        int8_t lmul = sextract32(FIELD_EX64(env->vtype, VTYPE, VLMUL), 0, 3);
+> -        uint32_t vsew = FIELD_EX64(env->vtype, VTYPE, VSEW);
+> -        uint32_t vlmax = vext_get_vlmax(cpu->cfg.vlenb, vsew, lmul);
+> -        uint32_t maxsz = vlmax << vsew;
+> -        bool vl_eq_vlmax = (env->vstart == 0) && (vlmax == env->vl) &&
+> -                           (maxsz >= 8);
+> -        flags = FIELD_DP32(flags, TB_FLAGS, VILL, env->vill);
+> -        flags = FIELD_DP32(flags, TB_FLAGS, SEW, vsew);
+> -        flags = FIELD_DP32(flags, TB_FLAGS, LMUL,
+> -                           FIELD_EX64(env->vtype, VTYPE, VLMUL));
+> -        flags = FIELD_DP32(flags, TB_FLAGS, VL_EQ_VLMAX, vl_eq_vlmax);
+> -        flags = FIELD_DP32(flags, TB_FLAGS, VTA,
+> -                           FIELD_EX64(env->vtype, VTYPE, VTA));
+> -        flags = FIELD_DP32(flags, TB_FLAGS, VMA,
+> -                           FIELD_EX64(env->vtype, VTYPE, VMA));
+> -        flags = FIELD_DP32(flags, TB_FLAGS, VSTART_EQ_ZERO, env->vstart == 0);
+> -    } else {
+> -        flags = FIELD_DP32(flags, TB_FLAGS, VILL, 1);
+> -    }
+> -
+> -#ifdef CONFIG_USER_ONLY
+> -    fs = EXT_STATUS_DIRTY;
+> -    vs = EXT_STATUS_DIRTY;
+> -#else
+> -    flags = FIELD_DP32(flags, TB_FLAGS, PRIV, env->priv);
+> -
+> -    flags |= riscv_env_mmu_index(env, 0);
+> -    fs = get_field(env->mstatus, MSTATUS_FS);
+> -    vs = get_field(env->mstatus, MSTATUS_VS);
+> -
+> -    if (env->virt_enabled) {
+> -        flags = FIELD_DP32(flags, TB_FLAGS, VIRT_ENABLED, 1);
+> -        /*
+> -         * Merge DISABLED and !DIRTY states using MIN.
+> -         * We will set both fields when dirtying.
+> -         */
+> -        fs = MIN(fs, get_field(env->mstatus_hs, MSTATUS_FS));
+> -        vs = MIN(vs, get_field(env->mstatus_hs, MSTATUS_VS));
+> -    }
+> -
+> -    /* With Zfinx, floating point is enabled/disabled by Smstateen. */
+> -    if (!riscv_has_ext(env, RVF)) {
+> -        fs = (smstateen_acc_ok(env, 0, SMSTATEEN0_FCSR) == RISCV_EXCP_NONE)
+> -             ? EXT_STATUS_DIRTY : EXT_STATUS_DISABLED;
+> -    }
+> -
+> -    if (cpu->cfg.debug && !icount_enabled()) {
+> -        flags = FIELD_DP32(flags, TB_FLAGS, ITRIGGER, env->itrigger_enabled);
+> -    }
+> -#endif
+> -
+> -    flags = FIELD_DP32(flags, TB_FLAGS, FS, fs);
+> -    flags = FIELD_DP32(flags, TB_FLAGS, VS, vs);
+> -    flags = FIELD_DP32(flags, TB_FLAGS, XL, env->xl);
+> -    flags = FIELD_DP32(flags, TB_FLAGS, AXL, cpu_address_xl(env));
+> -    if (env->cur_pmmask != 0) {
+> -        flags = FIELD_DP32(flags, TB_FLAGS, PM_MASK_ENABLED, 1);
+> -    }
+> -    if (env->cur_pmbase != 0) {
+> -        flags = FIELD_DP32(flags, TB_FLAGS, PM_BASE_ENABLED, 1);
+> -    }
+> -
+> -    *pflags = flags;
+> -}
+> -
+>   void riscv_cpu_update_mask(CPURISCVState *env)
+>   {
+>       target_ulong mask = 0, base = 0;
+> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+> index ab6db817db..934007673e 100644
+> --- a/target/riscv/tcg/tcg-cpu.c
+> +++ b/target/riscv/tcg/tcg-cpu.c
+> @@ -31,6 +31,7 @@
+>   #include "hw/core/accel-cpu.h"
+>   #include "hw/core/tcg-cpu-ops.h"
+>   #include "tcg/tcg.h"
+> +#include "sysemu/cpu-timers.h"
+>   
+>   /* Hash that stores user set extensions */
+>   static GHashTable *multi_ext_user_opts;
+> @@ -129,10 +130,97 @@ static void riscv_restore_state_to_opc(CPUState *cs,
+>       env->bins = data[1];
+>   }
+>   
+> +static void riscv_get_cpu_state(CPURISCVState *env, vaddr *pc,
+> +                                uint64_t *cs_base, uint32_t *pflags)
+> +{
+> +    RISCVCPU *cpu = env_archcpu(env);
+> +    RISCVExtStatus fs, vs;
+> +    uint32_t flags = 0;
+> +
+> +    *pc = env->xl == MXL_RV32 ? env->pc & UINT32_MAX : env->pc;
+> +    *cs_base = 0;
+> +
+> +    if (cpu->cfg.ext_zve32f) {
+> +        /*
+> +         * If env->vl equals to VLMAX, we can use generic vector operation
+> +         * expanders (GVEC) to accerlate the vector operations.
+> +         * However, as LMUL could be a fractional number. The maximum
+> +         * vector size can be operated might be less than 8 bytes,
+> +         * which is not supported by GVEC. So we set vl_eq_vlmax flag to true
+> +         * only when maxsz >= 8 bytes.
+> +         */
+> +
+> +        /* lmul encoded as in DisasContext::lmul */
+> +        int8_t lmul = sextract32(FIELD_EX64(env->vtype, VTYPE, VLMUL), 0, 3);
+> +        uint32_t vsew = FIELD_EX64(env->vtype, VTYPE, VSEW);
+> +        uint32_t vlmax = vext_get_vlmax(cpu->cfg.vlenb, vsew, lmul);
+> +        uint32_t maxsz = vlmax << vsew;
+> +        bool vl_eq_vlmax = (env->vstart == 0) && (vlmax == env->vl) &&
+> +                           (maxsz >= 8);
+> +        flags = FIELD_DP32(flags, TB_FLAGS, VILL, env->vill);
+> +        flags = FIELD_DP32(flags, TB_FLAGS, SEW, vsew);
+> +        flags = FIELD_DP32(flags, TB_FLAGS, LMUL,
+> +                           FIELD_EX64(env->vtype, VTYPE, VLMUL));
+> +        flags = FIELD_DP32(flags, TB_FLAGS, VL_EQ_VLMAX, vl_eq_vlmax);
+> +        flags = FIELD_DP32(flags, TB_FLAGS, VTA,
+> +                           FIELD_EX64(env->vtype, VTYPE, VTA));
+> +        flags = FIELD_DP32(flags, TB_FLAGS, VMA,
+> +                           FIELD_EX64(env->vtype, VTYPE, VMA));
+> +        flags = FIELD_DP32(flags, TB_FLAGS, VSTART_EQ_ZERO, env->vstart == 0);
+> +    } else {
+> +        flags = FIELD_DP32(flags, TB_FLAGS, VILL, 1);
+> +    }
+> +
+> +#ifdef CONFIG_USER_ONLY
+> +    fs = EXT_STATUS_DIRTY;
+> +    vs = EXT_STATUS_DIRTY;
+> +#else
+> +    flags = FIELD_DP32(flags, TB_FLAGS, PRIV, env->priv);
+> +
+> +    flags |= riscv_env_mmu_index(env, 0);
+> +    fs = get_field(env->mstatus, MSTATUS_FS);
+> +    vs = get_field(env->mstatus, MSTATUS_VS);
+> +
+> +    if (env->virt_enabled) {
+> +        flags = FIELD_DP32(flags, TB_FLAGS, VIRT_ENABLED, 1);
+> +        /*
+> +         * Merge DISABLED and !DIRTY states using MIN.
+> +         * We will set both fields when dirtying.
+> +         */
+> +        fs = MIN(fs, get_field(env->mstatus_hs, MSTATUS_FS));
+> +        vs = MIN(vs, get_field(env->mstatus_hs, MSTATUS_VS));
+> +    }
+> +
+> +    /* With Zfinx, floating point is enabled/disabled by Smstateen. */
+> +    if (!riscv_has_ext(env, RVF)) {
+> +        fs = (smstateen_acc_ok(env, 0, SMSTATEEN0_FCSR) == RISCV_EXCP_NONE)
+> +             ? EXT_STATUS_DIRTY : EXT_STATUS_DISABLED;
+> +    }
+> +
+> +    if (cpu->cfg.debug && !icount_enabled()) {
+> +        flags = FIELD_DP32(flags, TB_FLAGS, ITRIGGER, env->itrigger_enabled);
+> +    }
+> +#endif
+> +
+> +    flags = FIELD_DP32(flags, TB_FLAGS, FS, fs);
+> +    flags = FIELD_DP32(flags, TB_FLAGS, VS, vs);
+> +    flags = FIELD_DP32(flags, TB_FLAGS, XL, env->xl);
+> +    flags = FIELD_DP32(flags, TB_FLAGS, AXL, cpu_address_xl(env));
+> +    if (env->cur_pmmask != 0) {
+> +        flags = FIELD_DP32(flags, TB_FLAGS, PM_MASK_ENABLED, 1);
+> +    }
+> +    if (env->cur_pmbase != 0) {
+> +        flags = FIELD_DP32(flags, TB_FLAGS, PM_BASE_ENABLED, 1);
+> +    }
+> +
+> +    *pflags = flags;
+> +}
+> +
+>   static const TCGCPUOps riscv_tcg_ops = {
+>       .initialize = riscv_translate_init,
+>       .synchronize_from_tb = riscv_cpu_synchronize_from_tb,
+>       .restore_state_to_opc = riscv_restore_state_to_opc,
+> +    .get_cpu_state = riscv_get_cpu_state,
+>   
+>   #ifndef CONFIG_USER_ONLY
+>       .tlb_fill = riscv_cpu_tlb_fill,
+> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+> index e42728990e..3c16c4852b 100644
+> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+> @@ -578,7 +578,7 @@ static bool vext_check_slide(DisasContext *s, int vd, int vs2,
+>   }
+>   
+>   /*
+> - * In cpu_get_tb_cpu_state(), set VILL if RVV was not present.
+> + * In riscv_get_cpu_state(), set VILL if RVV was not present.
+>    * So RVV is also be checked in this function.
+>    */
+>   static bool vext_check_isa_ill(DisasContext *s)
 
