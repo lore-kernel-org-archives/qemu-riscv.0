@@ -4,85 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7961AC54E68
-	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Mar 2024 21:26:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3837FC54E68
+	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Mar 2024 21:38:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rmgyY-0007aZ-JQ; Tue, 19 Mar 2024 17:26:26 -0400
+	id 1rmh9M-00032h-9u; Tue, 19 Mar 2024 17:37:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rmgyX-0007Zq-Fk
- for qemu-riscv@nongnu.org; Tue, 19 Mar 2024 17:26:25 -0400
-Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
+ id 1rmh9K-00032X-Ld
+ for qemu-riscv@nongnu.org; Tue, 19 Mar 2024 17:37:34 -0400
+Received: from mail-pf1-x431.google.com ([2607:f8b0:4864:20::431])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rmgyV-0001q9-9f
- for qemu-riscv@nongnu.org; Tue, 19 Mar 2024 17:26:25 -0400
-Received: by mail-pf1-x42d.google.com with SMTP id
- d2e1a72fcca58-6e780830bdcso162431b3a.1
- for <qemu-riscv@nongnu.org>; Tue, 19 Mar 2024 14:26:22 -0700 (PDT)
+ id 1rmh9G-0003aA-JU
+ for qemu-riscv@nongnu.org; Tue, 19 Mar 2024 17:37:34 -0400
+Received: by mail-pf1-x431.google.com with SMTP id
+ d2e1a72fcca58-6e6aaa2f02cso4635393b3a.2
+ for <qemu-riscv@nongnu.org>; Tue, 19 Mar 2024 14:37:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1710883582; x=1711488382; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1710884247; x=1711489047; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=TVAvmDIhpciLflBuRwbnPdYQ1vOHfHflpIuQkAt+cPE=;
- b=NxtjUuD73Qa92/PGYVqzd7gaPdfy+KGVQgt3irb4pkcZnr7zaXgKw9ww/WziVDnvFa
- rVhBMahFUbZFe8XSreThPjovWYOWlzJ9CiJPAwqWT9A1FcTE9ppl+Zi7hnxYuoV/WfGd
- OsyRdvudIyoaPgLUP7AiLFisKSq2uzKa0iFjWe2gFLyTlIlPFX42g1xWp+eO1Lj2DvdH
- vV5DU9Q6gtvQ6dSZyrI60iK/UreNLTHUvucoOJ+2VegVTvxV1xKMN+0VgetXEDnp0NzB
- D2ShCM6OqhHtFLc2JDw6b5Z5vb4ZCIIDDeqKF83PKMMVIiHQACgnOGnaCNC8s5AHWjSL
- +Cfg==
+ bh=yofT0aKm02HD1ZH2AGkXXU3Lf6fZpLz3/Ha15hJDBI0=;
+ b=MsK09cSM3neLFVVfLuK2g4MtD4gHFONQfWsp+ZcpHyLEQfbo80vpECNRimKiRo1Sg8
+ 8+eWXuH4k55ZoNpAbtkrxWF8WgO/gb8Q/yJtIcY6S8WCP6vbH/RnpOyBCykAeK+NFNeV
+ tm1EO68GItwMMWt3MlGhfIt2xIid4IogfbcIYTuoYPm632xCZ7jmK3cwVN0tPZPG2PIF
+ sneSp2SVpfuCREYYacgPzuF79ci8/qAzEsck/4teHWSXYTu3yebH13NrwvxMgW+pj+CI
+ yWZRGaI3XHLYzAJoQSuPJUG1HklsUqQmx6dkxiXYPDsSSEE+um34zo+EWwEg/xiWMVFt
+ u5Uw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710883582; x=1711488382;
+ d=1e100.net; s=20230601; t=1710884247; x=1711489047;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=TVAvmDIhpciLflBuRwbnPdYQ1vOHfHflpIuQkAt+cPE=;
- b=Rqwzv+VKgHtO2pwN51zRhGj31HIlj7PjcoBTnbdGuXPV6iBDeITxC4idvFajmx8VBL
- l+j5Rjcqmm9SIcXR4gI7DHWfVCQHG1y/FDfo3ujRIILNff9MyEi8syYc5ir8aRqG5Phh
- bHbczWLFdQeNDCGV8N1sp23wMeJdmnVy8RKWV11jNSv3l0kMqGN20hMsh12zqm4NQNfH
- ft7mcWxEvgrAG/mDkf8Aq0aAe4oETIY/TR34UbH3CVFdHyh+IrL1C3h6+K8k1wcQoGXd
- yTdy5QRb5KSP9YkoXWNu7wuHt2I/9gNpR2qPvnwKVh03wKtiroIC250Xg+HCOTVtXybu
- zagg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWJ01WS+y65zobYLoCKMULyMvEWAMm+pEHVyHyVk5NyUniEig9CIkvqJjt4DkcWy/eOAQur9/MWFdphYX3b8Ztedm+C32E=
-X-Gm-Message-State: AOJu0YxmRU9k0mJkXKz7opRhznPaAWBS6ScIGx14SKvPoF2Q+8u7VXb8
- fY0u7veV4nPtrSx+/DgCuruPVl03VAoVYqbHgtyaMWi1h4vX1CehCobLIATeSWM=
-X-Google-Smtp-Source: AGHT+IGxzOLTw2JxHWwhFRZQys6gBfvBim6IA14uajfl3i6tX0YWB5Z9I1xBNEPCcnSa6KXhYpY95Q==
-X-Received: by 2002:a05:6a21:3390:b0:1a3:5b82:dd07 with SMTP id
- yy16-20020a056a21339000b001a35b82dd07mr945747pzb.8.1710883581754; 
- Tue, 19 Mar 2024 14:26:21 -0700 (PDT)
+ bh=yofT0aKm02HD1ZH2AGkXXU3Lf6fZpLz3/Ha15hJDBI0=;
+ b=ohFo4V7Sx67aJ2XkL0I5LGcoL+Kdk6088JTz6FhqOdPKn2KyBUP9Edl4BFDpRkhnNC
+ 46/Fvvs3tOn30nUDOIXwGg4TT7boGTOzu2dgOG1c7hZEyAu0nJ/Pdbh/Xx/do6Y/4kw1
+ PODKNIVzwM4+UENAC29BJdfwfdDsmFKxopSClXsMvqhH2st19Q5cvwEpZCgLwCUC4sSF
+ oFYxh3kWdV4cTwBvl6EsSmytPF7gGetph61wQ71cYzQ5XkCcHlbFOcw4QPSZqUnWbc/H
+ DX4Io7V7lZkpyZpmm83tze7irlXVDbAlwr0MSSsIqb5l84C+F4Go13xD2vCPqelm6T7T
+ idCA==
+X-Gm-Message-State: AOJu0Ywb0bauOfKrkoTcdhPb0bSTYnHdQfrtjVapW4vgxvVsKVe/MD14
+ vksfQ0oGVSJgFm2yJx6nFXW3XvyrH2awPMi8mCc8baTwiDR57Idli2SsxetZ4rkuiG4NarLvqVA
+ u
+X-Google-Smtp-Source: AGHT+IFYOpN5Q78XEkqsKTdh8AcI0XYrJrwiuJKABMzZM+nF0/aRsiDk1rqN0bBGaR74LyX6yLF1dQ==
+X-Received: by 2002:a05:6a20:12c3:b0:1a3:5fb7:42b5 with SMTP id
+ v3-20020a056a2012c300b001a35fb742b5mr325109pzg.16.1710884247060; 
+ Tue, 19 Mar 2024 14:37:27 -0700 (PDT)
 Received: from [192.168.68.110] ([177.94.15.159])
  by smtp.gmail.com with ESMTPSA id
- b30-20020aa78ede000000b006e6ca46cfe7sm4054145pfr.12.2024.03.19.14.26.17
+ r19-20020a63fc53000000b005e83b3ce8d9sm5809822pgk.8.2024.03.19.14.37.24
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 19 Mar 2024 14:26:21 -0700 (PDT)
-Message-ID: <d1d9a3b9-3c43-4cde-8aab-abb48fdd50ad@ventanamicro.com>
-Date: Tue, 19 Mar 2024 18:26:16 -0300
+ Tue, 19 Mar 2024 14:37:26 -0700 (PDT)
+Message-ID: <c4e3deed-ab91-4ae7-90c7-58c0527086ee@ventanamicro.com>
+Date: Tue, 19 Mar 2024 18:37:22 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH-for-9.1 19/27] target/riscv: Convert to
- TCGCPUOps::get_cpu_state()
+Subject: Re: [PATCH 1/4] target/riscv: Rename vext_set_elems_1s function
 Content-Language: en-US
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org
-Cc: qemu-s390x@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
- qemu-ppc@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
- Anton Johansson <anjo@rev.ng>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-References: <20240319154258.71206-1-philmd@linaro.org>
- <20240319154258.71206-20-philmd@linaro.org>
+To: Huang Tao <eric.huang@linux.alibaba.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, zhiwei_liu@linux.alibaba.com, liwei1518@gmail.com, 
+ bin.meng@windriver.com, alistair.francis@wdc.com, palmer@dabbelt.com
+References: <20240306092013.21231-1-eric.huang@linux.alibaba.com>
+ <20240306092013.21231-2-eric.huang@linux.alibaba.com>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240319154258.71206-20-philmd@linaro.org>
+In-Reply-To: <20240306092013.21231-2-eric.huang@linux.alibaba.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x42d.google.com
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::431;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x431.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -107,278 +100,663 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 3/19/24 12:42, Philippe Mathieu-Daudé wrote:
-> Convert cpu_get_tb_cpu_state() to TCGCPUOps::get_cpu_state().
+On 3/6/24 06:20, Huang Tao wrote:
+> In RVV and vcrypto instructions, the masked and tail elements are set to 1s
+> using vext_set_elems_1s function if the vma/vta bit is set. It is the element
+> agnostic policy.
 > 
-> Note, now riscv_get_cpu_state() is restricted to TCG, and
-> is declared with static scope.
+> However, this function can't deal the big endian situation. We rename the
+> function, adding '_le' to the end of the name, to indicate that it only
+> suits little endian situation.
 > 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> Signed-off-by: Huang Tao <eric.huang@linux.alibaba.com>
 > ---
+
+Given that this is a temporary change (vext_set_elems_1s_le is removed later) it's
+ok to not bother with the macro identations.
+
 
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-
->   target/riscv/cpu.h                      |  3 -
->   target/riscv/cpu.c                      |  2 +-
->   target/riscv/cpu_helper.c               | 87 ------------------------
->   target/riscv/tcg/tcg-cpu.c              | 88 +++++++++++++++++++++++++
->   target/riscv/insn_trans/trans_rvv.c.inc |  2 +-
->   5 files changed, 90 insertions(+), 92 deletions(-)
+>   target/riscv/vcrypto_helper.c   | 32 ++++++------
+>   target/riscv/vector_helper.c    | 92 ++++++++++++++++-----------------
+>   target/riscv/vector_internals.c | 10 ++--
+>   target/riscv/vector_internals.h |  6 +--
+>   4 files changed, 70 insertions(+), 70 deletions(-)
 > 
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 3b1a02b944..d00d1be235 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -704,9 +704,6 @@ static inline uint32_t vext_get_vlmax(uint32_t vlenb, uint32_t vsew,
->       return vlen >> (vsew + 3 - lmul);
->   }
->   
-> -void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
-> -                          uint64_t *cs_base, uint32_t *pflags);
-> -
->   void riscv_cpu_update_mask(CPURISCVState *env);
->   bool riscv_cpu_is_32bit(RISCVCPU *cpu);
->   
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index c160b9216b..ca537d0e0a 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -889,7 +889,7 @@ static vaddr riscv_cpu_get_pc(CPUState *cs)
->       RISCVCPU *cpu = RISCV_CPU(cs);
->       CPURISCVState *env = &cpu->env;
->   
-> -    /* Match cpu_get_tb_cpu_state. */
-> +    /* Match riscv_get_cpu_state. */
->       if (env->xl == MXL_RV32) {
->           return env->pc & UINT32_MAX;
+> diff --git a/target/riscv/vcrypto_helper.c b/target/riscv/vcrypto_helper.c
+> index e2d719b13b..f818749a63 100644
+> --- a/target/riscv/vcrypto_helper.c
+> +++ b/target/riscv/vcrypto_helper.c
+> @@ -235,7 +235,7 @@ static inline void xor_round_key(AESState *round_state, AESState *round_key)
+>           }                                                                 \
+>           env->vstart = 0;                                                  \
+>           /* set tail elements to 1s */                                     \
+> -        vext_set_elems_1s(vd, vta, vl * 4, total_elems * 4);              \
+> +        vext_set_elems_1s_le(vd, vta, vl * 4, total_elems * 4);              \
 >       }
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index ce7322011d..e18a269358 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -25,7 +25,6 @@
->   #include "pmu.h"
->   #include "exec/exec-all.h"
->   #include "instmap.h"
-> -#include "tcg/tcg-op.h"
->   #include "trace.h"
->   #include "semihosting/common-semi.h"
->   #include "sysemu/cpu-timers.h"
-> @@ -62,92 +61,6 @@ int riscv_env_mmu_index(CPURISCVState *env, bool ifetch)
->   #endif
+>   
+>   #define GEN_ZVKNED_HELPER_VS(NAME, ...)                                   \
+> @@ -259,7 +259,7 @@ static inline void xor_round_key(AESState *round_state, AESState *round_key)
+>           }                                                                 \
+>           env->vstart = 0;                                                  \
+>           /* set tail elements to 1s */                                     \
+> -        vext_set_elems_1s(vd, vta, vl * 4, total_elems * 4);              \
+> +        vext_set_elems_1s_le(vd, vta, vl * 4, total_elems * 4);              \
+>       }
+>   
+>   GEN_ZVKNED_HELPER_VV(vaesef_vv, aesenc_SB_SR_AK(&round_state,
+> @@ -339,7 +339,7 @@ void HELPER(vaeskf1_vi)(void *vd_vptr, void *vs2_vptr, uint32_t uimm,
+>       }
+>       env->vstart = 0;
+>       /* set tail elements to 1s */
+> -    vext_set_elems_1s(vd, vta, vl * 4, total_elems * 4);
+> +    vext_set_elems_1s_le(vd, vta, vl * 4, total_elems * 4);
 >   }
 >   
-> -void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
-> -                          uint64_t *cs_base, uint32_t *pflags)
-> -{
-> -    RISCVCPU *cpu = env_archcpu(env);
-> -    RISCVExtStatus fs, vs;
-> -    uint32_t flags = 0;
-> -
-> -    *pc = env->xl == MXL_RV32 ? env->pc & UINT32_MAX : env->pc;
-> -    *cs_base = 0;
-> -
-> -    if (cpu->cfg.ext_zve32f) {
-> -        /*
-> -         * If env->vl equals to VLMAX, we can use generic vector operation
-> -         * expanders (GVEC) to accerlate the vector operations.
-> -         * However, as LMUL could be a fractional number. The maximum
-> -         * vector size can be operated might be less than 8 bytes,
-> -         * which is not supported by GVEC. So we set vl_eq_vlmax flag to true
-> -         * only when maxsz >= 8 bytes.
-> -         */
-> -
-> -        /* lmul encoded as in DisasContext::lmul */
-> -        int8_t lmul = sextract32(FIELD_EX64(env->vtype, VTYPE, VLMUL), 0, 3);
-> -        uint32_t vsew = FIELD_EX64(env->vtype, VTYPE, VSEW);
-> -        uint32_t vlmax = vext_get_vlmax(cpu->cfg.vlenb, vsew, lmul);
-> -        uint32_t maxsz = vlmax << vsew;
-> -        bool vl_eq_vlmax = (env->vstart == 0) && (vlmax == env->vl) &&
-> -                           (maxsz >= 8);
-> -        flags = FIELD_DP32(flags, TB_FLAGS, VILL, env->vill);
-> -        flags = FIELD_DP32(flags, TB_FLAGS, SEW, vsew);
-> -        flags = FIELD_DP32(flags, TB_FLAGS, LMUL,
-> -                           FIELD_EX64(env->vtype, VTYPE, VLMUL));
-> -        flags = FIELD_DP32(flags, TB_FLAGS, VL_EQ_VLMAX, vl_eq_vlmax);
-> -        flags = FIELD_DP32(flags, TB_FLAGS, VTA,
-> -                           FIELD_EX64(env->vtype, VTYPE, VTA));
-> -        flags = FIELD_DP32(flags, TB_FLAGS, VMA,
-> -                           FIELD_EX64(env->vtype, VTYPE, VMA));
-> -        flags = FIELD_DP32(flags, TB_FLAGS, VSTART_EQ_ZERO, env->vstart == 0);
-> -    } else {
-> -        flags = FIELD_DP32(flags, TB_FLAGS, VILL, 1);
-> -    }
-> -
-> -#ifdef CONFIG_USER_ONLY
-> -    fs = EXT_STATUS_DIRTY;
-> -    vs = EXT_STATUS_DIRTY;
-> -#else
-> -    flags = FIELD_DP32(flags, TB_FLAGS, PRIV, env->priv);
-> -
-> -    flags |= riscv_env_mmu_index(env, 0);
-> -    fs = get_field(env->mstatus, MSTATUS_FS);
-> -    vs = get_field(env->mstatus, MSTATUS_VS);
-> -
-> -    if (env->virt_enabled) {
-> -        flags = FIELD_DP32(flags, TB_FLAGS, VIRT_ENABLED, 1);
-> -        /*
-> -         * Merge DISABLED and !DIRTY states using MIN.
-> -         * We will set both fields when dirtying.
-> -         */
-> -        fs = MIN(fs, get_field(env->mstatus_hs, MSTATUS_FS));
-> -        vs = MIN(vs, get_field(env->mstatus_hs, MSTATUS_VS));
-> -    }
-> -
-> -    /* With Zfinx, floating point is enabled/disabled by Smstateen. */
-> -    if (!riscv_has_ext(env, RVF)) {
-> -        fs = (smstateen_acc_ok(env, 0, SMSTATEEN0_FCSR) == RISCV_EXCP_NONE)
-> -             ? EXT_STATUS_DIRTY : EXT_STATUS_DISABLED;
-> -    }
-> -
-> -    if (cpu->cfg.debug && !icount_enabled()) {
-> -        flags = FIELD_DP32(flags, TB_FLAGS, ITRIGGER, env->itrigger_enabled);
-> -    }
-> -#endif
-> -
-> -    flags = FIELD_DP32(flags, TB_FLAGS, FS, fs);
-> -    flags = FIELD_DP32(flags, TB_FLAGS, VS, vs);
-> -    flags = FIELD_DP32(flags, TB_FLAGS, XL, env->xl);
-> -    flags = FIELD_DP32(flags, TB_FLAGS, AXL, cpu_address_xl(env));
-> -    if (env->cur_pmmask != 0) {
-> -        flags = FIELD_DP32(flags, TB_FLAGS, PM_MASK_ENABLED, 1);
-> -    }
-> -    if (env->cur_pmbase != 0) {
-> -        flags = FIELD_DP32(flags, TB_FLAGS, PM_BASE_ENABLED, 1);
-> -    }
-> -
-> -    *pflags = flags;
-> -}
-> -
->   void riscv_cpu_update_mask(CPURISCVState *env)
+>   void HELPER(vaeskf2_vi)(void *vd_vptr, void *vs2_vptr, uint32_t uimm,
+> @@ -396,7 +396,7 @@ void HELPER(vaeskf2_vi)(void *vd_vptr, void *vs2_vptr, uint32_t uimm,
+>       }
+>       env->vstart = 0;
+>       /* set tail elements to 1s */
+> -    vext_set_elems_1s(vd, vta, vl * 4, total_elems * 4);
+> +    vext_set_elems_1s_le(vd, vta, vl * 4, total_elems * 4);
+>   }
+>   
+>   static inline uint32_t sig0_sha256(uint32_t x)
+> @@ -469,7 +469,7 @@ void HELPER(vsha2ms_vv)(void *vd, void *vs1, void *vs2, CPURISCVState *env,
+>       }
+>       /* set tail elements to 1s */
+>       total_elems = vext_get_total_elems(env, desc, esz);
+> -    vext_set_elems_1s(vd, vta, env->vl * esz, total_elems * esz);
+> +    vext_set_elems_1s_le(vd, vta, env->vl * esz, total_elems * esz);
+>       env->vstart = 0;
+>   }
+>   
+> @@ -579,7 +579,7 @@ void HELPER(vsha2ch32_vv)(void *vd, void *vs1, void *vs2, CPURISCVState *env,
+>   
+>       /* set tail elements to 1s */
+>       total_elems = vext_get_total_elems(env, desc, esz);
+> -    vext_set_elems_1s(vd, vta, env->vl * esz, total_elems * esz);
+> +    vext_set_elems_1s_le(vd, vta, env->vl * esz, total_elems * esz);
+>       env->vstart = 0;
+>   }
+>   
+> @@ -597,7 +597,7 @@ void HELPER(vsha2ch64_vv)(void *vd, void *vs1, void *vs2, CPURISCVState *env,
+>   
+>       /* set tail elements to 1s */
+>       total_elems = vext_get_total_elems(env, desc, esz);
+> -    vext_set_elems_1s(vd, vta, env->vl * esz, total_elems * esz);
+> +    vext_set_elems_1s_le(vd, vta, env->vl * esz, total_elems * esz);
+>       env->vstart = 0;
+>   }
+>   
+> @@ -615,7 +615,7 @@ void HELPER(vsha2cl32_vv)(void *vd, void *vs1, void *vs2, CPURISCVState *env,
+>   
+>       /* set tail elements to 1s */
+>       total_elems = vext_get_total_elems(env, desc, esz);
+> -    vext_set_elems_1s(vd, vta, env->vl * esz, total_elems * esz);
+> +    vext_set_elems_1s_le(vd, vta, env->vl * esz, total_elems * esz);
+>       env->vstart = 0;
+>   }
+>   
+> @@ -633,7 +633,7 @@ void HELPER(vsha2cl64_vv)(void *vd, void *vs1, void *vs2, CPURISCVState *env,
+>   
+>       /* set tail elements to 1s */
+>       total_elems = vext_get_total_elems(env, desc, esz);
+> -    vext_set_elems_1s(vd, vta, env->vl * esz, total_elems * esz);
+> +    vext_set_elems_1s_le(vd, vta, env->vl * esz, total_elems * esz);
+>       env->vstart = 0;
+>   }
+>   
+> @@ -672,7 +672,7 @@ void HELPER(vsm3me_vv)(void *vd_vptr, void *vs1_vptr, void *vs2_vptr,
+>               vd[(i * 8) + j] = bswap32(w[H4(j + 16)]);
+>           }
+>       }
+> -    vext_set_elems_1s(vd_vptr, vta, env->vl * esz, total_elems * esz);
+> +    vext_set_elems_1s_le(vd_vptr, vta, env->vl * esz, total_elems * esz);
+>       env->vstart = 0;
+>   }
+>   
+> @@ -767,7 +767,7 @@ void HELPER(vsm3c_vi)(void *vd_vptr, void *vs2_vptr, uint32_t uimm,
+>               vd[i * 8 + k] = bswap32(v1[H4(k)]);
+>           }
+>       }
+> -    vext_set_elems_1s(vd_vptr, vta, env->vl * esz, total_elems * esz);
+> +    vext_set_elems_1s_le(vd_vptr, vta, env->vl * esz, total_elems * esz);
+>       env->vstart = 0;
+>   }
+>   
+> @@ -805,7 +805,7 @@ void HELPER(vghsh_vv)(void *vd_vptr, void *vs1_vptr, void *vs2_vptr,
+>           vd[i * 2 + 1] = brev8(Z[1]);
+>       }
+>       /* set tail elements to 1s */
+> -    vext_set_elems_1s(vd, vta, env->vl * 4, total_elems * 4);
+> +    vext_set_elems_1s_le(vd, vta, env->vl * 4, total_elems * 4);
+>       env->vstart = 0;
+>   }
+>   
+> @@ -839,7 +839,7 @@ void HELPER(vgmul_vv)(void *vd_vptr, void *vs2_vptr, CPURISCVState *env,
+>           vd[i * 2 + 1] = brev8(Z[1]);
+>       }
+>       /* set tail elements to 1s */
+> -    vext_set_elems_1s(vd, vta, env->vl * 4, total_elems * 4);
+> +    vext_set_elems_1s_le(vd, vta, env->vl * 4, total_elems * 4);
+>       env->vstart = 0;
+>   }
+>   
+> @@ -883,7 +883,7 @@ void HELPER(vsm4k_vi)(void *vd, void *vs2, uint32_t uimm5, CPURISCVState *env,
+>   
+>       env->vstart = 0;
+>       /* set tail elements to 1s */
+> -    vext_set_elems_1s(vd, vext_vta(desc), env->vl * esz, total_elems * esz);
+> +    vext_set_elems_1s_le(vd, vext_vta(desc), env->vl * esz, total_elems * esz);
+>   }
+>   
+>   static void do_sm4_round(uint32_t *rk, uint32_t *buf)
+> @@ -932,7 +932,7 @@ void HELPER(vsm4r_vv)(void *vd, void *vs2, CPURISCVState *env, uint32_t desc)
+>   
+>       env->vstart = 0;
+>       /* set tail elements to 1s */
+> -    vext_set_elems_1s(vd, vext_vta(desc), env->vl * esz, total_elems * esz);
+> +    vext_set_elems_1s_le(vd, vext_vta(desc), env->vl * esz, total_elems * esz);
+>   }
+>   
+>   void HELPER(vsm4r_vs)(void *vd, void *vs2, CPURISCVState *env, uint32_t desc)
+> @@ -966,5 +966,5 @@ void HELPER(vsm4r_vs)(void *vd, void *vs2, CPURISCVState *env, uint32_t desc)
+>   
+>       env->vstart = 0;
+>       /* set tail elements to 1s */
+> -    vext_set_elems_1s(vd, vext_vta(desc), env->vl * esz, total_elems * esz);
+> +    vext_set_elems_1s_le(vd, vext_vta(desc), env->vl * esz, total_elems * esz);
+>   }
+> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+> index 84cec73eb2..6ed73ed70a 100644
+> --- a/target/riscv/vector_helper.c
+> +++ b/target/riscv/vector_helper.c
+> @@ -187,7 +187,7 @@ static void vext_set_tail_elems_1s(target_ulong vl, void *vd,
+>       }
+>   
+>       for (k = 0; k < nf; ++k) {
+> -        vext_set_elems_1s(vd, vta, (k * max_elems + vl) * esz,
+> +        vext_set_elems_1s_le(vd, vta, (k * max_elems + vl) * esz,
+>                             (k * max_elems + max_elems) * esz);
+>       }
+>   }
+> @@ -213,7 +213,7 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base,
+>           while (k < nf) {
+>               if (!vm && !vext_elem_mask(v0, i)) {
+>                   /* set masked-off elements to 1s */
+> -                vext_set_elems_1s(vd, vma, (i + k * max_elems) * esz,
+> +                vext_set_elems_1s_le(vd, vma, (i + k * max_elems) * esz,
+>                                     (i + k * max_elems + 1) * esz);
+>                   k++;
+>                   continue;
+> @@ -393,7 +393,7 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
+>           while (k < nf) {
+>               if (!vm && !vext_elem_mask(v0, i)) {
+>                   /* set masked-off elements to 1s */
+> -                vext_set_elems_1s(vd, vma, (i + k * max_elems) * esz,
+> +                vext_set_elems_1s_le(vd, vma, (i + k * max_elems) * esz,
+>                                     (i + k * max_elems + 1) * esz);
+>                   k++;
+>                   continue;
+> @@ -523,7 +523,7 @@ ProbeSuccess:
+>           while (k < nf) {
+>               if (!vm && !vext_elem_mask(v0, i)) {
+>                   /* set masked-off elements to 1s */
+> -                vext_set_elems_1s(vd, vma, (i + k * max_elems) * esz,
+> +                vext_set_elems_1s_le(vd, vma, (i + k * max_elems) * esz,
+>                                     (i + k * max_elems + 1) * esz);
+>                   k++;
+>                   continue;
+> @@ -887,7 +887,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,   \
+>       }                                                         \
+>       env->vstart = 0;                                          \
+>       /* set tail elements to 1s */                             \
+> -    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);  \
+> +    vext_set_elems_1s_le(vd, vta, vl * esz, total_elems * esz);  \
+>   }
+>   
+>   GEN_VEXT_VADC_VVM(vadc_vvm_b, uint8_t,  H1, DO_VADC)
+> @@ -918,7 +918,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,        \
+>       }                                                                    \
+>       env->vstart = 0;                                                     \
+>       /* set tail elements to 1s */                                        \
+> -    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);             \
+> +    vext_set_elems_1s_le(vd, vta, vl * esz, total_elems * esz);             \
+>   }
+>   
+>   GEN_VEXT_VADC_VXM(vadc_vxm_b, uint8_t,  H1, DO_VADC)
+> @@ -1082,7 +1082,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,                          \
+>       for (i = env->vstart; i < vl; i++) {                                  \
+>           if (!vm && !vext_elem_mask(v0, i)) {                              \
+>               /* set masked-off elements to 1s */                           \
+> -            vext_set_elems_1s(vd, vma, i * esz, (i + 1) * esz);           \
+> +            vext_set_elems_1s_le(vd, vma, i * esz, (i + 1) * esz);           \
+>               continue;                                                     \
+>           }                                                                 \
+>           TS1 s1 = *((TS1 *)vs1 + HS1(i));                                  \
+> @@ -1091,7 +1091,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,                          \
+>       }                                                                     \
+>       env->vstart = 0;                                                      \
+>       /* set tail elements to 1s */                                         \
+> -    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);              \
+> +    vext_set_elems_1s_le(vd, vta, vl * esz, total_elems * esz);              \
+>   }
+>   
+>   GEN_VEXT_SHIFT_VV(vsll_vv_b, uint8_t,  uint8_t, H1, H1, DO_SLL, 0x7)
+> @@ -1129,7 +1129,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1,      \
+>       for (i = env->vstart; i < vl; i++) {                    \
+>           if (!vm && !vext_elem_mask(v0, i)) {                \
+>               /* set masked-off elements to 1s */             \
+> -            vext_set_elems_1s(vd, vma, i * esz,             \
+> +            vext_set_elems_1s_le(vd, vma, i * esz,             \
+>                                 (i + 1) * esz);               \
+>               continue;                                       \
+>           }                                                   \
+> @@ -1138,7 +1138,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1,      \
+>       }                                                       \
+>       env->vstart = 0;                                        \
+>       /* set tail elements to 1s */                           \
+> -    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);\
+> +    vext_set_elems_1s_le(vd, vta, vl * esz, total_elems * esz);\
+>   }
+>   
+>   GEN_VEXT_SHIFT_VX(vsll_vx_b, uint8_t, int8_t, H1, H1, DO_SLL, 0x7)
+> @@ -1806,7 +1806,7 @@ void HELPER(NAME)(void *vd, void *vs1, CPURISCVState *env,           \
+>       }                                                                \
+>       env->vstart = 0;                                                 \
+>       /* set tail elements to 1s */                                    \
+> -    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);         \
+> +    vext_set_elems_1s_le(vd, vta, vl * esz, total_elems * esz);         \
+>   }
+>   
+>   GEN_VEXT_VMV_VV(vmv_v_v_b, int8_t,  H1)
+> @@ -1829,7 +1829,7 @@ void HELPER(NAME)(void *vd, uint64_t s1, CPURISCVState *env,         \
+>       }                                                                \
+>       env->vstart = 0;                                                 \
+>       /* set tail elements to 1s */                                    \
+> -    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);         \
+> +    vext_set_elems_1s_le(vd, vta, vl * esz, total_elems * esz);         \
+>   }
+>   
+>   GEN_VEXT_VMV_VX(vmv_v_x_b, int8_t,  H1)
+> @@ -1853,7 +1853,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,          \
+>       }                                                                \
+>       env->vstart = 0;                                                 \
+>       /* set tail elements to 1s */                                    \
+> -    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);         \
+> +    vext_set_elems_1s_le(vd, vta, vl * esz, total_elems * esz);         \
+>   }
+>   
+>   GEN_VEXT_VMERGE_VV(vmerge_vvm_b, int8_t,  H1)
+> @@ -1879,7 +1879,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1,               \
+>       }                                                                \
+>       env->vstart = 0;                                                 \
+>       /* set tail elements to 1s */                                    \
+> -    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);         \
+> +    vext_set_elems_1s_le(vd, vta, vl * esz, total_elems * esz);         \
+>   }
+>   
+>   GEN_VEXT_VMERGE_VX(vmerge_vxm_b, int8_t,  H1)
+> @@ -1919,7 +1919,7 @@ vext_vv_rm_1(void *vd, void *v0, void *vs1, void *vs2,
+>       for (uint32_t i = env->vstart; i < vl; i++) {
+>           if (!vm && !vext_elem_mask(v0, i)) {
+>               /* set masked-off elements to 1s */
+> -            vext_set_elems_1s(vd, vma, i * esz, (i + 1) * esz);
+> +            vext_set_elems_1s_le(vd, vma, i * esz, (i + 1) * esz);
+>               continue;
+>           }
+>           fn(vd, vs1, vs2, i, env, vxrm);
+> @@ -1958,7 +1958,7 @@ vext_vv_rm_2(void *vd, void *v0, void *vs1, void *vs2,
+>           break;
+>       }
+>       /* set tail elements to 1s */
+> -    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);
+> +    vext_set_elems_1s_le(vd, vta, vl * esz, total_elems * esz);
+>   }
+>   
+>   /* generate helpers for fixed point instructions with OPIVV format */
+> @@ -2044,7 +2044,7 @@ vext_vx_rm_1(void *vd, void *v0, target_long s1, void *vs2,
+>       for (uint32_t i = env->vstart; i < vl; i++) {
+>           if (!vm && !vext_elem_mask(v0, i)) {
+>               /* set masked-off elements to 1s */
+> -            vext_set_elems_1s(vd, vma, i * esz, (i + 1) * esz);
+> +            vext_set_elems_1s_le(vd, vma, i * esz, (i + 1) * esz);
+>               continue;
+>           }
+>           fn(vd, s1, vs2, i, env, vxrm);
+> @@ -2083,7 +2083,7 @@ vext_vx_rm_2(void *vd, void *v0, target_long s1, void *vs2,
+>           break;
+>       }
+>       /* set tail elements to 1s */
+> -    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);
+> +    vext_set_elems_1s_le(vd, vta, vl * esz, total_elems * esz);
+>   }
+>   
+>   /* generate helpers for fixed point instructions with OPIVX format */
+> @@ -2841,7 +2841,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,          \
+>       for (i = env->vstart; i < vl; i++) {                  \
+>           if (!vm && !vext_elem_mask(v0, i)) {              \
+>               /* set masked-off elements to 1s */           \
+> -            vext_set_elems_1s(vd, vma, i * ESZ,           \
+> +            vext_set_elems_1s_le(vd, vma, i * ESZ,           \
+>                                 (i + 1) * ESZ);             \
+>               continue;                                     \
+>           }                                                 \
+> @@ -2849,7 +2849,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,          \
+>       }                                                     \
+>       env->vstart = 0;                                      \
+>       /* set tail elements to 1s */                         \
+> -    vext_set_elems_1s(vd, vta, vl * ESZ,                  \
+> +    vext_set_elems_1s_le(vd, vta, vl * ESZ,                  \
+>                         total_elems * ESZ);                 \
+>   }
+>   
+> @@ -2884,7 +2884,7 @@ void HELPER(NAME)(void *vd, void *v0, uint64_t s1,        \
+>       for (i = env->vstart; i < vl; i++) {                  \
+>           if (!vm && !vext_elem_mask(v0, i)) {              \
+>               /* set masked-off elements to 1s */           \
+> -            vext_set_elems_1s(vd, vma, i * ESZ,           \
+> +            vext_set_elems_1s_le(vd, vma, i * ESZ,           \
+>                                 (i + 1) * ESZ);             \
+>               continue;                                     \
+>           }                                                 \
+> @@ -2892,7 +2892,7 @@ void HELPER(NAME)(void *vd, void *v0, uint64_t s1,        \
+>       }                                                     \
+>       env->vstart = 0;                                      \
+>       /* set tail elements to 1s */                         \
+> -    vext_set_elems_1s(vd, vta, vl * ESZ,                  \
+> +    vext_set_elems_1s_le(vd, vta, vl * ESZ,                  \
+>                         total_elems * ESZ);                 \
+>   }
+>   
+> @@ -3473,14 +3473,14 @@ void HELPER(NAME)(void *vd, void *v0, void *vs2,       \
+>       for (i = env->vstart; i < vl; i++) {               \
+>           if (!vm && !vext_elem_mask(v0, i)) {           \
+>               /* set masked-off elements to 1s */        \
+> -            vext_set_elems_1s(vd, vma, i * ESZ,        \
+> +            vext_set_elems_1s_le(vd, vma, i * ESZ,        \
+>                                 (i + 1) * ESZ);          \
+>               continue;                                  \
+>           }                                              \
+>           do_##NAME(vd, vs2, i, env);                    \
+>       }                                                  \
+>       env->vstart = 0;                                   \
+> -    vext_set_elems_1s(vd, vta, vl * ESZ,               \
+> +    vext_set_elems_1s_le(vd, vta, vl * ESZ,               \
+>                         total_elems * ESZ);              \
+>   }
+>   
+> @@ -4228,7 +4228,7 @@ void HELPER(NAME)(void *vd, void *v0, uint64_t s1, void *vs2, \
+>       }                                                         \
+>       env->vstart = 0;                                          \
+>       /* set tail elements to 1s */                             \
+> -    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);  \
+> +    vext_set_elems_1s_le(vd, vta, vl * esz, total_elems * esz);  \
+>   }
+>   
+>   GEN_VFMERGE_VF(vfmerge_vfm_h, int16_t, H2)
+> @@ -4397,7 +4397,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,          \
+>       *((TD *)vd + HD(0)) = s1;                             \
+>       env->vstart = 0;                                      \
+>       /* set tail elements to 1s */                         \
+> -    vext_set_elems_1s(vd, vta, esz, vlenb);               \
+> +    vext_set_elems_1s_le(vd, vta, esz, vlenb);               \
+>   }
+>   
+>   /* vd[0] = sum(vs1[0], vs2[*]) */
+> @@ -4483,7 +4483,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,           \
+>       *((TD *)vd + HD(0)) = s1;                              \
+>       env->vstart = 0;                                       \
+>       /* set tail elements to 1s */                          \
+> -    vext_set_elems_1s(vd, vta, esz, vlenb);                \
+> +    vext_set_elems_1s_le(vd, vta, esz, vlenb);                \
+>   }
+>   
+>   /* Unordered sum */
+> @@ -4708,7 +4708,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs2, CPURISCVState *env,      \
+>       for (i = env->vstart; i < vl; i++) {                                  \
+>           if (!vm && !vext_elem_mask(v0, i)) {                              \
+>               /* set masked-off elements to 1s */                           \
+> -            vext_set_elems_1s(vd, vma, i * esz, (i + 1) * esz);           \
+> +            vext_set_elems_1s_le(vd, vma, i * esz, (i + 1) * esz);           \
+>               continue;                                                     \
+>           }                                                                 \
+>           *((ETYPE *)vd + H(i)) = sum;                                      \
+> @@ -4718,7 +4718,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs2, CPURISCVState *env,      \
+>       }                                                                     \
+>       env->vstart = 0;                                                      \
+>       /* set tail elements to 1s */                                         \
+> -    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);              \
+> +    vext_set_elems_1s_le(vd, vta, vl * esz, total_elems * esz);              \
+>   }
+>   
+>   GEN_VEXT_VIOTA_M(viota_m_b, uint8_t,  H1)
+> @@ -4741,14 +4741,14 @@ void HELPER(NAME)(void *vd, void *v0, CPURISCVState *env, uint32_t desc)  \
+>       for (i = env->vstart; i < vl; i++) {                                  \
+>           if (!vm && !vext_elem_mask(v0, i)) {                              \
+>               /* set masked-off elements to 1s */                           \
+> -            vext_set_elems_1s(vd, vma, i * esz, (i + 1) * esz);           \
+> +            vext_set_elems_1s_le(vd, vma, i * esz, (i + 1) * esz);           \
+>               continue;                                                     \
+>           }                                                                 \
+>           *((ETYPE *)vd + H(i)) = i;                                        \
+>       }                                                                     \
+>       env->vstart = 0;                                                      \
+>       /* set tail elements to 1s */                                         \
+> -    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);              \
+> +    vext_set_elems_1s_le(vd, vta, vl * esz, total_elems * esz);              \
+>   }
+>   
+>   GEN_VEXT_VID_V(vid_v_b, uint8_t,  H1)
+> @@ -4777,13 +4777,13 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
+>       for (i = i_min; i < vl; i++) {                                        \
+>           if (!vm && !vext_elem_mask(v0, i)) {                              \
+>               /* set masked-off elements to 1s */                           \
+> -            vext_set_elems_1s(vd, vma, i * esz, (i + 1) * esz);           \
+> +            vext_set_elems_1s_le(vd, vma, i * esz, (i + 1) * esz);           \
+>               continue;                                                     \
+>           }                                                                 \
+>           *((ETYPE *)vd + H(i)) = *((ETYPE *)vs2 + H(i - offset));          \
+>       }                                                                     \
+>       /* set tail elements to 1s */                                         \
+> -    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);              \
+> +    vext_set_elems_1s_le(vd, vta, vl * esz, total_elems * esz);              \
+>   }
+>   
+>   /* vslideup.vx vd, vs2, rs1, vm # vd[i+rs1] = vs2[i] */
+> @@ -4810,7 +4810,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
+>       for (i = env->vstart; i < i_max; ++i) {                               \
+>           if (!vm && !vext_elem_mask(v0, i)) {                              \
+>               /* set masked-off elements to 1s */                           \
+> -            vext_set_elems_1s(vd, vma, i * esz, (i + 1) * esz);           \
+> +            vext_set_elems_1s_le(vd, vma, i * esz, (i + 1) * esz);           \
+>               continue;                                                     \
+>           }                                                                 \
+>           *((ETYPE *)vd + H(i)) = *((ETYPE *)vs2 + H(i + s1));              \
+> @@ -4824,7 +4824,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
+>                                                                             \
+>       env->vstart = 0;                                                      \
+>       /* set tail elements to 1s */                                         \
+> -    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);              \
+> +    vext_set_elems_1s_le(vd, vta, vl * esz, total_elems * esz);              \
+>   }
+>   
+>   /* vslidedown.vx vd, vs2, rs1, vm # vd[i] = vs2[i+rs1] */
+> @@ -4850,7 +4850,7 @@ static void vslide1up_##BITWIDTH(void *vd, void *v0, uint64_t s1,           \
+>       for (i = env->vstart; i < vl; i++) {                                    \
+>           if (!vm && !vext_elem_mask(v0, i)) {                                \
+>               /* set masked-off elements to 1s */                             \
+> -            vext_set_elems_1s(vd, vma, i * esz, (i + 1) * esz);             \
+> +            vext_set_elems_1s_le(vd, vma, i * esz, (i + 1) * esz);             \
+>               continue;                                                       \
+>           }                                                                   \
+>           if (i == 0) {                                                       \
+> @@ -4861,7 +4861,7 @@ static void vslide1up_##BITWIDTH(void *vd, void *v0, uint64_t s1,           \
+>       }                                                                       \
+>       env->vstart = 0;                                                        \
+>       /* set tail elements to 1s */                                           \
+> -    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);                \
+> +    vext_set_elems_1s_le(vd, vta, vl * esz, total_elems * esz);                \
+>   }
+>   
+>   GEN_VEXT_VSLIE1UP(8,  H1)
+> @@ -4899,7 +4899,7 @@ static void vslide1down_##BITWIDTH(void *vd, void *v0, uint64_t s1,           \
+>       for (i = env->vstart; i < vl; i++) {                                      \
+>           if (!vm && !vext_elem_mask(v0, i)) {                                  \
+>               /* set masked-off elements to 1s */                               \
+> -            vext_set_elems_1s(vd, vma, i * esz, (i + 1) * esz);               \
+> +            vext_set_elems_1s_le(vd, vma, i * esz, (i + 1) * esz);            \
+>               continue;                                                         \
+>           }                                                                     \
+>           if (i == vl - 1) {                                                    \
+> @@ -4910,7 +4910,7 @@ static void vslide1down_##BITWIDTH(void *vd, void *v0, uint64_t s1,           \
+>       }                                                                         \
+>       env->vstart = 0;                                                          \
+>       /* set tail elements to 1s */                                             \
+> -    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);                  \
+> +    vext_set_elems_1s_le(vd, vta, vl * esz, total_elems * esz);               \
+>   }
+>   
+>   GEN_VEXT_VSLIDE1DOWN(8,  H1)
+> @@ -4974,7 +4974,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,               \
+>       for (i = env->vstart; i < vl; i++) {                                  \
+>           if (!vm && !vext_elem_mask(v0, i)) {                              \
+>               /* set masked-off elements to 1s */                           \
+> -            vext_set_elems_1s(vd, vma, i * esz, (i + 1) * esz);           \
+> +            vext_set_elems_1s_le(vd, vma, i * esz, (i + 1) * esz);           \
+>               continue;                                                     \
+>           }                                                                 \
+>           index = *((TS1 *)vs1 + HS1(i));                                   \
+> @@ -4986,7 +4986,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,               \
+>       }                                                                     \
+>       env->vstart = 0;                                                      \
+>       /* set tail elements to 1s */                                         \
+> -    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);              \
+> +    vext_set_elems_1s_le(vd, vta, vl * esz, total_elems * esz);              \
+>   }
+>   
+>   /* vd[i] = (vs1[i] >= VLMAX) ? 0 : vs2[vs1[i]]; */
+> @@ -5017,7 +5017,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
+>       for (i = env->vstart; i < vl; i++) {                                  \
+>           if (!vm && !vext_elem_mask(v0, i)) {                              \
+>               /* set masked-off elements to 1s */                           \
+> -            vext_set_elems_1s(vd, vma, i * esz, (i + 1) * esz);           \
+> +            vext_set_elems_1s_le(vd, vma, i * esz, (i + 1) * esz);           \
+>               continue;                                                     \
+>           }                                                                 \
+>           if (index >= vlmax) {                                             \
+> @@ -5028,7 +5028,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
+>       }                                                                     \
+>       env->vstart = 0;                                                      \
+>       /* set tail elements to 1s */                                         \
+> -    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);              \
+> +    vext_set_elems_1s_le(vd, vta, vl * esz, total_elems * esz);              \
+>   }
+>   
+>   /* vd[i] = (x[rs1] >= VLMAX) ? 0 : vs2[rs1] */
+> @@ -5057,7 +5057,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,               \
+>       }                                                                     \
+>       env->vstart = 0;                                                      \
+>       /* set tail elements to 1s */                                         \
+> -    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);              \
+> +    vext_set_elems_1s_le(vd, vta, vl * esz, total_elems * esz);              \
+>   }
+>   
+>   /* Compress into vd elements of vs2 where vs1 is enabled */
+> @@ -5098,14 +5098,14 @@ void HELPER(NAME)(void *vd, void *v0, void *vs2,                 \
+>       for (i = env->vstart; i < vl; i++) {                         \
+>           if (!vm && !vext_elem_mask(v0, i)) {                     \
+>               /* set masked-off elements to 1s */                  \
+> -            vext_set_elems_1s(vd, vma, i * esz, (i + 1) * esz);  \
+> +            vext_set_elems_1s_le(vd, vma, i * esz, (i + 1) * esz);  \
+>               continue;                                            \
+>           }                                                        \
+>           *((ETYPE *)vd + HD(i)) = *((DTYPE *)vs2 + HS1(i));       \
+>       }                                                            \
+>       env->vstart = 0;                                             \
+>       /* set tail elements to 1s */                                \
+> -    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);     \
+> +    vext_set_elems_1s_le(vd, vta, vl * esz, total_elems * esz);     \
+>   }
+>   
+>   GEN_VEXT_INT_EXT(vzext_vf2_h, uint16_t, uint8_t,  H2, H1)
+> diff --git a/target/riscv/vector_internals.c b/target/riscv/vector_internals.c
+> index 12f5964fbb..349b24f4ae 100644
+> --- a/target/riscv/vector_internals.c
+> +++ b/target/riscv/vector_internals.c
+> @@ -20,7 +20,7 @@
+>   #include "vector_internals.h"
+>   
+>   /* set agnostic elements to 1s */
+> -void vext_set_elems_1s(void *base, uint32_t is_agnostic, uint32_t cnt,
+> +void vext_set_elems_1s_le(void *base, uint32_t is_agnostic, uint32_t cnt,
+>                          uint32_t tot)
 >   {
->       target_ulong mask = 0, base = 0;
-> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-> index ab6db817db..934007673e 100644
-> --- a/target/riscv/tcg/tcg-cpu.c
-> +++ b/target/riscv/tcg/tcg-cpu.c
-> @@ -31,6 +31,7 @@
->   #include "hw/core/accel-cpu.h"
->   #include "hw/core/tcg-cpu-ops.h"
->   #include "tcg/tcg.h"
-> +#include "sysemu/cpu-timers.h"
->   
->   /* Hash that stores user set extensions */
->   static GHashTable *multi_ext_user_opts;
-> @@ -129,10 +130,97 @@ static void riscv_restore_state_to_opc(CPUState *cs,
->       env->bins = data[1];
+>       if (is_agnostic == 0) {
+> @@ -47,14 +47,14 @@ void do_vext_vv(void *vd, void *v0, void *vs1, void *vs2,
+>       for (i = env->vstart; i < vl; i++) {
+>           if (!vm && !vext_elem_mask(v0, i)) {
+>               /* set masked-off elements to 1s */
+> -            vext_set_elems_1s(vd, vma, i * esz, (i + 1) * esz);
+> +            vext_set_elems_1s_le(vd, vma, i * esz, (i + 1) * esz);
+>               continue;
+>           }
+>           fn(vd, vs1, vs2, i);
+>       }
+>       env->vstart = 0;
+>       /* set tail elements to 1s */
+> -    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);
+> +    vext_set_elems_1s_le(vd, vta, vl * esz, total_elems * esz);
 >   }
 >   
-> +static void riscv_get_cpu_state(CPURISCVState *env, vaddr *pc,
-> +                                uint64_t *cs_base, uint32_t *pflags)
-> +{
-> +    RISCVCPU *cpu = env_archcpu(env);
-> +    RISCVExtStatus fs, vs;
-> +    uint32_t flags = 0;
-> +
-> +    *pc = env->xl == MXL_RV32 ? env->pc & UINT32_MAX : env->pc;
-> +    *cs_base = 0;
-> +
-> +    if (cpu->cfg.ext_zve32f) {
-> +        /*
-> +         * If env->vl equals to VLMAX, we can use generic vector operation
-> +         * expanders (GVEC) to accerlate the vector operations.
-> +         * However, as LMUL could be a fractional number. The maximum
-> +         * vector size can be operated might be less than 8 bytes,
-> +         * which is not supported by GVEC. So we set vl_eq_vlmax flag to true
-> +         * only when maxsz >= 8 bytes.
-> +         */
-> +
-> +        /* lmul encoded as in DisasContext::lmul */
-> +        int8_t lmul = sextract32(FIELD_EX64(env->vtype, VTYPE, VLMUL), 0, 3);
-> +        uint32_t vsew = FIELD_EX64(env->vtype, VTYPE, VSEW);
-> +        uint32_t vlmax = vext_get_vlmax(cpu->cfg.vlenb, vsew, lmul);
-> +        uint32_t maxsz = vlmax << vsew;
-> +        bool vl_eq_vlmax = (env->vstart == 0) && (vlmax == env->vl) &&
-> +                           (maxsz >= 8);
-> +        flags = FIELD_DP32(flags, TB_FLAGS, VILL, env->vill);
-> +        flags = FIELD_DP32(flags, TB_FLAGS, SEW, vsew);
-> +        flags = FIELD_DP32(flags, TB_FLAGS, LMUL,
-> +                           FIELD_EX64(env->vtype, VTYPE, VLMUL));
-> +        flags = FIELD_DP32(flags, TB_FLAGS, VL_EQ_VLMAX, vl_eq_vlmax);
-> +        flags = FIELD_DP32(flags, TB_FLAGS, VTA,
-> +                           FIELD_EX64(env->vtype, VTYPE, VTA));
-> +        flags = FIELD_DP32(flags, TB_FLAGS, VMA,
-> +                           FIELD_EX64(env->vtype, VTYPE, VMA));
-> +        flags = FIELD_DP32(flags, TB_FLAGS, VSTART_EQ_ZERO, env->vstart == 0);
-> +    } else {
-> +        flags = FIELD_DP32(flags, TB_FLAGS, VILL, 1);
-> +    }
-> +
-> +#ifdef CONFIG_USER_ONLY
-> +    fs = EXT_STATUS_DIRTY;
-> +    vs = EXT_STATUS_DIRTY;
-> +#else
-> +    flags = FIELD_DP32(flags, TB_FLAGS, PRIV, env->priv);
-> +
-> +    flags |= riscv_env_mmu_index(env, 0);
-> +    fs = get_field(env->mstatus, MSTATUS_FS);
-> +    vs = get_field(env->mstatus, MSTATUS_VS);
-> +
-> +    if (env->virt_enabled) {
-> +        flags = FIELD_DP32(flags, TB_FLAGS, VIRT_ENABLED, 1);
-> +        /*
-> +         * Merge DISABLED and !DIRTY states using MIN.
-> +         * We will set both fields when dirtying.
-> +         */
-> +        fs = MIN(fs, get_field(env->mstatus_hs, MSTATUS_FS));
-> +        vs = MIN(vs, get_field(env->mstatus_hs, MSTATUS_VS));
-> +    }
-> +
-> +    /* With Zfinx, floating point is enabled/disabled by Smstateen. */
-> +    if (!riscv_has_ext(env, RVF)) {
-> +        fs = (smstateen_acc_ok(env, 0, SMSTATEEN0_FCSR) == RISCV_EXCP_NONE)
-> +             ? EXT_STATUS_DIRTY : EXT_STATUS_DISABLED;
-> +    }
-> +
-> +    if (cpu->cfg.debug && !icount_enabled()) {
-> +        flags = FIELD_DP32(flags, TB_FLAGS, ITRIGGER, env->itrigger_enabled);
-> +    }
-> +#endif
-> +
-> +    flags = FIELD_DP32(flags, TB_FLAGS, FS, fs);
-> +    flags = FIELD_DP32(flags, TB_FLAGS, VS, vs);
-> +    flags = FIELD_DP32(flags, TB_FLAGS, XL, env->xl);
-> +    flags = FIELD_DP32(flags, TB_FLAGS, AXL, cpu_address_xl(env));
-> +    if (env->cur_pmmask != 0) {
-> +        flags = FIELD_DP32(flags, TB_FLAGS, PM_MASK_ENABLED, 1);
-> +    }
-> +    if (env->cur_pmbase != 0) {
-> +        flags = FIELD_DP32(flags, TB_FLAGS, PM_BASE_ENABLED, 1);
-> +    }
-> +
-> +    *pflags = flags;
-> +}
-> +
->   static const TCGCPUOps riscv_tcg_ops = {
->       .initialize = riscv_translate_init,
->       .synchronize_from_tb = riscv_cpu_synchronize_from_tb,
->       .restore_state_to_opc = riscv_restore_state_to_opc,
-> +    .get_cpu_state = riscv_get_cpu_state,
->   
->   #ifndef CONFIG_USER_ONLY
->       .tlb_fill = riscv_cpu_tlb_fill,
-> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-> index e42728990e..3c16c4852b 100644
-> --- a/target/riscv/insn_trans/trans_rvv.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-> @@ -578,7 +578,7 @@ static bool vext_check_slide(DisasContext *s, int vd, int vs2,
+>   void do_vext_vx(void *vd, void *v0, target_long s1, void *vs2,
+> @@ -71,12 +71,12 @@ void do_vext_vx(void *vd, void *v0, target_long s1, void *vs2,
+>       for (i = env->vstart; i < vl; i++) {
+>           if (!vm && !vext_elem_mask(v0, i)) {
+>               /* set masked-off elements to 1s */
+> -            vext_set_elems_1s(vd, vma, i * esz, (i + 1) * esz);
+> +            vext_set_elems_1s_le(vd, vma, i * esz, (i + 1) * esz);
+>               continue;
+>           }
+>           fn(vd, s1, vs2, i);
+>       }
+>       env->vstart = 0;
+>       /* set tail elements to 1s */
+> -    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);
+> +    vext_set_elems_1s_le(vd, vta, vl * esz, total_elems * esz);
+>   }
+> diff --git a/target/riscv/vector_internals.h b/target/riscv/vector_internals.h
+> index 842765f6c1..fa599f60ca 100644
+> --- a/target/riscv/vector_internals.h
+> +++ b/target/riscv/vector_internals.h
+> @@ -114,7 +114,7 @@ static inline uint32_t vext_get_total_elems(CPURISCVState *env, uint32_t desc,
 >   }
 >   
->   /*
-> - * In cpu_get_tb_cpu_state(), set VILL if RVV was not present.
-> + * In riscv_get_cpu_state(), set VILL if RVV was not present.
->    * So RVV is also be checked in this function.
->    */
->   static bool vext_check_isa_ill(DisasContext *s)
+>   /* set agnostic elements to 1s */
+> -void vext_set_elems_1s(void *base, uint32_t is_agnostic, uint32_t cnt,
+> +void vext_set_elems_1s_le(void *base, uint32_t is_agnostic, uint32_t cnt,
+>                          uint32_t tot);
+>   
+>   /* expand macro args before macro */
+> @@ -154,7 +154,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs2,       \
+>       for (i = env->vstart; i < vl; i++) {               \
+>           if (!vm && !vext_elem_mask(v0, i)) {           \
+>               /* set masked-off elements to 1s */        \
+> -            vext_set_elems_1s(vd, vma, i * ESZ,        \
+> +            vext_set_elems_1s_le(vd, vma, i * ESZ,        \
+>                                 (i + 1) * ESZ);          \
+>               continue;                                  \
+>           }                                              \
+> @@ -162,7 +162,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs2,       \
+>       }                                                  \
+>       env->vstart = 0;                                   \
+>       /* set tail elements to 1s */                      \
+> -    vext_set_elems_1s(vd, vta, vl * ESZ,               \
+> +    vext_set_elems_1s_le(vd, vta, vl * ESZ,               \
+>                         total_elems * ESZ);              \
+>   }
+>   
 
