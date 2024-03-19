@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18035C54E60
-	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Mar 2024 07:52:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C605EC54E5D
+	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Mar 2024 08:13:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rmUGr-0007ah-4D; Tue, 19 Mar 2024 03:52:29 -0400
+	id 1rmUbS-0003ot-Ak; Tue, 19 Mar 2024 04:13:46 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1rmUGn-0007aR-PE; Tue, 19 Mar 2024 03:52:26 -0400
-Received: from out30-119.freemail.mail.aliyun.com ([115.124.30.119])
+ id 1rmUbL-0003nc-2U; Tue, 19 Mar 2024 04:13:39 -0400
+Received: from out30-100.freemail.mail.aliyun.com ([115.124.30.100])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1rmUGl-00042S-3z; Tue, 19 Mar 2024 03:52:25 -0400
+ id 1rmUbG-0007vb-Ib; Tue, 19 Mar 2024 04:13:38 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1710834731; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
- bh=XpDStMmscSKUsrbDqMfPXLY/L9Ji35OnClbYlj+KC4s=;
- b=RSbrIXMUDp4iCrH0HlTvuu97fGpv0hWRy2QiRutqGZCmIa5d5YimPVZq7dxGmyJwFa4D0twzGAXS3d25Tbr8M6KDWcXFaQBWDdBLrGomuLU16+2vVHZkXuQvS3wu29M9N5azgI06dym/Ksf0kLbqYW4H/igp69kxh6Dj8or/O3s=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R901e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046056;
+ t=1710836004; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
+ bh=VMxGg/HglIseeNwydchbhH/8VOT54s9BYAGz/q0SMqo=;
+ b=a8NuhIYaRlAdVLkwoWt+nXAeq97DsDgQkRGMEAgl5hrNs0cUL9klwRAq3X3elI27fqBHyMdIEG1r7NddAeIhEx1NPhjNPhN6SCqjWy9Z3Yt80bt7X8UcMEpRxuWzv+u8GqdfeWzeFWhlooVlb27jd0PuiLzp0tQh+xNr1G/WiC0=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R411e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046059;
  MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
- TI=SMTPD_---0W2sMRIs_1710834728; 
+ TI=SMTPD_---0W2sMZ1d_1710836001; 
 Received: from 30.198.0.148(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0W2sMRIs_1710834728) by smtp.aliyun-inc.com;
- Tue, 19 Mar 2024 15:52:09 +0800
-Message-ID: <9578e895-f4b3-4d2b-8f95-1fc07868846c@linux.alibaba.com>
-Date: Tue, 19 Mar 2024 15:52:06 +0800
+ fp:SMTPD_---0W2sMZ1d_1710836001) by smtp.aliyun-inc.com;
+ Tue, 19 Mar 2024 16:13:22 +0800
+Message-ID: <58752d39-25fb-467a-8e9b-15361539720d@linux.alibaba.com>
+Date: Tue, 19 Mar 2024 16:13:19 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH for 9.0 v15 03/10] target/riscv/vector_helper.c: fix
- 'vmvr_v' memcpy endianess
+Subject: Re: [PATCH for 9.0 v15 04/10] target/riscv: always clear vstart in
+ whole vec move insns
+Content-Language: en-US
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, palmer@rivosinc.com, max.chou@sifive.com,
  richard.henderson@linaro.org
 References: <20240314175704.478276-1-dbarboza@ventanamicro.com>
- <20240314175704.478276-4-dbarboza@ventanamicro.com>
-Content-Language: en-US
+ <20240314175704.478276-5-dbarboza@ventanamicro.com>
 From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20240314175704.478276-4-dbarboza@ventanamicro.com>
+In-Reply-To: <20240314175704.478276-5-dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=115.124.30.119;
+Received-SPF: pass client-ip=115.124.30.100;
  envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-119.freemail.mail.aliyun.com
+ helo=out30-100.freemail.mail.aliyun.com
 X-Spam_score_int: -174
 X-Spam_score: -17.5
 X-Spam_bar: -----------------
@@ -75,42 +75,69 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 On 2024/3/15 1:56, Daniel Henrique Barboza wrote:
-> vmvr_v isn't handling the case where the host might be big endian and
-> the bytes to be copied aren't sequential.
+> These insns have 2 paths: we'll either have vstart already cleared if
+> vstart_eq_zero or we'll do a brcond to check if vstart >= maxsz to call
+> the 'vmvr_v' helper. The helper will clear vstart if it executes until
+> the end, or if vstart >= vl.
 >
-> Suggested-by: Richard Henderson <richard.henderson@linaro.org>
+> For starters, the check itself is wrong: we're checking vstart >= maxsz,
+> when in fact we should use vstart in bytes, or 'startb' like 'vmvr_v' is
+> calling, to do the comparison. But even after fixing the comparison we'll
+> still need to clear vstart in the end, which isn't happening too.
+>
+> We want to make the helpers responsible to manage vstart, including
+> these corner cases, precisely to avoid these situations:
+>
+> - remove the wrong vstart >= maxsz cond from the translation;
+> - add a 'startb >= maxsz' cond in 'vmvr_v', and clear vstart if that
+>    happens.
+>
+> This way we're now sure that vstart is being cleared in the end of the
+> execution, regardless of the path taken.
+>
 > Fixes: f714361ed7 ("target/riscv: rvv-1.0: implement vstart CSR")
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> ---
->   target/riscv/vector_helper.c | 10 +++++++++-
->   1 file changed, 9 insertions(+), 1 deletion(-)
->
-> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index ca79571ae2..34ac4aa808 100644
-> --- a/target/riscv/vector_helper.c
-> +++ b/target/riscv/vector_helper.c
-> @@ -5075,9 +5075,17 @@ void HELPER(vmvr_v)(void *vd, void *vs2, CPURISCVState *env, uint32_t desc)
->       uint32_t startb = env->vstart * sewb;
->       uint32_t i = startb;
->   
-> +    if (HOST_BIG_ENDIAN && i % 8 != 0) {
-> +        uint32_t j = ROUND_UP(i, 8);
-> +        memcpy((uint8_t *)vd + H1(j - 1),
-> +               (uint8_t *)vs2 + H1(j - 1),
-> +               j - i);
-> +        i = j;
-> +    }
-> +
->       memcpy((uint8_t *)vd + H1(i),
->              (uint8_t *)vs2 + H1(i),
-> -           maxsz - startb);
-> +           maxsz - i);
 
 Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
 Zhiwei
 
+> ---
+>   target/riscv/insn_trans/trans_rvv.c.inc | 3 ---
+>   target/riscv/vector_helper.c            | 5 +++++
+>   2 files changed, 5 insertions(+), 3 deletions(-)
+>
+> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+> index 8c16a9f5b3..52c26a7834 100644
+> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+> @@ -3664,12 +3664,9 @@ static bool trans_##NAME(DisasContext *s, arg_##NAME * a)               \
+>                                vreg_ofs(s, a->rs2), maxsz, maxsz);        \
+>               mark_vs_dirty(s);                                           \
+>           } else {                                                        \
+> -            TCGLabel *over = gen_new_label();                           \
+> -            tcg_gen_brcondi_tl(TCG_COND_GEU, cpu_vstart, maxsz, over);  \
+>               tcg_gen_gvec_2_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, a->rs2), \
+>                                  tcg_env, maxsz, maxsz, 0, gen_helper_vmvr_v); \
+>               mark_vs_dirty(s);                                           \
+> -            gen_set_label(over);                                        \
+>           }                                                               \
+>           return true;                                                    \
+>       }                                                                   \
+> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+> index 34ac4aa808..bcc553c0e2 100644
+> --- a/target/riscv/vector_helper.c
+> +++ b/target/riscv/vector_helper.c
+> @@ -5075,6 +5075,11 @@ void HELPER(vmvr_v)(void *vd, void *vs2, CPURISCVState *env, uint32_t desc)
+>       uint32_t startb = env->vstart * sewb;
+>       uint32_t i = startb;
 >   
->       env->vstart = 0;
->   }
+> +    if (startb >= maxsz) {
+> +        env->vstart = 0;
+> +        return;
+> +    }
+> +
+>       if (HOST_BIG_ENDIAN && i % 8 != 0) {
+>           uint32_t j = ROUND_UP(i, 8);
+>           memcpy((uint8_t *)vd + H1(j - 1),
 
