@@ -4,93 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39726C54E5D
-	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Mar 2024 17:46:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59D11C54E5D
+	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Mar 2024 00:53:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rmH3q-0005EE-0O; Mon, 18 Mar 2024 13:46:14 -0400
+	id 1rmNiq-0004g7-1z; Mon, 18 Mar 2024 20:52:56 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bfreiber@student.ubc.ca>)
- id 1rmFzM-0001id-KZ
- for qemu-riscv@nongnu.org; Mon, 18 Mar 2024 12:37:28 -0400
-Received: from esvaout7.mail-relay.ubc.ca ([142.103.117.137]
- helo=nesvaprod07.mail-relay.ubc.ca)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1rmNio-0004fD-4A; Mon, 18 Mar 2024 20:52:54 -0400
+Received: from out30-133.freemail.mail.aliyun.com ([115.124.30.133])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bfreiber@student.ubc.ca>)
- id 1rmFzD-0000Df-Iv
- for qemu-riscv@nongnu.org; Mon, 18 Mar 2024 12:37:28 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=ubc.ca; i=@ubc.ca; q=dns/txt; s=s1; t=1710779840;
- x=1742315840; h=from:to:subject:date:message-id:mime-version;
- bh=v999oEE64Q6p0WmRTlNf0SOV5pfrgTUnNfzLAy1SU3E=;
- b=OoqDXggP0zj2lI6aSitlloflWB92p/DRPKXHUw4+D0utM0sjJOZH7a7f
- Ot4NufnphoA/cTcyJvw0Jz7TO0B52QSZvdTDJnguNQ/Qffbm7d8un8I7f
- lKREsgtksBVYjUN4//Qsgy1roFq0RwRgAPSF/5h7Xzu2YgcbwAoorDXT8
- sH5xd4KtnNOfkIS/w9IRtyHk2c3BAL5mR6HFNdlz3j03PxeoGz95ZkpeG
- 3jwKQOnLGha+xYSBK1nQmVcZvWJcRw+De9A0XhV0lG0PxKSKGho2Fcuns
- tvON0seJeCn3mLb7gHQKAF7/7/Yc2XUi1FgLsmmANqfstjhu2EiAGrOU6 w==;
-X-CSE-ConnectionGUID: bdo570WcTFORvA9lSmy1Tw==
-X-CSE-MsgGUID: EkuzVquDTZGBlTZGe7RJ1A==
-X-ExtLoop1: 1
-X-SMTPAUTH: FALSE
-IronPort-Data: A9a23:pO8m/an8dGZor+Ui8V9OLljo5gwuJERdPkR7XQ2eYbSJt1+Wr1Gzt
- xIv7RMyw0vx1phBB6l0bb0CeDoHuZblerYTSQdyrTc1CSsS9aIpPPzBRm/oJSSeM8bfe0xu6
- sQae7HoIds9JpPmjk7F3oPJ8z8kislkepKmULSYYnsoFVc9IMscoUkLd9AR09YAbeeRXlvlV
- ePa+6X3JFKj0jhoBWMYg4rrRMRH5auaVJsw5zTSVNgT1LPsvyB94KE3fMldG0DFrrx8Q4ZWc
- QpjIIaRpQs19z91Yj+sfy2SnkciGtY+NiDX4pZatjPLbrGvaUXe345iXMfwZ3u7hB2Dk9csl
- 41yvqCebj03F/zIo+EMCiVHRnQW0a1uoNcrIFCktNCLiUjPcn+q3v9lSko/VWEa0r8vRz0Ts
- 6ZEbmFSBvyAr7veLLaTQOd2i8UpIdPDJ58Ctnxm0XfEB/1gSpmrr6Diu4QEhmZu2ZAm8fD2S
- skEewR2cTj8UTJlPmslJ59hpsXxryyqG9FfgBfPzUYt2EDKwQlslaLsK9HLUtqNQ8pTgwCfv
- G2uwojiKhUQLNObxyGOqiujnfPXxXq+VYQOD+Xhs/A3xUOJyGMXFRBTW1+8qOX/kV+lR99aM
- AoV5mwzp6N0/0XDosTBYiBUaUWs5nY0M+e82cVggO1R4sI4OzqkO1U=
-IronPort-HdrOrdr: A9a23:KFHc96gZcRL+4BuVm/6a6IDJq3BQXsQji2hC6mlwRA09TyX4rb
- HMoB1173PJYVoqN03I+urhBEDjex7hHPdOiOF7V4tKNDOW2ldAR7sN0WKN+Vzd82aXzJ856Z
- td
-X-Talos-CUID: 9a23:fzGETm9Du8yH+6ngLpuVv0QYHZ16KkLW8Fn3GVGRWGJSTazMdUDFrQ==
-X-Talos-MUID: 9a23:koSRUwieyccXjov2yd2Pc8MpGcR18Zq3FWwxo7osv/W2GiEvARXEpWHi
-Received: from lbpglfsc01gstp01-ents01-f5-vrfglue-float.systems.it.ubc.ca
- (HELO smtp.mail.ubc.ca) ([10.45.24.97])
- by nesvaprod07.mail-relay.ubc.ca with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 18 Mar 2024 09:37:15 -0700
-Received: from SAM-SRV02AP.ead.ubc.ca (10.19.216.62) by
- EXCH-SRV01BP.ead.ubc.ca (10.19.216.29) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Mon, 18 Mar 2024 09:37:15 -0700
-Received: from SAM-SRV03AP.ead.ubc.ca (10.19.216.63) by SAM-SRV02AP.ead.ubc.ca
- (10.19.216.62) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Mon, 18 Mar
- 2024 09:37:10 -0700
-Received: from SAM-SRV03AP.ead.ubc.ca ([fe80::882:9760:e144:6bab]) by
- SAM-SRV03AP.ead.ubc.ca ([fe80::882:9760:e144:6bab%4]) with mapi id
- 15.01.2507.035; Mon, 18 Mar 2024 09:37:14 -0700
-From: "bfreiber@student.ubc.ca" <bfreiber@student.ubc.ca>
-To: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
-Subject: Opening file: qemu-riscv32
-Thread-Topic: Opening file: qemu-riscv32
-Thread-Index: AQHaeVFULv0uaRtEk0S4nKbJpjXFmA==
-Date: Mon, 18 Mar 2024 16:37:14 +0000
-Message-ID: <aaa7424af22a483fa8a1c713acf7c6fc@student.ubc.ca>
-Accept-Language: en-CA, en-US
-Content-Language: en-CA
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [24.207.73.1]
-Content-Type: multipart/alternative;
- boundary="_000_aaa7424af22a483fa8a1c713acf7c6fcstudentubcca_"
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1rmNil-0001Ei-IH; Mon, 18 Mar 2024 20:52:53 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linux.alibaba.com; s=default;
+ t=1710809557; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
+ bh=BMaHHbxrTCFCk4vOqtbSScP9fSZVwnAalOaMGv6IpIE=;
+ b=sOBhumAjg/czSz7Kqcz5y84nbn2l4arsL3zPfohji6WChbIydpmTtvhqiso1FSRsWbG1/G6AsGek9hgVEiN7CCi9Vcm7LuhYePHDkQDtHB9CO+g22g9WPwl17L0oWPhNo50W0mezPpPP+6OHCV1hG48YNXpmi8324Ha9MX2y1F8=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R101e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045192;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
+ TI=SMTPD_---0W2qi2FK_1710809555; 
+Received: from 30.198.0.148(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0W2qi2FK_1710809555) by smtp.aliyun-inc.com;
+ Tue, 19 Mar 2024 08:52:36 +0800
+Message-ID: <503b024f-1c7b-4eb4-991a-0cfb17cc448a@linux.alibaba.com>
+Date: Tue, 19 Mar 2024 08:52:33 +0800
 MIME-Version: 1.0
-Received-SPF: pass client-ip=142.103.117.137;
- envelope-from=bfreiber@student.ubc.ca; helo=nesvaprod07.mail-relay.ubc.ca
-X-Spam_score_int: -42
-X-Spam_score: -4.3
-X-Spam_bar: ----
-X-Spam_report: (-4.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH for 9.0 v15 01/10] target/riscv/vector_helper.c: set
+ vstart = 0 in GEN_VEXT_VSLIDEUP_VX()
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, palmer@rivosinc.com, max.chou@sifive.com,
+ richard.henderson@linaro.org
+References: <20240314175704.478276-1-dbarboza@ventanamicro.com>
+ <20240314175704.478276-2-dbarboza@ventanamicro.com>
+Content-Language: en-US
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20240314175704.478276-2-dbarboza@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=115.124.30.133;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-133.freemail.mail.aliyun.com
+X-Spam_score_int: -174
+X-Spam_score: -17.5
+X-Spam_bar: -----------------
+X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Mon, 18 Mar 2024 13:45:55 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -105,85 +73,33 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---_000_aaa7424af22a483fa8a1c713acf7c6fcstudentubcca_
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
 
-Hello,
+On 2024/3/15 1:56, Daniel Henrique Barboza wrote:
+> The helper isn't setting env->vstart = 0 after its execution, as it is
+> expected from every vector instruction that completes successfully.
+>
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Sorry if this is the wrong place to ask this - happy to be redirected if th=
-at's the case!
+Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
+Zhiwei
 
-I'm trying to open a file with fopen using qemu-riscv32, but I get an error=
- (38 - function not implemented). The file exists on my host machine, and I=
-'m providing the absolute path to the file.
-
-My invocation for qemu is `qemu-riscv32 ./out`.
-
-I am very new to qemu, and built qemu with default configurations. qemu-ris=
-cv32 seemed to work otherwise which is why I was using it - I just need the=
- barebones support for now, but will happily use qemu-system-riscv32 if it =
-will work.
-
-
-Any suggestions on what to do / pointers on where to look are very apprecia=
-ted!
-
-
-Cheers,
-
-
-Brandon
-
---_000_aaa7424af22a483fa8a1c713acf7c6fcstudentubcca_
-Content-Type: text/html; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
-1">
-<style type=3D"text/css" style=3D"display:none;"><!-- P {margin-top:0;margi=
-n-bottom:0;} --></style>
-</head>
-<body dir=3D"ltr">
-<div id=3D"divtagdefaultwrapper" style=3D"font-size:12pt;color:#000000;font=
--family:Calibri,Helvetica,sans-serif;" dir=3D"ltr">
-<p>Hello,<br>
-<br>
-Sorry if this is the wrong place to ask this - happy to be redirected if th=
-at's the case!<br>
-</p>
-<p><br>
-</p>
-<p>I'm trying to open a file with fopen using qemu-riscv32, but I get an er=
-ror (38 - function not implemented). The file exists on my host machine, an=
-d I'm providing the absolute path to the file.
-<br>
-<br>
-My invocation for qemu is `qemu-riscv32 ./out`. <br>
-<br>
-I am very new to qemu, and built qemu with default configurations. qemu-ris=
-cv32 seemed to work otherwise which is why I was using it - I just need the=
- barebones support for now, but will happily use qemu-system-riscv32 if it =
-will work.
-<br>
-</p>
-<p><br>
-</p>
-<p>Any suggestions on what to do / pointers on where to look are very appre=
-ciated!</p>
-<p><br>
-</p>
-<p>Cheers,</p>
-<p><br>
-</p>
-<p>Brandon<br>
-</p>
-</div>
-</body>
-</html>
-
---_000_aaa7424af22a483fa8a1c713acf7c6fcstudentubcca_--
+> ---
+>   target/riscv/vector_helper.c | 1 +
+>   1 file changed, 1 insertion(+)
+>
+> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+> index fe56c007d5..ca79571ae2 100644
+> --- a/target/riscv/vector_helper.c
+> +++ b/target/riscv/vector_helper.c
+> @@ -4781,6 +4781,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
+>           }                                                                 \
+>           *((ETYPE *)vd + H(i)) = *((ETYPE *)vs2 + H(i - offset));          \
+>       }                                                                     \
+> +    env->vstart = 0;                                                      \
+>       /* set tail elements to 1s */                                         \
+>       vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);              \
+>   }
 
