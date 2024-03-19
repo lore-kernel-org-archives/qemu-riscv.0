@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84D45CD11BF
-	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Mar 2024 15:43:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFDC1CD11BF
+	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Mar 2024 15:44:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rmbcy-0005ZC-OR; Tue, 19 Mar 2024 11:43:48 -0400
+	id 1rmbdo-0007Um-GP; Tue, 19 Mar 2024 11:44:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rmbcx-0005Yi-2V
- for qemu-riscv@nongnu.org; Tue, 19 Mar 2024 11:43:47 -0400
-Received: from mail-lj1-x229.google.com ([2a00:1450:4864:20::229])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rmbdl-0007Gl-Q0
+ for qemu-riscv@nongnu.org; Tue, 19 Mar 2024 11:44:37 -0400
+Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rmbcu-0004tP-Mz
- for qemu-riscv@nongnu.org; Tue, 19 Mar 2024 11:43:45 -0400
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-2d4541bf57eso76709321fa.2
- for <qemu-riscv@nongnu.org>; Tue, 19 Mar 2024 08:43:44 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rmbdd-0005Dw-9b
+ for qemu-riscv@nongnu.org; Tue, 19 Mar 2024 11:44:37 -0400
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-41461c256c4so9418495e9.0
+ for <qemu-riscv@nongnu.org>; Tue, 19 Mar 2024 08:44:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710863023; x=1711467823; darn=nongnu.org;
+ d=linaro.org; s=google; t=1710863068; x=1711467868; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wt+1/nVbm4UwUNrHtwVfJccIMKB4kkx/gPc6B1UnmDE=;
- b=M+xLodN6o4YytlQ0BuvMaMGvZHAc4IcZDYBgEDDHXEFUS44nQZFSjkqpDYr4DHfcEs
- 29EgGNGLkO6rvEpMO7dCBrx6OB5m8tyMBx7V+xvpvLPSDYIM7Ux171sNGs07EwFJDFMh
- Y2TI9jRMctvbh6VmepB/xOfm06Um/OYbDrsSlkvcJ2KMqOm8dUfcIe6K4TBSXYvnaoAm
- 5dktWuUHwZsh58Ob4dmVSFoP8yrHVZD171OlK8FdoLbdZCL6DRT5/+BvzCybVm1Ubaxw
- T45xUKDv9fniInOmNzHQzWAqbR3lOLQ2G+BfVUh9FRU/XuA+CVdEPaaToMMxnQ7tv4I2
- 3u2g==
+ bh=goVPZjhGsrNSLmW6IZIplIeGALKCmKT21+JRh5OPT4g=;
+ b=RF89ge2MZ0jHRN0KR97wC/9dNKrOWqZ5vxM1+bvJ3kk78z1eRgfNk6GmenC7ohxWES
+ GHcgFnzAm8Jx34p0plVoWm4BjvSojifDphY+U/zubykc+9Q7pOLhmbLxURSY7HPliMGm
+ nInSFUdVY0T0mbO+Rpqr6NyumiHbHD9IcPsGCUTFUIf/t1u9IS9vLAWHlJ2M7j6zKfRs
+ PilbfkICYH12MtRjOe3UtVLp0j+XhWb5n+38peOWDHAw09MnDDxOF7ksyvR/t9DBpl2j
+ 4XcVAyTnNEokZkCkG0Q3UUYu5/9A9kXTBI9m0857V9JRisLR0PV3/M1WIOLtt6eHLZUh
+ 4n7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710863023; x=1711467823;
+ d=1e100.net; s=20230601; t=1710863068; x=1711467868;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=wt+1/nVbm4UwUNrHtwVfJccIMKB4kkx/gPc6B1UnmDE=;
- b=HnyWt3CVzE8Uv//od6cPdoT97dEfa0paoEdeVBnH8jGjJCZPIHo25+tG/+ru5yAq83
- UfhEi21IRtbCWyTuenlfC/RbATkibW0OxvToJgThpcBhDjHMsItlnHQZUNHBE/Gnc8w1
- 8uAOtiF2teRKpk0xQ+V6VrH3VDoHEdEJiVGGgxBJk1p12asAjypyKazUOuCRP2zJUtcy
- PECjHC+cwQh8xgQ1eHLMTIXvjYUhSr/74UP1HDuqdoeLsjBYx+eq1EfapPLXhomHGUkY
- Nnf+aTmbxJjC1brkSuLY3NMJ/wT+yoblXEWelXUrfDJ6VeTfVCX84Eee5qRU0BcMB+af
- AxfA==
+ bh=goVPZjhGsrNSLmW6IZIplIeGALKCmKT21+JRh5OPT4g=;
+ b=SgI32ppaHWhVeY1r0M35vsKpmfMsJhBAt5ihaN+beXFy0got0mG+gdHM/c/PG7KDrU
+ oGxgnOVzbRjBo1++wLw61UdX3sn0eDI5swgqN4XMdPKTJfNJi+MC/Fq5t4n4qJXgbOXz
+ pF7jhcw+PGTjoqEbt9pfvGoSBcmyeO02daxLUyrRNOgnG0U+gpXGq5XgYxPhThrdglun
+ HDU1Hjlaum8wzcRz7xib7gyI0kPY1Z3FbkRzr3xSVlcG6qg+YlVHYe0vmSX2DI8aatdw
+ xMl2lvw/Eabdk/GyYOorokVPiVQhf/BuKm4J2tdkcxsYgPy0+1DZYz/U4S2CdEta13wN
+ GJvw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWWBngrZY0iM9hDB+JKAKmV0aw3a5Cq7od+EuL8WGr064CUroy/xrAlwd3brF1VMgRDsy0e1QULMCUgxlAIS875Y+Ev4g4=
-X-Gm-Message-State: AOJu0YzsFPElttnUQp4tIF9NpLHmcWLrlzV9m6MBrNaTgYudul3reVIA
- 30knQ1OPVdCxrmasyyYKe4Y/CG76uf6076hyV3dJMsiqfLRuttEZQVWAIGf9I4Q=
-X-Google-Smtp-Source: AGHT+IFlPVA6+46gHooYcC+IWoC3HQmzd+iRk6Nw7Da+Qr2A6IiWlww3lTAf8UqzoiR9v7CRPIMB8A==
-X-Received: by 2002:a2e:6d02:0:b0:2d2:e44e:a5cc with SMTP id
- i2-20020a2e6d02000000b002d2e44ea5ccmr10123039ljc.46.1710863022845; 
- Tue, 19 Mar 2024 08:43:42 -0700 (PDT)
+ AJvYcCVe6h61BE37czpOyB3v7yhdu0aoc+R8O80ZjdFKe1kk+EaQN87uQ4gRFgHkhuu4dZmX+pTS3Kieh+/7pNoT9inmpVajyeA=
+X-Gm-Message-State: AOJu0YxnG1xAyoJOzcabqTrHGZ/aFwHb+9JRT+nalQuuU6SqxtLGdSrm
+ kBN0drwHskzgrkfCjUOGVroknHLTcwennlJEByq5fksL4fOmMqfRU/xhHGRww4M=
+X-Google-Smtp-Source: AGHT+IEIacTEdvl1U5cLP5qgpG54E3GpTrl4MV3+Gl+NTqo1PltbQ0v3NatBwJnd9sALG/hnmUlpvw==
+X-Received: by 2002:a05:600c:314e:b0:413:ee58:db7e with SMTP id
+ h14-20020a05600c314e00b00413ee58db7emr2335980wmo.3.1710863067825; 
+ Tue, 19 Mar 2024 08:44:27 -0700 (PDT)
 Received: from m1x-phil.lan ([176.176.166.129])
  by smtp.gmail.com with ESMTPSA id
- fm24-20020a05600c0c1800b00414650448a7sm2379716wmb.11.2024.03.19.08.43.41
+ u6-20020a05600c19c600b0041413546e5bsm5695602wmq.0.2024.03.19.08.44.26
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 19 Mar 2024 08:43:42 -0700 (PDT)
+ Tue, 19 Mar 2024 08:44:27 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-s390x@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
  qemu-ppc@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
  Anton Johansson <anjo@rev.ng>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
-Subject: [PATCH-for-9.1 07/27] target/cris: Convert to
+ Chris Wulff <crwulff@gmail.com>, Marek Vasut <marex@denx.de>
+Subject: [PATCH-for-9.1 15/27] target/nios2: Convert to
  TCGCPUOps::get_cpu_state()
-Date: Tue, 19 Mar 2024 16:42:36 +0100
-Message-ID: <20240319154258.71206-8-philmd@linaro.org>
+Date: Tue, 19 Mar 2024 16:42:44 +0100
+Message-ID: <20240319154258.71206-16-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240319154258.71206-1-philmd@linaro.org>
 References: <20240319154258.71206-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::229;
- envelope-from=philmd@linaro.org; helo=mail-lj1-x229.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -103,67 +103,64 @@ Convert cpu_get_tb_cpu_state() to TCGCPUOps::get_cpu_state().
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/cris/cpu.h | 12 ------------
- target/cris/cpu.c | 11 +++++++++++
- 2 files changed, 11 insertions(+), 12 deletions(-)
+ target/nios2/cpu.h | 14 --------------
+ target/nios2/cpu.c | 13 +++++++++++++
+ 2 files changed, 13 insertions(+), 14 deletions(-)
 
-diff --git a/target/cris/cpu.h b/target/cris/cpu.h
-index dbd6fb05f0..6df53f49c4 100644
---- a/target/cris/cpu.h
-+++ b/target/cris/cpu.h
-@@ -273,16 +273,4 @@ enum {
- 
- #include "exec/cpu-all.h"
+diff --git a/target/nios2/cpu.h b/target/nios2/cpu.h
+index 32002b819a..d0616723fe 100644
+--- a/target/nios2/cpu.h
++++ b/target/nios2/cpu.h
+@@ -286,18 +286,4 @@ FIELD(TBFLAGS, CRS0, 0, 1)  /* Set if CRS == 0. */
+ FIELD(TBFLAGS, U, 1, 1)     /* Overlaps CR_STATUS_U */
+ FIELD(TBFLAGS, R0_0, 2, 1)  /* Set if R0 == 0. */
  
 -#define TARGET_HAS_CPU_GET_TB_CPU_STATE
 -
--static inline void cpu_get_tb_cpu_state(CPUCRISState *env, vaddr *pc,
+-static inline void cpu_get_tb_cpu_state(CPUNios2State *env, vaddr *pc,
 -                                        uint64_t *cs_base, uint32_t *flags)
 -{
+-    unsigned crs = FIELD_EX32(env->ctrl[CR_STATUS], CR_STATUS, CRS);
+-
 -    *pc = env->pc;
 -    *cs_base = 0;
--    *flags = env->dslot |
--            (env->pregs[PR_CCS] & (S_FLAG | P_FLAG | U_FLAG
--				     | X_FLAG | PFIX_FLAG));
+-    *flags = (env->ctrl[CR_STATUS] & CR_STATUS_U)
+-           | (crs ? 0 : R_TBFLAGS_CRS0_MASK)
+-           | (env->regs[0] ? 0 : R_TBFLAGS_R0_0_MASK);
 -}
 -
- #endif
-diff --git a/target/cris/cpu.c b/target/cris/cpu.c
-index eb4bddcb7e..8d0b92b96d 100644
---- a/target/cris/cpu.c
-+++ b/target/cris/cpu.c
-@@ -51,6 +51,15 @@ static void cris_restore_state_to_opc(CPUState *cs,
-     cpu->env.pc = data[0];
+ #endif /* NIOS2_CPU_H */
+diff --git a/target/nios2/cpu.c b/target/nios2/cpu.c
+index 679aff5730..d1a98c47ad 100644
+--- a/target/nios2/cpu.c
++++ b/target/nios2/cpu.c
+@@ -43,6 +43,18 @@ static void nios2_restore_state_to_opc(CPUState *cs,
+     cpu_env(cs)->pc = data[0];
  }
  
-+static void cris_get_cpu_state(CPUCRISState *env, vaddr *pc,
-+                               uint64_t *cs_base, uint32_t *flags)
++static void nios2_get_cpu_state(CPUNios2State *env, vaddr *pc,
++                                uint64_t *cs_base, uint32_t *flags)
 +{
++    unsigned crs = FIELD_EX32(env->ctrl[CR_STATUS], CR_STATUS, CRS);
++
 +    *pc = env->pc;
 +    *cs_base = 0;
-+    *flags = env->dslot |
-+        (env->pregs[PR_CCS] & (S_FLAG | P_FLAG | U_FLAG | X_FLAG | PFIX_FLAG));
++    *flags = (env->ctrl[CR_STATUS] & CR_STATUS_U)
++             | (crs ? 0 : R_TBFLAGS_CRS0_MASK)
++             | (env->regs[0] ? 0 : R_TBFLAGS_R0_0_MASK);
 +}
 +
- static bool cris_cpu_has_work(CPUState *cs)
+ static bool nios2_cpu_has_work(CPUState *cs)
  {
-     return cs->interrupt_request & (CPU_INTERRUPT_HARD | CPU_INTERRUPT_NMI);
-@@ -182,6 +191,7 @@ static const struct SysemuCPUOps cris_sysemu_ops = {
- static const TCGCPUOps crisv10_tcg_ops = {
-     .initialize = cris_initialize_crisv10_tcg,
-     .restore_state_to_opc = cris_restore_state_to_opc,
-+    .get_cpu_state = cris_get_cpu_state,
+     return cs->interrupt_request & CPU_INTERRUPT_HARD;
+@@ -354,6 +366,7 @@ static const struct SysemuCPUOps nios2_sysemu_ops = {
+ static const TCGCPUOps nios2_tcg_ops = {
+     .initialize = nios2_tcg_init,
+     .restore_state_to_opc = nios2_restore_state_to_opc,
++    .get_cpu_state = nios2_get_cpu_state,
  
  #ifndef CONFIG_USER_ONLY
-     .tlb_fill = cris_cpu_tlb_fill,
-@@ -193,6 +203,7 @@ static const TCGCPUOps crisv10_tcg_ops = {
- static const TCGCPUOps crisv32_tcg_ops = {
-     .initialize = cris_initialize_tcg,
-     .restore_state_to_opc = cris_restore_state_to_opc,
-+    .get_cpu_state = cris_get_cpu_state,
- 
- #ifndef CONFIG_USER_ONLY
-     .tlb_fill = cris_cpu_tlb_fill,
+     .tlb_fill = nios2_cpu_tlb_fill,
 -- 
 2.41.0
 
