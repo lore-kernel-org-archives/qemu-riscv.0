@@ -4,85 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B04E1CD11C2
-	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Mar 2024 15:45:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81208CD11C2
+	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Mar 2024 15:45:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rmbca-0005MA-83; Tue, 19 Mar 2024 11:43:24 -0400
+	id 1rmbda-00064K-71; Tue, 19 Mar 2024 11:44:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rmbcZ-0005Le-8P
- for qemu-riscv@nongnu.org; Tue, 19 Mar 2024 11:43:23 -0400
-Received: from mail-wr1-x433.google.com ([2a00:1450:4864:20::433])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rmbd8-0005lR-I6
+ for qemu-riscv@nongnu.org; Tue, 19 Mar 2024 11:44:00 -0400
+Received: from mail-wr1-x42b.google.com ([2a00:1450:4864:20::42b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rmbcX-0004om-KI
- for qemu-riscv@nongnu.org; Tue, 19 Mar 2024 11:43:22 -0400
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-3416df43cabso1430257f8f.3
- for <qemu-riscv@nongnu.org>; Tue, 19 Mar 2024 08:43:21 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rmbd2-0004yC-Ny
+ for qemu-riscv@nongnu.org; Tue, 19 Mar 2024 11:43:56 -0400
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-34005b5927eso2061196f8f.1
+ for <qemu-riscv@nongnu.org>; Tue, 19 Mar 2024 08:43:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710863000; x=1711467800; darn=nongnu.org;
+ d=linaro.org; s=google; t=1710863029; x=1711467829; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qQ0F9e1tiLbg+1mSpsh71oFSOMQcPQZFv/kc9q+gvBc=;
- b=U3+Hk1+1IjfFgD9aUYE90eQUkdWhVW7+WQckOfPjvpH2kLWDDBY266+fl9Ic9II09V
- AQPHxh4jYUboYmFXULIrNLfvr8VA0bPwMqrO3iZwe6BXskLp8lthxNNEdGhcSByFn4cD
- R+09jq68w/x3ZYk2cX+nXKwUbbwG0tll+Fcico3pdySZyuynb1rBaGEh9qdrkzRqQxjX
- xW1cVi+KhUQEAGleQzcL47orwYrsUWQqDLqOZ6rtw8fyZv2VP3tBU+jGmXXQqNNAQ9/o
- jSEiD4ieZWNXeQ1XatVYbz0OxDvEL7TCgyb6FZVHPc1qcjJ8xkBlOZK1mKt0whmV6uKN
- nn+w==
+ bh=Uhrck07YAgtzhdFq8/D5fUYa0OpjmAt0ZJzdbBj3AUo=;
+ b=rqu/EkySLXxLuBe89w6+sgPOBt2YinqCHysLniu6snnzBNL0LM9Bmucbl7hpMAlhRc
+ wK6EIlb0wdHq1Tq3kC00WQx5fIVIlkd66wez6jZle/PqAOclD/riKF3cY48sXRFdjF3P
+ UKLFEALzORtN1EEkRQf73vv/KeMQlDe3G98Hx+L+kJAsz6aVx0cUNV2Yzdn6ZaLmkSGE
+ xNzYXKnGdXllCg5gyzd3VBKov1gE/9/6NFVUmD9sPWfaFEuuah5tauEgI7c/YEg9uwVY
+ hEk1nYTE1xoDdBEpZVjvha33LJvi7pAaiMwqFtLORvN9N4B6/XDG5YKbOhRbnYON+HRO
+ cd/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710863000; x=1711467800;
+ d=1e100.net; s=20230601; t=1710863029; x=1711467829;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=qQ0F9e1tiLbg+1mSpsh71oFSOMQcPQZFv/kc9q+gvBc=;
- b=WRAtD7JZYWawHO4Asq1hsrMiDWE2GhU2ZKuKAgrCCKME588sQ67aQpmfdeR4i2Wgzc
- CjjhGWISVewaU0KDD09g9283axUZkLoHP5L8uzxnF3t7z2ftTqqebaSYoFsPBk6y9riu
- jaN7kAihS/2Q0/wmX2WpitP9U2QIIaIqtU35UIKSeOUTndQmoPzoCn7U/4+Iu5vES5zV
- rSza1fi34McOOdHSi8TvORVwO4RMvxEzmhOjnpXinFhk/CbC0caqH/pKB+8zp+q0+Adp
- R/uY0D67K8MKkvd0jk3MiK2uzPY1NI7XZxZxirNWPv5BQCpcUUlH5q/6QUW6WYhGmFBr
- xhzA==
+ bh=Uhrck07YAgtzhdFq8/D5fUYa0OpjmAt0ZJzdbBj3AUo=;
+ b=ShKW3XBxqKbPhBTs6C2luwjwWKdSxMEVbTcKS2sFsxBPY7Y9CnS1sq9ggeTLZraO7/
+ iK5Dq/0HiEOAAnXlC235VkUwImizgkzS5yzlCPy9SAM3CVvLeMHTipHtAMVMML9/+1Cd
+ rTnyEg1qxCOKThhiJWcvG5K+jJAYnLjNHmfjsONoWvSqWQwF7Kyote7aKOjC5Hs+61vh
+ +8ThBkYDb22OPjgradSjXf/+aa2E0BNywXndlnaVapqwN7gAQFQz6y+EKeNnhRtPEKY0
+ SrFAKEDU3O5GqAv2stOtOEG9OXpdyvdziWWgOSt50Wy0XGtWZlKbWhMGiPY1ikPV8Jjo
+ Fg0w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVGiZOOU9Ja1bedDZapjRXI1W6JQkF26HkDg7r/MMcuub/eCy5G/5GYwywofmGqsjk7R9HYDLzfiJwxzC/DOOnwiz0Q054=
-X-Gm-Message-State: AOJu0Yy/AkSRU+4zGWqrPOWetufar5LxEXO3lV1TZbBVk6TbSnnFCCb7
- St5aE9LQ/HXDjKzDfdWrYLoeE1e0JCY1aZDxJru8doPjj0fyA3BsAzDOu6UmHUI=
-X-Google-Smtp-Source: AGHT+IHNkIwxgTmLvtVpyDQh9Jev5XDRlN3i5jmRdH9rVkzOnNPPl32YeVx/fJc8BU8Spf6Qr6HJBA==
-X-Received: by 2002:a05:6000:184b:b0:33f:8e6d:ab7c with SMTP id
- c11-20020a056000184b00b0033f8e6dab7cmr8021706wri.71.1710863000174; 
- Tue, 19 Mar 2024 08:43:20 -0700 (PDT)
+ AJvYcCXHX20GQShwrZ64b+ugJCavvI6Z5tYyNZIGE4I+ega8bhoHfaDYJaDpD4teCfqIJ4z4biPQwF3PsbQ4UY/BtKWzMB8WcUA=
+X-Gm-Message-State: AOJu0Yxvvc8kUl5vp1SmVX8obXuBYa9iWe7Ndhlde2qgJ8vo3jzxIrB+
+ KGUlA57nAnjHD2YPW7a+Gnx69ur9rwufIzKK0OV+IULhP46/aOIklPvoJ7JDeRs=
+X-Google-Smtp-Source: AGHT+IEFpZRecB1YN1BASCgEdWgX9FWwwygcQlUuWShgXqOrPMO5UwU1c6Pt/uycNJTzkkg1C1hv0w==
+X-Received: by 2002:a5d:6a46:0:b0:33e:cc2e:8286 with SMTP id
+ t6-20020a5d6a46000000b0033ecc2e8286mr9495145wrw.59.1710863028662; 
+ Tue, 19 Mar 2024 08:43:48 -0700 (PDT)
 Received: from m1x-phil.lan ([176.176.166.129])
  by smtp.gmail.com with ESMTPSA id
- i2-20020adff302000000b0033e9fca1e49sm12609575wro.60.2024.03.19.08.43.18
+ w10-20020adff9ca000000b0033e72e104c5sm12591686wrr.34.2024.03.19.08.43.47
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 19 Mar 2024 08:43:19 -0700 (PDT)
+ Tue, 19 Mar 2024 08:43:48 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-s390x@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
  qemu-ppc@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
  Anton Johansson <anjo@rev.ng>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH-for-9.1 03/27] target/alpha: Convert to
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Brian Cain <bcain@quicinc.com>
+Subject: [PATCH-for-9.1 08/27] target/hexagon: Convert to
  TCGCPUOps::get_cpu_state()
-Date: Tue, 19 Mar 2024 16:42:32 +0100
-Message-ID: <20240319154258.71206-4-philmd@linaro.org>
+Date: Tue, 19 Mar 2024 16:42:37 +0100
+Message-ID: <20240319154258.71206-9-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240319154258.71206-1-philmd@linaro.org>
 References: <20240319154258.71206-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::433;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x433.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42b;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,64 +103,66 @@ Convert cpu_get_tb_cpu_state() to TCGCPUOps::get_cpu_state().
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/alpha/cpu.h | 13 -------------
- target/alpha/cpu.c | 12 ++++++++++++
- 2 files changed, 12 insertions(+), 13 deletions(-)
+ target/hexagon/cpu.h | 14 --------------
+ target/hexagon/cpu.c | 13 +++++++++++++
+ 2 files changed, 13 insertions(+), 14 deletions(-)
 
-diff --git a/target/alpha/cpu.h b/target/alpha/cpu.h
-index 16b0f8a097..b7f294d08a 100644
---- a/target/alpha/cpu.h
-+++ b/target/alpha/cpu.h
-@@ -467,19 +467,6 @@ void alpha_cpu_do_transaction_failed(CPUState *cs, hwaddr physaddr,
-                                      MemTxResult response, uintptr_t retaddr);
- #endif
+diff --git a/target/hexagon/cpu.h b/target/hexagon/cpu.h
+index 935a9c3276..1d42c33827 100644
+--- a/target/hexagon/cpu.h
++++ b/target/hexagon/cpu.h
+@@ -134,20 +134,6 @@ struct ArchCPU {
+ 
+ FIELD(TB_FLAGS, IS_TIGHT_LOOP, 0, 1)
  
 -#define TARGET_HAS_CPU_GET_TB_CPU_STATE
 -
--static inline void cpu_get_tb_cpu_state(CPUAlphaState *env, vaddr *pc,
--                                        uint64_t *cs_base, uint32_t *pflags)
+-static inline void cpu_get_tb_cpu_state(CPUHexagonState *env, vaddr *pc,
+-                                        uint64_t *cs_base, uint32_t *flags)
 -{
--    *pc = env->pc;
+-    uint32_t hex_flags = 0;
+-    *pc = env->gpr[HEX_REG_PC];
 -    *cs_base = 0;
--    *pflags = env->flags & ENV_FLAG_TB_MASK;
--#ifdef CONFIG_USER_ONLY
--    *pflags |= TB_FLAG_UNALIGN * !env_cpu(env)->prctl_unalign_sigbus;
--#endif
+-    if (*pc == env->gpr[HEX_REG_SA0]) {
+-        hex_flags = FIELD_DP32(hex_flags, TB_FLAGS, IS_TIGHT_LOOP, 1);
+-    }
+-    *flags = hex_flags;
 -}
 -
- #ifdef CONFIG_USER_ONLY
- /* Copied from linux ieee_swcr_to_fpcr.  */
- static inline uint64_t alpha_ieee_swcr_to_fpcr(uint64_t swcr)
-diff --git a/target/alpha/cpu.c b/target/alpha/cpu.c
-index 05f9ee41e9..7efeda02dc 100644
---- a/target/alpha/cpu.c
-+++ b/target/alpha/cpu.c
-@@ -49,6 +49,17 @@ static void alpha_restore_state_to_opc(CPUState *cs,
-     cpu->env.pc = data[0];
+ typedef HexagonCPU ArchCPU;
+ 
+ void hexagon_translate_init(void);
+diff --git a/target/hexagon/cpu.c b/target/hexagon/cpu.c
+index 3a716b9be3..5e0a9441f2 100644
+--- a/target/hexagon/cpu.c
++++ b/target/hexagon/cpu.c
+@@ -273,6 +273,18 @@ static void hexagon_restore_state_to_opc(CPUState *cs,
+     cpu_env(cs)->gpr[HEX_REG_PC] = data[0];
  }
  
-+static void alpha_get_cpu_state(CPUAlphaState *env, vaddr *pc,
-+                                uint64_t *cs_base, uint32_t *pflags)
++static void hexagon_get_cpu_state(CPUHexagonState *env, vaddr *pc,
++                                  uint64_t *cs_base, uint32_t *flags)
 +{
-+    *pc = env->pc;
++    uint32_t hex_flags = 0;
++    *pc = env->gpr[HEX_REG_PC];
 +    *cs_base = 0;
-+    *pflags = env->flags & ENV_FLAG_TB_MASK;
-+#ifdef CONFIG_USER_ONLY
-+    *pflags |= TB_FLAG_UNALIGN * !env_cpu(env)->prctl_unalign_sigbus;
-+#endif
++    if (*pc == env->gpr[HEX_REG_SA0]) {
++        hex_flags = FIELD_DP32(hex_flags, TB_FLAGS, IS_TIGHT_LOOP, 1);
++    }
++    *flags = hex_flags;
 +}
 +
- static bool alpha_cpu_has_work(CPUState *cs)
+ static void hexagon_cpu_reset_hold(Object *obj)
  {
-     /* Here we are checking to see if the CPU should wake up from HALT.
-@@ -194,6 +205,7 @@ static const struct SysemuCPUOps alpha_sysemu_ops = {
- static const TCGCPUOps alpha_tcg_ops = {
-     .initialize = alpha_translate_init,
-     .restore_state_to_opc = alpha_restore_state_to_opc,
-+    .get_cpu_state = alpha_get_cpu_state,
+     CPUState *cs = CPU(obj);
+@@ -327,6 +339,7 @@ static const TCGCPUOps hexagon_tcg_ops = {
+     .initialize = hexagon_translate_init,
+     .synchronize_from_tb = hexagon_cpu_synchronize_from_tb,
+     .restore_state_to_opc = hexagon_restore_state_to_opc,
++    .get_cpu_state = hexagon_get_cpu_state,
+ };
  
- #ifdef CONFIG_USER_ONLY
-     .record_sigsegv = alpha_cpu_record_sigsegv,
+ static void hexagon_cpu_class_init(ObjectClass *c, void *data)
 -- 
 2.41.0
 
