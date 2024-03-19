@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95917CD11C2
-	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Mar 2024 15:47:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF2BDCD11BF
+	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Mar 2024 15:49:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rmbf4-00036I-Va; Tue, 19 Mar 2024 11:45:59 -0400
+	id 1rmbf4-000336-EE; Tue, 19 Mar 2024 11:45:58 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rmbei-0001ss-Bx
- for qemu-riscv@nongnu.org; Tue, 19 Mar 2024 11:45:41 -0400
-Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rmbed-0001mY-50
+ for qemu-riscv@nongnu.org; Tue, 19 Mar 2024 11:45:32 -0400
+Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rmbee-0005sA-0M
- for qemu-riscv@nongnu.org; Tue, 19 Mar 2024 11:45:36 -0400
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-33fd8a2a407so1679870f8f.2
- for <qemu-riscv@nongnu.org>; Tue, 19 Mar 2024 08:45:31 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rmbeZ-0005q2-O3
+ for qemu-riscv@nongnu.org; Tue, 19 Mar 2024 11:45:30 -0400
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-4146178270dso8472815e9.1
+ for <qemu-riscv@nongnu.org>; Tue, 19 Mar 2024 08:45:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710863130; x=1711467930; darn=nongnu.org;
+ d=linaro.org; s=google; t=1710863124; x=1711467924; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zm2YX9dIHSMGPAJWuVZxhizkFvEayxvFDr7Y720qWo8=;
- b=oCijfxYib3UaiNFQgjrgmHEQNFvDPEuggVgfHkLFxvDFvBGYsojVLz0TDsqNZQHvWD
- iz45irMDhSuIYWcUnKAnVbpY9TXAUfBMp6n+8IiqHKkBkaShj0/TvE8oo2fGUVUb5yXa
- A881nAb0TbfIq9GOWcpE2QBUmobSX60X9oPnnqQbi7xUHhz6gxON1AZrCsF9JxgdFFdT
- EFky9fzaTR6HLyeSbaIyBOxAioFnIdp8gU8mbd1WXeB1CzxB4SAWS0md4XWpJEYA7pxo
- BJl9H0oroHe+6P92lwyRNcUXGLINAuZ5cXhuuAgmb2cpTrkEH3Z6G1B8Lp11phSG78Lm
- 1Xxg==
+ bh=cuDVEU6xu2/Is+40NdFmTs6boTjeWsn71DRjetsl+yM=;
+ b=w4dAN8yZnbe9OQi8Q5jpt9VuXwPdpincDvfrUkJG2ny8jJnZ2CkyG7Mgfr0rf8rrMC
+ ZwZlO2SIR8xwkf0EYV6k1/ZE36N4MyZiFmFeeKigce+rNyYaLok+1hReEuyukCNmTEjl
+ YY2QYAdaRPwbQKjvnJuGm3RIQkZxkuPophsayJ787RA0HvNamuSE/piBxbSvIZ28MOaF
+ 0sHm4mcMTYViEVWlgWjARkffUMSah01nqL9TLElfaPy1zzV+18R5WieJc18nq+ITuMuL
+ rMVNePWAT0XUOqvhHvRH3LHnD0N5bTW6t6hKBHVNaSdz0HDZyAQ1gdG8+K2TmNLFvAsM
+ 3ILg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710863130; x=1711467930;
+ d=1e100.net; s=20230601; t=1710863124; x=1711467924;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zm2YX9dIHSMGPAJWuVZxhizkFvEayxvFDr7Y720qWo8=;
- b=kfYoYEI/pHIRNou5Ta2Yx0tJQLN9IKakJI4k5+7UggEJWrS5CKh7aNxEevfSFsay5l
- pm4Q8CetXXwFcFip3hS7Fz2tTbj2DKuh1hOWyiC2H6Nzr+tdQs6+51jzJmjSWyAxuFZF
- V7WmfAQVbej2RZLpfmQH972xcfuHcpqr44sMsbvRIcKO41XMWxSt2d5HRb7tlcHfP7Gi
- ARvnTVfr8BChi7Ffc3AAJaneYtLJTFhs1qpxOpc1BUZXhLjFw3ivuobpV9UABcN1c6Wa
- r5iPIPfl/d+mRH6EIBsPtDRqPunTU88nh58c/fhu9smBLD/ME0ixneP1HWh4gylz7+LB
- iuzg==
+ bh=cuDVEU6xu2/Is+40NdFmTs6boTjeWsn71DRjetsl+yM=;
+ b=vZdNdKbWp/PDz6McOGmDBByiI+oBBVvSez9G/RbjcvqM2sxlfc9M+Al4CaFOw2i6Ws
+ fUAIhqkpL1DBKQT1LpiFCY9Bdmy6FTADM07AAYW4/i65MxKgQWytEOAcoLtMEuVODjfn
+ I5VD5jfAKaqcXcGnBAcm5Sdy3FwAGzlYLJznBeTkAlxoP70X1055R8ZktQgQjxglY4ov
+ hV33jcbP32F/Qwl5Bz0Afci2zp9X8As8eGxwpo5ePOzcyElYNyaLe+Mh2hwdGqjvVZbG
+ +rzLwadYJJfDJAh554Z/Mh+R+q4i0g7853xZ2saBrr0wicKVHV0ZxYR8sXMdOwM3AiZv
+ p+MA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU4JWsbEASbqU2GYBkXTiLdq/tVXhO4QPH1KNB1Ej1Ze26h/cVOJL6KwSVqpVHrh/9VeE7Ge3fDVDD407hEf7v2CPSjM7k=
-X-Gm-Message-State: AOJu0Yz2viFp07Y84L7c3ISrZFB5wdKNgVx90rkAq4A2UDk4zoOju3/x
- maJLZGpCO9zERah+ENwtbGRoKwGISGgAzHm9Bq9FYjZclKuf2uCs+Q+ViN2eQLI=
-X-Google-Smtp-Source: AGHT+IEktPlHxn6q2XP41lRLpPnm1DICm10F3tQlr1jLUMAsRtYpX6DzfdpwLTi4yhjM+HsmkLeNOA==
-X-Received: by 2002:adf:fc8c:0:b0:33e:c7e3:b1bb with SMTP id
- g12-20020adffc8c000000b0033ec7e3b1bbmr9763043wrr.16.1710863130186; 
- Tue, 19 Mar 2024 08:45:30 -0700 (PDT)
+ AJvYcCVi+9ClhQnWzqjK2ZwkXLZg9Gu6hPJHjku/LrFopX1q2XGTlS3TSEQPBV6bbzw2GTZ2uqL2HHIhvyZkbPEYc45wpZHeks4=
+X-Gm-Message-State: AOJu0YyNTXu0UrrJzWeKJr/HBH+rSf8CegvSICboW2wr1YhX0d8HVIKB
+ Wes/NassUPu2ndiFM7WfOE/1lvw10mjA3gs7V3dvPSo/IXQlIPTEhewD1lQ6z+c=
+X-Google-Smtp-Source: AGHT+IHxFJnG06+VS6vpiApyx8TyF9NHxMcA1RBtUQkNgVbl/5uFYyEz/Cd+O99ikAQY0ZdKIVJgyw==
+X-Received: by 2002:a05:600c:35ce:b0:414:5e9d:ad31 with SMTP id
+ r14-20020a05600c35ce00b004145e9dad31mr2871529wmq.13.1710863124688; 
+ Tue, 19 Mar 2024 08:45:24 -0700 (PDT)
 Received: from m1x-phil.lan ([176.176.166.129])
  by smtp.gmail.com with ESMTPSA id
- ba29-20020a0560001c1d00b0033ec8b3b3e4sm9758355wrb.79.2024.03.19.08.45.28
+ dw11-20020a0560000dcb00b0033b66c2d61esm12578388wrb.48.2024.03.19.08.45.23
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 19 Mar 2024 08:45:29 -0700 (PDT)
+ Tue, 19 Mar 2024 08:45:24 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-s390x@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
  qemu-ppc@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
  Anton Johansson <anjo@rev.ng>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Max Filippov <jcmvbkbc@gmail.com>
-Subject: [PATCH-for-9.1 26/27] target/xtensa: Convert to
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Subject: [PATCH-for-9.1 25/27] target/tricore: Convert to
  TCGCPUOps::get_cpu_state()
-Date: Tue, 19 Mar 2024 16:42:55 +0100
-Message-ID: <20240319154258.71206-27-philmd@linaro.org>
+Date: Tue, 19 Mar 2024 16:42:54 +0100
+Message-ID: <20240319154258.71206-26-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240319154258.71206-1-philmd@linaro.org>
 References: <20240319154258.71206-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::335;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x335.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -103,178 +103,64 @@ Convert cpu_get_tb_cpu_state() to TCGCPUOps::get_cpu_state().
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/xtensa/cpu.h | 70 ---------------------------------------------
- target/xtensa/cpu.c | 69 ++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 69 insertions(+), 70 deletions(-)
+ target/tricore/cpu.h | 12 ------------
+ target/tricore/cpu.c | 13 +++++++++++++
+ 2 files changed, 13 insertions(+), 12 deletions(-)
 
-diff --git a/target/xtensa/cpu.h b/target/xtensa/cpu.h
-index 3826b779e4..2b6f2bdea7 100644
---- a/target/xtensa/cpu.h
-+++ b/target/xtensa/cpu.h
-@@ -734,76 +734,6 @@ static inline uint32_t xtensa_replicate_windowstart(CPUXtensaState *env)
+diff --git a/target/tricore/cpu.h b/target/tricore/cpu.h
+index 220af69fc2..9537fef2b9 100644
+--- a/target/tricore/cpu.h
++++ b/target/tricore/cpu.h
+@@ -253,18 +253,6 @@ FIELD(TB_FLAGS, PRIV, 0, 2)
+ void cpu_state_reset(CPUTriCoreState *s);
+ void tricore_tcg_init(void);
  
- #include "exec/cpu-all.h"
- 
--#define TARGET_HAS_CPU_GET_TB_CPU_STATE
--
--static inline void cpu_get_tb_cpu_state(CPUXtensaState *env, vaddr *pc,
+-static inline void cpu_get_tb_cpu_state(CPUTriCoreState *env, vaddr *pc,
 -                                        uint64_t *cs_base, uint32_t *flags)
 -{
--    *pc = env->pc;
+-    uint32_t new_flags = 0;
+-    *pc = env->PC;
 -    *cs_base = 0;
--    *flags = 0;
--    *flags |= xtensa_get_ring(env);
--    if (env->sregs[PS] & PS_EXCM) {
--        *flags |= XTENSA_TBFLAG_EXCM;
--    } else if (xtensa_option_enabled(env->config, XTENSA_OPTION_LOOP)) {
--        target_ulong lend_dist =
--            env->sregs[LEND] - (env->pc & -(1u << TARGET_PAGE_BITS));
 -
--        /*
--         * 0 in the csbase_lend field means that there may not be a loopback
--         * for any instruction that starts inside this page. Any other value
--         * means that an instruction that ends at this offset from the page
--         * start may loop back and will need loopback code to be generated.
--         *
--         * lend_dist is 0 when LEND points to the start of the page, but
--         * no instruction that starts inside this page may end at offset 0,
--         * so it's still correct.
--         *
--         * When an instruction ends at a page boundary it may only start in
--         * the previous page. lend_dist will be encoded as TARGET_PAGE_SIZE
--         * for the TB that contains this instruction.
--         */
--        if (lend_dist < (1u << TARGET_PAGE_BITS) + env->config->max_insn_size) {
--            target_ulong lbeg_off = env->sregs[LEND] - env->sregs[LBEG];
--
--            *cs_base = lend_dist;
--            if (lbeg_off < 256) {
--                *cs_base |= lbeg_off << XTENSA_CSBASE_LBEG_OFF_SHIFT;
--            }
--        }
--    }
--    if (xtensa_option_enabled(env->config, XTENSA_OPTION_EXTENDED_L32R) &&
--            (env->sregs[LITBASE] & 1)) {
--        *flags |= XTENSA_TBFLAG_LITBASE;
--    }
--    if (xtensa_option_enabled(env->config, XTENSA_OPTION_DEBUG)) {
--        if (xtensa_get_cintlevel(env) < env->config->debug_level) {
--            *flags |= XTENSA_TBFLAG_DEBUG;
--        }
--        if (xtensa_get_cintlevel(env) < env->sregs[ICOUNTLEVEL]) {
--            *flags |= XTENSA_TBFLAG_ICOUNT;
--        }
--    }
--    if (xtensa_option_enabled(env->config, XTENSA_OPTION_COPROCESSOR)) {
--        *flags |= env->sregs[CPENABLE] << XTENSA_TBFLAG_CPENABLE_SHIFT;
--    }
--    if (xtensa_option_enabled(env->config, XTENSA_OPTION_WINDOWED_REGISTER) &&
--        (env->sregs[PS] & (PS_WOE | PS_EXCM)) == PS_WOE) {
--        uint32_t windowstart = xtensa_replicate_windowstart(env) >>
--            (env->sregs[WINDOW_BASE] + 1);
--        uint32_t w = ctz32(windowstart | 0x8);
--
--        *flags |= (w << XTENSA_TBFLAG_WINDOW_SHIFT) | XTENSA_TBFLAG_CWOE;
--        *flags |= extract32(env->sregs[PS], PS_CALLINC_SHIFT,
--                            PS_CALLINC_LEN) << XTENSA_TBFLAG_CALLINC_SHIFT;
--    } else {
--        *flags |= 3 << XTENSA_TBFLAG_WINDOW_SHIFT;
--    }
--    if (env->yield_needed) {
--        *flags |= XTENSA_TBFLAG_YIELD;
--    }
+-    new_flags |= FIELD_DP32(new_flags, TB_FLAGS, PRIV,
+-            extract32(env->PSW, 10, 2));
+-    *flags = new_flags;
 -}
 -
- XtensaCPU *xtensa_cpu_create_with_clock(const char *cpu_type,
-                                         Clock *cpu_refclk);
+ #define CPU_RESOLVING_TYPE TYPE_TRICORE_CPU
  
-diff --git a/target/xtensa/cpu.c b/target/xtensa/cpu.c
-index 875cf843c9..35c66432a1 100644
---- a/target/xtensa/cpu.c
-+++ b/target/xtensa/cpu.c
-@@ -63,6 +63,74 @@ static void xtensa_restore_state_to_opc(CPUState *cs,
-     cpu->env.pc = data[0];
+ /* helpers.c */
+diff --git a/target/tricore/cpu.c b/target/tricore/cpu.c
+index a9af73aeb5..d6ac07a488 100644
+--- a/target/tricore/cpu.c
++++ b/target/tricore/cpu.c
+@@ -58,6 +58,18 @@ static void tricore_restore_state_to_opc(CPUState *cs,
+     cpu_env(cs)->PC = data[0];
  }
  
-+static void xtensa_get_cpu_state(CPUXtensaState *env, vaddr *pc,
-+                                 uint64_t *cs_base, uint32_t *flags)
++static void tricore_get_cpu_state(CPUTriCoreState *env, vaddr *pc,
++                                  uint64_t *cs_base, uint32_t *flags)
 +{
-+    *pc = env->pc;
++    uint32_t new_flags = 0;
++    *pc = env->PC;
 +    *cs_base = 0;
-+    *flags = 0;
-+    *flags |= xtensa_get_ring(env);
-+    if (env->sregs[PS] & PS_EXCM) {
-+        *flags |= XTENSA_TBFLAG_EXCM;
-+    } else if (xtensa_option_enabled(env->config, XTENSA_OPTION_LOOP)) {
-+        target_ulong lend_dist =
-+            env->sregs[LEND] - (env->pc & -(1u << TARGET_PAGE_BITS));
 +
-+        /*
-+         * 0 in the csbase_lend field means that there may not be a loopback
-+         * for any instruction that starts inside this page. Any other value
-+         * means that an instruction that ends at this offset from the page
-+         * start may loop back and will need loopback code to be generated.
-+         *
-+         * lend_dist is 0 when LEND points to the start of the page, but
-+         * no instruction that starts inside this page may end at offset 0,
-+         * so it's still correct.
-+         *
-+         * When an instruction ends at a page boundary it may only start in
-+         * the previous page. lend_dist will be encoded as TARGET_PAGE_SIZE
-+         * for the TB that contains this instruction.
-+         */
-+        if (lend_dist < (1u << TARGET_PAGE_BITS) + env->config->max_insn_size) {
-+            target_ulong lbeg_off = env->sregs[LEND] - env->sregs[LBEG];
-+
-+            *cs_base = lend_dist;
-+            if (lbeg_off < 256) {
-+                *cs_base |= lbeg_off << XTENSA_CSBASE_LBEG_OFF_SHIFT;
-+            }
-+        }
-+    }
-+    if (xtensa_option_enabled(env->config, XTENSA_OPTION_EXTENDED_L32R) &&
-+            (env->sregs[LITBASE] & 1)) {
-+        *flags |= XTENSA_TBFLAG_LITBASE;
-+    }
-+    if (xtensa_option_enabled(env->config, XTENSA_OPTION_DEBUG)) {
-+        if (xtensa_get_cintlevel(env) < env->config->debug_level) {
-+            *flags |= XTENSA_TBFLAG_DEBUG;
-+        }
-+        if (xtensa_get_cintlevel(env) < env->sregs[ICOUNTLEVEL]) {
-+            *flags |= XTENSA_TBFLAG_ICOUNT;
-+        }
-+    }
-+    if (xtensa_option_enabled(env->config, XTENSA_OPTION_COPROCESSOR)) {
-+        *flags |= env->sregs[CPENABLE] << XTENSA_TBFLAG_CPENABLE_SHIFT;
-+    }
-+    if (xtensa_option_enabled(env->config, XTENSA_OPTION_WINDOWED_REGISTER) &&
-+        (env->sregs[PS] & (PS_WOE | PS_EXCM)) == PS_WOE) {
-+        uint32_t windowstart = xtensa_replicate_windowstart(env) >>
-+            (env->sregs[WINDOW_BASE] + 1);
-+        uint32_t w = ctz32(windowstart | 0x8);
-+
-+        *flags |= (w << XTENSA_TBFLAG_WINDOW_SHIFT) | XTENSA_TBFLAG_CWOE;
-+        *flags |= extract32(env->sregs[PS], PS_CALLINC_SHIFT,
-+                            PS_CALLINC_LEN) << XTENSA_TBFLAG_CALLINC_SHIFT;
-+    } else {
-+        *flags |= 3 << XTENSA_TBFLAG_WINDOW_SHIFT;
-+    }
-+    if (env->yield_needed) {
-+        *flags |= XTENSA_TBFLAG_YIELD;
-+    }
++    new_flags |= FIELD_DP32(new_flags, TB_FLAGS, PRIV,
++                            extract32(env->PSW, 10, 2));
++    *flags = new_flags;
 +}
 +
- static bool xtensa_cpu_has_work(CPUState *cs)
+ static void tricore_cpu_reset_hold(Object *obj)
  {
- #ifndef CONFIG_USER_ONLY
-@@ -230,6 +298,7 @@ static const TCGCPUOps xtensa_tcg_ops = {
-     .initialize = xtensa_translate_init,
-     .debug_excp_handler = xtensa_breakpoint_handler,
-     .restore_state_to_opc = xtensa_restore_state_to_opc,
-+    .get_cpu_state = xtensa_get_cpu_state,
+     CPUState *cs = CPU(obj);
+@@ -168,6 +180,7 @@ static const TCGCPUOps tricore_tcg_ops = {
+     .initialize = tricore_tcg_init,
+     .synchronize_from_tb = tricore_cpu_synchronize_from_tb,
+     .restore_state_to_opc = tricore_restore_state_to_opc,
++    .get_cpu_state = tricore_get_cpu_state,
+     .tlb_fill = tricore_cpu_tlb_fill,
+ };
  
- #ifndef CONFIG_USER_ONLY
-     .tlb_fill = xtensa_cpu_tlb_fill,
 -- 
 2.41.0
 
