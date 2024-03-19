@@ -4,79 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17852CD11DC
-	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Mar 2024 15:47:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD309CD11DB
+	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Mar 2024 15:47:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rmbeG-0000b9-8E; Tue, 19 Mar 2024 11:45:08 -0400
+	id 1rmbeG-0000dt-Vp; Tue, 19 Mar 2024 11:45:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rmbdt-0007kf-9t
- for qemu-riscv@nongnu.org; Tue, 19 Mar 2024 11:44:46 -0400
-Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rmbe4-00087Y-8u
+ for qemu-riscv@nongnu.org; Tue, 19 Mar 2024 11:44:57 -0400
+Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rmbdo-0005LG-Du
- for qemu-riscv@nongnu.org; Tue, 19 Mar 2024 11:44:45 -0400
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-33ff53528ceso1966224f8f.0
- for <qemu-riscv@nongnu.org>; Tue, 19 Mar 2024 08:44:39 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rmbe0-0005OG-8r
+ for qemu-riscv@nongnu.org; Tue, 19 Mar 2024 11:44:54 -0400
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-33ed4d8e9edso2499399f8f.2
+ for <qemu-riscv@nongnu.org>; Tue, 19 Mar 2024 08:44:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710863079; x=1711467879; darn=nongnu.org;
+ d=linaro.org; s=google; t=1710863091; x=1711467891; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=SBdrzyRnzam5C+4e/1m5S+T9al1+qhyfeKtl+AUinsY=;
- b=MKm7VdDHdGihdu4rM1Dq0+9DySDgqkW6/LnWgzQkCC3WbyrfNrkWjIChETeZlHh3jr
- 1XCtMMB44C5CxFbHY2Y84zEMSNZPe6EezH5mslkjbEZ24t8+SF8LMasMbHSvOuoB2H+b
- AfKnlo4E+zeKATL/+owc+6i/F5dcx9/ZT10wau/p7JAByohpzS/VjXBN+Vsig0ndJjzo
- ny0creta1cmRk78ZP1cpF4pxEysm7mmSwKhYBA1BCD56cXAGHSdzrtjhRx/G64Mo38cg
- x+sgFME8wsKP1Aoia2WbDO7eh/VKKr1kXb48xUu2tGL/pXmQw8/ZBX1Fvo2BobI208I0
- 3p0A==
+ bh=llLOSUG/r9mfjCgy2ld/tJJKqoPOBOUeFtNXpO/0qHo=;
+ b=BP+uOqwaa+4O0/0Jm4W5+DfMmWnITz/V1uW8pj8ps+d7CXMEJZ2HL9yeluSYG+fGRl
+ gCuS5WGXi0E7twJq+xE+K+dKV3HlRj5tbsPLaZoGgg7A8/5KIWReXYhTshSMgnDRL973
+ d+luuSDq2u9IJ648IyN1y56lm/4lNr5Q9aMws3WTcGVzfsa2PmmIrP/MMbJl4+yFUN71
+ LPUCjqe39I/QXr7nhYenNsijoT9MKlVw7DYnM+ZxdE86iwmE1+GbRWMEItLmlz7jghcJ
+ VjCxl7MeDhFwp11hRoLfUWkWJfWqrwVgnsWtj6hSyjFjh82/jT5LYrbAqYKEKwAJ+tek
+ M82w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710863079; x=1711467879;
+ d=1e100.net; s=20230601; t=1710863091; x=1711467891;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=SBdrzyRnzam5C+4e/1m5S+T9al1+qhyfeKtl+AUinsY=;
- b=wuO0/u7KTUGz12plP76brcRHY3kI5ni9v5ZTkYzLFNS7iw+McRjoTg61QrG/92P+Ar
- m1DLteAbmVVR3OrxKLRolqFD2M0bHDmdr9btLHM/mH5Xxzi6JuMfp1X+ZEIjEszMkdz6
- Ad6KxsQrz+y5qVcemYqlmgNNJek0FNccj+n8m5kDDfqBUS4svDX6ia3SPG5qBkPSGS6C
- mC+SOPuiqPQOqiGkAakH8cex2XZwLeXOB+r0cJ1oUR1Sk2riqoBxORfB0zLgfLmKutz4
- c/wpc2ZELVj/BzrjI3Lahhhay9Ty1eYclZxSH5mPiggBOsENRL/h3Wa0CUhhe/MGgCCO
- 5m/g==
+ bh=llLOSUG/r9mfjCgy2ld/tJJKqoPOBOUeFtNXpO/0qHo=;
+ b=mA1apQ5tZyUK0pLn3BTuom4iRyTCSeto/rgdlmqoURRRHmzyC2REZtrpvFOjuxPQyX
+ GLIUekeJKWJGBxHAtIy3NMGZEn6rsWFf0n9/dQ1M/yrNECjQjLWZIN6s5fR0JL/RqT4C
+ TGF6zN80Ym991I64dMksWeprT1tn4d8EplFJv5Im2nBWioE3ADxPOdqMr0fCkxk9Hk3J
+ MRx+TTAg9mcrQ3EBp8dQThskGG7ahAKGIC5A1rypEcp65BedJjsPo7RLgtX6tJoaLdVr
+ 5YV2hzwfXCB0f3Z6aDACKRn55z86P5d6zP8CilpZPkho61rDPNbd4ykAo3l2HHEY1W//
+ iFLA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWxWdSR46j7yxkmCMXxzybR73+662L2VOzlNeg0oObFkDvMPixRMW2tHPuFjJ/9Jm3tMDHDk0tonP+oN9gTlkjJtlw1jCg=
-X-Gm-Message-State: AOJu0Ywrn69llcydbDw8ObTr2CDMkrKK89eUz4SBQV/bItv1KPgMZKRH
- DmzRLGlp9pBIeC6UtwLhJ/Uih/Ictga5d3nhngxrJuTsveHJRjB+HkSzjKCF8ss=
-X-Google-Smtp-Source: AGHT+IGHGqeP39Ra2YKnXUNQF8xSFS49G7XmPrSaqAxfHsk6uXyCi0s3MFUNZUcX2Sz+lVvGSvMuhw==
-X-Received: by 2002:adf:f7c9:0:b0:33e:7719:325d with SMTP id
- a9-20020adff7c9000000b0033e7719325dmr13239459wrq.2.1710863079000; 
- Tue, 19 Mar 2024 08:44:39 -0700 (PDT)
+ AJvYcCXmHDGi1vm7MZlMaF0dCZBSWo3H7XDxa9ZyPPnY9FIHhK2TA/Je47z8veau3mVOqA3aFbs94KTMQkZwmQulcJQV0zInwlQ=
+X-Gm-Message-State: AOJu0YxXlvwcw/fV4YXJ+IgCbuBbeMBjlqRLWOI8gL18ZQbzEMrvQG8m
+ pUpqdZ9MhX39SCiLPFEQnY+RrIcpy3uhdvQnuLHd/qv5TKUjOITxBJDLeQef8Os=
+X-Google-Smtp-Source: AGHT+IHTPclSk48hyBJxb+nLb29dHp1P0+pWRcYXc9YfG4VMXSJX31dhq7YWip8U6j97bcYVEubocg==
+X-Received: by 2002:adf:ce81:0:b0:33f:6ec0:d228 with SMTP id
+ r1-20020adfce81000000b0033f6ec0d228mr6510892wrn.1.1710863090819; 
+ Tue, 19 Mar 2024 08:44:50 -0700 (PDT)
 Received: from m1x-phil.lan ([176.176.166.129])
  by smtp.gmail.com with ESMTPSA id
- y10-20020a5d4aca000000b0033e03d37685sm12668148wrs.55.2024.03.19.08.44.37
+ bq24-20020a5d5a18000000b0033ed8643638sm9333011wrb.106.2024.03.19.08.44.49
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 19 Mar 2024 08:44:38 -0700 (PDT)
+ Tue, 19 Mar 2024 08:44:50 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-s390x@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
  qemu-ppc@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
  Anton Johansson <anjo@rev.ng>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Nicholas Piggin <npiggin@gmail.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>
-Subject: [PATCH-for-9.1 17/27] target/ppc: Indent ppc_tcg_ops[] with 4 spaces
-Date: Tue, 19 Mar 2024 16:42:46 +0100
-Message-ID: <20240319154258.71206-18-philmd@linaro.org>
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Subject: [PATCH-for-9.1 19/27] target/riscv: Convert to
+ TCGCPUOps::get_cpu_state()
+Date: Tue, 19 Mar 2024 16:42:48 +0100
+Message-ID: <20240319154258.71206-20-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240319154258.71206-1-philmd@linaro.org>
 References: <20240319154258.71206-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::431;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x431.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::429;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x429.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -99,51 +103,275 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Convert cpu_get_tb_cpu_state() to TCGCPUOps::get_cpu_state().
+
+Note, now riscv_get_cpu_state() is restricted to TCG, and
+is declared with static scope.
+
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/ppc/cpu_init.c | 26 +++++++++++++-------------
- 1 file changed, 13 insertions(+), 13 deletions(-)
+ target/riscv/cpu.h                      |  3 -
+ target/riscv/cpu.c                      |  2 +-
+ target/riscv/cpu_helper.c               | 87 ------------------------
+ target/riscv/tcg/tcg-cpu.c              | 88 +++++++++++++++++++++++++
+ target/riscv/insn_trans/trans_rvv.c.inc |  2 +-
+ 5 files changed, 90 insertions(+), 92 deletions(-)
 
-diff --git a/target/ppc/cpu_init.c b/target/ppc/cpu_init.c
-index 7e65f08147..464e91faa2 100644
---- a/target/ppc/cpu_init.c
-+++ b/target/ppc/cpu_init.c
-@@ -7360,22 +7360,22 @@ static const struct SysemuCPUOps ppc_sysemu_ops = {
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 3b1a02b944..d00d1be235 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -704,9 +704,6 @@ static inline uint32_t vext_get_vlmax(uint32_t vlenb, uint32_t vsew,
+     return vlen >> (vsew + 3 - lmul);
+ }
+ 
+-void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
+-                          uint64_t *cs_base, uint32_t *pflags);
+-
+ void riscv_cpu_update_mask(CPURISCVState *env);
+ bool riscv_cpu_is_32bit(RISCVCPU *cpu);
+ 
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index c160b9216b..ca537d0e0a 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -889,7 +889,7 @@ static vaddr riscv_cpu_get_pc(CPUState *cs)
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     CPURISCVState *env = &cpu->env;
+ 
+-    /* Match cpu_get_tb_cpu_state. */
++    /* Match riscv_get_cpu_state. */
+     if (env->xl == MXL_RV32) {
+         return env->pc & UINT32_MAX;
+     }
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index ce7322011d..e18a269358 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -25,7 +25,6 @@
+ #include "pmu.h"
+ #include "exec/exec-all.h"
+ #include "instmap.h"
+-#include "tcg/tcg-op.h"
+ #include "trace.h"
+ #include "semihosting/common-semi.h"
+ #include "sysemu/cpu-timers.h"
+@@ -62,92 +61,6 @@ int riscv_env_mmu_index(CPURISCVState *env, bool ifetch)
+ #endif
+ }
+ 
+-void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
+-                          uint64_t *cs_base, uint32_t *pflags)
+-{
+-    RISCVCPU *cpu = env_archcpu(env);
+-    RISCVExtStatus fs, vs;
+-    uint32_t flags = 0;
+-
+-    *pc = env->xl == MXL_RV32 ? env->pc & UINT32_MAX : env->pc;
+-    *cs_base = 0;
+-
+-    if (cpu->cfg.ext_zve32f) {
+-        /*
+-         * If env->vl equals to VLMAX, we can use generic vector operation
+-         * expanders (GVEC) to accerlate the vector operations.
+-         * However, as LMUL could be a fractional number. The maximum
+-         * vector size can be operated might be less than 8 bytes,
+-         * which is not supported by GVEC. So we set vl_eq_vlmax flag to true
+-         * only when maxsz >= 8 bytes.
+-         */
+-
+-        /* lmul encoded as in DisasContext::lmul */
+-        int8_t lmul = sextract32(FIELD_EX64(env->vtype, VTYPE, VLMUL), 0, 3);
+-        uint32_t vsew = FIELD_EX64(env->vtype, VTYPE, VSEW);
+-        uint32_t vlmax = vext_get_vlmax(cpu->cfg.vlenb, vsew, lmul);
+-        uint32_t maxsz = vlmax << vsew;
+-        bool vl_eq_vlmax = (env->vstart == 0) && (vlmax == env->vl) &&
+-                           (maxsz >= 8);
+-        flags = FIELD_DP32(flags, TB_FLAGS, VILL, env->vill);
+-        flags = FIELD_DP32(flags, TB_FLAGS, SEW, vsew);
+-        flags = FIELD_DP32(flags, TB_FLAGS, LMUL,
+-                           FIELD_EX64(env->vtype, VTYPE, VLMUL));
+-        flags = FIELD_DP32(flags, TB_FLAGS, VL_EQ_VLMAX, vl_eq_vlmax);
+-        flags = FIELD_DP32(flags, TB_FLAGS, VTA,
+-                           FIELD_EX64(env->vtype, VTYPE, VTA));
+-        flags = FIELD_DP32(flags, TB_FLAGS, VMA,
+-                           FIELD_EX64(env->vtype, VTYPE, VMA));
+-        flags = FIELD_DP32(flags, TB_FLAGS, VSTART_EQ_ZERO, env->vstart == 0);
+-    } else {
+-        flags = FIELD_DP32(flags, TB_FLAGS, VILL, 1);
+-    }
+-
+-#ifdef CONFIG_USER_ONLY
+-    fs = EXT_STATUS_DIRTY;
+-    vs = EXT_STATUS_DIRTY;
+-#else
+-    flags = FIELD_DP32(flags, TB_FLAGS, PRIV, env->priv);
+-
+-    flags |= riscv_env_mmu_index(env, 0);
+-    fs = get_field(env->mstatus, MSTATUS_FS);
+-    vs = get_field(env->mstatus, MSTATUS_VS);
+-
+-    if (env->virt_enabled) {
+-        flags = FIELD_DP32(flags, TB_FLAGS, VIRT_ENABLED, 1);
+-        /*
+-         * Merge DISABLED and !DIRTY states using MIN.
+-         * We will set both fields when dirtying.
+-         */
+-        fs = MIN(fs, get_field(env->mstatus_hs, MSTATUS_FS));
+-        vs = MIN(vs, get_field(env->mstatus_hs, MSTATUS_VS));
+-    }
+-
+-    /* With Zfinx, floating point is enabled/disabled by Smstateen. */
+-    if (!riscv_has_ext(env, RVF)) {
+-        fs = (smstateen_acc_ok(env, 0, SMSTATEEN0_FCSR) == RISCV_EXCP_NONE)
+-             ? EXT_STATUS_DIRTY : EXT_STATUS_DISABLED;
+-    }
+-
+-    if (cpu->cfg.debug && !icount_enabled()) {
+-        flags = FIELD_DP32(flags, TB_FLAGS, ITRIGGER, env->itrigger_enabled);
+-    }
+-#endif
+-
+-    flags = FIELD_DP32(flags, TB_FLAGS, FS, fs);
+-    flags = FIELD_DP32(flags, TB_FLAGS, VS, vs);
+-    flags = FIELD_DP32(flags, TB_FLAGS, XL, env->xl);
+-    flags = FIELD_DP32(flags, TB_FLAGS, AXL, cpu_address_xl(env));
+-    if (env->cur_pmmask != 0) {
+-        flags = FIELD_DP32(flags, TB_FLAGS, PM_MASK_ENABLED, 1);
+-    }
+-    if (env->cur_pmbase != 0) {
+-        flags = FIELD_DP32(flags, TB_FLAGS, PM_BASE_ENABLED, 1);
+-    }
+-
+-    *pflags = flags;
+-}
+-
+ void riscv_cpu_update_mask(CPURISCVState *env)
+ {
+     target_ulong mask = 0, base = 0;
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index ab6db817db..934007673e 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -31,6 +31,7 @@
+ #include "hw/core/accel-cpu.h"
  #include "hw/core/tcg-cpu-ops.h"
+ #include "tcg/tcg.h"
++#include "sysemu/cpu-timers.h"
  
- static const TCGCPUOps ppc_tcg_ops = {
--  .initialize = ppc_translate_init,
--  .restore_state_to_opc = ppc_restore_state_to_opc,
-+    .initialize = ppc_translate_init,
-+    .restore_state_to_opc = ppc_restore_state_to_opc,
+ /* Hash that stores user set extensions */
+ static GHashTable *multi_ext_user_opts;
+@@ -129,10 +130,97 @@ static void riscv_restore_state_to_opc(CPUState *cs,
+     env->bins = data[1];
+ }
  
- #ifdef CONFIG_USER_ONLY
--  .record_sigsegv = ppc_cpu_record_sigsegv,
-+    .record_sigsegv = ppc_cpu_record_sigsegv,
- #else
--  .tlb_fill = ppc_cpu_tlb_fill,
--  .cpu_exec_interrupt = ppc_cpu_exec_interrupt,
--  .do_interrupt = ppc_cpu_do_interrupt,
--  .cpu_exec_enter = ppc_cpu_exec_enter,
--  .cpu_exec_exit = ppc_cpu_exec_exit,
--  .do_unaligned_access = ppc_cpu_do_unaligned_access,
--  .do_transaction_failed = ppc_cpu_do_transaction_failed,
--  .debug_excp_handler = ppc_cpu_debug_excp_handler,
--  .debug_check_breakpoint = ppc_cpu_debug_check_breakpoint,
--  .debug_check_watchpoint = ppc_cpu_debug_check_watchpoint,
-+    .tlb_fill = ppc_cpu_tlb_fill,
-+    .cpu_exec_interrupt = ppc_cpu_exec_interrupt,
-+    .do_interrupt = ppc_cpu_do_interrupt,
-+    .cpu_exec_enter = ppc_cpu_exec_enter,
-+    .cpu_exec_exit = ppc_cpu_exec_exit,
-+    .do_unaligned_access = ppc_cpu_do_unaligned_access,
-+    .do_transaction_failed = ppc_cpu_do_transaction_failed,
-+    .debug_excp_handler = ppc_cpu_debug_excp_handler,
-+    .debug_check_breakpoint = ppc_cpu_debug_check_breakpoint,
-+    .debug_check_watchpoint = ppc_cpu_debug_check_watchpoint,
- #endif /* !CONFIG_USER_ONLY */
- };
- #endif /* CONFIG_TCG */
++static void riscv_get_cpu_state(CPURISCVState *env, vaddr *pc,
++                                uint64_t *cs_base, uint32_t *pflags)
++{
++    RISCVCPU *cpu = env_archcpu(env);
++    RISCVExtStatus fs, vs;
++    uint32_t flags = 0;
++
++    *pc = env->xl == MXL_RV32 ? env->pc & UINT32_MAX : env->pc;
++    *cs_base = 0;
++
++    if (cpu->cfg.ext_zve32f) {
++        /*
++         * If env->vl equals to VLMAX, we can use generic vector operation
++         * expanders (GVEC) to accerlate the vector operations.
++         * However, as LMUL could be a fractional number. The maximum
++         * vector size can be operated might be less than 8 bytes,
++         * which is not supported by GVEC. So we set vl_eq_vlmax flag to true
++         * only when maxsz >= 8 bytes.
++         */
++
++        /* lmul encoded as in DisasContext::lmul */
++        int8_t lmul = sextract32(FIELD_EX64(env->vtype, VTYPE, VLMUL), 0, 3);
++        uint32_t vsew = FIELD_EX64(env->vtype, VTYPE, VSEW);
++        uint32_t vlmax = vext_get_vlmax(cpu->cfg.vlenb, vsew, lmul);
++        uint32_t maxsz = vlmax << vsew;
++        bool vl_eq_vlmax = (env->vstart == 0) && (vlmax == env->vl) &&
++                           (maxsz >= 8);
++        flags = FIELD_DP32(flags, TB_FLAGS, VILL, env->vill);
++        flags = FIELD_DP32(flags, TB_FLAGS, SEW, vsew);
++        flags = FIELD_DP32(flags, TB_FLAGS, LMUL,
++                           FIELD_EX64(env->vtype, VTYPE, VLMUL));
++        flags = FIELD_DP32(flags, TB_FLAGS, VL_EQ_VLMAX, vl_eq_vlmax);
++        flags = FIELD_DP32(flags, TB_FLAGS, VTA,
++                           FIELD_EX64(env->vtype, VTYPE, VTA));
++        flags = FIELD_DP32(flags, TB_FLAGS, VMA,
++                           FIELD_EX64(env->vtype, VTYPE, VMA));
++        flags = FIELD_DP32(flags, TB_FLAGS, VSTART_EQ_ZERO, env->vstart == 0);
++    } else {
++        flags = FIELD_DP32(flags, TB_FLAGS, VILL, 1);
++    }
++
++#ifdef CONFIG_USER_ONLY
++    fs = EXT_STATUS_DIRTY;
++    vs = EXT_STATUS_DIRTY;
++#else
++    flags = FIELD_DP32(flags, TB_FLAGS, PRIV, env->priv);
++
++    flags |= riscv_env_mmu_index(env, 0);
++    fs = get_field(env->mstatus, MSTATUS_FS);
++    vs = get_field(env->mstatus, MSTATUS_VS);
++
++    if (env->virt_enabled) {
++        flags = FIELD_DP32(flags, TB_FLAGS, VIRT_ENABLED, 1);
++        /*
++         * Merge DISABLED and !DIRTY states using MIN.
++         * We will set both fields when dirtying.
++         */
++        fs = MIN(fs, get_field(env->mstatus_hs, MSTATUS_FS));
++        vs = MIN(vs, get_field(env->mstatus_hs, MSTATUS_VS));
++    }
++
++    /* With Zfinx, floating point is enabled/disabled by Smstateen. */
++    if (!riscv_has_ext(env, RVF)) {
++        fs = (smstateen_acc_ok(env, 0, SMSTATEEN0_FCSR) == RISCV_EXCP_NONE)
++             ? EXT_STATUS_DIRTY : EXT_STATUS_DISABLED;
++    }
++
++    if (cpu->cfg.debug && !icount_enabled()) {
++        flags = FIELD_DP32(flags, TB_FLAGS, ITRIGGER, env->itrigger_enabled);
++    }
++#endif
++
++    flags = FIELD_DP32(flags, TB_FLAGS, FS, fs);
++    flags = FIELD_DP32(flags, TB_FLAGS, VS, vs);
++    flags = FIELD_DP32(flags, TB_FLAGS, XL, env->xl);
++    flags = FIELD_DP32(flags, TB_FLAGS, AXL, cpu_address_xl(env));
++    if (env->cur_pmmask != 0) {
++        flags = FIELD_DP32(flags, TB_FLAGS, PM_MASK_ENABLED, 1);
++    }
++    if (env->cur_pmbase != 0) {
++        flags = FIELD_DP32(flags, TB_FLAGS, PM_BASE_ENABLED, 1);
++    }
++
++    *pflags = flags;
++}
++
+ static const TCGCPUOps riscv_tcg_ops = {
+     .initialize = riscv_translate_init,
+     .synchronize_from_tb = riscv_cpu_synchronize_from_tb,
+     .restore_state_to_opc = riscv_restore_state_to_opc,
++    .get_cpu_state = riscv_get_cpu_state,
+ 
+ #ifndef CONFIG_USER_ONLY
+     .tlb_fill = riscv_cpu_tlb_fill,
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+index e42728990e..3c16c4852b 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -578,7 +578,7 @@ static bool vext_check_slide(DisasContext *s, int vd, int vs2,
+ }
+ 
+ /*
+- * In cpu_get_tb_cpu_state(), set VILL if RVV was not present.
++ * In riscv_get_cpu_state(), set VILL if RVV was not present.
+  * So RVV is also be checked in this function.
+  */
+ static bool vext_check_isa_ill(DisasContext *s)
 -- 
 2.41.0
 
