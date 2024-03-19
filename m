@@ -4,86 +4,120 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1343ECD11BF
-	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Mar 2024 15:51:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 168A0CD11BF
+	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Mar 2024 16:03:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rmbct-0005W9-Ed; Tue, 19 Mar 2024 11:43:43 -0400
+	id 1rmbuV-0004IV-9h; Tue, 19 Mar 2024 12:01:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rmbcq-0005UE-0L
- for qemu-riscv@nongnu.org; Tue, 19 Mar 2024 11:43:40 -0400
-Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
+ (Exim 4.90_1) (envelope-from <cfontana@suse.de>)
+ id 1rmbuA-00042X-CI; Tue, 19 Mar 2024 12:01:35 -0400
+Received: from smtp-out2.suse.de ([195.135.223.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rmbck-0004rF-9n
- for qemu-riscv@nongnu.org; Tue, 19 Mar 2024 11:43:39 -0400
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-41467d86184so3562735e9.3
- for <qemu-riscv@nongnu.org>; Tue, 19 Mar 2024 08:43:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710863012; x=1711467812; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tpNrOmMKfl0DvRbVcOp4RsIWsRWfZfygeoHOWL6CLc0=;
- b=WLHb/r2SCxCGp+SHNgNkxz00nvzqclCxeFKGxhnyzrEyx/stYDVJFg/8VMHHDfjUxg
- 0DeMNyjYwQ5xcT253p3Rb2XlOWq3O98qbltqKzA8NE5bM4XRoo5UsJCGiKebVxJBlDvE
- +n3d7JkllKHI0+EcBUTP7fCyguoZ73FzTPolSJkuTPYL/ryF55UYpHBKF6iiAo6yQQHO
- a6NR9B5rOAIZfGIf/1KCKP38IVgYqwBaTPqAoBAL3NMyaNcz7UTaId0W3GWbcV6s3ts2
- yPHTgGvwyD2gcUwdVnevAuOFTSwQHKO4yh4WW0Xgl3QVfKkFEpDKdKy77Am309w475Us
- QhaA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710863012; x=1711467812;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=tpNrOmMKfl0DvRbVcOp4RsIWsRWfZfygeoHOWL6CLc0=;
- b=Ns3vDccHmkJefPkNAXPfpQljDFuda3UhnDmE0FZYpIwS0qtXTX8jZI5DPeq1wkiD32
- iUZaT007HrW4YOq3CTy22RXtl7PJ0PGygy3wTOQBIScoOWaWhqr5PfHto1g8+FdkEazY
- OUE840vMbmc55n4vqq6T6ZliBXOQjL3+arWHGayD84mKYKeJ+4C+9L/VcnuFAsP09KTS
- Gu9I5y39wMue1sixXkALBr7bAQPk3ZWwRte8Xkvig1113tSAfL9AMIGa894TIxdodpR/
- 5SnynV3X5jv9d91zXlBnxruZ6MnKP1pGau56dw5jiTEAgFcyNIvEIyYmX3vENGWw0JNm
- /ltA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWVBc/HebvmmzqUdApsnO2mIOQw9It7LlOmr5HQ2vY9J7Y89e6TVl6bef5PvGG8zW/MHGFdgrRGVc3NbnjmJVJG0R640do=
-X-Gm-Message-State: AOJu0Yxb/N5VIZw9VjJxvBS1ocHvlpxgQsxQQXb+vdNB4IxpuM+2RYr2
- 2TENtdYC5mgMlFmrk4ifLx+nbGlFyyplomEPPe12jnNxqGIDelqJgxnpUAZMh5c=
-X-Google-Smtp-Source: AGHT+IErRBXKzRYXMMuqeMoxJpHBJ/FdksWdKkX2VXU6f6pKqOZw5EQ1YAtOnpP2vShxkzhnDOIUuQ==
-X-Received: by 2002:a05:600c:4f53:b0:414:ed4:e959 with SMTP id
- m19-20020a05600c4f5300b004140ed4e959mr6134890wmq.41.1710863011795; 
- Tue, 19 Mar 2024 08:43:31 -0700 (PDT)
-Received: from m1x-phil.lan ([176.176.166.129])
- by smtp.gmail.com with ESMTPSA id
- r8-20020a05600c458800b0041409c1af05sm10579703wmo.21.2024.03.19.08.43.30
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 19 Mar 2024 08:43:31 -0700 (PDT)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-To: qemu-devel@nongnu.org
+ (Exim 4.90_1) (envelope-from <cfontana@suse.de>)
+ id 1rmbu8-0000MY-2t; Tue, 19 Mar 2024 12:01:33 -0400
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 9AD1D5D89F;
+ Tue, 19 Mar 2024 16:01:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1710864078; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=TamivndfBC9761WbcWGHR42Hb7ojW7ILFJCEWzq+QxI=;
+ b=MvhbDmmro8/UnyKevr+IqHEuHQnSu8sZViMszQksgwNuFIxv0iEYie4Ahy7cHKzQS1q6wQ
+ oGXFzEGMFKI3mdx1oObEZBJRFSVNY9ZjriK/Eo1ZuMz3eWcRRD3lLHRj7zrgWZYm0tSlj2
+ BJtIGy0tlZqLObQpBloF9XV0x24rK4M=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1710864078;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=TamivndfBC9761WbcWGHR42Hb7ojW7ILFJCEWzq+QxI=;
+ b=c+mMH3uRXacm4srNJ4S5fJVihYKNiIEBPlkuUKQId7v2C8vVmJeod52mIHkWEvp7wu5vhH
+ Fy2qfRIt3Ignb9DA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1710864078; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=TamivndfBC9761WbcWGHR42Hb7ojW7ILFJCEWzq+QxI=;
+ b=MvhbDmmro8/UnyKevr+IqHEuHQnSu8sZViMszQksgwNuFIxv0iEYie4Ahy7cHKzQS1q6wQ
+ oGXFzEGMFKI3mdx1oObEZBJRFSVNY9ZjriK/Eo1ZuMz3eWcRRD3lLHRj7zrgWZYm0tSlj2
+ BJtIGy0tlZqLObQpBloF9XV0x24rK4M=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1710864078;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=TamivndfBC9761WbcWGHR42Hb7ojW7ILFJCEWzq+QxI=;
+ b=c+mMH3uRXacm4srNJ4S5fJVihYKNiIEBPlkuUKQId7v2C8vVmJeod52mIHkWEvp7wu5vhH
+ Fy2qfRIt3Ignb9DA==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 5DBAC136A5;
+ Tue, 19 Mar 2024 16:01:18 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([10.150.64.162])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id Km5xFc62+WXxHAAAD6G6ig
+ (envelope-from <cfontana@suse.de>); Tue, 19 Mar 2024 16:01:18 +0000
+Message-ID: <c756fec0-187f-c117-137b-46341a69fdd8@suse.de>
+Date: Tue, 19 Mar 2024 17:01:17 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.4.0
+Subject: Re: [PATCH-for-9.1 00/27] accel/tcg: Introduce
+ TCGCPUOps::get_cpu_state() handler
+Content-Language: en-US
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org
 Cc: qemu-s390x@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
  qemu-ppc@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
- Anton Johansson <anjo@rev.ng>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Peter Maydell <peter.maydell@linaro.org>
-Subject: [PATCH-for-9.1 05/27] target/arm: Convert to
- TCGCPUOps::get_cpu_state()
-Date: Tue, 19 Mar 2024 16:42:34 +0100
-Message-ID: <20240319154258.71206-6-philmd@linaro.org>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20240319154258.71206-1-philmd@linaro.org>
+ Anton Johansson <anjo@rev.ng>
 References: <20240319154258.71206-1-philmd@linaro.org>
-MIME-Version: 1.0
+ <b2b9f1f0-bb84-4cbe-828d-6142ebbbbd54@linaro.org>
+From: Claudio Fontana <cfontana@suse.de>
+In-Reply-To: <b2b9f1f0-bb84-4cbe-828d-6142ebbbbd54@linaro.org>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::332;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x332.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01,
- T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
+X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
+X-Spamd-Result: default: False [-1.74 / 50.00]; RCVD_VIA_SMTP_AUTH(0.00)[];
+ TO_DN_SOME(0.00)[]; DWL_DNSWL_BLOCKED(0.00)[suse.de:dkim];
+ RCVD_COUNT_THREE(0.00)[3]; DKIM_TRACE(0.00)[suse.de:+];
+ MX_GOOD(-0.01)[]; RCPT_COUNT_SEVEN(0.00)[8];
+ NEURAL_HAM_SHORT(-0.20)[-1.000]; FROM_EQ_ENVFROM(0.00)[];
+ MIME_TRACE(0.00)[0:+]; MID_RHS_MATCH_FROM(0.00)[];
+ BAYES_HAM(-1.73)[93.37%]; ARC_NA(0.00)[];
+ R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ FROM_HAS_DN(0.00)[]; TO_MATCH_ENVRCPT_ALL(0.00)[];
+ NEURAL_HAM_LONG(-1.00)[-1.000]; MIME_GOOD(-0.10)[text/plain];
+ DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:dkim];
+ FUZZY_BLOCKED(0.00)[rspamd.com]; RCVD_TLS_ALL(0.00)[];
+ SUSPICIOUS_RECIPS(1.50)[];
+ RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from]
+Authentication-Results: smtp-out2.suse.de;
+ dkim=pass header.d=suse.de header.s=susede2_rsa header.b=MvhbDmmr;
+ dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=c+mMH3uR
+X-Rspamd-Queue-Id: 9AD1D5D89F
+Received-SPF: pass client-ip=195.135.223.131; envelope-from=cfontana@suse.de;
+ helo=smtp-out2.suse.de
+X-Spam_score_int: -67
+X-Spam_score: -6.8
+X-Spam_bar: ------
+X-Spam_report: (-6.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-2.417,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,323 +133,58 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Convert cpu_get_tb_cpu_state() to TCGCPUOps::get_cpu_state().
+Thanks Philippe, I fear I am unable to really be uptodate,
+but it's great to see all the cleanup you and others have done!
 
-Move mve_no_pred() along because it is only used by
-arm_get_cpu_state().
+Ciao,
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
----
- target/arm/cpu.h         |   5 --
- target/arm/internals.h   |   2 +
- target/arm/cpu.c         | 110 +++++++++++++++++++++++++++++++++++++++
- target/arm/helper.c      | 109 --------------------------------------
- target/arm/tcg-stubs.c   |   4 --
- target/arm/tcg/cpu-v7m.c |   1 +
- 6 files changed, 113 insertions(+), 118 deletions(-)
+Claudio
 
-diff --git a/target/arm/cpu.h b/target/arm/cpu.h
-index d20e2bd90e..c563ff2b77 100644
---- a/target/arm/cpu.h
-+++ b/target/arm/cpu.h
-@@ -3151,11 +3151,6 @@ static inline bool arm_cpu_bswap_data(CPUARMState *env)
- }
- #endif
- 
--#define TARGET_HAS_CPU_GET_TB_CPU_STATE
--
--void cpu_get_tb_cpu_state(CPUARMState *env, vaddr *pc,
--                          uint64_t *cs_base, uint32_t *flags);
--
- enum {
-     QEMU_PSCI_CONDUIT_DISABLED = 0,
-     QEMU_PSCI_CONDUIT_SMC = 1,
-diff --git a/target/arm/internals.h b/target/arm/internals.h
-index 087caaf2bd..5daef30569 100644
---- a/target/arm/internals.h
-+++ b/target/arm/internals.h
-@@ -353,6 +353,8 @@ void arm_translate_init(void);
- void arm_restore_state_to_opc(CPUState *cs,
-                               const TranslationBlock *tb,
-                               const uint64_t *data);
-+void arm_get_cpu_state(CPUARMState *env, vaddr *pc,
-+                       uint64_t *cs_base, uint32_t *flags);
- void arm_cpu_synchronize_from_tb(CPUState *cs, const TranslationBlock *tb);
- #endif /* CONFIG_TCG */
- 
-diff --git a/target/arm/cpu.c b/target/arm/cpu.c
-index ab8d007a86..8e41e1c427 100644
---- a/target/arm/cpu.c
-+++ b/target/arm/cpu.c
-@@ -120,6 +120,115 @@ void arm_restore_state_to_opc(CPUState *cs,
-         env->exception.syndrome = data[2] << ARM_INSN_START_WORD2_SHIFT;
-     }
- }
-+
-+static bool mve_no_pred(CPUARMState *env)
-+{
-+    /*
-+     * Return true if there is definitely no predication of MVE
-+     * instructions by VPR or LTPSIZE. (Returning false even if there
-+     * isn't any predication is OK; generated code will just be
-+     * a little worse.)
-+     * If the CPU does not implement MVE then this TB flag is always 0.
-+     *
-+     * NOTE: if you change this logic, the "recalculate s->mve_no_pred"
-+     * logic in gen_update_fp_context() needs to be updated to match.
-+     *
-+     * We do not include the effect of the ECI bits here -- they are
-+     * tracked in other TB flags. This simplifies the logic for
-+     * "when did we emit code that changes the MVE_NO_PRED TB flag
-+     * and thus need to end the TB?".
-+     */
-+    if (cpu_isar_feature(aa32_mve, env_archcpu(env))) {
-+        return false;
-+    }
-+    if (env->v7m.vpr) {
-+        return false;
-+    }
-+    if (env->v7m.ltpsize < 4) {
-+        return false;
-+    }
-+    return true;
-+}
-+
-+void arm_get_cpu_state(CPUARMState *env, vaddr *pc,
-+                       uint64_t *cs_base, uint32_t *pflags)
-+{
-+    CPUARMTBFlags flags;
-+
-+    assert_hflags_rebuild_correctly(env);
-+    flags = env->hflags;
-+
-+    if (EX_TBFLAG_ANY(flags, AARCH64_STATE)) {
-+        *pc = env->pc;
-+        if (cpu_isar_feature(aa64_bti, env_archcpu(env))) {
-+            DP_TBFLAG_A64(flags, BTYPE, env->btype);
-+        }
-+    } else {
-+        *pc = env->regs[15];
-+
-+        if (arm_feature(env, ARM_FEATURE_M)) {
-+            if (arm_feature(env, ARM_FEATURE_M_SECURITY) &&
-+                FIELD_EX32(env->v7m.fpccr[M_REG_S], V7M_FPCCR, S)
-+                != env->v7m.secure) {
-+                DP_TBFLAG_M32(flags, FPCCR_S_WRONG, 1);
-+            }
-+
-+            if ((env->v7m.fpccr[env->v7m.secure] & R_V7M_FPCCR_ASPEN_MASK) &&
-+                (!(env->v7m.control[M_REG_S] & R_V7M_CONTROL_FPCA_MASK) ||
-+                 (env->v7m.secure &&
-+                  !(env->v7m.control[M_REG_S] & R_V7M_CONTROL_SFPA_MASK)))) {
-+                /*
-+                 * ASPEN is set, but FPCA/SFPA indicate that there is no
-+                 * active FP context; we must create a new FP context before
-+                 * executing any FP insn.
-+                 */
-+                DP_TBFLAG_M32(flags, NEW_FP_CTXT_NEEDED, 1);
-+            }
-+
-+            bool is_secure = env->v7m.fpccr[M_REG_S] & R_V7M_FPCCR_S_MASK;
-+            if (env->v7m.fpccr[is_secure] & R_V7M_FPCCR_LSPACT_MASK) {
-+                DP_TBFLAG_M32(flags, LSPACT, 1);
-+            }
-+
-+            if (mve_no_pred(env)) {
-+                DP_TBFLAG_M32(flags, MVE_NO_PRED, 1);
-+            }
-+        } else {
-+            /*
-+             * Note that XSCALE_CPAR shares bits with VECSTRIDE.
-+             * Note that VECLEN+VECSTRIDE are RES0 for M-profile.
-+             */
-+            if (arm_feature(env, ARM_FEATURE_XSCALE)) {
-+                DP_TBFLAG_A32(flags, XSCALE_CPAR, env->cp15.c15_cpar);
-+            } else {
-+                DP_TBFLAG_A32(flags, VECLEN, env->vfp.vec_len);
-+                DP_TBFLAG_A32(flags, VECSTRIDE, env->vfp.vec_stride);
-+            }
-+            if (env->vfp.xregs[ARM_VFP_FPEXC] & (1 << 30)) {
-+                DP_TBFLAG_A32(flags, VFPEN, 1);
-+            }
-+        }
-+
-+        DP_TBFLAG_AM32(flags, THUMB, env->thumb);
-+        DP_TBFLAG_AM32(flags, CONDEXEC, env->condexec_bits);
-+    }
-+
-+    /*
-+     * The SS_ACTIVE and PSTATE_SS bits correspond to the state machine
-+     * states defined in the ARM ARM for software singlestep:
-+     *  SS_ACTIVE   PSTATE.SS   State
-+     *     0            x       Inactive (the TB flag for SS is always 0)
-+     *     1            0       Active-pending
-+     *     1            1       Active-not-pending
-+     * SS_ACTIVE is set in hflags; PSTATE__SS is computed every TB.
-+     */
-+    if (EX_TBFLAG_ANY(flags, SS_ACTIVE) && (env->pstate & PSTATE_SS)) {
-+        DP_TBFLAG_ANY(flags, PSTATE__SS, 1);
-+    }
-+
-+    *pflags = flags.flags;
-+    *cs_base = flags.flags2;
-+}
- #endif /* CONFIG_TCG */
- 
- static bool arm_cpu_has_work(CPUState *cs)
-@@ -2479,6 +2588,7 @@ static const TCGCPUOps arm_tcg_ops = {
-     .synchronize_from_tb = arm_cpu_synchronize_from_tb,
-     .debug_excp_handler = arm_debug_excp_handler,
-     .restore_state_to_opc = arm_restore_state_to_opc,
-+    .get_cpu_state = arm_get_cpu_state,
- 
- #ifdef CONFIG_USER_ONLY
-     .record_sigsegv = arm_cpu_record_sigsegv,
-diff --git a/target/arm/helper.c b/target/arm/helper.c
-index 3f3a5b55d4..e50bec27d9 100644
---- a/target/arm/helper.c
-+++ b/target/arm/helper.c
-@@ -12509,115 +12509,6 @@ ARMMMUIdx arm_mmu_idx(CPUARMState *env)
-     return arm_mmu_idx_el(env, arm_current_el(env));
- }
- 
--static bool mve_no_pred(CPUARMState *env)
--{
--    /*
--     * Return true if there is definitely no predication of MVE
--     * instructions by VPR or LTPSIZE. (Returning false even if there
--     * isn't any predication is OK; generated code will just be
--     * a little worse.)
--     * If the CPU does not implement MVE then this TB flag is always 0.
--     *
--     * NOTE: if you change this logic, the "recalculate s->mve_no_pred"
--     * logic in gen_update_fp_context() needs to be updated to match.
--     *
--     * We do not include the effect of the ECI bits here -- they are
--     * tracked in other TB flags. This simplifies the logic for
--     * "when did we emit code that changes the MVE_NO_PRED TB flag
--     * and thus need to end the TB?".
--     */
--    if (cpu_isar_feature(aa32_mve, env_archcpu(env))) {
--        return false;
--    }
--    if (env->v7m.vpr) {
--        return false;
--    }
--    if (env->v7m.ltpsize < 4) {
--        return false;
--    }
--    return true;
--}
--
--void cpu_get_tb_cpu_state(CPUARMState *env, vaddr *pc,
--                          uint64_t *cs_base, uint32_t *pflags)
--{
--    CPUARMTBFlags flags;
--
--    assert_hflags_rebuild_correctly(env);
--    flags = env->hflags;
--
--    if (EX_TBFLAG_ANY(flags, AARCH64_STATE)) {
--        *pc = env->pc;
--        if (cpu_isar_feature(aa64_bti, env_archcpu(env))) {
--            DP_TBFLAG_A64(flags, BTYPE, env->btype);
--        }
--    } else {
--        *pc = env->regs[15];
--
--        if (arm_feature(env, ARM_FEATURE_M)) {
--            if (arm_feature(env, ARM_FEATURE_M_SECURITY) &&
--                FIELD_EX32(env->v7m.fpccr[M_REG_S], V7M_FPCCR, S)
--                != env->v7m.secure) {
--                DP_TBFLAG_M32(flags, FPCCR_S_WRONG, 1);
--            }
--
--            if ((env->v7m.fpccr[env->v7m.secure] & R_V7M_FPCCR_ASPEN_MASK) &&
--                (!(env->v7m.control[M_REG_S] & R_V7M_CONTROL_FPCA_MASK) ||
--                 (env->v7m.secure &&
--                  !(env->v7m.control[M_REG_S] & R_V7M_CONTROL_SFPA_MASK)))) {
--                /*
--                 * ASPEN is set, but FPCA/SFPA indicate that there is no
--                 * active FP context; we must create a new FP context before
--                 * executing any FP insn.
--                 */
--                DP_TBFLAG_M32(flags, NEW_FP_CTXT_NEEDED, 1);
--            }
--
--            bool is_secure = env->v7m.fpccr[M_REG_S] & R_V7M_FPCCR_S_MASK;
--            if (env->v7m.fpccr[is_secure] & R_V7M_FPCCR_LSPACT_MASK) {
--                DP_TBFLAG_M32(flags, LSPACT, 1);
--            }
--
--            if (mve_no_pred(env)) {
--                DP_TBFLAG_M32(flags, MVE_NO_PRED, 1);
--            }
--        } else {
--            /*
--             * Note that XSCALE_CPAR shares bits with VECSTRIDE.
--             * Note that VECLEN+VECSTRIDE are RES0 for M-profile.
--             */
--            if (arm_feature(env, ARM_FEATURE_XSCALE)) {
--                DP_TBFLAG_A32(flags, XSCALE_CPAR, env->cp15.c15_cpar);
--            } else {
--                DP_TBFLAG_A32(flags, VECLEN, env->vfp.vec_len);
--                DP_TBFLAG_A32(flags, VECSTRIDE, env->vfp.vec_stride);
--            }
--            if (env->vfp.xregs[ARM_VFP_FPEXC] & (1 << 30)) {
--                DP_TBFLAG_A32(flags, VFPEN, 1);
--            }
--        }
--
--        DP_TBFLAG_AM32(flags, THUMB, env->thumb);
--        DP_TBFLAG_AM32(flags, CONDEXEC, env->condexec_bits);
--    }
--
--    /*
--     * The SS_ACTIVE and PSTATE_SS bits correspond to the state machine
--     * states defined in the ARM ARM for software singlestep:
--     *  SS_ACTIVE   PSTATE.SS   State
--     *     0            x       Inactive (the TB flag for SS is always 0)
--     *     1            0       Active-pending
--     *     1            1       Active-not-pending
--     * SS_ACTIVE is set in hflags; PSTATE__SS is computed every TB.
--     */
--    if (EX_TBFLAG_ANY(flags, SS_ACTIVE) && (env->pstate & PSTATE_SS)) {
--        DP_TBFLAG_ANY(flags, PSTATE__SS, 1);
--    }
--
--    *pflags = flags.flags;
--    *cs_base = flags.flags2;
--}
--
- #ifdef TARGET_AARCH64
- /*
-  * The manual says that when SVE is enabled and VQ is widened the
-diff --git a/target/arm/tcg-stubs.c b/target/arm/tcg-stubs.c
-index 152b172e24..1a7ddb3664 100644
---- a/target/arm/tcg-stubs.c
-+++ b/target/arm/tcg-stubs.c
-@@ -21,7 +21,3 @@ void raise_exception_ra(CPUARMState *env, uint32_t excp, uint32_t syndrome,
- {
-     g_assert_not_reached();
- }
--/* Temporarily while cpu_get_tb_cpu_state() is still in common code */
--void assert_hflags_rebuild_correctly(CPUARMState *env)
--{
--}
-diff --git a/target/arm/tcg/cpu-v7m.c b/target/arm/tcg/cpu-v7m.c
-index c059c681e9..de4a1ff81b 100644
---- a/target/arm/tcg/cpu-v7m.c
-+++ b/target/arm/tcg/cpu-v7m.c
-@@ -237,6 +237,7 @@ static const TCGCPUOps arm_v7m_tcg_ops = {
-     .synchronize_from_tb = arm_cpu_synchronize_from_tb,
-     .debug_excp_handler = arm_debug_excp_handler,
-     .restore_state_to_opc = arm_restore_state_to_opc,
-+    .get_cpu_state = arm_get_cpu_state,
- 
- #ifdef CONFIG_USER_ONLY
-     .record_sigsegv = arm_cpu_record_sigsegv,
--- 
-2.41.0
+On 3/19/24 16:48, Philippe Mathieu-Daudé wrote:
+> (Forgot to Cc Claudio to keep him updated)
+> 
+> On 19/3/24 16:42, Philippe Mathieu-Daudé wrote:
+>> Hi,
+>>
+>> This series introduce a generic get_cpu_state() handler in
+>> TCGCPUOps and convert each target to it.
+>>
+>> This is required to get a single cpu_get_tb_cpu_state()
+>> for heterogeneous emulation (since this method is called
+>> by accel/tcg/).
+>>
+>> Regards,
+>>
+>> Phil.
+>>
+>> Philippe Mathieu-Daudé (27):
+>>    accel/tcg: Ensure frontends define restore_state_to_opc handler
+>>    accel/tcg: Introduce TCGCPUOps::get_cpu_state() handler
+>>    target/alpha: Convert to TCGCPUOps::get_cpu_state()
+>>    target/arm: Restrict TCG-specific declarations
+>>    target/arm: Convert to TCGCPUOps::get_cpu_state()
+>>    target/avr: Convert to TCGCPUOps::get_cpu_state()
+>>    target/cris: Convert to TCGCPUOps::get_cpu_state()
+>>    target/hexagon: Convert to TCGCPUOps::get_cpu_state()
+>>    target/hppa: Convert to TCGCPUOps::get_cpu_state()
+>>    target/i386: Convert to TCGCPUOps::get_cpu_state()
+>>    target/loongarch: Convert to TCGCPUOps::get_cpu_state()
+>>    target/m68k: Convert to TCGCPUOps::get_cpu_state()
+>>    target/microblaze: Convert to TCGCPUOps::get_cpu_state()
+>>    target/mips: Convert to TCGCPUOps::get_cpu_state()
+>>    target/nios2: Convert to TCGCPUOps::get_cpu_state()
+>>    target/openrisc: Convert to TCGCPUOps::get_cpu_state()
+>>    target/ppc: Indent ppc_tcg_ops[] with 4 spaces
+>>    target/ppc: Convert to TCGCPUOps::get_cpu_state()
+>>    target/riscv: Convert to TCGCPUOps::get_cpu_state()
+>>    target/rx: Convert to TCGCPUOps::get_cpu_state()
+>>    target/s390x: Restrict TCG-specific declarations
+>>    target/s390x: Convert to TCGCPUOps::get_cpu_state()
+>>    target/sh4: Convert to TCGCPUOps::get_cpu_state()
+>>    target/sparc: Convert to TCGCPUOps::get_cpu_state()
+>>    target/tricore: Convert to TCGCPUOps::get_cpu_state()
+>>    target/xtensa: Convert to TCGCPUOps::get_cpu_state()
+>>    accel/tcg: Remove check on TARGET_HAS_CPU_GET_TB_CPU_STATE
+> 
 
 
