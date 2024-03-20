@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA2CDC54E58
-	for <qemu-riscv@archiver.kernel.org>; Wed, 20 Mar 2024 20:18:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77902C54E67
+	for <qemu-riscv@archiver.kernel.org>; Wed, 20 Mar 2024 21:03:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rn2OA-0005xJ-2H; Wed, 20 Mar 2024 16:18:18 -0400
+	id 1rn35A-0003Mk-OB; Wed, 20 Mar 2024 17:02:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rn2O8-0005wi-Gi
- for qemu-riscv@nongnu.org; Wed, 20 Mar 2024 16:18:16 -0400
+ id 1rn358-0003MU-Kv
+ for qemu-riscv@nongnu.org; Wed, 20 Mar 2024 17:02:42 -0400
 Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rn2O6-00070n-VK
- for qemu-riscv@nongnu.org; Wed, 20 Mar 2024 16:18:16 -0400
+ id 1rn353-0006l6-DS
+ for qemu-riscv@nongnu.org; Wed, 20 Mar 2024 17:02:39 -0400
 Received: by mail-pf1-x429.google.com with SMTP id
- d2e1a72fcca58-6e88e4c8500so270190b3a.2
- for <qemu-riscv@nongnu.org>; Wed, 20 Mar 2024 13:18:14 -0700 (PDT)
+ d2e1a72fcca58-6e709e0c123so340206b3a.1
+ for <qemu-riscv@nongnu.org>; Wed, 20 Mar 2024 14:02:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1710965893; x=1711570693; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1710968555; x=1711573355; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=0g2ewkBwGtZphnyaMlw+pjLQWUdy7YDAogBqxB/fyEE=;
- b=XzsJmQ67iUigxrz9mUZrj/abdJoRUb+S2tMg5BbQHyEtdJc+1zG0bAEOyGWq6xraET
- 9r/CQa12L+nA/wJ6xK9cu8x+Qb8x2PyA9pjcAv0NSsituAJaHubryPbfL5dKCsaAAU77
- z3mu0/btHhykt97tq30wpZ4pRq56aeLvwNRTDGAJvQJClrybU0kaPkg8Wgo6p8tFmyQp
- 4oewD2p65vqQzrzx6+H/Btiy4Q1eMjsZGYCzHOBPWFHvpruMwFuLEv2OHSrA36e6S+oB
- 8YBchXLeLqDWJZFtoafyHVkHP6difQ5MwfQS/ytkt/2pXiURjQQwEXKM9cOLNhRU8cxr
- +L9w==
+ bh=sfpDhvNVJE/c/xB9tQjWioJlmZkL0NYOq3onpV9mdy8=;
+ b=E1YwPbwLNV1G6jkFsGfN4CT0BKocZWyb3vOnOhOnePucNuYeEfE6yzpQZriv51YdbO
+ QpFnE7tl/4ZHAsk0v2cimY8SbEHsgHJKq0tt+RSzcWGhkncW3BqEBMurkJRNP0ba8pbb
+ Ps3UPcrWJkmeWpZknPW/L+G/CZlmPMEX0V2f72DzJxOCPNHtNRYVKvNE6Pa6Bd5VixNI
+ 9ugbhMv49oUAVV6nXsuKtohPzUtoKfFVlACsli4RxmGk5GX9VSrj+GxsLfkTk8ZbUr+Z
+ T+Wf3A6qMdpih+uFjsIU9Ha4UheeyEu39cZjOMEbCty87oZhrGxpTUd15y5XtX8kQ8/J
+ vwIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710965893; x=1711570693;
+ d=1e100.net; s=20230601; t=1710968555; x=1711573355;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=0g2ewkBwGtZphnyaMlw+pjLQWUdy7YDAogBqxB/fyEE=;
- b=OGSWhCOe2WyAgE6E2K6oRq3PdgXNJuKdNhO1R0yIKvnBG7rgEr3sCx3hvmqz8uRcpb
- r8R8DhHcW+q6hqtSgFsCLMAdPqAXAQYiTKmZOgjmBVgfCEj/2zr060zOYHHaWGi6CbnG
- vplgDHKlPkE6hV3kvYnJ0ukyTI313ONhBIW0grKqenqN381aZ1+yKTXdySex1jbUoGbN
- X13QMv3SdSYXQo8oeVXRb77yuCubiJk3tZvZD7LQaLz+aCRCU+6BMCHh5ZYse+wyAXy0
- 8DjzFG8XfJsqdQdedkVJVyjEEEDsmjw0ZOAL9/XaLBLNL+FRo1U6otKsKbj9BCtnrPm9
- N/0A==
-X-Gm-Message-State: AOJu0YxarGKTgPYlJD8ParpqDJsC1BLLN387IXfPfH+c7JXehHDPyZRt
- V2K2GjuOcg5425SzuDzTNoU94E/eLGBVXsywmGeSFzZkj9LHAZpS+TtXm7zKpM4=
-X-Google-Smtp-Source: AGHT+IHdr08UWrcnIZlu+i9Se4QkdOMTCKi20OV7MACR8tWqXSYao2n+I3gl8W5HTMF6crbvaKdFig==
-X-Received: by 2002:a05:6a20:9f87:b0:1a3:6b56:d4d8 with SMTP id
- mm7-20020a056a209f8700b001a36b56d4d8mr8905994pzb.48.1710965893556; 
- Wed, 20 Mar 2024 13:18:13 -0700 (PDT)
+ bh=sfpDhvNVJE/c/xB9tQjWioJlmZkL0NYOq3onpV9mdy8=;
+ b=Tl+DurhCHIS+tBNCKvoFJz20JoYIBv8S2vgug3Qmfo7JkqaWZVTtihrRr3Gt7WBtRv
+ VXnUPI7YdAZ//EuJfEztFfRThG5yGKBULI+1cWL6YkMQp0SD6RYWdtvr4cQOAwedySzH
+ 2GkHCqM5FtUMlfi6K8Zw8+QeWdvOKh02YsVJGu9l7BrkBZ64FpH0X85Tr54I+lQD/OU5
+ MTsd2RzmJYeC2yEXgSq+DqRotDEZME9B1CU6o5bB34aJT9J9LOANRfWTwUJsBDvozyXy
+ 0L8VmtFfau3+vKiPAVLLNSu4kgy76sM7Z3eyHbp3G4Wjj1Cb3w6vnVQ0znV7I5/gQZcb
+ qd5g==
+X-Gm-Message-State: AOJu0YyEj6ZAwCT8nwumxMiU5QE3+DRr0F8Y8jpHTcy0TQ1FAyFVAf2K
+ RojWUgelOds4bCNqT2yFNJxV/dJiSoBprOI6yFsaWpaE3ySkgEuUPvKzMtt+qLw=
+X-Google-Smtp-Source: AGHT+IGIxG+2eywNbVbxgBBt8kuReFtWm37Y886JQrC54BOg7wa5pL36rKx73eW8wp2FrfHo+kzxDg==
+X-Received: by 2002:a05:6a00:2d86:b0:6e8:414:94b1 with SMTP id
+ fb6-20020a056a002d8600b006e8041494b1mr3462313pfb.3.1710968554615; 
+ Wed, 20 Mar 2024 14:02:34 -0700 (PDT)
 Received: from [192.168.68.110] ([177.94.15.159])
  by smtp.gmail.com with ESMTPSA id
- mi16-20020a170902fcd000b001dd578121d4sm14102988plb.204.2024.03.20.13.18.11
+ c19-20020aa78813000000b006e6a6866f02sm12037209pfo.40.2024.03.20.14.02.32
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 20 Mar 2024 13:18:13 -0700 (PDT)
-Message-ID: <00c69df0-b097-49a9-8287-f6db63dbbef5@ventanamicro.com>
-Date: Wed, 20 Mar 2024 17:18:09 -0300
+ Wed, 20 Mar 2024 14:02:34 -0700 (PDT)
+Message-ID: <a116ce8f-1ee0-4bad-8d05-88cac66b8a7e@ventanamicro.com>
+Date: Wed, 20 Mar 2024 18:02:30 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] target/riscv: Fix mode in riscv_tlb_fill
+Subject: Re: [PATCH v2 1/2] target/riscv/csr.c: Add functional of hvictl CSR
 Content-Language: en-US
 To: Irina Ryapolova <irina.ryapolova@syntacore.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  bin.meng@windriver.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com
-References: <20240320172828.23965-1-irina.ryapolova@syntacore.com>
+References: <20240320164259.19205-1-irina.ryapolova@syntacore.com>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240320172828.23965-1-irina.ryapolova@syntacore.com>
+In-Reply-To: <20240320164259.19205-1-irina.ryapolova@syntacore.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=2607:f8b0:4864:20::429;
  envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x429.google.com
 X-Spam_score_int: -20
@@ -80,7 +80,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,35 +96,71 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Hi,
+
+This patch doesn't apply in master or alistair/riscv-to-apply.next. Can you
+please re-send?
 
 
-On 3/20/24 14:28, Irina Ryapolova wrote:
-> Need to convert mmu_idx to privilege mode for PMP function.
+Thanks,
+
+
+Daniel
+
+
+On 3/20/24 13:42, Irina Ryapolova wrote:
+> CSR hvictl (Hypervisor Virtual Interrupt Control) provides further flexibility
+> for injecting interrupts into VS level in situations not fully supported by the
+> facilities described thus far, but only with more active involvement of the hypervisor.
 > 
-
-Please add:
-
-Fixes: b297129ae1 ("target/riscv: propagate PMP permission to TLB page")
-
+> A hypervisor must use hvictl for any of the following:
+> • asserting for VS level a major interrupt not supported by hvien and hvip;
+> • implementing configurability of priorities at VS level for major interrupts beyond those sup-
+> ported by hviprio1 and hviprio2; or
+> • emulating an external interrupt controller for a virtual hart without the use of an IMSIC’s
+> guest interrupt file, while also supporting configurable priorities both for external interrupts
+> and for major interrupts to the virtual hart.
+> 
+> All hvictl fields together can affect the value of CSR vstopi (Virtual Supervisor Top Interrupt)
+> and therefore the interrupt identity reported in vscause when an interrupt traps to VS-mode.
+> When hvictl.VTI = 1, the absence of an interrupt for VS level can be indicated only by setting
+> hvictl.IID = 9. Software might want to use the pair IID = 9, IPRIO = 0 generally to represent
+> no interrupt in hvictl.
+> 
+> (See riscv-interrupts-1.0: Interrupts at VS level)
+> 
 > Signed-off-by: Irina Ryapolova <irina.ryapolova@syntacore.com>
 > ---
-
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
->   target/riscv/cpu_helper.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+> Changes for v2:
+>    -added more information in commit message
+> ---
+>   target/riscv/csr.c | 15 +++++++++++++++
+>   1 file changed, 15 insertions(+)
 > 
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index ce7322011d..fc090d729a 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -1315,7 +1315,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->       bool two_stage_lookup = mmuidx_2stage(mmu_idx);
->       bool two_stage_indirect_error = false;
->       int ret = TRANSLATE_FAIL;
-> -    int mode = mmu_idx;
-> +    int mode = mmuidx_priv(mmu_idx);
->       /* default TLB page size */
->       target_ulong tlb_size = TARGET_PAGE_SIZE;
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 674ea075a4..0c21145eaf 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -3585,6 +3585,21 @@ static int read_hvictl(CPURISCVState *env, int csrno, target_ulong *val)
+>   static int write_hvictl(CPURISCVState *env, int csrno, target_ulong val)
+>   {
+>       env->hvictl = val & HVICTL_VALID_MASK;
+> +    if (env->hvictl & HVICTL_VTI)
+> +    {
+> +        uint32_t hviid = get_field(env->hvictl, HVICTL_IID);
+> +        uint32_t hviprio = get_field(env->hvictl, HVICTL_IPRIO);
+> +        /* the pair IID = 9, IPRIO = 0 generally to represent no interrupt in hvictl. */
+> +        if (!(hviid == IRQ_S_EXT && hviprio == 0)) {
+> +            uint64_t new_val = BIT(hviid) ;
+> +             if (new_val & S_MODE_INTERRUPTS) {
+> +                rmw_hvip64(env, csrno, NULL, new_val << 1, new_val << 1);
+> +            } else if (new_val & LOCAL_INTERRUPTS) {
+> +                rmw_hvip64(env, csrno, NULL, new_val, new_val);
+> +            }
+> +        }
+> +    }
+> +
+>       return RISCV_EXCP_NONE;
+>   }
 >   
 
