@@ -4,80 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5780BC54E67
-	for <qemu-riscv@archiver.kernel.org>; Wed, 20 Mar 2024 05:01:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76E2FC54E58
+	for <qemu-riscv@archiver.kernel.org>; Wed, 20 Mar 2024 05:08:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rmo4d-0008H1-CP; Wed, 20 Mar 2024 01:01:11 -0400
+	id 1rmoB8-00034k-J7; Wed, 20 Mar 2024 01:07:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <npiggin@gmail.com>)
- id 1rmo4P-0008D4-NJ; Wed, 20 Mar 2024 01:00:59 -0400
-Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429])
+ id 1rmoAy-00033O-2c; Wed, 20 Mar 2024 01:07:45 -0400
+Received: from mail-pf1-x431.google.com ([2607:f8b0:4864:20::431])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <npiggin@gmail.com>)
- id 1rmo4N-0001Ph-2V; Wed, 20 Mar 2024 01:00:57 -0400
-Received: by mail-pf1-x429.google.com with SMTP id
- d2e1a72fcca58-6e88e4c8500so99793b3a.2; 
- Tue, 19 Mar 2024 22:00:49 -0700 (PDT)
+ id 1rmoAw-0002OW-HJ; Wed, 20 Mar 2024 01:07:43 -0400
+Received: by mail-pf1-x431.google.com with SMTP id
+ d2e1a72fcca58-6e73e8bdea2so1764043b3a.0; 
+ Tue, 19 Mar 2024 22:07:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1710910848; x=1711515648; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1710911259; x=1711516059; darn=nongnu.org;
  h=in-reply-to:references:to:from:subject:cc:message-id:date
  :content-transfer-encoding:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IpOWB7Meyyi+PEQciVfates0LsJ+rJAWX/JqT+qExl0=;
- b=EYj5nTi3zg2dzOkGSaXmKonzUHFlGb0lGirFoO4FBr2XPoD+UNmPHURumMq/eKeZcO
- U/f6WJ3UoRA7xe+fYWTLXogP1Bs+48sRpYkz7UAusbsm+CEYW7TXkvl6XR39fW4jt1At
- Fqm2KD7ypGMILLPCt1Lno3Fy2k9+kKa+1VG0DtgZhFUpqOinikqLDzgZFIvt+OfsiSXi
- rCrDGcJuuVr/GMUCgqTFPftf9YuTiPBO9D9YSN+qQ7PQV4l87xlrLqbNRF6qjSrGgGMa
- qWIW8ztgnqTuNbLW3C8Zs3nQzqoFbblVc1kX1W0KdyixT382uzRYaFlzo8zm71/Eqdt1
- dOjA==
+ bh=KJVHJSj6BukakDsadDHAJXnzFQAWZ78/dgRNkDGUMn0=;
+ b=IdK9jc5ztAfNGAJ4JkT2MyoGCS6GUJcIU5rPRMcXbs0PDvFBjjQ2ezQc5C2nWbDb1e
+ Q61N9zzI57PS64KlZiRw8QlNnOPW7TqXo5ZS6sr2Nk9ATozRyb151bISphAwTW5QUOZ+
+ PfsJarbE5YyKVHmKb5M20ctEwmVINKPFYbiurSrRpv/PBAb53u37Es68z5n1iBI6zi9W
+ OEKO9fOgTY32Jf2ZFIKq6Mdp7i72gRI1nNEvKHn8GwXzo29ookvaxYe+xLYPsoAklZs1
+ /QHurO+yrQDG6wOg1mP1vffTGH/iLzXTkwaGZTbRJG2f2/I07qYU5j43s0WOpUV55WqY
+ sa3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710910848; x=1711515648;
+ d=1e100.net; s=20230601; t=1710911259; x=1711516059;
  h=in-reply-to:references:to:from:subject:cc:message-id:date
  :content-transfer-encoding:mime-version:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=IpOWB7Meyyi+PEQciVfates0LsJ+rJAWX/JqT+qExl0=;
- b=S3Tg+wgaCBEELSlVJuX7hGUfJdUAk8+5OhwT1VxY6ac0GxaJqZ0N6im7JREVwR738R
- CXkxsNOEU7Bm3AVaxkkzdvm+IM94TwBb/vHJ/bJP9a+hrcp9+l9mIaigcaVqjl/G6UrD
- oUoUkb/h4b/pa/o63Fx8vvULPS+tQ+ckXJuk6Viw1eRKPpe4kVeRe5/RKUt/uSU3Y4r/
- tLuwdOwEE9OhyN6MxVBXsgI+t+jzLbimMUy7mmekSo2QiJefF3MccPT098UJLL+FdFj7
- wnSzbBKs0bsRi/36wS13SOykHu+BVHy9Bci+v+bS95AK4uwawuYtdRXjAKBEkDnMsQo9
- oXYA==
+ bh=KJVHJSj6BukakDsadDHAJXnzFQAWZ78/dgRNkDGUMn0=;
+ b=JQwBVsuG/pHXIEWLZPaT4lccxc41kOD9RHLUpRYA/A76op6h84i53S4jqrlFFa93XX
+ /fDWLjbUB3btzaxk0onYKBUbqRo1RzCW4z9yscZcQw0OEUmIfh8lLmFLeI02bJ8dbv/b
+ uK2kzmDusOq7I4vKCcnX9k/+bKiKTsTveKkCstiSKDP2e/hq2I55GR7nPXKScE/FHymq
+ nEMlRLrcpmT/+f+IWyKfLmad3ipcJ3wNBYAEeeYLwmaKJn/euA/5B8F30UtCxoO4EoBN
+ cE2eRTa6Ob9Z1wHV6Wx/ump4m5yW8s5X8VDVswIIgbSPRiMQv7w7g0TQOQJQV/5cCnZC
+ 8U4w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUVemLIN2Ba4abqq/girQ3EDVDNOZLfni6mApvgywiFJeRN+8ZdGOmxBPlBQAA5oguuMo1m6xv1Lv8ntKOAY1y3d+dSZIGIYzzACielFvP5TvC/xkTG77fF9FUxgoIerFbZYT/Vu3CaEE/HlfiF3NqsTPIoElu9Ibj5ckxbm8pIvUwcApduyA==
-X-Gm-Message-State: AOJu0YxJEf4kPcCe2mojUyUhWd84a6KfQN4XRAXgVXc+tU/B4uq891nl
- GKpbAAUH2lI/ba/TJdES/sCTpjCcXG9+3VUrCAbroWy5rNH2ZUZH
-X-Google-Smtp-Source: AGHT+IHmBuWNXIgQPrrQT9ZywdJYkgxE8mIchY1DPXFQExfq7vuQwv8FovBFbRVNxBuit/2OQ97QLQ==
-X-Received: by 2002:a05:6a21:3406:b0:1a3:6940:82ea with SMTP id
- yn6-20020a056a21340600b001a3694082eamr6597267pzb.31.1710910848031; 
- Tue, 19 Mar 2024 22:00:48 -0700 (PDT)
+ AJvYcCUraEyFK0AH78Oef8N2RKHGZDZlgd3C84mXytrz3NMZs9ETwOVBj6All+3pcm8/Gfu0wDFvjbkkO6/M0Wnw/oxrac51a5C8wEVwc5QKTHeRd+Cf2jt/9KVTF6RqNixDwThB266FrSgNK40Tu4jfx1w6wpYjeKSUH3lzey6yESodG8BAaCJpcQ==
+X-Gm-Message-State: AOJu0YzAunTFb82SdbBrLgWdSOsswxZQJZHnHN5snXL9LLaY+lDCmjCy
+ KYO3CptEINei7AvlVMDFCY1OLGOybm8t2f2Qwi/Pm+tpTl+qf6QO93hao6TYGhg=
+X-Google-Smtp-Source: AGHT+IH2rImir7dMVpxwcGcJl1oG1hMMEOKOVGjA6RjheRb67pXkXeq++fZZW/A5m6QXgXiQK4Zmxw==
+X-Received: by 2002:a05:6a00:3cc5:b0:6e6:f9b6:4b1a with SMTP id
+ ln5-20020a056a003cc500b006e6f9b64b1amr1131163pfb.11.1710911258995; 
+ Tue, 19 Mar 2024 22:07:38 -0700 (PDT)
 Received: from localhost (193-116-208-39.tpgi.com.au. [193.116.208.39])
  by smtp.gmail.com with ESMTPSA id
- ey1-20020a056a0038c100b006e6b12d650asm10675761pfb.31.2024.03.19.22.00.44
+ k21-20020a628415000000b006e6bf165a3asm11477451pfd.91.2024.03.19.22.07.30
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 19 Mar 2024 22:00:47 -0700 (PDT)
+ Tue, 19 Mar 2024 22:07:38 -0700 (PDT)
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Date: Wed, 20 Mar 2024 15:00:42 +1000
-Message-Id: <CZYB9YB3MYGQ.4T8I8FJO64AO@wheely>
-Cc: <qemu-s390x@nongnu.org>, "Richard Henderson"
- <richard.henderson@linaro.org>, <qemu-ppc@nongnu.org>,
- <qemu-arm@nongnu.org>, <qemu-riscv@nongnu.org>, "Anton Johansson"
- <anjo@rev.ng>, "Daniel Henrique Barboza" <danielhb413@gmail.com>
-Subject: Re: [PATCH-for-9.1 18/27] target/ppc: Convert to
- TCGCPUOps::get_cpu_state()
+Date: Wed, 20 Mar 2024 15:07:28 +1000
+Message-Id: <CZYBF4Z72ZXF.3V28R4RT25I8K@wheely>
+Cc: <qemu-riscv@nongnu.org>, "Anton Johansson" <anjo@rev.ng>,
+ <qemu-s390x@nongnu.org>, <qemu-ppc@nongnu.org>,
+ =?utf-8?b?RGFuaWVsIFAgLiBCZXJyYW5nw6k=?= <berrange@redhat.com>, "Paolo
+ Bonzini" <pbonzini@redhat.com>, "Eduardo Habkost" <eduardo@habkost.net>,
+ "Claudio Fontana" <cfontana@suse.de>, "Richard Henderson"
+ <richard.henderson@linaro.org>, "Peter Maydell" <peter.maydell@linaro.org>,
+ =?utf-8?q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>, "Manos
+ Pitsidianakis" <manos.pitsidianakis@linaro.org>, "Zhao Liu"
+ <zhao1.liu@intel.com>, <qemu-arm@nongnu.org>, "Thomas Huth"
+ <thuth@redhat.com>, "Daniel Henrique Barboza" <danielhb413@gmail.com>
+Subject: Re: [PATCH-for-9.1 19/21] target/ppc: Factor
+ ppc_add_alias_definitions() out
 From: "Nicholas Piggin" <npiggin@gmail.com>
 To: =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- <qemu-devel@nongnu.org>
+ <qemu-devel@nongnu.org>, "Markus Armbruster" <armbru@redhat.com>
 X-Mailer: aerc 0.15.2
-References: <20240319154258.71206-1-philmd@linaro.org>
- <20240319154258.71206-19-philmd@linaro.org>
-In-Reply-To: <20240319154258.71206-19-philmd@linaro.org>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::429;
- envelope-from=npiggin@gmail.com; helo=mail-pf1-x429.google.com
+References: <20240315130910.15750-1-philmd@linaro.org>
+ <20240315130910.15750-20-philmd@linaro.org>
+In-Reply-To: <20240315130910.15750-20-philmd@linaro.org>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::431;
+ envelope-from=npiggin@gmail.com; helo=mail-pf1-x431.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -100,101 +106,88 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed Mar 20, 2024 at 1:42 AM AEST, Philippe Mathieu-Daud=C3=A9 wrote:
-> Convert cpu_get_tb_cpu_state() to TCGCPUOps::get_cpu_state(),
-> unifying with the method declared in target/ppc/helper_regs.c.
+On Fri Mar 15, 2024 at 11:09 PM AEST, Philippe Mathieu-Daud=C3=A9 wrote:
+> Factor ppc_add_alias_definitions() out of qmp_query_cpu_definitions()
+> to clearly see the generic pattern used in all targets.
 
-Looks okay AFAIKS.
+Looks equivalent.
 
 Reviewed-by: Nicholas Piggin <npiggin@gmail.com>
 
 >
 > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
 > ---
->  target/ppc/cpu.h         | 16 +++-------------
->  target/ppc/cpu_init.c    |  1 +
->  target/ppc/helper_regs.c | 13 +++++++------
->  3 files changed, 11 insertions(+), 19 deletions(-)
+>  target/ppc/cpu-models.h   |  4 ++++
+>  target/ppc/ppc-qmp-cmds.c | 26 +++++++++++++++-----------
+>  2 files changed, 19 insertions(+), 11 deletions(-)
 >
-> diff --git a/target/ppc/cpu.h b/target/ppc/cpu.h
-> index ced4e53024..6aa18db335 100644
-> --- a/target/ppc/cpu.h
-> +++ b/target/ppc/cpu.h
-> @@ -2716,19 +2716,9 @@ void cpu_write_xer(CPUPPCState *env, target_ulong =
-xer);
->   */
->  #define is_book3s_arch2x(ctx) (!!((ctx)->insns_flags & PPC_SEGMENT_64B))
+> diff --git a/target/ppc/cpu-models.h b/target/ppc/cpu-models.h
+> index 0229ef3a9a..89a5e232b7 100644
+> --- a/target/ppc/cpu-models.h
+> +++ b/target/ppc/cpu-models.h
+> @@ -21,6 +21,8 @@
+>  #ifndef TARGET_PPC_CPU_MODELS_H
+>  #define TARGET_PPC_CPU_MODELS_H
 > =20
-> -#define TARGET_HAS_CPU_GET_TB_CPU_STATE
-> -
-> -#ifdef CONFIG_DEBUG_TCG
-> -void cpu_get_tb_cpu_state(CPUPPCState *env, vaddr *pc,
-> -                          uint64_t *cs_base, uint32_t *flags);
-> -#else
-> -static inline void cpu_get_tb_cpu_state(CPUPPCState *env, vaddr *pc,
-> -                                        uint64_t *cs_base, uint32_t *fla=
-gs)
-> -{
-> -    *pc =3D env->nip;
-> -    *cs_base =3D 0;
-> -    *flags =3D env->hflags;
-> -}
-> +#ifdef CONFIG_TCG
-> +void ppc_get_cpu_state(CPUPPCState *env, vaddr *pc,
-> +                       uint64_t *cs_base, uint32_t *flags);
+> +#include "qapi/qapi-types-machine.h"
+> +
+>  /**
+>   * PowerPCCPUAlias:
+>   * @alias: The alias name.
+> @@ -480,4 +482,6 @@ enum {
+>      POWERPC_SVR_8641D              =3D 0x80900121,
+>  };
+> =20
+> +void ppc_add_alias_definitions(CpuDefinitionInfoList **cpu_list);
+> +
 >  #endif
-> =20
->  G_NORETURN void raise_exception(CPUPPCState *env, uint32_t exception);
-> diff --git a/target/ppc/cpu_init.c b/target/ppc/cpu_init.c
-> index 464e91faa2..673559b444 100644
-> --- a/target/ppc/cpu_init.c
-> +++ b/target/ppc/cpu_init.c
-> @@ -7362,6 +7362,7 @@ static const struct SysemuCPUOps ppc_sysemu_ops =3D=
- {
->  static const TCGCPUOps ppc_tcg_ops =3D {
->      .initialize =3D ppc_translate_init,
->      .restore_state_to_opc =3D ppc_restore_state_to_opc,
-> +    .get_cpu_state =3D ppc_get_cpu_state,
-> =20
->  #ifdef CONFIG_USER_ONLY
->      .record_sigsegv =3D ppc_cpu_record_sigsegv,
-> diff --git a/target/ppc/helper_regs.c b/target/ppc/helper_regs.c
-> index 25258986e3..e62591067c 100644
-> --- a/target/ppc/helper_regs.c
-> +++ b/target/ppc/helper_regs.c
-> @@ -217,25 +217,26 @@ void hreg_update_pmu_hflags(CPUPPCState *env)
->      env->hflags |=3D hreg_compute_pmu_hflags_value(env);
+> diff --git a/target/ppc/ppc-qmp-cmds.c b/target/ppc/ppc-qmp-cmds.c
+> index a25d86a8d1..528cc3e4af 100644
+> --- a/target/ppc/ppc-qmp-cmds.c
+> +++ b/target/ppc/ppc-qmp-cmds.c
+> @@ -189,17 +189,9 @@ static void ppc_cpu_defs_entry(gpointer data, gpoint=
+er user_data)
+>      QAPI_LIST_PREPEND(*first, info);
 >  }
 > =20
-> -#ifdef CONFIG_DEBUG_TCG
-> -void cpu_get_tb_cpu_state(CPUPPCState *env, vaddr *pc,
-> -                          uint64_t *cs_base, uint32_t *flags)
-> +#ifdef CONFIG_TCG
-> +void ppc_get_cpu_state(CPUPPCState *env, vaddr *pc,
-> +                       uint64_t *cs_base, uint32_t *flags)
+> -CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
+> +void ppc_add_alias_definitions(CpuDefinitionInfoList **cpu_list)
 >  {
->      uint32_t hflags_current =3D env->hflags;
-> -    uint32_t hflags_rebuilt;
+> -    CpuDefinitionInfoList *cpu_list =3D NULL;
+> -    GSList *list;
+> -    int i;
+> -
+> -    list =3D object_class_get_list(TYPE_POWERPC_CPU, false);
+> -    g_slist_foreach(list, ppc_cpu_defs_entry, &cpu_list);
+> -    g_slist_free(list);
+> -
+> -    for (i =3D 0; ppc_cpu_aliases[i].alias !=3D NULL; i++) {
+> +    for (unsigned i =3D 0; ppc_cpu_aliases[i].alias !=3D NULL; i++) {
+>          PowerPCCPUAlias *alias =3D &ppc_cpu_aliases[i];
+>          ObjectClass *oc;
+>          CpuDefinitionInfo *info;
+> @@ -213,8 +205,20 @@ CpuDefinitionInfoList *qmp_query_cpu_definitions(Err=
+or **errp)
+>          info->name =3D g_strdup(alias->alias);
+>          info->q_typename =3D g_strdup(object_class_get_name(oc));
 > =20
->      *pc =3D env->nip;
->      *cs_base =3D 0;
->      *flags =3D hflags_current;
-> =20
-> -    hflags_rebuilt =3D hreg_compute_hflags_value(env);
-> +#ifdef CONFIG_DEBUG_TCG
-> +    uint32_t hflags_rebuilt =3D hreg_compute_hflags_value(env);
->      if (unlikely(hflags_current !=3D hflags_rebuilt)) {
->          cpu_abort(env_cpu(env),
->                    "TCG hflags mismatch (current:0x%08x rebuilt:0x%08x)\n=
-",
->                    hflags_current, hflags_rebuilt);
+> -        QAPI_LIST_PREPEND(cpu_list, info);
+> +        QAPI_LIST_PREPEND(*cpu_list, info);
 >      }
-> -}
->  #endif
 > +}
-> +#endif /* CONFIG_TCG */
+> +
+> +CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
+> +{
+> +    CpuDefinitionInfoList *cpu_list =3D NULL;
+> +    GSList *list;
+> +
+> +    list =3D object_class_get_list(TYPE_POWERPC_CPU, false);
+> +    g_slist_foreach(list, ppc_cpu_defs_entry, &cpu_list);
+> +    g_slist_free(list);
+> +
+> +    ppc_add_alias_definitions(&cpu_list);
 > =20
->  void cpu_interrupt_exittb(CPUState *cs)
->  {
+>      return cpu_list;
+>  }
 
 
