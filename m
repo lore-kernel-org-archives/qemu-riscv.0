@@ -4,93 +4,141 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76E2FC54E58
-	for <qemu-riscv@archiver.kernel.org>; Wed, 20 Mar 2024 05:08:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97E80C54E58
+	for <qemu-riscv@archiver.kernel.org>; Wed, 20 Mar 2024 06:40:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rmoB8-00034k-J7; Wed, 20 Mar 2024 01:07:54 -0400
+	id 1rmpbT-00082A-5t; Wed, 20 Mar 2024 02:39:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <npiggin@gmail.com>)
- id 1rmoAy-00033O-2c; Wed, 20 Mar 2024 01:07:45 -0400
-Received: from mail-pf1-x431.google.com ([2607:f8b0:4864:20::431])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <npiggin@gmail.com>)
- id 1rmoAw-0002OW-HJ; Wed, 20 Mar 2024 01:07:43 -0400
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-6e73e8bdea2so1764043b3a.0; 
- Tue, 19 Mar 2024 22:07:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1710911259; x=1711516059; darn=nongnu.org;
- h=in-reply-to:references:to:from:subject:cc:message-id:date
- :content-transfer-encoding:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=KJVHJSj6BukakDsadDHAJXnzFQAWZ78/dgRNkDGUMn0=;
- b=IdK9jc5ztAfNGAJ4JkT2MyoGCS6GUJcIU5rPRMcXbs0PDvFBjjQ2ezQc5C2nWbDb1e
- Q61N9zzI57PS64KlZiRw8QlNnOPW7TqXo5ZS6sr2Nk9ATozRyb151bISphAwTW5QUOZ+
- PfsJarbE5YyKVHmKb5M20ctEwmVINKPFYbiurSrRpv/PBAb53u37Es68z5n1iBI6zi9W
- OEKO9fOgTY32Jf2ZFIKq6Mdp7i72gRI1nNEvKHn8GwXzo29ookvaxYe+xLYPsoAklZs1
- /QHurO+yrQDG6wOg1mP1vffTGH/iLzXTkwaGZTbRJG2f2/I07qYU5j43s0WOpUV55WqY
- sa3w==
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rmpbS-00081l-49
+ for qemu-riscv@nongnu.org; Wed, 20 Mar 2024 02:39:10 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rmpbP-0006U4-QO
+ for qemu-riscv@nongnu.org; Wed, 20 Mar 2024 02:39:09 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1710916745;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=ufm/Y1EoFMvkpl5VIargUW/JSv/syJHhyz9ubvjSrDU=;
+ b=HiVxkx//WJa7FXOXzgK4UL20WcW2h/mocIhdkA9qOs0v+KXK/wkZoimJpWzVR3n1yzeIkW
+ N+NkOYcJ3rJpeEhvEcFqWsd11tnGdLuXGyeCODVRNiJ8JjuieXiEqdK2D+aMZt2UBqE+jO
+ UUfrLyW+kJcB7KIerxDMjyAKDL72fuY=
+Received: from mail-lj1-f198.google.com (mail-lj1-f198.google.com
+ [209.85.208.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-665-etr6ct0LOBGKx87xC3QvOA-1; Wed, 20 Mar 2024 02:39:03 -0400
+X-MC-Unique: etr6ct0LOBGKx87xC3QvOA-1
+Received: by mail-lj1-f198.google.com with SMTP id
+ 38308e7fff4ca-2d4b150c9a0so29406541fa.0
+ for <qemu-riscv@nongnu.org>; Tue, 19 Mar 2024 23:39:03 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710911259; x=1711516059;
- h=in-reply-to:references:to:from:subject:cc:message-id:date
- :content-transfer-encoding:mime-version:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=KJVHJSj6BukakDsadDHAJXnzFQAWZ78/dgRNkDGUMn0=;
- b=JQwBVsuG/pHXIEWLZPaT4lccxc41kOD9RHLUpRYA/A76op6h84i53S4jqrlFFa93XX
- /fDWLjbUB3btzaxk0onYKBUbqRo1RzCW4z9yscZcQw0OEUmIfh8lLmFLeI02bJ8dbv/b
- uK2kzmDusOq7I4vKCcnX9k/+bKiKTsTveKkCstiSKDP2e/hq2I55GR7nPXKScE/FHymq
- nEMlRLrcpmT/+f+IWyKfLmad3ipcJ3wNBYAEeeYLwmaKJn/euA/5B8F30UtCxoO4EoBN
- cE2eRTa6Ob9Z1wHV6Wx/ump4m5yW8s5X8VDVswIIgbSPRiMQv7w7g0TQOQJQV/5cCnZC
- 8U4w==
+ d=1e100.net; s=20230601; t=1710916742; x=1711521542;
+ h=content-transfer-encoding:in-reply-to:autocrypt:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ufm/Y1EoFMvkpl5VIargUW/JSv/syJHhyz9ubvjSrDU=;
+ b=QmmXBssAfir1z9NOGZvok0CKCPEqDAiqnBCF5OHnnsro/dhVD7CFcj1RHVqJNhECBr
+ xEmU3Hwd/R3O0c/4VZmEgIUtQAa2WMwAlw04va1Fi/5uvDC8Eu7nfat8rIknQuII1ZOZ
+ u92kRyHXaFNwOeL6c8VSETYTPIw5wMVBD4uH/btAimgQQkuGVZ06cmC2hw9pMGhD7PdH
+ FLV846MUte05PcrRdDfXRBGCWuBhAWifZXSQCAPavnYnRYSOc2OAJV75XhBHySKi/Wnk
+ A88MOy5EATzzzJKpraTkO91LlReODeJQzW8VhaB3oE0/kvj+HSr3aGmA9tmBJgRGFgOT
+ Jiig==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUraEyFK0AH78Oef8N2RKHGZDZlgd3C84mXytrz3NMZs9ETwOVBj6All+3pcm8/Gfu0wDFvjbkkO6/M0Wnw/oxrac51a5C8wEVwc5QKTHeRd+Cf2jt/9KVTF6RqNixDwThB266FrSgNK40Tu4jfx1w6wpYjeKSUH3lzey6yESodG8BAaCJpcQ==
-X-Gm-Message-State: AOJu0YzAunTFb82SdbBrLgWdSOsswxZQJZHnHN5snXL9LLaY+lDCmjCy
- KYO3CptEINei7AvlVMDFCY1OLGOybm8t2f2Qwi/Pm+tpTl+qf6QO93hao6TYGhg=
-X-Google-Smtp-Source: AGHT+IH2rImir7dMVpxwcGcJl1oG1hMMEOKOVGjA6RjheRb67pXkXeq++fZZW/A5m6QXgXiQK4Zmxw==
-X-Received: by 2002:a05:6a00:3cc5:b0:6e6:f9b6:4b1a with SMTP id
- ln5-20020a056a003cc500b006e6f9b64b1amr1131163pfb.11.1710911258995; 
- Tue, 19 Mar 2024 22:07:38 -0700 (PDT)
-Received: from localhost (193-116-208-39.tpgi.com.au. [193.116.208.39])
- by smtp.gmail.com with ESMTPSA id
- k21-20020a628415000000b006e6bf165a3asm11477451pfd.91.2024.03.19.22.07.30
+ AJvYcCUfVbjYEVS5sdzahkRB1MOMdfHQZ6qB5kL/fIVXjYKNIP8lXbUiQFlZ1usspNVDEYNV54yIwqyHJU8ZxbqO4PzcNKIOyB8=
+X-Gm-Message-State: AOJu0Yw9gBuftoavBVkpsBsAdfSAXXhHUmcDsj3tozdHwvGIA/rqhv8p
+ HjMFdpK7O2WDYkCahxsSUmqrPU1fKUvKUX4Ff7zMZkJFXxc4lwmZ1bIE2TalBDjR/6a0y6estLv
+ W/do681K/NEh4XnqIIg+4DS6PMCM4AttNsMYVIuDiAA3mG7lghOVK
+X-Received: by 2002:a2e:be0f:0:b0:2d6:8e88:5a8b with SMTP id
+ z15-20020a2ebe0f000000b002d68e885a8bmr1160471ljq.32.1710916742088; 
+ Tue, 19 Mar 2024 23:39:02 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHjW92Dp913BtwdoA5r+xdwaSveUzuMgujO10qs9imzgk7riQ/IpK3DvOiqq4ZROrkBhHaLFg==
+X-Received: by 2002:a2e:be0f:0:b0:2d6:8e88:5a8b with SMTP id
+ z15-20020a2ebe0f000000b002d68e885a8bmr1160451ljq.32.1710916741723; 
+ Tue, 19 Mar 2024 23:39:01 -0700 (PDT)
+Received: from [192.168.0.9] (ip-109-43-177-50.web.vodafone.de.
+ [109.43.177.50]) by smtp.gmail.com with ESMTPSA id
+ my10-20020a1709065a4a00b00a4663d3b2bfsm6876746ejc.217.2024.03.19.23.39.00
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 19 Mar 2024 22:07:38 -0700 (PDT)
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Wed, 20 Mar 2024 15:07:28 +1000
-Message-Id: <CZYBF4Z72ZXF.3V28R4RT25I8K@wheely>
-Cc: <qemu-riscv@nongnu.org>, "Anton Johansson" <anjo@rev.ng>,
- <qemu-s390x@nongnu.org>, <qemu-ppc@nongnu.org>,
- =?utf-8?b?RGFuaWVsIFAgLiBCZXJyYW5nw6k=?= <berrange@redhat.com>, "Paolo
- Bonzini" <pbonzini@redhat.com>, "Eduardo Habkost" <eduardo@habkost.net>,
- "Claudio Fontana" <cfontana@suse.de>, "Richard Henderson"
- <richard.henderson@linaro.org>, "Peter Maydell" <peter.maydell@linaro.org>,
- =?utf-8?q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>, "Manos
- Pitsidianakis" <manos.pitsidianakis@linaro.org>, "Zhao Liu"
- <zhao1.liu@intel.com>, <qemu-arm@nongnu.org>, "Thomas Huth"
- <thuth@redhat.com>, "Daniel Henrique Barboza" <danielhb413@gmail.com>
-Subject: Re: [PATCH-for-9.1 19/21] target/ppc: Factor
- ppc_add_alias_definitions() out
-From: "Nicholas Piggin" <npiggin@gmail.com>
-To: =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- <qemu-devel@nongnu.org>, "Markus Armbruster" <armbru@redhat.com>
-X-Mailer: aerc 0.15.2
-References: <20240315130910.15750-1-philmd@linaro.org>
- <20240315130910.15750-20-philmd@linaro.org>
-In-Reply-To: <20240315130910.15750-20-philmd@linaro.org>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::431;
- envelope-from=npiggin@gmail.com; helo=mail-pf1-x431.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+ Tue, 19 Mar 2024 23:39:01 -0700 (PDT)
+Message-ID: <ef7a95d9-4a00-466c-b05d-7d1264e89de2@redhat.com>
+Date: Wed, 20 Mar 2024 07:38:59 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH-for-9.1 21/27] target/s390x: Restrict TCG-specific
+ declarations
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: qemu-s390x@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
+ qemu-ppc@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
+ Anton Johansson <anjo@rev.ng>, David Hildenbrand <david@redhat.com>,
+ Ilya Leoshkevich <iii@linux.ibm.com>
+References: <20240319154258.71206-1-philmd@linaro.org>
+ <20240319154258.71206-22-philmd@linaro.org>
+From: Thomas Huth <thuth@redhat.com>
+Autocrypt: addr=thuth@redhat.com; keydata=
+ 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
+In-Reply-To: <20240319154258.71206-22-philmd@linaro.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -24
+X-Spam_score: -2.5
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.422,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -106,88 +154,30 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri Mar 15, 2024 at 11:09 PM AEST, Philippe Mathieu-Daud=C3=A9 wrote:
-> Factor ppc_add_alias_definitions() out of qmp_query_cpu_definitions()
-> to clearly see the generic pattern used in all targets.
-
-Looks equivalent.
-
-Reviewed-by: Nicholas Piggin <npiggin@gmail.com>
-
->
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+On 19/03/2024 16.42, Philippe Mathieu-Daudé wrote:
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 > ---
->  target/ppc/cpu-models.h   |  4 ++++
->  target/ppc/ppc-qmp-cmds.c | 26 +++++++++++++++-----------
->  2 files changed, 19 insertions(+), 11 deletions(-)
->
-> diff --git a/target/ppc/cpu-models.h b/target/ppc/cpu-models.h
-> index 0229ef3a9a..89a5e232b7 100644
-> --- a/target/ppc/cpu-models.h
-> +++ b/target/ppc/cpu-models.h
-> @@ -21,6 +21,8 @@
->  #ifndef TARGET_PPC_CPU_MODELS_H
->  #define TARGET_PPC_CPU_MODELS_H
-> =20
-> +#include "qapi/qapi-types-machine.h"
-> +
->  /**
->   * PowerPCCPUAlias:
->   * @alias: The alias name.
-> @@ -480,4 +482,6 @@ enum {
->      POWERPC_SVR_8641D              =3D 0x80900121,
->  };
-> =20
-> +void ppc_add_alias_definitions(CpuDefinitionInfoList **cpu_list);
-> +
->  #endif
-> diff --git a/target/ppc/ppc-qmp-cmds.c b/target/ppc/ppc-qmp-cmds.c
-> index a25d86a8d1..528cc3e4af 100644
-> --- a/target/ppc/ppc-qmp-cmds.c
-> +++ b/target/ppc/ppc-qmp-cmds.c
-> @@ -189,17 +189,9 @@ static void ppc_cpu_defs_entry(gpointer data, gpoint=
-er user_data)
->      QAPI_LIST_PREPEND(*first, info);
->  }
-> =20
-> -CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
-> +void ppc_add_alias_definitions(CpuDefinitionInfoList **cpu_list)
->  {
-> -    CpuDefinitionInfoList *cpu_list =3D NULL;
-> -    GSList *list;
-> -    int i;
-> -
-> -    list =3D object_class_get_list(TYPE_POWERPC_CPU, false);
-> -    g_slist_foreach(list, ppc_cpu_defs_entry, &cpu_list);
-> -    g_slist_free(list);
-> -
-> -    for (i =3D 0; ppc_cpu_aliases[i].alias !=3D NULL; i++) {
-> +    for (unsigned i =3D 0; ppc_cpu_aliases[i].alias !=3D NULL; i++) {
->          PowerPCCPUAlias *alias =3D &ppc_cpu_aliases[i];
->          ObjectClass *oc;
->          CpuDefinitionInfo *info;
-> @@ -213,8 +205,20 @@ CpuDefinitionInfoList *qmp_query_cpu_definitions(Err=
-or **errp)
->          info->name =3D g_strdup(alias->alias);
->          info->q_typename =3D g_strdup(object_class_get_name(oc));
-> =20
-> -        QAPI_LIST_PREPEND(cpu_list, info);
-> +        QAPI_LIST_PREPEND(*cpu_list, info);
->      }
-> +}
-> +
-> +CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
-> +{
-> +    CpuDefinitionInfoList *cpu_list =3D NULL;
-> +    GSList *list;
-> +
-> +    list =3D object_class_get_list(TYPE_POWERPC_CPU, false);
-> +    g_slist_foreach(list, ppc_cpu_defs_entry, &cpu_list);
-> +    g_slist_free(list);
-> +
-> +    ppc_add_alias_definitions(&cpu_list);
-> =20
->      return cpu_list;
->  }
+>   target/s390x/s390x-internal.h | 2 ++
+>   1 file changed, 2 insertions(+)
+> 
+> diff --git a/target/s390x/s390x-internal.h b/target/s390x/s390x-internal.h
+> index 825252d728..559c9f561d 100644
+> --- a/target/s390x/s390x-internal.h
+> +++ b/target/s390x/s390x-internal.h
+> @@ -398,10 +398,12 @@ void handle_diag_308(CPUS390XState *env, uint64_t r1, uint64_t r3,
+>   
+>   
+>   /* translate.c */
+> +#ifdef CONFIG_TCG
+>   void s390x_translate_init(void);
+>   void s390x_restore_state_to_opc(CPUState *cs,
+>                                   const TranslationBlock *tb,
+>                                   const uint64_t *data);
+> +#endif /* CONFIG_TCG */
+>   
+>   /* sigp.c */
+>   int handle_sigp(CPUS390XState *env, uint8_t order, uint64_t r1, uint64_t r3);
+
+Reviewed-by: Thomas Huth <thuth@redhat.com>
 
 
