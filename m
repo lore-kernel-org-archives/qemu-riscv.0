@@ -4,86 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13A12C54E58
-	for <qemu-riscv@archiver.kernel.org>; Wed, 20 Mar 2024 17:18:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 998FDC54E58
+	for <qemu-riscv@archiver.kernel.org>; Wed, 20 Mar 2024 17:19:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rmzZg-0002G5-Qt; Wed, 20 Mar 2024 13:18:00 -0400
+	id 1rmzau-0003K5-8J; Wed, 20 Mar 2024 13:19:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1rmzZf-0002Fa-1e
- for qemu-riscv@nongnu.org; Wed, 20 Mar 2024 13:17:59 -0400
-Received: from mail-ed1-x535.google.com ([2a00:1450:4864:20::535])
+ (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
+ id 1rmzar-0003HR-Ia; Wed, 20 Mar 2024 13:19:13 -0400
+Received: from mail-ej1-x632.google.com ([2a00:1450:4864:20::632])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1rmzZd-0006Wf-0r
- for qemu-riscv@nongnu.org; Wed, 20 Mar 2024 13:17:58 -0400
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-56bb22ff7baso1130869a12.3
- for <qemu-riscv@nongnu.org>; Wed, 20 Mar 2024 10:17:56 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
+ id 1rmzap-0006eF-Tc; Wed, 20 Mar 2024 13:19:13 -0400
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-a468004667aso6379066b.2; 
+ Wed, 20 Mar 2024 10:19:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710955075; x=1711559875; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1710955150; x=1711559950; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=33F1//D2fVsuIjqVnoLzC6cYCRfMhnqisnhO1dhobsc=;
- b=wTjIEk5wqDvhqN5pP56g0QGFTNkHtDmBDsrgHwcnmZtfWNV5qWtoZJAk6YpM7+4UoJ
- /g4YXsB6Y24TW/HpziSl1BFQauJfzR5EceQAdWrrnZO69LMoKgseQ2ryMzZoj0bqq7Xr
- ciZTfpi2p1IYJs4bxBZNrFpEe0usWAEDUAzPsThHm2Am3tQTGdL1wtE2ThVfjMTqtc21
- 2ouv+NMC8kPljNHuriboxNiPQK+lZVfxTmz6V9z0881ulIJ4LhR4rarF3pnhoORr3t3j
- 5EAK+2VP0vpdQuHanFR+yxJj8Cb0KpepPzzqTgzhF3h15JKWiLFLqYC2r6RFkQzjGsX8
- s9JA==
+ bh=3pEt6Y91A7HM8RCal+AzIsE2i5XHB8wZ5gv0UJ8gFKI=;
+ b=d7KTUuUDSssPzdsMYYDQ+2VQHw9qcQ3FUsVc2/NCP7U71+F1uA9+XdgvjwkJoZ954X
+ kpdJAkVYDcjasBatMbM25FVCYFzHSMXlUb+76nOX0dBSJrNFSoxsxVcOKt2KaqMjpj/4
+ EbH61s5FVD6aJJws7A0Ws8QcIhHCj+SJAXz+d4S5E+t2YjM/c9pOC3vBWLgCCz+4gw7z
+ s51a334DPWEx6vYjTQqQksZ2csejgtgjO9eCNOum+OfRmnU92+hTEGxatOmWjg/WuJ2f
+ wd7htxIyuonahtrvsiGGRj1PcEE9aI66OBN8hhpf/Ev8uR4EXyZFMYpI0EUN4PxjD+mG
+ duiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710955075; x=1711559875;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1710955150; x=1711559950;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=33F1//D2fVsuIjqVnoLzC6cYCRfMhnqisnhO1dhobsc=;
- b=u+tnxonIb8FieUrHDMt1SnIAkrT6+44VrHKR3v0XwV2os+w/Uje/Ljb9yUEOw3w8ku
- DKRf6AuNU8i7JBaMORCNw9u5TFhFVLu7q8U7CEAJDoXcMwaEnXgZqgtqWOQ2p+NTvytt
- bjmxaX47sKakWsWoA0NM0PcbJaSTOezi1ZugpOOe3XuDwtRgzG7/men9k0VTbQKCOI/P
- d+0dz15TED2MGrG2yW7BYHaIT5hgBZtrbAzwRAky/6z7Rh83NuuSXm0aYXIu87TLSw4l
- nDmW6pIAdAq5wBTafvA1yZnaaYG0B4IXB4r1OrKziUI9WUnkgDeFLWj9/AUTMreDHkzL
- XJKw==
+ bh=3pEt6Y91A7HM8RCal+AzIsE2i5XHB8wZ5gv0UJ8gFKI=;
+ b=c56ZUmYRPsqftpLga3P6jKeAcxSE1utpTLa7f/aN0B5ZZhL8R8VctV/7XtV5FSAnwl
+ zghB23VuL3y++e2KOzvfpz4REjlingjT2BfWVjzlqmm7DV7xhfkvh64NRxAAsk+e+/Tw
+ d/CM6MQd+ZXew7pOJ34f+tNzOgvT94j5EdrmIynlHPihPo41J8/08RtJh3X5nUA//Gu1
+ suYsMZV01TdKSRi8v5sunnRmmP9xI9Pgw8AaNx6mjN2xTQoFcxmzuFquDRNruqIhNl0H
+ UJALKodqGv7wEjhkOYwoGzzOG9Qi82uxoeKjW56J6jC0+U7uY0atpWtFcIQ2vt9U8MUm
+ 3uGw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWdPVujVZuEuNwrHMfXF/+bYW4yDE+GRhwamtqPclni5JLLryD0TUBOCwpVpjqtshj1lwzxqO5mrz5Y/vJosSny/9mDftI=
-X-Gm-Message-State: AOJu0Yyc8zOafzfMPBnswefzmGnw4gwqwzE97KGOTt6jVHerxW5KoUo4
- LkCOh2UlvHIe2y+S389TquDWUU0HXkrDn8QNu8EszOViV15xbmNED3Iz/iIr0FPtyJQHzisvko+
- xIt11j8YhJ4sFx35PINRA3YEAto6NzC32rbOZ8A==
-X-Google-Smtp-Source: AGHT+IGypr6vcyDFxgdjfErmrgzvn4GBXX5EaJq2Nl7edaxdaUO/tMFMWVp58UUqCiH3ayzi3eDB4SKSW5VnMt7yPYw=
-X-Received: by 2002:a05:6402:4346:b0:56a:ae8a:acb3 with SMTP id
- n6-20020a056402434600b0056aae8aacb3mr5817083edc.42.1710955075311; Wed, 20 Mar
- 2024 10:17:55 -0700 (PDT)
+ AJvYcCVbYnvLFkICnC+hud2csLuj/mGD+VUKv63hj8Nl2HrRxDoi6dW3N5uU0+6mTAUAhvEtUgL/1632f5LYrVArD3+8+NcWVh6piiOYk5fUOOvUXX6uhj47S7Y74ofYCg==
+X-Gm-Message-State: AOJu0YzTWw+Svt4VPiEKLvIbLHO9BuaHtVqcFu+vjQrVF6njmHp5k8Ly
+ TZ7MTG6SZPR614L8CymGb/m6yqj+o28cEgwF8tW7wsIO6lxQm7SS
+X-Google-Smtp-Source: AGHT+IE+KBVk9BqSUknzL5iFw4h7Upe8/Rni/qGxT+ubhbC8jkdIhz6ecUUbu9nE0gQgSTI0eTGgjw==
+X-Received: by 2002:a17:907:5cb:b0:a46:c56f:fe39 with SMTP id
+ wg11-20020a17090705cb00b00a46c56ffe39mr6820068ejb.39.1710955150086; 
+ Wed, 20 Mar 2024 10:19:10 -0700 (PDT)
+Received: from freya.midgard (broadband-188-255-126-251.ip.moscow.rt.ru.
+ [188.255.126.251]) by smtp.gmail.com with ESMTPSA id
+ pv27-20020a170907209b00b00a4576dd5a8csm7481639ejb.201.2024.03.20.10.19.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 20 Mar 2024 10:19:09 -0700 (PDT)
+From: Alexey Baturo <baturo.alexey@gmail.com>
+X-Google-Original-From: Alexey Baturo <me@deliversmonkey.space>
+To: 
+Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org,
+ space.monkey.delivers@gmail.com, palmer@dabbelt.com,
+ Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
+ kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH v8 6/6] target/riscv: Enable updates for pointer masking
+ variables and thus enable pointer masking extension
+Date: Wed, 20 Mar 2024 20:18:50 +0300
+Message-Id: <20240320171850.1197824-7-me@deliversmonkey.space>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240320171850.1197824-1-me@deliversmonkey.space>
+References: <20240320171850.1197824-1-me@deliversmonkey.space>
 MIME-Version: 1.0
-References: <20240320164055.60319-1-philmd@linaro.org>
- <CAFEAcA81u9J9iijs-CNDbsANb6c0Cdb4qQKmBd=DiQAoFA4U=w@mail.gmail.com>
- <5deec986-7a22-402d-abe1-4e40f5bb427a@linaro.org>
-In-Reply-To: <5deec986-7a22-402d-abe1-4e40f5bb427a@linaro.org>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Wed, 20 Mar 2024 17:17:43 +0000
-Message-ID: <CAFEAcA_4J32gpUgxXxND8ZVhrEEhFK=gPG2SF8xsVJ+jpkV0WA@mail.gmail.com>
-Subject: Re: [PATCH-for-9.0 0/2] target/monitor: Deprecate 'info tlb/mem' in
- favor of 'info mmu'
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Richard Henderson <richard.henderson@linaro.org>,
- "Dr. David Alan Gilbert" <dave@treblig.org>, 
- Manos Pitsidianakis <manos.pitsidianakis@linaro.org>, qemu-ppc@nongnu.org, 
- Thomas Huth <thuth@redhat.com>, devel@lists.libvirt.org, 
- Paolo Bonzini <pbonzini@redhat.com>,
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::535;
- envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x535.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::632;
+ envelope-from=baturo.alexey@gmail.com; helo=mail-ej1-x632.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -101,100 +99,42 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, 20 Mar 2024 at 17:06, Philippe Mathieu-Daud=C3=A9 <philmd@linaro.or=
-g> wrote:
->
-> +Alex/Daniel
->
-> On 20/3/24 17:53, Peter Maydell wrote:
-> > On Wed, 20 Mar 2024 at 16:40, Philippe Mathieu-Daud=C3=A9 <philmd@linar=
-o.org> wrote:
-> >>
-> >> 'info tlb' and 'info mem' commands don't scale in heterogeneous
-> >> emulation. They will be reworked after the next release, hidden
-> >> behind the 'info mmu' command. It is not too late to deprecate
-> >> commands, so add the 'info mmu' command as wrapper to the other
-> >> ones, but already deprecate them.
-> >>
-> >> Philippe Mathieu-Daud=C3=A9 (2):
-> >>    target/monitor: Introduce 'info mmu' command
-> >>    target/monitor: Deprecate 'info tlb' and 'info mem' commands
-> >
-> > This seems to replace "info tlb" and "info mem" with "info mmu -t"
-> > and "info mmu -m", but it doesn't really say anything about:
-> >   * what the difference is between these two things
->
-> I really don't know; I'm only trying to keep the monitor interface
-> identical.
+From: Alexey Baturo <space.monkey.delivers@gmail.com>
 
-You don't, though: you change it from "info tlb" to "info mmu -t" etc.
+Signed-off-by: Alexey Baturo <space.monkey.delivers@gmail.com>
 
-> >   * which targets implement which and why
->
-> This one is easy to answer:
->
-> #if defined(TARGET_I386) || defined(TARGET_SH4) || defined(TARGET_SPARC)
-> || \
->      defined(TARGET_PPC) || defined(TARGET_XTENSA) || defined(TARGET_M68K=
-)
->      {
->          .name       =3D "tlb",
->
-> #if defined(TARGET_I386) || defined(TARGET_RISCV)
->      {
->          .name       =3D "mem",
->
-> >   * what the plan is for the future
->
-> My problem is with linking a single QEMU binary, as these two symbols
-> (hmp_info_mem and hmp_info_tlb) clash.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/cpu.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-Yes, but they both (implicitly) operate on the current HMP CPU,
-so the problem with linking into a single binary is that they're
-not indirected through a method on the CPU object, not the syntax
-used in the monitor to invoke them, presumably.
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 73c69f3d0a..9e3bf6c5c5 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -190,6 +190,9 @@ const RISCVIsaExtData isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(svinval, PRIV_VERSION_1_12_0, ext_svinval),
+     ISA_EXT_DATA_ENTRY(svnapot, PRIV_VERSION_1_12_0, ext_svnapot),
+     ISA_EXT_DATA_ENTRY(svpbmt, PRIV_VERSION_1_12_0, ext_svpbmt),
++    ISA_EXT_DATA_ENTRY(ssnpm, PRIV_VERSION_1_12_0, ext_ssnpm),
++    ISA_EXT_DATA_ENTRY(smnpm, PRIV_VERSION_1_12_0, ext_smnpm),
++    ISA_EXT_DATA_ENTRY(smmpm, PRIV_VERSION_1_12_0, ext_smmpm),
+     ISA_EXT_DATA_ENTRY(xtheadba, PRIV_VERSION_1_11_0, ext_xtheadba),
+     ISA_EXT_DATA_ENTRY(xtheadbb, PRIV_VERSION_1_11_0, ext_xtheadbb),
+     ISA_EXT_DATA_ENTRY(xtheadbs, PRIV_VERSION_1_11_0, ext_xtheadbs),
+@@ -1561,6 +1564,11 @@ const RISCVCPUMultiExtConfig riscv_cpu_vendor_exts[] = {
+ 
+ /* These are experimental so mark with 'x-' */
+ const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[] = {
++    /* Zjpm v0.8 extensions */
++    MULTI_EXT_CFG_BOOL("x-ssnpm", ext_ssnpm, false),
++    MULTI_EXT_CFG_BOOL("x-smnpm", ext_smnpm, false),
++    MULTI_EXT_CFG_BOOL("x-smmpm", ext_smmpm, false),
++
+     DEFINE_PROP_END_OF_LIST(),
+ };
+ 
+-- 
+2.34.1
 
-> I'm indeed only postponing the problem, without looking at what
-> this code does. I did it adding hmp_info_mmu_tlb/mem hooks in
-> TCGCPUOps ("hw/core/tcg-cpu-ops.h"), so the command can be
-> dispatched per target vcpu as target-agnostic code in
-> monitor/hmp-cmds.c:
->
-> +#include "hw/core/tcg-cpu-ops.h"
-> +
-> +static void hmp_info_mmu_tlb(Monitor *mon, CPUState *cpu)
-> +{
-> +    const TCGCPUOps *tcg_ops =3D cpu->cc->tcg_ops;
-> +
-> +    if (tcg_ops->hmp_info_mmu_tlb) {
-> +        tcg_ops->hmp_info_mmu_tlb(mon, cpu_env(cpu));
-> +    } else {
-> +        monitor_puts(mon, "No per-CPU information available on this
-> target\n");
-> +    }
-> +}
-
-These aren't TCG specific though, so why TCGCPUOps ?
-
-> > I am definitely not a fan of either of these commands, because
-> > (as we currently implement them) they effectively require each
-> > target architecture to implement a second copy of the page table
-> > walking code. But before we can deprecate them we need to be
-> > pretty sure that "info mmu" is what we want to replace them with.
->
-> An alternative is to just deprecate them, without adding "info mmu" :)
->
-> It is OK to un-deprecate stuff if we realize its usefulness.
-
-The commands are there because some users find them useful.
-I just dislike them because I think they're a bit niche and
-annoying to implement and not consistent across target
-architectures and not very well documented...
-
-By the way, we have no obligation to follow the deprecate-and-drop
-process for HMP commands; unlike QMP, we give ourselves the
-license to vary it when we feel like it, because the users are
-humans, not programs or scripts.
-
--- PMM
 
