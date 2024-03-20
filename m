@@ -4,69 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA5F4C54E58
-	for <qemu-riscv@archiver.kernel.org>; Wed, 20 Mar 2024 20:14:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27E56C54E58
+	for <qemu-riscv@archiver.kernel.org>; Wed, 20 Mar 2024 20:14:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rn2Jr-00020g-Ug; Wed, 20 Mar 2024 16:13:51 -0400
+	id 1rn2KA-0002Pt-8m; Wed, 20 Mar 2024 16:14:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rn2Jo-0001zZ-QU
- for qemu-riscv@nongnu.org; Wed, 20 Mar 2024 16:13:48 -0400
-Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
+ id 1rn2K9-0002Ni-BE
+ for qemu-riscv@nongnu.org; Wed, 20 Mar 2024 16:14:09 -0400
+Received: from mail-pg1-x532.google.com ([2607:f8b0:4864:20::532])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rn2Jl-0006Gc-52
- for qemu-riscv@nongnu.org; Wed, 20 Mar 2024 16:13:48 -0400
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-6e6aaa2f02cso262727b3a.2
- for <qemu-riscv@nongnu.org>; Wed, 20 Mar 2024 13:13:44 -0700 (PDT)
+ id 1rn2K1-0006Hb-8m
+ for qemu-riscv@nongnu.org; Wed, 20 Mar 2024 16:14:08 -0400
+Received: by mail-pg1-x532.google.com with SMTP id
+ 41be03b00d2f7-5cdbc4334edso126865a12.3
+ for <qemu-riscv@nongnu.org>; Wed, 20 Mar 2024 13:14:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1710965624; x=1711570424; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1710965640; x=1711570440; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=XRv7DiKvRrwz0cItyDcpLdPVrg1l5NvKslY6SkA3Ts8=;
- b=JUOp7whqBe3d3ZFTscd7ZMRNCoNAYBFi60bbVIUkpXQuzgWsO2UkESG2DlCpqLIrQW
- g9ATzi6d+ppvXY1RzGy4ZmJSrCC79SGm21pYJzfEkQquUutcylHDfne0t2+EGt00+ZG0
- 5JN5oCtea/jJs0c89u8nRe+2/LWpJEmso0lAsJORJhmL38BJgHlkJinzo1lcfYucEnKB
- x1fxzBtIBtxHEdQ/YfahOGsdSMGNATm7LZX3Ni9tBi9cYtMssxb9igU9CowpYz52g8l7
- Lo/L1iP4/yrhRuuGTodcWnYkGcU7j9v3e8HvgNDpSUr5c8YDcMtnNM0qd+kOiMfNGhp5
- BGew==
+ bh=R57tYoMxWo7WYEDyK0BOXMp2utsyWkna/XVVHMQMyOI=;
+ b=JyqgB5dvP9oNWnwiqxeAWnEKlMQVlEkcWjzirJUJB2jU7uqEMvl28ep+BwtmXa11Sb
+ 7QTCabNi4es2IR3YHevocRnXQv3hSvzMpHRW7Htr9VsO0ku9lf0H8UOsPArH+9TJPWfH
+ eGZGzRKzEwhIZzqCh0wkKBsaej947qIYlS99vQy69LXn8PABNndsHh7b3laSLd4aUH9C
+ Ql8RWAYeUMZA+2w7y6WpY4MncpoWsvhVe2Mftk4OiyUFc9hFEdI0Y+oP4A8XbqPWdwBc
+ WiT1e7DW0z0SJv0vOLW0OOIcItZV6jVUHqyEePEqypI58c8dll1NEtVIeb/3iq0uOFsq
+ wAQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710965624; x=1711570424;
+ d=1e100.net; s=20230601; t=1710965640; x=1711570440;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=XRv7DiKvRrwz0cItyDcpLdPVrg1l5NvKslY6SkA3Ts8=;
- b=P0HNMLjuhP0boni0R+Bj1bFZS5yvLDi0fgFkGyDwq+zmyjOXOGmP6z+naH6W3eigiA
- b6NkhkAcPLmBAJTNgh2SYHhNnWzyPrA3npHchaYmJfqnUhAaojDQrEznTOV8dAUoUfKL
- tpYpRqhiEXaOzXXoIi8QrerAmh0BAkI6IvG0p0ClZGPL9k2o4OMDMBq9m50xHZJ9i+Ig
- Wdufo2jssDvQ5MV+9J4/zMBe6jp/a4aenLHLmrTgwARE8E+lIf9jw1xewjtQkCzatlB/
- Ovk5tpbDy7N6sYPdqDGNbFiuYkMHJIHkB0yg1FWz9a+75ziS/6S3sxouZL+6whCJV6I+
- yaJQ==
+ bh=R57tYoMxWo7WYEDyK0BOXMp2utsyWkna/XVVHMQMyOI=;
+ b=hhpdsZ/kKee3y5wo3eQZZylMqh85PNIPvSDLpEwcaX/HoSpSIq3CNUVjRmcofrV2Sq
+ glNOJJ3zQVGdVJSVEuVgJPtWbiOG+pd7GABBOT6bGyCkNReQW3GabnY9/mSygsCKLngz
+ aBrIsvMps6LHY8XkVEyzXuY4jeUiYbMrXFjSFnxbhOX/6/ii+DecVgxcq97EQJ2iq5CY
+ CaVGmYNnMLuv5r3jQE5IG4rr/pUEkxXflYz4ZU5v9JsHmYD7vffGD09Ge2byB9fu7rNZ
+ PffKqT/frB3VL06gk1OSXMRusFX6IuK7ty6Q6R8+ClaJM97u30V2dbwbW1ff+CJd8TzH
+ jrWA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWAzlrLlPKRLjtUk/rgl8L9CNo6xcb5HNDRH0ajNBfuF/F1e7UTPFyOC2D0qczaIkDcuxQbYyqb98UoINiISHk69OyZ+iw=
-X-Gm-Message-State: AOJu0Yzq40914WcBMn3GtPc/CTIdHf9BCwIHSpr8WoqMM3vi+aa/cz77
- KcCk2lq3YkAF8XTdfowTjmAq0Yd9a9SAoxVt8wN5Ep83X0lk1hzbe1dCjcAGPcxpI5LCyK/ek5M
- 9
-X-Google-Smtp-Source: AGHT+IFVU75DHHzep1/AK6VXYJhk5fCMfZD2hV3vS3I1wpnaoN4Uh2NVqLs0QVh+S5H+/ZfhK0oOiQ==
-X-Received: by 2002:a05:6a20:8f01:b0:1a3:6f69:d9f3 with SMTP id
- b1-20020a056a208f0100b001a36f69d9f3mr3264108pzk.61.1710965623790; 
- Wed, 20 Mar 2024 13:13:43 -0700 (PDT)
+ AJvYcCWV+yl51pQecsF2GsEfU3WYo+rP+oGImu0nbhkE79IT4axEOadkUOj3zKiiWLgFxR1jyrE28fHtBBuNC/GwmDC339+o+zI=
+X-Gm-Message-State: AOJu0YywT65zrL6Er0AKNllmFW0CmughpfesT4DpAWU9o8VG0NsbXH34
+ q7yNqxOpdOrhdsxuugeBqBhz+DEDI4PbPvShh2muSWi0t7dTEJenYWIjpmvpX0g=
+X-Google-Smtp-Source: AGHT+IGpLVpi0JOs/lOC2seJgW6HKiNOFpi9DBXNGp2a1ThPBaUyEiRKJDGfeJob9fE4Sbmt1N4MOg==
+X-Received: by 2002:a05:6a20:5042:b0:1a3:5d0b:456a with SMTP id
+ o2-20020a056a20504200b001a35d0b456amr41756pza.32.1710965639692; 
+ Wed, 20 Mar 2024 13:13:59 -0700 (PDT)
 Received: from [192.168.68.110] ([177.94.15.159])
  by smtp.gmail.com with ESMTPSA id
- j8-20020a62e908000000b006e731b44241sm5360312pfh.42.2024.03.20.13.13.41
+ j8-20020a62e908000000b006e731b44241sm5360312pfh.42.2024.03.20.13.13.57
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 20 Mar 2024 13:13:43 -0700 (PDT)
-Message-ID: <d75b8950-fdd9-4717-aff7-c3a5f847428a@ventanamicro.com>
-Date: Wed, 20 Mar 2024 17:13:40 -0300
+ Wed, 20 Mar 2024 13:13:59 -0700 (PDT)
+Message-ID: <cc0ce8d0-74de-40b2-8425-9f0743be93ed@ventanamicro.com>
+Date: Wed, 20 Mar 2024 17:13:56 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] target/riscv: rvv: Check single width operator for vector
- fp widen instructions
+Subject: Re: [PATCH] target/riscv: rvv: Check single width operator for
+ vfncvt.rod.f.f.w
 Content-Language: en-US
 To: Max Chou <max.chou@sifive.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
@@ -76,13 +75,13 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Richard Henderson <richard.henderson@linaro.org>
 References: <20240320072709.1043227-1-max.chou@sifive.com>
- <20240320072709.1043227-3-max.chou@sifive.com>
+ <20240320072709.1043227-4-max.chou@sifive.com>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240320072709.1043227-3-max.chou@sifive.com>
+In-Reply-To: <20240320072709.1043227-4-max.chou@sifive.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x432.google.com
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::532;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x532.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -108,62 +107,25 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 On 3/20/24 04:25, Max Chou wrote:
-> The require_scale_rvf function only checks the double width operator for
-> the vector floating point widen instructions, so most of the widen
-> checking functions need to add require_rvf for single width operator.
-> 
-> The vfwcvt.f.x.v and vfwcvt.f.xu.v instructions convert single width
-> integer to double width float, so the opfxv_widen_check function doesn’t
-> need require_rvf for the single width operator(integer).
+> The opfv_narrow_check needs to check the single width float operator by
+> require_rvf.
 > 
 > Signed-off-by: Max Chou <max.chou@sifive.com>
 > ---
 
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
->   target/riscv/insn_trans/trans_rvv.c.inc | 5 +++++
->   1 file changed, 5 insertions(+)
+>   target/riscv/insn_trans/trans_rvv.c.inc | 1 +
+>   1 file changed, 1 insertion(+)
 > 
 > diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-> index ef568e263d..6cb9bc9fde 100644
+> index 6cb9bc9fde..19059fea5f 100644
 > --- a/target/riscv/insn_trans/trans_rvv.c.inc
 > +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-> @@ -2331,6 +2331,7 @@ GEN_OPFVF_TRANS(vfrsub_vf,  opfvf_check)
->   static bool opfvv_widen_check(DisasContext *s, arg_rmrr *a)
+> @@ -2817,6 +2817,7 @@ static bool opffv_narrow_check(DisasContext *s, arg_rmr *a)
+>   static bool opffv_rod_narrow_check(DisasContext *s, arg_rmr *a)
 >   {
->       return require_rvv(s) &&
-> +           require_rvf(s) &&
->              require_scale_rvf(s) &&
->              (s->sew != MO_8) &&
->              vext_check_isa_ill(s) &&
-> @@ -2370,6 +2371,7 @@ GEN_OPFVV_WIDEN_TRANS(vfwsub_vv, opfvv_widen_check)
->   static bool opfvf_widen_check(DisasContext *s, arg_rmrr *a)
->   {
->       return require_rvv(s) &&
-> +           require_rvf(s) &&
->              require_scale_rvf(s) &&
->              (s->sew != MO_8) &&
->              vext_check_isa_ill(s) &&
-> @@ -2402,6 +2404,7 @@ GEN_OPFVF_WIDEN_TRANS(vfwsub_vf)
->   static bool opfwv_widen_check(DisasContext *s, arg_rmrr *a)
->   {
->       return require_rvv(s) &&
-> +           require_rvf(s) &&
->              require_scale_rvf(s) &&
->              (s->sew != MO_8) &&
->              vext_check_isa_ill(s) &&
-> @@ -2441,6 +2444,7 @@ GEN_OPFWV_WIDEN_TRANS(vfwsub_wv)
->   static bool opfwf_widen_check(DisasContext *s, arg_rmrr *a)
->   {
->       return require_rvv(s) &&
-> +           require_rvf(s) &&
->              require_scale_rvf(s) &&
->              (s->sew != MO_8) &&
->              vext_check_isa_ill(s) &&
-> @@ -2941,6 +2945,7 @@ GEN_OPFVV_TRANS(vfredmin_vs, freduction_check)
->   static bool freduction_widen_check(DisasContext *s, arg_rmrr *a)
->   {
->       return reduction_widen_check(s, a) &&
+>       return opfv_narrow_check(s, a) &&
 > +           require_rvf(s) &&
 >              require_scale_rvf(s) &&
 >              (s->sew != MO_8);
