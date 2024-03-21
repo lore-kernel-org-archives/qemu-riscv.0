@@ -4,73 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5320EC54E68
-	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Mar 2024 05:20:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28D98C54E58
+	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Mar 2024 05:55:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rnAqF-0004rs-1A; Thu, 21 Mar 2024 01:19:51 -0400
+	id 1rnBOU-0000XO-Lf; Thu, 21 Mar 2024 01:55:14 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dg@treblig.org>)
- id 1rn3yR-0007NO-Re; Wed, 20 Mar 2024 17:59:52 -0400
-Received: from mx.treblig.org ([2a00:1098:5b::1])
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1rnBOT-0000Wy-00; Thu, 21 Mar 2024 01:55:13 -0400
+Received: from out30-110.freemail.mail.aliyun.com ([115.124.30.110])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dg@treblig.org>)
- id 1rn3yM-0000Lb-0x; Wed, 20 Mar 2024 17:59:51 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=treblig.org
- ; s=bytemarkmx;
- h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
- MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=BXcp6nmYQiOnkyo3239WHF4QCUPILYG3e0Ystupic7U=; b=OCN7BK/Uc6HGM5dW/cbK0m1ioN
- zQ1IUSCI1QBaEfh0CiWfAQQb1YhAyhVzmhyNu4YNzW0hzX65FjovxdiVscQnD7PfBozAzjy4Loz13
- VDSdH+wRFP/B9hCpb0J93Xc5GGhMf/8LOzjuShW16Nv/nBPNVelERIsbMz2hLxZY3cNpsPeidbosq
- kdgNHOU3q12LMfETPo9ZV+eBkSHv/41gOXFFlj0AZdIF3r+M50Q567lqxQs+qpM8fxL2eMDlP/rRH
- r4YQZrPoilcEpdwwQQ7APFv3eoYssXrVjwCyesfBpLH/jcnusMprgQ6EVrixmG0qwn7OZYSWi3tZ6
- pxUSZ0bQ==;
-Received: from dg by mx.treblig.org with local (Exim 4.96)
- (envelope-from <dg@treblig.org>) id 1rn3yH-00DZue-13;
- Wed, 20 Mar 2024 21:59:41 +0000
-Date: Wed, 20 Mar 2024 21:59:41 +0000
-From: "Dr. David Alan Gilbert" <dave@treblig.org>
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Richard Henderson <richard.henderson@linaro.org>,
- Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
- qemu-ppc@nongnu.org, Thomas Huth <thuth@redhat.com>,
- devel@lists.libvirt.org, Paolo Bonzini <pbonzini@redhat.com>,
- Alex =?iso-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>,
- Daniel =?iso-8859-1?Q?P=2E_Berrang=E9?= <berrange@redhat.com>
-Subject: Re: [PATCH-for-9.0 0/2] target/monitor: Deprecate 'info tlb/mem' in
- favor of 'info mmu'
-Message-ID: <ZftcTb2_O8zHPd3Z@gallifrey>
-References: <20240320164055.60319-1-philmd@linaro.org>
- <CAFEAcA81u9J9iijs-CNDbsANb6c0Cdb4qQKmBd=DiQAoFA4U=w@mail.gmail.com>
- <5deec986-7a22-402d-abe1-4e40f5bb427a@linaro.org>
- <CAFEAcA_4J32gpUgxXxND8ZVhrEEhFK=gPG2SF8xsVJ+jpkV0WA@mail.gmail.com>
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1rnBOP-0003kd-Rr; Thu, 21 Mar 2024 01:55:12 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linux.alibaba.com; s=default;
+ t=1711000496; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
+ bh=Yo5DBRQmmubqbV+E+YJ4w22GLhmuNyQY27Y5R5Un3uQ=;
+ b=vLLEQ6YFRu8mr3P1m6qG2c7tiTdhMHjBl1U5t4Z7OYQCro0bKUZ3co9MS6nfKrCyxuMer66b9JrD176+KHZMIkPDE+GY2WYG3lCePsJpadNcaRNEOrOQRZAfFAox28vVbJlc6atImMnw1UhU40xd+FFULLvdZRljx7pvG8WrhaA=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R181e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046056;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
+ TI=SMTPD_---0W2zadUx_1711000493; 
+Received: from 30.198.0.180(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0W2zadUx_1711000493) by smtp.aliyun-inc.com;
+ Thu, 21 Mar 2024 13:54:54 +0800
+Message-ID: <d58afdd1-257e-457f-ae28-52507431d2a6@linux.alibaba.com>
+Date: Thu, 21 Mar 2024 13:54:50 +0800
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAFEAcA_4J32gpUgxXxND8ZVhrEEhFK=gPG2SF8xsVJ+jpkV0WA@mail.gmail.com>
-X-Chocolate: 70 percent or better cocoa solids preferably
-X-Operating-System: Linux/6.1.0-17-amd64 (x86_64)
-X-Uptime: 21:59:13 up 78 days, 48 min,  1 user,  load average: 0.00, 0.00, 0.00
-User-Agent: Mutt/2.2.12 (2023-09-09)
-Received-SPF: pass client-ip=2a00:1098:5b::1; envelope-from=dg@treblig.org;
- helo=mx.treblig.org
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] target/riscv: Fix the element agnostic function problem
+Content-Language: en-US
+To: Huang Tao <eric.huang@linux.alibaba.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, dbarboza@ventanamicro.com, liwei1518@gmail.com,
+ bin.meng@windriver.com, alistair.francis@wdc.com, palmer@dabbelt.com,
+ Richard Henderson <richard.henderson@linaro.org>
+References: <20240321035816.99983-1-eric.huang@linux.alibaba.com>
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20240321035816.99983-1-eric.huang@linux.alibaba.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=115.124.30.110;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-110.freemail.mail.aliyun.com
+X-Spam_score_int: -174
+X-Spam_score: -17.5
+X-Spam_bar: -----------------
+X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Thu, 21 Mar 2024 01:19:48 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -85,108 +71,61 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-* Peter Maydell (peter.maydell@linaro.org) wrote:
-> On Wed, 20 Mar 2024 at 17:06, Philippe Mathieu-Daudé <philmd@linaro.org> wrote:
-> >
-> > +Alex/Daniel
-> >
-> > On 20/3/24 17:53, Peter Maydell wrote:
-> > > On Wed, 20 Mar 2024 at 16:40, Philippe Mathieu-Daudé <philmd@linaro.org> wrote:
-> > >>
-> > >> 'info tlb' and 'info mem' commands don't scale in heterogeneous
-> > >> emulation. They will be reworked after the next release, hidden
-> > >> behind the 'info mmu' command. It is not too late to deprecate
-> > >> commands, so add the 'info mmu' command as wrapper to the other
-> > >> ones, but already deprecate them.
-> > >>
-> > >> Philippe Mathieu-Daudé (2):
-> > >>    target/monitor: Introduce 'info mmu' command
-> > >>    target/monitor: Deprecate 'info tlb' and 'info mem' commands
-> > >
-> > > This seems to replace "info tlb" and "info mem" with "info mmu -t"
-> > > and "info mmu -m", but it doesn't really say anything about:
-> > >   * what the difference is between these two things
-> >
-> > I really don't know; I'm only trying to keep the monitor interface
-> > identical.
-> 
-> You don't, though: you change it from "info tlb" to "info mmu -t" etc.
-> 
-> > >   * which targets implement which and why
-> >
-> > This one is easy to answer:
-> >
-> > #if defined(TARGET_I386) || defined(TARGET_SH4) || defined(TARGET_SPARC)
-> > || \
-> >      defined(TARGET_PPC) || defined(TARGET_XTENSA) || defined(TARGET_M68K)
-> >      {
-> >          .name       = "tlb",
-> >
-> > #if defined(TARGET_I386) || defined(TARGET_RISCV)
-> >      {
-> >          .name       = "mem",
-> >
-> > >   * what the plan is for the future
-> >
-> > My problem is with linking a single QEMU binary, as these two symbols
-> > (hmp_info_mem and hmp_info_tlb) clash.
-> 
-> Yes, but they both (implicitly) operate on the current HMP CPU,
-> so the problem with linking into a single binary is that they're
-> not indirected through a method on the CPU object, not the syntax
-> used in the monitor to invoke them, presumably.
-> 
-> > I'm indeed only postponing the problem, without looking at what
-> > this code does. I did it adding hmp_info_mmu_tlb/mem hooks in
-> > TCGCPUOps ("hw/core/tcg-cpu-ops.h"), so the command can be
-> > dispatched per target vcpu as target-agnostic code in
-> > monitor/hmp-cmds.c:
-> >
-> > +#include "hw/core/tcg-cpu-ops.h"
-> > +
-> > +static void hmp_info_mmu_tlb(Monitor *mon, CPUState *cpu)
-> > +{
-> > +    const TCGCPUOps *tcg_ops = cpu->cc->tcg_ops;
-> > +
-> > +    if (tcg_ops->hmp_info_mmu_tlb) {
-> > +        tcg_ops->hmp_info_mmu_tlb(mon, cpu_env(cpu));
-> > +    } else {
-> > +        monitor_puts(mon, "No per-CPU information available on this
-> > target\n");
-> > +    }
-> > +}
-> 
-> These aren't TCG specific though, so why TCGCPUOps ?
-> 
-> > > I am definitely not a fan of either of these commands, because
-> > > (as we currently implement them) they effectively require each
-> > > target architecture to implement a second copy of the page table
-> > > walking code. But before we can deprecate them we need to be
-> > > pretty sure that "info mmu" is what we want to replace them with.
-> >
-> > An alternative is to just deprecate them, without adding "info mmu" :)
-> >
-> > It is OK to un-deprecate stuff if we realize its usefulness.
-> 
-> The commands are there because some users find them useful.
-> I just dislike them because I think they're a bit niche and
-> annoying to implement and not consistent across target
-> architectures and not very well documented...
-> 
-> By the way, we have no obligation to follow the deprecate-and-drop
-> process for HMP commands; unlike QMP, we give ourselves the
-> license to vary it when we feel like it, because the users are
-> humans, not programs or scripts.
 
-Right, so no rush to get the deprecation in; change it when you agree
-what you'd like a replacement to look like.
+On 2024/3/21 11:58, Huang Tao wrote:
+> In RVV and vcrypto instructions, the masked and tail elements are set to 1s
+> using vext_set_elems_1s function if the vma/vta bit is set. It is the element
+> agnostic policy.
+>
+> However, this function can't deal the big endian situation. This patch fixes
+> the problem by adding handling of such case.
+>
+> Signed-off-by: Huang Tao <eric.huang@linux.alibaba.com>
+> Suggested-by: Richard Henderson <richard.henderson@linaro.org>
+> ---
+> Changes in v2:
+> - Keep the api of vext_set_elems_1s
+> - Reduce the number of patches.
+> ---
+>   target/riscv/vector_internals.c | 22 ++++++++++++++++++++++
+>   1 file changed, 22 insertions(+)
+>
+> diff --git a/target/riscv/vector_internals.c b/target/riscv/vector_internals.c
+> index 12f5964fbb..3e45b9b4a7 100644
+> --- a/target/riscv/vector_internals.c
+> +++ b/target/riscv/vector_internals.c
+> @@ -30,6 +30,28 @@ void vext_set_elems_1s(void *base, uint32_t is_agnostic, uint32_t cnt,
+>       if (tot - cnt == 0) {
+>           return ;
+>       }
+> +
+> +#if HOST_BIG_ENDIAN
+> +    /*
+> +     * Deal the situation when the elements are insdie
+> +     * only one uint64 block including setting the
+> +     * masked-off element.
+> +     */
+> +    if ((tot - 1) ^ cnt < 8) {
+> +        memset(base + H1(tot - 1), -1, tot - cnt);
+> +        return;
+> +    }
+> +    /*
+> +     * Otherwise, at least cross two uint64_t blocks.
+> +     * Set first unaligned block.
+> +     */
+> +    if (cnt % 8 != 0) {
+> +        uint32_t j = ROUND_UP(cnt, 8);
+> +        memset(base + H1(j - 1), -1, j - cnt);
+> +        cnt = j;
+> +    }
+> +    /* Set other 64bit aligend blocks */
+> +#endif
 
-Dave
+Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
-> -- PMM
--- 
- -----Open up your eyes, open up your mind, open up your code -------   
-/ Dr. David Alan Gilbert    |       Running GNU/Linux       | Happy  \ 
-\        dave @ treblig.org |                               | In Hex /
- \ _________________________|_____ http://www.treblig.org   |_______/
+Zhiwei
+
+>       memset(base + cnt, -1, tot - cnt);
+>   }
+>   
 
