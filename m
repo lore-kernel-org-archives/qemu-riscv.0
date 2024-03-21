@@ -4,82 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77902C54E67
-	for <qemu-riscv@archiver.kernel.org>; Wed, 20 Mar 2024 21:03:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40D8BC54E67
+	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Mar 2024 02:21:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rn35A-0003Mk-OB; Wed, 20 Mar 2024 17:02:44 -0400
+	id 1rn83P-0001rZ-VQ; Wed, 20 Mar 2024 22:21:15 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rn358-0003MU-Kv
- for qemu-riscv@nongnu.org; Wed, 20 Mar 2024 17:02:42 -0400
-Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1rn83O-0001r0-PV
+ for qemu-riscv@nongnu.org; Wed, 20 Mar 2024 22:21:14 -0400
+Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rn353-0006l6-DS
- for qemu-riscv@nongnu.org; Wed, 20 Mar 2024 17:02:39 -0400
-Received: by mail-pf1-x429.google.com with SMTP id
- d2e1a72fcca58-6e709e0c123so340206b3a.1
- for <qemu-riscv@nongnu.org>; Wed, 20 Mar 2024 14:02:36 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1rn839-0002b8-FD
+ for qemu-riscv@nongnu.org; Wed, 20 Mar 2024 22:21:14 -0400
+Received: by mail-pf1-x432.google.com with SMTP id
+ d2e1a72fcca58-6e6ca2ac094so569087b3a.0
+ for <qemu-riscv@nongnu.org>; Wed, 20 Mar 2024 19:20:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1710968555; x=1711573355; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=linaro.org; s=google; t=1710987657; x=1711592457; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=sfpDhvNVJE/c/xB9tQjWioJlmZkL0NYOq3onpV9mdy8=;
- b=E1YwPbwLNV1G6jkFsGfN4CT0BKocZWyb3vOnOhOnePucNuYeEfE6yzpQZriv51YdbO
- QpFnE7tl/4ZHAsk0v2cimY8SbEHsgHJKq0tt+RSzcWGhkncW3BqEBMurkJRNP0ba8pbb
- Ps3UPcrWJkmeWpZknPW/L+G/CZlmPMEX0V2f72DzJxOCPNHtNRYVKvNE6Pa6Bd5VixNI
- 9ugbhMv49oUAVV6nXsuKtohPzUtoKfFVlACsli4RxmGk5GX9VSrj+GxsLfkTk8ZbUr+Z
- T+Wf3A6qMdpih+uFjsIU9Ha4UheeyEu39cZjOMEbCty87oZhrGxpTUd15y5XtX8kQ8/J
- vwIQ==
+ bh=7oMOvImn/q2QnsEoKEH9BRQSY8LnCLAmhNBL1UMRvwk=;
+ b=f2da8609bqrOKiVpIjXDIhY1no2Do7/WqFo6OpVvnYTIHH64l9b6gsr+wvLxDeMCS5
+ YUP3LvJo0dOTXibJxhKbwqbwk6LvL7mQ0KGtCjYd9lNT8t4+zkpwDLWfxvxfOPj0wcVA
+ u8gisPETiWu19lTmfUNYNWAmHYQ0jCWyV0DferPjyhoqrPQJLUadIpeL02fdh6bzbl/l
+ nhrUO/0iYoBkjLdUVrDP5pPmyz0E8Y0XFkvZImeBIBIHxgg8hxIzDg6jIf6yb8rKFzu4
+ sVqCxp72mKtotkDRKwwwaANhw6XIKhm1dLMQNA11zypGBiQCwTFIAG59jS/MsF0MI+Qg
+ Rc4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710968555; x=1711573355;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1710987657; x=1711592457;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=sfpDhvNVJE/c/xB9tQjWioJlmZkL0NYOq3onpV9mdy8=;
- b=Tl+DurhCHIS+tBNCKvoFJz20JoYIBv8S2vgug3Qmfo7JkqaWZVTtihrRr3Gt7WBtRv
- VXnUPI7YdAZ//EuJfEztFfRThG5yGKBULI+1cWL6YkMQp0SD6RYWdtvr4cQOAwedySzH
- 2GkHCqM5FtUMlfi6K8Zw8+QeWdvOKh02YsVJGu9l7BrkBZ64FpH0X85Tr54I+lQD/OU5
- MTsd2RzmJYeC2yEXgSq+DqRotDEZME9B1CU6o5bB34aJT9J9LOANRfWTwUJsBDvozyXy
- 0L8VmtFfau3+vKiPAVLLNSu4kgy76sM7Z3eyHbp3G4Wjj1Cb3w6vnVQ0znV7I5/gQZcb
- qd5g==
-X-Gm-Message-State: AOJu0YyEj6ZAwCT8nwumxMiU5QE3+DRr0F8Y8jpHTcy0TQ1FAyFVAf2K
- RojWUgelOds4bCNqT2yFNJxV/dJiSoBprOI6yFsaWpaE3ySkgEuUPvKzMtt+qLw=
-X-Google-Smtp-Source: AGHT+IGIxG+2eywNbVbxgBBt8kuReFtWm37Y886JQrC54BOg7wa5pL36rKx73eW8wp2FrfHo+kzxDg==
-X-Received: by 2002:a05:6a00:2d86:b0:6e8:414:94b1 with SMTP id
- fb6-20020a056a002d8600b006e8041494b1mr3462313pfb.3.1710968554615; 
- Wed, 20 Mar 2024 14:02:34 -0700 (PDT)
-Received: from [192.168.68.110] ([177.94.15.159])
- by smtp.gmail.com with ESMTPSA id
- c19-20020aa78813000000b006e6a6866f02sm12037209pfo.40.2024.03.20.14.02.32
+ bh=7oMOvImn/q2QnsEoKEH9BRQSY8LnCLAmhNBL1UMRvwk=;
+ b=LKePs8OVzhiP67zBwxMP72EHywX6xQogH/vTlT9I4WagNLlIqhQnABTNOiR0It3JGK
+ qmDT63nFvnlyRYg/7Mu96qrKy4XRgFDmF2k4ZSQ3JU8liXLZ7L1QKcRWVltpr4q9C5Zw
+ +WsRuwSkXq8uPuGIhbrjJ123AS8WzeWHlHT2ap3bXDLz2E8fOtjLfod4hSHRXw812E2f
+ jrhFGLawv8y+HJSUcuEta5k4EODeMA2IT8ELB2CiKBlWSLrexgigU+uQ/Xi1VUGJ1sXL
+ AMYGWHVwaExiDKngdbXX1Evhq5cOxBcCMKnvWL0SLrxxezQfdpbJyr6NbQF5Itdr1Y9P
+ W+Hw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVUOYHgCw1cjOoWSZOUY+3PX3bJUsHX8Wl4K/mY/ll8cVIHbmDbI+FrvkQJRlbop6OahzTINFpgXxp4LE7wuMnxqxrXH5k=
+X-Gm-Message-State: AOJu0Yx1LzRO8nYYIaHMf7YFYA4gWQ/8gzt6XErKGTzbYx/9mOn5MId/
+ S0g0geW7mtU71enYa+i2HtNbII+sZe6UzvEYzvB3xWk5sKuuB3bvcbTLPYPCwpM=
+X-Google-Smtp-Source: AGHT+IHI+DLgBR8Iqd4BDAg+ofVljn6BUzcHKIegouyQ78hXOJBX73cguAegoYN7G2+BKEBY6zf0wA==
+X-Received: by 2002:a05:6a00:1702:b0:6e7:117:c5d5 with SMTP id
+ h2-20020a056a00170200b006e70117c5d5mr7789207pfc.23.1710987656889; 
+ Wed, 20 Mar 2024 19:20:56 -0700 (PDT)
+Received: from [172.20.1.19] (173-197-098-125.biz.spectrum.com.
+ [173.197.98.125]) by smtp.gmail.com with ESMTPSA id
+ q20-20020a62ae14000000b006e6c38cbe96sm12372727pff.29.2024.03.20.19.20.54
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 20 Mar 2024 14:02:34 -0700 (PDT)
-Message-ID: <a116ce8f-1ee0-4bad-8d05-88cac66b8a7e@ventanamicro.com>
-Date: Wed, 20 Mar 2024 18:02:30 -0300
+ Wed, 20 Mar 2024 19:20:56 -0700 (PDT)
+Message-ID: <ea557fdd-e133-4347-83dd-3f88d8ab04b2@linaro.org>
+Date: Wed, 20 Mar 2024 16:20:52 -1000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/2] target/riscv/csr.c: Add functional of hvictl CSR
+Subject: Re: [PATCH-for-9.1 22/27] target/s390x: Convert to
+ TCGCPUOps::get_cpu_state()
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: qemu-s390x@nongnu.org, qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
+ qemu-riscv@nongnu.org, Anton Johansson <anjo@rev.ng>,
+ Thomas Huth <thuth@redhat.com>, David Hildenbrand <david@redhat.com>,
+ Ilya Leoshkevich <iii@linux.ibm.com>
+References: <20240319154258.71206-1-philmd@linaro.org>
+ <20240319154258.71206-23-philmd@linaro.org>
+ <ad0792cc-a782-47d8-9a18-c66883d9f6d1@linaro.org>
+ <c022abf3-0db9-4a17-9d53-f735368e6066@linaro.org>
 Content-Language: en-US
-To: Irina Ryapolova <irina.ryapolova@syntacore.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- bin.meng@windriver.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com
-References: <20240320164259.19205-1-irina.ryapolova@syntacore.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240320164259.19205-1-irina.ryapolova@syntacore.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <c022abf3-0db9-4a17-9d53-f735368e6066@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::429;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x429.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x432.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -96,71 +105,35 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
-
-This patch doesn't apply in master or alistair/riscv-to-apply.next. Can you
-please re-send?
-
-
-Thanks,
-
-
-Daniel
-
-
-On 3/20/24 13:42, Irina Ryapolova wrote:
-> CSR hvictl (Hypervisor Virtual Interrupt Control) provides further flexibility
-> for injecting interrupts into VS level in situations not fully supported by the
-> facilities described thus far, but only with more active involvement of the hypervisor.
+On 3/19/24 21:09, Philippe Mathieu-Daudé wrote:
+> On 19/3/24 22:05, Richard Henderson wrote:
+>> On 3/19/24 05:42, Philippe Mathieu-Daudé wrote:
+>>> Convert cpu_get_tb_cpu_state() to TCGCPUOps::get_cpu_state().
+>>>
+>>> Note, now s390x_get_cpu_state() is restricted to TCG.
+>>>
+>>> Signed-off-by: Philippe Mathieu-Daudé<philmd@linaro.org>
+>>> ---
+>>>   target/s390x/cpu.h            | 30 ------------------------------
+>>>   target/s390x/s390x-internal.h |  2 ++
+>>>   target/s390x/cpu.c            |  1 +
+>>>   target/s390x/tcg/mem_helper.c |  2 +-
+>>>   target/s390x/tcg/translate.c  | 23 +++++++++++++++++++++++
+>>>   5 files changed, 27 insertions(+), 31 deletions(-)
+>>
+>> Why is the function in translate.c, not cpu.c (with or without ifdefs)?
 > 
-> A hypervisor must use hvictl for any of the following:
-> • asserting for VS level a major interrupt not supported by hvien and hvip;
-> • implementing configurability of priorities at VS level for major interrupts beyond those sup-
-> ported by hviprio1 and hviprio2; or
-> • emulating an external interrupt controller for a virtual hart without the use of an IMSIC’s
-> guest interrupt file, while also supporting configurable priorities both for external interrupts
-> and for major interrupts to the virtual hart.
+> My understanding is target/foo/tcg/ is better for TCG-specific handlers,
+> less #ifdef'ry and stubs. Then bar_helper.c are meant for TCG helpers
+> (including "exec/helper-proto.h").
 > 
-> All hvictl fields together can affect the value of CSR vstopi (Virtual Supervisor Top Interrupt)
-> and therefore the interrupt identity reported in vscause when an interrupt traps to VS-mode.
-> When hvictl.VTI = 1, the absence of an interrupt for VS level can be indicated only by setting
-> hvictl.IID = 9. Software might want to use the pair IID = 9, IPRIO = 0 generally to represent
-> no interrupt in hvictl.
-> 
-> (See riscv-interrupts-1.0: Interrupts at VS level)
-> 
-> Signed-off-by: Irina Ryapolova <irina.ryapolova@syntacore.com>
-> ---
-> Changes for v2:
->    -added more information in commit message
-> ---
->   target/riscv/csr.c | 15 +++++++++++++++
->   1 file changed, 15 insertions(+)
-> 
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 674ea075a4..0c21145eaf 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -3585,6 +3585,21 @@ static int read_hvictl(CPURISCVState *env, int csrno, target_ulong *val)
->   static int write_hvictl(CPURISCVState *env, int csrno, target_ulong val)
->   {
->       env->hvictl = val & HVICTL_VALID_MASK;
-> +    if (env->hvictl & HVICTL_VTI)
-> +    {
-> +        uint32_t hviid = get_field(env->hvictl, HVICTL_IID);
-> +        uint32_t hviprio = get_field(env->hvictl, HVICTL_IPRIO);
-> +        /* the pair IID = 9, IPRIO = 0 generally to represent no interrupt in hvictl. */
-> +        if (!(hviid == IRQ_S_EXT && hviprio == 0)) {
-> +            uint64_t new_val = BIT(hviid) ;
-> +             if (new_val & S_MODE_INTERRUPTS) {
-> +                rmw_hvip64(env, csrno, NULL, new_val << 1, new_val << 1);
-> +            } else if (new_val & LOCAL_INTERRUPTS) {
-> +                rmw_hvip64(env, csrno, NULL, new_val, new_val);
-> +            }
-> +        }
-> +    }
-> +
->       return RISCV_EXCP_NONE;
->   }
->   
+> Can you think of a better file (new name?) in tcg/ or do you rather
+> keep it in the main cpu.c?
+
+Given that all other targets to this point used cpu.c, I would prefer s390x and sparc to 
+not be the only exceptions.
+
+
+r~
+
 
