@@ -4,58 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F639C54E68
-	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Mar 2024 08:31:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4410CD11DB
+	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Mar 2024 10:50:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rnDpw-00042w-5A; Thu, 21 Mar 2024 04:31:44 -0400
+	id 1rnFzm-0001mb-Od; Thu, 21 Mar 2024 06:50:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <eric.huang@linux.alibaba.com>)
- id 1rnDpg-00041n-7j; Thu, 21 Mar 2024 04:31:38 -0400
-Received: from out30-132.freemail.mail.aliyun.com ([115.124.30.132])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <eric.huang@linux.alibaba.com>)
- id 1rnDpd-0008Nr-OF; Thu, 21 Mar 2024 04:31:27 -0400
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1rnFzk-0001lg-Vw
+ for qemu-riscv@nongnu.org; Thu, 21 Mar 2024 06:50:01 -0400
+Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1rnFzj-0007OI-Id
+ for qemu-riscv@nongnu.org; Thu, 21 Mar 2024 06:50:00 -0400
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-1de0f92e649so5225005ad.0
+ for <qemu-riscv@nongnu.org>; Thu, 21 Mar 2024 03:49:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux.alibaba.com; s=default;
- t=1711009874; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
- bh=FuW58n5UxtdOQUlpaE5I8ecHkdr/LWyJ9sJqO9JqRH4=;
- b=aUocw5LMGXpcB/vFQD/AjjzNVI3PZQIvv9L5k7waGYf/3OGklxzIopVzjJ2vR/7kkCfsCqMgkwWmLCrIGUstBDqr1J0yCb4t4M7TnTqPYnigtn/fnisb0JVownwYourDAfPlwGJRP+BC1ar74bwJla0mGfm2lSBMBgowu0xi7D8=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R841e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045192;
- MF=eric.huang@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
- TI=SMTPD_---0W3-5zGG_1711009872; 
-Received: from 30.21.186.11(mailfrom:eric.huang@linux.alibaba.com
- fp:SMTPD_---0W3-5zGG_1711009872) by smtp.aliyun-inc.com;
- Thu, 21 Mar 2024 16:31:13 +0800
-Message-ID: <73db23e8-fa6c-425e-bb0b-4db9213bbbbb@linux.alibaba.com>
-Date: Thu, 21 Mar 2024 16:31:11 +0800
+ d=sifive.com; s=google; t=1711018197; x=1711622997; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=hg2LxHkojpo8q8H6r5/EMWy+uyhOa9hdLVMIdmHZC4Y=;
+ b=d6D0QWeX6U/qYPpQxIcd1/iivIS3Ve0/+TWaVVKx6MD/SwS9NOccLhsOT3gmFTKmg8
+ 3R0RiMsJhjoCi843cxtuX28yi7nhkb0/AcwRFvVKUl42YdwrpOpMJLJCfEtmqT9w7FSD
+ vwvPVuy9SWzQ0cxLlVOSRE+oGCjpl8y2EpWGGcbioS4IofsWe1/kEm+pUFr3juSBF3dY
+ EhLOFrHDOO2sHpwHed7y/4QhgodtFnbfZAUucEVNk6JiSiIdfhhT7wwncvg2RjPGpf1O
+ 7EMnjdsDk/aT6e3d+5z0dk+FSjFzPZgkCwNe/UciIZCwxxWZxzSXsL9OgkkSN7A7XD6W
+ JVlg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1711018197; x=1711622997;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=hg2LxHkojpo8q8H6r5/EMWy+uyhOa9hdLVMIdmHZC4Y=;
+ b=OoB9AFHVqiFIP5yRonZiaa0sffEcXdNAmIxWNoHkccN958lweaV/Grjk9FL8K1yL7R
+ GFO1t4rr0i/EIrE8sYyuUEjz/zusiQxZqLVD8yvAInukxnW1+mMfQFr8Q4c6+HTZ8BPo
+ qWzPOSP9obEYThzFP+osm7ruFTtwtv/IzJokqUthZZHyLuBTOSbXNFtgy+C1R3KcKL+p
+ 7FD34g/ffldz0hx+1JDECjXXuIOMwwSCahYW+mJwJmmFv3PYG/3y2/dUGs2UbDQFQdoH
+ tTNXVjWS4yN8oYc0vrT4voxlFLSU6LhFakfGJv10gVjzS0KYxVuChGXOLvzAKB+bRjHV
+ EQxQ==
+X-Gm-Message-State: AOJu0YycrjjWysTw0EDLxI2NvyWHL9pEMXktaf2qqvTFGXPryAmoD3lZ
+ rUCKfvqluVtiDJVaahjiAnxzHF34d6s61cmf1cNxwl9f4przpspUyLRvUyIY54g=
+X-Google-Smtp-Source: AGHT+IGC4qEZQVBCkmxNjsnTmEB8FTHYxHlE0oSB0MmLC2oDn9wyyfjrC+X37LfUUDh3O/p94uwpSA==
+X-Received: by 2002:a17:902:f605:b0:1e0:e3f:1afd with SMTP id
+ n5-20020a170902f60500b001e00e3f1afdmr16637633plg.68.1711018197175; 
+ Thu, 21 Mar 2024 03:49:57 -0700 (PDT)
+Received: from hsinchu16.internal.sifive.com
+ (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
+ by smtp.gmail.com with ESMTPSA id
+ j7-20020a17090276c700b001dc486f0cbesm15423749plt.222.2024.03.21.03.49.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 21 Mar 2024 03:49:56 -0700 (PDT)
+From: frank.chang@sifive.com
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, Frank Chang <frank.chang@sifive.com>,
+ Jim Shu <jim.shu@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Subject: [PATCH] hw/intc: Update APLIC IDC after claiming iforce register
+Date: Thu, 21 Mar 2024 18:49:48 +0800
+Message-ID: <20240321104951.12104-1-frank.chang@sifive.com>
+X-Mailer: git-send-email 2.43.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] target/riscv: Fix the element agnostic function problem
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, zhiwei_liu@linux.alibaba.com,
- dbarboza@ventanamicro.com, liwei1518@gmail.com, bin.meng@windriver.com,
- alistair.francis@wdc.com, palmer@dabbelt.com
-References: <20240321035816.99983-1-eric.huang@linux.alibaba.com>
- <ed5675bc-f82b-4d4e-95e4-1a3045dd1870@linaro.org>
-From: Huang Tao <eric.huang@linux.alibaba.com>
-In-Reply-To: <ed5675bc-f82b-4d4e-95e4-1a3045dd1870@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.132;
- envelope-from=eric.huang@linux.alibaba.com;
- helo=out30-132.freemail.mail.aliyun.com
-X-Spam_score_int: -174
-X-Spam_score: -17.5
-X-Spam_bar: -----------------
-X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
+ envelope-from=frank.chang@sifive.com; helo=mail-pl1-x632.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -71,78 +96,36 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+From: Frank Chang <frank.chang@sifive.com>
 
-On 2024/3/21 16:18, Richard Henderson wrote:
-> On 3/20/24 17:58, Huang Tao wrote:
->> In RVV and vcrypto instructions, the masked and tail elements are set 
->> to 1s
->> using vext_set_elems_1s function if the vma/vta bit is set. It is the 
->> element
->> agnostic policy.
->>
->> However, this function can't deal the big endian situation. This 
->> patch fixes
->> the problem by adding handling of such case.
->>
->> Signed-off-by: Huang Tao <eric.huang@linux.alibaba.com>
->> Suggested-by: Richard Henderson <richard.henderson@linaro.org>
->> ---
->> Changes in v2:
->> - Keep the api of vext_set_elems_1s
->> - Reduce the number of patches.
->> ---
->>   target/riscv/vector_internals.c | 22 ++++++++++++++++++++++
->>   1 file changed, 22 insertions(+)
->>
->> diff --git a/target/riscv/vector_internals.c 
->> b/target/riscv/vector_internals.c
->> index 12f5964fbb..3e45b9b4a7 100644
->> --- a/target/riscv/vector_internals.c
->> +++ b/target/riscv/vector_internals.c
->> @@ -30,6 +30,28 @@ void vext_set_elems_1s(void *base, uint32_t 
->> is_agnostic, uint32_t cnt,
->>       if (tot - cnt == 0) {
->>           return ;
->>       }
->> +
->> +#if HOST_BIG_ENDIAN
->> +    /*
->> +     * Deal the situation when the elements are insdie
->> +     * only one uint64 block including setting the
->> +     * masked-off element.
->> +     */
->> +    if ((tot - 1) ^ cnt < 8) {
->> +        memset(base + H1(tot - 1), -1, tot - cnt);
->> +        return;
->> +    }
->
-> (1) tot will always be a multiple of 8, afaik, so there's no need for 
-> this first block.
-> (2) Using if not #if means that the code is always compile-tested, 
-> even if it is eliminated.
->
->
-> r~
+Currently, QEMU only sets the iforce register to 0 and returns early
+when claiming the iforce register. However, this may leave mip.meip
+remains at 1 if a spurious external interrupt triggered by iforce
+register is the only pending interrupt to be claimed, and the interrupt
+cannot be lowered as expected.
 
-tot is not always be a multiple of 8. In the vector instructions, the 
-helper fuinctions will use vext_set_elems_1s to set one masked-off 
-element. In that case, tot = cnt + esz, and tot is not the end of a 
-vector register.
+This commit fixes this issue by calling riscv_aplic_idc_update() to
+update the IDC status after the iforce register is claimed.
 
-There is an example in GEN_VEXT_SHIFT_VV:
+Signed-off-by: Frank Chang <frank.chang@sifive.com>
+Reviewed-by: Jim Shu <jim.shu@sifive.com>
+---
+ hw/intc/riscv_aplic.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-     for (i = env->vstart; i < vl; i++) {
-         if (!vm && !vext_elem_mask(v0, i)) {
-             /* set masked-off elements to 1s */
-             vext_set_elems_1s(vd, vma, i * esz, (i + 1) * esz);
-             continue;
-         }
-
-As for the second point, I will use if instead of #if in the next version.
-
-Thanks,
-
-Huang Tao
-
+diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
+index 6a7fbfa861..fc5df0d598 100644
+--- a/hw/intc/riscv_aplic.c
++++ b/hw/intc/riscv_aplic.c
+@@ -488,6 +488,7 @@ static uint32_t riscv_aplic_idc_claimi(RISCVAPLICState *aplic, uint32_t idc)
+ 
+     if (!topi) {
+         aplic->iforce[idc] = 0;
++        riscv_aplic_idc_update(aplic, idc);
+         return 0;
+     }
+ 
+-- 
+2.43.2
 
 
