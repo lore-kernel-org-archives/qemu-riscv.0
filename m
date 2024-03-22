@@ -4,85 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43B1CCD11BF
-	for <qemu-riscv@archiver.kernel.org>; Fri, 22 Mar 2024 09:00:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50EE7C54E71
+	for <qemu-riscv@archiver.kernel.org>; Fri, 22 Mar 2024 09:20:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rnakj-0001EO-Iq; Fri, 22 Mar 2024 04:59:53 -0400
+	id 1rnb4v-0001ee-QH; Fri, 22 Mar 2024 05:20:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1rnaki-0001Dt-Dd
- for qemu-riscv@nongnu.org; Fri, 22 Mar 2024 04:59:52 -0400
-Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
+ (Exim 4.90_1) (envelope-from <marcin.juszkiewicz@linaro.org>)
+ id 1rnb4r-0001e4-Ke
+ for qemu-riscv@nongnu.org; Fri, 22 Mar 2024 05:20:41 -0400
+Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1rnakg-0001sk-S4
- for qemu-riscv@nongnu.org; Fri, 22 Mar 2024 04:59:52 -0400
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-1dee27acf7aso12734335ad.2
- for <qemu-riscv@nongnu.org>; Fri, 22 Mar 2024 01:59:50 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <marcin.juszkiewicz@linaro.org>)
+ id 1rnb4q-0005jV-64
+ for qemu-riscv@nongnu.org; Fri, 22 Mar 2024 05:20:41 -0400
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-414787c73c7so5834985e9.0
+ for <qemu-riscv@nongnu.org>; Fri, 22 Mar 2024 02:20:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1711097989; x=1711702789; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=a1vfWWq402ODKpgAEOpkY7cqpUKTrQvZscMmfpRFR7Q=;
- b=DPP4zEMGxRU6GDfWJRAh0helSVoHzDPhmlrhYJZ0niN2U4p6TMpmeFNEUKhXeoUJN/
- wd+Z19aIrUq5+reRKokjMzaj07ZOyKj/bbiIRGtiCzipLj51XaIuC6pUctL4bAWAtPxq
- 1TmJnNG8CpV3AMTVSQTFbnSjFMj7K+NSEJptDGMGHQsMr8z1Bu330DZvL99EwKX5GEMV
- +xPFgnq42rG+RVMjphQmU3j5OBDD5VGtPhGCh4Ge4adRbZGStMhQU6sSRWpsdomXrNwc
- 40gggHhwuLoLD1rbaJ3of6c92VBvp7+hdDVtbkiW7WwO4m1CUkHxa09s5MKXXlIlfpBn
- 7rQQ==
+ d=linaro.org; s=google; t=1711099237; x=1711704037; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:organization:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to;
+ bh=pouck9HZQleT7x+vFBGmfvusvsFxN07XU6u0eukEV1M=;
+ b=M30rFtKR/CyXPKtgrSBcsUq9tsXm/adF+nhSoKVd1OdVSAbfpyFCokafrGmy/l/0BA
+ f4igtQPv+XHR1Bj6/ktbHfQOwQoSOcsfXmcYG4812qbbTQY0q87Y1i4OF5K36mdhw62W
+ cSlcFxHZ5FW3RiTKbWYTbHq9dXlQuD3hGsbzcKZ2bNwCrGfJ4zoD/7ttqDjdsSWdBFW7
+ w1kDBbofjqoBgtiRHZ9bk8pDPMJzb2od9Ym33/cvK40rJVy3dV6+QL2u7LvlpGE12RL5
+ 8tcb9jnoTCpXvuesW00dsgXAMtgHac9iZtfAIB6mQniE3pYJWjZRsrKZLQpO+jehEuuk
+ p06g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711097989; x=1711702789;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=a1vfWWq402ODKpgAEOpkY7cqpUKTrQvZscMmfpRFR7Q=;
- b=EUPQafh+lb2LuNkVgoPp9P4JOrxvXlObjN+8mgL4T5lZS06KNG2PuD+z6GtsVCviEK
- OTdK+MbfLn/70NweWxYpecxmEjGk2V1XYmS4Hes9aCZuiYlyjrQg35LJEgDRCPOahTak
- AX9y2SVigGt48gmqWskqP6sSZmMDOskWUS1NqSzaUS3A18r5Ug2u0WynwVJVpOfspu6D
- 4LvTAvU0dNHkuVLJvBUBHh0k9Ni8+3i7IHzdmtxcDYpz6vAgFQnMX84Wo69AZXDczdJ+
- au2UVwtNCM1QIfvwnQBJdrWoeWFrziDj6H0JOS70Q+VYrFvWLfFV+EG6jnnlU9831R3Q
- Bdtw==
+ d=1e100.net; s=20230601; t=1711099237; x=1711704037;
+ h=content-transfer-encoding:in-reply-to:organization:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=pouck9HZQleT7x+vFBGmfvusvsFxN07XU6u0eukEV1M=;
+ b=jYMXYuKtvjVm6x8GlEPP0pUsqw53sseG10hsK75854vsgdxHpXf5oPlpf6HAadO2ya
+ GoePDviLRQxCnD77EiDYMll21u4nEecdoGUiKFRE48IdU8gFfpwD/Sm+8KeWD7SNPEDA
+ tHxVNEvAdtJYxRMIFUQmGm3C3Ih8qguGW5S0vYme442OE/FqFyDWQlTH7XQRNhwQLoJR
+ 60eFvxZdwHvKI9dkv1Dy5oOWMQZ6haMM7HCj7Stn6I1wZdCopFT5tBGDmMQxuWQ0dhcs
+ nd5ZnINGVF2hDHMa/0SiMh4AQlbFGyVc42zS+HN5D/QPlXGBKFVquQoH3uo7yQ4Bq1do
+ jrSA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWtfC5hAAhD7ts2c6wUAx2PO03x7cDmEg+q4SfPNu/nk79W8oFMmjHmkNTFJ2TCRiAto4gKjlxTXIpshQT3wfFJgaPxb3Q=
-X-Gm-Message-State: AOJu0Yw6GrMaDL/5TtPlqU1bKmHnYx99Mpk3XlhgI5AW1OiGxRDS8PSS
- 5FWQchyDyVPLtyEFsrhCAsTBWzr4ALR53mv2quj2IIuu2NQFErTjiyxKrKzBuoY=
-X-Google-Smtp-Source: AGHT+IF92LtyhLQu6LpObI4fvutoSbNTFhB4dvmwyPKHerXCsoLoomwrACyFPevb6bKn82G9dNyamQ==
-X-Received: by 2002:a17:902:f544:b0:1de:e47e:116c with SMTP id
- h4-20020a170902f54400b001dee47e116cmr2494974plf.39.1711097989319; 
- Fri, 22 Mar 2024 01:59:49 -0700 (PDT)
-Received: from [100.64.0.1] ([136.226.240.169])
- by smtp.gmail.com with ESMTPSA id
- l21-20020a170902d35500b001dc9422891esm1360749plk.30.2024.03.22.01.59.48
+ AJvYcCWRAkE90b1qDECe3/HUcTTpRIASg4LK1E9EaQFj4fdRnffkuoGINWaCRbhqn76+Ss0EC+oQ8hK/str/FVXe0YtYOw7TB+0=
+X-Gm-Message-State: AOJu0YzTf5NrSvsjarmOvwozH/EbTQo3N1+YlwbyTxLR/AMyAyhAIaQW
+ J6H7cf3n1XnDPCctbZHcKuetYt0krYiu0FlzLluL2l5KZOwg8ve64Lo6wt6m3gQ=
+X-Google-Smtp-Source: AGHT+IFGJj3d1+cZS1lq9wE69kifci8I4tFueyzMIqY5sKIeDCarj8jSpzHLJgnwEGRiyPEktGR9Sw==
+X-Received: by 2002:a5d:6884:0:b0:33e:aab0:9984 with SMTP id
+ h4-20020a5d6884000000b0033eaab09984mr1233864wru.24.1711099237648; 
+ Fri, 22 Mar 2024 02:20:37 -0700 (PDT)
+Received: from [192.168.200.106] (83.11.22.169.ipv4.supernova.orange.pl.
+ [83.11.22.169]) by smtp.gmail.com with ESMTPSA id
+ v7-20020a5d6107000000b0033e9e26a2d0sm1615431wrt.37.2024.03.22.02.20.35
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 22 Mar 2024 01:59:49 -0700 (PDT)
-Message-ID: <699485f0-4c96-4d63-ad09-276e22c65c02@sifive.com>
-Date: Fri, 22 Mar 2024 16:59:47 +0800
+ Fri, 22 Mar 2024 02:20:37 -0700 (PDT)
+Message-ID: <5587d9ed-6cdd-47ae-864e-75cb5ea47aee@linaro.org>
+Date: Fri, 22 Mar 2024 10:20:34 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] Fix fp16 checking in vector fp widen/narrow instructions
-To: Alistair Francis <alistair23@gmail.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-References: <20240320072709.1043227-1-max.chou@sifive.com>
- <CAKmqyKNN_BbxV-Qh=8gOCpb6z6RS2qmGajj--XU7XgnZ3ks10g@mail.gmail.com>
-Content-Language: en-US
-From: Max Chou <max.chou@sifive.com>
-In-Reply-To: <CAKmqyKNN_BbxV-Qh=8gOCpb6z6RS2qmGajj--XU7XgnZ3ks10g@mail.gmail.com>
+Subject: Re: [RFC v2 2/2] hw/riscv: Add server platform reference machine
+Content-Language: pl-PL, en-GB, en-HK
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: pbonzini@redhat.com, palmer@dabbelt.com, alistair.francis@wdc.com,
+ bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ andrei.warkentin@intel.com, shaolin.xie@alibaba-inc.com, ved@rivosinc.com,
+ sunilvl@ventanamicro.com, haibo1.xu@intel.com, evan.chai@intel.com,
+ yin.wang@intel.com, tech-server-platform@lists.riscv.org,
+ tech-server-soc@lists.riscv.org, atishp@rivosinc.com,
+ ajones@ventanamicro.com, conor@kernel.org, Fei Wu <fei2.wu@intel.com>,
+ Alistair Francis <alistair23@gmail.com>
+References: <20240312135222.3187945-1-fei2.wu@intel.com>
+ <20240312135222.3187945-3-fei2.wu@intel.com>
+ <CAKmqyKN-Yj-HZrR2MtxD2jC=JR6nFn5cEq866EXm0OfaEydXsQ@mail.gmail.com>
+ <cfac29ce-f353-4bbd-8e8d-4a7d40bf80e3@linaro.org>
+ <ebd63aa1-b4e7-490a-bdef-d952c8e37c47@canonical.com>
+From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+Organization: Linaro
+In-Reply-To: <ebd63aa1-b4e7-490a-bdef-d952c8e37c47@canonical.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
- envelope-from=max.chou@sifive.com; helo=mail-pl1-x62d.google.com
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::329;
+ envelope-from=marcin.juszkiewicz@linaro.org; helo=mail-wm1-x329.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,39 +111,38 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Thanks for the notification.
-I'll resend this series and rebase on the riscv-to-apply.next branch.
+W dniu 22.03.2024 o 09:50, Heinrich Schuchardt pisze:
+ >>> I see no mention of device trees in the spec, but I do see ACPI. Do we
+ >>> really expect a server platform to use DTs?
+ >>
+ >> This platform "kind of" follows sbsa-ref where we have very
+ >> minimalistic device tree sharing information qemu->firmware.
+ >>
+ >> libfdt is small, format is known and describes hardware. Firmware is
+ >> free to make use of it in any way it wants.
+ >>
+ >> On sbsa-ref we parse DT in TF-A (base firmware) and provide hardware
+ >> information to higher level (edk2) via SMC mechanism. Then EDK2
+ >> creates ACPI tables and provide them to the Operating System.
 
-Max
+ > We should ensure that only either an ACPI table or a device-tree
+ > description is passed to the OS and not both, e.g. when using
+ >
+ >      qemu-system-riscv64 -kernel vmlinux -M sbsa-ref
+ >
+ > But that requirement is not machine specific.
 
-On 2024/3/22 12:12 PM, Alistair Francis wrote:
-> On Wed, Mar 20, 2024 at 5:28 PM Max Chou <max.chou@sifive.com> wrote:
->> When SEW is 16, we need to check whether the Zvfhmin is enabled for the
->> single width operator for vector floating point widen/narrow
->> instructions.
->>
->> The commits in this patchset fix the single width operator checking and
->> remove the redudant SEW checking for vector floating point widen/narrow
->> instructions.
->>
->> Max Chou (4):
->>    target/riscv: rvv: Fix Zvfhmin checking for vfwcvt.f.f.v and
->>      vfncvt.f.f.w instructions
->>    target/riscv: rvv: Check single width operator for vector fp widen
->>      instructions
->>    target/riscv: rvv: Check single width operator for vfncvt.rod.f.f.w
->>    target/riscv: rvv: Remove redudant SEW checking for vector fp
->>      narrow/widen instructions
-> I think something went wrong here. It looks like you meant to send
-> this as a series, but somehow that information was lost in the subject
->
-> Alistair
->
->>   target/riscv/insn_trans/trans_rvv.c.inc | 42 ++++++++++++++++---------
->>   1 file changed, 28 insertions(+), 14 deletions(-)
->>
->> --
->> 2.31.1
->>
->>
+I would not call "qemu-system-* -M machinename -k kernel_image" a proper 
+way to boot for several systems emulated by QEMU.
+
+DeviceTree is in rvsp-ref and sbsa-ref because it is easy to process in 
+limited space 1st stage of firmware has.
+
+And if we knew how people will mention 'sbsa-ref uses DT' we would use 
+something else instead. But that would require adding more code into 
+existing firmware projects (libfdt is usually already there).
+
+I did not looked at DT generated for rvsp-ref. I know that sbsa-ref one 
+is too minimalistic for kernel use as we added only those fields/nodes 
+we need to provide data for firmware.
 
