@@ -4,98 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50EE7C54E71
-	for <qemu-riscv@archiver.kernel.org>; Fri, 22 Mar 2024 09:20:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C8C2C47DD9
+	for <qemu-riscv@archiver.kernel.org>; Fri, 22 Mar 2024 09:26:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rnb4v-0001ee-QH; Fri, 22 Mar 2024 05:20:45 -0400
+	id 1rnbAG-0004RQ-Su; Fri, 22 Mar 2024 05:26:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <marcin.juszkiewicz@linaro.org>)
- id 1rnb4r-0001e4-Ke
- for qemu-riscv@nongnu.org; Fri, 22 Mar 2024 05:20:41 -0400
-Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1rnbAF-0004R2-ID
+ for qemu-riscv@nongnu.org; Fri, 22 Mar 2024 05:26:15 -0400
+Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <marcin.juszkiewicz@linaro.org>)
- id 1rnb4q-0005jV-64
- for qemu-riscv@nongnu.org; Fri, 22 Mar 2024 05:20:41 -0400
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-414787c73c7so5834985e9.0
- for <qemu-riscv@nongnu.org>; Fri, 22 Mar 2024 02:20:39 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1rnbAD-0006ZL-W8
+ for qemu-riscv@nongnu.org; Fri, 22 Mar 2024 05:26:15 -0400
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-1dfff641d10so12373665ad.2
+ for <qemu-riscv@nongnu.org>; Fri, 22 Mar 2024 02:26:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1711099237; x=1711704037; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:organization:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to;
- bh=pouck9HZQleT7x+vFBGmfvusvsFxN07XU6u0eukEV1M=;
- b=M30rFtKR/CyXPKtgrSBcsUq9tsXm/adF+nhSoKVd1OdVSAbfpyFCokafrGmy/l/0BA
- f4igtQPv+XHR1Bj6/ktbHfQOwQoSOcsfXmcYG4812qbbTQY0q87Y1i4OF5K36mdhw62W
- cSlcFxHZ5FW3RiTKbWYTbHq9dXlQuD3hGsbzcKZ2bNwCrGfJ4zoD/7ttqDjdsSWdBFW7
- w1kDBbofjqoBgtiRHZ9bk8pDPMJzb2od9Ym33/cvK40rJVy3dV6+QL2u7LvlpGE12RL5
- 8tcb9jnoTCpXvuesW00dsgXAMtgHac9iZtfAIB6mQniE3pYJWjZRsrKZLQpO+jehEuuk
- p06g==
+ d=sifive.com; s=google; t=1711099572; x=1711704372; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=F7C+h3zUkuwKwkH7fDZaYwLp0SCWsBk7qn2QihiXSfM=;
+ b=FPpqjkNwZ+u2rT6GYo62lAIgzkWAMv2epewG9+QBFkjFU6Dq/6zPk5PL1+uNnJkt8B
+ kRBVNJXkNr0rTT9s/DA8/HJu1TwrCcar9ceO8A9bUPossdBxJrmstdht9PNiYxjHA9kM
+ FeU4j1cSH1LGLXpzZeFxV+TRljKTbuVFFOqNnQ/p+X2N/WcGWvidfgOF23N+eZYXBEpl
+ 1ap0lO9gYgw2VbzRd6tWBt4jQ1Lmd8dFzBOOqtCM4qDCK9Kw/MF9CsfcskPI5RxxOO8K
+ CqPUgDvQMuFRrItpx+3wnPheNsisbCuUtcT4m3dLygGEEbSOlo/ufTTgsv208hVIcE38
+ Hc+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711099237; x=1711704037;
- h=content-transfer-encoding:in-reply-to:organization:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=pouck9HZQleT7x+vFBGmfvusvsFxN07XU6u0eukEV1M=;
- b=jYMXYuKtvjVm6x8GlEPP0pUsqw53sseG10hsK75854vsgdxHpXf5oPlpf6HAadO2ya
- GoePDviLRQxCnD77EiDYMll21u4nEecdoGUiKFRE48IdU8gFfpwD/Sm+8KeWD7SNPEDA
- tHxVNEvAdtJYxRMIFUQmGm3C3Ih8qguGW5S0vYme442OE/FqFyDWQlTH7XQRNhwQLoJR
- 60eFvxZdwHvKI9dkv1Dy5oOWMQZ6haMM7HCj7Stn6I1wZdCopFT5tBGDmMQxuWQ0dhcs
- nd5ZnINGVF2hDHMa/0SiMh4AQlbFGyVc42zS+HN5D/QPlXGBKFVquQoH3uo7yQ4Bq1do
- jrSA==
+ d=1e100.net; s=20230601; t=1711099572; x=1711704372;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=F7C+h3zUkuwKwkH7fDZaYwLp0SCWsBk7qn2QihiXSfM=;
+ b=kiR8AZ7fatwACunMc+l6vBjBnTp1yT17o/dLoUIb1qX8fJEX8qzmjg9AYC7hL58fLk
+ UleeiSiN4zLd+1FxxrHHulBUwqyl7nT54BGqjYYkl6/UlKhYZgbtmyHTwTu+JxXEhSI6
+ QR435xZ9pENPFTuWylkE9DCo38662AZ+BCHsl0oCdR5LBj/M/HSS+XbluHXQhhazeNq2
+ qWj7ZG0mJZoRSSARt2NtRYq5qx0llxuoRP74e/iE09keMP50kMebj/i6r6x6Rwh32X7C
+ NbdZLUP1cMV40HcvRZ7CHJQNIpTQFJXV7cjDLYB7hpeUyMu9EBG4SSCDFuCNXpXgvm98
+ D5uw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWRAkE90b1qDECe3/HUcTTpRIASg4LK1E9EaQFj4fdRnffkuoGINWaCRbhqn76+Ss0EC+oQ8hK/str/FVXe0YtYOw7TB+0=
-X-Gm-Message-State: AOJu0YzTf5NrSvsjarmOvwozH/EbTQo3N1+YlwbyTxLR/AMyAyhAIaQW
- J6H7cf3n1XnDPCctbZHcKuetYt0krYiu0FlzLluL2l5KZOwg8ve64Lo6wt6m3gQ=
-X-Google-Smtp-Source: AGHT+IFGJj3d1+cZS1lq9wE69kifci8I4tFueyzMIqY5sKIeDCarj8jSpzHLJgnwEGRiyPEktGR9Sw==
-X-Received: by 2002:a5d:6884:0:b0:33e:aab0:9984 with SMTP id
- h4-20020a5d6884000000b0033eaab09984mr1233864wru.24.1711099237648; 
- Fri, 22 Mar 2024 02:20:37 -0700 (PDT)
-Received: from [192.168.200.106] (83.11.22.169.ipv4.supernova.orange.pl.
- [83.11.22.169]) by smtp.gmail.com with ESMTPSA id
- v7-20020a5d6107000000b0033e9e26a2d0sm1615431wrt.37.2024.03.22.02.20.35
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 22 Mar 2024 02:20:37 -0700 (PDT)
-Message-ID: <5587d9ed-6cdd-47ae-864e-75cb5ea47aee@linaro.org>
-Date: Fri, 22 Mar 2024 10:20:34 +0100
+ AJvYcCWoPIRSUJbxA4Mn+oXlOzlpdkv3xTVMPmZMw71WyjhyzCyqb7r6yGElNP6DdqnnGWUaruOo+b3R+t5wx+3/gli2CtWasXw=
+X-Gm-Message-State: AOJu0Yx0mNmicVad4KJIZ5o5sNL6J51zdCMKICd0/+nWSeITbIVpggM1
+ YlKcdU2XQb2LKfXS8MqAszMfLYGHgkRCPTkD+oto6iDJU3Qo01BuOUWzsSD/aBI=
+X-Google-Smtp-Source: AGHT+IHlv2PLizP/0esekwZfwldapQ1PoLQcEGMJNtS6xJb3rj5Pz7Cd2ihEBCoQC49rw0UfXVr/3w==
+X-Received: by 2002:a17:903:32cc:b0:1de:fdbd:9324 with SMTP id
+ i12-20020a17090332cc00b001defdbd9324mr1989767plr.10.1711099570322; 
+ Fri, 22 Mar 2024 02:26:10 -0700 (PDT)
+Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
+ [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
+ z14-20020a170903018e00b001e088a9e2bcsm1380380plg.292.2024.03.22.02.26.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 22 Mar 2024 02:26:10 -0700 (PDT)
+From: Max Chou <max.chou@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Max Chou <max.chou@sifive.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Richard Henderson <richard.henderson@linaro.org>
+Subject: [PATCH v2 1/4] target/riscv: rvv: Fix Zvfhmin checking for
+ vfwcvt.f.f.v and vfncvt.f.f.w instructions
+Date: Fri, 22 Mar 2024 17:25:55 +0800
+Message-Id: <20240322092600.1198921-2-max.chou@sifive.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240322092600.1198921-1-max.chou@sifive.com>
+References: <20240322092600.1198921-1-max.chou@sifive.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC v2 2/2] hw/riscv: Add server platform reference machine
-Content-Language: pl-PL, en-GB, en-HK
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: pbonzini@redhat.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- andrei.warkentin@intel.com, shaolin.xie@alibaba-inc.com, ved@rivosinc.com,
- sunilvl@ventanamicro.com, haibo1.xu@intel.com, evan.chai@intel.com,
- yin.wang@intel.com, tech-server-platform@lists.riscv.org,
- tech-server-soc@lists.riscv.org, atishp@rivosinc.com,
- ajones@ventanamicro.com, conor@kernel.org, Fei Wu <fei2.wu@intel.com>,
- Alistair Francis <alistair23@gmail.com>
-References: <20240312135222.3187945-1-fei2.wu@intel.com>
- <20240312135222.3187945-3-fei2.wu@intel.com>
- <CAKmqyKN-Yj-HZrR2MtxD2jC=JR6nFn5cEq866EXm0OfaEydXsQ@mail.gmail.com>
- <cfac29ce-f353-4bbd-8e8d-4a7d40bf80e3@linaro.org>
- <ebd63aa1-b4e7-490a-bdef-d952c8e37c47@canonical.com>
-From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
-Organization: Linaro
-In-Reply-To: <ebd63aa1-b4e7-490a-bdef-d952c8e37c47@canonical.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::329;
- envelope-from=marcin.juszkiewicz@linaro.org; helo=mail-wm1-x329.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
+ envelope-from=max.chou@sifive.com; helo=mail-pl1-x629.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -111,38 +103,73 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-W dniu 22.03.2024 o 09:50, Heinrich Schuchardt pisze:
- >>> I see no mention of device trees in the spec, but I do see ACPI. Do we
- >>> really expect a server platform to use DTs?
- >>
- >> This platform "kind of" follows sbsa-ref where we have very
- >> minimalistic device tree sharing information qemu->firmware.
- >>
- >> libfdt is small, format is known and describes hardware. Firmware is
- >> free to make use of it in any way it wants.
- >>
- >> On sbsa-ref we parse DT in TF-A (base firmware) and provide hardware
- >> information to higher level (edk2) via SMC mechanism. Then EDK2
- >> creates ACPI tables and provide them to the Operating System.
+According v spec 18.4, only the vfwcvt.f.f.v and vfncvt.f.f.w
+instructions will be affected by Zvfhmin extension.
+And the vfwcvt.f.f.v and vfncvt.f.f.w instructions only support the
+conversions of
 
- > We should ensure that only either an ACPI table or a device-tree
- > description is passed to the OS and not both, e.g. when using
- >
- >      qemu-system-riscv64 -kernel vmlinux -M sbsa-ref
- >
- > But that requirement is not machine specific.
+* From 1*SEW(16/32) to 2*SEW(32/64)
+* From 2*SEW(32/64) to 1*SEW(16/32)
 
-I would not call "qemu-system-* -M machinename -k kernel_image" a proper 
-way to boot for several systems emulated by QEMU.
+Signed-off-by: Max Chou <max.chou@sifive.com>
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+---
+ target/riscv/insn_trans/trans_rvv.c.inc | 20 ++++++++++++++++++--
+ 1 file changed, 18 insertions(+), 2 deletions(-)
 
-DeviceTree is in rvsp-ref and sbsa-ref because it is easy to process in 
-limited space 1st stage of firmware has.
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+index 7d84e7d8124..ef568e263d1 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -50,6 +50,22 @@ static bool require_rvf(DisasContext *s)
+     }
+ }
+ 
++static bool require_rvfmin(DisasContext *s)
++{
++    if (s->mstatus_fs == EXT_STATUS_DISABLED) {
++        return false;
++    }
++
++    switch (s->sew) {
++    case MO_16:
++        return s->cfg_ptr->ext_zvfhmin;
++    case MO_32:
++        return s->cfg_ptr->ext_zve32f;
++    default:
++        return false;
++    }
++}
++
+ static bool require_scale_rvf(DisasContext *s)
+ {
+     if (s->mstatus_fs == EXT_STATUS_DISABLED) {
+@@ -75,8 +91,6 @@ static bool require_scale_rvfmin(DisasContext *s)
+     }
+ 
+     switch (s->sew) {
+-    case MO_8:
+-        return s->cfg_ptr->ext_zvfhmin;
+     case MO_16:
+         return s->cfg_ptr->ext_zve32f;
+     case MO_32:
+@@ -2685,6 +2699,7 @@ static bool opxfv_widen_check(DisasContext *s, arg_rmr *a)
+ static bool opffv_widen_check(DisasContext *s, arg_rmr *a)
+ {
+     return opfv_widen_check(s, a) &&
++           require_rvfmin(s) &&
+            require_scale_rvfmin(s) &&
+            (s->sew != MO_8);
+ }
+@@ -2790,6 +2805,7 @@ static bool opfxv_narrow_check(DisasContext *s, arg_rmr *a)
+ static bool opffv_narrow_check(DisasContext *s, arg_rmr *a)
+ {
+     return opfv_narrow_check(s, a) &&
++           require_rvfmin(s) &&
+            require_scale_rvfmin(s) &&
+            (s->sew != MO_8);
+ }
+-- 
+2.34.1
 
-And if we knew how people will mention 'sbsa-ref uses DT' we would use 
-something else instead. But that would require adding more code into 
-existing firmware projects (libfdt is usually already there).
-
-I did not looked at DT generated for rvsp-ref. I know that sbsa-ref one 
-is too minimalistic for kernel use as we added only those fields/nodes 
-we need to provide data for firmware.
 
