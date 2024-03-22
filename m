@@ -4,88 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30C77C54E58
-	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Mar 2024 17:17:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31FA3C47DD9
+	for <qemu-riscv@archiver.kernel.org>; Fri, 22 Mar 2024 04:00:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rnM2e-00074s-No; Thu, 21 Mar 2024 13:17:24 -0400
+	id 1rnW4E-0000kI-Cd; Thu, 21 Mar 2024 23:59:42 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1rnM2c-00070e-A8
- for qemu-riscv@nongnu.org; Thu, 21 Mar 2024 13:17:22 -0400
-Received: from mail-qv1-xf33.google.com ([2607:f8b0:4864:20::f33])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1rnW4B-0000jk-SV; Thu, 21 Mar 2024 23:59:39 -0400
+Received: from mail-vk1-xa33.google.com ([2607:f8b0:4864:20::a33])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1rnM2a-0007C7-Nu
- for qemu-riscv@nongnu.org; Thu, 21 Mar 2024 13:17:22 -0400
-Received: by mail-qv1-xf33.google.com with SMTP id
- 6a1803df08f44-6962e6fbf60so12278926d6.1
- for <qemu-riscv@nongnu.org>; Thu, 21 Mar 2024 10:17:20 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1rnW4A-000352-6y; Thu, 21 Mar 2024 23:59:39 -0400
+Received: by mail-vk1-xa33.google.com with SMTP id
+ 71dfb90a1353d-4d458be7fb6so654979e0c.3; 
+ Thu, 21 Mar 2024 20:59:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1711041439; x=1711646239; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=bfRzyaQbdVM7LhhFkyg6noUZevlysrBjTZmd0VuOsCc=;
- b=S/ho9BPn354jnzhzfMILZuRsYaKoH2JD7P6OtQQ2NZ68FhcNTeH2z5srWgK7/GPlbh
- ZlgPfXyYZz8QKvR4E3PgUZeNnbQrHzB7668VlopT4gWxprkn5TP8LkSH+QGxIWmhUZVI
- 3LdAxD3y4yUciXXk0v+U0gLXARGzD2DmW98QXRsQxKk83aI/Efeu/S1nMKmFoc+O9NUW
- n5Wd10HZshS2sZV6mQ69TpuU75vTE5Rvc4f54rv6u6NEQMlGXB6EVq+F8Lxd0mEXTcF8
- 6sp67LCaxHCqQhr0Z1yTiOHdP/xCU/NDv6n1t3aDCANgwvIF61vJZiF+N3Ho0KKYFKto
- b6fA==
+ d=gmail.com; s=20230601; t=1711079975; x=1711684775; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Rg6e6TmyBzyCz42mV9qKTytx/ZgpxKm4Caqn+Ho49xg=;
+ b=LtKY0aacY5mzz7oH7QpxS83bxdzN6XO1Eq9cO6nPFiIkrGwyTVzCRU1JSMImaaafpK
+ gmwepMojPznMhg0slsTgjcHxa2oLDXYlHgtY7vQCRE0K2PCGHKGGBhRfcIMfXIdXl43B
+ VJ9ppFOot4HsGqsyiJr3Esj+LRillRsXN/3+Mp857Y/J4AP3PCl2TSE97fGAsphkoI3n
+ HErxwvZk1xAXrYoCUGxLr8gjZzSvGHNs7f0kA5WL2uymP0duZ6CvBql3tzyXxU45jnN3
+ d58NUSv01Z69eFpmnssN+9l1BNl+9tIjgtswknD/5IG/mjKS8EVmVn4EVeEZ1P537iv6
+ Uu0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711041439; x=1711646239;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=bfRzyaQbdVM7LhhFkyg6noUZevlysrBjTZmd0VuOsCc=;
- b=Vq1yoRtXK1OWGgCw3mGKpfhIq0OkQx2mBUop7rqHGSGla/p2rnaJrjyeTkaY1icQOj
- 4bzgte+L+S/RZ0E3OvMNIvDUtliAeO+lftKClIv4GNRq9RKVIU7+6LTjMZCRXg/mzSYs
- 88E5VVKRq64s9dzvJ17Ww0P85+R8oC2XWpc4elLDOp5/hdR4CyYyvCkFy+0Y53tPgRzP
- iLF5WNFHQanC0UNAX/D0Zcpj0+DRROUJg/bHloj6SLHxyrZwcfwwts74zsQyDIhojzWD
- TTBN28Rjt6GUFP4XE8LIgyanhK7N48ZTy+R/93fwMlPWjkzT9azio5fAj6nsrxRPqozX
- eweA==
+ d=1e100.net; s=20230601; t=1711079975; x=1711684775;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Rg6e6TmyBzyCz42mV9qKTytx/ZgpxKm4Caqn+Ho49xg=;
+ b=XLA6VCOy4MnOcF3g7+GiDdmsxA0Iy/+gt4ELpBgwaxIHCncjlcXl+V5XKCb+3Dx+LI
+ FVV/z81zvK7xv+YylAzwVcz6v0r+joGKSeiNgqh8r8k98nlyhbX3E4oOll8CJPSsjp4H
+ 6qEYQNmdWcIiLGAo//KxrRzE2pVUb4P6Ke1eEOBxSmFHZBEapai/74TUfRwfnsZGxYps
+ wrIuKzl0UON7BFTzSppPzuogWikAGOI92Cpv6oCZsWkUm6xG07dEG12GWIbc9XJK/MfS
+ XroAA2e1llHtlc4uYrPNC7SrXAeH8clhWyTIlGNjqk3flOAf4FJDPAxkUEZtCPG7AI37
+ o9JQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWLL3XG0eAIcvW36joOb6+aH956jFIaExadZcAwTLM+71z2xT0iPcI2EajywJ70Iyb4vhIRaHpzbLbhMUFlSdAYfAeB/GA=
-X-Gm-Message-State: AOJu0YxrcrmgNnLG7XeCglP1RpBoJYrwt7MaIbmuFoyBGhvEDiHYkSfU
- pbRoIzLOJp7xhHWqd26wPdojWCfpCJAVD15EaF1S4/Te0BdIqaDWML/VXKOemKSHfNE3IVJCWxc
- IoBM=
-X-Google-Smtp-Source: AGHT+IGxhclYz6XBiZKxlGAdH/UcoyCas7f4Uej4apIuOP+hyptjdNpNk40e4Jxg9EN3dhOfdKhoVA==
-X-Received: by 2002:a05:6a20:1581:b0:1a1:510e:7673 with SMTP id
- h1-20020a056a20158100b001a1510e7673mr102552pzj.46.1711040976517; 
- Thu, 21 Mar 2024 10:09:36 -0700 (PDT)
-Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
- [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
- k26-20020aa79d1a000000b006ea790c2232sm74028pfp.79.2024.03.21.10.09.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Mar 2024 10:09:36 -0700 (PDT)
-From: Max Chou <max.chou@sifive.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Max Chou <max.chou@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Andrew Jones <ajones@ventanamicro.com>,
- Rob Bradford <rbradford@rivosinc.com>
-Subject: [PATCH] target/riscv: rvv: Remove the dependency of Zvfbfmin to
- Zfbfmin
-Date: Fri, 22 Mar 2024 01:09:27 +0800
-Message-Id: <20240321170929.1162507-1-max.chou@sifive.com>
-X-Mailer: git-send-email 2.34.1
+ AJvYcCVwyQ6gnBUOALMRmz45DZlgcaYvHblaCIA45AyEntH9SdYNSTywUm9T4KxK5JbCZd9h3TxMGRqfauuIGsyhhyLjEWVqJ8o=
+X-Gm-Message-State: AOJu0YzVvRtn89cH/jnUsGKjSn8qLc3iNePd3kLEVhYtRVaZebwMWclk
+ ww2tjeHyqysMwSLdK/ooCQ17Y4Wsqw2x6eeirXscIQUHSNhJJN3UyGATRvpSkbBaQ8M1MroSta9
+ ul5RPC041brkl8+jes7yd4Y0JlmI=
+X-Google-Smtp-Source: AGHT+IGGFTnnE+LnCM5r0dhvg6pQScz5smAU65oUJ5CxfCEx/VbdjogWQz2ztc955d2nKKD/V+Hhkmhd5vCcAIxFHMs=
+X-Received: by 2002:a05:6122:992:b0:4d3:1ef2:c97d with SMTP id
+ g18-20020a056122099200b004d31ef2c97dmr1498610vkd.2.1711079975212; Thu, 21 Mar
+ 2024 20:59:35 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::f33;
- envelope-from=max.chou@sifive.com; helo=mail-qv1-xf33.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20240320093221.220854-1-dbarboza@ventanamicro.com>
+In-Reply-To: <20240320093221.220854-1-dbarboza@ventanamicro.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 22 Mar 2024 13:59:09 +1000
+Message-ID: <CAKmqyKMDu7UTMhHOxs2=5qjRkcgWson+iQoUDhG+23xAtQF3rQ@mail.gmail.com>
+Subject: Re: [PATCH for-9.0] target/riscv/debug: set tval=pc in breakpoint
+ exceptions
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com, Joseph Chan <jchan@ventanamicro.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a33;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa33.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,32 +93,87 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-According to the Zvfbfmin definition in the RISC-V BF16 extensions spec,
-the Zvfbfmin extension only requires either the V extension or the
-Zve32f extension.
+On Wed, Mar 20, 2024 at 7:33=E2=80=AFPM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
+>
+> We're not setting (s/m)tval when triggering breakpoints of type 2
+> (mcontrol) and 6 (mcontrol6). According to the debug spec section
+> 5.7.12, "Match Control Type 6":
+>
+> "The Privileged Spec says that breakpoint exceptions that occur on
+> instruction fetches, loads, or stores update the tval CSR with either
+> zero or the faulting virtual address. The faulting virtual address for
+> an mcontrol6 trigger with action =3D 0 is the address being accessed and
+> which caused that trigger to fire."
 
-Signed-off-by: Max Chou <max.chou@sifive.com>
----
- target/riscv/tcg/tcg-cpu.c | 5 -----
- 1 file changed, 5 deletions(-)
+Setting zero is valid though. I agree it's probably worth setting a
+value, but I don't think we need this for 9.0
 
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index 63192ef54f3..b5b95e052d2 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -530,11 +530,6 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
-         return;
-     }
- 
--    if (cpu->cfg.ext_zvfbfmin && !cpu->cfg.ext_zfbfmin) {
--        error_setg(errp, "Zvfbfmin extension depends on Zfbfmin extension");
--        return;
--    }
--
-     if (cpu->cfg.ext_zvfbfmin && !cpu->cfg.ext_zve32f) {
-         error_setg(errp, "Zvfbfmin extension depends on Zve32f extension");
-         return;
--- 
-2.34.1
+Alistair
 
+>
+> A similar text is also found in the Debug spec section 5.7.11 w.r.t.
+> mcontrol.
+>
+> Given that we always use action =3D 0, save the faulting address for the
+> mcontrol and mcontrol6 trigger breakpoints into env->badaddr, which is
+> used as as scratch area for traps with address information. 'tval' is
+> then set during riscv_cpu_do_interrupt().
+>
+> Reported-by: Joseph Chan <jchan@ventanamicro.com>
+> Fixes: b5f6379d13 ("target/riscv: debug: Implement debug related TCGCPUOp=
+s")
+> Fixes: c472c142a7 ("target/riscv: debug: Add initial support of type 6 tr=
+igger")
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> ---
+>  target/riscv/cpu_helper.c | 1 +
+>  target/riscv/debug.c      | 3 +++
+>  2 files changed, 4 insertions(+)
+>
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index ce7322011d..492ca63b1a 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -1717,6 +1717,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>              tval =3D env->bins;
+>              break;
+>          case RISCV_EXCP_BREAKPOINT:
+> +            tval =3D env->badaddr;
+>              if (cs->watchpoint_hit) {
+>                  tval =3D cs->watchpoint_hit->hitaddr;
+>                  cs->watchpoint_hit =3D NULL;
+> diff --git a/target/riscv/debug.c b/target/riscv/debug.c
+> index e30d99cc2f..b110370ea6 100644
+> --- a/target/riscv/debug.c
+> +++ b/target/riscv/debug.c
+> @@ -798,6 +798,7 @@ bool riscv_cpu_debug_check_breakpoint(CPUState *cs)
+>                  if ((ctrl & TYPE2_EXEC) && (bp->pc =3D=3D pc)) {
+>                      /* check U/S/M bit against current privilege level *=
+/
+>                      if ((ctrl >> 3) & BIT(env->priv)) {
+> +                        env->badaddr =3D pc;
+>                          return true;
+>                      }
+>                  }
+> @@ -810,11 +811,13 @@ bool riscv_cpu_debug_check_breakpoint(CPUState *cs)
+>                      if (env->virt_enabled) {
+>                          /* check VU/VS bit against current privilege lev=
+el */
+>                          if ((ctrl >> 23) & BIT(env->priv)) {
+> +                            env->badaddr =3D pc;
+>                              return true;
+>                          }
+>                      } else {
+>                          /* check U/S/M bit against current privilege lev=
+el */
+>                          if ((ctrl >> 3) & BIT(env->priv)) {
+> +                            env->badaddr =3D pc;
+>                              return true;
+>                          }
+>                      }
+> --
+> 2.44.0
+>
+>
 
