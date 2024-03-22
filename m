@@ -4,80 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FBBFC47DD9
-	for <qemu-riscv@archiver.kernel.org>; Fri, 22 Mar 2024 05:10:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54523C54E71
+	for <qemu-riscv@archiver.kernel.org>; Fri, 22 Mar 2024 07:15:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rnXAc-0001y8-GO; Fri, 22 Mar 2024 01:10:22 -0400
+	id 1rnZ6l-0001Xz-H2; Fri, 22 Mar 2024 03:14:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rnXAT-0001x0-H9; Fri, 22 Mar 2024 01:10:13 -0400
-Received: from mail-vk1-xa31.google.com ([2607:f8b0:4864:20::a31])
+ (Exim 4.90_1) (envelope-from <marcin.juszkiewicz@linaro.org>)
+ id 1rnZ6k-0001Xi-6j
+ for qemu-riscv@nongnu.org; Fri, 22 Mar 2024 03:14:30 -0400
+Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rnXAQ-00089o-Uk; Fri, 22 Mar 2024 01:10:13 -0400
-Received: by mail-vk1-xa31.google.com with SMTP id
- 71dfb90a1353d-4d523586a59so714574e0c.2; 
- Thu, 21 Mar 2024 22:10:10 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <marcin.juszkiewicz@linaro.org>)
+ id 1rnZ6i-00066F-84
+ for qemu-riscv@nongnu.org; Fri, 22 Mar 2024 03:14:29 -0400
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-56bc753f58eso1980434a12.3
+ for <qemu-riscv@nongnu.org>; Fri, 22 Mar 2024 00:14:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1711084209; x=1711689009; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RjilqN5ludifmJa+srAwbBrAavb2Ps3qBifRhpTPOhQ=;
- b=Z3XYWeFkrApgq+fNAfgIupoSPbEBhWMvzvH9MTS0S/+WZayS7D3lJ7NQ3WbXa4hJTM
- ofRsOu1QLYS4poqDLg81kI2y9oXuwYr6hoqvDa618/rnJrxOg4otCTsykTWXjBwUVBjU
- 6yay2aaSD9GbPmozacxKRbwTVTN5CQipubIgDyaaUeMiYQH6BpYIeQpAbzTpf+wUsv6+
- bN7LQFE6lQmschRoGGsvX8JE8jsH+pviCLhRpIZndqY/iir7e79iwRGeVyu6c0FE4UPk
- q+tj6y7/968No0BnVWpG5Qiec3SAVchOd8ehUDFHu9RvFdG+LcjTs25u6l5VjolP9VGO
- EMyA==
+ d=linaro.org; s=google; t=1711091666; x=1711696466; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:organization:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to;
+ bh=2SMFmlKvi3XK+b9AwqD4mM21rYhCikFTvlns1pr8FQ8=;
+ b=RjgO1tEBk4iPl+d+YUSOWqD+85hlK4VYH8DS8TutXkLuNIrkUqzeYYrXdBEcXC2QmG
+ NHrW33mFabWm5J/gn2UcpaQ++FQvmK/PZDY0iwPlcjNpc3Ca3J6GHnbYgq2DF/xM5+lV
+ +D+unIPPEb4OUDbba9jUYkr9owmdD7PysNPS2JhAmYTMEqdgMAI74y+SuH4vw0S0MyKK
+ FQl5+4hGHR41OZ9i5Ph/i3UTNdphhL4g88nX9E9LpV1j4KohmgKW8JYHoh4gfXsyHVrX
+ Z4I+y4HS3IvLv8WJZl/JawRA0/Ggg7K23RkLknMjAg9KWfg3sdlbcDO0gHLI6C1mD0qx
+ ZGvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711084209; x=1711689009;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=RjilqN5ludifmJa+srAwbBrAavb2Ps3qBifRhpTPOhQ=;
- b=jU1R3fJHN3j+V0Myyqbt2qR08OujpL/zD+xx6Y+jZs9Jr0ZIIc0BDFa1FUnJYsEqzP
- sFjPeWS6sXO1dbkAAPyUwg120LBjZ5gqZg0ujBO/LkozwZcDiocKCangF33cyqW2WJWj
- 386DzhgsGxuqORx/V9TEa+m/m+LUK/kLsQspQ05tfDempRMa5q9ouZA27KDS4RwbHrHq
- moVJq7ecKabRor3KDoSaJp8aOU836URWDo0k+fQRtzaN8CV2ga+rxVLUTiX5EOtzOOEg
- p579ge0ncaQVvdqDSQm/LvQu4LMaF5T9XDpt8o9zPbIrPcfV/JFlSw+xHntbU0ff9Iw5
- XYIw==
+ d=1e100.net; s=20230601; t=1711091666; x=1711696466;
+ h=content-transfer-encoding:in-reply-to:organization:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=2SMFmlKvi3XK+b9AwqD4mM21rYhCikFTvlns1pr8FQ8=;
+ b=iwzuxtS0p6qb6od6qeJ7SAGkgy8Nq9QQ5bMMahAfmfcGnuQuJOhILXlfwOGxfvrRUy
+ caEUzIF9AeAHf+0TGpl5z74fQj3D+uGPIsOZXpRfxOAmCUfIOEBnclnKqzspi6gy924X
+ 0vD8nYDOdnlJeU5DMUqIn417MgGhH/wlGcF+yDCe2fxa+CYTxGf9FpB8j76qu1H1ZQL8
+ UoB5hc30bxInIhfzU673Ik4CxHjXM8Edv6rIU2Ecqs+LbEv04ng4JMvyMe0uaz0uCvdr
+ 1ubJG9hqGkofKGPjRAuRiXTJ+qdBU5D8dZwNovnL15pHKo6kvA7FMLr6VDW7CgGelt14
+ lNzQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVc1nK+vD4J8MruPm/QL6hVw+kAGIQvyhYDD2j3vvik1mXZQi54SMMfSnAGjMpz81G8m7+v1etWx/u0Zwt/09p4oHR333w=
-X-Gm-Message-State: AOJu0YxUsbG7HrFpGUz//z1NiCAmqhzD1XI33Ap+D5wInG+dv5wL3wp+
- YIXaTwbUrIhqKiRKASqnAJD88430eF+s+L7jQV0IYeqfnT5VChhGqatIdE1CmwnbKk83YGqaj/c
- LP3X10i6XQqhtIg+sM4WWHJkDDMY=
-X-Google-Smtp-Source: AGHT+IG3188v2mkFQ1pD33an1VRxDwetGs07tu6pbZSqt0ETsU9RYOglp2KGYujvtEi5fYphdWjxshjCrb7df+iA2iY=
-X-Received: by 2002:a05:6122:32ca:b0:4d3:37d1:5a70 with SMTP id
- ck10-20020a05612232ca00b004d337d15a70mr1576238vkb.7.1711084209495; Thu, 21
- Mar 2024 22:10:09 -0700 (PDT)
+ AJvYcCUnPYWBtUbd6kHbGAxzXv3MDejLSDyNE+z/SB2mGse3aDLys96HjSKSgtrDg8YgEXZB5PpvowpOMkA35nuDxnTNBQQAkyo=
+X-Gm-Message-State: AOJu0YzQNNYGwZR8ei/7iLLDqR2IorYBXr32cvYiQ4NkotPsEZfamSeu
+ 5umygsa79wsvhMzzXOMcr8mZSb4GWNkFO07k3+fW6gteGJbtHlJUsK0grzMM/J8=
+X-Google-Smtp-Source: AGHT+IFgT1c3Ls4XRxrWt1YwlmPa5s+ga1yFCAE2BBDrP31IhbtrImytLfsrkuv0Ach5QYBdF0OX/w==
+X-Received: by 2002:a17:906:34c5:b0:a47:153b:45cb with SMTP id
+ h5-20020a17090634c500b00a47153b45cbmr835977ejb.30.1711091665883; 
+ Fri, 22 Mar 2024 00:14:25 -0700 (PDT)
+Received: from [192.168.200.106] (83.11.22.169.ipv4.supernova.orange.pl.
+ [83.11.22.169]) by smtp.gmail.com with ESMTPSA id
+ ch11-20020a170906c2cb00b00a47090964casm690605ejb.184.2024.03.22.00.14.24
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 22 Mar 2024 00:14:25 -0700 (PDT)
+Message-ID: <cfac29ce-f353-4bbd-8e8d-4a7d40bf80e3@linaro.org>
+Date: Fri, 22 Mar 2024 08:14:22 +0100
 MIME-Version: 1.0
-References: <20240321104951.12104-1-frank.chang@sifive.com>
-In-Reply-To: <20240321104951.12104-1-frank.chang@sifive.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 22 Mar 2024 15:09:00 +1000
-Message-ID: <CAKmqyKNEkhr16cpG_9hrEX2rqdQ8Q5=wFQLDA7fSWk-ONNiUpw@mail.gmail.com>
-Subject: Re: [PATCH] hw/intc: Update APLIC IDC after claiming iforce register
-To: frank.chang@sifive.com
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, Jim Shu <jim.shu@sifive.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a31;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa31.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC v2 2/2] hw/riscv: Add server platform reference machine
+Content-Language: pl-PL, en-GB, en-HK
+To: Alistair Francis <alistair23@gmail.com>, Fei Wu <fei2.wu@intel.com>
+Cc: pbonzini@redhat.com, palmer@dabbelt.com, alistair.francis@wdc.com,
+ bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ andrei.warkentin@intel.com, shaolin.xie@alibaba-inc.com, ved@rivosinc.com,
+ sunilvl@ventanamicro.com, haibo1.xu@intel.com, evan.chai@intel.com,
+ yin.wang@intel.com, tech-server-platform@lists.riscv.org,
+ tech-server-soc@lists.riscv.org, atishp@rivosinc.com,
+ ajones@ventanamicro.com, conor@kernel.org, heinrich.schuchardt@canonical.com
+References: <20240312135222.3187945-1-fei2.wu@intel.com>
+ <20240312135222.3187945-3-fei2.wu@intel.com>
+ <CAKmqyKN-Yj-HZrR2MtxD2jC=JR6nFn5cEq866EXm0OfaEydXsQ@mail.gmail.com>
+From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+Organization: Linaro
+In-Reply-To: <CAKmqyKN-Yj-HZrR2MtxD2jC=JR6nFn5cEq866EXm0OfaEydXsQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
+ envelope-from=marcin.juszkiewicz@linaro.org; helo=mail-ed1-x52e.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -95,47 +108,24 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Mar 21, 2024 at 8:50=E2=80=AFPM <frank.chang@sifive.com> wrote:
->
-> From: Frank Chang <frank.chang@sifive.com>
->
-> Currently, QEMU only sets the iforce register to 0 and returns early
-> when claiming the iforce register. However, this may leave mip.meip
-> remains at 1 if a spurious external interrupt triggered by iforce
-> register is the only pending interrupt to be claimed, and the interrupt
-> cannot be lowered as expected.
->
-> This commit fixes this issue by calling riscv_aplic_idc_update() to
-> update the IDC status after the iforce register is claimed.
->
-> Signed-off-by: Frank Chang <frank.chang@sifive.com>
-> Reviewed-by: Jim Shu <jim.shu@sifive.com>
+W dniu 22.03.2024 o 05:55, Alistair Francis pisze:
+> I see no mention of device trees in the spec, but I do see ACPI. Do we
+> really expect a server platform to use DTs?
 
-Thanks!
+This platform "kind of" follows sbsa-ref where we have very minimalistic 
+device tree sharing information qemu->firmware.
 
-Applied to riscv-to-apply.next
+libfdt is small, format is known and describes hardware. Firmware is 
+free to make use of it in any way it wants.
 
-Alistair
+On sbsa-ref we parse DT in TF-A (base firmware) and provide hardware 
+information to higher level (edk2) via SMC mechanism. Then EDK2 creates 
+ACPI tables and provide them to the Operating System.
 
-> ---
->  hw/intc/riscv_aplic.c | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
-> index 6a7fbfa861..fc5df0d598 100644
-> --- a/hw/intc/riscv_aplic.c
-> +++ b/hw/intc/riscv_aplic.c
-> @@ -488,6 +488,7 @@ static uint32_t riscv_aplic_idc_claimi(RISCVAPLICStat=
-e *aplic, uint32_t idc)
->
->      if (!topi) {
->          aplic->iforce[idc] =3D 0;
-> +        riscv_aplic_idc_update(aplic, idc);
->          return 0;
->      }
->
-> --
-> 2.43.2
->
->
+In physical system some parts of information provided in DT would be 
+read by firmware from onboard Embedded Controller chip.
+
+> These functions should be shared with the virt machine if we really do
+> want DTs, but I'm not convinced we do
+
 
