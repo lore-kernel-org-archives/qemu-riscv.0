@@ -4,84 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A8A5C47DD9
-	for <qemu-riscv@archiver.kernel.org>; Fri, 22 Mar 2024 09:33:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A1C2C47DD9
+	for <qemu-riscv@archiver.kernel.org>; Fri, 22 Mar 2024 09:34:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rnbGw-0006qK-He; Fri, 22 Mar 2024 05:33:10 -0400
+	id 1rnbII-0000AC-1w; Fri, 22 Mar 2024 05:34:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1rnbGu-0006p1-GN
- for qemu-riscv@nongnu.org; Fri, 22 Mar 2024 05:33:08 -0400
-Received: from mail-vk1-xa33.google.com ([2607:f8b0:4864:20::a33])
+ id 1rnbIE-00009u-Km
+ for qemu-riscv@nongnu.org; Fri, 22 Mar 2024 05:34:31 -0400
+Received: from mail-yw1-x1130.google.com ([2607:f8b0:4864:20::1130])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1rnbGr-00082L-Ul
- for qemu-riscv@nongnu.org; Fri, 22 Mar 2024 05:33:08 -0400
-Received: by mail-vk1-xa33.google.com with SMTP id
- 71dfb90a1353d-4d436ab8a36so783734e0c.0
- for <qemu-riscv@nongnu.org>; Fri, 22 Mar 2024 02:33:05 -0700 (PDT)
+ id 1rnbIB-000877-Or
+ for qemu-riscv@nongnu.org; Fri, 22 Mar 2024 05:34:29 -0400
+Received: by mail-yw1-x1130.google.com with SMTP id
+ 00721157ae682-60a434ea806so20447367b3.3
+ for <qemu-riscv@nongnu.org>; Fri, 22 Mar 2024 02:34:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1711099985; x=1711704785; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=NK+9yRKUKzgO+toUFNyttunP9TjjWWzFsOj48XWUWIU=;
- b=HwEPhK+Dh9+HMsKQISU3pYZMOmygOlDP+cjo2Btu8IwxPxuJ+KqBSoAj1YQglxXS3k
- PJGpcg8Ww1axw6cYSkDwoUlODAykSiItMCi32Gne5YyTah4O8/lcGHtvqx6m3KxqAhM6
- xV2Ch9KvXp/wm17vKU9xe+K4JI1vCORIXlEq/BLwYuaqrGHQj1Igyct4741C4xM2LfER
- fLZVW/fEMclAJoEJg4QyCtmNzSrT4RfzPPGvAqY0Dk3ACxHrtIcuK1J8Vw5ggxD/K/VW
- LW+MhX9/wNxOWRcDLvL8icdXbmKut/80s4RS8SOrmH6pr7rF8r/FbBAUZu8n5zVQbYun
- /X8g==
+ d=sifive.com; s=google; t=1711100064; x=1711704864; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=8/+hfSrW/mdAYwfwaUDoq5Q6x6uBgXDbqUbcs84BAx0=;
+ b=dIyhuG3ve2cFdSN3+LQvtHE7n6jC3iZCyqstujuyp+SPxOfJOIK2BYto/6CPSjHb4k
+ zzyeGLytm25R7rqy600acHE6dtTjCcBP0w5Eco9kkQRNzqfnMl/RkruvlQFald8duChF
+ LuywEaHR/8PiHRrwAaX3oY9rjkWytKyMRUS6C9ZRANTy6d4eFmZTuQOyeShSRBlzjfV9
+ HVv64sgJiP2j6PctcdiSPfaW/+4Teo5Jq3J77Wmm7CUtnrDn7ZEPV5ebHo/Y0W1A10Kg
+ vJBGutW3jXbCRWYlPXb89ovPilc/ClfHhxSjlq93EoEq1jz6HQNL33gOG+ZwBxOyh9r6
+ U3gw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711099985; x=1711704785;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=NK+9yRKUKzgO+toUFNyttunP9TjjWWzFsOj48XWUWIU=;
- b=iv/bUmql3g/d3xgXM2o1KOTjZ84AtnQvJGSH4omjDbNbJm4cXCbbq6LnRoKCYCT1Yo
- q2LIq5VJ1TC3bSpvKPCtoyKqDqSrjnblFcbIEWSdw7acQhJoSVhqbelu7nDFuYSLdwCr
- YTxBN93BEbGLSlOO1J23+oQM/lFltWDI9mjM0tamcPymgcVuADwiIMS7LAgk27PT8r9K
- FbZxnJvK87cWKdflLfN/FMCXZCiHxeAuVrBhYUXahEkzZ1GJgSrzWSdR2e6gKh//wuvq
- QPePkVDUw4lH7cUq3eAJSphU0pLT3HtNPQt7YyU6qXvJTCdJWsu4gjmohEsXulrtKyY0
- 9Aog==
+ d=1e100.net; s=20230601; t=1711100064; x=1711704864;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=8/+hfSrW/mdAYwfwaUDoq5Q6x6uBgXDbqUbcs84BAx0=;
+ b=CLqZ2E54oJfCzfzj2a4gbBIReo9+Zdn3gmn8yF/ClfowoAd3yeI8Vkc8AgbJQM2I4J
+ Tp4vAaRnG+rsAARz8aoyPUFGjnAEY2e7yLiVKxsU/65Sq+kT+em9kJhzMHbhYtCbJ9I+
+ pKfMMMHG4qWdZ4hGInw8nJBryYvvh7c1EwR0+0VOrsvfRvOETtIMU97ptzZxxe/USbfu
+ qPJbuJvSDUzOUbOLJ57X+MZCNhEK3+atBQR66V79Q/48flEyxmETpqQ34AlWs3onp4PP
+ XfqV6Xb6dCH50YbQYbJsatviRoYywUsuQpKFKOd3yHtdP8WTvtxQSLEGeT7xsDnXBnuc
+ /UFw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXDjKnaSNU09AeSS1bn2N0ENHGzwfzbTXBS2QuHXCfxJWJBd9GsBgIcn0n34vx4p0hAn1GalCS/7joORkmCa1nGofJoOy0=
-X-Gm-Message-State: AOJu0YwowmRhq9CqgloVfJlwEtHWw0EUnnn486L/wctfQ+3JskTRyQd3
- /RGs8E4o9HX0kK8CzFuJ3IvEK7IjphUhSqA97ET4TVx9UsvhMN3mzp1wNUasUyJfVZo1EZyrd/9
- ZjuU=
-X-Google-Smtp-Source: AGHT+IFFJCsdCgR5DUtw1hd2CwOyWmrOEhbETvWEYEROB7qnCvIBf4WgLwDNwQL5ZlvLFBkDw+G/Sg==
-X-Received: by 2002:a05:6a20:1b27:b0:1a3:703c:c809 with SMTP id
- ch39-20020a056a201b2700b001a3703cc809mr1743467pzb.21.1711099580884; 
- Fri, 22 Mar 2024 02:26:20 -0700 (PDT)
+ AJvYcCXsH/uBk7uOIdv8YiXkc3Xbko2JrfEXpeweKjZCyxlPVz/hRRU31Sj0lEJQ9E1U+qwtVhRt8A18anQHG8w1Xj/dLuuP7zA=
+X-Gm-Message-State: AOJu0Yz7jYiQMe6aGZdEzqcITWf6JrHPV5ByU1yFqs1CioCs+ebHJO24
+ m6fSiWszslfuTouah4rsP0JzX9yuEPuruhxJ3iIbIqsgjYigvPCkWfJtkjv6KAsFxh/RgphyAHP
+ 8yCI=
+X-Google-Smtp-Source: AGHT+IFwvJO7Z4zoV4jXz1cUnNriDmsTFmmKvNfGgaZAvFlA6NbDv0PpC4+vXASvpQX4NIYAmTpmQA==
+X-Received: by 2002:a05:6a20:560a:b0:1a3:6c9e:1e31 with SMTP id
+ ir10-20020a056a20560a00b001a36c9e1e31mr1903807pzc.19.1711099564731; 
+ Fri, 22 Mar 2024 02:26:04 -0700 (PDT)
 Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
  [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
- z14-20020a170903018e00b001e088a9e2bcsm1380380plg.292.2024.03.22.02.26.19
+ z14-20020a170903018e00b001e088a9e2bcsm1380380plg.292.2024.03.22.02.26.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Mar 2024 02:26:20 -0700 (PDT)
+ Fri, 22 Mar 2024 02:26:04 -0700 (PDT)
 From: Max Chou <max.chou@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Cc: Max Chou <max.chou@sifive.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Richard Henderson <richard.henderson@linaro.org>
-Subject: [PATCH v2 3/4] target/riscv: rvv: Check single width operator for
- vfncvt.rod.f.f.w
-Date: Fri, 22 Mar 2024 17:25:57 +0800
-Message-Id: <20240322092600.1198921-4-max.chou@sifive.com>
+Cc: Max Chou <max.chou@sifive.com>
+Subject: [PATCH v2 0/4] Fix fp16 checking in vector fp widen/narrow
+ instructions
+Date: Fri, 22 Mar 2024 17:25:54 +0800
+Message-Id: <20240322092600.1198921-1-max.chou@sifive.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240322092600.1198921-1-max.chou@sifive.com>
-References: <20240322092600.1198921-1-max.chou@sifive.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a33;
- envelope-from=max.chou@sifive.com; helo=mail-vk1-xa33.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1130;
+ envelope-from=max.chou@sifive.com; helo=mail-yw1-x1130.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -104,27 +96,39 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The opfv_narrow_check needs to check the single width float operator by
-require_rvf.
+When SEW is 16, we need to check whether the Zvfhmin is enabled for the
+single width operator for vector floating point widen/narrow
+instructions. 
 
-Signed-off-by: Max Chou <max.chou@sifive.com>
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- target/riscv/insn_trans/trans_rvv.c.inc | 1 +
- 1 file changed, 1 insertion(+)
+The commits in this patchset fix the single width operator checking and
+remove the redudant SEW checking for vector floating point widen/narrow
+instructions.
 
-diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index 6cb9bc9fde8..19059fea5f7 100644
---- a/target/riscv/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -2817,6 +2817,7 @@ static bool opffv_narrow_check(DisasContext *s, arg_rmr *a)
- static bool opffv_rod_narrow_check(DisasContext *s, arg_rmr *a)
- {
-     return opfv_narrow_check(s, a) &&
-+           require_rvf(s) &&
-            require_scale_rvf(s) &&
-            (s->sew != MO_8);
- }
+v2:
+  Group patchset and rebase to the riscv-to-apply.next branch(commit 385e575)
+
+
+Thanks to those who have already reviewed:
+
+    Daniel Henrique Barboza dbarboza@ventanamicro.com
+        [PATCH] target/riscv: rvv: Fix Zvfhmin checking for vfwcvt.f.f.v and vfncvt.f.f.w instructions
+        [PATCH] target/riscv: rvv: Check single width operator for vector fp widen instructions
+        [PATCH] target/riscv: rvv: Check single width operator for vfncvt.rod.f.f.w
+        [PATCH] target/riscv: rvv: Remove redudant SEW checking for vector fp narrow/widen instructions
+
+
+Max Chou (4):
+  target/riscv: rvv: Fix Zvfhmin checking for vfwcvt.f.f.v and
+    vfncvt.f.f.w instructions
+  target/riscv: rvv: Check single width operator for vector fp widen
+    instructions
+  target/riscv: rvv: Check single width operator for vfncvt.rod.f.f.w
+  target/riscv: rvv: Remove redudant SEW checking for vector fp
+    narrow/widen instructions
+
+ target/riscv/insn_trans/trans_rvv.c.inc | 42 ++++++++++++++++---------
+ 1 file changed, 28 insertions(+), 14 deletions(-)
+
 -- 
 2.34.1
 
