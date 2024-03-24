@@ -4,61 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EC86CD11BF
-	for <qemu-riscv@archiver.kernel.org>; Sun, 24 Mar 2024 09:44:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AC21C47DD9
+	for <qemu-riscv@archiver.kernel.org>; Sun, 24 Mar 2024 15:10:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1roKPO-0006FU-AK; Sun, 24 Mar 2024 05:44:54 -0400
+	id 1roPUE-0002wQ-TN; Sun, 24 Mar 2024 11:10:14 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <kbastian@mail.uni-paderborn.de>)
- id 1roKPK-0006DW-Mx; Sun, 24 Mar 2024 05:44:50 -0400
-Received: from shirlock.uni-paderborn.de ([2001:638:502:c003::15])
+ (Exim 4.90_1) (envelope-from <irina.ryapolova@syntacore.com>)
+ id 1roPUD-0002vi-3Z; Sun, 24 Mar 2024 11:10:13 -0400
+Received: from mta-04.yadro.com ([89.207.88.248])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <kbastian@mail.uni-paderborn.de>)
- id 1roKPI-0006lf-VF; Sun, 24 Mar 2024 05:44:50 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=mail.uni-paderborn.de; s=20170601; h=In-Reply-To:Content-Transfer-Encoding:
- Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:
- Sender:Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
- List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=YewijLU+TrbF4ce0hnwwHWP1g2DhzE8v1fnV4OZbtj0=; b=PsgHL45whyT9ykx1huJZnoCEw7
- VXPgOIUzCr/lat/Y4K/HKymN87q/0p0HgX0az69o00lOD6znPpW8BAeP42pDg9BTwmdAqX2tq/fBQ
- dNsTZMz/vEFUgeoA0CAGZL28hQirCVdnHyNQU533It3gUtkkrZvsFcXgb6j3a2ocwxGQ=;
-Date: Sun, 24 Mar 2024 10:44:41 +0100
-From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-s390x@nongnu.org, 
- Richard Henderson <richard.henderson@linaro.org>, qemu-ppc@nongnu.org,
- qemu-arm@nongnu.org, qemu-riscv@nongnu.org, Anton Johansson <anjo@rev.ng>
-Subject: Re: [PATCH-for-9.1 25/27] target/tricore: Convert to
- TCGCPUOps::get_cpu_state()
-Message-ID: <bqsi6kbga52jrllbqzgipknruhkeypbyelxa4kpmz72iukqqry@ubjt2rpwm325>
-References: <20240319154258.71206-1-philmd@linaro.org>
- <20240319154258.71206-26-philmd@linaro.org>
+ (Exim 4.90_1) (envelope-from <irina.ryapolova@syntacore.com>)
+ id 1roPUB-0003jI-3J; Sun, 24 Mar 2024 11:10:12 -0400
+DKIM-Filter: OpenDKIM Filter v2.11.0 mta-04.yadro.com 9CF9DC0003
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
+ s=mta-04; t=1711293000;
+ bh=NgBhcHvA1hJNLG9Q2UzD2GpmFdYNx5LDk1FdSzGkDj8=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=pRSkowahCH8kS2suGlfiff68Wvg1t9GXzxuNLRyJYJpKjT+zuHO5KFICOtfhKLAhE
+ HjP+ghRkbDSBLeoO38I4Tm9weMyVrWhM1RfFQzObzws6fiwcdPFp3uLmo/H+/l/kh+
+ n0ICUvRPR5rGYPy8hRDGrfIOZoS503lpzYGRia8ur9Oay19tiyvAmeJ4nI0U0RLXxg
+ cWw8B4Iup5nLtNzhW6JMqbRLTvfW3sBxXwDVa/Q86WEPUSDnYs1eOTl8BBiqp7wwCj
+ d0Mm/BKcw2JADgKaSP1kCoGedxTQBkBvLH4tWNDVQZDL2rjL45QitQRhDXUk6angu+
+ cQr5uQl40EX1A==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
+ s=mta-03; t=1711293000;
+ bh=NgBhcHvA1hJNLG9Q2UzD2GpmFdYNx5LDk1FdSzGkDj8=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=xGNeG6bgKiSKZ1fQeXTiZT4dMq5TPsXrRKp5jFKZy+yBE3WilIvJUl60oknpyOcZ7
+ lVkknAWEstWJvN3kBAUsZJBx+HVqHNPg4jaE7aODkBPj1q0g9vCvUfL83ImqMQexLO
+ vGiPSoaJ7bwjWyhD3DfDIcb6dszHshb61Tnl4NBfioMhfvcT4YiIGtkznFUcsHaiWA
+ hVjVyWoiNFkgmeG5RTDYjthlFqqdhwDEqqJkEqt/hWSiRtCpXHaLgAxF/lidwkpJCl
+ 623QGcULwLyBZPe4dODtz1xlxFT9cBFcONvVr4xQQAZtl8M2k/tFDriAUsBKFAZIvy
+ YTM9iqMbUZQtg==
+From: Irina Ryapolova <irina.ryapolova@syntacore.com>
+To: <qemu-devel@nongnu.org>
+CC: <qemu-riscv@nongnu.org>, <palmer@dabbelt.com>, <alistair.francis@wdc.com>, 
+ <bin.meng@windriver.com>, <liwei1518@gmail.com>,
+ <dbarboza@ventanamicro.com>, 
+ <zhiwei_liu@linux.alibaba.com>, Irina Ryapolova
+ <irina.ryapolova@syntacore.com>
+Subject: [PATCH] target/riscv: Fix mode in riscv_tlb_fill
+Date: Sun, 24 Mar 2024 18:09:47 +0300
+Message-ID: <20240324150949.20822-1-irina.ryapolova@syntacore.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20240319154258.71206-26-philmd@linaro.org>
-X-IMT-rspamd-score: -10
-X-IMT-Spam-Score: 0.0 ()
-X-PMX-Version: 6.4.9.2830568, Antispam-Engine: 2.7.2.2107409,
- Antispam-Data: 2024.1.27.235115, AntiVirus-Engine: 6.0.2,
- AntiVirus-Data: 2024.1.26.602001
-X-Sophos-SenderHistory: ip=79.202.220.76, fs=67, da=198882548, mc=1, sc=0, hc=1,
- sp=0, fso=67, re=0, sd=0, hd=0
-X-IMT-Authenticated-Sender: kbastian@UNI-PADERBORN.DE
-Received-SPF: pass client-ip=2001:638:502:c003::15;
- envelope-from=kbastian@mail.uni-paderborn.de; helo=shirlock.uni-paderborn.de
-X-Spam_score_int: -42
-X-Spam_score: -4.3
-X-Spam_bar: ----
-X-Spam_report: (-4.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, RCVD_IN_DNSWL_MED=-2.3,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Type: text/plain
+X-ClientProxiedBy: T-EXCH-08.corp.yadro.com (172.17.11.58) To
+ S-Exch-01.corp.yadro.com (10.78.5.241)
+Received-SPF: permerror client-ip=89.207.88.248;
+ envelope-from=irina.ryapolova@syntacore.com; helo=mta-04.yadro.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ T_SPF_PERMERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -74,17 +78,27 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Mar 19, 2024 at 04:42:54PM +0100, Philippe Mathieu-Daudé wrote:
-> Convert cpu_get_tb_cpu_state() to TCGCPUOps::get_cpu_state().
-> 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-> ---
->  target/tricore/cpu.h | 12 ------------
->  target/tricore/cpu.c | 13 +++++++++++++
->  2 files changed, 13 insertions(+), 12 deletions(-)
+Need to convert mmu_idx to privilege mode for PMP function.
 
-Reviewed-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Signed-off-by: Irina Ryapolova <irina.ryapolova@syntacore.com>
+---
+ target/riscv/cpu_helper.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Cheers,
-Bastian
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index ce7322011d..fc090d729a 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -1315,7 +1315,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+     bool two_stage_lookup = mmuidx_2stage(mmu_idx);
+     bool two_stage_indirect_error = false;
+     int ret = TRANSLATE_FAIL;
+-    int mode = mmu_idx;
++    int mode = mmuidx_priv(mmu_idx);
+     /* default TLB page size */
+     target_ulong tlb_size = TARGET_PAGE_SIZE;
+ 
+-- 
+2.25.1
+
 
