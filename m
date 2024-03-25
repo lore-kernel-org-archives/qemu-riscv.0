@@ -4,56 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4520C54E58
-	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Mar 2024 02:18:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91852C54E64
+	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Mar 2024 08:34:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1roZtw-0002zJ-M2; Sun, 24 Mar 2024 22:17:28 -0400
+	id 1rofmO-0003a1-Ro; Mon, 25 Mar 2024 04:34:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <eric.huang@linux.alibaba.com>)
- id 1roZtv-0002yo-1L; Sun, 24 Mar 2024 22:17:27 -0400
-Received: from out30-119.freemail.mail.aliyun.com ([115.124.30.119])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <eric.huang@linux.alibaba.com>)
- id 1roZts-00034B-27; Sun, 24 Mar 2024 22:17:26 -0400
+ (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
+ id 1rofmN-0003ZE-LP
+ for qemu-riscv@nongnu.org; Mon, 25 Mar 2024 04:34:03 -0400
+Received: from mail-pg1-x530.google.com ([2607:f8b0:4864:20::530])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
+ id 1rofmL-0004HE-UV
+ for qemu-riscv@nongnu.org; Mon, 25 Mar 2024 04:34:03 -0400
+Received: by mail-pg1-x530.google.com with SMTP id
+ 41be03b00d2f7-5d42e7ab8a9so1751194a12.3
+ for <qemu-riscv@nongnu.org>; Mon, 25 Mar 2024 01:34:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux.alibaba.com; s=default;
- t=1711333032; h=From:To:Subject:Date:Message-ID:MIME-Version;
- bh=gDEcVt7HpohF2BJxvlG3tnvyDzgR04c6yMZXRJot6jY=;
- b=gP36IoODrhb699Wi2ZbGXds4VedJABR2i5I41zeKD8F3y2ffbvzkXbthP4Z242UowZYskEMD6+iRhuuNoR6Leo8Lc/QIsdmHM3UZf58NdL+q2Gf/2az2fHjfTXT3Wma0D6T+ykvJ2MWtNvJNxv4qMuKwkF3mImWcZfd1F5FqQHM=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R201e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045176;
- MF=eric.huang@linux.alibaba.com; NM=1; PH=DS; RN=10; SR=0;
- TI=SMTPD_---0W386B2x_1711333030; 
-Received: from localhost.localdomain(mailfrom:eric.huang@linux.alibaba.com
- fp:SMTPD_---0W386B2x_1711333030) by smtp.aliyun-inc.com;
- Mon, 25 Mar 2024 10:17:11 +0800
-From: Huang Tao <eric.huang@linux.alibaba.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, zhiwei_liu@linux.alibaba.com,
- dbarboza@ventanamicro.com, liwei1518@gmail.com, bin.meng@windriver.com,
- alistair.francis@wdc.com, palmer@dabbelt.com,
- Huang Tao <eric.huang@linux.alibaba.com>,
- Richard Henderson <richard.henderson@linaro.org>
-Subject: [PATCH v3] target/riscv: Fix the element agnostic function problem
-Date: Mon, 25 Mar 2024 10:16:54 +0800
-Message-ID: <20240325021654.6594-1-eric.huang@linux.alibaba.com>
-X-Mailer: git-send-email 2.41.0
+ d=sifive.com; s=google; t=1711355640; x=1711960440; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=OLIbztS1B/f/kZz4MvwbrRHywnUwo5ZMMZA2JJ4cvaE=;
+ b=IsuVgF+00ZpEbdKXuikFkTNWC/5PrgV3uJ5scNjypiYS4NJsohToNxrXxCi+LtRC3e
+ ATsq1xtX/WwroX55bV8uf1OsD7JX664dNyrm0qG6Ccos+0gYjtrJsm+l/f7lYqyqIUwy
+ qWGLKh0235bU0Zr9C0/F087L0qWVsRVssECA1NuLtwVsJWCS6yHWejyB0iaWhhzVki4M
+ TNgYLR33aBdsMmoq4uv1QasdmAy/pPHt8iij4Yv8h8WawJhrLgdvLkAIWmTnTInPQQkA
+ 8E0/oi8mCjJQjXrZKECKOSFsSgjI2InBMVUW1MJUnSDXDttX2ZY43Bh408hpA5IGznnP
+ f7cQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1711355640; x=1711960440;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=OLIbztS1B/f/kZz4MvwbrRHywnUwo5ZMMZA2JJ4cvaE=;
+ b=gL2mzDBuapEw4CAiUQjOEjHOXH4TfkmmDc3yQwtpZtnaLPEXD7IQ2/wmt+muqt50kc
+ q/uda/KOKfvrBhvRgWaE5AOd/uSFrUoPvCw5/RSOz/axlmFVde012BaRL710VwBpDcsZ
+ Lr99w559ouPXiSmrkYjK4sbBFStFZox6Vie4tkNHhsmd+aQn/oEAAu8pXwqKq/BToqJ9
+ SweJptEuyKA+Zk8HTAWBd/N1k8b4aNayQ78Zraa2WWBLufgtvER6r3mxhyJD5iObU5Y2
+ OciEwVJ71HdPheuct6ZbSB/9B92fggVmrZiMSjvjsY4gZTZ11bY62LLQ7bx5FAUyy4oC
+ pdiw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVVLUnSPcMUcVpATLSL/dZbQQqtpHQzx7PqTiL86vtvDn5UMlWVSLKTPZSzN9VTimI6fL4ORvGaU/C2+BbBSj5V49MusOk=
+X-Gm-Message-State: AOJu0YwAag+ir3nS8YrOJeV3o4eqxFS7aIxSEGz3iZ6Y+cKTtc+Yi1u+
+ PTjrra1RTkOZv0FkgXCdV7KNjNYb/hywEtyoioCMfWp1qL6mogcMZ83wdfY6Vag=
+X-Google-Smtp-Source: AGHT+IHUiPIgDmSi0QeljvI7GM2TFEli4xtTIG6zv3nqlul70l3hm0jt8GVIazyT+HKaaGBKR0PH6g==
+X-Received: by 2002:a05:6a20:8f0b:b0:1a3:b153:5f4e with SMTP id
+ b11-20020a056a208f0b00b001a3b1535f4emr6043566pzk.54.1711355640596; 
+ Mon, 25 Mar 2024 01:34:00 -0700 (PDT)
+Received: from hsinchu16.internal.sifive.com
+ (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
+ by smtp.gmail.com with ESMTPSA id
+ f7-20020a170902684700b001e0287592c4sm4311269pln.267.2024.03.25.01.33.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 25 Mar 2024 01:34:00 -0700 (PDT)
+From: Jason Chien <jason.chien@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Jason Chien <jason.chien@sifive.com>, Frank Chang <frank.chang@sifive.com>,
+ Max Chou <max.chou@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Andrew Jones <ajones@ventanamicro.com>
+Subject: [PATCH v2 1/5] target/riscv: Add support for Zve32x extension
+Date: Mon, 25 Mar 2024 16:33:35 +0800
+Message-ID: <20240325083346.16656-2-jason.chien@sifive.com>
+X-Mailer: git-send-email 2.43.2
+In-Reply-To: <20240325083346.16656-1-jason.chien@sifive.com>
+References: <20240325083346.16656-1-jason.chien@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.119;
- envelope-from=eric.huang@linux.alibaba.com;
- helo=out30-119.freemail.mail.aliyun.com
-X-Spam_score_int: -174
-X-Spam_score: -17.5
-X-Spam_bar: -----------------
-X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::530;
+ envelope-from=jason.chien@sifive.com; helo=mail-pg1-x530.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -69,61 +104,130 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-In RVV and vcrypto instructions, the masked and tail elements are set to 1s
-using vext_set_elems_1s function if the vma/vta bit is set. It is the element
-agnostic policy.
+Add support for Zve32x extension and replace some checks for Zve32f with
+Zve32x, since Zve32f depends on Zve32x.
 
-However, this function can't deal the big endian situation. This patch fixes
-the problem by adding handling of such case.
-
-Signed-off-by: Huang Tao <eric.huang@linux.alibaba.com>
-Suggested-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Signed-off-by: Jason Chien <jason.chien@sifive.com>
+Reviewed-by: Frank Chang <frank.chang@sifive.com>
+Reviewed-by: Max Chou <max.chou@sifive.com>
 ---
-Changes in v3:
-- use "if (HOST_BIG_ENDIAN)" instead of "#if HOST_BIG_ENDIAN"
+ target/riscv/cpu.c                      |  1 +
+ target/riscv/cpu_cfg.h                  |  1 +
+ target/riscv/cpu_helper.c               |  2 +-
+ target/riscv/csr.c                      |  2 +-
+ target/riscv/insn_trans/trans_rvv.c.inc |  4 ++--
+ target/riscv/tcg/tcg-cpu.c              | 16 ++++++++--------
+ 6 files changed, 14 insertions(+), 12 deletions(-)
 
-Changes in v2:
-- Keep the api of vext_set_elems_1s
-- Reduce the number of patches.
----
- target/riscv/vector_internals.c | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
-
-diff --git a/target/riscv/vector_internals.c b/target/riscv/vector_internals.c
-index 12f5964fbb..36635a1138 100644
---- a/target/riscv/vector_internals.c
-+++ b/target/riscv/vector_internals.c
-@@ -30,6 +30,28 @@ void vext_set_elems_1s(void *base, uint32_t is_agnostic, uint32_t cnt,
-     if (tot - cnt == 0) {
-         return ;
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 36e3e5fdaf..851ac7372c 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -153,6 +153,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(zvbb, PRIV_VERSION_1_12_0, ext_zvbb),
+     ISA_EXT_DATA_ENTRY(zvbc, PRIV_VERSION_1_12_0, ext_zvbc),
+     ISA_EXT_DATA_ENTRY(zve32f, PRIV_VERSION_1_10_0, ext_zve32f),
++    ISA_EXT_DATA_ENTRY(zve32x, PRIV_VERSION_1_10_0, ext_zve32x),
+     ISA_EXT_DATA_ENTRY(zve64f, PRIV_VERSION_1_10_0, ext_zve64f),
+     ISA_EXT_DATA_ENTRY(zve64d, PRIV_VERSION_1_10_0, ext_zve64d),
+     ISA_EXT_DATA_ENTRY(zvfbfmin, PRIV_VERSION_1_12_0, ext_zvfbfmin),
+diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+index cb750154bd..dce49050c0 100644
+--- a/target/riscv/cpu_cfg.h
++++ b/target/riscv/cpu_cfg.h
+@@ -91,6 +91,7 @@ struct RISCVCPUConfig {
+     bool ext_zhinx;
+     bool ext_zhinxmin;
+     bool ext_zve32f;
++    bool ext_zve32x;
+     bool ext_zve64f;
+     bool ext_zve64d;
+     bool ext_zvbb;
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index fc090d729a..b13a50a665 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -72,7 +72,7 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
+     *pc = env->xl == MXL_RV32 ? env->pc & UINT32_MAX : env->pc;
+     *cs_base = 0;
+ 
+-    if (cpu->cfg.ext_zve32f) {
++    if (cpu->cfg.ext_zve32x) {
+         /*
+          * If env->vl equals to VLMAX, we can use generic vector operation
+          * expanders (GVEC) to accerlate the vector operations.
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 726096444f..d96feea5d3 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -93,7 +93,7 @@ static RISCVException fs(CPURISCVState *env, int csrno)
+ 
+ static RISCVException vs(CPURISCVState *env, int csrno)
+ {
+-    if (riscv_cpu_cfg(env)->ext_zve32f) {
++    if (riscv_cpu_cfg(env)->ext_zve32x) {
+ #if !defined(CONFIG_USER_ONLY)
+         if (!env->debugger && !riscv_cpu_vector_enabled(env)) {
+             return RISCV_EXCP_ILLEGAL_INST;
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+index 7d84e7d812..eec2939e23 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -149,7 +149,7 @@ static bool do_vsetvl(DisasContext *s, int rd, int rs1, TCGv s2)
+ {
+     TCGv s1, dst;
+ 
+-    if (!require_rvv(s) || !s->cfg_ptr->ext_zve32f) {
++    if (!require_rvv(s) || !s->cfg_ptr->ext_zve32x) {
+         return false;
      }
-+
-+    if (HOST_BIG_ENDIAN) {
-+        /*
-+         * Deal the situation when the elements are insdie
-+         * only one uint64 block including setting the
-+         * masked-off element.
-+         */
-+        if (((tot - 1) ^ cnt) < 8) {
-+            memset(base + H1(tot - 1), -1, tot - cnt);
+ 
+@@ -179,7 +179,7 @@ static bool do_vsetivli(DisasContext *s, int rd, TCGv s1, TCGv s2)
+ {
+     TCGv dst;
+ 
+-    if (!require_rvv(s) || !s->cfg_ptr->ext_zve32f) {
++    if (!require_rvv(s) || !s->cfg_ptr->ext_zve32x) {
+         return false;
+     }
+ 
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index b5b95e052d..ff0d485e7f 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -511,9 +511,13 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+         return;
+     }
+ 
+-    if (cpu->cfg.ext_zve32f && !riscv_has_ext(env, RVF)) {
+-        error_setg(errp, "Zve32f/Zve64f extensions require F extension");
+-        return;
++    /* The Zve32f extension depends on the Zve32x extension */
++    if (cpu->cfg.ext_zve32f) {
++        if (!riscv_has_ext(env, RVF)) {
++            error_setg(errp, "Zve32f/Zve64f extensions require F extension");
 +            return;
 +        }
-+        /*
-+         * Otherwise, at least cross two uint64_t blocks.
-+         * Set first unaligned block.
-+         */
-+        if (cnt % 8 != 0) {
-+            uint32_t j = ROUND_UP(cnt, 8);
-+            memset(base + H1(j - 1), -1, j - cnt);
-+            cnt = j;
-+        }
-+        /* Set other 64bit aligend blocks */
-+    }
-     memset(base + cnt, -1, tot - cnt);
- }
++        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zve32x), true);
+     }
  
+     if (cpu->cfg.ext_zvfh) {
+@@ -658,13 +662,9 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+         cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvbc), true);
+     }
+ 
+-    /*
+-     * In principle Zve*x would also suffice here, were they supported
+-     * in qemu
+-     */
+     if ((cpu->cfg.ext_zvbb || cpu->cfg.ext_zvkb || cpu->cfg.ext_zvkg ||
+          cpu->cfg.ext_zvkned || cpu->cfg.ext_zvknha || cpu->cfg.ext_zvksed ||
+-         cpu->cfg.ext_zvksh) && !cpu->cfg.ext_zve32f) {
++         cpu->cfg.ext_zvksh) && !cpu->cfg.ext_zve32x) {
+         error_setg(errp,
+                    "Vector crypto extensions require V or Zve* extensions");
+         return;
 -- 
-2.41.0
+2.43.2
 
 
