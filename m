@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91852C54E64
-	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Mar 2024 08:34:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 024B8C54E58
+	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Mar 2024 08:34:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rofmO-0003a1-Ro; Mon, 25 Mar 2024 04:34:04 -0400
+	id 1rofmj-0004HZ-3i; Mon, 25 Mar 2024 04:34:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
- id 1rofmN-0003ZE-LP
- for qemu-riscv@nongnu.org; Mon, 25 Mar 2024 04:34:03 -0400
-Received: from mail-pg1-x530.google.com ([2607:f8b0:4864:20::530])
+ id 1rofmh-0004Gn-K9
+ for qemu-riscv@nongnu.org; Mon, 25 Mar 2024 04:34:23 -0400
+Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
- id 1rofmL-0004HE-UV
- for qemu-riscv@nongnu.org; Mon, 25 Mar 2024 04:34:03 -0400
-Received: by mail-pg1-x530.google.com with SMTP id
- 41be03b00d2f7-5d42e7ab8a9so1751194a12.3
- for <qemu-riscv@nongnu.org>; Mon, 25 Mar 2024 01:34:01 -0700 (PDT)
+ id 1rofmg-0004Ky-9E
+ for qemu-riscv@nongnu.org; Mon, 25 Mar 2024 04:34:23 -0400
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-1e00d1e13a2so23434855ad.0
+ for <qemu-riscv@nongnu.org>; Mon, 25 Mar 2024 01:34:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1711355640; x=1711960440; darn=nongnu.org;
+ d=sifive.com; s=google; t=1711355661; x=1711960461; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OLIbztS1B/f/kZz4MvwbrRHywnUwo5ZMMZA2JJ4cvaE=;
- b=IsuVgF+00ZpEbdKXuikFkTNWC/5PrgV3uJ5scNjypiYS4NJsohToNxrXxCi+LtRC3e
- ATsq1xtX/WwroX55bV8uf1OsD7JX664dNyrm0qG6Ccos+0gYjtrJsm+l/f7lYqyqIUwy
- qWGLKh0235bU0Zr9C0/F087L0qWVsRVssECA1NuLtwVsJWCS6yHWejyB0iaWhhzVki4M
- TNgYLR33aBdsMmoq4uv1QasdmAy/pPHt8iij4Yv8h8WawJhrLgdvLkAIWmTnTInPQQkA
- 8E0/oi8mCjJQjXrZKECKOSFsSgjI2InBMVUW1MJUnSDXDttX2ZY43Bh408hpA5IGznnP
- f7cQ==
+ bh=q026NYb4ZHzOUxF7VvpJFc4wjD5B0PSeAlVXt5PkoW8=;
+ b=X2DB3X3bbuwb9N5YjPDbkxjjseJLOhpbr/4IeqGpC4eVu22UEAVKxsnmh0Xty7pPoE
+ uPjonJB+Q37/bt/qscxrRtn6HIXN+0HqmLPtcIkIomP0jyqItspBm9oONTsMe9nEry/Q
+ yB9gWjaFMwjeX6NaLAOCA13Na4cc//UOyzNDkRch/retriVAIxASj1YBHE7VtB8tl5nc
+ 0WzLxuJt9GRQEFd/JavvGBIidxNDBp7WjAzT0k6SYMVCPcN21vtdK8SbrBir29jbGjNF
+ B1+EbafqzSKwdY6Lhfrq1tbxQkIgr/Vxyrk/dwm+ThLdKjlXcnKREzvqRJRhoCwnMBQh
+ xdIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711355640; x=1711960440;
+ d=1e100.net; s=20230601; t=1711355661; x=1711960461;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=OLIbztS1B/f/kZz4MvwbrRHywnUwo5ZMMZA2JJ4cvaE=;
- b=gL2mzDBuapEw4CAiUQjOEjHOXH4TfkmmDc3yQwtpZtnaLPEXD7IQ2/wmt+muqt50kc
- q/uda/KOKfvrBhvRgWaE5AOd/uSFrUoPvCw5/RSOz/axlmFVde012BaRL710VwBpDcsZ
- Lr99w559ouPXiSmrkYjK4sbBFStFZox6Vie4tkNHhsmd+aQn/oEAAu8pXwqKq/BToqJ9
- SweJptEuyKA+Zk8HTAWBd/N1k8b4aNayQ78Zraa2WWBLufgtvER6r3mxhyJD5iObU5Y2
- OciEwVJ71HdPheuct6ZbSB/9B92fggVmrZiMSjvjsY4gZTZ11bY62LLQ7bx5FAUyy4oC
- pdiw==
+ bh=q026NYb4ZHzOUxF7VvpJFc4wjD5B0PSeAlVXt5PkoW8=;
+ b=jfvC7+wn+KsgcsQ74Wh+J6FdcRKScTxk6S/xrW/R+z8f1yc/H+JIgVnMO5hSr+D3vj
+ jTzRqjKl+x8IhngixDZhwRYnVLHciW79knMRKdHbdcCRyWwNKz38/k43gtChi1LlqkfA
+ nHGPU20xa51/0SWb+u+VFVqn6PhNLyEvOqCcTdvSOT6EyHRgPPlF2QZCzWp2Ah5vxJj/
+ W1TUsJHsLicXEJVLhbsb3bkUcaBKdQ5Y0kmggAiWhcK7Jke2iYoaznDnyqdUqBNORdzZ
+ kZWG01c/cmRBmqAIRimy4E/QvRawiSHz/KYx+XgC7bi+e4To0ibcCuIZNvZVDZwcIc0M
+ d8iQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVVLUnSPcMUcVpATLSL/dZbQQqtpHQzx7PqTiL86vtvDn5UMlWVSLKTPZSzN9VTimI6fL4ORvGaU/C2+BbBSj5V49MusOk=
-X-Gm-Message-State: AOJu0YwAag+ir3nS8YrOJeV3o4eqxFS7aIxSEGz3iZ6Y+cKTtc+Yi1u+
- PTjrra1RTkOZv0FkgXCdV7KNjNYb/hywEtyoioCMfWp1qL6mogcMZ83wdfY6Vag=
-X-Google-Smtp-Source: AGHT+IHUiPIgDmSi0QeljvI7GM2TFEli4xtTIG6zv3nqlul70l3hm0jt8GVIazyT+HKaaGBKR0PH6g==
-X-Received: by 2002:a05:6a20:8f0b:b0:1a3:b153:5f4e with SMTP id
- b11-20020a056a208f0b00b001a3b1535f4emr6043566pzk.54.1711355640596; 
- Mon, 25 Mar 2024 01:34:00 -0700 (PDT)
+ AJvYcCV8i/6oGB11rLbGoJDYVnJk3NAa4Q9Ujw7llAmQni9heeiVLKPLooLiAcjNbLcMMs5vZck1fUSsDjuqJP3K3ha/5/xaD6c=
+X-Gm-Message-State: AOJu0YxTWly0hXOYPH9l2tX8i17Olinw7K2pTjaEbCsxo4ZJDFnDkNdE
+ QpGrIgmo9RPTVh2yIUEbMfGtsIXYyNDv7VBJYpeJ7cK/w9lT2JVXleOJF9zyzUo=
+X-Google-Smtp-Source: AGHT+IHOHkd313euodSo67nOiJWihHvwiJUZ8aPvua5C/dG3tQkCO9Jg3AAQ+oAd4l9OX2OOpOmlNQ==
+X-Received: by 2002:a17:902:f78b:b0:1dd:861b:3666 with SMTP id
+ q11-20020a170902f78b00b001dd861b3666mr5601695pln.55.1711355660957; 
+ Mon, 25 Mar 2024 01:34:20 -0700 (PDT)
 Received: from hsinchu16.internal.sifive.com
  (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
  by smtp.gmail.com with ESMTPSA id
- f7-20020a170902684700b001e0287592c4sm4311269pln.267.2024.03.25.01.33.58
+ f7-20020a170902684700b001e0287592c4sm4311269pln.267.2024.03.25.01.34.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Mar 2024 01:34:00 -0700 (PDT)
+ Mon, 25 Mar 2024 01:34:20 -0700 (PDT)
 From: Jason Chien <jason.chien@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -69,19 +69,18 @@ Cc: Jason Chien <jason.chien@sifive.com>, Frank Chang <frank.chang@sifive.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Andrew Jones <ajones@ventanamicro.com>
-Subject: [PATCH v2 1/5] target/riscv: Add support for Zve32x extension
-Date: Mon, 25 Mar 2024 16:33:35 +0800
-Message-ID: <20240325083346.16656-2-jason.chien@sifive.com>
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Subject: [PATCH v2 5/5] target/riscv: Relax vector register check in RISCV
+ gdbstub
+Date: Mon, 25 Mar 2024 16:33:39 +0800
+Message-ID: <20240325083346.16656-6-jason.chien@sifive.com>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240325083346.16656-1-jason.chien@sifive.com>
 References: <20240325083346.16656-1-jason.chien@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::530;
- envelope-from=jason.chien@sifive.com; helo=mail-pg1-x530.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
+ envelope-from=jason.chien@sifive.com; helo=mail-pl1-x636.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -104,129 +103,31 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add support for Zve32x extension and replace some checks for Zve32f with
-Zve32x, since Zve32f depends on Zve32x.
+In current implementation, the gdbstub allows reading vector registers
+only if V extension is supported. However, all vector extensions and
+vector crypto extensions have the vector registers and they all depend
+on Zve32x. The gdbstub should check for Zve32x instead.
 
 Signed-off-by: Jason Chien <jason.chien@sifive.com>
 Reviewed-by: Frank Chang <frank.chang@sifive.com>
 Reviewed-by: Max Chou <max.chou@sifive.com>
 ---
- target/riscv/cpu.c                      |  1 +
- target/riscv/cpu_cfg.h                  |  1 +
- target/riscv/cpu_helper.c               |  2 +-
- target/riscv/csr.c                      |  2 +-
- target/riscv/insn_trans/trans_rvv.c.inc |  4 ++--
- target/riscv/tcg/tcg-cpu.c              | 16 ++++++++--------
- 6 files changed, 14 insertions(+), 12 deletions(-)
+ target/riscv/gdbstub.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 36e3e5fdaf..851ac7372c 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -153,6 +153,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(zvbb, PRIV_VERSION_1_12_0, ext_zvbb),
-     ISA_EXT_DATA_ENTRY(zvbc, PRIV_VERSION_1_12_0, ext_zvbc),
-     ISA_EXT_DATA_ENTRY(zve32f, PRIV_VERSION_1_10_0, ext_zve32f),
-+    ISA_EXT_DATA_ENTRY(zve32x, PRIV_VERSION_1_10_0, ext_zve32x),
-     ISA_EXT_DATA_ENTRY(zve64f, PRIV_VERSION_1_10_0, ext_zve64f),
-     ISA_EXT_DATA_ENTRY(zve64d, PRIV_VERSION_1_10_0, ext_zve64d),
-     ISA_EXT_DATA_ENTRY(zvfbfmin, PRIV_VERSION_1_12_0, ext_zvfbfmin),
-diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-index cb750154bd..dce49050c0 100644
---- a/target/riscv/cpu_cfg.h
-+++ b/target/riscv/cpu_cfg.h
-@@ -91,6 +91,7 @@ struct RISCVCPUConfig {
-     bool ext_zhinx;
-     bool ext_zhinxmin;
-     bool ext_zve32f;
-+    bool ext_zve32x;
-     bool ext_zve64f;
-     bool ext_zve64d;
-     bool ext_zvbb;
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index fc090d729a..b13a50a665 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -72,7 +72,7 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
-     *pc = env->xl == MXL_RV32 ? env->pc & UINT32_MAX : env->pc;
-     *cs_base = 0;
- 
--    if (cpu->cfg.ext_zve32f) {
+diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+index be7a02cd90..d0cc5762c2 100644
+--- a/target/riscv/gdbstub.c
++++ b/target/riscv/gdbstub.c
+@@ -338,7 +338,7 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+                                  gdb_find_static_feature("riscv-32bit-fpu.xml"),
+                                  0);
+     }
+-    if (env->misa_ext & RVV) {
 +    if (cpu->cfg.ext_zve32x) {
-         /*
-          * If env->vl equals to VLMAX, we can use generic vector operation
-          * expanders (GVEC) to accerlate the vector operations.
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 726096444f..d96feea5d3 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -93,7 +93,7 @@ static RISCVException fs(CPURISCVState *env, int csrno)
- 
- static RISCVException vs(CPURISCVState *env, int csrno)
- {
--    if (riscv_cpu_cfg(env)->ext_zve32f) {
-+    if (riscv_cpu_cfg(env)->ext_zve32x) {
- #if !defined(CONFIG_USER_ONLY)
-         if (!env->debugger && !riscv_cpu_vector_enabled(env)) {
-             return RISCV_EXCP_ILLEGAL_INST;
-diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index 7d84e7d812..eec2939e23 100644
---- a/target/riscv/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -149,7 +149,7 @@ static bool do_vsetvl(DisasContext *s, int rd, int rs1, TCGv s2)
- {
-     TCGv s1, dst;
- 
--    if (!require_rvv(s) || !s->cfg_ptr->ext_zve32f) {
-+    if (!require_rvv(s) || !s->cfg_ptr->ext_zve32x) {
-         return false;
-     }
- 
-@@ -179,7 +179,7 @@ static bool do_vsetivli(DisasContext *s, int rd, TCGv s1, TCGv s2)
- {
-     TCGv dst;
- 
--    if (!require_rvv(s) || !s->cfg_ptr->ext_zve32f) {
-+    if (!require_rvv(s) || !s->cfg_ptr->ext_zve32x) {
-         return false;
-     }
- 
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index b5b95e052d..ff0d485e7f 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -511,9 +511,13 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
-         return;
-     }
- 
--    if (cpu->cfg.ext_zve32f && !riscv_has_ext(env, RVF)) {
--        error_setg(errp, "Zve32f/Zve64f extensions require F extension");
--        return;
-+    /* The Zve32f extension depends on the Zve32x extension */
-+    if (cpu->cfg.ext_zve32f) {
-+        if (!riscv_has_ext(env, RVF)) {
-+            error_setg(errp, "Zve32f/Zve64f extensions require F extension");
-+            return;
-+        }
-+        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zve32x), true);
-     }
- 
-     if (cpu->cfg.ext_zvfh) {
-@@ -658,13 +662,9 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
-         cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvbc), true);
-     }
- 
--    /*
--     * In principle Zve*x would also suffice here, were they supported
--     * in qemu
--     */
-     if ((cpu->cfg.ext_zvbb || cpu->cfg.ext_zvkb || cpu->cfg.ext_zvkg ||
-          cpu->cfg.ext_zvkned || cpu->cfg.ext_zvknha || cpu->cfg.ext_zvksed ||
--         cpu->cfg.ext_zvksh) && !cpu->cfg.ext_zve32f) {
-+         cpu->cfg.ext_zvksh) && !cpu->cfg.ext_zve32x) {
-         error_setg(errp,
-                    "Vector crypto extensions require V or Zve* extensions");
-         return;
+         gdb_register_coprocessor(cs, riscv_gdb_get_vector,
+                                  riscv_gdb_set_vector,
+                                  ricsv_gen_dynamic_vector_feature(cs, cs->gdb_num_regs),
 -- 
 2.43.2
 
