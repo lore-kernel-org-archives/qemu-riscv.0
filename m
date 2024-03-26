@@ -4,47 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F743CD11DD
-	for <qemu-riscv@archiver.kernel.org>; Tue, 26 Mar 2024 13:33:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEA73CD11DD
+	for <qemu-riscv@archiver.kernel.org>; Tue, 26 Mar 2024 13:37:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rp6un-0003wW-Jb; Tue, 26 Mar 2024 09:32:33 -0400
+	id 1rp6zi-0005B1-9i; Tue, 26 Mar 2024 09:37:38 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1rp6um-0003w9-Mq
- for qemu-riscv@nongnu.org; Tue, 26 Mar 2024 09:32:32 -0400
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1rp6zd-00059m-8n
+ for qemu-riscv@nongnu.org; Tue, 26 Mar 2024 09:37:33 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1rp6uj-0003af-IR
- for qemu-riscv@nongnu.org; Tue, 26 Mar 2024 09:32:31 -0400
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1rp6zY-0004fD-BH
+ for qemu-riscv@nongnu.org; Tue, 26 Mar 2024 09:37:30 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1711459948;
+ s=mimecast20190719; t=1711460246;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=JYLy1OCZ/WnjMGSmPadg1kQr5dKf8rmhteT200xQIug=;
- b=FFAI9K/KQKekEp91Vw7geml7izJEQnwp9Ougdr2Tt7N5CIy32o73eZyOKt+bsvFtlhoo+3
- ERp3Od5uWiEvrahInc7ZxCkA2hawqFdRcw6KH+JafYbJeuPJMHjgpTu/nrUF/fb6N+W8vs
- ArHi8Znf2CdRfBTRS4zicQJzp41vkac=
+ bh=9IslcTcT5W/4mVhuyx1fhMDVdiwOSpv2X5AhvRFmRFw=;
+ b=h9nvGrIUy546tOy6AAVVOHlIeVBVbqUkW740FG7OnxHiK90x4Xxcs5MfeYNLO8iDVxPaYJ
+ FVphR2dBpGryGNyNhVal5VoG7ob+Ga21q4wLI0sI/6xLcrXH8BqzGYJpLdOAmc5SS3DK0T
+ xLik/GVPqXQKIA/u+690YkDdE7vONWg=
 Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
  [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-645-7ebkT3aZODGhrQ3OntrHZg-1; Tue, 26 Mar 2024 09:32:21 -0400
-X-MC-Unique: 7ebkT3aZODGhrQ3OntrHZg-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com
- [10.11.54.5])
+ us-mta-385-KumXqmMRMj6OBPCPqQYJeA-1; Tue, 26 Mar 2024 09:37:24 -0400
+X-MC-Unique: KumXqmMRMj6OBPCPqQYJeA-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 8047B101A58F;
- Tue, 26 Mar 2024 13:32:19 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 66F088FA104;
+ Tue, 26 Mar 2024 13:37:23 +0000 (UTC)
 Received: from blackfin.pond.sub.org (unknown [10.39.192.81])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 40DD6107A8;
- Tue, 26 Mar 2024 13:32:18 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 3B78140C6CB3;
+ Tue, 26 Mar 2024 13:37:23 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 27DA821E669D; Tue, 26 Mar 2024 14:32:13 +0100 (CET)
+ id 3199D21E6757; Tue, 26 Mar 2024 14:37:02 +0100 (CET)
 From: Markus Armbruster <armbru@redhat.com>
 To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 Cc: qemu-devel@nongnu.org,  qemu-riscv@nongnu.org,  Anton Johansson
@@ -56,30 +55,19 @@ Cc: qemu-devel@nongnu.org,  qemu-riscv@nongnu.org,  Anton Johansson
  Peter Maydell <peter.maydell@linaro.org>,  Alex =?utf-8?Q?Benn=C3=A9e?=
  <alex.bennee@linaro.org>,  Manos Pitsidianakis
  <manos.pitsidianakis@linaro.org>,  Zhao Liu <zhao1.liu@intel.com>,
- qemu-arm@nongnu.org,  Thomas Huth <thuth@redhat.com>,  Marcel Apfelbaum
- <marcel.apfelbaum@gmail.com>,  Yanan Wang <wangyanan55@huawei.com>,  Eric
- Blake <eblake@redhat.com>,  Song Gao <gaosong@loongson.cn>,  Huacai Chen
- <chenhuacai@kernel.org>,  Aurelien Jarno <aurelien@aurel32.net>,  Jiaxun
- Yang <jiaxun.yang@flygoat.com>,  Aleksandar Rikalo
- <aleksandar.rikalo@syrmia.com>,  Nicholas Piggin <npiggin@gmail.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,  Palmer Dabbelt
- <palmer@dabbelt.com>,  Alistair Francis <alistair.francis@wdc.com>,  Bin
- Meng <bin.meng@windriver.com>,  Weiwei Li <liwei1518@gmail.com>,  Liu
- Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: Re: [RFC PATCH-for-9.1 21/21] qapi: Make @query-cpu-definitions
- target-agnostic
-In-Reply-To: <20240315130910.15750-22-philmd@linaro.org> ("Philippe
- =?utf-8?Q?Mathieu-Daud=C3=A9=22's?= message of "Fri, 15 Mar 2024 14:09:09
+ qemu-arm@nongnu.org,  Thomas Huth <thuth@redhat.com>
+Subject: Re: [RFC PATCH-for-9.1 00/21] qapi: Make @query-cpu-definitions
+ command target-agnostic
+In-Reply-To: <20240315130910.15750-1-philmd@linaro.org> ("Philippe
+ =?utf-8?Q?Mathieu-Daud=C3=A9=22's?= message of "Fri, 15 Mar 2024 14:08:48
  +0100")
 References: <20240315130910.15750-1-philmd@linaro.org>
- <20240315130910.15750-22-philmd@linaro.org>
-Date: Tue, 26 Mar 2024 14:32:13 +0100
-Message-ID: <87o7b1m84i.fsf@pond.sub.org>
+Date: Tue, 26 Mar 2024 14:37:02 +0100
+Message-ID: <87edbxm7wh.fsf@pond.sub.org>
 User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.5
+Content-Type: text/plain
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.2
 Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -21
@@ -104,78 +92,6 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> writes:
-
-> All targets use the generic_query_cpu_definitions() method,
-> which is not target-specific. Make the command target agnostic
-> by moving it to machine.json. Rename generic_query_cpu_definitions
-> as qmp_query_cpu_definitions.
->
-> This is an introspection change for the target that were not
-> implementing qmp_query_cpu_definitions(): now query-cpu-definitions
-> returns an their CPUs list.
-
-Do you mean "returns their CPUs list"?
-
->
-> Example with SH4 before:
->
->   { "execute": "query-cpu-definitions" }
->
->   { "error": {"class": "CommandNotFound", "desc": "The command query-cpu-=
-definitions has not been found"} }
->
-> and after:
->
->   { "execute": "query-cpu-definitions" }
->
->   { "return": [
->           {"name": "sh7751r", "typename": "sh7751r-superh-cpu", "static":=
- false, "deprecated": false},
->           {"name": "sh7750r", "typename": "sh7750r-superh-cpu", "static":=
- false, "deprecated": false},
->           {"name": "sh7785", "typename": "sh7785-superh-cpu", "static": f=
-alse, "deprecated": false}
->       ]
->   }
-
-Does the result make sense?  What do the callbacks add for the targets
-that define them, and why do the other targets don't need them?
-
-Conversion steps:
-
-0. Create a generic version of the command, with optional callbacks
-   [PATCH 14]
-
-1. Turn the target-specific versions of the command into thin wrappers
-   around the generic version one by one, supplying callbacks to
-   preserve behavior [PATCH 15-20]
-
-2. Peel off the wrappers [this patch]
-
-3. Enable the command for all the other targets [also this patch]
-
-Correct?
-
-Split this patch?  Question, not a demand.
-
-I think the commit messages of the step 1 patches should explain the
-target-specific behavior, i.e. the difference between their callbacks
-and the default behavior.
-
-Obvious for cpu_list_compare(): sorted vs. unsorted.
-
-Not obvious for add_definition().
-
-> However this allows heterogeneous emulation to return a correct list.
-
-Cryptic.  It made me go back to PATCH 14, where I discovered the loop
-over the arch bits.
-
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
-> ---
-> Well, not all target got converted, I left the s390x one for later :)
-
-Haha!
+The general approach looks sane enough to me.
 
 
