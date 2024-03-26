@@ -4,60 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33F28C6FD1F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 26 Mar 2024 12:54:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2771ECD11DD
+	for <qemu-riscv@archiver.kernel.org>; Tue, 26 Mar 2024 13:29:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rp6Jw-0004OY-CU; Tue, 26 Mar 2024 08:54:28 -0400
+	id 1rp6rb-0001M5-BQ; Tue, 26 Mar 2024 09:29:15 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1rp6Jr-0004Kv-Mn
- for qemu-riscv@nongnu.org; Tue, 26 Mar 2024 08:54:23 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1rp6rZ-0001Kx-KD
+ for qemu-riscv@nongnu.org; Tue, 26 Mar 2024 09:29:13 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1rp6Jq-0004B0-0F
- for qemu-riscv@nongnu.org; Tue, 26 Mar 2024 08:54:23 -0400
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1rp6rW-0002mQ-6c
+ for qemu-riscv@nongnu.org; Tue, 26 Mar 2024 09:29:13 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1711457660;
+ s=mimecast20190719; t=1711459749;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=rV1RJmQNftGY7VwRVwt6w2BaMcFIKrZM4HMKKeiWQR4=;
- b=iv456EiVMhl0sLA6agVya/bNpDrmabWICGnUahiYAbfWP3CZqu2KYL5AR5NkQ1bu9a/Qwk
- nZZI4nhc9io1H4z569+qrfQEXEdTH3kDctfVLur+49hVuGeiW4v+pd3GlT9NNJs1hqIpMt
- FfFqkWoTzb7gC4iYM4bRMvYwPFICJAk=
+ bh=OicrD7O6SHbgh0NKnNiM0QdxrXxrvqefLuRqQi+U5aY=;
+ b=YI9LtSO1V1Y0Yw9OsrSJE0CcbO5xFDZZzJtKJAic/VpBMCAxCfm1Q2msgT7CZuXtX0moLI
+ lAhCJfNLDfv6oki+S8/3/mepijyyl2k2tvQ7V2BFlr2OQEGxA956ej+dGL0CuUTDY8LWLb
+ C+2lwhK8pvQB9Lc+AIctDSqPmJK4gd8=
 Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
  [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-542-kCQV6eGzM-C2dEFCyWa8Nw-1; Tue, 26 Mar 2024 08:54:15 -0400
-X-MC-Unique: kCQV6eGzM-C2dEFCyWa8Nw-1
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.rdu2.redhat.com
- [10.11.54.7])
+ us-mta-481-K-tlxBGrNbyXje-ODa7yIA-1; Tue, 26 Mar 2024 09:29:04 -0400
+X-MC-Unique: K-tlxBGrNbyXje-ODa7yIA-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.6])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 22A46800264;
- Tue, 26 Mar 2024 12:54:15 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 2848C101A526;
+ Tue, 26 Mar 2024 13:29:03 +0000 (UTC)
 Received: from blackfin.pond.sub.org (unknown [10.39.192.81])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id AB32C1C060D6;
- Tue, 26 Mar 2024 12:54:14 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 856772166B31;
+ Tue, 26 Mar 2024 13:29:02 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id A7A5621E669D; Tue, 26 Mar 2024 13:54:09 +0100 (CET)
+ id 8182C21E669D; Tue, 26 Mar 2024 14:28:57 +0100 (CET)
 From: Markus Armbruster <armbru@redhat.com>
 To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org,  qemu-riscv@nongnu.org,  Anton Johansson
- <anjo@rev.ng>,  qemu-s390x@nongnu.org,  qemu-ppc@nongnu.org,  Daniel P .
- =?utf-8?Q?Berrang=C3=A9?= <berrange@redhat.com>,  Paolo Bonzini
- <pbonzini@redhat.com>,
- Eduardo Habkost <eduardo@habkost.net>,  Claudio Fontana
- <cfontana@suse.de>,  Richard Henderson <richard.henderson@linaro.org>,
- Peter Maydell <peter.maydell@linaro.org>,  Alex =?utf-8?Q?Benn=C3=A9e?=
- <alex.bennee@linaro.org>,  Manos Pitsidianakis
- <manos.pitsidianakis@linaro.org>,  Zhao Liu <zhao1.liu@intel.com>,
- qemu-arm@nongnu.org,  Thomas Huth <thuth@redhat.com>,  Michael Roth
- <michael.roth@amd.com>
+Cc: qemu-devel@nongnu.org,  Markus Armbruster <armbru@redhat.com>,
+ qemu-riscv@nongnu.org,  Anton Johansson <anjo@rev.ng>,
+ qemu-s390x@nongnu.org,  qemu-ppc@nongnu.org,  Daniel P . =?utf-8?Q?Berra?=
+ =?utf-8?Q?ng=C3=A9?=
+ <berrange@redhat.com>,  Paolo Bonzini <pbonzini@redhat.com>,  Eduardo
+ Habkost <eduardo@habkost.net>,  Claudio Fontana <cfontana@suse.de>,
+ Richard Henderson <richard.henderson@linaro.org>,  Peter Maydell
+ <peter.maydell@linaro.org>,  Alex =?utf-8?Q?Benn=C3=A9e?=
+ <alex.bennee@linaro.org>,  Manos
+ Pitsidianakis <manos.pitsidianakis@linaro.org>,  Zhao Liu
+ <zhao1.liu@intel.com>,  qemu-arm@nongnu.org,  Thomas Huth
+ <thuth@redhat.com>,  Michael Roth <michael.roth@amd.com>
 Subject: Re: [RFC PATCH-for-9.1 14/21] system: Introduce QMP
  generic_query_cpu_definitions()
 In-Reply-To: <20240315130910.15750-15-philmd@linaro.org> ("Philippe
@@ -65,14 +66,14 @@ In-Reply-To: <20240315130910.15750-15-philmd@linaro.org> ("Philippe
  +0100")
 References: <20240315130910.15750-1-philmd@linaro.org>
  <20240315130910.15750-15-philmd@linaro.org>
-Date: Tue, 26 Mar 2024 13:54:09 +0100
-Message-ID: <87o7b1noge.fsf@pond.sub.org>
+Date: Tue, 26 Mar 2024 14:28:57 +0100
+Message-ID: <87v859m89y.fsf@pond.sub.org>
 User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.7
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=armbru@redhat.com;
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.6
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -21
 X-Spam_score: -2.2
@@ -161,23 +162,10 @@ u-ops.h
 > +     */
 > +    gint (*cpu_list_compare)(gconstpointer cpu_class_a, gconstpointer cp=
 u_class_b);
-
-Peeking ahead...  This is used for sorting the subtypes of the CPU type
-returned by cpu_typename_by_arch_bit().  Implementing the callback is
-optional, and when absent, we don't sort, i.e. we get hash table order.
-
-Worth mentioning it's optional?
-
 > +    /**
 > +     * @add_definition: Add the @cpu_class definition to @cpu_list.
 > +     */
 > +    void (*add_definition)(gpointer cpu_class, gpointer cpu_list);
-
-This one appears to default to cpu_common_add_definition().  Worth
-mentioning?
-
-I despise Glib's pointless typedefs for ordinary C types.
-
 > +    /**
 > +     * @add_alias_definitions: Add CPU alias definitions to @cpu_list.
 > +     */
@@ -192,9 +180,6 @@ s-target-compat.h
 > index 0000000000..86d45d8fcc
 > --- /dev/null
 > +++ b/include/qapi/commands-target-compat.h
-
-Why "compat"?
-
 > @@ -0,0 +1,14 @@
 > +/*
 > + * QAPI helpers for target specific QMP commands
@@ -288,6 +273,34 @@ ion,
 > +
 > +    return cpu_list;
 > +}
+
+The target-specific qmp_query_cpu_definitions() this is going to replace
+each execute the equivalent of *one* loop iteration: the one
+corresponding to their own arch bit.
+
+For the replacement to be faithful, as cpu_typename_by_arch_bit() must
+return non-null exactly once.
+
+This is the case for the qemu-system-TARGET.  The solution feels
+overengineered there.
+
+I figure cpu_typename_by_arch_bit() will return non-null multiple times
+in a future single binary supporting heterogeneous machines.
+
+Such a single binary then can't serve as drop-in replacement for the
+qemu-system-TARGET, because query-cpu-definitions returns more.
+
+To get a drop-in replacement, we'll need additional logic to restrict
+the query for the homogeneous use case.
+
+I think this needs to be discussed in the commit message.
+
+Possibly easier: don't loop over the bits, relying on
+cpu_typename_by_arch_bit() to select the right one.  Instead get the
+right bit from somewhere.
+
+We can switch to a loop when we need it for the heterogeneous case.
+
 > diff --git a/system/meson.build b/system/meson.build
 > index c6ee97e3b2..dd78caa9b7 100644
 > --- a/system/meson.build
@@ -300,14 +313,5 @@ ion,
 >    'cpu-qom-helpers.c',
 >    'cpu-throttle.c',
 >    'cpu-timers.c',
-
-The commit message made me expect the complete refactoring in this
-patch.  In fact, it's just a first step: the new
-generic_query_cpu_definitions() remains unused, and no target implements
-the new callbacks.  We can worry about this later.
-
-Subsequent patches convert targets to generic_query_cpu_definitions()
-one by one.  To convince myself the replacement is faithful, I'll have
-to refer back to this patch.  That's fine.
 
 
