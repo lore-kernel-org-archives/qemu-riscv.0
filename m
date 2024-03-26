@@ -4,80 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 311C7C54E58
-	for <qemu-riscv@archiver.kernel.org>; Tue, 26 Mar 2024 04:56:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1314C6FD1F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 26 Mar 2024 09:50:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1royqw-000414-7P; Tue, 26 Mar 2024 00:56:02 -0400
+	id 1rp3Rk-0003q3-LZ; Tue, 26 Mar 2024 05:50:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1royqu-00040g-5D; Tue, 26 Mar 2024 00:56:00 -0400
-Received: from mail-lj1-x231.google.com ([2a00:1450:4864:20::231])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1rp3Ri-0003oi-Fm
+ for qemu-riscv@nongnu.org; Tue, 26 Mar 2024 05:50:18 -0400
+Received: from mail-ej1-x62f.google.com ([2a00:1450:4864:20::62f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1royqp-0001FF-H1; Tue, 26 Mar 2024 00:55:59 -0400
-Received: by mail-lj1-x231.google.com with SMTP id
- 38308e7fff4ca-2d49f7e5c2cso68258321fa.2; 
- Mon, 25 Mar 2024 21:55:54 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1rp3Rf-0005pJ-F0
+ for qemu-riscv@nongnu.org; Tue, 26 Mar 2024 05:50:18 -0400
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-a466fc8fcccso681864766b.1
+ for <qemu-riscv@nongnu.org>; Tue, 26 Mar 2024 02:50:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1711428951; x=1712033751; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=rS+wzdQT5x7x5iCFTR/am43NuWsKoxOMfZ5wiLYQm/w=;
- b=adxK4954pmGN01Hp2Qv4o276wCYLdPayDTo6GKj6Kbmk5cbVDYO6cTFLLhML5cdKh5
- nolyIFEd2nREKfaLqHCcjcgbp5KD7GPeA0PHeWjE5oGrh6cHd3hs6HFplo+XbMcQJvNX
- NfSNpsoa0mYrd8mar1RqgPV5UHAGrn+0MLVDVGq8/r6YLFXYFmOr0RaOPA/n0YgN4xQr
- yAh0+15eXf6EG1SHuIo+xdlezv2EkQC4d2zSpuup9aHpDOKRKBn6xnQiXsK4PJ5lcZWk
- 0hlnWt4T1XitqrDhDksxw9rzqnn3Di8HAinDDTnJ1emkKFmi4QmB8/nIIl/zJILFkFG6
- sCMQ==
+ d=ventanamicro.com; s=google; t=1711446612; x=1712051412; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=8tqhNhpR84gq+U3RYnctvjPwNYRpv1R563RMIXFBceE=;
+ b=fGJu0dhAzNqwoo0C07pLgJz8EYdEAqNCHyYKR5pBT0DVovlNB4pohSscy1qodrO4d0
+ ZmIuPwBnwGlQMgeBDDJBB4MYF1V+O4joDrjDGxq753W2vYDdVVIEaCPpPURTbYMQh6/G
+ Qcqgy8BWNSZVbnhMCbfQD4XIgXMXlWIeJmSb+cWDsi/esxk+p5EVH+FD04dmBvzk71/U
+ aQydCSsZAwa+SmuTP9Wrfebr02+qJ2UtaRinj7ao07fgJrOIWtJZyRCer3DontDFpeAM
+ avHw9ayLwJpwcO8PK9hBxLtwHUNWUXiVmtCZ/tQAPk/y5nC9P4wkhqB5/I0rpP3tFNBZ
+ DlGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711428951; x=1712033751;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=rS+wzdQT5x7x5iCFTR/am43NuWsKoxOMfZ5wiLYQm/w=;
- b=P7/gvDEAjIW4PZmU+mu14YNcj1v/1+I1HZFPu6ds3OsJqu1Iuhp7C7HlYoNjQip54L
- ThUUXyeeQQ4GdzSa+vgd04uFgxRaQNXqov4hU8xNwqcqg/0q1C6/cPzJkNpMrZuWRLlT
- rcpcMXyPoVy6v3SQOppt0SOK2yA824zTR36DXKM02F98L4/AUSgqNCxMt0orqffWyNbW
- 5ZgsUTHPs/jO4cRuivJOnDqZIybSa+1klKa8jWybIfGaa8LuVaJ+7Jp0nAVN8Z8FgprX
- ur6eHfcNvO1Uq2TVhnZN5LeVRSnjYO60n5oYO1p+90/c/Ep2Vrxeu42amnO/hGEl7ek3
- 00FQ==
+ d=1e100.net; s=20230601; t=1711446612; x=1712051412;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8tqhNhpR84gq+U3RYnctvjPwNYRpv1R563RMIXFBceE=;
+ b=QBO7pEap7CJTDqN1PX12kIcRYhNPxetYJh29MEodkSm57xA3w2Olx3OcfjYES2iosC
+ hcL6JBf6lIkVOI3NuV9FTm3J/65C8GpI57ToB9nzJU1X71OFPX0d4pQXw/JeAZRK2cjt
+ euFBEwo4jlm7O4Ez+3LMPw4H7OIHfblDnstTx9Qsr19+yZU4UGbBiXW5dHSIWFdYDN9f
+ EyJ8ELTVqct6P4u//z3sKwLDaaul45OcqkOUJvK9zzmq8cFsx/ERAktZe+yI8zviHez4
+ LtE9Wy77oKtgnYCbv9wMp8Ynt4QbtRvVfgamMe7fH9GsG6mB9d0BdiSEbo251Qptf7dO
+ AZMg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUxPZSL3+ZtRJnmkZIYzAivA8OmXSuQE4z6jWhnR9xcFfozr8Wo57RwUmhezUhsBDauE0VOh4kYtzPjdmb0X1hABpuEXRoAEryTzOI4xuciCda3FCnOrJW5a2kxBQ==
-X-Gm-Message-State: AOJu0Yz3eoiIOoYb1SPJ44M5iKaH8E8qRgcGtALAjojhnS5+3nvYdMxW
- 0AbjvFXwD9LyyrqAB7cmFubgd0bDp0blmxLROMSUZ8g0CS/3ly7Dgg0MVe81zCt//plX3pUGjxa
- /73t9NevUQYndqd+I5rQm3zqmKVE=
-X-Google-Smtp-Source: AGHT+IHg1fw5vhSuJn7HdOWQlH3hc7vYnN35kbyA7PRBkX4/Zr6q2PepFrLV+EimGczcdzc8lyWI9flCPoJnO6xHESc=
-X-Received: by 2002:a2e:b704:0:b0:2d3:f3fe:48ac with SMTP id
- j4-20020a2eb704000000b002d3f3fe48acmr5170869ljo.27.1711428951102; Mon, 25 Mar
- 2024 21:55:51 -0700 (PDT)
-MIME-Version: 1.0
-References: <b7fff1e9-f2b3-4a45-8966-1dbd76263457@ventanamicro.com>
- <20240325130116.13194-1-alexei.filippov@syntacore.com>
-In-Reply-To: <20240325130116.13194-1-alexei.filippov@syntacore.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 26 Mar 2024 14:54:55 +1000
-Message-ID: <CAKmqyKNkyxx9YV5ahb-VTO=4+mtu-1D2nMvyP6=-MpZ6KGXomw@mail.gmail.com>
-Subject: Re: [PATCH v2] target/riscv/kvm/kvm-cpu.c: kvm_riscv_handle_sbi()
- fail with vendor-specific SBI
+ AJvYcCXhnN2JdoCkqHoyw5oWJeMLIiOcANstcT3oVvPFiQ0zG9myU3WBK0jD9CR7MK3rtwzO8zovPtNwhRCfVnFHJ1fE00NtxLY=
+X-Gm-Message-State: AOJu0YxkOuRxFWu2DnfS+YJjmpHw3DjXjCy78+e2PCrojR+F/jN2N2cL
+ zUTUOV/Cqo0ilRIrvpo967cbvbEBBRU+7PWVro9Pi4AduujozulNY77UDanIszc=
+X-Google-Smtp-Source: AGHT+IET8z1vXkdNpUuDSPY+mMi37+GFXhJ1V7OtS7oLm2ZimM9pj2hDpTJt0kCok9wFDUEsIXMVMw==
+X-Received: by 2002:a17:906:410d:b0:a47:29ef:f3ca with SMTP id
+ j13-20020a170906410d00b00a4729eff3camr554193ejk.31.1711446612430; 
+ Tue, 26 Mar 2024 02:50:12 -0700 (PDT)
+Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
+ [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
+ by smtp.gmail.com with ESMTPSA id
+ l12-20020a1709062a8c00b00a45f39b2d16sm4043630eje.200.2024.03.26.02.50.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 26 Mar 2024 02:50:11 -0700 (PDT)
+Date: Tue, 26 Mar 2024 10:50:11 +0100
+From: Andrew Jones <ajones@ventanamicro.com>
 To: Alexei Filippov <alexei.filippov@syntacore.com>
 Cc: dbarboza@ventanamicro.com, alistair.francis@wdc.com, 
- apatel@ventanamicro.com, bin.meng@windriver.com, liwei1518@gmail.com, 
- palmer@dabbelt.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- zhiwei_liu@linux.alibaba.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::231;
- envelope-from=alistair23@gmail.com; helo=mail-lj1-x231.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ apatel@ventanamicro.com, bin.meng@windriver.com, liwei1518@gmail.com,
+ palmer@dabbelt.com, 
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org, zhiwei_liu@linux.alibaba.com
+Subject: Re: [PATCH v2] target/riscv/kvm/kvm-cpu.c: kvm_riscv_handle_sbi()
+ fail with vendor-specific SBI
+Message-ID: <20240326-672b9d2fa4066ec883a9f037@orel>
+References: <b7fff1e9-f2b3-4a45-8966-1dbd76263457@ventanamicro.com>
+ <20240325130116.13194-1-alexei.filippov@syntacore.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240325130116.13194-1-alexei.filippov@syntacore.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::62f;
+ envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x62f.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -95,66 +100,71 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Mar 25, 2024 at 11:46=E2=80=AFPM Alexei Filippov
-<alexei.filippov@syntacore.com> wrote:
->
-> kvm_riscv_handle_sbi() may return not supported return code to not trigge=
-r
+On Mon, Mar 25, 2024 at 04:01:16PM +0300, Alexei Filippov wrote:
+> kvm_riscv_handle_sbi() may return not supported return code to not trigger
 > qemu abort with vendor-specific sbi.
->
+> 
 > Added SBI related return code's defines.
->
+> 
 > Signed-off-by: Alexei Filippov <alexei.filippov@syntacore.com>
 > Fixes: 4eb47125 ("target/riscv: Handle KVM_EXIT_RISCV_SBI exit")
 > Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-
-Alistair
-
 > ---
->
+> 
 > Changes since v1:
 >         -Add Fixes and Revied-by lines.
 >  target/riscv/kvm/kvm-cpu.c         |  5 +++--
 >  target/riscv/sbi_ecall_interface.h | 11 +++++++++++
 >  2 files changed, 14 insertions(+), 2 deletions(-)
->
+> 
 > diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
 > index 6a6c6cae80..a4f84ad950 100644
 > --- a/target/riscv/kvm/kvm-cpu.c
 > +++ b/target/riscv/kvm/kvm-cpu.c
-> @@ -1404,7 +1404,7 @@ static int kvm_riscv_handle_sbi(CPUState *cs, struc=
-t kvm_run *run)
->          if (ret =3D=3D sizeof(ch)) {
->              run->riscv_sbi.ret[0] =3D ch;
+> @@ -1404,7 +1404,7 @@ static int kvm_riscv_handle_sbi(CPUState *cs, struct kvm_run *run)
+>          if (ret == sizeof(ch)) {
+>              run->riscv_sbi.ret[0] = ch;
 >          } else {
-> -            run->riscv_sbi.ret[0] =3D -1;
-> +            run->riscv_sbi.ret[0] =3D SBI_ERR_FAILURE;
+> -            run->riscv_sbi.ret[0] = -1;
+> +            run->riscv_sbi.ret[0] = SBI_ERR_FAILURE;
 >          }
->          ret =3D 0;
+>          ret = 0;
 >          break;
-> @@ -1412,7 +1412,8 @@ static int kvm_riscv_handle_sbi(CPUState *cs, struc=
-t kvm_run *run)
+> @@ -1412,7 +1412,8 @@ static int kvm_riscv_handle_sbi(CPUState *cs, struct kvm_run *run)
 >          qemu_log_mask(LOG_UNIMP,
->                        "%s: un-handled SBI EXIT, specific reasons is %lu\=
-n",
+>                        "%s: un-handled SBI EXIT, specific reasons is %lu\n",
 >                        __func__, run->riscv_sbi.extension_id);
-> -        ret =3D -1;
-> +        run->riscv_sbi.ret[0] =3D SBI_ERR_NOT_SUPPORTED;
-> +        ret =3D 0;
+
+While changing this, can we also change this log to something like
+
+ "%s: Unhandled SBI exit with extension-id %lu\n", __func__, run->riscv_sbi.extension_id
+
+
+> -        ret = -1;
+> +        run->riscv_sbi.ret[0] = SBI_ERR_NOT_SUPPORTED;
+> +        ret = 0;
+
+We don't have any paths that set ret to anything other than zero now.
+Let's return zero at the bottom of the function instead. And the top
+of the function can then be cleaned up to
+
+ unsigned char ch;
+ int ret;
+
+ switch (run->riscv_sbi.extension_id) {
+
+
 >          break;
 >      }
 >      return ret;
-> diff --git a/target/riscv/sbi_ecall_interface.h b/target/riscv/sbi_ecall_=
-interface.h
+> diff --git a/target/riscv/sbi_ecall_interface.h b/target/riscv/sbi_ecall_interface.h
 > index 43899d08f6..0279e92a36 100644
 > --- a/target/riscv/sbi_ecall_interface.h
 > +++ b/target/riscv/sbi_ecall_interface.h
 > @@ -69,4 +69,15 @@
 >  #define SBI_EXT_VENDOR_END              0x09FFFFFF
 >  /* clang-format on */
->
+>  
 > +/* SBI return error codes */
 > +#define SBI_SUCCESS                  0
 > +#define SBI_ERR_FAILURE             -1
@@ -165,10 +175,16 @@ interface.h
 > +#define SBI_ERR_ALREADY_AVAILABLE   -6
 > +#define SBI_ERR_ALREADY_STARTED     -7
 > +#define SBI_ERR_ALREADY_STOPPED     -8
+
+v2 of the spec has SBI_ERR_NO_SHMEM as well.
+
+Thanks,
+drew
+
 > +
 >  #endif
-> --
+> -- 
 > 2.34.1
->
->
+> 
+> 
 
