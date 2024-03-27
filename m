@@ -4,65 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C45DC54E67
-	for <qemu-riscv@archiver.kernel.org>; Wed, 27 Mar 2024 11:20:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F834C54E67
+	for <qemu-riscv@archiver.kernel.org>; Wed, 27 Mar 2024 12:57:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rpRJq-0007ft-W0; Wed, 27 Mar 2024 07:19:47 -0400
+	id 1rpSqk-00063f-5o; Wed, 27 Mar 2024 08:57:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <conor@kernel.org>)
- id 1rpRJm-0007eT-UF; Wed, 27 Mar 2024 07:19:43 -0400
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ (Exim 4.90_1) (envelope-from <alexei.filippov@syntacore.com>)
+ id 1rpSqh-00060k-Ql; Wed, 27 Mar 2024 08:57:47 -0400
+Received: from mta-04.yadro.com ([89.207.88.248])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <conor@kernel.org>)
- id 1rpRJk-0005pk-UZ; Wed, 27 Mar 2024 07:19:42 -0400
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 5237161505;
- Wed, 27 Mar 2024 11:19:31 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8F6AFC43399;
- Wed, 27 Mar 2024 11:19:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1711538371;
- bh=hpYMPCMSZ0AeL/zkjNKXlOYlaTMtA4U1a/RTpBTUC0g=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=qz1EXefDCf5HKfFlUW1L3wgcSuYcr3HtxTgTfspHaBXI37JDDunyzmJvkat0Ebvjr
- l7U6eaZ2YwAjAHXBNmAgwZWmnQLsl8749oGFm8trhA2Ctyzzrr01FJboHLvOHZImoo
- C+TTHIxh7zxwV4oWNcSoDBpYzVd0xmy7qdgb6kltqO/02Jb3/oK2rYbCKOpFeFPHJI
- rFaAy7iLbOsnMuG47f/L+ZrTcEPz9A+yQx1Ocegle8WUXSZrMDXSFjiKXnlQHupd1e
- ot9DDPnhC9LFUxTady/YmOLP5OGY3WEVfHSDl9VQrg4jmkXmtKM3hSZzzE8EtuNy63
- H0WZd/6g8lAbw==
-Date: Wed, 27 Mar 2024 11:19:26 +0000
-From: Conor Dooley <conor@kernel.org>
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Christoph =?iso-8859-1?Q?M=FCllner?= <christoph.muellner@vrull.eu>,
- LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org,
- Alistair.Francis@wdc.com, palmer@dabbelt.com,
- bin.meng@windriver.com, liwei1518@gmail.com,
- dbarboza@ventanamicro.com, qemu-riscv@nongnu.org, bjorn@kernel.org,
- Philipp Tomsich <philipp.tomsich@vrull.eu>
-Subject: Re: [PATCH v2 2/2] target/riscv: Support xtheadmaee for thead-c906
-Message-ID: <20240327-overrun-outcast-795708a30e8c@spud>
-References: <20240204054228.651-1-zhiwei_liu@linux.alibaba.com>
- <20240204054228.651-3-zhiwei_liu@linux.alibaba.com>
- <CAKmqyKNGMjLg+JjJZAp+EsmfaWAyT7XiHZzBXZxeghS0hv6REg@mail.gmail.com>
- <CAEg0e7i6zaEhyfhRFKcTYjkCqRCzJ5eB+0EHUDVA6t-ypL78eg@mail.gmail.com>
- <CAKmqyKPgAQ4JaSNRmFfR-=w3daDkag-ORz0Ckn7r1JNmf8X2oA@mail.gmail.com>
+ (Exim 4.90_1) (envelope-from <alexei.filippov@syntacore.com>)
+ id 1rpSqf-0007Vg-Dj; Wed, 27 Mar 2024 08:57:47 -0400
+DKIM-Filter: OpenDKIM Filter v2.11.0 mta-04.yadro.com 09E2EC000E
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
+ s=mta-04; t=1711544261;
+ bh=igXJmAQBRIraB7SXsgsS6/LWmhtuqbDlP7Kfi3hiOhg=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=a/TpLrqhTwvq5S7a+fC/8MxDQU0UMC3MLsOr6j7DmukAOf6QGyjDQOeiznduPX/eb
+ 9GSS98vUxf068MOvndslhBZtLfFmwrTStvY48BAsP4ElrqCx9d6b7JXwhmKW9f5m6k
+ mK9PeIKFwq6ETNwYUFnYmBAg/0GYuFD0Ib30qBfOSuYOrKN/JwPDy3116bkXpu0Le8
+ dMV51tzbVnI8QEXI/XzFzWEL2LyiPmYSqYTSQe4XTlyEDVJ4+6qB2uuupj8GlB8Vl1
+ 8J0eDX8pT3ShIpEPe+Kcr9ueZPBi/3Jn1hSTVgAV3ibU79FruAk3f2KwX+XXgPiNGg
+ 4Xq63ztsEtAKg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
+ s=mta-03; t=1711544261;
+ bh=igXJmAQBRIraB7SXsgsS6/LWmhtuqbDlP7Kfi3hiOhg=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=UxIg30cK/PhdGXdGnev2pOE4YJMGMUE//4F2sE0LdeR/FjEgbRN82/DdisTDiCNDV
+ /Uq9K0vxO/rog7/9ex1o/gjxr0X9eLOcAmWYFOLR81xyzbkYumAypQjWr81Y2XwuzP
+ lVuu/RW7qpT+VqLCo4YIvkKpZvM/tV4ke4la1avrc3WRCqU4s2RbAa0SGAz9VBkCA1
+ 9pt7LFksQlh5nx4tnjTbskE1Hk2JpuCg98DVWmQRvFmm1NIx18aFPX85Bfxu/vj1l/
+ EqopWoYCwbVOGV1OzW5tKchqXXPWxxax5LwXOYE8vY5pSqodjjp+b4sWiadZAjUUvD
+ T/U1ihMJ8jARQ==
+From: Alexei Filippov <alexei.filippov@syntacore.com>
+To: <alistair23@gmail.com>
+CC: <alexei.filippov@syntacore.com>, <alistair.francis@wdc.com>,
+ <apatel@ventanamicro.com>, <bin.meng@windriver.com>,
+ <dbarboza@ventanamicro.com>, <liwei1518@gmail.com>, <palmer@dabbelt.com>,
+ <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>,
+ <zhiwei_liu@linux.alibaba.com>
+Subject: [PATCH v3] target/riscv/kvm/kvm-cpu.c: kvm_riscv_handle_sbi() fail
+ with vendor-specific SBI
+Date: Wed, 27 Mar 2024 15:57:32 +0300
+Message-ID: <20240327125732.11739-1-alexei.filippov@syntacore.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <CAKmqyKNkyxx9YV5ahb-VTO=4+mtu-1D2nMvyP6=-MpZ6KGXomw@mail.gmail.com>
+References: <CAKmqyKNkyxx9YV5ahb-VTO=4+mtu-1D2nMvyP6=-MpZ6KGXomw@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="OGEGKiDEjtufCwoP"
-Content-Disposition: inline
-In-Reply-To: <CAKmqyKPgAQ4JaSNRmFfR-=w3daDkag-ORz0Ckn7r1JNmf8X2oA@mail.gmail.com>
-Received-SPF: pass client-ip=139.178.84.217; envelope-from=conor@kernel.org;
- helo=dfw.source.kernel.org
-X-Spam_score_int: -70
-X-Spam_score: -7.1
-X-Spam_bar: -------
-X-Spam_report: (-7.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_HI=-5, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: T-EXCH-09.corp.yadro.com (172.17.11.59) To
+ T-EXCH-12.corp.yadro.com (172.17.11.143)
+Received-SPF: permerror client-ip=89.207.88.248;
+ envelope-from=alexei.filippov@syntacore.com; helo=mta-04.yadro.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ T_SPF_PERMERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -78,115 +81,86 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+kvm_riscv_handle_sbi() may return not supported return code to not trigger
+qemu abort with vendor-specific sbi.
 
---OGEGKiDEjtufCwoP
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Added SBI related return code's defines.
 
-Christoph linked here on his submission to Linux of a fix for this, so I
-am reviving this to leave a couple comments :)
+Signed-off-by: Alexei Filippov <alexei.filippov@syntacore.com>
+Fixes: 4eb47125 ("target/riscv: Handle KVM_EXIT_RISCV_SBI exit")
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
 
-On Thu, Feb 15, 2024 at 02:24:02PM +1000, Alistair Francis wrote:
-> On Mon, Feb 5, 2024 at 6:37=E2=80=AFPM Christoph M=C3=BCllner
-> <christoph.muellner@vrull.eu> wrote:
-> > On Mon, Feb 5, 2024 at 3:42=E2=80=AFAM Alistair Francis <alistair23@gma=
-il.com> wrote:
-> > > On Sun, Feb 4, 2024 at 3:44=E2=80=AFPM LIU Zhiwei <zhiwei_liu@linux.a=
-libaba.com> wrote:
+Changes since v2:
+        -Clear kvm_riscv_handle_sbi()
+        -Add SBI_ERR_NO_SHMEM return code's define
+ target/riscv/kvm/kvm-cpu.c         | 13 +++++--------
+ target/riscv/sbi_ecall_interface.h | 12 ++++++++++++
+ 2 files changed, 17 insertions(+), 8 deletions(-)
 
-> > > >              ppn =3D (pte & (target_ulong)PTE_PPN_MASK) >> PTE_PPN_=
-SHIFT;
-> > >
-> > > Unfortunately we won't be able to take this upstream. This is core
-> > > QEMU RISC-V code that is now being changed against the spec. I think
-> > > adding the CSR is fine, but we can't take this core change.
-> > >
-> > > A fix that works for everyone should be supporting the th_mxstatus
-> > > CSR, but don't support setting the TH_MXSTATUS_MAEE bit. That way
-> > > guests can detect that the bit isn't set and not use the reserved bits
-> > > in the PTE. From my understanding the extra PTE bits are related to
-> > > cache control in the hardware, which we don't need here
-> >
-> > Sounds good! Let me recap the overall plan:
-> > * QEMU does not emulate MAEE, but signals that MAEE is not available
-> > by setting TH_MXSTATUS_MAEE to 0.
->=20
-> Yep!
->=20
-> > * Consequence: The c906 emulation does not enable any page-base memory
-> > attribute mechanism.
->=20
-> Exactly
->=20
-> > * OpenSBI tests the TH_MXSTATUS_MAEE bit (M-mode only) and provides
-> > that information to user-space (e.g. DTB).
->=20
-> To the kernel, but yep!
->=20
-> > * The current Linux errata code will be enhanced to not assume MAEE
-> > for each core with T-Head vendor ID, but also query the MAEE bit and
-> > ensure it is set.
->=20
-> I feel like it should already do that :)
+diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+index 6a6c6cae80..844942d9ba 100644
+--- a/target/riscv/kvm/kvm-cpu.c
++++ b/target/riscv/kvm/kvm-cpu.c
+@@ -1392,7 +1392,6 @@ bool kvm_arch_stop_on_emulation_error(CPUState *cs)
+ 
+ static int kvm_riscv_handle_sbi(CPUState *cs, struct kvm_run *run)
+ {
+-    int ret = 0;
+     unsigned char ch;
+     switch (run->riscv_sbi.extension_id) {
+     case SBI_EXT_0_1_CONSOLE_PUTCHAR:
+@@ -1400,22 +1399,20 @@ static int kvm_riscv_handle_sbi(CPUState *cs, struct kvm_run *run)
+         qemu_chr_fe_write(serial_hd(0)->be, &ch, sizeof(ch));
+         break;
+     case SBI_EXT_0_1_CONSOLE_GETCHAR:
+-        ret = qemu_chr_fe_read_all(serial_hd(0)->be, &ch, sizeof(ch));
+-        if (ret == sizeof(ch)) {
++        if (qemu_chr_fe_read_all(serial_hd(0)->be, &ch, sizeof(ch)) == sizeof(ch)) {
+             run->riscv_sbi.ret[0] = ch;
+         } else {
+-            run->riscv_sbi.ret[0] = -1;
++            run->riscv_sbi.ret[0] = SBI_ERR_FAILURE;
+         }
+-        ret = 0;
+         break;
+     default:
+         qemu_log_mask(LOG_UNIMP,
+-                      "%s: un-handled SBI EXIT, specific reasons is %lu\n",
++                      "%s: Unhandled SBI exit with extension-id %lu\n",
+                       __func__, run->riscv_sbi.extension_id);
+-        ret = -1;
++        run->riscv_sbi.ret[0] = SBI_ERR_NOT_SUPPORTED;
+         break;
+     }
+-    return ret;
++    return 0;
+ }
+ 
+ int kvm_arch_handle_exit(CPUState *cs, struct kvm_run *run)
+diff --git a/target/riscv/sbi_ecall_interface.h b/target/riscv/sbi_ecall_interface.h
+index 43899d08f6..a2e21d9b8c 100644
+--- a/target/riscv/sbi_ecall_interface.h
++++ b/target/riscv/sbi_ecall_interface.h
+@@ -69,4 +69,16 @@
+ #define SBI_EXT_VENDOR_END              0x09FFFFFF
+ /* clang-format on */
+ 
++/* SBI return error codes */
++#define SBI_SUCCESS                  0
++#define SBI_ERR_FAILURE             -1
++#define SBI_ERR_NOT_SUPPORTED       -2
++#define SBI_ERR_INVALID_PARAM       -3
++#define SBI_ERR_DENIED              -4
++#define SBI_ERR_INVALID_ADDRESS     -5
++#define SBI_ERR_ALREADY_AVAILABLE   -6
++#define SBI_ERR_ALREADY_STARTED     -7
++#define SBI_ERR_ALREADY_STOPPED     -8
++#define SBI_ERR_NO_SHMEM            -9
++
+ #endif
+-- 
+2.34.1
 
-It doesn't quite do this right now. It only makes the assumption for
-CPUs where marchid and mvendorid are zero. The c908, and I think Guo Ren
-confirmed it will be the case going forward, sets these to non-zero
-values. We should have always required a dt property be set, rather than
-using m*id, but we can't go back on that for these devices. Going
-forward, if there are more CPUs that want to use this e.g. C908 in MAEE
-mode (it can do svpbmt too) I'm gonna require it is explicitly set in
-DT.
-
-> > * Booting on a QEMU c906 will not enable MAEE, but will still boot.
->=20
-> That's the hope
->=20
-> >
-> > We never had a complete MAEE implementation upstream, because that's no=
-t needed.
-> > But until recently we could mess with reserved bits how we want.
-> > Now that QEMU is more restrictive about reserved bits in the PTEs, we
-> > need to address this in the kernel.
-> >
-> > The downside is, that the kernel now sees a c906 CPU without MAEE and
-> > such a CPU does not exist.
->=20
-> Yeah, that is the downside. But in reality a CPU could exist that
-> doesn't allow seeing MAEE, so I don't think it's that insane.
-
-Aye, and the case of a new CPU disabling it but not setting m*id will be
-a pain.
-
-> > But that's fine, because this does not require extra code to handle thi=
-s case.
-> > Also, the additional check for the MAEE bit in the kernel errata
-> > probing code is likely needed anyway for future T-Head CPUs.
->=20
-> Exactly
-
-I don't really want to have extension detection side channels like this
-in Linux if it can be at all avoided, I'd rather get this information from
-DT or ACPI. The marchid =3D=3D mvendorid =3D=3D 0x0 case has a pretty high =
-chance
-of needing some special handling in the future though, so something
-targeting those cases when there's some demonstrable problem seems fair
-to me.
-
-Cheers,
-Conor.
-
---OGEGKiDEjtufCwoP
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZgQAvgAKCRB4tDGHoIJi
-0g6zAQDr2e63E2zIUHZChzpArReUVEUVK9tj42YPk1PtIt0J7QD9G9GvoPCzBD7v
-vJBNSplSRr02BZA2M485+RYt06EDDgE=
-=uras
------END PGP SIGNATURE-----
-
---OGEGKiDEjtufCwoP--
 
