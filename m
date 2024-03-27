@@ -4,96 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A1CCC54E67
-	for <qemu-riscv@archiver.kernel.org>; Wed, 27 Mar 2024 09:52:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 365D1C47DD9
+	for <qemu-riscv@archiver.kernel.org>; Wed, 27 Mar 2024 10:00:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rpPxW-0004Qn-O3; Wed, 27 Mar 2024 05:52:38 -0400
+	id 1rpQ5V-0000CK-7O; Wed, 27 Mar 2024 06:00:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rpPxU-00048U-FO
- for qemu-riscv@nongnu.org; Wed, 27 Mar 2024 05:52:36 -0400
-Received: from mail-ej1-x62a.google.com ([2a00:1450:4864:20::62a])
+ (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
+ id 1rpQ5O-0008RI-2G
+ for qemu-riscv@nongnu.org; Wed, 27 Mar 2024 06:00:46 -0400
+Received: from mail-ej1-x629.google.com ([2a00:1450:4864:20::629])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rpPxO-0006nq-MH
- for qemu-riscv@nongnu.org; Wed, 27 Mar 2024 05:52:32 -0400
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-a466a27d30aso799557766b.1
- for <qemu-riscv@nongnu.org>; Wed, 27 Mar 2024 02:52:30 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
+ id 1rpQ5I-0000vQ-Gs
+ for qemu-riscv@nongnu.org; Wed, 27 Mar 2024 06:00:45 -0400
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-a4715d4c2cbso826885366b.1
+ for <qemu-riscv@nongnu.org>; Wed, 27 Mar 2024 03:00:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1711533148; x=1712137948; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PbL9DbUU/VwqkR1vuLb4yIgDr+6Vr1z3If7UjhII6YI=;
- b=oshKLjFLYApqxWaVs1GZ40igalfXY7g+8FwJhTvrmvj7zFS+DOyxqJicvcr9o741z+
- K/zMyEI2i3nB7tdgSKfOJ1jqs37eh6Vo8WrWp0lBBDtA3HGv6t3rFpZ7sfJ6xqamJ1tY
- BoOHNjhBIcji2bv/Xld3uIXlqs1YSTpDPMosq2RqhhY6BXTi+QfbVTJjlWFbQr+2nxnk
- hR9wwlthGTa3ClUIONVmMZAOb56ZJ7lb3c1W6V8V8yAEuIzOW+j8fr40p/CNE5Qfp6Tl
- e1XXaUUdSU/kG+xW+msvmT/MuO9JqpFtHC7GOzChFPLYy6fI7hy1qNb+/nutF5zUfEKg
- e6Ug==
+ d=vrull.eu; s=google; t=1711533638; x=1712138438; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=unvmvu9B6Vrmtygb3di4GTC7E2hLPG03yoE1C4AJVBI=;
+ b=N/KYZuylSZEqTGKTG91tPubss/u375CCT8SRyWNKXP6lZBRfHchSPfpJqwMe2MzXAq
+ dHg8rTo/8eKZukj0QPZqWzW5ou5ZgrK7rh3fCwUDDxaDkBmaffTfJyXXkVjfpoGbzskP
+ CQ+Zy0wePzumHrxVeEvS9ka1irgXJO8y1VaiI4Tls59Z26MRRs8BfUxoBA+snJv2Gq+u
+ v95pkQGPUWP2RZPPyJgccp05kfCMw+WmtSSepnZLds3d02pAcMGyvTJ+8JJPGTmvaUY9
+ byg/SwrkljlFdLX+5wq5QFOZIUgtJM/QiiCbQeJA6HYMvBBzLJ97KsRU0ZbxoAHKuFql
+ U2ng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711533148; x=1712137948;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=PbL9DbUU/VwqkR1vuLb4yIgDr+6Vr1z3If7UjhII6YI=;
- b=LkNEBasEr8idYel3oW8i8xprxq68TGhlTG6SKIM/zMqNxV0uJIeSNj5A3FBg+DoZwp
- J/PjbFWCMbq/UD8c7ZfzeR0RkMNJrAQqfrTnE6iBimr2ArYNjc2EdZlG3yiaLONoiBQO
- pcB1wUQ79mQ2IuURymmy5rQ9z1rYYwVC5ASKODObWl5mIe37vAvUV0i6RdescUWmzxBx
- 3WrIJTX8C9zohrjwgKOihC6dQ6wl3zGztKT+WmeOv9RgnOC9/bWpcng5E7rUo4VWP2UC
- m3tl8ua58bC9HPTa/G+/6p7+VUb+sX0t8NPB1mTqdzBs9HAQtauQPmFegt3CDx/MMv0P
- j/Bg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVUaEZz3tnGRJSD93qKppvqrwc8gzZFeXshHTS3zPVoF6GLu60Y4H4bcJrlpuUdVMkjg7ZlBXo0yBNvuvRdOGpCTg0SO1w=
-X-Gm-Message-State: AOJu0YwCIP1BMULGVHPbJ9QVYIkg2XoqiOuhNQL0a5CioIfqWiNRa52X
- KNsv1J8X62H/KV8e/0UkFAUqRlQH/xV8lSLy+LMxYEFUAmiCy30rVdIOnhA3Ehc=
-X-Google-Smtp-Source: AGHT+IHENMXsIFnTT5a83mXxlNnKwPuYtzGuM9g8eGgCcvz45Yt7Ah+ZxibRrsWIlpyfU45SyCMAFQ==
-X-Received: by 2002:a17:906:2998:b0:a49:dfe7:834f with SMTP id
- x24-20020a170906299800b00a49dfe7834fmr492717eje.59.1711533148505; 
- Wed, 27 Mar 2024 02:52:28 -0700 (PDT)
-Received: from m1x-phil.lan ([176.187.205.175])
- by smtp.gmail.com with ESMTPSA id
- e10-20020a170906504a00b00a4735e440e1sm5219836ejk.97.2024.03.27.02.52.26
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 27 Mar 2024 02:52:28 -0700 (PDT)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-To: Thomas Huth <thuth@redhat.com>, qemu-devel@nongnu.org,
- Igor Mammedov <imammedo@redhat.com>
-Cc: Paolo Bonzini <pbonzini@redhat.com>, devel@lists.libvirt.org,
- Zhao Liu <zhao1.liu@intel.com>, Gerd Hoffmann <kraxel@redhat.com>,
- "Michael S. Tsirkin" <mst@redhat.com>, Ani Sinha <anisinha@redhat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Peter Maydell <peter.maydell@linaro.org>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Eduardo Habkost <eduardo@habkost.net>, Song Gao <gaosong@loongson.cn>,
- Palmer Dabbelt <palmer@dabbelt.com>,
+ d=1e100.net; s=20230601; t=1711533638; x=1712138438;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=unvmvu9B6Vrmtygb3di4GTC7E2hLPG03yoE1C4AJVBI=;
+ b=D1tskI2Zm3u5t/OlvAMZD/TBWCYCqTbX4cMwSeHSKlNf7p4CZeyHagBAmdsd1QcKGh
+ d9yZSEGCYHCRdBpxu7t5O97VmrcEAl+JTS773WgiFTmy6/ESZo+RKCbGl23BqfaHXoq3
+ A+MmDhMOLiK5ScMOHukAQOY8+sjDMMeOoihuRU8vQsRJBCdoB448tzxU0TOIjVF7ydAn
+ 8WOoMnOAbpZW0Aur92Bbelz2ELTcO4ymgzAq0ugUFUhp2zyTQ7BR5siGYzilABQJi0ZW
+ xFADceW29ATnPkDrqa58XXzbIqGjZBcRXRxqxP7mJAHfBvy1cfagdhYOTb3rBjQVG5SQ
+ GsKw==
+X-Gm-Message-State: AOJu0YwOwt7zNDI5PEBV34MnWbhg+WsTgyQQPdm9zwnUxY1yUcgFM0fM
+ D6Y7UiIGYe+y6+PUDOUO1nLnYRDjPUfAxdeANS85JOn+ZNXoTYE6N8Wa0sh8uKDTSRp8bUu2R5H
+ 8XB4=
+X-Google-Smtp-Source: AGHT+IFcC+xfeZlZ9H0mOJx5HI4hgpPLr6qVM3RlRVmV5iCC0LiljRWB+mY0eaZKiODkLQmDKnIMtA==
+X-Received: by 2002:a17:906:3797:b0:a46:967b:7c94 with SMTP id
+ n23-20020a170906379700b00a46967b7c94mr2605700ejc.18.1711533637763; 
+ Wed, 27 Mar 2024 03:00:37 -0700 (PDT)
+Received: from antares.fritz.box (62-178-148-172.cable.dynamic.surfer.at.
+ [62.178.148.172]) by smtp.gmail.com with ESMTPSA id
+ n19-20020a170906119300b00a4660b63502sm5277061eja.12.2024.03.27.03.00.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 27 Mar 2024 03:00:37 -0700 (PDT)
+From: =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>
+To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-arm@nongnu.org,
- qemu-riscv@nongnu.org
-Subject: [PATCH-for-9.1 v2 10/21] hw/smbios: Remove 'uuid_encoded' argument
- from smbios_set_defaults()
-Date: Wed, 27 Mar 2024 10:51:12 +0100
-Message-ID: <20240327095124.73639-11-philmd@linaro.org>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20240327095124.73639-1-philmd@linaro.org>
-References: <20240327095124.73639-1-philmd@linaro.org>
+ Bin Meng <bin.meng@windriver.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Cooper Qu <cooper.qu@linux.alibaba.com>,
+ Zhiwei Liu <zhiwei_liu@linux.alibaba.com>,
+ Huang Tao <eric.huang@linux.alibaba.com>
+Cc: =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH] riscv: thead: Add th.mxstatus CSR emulation
+Date: Wed, 27 Mar 2024 11:00:34 +0100
+Message-ID: <20240327100034.3636610-1-christoph.muellner@vrull.eu>
+X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::62a;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x62a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::629;
+ envelope-from=christoph.muellner@vrull.eu; helo=mail-ej1-x629.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -109,112 +102,151 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-'uuid_encoded' is always NULL, remove it.
+The th.mxstatus CSR can be used to identify available custom extension
+on T-Head CPUs. The CSR is documented here:
+  https://github.com/T-head-Semi/thead-extension-spec/pull/45
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+An important property of this patch is, that the th.mxstatus MAEE field
+is not set (indicating that XTheadMaee is not available).
+XTheadMaee is a memory attribute extension (similar to Svpbmt) which is
+implemented in many T-Head CPUs (C906, C910, etc.) and utilizes bits
+in PTEs that are marked as reserved. QEMU maintainers prefer to not
+implement XTheadMaee, so we need give kernels a mechanism to identify
+if XTheadMaee is available in a system or not. And this patch introduces
+this mechanism in QEMU in a way that's compatible with real HW
+(i.e., probing the th.mxstatus.MAEE bit).
+
+Further context can be found on the list:
+https://lists.gnu.org/archive/html/qemu-devel/2024-02/msg00775.html
+
+Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
 ---
- include/hw/firmware/smbios.h | 3 +--
- hw/arm/virt.c                | 3 +--
- hw/i386/fw_cfg.c             | 2 +-
- hw/loongarch/virt.c          | 2 +-
- hw/riscv/virt.c              | 2 +-
- hw/smbios/smbios.c           | 6 ++----
- 6 files changed, 7 insertions(+), 11 deletions(-)
+ target/riscv/cpu.c       |  1 +
+ target/riscv/cpu.h       |  3 ++
+ target/riscv/meson.build |  1 +
+ target/riscv/th_csr.c    | 76 ++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 81 insertions(+)
+ create mode 100644 target/riscv/th_csr.c
 
-diff --git a/include/hw/firmware/smbios.h b/include/hw/firmware/smbios.h
-index 8d3fb2fb3b..f066ab7262 100644
---- a/include/hw/firmware/smbios.h
-+++ b/include/hw/firmware/smbios.h
-@@ -331,8 +331,7 @@ void smbios_add_usr_blob_size(size_t size);
- void smbios_entry_add(QemuOpts *opts, Error **errp);
- void smbios_set_cpuid(uint32_t version, uint32_t features);
- void smbios_set_defaults(const char *manufacturer, const char *product,
--                         const char *version,
--                         bool uuid_encoded);
-+                         const char *version);
- void smbios_set_default_processor_family(uint16_t processor_family);
- uint8_t *smbios_get_table_legacy(size_t *length, Error **errp);
- void smbios_get_tables(MachineState *ms,
-diff --git a/hw/arm/virt.c b/hw/arm/virt.c
-index a9a913aead..a55ef916cb 100644
---- a/hw/arm/virt.c
-+++ b/hw/arm/virt.c
-@@ -1650,8 +1650,7 @@ static void virt_build_smbios(VirtMachineState *vms)
-     }
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 36e3e5fdaf..b82ba95ae6 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -545,6 +545,7 @@ static void rv64_thead_c906_cpu_init(Object *obj)
+     cpu->cfg.mvendorid = THEAD_VENDOR_ID;
+ #ifndef CONFIG_USER_ONLY
+     set_satp_mode_max_supported(cpu, VM_1_10_SV39);
++    th_register_custom_csrs(cpu);
+ #endif
  
-     smbios_set_defaults("QEMU", product,
--                        vmc->smbios_old_sys_ver ? "1.0" : mc->name,
--                        true);
-+                        vmc->smbios_old_sys_ver ? "1.0" : mc->name);
+     /* inherited from parent obj via riscv_cpu_init() */
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 3b1a02b944..c9f8f06751 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -824,4 +824,7 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs);
+ uint8_t satp_mode_max_from_map(uint32_t map);
+ const char *satp_mode_str(uint8_t satp_mode, bool is_32_bit);
  
-     /* build the array of physical mem area from base_memmap */
-     mem_array.address = vms->memmap[VIRT_MEM].base;
-diff --git a/hw/i386/fw_cfg.c b/hw/i386/fw_cfg.c
-index f7c2501161..ecc4047a4b 100644
---- a/hw/i386/fw_cfg.c
-+++ b/hw/i386/fw_cfg.c
-@@ -63,7 +63,7 @@ void fw_cfg_build_smbios(PCMachineState *pcms, FWCfgState *fw_cfg,
- 
-     if (pcmc->smbios_defaults) {
-         /* These values are guest ABI, do not change */
--        smbios_set_defaults("QEMU", mc->desc, mc->name, true);
-+        smbios_set_defaults("QEMU", mc->desc, mc->name);
-     }
- 
-     /* tell smbios about cpuid version and features */
-diff --git a/hw/loongarch/virt.c b/hw/loongarch/virt.c
-index 441d764843..00d3005e54 100644
---- a/hw/loongarch/virt.c
-+++ b/hw/loongarch/virt.c
-@@ -355,7 +355,7 @@ static void virt_build_smbios(LoongArchMachineState *lams)
-         return;
-     }
- 
--    smbios_set_defaults("QEMU", product, mc->name, true);
-+    smbios_set_defaults("QEMU", product, mc->name);
- 
-     smbios_get_tables(ms, SMBIOS_ENTRY_POINT_TYPE_64,
-                       NULL, 0,
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index d171e74f7b..1ed9b0552e 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -1277,7 +1277,7 @@ static void virt_build_smbios(RISCVVirtState *s)
-         product = "KVM Virtual Machine";
-     }
- 
--    smbios_set_defaults("QEMU", product, mc->name, true);
-+    smbios_set_defaults("QEMU", product, mc->name);
- 
-     if (riscv_is_32bit(&s->soc[0])) {
-         smbios_set_default_processor_family(0x200);
-diff --git a/hw/smbios/smbios.c b/hw/smbios/smbios.c
-index eed5787b15..8261eb716f 100644
---- a/hw/smbios/smbios.c
-+++ b/hw/smbios/smbios.c
-@@ -30,7 +30,7 @@
- #include "hw/pci/pci_device.h"
- #include "smbios_build.h"
- 
--static bool smbios_uuid_encoded = true;
-+static const bool smbios_uuid_encoded = true;
- /*
-  * SMBIOS tables provided by user with '-smbios file=<foo>' option
-  */
-@@ -1017,11 +1017,9 @@ void smbios_set_default_processor_family(uint16_t processor_family)
- }
- 
- void smbios_set_defaults(const char *manufacturer, const char *product,
--                         const char *version,
--                         bool uuid_encoded)
-+                         const char *version)
- {
-     smbios_have_defaults = true;
--    smbios_uuid_encoded = uuid_encoded;
- 
-     SMBIOS_SET_DEFAULT(smbios_type1.manufacturer, manufacturer);
-     SMBIOS_SET_DEFAULT(smbios_type1.product, product);
++/* Implemented in th_csr.c */
++void th_register_custom_csrs(RISCVCPU *cpu);
++
+ #endif /* RISCV_CPU_H */
+diff --git a/target/riscv/meson.build b/target/riscv/meson.build
+index a5e0734e7f..a4bd61e52a 100644
+--- a/target/riscv/meson.build
++++ b/target/riscv/meson.build
+@@ -33,6 +33,7 @@ riscv_system_ss.add(files(
+   'monitor.c',
+   'machine.c',
+   'pmu.c',
++  'th_csr.c',
+   'time_helper.c',
+   'riscv-qmp-cmds.c',
+ ))
+diff --git a/target/riscv/th_csr.c b/target/riscv/th_csr.c
+new file mode 100644
+index 0000000000..7fbcf88b5b
+--- /dev/null
++++ b/target/riscv/th_csr.c
+@@ -0,0 +1,76 @@
++/*
++ * T-Head-specific CSRs.
++ *
++ * Copyright (c) 2024 VRULL GmbH
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#include "qemu/osdep.h"
++#include "cpu.h"
++#include "cpu_vendorid.h"
++
++#define CSR_TH_MXSTATUS 0x7c0
++
++/* TH_MXSTATUS bits */
++#define TH_MXSTATUS_UCME        BIT(16)
++#define TH_MXSTATUS_MAEE        BIT(21)
++#define TH_MXSTATUS_THEADISAEE  BIT(22)
++
++typedef struct {
++    int csrno;
++    int (*insertion_test)(RISCVCPU *cpu);
++    riscv_csr_operations csr_ops;
++} riscv_csr;
++
++static RISCVException m_mode(CPURISCVState *env, int csrno)
++{
++    if (env->debugger)
++        return RISCV_EXCP_NONE;
++    if (env->priv != PRV_M)
++        return RISCV_EXCP_ILLEGAL_INST;
++    return RISCV_EXCP_NONE;
++}
++
++static int test_thead_mvendorid(RISCVCPU *cpu)
++{
++    if (cpu->cfg.mvendorid != THEAD_VENDOR_ID)
++        return -1;
++    return 0;
++}
++
++static RISCVException read_th_mxstatus(CPURISCVState *env, int csrno,
++                                       target_ulong *val)
++{
++    /* We don't set MAEE here, because QEMU does not implement MAEE. */
++    *val = TH_MXSTATUS_UCME | TH_MXSTATUS_THEADISAEE;
++    return RISCV_EXCP_NONE;
++}
++
++static riscv_csr th_csr_list[] = {
++    {
++        .csrno = CSR_TH_MXSTATUS,
++        .insertion_test = test_thead_mvendorid,
++        .csr_ops = { "th.mxstatus", m_mode, read_th_mxstatus }
++    }
++};
++
++void th_register_custom_csrs(RISCVCPU *cpu)
++{
++    for (size_t i = 0; i < ARRAY_SIZE(th_csr_list); i++) {
++        int csrno = th_csr_list[i].csrno;
++        riscv_csr_operations *csr_ops = &th_csr_list[i].csr_ops;
++        if (!th_csr_list[i].insertion_test(cpu))
++            riscv_set_csr_ops(csrno, csr_ops);
++    }
++}
 -- 
-2.41.0
+2.44.0
 
 
