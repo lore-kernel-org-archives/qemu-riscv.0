@@ -4,84 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D0B6C54E67
-	for <qemu-riscv@archiver.kernel.org>; Thu, 28 Mar 2024 02:25:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64738C54E67
+	for <qemu-riscv@archiver.kernel.org>; Thu, 28 Mar 2024 14:25:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rpfQx-0005Ih-6f; Wed, 27 Mar 2024 22:24:03 -0400
+	id 1rpqgl-00084y-DJ; Thu, 28 Mar 2024 10:25:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
- id 1rpfQv-0005IE-Id
- for qemu-riscv@nongnu.org; Wed, 27 Mar 2024 22:24:01 -0400
-Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
+ (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
+ id 1rpqgg-00084I-WE
+ for qemu-riscv@nongnu.org; Thu, 28 Mar 2024 10:25:03 -0400
+Received: from mail-pj1-x1036.google.com ([2607:f8b0:4864:20::1036])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
- id 1rpfQt-0007le-PT
- for qemu-riscv@nongnu.org; Wed, 27 Mar 2024 22:24:01 -0400
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-1dee5ef2a7bso3996845ad.1
- for <qemu-riscv@nongnu.org>; Wed, 27 Mar 2024 19:23:59 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
+ id 1rpqgf-0008Qd-43
+ for qemu-riscv@nongnu.org; Thu, 28 Mar 2024 10:25:02 -0400
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-29c7512e3b8so843773a91.1
+ for <qemu-riscv@nongnu.org>; Thu, 28 Mar 2024 07:25:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1711592638; x=1712197438; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=vrull.eu; s=google; t=1711635899; x=1712240699; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tF2OlAR3EBMx1Df6LSEev281Y2uuwVlXzu3oKih88BI=;
- b=CiBp5Bo7JncLol4cj4ygq0M+AFSp0FrTdS0QfimaXCIvKGjzAHSHnCaejR61uJAZb8
- 2owCWDtyTOm7CKxoZmLn6/zguCz1JPtrb+K4XF3+UJvkRIdRlOYUJsH1MQXApecdWC5n
- lCE7UlslLJ03px+kNLI1YF1RVP5VfcrrpIFDUH44L0GWDwahms243j/O+OR9FyuLBVbk
- oFxtxe9zWuusAL1vLKAdwX0Crn/AL5aPD+zJOY9E5Oq9riyDlFViTVRqM7ahqUpCNAkd
- CECwwH3wct+ZCIY06kJH1/PoKKZh7lDQkl9En1vnsUywsGZZbL2b20ZgXyKa9VJILWXQ
- TKhg==
+ bh=4IRasTilP2oTqS/RMUvzxI7kIcw6mJ+Dh562x7zpG4w=;
+ b=JicMZkW5BWhX4fW1GGODRo9261lcXiSoEKF/N3Oj76i3rlZjcsHc1K0FS3YhyoOzkk
+ VpDgzmfv4iflFRO5iSiB2xJZAILl9m84nIzW37Q7ISiKIFaTDaTQpCAm1Rjad3qqLqF9
+ w4sS5IuzAryGpJ77iXu/RZhrtnQY51QqZptxyOsN13p+2VvYhOAqxzK0jLGDVfrHEapf
+ wsnzhe8tXIE5XiUdO7ByMimRRyfp/zRBADGbBh6yK8fjobSkKzyRyFRixSzKb+NP9+AS
+ +SL3DEQMtDUidGLxmGXCJTak03pG+BPUMyhPjkkQ44V0BbeTeXrSHnjFmrDyusJqMMBP
+ oonw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711592638; x=1712197438;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1711635899; x=1712240699;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=tF2OlAR3EBMx1Df6LSEev281Y2uuwVlXzu3oKih88BI=;
- b=fWCT4Fa3p3dqde1al2guNPip1wCgkmhxqT50FtdvVeP8igv5H4n+lfKTvCgyrD0ObT
- HYzvKAWIPoKjrtoh6VX/g5B8B5C3kTImcG3QBV90p6ijk0b7K3h8E1tx4dZYtDCwkgSQ
- /FISiW0PMTRpFAnnDqmIG7g9TjAPAnZ0HgHYDrLXAEOcJMij4jV4DfozgETecgBwR5BJ
- oMGOobDm4j4znyO/53uPuF0PWZOoyvrTvO1aiNl+Mx8EfoX40wn7K6PcKlncx01YZDKS
- dJ36/TgZNhp9BUkzbcx2s5T8m//HfA5zceNrrSVEzeI1MgVKNZY3SYnC+wxt748Rl6rC
- DcdQ==
+ bh=4IRasTilP2oTqS/RMUvzxI7kIcw6mJ+Dh562x7zpG4w=;
+ b=cKGhdFY107ykHbOFPvdzSBOuNdF8wM/CVAts5sPvRjuK8WxqyhVEAxJJXFz5r1On66
+ bELZQdyoUBLRuAKBTU5hg3qmwJwJyCKjo3bOi4Nr9UZNDIRsxd7Ozsxnwk1Sr26T36Z5
+ Aix6d+rGkCM8We2Y5anZ1HnJyV/Atvv4gh1aXXOCPz4fXPRIXegmB6aoKZJa4+U57cYi
+ pEf5chkn+cYNKgYWFIbjajhjD7sxUvyWxFV2y0Ijzf/lysPNO4C/yufFiG9KZHcI0bwV
+ FNNGUcyzHzyNFoR330FzyoGzT85QqnWuTyWG13tmAORTkt0Ahl6G9/zXmtChDBQ4iszh
+ R2Vw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXY66kDXnKqglG8iGvcNx1QWgSVko799enpnj4ktIjGz+s1eJ7ZrP1nDzUBkMkBkSGdQrEwjabgWqWkz+ivZVsvDO1/UZk=
-X-Gm-Message-State: AOJu0Yz7JK5P7Csl7EQSNkqqZpdAYEW7fSTdy9zofFJJRx3VfdZyOTYu
- VLJyR5POqWkQQE3AoeyW+BNt8hLEnfA5lJ7mV3Wzl6I7EqxrxsoT2Nf8sTnkATs=
-X-Google-Smtp-Source: AGHT+IGDdy2ggZTqskIbJ8nYyIIk8X2IXPA2mlJaibfkLs6Dfp54Xb6oEoy1mfVN2L7Dx/s/tudICw==
-X-Received: by 2002:a17:902:a3c4:b0:1dd:651d:cc47 with SMTP id
- q4-20020a170902a3c400b001dd651dcc47mr1298164plb.28.1711592638492; 
- Wed, 27 Mar 2024 19:23:58 -0700 (PDT)
-Received: from hsinchu16.internal.sifive.com
- (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
- by smtp.gmail.com with ESMTPSA id
- d9-20020a170903230900b001e14807c7dfsm247424plh.86.2024.03.27.19.23.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Mar 2024 19:23:58 -0700 (PDT)
-From: Jason Chien <jason.chien@sifive.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Jason Chien <jason.chien@sifive.com>, Frank Chang <frank.chang@sifive.com>,
- Max Chou <max.chou@sifive.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Andrew Jones <ajones@ventanamicro.com>
-Subject: [PATCH v3 2/3] target/riscv: Add support for Zve64x extension
-Date: Thu, 28 Mar 2024 10:23:11 +0800
-Message-ID: <20240328022343.6871-3-jason.chien@sifive.com>
-X-Mailer: git-send-email 2.43.2
-In-Reply-To: <20240328022343.6871-1-jason.chien@sifive.com>
-References: <20240328022343.6871-1-jason.chien@sifive.com>
+ AJvYcCU8VWAXnMnbYXX7Q2MT8jNZjo+/sHBCjWS+9o1aoiDGvJAQlN8eFnD+SqZ4ohw5XJkqoSUocJysUbTaGFexWRJA8Gj+7h0=
+X-Gm-Message-State: AOJu0YwcJvvxLs5owvc1zmA0yJYoSQ6iT/dFsDsFRD6vz3wBDOdwJZNO
+ +px2840KWAg9v2t/px5L5sfehPwyZq6wGZrGjGpGCy2aB7mSsRsgzKNEcfcwD5e7Snihttrp0hc
+ 4eiZEr6c0X4vg1tNd5Hc2G7s/f0GDLYhzD+OFVg==
+X-Google-Smtp-Source: AGHT+IGEKkXys88TdvdTAoCJXBJzfaAcn9iKKZiEN/4BDYsx/Jq1YLq1e2haflRN0iCScvWuyXLczzT0RwHFwQbzs5o=
+X-Received: by 2002:a17:90b:4f81:b0:29b:307a:d5ed with SMTP id
+ qe1-20020a17090b4f8100b0029b307ad5edmr2824257pjb.10.1711635898969; Thu, 28
+ Mar 2024 07:24:58 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
- envelope-from=jason.chien@sifive.com; helo=mail-pl1-x62f.google.com
+References: <20240204054228.651-1-zhiwei_liu@linux.alibaba.com>
+ <20240204054228.651-3-zhiwei_liu@linux.alibaba.com>
+ <CAKmqyKNGMjLg+JjJZAp+EsmfaWAyT7XiHZzBXZxeghS0hv6REg@mail.gmail.com>
+ <CAEg0e7i6zaEhyfhRFKcTYjkCqRCzJ5eB+0EHUDVA6t-ypL78eg@mail.gmail.com>
+ <CAKmqyKPgAQ4JaSNRmFfR-=w3daDkag-ORz0Ckn7r1JNmf8X2oA@mail.gmail.com>
+ <20240327-overrun-outcast-795708a30e8c@spud>
+ <CAKmqyKP8kE=BDv2NzLeU+B3WNMJyke41__yOdVVcwe7k=9wpwA@mail.gmail.com>
+In-Reply-To: <CAKmqyKP8kE=BDv2NzLeU+B3WNMJyke41__yOdVVcwe7k=9wpwA@mail.gmail.com>
+From: =?UTF-8?Q?Christoph_M=C3=BCllner?= <christoph.muellner@vrull.eu>
+Date: Thu, 28 Mar 2024 15:24:47 +0100
+Message-ID: <CAEg0e7g68Y1+26T=6iTcqfe3suXP0N3D5uyp87D+yJWuCE-1Rg@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] target/riscv: Support xtheadmaee for thead-c906
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Conor Dooley <conor@kernel.org>, LIU Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ qemu-devel@nongnu.org, Alistair.Francis@wdc.com, palmer@dabbelt.com, 
+ bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com, 
+ qemu-riscv@nongnu.org, bjorn@kernel.org, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
+ envelope-from=christoph.muellner@vrull.eu; helo=mail-pj1-x1036.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -104,97 +101,86 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add support for Zve64x extension. Enabling Zve64f enables Zve64x and
-enabling Zve64x enables Zve32x according to their dependency.
+On Thu, Mar 28, 2024 at 2:19=E2=80=AFAM Alistair Francis <alistair23@gmail.=
+com> wrote:
+>
+> On Wed, Mar 27, 2024 at 9:19=E2=80=AFPM Conor Dooley <conor@kernel.org> w=
+rote:
+> >
+> > Christoph linked here on his submission to Linux of a fix for this, so =
+I
+> > am reviving this to leave a couple comments :)
+> >
+> > On Thu, Feb 15, 2024 at 02:24:02PM +1000, Alistair Francis wrote:
+> > > On Mon, Feb 5, 2024 at 6:37=E2=80=AFPM Christoph M=C3=BCllner
+> > > <christoph.muellner@vrull.eu> wrote:
+> > > > On Mon, Feb 5, 2024 at 3:42=E2=80=AFAM Alistair Francis <alistair23=
+@gmail.com> wrote:
+> > > > > On Sun, Feb 4, 2024 at 3:44=E2=80=AFPM LIU Zhiwei <zhiwei_liu@lin=
+ux.alibaba.com> wrote:
+> >
+> > > > > >              ppn =3D (pte & (target_ulong)PTE_PPN_MASK) >> PTE_=
+PPN_SHIFT;
+> > > > >
+> > > > > Unfortunately we won't be able to take this upstream. This is cor=
+e
+> > > > > QEMU RISC-V code that is now being changed against the spec. I th=
+ink
+> > > > > adding the CSR is fine, but we can't take this core change.
+> > > > >
+> > > > > A fix that works for everyone should be supporting the th_mxstatu=
+s
+> > > > > CSR, but don't support setting the TH_MXSTATUS_MAEE bit. That way
+> > > > > guests can detect that the bit isn't set and not use the reserved=
+ bits
+> > > > > in the PTE. From my understanding the extra PTE bits are related =
+to
+> > > > > cache control in the hardware, which we don't need here
+> > > >
+> > > > Sounds good! Let me recap the overall plan:
+> > > > * QEMU does not emulate MAEE, but signals that MAEE is not availabl=
+e
+> > > > by setting TH_MXSTATUS_MAEE to 0.
+> > >
+> > > Yep!
+> > >
+> > > > * Consequence: The c906 emulation does not enable any page-base mem=
+ory
+> > > > attribute mechanism.
+> > >
+> > > Exactly
+> > >
+> > > > * OpenSBI tests the TH_MXSTATUS_MAEE bit (M-mode only) and provides
+> > > > that information to user-space (e.g. DTB).
+> > >
+> > > To the kernel, but yep!
+> > >
+> > > > * The current Linux errata code will be enhanced to not assume MAEE
+> > > > for each core with T-Head vendor ID, but also query the MAEE bit an=
+d
+> > > > ensure it is set.
+> > >
+> > > I feel like it should already do that :)
+> >
+> > It doesn't quite do this right now. It only makes the assumption for
+> > CPUs where marchid and mvendorid are zero. The c908, and I think Guo Re=
+n
+> > confirmed it will be the case going forward, sets these to non-zero
+> > values. We should have always required a dt property be set, rather tha=
+n
+> > using m*id, but we can't go back on that for these devices. Going
+> > forward, if there are more CPUs that want to use this e.g. C908 in MAEE
+> > mode (it can do svpbmt too) I'm gonna require it is explicitly set in
+>
+> A DT node that we don't set also works fine for us
 
-Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2107
-Signed-off-by: Jason Chien <jason.chien@sifive.com>
-Reviewed-by: Frank Chang <frank.chang@sifive.com>
-Reviewed-by: Max Chou <max.chou@sifive.com>
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- target/riscv/cpu.c         |  2 ++
- target/riscv/cpu_cfg.h     |  1 +
- target/riscv/tcg/tcg-cpu.c | 17 +++++++++++------
- 3 files changed, 14 insertions(+), 6 deletions(-)
+I would really like to do that, but given the page table is set up so
+early in the boot process
+probing via CSR is much easier to realize in the kernel than parsing the DT=
+.
+Therefore, I think th.sxstatus emulation + probing is the best way to
+move forward.
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 6bd8798bb5..18e1ae66f4 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -156,6 +156,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(zve32x, PRIV_VERSION_1_10_0, ext_zve32x),
-     ISA_EXT_DATA_ENTRY(zve64f, PRIV_VERSION_1_10_0, ext_zve64f),
-     ISA_EXT_DATA_ENTRY(zve64d, PRIV_VERSION_1_10_0, ext_zve64d),
-+    ISA_EXT_DATA_ENTRY(zve64x, PRIV_VERSION_1_10_0, ext_zve64x),
-     ISA_EXT_DATA_ENTRY(zvfbfmin, PRIV_VERSION_1_12_0, ext_zvfbfmin),
-     ISA_EXT_DATA_ENTRY(zvfbfwma, PRIV_VERSION_1_12_0, ext_zvfbfwma),
-     ISA_EXT_DATA_ENTRY(zvfh, PRIV_VERSION_1_12_0, ext_zvfh),
-@@ -1476,6 +1477,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
-     MULTI_EXT_CFG_BOOL("zve32x", ext_zve32x, false),
-     MULTI_EXT_CFG_BOOL("zve64f", ext_zve64f, false),
-     MULTI_EXT_CFG_BOOL("zve64d", ext_zve64d, false),
-+    MULTI_EXT_CFG_BOOL("zve64x", ext_zve64x, false),
-     MULTI_EXT_CFG_BOOL("zvfbfmin", ext_zvfbfmin, false),
-     MULTI_EXT_CFG_BOOL("zvfbfwma", ext_zvfbfwma, false),
-     MULTI_EXT_CFG_BOOL("zvfh", ext_zvfh, false),
-diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-index dce49050c0..e1e4f32698 100644
---- a/target/riscv/cpu_cfg.h
-+++ b/target/riscv/cpu_cfg.h
-@@ -94,6 +94,7 @@ struct RISCVCPUConfig {
-     bool ext_zve32x;
-     bool ext_zve64f;
-     bool ext_zve64d;
-+    bool ext_zve64x;
-     bool ext_zvbb;
-     bool ext_zvbc;
-     bool ext_zvkb;
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index ff0d485e7f..4ebebebe09 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -498,17 +498,22 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
- 
-     /* The Zve64d extension depends on the Zve64f extension */
-     if (cpu->cfg.ext_zve64d) {
-+        if (!riscv_has_ext(env, RVD)) {
-+            error_setg(errp, "Zve64d/V extensions require D extension");
-+            return;
-+        }
-         cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zve64f), true);
-     }
- 
--    /* The Zve64f extension depends on the Zve32f extension */
-+    /* The Zve64f extension depends on the Zve64x and Zve32f extensions */
-     if (cpu->cfg.ext_zve64f) {
-+        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zve64x), true);
-         cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zve32f), true);
-     }
- 
--    if (cpu->cfg.ext_zve64d && !riscv_has_ext(env, RVD)) {
--        error_setg(errp, "Zve64d/V extensions require D extension");
--        return;
-+    /* The Zve64x extension depends on the Zve32x extension */
-+    if (cpu->cfg.ext_zve64x) {
-+        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zve32x), true);
-     }
- 
-     /* The Zve32f extension depends on the Zve32x extension */
-@@ -670,10 +675,10 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
-         return;
-     }
- 
--    if ((cpu->cfg.ext_zvbc || cpu->cfg.ext_zvknhb) && !cpu->cfg.ext_zve64f) {
-+    if ((cpu->cfg.ext_zvbc || cpu->cfg.ext_zvknhb) && !cpu->cfg.ext_zve64x) {
-         error_setg(
-             errp,
--            "Zvbc and Zvknhb extensions require V or Zve64{f,d} extensions");
-+            "Zvbc and Zvknhb extensions require V or Zve64x extensions");
-         return;
-     }
- 
--- 
-2.43.2
-
+Thanks,
+Christoph
 
