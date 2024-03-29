@@ -4,85 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D236CD11DD
-	for <qemu-riscv@archiver.kernel.org>; Fri, 29 Mar 2024 12:04:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9E28C6FD1F
+	for <qemu-riscv@archiver.kernel.org>; Fri, 29 Mar 2024 13:04:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rqAyK-0005GA-Qg; Fri, 29 Mar 2024 08:04:36 -0400
+	id 1rqBtl-0006Ud-J5; Fri, 29 Mar 2024 09:03:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1rqAyJ-0005Fs-6v
- for qemu-riscv@nongnu.org; Fri, 29 Mar 2024 08:04:35 -0400
-Received: from mail-lf1-x134.google.com ([2a00:1450:4864:20::134])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rqBtj-0006Sg-C0
+ for qemu-riscv@nongnu.org; Fri, 29 Mar 2024 09:03:55 -0400
+Received: from mail-ed1-x52b.google.com ([2a00:1450:4864:20::52b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1rqAyH-00017a-8P
- for qemu-riscv@nongnu.org; Fri, 29 Mar 2024 08:04:34 -0400
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-513e25afabaso2074484e87.2
- for <qemu-riscv@nongnu.org>; Fri, 29 Mar 2024 05:04:32 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rqBth-0004gY-0m
+ for qemu-riscv@nongnu.org; Fri, 29 Mar 2024 09:03:55 -0400
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-56899d9bf52so2556929a12.2
+ for <qemu-riscv@nongnu.org>; Fri, 29 Mar 2024 06:03:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=vrull.eu; s=google; t=1711713871; x=1712318671; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=gLXdedQiSpcjHV3+nBK5vnPRBrkLCL5A4dg1stDDZ/0=;
- b=RQP9Smsq+oWXB+cy5tC2WJ/xb54GdIv4ulqtGge3UHZH9WWjWnS9KLfZqhCufwjeLL
- ipcOjkM74GgNcIktNJSr2aZw20SZ+skiC+9p8S+li1IkI38554RsBdAbrj1z6D9qORyG
- 5ow5kIRi28IEIiHbhFZoPLwZinMy/Ei0G0IHHQ5pa6qc3MoyIQfviIEvXKqykvXJLCQP
- MOEy6a1/hUS0CRBUv60gQxjqvlUenthILkWTorrmmcpxRlAgnC/tE22RzHZSI4+yJtSO
- W/IKC0pTkJwUZtdGe1hvzAcTOwJID0Azyoz9impiRlfDClX6elMt9PXj0c1d3D6t7kej
- IRAg==
+ d=linaro.org; s=google; t=1711717431; x=1712322231; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=fF0AEMcN53T8zLpULJXCYH56leqwh2GeC0VdcdisnsI=;
+ b=pb9DKbq4lUeVCptzYpIly5E5LB0jA7ygK+hB1HNIkleyS3POwCcuSXm5WPN4aMSfZ3
+ 2rQuBGvRLF/BKAmRXLxQ7oLoWs9ji7KM9BQV6Xxgk8TbWOe7q9P4PuK4pli4lwvfaMr/
+ cemepGeMd/jn4QU4eQYKMsbS9vEYAVqLQSPiWoYkf9K2Hosa4akGOwKQaLJFZZFiF0mj
+ z+e7TWVqU7n0PGNwGOTBDffWMVnJU0SnLOPXlz0PAFs3D+/GTbQmvKwFPJVHUvP4oPSP
+ bsdwVFXY4KoBsWy8RON4LHEx8TKv2dguWQT7MIKLAyjXUIz9AsPntCIIieJ/bJ8a17XZ
+ q0Uw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711713871; x=1712318671;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=gLXdedQiSpcjHV3+nBK5vnPRBrkLCL5A4dg1stDDZ/0=;
- b=FcNZemQRqGFPhdVAD5OQkd/dbPH8x233MtHv9O12o19grix9dTaU2dtdsb3B2KvCNo
- OL1T2l48vt6xvOI2l/iS5AUWnF/1ULAJMuJh7ilXWW0rjRhTZURouh/YyiF/4q2nmnda
- oFJqICx57XQyxxRz1nQWinzNt3F8IZ9ZgRgGjYrQjPN5nSw/wXIMK5lUtn+fMrPecmbm
- QY7mCJJxyujvgqtGbf57J6HwJmO72aPBSmmRp/3CW5dFPLf0dmweQf2IktCAj8ME1cP+
- w0l4DRomdmiy3w2I22ZS7mTt/v5HMxfdLJSW38p0YjUjeJ5Ra0WqwR3kdAUNY9FIH7qn
- Bo7g==
-X-Gm-Message-State: AOJu0YxQMyb/HDHKa7iLj+PCGzyMQN6Ub9YjMSeFsXx16Qdc/oxKAMQo
- lrm2y+vjDUzWnxFdz2r8WhPqAGeTBYU+bS3xAP3e41MGSf2fEZE4AENz2zqO7/xyZ1FRi6/Rsfv
- HoTM=
-X-Google-Smtp-Source: AGHT+IHaBXu/DmwdMbwLOwpqt/MVeDWcGDps3bNd5LALyYf1g8VQ8C0I9BAGOkmVvg+KCrvrEd/NPw==
-X-Received: by 2002:ac2:54ae:0:b0:513:cb74:9ffe with SMTP id
- w14-20020ac254ae000000b00513cb749ffemr1405456lfk.50.1711713870549; 
- Fri, 29 Mar 2024 05:04:30 -0700 (PDT)
-Received: from antares.fritz.box (62-178-148-172.cable.dynamic.surfer.at.
- [62.178.148.172]) by smtp.gmail.com with ESMTPSA id
- rv4-20020a17090710c400b00a46cffe6d06sm1860870ejb.42.2024.03.29.05.04.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 29 Mar 2024 05:04:29 -0700 (PDT)
-From: =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>
-To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Cooper Qu <cooper.qu@linux.alibaba.com>,
- Zhiwei Liu <zhiwei_liu@linux.alibaba.com>,
- Huang Tao <eric.huang@linux.alibaba.com>, Conor Dooley <conor@kernel.org>,
- Andrew Jones <ajones@ventanamicro.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Vivian Wang <uwu@dram.page>, Qingfang Deng <dqfext@gmail.com>,
- Alexandre Ghiti <alex@ghiti.fr>
-Cc: =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>,
- Weiwei Li <liwei1518@gmail.com>
-Subject: [PATCH v2] riscv: thead: Add th.sxstatus CSR emulation
-Date: Fri, 29 Mar 2024 13:04:27 +0100
-Message-ID: <20240329120427.684677-1-christoph.muellner@vrull.eu>
-X-Mailer: git-send-email 2.44.0
+ d=1e100.net; s=20230601; t=1711717431; x=1712322231;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=fF0AEMcN53T8zLpULJXCYH56leqwh2GeC0VdcdisnsI=;
+ b=VSHO0OVpcq/OVCW2orPdpaYJUqjv7/ilzgvl1mFZS2+FbjkCo2OGSuV7DLmmPfBGUN
+ et4QdvMUo+0mmQQwLasD2m+1NwAoa2hTHcUgLE7Dtr2N0m6C1zbO5pRq8ifi/EJ1n3RU
+ g3DjPfHu4hn4L86JHcnsFLsIkcR1DPIpoHT/ZxFZQbkwX0V5RBiSFflNRVlb+k0oDoXE
+ FlVjtQAEEY6R3NPqM/p5MgsbhsjWDk0z+yc58EWsvwJrJmsIKyynScnp+fOvWiw/Rw0I
+ X4Y7xjmFzIpwk4ArRMLZr2SD1JvYocjKBhvKZKk0lii+dwMLztj/S9jSk3Hz7Nr+G6Ko
+ rN6g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWKqZ59tMD46tLjC8yaAE7pybUdrPIti/+5mZxQ73UTzxL9y+sMFcgDFgOuHUzm86cOd5GrDTjHdgCBrKqfdu1pmt4JN9I=
+X-Gm-Message-State: AOJu0YyqkJloCmOUjmpK0WKIT08S7bMxuaqZxt0nxPXOK3iTVjkSbUKl
+ TZfY6e5KlrmH1jimuu+yDoYS+WrYkij1kIse+lkH2JppfRg8yyKX+fYZUvkQHhU=
+X-Google-Smtp-Source: AGHT+IGusDVQ3jg0+CI+1zek0hD2iAfaouUn42nWLXeYMVkdB3NDh3jjiz+sA4UW771dJxUwH2T1wg==
+X-Received: by 2002:a17:906:3605:b0:a46:fb17:8871 with SMTP id
+ q5-20020a170906360500b00a46fb178871mr1634695ejb.76.1711717431337; 
+ Fri, 29 Mar 2024 06:03:51 -0700 (PDT)
+Received: from [192.168.69.100] (uni14-h01-176-184-39-242.dsl.sta.abo.bbox.fr.
+ [176.184.39.242]) by smtp.gmail.com with ESMTPSA id
+ o1-20020a1709064f8100b00a46baba1a0asm1914163eju.100.2024.03.29.06.03.49
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 29 Mar 2024 06:03:50 -0700 (PDT)
+Message-ID: <96bcb673-18dd-49bc-8bcb-281c7409b410@linaro.org>
+Date: Fri, 29 Mar 2024 14:03:48 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH-for-9.1 14/21] system: Introduce QMP
+ generic_query_cpu_definitions()
+To: Markus Armbruster <armbru@redhat.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ Anton Johansson <anjo@rev.ng>, qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
+ =?UTF-8?Q?Daniel_P=2EBerrang=C3=A9?= <berrange@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
+ Claudio Fontana <cfontana@suse.de>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
+ Zhao Liu <zhao1.liu@intel.com>, qemu-arm@nongnu.org,
+ Thomas Huth <thuth@redhat.com>, Michael Roth <michael.roth@amd.com>
+References: <20240315130910.15750-1-philmd@linaro.org>
+ <20240315130910.15750-15-philmd@linaro.org> <87v859m89y.fsf@pond.sub.org>
+Content-Language: en-US
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <87v859m89y.fsf@pond.sub.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::134;
- envelope-from=christoph.muellner@vrull.eu; helo=mail-lf1-x134.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52b;
+ envelope-from=philmd@linaro.org; helo=mail-ed1-x52b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -105,153 +107,148 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The th.sxstatus CSR can be used to identify available custom extension
-on T-Head CPUs. The CSR is documented here:
-  https://github.com/T-head-Semi/thead-extension-spec/pull/46
+Hi Markus,
 
-An important property of this patch is, that the th.sxstatus MAEE field
-is not set (indicating that XTheadMaee is not available).
-XTheadMaee is a memory attribute extension (similar to Svpbmt) which is
-implemented in many T-Head CPUs (C906, C910, etc.) and utilizes bits
-in PTEs that are marked as reserved. QEMU maintainers prefer to not
-implement XTheadMaee, so we need give kernels a mechanism to identify
-if XTheadMaee is available in a system or not. And this patch introduces
-this mechanism in QEMU in a way that's compatible with real HW
-(i.e., probing the th.sxstatus.MAEE bit).
+On 26/3/24 14:28, Markus Armbruster wrote:
+> Philippe Mathieu-Daudé <philmd@linaro.org> writes:
+> 
+>> Each target use a common template for qmp_query_cpu_definitions().
+>>
+>> Extract it as generic_query_cpu_definitions(), keeping the
+>> target-specific implementations as the following SysemuCPUOps
+>> handlers:
+>>   - cpu_list_compare()
+>>   - add_definition()
+>>   - add_alias_definitions()
+>>
+>> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+>> ---
+>>   MAINTAINERS                           |  2 +
+>>   include/hw/core/sysemu-cpu-ops.h      | 14 ++++++
+>>   include/qapi/commands-target-compat.h | 14 ++++++
+>>   system/cpu-qmp-cmds.c                 | 71 +++++++++++++++++++++++++++
+>>   system/meson.build                    |  1 +
+>>   5 files changed, 102 insertions(+)
+>>   create mode 100644 include/qapi/commands-target-compat.h
+>>   create mode 100644 system/cpu-qmp-cmds.c
 
-Further context can be found on the list:
-https://lists.gnu.org/archive/html/qemu-devel/2024-02/msg00775.html
 
-Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
----
- target/riscv/cpu.c       |  1 +
- target/riscv/cpu.h       |  3 ++
- target/riscv/meson.build |  1 +
- target/riscv/th_csr.c    | 78 ++++++++++++++++++++++++++++++++++++++++
- 4 files changed, 83 insertions(+)
- create mode 100644 target/riscv/th_csr.c
+>> diff --git a/system/cpu-qmp-cmds.c b/system/cpu-qmp-cmds.c
+>> new file mode 100644
+>> index 0000000000..daeb131159
+>> --- /dev/null
+>> +++ b/system/cpu-qmp-cmds.c
+>> @@ -0,0 +1,71 @@
+>> +/*
+>> + * QAPI helpers for target specific QMP commands
+>> + *
+>> + * SPDX-FileCopyrightText: 2024 Linaro Ltd.
+>> + * SPDX-License-Identifier: GPL-2.0-or-later
+>> + */
+>> +
+>> +#include "qemu/osdep.h"
+>> +#include "qom/object.h"
+>> +#include "qapi/commands-target-compat.h"
+>> +#include "sysemu/arch_init.h"
+>> +#include "hw/core/cpu.h"
+>> +#include "hw/core/sysemu-cpu-ops.h"
+>> +
+>> +static void cpu_common_add_definition(gpointer data, gpointer user_data)
+>> +{
+>> +    ObjectClass *oc = data;
+>> +    CpuDefinitionInfoList **cpu_list = user_data;
+>> +    CpuDefinitionInfo *info;
+>> +    const char *typename;
+>> +
+>> +    typename = object_class_get_name(oc);
+>> +    info = g_malloc0(sizeof(*info));
+>> +    info->name = cpu_model_from_type(typename);
+>> +    info->q_typename = g_strdup(typename);
+>> +
+>> +    QAPI_LIST_PREPEND(*cpu_list, info);
+>> +}
+>> +
+>> +static void arch_add_cpu_definitions(CpuDefinitionInfoList **cpu_list,
+>> +                                     const char *cpu_typename)
+>> +{
+>> +    ObjectClass *oc;
+>> +    GSList *list;
+>> +    const struct SysemuCPUOps *ops;
+>> +
+>> +    oc = object_class_by_name(cpu_typename);
+>> +    if (!oc) {
+>> +        return;
+>> +    }
+>> +    ops = CPU_CLASS(oc)->sysemu_ops;
+>> +
+>> +    list = object_class_get_list(cpu_typename, false);
+>> +    if (ops->cpu_list_compare) {
+>> +        list = g_slist_sort(list, ops->cpu_list_compare);
+>> +    }
+>> +    g_slist_foreach(list, ops->add_definition ? : cpu_common_add_definition,
+>> +                    cpu_list);
+>> +    g_slist_free(list);
+>> +
+>> +    if (ops->add_alias_definitions) {
+>> +        ops->add_alias_definitions(cpu_list);
+>> +    }
+>> +}
+>> +
+>> +CpuDefinitionInfoList *generic_query_cpu_definitions(Error **errp)
+>> +{
+>> +    CpuDefinitionInfoList *cpu_list = NULL;
+>> +
+>> +    for (unsigned i = 0; i <= QEMU_ARCH_BIT_LAST; i++) {
+>> +        const char *cpu_typename;
+>> +
+>> +        cpu_typename = cpu_typename_by_arch_bit(i);
+>> +        if (!cpu_typename) {
+>> +            continue;
+>> +        }
+>> +        arch_add_cpu_definitions(&cpu_list, cpu_typename);
+>> +    }
+>> +
+>> +    return cpu_list;
+>> +}
+> 
+> The target-specific qmp_query_cpu_definitions() this is going to replace
+> each execute the equivalent of *one* loop iteration: the one
+> corresponding to their own arch bit.
+> 
+> For the replacement to be faithful, as cpu_typename_by_arch_bit() must
+> return non-null exactly once.
+> 
+> This is the case for the qemu-system-TARGET.  The solution feels
+> overengineered there.
+> 
+> I figure cpu_typename_by_arch_bit() will return non-null multiple times
+> in a future single binary supporting heterogeneous machines.
+> 
+> Such a single binary then can't serve as drop-in replacement for the
+> qemu-system-TARGET, because query-cpu-definitions returns more.
+> 
+> To get a drop-in replacement, we'll need additional logic to restrict
+> the query for the homogeneous use case.
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 36e3e5fdaf..b82ba95ae6 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -545,6 +545,7 @@ static void rv64_thead_c906_cpu_init(Object *obj)
-     cpu->cfg.mvendorid = THEAD_VENDOR_ID;
- #ifndef CONFIG_USER_ONLY
-     set_satp_mode_max_supported(cpu, VM_1_10_SV39);
-+    th_register_custom_csrs(cpu);
- #endif
- 
-     /* inherited from parent obj via riscv_cpu_init() */
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 3b1a02b944..c9f8f06751 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -824,4 +824,7 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs);
- uint8_t satp_mode_max_from_map(uint32_t map);
- const char *satp_mode_str(uint8_t satp_mode, bool is_32_bit);
- 
-+/* Implemented in th_csr.c */
-+void th_register_custom_csrs(RISCVCPU *cpu);
-+
- #endif /* RISCV_CPU_H */
-diff --git a/target/riscv/meson.build b/target/riscv/meson.build
-index a5e0734e7f..a4bd61e52a 100644
---- a/target/riscv/meson.build
-+++ b/target/riscv/meson.build
-@@ -33,6 +33,7 @@ riscv_system_ss.add(files(
-   'monitor.c',
-   'machine.c',
-   'pmu.c',
-+  'th_csr.c',
-   'time_helper.c',
-   'riscv-qmp-cmds.c',
- ))
-diff --git a/target/riscv/th_csr.c b/target/riscv/th_csr.c
-new file mode 100644
-index 0000000000..66d260cabd
---- /dev/null
-+++ b/target/riscv/th_csr.c
-@@ -0,0 +1,78 @@
-+/*
-+ * T-Head-specific CSRs.
-+ *
-+ * Copyright (c) 2024 VRULL GmbH
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "cpu.h"
-+#include "cpu_vendorid.h"
-+
-+#define CSR_TH_SXSTATUS 0x5c0
-+
-+/* TH_SXSTATUS bits */
-+#define TH_SXSTATUS_UCME        BIT(16)
-+#define TH_SXSTATUS_MAEE        BIT(21)
-+#define TH_SXSTATUS_THEADISAEE  BIT(22)
-+
-+typedef struct {
-+    int csrno;
-+    int (*insertion_test)(RISCVCPU *cpu);
-+    riscv_csr_operations csr_ops;
-+} riscv_csr;
-+
-+static RISCVException s_mode_csr(CPURISCVState *env, int csrno)
-+{
-+    if (env->debugger)
-+        return RISCV_EXCP_NONE;
-+
-+    if (env->priv >= PRV_S)
-+        return RISCV_EXCP_NONE;
-+
-+    return RISCV_EXCP_ILLEGAL_INST;
-+}
-+
-+static int test_thead_mvendorid(RISCVCPU *cpu)
-+{
-+    if (cpu->cfg.mvendorid != THEAD_VENDOR_ID)
-+        return -1;
-+    return 0;
-+}
-+
-+static RISCVException read_th_sxstatus(CPURISCVState *env, int csrno,
-+                                       target_ulong *val)
-+{
-+    /* We don't set MAEE here, because QEMU does not implement MAEE. */
-+    *val = TH_SXSTATUS_UCME | TH_SXSTATUS_THEADISAEE;
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static riscv_csr th_csr_list[] = {
-+    {
-+        .csrno = CSR_TH_SXSTATUS,
-+        .insertion_test = test_thead_mvendorid,
-+        .csr_ops = { "th.sxstatus", s_mode_csr, read_th_sxstatus }
-+    }
-+};
-+
-+void th_register_custom_csrs(RISCVCPU *cpu)
-+{
-+    for (size_t i = 0; i < ARRAY_SIZE(th_csr_list); i++) {
-+        int csrno = th_csr_list[i].csrno;
-+        riscv_csr_operations *csr_ops = &th_csr_list[i].csr_ops;
-+        if (!th_csr_list[i].insertion_test(cpu))
-+            riscv_set_csr_ops(csrno, csr_ops);
-+    }
-+}
--- 
-2.44.0
+Can we ask the management layer to provide the current homogeneous
+target via argument? Otherwise we can add a new query-cpu-definitions-v2
+command requiring an explicit target argument, allowing 'all', and
+deprecate the current query-cpu-definitions.
 
+> I think this needs to be discussed in the commit message.
+> 
+> Possibly easier: don't loop over the bits, relying on
+> cpu_typename_by_arch_bit() to select the right one.  Instead get the
+> right bit from somewhere.
+> 
+> We can switch to a loop when we need it for the heterogeneous case.
+
+Alex suggested to consider heterogeneous emulation the new default,
+and the current homogeneous use as a particular case. I'd rather not
+plan on a "heterogeneous switch day" and get things integrated in
+the way, otherwise we'll never get there...
+
+Regards,
+
+Phil.
 
