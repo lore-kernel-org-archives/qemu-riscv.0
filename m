@@ -4,64 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD197CD11DD
-	for <qemu-riscv@archiver.kernel.org>; Fri, 29 Mar 2024 13:46:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 455BACD1283
+	for <qemu-riscv@archiver.kernel.org>; Mon,  1 Apr 2024 08:22:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rqCYI-0007Tf-IB; Fri, 29 Mar 2024 09:45:50 -0400
+	id 1rrCvb-0006ri-7d; Mon, 01 Apr 2024 04:22:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alexei.filippov@syntacore.com>)
- id 1rqCYD-0007S6-IJ; Fri, 29 Mar 2024 09:45:46 -0400
-Received: from mta-04.yadro.com ([89.207.88.248])
+ (Exim 4.90_1) (envelope-from <yangcheng.work@foxmail.com>)
+ id 1rrCvY-0006rD-6h; Mon, 01 Apr 2024 04:22:00 -0400
+Received: from ec2-54-164-151-162.compute-1.amazonaws.com ([54.164.151.162]
+ helo=qq.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alexei.filippov@syntacore.com>)
- id 1rqCYB-000448-PB; Fri, 29 Mar 2024 09:45:45 -0400
-DKIM-Filter: OpenDKIM Filter v2.11.0 mta-04.yadro.com 452CEC0006
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
- s=mta-04; t=1711719936;
- bh=24Hng9VXJ0njl4818EF1rbSl5XhF0Y9Qr9hcIhgmEZE=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=ggiSImtpsMv0wnuwXIVQQyDjNEaHaon9X/SYJC3fZewZEOVIj7RNxH0iI54nroJxC
- tCG3jbG+njJB3ZGbOzYGt9zjz2pdbTPvDoKuIoFXyKlOwC8k9106l1C3U0kob/f/NF
- gzV8IQ18D+yZwpvpywEtp3qrgihq7Ohj4qsVZE4AXtYCK4/gWU+9WuLNZnCCKtvCj2
- ghVPOdcPwqU0bPH2w9pT1T8q6n2xLN3FDCX5UfNpBxCjhMBrN0DF9aB5S1uIcTm+xq
- mX5WYKhDJADw+b3mNCE/ROObOgutmuMvqkQixVQa+eN/PLRNJVvOJ2biXsgwMi/ArX
- dqp6MNPTiojDQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
- s=mta-03; t=1711719936;
- bh=24Hng9VXJ0njl4818EF1rbSl5XhF0Y9Qr9hcIhgmEZE=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=CFPMXEJTBiEPkyY7aIIVxVgkeUAIFAWaHp96zfCmqNtEkErI4sXpuuKf7PIOxMOo9
- ZaXPpvmiSDcxigCiUnaZmN7TMeITrUVcatGxtp/G5Yaw+AWb1oDK6TzTPtAHonYpWx
- COvtN/aKW3y1sJc8u/Gk8M3bcvMJ81qgPA5UtV9snfAWl3ITTTUThxicFdazrWhmBP
- Ap0ZFhSuFw2dMlOZikmF0gXCEpbzJHWg22DUGwjko+YkKQJkYWpgLAC3eCFq2vdsUd
- rIKHezkhVtV1vgVFecXIDQnD47oJbMxo5GfKfypMBP+Ks9xrwzidy8mbcaeUBBrTP3
- uNAFj/SplxOmA==
-From: Alexei Filippov <alexei.filippov@syntacore.com>
-To: <palmer@dabbelt.com>, <alistair.francis@wdc.com>,
- <bin.meng@windriver.com>, <liwei1518@gmail.com>, <dbarboza@ventanamicro.com>, 
- <zhiwei_liu@linux.alibaba.com>
-CC: <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>, Alexei Filippov
- <alexei.filippov@syntacore.com>
-Subject: [PATCH] target/riscv/cpu_helper.c: fix wrong exception raise
-Date: Fri, 29 Mar 2024 16:45:27 +0300
-Message-ID: <20240329134527.1570936-1-alexei.filippov@syntacore.com>
+ (Exim 4.90_1) (envelope-from <yangcheng.work@foxmail.com>)
+ id 1rrCvU-00006T-Cd; Mon, 01 Apr 2024 04:21:59 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foxmail.com;
+ s=s201512; t=1711959705;
+ bh=zxltDTD3xd6OWrA5aJVV2SK0MBNTV1w8I4bp6Ra9o1c=;
+ h=From:To:Cc:Subject:Date;
+ b=p8l9VWIJornyiV+UDoDFhgTUrP8heFFSU+ZmfN0g0ZbB7picbOZm8NyUldC7X6u99
+ IdFG2IKXwjt7/vNaRbMQDHQj59eF6Dy8kREadCSuPnCWIpl8hHxvgmtCVcmk2vjCY/
+ XSbe5Fh7xryfeCVMW6T4e+nqjhIUFDZm/7DFoImE=
+Received: from yc-home.taila82bd.ts.net
+ ([2409:8a62:e78:44c0:8392:94b9:dc09:930])
+ by newxmesmtplogicsvrsza1-0.qq.com (NewEsmtp) with SMTP
+ id CF81B6E0; Mon, 01 Apr 2024 15:51:56 +0800
+X-QQ-mid: xmsmtpt1711957916tumjy7rhs
+Message-ID: <tencent_A4482251DD0890F312758FA6B33F60815609@qq.com>
+X-QQ-XMAILINFO: MKpxBSZQ33DDyFfeiiHm0vTGG9fNqyxcJZjtZVxOZJV86DeM/BXqp0YDKZL7p2
+ tgjWyf3Ypr1hrX9TT6LUr3TeD95aB+Ls846PQUShxuqLLKvVOA+yB5dUU0wlcMisJHZaHe+fuKbp
+ uSdFJmY6+s1Pz5PpAXedeJxwhIi+ebwNQ4m6zAYjBamueqjoS9iXmb+P9CZh40rmsDWONKgOq+HU
+ LngnD9+7JGkuTZVBjySulzaamYmz18A+Ap1tEe+W6YBKigomoxvluS7ofLRRIbqudn9gl8dQGXfH
+ uqjRRYhwyAflA2Jtyp3xWALjM6cv2Z8souwZzF3ddQIp2y1Tg2y7jq7b+hgnA7/yO39z2Oj6XsuX
+ etHLjWkQ8+87VN9Nuvit5N5If8LDMDDC0zI3QQSlf6TFQfSmBEqrjA3y1tMTqGWwgMxGeMlfckKw
+ wVRzdrxo+FiWU14XUtmHtgCd7Sm14buGF278CJsepPRPZ5eYeyIsvdrkm6U1KRPqAalTUTAayFZw
+ CbC3LHbwunAA9fDI0CQgpODHn5dFU+dPf9HxWHG3/eOl4sCZZ+hDbCCX2ZZn258pZuoFGObNBlxg
+ JLUZ4A24zcLCH/1Bl5ZG7k9VCNye55VRgb6wpZG3tBBYpknV2OJf4wiLRhaUyfMNgW1Me1s77dpF
+ 2xQzfCRRqtwqnTqjE6DRVMozZdrJiqyGTVlMC/fugQawG7gAZHw90ssZMFEFjC3sQiH/J3X6SVtb
+ wFnYWfVmSLiO6NDqiH7z7sIjqyQVEeYPeW/Sj8I+MYVVIwT///tFgDj0sTU7elmLqdvs/8rFYUG9
+ XIQHMyB4vK5iV7Vg2EeQt6JDqImJi0H0m5TraFAMO9v+hsFAlf67N40g/kefR/kTZMZUFqPY69tg
+ NaY5xODhu9PSXlGmeJX9CHwGhmQuflUpKUm0LWAaSMxzqdYSvqOG+sBPJBrYBQ5YIlhd4Tqshf29
+ TlKG72zxk5Dn76RAWcdVgCqg9zQFtrRx+6M4GU912NQZuh/fMQIm1sNYr2sQi8Xfp0I0V5QRbN96
+ ymbNeSf0eB7VaYCv1LUoWvaTrps0+Fjml84iDyf9p4ozK+w6Fr
+X-QQ-XMRINFO: NI4Ajvh11aEj8Xl/2s1/T8w=
+From: Cheng Yang <yangcheng.work@foxmail.com>
+To: qemu-riscv@nongnu.org
+Cc: Cheng Yang <yangcheng.work@foxmail.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ qemu-devel@nongnu.org (open list:All patches CC here)
+Subject: [PATCH v1 1/1] hw/riscv/boot.c: Support 64-bit address for initrd
+Date: Mon,  1 Apr 2024 15:51:22 +0800
+X-OQ-MSGID: <20240401075121.3460231-1-yangcheng.work@foxmail.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: T-EXCH-07.corp.yadro.com (172.17.11.57) To
- T-EXCH-12.corp.yadro.com (172.17.11.143)
-Received-SPF: permerror client-ip=89.207.88.248;
- envelope-from=alexei.filippov@syntacore.com; helo=mta-04.yadro.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- T_SPF_PERMERROR=0.01 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=54.164.151.162;
+ envelope-from=yangcheng.work@foxmail.com; helo=qq.com
+X-Spam_score_int: -10
+X-Spam_score: -1.1
+X-Spam_bar: -
+X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RDNS_DYNAMIC=0.982, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -77,40 +87,29 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Successed two stage translation, but failed pmp check can cause guest
-page fault instead of regular page fault.
+Use qemu_fdt_setprop_u64() instead of qemu_fdt_setprop_cell()
+to set the address of initrd in FDT to support 64-bit address.
 
-In case of execution ld instuction in VS mode we can
-face situation when two stages of translation was passed successfully,
-and if PMP check was failed first_stage_error variable going to be
-setted to false and raise_mmu_exception will raise
-RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT(scause == 21) instead of
-RISCV_EXCP_LOAD_ACCESS_FAULT(scause == 5) and this is wrong, according
-to RISCV privileged spec sect. 3.7: Attempting to execute a load or
-load-reserved instruction which accesses a physical address within a
-PMP region without read permissions raises a load access-fault
-exception.
-
-Signed-off-by: Alexei Filippov <alexei.filippov@syntacore.com>
+Signed-off-by: Cheng Yang <yangcheng.work@foxmail.com>
 ---
- target/riscv/cpu_helper.c | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+ hw/riscv/boot.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index bc70ab5abc..eaef1c2c62 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -1408,9 +1408,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-                               __func__, pa, ret, prot_pmp, tlb_size);
+diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+index 09878e722c..47281ca853 100644
+--- a/hw/riscv/boot.c
++++ b/hw/riscv/boot.c
+@@ -209,8 +209,8 @@ static void riscv_load_initrd(MachineState *machine, uint64_t kernel_entry)
+     /* Some RISC-V machines (e.g. opentitan) don't have a fdt. */
+     if (fdt) {
+         end = start + size;
+-        qemu_fdt_setprop_cell(fdt, "/chosen", "linux,initrd-start", start);
+-        qemu_fdt_setprop_cell(fdt, "/chosen", "linux,initrd-end", end);
++        qemu_fdt_setprop_u64(fdt, "/chosen", "linux,initrd-start", start);
++        qemu_fdt_setprop_u64(fdt, "/chosen", "linux,initrd-end", end);
+     }
+ }
  
-                 prot &= prot_pmp;
--            }
--
--            if (ret != TRANSLATE_SUCCESS) {
-+            } else {
-                 /*
-                  * Guest physical address translation failed, this is a HS
-                  * level exception
 -- 
 2.34.1
 
