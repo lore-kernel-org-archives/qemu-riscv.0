@@ -4,59 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FFA8C6FD1F
-	for <qemu-riscv@archiver.kernel.org>; Tue,  2 Apr 2024 07:02:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62896CD1284
+	for <qemu-riscv@archiver.kernel.org>; Tue,  2 Apr 2024 09:37:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rrY9c-0004Gi-IB; Tue, 02 Apr 2024 03:01:56 -0400
+	id 1rraaR-0002Iq-Gy; Tue, 02 Apr 2024 05:37:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <eric.huang@linux.alibaba.com>)
- id 1rrY9a-0004Fw-BS; Tue, 02 Apr 2024 03:01:54 -0400
-Received: from out30-111.freemail.mail.aliyun.com ([115.124.30.111])
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1rraaA-0002C6-03
+ for qemu-riscv@nongnu.org; Tue, 02 Apr 2024 05:37:31 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <eric.huang@linux.alibaba.com>)
- id 1rrY9X-0006hi-83; Tue, 02 Apr 2024 03:01:53 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux.alibaba.com; s=default;
- t=1712041306; h=Content-Type:Message-ID:Date:MIME-Version:Subject:To:From;
- bh=BHwh/deAZvnxN56/l+z1N1vpB38fM1rZx3fZq6hMk14=;
- b=VEzZ25e68jZ1ihKfpipdHkUBV0KvP3xqS4fVuDYhgDNj/ztOgMfxb+a+DQ2rClbEQAdYiBKtg3z5eWgRD1pfc4huyXdGhRjES8ziXTtG0knyFu3z0pcEOSdKHpzQ7U9snLZiiKuP+IcS/IjZUpy5kYYckb9mW1CaX49kE/+ESMg=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R101e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046051;
- MF=eric.huang@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
- TI=SMTPD_---0W3nUxi1_1712041304; 
-Received: from 30.21.185.194(mailfrom:eric.huang@linux.alibaba.com
- fp:SMTPD_---0W3nUxi1_1712041304) by smtp.aliyun-inc.com;
- Tue, 02 Apr 2024 15:01:45 +0800
-Content-Type: multipart/alternative;
- boundary="------------nXL00O2eTBSflkMHoorP9OG2"
-Message-ID: <7ca1c941-8980-4ff7-b2aa-1aacfbba569a@linux.alibaba.com>
-Date: Tue, 2 Apr 2024 15:01:43 +0800
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1rraZz-0001QL-T1
+ for qemu-riscv@nongnu.org; Tue, 02 Apr 2024 05:37:29 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1712050639;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=wF5lK1aJPl/KNxtJvjVqnprrlMlNrhSTZPVBoQn9ZQQ=;
+ b=RpcSBZGmdBD4Pnu6EqaJ265naJj7qMOwSaZL6D5ttPAJsamyz4TovEu9pzhUGrANkc+Wqc
+ mIOhv96Gm+zeckhAbIvdPsu1lDnqBH8hBx3TO558VoG+mnyPYhgmf8DqdvBPjueA1+r0dn
+ HI+DhacFIZlO3uG3hb2hzFROenJbqDo=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-465-ZNIApIi2P7W73p1i2a3tlA-1; Tue, 02 Apr 2024 05:37:14 -0400
+X-MC-Unique: ZNIApIi2P7W73p1i2a3tlA-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id E51E08828C3;
+ Tue,  2 Apr 2024 09:37:13 +0000 (UTC)
+Received: from blackfin.pond.sub.org (unknown [10.39.192.81])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 46CFE1121313;
+ Tue,  2 Apr 2024 09:37:13 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id 28B8221E6757; Tue,  2 Apr 2024 11:37:08 +0200 (CEST)
+From: Markus Armbruster <armbru@redhat.com>
+To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Cc: qemu-devel@nongnu.org,  qemu-riscv@nongnu.org,  Anton Johansson
+ <anjo@rev.ng>,  qemu-s390x@nongnu.org,  qemu-ppc@nongnu.org,  Daniel
+ =?utf-8?Q?P=2EBerrang=C3=A9?= <berrange@redhat.com>,  Paolo Bonzini
+ <pbonzini@redhat.com>,
+ Eduardo Habkost <eduardo@habkost.net>,  Claudio Fontana
+ <cfontana@suse.de>,  Richard Henderson <richard.henderson@linaro.org>,
+ Peter Maydell <peter.maydell@linaro.org>,  Alex =?utf-8?Q?Benn=C3=A9e?=
+ <alex.bennee@linaro.org>,  Manos Pitsidianakis
+ <manos.pitsidianakis@linaro.org>,  Zhao Liu <zhao1.liu@intel.com>,
+ qemu-arm@nongnu.org,  Thomas Huth <thuth@redhat.com>,  Michael Roth
+ <michael.roth@amd.com>
+Subject: Re: [RFC PATCH-for-9.1 14/21] system: Introduce QMP
+ generic_query_cpu_definitions()
+In-Reply-To: <96bcb673-18dd-49bc-8bcb-281c7409b410@linaro.org> ("Philippe
+ =?utf-8?Q?Mathieu-Daud=C3=A9=22's?= message of "Fri, 29 Mar 2024 14:03:48
+ +0100")
+References: <20240315130910.15750-1-philmd@linaro.org>
+ <20240315130910.15750-15-philmd@linaro.org>
+ <87v859m89y.fsf@pond.sub.org>
+ <96bcb673-18dd-49bc-8bcb-281c7409b410@linaro.org>
+Date: Tue, 02 Apr 2024 11:37:07 +0200
+Message-ID: <87bk6s3y2k.fsf@pond.sub.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] target/riscv: Fix the element agnostic function problem
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, zhiwei_liu@linux.alibaba.com,
- dbarboza@ventanamicro.com, liwei1518@gmail.com, bin.meng@windriver.com,
- alistair.francis@wdc.com, palmer@dabbelt.com,
- Richard Henderson <richard.henderson@linaro.org>
-References: <20240325021654.6594-1-eric.huang@linux.alibaba.com>
-From: Huang Tao <eric.huang@linux.alibaba.com>
-In-Reply-To: <20240325021654.6594-1-eric.huang@linux.alibaba.com>
-Received-SPF: pass client-ip=115.124.30.111;
- envelope-from=eric.huang@linux.alibaba.com;
- helo=out30-111.freemail.mail.aliyun.com
-X-Spam_score_int: -174
-X-Spam_score: -17.5
-X-Spam_bar: -----------------
-X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
- HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
- USER_IN_DEF_DKIM_WL=-7.5,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.3
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -72,148 +98,177 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This is a multi-part message in MIME format.
---------------nXL00O2eTBSflkMHoorP9OG2
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> writes:
 
-This is a ping to the patch below.
-
-https://patchew.org/QEMU/20240325021654.6594-1-eric.huang@linux.alibaba.com/ 
-
-
-On 2024/3/25 10:16, Huang Tao wrote:
-> In RVV and vcrypto instructions, the masked and tail elements are set to 1s
-> using vext_set_elems_1s function if the vma/vta bit is set. It is the element
-> agnostic policy.
+> Hi Markus,
 >
-> However, this function can't deal the big endian situation. This patch fixes
-> the problem by adding handling of such case.
+> On 26/3/24 14:28, Markus Armbruster wrote:
+>> Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> writes:
+>>=20
+>>> Each target use a common template for qmp_query_cpu_definitions().
+>>>
+>>> Extract it as generic_query_cpu_definitions(), keeping the
+>>> target-specific implementations as the following SysemuCPUOps
+>>> handlers:
+>>>   - cpu_list_compare()
+>>>   - add_definition()
+>>>   - add_alias_definitions()
+>>>
+>>> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+>>> ---
+>>>   MAINTAINERS                           |  2 +
+>>>   include/hw/core/sysemu-cpu-ops.h      | 14 ++++++
+>>>   include/qapi/commands-target-compat.h | 14 ++++++
+>>>   system/cpu-qmp-cmds.c                 | 71 +++++++++++++++++++++++++++
+>>>   system/meson.build                    |  1 +
+>>>   5 files changed, 102 insertions(+)
+>>>   create mode 100644 include/qapi/commands-target-compat.h
+>>>   create mode 100644 system/cpu-qmp-cmds.c
 >
-> Signed-off-by: Huang Tao<eric.huang@linux.alibaba.com>
-> Suggested-by: Richard Henderson<richard.henderson@linaro.org>
-> Reviewed-by: LIU Zhiwei<zhiwei_liu@linux.alibaba.com>
-> ---
-> Changes in v3:
-> - use "if (HOST_BIG_ENDIAN)" instead of "#if HOST_BIG_ENDIAN"
 >
-> Changes in v2:
-> - Keep the api of vext_set_elems_1s
-> - Reduce the number of patches.
-> ---
->   target/riscv/vector_internals.c | 22 ++++++++++++++++++++++
->   1 file changed, 22 insertions(+)
+>>> diff --git a/system/cpu-qmp-cmds.c b/system/cpu-qmp-cmds.c
+>>> new file mode 100644
+>>> index 0000000000..daeb131159
+>>> --- /dev/null
+>>> +++ b/system/cpu-qmp-cmds.c
+>>> @@ -0,0 +1,71 @@
+>>> +/*
+>>> + * QAPI helpers for target specific QMP commands
+>>> + *
+>>> + * SPDX-FileCopyrightText: 2024 Linaro Ltd.
+>>> + * SPDX-License-Identifier: GPL-2.0-or-later
+>>> + */
+>>> +
+>>> +#include "qemu/osdep.h"
+>>> +#include "qom/object.h"
+>>> +#include "qapi/commands-target-compat.h"
+>>> +#include "sysemu/arch_init.h"
+>>> +#include "hw/core/cpu.h"
+>>> +#include "hw/core/sysemu-cpu-ops.h"
+>>> +
+>>> +static void cpu_common_add_definition(gpointer data, gpointer user_dat=
+a)
+>>> +{
+>>> +    ObjectClass *oc =3D data;
+>>> +    CpuDefinitionInfoList **cpu_list =3D user_data;
+>>> +    CpuDefinitionInfo *info;
+>>> +    const char *typename;
+>>> +
+>>> +    typename =3D object_class_get_name(oc);
+>>> +    info =3D g_malloc0(sizeof(*info));
+>>> +    info->name =3D cpu_model_from_type(typename);
+>>> +    info->q_typename =3D g_strdup(typename);
+>>> +
+>>> +    QAPI_LIST_PREPEND(*cpu_list, info);
+>>> +}
+>>> +
+>>> +static void arch_add_cpu_definitions(CpuDefinitionInfoList **cpu_list,
+>>> +                                     const char *cpu_typename)
+>>> +{
+>>> +    ObjectClass *oc;
+>>> +    GSList *list;
+>>> +    const struct SysemuCPUOps *ops;
+>>> +
+>>> +    oc =3D object_class_by_name(cpu_typename);
+>>> +    if (!oc) {
+>>> +        return;
+>>> +    }
+>>> +    ops =3D CPU_CLASS(oc)->sysemu_ops;
+>>> +
+>>> +    list =3D object_class_get_list(cpu_typename, false);
+>>> +    if (ops->cpu_list_compare) {
+>>> +        list =3D g_slist_sort(list, ops->cpu_list_compare);
+>>> +    }
+>>> +    g_slist_foreach(list, ops->add_definition ? : cpu_common_add_defin=
+ition,
+>>> +                    cpu_list);
+>>> +    g_slist_free(list);
+>>> +
+>>> +    if (ops->add_alias_definitions) {
+>>> +        ops->add_alias_definitions(cpu_list);
+>>> +    }
+>>> +}
+>>> +
+>>> +CpuDefinitionInfoList *generic_query_cpu_definitions(Error **errp)
+>>> +{
+>>> +    CpuDefinitionInfoList *cpu_list =3D NULL;
+>>> +
+>>> +    for (unsigned i =3D 0; i <=3D QEMU_ARCH_BIT_LAST; i++) {
+>>> +        const char *cpu_typename;
+>>> +
+>>> +        cpu_typename =3D cpu_typename_by_arch_bit(i);
+>>> +        if (!cpu_typename) {
+>>> +            continue;
+>>> +        }
+>>> +        arch_add_cpu_definitions(&cpu_list, cpu_typename);
+>>> +    }
+>>> +
+>>> +    return cpu_list;
+>>> +}
+>>
+>> The target-specific qmp_query_cpu_definitions() this is going to replace
+>> each execute the equivalent of *one* loop iteration: the one
+>> corresponding to their own arch bit.
+>>
+>> For the replacement to be faithful, as cpu_typename_by_arch_bit() must
+>> return non-null exactly once.
+>>
+>> This is the case for the qemu-system-TARGET.  The solution feels
+>> overengineered there.
+>>
+>> I figure cpu_typename_by_arch_bit() will return non-null multiple times
+>> in a future single binary supporting heterogeneous machines.
+>>
+>> Such a single binary then can't serve as drop-in replacement for the
+>> qemu-system-TARGET, because query-cpu-definitions returns more.
+>>
+>> To get a drop-in replacement, we'll need additional logic to restrict
+>> the query for the homogeneous use case.
 >
-> diff --git a/target/riscv/vector_internals.c b/target/riscv/vector_internals.c
-> index 12f5964fbb..36635a1138 100644
-> --- a/target/riscv/vector_internals.c
-> +++ b/target/riscv/vector_internals.c
-> @@ -30,6 +30,28 @@ void vext_set_elems_1s(void *base, uint32_t is_agnostic, uint32_t cnt,
->       if (tot - cnt == 0) {
->           return ;
->       }
-> +
-> +    if (HOST_BIG_ENDIAN) {
-> +        /*
-> +         * Deal the situation when the elements are insdie
-> +         * only one uint64 block including setting the
-> +         * masked-off element.
-> +         */
-> +        if (((tot - 1) ^ cnt) < 8) {
-> +            memset(base + H1(tot - 1), -1, tot - cnt);
-> +            return;
-> +        }
-> +        /*
-> +         * Otherwise, at least cross two uint64_t blocks.
-> +         * Set first unaligned block.
-> +         */
-> +        if (cnt % 8 != 0) {
-> +            uint32_t j = ROUND_UP(cnt, 8);
-> +            memset(base + H1(j - 1), -1, j - cnt);
-> +            cnt = j;
-> +        }
-> +        /* Set other 64bit aligend blocks */
-> +    }
->       memset(base + cnt, -1, tot - cnt);
->   }
->   
---------------nXL00O2eTBSflkMHoorP9OG2
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+> Can we ask the management layer to provide the current homogeneous
+> target via argument? Otherwise we can add a new query-cpu-definitions-v2
+> command requiring an explicit target argument, allowing 'all', and
+> deprecate the current query-cpu-definitions.
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <p><span
-style="caret-color: rgb(33, 37, 41); color: rgb(33, 37, 41); font-family: SFMono-Regular, Menlo, Monaco, Consolas, &quot;Liberation Mono&quot;, &quot;Courier New&quot;, monospace; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: pre; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration: none; display: inline !important; float: none;">This is a ping to the patch below.</span></p>
-    <p><span
-style="caret-color: rgb(33, 37, 41); color: rgb(33, 37, 41); font-family: SFMono-Regular, Menlo, Monaco, Consolas, &quot;Liberation Mono&quot;, &quot;Courier New&quot;, monospace; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: pre; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration: none; display: inline !important; float: none;"><a class="moz-txt-link-freetext" href="https://patchew.org/QEMU/20240325021654.6594-1-eric.huang@linux.alibaba.com/">https://patchew.org/QEMU/20240325021654.6594-1-eric.huang@linux.alibaba.com/</a>
-</span></p>
-    <div class="moz-cite-prefix">On 2024/3/25 10:16, Huang Tao wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:20240325021654.6594-1-eric.huang@linux.alibaba.com">
-      <pre class="moz-quote-pre" wrap="">In RVV and vcrypto instructions, the masked and tail elements are set to 1s
-using vext_set_elems_1s function if the vma/vta bit is set. It is the element
-agnostic policy.
+Is "new binary can serve as drop-in replacement for the
+qemu-system-TARGET" a goal?
 
-However, this function can't deal the big endian situation. This patch fixes
-the problem by adding handling of such case.
+I'm asking because a new binary is also an opportunity to improve
+things, and backward compatibility conflicts with that.
 
-Signed-off-by: Huang Tao <a class="moz-txt-link-rfc2396E" href="mailto:eric.huang@linux.alibaba.com">&lt;eric.huang@linux.alibaba.com&gt;</a>
-Suggested-by: Richard Henderson <a class="moz-txt-link-rfc2396E" href="mailto:richard.henderson@linaro.org">&lt;richard.henderson@linaro.org&gt;</a>
-Reviewed-by: LIU Zhiwei <a class="moz-txt-link-rfc2396E" href="mailto:zhiwei_liu@linux.alibaba.com">&lt;zhiwei_liu@linux.alibaba.com&gt;</a>
----
-Changes in v3:
-- use "if (HOST_BIG_ENDIAN)" instead of "#if HOST_BIG_ENDIAN"
+Where would we want to go if backward compatibility was not a concern?
+I guess we'd want a single binary capable of running any machine,
+homogeneous or not.
 
-Changes in v2:
-- Keep the api of vext_set_elems_1s
-- Reduce the number of patches.
----
- target/riscv/vector_internals.c | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
+Your query-cpu-definitions would be fine for that binary, as long as its
+users can filter out the CPUs they're interested in.
 
-diff --git a/target/riscv/vector_internals.c b/target/riscv/vector_internals.c
-index 12f5964fbb..36635a1138 100644
---- a/target/riscv/vector_internals.c
-+++ b/target/riscv/vector_internals.c
-@@ -30,6 +30,28 @@ void vext_set_elems_1s(void *base, uint32_t is_agnostic, uint32_t cnt,
-     if (tot - cnt == 0) {
-         return ;
-     }
-+
-+    if (HOST_BIG_ENDIAN) {
-+        /*
-+         * Deal the situation when the elements are insdie
-+         * only one uint64 block including setting the
-+         * masked-off element.
-+         */
-+        if (((tot - 1) ^ cnt) &lt; 8) {
-+            memset(base + H1(tot - 1), -1, tot - cnt);
-+            return;
-+        }
-+        /*
-+         * Otherwise, at least cross two uint64_t blocks.
-+         * Set first unaligned block.
-+         */
-+        if (cnt % 8 != 0) {
-+            uint32_t j = ROUND_UP(cnt, 8);
-+            memset(base + H1(j - 1), -1, j - cnt);
-+            cnt = j;
-+        }
-+        /* Set other 64bit aligend blocks */
-+    }
-     memset(base + cnt, -1, tot - cnt);
- }
- 
-</pre>
-    </blockquote>
-  </body>
-</html>
+I prefer client-side filtering whenever practical, since it keeps the
+interface simple.  We do have to provide clients the information they
+need to filter.  How would a client filter the result of your
+query-cpu-definitions for target?
 
---------------nXL00O2eTBSflkMHoorP9OG2--
+Since backward compatibility is a concern, and we don't want to provide
+per target binaries forever, we need to think about how to provide
+suitable replacements based on the single binary.  I'm not sure drop-in
+replacement is feasible, given the complexity of the external
+interfaces.
+
+>> I think this needs to be discussed in the commit message.
+>>
+>> Possibly easier: don't loop over the bits, relying on
+>> cpu_typename_by_arch_bit() to select the right one.  Instead get the
+>> right bit from somewhere.
+>>
+>> We can switch to a loop when we need it for the heterogeneous case.
+>
+> Alex suggested to consider heterogeneous emulation the new default,
+> and the current homogeneous use as a particular case. I'd rather not
+> plan on a "heterogeneous switch day" and get things integrated in
+> the way, otherwise we'll never get there...
+
+I guess it's okay to overengineer certain things so they're ready for
+the heterogenous case when it comes.  We may want to explain this in
+comments, so people don't simplify the overengineered code :)
+
 
