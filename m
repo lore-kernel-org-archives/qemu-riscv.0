@@ -4,74 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3655BCD1288
-	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Apr 2024 05:14:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 826C5C6FD1F
+	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Apr 2024 07:09:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rrsx5-0001Fz-Uf; Wed, 03 Apr 2024 01:14:24 -0400
+	id 1rruka-0007lk-HN; Wed, 03 Apr 2024 03:09:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1rrsx2-0001Ev-RI; Wed, 03 Apr 2024 01:14:20 -0400
-Received: from isrv.corpit.ru ([86.62.121.231])
+ (Exim 4.90_1) (envelope-from <yumin686@andestech.com>)
+ id 1rrukY-0007lY-Kz; Wed, 03 Apr 2024 03:09:34 -0400
+Received: from 60-248-80-70.hinet-ip.hinet.net ([60.248.80.70]
+ helo=Atcsqr.andestech.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1rrsx1-0004S9-Cs; Wed, 03 Apr 2024 01:14:20 -0400
-Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id 1BD8D5B487;
- Wed,  3 Apr 2024 08:16:01 +0300 (MSK)
-Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id 74F77AA35C;
- Wed,  3 Apr 2024 08:14:16 +0300 (MSK)
-Message-ID: <f8622a76-7523-424e-88d5-cd6f251a625b@tls.msk.ru>
-Date: Wed, 3 Apr 2024 08:14:16 +0300
+ (Exim 4.90_1) (envelope-from <yumin686@andestech.com>)
+ id 1rrukV-0006U1-Qx; Wed, 03 Apr 2024 03:09:34 -0400
+Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
+ by Atcsqr.andestech.com with ESMTP id 433794db004551;
+ Wed, 3 Apr 2024 15:09:04 +0800 (+08)
+ (envelope-from yumin686@andestech.com)
+Received: from lubuntu-vb.andestech.com (10.0.16.95) by ATCPCS16.andestech.com
+ (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0;
+ Wed, 3 Apr 2024 15:09:04 +0800
+To: <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>
+CC: <palmer@dabbelt.com>, <alistair.francis@wdc.com>, <bin.meng@windriver.com>,
+ <liwei1518@gmail.com>, <dbarboza@ventanamicro.com>,
+ <zhiwei_liu@linux.alibaba.com>, <yumin686@andestech.com>
+Subject: [PATCH v3] target/riscv: raise an exception when CSRRS/CSRRC writes a
+ read-only CSR
+Date: Wed, 3 Apr 2024 15:08:23 +0800
+Message-ID: <20240403070823.80897-1-yumin686@andestech.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] Fix incorrect disassembly format for certain RISC-V
- instructions
-To: Simeon Krastnikov <Simeon.Krastnikov@imgtec.com>,
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
-Cc: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
- "qemu-trivial@nongnu.org" <qemu-trivial@nongnu.org>,
- Shiva Chen <Shiva.Chen@imgtec.com>
-References: <LO4P265MB66669BD6FF7CAB642AE30316933E2@LO4P265MB6666.GBRP265.PROD.OUTLOOK.COM>
-Content-Language: en-US
-From: Michael Tokarev <mjt@tls.msk.ru>
-Autocrypt: addr=mjt@tls.msk.ru; keydata=
- xsBLBETIiwkBCADh3cFB56BQYPjtMZCfK6PSLR8lw8EB20rsrPeJtd91IoNZlnCjSoxd9Th1
- bLUR8YlpRJ2rjc6O1Bc04VghqUOHgS/tYt8vLjcGWixzdhSLJgPDK3QQZPAvBjMbCt1B6euC
- WuD87Pv5Udlpnzf4aMwxkgfTusx+ynae/o+T5r7tXD+isccbC3SiGhmAPxFyY3zGcFk4+Rxc
- 0tP8YY2FWE/baHu+lBDTUN79efWAkHhex1XzVZsV7ZD16rzDbXFK5m6ApvGJWlr5YDEEydTF
- WwmvwBfr4OINVxzEG/ujNiG4fpMf2NsnFGyB9aSbFjXZevB4qWkduYYW+xpK1EryszHtAAYp
- zSBNaWNoYWVsIFRva2FyZXYgPG1qdEB0bHMubXNrLnJ1PsLAlgQTAQoAQAIbAwYLCQgHAwIE
- FQIIAwQWAgMBAh4BAheAAhkBFiEEbuGV0Yhuj/uBDUMkRXzgoIBEZcUFAmBbcjwFCS5e6jMA
- CgkQRXzgoIBEZcUTIQgA1hPsOF82pXxbcJXBMc4zB9OQu4AlnZvERoGyw7I2222QzaN3RFuj
- Fia//mapXzpIQNF08l/AA6cx+CKPeGnXwyZfF9fLa4RfifmdNKME8C00XlqnoJDZBGzq8yMy
- LAKDxl9OQWFcDwDxV+irg5U3fbtNVhvV0kLbS2TyQ0aU5w60ERS2NcyDWplOo7AOzZWChcA4
- UFf78oVdZdCW8YDtU0uQFhA9moNnrePy1HSFqduxnlFHEI+fDj/TiOm2ci48b8SBBJOIJFjl
- SBgH8+SfT9ZqkzhN9vh3YJ49831NwASVm0x1rDHcIwWD32VFZViZ3NjehogRNH9br0PSUYOC
- 3s7ATQRX2BjLAQgAnak3m0imYOkv2tO/olULFa686tlwuvl5kL0NWCdGQeXv2uMxy36szcrh
- K1uYhpiQv4r2qNd8BJtYlnYIK16N8GBdkplaDIHcBMbU4t+6bQzEIJIaWoq1hzakmHHngE2a
- pNMnUf/01GFvCRPlv3imkujE/5ILbagjtdyJaHF0wGOSlTnNT4W8j+zPJ/XK0I5EVQwtbmoc
- GY62LKxxz2pID6sPZV4zQVY4JdUQaFvOz1emnBxakkt0cq3Qnnqso1tjiy7vyH9CAwPR/48W
- fpK6dew4Fk+STYtBeixOTfSUS8qRS/wfpUeNa5RnEdTtFQ9IcjpQ/nPrvJJsu9FqwlpjMwAR
- AQABwsBlBBgBCAAPBQJX2BjLAhsMBQkSzAMAAAoJEEV84KCARGXFUKcH/jqKETECkbyPktdP
- cWVqw2ZIsmGxMkIdnZTbPwhORseGXMHadQODayhU9GWfCDdSPkWDWzMamD+qStfl9MhlVT60
- HTbo6wu1W/ogUS70qQPTY9IfsvAj6f8TlSlK0eLMa3s2UxL2oe5FkNs2CnVeRlr4Yqvp/ZQV
- 6LXtew4GPRrmplUT/Cre9QIUqR4pxYCQaMoOXQQw3Y0csBwoDYUQujn3slbDJRIweHoppBzT
- rM6ZG5ldWQN3n3d71pVuv80guylX8+TSB8Mvkqwb5I36/NAFKl0CbGbTuQli7SmNiTAKilXc
- Y5Uh9PIrmixt0JrmGVRzke6+11mTjVlio/J5dCM=
-In-Reply-To: <LO4P265MB66669BD6FF7CAB642AE30316933E2@LO4P265MB6666.GBRP265.PROD.OUTLOOK.COM>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=86.62.121.231; envelope-from=mjt@tls.msk.ru;
- helo=isrv.corpit.ru
-X-Spam_score_int: -68
-X-Spam_score: -6.9
-X-Spam_bar: ------
-X-Spam_report: (-6.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_HI=-5,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.0.16.95]
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 433794db004551
+Received-SPF: pass client-ip=60.248.80.70; envelope-from=yumin686@andestech.com;
+ helo=Atcsqr.andestech.com
+X-Spam_score_int: -8
+X-Spam_score: -0.9
+X-Spam_bar: /
+X-Spam_report: (-0.9 / 5.0 requ) BAYES_00=-1.9, RDNS_DYNAMIC=0.982,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ TVD_RCVD_IP=0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -84,19 +61,173 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-to:  Yu-Ming Chang <yumin686@andestech.com>
+From:  Yu-Ming Chang via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-02.04.2024 15:47, Simeon Krastnikov:
+Both CSRRS and CSRRC always read the addressed CSR and cause any read side
+effects regardless of rs1 and rd fields. Note that if rs1 specifies a register
+holding a zero value other than x0, the instruction will still attempt to write
+the unmodified value back to the CSR and will cause any attendant side effects.
 
-[Content-Type: text/html]
+So if CSRRS or CSRRC tries to write a read-only CSR with rs1 which specifies
+a register holding a zero value, an illegal instruction exception should be
+raised.
 
-Your patch is html-damaged.  There's probably a way to extract the text/plain
-version of it but it's better if you re-send it without html.
+Signed-off-by: Yu-Ming Chang <yumin686@andestech.com>
+---
+Hi maintainers,
+    Do I need to make any further improvements to this patch?
 
-Not saying anything about the changes though.
+Best regards,
+Yuming
 
-Thanks,
+ target/riscv/cpu.h       |  4 ++++
+ target/riscv/csr.c       | 51 ++++++++++++++++++++++++++++++++++++----
+ target/riscv/op_helper.c |  6 ++---
+ 3 files changed, 53 insertions(+), 8 deletions(-)
 
-/mjt
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 3b1a02b944..99006bdb45 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -710,6 +710,8 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
+ void riscv_cpu_update_mask(CPURISCVState *env);
+ bool riscv_cpu_is_32bit(RISCVCPU *cpu);
+ 
++RISCVException riscv_csrr(CPURISCVState *env, int csrno,
++                          target_ulong *ret_value);
+ RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
+                            target_ulong *ret_value,
+                            target_ulong new_value, target_ulong write_mask);
+@@ -742,6 +744,8 @@ typedef RISCVException (*riscv_csr_op_fn)(CPURISCVState *env, int csrno,
+                                           target_ulong new_value,
+                                           target_ulong write_mask);
+ 
++RISCVException riscv_csrr_i128(CPURISCVState *env, int csrno,
++                               Int128 *ret_value);
+ RISCVException riscv_csrrw_i128(CPURISCVState *env, int csrno,
+                                 Int128 *ret_value,
+                                 Int128 new_value, Int128 write_mask);
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 726096444f..35662e1777 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -4312,7 +4312,7 @@ static RISCVException rmw_seed(CPURISCVState *env, int csrno,
+ 
+ static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
+                                                int csrno,
+-                                               bool write_mask)
++                                               bool write)
+ {
+     /* check privileges and return RISCV_EXCP_ILLEGAL_INST if check fails */
+     bool read_only = get_field(csrno, 0xC00) == 3;
+@@ -4334,7 +4334,7 @@ static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
+     }
+ 
+     /* read / write check */
+-    if (write_mask && read_only) {
++    if (write && read_only) {
+         return RISCV_EXCP_ILLEGAL_INST;
+     }
+ 
+@@ -4421,11 +4421,22 @@ static RISCVException riscv_csrrw_do64(CPURISCVState *env, int csrno,
+     return RISCV_EXCP_NONE;
+ }
+ 
++RISCVException riscv_csrr(CPURISCVState *env, int csrno,
++                           target_ulong *ret_value)
++{
++    RISCVException ret = riscv_csrrw_check(env, csrno, false);
++    if (ret != RISCV_EXCP_NONE) {
++        return ret;
++    }
++
++    return riscv_csrrw_do64(env, csrno, ret_value, 0, 0);
++}
++
+ RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
+                            target_ulong *ret_value,
+                            target_ulong new_value, target_ulong write_mask)
+ {
+-    RISCVException ret = riscv_csrrw_check(env, csrno, write_mask);
++    RISCVException ret = riscv_csrrw_check(env, csrno, true);
+     if (ret != RISCV_EXCP_NONE) {
+         return ret;
+     }
+@@ -4473,13 +4484,45 @@ static RISCVException riscv_csrrw_do128(CPURISCVState *env, int csrno,
+     return RISCV_EXCP_NONE;
+ }
+ 
++RISCVException riscv_csrr_i128(CPURISCVState *env, int csrno,
++                               Int128 *ret_value)
++{
++    RISCVException ret;
++
++    ret = riscv_csrrw_check(env, csrno, false);
++    if (ret != RISCV_EXCP_NONE) {
++        return ret;
++    }
++
++    if (csr_ops[csrno].read128) {
++        return riscv_csrrw_do128(env, csrno, ret_value,
++                                 int128_zero(), int128_zero());
++    }
++
++    /*
++     * Fall back to 64-bit version for now, if the 128-bit alternative isn't
++     * at all defined.
++     * Note, some CSRs don't need to extend to MXLEN (64 upper bits non
++     * significant), for those, this fallback is correctly handling the
++     * accesses
++     */
++    target_ulong old_value;
++    ret = riscv_csrrw_do64(env, csrno, &old_value,
++                           (target_ulong)0,
++                           (target_ulong)0);
++    if (ret == RISCV_EXCP_NONE && ret_value) {
++        *ret_value = int128_make64(old_value);
++    }
++    return ret;
++}
++
+ RISCVException riscv_csrrw_i128(CPURISCVState *env, int csrno,
+                                 Int128 *ret_value,
+                                 Int128 new_value, Int128 write_mask)
+ {
+     RISCVException ret;
+ 
+-    ret = riscv_csrrw_check(env, csrno, int128_nz(write_mask));
++    ret = riscv_csrrw_check(env, csrno, true);
+     if (ret != RISCV_EXCP_NONE) {
+         return ret;
+     }
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index f414aaebdb..b95d47e9ac 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -51,7 +51,7 @@ target_ulong helper_csrr(CPURISCVState *env, int csr)
+     }
+ 
+     target_ulong val = 0;
+-    RISCVException ret = riscv_csrrw(env, csr, &val, 0, 0);
++    RISCVException ret = riscv_csrr(env, csr, &val);
+ 
+     if (ret != RISCV_EXCP_NONE) {
+         riscv_raise_exception(env, ret, GETPC());
+@@ -84,9 +84,7 @@ target_ulong helper_csrrw(CPURISCVState *env, int csr,
+ target_ulong helper_csrr_i128(CPURISCVState *env, int csr)
+ {
+     Int128 rv = int128_zero();
+-    RISCVException ret = riscv_csrrw_i128(env, csr, &rv,
+-                                          int128_zero(),
+-                                          int128_zero());
++    RISCVException ret = riscv_csrr_i128(env, csr, &rv);
+ 
+     if (ret != RISCV_EXCP_NONE) {
+         riscv_raise_exception(env, ret, GETPC());
+-- 
+2.34.1
+
 
