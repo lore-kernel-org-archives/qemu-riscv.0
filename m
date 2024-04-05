@@ -4,84 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8216CD1297
-	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Apr 2024 12:55:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4CC3CD1284
+	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Apr 2024 17:08:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rsj54-0004X9-Ea; Fri, 05 Apr 2024 08:54:06 -0400
+	id 1rsn2w-0006Nx-GA; Fri, 05 Apr 2024 13:08:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <npiggin@gmail.com>)
- id 1rsj51-0004Q9-MC; Fri, 05 Apr 2024 08:54:03 -0400
-Received: from mail-pj1-x102f.google.com ([2607:f8b0:4864:20::102f])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1rsn2u-0006MI-LY
+ for qemu-riscv@nongnu.org; Fri, 05 Apr 2024 13:08:08 -0400
+Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <npiggin@gmail.com>)
- id 1rsj4z-0000rw-Eb; Fri, 05 Apr 2024 08:54:03 -0400
-Received: by mail-pj1-x102f.google.com with SMTP id
- 98e67ed59e1d1-2a2d0ca3c92so1323269a91.0; 
- Fri, 05 Apr 2024 05:53:54 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1rsn2s-0006T7-GW
+ for qemu-riscv@nongnu.org; Fri, 05 Apr 2024 13:08:08 -0400
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-6ecf3943040so1353619b3a.0
+ for <qemu-riscv@nongnu.org>; Fri, 05 Apr 2024 10:08:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1712321632; x=1712926432; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=KW/JAdjkkx0AQWUZXkHf5lnnBtuRIMz2UCSnQC/OOKA=;
- b=ASkQoK4OA/tJlI3DkGsXMAum/DvT+aLei0rwu3YpMsMmI/Zv52zy30MTqqdkiRbr28
- uaBxBsYcgPb51Sqi8i8bCTOByu1BFTItLFh9P6J6lM38yGhCVB2o+iOaYmQo9x8vnQ5z
- z/8uPYDFYiey/ml5PgF7yAazuyeK/WJOhR3bOHUDKM76L0syIDMe1tGjimNvGdKHUqr7
- L1hJhG2pDzr7LC9Qkb0pcJnhNPLdQDamxKop6mF7as5H+uZM9gTD86icXsZRV+brYIfb
- UFBi/V8M8Aj2JXQZjPWox6yANW21Ci+zOSnbdDTICFMNigR4dcGypRkR41BmUwZdVK6S
- 5g0A==
+ d=linaro.org; s=google; t=1712336885; x=1712941685; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=hKIr47iz1buAmMPGzvABuUjvKOA4+I6PgN03YYyEOL4=;
+ b=ewo5oPNSIcN+D15IMHTmyNxhBlmFLVdeOdu/GjGZ152u+4aApu5RS2nhpdYYmCQklc
+ MEnNIOg8vP+5egeh1LMzJUQMi1A6tFWd1UYag37J9dWCPv0dvciQm3LW9MQq0KZfjzHf
+ cPvWfPwMVJkseHBkTRMbpoP2GN1W4/8uIeLu5gSiwhvYHeSe2dtoJZhZ6ibS8azXaG6B
+ 0nULfVrySW7w0qIQUDSVT3CI0zmtw2kftPDohT/i5AbrxEFQPRIUhLrr19oyC6t4aYhe
+ 4NbLI8/K1ePsaGJCDc1oVI+Yyl94ljYiQcSmNEV0hbIVeASptU/d/N6BW0/5zm2hF/8T
+ Y+nw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712321632; x=1712926432;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=KW/JAdjkkx0AQWUZXkHf5lnnBtuRIMz2UCSnQC/OOKA=;
- b=qWGvYOlaLlwxLp3Ay5ynf/anDLRRyBw/v+oaDhUYiavgiVR+DS4q2JNyNt0xmgFLa4
- M0m3jvuZibhoZOwOr7oq79BjXUt3h+V646JuQVXHnT+xCOCiIrnIGg+o34WC+w/V18Rk
- lA0wWA/eGkHw+Po75Wu+trM8EE3GA+t8c1giSilUzqphY00AnbTEg9oeTS+eEHDd7ZH6
- fLALx098wd5uiozYsNK6wkhTUbL7AgdPPKDTqL+14vyz4NVlOSBmKfdH/BsWl8wVtXZi
- ICD112oupFGalw7G8Szi03uXee8WR0hLtzb+aMVFbmyoVbBupqwdOhhJT4iB1gHY9hhH
- 2+1g==
+ d=1e100.net; s=20230601; t=1712336885; x=1712941685;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=hKIr47iz1buAmMPGzvABuUjvKOA4+I6PgN03YYyEOL4=;
+ b=nV/RTVWvf1zzPBzNuu7l24PzgxKn6un0MVpVykk9qgGXcVdtt1V5685tvJCmjUEpI/
+ KsoeGhV4xhNvzETtib5zs9C344BIS/c8rL+A0F4uL9sK3tmVcD5QTZ/XV16UoWqElvyg
+ BZGzhYrAsd9TbEQV0DLoAzzJbTeeP+K4xxsclDhFKQJqQQBVEfx/nCajsoSksIPWeDkv
+ A/hKfbmKdsur2dva4axGdR1dClMZOj/+jjcIGZZAw3SsegZy1cW1NkwQz8L7JKRZUyez
+ 3UfO4TKmhucXJH7NqmJZpwjyriSA7/NB8CWCjgV+mfpx4T63iGSLBXfGHCn0fTtg/d+U
+ VSPg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX/ofLuCRtOzYddaqpYl5fe67zpqguyVwLeOqH+jYdYS7uYXdAUDHMC1DyGh6eSMELXAaoi9Sq3ozpDIyqck31nSLFoxupf1JfEpD5oalcshVVx21+X5Sd+Wa+dqEdMSqrtu0D/GjUaeC8ZsAO7nuT2lzK0tCrgrvptuCJsE3WZrM3QQ2Y17VdK
-X-Gm-Message-State: AOJu0Yxni+ukjsQmLF4/TAVKgKXffN/kwSEUlTZj67s5rA7Of1lOsuod
- +m/NxFMPgEfdmWVirywG4LWODZbQKHOjtzyHo9dSPJUSKYQRj6kP+xHSGTy8
-X-Google-Smtp-Source: AGHT+IFFdgetPlOtv92JBgFBPLw8fZBrYIefywwFgfiOwmYhnRTUSJ539sd1E8L5KVxhh7vlkJo+Zw==
-X-Received: by 2002:a17:90b:110f:b0:2a2:2cbf:2144 with SMTP id
- gi15-20020a17090b110f00b002a22cbf2144mr2255243pjb.19.1712321632507; 
- Fri, 05 Apr 2024 05:53:52 -0700 (PDT)
-Received: from wheely.local0.net (124-169-104-130.tpgi.com.au.
- [124.169.104.130]) by smtp.gmail.com with ESMTPSA id
- t19-20020a17090ae51300b002a2d8d34009sm2984414pjy.27.2024.04.05.05.53.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Apr 2024 05:53:52 -0700 (PDT)
-From: Nicholas Piggin <npiggin@gmail.com>
-To: qemu-ppc@nongnu.org
-Cc: Nicholas Piggin <npiggin@gmail.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>,
+ AJvYcCW84RtNdPw7nIqJKBH2rz8WcXk7wgeGxN7+y/rHyefyt7ePd1qwwCeEi2X3TjsQk/lBzXHy9YjzkcHWwyf0UZ4sjLVD5cg=
+X-Gm-Message-State: AOJu0Yy5SburxV/n4ANKBtFyba10llraOST2WgiaFYQgiRsOwl564dkv
+ AuyZgcL2ZsuLlUmKA58h8Gz4xTH294dZfwYLJWmGglE8dP/msZpoJNyiBMbB+08=
+X-Google-Smtp-Source: AGHT+IFKaUhHPFOMtQlXcVm1xpldzq7iqAjzW4j0SX6w+X8wM8wsluYZhTNFhrVD30zf/5M+ZJmLLQ==
+X-Received: by 2002:a05:6a00:991:b0:6ea:d7b6:f4b4 with SMTP id
+ u17-20020a056a00099100b006ead7b6f4b4mr2368374pfg.21.1712336885060; 
+ Fri, 05 Apr 2024 10:08:05 -0700 (PDT)
+Received: from [172.20.1.19] (098-147-007-212.res.spectrum.com. [98.147.7.212])
+ by smtp.gmail.com with ESMTPSA id
+ c8-20020a62e808000000b006ecfd0bf326sm1790938pfi.99.2024.04.05.10.08.03
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 05 Apr 2024 10:08:04 -0700 (PDT)
+Message-ID: <e648b60f-6b1b-464a-aceb-441f1a79b54d@linaro.org>
+Date: Fri, 5 Apr 2024 07:08:00 -1000
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/3] tcg/cputlb: Remove non-synced variants of global
+ TLB flushes
+To: Nicholas Piggin <npiggin@gmail.com>, qemu-ppc@nongnu.org
+Cc: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Paolo Bonzini <pbonzini@redhat.com>,
  Daniel Henrique Barboza <danielhb413@gmail.com>, qemu-devel@nongnu.org,
  Peter Maydell <peter.maydell@linaro.org>, qemu-arm@nongnu.org,
  qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
-Subject: [PATCH-for-9.1 v2 0/3] target/ppc: fix tlb flushing race (plus
-Date: Fri,  5 Apr 2024 22:53:35 +1000
-Message-ID: <20240405125340.380828-1-npiggin@gmail.com>
-X-Mailer: git-send-email 2.43.0
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+References: <20240405125340.380828-1-npiggin@gmail.com>
+ <20240405125340.380828-3-npiggin@gmail.com>
+Content-Language: en-US
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20240405125340.380828-3-npiggin@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
- envelope-from=npiggin@gmail.com; helo=mail-pj1-x102f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x42d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,59 +103,27 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-ppc's broadcast tlb flushe must ensure all vCPUs have invalidated
-their TLBs when the tlbie sequence completes. This is not true in
-the current TCG implementation, due to async_run_on_cpu() returning
-before the remote CPU runs the job.
+On 4/5/24 02:53, Nicholas Piggin wrote:
+> These are no longer used.
+> 
+>    tlb_flush_all_cpus: removed by previous commit.
+>    tlb_flush_page_all_cpus: removed by previous commit.
+> 
+>    tlb_flush_page_bits_by_mmuidx_all_cpus: never used.
+>    tlb_flush_page_by_mmuidx_all_cpus: never used.
+>    tlb_flush_page_bits_by_mmuidx_all_cpus: never used, thus:
+>      tlb_flush_range_by_mmuidx_all_cpus: never used.
+>      tlb_flush_by_mmuidx_all_cpus: never used.
+> 
+> Reviewed-by: Philippe Mathieu-Daudé<philmd@linaro.org>
+> Signed-off-by: Nicholas Piggin<npiggin@gmail.com>
+> ---
+>   docs/devel/multi-thread-tcg.rst |  13 ++--
+>   include/exec/exec-all.h         |  97 +++++-------------------------
+>   accel/tcg/cputlb.c              | 103 --------------------------------
+>   3 files changed, 19 insertions(+), 194 deletions(-)
 
-Fixing ppc requires moving to async_safe_run_on_cpu(), however this
-API does not guarantee that either, and actually changing to the
-tlb_flush_*_all_cpus_synced() variants introduces another race
-which is that the flush is not even guaraneed to complete on the
-local CPU. To ensure that it is, the tlbie has to be made the last
-instruction in the TB.
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-Fixing ppc removes the last caller of the non-synced TLB flush
-variants, we can remove some dead code too.
-
-For others - at least arm, riscv, and s390x all use the
-tlb_flush_*_all_cpus_synced() calls AFAIKS without ending the TB. But
-it's possible I've missed where they do, or they have other issues that
-mean it's not required for the flush to take effect until some later
-operation which does end the TB. Maybe there is no problem, but it might
-be worth looking at.
-
-To reproduce, I have a kvm-unit-tests case for ppc but should be quite
-easy to port to other archs. You just need to be careful for the local
-CPU test case that your tlbi instruction is in the same TB as the
-subsequent load/store that is to incorrectly use a stale translation.
-
-https://gitlab.com/npiggin/kvm-unit-tests/-/tree/powerpc
-
-The test 'powerpc/mmu.elf tlbie:tlbi-other-cpu' breaks with upstream
-QEMU. If we use tlb_flush_*_all_cpus_synced() like other arch, then
-'powerpc/mmu.elf tlbie:tlbi-this-cpu' also breaks.
-
-Since v1 I understood the full problem and fix, and fixed the fix.
-
-Thanks,
-Nick
-
-Nicholas Piggin (3):
-  target/ppc: Fix broadcast tlbie synchronisation
-  tcg/cputlb: Remove non-synced variants of global TLB flushes
-  tcg/cputlb: remove other-cpu capability from TLB flushing
-
- docs/devel/multi-thread-tcg.rst              |  13 +-
- include/exec/exec-all.h                      |  97 ++-----------
- accel/tcg/cputlb.c                           | 145 ++-----------------
- target/ppc/helper_regs.c                     |   2 +-
- target/ppc/mmu_helper.c                      |   2 +-
- target/ppc/translate.c                       |   7 +
- target/ppc/translate/storage-ctrl-impl.c.inc |   7 +
- 7 files changed, 44 insertions(+), 229 deletions(-)
-
--- 
-2.43.0
-
+r~
 
