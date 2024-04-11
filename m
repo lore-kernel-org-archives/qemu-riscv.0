@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF9F4CD1284
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFA4CCD1292
 	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Apr 2024 10:46:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ruruq-0003AI-Nd; Thu, 11 Apr 2024 06:44:24 -0400
+	id 1rurui-0002wV-DS; Thu, 11 Apr 2024 06:44:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ruruo-00030B-0y
- for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 06:44:23 -0400
-Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ruruf-0002vX-1u
+ for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 06:44:13 -0400
+Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rurum-0004Mp-7O
- for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 06:44:21 -0400
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-417d092f39aso3802175e9.1
- for <qemu-riscv@nongnu.org>; Thu, 11 Apr 2024 03:44:19 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ruruZ-0004Im-QF
+ for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 06:44:12 -0400
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-417d42dd5a4so3829715e9.1
+ for <qemu-riscv@nongnu.org>; Thu, 11 Apr 2024 03:44:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712832259; x=1713437059; darn=nongnu.org;
+ d=linaro.org; s=google; t=1712832246; x=1713437046; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=chFRh2l0gcnmg03fCHQ7SXYogZ+gzE1I40m0bX1o6CE=;
- b=c5j3mEqIll58L5zq6hJWJGZLhH1d7hh/36VU6fYKyFvE7mJflDy8Z6/IxZVkoclLC6
- Us8uwAhhcOIjWRB5wKRchzmwBY9E8yf6W7fULJ3Be0ehRRyuTjBJs7WSjbMAS975K7I1
- PnAl+pFAkjmudj99nUZ3jEWvNGzGwp9ZFJi3xAI1T/6HJIcJkRuntvyUWhmoIvfjTisP
- akSmFEtZuSWCMwto/n3+ztSYikX0U5COHsw7i6pKKvHG7ObedGuMRSDVuA/150ek0E8q
- 4YLe8V0pNGJw0WHllYGIl96QB5dm81ulpqa5jVyiGSJeSyrl4gIdQ6bbft69/BKMkLCJ
- wjdg==
+ bh=+zSTvPGfcRjEBEVqiYMcCOTilCqnhe5Ojdjg6D66FBk=;
+ b=g/IYJVI4TbLIZNWEaOtyNXFOaUJQriPR0NuDWqHXF562W7r8h4uT0kewQ7GjUp2IpN
+ CmwWDW7PcUt+mtLAC7j2Q8gDGXZhqEPq1h9rIL6i2To4e/if2r6MeRhDg9RRXK35NPyi
+ xRuDCX7F/YKJN/pfv+7vKnNpK2ux6Y8tuFqkicRazqn5uK28h5BdYhBZyXP6rZY3r8N5
+ ZrUx3BBHF9DkkVh9Gm67H+AuPHXtQSROCq1rfLtLuiyTyCF1YUBBePMlbWBYyPfP/fza
+ KTcs1+TPCi+PVEzso55hM0FKUFSgtDXAex9C9tHhKyam7HTr5DlFDMWLaPybq0enJ1tN
+ 51MA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712832259; x=1713437059;
+ d=1e100.net; s=20230601; t=1712832246; x=1713437046;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=chFRh2l0gcnmg03fCHQ7SXYogZ+gzE1I40m0bX1o6CE=;
- b=A7YHO3ZyqlJMKYXBCLuxWkXCAUnnfYKP4ZVTGzLDm3UJaWETbCig4GqUeqOPq3CzwL
- O4dUMykSiV75JV69PTw74jAgQPPSSNghLSKqpYxdnAFG1ybJvyzmiLvfVg9ExYKYL6jp
- b2TRWS0xz9FO+uGLwy+FvUAMDbX1eHePflrTzC0QaLCruBDphMz4XP3FD6DkyKc+V+EJ
- TGaxl3aNuENJGj0gjgW5muwmHtY9z8ms5ECZp0hMzevYrxTRtjFMIfAFiQAww7XlF+Ok
- D5J69nW4/L/2k7WeyZaetB00np11fr+ArZWEvpptcuQaEttKEWOWOyljLTRqykfnteTV
- DZyw==
-X-Gm-Message-State: AOJu0YyKETrl7QrQ7dPoePwLlEdd+LmU0Xi+ICIY0cVf2+rD9gtWjhgl
- cyYJoq6wabzeZebNoPyQzFtWm+A0mBWA7zzN3Nh0TuKE/raz8DMgUhL8EWiB2GoH6fHBPdOub3G
- jCGY=
-X-Google-Smtp-Source: AGHT+IFjECzwDpyVWvUJySuSwoGDnBY202ZAAe8bPly8W7j1uYJbgDuXOU1kDaCF/UNyeX5b3pH3Kw==
-X-Received: by 2002:a05:600c:4f53:b0:416:89bc:dec6 with SMTP id
- m19-20020a05600c4f5300b0041689bcdec6mr2004919wmq.11.1712832258773; 
- Thu, 11 Apr 2024 03:44:18 -0700 (PDT)
+ bh=+zSTvPGfcRjEBEVqiYMcCOTilCqnhe5Ojdjg6D66FBk=;
+ b=MHvWrf2Sur0cGXIo2s90TSJJjJ7SSRbzLDqWKxhC4/UY1t3lrMnxX5BenENcSLTv+8
+ fLeaIO2fYnq36ws2i1xSKv4JhfEt1qOZyfTG06lriZt0sp7cjoxK+zDR1E7Dls5MQ/Mh
+ oCXqBhNEmhGCvaqW3QTNS2qo3K5jUSSdwdyC7mNv4qSH/xHXgN7slc9rV5EIMI0HQAG6
+ 2my/Jl78JGa2lMAoCyBeZRD4MFj2oNZBOj29Y5fJqPXLprMV/WMsoaNv6UpVZF+c99sx
+ NpuJA06rEKBsQv6BXbL92u42pCk19gcKfeAHt9Zmcfx2J7Y5j7JTNpK+beO6k38NwqMx
+ ZroQ==
+X-Gm-Message-State: AOJu0YyitKjxLgbiZDYrJcERdEJ5UdGDj4LSf1pAXP2KCzl9XImQdeyt
+ TRJYiXMPRLEyYe/SIWou0T2D+PQwYaHsKYzlp7xPL+w/Gygk+ZAEltnaohnO1+jYFzCakjUMBdf
+ GUhc=
+X-Google-Smtp-Source: AGHT+IHxWCKV8vYBX67vSm5fYCoJpyfz69U+mU6osVHyQ5gWbl898Jyb5aDRd9nQg5wgrHKpy7krBg==
+X-Received: by 2002:a05:600c:3154:b0:416:b7c0:23bc with SMTP id
+ h20-20020a05600c315400b00416b7c023bcmr4403843wmo.10.1712832246485; 
+ Thu, 11 Apr 2024 03:44:06 -0700 (PDT)
 Received: from localhost.localdomain
  (137.red-88-29-174.dynamicip.rima-tde.net. [88.29.174.137])
  by smtp.gmail.com with ESMTPSA id
- he8-20020a05600c540800b00416a08788a5sm5123079wmb.27.2024.04.11.03.44.17
+ t13-20020a05600c450d00b004171f151a5csm1914852wmo.16.2024.04.11.03.44.05
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 11 Apr 2024 03:44:18 -0700 (PDT)
+ Thu, 11 Apr 2024 03:44:06 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Jiri Pirko <jiri@resnulli.us>, Jason Wang <jasowang@redhat.com>
-Subject: [PATCH 6/9] hw/net/rocker: Replace sprintf() by snprintf()
-Date: Thu, 11 Apr 2024 12:43:37 +0200
-Message-ID: <20240411104340.6617-7-philmd@linaro.org>
+ Laurent Vivier <laurent@vivier.eu>
+Subject: [PATCH 4/9] linux-user/flatload: Replace sprintf() by snprintf()
+Date: Thu, 11 Apr 2024 12:43:35 +0200
+Message-ID: <20240411104340.6617-5-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240411104340.6617-1-philmd@linaro.org>
 References: <20240411104340.6617-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::335;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x335.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -101,66 +101,22 @@ resulting in painful developper experience. Use snprintf() instead.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- hw/net/rocker/rocker.c | 24 ++++++++++++------------
- 1 file changed, 12 insertions(+), 12 deletions(-)
+ linux-user/flatload.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/hw/net/rocker/rocker.c b/hw/net/rocker/rocker.c
-index 7ea8eb6ba5..03ac7a7ae9 100644
---- a/hw/net/rocker/rocker.c
-+++ b/hw/net/rocker/rocker.c
-@@ -915,40 +915,40 @@ static const char *rocker_reg_name(void *opaque, hwaddr addr)
+diff --git a/linux-user/flatload.c b/linux-user/flatload.c
+index 5b62aa0a2b..b0f04af4b6 100644
+--- a/linux-user/flatload.c
++++ b/linux-user/flatload.c
+@@ -692,7 +692,7 @@ static int load_flat_shared_library(int id, struct lib_info *libs)
+ 	char buf[16];
  
-         switch (index) {
-         case 0:
--            sprintf(ring_name, "cmd");
-+            snprintf(ring_name, sizeof(ring_name), "cmd");
-             break;
-         case 1:
--            sprintf(ring_name, "event");
-+            snprintf(ring_name, sizeof(ring_name), "event");
-             break;
-         default:
--            sprintf(ring_name, "%s-%d", index % 2 ? "rx" : "tx",
--                    (index - 2) / 2);
-+            snprintf(ring_name, sizeof(ring_name), "%s-%d",
-+                     index % 2 ? "rx" : "tx", (index - 2) / 2);
-         }
+ 	/* Create the file name */
+-	sprintf(buf, "/lib/lib%d.so", id);
++    snprintf(buf, sizeofbuf), "/lib/lib%d.so", id);
  
-         switch (offset) {
-         case ROCKER_DMA_DESC_ADDR_OFFSET:
--            sprintf(buf, "Ring[%s] ADDR", ring_name);
-+            snprintf(buf, sizeofbuf), "Ring[%s] ADDR", ring_name);
-             return buf;
-         case ROCKER_DMA_DESC_ADDR_OFFSET+4:
--            sprintf(buf, "Ring[%s] ADDR+4", ring_name);
-+            snprintf(buf, sizeofbuf), "Ring[%s] ADDR+4", ring_name);
-             return buf;
-         case ROCKER_DMA_DESC_SIZE_OFFSET:
--            sprintf(buf, "Ring[%s] SIZE", ring_name);
-+            snprintf(buf, sizeofbuf), "Ring[%s] SIZE", ring_name);
-             return buf;
-         case ROCKER_DMA_DESC_HEAD_OFFSET:
--            sprintf(buf, "Ring[%s] HEAD", ring_name);
-+            snprintf(buf, sizeofbuf), "Ring[%s] HEAD", ring_name);
-             return buf;
-         case ROCKER_DMA_DESC_TAIL_OFFSET:
--            sprintf(buf, "Ring[%s] TAIL", ring_name);
-+            snprintf(buf, sizeofbuf), "Ring[%s] TAIL", ring_name);
-             return buf;
-         case ROCKER_DMA_DESC_CTRL_OFFSET:
--            sprintf(buf, "Ring[%s] CTRL", ring_name);
-+            snprintf(buf, sizeofbuf), "Ring[%s] CTRL", ring_name);
-             return buf;
-         case ROCKER_DMA_DESC_CREDITS_OFFSET:
--            sprintf(buf, "Ring[%s] CREDITS", ring_name);
-+            snprintf(buf, sizeofbuf), "Ring[%s] CREDITS", ring_name);
-             return buf;
-         default:
--            sprintf(buf, "Ring[%s] ???", ring_name);
-+            snprintf(buf, sizeofbuf), "Ring[%s] ???", ring_name);
-             return buf;
-         }
-     } else {
+ 	/* Open the file up */
+ 	bprm.filename = buf;
 -- 
 2.41.0
 
