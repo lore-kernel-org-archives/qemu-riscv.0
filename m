@@ -4,86 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58DDBCD1292
-	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Apr 2024 10:46:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF9F4CD1284
+	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Apr 2024 10:46:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ruruw-0003Nw-1j; Thu, 11 Apr 2024 06:44:30 -0400
+	id 1ruruq-0003AI-Nd; Thu, 11 Apr 2024 06:44:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rurut-0003M3-Rx
- for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 06:44:27 -0400
-Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ruruo-00030B-0y
+ for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 06:44:23 -0400
+Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rurus-0004Nn-8P
- for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 06:44:27 -0400
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-343f1957ffcso449743f8f.0
- for <qemu-riscv@nongnu.org>; Thu, 11 Apr 2024 03:44:25 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rurum-0004Mp-7O
+ for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 06:44:21 -0400
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-417d092f39aso3802175e9.1
+ for <qemu-riscv@nongnu.org>; Thu, 11 Apr 2024 03:44:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712832265; x=1713437065; darn=nongnu.org;
+ d=linaro.org; s=google; t=1712832259; x=1713437059; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xiqqVJM+uSsQysg2/XmJ/Md8TLOTVsfYAw0sKCriLiE=;
- b=GZeFCtW9AOmnpwAxKfWv9ISvHo97cnyH/2SgCnGbG8O41ShKUf87tOeZFwkDYtNGwF
- a6/z6Pp8NPeWLcsXQm1nmM3Onw58KbDYigvUXot1c8FDcroYsGvgEWBpK8IM4Cc7lFAG
- iRvGJIjBdjA5zm0WnTHqUawBCvZCh+vLhC5dsO974tlMfnYXOBWlB6fVN9yjsbV0Qgvt
- m47JjFs6OYT1ic7MO+RiQa2EQvt1xwb9X419iK9mwSGJNW53SJT3PuCaIzqkYQf2PjNL
- Hz5aQQPQZh8BACQwP+bXUpYitcYFZ3sbWWBoFm+To7w9/La2P9o7fAEih4fqh+XDnYun
- FIGg==
+ bh=chFRh2l0gcnmg03fCHQ7SXYogZ+gzE1I40m0bX1o6CE=;
+ b=c5j3mEqIll58L5zq6hJWJGZLhH1d7hh/36VU6fYKyFvE7mJflDy8Z6/IxZVkoclLC6
+ Us8uwAhhcOIjWRB5wKRchzmwBY9E8yf6W7fULJ3Be0ehRRyuTjBJs7WSjbMAS975K7I1
+ PnAl+pFAkjmudj99nUZ3jEWvNGzGwp9ZFJi3xAI1T/6HJIcJkRuntvyUWhmoIvfjTisP
+ akSmFEtZuSWCMwto/n3+ztSYikX0U5COHsw7i6pKKvHG7ObedGuMRSDVuA/150ek0E8q
+ 4YLe8V0pNGJw0WHllYGIl96QB5dm81ulpqa5jVyiGSJeSyrl4gIdQ6bbft69/BKMkLCJ
+ wjdg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712832265; x=1713437065;
+ d=1e100.net; s=20230601; t=1712832259; x=1713437059;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=xiqqVJM+uSsQysg2/XmJ/Md8TLOTVsfYAw0sKCriLiE=;
- b=H6OZe/Im0c6uEJH9I3b4uRPn2f7jHBhWMv+TRWYFV0YhkhUIgHUTeHuWWmEWfvAUX3
- XWMt2lS/DTtgale7jGm5p//y3clZLrIJhaAKVujO+6fmAP8mYQ/y2GkzYDnAFQDrZ1Hy
- +nK4VmjH88TLed4EXAj+ZFYQxCSF7YYRzg/4TlBMN8MfRD/n+X3p4dr5C86j8eb9FPAb
- ewST/FYm5mn8+OJD8aCyHA57iZIppYLB98R6J1zCGP6hXqqczwL2swykh79LLp3PTmAe
- jOSKL0i+hOMXDezzr0wxOWJKfolpGm5krj2tC9vKla4c5RABBDWu1nHEPV9A9lKmO09q
- P8qA==
-X-Gm-Message-State: AOJu0YyigFMh/cs88m9JUlZr7kIw0925BGmxy5iOoT6VCjUXvj7W3nwY
- FoA8pvXrQ2QCn5+LCDTMlrGN4ejRjG0ivmMQh+GQ8zX7nzmLJUBD2yMqSS4NbpQ=
-X-Google-Smtp-Source: AGHT+IH5WdsUCy2YrTa1nAFk+W2+biINtYu7zSxeIY94sdIWWeUx9VCNP2h+PHW444Y+DBkdVr0M3g==
-X-Received: by 2002:a5d:46c4:0:b0:343:44cd:7d1e with SMTP id
- g4-20020a5d46c4000000b0034344cd7d1emr2084780wrs.17.1712832264913; 
- Thu, 11 Apr 2024 03:44:24 -0700 (PDT)
+ bh=chFRh2l0gcnmg03fCHQ7SXYogZ+gzE1I40m0bX1o6CE=;
+ b=A7YHO3ZyqlJMKYXBCLuxWkXCAUnnfYKP4ZVTGzLDm3UJaWETbCig4GqUeqOPq3CzwL
+ O4dUMykSiV75JV69PTw74jAgQPPSSNghLSKqpYxdnAFG1ybJvyzmiLvfVg9ExYKYL6jp
+ b2TRWS0xz9FO+uGLwy+FvUAMDbX1eHePflrTzC0QaLCruBDphMz4XP3FD6DkyKc+V+EJ
+ TGaxl3aNuENJGj0gjgW5muwmHtY9z8ms5ECZp0hMzevYrxTRtjFMIfAFiQAww7XlF+Ok
+ D5J69nW4/L/2k7WeyZaetB00np11fr+ArZWEvpptcuQaEttKEWOWOyljLTRqykfnteTV
+ DZyw==
+X-Gm-Message-State: AOJu0YyKETrl7QrQ7dPoePwLlEdd+LmU0Xi+ICIY0cVf2+rD9gtWjhgl
+ cyYJoq6wabzeZebNoPyQzFtWm+A0mBWA7zzN3Nh0TuKE/raz8DMgUhL8EWiB2GoH6fHBPdOub3G
+ jCGY=
+X-Google-Smtp-Source: AGHT+IFjECzwDpyVWvUJySuSwoGDnBY202ZAAe8bPly8W7j1uYJbgDuXOU1kDaCF/UNyeX5b3pH3Kw==
+X-Received: by 2002:a05:600c:4f53:b0:416:89bc:dec6 with SMTP id
+ m19-20020a05600c4f5300b0041689bcdec6mr2004919wmq.11.1712832258773; 
+ Thu, 11 Apr 2024 03:44:18 -0700 (PDT)
 Received: from localhost.localdomain
  (137.red-88-29-174.dynamicip.rima-tde.net. [88.29.174.137])
  by smtp.gmail.com with ESMTPSA id
- m5-20020a5d6245000000b0034334af2957sm1470365wrv.37.2024.04.11.03.44.23
+ he8-20020a05600c540800b00416a08788a5sm5123079wmb.27.2024.04.11.03.44.17
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 11 Apr 2024 03:44:24 -0700 (PDT)
+ Thu, 11 Apr 2024 03:44:18 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH 7/9] hw/riscv/virt: Replace sprintf() by snprintf()
-Date: Thu, 11 Apr 2024 12:43:38 +0200
-Message-ID: <20240411104340.6617-8-philmd@linaro.org>
+ Jiri Pirko <jiri@resnulli.us>, Jason Wang <jasowang@redhat.com>
+Subject: [PATCH 6/9] hw/net/rocker: Replace sprintf() by snprintf()
+Date: Thu, 11 Apr 2024 12:43:37 +0200
+Message-ID: <20240411104340.6617-7-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240411104340.6617-1-philmd@linaro.org>
 References: <20240411104340.6617-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::429;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x429.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::335;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x335.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,32 +101,66 @@ resulting in painful developper experience. Use snprintf() instead.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- hw/riscv/virt.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ hw/net/rocker/rocker.c | 24 ++++++++++++------------
+ 1 file changed, 12 insertions(+), 12 deletions(-)
 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index d171e74f7b..b3fede1207 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -1619,7 +1619,7 @@ static char *virt_get_aia_guests(Object *obj, Error **errp)
-     RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
-     char val[32];
+diff --git a/hw/net/rocker/rocker.c b/hw/net/rocker/rocker.c
+index 7ea8eb6ba5..03ac7a7ae9 100644
+--- a/hw/net/rocker/rocker.c
++++ b/hw/net/rocker/rocker.c
+@@ -915,40 +915,40 @@ static const char *rocker_reg_name(void *opaque, hwaddr addr)
  
--    sprintf(val, "%d", s->aia_guests);
-+    snprintf(val, sizeof(val), "%d", s->aia_guests);
-     return g_strdup(val);
- }
+         switch (index) {
+         case 0:
+-            sprintf(ring_name, "cmd");
++            snprintf(ring_name, sizeof(ring_name), "cmd");
+             break;
+         case 1:
+-            sprintf(ring_name, "event");
++            snprintf(ring_name, sizeof(ring_name), "event");
+             break;
+         default:
+-            sprintf(ring_name, "%s-%d", index % 2 ? "rx" : "tx",
+-                    (index - 2) / 2);
++            snprintf(ring_name, sizeof(ring_name), "%s-%d",
++                     index % 2 ? "rx" : "tx", (index - 2) / 2);
+         }
  
-@@ -1785,7 +1785,8 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
-     object_class_property_add_str(oc, "aia-guests",
-                                   virt_get_aia_guests,
-                                   virt_set_aia_guests);
--    sprintf(str, "Set number of guest MMIO pages for AIA IMSIC. Valid value "
-+    snprintf(str, sizeof(str),
-+                 "Set number of guest MMIO pages for AIA IMSIC. Valid value "
-                  "should be between 0 and %d.", VIRT_IRQCHIP_MAX_GUESTS);
-     object_class_property_set_description(oc, "aia-guests", str);
-     object_class_property_add(oc, "acpi", "OnOffAuto",
+         switch (offset) {
+         case ROCKER_DMA_DESC_ADDR_OFFSET:
+-            sprintf(buf, "Ring[%s] ADDR", ring_name);
++            snprintf(buf, sizeofbuf), "Ring[%s] ADDR", ring_name);
+             return buf;
+         case ROCKER_DMA_DESC_ADDR_OFFSET+4:
+-            sprintf(buf, "Ring[%s] ADDR+4", ring_name);
++            snprintf(buf, sizeofbuf), "Ring[%s] ADDR+4", ring_name);
+             return buf;
+         case ROCKER_DMA_DESC_SIZE_OFFSET:
+-            sprintf(buf, "Ring[%s] SIZE", ring_name);
++            snprintf(buf, sizeofbuf), "Ring[%s] SIZE", ring_name);
+             return buf;
+         case ROCKER_DMA_DESC_HEAD_OFFSET:
+-            sprintf(buf, "Ring[%s] HEAD", ring_name);
++            snprintf(buf, sizeofbuf), "Ring[%s] HEAD", ring_name);
+             return buf;
+         case ROCKER_DMA_DESC_TAIL_OFFSET:
+-            sprintf(buf, "Ring[%s] TAIL", ring_name);
++            snprintf(buf, sizeofbuf), "Ring[%s] TAIL", ring_name);
+             return buf;
+         case ROCKER_DMA_DESC_CTRL_OFFSET:
+-            sprintf(buf, "Ring[%s] CTRL", ring_name);
++            snprintf(buf, sizeofbuf), "Ring[%s] CTRL", ring_name);
+             return buf;
+         case ROCKER_DMA_DESC_CREDITS_OFFSET:
+-            sprintf(buf, "Ring[%s] CREDITS", ring_name);
++            snprintf(buf, sizeofbuf), "Ring[%s] CREDITS", ring_name);
+             return buf;
+         default:
+-            sprintf(buf, "Ring[%s] ???", ring_name);
++            snprintf(buf, sizeofbuf), "Ring[%s] ???", ring_name);
+             return buf;
+         }
+     } else {
 -- 
 2.41.0
 
