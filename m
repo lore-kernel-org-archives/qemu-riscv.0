@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB7EDCD128A
-	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Apr 2024 12:00:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07FB7CD1284
+	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Apr 2024 12:01:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rut5e-000832-26; Thu, 11 Apr 2024 07:59:38 -0400
+	id 1rut6z-0000dN-SX; Thu, 11 Apr 2024 08:01:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1rut5c-00081x-Gs
- for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 07:59:36 -0400
-Received: from mail-ed1-x532.google.com ([2a00:1450:4864:20::532])
+ id 1rut6u-0000aO-Nc
+ for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 08:00:58 -0400
+Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1rut5a-0002cs-Ml
- for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 07:59:36 -0400
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-56e1baf0380so8974326a12.3
- for <qemu-riscv@nongnu.org>; Thu, 11 Apr 2024 04:59:33 -0700 (PDT)
+ id 1rut6s-00037J-1T
+ for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 08:00:56 -0400
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-56e48d0a632so8662344a12.2
+ for <qemu-riscv@nongnu.org>; Thu, 11 Apr 2024 05:00:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712836772; x=1713441572; darn=nongnu.org;
+ d=linaro.org; s=google; t=1712836852; x=1713441652; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/d6rzWM3RKzS8a1pTpO5jIX42wetHh6wJ1iYR9ZIqe8=;
- b=ANpSno27vPzS4KGbFq7ocX4xkBopmfzZhtRiZ2gWg3WEHD6/E/7ie+imS84agLcdei
- HStwe9IcyzFiu6R2kTF5adgyOncq3tunflAYcF6ycCiocJKJcdLKjhsYloZUpMT1/1um
- XgC45pyjuJ/zYCR9RXzGg0Kg6C58XfwnQ9C7yQEZiengW9l9yxqvB67eS3gwelVvJJt+
- I91J+8N1rF3y7FL0nfBy8hGKLinkvoSUIjRJfjKr84GXf2XJv1yO34/FanWkfSXkATg7
- q7OWMk3flJSp+vPYAcyqxBZmEPUZQ4PqJTTz5/CE5CupaPhgLHdW0b5FmlotAxrOzhF+
- xt8Q==
+ bh=LMDpvBCsKme7SnyejsGjoTv5/y0095tC1fHhVZYZftw=;
+ b=YHvfATcUomsQEX6NupZR8zDS/FxowK8HhKjLhqCKI1AbD8WLvh1gpTE8fDqBS0N55u
+ Whznk5p2NXNEIb0YDtiQrf8DwkRcFQ3HLeK44ZRDWwevCCZDY4WmLfL8Vr7oBgL9mNa1
+ 1tsmf/Tz/ynNzEt8/grIy2+jkvRwop0YGNIVO0CpgErteLoygRm+NQ1FsG0+ZWXmaDTY
+ eXvKXLD5xzxt2Q537CI7e80JbrBBsWlQ8/hJVWJQRoPfdHBaZS3cs7EpZEgBZAK7WDen
+ jT3yI8WIfHtAs+EWfAvx0ZkjblbczJfhW+4oRYKRcNhnZncUCiDnj2wLUkJ0qUmWyFfS
+ EFCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712836772; x=1713441572;
+ d=1e100.net; s=20230601; t=1712836852; x=1713441652;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/d6rzWM3RKzS8a1pTpO5jIX42wetHh6wJ1iYR9ZIqe8=;
- b=SWUswI1RSOr7XdawI/oiO39goHY8wuvYTR8IDg6b4wIEyxlPDaG7B6ps2ThadHBbQX
- Qz9M2THgfiAdPeWWp6JuLyPs1Zhdb32te6eJ9Dwp/PMBoypkbb2hrHHI1AlqrpnPkX74
- f9XQEDIDfumtznS4yMUPvkC2BJ3dpTFcKmYpTDRAN29HByXYHdU/iBjEQsp69Wgwos96
- O9dTNqYbLTjMcHqG3gRkcz/0hOaCelZ4XWTYF9FBqwmbwIoIRG2EcPeuYvVPrQqp+Fnl
- 2H1o1Mtx5onQOkBV1CAM7N2f4w7u/zUwxQU2s8sEiIzRmngjVvNrBG26SstgHH4i/a/K
- D2NQ==
+ bh=LMDpvBCsKme7SnyejsGjoTv5/y0095tC1fHhVZYZftw=;
+ b=pvXnUQimXesBVKNAhZkg1nzqFfCF9u7aCUYAIoBi/9El480HqcpVOBjzxeQTRl9NgG
+ Q3SenOS57lUEBv4rTvQ1oQaijP5ZN9BRzInc39lsRTIkCxgKgzUh4lLjrm5uCo3Z6IiI
+ prkIvdYNIyIBnUtapSBHXAmQBYrnBL7PBhzj8PH/HyZiLRU0N6tZIv9+jE/Dp+eJY5Zn
+ RTXhiHf29kJmH3iGgFtEgluhV/nlJEi4+0mpLM9oFxJsGgpDgxWkiO+IHlPRxKZNxtsb
+ tP1CYzEHLNeuycJwX2VR35CDGy3Ncqf9Yjn8iS0fYNgKyD+Ruf2Vgmb8MBrnD43vtjuX
+ Tbuw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVaoJCBprP9g4oKVlmpuniiVMghYkudUW+Xf52vgWWnY7q5PCptldhuLAvciN+dIMOUI5FGeZxevtdAQUBYHGyjBfeLtjY=
-X-Gm-Message-State: AOJu0YzhyHAFdYEDxtJGB301MEaPdjl66+F7UQQ0FVDmw72MHDuXk5L9
- 6PDh3NVYLzmTMEGlmTya8+/UURByvm/jUksBPN5LmcvFadXkD3/aIXAMagonQW99zAK/Lzzkq2t
- Y6C4Qzn6byEewaZvPFcI6wFHG1sIU1TBARBeaQQ==
-X-Google-Smtp-Source: AGHT+IEZBE9CL57fOOXD8ugzG94aVuACdJqyvRZTMYuJSwpOa7Bv87fyLUCo3wLcrD4iUaiGj7OvJ3yAGelTW7TO9iQ=
-X-Received: by 2002:a50:a45b:0:b0:56f:daae:7cc1 with SMTP id
- v27-20020a50a45b000000b0056fdaae7cc1mr2385706edb.23.1712836772124; Thu, 11
- Apr 2024 04:59:32 -0700 (PDT)
+ AJvYcCXUFCUOfuY2mk4tWPv8PfLxY8HUoWiyd6VDVHS9olW/8twQ4ewEvbOSvOJWSfRK58vn/f+0d19b8CKVhpwIDFa07M5l+Qk=
+X-Gm-Message-State: AOJu0YxcqMqCZciOj8AjOpcwOcGJxQ9+N8RW9Nrj5xe0ReMxhGJFfcB6
+ zBnm6fOFHWyoEy/x1adWYnIBucigbjlcQu+UvWrPuHOJutVT5NSNVDxNh4vbtN6o9N5QlENn7Et
+ MvdsZ8tmcmGF81wP+yXh7U+9YlTKfoTGMMWb4yg==
+X-Google-Smtp-Source: AGHT+IE0yBMHAD/gjfRL6nzO6RBzcarhGUxCVzNYOAx06wsKoUKxZNwQDl8GBEC8Uds06mctb1cSUUJlk5T6w55WEas=
+X-Received: by 2002:a50:c30c:0:b0:566:2aff:2d38 with SMTP id
+ a12-20020a50c30c000000b005662aff2d38mr4262976edb.26.1712836852116; Thu, 11
+ Apr 2024 05:00:52 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240411104340.6617-1-philmd@linaro.org>
- <20240411104340.6617-10-philmd@linaro.org>
-In-Reply-To: <20240411104340.6617-10-philmd@linaro.org>
+ <20240411104340.6617-4-philmd@linaro.org>
+In-Reply-To: <20240411104340.6617-4-philmd@linaro.org>
 From: Peter Maydell <peter.maydell@linaro.org>
-Date: Thu, 11 Apr 2024 12:59:20 +0100
-Message-ID: <CAFEAcA_XHVWAiMZ8iw3xVVjnHs+aoxQB=uUjBQy7EGmSj14U+Q@mail.gmail.com>
-Subject: Re: [PATCH 9/9] target/i386: Replace sprintf() by snprintf()
+Date: Thu, 11 Apr 2024 13:00:41 +0100
+Message-ID: <CAFEAcA-tRVJ1+cXwmGg7XGdej_iRLYy-xYM6q=s_D4pmyVcC9A@mail.gmail.com>
+Subject: Re: [PATCH 3/9] disas/riscv: Replace sprintf() by snprintf()
 To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org, 
- Paolo Bonzini <pbonzini@redhat.com>, Marcelo Tosatti <mtosatti@redhat.com>,
- kvm@vger.kernel.org
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::532;
- envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x532.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
+ envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x52e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -102,39 +102,8 @@ g> wrote:
 >
 > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
 > ---
->  target/i386/kvm/kvm.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
->
-> diff --git a/target/i386/kvm/kvm.c b/target/i386/kvm/kvm.c
-> index e68cbe9293..a46d1426bf 100644
-> --- a/target/i386/kvm/kvm.c
-> +++ b/target/i386/kvm/kvm.c
-> @@ -5335,7 +5335,8 @@ int kvm_arch_handle_exit(CPUState *cs, struct kvm_r=
-un *run)
->      case KVM_EXIT_NOTIFY:
->          ctx_invalid =3D !!(run->notify.flags & KVM_NOTIFY_CONTEXT_INVALI=
-D);
->          state =3D KVM_STATE(current_accel());
-> -        sprintf(str, "Encounter a notify exit with %svalid context in"
-> +        snprintf(str, sizeof(str),
-> +                     "Encounter a notify exit with %svalid context in"
->                       " guest. There can be possible misbehaves in guest.=
-"
->                       " Please have a look.", ctx_invalid ? "in" : "");
->          if (ctx_invalid ||
-> --
 
-This is a case where I think we would be better off with
-g_strdup_printf():
-
- * the buffer declaration is a long way away from its use
- * the string is long and it's not trivial to confirm that
-   it will fit in the buffer
- * it's quite plausible somebody will come along later to
-   clean up the wording of the error message and not notice
-   they need to enlarge the buffer
- * it's only for printing a warning, so it's not going to
-   be in a hot codepath
+Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
 
 thanks
 -- PMM
