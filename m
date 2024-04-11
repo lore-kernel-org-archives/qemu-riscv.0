@@ -4,73 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC341CD1284
-	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Apr 2024 10:43:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E822CD128A
+	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Apr 2024 10:45:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ruruG-0002jO-8W; Thu, 11 Apr 2024 06:43:48 -0400
+	id 1ruruM-0002lJ-0o; Thu, 11 Apr 2024 06:43:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ruruF-0002jC-28
- for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 06:43:47 -0400
-Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ruruK-0002kg-6d
+ for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 06:43:52 -0400
+Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ruruD-000488-1J
- for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 06:43:46 -0400
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-343e46ec237so4713488f8f.2
- for <qemu-riscv@nongnu.org>; Thu, 11 Apr 2024 03:43:44 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ruruI-0004Aj-Ok
+ for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 06:43:51 -0400
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-346b96f1483so269217f8f.1
+ for <qemu-riscv@nongnu.org>; Thu, 11 Apr 2024 03:43:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712832223; x=1713437023; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=StAg582IsYUfzw7jTeYwZAGK85x75PWnZXDo6iqC+rM=;
- b=jUJhgtshcfKZbJ3KL3IFB8D3BAMZNSnSbsLDimh9H2aDa+ZgUwCLa9IDHvxuRRsxoZ
- P+qpTuxPO8YhVszlq/M5kYG4oaZc4vRYNeEtoBFcF5exfwjMZKdNDmNAo9gpeU/8BO0H
- HIavHQvuzwgLg1rEFQ6+DEFioXnZ9b9gj/3g1IRGr8pmfT5rNUs0b6JRQ/XTJDnkF+31
- avEgkcdVZVpDYp/pA9NYPCUpbpkLzLsNimVAjQToUXNI2BYnQarHDEOfIn0jiovAhGsp
- Vl4NUXNbiZhqnH+zH5k4RCNobaRCj1qZwQ26OzjGEeyEZIHoHocMXgcIS9kds4xbHv0B
- Rolg==
+ d=linaro.org; s=google; t=1712832229; x=1713437029; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=u3g1QSRg86bxVtcxnKKn01h0Ac3fWVT80PO+fMEEjTc=;
+ b=ujZpLNuGHK2mgdbNq1+2c8R/e0NYK1eJuktMVqdvKiJhiB4WtUPEa8yu1DKTX9KJu6
+ iH3B8pl8mwtJE3vId/+Xvaz9Eyy53LyIZLniC92hpKueuIJ9gXidZVC+yYgSSS6SzpfR
+ HHPINm0UkW+MKIFrPbo+M0FriOEdFfbvIDWpoSAPMiqq8/iOUcrsV8i+tYCvQNX+/8sC
+ DQu4PnehSbTywx1gtfTnnqFRQ2T2teeXLgdQ0+1b5C048d8GuPevS1kigPRLqteMFuQB
+ +ob8Y0yH/Q8fvaWpcAEKS+ZpHNraGxM6Ns7yTXb5LoNRzsPBIM6W1zEwKo/zQwqNlVA9
+ 9izQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712832223; x=1713437023;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=StAg582IsYUfzw7jTeYwZAGK85x75PWnZXDo6iqC+rM=;
- b=JRynRPA+8OMcDErocsSkmFIrWup+vIKZx1zP5oqPXKSwmL4XFkmLoJonqUsgA/7D/j
- 8AiorbL/GAxpiLpASEX8fq6Va7CakhMAkiAofr/JNL+ZqDAfgGhgYrpd73qe6kAhI/hS
- aayl4jNQvkMU8k7+Tg2c4L8Ts69tGKjQIQxEDgpyiu45pIDkP6ItRQk/+i42Pu00NwGB
- t15L+iJfGzoken69XabwSny99MamnxrCupoFmzwsCJ9WE5jiAI68B78qNvu1Azyyh0B+
- CEZa/vqVSf6/lbzbwlPYPrOHAxATj1zotPd4NwGA9I7j0OzWXMFgXtupYAsIql3B40fK
- ovHA==
-X-Gm-Message-State: AOJu0YyuzOprt5tDMSMo2of7RIiDC/izWTD88v4ZBHeA9+iZUW2EGUp2
- tYhZDk+OjuyBqnIFkBZKh67T1EZLbfLmUaPiRmnXKM+2tixVahljvjCX8G4j77oLd4jFm1gEy22
- N9Ic=
-X-Google-Smtp-Source: AGHT+IFi9/8iv6Qesk2ck+iKMFQl0VhFPHk3PrG4jLviJ88A8hvuZ0qNjj9KAPOtFpNX9gIPVohOig==
-X-Received: by 2002:a5d:5885:0:b0:346:b8cf:b61d with SMTP id
- n5-20020a5d5885000000b00346b8cfb61dmr1142647wrf.43.1712832223279; 
- Thu, 11 Apr 2024 03:43:43 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1712832229; x=1713437029;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=u3g1QSRg86bxVtcxnKKn01h0Ac3fWVT80PO+fMEEjTc=;
+ b=NZB5LURdxiusllt32qY7Ae5f4cgrSHw4hJrRoIsqXeaj5tAPImvTWMQdPg5om0peHy
+ 5q7V12g55PNw6+oMYP8hYGN9HPUUuQjxgrvEvyIrSB3xTz1JQe7+CaGSPMD05bYeKHeg
+ WrZHPe/etfqz2PG0KVSLWKMMdKU6bEmetaQQRsX2ZQupVUp4GIJ9YiaCcroT/chAdYIY
+ c/zUgh/p61QscJReP5SPfOCzpplehWtw3FM5sBCEu+MOZcvRxePpOK4abKwTaK02Ekhw
+ f1WT3bowcDf/5ZocENMgtnC/wz+WelEJWAlVImAwHjSZNyv8EXiov1BoQNxJb2jkWvH/
+ gxDQ==
+X-Gm-Message-State: AOJu0Yzu7QjHOteLm2I5w+o8MRBxOXbD7dHnEwhjhW3ek3b2dnk+KYzw
+ cERGtVYUPRELxgAymrm8trBrP/GbgPVUBDHV254Gc0e/MM7rRyU4wKhPssZZyFw=
+X-Google-Smtp-Source: AGHT+IFE1VighhGsxizlW1KVNqq6FJI4NrlkdeqVvnU3HOZQW/MzQeccuj1xC3nxBApNspbdHZsN6A==
+X-Received: by 2002:a5d:456d:0:b0:346:65dd:5580 with SMTP id
+ a13-20020a5d456d000000b0034665dd5580mr1693002wrc.3.1712832229124; 
+ Thu, 11 Apr 2024 03:43:49 -0700 (PDT)
 Received: from localhost.localdomain
  (137.red-88-29-174.dynamicip.rima-tde.net. [88.29.174.137])
  by smtp.gmail.com with ESMTPSA id
- h6-20020a5d5046000000b00346df659e7dsm98738wrt.17.2024.04.11.03.43.42
+ m5-20020a5d6245000000b0034334af2957sm1469250wrv.37.2024.04.11.03.43.47
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 11 Apr 2024 03:43:42 -0700 (PDT)
+ Thu, 11 Apr 2024 03:43:48 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
- Philippe =?unknown-8bit?q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 0/9] misc: Replace sprintf() by snprintf() due to macOS
- deprecation
-Date: Thu, 11 Apr 2024 12:43:31 +0200
-Message-ID: <20240411104340.6617-1-philmd@linaro.org>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Laurent Vivier <laurent@vivier.eu>
+Subject: [PATCH 1/9] disas/m68k: Replace sprintf() by snprintf()
+Date: Thu, 11 Apr 2024 12:43:32 +0200
+Message-ID: <20240411104340.6617-2-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20240411104340.6617-1-philmd@linaro.org>
+References: <20240411104340.6617-1-philmd@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::429;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x429.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::430;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x430.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -93,40 +95,27 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Continuation of:
-https://lore.kernel.org/qemu-devel/20240411101550.99392-1-philmd@linaro.org/
+sprintf() is deprecated on Darwin since macOS 13.0 / XCode 14.1,
+resulting in painful developper experience. Use snprintf() instead.
 
-*** BLURB HERE ***
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+---
+ disas/m68k.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Philippe Mathieu-Daudé (9):
-  disas/m68k: Replace sprintf() by snprintf()
-  disas/microblaze: Replace sprintf() by snprintf()
-  disas/riscv: Replace sprintf() by snprintf()
-  linux-user/flatload: Replace sprintf() by snprintf()
-  hw/misc/imx: Replace sprintf() by snprintf()
-  hw/net/rocker: Replace sprintf() by snprintf()
-  hw/riscv/virt: Replace sprintf() by snprintf()
-  target/arm: Replace sprintf() by snprintf()
-  target/i386: Replace sprintf() by snprintf()
-
- disas/m68k.c           |  2 +-
- disas/microblaze.c     | 25 ++++++++++++++++---------
- disas/riscv.c          | 10 +++++-----
- hw/misc/imx25_ccm.c    |  2 +-
- hw/misc/imx31_ccm.c    |  2 +-
- hw/misc/imx6_ccm.c     |  4 ++--
- hw/misc/imx6_src.c     |  2 +-
- hw/misc/imx6ul_ccm.c   |  4 ++--
- hw/misc/imx7_src.c     |  2 +-
- hw/net/imx_fec.c       |  2 +-
- hw/net/rocker/rocker.c | 24 ++++++++++++------------
- hw/riscv/virt.c        |  5 +++--
- hw/ssi/imx_spi.c       |  2 +-
- linux-user/flatload.c  |  2 +-
- target/arm/cpu64.c     |  4 ++--
- target/i386/kvm/kvm.c  |  3 ++-
- 16 files changed, 52 insertions(+), 43 deletions(-)
-
+diff --git a/disas/m68k.c b/disas/m68k.c
+index 1f16e295ab..800b4145ac 100644
+--- a/disas/m68k.c
++++ b/disas/m68k.c
+@@ -1000,7 +1000,7 @@ print_indexed (int basereg,
+ 
+   /* Generate the text for the index register.
+      Where this will be output is not yet determined.  */
+-  sprintf (buf, "%s:%c%s",
++  snprintf(buf, sizeof(buf), "%s:%c%s",
+ 	   reg_names[(word >> 12) & 0xf],
+ 	   (word & 0x800) ? 'l' : 'w',
+ 	   scales[(word >> 9) & 3]);
 -- 
 2.41.0
 
