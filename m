@@ -4,81 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B489FCD128A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 10 Apr 2024 20:25:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC341CD1284
+	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Apr 2024 10:43:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rueUl-0001s0-0Z; Wed, 10 Apr 2024 16:24:35 -0400
+	id 1ruruG-0002jO-8W; Thu, 11 Apr 2024 06:43:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rueUj-0001rD-Mu
- for qemu-riscv@nongnu.org; Wed, 10 Apr 2024 16:24:33 -0400
-Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ruruF-0002jC-28
+ for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 06:43:47 -0400
+Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rueUh-0003Ch-82
- for qemu-riscv@nongnu.org; Wed, 10 Apr 2024 16:24:33 -0400
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-6ecfeefe94cso162299b3a.0
- for <qemu-riscv@nongnu.org>; Wed, 10 Apr 2024 13:24:30 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ruruD-000488-1J
+ for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 06:43:46 -0400
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-343e46ec237so4713488f8f.2
+ for <qemu-riscv@nongnu.org>; Thu, 11 Apr 2024 03:43:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1712780669; x=1713385469; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=K0fdxUMTObtc6VatQxbqJ67dC34jcDtKHMHbSEy6M2k=;
- b=LVNUlrFJLPJN+rSB4HOaO184wy4FH/6LxQQLZE3o6Th3qtjdHg+E7k7IlP6vPAPgBw
- bJUQr4e2Nj5pQy9DYgS5enD4nT5bWYo/PfWaB8XqSZfDdDJHDovq1fhvPNmh74N8WDP9
- PgGJ14Kyr4H/DVlaoWfeZ9tekdxP/2bv4WZi6Gvk8orPLEkOT+rsvfrNrm2H3DasngPf
- YlAKUp7ppTW0ZhF9GnbnCURxxBwkeKGgMHypwQuyIiA/OjdJmm7KnDjeJri3o8m/AMpM
- TpZUdkBc8lmV7Rj5vf/wPdVv6YTzmpUrkA9NDnCjZbEb5WNoP1NDiqrPEKxWqITq96nc
- IGHA==
+ d=linaro.org; s=google; t=1712832223; x=1713437023; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=StAg582IsYUfzw7jTeYwZAGK85x75PWnZXDo6iqC+rM=;
+ b=jUJhgtshcfKZbJ3KL3IFB8D3BAMZNSnSbsLDimh9H2aDa+ZgUwCLa9IDHvxuRRsxoZ
+ P+qpTuxPO8YhVszlq/M5kYG4oaZc4vRYNeEtoBFcF5exfwjMZKdNDmNAo9gpeU/8BO0H
+ HIavHQvuzwgLg1rEFQ6+DEFioXnZ9b9gj/3g1IRGr8pmfT5rNUs0b6JRQ/XTJDnkF+31
+ avEgkcdVZVpDYp/pA9NYPCUpbpkLzLsNimVAjQToUXNI2BYnQarHDEOfIn0jiovAhGsp
+ Vl4NUXNbiZhqnH+zH5k4RCNobaRCj1qZwQ26OzjGEeyEZIHoHocMXgcIS9kds4xbHv0B
+ Rolg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712780669; x=1713385469;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=K0fdxUMTObtc6VatQxbqJ67dC34jcDtKHMHbSEy6M2k=;
- b=kjajWsgikHgBn6eOJrHrK9j7zg/8UjEsP6EstuzZxt51w7O+OG+ZGa/z5Gonm3DktV
- OaW0rP05CppLsQ4gulVdbeoPLoynASwB+wO2CJSm7UX+dNalV3Kb2msSxzq7oTvJbZg+
- z3gXf0jC/9Ol8J38mLYRMfvUt7oUCGSAo6DUAF4uWD1pJlofuuRngREuQvfmOXLoxeMy
- 9oXSaacs9JPJAaCA6JnX7NxX1hf5P0QaYvsJHvok0hTXX/EDSzX9ZgCEHyUaTOddc6cY
- E4XMPO230Z3WBHcHeb8XN0xfsXYFfZq1z00Nvxc/hQZgso2WzNJv1EJSqDOs/7R40gR1
- pmTA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVkf+WDL9dEvbjdEl3uPxV7MN5WFGPxuUn3Nm1OXmF5LTzLeZ2/BbEhZYDy7+MySyoigrDVL4J6tDkkgsp4bjwYGYclcIw=
-X-Gm-Message-State: AOJu0YzjWnWFBVswO+mhdd/cONHiUWaEiyJUzDnIgZ3r6g39eXOHXB1T
- 3ugfhyYaF/EmPOA8ZX1fQQpaLxLvV+APERXyw5VOawSeE/TT/JH0d5ryQiw8GN8=
-X-Google-Smtp-Source: AGHT+IFJBBzzbVoe/ecEwIfB10Piuo5mBfuOpNOiJRTQZVHpW4GEEaW2s1tDfQsNHc4CCOPZyJ7T7w==
-X-Received: by 2002:a05:6a00:acc:b0:6ea:f3fb:26fe with SMTP id
- c12-20020a056a000acc00b006eaf3fb26femr993065pfl.12.1712780668713; 
- Wed, 10 Apr 2024 13:24:28 -0700 (PDT)
-Received: from [192.168.68.110] ([177.94.15.159])
+ d=1e100.net; s=20230601; t=1712832223; x=1713437023;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=StAg582IsYUfzw7jTeYwZAGK85x75PWnZXDo6iqC+rM=;
+ b=JRynRPA+8OMcDErocsSkmFIrWup+vIKZx1zP5oqPXKSwmL4XFkmLoJonqUsgA/7D/j
+ 8AiorbL/GAxpiLpASEX8fq6Va7CakhMAkiAofr/JNL+ZqDAfgGhgYrpd73qe6kAhI/hS
+ aayl4jNQvkMU8k7+Tg2c4L8Ts69tGKjQIQxEDgpyiu45pIDkP6ItRQk/+i42Pu00NwGB
+ t15L+iJfGzoken69XabwSny99MamnxrCupoFmzwsCJ9WE5jiAI68B78qNvu1Azyyh0B+
+ CEZa/vqVSf6/lbzbwlPYPrOHAxATj1zotPd4NwGA9I7j0OzWXMFgXtupYAsIql3B40fK
+ ovHA==
+X-Gm-Message-State: AOJu0YyuzOprt5tDMSMo2of7RIiDC/izWTD88v4ZBHeA9+iZUW2EGUp2
+ tYhZDk+OjuyBqnIFkBZKh67T1EZLbfLmUaPiRmnXKM+2tixVahljvjCX8G4j77oLd4jFm1gEy22
+ N9Ic=
+X-Google-Smtp-Source: AGHT+IFi9/8iv6Qesk2ck+iKMFQl0VhFPHk3PrG4jLviJ88A8hvuZ0qNjj9KAPOtFpNX9gIPVohOig==
+X-Received: by 2002:a5d:5885:0:b0:346:b8cf:b61d with SMTP id
+ n5-20020a5d5885000000b00346b8cfb61dmr1142647wrf.43.1712832223279; 
+ Thu, 11 Apr 2024 03:43:43 -0700 (PDT)
+Received: from localhost.localdomain
+ (137.red-88-29-174.dynamicip.rima-tde.net. [88.29.174.137])
  by smtp.gmail.com with ESMTPSA id
- r15-20020aa78b8f000000b006edda81101esm47879pfd.80.2024.04.10.13.24.25
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 10 Apr 2024 13:24:28 -0700 (PDT)
-Message-ID: <e6b49db7-ec02-4d76-8d57-b47dbcbb8ee7@ventanamicro.com>
-Date: Wed, 10 Apr 2024 17:24:23 -0300
+ h6-20020a5d5046000000b00346df659e7dsm98738wrt.17.2024.04.11.03.43.42
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Thu, 11 Apr 2024 03:43:42 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
+ Philippe =?unknown-8bit?q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH 0/9] misc: Replace sprintf() by snprintf() due to macOS
+ deprecation
+Date: Thu, 11 Apr 2024 12:43:31 +0200
+Message-ID: <20240411104340.6617-1-philmd@linaro.org>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH for-9.0] target/riscv/debug: set tval=pc in breakpoint
- exceptions
-Content-Language: en-US
-To: Alistair Francis <alistair23@gmail.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
- palmer@rivosinc.com, Joseph Chan <jchan@ventanamicro.com>
-References: <20240320093221.220854-1-dbarboza@ventanamicro.com>
- <CAKmqyKMDu7UTMhHOxs2=5qjRkcgWson+iQoUDhG+23xAtQF3rQ@mail.gmail.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <CAKmqyKMDu7UTMhHOxs2=5qjRkcgWson+iQoUDhG+23xAtQF3rQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::435;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x435.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::429;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x429.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -101,120 +93,41 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Continuation of:
+https://lore.kernel.org/qemu-devel/20240411101550.99392-1-philmd@linaro.org/
 
+*** BLURB HERE ***
 
-On 3/22/24 00:59, Alistair Francis wrote:
-> On Wed, Mar 20, 2024 at 7:33 PM Daniel Henrique Barboza
-> <dbarboza@ventanamicro.com> wrote:
->>
->> We're not setting (s/m)tval when triggering breakpoints of type 2
->> (mcontrol) and 6 (mcontrol6). According to the debug spec section
->> 5.7.12, "Match Control Type 6":
->>
->> "The Privileged Spec says that breakpoint exceptions that occur on
->> instruction fetches, loads, or stores update the tval CSR with either
->> zero or the faulting virtual address. The faulting virtual address for
->> an mcontrol6 trigger with action = 0 is the address being accessed and
->> which caused that trigger to fire."
-> 
-> Setting zero is valid though. I agree it's probably worth setting a
-> value, but I don't think we need this for 9.0
+Philippe Mathieu-Daudé (9):
+  disas/m68k: Replace sprintf() by snprintf()
+  disas/microblaze: Replace sprintf() by snprintf()
+  disas/riscv: Replace sprintf() by snprintf()
+  linux-user/flatload: Replace sprintf() by snprintf()
+  hw/misc/imx: Replace sprintf() by snprintf()
+  hw/net/rocker: Replace sprintf() by snprintf()
+  hw/riscv/virt: Replace sprintf() by snprintf()
+  target/arm: Replace sprintf() by snprintf()
+  target/i386: Replace sprintf() by snprintf()
 
-In fact, when fixing another related bug I learned that this except I mentioned
-from the debug spec doesn't tell the whole story. The section for mtval, priv
-spec 3.1.16, says:
+ disas/m68k.c           |  2 +-
+ disas/microblaze.c     | 25 ++++++++++++++++---------
+ disas/riscv.c          | 10 +++++-----
+ hw/misc/imx25_ccm.c    |  2 +-
+ hw/misc/imx31_ccm.c    |  2 +-
+ hw/misc/imx6_ccm.c     |  4 ++--
+ hw/misc/imx6_src.c     |  2 +-
+ hw/misc/imx6ul_ccm.c   |  4 ++--
+ hw/misc/imx7_src.c     |  2 +-
+ hw/net/imx_fec.c       |  2 +-
+ hw/net/rocker/rocker.c | 24 ++++++++++++------------
+ hw/riscv/virt.c        |  5 +++--
+ hw/ssi/imx_spi.c       |  2 +-
+ linux-user/flatload.c  |  2 +-
+ target/arm/cpu64.c     |  4 ++--
+ target/i386/kvm/kvm.c  |  3 ++-
+ 16 files changed, 52 insertions(+), 43 deletions(-)
 
-"When a trap is taken into M-mode, mtval is either set to zero or written with
-exception-specific information to assist software in handling the trap. Otherwise,
-mtval is never written by the implementation (...)"
+-- 
+2.41.0
 
-
-So "mtval" zero is valid. However the section for stval, priv spec 4.1.9, says:
-
-"When a trap is taken into S-mode, stval is written with exception-specific information
-to assist software in handling the trap. Otherwise, stval is never written by the
-implementation, though it may be explicitly written by software. The hardware platform
-will specify which exceptions must set stval informatively and which may unconditionally
-set it to zero."
-
-This a bit more cryptic to me. It doesn't mention "it's either zero or written", giving
-the impression that we must set it to a valid addr. But then in the end it follows up
-with  "The hardware platform will specify which exceptions must set stval informatively
-and which may unconditionally set it to zero.". So I'm not sure whether stval can be
-zero or not. I *think* zero is kind of valid ...
-
-Due to the apparent ambiguity I can't claim that this patch, and another patch I'm about
-to send that kind of does the same thing, is 9.0 material. I'll send both as 9.1.
-
-
-Thanks,
-
-Daniel
-
-
-
-
-> 
-> Alistair
-> 
->>
->> A similar text is also found in the Debug spec section 5.7.11 w.r.t.
->> mcontrol.
->>
->> Given that we always use action = 0, save the faulting address for the
->> mcontrol and mcontrol6 trigger breakpoints into env->badaddr, which is
->> used as as scratch area for traps with address information. 'tval' is
->> then set during riscv_cpu_do_interrupt().
->>
->> Reported-by: Joseph Chan <jchan@ventanamicro.com>
->> Fixes: b5f6379d13 ("target/riscv: debug: Implement debug related TCGCPUOps")
->> Fixes: c472c142a7 ("target/riscv: debug: Add initial support of type 6 trigger")
->> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->> ---
->>   target/riscv/cpu_helper.c | 1 +
->>   target/riscv/debug.c      | 3 +++
->>   2 files changed, 4 insertions(+)
->>
->> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
->> index ce7322011d..492ca63b1a 100644
->> --- a/target/riscv/cpu_helper.c
->> +++ b/target/riscv/cpu_helper.c
->> @@ -1717,6 +1717,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->>               tval = env->bins;
->>               break;
->>           case RISCV_EXCP_BREAKPOINT:
->> +            tval = env->badaddr;
->>               if (cs->watchpoint_hit) {
->>                   tval = cs->watchpoint_hit->hitaddr;
->>                   cs->watchpoint_hit = NULL;
->> diff --git a/target/riscv/debug.c b/target/riscv/debug.c
->> index e30d99cc2f..b110370ea6 100644
->> --- a/target/riscv/debug.c
->> +++ b/target/riscv/debug.c
->> @@ -798,6 +798,7 @@ bool riscv_cpu_debug_check_breakpoint(CPUState *cs)
->>                   if ((ctrl & TYPE2_EXEC) && (bp->pc == pc)) {
->>                       /* check U/S/M bit against current privilege level */
->>                       if ((ctrl >> 3) & BIT(env->priv)) {
->> +                        env->badaddr = pc;
->>                           return true;
->>                       }
->>                   }
->> @@ -810,11 +811,13 @@ bool riscv_cpu_debug_check_breakpoint(CPUState *cs)
->>                       if (env->virt_enabled) {
->>                           /* check VU/VS bit against current privilege level */
->>                           if ((ctrl >> 23) & BIT(env->priv)) {
->> +                            env->badaddr = pc;
->>                               return true;
->>                           }
->>                       } else {
->>                           /* check U/S/M bit against current privilege level */
->>                           if ((ctrl >> 3) & BIT(env->priv)) {
->> +                            env->badaddr = pc;
->>                               return true;
->>                           }
->>                       }
->> --
->> 2.44.0
->>
->>
 
