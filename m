@@ -4,85 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0737CD128A
-	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Apr 2024 10:46:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 314D2CD1284
+	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Apr 2024 10:47:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ruruj-0002xM-Nr; Thu, 11 Apr 2024 06:44:17 -0400
+	id 1rurxB-0006cG-Fd; Thu, 11 Apr 2024 06:46:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ruruh-0002wT-K8
- for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 06:44:15 -0400
-Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1rurx6-0006Hj-MC
+ for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 06:46:45 -0400
+Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ruruf-0004K9-Vj
- for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 06:44:15 -0400
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-416b5f6813cso25159195e9.0
- for <qemu-riscv@nongnu.org>; Thu, 11 Apr 2024 03:44:13 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1rurx4-00053E-V2
+ for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 06:46:44 -0400
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-56e69a51a33so3788925a12.1
+ for <qemu-riscv@nongnu.org>; Thu, 11 Apr 2024 03:46:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712832252; x=1713437052; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1712832401; x=1713437201; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CeYnoI7aOgEwL66760hzse5mJ3cb0VBg+S1wKs8bFQ0=;
- b=G5bDdycK8Ly0Pi6hc566NKP7L8l/jED7DIFXFYByOqqqLEwgrjdSHO9AHgGU+hNZ9m
- xxmdD1IFlkQ5QONWaVPFvCZGvUmflW7gganTiPa0i4o5hb1/MMIbEacA6jAkgbDWF2wi
- rTwcY5U9RmMLwRerS3J1x2LkEFSndt4OJGfWkfIxaDU1BniN9q6mgykaFMzopGeIFmrD
- rVa5mu7sguckJ/Q2EdG24xv2Zva4OFBGRY6qVE7GNEBY6XN8U87KQkn8bXj3zSmElcEx
- KuCUplLGv65ttCDk+sVpt/pJn58g5dyY1Vi14Vz0XsYQI3Nv0UqHXfmyU5MHNQ6OvAHu
- 1ssA==
+ bh=vbkLjk7fSqzJjIzpx+/g4deWwnUPCXq7b84Avz4t4Dk=;
+ b=NqVZYDjZXCPlGN7eQrgh/B8zFVDzFXkjHiwOXO8GHPjrnSXGboyRLILqoJ8ig8eoXn
+ l9zGwyQqNDcc+jlrAhnecjPYxS+FvrjO8fYufD7vkXFO3Ps67nJD8SouBnoX0pr7XOk3
+ jhB/8Q396M7NmEDvNFfbFdftSTA3Pm4EPL88MvaUtXtn8piqw2tBQsht+WS8dbeVqzUp
+ ZoxZzbqf5vCYLpUDy/S+bV1so1TGkocfMekTbvsnqXtrMzEOc++IojP+Xzgw+BDedAYl
+ 0QpdRzbgLWI8x3wLl71rQkKj7hUGdIsnxSfd+9eSx3sVRbe8c6b6UUUEL38XUF+EGJxz
+ +F1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712832252; x=1713437052;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1712832401; x=1713437201;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=CeYnoI7aOgEwL66760hzse5mJ3cb0VBg+S1wKs8bFQ0=;
- b=pp85I6LfbigjgYDB5bH9Ndm+4Dmtg/NdRjEkQEkckLITj+HkoiAg8JhxxNpsWAGwYt
- M2ks360cchKOt9xgyrTyzVn57xglrfKjHcvX9VHuMyYALXdg/kMvC0V81b8nQAmMoTaZ
- PmNZnfr0hvH5GJ+lc36181gWDg+eROByBmrLD/bmuVLHK9DYlxHmhOEqOJ5oRVhJp6cL
- QRwjeneWRHb1JmgwN5GUYywZ6E8C63zJgWoF+YLwA42gQuVoQkEzojW1nKpcH1AC0e5E
- wvQwz+ZnizsdFiTQTgM5zKpBMhqLzgJ8LvEczq9kc1n6ctkFMcX4IA2LnAUEEbypek1r
- UoSw==
-X-Gm-Message-State: AOJu0YxGP3W//35IWXf0AliRBOwQvay96TduvutBEKY11wl6r/y9BLOZ
- zKvEiZZyHilI5wSOZcmAnIae1Nmcfdb2NpypIIj9ZARdc9XvVAeFLmsyliS7KHY=
-X-Google-Smtp-Source: AGHT+IHZwP4w7kgYlcRHvHPtn5xaFB3CMNvvDS+8wnLG/q7rQtgc/WRYzMesP2ko7FKOiMmKT9TvnQ==
-X-Received: by 2002:adf:ce86:0:b0:346:bc1b:4e7c with SMTP id
- r6-20020adfce86000000b00346bc1b4e7cmr1325606wrn.35.1712832252684; 
- Thu, 11 Apr 2024 03:44:12 -0700 (PDT)
-Received: from localhost.localdomain
- (137.red-88-29-174.dynamicip.rima-tde.net. [88.29.174.137])
- by smtp.gmail.com with ESMTPSA id
- c10-20020adfc04a000000b003467a420243sm1485130wrf.12.2024.04.11.03.44.11
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 11 Apr 2024 03:44:12 -0700 (PDT)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Peter Maydell <peter.maydell@linaro.org>,
- Jean-Christophe Dubois <jcd@tribudubois.net>,
- Andrey Smirnov <andrew.smirnov@gmail.com>,
- Jason Wang <jasowang@redhat.com>, Alistair Francis <alistair@alistair23.me>
-Subject: [PATCH 5/9] hw/misc/imx: Replace sprintf() by snprintf()
-Date: Thu, 11 Apr 2024 12:43:36 +0200
-Message-ID: <20240411104340.6617-6-philmd@linaro.org>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20240411104340.6617-1-philmd@linaro.org>
-References: <20240411104340.6617-1-philmd@linaro.org>
+ bh=vbkLjk7fSqzJjIzpx+/g4deWwnUPCXq7b84Avz4t4Dk=;
+ b=GepIM8SagjHhDTZC6j7Za2U/8IPpmWlUTHrYrJq6JCcB8vCVXQLdHTJ349WRyg1FZV
+ jCg7WZFF4BDM69oe4RRFugZAjvgNU+BqMyXbpzF759OsCTISVBFvs7579GEmMUxTnmdZ
+ xeRi9fkXGE5kfn8DutSUWlUqoBacd+6AMFeZt672tnMlXNqdx0vh5CchP9DoLqGtkFuZ
+ NAVg8vMXu0+bA/9omGks07qBYvJzTIpNccLBNoRc65JEgzr5a/w82IbUR/HKsU5Prywr
+ TeqFAjLtmeduP2q887lOPIEsDAbuiOu2u65hXT2yZQi8xk/BfBboPn54moXsNs1FbsKH
+ Qsiw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW/+qXvHatUwS7oaVk+/7Tl/PvMWBDKk58MANsun8WnTn+hBI0++ckj8EKIa8xHo9WimmeUJ9iFTZjhWSeWfbYtX+l6orA=
+X-Gm-Message-State: AOJu0YxlX8Ky0LTuEomqfVHMZIiTH0ehosIwV29333CFNHxSUl+cDrev
+ kmDSJ5s5zZvWQgZ1J3CxhyEQIyKgTl/99lgsFKbg7FR32wwcuaxKY2sM7TZsDYidf874RbgcgOA
+ fFNLO33c5uI2HB0D+n895FqcFmTjf8aMcY1BgEg==
+X-Google-Smtp-Source: AGHT+IF8HhxjCUu34evUGWEZ0hJ0lxCW5q+iEzpHoDV9B+DfmTJn2WtoNcY4GuM+XqDMtrXkBV6r2m+914k/EEQvTH0=
+X-Received: by 2002:a50:a6d2:0:b0:56d:fdb3:bcc5 with SMTP id
+ f18-20020a50a6d2000000b0056dfdb3bcc5mr3907275edc.12.1712832401239; Thu, 11
+ Apr 2024 03:46:41 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::330;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x330.google.com
+References: <20240411104340.6617-1-philmd@linaro.org>
+ <20240411104340.6617-6-philmd@linaro.org>
+In-Reply-To: <20240411104340.6617-6-philmd@linaro.org>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Thu, 11 Apr 2024 11:46:29 +0100
+Message-ID: <CAFEAcA-oDLAE1F9MThZBRabDeD1B6XdTSX_Qw_8PRGiK2Bjy9A@mail.gmail.com>
+Subject: Re: [PATCH 5/9] hw/misc/imx: Replace sprintf() by snprintf()
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org, 
+ Jean-Christophe Dubois <jcd@tribudubois.net>,
+ Andrey Smirnov <andrew.smirnov@gmail.com>, 
+ Jason Wang <jasowang@redhat.com>, Alistair Francis <alistair@alistair23.me>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::531;
+ envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x531.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,144 +95,27 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-sprintf() is deprecated on Darwin since macOS 13.0 / XCode 14.1,
-resulting in painful developper experience. Use snprintf() instead.
+On Thu, 11 Apr 2024 at 11:44, Philippe Mathieu-Daud=C3=A9 <philmd@linaro.or=
+g> wrote:
+>
+> sprintf() is deprecated on Darwin since macOS 13.0 / XCode 14.1,
+> resulting in painful developper experience. Use snprintf() instead.
+>
+> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+> ---
+>  hw/misc/imx25_ccm.c  | 2 +-
+>  hw/misc/imx31_ccm.c  | 2 +-
+>  hw/misc/imx6_ccm.c   | 4 ++--
+>  hw/misc/imx6_src.c   | 2 +-
+>  hw/misc/imx6ul_ccm.c | 4 ++--
+>  hw/misc/imx7_src.c   | 2 +-
+>  hw/net/imx_fec.c     | 2 +-
+>  hw/ssi/imx_spi.c     | 2 +-
+>  8 files changed, 10 insertions(+), 10 deletions(-)
+>
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
----
- hw/misc/imx25_ccm.c  | 2 +-
- hw/misc/imx31_ccm.c  | 2 +-
- hw/misc/imx6_ccm.c   | 4 ++--
- hw/misc/imx6_src.c   | 2 +-
- hw/misc/imx6ul_ccm.c | 4 ++--
- hw/misc/imx7_src.c   | 2 +-
- hw/net/imx_fec.c     | 2 +-
- hw/ssi/imx_spi.c     | 2 +-
- 8 files changed, 10 insertions(+), 10 deletions(-)
+Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
 
-diff --git a/hw/misc/imx25_ccm.c b/hw/misc/imx25_ccm.c
-index d888966014..faa726a86a 100644
---- a/hw/misc/imx25_ccm.c
-+++ b/hw/misc/imx25_ccm.c
-@@ -91,7 +91,7 @@ static const char *imx25_ccm_reg_name(uint32_t reg)
-     case IMX25_CCM_LPIMR1_REG:
-         return "lpimr1";
-     default:
--        sprintf(unknown, "[%u ?]", reg);
-+        snprintf(unknown, sizeof(unknown), "[%u ?]", reg);
-         return unknown;
-     }
- }
-diff --git a/hw/misc/imx31_ccm.c b/hw/misc/imx31_ccm.c
-index a9059bb1f7..125d4fceeb 100644
---- a/hw/misc/imx31_ccm.c
-+++ b/hw/misc/imx31_ccm.c
-@@ -89,7 +89,7 @@ static const char *imx31_ccm_reg_name(uint32_t reg)
-     case IMX31_CCM_PDR2_REG:
-         return "PDR2";
-     default:
--        sprintf(unknown, "[%u ?]", reg);
-+        snprintf(unknown, sizeof(unknown), "[%u ?]", reg);
-         return unknown;
-     }
- }
-diff --git a/hw/misc/imx6_ccm.c b/hw/misc/imx6_ccm.c
-index 56489d8b57..b1def7f05b 100644
---- a/hw/misc/imx6_ccm.c
-+++ b/hw/misc/imx6_ccm.c
-@@ -85,7 +85,7 @@ static const char *imx6_ccm_reg_name(uint32_t reg)
-     case CCM_CMEOR:
-         return "CMEOR";
-     default:
--        sprintf(unknown, "%u ?", reg);
-+        snprintf(unknown, sizeof(unknown), "%u ?", reg);
-         return unknown;
-     }
- }
-@@ -224,7 +224,7 @@ static const char *imx6_analog_reg_name(uint32_t reg)
-     case USB_ANALOG_DIGPROG:
-         return "USB_ANALOG_DIGPROG";
-     default:
--        sprintf(unknown, "%u ?", reg);
-+        snprintf(unknown, sizeof(unknown), "%u ?", reg);
-         return unknown;
-     }
- }
-diff --git a/hw/misc/imx6_src.c b/hw/misc/imx6_src.c
-index 0c6003559f..3766bdf561 100644
---- a/hw/misc/imx6_src.c
-+++ b/hw/misc/imx6_src.c
-@@ -68,7 +68,7 @@ static const char *imx6_src_reg_name(uint32_t reg)
-     case SRC_GPR10:
-         return "SRC_GPR10";
-     default:
--        sprintf(unknown, "%u ?", reg);
-+        snprintf(unknown, sizeof(unknown), "%u ?", reg);
-         return unknown;
-     }
- }
-diff --git a/hw/misc/imx6ul_ccm.c b/hw/misc/imx6ul_ccm.c
-index bbc0be9921..0ac49ea34b 100644
---- a/hw/misc/imx6ul_ccm.c
-+++ b/hw/misc/imx6ul_ccm.c
-@@ -143,7 +143,7 @@ static const char *imx6ul_ccm_reg_name(uint32_t reg)
-     case CCM_CMEOR:
-         return "CMEOR";
-     default:
--        sprintf(unknown, "%u ?", reg);
-+        snprintf(unknown, sizeof(unknown), "%u ?", reg);
-         return unknown;
-     }
- }
-@@ -274,7 +274,7 @@ static const char *imx6ul_analog_reg_name(uint32_t reg)
-     case USB_ANALOG_DIGPROG:
-         return "USB_ANALOG_DIGPROG";
-     default:
--        sprintf(unknown, "%u ?", reg);
-+        snprintf(unknown, sizeof(unknown), "%u ?", reg);
-         return unknown;
-     }
- }
-diff --git a/hw/misc/imx7_src.c b/hw/misc/imx7_src.c
-index b3725ff6e7..d19f0450d4 100644
---- a/hw/misc/imx7_src.c
-+++ b/hw/misc/imx7_src.c
-@@ -75,7 +75,7 @@ static const char *imx7_src_reg_name(uint32_t reg)
-     case SRC_GPR10:
-         return "SRC_GPR10";
-     default:
--        sprintf(unknown, "%u ?", reg);
-+        snprintf(unknown, sizeof(unknown), "%u ?", reg);
-         return unknown;
-     }
- }
-diff --git a/hw/net/imx_fec.c b/hw/net/imx_fec.c
-index cee84af7ba..8c91d20d44 100644
---- a/hw/net/imx_fec.c
-+++ b/hw/net/imx_fec.c
-@@ -41,7 +41,7 @@
- static const char *imx_default_reg_name(IMXFECState *s, uint32_t index)
- {
-     static char tmp[20];
--    sprintf(tmp, "index %d", index);
-+    snprintf(tmp, sizeof(tmp), "index %d", index);
-     return tmp;
- }
- 
-diff --git a/hw/ssi/imx_spi.c b/hw/ssi/imx_spi.c
-index d8a7583ff3..12d897d306 100644
---- a/hw/ssi/imx_spi.c
-+++ b/hw/ssi/imx_spi.c
-@@ -53,7 +53,7 @@ static const char *imx_spi_reg_name(uint32_t reg)
-     case ECSPI_MSGDATA:
-         return  "ECSPI_MSGDATA";
-     default:
--        sprintf(unknown, "%u ?", reg);
-+        snprintf(unknown, sizeof(unknown), "%u ?", reg);
-         return unknown;
-     }
- }
--- 
-2.41.0
-
+thanks
+-- PMM
 
