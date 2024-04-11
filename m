@@ -4,86 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5E04C4345F
-	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Apr 2024 21:13:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E327C4345F
+	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Apr 2024 21:23:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rv1j4-0004vI-NZ; Thu, 11 Apr 2024 17:12:54 -0400
+	id 1rv1sm-0007H3-8u; Thu, 11 Apr 2024 17:22:56 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rv1j3-0004ut-8J
- for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 17:12:53 -0400
-Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rv1sk-0007F8-L9
+ for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 17:22:54 -0400
+Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rv1j1-0000QE-R0
- for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 17:12:52 -0400
-Received: by mail-pf1-x429.google.com with SMTP id
- d2e1a72fcca58-6ed627829e6so300368b3a.1
- for <qemu-riscv@nongnu.org>; Thu, 11 Apr 2024 14:12:51 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rv1sj-000263-5Y
+ for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 17:22:54 -0400
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-346b96f1483so138007f8f.1
+ for <qemu-riscv@nongnu.org>; Thu, 11 Apr 2024 14:22:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712869970; x=1713474770; darn=nongnu.org;
+ d=linaro.org; s=google; t=1712870569; x=1713475369; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=IO5y9BOeUpOg4opmprf8Wn9TVP+GesVv+Rv2EFnHtxk=;
- b=fjCOknDD4ZqJRoU0VK9WzgFAQ/+C4Jj/JMAg/hhLPbProEzERuS0v8WWMNmdrqK7p6
- tkKrEr2XbNCFhxjiLJn4GDme6SQtoFVUKSESa3H8fflFv9pnFEipD5/P+uGG76e/fiNt
- mcCNFXSGFAgSy/Q2l90MN6qB+G8ZT/9k4YTeHffO0Aez0kmMkmruH9VYX8mejNI04yn/
- fSH8nBvXP9XERxTd94gtmE0kznh/fAtXyk3o6LquJbSs/QvqeUrJ++T+62zWYOPu85P1
- M/rE2Y8XrY3IOKEPljocKWF9Z99fG9w7ai14n0aNMAJaWVXoCdw0Vj6S0NrjTDmTMNDp
- za/A==
+ bh=GhCiyIYKMi7y/uDOSTPpcNjv70nLXfZKkQZydMmIQek=;
+ b=L/IsXwAu9ihTFVQnzotdXMutHsLDKq1NkNlAQ6T7zCDs4l401w3aF1aWGpn77i3iUb
+ ujXWvMullPDpm24J9n9W96KcaKobUyjh6+OAoI+BobiTVlIJsycpLMR9U+MvGIPOJF1u
+ 8bqe/IJLR1l/vbVkPsEoCeX+4dN9Av9VTsE/glxe8KD7hMXfhRSxPfrm//5jVEXsivT0
+ w0KSY1dQIPkDwxbgkgCB+j9p3x+KGfFrYvbQa2LnhMs+mrv9UItlSDAU8U61RzO8dHaC
+ mBFbzsqyRI08ULbQQmWZS1I0t1xR+mPts/t65ZJIE9atvrQi0j3NMJjrqwugqyghHgDT
+ 3MUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712869970; x=1713474770;
+ d=1e100.net; s=20230601; t=1712870569; x=1713475369;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=IO5y9BOeUpOg4opmprf8Wn9TVP+GesVv+Rv2EFnHtxk=;
- b=twadBfGwDJu3rEwsqJx63RD9Duxc+fBkfVcaMVWeiy+kcO/r40BkSXghZLHN74rzrt
- /x7QpfSZI79mWZAEtwa0GnsTql9WmFwjgiP8TZhwBu0IN5g0zTztZ4exwV/a+6oFJx3q
- 6Q8Gsk3v+ymwiP4Dr10JU9PiDbyTQ0HyvDdDPYYwgqtI+3mPCOEH6Rf28GRq0pmUmk47
- AOBLqyHKEr/25Vj/FDcVXnA1A1TUeNH23lz2m8TYaoaFLlh1DhuOdROrbGmiG/2ST/Iq
- Hudb5VFIM0nRJjVvWL9W/7G4gsV8Qp3kRmxXs5HriJ89eF+2yL3aMFLcinepeGzDzpHi
- PcoQ==
-X-Gm-Message-State: AOJu0YzniNZ5dC+MEzT04SVPlBRQ+bz32fS6g4dhkWGJ+q/mA3JcQYOb
- kbH+QdgI1YIS3bu943eRkKmrsEMOwUOpRLks87PUeOLvnWkoo54efHkuvtGUKrc=
-X-Google-Smtp-Source: AGHT+IGzdIYgV3Na5q5MzmV+cfDFiNV6yWPObDqDB4j2pRZ6CHBSwidelo6UMGTLPAswbtjZvdWO2w==
-X-Received: by 2002:a05:6a00:399d:b0:6ea:c2c7:5d6a with SMTP id
- fi29-20020a056a00399d00b006eac2c75d6amr1158217pfb.2.1712869970227; 
- Thu, 11 Apr 2024 14:12:50 -0700 (PDT)
-Received: from [192.168.0.4] (174-21-72-5.tukw.qwest.net. [174.21.72.5])
- by smtp.gmail.com with ESMTPSA id
- z128-20020a626586000000b006ed9d839c4csm1677534pfb.4.2024.04.11.14.12.49
+ bh=GhCiyIYKMi7y/uDOSTPpcNjv70nLXfZKkQZydMmIQek=;
+ b=GoKWxkpiqkteXl8HHe79LjKdpJaXUpnp6ldiVpIjORlMzrqvaelZazdW73NPhgRcoO
+ +v9JbGtLwPQxgXJRcPpuABbMUp777Qz/KUUYb0oVMInT7ERsRFGYNWOfU8PnWi4RE/9V
+ g+JPM2SJs3ylstZ5vFE4AtBFosv+St+LIVEo5M1mZ4o9sR3kBfOqzm5HF6UMxyv5IcDE
+ 9c8nbqPlKuQfvV5OiFfBbrL6PSvZsd3HVtFqNkBFjONmIcOTzqFEtRu9A1PCYWlq/9Td
+ qF8OG4RHHC7W+AJosIOITbO5FukDKtiDiGcrRKpGCqdfS6ZiWV0lVIdoL5M8RarWqGFI
+ IqDg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVnaqzRF94E4nEnfxgB+fgmsaZooAj6gqKSaekb9baV8+8+kS6ExNyRf6wzSzBxqXCf6Fs9Kv9tma/K/ZJEdkcheqGUI78=
+X-Gm-Message-State: AOJu0Yy7NQ8FjTWbQHPhgoyQVZO3Tdw2jn+4Kl6ZOg1WFgAU4VBLuGRP
+ X5aj2UzYuAo1yVR6epXsNdtEFxJ1xo+y4Haui+o7nF+rO7PcIfw9Fa/sgvJRJz8=
+X-Google-Smtp-Source: AGHT+IF4fSJmlwrQ3frdYMEEpvg3l+GnSvWUVBHZ2q+q6hB1uuDAK4S1VvzhMUNdh03ey9AGj/WOzw==
+X-Received: by 2002:a5d:45ca:0:b0:346:f830:db09 with SMTP id
+ b10-20020a5d45ca000000b00346f830db09mr342568wrs.31.1712870569248; 
+ Thu, 11 Apr 2024 14:22:49 -0700 (PDT)
+Received: from [192.168.1.28] (lfbn-bay-1-170-196.w83-193.abo.wanadoo.fr.
+ [83.193.250.196]) by smtp.gmail.com with ESMTPSA id
+ w13-20020a5d680d000000b003433bf6651dsm2640582wru.75.2024.04.11.14.22.48
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 11 Apr 2024 14:12:49 -0700 (PDT)
-Message-ID: <3b100155-89e7-4229-8c76-4b1b428225f3@linaro.org>
-Date: Thu, 11 Apr 2024 14:12:48 -0700
+ Thu, 11 Apr 2024 14:22:48 -0700 (PDT)
+Message-ID: <6309ca6c-6a31-4861-9cff-bef3326c6126@linaro.org>
+Date: Thu, 11 Apr 2024 23:22:47 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/9] disas/riscv: Replace sprintf() by snprintf()
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>
+Subject: Re: [PATCH 6/9] hw/net/rocker: Replace sprintf() by snprintf()
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
+ Jiri Pirko <jiri@resnulli.us>, Jason Wang <jasowang@redhat.com>
 References: <20240411104340.6617-1-philmd@linaro.org>
- <20240411104340.6617-4-philmd@linaro.org>
+ <20240411104340.6617-7-philmd@linaro.org>
+ <CAFEAcA9_pbMBjNsOJe2LkfC6z5wuRMSM1pL7X0aHVjdzysoLOw@mail.gmail.com>
 Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240411104340.6617-4-philmd@linaro.org>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <CAFEAcA9_pbMBjNsOJe2LkfC6z5wuRMSM1pL7X0aHVjdzysoLOw@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::429;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x429.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42d;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,18 +98,32 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 4/11/24 03:43, Philippe Mathieu-Daudé wrote:
-> sprintf() is deprecated on Darwin since macOS 13.0 / XCode 14.1,
-> resulting in painful developper experience. Use snprintf() instead.
+On 11/4/24 13:30, Peter Maydell wrote:
+> On Thu, 11 Apr 2024 at 11:47, Philippe Mathieu-Daudé <philmd@linaro.org> wrote:
+>>
+>> sprintf() is deprecated on Darwin since macOS 13.0 / XCode 14.1,
+>> resulting in painful developper experience. Use snprintf() instead.
 > 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-> ---
->   disas/riscv.c | 10 +++++-----
->   1 file changed, 5 insertions(+), 5 deletions(-)
+> ("developer")
+> 
+>> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+>> ---
+>>   hw/net/rocker/rocker.c | 24 ++++++++++++------------
+>>   1 file changed, 12 insertions(+), 12 deletions(-)
+> 
+>>           switch (offset) {
+>>           case ROCKER_DMA_DESC_ADDR_OFFSET:
+>> -            sprintf(buf, "Ring[%s] ADDR", ring_name);
+>> +            snprintf(buf, sizeofbuf), "Ring[%s] ADDR", ring_name);
+> 
+> Something seems to have gone wrong here. Shouldn't this have
+> failed to compile ?
 
-Ug.  Repeated strlen+strncat?
-All of format_inst should be rewritten, probably using GString.
+This code is guarded by DEBUG_ROCKER, which is why I didn't noticed :)
 
+Indeed when enabling:
 
-r~
+../../hw/net/rocker/rocker.c:930:65: error: extraneous ')' before ';'
+             snprintf(buf, sizeofbuf), "Ring[%s] ADDR", ring_name);
+                                                                 ^
 
