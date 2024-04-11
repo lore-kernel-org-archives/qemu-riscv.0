@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07FB7CD1284
-	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Apr 2024 12:01:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6580DCD1284
+	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Apr 2024 12:02:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rut6z-0000dN-SX; Thu, 11 Apr 2024 08:01:01 -0400
+	id 1rut7s-0001PM-MJ; Thu, 11 Apr 2024 08:01:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1rut6u-0000aO-Nc
- for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 08:00:58 -0400
-Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e])
+ id 1rut7l-0001Du-IQ
+ for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 08:01:49 -0400
+Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1rut6s-00037J-1T
- for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 08:00:56 -0400
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-56e48d0a632so8662344a12.2
- for <qemu-riscv@nongnu.org>; Thu, 11 Apr 2024 05:00:53 -0700 (PDT)
+ id 1rut7i-0003JT-Jy
+ for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 08:01:48 -0400
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-56e2ac1c16aso8111740a12.0
+ for <qemu-riscv@nongnu.org>; Thu, 11 Apr 2024 05:01:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712836852; x=1713441652; darn=nongnu.org;
+ d=linaro.org; s=google; t=1712836905; x=1713441705; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LMDpvBCsKme7SnyejsGjoTv5/y0095tC1fHhVZYZftw=;
- b=YHvfATcUomsQEX6NupZR8zDS/FxowK8HhKjLhqCKI1AbD8WLvh1gpTE8fDqBS0N55u
- Whznk5p2NXNEIb0YDtiQrf8DwkRcFQ3HLeK44ZRDWwevCCZDY4WmLfL8Vr7oBgL9mNa1
- 1tsmf/Tz/ynNzEt8/grIy2+jkvRwop0YGNIVO0CpgErteLoygRm+NQ1FsG0+ZWXmaDTY
- eXvKXLD5xzxt2Q537CI7e80JbrBBsWlQ8/hJVWJQRoPfdHBaZS3cs7EpZEgBZAK7WDen
- jT3yI8WIfHtAs+EWfAvx0ZkjblbczJfhW+4oRYKRcNhnZncUCiDnj2wLUkJ0qUmWyFfS
- EFCA==
+ bh=veCA5XuoiI2x3nFfPCI/nxUC6o5oC93sOeqtZpyyTvE=;
+ b=JwZ9+Kk0QuqtWx3r3zvma2I5YcnoxC919n0M2cyUYTLCa+44RE0tVfMU2WKAb/F+/G
+ 14O/RnZptmAWBLMHEfgMajo79rn6+q91/roHooA++p/MkMcAyTz1825Fv2mxf2L4nwq5
+ CcyWLj/0ZaRJ7rBNT3wcp1PE4OQYh/X49qiE1uRPLyiO9Xc3SRDCH3KICv8Xa/k765So
+ pD+A6igGglgihUIrzN5YUAxAOlcJhI0Ac8klZXilh/d6g0+sQbWq1Beba58GiP5eDo7v
+ kCBRHdgOGJULcPzOfd7Cjdjkl5LS78UOBJbk2paBYGtWv7iM66MPGtrTxkI3U+5woGW1
+ lkag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712836852; x=1713441652;
+ d=1e100.net; s=20230601; t=1712836905; x=1713441705;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=LMDpvBCsKme7SnyejsGjoTv5/y0095tC1fHhVZYZftw=;
- b=pvXnUQimXesBVKNAhZkg1nzqFfCF9u7aCUYAIoBi/9El480HqcpVOBjzxeQTRl9NgG
- Q3SenOS57lUEBv4rTvQ1oQaijP5ZN9BRzInc39lsRTIkCxgKgzUh4lLjrm5uCo3Z6IiI
- prkIvdYNIyIBnUtapSBHXAmQBYrnBL7PBhzj8PH/HyZiLRU0N6tZIv9+jE/Dp+eJY5Zn
- RTXhiHf29kJmH3iGgFtEgluhV/nlJEi4+0mpLM9oFxJsGgpDgxWkiO+IHlPRxKZNxtsb
- tP1CYzEHLNeuycJwX2VR35CDGy3Ncqf9Yjn8iS0fYNgKyD+Ruf2Vgmb8MBrnD43vtjuX
- Tbuw==
+ bh=veCA5XuoiI2x3nFfPCI/nxUC6o5oC93sOeqtZpyyTvE=;
+ b=ZPZsPhXaijolqiwCQi1eqzMyWuQt89n5uYwp2AxZkcMA50fBtP1qdOz8Z4KrcV6wSi
+ UMd3L/u6NMnBHVx1v/yJzSSdK8YGPcAk3N4M/zjJjBbFT1h6SrKf1x+3IJ+BFDFCDcYL
+ l8TEws5UeOzuxAsPVsJjn3hKVo4W/ClM/kGoSW9bpQBG2T5CMbxAOsrYzkcph6dm7dXC
+ Il7LsKEmnls1kxUwLnltwKvdOS59ghOWCHuNDRtlN9HG+qQkwpX2wGQOsDQ7zzk4TKsw
+ g57hdix1/LixiliSafEQWm210qN7qGzMf0UFepug+qQV7Mo5L0yWNYsxBv+vh8f7hqBt
+ zB7w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXUFCUOfuY2mk4tWPv8PfLxY8HUoWiyd6VDVHS9olW/8twQ4ewEvbOSvOJWSfRK58vn/f+0d19b8CKVhpwIDFa07M5l+Qk=
-X-Gm-Message-State: AOJu0YxcqMqCZciOj8AjOpcwOcGJxQ9+N8RW9Nrj5xe0ReMxhGJFfcB6
- zBnm6fOFHWyoEy/x1adWYnIBucigbjlcQu+UvWrPuHOJutVT5NSNVDxNh4vbtN6o9N5QlENn7Et
- MvdsZ8tmcmGF81wP+yXh7U+9YlTKfoTGMMWb4yg==
-X-Google-Smtp-Source: AGHT+IE0yBMHAD/gjfRL6nzO6RBzcarhGUxCVzNYOAx06wsKoUKxZNwQDl8GBEC8Uds06mctb1cSUUJlk5T6w55WEas=
-X-Received: by 2002:a50:c30c:0:b0:566:2aff:2d38 with SMTP id
- a12-20020a50c30c000000b005662aff2d38mr4262976edb.26.1712836852116; Thu, 11
- Apr 2024 05:00:52 -0700 (PDT)
+ AJvYcCUFjSjQrG4uzd+qIZ5isonvzbOCe3sYy3TlLh01zsegZ9RqnOX0ydLTEGrwiMhJtklfnK86I5Z99njraw5mV5hVbMpiNX0=
+X-Gm-Message-State: AOJu0YwUT/rz+1OeTR437kH4VlEGbat2e3tdtyRYYdGdVWMyIniX2IWV
+ waBftXaYS4EZK7QSNJrx2hRtKxfY6asNoRxz3JATepHh66ZouQcNuDiPPxZK0I3u6PB6eLdowtZ
+ 40YVwy6eZZHMFtIlhj2dR2FDvr5I2UDuPjehTvw==
+X-Google-Smtp-Source: AGHT+IExzea7Wn0tfVctGqtaeBG5SG1R9SqwGSagyXwti6Uj7YGcwPfnnmemdyzA/8j/iIMcC6jmfUrsw0Qitixs/GI=
+X-Received: by 2002:a50:cddb:0:b0:56e:7884:9c7 with SMTP id
+ h27-20020a50cddb000000b0056e788409c7mr3957528edj.19.1712836905190; Thu, 11
+ Apr 2024 05:01:45 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240411104340.6617-1-philmd@linaro.org>
- <20240411104340.6617-4-philmd@linaro.org>
-In-Reply-To: <20240411104340.6617-4-philmd@linaro.org>
+ <20240411104340.6617-2-philmd@linaro.org>
+In-Reply-To: <20240411104340.6617-2-philmd@linaro.org>
 From: Peter Maydell <peter.maydell@linaro.org>
-Date: Thu, 11 Apr 2024 13:00:41 +0100
-Message-ID: <CAFEAcA-tRVJ1+cXwmGg7XGdej_iRLYy-xYM6q=s_D4pmyVcC9A@mail.gmail.com>
-Subject: Re: [PATCH 3/9] disas/riscv: Replace sprintf() by snprintf()
+Date: Thu, 11 Apr 2024 13:01:34 +0100
+Message-ID: <CAFEAcA_N8yFY15v=QrCOAOPPPnsrfZk2Pqm_CBmxaj_8Gvf1xg@mail.gmail.com>
+Subject: Re: [PATCH 1/9] disas/m68k: Replace sprintf() by snprintf()
 To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>
+ Laurent Vivier <laurent@vivier.eu>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
- envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x52e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::534;
+ envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x534.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -102,6 +101,9 @@ g> wrote:
 >
 > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
 > ---
+>  disas/m68k.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
 
 Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
 
