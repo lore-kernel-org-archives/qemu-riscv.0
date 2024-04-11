@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 314D2CD1284
-	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Apr 2024 10:47:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81A43CD1292
+	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Apr 2024 10:47:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rurxB-0006cG-Fd; Thu, 11 Apr 2024 06:46:49 -0400
+	id 1rurvG-0003Yv-4D; Thu, 11 Apr 2024 06:44:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1rurx6-0006Hj-MC
- for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 06:46:45 -0400
-Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rurv6-0003RB-DH
+ for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 06:44:41 -0400
+Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1rurx4-00053E-V2
- for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 06:46:44 -0400
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-56e69a51a33so3788925a12.1
- for <qemu-riscv@nongnu.org>; Thu, 11 Apr 2024 03:46:42 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rurv4-0004T8-UJ
+ for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 06:44:40 -0400
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-417e327773cso1604895e9.1
+ for <qemu-riscv@nongnu.org>; Thu, 11 Apr 2024 03:44:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712832401; x=1713437201; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1712832277; x=1713437077; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vbkLjk7fSqzJjIzpx+/g4deWwnUPCXq7b84Avz4t4Dk=;
- b=NqVZYDjZXCPlGN7eQrgh/B8zFVDzFXkjHiwOXO8GHPjrnSXGboyRLILqoJ8ig8eoXn
- l9zGwyQqNDcc+jlrAhnecjPYxS+FvrjO8fYufD7vkXFO3Ps67nJD8SouBnoX0pr7XOk3
- jhB/8Q396M7NmEDvNFfbFdftSTA3Pm4EPL88MvaUtXtn8piqw2tBQsht+WS8dbeVqzUp
- ZoxZzbqf5vCYLpUDy/S+bV1so1TGkocfMekTbvsnqXtrMzEOc++IojP+Xzgw+BDedAYl
- 0QpdRzbgLWI8x3wLl71rQkKj7hUGdIsnxSfd+9eSx3sVRbe8c6b6UUUEL38XUF+EGJxz
- +F1w==
+ bh=7EwoYTZWhIpfsU+7LZSduNtPHyEqtMdnhAHnqEMdyEo=;
+ b=pjFWku9GGDFunh+xiDJKrJoNwOncYxEhPgPFW/6HAh1FpE4veygPGMaolH95MWsOdY
+ dczW0gxf+aC/ehQ5YloRE2RUJWyh46d/9UpShf6BuxEf7HIqFJ0oGhsGPAf0AgVZV+EP
+ 7A1+y+HE8226hc/bGkex6Secn1oUCs25GtxtHG5r2ByGpoYVkVaKlvHHZZa+/7Gq+hkY
+ Q+1egHchIQuxqETlCUcHYS6sTOzTMDMHCZKvPSZepPJ5By5GzlNpAEgwR4Gzuoboa8EH
+ Wogdb1GFU+NR6pY/oD1Fuo66eJcXz0WU+EExULLUXiVxiHJKtkp59KKA0deTKBv0dx3k
+ 5DUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712832401; x=1713437201;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1712832277; x=1713437077;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vbkLjk7fSqzJjIzpx+/g4deWwnUPCXq7b84Avz4t4Dk=;
- b=GepIM8SagjHhDTZC6j7Za2U/8IPpmWlUTHrYrJq6JCcB8vCVXQLdHTJ349WRyg1FZV
- jCg7WZFF4BDM69oe4RRFugZAjvgNU+BqMyXbpzF759OsCTISVBFvs7579GEmMUxTnmdZ
- xeRi9fkXGE5kfn8DutSUWlUqoBacd+6AMFeZt672tnMlXNqdx0vh5CchP9DoLqGtkFuZ
- NAVg8vMXu0+bA/9omGks07qBYvJzTIpNccLBNoRc65JEgzr5a/w82IbUR/HKsU5Prywr
- TeqFAjLtmeduP2q887lOPIEsDAbuiOu2u65hXT2yZQi8xk/BfBboPn54moXsNs1FbsKH
- Qsiw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW/+qXvHatUwS7oaVk+/7Tl/PvMWBDKk58MANsun8WnTn+hBI0++ckj8EKIa8xHo9WimmeUJ9iFTZjhWSeWfbYtX+l6orA=
-X-Gm-Message-State: AOJu0YxlX8Ky0LTuEomqfVHMZIiTH0ehosIwV29333CFNHxSUl+cDrev
- kmDSJ5s5zZvWQgZ1J3CxhyEQIyKgTl/99lgsFKbg7FR32wwcuaxKY2sM7TZsDYidf874RbgcgOA
- fFNLO33c5uI2HB0D+n895FqcFmTjf8aMcY1BgEg==
-X-Google-Smtp-Source: AGHT+IF8HhxjCUu34evUGWEZ0hJ0lxCW5q+iEzpHoDV9B+DfmTJn2WtoNcY4GuM+XqDMtrXkBV6r2m+914k/EEQvTH0=
-X-Received: by 2002:a50:a6d2:0:b0:56d:fdb3:bcc5 with SMTP id
- f18-20020a50a6d2000000b0056dfdb3bcc5mr3907275edc.12.1712832401239; Thu, 11
- Apr 2024 03:46:41 -0700 (PDT)
-MIME-Version: 1.0
+ bh=7EwoYTZWhIpfsU+7LZSduNtPHyEqtMdnhAHnqEMdyEo=;
+ b=ZDwWtiM5at9L8JPgIn0qOLeri/LklVMe7TmN8Adh1P4SEIb0x6CliBhIaXNMaWUpAQ
+ 5kjhWCWN2He0XqpQ6qXhsrAlpBWAm6YlyOqxgrM/tLKjspgef+lZi0fycAzEIovZJsN5
+ ueU6WsCXrSmxoZZVO/wVDq5V0vG470Bk1xFhXOSuDx4V6UmiBiyhZbUp3//QcLF60ZI9
+ M0YZdL268UwMM/ptP5acqkbSeqfWnJuam3e0koZe/LuQdv78PU+6+iLI8BtFid+LDuJq
+ 9AfQiaDLzNQtjtI3zifQ32sLHTs2V9+wC6bXNJ+5Gg6Zodxq7XVyqlu3wbNvzneQimTr
+ bUgw==
+X-Gm-Message-State: AOJu0YylJmuAhifJndFao9/O56RbXuD7U8YGYCUqcQO22lINZiw8VXei
+ +9D/DjmBXqMprimkwLzHz1K1MCdCDabUslFWBGQirI9rtTP43IaLIjOPtu0KiPCBCgmz50igT/u
+ TlNM=
+X-Google-Smtp-Source: AGHT+IF4EhEoIekMENdgzJsSeEXW3/EuiiQkTJ312xa/cjAXW8GfW5oIS0aYD5Qkz9X2dhicVf5IRg==
+X-Received: by 2002:a5d:644e:0:b0:33e:6ef3:b68e with SMTP id
+ d14-20020a5d644e000000b0033e6ef3b68emr1785788wrw.34.1712832277566; 
+ Thu, 11 Apr 2024 03:44:37 -0700 (PDT)
+Received: from localhost.localdomain
+ (137.red-88-29-174.dynamicip.rima-tde.net. [88.29.174.137])
+ by smtp.gmail.com with ESMTPSA id
+ q9-20020a5d61c9000000b00343d840b3f8sm1463776wrv.33.2024.04.11.03.44.36
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Thu, 11 Apr 2024 03:44:37 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>, Marcelo Tosatti <mtosatti@redhat.com>,
+ kvm@vger.kernel.org
+Subject: [PATCH 9/9] target/i386: Replace sprintf() by snprintf()
+Date: Thu, 11 Apr 2024 12:43:40 +0200
+Message-ID: <20240411104340.6617-10-philmd@linaro.org>
+X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20240411104340.6617-1-philmd@linaro.org>
 References: <20240411104340.6617-1-philmd@linaro.org>
- <20240411104340.6617-6-philmd@linaro.org>
-In-Reply-To: <20240411104340.6617-6-philmd@linaro.org>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Thu, 11 Apr 2024 11:46:29 +0100
-Message-ID: <CAFEAcA-oDLAE1F9MThZBRabDeD1B6XdTSX_Qw_8PRGiK2Bjy9A@mail.gmail.com>
-Subject: Re: [PATCH 5/9] hw/misc/imx: Replace sprintf() by snprintf()
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org, 
- Jean-Christophe Dubois <jcd@tribudubois.net>,
- Andrey Smirnov <andrew.smirnov@gmail.com>, 
- Jason Wang <jasowang@redhat.com>, Alistair Francis <alistair@alistair23.me>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::531;
- envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x531.google.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -95,27 +97,29 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, 11 Apr 2024 at 11:44, Philippe Mathieu-Daud=C3=A9 <philmd@linaro.or=
-g> wrote:
->
-> sprintf() is deprecated on Darwin since macOS 13.0 / XCode 14.1,
-> resulting in painful developper experience. Use snprintf() instead.
->
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
-> ---
->  hw/misc/imx25_ccm.c  | 2 +-
->  hw/misc/imx31_ccm.c  | 2 +-
->  hw/misc/imx6_ccm.c   | 4 ++--
->  hw/misc/imx6_src.c   | 2 +-
->  hw/misc/imx6ul_ccm.c | 4 ++--
->  hw/misc/imx7_src.c   | 2 +-
->  hw/net/imx_fec.c     | 2 +-
->  hw/ssi/imx_spi.c     | 2 +-
->  8 files changed, 10 insertions(+), 10 deletions(-)
->
+sprintf() is deprecated on Darwin since macOS 13.0 / XCode 14.1,
+resulting in painful developper experience. Use snprintf() instead.
 
-Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+---
+ target/i386/kvm/kvm.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-thanks
--- PMM
+diff --git a/target/i386/kvm/kvm.c b/target/i386/kvm/kvm.c
+index e68cbe9293..a46d1426bf 100644
+--- a/target/i386/kvm/kvm.c
++++ b/target/i386/kvm/kvm.c
+@@ -5335,7 +5335,8 @@ int kvm_arch_handle_exit(CPUState *cs, struct kvm_run *run)
+     case KVM_EXIT_NOTIFY:
+         ctx_invalid = !!(run->notify.flags & KVM_NOTIFY_CONTEXT_INVALID);
+         state = KVM_STATE(current_accel());
+-        sprintf(str, "Encounter a notify exit with %svalid context in"
++        snprintf(str, sizeof(str),
++                     "Encounter a notify exit with %svalid context in"
+                      " guest. There can be possible misbehaves in guest."
+                      " Please have a look.", ctx_invalid ? "in" : "");
+         if (ctx_invalid ||
+-- 
+2.41.0
+
 
