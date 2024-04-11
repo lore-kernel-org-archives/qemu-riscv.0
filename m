@@ -4,76 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 477BDCD1284
-	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Apr 2024 12:57:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82725C4345F
+	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Apr 2024 17:23:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rutzN-00013t-8B; Thu, 11 Apr 2024 08:57:13 -0400
+	id 1ruy8G-00006s-QZ; Thu, 11 Apr 2024 13:22:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <edgar.iglesias@gmail.com>)
- id 1rutzL-000131-9U; Thu, 11 Apr 2024 08:57:11 -0400
-Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529])
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1ruy8F-00006J-BA
+ for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 13:22:39 -0400
+Received: from mail-lf1-x133.google.com ([2a00:1450:4864:20::133])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <edgar.iglesias@gmail.com>)
- id 1rutzI-00085Z-Vy; Thu, 11 Apr 2024 08:57:10 -0400
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-56e136cbcecso10951200a12.3; 
- Thu, 11 Apr 2024 05:57:07 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1ruy8D-0005RO-DT
+ for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 13:22:39 -0400
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-516d6c1e238so85526e87.2
+ for <qemu-riscv@nongnu.org>; Thu, 11 Apr 2024 10:22:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1712840226; x=1713445026; darn=nongnu.org;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1712856155; x=1713460955;
+ darn=nongnu.org; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=SU9ZF9Nxg1/Hb9s4OTIFtHw6ic9sRAJoGHsHWFb2SeI=;
- b=e4Q4jaGu9vzdwMaj7uHzKffvwDC7XvLPJ9LRE+oPIj0cWWUc2ZKftlXuIDCdoSYMK/
- HKb3G0LZhRvVTgIFwRIt43YXZyUmqZwqZZWh8anQW9mtrqWqy38DKIUAViWCaEyE8TgM
- U9F0R5lo8vbNLsvs2IGAd9mRZqyUFDYN5SWOZ74vyCxTITl7Q9YHsVXQu/K0AohOxxlS
- DM46ASAaSYfzxw53Lf7fe0ecnGmCd+hIdR6d7bgXqh+iHG7Ait5qTja2RplBJm3xLKxp
- ca4VFTrA5MSCFjmvhp7+Ppyek/AsPDv0awcTS6eCKmh5Gwac7A9EIsE1fWJIiYiSjy8J
- N9Jw==
+ bh=mU/v67jgVY3bfXd6+1KCyb91Qhu805+BTHsSP3Tb/p0=;
+ b=H2W4izTN6wIVPndCrENqjtuOAs3Bf8dkmzDRWRAtXC/jYWK8D8IAO1naLCFm/qqu9k
+ JhzliKwrAxX9uELFyvne+rbTN3qmkw7NKZNqWsjqjT/bfaVRFgb8ogxja0x4CUldF5JP
+ s6QcV0Bk6GPjjtz3cAHB1p/3r54/kX28Mc7YTBK/kdKxbKH1Gm9HzvA5hPz20WtqNetv
+ PVqwZJHPTkf7fFb/EQmdbNk/du199Odhi92Lmr+05vEKVV3rIebVf0P3/HhQy5/BhfWo
+ S4i0O874QfCxoggCU0jvCy362MdI9b9ma1ps2g9R4muX00FdhHiZ0fOVUWfFXA0nTfP4
+ Vuaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712840226; x=1713445026;
+ d=1e100.net; s=20230601; t=1712856155; x=1713460955;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=SU9ZF9Nxg1/Hb9s4OTIFtHw6ic9sRAJoGHsHWFb2SeI=;
- b=lo29uy7LGtj57Qu/pBzZsxf/MFKH6AEvuicmhBZJCMUhRSsPPQBMAYXH4SlYqAwE+G
- Bunas8lQpyNu44MNJDT988QdNLuC6fREZDSLvvHhF47HMGj/7hb4f28Wm9Oj7gbHUvgW
- g+wIWo6u8/V8HOwqiC8Zpg3g2DmFI+6jH/buUVb/n4TtolOh2OqDCVI+7BoDNJgi3tM4
- TcbymO7oiVdykxSC/Lqa8jHNANcodBvTR6DP0i0O5DWYeqB2mG2e7aX1ZV8q7sNhIJ9O
- kxWHZGh6RmLea4vGMqfdDbgun02GuM7sD03KnVGOnPJ9owIMEB2Ac5l1BmvVTe49g0Lr
- yh8A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWeFVSR5K+RgOvFAfpDe+IHph5tCgXX9LDHRY/5qbmrbvaVVwmowf3vW7kUpVsTFM/Veait4equ2RLBMByZO2UEvz4xY4zBXKteHbvMVKhZAeOxu45qTc0vXZs=
-X-Gm-Message-State: AOJu0YwGrHDriQop4p/lkFh8jFI0sYpf+XSBT9bV6rBsqh9q1e1SBDOZ
- JDr4qx8IZNHhlGx4Gvgt2SEJjzrAXLArICNSMm7nsVQ+4mQ0dTb3DKDs0+YUsHOQ6N4xCOjSsg9
- ZPTUqjnA/p/ZWs0m5hYMxkCgIVEM=
-X-Google-Smtp-Source: AGHT+IESpQTdegef+JuvlebZsqrI9sj1rDjV0jIp94ov14oNCrWnzfv/t8n7lXnSFU+3vYtEm4LsMCDKa9jXB0N+CR4=
-X-Received: by 2002:a50:d7c4:0:b0:56d:b687:5a45 with SMTP id
- m4-20020a50d7c4000000b0056db6875a45mr3846499edj.1.1712840225521; Thu, 11 Apr
- 2024 05:57:05 -0700 (PDT)
+ bh=mU/v67jgVY3bfXd6+1KCyb91Qhu805+BTHsSP3Tb/p0=;
+ b=TaOqg4VnCQdWWTsM2CYXov3gNB6j8vdPt7zFTP7cyHmfreZ6LCvoT8Ct/jEuatflF8
+ pZ7TIwphlqgI8CAgZMeK8A8O/ykewk+dsuv1IFGoV7ZEB9FKXu5KA7bC5C1dz1fgizuH
+ WhCeyDRS0IxSLELJCDBhtfeVHDRUbl9xVJcNUE4fTaVhXGkjT98hGD6+KQrtkFclz2Nv
+ sLeeT7JNdfeQuzhY7tUoWULs0yONxCzjpScfrOBrzp2VH7AFAtuX7czLXY15FI3uxiRe
+ +ADClioG9VLeNMNN3YYbzNDj/rs4AAiXz4AQ+fI6a/HMgrWe/Kayo8YDDcYc9sdGZEwo
+ rrZw==
+X-Gm-Message-State: AOJu0YwHhJB4xcMtcolFKNyQ9N/kC6lmaySoC/gHtxftgH/5lX9zeAxB
+ NV76HjP1HLA8lo5vPNpOek2iZ32UUFehnsx/p98ZHuzp6KHAPdSoBpztl6w1Sz4zxFfR/knWIXU
+ 2m84R8GXGLQ43ZnEZPIuv3qYobZmS6dqx8DulOw==
+X-Google-Smtp-Source: AGHT+IEa1V2yr/k/lyAO8vJISaM0wANGgNWBLam5LbpZRMIY4Rg4BPgiqBldXqJsQ6oQbQMyFg31WdaNFcnXc9AlTAU=
+X-Received: by 2002:a05:651c:1994:b0:2d8:394c:6e7e with SMTP id
+ bx20-20020a05651c199400b002d8394c6e7emr228636ljb.15.1712856154885; Thu, 11
+ Apr 2024 10:22:34 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240411104340.6617-1-philmd@linaro.org>
- <20240411104340.6617-3-philmd@linaro.org>
-In-Reply-To: <20240411104340.6617-3-philmd@linaro.org>
-From: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
-Date: Thu, 11 Apr 2024 14:56:53 +0200
-Message-ID: <CAJy5ezoBzyRJSwqyxGnBqm968ef4zjBaPVdbBKeS+tVn8SY4rQ@mail.gmail.com>
-Subject: Re: [PATCH 2/9] disas/microblaze: Replace sprintf() by snprintf()
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org
+References: <20240411113406.1301906-1-cleger@rivosinc.com>
+In-Reply-To: <20240411113406.1301906-1-cleger@rivosinc.com>
+From: Atish Kumar Patra <atishp@rivosinc.com>
+Date: Thu, 11 Apr 2024 10:22:23 -0700
+Message-ID: <CAHBxVyG-_HeTBx=R8NyPvGL3wS8cVH=R_f9pV469LW=a6KRvZw@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: fix instructions count handling in icount
+ mode
+To: =?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@rivosinc.com>
+Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::529;
- envelope-from=edgar.iglesias@gmail.com; helo=mail-ed1-x529.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Received-SPF: pass client-ip=2a00:1450:4864:20::133;
+ envelope-from=atishp@rivosinc.com; helo=mail-lf1-x133.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -90,121 +94,126 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Apr 11, 2024 at 12:43=E2=80=AFPM Philippe Mathieu-Daud=C3=A9
-<philmd@linaro.org> wrote:
+On Thu, Apr 11, 2024 at 4:34=E2=80=AFAM Cl=C3=A9ment L=C3=A9ger <cleger@riv=
+osinc.com> wrote:
 >
-> sprintf() is deprecated on Darwin since macOS 13.0 / XCode 14.1,
-> resulting in painful developper experience. Use snprintf() instead.
+> When icount is enabled, rather than returning the virtual CPU time, we
+> should return the instruction count itself. Add an instructions bool
+> parameter to get_ticks() to correctly return icount_get_raw() when
+> icount_enabled() =3D=3D 1 and instruction count is queried. This will mod=
+ify
+> the existing behavior which was returning an instructions count close to
+> the number of cycles (CPI ~=3D 1).
 >
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
-
-Reviewed-by: Edgar E. Iglesias <edgar.iglesias@amd.com>
-
-
+> Signed-off-by: Cl=C3=A9ment L=C3=A9ger <cleger@rivosinc.com>
+>
 > ---
->  disas/microblaze.c | 25 ++++++++++++++++---------
->  1 file changed, 16 insertions(+), 9 deletions(-)
+>  target/riscv/csr.c | 29 ++++++++++++++++-------------
+>  1 file changed, 16 insertions(+), 13 deletions(-)
 >
-> diff --git a/disas/microblaze.c b/disas/microblaze.c
-> index 0b89b9c4fa..49a4c0fd40 100644
-> --- a/disas/microblaze.c
-> +++ b/disas/microblaze.c
-> @@ -600,7 +600,8 @@ static char *
->  get_field (long instr, long mask, unsigned short low)
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 726096444f..5f1dcee102 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -762,14 +762,17 @@ static RISCVException write_vcsr(CPURISCVState *env=
+, int csrno,
+>  }
+>
+>  /* User Timers and Counters */
+> -static target_ulong get_ticks(bool shift)
+> +static target_ulong get_ticks(bool shift, bool instructions)
 >  {
->    char tmpstr[25];
-> -  sprintf(tmpstr, "%s%d", register_prefix, (int)((instr & mask) >> low))=
-;
-> +  snprintf(tmpstr, sizeof(tmpstr), "%s%d", register_prefix,
-> +           (int)((instr & mask) >> low));
->    return(strdup(tmpstr));
->  }
+>      int64_t val;
+>      target_ulong result;
 >
-> @@ -608,7 +609,8 @@ static char *
->  get_field_imm (long instr)
+>  #if !defined(CONFIG_USER_ONLY)
+>      if (icount_enabled()) {
+> -        val =3D icount_get();
+> +        if (instructions)
+> +            val =3D icount_get_raw();
+> +        else
+> +            val =3D icount_get();
+>      } else {
+>          val =3D cpu_get_host_ticks();
+>      }
+> @@ -804,14 +807,14 @@ static RISCVException read_timeh(CPURISCVState *env=
+, int csrno,
+>  static RISCVException read_hpmcounter(CPURISCVState *env, int csrno,
+>                                        target_ulong *val)
 >  {
->    char tmpstr[25];
-> -  sprintf(tmpstr, "%d", (short)((instr & IMM_MASK) >> IMM_LOW));
-> +  snprintf(tmpstr, sizeof(tmpstr), "%d",
-> +           (short)((instr & IMM_MASK) >> IMM_LOW));
->    return(strdup(tmpstr));
+> -    *val =3D get_ticks(false);
+> +    *val =3D get_ticks(false, (csrno =3D=3D CSR_INSTRET));
+>      return RISCV_EXCP_NONE;
 >  }
 >
-> @@ -616,7 +618,8 @@ static char *
->  get_field_imm5 (long instr)
+>  static RISCVException read_hpmcounterh(CPURISCVState *env, int csrno,
+>                                         target_ulong *val)
 >  {
->    char tmpstr[25];
-> -  sprintf(tmpstr, "%d", (short)((instr & IMM5_MASK) >> IMM_LOW));
-> +  snprintf(tmpstr, sizeof(tmpstr), "%d",
-> +           (short)((instr & IMM5_MASK) >> IMM_LOW));
->    return(strdup(tmpstr));
+> -    *val =3D get_ticks(true);
+> +    *val =3D get_ticks(true, (csrno =3D=3D CSR_INSTRETH));
+>      return RISCV_EXCP_NONE;
 >  }
 >
-> @@ -624,7 +627,8 @@ static char *
->  get_field_rfsl (long instr)
->  {
->    char tmpstr[25];
-> -  sprintf(tmpstr, "%s%d", fsl_register_prefix, (short)((instr & RFSL_MAS=
-K) >> IMM_LOW));
-> +  snprintf(tmpstr, sizeof(tmpstr), "%s%d", fsl_register_prefix,
-> +           (short)((instr & RFSL_MASK) >> IMM_LOW));
->    return(strdup(tmpstr));
->  }
+> @@ -875,11 +878,11 @@ static RISCVException write_mhpmcounter(CPURISCVSta=
+te *env, int csrno,
+>      int ctr_idx =3D csrno - CSR_MCYCLE;
+>      PMUCTRState *counter =3D &env->pmu_ctrs[ctr_idx];
+>      uint64_t mhpmctr_val =3D val;
+> +    bool instr =3D riscv_pmu_ctr_monitor_instructions(env, ctr_idx);
 >
-> @@ -632,7 +636,8 @@ static char *
->  get_field_imm15 (long instr)
->  {
->    char tmpstr[25];
-> -  sprintf(tmpstr, "%d", (short)((instr & IMM15_MASK) >> IMM_LOW));
-> +  snprintf(tmpstr, sizeof(tmpstr), "%d",
-> +           (short)((instr & IMM15_MASK) >> IMM_LOW));
->    return(strdup(tmpstr));
->  }
+>      counter->mhpmcounter_val =3D val;
+> -    if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
+> -        riscv_pmu_ctr_monitor_instructions(env, ctr_idx)) {
+> -        counter->mhpmcounter_prev =3D get_ticks(false);
+> +    if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) || instr) {
+> +        counter->mhpmcounter_prev =3D get_ticks(false, instr);
+>          if (ctr_idx > 2) {
+>              if (riscv_cpu_mxl(env) =3D=3D MXL_RV32) {
+>                  mhpmctr_val =3D mhpmctr_val |
+> @@ -902,12 +905,12 @@ static RISCVException write_mhpmcounterh(CPURISCVSt=
+ate *env, int csrno,
+>      PMUCTRState *counter =3D &env->pmu_ctrs[ctr_idx];
+>      uint64_t mhpmctr_val =3D counter->mhpmcounter_val;
+>      uint64_t mhpmctrh_val =3D val;
+> +    bool instr =3D riscv_pmu_ctr_monitor_instructions(env, ctr_idx);
 >
-> @@ -641,7 +646,8 @@ static char *
->  get_field_unsigned_imm (long instr)
->  {
->    char tmpstr[25];
-> -  sprintf(tmpstr, "%d", (int)((instr & IMM_MASK) >> IMM_LOW));
-> +  snprintf(tmpstr, sizeof(tmpstr), "%d",
-> +           (int)((instr & IMM_MASK) >> IMM_LOW));
->    return(strdup(tmpstr));
->  }
->  #endif
-> @@ -653,7 +659,8 @@ get_field_unsigned_imm (long instr)
->    {
->    char tmpstr[25];
+>      counter->mhpmcounterh_val =3D val;
+>      mhpmctr_val =3D mhpmctr_val | (mhpmctrh_val << 32);
+> -    if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
+> -        riscv_pmu_ctr_monitor_instructions(env, ctr_idx)) {
+> -        counter->mhpmcounterh_prev =3D get_ticks(true);
+> +    if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) || instr) {
+> +        counter->mhpmcounterh_prev =3D get_ticks(true, instr);
+>          if (ctr_idx > 2) {
+>              riscv_pmu_setup_timer(env, mhpmctr_val, ctr_idx);
+>          }
+> @@ -926,6 +929,7 @@ static RISCVException riscv_pmu_read_ctr(CPURISCVStat=
+e *env, target_ulong *val,
+>                                           counter->mhpmcounter_prev;
+>      target_ulong ctr_val =3D upper_half ? counter->mhpmcounterh_val :
+>                                          counter->mhpmcounter_val;
+> +    bool instr =3D riscv_pmu_ctr_monitor_instructions(env, ctr_idx);
 >
-> -  sprintf(tmpstr, "%s%s", register_prefix, (((instr & IMM_MASK) >> IMM_L=
-OW) & REG_MSR_MASK) =3D=3D 0 ? "pc" : "msr");
-> +  snprintf(tmpstr, sizeof(tmpstr), "%s%s", register_prefix,
-> +          (((instr & IMM_MASK) >> IMM_LOW) & REG_MSR_MASK) =3D=3D 0 ? "p=
-c" : "msr");
->
->    return(strdup(tmpstr));
->    }
-> @@ -709,7 +716,7 @@ get_field_special(long instr, const struct op_code_st=
-ruct *op)
->     default :
->       {
->         if ( ((((instr & IMM_MASK) >> IMM_LOW) ^ op->immval_mask) & 0xE00=
-0) =3D=3D REG_PVR_MASK) {
-> -         sprintf(tmpstr, "%s%u", pvr_register_prefix,
-> +          snprintf(tmpstr, sizeof(tmpstr), "%s%u", pvr_register_prefix,
->                   (unsigned short)(((instr & IMM_MASK) >> IMM_LOW) ^
->                                    op->immval_mask) ^ REG_PVR_MASK);
->          return(strdup(tmpstr));
-> @@ -720,7 +727,7 @@ get_field_special(long instr, const struct op_code_st=
-ruct *op)
->       break;
->     }
->
-> -   sprintf(tmpstr, "%s%s", register_prefix, spr);
-> +   snprintf(tmpstr, sizeof(tmpstr), "%s%s", register_prefix, spr);
->     return(strdup(tmpstr));
->  }
->
+>      if (get_field(env->mcountinhibit, BIT(ctr_idx))) {
+>          /*
+> @@ -946,9 +950,8 @@ static RISCVException riscv_pmu_read_ctr(CPURISCVStat=
+e *env, target_ulong *val,
+>       * The kernel computes the perf delta by subtracting the current val=
+ue from
+>       * the value it initialized previously (ctr_val).
+>       */
+> -    if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
+> -        riscv_pmu_ctr_monitor_instructions(env, ctr_idx)) {
+> -        *val =3D get_ticks(upper_half) - ctr_prev + ctr_val;
+> +    if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) || instr) {
+> +        *val =3D get_ticks(upper_half, instr) - ctr_prev + ctr_val;
+>      } else {
+>          *val =3D ctr_val;
+>      }
 > --
-> 2.41.0
+> 2.43.0
 >
+
+
+Reviewed-by: Atish Patra <atishp@rivosinc.com>
 
