@@ -4,85 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53DE2C4345F
-	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Apr 2024 21:03:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5E04C4345F
+	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Apr 2024 21:13:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rv1Zm-0002sw-3S; Thu, 11 Apr 2024 17:03:18 -0400
+	id 1rv1j4-0004vI-NZ; Thu, 11 Apr 2024 17:12:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rv1Zg-0002sG-94
- for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 17:03:14 -0400
-Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
+ id 1rv1j3-0004ut-8J
+ for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 17:12:53 -0400
+Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rv1Zd-0007I3-12
- for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 17:03:12 -0400
-Received: by mail-pf1-x433.google.com with SMTP id
- d2e1a72fcca58-6eaf1005fcaso223557b3a.3
- for <qemu-riscv@nongnu.org>; Thu, 11 Apr 2024 14:03:08 -0700 (PDT)
+ id 1rv1j1-0000QE-R0
+ for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 17:12:52 -0400
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-6ed627829e6so300368b3a.1
+ for <qemu-riscv@nongnu.org>; Thu, 11 Apr 2024 14:12:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712869387; x=1713474187; darn=nongnu.org;
+ d=linaro.org; s=google; t=1712869970; x=1713474770; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=UFg8LpGbWjJdewisFMaAdYQRct2RbE/pxC2/MCy7zjk=;
- b=F22gb/MclihkerF5cJbCTmgPtyFiTE6LQQGlXAdUKGCGiSJ+xNWtWhMrsIf9cHTlqY
- /MektXC4pPOT23uMEtqDf9//v9J6ICUSVSJUpAj7xqi5pAtspzLDkwISQRv3vG4b/aH1
- jt7bZD2P7TJz2MpAF+AtCEjyvHUA+1xAvdpHc9EHsTAcnNezzUb39Gtp71orMgbkQRES
- kCRLVpNwTXsO/zaJVKTim5WnUMlKsgR4Vt76B1LfHTVHH8t4RilZFj/m+HqAeJ/JH0ol
- L3o3jmsxy9IG3bCVOuYaeU1O49BhZYJugIXVSLq1Rly20fvO4ploUNA2nuCclTz1x4yc
- 7peA==
+ bh=IO5y9BOeUpOg4opmprf8Wn9TVP+GesVv+Rv2EFnHtxk=;
+ b=fjCOknDD4ZqJRoU0VK9WzgFAQ/+C4Jj/JMAg/hhLPbProEzERuS0v8WWMNmdrqK7p6
+ tkKrEr2XbNCFhxjiLJn4GDme6SQtoFVUKSESa3H8fflFv9pnFEipD5/P+uGG76e/fiNt
+ mcCNFXSGFAgSy/Q2l90MN6qB+G8ZT/9k4YTeHffO0Aez0kmMkmruH9VYX8mejNI04yn/
+ fSH8nBvXP9XERxTd94gtmE0kznh/fAtXyk3o6LquJbSs/QvqeUrJ++T+62zWYOPu85P1
+ M/rE2Y8XrY3IOKEPljocKWF9Z99fG9w7ai14n0aNMAJaWVXoCdw0Vj6S0NrjTDmTMNDp
+ za/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712869387; x=1713474187;
+ d=1e100.net; s=20230601; t=1712869970; x=1713474770;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=UFg8LpGbWjJdewisFMaAdYQRct2RbE/pxC2/MCy7zjk=;
- b=b85SWP49RFIvhtZ9c1yyE0KYP9s1CZcARw9cb4o8pwb8aQFRp6005gj+ROkQISb//8
- xNhNun9kIg9WOsyzGyzVnXVFWC3l0gfq2BhaMIrSXuAl+6zjFVR6z+TaPfGRSgEWAEH2
- lX16Q+pHD2eA1DtACkxAmQxfL7OKeH6ebnD+QXmLg9AShaDEd5c1yhUkPOMzYV2lmuVA
- fenhRp/zIFt2XUbxlM60HYk8EwGexW8akYM86gefnELeLL+UbTVdabjdYLb9akybWrHg
- wjdc9jA3brevcyB2rqh9A2zgIXoRDh3h2ka/IEEQgpckgZfCidnPtu047181J3OvCAp5
- jpTA==
-X-Gm-Message-State: AOJu0Yxt5nLORa/vLR9H5aFbllgPqUCqlPD9Kb0mlaQgp/3paeoB86nk
- 05I8rpWHCPgBSb9UTQsTVDCMaV6/7fKC76YgjG1h9dl8LUP/ZbkdO8Y/c3JHyCE=
-X-Google-Smtp-Source: AGHT+IEiVRxhH4erhfVUQmjE6SyQvZPPKDZt98EyPd8oMeDne8K4foEeKsneqOjASw7tGYF9SxbgrQ==
-X-Received: by 2002:a05:6a00:1302:b0:6ed:63e:3525 with SMTP id
- j2-20020a056a00130200b006ed063e3525mr833129pfu.31.1712869387393; 
- Thu, 11 Apr 2024 14:03:07 -0700 (PDT)
+ bh=IO5y9BOeUpOg4opmprf8Wn9TVP+GesVv+Rv2EFnHtxk=;
+ b=twadBfGwDJu3rEwsqJx63RD9Duxc+fBkfVcaMVWeiy+kcO/r40BkSXghZLHN74rzrt
+ /x7QpfSZI79mWZAEtwa0GnsTql9WmFwjgiP8TZhwBu0IN5g0zTztZ4exwV/a+6oFJx3q
+ 6Q8Gsk3v+ymwiP4Dr10JU9PiDbyTQ0HyvDdDPYYwgqtI+3mPCOEH6Rf28GRq0pmUmk47
+ AOBLqyHKEr/25Vj/FDcVXnA1A1TUeNH23lz2m8TYaoaFLlh1DhuOdROrbGmiG/2ST/Iq
+ Hudb5VFIM0nRJjVvWL9W/7G4gsV8Qp3kRmxXs5HriJ89eF+2yL3aMFLcinepeGzDzpHi
+ PcoQ==
+X-Gm-Message-State: AOJu0YzniNZ5dC+MEzT04SVPlBRQ+bz32fS6g4dhkWGJ+q/mA3JcQYOb
+ kbH+QdgI1YIS3bu943eRkKmrsEMOwUOpRLks87PUeOLvnWkoo54efHkuvtGUKrc=
+X-Google-Smtp-Source: AGHT+IGzdIYgV3Na5q5MzmV+cfDFiNV6yWPObDqDB4j2pRZ6CHBSwidelo6UMGTLPAswbtjZvdWO2w==
+X-Received: by 2002:a05:6a00:399d:b0:6ea:c2c7:5d6a with SMTP id
+ fi29-20020a056a00399d00b006eac2c75d6amr1158217pfb.2.1712869970227; 
+ Thu, 11 Apr 2024 14:12:50 -0700 (PDT)
 Received: from [192.168.0.4] (174-21-72-5.tukw.qwest.net. [174.21.72.5])
  by smtp.gmail.com with ESMTPSA id
- gx15-20020a056a001e0f00b006e71aec34a8sm1599275pfb.167.2024.04.11.14.03.06
+ z128-20020a626586000000b006ed9d839c4csm1677534pfb.4.2024.04.11.14.12.49
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 11 Apr 2024 14:03:06 -0700 (PDT)
-Message-ID: <b75c03fa-2db3-4dc4-bb52-a8b6f97fc0b6@linaro.org>
-Date: Thu, 11 Apr 2024 14:03:05 -0700
+ Thu, 11 Apr 2024 14:12:49 -0700 (PDT)
+Message-ID: <3b100155-89e7-4229-8c76-4b1b428225f3@linaro.org>
+Date: Thu, 11 Apr 2024 14:12:48 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/9] disas/microblaze: Replace sprintf() by snprintf()
+Subject: Re: [PATCH 3/9] disas/riscv: Replace sprintf() by snprintf()
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>
 References: <20240411104340.6617-1-philmd@linaro.org>
- <20240411104340.6617-3-philmd@linaro.org>
+ <20240411104340.6617-4-philmd@linaro.org>
 Content-Language: en-US
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240411104340.6617-3-philmd@linaro.org>
+In-Reply-To: <20240411104340.6617-4-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x433.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::429;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x429.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,23 +105,11 @@ On 4/11/24 03:43, Philippe Mathieu-Daudé wrote:
 > 
 > Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 > ---
->   disas/microblaze.c | 25 ++++++++++++++++---------
->   1 file changed, 16 insertions(+), 9 deletions(-)
-> 
-> diff --git a/disas/microblaze.c b/disas/microblaze.c
-> index 0b89b9c4fa..49a4c0fd40 100644
-> --- a/disas/microblaze.c
-> +++ b/disas/microblaze.c
-> @@ -600,7 +600,8 @@ static char *
->   get_field (long instr, long mask, unsigned short low)
->   {
->     char tmpstr[25];
-> -  sprintf(tmpstr, "%s%d", register_prefix, (int)((instr & mask) >> low));
-> +  snprintf(tmpstr, sizeof(tmpstr), "%s%d", register_prefix,
-> +           (int)((instr & mask) >> low));
->     return(strdup(tmpstr));
+>   disas/riscv.c | 10 +++++-----
+>   1 file changed, 5 insertions(+), 5 deletions(-)
 
-Any s*printf followed by allocation should use g_strdup_printf to do it in one step.
+Ug.  Repeated strlen+strncat?
+All of format_inst should be rewritten, probably using GString.
 
 
 r~
