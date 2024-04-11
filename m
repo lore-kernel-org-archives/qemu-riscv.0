@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87280CD1284
-	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Apr 2024 10:46:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0737CD128A
+	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Apr 2024 10:46:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ruruR-0002nE-Ft; Thu, 11 Apr 2024 06:43:59 -0400
+	id 1ruruj-0002xM-Nr; Thu, 11 Apr 2024 06:44:17 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ruruP-0002mF-Q6
- for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 06:43:57 -0400
-Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ruruh-0002wT-K8
+ for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 06:44:15 -0400
+Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ruruO-0004Dq-54
- for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 06:43:57 -0400
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-34339f01cd2so5585318f8f.2
- for <qemu-riscv@nongnu.org>; Thu, 11 Apr 2024 03:43:55 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ruruf-0004K9-Vj
+ for qemu-riscv@nongnu.org; Thu, 11 Apr 2024 06:44:15 -0400
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-416b5f6813cso25159195e9.0
+ for <qemu-riscv@nongnu.org>; Thu, 11 Apr 2024 03:44:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712832235; x=1713437035; darn=nongnu.org;
+ d=linaro.org; s=google; t=1712832252; x=1713437052; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZARctQBaWTgi16Nsw9jDwGPNb4MI5ibxpQ1TfC8D7e4=;
- b=Uyq3ZvysZVVtHJqCKPc03g5Bsc5oinb0hXgKU+H4K5AlZ/8HcxFapInf8Z4Bz1ShGO
- 8KmPGbqO+fb3KLveXljBwmkqj4Zhu++jDyU5Tu6syvG3RWsQnxyOmqinSOEnHHwL90Ik
- SMugQiXDytI8bGOe3zaB3YhaWDdnITY+oSdm5/YHxG4v3Nyemr8sod6Qoz3r9tF0wJtN
- U83nfCBILtZ3labYAJlxnxic6UZaC2qjBD3SI0zVAArDrRc9RdqQ4dVWlKacV04vQ1u2
- /1wZSEAcw9YeJ+mxq8/U+4CqZyJrN09hHIyo4laihz7i/96ptAHxUQkcOoh6Hmo/IooK
- zbmw==
+ bh=CeYnoI7aOgEwL66760hzse5mJ3cb0VBg+S1wKs8bFQ0=;
+ b=G5bDdycK8Ly0Pi6hc566NKP7L8l/jED7DIFXFYByOqqqLEwgrjdSHO9AHgGU+hNZ9m
+ xxmdD1IFlkQ5QONWaVPFvCZGvUmflW7gganTiPa0i4o5hb1/MMIbEacA6jAkgbDWF2wi
+ rTwcY5U9RmMLwRerS3J1x2LkEFSndt4OJGfWkfIxaDU1BniN9q6mgykaFMzopGeIFmrD
+ rVa5mu7sguckJ/Q2EdG24xv2Zva4OFBGRY6qVE7GNEBY6XN8U87KQkn8bXj3zSmElcEx
+ KuCUplLGv65ttCDk+sVpt/pJn58g5dyY1Vi14Vz0XsYQI3Nv0UqHXfmyU5MHNQ6OvAHu
+ 1ssA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712832235; x=1713437035;
+ d=1e100.net; s=20230601; t=1712832252; x=1713437052;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ZARctQBaWTgi16Nsw9jDwGPNb4MI5ibxpQ1TfC8D7e4=;
- b=xOjdBbDHmwJar4Tcrzk+0MsT/8s3lIbjVsjJ8ny0ElEt2VSjFF4kJR1vf2S4VxkQLg
- nfgoGNYFXIheHS3NzQqP7Wp+cEnJUU29CefPEFyajEg+9OgYgwfqIO99gcuCe6GzUN4L
- DQZB6G6meqlGLKUg3wQH2K3VTqy0r1YM9kIRl7Wcb6HdtSRVP+oNnXLaEZvsc/TqYtDR
- cnIMVvHdLdE7P1F1+AApn467WXkrmlLjkplSvSzLpMRymzeT1aBsKkgGYW6CsD+8GVAN
- 0ZFAWI/DuIr2/UZZ0uCfKGoM0Q/E4c/crTRJmXFgBX3+veHTZSZ75dEUuOxzr1wtTu+Z
- ilvQ==
-X-Gm-Message-State: AOJu0YzsOsjXsHtDaygcjIYd28o52da05m7safuRRImpeZqacY2SDiZM
- sCZ8w6WeOg2FaLTHGmUFSVces7rPMncQ26BYCHghvfRKjBgkreFt/lCS0+Erp4RqKd6nKLheyhS
- m2OI=
-X-Google-Smtp-Source: AGHT+IFltCQplSMOQ6kMZ2B9MhaX0r2Lrd/lueNmil7OV2EbqlCrwSBa6bBQw/tU3i3Ti1Mq/6pdWQ==
-X-Received: by 2002:a5d:58c2:0:b0:346:ba70:f261 with SMTP id
- o2-20020a5d58c2000000b00346ba70f261mr952868wrf.2.1712832234836; 
- Thu, 11 Apr 2024 03:43:54 -0700 (PDT)
+ bh=CeYnoI7aOgEwL66760hzse5mJ3cb0VBg+S1wKs8bFQ0=;
+ b=pp85I6LfbigjgYDB5bH9Ndm+4Dmtg/NdRjEkQEkckLITj+HkoiAg8JhxxNpsWAGwYt
+ M2ks360cchKOt9xgyrTyzVn57xglrfKjHcvX9VHuMyYALXdg/kMvC0V81b8nQAmMoTaZ
+ PmNZnfr0hvH5GJ+lc36181gWDg+eROByBmrLD/bmuVLHK9DYlxHmhOEqOJ5oRVhJp6cL
+ QRwjeneWRHb1JmgwN5GUYywZ6E8C63zJgWoF+YLwA42gQuVoQkEzojW1nKpcH1AC0e5E
+ wvQwz+ZnizsdFiTQTgM5zKpBMhqLzgJ8LvEczq9kc1n6ctkFMcX4IA2LnAUEEbypek1r
+ UoSw==
+X-Gm-Message-State: AOJu0YxGP3W//35IWXf0AliRBOwQvay96TduvutBEKY11wl6r/y9BLOZ
+ zKvEiZZyHilI5wSOZcmAnIae1Nmcfdb2NpypIIj9ZARdc9XvVAeFLmsyliS7KHY=
+X-Google-Smtp-Source: AGHT+IHZwP4w7kgYlcRHvHPtn5xaFB3CMNvvDS+8wnLG/q7rQtgc/WRYzMesP2ko7FKOiMmKT9TvnQ==
+X-Received: by 2002:adf:ce86:0:b0:346:bc1b:4e7c with SMTP id
+ r6-20020adfce86000000b00346bc1b4e7cmr1325606wrn.35.1712832252684; 
+ Thu, 11 Apr 2024 03:44:12 -0700 (PDT)
 Received: from localhost.localdomain
  (137.red-88-29-174.dynamicip.rima-tde.net. [88.29.174.137])
  by smtp.gmail.com with ESMTPSA id
- t7-20020adfe447000000b00343eac2acc4sm1461921wrm.111.2024.04.11.03.43.53
+ c10-20020adfc04a000000b003467a420243sm1485130wrf.12.2024.04.11.03.44.11
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 11 Apr 2024 03:43:54 -0700 (PDT)
+ Thu, 11 Apr 2024 03:44:12 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
-Subject: [PATCH 2/9] disas/microblaze: Replace sprintf() by snprintf()
-Date: Thu, 11 Apr 2024 12:43:33 +0200
-Message-ID: <20240411104340.6617-3-philmd@linaro.org>
+ Peter Maydell <peter.maydell@linaro.org>,
+ Jean-Christophe Dubois <jcd@tribudubois.net>,
+ Andrey Smirnov <andrew.smirnov@gmail.com>,
+ Jason Wang <jasowang@redhat.com>, Alistair Francis <alistair@alistair23.me>
+Subject: [PATCH 5/9] hw/misc/imx: Replace sprintf() by snprintf()
+Date: Thu, 11 Apr 2024 12:43:36 +0200
+Message-ID: <20240411104340.6617-6-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240411104340.6617-1-philmd@linaro.org>
 References: <20240411104340.6617-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::430;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x430.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::330;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x330.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -101,101 +103,138 @@ resulting in painful developper experience. Use snprintf() instead.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- disas/microblaze.c | 25 ++++++++++++++++---------
- 1 file changed, 16 insertions(+), 9 deletions(-)
+ hw/misc/imx25_ccm.c  | 2 +-
+ hw/misc/imx31_ccm.c  | 2 +-
+ hw/misc/imx6_ccm.c   | 4 ++--
+ hw/misc/imx6_src.c   | 2 +-
+ hw/misc/imx6ul_ccm.c | 4 ++--
+ hw/misc/imx7_src.c   | 2 +-
+ hw/net/imx_fec.c     | 2 +-
+ hw/ssi/imx_spi.c     | 2 +-
+ 8 files changed, 10 insertions(+), 10 deletions(-)
 
-diff --git a/disas/microblaze.c b/disas/microblaze.c
-index 0b89b9c4fa..49a4c0fd40 100644
---- a/disas/microblaze.c
-+++ b/disas/microblaze.c
-@@ -600,7 +600,8 @@ static char *
- get_field (long instr, long mask, unsigned short low)
+diff --git a/hw/misc/imx25_ccm.c b/hw/misc/imx25_ccm.c
+index d888966014..faa726a86a 100644
+--- a/hw/misc/imx25_ccm.c
++++ b/hw/misc/imx25_ccm.c
+@@ -91,7 +91,7 @@ static const char *imx25_ccm_reg_name(uint32_t reg)
+     case IMX25_CCM_LPIMR1_REG:
+         return "lpimr1";
+     default:
+-        sprintf(unknown, "[%u ?]", reg);
++        snprintf(unknown, sizeof(unknown), "[%u ?]", reg);
+         return unknown;
+     }
+ }
+diff --git a/hw/misc/imx31_ccm.c b/hw/misc/imx31_ccm.c
+index a9059bb1f7..125d4fceeb 100644
+--- a/hw/misc/imx31_ccm.c
++++ b/hw/misc/imx31_ccm.c
+@@ -89,7 +89,7 @@ static const char *imx31_ccm_reg_name(uint32_t reg)
+     case IMX31_CCM_PDR2_REG:
+         return "PDR2";
+     default:
+-        sprintf(unknown, "[%u ?]", reg);
++        snprintf(unknown, sizeof(unknown), "[%u ?]", reg);
+         return unknown;
+     }
+ }
+diff --git a/hw/misc/imx6_ccm.c b/hw/misc/imx6_ccm.c
+index 56489d8b57..b1def7f05b 100644
+--- a/hw/misc/imx6_ccm.c
++++ b/hw/misc/imx6_ccm.c
+@@ -85,7 +85,7 @@ static const char *imx6_ccm_reg_name(uint32_t reg)
+     case CCM_CMEOR:
+         return "CMEOR";
+     default:
+-        sprintf(unknown, "%u ?", reg);
++        snprintf(unknown, sizeof(unknown), "%u ?", reg);
+         return unknown;
+     }
+ }
+@@ -224,7 +224,7 @@ static const char *imx6_analog_reg_name(uint32_t reg)
+     case USB_ANALOG_DIGPROG:
+         return "USB_ANALOG_DIGPROG";
+     default:
+-        sprintf(unknown, "%u ?", reg);
++        snprintf(unknown, sizeof(unknown), "%u ?", reg);
+         return unknown;
+     }
+ }
+diff --git a/hw/misc/imx6_src.c b/hw/misc/imx6_src.c
+index 0c6003559f..3766bdf561 100644
+--- a/hw/misc/imx6_src.c
++++ b/hw/misc/imx6_src.c
+@@ -68,7 +68,7 @@ static const char *imx6_src_reg_name(uint32_t reg)
+     case SRC_GPR10:
+         return "SRC_GPR10";
+     default:
+-        sprintf(unknown, "%u ?", reg);
++        snprintf(unknown, sizeof(unknown), "%u ?", reg);
+         return unknown;
+     }
+ }
+diff --git a/hw/misc/imx6ul_ccm.c b/hw/misc/imx6ul_ccm.c
+index bbc0be9921..0ac49ea34b 100644
+--- a/hw/misc/imx6ul_ccm.c
++++ b/hw/misc/imx6ul_ccm.c
+@@ -143,7 +143,7 @@ static const char *imx6ul_ccm_reg_name(uint32_t reg)
+     case CCM_CMEOR:
+         return "CMEOR";
+     default:
+-        sprintf(unknown, "%u ?", reg);
++        snprintf(unknown, sizeof(unknown), "%u ?", reg);
+         return unknown;
+     }
+ }
+@@ -274,7 +274,7 @@ static const char *imx6ul_analog_reg_name(uint32_t reg)
+     case USB_ANALOG_DIGPROG:
+         return "USB_ANALOG_DIGPROG";
+     default:
+-        sprintf(unknown, "%u ?", reg);
++        snprintf(unknown, sizeof(unknown), "%u ?", reg);
+         return unknown;
+     }
+ }
+diff --git a/hw/misc/imx7_src.c b/hw/misc/imx7_src.c
+index b3725ff6e7..d19f0450d4 100644
+--- a/hw/misc/imx7_src.c
++++ b/hw/misc/imx7_src.c
+@@ -75,7 +75,7 @@ static const char *imx7_src_reg_name(uint32_t reg)
+     case SRC_GPR10:
+         return "SRC_GPR10";
+     default:
+-        sprintf(unknown, "%u ?", reg);
++        snprintf(unknown, sizeof(unknown), "%u ?", reg);
+         return unknown;
+     }
+ }
+diff --git a/hw/net/imx_fec.c b/hw/net/imx_fec.c
+index cee84af7ba..8c91d20d44 100644
+--- a/hw/net/imx_fec.c
++++ b/hw/net/imx_fec.c
+@@ -41,7 +41,7 @@
+ static const char *imx_default_reg_name(IMXFECState *s, uint32_t index)
  {
-   char tmpstr[25];
--  sprintf(tmpstr, "%s%d", register_prefix, (int)((instr & mask) >> low));
-+  snprintf(tmpstr, sizeof(tmpstr), "%s%d", register_prefix,
-+           (int)((instr & mask) >> low));
-   return(strdup(tmpstr));
+     static char tmp[20];
+-    sprintf(tmp, "index %d", index);
++    snprintf(tmp, sizeof(tmp), "index %d", index);
+     return tmp;
  }
  
-@@ -608,7 +609,8 @@ static char *
- get_field_imm (long instr)
- {
-   char tmpstr[25];
--  sprintf(tmpstr, "%d", (short)((instr & IMM_MASK) >> IMM_LOW));
-+  snprintf(tmpstr, sizeof(tmpstr), "%d",
-+           (short)((instr & IMM_MASK) >> IMM_LOW));
-   return(strdup(tmpstr));
+diff --git a/hw/ssi/imx_spi.c b/hw/ssi/imx_spi.c
+index d8a7583ff3..12d897d306 100644
+--- a/hw/ssi/imx_spi.c
++++ b/hw/ssi/imx_spi.c
+@@ -53,7 +53,7 @@ static const char *imx_spi_reg_name(uint32_t reg)
+     case ECSPI_MSGDATA:
+         return  "ECSPI_MSGDATA";
+     default:
+-        sprintf(unknown, "%u ?", reg);
++        snprintf(unknown, sizeof(unknown), "%u ?", reg);
+         return unknown;
+     }
  }
- 
-@@ -616,7 +618,8 @@ static char *
- get_field_imm5 (long instr)
- {
-   char tmpstr[25];
--  sprintf(tmpstr, "%d", (short)((instr & IMM5_MASK) >> IMM_LOW));
-+  snprintf(tmpstr, sizeof(tmpstr), "%d",
-+           (short)((instr & IMM5_MASK) >> IMM_LOW));
-   return(strdup(tmpstr));
- }
- 
-@@ -624,7 +627,8 @@ static char *
- get_field_rfsl (long instr)
- {
-   char tmpstr[25];
--  sprintf(tmpstr, "%s%d", fsl_register_prefix, (short)((instr & RFSL_MASK) >> IMM_LOW));
-+  snprintf(tmpstr, sizeof(tmpstr), "%s%d", fsl_register_prefix,
-+           (short)((instr & RFSL_MASK) >> IMM_LOW));
-   return(strdup(tmpstr));
- }
- 
-@@ -632,7 +636,8 @@ static char *
- get_field_imm15 (long instr)
- {
-   char tmpstr[25];
--  sprintf(tmpstr, "%d", (short)((instr & IMM15_MASK) >> IMM_LOW));
-+  snprintf(tmpstr, sizeof(tmpstr), "%d",
-+           (short)((instr & IMM15_MASK) >> IMM_LOW));
-   return(strdup(tmpstr));
- }
- 
-@@ -641,7 +646,8 @@ static char *
- get_field_unsigned_imm (long instr)
- {
-   char tmpstr[25];
--  sprintf(tmpstr, "%d", (int)((instr & IMM_MASK) >> IMM_LOW));
-+  snprintf(tmpstr, sizeof(tmpstr), "%d",
-+           (int)((instr & IMM_MASK) >> IMM_LOW));
-   return(strdup(tmpstr));
- }
- #endif
-@@ -653,7 +659,8 @@ get_field_unsigned_imm (long instr)
-   {
-   char tmpstr[25];
-   
--  sprintf(tmpstr, "%s%s", register_prefix, (((instr & IMM_MASK) >> IMM_LOW) & REG_MSR_MASK) == 0 ? "pc" : "msr");
-+  snprintf(tmpstr, sizeof(tmpstr), "%s%s", register_prefix,
-+          (((instr & IMM_MASK) >> IMM_LOW) & REG_MSR_MASK) == 0 ? "pc" : "msr");
-   
-   return(strdup(tmpstr));
-   }
-@@ -709,7 +716,7 @@ get_field_special(long instr, const struct op_code_struct *op)
-    default :
-      {
-        if ( ((((instr & IMM_MASK) >> IMM_LOW) ^ op->immval_mask) & 0xE000) == REG_PVR_MASK) {
--	  sprintf(tmpstr, "%s%u", pvr_register_prefix,
-+          snprintf(tmpstr, sizeof(tmpstr), "%s%u", pvr_register_prefix,
-                  (unsigned short)(((instr & IMM_MASK) >> IMM_LOW) ^
-                                   op->immval_mask) ^ REG_PVR_MASK);
- 	 return(strdup(tmpstr));
-@@ -720,7 +727,7 @@ get_field_special(long instr, const struct op_code_struct *op)
-      break;
-    }
-    
--   sprintf(tmpstr, "%s%s", register_prefix, spr);
-+   snprintf(tmpstr, sizeof(tmpstr), "%s%s", register_prefix, spr);
-    return(strdup(tmpstr));
- }
- 
 -- 
 2.41.0
 
