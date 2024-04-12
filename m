@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4122C4345F
-	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Apr 2024 17:19:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CA33C4345F
+	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Apr 2024 17:27:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rvKYz-0003yd-Fm; Fri, 12 Apr 2024 13:19:45 -0400
+	id 1rvKg0-0006eL-FX; Fri, 12 Apr 2024 13:27:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rvKYy-0003x4-2w
- for qemu-riscv@nongnu.org; Fri, 12 Apr 2024 13:19:44 -0400
-Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
+ id 1rvKfy-0006dx-UH
+ for qemu-riscv@nongnu.org; Fri, 12 Apr 2024 13:26:58 -0400
+Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rvKYw-0001IP-9I
- for qemu-riscv@nongnu.org; Fri, 12 Apr 2024 13:19:43 -0400
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-1e3e84a302eso8804425ad.0
- for <qemu-riscv@nongnu.org>; Fri, 12 Apr 2024 10:19:41 -0700 (PDT)
+ id 1rvKfv-00030W-Lj
+ for qemu-riscv@nongnu.org; Fri, 12 Apr 2024 13:26:58 -0400
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-1e3ff14f249so9000465ad.1
+ for <qemu-riscv@nongnu.org>; Fri, 12 Apr 2024 10:26:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1712942380; x=1713547180; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1712942814; x=1713547614; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=pKfWM+CvdWFEkgGojd8ew4JZrU+UNJW9I1Aq/Px1mKw=;
- b=jXN/f6ts/LgIZzssdYEWpo3DzWIzI6Zn5q4wHueIShUyoCzhvlUNix9E/lmEwayqEe
- 7h3T4eoQo8XlHDRqFevSwBvILeBmcIlknZc8+mm8Q1oXxjF6YrcaskZSJdFBDREAvRp9
- 1gK5Bh53UvY8lzufQARLl+jjwiBzZbGAUiTO2pwiJaoNMHQe7R1FMO9S3BeKJo3FRGAr
- PRvGR+fJrc8PAmlefCfmiHYL5pjimTzhEwDxu7J5ReF82j14fsK+TA/lWBeq8IKr9q5s
- Jl7hp40i4eDiyAWUjQzKrk2AToZYJ+Yv9rfj0gPFbNOdShIyDBpnJEbEEMyDz8ePFIs/
- X6eg==
+ bh=P3DKA10cGVxqOJD5ZVls9Bezx11cg5ENXIVx4Fno3QA=;
+ b=CgO5JZaMoTS8mP2TudaZCU7yJmnBPBO5RRp05iIFyGNVVuqnFOEs8O0GWnXWpY/zA1
+ Vs5M3VaGG3RWa3bT03X6n3hsKawQ9m8TDDYVrqdFDrqv6uF89/gGGzDv1Yk+I7zR2bRG
+ P1ZN0VkKI7nsDFNQzK76zS34wbipojs3Am5IsejeerN4i2YMGSmkxL6dsKk084LmB+uA
+ nl9tJg8cqYFx3OwthXrq2zmySVsZVBxI2c3EcGtBnPP+pYVd8GU+hrGx5iEu0Ag+CBDX
+ wbkHZ/7yjKO+hhTUJI2mfpgRZWPfKxIYVL3UQ4AyHVWt7hEgBZFMaflKTJMHiYTrUwTc
+ dxBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712942380; x=1713547180;
+ d=1e100.net; s=20230601; t=1712942814; x=1713547614;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=pKfWM+CvdWFEkgGojd8ew4JZrU+UNJW9I1Aq/Px1mKw=;
- b=Jp6ucRUH//zWU6wRwh6s+r82AOgxraHp9xwfRPO4j5Xy58fG84bjBpKptjb2U+8kfn
- HljrtmZiTnjSD1Z1TtH2gPySJyl1mDZNV7ipboeckpRNvzaiwRaGTdX2UmJRPnyUQh05
- Ge93d+jOQhuuZmsDAd981hsmmtZpfnx2OTePXsndXuAb6XY3DNLi40oaoDycEHmM2DyB
- 9fubBBCbeJ+Wrk2KFOaGeZutr9SbEwQPPQwNiQJlWYd86DmtDLRDyMZxHAmgQbVgaEbM
- LhGmiLE/NDx938z4wZN8JCYriX6tiA6MM4aFwdnRPTlE+AdOzpEYUXRm7i6A6qYAmeyO
- H1EQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUvnmL7WZHzV3WXhtbIN2SmM5PokJviAuPUgLw5VIed5/SK/MMx3hmB0cUpsW9NpTo0XvOSsMaeMz/vzyxnxC1BTjWLMbY=
-X-Gm-Message-State: AOJu0Yy4apuBeiJA2XhTS5mmD1mZDqE5BL7ypeSqTbIooRukNuBwnRSo
- +sqGPCvVjjzdWaADk7t5DYP4buyjG12lEGErwYh9aMR+TzPme/pHqZUteoRpDb8=
-X-Google-Smtp-Source: AGHT+IH3B6D3viulP17Qi2o/M/KT06vAqWWmLz6B6trqWZ6DQ3UbO7orXvW91y3XYAQbofWzDI0qRg==
-X-Received: by 2002:a17:902:cecc:b0:1e5:2883:6ff6 with SMTP id
- d12-20020a170902cecc00b001e528836ff6mr3683840plg.11.1712942380389; 
- Fri, 12 Apr 2024 10:19:40 -0700 (PDT)
+ bh=P3DKA10cGVxqOJD5ZVls9Bezx11cg5ENXIVx4Fno3QA=;
+ b=YezbPxsZSjHYXlS6b6KO2lFhfbYtRltnI+RrFjoYDDvNCcbZSivAQElTZrBMhTgKMj
+ rSToJxfzBFoTlqIoaCg1LXeUHaTGs5ptS19BRh13X4Dxo4Zm8ZYnuwddWKeLC5nx9zDP
+ yQvqa2rqnl27SaNrEka/qgK4TTDtRBiGXecSTX+scTU8Jw4sJW+YKgE2LiE2xNhGgjXN
+ pM2E6KIEJKnUIZREssaAJ5UXJOO3AL5LSv/zjhlwmQkfNA9JKv3hMeuoBiUS1R571omb
+ fDtlXZMP5PUlIU8F84ppXlrz+djMpod9TePiorM5q11YIkQcc4Lb6jTXYJkTQm3VFEWx
+ zmCQ==
+X-Gm-Message-State: AOJu0Yyn49Qabw8O0xGVUpJjCWLjrMVt/5BnwTNo6wYT24hkq1djoyDp
+ gai90jOWoVrLdFIaEcxoaeKpZSp2X8NXGi0OQr31ckg4UfGXLVqikshr30IlUYo=
+X-Google-Smtp-Source: AGHT+IEAuNi3rKWw6Fpsh+YTeZVBu3QptdUZbQ4LBCOfI1QP03Z/vJ/KMBacI7ReZmdfP6iQuc7TPQ==
+X-Received: by 2002:a17:903:22c2:b0:1e3:c186:8db3 with SMTP id
+ y2-20020a17090322c200b001e3c1868db3mr8798912plg.15.1712942814001; 
+ Fri, 12 Apr 2024 10:26:54 -0700 (PDT)
 Received: from [192.168.68.110] ([177.45.186.202])
  by smtp.gmail.com with ESMTPSA id
- k18-20020a170902f29200b001e0da190a07sm3252659plc.167.2024.04.12.10.19.37
+ u11-20020a170902e5cb00b001e20587b552sm3245046plf.163.2024.04.12.10.26.50
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 12 Apr 2024 10:19:40 -0700 (PDT)
-Message-ID: <7c65a766-7419-4e73-bccb-43475527734f@ventanamicro.com>
-Date: Fri, 12 Apr 2024 14:19:36 -0300
+ Fri, 12 Apr 2024 10:26:53 -0700 (PDT)
+Message-ID: <70b7f011-e091-426a-b4aa-88ed9f112c79@ventanamicro.com>
+Date: Fri, 12 Apr 2024 14:26:49 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH for-9.0] target/riscv: prioritize pmp errors in
  raise_mmu_exception()
 Content-Language: en-US
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
- palmer@rivosinc.com, alexei.filippov@syntacore.com,
+To: Aleksei Filippov <alexei.filippov@syntacore.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  richard.henderson@linaro.org, Joseph Chan <jchan@ventanamicro.com>
 References: <20240409175241.1297072-1-dbarboza@ventanamicro.com>
- <CAFEAcA-XkK8ksZ7aMj-ap4BRw6V8dMJ6hGTozagGAAQfXz_=bg@mail.gmail.com>
+ <a8680fb3-8547-4b68-98d1-fd2d2d278375@syntacore.com>
+ <6947ea59-ccbd-43b8-b8a0-bc543b9992f9@ventanamicro.com>
+ <a4a23a7a-04fb-494d-b13a-933ab1a93ffa@syntacore.com>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <CAFEAcA-XkK8ksZ7aMj-ap4BRw6V8dMJ6hGTozagGAAQfXz_=bg@mail.gmail.com>
+In-Reply-To: <a4a23a7a-04fb-494d-b13a-933ab1a93ffa@syntacore.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x635.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x631.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -104,44 +103,65 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 4/12/24 14:12, Peter Maydell wrote:
-> On Tue, 9 Apr 2024 at 18:53, Daniel Henrique Barboza
-> <dbarboza@ventanamicro.com> wrote:
->>
->> raise_mmu_exception(), as is today, is prioritizing guest page faults by
->> checking first if virt_enabled && !first_stage, and then considering the
->> regular inst/load/store faults.
->>
->> There's no mention in the spec about guest page fault being a higher
->> priority that PMP faults. In fact, privileged spec section 3.7.1 says:
->>
->> "Attempting to fetch an instruction from a PMP region that does not have
->> execute permissions raises an instruction access-fault exception.
->> Attempting to execute a load or load-reserved instruction which accesses
->> a physical address within a PMP region without read permissions raises a
->> load access-fault exception. Attempting to execute a store,
->> store-conditional, or AMO instruction which accesses a physical address
->> within a PMP region without write permissions raises a store
->> access-fault exception."
->>
->> So, in fact, we're doing it wrong - PMP faults should always be thrown,
->> regardless of also being a first or second stage fault.
->>
->> The way riscv_cpu_tlb_fill() and get_physical_address() work is
->> adequate: a TRANSLATE_PMP_FAIL error is immediately reported and
->> reflected in the 'pmp_violation' flag. What we need is to change
->> raise_mmu_exception() to prioritize it.
->>
->> Reported-by: Joseph Chan <jchan@ventanamicro.com>
->> Fixes: 82d53adfbb ("target/riscv/cpu_helper.c: Invalid exception on MMU translation stage")
->> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+On 4/12/24 13:52, Aleksei Filippov wrote:
 > 
-> I guess from the Fixes: git commit hash that this isn't a regression
-> since 8.2 ? That would make it too late for 9.0 at this point in
-> the release cycle.
+> 
+> On 12.04.2024 19:00, Daniel Henrique Barboza wrote:
+> 
+>> Thanks for giving it a go. You're right, this patch alone is not enough and we'll
+>> need your patch too.
+>>
+>> But note that, with what you've said in mind, your patch will also end up setting
+>> mtval2 and env->guest_phys_fault_addr in case a PMP fault occurs during the
+>> get_physical_address() right at the start of second stage:
+>>
+>>          if (ret == TRANSLATE_SUCCESS) {
+>>              /* Second stage lookup */
+>>              im_address = pa;
+>>
+>>              ret = get_physical_address(env, &pa, &prot2, im_address, NULL,
+>>                                         access_type, MMUIdx_U, false, true,
+>>                                         false);
+>>
+>>
+>> I think your patch needs to also prevent env->guest_phys_fault_addr to be set when
+>> ret == TRANSLATE_PMP_FAIL.
+>>
+>> With these changes in your patch, and this patch, we're free to set "first_stage_error = false;"
+>> at the start of second stage lookup, keeping consistency, because raise_mmu_exception is now
+>> able to deal with it. I can amend this change in this patch. This patch would prioritize
+>> PMP errors, your patch will fix the problem with mtval2.
+>>
+>> Let me know what do you think. If you agree I can re-send both patches together.
+>>
+>>
+>> Thanks,
+>>
+>>
+>> Daniel
+> 
+> Oh, I actually missed that, thx, you are right. I could prepare patch to fix
+> this, do you want it in this thread or in previous with only my patch in?
 
-I don't think it's critical enough to push it for 9.0 now. We'll settle for
-9.1 and then Michael can pick it for 9.0-stable.
+If you don't mind, please re-send it together in a new thread with this patch too.
+
+Include this one as is, then include yours as a complement that fixes the problem
+with mtval2 that my patch missed. You can use the explanation you gave me as the
+new commit msg for your patch. E.g:
+
+"target/riscv: do not set mtval2 for non guest-page faults
+
+Previous patch fixed the PMP priority in raise_mmu_exception() but we're still
+setting mtval2 incorrectly. In riscv_cpu_tlb_fill(), after pmp check in 2 stage
+translation part, mtval2 will be set in case of successes 2 stage translation but
+failed pmp check.
+
+In this case we gonna set mtval2 via env->guest_phys_fault_addr in context of
+riscv_cpu_tlb_fill(), as this was a guest-page-fault, but it didn't and mtval2
+should be zero, according to RISCV privileged spec sect. 9.4.4: When a guest
+page-fault is taken into M-mode, mtval2 is written with either zero or guest
+physical address that faulted, shifted by 2 bits. *For other traps, mtval2
+is set to zero...* "
 
 
 Thanks,
@@ -149,6 +169,4 @@ Thanks,
 Daniel
 
 > 
-> thanks
-> -- PMM
 
