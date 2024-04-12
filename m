@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7650C00A94
-	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Apr 2024 09:56:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECF1BC04FFE
+	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Apr 2024 09:58:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rvDdk-0007pc-62; Fri, 12 Apr 2024 05:56:12 -0400
+	id 1rvDfe-0000XN-Ti; Fri, 12 Apr 2024 05:58:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <eric.huang@linux.alibaba.com>)
- id 1rvDdd-0007om-S5; Fri, 12 Apr 2024 05:56:05 -0400
-Received: from out30-119.freemail.mail.aliyun.com ([115.124.30.119])
+ id 1rvDfd-0000Wa-1Y; Fri, 12 Apr 2024 05:58:09 -0400
+Received: from out30-110.freemail.mail.aliyun.com ([115.124.30.110])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <eric.huang@linux.alibaba.com>)
- id 1rvDdZ-0008OR-33; Fri, 12 Apr 2024 05:56:04 -0400
+ id 1rvDfa-0000Y5-1p; Fri, 12 Apr 2024 05:58:08 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1712915755; h=From:To:Subject:Date:Message-ID:MIME-Version;
- bh=PtcCdLJMSL6qhMP3DJl3nheiurGwNC2IL8KiBFsJE8o=;
- b=SdK+XZzAq+/fDny8P/h73sRH5KSwpDpbiVwvqP6cmd9cLrWQYXaTpQwzAbhLsXD8Qps6fLD2YaQJNDIlBtWVvu1TMBWDqn800OUbBw2EyYOzKQq1hIsy0vGoNaHx7TwpVHa5w0ppKYjujSConf+oS9/uAzCAB0ohkyREa5M0NYg=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R181e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045168;
+ t=1712915876; h=From:To:Subject:Date:Message-ID:MIME-Version;
+ bh=1DFEJpDLU3j4QtHeAqrFTUn3BuZZzQrxuet5/p11QiA=;
+ b=xCvrunsBzI3xYTaky0AdiKEgzT4a5nstcsqPzGhPOW/V9bjAWIATtJxuxEzUFT64Z1oE7tE0hJApmw+DlN9DZODnbXE3gehflie9Ha023M49nyX53rzd9Zhoh2ww8/BwP9tFCJCyyzqVLt5CBiIew8TjCvlmoZKn33761uNt54M=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R121e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046056;
  MF=eric.huang@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
- TI=SMTPD_---0W4Nu53m_1712915753; 
+ TI=SMTPD_---0W4NtPyw_1712915874; 
 Received: from localhost.localdomain(mailfrom:eric.huang@linux.alibaba.com
- fp:SMTPD_---0W4Nu53m_1712915753) by smtp.aliyun-inc.com;
- Fri, 12 Apr 2024 17:55:54 +0800
+ fp:SMTPD_---0W4NtPyw_1712915874) by smtp.aliyun-inc.com;
+ Fri, 12 Apr 2024 17:57:55 +0800
 From: Huang Tao <eric.huang@linux.alibaba.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, zhiwei_liu@linux.alibaba.com,
  dbarboza@ventanamicro.com, liwei1518@gmail.com, bin.meng@windriver.com,
  alistair.francis@wdc.com, palmer@dabbelt.com,
  Huang Tao <eric.huang@linux.alibaba.com>
-Subject: [PATCH 60/65] target/riscv: Add integer extract and scalar move
+Subject: [PATCH 61/65] target/riscv: Add floating-point scalar move
  instructions for XTheadVector
-Date: Fri, 12 Apr 2024 15:37:30 +0800
-Message-ID: <20240412073735.76413-61-eric.huang@linux.alibaba.com>
+Date: Fri, 12 Apr 2024 15:37:31 +0800
+Message-ID: <20240412073735.76413-62-eric.huang@linux.alibaba.com>
 X-Mailer: git-send-email 2.44.0
 In-Reply-To: <20240412073735.76413-1-eric.huang@linux.alibaba.com>
 References: <20240412073735.76413-1-eric.huang@linux.alibaba.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.119;
+Received-SPF: pass client-ip=115.124.30.110;
  envelope-from=eric.huang@linux.alibaba.com;
- helo=out30-119.freemail.mail.aliyun.com
+ helo=out30-110.freemail.mail.aliyun.com
 X-Spam_score_int: -174
 X-Spam_score: -17.5
 X-Spam_bar: -----------------
@@ -71,139 +71,43 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-In this patch, we add integer extract and scalar move instructions to show the way we
-implement XTheadVector permutation instructions.
-XTheadVector integer scalar move instructions diff from RVV1.0 in the following
-points:
-1. th.vext.x.v can transfer any element in a vector register to a general
-   register, while vmv.x.s can only transfer the first element in a vector
-   register to a general register.
-2. When SEW < XLEN, XTheadVector zero-extend the value, while RVV1.0
-   sign-extend the value.
-3. different tail element process policy.
+XTheadVector floating-point scalar move instructions diff from RVV1.0 in
+the following points:
+1. When src width < dst width, RVV1.0 checks whether the input value is a
+   valid NaN-boxed value, in which case the least-significant dst-width bits
+   are used, else the canonical NaN value is used. XTheadVector always use the
+   least-significant bits.
+2. different tail elements process policy.
 
 Signed-off-by: Huang Tao <eric.huang@linux.alibaba.com>
 ---
- .../riscv/insn_trans/trans_xtheadvector.c.inc | 154 +++++++++++++++++-
- 1 file changed, 152 insertions(+), 2 deletions(-)
+ .../riscv/insn_trans/trans_xtheadvector.c.inc | 59 ++++++++++++++++++-
+ 1 file changed, 57 insertions(+), 2 deletions(-)
 
 diff --git a/target/riscv/insn_trans/trans_xtheadvector.c.inc b/target/riscv/insn_trans/trans_xtheadvector.c.inc
-index 9a0ea606ab..a8a1ec7b3f 100644
+index a8a1ec7b3f..54ccd933c0 100644
 --- a/target/riscv/insn_trans/trans_xtheadvector.c.inc
 +++ b/target/riscv/insn_trans/trans_xtheadvector.c.inc
-@@ -2588,14 +2588,164 @@ static bool trans_th_vid_v(DisasContext *s, arg_th_vid_v *a)
+@@ -2740,14 +2740,69 @@ static bool trans_th_vmv_s_x(DisasContext *s, arg_th_vmv_s_x *a)
      return false;
  }
  
-+/*
-+ * Vector Permutation Instructions
-+ */
-+
-+/* Integer Extract Instruction */
-+
-+/*
-+ * This function is almost the copy of load_element, except:
-+ * 1) When SEW < XLEN, XTheadVector zero-extend the value, while
-+ *    RVV1.0 sign-extend the value.
-+ */
-+static void load_element_th(TCGv_i64 dest, TCGv_ptr base,
-+                            int ofs, int sew)
-+{
-+    switch (sew) {
-+    case MO_8:
-+        tcg_gen_ld8u_i64(dest, base, ofs);
-+        break;
-+    case MO_16:
-+        tcg_gen_ld16u_i64(dest, base, ofs);
-+        break;
-+    case MO_32:
-+        tcg_gen_ld32u_i64(dest, base, ofs);
-+        break;
-+    case MO_64:
-+        tcg_gen_ld_i64(dest, base, ofs);
-+        break;
-+    default:
-+        g_assert_not_reached();
-+        break;
-+    }
-+}
-+
-+/* Load idx >= VLMAX ? 0 : vreg[idx] */
-+static void th_element_loadx(DisasContext *s, TCGv_i64 dest,
-+                              int vreg, TCGv idx, int vlmax)
-+{
-+    TCGv_i32 ofs = tcg_temp_new_i32();
-+    TCGv_ptr base = tcg_temp_new_ptr();
-+    TCGv_i64 t_idx = tcg_temp_new_i64();
-+    TCGv_i64 t_vlmax, t_zero;
-+
-+    /*
-+     * Mask the index to the length so that we do
-+     * not produce an out-of-range load.
-+     */
-+    tcg_gen_trunc_tl_i32(ofs, idx);
-+    tcg_gen_andi_i32(ofs, ofs, vlmax - 1);
-+
-+    /* Convert the index to an offset. */
-+    endian_adjust(ofs, s->sew);
-+    tcg_gen_shli_i32(ofs, ofs, s->sew);
-+
-+    /* Convert the index to a pointer. */
-+    tcg_gen_ext_i32_ptr(base, ofs);
-+    tcg_gen_add_ptr(base, base, tcg_env);
-+
-+    /* Perform the load. */
-+    load_element_th(dest, base,
-+                    vreg_ofs(s, vreg), s->sew);
-+
-+    /* Flush out-of-range indexing to zero.  */
-+    t_vlmax = tcg_constant_i64(vlmax);
-+    t_zero = tcg_constant_i64(0);
-+    tcg_gen_extu_tl_i64(t_idx, idx);
-+
-+    tcg_gen_movcond_i64(TCG_COND_LTU, dest, t_idx,
-+                        t_vlmax, dest, t_zero);
-+
-+}
-+/*
-+ * This function is almost the copy of vec_element_loadi, except
-+ * we just change the function name to decouple and delete the
-+ * unused parameter.
-+ * We delete the arg "bool sign", because XTheadVector always
-+ * zero-extend the value.
-+ */
-+static void th_element_loadi(DisasContext *s, TCGv_i64 dest,
-+                              int vreg, int idx)
-+{
-+    load_element_th(dest, tcg_env, endian_ofs(s, vreg, idx), s->sew);
-+}
-+
-+/*
-+ * Compared to trans_vmv_x_s, th.vext.x.v can transfer any element
-+ * in a vector register to a general register, while vmv.x.s can only
-+ * transfer the first element in a vector register to a general register.
-+ *
-+ * So we use th_element_loadx to load the element. And we use th_element_loadi
-+ * to deal with the special case when rs1 == 0, to accelerate.
-+ */
-+static bool trans_th_vext_x_v(DisasContext *s, arg_r *a)
++/* Floating-Point Scalar Move Instructions */
++static bool trans_th_vfmv_f_s(DisasContext *s, arg_th_vfmv_f_s *a)
 +{
 +    if (require_xtheadvector(s) &&
-+        vext_check_isa_ill(s)) {
-+        TCGv_i64 tmp = tcg_temp_new_i64();
-+        TCGv dest = dest_gpr(s, a->rd);
++        !s->vill && has_ext(s, RVF) &&
++        (s->mstatus_fs != 0) &&
++        (s->sew != 0)) {
++        unsigned int len = 8 << s->sew;
 +
-+        if (a->rs1 == 0) {
-+            /* Special case vmv.x.s rd, vs2. */
-+            th_element_loadi(s, tmp, a->rs2, 0);
-+        } else {
-+            /* This instruction ignores LMUL and vector register groups */
-+            int vlmax = s->cfg_ptr->vlenb >> s->sew;
-+            th_element_loadx(s, tmp, a->rs2, cpu_gpr[a->rs1], vlmax);
++        th_element_loadi(s, cpu_fpr[a->rd], a->rs2, 0);
++        if (len < 64) {
++            tcg_gen_ori_i64(cpu_fpr[a->rd], cpu_fpr[a->rd],
++                            MAKE_64BIT_MASK(len, 64 - len));
 +        }
 +
-+        tcg_gen_trunc_i64_tl(dest, tmp);
-+        gen_set_gpr(s, a->rd, dest);
++        mark_fs_dirty(s);
 +        tcg_gen_movi_tl(cpu_vstart, 0);
 +        finalize_rvv_inst(s);
 +        return true;
@@ -211,34 +115,32 @@ index 9a0ea606ab..a8a1ec7b3f 100644
 +    return false;
 +}
 +
-+/* Integer Scalar Move Instruction */
-+
-+static void th_element_storei(DisasContext *s, int vreg,
-+                              int idx, TCGv_i64 val)
-+{
-+    vec_element_storei(s, vreg, idx, val);
-+}
-+/* vmv.s.x vd, rs1 # vd[0] = rs1 */
-+static bool trans_th_vmv_s_x(DisasContext *s, arg_th_vmv_s_x *a)
++/* vfmv.s.f vd, rs1 # vd[0] = rs1 (vs2=0) */
++static bool trans_th_vfmv_s_f(DisasContext *s, arg_th_vfmv_s_f *a)
 +{
 +    if (require_xtheadvector(s) &&
-+        vext_check_isa_ill(s)) {
-+        /* This instruction ignores LMUL and vector register groups */
-+        int maxsz = s->cfg_ptr->vlenb;
++        !s->vill && has_ext(s, RVF) &&
++        (s->sew != 0)) {
 +        TCGv_i64 t1;
++        /* The instructions ignore LMUL and vector register group. */
++        uint32_t vlmax = s->cfg_ptr->vlenb;
++
++        /* if vl == 0, skip vector register write back */
 +        TCGLabel *over = gen_new_label();
-+        TCGv src1 = get_gpr(s, a->rs1, EXT_ZERO);
-+
 +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
-+        tcg_gen_gvec_dup_imm(MO_64, vreg_ofs(s, a->rd), maxsz, maxsz, 0);
-+        if (a->rs1 == 0) {
-+            goto done;
-+        }
 +
++        /* zeroed all elements */
++        tcg_gen_gvec_dup_imm(MO_64, vreg_ofs(s, a->rd), vlmax, vlmax, 0);
++
++        /* NaN-box f[rs1] as necessary for SEW */
 +        t1 = tcg_temp_new_i64();
-+        tcg_gen_extu_tl_i64(t1, src1);
++        if (s->sew == MO_64 && !has_ext(s, RVD)) {
++            tcg_gen_ori_i64(t1, cpu_fpr[a->rs1], MAKE_64BIT_MASK(32, 32));
++        } else {
++            tcg_gen_mov_i64(t1, cpu_fpr[a->rs1]);
++        }
 +        th_element_storei(s, a->rd, 0, t1);
-+    done:
++
 +        gen_set_label(over);
 +        tcg_gen_movi_tl(cpu_vstart, 0);
 +        finalize_rvv_inst(s);
@@ -253,11 +155,11 @@ index 9a0ea606ab..a8a1ec7b3f 100644
      return require_xtheadvector(s);                        \
  }
  
--TH_TRANS_STUB(th_vext_x_v)
--TH_TRANS_STUB(th_vmv_s_x)
- TH_TRANS_STUB(th_vfmv_f_s)
- TH_TRANS_STUB(th_vfmv_s_f)
+-TH_TRANS_STUB(th_vfmv_f_s)
+-TH_TRANS_STUB(th_vfmv_s_f)
  TH_TRANS_STUB(th_vslideup_vx)
+ TH_TRANS_STUB(th_vslideup_vi)
+ TH_TRANS_STUB(th_vslide1up_vx)
 -- 
 2.44.0
 
