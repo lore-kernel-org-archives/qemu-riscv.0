@@ -4,49 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D50BC4345F
-	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Apr 2024 09:48:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36A3FC4345F
+	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Apr 2024 09:50:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rvDVo-0002P4-0d; Fri, 12 Apr 2024 05:48:04 -0400
+	id 1rvDXs-00040U-0f; Fri, 12 Apr 2024 05:50:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <eric.huang@linux.alibaba.com>)
- id 1rvDVj-0002Og-SW; Fri, 12 Apr 2024 05:47:55 -0400
-Received: from out30-113.freemail.mail.aliyun.com ([115.124.30.113])
+ id 1rvDXh-0003vm-Vd; Fri, 12 Apr 2024 05:50:00 -0400
+Received: from out30-98.freemail.mail.aliyun.com ([115.124.30.98])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <eric.huang@linux.alibaba.com>)
- id 1rvDVh-0006hx-Ia; Fri, 12 Apr 2024 05:47:55 -0400
+ id 1rvDXf-0006xW-RV; Fri, 12 Apr 2024 05:49:57 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1712915268; h=From:To:Subject:Date:Message-ID:MIME-Version;
- bh=4hfyZW4/05JjpSrcaJwfhZSpTipmklmzRqInWF/EWcg=;
- b=pjwufuHa2HSW1onxtucc6u/bIDvweAOQ1S09hGTQ8uqUzaL9FshLOenGlmzFRFXmNtrJMjTIgXtG/Na7Z1eVq6cmJb4BVd+MGT82g8i0/oBQ6SxyFM76TZRERUtm7R0YrfiW/lWDzPSHdAMPDBa4A11SnQ7J13qITEWZOCalOco=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R181e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046059;
+ t=1712915390; h=From:To:Subject:Date:Message-ID:MIME-Version;
+ bh=imXaAcxAeJEThFU0GM/qjKnSob7ed7kgIB3usibiBv8=;
+ b=hwZKwu264V2ta7yl8JLorBB7tEh7KMKhlHRUhX459hBX9HowmyA1FyUYG0QM+RmW+mJq/UCAuCCpvSJEB0QGYOpsKJvvXX2WpWE1MzPQzKsB+7FSyW6RxbrOnNc2pvR30G0slVnRDfAD5bOvIGnGB05mkPSENOp4DT6nA2DY6Ms=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R461e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046050;
  MF=eric.huang@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
- TI=SMTPD_---0W4Nsh82_1712915267; 
+ TI=SMTPD_---0W4Nshnm_1712915388; 
 Received: from localhost.localdomain(mailfrom:eric.huang@linux.alibaba.com
- fp:SMTPD_---0W4Nsh82_1712915267) by smtp.aliyun-inc.com;
- Fri, 12 Apr 2024 17:47:48 +0800
+ fp:SMTPD_---0W4Nshnm_1712915388) by smtp.aliyun-inc.com;
+ Fri, 12 Apr 2024 17:49:49 +0800
 From: Huang Tao <eric.huang@linux.alibaba.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, zhiwei_liu@linux.alibaba.com,
  dbarboza@ventanamicro.com, liwei1518@gmail.com, bin.meng@windriver.com,
  alistair.francis@wdc.com, palmer@dabbelt.com,
  Huang Tao <eric.huang@linux.alibaba.com>
-Subject: [PATCH 56/65] target/riscv: Add th.vmfirst.m for XTheadVector
-Date: Fri, 12 Apr 2024 15:37:26 +0800
-Message-ID: <20240412073735.76413-57-eric.huang@linux.alibaba.com>
+Subject: [PATCH 57/65] target/riscv: Add set-X-first mask bit instructrions
+ for XTheadVector
+Date: Fri, 12 Apr 2024 15:37:27 +0800
+Message-ID: <20240412073735.76413-58-eric.huang@linux.alibaba.com>
 X-Mailer: git-send-email 2.44.0
 In-Reply-To: <20240412073735.76413-1-eric.huang@linux.alibaba.com>
 References: <20240412073735.76413-1-eric.huang@linux.alibaba.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.113;
+Received-SPF: pass client-ip=115.124.30.98;
  envelope-from=eric.huang@linux.alibaba.com;
- helo=out30-113.freemail.mail.aliyun.com
+ helo=out30-98.freemail.mail.aliyun.com
 X-Spam_score_int: -174
 X-Spam_score: -17.5
 X-Spam_bar: -----------------
@@ -75,96 +76,148 @@ general differences between XTheadVector and RVV1.0.
 
 Signed-off-by: Huang Tao <eric.huang@linux.alibaba.com>
 ---
- target/riscv/helper.h                         |  2 ++
- .../riscv/insn_trans/trans_xtheadvector.c.inc | 31 ++++++++++++++++++-
- target/riscv/xtheadvector_helper.c            | 20 ++++++++++++
- 3 files changed, 52 insertions(+), 1 deletion(-)
+ target/riscv/helper.h                         |  4 ++
+ .../riscv/insn_trans/trans_xtheadvector.c.inc | 36 ++++++++++-
+ target/riscv/xtheadvector_helper.c            | 64 +++++++++++++++++++
+ 3 files changed, 101 insertions(+), 3 deletions(-)
 
 diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 6ddecbbe65..2379a3431d 100644
+index 2379a3431d..90a1ff2601 100644
 --- a/target/riscv/helper.h
 +++ b/target/riscv/helper.h
-@@ -2300,3 +2300,5 @@ DEF_HELPER_6(th_vmornot_mm, void, ptr, ptr, ptr, ptr, env, i32)
- DEF_HELPER_6(th_vmxnor_mm, void, ptr, ptr, ptr, ptr, env, i32)
- 
+@@ -2302,3 +2302,7 @@ DEF_HELPER_6(th_vmxnor_mm, void, ptr, ptr, ptr, ptr, env, i32)
  DEF_HELPER_4(th_vmpopc_m, tl, ptr, ptr, env, i32)
+ 
+ DEF_HELPER_4(th_vmfirst_m, tl, ptr, ptr, env, i32)
 +
-+DEF_HELPER_4(th_vmfirst_m, tl, ptr, ptr, env, i32)
++DEF_HELPER_5(th_vmsbf_m, void, ptr, ptr, ptr, env, i32)
++DEF_HELPER_5(th_vmsif_m, void, ptr, ptr, ptr, env, i32)
++DEF_HELPER_5(th_vmsof_m, void, ptr, ptr, ptr, env, i32)
 diff --git a/target/riscv/insn_trans/trans_xtheadvector.c.inc b/target/riscv/insn_trans/trans_xtheadvector.c.inc
-index f8e8b321e4..45554c38fb 100644
+index 45554c38fb..d41c691c31 100644
 --- a/target/riscv/insn_trans/trans_xtheadvector.c.inc
 +++ b/target/riscv/insn_trans/trans_xtheadvector.c.inc
-@@ -2471,13 +2471,42 @@ static bool trans_th_vmpopc_m(DisasContext *s, arg_rmr *a)
+@@ -2500,6 +2500,39 @@ static bool trans_th_vmfirst_m(DisasContext *s, arg_rmr *a)
+     }
      return false;
  }
- 
-+/* vmfirst find-first-set mask bit */
-+static bool trans_th_vmfirst_m(DisasContext *s, arg_rmr *a)
-+{
-+    if (require_xtheadvector(s) &&
-+        vext_check_isa_ill(s)) {
-+        TCGv_ptr src2, mask;
-+        TCGv dst;
-+        TCGv_i32 desc;
-+        uint32_t data = 0;
-+        data = FIELD_DP32(data, VDATA_TH, MLEN, s->mlen);
-+        data = FIELD_DP32(data, VDATA_TH, VM, a->vm);
-+        data = FIELD_DP32(data, VDATA_TH, LMUL, s->lmul);
-+
-+        mask = tcg_temp_new_ptr();
-+        src2 = tcg_temp_new_ptr();
-+        dst = dest_gpr(s, a->rd);
-+        desc = tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb,
-+                                          s->cfg_ptr->vlenb, data));
-+
-+        tcg_gen_addi_ptr(src2, tcg_env, vreg_ofs(s, a->rs2));
-+        tcg_gen_addi_ptr(mask, tcg_env, vreg_ofs(s, 0));
-+
-+        gen_helper_th_vmfirst_m(dst, mask, src2, tcg_env, desc);
-+        gen_set_gpr(s, a->rd, dst);
-+
-+        return true;
-+    }
-+    return false;
++/*
++ * th.vmsbf.m set-before-first mask bit
++ * th.vmsif.m set-including-first mask bit
++ * th.vmsof.m set-only-first mask bit
++ */
++#define GEN_M_TRANS_TH(NAME)                                       \
++static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
++{                                                                  \
++    if (require_xtheadvector(s) &&                                 \
++        vext_check_isa_ill(s) &&                                   \
++        (a->rd != a->rs2) &&                                       \
++        s->vstart_eq_zero) {                                       \
++        uint32_t data = 0;                                         \
++        gen_helper_gvec_3_ptr *fn = gen_helper_##NAME;             \
++                                                                   \
++        data = FIELD_DP32(data, VDATA_TH, MLEN, s->mlen);          \
++        data = FIELD_DP32(data, VDATA_TH, VM, a->vm);              \
++        data = FIELD_DP32(data, VDATA_TH, LMUL, s->lmul);          \
++        tcg_gen_gvec_3_ptr(vreg_ofs(s, a->rd),                     \
++                           vreg_ofs(s, 0),                         \
++                           vreg_ofs(s, a->rs2),                    \
++                           tcg_env, s->cfg_ptr->vlenb,             \
++                           s->cfg_ptr->vlenb,                      \
++                           data, fn);                              \
++        finalize_rvv_inst(s);                                      \
++        return true;                                               \
++    }                                                              \
++    return false;                                                  \
 +}
 +
++GEN_M_TRANS_TH(th_vmsbf_m)
++GEN_M_TRANS_TH(th_vmsif_m)
++GEN_M_TRANS_TH(th_vmsof_m)
+ 
  #define TH_TRANS_STUB(NAME)                                \
  static bool trans_##NAME(DisasContext *s, arg_##NAME *a)   \
- {                                                          \
+@@ -2507,9 +2540,6 @@ static bool trans_##NAME(DisasContext *s, arg_##NAME *a)   \
      return require_xtheadvector(s);                        \
  }
  
--TH_TRANS_STUB(th_vmfirst_m)
- TH_TRANS_STUB(th_vmsbf_m)
- TH_TRANS_STUB(th_vmsif_m)
- TH_TRANS_STUB(th_vmsof_m)
+-TH_TRANS_STUB(th_vmsbf_m)
+-TH_TRANS_STUB(th_vmsif_m)
+-TH_TRANS_STUB(th_vmsof_m)
+ TH_TRANS_STUB(th_viota_m)
+ TH_TRANS_STUB(th_vid_v)
+ TH_TRANS_STUB(th_vext_x_v)
 diff --git a/target/riscv/xtheadvector_helper.c b/target/riscv/xtheadvector_helper.c
-index ba1ab0435d..1860e47f4f 100644
+index 1860e47f4f..d4f1665bf3 100644
 --- a/target/riscv/xtheadvector_helper.c
 +++ b/target/riscv/xtheadvector_helper.c
-@@ -3538,3 +3538,23 @@ target_ulong HELPER(th_vmpopc_m)(void *v0, void *vs2, CPURISCVState *env,
+@@ -3558,3 +3558,67 @@ target_ulong HELPER(th_vmfirst_m)(void *v0, void *vs2, CPURISCVState *env,
      env->vstart = 0;
-     return cnt;
+     return -1LL;
  }
 +
-+/* vmfirst find-first-set mask bit*/
-+target_ulong HELPER(th_vmfirst_m)(void *v0, void *vs2, CPURISCVState *env,
-+                               uint32_t desc)
++enum set_mask_type_th {
++    ONLY_FIRST = 1,
++    INCLUDE_FIRST,
++    BEFORE_FIRST,
++};
++
++static void vmsetm(void *vd, void *v0, void *vs2, CPURISCVState *env,
++                   uint32_t desc, enum set_mask_type_th type)
 +{
 +    uint32_t mlen = th_mlen(desc);
++    uint32_t vlmax = (env_archcpu(env)->cfg.vlenb << 3) / mlen;
 +    uint32_t vm = th_vm(desc);
 +    uint32_t vl = env->vl;
 +    int i;
++    bool first_mask_bit = false;
 +
 +    for (i = env->vstart; i < vl; i++) {
-+        if (vm || th_elem_mask(v0, mlen, i)) {
-+            if (th_elem_mask(vs2, mlen, i)) {
-+                return i;
++        if (!vm && !th_elem_mask(v0, mlen, i)) {
++            continue;
++        }
++        /* write a zero to all following active elements */
++        if (first_mask_bit) {
++            th_set_elem_mask(vd, mlen, i, 0);
++            continue;
++        }
++        if (th_elem_mask(vs2, mlen, i)) {
++            first_mask_bit = true;
++            if (type == BEFORE_FIRST) {
++                th_set_elem_mask(vd, mlen, i, 0);
++            } else {
++                th_set_elem_mask(vd, mlen, i, 1);
++            }
++        } else {
++            if (type == ONLY_FIRST) {
++                th_set_elem_mask(vd, mlen, i, 0);
++            } else {
++                th_set_elem_mask(vd, mlen, i, 1);
 +            }
 +        }
 +    }
 +    env->vstart = 0;
-+    return -1LL;
++    for (; i < vlmax; i++) {
++        th_set_elem_mask(vd, mlen, i, 0);
++    }
++}
++
++void HELPER(th_vmsbf_m)(void *vd, void *v0, void *vs2, CPURISCVState *env,
++                        uint32_t desc)
++{
++    vmsetm(vd, v0, vs2, env, desc, BEFORE_FIRST);
++}
++
++void HELPER(th_vmsif_m)(void *vd, void *v0, void *vs2, CPURISCVState *env,
++                        uint32_t desc)
++{
++    vmsetm(vd, v0, vs2, env, desc, INCLUDE_FIRST);
++}
++
++void HELPER(th_vmsof_m)(void *vd, void *v0, void *vs2, CPURISCVState *env,
++                        uint32_t desc)
++{
++    vmsetm(vd, v0, vs2, env, desc, ONLY_FIRST);
 +}
 -- 
 2.44.0
