@@ -4,57 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5B61C4345F
-	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Apr 2024 10:06:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15E90C4345F
+	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Apr 2024 11:11:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rvDna-00082R-V7; Fri, 12 Apr 2024 06:06:23 -0400
+	id 1rvEo3-0001Q6-47; Fri, 12 Apr 2024 07:10:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <eric.huang@linux.alibaba.com>)
- id 1rvDnW-0007wD-SP; Fri, 12 Apr 2024 06:06:18 -0400
-Received: from out30-132.freemail.mail.aliyun.com ([115.124.30.132])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <eric.huang@linux.alibaba.com>)
- id 1rvDnP-00022L-6H; Fri, 12 Apr 2024 06:06:18 -0400
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rvEo2-0001Pf-A0
+ for qemu-riscv@nongnu.org; Fri, 12 Apr 2024 07:10:54 -0400
+Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rvEo0-00069f-8x
+ for qemu-riscv@nongnu.org; Fri, 12 Apr 2024 07:10:53 -0400
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-343d7ff2350so503722f8f.0
+ for <qemu-riscv@nongnu.org>; Fri, 12 Apr 2024 04:10:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux.alibaba.com; s=default;
- t=1712916362; h=From:To:Subject:Date:Message-ID:MIME-Version;
- bh=S6PxTgtORypWKOerrWqfq+DLXyveNYf73gc+A01znRY=;
- b=Z6MQcW5NZoLm+vQ8e2OsUcOhKKSd9tQd4+KHGYuGyu84cpt0ljCIQj1R9C+e4hIy7JmtjpiBlCV/LQePp8A4vwbUTsd7QpyMo4PIlSTruAun/irMw9sf+JCypEU9KQNKZugP4qY7lvtrPnguudh1c2TFmo2zuyuClgiYgk+AU4s=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R161e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045176;
- MF=eric.huang@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
- TI=SMTPD_---0W4NtSbs_1712916361; 
-Received: from localhost.localdomain(mailfrom:eric.huang@linux.alibaba.com
- fp:SMTPD_---0W4NtSbs_1712916361) by smtp.aliyun-inc.com;
- Fri, 12 Apr 2024 18:06:02 +0800
-From: Huang Tao <eric.huang@linux.alibaba.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, zhiwei_liu@linux.alibaba.com,
- dbarboza@ventanamicro.com, liwei1518@gmail.com, bin.meng@windriver.com,
- alistair.francis@wdc.com, palmer@dabbelt.com,
- Huang Tao <eric.huang@linux.alibaba.com>
-Subject: [PATCH 65/65] target/riscv: Enable XTheadVector extension for c906
-Date: Fri, 12 Apr 2024 15:37:35 +0800
-Message-ID: <20240412073735.76413-66-eric.huang@linux.alibaba.com>
-X-Mailer: git-send-email 2.44.0
-In-Reply-To: <20240412073735.76413-1-eric.huang@linux.alibaba.com>
-References: <20240412073735.76413-1-eric.huang@linux.alibaba.com>
+ d=linaro.org; s=google; t=1712920250; x=1713525050; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=+zUgwDxL6Jh9gS602LQ1TWUHMO/rEs6zICIYwLbAqg8=;
+ b=Ip84Lzd/CnljmSD+28oECUk0P6YtEwG8M4aJ54TkLX1FpJINjhjLsV3/f1laUaA6Zg
+ Q9DpujKir3mWdNI/1ls6DuGyYfwvI7Ch2FZOHUDqBLK7afTkVjS927Yx0IKiNSFbnMyU
+ 5brO/3MfC6DUCXHEHvoq8/TXuguPoF5TheQjf4+Avpbr3dpCI5G30nPlJP+rOHC3xVBD
+ wT/hZKyuONq0SAV+lJ0X6vtYRZo695RO5QnhbvNKmuOpLazdJabz7yrmp7HKyGBQuaYc
+ HrvWeBu8j9PjC7KnTvzqfZktYe/OQl0m4YiwJSbtV9hFC6S+VrJ+pcxYsBHapKPwwJZZ
+ s47A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1712920250; x=1713525050;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=+zUgwDxL6Jh9gS602LQ1TWUHMO/rEs6zICIYwLbAqg8=;
+ b=qXY6AWIzbWySXIb8yBkmc5Q2sGdisamryJLRtREmepXAnuj67uVh2HUIUueK6BCX1c
+ uVGiwWoyRls23p/TMFJEgLcNtzaKnXvgLvlgxWh44O7nd8VcNLkdfI+RIIOu5mhyIyNu
+ 2CBj7LTtntqv/InLcSQap0DmrQcnDroRdLXNBZrlpcR7tY/jC8noYZ8QgL0aM4huQGcA
+ YdYy1wNJVbYCeqt2DMtkPx/xWV94pBdJ3LDIC2GTaQMKXGuHQTpKCvlCAY7OxjHl9pkU
+ QinJV4t283lKZu6ewL34IIR/+DlK1Oo2LCGm6CSQkdUOTYGf71f6NpFfgdjGFIQ6umQJ
+ AXqA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVzf0Ka2BBKZdftAPPCYfmGlSf7NOMqe/zQvRzKlTgsHDyicI5NfE0DsXVzlcSNiPXupDb/zirTt10QGIqs56Ou58sJV5o=
+X-Gm-Message-State: AOJu0YyC6SYYOy3RG+JPELEUZjagyG0ttgxIVh7japt9kMlJXOfRQXME
+ R9TT3z3SOZDqv4wQ8XHJ0DFZsPuFK/mMiETQiloZNxsdU+OI/fPn+aQldyQx8nY=
+X-Google-Smtp-Source: AGHT+IG78dfHB12b6CMwY2i/goX5zCao2yM1jsUJh1bso0Bj9FMgjPuTRdWG4kKUr2W2k1YZvPQvwQ==
+X-Received: by 2002:adf:ec42:0:b0:343:ebd4:b9f0 with SMTP id
+ w2-20020adfec42000000b00343ebd4b9f0mr1452496wrn.32.1712920250538; 
+ Fri, 12 Apr 2024 04:10:50 -0700 (PDT)
+Received: from [192.168.1.28] (lfbn-bay-1-170-196.w83-193.abo.wanadoo.fr.
+ [83.193.250.196]) by smtp.gmail.com with ESMTPSA id
+ cs5-20020a056000088500b00343a0e2375esm4036374wrb.27.2024.04.12.04.10.49
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 12 Apr 2024 04:10:50 -0700 (PDT)
+Message-ID: <35ea1f53-5c7a-45e8-9fa1-0df8fc7a0cba@linaro.org>
+Date: Fri, 12 Apr 2024 13:10:49 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.132;
- envelope-from=eric.huang@linux.alibaba.com;
- helo=out30-132.freemail.mail.aliyun.com
-X-Spam_score_int: -174
-X-Spam_score: -17.5
-X-Spam_bar: -----------------
-X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] hw: Fix problem with the A*MPCORE switches in the
+ Kconfig files
+To: Thomas Huth <thuth@redhat.com>, qemu-devel@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>, Peter Maydell <peter.maydell@linaro.org>
+Cc: qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+References: <20240412062042.105174-1-thuth@redhat.com>
+ <20240412062042.105174-2-thuth@redhat.com>
+Content-Language: en-US
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20240412062042.105174-2-thuth@redhat.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::436;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x436.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -70,27 +103,83 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This patch enables XTheadVector for the c906.
+On 12/4/24 08:20, Thomas Huth wrote:
+> A9MPCORE, ARM11MPCORE and A15MPCORE are defined twice, once in
+> hw/cpu/Kconfig and once in hw/arm/Kconfig. This is only possible
+> by accident, since hw/cpu/Kconfig is never included from hw/Kconfig.
+> Fix it by declaring the switches only in hw/cpu/Kconfig (since the
+> related files reside in the hw/cpu/ folder) and by making sure that
+> the file hw/cpu/Kconfig is now properly included from hw/Kconfig.
+> 
+> Signed-off-by: Thomas Huth <thuth@redhat.com>
+> ---
+>   hw/Kconfig     |  1 +
+>   hw/arm/Kconfig | 15 ---------------
+>   hw/cpu/Kconfig | 12 +++++++++---
+>   3 files changed, 10 insertions(+), 18 deletions(-)
+> 
+> diff --git a/hw/Kconfig b/hw/Kconfig
+> index 2c00936c28..9567cc475d 100644
+> --- a/hw/Kconfig
+> +++ b/hw/Kconfig
+> @@ -48,6 +48,7 @@ source watchdog/Kconfig
+>   
+>   # arch Kconfig
+>   source arm/Kconfig
+> +source cpu/Kconfig
+>   source alpha/Kconfig
+>   source avr/Kconfig
+>   source cris/Kconfig
+> diff --git a/hw/arm/Kconfig b/hw/arm/Kconfig
+> index 893a7bff66..d97015c45c 100644
+> --- a/hw/arm/Kconfig
+> +++ b/hw/arm/Kconfig
+> @@ -678,21 +678,6 @@ config ZAURUS
+>       select NAND
+>       select ECC
+>   
+> -config A9MPCORE
+> -    bool
+> -    select A9_GTIMER
+> -    select A9SCU       # snoop control unit
+> -    select ARM_GIC
+> -    select ARM_MPTIMER
+> -
+> -config A15MPCORE
+> -    bool
+> -    select ARM_GIC
+> -
+> -config ARM11MPCORE
+> -    bool
+> -    select ARM11SCU
+> -
+>   config ARMSSE
+>       bool
+>       select ARM_V7M
+> diff --git a/hw/cpu/Kconfig b/hw/cpu/Kconfig
+> index 1767d028ac..f776e884cd 100644
+> --- a/hw/cpu/Kconfig
+> +++ b/hw/cpu/Kconfig
+> @@ -1,8 +1,14 @@
+> -config ARM11MPCORE
+> -    bool
+> -
+>   config A9MPCORE
+>       bool
+> +    select A9_GTIMER
+> +    select A9SCU       # snoop control unit
+> +    select ARM_GIC
+> +    select ARM_MPTIMER
+>   
+>   config A15MPCORE
+>       bool
+> +    select ARM_GIC
+> +
+> +config ARM11MPCORE
+> +    bool
+> +    select ARM11SCU
 
-Signed-off-by: Huang Tao <eric.huang@linux.alibaba.com>
----
- target/riscv/cpu.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 05652e8c87..e85aa51237 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -542,7 +542,7 @@ static void rv64_thead_c906_cpu_init(Object *obj)
-     cpu->cfg.ext_xtheadmemidx = true;
-     cpu->cfg.ext_xtheadmempair = true;
-     cpu->cfg.ext_xtheadsync = true;
--    cpu->cfg.ext_xtheadvector = false;
-+    cpu->cfg.ext_xtheadvector = true;
- 
-     cpu->cfg.mvendorid = THEAD_VENDOR_ID;
- #ifndef CONFIG_USER_ONLY
--- 
-2.44.0
-
+I thought 
+https://lore.kernel.org/qemu-devel/20231212162935.42910-6-philmd@linaro.org/
+  was already merged :/ I'll look at what is missing and respin.
 
