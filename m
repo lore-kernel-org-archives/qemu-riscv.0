@@ -4,88 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CA33C4345F
-	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Apr 2024 17:27:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77537C4345F
+	for <qemu-riscv@archiver.kernel.org>; Sat, 13 Apr 2024 09:49:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rvKg0-0006eL-FX; Fri, 12 Apr 2024 13:27:00 -0400
+	id 1rva0O-0002Uv-SE; Sat, 13 Apr 2024 05:49:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rvKfy-0006dx-UH
- for qemu-riscv@nongnu.org; Fri, 12 Apr 2024 13:26:58 -0400
-Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rva0N-0002UZ-6T
+ for qemu-riscv@nongnu.org; Sat, 13 Apr 2024 05:49:03 -0400
+Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rvKfv-00030W-Lj
- for qemu-riscv@nongnu.org; Fri, 12 Apr 2024 13:26:58 -0400
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-1e3ff14f249so9000465ad.1
- for <qemu-riscv@nongnu.org>; Fri, 12 Apr 2024 10:26:54 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rva0D-0002m0-PS
+ for qemu-riscv@nongnu.org; Sat, 13 Apr 2024 05:49:02 -0400
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-346b94fa7ecso1566823f8f.3
+ for <qemu-riscv@nongnu.org>; Sat, 13 Apr 2024 02:48:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1712942814; x=1713547614; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=linaro.org; s=google; t=1713001732; x=1713606532; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=P3DKA10cGVxqOJD5ZVls9Bezx11cg5ENXIVx4Fno3QA=;
- b=CgO5JZaMoTS8mP2TudaZCU7yJmnBPBO5RRp05iIFyGNVVuqnFOEs8O0GWnXWpY/zA1
- Vs5M3VaGG3RWa3bT03X6n3hsKawQ9m8TDDYVrqdFDrqv6uF89/gGGzDv1Yk+I7zR2bRG
- P1ZN0VkKI7nsDFNQzK76zS34wbipojs3Am5IsejeerN4i2YMGSmkxL6dsKk084LmB+uA
- nl9tJg8cqYFx3OwthXrq2zmySVsZVBxI2c3EcGtBnPP+pYVd8GU+hrGx5iEu0Ag+CBDX
- wbkHZ/7yjKO+hhTUJI2mfpgRZWPfKxIYVL3UQ4AyHVWt7hEgBZFMaflKTJMHiYTrUwTc
- dxBw==
+ bh=YXdpzhcljKxwFeCjPC31atfXxlX/3Lka6nbkKu0vUDI=;
+ b=y9Q5H+RXmGg+kZU+xjugYm1vMROZ5okChxnPJQiPEufqUiEc2NKRVoCQMb1se0QXoi
+ YvRYM7hYCygC6OocNI4cdypVtSVO5LtYZ21u0Su5FWvysEYuzfqjNSCL48rBWJfaK0HA
+ I0w4HlMZaX7NRtVUsfr+1dRcBjm9rJrp7p5G8OW0WlRNTTGwsY5KjdLhkcSwJ699Ct6Z
+ buOGNTwuak5ky/Hz2v5QFzfdkMwyNgR0F8pOethzhgZnbUjqNPlbTAtxpmMhHFy98lXN
+ vIr1x7wu8Sic87r3g0qit9V+rdkoYpa3Wdg2zuJEvslehmUZtASpepmvyPwMOA69wp3+
+ UIaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712942814; x=1713547614;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1713001732; x=1713606532;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=P3DKA10cGVxqOJD5ZVls9Bezx11cg5ENXIVx4Fno3QA=;
- b=YezbPxsZSjHYXlS6b6KO2lFhfbYtRltnI+RrFjoYDDvNCcbZSivAQElTZrBMhTgKMj
- rSToJxfzBFoTlqIoaCg1LXeUHaTGs5ptS19BRh13X4Dxo4Zm8ZYnuwddWKeLC5nx9zDP
- yQvqa2rqnl27SaNrEka/qgK4TTDtRBiGXecSTX+scTU8Jw4sJW+YKgE2LiE2xNhGgjXN
- pM2E6KIEJKnUIZREssaAJ5UXJOO3AL5LSv/zjhlwmQkfNA9JKv3hMeuoBiUS1R571omb
- fDtlXZMP5PUlIU8F84ppXlrz+djMpod9TePiorM5q11YIkQcc4Lb6jTXYJkTQm3VFEWx
- zmCQ==
-X-Gm-Message-State: AOJu0Yyn49Qabw8O0xGVUpJjCWLjrMVt/5BnwTNo6wYT24hkq1djoyDp
- gai90jOWoVrLdFIaEcxoaeKpZSp2X8NXGi0OQr31ckg4UfGXLVqikshr30IlUYo=
-X-Google-Smtp-Source: AGHT+IEAuNi3rKWw6Fpsh+YTeZVBu3QptdUZbQ4LBCOfI1QP03Z/vJ/KMBacI7ReZmdfP6iQuc7TPQ==
-X-Received: by 2002:a17:903:22c2:b0:1e3:c186:8db3 with SMTP id
- y2-20020a17090322c200b001e3c1868db3mr8798912plg.15.1712942814001; 
- Fri, 12 Apr 2024 10:26:54 -0700 (PDT)
-Received: from [192.168.68.110] ([177.45.186.202])
- by smtp.gmail.com with ESMTPSA id
- u11-20020a170902e5cb00b001e20587b552sm3245046plf.163.2024.04.12.10.26.50
+ bh=YXdpzhcljKxwFeCjPC31atfXxlX/3Lka6nbkKu0vUDI=;
+ b=ei5KtJPDEzv3NZT2f8ASN9b5mupi9xXqd8yzospB09sQjnPrR+1FTdyq2v2JrHJ04r
+ R4tCb4hrAz46PWTA0skPvp0seFhIfcCFsssPPL3CqCZfY2Yu90Bkrl06/Ca+bDPRwkWj
+ XL26J+idHcRSmj3gdG+dceN3wokkuYZD0kejmeu1Fc/+VEaBzXySqSmxbU1Zy20wOi2O
+ gpZPNiR+DwfnEsiQcx35pLuDSABswN/qxGRwELFHCp39V1IBKhIhayl0AvIQjIv9ubW8
+ K/0mqV43Fd3mORV9HtU/v8qloSFV1v/48t/8BYDraNi1vSboGNCqYJlgQ/4FCF1QQ0ds
+ DNtw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUJQ9XInZ1IpaYRyOAhjG9GO7eYbTa1wuLiMVbOKZESXFKft3TXgygx04csM8xN3dD4ZyTRsbJPTj/desIcQbcu4sXoBJo=
+X-Gm-Message-State: AOJu0YyX+yz5jbZwwGTSpHb7G72PQ49CD7jreIrAY7O6ixScH5sVZlbi
+ 3nECdoUrwjBuNl28lbjAjFQ/2x+ET56qsi6T1SHuIkNFK+0knQtkwGlSvoJCo+E=
+X-Google-Smtp-Source: AGHT+IFdgfFJmMCzuCBCCHwf4X7LqDyN5gZrDqWkMitQ/4Tih71y1E4Refu1nrLTQycJ8M5VK2LgDw==
+X-Received: by 2002:a5d:4049:0:b0:343:6b76:251f with SMTP id
+ w9-20020a5d4049000000b003436b76251fmr3872935wrp.42.1713001732191; 
+ Sat, 13 Apr 2024 02:48:52 -0700 (PDT)
+Received: from [192.168.1.28] (lfbn-bay-1-170-196.w83-193.abo.wanadoo.fr.
+ [83.193.250.196]) by smtp.gmail.com with ESMTPSA id
+ k5-20020a5d66c5000000b00346406a5c80sm6143871wrw.32.2024.04.13.02.48.51
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 12 Apr 2024 10:26:53 -0700 (PDT)
-Message-ID: <70b7f011-e091-426a-b4aa-88ed9f112c79@ventanamicro.com>
-Date: Fri, 12 Apr 2024 14:26:49 -0300
+ Sat, 13 Apr 2024 02:48:51 -0700 (PDT)
+Message-ID: <fad7296f-1870-4b87-9b05-e367c7422d14@linaro.org>
+Date: Sat, 13 Apr 2024 11:48:50 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH for-9.0] target/riscv: prioritize pmp errors in
- raise_mmu_exception()
+Subject: Re: [PATCH 1/2] hw: Fix problem with the A*MPCORE switches in the
+ Kconfig files
+To: Thomas Huth <thuth@redhat.com>, qemu-devel@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>, Peter Maydell <peter.maydell@linaro.org>
+Cc: qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+References: <20240412062042.105174-1-thuth@redhat.com>
+ <20240412062042.105174-2-thuth@redhat.com>
+ <35ea1f53-5c7a-45e8-9fa1-0df8fc7a0cba@linaro.org>
+ <f75a5002-8292-4383-9d62-ebd8f3587c20@redhat.com>
 Content-Language: en-US
-To: Aleksei Filippov <alexei.filippov@syntacore.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- richard.henderson@linaro.org, Joseph Chan <jchan@ventanamicro.com>
-References: <20240409175241.1297072-1-dbarboza@ventanamicro.com>
- <a8680fb3-8547-4b68-98d1-fd2d2d278375@syntacore.com>
- <6947ea59-ccbd-43b8-b8a0-bc543b9992f9@ventanamicro.com>
- <a4a23a7a-04fb-494d-b13a-933ab1a93ffa@syntacore.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <a4a23a7a-04fb-494d-b13a-933ab1a93ffa@syntacore.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <f75a5002-8292-4383-9d62-ebd8f3587c20@redhat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x631.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,72 +105,90 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
-
-On 4/12/24 13:52, Aleksei Filippov wrote:
+On 12/4/24 13:32, Thomas Huth wrote:
+> On 12/04/2024 13.10, Philippe Mathieu-Daudé wrote:
+>> On 12/4/24 08:20, Thomas Huth wrote:
+>>> A9MPCORE, ARM11MPCORE and A15MPCORE are defined twice, once in
+>>> hw/cpu/Kconfig and once in hw/arm/Kconfig. This is only possible
+>>> by accident, since hw/cpu/Kconfig is never included from hw/Kconfig.
+>>> Fix it by declaring the switches only in hw/cpu/Kconfig (since the
+>>> related files reside in the hw/cpu/ folder) and by making sure that
+>>> the file hw/cpu/Kconfig is now properly included from hw/Kconfig.
+>>>
+>>> Signed-off-by: Thomas Huth <thuth@redhat.com>
+>>> ---
+>>>   hw/Kconfig     |  1 +
+>>>   hw/arm/Kconfig | 15 ---------------
+>>>   hw/cpu/Kconfig | 12 +++++++++---
+>>>   3 files changed, 10 insertions(+), 18 deletions(-)
+>>>
+>>> diff --git a/hw/Kconfig b/hw/Kconfig
+>>> index 2c00936c28..9567cc475d 100644
+>>> --- a/hw/Kconfig
+>>> +++ b/hw/Kconfig
+>>> @@ -48,6 +48,7 @@ source watchdog/Kconfig
+>>>   # arch Kconfig
+>>>   source arm/Kconfig
+>>> +source cpu/Kconfig
+>>>   source alpha/Kconfig
+>>>   source avr/Kconfig
+>>>   source cris/Kconfig
+>>> diff --git a/hw/arm/Kconfig b/hw/arm/Kconfig
+>>> index 893a7bff66..d97015c45c 100644
+>>> --- a/hw/arm/Kconfig
+>>> +++ b/hw/arm/Kconfig
+>>> @@ -678,21 +678,6 @@ config ZAURUS
+>>>       select NAND
+>>>       select ECC
+>>> -config A9MPCORE
+>>> -    bool
+>>> -    select A9_GTIMER
+>>> -    select A9SCU       # snoop control unit
+>>> -    select ARM_GIC
+>>> -    select ARM_MPTIMER
+>>> -
+>>> -config A15MPCORE
+>>> -    bool
+>>> -    select ARM_GIC
+>>> -
+>>> -config ARM11MPCORE
+>>> -    bool
+>>> -    select ARM11SCU
+>>> -
+>>>   config ARMSSE
+>>>       bool
+>>>       select ARM_V7M
+>>> diff --git a/hw/cpu/Kconfig b/hw/cpu/Kconfig
+>>> index 1767d028ac..f776e884cd 100644
+>>> --- a/hw/cpu/Kconfig
+>>> +++ b/hw/cpu/Kconfig
+>>> @@ -1,8 +1,14 @@
+>>> -config ARM11MPCORE
+>>> -    bool
+>>> -
+>>>   config A9MPCORE
+>>>       bool
+>>> +    select A9_GTIMER
+>>> +    select A9SCU       # snoop control unit
+>>> +    select ARM_GIC
+>>> +    select ARM_MPTIMER
+>>>   config A15MPCORE
+>>>       bool
+>>> +    select ARM_GIC
+>>> +
+>>> +config ARM11MPCORE
+>>> +    bool
+>>> +    select ARM11SCU
+>>
+>> I thought 
+>> https://lore.kernel.org/qemu-devel/20231212162935.42910-6-philmd@linaro.org/
+>>   was already merged :/ I'll look at what is missing and respin.
 > 
-> 
-> On 12.04.2024 19:00, Daniel Henrique Barboza wrote:
-> 
->> Thanks for giving it a go. You're right, this patch alone is not enough and we'll
->> need your patch too.
->>
->> But note that, with what you've said in mind, your patch will also end up setting
->> mtval2 and env->guest_phys_fault_addr in case a PMP fault occurs during the
->> get_physical_address() right at the start of second stage:
->>
->>          if (ret == TRANSLATE_SUCCESS) {
->>              /* Second stage lookup */
->>              im_address = pa;
->>
->>              ret = get_physical_address(env, &pa, &prot2, im_address, NULL,
->>                                         access_type, MMUIdx_U, false, true,
->>                                         false);
->>
->>
->> I think your patch needs to also prevent env->guest_phys_fault_addr to be set when
->> ret == TRANSLATE_PMP_FAIL.
->>
->> With these changes in your patch, and this patch, we're free to set "first_stage_error = false;"
->> at the start of second stage lookup, keeping consistency, because raise_mmu_exception is now
->> able to deal with it. I can amend this change in this patch. This patch would prioritize
->> PMP errors, your patch will fix the problem with mtval2.
->>
->> Let me know what do you think. If you agree I can re-send both patches together.
->>
->>
->> Thanks,
->>
->>
->> Daniel
-> 
-> Oh, I actually missed that, thx, you are right. I could prepare patch to fix
-> this, do you want it in this thread or in previous with only my patch in?
+> Oh, ok. But I'd prefer to keep the hw/cpu/Kconfig file since it will be 
+> used in the 2nd patch here, too.
 
-If you don't mind, please re-send it together in a new thread with this patch too.
+Fine,
 
-Include this one as is, then include yours as a complement that fixes the problem
-with mtval2 that my patch missed. You can use the explanation you gave me as the
-new commit msg for your patch. E.g:
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
-"target/riscv: do not set mtval2 for non guest-page faults
-
-Previous patch fixed the PMP priority in raise_mmu_exception() but we're still
-setting mtval2 incorrectly. In riscv_cpu_tlb_fill(), after pmp check in 2 stage
-translation part, mtval2 will be set in case of successes 2 stage translation but
-failed pmp check.
-
-In this case we gonna set mtval2 via env->guest_phys_fault_addr in context of
-riscv_cpu_tlb_fill(), as this was a guest-page-fault, but it didn't and mtval2
-should be zero, according to RISCV privileged spec sect. 9.4.4: When a guest
-page-fault is taken into M-mode, mtval2 is written with either zero or guest
-physical address that faulted, shifted by 2 bits. *For other traps, mtval2
-is set to zero...* "
-
-
-Thanks,
-
-Daniel
-
-> 
 
