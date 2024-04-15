@@ -4,68 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1B5DC4345F
-	for <qemu-riscv@archiver.kernel.org>; Sat, 13 Apr 2024 11:26:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60F04C4345F
+	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Apr 2024 01:49:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rvbWF-0006fK-Hd; Sat, 13 Apr 2024 07:26:03 -0400
+	id 1rwBT2-0006MF-VM; Sun, 14 Apr 2024 21:49:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alexei.filippov@syntacore.com>)
- id 1rvbW8-0006e8-Lk; Sat, 13 Apr 2024 07:25:56 -0400
-Received: from mta-04.yadro.com ([89.207.88.248])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alexei.filippov@syntacore.com>)
- id 1rvbW6-0008TS-Br; Sat, 13 Apr 2024 07:25:56 -0400
-DKIM-Filter: OpenDKIM Filter v2.11.0 mta-04.yadro.com D7EFEC0003
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
- s=mta-04; t=1713007549;
- bh=gdGwFR7E2dP6kVQgP8tYvVboB0w7+yvC8SaHxMhztqY=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=fDkoKwmlzVHrKI/BYgwAD4q5xTkYop2Iq/gE4XuGmax6AGWx5DyKqPW1E8mK/sf0z
- p/YN2l9W3/+ED3eOE9OFMQplCgG8txF4IRJxLSm+50sdjo9CUvxXvd2ydcdyZC8vE+
- O9CqgB1aPYIFJ4XpZ2OKNsrVkrD7eIqMfdMZbgbpHOHXjNCwSXrcq1yoP9tERc1v//
- fZUqglChtmzbyXIh8oNQR9oaiONJxZsneoc+LDoH6NbnYcdxdgjuwPZp2TbhTvSiuc
- IfDoOUuOvaLhjwvygWL6PiAJ+d05AqOfT38I7F1IZU3oY5lwqtk5BHbM9kgsyh4Ah3
- iNkPihHHmwYSA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
- s=mta-03; t=1713007549;
- bh=gdGwFR7E2dP6kVQgP8tYvVboB0w7+yvC8SaHxMhztqY=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=g0qc+ZJWqEiOxH3kM6FkO4JyHsutoqL5rkpZtm8IpGNjxsfb1V5YIKz7/Rg6A05bA
- GZ5gC1o9Wfv2r0oVmGFjSkgo7uj2o1eX4hYovZA9h7DOE3acJW0OT+otMtVFGkL/NI
- +RKhog7K0+yEg00oSSiDnUoEOGV/r2fLmsk9LjEIUsviVHGaNBimg5TCW5/DewIJDi
- t9NQkpvcfCgbDpaTJ7KEw26Zdq50YiT8loz1gZaakthAGmfWr0LTKKzv5rR7vpqjGt
- GwQ6c1TbmmmKI2xR88itTMvzGhI8/y/dBKgEFyto0I3eg5VqQ33JcHNFTemgYEYSqF
- m0OXEQIcPyHjA==
-From: Alexei Filippov <alexei.filippov@syntacore.com>
-To: <ajones@ventanamicro.com>
-CC: <alexei.filippov@syntacore.com>, <alistair.francis@wdc.com>,
- <apatel@ventanamicro.com>, <bin.meng@windriver.com>,
- <dbarboza@ventanamicro.com>, <liwei1518@gmail.com>, <palmer@dabbelt.com>,
- <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>,
- <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH v4] target/riscv/kvm/kvm-cpu.c: kvm_riscv_handle_sbi() fail
- with vendor-specific SBI
-Date: Sat, 13 Apr 2024 14:25:26 +0300
-Message-ID: <20240413112526.8748-1-alexei.filippov@syntacore.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240326-672b9d2fa4066ec883a9f037@orel>
-References: <20240326-672b9d2fa4066ec883a9f037@orel>
+ (Exim 4.90_1) (envelope-from <duchao@eswincomputing.com>)
+ id 1rwBT0-0006Li-Aw; Sun, 14 Apr 2024 21:49:06 -0400
+Received: from sgoci-sdnproxy-4.icoremail.net ([129.150.39.64])
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <duchao@eswincomputing.com>)
+ id 1rwBSx-0007ZY-Rb; Sun, 14 Apr 2024 21:49:06 -0400
+Received: from duchao$eswincomputing.com ( [10.64.113.11] ) by
+ ajax-webmail-app2 (Coremail) ; Mon, 15 Apr 2024 09:47:31 +0800 (GMT+08:00)
+X-Originating-IP: [10.64.113.11]
+Date: Mon, 15 Apr 2024 09:47:31 +0800 (GMT+08:00)
+X-CM-HeaderCharset: UTF-8
+From: "Chao Du" <duchao@eswincomputing.com>
+To: "Daniel Henrique Barboza" <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com, 
+ alistair23@gmail.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn, 
+ zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com, 
+ anup@brainfault.org, atishp@atishpatra.org
+Subject: Re: [RFC PATCH 0/4] target/riscv/kvm: QEMU support for KVM Guest
+ Debug on RISC-V
+X-Priority: 3
+X-Mailer: Coremail Webmail Server Version XT6.0.3 build 20220420(169d3f8c)
+ Copyright (c) 2002-2024 www.mailtech.cn
+ mispb-72143050-eaf5-4703-89e0-86624513b4ce-eswincomputing.com
+In-Reply-To: <48d413a8.25e8.18ec23d85b9.Coremail.duchao@eswincomputing.com>
+References: <20231221094923.7349-1-duchao@eswincomputing.com>
+ <846ec319-6026-4b14-b156-9e1f42c6dba1@ventanamicro.com>
+ <48d413a8.25e8.18ec23d85b9.Coremail.duchao@eswincomputing.com>
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset=UTF-8
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: T-EXCH-09.corp.yadro.com (172.17.11.59) To
- T-EXCH-12.corp.yadro.com (172.17.11.143)
-Received-SPF: permerror client-ip=89.207.88.248;
- envelope-from=alexei.filippov@syntacore.com; helo=mta-04.yadro.com
-X-Spam_score_int: 4
-X-Spam_score: 0.4
+Message-ID: <74adbf4d.2bb3.18edf7020f7.Coremail.duchao@eswincomputing.com>
+X-Coremail-Locale: en_US
+X-CM-TRANSID: TQJkCgBHWbszhxxm230GAA--.3729W
+X-CM-SenderInfo: xgxfxt3r6h245lqf0zpsxwx03jof0z/1tbiAQEIDGYboscKDgADsb
+X-Coremail-Antispam: 1Ur529EdanIXcx71UUUUU7IcSsGvfJ3iIAIbVAYjsxI4VWxJw
+ CS07vEb4IE77IF4wCS07vE1I0E4x80FVAKz4kxMIAIbVAFxVCaYxvI4VCIwcAKzIAtYxBI
+ daVFxhVjvjDU=
+Received-SPF: permerror client-ip=129.150.39.64;
+ envelope-from=duchao@eswincomputing.com; helo=sgoci-sdnproxy-4.icoremail.net
+X-Spam_score_int: -5
+X-Spam_score: -0.6
 X-Spam_bar: /
-X-Spam_report: (0.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SORTED_RECIPS=2.499,
- SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01 autolearn=no autolearn_force=no
+X-Spam_report: (-0.6 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_VALIDITY_RPBL=1.31, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -81,83 +72,49 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-kvm_riscv_handle_sbi() may return not supported return code to not trigger
-qemu abort with vendor-specific sbi.
-
-Added SBI related return code's defines.
-
-Signed-off-by: Alexei Filippov <alexei.filippov@syntacore.com>
-Fixes: 4eb47125 ("target/riscv: Handle KVM_EXIT_RISCV_SBI exit")
----
-
-Changes since v3:
-        -Clear Reviewed-by tags
- target/riscv/kvm/kvm-cpu.c         | 13 +++++--------
- target/riscv/sbi_ecall_interface.h | 12 ++++++++++++
- 2 files changed, 17 insertions(+), 8 deletions(-)
-
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index 6a6c6cae80..844942d9ba 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -1392,7 +1392,6 @@ bool kvm_arch_stop_on_emulation_error(CPUState *cs)
- 
- static int kvm_riscv_handle_sbi(CPUState *cs, struct kvm_run *run)
- {
--    int ret = 0;
-     unsigned char ch;
-     switch (run->riscv_sbi.extension_id) {
-     case SBI_EXT_0_1_CONSOLE_PUTCHAR:
-@@ -1400,22 +1399,20 @@ static int kvm_riscv_handle_sbi(CPUState *cs, struct kvm_run *run)
-         qemu_chr_fe_write(serial_hd(0)->be, &ch, sizeof(ch));
-         break;
-     case SBI_EXT_0_1_CONSOLE_GETCHAR:
--        ret = qemu_chr_fe_read_all(serial_hd(0)->be, &ch, sizeof(ch));
--        if (ret == sizeof(ch)) {
-+        if (qemu_chr_fe_read_all(serial_hd(0)->be, &ch, sizeof(ch)) == sizeof(ch)) {
-             run->riscv_sbi.ret[0] = ch;
-         } else {
--            run->riscv_sbi.ret[0] = -1;
-+            run->riscv_sbi.ret[0] = SBI_ERR_FAILURE;
-         }
--        ret = 0;
-         break;
-     default:
-         qemu_log_mask(LOG_UNIMP,
--                      "%s: un-handled SBI EXIT, specific reasons is %lu\n",
-+                      "%s: Unhandled SBI exit with extension-id %lu\n",
-                       __func__, run->riscv_sbi.extension_id);
--        ret = -1;
-+        run->riscv_sbi.ret[0] = SBI_ERR_NOT_SUPPORTED;
-         break;
-     }
--    return ret;
-+    return 0;
- }
- 
- int kvm_arch_handle_exit(CPUState *cs, struct kvm_run *run)
-diff --git a/target/riscv/sbi_ecall_interface.h b/target/riscv/sbi_ecall_interface.h
-index 43899d08f6..a2e21d9b8c 100644
---- a/target/riscv/sbi_ecall_interface.h
-+++ b/target/riscv/sbi_ecall_interface.h
-@@ -69,4 +69,16 @@
- #define SBI_EXT_VENDOR_END              0x09FFFFFF
- /* clang-format on */
- 
-+/* SBI return error codes */
-+#define SBI_SUCCESS                  0
-+#define SBI_ERR_FAILURE             -1
-+#define SBI_ERR_NOT_SUPPORTED       -2
-+#define SBI_ERR_INVALID_PARAM       -3
-+#define SBI_ERR_DENIED              -4
-+#define SBI_ERR_INVALID_ADDRESS     -5
-+#define SBI_ERR_ALREADY_AVAILABLE   -6
-+#define SBI_ERR_ALREADY_STARTED     -7
-+#define SBI_ERR_ALREADY_STOPPED     -8
-+#define SBI_ERR_NO_SHMEM            -9
-+
- #endif
--- 
-2.34.1
-
+R2VudGxlIHBpbmcuLi4KCk9uIDIwMjQtMDQtMDkgMTc6NDMsIENoYW8gRHUgPGR1Y2hhb0Blc3dp
+bmNvbXB1dGluZy5jb20+IHdyb3RlOgo+IAo+IEhpIERhbmllbCBhbmQgYWxsLAo+IAo+IFRoZSBL
+Vk0gcGF0Y2hlcyBoYXZlIGJlZW4gcmV2aWV3ZCBhbmQgYXJlIGluIHRoZSBxdWV1ZS4KPiBodHRw
+czovL2xvcmUua2VybmVsLm9yZy9hbGwvMjAyNDA0MDIwNjI2MjguNTQyNS0xLWR1Y2hhb0Blc3dp
+bmNvbXB1dGluZy5jb20vCj4gCj4gQ291bGQgeW91IHBsZWFzZSByZXZpZXcgaW4gdGhlIFFFTVUg
+c2lkZSA/Cj4gVGhlbiBJIHdpbGwgcmViYXNlIHRoaXMgc2VyaWVzIHdpdGggeW91ciBjb21tZW50
+cy4KPiAKPiBTb21lIE5vdGVzOgo+IDEuIEFzIHRoZSBmaXJzdCBzdGFnZSwgb25seSB0aGUgc29m
+dHdhcmUgYnJlYWtwb2ludHMgaXMgaW1wbGVtZW50ZWQuCj4gMi4gQSAnY29ybmVyIGNhc2UnIGlu
+IHdoaWNoIHRoZSBkZWJ1ZyBleGNlcHRpb24gaXMgbm90IGluc2VydGVkIGJ5IHRoZQo+IGRlYnVn
+Z2VyLCBuZWVkIHRvIGJlIHJlLWluamVjdGVkIHRvIHRoZSBndWVzdC4gVGhpcyBpcyBub3QgaGFu
+ZGxlZCB5ZXQKPiBpbiB0aGlzIHNlcmllcy4KPiAKPiBUaGFua3MsCj4gQ2hhbwo+IAo+IAo+IE9u
+IDIwMjMtMTItMjIgMjI6MTYsIERhbmllbCBIZW5yaXF1ZSBCYXJib3phIDxkYmFyYm96YUB2ZW50
+YW5hbWljcm8uY29tPiB3cm90ZToKPiA+IAo+ID4gSGksCj4gPiAKPiA+IEl0IHNlZW1zIHRoYXQg
+d2Ugc3RpbGwgbmVlZCB0aGUga2VybmVsIEtWTSBzaWRlIHRvIGJlIHNvcnRlZCBvdXQgZmlyc3Qg
+WzFdLAo+ID4gc28gSSBiZWxpZXZlIHdlIHNob3VsZCB3YWl0IGEgYml0IHVudGlsIHdlIGNhbiBy
+ZXZpZXcgdGhpcyBSRkMuIE90aGVyd2lzZSB3ZQo+ID4gbWlnaHQgcmlzayByZXZpZXdpbmcgc29t
+ZXRoaW5nIHRoYXQgaGFzIHRvIGJlIGNoYW5nZWQgbGF0ZXIuCj4gPiAKPiA+IAo+ID4gWzFdIGh0
+dHBzOi8vbG9yZS5rZXJuZWwub3JnL2t2bS8yMDIzMTIyMTA5NTAwMi43NDA0LTEtZHVjaGFvQGVz
+d2luY29tcHV0aW5nLmNvbS8KPiA+IAo+ID4gCj4gPiBUaGFua3MsCj4gPiAKPiA+IERhbmllbAo+
+ID4gCj4gPiBPbiAxMi8yMS8yMyAwNjo0OSwgQ2hhbyBEdSB3cm90ZToKPiA+ID4gVGhpcyBzZXJp
+ZXMgaW1wbGVtZW50cyBRRU1VIEtWTSBHdWVzdCBEZWJ1ZyBvbiBSSVNDLVYuIEN1cnJlbnRseSwg
+d2UgY2FuCj4gPiA+IGRlYnVnIFJJU0MtViBLVk0gZ3Vlc3QgZnJvbSB0aGUgaG9zdCBzaWRlLCB3
+aXRoIHNvZnR3YXJlIGJyZWFrcG9pbnRzLgo+ID4gPiAKPiA+ID4gQSBicmllZiB0ZXN0IHdhcyBk
+b25lIG9uIFFFTVUgUklTQy1WIGh5cGVydmlzb3IgZW11bGF0b3IuCj4gPiA+IAo+ID4gPiBBIFRP
+RE8gbGlzdCB3aGljaCB3aWxsIGJlIGFkZGVkIGxhdGVyOgo+ID4gPiAxLiBIVyBicmVha3BvaW50
+cyBzdXBwb3J0Cj4gPiA+IDIuIFRlc3QgY2FzZXMKPiA+ID4gCj4gPiA+IFRoaXMgc2VyaWVzIGlz
+IGJhc2VkIG9uIFFFTVUgOC4yLjAtcmM0IGFuZCBpcyBhbHNvIGF2YWlsYWJsZSBhdDoKPiA+ID4g
+aHR0cHM6Ly9naXRodWIuY29tL0R1LUNoYW8vcWVtdS90cmVlL3Jpc2N2X2dkX3N3Cj4gPiA+IAo+
+ID4gPiBUaGlzIGlzIGRlcGVuZGVudCBvbiBLVk0gc2lkZSBjaGFuZ2VzOgo+ID4gPiBodHRwczov
+L2dpdGh1Yi5jb20vRHUtQ2hhby9saW51eC90cmVlL3Jpc2N2X2dkX3N3Cj4gPiA+IAo+ID4gPiBD
+aGFvIER1ICg0KToKPiA+ID4gICAgdGFyZ2V0L3Jpc2N2L2t2bTogYWRkIHNvZnR3YXJlIGJyZWFr
+cG9pbnRzIHN1cHBvcnQKPiA+ID4gICAgdGFyZ2V0L3Jpc2N2L2t2bTogaW1wbGVtZW50IGt2bV9h
+cmNoX3VwZGF0ZV9ndWVzdF9kZWJ1ZygpCj4gPiA+ICAgIHRhcmdldC9yaXNjdi9rdm06IGhhbmRs
+ZSB0aGUgZXhpdCB3aXRoIGRlYnVnIHJlYXNvbgo+ID4gPiAgICBsaW51eC1oZWFkZXJzOiBlbmFi
+bGUgS1ZNIEdVRVNUIERFQlVHIGZvciBSSVNDLVYKPiA+ID4gCj4gPiA+ICAgYWNjZWwva3ZtL2t2
+bS1hbGwuYyAgICAgICAgICAgfCAgIDggKy0tCj4gPiA+ICAgaW5jbHVkZS9zeXNlbXUva3ZtLmgg
+ICAgICAgICAgfCAgIDYgKy0KPiA+ID4gICBsaW51eC1oZWFkZXJzL2FzbS1yaXNjdi9rdm0uaCB8
+ICAgMSArCj4gPiA+ICAgdGFyZ2V0L2FybS9rdm02NC5jICAgICAgICAgICAgfCAgIDYgKy0KPiA+
+ID4gICB0YXJnZXQvaTM4Ni9rdm0va3ZtLmMgICAgICAgICB8ICAgNiArLQo+ID4gPiAgIHRhcmdl
+dC9taXBzL2t2bS5jICAgICAgICAgICAgIHwgICA2ICstCj4gPiA+ICAgdGFyZ2V0L3BwYy9rdm0u
+YyAgICAgICAgICAgICAgfCAgIDYgKy0KPiA+ID4gICB0YXJnZXQvcmlzY3Yva3ZtL2t2bS1jcHUu
+YyAgICB8IDEwMSArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrCj4gPiA+ICAgdGFy
+Z2V0L3MzOTB4L2t2bS9rdm0uYyAgICAgICAgfCAgIDYgKy0KPiA+ID4gICA5IGZpbGVzIGNoYW5n
+ZWQsIDEzMCBpbnNlcnRpb25zKCspLCAxNiBkZWxldGlvbnMoLSkKPiA+ID4gCj4gPiA+IC0tCj4g
+PiA+IDIuMTcuMQo+ID4gPiAK
 
