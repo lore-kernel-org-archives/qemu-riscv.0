@@ -4,59 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60F04C4345F
-	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Apr 2024 01:49:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AC17C00A94
+	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Apr 2024 06:53:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rwBT2-0006MF-VM; Sun, 14 Apr 2024 21:49:08 -0400
+	id 1rwGD1-0002y7-1e; Mon, 15 Apr 2024 02:52:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <duchao@eswincomputing.com>)
- id 1rwBT0-0006Li-Aw; Sun, 14 Apr 2024 21:49:06 -0400
-Received: from sgoci-sdnproxy-4.icoremail.net ([129.150.39.64])
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <duchao@eswincomputing.com>)
- id 1rwBSx-0007ZY-Rb; Sun, 14 Apr 2024 21:49:06 -0400
-Received: from duchao$eswincomputing.com ( [10.64.113.11] ) by
- ajax-webmail-app2 (Coremail) ; Mon, 15 Apr 2024 09:47:31 +0800 (GMT+08:00)
-X-Originating-IP: [10.64.113.11]
-Date: Mon, 15 Apr 2024 09:47:31 +0800 (GMT+08:00)
-X-CM-HeaderCharset: UTF-8
-From: "Chao Du" <duchao@eswincomputing.com>
-To: "Daniel Henrique Barboza" <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com, 
- alistair23@gmail.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn, 
- zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com, 
- anup@brainfault.org, atishp@atishpatra.org
-Subject: Re: [RFC PATCH 0/4] target/riscv/kvm: QEMU support for KVM Guest
- Debug on RISC-V
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version XT6.0.3 build 20220420(169d3f8c)
- Copyright (c) 2002-2024 www.mailtech.cn
- mispb-72143050-eaf5-4703-89e0-86624513b4ce-eswincomputing.com
-In-Reply-To: <48d413a8.25e8.18ec23d85b9.Coremail.duchao@eswincomputing.com>
-References: <20231221094923.7349-1-duchao@eswincomputing.com>
- <846ec319-6026-4b14-b156-9e1f42c6dba1@ventanamicro.com>
- <48d413a8.25e8.18ec23d85b9.Coremail.duchao@eswincomputing.com>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset=UTF-8
-MIME-Version: 1.0
-Message-ID: <74adbf4d.2bb3.18edf7020f7.Coremail.duchao@eswincomputing.com>
-X-Coremail-Locale: en_US
-X-CM-TRANSID: TQJkCgBHWbszhxxm230GAA--.3729W
-X-CM-SenderInfo: xgxfxt3r6h245lqf0zpsxwx03jof0z/1tbiAQEIDGYboscKDgADsb
-X-Coremail-Antispam: 1Ur529EdanIXcx71UUUUU7IcSsGvfJ3iIAIbVAYjsxI4VWxJw
- CS07vEb4IE77IF4wCS07vE1I0E4x80FVAKz4kxMIAIbVAFxVCaYxvI4VCIwcAKzIAtYxBI
- daVFxhVjvjDU=
-Received-SPF: permerror client-ip=129.150.39.64;
- envelope-from=duchao@eswincomputing.com; helo=sgoci-sdnproxy-4.icoremail.net
-X-Spam_score_int: -5
-X-Spam_score: -0.6
-X-Spam_bar: /
-X-Spam_report: (-0.6 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_VALIDITY_RPBL=1.31, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
+ id 1rwGCz-0002xU-NT
+ for qemu-riscv@nongnu.org; Mon, 15 Apr 2024 02:52:53 -0400
+Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
+ id 1rwGCy-0004aV-01
+ for qemu-riscv@nongnu.org; Mon, 15 Apr 2024 02:52:53 -0400
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-1e3c9300c65so22812165ad.0
+ for <qemu-riscv@nongnu.org>; Sun, 14 Apr 2024 23:52:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sifive.com; s=google; t=1713163970; x=1713768770; darn=nongnu.org;
+ h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=BTcCQdUvjp2hbnjbDYmBwM5NCyK6LP1p76vlGeR6wsw=;
+ b=iulNVCjBVcsXXOX2gNAdGqNUzYB/dz+pCSQ1dl3igizP8E8qwTuKElG+x2hlZBFV4n
+ 16aD094CTsKuDPZMmdt7PQImZIjhAsemOobnyvTyJQ8WsjNEj6+HJhzR9gzqP+uKvOit
+ dfeCCWcU0IBDwd+cU6k8Q4wk49Y/Kti+AAfnagLcacYmz7bVw0TyUp3mpuooTYmnA3Qj
+ AEou0aXMdVoS9EwfXrUYz55ggA+/WzNCWfVSax3D2Y7a4/4TRQ81K8MichNd9bi77wY1
+ s/5HKfw72JHqUG/cG9xrJljI+v34NxzCxlSesGL4lbrwbR+QYIfZK7zCgi8R6BKNiq7d
+ pT+w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713163970; x=1713768770;
+ h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=BTcCQdUvjp2hbnjbDYmBwM5NCyK6LP1p76vlGeR6wsw=;
+ b=WWjQNcAhN3EsNQdS27Cff/in05LXK00XTj187LYCWXPn6Q0/bBFlvutraQAN3ypPFn
+ PfC7zIkBk6goz4Jju61tM6X8/DVyqhaxIrhduK3mW/k1mU1JYhA2tXP+Hy3zJsW1Qg81
+ byKiBk6lk3RSzRt9hcxYIwJHZLre/5Yn9QlNhzaH/WLbL4AsdrVVuRAuyg7RVNzzpmDC
+ A1RnRurEGx2Vsawj700Gv5qWruFlPVokxEzyyPmTLoqQ5OscF8KDjHTxn1WoQy+p911n
+ D0O2aZpkqPve8VvxDq+RtLM5OysVCiIhD+DNL47TKubu8VqzyaVLvvu7cKWpgN5VnRpA
+ O7aQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVweQ/2RGa/M0VNqOwgmohf1fBll5J9SNJ42TvTiGy4bgRxmRIdb6WCK+8nZljx7CTbvcWMPxwzZUVaxbG9R6SujE/IdY0=
+X-Gm-Message-State: AOJu0YzAvEvFJfkVPFY/pyCmCLNft23z5rcZHrrPJ9Cic66CVEp6p7f0
+ goVAU1xV7I1oqEodbY07yxDVerWGmYK4MBP0vkWW6x8efuSa7G0+rkWJYdg+jzQ=
+X-Google-Smtp-Source: AGHT+IHuj1udC5yzyDkvK5bH6sWXvRQRDFmC9qWucyK3jxf2LP6ciBmKufIDxWWa5C34csmXaJFnJQ==
+X-Received: by 2002:a17:902:7402:b0:1e6:3577:190e with SMTP id
+ g2-20020a170902740200b001e63577190emr2443553pll.24.1713163970331; 
+ Sun, 14 Apr 2024 23:52:50 -0700 (PDT)
+Received: from hsinchu26.internal.sifive.com
+ (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
+ by smtp.gmail.com with ESMTPSA id
+ jb12-20020a170903258c00b001e2a3014541sm7182394plb.190.2024.04.14.23.52.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 14 Apr 2024 23:52:50 -0700 (PDT)
+From: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: greentime.hu@sifive.com, vincent.chen@sifive.com, frank.chang@sifive.com,
+ jim.shu@sifive.com, Yong-Xuan Wang <yongxuan.wang@sifive.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Andrew Jones <ajones@ventanamicro.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH 1/1] target/riscv/kvm.c: Fix the hart bit setting of AIA
+Date: Mon, 15 Apr 2024 14:52:43 +0800
+Message-Id: <20240415065245.25455-1-yongxuan.wang@sifive.com>
+X-Mailer: git-send-email 2.17.1
+Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
+ envelope-from=yongxuan.wang@sifive.com; helo=mail-pl1-x636.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -72,49 +99,40 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-R2VudGxlIHBpbmcuLi4KCk9uIDIwMjQtMDQtMDkgMTc6NDMsIENoYW8gRHUgPGR1Y2hhb0Blc3dp
-bmNvbXB1dGluZy5jb20+IHdyb3RlOgo+IAo+IEhpIERhbmllbCBhbmQgYWxsLAo+IAo+IFRoZSBL
-Vk0gcGF0Y2hlcyBoYXZlIGJlZW4gcmV2aWV3ZCBhbmQgYXJlIGluIHRoZSBxdWV1ZS4KPiBodHRw
-czovL2xvcmUua2VybmVsLm9yZy9hbGwvMjAyNDA0MDIwNjI2MjguNTQyNS0xLWR1Y2hhb0Blc3dp
-bmNvbXB1dGluZy5jb20vCj4gCj4gQ291bGQgeW91IHBsZWFzZSByZXZpZXcgaW4gdGhlIFFFTVUg
-c2lkZSA/Cj4gVGhlbiBJIHdpbGwgcmViYXNlIHRoaXMgc2VyaWVzIHdpdGggeW91ciBjb21tZW50
-cy4KPiAKPiBTb21lIE5vdGVzOgo+IDEuIEFzIHRoZSBmaXJzdCBzdGFnZSwgb25seSB0aGUgc29m
-dHdhcmUgYnJlYWtwb2ludHMgaXMgaW1wbGVtZW50ZWQuCj4gMi4gQSAnY29ybmVyIGNhc2UnIGlu
-IHdoaWNoIHRoZSBkZWJ1ZyBleGNlcHRpb24gaXMgbm90IGluc2VydGVkIGJ5IHRoZQo+IGRlYnVn
-Z2VyLCBuZWVkIHRvIGJlIHJlLWluamVjdGVkIHRvIHRoZSBndWVzdC4gVGhpcyBpcyBub3QgaGFu
-ZGxlZCB5ZXQKPiBpbiB0aGlzIHNlcmllcy4KPiAKPiBUaGFua3MsCj4gQ2hhbwo+IAo+IAo+IE9u
-IDIwMjMtMTItMjIgMjI6MTYsIERhbmllbCBIZW5yaXF1ZSBCYXJib3phIDxkYmFyYm96YUB2ZW50
-YW5hbWljcm8uY29tPiB3cm90ZToKPiA+IAo+ID4gSGksCj4gPiAKPiA+IEl0IHNlZW1zIHRoYXQg
-d2Ugc3RpbGwgbmVlZCB0aGUga2VybmVsIEtWTSBzaWRlIHRvIGJlIHNvcnRlZCBvdXQgZmlyc3Qg
-WzFdLAo+ID4gc28gSSBiZWxpZXZlIHdlIHNob3VsZCB3YWl0IGEgYml0IHVudGlsIHdlIGNhbiBy
-ZXZpZXcgdGhpcyBSRkMuIE90aGVyd2lzZSB3ZQo+ID4gbWlnaHQgcmlzayByZXZpZXdpbmcgc29t
-ZXRoaW5nIHRoYXQgaGFzIHRvIGJlIGNoYW5nZWQgbGF0ZXIuCj4gPiAKPiA+IAo+ID4gWzFdIGh0
-dHBzOi8vbG9yZS5rZXJuZWwub3JnL2t2bS8yMDIzMTIyMTA5NTAwMi43NDA0LTEtZHVjaGFvQGVz
-d2luY29tcHV0aW5nLmNvbS8KPiA+IAo+ID4gCj4gPiBUaGFua3MsCj4gPiAKPiA+IERhbmllbAo+
-ID4gCj4gPiBPbiAxMi8yMS8yMyAwNjo0OSwgQ2hhbyBEdSB3cm90ZToKPiA+ID4gVGhpcyBzZXJp
-ZXMgaW1wbGVtZW50cyBRRU1VIEtWTSBHdWVzdCBEZWJ1ZyBvbiBSSVNDLVYuIEN1cnJlbnRseSwg
-d2UgY2FuCj4gPiA+IGRlYnVnIFJJU0MtViBLVk0gZ3Vlc3QgZnJvbSB0aGUgaG9zdCBzaWRlLCB3
-aXRoIHNvZnR3YXJlIGJyZWFrcG9pbnRzLgo+ID4gPiAKPiA+ID4gQSBicmllZiB0ZXN0IHdhcyBk
-b25lIG9uIFFFTVUgUklTQy1WIGh5cGVydmlzb3IgZW11bGF0b3IuCj4gPiA+IAo+ID4gPiBBIFRP
-RE8gbGlzdCB3aGljaCB3aWxsIGJlIGFkZGVkIGxhdGVyOgo+ID4gPiAxLiBIVyBicmVha3BvaW50
-cyBzdXBwb3J0Cj4gPiA+IDIuIFRlc3QgY2FzZXMKPiA+ID4gCj4gPiA+IFRoaXMgc2VyaWVzIGlz
-IGJhc2VkIG9uIFFFTVUgOC4yLjAtcmM0IGFuZCBpcyBhbHNvIGF2YWlsYWJsZSBhdDoKPiA+ID4g
-aHR0cHM6Ly9naXRodWIuY29tL0R1LUNoYW8vcWVtdS90cmVlL3Jpc2N2X2dkX3N3Cj4gPiA+IAo+
-ID4gPiBUaGlzIGlzIGRlcGVuZGVudCBvbiBLVk0gc2lkZSBjaGFuZ2VzOgo+ID4gPiBodHRwczov
-L2dpdGh1Yi5jb20vRHUtQ2hhby9saW51eC90cmVlL3Jpc2N2X2dkX3N3Cj4gPiA+IAo+ID4gPiBD
-aGFvIER1ICg0KToKPiA+ID4gICAgdGFyZ2V0L3Jpc2N2L2t2bTogYWRkIHNvZnR3YXJlIGJyZWFr
-cG9pbnRzIHN1cHBvcnQKPiA+ID4gICAgdGFyZ2V0L3Jpc2N2L2t2bTogaW1wbGVtZW50IGt2bV9h
-cmNoX3VwZGF0ZV9ndWVzdF9kZWJ1ZygpCj4gPiA+ICAgIHRhcmdldC9yaXNjdi9rdm06IGhhbmRs
-ZSB0aGUgZXhpdCB3aXRoIGRlYnVnIHJlYXNvbgo+ID4gPiAgICBsaW51eC1oZWFkZXJzOiBlbmFi
-bGUgS1ZNIEdVRVNUIERFQlVHIGZvciBSSVNDLVYKPiA+ID4gCj4gPiA+ICAgYWNjZWwva3ZtL2t2
-bS1hbGwuYyAgICAgICAgICAgfCAgIDggKy0tCj4gPiA+ICAgaW5jbHVkZS9zeXNlbXUva3ZtLmgg
-ICAgICAgICAgfCAgIDYgKy0KPiA+ID4gICBsaW51eC1oZWFkZXJzL2FzbS1yaXNjdi9rdm0uaCB8
-ICAgMSArCj4gPiA+ICAgdGFyZ2V0L2FybS9rdm02NC5jICAgICAgICAgICAgfCAgIDYgKy0KPiA+
-ID4gICB0YXJnZXQvaTM4Ni9rdm0va3ZtLmMgICAgICAgICB8ICAgNiArLQo+ID4gPiAgIHRhcmdl
-dC9taXBzL2t2bS5jICAgICAgICAgICAgIHwgICA2ICstCj4gPiA+ICAgdGFyZ2V0L3BwYy9rdm0u
-YyAgICAgICAgICAgICAgfCAgIDYgKy0KPiA+ID4gICB0YXJnZXQvcmlzY3Yva3ZtL2t2bS1jcHUu
-YyAgICB8IDEwMSArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrCj4gPiA+ICAgdGFy
-Z2V0L3MzOTB4L2t2bS9rdm0uYyAgICAgICAgfCAgIDYgKy0KPiA+ID4gICA5IGZpbGVzIGNoYW5n
-ZWQsIDEzMCBpbnNlcnRpb25zKCspLCAxNiBkZWxldGlvbnMoLSkKPiA+ID4gCj4gPiA+IC0tCj4g
-PiA+IDIuMTcuMQo+ID4gPiAK
+The hart bit setting is different with Linux AIA driver[1] when the number
+of hart is power of 2. For example, when the guest has 4 harts, the
+estimated result of AIA driver is 2, whereas we pass 3 to RISC-V/KVM. Since
+only 2 bits are needed to represent 4 harts, update the formula to get the
+accurate result.
+
+[1] https://lore.kernel.org/all/20240307140307.646078-1-apatel@ventanamicro.com/
+
+Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+---
+ target/riscv/kvm/kvm-cpu.c | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
+
+diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+index 6a6c6cae80f1..388c4ddaa145 100644
+--- a/target/riscv/kvm/kvm-cpu.c
++++ b/target/riscv/kvm/kvm-cpu.c
+@@ -1642,7 +1642,14 @@ void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
+         }
+     }
+ 
+-    hart_bits = find_last_bit(&max_hart_per_socket, BITS_PER_LONG) + 1;
++
++    if (max_hart_per_socket > 1) {
++        max_hart_per_socket--;
++        hart_bits = find_last_bit(&max_hart_per_socket, BITS_PER_LONG) + 1;
++    } else {
++        hart_bits = 0;
++    }
++
+     ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
+                             KVM_DEV_RISCV_AIA_CONFIG_HART_BITS,
+                             &hart_bits, true, NULL);
+-- 
+2.17.1
+
 
