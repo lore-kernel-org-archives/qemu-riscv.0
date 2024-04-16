@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2570C4345F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Apr 2024 19:05:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8911C4345F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Apr 2024 19:05:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rwo3Q-0001gF-Gp; Tue, 16 Apr 2024 15:01:16 -0400
+	id 1rwo4Q-0004lr-1g; Tue, 16 Apr 2024 15:02:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwo39-0001De-Ko
- for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 15:00:59 -0400
-Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwo4K-0004AX-Qk
+ for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 15:02:13 -0400
+Received: from mail-lf1-x132.google.com ([2a00:1450:4864:20::132])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwo35-0005fK-23
- for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 15:00:59 -0400
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-346b09d474dso4528644f8f.2
- for <qemu-riscv@nongnu.org>; Tue, 16 Apr 2024 12:00:44 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwo4I-0005ue-F0
+ for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 15:02:12 -0400
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-516f2e0edb7so5851755e87.1
+ for <qemu-riscv@nongnu.org>; Tue, 16 Apr 2024 12:02:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713294042; x=1713898842; darn=nongnu.org;
+ d=linaro.org; s=google; t=1713294129; x=1713898929; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XQMVapEs3CYgmDweUYusfpnz/y/x604jp5xhdw8yVc4=;
- b=acK2nH/iOAcLpljIsEsiOJUMdpm61hJPryla2KMCSgsXLML1h3/OqFn383FOjvuN9B
- kb84VAIS6HukP4bLC75U7moyVGmR9k4Y5OApDsD6iMHBPlWJMjobbSI4Jyb9T7SifMLt
- 5xA329nfZvrmQ7GYGbDgodBIBZXtJJGa0yQJLmnZm49aWk6TDf1p9QAmcu9RflzPlWp8
- A4MNT1NIW0L8ugPCkWWgr7JVkr3wdIj4TaohP4OnpU3qMmUCfpYDF5C5xdjpP0lU3SR5
- gayCS4DgOAuwohkys6j8jEqAoaM0YKQNDy1ZWbyH6lN5RcHH083R84qiOtMZjYN+1J7w
- ucfg==
+ bh=kMNnC0CtBUMfvsWtjsnWY6TflDR4yCy2djdqUVTuvak=;
+ b=t8qs/JL8yAg1ebnAvx1Dg30Vhcqu7XK6aUmJbOqPN3aK2zHtuVx8yJ1wnXj5OKCEv1
+ ff+HuhQ6I4YoZFL54caz/HOwpwFp8RkK42zn/nhGyO8YbQWY7cDXd77LLXU6UwHVy2zC
+ lmS6fWa59XnTxFEUnOBwiExbsC4eZRx5CuLakiz7xa09hxh+5RO23gHWidxPDrFxlJLk
+ myYdxS4F+L2oAout86NnOcqQHfiqe/jb1L+hQ4m0mNHW9Oft+JHx5MmQE5/u0mwcc8Q1
+ iO+Xe38b20rqI1rdM7Fl37zblJy2l7aJFxpYgnQiYP5i8NgqKtSR80JM4FJd5Ag7+xZB
+ cVBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713294042; x=1713898842;
+ d=1e100.net; s=20230601; t=1713294129; x=1713898929;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=XQMVapEs3CYgmDweUYusfpnz/y/x604jp5xhdw8yVc4=;
- b=NyZPSIUpctrAYmTjvVUlTiYvVGTo0K4agyZ2IzUpXKBIffwIs7/vWEtWjoZu7E+kF/
- RtXmhhBXXFt6p4PckBRBR3fW3l4rtLrlN/zCjOnv15oDAC5+3h7LjxRFvHlTC5MJ1vF2
- H6yyJL2EdtLv3K0CHr4JAeC3P2UXtMde8ygrSrD9MkIqTy5u7U+woshUwc8o4wfEBV7d
- Ud8rsX1urdIfhEuDXR2Lwvk02GnH4Eol7/y/iUfQBvnG40FXw62BO/355zX31YCG4gEc
- HCuzhOaEC8tRx/FrvpvGw08CkZXWqxrGooHKyUF4EV7GsNN4Z60HkkAJXqMMNuK+ZWrU
- 310A==
+ bh=kMNnC0CtBUMfvsWtjsnWY6TflDR4yCy2djdqUVTuvak=;
+ b=WfVv9DTbJv28j+uIvjxCkDO7lWPtdhVUhrAu6cvNfjvSxkQJ1GWGrZ1HIlqKQE64vt
+ jFOOjATwFxC1EGXdXeWbb3RXWJmI91Vn6yhyLoZCIcOm/7QIXIp/iE+gzHb9se6L6VlX
+ D4+XlDhBeLP4sRunI4NSr/b1Hymdhy9vXVrOEAxyuG2KUvGIn8+yNWMgbpBzCtCib00N
+ 3JHCOBPO/rLsEpBcCgDILuEP7C9OptJPMhPyZaqoj5kx5wOrFzNUNcfGDUZV/ZqIK6MZ
+ PIIFbDIljghylnDuFILbwRJvYC4MOKt/x59t9yDxTfsq3TYRMAq3fByG4OsCpd0t6Ws8
+ YCLg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUUyNEg3gFVmFWNhsGFj6cUbLUrvC/KewWKzp/kKecCLgs0iJmh6Dt40Hi7ED2C5KQTEAj5ObirpYb3j6p+TUwnFYktKiQ=
-X-Gm-Message-State: AOJu0YxIemd69yytA7s2YwfSeBd3kdL0nWgLAlo/lhUjYnlVXilrHo8u
- vOieIKpLwkD0lYnoai5K7fT13X2uCcYKWKJvGsGt6wKCefemrhz+LBijaXRobxc=
-X-Google-Smtp-Source: AGHT+IGnL5JmbtDDZEIcfbVuWwS/E0VTaHNwOqYN0lHrO8H585nWin8P9SPUGxY4DS0gePAUMMYiYA==
-X-Received: by 2002:a5d:6703:0:b0:347:82b7:abc2 with SMTP id
- o3-20020a5d6703000000b0034782b7abc2mr6710909wru.15.1713294042538; 
- Tue, 16 Apr 2024 12:00:42 -0700 (PDT)
+ AJvYcCXa7+kgl8AGKQlP2lXFOmpjAzEIBjH3qlFBQuhHGHpjxdBj1uo7ZAm8LcCxvY7nWaPNWsOq+xy2aj36OUfNkp9xeQN87JI=
+X-Gm-Message-State: AOJu0YzRfL+XXlLoZM+cTYFMZlZhAUYo7Qd7DFaITHfGfCaOrjPZQJs1
+ wpNqZj4fjOeAP85Wvm3nn64pgTz+i/f2bnxkZtKC3jHBawXBITezzThyQYsv7Lc=
+X-Google-Smtp-Source: AGHT+IGfYRyj7r002C9yM3FRzUGXQloA8hUqiyYSxfijYilgXSYfYJaEenswdOWXoxEW0bqJoGIMTA==
+X-Received: by 2002:a05:6512:33c8:b0:518:b069:3b7d with SMTP id
+ d8-20020a05651233c800b00518b0693b7dmr6333284lfg.6.1713294128761; 
+ Tue, 16 Apr 2024 12:02:08 -0700 (PDT)
 Received: from m1x-phil.lan ([176.176.155.61])
  by smtp.gmail.com with ESMTPSA id
- sa30-20020a1709076d1e00b00a522e95a580sm6417803ejc.217.2024.04.16.12.00.40
+ d19-20020a170906c21300b00a553846966csm1570949ejz.24.2024.04.16.12.02.06
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 16 Apr 2024 12:00:42 -0700 (PDT)
+ Tue, 16 Apr 2024 12:02:08 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org,
 	Thomas Huth <thuth@redhat.com>
@@ -66,26 +66,29 @@ Cc: "Michael S. Tsirkin" <mst@redhat.com>, qemu-riscv@nongnu.org,
  kvm@vger.kernel.org, qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
  Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Zhao Liu <zhao1.liu@intel.com>, Marcelo Tosatti <mtosatti@redhat.com>
-Subject: [PATCH v4 09/22] target/i386/kvm: Remove x86_cpu_change_kvm_default()
- and 'kvm-cpu.h'
-Date: Tue, 16 Apr 2024 20:59:25 +0200
-Message-ID: <20240416185939.37984-10-philmd@linaro.org>
+ Zhao Liu <zhao1.liu@intel.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>
+Subject: [PATCH v4 22/22] hw/i386/pc: Replace PCMachineClass::acpi_data_size
+ by PC_ACPI_DATA_SIZE
+Date: Tue, 16 Apr 2024 20:59:38 +0200
+Message-ID: <20240416185939.37984-23-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240416185939.37984-1-philmd@linaro.org>
 References: <20240416185939.37984-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::429;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x429.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::132;
+ envelope-from=philmd@linaro.org; helo=mail-lf1-x132.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,87 +104,92 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-x86_cpu_change_kvm_default() was only used out of kvm-cpu.c by
-the pc-i440fx-2.1 machine, which got removed. Make it static,
-and remove its declaration. "kvm-cpu.h" is now empty, remove it.
+PCMachineClass::acpi_data_size was only used by the pc-i440fx-2.0
+machine, which got removed. Since it is constant, replace the class
+field by a definition (local to hw/i386/pc.c, since not used
+elsewhere).
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Thomas Huth <thuth@redhat.com>
 Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- target/i386/kvm/kvm-cpu.h | 41 ---------------------------------------
- target/i386/kvm/kvm-cpu.c |  3 +--
- 2 files changed, 1 insertion(+), 43 deletions(-)
- delete mode 100644 target/i386/kvm/kvm-cpu.h
+ include/hw/i386/pc.h |  4 ----
+ hw/i386/pc.c         | 19 ++++++++++++-------
+ 2 files changed, 12 insertions(+), 11 deletions(-)
 
-diff --git a/target/i386/kvm/kvm-cpu.h b/target/i386/kvm/kvm-cpu.h
-deleted file mode 100644
-index e858ca21e5..0000000000
---- a/target/i386/kvm/kvm-cpu.h
-+++ /dev/null
-@@ -1,41 +0,0 @@
--/*
-- * i386 KVM CPU type and functions
-- *
-- *  Copyright (c) 2003 Fabrice Bellard
-- *
-- * This library is free software; you can redistribute it and/or
-- * modify it under the terms of the GNU Lesser General Public
-- * License as published by the Free Software Foundation; either
-- * version 2 of the License, or (at your option) any later version.
-- *
-- * This library is distributed in the hope that it will be useful,
-- * but WITHOUT ANY WARRANTY; without even the implied warranty of
-- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-- * Lesser General Public License for more details.
-- *
-- * You should have received a copy of the GNU Lesser General Public
-- * License along with this library; if not, see <http://www.gnu.org/licenses/>.
-- */
--
--#ifndef KVM_CPU_H
--#define KVM_CPU_H
--
--#ifdef CONFIG_KVM
--/*
-- * Change the value of a KVM-specific default
-- *
-- * If value is NULL, no default will be set and the original
-- * value from the CPU model table will be kept.
-- *
-- * It is valid to call this function only for properties that
-- * are already present in the kvm_default_props table.
-- */
--void x86_cpu_change_kvm_default(const char *prop, const char *value);
--
--#else /* !CONFIG_KVM */
--
--#define x86_cpu_change_kvm_default(a, b)
--
--#endif /* CONFIG_KVM */
--
--#endif /* KVM_CPU_H */
-diff --git a/target/i386/kvm/kvm-cpu.c b/target/i386/kvm/kvm-cpu.c
-index 9c791b7b05..cb8c73d20c 100644
---- a/target/i386/kvm/kvm-cpu.c
-+++ b/target/i386/kvm/kvm-cpu.c
-@@ -10,7 +10,6 @@
- #include "qemu/osdep.h"
- #include "cpu.h"
- #include "host-cpu.h"
--#include "kvm-cpu.h"
- #include "qapi/error.h"
- #include "sysemu/sysemu.h"
- #include "hw/boards.h"
-@@ -144,7 +143,7 @@ static PropValue kvm_default_props[] = {
- /*
-  * Only for builtin_x86_defs models initialized with x86_register_cpudef_types.
-  */
--void x86_cpu_change_kvm_default(const char *prop, const char *value)
-+static void x86_cpu_change_kvm_default(const char *prop, const char *value)
+diff --git a/include/hw/i386/pc.h b/include/hw/i386/pc.h
+index 96ccb4583f..0ad971782c 100644
+--- a/include/hw/i386/pc.h
++++ b/include/hw/i386/pc.h
+@@ -74,9 +74,6 @@ typedef struct PCMachineState {
+  *
+  * Compat fields:
+  *
+- * @acpi_data_size: Size of the chunk of memory at the top of RAM
+- *                  for the BIOS ACPI tables and other BIOS
+- *                  datastructures.
+  * @gigabyte_align: Make sure that guest addresses aligned at
+  *                  1Gbyte boundaries get mapped to host
+  *                  addresses aligned at 1Gbyte boundaries. This
+@@ -100,7 +97,6 @@ struct PCMachineClass {
+ 
+     /* ACPI compat: */
+     bool has_acpi_build;
+-    unsigned acpi_data_size;
+     int pci_root_uid;
+ 
+     /* SMBIOS compat: */
+diff --git a/hw/i386/pc.c b/hw/i386/pc.c
+index 2e2146f42b..0be8f08c47 100644
+--- a/hw/i386/pc.c
++++ b/hw/i386/pc.c
+@@ -256,6 +256,16 @@ GlobalProperty pc_compat_2_4[] = {
+ };
+ const size_t pc_compat_2_4_len = G_N_ELEMENTS(pc_compat_2_4);
+ 
++/*
++ * @PC_ACPI_DATA_SIZE:
++ * Size of the chunk of memory at the top of RAM for the BIOS ACPI tables
++ * and other BIOS datastructures.
++ *
++ * BIOS ACPI tables: 128K. Other BIOS datastructures: less than 4K
++ * reported to be used at the moment, 32K should be enough for a while.
++ */
++#define PC_ACPI_DATA_SIZE (0x20000 + 0x8000)
++
+ GSIState *pc_gsi_create(qemu_irq **irqs, bool pci_enabled)
  {
-     PropValue *pv;
-     for (pv = kvm_default_props; pv->prop; pv++) {
+     GSIState *s;
+@@ -634,8 +644,7 @@ void xen_load_linux(PCMachineState *pcms)
+     fw_cfg_add_i16(fw_cfg, FW_CFG_NB_CPUS, x86ms->boot_cpus);
+     rom_set_fw(fw_cfg);
+ 
+-    x86_load_linux(x86ms, fw_cfg, pcmc->acpi_data_size,
+-                   pcmc->pvh_enabled);
++    x86_load_linux(x86ms, fw_cfg, PC_ACPI_DATA_SIZE, pcmc->pvh_enabled);
+     for (i = 0; i < nb_option_roms; i++) {
+         assert(!strcmp(option_rom[i].name, "linuxboot.bin") ||
+                !strcmp(option_rom[i].name, "linuxboot_dma.bin") ||
+@@ -969,8 +978,7 @@ void pc_memory_init(PCMachineState *pcms,
+     }
+ 
+     if (linux_boot) {
+-        x86_load_linux(x86ms, fw_cfg, pcmc->acpi_data_size,
+-                       pcmc->pvh_enabled);
++        x86_load_linux(x86ms, fw_cfg, PC_ACPI_DATA_SIZE, pcmc->pvh_enabled);
+     }
+ 
+     for (i = 0; i < nb_option_roms; i++) {
+@@ -1724,9 +1732,6 @@ static void pc_machine_class_init(ObjectClass *oc, void *data)
+     pcmc->gigabyte_align = true;
+     pcmc->has_reserved_memory = true;
+     pcmc->enforce_amd_1tb_hole = true;
+-    /* BIOS ACPI tables: 128K. Other BIOS datastructures: less than 4K reported
+-     * to be used at the moment, 32K should be enough for a while.  */
+-    pcmc->acpi_data_size = 0x20000 + 0x8000;
+     pcmc->pvh_enabled = true;
+     pcmc->kvmclock_create_always = true;
+     x86mc->apic_xrupt_override = true;
 -- 
 2.41.0
 
