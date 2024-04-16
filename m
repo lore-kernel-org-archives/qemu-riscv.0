@@ -4,61 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA172C4345F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Apr 2024 13:56:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8214DC4345F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Apr 2024 13:57:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rwjGQ-0003Ma-Ln; Tue, 16 Apr 2024 09:54:22 -0400
+	id 1rwjG5-0002Mg-CZ; Tue, 16 Apr 2024 09:54:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwjGJ-000307-HO
- for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 09:54:16 -0400
-Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwjFt-00026J-2U
+ for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 09:53:49 -0400
+Received: from mail-ed1-x535.google.com ([2a00:1450:4864:20::535])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwjGH-0001s3-RI
- for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 09:54:15 -0400
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-56e2c1650d8so4418190a12.0
- for <qemu-riscv@nongnu.org>; Tue, 16 Apr 2024 06:54:13 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwjFm-0001mw-FB
+ for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 09:53:48 -0400
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-56c5d05128dso4789705a12.0
+ for <qemu-riscv@nongnu.org>; Tue, 16 Apr 2024 06:53:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713275652; x=1713880452; darn=nongnu.org;
+ d=linaro.org; s=google; t=1713275621; x=1713880421; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xnRVHCDouTA+5HlMl31thguywp3whz3Nvn7kAUajqzI=;
- b=NkqQ9jYU5x+proCeNpNSj+Iw2v6xVxmdRZE2io4XmOHGo9Pd9R8Rpiln98sql+8FwQ
- ZypMYyquyscF/aTKvpxc0MF1DoNJBji6wnEE+lM2yvg6VdAtNSveM+iKviDAu7724YGi
- 5QCAKimMWQyeWVIljaHTzxmh51xLkDJmC+wOmHLwfIpM3PtvBkJiXbvtcf/k0J4EPfkm
- pzv5b17vTsAzd8UBgHIuALUPC5d3TiORz+LN6AC0DDrcHr9kGnZ6zor7Gpf84Wp5tZ4K
- 4BFrsXeErVUnetyDtivoIrh6FukngierXR7hkET+wM0Tkwzho6BdCkMw/6vUZkcA7mWo
- rWVw==
+ bh=aDu2aZ9r50YKxf+dNaxDqKUjAn6DYpDYAzbmilk8iWY=;
+ b=QN6TZe4Hi69s/Wjpnif8my+a9u1/mycfsRvLQ03ToLykSMJS4c3UZOnl/FBXmyky2l
+ in3XIP4v29jyUprwEGFJziGnZWH92rrhN5K51/e92OwF9rwkxquZaCXdjv0SkAU+eu5t
+ hYxZpf2ztOL0E4klNcJpuNUOHvOIgoa0IIRitJnVAEd9sskGx1ocrIz4v1ieFp1YQ+5c
+ xZwqC5NmfX5Fm/lqc1TtlcOFbxnFjG6wI5xFCEbsiD18SfLCjDBTujN1JlGpKgSEfOjo
+ 9gNMb2MMfHkW0MhNzyEHVDhkD9w9rrFk+HCHxswlRIq9TGDkypJ2VwjLUGTF3cBA9G5/
+ M1zg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713275652; x=1713880452;
+ d=1e100.net; s=20230601; t=1713275621; x=1713880421;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=xnRVHCDouTA+5HlMl31thguywp3whz3Nvn7kAUajqzI=;
- b=UYxRpg/7RxRoXb6EpvoBIjFQv/WYK+76yLUO986RDTi6k/PFgsKXNsH37TF2QnwMSK
- ymN+nH1OAYzU9jaSWBEkPzG1ZAntaAKihmfSouLGkHUpTveBk41qkcvYxnsRtubpFsFS
- wQkn9+aBqzh4tuKxF8/m6Vr0k0sqOENKk6eqjQ3u5D4JXoIENO0JdYTvt2npf9Rppxni
- 5uq+/lO2MiUz/KjLxh3igCN1r4QgZMTtE2O4mk3qYl1gRrWCxhviqsjYIuGMyZ4v/2b8
- lWC8sEh7aRPeiMMtLlHtOr8piOY51P+y+aFKjt2fsFFwVsR7AjD1PlBrCWGG+dKLEDET
- BRew==
+ bh=aDu2aZ9r50YKxf+dNaxDqKUjAn6DYpDYAzbmilk8iWY=;
+ b=ROqR/sn6i2F0bZ00Np1ztadvdG9HFPhMG+6oud8NCjIEY0R3Ovp17EWW2D3PRrI6gg
+ +9EX2hhoLp3aqk9S7X7vybwu1sX6r7RE4Ha8Pb/i6t8eGDP5z2X3nQDAsnq3wojuMC86
+ Huqvf7UngxLYeleu5My5J3J1+fci5OxC+2tMHisYM2IGYSLU8EvVFYW0nEy8Q6C5hIKm
+ IcUzzhrExGatYD2Cs8eQW6iQcP9lKtzAXlksCyDE7xE9RffLk7JzjoS57UjEz2eMp1C1
+ MB5vakmqozDarkn96wFORJSoxVm+l6bzZwicwTrv4yqNFcFlYGcK9p/y4T7ATwfk/QgI
+ UMYQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX/bn3l1mQwHrkRZLWvokiZYCLQjK6fFn4QXTmSkItd67qSfhVi/YD1tPYdynon9sDOtTtMpCscid/ukWIknH+p8TM6ogw=
-X-Gm-Message-State: AOJu0YxZLcxk1IW99uyRZJheR09Ilrp3qtTKlfoqoELSWxp3hO4QZIS5
- mwJRg7Aqr5Kee5aLotu6uDtXpFsYhJR+2AC4lPRQR7Eqt3guSRvbgsqKBJAx7S9EHKnsNgmdJUJ
- V
-X-Google-Smtp-Source: AGHT+IFhG4L3gtH69a1y/FdVwHzVlnymk2JnoSWQL//ktYw6Ci8bSUiIFfJZsqtAUnQlxka7xmRipw==
-X-Received: by 2002:a50:9ec8:0:b0:568:32cc:f808 with SMTP id
- a66-20020a509ec8000000b0056832ccf808mr8400333edf.15.1713275652383; 
- Tue, 16 Apr 2024 06:54:12 -0700 (PDT)
+ AJvYcCXjvPWFwOQxnlgSrsH5U6b0CHVd/YvJ4pII1Uzs8dMNNLjycPPNBVOzlFVEClFW6/6YBhT5EQPp3hB98ymgyMZyikgKttc=
+X-Gm-Message-State: AOJu0Yx5ypCIw2xbkIL4MslTZK5JtEaaOYKVOXZtBo+7RWB+dEYuSmSN
+ ePtSG66LIsNy6B7wL/YFXfAM5WeEvU8sEHLVQkKN5cizhX6Id05/4Ekqry8TfTk=
+X-Google-Smtp-Source: AGHT+IG9GwsBxEHqpinP3LonbLPk3v0mIRKVFaq5iYprwUBs67j0MD+3TJfLJxHXzfifNj6VDYrcSA==
+X-Received: by 2002:a17:906:ecac:b0:a52:6ba8:8bf1 with SMTP id
+ qh12-20020a170906ecac00b00a526ba88bf1mr3357576ejb.77.1713275620894; 
+ Tue, 16 Apr 2024 06:53:40 -0700 (PDT)
 Received: from m1x-phil.lan ([176.176.155.61])
  by smtp.gmail.com with ESMTPSA id
- fi11-20020a056402550b00b00570498c622asm375182edb.66.2024.04.16.06.54.10
+ ho41-20020a1709070ea900b00a524318c380sm4976387ejc.80.2024.04.16.06.53.39
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 16 Apr 2024 06:54:12 -0700 (PDT)
+ Tue, 16 Apr 2024 06:53:40 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org,
 	Thomas Huth <thuth@redhat.com>
@@ -66,19 +65,20 @@ Cc: Ani Sinha <anisinha@redhat.com>, qemu-riscv@nongnu.org,
  qemu-ppc@nongnu.org, Zhao Liu <zhao1.liu@intel.com>,
  David Hildenbrand <david@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
  Igor Mammedov <imammedo@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v3 12/22] hw/smbios: Remove 'smbios_uuid_encoded',
- simplify smbios_encode_uuid()
-Date: Tue, 16 Apr 2024 15:52:41 +0200
-Message-ID: <20240416135252.8384-13-philmd@linaro.org>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>
+Subject: [PATCH v3 07/22] hw/acpi/ich9: Remove dead code related to
+ 'acpi_memory_hotplug'
+Date: Tue, 16 Apr 2024 15:52:36 +0200
+Message-ID: <20240416135252.8384-8-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240416135252.8384-1-philmd@linaro.org>
 References: <20240416135252.8384-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::534;
- envelope-from=philmd@linaro.org; helo=mail-ed1-x534.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::535;
+ envelope-from=philmd@linaro.org; helo=mail-ed1-x535.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -101,42 +101,87 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-'smbios_encode_uuid' is always true, remove it,
-simplifying smbios_encode_uuid().
+acpi_memory_hotplug::is_enabled is set to %true once via
+ich9_lpc_initfn() -> ich9_pm_add_properties(). No need to
+check it, so remove now dead code.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- hw/smbios/smbios.c | 9 +++------
- 1 file changed, 3 insertions(+), 6 deletions(-)
+ hw/acpi/ich9.c | 28 ++++++----------------------
+ 1 file changed, 6 insertions(+), 22 deletions(-)
 
-diff --git a/hw/smbios/smbios.c b/hw/smbios/smbios.c
-index 8261eb716f..3b7703489d 100644
---- a/hw/smbios/smbios.c
-+++ b/hw/smbios/smbios.c
-@@ -30,7 +30,6 @@
- #include "hw/pci/pci_device.h"
- #include "smbios_build.h"
+diff --git a/hw/acpi/ich9.c b/hw/acpi/ich9.c
+index 9b605af21a..02d8546bd3 100644
+--- a/hw/acpi/ich9.c
++++ b/hw/acpi/ich9.c
+@@ -153,17 +153,10 @@ static int ich9_pm_post_load(void *opaque, int version_id)
+      .offset     = vmstate_offset_pointer(_state, _field, uint8_t),  \
+  }
  
--static const bool smbios_uuid_encoded = true;
- /*
-  * SMBIOS tables provided by user with '-smbios file=<foo>' option
-  */
-@@ -600,11 +599,9 @@ static void smbios_build_type_0_table(void)
- static void smbios_encode_uuid(struct smbios_uuid *uuid, QemuUUID *in)
- {
-     memcpy(uuid, in, 16);
--    if (smbios_uuid_encoded) {
--        uuid->time_low = bswap32(uuid->time_low);
--        uuid->time_mid = bswap16(uuid->time_mid);
--        uuid->time_hi_and_version = bswap16(uuid->time_hi_and_version);
+-static bool vmstate_test_use_memhp(void *opaque)
+-{
+-    ICH9LPCPMRegs *s = opaque;
+-    return s->acpi_memory_hotplug.is_enabled;
+-}
+-
+ static const VMStateDescription vmstate_memhp_state = {
+     .name = "ich9_pm/memhp",
+     .version_id = 1,
+     .minimum_version_id = 1,
+-    .needed = vmstate_test_use_memhp,
+     .fields = (const VMStateField[]) {
+         VMSTATE_MEMORY_HOTPLUG(acpi_memory_hotplug, ICH9LPCPMRegs),
+         VMSTATE_END_OF_LIST()
+@@ -335,11 +328,9 @@ void ich9_pm_init(PCIDevice *lpc_pci, ICH9LPCPMRegs *pm, qemu_irq sci_irq)
+     legacy_acpi_cpu_hotplug_init(pci_address_space_io(lpc_pci),
+         OBJECT(lpc_pci), &pm->gpe_cpu, ICH9_CPU_HOTPLUG_IO_BASE);
+ 
+-    if (pm->acpi_memory_hotplug.is_enabled) {
+-        acpi_memory_hotplug_init(pci_address_space_io(lpc_pci), OBJECT(lpc_pci),
+-                                 &pm->acpi_memory_hotplug,
+-                                 ACPI_MEMORY_HOTPLUG_BASE);
 -    }
-+    uuid->time_low = bswap32(uuid->time_low);
-+    uuid->time_mid = bswap16(uuid->time_mid);
-+    uuid->time_hi_and_version = bswap16(uuid->time_hi_and_version);
++    acpi_memory_hotplug_init(pci_address_space_io(lpc_pci), OBJECT(lpc_pci),
++                             &pm->acpi_memory_hotplug,
++                             ACPI_MEMORY_HOTPLUG_BASE);
  }
  
- static void smbios_build_type_1_table(void)
+ static void ich9_pm_get_gpe0_blk(Object *obj, Visitor *v, const char *name,
+@@ -460,12 +451,7 @@ void ich9_pm_device_pre_plug_cb(HotplugHandler *hotplug_dev, DeviceState *dev,
+         return;
+     }
+ 
+-    if (object_dynamic_cast(OBJECT(dev), TYPE_PC_DIMM) &&
+-        !lpc->pm.acpi_memory_hotplug.is_enabled) {
+-        error_setg(errp,
+-                   "memory hotplug is not enabled: %s.memory-hotplug-support "
+-                   "is not set", object_get_typename(OBJECT(lpc)));
+-    } else if (object_dynamic_cast(OBJECT(dev), TYPE_CPU)) {
++    if (object_dynamic_cast(OBJECT(dev), TYPE_CPU)) {
+         uint64_t negotiated = lpc->smi_negotiated_features;
+ 
+         if (negotiated & BIT_ULL(ICH9_LPC_SMI_F_BROADCAST_BIT) &&
+@@ -509,8 +495,7 @@ void ich9_pm_device_unplug_request_cb(HotplugHandler *hotplug_dev,
+ {
+     ICH9LPCState *lpc = ICH9_LPC_DEVICE(hotplug_dev);
+ 
+-    if (lpc->pm.acpi_memory_hotplug.is_enabled &&
+-        object_dynamic_cast(OBJECT(dev), TYPE_PC_DIMM)) {
++    if (object_dynamic_cast(OBJECT(dev), TYPE_PC_DIMM)) {
+         acpi_memory_unplug_request_cb(hotplug_dev,
+                                       &lpc->pm.acpi_memory_hotplug, dev,
+                                       errp);
+@@ -545,8 +530,7 @@ void ich9_pm_device_unplug_cb(HotplugHandler *hotplug_dev, DeviceState *dev,
+ {
+     ICH9LPCState *lpc = ICH9_LPC_DEVICE(hotplug_dev);
+ 
+-    if (lpc->pm.acpi_memory_hotplug.is_enabled &&
+-        object_dynamic_cast(OBJECT(dev), TYPE_PC_DIMM)) {
++    if (object_dynamic_cast(OBJECT(dev), TYPE_PC_DIMM)) {
+         acpi_memory_unplug_cb(&lpc->pm.acpi_memory_hotplug, dev, errp);
+     } else if (object_dynamic_cast(OBJECT(dev), TYPE_CPU) &&
+                !lpc->pm.cpu_hotplug_legacy) {
 -- 
 2.41.0
 
