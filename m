@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EF27C4345F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Apr 2024 13:58:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9994C04FF9
+	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Apr 2024 13:58:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rwjGR-0003Vv-Ty; Tue, 16 Apr 2024 09:54:23 -0400
+	id 1rwjGR-0003V7-Ra; Tue, 16 Apr 2024 09:54:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwjGE-0002iZ-4r
- for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 09:54:12 -0400
-Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwjGQ-0003Ld-Ey
+ for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 09:54:22 -0400
+Received: from mail-ed1-x535.google.com ([2a00:1450:4864:20::535])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwjGC-0001qx-57
- for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 09:54:09 -0400
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-56e69a51a33so4328396a12.1
- for <qemu-riscv@nongnu.org>; Tue, 16 Apr 2024 06:54:07 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwjGO-0001uN-5v
+ for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 09:54:22 -0400
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-5700a9caee0so4084320a12.2
+ for <qemu-riscv@nongnu.org>; Tue, 16 Apr 2024 06:54:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713275646; x=1713880446; darn=nongnu.org;
+ d=linaro.org; s=google; t=1713275659; x=1713880459; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UuGQRWMqmr6ruVhTw3v1+AueGwovFmnNusAak3fPiJU=;
- b=eKE+BoUebL5WjsIkKju9B9igNMd8zk94zRmWT9YlQ1bQcklpByc2mQ3Jpghr+bumm4
- 4PGzTW8yFFL+PfGYZstYO6J8J9Vwx0gvo4gQxFnc+b85dVAP2t8QRGFFNjXp6z6wrAdM
- KGLn3RMrMIyly+hpWHDC7lgJZvB6gBKqT7HePnN+RYWHKqkFPwBJaUClmV4N+LitzM0i
- OU+w4V4Y1bmZK14aDs4Y/Wv0WzREcXOn4ABoUSAeKKhQVQOupzZ/Z/sMezmMnnOJinrT
- Br8KKSzKqwmlwc0dv8Pgr5h9yAf1QDABmvNxUjq9zFMaZpQ4dg5111OVp8vMHCusTMO9
- Z2Iw==
+ bh=oke/YPM4C6ufallz55sQ7YyPAmP6LUvQ2Lhm6MsGGjM=;
+ b=SZ+OYxK/vkDRQuDA3dPwPK0lyX9ODIo9jwYJuPFtQwoFsui376b7V9ARlz0dQ1IclO
+ FNz5rqDpLUgJJs16KAtwvksbEevRSm/5wHDyVmiZ/Cmcm+Sqz6bEcbyEts+IbOddfNnF
+ xggipkPAH5QkhKP7IxewtKrIwRheBq9cKvKvOlX/nwPxK1wyA9MT7RFWe4J0v3XS2eL4
+ Sg0moTCT8dkmskCThBqSH8+Z7zVCalPKg2wRKDH+RJAu34N3u73taT9tFc7U66NJ9+oP
+ HWHxZnRbGJy8DJMkzP18pobyIpOCVlu9PgrLw9OJqTFRS/lx+qYb9apqeMeI2gPVHkEJ
+ vIbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713275646; x=1713880446;
+ d=1e100.net; s=20230601; t=1713275659; x=1713880459;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UuGQRWMqmr6ruVhTw3v1+AueGwovFmnNusAak3fPiJU=;
- b=uWupBJDQU1LSoDF68Sd9Pza0CuueUghYAf3aRA6WtcysF2aCi5mWO6jCPII8ACLN4X
- oSDfTQcY12NB4K2hA6ygfAc2LIkxtrLvrVRMLWM6TCPq6Wfxde2jgvbPajzMAcBnzX4U
- nhwigat7P5+XiNCjm9uUUwAbby2QYcJqP5XXmwa6H29R89MKrWyC1a499wlpipOPHiCd
- 9BrHk4zLL/hIo160LIG32ei4yaAzZUrDUa37z0u6xPqBVHwTMbXpcfCHssmMVkNYeLO9
- dD/r0NsT1aw0jMsFsPrefUdACqMfyf58pc+SbzyGhvGDOGeHD0XIdT49c+lMXyjx8Ygi
- heww==
+ bh=oke/YPM4C6ufallz55sQ7YyPAmP6LUvQ2Lhm6MsGGjM=;
+ b=vIUsNTScu0Qjp2Lm2Vz/o4pIN0I8dxOPta7V05ioAz4/9QkskOymIg3d3NEsYg7hyj
+ UhrpZK7TqtNSYi0hZoCMiepBGcnz1IkCSP2HZoOwJhNTF0NjjcvtxmareCOhQ6Pt21YY
+ a/Jpfb/Y04UCqyhKtE/GcCbSpuPku/NWCTn2QCuLt0IpLxEFSYS9KSQW5UN0gN72J8cM
+ +7xj/ngLV1BVma3RcxCJNXtFBhOFoCtYhVAYtCss/9w8P2p79HHr9zPgl5rd1kzGUCZu
+ IHOSc4FpcHFOxpCqSKC6oF+Vnf1aSkq5Jtdhs9GmaPK6rerc/jDbsjOUiw2Wth6DFrWE
+ g3Ww==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUsY/DZVY6fWGesHJr3A071TnTmi2V7qDzj7VZfu7SBUksYjr4s4e2Eev5Z0md1kM81rW1iS+rZiahbg6mQ/Bxtxe4stQQ=
-X-Gm-Message-State: AOJu0Yz4tj/A3HbLBb6SSe9zbOKI3LYgm5UoWpq6C/kZ1MvtA7zcoHCI
- MRaP8avIbW+q59bmPo3mC6kDv7mxzHwEe778it29xQFAnvLdQyRTWmYFKnCiDxE=
-X-Google-Smtp-Source: AGHT+IE6IYmo1VuVUOK6xZ/1XIADaz45DMu2bPe10Ti/wKiNWf8jwKdKozqu/pKdUXNHfmZznGGeng==
-X-Received: by 2002:a50:d55d:0:b0:566:d333:45e8 with SMTP id
- f29-20020a50d55d000000b00566d33345e8mr8949322edj.20.1713275646553; 
- Tue, 16 Apr 2024 06:54:06 -0700 (PDT)
+ AJvYcCVj7jDBPdnnjfXL8/a4xRww0DHQgSqPTWq9g0HMYCRi3DmmvOy/BwFNsygK5D4C6kpwx7zOZ49tFkCviL4gf/OlRscVYig=
+X-Gm-Message-State: AOJu0YyP8dB6r3N6VRQTveW2RJTk2IItYVZRTGhS21mJFrg2zlqNeWHB
+ PJt1qefxzaw8c42YQhItcrGkmQ7huN2OBFLorG+CfEtigGG/Nl4EoDndlZWuzJ8=
+X-Google-Smtp-Source: AGHT+IFar985eI7fTq6SQK+TUJ3H9X+wIpTRFo6sDSXfswzXKhPwrzFViGaJT5lZYkwxmsUBflCNJQ==
+X-Received: by 2002:a17:906:46c8:b0:a52:42ce:7da6 with SMTP id
+ k8-20020a17090646c800b00a5242ce7da6mr5855717ejs.10.1713275658677; 
+ Tue, 16 Apr 2024 06:54:18 -0700 (PDT)
 Received: from m1x-phil.lan ([176.176.155.61])
  by smtp.gmail.com with ESMTPSA id
- ee42-20020a056402292a00b005701550ddc5sm3802566edb.90.2024.04.16.06.54.04
+ rh4-20020a17090720e400b00a5255afc856sm4100307ejb.84.2024.04.16.06.54.16
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 16 Apr 2024 06:54:06 -0700 (PDT)
+ Tue, 16 Apr 2024 06:54:18 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org,
 	Thomas Huth <thuth@redhat.com>
@@ -66,27 +66,23 @@ Cc: Ani Sinha <anisinha@redhat.com>, qemu-riscv@nongnu.org,
  David Hildenbrand <david@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
  Igor Mammedov <imammedo@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Peter Maydell <peter.maydell@linaro.org>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  Richard Henderson <richard.henderson@linaro.org>,
- Eduardo Habkost <eduardo@habkost.net>, Song Gao <gaosong@loongson.cn>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-arm@nongnu.org
-Subject: [PATCH v3 11/22] hw/smbios: Remove 'uuid_encoded' argument from
- smbios_set_defaults()
-Date: Tue, 16 Apr 2024 15:52:40 +0200
-Message-ID: <20240416135252.8384-12-philmd@linaro.org>
+ Eduardo Habkost <eduardo@habkost.net>, Cleber Rosa <crosa@redhat.com>,
+ Wainer dos Santos Moschetta <wainersm@redhat.com>,
+ Beraldo Leal <bleal@redhat.com>
+Subject: [PATCH v3 13/22] hw/i386/pc: Remove
+ PCMachineClass::enforce_aligned_dimm
+Date: Tue, 16 Apr 2024 15:52:42 +0200
+Message-ID: <20240416135252.8384-14-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240416135252.8384-1-philmd@linaro.org>
 References: <20240416135252.8384-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::529;
- envelope-from=philmd@linaro.org; helo=mail-ed1-x529.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::535;
+ envelope-from=philmd@linaro.org; helo=mail-ed1-x535.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -109,112 +105,116 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-'uuid_encoded' is always true, remove it.
+PCMachineClass::enforce_aligned_dimm was only used by the
+pc-i440fx-2.1 machine, which got removed. It is now always
+true. Remove it, simplifying pc_get_device_memory_range().
+Update the comment in Avocado test_phybits_low_pse36().
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- include/hw/firmware/smbios.h | 3 +--
- hw/arm/virt.c                | 3 +--
- hw/i386/fw_cfg.c             | 2 +-
- hw/loongarch/virt.c          | 2 +-
- hw/riscv/virt.c              | 2 +-
- hw/smbios/smbios.c           | 6 ++----
- 6 files changed, 7 insertions(+), 11 deletions(-)
+ include/hw/i386/pc.h                  |  3 ---
+ hw/i386/pc.c                          | 14 +++-----------
+ tests/avocado/mem-addr-space-check.py |  9 ++++-----
+ 3 files changed, 7 insertions(+), 19 deletions(-)
 
-diff --git a/include/hw/firmware/smbios.h b/include/hw/firmware/smbios.h
-index 8d3fb2fb3b..f066ab7262 100644
---- a/include/hw/firmware/smbios.h
-+++ b/include/hw/firmware/smbios.h
-@@ -331,8 +331,7 @@ void smbios_add_usr_blob_size(size_t size);
- void smbios_entry_add(QemuOpts *opts, Error **errp);
- void smbios_set_cpuid(uint32_t version, uint32_t features);
- void smbios_set_defaults(const char *manufacturer, const char *product,
--                         const char *version,
--                         bool uuid_encoded);
-+                         const char *version);
- void smbios_set_default_processor_family(uint16_t processor_family);
- uint8_t *smbios_get_table_legacy(size_t *length, Error **errp);
- void smbios_get_tables(MachineState *ms,
-diff --git a/hw/arm/virt.c b/hw/arm/virt.c
-index a9a913aead..a55ef916cb 100644
---- a/hw/arm/virt.c
-+++ b/hw/arm/virt.c
-@@ -1650,8 +1650,7 @@ static void virt_build_smbios(VirtMachineState *vms)
-     }
+diff --git a/include/hw/i386/pc.h b/include/hw/i386/pc.h
+index c2d9af36b2..231aae92ed 100644
+--- a/include/hw/i386/pc.h
++++ b/include/hw/i386/pc.h
+@@ -74,8 +74,6 @@ typedef struct PCMachineState {
+  *
+  * Compat fields:
+  *
+- * @enforce_aligned_dimm: check that DIMM's address/size is aligned by
+- *                        backend's alignment value if provided
+  * @acpi_data_size: Size of the chunk of memory at the top of RAM
+  *                  for the BIOS ACPI tables and other BIOS
+  *                  datastructures.
+@@ -114,7 +112,6 @@ struct PCMachineClass {
+     /* RAM / address space compat: */
+     bool gigabyte_align;
+     bool has_reserved_memory;
+-    bool enforce_aligned_dimm;
+     bool broken_reserved_end;
+     bool enforce_amd_1tb_hole;
  
-     smbios_set_defaults("QEMU", product,
--                        vmc->smbios_old_sys_ver ? "1.0" : mc->name,
--                        true);
-+                        vmc->smbios_old_sys_ver ? "1.0" : mc->name);
+diff --git a/hw/i386/pc.c b/hw/i386/pc.c
+index 2bf1bfd5b2..c7bfdfc1e1 100644
+--- a/hw/i386/pc.c
++++ b/hw/i386/pc.c
+@@ -716,7 +716,6 @@ static void pc_get_device_memory_range(PCMachineState *pcms,
+                                        hwaddr *base,
+                                        ram_addr_t *device_mem_size)
+ {
+-    PCMachineClass *pcmc = PC_MACHINE_GET_CLASS(pcms);
+     MachineState *machine = MACHINE(pcms);
+     ram_addr_t size;
+     hwaddr addr;
+@@ -724,10 +723,8 @@ static void pc_get_device_memory_range(PCMachineState *pcms,
+     size = machine->maxram_size - machine->ram_size;
+     addr = ROUND_UP(pc_above_4g_end(pcms), 1 * GiB);
  
-     /* build the array of physical mem area from base_memmap */
-     mem_array.address = vms->memmap[VIRT_MEM].base;
-diff --git a/hw/i386/fw_cfg.c b/hw/i386/fw_cfg.c
-index f7c2501161..ecc4047a4b 100644
---- a/hw/i386/fw_cfg.c
-+++ b/hw/i386/fw_cfg.c
-@@ -63,7 +63,7 @@ void fw_cfg_build_smbios(PCMachineState *pcms, FWCfgState *fw_cfg,
+-    if (pcmc->enforce_aligned_dimm) {
+-        /* size device region assuming 1G page max alignment per slot */
+-        size += (1 * GiB) * machine->ram_slots;
+-    }
++    /* size device region assuming 1G page max alignment per slot */
++    size += (1 * GiB) * machine->ram_slots;
  
-     if (pcmc->smbios_defaults) {
-         /* These values are guest ABI, do not change */
--        smbios_set_defaults("QEMU", mc->desc, mc->name, true);
-+        smbios_set_defaults("QEMU", mc->desc, mc->name);
-     }
+     *base = addr;
+     *device_mem_size = size;
+@@ -1285,12 +1282,9 @@ void pc_i8259_create(ISABus *isa_bus, qemu_irq *i8259_irqs)
+ static void pc_memory_pre_plug(HotplugHandler *hotplug_dev, DeviceState *dev,
+                                Error **errp)
+ {
+-    const PCMachineState *pcms = PC_MACHINE(hotplug_dev);
+     const X86MachineState *x86ms = X86_MACHINE(hotplug_dev);
+-    const PCMachineClass *pcmc = PC_MACHINE_GET_CLASS(pcms);
+     const MachineState *ms = MACHINE(hotplug_dev);
+     const bool is_nvdimm = object_dynamic_cast(OBJECT(dev), TYPE_NVDIMM);
+-    const uint64_t legacy_align = TARGET_PAGE_SIZE;
+     Error *local_err = NULL;
  
-     /* tell smbios about cpuid version and features */
-diff --git a/hw/loongarch/virt.c b/hw/loongarch/virt.c
-index 441d764843..00d3005e54 100644
---- a/hw/loongarch/virt.c
-+++ b/hw/loongarch/virt.c
-@@ -355,7 +355,7 @@ static void virt_build_smbios(LoongArchMachineState *lams)
+     /*
+@@ -1315,8 +1309,7 @@ static void pc_memory_pre_plug(HotplugHandler *hotplug_dev, DeviceState *dev,
          return;
      }
  
--    smbios_set_defaults("QEMU", product, mc->name, true);
-+    smbios_set_defaults("QEMU", product, mc->name);
- 
-     smbios_get_tables(ms, SMBIOS_ENTRY_POINT_TYPE_64,
-                       NULL, 0,
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index d171e74f7b..1ed9b0552e 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -1277,7 +1277,7 @@ static void virt_build_smbios(RISCVVirtState *s)
-         product = "KVM Virtual Machine";
-     }
- 
--    smbios_set_defaults("QEMU", product, mc->name, true);
-+    smbios_set_defaults("QEMU", product, mc->name);
- 
-     if (riscv_is_32bit(&s->soc[0])) {
-         smbios_set_default_processor_family(0x200);
-diff --git a/hw/smbios/smbios.c b/hw/smbios/smbios.c
-index eed5787b15..8261eb716f 100644
---- a/hw/smbios/smbios.c
-+++ b/hw/smbios/smbios.c
-@@ -30,7 +30,7 @@
- #include "hw/pci/pci_device.h"
- #include "smbios_build.h"
- 
--static bool smbios_uuid_encoded = true;
-+static const bool smbios_uuid_encoded = true;
- /*
-  * SMBIOS tables provided by user with '-smbios file=<foo>' option
-  */
-@@ -1017,11 +1017,9 @@ void smbios_set_default_processor_family(uint16_t processor_family)
+-    pc_dimm_pre_plug(PC_DIMM(dev), MACHINE(hotplug_dev),
+-                     pcmc->enforce_aligned_dimm ? NULL : &legacy_align, errp);
++    pc_dimm_pre_plug(PC_DIMM(dev), MACHINE(hotplug_dev), NULL, errp);
  }
  
- void smbios_set_defaults(const char *manufacturer, const char *product,
--                         const char *version,
--                         bool uuid_encoded)
-+                         const char *version)
- {
-     smbios_have_defaults = true;
--    smbios_uuid_encoded = uuid_encoded;
- 
-     SMBIOS_SET_DEFAULT(smbios_type1.manufacturer, manufacturer);
-     SMBIOS_SET_DEFAULT(smbios_type1.product, product);
+ static void pc_memory_plug(HotplugHandler *hotplug_dev,
+@@ -1780,7 +1773,6 @@ static void pc_machine_class_init(ObjectClass *oc, void *data)
+     pcmc->smbios_defaults = true;
+     pcmc->gigabyte_align = true;
+     pcmc->has_reserved_memory = true;
+-    pcmc->enforce_aligned_dimm = true;
+     pcmc->enforce_amd_1tb_hole = true;
+     /* BIOS ACPI tables: 128K. Other BIOS datastructures: less than 4K reported
+      * to be used at the moment, 32K should be enough for a while.  */
+diff --git a/tests/avocado/mem-addr-space-check.py b/tests/avocado/mem-addr-space-check.py
+index af019969c0..85541ea051 100644
+--- a/tests/avocado/mem-addr-space-check.py
++++ b/tests/avocado/mem-addr-space-check.py
+@@ -31,11 +31,10 @@ def test_phybits_low_pse36(self):
+         at 4 GiB boundary when "above_4g_mem_size" is 0 (this would be true when
+         we have 0.5 GiB of VM memory, see pc_q35_init()). This means total
+         hotpluggable memory size is 60 GiB. Per slot, we reserve 1 GiB of memory
+-        for dimm alignment for all newer machines (see enforce_aligned_dimm
+-        property for pc machines and pc_get_device_memory_range()). That leaves
+-        total hotpluggable actual memory size of 59 GiB. If the VM is started
+-        with 0.5 GiB of memory, maxmem should be set to a maximum value of
+-        59.5 GiB to ensure that the processor can address all memory directly.
++        for dimm alignment for all machines. That leaves total hotpluggable
++        actual memory size of 59 GiB. If the VM is started with 0.5 GiB of
++        memory, maxmem should be set to a maximum value of 59.5 GiB to ensure
++        that the processor can address all memory directly.
+         Note that 64-bit pci hole size is 0 in this case. If maxmem is set to
+         59.6G, QEMU should fail to start with a message "phy-bits are too low".
+         If maxmem is set to 59.5G with all other QEMU parameters identical, QEMU
 -- 
 2.41.0
 
