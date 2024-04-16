@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCADFC4345F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Apr 2024 19:02:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E76D8C4345F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Apr 2024 19:02:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rwo3W-0001sz-4m; Tue, 16 Apr 2024 15:01:22 -0400
+	id 1rwo37-00019T-5E; Tue, 16 Apr 2024 15:00:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwo3T-0001no-Ks
- for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 15:01:20 -0400
-Received: from mail-lf1-x131.google.com ([2a00:1450:4864:20::131])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwo2I-0000rU-FQ
+ for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 15:00:07 -0400
+Received: from mail-ej1-x630.google.com ([2a00:1450:4864:20::630])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwo3R-0005lg-Np
- for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 15:01:19 -0400
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-516d487659bso5775194e87.2
- for <qemu-riscv@nongnu.org>; Tue, 16 Apr 2024 12:01:17 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwo2G-0005Na-Lz
+ for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 15:00:06 -0400
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-a5252e5aa01so447413666b.1
+ for <qemu-riscv@nongnu.org>; Tue, 16 Apr 2024 12:00:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713294076; x=1713898876; darn=nongnu.org;
+ d=linaro.org; s=google; t=1713294003; x=1713898803; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3tX6emDsZqVY2muZJRjyArm9SgC2+2SHZUCWPsCYUO0=;
- b=XXkoo01wgJLcqx5MY3t7zg2on2TS+GzJ4CNGIwNhj6FTy44qflnA8ViNLoi0aI9xPJ
- i/UplER4f38P4niTFDIk1jFf8O+pgS00KIKxl/QhPLTcXEo1zOf53GzSjOJcMUvMsY3B
- 0PsG18DhOjGWi2W3OX6l6ErPTZa6Dy5fhAgJjZ6BuG4qpPh9NyKh73t9Pbza7tOS80e8
- kG2JzOHKySJ+fHEn+2CuCHNN6g35p1K4DinwzU6BQoHW/ksL7uoY++0QCCu/qJdW9yBB
- a5f24vFk1NkPQZVbW/Iy3Hr73xVlkEft+fSgoNZOZh+q4h+isQG+sHR9FcV8ExkHQJKd
- fmmQ==
+ bh=r/B5UTN+VVzZIBHg8vuvzaIXLhoLwQMP7eYF+iW6nSk=;
+ b=Jze8/bBAz2nKIkvy50C8jGwBrYzQ9Wd2QPeZdCZutEzvLy8JT2N3p1FbjqsvJR7PIr
+ wzVqS70L2dvbBOMi1ZvzcO0wMObfh5t/f1QPZZkVxL/gadbEfwyK7ljoNmWinOrRc99n
+ 2KIRfe9tT0FTDL2dqfXS8iApq/0m+IOziWW1FKgqgdUw7tGgDoMWT5YJE4pBTKIWZRbn
+ wTv1G88mR89e7rwwiL+lKM1KCSW6TnMXV/KC48L+ILX+z93nU3uAMFUpTQWA4smlYvq8
+ 1WeEJrAWduwZIJQEhNH6Td1IinBDpHS7Tol+JHeYLMwNnwBOG+wBqm0tnuHP63vkiJ3e
+ SZwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713294076; x=1713898876;
+ d=1e100.net; s=20230601; t=1713294003; x=1713898803;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3tX6emDsZqVY2muZJRjyArm9SgC2+2SHZUCWPsCYUO0=;
- b=g2lfwyeHApW3m9xVW5EjG4bZgQjeEKw0WNSLRpZ4HKOiLnwVOZVhBTzJgLCzvsrsAQ
- gz5PhoqxGn8dzOiRH776c63eAZLGTk42SJZzAfIQ9MPwPg89enNcmdC8F/oKtlHRjkyT
- b1YP6sqz5Y4b2zCjw1naoQmx5ozNtOPRwu+CQNEwHIr04psd3wb2Mr2mnsQPSCEjxar1
- HgKl08AabonBdeqolNmDfLInZp0MrCtArxQZcbRXH7kSVC0lf22e8Q6hY7iQFAog+Vod
- A1eUPWZ6SOLG9lfTnUGOLquH7WNEvfnwnBjMgb8/BxFkaXRsrzEQGezUoKNV2p18SHZG
- FIaA==
+ bh=r/B5UTN+VVzZIBHg8vuvzaIXLhoLwQMP7eYF+iW6nSk=;
+ b=IFhK5FoZtQtylTG4xToDwN0HYMRQ/Hlh+wlbm6GA2iVK4Ut/uiTofbsZ/IUpe5NFfv
+ xcwJuLt4AEGiHM05OaLv/Sqt73A5qHqkUVIqNew+/Pr6NBTokOrL/Bl9vY9Q9SZBw2Hy
+ pQ4BMtvRSI+/VilS5cgAYWHp7yFk1XThbmLXmtm8mtRTti7sX/UQduekZLhNN1hKiT4T
+ pMyaPx5Qdvd1xAFbhgfpnXhEVGXwQqqpJ8S//OIWVZJGT6RcVNX88uzOmASkLeyxKQEa
+ Ed/mqZvBiJctVfjPwv5682LOURzd0brjOTlJwT7ps66MYrmnnm4YDa7P9t4HJR9jDbGb
+ Q6DA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUVDB2Gnhw/BSH2nJYsxNNkQuOHXnNgSbTBZF0r1NFFTL/STAuraWjekAUXXqQjV1GgC4mVM+cO5sNrt4TA0abkYBovKpE=
-X-Gm-Message-State: AOJu0Yz84TLK5jBlhjSPzohLNLcTX44qaHSFhtWzc+OE2dimfkONKYYe
- zruLKGK/CrEP5uGPZrqLPD5a9j7+nGXnAp7d8QOzDiF0bgp06RLXjaz+ce0xdrM=
-X-Google-Smtp-Source: AGHT+IGAeJUk9j1vWHyak+lS5xvi7WZDRHJdtrfadkYcSMrcnN5S5wA21dkShPt8sipozRTysqPPHA==
-X-Received: by 2002:ac2:4c25:0:b0:515:c102:c825 with SMTP id
- u5-20020ac24c25000000b00515c102c825mr7947381lfq.19.1713294075893; 
- Tue, 16 Apr 2024 12:01:15 -0700 (PDT)
+ AJvYcCUZSHbIY2Zgx71SnyM2oH5t9DE3bCXt2fGX1qwrPPhBeVB6yHPPDv5wkAo0RkXHVYrzttIFmNv6kWEU5RvMbt5v8Dyb2bY=
+X-Gm-Message-State: AOJu0YwcYXEjbncas/pIb5v2WNqDfSNqn/QaCQln1jFxNjFXeWKfJtOn
+ JRdXirb7LnvsC/6tCinHJaufYXC8zFGn2827pOp9bhcSqZphOVEhXklIUEOqeBQ=
+X-Google-Smtp-Source: AGHT+IFYPRtucDga6LKg9OYiy7Lp1H1gYO0dq5T1mdbxUJVv5BVKlYTRGjoZPSqqHynS6LcsQRYSwQ==
+X-Received: by 2002:a17:906:bb17:b0:a51:98df:f664 with SMTP id
+ jz23-20020a170906bb1700b00a5198dff664mr8257297ejb.76.1713294003357; 
+ Tue, 16 Apr 2024 12:00:03 -0700 (PDT)
 Received: from m1x-phil.lan ([176.176.155.61])
  by smtp.gmail.com with ESMTPSA id
- gs39-20020a1709072d2700b00a46f95f5849sm7167635ejc.106.2024.04.16.12.01.13
+ ne33-20020a1709077ba100b00a51b26ba6c5sm7137906ejc.219.2024.04.16.12.00.01
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 16 Apr 2024 12:01:15 -0700 (PDT)
+ Tue, 16 Apr 2024 12:00:02 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org,
 	Thomas Huth <thuth@redhat.com>
@@ -66,28 +66,19 @@ Cc: "Michael S. Tsirkin" <mst@redhat.com>, qemu-riscv@nongnu.org,
  kvm@vger.kernel.org, qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
  Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Zhao Liu <zhao1.liu@intel.com>, Peter Maydell <peter.maydell@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Song Gao <gaosong@loongson.cn>,
- Xiao Guangrong <xiaoguangrong.eric@gmail.com>,
- Nicholas Piggin <npiggin@gmail.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- David Gibson <david@gibson.dropbear.id.au>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>
-Subject: [PATCH v4 14/22] hw/mem/pc-dimm: Remove legacy_align argument from
- pc_dimm_pre_plug()
-Date: Tue, 16 Apr 2024 20:59:30 +0200
-Message-ID: <20240416185939.37984-15-philmd@linaro.org>
+ Zhao Liu <zhao1.liu@intel.com>, Gerd Hoffmann <kraxel@redhat.com>
+Subject: [PATCH v4 03/22] hw/usb/hcd-xhci: Remove XHCI_FLAG_FORCE_PCIE_ENDCAP
+ flag
+Date: Tue, 16 Apr 2024 20:59:19 +0200
+Message-ID: <20240416185939.37984-4-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240416185939.37984-1-philmd@linaro.org>
 References: <20240416185939.37984-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::131;
- envelope-from=philmd@linaro.org; helo=mail-lf1-x131.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::630;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x630.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -110,111 +101,58 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-'legacy_align' is always NULL, remove it.
+XHCI_FLAG_FORCE_PCIE_ENDCAP was only used by the
+pc-i440fx-2.0 machine, which got removed. Remove it
+and simplify usb_xhci_pci_realize().
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Thomas Huth <thuth@redhat.com>
-Reviewed-by: David Hildenbrand <david@redhat.com>
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- include/hw/mem/pc-dimm.h | 3 +--
- hw/arm/virt.c            | 2 +-
- hw/i386/pc.c             | 2 +-
- hw/loongarch/virt.c      | 2 +-
- hw/mem/pc-dimm.c         | 6 ++----
- hw/ppc/spapr.c           | 2 +-
- 6 files changed, 7 insertions(+), 10 deletions(-)
+ hw/usb/hcd-xhci.h     | 1 -
+ hw/usb/hcd-xhci-nec.c | 2 --
+ hw/usb/hcd-xhci-pci.c | 3 +--
+ 3 files changed, 1 insertion(+), 5 deletions(-)
 
-diff --git a/include/hw/mem/pc-dimm.h b/include/hw/mem/pc-dimm.h
-index 322bebe555..fe0f3ea963 100644
---- a/include/hw/mem/pc-dimm.h
-+++ b/include/hw/mem/pc-dimm.h
-@@ -66,8 +66,7 @@ struct PCDIMMDeviceClass {
-     void (*unrealize)(PCDIMMDevice *dimm);
+diff --git a/hw/usb/hcd-xhci.h b/hw/usb/hcd-xhci.h
+index 98f598382a..1efa4858fb 100644
+--- a/hw/usb/hcd-xhci.h
++++ b/hw/usb/hcd-xhci.h
+@@ -37,7 +37,6 @@ typedef struct XHCIEPContext XHCIEPContext;
+ 
+ enum xhci_flags {
+     XHCI_FLAG_SS_FIRST = 1,
+-    XHCI_FLAG_FORCE_PCIE_ENDCAP,
+     XHCI_FLAG_ENABLE_STREAMS,
  };
  
--void pc_dimm_pre_plug(PCDIMMDevice *dimm, MachineState *machine,
--                      const uint64_t *legacy_align, Error **errp);
-+void pc_dimm_pre_plug(PCDIMMDevice *dimm, MachineState *machine, Error **errp);
- void pc_dimm_plug(PCDIMMDevice *dimm, MachineState *machine);
- void pc_dimm_unplug(PCDIMMDevice *dimm, MachineState *machine);
- #endif
-diff --git a/hw/arm/virt.c b/hw/arm/virt.c
-index a55ef916cb..7af05a6a2d 100644
---- a/hw/arm/virt.c
-+++ b/hw/arm/virt.c
-@@ -2736,7 +2736,7 @@ static void virt_memory_pre_plug(HotplugHandler *hotplug_dev, DeviceState *dev,
-         return;
+diff --git a/hw/usb/hcd-xhci-nec.c b/hw/usb/hcd-xhci-nec.c
+index 328e5bfe7c..5d5b069cf9 100644
+--- a/hw/usb/hcd-xhci-nec.c
++++ b/hw/usb/hcd-xhci-nec.c
+@@ -43,8 +43,6 @@ static Property nec_xhci_properties[] = {
+     DEFINE_PROP_ON_OFF_AUTO("msix", XHCIPciState, msix, ON_OFF_AUTO_AUTO),
+     DEFINE_PROP_BIT("superspeed-ports-first", XHCINecState, flags,
+                     XHCI_FLAG_SS_FIRST, true),
+-    DEFINE_PROP_BIT("force-pcie-endcap", XHCINecState, flags,
+-                    XHCI_FLAG_FORCE_PCIE_ENDCAP, false),
+     DEFINE_PROP_UINT32("intrs", XHCINecState, intrs, XHCI_MAXINTRS),
+     DEFINE_PROP_UINT32("slots", XHCINecState, slots, XHCI_MAXSLOTS),
+     DEFINE_PROP_END_OF_LIST(),
+diff --git a/hw/usb/hcd-xhci-pci.c b/hw/usb/hcd-xhci-pci.c
+index 4423983308..cbad96f393 100644
+--- a/hw/usb/hcd-xhci-pci.c
++++ b/hw/usb/hcd-xhci-pci.c
+@@ -148,8 +148,7 @@ static void usb_xhci_pci_realize(struct PCIDevice *dev, Error **errp)
+                      PCI_BASE_ADDRESS_MEM_TYPE_64,
+                      &s->xhci.mem);
+ 
+-    if (pci_bus_is_express(pci_get_bus(dev)) ||
+-        xhci_get_flag(&s->xhci, XHCI_FLAG_FORCE_PCIE_ENDCAP)) {
++    if (pci_bus_is_express(pci_get_bus(dev))) {
+         ret = pcie_endpoint_cap_init(dev, 0xa0);
+         assert(ret > 0);
      }
- 
--    pc_dimm_pre_plug(PC_DIMM(dev), MACHINE(hotplug_dev), NULL, errp);
-+    pc_dimm_pre_plug(PC_DIMM(dev), MACHINE(hotplug_dev), errp);
- }
- 
- static void virt_memory_plug(HotplugHandler *hotplug_dev,
-diff --git a/hw/i386/pc.c b/hw/i386/pc.c
-index c7bfdfc1e1..9ba21b9967 100644
---- a/hw/i386/pc.c
-+++ b/hw/i386/pc.c
-@@ -1309,7 +1309,7 @@ static void pc_memory_pre_plug(HotplugHandler *hotplug_dev, DeviceState *dev,
-         return;
-     }
- 
--    pc_dimm_pre_plug(PC_DIMM(dev), MACHINE(hotplug_dev), NULL, errp);
-+    pc_dimm_pre_plug(PC_DIMM(dev), MACHINE(hotplug_dev), errp);
- }
- 
- static void pc_memory_plug(HotplugHandler *hotplug_dev,
-diff --git a/hw/loongarch/virt.c b/hw/loongarch/virt.c
-index 00d3005e54..af71bd2a99 100644
---- a/hw/loongarch/virt.c
-+++ b/hw/loongarch/virt.c
-@@ -1025,7 +1025,7 @@ static bool memhp_type_supported(DeviceState *dev)
- static void virt_mem_pre_plug(HotplugHandler *hotplug_dev, DeviceState *dev,
-                                  Error **errp)
- {
--    pc_dimm_pre_plug(PC_DIMM(dev), MACHINE(hotplug_dev), NULL, errp);
-+    pc_dimm_pre_plug(PC_DIMM(dev), MACHINE(hotplug_dev), errp);
- }
- 
- static void virt_machine_device_pre_plug(HotplugHandler *hotplug_dev,
-diff --git a/hw/mem/pc-dimm.c b/hw/mem/pc-dimm.c
-index 37f1f4ccfd..836384a90f 100644
---- a/hw/mem/pc-dimm.c
-+++ b/hw/mem/pc-dimm.c
-@@ -44,8 +44,7 @@ static MemoryRegion *pc_dimm_get_memory_region(PCDIMMDevice *dimm, Error **errp)
-     return host_memory_backend_get_memory(dimm->hostmem);
- }
- 
--void pc_dimm_pre_plug(PCDIMMDevice *dimm, MachineState *machine,
--                      const uint64_t *legacy_align, Error **errp)
-+void pc_dimm_pre_plug(PCDIMMDevice *dimm, MachineState *machine, Error **errp)
- {
-     Error *local_err = NULL;
-     int slot;
-@@ -70,8 +69,7 @@ void pc_dimm_pre_plug(PCDIMMDevice *dimm, MachineState *machine,
-                             &error_abort);
-     trace_mhp_pc_dimm_assigned_slot(slot);
- 
--    memory_device_pre_plug(MEMORY_DEVICE(dimm), machine, legacy_align,
--                           errp);
-+    memory_device_pre_plug(MEMORY_DEVICE(dimm), machine, NULL, errp);
- }
- 
- void pc_dimm_plug(PCDIMMDevice *dimm, MachineState *machine)
-diff --git a/hw/ppc/spapr.c b/hw/ppc/spapr.c
-index e9bc97fee0..f147876dc9 100644
---- a/hw/ppc/spapr.c
-+++ b/hw/ppc/spapr.c
-@@ -3668,7 +3668,7 @@ static void spapr_memory_pre_plug(HotplugHandler *hotplug_dev, DeviceState *dev,
-         return;
-     }
- 
--    pc_dimm_pre_plug(dimm, MACHINE(hotplug_dev), NULL, errp);
-+    pc_dimm_pre_plug(dimm, MACHINE(hotplug_dev), errp);
- }
- 
- struct SpaprDimmState {
 -- 
 2.41.0
 
