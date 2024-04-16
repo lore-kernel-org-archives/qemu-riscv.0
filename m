@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C178EC04FF6
-	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Apr 2024 13:58:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F22A1C4345F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Apr 2024 13:58:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rwjHI-0005rS-FV; Tue, 16 Apr 2024 09:55:18 -0400
+	id 1rwjIQ-0008DU-K0; Tue, 16 Apr 2024 09:56:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwjGe-0004oN-ND
- for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 09:54:39 -0400
-Received: from mail-lf1-x135.google.com ([2a00:1450:4864:20::135])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwjHM-0006Gj-TY
+ for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 09:55:24 -0400
+Received: from mail-lj1-x22f.google.com ([2a00:1450:4864:20::22f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwjGb-0001wF-Nf
- for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 09:54:35 -0400
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-51935589486so316971e87.0
- for <qemu-riscv@nongnu.org>; Tue, 16 Apr 2024 06:54:33 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwjHJ-0002Dp-Sk
+ for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 09:55:19 -0400
+Received: by mail-lj1-x22f.google.com with SMTP id
+ 38308e7fff4ca-2d82713f473so82635771fa.3
+ for <qemu-riscv@nongnu.org>; Tue, 16 Apr 2024 06:55:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713275672; x=1713880472; darn=nongnu.org;
+ d=linaro.org; s=google; t=1713275715; x=1713880515; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zrloeWXgUOLOMISBfKf4pjkEgrJ1tsN5/Rvv0yaa8aA=;
- b=Fzafj7hMbLKlpjRfypiJcKv5gPj1AxjV/xBEtxUo/DSOldjWNKzm0DXgU1qPo/qnYW
- cG7PzFS7HbXWL1Qv1AZd/t1EYliBFJhEQz+rgP6Yo/q9VApondwWqFwmZZl6d2k/3t/T
- PwHgItfX0plm6Nib4/elGmBtFFI97uEK84/3aK9ge4oZDPQCA9I9jExXMVqkVbxshs5c
- 07Um0uwG1HIW9LCYChxs4osoB3jl1wEL3OAgtLVWkd3CwWYH8aHGac4/1hFSV2o+zVY+
- 3hwQr37tl1dw5r2BPlwUJ4naBWpkjAYT/J/SucLwi2KiKTFL+gcFDQ2Q4ZEoi0x6hS3I
- RqHw==
+ bh=FmoKGcuQgIbaL+xuAzdxXsXrBiVUMbQQjbVksVReO6M=;
+ b=DXOjJhV6Btkm667Ugn/esoColhPCbFGtTezDXogtEvZePDm+aRd9LGR1PJUaT9rqNr
+ Xj9awmvfJA/RXrn/gH4KPUwLZjq+49MB3ChXVVvwgQ6P4qQM+ZQMpyDQnVhHNdF6TVDG
+ lmKtWPj82zutWNvUh/U4cvGx+ntl6OMLUDVWm+fUBMzSqQOMHs+bYeg46jRNdaU61vYd
+ OzLxS1ZT+Z5fhKHnCxLi+F7i7qKElPH1wPgLJiwPfH9Qieo+A8jVQukbsDO4OQdggMvO
+ bHLvDScZzN82ABAaDdnXlcbRYNYi2HJXBrqwaT8hcySmzy/YkkV2DmUrLNGZ4q80/I3O
+ g20w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713275672; x=1713880472;
+ d=1e100.net; s=20230601; t=1713275715; x=1713880515;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zrloeWXgUOLOMISBfKf4pjkEgrJ1tsN5/Rvv0yaa8aA=;
- b=b+SALi1+6rjCX7xt3iKTBIm3Ea/mnQC+1KnVgk6ZgBvnkBg92vUkHyxWBPyxxJTx1X
- DH2IZXlww9Kgoe4vaX/R6djlftf2y+vRpUGYMLcCoAh96DRIRur0odtGA9zSKLKHkZnQ
- XPV9yYDpapm9py3Z1q6R7nrn2h6xQMwBxPZb1xKJNFh/QB5Kq86r2S2DhSsXWSY9ZsuI
- w/2CQzT7mNVi5wRs1sdBerP1hV2O9unQHijodvt1YG2eEXtWMkSv1/I8C7TG0KehVJKD
- vnk/0AlTjCecP5cyWmaFMnlAgnX6rLYq7fkdF1UzaVSFC6KfCDVHiIYsLtmfh1cbXor8
- G5Vg==
+ bh=FmoKGcuQgIbaL+xuAzdxXsXrBiVUMbQQjbVksVReO6M=;
+ b=Vll+u/vbjyHDyTNIZTU1Rgb2DAx3OHimf4LNBISHsbMqBcQJLS2/gWDl+baTzPZgtE
+ WgADwPVZHRYd3tsjlvLxtiC9gE5yZ1l7lD6MD1vxVqOBem56QQ848VmGv0RwxhUxOJFn
+ Eyu3mzbUePOun7snZ9wJb94s6NoJLMex2QjbId48fYZ1atA/jkbLxbqE8SzSVirJkLsO
+ 5Nb4DXfH1RARRQUeX9hnNfXj1zeC4kluosUgCYM7ybBDtduEVh11kNhwz1jX7aPmVTDy
+ 9LoiHGib5E/npUp03YoT3+a96UuE1frSIs+LHzakrfqyJgv5CiM3JFnFFiwOBs9ZK7tT
+ 5zog==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXzrFH3U6gXWmGwB4aawu3PyXtG7qBwC+FjS/37goYkAfEuVeVNCFgk6KmxWtpqRY2Nkv4ElybeaKD6ueaULkv1OpPBHno=
-X-Gm-Message-State: AOJu0YwCKKWdqUwWrLcqneCeN0CKP5+PHOd8QkpHykXutlv5Lu2h1kVO
- BQVl+pF4BkTIQfABNEVeEHoJZT0A4THCUYpsgdB3jlYit5TOFoe79oPUFIMCGw8=
-X-Google-Smtp-Source: AGHT+IFFgNM/rfr1tPQGfN5FidWriTyRIgbnJMzi8aUjvLsajQTyItDQd7VnyTO30mSBQpKohLuNJg==
-X-Received: by 2002:a05:6512:694:b0:519:3243:3083 with SMTP id
- t20-20020a056512069400b0051932433083mr816018lfe.14.1713275671881; 
- Tue, 16 Apr 2024 06:54:31 -0700 (PDT)
+ AJvYcCUT03Lbs45H6/nGCDdzH3aibvOU0DrdH1qjaSCsO/d6Js6GqCFQZzFwuJmvDu5Za7d2nJgA7x9JrMLJkXaTxwziYJ1mLV8=
+X-Gm-Message-State: AOJu0YwYAjVT84y1cs8OXckWUzohuukEs7jDynUmTMi8IZh97N3X3ozO
+ 23kgjo48eOv1MY0NvexSxVTI4kzOMkTV1IG6QuCzh7LAQWTBqdWH4PjxZkhG7b8=
+X-Google-Smtp-Source: AGHT+IFQ+VXXJofVjohYFBWizv2t50T9w0aHG1CZCG1ZcU96WC59Lzx+UiKLSPaDoZgdRGk3AqTvaw==
+X-Received: by 2002:a19:9112:0:b0:516:9f03:6a92 with SMTP id
+ t18-20020a199112000000b005169f036a92mr9651710lfd.43.1713275715096; 
+ Tue, 16 Apr 2024 06:55:15 -0700 (PDT)
 Received: from m1x-phil.lan ([176.176.155.61])
  by smtp.gmail.com with ESMTPSA id
- w17-20020a1709067c9100b00a4a396ba54asm6866832ejo.93.2024.04.16.06.54.30
+ be1-20020a1709070a4100b00a526e6f5cbdsm2383282ejc.47.2024.04.16.06.55.13
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 16 Apr 2024 06:54:31 -0700 (PDT)
+ Tue, 16 Apr 2024 06:55:14 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org,
 	Thomas Huth <thuth@redhat.com>
@@ -68,27 +68,26 @@ Cc: Ani Sinha <anisinha@redhat.com>, qemu-riscv@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  Richard Henderson <richard.henderson@linaro.org>,
- Eduardo Habkost <eduardo@habkost.net>,
- Xiao Guangrong <xiaoguangrong.eric@gmail.com>
-Subject: [PATCH v3 15/22] hw/mem/memory-device: Remove legacy_align from
- memory_device_pre_plug()
-Date: Tue, 16 Apr 2024 15:52:44 +0200
-Message-ID: <20240416135252.8384-16-philmd@linaro.org>
+ Eduardo Habkost <eduardo@habkost.net>
+Subject: [PATCH v3 22/22] hw/i386/pc: Replace PCMachineClass::acpi_data_size
+ by PC_ACPI_DATA_SIZE
+Date: Tue, 16 Apr 2024 15:52:51 +0200
+Message-ID: <20240416135252.8384-23-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240416135252.8384-1-philmd@linaro.org>
 References: <20240416135252.8384-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::135;
- envelope-from=philmd@linaro.org; helo=mail-lf1-x135.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::22f;
+ envelope-from=philmd@linaro.org; helo=mail-lj1-x22f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,106 +103,93 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-'legacy_align' is always NULL, remove it, simplifying
-memory_device_pre_plug().
+PCMachineClass::acpi_data_size was only used by the pc-i440fx-2.0
+machine, which got removed. Since it is constant, replace the class
+field by a definition (local to hw/i386/pc.c, since not used
+elsewhere).
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Thomas Huth <thuth@redhat.com>
-Message-Id: <20240305134221.30924-12-philmd@linaro.org>
-Reviewed-by: David Hildenbrand <david@redhat.com>
+Message-Id: <20240305134221.30924-19-philmd@linaro.org>
 Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- include/hw/mem/memory-device.h |  2 +-
- hw/i386/pc.c                   |  3 +--
- hw/mem/memory-device.c         | 12 ++++--------
- hw/mem/pc-dimm.c               |  2 +-
- hw/virtio/virtio-md-pci.c      |  2 +-
- 5 files changed, 8 insertions(+), 13 deletions(-)
+ include/hw/i386/pc.h |  4 ----
+ hw/i386/pc.c         | 19 ++++++++++++-------
+ 2 files changed, 12 insertions(+), 11 deletions(-)
 
-diff --git a/include/hw/mem/memory-device.h b/include/hw/mem/memory-device.h
-index e0571c8a31..c0a58087cc 100644
---- a/include/hw/mem/memory-device.h
-+++ b/include/hw/mem/memory-device.h
-@@ -169,7 +169,7 @@ uint64_t get_plugged_memory_size(void);
- unsigned int memory_devices_get_reserved_memslots(void);
- bool memory_devices_memslot_auto_decision_active(void);
- void memory_device_pre_plug(MemoryDeviceState *md, MachineState *ms,
--                            const uint64_t *legacy_align, Error **errp);
-+                            Error **errp);
- void memory_device_plug(MemoryDeviceState *md, MachineState *ms);
- void memory_device_unplug(MemoryDeviceState *md, MachineState *ms);
- uint64_t memory_device_get_region_size(const MemoryDeviceState *md,
+diff --git a/include/hw/i386/pc.h b/include/hw/i386/pc.h
+index 96ccb4583f..0ad971782c 100644
+--- a/include/hw/i386/pc.h
++++ b/include/hw/i386/pc.h
+@@ -74,9 +74,6 @@ typedef struct PCMachineState {
+  *
+  * Compat fields:
+  *
+- * @acpi_data_size: Size of the chunk of memory at the top of RAM
+- *                  for the BIOS ACPI tables and other BIOS
+- *                  datastructures.
+  * @gigabyte_align: Make sure that guest addresses aligned at
+  *                  1Gbyte boundaries get mapped to host
+  *                  addresses aligned at 1Gbyte boundaries. This
+@@ -100,7 +97,6 @@ struct PCMachineClass {
+ 
+     /* ACPI compat: */
+     bool has_acpi_build;
+-    unsigned acpi_data_size;
+     int pci_root_uid;
+ 
+     /* SMBIOS compat: */
 diff --git a/hw/i386/pc.c b/hw/i386/pc.c
-index 9ba21b9967..633724f177 100644
+index 2e2146f42b..0be8f08c47 100644
 --- a/hw/i386/pc.c
 +++ b/hw/i386/pc.c
-@@ -1377,8 +1377,7 @@ static void pc_hv_balloon_pre_plug(HotplugHandler *hotplug_dev,
+@@ -256,6 +256,16 @@ GlobalProperty pc_compat_2_4[] = {
+ };
+ const size_t pc_compat_2_4_len = G_N_ELEMENTS(pc_compat_2_4);
+ 
++/*
++ * @PC_ACPI_DATA_SIZE:
++ * Size of the chunk of memory at the top of RAM for the BIOS ACPI tables
++ * and other BIOS datastructures.
++ *
++ * BIOS ACPI tables: 128K. Other BIOS datastructures: less than 4K
++ * reported to be used at the moment, 32K should be enough for a while.
++ */
++#define PC_ACPI_DATA_SIZE (0x20000 + 0x8000)
++
+ GSIState *pc_gsi_create(qemu_irq **irqs, bool pci_enabled)
  {
-     /* The vmbus handler has no hotplug handler; we should never end up here. */
-     g_assert(!dev->hotplugged);
--    memory_device_pre_plug(MEMORY_DEVICE(dev), MACHINE(hotplug_dev), NULL,
--                           errp);
-+    memory_device_pre_plug(MEMORY_DEVICE(dev), MACHINE(hotplug_dev), errp);
- }
+     GSIState *s;
+@@ -634,8 +644,7 @@ void xen_load_linux(PCMachineState *pcms)
+     fw_cfg_add_i16(fw_cfg, FW_CFG_NB_CPUS, x86ms->boot_cpus);
+     rom_set_fw(fw_cfg);
  
- static void pc_hv_balloon_plug(HotplugHandler *hotplug_dev,
-diff --git a/hw/mem/memory-device.c b/hw/mem/memory-device.c
-index e098585cda..a5f279adcc 100644
---- a/hw/mem/memory-device.c
-+++ b/hw/mem/memory-device.c
-@@ -345,7 +345,7 @@ uint64_t get_plugged_memory_size(void)
- }
- 
- void memory_device_pre_plug(MemoryDeviceState *md, MachineState *ms,
--                            const uint64_t *legacy_align, Error **errp)
-+                            Error **errp)
- {
-     const MemoryDeviceClass *mdc = MEMORY_DEVICE_GET_CLASS(md);
-     Error *local_err = NULL;
-@@ -388,14 +388,10 @@ void memory_device_pre_plug(MemoryDeviceState *md, MachineState *ms,
-         return;
+-    x86_load_linux(x86ms, fw_cfg, pcmc->acpi_data_size,
+-                   pcmc->pvh_enabled);
++    x86_load_linux(x86ms, fw_cfg, PC_ACPI_DATA_SIZE, pcmc->pvh_enabled);
+     for (i = 0; i < nb_option_roms; i++) {
+         assert(!strcmp(option_rom[i].name, "linuxboot.bin") ||
+                !strcmp(option_rom[i].name, "linuxboot_dma.bin") ||
+@@ -969,8 +978,7 @@ void pc_memory_init(PCMachineState *pcms,
      }
  
--    if (legacy_align) {
--        align = *legacy_align;
--    } else {
--        if (mdc->get_min_alignment) {
--            align = mdc->get_min_alignment(md);
--        }
--        align = MAX(align, memory_region_get_alignment(mr));
-+    if (mdc->get_min_alignment) {
-+        align = mdc->get_min_alignment(md);
+     if (linux_boot) {
+-        x86_load_linux(x86ms, fw_cfg, pcmc->acpi_data_size,
+-                       pcmc->pvh_enabled);
++        x86_load_linux(x86ms, fw_cfg, PC_ACPI_DATA_SIZE, pcmc->pvh_enabled);
      }
-+    align = MAX(align, memory_region_get_alignment(mr));
-     addr = mdc->get_addr(md);
-     addr = memory_device_get_free_addr(ms, !addr ? NULL : &addr, align,
-                                        memory_region_size(mr), &local_err);
-diff --git a/hw/mem/pc-dimm.c b/hw/mem/pc-dimm.c
-index 836384a90f..27919ca45d 100644
---- a/hw/mem/pc-dimm.c
-+++ b/hw/mem/pc-dimm.c
-@@ -69,7 +69,7 @@ void pc_dimm_pre_plug(PCDIMMDevice *dimm, MachineState *machine, Error **errp)
-                             &error_abort);
-     trace_mhp_pc_dimm_assigned_slot(slot);
  
--    memory_device_pre_plug(MEMORY_DEVICE(dimm), machine, NULL, errp);
-+    memory_device_pre_plug(MEMORY_DEVICE(dimm), machine, errp);
- }
- 
- void pc_dimm_plug(PCDIMMDevice *dimm, MachineState *machine)
-diff --git a/hw/virtio/virtio-md-pci.c b/hw/virtio/virtio-md-pci.c
-index 62bfb7920b..9ec5067662 100644
---- a/hw/virtio/virtio-md-pci.c
-+++ b/hw/virtio/virtio-md-pci.c
-@@ -37,7 +37,7 @@ void virtio_md_pci_pre_plug(VirtIOMDPCI *vmd, MachineState *ms, Error **errp)
-      * First, see if we can plug this memory device at all. If that
-      * succeeds, branch of to the actual hotplug handler.
-      */
--    memory_device_pre_plug(md, ms, NULL, &local_err);
-+    memory_device_pre_plug(md, ms, &local_err);
-     if (!local_err && bus_handler) {
-         hotplug_handler_pre_plug(bus_handler, dev, &local_err);
-     }
+     for (i = 0; i < nb_option_roms; i++) {
+@@ -1724,9 +1732,6 @@ static void pc_machine_class_init(ObjectClass *oc, void *data)
+     pcmc->gigabyte_align = true;
+     pcmc->has_reserved_memory = true;
+     pcmc->enforce_amd_1tb_hole = true;
+-    /* BIOS ACPI tables: 128K. Other BIOS datastructures: less than 4K reported
+-     * to be used at the moment, 32K should be enough for a while.  */
+-    pcmc->acpi_data_size = 0x20000 + 0x8000;
+     pcmc->pvh_enabled = true;
+     pcmc->kvmclock_create_always = true;
+     x86mc->apic_xrupt_override = true;
 -- 
 2.41.0
 
