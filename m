@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 186DBC4345F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Apr 2024 19:01:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF2A8C4345F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Apr 2024 19:02:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rwo3R-0001je-Ky; Tue, 16 Apr 2024 15:01:17 -0400
+	id 1rwo3R-0001jh-PS; Tue, 16 Apr 2024 15:01:17 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwo3Q-0001et-2i
- for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 15:01:16 -0400
-Received: from mail-ed1-x52d.google.com ([2a00:1450:4864:20::52d])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwo3A-0001EW-RB
+ for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 15:01:01 -0400
+Received: from mail-ej1-x62f.google.com ([2a00:1450:4864:20::62f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwo3L-0005jx-O4
- for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 15:01:15 -0400
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-56e1bbdb362so5257374a12.1
- for <qemu-riscv@nongnu.org>; Tue, 16 Apr 2024 12:01:11 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwo35-0005f8-2a
+ for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 15:01:00 -0400
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-a5224dfa9adso14335266b.0
+ for <qemu-riscv@nongnu.org>; Tue, 16 Apr 2024 12:00:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713294069; x=1713898869; darn=nongnu.org;
+ d=linaro.org; s=google; t=1713294036; x=1713898836; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oke/YPM4C6ufallz55sQ7YyPAmP6LUvQ2Lhm6MsGGjM=;
- b=oZjhGlXG14ViE1tEmhme88dNqZQUqkTSwbFsWKryVvfrh0aSYMKWgFDMOym9FSmI3g
- VsRsBBGopH/lE0mIW5ITAKmOlTV3ju01IKjdkLYwK2W3XYWa1IxQX6hWlgXZgMtLaWPK
- qbZ/dkjdFOJMMTCEJSdsDP4hQkAeWmei68FuLfKF1pUHf1CYc0wvqzHx0Gn7rdv9TpI9
- HkBj2GHxeRk6k+7kKq5JSolI6ETHY0bKTX5nv7aj3PgOoA+quwM9w4or7dXFX9CK5Mc8
- S1obqnYBWqtbqBK9AtZoczABzaN7JlcHpcLDAP6eXKK1LEDsM2O0Phw4WOKJ8XlbQ+sJ
- f6Iw==
+ bh=oIsya0WjT//mE9jDUk5oKmf9DZYf6HHN1KydCpfDiGI=;
+ b=Umg76F8hOIX+SZVmQQQQoW4/Gvz/cq30j6V894aekvCrGT+xwdU51J4QSyopM08LAz
+ mYeeeb8JiEvVHTkznSHiqrrdt4lVQw6kJXONCkvIcZeBE96BhlHorNe4sIxa6QI6fvef
+ oq/ijMC3WYiyGU7Q/NpOWAtDUgQvYvZ7tHzdOn05iSzEKHClztrMRE4rUlPR6VYHQkOf
+ w1KHLqrfaydjPHavIRf2XX/blyIZT9uMV1Vg5Jm/lMj9nhPnM3tZf/fLSoNDH39GAMdO
+ HG5Lpcw8LzplS37fSbLCl00rrLqQSxrSdcfNH8kjTIlMO8PxTT7f/piynQsfD49uIcNk
+ Usig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713294069; x=1713898869;
+ d=1e100.net; s=20230601; t=1713294036; x=1713898836;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oke/YPM4C6ufallz55sQ7YyPAmP6LUvQ2Lhm6MsGGjM=;
- b=Mx3bzWIwP7XdTH1itWD5dTS5sNxNLG+p4rNQ9/zU1A5v5aTulCGANWgz5BKobklRdb
- 3w3cG20eDg1CM0KeYofJxx+RnLqOT0aa4CPs209OHRstp3JC7z2MQrjHQmF+k1Cj5l4c
- n71zi7xqXqxSw9kOs1aJcP9wloOxAsD7N7ojaUVrKf4p8tKuvhsGdA1iDFIJlo7NNkk/
- X07dbKr+GTIEEl6FDv1+2s2bFnnmCOlzpU9HxSIwYXv+84+N6KClxYK41C2iT5vweIwG
- 1aRnNxu2JW1nwa5JxELpeo2rDmQs5M1M0JUrGSz4GsQNp2+RVGrWGmELZvXwYa7Kz576
- 1cBw==
+ bh=oIsya0WjT//mE9jDUk5oKmf9DZYf6HHN1KydCpfDiGI=;
+ b=T2eECoCAt3kE9l4AyXWGI1WMJT6TWWPfXl1GB0TYY0KcFMsjTaVJNVHSY34f4+WMBX
+ SuM7AgRSvq+2+gTIVTdqF+BW+HrfubDZYwKxDM+ZRa4wC1UIByvi8onxvEK2Dbc5szes
+ LHeFWSw8iSdQFyZOHaf3T/YNGuOL7fLLDPkJviUgLbLlqWKOTqa+oTp5mjplwkhJ+7BE
+ nVLTcGzVof+J6B4XXxnuevRSbGZkQkqT7QOC0oUJ/ovu/EFOf1kjRQg0iejWRjcpBC3M
+ WjEXDHtYAy/+71mtKRxIBpEP8cmN0w9RwkWNFzsrALbO/LPLTlQAep0Lp8wt3/RyzN/f
+ 013g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWgnpuubp5sVWSwpcScxiObeDbHDgf6n3Qyh18Khd75m/GjQCbsBIcIPuLwEvXz5/GUm217IBIA00UsdQl4BlKN9stNDus=
-X-Gm-Message-State: AOJu0YwF5ErPEGHwbg6kZgT/+RGwkneyvPgBoi9x5cpsW3t8XYtRsuho
- GhjI2yzzlNRP0MZupHMuPhgf8IVHdv+oaYjPhL8+CS6I+YhBHrE5azjXnPLDDGQ=
-X-Google-Smtp-Source: AGHT+IHmlskYJ8/Hu0VI1tAvRagZD8+jRbz02VBA+zLU6IYfCB3uVa1UfcKarXuuTqhkhann3c3ikw==
-X-Received: by 2002:a17:906:ae8c:b0:a52:6fca:eb57 with SMTP id
- md12-20020a170906ae8c00b00a526fcaeb57mr4613401ejb.45.1713294069046; 
- Tue, 16 Apr 2024 12:01:09 -0700 (PDT)
+ AJvYcCVY2Accpf/KBHDXbQPj81oDJluhalkr1YtXNNKnwpWw3DlmweeZdMgUCi24DqZ6fwbgii+NtgpEB8FZmkMdZ+gV9crTnDQ=
+X-Gm-Message-State: AOJu0Yx6LMs7QbyiB4jAx1BzYLKdWVgcyxs3M/AX/Ix6PFp/trabmiKF
+ mkGwiEFkyNozJ/9YwvseZYbeVNhzkP9vHnf0gBRShdY5Vt5q9ESPBBk/zculr5Q=
+X-Google-Smtp-Source: AGHT+IFDj5d7VWVz7q+k1CBxU1v/RoV6oF6KH+CKP4bBoCQ0TNhAr4e1atOn0sNoC+sKrGpdObJJKw==
+X-Received: by 2002:a17:906:b259:b0:a52:6b76:c722 with SMTP id
+ ce25-20020a170906b25900b00a526b76c722mr3094545ejb.9.1713294035957; 
+ Tue, 16 Apr 2024 12:00:35 -0700 (PDT)
 Received: from m1x-phil.lan ([176.176.155.61])
  by smtp.gmail.com with ESMTPSA id
- jz1-20020a17090775e100b00a526457fc84sm3564186ejc.57.2024.04.16.12.01.06
+ bv13-20020a170906b1cd00b00a51a9d87570sm7266186ejb.17.2024.04.16.12.00.33
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 16 Apr 2024 12:01:08 -0700 (PDT)
+ Tue, 16 Apr 2024 12:00:35 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org,
 	Thomas Huth <thuth@redhat.com>
@@ -66,24 +66,21 @@ Cc: "Michael S. Tsirkin" <mst@redhat.com>, qemu-riscv@nongnu.org,
  kvm@vger.kernel.org, qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
  Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Zhao Liu <zhao1.liu@intel.com>,
+ Zhao Liu <zhao1.liu@intel.com>, devel@lists.libvirt.org,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  Richard Henderson <richard.henderson@linaro.org>,
- Eduardo Habkost <eduardo@habkost.net>, Cleber Rosa <crosa@redhat.com>,
- Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Beraldo Leal <bleal@redhat.com>
-Subject: [PATCH v4 13/22] hw/i386/pc: Remove
- PCMachineClass::enforce_aligned_dimm
-Date: Tue, 16 Apr 2024 20:59:29 +0200
-Message-ID: <20240416185939.37984-14-philmd@linaro.org>
+ Eduardo Habkost <eduardo@habkost.net>
+Subject: [PATCH v4 08/22] hw/i386/pc: Remove deprecated pc-i440fx-2.1 machine
+Date: Tue, 16 Apr 2024 20:59:24 +0200
+Message-ID: <20240416185939.37984-9-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240416185939.37984-1-philmd@linaro.org>
 References: <20240416185939.37984-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::52d;
- envelope-from=philmd@linaro.org; helo=mail-ed1-x52d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62f;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x62f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -106,116 +103,128 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-PCMachineClass::enforce_aligned_dimm was only used by the
-pc-i440fx-2.1 machine, which got removed. It is now always
-true. Remove it, simplifying pc_get_device_memory_range().
-Update the comment in Avocado test_phybits_low_pse36().
+The pc-i440fx-2.1 machine was deprecated for the 8.2
+release (see commit c7437f0ddb "docs/about: Mark the
+old pc-i440fx-2.0 - 2.3 machine types as deprecated"),
+time to remove it.
 
-Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Thomas Huth <thuth@redhat.com>
+Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- include/hw/i386/pc.h                  |  3 ---
- hw/i386/pc.c                          | 14 +++-----------
- tests/avocado/mem-addr-space-check.py |  9 ++++-----
- 3 files changed, 7 insertions(+), 19 deletions(-)
+ docs/about/deprecated.rst       |  2 +-
+ docs/about/removed-features.rst |  2 +-
+ include/hw/i386/pc.h            |  3 ---
+ hw/i386/pc.c                    |  7 -------
+ hw/i386/pc_piix.c               | 23 -----------------------
+ 5 files changed, 2 insertions(+), 35 deletions(-)
 
+diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
+index b09ae3d55d..a2a1b9d337 100644
+--- a/docs/about/deprecated.rst
++++ b/docs/about/deprecated.rst
+@@ -219,7 +219,7 @@ deprecated; use the new name ``dtb-randomness`` instead. The new name
+ better reflects the way this property affects all random data within
+ the device tree blob, not just the ``kaslr-seed`` node.
+ 
+-``pc-i440fx-2.1`` up to ``pc-i440fx-2.3`` (since 8.2) and ``pc-i440fx-2.4`` up to ``pc-i440fx-2.12`` (since 9.1)
++``pc-i440fx-2.2`` up to ``pc-i440fx-2.3`` (since 8.2) and ``pc-i440fx-2.4`` up to ``pc-i440fx-2.12`` (since 9.1)
+ ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+ 
+ These old machine types are quite neglected nowadays and thus might have
+diff --git a/docs/about/removed-features.rst b/docs/about/removed-features.rst
+index 51119e623f..01c55103d3 100644
+--- a/docs/about/removed-features.rst
++++ b/docs/about/removed-features.rst
+@@ -816,7 +816,7 @@ mips ``fulong2e`` machine alias (removed in 6.0)
+ 
+ This machine has been renamed ``fuloong2e``.
+ 
+-``pc-0.10`` up to ``pc-i440fx-2.0`` (removed in 4.0 up to 9.0)
++``pc-0.10`` up to ``pc-i440fx-2.1`` (removed in 4.0 up to 9.0)
+ ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+ 
+ These machine types were very old and likely could not be used for live
 diff --git a/include/hw/i386/pc.h b/include/hw/i386/pc.h
-index c2d9af36b2..231aae92ed 100644
+index 4ad724601a..b528f17904 100644
 --- a/include/hw/i386/pc.h
 +++ b/include/hw/i386/pc.h
-@@ -74,8 +74,6 @@ typedef struct PCMachineState {
-  *
-  * Compat fields:
-  *
-- * @enforce_aligned_dimm: check that DIMM's address/size is aligned by
-- *                        backend's alignment value if provided
-  * @acpi_data_size: Size of the chunk of memory at the top of RAM
-  *                  for the BIOS ACPI tables and other BIOS
-  *                  datastructures.
-@@ -114,7 +112,6 @@ struct PCMachineClass {
-     /* RAM / address space compat: */
-     bool gigabyte_align;
-     bool has_reserved_memory;
--    bool enforce_aligned_dimm;
-     bool broken_reserved_end;
-     bool enforce_amd_1tb_hole;
+@@ -281,9 +281,6 @@ extern const size_t pc_compat_2_3_len;
+ extern GlobalProperty pc_compat_2_2[];
+ extern const size_t pc_compat_2_2_len;
  
+-extern GlobalProperty pc_compat_2_1[];
+-extern const size_t pc_compat_2_1_len;
+-
+ #define DEFINE_PC_MACHINE(suffix, namestr, initfn, optsfn) \
+     static void pc_machine_##suffix##_class_init(ObjectClass *oc, void *data) \
+     { \
 diff --git a/hw/i386/pc.c b/hw/i386/pc.c
-index 2bf1bfd5b2..c7bfdfc1e1 100644
+index 172814f604..cd6335d6b4 100644
 --- a/hw/i386/pc.c
 +++ b/hw/i386/pc.c
-@@ -716,7 +716,6 @@ static void pc_get_device_memory_range(PCMachineState *pcms,
-                                        hwaddr *base,
-                                        ram_addr_t *device_mem_size)
+@@ -304,13 +304,6 @@ GlobalProperty pc_compat_2_2[] = {
+ };
+ const size_t pc_compat_2_2_len = G_N_ELEMENTS(pc_compat_2_2);
+ 
+-GlobalProperty pc_compat_2_1[] = {
+-    PC_CPU_MODEL_IDS("2.1.0")
+-    { "coreduo" "-" TYPE_X86_CPU, "vmx", "on" },
+-    { "core2duo" "-" TYPE_X86_CPU, "vmx", "on" },
+-};
+-const size_t pc_compat_2_1_len = G_N_ELEMENTS(pc_compat_2_1);
+-
+ GSIState *pc_gsi_create(qemu_irq **irqs, bool pci_enabled)
  {
--    PCMachineClass *pcmc = PC_MACHINE_GET_CLASS(pcms);
-     MachineState *machine = MACHINE(pcms);
-     ram_addr_t size;
-     hwaddr addr;
-@@ -724,10 +723,8 @@ static void pc_get_device_memory_range(PCMachineState *pcms,
-     size = machine->maxram_size - machine->ram_size;
-     addr = ROUND_UP(pc_above_4g_end(pcms), 1 * GiB);
+     GSIState *s;
+diff --git a/hw/i386/pc_piix.c b/hw/i386/pc_piix.c
+index 9e1bca7b17..dcf50684a4 100644
+--- a/hw/i386/pc_piix.c
++++ b/hw/i386/pc_piix.c
+@@ -66,7 +66,6 @@
+ #include "hw/hyperv/vmbus-bridge.h"
+ #include "hw/mem/nvdimm.h"
+ #include "hw/i386/acpi-build.h"
+-#include "kvm/kvm-cpu.h"
+ #include "target/i386/cpu.h"
  
--    if (pcmc->enforce_aligned_dimm) {
--        /* size device region assuming 1G page max alignment per slot */
--        size += (1 * GiB) * machine->ram_slots;
--    }
-+    /* size device region assuming 1G page max alignment per slot */
-+    size += (1 * GiB) * machine->ram_slots;
- 
-     *base = addr;
-     *device_mem_size = size;
-@@ -1285,12 +1282,9 @@ void pc_i8259_create(ISABus *isa_bus, qemu_irq *i8259_irqs)
- static void pc_memory_pre_plug(HotplugHandler *hotplug_dev, DeviceState *dev,
-                                Error **errp)
- {
--    const PCMachineState *pcms = PC_MACHINE(hotplug_dev);
-     const X86MachineState *x86ms = X86_MACHINE(hotplug_dev);
--    const PCMachineClass *pcmc = PC_MACHINE_GET_CLASS(pcms);
-     const MachineState *ms = MACHINE(hotplug_dev);
-     const bool is_nvdimm = object_dynamic_cast(OBJECT(dev), TYPE_NVDIMM);
--    const uint64_t legacy_align = TARGET_PAGE_SIZE;
-     Error *local_err = NULL;
- 
-     /*
-@@ -1315,8 +1309,7 @@ static void pc_memory_pre_plug(HotplugHandler *hotplug_dev, DeviceState *dev,
-         return;
-     }
- 
--    pc_dimm_pre_plug(PC_DIMM(dev), MACHINE(hotplug_dev),
--                     pcmc->enforce_aligned_dimm ? NULL : &legacy_align, errp);
-+    pc_dimm_pre_plug(PC_DIMM(dev), MACHINE(hotplug_dev), NULL, errp);
+ #define XEN_IOAPIC_NUM_PIRQS 128ULL
+@@ -435,12 +434,6 @@ static void pc_compat_2_2_fn(MachineState *machine)
+     pc_compat_2_3_fn(machine);
  }
  
- static void pc_memory_plug(HotplugHandler *hotplug_dev,
-@@ -1780,7 +1773,6 @@ static void pc_machine_class_init(ObjectClass *oc, void *data)
-     pcmc->smbios_defaults = true;
-     pcmc->gigabyte_align = true;
-     pcmc->has_reserved_memory = true;
--    pcmc->enforce_aligned_dimm = true;
-     pcmc->enforce_amd_1tb_hole = true;
-     /* BIOS ACPI tables: 128K. Other BIOS datastructures: less than 4K reported
-      * to be used at the moment, 32K should be enough for a while.  */
-diff --git a/tests/avocado/mem-addr-space-check.py b/tests/avocado/mem-addr-space-check.py
-index af019969c0..85541ea051 100644
---- a/tests/avocado/mem-addr-space-check.py
-+++ b/tests/avocado/mem-addr-space-check.py
-@@ -31,11 +31,10 @@ def test_phybits_low_pse36(self):
-         at 4 GiB boundary when "above_4g_mem_size" is 0 (this would be true when
-         we have 0.5 GiB of VM memory, see pc_q35_init()). This means total
-         hotpluggable memory size is 60 GiB. Per slot, we reserve 1 GiB of memory
--        for dimm alignment for all newer machines (see enforce_aligned_dimm
--        property for pc machines and pc_get_device_memory_range()). That leaves
--        total hotpluggable actual memory size of 59 GiB. If the VM is started
--        with 0.5 GiB of memory, maxmem should be set to a maximum value of
--        59.5 GiB to ensure that the processor can address all memory directly.
-+        for dimm alignment for all machines. That leaves total hotpluggable
-+        actual memory size of 59 GiB. If the VM is started with 0.5 GiB of
-+        memory, maxmem should be set to a maximum value of 59.5 GiB to ensure
-+        that the processor can address all memory directly.
-         Note that 64-bit pci hole size is 0 in this case. If maxmem is set to
-         59.6G, QEMU should fail to start with a message "phy-bits are too low".
-         If maxmem is set to 59.5G with all other QEMU parameters identical, QEMU
+-static void pc_compat_2_1_fn(MachineState *machine)
+-{
+-    pc_compat_2_2_fn(machine);
+-    x86_cpu_change_kvm_default("svm", NULL);
+-}
+-
+ #ifdef CONFIG_ISAPC
+ static void pc_init_isa(MachineState *machine)
+ {
+@@ -851,22 +844,6 @@ static void pc_i440fx_2_2_machine_options(MachineClass *m)
+ DEFINE_I440FX_MACHINE(v2_2, "pc-i440fx-2.2", pc_compat_2_2_fn,
+                       pc_i440fx_2_2_machine_options);
+ 
+-static void pc_i440fx_2_1_machine_options(MachineClass *m)
+-{
+-    PCMachineClass *pcmc = PC_MACHINE_CLASS(m);
+-
+-    pc_i440fx_2_2_machine_options(m);
+-    m->hw_version = "2.1.0";
+-    m->default_display = NULL;
+-    compat_props_add(m->compat_props, hw_compat_2_1, hw_compat_2_1_len);
+-    compat_props_add(m->compat_props, pc_compat_2_1, pc_compat_2_1_len);
+-    pcmc->smbios_uuid_encoded = false;
+-    pcmc->enforce_aligned_dimm = false;
+-}
+-
+-DEFINE_I440FX_MACHINE(v2_1, "pc-i440fx-2.1", pc_compat_2_1_fn,
+-                      pc_i440fx_2_1_machine_options);
+-
+ #ifdef CONFIG_ISAPC
+ static void isapc_machine_options(MachineClass *m)
+ {
 -- 
 2.41.0
 
