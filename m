@@ -4,60 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91702C4345F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Apr 2024 13:56:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA172C4345F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Apr 2024 13:56:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rwjG6-0002PH-GQ; Tue, 16 Apr 2024 09:54:02 -0400
+	id 1rwjGQ-0003Ma-Ln; Tue, 16 Apr 2024 09:54:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwjG3-0002IR-BJ
- for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 09:53:59 -0400
-Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwjGJ-000307-HO
+ for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 09:54:16 -0400
+Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwjFz-0001pG-6s
- for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 09:53:58 -0400
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-56e56ee8d5cso5769590a12.2
- for <qemu-riscv@nongnu.org>; Tue, 16 Apr 2024 06:53:54 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwjGH-0001s3-RI
+ for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 09:54:15 -0400
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-56e2c1650d8so4418190a12.0
+ for <qemu-riscv@nongnu.org>; Tue, 16 Apr 2024 06:54:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713275633; x=1713880433; darn=nongnu.org;
+ d=linaro.org; s=google; t=1713275652; x=1713880452; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=WRu6gIdKkp2mUDaWmMaxQTExs6byim7bx/MfazoYUmc=;
- b=a3ValaZfVsRt7AwaNcsfIdK/zd28l8JepYU5QBjoQr7ndWkReNfvvi0Z9xJ2P21GHa
- V2CVxp1GOZ+kViB6F7Jfo+vhsCjEFsDK2I6F6izQoGQkcSLIZTyysdCbQ3b/FNq4kUqr
- X8IZTEkTTpy6U7hQcP2TT9v0irx4lnU1WGN/dLqLSFtqBz49riuIY6D1BfrePSFzKDGZ
- 97EGjNpX+MlK/qBv0O9GsidReP1N7Gh3f+W/sANGYIukSFTEdR4qu04W6IlpMtX5nbCi
- DPvIwSngd1wk48sGtKiV9havaz/X9qq8C8O1SmK6T38G9LAtAn30dc3YeJ2GeGl2V46G
- uVQA==
+ bh=xnRVHCDouTA+5HlMl31thguywp3whz3Nvn7kAUajqzI=;
+ b=NkqQ9jYU5x+proCeNpNSj+Iw2v6xVxmdRZE2io4XmOHGo9Pd9R8Rpiln98sql+8FwQ
+ ZypMYyquyscF/aTKvpxc0MF1DoNJBji6wnEE+lM2yvg6VdAtNSveM+iKviDAu7724YGi
+ 5QCAKimMWQyeWVIljaHTzxmh51xLkDJmC+wOmHLwfIpM3PtvBkJiXbvtcf/k0J4EPfkm
+ pzv5b17vTsAzd8UBgHIuALUPC5d3TiORz+LN6AC0DDrcHr9kGnZ6zor7Gpf84Wp5tZ4K
+ 4BFrsXeErVUnetyDtivoIrh6FukngierXR7hkET+wM0Tkwzho6BdCkMw/6vUZkcA7mWo
+ rWVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713275633; x=1713880433;
+ d=1e100.net; s=20230601; t=1713275652; x=1713880452;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=WRu6gIdKkp2mUDaWmMaxQTExs6byim7bx/MfazoYUmc=;
- b=msiBEGJD/+0d8Tem647NbaJoZH9/b9wZgcCM23/1ZbxJiW5koj0BsdA30eQcdEbvwg
- TLkKoiUaTrBpX/2hhYeHCXc+FVWA2ubtyhtNca4uD7eTb00aRMmTjZhFpbSAZKx7qBeA
- 9NJ1H2riNmEcXLMq1kPilDk5VSZrJlBkI2hejDk3UOmPwSBO6Vl7ToCINrht0buRxjS+
- hQoo5IbyesGLp3Pr10308ChgR88Dr+QRK0A7/bnR+LjNFgq/rcrPHIBg6OwZ1MHYlwRR
- L4M8Yexk6EdwAvJajxhZihnKQWFInq3onWEDqShC46doNhf+cyFlweU+UMkGbpBsEeXo
- GEOg==
+ bh=xnRVHCDouTA+5HlMl31thguywp3whz3Nvn7kAUajqzI=;
+ b=UYxRpg/7RxRoXb6EpvoBIjFQv/WYK+76yLUO986RDTi6k/PFgsKXNsH37TF2QnwMSK
+ ymN+nH1OAYzU9jaSWBEkPzG1ZAntaAKihmfSouLGkHUpTveBk41qkcvYxnsRtubpFsFS
+ wQkn9+aBqzh4tuKxF8/m6Vr0k0sqOENKk6eqjQ3u5D4JXoIENO0JdYTvt2npf9Rppxni
+ 5uq+/lO2MiUz/KjLxh3igCN1r4QgZMTtE2O4mk3qYl1gRrWCxhviqsjYIuGMyZ4v/2b8
+ lWC8sEh7aRPeiMMtLlHtOr8piOY51P+y+aFKjt2fsFFwVsR7AjD1PlBrCWGG+dKLEDET
+ BRew==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUnm9nsE8jd/ZwstQhD/HBMdDFp9xqduUsyxVQPMXT6hIv6HO9aAAzXZyoMJQ/mhF+EZY1STImVqlZuK+4wYyPjLuxsJ9A=
-X-Gm-Message-State: AOJu0Yz84+x0m+ZOx4GZ6yu51l8JSJZajHbuTmNQln0aMU7GJUVPKE5t
- 6d0/v9JhJozt9FtIIyGsgiQ+g7eFkP77qo3RVST32tIal5/9HTxxYH2fG5Jnvm0=
-X-Google-Smtp-Source: AGHT+IGEkV4NtWFwS7smQ8etZfExDim57HWSMuEPad1Ashde9/8qRGKDeoK0TUptFcJYLEy24Oqhkg==
-X-Received: by 2002:a50:9545:0:b0:570:1de9:4cd7 with SMTP id
- v5-20020a509545000000b005701de94cd7mr6143993eda.15.1713275633197; 
- Tue, 16 Apr 2024 06:53:53 -0700 (PDT)
+ AJvYcCX/bn3l1mQwHrkRZLWvokiZYCLQjK6fFn4QXTmSkItd67qSfhVi/YD1tPYdynon9sDOtTtMpCscid/ukWIknH+p8TM6ogw=
+X-Gm-Message-State: AOJu0YxZLcxk1IW99uyRZJheR09Ilrp3qtTKlfoqoELSWxp3hO4QZIS5
+ mwJRg7Aqr5Kee5aLotu6uDtXpFsYhJR+2AC4lPRQR7Eqt3guSRvbgsqKBJAx7S9EHKnsNgmdJUJ
+ V
+X-Google-Smtp-Source: AGHT+IFhG4L3gtH69a1y/FdVwHzVlnymk2JnoSWQL//ktYw6Ci8bSUiIFfJZsqtAUnQlxka7xmRipw==
+X-Received: by 2002:a50:9ec8:0:b0:568:32cc:f808 with SMTP id
+ a66-20020a509ec8000000b0056832ccf808mr8400333edf.15.1713275652383; 
+ Tue, 16 Apr 2024 06:54:12 -0700 (PDT)
 Received: from m1x-phil.lan ([176.176.155.61])
  by smtp.gmail.com with ESMTPSA id
- n13-20020a05640206cd00b005704ae9272dsm240052edy.93.2024.04.16.06.53.51
+ fi11-20020a056402550b00b00570498c622asm375182edb.66.2024.04.16.06.54.10
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 16 Apr 2024 06:53:52 -0700 (PDT)
+ Tue, 16 Apr 2024 06:54:12 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org,
 	Thomas Huth <thuth@redhat.com>
@@ -65,20 +66,19 @@ Cc: Ani Sinha <anisinha@redhat.com>, qemu-riscv@nongnu.org,
  qemu-ppc@nongnu.org, Zhao Liu <zhao1.liu@intel.com>,
  David Hildenbrand <david@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
  Igor Mammedov <imammedo@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Marcelo Tosatti <mtosatti@redhat.com>, kvm@vger.kernel.org
-Subject: [PATCH v3 09/22] target/i386/kvm: Remove x86_cpu_change_kvm_default()
- and 'kvm-cpu.h'
-Date: Tue, 16 Apr 2024 15:52:38 +0200
-Message-ID: <20240416135252.8384-10-philmd@linaro.org>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH v3 12/22] hw/smbios: Remove 'smbios_uuid_encoded',
+ simplify smbios_encode_uuid()
+Date: Tue, 16 Apr 2024 15:52:41 +0200
+Message-ID: <20240416135252.8384-13-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240416135252.8384-1-philmd@linaro.org>
 References: <20240416135252.8384-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::531;
- envelope-from=philmd@linaro.org; helo=mail-ed1-x531.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::534;
+ envelope-from=philmd@linaro.org; helo=mail-ed1-x534.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -101,88 +101,42 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-x86_cpu_change_kvm_default() was only used out of kvm-cpu.c by
-the pc-i440fx-2.1 machine, which got removed. Make it static,
-and remove its declaration. "kvm-cpu.h" is now empty, remove it.
+'smbios_encode_uuid' is always true, remove it,
+simplifying smbios_encode_uuid().
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Thomas Huth <thuth@redhat.com>
-Message-Id: <20240305134221.30924-8-philmd@linaro.org>
 Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- target/i386/kvm/kvm-cpu.h | 41 ---------------------------------------
- target/i386/kvm/kvm-cpu.c |  3 +--
- 2 files changed, 1 insertion(+), 43 deletions(-)
- delete mode 100644 target/i386/kvm/kvm-cpu.h
+ hw/smbios/smbios.c | 9 +++------
+ 1 file changed, 3 insertions(+), 6 deletions(-)
 
-diff --git a/target/i386/kvm/kvm-cpu.h b/target/i386/kvm/kvm-cpu.h
-deleted file mode 100644
-index e858ca21e5..0000000000
---- a/target/i386/kvm/kvm-cpu.h
-+++ /dev/null
-@@ -1,41 +0,0 @@
--/*
-- * i386 KVM CPU type and functions
-- *
-- *  Copyright (c) 2003 Fabrice Bellard
-- *
-- * This library is free software; you can redistribute it and/or
-- * modify it under the terms of the GNU Lesser General Public
-- * License as published by the Free Software Foundation; either
-- * version 2 of the License, or (at your option) any later version.
-- *
-- * This library is distributed in the hope that it will be useful,
-- * but WITHOUT ANY WARRANTY; without even the implied warranty of
-- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-- * Lesser General Public License for more details.
-- *
-- * You should have received a copy of the GNU Lesser General Public
-- * License along with this library; if not, see <http://www.gnu.org/licenses/>.
-- */
--
--#ifndef KVM_CPU_H
--#define KVM_CPU_H
--
--#ifdef CONFIG_KVM
--/*
-- * Change the value of a KVM-specific default
-- *
-- * If value is NULL, no default will be set and the original
-- * value from the CPU model table will be kept.
-- *
-- * It is valid to call this function only for properties that
-- * are already present in the kvm_default_props table.
-- */
--void x86_cpu_change_kvm_default(const char *prop, const char *value);
--
--#else /* !CONFIG_KVM */
--
--#define x86_cpu_change_kvm_default(a, b)
--
--#endif /* CONFIG_KVM */
--
--#endif /* KVM_CPU_H */
-diff --git a/target/i386/kvm/kvm-cpu.c b/target/i386/kvm/kvm-cpu.c
-index 9c791b7b05..cb8c73d20c 100644
---- a/target/i386/kvm/kvm-cpu.c
-+++ b/target/i386/kvm/kvm-cpu.c
-@@ -10,7 +10,6 @@
- #include "qemu/osdep.h"
- #include "cpu.h"
- #include "host-cpu.h"
--#include "kvm-cpu.h"
- #include "qapi/error.h"
- #include "sysemu/sysemu.h"
- #include "hw/boards.h"
-@@ -144,7 +143,7 @@ static PropValue kvm_default_props[] = {
+diff --git a/hw/smbios/smbios.c b/hw/smbios/smbios.c
+index 8261eb716f..3b7703489d 100644
+--- a/hw/smbios/smbios.c
++++ b/hw/smbios/smbios.c
+@@ -30,7 +30,6 @@
+ #include "hw/pci/pci_device.h"
+ #include "smbios_build.h"
+ 
+-static const bool smbios_uuid_encoded = true;
  /*
-  * Only for builtin_x86_defs models initialized with x86_register_cpudef_types.
+  * SMBIOS tables provided by user with '-smbios file=<foo>' option
   */
--void x86_cpu_change_kvm_default(const char *prop, const char *value)
-+static void x86_cpu_change_kvm_default(const char *prop, const char *value)
+@@ -600,11 +599,9 @@ static void smbios_build_type_0_table(void)
+ static void smbios_encode_uuid(struct smbios_uuid *uuid, QemuUUID *in)
  {
-     PropValue *pv;
-     for (pv = kvm_default_props; pv->prop; pv++) {
+     memcpy(uuid, in, 16);
+-    if (smbios_uuid_encoded) {
+-        uuid->time_low = bswap32(uuid->time_low);
+-        uuid->time_mid = bswap16(uuid->time_mid);
+-        uuid->time_hi_and_version = bswap16(uuid->time_hi_and_version);
+-    }
++    uuid->time_low = bswap32(uuid->time_low);
++    uuid->time_mid = bswap16(uuid->time_mid);
++    uuid->time_hi_and_version = bswap16(uuid->time_hi_and_version);
+ }
+ 
+ static void smbios_build_type_1_table(void)
 -- 
 2.41.0
 
