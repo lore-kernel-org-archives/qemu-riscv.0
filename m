@@ -4,78 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9199C4345F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Apr 2024 03:15:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F6A8C4345F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Apr 2024 07:35:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rwZI3-0007an-9Z; Mon, 15 Apr 2024 23:15:23 -0400
+	id 1rwdKj-0004or-JG; Tue, 16 Apr 2024 03:34:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jchan@ventanamicro.com>)
- id 1rwZI1-0007Zt-Uq
- for qemu-riscv@nongnu.org; Mon, 15 Apr 2024 23:15:22 -0400
-Received: from mail-yw1-x112a.google.com ([2607:f8b0:4864:20::112a])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwdKi-0004oP-1K
+ for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 03:34:24 -0400
+Received: from mail-ed1-x52d.google.com ([2a00:1450:4864:20::52d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jchan@ventanamicro.com>)
- id 1rwZHz-0007VT-Ow
- for qemu-riscv@nongnu.org; Mon, 15 Apr 2024 23:15:21 -0400
-Received: by mail-yw1-x112a.google.com with SMTP id
- 00721157ae682-6181237230dso46093467b3.2
- for <qemu-riscv@nongnu.org>; Mon, 15 Apr 2024 20:15:19 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwdKg-0006QW-Bm
+ for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 03:34:23 -0400
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-56e56ee8d5cso5140549a12.2
+ for <qemu-riscv@nongnu.org>; Tue, 16 Apr 2024 00:34:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1713237318; x=1713842118; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=+nSGaMg//toxJD22pXFrX1xGuh8XqJLGmeeuNQ4rios=;
- b=o4rL8LqX8410sFikpA6P5dQcuQHo9MqVz9B2zF3N6UsRDTOYp8K24P8ElbXg0VlpA4
- WszT2sm/HPfOMdHQuTmPjaiem7KPy0BN5qv6HjUYPbtgIaOsHfMz75QlKio+fZiN7TBO
- rGqLA8QZggpk7CyPcvDoAf/hnizQySTOryOVKzSv5Xdvi+5y/Oi7RJ7a7veO6IuF8a0v
- I5wrLxaiAyQym1UrLRnu0YIZ/UZ2IocTYRjVC5aDKFBIDDDWWXdwQEi/USsN2HWY/IYM
- Z2Bn8CuciK9mLmGUcpyOBt0jyldlA7yeFEFbLvdTiRwcH46ESTC99qC34QxKA9QLXcx8
- E9dQ==
+ d=linaro.org; s=google; t=1713252860; x=1713857660; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=7LYAs7izQsVLWruu/9Fs3Ifo3+Ewv93g3NBlVCtDbEk=;
+ b=mNyFbTO9Kmhqj7miHWxXuM6YQavk7EJxdWug61jSwhFRZp1dynv4sWfd3PeyJV27fy
+ JsMpXtNL12d8GlT9Th8kw1RYnrpVub2fBRVfA6mHZ5z8ENLXQ8RZn3jECDyuuWaTyc6Z
+ Q+17tEentqWu9eSoXsyhNHM4zpXt+LojIhyS6u7YTFnxwjEtLimi4gZ2l7zzs+bg+ddA
+ x7Lanc/8pZSOBfwqI7AJta0314r/m+sa2oROMFk27+uECyekbhy/73tcKK42C7vy/luJ
+ L9lrlXqlisqkg+CESq1lwgHsvZzhPQ0SDxGP8c0UlPum0TBkk5b9lpl95vBAaNYhKQCR
+ yOZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713237318; x=1713842118;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=+nSGaMg//toxJD22pXFrX1xGuh8XqJLGmeeuNQ4rios=;
- b=Kj3pk8Bu1pVFEmlrRmxecKunZCZTVJFYyQEUSjulmkiJZjtLvm0cw5566B386AqQRW
- V+CgZH1IxZo0YMcr5rnmTKOY88V3X0F5YgUeyi8IEx8LimHCF6G38MrvwH9kpAkJ1wsu
- BosuTzbayQLm5oJGD2Netl0EPUoR9Con+gjaC4awlJhFNFrwJZvuYs+Iemw4BEY1k8wt
- 1lKV9oYkD0LqdVxYSuxbGpk3e0aug90r1wSJeq4+Pu1Qe+CrHVJ6owzkuRlDnMUoyum6
- rNc9LX6hEE2mXCyf3Q1ygPtAH2cTcn9jw34ObwMPb0UfXQc+sS2vWT4n5Ce4qBlknf8g
- JwNA==
+ d=1e100.net; s=20230601; t=1713252860; x=1713857660;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=7LYAs7izQsVLWruu/9Fs3Ifo3+Ewv93g3NBlVCtDbEk=;
+ b=kBNaL3UsuHK1FtyoUNrBDEu6G/55PKKoExB0aAgaM69BqoJijPnEHfbw/TR+nkRT6s
+ Lxt1FhBRk+4tr8khiIH9aYyie5hCp/QZZZNrRWPLD7jYkXbjdrWMBS3NEwZ8AuUpkriV
+ hjpCddAN9t+PMWbxcFFYj6iHEMKyBfn6Se9RNg7+tCGr9fGwgl9IYSVPsOR3skSqsbtm
+ j4BRY49LZ6XNxXWsDiWDv73PXRNSzi5pBIZqV8sQ3eFZ/XlAX6vteNuC04Ie/fWgelfJ
+ qLvK+ypkjhjqzyx01kigBTtmC4VyGHqf/iHNrkOAWWQIOQoijfiQNT5JlesdSd4b2xO8
+ qw2g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVnxaliaPouhLjw1Z7lqx36MBLrl4xDGTZM0MtG1YtNZJGW2mjaeffodQKH/EOjtajrteES3INv80keqOpY+8+xTG5RykQ=
-X-Gm-Message-State: AOJu0YyDbF/z/RZaaMiDe3WVkPSYjQhOnIHAq4Y5xkimqleGYdk6Lstc
- stGi9p8spZF7REw6SPhWNjrK8CdWfbVC5gR/jVFr5DVdVJd9irdqi0n011DZDkfj9Fi+PQARtVr
- LwdCMtQ0pEVyQAnB+8uq0KGq1mtzW8/cfog3s1A==
-X-Google-Smtp-Source: AGHT+IGrRH3NqQWZSFQyomPxpdHpU+OjqSL3H5I8khvSkiOw6+WBO/a6hV6j6XxKItkzV38urxUTPMNeUVqyGWfpoug=
-X-Received: by 2002:a0d:d596:0:b0:618:36de:a3dc with SMTP id
- x144-20020a0dd596000000b0061836dea3dcmr11890430ywd.28.1713237318238; Mon, 15
- Apr 2024 20:15:18 -0700 (PDT)
+ AJvYcCV9HG1jsILsdSBZpzFfs5PE1t3W8vYBdSB66yrYrXAmGyyOVx6e8n3hnWKOGKheQ5dk3v1FEsL1pg9BzzDDo5BF+FwhqBw=
+X-Gm-Message-State: AOJu0YyxEJEtMbq2JjK+8ftcbjlCwe5aYkFjC+B6oQ6c3T0nYQAVgmqT
+ B4DO91cABDjeD0vJAn+b15+l0B4jn0tVvuj2oeWx2uVEy1RunDTkCWeb5rmcQX8=
+X-Google-Smtp-Source: AGHT+IG9GJ72eqZ1qxi7lrT2Ecp9MNbBfxh/tgIQV98k8ra1Lfko1AUHDQ4Go1r2ZusUlmoILlKBNQ==
+X-Received: by 2002:a50:9b1a:0:b0:56e:2464:7c41 with SMTP id
+ o26-20020a509b1a000000b0056e24647c41mr9143342edi.19.1713252860520; 
+ Tue, 16 Apr 2024 00:34:20 -0700 (PDT)
+Received: from [192.168.69.100] ([176.176.155.61])
+ by smtp.gmail.com with ESMTPSA id
+ d3-20020a056402000300b005702c757af2sm2059791edu.30.2024.04.16.00.34.19
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 16 Apr 2024 00:34:20 -0700 (PDT)
+Message-ID: <17e59f9a-444e-43d3-af02-d036f90a036a@linaro.org>
+Date: Tue, 16 Apr 2024 09:34:17 +0200
 MIME-Version: 1.0
-References: <20240413105929.7030-1-alexei.filippov@syntacore.com>
- <CA+OBw2tScc2Gt+eHy3onTnK8m7XDfjbMVZ7dBoFowq1kL8c7EA@mail.gmail.com>
-In-Reply-To: <CA+OBw2tScc2Gt+eHy3onTnK8m7XDfjbMVZ7dBoFowq1kL8c7EA@mail.gmail.com>
-From: Joseph Chan <jchan@ventanamicro.com>
-Date: Mon, 15 Apr 2024 20:14:40 -0700
-Message-ID: <CA+OBw2t9RRk4q+xntusYSS+yE=R1S3XR3qzM2_jhXBazrZs3ZA@mail.gmail.com>
-Subject: Re: [PATCH 1/2] target/riscv: prioritize pmp errors in
- raise_mmu_exception()
-To: Alexei Filippov <alexei.filippov@syntacore.com>
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
- liwei1518@gmail.com, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Content-Type: multipart/alternative; boundary="000000000000c520d306162e2567"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::112a;
- envelope-from=jchan@ventanamicro.com; helo=mail-yw1-x112a.google.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 0/2] Improvements for switches in hw/cpu/Kconfig
+To: Thomas Huth <thuth@redhat.com>, qemu-devel@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>, Peter Maydell <peter.maydell@linaro.org>
+Cc: qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+References: <20240415065655.130099-1-thuth@redhat.com>
+Content-Language: en-US
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20240415065655.130099-1-thuth@redhat.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::52d;
+ envelope-from=philmd@linaro.org; helo=mail-ed1-x52d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -93,307 +101,20 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---000000000000c520d306162e2567
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On 15/4/24 08:56, Thomas Huth wrote:
+> First patch fixes the problem that the file hw/cpu/Kconfig is
+> currently ignored and the switches there are duplicated in hw/arm/.
+> 
+> The second patch introduces a proper config switch for the cpu-cluster
+> device.
+> 
+> v2:
+> - Don't make core.c depend on the CPU_CLUSTER switch
+> - Added Philippe's Reviewed-bys
+> 
+> Thomas Huth (2):
+>    hw: Fix problem with the A*MPCORE switches in the Kconfig files
+>    hw: Add a Kconfig switch for the TYPE_CPU_CLUSTER device
 
-Digging more in  Priv-v1.12/riscv-privileged-20211203.pdf
-<https://github.com/riscv/riscv-isa-manual/releases/download/Priv-v1.12/ris=
-cv-privileged-20211203.pdf>
- :
-Page 82,  Section 4.3.2 Virtual Address Translation Process.
-
-The spec actually mentions an address translation algorithm. Step 2
-mentions the exception code should be " access-fault exception
-corresponding to the original access type". i.e. 1, 5, 7.  All other steps
-should use " page-fault exception corresponding to the original access
-type". i.e. 12, 13, 15.
-
-Regards,
-Joseph Chan
-
-On Mon, Apr 15, 2024 at 11:50=E2=80=AFAM Joseph Chan <jchan@ventanamicro.co=
-m> wrote:
-
-> FYI
->
-> Priv-v1.12/riscv-privileged-20211203.pdf
-> <https://github.com/riscv/riscv-isa-manual/releases/download/Priv-v1.12/r=
-iscv-privileged-20211203.pdf>
-> defines exception priorities on
-> Page 40, Table 3.7
-> Page 130, Table 8.7
->
-> There is a sentence under Table 3.7:
-> "When a virtual address is translated into a physical address, the addres=
-s
-> translation algorithm
-> determines what specific exception may be raised."
->
->
-> The spec does not insist any implementation to report Exception Code 12
-> over 1; 13,15 over 5, 7. On the other hand, the phrases "During instructi=
-on
-> address translation:" and "With physical address for instruction:" gives =
-me
-> the impression that when the implementation can distinguish between these
-> situations, then reporting 12 , 13, 15 instead of 1, 5, 7 will provide a
-> fine-grained reason for why things were broken.
->
-> Regards,
-> Joseph Chan
->
->
-> On Sat, Apr 13, 2024 at 3:59=E2=80=AFAM Alexei Filippov <
-> alexei.filippov@syntacore.com> wrote:
->
->> From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->>
->> raise_mmu_exception(), as is today, is prioritizing guest page faults by
->> checking first if virt_enabled && !first_stage, and then considering the
->> regular inst/load/store faults.
->>
->> There's no mention in the spec about guest page fault being a higher
->> priority that PMP faults. In fact, privileged spec section 3.7.1 says:
->>
->> "Attempting to fetch an instruction from a PMP region that does not have
->> execute permissions raises an instruction access-fault exception.
->> Attempting to execute a load or load-reserved instruction which accesses
->> a physical address within a PMP region without read permissions raises a
->> load access-fault exception. Attempting to execute a store,
->> store-conditional, or AMO instruction which accesses a physical address
->> within a PMP region without write permissions raises a store
->> access-fault exception."
->>
->> So, in fact, we're doing it wrong - PMP faults should always be thrown,
->> regardless of also being a first or second stage fault.
->>
->> The way riscv_cpu_tlb_fill() and get_physical_address() work is
->> adequate: a TRANSLATE_PMP_FAIL error is immediately reported and
->> reflected in the 'pmp_violation' flag. What we need is to change
->> raise_mmu_exception() to prioritize it.
->>
->> Reported-by: Joseph Chan <jchan@ventanamicro.com>
->> Fixes: 82d53adfbb ("target/riscv/cpu_helper.c: Invalid exception on MMU
->> translation stage")
->> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->> ---
->>  target/riscv/cpu_helper.c | 22 ++++++++++++----------
->>  1 file changed, 12 insertions(+), 10 deletions(-)
->>
->> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
->> index bc70ab5abc..196166f8dd 100644
->> --- a/target/riscv/cpu_helper.c
->> +++ b/target/riscv/cpu_helper.c
->> @@ -1203,28 +1203,30 @@ static void raise_mmu_exception(CPURISCVState
->> *env, target_ulong address,
->>
->>      switch (access_type) {
->>      case MMU_INST_FETCH:
->> -        if (env->virt_enabled && !first_stage) {
->> +        if (pmp_violation) {
->> +            cs->exception_index =3D RISCV_EXCP_INST_ACCESS_FAULT;
->> +        } else if (env->virt_enabled && !first_stage) {
->>              cs->exception_index =3D RISCV_EXCP_INST_GUEST_PAGE_FAULT;
->>          } else {
->> -            cs->exception_index =3D pmp_violation ?
->> -                RISCV_EXCP_INST_ACCESS_FAULT :
->> RISCV_EXCP_INST_PAGE_FAULT;
->> +            cs->exception_index =3D RISCV_EXCP_INST_PAGE_FAULT;
->>          }
->>          break;
->>      case MMU_DATA_LOAD:
->> -        if (two_stage && !first_stage) {
->> +        if (pmp_violation) {
->> +            cs->exception_index =3D RISCV_EXCP_LOAD_ACCESS_FAULT;
->> +        } else if (two_stage && !first_stage) {
->>              cs->exception_index =3D RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT;
->>          } else {
->> -            cs->exception_index =3D pmp_violation ?
->> -                RISCV_EXCP_LOAD_ACCESS_FAULT :
->> RISCV_EXCP_LOAD_PAGE_FAULT;
->> +            cs->exception_index =3D RISCV_EXCP_LOAD_PAGE_FAULT;
->>          }
->>          break;
->>      case MMU_DATA_STORE:
->> -        if (two_stage && !first_stage) {
->> +        if (pmp_violation) {
->> +            cs->exception_index =3D RISCV_EXCP_STORE_AMO_ACCESS_FAULT;
->> +        } else if (two_stage && !first_stage) {
->>              cs->exception_index =3D
->> RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT;
->>          } else {
->> -            cs->exception_index =3D pmp_violation ?
->> -                RISCV_EXCP_STORE_AMO_ACCESS_FAULT :
->> -                RISCV_EXCP_STORE_PAGE_FAULT;
->> +            cs->exception_index =3D RISCV_EXCP_STORE_PAGE_FAULT;
->>          }
->>          break;
->>      default:
->> --
->> 2.34.1
->>
->>
-
---000000000000c520d306162e2567
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Digging more in=C2=A0
-
-<a href=3D"https://github.com/riscv/riscv-isa-manual/releases/download/Priv=
--v1.12/riscv-privileged-20211203.pdf" target=3D"_blank">Priv-v1.12/riscv-pr=
-ivileged-20211203.pdf</a>=C2=A0:<br>Page 82,=C2=A0 Section 4.3.2 Virtual Ad=
-dress Translation Process.<div><br></div><div>The spec actually=C2=A0mentio=
-ns an address translation algorithm. Step 2 mentions the exception code sho=
-uld be &quot;
-
- access-fault exception corresponding
-to the original access type&quot;. i.e. 1, 5, 7.=C2=A0 All other steps shou=
-ld use &quot;
-
-page-fault exception corresponding
-to the original access type&quot;. i.e. 12, 13, 15.</div><div><br></div><di=
-v>Regards,</div><div>Joseph Chan</div></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Mon, Apr 15, 2024 at 11:50=E2=80=
-=AFAM Joseph Chan &lt;<a href=3D"mailto:jchan@ventanamicro.com">jchan@venta=
-namicro.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=
-=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
--left:1ex"><div dir=3D"ltr">FYI<div><br><a href=3D"https://github.com/riscv=
-/riscv-isa-manual/releases/download/Priv-v1.12/riscv-privileged-20211203.pd=
-f" target=3D"_blank">Priv-v1.12/riscv-privileged-20211203.pdf</a>=C2=A0 def=
-ines exception priorities on<br>Page 40, Table 3.7<br>Page 130, Table 8.7<b=
-r><br>There is a sentence under Table 3.7:</div><div>&quot;When a virtual a=
-ddress is translated into a physical address, the address translation algor=
-ithm<br>determines what specific exception may be raised.&quot;</div><div><=
-br><br>The spec does not insist any<b> </b>implementation to report Excepti=
-on Code 12 over 1; 13,15 over 5, 7. On the other hand, the phrases &quot;Du=
-ring instruction address translation:&quot; and &quot;With physical address=
- for instruction:&quot; gives me the impression that when the implementatio=
-n can distinguish between these situations, then reporting 12 , 13, 15 inst=
-ead of 1, 5, 7 will provide a fine-grained reason for why things were broke=
-n.</div><div><br></div><div>Regards,</div><div>Joseph Chan<br><br></div></d=
-iv><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On =
-Sat, Apr 13, 2024 at 3:59=E2=80=AFAM Alexei Filippov &lt;<a href=3D"mailto:=
-alexei.filippov@syntacore.com" target=3D"_blank">alexei.filippov@syntacore.=
-com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"marg=
-in:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1e=
-x">From: Daniel Henrique Barboza &lt;<a href=3D"mailto:dbarboza@ventanamicr=
-o.com" target=3D"_blank">dbarboza@ventanamicro.com</a>&gt;<br>
-<br>
-raise_mmu_exception(), as is today, is prioritizing guest page faults by<br=
->
-checking first if virt_enabled &amp;&amp; !first_stage, and then considerin=
-g the<br>
-regular inst/load/store faults.<br>
-<br>
-There&#39;s no mention in the spec about guest page fault being a higher<br=
->
-priority that PMP faults. In fact, privileged spec section 3.7.1 says:<br>
-<br>
-&quot;Attempting to fetch an instruction from a PMP region that does not ha=
-ve<br>
-execute permissions raises an instruction access-fault exception.<br>
-Attempting to execute a load or load-reserved instruction which accesses<br=
->
-a physical address within a PMP region without read permissions raises a<br=
->
-load access-fault exception. Attempting to execute a store,<br>
-store-conditional, or AMO instruction which accesses a physical address<br>
-within a PMP region without write permissions raises a store<br>
-access-fault exception.&quot;<br>
-<br>
-So, in fact, we&#39;re doing it wrong - PMP faults should always be thrown,=
-<br>
-regardless of also being a first or second stage fault.<br>
-<br>
-The way riscv_cpu_tlb_fill() and get_physical_address() work is<br>
-adequate: a TRANSLATE_PMP_FAIL error is immediately reported and<br>
-reflected in the &#39;pmp_violation&#39; flag. What we need is to change<br=
->
-raise_mmu_exception() to prioritize it.<br>
-<br>
-Reported-by: Joseph Chan &lt;<a href=3D"mailto:jchan@ventanamicro.com" targ=
-et=3D"_blank">jchan@ventanamicro.com</a>&gt;<br>
-Fixes: 82d53adfbb (&quot;target/riscv/cpu_helper.c: Invalid exception on MM=
-U translation stage&quot;)<br>
-Signed-off-by: Daniel Henrique Barboza &lt;<a href=3D"mailto:dbarboza@venta=
-namicro.com" target=3D"_blank">dbarboza@ventanamicro.com</a>&gt;<br>
----<br>
-=C2=A0target/riscv/cpu_helper.c | 22 ++++++++++++----------<br>
-=C2=A01 file changed, 12 insertions(+), 10 deletions(-)<br>
-<br>
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c<br>
-index bc70ab5abc..196166f8dd 100644<br>
---- a/target/riscv/cpu_helper.c<br>
-+++ b/target/riscv/cpu_helper.c<br>
-@@ -1203,28 +1203,30 @@ static void raise_mmu_exception(CPURISCVState *env,=
- target_ulong address,<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0switch (access_type) {<br>
-=C2=A0 =C2=A0 =C2=A0case MMU_INST_FETCH:<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (env-&gt;virt_enabled &amp;&amp; !first_sta=
-ge) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (pmp_violation) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 cs-&gt;exception_index =3D RISCV=
-_EXCP_INST_ACCESS_FAULT;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 } else if (env-&gt;virt_enabled &amp;&amp; !fi=
-rst_stage) {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0cs-&gt;exception_index =3D =
-RISCV_EXCP_INST_GUEST_PAGE_FAULT;<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0} else {<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 cs-&gt;exception_index =3D pmp_v=
-iolation ?<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 RISCV_EXCP_INST_AC=
-CESS_FAULT : RISCV_EXCP_INST_PAGE_FAULT;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 cs-&gt;exception_index =3D RISCV=
-_EXCP_INST_PAGE_FAULT;<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0break;<br>
-=C2=A0 =C2=A0 =C2=A0case MMU_DATA_LOAD:<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (two_stage &amp;&amp; !first_stage) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (pmp_violation) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 cs-&gt;exception_index =3D RISCV=
-_EXCP_LOAD_ACCESS_FAULT;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 } else if (two_stage &amp;&amp; !first_stage) =
-{<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0cs-&gt;exception_index =3D =
-RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT;<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0} else {<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 cs-&gt;exception_index =3D pmp_v=
-iolation ?<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 RISCV_EXCP_LOAD_AC=
-CESS_FAULT : RISCV_EXCP_LOAD_PAGE_FAULT;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 cs-&gt;exception_index =3D RISCV=
-_EXCP_LOAD_PAGE_FAULT;<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0break;<br>
-=C2=A0 =C2=A0 =C2=A0case MMU_DATA_STORE:<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (two_stage &amp;&amp; !first_stage) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (pmp_violation) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 cs-&gt;exception_index =3D RISCV=
-_EXCP_STORE_AMO_ACCESS_FAULT;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 } else if (two_stage &amp;&amp; !first_stage) =
-{<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0cs-&gt;exception_index =3D =
-RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT;<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0} else {<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 cs-&gt;exception_index =3D pmp_v=
-iolation ?<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 RISCV_EXCP_STORE_A=
-MO_ACCESS_FAULT :<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 RISCV_EXCP_STORE_P=
-AGE_FAULT;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 cs-&gt;exception_index =3D RISCV=
-_EXCP_STORE_PAGE_FAULT;<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0break;<br>
-=C2=A0 =C2=A0 =C2=A0default:<br>
--- <br>
-2.34.1<br>
-<br>
-</blockquote></div>
-</blockquote></div>
-
---000000000000c520d306162e2567--
+Thanks, series queued.
 
