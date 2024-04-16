@@ -4,84 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8911C4345F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Apr 2024 19:05:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38570C4345F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Apr 2024 19:42:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rwo4Q-0004lr-1g; Tue, 16 Apr 2024 15:02:18 -0400
+	id 1rwoge-0003IZ-K7; Tue, 16 Apr 2024 15:41:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwo4K-0004AX-Qk
- for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 15:02:13 -0400
-Received: from mail-lf1-x132.google.com ([2a00:1450:4864:20::132])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rwoge-0003IK-4d
+ for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 15:41:48 -0400
+Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwo4I-0005ue-F0
- for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 15:02:12 -0400
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-516f2e0edb7so5851755e87.1
- for <qemu-riscv@nongnu.org>; Tue, 16 Apr 2024 12:02:09 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rwogb-00045G-DD
+ for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 15:41:46 -0400
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-1e5b6e8f662so35546995ad.0
+ for <qemu-riscv@nongnu.org>; Tue, 16 Apr 2024 12:41:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713294129; x=1713898929; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1713296504; x=1713901304; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kMNnC0CtBUMfvsWtjsnWY6TflDR4yCy2djdqUVTuvak=;
- b=t8qs/JL8yAg1ebnAvx1Dg30Vhcqu7XK6aUmJbOqPN3aK2zHtuVx8yJ1wnXj5OKCEv1
- ff+HuhQ6I4YoZFL54caz/HOwpwFp8RkK42zn/nhGyO8YbQWY7cDXd77LLXU6UwHVy2zC
- lmS6fWa59XnTxFEUnOBwiExbsC4eZRx5CuLakiz7xa09hxh+5RO23gHWidxPDrFxlJLk
- myYdxS4F+L2oAout86NnOcqQHfiqe/jb1L+hQ4m0mNHW9Oft+JHx5MmQE5/u0mwcc8Q1
- iO+Xe38b20rqI1rdM7Fl37zblJy2l7aJFxpYgnQiYP5i8NgqKtSR80JM4FJd5Ag7+xZB
- cVBA==
+ bh=nIXT4Ow0ePHNvQiW4c64R7S9d8m6CFTE0ZLlfQRIw4w=;
+ b=LJdXHhydNUPcBG2bNgcTSMO6VhAkgYelybgq/ziVH+dYgRo9CFM9osjaUx1Ti+vGtm
+ IXOE7Ac5w9O0fLz9HCOuWaM0e2XI7KBD2X17YY8hSvqZNvnmRnaWCEg4WZBAbZuFs+11
+ 4M6hTGf0TKrWPKb0F0FQJrtGyfMFVUnJ7S8SzraocNYfCTlOrKZa+tR4akko1UHKQ633
+ ppKdSDITAQNP4C1zLnQhSLHAhoe1czw3s5qAsqhzVms8imjbTx/nO7+RrGTJna0OVACS
+ dOUqq0tIi2lerxMIwl1qfhxL8dVvFsSUQrUXQsytMLr+dKj3hz6EgSIWVYuwJug5kfp/
+ A03w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713294129; x=1713898929;
+ d=1e100.net; s=20230601; t=1713296504; x=1713901304;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=kMNnC0CtBUMfvsWtjsnWY6TflDR4yCy2djdqUVTuvak=;
- b=WfVv9DTbJv28j+uIvjxCkDO7lWPtdhVUhrAu6cvNfjvSxkQJ1GWGrZ1HIlqKQE64vt
- jFOOjATwFxC1EGXdXeWbb3RXWJmI91Vn6yhyLoZCIcOm/7QIXIp/iE+gzHb9se6L6VlX
- D4+XlDhBeLP4sRunI4NSr/b1Hymdhy9vXVrOEAxyuG2KUvGIn8+yNWMgbpBzCtCib00N
- 3JHCOBPO/rLsEpBcCgDILuEP7C9OptJPMhPyZaqoj5kx5wOrFzNUNcfGDUZV/ZqIK6MZ
- PIIFbDIljghylnDuFILbwRJvYC4MOKt/x59t9yDxTfsq3TYRMAq3fByG4OsCpd0t6Ws8
- YCLg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXa7+kgl8AGKQlP2lXFOmpjAzEIBjH3qlFBQuhHGHpjxdBj1uo7ZAm8LcCxvY7nWaPNWsOq+xy2aj36OUfNkp9xeQN87JI=
-X-Gm-Message-State: AOJu0YzRfL+XXlLoZM+cTYFMZlZhAUYo7Qd7DFaITHfGfCaOrjPZQJs1
- wpNqZj4fjOeAP85Wvm3nn64pgTz+i/f2bnxkZtKC3jHBawXBITezzThyQYsv7Lc=
-X-Google-Smtp-Source: AGHT+IGfYRyj7r002C9yM3FRzUGXQloA8hUqiyYSxfijYilgXSYfYJaEenswdOWXoxEW0bqJoGIMTA==
-X-Received: by 2002:a05:6512:33c8:b0:518:b069:3b7d with SMTP id
- d8-20020a05651233c800b00518b0693b7dmr6333284lfg.6.1713294128761; 
- Tue, 16 Apr 2024 12:02:08 -0700 (PDT)
-Received: from m1x-phil.lan ([176.176.155.61])
+ bh=nIXT4Ow0ePHNvQiW4c64R7S9d8m6CFTE0ZLlfQRIw4w=;
+ b=X+zlnuJMTMmf6Ro4gzw2TN9GKhO8U9N81Dlg9P0U5WzWr46LKHOgid9bMdtpgXvoXS
+ JfNASgLrXfab2QOZ08GISFBaafLjCcnFREzsDx4lfMmtHSlsXkF1tjzF4/kBnQfpNqd9
+ HOkZOygeZW4+IXT19SC7okK9i1iR0fL7sqtM2YTvZaAPxuyepYavGl2UutDsrGgMy/uO
+ jBrfqfIjRcAapO/OI8Wfjb5Rwdc6HqRr8YY6nFME42pwBXe4m/xzES/1x5GW/wpLVn6f
+ ZKzxTBrDgZaBZm2vqoSvXNFryEnHXQ+3JueTcHGEk1Bh2Sj2VvjG83DzKuQ8MFG8dJ+Y
+ eu6g==
+X-Gm-Message-State: AOJu0YwTd0nPMl7Vn4xqXvKLKxHQXC+u7ZRMAeURkMf3vhijNUB+K5J3
+ tJGrdD0tsveGyQwr4GN4FkthUYNq+JD9iZPxzd9dPV9G8ncYVow6pVwMvNi+6LI=
+X-Google-Smtp-Source: AGHT+IG8lFONKE0bYSTjNnlkDB7gNgi017CmjRe3W4duWlr6iOdbUDUUvjfpZ2s8TRwDLnvAVmQAKQ==
+X-Received: by 2002:a17:903:26c3:b0:1e5:62:7aaa with SMTP id
+ jg3-20020a17090326c300b001e500627aaamr10843183plb.20.1713296503815; 
+ Tue, 16 Apr 2024 12:41:43 -0700 (PDT)
+Received: from grind.. ([2804:7f0:bdcd:fb00:6501:2693:db52:c621])
  by smtp.gmail.com with ESMTPSA id
- d19-20020a170906c21300b00a553846966csm1570949ejz.24.2024.04.16.12.02.06
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 16 Apr 2024 12:02:08 -0700 (PDT)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-To: qemu-devel@nongnu.org,
-	Thomas Huth <thuth@redhat.com>
-Cc: "Michael S. Tsirkin" <mst@redhat.com>, qemu-riscv@nongnu.org,
- David Hildenbrand <david@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
- kvm@vger.kernel.org, qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
- Paolo Bonzini <pbonzini@redhat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Zhao Liu <zhao1.liu@intel.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>
-Subject: [PATCH v4 22/22] hw/i386/pc: Replace PCMachineClass::acpi_data_size
- by PC_ACPI_DATA_SIZE
-Date: Tue, 16 Apr 2024 20:59:38 +0200
-Message-ID: <20240416185939.37984-23-philmd@linaro.org>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20240416185939.37984-1-philmd@linaro.org>
-References: <20240416185939.37984-1-philmd@linaro.org>
+ h5-20020a170902704500b001e3c972c83bsm10160586plt.76.2024.04.16.12.41.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 16 Apr 2024 12:41:43 -0700 (PDT)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH for-9.1 v2 2/2] trans_privileged.c.inc: set (m|s)tval on
+ ebreak breakpoint
+Date: Tue, 16 Apr 2024 16:41:32 -0300
+Message-ID: <20240416194132.1843699-3-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.44.0
+In-Reply-To: <20240416194132.1843699-1-dbarboza@ventanamicro.com>
+References: <20240416194132.1843699-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::132;
- envelope-from=philmd@linaro.org; helo=mail-lf1-x132.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x629.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -104,93 +96,46 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-PCMachineClass::acpi_data_size was only used by the pc-i440fx-2.0
-machine, which got removed. Since it is constant, replace the class
-field by a definition (local to hw/i386/pc.c, since not used
-elsewhere).
+Privileged spec section 4.1.9 mentions:
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Thomas Huth <thuth@redhat.com>
-Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
+"When a trap is taken into S-mode, stval is written with
+exception-specific information to assist software in handling the trap.
+(...)
+
+If stval is written with a nonzero value when a breakpoint,
+address-misaligned, access-fault, or page-fault exception occurs on an
+instruction fetch, load, or store, then stval will contain the faulting
+virtual address."
+
+A similar text is found for mtval in section 3.1.16.
+
+Setting mtval/stval in this scenario is optional, but some softwares read
+these regs when handling ebreaks.
+
+Write 'badaddr' in all ebreak breakpoints to write the appropriate
+'tval' during riscv_do_cpu_interrrupt().
+
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- include/hw/i386/pc.h |  4 ----
- hw/i386/pc.c         | 19 ++++++++++++-------
- 2 files changed, 12 insertions(+), 11 deletions(-)
+ target/riscv/insn_trans/trans_privileged.c.inc | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/include/hw/i386/pc.h b/include/hw/i386/pc.h
-index 96ccb4583f..0ad971782c 100644
---- a/include/hw/i386/pc.h
-+++ b/include/hw/i386/pc.h
-@@ -74,9 +74,6 @@ typedef struct PCMachineState {
-  *
-  * Compat fields:
-  *
-- * @acpi_data_size: Size of the chunk of memory at the top of RAM
-- *                  for the BIOS ACPI tables and other BIOS
-- *                  datastructures.
-  * @gigabyte_align: Make sure that guest addresses aligned at
-  *                  1Gbyte boundaries get mapped to host
-  *                  addresses aligned at 1Gbyte boundaries. This
-@@ -100,7 +97,6 @@ struct PCMachineClass {
- 
-     /* ACPI compat: */
-     bool has_acpi_build;
--    unsigned acpi_data_size;
-     int pci_root_uid;
- 
-     /* SMBIOS compat: */
-diff --git a/hw/i386/pc.c b/hw/i386/pc.c
-index 2e2146f42b..0be8f08c47 100644
---- a/hw/i386/pc.c
-+++ b/hw/i386/pc.c
-@@ -256,6 +256,16 @@ GlobalProperty pc_compat_2_4[] = {
- };
- const size_t pc_compat_2_4_len = G_N_ELEMENTS(pc_compat_2_4);
- 
-+/*
-+ * @PC_ACPI_DATA_SIZE:
-+ * Size of the chunk of memory at the top of RAM for the BIOS ACPI tables
-+ * and other BIOS datastructures.
-+ *
-+ * BIOS ACPI tables: 128K. Other BIOS datastructures: less than 4K
-+ * reported to be used at the moment, 32K should be enough for a while.
-+ */
-+#define PC_ACPI_DATA_SIZE (0x20000 + 0x8000)
+diff --git a/target/riscv/insn_trans/trans_privileged.c.inc b/target/riscv/insn_trans/trans_privileged.c.inc
+index 620ab54eb0..b89e3bd5b5 100644
+--- a/target/riscv/insn_trans/trans_privileged.c.inc
++++ b/target/riscv/insn_trans/trans_privileged.c.inc
+@@ -62,6 +62,10 @@ static bool trans_ebreak(DisasContext *ctx, arg_ebreak *a)
+     if (pre == 0x01f01013 && ebreak == 0x00100073 && post == 0x40705013) {
+         generate_exception(ctx, RISCV_EXCP_SEMIHOST);
+     } else {
++        TCGv temp = tcg_temp_new();
++        tcg_gen_movi_tl(temp, ebreak_addr);
++        tcg_gen_st_tl(temp, tcg_env, offsetof(CPURISCVState, badaddr));
 +
- GSIState *pc_gsi_create(qemu_irq **irqs, bool pci_enabled)
- {
-     GSIState *s;
-@@ -634,8 +644,7 @@ void xen_load_linux(PCMachineState *pcms)
-     fw_cfg_add_i16(fw_cfg, FW_CFG_NB_CPUS, x86ms->boot_cpus);
-     rom_set_fw(fw_cfg);
- 
--    x86_load_linux(x86ms, fw_cfg, pcmc->acpi_data_size,
--                   pcmc->pvh_enabled);
-+    x86_load_linux(x86ms, fw_cfg, PC_ACPI_DATA_SIZE, pcmc->pvh_enabled);
-     for (i = 0; i < nb_option_roms; i++) {
-         assert(!strcmp(option_rom[i].name, "linuxboot.bin") ||
-                !strcmp(option_rom[i].name, "linuxboot_dma.bin") ||
-@@ -969,8 +978,7 @@ void pc_memory_init(PCMachineState *pcms,
+         generate_exception(ctx, RISCV_EXCP_BREAKPOINT);
      }
- 
-     if (linux_boot) {
--        x86_load_linux(x86ms, fw_cfg, pcmc->acpi_data_size,
--                       pcmc->pvh_enabled);
-+        x86_load_linux(x86ms, fw_cfg, PC_ACPI_DATA_SIZE, pcmc->pvh_enabled);
-     }
- 
-     for (i = 0; i < nb_option_roms; i++) {
-@@ -1724,9 +1732,6 @@ static void pc_machine_class_init(ObjectClass *oc, void *data)
-     pcmc->gigabyte_align = true;
-     pcmc->has_reserved_memory = true;
-     pcmc->enforce_amd_1tb_hole = true;
--    /* BIOS ACPI tables: 128K. Other BIOS datastructures: less than 4K reported
--     * to be used at the moment, 32K should be enough for a while.  */
--    pcmc->acpi_data_size = 0x20000 + 0x8000;
-     pcmc->pvh_enabled = true;
-     pcmc->kvmclock_create_always = true;
-     x86mc->apic_xrupt_override = true;
+     return true;
 -- 
-2.41.0
+2.44.0
 
 
