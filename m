@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44E0BC4345F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFED5C04FF6
 	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Apr 2024 13:57:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rwjG3-0002HF-7g; Tue, 16 Apr 2024 09:53:59 -0400
+	id 1rwjHA-0005g3-Av; Tue, 16 Apr 2024 09:55:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwjFr-000240-Nz
- for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 09:53:47 -0400
-Received: from mail-lf1-x12c.google.com ([2a00:1450:4864:20::12c])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwjGr-0005Hb-Og
+ for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 09:54:53 -0400
+Received: from mail-lf1-x132.google.com ([2a00:1450:4864:20::132])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwjFg-0001mf-Il
- for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 09:53:47 -0400
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-516cdb21b34so5680476e87.1
- for <qemu-riscv@nongnu.org>; Tue, 16 Apr 2024 06:53:36 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwjGo-0001xq-Ud
+ for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 09:54:48 -0400
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-516d3a470d5so5084148e87.3
+ for <qemu-riscv@nongnu.org>; Tue, 16 Apr 2024 06:54:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713275615; x=1713880415; darn=nongnu.org;
+ d=linaro.org; s=google; t=1713275684; x=1713880484; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cesSegXMr71Lpaal5FJBOqynS/3X0jmvbPzoIKbt5l0=;
- b=fyH4cx1qdVNzxXdMjTmuryJvQ722mbCX0fnEBSq6CcFcOH6LNSzQAgXg4BwUtPlqBo
- 38dXIFcfwCwonmz56a/YQnYqH4j63Q8HBgGCIslBEMTcpA5Qs3ZZn9FMNcmtjrQuxhhS
- 7J6UBVt6dF+CRMMrDNLArRxSaAZRczH4rTiP5rF/H9p62qgnLw6DZ+L8ADsUfKxjAm2T
- seYx4VZ2jF9eFLePr1a9CNkr2NqdGfv9SogMqTnFuAPdjP4T8AsHxHE7we54+/dibS1D
- W6Bk++QHmXJ73eCxDaCIP8s1snCEejLzkqdGkVCSh/4bqOWDfdiAyvohEt8MFZmvac8p
- lywQ==
+ bh=zBppzEDS51MDAVFf+oWkcwnoJzt4m+loPuqdwyia2Jo=;
+ b=jVJAIQRet1DAlNCVnKx+S2cu7Ogq7IoSqRO/N+uwUBQzRchLAwXunXSJNFyC25yuq2
+ KkiuiBToxogmvyYvLac3G3yQnFJlpBf1Sxc5vfzIDAbjmpK5Lnzra/H3SZQAGO2ot/2T
+ hTAZ6Zekzd7jq3lyDaGzai+hED9SpALZykyaVfU7jetACkPGYrGGFikscaZb0QtCj8w3
+ Z4qOPTBoCprJZ8FiKCjkECnG1bAJntqi80dAvb30gHI1Urz00asHq1sfHU3tuC9HzQDZ
+ kRbbWMWpYzLudJfNBr4PR7q46yp5iFBOLPjk5N+E5vh7KRRmvkqG4re/c2krvkl6aNh5
+ wnSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713275615; x=1713880415;
+ d=1e100.net; s=20230601; t=1713275684; x=1713880484;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cesSegXMr71Lpaal5FJBOqynS/3X0jmvbPzoIKbt5l0=;
- b=aNfw0K9xRdh3Uvi4JGUnAKaZcbNeuvas8DI9re+d58eBkIae3fFuPeFeL3Se6v4iKb
- UGGM8FRV607WKnDC2DcrooxQqQf0UoI9zd6b7Wo49duPWEhzl8QYl/8mweE6qxDycKEE
- T9soGeYwI4oCs6K5CpjG0FNtdb0ZehukDMOP2EoaTNFreCMsS66dkYZ/AXT6hpya7IUI
- CXF0/GxkCOd0WMMk5AMlnn1ZEG2zb491WF00/wZxfz3B6pIMqa6Zh48sbL/nXGFo1jgd
- Np8YDLglSsWDiPR1PX7D/8KtspZxuJD0ZH66yXv99GQyDSoaiq5zb4bWsc5hGw6AR8my
- cAsA==
+ bh=zBppzEDS51MDAVFf+oWkcwnoJzt4m+loPuqdwyia2Jo=;
+ b=w7EQWOoqlYeTAolU0CJOTfvcHwbv9CIJye+PCHyG4gm9eIrOtUhP8+Jj8M4wM+R5Iy
+ aIkg57AeAm+EzsVHW4cBnJC3gC5eIB1uKSJYT2GPWxsklFNQ2kQUwpf6ZygE8W/keGwk
+ 0OzG0zf5tMD7ajDSqXAFVXBuyRcAmRaqKtRO7ocuws5WonvOdsJKVZqSiYshvTRLgw8Z
+ G43//yXhsGE2EtL1ph40sociDEF2k8ZV2AqSCWQbv8AqT+P5EQStqMlyb9mRjJ2NEK1p
+ hjzM9IfSY+UF5Wspm4lq/yIkP88MqiYVK1C13PvnRyB+IR7/+p7zud1FC1mR9CGgF3e0
+ zoIg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWHB6yu4cPMyKKo20i8gW12dx9CWzuptLCKo31EDBrJW+mSDiAw2tYoCji/IYyt7WhULlIiiPvRaxolOfkiS8rQ2KTqVW4=
-X-Gm-Message-State: AOJu0YzmIGvC2ZzGMDWJRrPb51f1OpDW/9UyRhWHiAbtGBXqwwnXMz3t
- scYRnkdgZpZkgFF5QwulyfK2jh0+6/4UTibHenNEVVl72uwvvt3I9BsQNCWGqEU=
-X-Google-Smtp-Source: AGHT+IGBPnjfSmRXCp87ZjDOBQyS+KGTJz7+un36CuOzI+u1xIIx9U8ve5RbLEcL35jlPS1DV7IfRA==
-X-Received: by 2002:a05:6512:39c5:b0:518:de06:31b6 with SMTP id
- k5-20020a05651239c500b00518de0631b6mr5266704lfu.3.1713275614821; 
- Tue, 16 Apr 2024 06:53:34 -0700 (PDT)
+ AJvYcCUvcZPdXO7NLYZCsjR0V13TDtjg+yi7J9zEgiiugRiduNlPxWzYi9bVYrmpc7LGz98QU4B/e7EH6xM+BGuaVtMg98GXgGk=
+X-Gm-Message-State: AOJu0Yy1EyXa15e5+MKlXDakAsDmopG8amt2Xp80Kw41UvLXEg6QkUcp
+ f4PvMgZZQqDMh64rbowZs8aY8QpNiTXant4+uLToNww9BWnE+AmJwfY7PtaA0ow=
+X-Google-Smtp-Source: AGHT+IE4prILb1Ayzx/lkcnii8L2DztU14FUF9cZPO63UNEquRoPu9ws+lj+UgUmFi026h11f6Wr8g==
+X-Received: by 2002:ac2:5e88:0:b0:515:c964:723f with SMTP id
+ b8-20020ac25e88000000b00515c964723fmr8230098lfq.20.1713275684153; 
+ Tue, 16 Apr 2024 06:54:44 -0700 (PDT)
 Received: from m1x-phil.lan ([176.176.155.61])
  by smtp.gmail.com with ESMTPSA id
- fe1-20020a056402390100b005701df2ea98sm3337890edb.32.2024.04.16.06.53.33
+ hz19-20020a1709072cf300b00a554a1c75cdsm302037ejc.172.2024.04.16.06.54.42
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 16 Apr 2024 06:53:34 -0700 (PDT)
+ Tue, 16 Apr 2024 06:54:43 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org,
 	Thomas Huth <thuth@redhat.com>
@@ -66,26 +66,28 @@ Cc: Ani Sinha <anisinha@redhat.com>, qemu-riscv@nongnu.org,
  David Hildenbrand <david@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
  Igor Mammedov <imammedo@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>
-Subject: [PATCH v3 06/22] hw/acpi/ich9: Remove 'memory-hotplug-support'
- property
-Date: Tue, 16 Apr 2024 15:52:35 +0200
-Message-ID: <20240416135252.8384-7-philmd@linaro.org>
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Eduardo Habkost <eduardo@habkost.net>
+Subject: [PATCH v3 17/22] hw/i386/pc: Remove
+ PCMachineClass::resizable_acpi_blob
+Date: Tue, 16 Apr 2024 15:52:46 +0200
+Message-ID: <20240416135252.8384-18-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240416135252.8384-1-philmd@linaro.org>
 References: <20240416135252.8384-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::12c;
- envelope-from=philmd@linaro.org; helo=mail-lf1-x12c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::132;
+ envelope-from=philmd@linaro.org; helo=mail-lf1-x132.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,52 +103,65 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-No external code sets the 'memory-hotplug-support'
-property, remove it.
+PCMachineClass::resizable_acpi_blob was only used by the
+pc-i440fx-2.2 machine, which got removed. It is now always
+true. Remove it, simplifying acpi_build().
 
-Suggested-by: Thomas Huth <thuth@redhat.com>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- hw/acpi/ich9.c | 18 ------------------
- 1 file changed, 18 deletions(-)
+ include/hw/i386/pc.h |  3 ---
+ hw/i386/acpi-build.c | 10 ----------
+ hw/i386/pc.c         |  1 -
+ 3 files changed, 14 deletions(-)
 
-diff --git a/hw/acpi/ich9.c b/hw/acpi/ich9.c
-index 573d032e8e..9b605af21a 100644
---- a/hw/acpi/ich9.c
-+++ b/hw/acpi/ich9.c
-@@ -351,21 +351,6 @@ static void ich9_pm_get_gpe0_blk(Object *obj, Visitor *v, const char *name,
-     visit_type_uint32(v, name, &value, errp);
- }
+diff --git a/include/hw/i386/pc.h b/include/hw/i386/pc.h
+index df97df6ca7..10a8ffa0de 100644
+--- a/include/hw/i386/pc.h
++++ b/include/hw/i386/pc.h
+@@ -124,9 +124,6 @@ struct PCMachineClass {
+     /* create kvmclock device even when KVM PV features are not exposed */
+     bool kvmclock_create_always;
  
--static bool ich9_pm_get_memory_hotplug_support(Object *obj, Error **errp)
--{
--    ICH9LPCState *s = ICH9_LPC_DEVICE(obj);
+-    /* resizable acpi blob compat */
+-    bool resizable_acpi_blob;
 -
--    return s->pm.acpi_memory_hotplug.is_enabled;
--}
--
--static void ich9_pm_set_memory_hotplug_support(Object *obj, bool value,
--                                               Error **errp)
--{
--    ICH9LPCState *s = ICH9_LPC_DEVICE(obj);
--
--    s->pm.acpi_memory_hotplug.is_enabled = value;
--}
--
- static bool ich9_pm_get_cpu_hotplug_legacy(Object *obj, Error **errp)
- {
-     ICH9LPCState *s = ICH9_LPC_DEVICE(obj);
-@@ -445,9 +430,6 @@ void ich9_pm_add_properties(Object *obj, ICH9LPCPMRegs *pm)
-                         NULL, NULL, pm);
-     object_property_add_uint32_ptr(obj, ACPI_PM_PROP_GPE0_BLK_LEN,
-                                    &gpe0_len, OBJ_PROP_FLAG_READ);
--    object_property_add_bool(obj, "memory-hotplug-support",
--                             ich9_pm_get_memory_hotplug_support,
--                             ich9_pm_set_memory_hotplug_support);
-     object_property_add_bool(obj, "cpu-hotplug-legacy",
-                              ich9_pm_get_cpu_hotplug_legacy,
-                              ich9_pm_set_cpu_hotplug_legacy);
+     /*
+      * whether the machine type implements broken 32-bit address space bound
+      * check for memory.
+diff --git a/hw/i386/acpi-build.c b/hw/i386/acpi-build.c
+index a6f8203460..ab2d4d8dcb 100644
+--- a/hw/i386/acpi-build.c
++++ b/hw/i386/acpi-build.c
+@@ -2688,16 +2688,6 @@ void acpi_build(AcpiBuildTables *tables, MachineState *machine)
+      * keep the table size stable for all (max_cpus, max_memory_slots)
+      * combinations.
+      */
+-    /* Make sure we have a buffer in case we need to resize the tables. */
+-    if ((tables_blob->len > ACPI_BUILD_TABLE_SIZE / 2) &&
+-        !pcmc->resizable_acpi_blob) {
+-        /* As of QEMU 2.1, this fires with 160 VCPUs and 255 memory slots.  */
+-        warn_report("ACPI table size %u exceeds %d bytes,"
+-                    " migration may not work",
+-                    tables_blob->len, ACPI_BUILD_TABLE_SIZE / 2);
+-        error_printf("Try removing CPUs, NUMA nodes, memory slots"
+-                     " or PCI bridges.\n");
+-    }
+     acpi_align_size(tables_blob, ACPI_BUILD_TABLE_SIZE);
+ 
+     acpi_align_size(tables->linker->cmd_blob, ACPI_BUILD_ALIGN_SIZE);
+diff --git a/hw/i386/pc.c b/hw/i386/pc.c
+index 18bef7c85e..c4a7885a3b 100644
+--- a/hw/i386/pc.c
++++ b/hw/i386/pc.c
+@@ -1755,7 +1755,6 @@ static void pc_machine_class_init(ObjectClass *oc, void *data)
+     pcmc->acpi_data_size = 0x20000 + 0x8000;
+     pcmc->pvh_enabled = true;
+     pcmc->kvmclock_create_always = true;
+-    pcmc->resizable_acpi_blob = true;
+     x86mc->apic_xrupt_override = true;
+     assert(!mc->get_hotplug_handler);
+     mc->get_hotplug_handler = pc_get_hotplug_handler;
 -- 
 2.41.0
 
