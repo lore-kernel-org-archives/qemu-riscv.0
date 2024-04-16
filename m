@@ -4,90 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A847AC4345F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Apr 2024 09:26:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D111DC4345F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Apr 2024 13:53:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rwf58-0007P1-QS; Tue, 16 Apr 2024 05:26:26 -0400
+	id 1rwjFB-0001UU-NS; Tue, 16 Apr 2024 09:53:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rwf4n-0007Me-E9
- for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 05:26:12 -0400
-Received: from mail-il1-x12b.google.com ([2607:f8b0:4864:20::12b])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwjF7-0001RE-0c
+ for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 09:53:01 -0400
+Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rwf4l-0001Gn-In
- for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 05:26:05 -0400
-Received: by mail-il1-x12b.google.com with SMTP id
- e9e14a558f8ab-36b146836d7so11089155ab.3
- for <qemu-riscv@nongnu.org>; Tue, 16 Apr 2024 02:26:02 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwjF3-0001Or-Ll
+ for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 09:53:00 -0400
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-418a776a4a0so1182535e9.1
+ for <qemu-riscv@nongnu.org>; Tue, 16 Apr 2024 06:52:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1713259561; x=1713864361; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=wXVhb8brYlfg9y9PMTKGdC+D/djaL9iRPIqdffYkTz4=;
- b=cgeoMTaqm4OIknRTzqF/ov8XvM+Bfb3gqai/JJdqYeZTPZ27V/Rtgf6paVNsZQOnk+
- a5FCEw5llmpe3tsRlrZXk4KdPIDcBmYh+RiDOrUy+tKdztNinUPPmDgGhl0buuvt5m4R
- t7Lk2gawGr0Fqb3b655A7Hqq606XlMRdu5phKfRKTfM+fe3tMpwoiXW1xmoX/ve4T2Ku
- jVwSaA383Ow6dcjXV57+wqdSql00ca1rZMkbenxHkBHk1AfAdP5MMJB1KGoB+yV4fooH
- 0pFTTBuoPG3AAVkEKHa/n74iOudMFzmS0W6LGMECm+0a8EX0r8In453AqItIWQjDAYWi
- Lv9w==
+ d=linaro.org; s=google; t=1713275576; x=1713880376; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=xtI/ti/zyiWRBP+sRIXWMJFQHPHz8noWNvHuXyxaDzE=;
+ b=TyeakZ7neKXiDVU4YkgDN4Ms4EtNO3fsByZ3DiuYtBPlodfJyhycV/GYHIIaqeKsG4
+ VdoC8O8hogyFU5RZI8+2LihzvbG1o6CXkbvspeOZ7IaRhiHCM3eM/mqEWhDhyMrJqwzV
+ ypApfm+HZKC35TnLuj+c121RezOvDe2AGgJonCgkxnEviyzieBGa2co0PZ6FsSighe55
+ WWV9oijv9PhiZpqrj7en2fcIjq+GY/4VYr322+6l5h0JltNbvKjXOJ3fSGuPpuDfnlSU
+ 5gMKdZYy2xVU89BNDta2UBvsZBV8lxYMe4tZLBOiNl/Wo4/YIQQhR/39zLp3KjS88E0/
+ 95lg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713259561; x=1713864361;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=wXVhb8brYlfg9y9PMTKGdC+D/djaL9iRPIqdffYkTz4=;
- b=ClcjXxKDSTQL2fnV01Z9u6M7udpED1DLvaAuwK8AMxMXB2+MiGpOPOHwfVdEwn/YVG
- m5/DVtxbP0eM5hY6NeZErrJaXaELFK/f7TrPU4DGdHvDdsf0UBu9nqx+H4MMG/+6Reos
- daWAztGNmjvtGz0YgO9x8rbA7zuQDj/nMzyu7by5lBHl5RV6/06Q+Jncxcy4TuTjWBrn
- fTRTz5/ArT7xPINwDazvXo4Wi4qOG7X6gEodvh4/Njn+VRJIzveguZvSxvZH8KFpFz6W
- VFnlsqOJPBnKHYttvNqK8353wzglQAG2OLvZplb2ol5V93JUs9BGw/3C9w15ApsCdeYK
- 9+kw==
+ d=1e100.net; s=20230601; t=1713275576; x=1713880376;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=xtI/ti/zyiWRBP+sRIXWMJFQHPHz8noWNvHuXyxaDzE=;
+ b=RNrZcGyYQYsdbcamSZIy+y1vc58pK5wRG3mWATu1zV0wh5uSwwC4B7mpSflgxPmBUu
+ DKxYgiZ7a3k3yyBcfWwy364dA8+JPekelzRNpJ/U7KEmERg+B9oiFVR2C+YuNYa7IrYd
+ 9RkxEE6OKe0pr/S7g/QYRxHiR0hz5q2mS8j81aJ6Hgn6WMxOQZmJ601+vkZdcFraQw1E
+ JCVTSzxgR2B/GxNkM9ZlTazN9CPsX69tBLyO1OKrTsFLwdDyGWxfzx/kBx0DPUkS8ZB6
+ kXPjhOz7mw2bkw02XH4jOgaHuc1ndLAvvvR5dCAXWNgpuilj8MhQSbYDdlFovERhlrA5
+ O8Lg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWzd5igtqC+cOg1K2jBQy6iE3ed7okCH2r4aXErE36MBOTTHZk5bFOTaFiwimmzCcaCJ2PD/CLWtN+pJ+G5X9CkS9Q4thA=
-X-Gm-Message-State: AOJu0YyxjvrV62ahTrbftGsdGuRJrC8w0T2brIVKpRbrYP2Pvla4giLt
- 3jWYqdHbrQqhatctDLXkPLivsOYV+8tyk5A2X/WW2vltmcAX5zQ08KOltnRm0tY=
-X-Google-Smtp-Source: AGHT+IGhAbnMJxflCiBtp+4bwFnOlJKhUMcJyLct3XJiZsDnMy/+85DcaL9WkEWUMYSoYRyRiaXxHg==
-X-Received: by 2002:a05:6e02:152a:b0:36b:be7:f2d1 with SMTP id
- i10-20020a056e02152a00b0036b0be7f2d1mr12722463ilu.6.1713259561467; 
- Tue, 16 Apr 2024 02:26:01 -0700 (PDT)
-Received: from [192.168.68.110] ([177.45.186.202])
+ AJvYcCV2QCn0u+4UNZspLV6KCTUEbE8tvpXsqOf63SlWeAhcT1kwMWJ7x8xiri3rfmG7ej5IDGdPuT2KEfF3niP78JgV2FEY1j8=
+X-Gm-Message-State: AOJu0Yxej/+9n2q01G8RGneXVE/f/qFOcetVHgaEMKXCO6BbGJXuViUr
+ JPymReYylcu4NJq0cikVXE5LOrkys83lhgCdf4a+tG7+3HdWn4Ym6Jx3Y23NUSA=
+X-Google-Smtp-Source: AGHT+IEpmBwLuNs7JbLYV2hI4E/Ma/qC8yzR0tV6teJIQpfXCuI/NAA86AgwIk4+Qb3o4xmbwtdf8Q==
+X-Received: by 2002:a05:600c:1d21:b0:418:a5fc:5a5b with SMTP id
+ l33-20020a05600c1d2100b00418a5fc5a5bmr432960wms.36.1713275575797; 
+ Tue, 16 Apr 2024 06:52:55 -0700 (PDT)
+Received: from m1x-phil.lan ([176.176.155.61])
  by smtp.gmail.com with ESMTPSA id
- u10-20020a63b54a000000b005dca5caed40sm8431575pgo.81.2024.04.16.02.25.57
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 16 Apr 2024 02:26:01 -0700 (PDT)
-Message-ID: <b93f13c4-05a9-4772-8ed9-a74b2f5f9cef@ventanamicro.com>
-Date: Tue, 16 Apr 2024 06:25:55 -0300
+ l35-20020a05600c1d2300b004161af729f4sm20462920wms.31.2024.04.16.06.52.54
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Tue, 16 Apr 2024 06:52:55 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org,
+	Thomas Huth <thuth@redhat.com>
+Cc: Ani Sinha <anisinha@redhat.com>, qemu-riscv@nongnu.org,
+ qemu-ppc@nongnu.org, Zhao Liu <zhao1.liu@intel.com>,
+ David Hildenbrand <david@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Igor Mammedov <imammedo@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Philippe =?unknown-8bit?q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH v3 00/22] hw/i386: Remove deprecated pc-i440fx-2.0 -> 2.3
+ machines
+Date: Tue, 16 Apr 2024 15:52:29 +0200
+Message-ID: <20240416135252.8384-1-philmd@linaro.org>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 0/4] target/riscv/kvm: QEMU support for KVM Guest
- Debug on RISC-V
-Content-Language: en-US
-To: Chao Du <duchao@eswincomputing.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com,
- alistair23@gmail.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn,
- zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com, anup@brainfault.org,
- atishp@atishpatra.org
-References: <20231221094923.7349-1-duchao@eswincomputing.com>
- <846ec319-6026-4b14-b156-9e1f42c6dba1@ventanamicro.com>
- <48d413a8.25e8.18ec23d85b9.Coremail.duchao@eswincomputing.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <48d413a8.25e8.18ec23d85b9.Coremail.duchao@eswincomputing.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12b;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-il1-x12b.google.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::333;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x333.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,90 +97,80 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Missing review: 1 (new, extracted from 20) & 20
 
+Since v2:
+- Addressed Zhao review comments
 
-On 4/9/24 06:43, Chao Du wrote:
-> Hi Daniel and all,
-> 
-> The KVM patches have been reviewd and are in the queue.
-> https://lore.kernel.org/all/20240402062628.5425-1-duchao@eswincomputing.com/
-> 
-> Could you please review in the QEMU side ?
-> Then I will rebase this series with your comments.
-> 
-> Some Notes:
-> 1. As the first stage, only the software breakpoints is implemented.
-> 2. A 'corner case' in which the debug exception is not inserted by the
-> debugger, need to be re-injected to the guest. This is not handled yet
-> in this series.
+Since v1:
+- Addressed Zhao and Thomas review comments
 
-Aside from the comments I made in patch 1 w.r.t checks that (perhaps) can be moved
-to kvm-all.c, it looks good to me.
+Kill legacy code, because we need to evolve.
 
-Since you're changing kvm-all.c we'll need Paolo to ack the changes in patch 1, so
-feel free to wait for him to take a look before sending v2.
+I ended there via dynamic machine -> ICH9 -> legacy ACPI...
 
+This should also help Igor cleanups:
+http://lore.kernel.org/qemu-devel/20240326171632.3cc7533d@imammedo.users.ipa.redhat.com/
 
-Thanks,
+Philippe Mathieu-Daudé (22):
+  hw/i386/pc: Deprecate 2.4 to 2.7 pc-i440fx machines
+  hw/i386/pc: Remove deprecated pc-i440fx-2.0 machine
+  hw/usb/hcd-xhci: Remove XHCI_FLAG_FORCE_PCIE_ENDCAP flag
+  hw/usb/hcd-xhci: Remove XHCI_FLAG_SS_FIRST flag
+  hw/i386/acpi: Remove PCMachineClass::legacy_acpi_table_size
+  hw/acpi/ich9: Remove 'memory-hotplug-support' property
+  hw/acpi/ich9: Remove dead code related to 'acpi_memory_hotplug'
+  hw/i386/pc: Remove deprecated pc-i440fx-2.1 machine
+  target/i386/kvm: Remove x86_cpu_change_kvm_default() and 'kvm-cpu.h'
+  hw/i386/pc: Remove PCMachineClass::smbios_uuid_encoded
+  hw/smbios: Remove 'uuid_encoded' argument from smbios_set_defaults()
+  hw/smbios: Remove 'smbios_uuid_encoded', simplify smbios_encode_uuid()
+  hw/i386/pc: Remove PCMachineClass::enforce_aligned_dimm
+  hw/mem/pc-dimm: Remove legacy_align argument from pc_dimm_pre_plug()
+  hw/mem/memory-device: Remove legacy_align from
+    memory_device_pre_plug()
+  hw/i386/pc: Remove deprecated pc-i440fx-2.2 machine
+  hw/i386/pc: Remove PCMachineClass::resizable_acpi_blob
+  hw/i386/pc: Remove PCMachineClass::rsdp_in_ram
+  hw/i386/acpi: Remove AcpiBuildState::rsdp field
+  hw/i386/pc: Remove deprecated pc-i440fx-2.3 machine
+  target/i386: Remove X86CPU::kvm_no_smi_migration field
+  hw/i386/pc: Replace PCMachineClass::acpi_data_size by
+    PC_ACPI_DATA_SIZE
 
+ docs/about/deprecated.rst             |   2 +-
+ docs/about/removed-features.rst       |   2 +-
+ hw/usb/hcd-xhci.h                     |   4 +-
+ include/hw/firmware/smbios.h          |   3 +-
+ include/hw/i386/pc.h                  |  22 ------
+ include/hw/mem/memory-device.h        |   2 +-
+ include/hw/mem/pc-dimm.h              |   3 +-
+ target/i386/cpu.h                     |   3 -
+ target/i386/kvm/kvm-cpu.h             |  41 ----------
+ hw/acpi/ich9.c                        |  46 ++---------
+ hw/arm/virt.c                         |   5 +-
+ hw/i386/acpi-build.c                  |  95 ++---------------------
+ hw/i386/fw_cfg.c                      |   3 +-
+ hw/i386/pc.c                          | 107 ++++----------------------
+ hw/i386/pc_piix.c                     | 102 +-----------------------
+ hw/loongarch/virt.c                   |   4 +-
+ hw/mem/memory-device.c                |  12 +--
+ hw/mem/pc-dimm.c                      |   6 +-
+ hw/ppc/spapr.c                        |   2 +-
+ hw/riscv/virt.c                       |   2 +-
+ hw/smbios/smbios.c                    |  13 +---
+ hw/usb/hcd-xhci-nec.c                 |   4 -
+ hw/usb/hcd-xhci-pci.c                 |   4 +-
+ hw/usb/hcd-xhci.c                     |  42 ++--------
+ hw/virtio/virtio-md-pci.c             |   2 +-
+ target/i386/cpu.c                     |   2 -
+ target/i386/kvm/kvm-cpu.c             |   3 +-
+ target/i386/kvm/kvm.c                 |   7 +-
+ tests/avocado/mem-addr-space-check.py |   9 +--
+ 29 files changed, 68 insertions(+), 484 deletions(-)
+ delete mode 100644 target/i386/kvm/kvm-cpu.h
 
-Daniel
+-- 
+2.41.0
 
-> 
-> Thanks,
-> Chao
-> 
-> 
-> On 2023-12-22 22:16, Daniel Henrique Barboza <dbarboza@ventanamicro.com> wrote:
->>
->> Hi,
->>
->> It seems that we still need the kernel KVM side to be sorted out first [1],
->> so I believe we should wait a bit until we can review this RFC. Otherwise we
->> might risk reviewing something that has to be changed later.
->>
->>
->> [1] https://lore.kernel.org/kvm/20231221095002.7404-1-duchao@eswincomputing.com/
->>
->>
->> Thanks,
->>
->> Daniel
->>
->> On 12/21/23 06:49, Chao Du wrote:
->>> This series implements QEMU KVM Guest Debug on RISC-V. Currently, we can
->>> debug RISC-V KVM guest from the host side, with software breakpoints.
->>>
->>> A brief test was done on QEMU RISC-V hypervisor emulator.
->>>
->>> A TODO list which will be added later:
->>> 1. HW breakpoints support
->>> 2. Test cases
->>>
->>> This series is based on QEMU 8.2.0-rc4 and is also available at:
->>> https://github.com/Du-Chao/qemu/tree/riscv_gd_sw
->>>
->>> This is dependent on KVM side changes:
->>> https://github.com/Du-Chao/linux/tree/riscv_gd_sw
->>>
->>> Chao Du (4):
->>>     target/riscv/kvm: add software breakpoints support
->>>     target/riscv/kvm: implement kvm_arch_update_guest_debug()
->>>     target/riscv/kvm: handle the exit with debug reason
->>>     linux-headers: enable KVM GUEST DEBUG for RISC-V
->>>
->>>    accel/kvm/kvm-all.c           |   8 +--
->>>    include/sysemu/kvm.h          |   6 +-
->>>    linux-headers/asm-riscv/kvm.h |   1 +
->>>    target/arm/kvm64.c            |   6 +-
->>>    target/i386/kvm/kvm.c         |   6 +-
->>>    target/mips/kvm.c             |   6 +-
->>>    target/ppc/kvm.c              |   6 +-
->>>    target/riscv/kvm/kvm-cpu.c    | 101 ++++++++++++++++++++++++++++++++++
->>>    target/s390x/kvm/kvm.c        |   6 +-
->>>    9 files changed, 130 insertions(+), 16 deletions(-)
->>>
->>> --
->>> 2.17.1
->>>
 
