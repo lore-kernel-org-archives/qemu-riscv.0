@@ -4,92 +4,143 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9994C04FF9
-	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Apr 2024 13:58:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36177C4345F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Apr 2024 14:23:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rwjGR-0003V7-Ra; Tue, 16 Apr 2024 09:54:23 -0400
+	id 1rwjiQ-0000pN-9r; Tue, 16 Apr 2024 10:23:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwjGQ-0003Ld-Ey
- for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 09:54:22 -0400
-Received: from mail-ed1-x535.google.com ([2a00:1450:4864:20::535])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwjGO-0001uN-5v
- for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 09:54:22 -0400
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5700a9caee0so4084320a12.2
- for <qemu-riscv@nongnu.org>; Tue, 16 Apr 2024 06:54:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713275659; x=1713880459; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=oke/YPM4C6ufallz55sQ7YyPAmP6LUvQ2Lhm6MsGGjM=;
- b=SZ+OYxK/vkDRQuDA3dPwPK0lyX9ODIo9jwYJuPFtQwoFsui376b7V9ARlz0dQ1IclO
- FNz5rqDpLUgJJs16KAtwvksbEevRSm/5wHDyVmiZ/Cmcm+Sqz6bEcbyEts+IbOddfNnF
- xggipkPAH5QkhKP7IxewtKrIwRheBq9cKvKvOlX/nwPxK1wyA9MT7RFWe4J0v3XS2eL4
- Sg0moTCT8dkmskCThBqSH8+Z7zVCalPKg2wRKDH+RJAu34N3u73taT9tFc7U66NJ9+oP
- HWHxZnRbGJy8DJMkzP18pobyIpOCVlu9PgrLw9OJqTFRS/lx+qYb9apqeMeI2gPVHkEJ
- vIbg==
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rwjiL-0000oc-CA
+ for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 10:23:13 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1rwjiJ-0007Fq-Nh
+ for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 10:23:12 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1713277390;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=/toMAwxMzMjKa7oPaz7A5ID2Uq4XsifLCkkneAg0ZPc=;
+ b=VRSUghuRJkaAhXLeyYGnNg7+2Y8g5S/aOwFgBS2SEsRahSLsPhXcZ6Av+ZjXbnn11g/CnL
+ NaTZZa6gqOo7WwvKucDPbWv34YesC2bCvF/YifCQlG8ox4pNTmfdIuUZw4LwMIlPD5L7wE
+ Ilmky+juvF08T8vl0m+Dp3H7flAUihI=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-518-Q8EIj3vHO5ukONvRB91iUw-1; Tue, 16 Apr 2024 10:23:09 -0400
+X-MC-Unique: Q8EIj3vHO5ukONvRB91iUw-1
+Received: by mail-wr1-f71.google.com with SMTP id
+ ffacd0b85a97d-343d3e1ff1eso3403665f8f.3
+ for <qemu-riscv@nongnu.org>; Tue, 16 Apr 2024 07:23:07 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713275659; x=1713880459;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=oke/YPM4C6ufallz55sQ7YyPAmP6LUvQ2Lhm6MsGGjM=;
- b=vIUsNTScu0Qjp2Lm2Vz/o4pIN0I8dxOPta7V05ioAz4/9QkskOymIg3d3NEsYg7hyj
- UhrpZK7TqtNSYi0hZoCMiepBGcnz1IkCSP2HZoOwJhNTF0NjjcvtxmareCOhQ6Pt21YY
- a/Jpfb/Y04UCqyhKtE/GcCbSpuPku/NWCTn2QCuLt0IpLxEFSYS9KSQW5UN0gN72J8cM
- +7xj/ngLV1BVma3RcxCJNXtFBhOFoCtYhVAYtCss/9w8P2p79HHr9zPgl5rd1kzGUCZu
- IHOSc4FpcHFOxpCqSKC6oF+Vnf1aSkq5Jtdhs9GmaPK6rerc/jDbsjOUiw2Wth6DFrWE
- g3Ww==
+ d=1e100.net; s=20230601; t=1713277387; x=1713882187;
+ h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=/toMAwxMzMjKa7oPaz7A5ID2Uq4XsifLCkkneAg0ZPc=;
+ b=pqRoaM/quabBSUZlOw4SnfGUt6emahEfSJ7XOxLi0evMIrsPSobh583OynzgaWqGnx
+ lzovhycNDA/CzM9Au/4Sd5Nkuv2TuCd19PubKbozn/yx+86d5ie4gOjPo2pz44/YXFUO
+ RhpnJpsbclda57N66Y20o6hpQRIgx/qgVdwSJzDUk3S5JzWbwe114MMGVyF1Iu8LAqrV
+ 97jFmrH+BIp56BYl/iF2fjGy3GpfwN1w7Pm+a0G+uNQhry6qHzg6I20sB0aYtjThEV5Y
+ ggissqRMa1ZqXj9dZ7zR+6KwL0yBcsBPPFOw5koJCcyxPz7epgRWuUSK+2fu/f0sY77e
+ 8WMg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVj7jDBPdnnjfXL8/a4xRww0DHQgSqPTWq9g0HMYCRi3DmmvOy/BwFNsygK5D4C6kpwx7zOZ49tFkCviL4gf/OlRscVYig=
-X-Gm-Message-State: AOJu0YyP8dB6r3N6VRQTveW2RJTk2IItYVZRTGhS21mJFrg2zlqNeWHB
- PJt1qefxzaw8c42YQhItcrGkmQ7huN2OBFLorG+CfEtigGG/Nl4EoDndlZWuzJ8=
-X-Google-Smtp-Source: AGHT+IFar985eI7fTq6SQK+TUJ3H9X+wIpTRFo6sDSXfswzXKhPwrzFViGaJT5lZYkwxmsUBflCNJQ==
-X-Received: by 2002:a17:906:46c8:b0:a52:42ce:7da6 with SMTP id
- k8-20020a17090646c800b00a5242ce7da6mr5855717ejs.10.1713275658677; 
- Tue, 16 Apr 2024 06:54:18 -0700 (PDT)
-Received: from m1x-phil.lan ([176.176.155.61])
- by smtp.gmail.com with ESMTPSA id
- rh4-20020a17090720e400b00a5255afc856sm4100307ejb.84.2024.04.16.06.54.16
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 16 Apr 2024 06:54:18 -0700 (PDT)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-To: qemu-devel@nongnu.org,
-	Thomas Huth <thuth@redhat.com>
+ AJvYcCXX3m8FCmkMM8qC/RqMso+Lar+CBnBN8BqQxuDprzcX2vxAiQ6vvz7qT5wnkTgzIuImunidBzaO7J5h76ohPPXEOBRZoG0=
+X-Gm-Message-State: AOJu0Yzwj5NOGoa1t5cQ+6FnnipP2Pro1XVEAh0KO7StEiJdzS/dxNg9
+ 8AMEEyWLiNJWoXyK/L5Punqa++fk01LUcKip2piizk3ROpc/PTINKH84DSQx6YDNeZLW6e4LPYM
+ pVr/F+vR4fOTTUWS+2FFgRLlB8b4N2l8vIK30aYeS5mZO0BQwbnBH
+X-Received: by 2002:a5d:5149:0:b0:349:8c4c:497e with SMTP id
+ u9-20020a5d5149000000b003498c4c497emr1339347wrt.58.1713277386822; 
+ Tue, 16 Apr 2024 07:23:06 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGlVY6ZkJQfq/zc/49UjC+Aj5YVDvjHy2vKm3Is+S4PhlZBabFRfKZq23YPDSQihr2gx3gFjA==
+X-Received: by 2002:a5d:5149:0:b0:349:8c4c:497e with SMTP id
+ u9-20020a5d5149000000b003498c4c497emr1339321wrt.58.1713277386449; 
+ Tue, 16 Apr 2024 07:23:06 -0700 (PDT)
+Received: from [192.168.0.9] (ip-109-43-179-50.web.vodafone.de.
+ [109.43.179.50]) by smtp.gmail.com with ESMTPSA id
+ e18-20020adffd12000000b00343826878e8sm14974161wrr.38.2024.04.16.07.23.05
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 16 Apr 2024 07:23:06 -0700 (PDT)
+Message-ID: <15834b55-8226-4355-91f2-9d5df4d3bc9b@redhat.com>
+Date: Tue, 16 Apr 2024 16:23:04 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 01/22] hw/i386/pc: Deprecate 2.4 to 2.7 pc-i440fx
+ machines
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org
 Cc: Ani Sinha <anisinha@redhat.com>, qemu-riscv@nongnu.org,
  qemu-ppc@nongnu.org, Zhao Liu <zhao1.liu@intel.com>,
  David Hildenbrand <david@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
  Igor Mammedov <imammedo@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Eduardo Habkost <eduardo@habkost.net>, Cleber Rosa <crosa@redhat.com>,
- Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Beraldo Leal <bleal@redhat.com>
-Subject: [PATCH v3 13/22] hw/i386/pc: Remove
- PCMachineClass::enforce_aligned_dimm
-Date: Tue, 16 Apr 2024 15:52:42 +0200
-Message-ID: <20240416135252.8384-14-philmd@linaro.org>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20240416135252.8384-1-philmd@linaro.org>
+ devel@lists.libvirt.org, Richard Henderson <richard.henderson@linaro.org>,
+ Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>
 References: <20240416135252.8384-1-philmd@linaro.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+ <20240416135252.8384-2-philmd@linaro.org>
+From: Thomas Huth <thuth@redhat.com>
+Autocrypt: addr=thuth@redhat.com; keydata=
+ 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
+In-Reply-To: <20240416135252.8384-2-philmd@linaro.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::535;
- envelope-from=philmd@linaro.org; helo=mail-ed1-x535.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -38
+X-Spam_score: -3.9
+X-Spam_bar: ---
+X-Spam_report: (-3.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.844,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,117 +156,34 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-PCMachineClass::enforce_aligned_dimm was only used by the
-pc-i440fx-2.1 machine, which got removed. It is now always
-true. Remove it, simplifying pc_get_device_memory_range().
-Update the comment in Avocado test_phybits_low_pse36().
+On 16/04/2024 15.52, Philippe Mathieu-Daudé wrote:
+> Similarly to the commit c7437f0ddb "docs/about: Mark the
+> old pc-i440fx-2.0 - 2.3 machine types as deprecated",
+> deprecate the 2.4 to 2.7 machines.
+> 
+> Suggested-by: Thomas Huth <thuth@redhat.com>
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> ---
+>   docs/about/deprecated.rst | 4 ++--
+>   hw/i386/pc_piix.c         | 2 +-
+>   2 files changed, 3 insertions(+), 3 deletions(-)
+> 
+> diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
+> index 7b548519b5..967ee34267 100644
+> --- a/docs/about/deprecated.rst
+> +++ b/docs/about/deprecated.rst
+> @@ -219,8 +219,8 @@ deprecated; use the new name ``dtb-randomness`` instead. The new name
+>   better reflects the way this property affects all random data within
+>   the device tree blob, not just the ``kaslr-seed`` node.
+>   
+> -``pc-i440fx-2.0`` up to ``pc-i440fx-2.3`` (since 8.2)
+> -'''''''''''''''''''''''''''''''''''''''''''''''''''''
+> +``pc-i440fx-2.0`` up to ``pc-i440fx-2.3`` (since 8.2) and ``pc-i440fx-2.4`` up to ``pc-i440fx-2.7`` (since 9.1)
+> +'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
----
- include/hw/i386/pc.h                  |  3 ---
- hw/i386/pc.c                          | 14 +++-----------
- tests/avocado/mem-addr-space-check.py |  9 ++++-----
- 3 files changed, 7 insertions(+), 19 deletions(-)
+Didn't we want to mark everything up to 2.12 as deprecated?
 
-diff --git a/include/hw/i386/pc.h b/include/hw/i386/pc.h
-index c2d9af36b2..231aae92ed 100644
---- a/include/hw/i386/pc.h
-+++ b/include/hw/i386/pc.h
-@@ -74,8 +74,6 @@ typedef struct PCMachineState {
-  *
-  * Compat fields:
-  *
-- * @enforce_aligned_dimm: check that DIMM's address/size is aligned by
-- *                        backend's alignment value if provided
-  * @acpi_data_size: Size of the chunk of memory at the top of RAM
-  *                  for the BIOS ACPI tables and other BIOS
-  *                  datastructures.
-@@ -114,7 +112,6 @@ struct PCMachineClass {
-     /* RAM / address space compat: */
-     bool gigabyte_align;
-     bool has_reserved_memory;
--    bool enforce_aligned_dimm;
-     bool broken_reserved_end;
-     bool enforce_amd_1tb_hole;
- 
-diff --git a/hw/i386/pc.c b/hw/i386/pc.c
-index 2bf1bfd5b2..c7bfdfc1e1 100644
---- a/hw/i386/pc.c
-+++ b/hw/i386/pc.c
-@@ -716,7 +716,6 @@ static void pc_get_device_memory_range(PCMachineState *pcms,
-                                        hwaddr *base,
-                                        ram_addr_t *device_mem_size)
- {
--    PCMachineClass *pcmc = PC_MACHINE_GET_CLASS(pcms);
-     MachineState *machine = MACHINE(pcms);
-     ram_addr_t size;
-     hwaddr addr;
-@@ -724,10 +723,8 @@ static void pc_get_device_memory_range(PCMachineState *pcms,
-     size = machine->maxram_size - machine->ram_size;
-     addr = ROUND_UP(pc_above_4g_end(pcms), 1 * GiB);
- 
--    if (pcmc->enforce_aligned_dimm) {
--        /* size device region assuming 1G page max alignment per slot */
--        size += (1 * GiB) * machine->ram_slots;
--    }
-+    /* size device region assuming 1G page max alignment per slot */
-+    size += (1 * GiB) * machine->ram_slots;
- 
-     *base = addr;
-     *device_mem_size = size;
-@@ -1285,12 +1282,9 @@ void pc_i8259_create(ISABus *isa_bus, qemu_irq *i8259_irqs)
- static void pc_memory_pre_plug(HotplugHandler *hotplug_dev, DeviceState *dev,
-                                Error **errp)
- {
--    const PCMachineState *pcms = PC_MACHINE(hotplug_dev);
-     const X86MachineState *x86ms = X86_MACHINE(hotplug_dev);
--    const PCMachineClass *pcmc = PC_MACHINE_GET_CLASS(pcms);
-     const MachineState *ms = MACHINE(hotplug_dev);
-     const bool is_nvdimm = object_dynamic_cast(OBJECT(dev), TYPE_NVDIMM);
--    const uint64_t legacy_align = TARGET_PAGE_SIZE;
-     Error *local_err = NULL;
- 
-     /*
-@@ -1315,8 +1309,7 @@ static void pc_memory_pre_plug(HotplugHandler *hotplug_dev, DeviceState *dev,
-         return;
-     }
- 
--    pc_dimm_pre_plug(PC_DIMM(dev), MACHINE(hotplug_dev),
--                     pcmc->enforce_aligned_dimm ? NULL : &legacy_align, errp);
-+    pc_dimm_pre_plug(PC_DIMM(dev), MACHINE(hotplug_dev), NULL, errp);
- }
- 
- static void pc_memory_plug(HotplugHandler *hotplug_dev,
-@@ -1780,7 +1773,6 @@ static void pc_machine_class_init(ObjectClass *oc, void *data)
-     pcmc->smbios_defaults = true;
-     pcmc->gigabyte_align = true;
-     pcmc->has_reserved_memory = true;
--    pcmc->enforce_aligned_dimm = true;
-     pcmc->enforce_amd_1tb_hole = true;
-     /* BIOS ACPI tables: 128K. Other BIOS datastructures: less than 4K reported
-      * to be used at the moment, 32K should be enough for a while.  */
-diff --git a/tests/avocado/mem-addr-space-check.py b/tests/avocado/mem-addr-space-check.py
-index af019969c0..85541ea051 100644
---- a/tests/avocado/mem-addr-space-check.py
-+++ b/tests/avocado/mem-addr-space-check.py
-@@ -31,11 +31,10 @@ def test_phybits_low_pse36(self):
-         at 4 GiB boundary when "above_4g_mem_size" is 0 (this would be true when
-         we have 0.5 GiB of VM memory, see pc_q35_init()). This means total
-         hotpluggable memory size is 60 GiB. Per slot, we reserve 1 GiB of memory
--        for dimm alignment for all newer machines (see enforce_aligned_dimm
--        property for pc machines and pc_get_device_memory_range()). That leaves
--        total hotpluggable actual memory size of 59 GiB. If the VM is started
--        with 0.5 GiB of memory, maxmem should be set to a maximum value of
--        59.5 GiB to ensure that the processor can address all memory directly.
-+        for dimm alignment for all machines. That leaves total hotpluggable
-+        actual memory size of 59 GiB. If the VM is started with 0.5 GiB of
-+        memory, maxmem should be set to a maximum value of 59.5 GiB to ensure
-+        that the processor can address all memory directly.
-         Note that 64-bit pci hole size is 0 in this case. If maxmem is set to
-         59.6G, QEMU should fail to start with a message "phy-bits are too low".
-         If maxmem is set to 59.5G with all other QEMU parameters identical, QEMU
--- 
-2.41.0
+Anyway,
+Reviewed-by: Thomas Huth <thuth@redhat.com>
 
 
