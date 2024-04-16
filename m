@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE9CBC04FF6
-	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Apr 2024 19:01:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 186DBC4345F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Apr 2024 19:01:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rwo3I-0001Jv-BZ; Tue, 16 Apr 2024 15:01:08 -0400
+	id 1rwo3R-0001je-Ky; Tue, 16 Apr 2024 15:01:17 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwo2Q-0000tW-7O
- for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 15:00:15 -0400
-Received: from mail-lf1-x12f.google.com ([2a00:1450:4864:20::12f])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwo3Q-0001et-2i
+ for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 15:01:16 -0400
+Received: from mail-ed1-x52d.google.com ([2a00:1450:4864:20::52d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwo2N-0005Zl-LY
- for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 15:00:13 -0400
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-5171a529224so6094324e87.0
- for <qemu-riscv@nongnu.org>; Tue, 16 Apr 2024 12:00:11 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwo3L-0005jx-O4
+ for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 15:01:15 -0400
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-56e1bbdb362so5257374a12.1
+ for <qemu-riscv@nongnu.org>; Tue, 16 Apr 2024 12:01:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713294010; x=1713898810; darn=nongnu.org;
+ d=linaro.org; s=google; t=1713294069; x=1713898869; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=r03IbH4Q5jukHMDYRNDrIPnxYvDkdnR4utG+Rvdo7L0=;
- b=hLqgxtpEB5H4QcbmOK6mXxPG3N0D5AabwrCTq8kBJaeDVVzcw1VaVQmOW31GV3PXOt
- LtM8t2umMYJ1Ld6mNPxA6qSFpLbf08ZJtiSYmcReQIANih0P5loxPyGoiijrl5JUqung
- 32McCauMNVBLSKLS+ylf5jVpbavxCL6C1hWbXTcWlHa9VvvUdCOt2aSQuoywGzCrIiVj
- ygGco1zN89jWwnyDAURbjq8jEOTJlY9qJYxNpOtcc1IZTqwCXH7cW/6l5De9Nrwxo1Wq
- RcCJz9tYmTpkvvh2ETmN3+UNAsInhenC/nPeLDaylUaFnNj/8iqMveMIkmR3TWqsa43w
- DD+g==
+ bh=oke/YPM4C6ufallz55sQ7YyPAmP6LUvQ2Lhm6MsGGjM=;
+ b=oZjhGlXG14ViE1tEmhme88dNqZQUqkTSwbFsWKryVvfrh0aSYMKWgFDMOym9FSmI3g
+ VsRsBBGopH/lE0mIW5ITAKmOlTV3ju01IKjdkLYwK2W3XYWa1IxQX6hWlgXZgMtLaWPK
+ qbZ/dkjdFOJMMTCEJSdsDP4hQkAeWmei68FuLfKF1pUHf1CYc0wvqzHx0Gn7rdv9TpI9
+ HkBj2GHxeRk6k+7kKq5JSolI6ETHY0bKTX5nv7aj3PgOoA+quwM9w4or7dXFX9CK5Mc8
+ S1obqnYBWqtbqBK9AtZoczABzaN7JlcHpcLDAP6eXKK1LEDsM2O0Phw4WOKJ8XlbQ+sJ
+ f6Iw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713294010; x=1713898810;
+ d=1e100.net; s=20230601; t=1713294069; x=1713898869;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=r03IbH4Q5jukHMDYRNDrIPnxYvDkdnR4utG+Rvdo7L0=;
- b=L35YTvyDZ3rIZ0Osspfo/4Do52CMSmh7E+Oya9tXwqQf2ufzF2AxWJ1pQZP1Div78E
- Jo2DkSplw3pk8iT3iWekX3GF5A0ZCrTl2VxbeWxi+jckjwcW2+sAOOBuA95hZxZY8tSg
- AcIhvG0Yr6PT6F6C+N9A54CpnXaFWp3DmAjas+MPo9qNIOU7ak1epC4gE9wKeNq6b5GP
- tFp3ZqLRg1SBpv9vLTTUAl4J7S9pFrv5BdxY4tDm5a/VHsTxm/RylyO9Wd0HF8HcSQoJ
- xIvPFj1gclIl5JRxTzitmnLR2pEE4ozCo0RATpoHjiUwHCW4QbDMlrxoV4l2b2lVIAB4
- X1nA==
+ bh=oke/YPM4C6ufallz55sQ7YyPAmP6LUvQ2Lhm6MsGGjM=;
+ b=Mx3bzWIwP7XdTH1itWD5dTS5sNxNLG+p4rNQ9/zU1A5v5aTulCGANWgz5BKobklRdb
+ 3w3cG20eDg1CM0KeYofJxx+RnLqOT0aa4CPs209OHRstp3JC7z2MQrjHQmF+k1Cj5l4c
+ n71zi7xqXqxSw9kOs1aJcP9wloOxAsD7N7ojaUVrKf4p8tKuvhsGdA1iDFIJlo7NNkk/
+ X07dbKr+GTIEEl6FDv1+2s2bFnnmCOlzpU9HxSIwYXv+84+N6KClxYK41C2iT5vweIwG
+ 1aRnNxu2JW1nwa5JxELpeo2rDmQs5M1M0JUrGSz4GsQNp2+RVGrWGmELZvXwYa7Kz576
+ 1cBw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVTQeMHBW/jFSw8yTv11rxkQd3z67XWuCxSITulmfz3hGGjlr+aSJRC1gXnmaZqYPlFNTdcwnL96YZ/zbUIEXBk2m38+Nk=
-X-Gm-Message-State: AOJu0YxdoNhLc5NYXh0B++S+5CfTnyk+aIcZw/ulOy6KBAfXfQHy0Ibq
- 31o/KzwayMN6OHlvDwLzbppzOJS8KlBg68MamJmKbEgwcKyfEUJ87JzQjfhHiT8=
-X-Google-Smtp-Source: AGHT+IHRsiss2Z7S14JYdvY6Yt6YrgQ0OojgolVzH0Nx8AY7SPkGC1icvBRPX09j77zZ7WWRP2L3sQ==
-X-Received: by 2002:ac2:5544:0:b0:515:bee6:5e8c with SMTP id
- l4-20020ac25544000000b00515bee65e8cmr7857295lfk.40.1713294009690; 
- Tue, 16 Apr 2024 12:00:09 -0700 (PDT)
+ AJvYcCWgnpuubp5sVWSwpcScxiObeDbHDgf6n3Qyh18Khd75m/GjQCbsBIcIPuLwEvXz5/GUm217IBIA00UsdQl4BlKN9stNDus=
+X-Gm-Message-State: AOJu0YwF5ErPEGHwbg6kZgT/+RGwkneyvPgBoi9x5cpsW3t8XYtRsuho
+ GhjI2yzzlNRP0MZupHMuPhgf8IVHdv+oaYjPhL8+CS6I+YhBHrE5azjXnPLDDGQ=
+X-Google-Smtp-Source: AGHT+IHmlskYJ8/Hu0VI1tAvRagZD8+jRbz02VBA+zLU6IYfCB3uVa1UfcKarXuuTqhkhann3c3ikw==
+X-Received: by 2002:a17:906:ae8c:b0:a52:6fca:eb57 with SMTP id
+ md12-20020a170906ae8c00b00a526fcaeb57mr4613401ejb.45.1713294069046; 
+ Tue, 16 Apr 2024 12:01:09 -0700 (PDT)
 Received: from m1x-phil.lan ([176.176.155.61])
  by smtp.gmail.com with ESMTPSA id
- ae12-20020a17090725cc00b00a529aeb4eccsm2558072ejc.140.2024.04.16.12.00.07
+ jz1-20020a17090775e100b00a526457fc84sm3564186ejc.57.2024.04.16.12.01.06
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 16 Apr 2024 12:00:09 -0700 (PDT)
+ Tue, 16 Apr 2024 12:01:08 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org,
 	Thomas Huth <thuth@redhat.com>
@@ -66,18 +66,24 @@ Cc: "Michael S. Tsirkin" <mst@redhat.com>, qemu-riscv@nongnu.org,
  kvm@vger.kernel.org, qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
  Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Zhao Liu <zhao1.liu@intel.com>, Gerd Hoffmann <kraxel@redhat.com>
-Subject: [PATCH v4 04/22] hw/usb/hcd-xhci: Remove XHCI_FLAG_SS_FIRST flag
-Date: Tue, 16 Apr 2024 20:59:20 +0200
-Message-ID: <20240416185939.37984-5-philmd@linaro.org>
+ Zhao Liu <zhao1.liu@intel.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Eduardo Habkost <eduardo@habkost.net>, Cleber Rosa <crosa@redhat.com>,
+ Wainer dos Santos Moschetta <wainersm@redhat.com>,
+ Beraldo Leal <bleal@redhat.com>
+Subject: [PATCH v4 13/22] hw/i386/pc: Remove
+ PCMachineClass::enforce_aligned_dimm
+Date: Tue, 16 Apr 2024 20:59:29 +0200
+Message-ID: <20240416185939.37984-14-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240416185939.37984-1-philmd@linaro.org>
 References: <20240416185939.37984-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::12f;
- envelope-from=philmd@linaro.org; helo=mail-lf1-x12f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52d;
+ envelope-from=philmd@linaro.org; helo=mail-ed1-x52d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -100,142 +106,116 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-XHCI_FLAG_SS_FIRST was only used by the pc-i440fx-2.0 machine,
-which got removed. Remove it and simplify various functions in
-hcd-xhci.c.
+PCMachineClass::enforce_aligned_dimm was only used by the
+pc-i440fx-2.1 machine, which got removed. It is now always
+true. Remove it, simplifying pc_get_device_memory_range().
+Update the comment in Avocado test_phybits_low_pse36().
 
-Reviewed-by: Thomas Huth <thuth@redhat.com>
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- hw/usb/hcd-xhci.h     |  3 +--
- hw/usb/hcd-xhci-nec.c |  2 --
- hw/usb/hcd-xhci-pci.c |  1 -
- hw/usb/hcd-xhci.c     | 42 ++++++++----------------------------------
- 4 files changed, 9 insertions(+), 39 deletions(-)
+ include/hw/i386/pc.h                  |  3 ---
+ hw/i386/pc.c                          | 14 +++-----------
+ tests/avocado/mem-addr-space-check.py |  9 ++++-----
+ 3 files changed, 7 insertions(+), 19 deletions(-)
 
-diff --git a/hw/usb/hcd-xhci.h b/hw/usb/hcd-xhci.h
-index 1efa4858fb..fe16d7ad05 100644
---- a/hw/usb/hcd-xhci.h
-+++ b/hw/usb/hcd-xhci.h
-@@ -36,8 +36,7 @@ typedef struct XHCIStreamContext XHCIStreamContext;
- typedef struct XHCIEPContext XHCIEPContext;
+diff --git a/include/hw/i386/pc.h b/include/hw/i386/pc.h
+index c2d9af36b2..231aae92ed 100644
+--- a/include/hw/i386/pc.h
++++ b/include/hw/i386/pc.h
+@@ -74,8 +74,6 @@ typedef struct PCMachineState {
+  *
+  * Compat fields:
+  *
+- * @enforce_aligned_dimm: check that DIMM's address/size is aligned by
+- *                        backend's alignment value if provided
+  * @acpi_data_size: Size of the chunk of memory at the top of RAM
+  *                  for the BIOS ACPI tables and other BIOS
+  *                  datastructures.
+@@ -114,7 +112,6 @@ struct PCMachineClass {
+     /* RAM / address space compat: */
+     bool gigabyte_align;
+     bool has_reserved_memory;
+-    bool enforce_aligned_dimm;
+     bool broken_reserved_end;
+     bool enforce_amd_1tb_hole;
  
- enum xhci_flags {
--    XHCI_FLAG_SS_FIRST = 1,
--    XHCI_FLAG_ENABLE_STREAMS,
-+    XHCI_FLAG_ENABLE_STREAMS = 1,
- };
+diff --git a/hw/i386/pc.c b/hw/i386/pc.c
+index 2bf1bfd5b2..c7bfdfc1e1 100644
+--- a/hw/i386/pc.c
++++ b/hw/i386/pc.c
+@@ -716,7 +716,6 @@ static void pc_get_device_memory_range(PCMachineState *pcms,
+                                        hwaddr *base,
+                                        ram_addr_t *device_mem_size)
+ {
+-    PCMachineClass *pcmc = PC_MACHINE_GET_CLASS(pcms);
+     MachineState *machine = MACHINE(pcms);
+     ram_addr_t size;
+     hwaddr addr;
+@@ -724,10 +723,8 @@ static void pc_get_device_memory_range(PCMachineState *pcms,
+     size = machine->maxram_size - machine->ram_size;
+     addr = ROUND_UP(pc_above_4g_end(pcms), 1 * GiB);
  
- typedef enum TRBType {
-diff --git a/hw/usb/hcd-xhci-nec.c b/hw/usb/hcd-xhci-nec.c
-index 5d5b069cf9..0c063b3697 100644
---- a/hw/usb/hcd-xhci-nec.c
-+++ b/hw/usb/hcd-xhci-nec.c
-@@ -41,8 +41,6 @@ struct XHCINecState {
- static Property nec_xhci_properties[] = {
-     DEFINE_PROP_ON_OFF_AUTO("msi", XHCIPciState, msi, ON_OFF_AUTO_AUTO),
-     DEFINE_PROP_ON_OFF_AUTO("msix", XHCIPciState, msix, ON_OFF_AUTO_AUTO),
--    DEFINE_PROP_BIT("superspeed-ports-first", XHCINecState, flags,
--                    XHCI_FLAG_SS_FIRST, true),
-     DEFINE_PROP_UINT32("intrs", XHCINecState, intrs, XHCI_MAXINTRS),
-     DEFINE_PROP_UINT32("slots", XHCINecState, slots, XHCI_MAXSLOTS),
-     DEFINE_PROP_END_OF_LIST(),
-diff --git a/hw/usb/hcd-xhci-pci.c b/hw/usb/hcd-xhci-pci.c
-index cbad96f393..264d7ebb77 100644
---- a/hw/usb/hcd-xhci-pci.c
-+++ b/hw/usb/hcd-xhci-pci.c
-@@ -242,7 +242,6 @@ static void qemu_xhci_instance_init(Object *obj)
-     s->msix     = ON_OFF_AUTO_AUTO;
-     xhci->numintrs = XHCI_MAXINTRS;
-     xhci->numslots = XHCI_MAXSLOTS;
--    xhci_set_flag(xhci, XHCI_FLAG_SS_FIRST);
+-    if (pcmc->enforce_aligned_dimm) {
+-        /* size device region assuming 1G page max alignment per slot */
+-        size += (1 * GiB) * machine->ram_slots;
+-    }
++    /* size device region assuming 1G page max alignment per slot */
++    size += (1 * GiB) * machine->ram_slots;
+ 
+     *base = addr;
+     *device_mem_size = size;
+@@ -1285,12 +1282,9 @@ void pc_i8259_create(ISABus *isa_bus, qemu_irq *i8259_irqs)
+ static void pc_memory_pre_plug(HotplugHandler *hotplug_dev, DeviceState *dev,
+                                Error **errp)
+ {
+-    const PCMachineState *pcms = PC_MACHINE(hotplug_dev);
+     const X86MachineState *x86ms = X86_MACHINE(hotplug_dev);
+-    const PCMachineClass *pcmc = PC_MACHINE_GET_CLASS(pcms);
+     const MachineState *ms = MACHINE(hotplug_dev);
+     const bool is_nvdimm = object_dynamic_cast(OBJECT(dev), TYPE_NVDIMM);
+-    const uint64_t legacy_align = TARGET_PAGE_SIZE;
+     Error *local_err = NULL;
+ 
+     /*
+@@ -1315,8 +1309,7 @@ static void pc_memory_pre_plug(HotplugHandler *hotplug_dev, DeviceState *dev,
+         return;
+     }
+ 
+-    pc_dimm_pre_plug(PC_DIMM(dev), MACHINE(hotplug_dev),
+-                     pcmc->enforce_aligned_dimm ? NULL : &legacy_align, errp);
++    pc_dimm_pre_plug(PC_DIMM(dev), MACHINE(hotplug_dev), NULL, errp);
  }
  
- static const TypeInfo qemu_xhci_info = {
-diff --git a/hw/usb/hcd-xhci.c b/hw/usb/hcd-xhci.c
-index ad40232eb6..b6411f0bda 100644
---- a/hw/usb/hcd-xhci.c
-+++ b/hw/usb/hcd-xhci.c
-@@ -541,18 +541,10 @@ static XHCIPort *xhci_lookup_port(XHCIState *xhci, struct USBPort *uport)
-     case USB_SPEED_LOW:
-     case USB_SPEED_FULL:
-     case USB_SPEED_HIGH:
--        if (xhci_get_flag(xhci, XHCI_FLAG_SS_FIRST)) {
--            index = uport->index + xhci->numports_3;
--        } else {
--            index = uport->index;
--        }
-+        index = uport->index + xhci->numports_3;
-         break;
-     case USB_SPEED_SUPER:
--        if (xhci_get_flag(xhci, XHCI_FLAG_SS_FIRST)) {
--            index = uport->index;
--        } else {
--            index = uport->index + xhci->numports_2;
--        }
-+        index = uport->index;
-         break;
-     default:
-         return NULL;
-@@ -2779,11 +2771,7 @@ static uint64_t xhci_cap_read(void *ptr, hwaddr reg, unsigned size)
-         ret = 0x20425355; /* "USB " */
-         break;
-     case 0x28: /* Supported Protocol:08 */
--        if (xhci_get_flag(xhci, XHCI_FLAG_SS_FIRST)) {
--            ret = (xhci->numports_2<<8) | (xhci->numports_3+1);
--        } else {
--            ret = (xhci->numports_2<<8) | 1;
--        }
-+        ret = (xhci->numports_2 << 8) | (xhci->numports_3 + 1);
-         break;
-     case 0x2c: /* Supported Protocol:0c */
-         ret = 0x00000000; /* reserved */
-@@ -2795,11 +2783,7 @@ static uint64_t xhci_cap_read(void *ptr, hwaddr reg, unsigned size)
-         ret = 0x20425355; /* "USB " */
-         break;
-     case 0x38: /* Supported Protocol:08 */
--        if (xhci_get_flag(xhci, XHCI_FLAG_SS_FIRST)) {
--            ret = (xhci->numports_3<<8) | 1;
--        } else {
--            ret = (xhci->numports_3<<8) | (xhci->numports_2+1);
--        }
-+        ret = (xhci->numports_3 << 8) | 1;
-         break;
-     case 0x3c: /* Supported Protocol:0c */
-         ret = 0x00000000; /* reserved */
-@@ -3349,13 +3333,8 @@ static void usb_xhci_init(XHCIState *xhci)
-     for (i = 0; i < usbports; i++) {
-         speedmask = 0;
-         if (i < xhci->numports_2) {
--            if (xhci_get_flag(xhci, XHCI_FLAG_SS_FIRST)) {
--                port = &xhci->ports[i + xhci->numports_3];
--                port->portnr = i + 1 + xhci->numports_3;
--            } else {
--                port = &xhci->ports[i];
--                port->portnr = i + 1;
--            }
-+            port = &xhci->ports[i + xhci->numports_3];
-+            port->portnr = i + 1 + xhci->numports_3;
-             port->uport = &xhci->uports[i];
-             port->speedmask =
-                 USB_SPEED_MASK_LOW  |
-@@ -3366,13 +3345,8 @@ static void usb_xhci_init(XHCIState *xhci)
-             speedmask |= port->speedmask;
-         }
-         if (i < xhci->numports_3) {
--            if (xhci_get_flag(xhci, XHCI_FLAG_SS_FIRST)) {
--                port = &xhci->ports[i];
--                port->portnr = i + 1;
--            } else {
--                port = &xhci->ports[i + xhci->numports_2];
--                port->portnr = i + 1 + xhci->numports_2;
--            }
-+            port = &xhci->ports[i];
-+            port->portnr = i + 1;
-             port->uport = &xhci->uports[i];
-             port->speedmask = USB_SPEED_MASK_SUPER;
-             assert(i < XHCI_MAXPORTS);
+ static void pc_memory_plug(HotplugHandler *hotplug_dev,
+@@ -1780,7 +1773,6 @@ static void pc_machine_class_init(ObjectClass *oc, void *data)
+     pcmc->smbios_defaults = true;
+     pcmc->gigabyte_align = true;
+     pcmc->has_reserved_memory = true;
+-    pcmc->enforce_aligned_dimm = true;
+     pcmc->enforce_amd_1tb_hole = true;
+     /* BIOS ACPI tables: 128K. Other BIOS datastructures: less than 4K reported
+      * to be used at the moment, 32K should be enough for a while.  */
+diff --git a/tests/avocado/mem-addr-space-check.py b/tests/avocado/mem-addr-space-check.py
+index af019969c0..85541ea051 100644
+--- a/tests/avocado/mem-addr-space-check.py
++++ b/tests/avocado/mem-addr-space-check.py
+@@ -31,11 +31,10 @@ def test_phybits_low_pse36(self):
+         at 4 GiB boundary when "above_4g_mem_size" is 0 (this would be true when
+         we have 0.5 GiB of VM memory, see pc_q35_init()). This means total
+         hotpluggable memory size is 60 GiB. Per slot, we reserve 1 GiB of memory
+-        for dimm alignment for all newer machines (see enforce_aligned_dimm
+-        property for pc machines and pc_get_device_memory_range()). That leaves
+-        total hotpluggable actual memory size of 59 GiB. If the VM is started
+-        with 0.5 GiB of memory, maxmem should be set to a maximum value of
+-        59.5 GiB to ensure that the processor can address all memory directly.
++        for dimm alignment for all machines. That leaves total hotpluggable
++        actual memory size of 59 GiB. If the VM is started with 0.5 GiB of
++        memory, maxmem should be set to a maximum value of 59.5 GiB to ensure
++        that the processor can address all memory directly.
+         Note that 64-bit pci hole size is 0 in this case. If maxmem is set to
+         59.6G, QEMU should fail to start with a message "phy-bits are too low".
+         If maxmem is set to 59.5G with all other QEMU parameters identical, QEMU
 -- 
 2.41.0
 
