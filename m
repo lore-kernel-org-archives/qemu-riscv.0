@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E76D8C4345F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Apr 2024 19:02:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAC76C04FF6
+	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Apr 2024 19:03:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rwo37-00019T-5E; Tue, 16 Apr 2024 15:00:57 -0400
+	id 1rwo3a-0001ya-S4; Tue, 16 Apr 2024 15:01:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwo2I-0000rU-FQ
- for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 15:00:07 -0400
-Received: from mail-ej1-x630.google.com ([2a00:1450:4864:20::630])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwo3Z-0001wm-PY
+ for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 15:01:25 -0400
+Received: from mail-ej1-x62c.google.com ([2a00:1450:4864:20::62c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwo2G-0005Na-Lz
- for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 15:00:06 -0400
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-a5252e5aa01so447413666b.1
- for <qemu-riscv@nongnu.org>; Tue, 16 Apr 2024 12:00:04 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwo3X-0005oO-Ul
+ for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 15:01:25 -0400
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-a51b008b3aeso590587766b.3
+ for <qemu-riscv@nongnu.org>; Tue, 16 Apr 2024 12:01:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713294003; x=1713898803; darn=nongnu.org;
+ d=linaro.org; s=google; t=1713294082; x=1713898882; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=r/B5UTN+VVzZIBHg8vuvzaIXLhoLwQMP7eYF+iW6nSk=;
- b=Jze8/bBAz2nKIkvy50C8jGwBrYzQ9Wd2QPeZdCZutEzvLy8JT2N3p1FbjqsvJR7PIr
- wzVqS70L2dvbBOMi1ZvzcO0wMObfh5t/f1QPZZkVxL/gadbEfwyK7ljoNmWinOrRc99n
- 2KIRfe9tT0FTDL2dqfXS8iApq/0m+IOziWW1FKgqgdUw7tGgDoMWT5YJE4pBTKIWZRbn
- wTv1G88mR89e7rwwiL+lKM1KCSW6TnMXV/KC48L+ILX+z93nU3uAMFUpTQWA4smlYvq8
- 1WeEJrAWduwZIJQEhNH6Td1IinBDpHS7Tol+JHeYLMwNnwBOG+wBqm0tnuHP63vkiJ3e
- SZwQ==
+ bh=+xewXMqFZRdg+aIzvHesVxZBjNGsZ5q/Yk0k6GByalI=;
+ b=E3PmjKOvt0FTl7di5qriohG73+MrjR/p8VJUl2SoI5EWKT5dlh6YThKgMWc2ym4GCq
+ u/XPEswhBqsNt+ZmkhIKxRjpEBTA6OvAT7S5CbYpEXu92oNIsVuRi+LVNavFUjBBNx33
+ U0Hh51M6ziXL4upFrhZ5Yy0jVtL9kRC+Q01ZXro9XqAo/KV3LayIgemw0ys3Hl+SXPgp
+ 4qPFFGzgVkkxfHFLsM0v14ss6Qdlfs0hSy5xbOqhCmVmNuhGsOMjB48va6QWsE5XEVL7
+ fCZqkoc/CFfqEFKjogWjCagGg1apc4WldPQYKQXrLnjQVIiAsn2+WL5+4rL+l9Q3PIGZ
+ 1Z1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713294003; x=1713898803;
+ d=1e100.net; s=20230601; t=1713294082; x=1713898882;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=r/B5UTN+VVzZIBHg8vuvzaIXLhoLwQMP7eYF+iW6nSk=;
- b=IFhK5FoZtQtylTG4xToDwN0HYMRQ/Hlh+wlbm6GA2iVK4Ut/uiTofbsZ/IUpe5NFfv
- xcwJuLt4AEGiHM05OaLv/Sqt73A5qHqkUVIqNew+/Pr6NBTokOrL/Bl9vY9Q9SZBw2Hy
- pQ4BMtvRSI+/VilS5cgAYWHp7yFk1XThbmLXmtm8mtRTti7sX/UQduekZLhNN1hKiT4T
- pMyaPx5Qdvd1xAFbhgfpnXhEVGXwQqqpJ8S//OIWVZJGT6RcVNX88uzOmASkLeyxKQEa
- Ed/mqZvBiJctVfjPwv5682LOURzd0brjOTlJwT7ps66MYrmnnm4YDa7P9t4HJR9jDbGb
- Q6DA==
+ bh=+xewXMqFZRdg+aIzvHesVxZBjNGsZ5q/Yk0k6GByalI=;
+ b=osJ/x4XQQdzH1sDX/RfvZ9yHOVdkmFoQUfV+W2IzhDP/McYtfkBoPoe+B2b16MafxD
+ AGWybbrCQZAnRmBvT+RAYbwksqYz8aCsmLGiVnzopZYbyCQwM2eS6a4hb35GBhFSCRn2
+ DsowGE3rp/dtxg3il06KEtORGRwciBpndgNy0fw1t7WDNk+qiBTPuu83u4sEhavqgC7u
+ JwpoZ1WdGsLt7fGbb6A8O/cNrWPkTw+lc05EzIY/8rj9MB8GnNgTDtScg88VFr0RimQu
+ IjNuA7sWkbFwcc5LAk09iuFYZqCuFevcy33Qb/8/XWNJyE+DLuX5CuebVxzA8JUnWZuh
+ GuEA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUZSHbIY2Zgx71SnyM2oH5t9DE3bCXt2fGX1qwrPPhBeVB6yHPPDv5wkAo0RkXHVYrzttIFmNv6kWEU5RvMbt5v8Dyb2bY=
-X-Gm-Message-State: AOJu0YwcYXEjbncas/pIb5v2WNqDfSNqn/QaCQln1jFxNjFXeWKfJtOn
- JRdXirb7LnvsC/6tCinHJaufYXC8zFGn2827pOp9bhcSqZphOVEhXklIUEOqeBQ=
-X-Google-Smtp-Source: AGHT+IFYPRtucDga6LKg9OYiy7Lp1H1gYO0dq5T1mdbxUJVv5BVKlYTRGjoZPSqqHynS6LcsQRYSwQ==
-X-Received: by 2002:a17:906:bb17:b0:a51:98df:f664 with SMTP id
- jz23-20020a170906bb1700b00a5198dff664mr8257297ejb.76.1713294003357; 
- Tue, 16 Apr 2024 12:00:03 -0700 (PDT)
+ AJvYcCWWp3SbBwW8rcC6rq/kEq9FSosv4HTVeWGQQ0ImTvKuvvq+PJOKR+TbVEjiBwqLbnSOXly0Z2G3kZgZTtFMsgb0LRHvc9g=
+X-Gm-Message-State: AOJu0YxyIeie0npZEpr8oIqFmnwi6pTWMQGLO4DnF5irF/wW6qEcf4Wx
+ 1a7RM05lfT/jVxQcFWFj4N8CTtItV4ARkwEhktphH6zQ4Qaa7SoND5pqtcOjFdc=
+X-Google-Smtp-Source: AGHT+IGrcfAnmJXonN8JuJEvsDmgkpMY/h2vEBpzGAwJB5s5ZBgbSWZCpPAV7Xr/p9z7spQOvcg7Dg==
+X-Received: by 2002:a17:907:724b:b0:a52:5795:226a with SMTP id
+ ds11-20020a170907724b00b00a525795226amr7057705ejc.5.1713294082413; 
+ Tue, 16 Apr 2024 12:01:22 -0700 (PDT)
 Received: from m1x-phil.lan ([176.176.155.61])
  by smtp.gmail.com with ESMTPSA id
- ne33-20020a1709077ba100b00a51b26ba6c5sm7137906ejc.219.2024.04.16.12.00.01
+ q5-20020a170906360500b00a51da296f66sm7135044ejb.41.2024.04.16.12.01.20
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 16 Apr 2024 12:00:02 -0700 (PDT)
+ Tue, 16 Apr 2024 12:01:22 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org,
 	Thomas Huth <thuth@redhat.com>
@@ -66,26 +66,30 @@ Cc: "Michael S. Tsirkin" <mst@redhat.com>, qemu-riscv@nongnu.org,
  kvm@vger.kernel.org, qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
  Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Zhao Liu <zhao1.liu@intel.com>, Gerd Hoffmann <kraxel@redhat.com>
-Subject: [PATCH v4 03/22] hw/usb/hcd-xhci: Remove XHCI_FLAG_FORCE_PCIE_ENDCAP
- flag
-Date: Tue, 16 Apr 2024 20:59:19 +0200
-Message-ID: <20240416185939.37984-4-philmd@linaro.org>
+ Zhao Liu <zhao1.liu@intel.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Xiao Guangrong <xiaoguangrong.eric@gmail.com>
+Subject: [PATCH v4 15/22] hw/mem/memory-device: Remove legacy_align from
+ memory_device_pre_plug()
+Date: Tue, 16 Apr 2024 20:59:31 +0200
+Message-ID: <20240416185939.37984-16-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240416185939.37984-1-philmd@linaro.org>
 References: <20240416185939.37984-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::630;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x630.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62c;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x62c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,57 +105,104 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-XHCI_FLAG_FORCE_PCIE_ENDCAP was only used by the
-pc-i440fx-2.0 machine, which got removed. Remove it
-and simplify usb_xhci_pci_realize().
+'legacy_align' is always NULL, remove it, simplifying
+memory_device_pre_plug().
 
-Reviewed-by: Thomas Huth <thuth@redhat.com>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Thomas Huth <thuth@redhat.com>
+Reviewed-by: David Hildenbrand <david@redhat.com>
 Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- hw/usb/hcd-xhci.h     | 1 -
- hw/usb/hcd-xhci-nec.c | 2 --
- hw/usb/hcd-xhci-pci.c | 3 +--
- 3 files changed, 1 insertion(+), 5 deletions(-)
+ include/hw/mem/memory-device.h |  2 +-
+ hw/i386/pc.c                   |  3 +--
+ hw/mem/memory-device.c         | 12 ++++--------
+ hw/mem/pc-dimm.c               |  2 +-
+ hw/virtio/virtio-md-pci.c      |  2 +-
+ 5 files changed, 8 insertions(+), 13 deletions(-)
 
-diff --git a/hw/usb/hcd-xhci.h b/hw/usb/hcd-xhci.h
-index 98f598382a..1efa4858fb 100644
---- a/hw/usb/hcd-xhci.h
-+++ b/hw/usb/hcd-xhci.h
-@@ -37,7 +37,6 @@ typedef struct XHCIEPContext XHCIEPContext;
+diff --git a/include/hw/mem/memory-device.h b/include/hw/mem/memory-device.h
+index e0571c8a31..c0a58087cc 100644
+--- a/include/hw/mem/memory-device.h
++++ b/include/hw/mem/memory-device.h
+@@ -169,7 +169,7 @@ uint64_t get_plugged_memory_size(void);
+ unsigned int memory_devices_get_reserved_memslots(void);
+ bool memory_devices_memslot_auto_decision_active(void);
+ void memory_device_pre_plug(MemoryDeviceState *md, MachineState *ms,
+-                            const uint64_t *legacy_align, Error **errp);
++                            Error **errp);
+ void memory_device_plug(MemoryDeviceState *md, MachineState *ms);
+ void memory_device_unplug(MemoryDeviceState *md, MachineState *ms);
+ uint64_t memory_device_get_region_size(const MemoryDeviceState *md,
+diff --git a/hw/i386/pc.c b/hw/i386/pc.c
+index 9ba21b9967..633724f177 100644
+--- a/hw/i386/pc.c
++++ b/hw/i386/pc.c
+@@ -1377,8 +1377,7 @@ static void pc_hv_balloon_pre_plug(HotplugHandler *hotplug_dev,
+ {
+     /* The vmbus handler has no hotplug handler; we should never end up here. */
+     g_assert(!dev->hotplugged);
+-    memory_device_pre_plug(MEMORY_DEVICE(dev), MACHINE(hotplug_dev), NULL,
+-                           errp);
++    memory_device_pre_plug(MEMORY_DEVICE(dev), MACHINE(hotplug_dev), errp);
+ }
  
- enum xhci_flags {
-     XHCI_FLAG_SS_FIRST = 1,
--    XHCI_FLAG_FORCE_PCIE_ENDCAP,
-     XHCI_FLAG_ENABLE_STREAMS,
- };
+ static void pc_hv_balloon_plug(HotplugHandler *hotplug_dev,
+diff --git a/hw/mem/memory-device.c b/hw/mem/memory-device.c
+index e098585cda..a5f279adcc 100644
+--- a/hw/mem/memory-device.c
++++ b/hw/mem/memory-device.c
+@@ -345,7 +345,7 @@ uint64_t get_plugged_memory_size(void)
+ }
  
-diff --git a/hw/usb/hcd-xhci-nec.c b/hw/usb/hcd-xhci-nec.c
-index 328e5bfe7c..5d5b069cf9 100644
---- a/hw/usb/hcd-xhci-nec.c
-+++ b/hw/usb/hcd-xhci-nec.c
-@@ -43,8 +43,6 @@ static Property nec_xhci_properties[] = {
-     DEFINE_PROP_ON_OFF_AUTO("msix", XHCIPciState, msix, ON_OFF_AUTO_AUTO),
-     DEFINE_PROP_BIT("superspeed-ports-first", XHCINecState, flags,
-                     XHCI_FLAG_SS_FIRST, true),
--    DEFINE_PROP_BIT("force-pcie-endcap", XHCINecState, flags,
--                    XHCI_FLAG_FORCE_PCIE_ENDCAP, false),
-     DEFINE_PROP_UINT32("intrs", XHCINecState, intrs, XHCI_MAXINTRS),
-     DEFINE_PROP_UINT32("slots", XHCINecState, slots, XHCI_MAXSLOTS),
-     DEFINE_PROP_END_OF_LIST(),
-diff --git a/hw/usb/hcd-xhci-pci.c b/hw/usb/hcd-xhci-pci.c
-index 4423983308..cbad96f393 100644
---- a/hw/usb/hcd-xhci-pci.c
-+++ b/hw/usb/hcd-xhci-pci.c
-@@ -148,8 +148,7 @@ static void usb_xhci_pci_realize(struct PCIDevice *dev, Error **errp)
-                      PCI_BASE_ADDRESS_MEM_TYPE_64,
-                      &s->xhci.mem);
+ void memory_device_pre_plug(MemoryDeviceState *md, MachineState *ms,
+-                            const uint64_t *legacy_align, Error **errp)
++                            Error **errp)
+ {
+     const MemoryDeviceClass *mdc = MEMORY_DEVICE_GET_CLASS(md);
+     Error *local_err = NULL;
+@@ -388,14 +388,10 @@ void memory_device_pre_plug(MemoryDeviceState *md, MachineState *ms,
+         return;
+     }
  
--    if (pci_bus_is_express(pci_get_bus(dev)) ||
--        xhci_get_flag(&s->xhci, XHCI_FLAG_FORCE_PCIE_ENDCAP)) {
-+    if (pci_bus_is_express(pci_get_bus(dev))) {
-         ret = pcie_endpoint_cap_init(dev, 0xa0);
-         assert(ret > 0);
+-    if (legacy_align) {
+-        align = *legacy_align;
+-    } else {
+-        if (mdc->get_min_alignment) {
+-            align = mdc->get_min_alignment(md);
+-        }
+-        align = MAX(align, memory_region_get_alignment(mr));
++    if (mdc->get_min_alignment) {
++        align = mdc->get_min_alignment(md);
+     }
++    align = MAX(align, memory_region_get_alignment(mr));
+     addr = mdc->get_addr(md);
+     addr = memory_device_get_free_addr(ms, !addr ? NULL : &addr, align,
+                                        memory_region_size(mr), &local_err);
+diff --git a/hw/mem/pc-dimm.c b/hw/mem/pc-dimm.c
+index 836384a90f..27919ca45d 100644
+--- a/hw/mem/pc-dimm.c
++++ b/hw/mem/pc-dimm.c
+@@ -69,7 +69,7 @@ void pc_dimm_pre_plug(PCDIMMDevice *dimm, MachineState *machine, Error **errp)
+                             &error_abort);
+     trace_mhp_pc_dimm_assigned_slot(slot);
+ 
+-    memory_device_pre_plug(MEMORY_DEVICE(dimm), machine, NULL, errp);
++    memory_device_pre_plug(MEMORY_DEVICE(dimm), machine, errp);
+ }
+ 
+ void pc_dimm_plug(PCDIMMDevice *dimm, MachineState *machine)
+diff --git a/hw/virtio/virtio-md-pci.c b/hw/virtio/virtio-md-pci.c
+index 62bfb7920b..9ec5067662 100644
+--- a/hw/virtio/virtio-md-pci.c
++++ b/hw/virtio/virtio-md-pci.c
+@@ -37,7 +37,7 @@ void virtio_md_pci_pre_plug(VirtIOMDPCI *vmd, MachineState *ms, Error **errp)
+      * First, see if we can plug this memory device at all. If that
+      * succeeds, branch of to the actual hotplug handler.
+      */
+-    memory_device_pre_plug(md, ms, NULL, &local_err);
++    memory_device_pre_plug(md, ms, &local_err);
+     if (!local_err && bus_handler) {
+         hotplug_handler_pre_plug(bus_handler, dev, &local_err);
      }
 -- 
 2.41.0
