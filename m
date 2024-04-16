@@ -4,59 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AECBFC4345F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Apr 2024 19:01:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 558DCC04FFF
+	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Apr 2024 19:01:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rwo25-0000mD-35; Tue, 16 Apr 2024 14:59:54 -0400
+	id 1rwo3T-0001mv-2c; Tue, 16 Apr 2024 15:01:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwo1z-0000lb-NO
- for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 14:59:48 -0400
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwo3N-0001Vp-0w
+ for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 15:01:13 -0400
 Received: from mail-ej1-x631.google.com ([2a00:1450:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwo1x-0005KM-14
- for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 14:59:46 -0400
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rwo3L-0005jJ-DX
+ for qemu-riscv@nongnu.org; Tue, 16 Apr 2024 15:01:12 -0400
 Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-a52aa665747so308494766b.2
- for <qemu-riscv@nongnu.org>; Tue, 16 Apr 2024 11:59:44 -0700 (PDT)
+ a640c23a62f3a-a5544fd07easo145054866b.0
+ for <qemu-riscv@nongnu.org>; Tue, 16 Apr 2024 12:01:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713293983; x=1713898783; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=aKI7O+b3Bo+xsao49zshX9B958w9RaU2PXoPe3/rS/I=;
- b=PJoywWtKizVzh0lZVvQHtZaUbWvRTSyNA5w4ouS63ig/zxaY/IKWzR5LgOxEAd1T1P
- mYzw+NVjVz6eTg9Uw4DMYzpWBuAM/bQb8BZLxt6533GPGvwQ9DyI3LbaqwDCfxKJPkBY
- cSt1zlGKFOxXPVEtvzjhIaOlhY/SCgJqBt5bARCxZG7A4qtxriiwrCAx1VsD0rwkfOjb
- lD9TqmLn+b6PdLRz6JHSmqVg51KwsfvmysFxaZMT5p8ehel8I4Pm/AlMFLna6w7CH47Z
- Q/Ms+tkttOTKaLlNBENUu/a3ZoNlzk/F8Y/15GwAdwXhpa+olNF1fyOD5ly0bzs9+zx6
- Kgrw==
+ d=linaro.org; s=google; t=1713294062; x=1713898862; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xnRVHCDouTA+5HlMl31thguywp3whz3Nvn7kAUajqzI=;
+ b=ZKa2ejw4GRIws2XhZpLlQWHneFq630p8RHMLZoklrSafv0XV/6bEJ14LJ7iqi8uY5V
+ hmAd2AEvHjTKFqXtA6suHwkKtYKIyyF8+op1eQ59KvHqINceKbIBXp4HPDXZNjTLPrpe
+ 09J+4Qs+dIS3gC4R4wvFE0hhyDIMs+fbqk/FBV/HsGv9igx8+oyWi3OxQWVaOeilHBZ0
+ CGe9NrBZcDmh7OUCMN1G/BOsyCIx4Rd/CGiq5YLR2366KpqZy9iDKiLPtP3+vE7TY74s
+ rpddoVobeTDeUaAbp5RcubTtmF53d/EG1nrsg6+2GHxxqIsNYcUyUd+opVT3DGwSObhi
+ GK7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713293983; x=1713898783;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=aKI7O+b3Bo+xsao49zshX9B958w9RaU2PXoPe3/rS/I=;
- b=DtSFx3OpqrwDO9cyX9lviWD7f3+D7ouGXl0y1dZqK/x7VApur5kXIUSL6JZVjo7UQt
- xua2gaekhI0X5wnRyN0uzAsJu6jiXpzyZuprQ0E1HPkSXaIcFX7v27ryfQrZW9aT2bmk
- wcgBfuP6Vv0YfSIELSs/AMfXWmAMt+yckzyK6cboA63SEZxyP6Dp5UN6khA7d/+dwGE4
- kwJTSYd7MCqM5SW6P4okMQHRF0GpAtJYYGQs4Fp36Elh2yYKTI5ptq56YCecdAQG9GBb
- iCRhJeiUSlnZTSjVRvwbqu04ed8hSxL0LosYIGUO9LUAuTfavAN2oEOk/EICMmeWBtcb
- mXpA==
+ d=1e100.net; s=20230601; t=1713294062; x=1713898862;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=xnRVHCDouTA+5HlMl31thguywp3whz3Nvn7kAUajqzI=;
+ b=ZADxxxD/nLD7vbe4XjxU8nYaSDQsJ2F19Vj176UcwgEfTLDftEsflkr07ntBvX9zy/
+ gwXJI8DA3yziIBdhia9lD7YzTdSm7l8ifuaUytPpnYH2OIh6yVogFdOv7B4lQRFVtMOS
+ v3YalUu81SbimWxpvRavzn327lw4/Pcg2MT6VGuE6AO82V3UqznIMTJsF89YCMSYNNA+
+ QnuhwA+61mMg4dV5yOiaqQAanwB16hI8/yBTMIkiTQr7qzFx4aZdv0YTCGyoHz0L05F5
+ uf+R5ltytEW5i8CsotdXLkBY+I+bVpYP4BG1D8Qo1Wwgtw2/AVz4HwCXzPq8rVCSucgP
+ nkiQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWg3bQT3RtOSuv76+1lps8vtJ45p2F9erXAK4v+W9CSn2g8p7vszsLGoqhVdS4YtU/QNXEzX6nlGzqCpxA/8fpN+uiya1A=
-X-Gm-Message-State: AOJu0YyQXDruEtcBYD3ax8MAdlb6qcKu08TT5Nv7zSUMyXhgfm8dPkrw
- hP84BI4rqlc+H4pGI9wl1mKaIElzQmZSbu2N7fG12y7S470K8fW/0G2pNDfUz0Y=
-X-Google-Smtp-Source: AGHT+IFKgUSVsIVRMT5nMr3cABObk1lQpiHZ360coDmul5EDy1HnpHZOBxGQZGiixLiic7I+g4y/cA==
-X-Received: by 2002:a17:906:794e:b0:a4e:904:3c7f with SMTP id
- l14-20020a170906794e00b00a4e09043c7fmr11383890ejo.50.1713293983216; 
- Tue, 16 Apr 2024 11:59:43 -0700 (PDT)
+ AJvYcCV1z15Aatftf/0dwA7ag3Q8noHwVjB3wA/rivWI53uUoc7g/SPWGjGYevKDugZnnNQJye+VqSdt6qhhULRclY1DIWhpPn4=
+X-Gm-Message-State: AOJu0Ywm1qLNK7Y7K9dEhD6A4xp/yRtsdKgW/sQbaNzxUShpsgVPwpTw
+ bEDJgLfTWPV3hnxeK5PQ4RNMaaElY9rmu3EN7VXRXtS5sW+etkEhV36jYEZKe4U=
+X-Google-Smtp-Source: AGHT+IHmrSIRqJsKZba5pLjtB/GfgVDWhUX3mw1VrEcy//79S5RNce+3653Kjo6DtPIWdXkATRLUrA==
+X-Received: by 2002:a17:906:594f:b0:a55:428d:5de9 with SMTP id
+ g15-20020a170906594f00b00a55428d5de9mr1810772ejr.28.1713294062573; 
+ Tue, 16 Apr 2024 12:01:02 -0700 (PDT)
 Received: from m1x-phil.lan ([176.176.155.61])
  by smtp.gmail.com with ESMTPSA id
- jw9-20020a170906e94900b00a52241b823esm6940165ejb.109.2024.04.16.11.59.41
+ q23-20020a170906a09700b00a519ec0a965sm7143556ejy.49.2024.04.16.12.01.00
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 16 Apr 2024 11:59:42 -0700 (PDT)
+ Tue, 16 Apr 2024 12:01:02 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org,
 	Thomas Huth <thuth@redhat.com>
@@ -64,14 +65,17 @@ Cc: "Michael S. Tsirkin" <mst@redhat.com>, qemu-riscv@nongnu.org,
  David Hildenbrand <david@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
  kvm@vger.kernel.org, qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
  Paolo Bonzini <pbonzini@redhat.com>,
- Philippe =?unknown-8bit?q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v4 00/22] hw/i386: Remove deprecated pc-i440fx-2.0 -> 2.3
- machines
-Date: Tue, 16 Apr 2024 20:59:16 +0200
-Message-ID: <20240416185939.37984-1-philmd@linaro.org>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Zhao Liu <zhao1.liu@intel.com>, Ani Sinha <anisinha@redhat.com>
+Subject: [PATCH v4 12/22] hw/smbios: Remove 'smbios_uuid_encoded',
+ simplify smbios_encode_uuid()
+Date: Tue, 16 Apr 2024 20:59:28 +0200
+Message-ID: <20240416185939.37984-13-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20240416185939.37984-1-philmd@linaro.org>
+References: <20240416185939.37984-1-philmd@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=2a00:1450:4864:20::631;
  envelope-from=philmd@linaro.org; helo=mail-ej1-x631.google.com
@@ -81,7 +85,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,82 +101,42 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Series fully reviewed.
+'smbios_encode_uuid' is always true, remove it,
+simplifying smbios_encode_uuid().
 
-Since v3:
-- Deprecate up to 2.12 (Thomas)
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
+---
+ hw/smbios/smbios.c | 9 +++------
+ 1 file changed, 3 insertions(+), 6 deletions(-)
 
-Since v2:
-- Addressed Zhao review comments
-
-Since v1:
-- Addressed Zhao and Thomas review comments
-
-Kill legacy code, because we need to evolve.
-
-I ended there via dynamic machine -> ICH9 -> legacy ACPI...
-
-This should also help Igor cleanups:
-http://lore.kernel.org/qemu-devel/20240326171632.3cc7533d@imammedo.users.ipa.redhat.com/
-
-Philippe Mathieu-Daudé (22):
-  hw/i386/pc: Deprecate 2.4 to 2.12 pc-i440fx machines
-  hw/i386/pc: Remove deprecated pc-i440fx-2.0 machine
-  hw/usb/hcd-xhci: Remove XHCI_FLAG_FORCE_PCIE_ENDCAP flag
-  hw/usb/hcd-xhci: Remove XHCI_FLAG_SS_FIRST flag
-  hw/i386/acpi: Remove PCMachineClass::legacy_acpi_table_size
-  hw/acpi/ich9: Remove 'memory-hotplug-support' property
-  hw/acpi/ich9: Remove dead code related to 'acpi_memory_hotplug'
-  hw/i386/pc: Remove deprecated pc-i440fx-2.1 machine
-  target/i386/kvm: Remove x86_cpu_change_kvm_default() and 'kvm-cpu.h'
-  hw/i386/pc: Remove PCMachineClass::smbios_uuid_encoded
-  hw/smbios: Remove 'uuid_encoded' argument from smbios_set_defaults()
-  hw/smbios: Remove 'smbios_uuid_encoded', simplify smbios_encode_uuid()
-  hw/i386/pc: Remove PCMachineClass::enforce_aligned_dimm
-  hw/mem/pc-dimm: Remove legacy_align argument from pc_dimm_pre_plug()
-  hw/mem/memory-device: Remove legacy_align from
-    memory_device_pre_plug()
-  hw/i386/pc: Remove deprecated pc-i440fx-2.2 machine
-  hw/i386/pc: Remove PCMachineClass::resizable_acpi_blob
-  hw/i386/pc: Remove PCMachineClass::rsdp_in_ram
-  hw/i386/acpi: Remove AcpiBuildState::rsdp field
-  hw/i386/pc: Remove deprecated pc-i440fx-2.3 machine
-  target/i386: Remove X86CPU::kvm_no_smi_migration field
-  hw/i386/pc: Replace PCMachineClass::acpi_data_size by
-    PC_ACPI_DATA_SIZE
-
- docs/about/deprecated.rst             |   4 +-
- docs/about/removed-features.rst       |   2 +-
- hw/usb/hcd-xhci.h                     |   4 +-
- include/hw/firmware/smbios.h          |   3 +-
- include/hw/i386/pc.h                  |  22 ------
- include/hw/mem/memory-device.h        |   2 +-
- include/hw/mem/pc-dimm.h              |   3 +-
- target/i386/cpu.h                     |   3 -
- target/i386/kvm/kvm-cpu.h             |  41 ----------
- hw/acpi/ich9.c                        |  46 ++---------
- hw/arm/virt.c                         |   5 +-
- hw/i386/acpi-build.c                  |  95 ++---------------------
- hw/i386/fw_cfg.c                      |   3 +-
- hw/i386/pc.c                          | 107 ++++----------------------
- hw/i386/pc_piix.c                     | 102 +-----------------------
- hw/loongarch/virt.c                   |   4 +-
- hw/mem/memory-device.c                |  12 +--
- hw/mem/pc-dimm.c                      |   6 +-
- hw/ppc/spapr.c                        |   2 +-
- hw/riscv/virt.c                       |   2 +-
- hw/smbios/smbios.c                    |  13 +---
- hw/usb/hcd-xhci-nec.c                 |   4 -
- hw/usb/hcd-xhci-pci.c                 |   4 +-
- hw/usb/hcd-xhci.c                     |  42 ++--------
- hw/virtio/virtio-md-pci.c             |   2 +-
- target/i386/cpu.c                     |   2 -
- target/i386/kvm/kvm-cpu.c             |   3 +-
- target/i386/kvm/kvm.c                 |   7 +-
- tests/avocado/mem-addr-space-check.py |   9 +--
- 29 files changed, 69 insertions(+), 485 deletions(-)
- delete mode 100644 target/i386/kvm/kvm-cpu.h
-
+diff --git a/hw/smbios/smbios.c b/hw/smbios/smbios.c
+index 8261eb716f..3b7703489d 100644
+--- a/hw/smbios/smbios.c
++++ b/hw/smbios/smbios.c
+@@ -30,7 +30,6 @@
+ #include "hw/pci/pci_device.h"
+ #include "smbios_build.h"
+ 
+-static const bool smbios_uuid_encoded = true;
+ /*
+  * SMBIOS tables provided by user with '-smbios file=<foo>' option
+  */
+@@ -600,11 +599,9 @@ static void smbios_build_type_0_table(void)
+ static void smbios_encode_uuid(struct smbios_uuid *uuid, QemuUUID *in)
+ {
+     memcpy(uuid, in, 16);
+-    if (smbios_uuid_encoded) {
+-        uuid->time_low = bswap32(uuid->time_low);
+-        uuid->time_mid = bswap16(uuid->time_mid);
+-        uuid->time_hi_and_version = bswap16(uuid->time_hi_and_version);
+-    }
++    uuid->time_low = bswap32(uuid->time_low);
++    uuid->time_mid = bswap16(uuid->time_mid);
++    uuid->time_hi_and_version = bswap16(uuid->time_hi_and_version);
+ }
+ 
+ static void smbios_build_type_1_table(void)
 -- 
 2.41.0
 
