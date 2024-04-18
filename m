@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 355A7C4345F
-	for <qemu-riscv@archiver.kernel.org>; Thu, 18 Apr 2024 19:27:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5944DC4345F
+	for <qemu-riscv@archiver.kernel.org>; Thu, 18 Apr 2024 19:28:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rxXOD-0007VW-6T; Thu, 18 Apr 2024 15:25:45 -0400
+	id 1rxXQT-0001fH-Az; Thu, 18 Apr 2024 15:28:05 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rxXO8-0007U9-CE
- for qemu-riscv@nongnu.org; Thu, 18 Apr 2024 15:25:40 -0400
-Received: from mail-lf1-x130.google.com ([2a00:1450:4864:20::130])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rxXP7-0008Cw-Tm
+ for qemu-riscv@nongnu.org; Thu, 18 Apr 2024 15:26:47 -0400
+Received: from mail-ej1-x629.google.com ([2a00:1450:4864:20::629])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rxXO5-0007FK-5v
- for qemu-riscv@nongnu.org; Thu, 18 Apr 2024 15:25:40 -0400
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-516d6c1e238so1534810e87.2
- for <qemu-riscv@nongnu.org>; Thu, 18 Apr 2024 12:25:36 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rxXP4-0007W0-9b
+ for qemu-riscv@nongnu.org; Thu, 18 Apr 2024 15:26:41 -0400
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-a4715991c32so134651466b.1
+ for <qemu-riscv@nongnu.org>; Thu, 18 Apr 2024 12:26:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713468335; x=1714073135; darn=nongnu.org;
+ d=linaro.org; s=google; t=1713468396; x=1714073196; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=a05kQu+3IE9JJfcYC8SvHu7OLyLA4nojU3zTAPx26K0=;
- b=F4hSO3e6Nq99Q23RPlrRgQSJyhcKyRF0hhqc8N3XLNvNLL49i9X4li5zlFd1ZPaPbq
- AG/8vS8omBz05xV2R2lRam/vuW7m7cMl3plwui0WURyi6Kh7aHHwDXWwDpeNgYkVKgrJ
- mZ8eRXr+kvjm2jntI3kIgbO0zRE9hFY3uWMi2b0TVKf7xiGA8xEF/jyRVACn1ib0w46P
- +gTKAJLnDgGjo/8yoIOhjiH4guI+fpRUYfNQG95iUfBx2+IY6+9ezUL7VgyyIIwtE+nb
- f2MTmlfOZpgwu9YwSg3uHcCWOoyj3jDkhfpOMlw2sQIzrCYmBb8kS01hojo/IX3ss71q
- +fpQ==
+ bh=Jio+r+AEUkjjrU5gDZl4zBsemaqAFeHzEWFaXnqFrOQ=;
+ b=H9ay9pzyZ3ABmD/RWdVRSmHZJ7NF0E3NBJrceLHGEJzh6D7hJPH+8f2V1ryKITt3ud
+ /B3wppTVSXUgTFlvB63p+1EKTKSIGLDYekYP/JSXjD5ogQiuK89yM44cC6X0kRqw8VMq
+ dPP4gljVL+cBnfA8M4m3V67fVvUoorMzwLr3wSy4Wg9JOhVtV8WbmGtvc/rN1bn4rP94
+ IfkdTDv83Dfn+TueCEwTIv5uOmw7J30z3m9GIha/9F5lkqNUyooZOiYbjS0Y81TSqkC7
+ qD+ALB49Pq+ZT8OnjAnk4roeyzf99jWE4yIgwVTFCCDLa+0kj5jnEdP6ueDv9/pMbc+l
+ RIag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713468335; x=1714073135;
+ d=1e100.net; s=20230601; t=1713468396; x=1714073196;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=a05kQu+3IE9JJfcYC8SvHu7OLyLA4nojU3zTAPx26K0=;
- b=Wew0WAeL92Bcm1msZqZEh21gFrP/Ae6X3ZKwT8N1L4mhV05ESvzQQh3HlF07HdCXw3
- hMrpXU4DDkW5huG5AOS2dU6VhCNQSm5qoaXCYLPd0AZ1Ayg5qY2YlI/ayEDEJ2lET+dw
- 2ZHQzKRQvbrFEjVSmbctNL2wuOBJSR9B9GcLgSK5qTQutHB1jyGEA518TV68YjbZ6BWd
- ThFQPECs0KaxZ1Xh0k12WN0o5MBjxGcWKZ/+ZF/YK5zqcxFIGQuR/yMcKtTEYmq262ke
- lOcaTi+f5I6GTof9oDkH7qkjuFrLny9aOUqbDyt0vXRBAhDRtbDWzy2/ncd03G8wQ6Ou
- W1Tw==
+ bh=Jio+r+AEUkjjrU5gDZl4zBsemaqAFeHzEWFaXnqFrOQ=;
+ b=Fw5Bb/9w3QCdoyd0FBNOGphWfXiPx6gcm1B5+XL6PHVwkaFnKv2/0HcRvqUiqc1yeW
+ 5AgxJNoPcmEmFmJAkjyqevvttZRaOVnA+O9N/miCPu8XrrBRTYI632NoMKCV0sY2b2Vk
+ Ba17aro3IrLYsO9WPYFf6SLhvIZO3SQ/YJzxG3Qb4qd4/LEGob3zfqnYmh2Gv1OX2JnS
+ Ui3nQ7sa1hoDvDx/3xIOrDMZSTIaj5BL2d/6Rt2KwPF988Q22SX8wJllw4S2veYZXR3O
+ RJtuToboJMm9vndiSJ+DO4gXDBcyEr59XWbwLyJ5SSmshw3qSJnKErS2YI851GMTFK0E
+ mm8Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU55F7yCZ5kf2eOayM48XZKBQq3K6FTIgmCvror2A44KF82v4HBTQgBxHJJRtUwIaK6YyIAfgscukQ8+X9NPCCalhLhyr4=
-X-Gm-Message-State: AOJu0YwGDBHSJHD0DtNfYSEEP9Ivv7SZbNq3emsSbL6e2RbEzhiSzreE
- cB/HLBWc1S6a5D1wJ6PRgSV97eFz+vGzXbPGFnLtNAB3pTRR/5c4rK4IH/oiPjI=
-X-Google-Smtp-Source: AGHT+IHfNUYllVyhV+QY71Ro4Kj4dJNcZ5I4DM2/UYYkrguyOxfOHqu9Q/5fh3sLLZjgbH1NDAnw6A==
-X-Received: by 2002:a19:2d42:0:b0:519:67f6:cd93 with SMTP id
- t2-20020a192d42000000b0051967f6cd93mr2279810lft.49.1713468334923; 
- Thu, 18 Apr 2024 12:25:34 -0700 (PDT)
+ AJvYcCXA7fjaDddVgSCfSlr5CezVRBD56mQWbztEWeoBxCe45UAB/gNICZKXtquTe7yTGFWRPwU67qmVYfU1KQ6QblOEj4LSDbA=
+X-Gm-Message-State: AOJu0YzkNCzmymL/arm0GK2uv8Awnhmy3wS7AZ7brV4dCxhEIUCuBbxD
+ vujHr0nE7NQ7NGlz6zs4kJLKsDlIyUcUrz3W215TCF6499YiE+1T6e1w9Yfv79c=
+X-Google-Smtp-Source: AGHT+IGvos0mZIxaTBgDhPQVJFUlHPzRnRLeB+2FoZuf4Lvw2zFvFjAnSJwEUd4r5lLo33Y0Jgv61A==
+X-Received: by 2002:a17:906:1f48:b0:a4e:cd5c:da72 with SMTP id
+ d8-20020a1709061f4800b00a4ecd5cda72mr43114ejk.63.1713468396179; 
+ Thu, 18 Apr 2024 12:26:36 -0700 (PDT)
 Received: from m1x-phil.lan ([176.176.151.213])
  by smtp.gmail.com with ESMTPSA id
- h17-20020a1709070b1100b00a558206b2c5sm77249ejl.99.2024.04.18.12.25.33
+ lu10-20020a170906faca00b00a52299d8eecsm1238430ejb.135.2024.04.18.12.26.34
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 18 Apr 2024 12:25:34 -0700 (PDT)
+ Thu, 18 Apr 2024 12:26:35 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Paolo Bonzini <pbonzini@redhat.com>,
@@ -67,28 +67,26 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Anton Johansson <anjo@rev.ng>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Yanan Wang <wangyanan55@huawei.com>
-Subject: [PATCH 01/24] exec: Declare MMUAccessType type in 'mmu-access-type.h'
- header
-Date: Thu, 18 Apr 2024 21:25:00 +0200
-Message-ID: <20240418192525.97451-2-philmd@linaro.org>
+ Peter Xu <peterx@redhat.com>
+Subject: [PATCH 11/24] exec: Move tlb_reset_dirty*() declarations to
+ 'exec/cputlb.h'
+Date: Thu, 18 Apr 2024 21:25:10 +0200
+Message-ID: <20240418192525.97451-12-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240418192525.97451-1-philmd@linaro.org>
 References: <20240418192525.97451-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::130;
- envelope-from=philmd@linaro.org; helo=mail-lf1-x130.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::629;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x629.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,95 +102,93 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The MMUAccessType enum is declared in "hw/core/cpu.h".
-"hw/core/cpu.h" contains declarations related to CPUState
-and CPUClass. Some source files only require MMUAccessType
-and don't need to pull in all CPU* declarations. In order
-to simplify, create a new "exec/mmu-access-type.h" header.
+Declare tlb_reset_dirty() and tlb_reset_dirty_range_all()
+in "exec/cputlb.h". Restrict tlb_reset_dirty_range_all()
+to TCG accel.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- include/exec/cpu_ldst.h        |  1 +
- include/exec/exec-all.h        |  1 +
- include/exec/mmu-access-type.h | 18 ++++++++++++++++++
- include/hw/core/cpu.h          |  8 +-------
- 4 files changed, 21 insertions(+), 7 deletions(-)
- create mode 100644 include/exec/mmu-access-type.h
+ include/exec/cputlb.h   | 12 +++++++++++-
+ include/exec/exec-all.h |  3 ---
+ include/exec/ram_addr.h |  1 +
+ system/physmem.c        |  2 ++
+ 4 files changed, 14 insertions(+), 4 deletions(-)
 
-diff --git a/include/exec/cpu_ldst.h b/include/exec/cpu_ldst.h
-index 64e0319996..5b99666702 100644
---- a/include/exec/cpu_ldst.h
-+++ b/include/exec/cpu_ldst.h
-@@ -64,6 +64,7 @@
+diff --git a/include/exec/cputlb.h b/include/exec/cputlb.h
+index 3594f904b4..dc92befb93 100644
+--- a/include/exec/cputlb.h
++++ b/include/exec/cputlb.h
+@@ -49,6 +49,9 @@ void *tlb_vaddr_to_host(CPUArchState *env, abi_ptr addr,
+ void tlb_protect_code(ram_addr_t ram_addr);
+ void tlb_unprotect_code(ram_addr_t ram_addr);
  
- #include "exec/memopidx.h"
- #include "exec/abi_ptr.h"
-+#include "exec/mmu-access-type.h"
- #include "qemu/int128.h"
- #include "cpu.h"
++void tlb_reset_dirty(CPUState *cpu, ram_addr_t start1, ram_addr_t length);
++void tlb_reset_dirty_range_all(ram_addr_t start, ram_addr_t length);
++
+ /**
+  * iotlb_to_section:
+  * @cpu: CPU performing the access
+@@ -69,6 +72,13 @@ hwaddr memory_region_section_get_iotlb(CPUState *cpu,
  
+ #endif /* CONFIG_USER_ONLY */
+ 
+-#endif /* CONFIG_TCG */
++#else /* !CONFIG_TCG */
++
++static inline void tlb_reset_dirty_range_all(ram_addr_t start,
++                                             ram_addr_t length)
++{
++}
++
++#endif /* !CONFIG_TCG */
+ 
+ #endif
 diff --git a/include/exec/exec-all.h b/include/exec/exec-all.h
-index e932d364b6..5cddfea01b 100644
+index 778c82ba8e..6f46015ab4 100644
 --- a/include/exec/exec-all.h
 +++ b/include/exec/exec-all.h
-@@ -25,6 +25,7 @@
- #include "exec/abi_ptr.h"
- #include "exec/cpu_ldst.h"
- #endif
-+#include "exec/mmu-access-type.h"
- #include "exec/translation-block.h"
- #include "qemu/clang-tsa.h"
+@@ -640,9 +640,6 @@ static inline void mmap_lock(void) {}
+ static inline void mmap_unlock(void) {}
+ #define WITH_MMAP_LOCK_GUARD()
  
-diff --git a/include/exec/mmu-access-type.h b/include/exec/mmu-access-type.h
-new file mode 100644
-index 0000000000..28bbb05b94
---- /dev/null
-+++ b/include/exec/mmu-access-type.h
-@@ -0,0 +1,18 @@
-+/*
-+ * QEMU MMU Access type definitions
-+ *
-+ * Copyright (c) 2012 SUSE LINUX Products GmbH
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+#ifndef EXEC_MMU_ACCESS_TYPE_H
-+#define EXEC_MMU_ACCESS_TYPE_H
-+
-+typedef enum MMUAccessType {
-+    MMU_DATA_LOAD  = 0,
-+    MMU_DATA_STORE = 1,
-+    MMU_INST_FETCH = 2
-+#define MMU_ACCESS_COUNT 3
-+} MMUAccessType;
-+
-+#endif
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index 3a66d8581e..5f0422493b 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -25,6 +25,7 @@
- #include "exec/hwaddr.h"
- #include "exec/vaddr.h"
- #include "exec/memattrs.h"
-+#include "exec/mmu-access-type.h"
- #include "exec/tlb-common.h"
- #include "qapi/qapi-types-run-state.h"
- #include "qemu/bitmap.h"
-@@ -80,13 +81,6 @@ DECLARE_CLASS_CHECKERS(CPUClass, CPU,
-     typedef struct ArchCPU CpuInstanceType; \
-     OBJECT_DECLARE_TYPE(ArchCPU, CpuClassType, CPU_MODULE_OBJ_NAME);
- 
--typedef enum MMUAccessType {
--    MMU_DATA_LOAD  = 0,
--    MMU_DATA_STORE = 1,
--    MMU_INST_FETCH = 2
--#define MMU_ACCESS_COUNT 3
--} MMUAccessType;
+-void tlb_reset_dirty(CPUState *cpu, ram_addr_t start1, ram_addr_t length);
+-void tlb_reset_dirty_range_all(ram_addr_t start, ram_addr_t length);
 -
- typedef struct CPUWatchpoint CPUWatchpoint;
+ #endif
  
- /* see accel-cpu.h */
+ #endif
+diff --git a/include/exec/ram_addr.h b/include/exec/ram_addr.h
+index 3fc83587c0..f06ae9b516 100644
+--- a/include/exec/ram_addr.h
++++ b/include/exec/ram_addr.h
+@@ -26,6 +26,7 @@
+ #include "exec/ramlist.h"
+ #include "exec/ramblock.h"
+ #include "exec/exec-all.h"
++#include "cputlb.h"
+ #include "qemu/rcu.h"
+ 
+ extern uint64_t total_dirty_pages;
+diff --git a/system/physmem.c b/system/physmem.c
+index 38d3ede9f9..7a7876a375 100644
+--- a/system/physmem.c
++++ b/system/physmem.c
+@@ -850,6 +850,7 @@ found:
+     return block;
+ }
+ 
++#ifdef CONFIG_TCG
+ void tlb_reset_dirty_range_all(ram_addr_t start, ram_addr_t length)
+ {
+     CPUState *cpu;
+@@ -869,6 +870,7 @@ void tlb_reset_dirty_range_all(ram_addr_t start, ram_addr_t length)
+         tlb_reset_dirty(cpu, start1, length);
+     }
+ }
++#endif
+ 
+ /* Note: start and end must be within the same ram block.  */
+ bool cpu_physical_memory_test_and_clear_dirty(ram_addr_t start,
 -- 
 2.41.0
 
