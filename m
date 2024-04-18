@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2678C4345F
-	for <qemu-riscv@archiver.kernel.org>; Thu, 18 Apr 2024 19:31:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CDC6C05023
+	for <qemu-riscv@archiver.kernel.org>; Thu, 18 Apr 2024 19:31:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rxXTK-0002nS-F9; Thu, 18 Apr 2024 15:31:02 -0400
+	id 1rxXTO-0003Mk-Or; Thu, 18 Apr 2024 15:31:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rxXQb-0002N5-TG
- for qemu-riscv@nongnu.org; Thu, 18 Apr 2024 15:28:15 -0400
-Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rxXQi-0002lb-PO
+ for qemu-riscv@nongnu.org; Thu, 18 Apr 2024 15:28:20 -0400
+Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rxXQY-0007j6-RU
- for qemu-riscv@nongnu.org; Thu, 18 Apr 2024 15:28:13 -0400
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-347c197a464so864166f8f.2
- for <qemu-riscv@nongnu.org>; Thu, 18 Apr 2024 12:28:09 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rxXQe-0007k9-RU
+ for qemu-riscv@nongnu.org; Thu, 18 Apr 2024 15:28:19 -0400
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-56e1f3462caso1674305a12.3
+ for <qemu-riscv@nongnu.org>; Thu, 18 Apr 2024 12:28:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713468488; x=1714073288; darn=nongnu.org;
+ d=linaro.org; s=google; t=1713468495; x=1714073295; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Hca3+XmwqR0YOlaHOdTYyVt5U6rBmejaVD76pmxE3UI=;
- b=U+62dtAQYNMKJwbQefk4ISLFHpeNHmL1Te0MJWqzNfXZEF0rTZHRzYuPj4YhZEHMMa
- r0LuvJ0KYTUbsg6ovg9wb8qdJ4JRL62m+Y21kPaBtLg5E1tG0QaudMbBexhkUhFJMW8a
- n+bF6a7xxTugAFPyioN/F9lsTWTaOFRjJIjL8Ju5QXrUUNBFx8/M/8/XjuxPGsaTy+xZ
- ER4F347ydE9OkgffZftt89c1OlMk9AhciLYP2KZpQR4d+612P3fAT4q28crMCMqLFYVT
- 39t9YLO1cQC+Qr9VqK6WvV94Bi3u1AYIK2jlJ+FjE/9V4RsPJHLbcqBQwaxq8UGqq/zb
- vlfQ==
+ bh=ZdGtqepmHp/hs0/Z1yrPy9JbSuxwne+2qc6kJd/9zb0=;
+ b=aYkuFhDxu0z/m0eHlNwToFwvxtSqdEXlxcHuIiK5otrmQjPGhTtAn5uj/VhCGOoAFd
+ 0b1F7y7r8gYIAf6mr+WvgPr/NlzXWNuy30NsHxh/VyzrROg1smcjh8cd3MqKzRn1VPe0
+ LPExxJsgnvhtuKyGlhz1CfRgSXERxp//6YB93ZNdp+Xjo7CTDAceu16R/VPs7o+XLAI3
+ BRTgxNlUfsh87FpY5C6dgv8ScTAchndt4Hz5/HbakoIRSVIoDhCCqS6sAhhF/9BXGVsn
+ +dnEQaeL4m0IcuMH5dPuItZcLQjkYhF2EyRTqUHN0kH797Z/RWTxsDkU8c5wiosKFZ/7
+ 0+ZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713468488; x=1714073288;
+ d=1e100.net; s=20230601; t=1713468495; x=1714073295;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Hca3+XmwqR0YOlaHOdTYyVt5U6rBmejaVD76pmxE3UI=;
- b=dcw1NSmgRD3mX5WRpELNDLcQhS0UcMgxDmv4t3dT5d8E7/wCz36MrA7G6iVtZ0XJI0
- 0+Bie2r2Zajz/9jfuVuGmW9T5YMM5KRZ+A6gom54Trs45XC85Tcpg4VgNZMlMBenN7Jy
- NsbXb2hDmn0t5IP1wpeeFL5wVD89rNt8IsQ8EWKWyRc495ZMN1ykOVmO+DSNAvHo+0SP
- HDt3uf4tTHHgvPqcM0OHjpeRWKQmBPdC0LUoHwYkqarndHpw86LHJn52hWNDW50XpBRK
- LdBSWhChbPvK735BENwPTaPLDu+Jy1CaaebZ7JKd+AH5JkFzr9+9IdGoprMr12BMq0Ro
- IUqA==
+ bh=ZdGtqepmHp/hs0/Z1yrPy9JbSuxwne+2qc6kJd/9zb0=;
+ b=dPqs/p3mZ9DFvh7tKaonbt1O+ACusfYti689Ldmj7oyCBMwA2qges0/ds65zVPhv8O
+ 2yXHoDPVrWOVwv+ugJjOxDjrc8Gl+VP/JV2IhY7Y5srb+D5PYnhkCxvkUZ30WidWPT6P
+ HMCMMBOnCAep/dcra0CRKAD0uJXXaF4i+8mAVDrh/Gg+wb7HrFrllmmw50XhhShHOKrB
+ 2xej7Y+uvUjAx94xQomchiFQ9lDy9i73fQcMZDmG/k37HXxea00EzWg2ZDWgdKkt2aAt
+ wp7ibuYb5LqQQ5/eJGLKCUWXF9w1C7s4dgLVkMj1DSBr0YsV+xc/whV+oNTQfBoyYUcl
+ +2Kg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU1n2JFRoQTbDnbxNXx2iuGF7uJ8V6wq2o0r/Jel73JXzoioL+J5QffluVO3XVNLdpJGDzjsWYC8Ce7T0m4StS65/zmMaQ=
-X-Gm-Message-State: AOJu0YyFh2b2Woh6+3H5eMtibtTyCEFU4VN9SjMA9qEEPuUKsexO0/1i
- 6CY1lGgWpnc5iKc1+OrbIKgwGJHzK4+iuWnt2MQ+CoJ8JIEz2k2cefnhbwMPTHo=
-X-Google-Smtp-Source: AGHT+IFY7dL6kQPENW/Gj6CBDv/d1qDFxnP7kZvuVmZ8Q0jxIs8r9dKZcEdctT8ubfxSRPUALhnlPg==
-X-Received: by 2002:adf:e40e:0:b0:34a:3eec:c379 with SMTP id
- g14-20020adfe40e000000b0034a3eecc379mr650087wrm.67.1713468488275; 
- Thu, 18 Apr 2024 12:28:08 -0700 (PDT)
+ AJvYcCVkTd2lDzqP/HYYuTejZ6QUUFsoD7NGg9gR3x2zcNs26hWYKOzI8gJSU/jKQm+IXBC4B2L0K/FeJaaNMYV1fHYX12Mq3Fs=
+X-Gm-Message-State: AOJu0YztdoG9vy/GCtqd//EwvsSRl2Z4Zb3DlS7hGxHwzBNqDzjTpVix
+ fCYMYrslxsXfiqvvgtOafPDrViNBYF7QdZmciL+ZvBtg83t4LpfFMBpJ8sKCSvM=
+X-Google-Smtp-Source: AGHT+IFOIY5gAThTWZwjM0+HF7s5tNrh3iGimgDUj1yFPdFdyFFdGwZS1SuNu7kuksfDMB5GlMY4Wg==
+X-Received: by 2002:a17:906:f0d9:b0:a51:b666:b372 with SMTP id
+ dk25-20020a170906f0d900b00a51b666b372mr61046ejb.27.1713468495043; 
+ Thu, 18 Apr 2024 12:28:15 -0700 (PDT)
 Received: from m1x-phil.lan ([176.176.151.213])
  by smtp.gmail.com with ESMTPSA id
- f5-20020a170906138500b00a5531e61002sm1247131ejc.206.2024.04.18.12.28.06
+ jp4-20020a170906f74400b00a4734125fd2sm1265134ejb.31.2024.04.18.12.28.12
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 18 Apr 2024 12:28:07 -0700 (PDT)
+ Thu, 18 Apr 2024 12:28:14 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Paolo Bonzini <pbonzini@redhat.com>,
@@ -67,27 +67,35 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Anton Johansson <anjo@rev.ng>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Alexandre Iooss <erdnaxe@crans.org>,
- Mahmoud Mandour <ma.mandourr@gmail.com>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH 21/24] plugins: Un-inline qemu_plugin_disable_mem_helpers()
-Date: Thu, 18 Apr 2024 21:25:20 +0200
-Message-ID: <20240418192525.97451-22-philmd@linaro.org>
+ Peter Maydell <peter.maydell@linaro.org>, Tyrone Ting <kfting@nuvoton.com>,
+ Hao Wu <wuhaotsh@google.com>, Huacai Chen <chenhuacai@kernel.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, BALATON Zoltan <balaton@eik.bme.hu>,
+ Nicholas Piggin <npiggin@gmail.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ David Gibson <david@gibson.dropbear.id.au>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Magnus Damm <magnus.damm@gmail.com>, Max Filippov <jcmvbkbc@gmail.com>
+Subject: [PATCH 22/24] exec: Remove 'exec/tswap.h' from 'exec/cpu-all.h'
+Date: Thu, 18 Apr 2024 21:25:21 +0200
+Message-ID: <20240418192525.97451-23-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240418192525.97451-1-philmd@linaro.org>
 References: <20240418192525.97451-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::435;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x435.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52f;
+ envelope-from=philmd@linaro.org; helo=mail-ed1-x52f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,57 +111,182 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-"qemu/plugin.h" only include the huge "hw/core/cpu.h"
-because qemu_plugin_disable_mem_helpers() accesses
-CPUState::plugin_mem_cbs. In order to avoid including
-it, un-inline qemu_plugin_disable_mem_helpers().
+"exec/cpu-all.h" doesn't require "exec/tswap.h". Remove it,
+including it in the sources when required.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- include/qemu/plugin.h | 6 +-----
- plugins/core.c        | 5 +++++
- 2 files changed, 6 insertions(+), 5 deletions(-)
+ hw/xtensa/bootparam.h       | 1 +
+ include/exec/cpu-all.h      | 1 -
+ accel/tcg/translator.c      | 1 +
+ hw/arm/boot.c               | 1 +
+ hw/arm/npcm7xx.c            | 1 +
+ hw/mips/fuloong2e.c         | 1 +
+ hw/mips/malta.c             | 1 +
+ hw/ppc/sam460ex.c           | 1 +
+ hw/ppc/spapr.c              | 1 +
+ hw/ppc/virtex_ml507.c       | 1 +
+ hw/sh4/r2d.c                | 1 +
+ target/arm/gdbstub.c        | 1 +
+ target/xtensa/xtensa-semi.c | 1 +
+ 13 files changed, 12 insertions(+), 1 deletion(-)
 
-diff --git a/include/qemu/plugin.h b/include/qemu/plugin.h
-index 41db748eda..28467c4a28 100644
---- a/include/qemu/plugin.h
-+++ b/include/qemu/plugin.h
-@@ -15,7 +15,6 @@
- #include "qemu/plugin-event.h"
- #include "qemu/bitmap.h"
- #include "exec/memopidx.h"
--#include "hw/core/cpu.h"
+diff --git a/hw/xtensa/bootparam.h b/hw/xtensa/bootparam.h
+index f57ff850bc..e1d47b503c 100644
+--- a/hw/xtensa/bootparam.h
++++ b/hw/xtensa/bootparam.h
+@@ -1,6 +1,7 @@
+ #ifndef HW_XTENSA_BOOTPARAM_H
+ #define HW_XTENSA_BOOTPARAM_H
+ 
++#include "exec/tswap.h"
+ #include "exec/cpu-common.h"
+ 
+ #define BP_TAG_COMMAND_LINE     0x1001  /* command line (0-terminated string)*/
+diff --git a/include/exec/cpu-all.h b/include/exec/cpu-all.h
+index 554b937ddb..cfbf51822c 100644
+--- a/include/exec/cpu-all.h
++++ b/include/exec/cpu-all.h
+@@ -21,7 +21,6 @@
+ 
+ #include "exec/cpu-common.h"
+ #include "exec/memory.h"
+-#include "exec/tswap.h"
+ #include "hw/core/cpu.h"
+ 
+ /* some important defines:
+diff --git a/accel/tcg/translator.c b/accel/tcg/translator.c
+index 6832e55135..85950377d9 100644
+--- a/accel/tcg/translator.c
++++ b/accel/tcg/translator.c
+@@ -12,6 +12,7 @@
+ #include "qemu/error-report.h"
+ #include "exec/exec-all.h"
+ #include "exec/translator.h"
++#include "exec/tswap.h"
+ #include "exec/cpu_ldst.h"
+ #include "exec/plugin-gen.h"
+ #include "tcg/tcg-op-common.h"
+diff --git a/hw/arm/boot.c b/hw/arm/boot.c
+index 84ea6a807a..93945a1a15 100644
+--- a/hw/arm/boot.c
++++ b/hw/arm/boot.c
+@@ -22,6 +22,7 @@
+ #include "sysemu/reset.h"
+ #include "hw/loader.h"
+ #include "elf.h"
++#include "exec/tswap.h"
+ #include "sysemu/device_tree.h"
+ #include "qemu/config-file.h"
+ #include "qemu/option.h"
+diff --git a/hw/arm/npcm7xx.c b/hw/arm/npcm7xx.c
+index cc68b5d8f1..1ef303415b 100644
+--- a/hw/arm/npcm7xx.c
++++ b/hw/arm/npcm7xx.c
+@@ -27,6 +27,7 @@
+ #include "qemu/units.h"
+ #include "sysemu/sysemu.h"
+ #include "target/arm/cpu-qom.h"
++#include "exec/tswap.h"
  
  /*
-  * Option parsing/processing.
-@@ -227,10 +226,7 @@ void qemu_plugin_atexit_cb(void);
+  * This covers the whole MMIO space. We'll use this to catch any MMIO accesses
+diff --git a/hw/mips/fuloong2e.c b/hw/mips/fuloong2e.c
+index a45aac368c..1d0613a76f 100644
+--- a/hw/mips/fuloong2e.c
++++ b/hw/mips/fuloong2e.c
+@@ -40,6 +40,7 @@
+ #include "sysemu/reset.h"
+ #include "sysemu/sysemu.h"
+ #include "qemu/error-report.h"
++#include "exec/tswap.h"
  
- void qemu_plugin_add_dyn_cb_arr(GArray *arr);
+ #define ENVP_PADDR              0x2000
+ #define ENVP_VADDR              cpu_mips_phys_to_kseg0(NULL, ENVP_PADDR)
+diff --git a/hw/mips/malta.c b/hw/mips/malta.c
+index af74008c82..3dca0f100c 100644
+--- a/hw/mips/malta.c
++++ b/hw/mips/malta.c
+@@ -56,6 +56,7 @@
+ #include "semihosting/semihost.h"
+ #include "hw/mips/cps.h"
+ #include "hw/qdev-clock.h"
++#include "exec/tswap.h"
+ #include "target/mips/internal.h"
+ #include "trace.h"
+ #include "cpu.h"
+diff --git a/hw/ppc/sam460ex.c b/hw/ppc/sam460ex.c
+index d42b677898..abc02f0817 100644
+--- a/hw/ppc/sam460ex.c
++++ b/hw/ppc/sam460ex.c
+@@ -24,6 +24,7 @@
+ #include "hw/loader.h"
+ #include "elf.h"
+ #include "exec/memory.h"
++#include "exec/tswap.h"
+ #include "ppc440.h"
+ #include "hw/pci-host/ppc4xx.h"
+ #include "hw/block/flash.h"
+diff --git a/hw/ppc/spapr.c b/hw/ppc/spapr.c
+index e9bc97fee0..b4b1f43983 100644
+--- a/hw/ppc/spapr.c
++++ b/hw/ppc/spapr.c
+@@ -74,6 +74,7 @@
+ #include "hw/virtio/virtio-scsi.h"
+ #include "hw/virtio/vhost-scsi-common.h"
  
--static inline void qemu_plugin_disable_mem_helpers(CPUState *cpu)
--{
--    cpu->plugin_mem_cbs = NULL;
--}
-+void qemu_plugin_disable_mem_helpers(CPUState *cpu);
++#include "exec/tswap.h"
+ #include "exec/ram_addr.h"
+ #include "hw/usb.h"
+ #include "qemu/config-file.h"
+diff --git a/hw/ppc/virtex_ml507.c b/hw/ppc/virtex_ml507.c
+index d02f330650..fd23afebf5 100644
+--- a/hw/ppc/virtex_ml507.c
++++ b/hw/ppc/virtex_ml507.c
+@@ -38,6 +38,7 @@
+ #include "qapi/error.h"
+ #include "qemu/error-report.h"
+ #include "qemu/option.h"
++#include "exec/tswap.h"
  
- /**
-  * qemu_plugin_user_exit(): clean-up callbacks before calling exit callbacks
-diff --git a/plugins/core.c b/plugins/core.c
-index 11ca20e626..b25092abb5 100644
---- a/plugins/core.c
-+++ b/plugins/core.c
-@@ -493,6 +493,11 @@ void exec_inline_op(struct qemu_plugin_dyn_cb *cb, int cpu_index)
-     }
- }
+ #include "hw/intc/ppc-uic.h"
+ #include "hw/ppc/ppc.h"
+diff --git a/hw/sh4/r2d.c b/hw/sh4/r2d.c
+index e5ac6751bd..5f4420f534 100644
+--- a/hw/sh4/r2d.c
++++ b/hw/sh4/r2d.c
+@@ -43,6 +43,7 @@
+ #include "hw/loader.h"
+ #include "hw/usb.h"
+ #include "hw/block/flash.h"
++#include "exec/tswap.h"
  
-+void qemu_plugin_disable_mem_helpers(CPUState *cpu)
-+{
-+    cpu->plugin_mem_cbs = NULL;
-+}
-+
- void qemu_plugin_vcpu_mem_cb(CPUState *cpu, uint64_t vaddr,
-                              MemOpIdx oi, enum qemu_plugin_mem_rw rw)
- {
+ #define FLASH_BASE 0x00000000
+ #define FLASH_SIZE (16 * MiB)
+diff --git a/target/arm/gdbstub.c b/target/arm/gdbstub.c
+index a3bb73cfa7..f2b001afdd 100644
+--- a/target/arm/gdbstub.c
++++ b/target/arm/gdbstub.c
+@@ -20,6 +20,7 @@
+ #include "qemu/osdep.h"
+ #include "cpu.h"
+ #include "exec/gdbstub.h"
++#include "exec/tswap.h"
+ #include "gdbstub/helpers.h"
+ #include "sysemu/tcg.h"
+ #include "internals.h"
+diff --git a/target/xtensa/xtensa-semi.c b/target/xtensa/xtensa-semi.c
+index fa21b7e11f..dbc42d1587 100644
+--- a/target/xtensa/xtensa-semi.c
++++ b/target/xtensa/xtensa-semi.c
+@@ -29,6 +29,7 @@
+ #include "cpu.h"
+ #include "chardev/char-fe.h"
+ #include "exec/helper-proto.h"
++#include "exec/tswap.h"
+ #include "semihosting/semihost.h"
+ #include "qapi/error.h"
+ #include "qemu/log.h"
 -- 
 2.41.0
 
