@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 449CBC04FF8
-	for <qemu-riscv@archiver.kernel.org>; Thu, 18 Apr 2024 19:29:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA77BC4345F
+	for <qemu-riscv@archiver.kernel.org>; Thu, 18 Apr 2024 19:29:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rxXRL-0003zD-Ps; Thu, 18 Apr 2024 15:28:59 -0400
+	id 1rxXS1-0006wS-J6; Thu, 18 Apr 2024 15:29:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rxXOa-0007m0-4r
- for qemu-riscv@nongnu.org; Thu, 18 Apr 2024 15:26:11 -0400
-Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rxXPm-0000Lk-Nu
+ for qemu-riscv@nongnu.org; Thu, 18 Apr 2024 15:27:23 -0400
+Received: from mail-ed1-x52c.google.com ([2a00:1450:4864:20::52c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rxXOY-0007Lj-K3
- for qemu-riscv@nongnu.org; Thu, 18 Apr 2024 15:26:07 -0400
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-56fe7dc7f58so1266560a12.2
- for <qemu-riscv@nongnu.org>; Thu, 18 Apr 2024 12:26:06 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rxXPk-0007c9-Iw
+ for qemu-riscv@nongnu.org; Thu, 18 Apr 2024 15:27:22 -0400
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-56e136cbcecso1752480a12.3
+ for <qemu-riscv@nongnu.org>; Thu, 18 Apr 2024 12:27:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713468365; x=1714073165; darn=nongnu.org;
+ d=linaro.org; s=google; t=1713468439; x=1714073239; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kMOTCzZ8G1QDoqpRuDm+110xUKe36YwlxUEiY1YFvik=;
- b=Q7WYsWSZ+N9wV4Y81fNy5BB3MIr7PNKoUY0ZECRnyrkpvvL9iBKP71IYNc3o9FYV/S
- fqsnn/qte7tZgNO8cVtB7BOdeNSZpy3VXmpzKubQtcGPaeQni7nhCQncwybTRquoo3TU
- vhqc0IXMvMeeMOoNxsc+yTBcI1AeyzJdFivQh9gBBozbHzDwiEGPNKGZ97rg2GeoH8Nx
- cKPkJ8aefyE+g7KjVC/2Nftx0pX7T/HNtAzKZ8p89HeX0D7QUtP7iErq+6NQBR47T3f0
- 2UWThA3ztsI7N6OES/CGSf+0ZN/0aSJjDVUPYq+EDXivRGBkdpOOJJfpShhgmIZxC5YH
- /HmQ==
+ bh=koVgyajCEgUVl/LMvNKONPGr1ZhJ2eug5WfoAqRNjUs=;
+ b=zqKavEvUwmpktzeC+ZkyMOS6iqmafM6qsXVAEzNYS8OxOXD0h7Li/SUtH2QlGSV42v
+ gtGr1aErMgYhJG8t6ttnlJYHRlT5s6csBUSDJvKUUgKwztK9bgxfoht0Jo8n566f9xw5
+ WJCPSisaHKLFFhBiVCqkCZGHBtCeSRgWZo/nc6Va/Nx+1SGtZ3etaTNi0SHVMgrMNSd5
+ jZTvmsADsT/EuGy7blU6vJQ1I46vFsxOrstT972mzuA6rwqIh7SOEPKHLLGWIo1TYQ6o
+ /W9EqRv6gjsOqagQZSxouEan0y/1CtFQ/QmvNJhe7Oz7fTIPkMAVefFne69uufMQ5WuQ
+ XPJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713468365; x=1714073165;
+ d=1e100.net; s=20230601; t=1713468439; x=1714073239;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=kMOTCzZ8G1QDoqpRuDm+110xUKe36YwlxUEiY1YFvik=;
- b=d/rS4lqONnABRsd0vVgBslY3hL+SztrUCScqfIa9EurDnKEWOIAHdgw6Fr0EnD2nW9
- C7b91OE5QJAUlzByIHog823ZfdOobEvSvoL0QdgknXjx575PHhX2+K8xtVCIBU1PwsbR
- wjouvckdS609Z5Ds7iMFEUmAhkPX4olcRU6SiC5cLb00M8973dY6B2DUKBldqyg62TpY
- +i2TJzk4mW92FkRZPs7dfQ6Hv+O1eMQ0A9jK5oBXG0sCgu0uACKqUsBnxGFz877J9Woc
- 0syZ8hrTJLT+eYby657PkAM4rIDkreclynpg+qPf+UQE4wSwQ1CY3AWeBGoFN7KaBY/o
- 1xYA==
+ bh=koVgyajCEgUVl/LMvNKONPGr1ZhJ2eug5WfoAqRNjUs=;
+ b=oZlyvI6iBDOJ6vQMRH5iT/ERVUOgeNUEeoFlcmeYTYzuL9IkCwpcy4WdH1cwWw5oTZ
+ fPoaota+ZnhhGHfBnpJtImUdqtXo30eIj9b0nIbQ5M+HPT6UfGVDMq8F2oVpRMZ1uvWC
+ qKkkcC7ITx/DWG9XB0Jg68+IhaBhYrOONU5gCgDstgxur/CJCmwccwPhOpYa/jKIAXTk
+ 9FGFQ1MIRId4XvhUioZW5FYKWPe15BZ1l9roGoCjIMZA3eUTgXWP2UxPIvN4KbAe+WH3
+ fcBLt1yKx3afnlE5nkbgR0UPD8348ss84RMWycykT11Y5PyVcIm8mR3+LdaHVwif2eVm
+ G6gg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUlNhxHT0NCxpwtvGJm2konvevdYCVoH4/LiMpY/MM28wsMmn64TBO1qBbP20It46z9cq1UU0MeVcDg6rEOdyVSRUb4VLc=
-X-Gm-Message-State: AOJu0YwmEFEQwxJs0XhwR1m/bzdIZX8Wzt0E0AM6+eygAfvahvcr6bJJ
- XPqPatQo0groGqc822ZgoVjAptnSIrZBTij1ZkS8KxLkkSr2co7FLPF0xJwp2Zs=
-X-Google-Smtp-Source: AGHT+IGauXFub4OFdy7tZBt9c2yQKaEln2/oxE9Uk8pxg4A6jmXoRy5XQ4BNQTCVjKmFKW2y4HZUKg==
-X-Received: by 2002:a50:951a:0:b0:56e:2fb9:66d6 with SMTP id
- u26-20020a50951a000000b0056e2fb966d6mr107290eda.27.1713468365147; 
- Thu, 18 Apr 2024 12:26:05 -0700 (PDT)
+ AJvYcCV44J0eaiWHxPYaP/Flw2+1mL7s+mlGT55iBCy4wbUAmjeZeFkrYtZxq1TFmkXMjMZnd/kwCRfbobjpeMErRTZWTwUXQ0Q=
+X-Gm-Message-State: AOJu0YwZecCZr5wclZ1TqCgSDvXFyeRJNzHOQo6JbUsvSgZRwIaqG18P
+ 7qKEH3H2BZgLHDfAj31QzOdvxgGDXgXtPyMWQ+mVtFEXRtJY2ZFooBCVYKBVO0w=
+X-Google-Smtp-Source: AGHT+IGUKx1BaAucoqEBkcKvR0ggaq6VcW3+/vbLpdXj+U90uCMnnNyN02Af7LhJb66dZ9m1Y8QZCA==
+X-Received: by 2002:a17:906:6013:b0:a52:ec:a87d with SMTP id
+ o19-20020a170906601300b00a5200eca87dmr48021ejj.74.1713468439142; 
+ Thu, 18 Apr 2024 12:27:19 -0700 (PDT)
 Received: from m1x-phil.lan ([176.176.151.213])
  by smtp.gmail.com with ESMTPSA id
- fj17-20020a0564022b9100b0056fe8f3eec6sm1194542edb.62.2024.04.18.12.26.03
+ n22-20020a170906119600b00a51a9d87570sm1269573eja.17.2024.04.18.12.27.17
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 18 Apr 2024 12:26:04 -0700 (PDT)
+ Thu, 18 Apr 2024 12:27:18 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Paolo Bonzini <pbonzini@redhat.com>,
@@ -67,25 +67,24 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Anton Johansson <anjo@rev.ng>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 06/24] exec: Have guest_addr_valid() methods take
- abi_ptr/size_t arguments
-Date: Thu, 18 Apr 2024 21:25:05 +0200
-Message-ID: <20240418192525.97451-7-philmd@linaro.org>
+Subject: [PATCH 16/24] exec: Move GUEST_ADDR_MAX definition to 'cpu_ldst.h'
+Date: Thu, 18 Apr 2024 21:25:15 +0200
+Message-ID: <20240418192525.97451-17-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240418192525.97451-1-philmd@linaro.org>
 References: <20240418192525.97451-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::534;
- envelope-from=philmd@linaro.org; helo=mail-ed1-x534.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52c;
+ envelope-from=philmd@linaro.org; helo=mail-ed1-x52c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,33 +100,118 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-abi_ulong is target specific, replace by abi_ptr which isn't.
-Use size_t for the @len type.
+GUEST_ADDR_MAX is only used in accel/tcg/user-exec.c
+and "exec/cpu_ldst.h". Move it from "exec/cpu-all.h"
+to "exec/cpu_ldst.h" so we can avoid including
+"exec/cpu-all.h" in accel/tcg/user-exec.c.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- include/exec/cpu_ldst.h | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ include/exec/cpu-all.h  | 34 +---------------------------------
+ include/exec/cpu_ldst.h | 30 ++++++++++++++++++++++++++++++
+ accel/tcg/cpu-exec.c    |  1 -
+ 3 files changed, 31 insertions(+), 34 deletions(-)
 
+diff --git a/include/exec/cpu-all.h b/include/exec/cpu-all.h
+index e75ec13cd0..554b937ddb 100644
+--- a/include/exec/cpu-all.h
++++ b/include/exec/cpu-all.h
+@@ -63,39 +63,7 @@
+ 
+ /* MMU memory access macros */
+ 
+-#if defined(CONFIG_USER_ONLY)
+-#include "exec/user/abitypes.h"
+-
+-/*
+- * If non-zero, the guest virtual address space is a contiguous subset
+- * of the host virtual address space, i.e. '-R reserved_va' is in effect
+- * either from the command-line or by default.  The value is the last
+- * byte of the guest address space e.g. UINT32_MAX.
+- *
+- * If zero, the host and guest virtual address spaces are intermingled.
+- */
+-extern unsigned long reserved_va;
+-
+-/*
+- * Limit the guest addresses as best we can.
+- *
+- * When not using -R reserved_va, we cannot really limit the guest
+- * to less address space than the host.  For 32-bit guests, this
+- * acts as a sanity check that we're not giving the guest an address
+- * that it cannot even represent.  For 64-bit guests... the address
+- * might not be what the real kernel would give, but it is at least
+- * representable in the guest.
+- *
+- * TODO: Improve address allocation to avoid this problem, and to
+- * avoid setting bits at the top of guest addresses that might need
+- * to be used for tags.
+- */
+-#define GUEST_ADDR_MAX_                                                 \
+-    ((MIN_CONST(TARGET_VIRT_ADDR_SPACE_BITS, TARGET_ABI_BITS) <= 32) ?  \
+-     UINT32_MAX : ~0ul)
+-#define GUEST_ADDR_MAX    (reserved_va ? : GUEST_ADDR_MAX_)
+-
+-#else
++#if !defined(CONFIG_USER_ONLY)
+ 
+ #include "exec/hwaddr.h"
+ 
 diff --git a/include/exec/cpu_ldst.h b/include/exec/cpu_ldst.h
-index f3c2a3ca74..63186b07e4 100644
+index 6d47d3114a..07649a01c1 100644
 --- a/include/exec/cpu_ldst.h
 +++ b/include/exec/cpu_ldst.h
-@@ -92,12 +92,12 @@ static inline void *g2h(CPUState *cs, abi_ptr x)
-     return g2h_untagged(cpu_untagged_addr(cs, x));
- }
+@@ -73,8 +73,38 @@
  
--static inline bool guest_addr_valid_untagged(abi_ulong x)
-+static inline bool guest_addr_valid_untagged(abi_ptr x)
- {
-     return x <= GUEST_ADDR_MAX;
- }
+ #if defined(CONFIG_USER_ONLY)
  
--static inline bool guest_range_valid_untagged(abi_ulong start, abi_ulong len)
-+static inline bool guest_range_valid_untagged(abi_ptr start, size_t len)
++#include "user/abitypes.h"
+ #include "user/guest-base.h"
+ 
++/*
++ * If non-zero, the guest virtual address space is a contiguous subset
++ * of the host virtual address space, i.e. '-R reserved_va' is in effect
++ * either from the command-line or by default.  The value is the last
++ * byte of the guest address space e.g. UINT32_MAX.
++ *
++ * If zero, the host and guest virtual address spaces are intermingled.
++ */
++extern unsigned long reserved_va;
++
++/*
++ * Limit the guest addresses as best we can.
++ *
++ * When not using -R reserved_va, we cannot really limit the guest
++ * to less address space than the host.  For 32-bit guests, this
++ * acts as a sanity check that we're not giving the guest an address
++ * that it cannot even represent.  For 64-bit guests... the address
++ * might not be what the real kernel would give, but it is at least
++ * representable in the guest.
++ *
++ * TODO: Improve address allocation to avoid this problem, and to
++ * avoid setting bits at the top of guest addresses that might need
++ * to be used for tags.
++ */
++#define GUEST_ADDR_MAX_                                                 \
++    ((MIN_CONST(TARGET_VIRT_ADDR_SPACE_BITS, TARGET_ABI_BITS) <= 32) ?  \
++     UINT32_MAX : ~0ul)
++#define GUEST_ADDR_MAX    (reserved_va ? : GUEST_ADDR_MAX_)
++
+ #ifndef TARGET_TAGGED_ADDRESSES
+ static inline abi_ptr cpu_untagged_addr(CPUState *cs, abi_ptr x)
  {
-     return len - 1 <= GUEST_ADDR_MAX && start <= GUEST_ADDR_MAX - len + 1;
- }
+diff --git a/accel/tcg/cpu-exec.c b/accel/tcg/cpu-exec.c
+index 225e5fbd3e..7bfd558027 100644
+--- a/accel/tcg/cpu-exec.c
++++ b/accel/tcg/cpu-exec.c
+@@ -31,7 +31,6 @@
+ #include "exec/log.h"
+ #include "qemu/main-loop.h"
+ #include "sysemu/cpus.h"
+-#include "exec/cpu-all.h"
+ #include "sysemu/cpu-timers.h"
+ #include "exec/replay-core.h"
+ #include "sysemu/tcg.h"
 -- 
 2.41.0
 
