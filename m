@@ -4,57 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 846F3C4345F
-	for <qemu-riscv@archiver.kernel.org>; Thu, 18 Apr 2024 09:48:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D842C04FFF
+	for <qemu-riscv@archiver.kernel.org>; Thu, 18 Apr 2024 13:39:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rxONO-0000tf-VB; Thu, 18 Apr 2024 05:48:19 -0400
+	id 1rxRz5-00050w-SF; Thu, 18 Apr 2024 09:39:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <duchao@eswincomputing.com>)
- id 1rxON2-0000oo-Hv; Thu, 18 Apr 2024 05:47:59 -0400
-Received: from azure-sdnproxy.icoremail.net ([20.231.56.155])
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <duchao@eswincomputing.com>)
- id 1rxOMx-0008ML-Dy; Thu, 18 Apr 2024 05:47:55 -0400
-Received: from duchao$eswincomputing.com ( [10.64.113.11] ) by
- ajax-webmail-app2 (Coremail) ; Thu, 18 Apr 2024 17:46:14 +0800 (GMT+08:00)
-X-Originating-IP: [10.64.113.11]
-Date: Thu, 18 Apr 2024 17:46:14 +0800 (GMT+08:00)
-X-CM-HeaderCharset: UTF-8
-From: "Chao Du" <duchao@eswincomputing.com>
-To: "Daniel Henrique Barboza" <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com, 
- alistair23@gmail.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn, 
- zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com, 
- anup@brainfault.org, atishp@atishpatra.org
-Subject: Re: [RFC PATCH 1/4] target/riscv/kvm: add software breakpoints support
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version XT6.0.3 build 20220420(169d3f8c)
- Copyright (c) 2002-2024 www.mailtech.cn
- mispb-72143050-eaf5-4703-89e0-86624513b4ce-eswincomputing.com
-In-Reply-To: <ada42503-dab4-474f-a61a-a9fe3fa63afa@ventanamicro.com>
-References: <20231221094923.7349-1-duchao@eswincomputing.com>
- <20231221094923.7349-2-duchao@eswincomputing.com>
- <ada42503-dab4-474f-a61a-a9fe3fa63afa@ventanamicro.com>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset=UTF-8
+ (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
+ id 1rxRz4-00050Y-7d
+ for qemu-riscv@nongnu.org; Thu, 18 Apr 2024 09:39:26 -0400
+Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
+ id 1rxRz2-00024f-0O
+ for qemu-riscv@nongnu.org; Thu, 18 Apr 2024 09:39:25 -0400
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-349a31b2babso103988f8f.2
+ for <qemu-riscv@nongnu.org>; Thu, 18 Apr 2024 06:39:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1713447561; x=1714052361;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=sKxV4vNn0xVLc410qBTqaMzk14l2dMYNkauNboBT5Z8=;
+ b=0q2OGmExz87jeQ4HwcgwOllcaMJ5PXJHBmkhMzid3sj25i/FihwjvwnJo3/Is88gz5
+ Mz8/uO0MvFqsz7/hBqr37tJM/2M/OTv4xj/ABeyY/QUFcAVKVgABtQnebzFuFnR1Wt+S
+ Z8zYrKnCZXWuzYpCvgN9ccB+jhksUrK9ras3blgt49VW1PD8gpR5032Vyl/fPPH16JxZ
+ 4qPJg70eY94M0R6R8hutz3ZtrhV3VBMgvEbBCU0wNxiWAc8bpPO8mvp3yvZaEgjgkZ2w
+ xTNf2h8KFEo34tjMXlhvrZOmGIaYsbRUmxFfluMLBKXegcEeVXDf+pEThanwuEKXSZBy
+ ZeSg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713447561; x=1714052361;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=sKxV4vNn0xVLc410qBTqaMzk14l2dMYNkauNboBT5Z8=;
+ b=EXufe5pf6aB4QxwfFS918UsFvB6Q9VMxe+hZrBcfiz31sxHPa0gp0GZrzXnPxvuSAw
+ Zwr2OZZSCFSSo/hhrpFLtEK9g7Bdhz7HQ10fnXjuVbQj2C84qAkSz5W5gh/fO5kgxgqs
+ 4G5qLalDTqfUU6bWJhb3V+gDL/kfzaZ7um8ERTTkhHF+dDWFlCiRavtUWWfnBExCNf4M
+ 0XNQqm1kNendg4KdfEnKK8Otl1bsSNBTelx2SiLNVtkazTK1Wrv+c4W9OE3+7lZ6SJ67
+ WMHGrqrvkkToV6lq8tKhDe4aAPHl00XDYO4FSbPFdz9nfAupgxsne0RHuS2wyiGXasGg
+ 1sIA==
+X-Gm-Message-State: AOJu0YzeBbKDgVmzfpdLP2i808FyEuKUSHp4Wgd2w6lcv9j71l4a5VU4
+ dcmjKcQgqbIBEs4SbBsvVqcPM/v0z6umU5W9Bk9Xtal0QpN2sx4hxAVzzlvrqk3qCikgNu5Y9nu
+ qMlM=
+X-Google-Smtp-Source: AGHT+IEAtksLls6R2/VOFy5ElGOSBoW9A5aEfFFRvCMLDKrLaxGHniD3JTBxLlBS1tnOrSsp+XcOXg==
+X-Received: by 2002:a05:600c:5101:b0:416:a773:7d18 with SMTP id
+ o1-20020a05600c510100b00416a7737d18mr1956281wms.0.1713447561443; 
+ Thu, 18 Apr 2024 06:39:21 -0700 (PDT)
+Received: from carbon-x1.. ([2a01:e0a:999:a3a0:7b64:4d1d:16d8:e38b])
+ by smtp.gmail.com with ESMTPSA id
+ je12-20020a05600c1f8c00b004183edc31adsm6554015wmb.44.2024.04.18.06.39.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 18 Apr 2024 06:39:20 -0700 (PDT)
+From: =?UTF-8?q?Cl=C3=A9ment=20L=C3=A9ger?= <cleger@rivosinc.com>
+To: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>
+Cc: =?UTF-8?q?Cl=C3=A9ment=20L=C3=A9ger?= <cleger@rivosinc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Ved Shanbhogue <ved@rivosinc.com>, Atish Patra <atishp@rivosinc.com>,
+ qemu-devel@nongnu.org
+Subject: [RFC PATCH 0/3] target/riscv: Add support for Smdbltrp and Ssdbltrp
+ extensions
+Date: Thu, 18 Apr 2024 15:39:12 +0200
+Message-ID: <20240418133916.1442471-1-cleger@rivosinc.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Message-ID: <53af84b3.3414.18ef0997d79.Coremail.duchao@eswincomputing.com>
-X-Coremail-Locale: en_US
-X-CM-TRANSID: TQJkCgAnOrzm6yBmmDQHAA--.4833W
-X-CM-SenderInfo: xgxfxt3r6h245lqf0zpsxwx03jof0z/1tbiAQELDGYg6MgBCAAAso
-X-Coremail-Antispam: 1Ur529EdanIXcx71UUUUU7IcSsGvfJ3iIAIbVAYjsxI4VW3Jw
- CS07vEb4IE77IF4wCS07vE1I0E4x80FVAKz4kxMIAIbVAFxVCaYxvI4VCIwcAKzIAtYxBI
- daVFxhVjvjDU=
-Received-SPF: pass client-ip=20.231.56.155;
- envelope-from=duchao@eswincomputing.com; helo=azure-sdnproxy.icoremail.net
-X-Spam_score_int: -25
-X-Spam_score: -2.6
-X-Spam_bar: --
-X-Spam_report: (-2.6 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_LOW=-0.7,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::431;
+ envelope-from=cleger@rivosinc.com; helo=mail-wr1-x431.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -70,218 +100,164 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-T24gMjAyNC0wNC0xNiAxNzoyMywgRGFuaWVsIEhlbnJpcXVlIEJhcmJvemEgPGRiYXJib3phQHZl
-bnRhbmFtaWNyby5jb20+IHdyb3RlOgo+IAo+IE9uIDEyLzIxLzIzIDA2OjQ5LCBDaGFvIER1IHdy
-b3RlOgo+ID4gVGhpcyBwYXRjaCBpbXBsZW1lbnRzIGluc2VydC9yZW1vdmUgc29mdHdhcmUgYnJl
-YWtwb2ludCBwcm9jZXNzOgo+ID4gCj4gPiBBZGQgYW4gaW5wdXQgcGFyYW1ldGVyIGZvciBrdm1f
-YXJjaF9pbnNlcnRfc3dfYnJlYWtwb2ludCgpIGFuZAo+ID4ga3ZtX2FyY2hfcmVtb3ZlX3N3X2Jy
-ZWFrcG9pbnQoKSB0byBwYXNzIHRoZSBsZW5ndGggaW5mb3JtYXRpb24sCj4gPiB3aGljaCBoZWxw
-cyB1cyB0byBrbm93IHdoZXRoZXIgaXQgaXMgYSBjb21wcmVzc2VkIGluc3RydWN0aW9uLgo+ID4g
-Rm9yIHNvbWUgcmVtb3ZlIGNhc2VzLCB3ZSBkbyBub3QgaGF2ZSB0aGUgbGVuZ3RoIGluZm8sIHNv
-IHdlIG5lZWQKPiA+IHRvIGp1ZGdlIGJ5IG91cnNlbHZlcy4KPiA+IAo+ID4gRm9yIFJJU0MtViwg
-R0RCIHRyZWF0cyBzaW5nbGUtc3RlcCBzaW1pbGFybHkgdG8gYnJlYWtwb2ludDogYWRkIGEKPiA+
-IGJyZWFrcG9pbnQgYXQgdGhlIG5leHQgc3RlcCBhZGRyZXNzLCB0aGVuIGNvbnRpbnVlLiBTbyB0
-aGlzIGFsc28KPiA+IHdvcmtzIGZvciBzaW5nbGUtc3RlcCBkZWJ1Z2dpbmcuCj4gPiAKPiA+IEFk
-ZCBzb21lIHN0dWJzIHdoaWNoIGFyZSBuZWNlc3NhcnkgZm9yIGJ1aWxkaW5nLCBhbmQgd2lsbCBi
-ZQo+ID4gaW1wbGVtZW50ZWQgbGF0ZXIuCj4gPiAKPiA+IFNpZ25lZC1vZmYtYnk6IENoYW8gRHUg
-PGR1Y2hhb0Blc3dpbmNvbXB1dGluZy5jb20+Cj4gPiAtLS0KPiA+ICAgYWNjZWwva3ZtL2t2bS1h
-bGwuYyAgICAgICAgfCAgOCArKy0tCj4gPiAgIGluY2x1ZGUvc3lzZW11L2t2bS5oICAgICAgIHwg
-IDYgKystCj4gPiAgIHRhcmdldC9hcm0va3ZtNjQuYyAgICAgICAgIHwgIDYgKystCj4gPiAgIHRh
-cmdldC9pMzg2L2t2bS9rdm0uYyAgICAgIHwgIDYgKystCj4gPiAgIHRhcmdldC9taXBzL2t2bS5j
-ICAgICAgICAgIHwgIDYgKystCj4gPiAgIHRhcmdldC9wcGMva3ZtLmMgICAgICAgICAgIHwgIDYg
-KystCj4gPiAgIHRhcmdldC9yaXNjdi9rdm0va3ZtLWNwdS5jIHwgNzkgKysrKysrKysrKysrKysr
-KysrKysrKysrKysrKysrKysrKysrKysKPiA+ICAgdGFyZ2V0L3MzOTB4L2t2bS9rdm0uYyAgICAg
-fCAgNiArKy0KPiA+ICAgOCBmaWxlcyBjaGFuZ2VkLCAxMDcgaW5zZXJ0aW9ucygrKSwgMTYgZGVs
-ZXRpb25zKC0pCj4gPiAKPiA+IGRpZmYgLS1naXQgYS9hY2NlbC9rdm0va3ZtLWFsbC5jIGIvYWNj
-ZWwva3ZtL2t2bS1hbGwuYwo+ID4gaW5kZXggZTM5YTgxMGE0ZS4uY2NjNTA1ZDBjMiAxMDA2NDQK
-PiA+IC0tLSBhL2FjY2VsL2t2bS9rdm0tYWxsLmMKPiA+ICsrKyBiL2FjY2VsL2t2bS9rdm0tYWxs
-LmMKPiA+IEBAIC0zMjMxLDcgKzMyMzEsNyBAQCBpbnQga3ZtX2luc2VydF9icmVha3BvaW50KENQ
-VVN0YXRlICpjcHUsIGludCB0eXBlLCB2YWRkciBhZGRyLCB2YWRkciBsZW4pCj4gPiAgICAgICAg
-ICAgYnAgPSBnX25ldyhzdHJ1Y3Qga3ZtX3N3X2JyZWFrcG9pbnQsIDEpOwo+ID4gICAgICAgICAg
-IGJwLT5wYyA9IGFkZHI7Cj4gPiAgICAgICAgICAgYnAtPnVzZV9jb3VudCA9IDE7Cj4gPiAtICAg
-ICAgICBlcnIgPSBrdm1fYXJjaF9pbnNlcnRfc3dfYnJlYWtwb2ludChjcHUsIGJwKTsKPiA+ICsg
-ICAgICAgIGVyciA9IGt2bV9hcmNoX2luc2VydF9zd19icmVha3BvaW50KGNwdSwgYnAsIGxlbik7
-Cj4gPiAgICAgICAgICAgaWYgKGVycikgewo+ID4gICAgICAgICAgICAgICBnX2ZyZWUoYnApOwo+
-ID4gICAgICAgICAgICAgICByZXR1cm4gZXJyOwo+ID4gQEAgLTMyNzAsNyArMzI3MCw3IEBAIGlu
-dCBrdm1fcmVtb3ZlX2JyZWFrcG9pbnQoQ1BVU3RhdGUgKmNwdSwgaW50IHR5cGUsIHZhZGRyIGFk
-ZHIsIHZhZGRyIGxlbikKPiA+ICAgICAgICAgICAgICAgcmV0dXJuIDA7Cj4gPiAgICAgICAgICAg
-fQo+ID4gICAKPiA+IC0gICAgICAgIGVyciA9IGt2bV9hcmNoX3JlbW92ZV9zd19icmVha3BvaW50
-KGNwdSwgYnApOwo+ID4gKyAgICAgICAgZXJyID0ga3ZtX2FyY2hfcmVtb3ZlX3N3X2JyZWFrcG9p
-bnQoY3B1LCBicCwgbGVuKTsKPiA+ICAgICAgICAgICBpZiAoZXJyKSB7Cj4gPiAgICAgICAgICAg
-ICAgIHJldHVybiBlcnI7Cj4gPiAgICAgICAgICAgfQo+ID4gQEAgLTMzMDAsMTAgKzMzMDAsMTAg
-QEAgdm9pZCBrdm1fcmVtb3ZlX2FsbF9icmVha3BvaW50cyhDUFVTdGF0ZSAqY3B1KQo+ID4gICAg
-ICAgQ1BVU3RhdGUgKnRtcGNwdTsKPiA+ICAgCj4gPiAgICAgICBRVEFJTFFfRk9SRUFDSF9TQUZF
-KGJwLCAmcy0+a3ZtX3N3X2JyZWFrcG9pbnRzLCBlbnRyeSwgbmV4dCkgewo+ID4gLSAgICAgICAg
-aWYgKGt2bV9hcmNoX3JlbW92ZV9zd19icmVha3BvaW50KGNwdSwgYnApICE9IDApIHsKPiA+ICsg
-ICAgICAgIGlmIChrdm1fYXJjaF9yZW1vdmVfc3dfYnJlYWtwb2ludChjcHUsIGJwLCAwKSAhPSAw
-KSB7Cj4gPiAgICAgICAgICAgICAgIC8qIFRyeSBoYXJkZXIgdG8gZmluZCBhIENQVSB0aGF0IGN1
-cnJlbnRseSBzZWVzIHRoZSBicmVha3BvaW50LiAqLwo+ID4gICAgICAgICAgICAgICBDUFVfRk9S
-RUFDSCh0bXBjcHUpIHsKPiA+IC0gICAgICAgICAgICAgICAgaWYgKGt2bV9hcmNoX3JlbW92ZV9z
-d19icmVha3BvaW50KHRtcGNwdSwgYnApID09IDApIHsKPiA+ICsgICAgICAgICAgICAgICAgaWYg
-KGt2bV9hcmNoX3JlbW92ZV9zd19icmVha3BvaW50KHRtcGNwdSwgYnAsIDApID09IDApIHsKPiA+
-ICAgICAgICAgICAgICAgICAgICAgICBicmVhazsKPiA+ICAgICAgICAgICAgICAgICAgIH0KPiA+
-ICAgICAgICAgICAgICAgfQo+ID4gZGlmZiAtLWdpdCBhL2luY2x1ZGUvc3lzZW11L2t2bS5oIGIv
-aW5jbHVkZS9zeXNlbXUva3ZtLmgKPiA+IGluZGV4IGQ2MTQ4NzgxNjQuLmFiMzhjMjNkZWYgMTAw
-NjQ0Cj4gPiAtLS0gYS9pbmNsdWRlL3N5c2VtdS9rdm0uaAo+ID4gKysrIGIvaW5jbHVkZS9zeXNl
-bXUva3ZtLmgKPiA+IEBAIC0zOTEsOSArMzkxLDExIEBAIHN0cnVjdCBrdm1fc3dfYnJlYWtwb2lu
-dCAqa3ZtX2ZpbmRfc3dfYnJlYWtwb2ludChDUFVTdGF0ZSAqY3B1LAo+ID4gICBpbnQga3ZtX3N3
-X2JyZWFrcG9pbnRzX2FjdGl2ZShDUFVTdGF0ZSAqY3B1KTsKPiA+ICAgCj4gPiAgIGludCBrdm1f
-YXJjaF9pbnNlcnRfc3dfYnJlYWtwb2ludChDUFVTdGF0ZSAqY3B1LAo+ID4gLSAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBzdHJ1Y3Qga3ZtX3N3X2JyZWFrcG9pbnQgKmJwKTsKPiA+
-ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc3RydWN0IGt2bV9zd19icmVha3Bv
-aW50ICpicCwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdmFkZHIgbGVu
-KTsKPiA+ICAgaW50IGt2bV9hcmNoX3JlbW92ZV9zd19icmVha3BvaW50KENQVVN0YXRlICpjcHUs
-Cj4gPiAtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHN0cnVjdCBrdm1fc3dfYnJl
-YWtwb2ludCAqYnApOwo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzdHJ1
-Y3Qga3ZtX3N3X2JyZWFrcG9pbnQgKmJwLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICB2YWRkciBsZW4pOwo+ID4gICBpbnQga3ZtX2FyY2hfaW5zZXJ0X2h3X2JyZWFrcG9p
-bnQodmFkZHIgYWRkciwgdmFkZHIgbGVuLCBpbnQgdHlwZSk7Cj4gPiAgIGludCBrdm1fYXJjaF9y
-ZW1vdmVfaHdfYnJlYWtwb2ludCh2YWRkciBhZGRyLCB2YWRkciBsZW4sIGludCB0eXBlKTsKPiA+
-ICAgdm9pZCBrdm1fYXJjaF9yZW1vdmVfYWxsX2h3X2JyZWFrcG9pbnRzKHZvaWQpOwo+ID4gZGlm
-ZiAtLWdpdCBhL3RhcmdldC9hcm0va3ZtNjQuYyBiL3RhcmdldC9hcm0va3ZtNjQuYwo+ID4gaW5k
-ZXggM2MxNzVjOTNhNy4uMDIzZTkyYjU3NyAxMDA2NDQKPiA+IC0tLSBhL3RhcmdldC9hcm0va3Zt
-NjQuYwo+ID4gKysrIGIvdGFyZ2V0L2FybS9rdm02NC5jCj4gPiBAQCAtMTEzOSw3ICsxMTM5LDgg
-QEAgdm9pZCBrdm1fYXJjaF9vbl9zaWdidXNfdmNwdShDUFVTdGF0ZSAqYywgaW50IGNvZGUsIHZv
-aWQgKmFkZHIpCj4gPiAgIC8qIEM2LjYuMjkgQlJLIGluc3RydWN0aW9uICovCj4gPiAgIHN0YXRp
-YyBjb25zdCB1aW50MzJfdCBicmtfaW5zbiA9IDB4ZDQyMDAwMDA7Cj4gPiAgIAo+ID4gLWludCBr
-dm1fYXJjaF9pbnNlcnRfc3dfYnJlYWtwb2ludChDUFVTdGF0ZSAqY3MsIHN0cnVjdCBrdm1fc3df
-YnJlYWtwb2ludCAqYnApCj4gPiAraW50IGt2bV9hcmNoX2luc2VydF9zd19icmVha3BvaW50KENQ
-VVN0YXRlICpjcywgc3RydWN0IGt2bV9zd19icmVha3BvaW50ICpicCwKPiA+ICsgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgdmFkZHIgbGVuKQo+ID4gICB7Cj4gPiAgICAgICBpZiAo
-aGF2ZV9ndWVzdF9kZWJ1Zykgewo+ID4gICAgICAgICAgIGlmIChjcHVfbWVtb3J5X3J3X2RlYnVn
-KGNzLCBicC0+cGMsICh1aW50OF90ICopJmJwLT5zYXZlZF9pbnNuLCA0LCAwKSB8fAo+ID4gQEAg
-LTExNTMsNyArMTE1NCw4IEBAIGludCBrdm1fYXJjaF9pbnNlcnRfc3dfYnJlYWtwb2ludChDUFVT
-dGF0ZSAqY3MsIHN0cnVjdCBrdm1fc3dfYnJlYWtwb2ludCAqYnApCj4gPiAgICAgICB9Cj4gPiAg
-IH0KPiA+ICAgCj4gPiAtaW50IGt2bV9hcmNoX3JlbW92ZV9zd19icmVha3BvaW50KENQVVN0YXRl
-ICpjcywgc3RydWN0IGt2bV9zd19icmVha3BvaW50ICpicCkKPiA+ICtpbnQga3ZtX2FyY2hfcmVt
-b3ZlX3N3X2JyZWFrcG9pbnQoQ1BVU3RhdGUgKmNzLCBzdHJ1Y3Qga3ZtX3N3X2JyZWFrcG9pbnQg
-KmJwLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB2YWRkciBsZW4pCj4g
-PiAgIHsKPiA+ICAgICAgIHN0YXRpYyB1aW50MzJfdCBicms7Cj4gPiAgIAo+ID4gZGlmZiAtLWdp
-dCBhL3RhcmdldC9pMzg2L2t2bS9rdm0uYyBiL3RhcmdldC9pMzg2L2t2bS9rdm0uYwo+ID4gaW5k
-ZXggNGNlODA1NTViNC4uNzQyYjdjODI5NiAxMDA2NDQKPiA+IC0tLSBhL3RhcmdldC9pMzg2L2t2
-bS9rdm0uYwo+ID4gKysrIGIvdGFyZ2V0L2kzODYva3ZtL2t2bS5jCj4gPiBAQCAtNDkzNSw3ICs0
-OTM1LDggQEAgc3RhdGljIGludCBrdm1faGFuZGxlX3Rwcl9hY2Nlc3MoWDg2Q1BVICpjcHUpCj4g
-PiAgICAgICByZXR1cm4gMTsKPiA+ICAgfQo+ID4gICAKPiA+IC1pbnQga3ZtX2FyY2hfaW5zZXJ0
-X3N3X2JyZWFrcG9pbnQoQ1BVU3RhdGUgKmNzLCBzdHJ1Y3Qga3ZtX3N3X2JyZWFrcG9pbnQgKmJw
-KQo+ID4gK2ludCBrdm1fYXJjaF9pbnNlcnRfc3dfYnJlYWtwb2ludChDUFVTdGF0ZSAqY3MsIHN0
-cnVjdCBrdm1fc3dfYnJlYWtwb2ludCAqYnAsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHZhZGRyIGxlbikKPiA+ICAgewo+ID4gICAgICAgc3RhdGljIGNvbnN0IHVpbnQ4
-X3QgaW50MyA9IDB4Y2M7Cj4gPiAgIAo+ID4gQEAgLTQ5NDYsNyArNDk0Nyw4IEBAIGludCBrdm1f
-YXJjaF9pbnNlcnRfc3dfYnJlYWtwb2ludChDUFVTdGF0ZSAqY3MsIHN0cnVjdCBrdm1fc3dfYnJl
-YWtwb2ludCAqYnApCj4gPiAgICAgICByZXR1cm4gMDsKPiA+ICAgfQo+ID4gICAKPiA+IC1pbnQg
-a3ZtX2FyY2hfcmVtb3ZlX3N3X2JyZWFrcG9pbnQoQ1BVU3RhdGUgKmNzLCBzdHJ1Y3Qga3ZtX3N3
-X2JyZWFrcG9pbnQgKmJwKQo+ID4gK2ludCBrdm1fYXJjaF9yZW1vdmVfc3dfYnJlYWtwb2ludChD
-UFVTdGF0ZSAqY3MsIHN0cnVjdCBrdm1fc3dfYnJlYWtwb2ludCAqYnAsCj4gPiArICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIHZhZGRyIGxlbikKPiA+ICAgewo+ID4gICAgICAgdWlu
-dDhfdCBpbnQzOwo+ID4gICAKPiA+IGRpZmYgLS1naXQgYS90YXJnZXQvbWlwcy9rdm0uYyBiL3Rh
-cmdldC9taXBzL2t2bS5jCj4gPiBpbmRleCBlMjJlMjRlZDk3Li4yZjY4OTM4Y2RmIDEwMDY0NAo+
-ID4gLS0tIGEvdGFyZ2V0L21pcHMva3ZtLmMKPiA+ICsrKyBiL3RhcmdldC9taXBzL2t2bS5jCj4g
-PiBAQCAtMTEyLDEzICsxMTIsMTUgQEAgdm9pZCBrdm1fbWlwc19yZXNldF92Y3B1KE1JUFNDUFUg
-KmNwdSkKPiA+ICAgICAgIERQUklOVEYoIiVzXG4iLCBfX2Z1bmNfXyk7Cj4gPiAgIH0KPiA+ICAg
-Cj4gPiAtaW50IGt2bV9hcmNoX2luc2VydF9zd19icmVha3BvaW50KENQVVN0YXRlICpjcywgc3Ry
-dWN0IGt2bV9zd19icmVha3BvaW50ICpicCkKPiA+ICtpbnQga3ZtX2FyY2hfaW5zZXJ0X3N3X2Jy
-ZWFrcG9pbnQoQ1BVU3RhdGUgKmNzLCBzdHJ1Y3Qga3ZtX3N3X2JyZWFrcG9pbnQgKmJwLAo+ID4g
-KyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB2YWRkciBsZW4pCj4gPiAgIHsKPiA+
-ICAgICAgIERQUklOVEYoIiVzXG4iLCBfX2Z1bmNfXyk7Cj4gPiAgICAgICByZXR1cm4gMDsKPiA+
-ICAgfQo+ID4gICAKPiA+IC1pbnQga3ZtX2FyY2hfcmVtb3ZlX3N3X2JyZWFrcG9pbnQoQ1BVU3Rh
-dGUgKmNzLCBzdHJ1Y3Qga3ZtX3N3X2JyZWFrcG9pbnQgKmJwKQo+ID4gK2ludCBrdm1fYXJjaF9y
-ZW1vdmVfc3dfYnJlYWtwb2ludChDUFVTdGF0ZSAqY3MsIHN0cnVjdCBrdm1fc3dfYnJlYWtwb2lu
-dCAqYnAsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHZhZGRyIGxlbikK
-PiA+ICAgewo+ID4gICAgICAgRFBSSU5URigiJXNcbiIsIF9fZnVuY19fKTsKPiA+ICAgICAgIHJl
-dHVybiAwOwo+ID4gZGlmZiAtLWdpdCBhL3RhcmdldC9wcGMva3ZtLmMgYi90YXJnZXQvcHBjL2t2
-bS5jCj4gPiBpbmRleCA5YjFhYmUyZmM0Li5hOTljODViMmYzIDEwMDY0NAo+ID4gLS0tIGEvdGFy
-Z2V0L3BwYy9rdm0uYwo+ID4gKysrIGIvdGFyZ2V0L3BwYy9rdm0uYwo+ID4gQEAgLTEzNzUsNyAr
-MTM3NSw4IEBAIHN0YXRpYyBpbnQga3ZtcHBjX2hhbmRsZV9kY3Jfd3JpdGUoQ1BVUFBDU3RhdGUg
-KmVudiwKPiA+ICAgICAgIHJldHVybiAwOwo+ID4gICB9Cj4gPiAgIAo+ID4gLWludCBrdm1fYXJj
-aF9pbnNlcnRfc3dfYnJlYWtwb2ludChDUFVTdGF0ZSAqY3MsIHN0cnVjdCBrdm1fc3dfYnJlYWtw
-b2ludCAqYnApCj4gPiAraW50IGt2bV9hcmNoX2luc2VydF9zd19icmVha3BvaW50KENQVVN0YXRl
-ICpjcywgc3RydWN0IGt2bV9zd19icmVha3BvaW50ICpicCwKPiA+ICsgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgdmFkZHIgbGVuKQo+ID4gICB7Cj4gPiAgICAgICAvKiBNaXhlZCBl
-bmRpYW4gY2FzZSBpcyBub3QgaGFuZGxlZCAqLwo+ID4gICAgICAgdWludDMyX3Qgc2MgPSBkZWJ1
-Z19pbnN0X29wY29kZTsKPiA+IEBAIC0xMzg5LDcgKzEzOTAsOCBAQCBpbnQga3ZtX2FyY2hfaW5z
-ZXJ0X3N3X2JyZWFrcG9pbnQoQ1BVU3RhdGUgKmNzLCBzdHJ1Y3Qga3ZtX3N3X2JyZWFrcG9pbnQg
-KmJwKQo+ID4gICAgICAgcmV0dXJuIDA7Cj4gPiAgIH0KPiA+ICAgCj4gPiAtaW50IGt2bV9hcmNo
-X3JlbW92ZV9zd19icmVha3BvaW50KENQVVN0YXRlICpjcywgc3RydWN0IGt2bV9zd19icmVha3Bv
-aW50ICpicCkKPiA+ICtpbnQga3ZtX2FyY2hfcmVtb3ZlX3N3X2JyZWFrcG9pbnQoQ1BVU3RhdGUg
-KmNzLCBzdHJ1Y3Qga3ZtX3N3X2JyZWFrcG9pbnQgKmJwLAo+ID4gKyAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICB2YWRkciBsZW4pCj4gPiAgIHsKPiA+ICAgICAgIHVpbnQzMl90IHNj
-Owo+ID4gICAKPiA+IGRpZmYgLS1naXQgYS90YXJnZXQvcmlzY3Yva3ZtL2t2bS1jcHUuYyBiL3Rh
-cmdldC9yaXNjdi9rdm0va3ZtLWNwdS5jCj4gPiBpbmRleCA0NWI2Y2YxY2ZhLi5lOTExMDAwNmIw
-IDEwMDY0NAo+ID4gLS0tIGEvdGFyZ2V0L3Jpc2N2L2t2bS9rdm0tY3B1LmMKPiA+ICsrKyBiL3Rh
-cmdldC9yaXNjdi9rdm0va3ZtLWNwdS5jCj4gPiBAQCAtMTUyMSwzICsxNTIxLDgyIEBAIHN0YXRp
-YyBjb25zdCBUeXBlSW5mbyByaXNjdl9rdm1fY3B1X3R5cGVfaW5mb3NbXSA9IHsKPiA+ICAgfTsK
-PiA+ICAgCj4gPiAgIERFRklORV9UWVBFUyhyaXNjdl9rdm1fY3B1X3R5cGVfaW5mb3MpCj4gPiAr
-Cj4gPiArc3RhdGljIGNvbnN0IHVpbnQzMl90IGVicmVha19pbnNuID0gMHgwMDEwMDA3MzsKPiA+
-ICtzdGF0aWMgY29uc3QgdWludDE2X3QgY19lYnJlYWtfaW5zbiA9IDB4OTAwMjsKPiA+ICsKPiA+
-ICtpbnQga3ZtX2FyY2hfaW5zZXJ0X3N3X2JyZWFrcG9pbnQoQ1BVU3RhdGUgKmNzLCBzdHJ1Y3Qg
-a3ZtX3N3X2JyZWFrcG9pbnQgKmJwLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICB2YWRkciBsZW4pCj4gPiArewo+ID4gKyAgICBpZiAobGVuICE9IDQgJiYgbGVuICE9IDIp
-IHsKPiA+ICsgICAgICAgIHJldHVybiAtRUlOVkFMOwo+ID4gKyAgICB9Cj4gCj4gSSB3b25kZXIg
-aWYgdGhpcyB2ZXJpZmljYXRpb24gc2hvdWxkIGJlIG1vdmVkIHRvIGt2bV9pbnNlcnRfYnJlYWtw
-b2ludCgpLiBJcwo+IHRoZXJlIGFueSBrbm93biByZWFzb24gd2h5IG90aGVyIGFyY2hzIHdvdWxk
-IHVzZSAnbGVuJyBvdGhlciB0aGFuIDIgb3IgND8gVGhlCj4gcGFyZW50IGZ1bmN0aW9uIGNhbiB0
-aHJvdyB0aGUgRUlOVkFMIGluIHRoaXMgY2FzZS4gT3RoZXJ3aXNlIGFsbCBjYWxsZXJzIGZyb20K
-PiBhbGwgYXJjaHMgd2lsbCBuZWVkIGEgc2ltaWxhciBFSU5WQUwgY2hlY2suCj4gCgpUaGFua3Mg
-Zm9yIHRoZSByZXZpZXcuIEFuZCB5b3UgYXJlIHJpZ2h0LCB3ZSBjYW4gbW92ZSB0aGlzIGNoZWNr
-IHRvIHRoZSBwYXJlbnQKZnVuY3Rpb24sIHRvIGF2b2lkIHRoZSBkdXBsaWNhdGVkIGNvZGVzLiAK
-QnV0IHNpbmNlIEknbSBub3QgcHJldHR5IHN1cmUgd2hldGhlciBpdCB3aWxsIGJyZWFrIG90aGVy
-IGFyY2hzLCBzbyBJIGNob3NlIHRvCmRvIHRoaXMgb25seSBmb3IgUklTQy1WLiBLZWVwIG90aGVy
-IGFyY2hzIGFzIHRoZXkgYXJlLgoKQXMgeW91IG1lbnRpb25lZCwgbWF5YmUgUGFvbG8gY291bGQg
-Y29tbWVudCBvbiB0aGlzIGFsc28uCgo+ID4gKwo+ID4gKyAgICB1aW50OF90ICogaW5zbiA9IChs
-ZW4gPT0gNCkgPyAodWludDhfdCAqKSZlYnJlYWtfaW5zbiA6Cj4gPiArICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICh1aW50OF90ICopJmNfZWJyZWFrX2luc247Cj4gPiArCj4gPiAr
-ICAgIGlmIChjcHVfbWVtb3J5X3J3X2RlYnVnKGNzLCBicC0+cGMsICh1aW50OF90ICopJmJwLT5z
-YXZlZF9pbnNuLCBsZW4sIDApIHx8Cj4gPiArICAgICAgICBjcHVfbWVtb3J5X3J3X2RlYnVnKGNz
-LCBicC0+cGMsIGluc24sIGxlbiwgMSkpIHsKPiA+ICsgICAgICAgIHJldHVybiAtRUlOVkFMOwo+
-ID4gKyAgICB9Cj4gPiArCj4gPiArICAgIHJldHVybiAwOwo+ID4gK30KPiA+ICsKPiA+ICtpbnQg
-a3ZtX2FyY2hfcmVtb3ZlX3N3X2JyZWFrcG9pbnQoQ1BVU3RhdGUgKmNzLCBzdHJ1Y3Qga3ZtX3N3
-X2JyZWFrcG9pbnQgKmJwLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB2
-YWRkciBsZW4pCj4gPiArewo+ID4gKyAgICB1aW50OF90IGxlbmd0aDsKPiA+ICsKPiA+ICsgICAg
-aWYgKGxlbiA9PSA0IHx8IGxlbiA9PSAyKSB7Cj4gPiArICAgICAgICBsZW5ndGggPSAodWludDhf
-dClsZW47Cj4gCj4gU2FtZSBxdWVzdGlvbiBhcyBhYm92ZSAtIHBlcmhhcHMgdGhlIGxlbiA9IDAg
-fCAyIHwgNCBjb25kaXRpb25hbCBjYW4gYmUgbW92ZWQgdG8KPiBrdm1fcmVtb3ZlX2JyZWFrcG9p
-bnQoKS4KPiAKClNhbWUgYXMgYWJvdmUuCgpUaGFua3MsCkNoYW8KCj4gCj4gVGhhbmtzLAo+IAo+
-IAo+IERhbmllbAo+IAo+IAo+ID4gKyAgICB9IGVsc2UgaWYgKGxlbiA9PSAwKSB7Cj4gPiArICAg
-ICAgICAvKiBOZWVkIHRvIGRlY2lkZSB0aGUgaW5zdHJ1Y3Rpb24gbGVuZ3RoIGluIHRoaXMgY2Fz
-ZS4gKi8KPiA+ICsgICAgICAgIHVpbnQzMl90IHJlYWRfNF9ieXRlczsKPiA+ICsgICAgICAgIHVp
-bnQxNl90IHJlYWRfMl9ieXRlczsKPiA+ICsKPiA+ICsgICAgICAgIGlmIChjcHVfbWVtb3J5X3J3
-X2RlYnVnKGNzLCBicC0+cGMsICh1aW50OF90ICopJnJlYWRfNF9ieXRlcywgNCwgMCkgfHwKPiA+
-ICsgICAgICAgICAgICBjcHVfbWVtb3J5X3J3X2RlYnVnKGNzLCBicC0+cGMsICh1aW50OF90ICop
-JnJlYWRfMl9ieXRlcywgMiwgMCkpIHsKPiA+ICsgICAgICAgICAgICByZXR1cm4gLUVJTlZBTDsK
-PiA+ICsgICAgICAgIH0KPiA+ICsKPiA+ICsgICAgICAgIGlmIChyZWFkXzRfYnl0ZXMgPT0gZWJy
-ZWFrX2luc24pIHsKPiA+ICsgICAgICAgICAgICBsZW5ndGggPSA0Owo+ID4gKyAgICAgICAgfSBl
-bHNlIGlmIChyZWFkXzJfYnl0ZXMgPT0gY19lYnJlYWtfaW5zbikgewo+ID4gKyAgICAgICAgICAg
-IGxlbmd0aCA9IDI7Cj4gPiArICAgICAgICB9IGVsc2Ugewo+ID4gKyAgICAgICAgICAgIHJldHVy
-biAtRUlOVkFMOwo+ID4gKyAgICAgICAgfQo+ID4gKyAgICB9IGVsc2Ugewo+ID4gKyAgICAgICAg
-cmV0dXJuIC1FSU5WQUw7Cj4gPiArICAgIH0KPiA+ICsKPiA+ICsgICAgaWYgKGNwdV9tZW1vcnlf
-cndfZGVidWcoY3MsIGJwLT5wYywgKHVpbnQ4X3QgKikmYnAtPnNhdmVkX2luc24sCj4gPiArICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIGxlbmd0aCwgMSkpIHsKPiA+ICsgICAgICAgIHJldHVy
-biAtRUlOVkFMOwo+ID4gKyAgICB9Cj4gPiArCj4gPiArICAgIHJldHVybiAwOwo+ID4gK30KPiA+
-ICsKPiA+ICtpbnQga3ZtX2FyY2hfaW5zZXJ0X2h3X2JyZWFrcG9pbnQodmFkZHIgYWRkciwgdmFk
-ZHIgbGVuLCBpbnQgdHlwZSkKPiA+ICt7Cj4gPiArICAgIC8qIFRPRE87IFRvIGJlIGltcGxlbWVu
-dGVkIGxhdGVyLiAqLwo+ID4gKyAgICByZXR1cm4gLUVJTlZBTDsKPiA+ICt9Cj4gPiArCj4gPiAr
-aW50IGt2bV9hcmNoX3JlbW92ZV9od19icmVha3BvaW50KHZhZGRyIGFkZHIsIHZhZGRyIGxlbiwg
-aW50IHR5cGUpCj4gPiArewo+ID4gKyAgICAvKiBUT0RPOyBUbyBiZSBpbXBsZW1lbnRlZCBsYXRl
-ci4gKi8KPiA+ICsgICAgcmV0dXJuIC1FSU5WQUw7Cj4gPiArfQo+ID4gKwo+ID4gK3ZvaWQga3Zt
-X2FyY2hfcmVtb3ZlX2FsbF9od19icmVha3BvaW50cyh2b2lkKQo+ID4gK3sKPiA+ICsgICAgLyog
-VE9ETzsgVG8gYmUgaW1wbGVtZW50ZWQgbGF0ZXIuICovCj4gPiArfQo+ID4gKwo+ID4gK3ZvaWQg
-a3ZtX2FyY2hfdXBkYXRlX2d1ZXN0X2RlYnVnKENQVVN0YXRlICpjcywgc3RydWN0IGt2bV9ndWVz
-dF9kZWJ1ZyAqZGJnKQo+ID4gK3sKPiA+ICsgICAgLyogVE9ETzsgVG8gYmUgaW1wbGVtZW50ZWQg
-bGF0ZXIuICovCj4gPiArfQo+ID4gZGlmZiAtLWdpdCBhL3RhcmdldC9zMzkweC9rdm0va3ZtLmMg
-Yi90YXJnZXQvczM5MHgva3ZtL2t2bS5jCj4gPiBpbmRleCAzM2FiMzU1MWY0Li5mYWZhY2VkZDZh
-IDEwMDY0NAo+ID4gLS0tIGEvdGFyZ2V0L3MzOTB4L2t2bS9rdm0uYwo+ID4gKysrIGIvdGFyZ2V0
-L3MzOTB4L2t2bS9rdm0uYwo+ID4gQEAgLTg2Nyw3ICs4NjcsOCBAQCBzdGF0aWMgdm9pZCBkZXRl
-cm1pbmVfc3dfYnJlYWtwb2ludF9pbnN0cih2b2lkKQo+ID4gICAgICAgICAgIH0KPiA+ICAgfQo+
-ID4gICAKPiA+IC1pbnQga3ZtX2FyY2hfaW5zZXJ0X3N3X2JyZWFrcG9pbnQoQ1BVU3RhdGUgKmNz
-LCBzdHJ1Y3Qga3ZtX3N3X2JyZWFrcG9pbnQgKmJwKQo+ID4gK2ludCBrdm1fYXJjaF9pbnNlcnRf
-c3dfYnJlYWtwb2ludChDUFVTdGF0ZSAqY3MsIHN0cnVjdCBrdm1fc3dfYnJlYWtwb2ludCAqYnAs
-Cj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHZhZGRyIGxlbikKPiA+ICAg
-ewo+ID4gICAgICAgZGV0ZXJtaW5lX3N3X2JyZWFrcG9pbnRfaW5zdHIoKTsKPiA+ICAgCj4gPiBA
-QCAtODc5LDcgKzg4MCw4IEBAIGludCBrdm1fYXJjaF9pbnNlcnRfc3dfYnJlYWtwb2ludChDUFVT
-dGF0ZSAqY3MsIHN0cnVjdCBrdm1fc3dfYnJlYWtwb2ludCAqYnApCj4gPiAgICAgICByZXR1cm4g
-MDsKPiA+ICAgfQo+ID4gICAKPiA+IC1pbnQga3ZtX2FyY2hfcmVtb3ZlX3N3X2JyZWFrcG9pbnQo
-Q1BVU3RhdGUgKmNzLCBzdHJ1Y3Qga3ZtX3N3X2JyZWFrcG9pbnQgKmJwKQo+ID4gK2ludCBrdm1f
-YXJjaF9yZW1vdmVfc3dfYnJlYWtwb2ludChDUFVTdGF0ZSAqY3MsIHN0cnVjdCBrdm1fc3dfYnJl
-YWtwb2ludCAqYnAsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHZhZGRy
-IGxlbikKPiA+ICAgewo+ID4gICAgICAgdWludDhfdCB0W01BWF9JTEVOXTsKPiA+ICAgCg==
+A double trap typically arises during a sensitive phase in trap handling
+operations — when an exception or interrupt occurs while the trap
+handler (the component responsible for managing these events) is in a
+non-reentrant state. This non-reentrancy usually occurs in the early
+phase of trap handling, wherein the trap handler has not yet preserved
+the necessary state to handle and resume from the trap. The occurrence
+of such event is unlikely but can happen when dealing with hardware
+errors.
+
+This series adds support for Ssdbltrp as well as Smdbltrp [1].
+
+Ssdbltrp can be tested using qemu[1], opensbi[2], linux[3] and
+kvm-unit-tests[5]. Assuming you have a riscv environment available and
+configured (CROSS_COMPILE), it can be built for riscv64 using the
+following instructions:
+
+Qemu:
+  $ git clone https://github.com/rivosinc/qemu.git
+  $ cd qemu
+  $ git switch dev/cleger/dbltrp_rfc_v1
+  $ mkdir build && cd build
+  $ ../configure --target-list=riscv64-softmmu
+  $ make
+
+OpenSBI:
+  $ git clone https://github.com/rivosinc/opensbi.git
+  $ cd opensbi
+  $ git switch dev/cleger/dbltrp_rfc_v1
+  $ make O=build PLATFORM_RISCV_XLEN=64 PLATFORM=generic
+
+Linux:
+  $ git clone https://github.com/rivosinc/linux.git
+  $ cd linux
+  $ git switch dev/cleger/dbltrp_rfc_v1
+  $ export ARCH=riscv
+  $ make O=build defconfig
+  $ ./script/config --file build/.config --enable RISCV_DBLTRP
+  $ make O=build
+
+kvm-unit-tests:
+  $ git clone https://github.com/clementleger/kvm-unit-tests.git
+  $ cd kvm-unit-tests
+  $ git switch dev/cleger/dbltrp_rfc_v1
+  $ ./configure --arch=riscv64 --cross-prefix=$CROSS_COMPILE
+  $ make
+
+You will also need kvmtool in your rootfs. One can build a buildroot
+rootfs using the buildroot provided at [6] (which contains an update
+of kvmtool with riscv support).
+
+Run with kvm-unit-test test as kernel:
+  $ qemu-system-riscv64 \
+    -M virt \
+    -cpu rv64,x-ssdbltrp=true,x-smdbltrp=true \
+    -nographic \
+    -serial mon:stdio \
+    -bios opensbi/build/platform/generic/firmware/fw_jump.bin \
+    -kernel kvm-unit-tests-dbltrp/riscv/sbi_dbltrp.flat
+  ...
+  [OpenSBI boot partially elided]
+  Boot HART ISA Extensions  : sscofpmf,sstc,zicntr,zihpm,zicboz,zicbom,sdtrig,svadu,ssdbltrp
+  ...
+  ##########################################################################
+  #    kvm-unit-tests
+  ##########################################################################
+
+  PASS: sbi: fwft: FWFT extension probing no error
+  PASS: sbi: fwft: FWFT extension is present
+  PASS: sbi: fwft: dbltrp: Get double trap enable feature value
+  PASS: sbi: fwft: dbltrp: Set double trap enable feature value == 0
+  PASS: sbi: fwft: dbltrp: Get double trap enable feature value == 0
+  PASS: sbi: fwft: dbltrp: Double trap disabled, trap first time ok
+  PASS: sbi: fwft: dbltrp: Set double trap enable feature value == 1
+  PASS: sbi: fwft: dbltrp: Get double trap enable feature value == 1
+  PASS: sbi: fwft: dbltrp: Trapped twice allowed ok
+  INFO: sbi: fwft: dbltrp: Should generate a double trap and crash !
+
+  sbi_trap_error: hart0: trap0: double trap handler failed (error -10)
+
+  sbi_trap_error: hart0: trap0: mcause=0x0000000000000010 mtval=0x0000000000000000
+  sbi_trap_error: hart0: trap0: mtval2=0x0000000000000003 mtinst=0x0000000000000000
+  sbi_trap_error: hart0: trap0: mepc=0x00000000802000d8 mstatus=0x8000000a01006900
+  sbi_trap_error: hart0: trap0: ra=0x00000000802001fc sp=0x0000000080213e70
+  sbi_trap_error: hart0: trap0: gp=0x0000000000000000 tp=0x0000000080088000
+  sbi_trap_error: hart0: trap0: s0=0x0000000080213e80 s1=0x0000000000000001
+  sbi_trap_error: hart0: trap0: a0=0x0000000080213e80 a1=0x0000000080208193
+  sbi_trap_error: hart0: trap0: a2=0x000000008020dc20 a3=0x000000000000000f
+  sbi_trap_error: hart0: trap0: a4=0x0000000080210cd8 a5=0x00000000802110d0
+  sbi_trap_error: hart0: trap0: a6=0x00000000802136e4 a7=0x0000000046574654
+  sbi_trap_error: hart0: trap0: s2=0x0000000080210cd9 s3=0x0000000000000000
+  sbi_trap_error: hart0: trap0: s4=0x0000000000000000 s5=0x0000000000000000
+  sbi_trap_error: hart0: trap0: s6=0x0000000000000000 s7=0x0000000000000001
+  sbi_trap_error: hart0: trap0: s8=0x0000000000002000 s9=0x0000000080083700
+  sbi_trap_error: hart0: trap0: s10=0x0000000000000000 s11=0x0000000000000000
+  sbi_trap_error: hart0: trap0: t0=0x0000000000000000 t1=0x0000000080213ed8
+  sbi_trap_error: hart0: trap0: t2=0x0000000000001000 t3=0x0000000080213ee0
+  sbi_trap_error: hart0: trap0: t4=0x0000000000000000 t5=0x000000008020f8d0
+  sbi_trap_error: hart0: trap0: t6=0x0000000000000000
+
+Run with linux and kvm-unit-test test in kvm (testing VS-mode):
+  $ qemu-system-riscv64 \
+    -M virt \
+    -cpu rv64,x-ssdbltrp=true,x-smdbltrp=true \
+    -nographic \
+    -serial mon:stdio \
+    -bios opensbi/build/platform/generic/firmware/fw_jump.bin \
+    -kernel linux/build/arch/riscv/boot/Image
+  ...
+  [Linux boot partially elided]
+  [    0.735079] riscv-dbltrp: Double trap handling registered
+  ...
+
+  $ lkvm run -k sbi_dbltrp.flat -m 128 -c 2
+  ##########################################################################
+  #    kvm-unit-tests
+  ##########################################################################
+
+  PASS: sbi: fwft: FWFT extension probing no error
+  PASS: sbi: fwft: FWFT extension is present
+  PASS: sbi: fwft: dbltrp: Get double trap enable feature value
+  PASS: sbi: fwft: dbltrp: Set double trap enable feature value == 0
+  PASS: sbi: fwft: dbltrp: Get double trap enable feature value == 0
+  PASS: sbi: fwft: dbltrp: Double trap disabled, trap first time ok
+  PASS: sbi: fwft: dbltrp: Set double trap enable feature value == 1
+  PASS: sbi: fwft: dbltrp: Get double trap enable feature value == 1
+  PASS: sbi: fwft: dbltrp: Trapped twice allowed ok
+  INFO: sbi: fwft: dbltrp: Should generate a double trap and crash !
+  [   51.939077] Guest double trap
+  [   51.939323] kvm [93]: VCPU exit error -95
+  [   51.939683] kvm [93]: SEPC=0x802000d8 SSTATUS=0x200004520 HSTATUS=0x200200180
+  [   51.939947] kvm [93]: SCAUSE=0x10 STVAL=0x0 HTVAL=0x3 HTINST=0x0
+  KVM_RUN failed: Operation not supported
+  $
+
+Link: https://github.com/riscv/riscv-double-trap/releases/download/v0.56/riscv-double-trap.pdf [1]
+Link: https://github.com/rivosinc/qemu/tree/dev/cleger/dbltrp_rfc_v1 [2]
+Link: https://github.com/rivosinc/opensbi/tree/dev/cleger/dbltrp_rfc_v1 [3]
+Link: https://github.com/rivosinc/linux/tree/dev/cleger/dbltrp_rfc_v1 [4]
+Link: https://github.com/clementleger/kvm-unit-tests/tree/dev/cleger/dbltrp_rfc_v1 [5]
+Link: https://github.com/clementleger/buildroot/tree/dev/cleger/kvmtool [6]
+
+---
+
+Clément Léger (3):
+  target/riscv: change RISCV_EXCP_SEMIHOST exception number
+  target/riscv: add Ssdbltrp extension support
+  target/riscv: add Smdbltrp extension support
+
+ target/riscv/cpu.c        |  9 +++++-
+ target/riscv/cpu.h        |  1 +
+ target/riscv/cpu_bits.h   | 10 +++++-
+ target/riscv/cpu_cfg.h    |  2 ++
+ target/riscv/cpu_helper.c | 66 ++++++++++++++++++++++++++++++++++-----
+ target/riscv/csr.c        | 56 +++++++++++++++++++++++++++------
+ target/riscv/op_helper.c  | 14 +++++++++
+ 7 files changed, 139 insertions(+), 19 deletions(-)
+
+-- 
+2.43.0
+
 
