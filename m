@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5944DC4345F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B391C05023
 	for <qemu-riscv@archiver.kernel.org>; Thu, 18 Apr 2024 19:28:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rxXQT-0001fH-Az; Thu, 18 Apr 2024 15:28:05 -0400
+	id 1rxXQ7-0000w6-0R; Thu, 18 Apr 2024 15:27:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rxXP7-0008Cw-Tm
- for qemu-riscv@nongnu.org; Thu, 18 Apr 2024 15:26:47 -0400
-Received: from mail-ej1-x629.google.com ([2a00:1450:4864:20::629])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rxXOh-0007pE-81
+ for qemu-riscv@nongnu.org; Thu, 18 Apr 2024 15:26:16 -0400
+Received: from mail-ej1-x630.google.com ([2a00:1450:4864:20::630])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rxXP4-0007W0-9b
- for qemu-riscv@nongnu.org; Thu, 18 Apr 2024 15:26:41 -0400
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-a4715991c32so134651466b.1
- for <qemu-riscv@nongnu.org>; Thu, 18 Apr 2024 12:26:37 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rxXOf-0007PE-B8
+ for qemu-riscv@nongnu.org; Thu, 18 Apr 2024 15:26:15 -0400
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-a5269c3f9c7so134802266b.2
+ for <qemu-riscv@nongnu.org>; Thu, 18 Apr 2024 12:26:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713468396; x=1714073196; darn=nongnu.org;
+ d=linaro.org; s=google; t=1713468372; x=1714073172; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Jio+r+AEUkjjrU5gDZl4zBsemaqAFeHzEWFaXnqFrOQ=;
- b=H9ay9pzyZ3ABmD/RWdVRSmHZJ7NF0E3NBJrceLHGEJzh6D7hJPH+8f2V1ryKITt3ud
- /B3wppTVSXUgTFlvB63p+1EKTKSIGLDYekYP/JSXjD5ogQiuK89yM44cC6X0kRqw8VMq
- dPP4gljVL+cBnfA8M4m3V67fVvUoorMzwLr3wSy4Wg9JOhVtV8WbmGtvc/rN1bn4rP94
- IfkdTDv83Dfn+TueCEwTIv5uOmw7J30z3m9GIha/9F5lkqNUyooZOiYbjS0Y81TSqkC7
- qD+ALB49Pq+ZT8OnjAnk4roeyzf99jWE4yIgwVTFCCDLa+0kj5jnEdP6ueDv9/pMbc+l
- RIag==
+ bh=9U+h/wZIc3z+oX/TXzP2qUKxN0wKW4ADsCvM3ymjRp0=;
+ b=OXhY/Buhko3s7UunL/ForDhnDCXTzNZnT86h9tZD2ta+Z+fJ0d64GwRu2JZ30LcfzM
+ WjRuXcIe7y/BrLfY/QGRhwIzOeDHbJa3sqZS1IFnj2rHeKQy/P3zXw+x1sYcQZC+uMPL
+ 6pu5jtSZJGgXHiYu0ZsmlVEVldbY+TWEJ0Mjr/RcmoGR83DbFcFNmKTm3Cg/erWPrrIk
+ EwqC0YJOIvsqPzylwTXfMuxxRao7rhHw+NUMzqIBS5R6qMgSRen0KzSfdf0SwaNdGEaT
+ 6t2o7prZZQpvS45bC9j5SE1qGf1BUMlnp82rxA3NQaEjCTJMnKnhURWBkyah+Q6Os0sM
+ Wd4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713468396; x=1714073196;
+ d=1e100.net; s=20230601; t=1713468372; x=1714073172;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Jio+r+AEUkjjrU5gDZl4zBsemaqAFeHzEWFaXnqFrOQ=;
- b=Fw5Bb/9w3QCdoyd0FBNOGphWfXiPx6gcm1B5+XL6PHVwkaFnKv2/0HcRvqUiqc1yeW
- 5AgxJNoPcmEmFmJAkjyqevvttZRaOVnA+O9N/miCPu8XrrBRTYI632NoMKCV0sY2b2Vk
- Ba17aro3IrLYsO9WPYFf6SLhvIZO3SQ/YJzxG3Qb4qd4/LEGob3zfqnYmh2Gv1OX2JnS
- Ui3nQ7sa1hoDvDx/3xIOrDMZSTIaj5BL2d/6Rt2KwPF988Q22SX8wJllw4S2veYZXR3O
- RJtuToboJMm9vndiSJ+DO4gXDBcyEr59XWbwLyJ5SSmshw3qSJnKErS2YI851GMTFK0E
- mm8Q==
+ bh=9U+h/wZIc3z+oX/TXzP2qUKxN0wKW4ADsCvM3ymjRp0=;
+ b=Eh3VNea4neY55E1GpbD0YJCA13OSn7Guok5ynVu0pvWTHI1v4ey/Jv+CDGq3UjpENh
+ casiNvSIKjd8xMTeg5Zcm4aksYHD4lMhBixOL9c/YFlJeMvfQ5KQ2NzfaiFtOtCx3XJG
+ pR/bvOTKhQzHZtzD4CFnqU7hyqi824YOaX6le9FW5pubenehmmgHWIleecK5S5+FPBpR
+ AlE7c3wgIBAl3/nr7JWiq6sUSC5cFN8pd2Qs1b2/y0J5QEyZDuZXwm4XQG5IEtQgRG2F
+ rK99yVzbBeHOq6ylW35K71e2FUfUZLU8JLHjU/Gmz1cNNXKlqkOJaKUCi7YH4Q0bWv4T
+ cmzw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXA7fjaDddVgSCfSlr5CezVRBD56mQWbztEWeoBxCe45UAB/gNICZKXtquTe7yTGFWRPwU67qmVYfU1KQ6QblOEj4LSDbA=
-X-Gm-Message-State: AOJu0YzkNCzmymL/arm0GK2uv8Awnhmy3wS7AZ7brV4dCxhEIUCuBbxD
- vujHr0nE7NQ7NGlz6zs4kJLKsDlIyUcUrz3W215TCF6499YiE+1T6e1w9Yfv79c=
-X-Google-Smtp-Source: AGHT+IGvos0mZIxaTBgDhPQVJFUlHPzRnRLeB+2FoZuf4Lvw2zFvFjAnSJwEUd4r5lLo33Y0Jgv61A==
-X-Received: by 2002:a17:906:1f48:b0:a4e:cd5c:da72 with SMTP id
- d8-20020a1709061f4800b00a4ecd5cda72mr43114ejk.63.1713468396179; 
- Thu, 18 Apr 2024 12:26:36 -0700 (PDT)
+ AJvYcCUkLDFVrEEpoR780qn3ys6O1CNhw9JjQpayXtMM6xVagPwyXiaeS8QDLYbpBrQ764VyOuItYxz0U3sHyTKv+uiYRY2+6ZI=
+X-Gm-Message-State: AOJu0YwG4Kz/zVl+O8bTHoSw3Vl/w7IdbglTlLUUWwtt8BxKE2wjkeWv
+ JL41YYNNzBHM7zlFqLVS065icjIblB7WGiDFk4CvP6v8ZELAXd9HdAfA83guRRY=
+X-Google-Smtp-Source: AGHT+IF3G8X24RbaYze8VdVZ1kx3UyNMM7AzihIFYhjXkguw8ljWqt1FoAzlNUd5Ds9C7eQQOymXBQ==
+X-Received: by 2002:a17:906:2642:b0:a51:982e:b3f7 with SMTP id
+ i2-20020a170906264200b00a51982eb3f7mr47184ejc.37.1713468371935; 
+ Thu, 18 Apr 2024 12:26:11 -0700 (PDT)
 Received: from m1x-phil.lan ([176.176.151.213])
  by smtp.gmail.com with ESMTPSA id
- lu10-20020a170906faca00b00a52299d8eecsm1238430ejb.135.2024.04.18.12.26.34
+ v18-20020a170906489200b00a46baba1a0asm1259512ejq.100.2024.04.18.12.26.09
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 18 Apr 2024 12:26:35 -0700 (PDT)
+ Thu, 18 Apr 2024 12:26:11 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Paolo Bonzini <pbonzini@redhat.com>,
@@ -67,19 +67,26 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Anton Johansson <anjo@rev.ng>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Peter Xu <peterx@redhat.com>
-Subject: [PATCH 11/24] exec: Move tlb_reset_dirty*() declarations to
+ Riku Voipio <riku.voipio@iki.fi>, Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Artyom Tarasenko <atar4qemu@gmail.com>
+Subject: [PATCH 07/24] exec: Un-inline tlb_vaddr_to_host() and declare it in
  'exec/cputlb.h'
-Date: Thu, 18 Apr 2024 21:25:10 +0200
-Message-ID: <20240418192525.97451-12-philmd@linaro.org>
+Date: Thu, 18 Apr 2024 21:25:06 +0200
+Message-ID: <20240418192525.97451-8-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240418192525.97451-1-philmd@linaro.org>
 References: <20240418192525.97451-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::629;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x629.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::630;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x630.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -102,93 +109,147 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Declare tlb_reset_dirty() and tlb_reset_dirty_range_all()
-in "exec/cputlb.h". Restrict tlb_reset_dirty_range_all()
-to TCG accel.
+Declare tlb_vaddr_to_host() in "exec/cputlb.h" with the CPU TLB
+API. Un-inline the user emulation definition to avoid including
+"exec/cpu_ldst.h" (which declares g2h) in "exec/cputlb.h".
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- include/exec/cputlb.h   | 12 +++++++++++-
- include/exec/exec-all.h |  3 ---
- include/exec/ram_addr.h |  1 +
- system/physmem.c        |  2 ++
- 4 files changed, 14 insertions(+), 4 deletions(-)
+ include/exec/cpu_ldst.h      | 24 ------------------------
+ include/exec/cputlb.h        | 18 ++++++++++++++++++
+ accel/tcg/user-exec.c        |  7 +++++++
+ target/arm/tcg/helper-a64.c  |  1 +
+ target/riscv/vector_helper.c |  1 +
+ target/sparc/mmu_helper.c    |  1 +
+ 6 files changed, 28 insertions(+), 24 deletions(-)
 
+diff --git a/include/exec/cpu_ldst.h b/include/exec/cpu_ldst.h
+index 63186b07e4..7032949dba 100644
+--- a/include/exec/cpu_ldst.h
++++ b/include/exec/cpu_ldst.h
+@@ -418,28 +418,4 @@ static inline int cpu_ldsw_code(CPUArchState *env, abi_ptr addr)
+     return (int16_t)cpu_lduw_code(env, addr);
+ }
+ 
+-/**
+- * tlb_vaddr_to_host:
+- * @env: CPUArchState
+- * @addr: guest virtual address to look up
+- * @access_type: 0 for read, 1 for write, 2 for execute
+- * @mmu_idx: MMU index to use for lookup
+- *
+- * Look up the specified guest virtual index in the TCG softmmu TLB.
+- * If we can translate a host virtual address suitable for direct RAM
+- * access, without causing a guest exception, then return it.
+- * Otherwise (TLB entry is for an I/O access, guest software
+- * TLB fill required, etc) return NULL.
+- */
+-#ifdef CONFIG_USER_ONLY
+-static inline void *tlb_vaddr_to_host(CPUArchState *env, abi_ptr addr,
+-                                      MMUAccessType access_type, int mmu_idx)
+-{
+-    return g2h(env_cpu(env), addr);
+-}
+-#else
+-void *tlb_vaddr_to_host(CPUArchState *env, abi_ptr addr,
+-                        MMUAccessType access_type, int mmu_idx);
+-#endif
+-
+ #endif /* CPU_LDST_H */
 diff --git a/include/exec/cputlb.h b/include/exec/cputlb.h
-index 3594f904b4..dc92befb93 100644
+index ef18642a32..173eb98b9a 100644
 --- a/include/exec/cputlb.h
 +++ b/include/exec/cputlb.h
-@@ -49,6 +49,9 @@ void *tlb_vaddr_to_host(CPUArchState *env, abi_ptr addr,
+@@ -20,10 +20,28 @@
+ #ifndef CPUTLB_H
+ #define CPUTLB_H
+ 
++#include "exec/abi_ptr.h"
+ #include "exec/cpu-common.h"
++#include "exec/mmu-access-type.h"
+ 
+ #ifdef CONFIG_TCG
+ 
++/**
++ * tlb_vaddr_to_host:
++ * @env: CPUArchState
++ * @addr: guest virtual address to look up
++ * @access_type: 0 for read, 1 for write, 2 for execute
++ * @mmu_idx: MMU index to use for lookup
++ *
++ * Look up the specified guest virtual index in the TCG softmmu TLB.
++ * If we can translate a host virtual address suitable for direct RAM
++ * access, without causing a guest exception, then return it.
++ * Otherwise (TLB entry is for an I/O access, guest software
++ * TLB fill required, etc) return NULL.
++ */
++void *tlb_vaddr_to_host(CPUArchState *env, abi_ptr addr,
++                        MMUAccessType access_type, int mmu_idx);
++
+ #if !defined(CONFIG_USER_ONLY)
+ /* cputlb.c */
  void tlb_protect_code(ram_addr_t ram_addr);
- void tlb_unprotect_code(ram_addr_t ram_addr);
- 
-+void tlb_reset_dirty(CPUState *cpu, ram_addr_t start1, ram_addr_t length);
-+void tlb_reset_dirty_range_all(ram_addr_t start, ram_addr_t length);
-+
- /**
-  * iotlb_to_section:
-  * @cpu: CPU performing the access
-@@ -69,6 +72,13 @@ hwaddr memory_region_section_get_iotlb(CPUState *cpu,
- 
- #endif /* CONFIG_USER_ONLY */
- 
--#endif /* CONFIG_TCG */
-+#else /* !CONFIG_TCG */
-+
-+static inline void tlb_reset_dirty_range_all(ram_addr_t start,
-+                                             ram_addr_t length)
-+{
-+}
-+
-+#endif /* !CONFIG_TCG */
- 
- #endif
-diff --git a/include/exec/exec-all.h b/include/exec/exec-all.h
-index 778c82ba8e..6f46015ab4 100644
---- a/include/exec/exec-all.h
-+++ b/include/exec/exec-all.h
-@@ -640,9 +640,6 @@ static inline void mmap_lock(void) {}
- static inline void mmap_unlock(void) {}
- #define WITH_MMAP_LOCK_GUARD()
- 
--void tlb_reset_dirty(CPUState *cpu, ram_addr_t start1, ram_addr_t length);
--void tlb_reset_dirty_range_all(ram_addr_t start, ram_addr_t length);
--
- #endif
- 
- #endif
-diff --git a/include/exec/ram_addr.h b/include/exec/ram_addr.h
-index 3fc83587c0..f06ae9b516 100644
---- a/include/exec/ram_addr.h
-+++ b/include/exec/ram_addr.h
-@@ -26,6 +26,7 @@
- #include "exec/ramlist.h"
- #include "exec/ramblock.h"
- #include "exec/exec-all.h"
-+#include "cputlb.h"
+diff --git a/accel/tcg/user-exec.c b/accel/tcg/user-exec.c
+index 1c621477ad..54b35588b9 100644
+--- a/accel/tcg/user-exec.c
++++ b/accel/tcg/user-exec.c
+@@ -23,6 +23,7 @@
+ #include "tcg/tcg.h"
+ #include "qemu/bitops.h"
  #include "qemu/rcu.h"
- 
- extern uint64_t total_dirty_pages;
-diff --git a/system/physmem.c b/system/physmem.c
-index 38d3ede9f9..7a7876a375 100644
---- a/system/physmem.c
-+++ b/system/physmem.c
-@@ -850,6 +850,7 @@ found:
-     return block;
- }
- 
-+#ifdef CONFIG_TCG
- void tlb_reset_dirty_range_all(ram_addr_t start, ram_addr_t length)
- {
-     CPUState *cpu;
-@@ -869,6 +870,7 @@ void tlb_reset_dirty_range_all(ram_addr_t start, ram_addr_t length)
-         tlb_reset_dirty(cpu, start1, length);
++#include "exec/cputlb.h"
+ #include "exec/cpu_ldst.h"
+ #include "exec/translate-all.h"
+ #include "exec/helper-proto.h"
+@@ -138,6 +139,12 @@ bool handle_sigsegv_accerr_write(CPUState *cpu, sigset_t *old_set,
      }
  }
-+#endif
  
- /* Note: start and end must be within the same ram block.  */
- bool cpu_physical_memory_test_and_clear_dirty(ram_addr_t start,
++void *tlb_vaddr_to_host(CPUArchState *env, abi_ptr addr,
++                        MMUAccessType access_type, int mmu_idx)
++{
++    return g2h(env_cpu(env), addr);
++}
++
+ typedef struct PageFlagsNode {
+     struct rcu_head rcu;
+     IntervalTreeNode itree;
+diff --git a/target/arm/tcg/helper-a64.c b/target/arm/tcg/helper-a64.c
+index ebaa7f00df..9b3ae06207 100644
+--- a/target/arm/tcg/helper-a64.c
++++ b/target/arm/tcg/helper-a64.c
+@@ -29,6 +29,7 @@
+ #include "internals.h"
+ #include "qemu/crc32c.h"
+ #include "exec/exec-all.h"
++#include "exec/cputlb.h"
+ #include "exec/cpu_ldst.h"
+ #include "qemu/int128.h"
+ #include "qemu/atomic128.h"
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index fa139040f8..d3d9c33597 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -22,6 +22,7 @@
+ #include "cpu.h"
+ #include "exec/memop.h"
+ #include "exec/exec-all.h"
++#include "exec/cputlb.h"
+ #include "exec/cpu_ldst.h"
+ #include "exec/helper-proto.h"
+ #include "fpu/softfloat.h"
+diff --git a/target/sparc/mmu_helper.c b/target/sparc/mmu_helper.c
+index ad1591d9fd..e79a33367a 100644
+--- a/target/sparc/mmu_helper.c
++++ b/target/sparc/mmu_helper.c
+@@ -21,6 +21,7 @@
+ #include "qemu/log.h"
+ #include "cpu.h"
+ #include "exec/exec-all.h"
++#include "exec/cputlb.h"
+ #include "qemu/qemu-print.h"
+ #include "trace.h"
+ 
 -- 
 2.41.0
 
