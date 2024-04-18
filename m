@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B741C4345F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 449CBC04FF8
 	for <qemu-riscv@archiver.kernel.org>; Thu, 18 Apr 2024 19:29:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rxXRM-00041X-I8; Thu, 18 Apr 2024 15:29:00 -0400
+	id 1rxXRL-0003zD-Ps; Thu, 18 Apr 2024 15:28:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rxXPb-0000B2-DZ
- for qemu-riscv@nongnu.org; Thu, 18 Apr 2024 15:27:15 -0400
-Received: from mail-ej1-x62d.google.com ([2a00:1450:4864:20::62d])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rxXOa-0007m0-4r
+ for qemu-riscv@nongnu.org; Thu, 18 Apr 2024 15:26:11 -0400
+Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rxXPY-0007aV-Da
- for qemu-riscv@nongnu.org; Thu, 18 Apr 2024 15:27:10 -0400
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a5561b88bb3so130338266b.0
- for <qemu-riscv@nongnu.org>; Thu, 18 Apr 2024 12:27:08 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rxXOY-0007Lj-K3
+ for qemu-riscv@nongnu.org; Thu, 18 Apr 2024 15:26:07 -0400
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-56fe7dc7f58so1266560a12.2
+ for <qemu-riscv@nongnu.org>; Thu, 18 Apr 2024 12:26:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713468427; x=1714073227; darn=nongnu.org;
+ d=linaro.org; s=google; t=1713468365; x=1714073165; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VHCcAuBE/LTzo7Jv3JWIaIvZFf+gAOHGRyRvAagXUpM=;
- b=JjvbdB1EI4R2c/uPHtkX0rPFYOizmp27XThfBJjjFopev2/Z+y64mfPJ9iVpt1R4wH
- KoEgA7n4Zx+wPyXZvzaXmA4kLAqrTm1RanPMuM5x865qxc+QRDdikgxO2sxxfWO8U6Nd
- j9bg2ZnlqvWGdXsvEu559nDpPw0v5dTONhXXvdrYPxG8pFQxWw55URZWcAzZcIKqc+lA
- 3L5Rqu//7FjpMHFq01rPL7gWOkC61EvpDYJ6y8DzOjf6m2qhP7EJ7IGL+D+MbRsT7L32
- NpYNp9Ph2EGScz9JO1yAbtx/BjJS5/KoibjSnburEOHuX25BzQSjxEDpV9uutGmLNVvW
- a5mw==
+ bh=kMOTCzZ8G1QDoqpRuDm+110xUKe36YwlxUEiY1YFvik=;
+ b=Q7WYsWSZ+N9wV4Y81fNy5BB3MIr7PNKoUY0ZECRnyrkpvvL9iBKP71IYNc3o9FYV/S
+ fqsnn/qte7tZgNO8cVtB7BOdeNSZpy3VXmpzKubQtcGPaeQni7nhCQncwybTRquoo3TU
+ vhqc0IXMvMeeMOoNxsc+yTBcI1AeyzJdFivQh9gBBozbHzDwiEGPNKGZ97rg2GeoH8Nx
+ cKPkJ8aefyE+g7KjVC/2Nftx0pX7T/HNtAzKZ8p89HeX0D7QUtP7iErq+6NQBR47T3f0
+ 2UWThA3ztsI7N6OES/CGSf+0ZN/0aSJjDVUPYq+EDXivRGBkdpOOJJfpShhgmIZxC5YH
+ /HmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713468427; x=1714073227;
+ d=1e100.net; s=20230601; t=1713468365; x=1714073165;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=VHCcAuBE/LTzo7Jv3JWIaIvZFf+gAOHGRyRvAagXUpM=;
- b=pBW6sa1MAXQ6LR+t8G+wdi3rX+7HSPjJhfFa6JdwbKX1MoFGSJlTRnoEUfZnULouUv
- X6hb3YYeo3XGKfxVgz8uyQwHSaviTMOOwiQO0kBee9i+GWtVr5Fa/vfA2jnnZC8Xpnk0
- 8wd86LqATULWAvkmt5EVgVWLzaJXsaGk4TwGn/rcJZuaQOEwYfPe2LIctYODZSUC9Qt0
- zrI+nHktmzY6d4MwdnX/oQ6PCaVMXMfmoDTMDi0snMwpYFjor9A8jaPieAcWKHd8t9NQ
- JHL7BqlzVSq09y6Z+H9IVo9xNuvukPlPLZ2fiMH6vV2G/d5pVutZRfRXKGDktGALL5LR
- mJkg==
+ bh=kMOTCzZ8G1QDoqpRuDm+110xUKe36YwlxUEiY1YFvik=;
+ b=d/rS4lqONnABRsd0vVgBslY3hL+SztrUCScqfIa9EurDnKEWOIAHdgw6Fr0EnD2nW9
+ C7b91OE5QJAUlzByIHog823ZfdOobEvSvoL0QdgknXjx575PHhX2+K8xtVCIBU1PwsbR
+ wjouvckdS609Z5Ds7iMFEUmAhkPX4olcRU6SiC5cLb00M8973dY6B2DUKBldqyg62TpY
+ +i2TJzk4mW92FkRZPs7dfQ6Hv+O1eMQ0A9jK5oBXG0sCgu0uACKqUsBnxGFz877J9Woc
+ 0syZ8hrTJLT+eYby657PkAM4rIDkreclynpg+qPf+UQE4wSwQ1CY3AWeBGoFN7KaBY/o
+ 1xYA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXGNwtVX36y3ArTnBlAUlGA39H0g6mRCbUbOrrjPTrfRn+pCKT6mjtG8fYiEJutWNqJAyEV84paH9lZG4V5TzxbhDt6ygg=
-X-Gm-Message-State: AOJu0YzgNXNQyesT701yp6RVcuwheZ8NqQk4oukykw5WqFrJNAYGwf8l
- e4zwmIjz/tLenCJ8VYS8gtOrXYCBDJKh37jSSH6lhzIApdy21S9XD4ib7L8JIQo=
-X-Google-Smtp-Source: AGHT+IHCVKWH0+AZiuPsOyJcP3T0HcQ3oNxiRJGIC+ivVe0T0x2KkBJdxwuTUWOtC8MRPWBviUHknA==
-X-Received: by 2002:a17:906:3502:b0:a52:277d:c1c9 with SMTP id
- r2-20020a170906350200b00a52277dc1c9mr53891eja.50.1713468427063; 
- Thu, 18 Apr 2024 12:27:07 -0700 (PDT)
+ AJvYcCUlNhxHT0NCxpwtvGJm2konvevdYCVoH4/LiMpY/MM28wsMmn64TBO1qBbP20It46z9cq1UU0MeVcDg6rEOdyVSRUb4VLc=
+X-Gm-Message-State: AOJu0YwmEFEQwxJs0XhwR1m/bzdIZX8Wzt0E0AM6+eygAfvahvcr6bJJ
+ XPqPatQo0groGqc822ZgoVjAptnSIrZBTij1ZkS8KxLkkSr2co7FLPF0xJwp2Zs=
+X-Google-Smtp-Source: AGHT+IGauXFub4OFdy7tZBt9c2yQKaEln2/oxE9Uk8pxg4A6jmXoRy5XQ4BNQTCVjKmFKW2y4HZUKg==
+X-Received: by 2002:a50:951a:0:b0:56e:2fb9:66d6 with SMTP id
+ u26-20020a50951a000000b0056e2fb966d6mr107290eda.27.1713468365147; 
+ Thu, 18 Apr 2024 12:26:05 -0700 (PDT)
 Received: from m1x-phil.lan ([176.176.151.213])
  by smtp.gmail.com with ESMTPSA id
- j21-20020a170906431500b00a521e5856f6sm1256588ejm.51.2024.04.18.12.27.05
+ fj17-20020a0564022b9100b0056fe8f3eec6sm1194542edb.62.2024.04.18.12.26.03
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 18 Apr 2024 12:27:06 -0700 (PDT)
+ Thu, 18 Apr 2024 12:26:04 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Paolo Bonzini <pbonzini@redhat.com>,
@@ -66,27 +66,26 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>,
  David Hildenbrand <david@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Anton Johansson <anjo@rev.ng>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Riku Voipio <riku.voipio@iki.fi>
-Subject: [PATCH 14/24] exec: Rename 'exec/user/guest-base.h' as
- 'user/guest-base.h'
-Date: Thu, 18 Apr 2024 21:25:13 +0200
-Message-ID: <20240418192525.97451-15-philmd@linaro.org>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH 06/24] exec: Have guest_addr_valid() methods take
+ abi_ptr/size_t arguments
+Date: Thu, 18 Apr 2024 21:25:05 +0200
+Message-ID: <20240418192525.97451-7-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240418192525.97451-1-philmd@linaro.org>
 References: <20240418192525.97451-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::62d;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x62d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::534;
+ envelope-from=philmd@linaro.org; helo=mail-ed1-x534.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,61 +101,33 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The include/user/ directory contains the user-emulation
-specific headers. Move guest-base.h there too.
+abi_ulong is target specific, replace by abi_ptr which isn't.
+Use size_t for the @len type.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- include/exec/cpu-all.h               | 2 +-
- include/{exec => }/user/guest-base.h | 4 ++--
- tcg/tcg.c                            | 2 +-
- 3 files changed, 4 insertions(+), 4 deletions(-)
- rename include/{exec => }/user/guest-base.h (72%)
+ include/exec/cpu_ldst.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/include/exec/cpu-all.h b/include/exec/cpu-all.h
-index 78848f018c..027f19e052 100644
---- a/include/exec/cpu-all.h
-+++ b/include/exec/cpu-all.h
-@@ -65,7 +65,7 @@
+diff --git a/include/exec/cpu_ldst.h b/include/exec/cpu_ldst.h
+index f3c2a3ca74..63186b07e4 100644
+--- a/include/exec/cpu_ldst.h
++++ b/include/exec/cpu_ldst.h
+@@ -92,12 +92,12 @@ static inline void *g2h(CPUState *cs, abi_ptr x)
+     return g2h_untagged(cpu_untagged_addr(cs, x));
+ }
  
- #if defined(CONFIG_USER_ONLY)
- #include "exec/user/abitypes.h"
--#include "exec/user/guest-base.h"
-+#include "user/guest-base.h"
+-static inline bool guest_addr_valid_untagged(abi_ulong x)
++static inline bool guest_addr_valid_untagged(abi_ptr x)
+ {
+     return x <= GUEST_ADDR_MAX;
+ }
  
- extern bool have_guest_base;
- 
-diff --git a/include/exec/user/guest-base.h b/include/user/guest-base.h
-similarity index 72%
-rename from include/exec/user/guest-base.h
-rename to include/user/guest-base.h
-index afe2ab7fbb..1e42bca5db 100644
---- a/include/exec/user/guest-base.h
-+++ b/include/user/guest-base.h
-@@ -4,8 +4,8 @@
-  *  Copyright (c) 2003 Fabrice Bellard
-  */
- 
--#ifndef EXEC_USER_GUEST_BASE_H
--#define EXEC_USER_GUEST_BASE_H
-+#ifndef USER_GUEST_BASE_H
-+#define USER_GUEST_BASE_H
- 
- extern uintptr_t guest_base;
- 
-diff --git a/tcg/tcg.c b/tcg/tcg.c
-index 0c0bb9d169..6a32656cd4 100644
---- a/tcg/tcg.c
-+++ b/tcg/tcg.c
-@@ -57,7 +57,7 @@
- #include "tcg-internal.h"
- #include "tcg/perf.h"
- #ifdef CONFIG_USER_ONLY
--#include "exec/user/guest-base.h"
-+#include "user/guest-base.h"
- #endif
- 
- /* Forward declarations for functions declared in tcg-target.c.inc and
+-static inline bool guest_range_valid_untagged(abi_ulong start, abi_ulong len)
++static inline bool guest_range_valid_untagged(abi_ptr start, size_t len)
+ {
+     return len - 1 <= GUEST_ADDR_MAX && start <= GUEST_ADDR_MAX - len + 1;
+ }
 -- 
 2.41.0
 
