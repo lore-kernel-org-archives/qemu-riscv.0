@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5961AC4345F
-	for <qemu-riscv@archiver.kernel.org>; Thu, 18 Apr 2024 19:32:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 670F8C05023
+	for <qemu-riscv@archiver.kernel.org>; Thu, 18 Apr 2024 19:32:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rxXTQ-0003XI-7S; Thu, 18 Apr 2024 15:31:08 -0400
+	id 1rxXTJ-0002dG-FM; Thu, 18 Apr 2024 15:31:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rxXQo-0002wd-Do
- for qemu-riscv@nongnu.org; Thu, 18 Apr 2024 15:28:32 -0400
-Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rxXQT-0001jd-BB
+ for qemu-riscv@nongnu.org; Thu, 18 Apr 2024 15:28:05 -0400
+Received: from mail-ej1-x62c.google.com ([2a00:1450:4864:20::62c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rxXQl-0007lL-6C
- for qemu-riscv@nongnu.org; Thu, 18 Apr 2024 15:28:25 -0400
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-3476dcd9c46so848181f8f.0
- for <qemu-riscv@nongnu.org>; Thu, 18 Apr 2024 12:28:22 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rxXQR-0007hs-Lk
+ for qemu-riscv@nongnu.org; Thu, 18 Apr 2024 15:28:05 -0400
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-a526d0b2349so144686366b.3
+ for <qemu-riscv@nongnu.org>; Thu, 18 Apr 2024 12:28:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713468501; x=1714073301; darn=nongnu.org;
+ d=linaro.org; s=google; t=1713468482; x=1714073282; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/Yz7aRuiYxkABVdFEv0r+XjMMhiAPKgmd2KiD0xHfQg=;
- b=X7vURuSvQT07cVgIi989oUl+bZhnHoK29CgeeFQxYymNaWLK5OblSHmRF7Tjg51WnB
- zPhuB/xUeh58Z3cFClgBHDZdfXm7Y22Sk3JtlAlHTQ1c9Yh7El2odjwatSrrZIxmEgwn
- 2br76v9t3LeU4lzGfIr0l2mrqtqlG+w7ZLmcS8mFSt37dyfcDtlskn5YXqrH9cUB97vB
- D6cT0QmeYMqGNrPOmDGhzyFs/bFcpKGl02M0qCOMil47F0Zo+kguv0rSefT25UtDH7ex
- Z0bT17Ga/g3rFh3+2gUVgrVugdXzkszACplAFYd63RIvyRWj9j/Rfy/to+KSq41I0e5L
- MuYg==
+ bh=o0/TLkq+0Cek1YtUvPVSPSPpKhvNS+eTx919tWRRKxo=;
+ b=c/IqhHd5rFyjt+7/J95u+CqZ/4ldYN50hoEPLJKba9lPKy7MpeSLefEkTpcz5JoQ4O
+ CBiWKCiUfjjOvSKTCfb15XrgZjhtj9cIZWuUiLKVVPXBaW1D+1flaxxUhxNT4pjv6Y7N
+ YnMnBNIUL1Myu8RfcYbTS31Yu6qcQsO0neVxU403/R4Y5YMFaBQyfdVzcb5OWCZLjIjM
+ IBJjrygxBlciJYz+6QlUvR4zL9P5S1GfS65mrIfAfGOlaT3fjPPWlO+W5ZTQHimOClcx
+ gKamW+i3ipHuJ/v9X2+2mb7t1ttilolgru3Gdmolj4UiYaecm6mFz41fGhdOhY661VDt
+ 8WSA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713468501; x=1714073301;
+ d=1e100.net; s=20230601; t=1713468482; x=1714073282;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/Yz7aRuiYxkABVdFEv0r+XjMMhiAPKgmd2KiD0xHfQg=;
- b=AWg94M6/aV9DYlbMZ+bgZJ19ucVck1rjGrGZ7ZrTPSG+OoI0Pip/O4Kco5l4OB/JGL
- M0N0DF8vRTpKhSwPl/0bzn53z3l4k6mVAGOyGdlgOdrT7A/D/GGGTpn+g8aYLhE35Qj4
- mqT37SS042wLX+EyXM2FN25qWKPAOFEV0T53Cum+jbS6P3dl8Ls8Pso0Gixyr0mGg/fa
- oqdngEgQ/9rO3Hc5sexx42Ts9Iw8B5Am5SK0cz5vQhQgonfbqvy1zZnayVlUrFheeAJ7
- vLphUeHyil2xifsU1EFA9plpt8JBfugyDDy1XlH5Cm3zxqDw4l3qYzdlhCUJzVPPgEJe
- yTBA==
+ bh=o0/TLkq+0Cek1YtUvPVSPSPpKhvNS+eTx919tWRRKxo=;
+ b=qQPi3cB1JVYYg0TskstMMBxROLxltyWZoSCa693hpPpySLAxpfpQL+eXcTOGFgY6Qv
+ 0LKI7BzVLcih3TYO7Z3oae+mJAV8pHuF3k69WYWr/6Qu9vXQjn3rd5BHCKLsL/j7t2X1
+ NoAANjkZkTviY+fIdBNQ7T8yO8aUp87KAU4qSY+1uWmnzJfiVVQdISXno5Y1o3GxPKQq
+ ySfZAfsMhT8jBVNUA9Ht0a2f9c2GdrpqCLtbK3p7kqpoewTgFL1DQEvHxiXHR7li03Kc
+ hTm699sndCLczaqrKvl72CXtwJRIomya764aVGvytwTZ/ssvgkvbI+nTd5ymiMYEH8dC
+ h2dQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXD5w9sjOJCFDExJzRa91xW3m3iJ9s8pg2CTlvD3WbA1OR5W/vDPmZrTCrzee/JK1hRs9ovhlXAcSSuZ2byukPW7DBmWdc=
-X-Gm-Message-State: AOJu0YxlBI/4F5zTC0s9QtttB+/VSJ2ROBOxz4Dw/V7zlGh1HRutWywq
- UUm02npCXsI1azUXy2udz44OcCQNhE+Zo9D3vfJ3iu4mTc9pM5v5BSYKoiJUjfw=
-X-Google-Smtp-Source: AGHT+IE562H6bYcdnvQhGKG5MNuVHbGU/S9+AnWWXJN4YRjw79fzPiSU1R9hf/G0jjN+LtZRXHV9Vw==
-X-Received: by 2002:a5d:64ca:0:b0:346:44:3910 with SMTP id
- f10-20020a5d64ca000000b0034600443910mr2930235wri.49.1713468501071; 
- Thu, 18 Apr 2024 12:28:21 -0700 (PDT)
+ AJvYcCVWVDj4zuM8pcJ0UzUJYxNKcWuQd5xucMiY6gqWWI8lkZ7FJG0hcIuwub46Bf1vGHK4fpwL4mJZVZPBh3zb5fuB3eTiuks=
+X-Gm-Message-State: AOJu0Yx1CZ72moKZ5b6qPpN8p8Nu6MgVNsrXNKDLmne8M0jdQNIdS9dQ
+ 81AqXP3fd5aL3+u1gDjn58f/kL9p6ke/NKpcjJAVsoh2qkPus0QKQKD81KIeZF0=
+X-Google-Smtp-Source: AGHT+IH9yyvoNEN3HFm6hHVceIDsgByTLejuLf3ciPZ1cvgkKcJXZJEDKVJuDdc5pS0wuniEfSC/cQ==
+X-Received: by 2002:a17:906:a008:b0:a55:4d24:6f9a with SMTP id
+ p8-20020a170906a00800b00a554d246f9amr59518ejy.6.1713468482236; 
+ Thu, 18 Apr 2024 12:28:02 -0700 (PDT)
 Received: from m1x-phil.lan ([176.176.151.213])
  by smtp.gmail.com with ESMTPSA id
- u21-20020a1709064ad500b00a47423b4c33sm1256988ejt.128.2024.04.18.12.28.19
+ z13-20020a170906434d00b00a51e5813f4fsm1286099ejm.19.2024.04.18.12.28.00
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 18 Apr 2024 12:28:20 -0700 (PDT)
+ Thu, 18 Apr 2024 12:28:01 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Paolo Bonzini <pbonzini@redhat.com>,
@@ -67,26 +67,26 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Anton Johansson <anjo@rev.ng>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Michael Rolnik <mrolnik@gmail.com>, Brian Cain <bcain@quicinc.com>,
- Song Gao <gaosong@loongson.cn>, Yoshinori Sato <ysato@users.sourceforge.jp>
-Subject: [PATCH 23/24] exec: Remove 'disas/disas.h' from 'exec/log.h'
-Date: Thu, 18 Apr 2024 21:25:22 +0200
-Message-ID: <20240418192525.97451-24-philmd@linaro.org>
+ Max Filippov <jcmvbkbc@gmail.com>
+Subject: [PATCH 20/24] hw/xtensa: Include missing 'exec/cpu-common.h' in
+ 'bootparam.h'
+Date: Thu, 18 Apr 2024 21:25:19 +0200
+Message-ID: <20240418192525.97451-21-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240418192525.97451-1-philmd@linaro.org>
 References: <20240418192525.97451-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42e;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62c;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x62c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,91 +102,26 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-"exec/log.h" doesn't require "disas/disas.h". Remove it,
-including it in the sources when required.
+cpu_physical_memory_write() is declared in "exec/cpu-common.h".
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- include/exec/log.h               | 1 -
- target/avr/translate.c           | 1 +
- target/hexagon/translate.c       | 1 +
- target/loongarch/tcg/translate.c | 1 +
- target/rx/translate.c            | 1 +
- tcg/tcg.c                        | 1 +
- 6 files changed, 5 insertions(+), 1 deletion(-)
+ hw/xtensa/bootparam.h | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/include/exec/log.h b/include/exec/log.h
-index e0ff778a10..ee33981aab 100644
---- a/include/exec/log.h
-+++ b/include/exec/log.h
-@@ -4,7 +4,6 @@
- #include "qemu/log.h"
- #include "qemu/log-for-trace.h"
- #include "hw/core/cpu.h"
--#include "disas/disas.h"
+diff --git a/hw/xtensa/bootparam.h b/hw/xtensa/bootparam.h
+index ade7891ec5..f57ff850bc 100644
+--- a/hw/xtensa/bootparam.h
++++ b/hw/xtensa/bootparam.h
+@@ -1,6 +1,8 @@
+ #ifndef HW_XTENSA_BOOTPARAM_H
+ #define HW_XTENSA_BOOTPARAM_H
  
- /* cpu_dump_state() logging functions: */
- /**
-diff --git a/target/avr/translate.c b/target/avr/translate.c
-index 87e2bd5ef1..b2005f3cbe 100644
---- a/target/avr/translate.c
-+++ b/target/avr/translate.c
-@@ -29,6 +29,7 @@
- #include "exec/helper-gen.h"
- #include "exec/log.h"
- #include "exec/translator.h"
-+#include "disas/disas.h"
- 
- #define HELPER_H "helper.h"
- #include "exec/helper-info.c.inc"
-diff --git a/target/hexagon/translate.c b/target/hexagon/translate.c
-index 47a870f42d..6bec38404e 100644
---- a/target/hexagon/translate.c
-+++ b/target/hexagon/translate.c
-@@ -25,6 +25,7 @@
- #include "exec/translation-block.h"
- #include "exec/cpu_ldst.h"
- #include "exec/log.h"
-+#include "disas/disas.h"
- #include "internal.h"
- #include "attribs.h"
- #include "insn.h"
-diff --git a/target/loongarch/tcg/translate.c b/target/loongarch/tcg/translate.c
-index 7567712655..ae87a68c69 100644
---- a/target/loongarch/tcg/translate.c
-+++ b/target/loongarch/tcg/translate.c
-@@ -14,6 +14,7 @@
- #include "exec/helper-proto.h"
- #include "exec/helper-gen.h"
- #include "exec/log.h"
-+#include "disas/disas.h"
- #include "qemu/qemu-print.h"
- #include "fpu/softfloat.h"
- #include "translate.h"
-diff --git a/target/rx/translate.c b/target/rx/translate.c
-index f6e9e0ec90..4259ad6d74 100644
---- a/target/rx/translate.c
-+++ b/target/rx/translate.c
-@@ -27,6 +27,7 @@
- #include "exec/helper-gen.h"
- #include "exec/translator.h"
- #include "exec/log.h"
-+#include "disas/disas.h"
- 
- #define HELPER_H "helper.h"
- #include "exec/helper-info.c.inc"
-diff --git a/tcg/tcg.c b/tcg/tcg.c
-index 6a32656cd4..e7e0ab6846 100644
---- a/tcg/tcg.c
-+++ b/tcg/tcg.c
-@@ -51,6 +51,7 @@
- #endif
- 
- #include "elf.h"
-+#include "disas/disas.h"
- #include "exec/log.h"
- #include "tcg/tcg-ldst.h"
- #include "tcg/tcg-temp-internal.h"
++#include "exec/cpu-common.h"
++
+ #define BP_TAG_COMMAND_LINE     0x1001  /* command line (0-terminated string)*/
+ #define BP_TAG_INITRD           0x1002  /* ramdisk addr and size (bp_meminfo) */
+ #define BP_TAG_MEMORY           0x1003  /* memory addr and size (bp_meminfo) */
 -- 
 2.41.0
 
