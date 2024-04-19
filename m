@@ -4,59 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C6C6C4345F
-	for <qemu-riscv@archiver.kernel.org>; Fri, 19 Apr 2024 11:05:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C798C4345F
+	for <qemu-riscv@archiver.kernel.org>; Fri, 19 Apr 2024 11:37:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rxm3X-0003AH-2O; Fri, 19 Apr 2024 07:05:23 -0400
+	id 1rxmYn-0002Um-KK; Fri, 19 Apr 2024 07:37:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rxm3U-00039F-QK
- for qemu-riscv@nongnu.org; Fri, 19 Apr 2024 07:05:20 -0400
-Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rxmYl-0002UO-5B
+ for qemu-riscv@nongnu.org; Fri, 19 Apr 2024 07:37:39 -0400
+Received: from mail-lf1-x133.google.com ([2a00:1450:4864:20::133])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rxm3T-00017f-1y
- for qemu-riscv@nongnu.org; Fri, 19 Apr 2024 07:05:20 -0400
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-343c2f5b50fso1226523f8f.2
- for <qemu-riscv@nongnu.org>; Fri, 19 Apr 2024 04:05:18 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rxmYh-0007M2-49
+ for qemu-riscv@nongnu.org; Fri, 19 Apr 2024 07:37:37 -0400
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-516d68d7a8bso1834973e87.1
+ for <qemu-riscv@nongnu.org>; Fri, 19 Apr 2024 04:37:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713524717; x=1714129517; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=KdTZXTwvt7Tibj/dR564Jrh2V5NCXVN+EQdPOip61Ds=;
- b=Mzq06ahm+tSV8vLYUKsmHYnTvan1asKQaU20iU7wQC02nvrD+9xiVepS1baLLcMZJs
- I1O2ATu0iTP5l5faz00JqlgPfy0JsyuOXAgLPZGTpvjnUQhYj61ZhtPVBpQIqRsi0M/a
- MpoipAOEbGnN4umKFmyaoqxBc8Efm1QPIxS5+EACDiqQXOf9rsHZFszisQFdBeFlCj7p
- QALekJx8I6YsKlPzqjWiZ3wzYa58/z6hYF4m8XfaCNTkjUjrXzfyR0MmWs+MQY99JcaV
- U5YCFl6NJjudz5k1ZA7a9HNXI+O4nqnTYkeC3aGauTfSRU9Is2/gChFpsuYl7DRmtBkh
- JHoA==
+ d=linaro.org; s=google; t=1713526653; x=1714131453; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=nrnrRegtkyfxduWxtrS4OrBikimShihaGMlaDw1dgQE=;
+ b=q38erFR9CGbunf/FWmI6FDq/IBREDeK+0Xr3MwDUJfLJsVYmLDtinBgLRKk+ob+S6m
+ xEfjbLs1s3AETywxiQR4OoUnO8sFdhnMOPu6hVzmPUabDzegpHzAZocVnGAl3o7691dj
+ djyvS2nkkeTIqyuvHBfhbEvWBvq9p80SPZ/rH12m1FdoI2JMCearXDI6r+r+O8BqZmu0
+ BVb9IrLFhcHcMBsL40LvQEC/ovbhPxkczZhY7ZL8cuSFT8TAbQ6/OeWIYkKpWJD1tqya
+ 7DtBiUlpndzMrrCF3hm+zeMomT0hTsdtg7M1eoaRCqNHm1d+Ybai9UO+yfLW0EZdFXlb
+ vB1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713524717; x=1714129517;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=KdTZXTwvt7Tibj/dR564Jrh2V5NCXVN+EQdPOip61Ds=;
- b=RXL7BwmFrvrX32z+3hkdm2BeXXO7E/ziqhO+IPhomw1twZ7D1dDFHxUQRvn0nHug9/
- XlBMTduIwoFv35NKcGEOxIahIccTjCO4uqli5Pn0eMMHmH4IoexMrf8xhgYonOMi+Z58
- aaXH4uVjNQpIozUOKYB6cXyuyDZthqxzo7ykncFJSNT+QCFvYJSldrRKKjQ+XctLDBsU
- FMqpR0k+4BTCxxOBcTOQc3qjDwCDoqcKagOjCJgqJxjBdoUxSenvNKRXbocNf3dbEPfh
- 33YIIfdsoNfDNsfzim7sKSH5rXROULPV5GpB5oXzbvhtqaAT38XNbr2WiPze6Z3NcDt7
- HTnA==
-X-Gm-Message-State: AOJu0YxdxYucaYgNtjKxJ9dtqzqCzHIyww/YXForDI3GBLhwQV6NxV6+
- ttxZfSVRgd5ee1nnuZ17iYrhMBWtav4hLapuxyrtMxKatCHQAejByzeCAxa2cX0=
-X-Google-Smtp-Source: AGHT+IGiy1TVh0xMAzDpaojJeppcBKmnVT0SZZgiwJRz+atx2xE9SH+bPfDcRcRLgcjUcVJhTk8oRA==
-X-Received: by 2002:a5d:64a6:0:b0:34a:65c8:7413 with SMTP id
- m6-20020a5d64a6000000b0034a65c87413mr1048059wrp.30.1713524716913; 
- Fri, 19 Apr 2024 04:05:16 -0700 (PDT)
-Received: from m1x-phil.lan ([176.176.143.233])
+ d=1e100.net; s=20230601; t=1713526653; x=1714131453;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=nrnrRegtkyfxduWxtrS4OrBikimShihaGMlaDw1dgQE=;
+ b=p4U0LtM/bxRNZ4jLfm+q0K/Nop1PsHkX10KPwPRGaw1WI51zzP+DjQ9TjUy0P4wdEI
+ wDVkdQnmuoQuVKpPSjTXT38yHcS+awe2hGJQMZijK0vOWltUmzfYeLV2crpOh7BXYYwG
+ 903e1QG/F8D18gbFg2G/AEAFK1/govXRgdwmf14MPY2ExPbGo2VnhamnGwyCU+fg08lq
+ QPW4TuoVTrfYnxUiGtEyglZfj5tV5AUmGqffGPk+9hOJBJWKtoR92i7u3FlQHKa6HvLg
+ Cl7Qw/G8OQufdO5SPQBMAXI4aR0uK+CnfHLiS8/GQY22HzgIWQnnhsK1NP6JhI/f1zay
+ wdYg==
+X-Gm-Message-State: AOJu0YzawKLVqgNAMaN8lbvZzNB76lBXvYHzPaNjOlemA6x+cYIT/LXu
+ qRCGN+7+LhFu0bpmnkx+hX4DnTyM9xbY8kJwjanE3U/W9QyOF/v2+eRX6XRa73QeSPflW6Xh2Ky
+ OQyI=
+X-Google-Smtp-Source: AGHT+IEWuhHMr9JkSxAwII12GwpXGXIjLCc9viAj/wuXl7+UybKzGS/XdcbUaaTvfiAYxcQiR6jtcg==
+X-Received: by 2002:a19:6442:0:b0:51a:ae0a:26dd with SMTP id
+ b2-20020a196442000000b0051aae0a26ddmr921350lfj.28.1713526652843; 
+ Fri, 19 Apr 2024 04:37:32 -0700 (PDT)
+Received: from [192.168.69.100] ([176.176.143.233])
  by smtp.gmail.com with ESMTPSA id
- p3-20020a5d6383000000b00341b451a31asm4159105wru.36.2024.04.19.04.05.15
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 19 Apr 2024 04:05:16 -0700 (PDT)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-To: qemu-devel@nongnu.org
+ j24-20020a056512345800b00516c9ab5779sm662000lfr.275.2024.04.19.04.37.30
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 19 Apr 2024 04:37:32 -0700 (PDT)
+Message-ID: <e70bbb7d-7048-493e-b359-88472e73c199@linaro.org>
+Date: Fri, 19 Apr 2024 13:37:28 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] target/riscv: Use get_address() to get address with
+ Zicbom extensions
+To: qemu-devel@nongnu.org, qemu-stable <qemu-stable@nongnu.org>
 Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
  Bin Meng <bin.meng@windriver.com>,
  Alistair Francis <alistair.francis@wdc.com>,
@@ -65,18 +72,15 @@ Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Weiwei Li <liwei1518@gmail.com>,
  Palmer Dabbelt <palmer@rivosinc.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Zhiwei Jiang <jiangzw@tecorigin.com>
-Subject: [PATCH] target/riscv: Use get_address() to get address with Zicbom
- extensions
-Date: Fri, 19 Apr 2024 13:05:13 +0200
-Message-ID: <20240419110514.69697-1-philmd@linaro.org>
-X-Mailer: git-send-email 2.41.0
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+References: <20240419110514.69697-1-philmd@linaro.org>
+Content-Language: en-US
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20240419110514.69697-1-philmd@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::133;
+ envelope-from=philmd@linaro.org; helo=mail-lf1-x133.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -99,53 +103,18 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-We need to use get_address() to get an address from cpu_gpr[],
-since $zero is "special" (NULL).
+On 19/4/24 13:05, Philippe Mathieu-Daudé wrote:
+> We need to use get_address() to get an address from cpu_gpr[],
+> since $zero is "special" (NULL).
+> 
 
-Fixes: e05da09b7c ("target/riscv: implement Zicbom extension")
-Reported-by: Zhiwei Jiang (姜智伟) <jiangzw@tecorigin.com>
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
----
- target/riscv/insn_trans/trans_rvzicbo.c.inc | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+Cc: qemu-stable@nongnu.org
 
-diff --git a/target/riscv/insn_trans/trans_rvzicbo.c.inc b/target/riscv/insn_trans/trans_rvzicbo.c.inc
-index d5d7095903..6f6b29598d 100644
---- a/target/riscv/insn_trans/trans_rvzicbo.c.inc
-+++ b/target/riscv/insn_trans/trans_rvzicbo.c.inc
-@@ -31,27 +31,27 @@
- static bool trans_cbo_clean(DisasContext *ctx, arg_cbo_clean *a)
- {
-     REQUIRE_ZICBOM(ctx);
--    gen_helper_cbo_clean_flush(tcg_env, cpu_gpr[a->rs1]);
-+    gen_helper_cbo_clean_flush(tcg_env, get_address(ctx, a->rs1, 0));
-     return true;
- }
- 
- static bool trans_cbo_flush(DisasContext *ctx, arg_cbo_flush *a)
- {
-     REQUIRE_ZICBOM(ctx);
--    gen_helper_cbo_clean_flush(tcg_env, cpu_gpr[a->rs1]);
-+    gen_helper_cbo_clean_flush(tcg_env, get_address(ctx, a->rs1, 0));
-     return true;
- }
- 
- static bool trans_cbo_inval(DisasContext *ctx, arg_cbo_inval *a)
- {
-     REQUIRE_ZICBOM(ctx);
--    gen_helper_cbo_inval(tcg_env, cpu_gpr[a->rs1]);
-+    gen_helper_cbo_inval(tcg_env, get_address(ctx, a->rs1, 0));
-     return true;
- }
- 
- static bool trans_cbo_zero(DisasContext *ctx, arg_cbo_zero *a)
- {
-     REQUIRE_ZICBOZ(ctx);
--    gen_helper_cbo_zero(tcg_env, cpu_gpr[a->rs1]);
-+    gen_helper_cbo_zero(tcg_env, get_address(ctx, a->rs1, 0));
-     return true;
- }
--- 
-2.41.0
+> Fixes: e05da09b7c ("target/riscv: implement Zicbom extension")
+> Reported-by: Zhiwei Jiang (姜智伟) <jiangzw@tecorigin.com>
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> ---
+>   target/riscv/insn_trans/trans_rvzicbo.c.inc | 8 ++++----
+>   1 file changed, 4 insertions(+), 4 deletions(-)
 
 
