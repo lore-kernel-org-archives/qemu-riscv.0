@@ -4,86 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60652C4345F
-	for <qemu-riscv@archiver.kernel.org>; Thu, 18 Apr 2024 19:35:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C6C6C4345F
+	for <qemu-riscv@archiver.kernel.org>; Fri, 19 Apr 2024 11:05:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rxXXN-0003sD-PN; Thu, 18 Apr 2024 15:35:13 -0400
+	id 1rxm3X-0003AH-2O; Fri, 19 Apr 2024 07:05:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rxXXL-0003rW-Li
- for qemu-riscv@nongnu.org; Thu, 18 Apr 2024 15:35:11 -0400
-Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rxm3U-00039F-QK
+ for qemu-riscv@nongnu.org; Fri, 19 Apr 2024 07:05:20 -0400
+Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rxXXJ-0000uw-BR
- for qemu-riscv@nongnu.org; Thu, 18 Apr 2024 15:35:11 -0400
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-418e06c0ef4so11589505e9.0
- for <qemu-riscv@nongnu.org>; Thu, 18 Apr 2024 12:35:08 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rxm3T-00017f-1y
+ for qemu-riscv@nongnu.org; Fri, 19 Apr 2024 07:05:20 -0400
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-343c2f5b50fso1226523f8f.2
+ for <qemu-riscv@nongnu.org>; Fri, 19 Apr 2024 04:05:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713468906; x=1714073706; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=W3POXLkXOEegSIr+CiLoNV+e6nPI439irSo27x6wQYk=;
- b=GXs9f9ThV+NrUmNdSx1K8B1hoxIVf9iE20OsYGJQUhkvW8cSK9lD47oPhhIKIPu0jh
- OEXfNBKaY271IdiEaXrcGFXYnzp18T/EwiP6XRaCngdUQ6GEFmYDXtTJRyihhVcZR6iq
- iDMAYxHxVdqM0fghhZ/5jOsDk0HCexp0516BWRA+T4+IQ3+tTDPp3j39JIctbwn2Gl8m
- 2UekLebE/rYEWa7d9gJAUQ8mDxG/3X6ao80o90ie/s6KhBVLP0GDpnuk4GVej0XECNSY
- nRvtESjN7pHjzYXhYt13e8jIKovPwS6W413r/9QRmy42EK0wBjsXPLi4UlLoFgyHBLjz
- 4lVw==
+ d=linaro.org; s=google; t=1713524717; x=1714129517; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=KdTZXTwvt7Tibj/dR564Jrh2V5NCXVN+EQdPOip61Ds=;
+ b=Mzq06ahm+tSV8vLYUKsmHYnTvan1asKQaU20iU7wQC02nvrD+9xiVepS1baLLcMZJs
+ I1O2ATu0iTP5l5faz00JqlgPfy0JsyuOXAgLPZGTpvjnUQhYj61ZhtPVBpQIqRsi0M/a
+ MpoipAOEbGnN4umKFmyaoqxBc8Efm1QPIxS5+EACDiqQXOf9rsHZFszisQFdBeFlCj7p
+ QALekJx8I6YsKlPzqjWiZ3wzYa58/z6hYF4m8XfaCNTkjUjrXzfyR0MmWs+MQY99JcaV
+ U5YCFl6NJjudz5k1ZA7a9HNXI+O4nqnTYkeC3aGauTfSRU9Is2/gChFpsuYl7DRmtBkh
+ JHoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713468906; x=1714073706;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=W3POXLkXOEegSIr+CiLoNV+e6nPI439irSo27x6wQYk=;
- b=gXcrDZiAMTUL2MsOfA4BRs+h/vCVin+RmUIUYfxAR0GbWrzJvu+UJHrXs35Hvc6n5P
- /x8gxylEOEmHMvA6pE07AOB77GXCYgIKSxN8NEw34SN57hlLKtbgfxsjreYKWT4ebNAa
- 1wKscl6zzDV/XP9zkw4/CNGbBRtCWIj5aYUHyL9NOw/gBJOX2m9/J9bEasTqQQKq5S5g
- ino6fHU1YoZoKQJUDoy4+P3s0BrtnnKkddRuEYX0Ikg5NmEmEydSvOJP+FzFfKtKHLGk
- SpFcOmBA3qJH9dZo5bN1MDoff1DNRM8h7HOgf1YV0HxRi+yd5rBtATJILJ1P3X6qKgw/
- yvAQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX7dUSZncDjDSAIvhv8kaG/YC47dCqrUntrFilV1ZPQRde3GJeBaO+MrB1/2yTcKd7iLDF4RAitxD0aFaJkNzUJaRqINZo=
-X-Gm-Message-State: AOJu0Yyj8QCjTKaUi7D9r77I8SGJsLHk9o24hODRlZs88yac/gM9wYNT
- SzbL3k5szW34xQWqKM6l8H9T7e5VZFMAucB/gwxoxOOyots8303McdYG+/INE80=
-X-Google-Smtp-Source: AGHT+IGMCzmEnXnVD4o31/C0VmlviDxbH19sLaVnp9L+a0G+U6wowTv37MaEj2AIuCUCXbCDxujMhg==
-X-Received: by 2002:a05:600c:3511:b0:417:f527:21d0 with SMTP id
- h17-20020a05600c351100b00417f52721d0mr3869169wmq.0.1713468906643; 
- Thu, 18 Apr 2024 12:35:06 -0700 (PDT)
-Received: from [192.168.69.100] ([176.176.151.213])
+ d=1e100.net; s=20230601; t=1713524717; x=1714129517;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=KdTZXTwvt7Tibj/dR564Jrh2V5NCXVN+EQdPOip61Ds=;
+ b=RXL7BwmFrvrX32z+3hkdm2BeXXO7E/ziqhO+IPhomw1twZ7D1dDFHxUQRvn0nHug9/
+ XlBMTduIwoFv35NKcGEOxIahIccTjCO4uqli5Pn0eMMHmH4IoexMrf8xhgYonOMi+Z58
+ aaXH4uVjNQpIozUOKYB6cXyuyDZthqxzo7ykncFJSNT+QCFvYJSldrRKKjQ+XctLDBsU
+ FMqpR0k+4BTCxxOBcTOQc3qjDwCDoqcKagOjCJgqJxjBdoUxSenvNKRXbocNf3dbEPfh
+ 33YIIfdsoNfDNsfzim7sKSH5rXROULPV5GpB5oXzbvhtqaAT38XNbr2WiPze6Z3NcDt7
+ HTnA==
+X-Gm-Message-State: AOJu0YxdxYucaYgNtjKxJ9dtqzqCzHIyww/YXForDI3GBLhwQV6NxV6+
+ ttxZfSVRgd5ee1nnuZ17iYrhMBWtav4hLapuxyrtMxKatCHQAejByzeCAxa2cX0=
+X-Google-Smtp-Source: AGHT+IGiy1TVh0xMAzDpaojJeppcBKmnVT0SZZgiwJRz+atx2xE9SH+bPfDcRcRLgcjUcVJhTk8oRA==
+X-Received: by 2002:a5d:64a6:0:b0:34a:65c8:7413 with SMTP id
+ m6-20020a5d64a6000000b0034a65c87413mr1048059wrp.30.1713524716913; 
+ Fri, 19 Apr 2024 04:05:16 -0700 (PDT)
+Received: from m1x-phil.lan ([176.176.143.233])
  by smtp.gmail.com with ESMTPSA id
- v11-20020a05600c444b00b00418d5b16f85sm3747438wmn.21.2024.04.18.12.35.04
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 18 Apr 2024 12:35:05 -0700 (PDT)
-Message-ID: <a75b20b5-995c-4de6-81f8-78a6f58d12b8@linaro.org>
-Date: Thu, 18 Apr 2024 21:35:03 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 00/24] include/exec: Rework (part 2)
+ p3-20020a5d6383000000b00341b451a31asm4159105wru.36.2024.04.19.04.05.15
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Fri, 19 Apr 2024 04:05:16 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
-Cc: Paolo Bonzini <pbonzini@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>, qemu-arm@nongnu.org,
- qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
- David Hildenbrand <david@redhat.com>, =?UTF-8?Q?Alex_Benn=C3=A9e?=
- <alex.bennee@linaro.org>, Anton Johansson <anjo@rev.ng>
-References: <20240418192525.97451-1-philmd@linaro.org>
-Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20240418192525.97451-1-philmd@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Bin Meng <bin.meng@windriver.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Christoph Muellner <cmuellner@linux.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Weiwei Li <liwei1518@gmail.com>,
+ Palmer Dabbelt <palmer@rivosinc.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Zhiwei Jiang <jiangzw@tecorigin.com>
+Subject: [PATCH] target/riscv: Use get_address() to get address with Zicbom
+ extensions
+Date: Fri, 19 Apr 2024 13:05:13 +0200
+Message-ID: <20240419110514.69697-1-philmd@linaro.org>
+X-Mailer: git-send-email 2.41.0
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::333;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x333.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,44 +99,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 18/4/24 21:24, Philippe Mathieu-Daudé wrote:
-> Reordering exec/, second round. Mostly splitting:
-> - TCG LDST API (to "exec/cpu_ldst.h")
-> - CPU TLB APIs (to "exec/cputlb.h")
-> from "exec/cpu-all.h" and "exec/exec-all.h", and
-> reducing inclusions of "hw/core/cpu.h".
-> 
-> Based-on: <20240417182806.69446-1-philmd@linaro.org>
-> or https://gitlab.com/philmd/qemu/-/commits/exec-next
+We need to use get_address() to get an address from cpu_gpr[],
+since $zero is "special" (NULL).
 
-And this series is available as
-https://gitlab.com/philmd/qemu/-/commits/exec-rework-part2/
+Fixes: e05da09b7c ("target/riscv: implement Zicbom extension")
+Reported-by: Zhiwei Jiang (姜智伟) <jiangzw@tecorigin.com>
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+---
+ target/riscv/insn_trans/trans_rvzicbo.c.inc | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-> Philippe Mathieu-Daudé (24):
->    exec: Declare MMUAccessType type in 'mmu-access-type.h' header
->    exec: Declare CPUBreakpoint/CPUWatchpoint type in 'breakpoint.h'
->      header
->    hw/core: Avoid including the full 'hw/core/cpu.h' in 'tcg-cpu-ops.h'
->    exec: Restrict TCG specific declarations of 'cputlb.h'
->    exec: Restrict 'cpu_ldst.h' to TCG accelerator
->    exec: Have guest_addr_valid() methods take abi_ptr/size_t arguments
->    exec: Un-inline tlb_vaddr_to_host() and declare it in 'exec/cputlb.h'
->    physmem: Move TCG CPU IOTLB methods around
->    physmem: Restrict TCG CPU IOTLB code to TCG accel
->    exec: Reduce tlb_set_dirty() declaration scope
->    exec: Move tlb_reset_dirty*() declarations to 'exec/cputlb.h'
->    exec: Move CPUTLBEntry helpers to cputlb.c
->    target/sparc: Replace abi_ulong by uint32_t for TARGET_ABI32
->    exec: Rename 'exec/user/guest-base.h' as 'user/guest-base.h'
->    exec: Restrict inclusion of 'user/guest-base.h'
->    exec: Move GUEST_ADDR_MAX definition to 'cpu_ldst.h'
->    exec: Include missing 'qemu/log-for-trace.h' header in 'exec/log.h'
->    plugins: Include missing 'qemu/bitmap.h' header
->    gdbstub: Avoid including 'cpu.h' in 'gdbstub/helpers.h'
->    hw/xtensa: Include missing 'exec/cpu-common.h' in 'bootparam.h'
->    plugins: Un-inline qemu_plugin_disable_mem_helpers()
->    exec: Remove 'exec/tswap.h' from 'exec/cpu-all.h'
->    exec: Remove 'disas/disas.h' from 'exec/log.h'
->    exec: Remove unnecessary inclusions of 'hw/core/cpu.h'
+diff --git a/target/riscv/insn_trans/trans_rvzicbo.c.inc b/target/riscv/insn_trans/trans_rvzicbo.c.inc
+index d5d7095903..6f6b29598d 100644
+--- a/target/riscv/insn_trans/trans_rvzicbo.c.inc
++++ b/target/riscv/insn_trans/trans_rvzicbo.c.inc
+@@ -31,27 +31,27 @@
+ static bool trans_cbo_clean(DisasContext *ctx, arg_cbo_clean *a)
+ {
+     REQUIRE_ZICBOM(ctx);
+-    gen_helper_cbo_clean_flush(tcg_env, cpu_gpr[a->rs1]);
++    gen_helper_cbo_clean_flush(tcg_env, get_address(ctx, a->rs1, 0));
+     return true;
+ }
+ 
+ static bool trans_cbo_flush(DisasContext *ctx, arg_cbo_flush *a)
+ {
+     REQUIRE_ZICBOM(ctx);
+-    gen_helper_cbo_clean_flush(tcg_env, cpu_gpr[a->rs1]);
++    gen_helper_cbo_clean_flush(tcg_env, get_address(ctx, a->rs1, 0));
+     return true;
+ }
+ 
+ static bool trans_cbo_inval(DisasContext *ctx, arg_cbo_inval *a)
+ {
+     REQUIRE_ZICBOM(ctx);
+-    gen_helper_cbo_inval(tcg_env, cpu_gpr[a->rs1]);
++    gen_helper_cbo_inval(tcg_env, get_address(ctx, a->rs1, 0));
+     return true;
+ }
+ 
+ static bool trans_cbo_zero(DisasContext *ctx, arg_cbo_zero *a)
+ {
+     REQUIRE_ZICBOZ(ctx);
+-    gen_helper_cbo_zero(tcg_env, cpu_gpr[a->rs1]);
++    gen_helper_cbo_zero(tcg_env, get_address(ctx, a->rs1, 0));
+     return true;
+ }
+-- 
+2.41.0
 
 
