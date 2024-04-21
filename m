@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 851BEC4345F
-	for <qemu-riscv@archiver.kernel.org>; Sun, 21 Apr 2024 16:40:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49F93C4345F
+	for <qemu-riscv@archiver.kernel.org>; Sun, 21 Apr 2024 16:45:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ryaDo-0007wX-3w; Sun, 21 Apr 2024 12:39:20 -0400
+	id 1ryaJC-0001dS-Mz; Sun, 21 Apr 2024 12:44:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1ryaDm-0007v6-E3
- for qemu-riscv@nongnu.org; Sun, 21 Apr 2024 12:39:18 -0400
-Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e])
+ id 1ryaJB-0001cD-78
+ for qemu-riscv@nongnu.org; Sun, 21 Apr 2024 12:44:53 -0400
+Received: from mail-pf1-x434.google.com ([2607:f8b0:4864:20::434])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1ryaDj-0000ux-N7
- for qemu-riscv@nongnu.org; Sun, 21 Apr 2024 12:39:18 -0400
-Received: by mail-pf1-x42e.google.com with SMTP id
- d2e1a72fcca58-6ed32341906so3488246b3a.1
- for <qemu-riscv@nongnu.org>; Sun, 21 Apr 2024 09:39:15 -0700 (PDT)
+ id 1ryaJ9-0001gK-He
+ for qemu-riscv@nongnu.org; Sun, 21 Apr 2024 12:44:52 -0400
+Received: by mail-pf1-x434.google.com with SMTP id
+ d2e1a72fcca58-6e46dcd8feaso1559618b3a.2
+ for <qemu-riscv@nongnu.org>; Sun, 21 Apr 2024 09:44:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713717554; x=1714322354; darn=nongnu.org;
+ d=linaro.org; s=google; t=1713717890; x=1714322690; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=KBIKe8zgLoNCoWSrF2oAO7S40KS5rkTLrzC/jSW5AhA=;
- b=hylT1XZn2561fHs160ZGrRG4BC0GXT2TzYKaVVC4e0IkGAmt1ZpRBlERXRDfrFtKHO
- VJOYc+QeQVwB/paQPkJ691talUJxFDT40luytN/gFGN6XuAGuF0trSnMcMtKeW9QjlX1
- 5EeRG4/BN9d1xcyaCJC4Vj8T3bRD0jKh65663dnTiai7awEBQgwhhhOzIa7ehWhfxBZf
- sBdMCHzCgERT4uPbqpgOo3z9AdW0Sh21aLGotrzfh1J8LyI0xLFBEwMSBLOibjn1bd6I
- 2lSBll2ifonZroS9e+20EA6nsx10UQf281MzyP9mjthKt9D/5d265uAuSdlPApC36eMu
- sBig==
+ bh=Nyzp97ki1grnNxngMCvV07B0rG8wrW4X+oI9mWIoUg0=;
+ b=lyvEx5F64Z1OO/GTFZwy0AO7/9NJpXy7xlIEOGa+TXCV/5POI9+A+ti7z1sYMojch0
+ tTsbLtWKd4MC58sY/iiCBerGaBblPweeGNreEEUra12s004Oitx8nZCsXgXJ5RHJoEXW
+ 4zfgE8rln6MtPP5+LfzPTpW6rAlK1oxlVE09yRwh0DMkhqsapfVH2mxT8ZeLXy4gtxhT
+ 0zrKW2MFXid62L+9wlf8/sztdqsiXFBJqoatOAAxI5iFYXLvR9ugNSAMPBEG6J9LwB4m
+ uQA9rnF8uxxUgd+m/vLTetPSCnblhBkFLvwlTdy2XXfY2zTHOkeyOAaC88LVqc4fDgeM
+ 7aEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713717554; x=1714322354;
+ d=1e100.net; s=20230601; t=1713717890; x=1714322690;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=KBIKe8zgLoNCoWSrF2oAO7S40KS5rkTLrzC/jSW5AhA=;
- b=un0YU5w8FOVg/4Owx7tHEtbLZUndFY7s22xk0eRiI0asgOvw2by99m533EFYErzNDm
- TDEBKN5tuRczOdsHCNDIhOuEW3g3iJAAmkR469QxcOZxLixW+qeqC/xbXiLtH9Eokzx1
- nH7hcfv8Y7I+twmoCmZRqdHcPTCBTyfPmYT2ba5ACkkBsAQrhNTC8nT7VbUzuOAnGDXG
- p0iLGzvtP6j4sTZY8wKJrNAnXapr1DRiRDX3RCKcbM/CrSu2MED4o/bQikSdQGrbRN/r
- Ia4xyl1x1G27a6oWJDVaF8EhVdZK0uFFg053JpBUdz6dbIAHWEL4z/0bEZBwCK5ofErn
- wxWg==
+ bh=Nyzp97ki1grnNxngMCvV07B0rG8wrW4X+oI9mWIoUg0=;
+ b=PMwJg0PeQd0vVrA+K4/q7sIRfHaAa8hHyISJILxfsKU/HLLMYsneHZ45FsmNmil41X
+ T7BT0S8weMZ8NIZlhfjBuAReqvY96Q+5fB5yC7mmLX4mpnJCsnufYJOydcTeilNLewLc
+ mN5APQcdkexY+47EMBo3AkS3xAykucuS2Bj9btQW42pPyIv5lNITuM8CmeHSXoWzHKJK
+ H5/F3Ao07hFXczA8e3ThurNGff/gV5MOLT9OMM0hLS7DadOy4YSOhvilnyTA4tuFwmkl
+ 87dYga1zCt8gOKrrxVEsUNxKYwAvMhkYK1YcwQgWY0Uvm9a8E/aMwK2aqoe/4LYMnjev
+ +CVg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVc/iaDI7g/5SuT0SuOwApuNRdGxwFDM3iLV5PAxU2XZR+ncSUxLTBV5mxLb+kMUZ5Ek0dkEhu7giQaxZbp6HvyL7+SGI4=
-X-Gm-Message-State: AOJu0Yx57LJQkSrlIMkq7LAn9PkDScaaE6ZngL/PpgzvrxgM9LoHRl1x
- uyYmqzGkdKJU2t8iGXoxrKSpxh/eR8USPlRw1kOqh3Ulv2LrCOz7QF6U56jBCMI=
-X-Google-Smtp-Source: AGHT+IGCwGjfAvYRcqjA2Bi2AYbsyA1QQoJSzL60PWGPM8M7/QMuG7JcYk5iQbZ3aKx71eqxHRHL1w==
-X-Received: by 2002:a05:6a00:3a1e:b0:6ed:5f66:602 with SMTP id
- fj30-20020a056a003a1e00b006ed5f660602mr8896814pfb.9.1713717554235; 
- Sun, 21 Apr 2024 09:39:14 -0700 (PDT)
+ AJvYcCWigYle5Kr7OsLCWOmiLo/1iwl6K+RkRXsB5KLEcOqqa9MOmmoipjn93Y8imuiSIGCqsUFlZMzJL/h8nQG7sNGJFqxUI9M=
+X-Gm-Message-State: AOJu0Yxv6nEZDNFu1OfX8uuHapOEezGhjV3Pxk4Vq9rq1a9cKjJqAK2J
+ skBFY6mxi3GH2OHSCiGacfTLCvkjrFp2nyy4FlySvby4htKZXPV1DfGhUCcGMLk=
+X-Google-Smtp-Source: AGHT+IEW0S90e+aa9Rokk8Nr+asc0MSx8g2O+FJc6mVvrp7msO29LBb8PrSeUtP+nkxwtnmiTnWQVw==
+X-Received: by 2002:a05:6a00:4f87:b0:6ee:1737:1e43 with SMTP id
+ ld7-20020a056a004f8700b006ee17371e43mr10271763pfb.17.1713717889952; 
+ Sun, 21 Apr 2024 09:44:49 -0700 (PDT)
 Received: from [192.168.91.227] ([156.19.246.23])
  by smtp.gmail.com with ESMTPSA id
- e15-20020a62aa0f000000b006ece85910edsm6342752pff.152.2024.04.21.09.39.13
+ x37-20020a056a000be500b006edcceffcb0sm6348703pfu.161.2024.04.21.09.44.48
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 21 Apr 2024 09:39:13 -0700 (PDT)
-Message-ID: <6cf18e2b-f914-4ae7-be96-8c9d469c48df@linaro.org>
-Date: Sun, 21 Apr 2024 09:39:10 -0700
+ Sun, 21 Apr 2024 09:44:49 -0700 (PDT)
+Message-ID: <76d68cab-7b28-43bf-89a6-bb39a7fdb131@linaro.org>
+Date: Sun, 21 Apr 2024 09:44:46 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 12/24] exec: Move CPUTLBEntry helpers to cputlb.c
+Subject: Re: [PATCH 17/24] exec: Include missing 'qemu/log-for-trace.h' header
+ in 'exec/log.h'
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  qemu-devel@nongnu.org
 Cc: Paolo Bonzini <pbonzini@redhat.com>, qemu-arm@nongnu.org,
@@ -72,14 +73,14 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>, qemu-arm@nongnu.org,
  David Hildenbrand <david@redhat.com>, =?UTF-8?Q?Alex_Benn=C3=A9e?=
  <alex.bennee@linaro.org>, Anton Johansson <anjo@rev.ng>
 References: <20240418192525.97451-1-philmd@linaro.org>
- <20240418192525.97451-13-philmd@linaro.org>
+ <20240418192525.97451-18-philmd@linaro.org>
 Content-Language: en-US
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240418192525.97451-13-philmd@linaro.org>
+In-Reply-To: <20240418192525.97451-18-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42e;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x42e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::434;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x434.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -103,22 +104,30 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 4/18/24 12:25, Philippe Mathieu-Daudé wrote:
-> The following CPUTLBEntry helpers are only used in accel/tcg/cputlb.c:
->    - tlb_index()
->    - tlb_entry()
->    - tlb_read_idx()
->    - tlb_addr_write()
+> "exec/log.h" accesses the qemu_loglevel variable,
+> which is declared in "qemu/log-for-trace.h".
 > 
-> Move them to this file, allowing to remove the huge "cpu.h" header
-> inclusion from "exec/cpu_ldst.h".
-> 
-> Signed-off-by: Philippe Mathieu-Daudé<philmd@linaro.org>
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 > ---
->   include/exec/cpu_ldst.h | 55 -----------------------------------------
->   accel/tcg/cputlb.c      | 51 ++++++++++++++++++++++++++++++++++++++
->   2 files changed, 51 insertions(+), 55 deletions(-)
+>   include/exec/log.h | 1 +
+>   1 file changed, 1 insertion(+)
+> 
+> diff --git a/include/exec/log.h b/include/exec/log.h
+> index 4a7375a45f..e0ff778a10 100644
+> --- a/include/exec/log.h
+> +++ b/include/exec/log.h
+> @@ -2,6 +2,7 @@
+>   #define QEMU_EXEC_LOG_H
+>   
+>   #include "qemu/log.h"
+> +#include "qemu/log-for-trace.h"
+>   #include "hw/core/cpu.h"
+>   #include "disas/disas.h"
+>   
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+I disagree: qemu/log.h is the main file; log-for-trace.h was split out for other usage. 
+That shouldn't mean that log-for-trace.h needs to be spread around.
+
 
 r~
 
