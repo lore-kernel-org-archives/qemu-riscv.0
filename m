@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96CBCC07C79
-	for <qemu-riscv@archiver.kernel.org>; Sun, 21 Apr 2024 16:29:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65CCFC4345F
+	for <qemu-riscv@archiver.kernel.org>; Sun, 21 Apr 2024 16:35:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rya42-00045E-JM; Sun, 21 Apr 2024 12:29:14 -0400
+	id 1rya9h-0005zU-Bb; Sun, 21 Apr 2024 12:35:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rya3z-00044P-Tu
- for qemu-riscv@nongnu.org; Sun, 21 Apr 2024 12:29:11 -0400
-Received: from mail-pf1-x42c.google.com ([2607:f8b0:4864:20::42c])
+ id 1rya9e-0005yZ-Lh
+ for qemu-riscv@nongnu.org; Sun, 21 Apr 2024 12:35:02 -0400
+Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1rya3x-0007YW-4j
- for qemu-riscv@nongnu.org; Sun, 21 Apr 2024 12:29:11 -0400
-Received: by mail-pf1-x42c.google.com with SMTP id
- d2e1a72fcca58-6ed2dc03df6so3233315b3a.1
- for <qemu-riscv@nongnu.org>; Sun, 21 Apr 2024 09:29:07 -0700 (PDT)
+ id 1rya9d-0000EG-2r
+ for qemu-riscv@nongnu.org; Sun, 21 Apr 2024 12:35:02 -0400
+Received: by mail-pf1-x436.google.com with SMTP id
+ d2e1a72fcca58-6ed04c91c46so3578127b3a.0
+ for <qemu-riscv@nongnu.org>; Sun, 21 Apr 2024 09:35:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713716947; x=1714321747; darn=nongnu.org;
+ d=linaro.org; s=google; t=1713717300; x=1714322100; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=NyfnQy3RE7q1hQCupGmQCeese//ndHVvXWIzLeIq5PM=;
- b=I2GZKBpk6m8PjH5j7vVtSg/+7iai3T3rEkzIpoDjZPV+UnW4pmbRpJoMjEpg5oBQ5P
- ADUOFRWJ4CnK9G68FLuPphOmQQY6OqLPKF0m+ug8vscDziMMgmrZs35B8pkOGWIhRN97
- d1WcsxgdYS8W0MP/GlAEvu3sqAYvdRvX1svE/tevto0D8tlcbxA1RElT7j76egFTBsDU
- fdMYw1nJqYG5vampomjz+Z8t8mWbFXjBLhF0HgY6bIHVsv2zLkOUW1VccoF2ZTJy75rf
- 0bg6Xz/e2kejSKhC/a4AcOtVWTNw3Fz7lRte4Pc/fyc6Y+V4vg5ui8DJ1K+3b3JPTMX3
- v8IQ==
+ bh=Q6t9EefEmzisuG1L2p4hGtTQ70qJuaPEx74sbOjwAts=;
+ b=wfx3xiWPrldH2UKHJabMkOX+vdehxUlT0azTlsZBb6NJa9wf968xHCdqw4I5p2qOrK
+ ynv9jo0IFtuqfdQ0u9XpI/JvDXU0N66mDQgjKE+V09RUnSE9l3nr4JS9bdXJPku4a1Dg
+ wWGdb70a+tCZg57ohUkp3OFPQnDORuuLf6Tb+02uBDVNJ5jIwGInU5pyGnC8E5K5Lcik
+ NI8qGDxWm0uJJJYNOur/LjN1Lwljcm00pe0g/KHe2A4sH6w/N9lKiRhGQJk/mZ1kNNAK
+ nmo8ttRMzkhil7HBdhBATnsaRLhapllCrcfHlz6HPSMvSqhFC/gD6tIPrnEehzPKDgJG
+ l7rw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713716947; x=1714321747;
+ d=1e100.net; s=20230601; t=1713717300; x=1714322100;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=NyfnQy3RE7q1hQCupGmQCeese//ndHVvXWIzLeIq5PM=;
- b=gPmg9pBdbedgjxHTnsoepzdsnhvIt1om/J0Q751FLlVB/dfScuDsCLIa/KlHXxYjM9
- ZGrvfZg2xQfm/oIcTMvarR8fMR7G3M4UG8Mm0YV3bGplZgoFkAfbLMzUALw58vvu/98r
- aAYM7YJdKQKILyaufQ6vJweKr31lxLiQZcSELpaSsHHULvi9RMGY4Phl7dYfkEl6jcvr
- wSOvUtO0oaZcJ4S3moMccuRjtCuHAgg9sDZEfBlyQWXWm98uEZHj45eMm5zVo6YO9RVi
- /YbJtrm2gjNp2EHgk0D/xoHztOXFG+rL4+XqKmh9efFf1Pt52kICRvBewSpT9vmsM08G
- D+tA==
+ bh=Q6t9EefEmzisuG1L2p4hGtTQ70qJuaPEx74sbOjwAts=;
+ b=Q3diTbupJuEi9/rFgoezw2LSvWWBLsQX/4M/BKgEFeLdjRVCqDs99n2j3Goow8nHl3
+ xSc4/k0bcPz6jRijrkac9p7Z37nHi9R9V9srfKM6DLWjoVEmw9mHjNGWAfzzLyiZXick
+ zUd/l/ncB7NjGQ9TyWr+ELa55ttT0EPyXy9LaFukphJvz4+wRxOVrIxhl/gChCUojMUq
+ 9g10BmwE2RuYInOGdwCQ8hA53LyOYUrSCMTziQw3iFmvIJ29DFStL6UFWB/qSuEznA3j
+ ydx9+/sWNnXMHqQOrJKtAz9DrRTg5RoFeX6R/vWnMmZC71fcWMYB3KLtcXjAR4mb47Nb
+ Y4NA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV9XhFNn6IQY5jHGrCQ+NrN3OIE1aDNbXMw84ZpXpJ9dFfLa5kfY54O8Mbtce+fzi1n0g2QElp/9j+B9OFjlvnwT+uI/I8=
-X-Gm-Message-State: AOJu0YxsB9oLAbIGKjBizWCOxxulp8qmzUDJf++BoYtQtIW3b1HBDALL
- 9kzmqKEEAwI9TsmDDPlwxD0iXw6g0gvbvUl/VTI7G76pVTkuTJR6GQOh8+HSTQBfrEwnh5uRFh/
- +
-X-Google-Smtp-Source: AGHT+IGUEDGMuAojfCufYunpafSYxvQZm30nJeqD2YE41fGszRVNuV24xTsW+KklMwVPNV6KuETgZg==
-X-Received: by 2002:a05:6a00:9383:b0:6ea:e841:5889 with SMTP id
- ka3-20020a056a00938300b006eae8415889mr11446034pfb.33.1713716946688; 
- Sun, 21 Apr 2024 09:29:06 -0700 (PDT)
+ AJvYcCUSTr8MN0vWCuFAUjkJlF266Zl+U0nwIzedgHhi6DnAM/lzHKJcdQuqfew+1NtAdmhDLcv7CAYlqyFnpfD1KvQWIK0aqbc=
+X-Gm-Message-State: AOJu0Yw4+oLOiQInnXkBiSHIPxjdjlG+/wvtBOqACqV7dks4/9YaGd51
+ DlTWNUDAMSBgzaWOz6e0cJMoIigpa2QY1Kpa7kP9vy+ntUJHCZ9ax/1SMJi9H2LSvI+vUjZ+KTo
+ 9
+X-Google-Smtp-Source: AGHT+IH7YQdim60+w8EMS96zvtkJSJdEYf34/+Dc/fkRjZYLoIdv2EQ1QOt2nfLrRO4M/uy7oPdm7A==
+X-Received: by 2002:a05:6a00:1910:b0:6e7:4abe:85a0 with SMTP id
+ y16-20020a056a00191000b006e74abe85a0mr10548531pfi.14.1713717299699; 
+ Sun, 21 Apr 2024 09:34:59 -0700 (PDT)
 Received: from [192.168.91.227] ([156.19.246.23])
  by smtp.gmail.com with ESMTPSA id
- v28-20020a63481c000000b005f7536fbebfsm6004020pga.11.2024.04.21.09.29.05
+ k17-20020aa79d11000000b006ea858e6e78sm6313352pfp.45.2024.04.21.09.34.58
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 21 Apr 2024 09:29:06 -0700 (PDT)
-Message-ID: <ab3c8740-463c-4764-9e8a-9a2676366de2@linaro.org>
-Date: Sun, 21 Apr 2024 09:29:02 -0700
+ Sun, 21 Apr 2024 09:34:59 -0700 (PDT)
+Message-ID: <d69a848b-0450-4058-8167-bdca2998d924@linaro.org>
+Date: Sun, 21 Apr 2024 09:34:55 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 06/24] exec: Have guest_addr_valid() methods take
- abi_ptr/size_t arguments
+Subject: Re: [PATCH 08/24] physmem: Move TCG CPU IOTLB methods around
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  qemu-devel@nongnu.org
 Cc: Paolo Bonzini <pbonzini@redhat.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  David Hildenbrand <david@redhat.com>, =?UTF-8?Q?Alex_Benn=C3=A9e?=
- <alex.bennee@linaro.org>, Anton Johansson <anjo@rev.ng>
+ <alex.bennee@linaro.org>, Anton Johansson <anjo@rev.ng>,
+ Peter Xu <peterx@redhat.com>
 References: <20240418192525.97451-1-philmd@linaro.org>
- <20240418192525.97451-7-philmd@linaro.org>
+ <20240418192525.97451-9-philmd@linaro.org>
 Content-Language: en-US
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240418192525.97451-7-philmd@linaro.org>
+In-Reply-To: <20240418192525.97451-9-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42c;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x42c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::436;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x436.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -105,34 +105,17 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 4/18/24 12:25, Philippe Mathieu-Daudé wrote:
-> abi_ulong is target specific, replace by abi_ptr which isn't.
-> Use size_t for the @len type.
+> The next commit will restrict TCG specific code in physmem.c
+> using some #ifdef'ry. In order to keep it simple, move
+> iotlb_to_section() and memory_region_section_get_iotlb()
+> around close together.
 > 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> Signed-off-by: Philippe Mathieu-Daudé<philmd@linaro.org>
 > ---
->   include/exec/cpu_ldst.h | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/include/exec/cpu_ldst.h b/include/exec/cpu_ldst.h
-> index f3c2a3ca74..63186b07e4 100644
-> --- a/include/exec/cpu_ldst.h
-> +++ b/include/exec/cpu_ldst.h
-> @@ -92,12 +92,12 @@ static inline void *g2h(CPUState *cs, abi_ptr x)
->       return g2h_untagged(cpu_untagged_addr(cs, x));
->   }
->   
-> -static inline bool guest_addr_valid_untagged(abi_ulong x)
-> +static inline bool guest_addr_valid_untagged(abi_ptr x)
->   {
->       return x <= GUEST_ADDR_MAX;
->   }
->   
-> -static inline bool guest_range_valid_untagged(abi_ulong start, abi_ulong len)
-> +static inline bool guest_range_valid_untagged(abi_ptr start, size_t len)
+>   system/physmem.c | 50 ++++++++++++++++++++++++------------------------
+>   1 file changed, 25 insertions(+), 25 deletions(-)
 
-No, this needs to remain a large type for 64-bit guest on 32-bit host.
-(When will that ever die...)
-
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 r~
 
