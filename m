@@ -4,82 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE7CFC4345F
-	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Apr 2024 13:47:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F176C4345F
+	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Apr 2024 13:59:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rytzv-0007et-3K; Mon, 22 Apr 2024 09:46:19 -0400
+	id 1ryuCA-0003sD-9U; Mon, 22 Apr 2024 09:58:58 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1rytzu-0007bf-4B
- for qemu-riscv@nongnu.org; Mon, 22 Apr 2024 09:46:18 -0400
-Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436])
+ (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
+ id 1ryuC6-0003pu-UG
+ for qemu-riscv@nongnu.org; Mon, 22 Apr 2024 09:58:55 -0400
+Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1rytzk-0000GD-TC
- for qemu-riscv@nongnu.org; Mon, 22 Apr 2024 09:46:10 -0400
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-34b1e35155aso852922f8f.3
- for <qemu-riscv@nongnu.org>; Mon, 22 Apr 2024 06:46:08 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
+ id 1ryuC3-0002jX-B3
+ for qemu-riscv@nongnu.org; Mon, 22 Apr 2024 09:58:54 -0400
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-34801b1bc4aso737384f8f.0
+ for <qemu-riscv@nongnu.org>; Mon, 22 Apr 2024 06:58:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1713793566; x=1714398366; darn=nongnu.org;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1713794329; x=1714399129;
+ darn=nongnu.org; 
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=tAPZ9edf4TI7D81b9AdMksyI8LjSYzU3sU/h7DSxoJk=;
- b=QuhB5I2y4HZWPQGhk62QVaAm6VQid4+r00zF31KNc9YqA/mnKB+DBqT50G40U8gm8/
- C5Mf9ZBqsKlnEs1rOujOWq3l5a8nOE8kUD3pVff3Mj9vbngKBqKLmPiUM2c/aqJrsAwF
- 66c7ZsjHz7SJIdE+7I4viNhsC0ijNIXJSgs2LPv2SCxvAeurchzhF5hudAli1qwzhvXc
- twASTMQESPpw7UI+xctUeKEAgIAzvFqNwjpNLihdTF4B5u4e3N/RC0N7tbDyqaiS20TR
- 5kHXJPY5x33jaWAkn5J57wHCeZNWKfee9SBUE8Gjb+WteCesRdMzc6Q2XyRdaCTmoiG2
- uBUg==
+ bh=iZkvdy3nHVfG+OpWotHOqDYl4caZhvGaq43kdwd0U8c=;
+ b=ZDnVTNCF7kn5qvq6nMoORfnAOTcVmKBXLWvZmvkg0W5Tg5LIrhXOLaQBWGQlhly1QV
+ 5DJ/IYoEoDNTFezysKpGcgcHvIC+q7HuPfuF226AErk71EiYs6dhQc1abpl2YMvGCW5c
+ wCWwQHopIpp8cFTGooGUkogxtSR4+5CFoSvFLVYEeKdn16FJDLTCyufyBVOx6t+H4fez
+ czu23fPHVJPLoNVBqQqjy39C/0QANA8kq73qw6NqlOMC7SCyPAD0sRa0dOsOG+bRU5KS
+ LZWtH2sLNxyLgkPc6U0cq+5T+Wkov4U7TFXUYF2Wbud+ew8INfHt8ta/nLyBf5+zbHB3
+ tFOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713793566; x=1714398366;
+ d=1e100.net; s=20230601; t=1713794329; x=1714399129;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=tAPZ9edf4TI7D81b9AdMksyI8LjSYzU3sU/h7DSxoJk=;
- b=G23cOXIw/4c2slTkIUrYkrEyByxCHjTqWwUuHNVzfaS38m1bQBmfr92knP0/Nxbmm9
- JYXKt7G8rnJGF439UHVTZHamgP4skQm8+8MCmRd8zt+weHa9f9niXOTkjq8xrYTntkfh
- I8dDQlL7HnIacOjpwXFo+pftH5h7qk9YyGaHMp86oDX69ElASHvsgGmWmdA96Xp6WjlM
- eSyITgXJWSM3Pov51CCnw8GV5G9jSJJD9stlFx0NuqhEzNF/aM7bkRorhlsVbKjAs+Yl
- SV0D5FWzJAeNH8WZ5kjumxx45YviJ1n5pgZ9WA0O1l+kEuN3yb8DlIMm4rJ8UFvmiOAV
- PDNw==
-X-Gm-Message-State: AOJu0YyVwiqSKgR+LIz7+nnSXwt5v+ozQCLrAy6MOMl5AlGWhZrrLcnH
- hWiDQvTeCDJ1pI43rAX42It8WqXzKg56D7mrFxSLvGz8+VyEbt1o1IOz5bCHuw7/USJg4dHRNDE
- FH7s=
-X-Google-Smtp-Source: AGHT+IFpP8swYuoMbq8zgc1WTO7dcQ3sQAf6y/9sfek82t463bps9kgeZ/Z7MTEtXTBQp8u1mTNXVA==
-X-Received: by 2002:adf:f38f:0:b0:346:bc1b:4e7c with SMTP id
- m15-20020adff38f000000b00346bc1b4e7cmr7741631wro.35.1713793566462; 
- Mon, 22 Apr 2024 06:46:06 -0700 (PDT)
-Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
- [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
+ bh=iZkvdy3nHVfG+OpWotHOqDYl4caZhvGaq43kdwd0U8c=;
+ b=Dkv2ronvoEULzneJs86W+YIJ0lnytMM4bDequABjNIQ2eJsFfyGK0OCDM0ug/Xr7dx
+ pJiR8LmJru7vuNdh5iFjUu+dnSBrRwNQK+YS3gDSOnmp+8dE7JBoAdncfG/LDBcG/Eo8
+ Qqtr/7MmMesWQPO2z0lvDxiWm4NZvF5RiqAWCBrkpROSdsY+Xln0kPj3rGm1TanAf89X
+ J18aYszZsBz8EPwAicIEbTp3T0v95dw8hXeLn6nZZSEeDGS8IcPHE1h0WiYtFcUxcLbW
+ gjf2Q1XC71nZgyWr6kvnw9PKVMxoMpECNnT9dJvwfA380T2adfU6Y4gnx0YdT3cw6hYV
+ bEeQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUnIRqPyISrrN6gQg+J9WXWtr3O+c0MxIJ7lkcDAzVRCvp775XQIQRahLruC8rgd0i9we9f8sClEVk/T8G0MotL7nJFYiQ=
+X-Gm-Message-State: AOJu0YzHmHhUs7WHlG4fskLSLg3a4SSTbl5AlFLPDUkN1PFxSnEECXxj
+ QY/SOWaLgkBxP/A5lHJCb0Erh471DlvvKYOqR8jqQVCdbrCHNVFmZVP3qmeTxHA=
+X-Google-Smtp-Source: AGHT+IE6GvAPJJEhjEGyRH5alMtBQCKezk2s1FFlEO/wMK3k8B7UfIMhQ4cFlIkGsCaJYiH6i+xOmw==
+X-Received: by 2002:a05:600c:1c90:b0:418:31b9:55c3 with SMTP id
+ k16-20020a05600c1c9000b0041831b955c3mr6748756wms.3.1713794328865; 
+ Mon, 22 Apr 2024 06:58:48 -0700 (PDT)
+Received: from carbon-x1.. ([2a01:e0a:999:a3a0:e027:15d5:993a:92b])
  by smtp.gmail.com with ESMTPSA id
- ig11-20020a1709072e0b00b00a525492801dsm5774128ejc.119.2024.04.22.06.46.05
+ v11-20020a05600c444b00b00418d5b16f85sm16746838wmn.21.2024.04.22.06.58.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Apr 2024 06:46:06 -0700 (PDT)
-From: Andrew Jones <ajones@ventanamicro.com>
-To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, kvm-riscv@lists.infradead.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, apatel@ventanamicro.com
-Subject: [PATCH] target/riscv/kvm: Fix exposure of Zkr
-Date: Mon, 22 Apr 2024 15:46:06 +0200
-Message-ID: <20240422134605.534207-2-ajones@ventanamicro.com>
-X-Mailer: git-send-email 2.44.0
+ Mon, 22 Apr 2024 06:58:48 -0700 (PDT)
+From: =?UTF-8?q?Cl=C3=A9ment=20L=C3=A9ger?= <cleger@rivosinc.com>
+To: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org
+Cc: =?UTF-8?q?Cl=C3=A9ment=20L=C3=A9ger?= <cleger@rivosinc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
+Subject: [PATCH] target/riscv: change RISCV_EXCP_SEMIHOST exception number to
+ 63
+Date: Mon, 22 Apr 2024 15:58:36 +0200
+Message-ID: <20240422135840.1959967-1-cleger@rivosinc.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-type: text/plain
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::436;
- envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x436.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
+ envelope-from=cleger@rivosinc.com; helo=mail-wr1-x42c.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -95,117 +99,37 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The Zkr extension may only be exposed to KVM guests if the VMM
-implements the SEED CSR. Use the same implementation as TCG.
+The current semihost exception number (16) is a reserved number (range
+[16-17]). The upcoming double trap specification uses that number for
+the double trap exception. Since the privileged spec (Table 22) defines
+ranges for custom uses change the semihosting exception number to 63
+which belongs to the range [48-63] in order to avoid any future
+collisions with reserved exception.
 
-Without this patch, running with a KVM which does not forward the
-SEED CSR access to QEMU will result in an ILL exception being
-injected into the guest (this results in Linux guests crashing on
-boot). And, when running with a KVM which does forward the access,
-QEMU will crash, since QEMU doesn't know what to do with the exit.
+Signed-off-by: Clément Léger <cleger@rivosinc.com>
 
-Fixes: 3108e2f1c69d ("target/riscv/kvm: update KVM exts to Linux 6.8")
-Signed-off-by: Andrew Jones <ajones@ventanamicro.com>
 ---
- target/riscv/cpu.h         |  3 +++
- target/riscv/csr.c         | 18 ++++++++++++++----
- target/riscv/kvm/kvm-cpu.c | 25 +++++++++++++++++++++++++
- 3 files changed, 42 insertions(+), 4 deletions(-)
+ target/riscv/cpu_bits.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 3b1a02b9449a..52fb8c15d08f 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -821,6 +821,9 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops);
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index fc2068ee4d..74318a925c 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -670,11 +670,11 @@ typedef enum RISCVException {
+     RISCV_EXCP_INST_PAGE_FAULT = 0xc, /* since: priv-1.10.0 */
+     RISCV_EXCP_LOAD_PAGE_FAULT = 0xd, /* since: priv-1.10.0 */
+     RISCV_EXCP_STORE_PAGE_FAULT = 0xf, /* since: priv-1.10.0 */
+-    RISCV_EXCP_SEMIHOST = 0x10,
+     RISCV_EXCP_INST_GUEST_PAGE_FAULT = 0x14,
+     RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT = 0x15,
+     RISCV_EXCP_VIRT_INSTRUCTION_FAULT = 0x16,
+     RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT = 0x17,
++    RISCV_EXCP_SEMIHOST = 0x3f,
+ } RISCVException;
  
- void riscv_cpu_register_gdb_regs_for_features(CPUState *cs);
- 
-+target_ulong riscv_new_csr_seed(target_ulong new_value,
-+                                target_ulong write_mask);
-+
- uint8_t satp_mode_max_from_map(uint32_t map);
- const char *satp_mode_str(uint8_t satp_mode, bool is_32_bit);
- 
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 726096444fae..829d8346ed4e 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -4267,10 +4267,8 @@ static RISCVException write_upmbase(CPURISCVState *env, int csrno,
- #endif
- 
- /* Crypto Extension */
--static RISCVException rmw_seed(CPURISCVState *env, int csrno,
--                               target_ulong *ret_value,
--                               target_ulong new_value,
--                               target_ulong write_mask)
-+target_ulong riscv_new_csr_seed(target_ulong new_value,
-+                                target_ulong write_mask)
- {
-     uint16_t random_v;
-     Error *random_e = NULL;
-@@ -4294,6 +4292,18 @@ static RISCVException rmw_seed(CPURISCVState *env, int csrno,
-         rval = random_v | SEED_OPST_ES16;
-     }
- 
-+    return rval;
-+}
-+
-+static RISCVException rmw_seed(CPURISCVState *env, int csrno,
-+                               target_ulong *ret_value,
-+                               target_ulong new_value,
-+                               target_ulong write_mask)
-+{
-+    target_ulong rval;
-+
-+    rval = riscv_new_csr_seed(new_value, write_mask);
-+
-     if (ret_value) {
-         *ret_value = rval;
-     }
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index 6a6c6cae80f1..50bdbd24a878 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -1418,6 +1418,28 @@ static int kvm_riscv_handle_sbi(CPUState *cs, struct kvm_run *run)
-     return ret;
- }
- 
-+static int kvm_riscv_handle_csr(CPUState *cs, struct kvm_run *run)
-+{
-+    target_ulong csr_num = run->riscv_csr.csr_num;
-+    target_ulong new_value = run->riscv_csr.new_value;
-+    target_ulong write_mask = run->riscv_csr.write_mask;
-+    int ret = 0;
-+
-+    switch (csr_num) {
-+    case CSR_SEED:
-+        run->riscv_csr.ret_value = riscv_new_csr_seed(new_value, write_mask);
-+        break;
-+    default:
-+        qemu_log_mask(LOG_UNIMP,
-+                      "%s: un-handled CSR EXIT for CSR %lx\n",
-+                      __func__, csr_num);
-+        ret = -1;
-+        break;
-+    }
-+
-+    return ret;
-+}
-+
- int kvm_arch_handle_exit(CPUState *cs, struct kvm_run *run)
- {
-     int ret = 0;
-@@ -1425,6 +1447,9 @@ int kvm_arch_handle_exit(CPUState *cs, struct kvm_run *run)
-     case KVM_EXIT_RISCV_SBI:
-         ret = kvm_riscv_handle_sbi(cs, run);
-         break;
-+    case KVM_EXIT_RISCV_CSR:
-+        ret = kvm_riscv_handle_csr(cs, run);
-+        break;
-     default:
-         qemu_log_mask(LOG_UNIMP, "%s: un-handled exit reason %d\n",
-                       __func__, run->exit_reason);
+ #define RISCV_EXCP_INT_FLAG                0x80000000
 -- 
-2.44.0
+2.43.0
 
 
