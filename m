@@ -4,90 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1225C4345F
-	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Apr 2024 13:02:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD9D5C4345F
+	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Apr 2024 13:13:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rytJG-0000Yq-Go; Mon, 22 Apr 2024 09:02:14 -0400
+	id 1rytTy-0004Sg-B5; Mon, 22 Apr 2024 09:13:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
- id 1rytJ9-0000YM-4q
- for qemu-riscv@nongnu.org; Mon, 22 Apr 2024 09:02:07 -0400
-Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rytTl-0004Pz-OU
+ for qemu-riscv@nongnu.org; Mon, 22 Apr 2024 09:13:06 -0400
+Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
- id 1rytJ5-0000C8-Vk
- for qemu-riscv@nongnu.org; Mon, 22 Apr 2024 09:02:06 -0400
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-349a31b2babso651995f8f.2
- for <qemu-riscv@nongnu.org>; Mon, 22 Apr 2024 06:02:02 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rytTj-0002Dj-Tc
+ for qemu-riscv@nongnu.org; Mon, 22 Apr 2024 09:13:05 -0400
+Received: by mail-pf1-x42b.google.com with SMTP id
+ d2e1a72fcca58-6f07de6ab93so4240323b3a.2
+ for <qemu-riscv@nongnu.org>; Mon, 22 Apr 2024 06:13:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1713790920; x=1714395720;
- darn=nongnu.org; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=msJIZBAlNSRvum4JVDHS8jLA1sUyfGdrKRHLEguwhEU=;
- b=muZwCi3Nac/CLnQPwsY0WT75520vjeA5f49fZ2Jeoki3ppCo1dTB+CNVgD+k9XrJmv
- /B4Bb57eyDwog6PkIw8FEoeaI/dXbeXtaIEEQr86E87LVxniQ7RHveHpmGj+ntBSbRVx
- ZjLoywAAFw2XPU3Fy7xgE5L8Xl5BRA8tNZM+s6P4IX81XYoPubQo1T8GBz6Zs+kmnNGR
- ylobgpWRWhVP6BICNO8mbXYt7P9HOO8YcxRiIiX+jtMiNAnyg1ys+MaRQ1eMrHHsoxfH
- UCYISEMlycsEe0yV2q3VVWnanq+YQcc0Eq333DBNneSNgS2dfREapeM9MH/zzey63xXD
- wtDg==
+ d=ventanamicro.com; s=google; t=1713791581; x=1714396381; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=s0uOuYuzumfoJBLjCu3eBZ4K9wNhu1mAl0QjtYH6GRg=;
+ b=P71QoKeucE7Na1+/q2Z/Qwewxz/eCT23UEk9w8N7CpjVKzMO+schA9x4q/VLhaiVog
+ MjC5/U3w1DySwh/dccB2ZjZMvIxw/9kDlc2V8bMk9b6sopeAPqmQwdFE8buq+kXYT6Gb
+ uG+oxTVzJoY+UgccH2GTK9KBbzZwONr3XD6nZdLVaV4wlLROQEeC+oqZPRARWaIWR60/
+ Ec530gHiPb+wzV+hEIbyNkodnFSv/oPWEzdcI3Tq8vPTHhxvvW3oDjKnEpw0bDDX1pLj
+ MU14a5Y4UR9MLoj2iIcukFYd/Hjk8GQkO7v7oW/8EARarnSPCnW8+ediDYSgD3IiswPy
+ FNKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713790920; x=1714395720;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=msJIZBAlNSRvum4JVDHS8jLA1sUyfGdrKRHLEguwhEU=;
- b=h8nPIBvYsjyTHR38DwOBHU5Vpt3F/CN+HziolH8aXNCpeMCmctTaYbQIXN0v7yRqWn
- Z2hpMlANT7uibCfMiKQbtLY9pZLnh0ywrG3d+hg6+PB1VTyidH5TfU8tn7jKxLPi6KVy
- DS7ZMcu51ixFJ2wYxDSd1aoVhHOx8VtN3SLON9Crs8cwPzCwhBuFogJ/WkQH4qR5hh7R
- wxLLZRDd1gpgQ0QKNt/2sfALYCE4plZ+uuZz5xnie8X0CfZ14i845rhmwC+1jp0UC+Kh
- XfARvREiItE5imHS8IwqmFJrU3whSj2Z5aEiB19LkJw+GwVGTqYMY6sIggkstJUxHtsG
- MT9A==
-X-Gm-Message-State: AOJu0Yz+/MwJilQQ9GWhueGiMRdFLyQ2XOQNNoyLXe5fmwSwHpUnpwoV
- 0to8OKue0xy8Nc1St90UBDz3tK5CTKopcP/IDsNT/29tClZYu1uftA1pEeLmCLQ=
-X-Google-Smtp-Source: AGHT+IFK81k8uPi2VWArzTS61C9PYgxnGWb72u0mhGETeimKHXhztYOcDgcxHxuBa50U7zhpnWBzHQ==
-X-Received: by 2002:a5d:4a90:0:b0:34a:ce2:e2c9 with SMTP id
- o16-20020a5d4a90000000b0034a0ce2e2c9mr6171329wrq.3.1713790920385; 
- Mon, 22 Apr 2024 06:02:00 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:999:a3a0:9f43:3ca4:162c:d540?
- ([2a01:e0a:999:a3a0:9f43:3ca4:162c:d540])
- by smtp.gmail.com with ESMTPSA id
- w14-20020adfee4e000000b00343d6c7240fsm11925679wro.35.2024.04.22.06.01.59
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 22 Apr 2024 06:01:59 -0700 (PDT)
-Message-ID: <bdc875c7-4581-4608-a76d-3e3469a8bc9a@rivosinc.com>
-Date: Mon, 22 Apr 2024 15:01:58 +0200
+ d=1e100.net; s=20230601; t=1713791581; x=1714396381;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=s0uOuYuzumfoJBLjCu3eBZ4K9wNhu1mAl0QjtYH6GRg=;
+ b=h6xQaHrtOe+SJ0QlGSFSgPLarN0GMS081MJCDervF4Doqwjh2qPFjNLxyEYRo4y9zE
+ CdYKRk2Vrr1xwnb0CUpt08fSeiXacFDzF3ybs+02r6HvUAKCKBLxyxsvLBgC4sblyhJU
+ yg0EQ81cgUjZI9f/g/ndM/vmjRPTAyGbqjkiAghCHiJE14VI19ycNe06D0Rp6iW6qyw6
+ PpgFGawu2PWGaTqAaimrElWJqRFpOoww3DH73sLe4e6WCrvIePeRf0CQm4zZeM4sHQjK
+ zuiTUZzW1ES1jeMRD64kTqpCiNpviBj9vU7/25wgFhCZ6vYUHk3ISsYpUmZ8W16fxzzT
+ uRsg==
+X-Gm-Message-State: AOJu0Yx1ylCkwD73U1gLOg5cgqM+OF50iJG2mFtL/sOzv/V4ulViQfij
+ YPnBNLcyj02qtfDHlL7qYApXo8leNT6GWU8e65UjSURm/IcLujUubcknvTjoxSo=
+X-Google-Smtp-Source: AGHT+IF32DzN57RJyd67E8B8rlguZLvjwtnbPmhNc6CuNtLdJlH9L6ko36QBfQ92fb8izotZ3CbC6Q==
+X-Received: by 2002:a05:6a00:6616:b0:6ed:4223:5b47 with SMTP id
+ he22-20020a056a00661600b006ed42235b47mr8131740pfb.33.1713791580779; 
+ Mon, 22 Apr 2024 06:13:00 -0700 (PDT)
+Received: from grind.. ([191.255.35.121]) by smtp.gmail.com with ESMTPSA id
+ fe12-20020a056a002f0c00b006ea918dab9csm7744128pfb.157.2024.04.22.06.12.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 22 Apr 2024 06:13:00 -0700 (PDT)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ ajones@ventanamicro.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH] target/riscv/kvm: tolerate KVM disable ext errors
+Date: Mon, 22 Apr 2024 10:12:53 -0300
+Message-ID: <20240422131253.313869-1-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 1/3] target/riscv: change RISCV_EXCP_SEMIHOST
- exception number
-To: Alistair Francis <alistair23@gmail.com>
-Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Ved Shanbhogue
- <ved@rivosinc.com>, Atish Patra <atishp@rivosinc.com>, qemu-devel@nongnu.org
-References: <20240418133916.1442471-1-cleger@rivosinc.com>
- <20240418133916.1442471-2-cleger@rivosinc.com>
- <CAKmqyKOcYwAgEnV-gyUYu19dLCKx94-rMoaE5m-8FB0fq7AL+g@mail.gmail.com>
-Content-Language: en-US
-From: =?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@rivosinc.com>
-In-Reply-To: <CAKmqyKOcYwAgEnV-gyUYu19dLCKx94-rMoaE5m-8FB0fq7AL+g@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::435;
- envelope-from=cleger@rivosinc.com; helo=mail-wr1-x435.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42b;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x42b.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -104,50 +92,55 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Running a KVM guest using a 6.9-rc3 kernel, in a 6.8 host that has zkr
+enabled, will fail with a kernel oops SIGILL right at the start. The
+reason is that we can't expose zkr without implementing the SEED CSR.
+Disabling zkr in the guest would be a workaround, but if the KVM doesn't
+allow it we'll error out and never boot.
 
+In hindsight this is too strict. If we keep proceeding, despite not
+disabling the extension in the KVM vcpu, we'll not add extension in
+riscv,isa. The guest kernel will be unaware of the extension, i.e. it
+doesn't matter if the KVM vcpu has it enabled underneath or not. So it's
+ok to keep booting in this case.
 
-On 22/04/2024 05:25, Alistair Francis wrote:
-> On Thu, Apr 18, 2024 at 11:40 PM Clément Léger <cleger@rivosinc.com> wrote:
->>
->> The double trap specification defines the double trap exception number
->> to be 16 which is actually used by the internal semihosting one. Change
->> it to some other value.
->>
->> Signed-off-by: Clément Léger <cleger@rivosinc.com>
-> 
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Change our current logic to not error out if we fail to disable an
+extension in kvm_set_one_reg(): throw an warning instead and keep
+booting.  We'll keep the existing behavior when we fail to enable an
+extension in KVM, since adding the extension in riscv,isa at this point
+will cause a guest malfunction because the extension isn't enabled in
+the vcpu.
 
-Hi Alistair,
+Suggested-by: Andrew Jones <ajones@ventanamicro.com>
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+---
+ target/riscv/kvm/kvm-cpu.c | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
 
-Ved actually told me that even 17 is reserved so I'll move the semihost
-one to 63, which is in a range designated for custom use.
+diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+index 6a6c6cae80..261ca24504 100644
+--- a/target/riscv/kvm/kvm-cpu.c
++++ b/target/riscv/kvm/kvm-cpu.c
+@@ -427,10 +427,14 @@ static void kvm_riscv_update_cpu_cfg_isa_ext(RISCVCPU *cpu, CPUState *cs)
+         reg = kvm_cpu_cfg_get(cpu, multi_ext_cfg);
+         ret = kvm_set_one_reg(cs, id, &reg);
+         if (ret != 0) {
+-            error_report("Unable to %s extension %s in KVM, error %d",
+-                         reg ? "enable" : "disable",
+-                         multi_ext_cfg->name, ret);
+-            exit(EXIT_FAILURE);
++            if (reg) {
++                error_report("Unable to enable extension %s in KVM, error %d",
++                             multi_ext_cfg->name, ret);
++                exit(EXIT_FAILURE);
++            } else {
++                warn_report("KVM did not disable extension %s (error %d)",
++                            multi_ext_cfg->name, ret);
++            }
+         }
+     }
+ }
+-- 
+2.44.0
 
-Regards,
-
-Clément
-
-> 
-> Alistair
-> 
->> ---
->>  target/riscv/cpu_bits.h | 2 +-
->>  1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
->> index fc2068ee4d..9ade72ff31 100644
->> --- a/target/riscv/cpu_bits.h
->> +++ b/target/riscv/cpu_bits.h
->> @@ -670,7 +670,7 @@ typedef enum RISCVException {
->>      RISCV_EXCP_INST_PAGE_FAULT = 0xc, /* since: priv-1.10.0 */
->>      RISCV_EXCP_LOAD_PAGE_FAULT = 0xd, /* since: priv-1.10.0 */
->>      RISCV_EXCP_STORE_PAGE_FAULT = 0xf, /* since: priv-1.10.0 */
->> -    RISCV_EXCP_SEMIHOST = 0x10,
->> +    RISCV_EXCP_SEMIHOST = 0x11,
->>      RISCV_EXCP_INST_GUEST_PAGE_FAULT = 0x14,
->>      RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT = 0x15,
->>      RISCV_EXCP_VIRT_INSTRUCTION_FAULT = 0x16,
->> --
->> 2.43.0
->>
->>
 
