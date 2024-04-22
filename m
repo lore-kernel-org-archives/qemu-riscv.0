@@ -4,58 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15C77C07C79
-	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Apr 2024 11:25:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90E6DC4345F
+	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Apr 2024 11:41:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ryrn4-0003El-O8; Mon, 22 Apr 2024 07:24:54 -0400
+	id 1rys2P-0006s9-JZ; Mon, 22 Apr 2024 07:40:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alexei.filippov@syntacore.com>)
- id 1ryrn2-000381-QE; Mon, 22 Apr 2024 07:24:52 -0400
+ id 1rys2M-0006rJ-KU; Mon, 22 Apr 2024 07:40:42 -0400
 Received: from mta-04.yadro.com ([89.207.88.248])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alexei.filippov@syntacore.com>)
- id 1ryrn0-0007L1-SE; Mon, 22 Apr 2024 07:24:52 -0400
-DKIM-Filter: OpenDKIM Filter v2.11.0 mta-04.yadro.com 62DEBC0002
+ id 1rys2K-0001vU-MI; Mon, 22 Apr 2024 07:40:42 -0400
+DKIM-Filter: OpenDKIM Filter v2.11.0 mta-04.yadro.com AECCEC0004
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
- s=mta-04; t=1713785085;
- bh=knZaCxNyHEEDulzJLlcCVQiRkDfhoJ7zcpyDgfjmZUY=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=ph68UmMhzQPy2w5I92igEJKabBPHJkLR3GcxJhsvzjU8hTsmBZ3O/oK6jem5CCs/O
- I8zpsFkOq/zuDw+mvYYjeX3wKd4k3D7oAz0prCFQLDJtgEvr3+BlNcaVSCVhaCiHzf
- 4q1WYNv/3SfBbiN5csrI20tMplMFWPTjE6MZ3Eoxuhhn2Oq0V9DMjnKheHeNI4O3AM
- l8eOlIa9I1588HFPHUFeGIblLBN4ghHOYzwhLSWCg8PfKSBx7ENgApRQgCzOausocN
- S19wuX6VLJ63Y0vskVXGm50IPKtvqnHDanzRs2zYZpa+75xn+y8g7cDbMlgPb6y3qi
- K8q4KjHa1KyfA==
+ s=mta-04; t=1713786036;
+ bh=EuuIssokjsKxqeKF8jpo5+XooGzJXGYbZRbkLXCQAUs=;
+ h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type:From;
+ b=kZU+tGee/oI/3HSLtOKGgZ3JQ2cTzzTEsmi1BYCmuHK54Tn8UAXfOQ8oRh2ogSKgu
+ k7VDxkOKJIFhdg0Py/0R0obTGS/dfpFCPeD0L8ceqiPNoSm59rikITktAdFvbD5wNt
+ DfC7jbIhRqBeX2Uw2081gUuoIJCN9kOB4KxeVbt1GzFm3Snm1do73frscAZRgCF7kn
+ te1zMLmLBAKw7LMDWcBvTCf7z/Vyso3xHrM/j8EwSlIGMcIZROG0JOjOyHNx5f3j08
+ ZXnSoDJ4bd86uAyEi6t3nwpNuZe755fDm5271tHjcGnk72EptOBz7aqSc6gs/Y60dP
+ NNrt0ZpeYVB+g==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
- s=mta-03; t=1713785085;
- bh=knZaCxNyHEEDulzJLlcCVQiRkDfhoJ7zcpyDgfjmZUY=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=IFI0ubrFLL8U4/q4N2M2NrKMeZhmjyL5LRegX71aQB/E0123G430NAE1GN4KmdP7Z
- T2/pupG/XnXFP3UdYYFGGgLrz0JDmhVIfUDS7ji6fdwbjGB/+Cj9vlJ5xwQU8BhWNI
- pau1IJHzLd4VXBAkvGDswDeVUqrr2weFvhaWXkSodlS6DQ7kO2ceuJAREC7m7rM48j
- 9s1pcl9x7rEpDhywMzV02mlhB731C+Ecka8ntoZnklNkprT0qTr31AdD6pmxd4uLSd
- YxaMP0S24pdbyGCN6Dn9nT+bq3fhPw1FZ0BHPd31HL1WDumZ7k+I7hCv3gtWUOheVH
- AT/qzejRPGcVg==
-From: Alexei Filippov <alexei.filippov@syntacore.com>
+ s=mta-03; t=1713786036;
+ bh=EuuIssokjsKxqeKF8jpo5+XooGzJXGYbZRbkLXCQAUs=;
+ h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type:From;
+ b=u8e40+Ob7izYrYzkdoWFhiHIF7g/lriFD/rCo5M1Rubh+oEAlbc+tRUs+mz4gxAOa
+ EkMNwdYKtkNs01cmkUodLbfQjhvt6KpRSLU+X+FDJ5CchSaeqxPdPnaK502OPHGqH5
+ Fbl/KvWgX4FWVZCoCax/dycfufxOnhxJISBtE2tZx62IssYUYwx4KNKB04+wBxhZE0
+ /M1UMPPzwS8AGn9RCYLQ2jZiWLpSNn2xiANgB2Ot0OsZ2LELWT8Jzu9bT541Mphdar
+ yyIzj55rQSC7dwpROnKkM6asiutdkomP19Pn4c5/toQ6arYBSo4ngJo36rAbav+SXo
+ 4ZoMZbf09u/EQ==
+Message-ID: <ecbda674-791d-4064-b48e-398cbf34b603@syntacore.com>
+Date: Mon, 22 Apr 2024 14:40:34 +0300
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5] target/riscv/kvm/kvm-cpu.c: kvm_riscv_handle_sbi()
+ fail with vendor-specific sbi.
 To: <ajones@ventanamicro.com>
-CC: <alexei.filippov@syntacore.com>, <alistair.francis@wdc.com>,
- <alistair23@gmail.com>, <apatel@ventanamicro.com>, <bin.meng@windriver.com>,
+CC: <alistair.francis@wdc.com>, <alistair23@gmail.com>,
+ <apatel@ventanamicro.com>, <bin.meng@windriver.com>,
  <dbarboza@ventanamicro.com>, <liwei1518@gmail.com>, <palmer@dabbelt.com>,
  <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>,
  <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH v5] target/riscv/kvm/kvm-cpu.c: kvm_riscv_handle_sbi() fail
- with vendor-specific sbi.
-Date: Mon, 22 Apr 2024 14:24:37 +0300
-Message-ID: <20240422112437.11079-1-alexei.filippov@syntacore.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240422-e78b28f00a168518c5d4937a@orel>
 References: <20240422-e78b28f00a168518c5d4937a@orel>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+ <20240422112437.11079-1-alexei.filippov@syntacore.com>
+Content-Language: en-US
+From: Aleksei Filippov <alexei.filippov@syntacore.com>
+Organization: Syntacore
+In-Reply-To: <20240422112437.11079-1-alexei.filippov@syntacore.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
 X-ClientProxiedBy: T-Exch-05.corp.yadro.com (172.17.10.109) To
  T-EXCH-12.corp.yadro.com (172.17.11.143)
 Received-SPF: permerror client-ip=89.207.88.248;
@@ -81,59 +84,64 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-kvm_riscv_handle_sbi() may return not supported return code to not
-trigger qemu abort with vendor-specific sbi.
 
-Add new error path to provide proper error in case of
-qemu_chr_fe_read_all() may not return sizeof(ch).
 
-Added SBI related return code's defines.
+On 22.04.2024 14:24, Alexei Filippov wrote:
+> kvm_riscv_handle_sbi() may return not supported return code to not
+> trigger qemu abort with vendor-specific sbi.
+> 
+> Add new error path to provide proper error in case of
+> qemu_chr_fe_read_all() may not return sizeof(ch).
+> 
+> Added SBI related return code's defines.
+> 
+> Signed-off-by: Alexei Filippov <alexei.filippov@syntacore.com>
+> ---
+>   target/riscv/kvm/kvm-cpu.c         | 9 +++++----
+>   target/riscv/sbi_ecall_interface.h | 1 +
+>   2 files changed, 6 insertions(+), 4 deletions(-)
+> 
+> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+> index aeca1e3e83..5bb7b74d03 100644
+> --- a/target/riscv/kvm/kvm-cpu.c
+> +++ b/target/riscv/kvm/kvm-cpu.c
+> @@ -1173,17 +1173,18 @@ static int kvm_riscv_handle_sbi(CPUState *cs, struct kvm_run *run)
+>           ret = qemu_chr_fe_read_all(serial_hd(0)->be, &ch, sizeof(ch));
+>           if (ret == sizeof(ch)) {
+>               run->riscv_sbi.ret[0] = ch;
+> -        } else {
+> +            ret = 0;
+> +        } else if (ret == 0) {
+>               run->riscv_sbi.ret[0] = SBI_ERR_FAILURE;
+> +        } else {
+> +            ret = -1;
+>           }
+> -        ret = 0;
+>           break;
+>       default:
+>           qemu_log_mask(LOG_UNIMP,
+> -                      "%s: un-handled SBI EXIT, specific reasons is %lu\n",
+> +                      "%s: Unhandled SBI exit with extension-id %lu\n"
+>                         __func__, run->riscv_sbi.extension_id);
+>           run->riscv_sbi.ret[0] = SBI_ERR_NOT_SUPPORTED;
+> -        ret = 0;
+>           break;
+>       }
+>       return ret;
+> diff --git a/target/riscv/sbi_ecall_interface.h b/target/riscv/sbi_ecall_interface.h
+> index 0279e92a36..a2e21d9b8c 100644
+> --- a/target/riscv/sbi_ecall_interface.h
+> +++ b/target/riscv/sbi_ecall_interface.h
+> @@ -79,5 +79,6 @@
+>   #define SBI_ERR_ALREADY_AVAILABLE   -6
+>   #define SBI_ERR_ALREADY_STARTED     -7
+>   #define SBI_ERR_ALREADY_STOPPED     -8
+> +#define SBI_ERR_NO_SHMEM            -9
+>   
+>   #endif
 
-Signed-off-by: Alexei Filippov <alexei.filippov@syntacore.com>
----
- target/riscv/kvm/kvm-cpu.c         | 9 +++++----
- target/riscv/sbi_ecall_interface.h | 1 +
- 2 files changed, 6 insertions(+), 4 deletions(-)
-
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index aeca1e3e83..5bb7b74d03 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -1173,17 +1173,18 @@ static int kvm_riscv_handle_sbi(CPUState *cs, struct kvm_run *run)
-         ret = qemu_chr_fe_read_all(serial_hd(0)->be, &ch, sizeof(ch));
-         if (ret == sizeof(ch)) {
-             run->riscv_sbi.ret[0] = ch;
--        } else {
-+            ret = 0;
-+        } else if (ret == 0) {
-             run->riscv_sbi.ret[0] = SBI_ERR_FAILURE;
-+        } else {
-+            ret = -1;
-         }
--        ret = 0;
-         break;
-     default:
-         qemu_log_mask(LOG_UNIMP,
--                      "%s: un-handled SBI EXIT, specific reasons is %lu\n",
-+                      "%s: Unhandled SBI exit with extension-id %lu\n"
-                       __func__, run->riscv_sbi.extension_id);
-         run->riscv_sbi.ret[0] = SBI_ERR_NOT_SUPPORTED;
--        ret = 0;
-         break;
-     }
-     return ret;
-diff --git a/target/riscv/sbi_ecall_interface.h b/target/riscv/sbi_ecall_interface.h
-index 0279e92a36..a2e21d9b8c 100644
---- a/target/riscv/sbi_ecall_interface.h
-+++ b/target/riscv/sbi_ecall_interface.h
-@@ -79,5 +79,6 @@
- #define SBI_ERR_ALREADY_AVAILABLE   -6
- #define SBI_ERR_ALREADY_STARTED     -7
- #define SBI_ERR_ALREADY_STOPPED     -8
-+#define SBI_ERR_NO_SHMEM            -9
- 
- #endif
+Oh, my bad, wrong patch. Will resend properly.
 -- 
-2.34.1
-
+Sincerely,
+Aleksei Filippov
 
