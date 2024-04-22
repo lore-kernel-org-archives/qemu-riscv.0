@@ -4,80 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4C82C4345F
-	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Apr 2024 03:56:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65307C4345F
+	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Apr 2024 06:43:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rykmh-0001r5-GK; Sun, 21 Apr 2024 23:56:04 -0400
+	id 1rynOH-0000Pr-2v; Mon, 22 Apr 2024 02:43:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rykmf-0001qm-9l; Sun, 21 Apr 2024 23:56:01 -0400
-Received: from mail-vs1-xe36.google.com ([2607:f8b0:4864:20::e36])
+ (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
+ id 1rynOF-0000Pg-IP
+ for qemu-riscv@nongnu.org; Mon, 22 Apr 2024 02:42:59 -0400
+Received: from mail-pg1-x535.google.com ([2607:f8b0:4864:20::535])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rykmd-0001eh-Ap; Sun, 21 Apr 2024 23:56:01 -0400
-Received: by mail-vs1-xe36.google.com with SMTP id
- ada2fe7eead31-479cbfc62e9so1052040137.0; 
- Sun, 21 Apr 2024 20:55:58 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
+ id 1rynOD-0005gq-Ix
+ for qemu-riscv@nongnu.org; Mon, 22 Apr 2024 02:42:59 -0400
+Received: by mail-pg1-x535.google.com with SMTP id
+ 41be03b00d2f7-6001399f22bso398925a12.0
+ for <qemu-riscv@nongnu.org>; Sun, 21 Apr 2024 23:42:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713758158; x=1714362958; darn=nongnu.org;
+ d=vrull.eu; s=google; t=1713768175; x=1714372975; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=aaO/gUqiTbPYh0MI6/kxlUTbhth4CUAI/39aqaVKvNk=;
- b=IM8x0cFcqVzaTBg4reuLPA7p5qy+c2Ee6UP2jIQXNyKXhMWm16h6B3dVaS90X7f4/K
- pHlMJ2FyYrjV928KPbXen/U/Kj1W9rRSt8D46V0r2QFRaPiJU4AFY/77QOpt+ouTFqi+
- sQ0PQXfaT5FzMRhzcxWEZPaZePxnzCapPzWYIwhL/+L527vbJG4zUUUlDllr+dX6dmUF
- vC/ROvjqKv7Xs7RIzgUBiW0cNx/9fD/H+Es1gG1C1vxY2RojmRmi7zjmpN2R1Rkju9Jp
- 5vCk2x9Yv2SV3slA09+adkAQzZwkkwRGN3op9m47VcttNBB8rtRenKa6BljQR63hrUHV
- t4+g==
+ bh=FrWw4q2Xm+oFKpa+35A1aBlxmx5TMxqjJGYk8G9bETI=;
+ b=IyEWsnBRStn3iUEuyjBOxV8wUw11kwAjG2gpNas1JSRsX1D7IivGQudVerSZgnfJbP
+ wbt4/MW3/S9V5dCYMD1woyM9Lvj1KfWp+Dms5r4lRUC91NNns25uweQcVcQ+BwBkxdDR
+ CORn08XUFnzSdnPekYoQsUtW4uuzSQ3TUKfQw6j3lDZPGJOA2w2kHlSPG62dud2j9O8a
+ SutqADsyN8+DaJsKA6okIxlJAGs3JzceY3sWT6iAedbBszVbyNMr0fgJylCmGzHhV1io
+ vU4Bk88xOSnoNquObzEhEnOKJM1EZUWWi4+IEtJ/hX36rlbU/Gql8KYcv9JJWvZg3VaL
+ YprQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713758158; x=1714362958;
+ d=1e100.net; s=20230601; t=1713768175; x=1714372975;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=aaO/gUqiTbPYh0MI6/kxlUTbhth4CUAI/39aqaVKvNk=;
- b=ZondcrCh/AUPrWbD7BxeJZ+AhbjfyB2viGv2gEiuKwrZgE0vx35y1Hebo25B7Tl5O4
- joXc7UQwNaJPUPwF93ATr7+LxBsDjBTU98xPGbF7PYRZ31LCHcCLN0mgl3g5zhPHHlWm
- y9gwACxFGsU/iDodFqDQr8kRvm1hY7Bh8SE0Im4wuD/O7a1jubFjiuFS7TGaIVJJdLN/
- 4zEc3gyFiromATzJV5fIfIWY7MX2wn/cKC9F64GrZYTDtE1Moz1xin1QHptJ31tGz8P2
- aH2vU4aK1FhWZPSXP+8WBqmjn+W9vasuBcaghzRZBjlfUXbRj/7HRJZmIokQLuNJoazu
- 0e4w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXO7ul9/azIVu+cXFZ8iM2Gk/+UEzqfdeAGWx7DgGIbCJD4pskVpKdIBbRwERkTUpty6ocxPtrmw7NU5RZ1qZqPtcYN/fw2NEoKVMBO1hXQE3U1Ww9EfnaxRwRVUg==
-X-Gm-Message-State: AOJu0Yxuvx96uwIqf+S4lSJt1eFOHY1ZBnZ+lTvpglhwVhos1ATULueP
- vyaS7iLgTPS6PjrpCNs3oMjJKecCvHYiP3fUnKe9k9Bt0aDx3M8+e/08+F2T8hVyXMF3BD14DXK
- pTBzDmDZ33T74Lrm8PeUZ+3lRz+U=
-X-Google-Smtp-Source: AGHT+IFCwfp0L5ntpDVpd/9Ar72JW1gBzSPcqrBL840bbVQiSvQN1xXnKTAtaIiFxZqd7Nz4rMNghkkJgVSZ0O1jico=
-X-Received: by 2002:a05:6102:19c8:b0:47a:2c1f:cba1 with SMTP id
- jn8-20020a05610219c800b0047a2c1fcba1mr10851674vsb.10.1713758157756; Sun, 21
- Apr 2024 20:55:57 -0700 (PDT)
+ bh=FrWw4q2Xm+oFKpa+35A1aBlxmx5TMxqjJGYk8G9bETI=;
+ b=R+eiJ5FnDsroOhoJilqox8fVWIHjucRibaUw9YS3CXmMBqYiNbQXjkC38Br7PCaj8P
+ vxtt5zpQXLJsnOoRloFP1YM3ktMhSW/Xb6g8tSsh4jvd8v8TWmaBv33tGrHBIbL4Q2kg
+ 5DsRI2dNFSqs8pHbieaHK6I/TR8MWjiH5e+qUDJGg5aZCFnJKlWH4EweidjTYE75UKVA
+ XeuGQmHBK/xt0YxM5Ehn/gqlmFXJzMmbHpkI3Tck5V118IO+a0wUKRMGpRdPnke2zCSA
+ rc8sIrv9c+T5kYaEhfNMUNPmlK42K0fz8++CiW3u9h5gDuWhVX9IBXWcRJoJeiMFuQib
+ OJlw==
+X-Gm-Message-State: AOJu0YxuYjUGIoQiMTA2n5aA8KCRlCC/g2wYbHPfXtauPamBTfgUvE3R
+ MQrD2ZVqUB/r6x23Y8vP5I0RmcLwDWdrkY3lvgwWtiLOexw0Sx6qb4S9IN1QMU7KCrcU2eBmwPg
+ tZxABY7m4BEw0UtrZuYE5rLFipJZPQ1tiVhikjg==
+X-Google-Smtp-Source: AGHT+IFuN02/yxqdRvVifxMzU5pZxt+/pM4sNxc3S6ATywSRpMtqLyGDR191Wug9JyTJh3ajipkjVHWDYsx9eziH6Ac=
+X-Received: by 2002:a05:6a20:914d:b0:1a7:a21b:66f9 with SMTP id
+ x13-20020a056a20914d00b001a7a21b66f9mr10724455pzc.43.1713768175294; Sun, 21
+ Apr 2024 23:42:55 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240326-672b9d2fa4066ec883a9f037@orel>
- <20240413112526.8748-1-alexei.filippov@syntacore.com>
-In-Reply-To: <20240413112526.8748-1-alexei.filippov@syntacore.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 22 Apr 2024 13:55:31 +1000
-Message-ID: <CAKmqyKN1ATWcSqNXXG-81shqRj_XPG0hSVPVtW3gjeOCgNNfuw@mail.gmail.com>
-Subject: Re: [PATCH v4] target/riscv/kvm/kvm-cpu.c: kvm_riscv_handle_sbi()
- fail with vendor-specific SBI
-To: Alexei Filippov <alexei.filippov@syntacore.com>
-Cc: ajones@ventanamicro.com, alistair.francis@wdc.com, apatel@ventanamicro.com,
- bin.meng@windriver.com, dbarboza@ventanamicro.com, liwei1518@gmail.com, 
- palmer@dabbelt.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- zhiwei_liu@linux.alibaba.com
+References: <20240417225432.476505-1-christoph.muellner@vrull.eu>
+ <CAKmqyKOPEZQoQqs+W5A68HK1W+9wbLrbKrG1d1Pq4ABnxcZWdg@mail.gmail.com>
+In-Reply-To: <CAKmqyKOPEZQoQqs+W5A68HK1W+9wbLrbKrG1d1Pq4ABnxcZWdg@mail.gmail.com>
+From: =?UTF-8?Q?Christoph_M=C3=BCllner?= <christoph.muellner@vrull.eu>
+Date: Mon, 22 Apr 2024 08:42:43 +0200
+Message-ID: <CAEg0e7g2STB3U55EBWw9_busuCf8QhWbt0wW2gFpE0doLVgQ2Q@mail.gmail.com>
+Subject: Re: [PATCH v3] riscv: thead: Add th.sxstatus CSR emulation
+To: Alistair Francis <alistair23@gmail.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Cooper Qu <cooper.qu@linux.alibaba.com>, 
+ Zhiwei Liu <zhiwei_liu@linux.alibaba.com>,
+ Huang Tao <eric.huang@linux.alibaba.com>, 
+ Conor Dooley <conor@kernel.org>, Andrew Jones <ajones@ventanamicro.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Vivian Wang <uwu@dram.page>, 
+ Qingfang Deng <dqfext@gmail.com>, Alexandre Ghiti <alex@ghiti.fr>, 
+ LIU Zhiwei <zhiwe_liu@linux.alibaba.com>, Weiwei Li <liwei1518@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e36;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe36.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::535;
+ envelope-from=christoph.muellner@vrull.eu; helo=mail-pg1-x535.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -95,100 +101,198 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sat, Apr 13, 2024 at 9:26=E2=80=AFPM Alexei Filippov
-<alexei.filippov@syntacore.com> wrote:
+On Mon, Apr 22, 2024 at 5:29=E2=80=AFAM Alistair Francis <alistair23@gmail.=
+com> wrote:
 >
-> kvm_riscv_handle_sbi() may return not supported return code to not trigge=
-r
-> qemu abort with vendor-specific sbi.
+> On Thu, Apr 18, 2024 at 8:55=E2=80=AFAM Christoph M=C3=BCllner
+> <christoph.muellner@vrull.eu> wrote:
+> >
+> > The th.sxstatus CSR can be used to identify available custom extension
+> > on T-Head CPUs. The CSR is documented here:
+> >   https://github.com/T-head-Semi/thead-extension-spec/blob/master/xthea=
+dsxstatus.adoc
+> >
+> > An important property of this patch is, that the th.sxstatus MAEE field
+> > is not set (indicating that XTheadMae is not available).
+> > XTheadMae is a memory attribute extension (similar to Svpbmt) which is
+> > implemented in many T-Head CPUs (C906, C910, etc.) and utilizes bits
+> > in PTEs that are marked as reserved. QEMU maintainers prefer to not
+> > implement XTheadMae, so we need give kernels a mechanism to identify
+> > if XTheadMae is available in a system or not. And this patch introduces
+> > this mechanism in QEMU in a way that's compatible with real HW
+> > (i.e., probing the th.sxstatus.MAEE bit).
+> >
+> > Further context can be found on the list:
+> > https://lists.gnu.org/archive/html/qemu-devel/2024-02/msg00775.html
+> >
+> > Reviewed-by: LIU Zhiwei <zhiwe_liu@linux.alibaba.com>
+> > Signed-off-by: Christoph M=C3=BCllner <christoph.muellner@vrull.eu>
+> > ---
+> >  target/riscv/cpu.c       |  1 +
+> >  target/riscv/cpu.h       |  4 +++
+> >  target/riscv/csr.c       |  2 +-
+> >  target/riscv/meson.build |  1 +
+> >  target/riscv/th_csr.c    | 68 ++++++++++++++++++++++++++++++++++++++++
+> >  5 files changed, 75 insertions(+), 1 deletion(-)
+> >  create mode 100644 target/riscv/th_csr.c
+> >
+> > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> > index 36e3e5fdaf..b82ba95ae6 100644
+> > --- a/target/riscv/cpu.c
+> > +++ b/target/riscv/cpu.c
+> > @@ -545,6 +545,7 @@ static void rv64_thead_c906_cpu_init(Object *obj)
+> >      cpu->cfg.mvendorid =3D THEAD_VENDOR_ID;
+> >  #ifndef CONFIG_USER_ONLY
+> >      set_satp_mode_max_supported(cpu, VM_1_10_SV39);
+> > +    th_register_custom_csrs(cpu);
+> >  #endif
+> >
+> >      /* inherited from parent obj via riscv_cpu_init() */
+> > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> > index 3b1a02b944..fd9424c8e9 100644
+> > --- a/target/riscv/cpu.h
+> > +++ b/target/riscv/cpu.h
+> > @@ -818,10 +818,14 @@ extern const bool valid_vm_1_10_32[], valid_vm_1_=
+10_64[];
+> >
+> >  void riscv_get_csr_ops(int csrno, riscv_csr_operations *ops);
+> >  void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops);
+> > +RISCVException smode(CPURISCVState *env, int csrno);
 >
-> Added SBI related return code's defines.
+> I don't think we should make this public. Especially not the name `smode(=
+)`.
 >
-> Signed-off-by: Alexei Filippov <alexei.filippov@syntacore.com>
-> Fixes: 4eb47125 ("target/riscv: Handle KVM_EXIT_RISCV_SBI exit")
-> ---
+> One option is to rename this, something like `riscv_csr_check_smode()` ma=
+ybe?
 >
-> Changes since v3:
->         -Clear Reviewed-by tags
->  target/riscv/kvm/kvm-cpu.c         | 13 +++++--------
->  target/riscv/sbi_ecall_interface.h | 12 ++++++++++++
->  2 files changed, 17 insertions(+), 8 deletions(-)
->
-> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-> index 6a6c6cae80..844942d9ba 100644
-> --- a/target/riscv/kvm/kvm-cpu.c
-> +++ b/target/riscv/kvm/kvm-cpu.c
-> @@ -1392,7 +1392,6 @@ bool kvm_arch_stop_on_emulation_error(CPUState *cs)
->
->  static int kvm_riscv_handle_sbi(CPUState *cs, struct kvm_run *run)
->  {
-> -    int ret =3D 0;
->      unsigned char ch;
->      switch (run->riscv_sbi.extension_id) {
->      case SBI_EXT_0_1_CONSOLE_PUTCHAR:
-> @@ -1400,22 +1399,20 @@ static int kvm_riscv_handle_sbi(CPUState *cs, str=
-uct kvm_run *run)
->          qemu_chr_fe_write(serial_hd(0)->be, &ch, sizeof(ch));
->          break;
->      case SBI_EXT_0_1_CONSOLE_GETCHAR:
-> -        ret =3D qemu_chr_fe_read_all(serial_hd(0)->be, &ch, sizeof(ch));
-> -        if (ret =3D=3D sizeof(ch)) {
-> +        if (qemu_chr_fe_read_all(serial_hd(0)->be, &ch, sizeof(ch)) =3D=
-=3D sizeof(ch)) {
->              run->riscv_sbi.ret[0] =3D ch;
->          } else {
-> -            run->riscv_sbi.ret[0] =3D -1;
-> +            run->riscv_sbi.ret[0] =3D SBI_ERR_FAILURE;
+> The better option is probably just to copy it to the vendor
+> implementation as it's a pretty simple function.
 
-I'm not sure I follow. This seems like a failure but we report success
-to the caller of this function?
+Ok, I will copy it and create a v3.
 
-Can you expand the commit message to explain why we want this change
+Thanks!
 
-Alistair
-
->          }
-> -        ret =3D 0;
->          break;
->      default:
->          qemu_log_mask(LOG_UNIMP,
-> -                      "%s: un-handled SBI EXIT, specific reasons is %lu\=
-n",
-> +                      "%s: Unhandled SBI exit with extension-id %lu\n",
->                        __func__, run->riscv_sbi.extension_id);
-> -        ret =3D -1;
-> +        run->riscv_sbi.ret[0] =3D SBI_ERR_NOT_SUPPORTED;
->          break;
->      }
-> -    return ret;
-> +    return 0;
->  }
 >
->  int kvm_arch_handle_exit(CPUState *cs, struct kvm_run *run)
-> diff --git a/target/riscv/sbi_ecall_interface.h b/target/riscv/sbi_ecall_=
-interface.h
-> index 43899d08f6..a2e21d9b8c 100644
-> --- a/target/riscv/sbi_ecall_interface.h
-> +++ b/target/riscv/sbi_ecall_interface.h
-> @@ -69,4 +69,16 @@
->  #define SBI_EXT_VENDOR_END              0x09FFFFFF
->  /* clang-format on */
+> Alistair
 >
-> +/* SBI return error codes */
-> +#define SBI_SUCCESS                  0
-> +#define SBI_ERR_FAILURE             -1
-> +#define SBI_ERR_NOT_SUPPORTED       -2
-> +#define SBI_ERR_INVALID_PARAM       -3
-> +#define SBI_ERR_DENIED              -4
-> +#define SBI_ERR_INVALID_ADDRESS     -5
-> +#define SBI_ERR_ALREADY_AVAILABLE   -6
-> +#define SBI_ERR_ALREADY_STARTED     -7
-> +#define SBI_ERR_ALREADY_STOPPED     -8
-> +#define SBI_ERR_NO_SHMEM            -9
-> +
->  #endif
-> --
-> 2.34.1
->
->
+> >
+> >  void riscv_cpu_register_gdb_regs_for_features(CPUState *cs);
+> >
+> >  uint8_t satp_mode_max_from_map(uint32_t map);
+> >  const char *satp_mode_str(uint8_t satp_mode, bool is_32_bit);
+> >
+> > +/* Implemented in th_csr.c */
+> > +void th_register_custom_csrs(RISCVCPU *cpu);
+> > +
+> >  #endif /* RISCV_CPU_H */
+> > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> > index 726096444f..503eeb5f24 100644
+> > --- a/target/riscv/csr.c
+> > +++ b/target/riscv/csr.c
+> > @@ -260,7 +260,7 @@ static RISCVException aia_any32(CPURISCVState *env,=
+ int csrno)
+> >      return any32(env, csrno);
+> >  }
+> >
+> > -static RISCVException smode(CPURISCVState *env, int csrno)
+> > +RISCVException smode(CPURISCVState *env, int csrno)
+> >  {
+> >      if (riscv_has_ext(env, RVS)) {
+> >          return RISCV_EXCP_NONE;
+> > diff --git a/target/riscv/meson.build b/target/riscv/meson.build
+> > index a5e0734e7f..a4bd61e52a 100644
+> > --- a/target/riscv/meson.build
+> > +++ b/target/riscv/meson.build
+> > @@ -33,6 +33,7 @@ riscv_system_ss.add(files(
+> >    'monitor.c',
+> >    'machine.c',
+> >    'pmu.c',
+> > +  'th_csr.c',
+> >    'time_helper.c',
+> >    'riscv-qmp-cmds.c',
+> >  ))
+> > diff --git a/target/riscv/th_csr.c b/target/riscv/th_csr.c
+> > new file mode 100644
+> > index 0000000000..44e28a9298
+> > --- /dev/null
+> > +++ b/target/riscv/th_csr.c
+> > @@ -0,0 +1,68 @@
+> > +/*
+> > + * T-Head-specific CSRs.
+> > + *
+> > + * Copyright (c) 2024 VRULL GmbH
+> > + *
+> > + * This program is free software; you can redistribute it and/or modif=
+y it
+> > + * under the terms and conditions of the GNU General Public License,
+> > + * version 2 or later, as published by the Free Software Foundation.
+> > + *
+> > + * This program is distributed in the hope it will be useful, but WITH=
+OUT
+> > + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY =
+or
+> > + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public Licen=
+se for
+> > + * more details.
+> > + *
+> > + * You should have received a copy of the GNU General Public License a=
+long with
+> > + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> > + */
+> > +
+> > +#include "qemu/osdep.h"
+> > +#include "cpu.h"
+> > +#include "cpu_vendorid.h"
+> > +
+> > +#define CSR_TH_SXSTATUS 0x5c0
+> > +
+> > +/* TH_SXSTATUS bits */
+> > +#define TH_SXSTATUS_UCME        BIT(16)
+> > +#define TH_SXSTATUS_MAEE        BIT(21)
+> > +#define TH_SXSTATUS_THEADISAEE  BIT(22)
+> > +
+> > +typedef struct {
+> > +    int csrno;
+> > +    int (*insertion_test)(RISCVCPU *cpu);
+> > +    riscv_csr_operations csr_ops;
+> > +} riscv_csr;
+> > +
+> > +static int test_thead_mvendorid(RISCVCPU *cpu)
+> > +{
+> > +    if (cpu->cfg.mvendorid !=3D THEAD_VENDOR_ID)
+> > +        return -1;
+> > +
+> > +    return 0;
+> > +}
+> > +
+> > +static RISCVException read_th_sxstatus(CPURISCVState *env, int csrno,
+> > +                                       target_ulong *val)
+> > +{
+> > +    /* We don't set MAEE here, because QEMU does not implement MAEE. *=
+/
+> > +    *val =3D TH_SXSTATUS_UCME | TH_SXSTATUS_THEADISAEE;
+> > +    return RISCV_EXCP_NONE;
+> > +}
+> > +
+> > +static riscv_csr th_csr_list[] =3D {
+> > +    {
+> > +        .csrno =3D CSR_TH_SXSTATUS,
+> > +        .insertion_test =3D test_thead_mvendorid,
+> > +        .csr_ops =3D { "th.sxstatus", smode, read_th_sxstatus }
+> > +    }
+> > +};
+> > +
+> > +void th_register_custom_csrs(RISCVCPU *cpu)
+> > +{
+> > +    for (size_t i =3D 0; i < ARRAY_SIZE(th_csr_list); i++) {
+> > +        int csrno =3D th_csr_list[i].csrno;
+> > +        riscv_csr_operations *csr_ops =3D &th_csr_list[i].csr_ops;
+> > +        if (!th_csr_list[i].insertion_test(cpu))
+> > +            riscv_set_csr_ops(csrno, csr_ops);
+> > +    }
+> > +}
+> > --
+> > 2.44.0
+> >
+> >
 
