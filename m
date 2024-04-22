@@ -4,94 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3719C4345F
-	for <qemu-riscv@archiver.kernel.org>; Sun, 21 Apr 2024 17:03:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 556B3C4345F
+	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Apr 2024 03:25:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ryaaj-0000kl-UH; Sun, 21 Apr 2024 13:03:01 -0400
+	id 1rykJE-0003sw-Lf; Sun, 21 Apr 2024 23:25:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1ryaah-0000kO-Qt
- for qemu-riscv@nongnu.org; Sun, 21 Apr 2024 13:02:59 -0400
-Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1rykJC-0003sc-O9; Sun, 21 Apr 2024 23:25:34 -0400
+Received: from mail-ua1-x932.google.com ([2607:f8b0:4864:20::932])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1ryaag-0004wf-Ad
- for qemu-riscv@nongnu.org; Sun, 21 Apr 2024 13:02:59 -0400
-Received: by mail-pl1-x629.google.com with SMTP id
- d9443c01a7336-1e651a9f3ffso20294375ad.1
- for <qemu-riscv@nongnu.org>; Sun, 21 Apr 2024 10:02:57 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1rykJB-0004v6-34; Sun, 21 Apr 2024 23:25:34 -0400
+Received: by mail-ua1-x932.google.com with SMTP id
+ a1e0cc1a2514c-7eb9cb7b657so1123185241.1; 
+ Sun, 21 Apr 2024 20:25:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713718977; x=1714323777; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Is9+G+sXsgs9tbaaTE0MWItPvvvb9tGCsHcscT8xhMM=;
- b=d3RhIASZ+5coa4P+/UYQQ3Km/j1VN4+IRHI0wDBTBtMgma+aUyUrLWtFKDuVZ+LoeI
- yO20io33or3QkIMVcnXA5+bryB9ekClNOtBdjwR49zi7o2xbRWbeWYIR2DV7LBk7wXkA
- YsNGPX+hUrvqSnBGWjzfeyfbV3p1E689AjmqoUl6Y6A8r3LoGemjEJHE6nM7Uc0GIQ2c
- TbQeFJlnJuRqSGqfsuRMfsK6EKNxi/ruvvV0jup1OxyRVeDTrlxKQFU+Y7BiFMBeifbv
- h4EXcaPbPYV+BkhdmmWWmDXCH1DADqf5lcKJYzmiANRHdaXT70S9AfKV2zp1w6isjiZ2
- N0XA==
+ d=gmail.com; s=20230601; t=1713756331; x=1714361131; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=t8MlDnEAxy0uzLrI6vXb30mtL08CR66ZwVYe9VsH2FA=;
+ b=JSD9q1rcfnLxUnvWNED65k+czB2i3cZAaEVDbw/twuYonWZAO39BjFU/BoAReadKtd
+ P2LzH394bMXW4eEDUik6IOwoeza2XoZ1x6mfh8TCmmOlwdeWWwg90Pb7ASONW81S9CZ/
+ NJXG68cyz8CatppgUiv9WYe6gaVQVPqvaJJaJ93XKSX2Iip/tS4sVqTkZqBd8IvXwUhk
+ YI77XCuP6e5H6cE5Sq98qSaXHh8V9UfkowvbjlD0eZ7MwRV1xK0SlOgnORMxWapjGr20
+ gUOyhdQ4CgFKGFg3OKcnqE6BaN9KlYLL8QbhOE8Cvj6Ysj/2SQAOTgPy2h/xWR/FiQFT
+ 8wNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713718977; x=1714323777;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Is9+G+sXsgs9tbaaTE0MWItPvvvb9tGCsHcscT8xhMM=;
- b=WcbfKs5bm9egf0GfRTY9ng3lhzwCNzBzl4IP/IULU9+cAhL8wAz5RYFCEQlV3e7c/7
- 7v1zbRn+vcvaUScqT82lLFqP0QfvlN4idD9wg8UDfOlnPh8M/fGDGZI4Y1SzzQ/O00oS
- Ig51zrd45oEplhNvqtFzdtAIWdsbtQw1htuShx2LWW3ntpKS2eDNR1Ameu218YaEjjiY
- i5Ii6werAXbvZ5qO1iL/IIIEIhyzVPBreY6JjTuGHFIarq6nFlieMlo6/TcXTgjkA+Fw
- vGWNF9KRLpl0Pa2isSKw0420EfYERf8eT8rDiCGu9AwgT8vLZZx2cNeNXERfZEiXrL4U
- 7SKQ==
+ d=1e100.net; s=20230601; t=1713756331; x=1714361131;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=t8MlDnEAxy0uzLrI6vXb30mtL08CR66ZwVYe9VsH2FA=;
+ b=SUh4uxmgBqS+Yw0iFGcF52zD2VXXvbs6HdS6Q5+0A0YOGbkn9DAvdQX2z9gy88Bbaa
+ ycRu/uPmgs8/BccKWRcHQSjQ4PEieA1QGde8c5rXT+qcI73nug5h1YcFq2kZ/2FJvdQ2
+ enS13bEMOC+m0kkKYdOVzw2WNjHP6Y3VSjZ9koVKlI9dlhcHMjzcZlHwBO59U6Rub7/P
+ 3QLI0sCfeMVhPUbegMe40yRrodO2FUCxkIQaKu7Bbx+GClb+eFgPuYMY955tDFIuiNOM
+ /CIUtaiA86Iyh5UVyntjdbhu/6bD2iNtuwyGM27x3L2jm2E6RM8sP3tLMCJPdgxb23ZL
+ WIxg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWJ0JxdUERI/H0cLbF6PxCAi1LnsTp0Xf21EEL4nvXGzDvXrGkagPekpyaO/kdu8LS16nQXZE7vwT5OenNiZT7EBTj7hwg=
-X-Gm-Message-State: AOJu0YzVU7QVIclBL1RCy3vIFC0UBDMD31nrnISzFj0c000G2/4dIpAu
- 7VvolfHKI+U79Y97+iukjh3nTqD0EiffH532QaDwt/ybfByn/5BXJWxp/DBF4Qo=
-X-Google-Smtp-Source: AGHT+IGqGa75UZ+kxBJqZgsES9Nskp+wQBMR1roE2ivdGfjaOP+QEXk2DeP/eOAK1nwdmPgeA4hHkw==
-X-Received: by 2002:a17:902:c94c:b0:1e8:2c8d:b793 with SMTP id
- i12-20020a170902c94c00b001e82c8db793mr9482567pla.41.1713718976845; 
- Sun, 21 Apr 2024 10:02:56 -0700 (PDT)
-Received: from [192.168.91.227] ([156.19.246.23])
- by smtp.gmail.com with ESMTPSA id
- q12-20020a170902a3cc00b001dd707d5fe6sm6651002plb.158.2024.04.21.10.02.55
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 21 Apr 2024 10:02:56 -0700 (PDT)
-Message-ID: <00a3d489-f51c-4a4b-a5a4-f0cc7cfd3fb2@linaro.org>
-Date: Sun, 21 Apr 2024 10:02:54 -0700
+ AJvYcCVM/oHe5V+Q/tJBe7b7utrFEo36aqF9D9jc8Ex8hHd5a3uBcdoqUlNuBvTzWRUULoXHP7TYBONIVqvMv3psRO9qFiY8584=
+X-Gm-Message-State: AOJu0YxGWeCjgCguUzqrAy64aIoXWi2t+KI2Zimc77hROVseQF5usdKV
+ 8fand8xWAPNyR4Ekle8uH861mE3aDqUNOnurRGiaP6JqqaIATeQzJAdAshL+zN6pG7B+Wu+8pba
+ DqrTcvKeFMe5g13HwRqSN6Des9JY=
+X-Google-Smtp-Source: AGHT+IGYI0LRHsnLNXY6WCOnu92rfU/3TOla7ulV0bXPfC//vvox0PS9AIRrQcANvhA/KOMkhLDV6kB76frwOAmtrbQ=
+X-Received: by 2002:a67:fa51:0:b0:47b:b6df:45f5 with SMTP id
+ j17-20020a67fa51000000b0047bb6df45f5mr9725554vsq.6.1713756329372; Sun, 21 Apr
+ 2024 20:25:29 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 24/24] exec: Remove unnecessary inclusions of
- 'hw/core/cpu.h'
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org
-Cc: Paolo Bonzini <pbonzini@redhat.com>, qemu-arm@nongnu.org,
- qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
- David Hildenbrand <david@redhat.com>, =?UTF-8?Q?Alex_Benn=C3=A9e?=
- <alex.bennee@linaro.org>, Anton Johansson <anjo@rev.ng>,
- Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Yanan Wang <wangyanan55@huawei.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
-References: <20240418192525.97451-1-philmd@linaro.org>
- <20240418192525.97451-25-philmd@linaro.org>
-Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240418192525.97451-25-philmd@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x629.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20240418133916.1442471-1-cleger@rivosinc.com>
+ <20240418133916.1442471-2-cleger@rivosinc.com>
+In-Reply-To: <20240418133916.1442471-2-cleger@rivosinc.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 22 Apr 2024 13:25:03 +1000
+Message-ID: <CAKmqyKOcYwAgEnV-gyUYu19dLCKx94-rMoaE5m-8FB0fq7AL+g@mail.gmail.com>
+Subject: Re: [RFC PATCH 1/3] target/riscv: change RISCV_EXCP_SEMIHOST
+ exception number
+To: =?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@rivosinc.com>
+Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Ved Shanbhogue <ved@rivosinc.com>, 
+ Atish Patra <atishp@rivosinc.com>, qemu-devel@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::932;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x932.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,19 +97,38 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 4/18/24 12:25, Philippe Mathieu-Daudé wrote:
-> When "hw/core/cpu.h" is not required, remove it.
-> 
-> Signed-off-by: Philippe Mathieu-Daudé<philmd@linaro.org>
+On Thu, Apr 18, 2024 at 11:40=E2=80=AFPM Cl=C3=A9ment L=C3=A9ger <cleger@ri=
+vosinc.com> wrote:
+>
+> The double trap specification defines the double trap exception number
+> to be 16 which is actually used by the internal semihosting one. Change
+> it to some other value.
+>
+> Signed-off-by: Cl=C3=A9ment L=C3=A9ger <cleger@rivosinc.com>
+
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
+Alistair
+
 > ---
->   include/exec/cpu-all.h    | 1 -
->   include/exec/cpu-defs.h   | 1 -
->   include/hw/boards.h       | 1 -
->   include/hw/ppc/openpic.h  | 1 -
->   include/sysemu/hw_accel.h | 1 -
->   5 files changed, 5 deletions(-)
-
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-
-r~
+>  target/riscv/cpu_bits.h | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index fc2068ee4d..9ade72ff31 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -670,7 +670,7 @@ typedef enum RISCVException {
+>      RISCV_EXCP_INST_PAGE_FAULT =3D 0xc, /* since: priv-1.10.0 */
+>      RISCV_EXCP_LOAD_PAGE_FAULT =3D 0xd, /* since: priv-1.10.0 */
+>      RISCV_EXCP_STORE_PAGE_FAULT =3D 0xf, /* since: priv-1.10.0 */
+> -    RISCV_EXCP_SEMIHOST =3D 0x10,
+> +    RISCV_EXCP_SEMIHOST =3D 0x11,
+>      RISCV_EXCP_INST_GUEST_PAGE_FAULT =3D 0x14,
+>      RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT =3D 0x15,
+>      RISCV_EXCP_VIRT_INSTRUCTION_FAULT =3D 0x16,
+> --
+> 2.43.0
+>
+>
 
