@@ -4,95 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB1F3C4345F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 23 Apr 2024 12:49:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB3C4C4345F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 23 Apr 2024 16:34:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rzFZX-0005BU-Gp; Tue, 23 Apr 2024 08:48:31 -0400
+	id 1rzJ5o-00049T-J9; Tue, 23 Apr 2024 12:34:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
- id 1rzFZS-00058H-0p
- for qemu-riscv@nongnu.org; Tue, 23 Apr 2024 08:48:26 -0400
-Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d])
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1rzJ5m-000494-SU
+ for qemu-riscv@nongnu.org; Tue, 23 Apr 2024 12:34:02 -0400
+Received: from mail-lf1-x12c.google.com ([2a00:1450:4864:20::12c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
- id 1rzFZP-0004xd-TF
- for qemu-riscv@nongnu.org; Tue, 23 Apr 2024 08:48:25 -0400
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-34b3f3764d3so251988f8f.3
- for <qemu-riscv@nongnu.org>; Tue, 23 Apr 2024 05:48:23 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1rzJ5l-0001PG-6l
+ for qemu-riscv@nongnu.org; Tue, 23 Apr 2024 12:34:02 -0400
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-516d2600569so7445756e87.0
+ for <qemu-riscv@nongnu.org>; Tue, 23 Apr 2024 09:33:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1713876501; x=1714481301;
- darn=nongnu.org; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=upmp17IZU71FfVax5a4XTIDXJxQ3I1tlzX3P4AJdJe4=;
- b=gUqUMUDiVK55BpKFPb/QvliRBZWR891RbsF3e0jqgOrJ4fKt8oVRPOYezs286V/9wG
- if5G2gkebv1ybcfCQbbYSiErs0/tr+FhZrW7KD6Wb5RirhRmYUL16sOWrgUqZmvYjHdo
- iwgFK/gTJ44vSepQN21/DOjE55JGbePMWBdaNBuTRmXq8ACmdoUYkYTu1bhrP+XDbhl8
- SFK49+aiHN1YTuNswPLBgBcPnN7np3h7HMD312TfsgwAnKFzBY4sVq8078i7su1kUq8N
- 0zUSnd5KgxzzXj5p8nKWh0iAAtyuAXsZLFfA2eh/pAh5DlA4x9XlfpC7GDFlJQWgMTKD
- FpQA==
+ d=sifive.com; s=google; t=1713890038; x=1714494838; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=U3JM07lnpUoNLbh9z5M56/L9GuYgZeYjNXzA0bB/EHo=;
+ b=JxeNIuvxQJwVn9J0dMPr+azDIHHt3R2YasUuimXTZqsLKZMi3gdz5IcBkJsZd/pcsi
+ gvAjL5amj99TryIgKFRJ2eJpiagyn2Yf/syA8Pqzw4XHx6rLB1Xi59ftWhWJQDktQmoG
+ pjkNT/JmdlOfDJHdlW4LTsBcklzvPziVd63Z5fxGMPjmAOCDiM1sXBptRION5S2VHmaO
+ IJFj/f8tAZLNX0Xb5Lj7gn8/3HyFzPloSsFTPWu0BvPo/4xqCIdjExbPXvalpnBfBiBf
+ dbj+JagJZxRy8UjRBqwlwzgCP105TyBG0F27xm/SNCP7OJZOoUfPzxG28m+e3Nx2t2f4
+ jJTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713876501; x=1714481301;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=upmp17IZU71FfVax5a4XTIDXJxQ3I1tlzX3P4AJdJe4=;
- b=lHw7ZkehXwBdyhw/BXPsxAwnEEtqHwRXKKTN7iD09L7p7YykISoHYypqEbLhhjaTJF
- h677KzG92ihYtW+Xsz5JP4otOolIVMh550fZfpeKN0schyTzXKOAhaHtvS6Pdm12zyIE
- B/5MtsbQHOVEpveD2CfQrBvTNXtxcCu6Icr/UOUCCP6dC1qVDjQXPernixgPqOroDwLD
- 3yh8FGeKS5hWncj3mYXTiNcOlHFtCN0KQNpKgN1WAnj/jghqfy965EBON8CZV+j04Xmy
- 8CkdMgGhKaamhJFYyGFLB7w35YAfqf/G2wElj379Ad4/jVdhX3k4c458UF2UwAqO3o3A
- etZQ==
+ d=1e100.net; s=20230601; t=1713890038; x=1714494838;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=U3JM07lnpUoNLbh9z5M56/L9GuYgZeYjNXzA0bB/EHo=;
+ b=Hrh4JP+CwJpWYRmrO2KaZgfieXn9tVwQJqkiTecBpq9A9HNZhKaEsxlUQuQNnWcELp
+ nA5k8MrZcyMsCfKlDKU3Naa44JNZQucX25J52jbilO2Lv+iyygQGoSMS49GUV5cWUhcQ
+ pesBNTxAAEniV+ngNNGtQ/rjMoaAhl6OelGjLmENM2u5/jLtpUHUlp7+FWgSMyrSvh1+
+ iSb3d8C8y3rmaiboedAD4gwSCTy2bbvG9fTvmEGjG9x034378HoY6Ad6YTIQLaYXS8HS
+ p2BlpuxaBh5vEAwDQ9SOWKpfu3czEbj8qbMdhcZbmdiBl9q7kphdxtaG99FFN9aEv8/S
+ beLw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWf66KZkQsk6FHNlU1RIzL1lFH/cNufM9uSRovxSfcJ1J4YtqS17alIFpee3JCm1ZjlPH7arr7OXN7TveVumnCbEMm/ZC4=
-X-Gm-Message-State: AOJu0YzNAeh3IA05+PxEEJnHXu4iRDraxyY+QpdqT5nz35LUT/RBPu1/
- gV3rIO7Rpo/3XFWH9wCya9XCkqb1yOaj0n1n/j9UaSM1XRgyazHXIYPYUEeVARE=
-X-Google-Smtp-Source: AGHT+IFM52nFpTIiBtxGX82x28khIr4XteXRd9BeoHvRfr59TX2Ajz7HprGksnHgNFNUs5RFk94OWw==
-X-Received: by 2002:a05:600c:3b09:b0:418:ef65:4b11 with SMTP id
- m9-20020a05600c3b0900b00418ef654b11mr10129528wms.2.1713876501580; 
- Tue, 23 Apr 2024 05:48:21 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:999:a3a0:71cb:1f75:7053:849c?
- ([2a01:e0a:999:a3a0:71cb:1f75:7053:849c])
- by smtp.gmail.com with ESMTPSA id
- i13-20020a05600c354d00b00419fba938d8sm11455806wmq.27.2024.04.23.05.48.19
+ AJvYcCUWQsa4Xz7Om+VrSTTIzxrNMmSFTtJQ/XdhXAeuJqtBDzuC/HPFnwv/M1cPpFvMg/7SoKlKs2ROYuqSGGmEZxlkP8zuXQg=
+X-Gm-Message-State: AOJu0YwHRxKHnDWkrHoxk8CSdskgRAZvOp9899WHGEEV9qcDZ/b1xPHB
+ bAmgGM6caS8/ohRN2+zt3/RBWh9ohdufjOLlPmIZSr3Rs+QTZEb58Wa0lbhlDNoENmT3V1b3gjJ
+ +MDA=
+X-Google-Smtp-Source: AGHT+IE45Vx8RE9YX7zAGUW2SrmmTJ+sA8NU+gsV9kgYVxDVDF84RaXBK1zaLblIhIU6jIKIMzg0ig==
+X-Received: by 2002:a19:c207:0:b0:51a:c28c:4d01 with SMTP id
+ l7-20020a19c207000000b0051ac28c4d01mr56724lfc.15.1713890037562; 
+ Tue, 23 Apr 2024 09:33:57 -0700 (PDT)
+Received: from mail-lj1-f172.google.com (mail-lj1-f172.google.com.
+ [209.85.208.172]) by smtp.gmail.com with ESMTPSA id
+ h9-20020ac25969000000b00518e44b5d4dsm2068947lfp.98.2024.04.23.09.33.57
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 23 Apr 2024 05:48:20 -0700 (PDT)
-Message-ID: <3cec0ced-b017-4875-99fe-b1222b2f4372@rivosinc.com>
-Date: Tue, 23 Apr 2024 14:48:18 +0200
+ Tue, 23 Apr 2024 09:33:57 -0700 (PDT)
+Received: by mail-lj1-f172.google.com with SMTP id
+ 38308e7fff4ca-2dcbcfe11f8so45802621fa.2; 
+ Tue, 23 Apr 2024 09:33:57 -0700 (PDT)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWjRmBBj/3mHbKF9bTMnYrn7IP7j+kyOUTUz2SMSIL+6C//6TcTMKel3BVQMcwVoXLjMYFzbdZhxApgGzbbr48BJuTdqOU=
+X-Received: by 2002:a2e:9a95:0:b0:2da:9f24:44a8 with SMTP id
+ p21-20020a2e9a95000000b002da9f2444a8mr9503460lji.11.1713890037092; Tue, 23
+ Apr 2024 09:33:57 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] target/riscv: change RISCV_EXCP_SEMIHOST exception number
- to 63
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org
-Cc: Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei
- <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org,
- Anup Patel <apatel@ventanamicro.com>
-References: <20240422135840.1959967-1-cleger@rivosinc.com>
- <b0fcb589-9217-4d30-8b72-5b0210ea871f@ventanamicro.com>
- <73af7008-f40a-4861-8826-2de4d5fc0564@linaro.org>
- <a3b54b5b-005f-46e4-a472-adbbf7d38635@ventanamicro.com>
-Content-Language: en-US
-From: =?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@rivosinc.com>
-In-Reply-To: <a3b54b5b-005f-46e4-a472-adbbf7d38635@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42d;
- envelope-from=cleger@rivosinc.com; helo=mail-wr1-x42d.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+References: <20240307160319.675044-1-dbarboza@ventanamicro.com>
+ <20240307160319.675044-2-dbarboza@ventanamicro.com>
+In-Reply-To: <20240307160319.675044-2-dbarboza@ventanamicro.com>
+From: Frank Chang <frank.chang@sifive.com>
+Date: Wed, 24 Apr 2024 00:33:45 +0800
+X-Gmail-Original-Message-ID: <CANzO1D0q5nv7TAWkTS03CaNFS7visaewDS4Of5PzWxA+LdhFvg@mail.gmail.com>
+Message-ID: <CANzO1D0q5nv7TAWkTS03CaNFS7visaewDS4Of5PzWxA+LdhFvg@mail.gmail.com>
+Subject: Re: [PATCH v2 01/15] exec/memtxattr: add process identifier to the
+ transaction attributes
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com, ajones@ventanamicro.com, tjeznach@rivosinc.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::12c;
+ envelope-from=frank.chang@sifive.com; helo=mail-lf1-x12c.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -108,70 +109,41 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Reviewed-by: Frank Chang <frank.chang@sifive.com>
 
-
-On 22/04/2024 21:58, Daniel Henrique Barboza wrote:
-> 
-> 
-> On 4/22/24 16:44, Richard Henderson wrote:
->> On 4/22/24 10:45, Daniel Henrique Barboza wrote:
->>> Palmer, Anup,
->>>
->>> On 4/22/24 10:58, Clément Léger wrote:
->>>> The current semihost exception number (16) is a reserved number (range
->>>> [16-17]). The upcoming double trap specification uses that number for
->>>> the double trap exception. Since the privileged spec (Table 22) defines
->>>> ranges for custom uses change the semihosting exception number to 63
->>>> which belongs to the range [48-63] in order to avoid any future
->>>> collisions with reserved exception.
->>>
->>>
->>> I didn't find any reference to a number for the SEMIHOST exception here:
->>>
->>>
->>> https://github.com/riscv-non-isa/riscv-semihosting
->>>
->>>
->>> Do we have any potential candidates? I would like to avoid, if
->>> possible, setting
->>> RISCV_EXCP_SEMIHOST to 63 as a band-aid just to replace it later on
->>> by the real
->>> value.
->>
->> RISCV_EXCP_SEMIHOST is internal to the qemu implementation and will
->> never be delivered to the guest.
->>
->> I suggest using a number high in the >64 reserved range which will
->> (likely) never be used by any implementation, including ones that *do*
->> define implementation-specific exceptions.  Which seems more likely
->> than not within the "implementation defined" range.
->>
->> E.g. target/i386 uses 0x100+n for qemu internal exceptions.
-> 
-> I'm not sure if we have a range for risc-v qemu internal exceptions
-> only. IIRC we don't.
-> 
-> If that's really the case I believe we could use whatever i386/ARM uses.
-> At least we'll have some
-> standardization.
-
-The spec also states that numbers >= 64 are reserved which is why using
-a one for custom use was making sense.
-
-Thanks,
-
-Clément
-
-> 
-> 
-> Thanks,
-> 
-> Daniel
-> 
->>
->> But in any case, the number can be redefined at will and not cause
->> compatibility issues.
->>
->>
->> r~
+Daniel Henrique Barboza <dbarboza@ventanamicro.com> =E6=96=BC 2024=E5=B9=B4=
+3=E6=9C=888=E6=97=A5 =E9=80=B1=E4=BA=94 =E4=B8=8A=E5=8D=8812:04=E5=AF=AB=E9=
+=81=93=EF=BC=9A
+>
+> From: Tomasz Jeznach <tjeznach@rivosinc.com>
+>
+> Extend memory transaction attributes with process identifier to allow
+> per-request address translation logic to use requester_id / process_id
+> to identify memory mapping (e.g. enabling IOMMU w/ PASID translations).
+>
+> Signed-off-by: Tomasz Jeznach <tjeznach@rivosinc.com>
+> ---
+>  include/exec/memattrs.h | 5 +++++
+>  1 file changed, 5 insertions(+)
+>
+> diff --git a/include/exec/memattrs.h b/include/exec/memattrs.h
+> index 14cdd8d582..46d0725416 100644
+> --- a/include/exec/memattrs.h
+> +++ b/include/exec/memattrs.h
+> @@ -52,6 +52,11 @@ typedef struct MemTxAttrs {
+>      unsigned int memory:1;
+>      /* Requester ID (for MSI for example) */
+>      unsigned int requester_id:16;
+> +
+> +    /*
+> +     * PCI PASID support: Limited to 8 bits process identifier.
+> +     */
+> +    unsigned int pasid:8;
+>  } MemTxAttrs;
+>
+>  /* Bus masters which don't specify any attributes will get this,
+> --
+> 2.43.2
+>
+>
 
