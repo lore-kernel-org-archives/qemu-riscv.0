@@ -4,80 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2613C4345F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 23 Apr 2024 06:05:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB1F3C4345F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 23 Apr 2024 12:49:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rz9H3-0006HO-7i; Tue, 23 Apr 2024 02:05:01 -0400
+	id 1rzFZX-0005BU-Gp; Tue, 23 Apr 2024 08:48:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rz9H1-0006Gp-OJ; Tue, 23 Apr 2024 02:04:59 -0400
-Received: from mail-vk1-xa29.google.com ([2607:f8b0:4864:20::a29])
+ (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
+ id 1rzFZS-00058H-0p
+ for qemu-riscv@nongnu.org; Tue, 23 Apr 2024 08:48:26 -0400
+Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1rz9H0-0006eX-3o; Tue, 23 Apr 2024 02:04:59 -0400
-Received: by mail-vk1-xa29.google.com with SMTP id
- 71dfb90a1353d-4dac112e142so1543929e0c.1; 
- Mon, 22 Apr 2024 23:04:56 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
+ id 1rzFZP-0004xd-TF
+ for qemu-riscv@nongnu.org; Tue, 23 Apr 2024 08:48:25 -0400
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-34b3f3764d3so251988f8f.3
+ for <qemu-riscv@nongnu.org>; Tue, 23 Apr 2024 05:48:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713852296; x=1714457096; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FzNLZv4GXpHsLODlul+fM8UateOwerdI9bTqnW6mn5o=;
- b=LgeqJzPE1o0qKAI8W/kNOy+5qnewksi/JpCKCqIl4qPkmTEuHShR/1c5i1eGNajthY
- GQOizSsscGgC+vlmykbzEEaeeJdPQbeqcioavu1+T0W2knchfoODPNaVNvYGViiDA6SU
- XjWLdInvpTgl37OsUi4lHv6Jfyisw2ldJn1jakoW5Ql7i9xFZVqEamz7VQpHSPF0jtyZ
- aX7mKOtzGauD5COfD/l31SYG3YKMSSOyXSgjnG4kVQKqobb5KZGZvsmXwbfX1tRpiX5T
- aGcZjfFizGYd817rF6b4GPOPlXkodKI6AfSz1s8xH6T34lsfq0i+N5XJA/3xEkTsIVgg
- 3Dnw==
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1713876501; x=1714481301;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=upmp17IZU71FfVax5a4XTIDXJxQ3I1tlzX3P4AJdJe4=;
+ b=gUqUMUDiVK55BpKFPb/QvliRBZWR891RbsF3e0jqgOrJ4fKt8oVRPOYezs286V/9wG
+ if5G2gkebv1ybcfCQbbYSiErs0/tr+FhZrW7KD6Wb5RirhRmYUL16sOWrgUqZmvYjHdo
+ iwgFK/gTJ44vSepQN21/DOjE55JGbePMWBdaNBuTRmXq8ACmdoUYkYTu1bhrP+XDbhl8
+ SFK49+aiHN1YTuNswPLBgBcPnN7np3h7HMD312TfsgwAnKFzBY4sVq8078i7su1kUq8N
+ 0zUSnd5KgxzzXj5p8nKWh0iAAtyuAXsZLFfA2eh/pAh5DlA4x9XlfpC7GDFlJQWgMTKD
+ FpQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713852296; x=1714457096;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=FzNLZv4GXpHsLODlul+fM8UateOwerdI9bTqnW6mn5o=;
- b=GLdlJNI7xVXNn2Ci6bHdm+8LcXbidUMFcLD3hK5eB/WL4FdWch02KqQRxS59Lylpkr
- HVtEdN2VkPd1uzBCFgQKHp5h6KuLHb+uKplr6n6Ujslprs4kpMxVhUMtx1rPgaLz97H+
- PgnFYpZqG48G12CUME7jtyaKsulaAzpPADFH6m6xC54hHk3KDW80HGRKV2aPhFtqMsBZ
- 9izMhTV7/TI/ZdOH77lfwws4KxPITVIy67EcvFggVciIzvYtfjUljrIdDpMgtmzrtDJQ
- uF0s6ckA1jLJD89vziKBuWwhgn/s85vnGg8/v1eZVM9yU/liyFr8tTozTl66ei4ty5OT
- uYSw==
+ d=1e100.net; s=20230601; t=1713876501; x=1714481301;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=upmp17IZU71FfVax5a4XTIDXJxQ3I1tlzX3P4AJdJe4=;
+ b=lHw7ZkehXwBdyhw/BXPsxAwnEEtqHwRXKKTN7iD09L7p7YykISoHYypqEbLhhjaTJF
+ h677KzG92ihYtW+Xsz5JP4otOolIVMh550fZfpeKN0schyTzXKOAhaHtvS6Pdm12zyIE
+ B/5MtsbQHOVEpveD2CfQrBvTNXtxcCu6Icr/UOUCCP6dC1qVDjQXPernixgPqOroDwLD
+ 3yh8FGeKS5hWncj3mYXTiNcOlHFtCN0KQNpKgN1WAnj/jghqfy965EBON8CZV+j04Xmy
+ 8CkdMgGhKaamhJFYyGFLB7w35YAfqf/G2wElj379Ad4/jVdhX3k4c458UF2UwAqO3o3A
+ etZQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVhSCHuj21EbsbuhN0BQrJMjkk194xUBLay8MuqyvmQFSfGrmfYuIrI3BFaN5DgHx64YwhmM6Br3vBk7A+56g1Fy4ZXq80=
-X-Gm-Message-State: AOJu0YzGIZZvSxjBL9ni8QQDoIzSR8Fn6uG+7h9zi19bglKCjtQ/JM1H
- ZaUZvztHaQXgHdtO0+DC28tPdk5g7/8L8xb04QNK9ndTu9810esjsZUAKXqhmsXEL58PlnXZnyJ
- 5dWwrX64l8ufJdZ+J7THlEOLC7oI=
-X-Google-Smtp-Source: AGHT+IH3IUGPAV4yReCKQxfyNroNCSD+X9LwrrkgussOskvOm0BRwLcYd7yrz948GVDxW2RN88a4PvSTtP0gG5JyuiA=
-X-Received: by 2002:a05:6122:3115:b0:4d4:ef9:719d with SMTP id
- cg21-20020a056122311500b004d40ef9719dmr14284415vkb.5.1713852296182; Mon, 22
- Apr 2024 23:04:56 -0700 (PDT)
+ AJvYcCWf66KZkQsk6FHNlU1RIzL1lFH/cNufM9uSRovxSfcJ1J4YtqS17alIFpee3JCm1ZjlPH7arr7OXN7TveVumnCbEMm/ZC4=
+X-Gm-Message-State: AOJu0YzNAeh3IA05+PxEEJnHXu4iRDraxyY+QpdqT5nz35LUT/RBPu1/
+ gV3rIO7Rpo/3XFWH9wCya9XCkqb1yOaj0n1n/j9UaSM1XRgyazHXIYPYUEeVARE=
+X-Google-Smtp-Source: AGHT+IFM52nFpTIiBtxGX82x28khIr4XteXRd9BeoHvRfr59TX2Ajz7HprGksnHgNFNUs5RFk94OWw==
+X-Received: by 2002:a05:600c:3b09:b0:418:ef65:4b11 with SMTP id
+ m9-20020a05600c3b0900b00418ef654b11mr10129528wms.2.1713876501580; 
+ Tue, 23 Apr 2024 05:48:21 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:999:a3a0:71cb:1f75:7053:849c?
+ ([2a01:e0a:999:a3a0:71cb:1f75:7053:849c])
+ by smtp.gmail.com with ESMTPSA id
+ i13-20020a05600c354d00b00419fba938d8sm11455806wmq.27.2024.04.23.05.48.19
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 23 Apr 2024 05:48:20 -0700 (PDT)
+Message-ID: <3cec0ced-b017-4875-99fe-b1222b2f4372@rivosinc.com>
+Date: Tue, 23 Apr 2024 14:48:18 +0200
 MIME-Version: 1.0
-References: <20240409014445.278-1-gaoshanliukou@163.com>
-In-Reply-To: <20240409014445.278-1-gaoshanliukou@163.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 23 Apr 2024 16:04:29 +1000
-Message-ID: <CAKmqyKM-0P+qbLZ0AB_NUOQEW5ypE8u=40ggi_=smtJjh8pYkg@mail.gmail.com>
-Subject: Re: [PATCH] hw/intc/riscv_aplic: APLICs should add child earlier than
- realize
-To: "yang.zhang" <gaoshanliukou@163.com>
-Cc: qemu-devel@nongnu.org, dbarboza@ventanamicro.com, bin.meng@windriver.com, 
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org, 
- "yang.zhang" <yang.zhang@hexintek.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a29;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa29.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] target/riscv: change RISCV_EXCP_SEMIHOST exception number
+ to 63
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org
+Cc: Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org,
+ Anup Patel <apatel@ventanamicro.com>
+References: <20240422135840.1959967-1-cleger@rivosinc.com>
+ <b0fcb589-9217-4d30-8b72-5b0210ea871f@ventanamicro.com>
+ <73af7008-f40a-4861-8826-2de4d5fc0564@linaro.org>
+ <a3b54b5b-005f-46e4-a472-adbbf7d38635@ventanamicro.com>
+Content-Language: en-US
+From: =?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@rivosinc.com>
+In-Reply-To: <a3b54b5b-005f-46e4-a472-adbbf7d38635@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::42d;
+ envelope-from=cleger@rivosinc.com; helo=mail-wr1-x42d.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -93,56 +108,70 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Apr 9, 2024 at 11:46=E2=80=AFAM yang.zhang <gaoshanliukou@163.com> =
-wrote:
->
-> From: "yang.zhang" <yang.zhang@hexintek.com>
->
-> Since only root APLICs can have hw IRQ lines, aplic->parent should
-> be initialized first.
->
-> Fixes: e8f79343cf ("hw/intc: Add RISC-V AIA APLIC device emulation")
-> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> Signed-off-by: yang.zhang <yang.zhang@hexintek.com>
 
-Thanks!
 
-Applied to riscv-to-apply.next
+On 22/04/2024 21:58, Daniel Henrique Barboza wrote:
+> 
+> 
+> On 4/22/24 16:44, Richard Henderson wrote:
+>> On 4/22/24 10:45, Daniel Henrique Barboza wrote:
+>>> Palmer, Anup,
+>>>
+>>> On 4/22/24 10:58, Clément Léger wrote:
+>>>> The current semihost exception number (16) is a reserved number (range
+>>>> [16-17]). The upcoming double trap specification uses that number for
+>>>> the double trap exception. Since the privileged spec (Table 22) defines
+>>>> ranges for custom uses change the semihosting exception number to 63
+>>>> which belongs to the range [48-63] in order to avoid any future
+>>>> collisions with reserved exception.
+>>>
+>>>
+>>> I didn't find any reference to a number for the SEMIHOST exception here:
+>>>
+>>>
+>>> https://github.com/riscv-non-isa/riscv-semihosting
+>>>
+>>>
+>>> Do we have any potential candidates? I would like to avoid, if
+>>> possible, setting
+>>> RISCV_EXCP_SEMIHOST to 63 as a band-aid just to replace it later on
+>>> by the real
+>>> value.
+>>
+>> RISCV_EXCP_SEMIHOST is internal to the qemu implementation and will
+>> never be delivered to the guest.
+>>
+>> I suggest using a number high in the >64 reserved range which will
+>> (likely) never be used by any implementation, including ones that *do*
+>> define implementation-specific exceptions.  Which seems more likely
+>> than not within the "implementation defined" range.
+>>
+>> E.g. target/i386 uses 0x100+n for qemu internal exceptions.
+> 
+> I'm not sure if we have a range for risc-v qemu internal exceptions
+> only. IIRC we don't.
+> 
+> If that's really the case I believe we could use whatever i386/ARM uses.
+> At least we'll have some
+> standardization.
 
-Alistair
+The spec also states that numbers >= 64 are reserved which is why using
+a one for custom use was making sense.
 
-> ---
->  hw/intc/riscv_aplic.c | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
->
-> diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
-> index fc5df0d598..32edd6d07b 100644
-> --- a/hw/intc/riscv_aplic.c
-> +++ b/hw/intc/riscv_aplic.c
-> @@ -1000,16 +1000,16 @@ DeviceState *riscv_aplic_create(hwaddr addr, hwad=
-dr size,
->      qdev_prop_set_bit(dev, "msimode", msimode);
->      qdev_prop_set_bit(dev, "mmode", mmode);
->
-> +    if (parent) {
-> +        riscv_aplic_add_child(parent, dev);
-> +    }
-> +
->      sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
->
->      if (!is_kvm_aia(msimode)) {
->          sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
->      }
->
-> -    if (parent) {
-> -        riscv_aplic_add_child(parent, dev);
-> -    }
-> -
->      if (!msimode) {
->          for (i =3D 0; i < num_harts; i++) {
->              CPUState *cpu =3D cpu_by_arch_id(hartid_base + i);
-> --
-> 2.25.1
->
->
+Thanks,
+
+Clément
+
+> 
+> 
+> Thanks,
+> 
+> Daniel
+> 
+>>
+>> But in any case, the number can be redefined at will and not cause
+>> compatibility issues.
+>>
+>>
+>> r~
 
