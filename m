@@ -4,85 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6074C4345F
-	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Apr 2024 14:47:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA2FCC10F15
+	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Apr 2024 17:19:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rzdtb-00076Y-0g; Wed, 24 Apr 2024 10:46:51 -0400
+	id 1rzgH0-0001x8-7D; Wed, 24 Apr 2024 13:19:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1rzdtV-00076D-GW
- for qemu-riscv@nongnu.org; Wed, 24 Apr 2024 10:46:45 -0400
-Received: from mail-ej1-x635.google.com ([2a00:1450:4864:20::635])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rzgGr-0001wR-OY
+ for qemu-riscv@nongnu.org; Wed, 24 Apr 2024 13:19:02 -0400
+Received: from mail-oi1-x22e.google.com ([2607:f8b0:4864:20::22e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1rzdtS-0005ga-PC
- for qemu-riscv@nongnu.org; Wed, 24 Apr 2024 10:46:45 -0400
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-a559b919303so511911766b.1
- for <qemu-riscv@nongnu.org>; Wed, 24 Apr 2024 07:46:42 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rzgGn-00071T-If
+ for qemu-riscv@nongnu.org; Wed, 24 Apr 2024 13:18:59 -0400
+Received: by mail-oi1-x22e.google.com with SMTP id
+ 5614622812f47-3c75139645aso97233b6e.1
+ for <qemu-riscv@nongnu.org>; Wed, 24 Apr 2024 10:18:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1713970001; x=1714574801; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=YqZ0BRIapaMHeZ3lavwFhX+MMvltS4Y1Ce+4y0p7Jts=;
- b=FR2PfGcNiSjHZb5XqVyPghY4VGG+YPv7EeIzHMXaHCxXjkgTZU8G4Irx3jwtEbX+wK
- gyS7sBb7g2H6KC0E9VrZKVPzpAs/45XWmXNSJdfV7Wo6fXNeKm1ZWNECmZknLRMdZUUS
- yHkLC1kFOwRS9eFMR6t/2wDJHrMAc2wTee7BrwaYeB4PyYPQ8vz+45qY/e8NfZF6OWNr
- ir8QbaKeTgjFiFWdy0CLfjDQdeWsCX9ekNhMjYHLuXPUSV0LDCEf2PQXcd9a9YhInKpD
- BYJs1a4r4hzFxer7ctuCIB9B6Xo7L1znbWkLzdYR4CxBWWlpUCOr84dwk5CJ88XzGftM
- Fdqw==
+ d=ventanamicro.com; s=google; t=1713979136; x=1714583936; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=GsOCIQKFSyHzRI8PbcW9VcRuxJW59AWgDAEe38Er4SI=;
+ b=QEiXX6Lz07YoOYbOXmddMidTty7TygN9qVDPOw3Z1qcegKd+Xga8JdHskcV5G0lgV0
+ KIrSj+5QY5hBPWT55AzI9ouDADex82U+5KLgLT5LVuMhIfySNzK/hSVTdNCyOhybl6nQ
+ fD6fpy8zkuMtLOKg2Z48afwN6eCSvm36Gs47Hy5x/dp2bSImHgSGG2080OpHwk5ZwQwa
+ BjNIFZ+i9cN63NaOVU7kEq4kES2IwdpfWJ0bXx61vddwpsSDC1KkiK2pu91Fp4O5nslP
+ pcy3kqAGxCdHc8w1xWU8Xcsy+un0uON3feeQthUPKZR32f16BTsbk/o+aVWxI2Gi4KUQ
+ Y9Iw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713970001; x=1714574801;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=YqZ0BRIapaMHeZ3lavwFhX+MMvltS4Y1Ce+4y0p7Jts=;
- b=b46R87oIo3IhYQPnNoH+8OUzEhEcWOAYvIOilGDsYBisgdwgYhl9N5pV1TooZ9Jce4
- dmxtd4gwQd4DMb685JTKFT/gUsJSDS6GKRB6X2Uo8X0GpBvKrX7Cf/ga+Ms8Oax4hncS
- VKu7TioaQHiUfUnv8SIArm4frdzHtc1vXbYx3mD/Ve955c+w/tBnxi082908y293dvYz
- LEdogPGD/G58BrtFm1f62IcgY2IyYO30oAjBTEDCemjVMiUaGlq5X2o3bOvUm5Jc9vsY
- kc1eQvMM5IOHKvwLu5oF6pp9aXPEhOK6qskg30hu0bebL9zsyvs+u9i+XUOVGSvunxmF
- 8zHA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUfsjPOwoAR0ni5UlZm6eX/Y5IMwkSKtV9Zs7sKCl6YL1YKmCwLa0SOrjwO7vjZxhPn90rse6eFeFK/DqYldCk0gDQg5RM=
-X-Gm-Message-State: AOJu0Yww+BXUc+sdHh7NsXA5jOT2M7wvnu/ffmHVmxUIY9w89H+4P+vl
- GD18m5oTl8fL4NLUdo1p0tgRx+mVZY5MQ26qoWSyCpHrrKVB0+Wxycy+ShAmbNrC/Ef11tAr0iw
- KahI=
-X-Google-Smtp-Source: AGHT+IEeU8xcwX/+nJgDZkd944Ela0X3y0YOLO2axABSFVxGvvCvgYzsUFMvfOb+42Tw0AXDbq5z1w==
-X-Received: by 2002:a17:906:cb8f:b0:a58:71e7:d1e8 with SMTP id
- mf15-20020a170906cb8f00b00a5871e7d1e8mr1788434ejb.52.1713970000894; 
- Wed, 24 Apr 2024 07:46:40 -0700 (PDT)
-Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
- [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
+ d=1e100.net; s=20230601; t=1713979136; x=1714583936;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=GsOCIQKFSyHzRI8PbcW9VcRuxJW59AWgDAEe38Er4SI=;
+ b=j1+7m/SUjoBTcu+PpH0XYLCMmHV1TYjWx2O93RBiq+tL/TPDPa+KjJqoWEoJQh5LU0
+ +gsyk62CFa/DZUYddEWHH500DDjceSfu7b2R0To1jd0sTpSkN82ElZJSApp2gtZHOuGr
+ uGpUaJG/lXosRRFo8X92EeAdlXd/7gA5wuR5D1/HtHxMxdziFhSx88RgQZsCXPSPySWM
+ ha8mDYYtJ93nn/+qku1WeGIpNGtkOYDFCSWdgSx2cCTQE3UuQRfHUzGglxAH1rNd8+6i
+ ASdu8mR6gmVxbDUWJ6jA8ijn9pidGv7tBm0Vg03T5i64VmAUi4RfddT97ENEogFG7y+V
+ MXug==
+X-Gm-Message-State: AOJu0Yx9h5aPW6vNvps1WaLrYsqBI3XF0omSRKUJ/q+UXSPUv86DV7kS
+ N7+Db0hU2IOvJY6Ag69yO41+2AP74auufB0Z0c6lLsKrxPhwiLVhyfypyp4lcrQ=
+X-Google-Smtp-Source: AGHT+IHykTZG/3+gty8JFJ0bl7IKuHEPHVwwezTCdbRkivI28Xx4Dw55dXnfVZpjegvbe/zCqoHdYA==
+X-Received: by 2002:a05:6870:f10c:b0:222:99cb:2215 with SMTP id
+ k12-20020a056870f10c00b0022299cb2215mr3303030oac.28.1713979136046; 
+ Wed, 24 Apr 2024 10:18:56 -0700 (PDT)
+Received: from [192.168.68.110] ([191.255.35.121])
  by smtp.gmail.com with ESMTPSA id
- bu6-20020a170906a14600b00a57c75871d8sm2998529ejb.106.2024.04.24.07.46.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Apr 2024 07:46:40 -0700 (PDT)
-Date: Wed, 24 Apr 2024 16:46:39 +0200
-From: Andrew Jones <ajones@ventanamicro.com>
-To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: christoph.muellner@vrull.eu, palmer@dabbelt.com, 
- alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com, 
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com
-Subject: Re: [PATCH v3] target/riscv: Raise exceptions on wrs.nto
-Message-ID: <20240424-31025d6338d49bfbda2be736@orel>
-References: <20240424142808.62936-2-ajones@ventanamicro.com>
+ fa19-20020a056a002d1300b006e57247f4e5sm11680927pfb.8.2024.04.24.10.18.52
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 24 Apr 2024 10:18:55 -0700 (PDT)
+Message-ID: <a619f516-d174-428a-aa19-52664282265b@ventanamicro.com>
+Date: Wed, 24 Apr 2024 14:18:50 -0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240424142808.62936-2-ajones@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::635;
- envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x635.google.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] target/riscv/kvm: remove sneaky strerrorname_np()
+ instance
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ thuth@redhat.com, alex.bennee@linaro.org, mjt@tls.msk.ru,
+ ajones@ventanamicro.com
+References: <20240424094700.453356-1-dbarboza@ventanamicro.com>
+ <20240424094700.453356-2-dbarboza@ventanamicro.com>
+ <82079170-9d82-46d5-81e4-44d3b38b551f@linaro.org>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <82079170-9d82-46d5-81e4-44d3b38b551f@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::22e;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x22e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,118 +102,52 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Apr 24, 2024 at 04:28:09PM +0200, Andrew Jones wrote:
-> Implementing wrs.nto to always just return is consistent with the
-> specification, as the instruction is permitted to terminate the
-> stall for any reason, but it's not useful for virtualization, where
-> we'd like the guest to trap to the hypervisor in order to allow
-> scheduling of the lock holding VCPU. Change to always immediately
-> raise exceptions when the appropriate conditions are present,
-> otherwise continue to just return. Note, immediately raising
-> exceptions is also consistent with the specification since the
-> time limit that should expire prior to the exception is
-> implementation-specific.
-> 
-> Signed-off-by: Andrew Jones <ajones@ventanamicro.com>
-> Reviewed-by: Christoph M??llner <christoph.muellner@vrull.eu>
-> ---
-> v3:
->  - Sending again, hoping the ?? remains in M??llner
 
-This looks like my mail reader (neomutt)'s problem. The patch was correct
-(also for v2) and other readers render it correctly. Sorry for the noise.
+
+On 4/24/24 06:55, Philippe Mathieu-Daudé wrote:
+> On 24/4/24 11:46, Daniel Henrique Barboza wrote:
+>> Commit d424db2354 excluded some strerrorname_np() instances because they
+>> break musl libc builds. Another instance happened to slip by via commit
+>> d4ff3da8f4.
+>>
+>> Remove it before it causes trouble again.
+>>
+>> Fixes: d4ff3da8f4 (target/riscv/kvm: initialize 'vlenb' via get-reg-list)
+>> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>> ---
+>>   target/riscv/kvm/kvm-cpu.c | 4 ++--
+>>   1 file changed, 2 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+>> index 6a6c6cae80..ee69ea9785 100644
+>> --- a/target/riscv/kvm/kvm-cpu.c
+>> +++ b/target/riscv/kvm/kvm-cpu.c
+>> @@ -1054,8 +1054,8 @@ static void kvm_riscv_read_vlenb(RISCVCPU *cpu, KVMScratchCPU *kvmcpu,
+>>           ret = ioctl(kvmcpu->cpufd, KVM_GET_ONE_REG, &reg);
+>>           if (ret != 0) {
+>> -            error_report("Unable to read vlenb register, error code: %s",
+>> -                         strerrorname_np(errno));
+>> +            error_report("Unable to read vlenb register, error code: %d",
+>> +                         errno);
+> 
+> Why not use "%s" strerror(errno)?
+
+It's not exactly the same. For errno = 2 strerrorname_np() gives "ENOENT", and
+sterror() gives "No such file or directory". In this particular context I think
+just printing a "error code -2" is clearer because we're not mentioning files and
+dirs in a KVM reg context.
+
+But in the end I don't mind changing to strerror() if you feel strong about it. It's
+fine either way.
+
 
 Thanks,
-drew
 
-> v2:
->  - Added #ifndef CONFIG_USER_ONLY around helper call
+
+Daniel
+
 > 
->  target/riscv/helper.h                       |  1 +
->  target/riscv/insn_trans/trans_rvzawrs.c.inc | 29 ++++++++++++++-------
->  target/riscv/op_helper.c                    | 11 ++++++++
->  3 files changed, 32 insertions(+), 9 deletions(-)
-> 
-> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-> index 8a635238514d..451261ce5a4f 100644
-> --- a/target/riscv/helper.h
-> +++ b/target/riscv/helper.h
-> @@ -132,6 +132,7 @@ DEF_HELPER_6(csrrw_i128, tl, env, int, tl, tl, tl, tl)
->  DEF_HELPER_1(sret, tl, env)
->  DEF_HELPER_1(mret, tl, env)
->  DEF_HELPER_1(wfi, void, env)
-> +DEF_HELPER_1(wrs_nto, void, env)
->  DEF_HELPER_1(tlb_flush, void, env)
->  DEF_HELPER_1(tlb_flush_all, void, env)
->  /* Native Debug */
-> diff --git a/target/riscv/insn_trans/trans_rvzawrs.c.inc b/target/riscv/insn_trans/trans_rvzawrs.c.inc
-> index 32efbff4d5a5..0eef03383889 100644
-> --- a/target/riscv/insn_trans/trans_rvzawrs.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvzawrs.c.inc
-> @@ -16,7 +16,7 @@
->   * this program.  If not, see <http://www.gnu.org/licenses/>.
->   */
->  
-> -static bool trans_wrs(DisasContext *ctx)
-> +static bool trans_wrs_sto(DisasContext *ctx, arg_wrs_sto *a)
->  {
->      if (!ctx->cfg_ptr->ext_zawrs) {
->          return false;
-> @@ -40,12 +40,23 @@ static bool trans_wrs(DisasContext *ctx)
->      return true;
->  }
->  
-> -#define GEN_TRANS_WRS(insn)                                     \
-> -static bool trans_ ## insn(DisasContext *ctx, arg_ ## insn *a)  \
-> -{                                                               \
-> -    (void)a;                                                    \
-> -    return trans_wrs(ctx);                                      \
-> -}
-> +static bool trans_wrs_nto(DisasContext *ctx, arg_wrs_nto *a)
-> +{
-> +    if (!ctx->cfg_ptr->ext_zawrs) {
-> +        return false;
-> +    }
->  
-> -GEN_TRANS_WRS(wrs_nto)
-> -GEN_TRANS_WRS(wrs_sto)
-> +    /*
-> +     * Depending on the mode of execution, mstatus.TW and hstatus.VTW, wrs.nto
-> +     * should raise an exception when the implementation-specific bounded time
-> +     * limit has expired. Our time limit is zero, so we either return
-> +     * immediately, as does our implementation of wrs.sto, or raise an
-> +     * exception, as handled by the wrs.nto helper.
-> +     */
-> +#ifndef CONFIG_USER_ONLY
-> +    gen_helper_wrs_nto(tcg_env);
-> +#endif
-> +
-> +    /* We only get here when helper_wrs_nto() doesn't raise an exception. */
-> +    return trans_wrs_sto(ctx, NULL);
-> +}
-> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-> index f414aaebdbab..2baf5bc3ca19 100644
-> --- a/target/riscv/op_helper.c
-> +++ b/target/riscv/op_helper.c
-> @@ -380,6 +380,17 @@ void helper_wfi(CPURISCVState *env)
->      }
->  }
->  
-> +void helper_wrs_nto(CPURISCVState *env)
-> +{
-> +    if (env->virt_enabled && (env->priv == PRV_S || env->priv == PRV_U) &&
-> +        get_field(env->hstatus, HSTATUS_VTW) &&
-> +        !get_field(env->mstatus, MSTATUS_TW)) {
-> +        riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GETPC());
-> +    } else if (env->priv != PRV_M && get_field(env->mstatus, MSTATUS_TW)) {
-> +        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-> +    }
-> +}
-> +
->  void helper_tlb_flush(CPURISCVState *env)
->  {
->      CPUState *cs = env_cpu(env);
-> -- 
-> 2.44.0
+>>               exit(EXIT_FAILURE);
+>>           }
 > 
 
