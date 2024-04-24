@@ -4,94 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB3C4C4345F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 23 Apr 2024 16:34:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08A25C4345F
+	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Apr 2024 00:14:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rzJ5o-00049T-J9; Tue, 23 Apr 2024 12:34:04 -0400
+	id 1rzQH5-00087P-HF; Tue, 23 Apr 2024 20:14:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1rzJ5m-000494-SU
- for qemu-riscv@nongnu.org; Tue, 23 Apr 2024 12:34:02 -0400
-Received: from mail-lf1-x12c.google.com ([2a00:1450:4864:20::12c])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1rzQH2-000872-Ma; Tue, 23 Apr 2024 20:14:08 -0400
+Received: from mail-ua1-x92b.google.com ([2607:f8b0:4864:20::92b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1rzJ5l-0001PG-6l
- for qemu-riscv@nongnu.org; Tue, 23 Apr 2024 12:34:02 -0400
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-516d2600569so7445756e87.0
- for <qemu-riscv@nongnu.org>; Tue, 23 Apr 2024 09:33:59 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1rzQH0-0004xC-W1; Tue, 23 Apr 2024 20:14:08 -0400
+Received: by mail-ua1-x92b.google.com with SMTP id
+ a1e0cc1a2514c-7eb89aa9176so1876119241.3; 
+ Tue, 23 Apr 2024 17:14:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1713890038; x=1714494838; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1713917641; x=1714522441; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=U3JM07lnpUoNLbh9z5M56/L9GuYgZeYjNXzA0bB/EHo=;
- b=JxeNIuvxQJwVn9J0dMPr+azDIHHt3R2YasUuimXTZqsLKZMi3gdz5IcBkJsZd/pcsi
- gvAjL5amj99TryIgKFRJ2eJpiagyn2Yf/syA8Pqzw4XHx6rLB1Xi59ftWhWJQDktQmoG
- pjkNT/JmdlOfDJHdlW4LTsBcklzvPziVd63Z5fxGMPjmAOCDiM1sXBptRION5S2VHmaO
- IJFj/f8tAZLNX0Xb5Lj7gn8/3HyFzPloSsFTPWu0BvPo/4xqCIdjExbPXvalpnBfBiBf
- dbj+JagJZxRy8UjRBqwlwzgCP105TyBG0F27xm/SNCP7OJZOoUfPzxG28m+e3Nx2t2f4
- jJTw==
+ bh=Bqux2F1GZ9uFOQ6wr08fmB0cKm4rga5TZUBfcEt/pTM=;
+ b=OIxaxR044qPP3MBC5b10sl2Znyi35142kFbgUR64I98kPcr98TWig9xSEsArUZ5gcN
+ jO2CYR6+fyGK6Kva5BVa608YVqiEAY2BuvA2ERBdopUSjuAWR+/BaqDa2OI6OPQXAVyW
+ 0msLd+PfoMZZLFDauvwAREoxi9IWHbRvcWgu8Nk5eOwDLN80YA9+gWGEjQ7mvC+8FeTl
+ 3sg4xWhuqhqFDNEJ5H1elQ2pEtXSWYm3rI2kFMFYHFuqLmlD5zu8fNrRTsDwvtFy25R5
+ 0j1w1CEnH8C3HAPEUN/KIczJC+ylRRjU1gvkuEXpInyXyhTkx58TXQm9x3xHgWSfrtYu
+ VjqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713890038; x=1714494838;
+ d=1e100.net; s=20230601; t=1713917641; x=1714522441;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=U3JM07lnpUoNLbh9z5M56/L9GuYgZeYjNXzA0bB/EHo=;
- b=Hrh4JP+CwJpWYRmrO2KaZgfieXn9tVwQJqkiTecBpq9A9HNZhKaEsxlUQuQNnWcELp
- nA5k8MrZcyMsCfKlDKU3Naa44JNZQucX25J52jbilO2Lv+iyygQGoSMS49GUV5cWUhcQ
- pesBNTxAAEniV+ngNNGtQ/rjMoaAhl6OelGjLmENM2u5/jLtpUHUlp7+FWgSMyrSvh1+
- iSb3d8C8y3rmaiboedAD4gwSCTy2bbvG9fTvmEGjG9x034378HoY6Ad6YTIQLaYXS8HS
- p2BlpuxaBh5vEAwDQ9SOWKpfu3czEbj8qbMdhcZbmdiBl9q7kphdxtaG99FFN9aEv8/S
- beLw==
+ bh=Bqux2F1GZ9uFOQ6wr08fmB0cKm4rga5TZUBfcEt/pTM=;
+ b=ERJ9WgKlFAL68e/4W6r2n1+pfICsw6JkhmXYIoOzNSwJQupASaNtx0H0wRqwqDq77T
+ m9+olo5xPg0IX00CoOZSghzw9EoZcES9ktKhqDkbWAMQAy8jnJxuC+TK5t4tFzShoIaQ
+ thIz3V50bwdoM5SwEQ7mq4G+GxbnctpgtrLN2KK+qSFCIVadvY8lJcqk0ZznhYnWez0v
+ DSVK6LBLjsXsRKbIxUhBmddNBOd4onSaFKt2XIV3vZgAiJtoQAd86M9PEWasDrS0f4MF
+ hG+lIl9L774eJ1shobZ4KnaWInPnHcFhEYWqHxpsrtSiDkZOYB7LpW+xuDW81M35fRub
+ EtqA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUWQsa4Xz7Om+VrSTTIzxrNMmSFTtJQ/XdhXAeuJqtBDzuC/HPFnwv/M1cPpFvMg/7SoKlKs2ROYuqSGGmEZxlkP8zuXQg=
-X-Gm-Message-State: AOJu0YwHRxKHnDWkrHoxk8CSdskgRAZvOp9899WHGEEV9qcDZ/b1xPHB
- bAmgGM6caS8/ohRN2+zt3/RBWh9ohdufjOLlPmIZSr3Rs+QTZEb58Wa0lbhlDNoENmT3V1b3gjJ
- +MDA=
-X-Google-Smtp-Source: AGHT+IE45Vx8RE9YX7zAGUW2SrmmTJ+sA8NU+gsV9kgYVxDVDF84RaXBK1zaLblIhIU6jIKIMzg0ig==
-X-Received: by 2002:a19:c207:0:b0:51a:c28c:4d01 with SMTP id
- l7-20020a19c207000000b0051ac28c4d01mr56724lfc.15.1713890037562; 
- Tue, 23 Apr 2024 09:33:57 -0700 (PDT)
-Received: from mail-lj1-f172.google.com (mail-lj1-f172.google.com.
- [209.85.208.172]) by smtp.gmail.com with ESMTPSA id
- h9-20020ac25969000000b00518e44b5d4dsm2068947lfp.98.2024.04.23.09.33.57
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 23 Apr 2024 09:33:57 -0700 (PDT)
-Received: by mail-lj1-f172.google.com with SMTP id
- 38308e7fff4ca-2dcbcfe11f8so45802621fa.2; 
- Tue, 23 Apr 2024 09:33:57 -0700 (PDT)
-X-Forwarded-Encrypted: i=1;
- AJvYcCWjRmBBj/3mHbKF9bTMnYrn7IP7j+kyOUTUz2SMSIL+6C//6TcTMKel3BVQMcwVoXLjMYFzbdZhxApgGzbbr48BJuTdqOU=
-X-Received: by 2002:a2e:9a95:0:b0:2da:9f24:44a8 with SMTP id
- p21-20020a2e9a95000000b002da9f2444a8mr9503460lji.11.1713890037092; Tue, 23
- Apr 2024 09:33:57 -0700 (PDT)
+ AJvYcCVSz7TmxUoUGxRbVd3sRdKo0XZrPODHiMj5XNDKvvfuyJ8yAQDMO4pcZm/kUF9YcaRmafZrZnWeH1stabfXUxLzWnM/QG0=
+X-Gm-Message-State: AOJu0Yy/gVo8D8l9eTmQ90nLhFPMQJPWGSsBRCgQVjaNaNSiqknUAn1T
+ 3ieKXHI/eOsn6K5aiV9Xvvk+WCwsUNdnkrcXPxo7T4Pvfsw7bCPIU+jIUQg6r+zBJkQ7WR2b7sn
+ 7fWM9YD/Zwfee6mP9yMoAjeqfwtVcA/V+VOg=
+X-Google-Smtp-Source: AGHT+IGMYdKNzgEndLXYzaR9CjeGefEYs3SAXBgzbawvIEdyZ6B8UTsDCYa45izD1Q1jsO7sf/O3L6+QPc4kxr3pdVY=
+X-Received: by 2002:a05:6102:26c9:b0:47b:d34f:a4ca with SMTP id
+ m9-20020a05610226c900b0047bd34fa4camr1342382vss.30.1713917640817; Tue, 23 Apr
+ 2024 17:14:00 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240307160319.675044-1-dbarboza@ventanamicro.com>
- <20240307160319.675044-2-dbarboza@ventanamicro.com>
-In-Reply-To: <20240307160319.675044-2-dbarboza@ventanamicro.com>
-From: Frank Chang <frank.chang@sifive.com>
-Date: Wed, 24 Apr 2024 00:33:45 +0800
-X-Gmail-Original-Message-ID: <CANzO1D0q5nv7TAWkTS03CaNFS7visaewDS4Of5PzWxA+LdhFvg@mail.gmail.com>
-Message-ID: <CANzO1D0q5nv7TAWkTS03CaNFS7visaewDS4Of5PzWxA+LdhFvg@mail.gmail.com>
-Subject: Re: [PATCH v2 01/15] exec/memtxattr: add process identifier to the
- transaction attributes
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com, ajones@ventanamicro.com, tjeznach@rivosinc.com
+References: <20240422134605.534207-2-ajones@ventanamicro.com>
+In-Reply-To: <20240422134605.534207-2-ajones@ventanamicro.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 24 Apr 2024 10:13:34 +1000
+Message-ID: <CAKmqyKNX=gnWgTBDp60W_iZk3aEfcNbvfhB+N6ZoWvkQdwxgkg@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv/kvm: Fix exposure of Zkr
+To: Andrew Jones <ajones@ventanamicro.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ kvm-riscv@lists.infradead.org, palmer@dabbelt.com, alistair.francis@wdc.com, 
+ bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com, 
+ zhiwei_liu@linux.alibaba.com, apatel@ventanamicro.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::12c;
- envelope-from=frank.chang@sifive.com; helo=mail-lf1-x12c.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92b;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92b.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -109,41 +93,134 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Reviewed-by: Frank Chang <frank.chang@sifive.com>
+On Mon, Apr 22, 2024 at 11:47=E2=80=AFPM Andrew Jones <ajones@ventanamicro.=
+com> wrote:
+>
+> The Zkr extension may only be exposed to KVM guests if the VMM
+> implements the SEED CSR. Use the same implementation as TCG.
+>
+> Without this patch, running with a KVM which does not forward the
+> SEED CSR access to QEMU will result in an ILL exception being
+> injected into the guest (this results in Linux guests crashing on
+> boot). And, when running with a KVM which does forward the access,
+> QEMU will crash, since QEMU doesn't know what to do with the exit.
+>
+> Fixes: 3108e2f1c69d ("target/riscv/kvm: update KVM exts to Linux 6.8")
+> Signed-off-by: Andrew Jones <ajones@ventanamicro.com>
 
-Daniel Henrique Barboza <dbarboza@ventanamicro.com> =E6=96=BC 2024=E5=B9=B4=
-3=E6=9C=888=E6=97=A5 =E9=80=B1=E4=BA=94 =E4=B8=8A=E5=8D=8812:04=E5=AF=AB=E9=
-=81=93=EF=BC=9A
->
-> From: Tomasz Jeznach <tjeznach@rivosinc.com>
->
-> Extend memory transaction attributes with process identifier to allow
-> per-request address translation logic to use requester_id / process_id
-> to identify memory mapping (e.g. enabling IOMMU w/ PASID translations).
->
-> Signed-off-by: Tomasz Jeznach <tjeznach@rivosinc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
+
+Alistair
+
 > ---
->  include/exec/memattrs.h | 5 +++++
->  1 file changed, 5 insertions(+)
+>  target/riscv/cpu.h         |  3 +++
+>  target/riscv/csr.c         | 18 ++++++++++++++----
+>  target/riscv/kvm/kvm-cpu.c | 25 +++++++++++++++++++++++++
+>  3 files changed, 42 insertions(+), 4 deletions(-)
 >
-> diff --git a/include/exec/memattrs.h b/include/exec/memattrs.h
-> index 14cdd8d582..46d0725416 100644
-> --- a/include/exec/memattrs.h
-> +++ b/include/exec/memattrs.h
-> @@ -52,6 +52,11 @@ typedef struct MemTxAttrs {
->      unsigned int memory:1;
->      /* Requester ID (for MSI for example) */
->      unsigned int requester_id:16;
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 3b1a02b9449a..52fb8c15d08f 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -821,6 +821,9 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operation=
+s *ops);
+>
+>  void riscv_cpu_register_gdb_regs_for_features(CPUState *cs);
+>
+> +target_ulong riscv_new_csr_seed(target_ulong new_value,
+> +                                target_ulong write_mask);
 > +
-> +    /*
-> +     * PCI PASID support: Limited to 8 bits process identifier.
-> +     */
-> +    unsigned int pasid:8;
->  } MemTxAttrs;
+>  uint8_t satp_mode_max_from_map(uint32_t map);
+>  const char *satp_mode_str(uint8_t satp_mode, bool is_32_bit);
 >
->  /* Bus masters which don't specify any attributes will get this,
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 726096444fae..829d8346ed4e 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -4267,10 +4267,8 @@ static RISCVException write_upmbase(CPURISCVState =
+*env, int csrno,
+>  #endif
+>
+>  /* Crypto Extension */
+> -static RISCVException rmw_seed(CPURISCVState *env, int csrno,
+> -                               target_ulong *ret_value,
+> -                               target_ulong new_value,
+> -                               target_ulong write_mask)
+> +target_ulong riscv_new_csr_seed(target_ulong new_value,
+> +                                target_ulong write_mask)
+>  {
+>      uint16_t random_v;
+>      Error *random_e =3D NULL;
+> @@ -4294,6 +4292,18 @@ static RISCVException rmw_seed(CPURISCVState *env,=
+ int csrno,
+>          rval =3D random_v | SEED_OPST_ES16;
+>      }
+>
+> +    return rval;
+> +}
+> +
+> +static RISCVException rmw_seed(CPURISCVState *env, int csrno,
+> +                               target_ulong *ret_value,
+> +                               target_ulong new_value,
+> +                               target_ulong write_mask)
+> +{
+> +    target_ulong rval;
+> +
+> +    rval =3D riscv_new_csr_seed(new_value, write_mask);
+> +
+>      if (ret_value) {
+>          *ret_value =3D rval;
+>      }
+> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+> index 6a6c6cae80f1..50bdbd24a878 100644
+> --- a/target/riscv/kvm/kvm-cpu.c
+> +++ b/target/riscv/kvm/kvm-cpu.c
+> @@ -1418,6 +1418,28 @@ static int kvm_riscv_handle_sbi(CPUState *cs, stru=
+ct kvm_run *run)
+>      return ret;
+>  }
+>
+> +static int kvm_riscv_handle_csr(CPUState *cs, struct kvm_run *run)
+> +{
+> +    target_ulong csr_num =3D run->riscv_csr.csr_num;
+> +    target_ulong new_value =3D run->riscv_csr.new_value;
+> +    target_ulong write_mask =3D run->riscv_csr.write_mask;
+> +    int ret =3D 0;
+> +
+> +    switch (csr_num) {
+> +    case CSR_SEED:
+> +        run->riscv_csr.ret_value =3D riscv_new_csr_seed(new_value, write=
+_mask);
+> +        break;
+> +    default:
+> +        qemu_log_mask(LOG_UNIMP,
+> +                      "%s: un-handled CSR EXIT for CSR %lx\n",
+> +                      __func__, csr_num);
+> +        ret =3D -1;
+> +        break;
+> +    }
+> +
+> +    return ret;
+> +}
+> +
+>  int kvm_arch_handle_exit(CPUState *cs, struct kvm_run *run)
+>  {
+>      int ret =3D 0;
+> @@ -1425,6 +1447,9 @@ int kvm_arch_handle_exit(CPUState *cs, struct kvm_r=
+un *run)
+>      case KVM_EXIT_RISCV_SBI:
+>          ret =3D kvm_riscv_handle_sbi(cs, run);
+>          break;
+> +    case KVM_EXIT_RISCV_CSR:
+> +        ret =3D kvm_riscv_handle_csr(cs, run);
+> +        break;
+>      default:
+>          qemu_log_mask(LOG_UNIMP, "%s: un-handled exit reason %d\n",
+>                        __func__, run->exit_reason);
 > --
-> 2.43.2
+> 2.44.0
 >
 >
 
