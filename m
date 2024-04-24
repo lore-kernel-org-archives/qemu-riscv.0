@@ -4,75 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0721CC4345F
-	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Apr 2024 09:08:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D600CC4345F
+	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Apr 2024 09:47:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rzYcW-000257-3s; Wed, 24 Apr 2024 05:08:52 -0400
+	id 1rzZDg-00082d-Ri; Wed, 24 Apr 2024 05:47:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1rzYcJ-0001iu-VN; Wed, 24 Apr 2024 05:08:40 -0400
-Received: from isrv.corpit.ru ([86.62.121.231])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1rzYcH-0007kI-Lu; Wed, 24 Apr 2024 05:08:39 -0400
-Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id 286366157B;
- Wed, 24 Apr 2024 12:08:41 +0300 (MSK)
-Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id 4B17DBE123;
- Wed, 24 Apr 2024 12:08:34 +0300 (MSK)
-Message-ID: <839bfcd0-9470-4112-96a3-2acc19fb4c80@tls.msk.ru>
-Date: Wed, 24 Apr 2024 12:08:34 +0300
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rzZDf-000828-2W
+ for qemu-riscv@nongnu.org; Wed, 24 Apr 2024 05:47:15 -0400
+Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1rzZDd-0006J1-BR
+ for qemu-riscv@nongnu.org; Wed, 24 Apr 2024 05:47:14 -0400
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-1e65b29f703so51795265ad.3
+ for <qemu-riscv@nongnu.org>; Wed, 24 Apr 2024 02:47:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1713952031; x=1714556831; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Pjr70G2j0okcAKa9B3Ycs4M/p/U4C6krFHySQG7Bkhc=;
+ b=bRwF/nkkrt8wAi1Yn2xFi6uWvwnc6iddqLFbRWC+ZO0ntVTaZrtTUNvdCJaQxPTzDF
+ iJsgpnXPxGYmtu4vxWQTFdXvIcOmAb8UiPMycw8XVW+SZIMzhHvLNzH3ZjiZUyzQwRSW
+ d/O4GuLMCtXOHAYb8qKqO+NnQ6cxmQWXPPmkTWpGe7SqbTs4gFeFwIJyLNULB5b9zuG1
+ Ddz2M0ebHDsGXPBuHKYxXtT+Lwv4+VMTaEmwSCO7znVfmc8QZQeouQDMawZ7+j+nUVIL
+ AdwT7xGX8NWK2ihVDo4Bu7Gf8vGI8xytK0DZ1wKE3D43CSQ+UwbTjxqO8DaRZQq0KDWF
+ 2AVQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713952031; x=1714556831;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Pjr70G2j0okcAKa9B3Ycs4M/p/U4C6krFHySQG7Bkhc=;
+ b=HibnEPbxf4rtRJxpnu9EwtBjxfz/HRrBsXmNAoJT7Xhh9g7r9691oHiOw5T2nqV7yb
+ WcEEyMS2Gnc7EeHURDDgv8kfSqM732Buh7TDZAZnCuVMNqG4UuCtSmytYUEKRpiKJwPh
+ O1qcq60LFtv5NUgnTTwLmgmlj+xfHCmZcFpTIZPQGlkASzn/fIngHJgYwbzwX1YkAa2O
+ IKorjklEb04ztjAnxqPa86eriNa1GtyapdteW2gvhjVPkRy9tWO2bKLVaqDE5XrekZML
+ 9uTM5hlSU/3d7Lyh2pKLsY4cECdZzMqBlEc3AOL/1MnaB5xXVA042CbhX5ckQmRQ6Zyf
+ fxnA==
+X-Gm-Message-State: AOJu0YyC6VjrjYbwAP/vTMI6E9XaCtRq0YXeIpkoPNwNgSHhgfkdmbJ1
+ /1lzjkxIGoYI2NC1HhxzP1KAuTzggZpEdEwQXTNLl6E5QJAgwEw3UqfdK9JMM34=
+X-Google-Smtp-Source: AGHT+IHtoVFUxRODk42R53WBWKPTpxqRGPbEBezzFFi3j6ePuEgoszGdu+j/slBPXZqaIbYiEgeehw==
+X-Received: by 2002:a17:902:d2c5:b0:1e3:dfdb:ac6b with SMTP id
+ n5-20020a170902d2c500b001e3dfdbac6bmr2554144plc.4.1713952031182; 
+ Wed, 24 Apr 2024 02:47:11 -0700 (PDT)
+Received: from grind.. ([191.255.35.121]) by smtp.gmail.com with ESMTPSA id
+ y24-20020a1709027c9800b001e0d62e077esm11513389pll.247.2024.04.24.02.47.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 24 Apr 2024 02:47:10 -0700 (PDT)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ thuth@redhat.com, alex.bennee@linaro.org, philmd@linaro.org,
+ mjt@tls.msk.ru, ajones@ventanamicro.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH 0/2] riscv,kvm: remove another strerrorname_np() 
+Date: Wed, 24 Apr 2024 06:46:58 -0300
+Message-ID: <20240424094700.453356-1-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] Fix incorrect disassembly format for certain RISC-V
- instructions
-To: Simeon Krastnikov <Simeon.Krastnikov@imgtec.com>,
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
-Cc: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
- "qemu-trivial@nongnu.org" <qemu-trivial@nongnu.org>,
- Shiva Chen <Shiva.Chen@imgtec.com>
-References: <LO4P265MB66669BD6FF7CAB642AE30316933E2@LO4P265MB6666.GBRP265.PROD.OUTLOOK.COM>
- <LO4P265MB6666B4EBBD3BE5DC8822C85E933D2@LO4P265MB6666.GBRP265.PROD.OUTLOOK.COM>
-Content-Language: en-US
-From: Michael Tokarev <mjt@tls.msk.ru>
-Autocrypt: addr=mjt@tls.msk.ru; keydata=
- xsBLBETIiwkBCADh3cFB56BQYPjtMZCfK6PSLR8lw8EB20rsrPeJtd91IoNZlnCjSoxd9Th1
- bLUR8YlpRJ2rjc6O1Bc04VghqUOHgS/tYt8vLjcGWixzdhSLJgPDK3QQZPAvBjMbCt1B6euC
- WuD87Pv5Udlpnzf4aMwxkgfTusx+ynae/o+T5r7tXD+isccbC3SiGhmAPxFyY3zGcFk4+Rxc
- 0tP8YY2FWE/baHu+lBDTUN79efWAkHhex1XzVZsV7ZD16rzDbXFK5m6ApvGJWlr5YDEEydTF
- WwmvwBfr4OINVxzEG/ujNiG4fpMf2NsnFGyB9aSbFjXZevB4qWkduYYW+xpK1EryszHtAAYp
- zSBNaWNoYWVsIFRva2FyZXYgPG1qdEB0bHMubXNrLnJ1PsLAlgQTAQoAQAIbAwYLCQgHAwIE
- FQIIAwQWAgMBAh4BAheAAhkBFiEEbuGV0Yhuj/uBDUMkRXzgoIBEZcUFAmBbcjwFCS5e6jMA
- CgkQRXzgoIBEZcUTIQgA1hPsOF82pXxbcJXBMc4zB9OQu4AlnZvERoGyw7I2222QzaN3RFuj
- Fia//mapXzpIQNF08l/AA6cx+CKPeGnXwyZfF9fLa4RfifmdNKME8C00XlqnoJDZBGzq8yMy
- LAKDxl9OQWFcDwDxV+irg5U3fbtNVhvV0kLbS2TyQ0aU5w60ERS2NcyDWplOo7AOzZWChcA4
- UFf78oVdZdCW8YDtU0uQFhA9moNnrePy1HSFqduxnlFHEI+fDj/TiOm2ci48b8SBBJOIJFjl
- SBgH8+SfT9ZqkzhN9vh3YJ49831NwASVm0x1rDHcIwWD32VFZViZ3NjehogRNH9br0PSUYOC
- 3s7ATQRX2BjLAQgAnak3m0imYOkv2tO/olULFa686tlwuvl5kL0NWCdGQeXv2uMxy36szcrh
- K1uYhpiQv4r2qNd8BJtYlnYIK16N8GBdkplaDIHcBMbU4t+6bQzEIJIaWoq1hzakmHHngE2a
- pNMnUf/01GFvCRPlv3imkujE/5ILbagjtdyJaHF0wGOSlTnNT4W8j+zPJ/XK0I5EVQwtbmoc
- GY62LKxxz2pID6sPZV4zQVY4JdUQaFvOz1emnBxakkt0cq3Qnnqso1tjiy7vyH9CAwPR/48W
- fpK6dew4Fk+STYtBeixOTfSUS8qRS/wfpUeNa5RnEdTtFQ9IcjpQ/nPrvJJsu9FqwlpjMwAR
- AQABwsBlBBgBCAAPBQJX2BjLAhsMBQkSzAMAAAoJEEV84KCARGXFUKcH/jqKETECkbyPktdP
- cWVqw2ZIsmGxMkIdnZTbPwhORseGXMHadQODayhU9GWfCDdSPkWDWzMamD+qStfl9MhlVT60
- HTbo6wu1W/ogUS70qQPTY9IfsvAj6f8TlSlK0eLMa3s2UxL2oe5FkNs2CnVeRlr4Yqvp/ZQV
- 6LXtew4GPRrmplUT/Cre9QIUqR4pxYCQaMoOXQQw3Y0csBwoDYUQujn3slbDJRIweHoppBzT
- rM6ZG5ldWQN3n3d71pVuv80guylX8+TSB8Mvkqwb5I36/NAFKl0CbGbTuQli7SmNiTAKilXc
- Y5Uh9PIrmixt0JrmGVRzke6+11mTjVlio/J5dCM=
-In-Reply-To: <LO4P265MB6666B4EBBD3BE5DC8822C85E933D2@LO4P265MB6666.GBRP265.PROD.OUTLOOK.COM>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=86.62.121.231; envelope-from=mjt@tls.msk.ru;
- helo=isrv.corpit.ru
-X-Spam_score_int: -68
-X-Spam_score: -6.9
-X-Spam_bar: ------
-X-Spam_report: (-6.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_HI=-5,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x630.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -88,26 +93,26 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-03.04.2024 12:14, Simeon Krastnikov wrote:
-> * The immediate argument to lui/auipc should be an integer in the interval
->   [0x0, 0xfffff]; e.g., 'auipc 0xfffff' and not 'auipc -1'
-> * The floating-point rounding mode is the last operand to the function,
->    not the first; e.g., 'fcvt.w.s a0, fa0, rtz' and not 'fcvt.w.s rtz,
-> a0, fa0'. Note that fcvt.d.w[u] and fcvt.w[u].d are unaffected by the
-> rounding mode and hence it is omitted from their disassembly.
-> * When aq and rl are both present, they are not separated by a '.';
->    e.g., 'lr.d.aqrl' and not 'lr.d.aq.rl'.
-> 
-> Based on the following assembly reference:
-> https://github.com/riscv-non-isa/riscv-asm-manual/blob/master/riscv-asm.md
+Hi,
 
-Can someone from the riscv team review this?
+strerrorname_np() was removed last December due to problems with musl
+libc builds. And then I ended up adding another instance during the 9.0
+cycle (commit ).
 
-This change isn't "trivial enough" for qemu-trivial, it should be picked up
-by the riscv team.  At the very least, it touches too many instructions.
+So here I am removing the newly added instance and, this time, patching
+checkpatch.pl to forbid this function from showing up again.
 
-Thanks,
+Michael, patch 1 is qemu-stable material.
 
-/mjt
+Daniel Henrique Barboza (2):
+  target/riscv/kvm: remove sneaky strerrorname_np() instance
+  checkpatch.pl: forbid strerrorname_np()
+
+ scripts/checkpatch.pl      | 4 ++++
+ target/riscv/kvm/kvm-cpu.c | 4 ++--
+ 2 files changed, 6 insertions(+), 2 deletions(-)
+
+-- 
+2.44.0
 
 
