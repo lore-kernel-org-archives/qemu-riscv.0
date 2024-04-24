@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7D84C4345F
-	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Apr 2024 20:25:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E1A8C19F4E
+	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Apr 2024 20:25:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rzjAg-00059K-Ut; Wed, 24 Apr 2024 16:24:51 -0400
+	id 1rzjAe-00056b-Cv; Wed, 24 Apr 2024 16:24:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rzjAZ-00055O-4f
- for qemu-riscv@nongnu.org; Wed, 24 Apr 2024 16:24:47 -0400
-Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b])
+ id 1rzjAV-00052l-6d
+ for qemu-riscv@nongnu.org; Wed, 24 Apr 2024 16:24:39 -0400
+Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1rzjAX-0006XS-Cr
- for qemu-riscv@nongnu.org; Wed, 24 Apr 2024 16:24:42 -0400
-Received: by mail-pf1-x42b.google.com with SMTP id
- d2e1a72fcca58-6f30f69a958so294629b3a.1
- for <qemu-riscv@nongnu.org>; Wed, 24 Apr 2024 13:24:40 -0700 (PDT)
+ id 1rzjAT-0006Wl-Nx
+ for qemu-riscv@nongnu.org; Wed, 24 Apr 2024 16:24:38 -0400
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-6ecff9df447so355346b3a.1
+ for <qemu-riscv@nongnu.org>; Wed, 24 Apr 2024 13:24:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1713990280; x=1714595080; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1713990276; x=1714595076; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6k1TEiVk/yosToW5KCtbEMqzVSjxDe3oLoEdhyG1u/s=;
- b=DyOIafxouxjdtnMG3pX5z1SRPAkrv7lr6O3eS2eiI9G56V7MrAg3veyaCbC4QDdVw4
- UjcF+mM2o5G+RIkCOwi3801PjjMFt1JhfrpCxEqOOtth5TuZM+rZ4AhSNrQc8Dh05emA
- n+7J/dOe++72dyyReAAwhulzB1RVuJOdTZOaqR3XxY/moNqJ4ff27BpkGt8SzR4ctQAX
- 6TkMz2XFajep5jXRAGCB7i28zpYQRpmywz/8pNdSR/tQ1pK7zuUebG1aIDYhQIXXeaT/
- WhwhKWXZGqYeAzs0uKfGkmRSfqq1FOnjy0L6R+JVOdZh1vksU3Pn8fQeNqjWnDGwzgei
- cMnQ==
+ bh=QderLQFNnEEbgwL1oCKkwQI5umxVetU0de2TmLTVPbw=;
+ b=GCmtKrkqoJtUUClhhlS/5ZCw73zsaE59bRfhaYHiIzlJL39sNcuoQLxKgSpmTttZTH
+ flodMe2vaY15MgJk/MYYLuhGlR8fXiEecpo7380H1uUIXZPfTqg8jvRhpwgHMZBUka6T
+ W+lXAVKjtx0MNrdoFuqm7mNCDrXsMpZuhQNq7YYzpMJ9ieQ+NOBdBUdreNWqkfPLL/eh
+ jnMpLdfqLYCntUwL63AT6B+l4qtKYvc6NY1ePpFEYtzUytUXBcn8HBfTYMOtT0VAMquO
+ BiBpbQy1vT+51xmFhcJ9pRfZN7wIM02+ZMMtkuN5zGfw4XBPU5bLTfM6M/U8ZfIbs104
+ N2xw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713990280; x=1714595080;
+ d=1e100.net; s=20230601; t=1713990276; x=1714595076;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6k1TEiVk/yosToW5KCtbEMqzVSjxDe3oLoEdhyG1u/s=;
- b=aIV3JVaNWyEwkdvCjHDMRaeQbiQzak6RTSSaD17o+E68G+A1rtQN6zyLn4ANTH2WTx
- DLbE9Z+6R89pdEiNa9sH+XakDoCseVwgGO4ImW0J03I8lqHV80bMvJ5ApRwO2pMrVejO
- ZPmY0ECUEbkPNWTU6KwuW5gm65sPXoAeAubustXBw1/ZMEUvfQ67o8xJAL72Gj6UAS+O
- BBIk/sITa5frUjHEjRY88OCWcGQrnEsmvqMyj2xfOlO9sxh5w6DVrG8ZB5LzOWS5o9Tq
- d7OZnkp9cGFlv9MgxvZYNcjDhFFg1NFVwo3ykwvN4Cm3OdnDUQd0wOmmMNOk4T35oVaO
- OmCA==
-X-Gm-Message-State: AOJu0YxS874BLZO1EWeb+RBCr/wUEF1UGFg3OunpRKlrMfkziY1J2ixQ
- bwYsUg3pc/+6cB6Q+fMvRPw8NboBQ4TQQjxLqdORAppM+SFwI/7nRL3R0AbI2HM=
-X-Google-Smtp-Source: AGHT+IFjAy4P2BunZ2vBAbReCxsWdtAGGpbKIsRhXCgwMJf9aIMeHrx+Za/wGLdCUYmVbsAYeINLWw==
-X-Received: by 2002:a05:6a00:2d87:b0:6ed:60a4:6d9c with SMTP id
- fb7-20020a056a002d8700b006ed60a46d9cmr4422296pfb.4.1713990279992; 
- Wed, 24 Apr 2024 13:24:39 -0700 (PDT)
+ bh=QderLQFNnEEbgwL1oCKkwQI5umxVetU0de2TmLTVPbw=;
+ b=TSO1jWUbNFSQzwqwF+4mrXs7N2o1E7thmbJ4586hCMI1F0Ll1bkFpo5tamy/uZbQPA
+ 5eYf84H1esOoD9dA7/f6avzC4aud52qQpQNZJhPBDWBGsy47Q2aDR/WafAHW5JnTiFlg
+ t6vlUk51TbDS6p0lg1N4Fy2vz/qlc9SXpjyoGX84GsjIyFh0MYsJdIGwycWIr5R/MmCT
+ NDdqUWp7aXDfpVbVCNn9pljLYxQkhML2jUtayRm8J6tlvCNPReT13txSWKGPWxBRj0pu
+ 9ZVTW1A+LoQVE57orrZAAmPZWk86tezJghnRDC7RAvF+saP2O4iedGGf8CB2vwQJQaqr
+ a2qA==
+X-Gm-Message-State: AOJu0YxRhQmEqM4ZcHMmkjNAu7/c9ZaJ/7Vd12ui3KVcOpL9UK69137U
+ Y6CWPOnvpDhb8wODb0A8Lo+vz1O04y8XRaHIqMPXGWEYyKYcwfzxcFTaSWAPgZE=
+X-Google-Smtp-Source: AGHT+IEi7E7s0dSSKIGTF8Tk09FtgjHEsSImrbEyBJHjXPOn3ooykqGAWGpSs0/JnTgGed2faWCPhw==
+X-Received: by 2002:a05:6a00:2ea3:b0:6f3:1be8:ab68 with SMTP id
+ fd35-20020a056a002ea300b006f31be8ab68mr4864206pfb.32.1713990276207; 
+ Wed, 24 Apr 2024 13:24:36 -0700 (PDT)
 Received: from grind.. ([191.255.35.121]) by smtp.gmail.com with ESMTPSA id
- fm8-20020a056a002f8800b006ed059cdf02sm11862015pfb.116.2024.04.24.13.24.36
+ fm8-20020a056a002f8800b006ed059cdf02sm11862015pfb.116.2024.04.24.13.24.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Apr 2024 13:24:39 -0700 (PDT)
+ Wed, 24 Apr 2024 13:24:35 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
@@ -64,17 +64,18 @@ Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  thuth@redhat.com, alex.bennee@linaro.org, philmd@linaro.org,
  mjt@tls.msk.ru, ajones@ventanamicro.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v2 2/2] checkpatch.pl: forbid strerrorname_np()
-Date: Wed, 24 Apr 2024 17:24:25 -0300
-Message-ID: <20240424202425.534338-3-dbarboza@ventanamicro.com>
+Subject: [PATCH v2 1/2] target/riscv/kvm: remove sneaky strerrorname_np()
+ instance
+Date: Wed, 24 Apr 2024 17:24:24 -0300
+Message-ID: <20240424202425.534338-2-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.44.0
 In-Reply-To: <20240424202425.534338-1-dbarboza@ventanamicro.com>
 References: <20240424202425.534338-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42b;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x42b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42e;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x42e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -97,41 +98,35 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Commit d424db2354 removed an instance of strerrorname_np() because it
-was breaking building with musl libc. A recent RISC-V patch ended up
-re-introducing it again by accident.
+Commit d424db2354 excluded some strerrorname_np() instances because they
+break musl libc builds. Another instance happened to slip by via commit
+d4ff3da8f4.
 
-Put this function in the baddies list in checkpatch.pl to avoid this
-situation again. This is what it will look like next time:
+Remove it before it causes trouble again.
 
- $ ./scripts/checkpatch.pl 0001-temp-test.patch
- ERROR: use strerror() instead of strerrorname_np()
- #22: FILE: target/riscv/kvm/kvm-cpu.c:1058:
- +                         strerrorname_np(errno));
-
- total: 1 errors, 0 warnings, 10 lines checked
-
+Fixes: d4ff3da8f4 (target/riscv/kvm: initialize 'vlenb' via get-reg-list)
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Reviewed-by: Thomas Huth <thuth@redhat.com>
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- scripts/checkpatch.pl | 3 +++
- 1 file changed, 3 insertions(+)
+ target/riscv/kvm/kvm-cpu.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/scripts/checkpatch.pl b/scripts/checkpatch.pl
-index 7026895074..f7ffa74858 100755
---- a/scripts/checkpatch.pl
-+++ b/scripts/checkpatch.pl
-@@ -3078,6 +3078,9 @@ sub process {
- 		if ($line =~ /\b(g_)?assert\(0\)/) {
- 			ERROR("use g_assert_not_reached() instead of assert(0)\n" . $herecurr);
- 		}
-+		if ($line =~ /\bstrerrorname_np\(/) {
-+			ERROR("use strerror() instead of strerrorname_np()\n" . $herecurr);
-+		}
- 		my $non_exit_glib_asserts = qr{g_assert_cmpstr|
- 						g_assert_cmpint|
- 						g_assert_cmpuint|
+diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+index 6a6c6cae80..ee69ea9785 100644
+--- a/target/riscv/kvm/kvm-cpu.c
++++ b/target/riscv/kvm/kvm-cpu.c
+@@ -1054,8 +1054,8 @@ static void kvm_riscv_read_vlenb(RISCVCPU *cpu, KVMScratchCPU *kvmcpu,
+ 
+         ret = ioctl(kvmcpu->cpufd, KVM_GET_ONE_REG, &reg);
+         if (ret != 0) {
+-            error_report("Unable to read vlenb register, error code: %s",
+-                         strerrorname_np(errno));
++            error_report("Unable to read vlenb register, error code: %d",
++                         errno);
+             exit(EXIT_FAILURE);
+         }
+ 
 -- 
 2.44.0
 
