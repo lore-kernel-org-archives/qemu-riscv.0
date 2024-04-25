@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75167C10F15
-	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Apr 2024 11:07:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D0DAC4345F
+	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Apr 2024 11:07:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rzwsa-0008F0-4T; Thu, 25 Apr 2024 07:03:04 -0400
+	id 1rzwuU-0003Dz-5q; Thu, 25 Apr 2024 07:05:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzws5-0007ro-8H
- for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:02:33 -0400
-Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwtb-0000JE-Cw
+ for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:04:09 -0400
+Received: from mail-lj1-x22f.google.com ([2a00:1450:4864:20::22f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzws3-0008El-5W
- for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:02:32 -0400
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-41b5dd5af48so1781545e9.0
- for <qemu-riscv@nongnu.org>; Thu, 25 Apr 2024 04:02:30 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwtX-0000Mq-AN
+ for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:04:06 -0400
+Received: by mail-lj1-x22f.google.com with SMTP id
+ 38308e7fff4ca-2dac77cdf43so9600341fa.2
+ for <qemu-riscv@nongnu.org>; Thu, 25 Apr 2024 04:04:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1714042949; x=1714647749; darn=nongnu.org;
+ d=linaro.org; s=google; t=1714043039; x=1714647839; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=b/DaGtvlqhC1nG0WRRs696RzTAGLW5V48G1JnVnt1qc=;
- b=qDsNuyso8EAIa1u2Bmlv2bVFIvJwqUkA0b3keiTrsJYp1M+wmLxVEFk0eOi/c1I49x
- y/j9Spnv5W2cFVH3W/JMtNSXSnEB1t/WoFawPUsR/0y2OOBq+RLT+GxcvViAsDjt3ZCE
- MuT0xhwNUf+21c3gtc6B/m828+TBcBxCqWWxofoo5VL0DF2ohZgi9rEUzO1B+5YIIhcW
- Y2KEY0/LurwxZBmWySOpgPeLd/XSp1VvFUC/K+qwWOW3UpKD6W/fp4Dd+zIdZIHuLiQM
- IRg5or8377kSgoLSe99VZs+blbioxdAaRbATG8a9H86sUvWnU6Now7aMW7hDHGtw8NXW
- +Iaw==
+ bh=vykN0pIt49J3GEMpH2YakbfFLS9d+NOdnblTzedh0DY=;
+ b=ge/5W1Z5UVX3PPgyKn4UHFd9nbESU5wtOTP5095Bm6afywSeBiHPR5htX1M130Qno2
+ XaV2Y+Sal3luYptmwrG+oNOxp/JMTvsZL9PjQhgsiqozUKtxQ3qymfYVfIsL1hnp+w7U
+ 3WP+c3tsTB9UmQ7oAh1nI1HXpLX52wAkmUmoB4mMKULchs7HLoE/PJRl9ZhUBrgEJVcb
+ kRxsZ/RV/ShdXmv4b+vXS42eZFWq8RBOhH54OrSuD+FCQsDlv8IoJ9ryvWzD1rvYp4Tt
+ dRt6r0yr5VmCD+4kCgfU08vUV06QEsJcJ7vFG+xj0q+Yk/9nNNtLsa/pMHUbNssLhWd/
+ 7hyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714042949; x=1714647749;
+ d=1e100.net; s=20230601; t=1714043039; x=1714647839;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=b/DaGtvlqhC1nG0WRRs696RzTAGLW5V48G1JnVnt1qc=;
- b=OYlJzmUz/bl4YNJCx+gWJaVQI7WbTNW8QF2N33SknnguUt+sI+vN+UNZEwhZehtM90
- 0oCOhq437hZN+NOdl24PYNzL/suAsCmE5EioLBy06+ajeYboLAyYi3Qf35QIi5tIZvY4
- pVRsa4hpmVZ0oC8Wn6ApJn7vLwghDdho8pmlwjkoI+B+rFXkGODlEPrXaRybxYRc8zgp
- 06D6D/6ax6py336WD7/eSGFCuE3eqvsjhIT6Xrfyz962zNwRXSLtgyYCCmUzM3bswmA1
- zEkHEItk+JZcqdm41cZgHVB4n4jXe0krbzhzTEj3Zxdemdf1vW7eqjwP1UUBLdaivhLL
- e6fQ==
-X-Gm-Message-State: AOJu0Yy4MxwSbJ+Vd3vsr7JbpFWEkPoDakSAqAfvSVEhhK7hbBK8b8Td
- HwE10vp4Xacjv+3/22w9yylGniwDNoO3xMtjgWx+KqO0NE+JXwb+jRY3VAkqogz2QUOT+k5bJqy
- y
-X-Google-Smtp-Source: AGHT+IGxA0fp45S5TMqgqmXhQYaNVa3QNit+EQ7R21X8NbKdw/H6ughSa+c5LgPpgdOWh3hwMMfjnQ==
-X-Received: by 2002:a05:600c:4f03:b0:418:ed13:315e with SMTP id
- l3-20020a05600c4f0300b00418ed13315emr3752068wmq.2.1714042949561; 
- Thu, 25 Apr 2024 04:02:29 -0700 (PDT)
+ bh=vykN0pIt49J3GEMpH2YakbfFLS9d+NOdnblTzedh0DY=;
+ b=JAMvYo3tS0vEQzcHp0aDYRSh2i9LHv66u3uLVqIq0PWy2Orlk+BoxNjp/RAjVzc0eQ
+ EtMlSmc+8RyIeJniBTQ8ZBrL8LvOxgNXg2FGYLapPjK//kftbJPJca4y1SrmT82kM8k0
+ gsX+ETFG/grjorQmTNmp+NSEV2zwSL43ZqTYOw4nV6zdOh1LFjpB4+cirB4immPdgbN6
+ O53t0pAGgCAOJLz3pymKVICafFUNgni9GNyCBO1w1OCdEy+lXSZGMSOEtFM5fpVAltWb
+ jR5U/k8Y6C0lm/AVNusWefwajXf7bMMpDcfW5WWuPAOQwBSLJKaRATNV4J/JFnfUrKqV
+ Gqng==
+X-Gm-Message-State: AOJu0Yy+ddaowBFtibz9yBRQqFn9M5bHh8pPtK9kdqbdYqqFPLtjooRf
+ YkLnG1ql/XGuGlIGnaXQbTKUCI/xoNKG22ANAipGbeuUMCLFp28NWXfGE3Nr2Y4=
+X-Google-Smtp-Source: AGHT+IH8mFAQdgVe8Ug584icuarIPeRoP8mdneCGHYZqIATf4nok2omqYQTD+Ae/+hRL3KyPU8mLmQ==
+X-Received: by 2002:a2e:bb83:0:b0:2d8:901f:7f45 with SMTP id
+ y3-20020a2ebb83000000b002d8901f7f45mr3356811lje.13.1714043039569; 
+ Thu, 25 Apr 2024 04:03:59 -0700 (PDT)
 Received: from localhost.localdomain ([92.88.170.77])
  by smtp.gmail.com with ESMTPSA id
- f17-20020a05600c155100b00418db9e4228sm27280045wmg.29.2024.04.25.04.02.28
+ e4-20020a05600c4e4400b0041b0f10fc7asm5000576wmq.31.2024.04.25.04.03.58
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 25 Apr 2024 04:02:29 -0700 (PDT)
+ Thu, 25 Apr 2024 04:03:59 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
+Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org, Zhao Liu <zhao1.liu@intel.com>,
+ Xiaoyao Li <xiaoyao.li@intel.com>, Yongwei Ma <yongwei.ma@intel.com>,
+ Babu Moger <babu.moger@amd.com>, Markus Armbruster <armbru@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>
-Subject: [PULL 05/22] hw/core: Remove check on NEED_CPU_H in tcg-cpu-ops.h
-Date: Thu, 25 Apr 2024 13:01:38 +0200
-Message-ID: <20240425110157.20328-6-philmd@linaro.org>
+ Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Yanan Wang <wangyanan55@huawei.com>, Eric Blake <eblake@redhat.com>
+Subject: [PULL 21/22] hw/core: Introduce module-id as the topology subindex
+Date: Thu, 25 Apr 2024 13:01:54 +0200
+Message-ID: <20240425110157.20328-22-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240425110157.20328-1-philmd@linaro.org>
 References: <20240425110157.20328-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::22f;
+ envelope-from=philmd@linaro.org; helo=mail-lj1-x22f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -96,37 +98,60 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Commit fd3f7d24d4 ("include/hw/core: Remove i386 conditional
-on fake_user_interrupt") remove the need to check on NEED_CPU_H.
+From: Zhao Liu <zhao1.liu@intel.com>
 
+Add module-id in CpuInstanceProperties, to locate the CPU with module
+level.
+
+Suggested-by: Xiaoyao Li <xiaoyao.li@intel.com>
+Tested-by: Yongwei Ma <yongwei.ma@intel.com>
+Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
+Tested-by: Babu Moger <babu.moger@amd.com>
+Acked-by: Markus Armbruster <armbru@redhat.com>
+Message-ID: <20240424154929.1487382-4-zhao1.liu@intel.com>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Message-Id: <20240321154838.95771-3-philmd@linaro.org>
 ---
- include/hw/core/tcg-cpu-ops.h | 3 ---
- 1 file changed, 3 deletions(-)
+ qapi/machine.json          | 4 ++++
+ hw/core/machine-hmp-cmds.c | 4 ++++
+ 2 files changed, 8 insertions(+)
 
-diff --git a/include/hw/core/tcg-cpu-ops.h b/include/hw/core/tcg-cpu-ops.h
-index bf8ff8e3ee..dc1f16a977 100644
---- a/include/hw/core/tcg-cpu-ops.h
-+++ b/include/hw/core/tcg-cpu-ops.h
-@@ -49,7 +49,6 @@ struct TCGCPUOps {
-     /** @debug_excp_handler: Callback for handling debug exceptions */
-     void (*debug_excp_handler)(CPUState *cpu);
- 
--#ifdef NEED_CPU_H
- #ifdef CONFIG_USER_ONLY
-     /**
-      * @fake_user_interrupt: Callback for 'fake exception' handling.
-@@ -174,8 +173,6 @@ struct TCGCPUOps {
-      */
-     bool (*need_replay_interrupt)(int interrupt_request);
- #endif /* !CONFIG_USER_ONLY */
--#endif /* NEED_CPU_H */
--
- };
- 
- #if defined(CONFIG_USER_ONLY)
+diff --git a/qapi/machine.json b/qapi/machine.json
+index 48f98e7d9f..bce6e1bbc4 100644
+--- a/qapi/machine.json
++++ b/qapi/machine.json
+@@ -988,6 +988,9 @@
+ # @cluster-id: cluster number within the parent container the CPU
+ #     belongs to (since 7.1)
+ #
++# @module-id: module number within the parent container the CPU belongs
++#     to (since 9.1)
++#
+ # @core-id: core number within the parent container the CPU belongs to
+ #
+ # @thread-id: thread number within the core the CPU  belongs to
+@@ -1005,6 +1008,7 @@
+             '*socket-id': 'int',
+             '*die-id': 'int',
+             '*cluster-id': 'int',
++            '*module-id': 'int',
+             '*core-id': 'int',
+             '*thread-id': 'int'
+   }
+diff --git a/hw/core/machine-hmp-cmds.c b/hw/core/machine-hmp-cmds.c
+index a6ff6a4875..8701f00cc7 100644
+--- a/hw/core/machine-hmp-cmds.c
++++ b/hw/core/machine-hmp-cmds.c
+@@ -87,6 +87,10 @@ void hmp_hotpluggable_cpus(Monitor *mon, const QDict *qdict)
+             monitor_printf(mon, "    cluster-id: \"%" PRIu64 "\"\n",
+                            c->cluster_id);
+         }
++        if (c->has_module_id) {
++            monitor_printf(mon, "    module-id: \"%" PRIu64 "\"\n",
++                           c->module_id);
++        }
+         if (c->has_core_id) {
+             monitor_printf(mon, "    core-id: \"%" PRIu64 "\"\n", c->core_id);
+         }
 -- 
 2.41.0
 
