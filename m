@@ -4,83 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83DC9C19F4F
-	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Apr 2024 11:07:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF5E7C4345F
+	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Apr 2024 11:09:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rzwrs-0007ns-AF; Thu, 25 Apr 2024 07:02:20 -0400
+	id 1rzwuM-00032b-EX; Thu, 25 Apr 2024 07:04:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwrp-0007l5-72
- for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:02:17 -0400
-Received: from mail-lj1-x22d.google.com ([2a00:1450:4864:20::22d])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwt8-00008n-VP
+ for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:03:57 -0400
+Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwrn-00089S-3T
- for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:02:16 -0400
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-2dd041acff1so9300221fa.1
- for <qemu-riscv@nongnu.org>; Thu, 25 Apr 2024 04:02:14 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwsr-0000DC-S4
+ for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:03:23 -0400
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-41adf3580dbso5031685e9.0
+ for <qemu-riscv@nongnu.org>; Thu, 25 Apr 2024 04:03:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1714042933; x=1714647733; darn=nongnu.org;
+ d=linaro.org; s=google; t=1714043000; x=1714647800; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vLZ+JSbydZ+0P9XLjVkCEIbh5VWxC42GBVm2ZIIKLSk=;
- b=J4G96lAURIAg+kmcYhgjVDW9HYr8wnW1rI66EHq9itxF++2G7BpXZcwRrHgspLFJz4
- qXJTpVMA6A2XKRpDYkHZBFX8QDaLENEum298A7VBXw2BMfsS8QoTdQ28D7fT21wi4a1D
- CsXRg96wAghBks2Imv6xfFZjyZiPfg1PEEEeI3IjEREz2VbKN5E5+h/a7Mw39G+emooP
- IEWrMMiz9Bcjkev0ZR9KT9uCTNR+ar/BdFTgRDywXF6PSbbyXcvquk897uBj+GWe50Uq
- VpyUyv7T6C1Dnpr++Csov+MXkZFOhEUBUTHaWUj1pl/1iSRU/YikE65P4g1Gm9hIbiHD
- lUsw==
+ bh=pvunkSj/8Waxads7PhZ8ZQlWRsJ6KI6vMAUvxRYx65M=;
+ b=gL9a3tea7yE6jcdX6zkmxwDmR6RkxmQKGR0W8cbgks1HpM55Kl2q+Fh5rDjzchqYhY
+ ibf6gTSzByxXyHNx3UMizX1IL+oJfoPpgfewwNEdFKYZRg6DDQgrJ/yQlBA/QOFsOT30
+ mPK+d1+VuHN3r3++vGimHOahyjN386AlBBbee1h9kn3SpQcpFESm/DIQ2CK8kNho5nJp
+ 24zHp3k6m2azSmBCFVEiiXKCNsLNVXUwhFGki3EhncgbEJir3NyRHAhCd1U1V8o6lkEQ
+ 70rEdMd1hXHJQieDioZs0cKc08yQlROsxMFvwpfcpDfkKuMuvWWevUqvtOohZZGXyXHp
+ nHHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714042933; x=1714647733;
+ d=1e100.net; s=20230601; t=1714043000; x=1714647800;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vLZ+JSbydZ+0P9XLjVkCEIbh5VWxC42GBVm2ZIIKLSk=;
- b=gUhWB6DaH1NqCAPu6htH875fCyEUASG8w5SH0hATJm3G5AiCI0aCDOw7cwzU0ICeeI
- aCv+h8M715SXwuCOz6b1XElNC061gwrEFqZcSuv6wOf/l5Mh/aMyj52MA/XKIBW8D10p
- D6jCbb5Jd6f/1eiMKS4V/irqqE2+nJvRer8E2nVq1k8ne40U6hrGacVC0X5hd/EjW7/5
- cGzgT9VsRQNIceVVOFKJFz1DDm2mzircME/FIYwmI0bp6mGv+S/fXq0wBnSWzSuT8vpW
- 4ZV/L/HCMQF5Ik1PKyBmWxaJRUmAS63trTawd69shOkn9FiMEuveIvcRAL3VR9yxH4Wi
- 56gw==
-X-Gm-Message-State: AOJu0Yy+aJxhyPSspoMlNHQ1rNoX0rYZPJXZb4rhDtYJqGL548MifUMa
- KH1qYIX/96A7hL67UORBb5YVv4ItPSc+g4ilnfnOUePTM+mredX3tlXdVCZqvs0=
-X-Google-Smtp-Source: AGHT+IEIwEKtRxzjDxE5XZKOER0BztzWhqxqJNsv78wTLrxRgsPNwlOo5sgeR9LyeZoBJnnXiQJaKA==
-X-Received: by 2002:a2e:88d1:0:b0:2dd:2fc:3cd with SMTP id
- a17-20020a2e88d1000000b002dd02fc03cdmr3419727ljk.29.1714042933255; 
- Thu, 25 Apr 2024 04:02:13 -0700 (PDT)
+ bh=pvunkSj/8Waxads7PhZ8ZQlWRsJ6KI6vMAUvxRYx65M=;
+ b=Slid5qnoXvq+FB6VITQbf2gB1TF5U1attNVOtGWVChwxoEXLmpfiJ85Xf5PFjHzP14
+ NY4SMPN4epLiFPUDXlYeG3BXTCCmu+viwO9DQhPGkAfOcnbhG2DZo4UQ20Wsc6VldWKV
+ xCx3eNQOqVDbk+7tFipNzsJi6dgIRswhkVd5jwT5Bdfr0vWk7gFOu/JAvDPwcexi3ogP
+ dKr0R104GmVFyKdEiSLLpAWoTzQUQXuTbGN7gVNnAKawYzPhGKJOv/DgbwrpBO/Hxz37
+ +KSXdKfukSa2rruhQnd63JsTjP/3fhh1dAtJo4BejIubSdjx/qttPKaRdWiqFYVWANS3
+ 9JcQ==
+X-Gm-Message-State: AOJu0YwVxUCh+qjFtgP79lpmNMZNVmXIik3j611VkA5jNIG8Vwd/riJS
+ wlAJcBQluveVfa8xzOsQcyfBvQsPmOCXf1M0n5UDw0avCosYk8oGfh/geWSTVRA=
+X-Google-Smtp-Source: AGHT+IEmrIxHIZTR3N3C87Loh/LBNBpgekND21HRCbgm42Ea4SiO726knsE1orKhBPiOc+Dh2IhLkQ==
+X-Received: by 2002:a05:600c:3554:b0:415:ff48:59fc with SMTP id
+ i20-20020a05600c355400b00415ff4859fcmr2033033wmq.8.1714043000386; 
+ Thu, 25 Apr 2024 04:03:20 -0700 (PDT)
 Received: from localhost.localdomain ([92.88.170.77])
  by smtp.gmail.com with ESMTPSA id
- bi14-20020a05600c3d8e00b0041b5944a197sm1195465wmb.45.2024.04.25.04.02.11
+ k41-20020a05600c1ca900b00417e8be070csm27334682wms.9.2024.04.25.04.03.18
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 25 Apr 2024 04:02:12 -0700 (PDT)
+ Thu, 25 Apr 2024 04:03:20 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
- Maksim Davydov <davydov-max@yandex-team.ru>,
- Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,
+Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org, Zhao Liu <zhao1.liu@intel.com>,
  Markus Armbruster <armbru@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Yanan Wang <wangyanan55@huawei.com>, Eric Blake <eblake@redhat.com>,
- Alexander Bulekov <alxndr@bu.edu>, Paolo Bonzini <pbonzini@redhat.com>,
- Bandan Das <bsd@redhat.com>, Stefan Hajnoczi <stefanha@redhat.com>,
- Thomas Huth <thuth@redhat.com>, Darren Kenny <darren.kenny@oracle.com>,
- Qiuhao Li <Qiuhao.Li@outlook.com>, Laurent Vivier <lvivier@redhat.com>
-Subject: [PULL 02/22] qmp: add dump machine type compatibility properties
-Date: Thu, 25 Apr 2024 13:01:35 +0200
-Message-ID: <20240425110157.20328-3-philmd@linaro.org>
+ Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+ Jonathan Cameron <jonathan.cameron@huawei.com>,
+ Fan Ni <fan.ni@samsung.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>
+Subject: [PULL 14/22] hw/cxl/cxl-cdat: Make cxl_doe_cdat_init() return boolean
+Date: Thu, 25 Apr 2024 13:01:47 +0200
+Message-ID: <20240425110157.20328-15-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240425110157.20328-1-philmd@linaro.org>
 References: <20240425110157.20328-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::22d;
- envelope-from=philmd@linaro.org; helo=mail-lj1-x22d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::332;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x332.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -103,183 +98,89 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Maksim Davydov <davydov-max@yandex-team.ru>
+From: Zhao Liu <zhao1.liu@intel.com>
 
-To control that creating new machine type doesn't affect the previous
-types (their compat_props) and to check complex compat_props inheritance
-we need qmp command to print machine type compatibility properties.
-This patch adds the ability to get list of all the compat_props of the
-corresponding supported machines for their comparison via new optional
-argument of "query-machines" command. Since information on compatibility
-properties can increase the command output by a factor of 40, add an
-argument to enable it, default off.
+As error.h suggested, the best practice for callee is to return
+something to indicate success / failure.
 
-Signed-off-by: Maksim Davydov <davydov-max@yandex-team.ru>
-Reviewed-by: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
-Acked-by: Markus Armbruster <armbru@redhat.com>
-Message-ID: <20240318213550.155573-3-davydov-max@yandex-team.ru>
+With returned boolean, there's no need to dereference @errp to check
+failure case.
+
+Suggested-by: Markus Armbruster <armbru@redhat.com>
+Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Acked-by: Jonathan Cameron <Jonathan.Cameron@huawei.com>
+Message-ID: <20240418100433.1085447-4-zhao1.liu@linux.intel.com>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- qapi/machine.json           | 67 +++++++++++++++++++++++++++++++++++--
- hw/core/machine-qmp-cmds.c  | 23 ++++++++++++-
- tests/qtest/fuzz/qos_fuzz.c |  2 +-
- 3 files changed, 88 insertions(+), 4 deletions(-)
+ include/hw/cxl/cxl_component.h | 2 +-
+ hw/cxl/cxl-cdat.c              | 6 +++---
+ hw/mem/cxl_type3.c             | 3 +--
+ hw/pci-bridge/cxl_upstream.c   | 3 +--
+ 4 files changed, 6 insertions(+), 8 deletions(-)
 
-diff --git a/qapi/machine.json b/qapi/machine.json
-index 2df407e877..3e9cc3f17d 100644
---- a/qapi/machine.json
-+++ b/qapi/machine.json
-@@ -135,6 +135,26 @@
- ##
- { 'command': 'query-cpus-fast', 'returns': [ 'CpuInfoFast' ] }
+diff --git a/include/hw/cxl/cxl_component.h b/include/hw/cxl/cxl_component.h
+index 5012fab6f7..945ee6ffd0 100644
+--- a/include/hw/cxl/cxl_component.h
++++ b/include/hw/cxl/cxl_component.h
+@@ -273,7 +273,7 @@ hwaddr cxl_decode_ig(int ig);
+ CXLComponentState *cxl_get_hb_cstate(PCIHostState *hb);
+ bool cxl_get_hb_passthrough(PCIHostState *hb);
  
-+##
-+# @CompatProperty:
-+#
-+# Property default values specific to a machine type, for use by
-+# scripts/compare-machine-types.
-+#
-+# @qom-type: name of the QOM type to which the default applies
-+#
-+# @property: name of its property to which the default applies
-+#
-+# @value: the default value (machine-specific default can overwrite
-+#     the "default" default, to avoid this use -machine none)
-+#
-+# Since: 9.1
-+##
-+{ 'struct': 'CompatProperty',
-+  'data': { 'qom-type': 'str',
-+            'property': 'str',
-+            'value': 'str' } }
-+
- ##
- # @MachineInfo:
- #
-@@ -166,6 +186,14 @@
- #
- # @acpi: machine type supports ACPI (since 8.0)
- #
-+# @compat-props: The machine type's compatibility properties.  Only
-+#     present when query-machines argument @compat-props is true.
-+#     (since 9.1)
-+#
-+# Features:
-+#
-+# @unstable: Member @compat-props is experimental.
-+#
- # Since: 1.2
- ##
- { 'struct': 'MachineInfo',
-@@ -173,18 +201,53 @@
-             '*is-default': 'bool', 'cpu-max': 'int',
-             'hotpluggable-cpus': 'bool',  'numa-mem-supported': 'bool',
-             'deprecated': 'bool', '*default-cpu-type': 'str',
--            '*default-ram-id': 'str', 'acpi': 'bool' } }
-+            '*default-ram-id': 'str', 'acpi': 'bool',
-+            '*compat-props': { 'type': ['CompatProperty'],
-+                               'features': ['unstable'] } } }
+-void cxl_doe_cdat_init(CXLComponentState *cxl_cstate, Error **errp);
++bool cxl_doe_cdat_init(CXLComponentState *cxl_cstate, Error **errp);
+ void cxl_doe_cdat_release(CXLComponentState *cxl_cstate);
+ void cxl_doe_cdat_update(CXLComponentState *cxl_cstate, Error **errp);
  
- ##
- # @query-machines:
- #
- # Return a list of supported machines
- #
-+# @compat-props: if true, also return compatibility properties.
-+#     (default: false) (since 9.1)
-+#
-+# Features:
-+#
-+# @unstable: Argument @compat-props is experimental.
-+#
- # Returns: a list of MachineInfo
- #
- # Since: 1.2
-+#
-+# Example:
-+#
-+#     -> { "execute": "query-machines", "arguments": { "compat-props": true } }
-+#     <- { "return": [
-+#               {
-+#                  "hotpluggable-cpus": true,
-+#                  "name": "pc-q35-6.2",
-+#                  "compat-props": [
-+#                       {
-+#                          "qom-type": "virtio-mem",
-+#                          "property": "unplugged-inaccessible",
-+#                          "value": "off"
-+#                       }
-+#                   ],
-+#                   "numa-mem-supported": false,
-+#                   "default-cpu-type": "qemu64-x86_64-cpu",
-+#                   "cpu-max": 288,
-+#                   "deprecated": false,
-+#                   "default-ram-id": "pc.ram"
-+#               },
-+#               ...
-+#        }
- ##
--{ 'command': 'query-machines', 'returns': ['MachineInfo'] }
-+{ 'command': 'query-machines',
-+  'data': { '*compat-props': { 'type': 'bool',
-+                               'features': [ 'unstable' ] } },
-+  'returns': ['MachineInfo'] }
- 
- ##
- # @CurrentMachineParams:
-diff --git a/hw/core/machine-qmp-cmds.c b/hw/core/machine-qmp-cmds.c
-index c20829b9ae..5972100b1f 100644
---- a/hw/core/machine-qmp-cmds.c
-+++ b/hw/core/machine-qmp-cmds.c
-@@ -64,7 +64,8 @@ CpuInfoFastList *qmp_query_cpus_fast(Error **errp)
-     return head;
+diff --git a/hw/cxl/cxl-cdat.c b/hw/cxl/cxl-cdat.c
+index e7bc1380bf..959a55518e 100644
+--- a/hw/cxl/cxl-cdat.c
++++ b/hw/cxl/cxl-cdat.c
+@@ -189,14 +189,14 @@ static bool ct3_load_cdat(CDATObject *cdat, Error **errp)
+     return true;
  }
  
--MachineInfoList *qmp_query_machines(Error **errp)
-+MachineInfoList *qmp_query_machines(bool has_compat_props, bool compat_props,
-+                                    Error **errp)
+-void cxl_doe_cdat_init(CXLComponentState *cxl_cstate, Error **errp)
++bool cxl_doe_cdat_init(CXLComponentState *cxl_cstate, Error **errp)
  {
-     GSList *el, *machines = object_class_get_list(TYPE_MACHINE, false);
-     MachineInfoList *mach_list = NULL;
-@@ -96,6 +97,26 @@ MachineInfoList *qmp_query_machines(Error **errp)
-             info->default_ram_id = g_strdup(mc->default_ram_id);
-         }
+     CDATObject *cdat = &cxl_cstate->cdat;
  
-+        if (compat_props && mc->compat_props) {
-+            int i;
-+            info->compat_props = NULL;
-+            CompatPropertyList **tail = &(info->compat_props);
-+            info->has_compat_props = true;
-+
-+            for (i = 0; i < mc->compat_props->len; i++) {
-+                GlobalProperty *mt_prop = g_ptr_array_index(mc->compat_props,
-+                                                            i);
-+                CompatProperty *prop;
-+
-+                prop = g_malloc0(sizeof(*prop));
-+                prop->qom_type = g_strdup(mt_prop->driver);
-+                prop->property = g_strdup(mt_prop->property);
-+                prop->value = g_strdup(mt_prop->value);
-+
-+                QAPI_LIST_APPEND(tail, prop);
-+            }
-+        }
-+
-         QAPI_LIST_PREPEND(mach_list, info);
+     if (cdat->filename) {
+-        ct3_load_cdat(cdat, errp);
++        return ct3_load_cdat(cdat, errp);
+     } else {
+-        ct3_build_cdat(cdat, errp);
++        return ct3_build_cdat(cdat, errp);
+     }
+ }
+ 
+diff --git a/hw/mem/cxl_type3.c b/hw/mem/cxl_type3.c
+index b0a7e9f11b..3e42490b6c 100644
+--- a/hw/mem/cxl_type3.c
++++ b/hw/mem/cxl_type3.c
+@@ -705,8 +705,7 @@ static void ct3_realize(PCIDevice *pci_dev, Error **errp)
+     cxl_cstate->cdat.build_cdat_table = ct3_build_cdat_table;
+     cxl_cstate->cdat.free_cdat_table = ct3_free_cdat_table;
+     cxl_cstate->cdat.private = ct3d;
+-    cxl_doe_cdat_init(cxl_cstate, errp);
+-    if (*errp) {
++    if (!cxl_doe_cdat_init(cxl_cstate, errp)) {
+         goto err_free_special_ops;
      }
  
-diff --git a/tests/qtest/fuzz/qos_fuzz.c b/tests/qtest/fuzz/qos_fuzz.c
-index e403d373a0..b71e945c5f 100644
---- a/tests/qtest/fuzz/qos_fuzz.c
-+++ b/tests/qtest/fuzz/qos_fuzz.c
-@@ -46,7 +46,7 @@ static void qos_set_machines_devices_available(void)
-     MachineInfoList *mach_info;
-     ObjectTypeInfoList *type_info;
- 
--    mach_info = qmp_query_machines(&error_abort);
-+    mach_info = qmp_query_machines(false, false, &error_abort);
-     machines_apply_to_node(mach_info);
-     qapi_free_MachineInfoList(mach_info);
+diff --git a/hw/pci-bridge/cxl_upstream.c b/hw/pci-bridge/cxl_upstream.c
+index 783fa6adac..e51221a5f3 100644
+--- a/hw/pci-bridge/cxl_upstream.c
++++ b/hw/pci-bridge/cxl_upstream.c
+@@ -338,8 +338,7 @@ static void cxl_usp_realize(PCIDevice *d, Error **errp)
+     cxl_cstate->cdat.build_cdat_table = build_cdat_table;
+     cxl_cstate->cdat.free_cdat_table = free_default_cdat_table;
+     cxl_cstate->cdat.private = d;
+-    cxl_doe_cdat_init(cxl_cstate, errp);
+-    if (*errp) {
++    if (!cxl_doe_cdat_init(cxl_cstate, errp)) {
+         goto err_cap;
+     }
  
 -- 
 2.41.0
