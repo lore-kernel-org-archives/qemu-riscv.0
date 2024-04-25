@@ -4,75 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 327E8C10F15
-	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Apr 2024 11:06:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62128C4345F
+	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Apr 2024 11:06:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rzwu3-0002HU-Oz; Thu, 25 Apr 2024 07:04:35 -0400
+	id 1rzwu2-00029n-GA; Thu, 25 Apr 2024 07:04:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwtW-0000Hv-Cu
- for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:04:09 -0400
-Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwsj-0008UQ-43
+ for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:03:38 -0400
+Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwtI-0000IX-SF
- for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:03:54 -0400
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-343c7fae6e4so686854f8f.1
- for <qemu-riscv@nongnu.org>; Thu, 25 Apr 2024 04:03:38 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwsa-00005Z-QY
+ for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:03:06 -0400
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-41adf155cffso6383995e9.2
+ for <qemu-riscv@nongnu.org>; Thu, 25 Apr 2024 04:03:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1714043017; x=1714647817; darn=nongnu.org;
+ d=linaro.org; s=google; t=1714042983; x=1714647783; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=q5xgdXCGND9O0mxiiZCYBTt0WDd2teRijPgGqLuPJXs=;
- b=g5EW0dllJYe6kN4eFHbXVWmL4KhI3jy6/Ii3SibI0uZLUDhHAzNufOdir+OZbTp/O3
- zp0O42G9+3pNG6QU0r7I+9QwJughycPnPoRIDjP8vnkZC4vQnTTkI9Bq/wdDH1AdzR/M
- YzEjNNxt7hl422i1Xk9WnxmJLzBZsyzrJ6UrHV5SnweI1iu6aEEzA/ewGOgMtTFnakBf
- 4zIuQvHU4gt6X39RNNUgJFnQG0DLjnE13Hoc3Wov9LUTPOcuOn8RB4FgEKFChi+48xDi
- 103ZXVpsKhkaMK1tevcVM2pxItvHMvrCs3HQiMrDs2FX8iWYT9YeB4fEHB7H5f/Qo5Ax
- UGLg==
+ bh=LbAs9YmrS9dSJaP9YCdhZk5wTEYcOSkfG+YJap7/m1c=;
+ b=upb2cCJutQ4RH6YHzzcoh/SDNJoih4pUuQVugFQuUw/SYzlRKtBXLJVkLUhTaWhD12
+ 86gxQHirJvp/zOls6O3rP7PURSM3hSXhbz4aoIAS98Fgb5+sO17E2uiD9bisXYPPXwzv
+ jUX1Q+etUnPzPnCmjMj0smUZngnFNRI3rXlLDlsgEk10YDwtaKkNQ6Oz+vUvQoYTd7YZ
+ IvnAmQuDN//McM+FdPzTKIeOkHSOOarysxBBhea3gdeJtDtcuTZfqildmjRlt4e0rTD8
+ FPt0LvRxeSUWNCr6ixC5z6UqlBa/Ro1mRi3szVPepMUPmhHg6syJNqr5MTJIV9AhxKAz
+ W8+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714043017; x=1714647817;
+ d=1e100.net; s=20230601; t=1714042983; x=1714647783;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=q5xgdXCGND9O0mxiiZCYBTt0WDd2teRijPgGqLuPJXs=;
- b=XwI+Y1bSgjfev1ayxr+fTlU5pxnJYqKimgmL1M4pxpJWvSZA0cBq4cUyZYIj/e11Ah
- N1tQKMsRtKx/JMmlY9MOcHd4Tnt3K3qZo66nyg08+ZPsCKUs3BhDiunW3MqeWQyI3GSm
- gUjlM0SvYUyqZqEN7UOJyqRkSHaFjWxUQTBjY1kVlru3v5psj6zwFxC4XoawgXs1lFut
- qt+a1x9wPoCyRinsz0BQpy7/Qw2WfGKL3f/Q5UfDJ6bV/1U94/rg4MRl+yKotPH1Mn0S
- fJ6Ia0WcIRGS6pS1LM7n1uXApaPEsaZB8BbHguOyDaaEqqZiofyEGGo355O8yThqazru
- p8aA==
-X-Gm-Message-State: AOJu0YwJSNXOn423BJsLnc2HSFtarmRyTH+mAKaUVdln+h7VXj8LE1ts
- /7DVzoh1RaN/cURsPF4JXCxiaWUe9ilCXsvIbbgGUXBPiMdCf1f91HtRULG+8PE=
-X-Google-Smtp-Source: AGHT+IGo4/4ds+aqwK0mOG61Mddx3imkACop4W8f2nNt+x5+kxgtBIL46K0+6irigKjFcRzE/192Mw==
-X-Received: by 2002:adf:f146:0:b0:343:b686:89a0 with SMTP id
- y6-20020adff146000000b00343b68689a0mr3968839wro.13.1714043016769; 
- Thu, 25 Apr 2024 04:03:36 -0700 (PDT)
+ bh=LbAs9YmrS9dSJaP9YCdhZk5wTEYcOSkfG+YJap7/m1c=;
+ b=QqyxxY/UA0wUgIt7E15D3lrzMvhRDW/SOLJDzLNQwR9vZUvbM3O/FSTpNGJFvxMNJg
+ Kgtcb+q+r9gYSRhQZnw1CUinSSAgM01a6sLR3S0+9nlPjMA15uoxjxOWRto2CrMGeOjs
+ acLer9onTf9807fAaAemH/fxALl1oCFHLZizOQ/zySlkXm7H85PSH1Br/u/maFbQRcHs
+ qaimJx18PkZ1RndGQ524vud0nI5BZsWvS5hwcrsuVI0Tkkm8uyNh+q/PdfjjBqUoxD/g
+ vIPJMG57oV4dHjTx+xHWgtnzI6Ns9TSVSwCIkRUGjHfN87lAfQjenQVYgh5F82AMrCTc
+ DVVA==
+X-Gm-Message-State: AOJu0YyXpnZVJjqPPSiNu+/P9/e1VS8kjvhjIdPOA8oQpXDiA+3TSmgU
+ D5xFxZXOApLL+r4DRovWz1W2fTSyH3tD912IGuIrFeEunwZ6IJ1rKprk/OhL7hyYLih7wWyAknD
+ T
+X-Google-Smtp-Source: AGHT+IFGt7D2a5BG0f6Ej/yKtX3pUKUzeeUlIFdZucYldsHGorV+6z4Q5Ind8NR6PRSHS1Ee03ftFg==
+X-Received: by 2002:a05:600c:154f:b0:418:e08c:817 with SMTP id
+ f15-20020a05600c154f00b00418e08c0817mr3681618wmg.32.1714042983172; 
+ Thu, 25 Apr 2024 04:03:03 -0700 (PDT)
 Received: from localhost.localdomain ([92.88.170.77])
  by smtp.gmail.com with ESMTPSA id
- x13-20020a5d54cd000000b0034335e47102sm19464539wrv.113.2024.04.25.04.03.35
+ p9-20020a05600c1d8900b0041b13c5c9f9sm4678586wms.17.2024.04.25.04.03.01
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 25 Apr 2024 04:03:36 -0700 (PDT)
+ Thu, 25 Apr 2024 04:03:02 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
- =?UTF-8?q?In=C3=A8s=20Varhol?= <ines.varhol@telecom-paris.fr>,
+Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org, Thomas Huth <thuth@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Arnaud Minier <arnaud.minier@telecom-paris.fr>
-Subject: [PULL 17/22] hw/misc : Correct 5 spaces indents in stm32l4x5_exti
-Date: Thu, 25 Apr 2024 13:01:50 +0200
-Message-ID: <20240425110157.20328-18-philmd@linaro.org>
+ Richard Henderson <richard.henderson@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Subject: [PULL 11/22] hw: Add a Kconfig switch for the TYPE_CPU_CLUSTER device
+Date: Thu, 25 Apr 2024 13:01:44 +0200
+Message-ID: <20240425110157.20328-12-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240425110157.20328-1-philmd@linaro.org>
 References: <20240425110157.20328-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::435;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x435.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::332;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x332.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -95,47 +102,94 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Inès Varhol <ines.varhol@telecom-paris.fr>
+From: Thomas Huth <thuth@redhat.com>
 
-Signed-off-by: Inès Varhol <ines.varhol@telecom-paris.fr>
+The cpu-cluster device is only needed for some few arm and riscv
+machines. Let's avoid compiling and linking it if it is not really
+necessary.
+
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Message-ID: <20240421141455.116548-1-ines.varhol@telecom-paris.fr>
+Signed-off-by: Thomas Huth <thuth@redhat.com>
+Message-ID: <20240415065655.130099-3-thuth@redhat.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- hw/misc/stm32l4x5_exti.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ hw/arm/Kconfig     | 3 +++
+ hw/cpu/Kconfig     | 3 +++
+ hw/cpu/meson.build | 3 ++-
+ hw/riscv/Kconfig   | 2 ++
+ 4 files changed, 10 insertions(+), 1 deletion(-)
 
-diff --git a/hw/misc/stm32l4x5_exti.c b/hw/misc/stm32l4x5_exti.c
-index 9fd859160d..5c55ee4268 100644
---- a/hw/misc/stm32l4x5_exti.c
-+++ b/hw/misc/stm32l4x5_exti.c
-@@ -59,22 +59,22 @@ static const uint32_t exti_romask[EXTI_NUM_REGISTER] = {
+diff --git a/hw/arm/Kconfig b/hw/arm/Kconfig
+index d97015c45c..5d4015b75a 100644
+--- a/hw/arm/Kconfig
++++ b/hw/arm/Kconfig
+@@ -485,6 +485,7 @@ config XLNX_ZYNQMP_ARM
+     select AHCI
+     select ARM_GIC
+     select CADENCE
++    select CPU_CLUSTER
+     select DDC
+     select DPCD
+     select SDHCI
+@@ -503,6 +504,7 @@ config XLNX_VERSAL
+     default y
+     depends on TCG && AARCH64
+     select ARM_GIC
++    select CPU_CLUSTER
+     select PL011
+     select CADENCE
+     select VIRTIO_MMIO
+@@ -688,6 +690,7 @@ config ARMSSE
+     select CMSDK_APB_DUALTIMER
+     select CMSDK_APB_UART
+     select CMSDK_APB_WATCHDOG
++    select CPU_CLUSTER
+     select IOTKIT_SECCTL
+     select IOTKIT_SYSCTL
+     select IOTKIT_SYSINFO
+diff --git a/hw/cpu/Kconfig b/hw/cpu/Kconfig
+index f776e884cd..baff478e1b 100644
+--- a/hw/cpu/Kconfig
++++ b/hw/cpu/Kconfig
+@@ -12,3 +12,6 @@ config A15MPCORE
+ config ARM11MPCORE
+     bool
+     select ARM11SCU
++
++config CPU_CLUSTER
++    bool
+diff --git a/hw/cpu/meson.build b/hw/cpu/meson.build
+index 38cdcfbe57..9d36bf8ae2 100644
+--- a/hw/cpu/meson.build
++++ b/hw/cpu/meson.build
+@@ -1,4 +1,5 @@
+-system_ss.add(files('core.c', 'cluster.c'))
++system_ss.add(files('core.c'))
++system_ss.add(when: 'CONFIG_CPU_CLUSTER', if_true: files('cluster.c'))
  
- static unsigned regbank_index_by_irq(unsigned irq)
- {
--     return irq >= EXTI_MAX_IRQ_PER_BANK ? 1 : 0;
-+    return irq >= EXTI_MAX_IRQ_PER_BANK ? 1 : 0;
- }
- 
- static unsigned regbank_index_by_addr(hwaddr addr)
- {
--     return addr >= EXTI_IMR2 ? 1 : 0;
-+    return addr >= EXTI_IMR2 ? 1 : 0;
- }
- 
- static unsigned valid_mask(unsigned bank)
- {
--     return MAKE_64BIT_MASK(0, irqs_per_bank[bank]);
-+    return MAKE_64BIT_MASK(0, irqs_per_bank[bank]);
- }
- 
- static unsigned configurable_mask(unsigned bank)
- {
--     return valid_mask(bank) & ~exti_romask[bank];
-+    return valid_mask(bank) & ~exti_romask[bank];
- }
- 
- static void stm32l4x5_exti_reset_hold(Object *obj)
+ system_ss.add(when: 'CONFIG_ARM11MPCORE', if_true: files('arm11mpcore.c'))
+ system_ss.add(when: 'CONFIG_REALVIEW', if_true: files('realview_mpcore.c'))
+diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+index 5d644eb7b1..fc72ef0379 100644
+--- a/hw/riscv/Kconfig
++++ b/hw/riscv/Kconfig
+@@ -9,6 +9,7 @@ config IBEX
+ config MICROCHIP_PFSOC
+     bool
+     select CADENCE_SDHCI
++    select CPU_CLUSTER
+     select MCHP_PFSOC_DMC
+     select MCHP_PFSOC_IOSCB
+     select MCHP_PFSOC_MMUART
+@@ -68,6 +69,7 @@ config SIFIVE_E
+ config SIFIVE_U
+     bool
+     select CADENCE
++    select CPU_CLUSTER
+     select RISCV_ACLINT
+     select SIFIVE_GPIO
+     select SIFIVE_PDMA
 -- 
 2.41.0
 
