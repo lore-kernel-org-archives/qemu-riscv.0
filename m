@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B960CC4345F
-	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Apr 2024 11:09:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6999C4345F
+	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Apr 2024 11:09:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rzwu5-0002OC-Go; Thu, 25 Apr 2024 07:04:37 -0400
+	id 1rzwuI-0002pN-GI; Thu, 25 Apr 2024 07:04:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwsN-00089X-S8
- for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:02:53 -0400
-Received: from mail-wr1-x42f.google.com ([2a00:1450:4864:20::42f])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwsn-0008VM-7g
+ for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:03:38 -0400
+Received: from mail-lj1-x236.google.com ([2a00:1450:4864:20::236])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwsJ-0008MA-Mb
- for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:02:51 -0400
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-34782453ffdso774945f8f.1
- for <qemu-riscv@nongnu.org>; Thu, 25 Apr 2024 04:02:47 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwsk-00007D-AF
+ for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:03:16 -0400
+Received: by mail-lj1-x236.google.com with SMTP id
+ 38308e7fff4ca-2dd19c29c41so9233071fa.3
+ for <qemu-riscv@nongnu.org>; Thu, 25 Apr 2024 04:03:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1714042966; x=1714647766; darn=nongnu.org;
+ d=linaro.org; s=google; t=1714042989; x=1714647789; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1My8ZSy1rXly0MJHGOKnYCpxMH11O/qNA4PcnoQO/Bk=;
- b=KVskqAR3LQ9dvMHcvBTznebqLCn/DRkEwFiSaYB/Mgfjq36jG4YPFzAFs6j15i7QWo
- CYTMZTakuAMZ1eqoxdg9kAOu1UEh6nbMMT94cyz0ycXKLoSS7sVcfVNdKVuS52/Jmj9U
- dbVAIorWMZONE0F2lZeSVQrqwvD0TbCW1pd7TpwkVUVsHXjZ85ZiOyY5tGBF3+wzdEdk
- zYwZRdnbk9frdRd8e9xqAADnjwMKICbEWLqRxEEXsK21kFd5a+RZKisM26ZQx/bAaus3
- lFCclX8cTBJRSzQ4Zg4kdRT4tR+SbqIb5rlhUy5hRd/OkuuJ/BjuLrRPCsTdv1SQA1jc
- 6+pQ==
+ bh=LU/r9zSSWOAgtXVFmIxCt1qMAeFSfB+B8bTVtMRUbL4=;
+ b=WrXR9xds2luym4J6tztK66DnJaf/wuj2yu2EDa583PaxoSFJwEWk1s2L1aNchIx+/r
+ bbR9UZz7iFtrCvMuaaKDwy3TZsSwGW9zzUFnkKUtVogRlNYkQ18amTlZR9yb/pPExQ2j
+ fjGvhqmzFGItbBbAjuHVlaCBQNbmXskDV7Snl6aLxO67SwCZGLsYvUI6KWzLAQQ/obJ8
+ MeQ9254Ek3cXhnTeh1ApAZ9/J5mkzleH+K9rKInF3B7Y1sQ4VXjXN0HdV+sqQ7CRQsXS
+ xsVN1HokLi5KiqQA+3m7jZXt90Xy2TAVok0I9hsD2cFYXLzuWsODMcI6TuDobnVQOdTP
+ 5GAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714042966; x=1714647766;
+ d=1e100.net; s=20230601; t=1714042989; x=1714647789;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=1My8ZSy1rXly0MJHGOKnYCpxMH11O/qNA4PcnoQO/Bk=;
- b=akbU3bGDW0kylS5pgecPbkcrseitIvi9ddq0SKRDkne/FDnZv6EPyeHOSgGCO6qG9V
- 7zsJkC87o+ZF7OTp8oWZT8pZB90RPJ2jO04g34X5X5urshjGELqNO50OAi2T57jpY18Z
- YEatWu6EXkE64oadNL1XGvTqAGRF+tfO2KXGlQxN0uEX6mWAGINE9RURKVxFtIcA9ySt
- ZJTQ1c+CXUJ1VweTiSfxc5lsIgnUr6X7fgK/ei/tkNgF3XLOc12OgugXC0aBFucor7ub
- IpFL0f7YVwPS2oCXwgW6ZdlPKslit0Vt3pxpgd0zoBqtLczrLWLjwPfYxJ2ZvAM2/Yur
- HhYA==
-X-Gm-Message-State: AOJu0YyPMSeYNU+deFCxJP/GsNjEVHZMvJumIqqqx6JFbYPcPTB9Lpto
- nTKC8Mv8ugYynG2TURvLSy8obeEd3NGSiS6Rsz7BVn7dgJnS0i6r+XDaGhY4JYo=
-X-Google-Smtp-Source: AGHT+IE4IoeXcSulUmKusv8xe735pBmPVtI1vUDyo/L1oiGIjq+L/sDOEgWcwuFIItf50QS5uMpM1w==
-X-Received: by 2002:a5d:420a:0:b0:34a:33e6:440d with SMTP id
- n10-20020a5d420a000000b0034a33e6440dmr4481547wrq.24.1714042966196; 
- Thu, 25 Apr 2024 04:02:46 -0700 (PDT)
+ bh=LU/r9zSSWOAgtXVFmIxCt1qMAeFSfB+B8bTVtMRUbL4=;
+ b=Thgi7U5eZjMzDFNE4NO0fd7cDwZUflIkOb97vT3d6XFUy4RxXhw/nPNGj09U3C3DyA
+ kKPkKYyrXtkCRHdtJpDLNSpjPbbp9/CIL3vaB8kc6f+BUYqHl4X0J6GMOCmlc+AaVd/V
+ ond6fR3ySmVPO69d+e5AY1yY+lR4Gq2zzWzm+j6UB2nneC17kKd8RAqT8OseJGW/eQE7
+ 2Yp/j5h4FC40N2erFaOlURvgAYMAJkJGnvpmxEZYlUaSxk1NzgwvCeu6/oHLiIOW0bi/
+ ecqCLzz98Wf1X+46VMiKN8BwEcbc2F7jX8kli3ihubrF3IrEZa/PTqpGPh5eLHrdwRT4
+ Xm0A==
+X-Gm-Message-State: AOJu0Ywm+4Mt+dMr1l1PUjFa/kUMREA3d2xJkBAegv9jAVD8FGhuBm0P
+ Lvclk3vK0ASMzhlj6hzkbeQRNJfroVQ1lYdXJWrN4aAw3Sx5sCjQYosCZBZDRSFNJR8IGlNpbwe
+ b
+X-Google-Smtp-Source: AGHT+IFO8miQl6dbOAeeTD9X+PVLuHZOUwqnZSgopxhCCr33r6EuDuv6CgJsQcLWxILvpMYPwwf/Zw==
+X-Received: by 2002:a2e:954f:0:b0:2de:81c9:14b3 with SMTP id
+ t15-20020a2e954f000000b002de81c914b3mr2837508ljh.35.1714042988935; 
+ Thu, 25 Apr 2024 04:03:08 -0700 (PDT)
 Received: from localhost.localdomain ([92.88.170.77])
  by smtp.gmail.com with ESMTPSA id
- fj3-20020a05600c0c8300b00416b2cbad06sm31028131wmb.41.2024.04.25.04.02.44
+ o20-20020a05600c511400b0041a49b10a13sm14955302wms.11.2024.04.25.04.03.07
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 25 Apr 2024 04:02:45 -0700 (PDT)
+ Thu, 25 Apr 2024 04:03:08 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
+Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org, Zhao Liu <zhao1.liu@intel.com>,
+ Markus Armbruster <armbru@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Peter Maydell <peter.maydell@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- Jean-Christophe Dubois <jcd@tribudubois.net>,
- Andrey Smirnov <andrew.smirnov@gmail.com>,
- Jason Wang <jasowang@redhat.com>, Alistair Francis <alistair@alistair23.me>
-Subject: [PULL 08/22] hw/misc/imx: Replace sprintf() by snprintf()
-Date: Thu, 25 Apr 2024 13:01:41 +0200
-Message-ID: <20240425110157.20328-9-philmd@linaro.org>
+ Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+ Jonathan Cameron <jonathan.cameron@huawei.com>, Fan Ni <fan.ni@samsung.com>
+Subject: [PULL 12/22] hw/cxl/cxl-cdat: Make ct3_load_cdat() return boolean
+Date: Thu, 25 Apr 2024 13:01:45 +0200
+Message-ID: <20240425110157.20328-13-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240425110157.20328-1-philmd@linaro.org>
 References: <20240425110157.20328-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42f;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::236;
+ envelope-from=philmd@linaro.org; helo=mail-lj1-x236.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -98,146 +97,82 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-sprintf() is deprecated on Darwin since macOS 13.0 / XCode 14.1,
-resulting in painful developer experience. Use snprintf() instead.
+From: Zhao Liu <zhao1.liu@intel.com>
 
+As error.h suggested, the best practice for callee is to return
+something to indicate success / failure.
+
+So make ct3_load_cdat() return boolean, and this is the preparation for
+cxl_doe_cdat_init() returning boolean.
+
+Suggested-by: Markus Armbruster <armbru@redhat.com>
+Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Acked-by: Jonathan Cameron <Jonathan.Cameron@huawei.com>
+Message-ID: <20240418100433.1085447-2-zhao1.liu@linux.intel.com>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
-Message-Id: <20240411104340.6617-6-philmd@linaro.org>
-Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- hw/misc/imx25_ccm.c  | 2 +-
- hw/misc/imx31_ccm.c  | 2 +-
- hw/misc/imx6_ccm.c   | 4 ++--
- hw/misc/imx6_src.c   | 2 +-
- hw/misc/imx6ul_ccm.c | 4 ++--
- hw/misc/imx7_src.c   | 2 +-
- hw/net/imx_fec.c     | 2 +-
- hw/ssi/imx_spi.c     | 2 +-
- 8 files changed, 10 insertions(+), 10 deletions(-)
+ hw/cxl/cxl-cdat.c | 13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
 
-diff --git a/hw/misc/imx25_ccm.c b/hw/misc/imx25_ccm.c
-index d888966014..faa726a86a 100644
---- a/hw/misc/imx25_ccm.c
-+++ b/hw/misc/imx25_ccm.c
-@@ -91,7 +91,7 @@ static const char *imx25_ccm_reg_name(uint32_t reg)
-     case IMX25_CCM_LPIMR1_REG:
-         return "lpimr1";
-     default:
--        sprintf(unknown, "[%u ?]", reg);
-+        snprintf(unknown, sizeof(unknown), "[%u ?]", reg);
-         return unknown;
-     }
- }
-diff --git a/hw/misc/imx31_ccm.c b/hw/misc/imx31_ccm.c
-index a9059bb1f7..125d4fceeb 100644
---- a/hw/misc/imx31_ccm.c
-+++ b/hw/misc/imx31_ccm.c
-@@ -89,7 +89,7 @@ static const char *imx31_ccm_reg_name(uint32_t reg)
-     case IMX31_CCM_PDR2_REG:
-         return "PDR2";
-     default:
--        sprintf(unknown, "[%u ?]", reg);
-+        snprintf(unknown, sizeof(unknown), "[%u ?]", reg);
-         return unknown;
-     }
- }
-diff --git a/hw/misc/imx6_ccm.c b/hw/misc/imx6_ccm.c
-index 56489d8b57..b1def7f05b 100644
---- a/hw/misc/imx6_ccm.c
-+++ b/hw/misc/imx6_ccm.c
-@@ -85,7 +85,7 @@ static const char *imx6_ccm_reg_name(uint32_t reg)
-     case CCM_CMEOR:
-         return "CMEOR";
-     default:
--        sprintf(unknown, "%u ?", reg);
-+        snprintf(unknown, sizeof(unknown), "%u ?", reg);
-         return unknown;
-     }
- }
-@@ -224,7 +224,7 @@ static const char *imx6_analog_reg_name(uint32_t reg)
-     case USB_ANALOG_DIGPROG:
-         return "USB_ANALOG_DIGPROG";
-     default:
--        sprintf(unknown, "%u ?", reg);
-+        snprintf(unknown, sizeof(unknown), "%u ?", reg);
-         return unknown;
-     }
- }
-diff --git a/hw/misc/imx6_src.c b/hw/misc/imx6_src.c
-index 0c6003559f..3766bdf561 100644
---- a/hw/misc/imx6_src.c
-+++ b/hw/misc/imx6_src.c
-@@ -68,7 +68,7 @@ static const char *imx6_src_reg_name(uint32_t reg)
-     case SRC_GPR10:
-         return "SRC_GPR10";
-     default:
--        sprintf(unknown, "%u ?", reg);
-+        snprintf(unknown, sizeof(unknown), "%u ?", reg);
-         return unknown;
-     }
- }
-diff --git a/hw/misc/imx6ul_ccm.c b/hw/misc/imx6ul_ccm.c
-index bbc0be9921..0ac49ea34b 100644
---- a/hw/misc/imx6ul_ccm.c
-+++ b/hw/misc/imx6ul_ccm.c
-@@ -143,7 +143,7 @@ static const char *imx6ul_ccm_reg_name(uint32_t reg)
-     case CCM_CMEOR:
-         return "CMEOR";
-     default:
--        sprintf(unknown, "%u ?", reg);
-+        snprintf(unknown, sizeof(unknown), "%u ?", reg);
-         return unknown;
-     }
- }
-@@ -274,7 +274,7 @@ static const char *imx6ul_analog_reg_name(uint32_t reg)
-     case USB_ANALOG_DIGPROG:
-         return "USB_ANALOG_DIGPROG";
-     default:
--        sprintf(unknown, "%u ?", reg);
-+        snprintf(unknown, sizeof(unknown), "%u ?", reg);
-         return unknown;
-     }
- }
-diff --git a/hw/misc/imx7_src.c b/hw/misc/imx7_src.c
-index b3725ff6e7..d19f0450d4 100644
---- a/hw/misc/imx7_src.c
-+++ b/hw/misc/imx7_src.c
-@@ -75,7 +75,7 @@ static const char *imx7_src_reg_name(uint32_t reg)
-     case SRC_GPR10:
-         return "SRC_GPR10";
-     default:
--        sprintf(unknown, "%u ?", reg);
-+        snprintf(unknown, sizeof(unknown), "%u ?", reg);
-         return unknown;
-     }
- }
-diff --git a/hw/net/imx_fec.c b/hw/net/imx_fec.c
-index cee84af7ba..8c91d20d44 100644
---- a/hw/net/imx_fec.c
-+++ b/hw/net/imx_fec.c
-@@ -41,7 +41,7 @@
- static const char *imx_default_reg_name(IMXFECState *s, uint32_t index)
- {
-     static char tmp[20];
--    sprintf(tmp, "index %d", index);
-+    snprintf(tmp, sizeof(tmp), "index %d", index);
-     return tmp;
+diff --git a/hw/cxl/cxl-cdat.c b/hw/cxl/cxl-cdat.c
+index 551545f782..b3e496857a 100644
+--- a/hw/cxl/cxl-cdat.c
++++ b/hw/cxl/cxl-cdat.c
+@@ -111,7 +111,7 @@ static void ct3_build_cdat(CDATObject *cdat, Error **errp)
+     cdat->entry = g_steal_pointer(&cdat_st);
  }
  
-diff --git a/hw/ssi/imx_spi.c b/hw/ssi/imx_spi.c
-index d8a7583ff3..12d897d306 100644
---- a/hw/ssi/imx_spi.c
-+++ b/hw/ssi/imx_spi.c
-@@ -53,7 +53,7 @@ static const char *imx_spi_reg_name(uint32_t reg)
-     case ECSPI_MSGDATA:
-         return  "ECSPI_MSGDATA";
-     default:
--        sprintf(unknown, "%u ?", reg);
-+        snprintf(unknown, sizeof(unknown), "%u ?", reg);
-         return unknown;
+-static void ct3_load_cdat(CDATObject *cdat, Error **errp)
++static bool ct3_load_cdat(CDATObject *cdat, Error **errp)
+ {
+     g_autofree CDATEntry *cdat_st = NULL;
+     g_autofree uint8_t *buf = NULL;
+@@ -127,11 +127,11 @@ static void ct3_load_cdat(CDATObject *cdat, Error **errp)
+                              &file_size, &error)) {
+         error_setg(errp, "CDAT: File read failed: %s", error->message);
+         g_error_free(error);
+-        return;
++        return false;
      }
+     if (file_size < sizeof(CDATTableHeader)) {
+         error_setg(errp, "CDAT: File too short");
+-        return;
++        return false;
+     }
+     i = sizeof(CDATTableHeader);
+     num_ent = 1;
+@@ -139,19 +139,19 @@ static void ct3_load_cdat(CDATObject *cdat, Error **errp)
+         hdr = (CDATSubHeader *)(buf + i);
+         if (i + sizeof(CDATSubHeader) > file_size) {
+             error_setg(errp, "CDAT: Truncated table");
+-            return;
++            return false;
+         }
+         cdat_len_check(hdr, errp);
+         i += hdr->length;
+         if (i > file_size) {
+             error_setg(errp, "CDAT: Truncated table");
+-            return;
++            return false;
+         }
+         num_ent++;
+     }
+     if (i != file_size) {
+         error_setg(errp, "CDAT: File length mismatch");
+-        return;
++        return false;
+     }
+ 
+     cdat_st = g_new0(CDATEntry, num_ent);
+@@ -185,6 +185,7 @@ static void ct3_load_cdat(CDATObject *cdat, Error **errp)
+     cdat->entry_len = num_ent;
+     cdat->entry = g_steal_pointer(&cdat_st);
+     cdat->buf = g_steal_pointer(&buf);
++    return true;
  }
+ 
+ void cxl_doe_cdat_init(CXLComponentState *cxl_cstate, Error **errp)
 -- 
 2.41.0
 
