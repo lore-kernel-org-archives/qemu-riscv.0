@@ -4,74 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59BEDC4345F
-	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Apr 2024 11:04:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A55CAC4345F
+	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Apr 2024 11:05:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rzwtf-0000Jj-Sb; Thu, 25 Apr 2024 07:04:13 -0400
+	id 1rzwuS-0003BI-Ih; Thu, 25 Apr 2024 07:05:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwsH-00085d-UT
- for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:02:47 -0400
-Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwtb-0000JF-DD
+ for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:04:09 -0400
+Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwsF-0008IQ-MC
- for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:02:44 -0400
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-34665dd7744so589895f8f.1
- for <qemu-riscv@nongnu.org>; Thu, 25 Apr 2024 04:02:41 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwtY-0000Kt-6C
+ for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:04:06 -0400
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-4196c62bb4eso6588905e9.2
+ for <qemu-riscv@nongnu.org>; Thu, 25 Apr 2024 04:03:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1714042960; x=1714647760; darn=nongnu.org;
+ d=linaro.org; s=google; t=1714043028; x=1714647828; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lYhjl1/jGiesNQD68pOCk3VBrraJnT7fa7wrXc4FOT0=;
- b=sS9SNaY2m91SB2OuGxhRGe3Zi640dzqYr+7FM0qXPCca7ZjDwL/7jLEsJbRCeN/MHm
- zN1X0yKopOlZPSXZfLa3wjPoTrNBk8SINFYZR/C+049d1tuYW2c5L/Z0ui3IzYdHEbCm
- /hGKBzdn4K+uv4/MTZmHgpTgouyIjQAPlGqBs9O3RxD+gWzDjxjtPcu5D6Z2TY448kok
- 03cz9qZGWePMuofu9qcMXjLqfWrk9NMXwUz9movYjDmH9UMh8GuXIE2hefebeWK66uU5
- hz7r/e/mwMwK/3nsJn/wKPm7RR9wIF+FSudPsR3mApq9xr3ehinTIGtLyNoPY+loV+th
- 7tww==
+ bh=W7uwePuX3rPWTRA+fw+W1FX6Shl9Ifmx73up+GoZgb0=;
+ b=CFwqAPvFeUPkhH4JNVmmXc9RzcanHFPge6GaaXeL2rXurKpilMQmpVqVsGz32mxv6v
+ pGWBI3PACyXx3XAKNi5uBH7D6+5BAiP5Z7GNBCfu2hidZx6UDASwjZIuS7yXeEK31Zag
+ F3mokBzLLIgZcEste0+Y+dV5FAVJKYp7OLNyHJPDxI54AqSPLZaT1shztRSONi7pvBDz
+ fN5+Ew2IS2A/T9Rwe/CT9LPzXd/+i43LDx36X9FimFBzIzk6kAvYDI9Lfze+2tHN+03B
+ IO4pYV5t/PVtQ1rKsxqZXV1IfYz+SX00FS5yACi7Nbyc0uqxVHX3o3k1xpjCWK8UiUhf
+ L9cA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714042960; x=1714647760;
+ d=1e100.net; s=20230601; t=1714043028; x=1714647828;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lYhjl1/jGiesNQD68pOCk3VBrraJnT7fa7wrXc4FOT0=;
- b=UkeOcPKR8wQ0t/MsdPHxo0AnN/mTvrLGCoS0kr6a3sON44v1b9mBks9cX4H/GIIHS0
- ZwKZaudRF6FXTfMsP0157KvO2RsxcmCkr+zNSAuGWnHnPEV4JEtg7cghe36LkxM9z4Rh
- 1WMGwCXB0AKCbkhK0ScN2ezsyLK7FpoH/E9ODPDZXFSd4/0jwhbibWpOU8wRKNg8RDGr
- pMoGFlbSdKMzr5aPGN9QG2BPB6x3QttCYp1jZoWICpSBh9VGCzIjxiwGM3mX+Qku6KXU
- BFpPq7aUrwf/dXDATJHi/cEH5trWWF6jl4X9YigMvrnyREjMpV0MhQpoh6hnqq9GfO73
- 3uUw==
-X-Gm-Message-State: AOJu0YxfTS/UOG4lAZveuX9PFDkpbdYOweqXa20hFtnmy/Gm2tOjX6mO
- 8Ceb3MUHaEyibXI0flXY/cXOnbmYhj58JSyx233O0Ko/s2EmHoxrKltbTODAyMY=
-X-Google-Smtp-Source: AGHT+IE+z8VLtpiVcsEDriTtA4dS6T5UEXA3GkhSwRz42pIaS0iByWzozD1pu3D1/ycppsU1VPSF5A==
-X-Received: by 2002:a05:6000:47:b0:33d:b376:8a07 with SMTP id
- k7-20020a056000004700b0033db3768a07mr3496522wrx.8.1714042960487; 
- Thu, 25 Apr 2024 04:02:40 -0700 (PDT)
+ bh=W7uwePuX3rPWTRA+fw+W1FX6Shl9Ifmx73up+GoZgb0=;
+ b=OlGQjLVltTFdDHQSc3D4lCyeveZVsz+Q6Y99EwIXoTLUnNFdRJEPOxdb1B9+FV3xf6
+ LGXPw8AA12THD6l28//iVbzDaeg2cCZdqUba84DvZ3ye94xNRVCDYd9HxyOokMyO5edc
+ JM+375QqvHWtzjMcBeqJBn7bWandSVUkI4r2QHqlqs+6jE5CKmTCx7u0QUbXqYAmgxot
+ 4R2+TsOkErmqUvsyVL2VpaTZqzMvfNm6rcAG70tfg3HznId11RXWLsnJjbjXUf+JggcQ
+ LRHluvbKAL5QjKLxa+s2LhFpBJeRlyKpBoyNDdS6NS/92qIPVLFLYf6x/s5NKc5vRJvI
+ 8RZw==
+X-Gm-Message-State: AOJu0Yw3UjhpNxViRuKGuP7bF/95ekPg+0Xe0wCgrKcAfxPhU1vreoS4
+ XitXN/OxcJ0nPWOtKFljHGp8AThxjzYwaMzBn34ltOa6oYm5lvNnY+aOcKwfIjg=
+X-Google-Smtp-Source: AGHT+IHNDMb4unbEF38ERzGAuYkwXlMJIjH7EVKROZcBO6j/BgEOn6BE5qQWhB8ADTUv7U6/8UAb4g==
+X-Received: by 2002:a05:600c:3502:b0:41a:fe41:80e4 with SMTP id
+ h2-20020a05600c350200b0041afe4180e4mr3402391wmq.0.1714043027837; 
+ Thu, 25 Apr 2024 04:03:47 -0700 (PDT)
 Received: from localhost.localdomain ([92.88.170.77])
  by smtp.gmail.com with ESMTPSA id
- y18-20020a5d4ad2000000b0034a0d3c0715sm19281014wrs.50.2024.04.25.04.02.39
+ jg1-20020a05600ca00100b0041b25a70a85sm3623801wmb.30.2024.04.25.04.03.46
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 25 Apr 2024 04:02:40 -0700 (PDT)
+ Thu, 25 Apr 2024 04:03:47 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
+Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org, Zhao Liu <zhao1.liu@intel.com>,
+ Xiaoyao Li <xiaoyao.li@intel.com>, Yongwei Ma <yongwei.ma@intel.com>,
+ Babu Moger <babu.moger@amd.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Peter Maydell <peter.maydell@linaro.org>
-Subject: [PULL 07/22] hw/misc/applesmc: Simplify DeviceReset handler
-Date: Thu, 25 Apr 2024 13:01:40 +0200
-Message-ID: <20240425110157.20328-8-philmd@linaro.org>
+ Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Yanan Wang <wangyanan55@huawei.com>
+Subject: [PULL 19/22] hw/core/machine: Introduce the module as a CPU topology
+ level
+Date: Thu, 25 Apr 2024 13:01:52 +0200
+Message-ID: <20240425110157.20328-20-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240425110157.20328-1-philmd@linaro.org>
 References: <20240425110157.20328-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42d;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32e.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,99 +99,119 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Have applesmc_find_key() return a const pointer.
-Since the returned buffers are not modified in
-applesmc_io_data_write(), it is pointless to
-delete and re-add the keys in the DeviceReset
-handler. Add them once in DeviceRealize, and
-discard them in the DeviceUnrealize handler.
+From: Zhao Liu <zhao1.liu@intel.com>
 
+In x86, module is the topology level above core, which contains a set
+of cores that share certain resources (in current products, the resource
+usually includes L2 cache, as well as module scoped features and MSRs).
+
+Though smp.clusters could also share the L2 cache resource [1], there
+are following reasons that drive us to introduce the new smp.modules:
+
+  * As the CPU topology abstraction in device tree [2], cluster supports
+    nesting (though currently QEMU hasn't support that). In contrast,
+    (x86) module does not support nesting.
+
+  * Due to nesting, there is great flexibility in sharing resources
+    on cluster, rather than narrowing cluster down to sharing L2 (and
+    L3 tags) as the lowest topology level that contains cores.
+
+  * Flexible nesting of cluster allows it to correspond to any level
+    between the x86 package and core.
+
+  * In Linux kernel, x86's cluster only represents the L2 cache domain
+    but QEMU's smp.clusters is the CPU topology level. Linux kernel will
+    also expose module level topology information in sysfs for x86. To
+    avoid cluster ambiguity and keep a consistent CPU topology naming
+    style with the Linux kernel, we introduce module level for x86.
+
+The module is, in existing hardware practice, the lowest layer that
+contains the core, while the cluster is able to have a higher
+topological scope than the module due to its nesting.
+
+Therefore, place the module between the cluster and the core:
+
+    drawer/book/socket/die/cluster/module/core/thread
+
+With the above topological hierarchy order, introduce module level
+support in MachineState and MachineClass.
+
+[1]: https://lore.kernel.org/qemu-devel/c3d68005-54e0-b8fe-8dc1-5989fe3c7e69@huawei.com/
+[2]: https://www.kernel.org/doc/Documentation/devicetree/bindings/cpu/cpu-topology.txt
+
+Suggested-by: Xiaoyao Li <xiaoyao.li@intel.com>
+Tested-by: Yongwei Ma <yongwei.ma@intel.com>
+Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
+Tested-by: Babu Moger <babu.moger@amd.com>
+Message-ID: <20240424154929.1487382-2-zhao1.liu@intel.com>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
-Message-Id: <20240410180819.92332-1-philmd@linaro.org>
 ---
- hw/misc/applesmc.c | 36 +++++++++++++++++++++---------------
- 1 file changed, 21 insertions(+), 15 deletions(-)
+ include/hw/boards.h   | 4 ++++
+ hw/core/machine-smp.c | 2 +-
+ hw/core/machine.c     | 1 +
+ 3 files changed, 6 insertions(+), 1 deletion(-)
 
-diff --git a/hw/misc/applesmc.c b/hw/misc/applesmc.c
-index 14e3ef667d..59a4899312 100644
---- a/hw/misc/applesmc.c
-+++ b/hw/misc/applesmc.c
-@@ -145,7 +145,7 @@ static void applesmc_io_cmd_write(void *opaque, hwaddr addr, uint64_t val,
-     s->data_pos = 0;
+diff --git a/include/hw/boards.h b/include/hw/boards.h
+index 69c1ba45cf..2fa800f11a 100644
+--- a/include/hw/boards.h
++++ b/include/hw/boards.h
+@@ -144,6 +144,7 @@ typedef struct {
+  *                 provided SMP configuration
+  * @books_supported - whether books are supported by the machine
+  * @drawers_supported - whether drawers are supported by the machine
++ * @modules_supported - whether modules are supported by the machine
+  */
+ typedef struct {
+     bool prefer_sockets;
+@@ -152,6 +153,7 @@ typedef struct {
+     bool has_clusters;
+     bool books_supported;
+     bool drawers_supported;
++    bool modules_supported;
+ } SMPCompatProps;
+ 
+ /**
+@@ -339,6 +341,7 @@ typedef struct DeviceMemoryState {
+  * @sockets: the number of sockets in one book
+  * @dies: the number of dies in one socket
+  * @clusters: the number of clusters in one die
++ * @modules: the number of modules in one cluster
+  * @cores: the number of cores in one cluster
+  * @threads: the number of threads in one core
+  * @max_cpus: the maximum number of logical processors on the machine
+@@ -350,6 +353,7 @@ typedef struct CpuTopology {
+     unsigned int sockets;
+     unsigned int dies;
+     unsigned int clusters;
++    unsigned int modules;
+     unsigned int cores;
+     unsigned int threads;
+     unsigned int max_cpus;
+diff --git a/hw/core/machine-smp.c b/hw/core/machine-smp.c
+index 27864c9507..2e68fcfdfd 100644
+--- a/hw/core/machine-smp.c
++++ b/hw/core/machine-smp.c
+@@ -266,7 +266,7 @@ void machine_parse_smp_config(MachineState *ms,
+ 
+ unsigned int machine_topo_get_cores_per_socket(const MachineState *ms)
+ {
+-    return ms->smp.cores * ms->smp.clusters * ms->smp.dies;
++    return ms->smp.cores * ms->smp.modules * ms->smp.clusters * ms->smp.dies;
  }
  
--static struct AppleSMCData *applesmc_find_key(AppleSMCState *s)
-+static const struct AppleSMCData *applesmc_find_key(AppleSMCState *s)
- {
-     struct AppleSMCData *d;
+ unsigned int machine_topo_get_threads_per_socket(const MachineState *ms)
+diff --git a/hw/core/machine.c b/hw/core/machine.c
+index 582c2df37a..9966641159 100644
+--- a/hw/core/machine.c
++++ b/hw/core/machine.c
+@@ -1157,6 +1157,7 @@ static void machine_initfn(Object *obj)
+     ms->smp.sockets = 1;
+     ms->smp.dies = 1;
+     ms->smp.clusters = 1;
++    ms->smp.modules = 1;
+     ms->smp.cores = 1;
+     ms->smp.threads = 1;
  
-@@ -161,7 +161,7 @@ static void applesmc_io_data_write(void *opaque, hwaddr addr, uint64_t val,
-                                    unsigned size)
- {
-     AppleSMCState *s = opaque;
--    struct AppleSMCData *d;
-+    const struct AppleSMCData *d;
- 
-     smc_debug("DATA received: 0x%02x\n", (uint8_t)val);
-     switch (s->cmd) {
-@@ -269,23 +269,10 @@ static void applesmc_add_key(AppleSMCState *s, const char *key,
- static void qdev_applesmc_isa_reset(DeviceState *dev)
- {
-     AppleSMCState *s = APPLE_SMC(dev);
--    struct AppleSMCData *d, *next;
- 
--    /* Remove existing entries */
--    QLIST_FOREACH_SAFE(d, &s->data_def, node, next) {
--        QLIST_REMOVE(d, node);
--        g_free(d);
--    }
-     s->status = 0x00;
-     s->status_1e = 0x00;
-     s->last_ret = 0x00;
--
--    applesmc_add_key(s, "REV ", 6, "\x01\x13\x0f\x00\x00\x03");
--    applesmc_add_key(s, "OSK0", 32, s->osk);
--    applesmc_add_key(s, "OSK1", 32, s->osk + 32);
--    applesmc_add_key(s, "NATJ", 1, "\0");
--    applesmc_add_key(s, "MSSP", 1, "\0");
--    applesmc_add_key(s, "MSSD", 1, "\0x3");
- }
- 
- static const MemoryRegionOps applesmc_data_io_ops = {
-@@ -343,6 +330,24 @@ static void applesmc_isa_realize(DeviceState *dev, Error **errp)
-     }
- 
-     QLIST_INIT(&s->data_def);
-+    applesmc_add_key(s, "REV ", 6, "\x01\x13\x0f\x00\x00\x03");
-+    applesmc_add_key(s, "OSK0", 32, s->osk);
-+    applesmc_add_key(s, "OSK1", 32, s->osk + 32);
-+    applesmc_add_key(s, "NATJ", 1, "\0");
-+    applesmc_add_key(s, "MSSP", 1, "\0");
-+    applesmc_add_key(s, "MSSD", 1, "\0x3");
-+}
-+
-+static void applesmc_unrealize(DeviceState *dev)
-+{
-+    AppleSMCState *s = APPLE_SMC(dev);
-+    struct AppleSMCData *d, *next;
-+
-+    /* Remove existing entries */
-+    QLIST_FOREACH_SAFE(d, &s->data_def, node, next) {
-+        QLIST_REMOVE(d, node);
-+        g_free(d);
-+    }
- }
- 
- static Property applesmc_isa_properties[] = {
-@@ -377,6 +382,7 @@ static void qdev_applesmc_class_init(ObjectClass *klass, void *data)
-     AcpiDevAmlIfClass *adevc = ACPI_DEV_AML_IF_CLASS(klass);
- 
-     dc->realize = applesmc_isa_realize;
-+    dc->unrealize = applesmc_unrealize;
-     dc->reset = qdev_applesmc_isa_reset;
-     device_class_set_props(dc, applesmc_isa_properties);
-     set_bit(DEVICE_CATEGORY_MISC, dc->categories);
 -- 
 2.41.0
 
