@@ -4,86 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C556C4345F
-	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Apr 2024 11:06:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68405C4345F
+	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Apr 2024 11:06:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rzwv2-0003bI-P2; Thu, 25 Apr 2024 07:05:38 -0400
+	id 1rzwtq-0000zr-2G; Thu, 25 Apr 2024 07:04:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwtZ-0000Ix-GO
- for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:04:09 -0400
-Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwsq-00005T-9l
+ for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:03:38 -0400
+Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwtT-0000ML-E0
- for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:04:04 -0400
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-41a1d2a7b81so10911315e9.0
- for <qemu-riscv@nongnu.org>; Thu, 25 Apr 2024 04:03:54 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwsm-0000A8-Rd
+ for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:03:19 -0400
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-4155819f710so6583455e9.2
+ for <qemu-riscv@nongnu.org>; Thu, 25 Apr 2024 04:03:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1714043034; x=1714647834; darn=nongnu.org;
+ d=linaro.org; s=google; t=1714042994; x=1714647794; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=g96vdGUPlIMAMR0tgpTdGd3qjyGWYgQDQCU+2PoDhEA=;
- b=lXLKlDz+kj0vrE/FQpclKomG+nbgEYsQfQzMsUyDCTJwlryROR7hW3iY179ObPbiyP
- t0vI9mCSNlAvvhHTG1DaqPrtPOqqKNyTsbOGxJy8S7wV4+T+yBdZpGGWkME0UenRJwNj
- oxJ+ofX5FPu1k2s/pVt9xcvmbAATR/osfMBI1v73u8LhKyjtpfVQhGXX/Hdr3zAm7ptE
- pQPHpXJWUaeZ+FXm1bMKop5BsgdPXYKR2imr/AHiZ5a1/NWyoxc5tFYN0vSl2vBomU5W
- 9hMaeuepLAz+95qUq3H0T7MlR7848nP5uD7EH9WTb6FidI1/iGVUgZHBpVERx440mi+a
- HvuQ==
+ bh=8bJ1N9o6y+S8lNsIITbhbB1Udo8RPNY/z42IZN8n3uY=;
+ b=o9e2JvchHg5dfWSh/z2SQMfNy0QkVIe91WIGmoHqe2VYBytEsQZxCyuy43VUT0Cvqg
+ BOgDlE/7pATxN5NYjfW62/PeVsTPMm9SlQT4ksgbfOo5RRSGINZQBeMEx8al0LBuegIM
+ SVc5Vd0glybBwHQjgzkjJqsznfmrj/z7Hmn0+obklXI2F8iShdJeskrCdmvX6cfaoabm
+ R6eLWEA6UcsMFBjiIf8Bfjh1WN2Xhw6dVB3sjfhBYupFiJPtBipofJpW97qjmybVBf9O
+ +9NPuqaXFYYQ+TiIj+v4OIsqTZEGbeqIVpD5t0YH3YN+Cpvt+RYx1K41qzhwL1ior+OY
+ Sdrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714043034; x=1714647834;
+ d=1e100.net; s=20230601; t=1714042994; x=1714647794;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=g96vdGUPlIMAMR0tgpTdGd3qjyGWYgQDQCU+2PoDhEA=;
- b=eZ0wUB07OZhWxs5+h0JpFf/FSsgb6eQ66feUwh29SYubmmUkcKt55JYbO6mM2ggQYr
- ey3DK3TPm1x3XVzKcSjdE6rDOkvKm7CfN0O6A8QUbP1r+RCUX/OR8qSGHTGch0taFDbA
- hFWUjluUICuo7NlewSmb643EJgwOu8Wm+wizSjXSiGDfttKqGcZS7+so3mEI6FnQbnwx
- wKqAlId/V86NZak0m/Sv+2qIAUzXr+Asdn1tBZGY80jMDYbMtMZHwjWBAJ93q8lPgRRi
- DGxrUZf6tP4rYEcKMcDAt2tr4GFFnb7Ao19pKpz3G4BKBHiXPnNzSemH0sp1G3SmBdU8
- nvoA==
-X-Gm-Message-State: AOJu0YzM7IKC6uz2VWWyfEET+hbKYUIotz+sIkfbUB1B/glv4m1RKcAl
- gQHvRvzzXVKnufjOzuJDhTBSrr3CDqWeUKJeVzomzG6KloAEwQzAZPeTq/QAA6g=
-X-Google-Smtp-Source: AGHT+IGjQzm6j03xu7otoMVLUkfmm4z/psoO2x+hsMHYrcIwQPKyBdHoI4vAt2n90sdZN9DGeD4D4g==
-X-Received: by 2002:a05:600c:4fc6:b0:41a:3369:61a3 with SMTP id
- o6-20020a05600c4fc600b0041a336961a3mr2073458wmq.5.1714043033731; 
- Thu, 25 Apr 2024 04:03:53 -0700 (PDT)
+ bh=8bJ1N9o6y+S8lNsIITbhbB1Udo8RPNY/z42IZN8n3uY=;
+ b=VY0C/DH3hMnio4ZwyhEfBseIvRqqy6lX6IuOZ3Lt+APrSr60neb0yZLNbr1NSS01jS
+ 5WXYBZQJoN55C6yb1pS5YXlg9zM7rAev8rZYpOefl9pu40pp8zNVafDb8LV4iVqs0KXo
+ y486fesMeIt3JtCrcP+FNkm+YH/0UAhIG33hpyKc+PluKYsbRgAeqBrZQOs4xdIembq9
+ FGu6GTMtz3qNvTCnWLokfe+uwe0RCHmfHeYx/Y5mRhXb5uNgB3A8wDI48dUGYL9nCEyx
+ hW4N7dI54WosFi9kRHuk8fbpO5XREkI4xwgVxWiwq8OtvmJ9WmjIO6bfMpY+EX6XqKff
+ G59g==
+X-Gm-Message-State: AOJu0YycOD7GqMctUXDMvN5Dbl3K9Lz/tmSQVXgqh9lhrGaWVngfDlB1
+ loLUok4gdoIaPG8ggsClDBR1cGY/GFzJi2dL/NGwwBw2MPHHab8EoJ4SgiHtfOc=
+X-Google-Smtp-Source: AGHT+IExtxLJ50MnYU/IbmveQvsJjUvXAL9seoPtUBsjFHLwrfdxSyldZdl8iBPaCQOyZrDoOo9++g==
+X-Received: by 2002:a05:600c:35c7:b0:418:a7a7:990f with SMTP id
+ r7-20020a05600c35c700b00418a7a7990fmr4300251wmq.13.1714042994514; 
+ Thu, 25 Apr 2024 04:03:14 -0700 (PDT)
 Received: from localhost.localdomain ([92.88.170.77])
  by smtp.gmail.com with ESMTPSA id
- q6-20020a05600c46c600b0041892857924sm27165769wmo.36.2024.04.25.04.03.52
+ fc19-20020a05600c525300b00418981b59d4sm31049322wmb.10.2024.04.25.04.03.13
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 25 Apr 2024 04:03:53 -0700 (PDT)
+ Thu, 25 Apr 2024 04:03:14 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org, Zhao Liu <zhao1.liu@intel.com>,
- Xiaoyao Li <xiaoyao.li@intel.com>, Yongwei Ma <yongwei.ma@intel.com>,
- Babu Moger <babu.moger@amd.com>, Markus Armbruster <armbru@redhat.com>,
+ Markus Armbruster <armbru@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Yanan Wang <wangyanan55@huawei.com>, Eric Blake <eblake@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>
-Subject: [PULL 20/22] hw/core/machine: Support modules in -smp
-Date: Thu, 25 Apr 2024 13:01:53 +0200
-Message-ID: <20240425110157.20328-21-philmd@linaro.org>
+ Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+ Jonathan Cameron <jonathan.cameron@huawei.com>, Fan Ni <fan.ni@samsung.com>
+Subject: [PULL 13/22] hw/cxl/cxl-cdat: Make ct3_build_cdat() return boolean
+Date: Thu, 25 Apr 2024 13:01:46 +0200
+Message-ID: <20240425110157.20328-14-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240425110157.20328-1-philmd@linaro.org>
 References: <20240425110157.20328-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,176 +98,69 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Zhao Liu <zhao1.liu@intel.com>
 
-Add "modules" parameter parsing support in -smp.
+As error.h suggested, the best practice for callee is to return
+something to indicate success / failure.
 
-Suggested-by: Xiaoyao Li <xiaoyao.li@intel.com>
-Tested-by: Yongwei Ma <yongwei.ma@intel.com>
+So make ct3_build_cdat() return boolean, and this is the preparation for
+cxl_doe_cdat_init() returning boolean.
+
+Suggested-by: Markus Armbruster <armbru@redhat.com>
 Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
-Tested-by: Babu Moger <babu.moger@amd.com>
-Acked-by: Markus Armbruster <armbru@redhat.com>
-Message-ID: <20240424154929.1487382-3-zhao1.liu@intel.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Acked-by: Jonathan Cameron <Jonathan.Cameron@huawei.com>
+Message-ID: <20240418100433.1085447-3-zhao1.liu@linux.intel.com>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- qapi/machine.json     |  3 +++
- hw/core/machine-smp.c | 39 +++++++++++++++++++++++++++++++++------
- hw/core/machine.c     |  1 +
- system/vl.c           |  3 +++
- 4 files changed, 40 insertions(+), 6 deletions(-)
+ hw/cxl/cxl-cdat.c | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
-diff --git a/qapi/machine.json b/qapi/machine.json
-index 3e9cc3f17d..48f98e7d9f 100644
---- a/qapi/machine.json
-+++ b/qapi/machine.json
-@@ -1696,6 +1696,8 @@
- #
- # @clusters: number of clusters per parent container (since 7.0)
- #
-+# @modules: number of modules per parent container (since 9.1)
-+#
- # @cores: number of cores per parent container
- #
- # @threads: number of threads per core
-@@ -1709,6 +1711,7 @@
-      '*sockets': 'int',
-      '*dies': 'int',
-      '*clusters': 'int',
-+     '*modules': 'int',
-      '*cores': 'int',
-      '*threads': 'int',
-      '*maxcpus': 'int' } }
-diff --git a/hw/core/machine-smp.c b/hw/core/machine-smp.c
-index 2e68fcfdfd..2b93fa99c9 100644
---- a/hw/core/machine-smp.c
-+++ b/hw/core/machine-smp.c
-@@ -51,6 +51,10 @@ static char *cpu_hierarchy_to_string(MachineState *ms)
-         g_string_append_printf(s, " * clusters (%u)", ms->smp.clusters);
+diff --git a/hw/cxl/cxl-cdat.c b/hw/cxl/cxl-cdat.c
+index b3e496857a..e7bc1380bf 100644
+--- a/hw/cxl/cxl-cdat.c
++++ b/hw/cxl/cxl-cdat.c
+@@ -44,7 +44,7 @@ static void cdat_len_check(CDATSubHeader *hdr, Error **errp)
+     }
+ }
+ 
+-static void ct3_build_cdat(CDATObject *cdat, Error **errp)
++static bool ct3_build_cdat(CDATObject *cdat, Error **errp)
+ {
+     g_autofree CDATTableHeader *cdat_header = NULL;
+     g_autofree CDATEntry *cdat_st = NULL;
+@@ -58,7 +58,7 @@ static void ct3_build_cdat(CDATObject *cdat, Error **errp)
+     cdat_header = g_malloc0(sizeof(*cdat_header));
+     if (!cdat_header) {
+         error_setg(errp, "Failed to allocate CDAT header");
+-        return;
++        return false;
      }
  
-+    if (mc->smp_props.modules_supported) {
-+        g_string_append_printf(s, " * modules (%u)", ms->smp.modules);
-+    }
-+
-     g_string_append_printf(s, " * cores (%u)", ms->smp.cores);
-     g_string_append_printf(s, " * threads (%u)", ms->smp.threads);
+     cdat->built_buf_len = cdat->build_cdat_table(&cdat->built_buf,
+@@ -67,14 +67,14 @@ static void ct3_build_cdat(CDATObject *cdat, Error **errp)
+     if (cdat->built_buf_len <= 0) {
+         /* Build later as not all data available yet */
+         cdat->to_update = true;
+-        return;
++        return true;
+     }
+     cdat->to_update = false;
  
-@@ -88,6 +92,7 @@ void machine_parse_smp_config(MachineState *ms,
-     unsigned sockets = config->has_sockets ? config->sockets : 0;
-     unsigned dies    = config->has_dies ? config->dies : 0;
-     unsigned clusters = config->has_clusters ? config->clusters : 0;
-+    unsigned modules = config->has_modules ? config->modules : 0;
-     unsigned cores   = config->has_cores ? config->cores : 0;
-     unsigned threads = config->has_threads ? config->threads : 0;
-     unsigned maxcpus = config->has_maxcpus ? config->maxcpus : 0;
-@@ -103,6 +108,7 @@ void machine_parse_smp_config(MachineState *ms,
-         (config->has_sockets && config->sockets == 0) ||
-         (config->has_dies && config->dies == 0) ||
-         (config->has_clusters && config->clusters == 0) ||
-+        (config->has_modules && config->modules == 0) ||
-         (config->has_cores && config->cores == 0) ||
-         (config->has_threads && config->threads == 0) ||
-         (config->has_maxcpus && config->maxcpus == 0)) {
-@@ -115,6 +121,20 @@ void machine_parse_smp_config(MachineState *ms,
-      * If not supported by the machine, a topology parameter must be
-      * omitted.
-      */
-+    if (!mc->smp_props.modules_supported && config->has_modules) {
-+        if (config->modules > 1) {
-+            error_setg(errp, "modules not supported by this "
-+                       "machine's CPU topology");
-+            return;
-+        } else {
-+            /* Here modules only equals 1 since we've checked zero case. */
-+            warn_report("Deprecated CPU topology (considered invalid): "
-+                        "Unsupported modules parameter mustn't be "
-+                        "specified as 1");
-+        }
-+    }
-+    modules = modules > 0 ? modules : 1;
-+
-     if (!mc->smp_props.clusters_supported && config->has_clusters) {
-         if (config->clusters > 1) {
-             error_setg(errp, "clusters not supported by this "
-@@ -185,11 +205,13 @@ void machine_parse_smp_config(MachineState *ms,
-                 cores = cores > 0 ? cores : 1;
-                 threads = threads > 0 ? threads : 1;
-                 sockets = maxcpus /
--                          (drawers * books * dies * clusters * cores * threads);
-+                          (drawers * books * dies * clusters *
-+                           modules * cores * threads);
-             } else if (cores == 0) {
-                 threads = threads > 0 ? threads : 1;
-                 cores = maxcpus /
--                        (drawers * books * sockets * dies * clusters * threads);
-+                        (drawers * books * sockets * dies *
-+                         clusters * modules * threads);
-             }
-         } else {
-             /* prefer cores over sockets since 6.2 */
-@@ -197,22 +219,26 @@ void machine_parse_smp_config(MachineState *ms,
-                 sockets = sockets > 0 ? sockets : 1;
-                 threads = threads > 0 ? threads : 1;
-                 cores = maxcpus /
--                        (drawers * books * sockets * dies * clusters * threads);
-+                        (drawers * books * sockets * dies *
-+                         clusters * modules * threads);
-             } else if (sockets == 0) {
-                 threads = threads > 0 ? threads : 1;
-                 sockets = maxcpus /
--                          (drawers * books * dies * clusters * cores * threads);
-+                          (drawers * books * dies * clusters *
-+                           modules * cores * threads);
-             }
-         }
- 
-         /* try to calculate omitted threads at last */
-         if (threads == 0) {
-             threads = maxcpus /
--                      (drawers * books * sockets * dies * clusters * cores);
-+                      (drawers * books * sockets * dies *
-+                       clusters * modules * cores);
-         }
+     cdat_st = g_malloc0(sizeof(*cdat_st) * (cdat->built_buf_len + 1));
+     if (!cdat_st) {
+         error_setg(errp, "Failed to allocate CDAT entry array");
+-        return;
++        return false;
      }
  
--    total_cpus = drawers * books * sockets * dies * clusters * cores * threads;
-+    total_cpus = drawers * books * sockets * dies *
-+                 clusters * modules * cores * threads;
-     maxcpus = maxcpus > 0 ? maxcpus : total_cpus;
-     cpus = cpus > 0 ? cpus : maxcpus;
+     /* Entry 0 for CDAT header, starts with Entry 1 */
+@@ -109,6 +109,7 @@ static void ct3_build_cdat(CDATObject *cdat, Error **errp)
+     cdat_st[0].length = sizeof(*cdat_header);
+     cdat->entry_len = 1 + cdat->built_buf_len;
+     cdat->entry = g_steal_pointer(&cdat_st);
++    return true;
+ }
  
-@@ -222,6 +248,7 @@ void machine_parse_smp_config(MachineState *ms,
-     ms->smp.sockets = sockets;
-     ms->smp.dies = dies;
-     ms->smp.clusters = clusters;
-+    ms->smp.modules = modules;
-     ms->smp.cores = cores;
-     ms->smp.threads = threads;
-     ms->smp.max_cpus = maxcpus;
-diff --git a/hw/core/machine.c b/hw/core/machine.c
-index 9966641159..494b712a76 100644
---- a/hw/core/machine.c
-+++ b/hw/core/machine.c
-@@ -881,6 +881,7 @@ static void machine_get_smp(Object *obj, Visitor *v, const char *name,
-         .has_sockets = true, .sockets = ms->smp.sockets,
-         .has_dies = true, .dies = ms->smp.dies,
-         .has_clusters = true, .clusters = ms->smp.clusters,
-+        .has_modules = true, .modules = ms->smp.modules,
-         .has_cores = true, .cores = ms->smp.cores,
-         .has_threads = true, .threads = ms->smp.threads,
-         .has_maxcpus = true, .maxcpus = ms->smp.max_cpus,
-diff --git a/system/vl.c b/system/vl.c
-index c644222982..7756eac81e 100644
---- a/system/vl.c
-+++ b/system/vl.c
-@@ -741,6 +741,9 @@ static QemuOptsList qemu_smp_opts = {
-         }, {
-             .name = "clusters",
-             .type = QEMU_OPT_NUMBER,
-+        }, {
-+            .name = "modules",
-+            .type = QEMU_OPT_NUMBER,
-         }, {
-             .name = "cores",
-             .type = QEMU_OPT_NUMBER,
+ static bool ct3_load_cdat(CDATObject *cdat, Error **errp)
 -- 
 2.41.0
 
