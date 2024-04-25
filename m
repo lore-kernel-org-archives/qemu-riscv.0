@@ -4,87 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 497E1C4345F
-	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Apr 2024 11:04:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59BEDC4345F
+	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Apr 2024 11:04:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rzwtq-00014A-JP; Thu, 25 Apr 2024 07:04:22 -0400
+	id 1rzwtf-0000Jj-Sb; Thu, 25 Apr 2024 07:04:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwsS-0008DN-Nl
- for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:02:58 -0400
-Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwsH-00085d-UT
+ for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:02:47 -0400
+Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwsP-0008Nf-U9
- for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:02:55 -0400
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-41b42ce6bfdso3618745e9.1
- for <qemu-riscv@nongnu.org>; Thu, 25 Apr 2024 04:02:53 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwsF-0008IQ-MC
+ for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:02:44 -0400
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-34665dd7744so589895f8f.1
+ for <qemu-riscv@nongnu.org>; Thu, 25 Apr 2024 04:02:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1714042972; x=1714647772; darn=nongnu.org;
+ d=linaro.org; s=google; t=1714042960; x=1714647760; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Rf1txhvOtU9A895EpVlfVLIui0ISU1TQahG+lZi6+b0=;
- b=PR5ClGRqgiiosD0JZPWcJyUawvI/ODaN7ZRYcLTZK25JoSDmN77cwLSCk3vgFT3icb
- rKIrpjor+xpY43qJFwdZp6sV86OTYz6J5RqnB/1/QQqwUzvJMjo4iWlCvqNgrKZrv+cX
- VMg8MtpQV+r/3SERfoQ4b8dqFox6QTZmMkUGZw7Z2UfaWUmSJB1YUirw7UvrTtvN8rm9
- tNfifvy9h13SIE8NRef3T8UwD5UKshoBLO7CEFSB/Zyj68F9oK7K3ZVB4XNQlGCC8JJR
- YWzHph8ohRhGMlhx2937TxhMWxwS+p+aSzHOAQEjXi2QMZpweYU9jHzton+saQYbcU7m
- s9ZQ==
+ bh=lYhjl1/jGiesNQD68pOCk3VBrraJnT7fa7wrXc4FOT0=;
+ b=sS9SNaY2m91SB2OuGxhRGe3Zi640dzqYr+7FM0qXPCca7ZjDwL/7jLEsJbRCeN/MHm
+ zN1X0yKopOlZPSXZfLa3wjPoTrNBk8SINFYZR/C+049d1tuYW2c5L/Z0ui3IzYdHEbCm
+ /hGKBzdn4K+uv4/MTZmHgpTgouyIjQAPlGqBs9O3RxD+gWzDjxjtPcu5D6Z2TY448kok
+ 03cz9qZGWePMuofu9qcMXjLqfWrk9NMXwUz9movYjDmH9UMh8GuXIE2hefebeWK66uU5
+ hz7r/e/mwMwK/3nsJn/wKPm7RR9wIF+FSudPsR3mApq9xr3ehinTIGtLyNoPY+loV+th
+ 7tww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714042972; x=1714647772;
+ d=1e100.net; s=20230601; t=1714042960; x=1714647760;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Rf1txhvOtU9A895EpVlfVLIui0ISU1TQahG+lZi6+b0=;
- b=WWlfA9sbSpaNnPgFegJmIZb1hfI9jHKKWptchfIWzEpZouzbfwmlI4geT3fsNEf7q1
- sF7fG3pTYSPwtLuq7IK4Dv4zLGrYcFUqbDA+uwIIw8x7GsjCsSlo4tDIxQBneFk1GzO/
- 9xohGNderOEu6JzTbsfL7nf+QZ+doa4gb9rgzp6ErYq98x8Fvs/jrbO7vQPzdP2NftRh
- VTaeY0DnurpkO9g/r1V4rWxN46ZDpMwXoVm2D66IbDMCelhwedCCv9t3Qz/wtpL6RZmO
- n9TWzbEBo1S65emuL7+eQ3eOff7JCxtfaoFR+iBnGZZ8jnAw04SkYoKDwKgF0ju80H6g
- zzrw==
-X-Gm-Message-State: AOJu0YwZSXaFVJheNk1LybonlccK09MhhXvk3NP8xa/z5vCL8XLD/aNf
- MaIAb9KLDR+lNsIVJLmo5v5863Mr//BAhJLw65Q0khix7yu1tQuzoOzSgU13Otg=
-X-Google-Smtp-Source: AGHT+IEagd4TEJwMWXiRoiDfm5K7DXg/2fEHi+ML+UAWzDDR+Bsuyjlmyp/tzJESuePfwQuGb6xq+g==
-X-Received: by 2002:a05:600c:4ec9:b0:41a:bf5d:c30a with SMTP id
- g9-20020a05600c4ec900b0041abf5dc30amr5646980wmq.18.1714042972013; 
- Thu, 25 Apr 2024 04:02:52 -0700 (PDT)
+ bh=lYhjl1/jGiesNQD68pOCk3VBrraJnT7fa7wrXc4FOT0=;
+ b=UkeOcPKR8wQ0t/MsdPHxo0AnN/mTvrLGCoS0kr6a3sON44v1b9mBks9cX4H/GIIHS0
+ ZwKZaudRF6FXTfMsP0157KvO2RsxcmCkr+zNSAuGWnHnPEV4JEtg7cghe36LkxM9z4Rh
+ 1WMGwCXB0AKCbkhK0ScN2ezsyLK7FpoH/E9ODPDZXFSd4/0jwhbibWpOU8wRKNg8RDGr
+ pMoGFlbSdKMzr5aPGN9QG2BPB6x3QttCYp1jZoWICpSBh9VGCzIjxiwGM3mX+Qku6KXU
+ BFpPq7aUrwf/dXDATJHi/cEH5trWWF6jl4X9YigMvrnyREjMpV0MhQpoh6hnqq9GfO73
+ 3uUw==
+X-Gm-Message-State: AOJu0YxfTS/UOG4lAZveuX9PFDkpbdYOweqXa20hFtnmy/Gm2tOjX6mO
+ 8Ceb3MUHaEyibXI0flXY/cXOnbmYhj58JSyx233O0Ko/s2EmHoxrKltbTODAyMY=
+X-Google-Smtp-Source: AGHT+IE+z8VLtpiVcsEDriTtA4dS6T5UEXA3GkhSwRz42pIaS0iByWzozD1pu3D1/ycppsU1VPSF5A==
+X-Received: by 2002:a05:6000:47:b0:33d:b376:8a07 with SMTP id
+ k7-20020a056000004700b0033db3768a07mr3496522wrx.8.1714042960487; 
+ Thu, 25 Apr 2024 04:02:40 -0700 (PDT)
 Received: from localhost.localdomain ([92.88.170.77])
  by smtp.gmail.com with ESMTPSA id
- c9-20020a05600c0a4900b0041b43d2d745sm2089435wmq.7.2024.04.25.04.02.50
+ y18-20020a5d4ad2000000b0034a0d3c0715sm19281014wrs.50.2024.04.25.04.02.39
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 25 Apr 2024 04:02:51 -0700 (PDT)
+ Thu, 25 Apr 2024 04:02:40 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PULL 09/22] hw/riscv/virt: Replace sprintf by g_strdup_printf
-Date: Thu, 25 Apr 2024 13:01:42 +0200
-Message-ID: <20240425110157.20328-10-philmd@linaro.org>
+ Peter Maydell <peter.maydell@linaro.org>
+Subject: [PULL 07/22] hw/misc/applesmc: Simplify DeviceReset handler
+Date: Thu, 25 Apr 2024 13:01:40 +0200
+Message-ID: <20240425110157.20328-8-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240425110157.20328-1-philmd@linaro.org>
 References: <20240425110157.20328-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32f.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
-X-Spam_action: no action
+Received-SPF: pass client-ip=2a00:1450:4864:20::42d;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42d.google.com
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -99,67 +86,99 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-sprintf() is deprecated on Darwin since macOS 13.0 / XCode 14.1.
-Use g_strdup_printf instead.
+Have applesmc_find_key() return a const pointer.
+Since the returned buffers are not modified in
+applesmc_io_data_write(), it is pointless to
+delete and re-add the keys in the DeviceReset
+handler. Add them once in DeviceRealize, and
+discard them in the DeviceUnrealize handler.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-[rth: Use g_strdup_printf]
-Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-Message-Id: <20240412073346.458116-26-richard.henderson@linaro.org>
+Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
+Message-Id: <20240410180819.92332-1-philmd@linaro.org>
 ---
- hw/riscv/virt.c | 17 +++++++++--------
- 1 file changed, 9 insertions(+), 8 deletions(-)
+ hw/misc/applesmc.c | 36 +++++++++++++++++++++---------------
+ 1 file changed, 21 insertions(+), 15 deletions(-)
 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index d171e74f7b..4fdb660525 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -1617,10 +1617,8 @@ static void virt_machine_instance_init(Object *obj)
- static char *virt_get_aia_guests(Object *obj, Error **errp)
- {
-     RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
--    char val[32];
- 
--    sprintf(val, "%d", s->aia_guests);
--    return g_strdup(val);
-+    return g_strdup_printf("%d", s->aia_guests);
+diff --git a/hw/misc/applesmc.c b/hw/misc/applesmc.c
+index 14e3ef667d..59a4899312 100644
+--- a/hw/misc/applesmc.c
++++ b/hw/misc/applesmc.c
+@@ -145,7 +145,7 @@ static void applesmc_io_cmd_write(void *opaque, hwaddr addr, uint64_t val,
+     s->data_pos = 0;
  }
  
- static void virt_set_aia_guests(Object *obj, const char *val, Error **errp)
-@@ -1741,7 +1739,6 @@ static void virt_machine_device_plug_cb(HotplugHandler *hotplug_dev,
- 
- static void virt_machine_class_init(ObjectClass *oc, void *data)
+-static struct AppleSMCData *applesmc_find_key(AppleSMCState *s)
++static const struct AppleSMCData *applesmc_find_key(AppleSMCState *s)
  {
--    char str[128];
-     MachineClass *mc = MACHINE_CLASS(oc);
-     HotplugHandlerClass *hc = HOTPLUG_HANDLER_CLASS(oc);
+     struct AppleSMCData *d;
  
-@@ -1767,7 +1764,6 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
-     machine_class_allow_dynamic_sysbus_dev(mc, TYPE_TPM_TIS_SYSBUS);
- #endif
+@@ -161,7 +161,7 @@ static void applesmc_io_data_write(void *opaque, hwaddr addr, uint64_t val,
+                                    unsigned size)
+ {
+     AppleSMCState *s = opaque;
+-    struct AppleSMCData *d;
++    const struct AppleSMCData *d;
  
+     smc_debug("DATA received: 0x%02x\n", (uint8_t)val);
+     switch (s->cmd) {
+@@ -269,23 +269,10 @@ static void applesmc_add_key(AppleSMCState *s, const char *key,
+ static void qdev_applesmc_isa_reset(DeviceState *dev)
+ {
+     AppleSMCState *s = APPLE_SMC(dev);
+-    struct AppleSMCData *d, *next;
+ 
+-    /* Remove existing entries */
+-    QLIST_FOREACH_SAFE(d, &s->data_def, node, next) {
+-        QLIST_REMOVE(d, node);
+-        g_free(d);
+-    }
+     s->status = 0x00;
+     s->status_1e = 0x00;
+     s->last_ret = 0x00;
 -
-     object_class_property_add_bool(oc, "aclint", virt_get_aclint,
-                                    virt_set_aclint);
-     object_class_property_set_description(oc, "aclint",
-@@ -1785,9 +1781,14 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
-     object_class_property_add_str(oc, "aia-guests",
-                                   virt_get_aia_guests,
-                                   virt_set_aia_guests);
--    sprintf(str, "Set number of guest MMIO pages for AIA IMSIC. Valid value "
--                 "should be between 0 and %d.", VIRT_IRQCHIP_MAX_GUESTS);
--    object_class_property_set_description(oc, "aia-guests", str);
-+    {
-+        g_autofree char *str =
-+            g_strdup_printf("Set number of guest MMIO pages for AIA IMSIC. "
-+                            "Valid value should be between 0 and %d.",
-+                            VIRT_IRQCHIP_MAX_GUESTS);
-+        object_class_property_set_description(oc, "aia-guests", str);
-+    }
+-    applesmc_add_key(s, "REV ", 6, "\x01\x13\x0f\x00\x00\x03");
+-    applesmc_add_key(s, "OSK0", 32, s->osk);
+-    applesmc_add_key(s, "OSK1", 32, s->osk + 32);
+-    applesmc_add_key(s, "NATJ", 1, "\0");
+-    applesmc_add_key(s, "MSSP", 1, "\0");
+-    applesmc_add_key(s, "MSSD", 1, "\0x3");
+ }
+ 
+ static const MemoryRegionOps applesmc_data_io_ops = {
+@@ -343,6 +330,24 @@ static void applesmc_isa_realize(DeviceState *dev, Error **errp)
+     }
+ 
+     QLIST_INIT(&s->data_def);
++    applesmc_add_key(s, "REV ", 6, "\x01\x13\x0f\x00\x00\x03");
++    applesmc_add_key(s, "OSK0", 32, s->osk);
++    applesmc_add_key(s, "OSK1", 32, s->osk + 32);
++    applesmc_add_key(s, "NATJ", 1, "\0");
++    applesmc_add_key(s, "MSSP", 1, "\0");
++    applesmc_add_key(s, "MSSD", 1, "\0x3");
++}
 +
-     object_class_property_add(oc, "acpi", "OnOffAuto",
-                               virt_get_acpi, virt_set_acpi,
-                               NULL, NULL);
++static void applesmc_unrealize(DeviceState *dev)
++{
++    AppleSMCState *s = APPLE_SMC(dev);
++    struct AppleSMCData *d, *next;
++
++    /* Remove existing entries */
++    QLIST_FOREACH_SAFE(d, &s->data_def, node, next) {
++        QLIST_REMOVE(d, node);
++        g_free(d);
++    }
+ }
+ 
+ static Property applesmc_isa_properties[] = {
+@@ -377,6 +382,7 @@ static void qdev_applesmc_class_init(ObjectClass *klass, void *data)
+     AcpiDevAmlIfClass *adevc = ACPI_DEV_AML_IF_CLASS(klass);
+ 
+     dc->realize = applesmc_isa_realize;
++    dc->unrealize = applesmc_unrealize;
+     dc->reset = qdev_applesmc_isa_reset;
+     device_class_set_props(dc, applesmc_isa_properties);
+     set_bit(DEVICE_CATEGORY_MISC, dc->categories);
 -- 
 2.41.0
 
