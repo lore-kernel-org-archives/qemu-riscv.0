@@ -4,80 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB9C2C4345F
-	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Apr 2024 11:09:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CCB2C4345F
+	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Apr 2024 11:09:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rzwun-0003RR-U0; Thu, 25 Apr 2024 07:05:22 -0400
+	id 1rzwu7-0002UY-7l; Thu, 25 Apr 2024 07:04:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwtX-0000II-H1
- for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:04:09 -0400
-Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwtf-0000MB-KW
+ for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:04:13 -0400
+Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwtL-0000Jq-6j
- for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:03:54 -0400
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-41b5e74fa83so1816695e9.0
- for <qemu-riscv@nongnu.org>; Thu, 25 Apr 2024 04:03:43 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwtb-0000OB-66
+ for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:04:10 -0400
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-34a7e47d164so640721f8f.3
+ for <qemu-riscv@nongnu.org>; Thu, 25 Apr 2024 04:04:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1714043022; x=1714647822; darn=nongnu.org;
+ d=linaro.org; s=google; t=1714043045; x=1714647845; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3jM66TtA9+JPWnnaJ/wdkFyoBPGKJrTnB7XlYnSXjfw=;
- b=q67tICheuqQtUFBIwqS8xdmp9ZjCnwej4ObCq0rfBW0NnQ5jxQfOibhMOdM4cS/LZO
- 7uEqp3eN7KJ/f6mHWt0GgKd4kvOj8bCevQQIsTWS4PDAgRVEmw/JWezo/nUIlZCDleWp
- lPlHGABqys96bi7bcWl/Baf6f5EW3jNOhUcNwmrFBj/pLdJ+BcS+V4RB8VTY4X/b+ti5
- a4ZNF4Sc7vaIwUXU7DedWrG1qF9SG8ty02pFOLgjKUZnkecwOxCWWJ5Y5jQlgRwxFcYG
- uUQhoPrnbf3PSDWRrSG/RhlgDYK5kXAhZvVj86moZEn003H0yMemIislAARfYsVmG8uR
- Hbkg==
+ bh=DtMNR1ZQjJCcNYkkejZVBvEmwe3F+2PjUE+kGb5DBZI=;
+ b=qQ8XGqfKyttfqQ17Re/ThAnwmjlzoPq9rO1qUq/w6yY5A71wbKOdIN8SCHl2A22jjN
+ O3Ae6fIwtJcAmvtIPr+PWUTPutzI9jMKQUlnFwIn07K3Opu7hDSqeutdoL3IuvTezjfe
+ w7Zaj9ygGl+95fhQp5yK5FccE0OIqDUzyDquhlVEjXl4LUWEisOqxkUHAYZ2UzZQFKOI
+ wGUhgGJ4iXsdmXhGQI7OBpqaja9wS8FtgYvrQEX2ozOdl0CEIuy6GWLT4SMAciIytFX8
+ 4zDk06SRM5R7w9+5w7PtcIkke8e5Opl7BonYK3n+J2J0WfUuIQp5tmX5sPaNoS5kF4CX
+ WzLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714043022; x=1714647822;
+ d=1e100.net; s=20230601; t=1714043045; x=1714647845;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3jM66TtA9+JPWnnaJ/wdkFyoBPGKJrTnB7XlYnSXjfw=;
- b=QO1ptKYIAYBfnF1z4CKcPfiiimZDH5uvcx0uBU0eTZboj+qrBHQEeyHm7GHWP5sptK
- SKDHcd6/zdsK/QCfiTGUVsY6WLE8r83E0KgJpU3d13dm89YkwvLwo1UgXx7eLX8fYEC3
- dYiPaGy2i2WAUgAEULFc5fzgxXGJ9hChNTf9rfbP3ZZWKPyZuIMZPBxrQD86KaFA6Ds8
- B+XEI7J8SKzGH4N3QPQPHKHxsdRxf9VumBmUpQ/PB+6a4CfS9ugA1amNDgW5PDk1E5w8
- diq9CX5fMnu/mGUX/7rW2GIrSCAZKk7EmbwJB4XDpTCZj9trYldZYKjwQ0scvyaMVzNr
- bbwQ==
-X-Gm-Message-State: AOJu0YzH3nSgBSVXUyQb8SCDd95fa30yFI3Yr4TmwlmMwsY576A7rSLH
- t9XZrAlsf9wm6g6332MAl8XgeOFRl3i6bJHDPyiIskAg2oTtKdpR5BvxrfMOgyc=
-X-Google-Smtp-Source: AGHT+IFep8mayYoTqo1tEoWaxYRBNnZQKy6JlVbPvXcPmoksWBiLC7hipxkwT32wWx0hqDlaV9VWvQ==
-X-Received: by 2002:a05:600c:4ecb:b0:419:ed35:e312 with SMTP id
- g11-20020a05600c4ecb00b00419ed35e312mr4210635wmq.21.1714043022268; 
- Thu, 25 Apr 2024 04:03:42 -0700 (PDT)
+ bh=DtMNR1ZQjJCcNYkkejZVBvEmwe3F+2PjUE+kGb5DBZI=;
+ b=fxPQvmpNxPMc+xQNCGBLvnSyDkYrM304a+599rwkHF0QKOWC+ow95atCC8rt01fnfZ
+ 7NC4RRwZ5WnqkP6JAzLBlnhmjJnNWfKBkPGkUIHvlLZ6wl7r8H5/AtEgWrt1V8OkJopF
+ iAFUf+qne/UcRRZLx9AnDxSmk3kYML6L/cx11p9k98CtCPmTrP9tPAlYaw/7J4k9jXiG
+ 5BKyihzfGm6nhlP+OebMpdxTAGQRKJJrkGJOi0V7GTBAFaFMo/mLabo2Avai2tpcTvje
+ jhvuuidDVvgIHqjd1iJsssJljxdLRkBNz8JMMrMcznJzeftztI9G1WEvkcrTIi2XdpMJ
+ B4xQ==
+X-Gm-Message-State: AOJu0Yx4tNZAxFcofvXWD+RDsgyIR2qzy1yJ0J7nqNd8gS8+0VKk8+qX
+ 2IbnSy019P/lwOnZlMmBenaXb3BwvxEn0qJ4eJy9sa2pnEBqb1R3xVHB3n8GIIQ=
+X-Google-Smtp-Source: AGHT+IEWNircr86tkVldy1EsXrXAxD/kzzSUIMWxBrCkq+T/LXkDmvFt7vckXR5njOJa/f9q3055aQ==
+X-Received: by 2002:a5d:6e5d:0:b0:34b:1f34:9c06 with SMTP id
+ j29-20020a5d6e5d000000b0034b1f349c06mr3712985wrz.24.1714043045068; 
+ Thu, 25 Apr 2024 04:04:05 -0700 (PDT)
 Received: from localhost.localdomain ([92.88.170.77])
  by smtp.gmail.com with ESMTPSA id
- u11-20020a05600c138b00b004187450e4cesm30787552wmf.29.2024.04.25.04.03.40
+ u17-20020adfeb51000000b00347321735a6sm19543079wrn.66.2024.04.25.04.04.03
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 25 Apr 2024 04:03:41 -0700 (PDT)
+ Thu, 25 Apr 2024 04:04:04 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
- Bernhard Beschow <shentey@gmail.com>,
+Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org, Zhao Liu <zhao1.liu@intel.com>,
+ Yongwei Ma <yongwei.ma@intel.com>, Babu Moger <babu.moger@amd.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- "Michael S. Tsirkin" <mst@redhat.com>,
+ Eduardo Habkost <eduardo@habkost.net>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Eduardo Habkost <eduardo@habkost.net>
-Subject: [PULL 18/22] hw/i386/pc_sysfw: Remove unused parameter from
- pc_isa_bios_init()
-Date: Thu, 25 Apr 2024 13:01:51 +0200
-Message-ID: <20240425110157.20328-19-philmd@linaro.org>
+ Yanan Wang <wangyanan55@huawei.com>
+Subject: [PULL 22/22] hw/core: Support module-id in numa configuration
+Date: Thu, 25 Apr 2024 13:01:55 +0200
+Message-ID: <20240425110157.20328-23-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240425110157.20328-1-philmd@linaro.org>
 References: <20240425110157.20328-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::331;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x331.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::429;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x429.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -100,39 +97,65 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Bernhard Beschow <shentey@gmail.com>
+From: Zhao Liu <zhao1.liu@intel.com>
 
-Signed-off-by: Bernhard Beschow <shentey@gmail.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Message-ID: <20240422200625.2768-2-shentey@gmail.com>
+Module is a level above the core, thereby supporting numa
+configuration on the module level can bring user more numa flexibility.
+
+This is the natural further support for module level.
+
+Add module level support in numa configuration.
+
+Tested-by: Yongwei Ma <yongwei.ma@intel.com>
+Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
+Tested-by: Babu Moger <babu.moger@amd.com>
+Message-ID: <20240424154929.1487382-5-zhao1.liu@intel.com>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- hw/i386/pc_sysfw.c | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+ hw/core/machine.c | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
 
-diff --git a/hw/i386/pc_sysfw.c b/hw/i386/pc_sysfw.c
-index 3efabbbab2..87b5bf59d6 100644
---- a/hw/i386/pc_sysfw.c
-+++ b/hw/i386/pc_sysfw.c
-@@ -41,8 +41,7 @@
- #define FLASH_SECTOR_SIZE 4096
+diff --git a/hw/core/machine.c b/hw/core/machine.c
+index 494b712a76..0dec48e802 100644
+--- a/hw/core/machine.c
++++ b/hw/core/machine.c
+@@ -800,6 +800,11 @@ void machine_set_cpu_numa_node(MachineState *machine,
+             return;
+         }
  
- static void pc_isa_bios_init(MemoryRegion *rom_memory,
--                             MemoryRegion *flash_mem,
--                             int ram_size)
-+                             MemoryRegion *flash_mem)
- {
-     int isa_bios_size;
-     MemoryRegion *isa_bios;
-@@ -186,7 +185,7 @@ static void pc_system_flash_map(PCMachineState *pcms,
++        if (props->has_module_id && !slot->props.has_module_id) {
++            error_setg(errp, "module-id is not supported");
++            return;
++        }
++
+         if (props->has_cluster_id && !slot->props.has_cluster_id) {
+             error_setg(errp, "cluster-id is not supported");
+             return;
+@@ -824,6 +829,11 @@ void machine_set_cpu_numa_node(MachineState *machine,
+                 continue;
+         }
  
-         if (i == 0) {
-             flash_mem = pflash_cfi01_get_memory(system_flash);
--            pc_isa_bios_init(rom_memory, flash_mem, size);
-+            pc_isa_bios_init(rom_memory, flash_mem);
- 
-             /* Encrypt the pflash boot ROM */
-             if (sev_enabled()) {
++        if (props->has_module_id &&
++            props->module_id != slot->props.module_id) {
++                continue;
++        }
++
+         if (props->has_cluster_id &&
+             props->cluster_id != slot->props.cluster_id) {
+                 continue;
+@@ -1226,6 +1236,12 @@ static char *cpu_slot_to_string(const CPUArchId *cpu)
+         }
+         g_string_append_printf(s, "cluster-id: %"PRId64, cpu->props.cluster_id);
+     }
++    if (cpu->props.has_module_id) {
++        if (s->len) {
++            g_string_append_printf(s, ", ");
++        }
++        g_string_append_printf(s, "module-id: %"PRId64, cpu->props.module_id);
++    }
+     if (cpu->props.has_core_id) {
+         if (s->len) {
+             g_string_append_printf(s, ", ");
 -- 
 2.41.0
 
