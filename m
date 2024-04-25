@@ -4,85 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF5E7C4345F
-	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Apr 2024 11:09:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB9C2C4345F
+	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Apr 2024 11:09:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rzwuM-00032b-EX; Thu, 25 Apr 2024 07:04:54 -0400
+	id 1rzwun-0003RR-U0; Thu, 25 Apr 2024 07:05:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwt8-00008n-VP
- for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:03:57 -0400
-Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwtX-0000II-H1
+ for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:04:09 -0400
+Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwsr-0000DC-S4
- for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:03:23 -0400
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-41adf3580dbso5031685e9.0
- for <qemu-riscv@nongnu.org>; Thu, 25 Apr 2024 04:03:21 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwtL-0000Jq-6j
+ for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:03:54 -0400
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-41b5e74fa83so1816695e9.0
+ for <qemu-riscv@nongnu.org>; Thu, 25 Apr 2024 04:03:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1714043000; x=1714647800; darn=nongnu.org;
+ d=linaro.org; s=google; t=1714043022; x=1714647822; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pvunkSj/8Waxads7PhZ8ZQlWRsJ6KI6vMAUvxRYx65M=;
- b=gL9a3tea7yE6jcdX6zkmxwDmR6RkxmQKGR0W8cbgks1HpM55Kl2q+Fh5rDjzchqYhY
- ibf6gTSzByxXyHNx3UMizX1IL+oJfoPpgfewwNEdFKYZRg6DDQgrJ/yQlBA/QOFsOT30
- mPK+d1+VuHN3r3++vGimHOahyjN386AlBBbee1h9kn3SpQcpFESm/DIQ2CK8kNho5nJp
- 24zHp3k6m2azSmBCFVEiiXKCNsLNVXUwhFGki3EhncgbEJir3NyRHAhCd1U1V8o6lkEQ
- 70rEdMd1hXHJQieDioZs0cKc08yQlROsxMFvwpfcpDfkKuMuvWWevUqvtOohZZGXyXHp
- nHHQ==
+ bh=3jM66TtA9+JPWnnaJ/wdkFyoBPGKJrTnB7XlYnSXjfw=;
+ b=q67tICheuqQtUFBIwqS8xdmp9ZjCnwej4ObCq0rfBW0NnQ5jxQfOibhMOdM4cS/LZO
+ 7uEqp3eN7KJ/f6mHWt0GgKd4kvOj8bCevQQIsTWS4PDAgRVEmw/JWezo/nUIlZCDleWp
+ lPlHGABqys96bi7bcWl/Baf6f5EW3jNOhUcNwmrFBj/pLdJ+BcS+V4RB8VTY4X/b+ti5
+ a4ZNF4Sc7vaIwUXU7DedWrG1qF9SG8ty02pFOLgjKUZnkecwOxCWWJ5Y5jQlgRwxFcYG
+ uUQhoPrnbf3PSDWRrSG/RhlgDYK5kXAhZvVj86moZEn003H0yMemIislAARfYsVmG8uR
+ Hbkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714043000; x=1714647800;
+ d=1e100.net; s=20230601; t=1714043022; x=1714647822;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pvunkSj/8Waxads7PhZ8ZQlWRsJ6KI6vMAUvxRYx65M=;
- b=Slid5qnoXvq+FB6VITQbf2gB1TF5U1attNVOtGWVChwxoEXLmpfiJ85Xf5PFjHzP14
- NY4SMPN4epLiFPUDXlYeG3BXTCCmu+viwO9DQhPGkAfOcnbhG2DZo4UQ20Wsc6VldWKV
- xCx3eNQOqVDbk+7tFipNzsJi6dgIRswhkVd5jwT5Bdfr0vWk7gFOu/JAvDPwcexi3ogP
- dKr0R104GmVFyKdEiSLLpAWoTzQUQXuTbGN7gVNnAKawYzPhGKJOv/DgbwrpBO/Hxz37
- +KSXdKfukSa2rruhQnd63JsTjP/3fhh1dAtJo4BejIubSdjx/qttPKaRdWiqFYVWANS3
- 9JcQ==
-X-Gm-Message-State: AOJu0YwVxUCh+qjFtgP79lpmNMZNVmXIik3j611VkA5jNIG8Vwd/riJS
- wlAJcBQluveVfa8xzOsQcyfBvQsPmOCXf1M0n5UDw0avCosYk8oGfh/geWSTVRA=
-X-Google-Smtp-Source: AGHT+IEmrIxHIZTR3N3C87Loh/LBNBpgekND21HRCbgm42Ea4SiO726knsE1orKhBPiOc+Dh2IhLkQ==
-X-Received: by 2002:a05:600c:3554:b0:415:ff48:59fc with SMTP id
- i20-20020a05600c355400b00415ff4859fcmr2033033wmq.8.1714043000386; 
- Thu, 25 Apr 2024 04:03:20 -0700 (PDT)
+ bh=3jM66TtA9+JPWnnaJ/wdkFyoBPGKJrTnB7XlYnSXjfw=;
+ b=QO1ptKYIAYBfnF1z4CKcPfiiimZDH5uvcx0uBU0eTZboj+qrBHQEeyHm7GHWP5sptK
+ SKDHcd6/zdsK/QCfiTGUVsY6WLE8r83E0KgJpU3d13dm89YkwvLwo1UgXx7eLX8fYEC3
+ dYiPaGy2i2WAUgAEULFc5fzgxXGJ9hChNTf9rfbP3ZZWKPyZuIMZPBxrQD86KaFA6Ds8
+ B+XEI7J8SKzGH4N3QPQPHKHxsdRxf9VumBmUpQ/PB+6a4CfS9ugA1amNDgW5PDk1E5w8
+ diq9CX5fMnu/mGUX/7rW2GIrSCAZKk7EmbwJB4XDpTCZj9trYldZYKjwQ0scvyaMVzNr
+ bbwQ==
+X-Gm-Message-State: AOJu0YzH3nSgBSVXUyQb8SCDd95fa30yFI3Yr4TmwlmMwsY576A7rSLH
+ t9XZrAlsf9wm6g6332MAl8XgeOFRl3i6bJHDPyiIskAg2oTtKdpR5BvxrfMOgyc=
+X-Google-Smtp-Source: AGHT+IFep8mayYoTqo1tEoWaxYRBNnZQKy6JlVbPvXcPmoksWBiLC7hipxkwT32wWx0hqDlaV9VWvQ==
+X-Received: by 2002:a05:600c:4ecb:b0:419:ed35:e312 with SMTP id
+ g11-20020a05600c4ecb00b00419ed35e312mr4210635wmq.21.1714043022268; 
+ Thu, 25 Apr 2024 04:03:42 -0700 (PDT)
 Received: from localhost.localdomain ([92.88.170.77])
  by smtp.gmail.com with ESMTPSA id
- k41-20020a05600c1ca900b00417e8be070csm27334682wms.9.2024.04.25.04.03.18
+ u11-20020a05600c138b00b004187450e4cesm30787552wmf.29.2024.04.25.04.03.40
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 25 Apr 2024 04:03:20 -0700 (PDT)
+ Thu, 25 Apr 2024 04:03:41 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org, Zhao Liu <zhao1.liu@intel.com>,
- Markus Armbruster <armbru@redhat.com>,
+Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
+ Bernhard Beschow <shentey@gmail.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Jonathan Cameron <Jonathan.Cameron@huawei.com>,
- Jonathan Cameron <jonathan.cameron@huawei.com>,
- Fan Ni <fan.ni@samsung.com>, "Michael S. Tsirkin" <mst@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>
-Subject: [PULL 14/22] hw/cxl/cxl-cdat: Make cxl_doe_cdat_init() return boolean
-Date: Thu, 25 Apr 2024 13:01:47 +0200
-Message-ID: <20240425110157.20328-15-philmd@linaro.org>
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Eduardo Habkost <eduardo@habkost.net>
+Subject: [PULL 18/22] hw/i386/pc_sysfw: Remove unused parameter from
+ pc_isa_bios_init()
+Date: Thu, 25 Apr 2024 13:01:51 +0200
+Message-ID: <20240425110157.20328-19-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240425110157.20328-1-philmd@linaro.org>
 References: <20240425110157.20328-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::332;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x332.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::331;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x331.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,90 +100,39 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Zhao Liu <zhao1.liu@intel.com>
+From: Bernhard Beschow <shentey@gmail.com>
 
-As error.h suggested, the best practice for callee is to return
-something to indicate success / failure.
-
-With returned boolean, there's no need to dereference @errp to check
-failure case.
-
-Suggested-by: Markus Armbruster <armbru@redhat.com>
-Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
+Signed-off-by: Bernhard Beschow <shentey@gmail.com>
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Acked-by: Jonathan Cameron <Jonathan.Cameron@huawei.com>
-Message-ID: <20240418100433.1085447-4-zhao1.liu@linux.intel.com>
+Message-ID: <20240422200625.2768-2-shentey@gmail.com>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- include/hw/cxl/cxl_component.h | 2 +-
- hw/cxl/cxl-cdat.c              | 6 +++---
- hw/mem/cxl_type3.c             | 3 +--
- hw/pci-bridge/cxl_upstream.c   | 3 +--
- 4 files changed, 6 insertions(+), 8 deletions(-)
+ hw/i386/pc_sysfw.c | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/include/hw/cxl/cxl_component.h b/include/hw/cxl/cxl_component.h
-index 5012fab6f7..945ee6ffd0 100644
---- a/include/hw/cxl/cxl_component.h
-+++ b/include/hw/cxl/cxl_component.h
-@@ -273,7 +273,7 @@ hwaddr cxl_decode_ig(int ig);
- CXLComponentState *cxl_get_hb_cstate(PCIHostState *hb);
- bool cxl_get_hb_passthrough(PCIHostState *hb);
+diff --git a/hw/i386/pc_sysfw.c b/hw/i386/pc_sysfw.c
+index 3efabbbab2..87b5bf59d6 100644
+--- a/hw/i386/pc_sysfw.c
++++ b/hw/i386/pc_sysfw.c
+@@ -41,8 +41,7 @@
+ #define FLASH_SECTOR_SIZE 4096
  
--void cxl_doe_cdat_init(CXLComponentState *cxl_cstate, Error **errp);
-+bool cxl_doe_cdat_init(CXLComponentState *cxl_cstate, Error **errp);
- void cxl_doe_cdat_release(CXLComponentState *cxl_cstate);
- void cxl_doe_cdat_update(CXLComponentState *cxl_cstate, Error **errp);
- 
-diff --git a/hw/cxl/cxl-cdat.c b/hw/cxl/cxl-cdat.c
-index e7bc1380bf..959a55518e 100644
---- a/hw/cxl/cxl-cdat.c
-+++ b/hw/cxl/cxl-cdat.c
-@@ -189,14 +189,14 @@ static bool ct3_load_cdat(CDATObject *cdat, Error **errp)
-     return true;
- }
- 
--void cxl_doe_cdat_init(CXLComponentState *cxl_cstate, Error **errp)
-+bool cxl_doe_cdat_init(CXLComponentState *cxl_cstate, Error **errp)
+ static void pc_isa_bios_init(MemoryRegion *rom_memory,
+-                             MemoryRegion *flash_mem,
+-                             int ram_size)
++                             MemoryRegion *flash_mem)
  {
-     CDATObject *cdat = &cxl_cstate->cdat;
+     int isa_bios_size;
+     MemoryRegion *isa_bios;
+@@ -186,7 +185,7 @@ static void pc_system_flash_map(PCMachineState *pcms,
  
-     if (cdat->filename) {
--        ct3_load_cdat(cdat, errp);
-+        return ct3_load_cdat(cdat, errp);
-     } else {
--        ct3_build_cdat(cdat, errp);
-+        return ct3_build_cdat(cdat, errp);
-     }
- }
+         if (i == 0) {
+             flash_mem = pflash_cfi01_get_memory(system_flash);
+-            pc_isa_bios_init(rom_memory, flash_mem, size);
++            pc_isa_bios_init(rom_memory, flash_mem);
  
-diff --git a/hw/mem/cxl_type3.c b/hw/mem/cxl_type3.c
-index b0a7e9f11b..3e42490b6c 100644
---- a/hw/mem/cxl_type3.c
-+++ b/hw/mem/cxl_type3.c
-@@ -705,8 +705,7 @@ static void ct3_realize(PCIDevice *pci_dev, Error **errp)
-     cxl_cstate->cdat.build_cdat_table = ct3_build_cdat_table;
-     cxl_cstate->cdat.free_cdat_table = ct3_free_cdat_table;
-     cxl_cstate->cdat.private = ct3d;
--    cxl_doe_cdat_init(cxl_cstate, errp);
--    if (*errp) {
-+    if (!cxl_doe_cdat_init(cxl_cstate, errp)) {
-         goto err_free_special_ops;
-     }
- 
-diff --git a/hw/pci-bridge/cxl_upstream.c b/hw/pci-bridge/cxl_upstream.c
-index 783fa6adac..e51221a5f3 100644
---- a/hw/pci-bridge/cxl_upstream.c
-+++ b/hw/pci-bridge/cxl_upstream.c
-@@ -338,8 +338,7 @@ static void cxl_usp_realize(PCIDevice *d, Error **errp)
-     cxl_cstate->cdat.build_cdat_table = build_cdat_table;
-     cxl_cstate->cdat.free_cdat_table = free_default_cdat_table;
-     cxl_cstate->cdat.private = d;
--    cxl_doe_cdat_init(cxl_cstate, errp);
--    if (*errp) {
-+    if (!cxl_doe_cdat_init(cxl_cstate, errp)) {
-         goto err_cap;
-     }
- 
+             /* Encrypt the pflash boot ROM */
+             if (sev_enabled()) {
 -- 
 2.41.0
 
