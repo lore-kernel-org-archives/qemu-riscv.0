@@ -4,73 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B29BC10F15
-	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Apr 2024 20:29:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00753C10F1A
+	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Apr 2024 06:29:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rzjF7-0008As-5C; Wed, 24 Apr 2024 16:29:25 -0400
+	id 1rzsbT-00069S-40; Thu, 25 Apr 2024 02:29:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1rzjEz-00089m-4X; Wed, 24 Apr 2024 16:29:17 -0400
-Received: from isrv.corpit.ru ([86.62.121.231])
+ (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
+ id 1rzsbG-000661-Vu; Thu, 25 Apr 2024 02:28:55 -0400
+Received: from rev.ng ([5.9.113.41])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1rzjEx-0007QP-3r; Wed, 24 Apr 2024 16:29:16 -0400
-Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id 6C44261891;
- Wed, 24 Apr 2024 23:29:19 +0300 (MSK)
-Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id 1A2ABBE6DB;
- Wed, 24 Apr 2024 23:29:12 +0300 (MSK)
-Message-ID: <015b19da-f8d3-4988-bafb-6fae6d53f82d@tls.msk.ru>
-Date: Wed, 24 Apr 2024 23:29:12 +0300
+ (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
+ id 1rzsbF-0006eY-AE; Thu, 25 Apr 2024 02:28:54 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=rev.ng;
+ s=dkim; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive:List-Unsubscribe:List-Unsubscribe-Post:
+ List-Help; bh=5QMD6OT4/QN/tvMX/7HwcVotZ4cCQJVV7+QfBX/IXgc=; b=VS8TNiuP7OgPdUJ
+ QEV8fRLGE0wAPkCR6SlJs5Fu9RLITCHipuNzZbfe2ZbTDRmrQEOqZIrPGP1RN/D8Ec5xr+jZZ1anB
+ /oFJ+9cQQNSj3gMdhcenLgNyrVHLAMTED0n505jZtd+03ADjnOGjfVvEnsTc8Jr3fHE3Mf2nbkJQT
+ Vs=;
+Date: Thu, 25 Apr 2024 08:29:40 +0200
+To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Cc: qemu-devel@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>, 
+ Richard Henderson <richard.henderson@linaro.org>, qemu-arm@nongnu.org,
+ qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, 
+ David Hildenbrand <david@redhat.com>,
+ Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>, 
+ Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, 
+ Yanan Wang <wangyanan55@huawei.com>, Peter Maydell <peter.maydell@linaro.org>, 
+ Nicholas Piggin <npiggin@gmail.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Subject: Re: [PATCH 02/24] exec: Declare CPUBreakpoint/CPUWatchpoint type in
+ 'breakpoint.h' header
+Message-ID: <bjz7nuf5v5z6vlucnm7rw2bp6dfnpw534pwfqzlenllmxzx3o2@tnzxchmwmcpl>
+References: <20240418192525.97451-1-philmd@linaro.org>
+ <20240418192525.97451-3-philmd@linaro.org>
+ <09dd8fe2-29ec-4099-9746-70fe8665b3dd@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/2] riscv,kvm: remove another strerrorname_np()
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- thuth@redhat.com, alex.bennee@linaro.org, philmd@linaro.org,
- ajones@ventanamicro.com
-References: <20240424202425.534338-1-dbarboza@ventanamicro.com>
-Content-Language: en-US
-From: Michael Tokarev <mjt@tls.msk.ru>
-Autocrypt: addr=mjt@tls.msk.ru; keydata=
- xsBLBETIiwkBCADh3cFB56BQYPjtMZCfK6PSLR8lw8EB20rsrPeJtd91IoNZlnCjSoxd9Th1
- bLUR8YlpRJ2rjc6O1Bc04VghqUOHgS/tYt8vLjcGWixzdhSLJgPDK3QQZPAvBjMbCt1B6euC
- WuD87Pv5Udlpnzf4aMwxkgfTusx+ynae/o+T5r7tXD+isccbC3SiGhmAPxFyY3zGcFk4+Rxc
- 0tP8YY2FWE/baHu+lBDTUN79efWAkHhex1XzVZsV7ZD16rzDbXFK5m6ApvGJWlr5YDEEydTF
- WwmvwBfr4OINVxzEG/ujNiG4fpMf2NsnFGyB9aSbFjXZevB4qWkduYYW+xpK1EryszHtAAYp
- zSBNaWNoYWVsIFRva2FyZXYgPG1qdEB0bHMubXNrLnJ1PsLAlgQTAQoAQAIbAwYLCQgHAwIE
- FQIIAwQWAgMBAh4BAheAAhkBFiEEbuGV0Yhuj/uBDUMkRXzgoIBEZcUFAmBbcjwFCS5e6jMA
- CgkQRXzgoIBEZcUTIQgA1hPsOF82pXxbcJXBMc4zB9OQu4AlnZvERoGyw7I2222QzaN3RFuj
- Fia//mapXzpIQNF08l/AA6cx+CKPeGnXwyZfF9fLa4RfifmdNKME8C00XlqnoJDZBGzq8yMy
- LAKDxl9OQWFcDwDxV+irg5U3fbtNVhvV0kLbS2TyQ0aU5w60ERS2NcyDWplOo7AOzZWChcA4
- UFf78oVdZdCW8YDtU0uQFhA9moNnrePy1HSFqduxnlFHEI+fDj/TiOm2ci48b8SBBJOIJFjl
- SBgH8+SfT9ZqkzhN9vh3YJ49831NwASVm0x1rDHcIwWD32VFZViZ3NjehogRNH9br0PSUYOC
- 3s7ATQRX2BjLAQgAnak3m0imYOkv2tO/olULFa686tlwuvl5kL0NWCdGQeXv2uMxy36szcrh
- K1uYhpiQv4r2qNd8BJtYlnYIK16N8GBdkplaDIHcBMbU4t+6bQzEIJIaWoq1hzakmHHngE2a
- pNMnUf/01GFvCRPlv3imkujE/5ILbagjtdyJaHF0wGOSlTnNT4W8j+zPJ/XK0I5EVQwtbmoc
- GY62LKxxz2pID6sPZV4zQVY4JdUQaFvOz1emnBxakkt0cq3Qnnqso1tjiy7vyH9CAwPR/48W
- fpK6dew4Fk+STYtBeixOTfSUS8qRS/wfpUeNa5RnEdTtFQ9IcjpQ/nPrvJJsu9FqwlpjMwAR
- AQABwsBlBBgBCAAPBQJX2BjLAhsMBQkSzAMAAAoJEEV84KCARGXFUKcH/jqKETECkbyPktdP
- cWVqw2ZIsmGxMkIdnZTbPwhORseGXMHadQODayhU9GWfCDdSPkWDWzMamD+qStfl9MhlVT60
- HTbo6wu1W/ogUS70qQPTY9IfsvAj6f8TlSlK0eLMa3s2UxL2oe5FkNs2CnVeRlr4Yqvp/ZQV
- 6LXtew4GPRrmplUT/Cre9QIUqR4pxYCQaMoOXQQw3Y0csBwoDYUQujn3slbDJRIweHoppBzT
- rM6ZG5ldWQN3n3d71pVuv80guylX8+TSB8Mvkqwb5I36/NAFKl0CbGbTuQli7SmNiTAKilXc
- Y5Uh9PIrmixt0JrmGVRzke6+11mTjVlio/J5dCM=
-In-Reply-To: <20240424202425.534338-1-dbarboza@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=86.62.121.231; envelope-from=mjt@tls.msk.ru;
- helo=isrv.corpit.ru
-X-Spam_score_int: -68
-X-Spam_score: -6.9
-X-Spam_bar: ------
-X-Spam_report: (-6.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_HI=-5,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <09dd8fe2-29ec-4099-9746-70fe8665b3dd@linaro.org>
+Received-SPF: pass client-ip=5.9.113.41; envelope-from=anjo@rev.ng; helo=rev.ng
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -83,33 +74,28 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-to:  Anton Johansson <anjo@rev.ng>
+From:  Anton Johansson via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-24.04.2024 23:24, Daniel Henrique Barboza wrote:
-> Hi,
-> 
-> In this new version a small change suggested by Phil was made in patch
-> 2. No other changes made.
+On 18/04/24, Philippe Mathieu-Daudé wrote:
+> On 18/4/24 21:25, Philippe Mathieu-Daudé wrote:
+> > The CPUBreakpoint and CPUWatchpoint structures are declared
+> > in "hw/core/cpu.h", which contains declarations related to
+> > CPUState and CPUClass. Some source files only require the
+> > BP/WP definitions and don't need to pull in all CPU* API.
+> > In order to simplify, create a new "exec/breakpoint.h" header.
+> > 
+> > Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> > ---
+> >   include/exec/breakpoint.h | 23 +++++++++++++++++++++++
+> >   include/hw/core/cpu.h     | 16 +---------------
+> >   target/arm/internals.h    |  1 +
+> >   target/ppc/internal.h     |  1 +
+> >   target/riscv/debug.h      |  2 ++
+> >   5 files changed, 28 insertions(+), 15 deletions(-)
+> >   create mode 100644 include/exec/breakpoint.h
 
-Applied to trivial-patches tree.
-
-> Note: checkpatch.pl is nagging quite a bit about the checkpatch.pl change
-> this time, claiming that I'm adding a line > 90 chars when in reality the
-> line has 80 chars:
-> 
-> ERROR: line over 90 characters
-> #39: FILE: scripts/checkpatch.pl:3082:
-> +			ERROR("use strerror() instead of strerrorname_np()\n" . $herecurr);
-> 
-> total: 1 errors, 0 warnings, 9 lines checked
-> 
-> I supposed it's counting each TAB as more than one char. Let me know if
-> I need to care about this error and I'll send a v3.
-
-checkpatch complaining about checkpatch change is nice.
-Nope, it is the style used here, all other tests are
-like this too, but worse.
-
-/mjt
+Reviewed-by: Anton Johansson <anjo@rev.ng>
 
