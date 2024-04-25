@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6999C4345F
-	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Apr 2024 11:09:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04149C4345F
+	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Apr 2024 11:10:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rzwuI-0002pN-GI; Thu, 25 Apr 2024 07:04:50 -0400
+	id 1rzwuR-00038j-Jf; Thu, 25 Apr 2024 07:04:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwsn-0008VM-7g
- for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:03:38 -0400
-Received: from mail-lj1-x236.google.com ([2a00:1450:4864:20::236])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwtF-0000A3-JR
+ for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:04:03 -0400
+Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwsk-00007D-AF
- for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:03:16 -0400
-Received: by mail-lj1-x236.google.com with SMTP id
- 38308e7fff4ca-2dd19c29c41so9233071fa.3
- for <qemu-riscv@nongnu.org>; Thu, 25 Apr 2024 04:03:10 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwt5-0000Fz-8i
+ for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:03:42 -0400
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-4196c62bb4eso6586075e9.2
+ for <qemu-riscv@nongnu.org>; Thu, 25 Apr 2024 04:03:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1714042989; x=1714647789; darn=nongnu.org;
+ d=linaro.org; s=google; t=1714043006; x=1714647806; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LU/r9zSSWOAgtXVFmIxCt1qMAeFSfB+B8bTVtMRUbL4=;
- b=WrXR9xds2luym4J6tztK66DnJaf/wuj2yu2EDa583PaxoSFJwEWk1s2L1aNchIx+/r
- bbR9UZz7iFtrCvMuaaKDwy3TZsSwGW9zzUFnkKUtVogRlNYkQ18amTlZR9yb/pPExQ2j
- fjGvhqmzFGItbBbAjuHVlaCBQNbmXskDV7Snl6aLxO67SwCZGLsYvUI6KWzLAQQ/obJ8
- MeQ9254Ek3cXhnTeh1ApAZ9/J5mkzleH+K9rKInF3B7Y1sQ4VXjXN0HdV+sqQ7CRQsXS
- xsVN1HokLi5KiqQA+3m7jZXt90Xy2TAVok0I9hsD2cFYXLzuWsODMcI6TuDobnVQOdTP
- 5GAg==
+ bh=AM4wpjhaRu1VnbLScsMczsVnLF9tLEy5hd6kj7QFVIE=;
+ b=DRP/e7hmF6iTP+67jZNGAZC5bdVnFmP3bDeqkkvXVRtNO1QVv9eP+1BQ51xeN1OnO7
+ GrQgB+KpD9aKhDRUDjNILD++QhzOgAoyQo8ZV2wS16RW7tPR+z9QYb4viTK4x6Tv3tOf
+ PJn0lKmm26v30ffqOJfJkntUbhMQN6/WZqaOTMQyaNG5DpTPxDWZx+2xj3ZuAmZx4rWZ
+ 53j8HNEgGjxvtECCQ5LQ+OPHXbHisNkuBtdoCc8+NbausmdY4/8V0bMH29qz8ZrME+2D
+ BR2kWIENkCnd41O60ynhaXnLwMEJqjUYvwqt8ORwK6XzUuaraxXQQRa4oPp8YIxglKm+
+ 1UFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714042989; x=1714647789;
+ d=1e100.net; s=20230601; t=1714043006; x=1714647806;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=LU/r9zSSWOAgtXVFmIxCt1qMAeFSfB+B8bTVtMRUbL4=;
- b=Thgi7U5eZjMzDFNE4NO0fd7cDwZUflIkOb97vT3d6XFUy4RxXhw/nPNGj09U3C3DyA
- kKPkKYyrXtkCRHdtJpDLNSpjPbbp9/CIL3vaB8kc6f+BUYqHl4X0J6GMOCmlc+AaVd/V
- ond6fR3ySmVPO69d+e5AY1yY+lR4Gq2zzWzm+j6UB2nneC17kKd8RAqT8OseJGW/eQE7
- 2Yp/j5h4FC40N2erFaOlURvgAYMAJkJGnvpmxEZYlUaSxk1NzgwvCeu6/oHLiIOW0bi/
- ecqCLzz98Wf1X+46VMiKN8BwEcbc2F7jX8kli3ihubrF3IrEZa/PTqpGPh5eLHrdwRT4
- Xm0A==
-X-Gm-Message-State: AOJu0Ywm+4Mt+dMr1l1PUjFa/kUMREA3d2xJkBAegv9jAVD8FGhuBm0P
- Lvclk3vK0ASMzhlj6hzkbeQRNJfroVQ1lYdXJWrN4aAw3Sx5sCjQYosCZBZDRSFNJR8IGlNpbwe
- b
-X-Google-Smtp-Source: AGHT+IFO8miQl6dbOAeeTD9X+PVLuHZOUwqnZSgopxhCCr33r6EuDuv6CgJsQcLWxILvpMYPwwf/Zw==
-X-Received: by 2002:a2e:954f:0:b0:2de:81c9:14b3 with SMTP id
- t15-20020a2e954f000000b002de81c914b3mr2837508ljh.35.1714042988935; 
- Thu, 25 Apr 2024 04:03:08 -0700 (PDT)
+ bh=AM4wpjhaRu1VnbLScsMczsVnLF9tLEy5hd6kj7QFVIE=;
+ b=OHeQBU1N33i3+XZr5smy0gjlVD73ekZ8MdJHsmrP3AZYik1nuD6DSRq+ruf2Jx9EfP
+ W2UT5lt8ezb2860ktVkQZxRieAZ+ElYggNmPCsyBNwVXKMC3UgAUNOE1Ffur4DHrTf5H
+ mIis7l+CGO+U9turXrvOsyHKmvGaLopqfodzxWoAE+AK0z31VDXzfA20NIR94icBXOJd
+ PZYy4Cyy2RN1mbE6uO6fwKClMhHCqbJg/9PeFJPcitZT6r0nt2Q0udgLyHn2C3004S/E
+ v8HgDJ5g7Skek6UCHaoBgc+2i0ALm8DTXQ0cp0LixIf3LAvswxMBtC5oMSvB1LytE4Q1
+ sM7w==
+X-Gm-Message-State: AOJu0YweA6l4nAAsMoQoy3O0+lxuroMGt+Yowd+q/g8JTw5PmFRYid2u
+ huQTCeuHG6WdUz47sL1BLYK/pfZ5i0OyDrLHQUbMQO6oCAKPpjnwzXl7mwrB6u8=
+X-Google-Smtp-Source: AGHT+IGe49IAc2SdSXO25jaUyqK6FP6td8CeYnIlxdI0bb6LP3p3uwTpqkW0EOAH6Idsm470AsYsHQ==
+X-Received: by 2002:a05:600c:4508:b0:418:f991:8ad4 with SMTP id
+ t8-20020a05600c450800b00418f9918ad4mr4383715wmo.6.1714043006094; 
+ Thu, 25 Apr 2024 04:03:26 -0700 (PDT)
 Received: from localhost.localdomain ([92.88.170.77])
  by smtp.gmail.com with ESMTPSA id
- o20-20020a05600c511400b0041a49b10a13sm14955302wms.11.2024.04.25.04.03.07
+ l37-20020a05600c1d2500b004186f979543sm31187720wms.33.2024.04.25.04.03.24
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 25 Apr 2024 04:03:08 -0700 (PDT)
+ Thu, 25 Apr 2024 04:03:25 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org, Zhao Liu <zhao1.liu@intel.com>,
- Markus Armbruster <armbru@redhat.com>,
+Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Jonathan Cameron <Jonathan.Cameron@huawei.com>,
- Jonathan Cameron <jonathan.cameron@huawei.com>, Fan Ni <fan.ni@samsung.com>
-Subject: [PULL 12/22] hw/cxl/cxl-cdat: Make ct3_load_cdat() return boolean
-Date: Thu, 25 Apr 2024 13:01:45 +0200
-Message-ID: <20240425110157.20328-13-philmd@linaro.org>
+ Richard Henderson <richard.henderson@linaro.org>,
+ Warner Losh <imp@bsdimp.com>, Kyle Evans <kevans@freebsd.org>,
+ Laurent Vivier <laurent@vivier.eu>
+Subject: [PULL 15/22] hw/elf_ops: Rename elf_ops.h -> elf_ops.h.inc
+Date: Thu, 25 Apr 2024 13:01:48 +0200
+Message-ID: <20240425110157.20328-16-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240425110157.20328-1-philmd@linaro.org>
 References: <20240425110157.20328-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::236;
- envelope-from=philmd@linaro.org; helo=mail-lj1-x236.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::334;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x334.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -97,82 +96,82 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Zhao Liu <zhao1.liu@intel.com>
+Since commit 139c1837db ("meson: rename included C source files
+to .c.inc"), QEMU standard procedure for included C files is to
+use *.c.inc.
 
-As error.h suggested, the best practice for callee is to return
-something to indicate success / failure.
+Besides, since commit 6a0057aa22 ("docs/devel: make a statement
+about includes") this is documented in the Coding Style:
 
-So make ct3_load_cdat() return boolean, and this is the preparation for
-cxl_doe_cdat_init() returning boolean.
+  If you do use template header files they should be named with
+  the ``.c.inc`` or ``.h.inc`` suffix to make it clear they are
+  being included for expansion.
 
-Suggested-by: Markus Armbruster <armbru@redhat.com>
-Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Acked-by: Jonathan Cameron <Jonathan.Cameron@huawei.com>
-Message-ID: <20240418100433.1085447-2-zhao1.liu@linux.intel.com>
+Therefore rename "hw/elf_ops.h" as "hw/elf_ops.h.inc".
+
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Acked-by: Richard Henderson <richard.henderson@linaro.org>
+Message-Id: <20240424173333.96148-2-philmd@linaro.org>
 ---
- hw/cxl/cxl-cdat.c | 13 +++++++------
- 1 file changed, 7 insertions(+), 6 deletions(-)
+ include/hw/{elf_ops.h => elf_ops.h.inc} | 0
+ bsd-user/elfload.c                      | 2 +-
+ hw/core/loader.c                        | 4 ++--
+ linux-user/elfload.c                    | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
+ rename include/hw/{elf_ops.h => elf_ops.h.inc} (100%)
 
-diff --git a/hw/cxl/cxl-cdat.c b/hw/cxl/cxl-cdat.c
-index 551545f782..b3e496857a 100644
---- a/hw/cxl/cxl-cdat.c
-+++ b/hw/cxl/cxl-cdat.c
-@@ -111,7 +111,7 @@ static void ct3_build_cdat(CDATObject *cdat, Error **errp)
-     cdat->entry = g_steal_pointer(&cdat_st);
+diff --git a/include/hw/elf_ops.h b/include/hw/elf_ops.h.inc
+similarity index 100%
+rename from include/hw/elf_ops.h
+rename to include/hw/elf_ops.h.inc
+diff --git a/bsd-user/elfload.c b/bsd-user/elfload.c
+index baf2f63d2f..833fa3bd05 100644
+--- a/bsd-user/elfload.c
++++ b/bsd-user/elfload.c
+@@ -383,7 +383,7 @@ static const char *lookup_symbolxx(struct syminfo *s, uint64_t orig_addr)
+     return "";
  }
  
--static void ct3_load_cdat(CDATObject *cdat, Error **errp)
-+static bool ct3_load_cdat(CDATObject *cdat, Error **errp)
+-/* FIXME: This should use elf_ops.h  */
++/* FIXME: This should use elf_ops.h.inc  */
+ static int symcmp(const void *s0, const void *s1)
  {
-     g_autofree CDATEntry *cdat_st = NULL;
-     g_autofree uint8_t *buf = NULL;
-@@ -127,11 +127,11 @@ static void ct3_load_cdat(CDATObject *cdat, Error **errp)
-                              &file_size, &error)) {
-         error_setg(errp, "CDAT: File read failed: %s", error->message);
-         g_error_free(error);
--        return;
-+        return false;
-     }
-     if (file_size < sizeof(CDATTableHeader)) {
-         error_setg(errp, "CDAT: File too short");
--        return;
-+        return false;
-     }
-     i = sizeof(CDATTableHeader);
-     num_ent = 1;
-@@ -139,19 +139,19 @@ static void ct3_load_cdat(CDATObject *cdat, Error **errp)
-         hdr = (CDATSubHeader *)(buf + i);
-         if (i + sizeof(CDATSubHeader) > file_size) {
-             error_setg(errp, "CDAT: Truncated table");
--            return;
-+            return false;
-         }
-         cdat_len_check(hdr, errp);
-         i += hdr->length;
-         if (i > file_size) {
-             error_setg(errp, "CDAT: Truncated table");
--            return;
-+            return false;
-         }
-         num_ent++;
-     }
-     if (i != file_size) {
-         error_setg(errp, "CDAT: File length mismatch");
--        return;
-+        return false;
-     }
+     struct elf_sym *sym0 = (struct elf_sym *)s0;
+diff --git a/hw/core/loader.c b/hw/core/loader.c
+index b8e52f3fb0..2f8105d7de 100644
+--- a/hw/core/loader.c
++++ b/hw/core/loader.c
+@@ -305,7 +305,7 @@ static void *load_at(int fd, off_t offset, size_t size)
+ #define elf_word        uint32_t
+ #define elf_sword       int32_t
+ #define bswapSZs        bswap32s
+-#include "hw/elf_ops.h"
++#include "hw/elf_ops.h.inc"
  
-     cdat_st = g_new0(CDATEntry, num_ent);
-@@ -185,6 +185,7 @@ static void ct3_load_cdat(CDATObject *cdat, Error **errp)
-     cdat->entry_len = num_ent;
-     cdat->entry = g_steal_pointer(&cdat_st);
-     cdat->buf = g_steal_pointer(&buf);
-+    return true;
+ #undef elfhdr
+ #undef elf_phdr
+@@ -327,7 +327,7 @@ static void *load_at(int fd, off_t offset, size_t size)
+ #define elf_sword       int64_t
+ #define bswapSZs        bswap64s
+ #define SZ              64
+-#include "hw/elf_ops.h"
++#include "hw/elf_ops.h.inc"
+ 
+ const char *load_elf_strerror(ssize_t error)
+ {
+diff --git a/linux-user/elfload.c b/linux-user/elfload.c
+index f4a0b78c75..a0999dac15 100644
+--- a/linux-user/elfload.c
++++ b/linux-user/elfload.c
+@@ -3572,7 +3572,7 @@ static const char *lookup_symbolxx(struct syminfo *s, uint64_t orig_addr)
+     return "";
  }
  
- void cxl_doe_cdat_init(CXLComponentState *cxl_cstate, Error **errp)
+-/* FIXME: This should use elf_ops.h  */
++/* FIXME: This should use elf_ops.h.inc  */
+ static int symcmp(const void *s0, const void *s1)
+ {
+     struct elf_sym *sym0 = (struct elf_sym *)s0;
 -- 
 2.41.0
 
