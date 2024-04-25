@@ -4,75 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3994C4345F
-	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Apr 2024 11:11:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89B5CC4345F
+	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Apr 2024 15:50:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1rzwtm-0000gJ-OX; Thu, 25 Apr 2024 07:04:18 -0400
+	id 1s01Mo-0005N6-Oi; Thu, 25 Apr 2024 11:50:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwsI-00085m-09
- for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:02:47 -0400
-Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1s01Mk-0005LM-Rh
+ for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 11:50:30 -0400
+Received: from mail-pf1-x434.google.com ([2607:f8b0:4864:20::434])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1rzwsF-0008GP-NX
- for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 07:02:44 -0400
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-34be34b3296so803258f8f.1
- for <qemu-riscv@nongnu.org>; Thu, 25 Apr 2024 04:02:36 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1s01Mh-00089N-Jb
+ for qemu-riscv@nongnu.org; Thu, 25 Apr 2024 11:50:30 -0400
+Received: by mail-pf1-x434.google.com with SMTP id
+ d2e1a72fcca58-6ed9fc77bbfso962804b3a.1
+ for <qemu-riscv@nongnu.org>; Thu, 25 Apr 2024 08:50:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1714042955; x=1714647755; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wFyOmcP9zazcZyBZQtyOmZdkDwwfij0kGGeaUavMPCY=;
- b=JM3p7lNoymgGwo9QJIAXFDLyYvg1zWCIQUh5HhR0sAs3LWhlzep73kVohA7FD0s2vC
- 8lo0fdYq0Zz+1H9Q9PiMaouFeqw02Ia4CjrsrkcuwQdlHKiJ42h6+iVg+yKtoS4E2IyW
- 0kOdUmeXjsAJLAZq0PKTp7gCP7clcREo4RB50sLth7LOLeJVZs77JNtkGmTVSPm0tR1+
- upfmRvEBXwK70BG6hZn0RcUhbYiCEolR3bqwdfjOylExtwTmewNlYGh8cTBh5FSg91NQ
- HxvAgOmmDie/fyqa/aghpkkbQBdEXQNjjIAFo205DGRVyUZ6vu2grWDXaifh/jHNuPDS
- +m2g==
+ d=ventanamicro.com; s=google; t=1714060225; x=1714665025; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=hyNWL5Z/arkoll/9yENM8A6PHPI/XzRs+hMbp5GjFAk=;
+ b=OHlVaXWMrVatf/RH/HjkJePkSGOLhrNCJm6akWbXL+Ev49/LS2R1TXyo88+XAoIYyh
+ 6LrnlkEbCYsAug4Ke9FkDnPmtdSK+RCWWMftkIl0po6W+U6V3IXegON23sxvSE01Ozuz
+ t3NJE4pFkoG2EBQJNaqyU9M7L43X9lBziH7krI/58MUDt0XQ0/wYQlDAKjSUYXvgYGog
+ Oy2Ld9FmmfXXQASQj8Ju2/PJt2ObwmVI9LlDuhwDmwy9YljUora4Q/PUV0Moy+peNUn2
+ Zw+esRA3m9I19nLMph5guNvz8nsuaIlGiFSauPvsaU4X9ROmpDqjZt1YEqU7YGo3Mg0Q
+ OxNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714042955; x=1714647755;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=wFyOmcP9zazcZyBZQtyOmZdkDwwfij0kGGeaUavMPCY=;
- b=X9gXqQCZKe08KXAEuCl2Cb4XI4Heuul+Yh0IuVJOrd1WUdhsxvPqIx5AVH0Dwh6JgL
- 4xt7vlErVpe9VwisIsOu41jicgOvzrb5ulDxJjrb8HnRx8A1m52yNMdrDyckquZF3gC8
- g5xEn9z8nkQE9ooQSjVyu5hjtZSQ+P95608sSEhdxL/ZxjPYbTe+eMe2IOmNtmHT8UHC
- eNu/1EwdvUafqsYYoKfgtBlw17y6AiI1erELjH/uzUqyAbb5GgFi6Hak2CmlBVrezFaU
- g33h9YGJEyrtKjjFWDn3G185+8qSQaFInc5VuBoNO17s+9lQtyVSOjfGHbz9ZzeowLGn
- HYew==
-X-Gm-Message-State: AOJu0Yy95oY8GZkSNPkZ7QWSiQ5Aq7E84+Rl9mPvL/Jzqk8Da+84hAlW
- 5Yt7MM/GsL2jPkoFyP1srz5C0sKFmWEX9GoB8JIrVuR6iGpz+DCjnhuB5k8rz0o=
-X-Google-Smtp-Source: AGHT+IGbYXBotcggNmvYjJn0SeDlza7RBgJd8SuRBaPyoda0C+BK+2E4ZRY1R2o55gkIYXrS+UqrnQ==
-X-Received: by 2002:a5d:6709:0:b0:341:d3b0:ae7d with SMTP id
- o9-20020a5d6709000000b00341d3b0ae7dmr4204754wru.45.1714042955056; 
- Thu, 25 Apr 2024 04:02:35 -0700 (PDT)
-Received: from localhost.localdomain ([92.88.170.77])
- by smtp.gmail.com with ESMTPSA id
- m18-20020adff392000000b00345920fcb45sm19699321wro.13.2024.04.25.04.02.33
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 25 Apr 2024 04:02:34 -0700 (PDT)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+ d=1e100.net; s=20230601; t=1714060225; x=1714665025;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=hyNWL5Z/arkoll/9yENM8A6PHPI/XzRs+hMbp5GjFAk=;
+ b=TdaZCUI91MWZ9jtBZKoBi+62CtrRXGIONMdhrvrGw81siaf61QBxfmCcv7oGFSnIjj
+ 1KFO/oEY+pFR4UYL/uxp3rPDTqHc2ACjXnwF/rLvQS+d1poutka6PzLEvq//X+XjdTOW
+ FNbh3dx4voH4p49GmyQ2bpvHJzNmN8pQLWpPysdQD/9gp6qjumTCTrGsZ21rmwJWy0/O
+ Ybzlar3jzoKSmBMfupMO65dirjxPyuJXo1jemF1omFUEBG+0Sc0+ENsy9vO73i3HOHPJ
+ 7BKbAD9VlUqPD3O8+G2oYacQT6ocEyKmtWYiyVianeU0oGeDkEMSBzeVLQ64Q7U8HnvB
+ V6ug==
+X-Gm-Message-State: AOJu0Yw/aNnOZnmmzbCKWpgVOXs8lYaY1IMEcioP1ksVRubf15n3bPBh
+ +Qf7wcgoynVJbni2+FKuR6t92fG83FC1HWgtPuP3l6N0+/kjDiFa/x8f1KIzFcs=
+X-Google-Smtp-Source: AGHT+IFi2cTOCGcO0kYuX20sdt1o3mYuhKmtiXh6Jzmt3ncSfs5KJEBBnhbTeA7+AeIzmE1T8KLxPA==
+X-Received: by 2002:a05:6a00:1ac7:b0:6e9:74d7:7092 with SMTP id
+ f7-20020a056a001ac700b006e974d77092mr150179pfv.24.1714060225095; 
+ Thu, 25 Apr 2024 08:50:25 -0700 (PDT)
+Received: from grind.. ([191.255.35.121]) by smtp.gmail.com with ESMTPSA id
+ y8-20020aa78048000000b006f2e10b00d6sm7207359pfm.41.2024.04.25.08.50.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 25 Apr 2024 08:50:24 -0700 (PDT)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- Zhao Liu <zhao1.liu@intel.com>, Paolo Bonzini <pbonzini@redhat.com>
-Subject: [PULL 06/22] target/i386: Move APIC related code to cpu-apic.c
-Date: Thu, 25 Apr 2024 13:01:39 +0200
-Message-ID: <20240425110157.20328-7-philmd@linaro.org>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20240425110157.20328-1-philmd@linaro.org>
-References: <20240425110157.20328-1-philmd@linaro.org>
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH] target/riscv/kvm: implement SBI debug console (DBCN) calls
+Date: Thu, 25 Apr 2024 12:50:12 -0300
+Message-ID: <20240425155012.581366-1-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::431;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x431.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::434;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x434.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -87,297 +91,242 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Move APIC related code split in cpu-sysemu.c and
-monitor.c to cpu-apic.c.
+SBI defines a Debug Console extension "DBCN" that will, in time, replace
+the legacy console putchar and getchar SBI extensions.
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
-Message-Id: <20240321154838.95771-4-philmd@linaro.org>
+The appeal of the DBCN extension is that it allows multiple bytes to be
+read/written in the SBI console in a single SBI call.
+
+As far as KVM goes, the DBCN calls are forwarded by an in-kernel KVM
+module to userspace. But this will only happens if the KVM module
+actually supports this SBI extension and we activate it.
+
+We'll check for DBCN support during init time, checking if get-reg-list
+is advertising KVM_RISCV_SBI_EXT_DBCN. In that case, we'll enable it via
+kvm_set_one_reg() during kvm_arch_init_vcpu().
+
+Finally, change kvm_riscv_handle_sbi() to handle the incoming calls for
+SBI_EXT_DBCN, reading and writing as required.
+
+A simple KVM guest with 'earlycon=sbi', running in an emulated RISC-V
+host, takes around 20 seconds to boot without using DBCN. With this
+patch we're taking around 14 seconds to boot due to the speed-up in the
+terminal output.  There's no change in boot time if the guest isn't
+using earlycon.
+
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- target/i386/cpu-apic.c   | 112 +++++++++++++++++++++++++++++++++++++++
- target/i386/cpu-sysemu.c |  77 ---------------------------
- target/i386/monitor.c    |  25 ---------
- target/i386/meson.build  |   1 +
- 4 files changed, 113 insertions(+), 102 deletions(-)
- create mode 100644 target/i386/cpu-apic.c
+ target/riscv/kvm/kvm-cpu.c         | 111 +++++++++++++++++++++++++++++
+ target/riscv/sbi_ecall_interface.h |  17 +++++
+ 2 files changed, 128 insertions(+)
 
-diff --git a/target/i386/cpu-apic.c b/target/i386/cpu-apic.c
-new file mode 100644
-index 0000000000..d397ec94dc
---- /dev/null
-+++ b/target/i386/cpu-apic.c
-@@ -0,0 +1,112 @@
-+/*
-+ * QEMU x86 CPU <-> APIC
-+ *
-+ * Copyright (c) 2003-2004 Fabrice Bellard
-+ *
-+ * SPDX-License-Identifier: MIT
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "qapi/qmp/qdict.h"
-+#include "qapi/error.h"
-+#include "monitor/monitor.h"
-+#include "monitor/hmp-target.h"
-+#include "sysemu/hw_accel.h"
-+#include "sysemu/kvm.h"
-+#include "sysemu/xen.h"
-+#include "exec/address-spaces.h"
-+#include "hw/qdev-properties.h"
-+#include "hw/i386/apic_internal.h"
-+#include "cpu-internal.h"
-+
-+APICCommonClass *apic_get_class(Error **errp)
-+{
-+    const char *apic_type = "apic";
-+
-+    /* TODO: in-kernel irqchip for hvf */
-+    if (kvm_enabled()) {
-+        if (!kvm_irqchip_in_kernel()) {
-+            error_setg(errp, "KVM does not support userspace APIC");
-+            return NULL;
-+        }
-+        apic_type = "kvm-apic";
-+    } else if (xen_enabled()) {
-+        apic_type = "xen-apic";
-+    } else if (whpx_apic_in_platform()) {
-+        apic_type = "whpx-apic";
-+    }
-+
-+    return APIC_COMMON_CLASS(object_class_by_name(apic_type));
-+}
-+
-+void x86_cpu_apic_create(X86CPU *cpu, Error **errp)
-+{
-+    APICCommonState *apic;
-+    APICCommonClass *apic_class = apic_get_class(errp);
-+
-+    if (!apic_class) {
-+        return;
-+    }
-+
-+    cpu->apic_state = DEVICE(object_new_with_class(OBJECT_CLASS(apic_class)));
-+    object_property_add_child(OBJECT(cpu), "lapic",
-+                              OBJECT(cpu->apic_state));
-+    object_unref(OBJECT(cpu->apic_state));
-+
-+    /* TODO: convert to link<> */
-+    apic = APIC_COMMON(cpu->apic_state);
-+    apic->cpu = cpu;
-+    apic->apicbase = APIC_DEFAULT_ADDRESS | MSR_IA32_APICBASE_ENABLE;
-+
-+    /*
-+     * apic_common_set_id needs to check if the CPU has x2APIC
-+     * feature in case APIC ID >= 255, so we need to set apic->cpu
-+     * before setting APIC ID
-+     */
-+    qdev_prop_set_uint32(cpu->apic_state, "id", cpu->apic_id);
-+}
-+
-+void x86_cpu_apic_realize(X86CPU *cpu, Error **errp)
-+{
-+    APICCommonState *apic;
-+    static bool apic_mmio_map_once;
-+
-+    if (cpu->apic_state == NULL) {
-+        return;
-+    }
-+    qdev_realize(DEVICE(cpu->apic_state), NULL, errp);
-+
-+    /* Map APIC MMIO area */
-+    apic = APIC_COMMON(cpu->apic_state);
-+    if (!apic_mmio_map_once) {
-+        memory_region_add_subregion_overlap(get_system_memory(),
-+                                            apic->apicbase &
-+                                            MSR_IA32_APICBASE_BASE,
-+                                            &apic->io_memory,
-+                                            0x1000);
-+        apic_mmio_map_once = true;
-+     }
-+}
-+
-+void hmp_info_local_apic(Monitor *mon, const QDict *qdict)
-+{
-+    CPUState *cs;
-+
-+    if (qdict_haskey(qdict, "apic-id")) {
-+        int id = qdict_get_try_int(qdict, "apic-id", 0);
-+
-+        cs = cpu_by_arch_id(id);
-+        if (cs) {
-+            cpu_synchronize_state(cs);
-+        }
-+    } else {
-+        cs = mon_get_cpu(mon);
-+    }
-+
-+
-+    if (!cs) {
-+        monitor_printf(mon, "No CPU available\n");
-+        return;
-+    }
-+    x86_cpu_dump_local_apic_state(cs, CPU_DUMP_FPU);
-+}
-diff --git a/target/i386/cpu-sysemu.c b/target/i386/cpu-sysemu.c
-index 3f9093d285..227ac021f6 100644
---- a/target/i386/cpu-sysemu.c
-+++ b/target/i386/cpu-sysemu.c
-@@ -19,19 +19,12 @@
+diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+index 03e3fee607..54a9ab9fd7 100644
+--- a/target/riscv/kvm/kvm-cpu.c
++++ b/target/riscv/kvm/kvm-cpu.c
+@@ -409,6 +409,12 @@ static KVMCPUConfig kvm_v_vlenb = {
+                    KVM_REG_RISCV_VECTOR_CSR_REG(vlenb)
+ };
  
- #include "qemu/osdep.h"
- #include "cpu.h"
--#include "sysemu/kvm.h"
--#include "sysemu/xen.h"
--#include "sysemu/whpx.h"
- #include "qapi/error.h"
- #include "qapi/qapi-visit-run-state.h"
- #include "qapi/qmp/qdict.h"
- #include "qapi/qobject-input-visitor.h"
- #include "qom/qom-qobject.h"
- #include "qapi/qapi-commands-machine-target.h"
--#include "hw/qdev-properties.h"
--
--#include "exec/address-spaces.h"
--#include "hw/i386/apic_internal.h"
- 
- #include "cpu-internal.h"
- 
-@@ -273,75 +266,6 @@ void x86_cpu_machine_reset_cb(void *opaque)
-     cpu_reset(CPU(cpu));
- }
- 
--APICCommonClass *apic_get_class(Error **errp)
--{
--    const char *apic_type = "apic";
--
--    /* TODO: in-kernel irqchip for hvf */
--    if (kvm_enabled()) {
--        if (!kvm_irqchip_in_kernel()) {
--            error_setg(errp, "KVM does not support userspace APIC");
--            return NULL;
--        }
--        apic_type = "kvm-apic";
--    } else if (xen_enabled()) {
--        apic_type = "xen-apic";
--    } else if (whpx_apic_in_platform()) {
--        apic_type = "whpx-apic";
--    }
--
--    return APIC_COMMON_CLASS(object_class_by_name(apic_type));
--}
--
--void x86_cpu_apic_create(X86CPU *cpu, Error **errp)
--{
--    APICCommonState *apic;
--    APICCommonClass *apic_class = apic_get_class(errp);
--
--    if (!apic_class) {
--        return;
--    }
--
--    cpu->apic_state = DEVICE(object_new_with_class(OBJECT_CLASS(apic_class)));
--    object_property_add_child(OBJECT(cpu), "lapic",
--                              OBJECT(cpu->apic_state));
--    object_unref(OBJECT(cpu->apic_state));
--
--    /* TODO: convert to link<> */
--    apic = APIC_COMMON(cpu->apic_state);
--    apic->cpu = cpu;
--    apic->apicbase = APIC_DEFAULT_ADDRESS | MSR_IA32_APICBASE_ENABLE;
--
--    /*
--     * apic_common_set_id needs to check if the CPU has x2APIC
--     * feature in case APIC ID >= 255, so we need to set apic->cpu
--     * before setting APIC ID
--     */
--    qdev_prop_set_uint32(cpu->apic_state, "id", cpu->apic_id);
--}
--
--void x86_cpu_apic_realize(X86CPU *cpu, Error **errp)
--{
--    APICCommonState *apic;
--    static bool apic_mmio_map_once;
--
--    if (cpu->apic_state == NULL) {
--        return;
--    }
--    qdev_realize(DEVICE(cpu->apic_state), NULL, errp);
--
--    /* Map APIC MMIO area */
--    apic = APIC_COMMON(cpu->apic_state);
--    if (!apic_mmio_map_once) {
--        memory_region_add_subregion_overlap(get_system_memory(),
--                                            apic->apicbase &
--                                            MSR_IA32_APICBASE_BASE,
--                                            &apic->io_memory,
--                                            0x1000);
--        apic_mmio_map_once = true;
--     }
--}
--
- GuestPanicInformation *x86_cpu_get_crash_info(CPUState *cs)
++static KVMCPUConfig kvm_sbi_dbcn = {
++    .name = "sbi_dbcn",
++    .kvm_reg_id = KVM_REG_RISCV | KVM_REG_SIZE_U64 |
++                  KVM_REG_RISCV_SBI_EXT | KVM_RISCV_SBI_EXT_DBCN
++};
++
+ static void kvm_riscv_update_cpu_cfg_isa_ext(RISCVCPU *cpu, CPUState *cs)
  {
-     X86CPU *cpu = X86_CPU(cs);
-@@ -385,4 +309,3 @@ void x86_cpu_get_crash_info_qom(Object *obj, Visitor *v,
-                                      errp);
-     qapi_free_GuestPanicInformation(panic_info);
+     CPURISCVState *env = &cpu->env;
+@@ -1041,6 +1047,20 @@ static int uint64_cmp(const void *a, const void *b)
+     return 0;
  }
--
-diff --git a/target/i386/monitor.c b/target/i386/monitor.c
-index 3a281dab02..2d766b2637 100644
---- a/target/i386/monitor.c
-+++ b/target/i386/monitor.c
-@@ -28,8 +28,6 @@
- #include "monitor/hmp-target.h"
- #include "monitor/hmp.h"
- #include "qapi/qmp/qdict.h"
--#include "sysemu/hw_accel.h"
--#include "sysemu/kvm.h"
- #include "qapi/error.h"
- #include "qapi/qapi-commands-misc-target.h"
- #include "qapi/qapi-commands-misc.h"
-@@ -647,26 +645,3 @@ const MonitorDef *target_monitor_defs(void)
+ 
++static void kvm_riscv_check_sbi_dbcn_support(RISCVCPU *cpu,
++                                             KVMScratchCPU *kvmcpu,
++                                             struct kvm_reg_list *reglist)
++{
++    struct kvm_reg_list *reg_search;
++
++    reg_search = bsearch(&kvm_sbi_dbcn.kvm_reg_id, reglist->reg, reglist->n,
++                         sizeof(uint64_t), uint64_cmp);
++
++    if (reg_search) {
++        kvm_sbi_dbcn.supported = true;
++    }
++}
++
+ static void kvm_riscv_read_vlenb(RISCVCPU *cpu, KVMScratchCPU *kvmcpu,
+                                  struct kvm_reg_list *reglist)
  {
-     return monitor_defs;
+@@ -1146,6 +1166,8 @@ static void kvm_riscv_init_multiext_cfg(RISCVCPU *cpu, KVMScratchCPU *kvmcpu)
+     if (riscv_has_ext(&cpu->env, RVV)) {
+         kvm_riscv_read_vlenb(cpu, kvmcpu, reglist);
+     }
++
++    kvm_riscv_check_sbi_dbcn_support(cpu, kvmcpu, reglist);
  }
--
--void hmp_info_local_apic(Monitor *mon, const QDict *qdict)
--{
--    CPUState *cs;
--
--    if (qdict_haskey(qdict, "apic-id")) {
--        int id = qdict_get_try_int(qdict, "apic-id", 0);
--
--        cs = cpu_by_arch_id(id);
--        if (cs) {
--            cpu_synchronize_state(cs);
--        }
--    } else {
--        cs = mon_get_cpu(mon);
--    }
--
--
--    if (!cs) {
--        monitor_printf(mon, "No CPU available\n");
--        return;
--    }
--    x86_cpu_dump_local_apic_state(cs, CPU_DUMP_FPU);
--}
-diff --git a/target/i386/meson.build b/target/i386/meson.build
-index 8abce725f8..075117989b 100644
---- a/target/i386/meson.build
-+++ b/target/i386/meson.build
-@@ -18,6 +18,7 @@ i386_system_ss.add(files(
-   'arch_memory_mapping.c',
-   'machine.c',
-   'monitor.c',
-+  'cpu-apic.c',
-   'cpu-sysemu.c',
- ))
- i386_system_ss.add(when: 'CONFIG_SEV', if_true: files('sev.c'), if_false: files('sev-sysemu-stub.c'))
+ 
+ static void riscv_init_kvm_registers(Object *cpu_obj)
+@@ -1320,6 +1342,17 @@ static int kvm_vcpu_set_machine_ids(RISCVCPU *cpu, CPUState *cs)
+     return ret;
+ }
+ 
++static int kvm_vcpu_enable_sbi_dbcn(RISCVCPU *cpu, CPUState *cs)
++{
++    target_ulong reg = 1;
++
++    if (!kvm_sbi_dbcn.supported) {
++        return 0;
++    }
++
++    return kvm_set_one_reg(cs, kvm_sbi_dbcn.kvm_reg_id, &reg);
++}
++
+ int kvm_arch_init_vcpu(CPUState *cs)
+ {
+     int ret = 0;
+@@ -1337,6 +1370,8 @@ int kvm_arch_init_vcpu(CPUState *cs)
+     kvm_riscv_update_cpu_misa_ext(cpu, cs);
+     kvm_riscv_update_cpu_cfg_isa_ext(cpu, cs);
+ 
++    ret = kvm_vcpu_enable_sbi_dbcn(cpu, cs);
++
+     return ret;
+ }
+ 
+@@ -1394,6 +1429,79 @@ bool kvm_arch_stop_on_emulation_error(CPUState *cs)
+     return true;
+ }
+ 
++static void kvm_riscv_handle_sbi_dbcn(CPUState *cs, struct kvm_run *run)
++{
++    g_autofree uint8_t *buf = NULL;
++    RISCVCPU *cpu = RISCV_CPU(cs);
++    target_ulong num_bytes;
++    uint64_t addr;
++    unsigned char ch;
++    int ret;
++
++    switch (run->riscv_sbi.function_id) {
++    case SBI_EXT_DBCN_CONSOLE_READ:
++    case SBI_EXT_DBCN_CONSOLE_WRITE:
++        num_bytes = run->riscv_sbi.args[0];
++
++        if (num_bytes == 0) {
++            run->riscv_sbi.ret[0] = SBI_SUCCESS;
++            run->riscv_sbi.ret[1] = 0;
++            break;
++        }
++
++        addr = run->riscv_sbi.args[1];
++
++        /*
++         * Handle the case where a 32 bit CPU is running in a
++         * 64 bit addressing env.
++         */
++        if (riscv_cpu_mxl(&cpu->env) == MXL_RV32) {
++            addr |= (uint64_t)run->riscv_sbi.args[2] << 32;
++        }
++
++        buf = g_malloc0(num_bytes);
++
++        if (run->riscv_sbi.function_id == SBI_EXT_DBCN_CONSOLE_READ) {
++            ret = qemu_chr_fe_read_all(serial_hd(0)->be, buf, num_bytes);
++            if (ret < 0) {
++                error_report("SBI_EXT_DBCN_CONSOLE_READ: error when "
++                             "reading chardev");
++                exit(1);
++            }
++
++            cpu_physical_memory_write(addr, buf, ret);
++        } else {
++            cpu_physical_memory_read(addr, buf, num_bytes);
++
++            ret = qemu_chr_fe_write_all(serial_hd(0)->be, buf, num_bytes);
++            if (ret < 0) {
++                error_report("SBI_EXT_DBCN_CONSOLE_WRITE: error when "
++                             "writing chardev");
++                exit(1);
++            }
++        }
++
++        run->riscv_sbi.ret[0] = SBI_SUCCESS;
++        run->riscv_sbi.ret[1] = ret;
++        break;
++    case SBI_EXT_DBCN_CONSOLE_WRITE_BYTE:
++        ch = run->riscv_sbi.args[0];
++        ret = qemu_chr_fe_write(serial_hd(0)->be, &ch, sizeof(ch));
++
++        if (ret < 0) {
++            error_report("SBI_EXT_DBCN_CONSOLE_WRITE_BYTE: error when "
++                         "writing chardev");
++            exit(1);
++        }
++
++        run->riscv_sbi.ret[0] = SBI_SUCCESS;
++        run->riscv_sbi.ret[1] = 0;
++        break;
++    default:
++        run->riscv_sbi.ret[0] = SBI_ERR_NOT_SUPPORTED;
++    }
++}
++
+ static int kvm_riscv_handle_sbi(CPUState *cs, struct kvm_run *run)
+ {
+     int ret = 0;
+@@ -1412,6 +1520,9 @@ static int kvm_riscv_handle_sbi(CPUState *cs, struct kvm_run *run)
+         }
+         ret = 0;
+         break;
++    case SBI_EXT_DBCN:
++        kvm_riscv_handle_sbi_dbcn(cs, run);
++        break;
+     default:
+         qemu_log_mask(LOG_UNIMP,
+                       "%s: un-handled SBI EXIT, specific reasons is %lu\n",
+diff --git a/target/riscv/sbi_ecall_interface.h b/target/riscv/sbi_ecall_interface.h
+index 43899d08f6..7dfe5f72c6 100644
+--- a/target/riscv/sbi_ecall_interface.h
++++ b/target/riscv/sbi_ecall_interface.h
+@@ -12,6 +12,17 @@
+ 
+ /* clang-format off */
+ 
++#define SBI_SUCCESS                      0
++#define SBI_ERR_FAILED                  -1
++#define SBI_ERR_NOT_SUPPORTED           -2
++#define SBI_ERR_INVALID_PARAM           -3
++#define SBI_ERR_DENIED                  -4
++#define SBI_ERR_INVALID_ADDRESS         -5
++#define SBI_ERR_ALREADY_AVAILABLE       -6
++#define SBI_ERR_ALREADY_STARTED         -7
++#define SBI_ERR_ALREADY_STOPPED         -8
++#define SBI_ERR_NO_SHMEM                -9
++
+ /* SBI Extension IDs */
+ #define SBI_EXT_0_1_SET_TIMER           0x0
+ #define SBI_EXT_0_1_CONSOLE_PUTCHAR     0x1
+@@ -27,6 +38,7 @@
+ #define SBI_EXT_IPI                     0x735049
+ #define SBI_EXT_RFENCE                  0x52464E43
+ #define SBI_EXT_HSM                     0x48534D
++#define SBI_EXT_DBCN                    0x4442434E
+ 
+ /* SBI function IDs for BASE extension */
+ #define SBI_EXT_BASE_GET_SPEC_VERSION   0x0
+@@ -57,6 +69,11 @@
+ #define SBI_EXT_HSM_HART_STOP           0x1
+ #define SBI_EXT_HSM_HART_GET_STATUS     0x2
+ 
++/* SBI function IDs for DBCN extension */
++#define SBI_EXT_DBCN_CONSOLE_WRITE      0x0
++#define SBI_EXT_DBCN_CONSOLE_READ       0x1
++#define SBI_EXT_DBCN_CONSOLE_WRITE_BYTE 0x2
++
+ #define SBI_HSM_HART_STATUS_STARTED     0x0
+ #define SBI_HSM_HART_STATUS_STOPPED     0x1
+ #define SBI_HSM_HART_STATUS_START_PENDING   0x2
 -- 
-2.41.0
+2.44.0
 
 
