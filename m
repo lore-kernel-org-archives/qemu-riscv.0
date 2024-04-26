@@ -4,90 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33B1EC4345F
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Apr 2024 19:35:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 247B4C4345F
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Apr 2024 19:42:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s0RL3-00079D-Do; Fri, 26 Apr 2024 15:34:29 -0400
+	id 1s0RSV-0000CT-CS; Fri, 26 Apr 2024 15:42:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1s0RKv-00077Z-CY
- for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:34:21 -0400
-Received: from mail-pj1-x102d.google.com ([2607:f8b0:4864:20::102d])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s0RSU-0000C0-3R
+ for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:42:10 -0400
+Received: from mail-ed1-x52c.google.com ([2a00:1450:4864:20::52c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1s0RKs-0001Hv-J7
- for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:34:21 -0400
-Received: by mail-pj1-x102d.google.com with SMTP id
- 98e67ed59e1d1-2a2d248a2e1so2689588a91.0
- for <qemu-riscv@nongnu.org>; Fri, 26 Apr 2024 12:34:16 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s0RSQ-0002ki-To
+ for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:42:09 -0400
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-57267852b3dso352977a12.3
+ for <qemu-riscv@nongnu.org>; Fri, 26 Apr 2024 12:42:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1714160055; x=1714764855; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=m+Ylf8YtrrHtw/DdiVzN8IRtPB4Fe4ozL1NRbrzq8l4=;
- b=HTjEzB1U+zxBx0WSUOQ6kP9Ok91Xl1DoD9FlDEaaBd8Euj9Zfi85XnkhuRZ9hPFtEU
- ziPSM50yZDOJQsR1QxlCO/tvq4+QzFTmTzwOkehoOFkWnh+u2V6Y4QhHD8RaG+w0iAla
- xcPzF2+pSaB3MyQfNSgC9/ZZ0PbsFwwGZ66Zo3nPbvJYmVv3elL6Scv4iWCuVvEn01lF
- Wy0USR3peAjtemHaC7FKP3oIPK1m2a6onUYdH8R4pnCMl+8K3862/b/6Rat6SHA5c3E2
- M7fPlqaYy8yXC65xqTU8Vf3AgMgrDZ4A1vhAptAP5EqskOyOzIteaGeUiBDk7VSH/Vk6
- VBXQ==
+ d=linaro.org; s=google; t=1714160523; x=1714765323; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=U3DFgau0bBFHqq3QQqiBFqK7p+j271JWuNvgAdtuSqI=;
+ b=QCK7hY1m199XWVob6dpli3X8cHcgPrq/o5mKjnvJeG056m2T383g6DA2Ie+Salrivm
+ HynFuCKRxzyek/6BQCoVapisRpN5rgAjicCCFC5Wyc4fFOs0O8XxFsZiwuIbJ91XaQEK
+ vhmVQgB6UazZHOz0xYW2F2uQIsBbFiYreyqH6p2j3O3CtcCnw3Wix1BYOzgMHO6BrjgS
+ 6TjrSKSOMn3cHfDEE0lnFV2p9I8kuX2S2SgW/zGDraR96eP12Lr+Cc1Ln8uYBT+alpMX
+ lwtqS/+XEsJ9Xeqg4vTYBF8XOPMkOpFP38fa5IRSHDKs97Fvhq4/up2aCZWVBP4L0H9o
+ IxvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714160055; x=1714764855;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=m+Ylf8YtrrHtw/DdiVzN8IRtPB4Fe4ozL1NRbrzq8l4=;
- b=It7Gdl5HZ8H1JDjg9GtxIIwKcgbNPEh+hsKb0BewWFT0x283VeduzSKv72CD6ZkcFt
- cBkAg2Br63Vj0E+jhXiqUXStvj/GpxIcuEQX+A3vhRJCA24fvThxkb1VgYPeZujFF4jO
- y4Sov/xxDgrC7wzPtGl/fPGW2FhnpzFZnvp+TUY9DySTYgF5CRzggNhRG+pGt80ekxoY
- Zc+RJQpzd+CzPBk7U0dw2bGyIHqMP2WvWAIa3qh8rfxncJqEFT4aRpVzkWR9ydi/j5Ot
- SNkHCh7hOKkrA1eQAKQ8JrqXmnf+eyFwUdGHgz1tNfOdMNTk2AhG9/uZDZyTVbO9Ur6X
- jw/Q==
+ d=1e100.net; s=20230601; t=1714160523; x=1714765323;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=U3DFgau0bBFHqq3QQqiBFqK7p+j271JWuNvgAdtuSqI=;
+ b=gnGtuxmHZZXlNT52JwYW1AkzKsCtErKtMyTAf1PSVHjBWGsUEANRb7WIAf01CZ1n5x
+ x1Yb4YoBG8NoztJ24Z222DjZqQQfYIaEDXsSnQeuF6KqL2a0jpsyOkbKmroLavAZQzZf
+ aEJQ3HbzwNG5emG0N8RBHCAPr7FyVIoxoCcV1GM5pe0bf/iFBEwi82Dxe5qAAFo8Lspn
+ E/qBjxCH0KB1GL+AhwlYqozEELFcuskEa5VJx4wEQJf5ZmPUklvTspYDxmjjS9Sn9oEV
+ J+yygCTVDh/+fTExhS6r4n7tq0/LIe1FcrMQIEWPTosiVItaK+ixFCRilgFmupSqVMiY
+ FBiA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVjjOhSjNZ67pGfpkwUefrqEFRKa8KsLvoHwmSE8eWPNc1/XJ8iYWdIEkUk2r6R+kN0RQETUy1Y+S6zSC14D+uepWJs/ow=
-X-Gm-Message-State: AOJu0YybcMLaZdRrceOR0HWpKLy/lY7lD2AAbjojlith/hvmMALETmik
- KiB0W6A7p0mKvEQDE2KxU4mdaPuOaj5SO0+d00p62lMt4FlghRHj/XUlmSC9E68=
-X-Google-Smtp-Source: AGHT+IEeTVMIF4CQktUYMKbZ446pl1MS5mi6qVDru/JGYGVK2QrZIOnaDhzXbOAdfjdHnan3iUGU3Q==
-X-Received: by 2002:a17:90a:3d4e:b0:2a2:faf4:71da with SMTP id
- o14-20020a17090a3d4e00b002a2faf471damr852171pjf.10.1714160055121; 
- Fri, 26 Apr 2024 12:34:15 -0700 (PDT)
-Received: from ?IPV6:2604:3d08:937d:c610::abdb? ([2604:3d08:937d:c610::abdb])
- by smtp.gmail.com with ESMTPSA id
- o16-20020a17090aac1000b002a27132ac02sm14900680pjq.2.2024.04.26.12.34.14
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 26 Apr 2024 12:34:14 -0700 (PDT)
-Message-ID: <6a4c2b81-ffea-437c-aa96-d96d009f3a1c@linaro.org>
-Date: Fri, 26 Apr 2024 12:34:13 -0700
+ AJvYcCUs7sf4ah/ANCHTDbnDKwU/VqKV8mR7GVtSO+k/A1xStFFfrpo5hZlEp3JKXgMMLxOgLxZJta9E9Cr8QbKwGUwkPFJEf1Y=
+X-Gm-Message-State: AOJu0YzEwA3ha5hddg2NHHOdi4jT5aBkm0pv1lkS1t0bME2lsZEse/d8
+ Aqo8eNVdaSKSrjP19diyVTbmozvsBDYyoj3LnFnz5VqBvnge6ygNbgiFupdgebc=
+X-Google-Smtp-Source: AGHT+IHI4frtraiWjI8RqdI2HczpjK2D6Rie1RmZ8YVy4jS8KUFLo0S/eqG1QBM34lAZvTML6D/Viw==
+X-Received: by 2002:a50:871b:0:b0:571:fe99:df9e with SMTP id
+ i27-20020a50871b000000b00571fe99df9emr1923252edb.40.1714160523351; 
+ Fri, 26 Apr 2024 12:42:03 -0700 (PDT)
+Received: from m1x-phil.lan (aul93-h02-176-184-11-147.dsl.sta.abo.bbox.fr.
+ [176.184.11.147]) by smtp.gmail.com with ESMTPSA id
+ c8-20020a50d648000000b0057232df2e5dsm3090799edj.32.2024.04.26.12.42.02
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Fri, 26 Apr 2024 12:42:02 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: qemu-arm@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
+ qemu-ppc@nongnu.org,
+ Philippe =?unknown-8bit?q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PULL 00/38] Exec / accelerators patches
+Date: Fri, 26 Apr 2024 21:41:20 +0200
+Message-ID: <20240426194200.43723-1-philmd@linaro.org>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 18/24] plugins: Include missing 'qemu/bitmap.h' header
-Content-Language: en-US
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org
-Cc: Paolo Bonzini <pbonzini@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>, qemu-arm@nongnu.org,
- qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
- David Hildenbrand <david@redhat.com>, =?UTF-8?Q?Alex_Benn=C3=A9e?=
- <alex.bennee@linaro.org>, Anton Johansson <anjo@rev.ng>
-References: <20240418192525.97451-1-philmd@linaro.org>
- <20240418192525.97451-19-philmd@linaro.org>
-From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-In-Reply-To: <20240418192525.97451-19-philmd@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102d;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-pj1-x102d.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::52c;
+ envelope-from=philmd@linaro.org; helo=mail-ed1-x52c.google.com
+X-Spam_score_int: 4
+X-Spam_score: 0.4
+X-Spam_bar: /
+X-Spam_report: (0.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ SUSPICIOUS_RECIPS=2.51 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,18 +93,221 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-T24gNC8xOC8yNCAxMjoyNSwgUGhpbGlwcGUgTWF0aGlldS1EYXVkw6kgd3JvdGU6DQo+ICJx
-ZW11L3BsdWdpbi5oIiB1c2VzIERFQ0xBUkVfQklUTUFQKCksIHdoaWNoIGlzDQo+IGRlY2xh
-cmVkIGluICJxZW11L2JpdG1hcC5oIi4NCj4gDQo+IFNpZ25lZC1vZmYtYnk6IFBoaWxpcHBl
-IE1hdGhpZXUtRGF1ZMOpIDxwaGlsbWRAbGluYXJvLm9yZz4NCj4gLS0tDQo+ICAgaW5jbHVk
-ZS9xZW11L3BsdWdpbi5oIHwgMSArDQo+ICAgMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9u
-KCspDQo+IA0KPiBkaWZmIC0tZ2l0IGEvaW5jbHVkZS9xZW11L3BsdWdpbi5oIGIvaW5jbHVk
-ZS9xZW11L3BsdWdpbi5oDQo+IGluZGV4IDEyYTk2Y2VhMmEuLjQxZGI3NDhlZGEgMTAwNjQ0
-DQo+IC0tLSBhL2luY2x1ZGUvcWVtdS9wbHVnaW4uaA0KPiArKysgYi9pbmNsdWRlL3FlbXUv
-cGx1Z2luLmgNCj4gQEAgLTEzLDYgKzEzLDcgQEANCj4gICAjaW5jbHVkZSAicWVtdS9xdWV1
-ZS5oIg0KPiAgICNpbmNsdWRlICJxZW11L29wdGlvbi5oIg0KPiAgICNpbmNsdWRlICJxZW11
-L3BsdWdpbi1ldmVudC5oIg0KPiArI2luY2x1ZGUgInFlbXUvYml0bWFwLmgiDQo+ICAgI2lu
-Y2x1ZGUgImV4ZWMvbWVtb3BpZHguaCINCj4gICAjaW5jbHVkZSAiaHcvY29yZS9jcHUuaCIN
-Cj4gICANCg0KUmV2aWV3ZWQtYnk6IFBpZXJyaWNrIEJvdXZpZXIgPHBpZXJyaWNrLmJvdXZp
-ZXJAbGluYXJvLm9yZz4NCg==
+The following changes since commit a118c4aff4087eafb68f7132b233ad548cf16376:
+
+  Merge tag 'hw-misc-20240425' of https://github.com/philmd/qemu into staging (2024-04-25 09:43:29 -0700)
+
+are available in the Git repository at:
+
+  https://github.com/philmd/qemu.git tags/accel-20240426
+
+for you to fetch changes up to 671558d290ffb93752d3245e7c5604b04b6dcdf2:
+
+  plugins: Include missing 'qemu/bitmap.h' header (2024-04-26 21:36:19 +0200)
+
+Selfish PR, painfully tested commit by commit.
+----------------------------------------------------------------
+Accelerators patches
+
+A lot of trivial cleanups and simplifications (moving methods around,
+adding/removing #include statements). Most notable changes:
+
+- Rename NEED_CPU_H -> COMPILING_PER_TARGET
+- Rename few template headers using the '.h.inc' suffix
+- Extract some definitions / declarations into their own header:
+  - accel/tcg/user-retaddr.h (helper_retaddr)
+  - include/exec/abi_ptr.h (abi_ptr)
+  - include/exec/breakpoint.h (CPUBreakpoint, CPUWatchpoint)
+  - include/exec/mmu-access-type.h (MMUAccessType)
+  - include/user/tswap-target.h (tswapl, bswaptls)
+
+----------------------------------------------------------------
+
+Philippe Mathieu-Daudé (38):
+  exec: Rename NEED_CPU_H -> COMPILING_PER_TARGET
+  exec: Reduce tlb_set_dirty() declaration scope
+  exec: Include 'cpu.h' before validating CPUArchState placement
+  exec: Expose 'target_page.h' API to user emulation
+  accel: Include missing 'exec/cpu_ldst.h' header
+  gdbstub: Include missing 'hw/core/cpu.h' header
+  gdbstub: Simplify #ifdef'ry in helpers.h
+  gdbstub: Avoid including 'cpu.h' in 'gdbstub/helpers.h'
+  semihosting/uaccess: Avoid including 'cpu.h'
+  semihosting/guestfd: Remove unused 'semihosting/uaccess.h' header
+  target: Define TCG_GUEST_DEFAULT_MO in 'cpu-param.h'
+  target/ppc/excp_helper: Avoid 'abi_ptr' in system emulation
+  target/sparc: Replace abi_ulong by uint32_t for TARGET_ABI32
+  target/i386: Include missing 'exec/exec-all.h' header
+  accel/tcg: Un-inline retaddr helpers to 'user-retaddr.h'
+  accel/tcg: Include missing 'hw/core/cpu.h' header
+  accel/tcg: Include missing headers in 'tb-jmp-cache.h'
+  accel/tcg: Rename load-extract/store-insert headers using .h.inc
+    suffix
+  accel/tcg: Rename helper-head.h -> helper-head.h.inc
+  accel/whpx: Use accel-specific per-vcpu @dirty field
+  accel/nvmm: Use accel-specific per-vcpu @dirty field
+  accel/hvf: Use accel-specific per-vcpu @dirty field
+  exec/cpu-all: Reduce 'qemu/rcu.h' header inclusion
+  exec/cpu-all: Remove unused 'qemu/thread.h' header
+  exec/cpu-all: Remove unused tswapls() definitions
+  exec: Declare target_words_bigendian() in 'exec/tswap.h'
+  exec: Move [b]tswapl() declarations to 'exec/user/tswap-target.h'
+  exec/user: Do not include 'cpu.h' in 'abitypes.h'
+  exec: Declare abi_ptr type in its own 'abi_ptr.h' header
+  exec: Declare MMUAccessType type in 'mmu-access-type.h' header
+  exec: Declare CPUBreakpoint/CPUWatchpoint type in 'breakpoint.h'
+    header
+  exec: Restrict TCG specific declarations of 'cputlb.h'
+  exec: Restrict 'cpu_ldst.h' to TCG accelerator
+  exec: Rename 'exec/user/guest-base.h' as 'user/guest-base.h'
+  exec: Restrict inclusion of 'user/guest-base.h'
+  exec: Move CPUTLBEntry helpers to cputlb.c
+  hw/core: Avoid including the full 'hw/core/cpu.h' in 'tcg-cpu-ops.h'
+  plugins: Include missing 'qemu/bitmap.h' header
+
+ MAINTAINERS                                   |   1 +
+ meson.build                                   |   6 +-
+ accel/tcg/tb-jmp-cache.h                      |   3 +
+ accel/tcg/user-retaddr.h                      |  28 +++++
+ bsd-user/freebsd/target_os_elf.h              |   1 +
+ bsd-user/freebsd/target_os_stack.h            |   1 +
+ bsd-user/netbsd/target_os_elf.h               |   1 +
+ bsd-user/openbsd/target_os_elf.h              |   1 +
+ include/exec/abi_ptr.h                        |  33 ++++++
+ include/exec/breakpoint.h                     |  30 +++++
+ include/exec/cpu-all.h                        |  16 +--
+ include/exec/cpu-defs.h                       |   2 +-
+ include/exec/cpu_ldst.h                       | 105 ++----------------
+ include/exec/cputlb.h                         |   5 +
+ include/exec/exec-all.h                       |   3 +-
+ include/exec/memop.h                          |   4 +-
+ include/exec/memory.h                         |   4 +-
+ include/exec/mmu-access-type.h                |  18 +++
+ include/exec/ram_addr.h                       |   1 +
+ include/exec/translator.h                     |   5 +-
+ include/exec/tswap.h                          |  16 ++-
+ include/exec/user/abitypes.h                  |   8 +-
+ include/exec/user/guest-base.h                |  12 --
+ include/gdbstub/helpers.h                     |  12 +-
+ include/hw/core/cpu.h                         |  42 +------
+ include/hw/core/tcg-cpu-ops.h                 |   6 +-
+ include/qemu/osdep.h                          |   2 +-
+ include/qemu/plugin.h                         |   1 +
+ include/semihosting/uaccess.h                 |   4 +-
+ include/sysemu/hvf.h                          |   8 +-
+ include/sysemu/hvf_int.h                      |   1 +
+ include/sysemu/kvm.h                          |   6 +-
+ include/sysemu/nvmm.h                         |   4 +-
+ include/sysemu/whpx.h                         |   4 +-
+ include/sysemu/xen.h                          |   4 +-
+ include/user/guest-base.h                     |  18 +++
+ include/user/tswap-target.h                   |  22 ++++
+ target/alpha/cpu-param.h                      |   3 +
+ target/alpha/cpu.h                            |   3 -
+ target/arm/cpu-param.h                        |   8 +-
+ target/arm/cpu.h                              |   3 -
+ target/arm/internals.h                        |   1 +
+ target/arm/kvm-consts.h                       |   4 +-
+ target/avr/cpu-param.h                        |   2 +
+ target/avr/cpu.h                              |   2 -
+ target/hppa/cpu-param.h                       |   8 ++
+ target/hppa/cpu.h                             |   6 -
+ target/i386/cpu-param.h                       |   3 +
+ target/i386/cpu.h                             |   3 -
+ target/loongarch/cpu-param.h                  |   2 +
+ target/loongarch/cpu.h                        |   2 -
+ target/microblaze/cpu-param.h                 |   3 +
+ target/microblaze/cpu.h                       |   3 -
+ target/mips/cpu-param.h                       |   2 +
+ target/mips/cpu.h                             |   2 -
+ target/openrisc/cpu-param.h                   |   2 +
+ target/openrisc/cpu.h                         |   2 -
+ target/ppc/cpu-param.h                        |   2 +
+ target/ppc/cpu.h                              |   2 -
+ target/ppc/internal.h                         |   1 +
+ target/riscv/cpu-param.h                      |   2 +
+ target/riscv/cpu.h                            |   2 -
+ target/riscv/debug.h                          |   2 +
+ target/s390x/cpu-param.h                      |   6 +
+ target/s390x/cpu.h                            |   3 -
+ target/sparc/cpu-param.h                      |  23 ++++
+ target/sparc/cpu.h                            |  23 ----
+ target/xtensa/cpu-param.h                     |   3 +
+ target/xtensa/cpu.h                           |   3 -
+ ...al16-al8.h => load-extract-al16-al8.h.inc} |   0
+ ...-insert-al16.h => store-insert-al16.h.inc} |   0
+ ...al16-al8.h => load-extract-al16-al8.h.inc} |   0
+ ...-insert-al16.h => store-insert-al16.h.inc} |   0
+ ...al16-al8.h => load-extract-al16-al8.h.inc} |   0
+ ...-insert-al16.h => store-insert-al16.h.inc} |   0
+ ...al16-al8.h => load-extract-al16-al8.h.inc} |   0
+ include/exec/helper-gen.h.inc                 |   2 +-
+ .../exec/{helper-head.h => helper-head.h.inc} |   4 +-
+ include/exec/helper-proto.h.inc               |   2 +-
+ accel/hvf/hvf-accel-ops.c                     |  10 +-
+ accel/stubs/tcg-stub.c                        |   4 -
+ accel/tcg/cpu-exec.c                          |   3 +
+ accel/tcg/cputlb.c                            |  53 ++++++++-
+ accel/tcg/tcg-accel-ops.c                     |   2 +
+ accel/tcg/translator.c                        |   1 +
+ accel/tcg/user-exec.c                         |   1 +
+ bsd-user/main.c                               |   1 +
+ bsd-user/signal.c                             |   1 +
+ bsd-user/strace.c                             |   1 +
+ cpu-target.c                                  |   1 +
+ disas/disas.c                                 |   1 +
+ gdbstub/gdbstub.c                             |   1 +
+ hw/audio/virtio-snd.c                         |   2 +-
+ hw/core/cpu-sysemu.c                          |   2 +-
+ hw/core/generic-loader.c                      |   2 +-
+ hw/display/vga.c                              |   2 +-
+ hw/virtio/virtio.c                            |   1 +
+ linux-user/elfload.c                          |   2 +
+ linux-user/i386/signal.c                      |   1 +
+ linux-user/main.c                             |   1 +
+ linux-user/ppc/signal.c                       |   1 +
+ page-target.c                                 |  44 ++++++++
+ semihosting/guestfd.c                         |   5 +-
+ system/physmem.c                              |  30 -----
+ target/arm/hvf/hvf.c                          |   4 +-
+ target/avr/gdbstub.c                          |   1 +
+ target/hexagon/translate.c                    |   1 +
+ target/i386/hvf/hvf.c                         |   4 +-
+ target/i386/hvf/x86hvf.c                      |   2 +-
+ target/i386/nvmm/nvmm-all.c                   |  21 ++--
+ target/i386/tcg/fpu_helper.c                  |   1 +
+ target/i386/whpx/whpx-all.c                   |  23 ++--
+ target/microblaze/cpu.c                       |   1 +
+ target/microblaze/translate.c                 |   1 +
+ target/ppc/excp_helper.c                      |   2 +-
+ target/sparc/gdbstub.c                        |   2 +-
+ target/target-common.c                        |  10 --
+ target/tricore/gdbstub.c                      |   1 +
+ tcg/tcg.c                                     |   2 +-
+ accel/tcg/ldst_atomicity.c.inc                |   4 +-
+ include/exec/helper-info.c.inc                |   2 +-
+ scripts/analyze-inclusions                    |   6 +-
+ target/meson.build                            |   2 -
+ 123 files changed, 488 insertions(+), 357 deletions(-)
+ create mode 100644 accel/tcg/user-retaddr.h
+ create mode 100644 include/exec/abi_ptr.h
+ create mode 100644 include/exec/breakpoint.h
+ create mode 100644 include/exec/mmu-access-type.h
+ delete mode 100644 include/exec/user/guest-base.h
+ create mode 100644 include/user/guest-base.h
+ create mode 100644 include/user/tswap-target.h
+ rename host/include/aarch64/host/{load-extract-al16-al8.h => load-extract-al16-al8.h.inc} (100%)
+ rename host/include/aarch64/host/{store-insert-al16.h => store-insert-al16.h.inc} (100%)
+ rename host/include/generic/host/{load-extract-al16-al8.h => load-extract-al16-al8.h.inc} (100%)
+ rename host/include/generic/host/{store-insert-al16.h => store-insert-al16.h.inc} (100%)
+ rename host/include/loongarch64/host/{load-extract-al16-al8.h => load-extract-al16-al8.h.inc} (100%)
+ rename host/include/loongarch64/host/{store-insert-al16.h => store-insert-al16.h.inc} (100%)
+ rename host/include/x86_64/host/{load-extract-al16-al8.h => load-extract-al16-al8.h.inc} (100%)
+ rename include/exec/{helper-head.h => helper-head.h.inc} (98%)
+ create mode 100644 page-target.c
+ delete mode 100644 target/target-common.c
+
+-- 
+2.41.0
+
 
