@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B37A7C4345F
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Apr 2024 19:43:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD937C19F4F
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Apr 2024 19:43:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s0RTK-0000wZ-Bl; Fri, 26 Apr 2024 15:43:02 -0400
+	id 1s0RT9-0000np-Lt; Fri, 26 Apr 2024 15:42:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s0RTH-0000vh-EB
- for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:42:59 -0400
-Received: from mail-ej1-x633.google.com ([2a00:1450:4864:20::633])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s0RT7-0000iD-Ml
+ for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:42:49 -0400
+Received: from mail-ed1-x533.google.com ([2a00:1450:4864:20::533])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s0RTF-00030G-S8
- for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:42:59 -0400
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a55b93f5540so337892566b.1
- for <qemu-riscv@nongnu.org>; Fri, 26 Apr 2024 12:42:57 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s0RT5-0002x4-3D
+ for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:42:49 -0400
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-5726716a006so453408a12.2
+ for <qemu-riscv@nongnu.org>; Fri, 26 Apr 2024 12:42:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1714160576; x=1714765376; darn=nongnu.org;
+ d=linaro.org; s=google; t=1714160565; x=1714765365; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DE5bQD16xfwEMndgjcE7z1cuHvznf4KEW6ZfSJ0m28c=;
- b=mtLD3cryCFwGKpctZkcO6fJCInvNr+xo6odVYnQX+roWWGoDY3XJ9or/wh5SvLjJ9J
- NPY6N5eX2SB9uKZ6dDCptDxUqjgNn6p395lSeH6YFP2+2NeDIvA7B+mvbGTGV7AXa5ea
- MpV+BBH3w1FJPILlCfD4kW9uThOO+VPbqa0uMvPF0NdC+B8IlipBxCZ4bpnyvNkL3JIf
- v9DbIX/uPwABEXxXinVF+Kji9vKOz4SXLDvR+/NzUiEVDwLGoF40qBVU7VTfsP5pQEbz
- 4pTk8hc1zAIXBX7yCm/39lX81kFqxcMctRu7+gbiFxVkkb77hoPYbXampp85NSbJWFmZ
- 086g==
+ bh=t0nMCqhYKzp5r2ZnGbDu0d0x6qlsj2uY/rxTdGpirtw=;
+ b=qN6nv4rJWdPVWrNZoycw2XsB/z87C8srPfzNU8bIrHq+iSq30rZILMLDCinYkjOam4
+ PDWeF44Na8uzf0xzL9Hd4TZTn5/wZxAhtjtfzQfD5FEcbtzy3NK0L+gGe7qpN/v8n4s/
+ piZlqI9++tetkfnWLMxscTcTPo+AZIsoFNebY+gfdJMeaD9PhklZi4ULrmIuCeLMx1MM
+ /SseirdfFr6FRAku2YRFDo4NrJejKUZVu8opo8rNWxeOVj/8tbRbn4FAvf7/qv4rPRl3
+ BnyipHYfzkrkeQAFEJ/VSG5/6DjZGXR5JfuxzxIjjUl7A43wfJnrmTxM/iRI+z3FygyP
+ 5sgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714160576; x=1714765376;
+ d=1e100.net; s=20230601; t=1714160565; x=1714765365;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DE5bQD16xfwEMndgjcE7z1cuHvznf4KEW6ZfSJ0m28c=;
- b=IY5BMFa8IQ03pf+zS7ZMdhJ03rRZ5ZPJ8+MKbXVgXsSAzMB7oqN3gYmrVuXA5AZbQJ
- qBpqXbtaafqnF4paiMwP24Ivg5nw9gLpR1Mr0jJamEWkN5vXIPab6WO73WItYOAHiCiR
- y/5hE8JekY3M3/3xn3h3kld0BVrY8UCMzWbYdvZC0+euxvQvt1pc0ic5hdyRrt3Dhhlk
- 1TsSRDs7N8F1lDDuOO0/wAzywIOO8VlzIgh+tdKXXnE9hGwWdbVCOgvhHXU6uMKhJ9vy
- BpR21MGAbxaMLeVzkqj/MyDQe26Q46EoxcpY5HshqFyeOIELbi6f+TCJ5SnUPcAI3ua/
- gdrQ==
+ bh=t0nMCqhYKzp5r2ZnGbDu0d0x6qlsj2uY/rxTdGpirtw=;
+ b=oRiO5RWw9ZabPIasYRLo9WL3lttmAdPj31TBKu32lnot616Sgh3eB8t8/GCqiyy9VW
+ tYOsE9RzUgcQEFV7OlEVsyYXr3H0Bhl+AeSk2Q6EDELkaAGW651j1Sidr8/AG7C5Ncyq
+ /3VhqwTvsnRhrO6PKK4hwuCEkXT5znDQNgxlaxaHhToeWCavB/HzZIxO1rOKRMHp7tRS
+ QSe2PQc0O88JNrtCmBzhOrmXtU/2gEg+kzF/dER2HfmRSliOUFA/0JLwKTHAJym6Smox
+ iqrGBewhfrQiI//2xlNk9o7gVRBN5Ep3FmIK/KSngdnmbg3GOFAOiVtraZUirTegJSgm
+ hovw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW0kMCwboaqKVUeNFh7kTl4Dvucf0mRv7RGXSR7q2M8WULj0sYMIukChsX1A3B4vFoyOgcd0haNeT1E9ZdaZALVW1ESYjk=
-X-Gm-Message-State: AOJu0Yx14rnC0xUzfdVolpHfxHEg/QvvX8i4qCYg58cWpWAxF7SbjpCz
- YI04mrbFkEM0OsZFzfr3t8mtZi56cHybmKDTwlfS59u1wKpAjgRjbYHj3U0bX4k=
-X-Google-Smtp-Source: AGHT+IHuivKhc9k4NJGWGfSfiujJsFGjDjDNF8PSddUqhuzyJQcSFexKwQKV1AGdJzYCFcbsEbYqZA==
-X-Received: by 2002:a17:906:b0d8:b0:a55:adec:7139 with SMTP id
- bk24-20020a170906b0d800b00a55adec7139mr2412387ejb.60.1714160576443; 
- Fri, 26 Apr 2024 12:42:56 -0700 (PDT)
+ AJvYcCVLC5xecN82a7U4ujGCWxXHo6rI1WSTN+f5ySK843hvchgDOYLWwSBypX7AsvqlpgvF3gsUGccpMJGygsJ56oOlwrwICHY=
+X-Gm-Message-State: AOJu0YyQwKFZGvx0DE7Ka8tuXeMQAxmYwv15/jDdaaurNVjU2oDpJyQd
+ 7vQGlzUF0w3Ww73Ju04yLrEQmtf8wPqBwLbDLJhxC9AmY22BT6v+9Pnmhq88Wlk=
+X-Google-Smtp-Source: AGHT+IHy1tLGCW7Nem/jvC7aOudNiOgNhqRxkuX/J7UTcovAnA7B/AIFC8TXFy/FYnitwiaNryc9TQ==
+X-Received: by 2002:a50:a6dc:0:b0:572:6b03:607 with SMTP id
+ f28-20020a50a6dc000000b005726b030607mr44695edc.42.1714160565256; 
+ Fri, 26 Apr 2024 12:42:45 -0700 (PDT)
 Received: from m1x-phil.lan (aul93-h02-176-184-11-147.dsl.sta.abo.bbox.fr.
  [176.184.11.147]) by smtp.gmail.com with ESMTPSA id
- n1-20020a170906724100b00a55bef9ab56sm5775865ejk.120.2024.04.26.12.42.55
+ cf8-20020a0564020b8800b0056c24df7a78sm10395889edb.5.2024.04.26.12.42.43
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 26 Apr 2024 12:42:56 -0700 (PDT)
+ Fri, 26 Apr 2024 12:42:44 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
@@ -65,17 +65,17 @@ Cc: qemu-arm@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Richard Henderson <richard.henderson@linaro.org>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-Subject: [PULL 09/38] semihosting/uaccess: Avoid including 'cpu.h'
-Date: Fri, 26 Apr 2024 21:41:29 +0200
-Message-ID: <20240426194200.43723-10-philmd@linaro.org>
+Subject: [PULL 07/38] gdbstub: Simplify #ifdef'ry in helpers.h
+Date: Fri, 26 Apr 2024 21:41:27 +0200
+Message-ID: <20240426194200.43723-8-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240426194200.43723-1-philmd@linaro.org>
 References: <20240426194200.43723-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::633;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x633.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::533;
+ envelope-from=philmd@linaro.org; helo=mail-ed1-x533.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -98,36 +98,40 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-"semihosting/uaccess.h" only requires the following headers:
-
-  - "exec/cpu-defs.h" for target_ulong,
-  - "exec/cpu-common.h" for cpu_memory_rw_debug()
-  - "exec/tswap.h" for tswap32() and tswap64().
-
-Include them instead of the huge "cpu.h".
+Slightly simplify by checking NEED_CPU_H definition in header.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Message-Id: <42c6471e-8383-45e0-85ee-e20ca32ecbad@linaro.org>
+Message-Id: <20240322161439.6448-2-philmd@linaro.org>
 ---
- include/semihosting/uaccess.h | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ include/gdbstub/helpers.h | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
 
-diff --git a/include/semihosting/uaccess.h b/include/semihosting/uaccess.h
-index 3963eafc3e..dd289af8dd 100644
---- a/include/semihosting/uaccess.h
-+++ b/include/semihosting/uaccess.h
-@@ -14,7 +14,9 @@
- #error Cannot include semihosting/uaccess.h from user emulation
+diff --git a/include/gdbstub/helpers.h b/include/gdbstub/helpers.h
+index 6b97610f48..6277a858a1 100644
+--- a/include/gdbstub/helpers.h
++++ b/include/gdbstub/helpers.h
+@@ -12,7 +12,10 @@
+ #ifndef _GDBSTUB_HELPERS_H_
+ #define _GDBSTUB_HELPERS_H_
+ 
+-#ifdef COMPILING_PER_TARGET
++#ifndef COMPILING_PER_TARGET
++#error "gdbstub helpers should only be included by target specific code"
++#endif
++
+ #include "cpu.h"
+ 
+ /*
+@@ -96,8 +99,4 @@ static inline uint8_t *gdb_get_reg_ptr(GByteArray *buf, int len)
+ #define ldtul_p(addr) ldl_p(addr)
  #endif
  
--#include "cpu.h"
-+#include "exec/cpu-common.h"
-+#include "exec/cpu-defs.h"
-+#include "exec/tswap.h"
- 
- #define get_user_u64(val, addr)                                         \
-     ({ uint64_t val_ = 0;                                               \
+-#else
+-#error "gdbstub helpers should only be included by target specific code"
+-#endif
+-
+ #endif /* _GDBSTUB_HELPERS_H_ */
 -- 
 2.41.0
 
