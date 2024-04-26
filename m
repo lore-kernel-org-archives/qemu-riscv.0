@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B07EC4345F
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Apr 2024 19:42:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A24AC4345F
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Apr 2024 19:42:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s0RT2-0000bz-Ti; Fri, 26 Apr 2024 15:42:44 -0400
+	id 1s0RSt-0000LH-45; Fri, 26 Apr 2024 15:42:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s0RT0-0000b2-RK
- for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:42:42 -0400
-Received: from mail-ej1-x635.google.com ([2a00:1450:4864:20::635])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s0RSm-0000Iv-WD
+ for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:42:29 -0400
+Received: from mail-lf1-x134.google.com ([2a00:1450:4864:20::134])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s0RSz-0002vU-0x
- for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:42:42 -0400
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-a51a7d4466bso303373066b.2
- for <qemu-riscv@nongnu.org>; Fri, 26 Apr 2024 12:42:40 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s0RSd-0002nN-2g
+ for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:42:23 -0400
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-51acb95b892so3209927e87.2
+ for <qemu-riscv@nongnu.org>; Fri, 26 Apr 2024 12:42:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1714160559; x=1714765359; darn=nongnu.org;
+ d=linaro.org; s=google; t=1714160536; x=1714765336; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4X/VhmwXvkdhIQuo7rHVj9w7BkqzRhVw95Tx0jafh5o=;
- b=l9DqV5US4XkYQL/ZnZc0L9FJ61xIS7vuMqTfa7mzfRLeohtqgjPS9ATJzwIkSvJfKC
- bQcqvM8U4/mVaNOeei/kl+dRPTE8aeV6JM4KkeOfTKyDfJnacmFXj+4PGsnn+9jn9fEG
- VatWhEfItd20RGFa6E9sy6/2YY+R9bCssHVMGWAtJprHvlq2vrw7PlKp9DZZtbK5aQuN
- PO4VJG4KzUGrbHrZH3Q29CaJBoQIo850T8wEdjbP3COASE2+23OUT6ImGfYNnzu9/ZsY
- JuLEw32lXebkM2Iuah7oPowiYuzN6V5SSIh9TPl9TvSzlK8ttRnVdLkAn2xu8CVjy0J+
- lVUw==
+ bh=D/VvS2kWTA4rqEGF0JfFrfE/nD7tnjsws7S2+jUi5LY=;
+ b=LLZ5gaaUImzu1QoiVR+g9ULSvAhAyfPWE8DzzB248TJP0C6FPFUTy5tiP0Ih4ImyvE
+ LxpCpcYjVLMocCj0VpcLU2/fJGCxjC1RWB1RaQGx/rk4uAFhPcx1S9ANdyGvF4giUA7k
+ hqNMsI1qLvDrtyZZeFh/zaoMUAQNLIHsC+nD8MRbgZwTpT/nfLxaFk4pZs10iXgcGxX2
+ XfUrHI922nC+qibQPhyJTJJq5Pgnfcfwve0XBXz5MhSbLK89aOdGwgeTeO3gd6Wiwimg
+ fyXNGAhLIiPI4d4f7tU5MmPg0tkGBGEtNNXflEiutuD//pXgRaQSKz8JbsCzcDNKcVvY
+ gr3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714160559; x=1714765359;
+ d=1e100.net; s=20230601; t=1714160536; x=1714765336;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4X/VhmwXvkdhIQuo7rHVj9w7BkqzRhVw95Tx0jafh5o=;
- b=u0YyEOJw8j8MQBHzz+P1GI2o0kguX/qNxEaK0AM7vKOaHeElmDBrwaxEgMVmvCPYIy
- Ub0ou8gC+16EXkaKfzITIjShKaEy7V/9jJMLM0hDXjyXuQQ+sKfjcCT5ATXHuH7FCfIu
- mybIT6gdSNMRrUGajzUYm3Or/g36ShyfYZ205uP149BRJ8/2nr7CXHpEWhHKzFYXM3Rw
- Dh0aOLVlGHPwFIdU0beTCycj+S9nMyQIVI1gO3m7jDxUUrEFQ+D8kb9CAg7/SLh/3Lu+
- FQ5TuNbXnNPgX0JYu1PIHU42kIlECgseRkxckJelUpvwTO5b5ovp3E+X2nYdI8po7bIO
- x6dw==
+ bh=D/VvS2kWTA4rqEGF0JfFrfE/nD7tnjsws7S2+jUi5LY=;
+ b=agnpWE9eCph0GZkN6noXBhPpseEfO7kFndaos5zfvsDQI641gAzgeoueK7WgVsJGde
+ flFrg5xryYxSztur9Er5G12tHHArpOIg1xLvoNBfFzbeHX7DpvXxQmda18VWBEeZJvCk
+ 1Sy+QfkGBLpA3tRidlJSvstVIw4scPrWcKgEZx+OJfg8bdcX9EJbZypg4v7uovLPW9Mj
+ ie/jEQU3+LuyyZ+uablN9KSU3Wo1yw+EbSN/sqQb5/I0behVafyQc2nYCHEz74a0O23R
+ 9EGkEUCJiFOmuvE0LO+9JRrIELTQ5zgk0j9ty4Ihg4/zZVEoOB0QzmVQb6UGxOFwOUvu
+ 7/bg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX9fyc0Q+PpCC/0ddj3/7txXN2U5vl5cPuxJH2M5GlbUkxy7k79ok65TqRoL+03NtDSgZLgfEzHllvsc+sAOuJ5W3UpUdM=
-X-Gm-Message-State: AOJu0Yzro8m4KIEjop6EvPMdwkx1FEE5tjtyS9eDTmaS5Ui0cOS8M7Ke
- AyjKK9JDBWtVGUEPQcGfszW7K5VdDkTFmjE2oDGUE3VsnwmKdSBvea+RMmwB+P4=
-X-Google-Smtp-Source: AGHT+IGxJBhgvUwhhWCAgenYBiSIUi2w5crKR0/10WrNMXoZqN9Fol3uSvd/ZTOG18vXH6erYN0+GQ==
-X-Received: by 2002:a17:906:28d9:b0:a55:63de:9aa9 with SMTP id
- p25-20020a17090628d900b00a5563de9aa9mr2581937ejd.49.1714160559645; 
- Fri, 26 Apr 2024 12:42:39 -0700 (PDT)
+ AJvYcCU0zzo7tRLoUiFz4MR/PVDHD6mPa9Nx8pjBxqJQVVwo8fXnk79uFcyicgMpytWwzRC2X4KgfmcebhHn35nP7llmAxlZkRg=
+X-Gm-Message-State: AOJu0Yw1gt+gH1qK93fNmRD/CDH17cJySEoSoAiUFxnFUEP1Qrng5gTD
+ dF2+b8wG6H1P/qwZvUSxPZGS8yaEebniQ9PoTBchk5Z39Wi4PAfRGgIdq/6eWuMsftNtAxqZsj5
+ /r/E=
+X-Google-Smtp-Source: AGHT+IHeLtSXNpoa+2cufMxIp9ptF0cVlDgusmb+EblTSh2hSulYqomjm/YGG71rxaX9oJD/tEzuCQ==
+X-Received: by 2002:a05:6512:4806:b0:51b:6366:3459 with SMTP id
+ eo6-20020a056512480600b0051b63663459mr2820804lfb.67.1714160536378; 
+ Fri, 26 Apr 2024 12:42:16 -0700 (PDT)
 Received: from m1x-phil.lan (aul93-h02-176-184-11-147.dsl.sta.abo.bbox.fr.
  [176.184.11.147]) by smtp.gmail.com with ESMTPSA id
- n11-20020a170906b30b00b00a5242e285aesm10798927ejz.184.2024.04.26.12.42.38
+ c26-20020aa7c99a000000b00572405680e8sm1789128edt.21.2024.04.26.12.42.14
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 26 Apr 2024 12:42:39 -0700 (PDT)
+ Fri, 26 Apr 2024 12:42:15 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  qemu-ppc@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Warner Losh <imp@bsdimp.com>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
  Richard Henderson <richard.henderson@linaro.org>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-Subject: [PULL 06/38] gdbstub: Include missing 'hw/core/cpu.h' header
-Date: Fri, 26 Apr 2024 21:41:26 +0200
-Message-ID: <20240426194200.43723-7-philmd@linaro.org>
+ Paolo Bonzini <pbonzini@redhat.com>
+Subject: [PULL 02/38] exec: Reduce tlb_set_dirty() declaration scope
+Date: Fri, 26 Apr 2024 21:41:22 +0200
+Message-ID: <20240426194200.43723-3-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240426194200.43723-1-philmd@linaro.org>
 References: <20240426194200.43723-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::635;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x635.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::134;
+ envelope-from=philmd@linaro.org; helo=mail-lf1-x134.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -99,35 +100,60 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Functions such gdb_get_cpu_pid() dereference CPUState so
-require the structure declaration from "hw/core/cpu.h":
-
-  static uint32_t gdb_get_cpu_pid(CPUState *cpu)
-  {
-    ...
-    return cpu->cluster_index + 1;
-  }
+tlb_set_dirty() is only used in accel/tcg/cputlb.c,
+where it is defined. Declare it statically, removing
+the stub.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Warner Losh <imp@bsdimp.com>
-Message-Id: <20231211212003.21686-15-philmd@linaro.org>
+Reviewed-by: Harsh Prateek Bora <harshpb@linux.ibm.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Message-Id: <20240418192525.97451-11-philmd@linaro.org>
 ---
- gdbstub/gdbstub.c | 1 +
- 1 file changed, 1 insertion(+)
+ include/exec/exec-all.h | 1 -
+ accel/stubs/tcg-stub.c  | 4 ----
+ accel/tcg/cputlb.c      | 2 +-
+ 3 files changed, 1 insertion(+), 6 deletions(-)
 
-diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
-index 9c23d44baf..9c2b8b5d0a 100644
---- a/gdbstub/gdbstub.c
-+++ b/gdbstub/gdbstub.c
-@@ -37,6 +37,7 @@
- #include "hw/cpu/cluster.h"
- #include "hw/boards.h"
- #endif
-+#include "hw/core/cpu.h"
+diff --git a/include/exec/exec-all.h b/include/exec/exec-all.h
+index 3e53501691..9599e16a09 100644
+--- a/include/exec/exec-all.h
++++ b/include/exec/exec-all.h
+@@ -654,7 +654,6 @@ static inline void mmap_unlock(void) {}
+ #define WITH_MMAP_LOCK_GUARD()
  
- #include "sysemu/hw_accel.h"
- #include "sysemu/runstate.h"
+ void tlb_reset_dirty(CPUState *cpu, ram_addr_t start1, ram_addr_t length);
+-void tlb_set_dirty(CPUState *cpu, vaddr addr);
+ void tlb_reset_dirty_range_all(ram_addr_t start, ram_addr_t length);
+ 
+ MemoryRegionSection *
+diff --git a/accel/stubs/tcg-stub.c b/accel/stubs/tcg-stub.c
+index 8a496a2a6f..dd890d6cf6 100644
+--- a/accel/stubs/tcg-stub.c
++++ b/accel/stubs/tcg-stub.c
+@@ -18,10 +18,6 @@ void tb_flush(CPUState *cpu)
+ {
+ }
+ 
+-void tlb_set_dirty(CPUState *cpu, vaddr vaddr)
+-{
+-}
+-
+ int probe_access_flags(CPUArchState *env, vaddr addr, int size,
+                        MMUAccessType access_type, int mmu_idx,
+                        bool nonfault, void **phost, uintptr_t retaddr)
+diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
+index 93b1ca810b..e16d02a62c 100644
+--- a/accel/tcg/cputlb.c
++++ b/accel/tcg/cputlb.c
+@@ -1039,7 +1039,7 @@ static inline void tlb_set_dirty1_locked(CPUTLBEntry *tlb_entry,
+ 
+ /* update the TLB corresponding to virtual page vaddr
+    so that it is no longer dirty */
+-void tlb_set_dirty(CPUState *cpu, vaddr addr)
++static void tlb_set_dirty(CPUState *cpu, vaddr addr)
+ {
+     int mmu_idx;
+ 
 -- 
 2.41.0
 
