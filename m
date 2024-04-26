@@ -4,88 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5DC5C4345F
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Apr 2024 19:47:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EFB7C4345F
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Apr 2024 19:47:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s0RVV-0000Zn-3e; Fri, 26 Apr 2024 15:45:18 -0400
+	id 1s0RVv-0002l3-Qj; Fri, 26 Apr 2024 15:45:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s0RVO-0000H8-Eh
- for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:45:10 -0400
-Received: from mail-ej1-x636.google.com ([2a00:1450:4864:20::636])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s0RVs-0002YL-Sn
+ for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:45:41 -0400
+Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s0RVM-0004UH-9S
- for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:45:10 -0400
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-a5557e3ebcaso424856266b.1
- for <qemu-riscv@nongnu.org>; Fri, 26 Apr 2024 12:45:07 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s0RVo-0004nE-I8
+ for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:45:40 -0400
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-56e56ee8d5cso3314215a12.2
+ for <qemu-riscv@nongnu.org>; Fri, 26 Apr 2024 12:45:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1714160707; x=1714765507; darn=nongnu.org;
+ d=linaro.org; s=google; t=1714160735; x=1714765535; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fHVia7emVLdfn7RVXOtjmfvyr/0v1O15dG1Znnu+R50=;
- b=VD3YBFowYHVTRk8e3L62qHVwEIOEQEsQxbMsFQpb7h3ygY/AMtl2V+IYc1hJTcjuVh
- EYj8YrkW4v2IYWaS6z7GxpNGKVItl5nuMtMK0bvjdqNeKsX6VOv8QG6Rz3jqZgpDcrgQ
- FMZel/ZgcMaULcN1Zr79Nz2UMKPzmwS8O9vAYeTsT02VRfj1+4vnxuzxQ+H1Wi4v3V0F
- bjBQniObP8x7SfqCQHsww/B8VuaxyVyvGKabJwjC80N5+lWcdT5dFA8l3dOQFHTn2sz5
- bgTjSFDZgPM5I6kfUXWG2Huz/mXtFpYM2aHOShJOkkXXsPrV0i4SN197U4WFJBDXO+nK
- YQcw==
+ bh=1K8YiKF1aId8lywgtec1SE+/hOSGvJR5IQSEQZIayng=;
+ b=ivfiCW9hgdA8Nl9aV1jfsO+g+9BR4000Df/iY/egOXKgRXsvAA33hc7VLVWSK9BJz1
+ kvglLqeHVinuFNW40D4nFZ7elGjLmJLgo5wV4vRT/P32PF1JAoezpj36/+6R8XsTk6Ur
+ phxXYuVu/2zWiZFeFnhxGRXwejfBrkL0wLECaud659mdE3UG7ofSSis0BgXT+GNWCtvi
+ 55VK+v2G2q6/9jtgJSWbL3x3e7UrKiuGJ8zUZSxHzsE/gHl2HIwRwA5O/HVAtf2ore8M
+ KRHYRGygP8jXYNYiXIwy9JB3TeiGfq9e0aFg7qzO+4IPuj9AiHzgai2nqETMG9zwzVXe
+ Rzvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714160707; x=1714765507;
+ d=1e100.net; s=20230601; t=1714160735; x=1714765535;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=fHVia7emVLdfn7RVXOtjmfvyr/0v1O15dG1Znnu+R50=;
- b=DOvEtk27C4vGeWOvc9YZF0++lujY4dxajyUPWuozQNNfOBupuMfptG5c/RYvawbfqE
- PXyc9tKUBcfX53MMMU8MjXci147NP5bRfp2vzBTdLwNQdAlVb87exLSP3g3MjSODRSBd
- zKFhdrJxfKYyxWgdfm+NWNpq8xXK+4oWXMKZgVK1VhL5KEEPlLCr38YDJo+zpwR+WVwL
- AQbMDtUkpHGazVjhz3HXwke894P8lTCV7rhKnNVM3DWIVEGK4Q8acamv0pSkMIjhih7m
- WWhhOwnHqkTvrNvrSFApjkKQByfsYW6wkv9l9HFMY1Kzyn/neZbbsYuZB7Nf8VeDHJpe
- 8sWg==
+ bh=1K8YiKF1aId8lywgtec1SE+/hOSGvJR5IQSEQZIayng=;
+ b=i9Vv+9y3GlgwD8obosrxOxYaT0x1Oz3eXv9B8OLJ4jGxtjwv1cxnoSv5hx7CG6rBM+
+ 5vLTi+KUrFIZKL2XhEjDLHsgzOfz8GcnHBLwEomGb08FvbFKjruUtfG0wqFV+Sr1sUUi
+ WETUMMfsOCe0DvhxJ9QSGWyx3WQ4iW9nKJuV0UkRqLMV/jgcg3N1YuJjFCbKo9aj321S
+ am13NirzbpDHX8FYy4gU4Kg8r2uXbtgN98ncxLfQmJKsFVPur+i/50rdaYR7hQ9fSUJ+
+ IhVoXilN+BvqlCbexbJmgz/1SH30VF6hC/XnJewzvC0BJDIN00KC57AxctBFmSS4XFw1
+ aQ7A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXE3At/CUVo1egibVz3vKoJE3kyG3Bf5+NC01omZtQkyJGM79tUcs3IHbSzQMzQ9pI3OSq5knT7AswX3KZvW5FDFitdOPc=
-X-Gm-Message-State: AOJu0YxJ49Jr9GPGOwcVmU/c+LXkX0a3kDQm6stiIHyJd2JkkvUgRaZr
- CFeqvi+XR8U9HkIJDCbP/6lSUmrKiBKbMe9+pJ3gW9iXCqimVMNU+cy9hH4J1Qs=
-X-Google-Smtp-Source: AGHT+IGwxX3sKiMVt+Tb+iGuFDgngNYesKSt7wg2nDlEikU8bCNCZuDDZwwjqhG0DfGij85yilw3Lg==
-X-Received: by 2002:a17:906:d193:b0:a55:b2c0:a103 with SMTP id
- c19-20020a170906d19300b00a55b2c0a103mr2866142ejz.33.1714160706682; 
- Fri, 26 Apr 2024 12:45:06 -0700 (PDT)
+ AJvYcCUpsPJ/ys1YLhmIJp3zc0Sf08nm39xpa05MbvPQiTo7clRkAvw2fPcsdSfprT6Xo/tYfTCtE0+oLwJIzUigS6+SUpESnfU=
+X-Gm-Message-State: AOJu0YyOhsu5swa9869/fpZwH3MDg0K07PegT1+amojCCWKNRGcqK3bE
+ 6DfDAMR9BjVfRSx2Ptb+Mvc5IKY4FU3jHkfYceHBstFmcRsyRoFIRsumgyQAt8A=
+X-Google-Smtp-Source: AGHT+IG/2Z9324IHHq49V3rjB75zC32hEfEKIBJS45GUBl9UIufcCPAkk+i00Rt33wQOKXS+OJYWpA==
+X-Received: by 2002:a50:cd15:0:b0:56e:2e0:79d1 with SMTP id
+ z21-20020a50cd15000000b0056e02e079d1mr2851870edi.4.1714160735082; 
+ Fri, 26 Apr 2024 12:45:35 -0700 (PDT)
 Received: from m1x-phil.lan (aul93-h02-176-184-11-147.dsl.sta.abo.bbox.fr.
  [176.184.11.147]) by smtp.gmail.com with ESMTPSA id
- ef15-20020a17090697cf00b00a58bcfa6610sm1863773ejb.185.2024.04.26.12.45.04
+ fk6-20020a056402398600b00571ba529bbasm10313860edb.44.2024.04.26.12.45.33
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 26 Apr 2024 12:45:06 -0700 (PDT)
+ Fri, 26 Apr 2024 12:45:34 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  qemu-ppc@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Richard Henderson <richard.henderson@linaro.org>,
- Anton Johansson <anjo@rev.ng>, Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Yanan Wang <wangyanan55@huawei.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Nicholas Piggin <npiggin@gmail.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PULL 31/38] exec: Declare CPUBreakpoint/CPUWatchpoint type in
- 'breakpoint.h' header
-Date: Fri, 26 Apr 2024 21:41:51 +0200
-Message-ID: <20240426194200.43723-32-philmd@linaro.org>
+ Paolo Bonzini <pbonzini@redhat.com>
+Subject: [PULL 36/38] exec: Move CPUTLBEntry helpers to cputlb.c
+Date: Fri, 26 Apr 2024 21:41:56 +0200
+Message-ID: <20240426194200.43723-37-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240426194200.43723-1-philmd@linaro.org>
 References: <20240426194200.43723-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::636;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x636.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::529;
+ envelope-from=philmd@linaro.org; helo=mail-ed1-x529.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -108,132 +98,165 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The CPUBreakpoint and CPUWatchpoint structures are declared
-in "hw/core/cpu.h", which contains declarations related to
-CPUState and CPUClass. Some source files only require the
-BP/WP definitions and don't need to pull in all CPU* API.
-In order to simplify, create a new "exec/breakpoint.h" header.
+The following CPUTLBEntry helpers are only used in accel/tcg/cputlb.c:
+  - tlb_index()
+  - tlb_entry()
+  - tlb_read_idx()
+  - tlb_addr_write()
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Move them to this file, allowing to remove the huge "cpu.h" header
+inclusion from "exec/cpu_ldst.h".
+
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Anton Johansson <anjo@rev.ng>
-Message-Id: <20240418192525.97451-3-philmd@linaro.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Message-Id: <20240418192525.97451-13-philmd@linaro.org>
 ---
- include/exec/breakpoint.h | 30 ++++++++++++++++++++++++++++++
- include/hw/core/cpu.h     | 16 +---------------
- target/arm/internals.h    |  1 +
- target/ppc/internal.h     |  1 +
- target/riscv/debug.h      |  2 ++
- 5 files changed, 35 insertions(+), 15 deletions(-)
- create mode 100644 include/exec/breakpoint.h
+ include/exec/cpu_ldst.h | 55 -----------------------------------------
+ accel/tcg/cputlb.c      | 51 ++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 51 insertions(+), 55 deletions(-)
 
-diff --git a/include/exec/breakpoint.h b/include/exec/breakpoint.h
-new file mode 100644
-index 0000000000..95f0482e6d
---- /dev/null
-+++ b/include/exec/breakpoint.h
-@@ -0,0 +1,30 @@
-+/*
-+ * QEMU breakpoint & watchpoint definitions
-+ *
-+ * Copyright (c) 2012 SUSE LINUX Products GmbH
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+#ifndef EXEC_BREAKPOINT_H
-+#define EXEC_BREAKPOINT_H
-+
-+#include "qemu/queue.h"
+diff --git a/include/exec/cpu_ldst.h b/include/exec/cpu_ldst.h
+index 7d0a0412ad..11ba3778ba 100644
+--- a/include/exec/cpu_ldst.h
++++ b/include/exec/cpu_ldst.h
+@@ -70,7 +70,6 @@
+ #include "exec/abi_ptr.h"
+ #include "exec/mmu-access-type.h"
+ #include "qemu/int128.h"
+-#include "cpu.h"
+ 
+ #if defined(CONFIG_USER_ONLY)
+ 
+@@ -296,60 +295,6 @@ Int128 cpu_atomic_cmpxchgo_be_mmu(CPUArchState *env, abi_ptr addr,
+                                   Int128 cmpv, Int128 newv,
+                                   MemOpIdx oi, uintptr_t retaddr);
+ 
+-#if !defined(CONFIG_USER_ONLY)
+-
+-#include "tcg/oversized-guest.h"
+-
+-static inline uint64_t tlb_read_idx(const CPUTLBEntry *entry,
+-                                    MMUAccessType access_type)
+-{
+-    /* Do not rearrange the CPUTLBEntry structure members. */
+-    QEMU_BUILD_BUG_ON(offsetof(CPUTLBEntry, addr_read) !=
+-                      MMU_DATA_LOAD * sizeof(uint64_t));
+-    QEMU_BUILD_BUG_ON(offsetof(CPUTLBEntry, addr_write) !=
+-                      MMU_DATA_STORE * sizeof(uint64_t));
+-    QEMU_BUILD_BUG_ON(offsetof(CPUTLBEntry, addr_code) !=
+-                      MMU_INST_FETCH * sizeof(uint64_t));
+-
+-#if TARGET_LONG_BITS == 32
+-    /* Use qatomic_read, in case of addr_write; only care about low bits. */
+-    const uint32_t *ptr = (uint32_t *)&entry->addr_idx[access_type];
+-    ptr += HOST_BIG_ENDIAN;
+-    return qatomic_read(ptr);
+-#else
+-    const uint64_t *ptr = &entry->addr_idx[access_type];
+-# if TCG_OVERSIZED_GUEST
+-    return *ptr;
+-# else
+-    /* ofs might correspond to .addr_write, so use qatomic_read */
+-    return qatomic_read(ptr);
+-# endif
+-#endif
+-}
+-
+-static inline uint64_t tlb_addr_write(const CPUTLBEntry *entry)
+-{
+-    return tlb_read_idx(entry, MMU_DATA_STORE);
+-}
+-
+-/* Find the TLB index corresponding to the mmu_idx + address pair.  */
+-static inline uintptr_t tlb_index(CPUState *cpu, uintptr_t mmu_idx,
+-                                  vaddr addr)
+-{
+-    uintptr_t size_mask = cpu->neg.tlb.f[mmu_idx].mask >> CPU_TLB_ENTRY_BITS;
+-
+-    return (addr >> TARGET_PAGE_BITS) & size_mask;
+-}
+-
+-/* Find the TLB entry corresponding to the mmu_idx + address pair.  */
+-static inline CPUTLBEntry *tlb_entry(CPUState *cpu, uintptr_t mmu_idx,
+-                                     vaddr addr)
+-{
+-    return &cpu->neg.tlb.f[mmu_idx].table[tlb_index(cpu, mmu_idx, addr)];
+-}
+-
+-#endif /* !defined(CONFIG_USER_ONLY) */
+-
+ #if TARGET_BIG_ENDIAN
+ # define cpu_lduw_data        cpu_lduw_be_data
+ # define cpu_ldsw_data        cpu_ldsw_be_data
+diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
+index e16d02a62c..953c437ba9 100644
+--- a/accel/tcg/cputlb.c
++++ b/accel/tcg/cputlb.c
+@@ -27,6 +27,9 @@
+ #include "exec/tb-flush.h"
+ #include "exec/memory-internal.h"
+ #include "exec/ram_addr.h"
++#include "exec/mmu-access-type.h"
++#include "exec/tlb-common.h"
 +#include "exec/vaddr.h"
-+#include "exec/memattrs.h"
+ #include "tcg/tcg.h"
+ #include "qemu/error-report.h"
+ #include "exec/log.h"
+@@ -95,6 +98,54 @@ static inline size_t sizeof_tlb(CPUTLBDescFast *fast)
+     return fast->mask + (1 << CPU_TLB_ENTRY_BITS);
+ }
+ 
++static inline uint64_t tlb_read_idx(const CPUTLBEntry *entry,
++                                    MMUAccessType access_type)
++{
++    /* Do not rearrange the CPUTLBEntry structure members. */
++    QEMU_BUILD_BUG_ON(offsetof(CPUTLBEntry, addr_read) !=
++                      MMU_DATA_LOAD * sizeof(uint64_t));
++    QEMU_BUILD_BUG_ON(offsetof(CPUTLBEntry, addr_write) !=
++                      MMU_DATA_STORE * sizeof(uint64_t));
++    QEMU_BUILD_BUG_ON(offsetof(CPUTLBEntry, addr_code) !=
++                      MMU_INST_FETCH * sizeof(uint64_t));
 +
-+typedef struct CPUBreakpoint {
-+    vaddr pc;
-+    int flags; /* BP_* */
-+    QTAILQ_ENTRY(CPUBreakpoint) entry;
-+} CPUBreakpoint;
-+
-+typedef struct CPUWatchpoint {
-+    vaddr vaddr;
-+    vaddr len;
-+    vaddr hitaddr;
-+    MemTxAttrs hitattrs;
-+    int flags; /* BP_* */
-+    QTAILQ_ENTRY(CPUWatchpoint) entry;
-+} CPUWatchpoint;
-+
++#if TARGET_LONG_BITS == 32
++    /* Use qatomic_read, in case of addr_write; only care about low bits. */
++    const uint32_t *ptr = (uint32_t *)&entry->addr_idx[access_type];
++    ptr += HOST_BIG_ENDIAN;
++    return qatomic_read(ptr);
++#else
++    const uint64_t *ptr = &entry->addr_idx[access_type];
++# if TCG_OVERSIZED_GUEST
++    return *ptr;
++# else
++    /* ofs might correspond to .addr_write, so use qatomic_read */
++    return qatomic_read(ptr);
++# endif
 +#endif
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index 759c3e7d89..46b99a7ea5 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -22,6 +22,7 @@
- 
- #include "hw/qdev-core.h"
- #include "disas/dis-asm.h"
-+#include "exec/breakpoint.h"
- #include "exec/hwaddr.h"
- #include "exec/vaddr.h"
- #include "exec/memattrs.h"
-@@ -347,21 +348,6 @@ typedef struct CPUNegativeOffsetState {
-     bool can_do_io;
- } CPUNegativeOffsetState;
- 
--typedef struct CPUBreakpoint {
--    vaddr pc;
--    int flags; /* BP_* */
--    QTAILQ_ENTRY(CPUBreakpoint) entry;
--} CPUBreakpoint;
--
--struct CPUWatchpoint {
--    vaddr vaddr;
--    vaddr len;
--    vaddr hitaddr;
--    MemTxAttrs hitattrs;
--    int flags; /* BP_* */
--    QTAILQ_ENTRY(CPUWatchpoint) entry;
--};
--
- struct KVMState;
- struct kvm_run;
- 
-diff --git a/target/arm/internals.h b/target/arm/internals.h
-index b53f5e8ff2..e40ec453d5 100644
---- a/target/arm/internals.h
-+++ b/target/arm/internals.h
-@@ -25,6 +25,7 @@
- #ifndef TARGET_ARM_INTERNALS_H
- #define TARGET_ARM_INTERNALS_H
- 
-+#include "exec/breakpoint.h"
- #include "hw/registerfields.h"
- #include "tcg/tcg-gvec-desc.h"
- #include "syndrome.h"
-diff --git a/target/ppc/internal.h b/target/ppc/internal.h
-index 5b20ecbd33..601c0b533f 100644
---- a/target/ppc/internal.h
-+++ b/target/ppc/internal.h
-@@ -18,6 +18,7 @@
- #ifndef PPC_INTERNAL_H
- #define PPC_INTERNAL_H
- 
-+#include "exec/breakpoint.h"
- #include "hw/registerfields.h"
- 
- /* PM instructions */
-diff --git a/target/riscv/debug.h b/target/riscv/debug.h
-index 5794aa6ee5..c347863578 100644
---- a/target/riscv/debug.h
-+++ b/target/riscv/debug.h
-@@ -22,6 +22,8 @@
- #ifndef RISCV_DEBUG_H
- #define RISCV_DEBUG_H
- 
-+#include "exec/breakpoint.h"
++}
 +
- #define RV_MAX_TRIGGERS         2
- 
- /* register index of tdata CSRs */
++static inline uint64_t tlb_addr_write(const CPUTLBEntry *entry)
++{
++    return tlb_read_idx(entry, MMU_DATA_STORE);
++}
++
++/* Find the TLB index corresponding to the mmu_idx + address pair.  */
++static inline uintptr_t tlb_index(CPUState *cpu, uintptr_t mmu_idx,
++                                  vaddr addr)
++{
++    uintptr_t size_mask = cpu->neg.tlb.f[mmu_idx].mask >> CPU_TLB_ENTRY_BITS;
++
++    return (addr >> TARGET_PAGE_BITS) & size_mask;
++}
++
++/* Find the TLB entry corresponding to the mmu_idx + address pair.  */
++static inline CPUTLBEntry *tlb_entry(CPUState *cpu, uintptr_t mmu_idx,
++                                     vaddr addr)
++{
++    return &cpu->neg.tlb.f[mmu_idx].table[tlb_index(cpu, mmu_idx, addr)];
++}
++
+ static void tlb_window_reset(CPUTLBDesc *desc, int64_t ns,
+                              size_t max_entries)
+ {
 -- 
 2.41.0
 
