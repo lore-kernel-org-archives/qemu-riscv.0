@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 199F0C4345F
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Apr 2024 19:45:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78B6AC4345F
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Apr 2024 19:46:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s0RUT-0003Mn-Hw; Fri, 26 Apr 2024 15:44:13 -0400
+	id 1s0RW3-0003Om-W9; Fri, 26 Apr 2024 15:45:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s0RTn-0001jb-Lv
- for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:43:31 -0400
-Received: from mail-ej1-x636.google.com ([2a00:1450:4864:20::636])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s0RW1-0003Im-NL
+ for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:45:49 -0400
+Received: from mail-lf1-x134.google.com ([2a00:1450:4864:20::134])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s0RTk-00037b-36
- for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:43:31 -0400
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-a556d22fa93so297623666b.3
- for <qemu-riscv@nongnu.org>; Fri, 26 Apr 2024 12:43:27 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s0RW0-0004rc-3p
+ for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:45:49 -0400
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-51b09c3a111so3577387e87.1
+ for <qemu-riscv@nongnu.org>; Fri, 26 Apr 2024 12:45:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1714160606; x=1714765406; darn=nongnu.org;
+ d=linaro.org; s=google; t=1714160746; x=1714765546; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ImXEe3AsI+IkHscdZF2OSgUHx6phFwxkW/+zKfz8Om4=;
- b=BSLu+ROaLKnJztDBtlI+JzJ7mc05sfBehSZB4Rnj19t/cPvC/New8fvqtT0NfEKOx1
- QJEmbqVi0EdWKTIVdXlXMHwJpoQM7M3OAE6k5inlK7anaubCg29UqHOl+YrmLeGfZiJ+
- TINyT4bq1yqxWgfgNE8bOzWH7IXcEIE577txzp/Hac6Cdk5Zq/9TGluo7gEOuh3mnPYb
- JpHh6amhV4Qno4Ul4gOX/WOSP8hBAvRRj78+BanHaUd3NGnW9rzEOgtTuvju6BYgqqPH
- VXYpYcYckoqSa/A+/+7bsaWzD94JgaqpajdDqtGp/kbXmtbyQ/ZFSuBxuSNWTiB5N41I
- O1SQ==
+ bh=q7YRlrLoDVqcKqwJc5XUnzy4U8ujSMb/8xBf3PSdyhk=;
+ b=MnmuAFn3RzMmtPudj0mPg2amQIkZWLEM2+EKcx5M6L0cngtng5QrnyBkDK5/h1XCMY
+ JVAKSQ6hueIEemEYOnjNopUWkObg97IvpgguhkM7izJjvtNgHa5c1EPZsYCQHSd4Rd47
+ a1nPvrNqLwEJT5OqWF5StRw3qMx0qLnp78xFPrvRYqJID6My0WkAH98/tywjWeaL85jP
+ Luibf3m1KAs2uqwNXRMGv81BlbRZYTGXa1erjOQaxqkZ/aFA/XgcDNflmRaoc9A9naQg
+ eRnnBBPT7+WW8DGvqJCG3oJFP6qMZz+Y9ZD2TxLlsBCF5aqiYKQkEmGSkBb8pBCnwNt3
+ 7nwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714160606; x=1714765406;
+ d=1e100.net; s=20230601; t=1714160746; x=1714765546;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ImXEe3AsI+IkHscdZF2OSgUHx6phFwxkW/+zKfz8Om4=;
- b=KV9crzlvjuDMzhDyR4xeG42+YB0KpeMpxk87T5Gpx52GbnMnoAOrCWsufGexQEGuUY
- p5VaS7S4OZ8bkpPWC+1QD066n7bHEiInoApi231qdq1cTrOaZ5wP/ae86ZrUfxhmcpbq
- JbrMS+sriAVti8W0FHrA+Bb6fFJFewbyjjGK/9gaeSDYqRSkTpkZ2S+qCHTcr7KIHaxc
- OiKBeHshtb+TRYKKsdkm6w/nj8MNb3erUKlIHAjdA5zPVjDe42w1qrlzf17CS2whKK6a
- GihAfwuRB0FFENZY+GUNpcuAH/odRomnqgN1dIlFQfQO6uCLUcoBUj6GTbS4W353G5tS
- PhUw==
+ bh=q7YRlrLoDVqcKqwJc5XUnzy4U8ujSMb/8xBf3PSdyhk=;
+ b=MPwVEf8yk2IHMYQbVYy3PzeSCEibmVx/obgNJNgU1xblccCwdt9oaQ3r3hZpo4cMEO
+ NZLlWYgKMNQAWf3vYKu3lrzr3+/c/6/A/CnRjdsrXQzZ4fjS+Dx1YS997hULQ9khhFNu
+ WPcJtKql5swWlYQijpZDj+yVjjyrPOZ+MBA2yTKzvwyirA2eLuuXTwTkBTS1x/3h0+V4
+ kb/x1AGxS0H+2tia/cuZ2xX3Lpr6yin7/c+QGHh19BNp2hXnOj4+zcc1mX5ksJTPQBGF
+ DuQ3TCyCp+PuFTazApjeLVbJMIUmSBsJlIbK5imM5IEYA30svQV3g/XEF5g1XrsQXnNP
+ /+IQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXbQZABcXYp2J4jeVHlpAcSrZKx2uIqGdGRDYJ14g1xAfMowmmlu8OdXNc+zKtlFnGtV027uI1ppFXAQEcFRdrFNtPb/nQ=
-X-Gm-Message-State: AOJu0YxX1kt1anVNm/j5MMoU0m9CZI75PYnNj98vEhCq4AGxnQlQlM/w
- 7V19IFO7QZNCKTlE6XSD5yMqxF3xr4d9CPcVFVQQE3mvoNm4jpjjnNSzmY7sS0k=
-X-Google-Smtp-Source: AGHT+IETZwTb4a/21u+upB/lEy3ej/85A0BRlZkCkWx2rxIQGoA88FAGDYQsdKXyNU7INJJuCiipQw==
-X-Received: by 2002:a17:906:af19:b0:a58:d757:66bb with SMTP id
- lx25-20020a170906af1900b00a58d75766bbmr1292294ejb.14.1714160606653; 
- Fri, 26 Apr 2024 12:43:26 -0700 (PDT)
+ AJvYcCX76+fte04rTwkoWLVeg8zByjDPabLMyL6EbMeSYXrawKKBaggaiNqJOPF+L+0qd5hPXIqIJHjXlo8qjT+u/w28lyCkgTc=
+X-Gm-Message-State: AOJu0YzJHl7HR9PkeSAlExuYNSoL0nUMrFyj0ew/givbXi17oNqfDdwJ
+ lXwmQ/63bvojUvUZZ77uoSZZKFm1MV1Yt4FlzHRR1RPj9GkBavx8CyyYQEsMxXY=
+X-Google-Smtp-Source: AGHT+IEizWECJiHFY2lqs+yjor1DElScPSkGynXQo4U3KncjdruIEQM1SaflMnx6CBfEWAUsmEZv3A==
+X-Received: by 2002:a05:6512:2c99:b0:51c:ee04:3732 with SMTP id
+ dw25-20020a0565122c9900b0051cee043732mr969913lfb.7.1714160746403; 
+ Fri, 26 Apr 2024 12:45:46 -0700 (PDT)
 Received: from m1x-phil.lan (aul93-h02-176-184-11-147.dsl.sta.abo.bbox.fr.
  [176.184.11.147]) by smtp.gmail.com with ESMTPSA id
- bi14-20020a170907368e00b00a5588ed8fa2sm9358983ejc.113.2024.04.26.12.43.25
+ g4-20020a056402320400b00572593ddf22sm854298eda.58.2024.04.26.12.45.44
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 26 Apr 2024 12:43:26 -0700 (PDT)
+ Fri, 26 Apr 2024 12:45:45 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  qemu-ppc@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Richard Henderson <richard.henderson@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>, Eduardo Habkost <eduardo@habkost.net>
-Subject: [PULL 14/38] target/i386: Include missing 'exec/exec-all.h' header
-Date: Fri, 26 Apr 2024 21:41:34 +0200
-Message-ID: <20240426194200.43723-15-philmd@linaro.org>
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>
+Subject: [PULL 38/38] plugins: Include missing 'qemu/bitmap.h' header
+Date: Fri, 26 Apr 2024 21:41:58 +0200
+Message-ID: <20240426194200.43723-39-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240426194200.43723-1-philmd@linaro.org>
 References: <20240426194200.43723-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::636;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x636.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::134;
+ envelope-from=philmd@linaro.org; helo=mail-lf1-x134.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,28 +98,30 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The XRSTOR instruction ends calling tlb_flush(), declared
-in "exec/exec-all.h".
+Since commit c006147122 ("plugins: create CPUPluginState and
+migrate plugin_mask") "qemu/plugin.h" uses DECLARE_BITMAP(),
+which is declared in "qemu/bitmap.h".
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Message-Id: <20231211212003.21686-13-philmd@linaro.org>
+Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+Message-Id: <20240418192525.97451-19-philmd@linaro.org>
 ---
- target/i386/tcg/fpu_helper.c | 1 +
+ include/qemu/plugin.h | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/target/i386/tcg/fpu_helper.c b/target/i386/tcg/fpu_helper.c
-index 4b965a5d6c..ece22a3553 100644
---- a/target/i386/tcg/fpu_helper.c
-+++ b/target/i386/tcg/fpu_helper.c
-@@ -21,6 +21,7 @@
- #include <math.h>
- #include "cpu.h"
- #include "tcg-cpu.h"
-+#include "exec/exec-all.h"
- #include "exec/cpu_ldst.h"
- #include "exec/helper-proto.h"
- #include "fpu/softfloat.h"
+diff --git a/include/qemu/plugin.h b/include/qemu/plugin.h
+index 12a96cea2a..41db748eda 100644
+--- a/include/qemu/plugin.h
++++ b/include/qemu/plugin.h
+@@ -13,6 +13,7 @@
+ #include "qemu/queue.h"
+ #include "qemu/option.h"
+ #include "qemu/plugin-event.h"
++#include "qemu/bitmap.h"
+ #include "exec/memopidx.h"
+ #include "hw/core/cpu.h"
+ 
 -- 
 2.41.0
 
