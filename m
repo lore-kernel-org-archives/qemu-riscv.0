@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5E09C19F4F
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Apr 2024 19:48:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D20D0C4345F
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Apr 2024 19:49:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s0RUb-0004Jg-SI; Fri, 26 Apr 2024 15:44:23 -0400
+	id 1s0RVb-000151-2e; Fri, 26 Apr 2024 15:45:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s0RUF-0002ix-7D
- for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:44:00 -0400
-Received: from mail-ej1-x633.google.com ([2a00:1450:4864:20::633])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s0RVV-0000iN-8L
+ for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:45:18 -0400
+Received: from mail-ej1-x62c.google.com ([2a00:1450:4864:20::62c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s0RU8-0003Fa-MU
- for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:43:58 -0400
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a55ab922260so342617166b.3
- for <qemu-riscv@nongnu.org>; Fri, 26 Apr 2024 12:43:50 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s0RVR-0004Xh-Vm
+ for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:45:16 -0400
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-a58be618a17so267356366b.0
+ for <qemu-riscv@nongnu.org>; Fri, 26 Apr 2024 12:45:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1714160629; x=1714765429; darn=nongnu.org;
+ d=linaro.org; s=google; t=1714160712; x=1714765512; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=v7EfD6ZqpZav9ENI55PjcdOF+ptN44Hp+/BctxTPyg4=;
- b=cJVZOFYXU+L6mWEHIDpfDAq3AKeZQj6D1w6JUy+oatdX/eww/rJactZnOXbwQ2N6xQ
- 7b6CxLcxrZ2BQa4sJwBtDhsQnNmxPrH77jyE6nkrw2mdibG2VDcMcXeHqdoPy7tGenHP
- PyNZXT5Cz9WzX18ECn0xlzipATxfGcnRfWkVfO6OsS7pR7iqS/lNhuoda7q2ROjcuUMl
- +wJFpjpvMGkjwXnZYzkXvENrvbqCRvd6Gcckf7C1Q/RWnQZiXeeeX18DRQGd43Rxoz6R
- X7+Qe27rRSoDJIFInjKR1w4LtisyYq9F7+EnahRDQxxNMyUbC7eDhP1gb5UTeR+QUKTz
- v/VA==
+ bh=qqr1BfgxtDJCbOWtFyibCNg276fEde+mRkEZWF16SzE=;
+ b=acvXJmnQOK26rVxfSyuscFfix4Ox1oR2nmZP9I6LUdrNC33cLp2tathvwzTkZAyNqD
+ mq9QZwXMf/YVxBhISNZeG/E1uXYaYVn0BMIR3DuNjgVh5pI0GBYhiRICceKsXGFo+4y4
+ Uxvl135LIz/5cvud71JZk1U2/ARrzmG6HOXVK8X7r7wxHn+aCgvo8REhiOgOnEVw9Ald
+ LXxoiyRsPuERdTsMIoCNq4BZNYNPr3pRvumTUZk+VxmMoLEJ+1ocdErtofMJEO6oQuO1
+ WAA7+og8ONjucTcoN8RazA/bdiJTpU04V8AcHXLElfEWkBGFb85Mx6M0DQRBWmk+5fEb
+ 7zAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714160629; x=1714765429;
+ d=1e100.net; s=20230601; t=1714160712; x=1714765512;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=v7EfD6ZqpZav9ENI55PjcdOF+ptN44Hp+/BctxTPyg4=;
- b=KriyTqzOyuftVthA2xI0zJsEo3FxQGGbxoChvMq13FR4im0Pnl1d8gvVDCUWEu8OQn
- CEZDkj6hKx6P1W3WiQSXU7+HTQ5FzjS2+bD4vaKQiWV2czXjUgVsc/4Vut16IMFW155t
- azHvN5pxiH4mBpzoS3s+Nxkn2j15kLdC2p8pVtxPPyopbZ3qNjh7H5iwGYU7jeD0iOQ1
- k8HXEZzeBJTl4LWjhLyiL+STGUa+c6OoO0xinX/bVvfz4WyLKaUjYt0auacIrJOTsDD1
- oIcJ3Lb8Cfetjle0BP8aI+B/o89EFf1GULj/sn4Dj+t8MNj8TA1oBYAtCM5gZIY6miqo
- X11A==
+ bh=qqr1BfgxtDJCbOWtFyibCNg276fEde+mRkEZWF16SzE=;
+ b=uB7aYJJBrEFB7LSbY8yo1+TOLHsvuW95seCPAYY3yce+uNRBXQBxlFPZEpZmENDRhz
+ SqpHxZbh57bLolkyCmWg4txoIAU32Ilm1LDY0moFGoSrGl6SBSuYGXmHVFHA8u8kaGyT
+ ZhM0dyyxMwsfemE1A1DZfgEkrqpu45DltUuY0t7NBZZ49kapxRGlfiZPWUP6abkkpp2q
+ P7JokfffXsi7frsUUdOo/IXlVYsiwfXKA6tRJ5wgDwmidE7kdSmZqMq5dt0m0YZW3kYz
+ IoYFGDoUJfcIohvwfFGPIXrLZklrRSRglq7GjrRMX7El0AU+3tLKdNHQRbZrGjw58kcd
+ 2l/w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVWzPE8ePMjhBhdwf6hVMNo68rPPTxrwzGktbJHKfE1BcSI2JcGBzvMEvec9HlfS6tvZ8EbWTYj4KiJ/CSk1wau320hlxo=
-X-Gm-Message-State: AOJu0Yx7g/T0+rDCMqbfXgJ4aDChjZugxhJgXKzJvzL6Ju4pD2/BQAWw
- XiNnKctTSsR7b80gET1oUTAhAT7EQqAv0KaHG/33GFWkoGbi1EltBUuwtr1pHPQ=
-X-Google-Smtp-Source: AGHT+IEOXlToa21r4yUxiAleA+/mG4rc15QE0VT8GBUb+CHeadQ4/roYWuQ/oB749Wv4bjPrXIvxFA==
-X-Received: by 2002:a17:906:c1d6:b0:a55:bf86:3ccd with SMTP id
- bw22-20020a170906c1d600b00a55bf863ccdmr2750281ejb.40.1714160629052; 
- Fri, 26 Apr 2024 12:43:49 -0700 (PDT)
+ AJvYcCVSkcWBLgtphB8GgUDSEFvCnCD0TqxLe8q/Gm/VYdzik4DvP7g6YgteDPu2l68ao4GCdUaN8eWn0FdRS8OxqqutQte4SDg=
+X-Gm-Message-State: AOJu0YynTejcA/Qp4m0lUCIhDsueUOL4pUUI1RfaZxDIOLpZqQLfvGVj
+ 5LbUd6zop56PXovMrIkx1rumT26fY2yTsO/pgLEi4sSIVBIfgbbU4vxhCMr7R7E=
+X-Google-Smtp-Source: AGHT+IFAJR8eHA24IJxjS9GCEnfHyjCs6dEj5XriEYpFsxxBqQNjWE25ztx7AU3YMwEhAlx6khApCQ==
+X-Received: by 2002:a17:906:28d9:b0:a55:63de:9aa9 with SMTP id
+ p25-20020a17090628d900b00a5563de9aa9mr2583901ejd.49.1714160712302; 
+ Fri, 26 Apr 2024 12:45:12 -0700 (PDT)
 Received: from m1x-phil.lan (aul93-h02-176-184-11-147.dsl.sta.abo.bbox.fr.
  [176.184.11.147]) by smtp.gmail.com with ESMTPSA id
- lb9-20020a170906adc900b00a5889e8353esm3839625ejb.44.2024.04.26.12.43.47
+ jz12-20020a17090775ec00b00a58a9a56c44sm2359531ejc.16.2024.04.26.12.45.10
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 26 Apr 2024 12:43:48 -0700 (PDT)
+ Fri, 26 Apr 2024 12:45:11 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
@@ -65,25 +65,24 @@ Cc: qemu-arm@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Richard Henderson <richard.henderson@linaro.org>,
  Paolo Bonzini <pbonzini@redhat.com>
-Subject: [PULL 18/38] accel/tcg: Rename load-extract/store-insert headers
- using .h.inc suffix
-Date: Fri, 26 Apr 2024 21:41:38 +0200
-Message-ID: <20240426194200.43723-19-philmd@linaro.org>
+Subject: [PULL 32/38] exec: Restrict TCG specific declarations of 'cputlb.h'
+Date: Fri, 26 Apr 2024 21:41:52 +0200
+Message-ID: <20240426194200.43723-33-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240426194200.43723-1-philmd@linaro.org>
 References: <20240426194200.43723-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::633;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x633.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62c;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x62c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,84 +98,34 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Since commit 139c1837db ("meson: rename included C source files
-to .c.inc"), QEMU standard procedure for included C files is to
-use *.c.inc.
-
-Besides, since commit 6a0057aa22 ("docs/devel: make a statement
-about includes") this is documented in the Coding Style:
-
-  If you do use template header files they should be named with
-  the ``.c.inc`` or ``.h.inc`` suffix to make it clear they are
-  being included for expansion.
-
-Therefore rename 'store-insert-al16.h' as 'store-insert-al16.h.inc'
-and 'load-extract-al16-al8.h' as 'load-extract-al16-al8.h.inc'.
+Avoid TCG specific declarations being used from non-TCG accelerators.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Acked-by: Richard Henderson <richard.henderson@linaro.org>
-Message-Id: <20240424173333.96148-3-philmd@linaro.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Message-Id: <20240418192525.97451-5-philmd@linaro.org>
 ---
- .../{load-extract-al16-al8.h => load-extract-al16-al8.h.inc}  | 0
- .../host/{store-insert-al16.h => store-insert-al16.h.inc}     | 0
- .../{load-extract-al16-al8.h => load-extract-al16-al8.h.inc}  | 0
- .../host/{store-insert-al16.h => store-insert-al16.h.inc}     | 0
- .../{load-extract-al16-al8.h => load-extract-al16-al8.h.inc}  | 0
- .../host/{store-insert-al16.h => store-insert-al16.h.inc}     | 0
- .../{load-extract-al16-al8.h => load-extract-al16-al8.h.inc}  | 0
- accel/tcg/ldst_atomicity.c.inc                                | 4 ++--
- 8 files changed, 2 insertions(+), 2 deletions(-)
- rename host/include/aarch64/host/{load-extract-al16-al8.h => load-extract-al16-al8.h.inc} (100%)
- rename host/include/aarch64/host/{store-insert-al16.h => store-insert-al16.h.inc} (100%)
- rename host/include/generic/host/{load-extract-al16-al8.h => load-extract-al16-al8.h.inc} (100%)
- rename host/include/generic/host/{store-insert-al16.h => store-insert-al16.h.inc} (100%)
- rename host/include/loongarch64/host/{load-extract-al16-al8.h => load-extract-al16-al8.h.inc} (100%)
- rename host/include/loongarch64/host/{store-insert-al16.h => store-insert-al16.h.inc} (100%)
- rename host/include/x86_64/host/{load-extract-al16-al8.h => load-extract-al16-al8.h.inc} (100%)
+ include/exec/cputlb.h | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/host/include/aarch64/host/load-extract-al16-al8.h b/host/include/aarch64/host/load-extract-al16-al8.h.inc
-similarity index 100%
-rename from host/include/aarch64/host/load-extract-al16-al8.h
-rename to host/include/aarch64/host/load-extract-al16-al8.h.inc
-diff --git a/host/include/aarch64/host/store-insert-al16.h b/host/include/aarch64/host/store-insert-al16.h.inc
-similarity index 100%
-rename from host/include/aarch64/host/store-insert-al16.h
-rename to host/include/aarch64/host/store-insert-al16.h.inc
-diff --git a/host/include/generic/host/load-extract-al16-al8.h b/host/include/generic/host/load-extract-al16-al8.h.inc
-similarity index 100%
-rename from host/include/generic/host/load-extract-al16-al8.h
-rename to host/include/generic/host/load-extract-al16-al8.h.inc
-diff --git a/host/include/generic/host/store-insert-al16.h b/host/include/generic/host/store-insert-al16.h.inc
-similarity index 100%
-rename from host/include/generic/host/store-insert-al16.h
-rename to host/include/generic/host/store-insert-al16.h.inc
-diff --git a/host/include/loongarch64/host/load-extract-al16-al8.h b/host/include/loongarch64/host/load-extract-al16-al8.h.inc
-similarity index 100%
-rename from host/include/loongarch64/host/load-extract-al16-al8.h
-rename to host/include/loongarch64/host/load-extract-al16-al8.h.inc
-diff --git a/host/include/loongarch64/host/store-insert-al16.h b/host/include/loongarch64/host/store-insert-al16.h.inc
-similarity index 100%
-rename from host/include/loongarch64/host/store-insert-al16.h
-rename to host/include/loongarch64/host/store-insert-al16.h.inc
-diff --git a/host/include/x86_64/host/load-extract-al16-al8.h b/host/include/x86_64/host/load-extract-al16-al8.h.inc
-similarity index 100%
-rename from host/include/x86_64/host/load-extract-al16-al8.h
-rename to host/include/x86_64/host/load-extract-al16-al8.h.inc
-diff --git a/accel/tcg/ldst_atomicity.c.inc b/accel/tcg/ldst_atomicity.c.inc
-index 97dae70d53..134da3c1da 100644
---- a/accel/tcg/ldst_atomicity.c.inc
-+++ b/accel/tcg/ldst_atomicity.c.inc
-@@ -9,8 +9,8 @@
-  * See the COPYING file in the top-level directory.
-  */
+diff --git a/include/exec/cputlb.h b/include/exec/cputlb.h
+index 6da1462c4f..ef18642a32 100644
+--- a/include/exec/cputlb.h
++++ b/include/exec/cputlb.h
+@@ -22,9 +22,14 @@
  
--#include "host/load-extract-al16-al8.h"
--#include "host/store-insert-al16.h"
-+#include "host/load-extract-al16-al8.h.inc"
-+#include "host/store-insert-al16.h.inc"
+ #include "exec/cpu-common.h"
  
- #ifdef CONFIG_ATOMIC64
- # define HAVE_al8          true
++#ifdef CONFIG_TCG
++
+ #if !defined(CONFIG_USER_ONLY)
+ /* cputlb.c */
+ void tlb_protect_code(ram_addr_t ram_addr);
+ void tlb_unprotect_code(ram_addr_t ram_addr);
+ #endif
++
++#endif /* CONFIG_TCG */
++
+ #endif
 -- 
 2.41.0
 
