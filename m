@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3236C04FFE
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Apr 2024 19:47:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85D61C4345F
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Apr 2024 19:47:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s0RUr-0006Hb-OK; Fri, 26 Apr 2024 15:44:37 -0400
+	id 1s0RVF-00005E-JO; Fri, 26 Apr 2024 15:45:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s0RUS-0003I1-EE
- for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:44:12 -0400
-Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s0RVD-0008Pu-HY
+ for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:44:59 -0400
+Received: from mail-lj1-x229.google.com ([2a00:1450:4864:20::229])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s0RUO-0003SR-N5
- for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:44:11 -0400
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-571be483ccaso3071200a12.2
- for <qemu-riscv@nongnu.org>; Fri, 26 Apr 2024 12:44:06 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s0RVA-00047O-72
+ for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:44:59 -0400
+Received: by mail-lj1-x229.google.com with SMTP id
+ 38308e7fff4ca-2dd6a7ae2dcso39857171fa.1
+ for <qemu-riscv@nongnu.org>; Fri, 26 Apr 2024 12:44:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1714160646; x=1714765446; darn=nongnu.org;
+ d=linaro.org; s=google; t=1714160694; x=1714765494; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Yi4qzwVEIokTDVOXJGX3UXAbAGnKr2+Pju6ZmUzQWug=;
- b=JlxMWkm6oUDxpEPsHc/9FkGba94rEFG08N4HJV7mUv1m0yeOHoU2DJoDRS0OEo4Wca
- vzahnq5869oMVyWsFAMN88xBj0rMt8hnyO6UanWMpWZLtDHue7x5ubhg3EHfrYjW4DxP
- Uwa94TyVsLWQkCLPJpxYPsilBxmBNF7Q0FHir+wudK56esIlPMwjhCenbwE4PRUYoeWm
- jIiYXrSdLzFMbx/OYF4oQQ+3+s3QBfesDzSjCHT3B3JRf2TS5JUVgVS2642G89mloArV
- 99D9M5jxbDbBSSnFKMp0kjjJ0t78/xhjIMiO2D2SJJIrI3QMQDeIwcr5wwbp2IVNEU0l
- cP1g==
+ bh=O9yWcGZAI9YJhaaCrPIJ5UzojqcAhJ+99W/2NEpvWPY=;
+ b=XM+o+9A7QoMGYO40D2WHigONbruErFFVZnReSPbCXhvTq2HwoWTBYIcF1XsJdItm63
+ OadKUZHyZEC8PBDRrtzh7ktB1mzhS4RDD/F5/MNvcp3vovpDgsjn9sGFbX2GXeoKM6fS
+ y61uVykqw5y53dWFcnQgPwbZkmkZand+yyjpcFECxLzGzEPhBtsNdx/kKOvFhJwrBpq0
+ sSFHY7gCSp0Kf2PG/ixBdW47103EubK/wOf+8nFFTRB0imtyInRiraGpF0NzKlcWvY3H
+ 1r5wgEPHbRuhozIG6QN+iS6Yubkx97Thk+sCT9da5PsW75WmIRqBsHdxhNpNiUhsp5Xd
+ 6tYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714160646; x=1714765446;
+ d=1e100.net; s=20230601; t=1714160694; x=1714765494;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Yi4qzwVEIokTDVOXJGX3UXAbAGnKr2+Pju6ZmUzQWug=;
- b=UcO3J6sp+ycV1+0vXMhpefxn30gx2L4liqbkkQzNZS4pZeRRt3UZ8B4+RUKgFRpaCs
- YGDkYcG94PldenCbm0dSyBHcRx45r24+b9A5fWdywYzW5Va5ca1BvuwmKclDr42rtya+
- 8IKouuH8OHQVDSull+p8PSjrQP5Mm9jsZ2xZEB9WED2VOZyzoux0B9CjFveWY8HQdZtV
- ZvYY6aLckUwgHk1Tqot8tASN8Tpm3jXpFP6kVzin7LfkYjNVqqCizbrcZLF6MWmYQSBw
- FQwtDEG3eX9cSVlmGrkTH84nfI/ekhHkShdTpzBVLsGMXWi+2eyRRKxqQ1mzhSPubUcL
- 11WQ==
+ bh=O9yWcGZAI9YJhaaCrPIJ5UzojqcAhJ+99W/2NEpvWPY=;
+ b=nEhq4htOTexFiPPYhscebm1Y45Oii9HTcRTqs8uGs3NyCzQ43y3GNDidc06RefVeMh
+ evB0DjHMkV2rpLbIFiVnhErbQuSdYi/3YeHGUl82ue7XQYd7gAjDm9LpHmxPhyTInXWS
+ ZtkiXRmFWQH5d/iAhmsYQrtvx3wCaCjsBHnzNtwFZ6vSgFONZ3Jy8g9smxqqfQYGHzA4
+ uJfdajq2S0c9ZCmqGnsOt/gUCOfkFijTZzPXLKhsqb8+3ZFEYF2gQuWDp97dtmQ+A6EY
+ kar/cXO+up6XX04b6xaRyK/14spMZQXgLM/NSj+vkoqlJLh+zN73FV/oyOGmV9JDNPDc
+ 9MoA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWjzExN3pxLyc+MgKrN5Jk42Z0kczz1AoRtIq2Vd15/gJSF3dPUeYvQ04XwPD+Seo3430TkRFZLlf+8Ve9anjP8Cewu/zc=
-X-Gm-Message-State: AOJu0Yz93ZC1VkxGi1ySTmbOfCIEHWJYFs5aac6PQpKe4BUGAMarwou4
- WHVzAUa7Fx4mYQCllHa0pv3uK9qEex//Nwr7ELiCiTPEXsQa6sQzU/wI8dJJ0v8=
-X-Google-Smtp-Source: AGHT+IFXMGCYbRnNfazAzNLEZBwThw+jXzRFYB0Gm2woHPKm9YaOPwh/RhTlp5jRRRkn11wGYFVPfA==
-X-Received: by 2002:a50:8d42:0:b0:56e:2e10:7dad with SMTP id
- t2-20020a508d42000000b0056e2e107dadmr2804865edt.35.1714160645819; 
- Fri, 26 Apr 2024 12:44:05 -0700 (PDT)
+ AJvYcCUvClYl0PAhTO4QIlRXDPniVRrv8bOPbLVC0k3IRV5f3Z98kk9fAnVUm1c0x5foqZW92243bJ+vRDlizgQ+/d3/oaBL4vM=
+X-Gm-Message-State: AOJu0YwHW0YLyzuRc50XqiJ2OOYAP6y0h5VWl0XhkTwhtA15xjx+YZLx
+ sxKkLUvxVlCOH2hU1wrwgPe0x4zUOgx5mY8vEpQkSGcG+V1cSe78lu+gFprGWkE=
+X-Google-Smtp-Source: AGHT+IEkPQs9duixVRBukgTwLqANKQo2EbNAR1DifxNFZ52yn88GjQTiys7n4Fdp+0p0CWUFSOf+EA==
+X-Received: by 2002:a05:6512:ba7:b0:51a:fc86:fc6d with SMTP id
+ b39-20020a0565120ba700b0051afc86fc6dmr3811665lfv.22.1714160692338; 
+ Fri, 26 Apr 2024 12:44:52 -0700 (PDT)
 Received: from m1x-phil.lan (aul93-h02-176-184-11-147.dsl.sta.abo.bbox.fr.
  [176.184.11.147]) by smtp.gmail.com with ESMTPSA id
- bf17-20020a0564021a5100b0056bf6287f32sm10263342edb.26.2024.04.26.12.44.04
+ jw17-20020a170906e95100b00a58df78ab27sm188914ejb.166.2024.04.26.12.44.51
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 26 Apr 2024 12:44:05 -0700 (PDT)
+ Fri, 26 Apr 2024 12:44:51 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  qemu-ppc@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Richard Henderson <richard.henderson@linaro.org>,
- Reinoud Zandijk <reinoud@netbsd.org>
-Subject: [PULL 21/38] accel/nvmm: Use accel-specific per-vcpu @dirty field
-Date: Fri, 26 Apr 2024 21:41:41 +0200
-Message-ID: <20240426194200.43723-22-philmd@linaro.org>
+ Paolo Bonzini <pbonzini@redhat.com>
+Subject: [PULL 29/38] exec: Declare abi_ptr type in its own 'abi_ptr.h' header
+Date: Fri, 26 Apr 2024 21:41:49 +0200
+Message-ID: <20240426194200.43723-30-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240426194200.43723-1-philmd@linaro.org>
 References: <20240426194200.43723-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::52f;
- envelope-from=philmd@linaro.org; helo=mail-ed1-x52f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::229;
+ envelope-from=philmd@linaro.org; helo=mail-lj1-x229.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -98,107 +98,128 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-NVMM has a specific use of the CPUState::vcpu_dirty field
-(CPUState::vcpu_dirty is not used by common code).
-To make this field accel-specific, add and use a new
-@dirty variable in the AccelCPUState structure.
+The abi_ptr type is declared in "exec/cpu_ldst.h" with all
+the load/store helpers. Some source files requiring abi_ptr
+type don't need the load/store helpers. In order to simplify,
+create a new "exec/abi_ptr.h" header.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Message-Id: <20240424174506.326-3-philmd@linaro.org>
+Message-Id: <20231212123401.37493-21-philmd@linaro.org>
 ---
- target/i386/nvmm/nvmm-all.c | 21 +++++++++++----------
- 1 file changed, 11 insertions(+), 10 deletions(-)
+ include/exec/abi_ptr.h    | 33 +++++++++++++++++++++++++++++++++
+ include/exec/cpu_ldst.h   | 17 +++--------------
+ include/exec/exec-all.h   |  1 +
+ include/exec/translator.h |  5 ++++-
+ 4 files changed, 41 insertions(+), 15 deletions(-)
+ create mode 100644 include/exec/abi_ptr.h
 
-diff --git a/target/i386/nvmm/nvmm-all.c b/target/i386/nvmm/nvmm-all.c
-index 49a3a3b916..f9cced53b3 100644
---- a/target/i386/nvmm/nvmm-all.c
-+++ b/target/i386/nvmm/nvmm-all.c
-@@ -30,6 +30,7 @@ struct AccelCPUState {
-     struct nvmm_vcpu vcpu;
-     uint8_t tpr;
-     bool stop;
-+    bool dirty;
+diff --git a/include/exec/abi_ptr.h b/include/exec/abi_ptr.h
+new file mode 100644
+index 0000000000..2aedcceb0c
+--- /dev/null
++++ b/include/exec/abi_ptr.h
+@@ -0,0 +1,33 @@
++/*
++ * QEMU abi_ptr type definitions
++ *
++ * SPDX-License-Identifier: LGPL-2.1-or-later
++ */
++#ifndef EXEC_ABI_PTR_H
++#define EXEC_ABI_PTR_H
++
++#include "cpu-param.h"
++
++#if defined(CONFIG_USER_ONLY)
++/*
++ * sparc32plus has 64bit long but 32bit space address
++ * this can make bad result with g2h() and h2g()
++ */
++#if TARGET_VIRT_ADDR_SPACE_BITS <= 32
++typedef uint32_t abi_ptr;
++#define TARGET_ABI_FMT_ptr "%x"
++#else
++typedef uint64_t abi_ptr;
++#define TARGET_ABI_FMT_ptr "%"PRIx64
++#endif
++
++#else /* !CONFIG_USER_ONLY */
++
++#include "exec/target_long.h"
++
++typedef target_ulong abi_ptr;
++#define TARGET_ABI_FMT_ptr TARGET_FMT_lx
++
++#endif /* !CONFIG_USER_ONLY */
++
++#endif
+diff --git a/include/exec/cpu_ldst.h b/include/exec/cpu_ldst.h
+index 82690d3947..64e0319996 100644
+--- a/include/exec/cpu_ldst.h
++++ b/include/exec/cpu_ldst.h
+@@ -63,20 +63,11 @@
+ #define CPU_LDST_H
  
-     /* Window-exiting for INTs/NMIs. */
-     bool int_window_exit;
-@@ -507,7 +508,7 @@ nvmm_io_callback(struct nvmm_io *io)
-     }
+ #include "exec/memopidx.h"
++#include "exec/abi_ptr.h"
+ #include "qemu/int128.h"
+ #include "cpu.h"
  
-     /* Needed, otherwise infinite loop. */
--    current_cpu->vcpu_dirty = false;
-+    current_cpu->accel->dirty = false;
- }
+ #if defined(CONFIG_USER_ONLY)
+-/* sparc32plus has 64bit long but 32bit space address
+- * this can make bad result with g2h() and h2g()
+- */
+-#if TARGET_VIRT_ADDR_SPACE_BITS <= 32
+-typedef uint32_t abi_ptr;
+-#define TARGET_ABI_FMT_ptr "%x"
+-#else
+-typedef uint64_t abi_ptr;
+-#define TARGET_ABI_FMT_ptr "%"PRIx64
+-#endif
  
- static void
-@@ -516,7 +517,7 @@ nvmm_mem_callback(struct nvmm_mem *mem)
-     cpu_physical_memory_rw(mem->gpa, mem->data, mem->size, mem->write);
+ #ifndef TARGET_TAGGED_ADDRESSES
+ static inline abi_ptr cpu_untagged_addr(CPUState *cs, abi_ptr x)
+@@ -120,10 +111,8 @@ static inline bool guest_range_valid_untagged(abi_ulong start, abi_ulong len)
+     assert(h2g_valid(x)); \
+     h2g_nocheck(x); \
+ })
+-#else
+-typedef vaddr abi_ptr;
+-#define TARGET_ABI_FMT_ptr VADDR_PRIx
+-#endif
++
++#endif /* CONFIG_USER_ONLY */
  
-     /* Needed, otherwise infinite loop. */
--    current_cpu->vcpu_dirty = false;
-+    current_cpu->accel->dirty = false;
- }
+ uint32_t cpu_ldub_data(CPUArchState *env, abi_ptr ptr);
+ int cpu_ldsb_data(CPUArchState *env, abi_ptr ptr);
+diff --git a/include/exec/exec-all.h b/include/exec/exec-all.h
+index 9599e16a09..530d442112 100644
+--- a/include/exec/exec-all.h
++++ b/include/exec/exec-all.h
+@@ -22,6 +22,7 @@
  
- static struct nvmm_assist_callbacks nvmm_callbacks = {
-@@ -726,9 +727,9 @@ nvmm_vcpu_loop(CPUState *cpu)
-      * Inner VCPU loop.
-      */
-     do {
--        if (cpu->vcpu_dirty) {
-+        if (cpu->accel->dirty) {
-             nvmm_set_registers(cpu);
--            cpu->vcpu_dirty = false;
-+            cpu->accel->dirty = false;
-         }
+ #include "cpu.h"
+ #if defined(CONFIG_USER_ONLY)
++#include "exec/abi_ptr.h"
+ #include "exec/cpu_ldst.h"
+ #endif
+ #include "exec/translation-block.h"
+diff --git a/include/exec/translator.h b/include/exec/translator.h
+index 2c4fb818e7..6cd937ac5c 100644
+--- a/include/exec/translator.h
++++ b/include/exec/translator.h
+@@ -19,7 +19,10 @@
+  */
  
-         if (qcpu->stop) {
-@@ -826,32 +827,32 @@ static void
- do_nvmm_cpu_synchronize_state(CPUState *cpu, run_on_cpu_data arg)
- {
-     nvmm_get_registers(cpu);
--    cpu->vcpu_dirty = true;
-+    cpu->accel->dirty = true;
- }
+ #include "qemu/bswap.h"
+-#include "exec/cpu_ldst.h"	/* for abi_ptr */
++#include "exec/cpu-common.h"
++#include "exec/cpu-defs.h"
++#include "exec/abi_ptr.h"
++#include "cpu.h"
  
- static void
- do_nvmm_cpu_synchronize_post_reset(CPUState *cpu, run_on_cpu_data arg)
- {
-     nvmm_set_registers(cpu);
--    cpu->vcpu_dirty = false;
-+    cpu->accel->dirty = false;
- }
- 
- static void
- do_nvmm_cpu_synchronize_post_init(CPUState *cpu, run_on_cpu_data arg)
- {
-     nvmm_set_registers(cpu);
--    cpu->vcpu_dirty = false;
-+    cpu->accel->dirty = false;
- }
- 
- static void
- do_nvmm_cpu_synchronize_pre_loadvm(CPUState *cpu, run_on_cpu_data arg)
- {
--    cpu->vcpu_dirty = true;
-+    cpu->accel->dirty = true;
- }
- 
- void nvmm_cpu_synchronize_state(CPUState *cpu)
- {
--    if (!cpu->vcpu_dirty) {
-+    if (!cpu->accel->dirty) {
-         run_on_cpu(cpu, do_nvmm_cpu_synchronize_state, RUN_ON_CPU_NULL);
-     }
- }
-@@ -981,7 +982,7 @@ nvmm_init_vcpu(CPUState *cpu)
-         }
-     }
- 
--    cpu->vcpu_dirty = true;
-+    cpu->accel->dirty = true;
-     cpu->accel = qcpu;
- 
-     return 0;
+ /**
+  * gen_intermediate_code
 -- 
 2.41.0
 
