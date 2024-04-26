@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9C27C04FFE
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Apr 2024 19:51:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20C45C4345F
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Apr 2024 19:51:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s0RSx-0000Ya-Dm; Fri, 26 Apr 2024 15:42:39 -0400
+	id 1s0RVl-0001lJ-4a; Fri, 26 Apr 2024 15:45:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s0RSv-0000VU-Ls
- for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:42:37 -0400
-Received: from mail-ej1-x62e.google.com ([2a00:1450:4864:20::62e])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s0RVZ-0000wt-8O
+ for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:45:21 -0400
+Received: from mail-ej1-x633.google.com ([2a00:1450:4864:20::633])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s0RSt-0002tV-Gz
- for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:42:37 -0400
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a58c0a05a39so257164166b.2
- for <qemu-riscv@nongnu.org>; Fri, 26 Apr 2024 12:42:35 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s0RVX-0004ZZ-7l
+ for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:45:20 -0400
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-a5557e3ebcaso424878866b.1
+ for <qemu-riscv@nongnu.org>; Fri, 26 Apr 2024 12:45:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1714160554; x=1714765354; darn=nongnu.org;
+ d=linaro.org; s=google; t=1714160718; x=1714765518; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PmvNrspQ4cegMOJikcLgrcfGHx45XMIAa70gCbSZauU=;
- b=YdHFy1AV9K4NTYD+68FsT4yFL1hAFieTQIFgCpNqwaKIrUwQmnNzMwByKsNvR7rsSD
- /JNhA4TJOKP6DOw28Xyqf1rY6wgdVzwi0Cq4g0kBzW1gpC5ewaBygSwol5XW3k146Z3c
- akKqFxiU1esv8ZaUr+E9ysTiCvQ4Lhn6ZXmwUGNyceG5NPgoW4xa44T5/3q9d9pPE+am
- PlsNN7acIFVKepYyPgNCUvZk/Eo4D0zAhXUlRw7gqyhKV0x5QBVoDTMp82bJQLvq14By
- xQoCP1se+o7K/Z08b6lLnnQragxmwjD+3jDArQMjnQkPQ5WtCr0+kl+/t1DHZ0Xr8Zud
- NjUw==
+ bh=IXDAwLQsv2ww5TZLeRIWY1HIfD/SnMqDRj2dwvAIHgY=;
+ b=zu0zykhTN8O9lp5Zsdgu4VwjvzDUEvIzrQ5Kw5EnVtKG19iLemz1txafl1QoTp/M3C
+ VxwCD7EI1r5c4FNXgnIMLJR/z3rqA1wPn3AZVMTH/08a/+0ZVyGSYQgB1h9Nosixboc0
+ KkAatfjLLiEtJAbcJaDgzpxQO5PPvox7RyN+k7BXHJElGaiwHbhBWQhMbKvqzZydTW+p
+ 62aqij0dmkcDCkWBVOYxMsGyIBJfKeaH8HIIbAkkoaucioghN3YIW35Pslxr6BfPWXQC
+ o5hY4OvOxvcbdd5HsanEkAKqkXMrACORfmcpHTacNouIxijrOHLBsby7p1xGYPqv7Yel
+ 4mkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714160554; x=1714765354;
+ d=1e100.net; s=20230601; t=1714160718; x=1714765518;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=PmvNrspQ4cegMOJikcLgrcfGHx45XMIAa70gCbSZauU=;
- b=P62mze2l08l+b2wcT0n+MtKLYJsSkEELv+OtgsSWcp6gB1IqGMi2E+ChTFBJJfdC1a
- EV9oJ1nZYI8yYSC5dR3+AR3bw+JXa91FAWLMzczWe8V7fTpfGTONZZqyPGfeP8aVJ/9B
- 3eiaO8o0I6at0CW8yS25R4xAC54nJ6wbd02Isjct/fFlGig95JwTD+VefyKCPitMyKPf
- FSuwevr23tfjA8nIhJ6Zbaycvt5rTSFJXN+moA8nnIG1lTQms8+QANPXl+YB6Nt417BY
- OfsK5QdT1YqgRq4l3taNa3uoF7pfUR6jBsm2l5MczGuYMZIBPyDtw0LBPRDllHEGg5R0
- GP+A==
+ bh=IXDAwLQsv2ww5TZLeRIWY1HIfD/SnMqDRj2dwvAIHgY=;
+ b=G24yXk+InjDIRmUsm93baovJ/QzsKG+YuTXJ5Oy5VpoLqs3BjxEeqDRi5lE71yHFDV
+ AN42wnvxD6NOyOcqc2DDyC+SbXEdfT0nDDRkPCiMMo3o39MBEmhVnxSZ4olv0zA/q36m
+ dVS0ThVlr+Pjai1gdWp4OLcI/ag0E3kBkINRX26Zd+0IRpQLqGnp/kofIeuAk67ZXtA8
+ 0oJYGwEzqtxWzBlaScUIclu8RHhKcC4gi8cNgeFYGIaOWhVkAtyUdhz5Tgzu2Jyd2dFs
+ TDMNpM8/9ftF+r02FGKjMnzIcMe1fQYtftHfSQDDiaqxZlS8zSMFPBpGWDCGfwWpa8Y2
+ lwSg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW/YXvyNtMfJ8rUrtIQDKLB60/uung5s56mBMG7nFOB/EX5FekWm11NFhA5uGy6RKZ59U6LjQrsW8ht7btZRWb4cIwXSGM=
-X-Gm-Message-State: AOJu0YxVIDJEv2DptQDsMAMAw7Eh3KhRMT/nAGmilmcUSXpeHnFmlVUG
- 5ux5gCPUz8lZQtgVOWGKLA0ywCrI5atznw2uMz+kGf0yeOFVAkULOQ26O37kYDk=
-X-Google-Smtp-Source: AGHT+IGPiMfDKc6V8n2xYyHp0jJiqml4tLfGM0tbtW0vpY4D+01ygLRYO25pcBOjrWkj7c+mdaHBMw==
-X-Received: by 2002:a17:906:3593:b0:a58:be1f:9134 with SMTP id
- o19-20020a170906359300b00a58be1f9134mr2374855ejb.30.1714160554023; 
- Fri, 26 Apr 2024 12:42:34 -0700 (PDT)
+ AJvYcCVHLShEkFHijyC4Q7+9S7JMr0w9dYMLJwE7nAVlQ0EDITOO/RPM6jJL5a2pWm0tp0AkbGh4AWql8mfHvC/XTKD8kw+cve0=
+X-Gm-Message-State: AOJu0YwqKbBnPh+g6Ap3AzBbj1iPq1Cq9CJQOmkCLvL1HdSb4a2s87Wz
+ z8JYGwJp/29FnXVKXOlehO7BnAEz8jknSBk+/GRdnK7fIa1J3NuzU1PT2OiKbQ7TM4VdOzRjuz0
+ tzW0=
+X-Google-Smtp-Source: AGHT+IEgJdTI8rt+PyOgpO3hCB5yaM4NBY8HNxEVtviUMKGm932HnqQvCPkqFfiDWe+9Ou9Pw85Csg==
+X-Received: by 2002:a17:907:7244:b0:a58:c4f9:a2f7 with SMTP id
+ ds4-20020a170907724400b00a58c4f9a2f7mr697418ejc.2.1714160717925; 
+ Fri, 26 Apr 2024 12:45:17 -0700 (PDT)
 Received: from m1x-phil.lan (aul93-h02-176-184-11-147.dsl.sta.abo.bbox.fr.
  [176.184.11.147]) by smtp.gmail.com with ESMTPSA id
- m24-20020a17090607d800b00a524216fe78sm10939590ejc.64.2024.04.26.12.42.32
+ cd19-20020a170906b35300b00a4673706b4dsm10888091ejb.78.2024.04.26.12.45.16
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 26 Apr 2024 12:42:33 -0700 (PDT)
+ Fri, 26 Apr 2024 12:45:17 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  qemu-ppc@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Richard Henderson <richard.henderson@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>, Brian Cain <bcain@quicinc.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
-Subject: [PULL 05/38] accel: Include missing 'exec/cpu_ldst.h' header
-Date: Fri, 26 Apr 2024 21:41:25 +0200
-Message-ID: <20240426194200.43723-6-philmd@linaro.org>
+ Paolo Bonzini <pbonzini@redhat.com>
+Subject: [PULL 33/38] exec: Restrict 'cpu_ldst.h' to TCG accelerator
+Date: Fri, 26 Apr 2024 21:41:53 +0200
+Message-ID: <20240426194200.43723-34-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240426194200.43723-1-philmd@linaro.org>
 References: <20240426194200.43723-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::62e;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x62e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::633;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x633.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -99,67 +99,38 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Theses files call cpu_ldl_code() which is declared
-in "exec/cpu_ldst.h".
+"exec/cpu_ldst.h" is specific to TCG, do not allow its
+inclusion from other accelerators.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Message-Id: <20231211212003.21686-5-philmd@linaro.org>
+Message-Id: <20240418192525.97451-6-philmd@linaro.org>
 ---
- accel/tcg/translator.c        | 1 +
- target/hexagon/translate.c    | 1 +
- target/microblaze/cpu.c       | 1 +
- target/microblaze/translate.c | 1 +
- 4 files changed, 4 insertions(+)
+ include/exec/cpu_ldst.h | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/accel/tcg/translator.c b/accel/tcg/translator.c
-index 9de0bc34c8..6832e55135 100644
---- a/accel/tcg/translator.c
-+++ b/accel/tcg/translator.c
-@@ -12,6 +12,7 @@
- #include "qemu/error-report.h"
- #include "exec/exec-all.h"
- #include "exec/translator.h"
-+#include "exec/cpu_ldst.h"
- #include "exec/plugin-gen.h"
- #include "tcg/tcg-op-common.h"
- #include "internal-target.h"
-diff --git a/target/hexagon/translate.c b/target/hexagon/translate.c
-index f163eefe97..47a870f42d 100644
---- a/target/hexagon/translate.c
-+++ b/target/hexagon/translate.c
-@@ -23,6 +23,7 @@
- #include "exec/helper-gen.h"
- #include "exec/helper-proto.h"
- #include "exec/translation-block.h"
-+#include "exec/cpu_ldst.h"
- #include "exec/log.h"
- #include "internal.h"
- #include "attribs.h"
-diff --git a/target/microblaze/cpu.c b/target/microblaze/cpu.c
-index f8dc3173fc..9eb7374ccd 100644
---- a/target/microblaze/cpu.c
-+++ b/target/microblaze/cpu.c
-@@ -28,6 +28,7 @@
- #include "qemu/module.h"
- #include "hw/qdev-properties.h"
- #include "exec/exec-all.h"
-+#include "exec/cpu_ldst.h"
- #include "exec/gdbstub.h"
- #include "fpu/softfloat-helpers.h"
- #include "tcg/tcg.h"
-diff --git a/target/microblaze/translate.c b/target/microblaze/translate.c
-index fc451befae..6d89c1a175 100644
---- a/target/microblaze/translate.c
-+++ b/target/microblaze/translate.c
-@@ -22,6 +22,7 @@
- #include "cpu.h"
- #include "disas/disas.h"
- #include "exec/exec-all.h"
-+#include "exec/cpu_ldst.h"
- #include "tcg/tcg-op.h"
- #include "exec/helper-proto.h"
- #include "exec/helper-gen.h"
+diff --git a/include/exec/cpu_ldst.h b/include/exec/cpu_ldst.h
+index 5b99666702..f3c2a3ca74 100644
+--- a/include/exec/cpu_ldst.h
++++ b/include/exec/cpu_ldst.h
+@@ -1,5 +1,5 @@
+ /*
+- *  Software MMU support
++ *  Software MMU support (per-target)
+  *
+  * This library is free software; you can redistribute it and/or
+  * modify it under the terms of the GNU Lesser General Public
+@@ -62,6 +62,10 @@
+ #ifndef CPU_LDST_H
+ #define CPU_LDST_H
+ 
++#ifndef CONFIG_TCG
++#error Can only include this header with TCG
++#endif
++
+ #include "exec/memopidx.h"
+ #include "exec/abi_ptr.h"
+ #include "exec/mmu-access-type.h"
 -- 
 2.41.0
 
