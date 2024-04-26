@@ -4,61 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03A43C4345F
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Apr 2024 19:50:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2E93C4345F
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Apr 2024 19:50:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s0RUY-0003xS-9p; Fri, 26 Apr 2024 15:44:19 -0400
+	id 1s0RWg-00044h-L7; Fri, 26 Apr 2024 15:46:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s0RUA-0002XO-8l
- for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:43:56 -0400
-Received: from mail-ed1-x52d.google.com ([2a00:1450:4864:20::52d])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s0RWB-0003le-Jk
+ for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:45:59 -0400
+Received: from mail-ej1-x635.google.com ([2a00:1450:4864:20::635])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s0RU1-0003Eg-T7
- for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:43:53 -0400
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-57225322312so3650747a12.1
- for <qemu-riscv@nongnu.org>; Fri, 26 Apr 2024 12:43:45 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s0RVv-0004pk-3G
+ for qemu-riscv@nongnu.org; Fri, 26 Apr 2024 15:45:58 -0400
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-a557044f2ddso321083266b.2
+ for <qemu-riscv@nongnu.org>; Fri, 26 Apr 2024 12:45:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1714160623; x=1714765423; darn=nongnu.org;
+ d=linaro.org; s=google; t=1714160740; x=1714765540; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7ENBQU0RX+7z0jYkAe6EtdYUSGSuY24I2mpEgO+y4o0=;
- b=qFvyHQittAKmODWxgVXsBe4Ov8PYrWSNK6/GUkdqbRgFvRN0Oy8XDFoPDIalHvP+dw
- mJqP2fpz43U8fyf1+VGmvk02UG7w/zlNFWJVN+yYUs9OGQOjg7wm5KGV5nJs2pE9g8PJ
- 1MKydN8toAgbovLi1Z3fT28QS1UCYLW4CkshqNsc6vDe8KiqD2/pAFKFPbbn3uTZGOGG
- NrI9yZ0ctKmJ7CUQm28dsw0H4jcWw+cYiWAuDjRLQiZ1elXkSTW+K8Mw6yCWqTsjlszI
- 1gq7TAued3ftv5HU97WLfQ1txFOP8uaf1aJUqhT7xGPGwgmYymI6AxqQgCOMhDQbiDHG
- DaGA==
+ bh=rBREpUZQ0r3GUKko+t9VMOEs4AUMGwGQ0XgatsXxsV4=;
+ b=XcmflDGOl8Qt98eajrPFbuXni1rhiWTTaGibRfYCpKbjL+q8DCDvVxKSIDweDvY6gv
+ NTxVdZIMS+WhDt/YGkD5fgLSBjWPO3fnez78At/yFk0vP092Tqr5xon8BgJxu7iWqpBB
+ PDMzn+TOSh3Agl5XuPsc1KgqOHCqOjF9bflWYi9zhHHEJW+o7B2GXpv2V3H6W7qVZ8Fa
+ 7JhQxMsyvPtMGbZRsYRuEDDklsaWbw+ZgQioxQKay1F+FxU17kNd7AvcwogxnsCJf3Q6
+ 9cq+6oVFRTK/b2K2WobBOjhaeqeSYU2JWpPnVhhCzhrqkPfsnL66gubkNAAHdeTh7e6v
+ rhgQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714160623; x=1714765423;
+ d=1e100.net; s=20230601; t=1714160740; x=1714765540;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7ENBQU0RX+7z0jYkAe6EtdYUSGSuY24I2mpEgO+y4o0=;
- b=ig+WroYIMmc8CuDEHCcGUi1f2xyGwZsfsAvfCqA/SCZHdZBERam8Ep497beYU/PKCH
- 05EratuPsbs1tWuDC8nr5N/JUxXpiPEBJK04vD1SIhWdgjfb32SO4DhqaT32sbErTt2s
- TNtsTc0GsDtsytQVGRIyp3vNFJPNEupYAfKC8gnuF+UCn/diGKFCOkjsWKexLOiEWiS6
- CCVMog2dp1i9011TZ+zljeRLLsmGoi8SvxbBJiiwBo9YRfLMfesq85auOaIvFLtAUI48
- Bgdpti9sMwHp9TvNYi01nOxAKpc/301eh0bR7HsCiURJC2KOioup2LlNIbnV4pzp784k
- 9G6w==
+ bh=rBREpUZQ0r3GUKko+t9VMOEs4AUMGwGQ0XgatsXxsV4=;
+ b=QAc+ViaBE5j3BDz4OKrJ59lSsF9GEW0ESR/37VW/ho7CpRs/EkqfPBiOlMbX9Y+333
+ CWqoaRrxmqCwpPXLu+pDFt7xyUEFvLoblQHXr2fIaNsAMPJoJKQNoVdzWoZo0tZIZYm2
+ CJ2cC96yIe7+BooUZlRs+bvERCcDSfRzaGgBaTS3rzVgk0YsMXCc75mHCHN8MIFZKEmg
+ LVSWLGkl98kpUvIMGQShmTayD8uzEuqVKknNcMxCqaSLr6TIyDaqfqjkb/8Zl4BVZdM5
+ RjQxzQ4WpETXjDPXvjvZfih5Ku1PakJ0GzzNlilNNpaVzR/9mK4WN3CEm73ZUee4jHQK
+ xzuA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVDvV2YVREemMgp61qiJF2efZOll/cTL6BdTvPbmCCBLBfmgMKIXwBeQmOsE1fwx3gA9AnKdvgXcA1S+1axFH0Kx6nTo7o=
-X-Gm-Message-State: AOJu0Ywuvx6NNF8q1onLMw97Ti51HJK+3qO+AwJ6scSIwMdfkkmTs821
- 7fr2IGc2JIUFU3FyljdvQsWX694ccXvOGgEEZPbeuMcGH0F4CNfjARpMHLVYELlFx4ZTGsPiy+7
- ertY=
-X-Google-Smtp-Source: AGHT+IFOXyRU0XboRrP8yvE6c/KL1v/K13UfHP9b7aI2p9uUVx6EI3q/HsZ+tUw+MtdSBACFe0SISg==
-X-Received: by 2002:a50:99d6:0:b0:56e:355d:2ece with SMTP id
- n22-20020a5099d6000000b0056e355d2ecemr2481443edb.30.1714160623526; 
- Fri, 26 Apr 2024 12:43:43 -0700 (PDT)
+ AJvYcCUiQyuKHX1PZkSG1c/nejLsJKCr4BqK3Z9xNDwJXP4cVu+8hFtd0JAhNVVihB8sBSDrJXwm9XPQJgQOW4GPCYWc635uy+Y=
+X-Gm-Message-State: AOJu0YxbIxNJ70sYIfHQiBSWjfk5anSbkvee1PGVYwuHHwnLh+FGil6p
+ 4qH+jhVSqFcwApT/B1ymxvy5pjR4oJZF/wmFOJVh9rb1gWTalQj/U9U/+opW36I=
+X-Google-Smtp-Source: AGHT+IHjSw9zdV3vqmgmRnB18I52aARA6bvPfoPPdGqh++TJMtUZutBBWfdUBtaqCGJjnAhvwkQDfQ==
+X-Received: by 2002:a17:906:2854:b0:a58:9a74:5e6d with SMTP id
+ s20-20020a170906285400b00a589a745e6dmr335495ejc.11.1714160740621; 
+ Fri, 26 Apr 2024 12:45:40 -0700 (PDT)
 Received: from m1x-phil.lan (aul93-h02-176-184-11-147.dsl.sta.abo.bbox.fr.
  [176.184.11.147]) by smtp.gmail.com with ESMTPSA id
- ek17-20020a056402371100b0057266474cd2sm289245edb.15.2024.04.26.12.43.42
+ se12-20020a170906ce4c00b00a587271f77dsm5326419ejb.176.2024.04.26.12.45.39
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 26 Apr 2024 12:43:43 -0700 (PDT)
+ Fri, 26 Apr 2024 12:45:40 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
@@ -66,23 +65,23 @@ Cc: qemu-arm@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Richard Henderson <richard.henderson@linaro.org>,
  Paolo Bonzini <pbonzini@redhat.com>
-Subject: [PULL 17/38] accel/tcg: Include missing headers in 'tb-jmp-cache.h'
-Date: Fri, 26 Apr 2024 21:41:37 +0200
-Message-ID: <20240426194200.43723-18-philmd@linaro.org>
+Subject: [PULL 37/38] hw/core: Avoid including the full 'hw/core/cpu.h' in
+ 'tcg-cpu-ops.h'
+Date: Fri, 26 Apr 2024 21:41:57 +0200
+Message-ID: <20240426194200.43723-38-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240426194200.43723-1-philmd@linaro.org>
 References: <20240426194200.43723-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::52d;
- envelope-from=philmd@linaro.org; helo=mail-ed1-x52d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::635;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x635.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -99,38 +98,33 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Due to missing headers, when including "tb-jmp-cache.h" we might get:
-
-  accel/tcg/tb-jmp-cache.h:21:21: error: field ‘rcu’ has incomplete type
-     21 |     struct rcu_head rcu;
-        |                     ^~~
-  accel/tcg/tb-jmp-cache.h:24:9: error: unknown type name ‘vaddr’
-     24 |         vaddr pc;
-        |         ^~~~~
-
-Add the missing "qemu/rcu.h" and "exec/cpu-common.h" headers.
+Only include what is required, avoiding the full
+CPUState API from the huge "hw/core/cpu.h" header.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Acked-by: Richard Henderson <richard.henderson@linaro.org>
-Message-Id: <20240111162442.43755-1-philmd@linaro.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Message-Id: <20240418192525.97451-4-philmd@linaro.org>
 ---
- accel/tcg/tb-jmp-cache.h | 3 +++
- 1 file changed, 3 insertions(+)
+ include/hw/core/tcg-cpu-ops.h | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/accel/tcg/tb-jmp-cache.h b/accel/tcg/tb-jmp-cache.h
-index 4ab8553afc..184bb3e3e2 100644
---- a/accel/tcg/tb-jmp-cache.h
-+++ b/accel/tcg/tb-jmp-cache.h
-@@ -9,6 +9,9 @@
- #ifndef ACCEL_TCG_TB_JMP_CACHE_H
- #define ACCEL_TCG_TB_JMP_CACHE_H
+diff --git a/include/hw/core/tcg-cpu-ops.h b/include/hw/core/tcg-cpu-ops.h
+index dc1f16a977..9387d38748 100644
+--- a/include/hw/core/tcg-cpu-ops.h
++++ b/include/hw/core/tcg-cpu-ops.h
+@@ -10,7 +10,11 @@
+ #ifndef TCG_CPU_OPS_H
+ #define TCG_CPU_OPS_H
  
-+#include "qemu/rcu.h"
-+#include "exec/cpu-common.h"
-+
- #define TB_JMP_CACHE_BITS 12
- #define TB_JMP_CACHE_SIZE (1 << TB_JMP_CACHE_BITS)
+-#include "hw/core/cpu.h"
++#include "exec/breakpoint.h"
++#include "exec/hwaddr.h"
++#include "exec/memattrs.h"
++#include "exec/mmu-access-type.h"
++#include "exec/vaddr.h"
  
+ struct TCGCPUOps {
+     /**
 -- 
 2.41.0
 
