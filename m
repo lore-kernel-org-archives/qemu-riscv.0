@@ -4,32 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1E16C4345F
-	for <qemu-riscv@archiver.kernel.org>; Sat, 27 Apr 2024 06:59:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A685BC4345F
+	for <qemu-riscv@archiver.kernel.org>; Sat, 27 Apr 2024 07:24:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s0c1e-0002Ma-Ji; Sat, 27 Apr 2024 02:59:10 -0400
+	id 1s0cPt-0001ln-6h; Sat, 27 Apr 2024 03:24:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1s0c1c-0002M2-QY; Sat, 27 Apr 2024 02:59:08 -0400
+ id 1s0cPr-0001lI-7Z; Sat, 27 Apr 2024 03:24:11 -0400
 Received: from isrv.corpit.ru ([86.62.121.231])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1s0c1a-0007Uc-5D; Sat, 27 Apr 2024 02:59:08 -0400
+ id 1s0cPp-0005D6-Cp; Sat, 27 Apr 2024 03:24:10 -0400
 Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id 06D4A62666;
- Sat, 27 Apr 2024 09:59:11 +0300 (MSK)
+ by isrv.corpit.ru (Postfix) with ESMTP id 2FCC562680;
+ Sat, 27 Apr 2024 10:24:13 +0300 (MSK)
 Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id E7498C0484;
- Sat, 27 Apr 2024 09:59:01 +0300 (MSK)
-Message-ID: <c174a8cd-4a53-4a28-8688-aa62c7eab45e@tls.msk.ru>
-Date: Sat, 27 Apr 2024 09:59:01 +0300
+ by tsrv.corpit.ru (Postfix) with ESMTP id 18D1EC04F0;
+ Sat, 27 Apr 2024 10:24:04 +0300 (MSK)
+Message-ID: <97934a65-f62f-49e9-820b-07463c3029ed@tls.msk.ru>
+Date: Sat, 27 Apr 2024 10:24:04 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v2 1/1] target/riscv/kvm: fix timebase-frequency when
  using KVM acceleration
+From: Michael Tokarev <mjt@tls.msk.ru>
 To: Andrew Jones <ajones@ventanamicro.com>,
  Yong-Xuan Wang <yongxuan.wang@sifive.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org, qemu-stable <qemu-stable@nongnu.org>
@@ -43,8 +44,8 @@ Cc: greentime.hu@sifive.com, vincent.chen@sifive.com, frank.chang@sifive.com,
 References: <20240314061510.9800-1-yongxuan.wang@sifive.com>
  <e841b1ba-1348-48ae-89b7-bfa14ff8e70c@tls.msk.ru>
  <2C907355-C0F4-4C7F-B37C-8B4371A57B00@ventanamicro.com>
+ <c174a8cd-4a53-4a28-8688-aa62c7eab45e@tls.msk.ru>
 Content-Language: en-US
-From: Michael Tokarev <mjt@tls.msk.ru>
 Autocrypt: addr=mjt@tls.msk.ru; keydata=
  xsBLBETIiwkBCADh3cFB56BQYPjtMZCfK6PSLR8lw8EB20rsrPeJtd91IoNZlnCjSoxd9Th1
  bLUR8YlpRJ2rjc6O1Bc04VghqUOHgS/tYt8vLjcGWixzdhSLJgPDK3QQZPAvBjMbCt1B6euC
@@ -69,9 +70,9 @@ Autocrypt: addr=mjt@tls.msk.ru; keydata=
  6LXtew4GPRrmplUT/Cre9QIUqR4pxYCQaMoOXQQw3Y0csBwoDYUQujn3slbDJRIweHoppBzT
  rM6ZG5ldWQN3n3d71pVuv80guylX8+TSB8Mvkqwb5I36/NAFKl0CbGbTuQli7SmNiTAKilXc
  Y5Uh9PIrmixt0JrmGVRzke6+11mTjVlio/J5dCM=
-In-Reply-To: <2C907355-C0F4-4C7F-B37C-8B4371A57B00@ventanamicro.com>
+In-Reply-To: <c174a8cd-4a53-4a28-8688-aa62c7eab45e@tls.msk.ru>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=86.62.121.231; envelope-from=mjt@tls.msk.ru;
  helo=isrv.corpit.ru
 X-Spam_score_int: -68
@@ -94,51 +95,37 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-27.04.2024 09:23, Andrew Jones wrote:
-> On April 27, 2024 1:44:42 AM GMT+02:00, Michael Tokarev <mjt@tls.msk.ru> wrote:
->> 14.03.2024 09:15, Yong-Xuan Wang:
->>> The timebase-frequency of guest OS should be the same with host
->>> machine. The timebase-frequency value in DTS should be got from
->>> hypervisor when using KVM acceleration.
->>
->> This change ended up in stable-8.2 (v8.2.3).  Interestingly, this thing
->> compiled not even once, or else it would be obvious it fails to compile.
->> Somehow I was too used to CI, forgetting that we don't have riscv *host*
->> in CI (and I don't have one locally either).  So 8.2.3 is broken on
->> riscv64 *host*.
+27.04.2024 09:59, Michael Tokarev wrote:
+> 27.04.2024 09:23, Andrew Jones wrote:
+...
+>> It's possible to cross-compile qemu, so it'd be good to add that to the CI for riscv until we can add native compiling.
 > 
-> It's possible to cross-compile qemu, so it'd be good to add that to the CI for riscv until we can add native compiling.
+> Yes, definitely.  Qemu is already being cross-compiled on all "other"
+> architectures during CI.  But it is also being *run*, not just compiled.
+> And this is what's broken on riscv64 for almost a year now, and this
+> job has been disabled.  Instead, the *run* part of this job needs to
+> be disabled, but *build* part should be kept.
 
-Yes, definitely.  Qemu is already being cross-compiled on all "other"
-architectures during CI.  But it is also being *run*, not just compiled.
-And this is what's broken on riscv64 for almost a year now, and this
-job has been disabled.  Instead, the *run* part of this job needs to
-be disabled, but *build* part should be kept.
+Aha. I was wrong. And I was there before too, for sure, - just forgot
+about it. In order to be cross-compiled, the cross-build environment
+needs to have target -dev libraries, not only the cross-compiler.
+And this is where debian riscv64 port is failing.
 
->> In 8.2, KVM_RISCV_GET_TIMER macro accepts 4 arguments, because it does
->> not have 10f86d1b845087d1 "target/riscv/kvm: change timer regs size to u64".
->>
->> What do you think, should I revert this change for stable-8.2, or pick
->> 10f86d1b845087d1 too, or change this commit (fix timebase-frequency) to
->> provide the missing argument for this macro?
-> 
-> Changing the timer regs to u64 is an rv32 fix, so it's reasonable to also pick it up. I suggest we keep this patch one way or another, though.
+So no, it is not currently possible to cross-compile qemu at least
+on debian without building whole cross-environment with all libraries
+and other necessary stuff.
 
-Okay, so I need help choosing which patches to pick.
+I'll try to use debian riscv64 porterbox to at least verify the new
+set of patches we'll pick here to fix this breakage, at least compiles
+on riscv64 :)
 
-10f86d1b845087d1 isn't sufficient, since it relies on 450bd6618fda3d
-"target/riscv/kvm: change KVM_REG_RISCV_FP_D to u64".  In the same series
-there also was 49c211ffca00fdf7c "target/riscv/kvm: change KVM_REG_RISCV_FP_F
-to u32" - is it also needed?
+> 10f86d1b845087d1 isn't sufficient, since it relies on 450bd6618fda3d
+> "target/riscv/kvm: change KVM_REG_RISCV_FP_D to u64".  In the same series
+> there also was 49c211ffca00fdf7c "target/riscv/kvm: change KVM_REG_RISCV_FP_F
+> to u32" - is it also needed?
 
-Please tell me the set of things I need for stable-8.2 here.  I'd
-love to makes 8.2.4 release really soon, to fix this breakage.
-
-Also, right now I don't know how to even compile-test it.  So meanwhile I'll
-try to fix that and push this change to qemu master (to re-enable riscv64
-CI job but only build part of it).  I don't have riscv hardware handy :)
-
-Thanks,
+49c211ffca00fdf7c is also needed.  So it's 3 so far, still not compile-
+tested.  Anything else?
 
 /mjt
 
