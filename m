@@ -4,79 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 025DDC4345F
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Apr 2024 23:45:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52759C4345F
+	for <qemu-riscv@archiver.kernel.org>; Sat, 27 Apr 2024 06:24:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s0VFV-0007oN-05; Fri, 26 Apr 2024 19:45:01 -0400
+	id 1s0bTd-0001uG-2U; Sat, 27 Apr 2024 02:24:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1s0VFS-0007n6-Bd; Fri, 26 Apr 2024 19:44:58 -0400
-Received: from isrv.corpit.ru ([86.62.121.231])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1s0VFQ-0004eo-6I; Fri, 26 Apr 2024 19:44:58 -0400
-Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id 4ED4F62576;
- Sat, 27 Apr 2024 02:44:51 +0300 (MSK)
-Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id 5C19BC022D;
- Sat, 27 Apr 2024 02:44:42 +0300 (MSK)
-Message-ID: <e841b1ba-1348-48ae-89b7-bfa14ff8e70c@tls.msk.ru>
-Date: Sat, 27 Apr 2024 02:44:42 +0300
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/1] target/riscv/kvm: fix timebase-frequency when
- using KVM acceleration
-To: Yong-Xuan Wang <yongxuan.wang@sifive.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, qemu-stable <qemu-stable@nongnu.org>
-Cc: greentime.hu@sifive.com, vincent.chen@sifive.com, frank.chang@sifive.com, 
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1s0bTU-0001sS-VC
+ for qemu-riscv@nongnu.org; Sat, 27 Apr 2024 02:23:53 -0400
+Received: from mail-ej1-x62a.google.com ([2a00:1450:4864:20::62a])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1s0bTL-0000oj-7p
+ for qemu-riscv@nongnu.org; Sat, 27 Apr 2024 02:23:52 -0400
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-a58e7628aeaso23910266b.2
+ for <qemu-riscv@nongnu.org>; Fri, 26 Apr 2024 23:23:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1714199021; x=1714803821; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:references
+ :in-reply-to:subject:cc:to:from:date:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=PU1WiGTy9nuAHYMbOcDD7fsR2eqaB67hJZeJnbAnMfA=;
+ b=iBq8MGyyqN6n+d6b8zS4E8Q43wH6bfnNlSCaGjGlnxNoo5Gxg9lx4YKw1rDw9h5CxQ
+ WyO5A0LopkEdjF5Vf/hZeArg0C2RzWR/N+NZ1LR+IL4xsvjqnzkrq7RUZTHzRc5GWzuj
+ aznOhiAVC+3iwgGsV9HgmU/GLpfPVISOulN+xTIcfAjjsmKXQ0Dce+dQD7Hai2KLg0j5
+ AP6g8TVHKYjqCYkLaxQ5rYPD7yBaVolITHE5Dp/WnAHytrZgLEC1f/fz9tsMBN7Wv0wj
+ ofpAeTDUcQbau2SO+5V8ce5WzFglIXn04pNv87W3kY+7+CFnlWxoElnm7witI2wUOdn7
+ AHQg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1714199021; x=1714803821;
+ h=content-transfer-encoding:mime-version:message-id:references
+ :in-reply-to:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=PU1WiGTy9nuAHYMbOcDD7fsR2eqaB67hJZeJnbAnMfA=;
+ b=tKuGqiuDn9v6LdtuEcSYgXnAHWEhEobhog2LUH8Wgm1215CsRMmYIdWOELVvJrUT6w
+ zIR+11/tWtIAho1Q+h2EahgGKDDimP85DPlIaFc5GPqi05lqZNQg1CNuAAcnQz9ZHNkm
+ qD3J3/sE0Pa6NveWQbkuqgRtW5mMieo/egS4785QR/e3iSWe98QuZb+0jNYTjohM8LWH
+ TrboYkpFKYY644SdN6AmIV0wUetVF5DoRzBETlZXaniCST74teUa4F3tE4y8/C68qudK
+ cgwlREs2qVhdN1PzYIcdHYq5yt7rez0a/EkLoSeIrLLNUekBVXXUwhe5NIuQ6fM9y4Du
+ oAtw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWwIQYrenWXhR1cxyqX3gehSzpa3mUc67R4Kq7exT6cCDd7kBbWG2T3YiF60SxSDHrDn3kaqp0B2lhbWqTPimkoLS29Uto=
+X-Gm-Message-State: AOJu0YypLUJcDwiMLmuONm4q2dVjP2BHfLZkMF/vQd0ak7QvAwF2YsED
+ vjnvws60QWP9UlMJ0mxa1hfVEokaO1FaYXVMGt5V7YkNl3DaM3X4kzheT6RcLKWvNSuQEgtaFiz
+ Nluk=
+X-Google-Smtp-Source: AGHT+IHAwqaqBvaNm2GnaEQWa4JmeoiwGNfHfPKwEwy1dMsPOLaPuIKYIwUqnXu209L6L7QwN2FRgA==
+X-Received: by 2002:a17:906:7c52:b0:a55:201f:75a with SMTP id
+ g18-20020a1709067c5200b00a55201f075amr2683296ejp.33.1714199021075; 
+ Fri, 26 Apr 2024 23:23:41 -0700 (PDT)
+Received: from [127.0.0.1] (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
+ by smtp.gmail.com with ESMTPSA id
+ a14-20020a1709065f8e00b00a559bbe8a00sm8548052eju.100.2024.04.26.23.23.40
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 26 Apr 2024 23:23:40 -0700 (PDT)
+Date: Sat, 27 Apr 2024 08:23:40 +0200
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Michael Tokarev <mjt@tls.msk.ru>, Yong-Xuan Wang <yongxuan.wang@sifive.com>,
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ qemu-stable <qemu-stable@nongnu.org>
+CC: greentime.hu@sifive.com, vincent.chen@sifive.com, frank.chang@sifive.com, 
  jim.shu@sifive.com, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Andrew Jones <ajones@ventanamicro.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+ =?ISO-8859-1?Q?Philippe_Mathieu-Daud=E9?= <philmd@linaro.org>
+Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v2_1/1=5D_target/riscv/kvm=3A_fix_ti?=
+ =?US-ASCII?Q?mebase-frequency_when_using_KVM_acceleration?=
+In-Reply-To: <e841b1ba-1348-48ae-89b7-bfa14ff8e70c@tls.msk.ru>
 References: <20240314061510.9800-1-yongxuan.wang@sifive.com>
-Content-Language: en-US
-From: Michael Tokarev <mjt@tls.msk.ru>
-Autocrypt: addr=mjt@tls.msk.ru; keydata=
- xsBLBETIiwkBCADh3cFB56BQYPjtMZCfK6PSLR8lw8EB20rsrPeJtd91IoNZlnCjSoxd9Th1
- bLUR8YlpRJ2rjc6O1Bc04VghqUOHgS/tYt8vLjcGWixzdhSLJgPDK3QQZPAvBjMbCt1B6euC
- WuD87Pv5Udlpnzf4aMwxkgfTusx+ynae/o+T5r7tXD+isccbC3SiGhmAPxFyY3zGcFk4+Rxc
- 0tP8YY2FWE/baHu+lBDTUN79efWAkHhex1XzVZsV7ZD16rzDbXFK5m6ApvGJWlr5YDEEydTF
- WwmvwBfr4OINVxzEG/ujNiG4fpMf2NsnFGyB9aSbFjXZevB4qWkduYYW+xpK1EryszHtAAYp
- zSBNaWNoYWVsIFRva2FyZXYgPG1qdEB0bHMubXNrLnJ1PsLAlgQTAQoAQAIbAwYLCQgHAwIE
- FQIIAwQWAgMBAh4BAheAAhkBFiEEbuGV0Yhuj/uBDUMkRXzgoIBEZcUFAmBbcjwFCS5e6jMA
- CgkQRXzgoIBEZcUTIQgA1hPsOF82pXxbcJXBMc4zB9OQu4AlnZvERoGyw7I2222QzaN3RFuj
- Fia//mapXzpIQNF08l/AA6cx+CKPeGnXwyZfF9fLa4RfifmdNKME8C00XlqnoJDZBGzq8yMy
- LAKDxl9OQWFcDwDxV+irg5U3fbtNVhvV0kLbS2TyQ0aU5w60ERS2NcyDWplOo7AOzZWChcA4
- UFf78oVdZdCW8YDtU0uQFhA9moNnrePy1HSFqduxnlFHEI+fDj/TiOm2ci48b8SBBJOIJFjl
- SBgH8+SfT9ZqkzhN9vh3YJ49831NwASVm0x1rDHcIwWD32VFZViZ3NjehogRNH9br0PSUYOC
- 3s7ATQRX2BjLAQgAnak3m0imYOkv2tO/olULFa686tlwuvl5kL0NWCdGQeXv2uMxy36szcrh
- K1uYhpiQv4r2qNd8BJtYlnYIK16N8GBdkplaDIHcBMbU4t+6bQzEIJIaWoq1hzakmHHngE2a
- pNMnUf/01GFvCRPlv3imkujE/5ILbagjtdyJaHF0wGOSlTnNT4W8j+zPJ/XK0I5EVQwtbmoc
- GY62LKxxz2pID6sPZV4zQVY4JdUQaFvOz1emnBxakkt0cq3Qnnqso1tjiy7vyH9CAwPR/48W
- fpK6dew4Fk+STYtBeixOTfSUS8qRS/wfpUeNa5RnEdTtFQ9IcjpQ/nPrvJJsu9FqwlpjMwAR
- AQABwsBlBBgBCAAPBQJX2BjLAhsMBQkSzAMAAAoJEEV84KCARGXFUKcH/jqKETECkbyPktdP
- cWVqw2ZIsmGxMkIdnZTbPwhORseGXMHadQODayhU9GWfCDdSPkWDWzMamD+qStfl9MhlVT60
- HTbo6wu1W/ogUS70qQPTY9IfsvAj6f8TlSlK0eLMa3s2UxL2oe5FkNs2CnVeRlr4Yqvp/ZQV
- 6LXtew4GPRrmplUT/Cre9QIUqR4pxYCQaMoOXQQw3Y0csBwoDYUQujn3slbDJRIweHoppBzT
- rM6ZG5ldWQN3n3d71pVuv80guylX8+TSB8Mvkqwb5I36/NAFKl0CbGbTuQli7SmNiTAKilXc
- Y5Uh9PIrmixt0JrmGVRzke6+11mTjVlio/J5dCM=
-In-Reply-To: <20240314061510.9800-1-yongxuan.wang@sifive.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=86.62.121.231; envelope-from=mjt@tls.msk.ru;
- helo=isrv.corpit.ru
-X-Spam_score_int: -68
-X-Spam_score: -6.9
-X-Spam_bar: ------
-X-Spam_report: (-6.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_HI=-5,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ <e841b1ba-1348-48ae-89b7-bfa14ff8e70c@tls.msk.ru>
+Message-ID: <2C907355-C0F4-4C7F-B37C-8B4371A57B00@ventanamicro.com>
+MIME-Version: 1.0
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::62a;
+ envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x62a.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -92,92 +107,105 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-14.03.2024 09:15, Yong-Xuan Wang:
-> The timebase-frequency of guest OS should be the same with host
-> machine. The timebase-frequency value in DTS should be got from
-> hypervisor when using KVM acceleration.
+On April 27, 2024 1:44:42 AM GMT+02:00, Michael Tokarev <mjt@tls=2Emsk=2Eru=
+> wrote:
+>14=2E03=2E2024 09:15, Yong-Xuan Wang:
+>> The timebase-frequency of guest OS should be the same with host
+>> machine=2E The timebase-frequency value in DTS should be got from
+>> hypervisor when using KVM acceleration=2E
+>
+>This change ended up in stable-8=2E2 (v8=2E2=2E3)=2E  Interestingly, this=
+ thing
+>compiled not even once, or else it would be obvious it fails to compile=
+=2E
+>Somehow I was too used to CI, forgetting that we don't have riscv *host*
+>in CI (and I don't have one locally either)=2E  So 8=2E2=2E3 is broken on
+>riscv64 *host*=2E
 
-This change ended up in stable-8.2 (v8.2.3).  Interestingly, this thing
-compiled not even once, or else it would be obvious it fails to compile.
-Somehow I was too used to CI, forgetting that we don't have riscv *host*
-in CI (and I don't have one locally either).  So 8.2.3 is broken on
-riscv64 *host*.
+It's possible to cross-compile qemu, so it'd be good to add that to the CI=
+ for riscv until we can add native compiling=2E
 
-In 8.2, KVM_RISCV_GET_TIMER macro accepts 4 arguments, because it does
-not have 10f86d1b845087d1 "target/riscv/kvm: change timer regs size to u64".
+>
+>In 8=2E2, KVM_RISCV_GET_TIMER macro accepts 4 arguments, because it does
+>not have 10f86d1b845087d1 "target/riscv/kvm: change timer regs size to u6=
+4"=2E
+>
+>What do you think, should I revert this change for stable-8=2E2, or pick
+>10f86d1b845087d1 too, or change this commit (fix timebase-frequency) to
+>provide the missing argument for this macro?
 
-What do you think, should I revert this change for stable-8.2, or pick
-10f86d1b845087d1 too, or change this commit (fix timebase-frequency) to
-provide the missing argument for this macro?
+Changing the timer regs to u64 is an rv32 fix, so it's reasonable to also =
+pick it up=2E I suggest we keep this patch one way or another, though=2E
 
 Thanks,
+drew
 
-/mjt
-
-
-> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
-> Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
-> 
-> ---
-> Changelog
-> v2:
-> - update the function definition
-> - restructure if-else statement
-> ---
->   hw/riscv/virt.c              | 2 ++
->   target/riscv/kvm/kvm-cpu.c   | 9 +++++++++
->   target/riscv/kvm/kvm_riscv.h | 1 +
->   3 files changed, 12 insertions(+)
-> 
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index a094af97c32a..533b17799581 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -711,6 +711,8 @@ static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *memmap,
->   
->       qemu_fdt_add_subnode(ms->fdt, "/cpus");
->       qemu_fdt_setprop_cell(ms->fdt, "/cpus", "timebase-frequency",
-> +                          kvm_enabled() ?
-> +                          kvm_riscv_get_timebase_frequency(first_cpu) :
->                             RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ);
->       qemu_fdt_setprop_cell(ms->fdt, "/cpus", "#size-cells", 0x0);
->       qemu_fdt_setprop_cell(ms->fdt, "/cpus", "#address-cells", 0x1);
-> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-> index c7afdb1e81b7..bbb115eaa867 100644
-> --- a/target/riscv/kvm/kvm-cpu.c
-> +++ b/target/riscv/kvm/kvm-cpu.c
-> @@ -739,6 +739,15 @@ static void kvm_riscv_put_regs_timer(CPUState *cs)
->       env->kvm_timer_dirty = false;
->   }
->   
-> +uint64_t kvm_riscv_get_timebase_frequency(CPUState *cs)
-> +{
-> +    uint64_t reg;
-> +
-> +    KVM_RISCV_GET_TIMER(cs, frequency, reg);
-> +
-> +    return reg;
-> +}
-> +
->   static int kvm_riscv_get_regs_vector(CPUState *cs)
->   {
->       RISCVCPU *cpu = RISCV_CPU(cs);
-> diff --git a/target/riscv/kvm/kvm_riscv.h b/target/riscv/kvm/kvm_riscv.h
-> index 4bd98fddc776..58518988681d 100644
-> --- a/target/riscv/kvm/kvm_riscv.h
-> +++ b/target/riscv/kvm/kvm_riscv.h
-> @@ -28,5 +28,6 @@ void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
->   void riscv_kvm_aplic_request(void *opaque, int irq, int level);
->   int kvm_riscv_sync_mpstate_to_kvm(RISCVCPU *cpu, int state);
->   void riscv_kvm_cpu_finalize_features(RISCVCPU *cpu, Error **errp);
-> +uint64_t kvm_riscv_get_timebase_frequency(CPUState *cs);
->   
->   #endif
-
--- 
-GPG Key transition (from rsa2048 to rsa4096) since 2024-04-24.
-New key: rsa4096/61AD3D98ECDF2C8E  9D8B E14E 3F2A 9DD7 9199  28F1 61AD 3D98 ECDF 2C8E
-Old key: rsa2048/457CE0A0804465C5  6EE1 95D1 886E 8FFB 810D  4324 457C E0A0 8044 65C5
-Transition statement: http://www.corpit.ru/mjt/gpg-transition-2024.txt
+>
+>Thanks,
+>
+>/mjt
+>
+>
+>> Reviewed-by: Andrew Jones <ajones@ventanamicro=2Ecom>
+>> Signed-off-by: Yong-Xuan Wang <yongxuan=2Ewang@sifive=2Ecom>
+>>=20
+>> ---
+>> Changelog
+>> v2:
+>> - update the function definition
+>> - restructure if-else statement
+>> ---
+>>   hw/riscv/virt=2Ec              | 2 ++
+>>   target/riscv/kvm/kvm-cpu=2Ec   | 9 +++++++++
+>>   target/riscv/kvm/kvm_riscv=2Eh | 1 +
+>>   3 files changed, 12 insertions(+)
+>>=20
+>> diff --git a/hw/riscv/virt=2Ec b/hw/riscv/virt=2Ec
+>> index a094af97c32a=2E=2E533b17799581 100644
+>> --- a/hw/riscv/virt=2Ec
+>> +++ b/hw/riscv/virt=2Ec
+>> @@ -711,6 +711,8 @@ static void create_fdt_sockets(RISCVVirtState *s, c=
+onst MemMapEntry *memmap,
+>>         qemu_fdt_add_subnode(ms->fdt, "/cpus");
+>>       qemu_fdt_setprop_cell(ms->fdt, "/cpus", "timebase-frequency",
+>> +                          kvm_enabled() ?
+>> +                          kvm_riscv_get_timebase_frequency(first_cpu) =
+:
+>>                             RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ);
+>>       qemu_fdt_setprop_cell(ms->fdt, "/cpus", "#size-cells", 0x0);
+>>       qemu_fdt_setprop_cell(ms->fdt, "/cpus", "#address-cells", 0x1);
+>> diff --git a/target/riscv/kvm/kvm-cpu=2Ec b/target/riscv/kvm/kvm-cpu=2E=
+c
+>> index c7afdb1e81b7=2E=2Ebbb115eaa867 100644
+>> --- a/target/riscv/kvm/kvm-cpu=2Ec
+>> +++ b/target/riscv/kvm/kvm-cpu=2Ec
+>> @@ -739,6 +739,15 @@ static void kvm_riscv_put_regs_timer(CPUState *cs)
+>>       env->kvm_timer_dirty =3D false;
+>>   }
+>>   +uint64_t kvm_riscv_get_timebase_frequency(CPUState *cs)
+>> +{
+>> +    uint64_t reg;
+>> +
+>> +    KVM_RISCV_GET_TIMER(cs, frequency, reg);
+>> +
+>> +    return reg;
+>> +}
+>> +
+>>   static int kvm_riscv_get_regs_vector(CPUState *cs)
+>>   {
+>>       RISCVCPU *cpu =3D RISCV_CPU(cs);
+>> diff --git a/target/riscv/kvm/kvm_riscv=2Eh b/target/riscv/kvm/kvm_risc=
+v=2Eh
+>> index 4bd98fddc776=2E=2E58518988681d 100644
+>> --- a/target/riscv/kvm/kvm_riscv=2Eh
+>> +++ b/target/riscv/kvm/kvm_riscv=2Eh
+>> @@ -28,5 +28,6 @@ void kvm_riscv_aia_create(MachineState *machine, uint=
+64_t group_shift,
+>>   void riscv_kvm_aplic_request(void *opaque, int irq, int level);
+>>   int kvm_riscv_sync_mpstate_to_kvm(RISCVCPU *cpu, int state);
+>>   void riscv_kvm_cpu_finalize_features(RISCVCPU *cpu, Error **errp);
+>> +uint64_t kvm_riscv_get_timebase_frequency(CPUState *cs);
+>>     #endif
+>
 
 
