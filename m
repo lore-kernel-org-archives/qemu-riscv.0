@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8519C4345F
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Apr 2024 19:29:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9544FC04FFE
+	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Apr 2024 19:29:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s1Wfq-0001Oa-0o; Mon, 29 Apr 2024 15:28:26 -0400
+	id 1s1Wfn-0001Nn-2F; Mon, 29 Apr 2024 15:28:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1s1Wfk-0001Mx-5l
- for qemu-riscv@nongnu.org; Mon, 29 Apr 2024 15:28:20 -0400
-Received: from mail-oo1-xc30.google.com ([2607:f8b0:4864:20::c30])
+ id 1s1Wfh-0001MM-W6
+ for qemu-riscv@nongnu.org; Mon, 29 Apr 2024 15:28:18 -0400
+Received: from mail-oo1-xc33.google.com ([2607:f8b0:4864:20::c33])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1s1Wff-0007dK-0l
- for qemu-riscv@nongnu.org; Mon, 29 Apr 2024 15:28:19 -0400
-Received: by mail-oo1-xc30.google.com with SMTP id
- 006d021491bc7-5aa1bf6cb40so3477699eaf.1
- for <qemu-riscv@nongnu.org>; Mon, 29 Apr 2024 12:28:12 -0700 (PDT)
+ id 1s1Wfe-0007b9-QX
+ for qemu-riscv@nongnu.org; Mon, 29 Apr 2024 15:28:17 -0400
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-5aa400b917dso3326224eaf.0
+ for <qemu-riscv@nongnu.org>; Mon, 29 Apr 2024 12:28:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1714418891; x=1715023691;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1714418889; x=1715023689;
  darn=nongnu.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=bScCJjfgJNg2TLkGQk/MhVa25I0Chcy3m3vUR3If4T8=;
- b=OIMMZfLGo1X+2Ld1yeLmgmQ+vSW6DOxun9h4Rl1X/N/WSRijyLSIFXX7aUQCe32ohN
- qdwZgUOvPO/l/VUOqMNRs3dPqKwXrCU5rEQtf9A8ZBC6aE5VXEE/quv37Ssy0Iw2Ujru
- HmRQSUSR+FvWPc/v6Dv5G8dnUBaSzmYaEBYGji4QZjXbYONjELEGK6Jyo5JbgHjJyS9o
- i5947DZKdDvVEhbmolEmynmIOLgk+pNLF422MP4tb9sbWjZm2md+pTaZwULXF5wI55Qt
- trCNDXE670sBCBVAx9hzhWOxPZTBwt6OkHl3F+ZfAOF6YBBHapFm5g5yWBOiFp4xM98m
- JNJA==
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=WyEiUPA8bIj4Xi/U98owUDeYtfdrkRsuHYwmaXoEJcM=;
+ b=bah/PPb4weLJ+0p+iN2Q2bim8fM5r15Q16Z8cqr5i2cChTGz/XnYKNFnLewE3ZRmBg
+ NxHkGDcPgD6K3lpxZbOVqxk3z+i5TI3XC55phpgN1nKFNf4+Oy9BPsVqJOP815N9c85g
+ 7XWywEJBciUCaggDlbD4Wdyx6ZO7EgVRqEkJ2pYByt+0282+rx5Orlx4Y+Jj3IEcUHJi
+ gDXepbpJeyWbPJth2xGzTXk+weFlE4Dwu27hKcDEMw7x1XTxv9u9JJsSmIomjDvAuw9c
+ WxTEdUfDSsHCBQ9SmiVLekgQ5G2fpNjg3nrCHMqo84C1cOWdTTbnm3ajGSaWEkWNnXXW
+ HOYA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714418891; x=1715023691;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=bScCJjfgJNg2TLkGQk/MhVa25I0Chcy3m3vUR3If4T8=;
- b=s/igYg9CE37XNjSCEHyxyM9YS8XxS+bAK0CktxnsQzZaTLmbPyafoOwAM33oinB80S
- 4STacWH6CR9qVxuuI9Oj/BmmemjaRB7RAXXlYcFdNhV0aNRE85ix9jIn33HLCp18BGyH
- YdasDh2jWmoukfmyQjToZVW8jXrlKl3pGqFBR0/FdIcvABDBgaKGo5buWd/YYEG5njV3
- 3VRis1Kb7goFY+WtNAm6kDlRTn/3MfsNiKQHV57uFibzuKfyMU3NWAfH1J4InXAWdKFD
- tYU3rnqGpzP+tEPVNDAlLPvDbZuQBqyzlZF0TrfWT54cHaK7xqaNMks/raTs2pFqCWKM
- RH5A==
-X-Gm-Message-State: AOJu0YxIJzi+vVW+Wa1ZRvaUwfa/5iKMDM0k9i2RaftWFP5Cx7VSMAMV
- yntc/W67h8puBk4HKkJkCCjpEQywTYLHn7Z67CRel0EN9XmrxNHN9tYl01NmUfYN3qg8U8/man0
- W
-X-Google-Smtp-Source: AGHT+IG7rH0d+G6x7Ex0y/0ob66PpHkXDEgyjSgd8UrJO7F0d1kVuCE/nZWqZAzbbbOlfQeNR/+Jkg==
-X-Received: by 2002:a05:6358:3913:b0:18b:9051:3cc with SMTP id
- y19-20020a056358391300b0018b905103ccmr11583644rwd.17.1714418891354; 
- Mon, 29 Apr 2024 12:28:11 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1714418889; x=1715023689;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=WyEiUPA8bIj4Xi/U98owUDeYtfdrkRsuHYwmaXoEJcM=;
+ b=tTcEWjFMg6XkNNILwmDXykq6tP59arxAToAfeEWe+4BZLHnV1M2nHZRqlN47jFDa6Z
+ fP8quhR+M4t/O65QuwKwT+IsVsvuNNIYjbLb7YQWZ0Avtr15S9pvjCUyOVGH42wjvfrg
+ n886bgVj1N+zT1XFPly8hOiLAVT0Fch2jnxH6c2MjeTPEmBoFBkW9fasy/2hpJlA9TF3
+ bwsFZRT63LcB1zarigg+kqByLWVkz16mQGkIwpp7/5qNOpsRCFppoQF7iL92D40jF2ix
+ xKNlpUZ+Lj6IW4FfES+qvfKI3nRtXLiO8TTSTm3UTp+Vge5nECHzNf6i+y7Z6W5YhjSG
+ 6kPA==
+X-Gm-Message-State: AOJu0YzzrgnvCERXH50MUclEdv4qgvpYO8TFjPwpw9C2SwbcnUSCgZNu
+ vBUsJkB1L0yDKgJwNkTNShaDiPotyFctJew7UHsK+QcQgYB1cSzXJoCfBfzEOIJXi0IwV+uqhWt
+ E
+X-Google-Smtp-Source: AGHT+IEwL329nmuvT5Z5h3eFPR8fIp+Mth6t9qV2NlPHiUN83PxIW0kE0o+NyrDiU3gYTXSMAclYUg==
+X-Received: by 2002:a05:6358:1911:b0:186:c06f:435c with SMTP id
+ w17-20020a056358191100b00186c06f435cmr17847762rwm.24.1714418888977; 
+ Mon, 29 Apr 2024 12:28:08 -0700 (PDT)
 Received: from atishp.ba.rivosinc.com ([64.71.180.162])
  by smtp.gmail.com with ESMTPSA id
- i13-20020a63e44d000000b005d8b89bbf20sm19293887pgk.63.2024.04.29.12.28.10
+ i13-20020a63e44d000000b005d8b89bbf20sm19293887pgk.63.2024.04.29.12.28.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Apr 2024 12:28:11 -0700 (PDT)
+ Mon, 29 Apr 2024 12:28:08 -0700 (PDT)
 From: Atish Patra <atishp@rivosinc.com>
-Date: Mon, 29 Apr 2024 12:28:05 -0700
-Subject: [PATCH 2/3] target/riscv: Enforce WARL behavior for
- scounteren/hcounteren
+Subject: [PATCH 0/3] Assorted fixes for PMU
+Date: Mon, 29 Apr 2024 12:28:03 -0700
+Message-Id: <20240429-countinhibit_fix-v1-0-802ec1e99133@rivosinc.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240429-countinhibit_fix-v1-2-802ec1e99133@rivosinc.com>
-References: <20240429-countinhibit_fix-v1-0-802ec1e99133@rivosinc.com>
-In-Reply-To: <20240429-countinhibit_fix-v1-0-802ec1e99133@rivosinc.com>
+X-B4-Tracking: v=1; b=H4sIAMP0L2YC/x2MWwqAIBAArxL7naBmD7pKRJStuT8aWhGId0/6n
+ IGZBBEDYYSxShDwoUjeFRB1Bdqu7kBGe2GQXCqu5MC0v91FztJG12LoZbpbhRbCqKZvoWRnwKL
+ /5TTn/AFmQrAiYgAAAA==
 To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: Atish Patra <atishp@rivosinc.com>, palmer@dabbelt.com, 
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, bin.meng@windriver.com, 
  dbarboza@ventanamicro.com, alistair.francis@wdc.com
 X-Mailer: b4 0.13-dev-f0463
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c30;
- envelope-from=atishp@rivosinc.com; helo=mail-oo1-xc30.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c33;
+ envelope-from=atishp@rivosinc.com; helo=mail-oo1-xc33.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,47 +97,27 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-scounteren/hcountern are also WARL registers similar to mcountern.
-Only set the bits for the available counters during the write to
-preserve the WARL behavior.
+This series contains few miscallenous fixes related to hpmcounters
+and related code. The first patch fixes an issue with cycle/instret
+counters overcouting while the remaining two are more for specification
+compliance.
 
 Signed-off-by: Atish Patra <atishp@rivosinc.com>
 ---
- target/riscv/csr.c | 12 ++++++++++--
- 1 file changed, 10 insertions(+), 2 deletions(-)
+Atish Patra (3):
+      target/riscv: Save counter values during countinhibit update
+      target/riscv: Enforce WARL behavior for scounteren/hcounteren
+      target/riscv: Fix the predicate functions for mhpmeventhX CSRs
 
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 68ca31aff47d..a01911541d67 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -2843,7 +2843,11 @@ static RISCVException read_scounteren(CPURISCVState *env, int csrno,
- static RISCVException write_scounteren(CPURISCVState *env, int csrno,
-                                        target_ulong val)
- {
--    env->scounteren = val;
-+    RISCVCPU *cpu = env_archcpu(env);
-+
-+    /* WARL register - disable unavailable counters */
-+    env->scounteren = val & (cpu->pmu_avail_ctrs | COUNTEREN_CY | COUNTEREN_TM |
-+                             COUNTEREN_IR);
-     return RISCV_EXCP_NONE;
- }
- 
-@@ -3475,7 +3479,11 @@ static RISCVException read_hcounteren(CPURISCVState *env, int csrno,
- static RISCVException write_hcounteren(CPURISCVState *env, int csrno,
-                                        target_ulong val)
- {
--    env->hcounteren = val;
-+    RISCVCPU *cpu = env_archcpu(env);
-+
-+    /* WARL register - disable unavailable counters */
-+    env->hcounteren = val & (cpu->pmu_avail_ctrs | COUNTEREN_CY | COUNTEREN_TM |
-+                             COUNTEREN_IR);
-     return RISCV_EXCP_NONE;
- }
- 
-
--- 
-2.34.1
+ target/riscv/cpu.h     |   1 -
+ target/riscv/csr.c     | 111 ++++++++++++++++++++++++++++++-------------------
+ target/riscv/machine.c |   1 -
+ 3 files changed, 68 insertions(+), 45 deletions(-)
+---
+base-commit: 1642f979a71a5667a05070be2df82f48bd43ad7a
+change-id: 20240428-countinhibit_fix-c6a1c11f4375
+--
+Regards,
+Atish patra
 
 
