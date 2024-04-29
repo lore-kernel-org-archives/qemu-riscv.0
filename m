@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C73AC4345F
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Apr 2024 04:09:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C430C4345F
+	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Apr 2024 05:42:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s1IJu-0006gl-Qb; Mon, 29 Apr 2024 00:08:50 -0400
+	id 1s1Jm6-0002k8-VV; Mon, 29 Apr 2024 01:42:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1s1IJp-0006gC-5k; Mon, 29 Apr 2024 00:08:45 -0400
-Received: from mail-vk1-xa36.google.com ([2607:f8b0:4864:20::a36])
+ id 1s1Jll-0002je-Un; Mon, 29 Apr 2024 01:41:45 -0400
+Received: from mail-vs1-xe36.google.com ([2607:f8b0:4864:20::e36])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1s1IJn-0002DK-GL; Mon, 29 Apr 2024 00:08:44 -0400
-Received: by mail-vk1-xa36.google.com with SMTP id
- 71dfb90a1353d-4dab344ace5so1082708e0c.3; 
- Sun, 28 Apr 2024 21:08:40 -0700 (PDT)
+ id 1s1Jli-00024A-V7; Mon, 29 Apr 2024 01:41:41 -0400
+Received: by mail-vs1-xe36.google.com with SMTP id
+ ada2fe7eead31-47c26f67c7eso578815137.0; 
+ Sun, 28 Apr 2024 22:41:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1714363720; x=1714968520; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1714369295; x=1714974095; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=iuxX0DfE2ioM8GqORqaUXBJyHlAExjOT5uU/LlQXZqo=;
- b=V1r9GLX0tAxYGPq+voA/73oNi04Z3gAwsft+vSmFnUYmnN7jk/pizNyrpRwKbyrUOP
- 8OWO660SIGXsgAtbCBkHMoQOUn96GDiGtHbjBnk7p2gR6QRri1XE3GXWPPPIKk9XvnOy
- WXFaW1E1okjTtBgAjOdxyWE+EQN/At1FzKhE25/rmwp7TYyCI0J3Pt6HgAJxvYMadd1n
- 7AX+nteUoPm6oIw0iOtJAgchV7wLISgdUcS5JwBhaCY3GSRKfYS1CHtgz9aSR4vMIYFM
- GOPhfobjUR3ofMCkHpBye9x7xsc8UhPiDxKGzfSbdYYOLY6P4BiPd0ofbLIgN1Barjn/
- ZF9g==
+ bh=eBi0qg/ZQSQ4ux2ec1U/dDOHRnzUZkeozfe9rDUFOEE=;
+ b=Ye4sJ9I0Wr0zpBlKpzhQEA9XNXWPcPu3f/ATrNc+deRDsBEXaomBOMD2Y3LoyunWF7
+ 0BelT71ZGVKujUNIzdtvR3yn1z3arub5Ron/gSisCjiLI0UrmlBLh06ljE7E9RIto/gl
+ o47HoSM9f5RHdBQ9Cxvm5xFati38zXJkyCfJqSRWEEqPdXRsuwN+lQWZt7kWLKiRXmOH
+ E0MVs9KIsSrQYxE+DrsNxRiujn2wDijU2f+ubiWfI6PFSh8z8ByIplKnpH7hyjBlGzjl
+ X0ubXVfR7ZKIeXg9H653idJn9+e7RcniGcrrBOYjT9/1vl7P6l/Dv1Ry7QJYBj9e0rhP
+ NonA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714363720; x=1714968520;
+ d=1e100.net; s=20230601; t=1714369295; x=1714974095;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=iuxX0DfE2ioM8GqORqaUXBJyHlAExjOT5uU/LlQXZqo=;
- b=JALl83Ww6cT4Zw/LuB96e1mrjrkq3h8aFnNnG0yPKODmqGTproSNFBA8j3TswKyudg
- gXH5mB/HQeW3ELH7us9AC/y/mL1UczbnFxihJ2w5936oEOItxP0uDqbP2lRVkaqa2Tur
- oQCXGHW8zqeFDUeCKJ5uuVKC1B6lsANN77/qDQ4iyIg9CtndJzUVWK6BXLgek46C4omF
- TKDQxgRdarvNHOX3pFxM5vpDeYevCkhLgELykotchBaYS85PFPJS2o0FWMFu+UjEwkDB
- INirwNzdEhaSNXM7adEPwQZ0cs4mi30Gap6VxXkA29wDEcpSODAdzBSQORU1HGteWfV4
- 0LOw==
+ bh=eBi0qg/ZQSQ4ux2ec1U/dDOHRnzUZkeozfe9rDUFOEE=;
+ b=YZPoivw4tf5+2dC8yiGmRYWER9FrDRAiGskZvvNMjgpbRc2QlBXG1H10DmbZtdVpij
+ /CdEKcAVPVyOJqC0+cpn4dwMlo3RZvRWk/arXdWpwvkwDRYjaGp1iFTLKMpjjTu+UQwI
+ 7x7nlNHcAuY92yihzg0PxG4+iDUJqw44niw1toE3GDO063icS0+CzJ5ofUadY8dZgNhv
+ kykhWmTi/rH8OVv1S9eR0My3L1exYlpFbwWcoUpN8TceOXWg0VQZCo6eIo8y0QlrsvIJ
+ lChxruay3iftDu29hU172ybdTbmRpbP6Tzai4aAet/aLr4URMcHyrgZyQM5pt7sq8Z0v
+ m5Ow==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUS2CwnSTZa1lEPTNEiSmcDeFLDn626UT+ShzNUWtLiu6R4S7y0Ue25NeU9K4SqaMGc4gZc4IvTDR4yHDcDxuNSZ/nx9yM=
-X-Gm-Message-State: AOJu0YxNhr0FNIwQhYHez/Ao5qnr730uU327iulI6YxOU4aIGHogAcLb
- 0eH8RxVnYJw6dRQWugZjkgfT8uL30HwgAxvBM8nLcmsLzHYGrtd7Fn6/0goDCCT10x/4NW8A7Jl
- G7dfPlM2xl6bD8xesn2zMq66PDAQ=
-X-Google-Smtp-Source: AGHT+IF0OMgdKc99hV+4eW+MwVi+AOZ1dieLgXa+RnLtt13e9/CXjbU4iFKQ+PsreHsyro8Oz4Fd5IN/jjiV83yT+TQ=
-X-Received: by 2002:a05:6122:2a0f:b0:4d3:1ef2:c97d with SMTP id
- fw15-20020a0561222a0f00b004d31ef2c97dmr9129665vkb.2.1714363720106; Sun, 28
- Apr 2024 21:08:40 -0700 (PDT)
+ AJvYcCUo89ZVQz4e/JWiAaEmGX+SM5uV3aahd7Mrt3MfslO+kkq0CMfWCa3MZI54C6ntuFdLJpggyCcn52J9Wj7trfa/sUtJCOA=
+X-Gm-Message-State: AOJu0YzRnjmUbpl8CvKgabzEdMDIicVDM4hkPFp32AW0aCmUnMPduEYj
+ kUbgP9ufsbpudiQvZZus+EJTz1lpL3szb5MbhqTrYEPX9d2do6CoDilNYd3ibTm8Tm9zd1wEzxe
+ qm/Ul3ZsL+c1BU3Oj/cqgqNi1nmFRzUY1
+X-Google-Smtp-Source: AGHT+IGrLNPa1rsrflBDROtR5dLnQZLnbMdBcLHudgegumaq4srwxjCkkUYZcjFqP2FD8fXgWT4zsli5/HXbjuqlCx0=
+X-Received: by 2002:a05:6122:411f:b0:4d8:7a5e:392f with SMTP id
+ ce31-20020a056122411f00b004d87a5e392fmr9970672vkb.12.1714369294387; Sun, 28
+ Apr 2024 22:41:34 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240314185957.36940-1-hchauhan@ventanamicro.com>
- <20240314185957.36940-3-hchauhan@ventanamicro.com>
-In-Reply-To: <20240314185957.36940-3-hchauhan@ventanamicro.com>
+ <20240314185957.36940-4-hchauhan@ventanamicro.com>
+In-Reply-To: <20240314185957.36940-4-hchauhan@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 29 Apr 2024 14:08:14 +1000
-Message-ID: <CAKmqyKPLh7cOz3orJ0BBihNvR=d7s2X2M+ykY0vrwYKHAKFzMg@mail.gmail.com>
-Subject: Re: [PATCH v7 2/4] target/riscv: Enable mcontrol6 triggers only when
- sdtrig is selected
+Date: Mon, 29 Apr 2024 15:41:07 +1000
+Message-ID: <CAKmqyKO67qjXhxRM_j6DP+uu7SzXPACGbCZaFQmUVJ7gv1tC0w@mail.gmail.com>
+Subject: Re: [PATCH v7 3/4] target/riscv: Expose sdtrig ISA extension
 To: Himanshu Chauhan <hchauhan@ventanamicro.com>
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, ajones@ventanamicro.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a36;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa36.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e36;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe36.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -92,145 +91,50 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Mar 15, 2024 at 5:01=E2=80=AFAM Himanshu Chauhan
+On Fri, Mar 15, 2024 at 5:02=E2=80=AFAM Himanshu Chauhan
 <hchauhan@ventanamicro.com> wrote:
 >
-> The mcontrol6 triggers are not defined in debug specification v0.13
-> These triggers are defined in sdtrig ISA extension.
+> This patch adds "sdtrig" in the ISA string when sdtrig extension is enabl=
+ed.
+> The sdtrig extension may or may not be implemented in a system. Therefore=
+, the
+>            -cpu rv64,sdtrig=3D<true/false>
+> option can be used to dynamically turn sdtrig extension on or off.
 >
-> This patch:
->    * Adds ext_sdtrig capability which is used to select mcontrol6 trigger=
-s
->    * Keeps the debug property. All triggers that are defined in v0.13 are
->      exposed.
-
-Thanks for this!
-
+> By default, the sdtrig extension is disabled and debug property enabled a=
+s usual.
 >
 > Signed-off-by: Himanshu Chauhan <hchauhan@ventanamicro.com>
-> ---
->  target/riscv/cpu.c     |  5 +++++
->  target/riscv/cpu_cfg.h |  1 +
->  target/riscv/debug.c   | 30 +++++++++++++++++++++++++-----
->  3 files changed, 31 insertions(+), 5 deletions(-)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index c160b9216b..ab631500ac 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -1008,6 +1008,11 @@ static void riscv_cpu_reset_hold(Object *obj)
->      set_default_nan_mode(1, &env->fp_status);
->
->  #ifndef CONFIG_USER_ONLY
-> +    if (!cpu->cfg.debug && cpu->cfg.ext_sdtrig) {
-> +        warn_report("Enabling 'debug' since 'sdtrig' is enabled.");
 
-I don't think we need the warning. It isn't a problem for the user
-
-Otherwise
-
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
-> +        cpu->cfg.debug =3D true;
-> +    }
-> +
->      if (cpu->cfg.debug) {
->          riscv_trigger_reset_hold(env);
->      }
-> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-> index 2040b90da0..0c57e1acd4 100644
-> --- a/target/riscv/cpu_cfg.h
-> +++ b/target/riscv/cpu_cfg.h
-> @@ -114,6 +114,7 @@ struct RISCVCPUConfig {
->      bool ext_zvfbfwma;
->      bool ext_zvfh;
->      bool ext_zvfhmin;
-> +    bool ext_sdtrig;
->      bool ext_smaia;
->      bool ext_ssaia;
->      bool ext_sscofpmf;
-> diff --git a/target/riscv/debug.c b/target/riscv/debug.c
-> index 5f14b39b06..c40e727e12 100644
-> --- a/target/riscv/debug.c
-> +++ b/target/riscv/debug.c
-> @@ -100,13 +100,16 @@ static trigger_action_t get_trigger_action(CPURISCV=
-State *env,
->      target_ulong tdata1 =3D env->tdata1[trigger_index];
->      int trigger_type =3D get_trigger_type(env, trigger_index);
->      trigger_action_t action =3D DBG_ACTION_NONE;
-> +    const RISCVCPUConfig *cfg =3D riscv_cpu_cfg(env);
+> ---
+>  target/riscv/cpu.c | 2 ++
+>  1 file changed, 2 insertions(+)
 >
->      switch (trigger_type) {
->      case TRIGGER_TYPE_AD_MATCH:
->          action =3D (tdata1 & TYPE2_ACTION) >> 12;
->          break;
->      case TRIGGER_TYPE_AD_MATCH6:
-> -        action =3D (tdata1 & TYPE6_ACTION) >> 12;
-> +        if (cfg->ext_sdtrig) {
-> +            action =3D (tdata1 & TYPE6_ACTION) >> 12;
-> +        }
->          break;
->      case TRIGGER_TYPE_INST_CNT:
->      case TRIGGER_TYPE_INT:
-> @@ -727,7 +730,12 @@ void tdata_csr_write(CPURISCVState *env, int tdata_i=
-ndex, target_ulong val)
->          type2_reg_write(env, env->trigger_cur, tdata_index, val);
->          break;
->      case TRIGGER_TYPE_AD_MATCH6:
-> -        type6_reg_write(env, env->trigger_cur, tdata_index, val);
-> +        if (riscv_cpu_cfg(env)->ext_sdtrig) {
-> +            type6_reg_write(env, env->trigger_cur, tdata_index, val);
-> +        } else {
-> +            qemu_log_mask(LOG_UNIMP, "trigger type: %d is not supported\=
-n",
-> +                          trigger_type);
-> +        }
->          break;
->      case TRIGGER_TYPE_INST_CNT:
->          itrigger_reg_write(env, env->trigger_cur, tdata_index, val);
-> @@ -750,9 +758,13 @@ void tdata_csr_write(CPURISCVState *env, int tdata_i=
-ndex, target_ulong val)
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index ab631500ac..4231f36c1b 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -175,6 +175,7 @@ const RISCVIsaExtData isa_edata_arr[] =3D {
+>      ISA_EXT_DATA_ENTRY(zvkt, PRIV_VERSION_1_12_0, ext_zvkt),
+>      ISA_EXT_DATA_ENTRY(zhinx, PRIV_VERSION_1_12_0, ext_zhinx),
+>      ISA_EXT_DATA_ENTRY(zhinxmin, PRIV_VERSION_1_12_0, ext_zhinxmin),
+> +    ISA_EXT_DATA_ENTRY(sdtrig, PRIV_VERSION_1_12_0, ext_sdtrig),
+>      ISA_EXT_DATA_ENTRY(smaia, PRIV_VERSION_1_12_0, ext_smaia),
+>      ISA_EXT_DATA_ENTRY(smepmp, PRIV_VERSION_1_12_0, ext_smepmp),
+>      ISA_EXT_DATA_ENTRY(smstateen, PRIV_VERSION_1_12_0, ext_smstateen),
+> @@ -1485,6 +1486,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[]=
+ =3D {
+>      MULTI_EXT_CFG_BOOL("zvfhmin", ext_zvfhmin, false),
+>      MULTI_EXT_CFG_BOOL("sstc", ext_sstc, true),
 >
->  target_ulong tinfo_csr_read(CPURISCVState *env)
->  {
-> -    /* assume all triggers support the same types of triggers */
-> -    return BIT(TRIGGER_TYPE_AD_MATCH) |
-> -           BIT(TRIGGER_TYPE_AD_MATCH6);
-> +    target_ulong ts =3D BIT(TRIGGER_TYPE_AD_MATCH);
-> +
-> +    if (riscv_cpu_cfg(env)->ext_sdtrig) {
-> +        ts |=3D BIT(TRIGGER_TYPE_AD_MATCH6);
-> +    }
-> +
-> +    return ts;
->  }
->
->  void riscv_cpu_debug_excp_handler(CPUState *cs)
-> @@ -803,6 +815,10 @@ bool riscv_cpu_debug_check_breakpoint(CPUState *cs)
->                  }
->                  break;
->              case TRIGGER_TYPE_AD_MATCH6:
-> +                if (!cpu->cfg.ext_sdtrig) {
-> +                    break;
-> +                }
-> +
->                  ctrl =3D env->tdata1[i];
->                  pc =3D env->tdata2[i];
->
-> @@ -869,6 +885,10 @@ bool riscv_cpu_debug_check_watchpoint(CPUState *cs, =
-CPUWatchpoint *wp)
->              }
->              break;
->          case TRIGGER_TYPE_AD_MATCH6:
-> +            if (!cpu->cfg.ext_sdtrig) {
-> +                break;
-> +            }
-> +
->              ctrl =3D env->tdata1[i];
->              addr =3D env->tdata2[i];
->              flags =3D 0;
+> +    MULTI_EXT_CFG_BOOL("sdtrig", ext_sdtrig, false),
+>      MULTI_EXT_CFG_BOOL("smaia", ext_smaia, false),
+>      MULTI_EXT_CFG_BOOL("smepmp", ext_smepmp, false),
+>      MULTI_EXT_CFG_BOOL("smstateen", ext_smstateen, false),
 > --
 > 2.34.1
 >
