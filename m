@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72B0AC4345F
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Apr 2024 02:47:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63ED3C4345F
+	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Apr 2024 02:53:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s1H2m-0005mG-W2; Sun, 28 Apr 2024 22:47:05 -0400
+	id 1s1H8X-0000Qw-2T; Sun, 28 Apr 2024 22:53:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1s1H2l-0005m3-Lk; Sun, 28 Apr 2024 22:47:03 -0400
-Received: from mail-ua1-x92b.google.com ([2607:f8b0:4864:20::92b])
+ id 1s1H8W-0000QX-5F; Sun, 28 Apr 2024 22:53:00 -0400
+Received: from mail-ua1-x935.google.com ([2607:f8b0:4864:20::935])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1s1H2h-00064u-CP; Sun, 28 Apr 2024 22:47:02 -0400
-Received: by mail-ua1-x92b.google.com with SMTP id
- a1e0cc1a2514c-7eb7f34f36dso1977937241.1; 
- Sun, 28 Apr 2024 19:46:58 -0700 (PDT)
+ id 1s1H8U-0006g2-Nu; Sun, 28 Apr 2024 22:52:59 -0400
+Received: by mail-ua1-x935.google.com with SMTP id
+ a1e0cc1a2514c-7f04901d456so575961241.0; 
+ Sun, 28 Apr 2024 19:52:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1714358817; x=1714963617; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1714359177; x=1714963977; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=EiRI/5tgmJJ+4M7kHgex6t2sUf3vRniZ+ouPkn5CWjg=;
- b=QgJyOmANtBreQTiPwBSqDZtqRV1/BekwVolv6VQ/NAtLF3F8u8stVaS7NJWrQj5RiK
- kcH0txUzn7GV93AQiocYNpKIHXWKrwYBg2nkk/JBudWFZY+oudjIVX5eQr/Owkz0mInj
- dDm8mmrL7Y0AJdAdPDiIc4ueAZekenfCywcuOUn5bYFP0eXkG/mEjvcjgocQGj/fkzeF
- ZEeFuTGDETzVGa+PBrRHV3WP34QzrilR3hEhO+Y29M9jiCasL6tBwtScB/xNd4pCi6xW
- D2smlAzgccd17f096Qxfr8JwkPFbvdSxHpy80CnKUGzy99Rwr8JAw0h0EVpwSsq71yQR
- 6xIA==
+ bh=RWLhC2I3eB516k7TFIaN0g9mrOyGwGsAoC+dvPA7Yic=;
+ b=lPCSWekM9mj6qNwM8RyDOXgcxwFFiJ3L+DyeVZrtDOPb3T0rIPl8jzUEpcBTaikz5T
+ cfXvzyjDYnR/vztpVSLd21SZTFa6SI5shza4d6iVdOx9kA5yuWQHdAwP+/2ij9lnD6dz
+ 5JAAQApr/HuBqTOxm6En+KZPhsyUuQXuNQdueU4a5PmuWQUGbtXxcuk+EgudJUNzjKwE
+ r4pzxAJQErCT7OwiGbqJIL5Rn0fNTqdiDpjqZ6RyotHRqPgc2oJjEaF8TiZavXHwGgoP
+ +pWvvuyxJmqpqkq0/gqayySgfpw1TYVTYUnA8djh3sMiPBc7itvf8pzqtFC6ynRmBz2q
+ l64A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714358817; x=1714963617;
+ d=1e100.net; s=20230601; t=1714359177; x=1714963977;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=EiRI/5tgmJJ+4M7kHgex6t2sUf3vRniZ+ouPkn5CWjg=;
- b=t3vLR+EiojjoKKKfS8nDEO8tlwB3eaye0njoyXUUqyr9UuTxf+I8khK0LBYq4jx2Hb
- /lvdtABFAZMApW+zwNszmO+aSVD32eer2DgA+BcXQToY1AsrishUuiE37CBr4XfdbGQs
- 7GAYqcq7dEsBdifsQfG4Q5nNb60JSW9o4ELn3HHdpoQSdAOhHMR+72NzQnZdmn+DYiHv
- RRw8CsDvEq8nxE+Bs616irWJxEaa+mbahtdYJOIKWlehkern7wocc8XH4srCjI71yay2
- u4DitYQTkeq6e2zkrUr8+4VqRR/XPkQaxqRenyt1eGrwQ53Otp9EVQ19Y1uN+eqE6ma9
- jKIg==
+ bh=RWLhC2I3eB516k7TFIaN0g9mrOyGwGsAoC+dvPA7Yic=;
+ b=qq31FOg6lguYZiYPihixAt9tnItYyPdpz1R5COMVoANfP1X8nklBab87xQLz8XJZPE
+ TanP+aIwk9vO0lH/6yciYGrXBAwQC1w95OtGyUgJJNq02fP48yWdhYdPzzgacOTOO7EA
+ JSvqv4lyfiygrZKSMIFAqNHVDuJTfCEgG8uVJpqKjNo+bNGnPTYv1lo/t/lOgJBxdyMV
+ MhhRcrVEYw9UCrWRS+g5rMCGeTEKF6FoRn1OVYMrZTBlTTUrmPMvuICxYdNusBS8b8EQ
+ Mqo88tLhGURQf1MYnD2bpKQXoNYzjO87AsBWB2hgLFYoK/UKjg98zjmG3qiSTfTPaifN
+ AV3Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWAfCDVw06WYfBG9vb2gV/9359Zlqi04Eqj7tcf6NofTja7R6DeMRe2gTRuvZPn6QTKdYpgiWRM3KUQCDf9sZrzuDYDz05XOFo4Baq+ghRL8Vbkf+ObN4UPKSU2bA==
-X-Gm-Message-State: AOJu0YzFPkgjdze29FlumBBtfKz2ZJeXu+cmUgprgUSHeZbXQnVoDefz
- z1uR3nPpDYjK0eLSi95q412vMNU1hqEL3j9Aw9HNDqNDtbIs15d4E99NlV8Cg8cUrmpEPQAlMNH
- lAavs++tn7G0Osrg1OKbze6gNrZaipFln
-X-Google-Smtp-Source: AGHT+IEQ+3KTSn0uqOCKXXDNub20gPDnGEmDqrvg3047z7ejOf5m2jb7B47tQwRn/dJek9ytpUPunAZWcunAi6mtsIA=
-X-Received: by 2002:a05:6122:a22:b0:4d3:35ac:3553 with SMTP id
- 34-20020a0561220a2200b004d335ac3553mr8677188vkn.10.1714358817573; Sun, 28 Apr
- 2024 19:46:57 -0700 (PDT)
+ AJvYcCWsoeX5SGcxs9qlvudCESlslMlha7vESYCRmao9+npvWWhfIMPmOpgrDwmIl3GJYvXRDhKWRq7SCZWzPg+biJ6PQ66bk5vFjzTPjA+tMJtoFurrTu356ewwB7PLMg==
+X-Gm-Message-State: AOJu0YwhnjYBU/TYfID6vItCqtJMPsCAqitMCv9vJgfzSQNRYJ2kzbFp
+ mdXFeR4E6y0FE/8ZRQl+1Loq6DTHFYlYHEZlZrDapyE0kV0UKq3AbGKlwVAi2ay5jbz7SOIp9PA
+ nokkDTS45x5K/4sS0xWrhVNkunwACn6m/
+X-Google-Smtp-Source: AGHT+IFVSJjYVdy+tPZYU5VHaxAjTCUSqIYtjY3YbT/6cdG66kvJcdwiKIJ78cswJ6yn9tRjeBVVIz16EEkkuqXEynU=
+X-Received: by 2002:a05:6122:8d1:b0:4d3:3f2b:dc63 with SMTP id
+ 17-20020a05612208d100b004d33f2bdc63mr6935207vkg.5.1714359177397; Sun, 28 Apr
+ 2024 19:52:57 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240422135840.1959967-1-cleger@rivosinc.com>
 In-Reply-To: <20240422135840.1959967-1-cleger@rivosinc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 29 Apr 2024 12:46:31 +1000
-Message-ID: <CAKmqyKNtCiYxJr1fONpaE9xW=E2itaZ9u2nM2aZRRT-OqV_U1Q@mail.gmail.com>
+Date: Mon, 29 Apr 2024 12:52:31 +1000
+Message-ID: <CAKmqyKNOusH57DGjrGuWE1qm1exaZH9i8L3dHosrNsgzCkLgpA@mail.gmail.com>
 Subject: Re: [PATCH] target/riscv: change RISCV_EXCP_SEMIHOST exception number
  to 63
 To: =?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@rivosinc.com>
@@ -71,8 +71,8 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92b;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::935;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x935.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -108,7 +108,9 @@ vosinc.com> wrote:
 >
 > Signed-off-by: Cl=C3=A9ment L=C3=A9ger <cleger@rivosinc.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
