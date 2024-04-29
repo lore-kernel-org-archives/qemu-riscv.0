@@ -4,88 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9394C4345F
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Apr 2024 07:38:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0184BC19F53
+	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Apr 2024 07:58:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s1Law-0007gB-9H; Mon, 29 Apr 2024 03:38:38 -0400
+	id 1s1LuJ-0000A7-No; Mon, 29 Apr 2024 03:58:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1s1Laq-0007fQ-2D
- for qemu-riscv@nongnu.org; Mon, 29 Apr 2024 03:38:32 -0400
-Received: from mail-pg1-x536.google.com ([2607:f8b0:4864:20::536])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1s1Lao-0008Ko-6c
- for qemu-riscv@nongnu.org; Mon, 29 Apr 2024 03:38:31 -0400
-Received: by mail-pg1-x536.google.com with SMTP id
- 41be03b00d2f7-60c49bdbcd3so1303081a12.0
- for <qemu-riscv@nongnu.org>; Mon, 29 Apr 2024 00:38:28 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <eric.huang@linux.alibaba.com>)
+ id 1s1Lu7-000088-Qj; Mon, 29 Apr 2024 03:58:29 -0400
+Received: from out30-124.freemail.mail.aliyun.com ([115.124.30.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <eric.huang@linux.alibaba.com>)
+ id 1s1Lu1-0003x6-43; Mon, 29 Apr 2024 03:58:24 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=vrull.eu; s=google; t=1714376307; x=1714981107; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TAXb+/s4aJtPkMUqgr5DUCkeodsEuGGthA+2aas1dow=;
- b=FK7WBaVNilvQ1Ohe7RY8Xsn9qG/xBpm4j0AGEZIEqAiAnv6vAamcX3kBnJoEuxeQwO
- C8KBDNFkA6mo5gKY30Uzq7+qqObsv+QpQvjjz1cGN2fONK/6GcZQRZhuvhrg9iKE+DKR
- V6EnC3lrZCKdM4MnEmJ6Om3pYQmMPuPXBzbLaJU+mMMMs4jf7tcmrvrUpsePOl+52S+c
- ZmeUtZ+HOSENsFcwUZObP2lytDsbe7mBNjC1pMH3oBqAad2KyIDgEsu4i54aG0LuUJkw
- vh7YJv9ZkdN6w5VAaf22zRc69gvJdi/Bs8bYTfc9UHqRHpRRARhiYpqYbz9te0sd1snK
- 6msw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714376307; x=1714981107;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=TAXb+/s4aJtPkMUqgr5DUCkeodsEuGGthA+2aas1dow=;
- b=nY0IqGvIh2oqjj8Ocvwoy/MKaxFIN4vcjnoHBHWFiDbWhf7LkzLEn7sxOk6DZeQbCm
- 6BJIfIESQtS0rAXRwXsuXOiMJ3kyMdcecGBlZWhLthY57q5BpsJ6IDHnPld38pcsWznu
- yHEO+b4le364K8aZnaIY7gQggQ7TjTr5gX+Snh3iYYrfNE/nI77eo2SYieQLy+dMC8dM
- NQAwvF/sg4QQCfIjKJlpM+46+uIX123SWtr9FONfEQ4bRFU2bFiicVHLblRgG6gdUSPG
- Sd0Bb75Z76YkmNtdrZB0Yt/vDukUKEuWUVtJung0wQdgv3DXzJO2BAHnD3+fNZKLOY8Y
- pJLQ==
-X-Gm-Message-State: AOJu0Yxes/atygwEMwhAbtZTkbsht7VkaL2gDbwuhWg7v4ixmEI5XSfm
- yAhKev6b8IVUd8dTCsXiv//QsS4cmaDFURb2kwNBMUe5JJWeEi5RdG+5vazSQFg6z/esIbPzFjb
- L6ikrLOX+G1re3oBBIYUmlbX1hQVbNsAnuwj5wg==
-X-Google-Smtp-Source: AGHT+IFI5zJJTu1xMF32CQ7ZMKjrzQhzHFktuzjTVI8Lks7AlmUPZ4LofWkbr0qF0kDs7cFBbalsN4L6Ohu7rywvUQY=
-X-Received: by 2002:a05:6a21:8889:b0:1a7:79b2:ff1b with SMTP id
- tb9-20020a056a21888900b001a779b2ff1bmr6438343pzc.27.1714376307487; Mon, 29
- Apr 2024 00:38:27 -0700 (PDT)
+ d=linux.alibaba.com; s=default;
+ t=1714377487; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
+ bh=Xr4CT/JJOrRMQTQ4CUpXKgOjqdpcKi4ABUX4eRScyXE=;
+ b=JH1DbndWjrK5z4gnn8zFD9jwrRCvbdUZpvnT6BAZUCibVwpTZTjdCCV1fLEse+nDQuoKl/umCtuykVxWwgSVq1Buqkqlaifmo2XKVLKWkkD1NXpE3RFJL3RXidC18RsLR0PaQd+ImA2+858gwEdY7onI4nNymPUPjv46M+kWOb4=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R101e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037067112;
+ MF=eric.huang@linux.alibaba.com; NM=1; PH=DS; RN=11; SR=0;
+ TI=SMTPD_---0W5TTMML_1714377485; 
+Received: from 30.21.185.170(mailfrom:eric.huang@linux.alibaba.com
+ fp:SMTPD_---0W5TTMML_1714377485) by smtp.aliyun-inc.com;
+ Mon, 29 Apr 2024 15:58:06 +0800
+Message-ID: <c9fb4c6e-9eae-4302-82cf-b02eacce6d9d@linux.alibaba.com>
+Date: Mon, 29 Apr 2024 15:58:04 +0800
 MIME-Version: 1.0
-References: <20240422065208.1953562-1-christoph.muellner@vrull.eu>
- <CAKmqyKNM-WWtFsUf0vVDi94YD+mMM2AYHL_sT-PdHHeQc289-Q@mail.gmail.com>
-In-Reply-To: <CAKmqyKNM-WWtFsUf0vVDi94YD+mMM2AYHL_sT-PdHHeQc289-Q@mail.gmail.com>
-From: =?UTF-8?Q?Christoph_M=C3=BCllner?= <christoph.muellner@vrull.eu>
-Date: Mon, 29 Apr 2024 09:38:16 +0200
-Message-ID: <CAEg0e7g5R0+Li_TU1inE0r=WeQTv85Oh8rtOn7TOepbBPGd__w@mail.gmail.com>
-Subject: Re: [PATCH v4] riscv: thead: Add th.sxstatus CSR emulation
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4] target/riscv: Implement dynamic establishment of
+ custom decoder
 To: Alistair Francis <alistair23@gmail.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Cooper Qu <cooper.qu@linux.alibaba.com>, 
- Zhiwei Liu <zhiwei_liu@linux.alibaba.com>,
- Huang Tao <eric.huang@linux.alibaba.com>, 
- Conor Dooley <conor@kernel.org>, Andrew Jones <ajones@ventanamicro.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Vivian Wang <uwu@dram.page>, 
- Qingfang Deng <dqfext@gmail.com>, Alexandre Ghiti <alex@ghiti.fr>, 
- LIU Zhiwei <zhiwe_liu@linux.alibaba.com>, Weiwei Li <liwei1518@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::536;
- envelope-from=christoph.muellner@vrull.eu; helo=mail-pg1-x536.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ zhiwei_liu@linux.alibaba.com, dbarboza@ventanamicro.com,
+ liwei1518@gmail.com, bin.meng@windriver.com, alistair.francis@wdc.com,
+ palmer@dabbelt.com, Christoph Muellner <christoph.muellner@vrull.eu>,
+ Richard Henderson <richard.henderson@linaro.org>
+References: <20240314092158.65866-1-eric.huang@linux.alibaba.com>
+ <CAKmqyKP+=Q4oup1mpWskykfgE3HZRJpaVX_JTk=0=jU_TkgsUQ@mail.gmail.com>
+From: Huang Tao <eric.huang@linux.alibaba.com>
+In-Reply-To: <CAKmqyKP+=Q4oup1mpWskykfgE3HZRJpaVX_JTk=0=jU_TkgsUQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=115.124.30.124;
+ envelope-from=eric.huang@linux.alibaba.com;
+ helo=out30-124.freemail.mail.aliyun.com
+X-Spam_score_int: -174
+X-Spam_score: -17.5
+X-Spam_bar: -----------------
+X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,181 +74,205 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Apr 29, 2024 at 5:29=E2=80=AFAM Alistair Francis <alistair23@gmail.=
-com> wrote:
->
-> On Mon, Apr 22, 2024 at 4:53=E2=80=AFPM Christoph M=C3=BCllner
-> <christoph.muellner@vrull.eu> wrote:
-> >
-> > The th.sxstatus CSR can be used to identify available custom extension
-> > on T-Head CPUs. The CSR is documented here:
-> >   https://github.com/T-head-Semi/thead-extension-spec/blob/master/xthea=
-dsxstatus.adoc
-> >
-> > An important property of this patch is, that the th.sxstatus MAEE field
-> > is not set (indicating that XTheadMae is not available).
-> > XTheadMae is a memory attribute extension (similar to Svpbmt) which is
-> > implemented in many T-Head CPUs (C906, C910, etc.) and utilizes bits
-> > in PTEs that are marked as reserved. QEMU maintainers prefer to not
-> > implement XTheadMae, so we need give kernels a mechanism to identify
-> > if XTheadMae is available in a system or not. And this patch introduces
-> > this mechanism in QEMU in a way that's compatible with real HW
-> > (i.e., probing the th.sxstatus.MAEE bit).
-> >
-> > Further context can be found on the list:
-> > https://lists.gnu.org/archive/html/qemu-devel/2024-02/msg00775.html
-> >
-> > Reviewed-by: LIU Zhiwei <zhiwe_liu@linux.alibaba.com>
-> > Signed-off-by: Christoph M=C3=BCllner <christoph.muellner@vrull.eu>
-> > ---
-> >  target/riscv/cpu.c       |  1 +
-> >  target/riscv/cpu.h       |  3 ++
-> >  target/riscv/meson.build |  1 +
-> >  target/riscv/th_csr.c    | 77 ++++++++++++++++++++++++++++++++++++++++
-> >  4 files changed, 82 insertions(+)
-> >  create mode 100644 target/riscv/th_csr.c
-> >
-> > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> > index 36e3e5fdaf..b82ba95ae6 100644
-> > --- a/target/riscv/cpu.c
-> > +++ b/target/riscv/cpu.c
-> > @@ -545,6 +545,7 @@ static void rv64_thead_c906_cpu_init(Object *obj)
-> >      cpu->cfg.mvendorid =3D THEAD_VENDOR_ID;
-> >  #ifndef CONFIG_USER_ONLY
-> >      set_satp_mode_max_supported(cpu, VM_1_10_SV39);
-> > +    th_register_custom_csrs(cpu);
-> >  #endif
-> >
-> >      /* inherited from parent obj via riscv_cpu_init() */
-> > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> > index 3b1a02b944..c9f8f06751 100644
-> > --- a/target/riscv/cpu.h
-> > +++ b/target/riscv/cpu.h
-> > @@ -824,4 +824,7 @@ void riscv_cpu_register_gdb_regs_for_features(CPUSt=
-ate *cs);
-> >  uint8_t satp_mode_max_from_map(uint32_t map);
-> >  const char *satp_mode_str(uint8_t satp_mode, bool is_32_bit);
-> >
-> > +/* Implemented in th_csr.c */
-> > +void th_register_custom_csrs(RISCVCPU *cpu);
-> > +
-> >  #endif /* RISCV_CPU_H */
-> > diff --git a/target/riscv/meson.build b/target/riscv/meson.build
-> > index a5e0734e7f..a4bd61e52a 100644
-> > --- a/target/riscv/meson.build
-> > +++ b/target/riscv/meson.build
-> > @@ -33,6 +33,7 @@ riscv_system_ss.add(files(
-> >    'monitor.c',
-> >    'machine.c',
-> >    'pmu.c',
-> > +  'th_csr.c',
-> >    'time_helper.c',
-> >    'riscv-qmp-cmds.c',
-> >  ))
-> > diff --git a/target/riscv/th_csr.c b/target/riscv/th_csr.c
-> > new file mode 100644
-> > index 0000000000..0eb3ad64f1
-> > --- /dev/null
-> > +++ b/target/riscv/th_csr.c
-> > @@ -0,0 +1,77 @@
-> > +/*
-> > + * T-Head-specific CSRs.
-> > + *
-> > + * Copyright (c) 2024 VRULL GmbH
-> > + *
-> > + * This program is free software; you can redistribute it and/or modif=
-y it
-> > + * under the terms and conditions of the GNU General Public License,
-> > + * version 2 or later, as published by the Free Software Foundation.
-> > + *
-> > + * This program is distributed in the hope it will be useful, but WITH=
-OUT
-> > + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY =
-or
-> > + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public Licen=
-se for
-> > + * more details.
-> > + *
-> > + * You should have received a copy of the GNU General Public License a=
-long with
-> > + * this program.  If not, see <http://www.gnu.org/licenses/>.
-> > + */
-> > +
-> > +#include "qemu/osdep.h"
-> > +#include "cpu.h"
-> > +#include "cpu_vendorid.h"
-> > +
-> > +#define CSR_TH_SXSTATUS 0x5c0
-> > +
-> > +/* TH_SXSTATUS bits */
-> > +#define TH_SXSTATUS_UCME        BIT(16)
-> > +#define TH_SXSTATUS_MAEE        BIT(21)
-> > +#define TH_SXSTATUS_THEADISAEE  BIT(22)
-> > +
-> > +typedef struct {
-> > +    int csrno;
-> > +    int (*insertion_test)(RISCVCPU *cpu);
-> > +    riscv_csr_operations csr_ops;
-> > +} riscv_csr;
-> > +
-> > +static RISCVException smode(CPURISCVState *env, int csrno)
-> > +{
-> > +    if (riscv_has_ext(env, RVS)) {
-> > +        return RISCV_EXCP_NONE;
-> > +    }
-> > +
-> > +    return RISCV_EXCP_ILLEGAL_INST;
-> > +}
-> > +
-> > +static int test_thead_mvendorid(RISCVCPU *cpu)
-> > +{
-> > +    if (cpu->cfg.mvendorid !=3D THEAD_VENDOR_ID)
-> > +        return -1;
-> > +
-> > +    return 0;
-> > +}
-> > +
-> > +static RISCVException read_th_sxstatus(CPURISCVState *env, int csrno,
-> > +                                       target_ulong *val)
-> > +{
-> > +    /* We don't set MAEE here, because QEMU does not implement MAEE. *=
-/
-> > +    *val =3D TH_SXSTATUS_UCME | TH_SXSTATUS_THEADISAEE;
-> > +    return RISCV_EXCP_NONE;
-> > +}
-> > +
-> > +static riscv_csr th_csr_list[] =3D {
-> > +    {
-> > +        .csrno =3D CSR_TH_SXSTATUS,
-> > +        .insertion_test =3D test_thead_mvendorid,
-> > +        .csr_ops =3D { "th.sxstatus", smode, read_th_sxstatus }
-> > +    }
-> > +};
-> > +
-> > +void th_register_custom_csrs(RISCVCPU *cpu)
-> > +{
-> > +    for (size_t i =3D 0; i < ARRAY_SIZE(th_csr_list); i++) {
-> > +        int csrno =3D th_csr_list[i].csrno;
-> > +        riscv_csr_operations *csr_ops =3D &th_csr_list[i].csr_ops;
-> > +        if (!th_csr_list[i].insertion_test(cpu))
-> > +            riscv_set_csr_ops(csrno, csr_ops);
->
-> Checkpatch error here with missing brackets and some other places above
 
-Sorry for that!
-v5 has been sent, where all checkpatch issues have been addressed.
-
->
-> Otherwise:
->
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+On 2024/4/29 11:51, Alistair Francis wrote:
+> On Thu, Mar 14, 2024 at 7:23 PM Huang Tao <eric.huang@linux.alibaba.com> wrote:
+>> In this patch, we modify the decoder to be a freely composable data
+>> structure instead of a hardcoded one. It can be dynamically builded up
+>> according to the extensions.
+>> This approach has several benefits:
+>> 1. Provides support for heterogeneous cpu architectures. As we add decoder in
+>>     RISCVCPU, each cpu can have their own decoder, and the decoders can be
+>>     different due to cpu's features.
+>> 2. Improve the decoding efficiency. We run the guard_func to see if the decoder
+>>     can be added to the dynamic_decoder when building up the decoder. Therefore,
+>>     there is no need to run the guard_func when decoding each instruction. It can
+>>     improve the decoding efficiency
+>> 3. For vendor or dynamic cpus, it allows them to customize their own decoder
+>>     functions to improve decoding efficiency, especially when vendor-defined
+>>     instruction sets increase. Because of dynamic building up, it can skip the other
+>>     decoder guard functions when decoding.
+>> 4. Pre patch for allowing adding a vendor decoder before decode_insn32() with minimal
+>>     overhead for users that don't need this particular vendor decoder.
+>>
+>> Signed-off-by: Huang Tao <eric.huang@linux.alibaba.com>
+>> Suggested-by: Christoph Muellner <christoph.muellner@vrull.eu>
+>> Co-authored-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+>> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+> Do you mind rebasing this on
+> https://github.com/alistair23/qemu/tree/riscv-to-apply.next?
 >
 > Alistair
->
-> > +    }
-> > +}
-> > --
-> > 2.44.0
-> >
-> >
+
+I will rebase this patch on the latest riscv-to-apply.next.
+
+Thanks
+
+>> ---
+>> Changes in v4:
+>> - fix typo
+>> - rename function
+>> - add 'if tcg_enable()'
+>> - move function to tcg-cpu.c and declarations to tcg-cpu.h
+>>
+>> Changes in v3:
+>> - use GPtrArray to save decode function poionter list.
+>> ---
+>>   target/riscv/cpu.c         |  1 +
+>>   target/riscv/cpu.h         |  1 +
+>>   target/riscv/tcg/tcg-cpu.c | 15 +++++++++++++++
+>>   target/riscv/tcg/tcg-cpu.h | 15 +++++++++++++++
+>>   target/riscv/translate.c   | 31 +++++++++++++++----------------
+>>   5 files changed, 47 insertions(+), 16 deletions(-)
+>>
+>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+>> index c160b9216b..17070b82a7 100644
+>> --- a/target/riscv/cpu.c
+>> +++ b/target/riscv/cpu.c
+>> @@ -1132,6 +1132,7 @@ void riscv_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
+>>               error_propagate(errp, local_err);
+>>               return;
+>>           }
+>> +        riscv_tcg_cpu_finalize_dynamic_decoder(cpu);
+>>       } else if (kvm_enabled()) {
+>>           riscv_kvm_cpu_finalize_features(cpu, &local_err);
+>>           if (local_err != NULL) {
+>> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+>> index 3b1a02b944..48e67410e1 100644
+>> --- a/target/riscv/cpu.h
+>> +++ b/target/riscv/cpu.h
+>> @@ -457,6 +457,7 @@ struct ArchCPU {
+>>       uint32_t pmu_avail_ctrs;
+>>       /* Mapping of events to counters */
+>>       GHashTable *pmu_event_ctr_map;
+>> +    const GPtrArray *decoders;
+>>   };
+>>
+>>   /**
+>> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+>> index ab6db817db..c9ab92ea2f 100644
+>> --- a/target/riscv/tcg/tcg-cpu.c
+>> +++ b/target/riscv/tcg/tcg-cpu.c
+>> @@ -853,6 +853,21 @@ void riscv_tcg_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
+>>       }
+>>   }
+>>
+>> +void riscv_tcg_cpu_finalize_dynamic_decoder(RISCVCPU *cpu)
+>> +{
+>> +    GPtrArray *dynamic_decoders;
+>> +    dynamic_decoders = g_ptr_array_sized_new(decoder_table_size);
+>> +    for (size_t i = 0; i < decoder_table_size; ++i) {
+>> +        if (decoder_table[i].guard_func &&
+>> +            decoder_table[i].guard_func(&cpu->cfg)) {
+>> +            g_ptr_array_add(dynamic_decoders,
+>> +                            (gpointer)decoder_table[i].riscv_cpu_decode_fn);
+>> +        }
+>> +    }
+>> +
+>> +    cpu->decoders = dynamic_decoders;
+>> +}
+>> +
+>>   bool riscv_cpu_tcg_compatible(RISCVCPU *cpu)
+>>   {
+>>       return object_dynamic_cast(OBJECT(cpu), TYPE_RISCV_CPU_HOST) == NULL;
+>> diff --git a/target/riscv/tcg/tcg-cpu.h b/target/riscv/tcg/tcg-cpu.h
+>> index f7b32417f8..ce94253fe4 100644
+>> --- a/target/riscv/tcg/tcg-cpu.h
+>> +++ b/target/riscv/tcg/tcg-cpu.h
+>> @@ -26,4 +26,19 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp);
+>>   void riscv_tcg_cpu_finalize_features(RISCVCPU *cpu, Error **errp);
+>>   bool riscv_cpu_tcg_compatible(RISCVCPU *cpu);
+>>
+>> +struct DisasContext;
+>> +struct RISCVCPUConfig;
+>> +typedef struct RISCVDecoder {
+>> +    bool (*guard_func)(const struct RISCVCPUConfig *);
+>> +    bool (*riscv_cpu_decode_fn)(struct DisasContext *, uint32_t);
+>> +} RISCVDecoder;
+>> +
+>> +typedef bool (*riscv_cpu_decode_fn)(struct DisasContext *, uint32_t);
+>> +
+>> +extern const size_t decoder_table_size;
+>> +
+>> +extern const RISCVDecoder decoder_table[];
+>> +
+>> +void riscv_tcg_cpu_finalize_dynamic_decoder(RISCVCPU *cpu);
+>> +
+>>   #endif
+>> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+>> index ea5d52b2ef..bce16d5054 100644
+>> --- a/target/riscv/translate.c
+>> +++ b/target/riscv/translate.c
+>> @@ -37,6 +37,8 @@
+>>   #include "exec/helper-info.c.inc"
+>>   #undef  HELPER_H
+>>
+>> +#include "tcg/tcg-cpu.h"
+>> +
+>>   /* global register indices */
+>>   static TCGv cpu_gpr[32], cpu_gprh[32], cpu_pc, cpu_vl, cpu_vstart;
+>>   static TCGv_i64 cpu_fpr[32]; /* assume F and D extensions */
+>> @@ -117,6 +119,7 @@ typedef struct DisasContext {
+>>       bool frm_valid;
+>>       /* TCG of the current insn_start */
+>>       TCGOp *insn_start;
+>> +    const GPtrArray *decoders;
+>>   } DisasContext;
+>>
+>>   static inline bool has_ext(DisasContext *ctx, uint32_t ext)
+>> @@ -1120,21 +1123,16 @@ static inline int insn_len(uint16_t first_word)
+>>       return (first_word & 3) == 3 ? 4 : 2;
+>>   }
+>>
+>> +const RISCVDecoder decoder_table[] = {
+>> +    { always_true_p, decode_insn32 },
+>> +    { has_xthead_p, decode_xthead},
+>> +    { has_XVentanaCondOps_p, decode_XVentanaCodeOps},
+>> +};
+>> +
+>> +const size_t decoder_table_size = ARRAY_SIZE(decoder_table);
+>> +
+>>   static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
+>>   {
+>> -    /*
+>> -     * A table with predicate (i.e., guard) functions and decoder functions
+>> -     * that are tested in-order until a decoder matches onto the opcode.
+>> -     */
+>> -    static const struct {
+>> -        bool (*guard_func)(const RISCVCPUConfig *);
+>> -        bool (*decode_func)(DisasContext *, uint32_t);
+>> -    } decoders[] = {
+>> -        { always_true_p,  decode_insn32 },
+>> -        { has_xthead_p, decode_xthead },
+>> -        { has_XVentanaCondOps_p,  decode_XVentanaCodeOps },
+>> -    };
+>> -
+>>       ctx->virt_inst_excp = false;
+>>       ctx->cur_insn_len = insn_len(opcode);
+>>       /* Check for compressed insn */
+>> @@ -1155,9 +1153,9 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
+>>                                                ctx->base.pc_next + 2));
+>>           ctx->opcode = opcode32;
+>>
+>> -        for (size_t i = 0; i < ARRAY_SIZE(decoders); ++i) {
+>> -            if (decoders[i].guard_func(ctx->cfg_ptr) &&
+>> -                decoders[i].decode_func(ctx, opcode32)) {
+>> +        for (guint i = 0; i < ctx->decoders->len; ++i) {
+>> +            riscv_cpu_decode_fn func = g_ptr_array_index(ctx->decoders, i);
+>> +            if (func(ctx, opcode32)) {
+>>                   return;
+>>               }
+>>           }
+>> @@ -1202,6 +1200,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+>>       ctx->itrigger = FIELD_EX32(tb_flags, TB_FLAGS, ITRIGGER);
+>>       ctx->zero = tcg_constant_tl(0);
+>>       ctx->virt_inst_excp = false;
+>> +    ctx->decoders = cpu->decoders;
+>>   }
+>>
+>>   static void riscv_tr_tb_start(DisasContextBase *db, CPUState *cpu)
+>> --
+>> 2.41.0
+>>
+>>
 
