@@ -4,73 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35CF7C19F53
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Apr 2024 14:54:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64F49C19F53
+	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Apr 2024 19:29:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s1SOT-0001ZD-2k; Mon, 29 Apr 2024 10:54:13 -0400
+	id 1s1Wfq-0001P9-S2; Mon, 29 Apr 2024 15:28:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
- id 1s1SOQ-0001YT-Ql
- for qemu-riscv@nongnu.org; Mon, 29 Apr 2024 10:54:10 -0400
-Received: from mail-pf1-x431.google.com ([2607:f8b0:4864:20::431])
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1s1Wfi-0001MO-4n
+ for qemu-riscv@nongnu.org; Mon, 29 Apr 2024 15:28:18 -0400
+Received: from mail-oo1-xc36.google.com ([2607:f8b0:4864:20::c36])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
- id 1s1SOO-00085b-Tc
- for qemu-riscv@nongnu.org; Mon, 29 Apr 2024 10:54:10 -0400
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-6ee12766586so3415152b3a.0
- for <qemu-riscv@nongnu.org>; Mon, 29 Apr 2024 07:54:07 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1s1Wfe-0007bu-OA
+ for qemu-riscv@nongnu.org; Mon, 29 Apr 2024 15:28:17 -0400
+Received: by mail-oo1-xc36.google.com with SMTP id
+ 006d021491bc7-5aa3f0fcd46so3193297eaf.1
+ for <qemu-riscv@nongnu.org>; Mon, 29 Apr 2024 12:28:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=dabbelt-com.20230601.gappssmtp.com; s=20230601; t=1714402446; x=1715007246;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1714418890; x=1715023690;
  darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:message-id:to:from:cc
- :in-reply-to:subject:date:from:to:cc:subject:date:message-id
- :reply-to; bh=F1RyZECO+U5v2UI0E3MjiPKlY7GEuVxMkQn/MrwB5ls=;
- b=mWFnoKuvw+tgq4lxDhrlJegYDHnAlz5PyT1qmX/He3KMODpFWInZSVNw4krVdl4fv/
- 16kXyA24iQLOSb2ohmGorP5csENMeCcaejKLct/D5HDrPTkRCkVl3HXfu0n9XWLT3wVR
- zJrOZICHFGtbPW4j753m2nExY5QPa2slrt6F5M15UyKJ+0sRLze9n7JZjENTbjMb0Vnx
- s210uIT0k4OjjhTdKrHtUNKC1Tk4jwDeCF7+Oqt1fVYmYZw9yyE8qlhClkK90r1Bma+B
- Z3OC8B5vH08mNFVzqLZ67Q/OMerwOiCTKQnLPcLJYOIiQPHb+nlkSMIjfpmeoRz9q5gl
- cHqQ==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=SWkUI25HSMpKrt4/gZiXxUlGt2r+TGYzYTJUn3m6V1Q=;
+ b=TuIvoha7/oks/XdMLNSmlq1Bb5vIHbjjMFo3pXkspa3Fww/GUOLEXxpu6x+X0sEibH
+ heU9XbAQqQedPQ23jAlZIEJo5ocfVHFWKc/dgxm5ouaA2Dzc38XsYHKEb53fNdwHmmMV
+ oR7iV1XfUkB1OTXx8EXQqJw2JNezCP/LHgKjTcqRQmpsRmtLgc39p7V+cc6M52R56lFn
+ 7ZqeGUSksfLw8dwX+0TY9HEsrmaOqGGHd7E3O8GBy6grmHmE4gqu+0p3wWuCcJ4MhwaU
+ ecbpn87n05L23Sn1GIL2RovOYCYiR4jzWpC0h3Fr+tVw5G41k9zbYaxw+GmbRlIz53eH
+ nItg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714402446; x=1715007246;
- h=content-transfer-encoding:mime-version:message-id:to:from:cc
- :in-reply-to:subject:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=F1RyZECO+U5v2UI0E3MjiPKlY7GEuVxMkQn/MrwB5ls=;
- b=od7EOR89m32s32+H0LdfVhRIFYhMT16t4pJahg/2aBItvOaW/LBNlufO67mK4QUnDI
- fX5MuzNIUjhAIAyezNNhqHqTnyvLz6ILuBnYnZLWW+VIm6ootFrjMt9fxqgxUdnQncWD
- lTs8W4sDd6N/g2l3LEor4XKaIygpMtCsafBGiSb2+8iLjvYrJow9DVhcW6+4f9viJtRL
- xqmaS6aMOG9b5D5N/fJbx4n3XajAD4z/v8OT0oM1yHoLzXywcg35ZNcc35bPwSkR1Pup
- YwqymXza7VmTQlifKZ6dH8ldmytXrO47geLxcFlwgq9PB77ROIpC+vi4s6rLtslmFcI3
- TtxA==
-X-Gm-Message-State: AOJu0YwTDl2Esuq9GS/09LTjCQh5VJLl4sqNm2AuJ8BHSM/5twC9CmVs
- 9uneuUvoux3qJdUHy29xm7rePyQ7MgVql3Y32nS+fZ/Bew4pFHrhHt5zAMlUcIBnxQ2Ih1VPNtb
- H
-X-Google-Smtp-Source: AGHT+IEbUO3E39mcAr2uW9DO7nQeiRX3reAFi7F7IOVMyVOvXh93pQd74Aef8i6guln1MwyUb6AGkw==
-X-Received: by 2002:a05:6a00:4b04:b0:6f3:ee23:3c39 with SMTP id
- kq4-20020a056a004b0400b006f3ee233c39mr9253692pfb.7.1714402445647; 
- Mon, 29 Apr 2024 07:54:05 -0700 (PDT)
-Received: from localhost ([50.145.13.30]) by smtp.gmail.com with ESMTPSA id
- fe8-20020a056a002f0800b006ed00ea504asm19395596pfb.159.2024.04.29.07.54.04
+ d=1e100.net; s=20230601; t=1714418890; x=1715023690;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=SWkUI25HSMpKrt4/gZiXxUlGt2r+TGYzYTJUn3m6V1Q=;
+ b=eZrPDUwZW1raWZy72TWElR968qpt7cFvF73epxClJEt6c4DpdNIzBH0m8WqsCiHvKe
+ 4yjPeUqf8tG9BM/abuZZA55wXAR5V3/jLWvyNn3cGL5ypJYIV1k9et8kuddukuaWwqMg
+ Tv6jbFOA4R3lyOJXbjiom/f6nOQq/oHGxFpqDYWSGdQhQsVi8uF3l78KuKXcfHklJdtY
+ GKzYENHyJFEviUADcf5NPOtHsiqFZvjwRiLKJc2ojOn++2fVBU8UYkObBzEwb3Twuwdq
+ wtP5DaEr72sRdYBdlwFsEEn60Kx6yWtnvUlCXfaH6P8bVZTAjWm8rDocwETPfuTqiYoX
+ kj+Q==
+X-Gm-Message-State: AOJu0YyE1RTTmxTN8UL7/Af5qRrKdYMAdJGPs+Cs0GmA9V4mAeQaarIs
+ Izt8m6uWL5v8PdOo6IsPCKFg8qm2TQzvF55F4GacMa5hWUpV+4nlfEq8mW3u2/heTRfmqtqVpDE
+ d
+X-Google-Smtp-Source: AGHT+IFY3dOV2+3XGVYKja5LJ+HSGfxEjArpk/Vhp3I4XwIlJI1gAse+dr7i8zy+ngulHlSsc/l2jg==
+X-Received: by 2002:a05:6358:7252:b0:186:40c3:e495 with SMTP id
+ i18-20020a056358725200b0018640c3e495mr9368903rwa.23.1714418890148; 
+ Mon, 29 Apr 2024 12:28:10 -0700 (PDT)
+Received: from atishp.ba.rivosinc.com ([64.71.180.162])
+ by smtp.gmail.com with ESMTPSA id
+ i13-20020a63e44d000000b005d8b89bbf20sm19293887pgk.63.2024.04.29.12.28.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Apr 2024 07:54:05 -0700 (PDT)
-Date: Mon, 29 Apr 2024 07:54:05 -0700 (PDT)
-X-Google-Original-Date: Mon, 29 Apr 2024 07:54:00 PDT (-0700)
-Subject: Re: RISC-V Floating Point Extension
-In-Reply-To: <ximss-278650015@mail1.uni-kl.de>
-CC: qemu-riscv@nongnu.org
-From: Palmer Dabbelt <palmer@dabbelt.com>
-To: dchrist@rptu.de
-Message-ID: <mhng-c7940df3-4bfa-44cc-b0b4-14c365ed56a9@palmer-ri-x1c9a>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::431;
- envelope-from=palmer@dabbelt.com; helo=mail-pf1-x431.google.com
+ Mon, 29 Apr 2024 12:28:09 -0700 (PDT)
+From: Atish Patra <atishp@rivosinc.com>
+Date: Mon, 29 Apr 2024 12:28:04 -0700
+Subject: [PATCH 1/3] target/riscv: Save counter values during countinhibit
+ update
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20240429-countinhibit_fix-v1-1-802ec1e99133@rivosinc.com>
+References: <20240429-countinhibit_fix-v1-0-802ec1e99133@rivosinc.com>
+In-Reply-To: <20240429-countinhibit_fix-v1-0-802ec1e99133@rivosinc.com>
+To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Cc: Atish Patra <atishp@rivosinc.com>, palmer@dabbelt.com, 
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, bin.meng@windriver.com, 
+ dbarboza@ventanamicro.com, alistair.francis@wdc.com
+X-Mailer: b4 0.13-dev-f0463
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c36;
+ envelope-from=atishp@rivosinc.com; helo=mail-oo1-xc36.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -92,25 +97,101 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, 29 Apr 2024 07:02:59 PDT (-0700), dchrist@rptu.de wrote:
-> Hello,
->
-> I'm currently trying to run a RISC-V bare-metal kernel on QEMU that uses the
-> floating point extension F.
-> It seems like this extension, besides D, is enabled automatically in QEMU.
-> In fact, the floating point registers can be examined successfully using
-> GDB.
-> However, when the first floating point instruction is reached in the program
-> execution (in this case flw), an illegal instruction trap is raised. The
-> kernel itself is compiled using these flags: -march=rv32imaf -mabi=ilp32f
-> Is there something I am missing? Perhaps, the FPU needs to be enabled in
-> some way?
+Currently, if a counter monitoring cycle/instret is stopped via
+mcountinhibit we just update the state while the value is saved
+during the next read. This is not accurate as the read may happen
+many cycles after the counter is stopped. Ideally, the read should
+return the value saved when the counter is stopped.
 
-There's dynamic enable bits for floating point in the various status 
-registers, see mstatus.FS in the priv spec for the details.
+Thus, save the value of the counter during the inhibit update
+operation and return that value during the read if corresponding bit
+in mcountihibit is set.
 
-> Thanks for your help!
->
-> Best
-> Derek
+Signed-off-by: Atish Patra <atishp@rivosinc.com>
+---
+ target/riscv/cpu.h     |  1 -
+ target/riscv/csr.c     | 32 ++++++++++++++++++++------------
+ target/riscv/machine.c |  1 -
+ 3 files changed, 20 insertions(+), 14 deletions(-)
+
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 3b1a02b9449a..09bbf7ce9880 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -153,7 +153,6 @@ typedef struct PMUCTRState {
+     target_ulong mhpmcounter_prev;
+     /* Snapshort value of a counter in RV32 */
+     target_ulong mhpmcounterh_prev;
+-    bool started;
+     /* Value beyond UINT32_MAX/UINT64_MAX before overflow interrupt trigger */
+     target_ulong irq_overflow_left;
+ } PMUCTRState;
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 726096444fae..68ca31aff47d 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -929,17 +929,11 @@ static RISCVException riscv_pmu_read_ctr(CPURISCVState *env, target_ulong *val,
+ 
+     if (get_field(env->mcountinhibit, BIT(ctr_idx))) {
+         /*
+-         * Counter should not increment if inhibit bit is set. We can't really
+-         * stop the icount counting. Just return the counter value written by
+-         * the supervisor to indicate that counter was not incremented.
++         * Counter should not increment if inhibit bit is set. Just return the
++         * current counter value.
+          */
+-        if (!counter->started) {
+-            *val = ctr_val;
+-            return RISCV_EXCP_NONE;
+-        } else {
+-            /* Mark that the counter has been stopped */
+-            counter->started = false;
+-        }
++         *val = ctr_val;
++         return RISCV_EXCP_NONE;
+     }
+ 
+     /*
+@@ -1973,9 +1967,23 @@ static RISCVException write_mcountinhibit(CPURISCVState *env, int csrno,
+ 
+     /* Check if any other counter is also monitoring cycles/instructions */
+     for (cidx = 0; cidx < RV_MAX_MHPMCOUNTERS; cidx++) {
+-        if (!get_field(env->mcountinhibit, BIT(cidx))) {
+             counter = &env->pmu_ctrs[cidx];
+-            counter->started = true;
++        if (get_field(env->mcountinhibit, BIT(cidx)) && (val & BIT(cidx))) {
++	    /*
++             * Update the counter value for cycle/instret as we can't stop the
++             * host ticks. But we should show the current value at this moment.
++             */
++            if (riscv_pmu_ctr_monitor_cycles(env, cidx) ||
++                riscv_pmu_ctr_monitor_instructions(env, cidx)) {
++                counter->mhpmcounter_val = get_ticks(false) -
++                                           counter->mhpmcounter_prev +
++                                           counter->mhpmcounter_val;
++                if (riscv_cpu_mxl(env) == MXL_RV32) {
++                    counter->mhpmcounterh_val = get_ticks(false) -
++                                                counter->mhpmcounterh_prev +
++                                                counter->mhpmcounterh_val;
++		}
++            }
+         }
+     }
+ 
+diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+index 76f2150f78b5..3e0f2dd2ce2a 100644
+--- a/target/riscv/machine.c
++++ b/target/riscv/machine.c
+@@ -328,7 +328,6 @@ static const VMStateDescription vmstate_pmu_ctr_state = {
+         VMSTATE_UINTTL(mhpmcounterh_val, PMUCTRState),
+         VMSTATE_UINTTL(mhpmcounter_prev, PMUCTRState),
+         VMSTATE_UINTTL(mhpmcounterh_prev, PMUCTRState),
+-        VMSTATE_BOOL(started, PMUCTRState),
+         VMSTATE_END_OF_LIST()
+     }
+ };
+
+-- 
+2.34.1
+
 
