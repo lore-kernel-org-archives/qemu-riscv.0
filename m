@@ -4,79 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF3C2C4345F
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Apr 2024 09:43:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DDE2C4345F
+	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Apr 2024 10:56:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s1NXY-0004ln-Tv; Mon, 29 Apr 2024 05:43:16 -0400
+	id 1s1OfQ-0000kL-Kj; Mon, 29 Apr 2024 06:55:28 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1s1NXW-0004ky-HT
- for qemu-riscv@nongnu.org; Mon, 29 Apr 2024 05:43:14 -0400
-Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s1OfB-0000ii-NP
+ for qemu-riscv@nongnu.org; Mon, 29 Apr 2024 06:55:14 -0400
+Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1s1NXU-0007zK-T2
- for qemu-riscv@nongnu.org; Mon, 29 Apr 2024 05:43:14 -0400
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-1eac92f7c74so31437825ad.3
- for <qemu-riscv@nongnu.org>; Mon, 29 Apr 2024 02:43:12 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s1Of9-0005mk-Qi
+ for qemu-riscv@nongnu.org; Mon, 29 Apr 2024 06:55:13 -0400
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-34c8f393195so1591847f8f.0
+ for <qemu-riscv@nongnu.org>; Mon, 29 Apr 2024 03:55:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1714383791; x=1714988591; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=IKU+C84lncTLIQBF3C2rWBemvQGxB4c0ZoRwkqzmDMY=;
- b=fsUrRBALrUAboYCF9IZ4rAQYYL7gR/TzgiaDYh3vrxzMF52ALyq6F11SjpGz+UXjjA
- o3d4Qb0bjdNpuPorkxrhwYYWAS9smWIt4x6T7oCA6qcOqB+DHxT3zUzBtxBLmCI4vnqh
- S0zXKvZ1HP2okLs0FO/T+5D+ZJ67HZuAKyvlp48t4axS7avypwp0QFHCx8SPcPcnv1x1
- K4iKbd4r559MBXFobpa/acPOWB1e2OZooHgC6/jrKbqy3CxKsGyIMO0e+42TCw/yNgMF
- 0N2WiE/sXg3GfyDtHVz6e2iwC4+8AhYd5skfYjQi4377oPi9OzeUdt8ovBe9FstesLn7
- DXpg==
+ d=linaro.org; s=google; t=1714388110; x=1714992910; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:cc:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=LP2Wu0Dw54Q00OIOEd9jYBjLmXzE8lcBDZN927nb1oE=;
+ b=QiT6AWaUXox9UwBUyZls0AGLN1V8fj2shWSRHQitYs4GSVEFJ+tRBH2IDSgzZ0sd7c
+ b78lsduzIgON0WCTj3rREsTOkoVEhyu+UARa6HlOZi6vUgi41PNzKEsIgmUg702Ekjow
+ H5B14p8FbeD/SDkODEoLNHB0Oigspp6NoOhz3RcUX/QXkhpBlB0TcAKVMYMtEB9SKTuk
+ Gq+WvGpPXschWDQC3E9v3T8t+68Rk4v0J2ht88/CjhALgJN5t6grUvpmI0RYIHoJT+Kt
+ FkNRaQbJq56DIjK/Q7dpBMwqz2NDy/KvxHDWaLfc6gDwqMo2Y+N+qBlr3YnFVtscUJqB
+ DEyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714383791; x=1714988591;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1714388110; x=1714992910;
+ h=content-transfer-encoding:in-reply-to:from:cc:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=IKU+C84lncTLIQBF3C2rWBemvQGxB4c0ZoRwkqzmDMY=;
- b=DskqJlbFUQSnvVsD4br/jnWHjiOY3iDXuuUDiySFOciPbmBVSItqDfGOi4NL1jWuUB
- iY0dVdo1GZWVT/2WELILlg0IIwOPKxyp2QrvLKuLhy6Chd3M/ypzL6nG/WQFUtYuYUNz
- ncgXIz5YApcT1g5i5qo6HMp/p1Eg8smCfQGjSW65kAxJjeFNcLA4n4frj7K6PMnI5UEF
- IsdaCl+YGvt0AWaRR5aZdjf0134DeoSZWPIFMfFAapZw1sPCnjsQ0pkNfrb2Ve7+oy5P
- YHnCPyC+iQeXunGfIr4GWXC07xQSITTfLZhKJw6qeq59q+mIp8mSD5JX1qwN70LrHMBj
- /EbA==
-X-Gm-Message-State: AOJu0YzKgSH9RR5BB2TkR9x93kEh3GR0Hs4TyVlngpzH9WK8Pvq7noo0
- SE7nYjQUzi57MMddlT7O2WXs+uo2kSWbCNfFTZZ1XO+Omy59NRruWObLdWwJufw=
-X-Google-Smtp-Source: AGHT+IEHTI0Kc6rOaDRJGmVP9Ct+xTkBf/tWhg2T7IqtxJCzQBgLFxga/4wfyKgnIeW5FoiXDzV6tg==
-X-Received: by 2002:a17:903:2342:b0:1eb:4c98:8b15 with SMTP id
- c2-20020a170903234200b001eb4c988b15mr7917563plh.61.1714383790902; 
- Mon, 29 Apr 2024 02:43:10 -0700 (PDT)
-Received: from [192.168.68.110] ([187.11.154.208])
+ bh=LP2Wu0Dw54Q00OIOEd9jYBjLmXzE8lcBDZN927nb1oE=;
+ b=qppYUZfkC1PeiDpFmqk5bp2dr2KmdY2uVvokLehPSdUr5+bsidcJJvyGGA+GAr6be1
+ PzYSyD303zn+b6W3kFjgDG6KZa9kIPs9n5G9nJKV/h3LGD0kVUzXT5aghIKWSAdH2qs6
+ 8yb9bmPFkNp8YNCo6V/lmfWIyl68xmOZRYTbhyy2RHjdtoOh+aoctd9Nnhv7vFZmLtD3
+ QfpgCax+SB2kTz1y8bY5dibko1QoFiUlW24S7OvjyzvFHsx1GE+WCYamibLX1vloS4FI
+ hfDA7+1+jW1ZKSrC5xh+TUPif62KPRRhXOJ1HoMb8TqXaHvIbqtMKEvfu9WqNZ/ZNbP7
+ F+Og==
+X-Gm-Message-State: AOJu0Yz4mJkseYn98lDLkt+Cvnr4SUa+gwCykAQtF5lZ86pPBfH0QexM
+ SJyixKWRaaGepHICVhv1JlVq4Nigc0ce3tyXV1eKd8FV9Ltr/kBjEdJZ8QB+r9g=
+X-Google-Smtp-Source: AGHT+IHzK/irlEJPmlWh0zdWn8HG2ihhUElOH+dQPuaXIvVvL87wf5iLR7WthyaSL5Zp5gXupxHj0g==
+X-Received: by 2002:a5d:564a:0:b0:34c:b8fa:976a with SMTP id
+ j10-20020a5d564a000000b0034cb8fa976amr4130495wrw.59.1714388109851; 
+ Mon, 29 Apr 2024 03:55:09 -0700 (PDT)
+Received: from [10.79.37.248] ([83.247.137.20])
  by smtp.gmail.com with ESMTPSA id
- z21-20020a1709028f9500b001dda32430b3sm19922213plo.89.2024.04.29.02.43.07
+ b7-20020adff907000000b0034b3394f0e1sm18685009wrr.10.2024.04.29.03.55.09
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 29 Apr 2024 02:43:10 -0700 (PDT)
-Message-ID: <ca275792-36c9-4ccd-b7b2-24d9fd837b24@ventanamicro.com>
-Date: Mon, 29 Apr 2024 06:43:04 -0300
+ Mon, 29 Apr 2024 03:55:09 -0700 (PDT)
+Message-ID: <b6b4cc3a-45e9-4516-9faa-942795ad9c36@linaro.org>
+Date: Mon, 29 Apr 2024 12:55:08 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] target/riscv: do not set mtval2 for non guest-page
- faults
-To: Alexei Filippov <alexei.filippov@syntacore.com>, palmer@dabbelt.com,
- alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-References: <20240413105929.7030-1-alexei.filippov@syntacore.com>
- <20240413105929.7030-2-alexei.filippov@syntacore.com>
+Subject: Re: [PATCH v2 29/33] target/riscv: Use translator_ld* for everything
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+References: <20240424233131.988727-1-richard.henderson@linaro.org>
+ <20240424233131.988727-30-richard.henderson@linaro.org>
 Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240413105929.7030-2-alexei.filippov@syntacore.com>
+Cc: qemu-riscv <qemu-riscv@nongnu.org>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20240424233131.988727-30-richard.henderson@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::429;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x429.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -99,55 +94,44 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Cc'ing qemu-riscv@
 
-
-On 4/13/24 07:59, Alexei Filippov wrote:
-> Previous patch fixed the PMP priority in raise_mmu_exception() but we're still
-> setting mtval2 incorrectly. In riscv_cpu_tlb_fill(), after pmp check in 2 stage
-> translation part, mtval2 will be set in case of successes 2 stage translation but
-> failed pmp check.
-> 
-> In this case we gonna set mtval2 via env->guest_phys_fault_addr in context of
-> riscv_cpu_tlb_fill(), as this was a guest-page-fault, but it didn't and mtval2
-> should be zero, according to RISCV privileged spec sect. 9.4.4: When a guest
-> page-fault is taken into M-mode, mtval2 is written with either zero or guest
-> physical address that faulted, shifted by 2 bits. *For other traps, mtval2
-> is set to zero...*
-> 
-> Signed-off-by: Alexei Filippov <alexei.filippov@syntacore.com>
+On 25/4/24 01:31, Richard Henderson wrote:
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
-
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
->   target/riscv/cpu_helper.c | 12 ++++++------
->   1 file changed, 6 insertions(+), 6 deletions(-)
+>   target/riscv/translate.c | 6 +++---
+>   1 file changed, 3 insertions(+), 3 deletions(-)
 > 
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 196166f8dd..89e659fe3a 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -1410,17 +1410,17 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->                                 __func__, pa, ret, prot_pmp, tlb_size);
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index c999e942e1..2c27fd4ce1 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -20,7 +20,6 @@
+>   #include "qemu/log.h"
+>   #include "cpu.h"
+>   #include "tcg/tcg-op.h"
+> -#include "exec/cpu_ldst.h"
+>   #include "exec/exec-all.h"
+>   #include "exec/helper-proto.h"
+>   #include "exec/helper-gen.h"
+> @@ -1082,7 +1081,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
+>       CPUState *cpu = ctx->cs;
+>       CPURISCVState *env = cpu_env(cpu);
 >   
->                   prot &= prot_pmp;
-> -            }
-> -
-> -            if (ret != TRANSLATE_SUCCESS) {
-> +            } else {
->                   /*
->                    * Guest physical address translation failed, this is a HS
->                    * level exception
->                    */
->                   first_stage_error = false;
-> -                env->guest_phys_fault_addr = (im_address |
-> -                                              (address &
-> -                                               (TARGET_PAGE_SIZE - 1))) >> 2;
-> +                if (ret != TRANSLATE_PMP_FAIL) {
-> +                    env->guest_phys_fault_addr = (im_address |
-> +                                                  (address &
-> +                                                   (TARGET_PAGE_SIZE - 1))) >> 2;
-> +                }
->               }
->           }
->       } else {
+> -    return cpu_ldl_code(env, pc);
+> +    return translator_ldl(env, &ctx->base, pc);
+>   }
+>   
+>   /* Include insn module translation function */
+> @@ -1243,7 +1242,8 @@ static void riscv_tr_translate_insn(DisasContextBase *dcbase, CPUState *cpu)
+>               unsigned page_ofs = ctx->base.pc_next & ~TARGET_PAGE_MASK;
+>   
+>               if (page_ofs > TARGET_PAGE_SIZE - MAX_INSN_LEN) {
+> -                uint16_t next_insn = cpu_lduw_code(env, ctx->base.pc_next);
+> +                uint16_t next_insn =
+> +                    translator_lduw(env, &ctx->base, ctx->base.pc_next);
+>                   int len = insn_len(next_insn);
+>   
+>                   if (!is_same_page(&ctx->base, ctx->base.pc_next + len - 1)) {
+
 
