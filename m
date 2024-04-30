@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9E15C4345F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Apr 2024 18:01:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A41FC4345F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Apr 2024 18:02:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s1rmm-0005wU-Ce; Tue, 30 Apr 2024 14:01:00 -0400
+	id 1s1roA-0006sM-KB; Tue, 30 Apr 2024 14:02:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1s1rml-0005w6-Ez
- for qemu-riscv@nongnu.org; Tue, 30 Apr 2024 14:00:59 -0400
-Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
+ id 1s1rnx-0006oK-I7
+ for qemu-riscv@nongnu.org; Tue, 30 Apr 2024 14:02:14 -0400
+Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1s1rmg-0005lL-5E
- for qemu-riscv@nongnu.org; Tue, 30 Apr 2024 14:00:58 -0400
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-1e8bbcbc2b7so54290135ad.0
- for <qemu-riscv@nongnu.org>; Tue, 30 Apr 2024 11:00:51 -0700 (PDT)
+ id 1s1rnw-0006K3-3t
+ for qemu-riscv@nongnu.org; Tue, 30 Apr 2024 14:02:13 -0400
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-1e86d56b3bcso55160235ad.1
+ for <qemu-riscv@nongnu.org>; Tue, 30 Apr 2024 11:02:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1714500050; x=1715104850; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1714500129; x=1715104929; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=KIrs7j4YMFww+dcXVrYn4lShSCWiAn2OjEdShWaBO+E=;
- b=afqRcZMa3G9QTLfyAS05Dx5yT7E58/PQ39PcvTziTzpze/bKGM+mX0zL+Q5QHoZ3GS
- cZaoc7migiE20+XpnnsuLQOVnyYrMthlfxVtISLmfLZeJLCE76/XdVSkTCcFBDRyI0Nd
- dO0tI/uBdjQGzpvjETjruA5qoZ/0noMNRCwqU1+meotiiAAeX0LC4kxyvqCwapTK6mgB
- 11bWCIeZVh0U1UDp3aVgWFz5r7erG/kEC9J73A14VS1wsLuuE4m3YcZDgboSicj3soGk
- k48OhBl0OSAFDvVLE4LqF/hkLrZvVyPAJV4R7T6So2aw0x6soBYCTGgcgWnJOvExO0aG
- AVqQ==
+ bh=xG52DUb8MKCii4RhM5Z2NhFbXjj4O7G8wtYfzgACnmM=;
+ b=YhQY4OxZ8znRsJl+OIv5DpNXtDho7KkkaFHv9HkeyqdT4x7pEGHcRgYxjgKPF9Ljq+
+ mZ9NEPr+D+GcHu8/QjMdKRwoxokY67UauJrLmviALlyZfGPZbchW8d44pkA7dUEsDTvl
+ YSXKDsIY5ku8+BFPE8deNA+lYGVfCfm7n0/EjiIif+rh15cZ/nQkT0E/VSnhltshPP+u
+ GmXlb8/yyvCDHBIyzDtnG/gjH7WVXMmHU/qi3jLaFAmkfkphF9vJZ6v4oPKhbqFooAGa
+ AEqy1q7/wraxPoy1fB46T8K//NOS9RvWXaAtaVaRKDWj1jGX9XkI2k+xFs3A5rsubaHX
+ 5QKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714500050; x=1715104850;
+ d=1e100.net; s=20230601; t=1714500129; x=1715104929;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=KIrs7j4YMFww+dcXVrYn4lShSCWiAn2OjEdShWaBO+E=;
- b=FvJgiXGuGHVr45FH/b2OTFcPJqQEkqBz3zhaHyCQRRZc+G07bHFDffvIDfWilklcyb
- 5PRYF7Imhb2RanInUjuKIRMDvVWG+3soorNrN0qlB4Cva2/tLy47qHqdvYeJCBF99AI6
- ltz2m7PBZGE+Jst0vy1YxUllqvuJgLbrPiTg3D4jJ/ILYNu15NZbcOq8wSbjnuHSyE81
- atoIOugyLSvEcndeOQR6BCVckALowh473E7lmJwol/c0i8oZW5CnZoX9RfbKn6zI16ZY
- 1j9vPHd7nhjV5hDYk6rxH8tPqwowCadUGNVTHiIIdEGiJGWI+QpsXAy2Vm9pPFE4AEbA
- 2OBw==
+ bh=xG52DUb8MKCii4RhM5Z2NhFbXjj4O7G8wtYfzgACnmM=;
+ b=Ia3g+PcZUHJ7BiKgp8SCE7a7QQ1BVuZX/opN26VoYDf9GyyNs65upnLjhKluIhsrj1
+ 265Mp39N09rPzCP/u/tX7PJUJmdZ4j4wjzpzFMIp+MREFeZpSzYX99a4YRr2wil+n8BE
+ udUKfiHCPTPsAvygQuo2RnZhFrKkylBNB4i9Axz4UuzeHFhb3rB1ZRH31KlbkhCat0Rt
+ xlYwqrGy+ShIpSgepe0leaddRQ9RSsIF/CdDoCpAF62cwMhpHykN2nYTi/e2If23boW7
+ PC+6R8R4AnzRVvmmcn1peLFrjW7H7DH5EECBbt448k1St9VhoTkJ6c5gwZmghk6IEZxb
+ KR5A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXydKEpWKSpQ/20YHqKC/jx73f7PpG5B6JB2vdZ3BN7Pb1AiMSBAkIO6IcA+dI0wJOb5VlXMiCYrV6xProixg+NeJyEbHY=
-X-Gm-Message-State: AOJu0Yw/j3VcZuONEfqD35z0LHmqjAlfoGUM/k07G10pKJGUdOzz39rE
- WmwiJkQVdZ8Wvvdvkr3osUNu5Wh+8H+1Ia5dsuq2nKfXHP0DDPhAo6hjKkM0x4U=
-X-Google-Smtp-Source: AGHT+IHPt9s5I3RNterSAWM5NQ2/6YSGDk88/zZQ/BZ0n4TxKKtKrb1nU/7QsSL6+5Mr663Z5WiUYw==
-X-Received: by 2002:a17:902:b948:b0:1e5:4f5:7fa7 with SMTP id
- h8-20020a170902b94800b001e504f57fa7mr158459pls.21.1714500050318; 
- Tue, 30 Apr 2024 11:00:50 -0700 (PDT)
+ AJvYcCUd6NmKFgSxxzVee2trY0iRADHEmYcVazZQApH8A125PQcq9G9GKx6EOPGN9ZxUTX6a+Wm9c2ncT/5fob3YUWGHTj1qVzU=
+X-Gm-Message-State: AOJu0YxgCWgudHsdMS91tAuPc/5/olvuqCiXGeTYY22Aa5OaXunXi6k2
+ /UQPimqDCAY++EW9AyqpJUP1M+Aw2yo//JqmcZTfIsRgdcZQ78uPjf9eKYwM/rk=
+X-Google-Smtp-Source: AGHT+IGHUc8zlVI42nkKjwLza807Z1PV8orIZatqV/K/cvW5LNB1EpIboB0rtEcsGcGafk7rkwfLQA==
+X-Received: by 2002:a17:902:d2c8:b0:1e4:10d9:5dfb with SMTP id
+ n8-20020a170902d2c800b001e410d95dfbmr170060plc.38.1714500129551; 
+ Tue, 30 Apr 2024 11:02:09 -0700 (PDT)
 Received: from [192.168.68.110] ([187.11.154.208])
  by smtp.gmail.com with ESMTPSA id
- t6-20020a170902e84600b001e604438791sm22695768plg.156.2024.04.30.11.00.46
+ t6-20020a170902e84600b001e604438791sm22695768plg.156.2024.04.30.11.02.06
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 30 Apr 2024 11:00:49 -0700 (PDT)
-Message-ID: <d672ec9d-eaa0-48c1-9f99-d94cf06e7aac@ventanamicro.com>
-Date: Tue, 30 Apr 2024 15:00:45 -0300
+ Tue, 30 Apr 2024 11:02:09 -0700 (PDT)
+Message-ID: <7944796f-fe31-4012-87ab-6c6407d5118f@ventanamicro.com>
+Date: Tue, 30 Apr 2024 15:02:06 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] target/riscv: Save counter values during countinhibit
- update
+Subject: Re: [PATCH 2/3] target/riscv: Enforce WARL behavior for
+ scounteren/hcounteren
 Content-Language: en-US
 To: Atish Patra <atishp@rivosinc.com>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
 Cc: palmer@dabbelt.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
- bin.meng@windriver.com, alistair.francis@wdc.com,
- Andrew Jones <ajones@ventanamicro.com>
+ bin.meng@windriver.com, alistair.francis@wdc.com
 References: <20240429-countinhibit_fix-v1-0-802ec1e99133@rivosinc.com>
- <20240429-countinhibit_fix-v1-1-802ec1e99133@rivosinc.com>
+ <20240429-countinhibit_fix-v1-2-802ec1e99133@rivosinc.com>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240429-countinhibit_fix-v1-1-802ec1e99133@rivosinc.com>
+In-Reply-To: <20240429-countinhibit_fix-v1-2-802ec1e99133@rivosinc.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -105,130 +104,47 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 On 4/29/24 16:28, Atish Patra wrote:
-> Currently, if a counter monitoring cycle/instret is stopped via
-> mcountinhibit we just update the state while the value is saved
-> during the next read. This is not accurate as the read may happen
-> many cycles after the counter is stopped. Ideally, the read should
-> return the value saved when the counter is stopped.
-> 
-> Thus, save the value of the counter during the inhibit update
-> operation and return that value during the read if corresponding bit
-> in mcountihibit is set.
+> scounteren/hcountern are also WARL registers similar to mcountern.
+> Only set the bits for the available counters during the write to
+> preserve the WARL behavior.
 > 
 > Signed-off-by: Atish Patra <atishp@rivosinc.com>
 > ---
->   target/riscv/cpu.h     |  1 -
->   target/riscv/csr.c     | 32 ++++++++++++++++++++------------
->   target/riscv/machine.c |  1 -
->   3 files changed, 20 insertions(+), 14 deletions(-)
+
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+>   target/riscv/csr.c | 12 ++++++++++--
+>   1 file changed, 10 insertions(+), 2 deletions(-)
 > 
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 3b1a02b9449a..09bbf7ce9880 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -153,7 +153,6 @@ typedef struct PMUCTRState {
->       target_ulong mhpmcounter_prev;
->       /* Snapshort value of a counter in RV32 */
->       target_ulong mhpmcounterh_prev;
-> -    bool started;
->       /* Value beyond UINT32_MAX/UINT64_MAX before overflow interrupt trigger */
->       target_ulong irq_overflow_left;
->   } PMUCTRState;
 > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 726096444fae..68ca31aff47d 100644
+> index 68ca31aff47d..a01911541d67 100644
 > --- a/target/riscv/csr.c
 > +++ b/target/riscv/csr.c
-> @@ -929,17 +929,11 @@ static RISCVException riscv_pmu_read_ctr(CPURISCVState *env, target_ulong *val,
+> @@ -2843,7 +2843,11 @@ static RISCVException read_scounteren(CPURISCVState *env, int csrno,
+>   static RISCVException write_scounteren(CPURISCVState *env, int csrno,
+>                                          target_ulong val)
+>   {
+> -    env->scounteren = val;
+> +    RISCVCPU *cpu = env_archcpu(env);
+> +
+> +    /* WARL register - disable unavailable counters */
+> +    env->scounteren = val & (cpu->pmu_avail_ctrs | COUNTEREN_CY | COUNTEREN_TM |
+> +                             COUNTEREN_IR);
+>       return RISCV_EXCP_NONE;
+>   }
 >   
->       if (get_field(env->mcountinhibit, BIT(ctr_idx))) {
->           /*
-> -         * Counter should not increment if inhibit bit is set. We can't really
-> -         * stop the icount counting. Just return the counter value written by
-> -         * the supervisor to indicate that counter was not incremented.
-> +         * Counter should not increment if inhibit bit is set. Just return the
-> +         * current counter value.
->            */
-> -        if (!counter->started) {
-> -            *val = ctr_val;
-> -            return RISCV_EXCP_NONE;
-> -        } else {
-> -            /* Mark that the counter has been stopped */
-> -            counter->started = false;
-> -        }
-> +         *val = ctr_val;
-> +         return RISCV_EXCP_NONE;
->       }
+> @@ -3475,7 +3479,11 @@ static RISCVException read_hcounteren(CPURISCVState *env, int csrno,
+>   static RISCVException write_hcounteren(CPURISCVState *env, int csrno,
+>                                          target_ulong val)
+>   {
+> -    env->hcounteren = val;
+> +    RISCVCPU *cpu = env_archcpu(env);
+> +
+> +    /* WARL register - disable unavailable counters */
+> +    env->hcounteren = val & (cpu->pmu_avail_ctrs | COUNTEREN_CY | COUNTEREN_TM |
+> +                             COUNTEREN_IR);
+>       return RISCV_EXCP_NONE;
+>   }
 >   
->       /*
-> @@ -1973,9 +1967,23 @@ static RISCVException write_mcountinhibit(CPURISCVState *env, int csrno,
->   
->       /* Check if any other counter is also monitoring cycles/instructions */
->       for (cidx = 0; cidx < RV_MAX_MHPMCOUNTERS; cidx++) {
-> -        if (!get_field(env->mcountinhibit, BIT(cidx))) {
->               counter = &env->pmu_ctrs[cidx];
-> -            counter->started = true;
-> +        if (get_field(env->mcountinhibit, BIT(cidx)) && (val & BIT(cidx))) {
-> +	    /*
-> +             * Update the counter value for cycle/instret as we can't stop the
-> +             * host ticks. But we should show the current value at this moment.
-> +             */
-> +            if (riscv_pmu_ctr_monitor_cycles(env, cidx) ||
-> +                riscv_pmu_ctr_monitor_instructions(env, cidx)) {
-> +                counter->mhpmcounter_val = get_ticks(false) -
-> +                                           counter->mhpmcounter_prev +
-> +                                           counter->mhpmcounter_val;
-> +                if (riscv_cpu_mxl(env) == MXL_RV32) {
-> +                    counter->mhpmcounterh_val = get_ticks(false) -
-> +                                                counter->mhpmcounterh_prev +
-> +                                                counter->mhpmcounterh_val;
-> +		}
-> +            }
->           }
->       }
->   
-> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-> index 76f2150f78b5..3e0f2dd2ce2a 100644
-> --- a/target/riscv/machine.c
-> +++ b/target/riscv/machine.c
-> @@ -328,7 +328,6 @@ static const VMStateDescription vmstate_pmu_ctr_state = {
->           VMSTATE_UINTTL(mhpmcounterh_val, PMUCTRState),
->           VMSTATE_UINTTL(mhpmcounter_prev, PMUCTRState),
->           VMSTATE_UINTTL(mhpmcounterh_prev, PMUCTRState),
-> -        VMSTATE_BOOL(started, PMUCTRState),
-
-Unfortunately we can't remove fields from the VMStateDescription without breaking
-migration backward compatibility. Older QEMUs will attempt to read a field that
-doesn't exist and migration will fail.
-
-I'm assuming that we care about backward compat. If we're not up to this point yet
-then we can just bump the version_id of vmstate_pmu_ctr_state and be done with it.
-This is fine to do unless someone jumps in and complains that we broke a migration
-case for the 'virt' board. Granted, we don't have versioned boards yet so I'm unsure
-if someone would actually have a base to complain. Alistair, Drew, care to comment?
-
-
-Now, if we care about backward migration compat, we'll need to do as described in
-devel/migration/main.rst, section "Not sending existing elements". An example on
-how we need to proceed can also be seen in commit 6cc88d6bf9. But in short we
-would need to:
-
-- add a dummy property, e.g. a 'mig_started' bool
-
-- use a slightly different macro in vmstate:
-
-> -        VMSTATE_BOOL(started, PMUCTRState),
-> +        VMSTATE_BOOL_TEST(mig_started, PMUCTRState),
-
-- add hooks in pre_load()/post_load() to load the 'started' field
-
-
-
-Thanks,
-
-Daniel
-
->           VMSTATE_END_OF_LIST()
->       }
->   };
 > 
 
