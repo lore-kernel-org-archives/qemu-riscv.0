@@ -4,81 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 558A4C04FFE
-	for <qemu-riscv@archiver.kernel.org>; Thu,  2 May 2024 12:14:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6818EC4345F
+	for <qemu-riscv@archiver.kernel.org>; Thu,  2 May 2024 12:40:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s2VKB-0006Ua-Ov; Thu, 02 May 2024 08:14:07 -0400
+	id 1s2Vj2-0001PB-Tx; Thu, 02 May 2024 08:39:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1s2VK7-0006Fk-Qp
- for qemu-riscv@nongnu.org; Thu, 02 May 2024 08:14:04 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1s2VK0-00015X-5e
- for qemu-riscv@nongnu.org; Thu, 02 May 2024 08:13:59 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1714652029;
- h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=hMfa/XrGYhegbpAwndAKxgfT1VHN5XMhQpu8iMYZ4Ng=;
- b=Uvw/qGZEIlmQyhDMurFYJGvH5W3/aO95RZB93PF0c+9eYFPwu5maWu6zojw5/DjT7wzAzj
- /Qme2JR/z2bELiIOeJmmLLpT3ZAvDJyoQYfCLOcuxGEiZ//HX3F6cFXlOw/8OnhoAjz9wf
- B95ML1aUiqff/9Y3wnlkD5WMetDAoNQ=
-Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
- by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-130-xzCSHd0QOYiKA7j74SUk4w-1; Thu,
- 02 May 2024 08:13:45 -0400
-X-MC-Unique: xzCSHd0QOYiKA7j74SUk4w-1
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.rdu2.redhat.com
- [10.11.54.7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 3924C1C4C3E1;
- Thu,  2 May 2024 12:13:45 +0000 (UTC)
-Received: from redhat.com (unknown [10.42.28.138])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 0B43E1C0654B;
- Thu,  2 May 2024 12:13:41 +0000 (UTC)
-Date: Thu, 2 May 2024 13:13:40 +0100
-From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, Thomas Huth <thuth@redhat.com>,
- "Michael S. Tsirkin" <mst@redhat.com>, qemu-riscv@nongnu.org,
- David Hildenbrand <david@redhat.com>,
- Igor Mammedov <imammedo@redhat.com>, kvm@vger.kernel.org,
- qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
- Paolo Bonzini <pbonzini@redhat.com>, devel@lists.libvirt.org,
- Richard Henderson <richard.henderson@linaro.org>,
- Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>
-Subject: Re: [PATCH v4 20/22] hw/i386/pc: Remove deprecated pc-i440fx-2.3
- machine
-Message-ID: <ZjODdLACORiQ0Kfm@redhat.com>
-References: <20240416185939.37984-1-philmd@linaro.org>
- <20240416185939.37984-21-philmd@linaro.org>
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1s2Viy-0001O6-4w
+ for qemu-riscv@nongnu.org; Thu, 02 May 2024 08:39:44 -0400
+Received: from mail-ej1-x635.google.com ([2a00:1450:4864:20::635])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1s2Viv-00059R-HG
+ for qemu-riscv@nongnu.org; Thu, 02 May 2024 08:39:43 -0400
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-a524ecaf215so1012939666b.2
+ for <qemu-riscv@nongnu.org>; Thu, 02 May 2024 05:39:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1714653579; x=1715258379; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=XtYzsznNjgXFGwWxCNrrkFvPY6of5sv4Lpp6+h15FKA=;
+ b=WKkDoWPuD7hyt5aEyo7P/myOyXvuhrMn0QFLXxdSBYbt13gy0K9hmJpZYQVprbVv4O
+ +s4PLmqEjX+yiF5N0YSwUrdk0Ju9c/iiPPsS46qVilw8ua6UZqhRvyjdG3hfyEbqo9TW
+ CpF5Q0p3uK8tz1yvYHA+rYe1XBXvTFR/Fs4y0Vthy8iDdMHMX5yuiUIKSLUc53oOun0H
+ 2krItQxm+4N6Lpgx8Tb9MOMGmlIWctXjA2JvWmitN2Nay1HJs9EsoxzmnkgqRzC1SuTD
+ 3c1xEGliKzS71/qb56z6Lcy1Q5ONV00pc9/IZSmMoWxHYjB5p1Vdgrf2VAfm5Wr6hNbd
+ 0ipQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1714653579; x=1715258379;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=XtYzsznNjgXFGwWxCNrrkFvPY6of5sv4Lpp6+h15FKA=;
+ b=XyrRWn2HYGX5fbqR1wA6WcHJa0c19FFrUG7ODBqF6QGcqxdGP6mrzs0fiP/1ARvyIF
+ QhyYk4fzWHZ1mv9Hfv5sBs2WHAugK30tc05dk3u+f7vBTOj+mYv49wUBiZcngwr5KzOt
+ YWQ+vmTBIk7Zmd05SsF7sftakeut3fFQeB70gCuoa071c8eP1CC6X8sqICWMXSGv7Xru
+ rpbppkqhnQR6MbHyBxIW1RfMDYtYcuB2wHZj7u2dAMUcEFt3tdljm/0dpqEtrdeyIwL4
+ 3ZcsBQloWC/72DabScj4aUTT5tMH/KSI7yq3nxyvKy34Yb7YKwGci10++DdRdouAKD5z
+ +HUA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWDYbfEBvMS25Ql7Ey9YtRriGuPF6ewUkcTMY7tCPrA9EOJnTSMGTjsi271TflFXFbSPqGYtjPVx+AT4ida5icRrdvcnZQ=
+X-Gm-Message-State: AOJu0YwwkvCqE3YD4xVBVDjCottAvpCrw+0vOmxbnpGl4jbK8p5vnfuM
+ AfW45mCCaiauVmUtELKgiyvQofoRcYUJud4nuqPMvzyIixF/bJXxWwwQZaeOTAE=
+X-Google-Smtp-Source: AGHT+IEGkc+s89qdKLoT3eWuk6nkUxxNwpXKN10KrxjEQGkXdZLkg9/DT7Z74fFsHLOickC72NIQiA==
+X-Received: by 2002:a17:906:c02:b0:a58:cd39:d154 with SMTP id
+ s2-20020a1709060c0200b00a58cd39d154mr1232393ejf.11.1714653579313; 
+ Thu, 02 May 2024 05:39:39 -0700 (PDT)
+Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
+ [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
+ by smtp.gmail.com with ESMTPSA id
+ k25-20020a1709061c1900b00a58db23f174sm511734ejg.87.2024.05.02.05.39.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 02 May 2024 05:39:38 -0700 (PDT)
+Date: Thu, 2 May 2024 14:39:37 +0200
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: Atish Patra <atishp@rivosinc.com>, qemu-riscv@nongnu.org, 
+ qemu-devel@nongnu.org, palmer@dabbelt.com, liwei1518@gmail.com, 
+ zhiwei_liu@linux.alibaba.com, bin.meng@windriver.com, alistair.francis@wdc.com
+Subject: Re: [PATCH 1/3] target/riscv: Save counter values during
+ countinhibit update
+Message-ID: <20240502-8a8ecc74a81a9fa33bf8c9b1@orel>
+References: <20240429-countinhibit_fix-v1-0-802ec1e99133@rivosinc.com>
+ <20240429-countinhibit_fix-v1-1-802ec1e99133@rivosinc.com>
+ <d672ec9d-eaa0-48c1-9f99-d94cf06e7aac@ventanamicro.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20240416185939.37984-21-philmd@linaro.org>
-User-Agent: Mutt/2.2.12 (2023-09-09)
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.7
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=berrange@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -35
-X-Spam_score: -3.6
-X-Spam_bar: ---
-X-Spam_report: (-3.6 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.476,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+In-Reply-To: <d672ec9d-eaa0-48c1-9f99-d94cf06e7aac@ventanamicro.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::635;
+ envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x635.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -91,74 +97,126 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Apr 16, 2024 at 08:59:36PM +0200, Philippe Mathieu-Daudé wrote:
-> The pc-i440fx-2.3 machine was deprecated for the 8.2
-> release (see commit c7437f0ddb "docs/about: Mark the
-> old pc-i440fx-2.0 - 2.3 machine types as deprecated"),
-> time to remove it.
+On Tue, Apr 30, 2024 at 03:00:45PM GMT, Daniel Henrique Barboza wrote:
 > 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-> ---
->  docs/about/deprecated.rst       |  4 ++--
->  docs/about/removed-features.rst |  2 +-
->  hw/i386/pc.c                    | 25 -------------------------
->  hw/i386/pc_piix.c               | 19 -------------------
->  4 files changed, 3 insertions(+), 47 deletions(-)
+> 
+> On 4/29/24 16:28, Atish Patra wrote:
+> > Currently, if a counter monitoring cycle/instret is stopped via
+> > mcountinhibit we just update the state while the value is saved
+> > during the next read. This is not accurate as the read may happen
+> > many cycles after the counter is stopped. Ideally, the read should
+> > return the value saved when the counter is stopped.
+> > 
+> > Thus, save the value of the counter during the inhibit update
+> > operation and return that value during the read if corresponding bit
+> > in mcountihibit is set.
+> > 
+> > Signed-off-by: Atish Patra <atishp@rivosinc.com>
+> > ---
+> >   target/riscv/cpu.h     |  1 -
+> >   target/riscv/csr.c     | 32 ++++++++++++++++++++------------
+> >   target/riscv/machine.c |  1 -
+> >   3 files changed, 20 insertions(+), 14 deletions(-)
+> > 
+> > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> > index 3b1a02b9449a..09bbf7ce9880 100644
+> > --- a/target/riscv/cpu.h
+> > +++ b/target/riscv/cpu.h
+> > @@ -153,7 +153,6 @@ typedef struct PMUCTRState {
+> >       target_ulong mhpmcounter_prev;
+> >       /* Snapshort value of a counter in RV32 */
+> >       target_ulong mhpmcounterh_prev;
+> > -    bool started;
+> >       /* Value beyond UINT32_MAX/UINT64_MAX before overflow interrupt trigger */
+> >       target_ulong irq_overflow_left;
+> >   } PMUCTRState;
+> > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> > index 726096444fae..68ca31aff47d 100644
+> > --- a/target/riscv/csr.c
+> > +++ b/target/riscv/csr.c
+> > @@ -929,17 +929,11 @@ static RISCVException riscv_pmu_read_ctr(CPURISCVState *env, target_ulong *val,
+> >       if (get_field(env->mcountinhibit, BIT(ctr_idx))) {
+> >           /*
+> > -         * Counter should not increment if inhibit bit is set. We can't really
+> > -         * stop the icount counting. Just return the counter value written by
+> > -         * the supervisor to indicate that counter was not incremented.
+> > +         * Counter should not increment if inhibit bit is set. Just return the
+> > +         * current counter value.
+> >            */
+> > -        if (!counter->started) {
+> > -            *val = ctr_val;
+> > -            return RISCV_EXCP_NONE;
+> > -        } else {
+> > -            /* Mark that the counter has been stopped */
+> > -            counter->started = false;
+> > -        }
+> > +         *val = ctr_val;
+> > +         return RISCV_EXCP_NONE;
+> >       }
+> >       /*
+> > @@ -1973,9 +1967,23 @@ static RISCVException write_mcountinhibit(CPURISCVState *env, int csrno,
+> >       /* Check if any other counter is also monitoring cycles/instructions */
+> >       for (cidx = 0; cidx < RV_MAX_MHPMCOUNTERS; cidx++) {
+> > -        if (!get_field(env->mcountinhibit, BIT(cidx))) {
+> >               counter = &env->pmu_ctrs[cidx];
+> > -            counter->started = true;
+> > +        if (get_field(env->mcountinhibit, BIT(cidx)) && (val & BIT(cidx))) {
+> > +	    /*
+> > +             * Update the counter value for cycle/instret as we can't stop the
+> > +             * host ticks. But we should show the current value at this moment.
+> > +             */
+> > +            if (riscv_pmu_ctr_monitor_cycles(env, cidx) ||
+> > +                riscv_pmu_ctr_monitor_instructions(env, cidx)) {
+> > +                counter->mhpmcounter_val = get_ticks(false) -
+> > +                                           counter->mhpmcounter_prev +
+> > +                                           counter->mhpmcounter_val;
+> > +                if (riscv_cpu_mxl(env) == MXL_RV32) {
+> > +                    counter->mhpmcounterh_val = get_ticks(false) -
+> > +                                                counter->mhpmcounterh_prev +
+> > +                                                counter->mhpmcounterh_val;
+> > +		}
+> > +            }
+> >           }
+> >       }
+> > diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+> > index 76f2150f78b5..3e0f2dd2ce2a 100644
+> > --- a/target/riscv/machine.c
+> > +++ b/target/riscv/machine.c
+> > @@ -328,7 +328,6 @@ static const VMStateDescription vmstate_pmu_ctr_state = {
+> >           VMSTATE_UINTTL(mhpmcounterh_val, PMUCTRState),
+> >           VMSTATE_UINTTL(mhpmcounter_prev, PMUCTRState),
+> >           VMSTATE_UINTTL(mhpmcounterh_prev, PMUCTRState),
+> > -        VMSTATE_BOOL(started, PMUCTRState),
+> 
+> Unfortunately we can't remove fields from the VMStateDescription without breaking
+> migration backward compatibility. Older QEMUs will attempt to read a field that
+> doesn't exist and migration will fail.
+> 
+> I'm assuming that we care about backward compat. If we're not up to this point yet
+> then we can just bump the version_id of vmstate_pmu_ctr_state and be done with it.
+> This is fine to do unless someone jumps in and complains that we broke a migration
+> case for the 'virt' board. Granted, we don't have versioned boards yet so I'm unsure
+> if someone would actually have a base to complain. Alistair, Drew, care to comment?
 
+Without versioning boards, then we shouldn't expect migrations to work for
+anything other than between QEMUs of the same version. We're delaying the
+versioning until it's reasonable to expect users to prefer to migrate
+their guests, rather than reboot them, when updating the QEMU the guests
+are running on. I'm not sure how we'll know when that is, but I think we
+can wait until somebody shouts or at least until we see that the tooling
+which makes migration easy (libvirt, etc.) is present.
 
-> diff --git a/hw/i386/pc_piix.c b/hw/i386/pc_piix.c
-> index 30bcd86ee6..370d130a6d 100644
-> --- a/hw/i386/pc_piix.c
-> +++ b/hw/i386/pc_piix.c
-> @@ -421,14 +421,6 @@ static void pc_set_south_bridge(Object *obj, int value, Error **errp)
->   * hw_compat_*, pc_compat_*, or * pc_*_machine_options().
->   */
+Regarding this patch, I'm curious what the current status is of migration.
+If we can currently migrate from a QEMU with the latest released version
+to a QEMU built from the current upstream, and then back again, then I
+think this patch should be written in a way to preserve that. If we
+already fail that ping-pong migration, then, as this patch doesn't make
+things worse, we might as well save ourselves from the burden of the
+compat code.
 
-The comment that is just out of sight in the diff is now obsolete
-and should be removed too.
-
->  
-> -static void pc_compat_2_3_fn(MachineState *machine)
-> -{
-> -    X86MachineState *x86ms = X86_MACHINE(machine);
-> -    if (kvm_enabled()) {
-> -        x86ms->smm = ON_OFF_AUTO_OFF;
-> -    }
-> -}
-> -
->  #ifdef CONFIG_ISAPC
->  static void pc_init_isa(MachineState *machine)
->  {
-> @@ -812,17 +804,6 @@ static void pc_i440fx_2_4_machine_options(MachineClass *m)
->  DEFINE_I440FX_MACHINE(v2_4, "pc-i440fx-2.4", NULL,
->                        pc_i440fx_2_4_machine_options)
->  
-> -static void pc_i440fx_2_3_machine_options(MachineClass *m)
-> -{
-> -    pc_i440fx_2_4_machine_options(m);
-> -    m->hw_version = "2.3.0";
-> -    compat_props_add(m->compat_props, hw_compat_2_3, hw_compat_2_3_len);
-> -    compat_props_add(m->compat_props, pc_compat_2_3, pc_compat_2_3_len);
-> -}
-> -
-> -DEFINE_I440FX_MACHINE(v2_3, "pc-i440fx-2.3", pc_compat_2_3_fn,
-> -                      pc_i440fx_2_3_machine_options);
-
-This is the last DEFINE_I440FX_MACHINE call that provides a
-non-NULL 3rd parameter.
-
-IOW, there could be a further patch removing the 3rd 'compatfn'
-parameter now it is finally obsolete.
-
-With regards,
-Daniel
--- 
-|: https://berrange.com      -o-    https://www.flickr.com/photos/dberrange :|
-|: https://libvirt.org         -o-            https://fstop138.berrange.com :|
-|: https://entangle-photo.org    -o-    https://www.instagram.com/dberrange :|
-
+Thanks,
+drew
 
