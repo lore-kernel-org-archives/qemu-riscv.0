@@ -4,73 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADC53C4345F
-	for <qemu-riscv@archiver.kernel.org>; Fri,  3 May 2024 10:40:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31D85C10F16
+	for <qemu-riscv@archiver.kernel.org>; Fri,  3 May 2024 11:55:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s2qKO-0006Z3-1p; Fri, 03 May 2024 06:39:44 -0400
+	id 1s2rVf-0000MU-6N; Fri, 03 May 2024 07:55:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alexei.filippov@syntacore.com>)
- id 1s2qKL-0006Xc-Ms; Fri, 03 May 2024 06:39:41 -0400
-Received: from mta-04.yadro.com ([89.207.88.248])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alexei.filippov@syntacore.com>)
- id 1s2qKJ-0000VT-Ht; Fri, 03 May 2024 06:39:41 -0400
-DKIM-Filter: OpenDKIM Filter v2.11.0 mta-04.yadro.com 69AEEC0006
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
- s=mta-04; t=1714732775;
- bh=4tUJdpqAd9R6UWBtq4RMNG1+HhfhmB08gWUPWb3n/n8=;
- h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type:From;
- b=u0L8iX5VnSGAxKyHp5bn7ErXTn+7o9WIWN0wfVvxbJFXR7J+1paa20eJ3qnRGi+NC
- jvawAb7ltOuHIbQGAtJvHHO7eV0h+8PoERIySGWFNpuCSo1yx7Eiyx26V6cbMHDQlq
- QR7cg89VdMaqmOZM8X9aqq9AHkwnu931pSM+NbdfhMuJI96HvBxpkgVPFmm9BQ+F1J
- HXuH+Aq/Tr/qR3kJDazIAdetW96OTeqSnvVeodAhZZqWb3HZS90hKfVA+U0msT9FgH
- iNVnX+XC0MvwzGyCA10ZzJLPIKPOmNMj8AzbiXze9aaPz3DXQu+7RQKQUxXVSFwcet
- iaUpB+7F2oVMQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
- s=mta-03; t=1714732775;
- bh=4tUJdpqAd9R6UWBtq4RMNG1+HhfhmB08gWUPWb3n/n8=;
- h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type:From;
- b=mNOhuLWCsYl0i4Idl2FyReUTGJhqxbWsqGW4lBYMeln54OIuIQOFosNRb9zWOY+5B
- 88eSyaEFzigLm7nPvcRHdAF5Gar/h01xZ3bHqJ4aZteSD/YLPJ5l1x5YR53AMG4b/0
- YLjTSL/0MaNtznDXVf1/922aotA0EIDp1QTvVvTavPbVu15uNbeMnU5SuIHrDCuN3S
- 5PjHi0Ip+MlZd5giHSdz7CSq5OmVIgQlwe5zTBWzylpZSnh8wUg/VwEh8PvFxb5D6R
- BSx+OWYNszs9sccxMXGwvU2hP/fHKjW8/UPQ8uJOycMIor8hdv/HUJ0AxLhkPUAFvM
- kitKDMYx2MNsw==
-Message-ID: <e7acd34f-956c-47ea-acfd-0b9ef82ff90c@syntacore.com>
-Date: Fri, 3 May 2024 13:39:32 +0300
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1s2rVY-0000Dk-OV
+ for qemu-riscv@nongnu.org; Fri, 03 May 2024 07:55:21 -0400
+Received: from mail-ej1-x62d.google.com ([2a00:1450:4864:20::62d])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1s2rVJ-0002XL-P0
+ for qemu-riscv@nongnu.org; Fri, 03 May 2024 07:55:20 -0400
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-a5557e3ebcaso498277666b.1
+ for <qemu-riscv@nongnu.org>; Fri, 03 May 2024 04:55:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1714737303; x=1715342103; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=XPmmVB2NIQMrFdtHs/DkWgUhXnPTMJp4eJItgyjhvcI=;
+ b=Kku6VBMH3mgV+bRJS2M2HVdhoS8lHaYHC/IwnVY67xbdLcD2KmsOPa6+NXCUDG17zN
+ nLu3ZtYGd3/mCga1OmPHEHO8gkz14hN2EoN5jibLR4ADGoI+DazDBr9O13g4tpP0kTc9
+ 568yFfLh5Bir9VhpTtAcMOLw8xrFvI1WbqnfwUq34CXbP4wzpKs1twmObza/iRtt9LJL
+ bLTeDdkAk5Uy7xdlpHfdST8fQq/OIeNgJmjDU+mJj9MiqLZ3JXEyPWUYtp1lU4PUrew9
+ LPGS48WbLy7RBeNHFp+BNRsjUq5QprFpxwiFN/oKeiWcDHda/kbsIIQTOZUx8pTql6yt
+ a0LA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1714737304; x=1715342104;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=XPmmVB2NIQMrFdtHs/DkWgUhXnPTMJp4eJItgyjhvcI=;
+ b=U47s43a0gphnpSZHQulEm5VcWSgpPzSKnm7Y/i6TsOk+poxY3rCJjNFE/khD4/j1ol
+ krutf4y4OIFqFC1Ek5lktdzHWUqc3lVyO2JrZWaYya7MmxCOZDvfX/jul2TBrCBQHPJR
+ zjQqiKx7obsvymm+kAGUgQHjow/wKX+TnmrsTpN+eMWBZogiyZ7BC6gLEYhGh6c767JR
+ PS/hiAU2Ptgn2EU/2J3yCNAA1khjs7m9FUy6ijezKUQA/lIkE25PbPxFW4xw79mJRcMX
+ X1c39sT0nNoSA+pedX3j6sngDruC+n38V3uSzY2vOn9CzCUmZ3RLmOVCSIB3h/hHV/k+
+ MnVA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXbIVLIvvBuw4BnLij9xYMggqS55KvhYg8KNn+6nKOlZU1h2j8/GMobc640DmnfF6UcnTfqmSPHWdIN/C08/evqK7LRAcg=
+X-Gm-Message-State: AOJu0Yy4NHWzf+LVnxrDzpCI/9j3C00KEywcbrFh2LCjOW9p+3Ti1Et7
+ S6cPN6Iu739zGsNvtsm83a7bQ1Rclv4BgMWwNiyBZREkURutZ96UGddkBXswsP0=
+X-Google-Smtp-Source: AGHT+IHabr4V0on42EpFuBZCtspfGWwMqtfKlMFysjY56S+e5VICmjD/MWpwfpxrs05KG8PBE266sA==
+X-Received: by 2002:a17:906:309b:b0:a59:9c2f:c7d4 with SMTP id
+ 27-20020a170906309b00b00a599c2fc7d4mr338918ejv.19.1714737303572; 
+ Fri, 03 May 2024 04:55:03 -0700 (PDT)
+Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
+ [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
+ by smtp.gmail.com with ESMTPSA id
+ g2-20020a1709061c8200b00a59937ec4c4sm518079ejh.87.2024.05.03.04.55.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 03 May 2024 04:55:02 -0700 (PDT)
+Date: Fri, 3 May 2024 13:55:01 +0200
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Aleksei Filippov <alexei.filippov@syntacore.com>
+Cc: alistair.francis@wdc.com, alistair23@gmail.com, 
+ apatel@ventanamicro.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
+ liwei1518@gmail.com, palmer@dabbelt.com, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, zhiwei_liu@linux.alibaba.com
 Subject: Re: [PATCH v6] target/riscv/kvm/kvm-cpu.c: kvm_riscv_handle_sbi()
  fail with vendor-specific SBI
-To: Andrew Jones <ajones@ventanamicro.com>
-CC: <alistair.francis@wdc.com>, <alistair23@gmail.com>,
- <apatel@ventanamicro.com>, <bin.meng@windriver.com>,
- <dbarboza@ventanamicro.com>, <liwei1518@gmail.com>, <palmer@dabbelt.com>,
- <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>,
- <zhiwei_liu@linux.alibaba.com>
+Message-ID: <20240503-1417868a079951810dadb71c@orel>
 References: <20240422-e78b28f00a168518c5d4937a@orel>
  <20240422114254.13839-1-alexei.filippov@syntacore.com>
  <20240422-fd9fc07462257b6da42d8eb5@orel>
  <20240425-7ae473e720f2879f34c957f6@orel>
-Content-Language: en-US
-From: Aleksei Filippov <alexei.filippov@syntacore.com>
-Organization: Syntacore
-In-Reply-To: <20240425-7ae473e720f2879f34c957f6@orel>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: T-EXCH-09.corp.yadro.com (172.17.11.59) To
- T-EXCH-12.corp.yadro.com (172.17.11.143)
-Received-SPF: permerror client-ip=89.207.88.248;
- envelope-from=alexei.filippov@syntacore.com; helo=mta-04.yadro.com
+ <e7acd34f-956c-47ea-acfd-0b9ef82ff90c@syntacore.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <e7acd34f-956c-47ea-acfd-0b9ef82ff90c@syntacore.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::62d;
+ envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x62d.google.com
 X-Spam_score_int: 4
 X-Spam_score: 0.4
 X-Spam_bar: /
 X-Spam_report: (0.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
  DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SORTED_RECIPS=2.499,
- SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01 autolearn=no autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -86,107 +102,117 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
-
-On 25.04.2024 12:21, Andrew Jones wrote:
-> On Mon, Apr 22, 2024 at 02:31:36PM +0200, Andrew Jones wrote:
->> On Mon, Apr 22, 2024 at 02:42:54PM +0300, Alexei Filippov wrote:
->>> kvm_riscv_handle_sbi() may return not supported return code to not
->>> trigger qemu abort with vendor-specific sbi.
->>>
->>> Add new error path to provide proper error in case of
->>> qemu_chr_fe_read_all() may not return sizeof(ch).
->>
->> I think something more along the lines of what I wrote in my previous
->> reply will help clarify this more. Here's what I wrote
->>
->> """
->> Exactly zero just means we failed to read input, which can happen, so
->> telling the SBI caller we failed to read, but telling the caller of this
->> function that we successfully emulated the SBI call, is correct. However,
->> anything else, other than sizeof(ch), means something unexpected happened,
->> so we should indeed return an error from this function.
->> """
->>
->> Thanks,
->> drew
->>
->>>
->>> Added SBI related return code's defines.
->>>
->>> Signed-off-by: Alexei Filippov <alexei.filippov@syntacore.com>
->>> ---
->>> Changes since v4-5:
->>> 		-Added new error path in case of qemu_chr_fe_read_all() may not
->>> 		return sizeof(ch).
->>> 		-Added more comments in commit message.
->>>   target/riscv/kvm/kvm-cpu.c         | 10 ++++++----
->>>   target/riscv/sbi_ecall_interface.h | 12 ++++++++++++
->>>   2 files changed, 18 insertions(+), 4 deletions(-)
->>>
->>> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
->>> index f9dbc18a76..5bb7b74d03 100644
->>> --- a/target/riscv/kvm/kvm-cpu.c
->>> +++ b/target/riscv/kvm/kvm-cpu.c
->>> @@ -1173,16 +1173,18 @@ static int kvm_riscv_handle_sbi(CPUState *cs, struct kvm_run *run)
->>>           ret = qemu_chr_fe_read_all(serial_hd(0)->be, &ch, sizeof(ch));
->>>           if (ret == sizeof(ch)) {
->>>               run->riscv_sbi.ret[0] = ch;
->>> +            ret = 0;
->>> +        } else if (ret == 0) {
->>> +            run->riscv_sbi.ret[0] = SBI_ERR_FAILURE;
+On Fri, May 03, 2024 at 01:39:32PM GMT, Aleksei Filippov wrote:
 > 
-> I'd prefer we still explicitly assign ret[0] to -1 here since that's what
-> the spec explicitly says.
 > 
-> Thanks,
-> drew
+> On 25.04.2024 12:21, Andrew Jones wrote:
+> > On Mon, Apr 22, 2024 at 02:31:36PM +0200, Andrew Jones wrote:
+> > > On Mon, Apr 22, 2024 at 02:42:54PM +0300, Alexei Filippov wrote:
+> > > > kvm_riscv_handle_sbi() may return not supported return code to not
+> > > > trigger qemu abort with vendor-specific sbi.
+> > > > 
+> > > > Add new error path to provide proper error in case of
+> > > > qemu_chr_fe_read_all() may not return sizeof(ch).
+> > > 
+> > > I think something more along the lines of what I wrote in my previous
+> > > reply will help clarify this more. Here's what I wrote
+> > > 
+> > > """
+> > > Exactly zero just means we failed to read input, which can happen, so
+> > > telling the SBI caller we failed to read, but telling the caller of this
+> > > function that we successfully emulated the SBI call, is correct. However,
+> > > anything else, other than sizeof(ch), means something unexpected happened,
+> > > so we should indeed return an error from this function.
+> > > """
+> > > 
+> > > Thanks,
+> > > drew
+> > > 
+> > > > 
+> > > > Added SBI related return code's defines.
+> > > > 
+> > > > Signed-off-by: Alexei Filippov <alexei.filippov@syntacore.com>
+> > > > ---
+> > > > Changes since v4-5:
+> > > > 		-Added new error path in case of qemu_chr_fe_read_all() may not
+> > > > 		return sizeof(ch).
+> > > > 		-Added more comments in commit message.
+> > > >   target/riscv/kvm/kvm-cpu.c         | 10 ++++++----
+> > > >   target/riscv/sbi_ecall_interface.h | 12 ++++++++++++
+> > > >   2 files changed, 18 insertions(+), 4 deletions(-)
+> > > > 
+> > > > diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+> > > > index f9dbc18a76..5bb7b74d03 100644
+> > > > --- a/target/riscv/kvm/kvm-cpu.c
+> > > > +++ b/target/riscv/kvm/kvm-cpu.c
+> > > > @@ -1173,16 +1173,18 @@ static int kvm_riscv_handle_sbi(CPUState *cs, struct kvm_run *run)
+> > > >           ret = qemu_chr_fe_read_all(serial_hd(0)->be, &ch, sizeof(ch));
+> > > >           if (ret == sizeof(ch)) {
+> > > >               run->riscv_sbi.ret[0] = ch;
+> > > > +            ret = 0;
+> > > > +        } else if (ret == 0) {
+> > > > +            run->riscv_sbi.ret[0] = SBI_ERR_FAILURE;
+> > 
+> > I'd prefer we still explicitly assign ret[0] to -1 here since that's what
+> > the spec explicitly says.
+> > 
+> > Thanks,
+> > drew
+> 
+> Can you please explain it a little bit more, cz I believe SBI_ERR_FAILURE is
+> -1 anyway. Defines was added at first place just to came along with Linux
+> kernel SBI related defines.
 
-Can you please explain it a little bit more, cz I believe SBI_ERR_FAILURE is -1 
-anyway. Defines was added at first place just to came along with Linux kernel 
-SBI related defines.
--- 
-Sincerely,
-Aleksei Filippov
+Legacy SBI calls like SBI_EXT_0_1_CONSOLE_GETCHAR don't return a struct
+sbiret, they only return a function-specific long. The spec says for
+Getchar that it returns "...the byte on success, or -1 for failure."
+So we should explicitly set failure to -1, especially since
+SBI_ERR_FAILURE isn't defined for legacy SBI calls.
 
->>>           } else {
->>> -            run->riscv_sbi.ret[0] = -1;
->>> +            ret = -1;
->>>           }
->>> -        ret = 0;
->>>           break;
->>>       default:
->>>           qemu_log_mask(LOG_UNIMP,
->>> -                      "%s: un-handled SBI EXIT, specific reasons is %lu\n",
->>> +                      "%s: Unhandled SBI exit with extension-id %lu\n"
->>>                         __func__, run->riscv_sbi.extension_id);
->>> -        ret = -1;
->>> +        run->riscv_sbi.ret[0] = SBI_ERR_NOT_SUPPORTED;
->>>           break;
->>>       }
->>>       return ret;
->>> diff --git a/target/riscv/sbi_ecall_interface.h b/target/riscv/sbi_ecall_interface.h
->>> index 43899d08f6..a2e21d9b8c 100644
->>> --- a/target/riscv/sbi_ecall_interface.h
->>> +++ b/target/riscv/sbi_ecall_interface.h
->>> @@ -69,4 +69,16 @@
->>>   #define SBI_EXT_VENDOR_END              0x09FFFFFF
->>>   /* clang-format on */
->>>   
->>> +/* SBI return error codes */
->>> +#define SBI_SUCCESS                  0
->>> +#define SBI_ERR_FAILURE             -1
->>> +#define SBI_ERR_NOT_SUPPORTED       -2
->>> +#define SBI_ERR_INVALID_PARAM       -3
->>> +#define SBI_ERR_DENIED              -4
->>> +#define SBI_ERR_INVALID_ADDRESS     -5
->>> +#define SBI_ERR_ALREADY_AVAILABLE   -6
->>> +#define SBI_ERR_ALREADY_STARTED     -7
->>> +#define SBI_ERR_ALREADY_STOPPED     -8
->>> +#define SBI_ERR_NO_SHMEM            -9
->>> +
->>>   #endif
->>> -- 
->>> 2.34.1
->>>
+Thanks,
+drew
+
+> -- 
+> Sincerely,
+> Aleksei Filippov
+> 
+> > > >           } else {
+> > > > -            run->riscv_sbi.ret[0] = -1;
+> > > > +            ret = -1;
+> > > >           }
+> > > > -        ret = 0;
+> > > >           break;
+> > > >       default:
+> > > >           qemu_log_mask(LOG_UNIMP,
+> > > > -                      "%s: un-handled SBI EXIT, specific reasons is %lu\n",
+> > > > +                      "%s: Unhandled SBI exit with extension-id %lu\n"
+> > > >                         __func__, run->riscv_sbi.extension_id);
+> > > > -        ret = -1;
+> > > > +        run->riscv_sbi.ret[0] = SBI_ERR_NOT_SUPPORTED;
+> > > >           break;
+> > > >       }
+> > > >       return ret;
+> > > > diff --git a/target/riscv/sbi_ecall_interface.h b/target/riscv/sbi_ecall_interface.h
+> > > > index 43899d08f6..a2e21d9b8c 100644
+> > > > --- a/target/riscv/sbi_ecall_interface.h
+> > > > +++ b/target/riscv/sbi_ecall_interface.h
+> > > > @@ -69,4 +69,16 @@
+> > > >   #define SBI_EXT_VENDOR_END              0x09FFFFFF
+> > > >   /* clang-format on */
+> > > > +/* SBI return error codes */
+> > > > +#define SBI_SUCCESS                  0
+> > > > +#define SBI_ERR_FAILURE             -1
+> > > > +#define SBI_ERR_NOT_SUPPORTED       -2
+> > > > +#define SBI_ERR_INVALID_PARAM       -3
+> > > > +#define SBI_ERR_DENIED              -4
+> > > > +#define SBI_ERR_INVALID_ADDRESS     -5
+> > > > +#define SBI_ERR_ALREADY_AVAILABLE   -6
+> > > > +#define SBI_ERR_ALREADY_STARTED     -7
+> > > > +#define SBI_ERR_ALREADY_STOPPED     -8
+> > > > +#define SBI_ERR_NO_SHMEM            -9
+> > > > +
+> > > >   #endif
+> > > > -- 
+> > > > 2.34.1
+> > > > 
 
