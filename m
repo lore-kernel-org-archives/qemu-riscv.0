@@ -4,141 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 526B8C4345F
-	for <qemu-riscv@archiver.kernel.org>; Mon,  6 May 2024 05:47:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 163ACC10F16
+	for <qemu-riscv@archiver.kernel.org>; Mon,  6 May 2024 06:12:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s3rBn-0007tn-Cd; Mon, 06 May 2024 01:47:03 -0400
+	id 1s3raO-0005kj-2i; Mon, 06 May 2024 02:12:28 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jeeheng.sia@starfivetech.com>)
- id 1s3rBW-0007nD-JA; Mon, 06 May 2024 01:46:56 -0400
-Received: from mail-sh0chn02on2071d.outbound.protection.partner.outlook.cn
- ([2406:e500:4420:2::71d]
- helo=CHN02-SH0-obe.outbound.protection.partner.outlook.cn)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jeeheng.sia@starfivetech.com>)
- id 1s3rBQ-0005oD-1v; Mon, 06 May 2024 01:46:45 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=dRbF6h+Pv01o4u8Xbq9T7C87+wFwG/aBBYLX2Qoc15TrB5QQJcVyMUNceh2QMK8Hoa1zir0JiSsBgXndzQ38vfw70NqPDW069+7hioLBhWuN5azRSDvoD4YC8gWbYo8ZyHYRrFsxXoRz80c4JFFROPiFkp2OKF2q77i6WdXOdioKjYFY40EzEtNE6eTpTDuJyXpq8zs/R8o0O1UWi3VDArLLv89+/jEOhWREJHkoZrmv1Wc+pQ8uWnBce39nSfdyRvEbF7xCoL1Fs8ahx2bOWPzHrbenAUc2LMGmpjGrnKSr1saHTdQu4YcYswZriPetkzv2Y0oJ/5qKKmyy2k0bIQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=soINnmFFapw1a4ZiYQ4Op3sbyioJxy1Oo/jJBkWGxco=;
- b=C4467Ed4yJfiaUDtZ6fBu4oqwoBQXAKYXIhntjXXooJUBKLMVMzgLANtM9F/KRJehqn/zV1/UYdi23+s4qllCIqOM/KFE21DgluYNn2Ty2XHrZ3PU/WnThPOBJYFRr9CCO0tRklY3ZaGzXLys84pre4rrp4dOoZTzG+IUJHhSEFqf1DGRGSura75Y3de74850a8dDOMD4rMNuyroWqW+Mr+TC5YKcPZZW7nBeEa+mLWuylym/aTBv6zl50p5aIjZIlTQTR8rvnU5UHJQUb1U9QiBGHB3/qGElpxgJNW5PkdX6tMlEmbTja57eIDaoLsyBflmQSr+GpM29X0atgzniQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=starfivetech.com; dmarc=pass action=none
- header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
-Received: from NT0PR01MB1278.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c510:12::10) by NT0PR01MB1040.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c510:d::14) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7472.33; Mon, 6 May
- 2024 05:46:24 +0000
-Received: from NT0PR01MB1278.CHNPR01.prod.partner.outlook.cn
- ([fe80::e604:661e:e939:4c87]) by
- NT0PR01MB1278.CHNPR01.prod.partner.outlook.cn ([fe80::e604:661e:e939:4c87%4])
- with mapi id 15.20.7472.044; Mon, 6 May 2024 05:46:24 +0000
-From: JeeHeng Sia <jeeheng.sia@starfivetech.com>
-To: Peter Maydell <peter.maydell@linaro.org>
-CC: "qemu-arm@nongnu.org" <qemu-arm@nongnu.org>, "qemu-devel@nongnu.org"
- <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
- "mst@redhat.com" <mst@redhat.com>, "imammedo@redhat.com"
- <imammedo@redhat.com>, "anisinha@redhat.com" <anisinha@redhat.com>,
- "shannon.zhaosl@gmail.com" <shannon.zhaosl@gmail.com>,
- "sunilvl@ventanamicro.com" <sunilvl@ventanamicro.com>, "palmer@dabbelt.com"
- <palmer@dabbelt.com>, "alistair.francis@wdc.com" <alistair.francis@wdc.com>,
- "bin.meng@windriver.com" <bin.meng@windriver.com>, "liwei1518@gmail.com"
- <liwei1518@gmail.com>, "dbarboza@ventanamicro.com"
- <dbarboza@ventanamicro.com>, "zhiwei_liu@linux.alibaba.com"
- <zhiwei_liu@linux.alibaba.com>
-Subject: RE: [PATCH v1 0/2] Upgrade ACPI SPCR table to support SPCR table
- version 4 format
-Thread-Topic: [PATCH v1 0/2] Upgrade ACPI SPCR table to support SPCR table
- version 4 format
-Thread-Index: AQHanE9f4TY4Mv2Vj0W7wml1LjpFr7GDqtWAgAYLrAA=
-Date: Mon, 6 May 2024 05:46:24 +0000
-Message-ID: <NT0PR01MB12781A762B996998AF0B7FDD9C1CA@NT0PR01MB1278.CHNPR01.prod.partner.outlook.cn>
-References: <20240502051233.50749-1-jeeheng.sia@starfivetech.com>
- <CAFEAcA_FO7BvUDbnJdUTkuatFse7bWR2mjL2OQ_vsB_dLdKbow@mail.gmail.com>
-In-Reply-To: <CAFEAcA_FO7BvUDbnJdUTkuatFse7bWR2mjL2OQ_vsB_dLdKbow@mail.gmail.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=starfivetech.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: NT0PR01MB1278:EE_|NT0PR01MB1040:EE_
-x-ms-office365-filtering-correlation-id: be68fc63-9511-4cd7-87e2-08dc6d8fdd67
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: Akt23vHCeXkjWHpbw5oaTGQZBIWup7ELBfE4CuyitYNiSuw8iMAQTfNjqBdgSQ4/cfHbwf1x8/PFbWdLHXU36XmFWNkGKdg4csYtgtbxPy/1keubpcoZKP5wRdxrw/P1Wwj0u9Uc55Kg25QSy569jH8ol/Eo6rJSBht10RDc8xSIuYZaMgQ+NB8Z8QlMT+SFa5ea1ooYj0e2khcagOmoQIDZJxOQp1wXPa6T2RJoATyaBDFYGHAy6WGml/O8ocAqH79Eb3OABwkqAEmb880nzqBh7irrUepxEJxau58O9DFfYcp8Wy5Ds+E3BN7mR2vT3W8vFxUJ1Zf2SDVy/hnv0SnB2qKrT472FePu86SHhar0O51LiP9nRRU/4PNAMITa6IJLUA6p5fitt5wVcO3lg2m4Grt5yZxBFAQcSXDUDBcpqmPUD5Hewt68z7DlWNEXeAKt8vp6TBcXit7+cEXVgwxZnZdJ2vMK4uFPFPQ0KN/PQiAYKNCEXg0/ALU7QMMydIaeC0VTA1z5vRfBVPx8vJrg08GztHV7I62wYdfNok5sMSo7cBMLLHPnxP1h6crESZ45osOXlFXiyCLbDzE/PfpSWLXnsU9xKnNhaHev5K/awvj2CxGeohVYfeDSOyxe
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:NT0PR01MB1278.CHNPR01.prod.partner.outlook.cn; PTR:;
- CAT:NONE;
- SFS:(13230031)(366007)(41320700004)(7416005)(1800799015)(38070700009); DIR:OUT;
- SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?MzRESDJkaTYvWWRVV1V3SDlKNTcwUm9iQ2tHOGgweE9yWFF5S0xXSlpRTEZY?=
- =?utf-8?B?cTVwNU91MU5BbFFaMzVDSGtyeTNTTG1zckZPaE1CUk9oTTlwQXZhR1lvTGtt?=
- =?utf-8?B?S0lmRTkyQURtL3Z3UzltLzBOdmNBS0NPc1F3Q0NIbEZDQ2NJRi9xTEo0L1R4?=
- =?utf-8?B?bmx4MXQrbi9KZTBZZStVdlBQeVZjYVZmcDdtT2M3U0VQc3dkSE40TWZlWUZZ?=
- =?utf-8?B?S004d00vcFQ0MnBpeXpSR0ZQSTl0SE9YeUhYQkV5Qy9aL2NReDVYZS9JUXlz?=
- =?utf-8?B?WUZGeGZyRjlzWkg2cm9acEVFNXBHTVdEcU05cmNBbldLc3VFZ1pyTms4U3ls?=
- =?utf-8?B?RjNpbHR3M1VUdzRyM1RXQ0NHL3VMSkRmQ2NqQ0RweWRwVUpYYU9jZ3JjZ1Y5?=
- =?utf-8?B?ZDBxWTQwWkV1ZTYzbTdjc1NuV0d1cFh5VE5sdFJuTENDOXFDZmZxRlJFQktw?=
- =?utf-8?B?bi90V1duQi9COFpRNEY5Qzg1TWIwWkhFY0ppSk5VYXh1V1YrRDlMQXZGNHRx?=
- =?utf-8?B?dmRwOHFnOEU4NnBVZUMzZ3VDYXZ2S0lLaWZZN0kzZDZOQ0FBRUhDSUhOS2h4?=
- =?utf-8?B?aDBma0V6VFREYk43L25aNlFmQVo3bTJzbFI5SElkSzJuRjlqNENDczdhSTJL?=
- =?utf-8?B?YTQyeTRzRWxrbnJKK3oxdzJIc1RUbmpZTGZKbCt6UVkrQ2lQWkFnc3VIUHcw?=
- =?utf-8?B?c09IQUl1aVp5cVUrUGtFTWlrVXlpczJwbHljelJCSCttN1dwTmkxdFJmbG1Y?=
- =?utf-8?B?L2FJVktjTWFUb1BCSUdrU0EwSHVPUVRxVzBUMitZb1lHNXdIejQ1OHpnaTIv?=
- =?utf-8?B?UUtGWklMaWRhSmlZQ2ZYTTBaT29rS0lPRU5LeHVRYlhMejhPb3JzNGRleWFh?=
- =?utf-8?B?OTBidXN6ejJNcXhKWkZGN1A0Zkk0eTRGUCtZbkhnNWgzbFdrbWp5bHBhdWlo?=
- =?utf-8?B?RTBXSWJWZHl6TW5KTlllN29Fd09RV0grQmRQSllUZG1SWDlWODZrV1lCWXVX?=
- =?utf-8?B?NkduQ1FRcVdmbk9Od0s0bUljbXAxYjNnODZIQ1NDU3RKbGNPK0VPYXVxZFNO?=
- =?utf-8?B?bjRoVGd4M25hM0ZRZkRCTTJnaVVvQ05lR0g5UmhPcjllVDR2UUYycW1iQUo0?=
- =?utf-8?B?alM3OEUwSHJPYktiK3NUcmx2NjJISkRMMFNpQVQrbk5QS1NLdmp1ais0QWd5?=
- =?utf-8?B?aFl6Rnd0dEtONnE4eDdoZm4rZ2E3eU1YNmRYUWZiUElPc05SNFo4N2hmTFpR?=
- =?utf-8?B?dTRGQ0VONFVhVTJ2b0J2OHd0TkRLY3A1aVpRQllpYVJtYVJrUnl4bitZSnIv?=
- =?utf-8?B?MjBURVV2akRvN21JSE5xVGYwQ0FiZWVkNllxMjRQMHRCUXRreENpQStRcmgx?=
- =?utf-8?B?S2laWmpwQnNLQlJmd3E3NG5VL21QMkVzc0F4b2NjUTVOaVNvWkVibVFzNkVY?=
- =?utf-8?B?bzVkcWtBbE0rQ3F4djNFaFZobEV2VnpmS1JhVFRBMmF5YkZHQXpUYmZQSFE3?=
- =?utf-8?B?ZGhQaEpNdWF1STNqemp5WHVTNUdZSm5Ca3V3VUN4bUlKV3FYTVFCbnRQeC9j?=
- =?utf-8?B?eC9TYmlFNExaQ0J2Vkk5SFdzWFFwelZiNXNoaDJPS21oaEpKZWJGUlJabU1p?=
- =?utf-8?B?djVzVlJvcTExVTJrdUxiYnVFMFRkNEJnVmg1aTB6ZUFHa1pWWEVHczBmK1NF?=
- =?utf-8?B?WEo4Nndrbnp5aTdiMTBjaFNRcVBFMElob1JFMkVGYUJReW0wa0VWempXVUta?=
- =?utf-8?B?a2RhU3VMdjhmdkdzY2V1SjNqeGpCQVp3K3hNWTdLTnhVQjJCeXVBZ3F3c2Q1?=
- =?utf-8?B?Q1F6TnUzQVhxaTVFNmFvRXZOUDBDcE5JTk1YakdwZFBkV1B4NTZsU2laZnp5?=
- =?utf-8?B?VXVaZFRhMWU5QzJ2eHpPcjdOT0QyMmdOTGlJKzdwbVZJcFRyUVpOUituR1ZL?=
- =?utf-8?B?UlNZUDJXYW5RNUkrMDAwWmpNY0RlUTRRUFFuOEJWT3Y2ZHRnc2I0OFpFdWtT?=
- =?utf-8?B?QzhvbEY2WU53Mm1ja1B6Qk1Cb0tFUm5GTGRZWUF1eGhzVTBWUGh1Sytaeklv?=
- =?utf-8?B?dmNiRklKMS83MWc5K0V6TFl0dFY0K0l2MVdYVFhRK0pYTTF4dmRUU2J6aWNs?=
- =?utf-8?B?V2Iyc0lHQWhsS3dTZHBiMzUvSDN3Y1htbkdOSmhISjV2ZzRjT0gzU2t4NjR6?=
- =?utf-8?B?R2cxUmtPRGpncWxPaW83dDN0WlVEZzRBS0RodE45SXF4M3FuSk15UE9yaTBu?=
- =?utf-8?B?U3R1cENBMU5PeHZLTUpSNjdtUlJ3PT0=?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1s3raM-0005jz-Hb
+ for qemu-riscv@nongnu.org; Mon, 06 May 2024 02:12:26 -0400
+Received: from mail-lf1-x12f.google.com ([2a00:1450:4864:20::12f])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1s3raK-00046f-Ly
+ for qemu-riscv@nongnu.org; Mon, 06 May 2024 02:12:26 -0400
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-51fd87ce075so1590344e87.3
+ for <qemu-riscv@nongnu.org>; Sun, 05 May 2024 23:12:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sifive.com; s=google; t=1714975942; x=1715580742; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=VXx0i4fSaFCK9+9RiI/Aa6wwUQxFeaFWg/hGSQ0VnYY=;
+ b=cLZTzJO/h/iabTFgjoI8SnIhvAQ4YR6AOUnufEFuCN+xeNlqniSvaJ8YdhA/Y4Icad
+ XECbeYFlxkp8x/8D3/Y9IiDge5xX0I50sPtOxTRUf4q9UIAXW/+JVwyxKkmcYmU+qCpR
+ TOTZ92hOSZSmsAhRd2/D0H8OyJFO6HiR8XEQAEzXOYpfUwy40NCGNAZJv/gaA8s0ETIx
+ gN2QOBVZW0vKcNRWQf35nlKNBEiADVYAxa/F7RQltBPPLryeJ/darWZY/wMjNGnBC9Nf
+ lBntUCowWxr+S0xand9OsdOxOHgYBw8pY+MmWT4Ugzfp77QVIAE5H8ZroEWzasOzHeY0
+ tRFg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1714975942; x=1715580742;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=VXx0i4fSaFCK9+9RiI/Aa6wwUQxFeaFWg/hGSQ0VnYY=;
+ b=Mrv8qHWxErSw80orU4ArRmkIissUEDK6o1GMk1K8fJ2VZCYJTqNyZevUIm+qUPJP2y
+ JVAFiNTnGDS6GWdShTtNWwTnay22u4DExD+RSD4o5IVcRoTI+2qPCq8HoML7ZVjnCdhd
+ On9Gw0SP2uGN6eaHD9Ib3KCC8Ors3KOtg1Sf9P7J5tMSqC1sV7pqlE7mG4SOSJTySzOU
+ z4zqfjqXWs7xis8oLNUIjvvDRcnoMMe9B5Q3F8N5ZM2kf//bvf4bEWwTIVpQv0wdAv0w
+ KbaUq5ghAGAsAdl5bD6rMmmxQ7Ep0biLZC36do9+O05d1cyfQCR3zu4rvW04TO7wF5al
+ xOJQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUCGtK7uxmS8W5xBq2PrcsODBlzBu41hZPYmS4jfnqn3LV91h1KnISgZNvLQli4b73pjVJnPiQH5b9+7tIpqRhwjSX/09o=
+X-Gm-Message-State: AOJu0YzI6WHdP9PZ2NsT6aCj/hzw9cCIKd2yAo/XMLh8d45z+FDtorMY
+ V+iibMwJzacsXuoL1XgaXAiODs9ofo8HgSx69ggI+FCMYZhasvrMvXrcBqKw9lk3DpoLyp6tywx
+ mCCI=
+X-Google-Smtp-Source: AGHT+IHENwKg/Pj3kUARg0vayx8vOpDvaXxgCnio9CMlQoEAgkrETTtnF4OokQ+gvu/XlFkZhFSwRA==
+X-Received: by 2002:a19:f606:0:b0:519:1a91:30cc with SMTP id
+ x6-20020a19f606000000b005191a9130ccmr5869974lfe.4.1714975942131; 
+ Sun, 05 May 2024 23:12:22 -0700 (PDT)
+Received: from mail-lj1-f178.google.com (mail-lj1-f178.google.com.
+ [209.85.208.178]) by smtp.gmail.com with ESMTPSA id
+ dw11-20020a0565122c8b00b0051ff89d5ec6sm841245lfb.58.2024.05.05.23.12.21
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 05 May 2024 23:12:21 -0700 (PDT)
+Received: by mail-lj1-f178.google.com with SMTP id
+ 38308e7fff4ca-2e0b2ddc5d1so19253491fa.3; 
+ Sun, 05 May 2024 23:12:21 -0700 (PDT)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUEMDnld/iJ2JV3vI3+qvr3nPHq5m62b71QF37Xn/34maHLtpAKGyAgUIcP+CJCSI9PYzwnqYtPx1tre4wEAqAnTpmJ0XQ=
+X-Received: by 2002:a2e:b009:0:b0:2d4:3d86:54e2 with SMTP id
+ y9-20020a2eb009000000b002d43d8654e2mr5012098ljk.27.1714975941554; Sun, 05 May
+ 2024 23:12:21 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: starfivetech.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: NT0PR01MB1278.CHNPR01.prod.partner.outlook.cn
-X-MS-Exchange-CrossTenant-Network-Message-Id: be68fc63-9511-4cd7-87e2-08dc6d8fdd67
-X-MS-Exchange-CrossTenant-originalarrivaltime: 06 May 2024 05:46:24.1499 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: IOM9NZNqrPVvsVPe2nfHpqZZQowgHY/SDJjdIddawQscs8EDdnDDyoOKmE+wJwbJFVzZwjkh1SDQnSYQuJrvpPxW4tFKfQIvnvr2AdAwT1o=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: NT0PR01MB1040
-Received-SPF: pass client-ip=2406:e500:4420:2::71d;
- envelope-from=jeeheng.sia@starfivetech.com;
- helo=CHN02-SH0-obe.outbound.protection.partner.outlook.cn
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+References: <20240307160319.675044-1-dbarboza@ventanamicro.com>
+ <20240307160319.675044-13-dbarboza@ventanamicro.com>
+In-Reply-To: <20240307160319.675044-13-dbarboza@ventanamicro.com>
+From: Frank Chang <frank.chang@sifive.com>
+Date: Mon, 6 May 2024 14:12:10 +0800
+X-Gmail-Original-Message-ID: <CANzO1D13s85OE3u30EkP43CFVdFNgJNVWoM-BW9oPJi-A7cbNA@mail.gmail.com>
+Message-ID: <CANzO1D13s85OE3u30EkP43CFVdFNgJNVWoM-BW9oPJi-A7cbNA@mail.gmail.com>
+Subject: Re: [PATCH v2 12/15] hw/riscv/riscv-iommu: Add another irq for mrif
+ notifications
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com, ajones@ventanamicro.com, tjeznach@rivosinc.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::12f;
+ envelope-from=frank.chang@sifive.com; helo=mail-lf1-x12f.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -154,46 +109,75 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogUGV0ZXIgTWF5ZGVsbCA8
-cGV0ZXIubWF5ZGVsbEBsaW5hcm8ub3JnPg0KPiBTZW50OiBUaHVyc2RheSwgTWF5IDIsIDIwMjQg
-NToxOSBQTQ0KPiBUbzogSmVlSGVuZyBTaWEgPGplZWhlbmcuc2lhQHN0YXJmaXZldGVjaC5jb20+
-DQo+IENjOiBxZW11LWFybUBub25nbnUub3JnOyBxZW11LWRldmVsQG5vbmdudS5vcmc7IHFlbXUt
-cmlzY3ZAbm9uZ251Lm9yZzsgbXN0QHJlZGhhdC5jb207IGltYW1tZWRvQHJlZGhhdC5jb207DQo+
-IGFuaXNpbmhhQHJlZGhhdC5jb207IHNoYW5ub24uemhhb3NsQGdtYWlsLmNvbTsgc3VuaWx2bEB2
-ZW50YW5hbWljcm8uY29tOyBwYWxtZXJAZGFiYmVsdC5jb207IGFsaXN0YWlyLmZyYW5jaXNAd2Rj
-LmNvbTsNCj4gYmluLm1lbmdAd2luZHJpdmVyLmNvbTsgbGl3ZWkxNTE4QGdtYWlsLmNvbTsgZGJh
-cmJvemFAdmVudGFuYW1pY3JvLmNvbTsgemhpd2VpX2xpdUBsaW51eC5hbGliYWJhLmNvbQ0KPiBT
-dWJqZWN0OiBSZTogW1BBVENIIHYxIDAvMl0gVXBncmFkZSBBQ1BJIFNQQ1IgdGFibGUgdG8gc3Vw
-cG9ydCBTUENSIHRhYmxlIHZlcnNpb24gNCBmb3JtYXQNCj4gDQo+IE9uIFRodSwgMiBNYXkgMjAy
-NCBhdCAwNjoxMiwgU2lhIEplZSBIZW5nIDxqZWVoZW5nLnNpYUBzdGFyZml2ZXRlY2guY29tPiB3
-cm90ZToNCj4gPg0KPiA+IFVwZGF0ZSB0aGUgU1BDUiB0YWJsZSB0byBhY2NvbW1vZGF0ZSB0aGUg
-U1BDUiBUYWJsZSB2ZXJzaW9uIDQgWzFdLg0KPiA+IFRoZSBTUENSIHRhYmxlIGhhcyBiZWVuIG1v
-ZGlmaWVkIHRvIGFkaGVyZSB0byB0aGUgdmVyc2lvbiA0IGZvcm1hdCBbMl0uDQo+ID4NCj4gPiBN
-ZWFud2hpbGUsIHRoZSB2aXJ0IFNQQ1IgZ29sZGVuIHJlZmVyZW5jZSBmaWxlcyBoYXZlIGJlZW4g
-dXBkYXRlZCB0bw0KPiA+IGFjY29tbW9kYXRlIHRoZSBTUENSIFRhYmxlIHZlcnNpb24gNC4NCj4g
-Pg0KPiA+IFsxXTogaHR0cHM6Ly9sZWFybi5taWNyb3NvZnQuY29tL2VuLXVzL3dpbmRvd3MtaGFy
-ZHdhcmUvZHJpdmVycy9zZXJwb3J0cy9zZXJpYWwtcG9ydC1jb25zb2xlLXJlZGlyZWN0aW9uLXRh
-YmxlDQo+ID4gWzJdOiBodHRwczovL2dpdGh1Yi5jb20vYWNwaWNhL2FjcGljYS9wdWxsLzkzMQ0K
-PiA+DQo+ID4gU2lhIEplZSBIZW5nICgyKToNCj4gPiAgIHRlc3RzL3F0ZXN0L2Jpb3MtdGFibGVz
-LXRlc3Q6IFVwZGF0ZSB2aXJ0IFNQQ1IgZ29sZGVuIHJlZmVyZW5jZXMNCj4gPiAgIGh3L2FjcGk6
-IFVwZ3JhZGUgQUNQSSBTUENSIHRhYmxlIHRvIHN1cHBvcnQgU1BDUiB0YWJsZSB2ZXJzaW9uIDQN
-Cj4gPiAgICAgZm9ybWF0DQo+IA0KPiBUaGlzIGlzbid0IHRoZSByaWdodCB3YXkgdG8gbWFrZSBh
-IGNoYW5nZSB0aGF0IHJlcXVpcmVzDQo+IHVwZGF0ZXMgdG8gdGhlIGJpb3MtdGFibGVzLXRlc3Qg
-cmVmZXJlbmNlIGZpbGVzLCBiZWNhdXNlDQo+ICJtYWtlIGNoZWNrIiB3aWxsIGZhaWwgYWZ0ZXIg
-cGF0Y2ggMSBidXQgYmVmb3JlIHBhdGNoIDIuDQo+IA0KPiBZb3UgbmVlZCBhIHRocmVlLXBhdGNo
-IGFwcHJvYWNoLiBIb3cgdG8gZG8gdGhhdCBpcyBkb2N1bWVudGVkDQo+IGluIHRoZSBjb21tZW50
-IGF0IHRoZSB0b3Agb2YgYmlvcy10YWJsZXMtdGVzdC5jLiBUaGUgcmVzdWx0aW5nDQo+IHRocmVl
-IHBhdGNoZXMgc2hvdWxkIGxvb2sgbGlrZToNCj4gICogcGF0Y2ggMSB1cGRhdGVzIGJpb3MtdGFi
-bGVzLXRlc3QtYWxsb3dlZC1kaWZmLmggdG8NCj4gICAgbWFyayB0aGUgYWZmZWN0ZWQgdGVzdCBv
-ciB0ZXN0cyBhcyAiT0sgdG8gZmFpbCINCj4gICogcGF0Y2ggMiBtYWtlcyB0aGUgY2hhbmdlcyB0
-byBRRU1VIHRoYXQgYWx0ZXIgdGhlDQo+ICAgIHJlcXVpcmVkIHRhYmxlIG91dHB1dA0KPiAgKiBw
-YXRjaCAzIHVwZGF0ZXMgdGhlIHJlZmVyZW5jZSBmaWxlcyBhbmQgcmVtb3ZlcyB0aGUNCj4gICAg
-dGVzdHMgZnJvbSB0aGUgYWxsb3dlZC1kaWZmIGZpbGUNCj4gDQo+IFNlZSBmb3IgaW5zdGFuY2Ug
-Y29tbWl0cyA2YzFjMmU5MTJmY2Y5LCAxZWM4OTZmZTdjYTkzOCwNCj4gZWEyZmRlNWJjY2M1MTQg
-YXMgYW4gZXhhbXBsZS4NClRoYW5rIHlvdSBmb3IgdGhlIGd1aWRhbmNlLiBJIHdpbGwgaW1wcm92
-ZSB0aGUgcGF0Y2ggYnkgcmVmZXJyaW5nIHRvIHRoZSBleGFtcGxlIHByb3ZpZGVkLg0KPiANCj4g
-U2lkZSBub3RlOiBpZiByaXNjdiB2aXJ0IGhhcyBBUENJIHRhYmxlcyBub3csIG1heWJlIHdlDQo+
-IHNob3VsZCBhZGQgdGVzdGluZyBvZiB0aGVtIHRvIHRoZSBiaW9zLXRhYmxlcy10ZXN0ID8NClN1
-cmUuIEkgd2lsbCBtYWtlIG1vZGlmaWNhdGlvbnMgYmFzZWQgb24gdGhlIFJJU0MtViB0ZXN0Lg0K
-PiANCj4gdGhhbmtzDQo+IC0tIFBNTQ0K
+Reviewed-by: Frank Chang <frank.chang@sifive.com>
+
+Daniel Henrique Barboza <dbarboza@ventanamicro.com> =E6=96=BC 2024=E5=B9=B4=
+3=E6=9C=888=E6=97=A5 =E9=80=B1=E4=BA=94 =E4=B8=8A=E5=8D=8812:06=E5=AF=AB=E9=
+=81=93=EF=BC=9A
+>
+> From: Andrew Jones <ajones@ventanamicro.com>
+>
+> And add mrif notification trace.
+>
+> Signed-off-by: Andrew Jones <ajones@ventanamicro.com>
+> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> ---
+>  hw/riscv/riscv-iommu-pci.c | 2 +-
+>  hw/riscv/riscv-iommu.c     | 1 +
+>  hw/riscv/trace-events      | 1 +
+>  3 files changed, 3 insertions(+), 1 deletion(-)
+>
+> diff --git a/hw/riscv/riscv-iommu-pci.c b/hw/riscv/riscv-iommu-pci.c
+> index 4eb1057210..8a7b71166c 100644
+> --- a/hw/riscv/riscv-iommu-pci.c
+> +++ b/hw/riscv/riscv-iommu-pci.c
+> @@ -78,7 +78,7 @@ static void riscv_iommu_pci_realize(PCIDevice *dev, Err=
+or **errp)
+>      pci_register_bar(dev, 0, PCI_BASE_ADDRESS_SPACE_MEMORY |
+>                       PCI_BASE_ADDRESS_MEM_TYPE_64, &s->bar0);
+>
+> -    int ret =3D msix_init(dev, RISCV_IOMMU_INTR_COUNT,
+> +    int ret =3D msix_init(dev, RISCV_IOMMU_INTR_COUNT + 1,
+>                          &s->bar0, 0, RISCV_IOMMU_REG_MSI_CONFIG,
+>                          &s->bar0, 0, RISCV_IOMMU_REG_MSI_CONFIG + 256, 0=
+, &err);
+>
+> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+> index 1fa1286d07..954a6892c2 100644
+> --- a/hw/riscv/riscv-iommu.c
+> +++ b/hw/riscv/riscv-iommu.c
+> @@ -543,6 +543,7 @@ static MemTxResult riscv_iommu_msi_write(RISCVIOMMUSt=
+ate *s,
+>      if (res !=3D MEMTX_OK) {
+>          return res;
+>      }
+> +    trace_riscv_iommu_mrif_notification(s->parent_obj.id, n190, addr);
+>
+>      return MEMTX_OK;
+>  }
+> diff --git a/hw/riscv/trace-events b/hw/riscv/trace-events
+> index 4b486b6420..d69719a27a 100644
+> --- a/hw/riscv/trace-events
+> +++ b/hw/riscv/trace-events
+> @@ -6,6 +6,7 @@ riscv_iommu_flt(const char *id, unsigned b, unsigned d, u=
+nsigned f, uint64_t rea
+>  riscv_iommu_pri(const char *id, unsigned b, unsigned d, unsigned f, uint=
+64_t iova) "%s: page request %04x:%02x.%u iova: 0x%"PRIx64
+>  riscv_iommu_dma(const char *id, unsigned b, unsigned d, unsigned f, unsi=
+gned pasid, const char *dir, uint64_t iova, uint64_t phys) "%s: translate %=
+04x:%02x.%u #%u %s 0x%"PRIx64" -> 0x%"PRIx64
+>  riscv_iommu_msi(const char *id, unsigned b, unsigned d, unsigned f, uint=
+64_t iova, uint64_t phys) "%s: translate %04x:%02x.%u MSI 0x%"PRIx64" -> 0x=
+%"PRIx64
+> +riscv_iommu_mrif_notification(const char *id, uint32_t nid, uint64_t phy=
+s) "%s: sent MRIF notification 0x%x to 0x%"PRIx64
+>  riscv_iommu_cmd(const char *id, uint64_t l, uint64_t u) "%s: command 0x%=
+"PRIx64" 0x%"PRIx64
+>  riscv_iommu_notifier_add(const char *id) "%s: dev-iotlb notifier added"
+>  riscv_iommu_notifier_del(const char *id) "%s: dev-iotlb notifier removed=
+"
+> --
+> 2.43.2
+>
+>
 
