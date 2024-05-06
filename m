@@ -4,58 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D05D4C4345F
-	for <qemu-riscv@archiver.kernel.org>; Mon,  6 May 2024 02:37:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 645C2C4345F
+	for <qemu-riscv@archiver.kernel.org>; Mon,  6 May 2024 04:10:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s3oDc-0006Ap-Uh; Sun, 05 May 2024 22:36:44 -0400
+	id 1s3pfW-0004XJ-Qw; Mon, 06 May 2024 00:09:38 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <eric.huang@linux.alibaba.com>)
- id 1s3oDT-00068T-73; Sun, 05 May 2024 22:36:36 -0400
-Received: from out30-99.freemail.mail.aliyun.com ([115.124.30.99])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <eric.huang@linux.alibaba.com>)
- id 1s3oDO-0005JH-GM; Sun, 05 May 2024 22:36:34 -0400
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1s3pfS-0004X5-EU
+ for qemu-riscv@nongnu.org; Mon, 06 May 2024 00:09:34 -0400
+Received: from mail-lf1-x130.google.com ([2a00:1450:4864:20::130])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1s3pfO-0003qg-Ln
+ for qemu-riscv@nongnu.org; Mon, 06 May 2024 00:09:34 -0400
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-51ab4ee9df8so1821088e87.1
+ for <qemu-riscv@nongnu.org>; Sun, 05 May 2024 21:09:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux.alibaba.com; s=default;
- t=1714962980; h=From:To:Subject:Date:Message-ID:MIME-Version;
- bh=VYAVeRMKZI8P52HWvIaKancLspgPQjp2KQ+AmcqrVI8=;
- b=E8v2U4TXEOn3lVtxgaP3JLuKk8CxaIK03MYaHf5ZyfgOuWhJKDZgtjBSU/P7Ifb7DjODa8qphyOcsHXTD09xs6j8sfix7aC5k+z1jiwNLbAZwJqSws5RBgEnPEDCwG1Y5uT19PkXqUDVPnXpU4fMrQTTs4awBBAq0c2xGyXkEEU=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R941e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033032014031;
- MF=eric.huang@linux.alibaba.com; NM=1; PH=DS; RN=11; SR=0;
- TI=SMTPD_---0W5q-kTJ_1714962977; 
-Received: from localhost.localdomain(mailfrom:eric.huang@linux.alibaba.com
- fp:SMTPD_---0W5q-kTJ_1714962977) by smtp.aliyun-inc.com;
- Mon, 06 May 2024 10:36:18 +0800
-From: Huang Tao <eric.huang@linux.alibaba.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, zhiwei_liu@linux.alibaba.com,
- dbarboza@ventanamicro.com, liwei1518@gmail.com, bin.meng@windriver.com,
- alistair.francis@wdc.com, palmer@dabbelt.com,
- Huang Tao <eric.huang@linux.alibaba.com>,
- Christoph Muellner <christoph.muellner@vrull.eu>,
- Richard Henderson <richard.henderson@linaro.org>
-Subject: [PATCH v5] target/riscv: Implement dynamic establishment of custom
- decoder
-Date: Mon,  6 May 2024 10:36:07 +0800
-Message-ID: <20240506023607.29544-1-eric.huang@linux.alibaba.com>
-X-Mailer: git-send-email 2.44.0
+ d=sifive.com; s=google; t=1714968566; x=1715573366; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+9SuWRYpKUVtMCPb2hrJa6wlHec+1WVJMgVteK90KIU=;
+ b=aXxuikdJVugwpW+fCKQf/0HbHMkHOlXl8kMhQTE1rcrE7fhRuruC+jgz/UUm/PIeKM
+ Ql42rEUgU13Bto7PDS6q9OM5pJ/5HRLYcqWZJWR5Ycf3pBZeob50DJzW4pxcGGtfVTds
+ Q1NsUtdwbu80+njs8ITSrGNIucyq//hyjBchZFZThllc3zJrOW8ovDKgRYk/8/OV91LJ
+ mOUbMEiEz+NpHbDpdEV5u+gqg/tN6PS7pcYsZ5ieTtHoICrI0W85xpsI5hncNorDbQJb
+ 9pF+6E6ZFzzLEaeilWAvVPp/d2Bl2u2xNHE0y/o9YVCXkA0/G4iOX7T/2cCV7w+yOhHh
+ qZoA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1714968566; x=1715573366;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+9SuWRYpKUVtMCPb2hrJa6wlHec+1WVJMgVteK90KIU=;
+ b=Ucu/rdqOsc0LE5qHsSw0OvPJMKotk9J3g070qm8u19P0RF3FndcNFxGQhpn9k6SqvP
+ 06kpND6e41gWfBJWI4siSNW7mYtkZmy5ptVmo8x8x4E6wtsNnMonYdykyfx6Dq9J6Vzx
+ Ak3pFePlfkl2F0ge6mO3wo18wGUcd1PRiO4cLD+CPIadsR1McXQQMIa2nP1GysbzJ1+4
+ qnUeaDvKwLM2Tyy/savT599y88BrVx6Uov6PlpnENgi+rTmqsvi72CRBp3o0QQccAGyQ
+ 62mesPTviyVEmI7nW2G0IO38CVfPuWSgbYQsoEeptUeZOHwTJx3Ir9jdMzMdNbtv+W7t
+ YW8Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWPKsViM65b14eJ4eazpivZAMI8sEDOiejWpDmFT0CgWJ5F6l9HsERFmtaXMTo47USJ6pTGmAorGepDKG7VfNVgBx+8RIw=
+X-Gm-Message-State: AOJu0YwAkpciLE617AI95gurlFce8dxRyLTfpvCgqd7gy/yAOuXMOAoW
+ Y6mzeRn7LQdZTZYw/NSLrkwVhR84Lu5HcbLg04P+ins74xxarjgVz/dGvJMjkeM=
+X-Google-Smtp-Source: AGHT+IGyGByzbTJkkDfLYY7K32JExNhxtmfPKlP7hKyFC4a4J4VVtdNUGekGHct0W8cLY0t4+Ghh/w==
+X-Received: by 2002:a19:6454:0:b0:51e:eac7:d69b with SMTP id
+ b20-20020a196454000000b0051eeac7d69bmr6106877lfj.27.1714968566072; 
+ Sun, 05 May 2024 21:09:26 -0700 (PDT)
+Received: from mail-lj1-f174.google.com (mail-lj1-f174.google.com.
+ [209.85.208.174]) by smtp.gmail.com with ESMTPSA id
+ q4-20020a19a404000000b00516c1fa74e3sm1456900lfc.207.2024.05.05.21.09.25
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 05 May 2024 21:09:25 -0700 (PDT)
+Received: by mail-lj1-f174.google.com with SMTP id
+ 38308e7fff4ca-2e27277d2c1so20039871fa.2; 
+ Sun, 05 May 2024 21:09:25 -0700 (PDT)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXu25dPxQPll4SBPumTMjd0zNWpIJwglzHjoZfvDoTuch90xnaav42kiF58Y/+9xrSwURwyzd3oODmVtG+QE3nvh2gP3XA=
+X-Received: by 2002:a2e:b601:0:b0:2e1:18d:7497 with SMTP id
+ r1-20020a2eb601000000b002e1018d7497mr5806301ljn.7.1714968565421; Sun, 05 May
+ 2024 21:09:25 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.99;
- envelope-from=eric.huang@linux.alibaba.com;
- helo=out30-99.freemail.mail.aliyun.com
-X-Spam_score_int: -174
-X-Spam_score: -17.5
-X-Spam_bar: -----------------
-X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+References: <20240307160319.675044-1-dbarboza@ventanamicro.com>
+ <20240307160319.675044-12-dbarboza@ventanamicro.com>
+In-Reply-To: <20240307160319.675044-12-dbarboza@ventanamicro.com>
+From: Frank Chang <frank.chang@sifive.com>
+Date: Mon, 6 May 2024 12:09:14 +0800
+X-Gmail-Original-Message-ID: <CANzO1D0ywHs+Juv9_qavykxCDiUsuk6tebObfSAyRbgW-WhGJA@mail.gmail.com>
+Message-ID: <CANzO1D0ywHs+Juv9_qavykxCDiUsuk6tebObfSAyRbgW-WhGJA@mail.gmail.com>
+Subject: Re: [PATCH v2 11/15] hw/riscv/riscv-iommu: add DBG support
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com, ajones@ventanamicro.com, tjeznach@rivosinc.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::130;
+ envelope-from=frank.chang@sifive.com; helo=mail-lf1-x130.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -71,196 +107,187 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-In this patch, we modify the decoder to be a freely composable data
-structure instead of a hardcoded one. It can be dynamically builded up
-according to the extensions.
-This approach has several benefits:
-1. Provides support for heterogeneous cpu architectures. As we add decoder in
-   RISCVCPU, each cpu can have their own decoder, and the decoders can be
-   different due to cpu's features.
-2. Improve the decoding efficiency. We run the guard_func to see if the decoder
-   can be added to the dynamic_decoder when building up the decoder. Therefore,
-   there is no need to run the guard_func when decoding each instruction. It can
-   improve the decoding efficiency
-3. For vendor or dynamic cpus, it allows them to customize their own decoder
-   functions to improve decoding efficiency, especially when vendor-defined
-   instruction sets increase. Because of dynamic building up, it can skip the other
-   decoder guard functions when decoding.
-4. Pre patch for allowing adding a vendor decoder before decode_insn32() with minimal
-   overhead for users that don't need this particular vendor decoder.
+Hi Daniel,
 
-Signed-off-by: Huang Tao <eric.huang@linux.alibaba.com>
-Suggested-by: Christoph Muellner <christoph.muellner@vrull.eu>
-Co-authored-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
-Changes in v5:
-- rebase on https://github.com/alistair23/qemu/tree/riscv-to-apply.next
+Daniel Henrique Barboza <dbarboza@ventanamicro.com> =E6=96=BC 2024=E5=B9=B4=
+3=E6=9C=888=E6=97=A5 =E9=80=B1=E4=BA=94 =E4=B8=8A=E5=8D=8812:05=E5=AF=AB=E9=
+=81=93=EF=BC=9A
+>
+> From: Tomasz Jeznach <tjeznach@rivosinc.com>
+>
+> DBG support adds three additional registers: tr_req_iova, tr_req_ctl and
+> tr_response.
+>
+> The DBG cap is always enabled. No on/off toggle is provided for it.
+>
+> Signed-off-by: Tomasz Jeznach <tjeznach@rivosinc.com>
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> ---
+>  hw/riscv/riscv-iommu-bits.h | 20 +++++++++++++
+>  hw/riscv/riscv-iommu.c      | 57 ++++++++++++++++++++++++++++++++++++-
+>  2 files changed, 76 insertions(+), 1 deletion(-)
+>
+> diff --git a/hw/riscv/riscv-iommu-bits.h b/hw/riscv/riscv-iommu-bits.h
+> index 0994f5ce48..b3f92411bb 100644
+> --- a/hw/riscv/riscv-iommu-bits.h
+> +++ b/hw/riscv/riscv-iommu-bits.h
+> @@ -83,6 +83,7 @@ struct riscv_iommu_pq_record {
+>  #define RISCV_IOMMU_CAP_MSI_MRIF        BIT_ULL(23)
+>  #define RISCV_IOMMU_CAP_ATS             BIT_ULL(25)
+>  #define RISCV_IOMMU_CAP_IGS             GENMASK_ULL(29, 28)
+> +#define RISCV_IOMMU_CAP_DBG             BIT_ULL(31)
+>  #define RISCV_IOMMU_CAP_PAS             GENMASK_ULL(37, 32)
+>  #define RISCV_IOMMU_CAP_PD8             BIT_ULL(38)
+>
+> @@ -177,6 +178,25 @@ enum {
+>      RISCV_IOMMU_INTR_COUNT
+>  };
+>
+> +#define RISCV_IOMMU_IPSR_CIP            BIT(RISCV_IOMMU_INTR_CQ)
+> +#define RISCV_IOMMU_IPSR_FIP            BIT(RISCV_IOMMU_INTR_FQ)
+> +#define RISCV_IOMMU_IPSR_PMIP           BIT(RISCV_IOMMU_INTR_PM)
+> +#define RISCV_IOMMU_IPSR_PIP            BIT(RISCV_IOMMU_INTR_PQ)
 
-Changes in v4:
-- fix typo
-- rename function
-- add 'if tcg_enable()'
-- move function to tcg-cpu.c and declarations to tcg-cpu.h
+These are not related to the DBG.
 
-Changes in v3:
-- use GPtrArray to save decode function poionter list.
----
- target/riscv/cpu.c         |  1 +
- target/riscv/cpu.h         |  1 +
- target/riscv/tcg/tcg-cpu.c | 15 +++++++++++++++
- target/riscv/tcg/tcg-cpu.h | 15 +++++++++++++++
- target/riscv/translate.c   | 31 +++++++++++++++----------------
- 5 files changed, 47 insertions(+), 16 deletions(-)
+> +
+> +/* 5.24 Translation request IOVA (64bits) */
+> +#define RISCV_IOMMU_REG_TR_REQ_IOVA     0x0258
+> +
+> +/* 5.25 Translation request control (64bits) */
+> +#define RISCV_IOMMU_REG_TR_REQ_CTL      0x0260
+> +#define RISCV_IOMMU_TR_REQ_CTL_GO_BUSY  BIT_ULL(0)
+> +#define RISCV_IOMMU_TR_REQ_CTL_PID      GENMASK_ULL(31, 12)
+> +#define RISCV_IOMMU_TR_REQ_CTL_DID      GENMASK_ULL(63, 40)
+> +
+> +/* 5.26 Translation request response (64bits) */
+> +#define RISCV_IOMMU_REG_TR_RESPONSE     0x0268
+> +#define RISCV_IOMMU_TR_RESPONSE_FAULT   BIT_ULL(0)
+> +#define RISCV_IOMMU_TR_RESPONSE_PPN     RISCV_IOMMU_PPN_FIELD
+> +
+>  /* 5.27 Interrupt cause to vector (64bits) */
+>  #define RISCV_IOMMU_REG_IVEC            0x02F8
+>
+> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+> index 7af5929b10..1fa1286d07 100644
+> --- a/hw/riscv/riscv-iommu.c
+> +++ b/hw/riscv/riscv-iommu.c
+> @@ -1457,6 +1457,46 @@ static void riscv_iommu_process_pq_control(RISCVIO=
+MMUState *s)
+>      riscv_iommu_reg_mod32(s, RISCV_IOMMU_REG_PQCSR, ctrl_set, ctrl_clr);
+>  }
+>
+> +static void riscv_iommu_process_dbg(RISCVIOMMUState *s)
+> +{
+> +    uint64_t iova =3D riscv_iommu_reg_get64(s, RISCV_IOMMU_REG_TR_REQ_IO=
+VA);
+> +    uint64_t ctrl =3D riscv_iommu_reg_get64(s, RISCV_IOMMU_REG_TR_REQ_CT=
+L);
+> +    unsigned devid =3D get_field(ctrl, RISCV_IOMMU_TR_REQ_CTL_DID);
+> +    unsigned pid =3D get_field(ctrl, RISCV_IOMMU_TR_REQ_CTL_PID);
+> +    RISCVIOMMUContext *ctx;
+> +    void *ref;
+> +
+> +    if (!(ctrl & RISCV_IOMMU_TR_REQ_CTL_GO_BUSY)) {
+> +        return;
+> +    }
+> +
+> +    ctx =3D riscv_iommu_ctx(s, devid, pid, &ref);
+> +    if (ctx =3D=3D NULL) {
+> +        riscv_iommu_reg_set64(s, RISCV_IOMMU_REG_TR_RESPONSE,
+> +                                 RISCV_IOMMU_TR_RESPONSE_FAULT |
+> +                                 (RISCV_IOMMU_FQ_CAUSE_DMA_DISABLED << 1=
+0));
+> +    } else {
+> +        IOMMUTLBEntry iotlb =3D {
+> +            .iova =3D iova,
+> +            .perm =3D IOMMU_NONE,
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index a74f0eb29c..2cb145121d 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1134,6 +1134,7 @@ void riscv_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
-             error_propagate(errp, local_err);
-             return;
-         }
-+        riscv_tcg_cpu_finalize_dynamic_decoder(cpu);
-     } else if (kvm_enabled()) {
-         riscv_kvm_cpu_finalize_features(cpu, &local_err);
-         if (local_err != NULL) {
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index e0dd1828b5..2838d9640b 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -455,6 +455,7 @@ struct ArchCPU {
-     uint32_t pmu_avail_ctrs;
-     /* Mapping of events to counters */
-     GHashTable *pmu_event_ctr_map;
-+    const GPtrArray *decoders;
- };
- 
- /**
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index 4ebebebe09..3a4ec3662a 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -863,6 +863,21 @@ void riscv_tcg_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
-     }
- }
- 
-+void riscv_tcg_cpu_finalize_dynamic_decoder(RISCVCPU *cpu)
-+{
-+    GPtrArray *dynamic_decoders;
-+    dynamic_decoders = g_ptr_array_sized_new(decoder_table_size);
-+    for (size_t i = 0; i < decoder_table_size; ++i) {
-+        if (decoder_table[i].guard_func &&
-+            decoder_table[i].guard_func(&cpu->cfg)) {
-+            g_ptr_array_add(dynamic_decoders,
-+                            (gpointer)decoder_table[i].riscv_cpu_decode_fn);
-+        }
-+    }
-+
-+    cpu->decoders = dynamic_decoders;
-+}
-+
- bool riscv_cpu_tcg_compatible(RISCVCPU *cpu)
- {
-     return object_dynamic_cast(OBJECT(cpu), TYPE_RISCV_CPU_HOST) == NULL;
-diff --git a/target/riscv/tcg/tcg-cpu.h b/target/riscv/tcg/tcg-cpu.h
-index f7b32417f8..ce94253fe4 100644
---- a/target/riscv/tcg/tcg-cpu.h
-+++ b/target/riscv/tcg/tcg-cpu.h
-@@ -26,4 +26,19 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp);
- void riscv_tcg_cpu_finalize_features(RISCVCPU *cpu, Error **errp);
- bool riscv_cpu_tcg_compatible(RISCVCPU *cpu);
- 
-+struct DisasContext;
-+struct RISCVCPUConfig;
-+typedef struct RISCVDecoder {
-+    bool (*guard_func)(const struct RISCVCPUConfig *);
-+    bool (*riscv_cpu_decode_fn)(struct DisasContext *, uint32_t);
-+} RISCVDecoder;
-+
-+typedef bool (*riscv_cpu_decode_fn)(struct DisasContext *, uint32_t);
-+
-+extern const size_t decoder_table_size;
-+
-+extern const RISCVDecoder decoder_table[];
-+
-+void riscv_tcg_cpu_finalize_dynamic_decoder(RISCVCPU *cpu);
-+
- #endif
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 9ff09ebdb6..15e7123a68 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -37,6 +37,8 @@
- #include "exec/helper-info.c.inc"
- #undef  HELPER_H
- 
-+#include "tcg/tcg-cpu.h"
-+
- /* global register indices */
- static TCGv cpu_gpr[32], cpu_gprh[32], cpu_pc, cpu_vl, cpu_vstart;
- static TCGv_i64 cpu_fpr[32]; /* assume F and D extensions */
-@@ -116,6 +118,7 @@ typedef struct DisasContext {
-     /* FRM is known to contain a valid value. */
-     bool frm_valid;
-     bool insn_start_updated;
-+    const GPtrArray *decoders;
- } DisasContext;
- 
- static inline bool has_ext(DisasContext *ctx, uint32_t ext)
-@@ -1125,21 +1128,16 @@ static inline int insn_len(uint16_t first_word)
-     return (first_word & 3) == 3 ? 4 : 2;
- }
- 
-+const RISCVDecoder decoder_table[] = {
-+    { always_true_p, decode_insn32 },
-+    { has_xthead_p, decode_xthead},
-+    { has_XVentanaCondOps_p, decode_XVentanaCodeOps},
-+};
-+
-+const size_t decoder_table_size = ARRAY_SIZE(decoder_table);
-+
- static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
- {
--    /*
--     * A table with predicate (i.e., guard) functions and decoder functions
--     * that are tested in-order until a decoder matches onto the opcode.
--     */
--    static const struct {
--        bool (*guard_func)(const RISCVCPUConfig *);
--        bool (*decode_func)(DisasContext *, uint32_t);
--    } decoders[] = {
--        { always_true_p,  decode_insn32 },
--        { has_xthead_p, decode_xthead },
--        { has_XVentanaCondOps_p,  decode_XVentanaCodeOps },
--    };
--
-     ctx->virt_inst_excp = false;
-     ctx->cur_insn_len = insn_len(opcode);
-     /* Check for compressed insn */
-@@ -1160,9 +1158,9 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
-                                              ctx->base.pc_next + 2));
-         ctx->opcode = opcode32;
- 
--        for (size_t i = 0; i < ARRAY_SIZE(decoders); ++i) {
--            if (decoders[i].guard_func(ctx->cfg_ptr) &&
--                decoders[i].decode_func(ctx, opcode32)) {
-+        for (guint i = 0; i < ctx->decoders->len; ++i) {
-+            riscv_cpu_decode_fn func = g_ptr_array_index(ctx->decoders, i);
-+            if (func(ctx, opcode32)) {
-                 return;
-             }
-         }
-@@ -1207,6 +1205,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
-     ctx->itrigger = FIELD_EX32(tb_flags, TB_FLAGS, ITRIGGER);
-     ctx->zero = tcg_constant_tl(0);
-     ctx->virt_inst_excp = false;
-+    ctx->decoders = cpu->decoders;
- }
- 
- static void riscv_tr_tb_start(DisasContextBase *db, CPUState *cpu)
--- 
-2.44.0
+.perm should honor tr_req_ctl.[Exe|Nw]
 
+> +            .addr_mask =3D ~0,
+> +            .target_as =3D NULL,
+> +        };
+> +        int fault =3D riscv_iommu_translate(s, ctx, &iotlb, false);
+> +        if (fault) {
+> +            iova =3D RISCV_IOMMU_TR_RESPONSE_FAULT | (((uint64_t) fault)=
+ << 10);
+> +        } else {
+> +            iova =3D ((iotlb.translated_addr & ~iotlb.addr_mask) >> 2) &
+
+For 4-KB page, we should right-shift 12 bits.
+
+> +                RISCV_IOMMU_TR_RESPONSE_PPN;
+
+It's possible that the translation is not 4-KB page (i.e. superpage),
+which we should set tr_response.S
+and encode translation range size in tr_response.PPN.
+
+Regards,
+Frank Chang
+
+> +        }
+> +        riscv_iommu_reg_set64(s, RISCV_IOMMU_REG_TR_RESPONSE, iova);
+> +    }
+> +
+> +    riscv_iommu_reg_mod64(s, RISCV_IOMMU_REG_TR_REQ_CTL, 0,
+> +        RISCV_IOMMU_TR_REQ_CTL_GO_BUSY);
+> +    riscv_iommu_ctx_put(s, ref);
+> +}
+> +
+>  /* Core IOMMU execution activation */
+>  enum {
+>      RISCV_IOMMU_EXEC_DDTP,
+> @@ -1502,7 +1542,7 @@ static void *riscv_iommu_core_proc(void* arg)
+>              /* NOP */
+>              break;
+>          case BIT(RISCV_IOMMU_EXEC_TR_REQUEST):
+> -            /* DBG support not implemented yet */
+> +            riscv_iommu_process_dbg(s);
+>              break;
+>          }
+>          exec &=3D ~mask;
+> @@ -1574,6 +1614,12 @@ static MemTxResult riscv_iommu_mmio_write(void *op=
+aque, hwaddr addr,
+>          exec =3D BIT(RISCV_IOMMU_EXEC_PQCSR);
+>          busy =3D RISCV_IOMMU_PQCSR_BUSY;
+>          break;
+> +
+> +    case RISCV_IOMMU_REG_TR_REQ_CTL:
+> +        exec =3D BIT(RISCV_IOMMU_EXEC_TR_REQUEST);
+> +        regb =3D RISCV_IOMMU_REG_TR_REQ_CTL;
+> +        busy =3D RISCV_IOMMU_TR_REQ_CTL_GO_BUSY;
+> +        break;
+>      }
+>
+>      /*
+> @@ -1746,6 +1792,9 @@ static void riscv_iommu_realize(DeviceState *dev, E=
+rror **errp)
+>          s->cap |=3D RISCV_IOMMU_CAP_SV32X4 | RISCV_IOMMU_CAP_SV39X4 |
+>                    RISCV_IOMMU_CAP_SV48X4 | RISCV_IOMMU_CAP_SV57X4;
+>      }
+> +    /* Enable translation debug interface */
+> +    s->cap |=3D RISCV_IOMMU_CAP_DBG;
+> +
+>      /* Report QEMU target physical address space limits */
+>      s->cap =3D set_field(s->cap, RISCV_IOMMU_CAP_PAS,
+>                         TARGET_PHYS_ADDR_SPACE_BITS);
+> @@ -1800,6 +1849,12 @@ static void riscv_iommu_realize(DeviceState *dev, =
+Error **errp)
+>      stl_le_p(&s->regs_wc[RISCV_IOMMU_REG_IPSR], ~0);
+>      stl_le_p(&s->regs_ro[RISCV_IOMMU_REG_IVEC], 0);
+>      stq_le_p(&s->regs_rw[RISCV_IOMMU_REG_DDTP], s->ddtp);
+> +    /* If debug registers enabled. */
+> +    if (s->cap & RISCV_IOMMU_CAP_DBG) {
+> +        stq_le_p(&s->regs_ro[RISCV_IOMMU_REG_TR_REQ_IOVA], 0);
+> +        stq_le_p(&s->regs_ro[RISCV_IOMMU_REG_TR_REQ_CTL],
+> +            RISCV_IOMMU_TR_REQ_CTL_GO_BUSY);
+> +    }
+>
+>      /* Memory region for downstream access, if specified. */
+>      if (s->target_mr) {
+> --
+> 2.43.2
+>
+>
 
