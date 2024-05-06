@@ -4,89 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 163ACC10F16
-	for <qemu-riscv@archiver.kernel.org>; Mon,  6 May 2024 06:12:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D093C10F16
+	for <qemu-riscv@archiver.kernel.org>; Mon,  6 May 2024 13:06:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s3raO-0005kj-2i; Mon, 06 May 2024 02:12:28 -0400
+	id 1s3y27-0001tw-L3; Mon, 06 May 2024 09:05:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1s3raM-0005jz-Hb
- for qemu-riscv@nongnu.org; Mon, 06 May 2024 02:12:26 -0400
-Received: from mail-lf1-x12f.google.com ([2a00:1450:4864:20::12f])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1s3y23-0001q6-U0
+ for qemu-riscv@nongnu.org; Mon, 06 May 2024 09:05:28 -0400
+Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1s3raK-00046f-Ly
- for qemu-riscv@nongnu.org; Mon, 06 May 2024 02:12:26 -0400
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-51fd87ce075so1590344e87.3
- for <qemu-riscv@nongnu.org>; Sun, 05 May 2024 23:12:24 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1s3y20-0008BI-Gr
+ for qemu-riscv@nongnu.org; Mon, 06 May 2024 09:05:27 -0400
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-1e4bf0b3e06so16765295ad.1
+ for <qemu-riscv@nongnu.org>; Mon, 06 May 2024 06:05:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1714975942; x=1715580742; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VXx0i4fSaFCK9+9RiI/Aa6wwUQxFeaFWg/hGSQ0VnYY=;
- b=cLZTzJO/h/iabTFgjoI8SnIhvAQ4YR6AOUnufEFuCN+xeNlqniSvaJ8YdhA/Y4Icad
- XECbeYFlxkp8x/8D3/Y9IiDge5xX0I50sPtOxTRUf4q9UIAXW/+JVwyxKkmcYmU+qCpR
- TOTZ92hOSZSmsAhRd2/D0H8OyJFO6HiR8XEQAEzXOYpfUwy40NCGNAZJv/gaA8s0ETIx
- gN2QOBVZW0vKcNRWQf35nlKNBEiADVYAxa/F7RQltBPPLryeJ/darWZY/wMjNGnBC9Nf
- lBntUCowWxr+S0xand9OsdOxOHgYBw8pY+MmWT4Ugzfp77QVIAE5H8ZroEWzasOzHeY0
- tRFg==
+ d=ventanamicro.com; s=google; t=1715000715; x=1715605515; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=m2e6miWxvP8l2p8XuQ6anDUvvnsup8z0r2EdQToelss=;
+ b=Ye5J+3CD9y8ZKkm7aRhMpV3gkrYkyPFDrk4jJ8Plc4Rp6NzuHU/yt8KgkY5oayOCFV
+ HHCl473K2pkwVNSvFu3e7AjdOxgGiA9uVoXBJCD7RBaBjYphxWle95RNvUQd+WViJWIK
+ BIHD02wLp7VESmhVIrDikGz4jc6ZSi7HCCkKaXDFkkePFSfk9e4udLJwZ2rwR3YEPn9f
+ 5a5QGTRbTXDLIkz3nJu6a44SYzhwD60/M2LURIIvMQDYC/ntrOM2rmfLk2xe9cFl6/YC
+ iqnn6wfWKtuM4fJscgKZJnARBwXECETd5S7197KmtPhbLysDdVti51/s9mFB9JXJ5A63
+ Smtg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714975942; x=1715580742;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=VXx0i4fSaFCK9+9RiI/Aa6wwUQxFeaFWg/hGSQ0VnYY=;
- b=Mrv8qHWxErSw80orU4ArRmkIissUEDK6o1GMk1K8fJ2VZCYJTqNyZevUIm+qUPJP2y
- JVAFiNTnGDS6GWdShTtNWwTnay22u4DExD+RSD4o5IVcRoTI+2qPCq8HoML7ZVjnCdhd
- On9Gw0SP2uGN6eaHD9Ib3KCC8Ors3KOtg1Sf9P7J5tMSqC1sV7pqlE7mG4SOSJTySzOU
- z4zqfjqXWs7xis8oLNUIjvvDRcnoMMe9B5Q3F8N5ZM2kf//bvf4bEWwTIVpQv0wdAv0w
- KbaUq5ghAGAsAdl5bD6rMmmxQ7Ep0biLZC36do9+O05d1cyfQCR3zu4rvW04TO7wF5al
- xOJQ==
+ d=1e100.net; s=20230601; t=1715000715; x=1715605515;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=m2e6miWxvP8l2p8XuQ6anDUvvnsup8z0r2EdQToelss=;
+ b=FGKJ4SeEOduq/+nXExcahDfKj0jYUZ1iWBiwfyHb0uMZDL7l36XZd1x9LtNCDsS/ZO
+ 82J49DolLSLOAfA7BmaqkHT+/XVMB7QNwRlXe2auk9oPlWFXLy+2mCRetoSf+MhGG29z
+ JRQB+Mvj+Fjh9aA5d80qlG7PA/3NcG3ViiwMYxquQLUSY/xCHVxo9PMObYaqUBpMxOmH
+ 9fcLx9AkGpmESUHnc/JQMo5ArQKsa3HWbpZl3D9qt8RFTFE3DZW3kUGsaOb0mQtqkYkF
+ qNebWivkKdodL30WtmlpmVCN/ZFxIFuukCIbgqD2daGSigtjHZ62uyzGqozAQW/xW8Lm
+ WS2Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUCGtK7uxmS8W5xBq2PrcsODBlzBu41hZPYmS4jfnqn3LV91h1KnISgZNvLQli4b73pjVJnPiQH5b9+7tIpqRhwjSX/09o=
-X-Gm-Message-State: AOJu0YzI6WHdP9PZ2NsT6aCj/hzw9cCIKd2yAo/XMLh8d45z+FDtorMY
- V+iibMwJzacsXuoL1XgaXAiODs9ofo8HgSx69ggI+FCMYZhasvrMvXrcBqKw9lk3DpoLyp6tywx
- mCCI=
-X-Google-Smtp-Source: AGHT+IHENwKg/Pj3kUARg0vayx8vOpDvaXxgCnio9CMlQoEAgkrETTtnF4OokQ+gvu/XlFkZhFSwRA==
-X-Received: by 2002:a19:f606:0:b0:519:1a91:30cc with SMTP id
- x6-20020a19f606000000b005191a9130ccmr5869974lfe.4.1714975942131; 
- Sun, 05 May 2024 23:12:22 -0700 (PDT)
-Received: from mail-lj1-f178.google.com (mail-lj1-f178.google.com.
- [209.85.208.178]) by smtp.gmail.com with ESMTPSA id
- dw11-20020a0565122c8b00b0051ff89d5ec6sm841245lfb.58.2024.05.05.23.12.21
+ AJvYcCX1LiuF4KzouY3aU+VcRPeOVwQL/gNZcj9Y3k6+fJI/mvoADNaGYJtQIyTMUClwwJKqzbZWrVG+Dk5z9ZnJlv1xoiiHYhQ=
+X-Gm-Message-State: AOJu0YxhUQKOdxszAcpggMBBXbBlBE2E8/YiCFOJ/u0aqwpmJicjYvlP
+ /tgCZRkae7BZ6eUYOFAghBElseWvaNCorDcB/1SZPnMVvraX+1vykyU61Wtgbao=
+X-Google-Smtp-Source: AGHT+IGOwJzhMhEp11Mu1Y8Ro+3/F1mirpNirXxEZDIA4e+nFoRnzf3b+yeiLih8bTyK97CRA8Rcrg==
+X-Received: by 2002:a17:902:bb95:b0:1e2:688e:597d with SMTP id
+ m21-20020a170902bb9500b001e2688e597dmr10241247pls.21.1715000714089; 
+ Mon, 06 May 2024 06:05:14 -0700 (PDT)
+Received: from [192.168.68.110] ([177.94.42.168])
+ by smtp.gmail.com with ESMTPSA id
+ kn14-20020a170903078e00b001e27557050dsm8209549plb.178.2024.05.06.06.05.11
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 05 May 2024 23:12:21 -0700 (PDT)
-Received: by mail-lj1-f178.google.com with SMTP id
- 38308e7fff4ca-2e0b2ddc5d1so19253491fa.3; 
- Sun, 05 May 2024 23:12:21 -0700 (PDT)
-X-Forwarded-Encrypted: i=1;
- AJvYcCUEMDnld/iJ2JV3vI3+qvr3nPHq5m62b71QF37Xn/34maHLtpAKGyAgUIcP+CJCSI9PYzwnqYtPx1tre4wEAqAnTpmJ0XQ=
-X-Received: by 2002:a2e:b009:0:b0:2d4:3d86:54e2 with SMTP id
- y9-20020a2eb009000000b002d43d8654e2mr5012098ljk.27.1714975941554; Sun, 05 May
- 2024 23:12:21 -0700 (PDT)
+ Mon, 06 May 2024 06:05:13 -0700 (PDT)
+Message-ID: <e3eba1d7-35d7-4ecd-8443-320cbebc2bc3@ventanamicro.com>
+Date: Mon, 6 May 2024 10:05:09 -0300
 MIME-Version: 1.0
-References: <20240307160319.675044-1-dbarboza@ventanamicro.com>
- <20240307160319.675044-13-dbarboza@ventanamicro.com>
-In-Reply-To: <20240307160319.675044-13-dbarboza@ventanamicro.com>
-From: Frank Chang <frank.chang@sifive.com>
-Date: Mon, 6 May 2024 14:12:10 +0800
-X-Gmail-Original-Message-ID: <CANzO1D13s85OE3u30EkP43CFVdFNgJNVWoM-BW9oPJi-A7cbNA@mail.gmail.com>
-Message-ID: <CANzO1D13s85OE3u30EkP43CFVdFNgJNVWoM-BW9oPJi-A7cbNA@mail.gmail.com>
-Subject: Re: [PATCH v2 12/15] hw/riscv/riscv-iommu: Add another irq for mrif
- notifications
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 11/15] hw/riscv/riscv-iommu: add DBG support
+To: Frank Chang <frank.chang@sifive.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
  palmer@rivosinc.com, ajones@ventanamicro.com, tjeznach@rivosinc.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::12f;
- envelope-from=frank.chang@sifive.com; helo=mail-lf1-x12f.google.com
+References: <20240307160319.675044-1-dbarboza@ventanamicro.com>
+ <20240307160319.675044-12-dbarboza@ventanamicro.com>
+ <CANzO1D0ywHs+Juv9_qavykxCDiUsuk6tebObfSAyRbgW-WhGJA@mail.gmail.com>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <CANzO1D0ywHs+Juv9_qavykxCDiUsuk6tebObfSAyRbgW-WhGJA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x633.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -109,75 +101,196 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Reviewed-by: Frank Chang <frank.chang@sifive.com>
+Hi Frank,
 
-Daniel Henrique Barboza <dbarboza@ventanamicro.com> =E6=96=BC 2024=E5=B9=B4=
-3=E6=9C=888=E6=97=A5 =E9=80=B1=E4=BA=94 =E4=B8=8A=E5=8D=8812:06=E5=AF=AB=E9=
-=81=93=EF=BC=9A
->
-> From: Andrew Jones <ajones@ventanamicro.com>
->
-> And add mrif notification trace.
->
-> Signed-off-by: Andrew Jones <ajones@ventanamicro.com>
-> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> ---
->  hw/riscv/riscv-iommu-pci.c | 2 +-
->  hw/riscv/riscv-iommu.c     | 1 +
->  hw/riscv/trace-events      | 1 +
->  3 files changed, 3 insertions(+), 1 deletion(-)
->
-> diff --git a/hw/riscv/riscv-iommu-pci.c b/hw/riscv/riscv-iommu-pci.c
-> index 4eb1057210..8a7b71166c 100644
-> --- a/hw/riscv/riscv-iommu-pci.c
-> +++ b/hw/riscv/riscv-iommu-pci.c
-> @@ -78,7 +78,7 @@ static void riscv_iommu_pci_realize(PCIDevice *dev, Err=
-or **errp)
->      pci_register_bar(dev, 0, PCI_BASE_ADDRESS_SPACE_MEMORY |
->                       PCI_BASE_ADDRESS_MEM_TYPE_64, &s->bar0);
->
-> -    int ret =3D msix_init(dev, RISCV_IOMMU_INTR_COUNT,
-> +    int ret =3D msix_init(dev, RISCV_IOMMU_INTR_COUNT + 1,
->                          &s->bar0, 0, RISCV_IOMMU_REG_MSI_CONFIG,
->                          &s->bar0, 0, RISCV_IOMMU_REG_MSI_CONFIG + 256, 0=
-, &err);
->
-> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-> index 1fa1286d07..954a6892c2 100644
-> --- a/hw/riscv/riscv-iommu.c
-> +++ b/hw/riscv/riscv-iommu.c
-> @@ -543,6 +543,7 @@ static MemTxResult riscv_iommu_msi_write(RISCVIOMMUSt=
-ate *s,
->      if (res !=3D MEMTX_OK) {
->          return res;
->      }
-> +    trace_riscv_iommu_mrif_notification(s->parent_obj.id, n190, addr);
->
->      return MEMTX_OK;
->  }
-> diff --git a/hw/riscv/trace-events b/hw/riscv/trace-events
-> index 4b486b6420..d69719a27a 100644
-> --- a/hw/riscv/trace-events
-> +++ b/hw/riscv/trace-events
-> @@ -6,6 +6,7 @@ riscv_iommu_flt(const char *id, unsigned b, unsigned d, u=
-nsigned f, uint64_t rea
->  riscv_iommu_pri(const char *id, unsigned b, unsigned d, unsigned f, uint=
-64_t iova) "%s: page request %04x:%02x.%u iova: 0x%"PRIx64
->  riscv_iommu_dma(const char *id, unsigned b, unsigned d, unsigned f, unsi=
-gned pasid, const char *dir, uint64_t iova, uint64_t phys) "%s: translate %=
-04x:%02x.%u #%u %s 0x%"PRIx64" -> 0x%"PRIx64
->  riscv_iommu_msi(const char *id, unsigned b, unsigned d, unsigned f, uint=
-64_t iova, uint64_t phys) "%s: translate %04x:%02x.%u MSI 0x%"PRIx64" -> 0x=
-%"PRIx64
-> +riscv_iommu_mrif_notification(const char *id, uint32_t nid, uint64_t phy=
-s) "%s: sent MRIF notification 0x%x to 0x%"PRIx64
->  riscv_iommu_cmd(const char *id, uint64_t l, uint64_t u) "%s: command 0x%=
-"PRIx64" 0x%"PRIx64
->  riscv_iommu_notifier_add(const char *id) "%s: dev-iotlb notifier added"
->  riscv_iommu_notifier_del(const char *id) "%s: dev-iotlb notifier removed=
-"
-> --
-> 2.43.2
->
->
+On 5/6/24 01:09, Frank Chang wrote:
+> Hi Daniel,
+> 
+> Daniel Henrique Barboza <dbarboza@ventanamicro.com> 於 2024年3月8日 週五 上午12:05寫道：
+>>
+>> From: Tomasz Jeznach <tjeznach@rivosinc.com>
+>>
+>> DBG support adds three additional registers: tr_req_iova, tr_req_ctl and
+>> tr_response.
+>>
+>> The DBG cap is always enabled. No on/off toggle is provided for it.
+>>
+>> Signed-off-by: Tomasz Jeznach <tjeznach@rivosinc.com>
+>> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>> ---
+>>   hw/riscv/riscv-iommu-bits.h | 20 +++++++++++++
+>>   hw/riscv/riscv-iommu.c      | 57 ++++++++++++++++++++++++++++++++++++-
+>>   2 files changed, 76 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/hw/riscv/riscv-iommu-bits.h b/hw/riscv/riscv-iommu-bits.h
+>> index 0994f5ce48..b3f92411bb 100644
+>> --- a/hw/riscv/riscv-iommu-bits.h
+>> +++ b/hw/riscv/riscv-iommu-bits.h
+>> @@ -83,6 +83,7 @@ struct riscv_iommu_pq_record {
+>>   #define RISCV_IOMMU_CAP_MSI_MRIF        BIT_ULL(23)
+>>   #define RISCV_IOMMU_CAP_ATS             BIT_ULL(25)
+>>   #define RISCV_IOMMU_CAP_IGS             GENMASK_ULL(29, 28)
+>> +#define RISCV_IOMMU_CAP_DBG             BIT_ULL(31)
+>>   #define RISCV_IOMMU_CAP_PAS             GENMASK_ULL(37, 32)
+>>   #define RISCV_IOMMU_CAP_PD8             BIT_ULL(38)
+>>
+>> @@ -177,6 +178,25 @@ enum {
+>>       RISCV_IOMMU_INTR_COUNT
+>>   };
+>>
+>> +#define RISCV_IOMMU_IPSR_CIP            BIT(RISCV_IOMMU_INTR_CQ)
+>> +#define RISCV_IOMMU_IPSR_FIP            BIT(RISCV_IOMMU_INTR_FQ)
+>> +#define RISCV_IOMMU_IPSR_PMIP           BIT(RISCV_IOMMU_INTR_PM)
+>> +#define RISCV_IOMMU_IPSR_PIP            BIT(RISCV_IOMMU_INTR_PQ)
+> 
+> These are not related to the DBG.
+> 
+>> +
+>> +/* 5.24 Translation request IOVA (64bits) */
+>> +#define RISCV_IOMMU_REG_TR_REQ_IOVA     0x0258
+>> +
+>> +/* 5.25 Translation request control (64bits) */
+>> +#define RISCV_IOMMU_REG_TR_REQ_CTL      0x0260
+>> +#define RISCV_IOMMU_TR_REQ_CTL_GO_BUSY  BIT_ULL(0)
+>> +#define RISCV_IOMMU_TR_REQ_CTL_PID      GENMASK_ULL(31, 12)
+>> +#define RISCV_IOMMU_TR_REQ_CTL_DID      GENMASK_ULL(63, 40)
+>> +
+>> +/* 5.26 Translation request response (64bits) */
+>> +#define RISCV_IOMMU_REG_TR_RESPONSE     0x0268
+>> +#define RISCV_IOMMU_TR_RESPONSE_FAULT   BIT_ULL(0)
+>> +#define RISCV_IOMMU_TR_RESPONSE_PPN     RISCV_IOMMU_PPN_FIELD
+>> +
+>>   /* 5.27 Interrupt cause to vector (64bits) */
+>>   #define RISCV_IOMMU_REG_IVEC            0x02F8
+>>
+>> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+>> index 7af5929b10..1fa1286d07 100644
+>> --- a/hw/riscv/riscv-iommu.c
+>> +++ b/hw/riscv/riscv-iommu.c
+>> @@ -1457,6 +1457,46 @@ static void riscv_iommu_process_pq_control(RISCVIOMMUState *s)
+>>       riscv_iommu_reg_mod32(s, RISCV_IOMMU_REG_PQCSR, ctrl_set, ctrl_clr);
+>>   }
+>>
+>> +static void riscv_iommu_process_dbg(RISCVIOMMUState *s)
+>> +{
+>> +    uint64_t iova = riscv_iommu_reg_get64(s, RISCV_IOMMU_REG_TR_REQ_IOVA);
+>> +    uint64_t ctrl = riscv_iommu_reg_get64(s, RISCV_IOMMU_REG_TR_REQ_CTL);
+>> +    unsigned devid = get_field(ctrl, RISCV_IOMMU_TR_REQ_CTL_DID);
+>> +    unsigned pid = get_field(ctrl, RISCV_IOMMU_TR_REQ_CTL_PID);
+>> +    RISCVIOMMUContext *ctx;
+>> +    void *ref;
+>> +
+>> +    if (!(ctrl & RISCV_IOMMU_TR_REQ_CTL_GO_BUSY)) {
+>> +        return;
+>> +    }
+>> +
+>> +    ctx = riscv_iommu_ctx(s, devid, pid, &ref);
+>> +    if (ctx == NULL) {
+>> +        riscv_iommu_reg_set64(s, RISCV_IOMMU_REG_TR_RESPONSE,
+>> +                                 RISCV_IOMMU_TR_RESPONSE_FAULT |
+>> +                                 (RISCV_IOMMU_FQ_CAUSE_DMA_DISABLED << 10));
+>> +    } else {
+>> +        IOMMUTLBEntry iotlb = {
+>> +            .iova = iova,
+>> +            .perm = IOMMU_NONE,
+> 
+> .perm should honor tr_req_ctl.[Exe|Nw]
+> 
+>> +            .addr_mask = ~0,
+>> +            .target_as = NULL,
+>> +        };
+>> +        int fault = riscv_iommu_translate(s, ctx, &iotlb, false);
+>> +        if (fault) {
+>> +            iova = RISCV_IOMMU_TR_RESPONSE_FAULT | (((uint64_t) fault) << 10);
+>> +        } else {
+>> +            iova = ((iotlb.translated_addr & ~iotlb.addr_mask) >> 2) &
+> 
+> For 4-KB page, we should right-shift 12 bits.
+> 
+>> +                RISCV_IOMMU_TR_RESPONSE_PPN;
+> 
+> It's possible that the translation is not 4-KB page (i.e. superpage),
+> which we should set tr_response.S
+> and encode translation range size in tr_response.PPN.
+
+At this moment this emulation doesn't support superpages, at least from my
+understanding. Tomasz is welcome to correct me if I'm wrong. I'll explictly
+set tr_response.S to 0 here to make it clearer.
+
+The idea here IIUC is to, in the future, merge the IOMMU translation lookup code
+with the existing lookup code we have (cpu_helper.c, get_physical_address()), and
+with that the IOMMU will end up supporting both super-pages and svnapot.
+
+
+
+Thanks,
+
+Daniel
+
+
+> 
+> Regards,
+> Frank Chang
+> 
+>> +        }
+>> +        riscv_iommu_reg_set64(s, RISCV_IOMMU_REG_TR_RESPONSE, iova);
+>> +    }
+>> +
+>> +    riscv_iommu_reg_mod64(s, RISCV_IOMMU_REG_TR_REQ_CTL, 0,
+>> +        RISCV_IOMMU_TR_REQ_CTL_GO_BUSY);
+>> +    riscv_iommu_ctx_put(s, ref);
+>> +}
+>> +
+>>   /* Core IOMMU execution activation */
+>>   enum {
+>>       RISCV_IOMMU_EXEC_DDTP,
+>> @@ -1502,7 +1542,7 @@ static void *riscv_iommu_core_proc(void* arg)
+>>               /* NOP */
+>>               break;
+>>           case BIT(RISCV_IOMMU_EXEC_TR_REQUEST):
+>> -            /* DBG support not implemented yet */
+>> +            riscv_iommu_process_dbg(s);
+>>               break;
+>>           }
+>>           exec &= ~mask;
+>> @@ -1574,6 +1614,12 @@ static MemTxResult riscv_iommu_mmio_write(void *opaque, hwaddr addr,
+>>           exec = BIT(RISCV_IOMMU_EXEC_PQCSR);
+>>           busy = RISCV_IOMMU_PQCSR_BUSY;
+>>           break;
+>> +
+>> +    case RISCV_IOMMU_REG_TR_REQ_CTL:
+>> +        exec = BIT(RISCV_IOMMU_EXEC_TR_REQUEST);
+>> +        regb = RISCV_IOMMU_REG_TR_REQ_CTL;
+>> +        busy = RISCV_IOMMU_TR_REQ_CTL_GO_BUSY;
+>> +        break;
+>>       }
+>>
+>>       /*
+>> @@ -1746,6 +1792,9 @@ static void riscv_iommu_realize(DeviceState *dev, Error **errp)
+>>           s->cap |= RISCV_IOMMU_CAP_SV32X4 | RISCV_IOMMU_CAP_SV39X4 |
+>>                     RISCV_IOMMU_CAP_SV48X4 | RISCV_IOMMU_CAP_SV57X4;
+>>       }
+>> +    /* Enable translation debug interface */
+>> +    s->cap |= RISCV_IOMMU_CAP_DBG;
+>> +
+>>       /* Report QEMU target physical address space limits */
+>>       s->cap = set_field(s->cap, RISCV_IOMMU_CAP_PAS,
+>>                          TARGET_PHYS_ADDR_SPACE_BITS);
+>> @@ -1800,6 +1849,12 @@ static void riscv_iommu_realize(DeviceState *dev, Error **errp)
+>>       stl_le_p(&s->regs_wc[RISCV_IOMMU_REG_IPSR], ~0);
+>>       stl_le_p(&s->regs_ro[RISCV_IOMMU_REG_IVEC], 0);
+>>       stq_le_p(&s->regs_rw[RISCV_IOMMU_REG_DDTP], s->ddtp);
+>> +    /* If debug registers enabled. */
+>> +    if (s->cap & RISCV_IOMMU_CAP_DBG) {
+>> +        stq_le_p(&s->regs_ro[RISCV_IOMMU_REG_TR_REQ_IOVA], 0);
+>> +        stq_le_p(&s->regs_ro[RISCV_IOMMU_REG_TR_REQ_CTL],
+>> +            RISCV_IOMMU_TR_REQ_CTL_GO_BUSY);
+>> +    }
+>>
+>>       /* Memory region for downstream access, if specified. */
+>>       if (s->target_mr) {
+>> --
+>> 2.43.2
+>>
+>>
 
