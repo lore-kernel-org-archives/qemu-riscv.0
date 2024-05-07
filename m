@@ -4,94 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB4E4C10F1A
-	for <qemu-riscv@archiver.kernel.org>; Tue,  7 May 2024 09:06:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B725EC41513
+	for <qemu-riscv@archiver.kernel.org>; Tue,  7 May 2024 10:12:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s4GmR-0007YS-FE; Tue, 07 May 2024 05:06:35 -0400
+	id 1s4HoU-0006Vl-EY; Tue, 07 May 2024 06:12:46 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1s4GmQ-0007YK-PS
- for qemu-riscv@nongnu.org; Tue, 07 May 2024 05:06:34 -0400
-Received: from mail-lf1-x132.google.com ([2a00:1450:4864:20::132])
+ (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
+ id 1s4HoM-0006Rw-Ek
+ for qemu-riscv@nongnu.org; Tue, 07 May 2024 06:12:39 -0400
+Received: from mail-ot1-x334.google.com ([2607:f8b0:4864:20::334])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1s4GmO-0006Zq-EB
- for qemu-riscv@nongnu.org; Tue, 07 May 2024 05:06:34 -0400
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-51aa6a8e49aso3913887e87.3
- for <qemu-riscv@nongnu.org>; Tue, 07 May 2024 02:06:31 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
+ id 1s4HoG-0007cl-RZ
+ for qemu-riscv@nongnu.org; Tue, 07 May 2024 06:12:38 -0400
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-6ef9b3bde1bso555579a34.2
+ for <qemu-riscv@nongnu.org>; Tue, 07 May 2024 03:12:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1715072790; x=1715677590; darn=nongnu.org;
+ d=sifive.com; s=google; t=1715076747; x=1715681547; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AeTLInywx/8jWc09cXAEdBRVupgy2H4EYNKJEbF3QfY=;
- b=mcZVc5Ir0ROJnAz5x3JnWLuY10YeI4nfNFOx29LEmf1Sk2xQVUkd7f2Xu5qHxsCKkI
- olInMwoKhziZD0kP8y4O4Pk+xxuGhwg/xSgtUpzN4FNG+zss0RisJ81hfsNbr+MY3y5x
- glJiuCnv4Y0bOCjQPwmKWe8LAviIIUh3U8HDf3Y723usjUkhl1akU4CHIKxMOs1POB0V
- yJHyg4/E2+QCvf5+61rIK3gJ2hSKktx4My8SXCHbwZ2+5vF3GlE8c9QE9njwwJFEYxWV
- /+ZVIrofCh6TMbpnRes3G3IaT+lHaZqww7iBYBZpEy7g2yIs4FGGw7oWewPy0gI/Qxll
- YbVg==
+ bh=n4/GAPdJUfHnp48kN0aWhS7WR6PdArXN2IIWbN7coW0=;
+ b=RnZLHtXY7nnYhaijyLXnbJUHzjGsHDlNFFXakI3/rCCoGEFgfpZt5YQIATxAmAQjtX
+ 98maJGCvk6FUZEIaLbSUysGWLCYRfm3cVFN9hMqsYcOthdckgF/lVL88jkrgtcy6EKS5
+ QCQA5f5UTRYFXH38aEF4OKgaPiSwfJDAcRx88iufujhN/UNMuTNEmdi9mkvT8BOHC+f/
+ kbhxp9AxntoHlZIexkYYXWSwRt3TZU1A3tB/ntMG2le20jS1aeLfdv+nwqpG1jvoqPWN
+ U2Icuad37zw9yCfAumzG6Dv4igrzxiVqhi+PQDNsexoJ1RkR25qTtUX2iaQGy8er1Qwy
+ wY3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715072790; x=1715677590;
+ d=1e100.net; s=20230601; t=1715076747; x=1715681547;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AeTLInywx/8jWc09cXAEdBRVupgy2H4EYNKJEbF3QfY=;
- b=p/DeWVfMX1WukB9it3Go0xXvWlCozJOXnOwI8Ayo2UelYhRU6x+TQY34mUV6ZXGMFA
- bQvHATyrDk2jQqE73RDiPlr5pKfQVF2whtnqnH84me7QdXo0991GdJziyZ2kYQHdF/Id
- +tqanUaMnfjbduoV7WhAB7pAf6i98sZV8Yer8ROjV/ie6erxUSSJig1sjMnWZZrtEw4G
- iWvEAe5Ka7CE1bNvsj1jUaY+O6FJJbTrCYyft65l/NBqRZbLM8YqeyqTXoPF0PBrNfHe
- F3vpPQTvymscY7DbyRO416ShTwDMpIwuoritYToWDgT58nH4WrCHZto52HL/8VJqDMIS
- Nb9A==
+ bh=n4/GAPdJUfHnp48kN0aWhS7WR6PdArXN2IIWbN7coW0=;
+ b=MsBT6BMSePHXVYJkM+c61VRctnqJ3i55sFtuYWLHsTRn6tFnkaXIBv1n9v8HT51sNV
+ RoX31GL3pn1Ll0jDBv8szIKAUXb/W+JYOzzUnKSlmwCFvqqU3BTs6YBp345WmNGy2ygh
+ 9+f+hZMCrCCKLJFHPxOIs3IPXhW4CsrPtAyjBe/22vYRkOO4DGe210YmleFXmCrsvQ4B
+ eJTQGDP68HdHyFoKfGGWbMpd9/RC5QdTa5q9aPkJ7LWBYSPWCZXt1EQsIVMkHDkYRKqh
+ bWUGDeaQ6/6xD2iqQqCn4qzt4gxw3WCzWJvIkg11RLy9t1tJXGPY+8r1CRo+GLNnoeBt
+ vXEw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXSS/fgX6+fdWoIfBlInWv82jpCDGo5nqEFUrR9FeebK+BBj20IrUFYngf1TVFruHa4flpv/0cMSD5X6GMZWlH+lv5TzR4=
-X-Gm-Message-State: AOJu0YymqqbTK+LmJhexmdFFKFFIyIrp7uB7XdjeO+2ySLMTJ6BPw2Za
- pbekIH6X3ctU6w1kb+bRiTL3xGBifpcG21vMgcyhgakMnR0rBDVC1YZGivClgao=
-X-Google-Smtp-Source: AGHT+IEdZRNGVO75Th60Xo9Q2qXmSgTQFg7hyActGbsBNH6E0gfeYUePQEab7Z2RVRFUIa71iFLO9g==
-X-Received: by 2002:a05:6512:793:b0:51d:a87d:b6f3 with SMTP id
- x19-20020a056512079300b0051da87db6f3mr6386864lfr.39.1715072790206; 
- Tue, 07 May 2024 02:06:30 -0700 (PDT)
-Received: from mail-lj1-f173.google.com (mail-lj1-f173.google.com.
- [209.85.208.173]) by smtp.gmail.com with ESMTPSA id
- t29-20020a192d5d000000b0051f0da61e60sm2041842lft.55.2024.05.07.02.06.29
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 07 May 2024 02:06:29 -0700 (PDT)
-Received: by mail-lj1-f173.google.com with SMTP id
- 38308e7fff4ca-2e30c625178so25589721fa.1; 
- Tue, 07 May 2024 02:06:29 -0700 (PDT)
-X-Forwarded-Encrypted: i=1;
- AJvYcCXK73Aqy+k3vxTOkMSGkMKRpHtO2VJVaj+K+JxiMBI6ZUuS9h4Rgfti0Kn4Da67CoJyZxaGPbpUp0mcOzaktBLVAHyl1+g=
-X-Received: by 2002:a2e:7d07:0:b0:2de:809c:c67b with SMTP id
- y7-20020a2e7d07000000b002de809cc67bmr7064516ljc.24.1715072789595; Tue, 07 May
- 2024 02:06:29 -0700 (PDT)
+ AJvYcCV2Okj5kvcr9gRX8T9zApM/vjkymgKYnP4sN/8FJjkgrr7U/r/5kniUmomEFV0/CtjWGzA60Ubb8ar4ueyWZYLIM2U+V+o=
+X-Gm-Message-State: AOJu0YxHiV/NiKvq+S/3PhLzVgkLsD8NpggMfK4J9dcK74kk4wb045Rk
+ RHnGW52SGLYn08VFN1Ux7cgnsnap2Y5lauUR9XPxMesgv1SuswgkgRpEQVirUJ7WF1hA25Ul5Gx
+ GroWvqwh2xCUAWRmTUMb5t/asrp7JJ7OHU9mImF4eAXlXuUAF
+X-Google-Smtp-Source: AGHT+IGzBoELkMyDthtPioUrbGr0WU7/8LaTFS3isC/sBOp7EiPzsaDUZt98yiaSPIZGmVYlaLWNvCumtx9/AWkQQ9U=
+X-Received: by 2002:a05:6870:32d3:b0:23f:6c3d:c789 with SMTP id
+ r19-20020a05687032d300b0023f6c3dc789mr8380041oac.30.1715076746856; Tue, 07
+ May 2024 03:12:26 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240307160319.675044-1-dbarboza@ventanamicro.com>
- <20240307160319.675044-15-dbarboza@ventanamicro.com>
-In-Reply-To: <20240307160319.675044-15-dbarboza@ventanamicro.com>
-From: Frank Chang <frank.chang@sifive.com>
-Date: Tue, 7 May 2024 17:06:18 +0800
-X-Gmail-Original-Message-ID: <CANzO1D3JJqf_CAAXkHxEuiY9rvy5W4HOOnDYMG9-S7Yd7ArWPQ@mail.gmail.com>
-Message-ID: <CANzO1D3JJqf_CAAXkHxEuiY9rvy5W4HOOnDYMG9-S7Yd7ArWPQ@mail.gmail.com>
-Subject: Re: [PATCH v2 14/15] hw/misc: EDU: added PASID support
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com, ajones@ventanamicro.com, tjeznach@rivosinc.com
+References: <20240415065245.25455-1-yongxuan.wang@sifive.com>
+ <CAKmqyKO3qj9k74RBp+KCGxgPR_=ZGCSzdUDdGrQj9TPJCUD1Nw@mail.gmail.com>
+In-Reply-To: <CAKmqyKO3qj9k74RBp+KCGxgPR_=ZGCSzdUDdGrQj9TPJCUD1Nw@mail.gmail.com>
+From: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+Date: Tue, 7 May 2024 18:12:16 +0800
+Message-ID: <CAMWQL2h3+1rkYMusg0Mzgu6NZy4gYLa75+nGWRVzjF83jCukzA@mail.gmail.com>
+Subject: Re: [PATCH 1/1] target/riscv/kvm.c: Fix the hart bit setting of AIA
+To: Alistair Francis <alistair23@gmail.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, greentime.hu@sifive.com, 
+ vincent.chen@sifive.com, frank.chang@sifive.com, jim.shu@sifive.com, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Andrew Jones <ajones@ventanamicro.com>,
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::132;
- envelope-from=frank.chang@sifive.com; helo=mail-lf1-x132.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::334;
+ envelope-from=yongxuan.wang@sifive.com; helo=mail-ot1-x334.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,210 +100,82 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Daniel,
+Hi Alistair,
 
-Daniel Henrique Barboza <dbarboza@ventanamicro.com> =E6=96=BC 2024=E5=B9=B4=
-3=E6=9C=888=E6=97=A5 =E9=80=B1=E4=BA=94 =E4=B8=8A=E5=8D=8812:05=E5=AF=AB=E9=
-=81=93=EF=BC=9A
-
+On Mon, Apr 29, 2024 at 11:25=E2=80=AFAM Alistair Francis <alistair23@gmail=
+.com> wrote:
 >
-> From: Tomasz Jeznach <tjeznach@rivosinc.com>
+> On Mon, Apr 15, 2024 at 4:53=E2=80=AFPM Yong-Xuan Wang <yongxuan.wang@sif=
+ive.com> wrote:
+> >
+> > The hart bit setting is different with Linux AIA driver[1] when the num=
+ber
+> > of hart is power of 2. For example, when the guest has 4 harts, the
+> > estimated result of AIA driver is 2, whereas we pass 3 to RISC-V/KVM. S=
+ince
+> > only 2 bits are needed to represent 4 harts, update the formula to get =
+the
+> > accurate result.
 >
-> Extension to support DMA with PASID identifier and reporting PASID
-> extended PCIe capabilities.
+> I don't really follow this.
 >
-> Signed-off-by: Tomasz Jeznach <tjeznach@rivosinc.com>
-> ---
->  hw/misc/edu.c | 57 +++++++++++++++++++++++++++++++++++++++------------
->  1 file changed, 44 insertions(+), 13 deletions(-)
->
-> diff --git a/hw/misc/edu.c b/hw/misc/edu.c
-> index 2a976ca2b1..522cec85b3 100644
-> --- a/hw/misc/edu.c
-> +++ b/hw/misc/edu.c
-> @@ -26,6 +26,7 @@
->  #include "qemu/units.h"
->  #include "hw/pci/pci.h"
->  #include "hw/hw.h"
-> +#include "hw/qdev-properties.h"
->  #include "hw/pci/msi.h"
->  #include "qemu/timer.h"
->  #include "qom/object.h"
-> @@ -53,6 +54,8 @@ struct EduState {
->      QemuCond thr_cond;
->      bool stopping;
->
-> +    bool enable_pasid;
-> +
->      uint32_t addr4;
->      uint32_t fact;
->  #define EDU_STATUS_COMPUTING    0x01
-> @@ -66,6 +69,9 @@ struct EduState {
->  # define EDU_DMA_FROM_PCI       0
->  # define EDU_DMA_TO_PCI         1
->  #define EDU_DMA_IRQ             0x4
-> +#define EDU_DMA_PV              0x8
-> +#define EDU_DMA_PASID(cmd)      (((cmd) >> 8) & ((1U << 20) - 1))
-> +
->      struct dma_state {
->          dma_addr_t src;
->          dma_addr_t dst;
-> @@ -126,12 +132,7 @@ static void edu_check_range(uint64_t addr, uint64_t =
-size1, uint64_t start,
->
->  static dma_addr_t edu_clamp_addr(const EduState *edu, dma_addr_t addr)
->  {
-> -    dma_addr_t res =3D addr & edu->dma_mask;
-> -
-> -    if (addr !=3D res) {
-> -        printf("EDU: clamping DMA %#.16"PRIx64" to %#.16"PRIx64"!\n", ad=
-dr, res);
-> -    }
-> -
-> +    dma_addr_t res =3D addr;
->      return res;
->  }
->
-> @@ -139,23 +140,33 @@ static void edu_dma_timer(void *opaque)
->  {
->      EduState *edu =3D opaque;
->      bool raise_irq =3D false;
-> +    MemTxAttrs attrs =3D MEMTXATTRS_UNSPECIFIED;
->
->      if (!(edu->dma.cmd & EDU_DMA_RUN)) {
->          return;
->      }
->
-> +    if (edu->enable_pasid && (edu->dma.cmd & EDU_DMA_PV)) {
-> +        attrs.unspecified =3D 0;
-> +        attrs.pasid =3D EDU_DMA_PASID(edu->dma.cmd);
-> +        attrs.requester_id =3D pci_requester_id(&edu->pdev);
-> +        attrs.secure =3D 0;
-> +    }
-> +
->      if (EDU_DMA_DIR(edu->dma.cmd) =3D=3D EDU_DMA_FROM_PCI) {
->          uint64_t dst =3D edu->dma.dst;
->          edu_check_range(dst, edu->dma.cnt, DMA_START, DMA_SIZE);
->          dst -=3D DMA_START;
-> -        pci_dma_read(&edu->pdev, edu_clamp_addr(edu, edu->dma.src),
-> -                edu->dma_buf + dst, edu->dma.cnt);
-> +        pci_dma_rw(&edu->pdev, edu_clamp_addr(edu, edu->dma.src),
-> +                edu->dma_buf + dst, edu->dma.cnt,
-> +                DMA_DIRECTION_TO_DEVICE, attrs);
->      } else {
->          uint64_t src =3D edu->dma.src;
->          edu_check_range(src, edu->dma.cnt, DMA_START, DMA_SIZE);
->          src -=3D DMA_START;
-> -        pci_dma_write(&edu->pdev, edu_clamp_addr(edu, edu->dma.dst),
-> -                edu->dma_buf + src, edu->dma.cnt);
-> +        pci_dma_rw(&edu->pdev, edu_clamp_addr(edu, edu->dma.dst),
-> +                edu->dma_buf + src, edu->dma.cnt,
-> +                DMA_DIRECTION_FROM_DEVICE, attrs);
->      }
->
->      edu->dma.cmd &=3D ~EDU_DMA_RUN;
-> @@ -255,7 +266,8 @@ static void edu_mmio_write(void *opaque, hwaddr addr,=
- uint64_t val,
->          if (qatomic_read(&edu->status) & EDU_STATUS_COMPUTING) {
->              break;
->          }
-> -        /* EDU_STATUS_COMPUTING cannot go 0->1 concurrently, because it =
-is only
-> +        /*
-> +         * EDU_STATUS_COMPUTING cannot go 0->1 concurrently, because it =
-is only
->           * set in this function and it is under the iothread mutex.
->           */
->          qemu_mutex_lock(&edu->thr_mutex);
-> @@ -368,9 +380,21 @@ static void pci_edu_realize(PCIDevice *pdev, Error *=
-*errp)
->  {
->      EduState *edu =3D EDU(pdev);
->      uint8_t *pci_conf =3D pdev->config;
-> +    int pos;
->
->      pci_config_set_interrupt_pin(pci_conf, 1);
->
-> +    pcie_endpoint_cap_init(pdev, 0);
-> +
-> +    /* PCIe extended capability for PASID */
-> +    pos =3D PCI_CONFIG_SPACE_SIZE;
-> +    if (edu->enable_pasid) {
-> +        /* PCIe Spec 7.8.9 PASID Extended Capability Structure */
-> +        pcie_add_capability(pdev, 0x1b, 1, pos, 8);
-> +        pci_set_long(pdev->config + pos + 4, 0x00001400);
-> +        pci_set_long(pdev->wmask + pos + 4,  0xfff0ffff);
-
-We should use the defines declared in
-include/standard-headers/linux/pci_regs.h for readability.
-
-> +    }
-> +
->      if (msi_init(pdev, 0, 1, true, false, errp)) {
->          return;
->      }
-> @@ -404,20 +428,27 @@ static void pci_edu_uninit(PCIDevice *pdev)
->      msi_uninit(pdev);
->  }
->
-> +
-
-This new line is unnecessary.
-
->  static void edu_instance_init(Object *obj)
->  {
->      EduState *edu =3D EDU(obj);
->
-> -    edu->dma_mask =3D (1UL << 28) - 1;
-> +    edu->dma_mask =3D ~0ULL;
-
-docs/specs/edu.txt says:
-"For educational purposes, the device supports only 28 bits (256 MiB)
-by default. Students shall set dma_mask for the device in the OS driver
-properly."
-
-We should either update the EDU spec or revert the change here.
-
->      object_property_add_uint64_ptr(obj, "dma_mask",
->                                     &edu->dma_mask, OBJ_PROP_FLAG_READWRI=
-TE);
->  }
->
-> +static Property edu_properties[] =3D {
-> +    DEFINE_PROP_BOOL("pasid", EduState, enable_pasid, TRUE),
-> +    DEFINE_PROP_END_OF_LIST(),
-> +};
-> +
->  static void edu_class_init(ObjectClass *class, void *data)
->  {
->      DeviceClass *dc =3D DEVICE_CLASS(class);
->      PCIDeviceClass *k =3D PCI_DEVICE_CLASS(class);
->
-> +    device_class_set_props(dc, edu_properties);
->      k->realize =3D pci_edu_realize;
->      k->exit =3D pci_edu_uninit;
->      k->vendor_id =3D PCI_VENDOR_ID_QEMU;
-> @@ -430,7 +461,7 @@ static void edu_class_init(ObjectClass *class, void *=
-data)
->  static void pci_edu_register_types(void)
->  {
->      static InterfaceInfo interfaces[] =3D {
-> -        { INTERFACE_CONVENTIONAL_PCI_DEVICE },
-> +        { INTERFACE_PCIE_DEVICE },
->          { },
->      };
->      static const TypeInfo edu_info =3D {
-> --
-> 2.43.2
->
+> Do you mind re-wording it to talk about what the specification says?
+> Not what Linux does.
 >
 
-This commit introduces a new command for PASID (PV, bitwise OR of:
-0x08; PASID, cmds[27:8]).
-We should also update the EDU spec: docs/specs/edu.rst to address the chang=
-es.
+Sure!
 
+> >
+> > [1] https://lore.kernel.org/all/20240307140307.646078-1-apatel@ventanam=
+icro.com/
+> >
+> > Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+> > ---
+> >  target/riscv/kvm/kvm-cpu.c | 9 ++++++++-
+> >  1 file changed, 8 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+> > index 6a6c6cae80f1..388c4ddaa145 100644
+> > --- a/target/riscv/kvm/kvm-cpu.c
+> > +++ b/target/riscv/kvm/kvm-cpu.c
+> > @@ -1642,7 +1642,14 @@ void kvm_riscv_aia_create(MachineState *machine,=
+ uint64_t group_shift,
+> >          }
+> >      }
+> >
+> > -    hart_bits =3D find_last_bit(&max_hart_per_socket, BITS_PER_LONG) +=
+ 1;
+> > +
+> > +    if (max_hart_per_socket > 1) {
+> > +        max_hart_per_socket--;
+>
+> Assuming there are an even number of cores (which there usually are)
+> won't this always result in a
+>
+> > +        hart_bits =3D find_last_bit(&max_hart_per_socket, BITS_PER_LON=
+G) + 1;
+>
+> 1 being returned by find_last_bit()?
+>
+
+find_last_bit() returns the position of the leftmost set bit. The
+output will not be 1 when the given input is an odd number.
 
 Regards,
-Frank Chang
+Yong-Xuan
+
+
+> Alistair
+>
+> > +    } else {
+> > +        hart_bits =3D 0;
+> > +    }
+> > +
+> >      ret =3D kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
+> >                              KVM_DEV_RISCV_AIA_CONFIG_HART_BITS,
+> >                              &hart_bits, true, NULL);
+> > --
+> > 2.17.1
+> >
+> >
 
