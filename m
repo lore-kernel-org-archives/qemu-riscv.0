@@ -4,84 +4,122 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52A95C10F16
-	for <qemu-riscv@archiver.kernel.org>; Mon,  6 May 2024 14:30:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2E47C25B5C
+	for <qemu-riscv@archiver.kernel.org>; Tue,  7 May 2024 05:24:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s3zLd-0004WM-EN; Mon, 06 May 2024 10:29:45 -0400
+	id 1s4DIP-0004Ue-78; Tue, 07 May 2024 01:23:21 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s3zLV-0004Rf-W1
- for qemu-riscv@nongnu.org; Mon, 06 May 2024 10:29:39 -0400
-Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1s3zLU-0008R0-7x
- for qemu-riscv@nongnu.org; Mon, 06 May 2024 10:29:37 -0400
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-41c7ac73fddso21282365e9.3
- for <qemu-riscv@nongnu.org>; Mon, 06 May 2024 07:29:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1715005774; x=1715610574; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=ba7nd+UfOBYkqEvqsJujD4dIxGkHfk5SM1/9sfXvRGg=;
- b=GqM+geYeKZ/5LHNzyGHRfrMm2RODv3mHSkSDa3JT8Zdcb3NqHj6bCPfYRNNco+t3YH
- jt6KDwTXuto+cL7PKzEdah6ccYgp220MtyO+WZa17p9HA74BB2mZ+nFDMWJykhknhZgv
- RnunW2+4rAn/kZcryjJCDt7uCoWKgI4xZ53zEy9C1Ft/E/3UlDZT4xrs3bC/Ws0h0bjx
- arJro99RQYL25Id/wXPHjmw4idcOeHJkkhH7s+vjiE0uLPt5xjQlA2CCSYU8jdKDNjOd
- 6Bc019hV6VpvJ4rQplfigzdXkOTP3mSfiWZk1NWNCwfzz461tSVxN6Iy7/NTANNrH77K
- 0jew==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715005774; x=1715610574;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ba7nd+UfOBYkqEvqsJujD4dIxGkHfk5SM1/9sfXvRGg=;
- b=TbvSf9JmnQzjgyNNbExWPo3uXQSgOmgzInzggQ5QFlsRpXqS6uxj88PqYNFT7orSJo
- EBsY/2Sbuj+1GAPrXXcQBP3vtN9f88Iq4CanWqSuPzUHv8gdzpYMQgiLXfWSKZTXvR5v
- fOb/LVDy1Unvrn/RYHqyv9LPBYSfwvdLpr9W3A7r5TqO3EuIw2agPfs9ppHDurogXXQW
- Hvm5uD+yLcGBmoCDRHLYfiQ4r3xf7U3gP8qTz45uRsUcEATyMfUoQLYfvetcpijJMnvZ
- AI7jsDKZnMCB3wv7HVwc0T2X1UTuP77VyaopyYGoA+yR0LOUEvWG38UseWpYEXVqd8Kx
- F5ZA==
-X-Gm-Message-State: AOJu0YxNNsGvk9AoLlKWFyGhpBETn/4I9+sQPY2vxxTTQgzD+FS+aHah
- HA7IbiOG3W41GfuI9EqVScnJIJzfZGzB2zNX306rP3NA17afMThtLvk212j9DCc=
-X-Google-Smtp-Source: AGHT+IFu9jTJzOMdEtdPRC073tVIICl0ogjMziKULhaxYUUNf5yt9pqu26+0Xf79jIkH0MWsE5nTVg==
-X-Received: by 2002:a5d:5483:0:b0:34a:35c7:22a3 with SMTP id
- h3-20020a5d5483000000b0034a35c722a3mr9032998wrv.20.1715005773952; 
- Mon, 06 May 2024 07:29:33 -0700 (PDT)
-Received: from [192.168.69.100] ([176.187.211.4])
- by smtp.gmail.com with ESMTPSA id
- cm11-20020a5d5f4b000000b0034dd27adb2fsm10821339wrb.107.2024.05.06.07.29.32
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 06 May 2024 07:29:33 -0700 (PDT)
-Message-ID: <6de106f2-1061-483e-97db-96b09e5b40ad@linaro.org>
-Date: Mon, 6 May 2024 16:29:31 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 00/22] hw/i386: Remove deprecated pc-i440fx-2.0 -> 2.3
- machines
-To: "Michael S. Tsirkin" <mst@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Thomas Huth <thuth@redhat.com>, David Hildenbrand <david@redhat.com>,
- Igor Mammedov <imammedo@redhat.com>, kvm@vger.kernel.org,
- qemu-ppc@nongnu.org, qemu-arm@nongnu.org
-References: <20240416185939.37984-1-philmd@linaro.org>
-Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20240416185939.37984-1-philmd@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ (Exim 4.90_1) (envelope-from <jeeheng.sia@starfivetech.com>)
+ id 1s4DIH-0004Jv-Ez; Tue, 07 May 2024 01:23:13 -0400
+Received: from mail-sh0chn02on20711.outbound.protection.partner.outlook.cn
+ ([2406:e500:4420:2::711]
+ helo=CHN02-SH0-obe.outbound.protection.partner.outlook.cn)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <jeeheng.sia@starfivetech.com>)
+ id 1s4DIC-0005li-SB; Tue, 07 May 2024 01:23:11 -0400
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=izs/leD+7EUZ9TYbZLY0N6CmxvtfydSd17xQbcU1wjhMQX6zbi/mIf6Xs9H/icZi81iXM0idv2tHwpZUviONAobyWunH4kDfBneVZn1gS/klKk1/y0ypxyapg5LtqYhxrbvHQtPrwIJ9wsrG/mMgHIX9/WTFxwnfJZoNKn0f5HsUaCNXCHkhghs+8Oy11cnYze/vkXdINt/pH/lxOtALcXCBaNs+kZBq7ml8GQVPHbCwchJihdJkXUgpIIYdfBkm0LYSPQ3z5tE970mKkCXeeGJ7WVlXrhP5cfjLCJcLffztkDt+ORXIM/fzMvTOe2F7khH2sAguAo4M8ZrXWJmPFw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Nt6uin/vJWlTUfic1MlQz0pJWmgrFZIbRUaLK1XOVKs=;
+ b=MOSI8UDQIov6oF2/zwnRIXfL+ov3A7o+l1pCUHNyQD44wvdz9zkjI3lSHPaRToKm3/uWehOjDEwgfNZ3RqjHrKtfzaoj4k90MBknl/zduffhV3R9a6xQLKqX8SnWSGU0EOZt4q0lArcAnY90IEu7EwdPMbTpZ3u5jTYcRdB8OzEQZj5gyA3+Kf5+cNaL6Cc/5G4NwMOC6Lm2d5Ib1OmA2ZDg1HGtro6YG8xC3b2cSd8CpObOgGVqAZsVw9N4cneSHZ5b5TrOkUTbwpQ6fF0YJmrWkvIjyvkINy0Rq2NGpaek4sgg/RoEFlb+8I54A/6iiNvDwiB25wzStn75g2yjpg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=starfivetech.com; dmarc=pass action=none
+ header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=starfivetech.com;
+Received: from NT0PR01MB1278.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c510:12::10) by NT0PR01MB1072.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c510:3::14) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7472.33; Tue, 7 May
+ 2024 05:22:30 +0000
+Received: from NT0PR01MB1278.CHNPR01.prod.partner.outlook.cn
+ ([fe80::e604:661e:e939:4c87]) by
+ NT0PR01MB1278.CHNPR01.prod.partner.outlook.cn ([fe80::e604:661e:e939:4c87%4])
+ with mapi id 15.20.7472.044; Tue, 7 May 2024 05:22:30 +0000
+From: Sia Jee Heng <jeeheng.sia@starfivetech.com>
+To: qemu-arm@nongnu.org,
+	qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: mst@redhat.com, imammedo@redhat.com, anisinha@redhat.com,
+ peter.maydell@linaro.org, jeeheng.sia@starfivetech.com,
+ shannon.zhaosl@gmail.com, sunilvl@ventanamicro.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com
+Subject: [PATCH v2 1/3] qtest: allow SPCR acpi table changes
+Date: Mon,  6 May 2024 22:22:10 -0700
+Message-Id: <20240507052212.291137-2-jeeheng.sia@starfivetech.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240507052212.291137-1-jeeheng.sia@starfivetech.com>
+References: <20240507052212.291137-1-jeeheng.sia@starfivetech.com>
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32a.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Content-Type: text/plain
+X-ClientProxiedBy: NT0PR01CA0024.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c510:c::8) To NT0PR01MB1278.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c510:12::10)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: NT0PR01MB1278:EE_|NT0PR01MB1072:EE_
+X-MS-Office365-Filtering-Correlation-Id: 122b17d1-ebb5-4859-f750-08dc6e55b0f7
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: q69iftimE0VPSEAcWAvhr7xyyvFFGJfvuibwgoJcE94N6/lHkbPwxAQ10e17MDsqyI7a4NJBWQzzZBHyn32fI2Aoa28hnPG0bi550pibwGJw9JDBP7nuDqW2wlVmiO7EvtbL9CIx33zkiVrAvJbMOKTL2MfSd71cBs3Cbj35B96eGZQ94Ssrjh370kDvf0x3O0Ow0yF3TVlMGMM601IFFFK0VuQ+6wF1trsaXt50Un+NeI21ZNKMemy81OtQuQgXsvWapI6SrHAGVi4rlvZ1oUz3/jfiQCVnICOcKQ5gVLao7cvaaFztKj/7M3KuBsYeQ919Qs/v62WExVSJ5JXEsJ2+fZGMLR3JRjqDbwnxRfFlj35hF6bbdrCpOMLjCGxjuQEHEoUHExxYJgwnPC3fsNZXgVyJuYv6EvJiZh0grpdmLj7tywlPbpomuYjYvH3XHrs+eYm2H1FdL157BVMYeNU0OSNRzWxAWSGbrzsi1WKoOSf19B+zp86O4kpEw3WXjQWhTEuFSdczoBZCd3Vlj5tPOOuLIIjICYrmxVwlJb6Fi2AGexYeAHaSN9kQXd4/zQvD7nEU1RZaYt9VRun5Kz3+BRoYU/Qxx4nMo14LBA3asJ2Z+2rQWj7hiRjlAWUf
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:NT0PR01MB1278.CHNPR01.prod.partner.outlook.cn; PTR:;
+ CAT:NONE;
+ SFS:(13230031)(366007)(52116005)(41320700004)(7416005)(1800799015)(38350700005);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?1u4J+Kklq5dHI50Wlm/j6MYbIkORR65oHLttPDchWv32+vBtmuWyuKpwjbFt?=
+ =?us-ascii?Q?i7KcFWNKjcri6zG1mY+VonqAbGE/qyTKrEhvjugoDSRswheJVfinnFDph7XG?=
+ =?us-ascii?Q?2mCtfn2FNjqJxwNdd2AposEmm+h26w6a4VfcG9/EGYdqAmxzb+Ql4AbxSGW+?=
+ =?us-ascii?Q?M+fUchHt/Txf3DHlawGuymY0MJf0I3ASe7A0ri9mfMxWNMbnFzT0Zq8ZlxR6?=
+ =?us-ascii?Q?jDzlKssttBjt1tCSHvVrZJMV5rpinLftXevDBDhypv/jBkVtC5gmvu2nLZCB?=
+ =?us-ascii?Q?5/tjTXAw3doFw7x4vFA3tyaWKvOLEdpu0XdxqbjvpTUa0SYzzcay8Vw2w5WN?=
+ =?us-ascii?Q?6gV62x5vt9+eQ/wfHejrryysL2MMdHb6sYvjVRqSMH/ruhczmCTL6lcHDtJa?=
+ =?us-ascii?Q?chqESW8rJD8pBD1zTpPKdt8qXcETp/Ru0Klksns81QwueQ6vsg5/4zNhd1HC?=
+ =?us-ascii?Q?TqtsHbprAPzJRL7mU2OrDf2Gd75GlUavbDKyCXS8RLMCO4WC5ULOfoyu96Wm?=
+ =?us-ascii?Q?31NUBng+09QltD5JaDT/pysFxgrYufdlaN5And/xeFWSWAe9m5926frATpqZ?=
+ =?us-ascii?Q?9419pXICbmA0VzPSx865D2LpOsnSOJIXLJjaxpkhYOUzQxzDtYFn1kt7fH+L?=
+ =?us-ascii?Q?fr1lDsAq9ekpblLC2cYLomO9SfmfUuMSKeTyvSF7GhJQYTPt8SzLsqpmNCbb?=
+ =?us-ascii?Q?r4psQXzUuY3Z9M3LtaRkt2tScstvooDYD0MIq6Tvrz35kRh4XzJ261cu/lDe?=
+ =?us-ascii?Q?Pso+Ul+T16broPFpMelVhkOie4J8K3/zdxJ5A+8opkyeQ1Hr5LNQGx66Oq0w?=
+ =?us-ascii?Q?yPCqh+AxdZY3ojdEe5OW61j1myMbKGsENqvVfW0bPS7kDmnY/iiEIM5i7ywD?=
+ =?us-ascii?Q?s/B51t2N5nloOVMhNapQZDDFy6snBGhLLd2FSRYGmrh+j25h99mNoOY/qpg6?=
+ =?us-ascii?Q?xtrpgb33vWgg+r0XJKSCc6feGY+IokpzCa4wNTcPbmw3qWCX/9+yE6962j+0?=
+ =?us-ascii?Q?I0LGFkUvI00BrmJL6QvJ28Qzc2mvJsna8xV6Yidx1TMS40SEekXsZrMjvhiP?=
+ =?us-ascii?Q?FbPMLYlx6kZ8IL6UymKDsv5f1w8nbWttDg3A3nyzUix2nTOGzmelMv4oTLY6?=
+ =?us-ascii?Q?Bpi5JHkralWiALnNxMrKjvKmIsmLPO63xsktTMvpXBfXr3GKTgmEmTXksELu?=
+ =?us-ascii?Q?NjkX2R+6ziQVfUKyMkl+v94N3ooMmiH2/qdIYYE1GJ0dabMYWt7fYzJzSHdK?=
+ =?us-ascii?Q?Ytsidh2ck2nAMqZjWBOR1S56yyN5rMNMAatrA2qNwVBBSBO3Y2G42mniuC7x?=
+ =?us-ascii?Q?f9itpI/yFgp5Uh4C5ZpWktJtvFgy51jnqai9f+Du01fgjE2dQT0nRuAN9Pgm?=
+ =?us-ascii?Q?8dtjKuVOj9oE9yQWVTHC6MYfzPxS+hCCYJ62PtXY7u1melTZQaLeg1/X8Z3j?=
+ =?us-ascii?Q?MzA1Or5mO4NrRAJZy6Kop6gSaOqyfklWyIM0meVulTJFfe126PmoL7weGqP3?=
+ =?us-ascii?Q?tfdhQGaNZkYWDWIAPc99LsSEHv0J0ZBoUiYVtW7jTvqmpFc/EdziJTtRDypk?=
+ =?us-ascii?Q?MM0OMAHa2hCRrOySxXR6hpLVLb3extSA1W/BzYQqwbFLXheDum5gk6UO/6Jy?=
+ =?us-ascii?Q?jA=3D=3D?=
+X-OriginatorOrg: starfivetech.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 122b17d1-ebb5-4859-f750-08dc6e55b0f7
+X-MS-Exchange-CrossTenant-AuthSource: NT0PR01MB1278.CHNPR01.prod.partner.outlook.cn
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 May 2024 05:22:30.3285 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: IB5PuVUTKxYj1N1ixcM4hqE5e/W1GTIt10H8EKrzEuxok4E8kVxhsc9uPrWKUQeYIs2RWQlF8DRLFJ5JEGlsAl2XnQ7zIoxOvg0I9+TFsFk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: NT0PR01MB1072
+Received-SPF: pass client-ip=2406:e500:4420:2::711;
+ envelope-from=jeeheng.sia@starfivetech.com;
+ helo=CHN02-SH0-obe.outbound.protection.partner.outlook.cn
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,34 +135,20 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 16/4/24 20:59, Philippe Mathieu-Daudé wrote:
-> Series fully reviewed.
+Signed-off-by: Sia Jee Heng <jeeheng.sia@starfivetech.com>
+---
+ tests/qtest/bios-tables-test-allowed-diff.h | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Ping, is there some issue holding this series?
+diff --git a/tests/qtest/bios-tables-test-allowed-diff.h b/tests/qtest/bios-tables-test-allowed-diff.h
+index dfb8523c8b..3f12ca546b 100644
+--- a/tests/qtest/bios-tables-test-allowed-diff.h
++++ b/tests/qtest/bios-tables-test-allowed-diff.h
+@@ -1 +1,3 @@
+ /* List of comma-separated changed AML files to ignore */
++"tests/data/acpi/virt/riscv64/SPCR",
++"tests/data/acpi/virt/aarch64/SPCR",
+-- 
+2.34.1
 
-> Philippe Mathieu-Daudé (22):
->    hw/i386/pc: Deprecate 2.4 to 2.12 pc-i440fx machines
->    hw/i386/pc: Remove deprecated pc-i440fx-2.0 machine
->    hw/usb/hcd-xhci: Remove XHCI_FLAG_FORCE_PCIE_ENDCAP flag
->    hw/usb/hcd-xhci: Remove XHCI_FLAG_SS_FIRST flag
->    hw/i386/acpi: Remove PCMachineClass::legacy_acpi_table_size
->    hw/acpi/ich9: Remove 'memory-hotplug-support' property
->    hw/acpi/ich9: Remove dead code related to 'acpi_memory_hotplug'
->    hw/i386/pc: Remove deprecated pc-i440fx-2.1 machine
->    target/i386/kvm: Remove x86_cpu_change_kvm_default() and 'kvm-cpu.h'
->    hw/i386/pc: Remove PCMachineClass::smbios_uuid_encoded
->    hw/smbios: Remove 'uuid_encoded' argument from smbios_set_defaults()
->    hw/smbios: Remove 'smbios_uuid_encoded', simplify smbios_encode_uuid()
->    hw/i386/pc: Remove PCMachineClass::enforce_aligned_dimm
->    hw/mem/pc-dimm: Remove legacy_align argument from pc_dimm_pre_plug()
->    hw/mem/memory-device: Remove legacy_align from
->      memory_device_pre_plug()
->    hw/i386/pc: Remove deprecated pc-i440fx-2.2 machine
->    hw/i386/pc: Remove PCMachineClass::resizable_acpi_blob
->    hw/i386/pc: Remove PCMachineClass::rsdp_in_ram
->    hw/i386/acpi: Remove AcpiBuildState::rsdp field
->    hw/i386/pc: Remove deprecated pc-i440fx-2.3 machine
->    target/i386: Remove X86CPU::kvm_no_smi_migration field
->    hw/i386/pc: Replace PCMachineClass::acpi_data_size by
->      PC_ACPI_DATA_SIZE
 
