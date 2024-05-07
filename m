@@ -4,121 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 908CBC10F1A
-	for <qemu-riscv@archiver.kernel.org>; Tue,  7 May 2024 05:43:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CA12C25B4F
+	for <qemu-riscv@archiver.kernel.org>; Tue,  7 May 2024 08:02:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s4Db7-0002gr-Sv; Tue, 07 May 2024 01:42:41 -0400
+	id 1s4Flu-0005CB-TU; Tue, 07 May 2024 04:01:58 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jeeheng.sia@starfivetech.com>)
- id 1s4Daz-0002dF-AA; Tue, 07 May 2024 01:42:33 -0400
-Received: from mail-sh0chn02on2070e.outbound.protection.partner.outlook.cn
- ([2406:e500:4420:2::70e]
- helo=CHN02-SH0-obe.outbound.protection.partner.outlook.cn)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jeeheng.sia@starfivetech.com>)
- id 1s4Dav-0007IG-2H; Tue, 07 May 2024 01:42:32 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=TQKkW7Ll8uWtNC5VQ1p/qM2EW1u0UTH7+bVrb1X3/BsTs3gob8jUdOZftP5ZsvLJBMwLdJuxes5naIBgb7208v+/IEQ9ke7pnjTgoVnwS5HH7D35f1OUe3/nGzyJac8y3s+5F8PZBaOvyUyR6GI0bFSV/BO1nbnNZVA8o9IhAgBPowF3Z2uUR6tBWpygEh4kcoSwgQVvb1/YVwfkAbE3SKGKbY0/3f0uzhzVMLmN4hOM0d4EVTLHVXqCwMqk4SrQ4BQnX6HyXmJvqlsWWnOIKsFhh/KZByGlPTNtg0nDqqMnXGxl3vQClZo8ddFdjGeqaFx6bzeJW+8oXumJhkEeBQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=WqFcqPKO/+mldgGzvm9zW25vFaxFJoopkuCQHD+vhis=;
- b=Hxa8b5lEMgEo3SvdTXngSNXu3HFRNqj7myREOwm1nMo6bZARq27RM7f1qXWIl3itHxYfuXwhL/LAKolr1wKpHiYiJVNmjiSLujJDJ0ZPYJPG/1XsVnDAEk+Ewq14EcScFKGTHbWRfxp6h62HTYw+hVeU1MmzKw+9If02xfbv8IDYrfCNoTgZipGC+YNBYyd+hliNg5nOUoMNsk2AA6PydlxWfqI+XlosnajfnjgalJzp0ss3kH9ma3NhP1/E0b9nL0m3j7LpH3CLwoo1VqsCJEfuVwdlmgIvZjrIVDXRAzp1iuq2xSgJOdqPweL4ymRabmY5ldRM3sT6ASHXeoWWEQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=starfivetech.com; dmarc=pass action=none
- header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=starfivetech.com;
-Received: from NT0PR01MB1278.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c510:12::10) by NT0PR01MB1072.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c510:3::14) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7472.33; Tue, 7 May
- 2024 05:22:27 +0000
-Received: from NT0PR01MB1278.CHNPR01.prod.partner.outlook.cn
- ([fe80::e604:661e:e939:4c87]) by
- NT0PR01MB1278.CHNPR01.prod.partner.outlook.cn ([fe80::e604:661e:e939:4c87%4])
- with mapi id 15.20.7472.044; Tue, 7 May 2024 05:22:27 +0000
-From: Sia Jee Heng <jeeheng.sia@starfivetech.com>
-To: qemu-arm@nongnu.org,
-	qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: mst@redhat.com, imammedo@redhat.com, anisinha@redhat.com,
- peter.maydell@linaro.org, jeeheng.sia@starfivetech.com,
- shannon.zhaosl@gmail.com, sunilvl@ventanamicro.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com
-Subject: [PATCH v2 0/3] Upgrade ACPI SPCR table to support SPCR table version
- 4 format
-Date: Mon,  6 May 2024 22:22:09 -0700
-Message-Id: <20240507052212.291137-1-jeeheng.sia@starfivetech.com>
-X-Mailer: git-send-email 2.34.1
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: NT0PR01CA0024.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c510:c::8) To NT0PR01MB1278.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c510:12::10)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1s4Flt-0005Ba-95
+ for qemu-riscv@nongnu.org; Tue, 07 May 2024 04:01:57 -0400
+Received: from mail-lf1-x135.google.com ([2a00:1450:4864:20::135])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1s4Flk-00018i-1t
+ for qemu-riscv@nongnu.org; Tue, 07 May 2024 04:01:57 -0400
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-51ff65b1e14so3367984e87.2
+ for <qemu-riscv@nongnu.org>; Tue, 07 May 2024 01:01:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sifive.com; s=google; t=1715068905; x=1715673705; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=JoHUFtgB5S9APLp2RzVw2JEkbwtOfY/99RuKvWPvenc=;
+ b=NbbdTFICTqKnOilJcWxT01W0w0/INC4CZCtywJ9+wq0X8eq45Z70tFmh2QBQTCvuQy
+ DhVwTQh8TDqhKl4By8qTHbYhdqmbT35ZjydeYMqorFCAiBLwcLafeqBkuXZ52L8rfMgb
+ 2aoVUXW55BIcV94yz6hX40hgsvuZw4Uh5fRyFTbhpRJC6VVwMouEzTjiVX7ktVkpk7WH
+ jhUSUIdQiuu0GyuIze1OwwwKLt1lt4isaU5qeNAspKOrqzgJDoaepnrOOzeSjwXQlfKa
+ IvWsV9avAbMwPhQTzqkJp/ynj2BKQ7JRL7BoAJY+ForWLqTi10302h+wWvw17iKBrevE
+ rRKg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1715068905; x=1715673705;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=JoHUFtgB5S9APLp2RzVw2JEkbwtOfY/99RuKvWPvenc=;
+ b=gPzmP0CFI5c+j9NA8cn+vbiqfgkzX5D3gjfiOH4MSFyGdbwwIIDjKdrjve56nqevLI
+ 36xtmnFQm7UHfvyJWA3Ub5904DbD2WWUkTbvPGWCsouFQipiVazSqDUu0sIJonMTwKW9
+ HVmopaoUgZhQ+Y4QEWD2g521et51xLvU9siJrHPw7hPsrW3eZQ3HPVrQ3FZiSkH3g1tD
+ vzwLrRBc01MM9DMiIBJW9YLo6+syrwOS6L3JjD1+CXhfcCPhpnEVX+TMlkaC+dyy/7LE
+ 6EmOUzx99GjyB8Tk7frx7Ywqk2/kCMKME+fTMvh+X4IMYp3cCUwWwYdXz85vlV9TgV/7
+ Vrng==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWgSgnnsbqgOO78tGGbcxoTWFLhOTFI2vFpmdaPtoTHnuDA6MmhfrkXLTEYKUc8vjkBIHisTH9klU4wz+g7vVF7nVcQnoY=
+X-Gm-Message-State: AOJu0YxdBPefj4Qu8ePQbDqcIb/dwKgCy/k0FIboiMQ0J+J+d8hO2Y2i
+ osoLiDz/fs9wpah6HJrVPmv9QU0D53ULVfkGmU7rvSHeF9l4kqYcBsQfa7JznpE=
+X-Google-Smtp-Source: AGHT+IGYNHhtJoS/CJyin4cKp6/hf0FKN+wPyscmh1kuPIb2YDBYBjNG4RxfkblVN5Gl9fqmBYAX9g==
+X-Received: by 2002:a05:6512:3441:b0:51c:441d:9bc2 with SMTP id
+ j1-20020a056512344100b0051c441d9bc2mr6847002lfr.27.1715068905322; 
+ Tue, 07 May 2024 01:01:45 -0700 (PDT)
+Received: from mail-lj1-f178.google.com (mail-lj1-f178.google.com.
+ [209.85.208.178]) by smtp.gmail.com with ESMTPSA id
+ be36-20020a056512252400b005204f6ab0edsm1012850lfb.286.2024.05.07.01.01.44
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 07 May 2024 01:01:44 -0700 (PDT)
+Received: by mail-lj1-f178.google.com with SMTP id
+ 38308e7fff4ca-2e3e18c24c1so7081301fa.1; 
+ Tue, 07 May 2024 01:01:44 -0700 (PDT)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWH0+MT11u1Vfa2EPDBYKDzNi/yNLkqwQJVCJnrxprTm4uH5Z1haj5Mip9LM3kOsiqb2XrE5yK1BWHbQM8wtNcJcwMoYLw=
+X-Received: by 2002:a05:651c:201c:b0:2dd:c9fc:c472 with SMTP id
+ s28-20020a05651c201c00b002ddc9fcc472mr7232315ljo.26.1715068904373; Tue, 07
+ May 2024 01:01:44 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: NT0PR01MB1278:EE_|NT0PR01MB1072:EE_
-X-MS-Office365-Filtering-Correlation-Id: 828fc01b-0f8b-40d9-e9be-08dc6e55af14
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: M7GaCVuk8agZz9o5ObJc57pZPFkzCFk1UDfaz7lT7UcIgPYM7t2KUILwNu7mTsRQnWDS/hLe21/U4v2+0SkTGCeMr8D0GFDbR0oGGmqO62DL+mfl5cBJwJ2u2bWQwSyXz3qMzKeH5tTOpDjFBIOfpCRW0sMHKPMdf1aeNDa7YIH+Gjj1wqPMXElZHNrNPBM8DtbHiFFa1ygSf6sRvIyfRqcXPsRK/SIGDKpMmUirM735vFVKmV9D6r8ZoY05pI0gGHKBj428u2JDPZ5uL+ok4xCnR0NLxDXAy2X4lcwiUZTQ71PR6gAD6/C0CJGoc42jw5YD35/DjfG8s1zWUIUHZOtW13r6rKrkeeQ+5oqUY7NNp4lng/na3B5ZZ/a+44N0UrECwyHfzKK3cvGp2mZWiaWOxDerrTHhO/3KpF7Htlypfr9T117ItXLGa7XSKNOmdGrM4jXRmOA04cVBzagci7a2k8zvHnJyPH7U8wgoa/r4DgGnUhGslGnaNtRZF3G4qbYR1hOw+ZcTqed/ivpuU8bMQvmUTNSfBgiz3EVTzug2q45dtvv2eXbNb7RYUshsNkjoE40xfPPC2xvGfkYfGLzhFthHNGy+Hp+Q7RBKB+Tl/igHYJc79N6oEElcsHPi
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:NT0PR01MB1278.CHNPR01.prod.partner.outlook.cn; PTR:;
- CAT:NONE;
- SFS:(13230031)(366007)(52116005)(41320700004)(7416005)(1800799015)(38350700005);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Lbr8FjBt3pjPOC05SNXYqDomyvDFm26N4IRcb0HH9GQFLGsd+5RETv/RmPoR?=
- =?us-ascii?Q?qqumrqDlEiABJsR+98X4KNO/xIATw51zpFHj9r6n7eChJyOXXdRyTf+qjyp0?=
- =?us-ascii?Q?PECo4thPZcCjZMCw9dDn+CWQ3y01mO2Us/4e4bcl+uX5NiiP0Gy6VsnyfaWf?=
- =?us-ascii?Q?Ya25WKeHo35wrhcc3bPbWICzKoY2i2qvbd9A7sCkjPSPI5/WLOCWcCM8o0AW?=
- =?us-ascii?Q?dJ7N73thkrNX3snNFoD9myjd5oWHWg8kMeum1bYS3SanLOM9ghaI511qP2HH?=
- =?us-ascii?Q?XY7WdfcotvtLutQaMeqWseYha0lrNTWTR2RB4NoZyBtmR2/OgF9JP0gxUN2l?=
- =?us-ascii?Q?HXon6K1ewEVQsmy9xIXHlFG4TZPKzPnBhfUrKEGZIBjAEKagy/YbFvmpoWgg?=
- =?us-ascii?Q?GwJ5ExhTJP3F32uPN2K3chh1eVtTozI2CJMZsTzB3UufskiSYA2BoGdF0Qai?=
- =?us-ascii?Q?tpbEvQ8cFW+zKProXhNl1Z02rZ12iKsh54qQeoDy8Bmr5r5fXsS0a/JWWPG7?=
- =?us-ascii?Q?Tw88zrPn62l+fZu6W88Vb+vbyLYuV1z85YynlEYOPY2AUXjLNp1Meq3wmoek?=
- =?us-ascii?Q?peY50bHyVqziKFtSkPiomCkPyaf/sdGkMg2tzavz75/xl6XqJkLhCsSikLsN?=
- =?us-ascii?Q?xjNXHNzhtd+dEVpdCqXA5b5l96J/MoyfMNZARN1WABfYtXqsBPJZvIwfJeVG?=
- =?us-ascii?Q?VnfBqvNkYhvBTf2M9sI5/+SRG5bkw7kzRxNdg6qz6KqAXSZtmqkFMpdBg6db?=
- =?us-ascii?Q?og2RLjCldGIwv7CEPGsOQTUoZuhPEFVavlobtZWRYnY/jgGtsVfHxB4rE58g?=
- =?us-ascii?Q?NgeaGSJT3/QS9ciNfIekIykE6xFlhrfDYj/kWGK8YiNvogusyfcc+DHuWlM4?=
- =?us-ascii?Q?Dk3/0p+LxjBREKn6OWYduNYvtRtfNJ4sqVnib0dxqGrPvtxchbSpDj+SyTWU?=
- =?us-ascii?Q?3MdEtSwG2Ev5umMFa8QbEZUN3N5/MCDkmDx+k2Vw/OeZid5FQY4upTWr6Uls?=
- =?us-ascii?Q?eYmVi85jA6RR8S/zaLCBmvudP+zzjxrehQvG3XHTogLIrbTNAJTppniVku/a?=
- =?us-ascii?Q?ucduQ2N2FpPbrKlYx4b2sGDwMMto11sZt7b/3nT16rROTydhxk+cg6AchNPs?=
- =?us-ascii?Q?eimuoVURy/SzPi0W0GDe4Ylcw+1HUDVfMKk8S9LYuO4FiUASNxVJcSHK0fxN?=
- =?us-ascii?Q?zzq8W0xgd0PAetlNMLfT4dji9kgvl0FZjYsKBQJTaRTcAU/ECxUOtRBPXhsh?=
- =?us-ascii?Q?DL3aD/M7fh8mR51TMD2Zjk+gbGFy21a8wAqLrQVJrA4rwiqLc2rgvuvSvbpi?=
- =?us-ascii?Q?Lk0njCdZB+LgN2O0PSPMgMnO6D4ScO44J4OPonANusr0JSROytUL4kyreEmD?=
- =?us-ascii?Q?W/PWgI7j1A47Owm+1TXJExQYcwzzwsCdBfOGyNbb6WXzziv+u6mYUz5ZvArR?=
- =?us-ascii?Q?gfWy6d3zdov/3JZfcsBYqHwjswksgbf9/Qsyyzs8GHdG6fTgl8EkB0RJJkpO?=
- =?us-ascii?Q?I/sYOuZA/JaIq37M/fJHnrDzfzPN1woARm7ZqPHPmvog+puo+yYG6rgdwA2b?=
- =?us-ascii?Q?zG6GNhqGDaF6xi7ded2ovG72M7q0AZjQb6pGG9U1fPjKbM6lITSEWMb+a/hw?=
- =?us-ascii?Q?TA=3D=3D?=
-X-OriginatorOrg: starfivetech.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 828fc01b-0f8b-40d9-e9be-08dc6e55af14
-X-MS-Exchange-CrossTenant-AuthSource: NT0PR01MB1278.CHNPR01.prod.partner.outlook.cn
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 May 2024 05:22:26.9957 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: tHRc5UzpObRnQWQAygvgTV5MU/GziITwzkfu4YWAsz1SZk1jctJ7K8bIp7ad8rgQfqoiBtgHpGFJbQBZybQ+ub9jxSysP5g1rM5dOAca3VM=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: NT0PR01MB1072
-Received-SPF: pass client-ip=2406:e500:4420:2::70e;
- envelope-from=jeeheng.sia@starfivetech.com;
- helo=CHN02-SH0-obe.outbound.protection.partner.outlook.cn
-X-Spam_score_int: 1
-X-Spam_score: 0.1
-X-Spam_bar: /
-X-Spam_report: (0.1 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001, URI_TRY_3LD=1.997 autolearn=no autolearn_force=no
+References: <20240307160319.675044-1-dbarboza@ventanamicro.com>
+ <20240307160319.675044-14-dbarboza@ventanamicro.com>
+In-Reply-To: <20240307160319.675044-14-dbarboza@ventanamicro.com>
+From: Frank Chang <frank.chang@sifive.com>
+Date: Tue, 7 May 2024 16:01:30 +0800
+X-Gmail-Original-Message-ID: <CANzO1D15=7kif7Dutut=cvsv4DZbu8C99b020AmrUAYv49E_Gg@mail.gmail.com>
+Message-ID: <CANzO1D15=7kif7Dutut=cvsv4DZbu8C99b020AmrUAYv49E_Gg@mail.gmail.com>
+Subject: Re: [PATCH v2 13/15] qtest/riscv-iommu-test: add init queues test
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com, ajones@ventanamicro.com, tjeznach@rivosinc.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::135;
+ envelope-from=frank.chang@sifive.com; helo=mail-lf1-x135.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -134,41 +107,238 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Update the SPCR table to accommodate the SPCR Table version 4 [1].
-The SPCR table has been modified to adhere to the version 4 format [2].
+Reviewed-by: Frank Chang <frank.chang@sifive.com>
 
-Meanwhile, the virt SPCR golden reference files have been updated to
-accommodate the SPCR Table version 4.
-
-This patch series depends on Sunil's patch series [3], where Bios-Table-Test
-is now supported by both ARM and RISC-V.
-
-[1]: https://learn.microsoft.com/en-us/windows-hardware/drivers/serports/serial-port-console-redirection-table
-[2]: https://github.com/acpica/acpica/pull/931
-[3]: https://lore.kernel.org/all/20240315130519.2378765-1-sunilvl@ventanamicro.com/
-
-Changes in v2:
-- Utilizes a three-patch approach to modify the ACPI pre-built binary
-  files required by the Bios-Table-Test.
-- Rebases and incorporates changes to support both ARM and RISC-V ACPI
-  pre-built binary files.
-
-Sia Jee Heng (3):
-  qtest: allow SPCR acpi table changes
-  hw/acpi: Upgrade ACPI SPCR table to support SPCR table version 4
-    format
-  tests/qtest/bios-tables-test: Update virt SPCR golden references
-
- hw/acpi/aml-build.c               |  14 +++++++++++---
- hw/arm/virt-acpi-build.c          |  10 ++++++++--
- hw/riscv/virt-acpi-build.c        |  12 +++++++++---
- include/hw/acpi/acpi-defs.h       |   7 +++++--
- include/hw/acpi/aml-build.h       |   2 +-
- tests/data/acpi/virt/aarch64/SPCR | Bin 80 -> 90 bytes
- tests/data/acpi/virt/riscv64/SPCR | Bin 80 -> 90 bytes
- 7 files changed, 34 insertions(+), 11 deletions(-)
-
--- 
-2.34.1
-
+Daniel Henrique Barboza <dbarboza@ventanamicro.com> =E6=96=BC 2024=E5=B9=B4=
+3=E6=9C=888=E6=97=A5 =E9=80=B1=E4=BA=94 =E4=B8=8A=E5=8D=8812:06=E5=AF=AB=E9=
+=81=93=EF=BC=9A
+>
+> Add an additional test to further exercise the IOMMU where we attempt to
+> initialize the command, fault and page-request queues.
+>
+> These steps are taken from chapter 6.2 of the RISC-V IOMMU spec,
+> "Guidelines for initialization". It emulates what we expect from the
+> software/OS when initializing the IOMMU.
+>
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> ---
+>  tests/qtest/libqos/riscv-iommu.h |  29 +++++++
+>  tests/qtest/riscv-iommu-test.c   | 141 +++++++++++++++++++++++++++++++
+>  2 files changed, 170 insertions(+)
+>
+> diff --git a/tests/qtest/libqos/riscv-iommu.h b/tests/qtest/libqos/riscv-=
+iommu.h
+> index 8c056caa7b..aeaa5fb8b8 100644
+> --- a/tests/qtest/libqos/riscv-iommu.h
+> +++ b/tests/qtest/libqos/riscv-iommu.h
+> @@ -58,6 +58,35 @@
+>
+>  #define RISCV_IOMMU_REG_IPSR            0x0054
+>
+> +#define RISCV_IOMMU_REG_IVEC            0x02F8
+> +#define RISCV_IOMMU_REG_IVEC_CIV        GENMASK_ULL(3, 0)
+> +#define RISCV_IOMMU_REG_IVEC_FIV        GENMASK_ULL(7, 4)
+> +#define RISCV_IOMMU_REG_IVEC_PIV        GENMASK_ULL(15, 12)
+> +
+> +#define RISCV_IOMMU_REG_CQB             0x0018
+> +#define RISCV_IOMMU_CQB_PPN_START       10
+> +#define RISCV_IOMMU_CQB_PPN_LEN         44
+> +#define RISCV_IOMMU_CQB_LOG2SZ_START    0
+> +#define RISCV_IOMMU_CQB_LOG2SZ_LEN      5
+> +
+> +#define RISCV_IOMMU_REG_CQT             0x0024
+> +
+> +#define RISCV_IOMMU_REG_FQB             0x0028
+> +#define RISCV_IOMMU_FQB_PPN_START       10
+> +#define RISCV_IOMMU_FQB_PPN_LEN         44
+> +#define RISCV_IOMMU_FQB_LOG2SZ_START    0
+> +#define RISCV_IOMMU_FQB_LOG2SZ_LEN      5
+> +
+> +#define RISCV_IOMMU_REG_FQT             0x0034
+> +
+> +#define RISCV_IOMMU_REG_PQB             0x0038
+> +#define RISCV_IOMMU_PQB_PPN_START       10
+> +#define RISCV_IOMMU_PQB_PPN_LEN         44
+> +#define RISCV_IOMMU_PQB_LOG2SZ_START    0
+> +#define RISCV_IOMMU_PQB_LOG2SZ_LEN      5
+> +
+> +#define RISCV_IOMMU_REG_PQT             0x0044
+> +
+>  typedef struct QRISCVIOMMU {
+>      QOSGraphObject obj;
+>      QPCIDevice dev;
+> diff --git a/tests/qtest/riscv-iommu-test.c b/tests/qtest/riscv-iommu-tes=
+t.c
+> index 13b887d15e..64f3f092f2 100644
+> --- a/tests/qtest/riscv-iommu-test.c
+> +++ b/tests/qtest/riscv-iommu-test.c
+> @@ -33,6 +33,20 @@ static uint64_t riscv_iommu_read_reg64(QRISCVIOMMU *r_=
+iommu, int reg_offset)
+>      return reg;
+>  }
+>
+> +static void riscv_iommu_write_reg32(QRISCVIOMMU *r_iommu, int reg_offset=
+,
+> +                                    uint32_t val)
+> +{
+> +    qpci_memwrite(&r_iommu->dev, r_iommu->reg_bar, reg_offset,
+> +                  &val, sizeof(val));
+> +}
+> +
+> +static void riscv_iommu_write_reg64(QRISCVIOMMU *r_iommu, int reg_offset=
+,
+> +                                    uint64_t val)
+> +{
+> +    qpci_memwrite(&r_iommu->dev, r_iommu->reg_bar, reg_offset,
+> +                  &val, sizeof(val));
+> +}
+> +
+>  static void test_pci_config(void *obj, void *data, QGuestAllocator *t_al=
+loc)
+>  {
+>      QRISCVIOMMU *r_iommu =3D obj;
+> @@ -84,10 +98,137 @@ static void test_reg_reset(void *obj, void *data, QG=
+uestAllocator *t_alloc)
+>      g_assert_cmpuint(reg, =3D=3D, 0);
+>  }
+>
+> +/*
+> + * Common timeout-based poll for CQCSR, FQCSR and PQCSR. All
+> + * their ON bits are mapped as RISCV_IOMMU_QUEUE_ACTIVE (16),
+> + */
+> +static void qtest_wait_for_queue_active(QRISCVIOMMU *r_iommu,
+> +                                        uint32_t queue_csr)
+> +{
+> +    QTestState *qts =3D global_qtest;
+> +    guint64 timeout_us =3D 2 * 1000 * 1000;
+> +    gint64 start_time =3D g_get_monotonic_time();
+> +    uint32_t reg;
+> +
+> +    for (;;) {
+> +        qtest_clock_step(qts, 100);
+> +
+> +        reg =3D riscv_iommu_read_reg32(r_iommu, queue_csr);
+> +        if (reg & RISCV_IOMMU_QUEUE_ACTIVE) {
+> +            break;
+> +        }
+> +        g_assert(g_get_monotonic_time() - start_time <=3D timeout_us);
+> +    }
+> +}
+> +
+> +/*
+> + * Goes through the queue activation procedures of chapter 6.2,
+> + * "Guidelines for initialization", of the RISCV-IOMMU spec.
+> + */
+> +static void test_iommu_init_queues(void *obj, void *data,
+> +                                   QGuestAllocator *t_alloc)
+> +{
+> +    QRISCVIOMMU *r_iommu =3D obj;
+> +    uint64_t reg64, q_addr;
+> +    uint32_t reg;
+> +    int k;
+> +
+> +    reg64 =3D riscv_iommu_read_reg64(r_iommu, RISCV_IOMMU_REG_CAP);
+> +    g_assert_cmpuint(reg64 & RISCV_IOMMU_CAP_VERSION, =3D=3D, 0x10);
+> +
+> +    /*
+> +     * Program the command queue. Write 0xF to civ, assert that
+> +     * we have 4 writable bits (k =3D 4). The amount of entries N in the
+> +     * command queue is 2^4 =3D 16. We need to alloc a N*16 bytes
+> +     * buffer and use it to set cqb.
+> +     */
+> +    riscv_iommu_write_reg32(r_iommu, RISCV_IOMMU_REG_IVEC,
+> +                            0xFFFF & RISCV_IOMMU_REG_IVEC_CIV);
+> +    reg =3D riscv_iommu_read_reg32(r_iommu, RISCV_IOMMU_REG_IVEC);
+> +    g_assert_cmpuint(reg & RISCV_IOMMU_REG_IVEC_CIV, =3D=3D, 0xF);
+> +
+> +    q_addr =3D guest_alloc(t_alloc, 16 * 16);
+> +    reg64 =3D 0;
+> +    k =3D 4;
+> +    deposit64(reg64, RISCV_IOMMU_CQB_PPN_START,
+> +              RISCV_IOMMU_CQB_PPN_LEN, q_addr);
+> +    deposit64(reg64, RISCV_IOMMU_CQB_LOG2SZ_START,
+> +              RISCV_IOMMU_CQB_LOG2SZ_LEN, k - 1);
+> +    riscv_iommu_write_reg64(r_iommu, RISCV_IOMMU_REG_CQB, reg64);
+> +
+> +    /* cqt =3D 0, cqcsr.cqen =3D 1, poll cqcsr.cqon until it reads 1 */
+> +    riscv_iommu_write_reg32(r_iommu, RISCV_IOMMU_REG_CQT, 0);
+> +
+> +    reg =3D riscv_iommu_read_reg32(r_iommu, RISCV_IOMMU_REG_CQCSR);
+> +    reg |=3D RISCV_IOMMU_CQCSR_CQEN;
+> +    riscv_iommu_write_reg32(r_iommu, RISCV_IOMMU_REG_CQCSR, reg);
+> +
+> +    qtest_wait_for_queue_active(r_iommu, RISCV_IOMMU_REG_CQCSR);
+> +
+> +    /*
+> +     * Program the fault queue. Similar to the above:
+> +     * - Write 0xF to fiv, assert that we have 4 writable bits (k =3D 4)
+> +     * - Alloc a 16*32 bytes (instead of 16*16) buffer and use it to set
+> +     * fqb
+> +     */
+> +    riscv_iommu_write_reg32(r_iommu, RISCV_IOMMU_REG_IVEC,
+> +                            0xFFFF & RISCV_IOMMU_REG_IVEC_FIV);
+> +    reg =3D riscv_iommu_read_reg32(r_iommu, RISCV_IOMMU_REG_IVEC);
+> +    g_assert_cmpuint(reg & RISCV_IOMMU_REG_IVEC_FIV, =3D=3D, 0xF0);
+> +
+> +    q_addr =3D guest_alloc(t_alloc, 16 * 32);
+> +    reg64 =3D 0;
+> +    k =3D 4;
+> +    deposit64(reg64, RISCV_IOMMU_FQB_PPN_START,
+> +              RISCV_IOMMU_FQB_PPN_LEN, q_addr);
+> +    deposit64(reg64, RISCV_IOMMU_FQB_LOG2SZ_START,
+> +              RISCV_IOMMU_FQB_LOG2SZ_LEN, k - 1);
+> +    riscv_iommu_write_reg64(r_iommu, RISCV_IOMMU_REG_FQB, reg64);
+> +
+> +    /* fqt =3D 0, fqcsr.fqen =3D 1, poll fqcsr.fqon until it reads 1 */
+> +    riscv_iommu_write_reg32(r_iommu, RISCV_IOMMU_REG_FQT, 0);
+> +
+> +    reg =3D riscv_iommu_read_reg32(r_iommu, RISCV_IOMMU_REG_FQCSR);
+> +    reg |=3D RISCV_IOMMU_FQCSR_FQEN;
+> +    riscv_iommu_write_reg32(r_iommu, RISCV_IOMMU_REG_FQCSR, reg);
+> +
+> +    qtest_wait_for_queue_active(r_iommu, RISCV_IOMMU_REG_FQCSR);
+> +
+> +    /*
+> +     * Program the page-request queue:
+> +     - Write 0xF to piv, assert that we have 4 writable bits (k =3D 4)
+> +     - Alloc a 16*16 bytes buffer and use it to set pqb.
+> +     */
+> +    riscv_iommu_write_reg32(r_iommu, RISCV_IOMMU_REG_IVEC,
+> +                            0xFFFF & RISCV_IOMMU_REG_IVEC_PIV);
+> +    reg =3D riscv_iommu_read_reg32(r_iommu, RISCV_IOMMU_REG_IVEC);
+> +    g_assert_cmpuint(reg & RISCV_IOMMU_REG_IVEC_PIV, =3D=3D, 0xF000);
+> +
+> +    q_addr =3D guest_alloc(t_alloc, 16 * 16);
+> +    reg64 =3D 0;
+> +    k =3D 4;
+> +    deposit64(reg64, RISCV_IOMMU_PQB_PPN_START,
+> +              RISCV_IOMMU_PQB_PPN_LEN, q_addr);
+> +    deposit64(reg64, RISCV_IOMMU_PQB_LOG2SZ_START,
+> +              RISCV_IOMMU_PQB_LOG2SZ_LEN, k - 1);
+> +    riscv_iommu_write_reg64(r_iommu, RISCV_IOMMU_REG_PQB, reg64);
+> +
+> +    /* pqt =3D 0, pqcsr.pqen =3D 1, poll pqcsr.pqon until it reads 1 */
+> +    riscv_iommu_write_reg32(r_iommu, RISCV_IOMMU_REG_PQT, 0);
+> +
+> +    reg =3D riscv_iommu_read_reg32(r_iommu, RISCV_IOMMU_REG_PQCSR);
+> +    reg |=3D RISCV_IOMMU_PQCSR_PQEN;
+> +    riscv_iommu_write_reg32(r_iommu, RISCV_IOMMU_REG_PQCSR, reg);
+> +
+> +    qtest_wait_for_queue_active(r_iommu, RISCV_IOMMU_REG_PQCSR);
+> +}
+> +
+>  static void register_riscv_iommu_test(void)
+>  {
+>      qos_add_test("pci_config", "riscv-iommu-pci", test_pci_config, NULL)=
+;
+>      qos_add_test("reg_reset", "riscv-iommu-pci", test_reg_reset, NULL);
+> +    qos_add_test("iommu_init_queues", "riscv-iommu-pci",
+> +                 test_iommu_init_queues, NULL);
+>  }
+>
+>  libqos_init(register_riscv_iommu_test);
+> --
+> 2.43.2
+>
+>
 
