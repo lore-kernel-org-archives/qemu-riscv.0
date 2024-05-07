@@ -4,78 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85A89C10F1A
-	for <qemu-riscv@archiver.kernel.org>; Tue,  7 May 2024 15:44:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1631AC25B4F
+	for <qemu-riscv@archiver.kernel.org>; Tue,  7 May 2024 15:53:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s4MzW-0000X5-FD; Tue, 07 May 2024 11:44:30 -0400
+	id 1s4N8E-0006ng-9G; Tue, 07 May 2024 11:53:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1s4MzU-0000Wm-Sw
- for qemu-riscv@nongnu.org; Tue, 07 May 2024 11:44:28 -0400
-Received: from mail-lf1-x134.google.com ([2a00:1450:4864:20::134])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1s4MzS-0000eG-NN
- for qemu-riscv@nongnu.org; Tue, 07 May 2024 11:44:28 -0400
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-51f29e80800so3637655e87.2
- for <qemu-riscv@nongnu.org>; Tue, 07 May 2024 08:44:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1715096664; x=1715701464; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=PgCWd3ozrnfYhYIfJMSsiKXQhJVHkqeKZcJjbYbl2r4=;
- b=ThYBRUQPY3cp/C6/u4kCLqjxRugrDLPrlR9/MUX8FpPmf2dtkkkKXfcP3pPTilPrBB
- hK9jrRNmkV0NFygp8UxQtU7Jyc4YqeCAcDfrZUKwzJ2JkDAb7JrPf7TeEdgBk+kN2bje
- rMf0/qEyPPLFbKN8sQV9UgEm1tfqhaJks9PsKfSNSOW92qsVpl8DlXgcJ526+2JXC3cr
- 36cc1Tn60kvkbYRtPghR6f5vvoBG7rnmaGpgvPhs7nbNXpb/wDa7+VGvj0bVW5coVd0I
- Hog2CxNunz/We21JGfDkaU0DMLt7tQ6lly8Q0fD1wAdWS3MV2ZTPODaAQ9iHGr6UhRZ6
- hEYQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715096664; x=1715701464;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=PgCWd3ozrnfYhYIfJMSsiKXQhJVHkqeKZcJjbYbl2r4=;
- b=VRHUMktJf/SwRIJnTtthPTnn5crTHXckU86FYwMZCjdiv8E4suBt+aZ/WnLZRpQFDX
- McvZw2jG76ijV/jAdnprO8aqbDFYRyIIK12ESotR6C3vT9jeqFZxS5B0HfVsHlg7pt94
- TUR/oZUTnVO/QSwgt9Ci2b/yd6BuoxY9W/rJu3NDLtOC8B8TsKfQHm0MDpskEuhE6CqH
- kr9wORx04D1TMTYbtSUnI9FNCGu2TeTAh8UFA3qIqU5IbGPD+Gh+ZvqY6sX5PMi0wyAQ
- BljWfi/U2FZLGZrYk33Lt07lJt30brgLtX8GzMPbkYnqdmeMrCEE/eIJUw9HhqtIQIpX
- xWKA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV/uHfchDZZa9pvWSfFvkKLkD55AqpBntdnek33fF1SgqSmAo4zkDUkzGAVyDgqxk5YcmyOqbu/ZZHc0g6S9KmRsG2LrRc=
-X-Gm-Message-State: AOJu0YzR+DBmHjNlO30xuAK/WRDvPzC5VgdRMoBKY8vrf9TYJR8ASP7z
- dxU/UCHG/VnM/C7rxgVerc8CseV5WrlS2SMU0KxtmDDZdqse4Z5LO5KR7qKtvK6fakMAJUt8gte
- tZrFi3Q+E4aFgN1HY0yg1SgsdDSOH6MXoN3nYtA==
-X-Google-Smtp-Source: AGHT+IElj6IxXkWzHBSQLS9BijDiOIE+OySeSWbniQbQuAVeVcjhjlywJ4ANV4EEimwmNjt7wqCnyQLqCcxDGFzAdXY=
-X-Received: by 2002:ac2:5a11:0:b0:51e:bc4f:ed2a with SMTP id
- q17-20020ac25a11000000b0051ebc4fed2amr8120205lfn.37.1715096664544; Tue, 07
- May 2024 08:44:24 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240503124244.8804-1-dbarboza@ventanamicro.com>
-In-Reply-To: <20240503124244.8804-1-dbarboza@ventanamicro.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Tue, 7 May 2024 16:44:13 +0100
-Message-ID: <CAFEAcA_gu40QoTXUPP2f=8vGvEOTbGWKtqR3b-e7YYhbFG0aiw@mail.gmail.com>
-Subject: Re: [RFC PATCH 0/1] pci: allocate a PCI ID for RISC-V IOMMU
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1s4N85-0006Z2-N2
+ for qemu-riscv@nongnu.org; Tue, 07 May 2024 11:53:22 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1s4N82-00059t-SX
+ for qemu-riscv@nongnu.org; Tue, 07 May 2024 11:53:19 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1715097197;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=F/p62PpUlXpQLcDK4AU7DZJBrUFG0lvrcdHAWwWeto0=;
+ b=U+59O1P+lUWObASlVKyYfYuC/e1KVCQc2RmlidZ/wGdUCUKWzhTCYRjgvAa8sVIQOJMFrI
+ GV8DQ/0KhHy7BgseOfboaMre65YkKAa/KSZDJ21WZ9vb8pRqtC0jkUDpAJYKVsEoHLGGRO
+ MojejoojH9Nw71TCuLEh0MY/E1+0tvM=
+Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
+ by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-681-DlMw73eoPDGQeT1AdlXGrw-1; Tue,
+ 07 May 2024 11:53:13 -0400
+X-MC-Unique: DlMw73eoPDGQeT1AdlXGrw-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.6])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 6DB763803526;
+ Tue,  7 May 2024 15:53:12 +0000 (UTC)
+Received: from sirius.home.kraxel.org (unknown [10.39.192.234])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 970CF2141800;
+ Tue,  7 May 2024 15:53:11 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+ id 888581800D4F; Tue,  7 May 2024 17:53:10 +0200 (CEST)
+Date: Tue, 7 May 2024 17:53:10 +0200
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: Frank Chang <frank.chang@sifive.com>
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com, ajones@ventanamicro.com, kraxel@redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::134;
- envelope-from=peter.maydell@linaro.org; helo=mail-lf1-x134.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+ palmer@rivosinc.com, ajones@ventanamicro.com
+Subject: Re: [RFC PATCH 0/1] pci: allocate a PCI ID for RISC-V IOMMU
+Message-ID: <d4wsa62chc4dgxeakmsimk6tsvxhflgbofgbugpfjyyo5xx2oh@urgime5r4wqs>
+References: <20240503124244.8804-1-dbarboza@ventanamicro.com>
+ <CANzO1D0g=AoPkyFS_5d5mJwmwDX8hpaj0fjeFy9xt4xi70fh1A@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CANzO1D0g=AoPkyFS_5d5mJwmwDX8hpaj0fjeFy9xt4xi70fh1A@mail.gmail.com>
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.6
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=kraxel@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -26
+X-Spam_score: -2.7
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.7 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.581,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -91,22 +86,24 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, 3 May 2024 at 13:43, Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
->
-> Hi,
->
-> In this RFC I want to check with Gerd and others if it's ok to add a PCI
-> id for the RISC-V IOMMU device. It's currently under review in [1]. The
-> idea is to fold this patch into the RISC-V IOMMU series if we're all ok
-> with this change.
+On Tue, May 07, 2024 at 11:37:05PM GMT, Frank Chang wrote:
+> Hi Daniel,
+> 
+> Daniel Henrique Barboza <dbarboza@ventanamicro.com> 於 2024年5月3日 週五 下午8:43寫道：
+> >
+> > Hi,
+> >
+> > In this RFC I want to check with Gerd and others if it's ok to add a PCI
+> > id for the RISC-V IOMMU device. It's currently under review in [1]. The
+> 
+> Is the link [1] missing?
 
-My question here would be "why is this risc-v specific?" (and more
-generally "what is this for?" -- the cover letter and patch and
-documentation page provide almost no information about what this
-device is and why it needs to exist rather than using either
-virtio-iommu or else a model of a real hardware IOMMU.)
+Yes ;)
 
-thanks
--- PMM
+Also:  A bit more background on the iommu would be great, for example a
+pointer to the specification.
+
+take care,
+  Gerd
+
 
