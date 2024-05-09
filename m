@@ -4,87 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EEBAC04FFE
-	for <qemu-riscv@archiver.kernel.org>; Wed,  8 May 2024 12:41:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1109C25B10
+	for <qemu-riscv@archiver.kernel.org>; Thu,  9 May 2024 17:24:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s4gc0-0005wY-Nq; Wed, 08 May 2024 08:41:32 -0400
+	id 1s57Uo-00009r-5S; Thu, 09 May 2024 13:23:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1s4gbw-0005v2-RW
- for qemu-riscv@nongnu.org; Wed, 08 May 2024 08:41:29 -0400
-Received: from mail-pf1-x431.google.com ([2607:f8b0:4864:20::431])
+ id 1s57Ul-00008z-4z
+ for qemu-riscv@nongnu.org; Thu, 09 May 2024 13:23:51 -0400
+Received: from mail-oo1-xc33.google.com ([2607:f8b0:4864:20::c33])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1s4gbt-00064f-Pc
- for qemu-riscv@nongnu.org; Wed, 08 May 2024 08:41:28 -0400
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-6f44b5e7f07so3154754b3a.2
- for <qemu-riscv@nongnu.org>; Wed, 08 May 2024 05:41:24 -0700 (PDT)
+ id 1s57Uj-0001k0-Fe
+ for qemu-riscv@nongnu.org; Thu, 09 May 2024 13:23:50 -0400
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-5b27bbcb5f0so292398eaf.3
+ for <qemu-riscv@nongnu.org>; Thu, 09 May 2024 10:23:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1715172083; x=1715776883; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1715275427; x=1715880227; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=+rlAW1ekL9rCpFLaN3Hr4fOoUor3667dgRxwCKd5zXw=;
- b=eLNNpO8d/YiLSUYpplLegm2W8Q3rXoWITF0zYdHrw0KK/M3EiCUm0pTqeo9oRWnqSR
- R8qiEz+Do2NHnHPiyIxr05Iz1UG0nYi8UjP20fCbNYBxpnasqkC7vjBDGWtIIpVFQU63
- OTVKca1CIwiXvoEOSfkFYDBia4Hs56ek2MIt5CPTMElG3j0MsK50fRCebOElrFSRIA+U
- 2y+OagfZT/GG03up04/i2zu6rmcnS9sENGS1DUjVDjwfeKZxbY6CcK7FW17I1hUgiXgk
- 7NiPYFGCg9CsM2/AaekpyXeiUvi4WgeeALujIiNnCNeeIdBAhlAtuaFGOBi3+uao9/YJ
- S8XA==
+ bh=xwF/nbCURBpkQ4nID4bntEGUs6wHd4GNufxv7rbFTw8=;
+ b=aGTbNc2b6cWY/gxgz8GndFH05isorOgJm1BVhFZZ7XdIIwvdZuXVPiOp2m0V2TP3iZ
+ 4brguKfyVNjZl53GtXprXGUuT/SJxWkEVc6YcF53VceHyPBxSI0jGhzEUVflYQRIzheK
+ RVZ3AFK8eYOWSWSK1sw3k/HseeqkS3zbTcSz0t9QGMMkm4MMmYWDh9Mi5lx1/JMqylot
+ PEllM9+QAEd/LvgsZEQDSOVnro1EcF/yNKY4NLMomxui1ZBW/jMtnqXKB5cg2mzsJmE8
+ /+8HWREFtvfWtgip0Vg0BhjBEI4aCX4mirHg2+UxuSqr4gLspdUUvTdto+QRo83qQEgu
+ JGOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715172083; x=1715776883;
+ d=1e100.net; s=20230601; t=1715275427; x=1715880227;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=+rlAW1ekL9rCpFLaN3Hr4fOoUor3667dgRxwCKd5zXw=;
- b=cbfutnCRA2B3MRre1Q8wCz3QiPBRbD5YiKpW+gD0C7mfZ6xGwfw3VITXivYziJ/I0l
- mtFCPkWseFap+2q1qryT7F1EkHBbnpi7YB/BwqfeEburoNEeyqredryXnf48zopoa0Vr
- jKUf/KqENK0Jlv9EHk5H5/kY67HgjAU+TU4aHLQdl6NWkKLkCt4+QP72W0HPg3GNUbwZ
- 2z6GSwLvA/BUQrbtKdKDh4r3ML6duos2AUc6vj72T5k4szvKMQ/8Mx/T9l8yZNNl0XbF
- 4VNjJDXqfAfCmV52o1+oRz17o37wQ1OzxpiNmcukxSPhIjk152AkMtT4JHGkrmge6yGy
- GaFg==
+ bh=xwF/nbCURBpkQ4nID4bntEGUs6wHd4GNufxv7rbFTw8=;
+ b=TCsnz9CZmYX/nCaiu8+MrsztUQ/H78wWoEDrTAgDtb0G6qQLbIpJRc10HR2QG2EMXk
+ dYTLtsany4lEsJhGCm0w4mZXVotiDe7xmOLxvpAzRVoMMWMlprl2x4fIsDC7aAfLtU73
+ /i8zuTWCplgVPvp422tla/FTFHFxryYsWguGczh20DV9ZADIQmM0SiEusIVExBorWv9c
+ u94cg13MKpmQF2skInVN528tvkP10K6SdaYtqc1SegRswqu0YTBkC/haUOMOrRp6mXBv
+ ysTWLe0BmaMUDbBRmdxeXe2/MiMzIdkn62rUV4vwyafvTQPGxTGaWKOc/fQO3dgn77lF
+ cY5A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXPYtP6DYpe2AwusrViAOx+JJu3qDhEn0qm5irC7/AwidAMf45fF0ue6mbMgkwWh8Ji7ysxVxgEgq0HP/lwr6TSQHiglUg=
-X-Gm-Message-State: AOJu0YxJoaPwE36aDtMAwHG/LXpmDicgDLxW3i0b+9OkMGEvzCAtQiiW
- OvUzcqHwDO2+HIbi4x/i9eSPkHYejwgA0dHPJZ0xWNqCxJe+3uo1INGirgYwuFY=
-X-Google-Smtp-Source: AGHT+IGxepVqlf7Hhu77rpJgoOQ5AAW11AgU4gjDDvSfWZFqB+v4zVyO/23RAzAQkHSht3XCdVRyVQ==
-X-Received: by 2002:a62:bd17:0:b0:6ed:60a4:777b with SMTP id
- d2e1a72fcca58-6f49c1fd756mr2314575b3a.8.1715172082977; 
- Wed, 08 May 2024 05:41:22 -0700 (PDT)
+ AJvYcCUjjp7rMkLMkg8gIl7eWtOkuhknl0yolfo8T7SBpoCOnqi1fmqGq5pcyhITn8WCYRUEcWf4edUJbir9mX3F1rmm/jBcnpA=
+X-Gm-Message-State: AOJu0YyuSltwcYo2F9qN9QKwNUuMpmsfwtvfI1AsLRo6idVEUxpJOfnh
+ qOHPhZAMit4+h4lCNOKrrJISibD3H9lBF81TJEP0bJ7XuOy8J4TeP0o3KLO5UcM=
+X-Google-Smtp-Source: AGHT+IFOAyvnNp+WnyYOD56KMdfUSmCE/bbac2IFvWwfxltD7ziRP2bno90IMEr9h5f3rJ+VMlaOCA==
+X-Received: by 2002:a05:6358:8aa:b0:183:f636:8a46 with SMTP id
+ e5c5f4694b2df-193bd0078b5mr3883455d.27.1715275427031; 
+ Thu, 09 May 2024 10:23:47 -0700 (PDT)
 Received: from [192.168.68.110] ([177.94.42.168])
  by smtp.gmail.com with ESMTPSA id
- m13-20020a62f20d000000b006f45831ac05sm7715561pfh.0.2024.05.08.05.41.20
+ 41be03b00d2f7-63411904351sm1572753a12.91.2024.05.09.10.23.44
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 08 May 2024 05:41:22 -0700 (PDT)
-Message-ID: <d8fcb94e-86cf-4497-b450-1a32e4606512@ventanamicro.com>
-Date: Wed, 8 May 2024 09:41:18 -0300
+ Thu, 09 May 2024 10:23:46 -0700 (PDT)
+Message-ID: <a53ac495-4656-4786-ba90-d83169aaffad@ventanamicro.com>
+Date: Thu, 9 May 2024 14:23:42 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 0/1] pci: allocate a PCI ID for RISC-V IOMMU
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
- palmer@rivosinc.com, ajones@ventanamicro.com, kraxel@redhat.com
-References: <20240503124244.8804-1-dbarboza@ventanamicro.com>
- <CAFEAcA_gu40QoTXUPP2f=8vGvEOTbGWKtqR3b-e7YYhbFG0aiw@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Remove experimental prefix from "B"
+ extension
+To: Andrew Jones <ajones@ventanamicro.com>,
+ Rob Bradford <rbradford@rivosinc.com>
+Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
+References: <20240507102721.55845-1-rbradford@rivosinc.com>
+ <20240508-ff6bfb7f94499a3a8d6382f6@orel>
 Content-Language: en-US
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <CAFEAcA_gu40QoTXUPP2f=8vGvEOTbGWKtqR3b-e7YYhbFG0aiw@mail.gmail.com>
+In-Reply-To: <20240508-ff6bfb7f94499a3a8d6382f6@orel>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::431;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x431.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c33;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc33.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,52 +105,55 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 5/7/24 12:44, Peter Maydell wrote:
-> On Fri, 3 May 2024 at 13:43, Daniel Henrique Barboza
-> <dbarboza@ventanamicro.com> wrote:
+On 5/8/24 08:22, Andrew Jones wrote:
+> On Tue, May 07, 2024 at 11:27:21AM GMT, Rob Bradford wrote:
+>> This extension has now been ratified:
+>> https://jira.riscv.org/browse/RVS-2006 so the "x-" prefix can be
+>> removed.
 >>
->> Hi,
+>> Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
+>> ---
+>>   target/riscv/cpu.c | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
 >>
->> In this RFC I want to check with Gerd and others if it's ok to add a PCI
->> id for the RISC-V IOMMU device. It's currently under review in [1]. The
->> idea is to fold this patch into the RISC-V IOMMU series if we're all ok
->> with this change.
+>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+>> index eb1a2e7d6d..861d9f4350 100644
+>> --- a/target/riscv/cpu.c
+>> +++ b/target/riscv/cpu.c
+>> @@ -1396,7 +1396,7 @@ static const MISAExtInfo misa_ext_info_arr[] = {
+>>       MISA_EXT_INFO(RVJ, "x-j", "Dynamic translated languages"),
+>>       MISA_EXT_INFO(RVV, "v", "Vector operations"),
+>>       MISA_EXT_INFO(RVG, "g", "General purpose (IMAFD_Zicsr_Zifencei)"),
+>> -    MISA_EXT_INFO(RVB, "x-b", "Bit manipulation (Zba_Zbb_Zbs)")
+>> +    MISA_EXT_INFO(RVB, "b", "Bit manipulation (Zba_Zbb_Zbs)")
+>>   };
+>>   
+>>   static void riscv_cpu_validate_misa_mxl(RISCVCPUClass *mcc)
+>> -- 
+>> 2.44.0
+>>
+>>
 > 
-> My question here would be "why is this risc-v specific?" (and more
-> generally "what is this for?" -- the cover letter and patch and
-> documentation page provide almost no information about what this
-> device is and why it needs to exist rather than using either
-> virtio-iommu or else a model of a real hardware IOMMU.)
+> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+> 
+> I think we should also either change the false to true for RVB in
+> misa_ext_cfgs[] or at least ensure RVB is set for the 'max' cpu
+> type in riscv_init_max_cpu_extensions().
 
-The RISC-V IOMMU device emulation under review ([1]) is a reference implementation of
-the riscv-iommu spec [2]. AFAIK it is similar to what we already have with aarch64 'smmuv3'
-'virt' bus, i.e. an impl of ARM's SMMUv3 that isn't tied to a specific vendor.
+I prefer if we keep misa_ext_cfgs[] as is. Changing the defaults in this array
+will also change the defaults for rv64. IMO we should enable RVB manually in
+riscv_init_max_cpu_extensions().
 
-The difference here is that the riscv-iommu spec, ratified by RISC-V International (RVI),
-predicts that the device could be implemented as a PCIe device. But RVI didn't bother
-assigning a PCI ID for their reference IOMMU. The existing implementation in [1] is using
-a Rivos PCI ID that we're treating as a placeholder only. We need an ID that reflects that
-this is a device that adheres to the riscv-iommu spec, not to an IOMMU of any particular
-vendor.
-
-Since RVI doesn't provide a PCI ID for it we went to Red Hat, and they were kind enough
-to give us a PCI ID for the RISC-V IOMMU reference device.
-
-I'll do a proper job this time and add all this context in the commit msg. Including a
-proper shout-out to Gerd and Red Hat.
-
+We already have some precedence for it: RVV is enabled in 'max' while is default
+'false' for rv64.
 
 
 Thanks,
 
-
 Daniel
 
 
-[1] https://lore.kernel.org/qemu-riscv/20240307160319.675044-1-dbarboza@ventanamicro.com/
-[2] https://github.com/riscv-non-isa/riscv-iommu/releases/tag/v1.0.0
-
 > 
-> thanks
-> -- PMM
+> Thanks,
+> drew
 
