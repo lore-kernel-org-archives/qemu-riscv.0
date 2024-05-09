@@ -4,90 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1109C25B10
-	for <qemu-riscv@archiver.kernel.org>; Thu,  9 May 2024 17:24:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF0E4C25B10
+	for <qemu-riscv@archiver.kernel.org>; Thu,  9 May 2024 20:30:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s57Uo-00009r-5S; Thu, 09 May 2024 13:23:54 -0400
+	id 1s5AMW-0002hS-8O; Thu, 09 May 2024 16:27:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1s57Ul-00008z-4z
- for qemu-riscv@nongnu.org; Thu, 09 May 2024 13:23:51 -0400
-Received: from mail-oo1-xc33.google.com ([2607:f8b0:4864:20::c33])
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1s5AMD-0002IO-8n
+ for qemu-riscv@nongnu.org; Thu, 09 May 2024 16:27:15 -0400
+Received: from mail-lf1-x12a.google.com ([2a00:1450:4864:20::12a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1s57Uj-0001k0-Fe
- for qemu-riscv@nongnu.org; Thu, 09 May 2024 13:23:50 -0400
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-5b27bbcb5f0so292398eaf.3
- for <qemu-riscv@nongnu.org>; Thu, 09 May 2024 10:23:48 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1s5AMA-0001PD-2F
+ for qemu-riscv@nongnu.org; Thu, 09 May 2024 16:27:13 -0400
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-51f0602bc58so2245076e87.0
+ for <qemu-riscv@nongnu.org>; Thu, 09 May 2024 13:27:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1715275427; x=1715880227; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=xwF/nbCURBpkQ4nID4bntEGUs6wHd4GNufxv7rbFTw8=;
- b=aGTbNc2b6cWY/gxgz8GndFH05isorOgJm1BVhFZZ7XdIIwvdZuXVPiOp2m0V2TP3iZ
- 4brguKfyVNjZl53GtXprXGUuT/SJxWkEVc6YcF53VceHyPBxSI0jGhzEUVflYQRIzheK
- RVZ3AFK8eYOWSWSK1sw3k/HseeqkS3zbTcSz0t9QGMMkm4MMmYWDh9Mi5lx1/JMqylot
- PEllM9+QAEd/LvgsZEQDSOVnro1EcF/yNKY4NLMomxui1ZBW/jMtnqXKB5cg2mzsJmE8
- /+8HWREFtvfWtgip0Vg0BhjBEI4aCX4mirHg2+UxuSqr4gLspdUUvTdto+QRo83qQEgu
- JGOw==
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1715286427; x=1715891227;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2nFoPXez/lVC8jSJFrENEqZGtmO/5tWYFQFWfazisc8=;
+ b=PLlWnLRINMHZ0pq+G/5WTsqtdT8QWV9Q/UnrT0uRYevq8PAanR568szGozkhWxWkUw
+ DahYDjCAJ/Zg7UyBjPfMO58Ri1UVzFj+cbp/e1YLUFSypTt0CyZTVmc6yLFA2vRfRYv0
+ HlngNkfdRmdVBNJirewXSBZC/Zccg33b0MFKNnm5SgY9RAHqaV94JyHzWnTt9PymbqF2
+ SH1hb/gxlDn3zrQPJf+B/AJqTqVSl8WrfTaWWlOHqMuBdmE6U+uaAmqZJQK3qCLndbqF
+ 9gtEqShKXwsTxa+RdD2RanwnGck/3HSGZsSF1fw0z5+LTgbx2V5+y/zBVYgTdLPcMeed
+ poEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715275427; x=1715880227;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=xwF/nbCURBpkQ4nID4bntEGUs6wHd4GNufxv7rbFTw8=;
- b=TCsnz9CZmYX/nCaiu8+MrsztUQ/H78wWoEDrTAgDtb0G6qQLbIpJRc10HR2QG2EMXk
- dYTLtsany4lEsJhGCm0w4mZXVotiDe7xmOLxvpAzRVoMMWMlprl2x4fIsDC7aAfLtU73
- /i8zuTWCplgVPvp422tla/FTFHFxryYsWguGczh20DV9ZADIQmM0SiEusIVExBorWv9c
- u94cg13MKpmQF2skInVN528tvkP10K6SdaYtqc1SegRswqu0YTBkC/haUOMOrRp6mXBv
- ysTWLe0BmaMUDbBRmdxeXe2/MiMzIdkn62rUV4vwyafvTQPGxTGaWKOc/fQO3dgn77lF
- cY5A==
+ d=1e100.net; s=20230601; t=1715286427; x=1715891227;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=2nFoPXez/lVC8jSJFrENEqZGtmO/5tWYFQFWfazisc8=;
+ b=O2lkPx7oLWJkVd0NyJGdDy0ck2TRotUITQLqSrgO5xmoQ7p/O/7IUiR3qkIftPbCoe
+ dJYpi6l7P/3B9r80ctzv0q3X5OolcllK7oeuqku9NlqEtQGwlsZO3VhW9sNOUjvnbP57
+ fYyWqpIs4JqsUN2PsAUq39DUWXGiQI43hOdfqDV/GZcX2apPV+NgIonbcTIlkXvoOMF/
+ sha3pEGcU/tdNR1xrREDhutnN6Kf529zQQVFcovBoWnnmHpD57Y02+awnGurI1z5e3mn
+ /07TelFvRn4/VYrJmYqqwjRiQlp7LYSgYX++DJOiI/2NQNibdWo7smNa7knEtWQSB+0H
+ RPqA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUjjp7rMkLMkg8gIl7eWtOkuhknl0yolfo8T7SBpoCOnqi1fmqGq5pcyhITn8WCYRUEcWf4edUJbir9mX3F1rmm/jBcnpA=
-X-Gm-Message-State: AOJu0YyuSltwcYo2F9qN9QKwNUuMpmsfwtvfI1AsLRo6idVEUxpJOfnh
- qOHPhZAMit4+h4lCNOKrrJISibD3H9lBF81TJEP0bJ7XuOy8J4TeP0o3KLO5UcM=
-X-Google-Smtp-Source: AGHT+IFOAyvnNp+WnyYOD56KMdfUSmCE/bbac2IFvWwfxltD7ziRP2bno90IMEr9h5f3rJ+VMlaOCA==
-X-Received: by 2002:a05:6358:8aa:b0:183:f636:8a46 with SMTP id
- e5c5f4694b2df-193bd0078b5mr3883455d.27.1715275427031; 
- Thu, 09 May 2024 10:23:47 -0700 (PDT)
-Received: from [192.168.68.110] ([177.94.42.168])
- by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-63411904351sm1572753a12.91.2024.05.09.10.23.44
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 09 May 2024 10:23:46 -0700 (PDT)
-Message-ID: <a53ac495-4656-4786-ba90-d83169aaffad@ventanamicro.com>
-Date: Thu, 9 May 2024 14:23:42 -0300
+ AJvYcCXOFpyjA3nId5p0hE9wI3pFiN39TwNYqSdhIKKB2WJp2I07y9r/p9McHK7lXZ3m2L56yQ8eq6RrKwLsHI6J546cSCnc5Es=
+X-Gm-Message-State: AOJu0Yx05ZeFpZxbAAtxvkYUHb2T51z9cSoDLCvC/hPNUtNB7SCs/W6y
+ s8Bm4voYsOLGytxsvWXZxtEiVtnzdWKEBajrV15XhCVdXrqV3Ie2nY9Afw9ADu2Uv/FrY+Xh1ms
+ YiBrTSeNN84O9QTrxT9RvZe+bruRdSWhWRgWbgn17PnYNee9ZkEA=
+X-Google-Smtp-Source: AGHT+IEHcjbvGX4lbrCi5aQY8alYVTbprTL6TpIybjuXJal6giigCsGWPmYAphVrxh2O95LOyVxsa9+f97CiMplolgc=
+X-Received: by 2002:a19:8c16:0:b0:51e:5867:6438 with SMTP id
+ 2adb3069b0e04-521e095fbebmr1065690e87.7.1715286427508; Thu, 09 May 2024
+ 13:27:07 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] target/riscv: Remove experimental prefix from "B"
- extension
-To: Andrew Jones <ajones@ventanamicro.com>,
- Rob Bradford <rbradford@rivosinc.com>
-Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
-References: <20240507102721.55845-1-rbradford@rivosinc.com>
- <20240508-ff6bfb7f94499a3a8d6382f6@orel>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240508-ff6bfb7f94499a3a8d6382f6@orel>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c33;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc33.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+References: <20240429-countinhibit_fix-v1-0-802ec1e99133@rivosinc.com>
+ <20240429-countinhibit_fix-v1-1-802ec1e99133@rivosinc.com>
+ <d672ec9d-eaa0-48c1-9f99-d94cf06e7aac@ventanamicro.com>
+ <20240502-8a8ecc74a81a9fa33bf8c9b1@orel>
+In-Reply-To: <20240502-8a8ecc74a81a9fa33bf8c9b1@orel>
+From: Atish Kumar Patra <atishp@rivosinc.com>
+Date: Thu, 9 May 2024 13:26:56 -0700
+Message-ID: <CAHBxVyH4ooHy=GGkqPmYO4NaL7-Rt-Ds=-m=jmWw5kzq6_u=Rg@mail.gmail.com>
+Subject: Re: [PATCH 1/3] target/riscv: Save counter values during countinhibit
+ update
+To: Andrew Jones <ajones@ventanamicro.com>
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, 
+ palmer@dabbelt.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ bin.meng@windriver.com, alistair.francis@wdc.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::12a;
+ envelope-from=atishp@rivosinc.com; helo=mail-lf1-x12a.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,57 +98,160 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On Thu, May 2, 2024 at 5:39=E2=80=AFAM Andrew Jones <ajones@ventanamicro.co=
+m> wrote:
+>
+> On Tue, Apr 30, 2024 at 03:00:45PM GMT, Daniel Henrique Barboza wrote:
+> >
+> >
+> > On 4/29/24 16:28, Atish Patra wrote:
+> > > Currently, if a counter monitoring cycle/instret is stopped via
+> > > mcountinhibit we just update the state while the value is saved
+> > > during the next read. This is not accurate as the read may happen
+> > > many cycles after the counter is stopped. Ideally, the read should
+> > > return the value saved when the counter is stopped.
+> > >
+> > > Thus, save the value of the counter during the inhibit update
+> > > operation and return that value during the read if corresponding bit
+> > > in mcountihibit is set.
+> > >
+> > > Signed-off-by: Atish Patra <atishp@rivosinc.com>
+> > > ---
+> > >   target/riscv/cpu.h     |  1 -
+> > >   target/riscv/csr.c     | 32 ++++++++++++++++++++------------
+> > >   target/riscv/machine.c |  1 -
+> > >   3 files changed, 20 insertions(+), 14 deletions(-)
+> > >
+> > > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> > > index 3b1a02b9449a..09bbf7ce9880 100644
+> > > --- a/target/riscv/cpu.h
+> > > +++ b/target/riscv/cpu.h
+> > > @@ -153,7 +153,6 @@ typedef struct PMUCTRState {
+> > >       target_ulong mhpmcounter_prev;
+> > >       /* Snapshort value of a counter in RV32 */
+> > >       target_ulong mhpmcounterh_prev;
+> > > -    bool started;
+> > >       /* Value beyond UINT32_MAX/UINT64_MAX before overflow interrupt=
+ trigger */
+> > >       target_ulong irq_overflow_left;
+> > >   } PMUCTRState;
+> > > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> > > index 726096444fae..68ca31aff47d 100644
+> > > --- a/target/riscv/csr.c
+> > > +++ b/target/riscv/csr.c
+> > > @@ -929,17 +929,11 @@ static RISCVException riscv_pmu_read_ctr(CPURIS=
+CVState *env, target_ulong *val,
+> > >       if (get_field(env->mcountinhibit, BIT(ctr_idx))) {
+> > >           /*
+> > > -         * Counter should not increment if inhibit bit is set. We ca=
+n't really
+> > > -         * stop the icount counting. Just return the counter value w=
+ritten by
+> > > -         * the supervisor to indicate that counter was not increment=
+ed.
+> > > +         * Counter should not increment if inhibit bit is set. Just =
+return the
+> > > +         * current counter value.
+> > >            */
+> > > -        if (!counter->started) {
+> > > -            *val =3D ctr_val;
+> > > -            return RISCV_EXCP_NONE;
+> > > -        } else {
+> > > -            /* Mark that the counter has been stopped */
+> > > -            counter->started =3D false;
+> > > -        }
+> > > +         *val =3D ctr_val;
+> > > +         return RISCV_EXCP_NONE;
+> > >       }
+> > >       /*
+> > > @@ -1973,9 +1967,23 @@ static RISCVException write_mcountinhibit(CPUR=
+ISCVState *env, int csrno,
+> > >       /* Check if any other counter is also monitoring cycles/instruc=
+tions */
+> > >       for (cidx =3D 0; cidx < RV_MAX_MHPMCOUNTERS; cidx++) {
+> > > -        if (!get_field(env->mcountinhibit, BIT(cidx))) {
+> > >               counter =3D &env->pmu_ctrs[cidx];
+> > > -            counter->started =3D true;
+> > > +        if (get_field(env->mcountinhibit, BIT(cidx)) && (val & BIT(c=
+idx))) {
+> > > +       /*
+> > > +             * Update the counter value for cycle/instret as we can'=
+t stop the
+> > > +             * host ticks. But we should show the current value at t=
+his moment.
+> > > +             */
+> > > +            if (riscv_pmu_ctr_monitor_cycles(env, cidx) ||
+> > > +                riscv_pmu_ctr_monitor_instructions(env, cidx)) {
+> > > +                counter->mhpmcounter_val =3D get_ticks(false) -
+> > > +                                           counter->mhpmcounter_prev=
+ +
+> > > +                                           counter->mhpmcounter_val;
+> > > +                if (riscv_cpu_mxl(env) =3D=3D MXL_RV32) {
+> > > +                    counter->mhpmcounterh_val =3D get_ticks(false) -
+> > > +                                                counter->mhpmcounter=
+h_prev +
+> > > +                                                counter->mhpmcounter=
+h_val;
+> > > +           }
+> > > +            }
+> > >           }
+> > >       }
+> > > diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+> > > index 76f2150f78b5..3e0f2dd2ce2a 100644
+> > > --- a/target/riscv/machine.c
+> > > +++ b/target/riscv/machine.c
+> > > @@ -328,7 +328,6 @@ static const VMStateDescription vmstate_pmu_ctr_s=
+tate =3D {
+> > >           VMSTATE_UINTTL(mhpmcounterh_val, PMUCTRState),
+> > >           VMSTATE_UINTTL(mhpmcounter_prev, PMUCTRState),
+> > >           VMSTATE_UINTTL(mhpmcounterh_prev, PMUCTRState),
+> > > -        VMSTATE_BOOL(started, PMUCTRState),
+> >
+> > Unfortunately we can't remove fields from the VMStateDescription withou=
+t breaking
+> > migration backward compatibility. Older QEMUs will attempt to read a fi=
+eld that
+> > doesn't exist and migration will fail.
+> >
+> > I'm assuming that we care about backward compat. If we're not up to thi=
+s point yet
+> > then we can just bump the version_id of vmstate_pmu_ctr_state and be do=
+ne with it.
+> > This is fine to do unless someone jumps in and complains that we broke =
+a migration
+> > case for the 'virt' board. Granted, we don't have versioned boards yet =
+so I'm unsure
+> > if someone would actually have a base to complain. Alistair, Drew, care=
+ to comment?
+>
+> Without versioning boards, then we shouldn't expect migrations to work fo=
+r
+> anything other than between QEMUs of the same version. We're delaying the
+> versioning until it's reasonable to expect users to prefer to migrate
+> their guests, rather than reboot them, when updating the QEMU the guests
+> are running on. I'm not sure how we'll know when that is, but I think we
+> can wait until somebody shouts or at least until we see that the tooling
+> which makes migration easy (libvirt, etc.) is present.
+>
+> Regarding this patch, I'm curious what the current status is of migration=
+.
+> If we can currently migrate from a QEMU with the latest released version
+> to a QEMU built from the current upstream, and then back again, then I
 
+I haven't heard of anyone who actually uses migration in Qemu.
+There is only one way to know about it when somebody complains.
 
-On 5/8/24 08:22, Andrew Jones wrote:
-> On Tue, May 07, 2024 at 11:27:21AM GMT, Rob Bradford wrote:
->> This extension has now been ratified:
->> https://jira.riscv.org/browse/RVS-2006 so the "x-" prefix can be
->> removed.
->>
->> Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
->> ---
->>   target/riscv/cpu.c | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->> index eb1a2e7d6d..861d9f4350 100644
->> --- a/target/riscv/cpu.c
->> +++ b/target/riscv/cpu.c
->> @@ -1396,7 +1396,7 @@ static const MISAExtInfo misa_ext_info_arr[] = {
->>       MISA_EXT_INFO(RVJ, "x-j", "Dynamic translated languages"),
->>       MISA_EXT_INFO(RVV, "v", "Vector operations"),
->>       MISA_EXT_INFO(RVG, "g", "General purpose (IMAFD_Zicsr_Zifencei)"),
->> -    MISA_EXT_INFO(RVB, "x-b", "Bit manipulation (Zba_Zbb_Zbs)")
->> +    MISA_EXT_INFO(RVB, "b", "Bit manipulation (Zba_Zbb_Zbs)")
->>   };
->>   
->>   static void riscv_cpu_validate_misa_mxl(RISCVCPUClass *mcc)
->> -- 
->> 2.44.0
->>
->>
-> 
-> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
-> 
-> I think we should also either change the false to true for RVB in
-> misa_ext_cfgs[] or at least ensure RVB is set for the 'max' cpu
-> type in riscv_init_max_cpu_extensions().
+I think we should just keep it simple and bump up the version  of
+vmstate_pmu_ctr_state.
+If somebody complains about backward compatibility, we can implement
+compat code.
+Otherwise, I don't see the point.
 
-I prefer if we keep misa_ext_cfgs[] as is. Changing the defaults in this array
-will also change the defaults for rv64. IMO we should enable RVB manually in
-riscv_init_max_cpu_extensions().
-
-We already have some precedence for it: RVV is enabled in 'max' while is default
-'false' for rv64.
-
-
-Thanks,
-
-Daniel
-
-
-> 
+> think this patch should be written in a way to preserve that. If we
+> already fail that ping-pong migration, then, as this patch doesn't make
+> things worse, we might as well save ourselves from the burden of the
+> compat code.
+>
 > Thanks,
 > drew
 
