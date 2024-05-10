@@ -4,88 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2435FC25B10
-	for <qemu-riscv@archiver.kernel.org>; Fri, 10 May 2024 06:54:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1968BC25B10
+	for <qemu-riscv@archiver.kernel.org>; Fri, 10 May 2024 08:30:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s5K8W-0001gk-7W; Fri, 10 May 2024 02:53:44 -0400
+	id 1s5Ldt-0006zU-Dh; Fri, 10 May 2024 04:30:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <fea.wang@sifive.com>)
- id 1s5K8U-0001fu-2b
- for qemu-riscv@nongnu.org; Fri, 10 May 2024 02:53:42 -0400
-Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1s5Ldm-0006ya-5n
+ for qemu-riscv@nongnu.org; Fri, 10 May 2024 04:30:08 -0400
+Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <fea.wang@sifive.com>)
- id 1s5K8S-0004pK-Ep
- for qemu-riscv@nongnu.org; Fri, 10 May 2024 02:53:41 -0400
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-1ec41d82b8bso15373255ad.2
- for <qemu-riscv@nongnu.org>; Thu, 09 May 2024 23:53:40 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1s5LdZ-00048E-VV
+ for qemu-riscv@nongnu.org; Fri, 10 May 2024 04:30:05 -0400
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-41b782405d5so17896175e9.2
+ for <qemu-riscv@nongnu.org>; Fri, 10 May 2024 01:29:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1715324019; x=1715928819; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=myUSGxZ6KvD2m50MweZ9w07eN6Ng2ZhuGkrMddDWFfY=;
- b=YhzqElQQG35Qnc+odVyaNYcKY0j9zfsGFTYe1DMUsHRsyqjkUXZMi6eUAotdmMCrrF
- QLlcbYGIlEY660mPofqwYKGs2JGVRcwPpFyeUD840q8SgxtrabdD9cXpTphxaqnT6HYj
- aB3tmcTpujhsLLhpTvy+JAWswRGOg16M+Y9SO9YDYkrg/8Yu80AMX495Wx/nqUpsw1r4
- LZzPJDFhs9wAEQhB0sqnh9hKAvs2oELXLuYLxI1dJlpAaPBixRlPp9y5n98A1P3n51ad
- B+tErjxAJ8FYdm9qTa67a0MheM2773WvjXGuvpS5Q59A8X+eMUURH4WuPhYdQoiDnndS
- qHuA==
+ d=ventanamicro.com; s=google; t=1715329791; x=1715934591; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=V6FtQwz2fn5OcDwvvleaqAYhew16SKaZD7a7Orw3Obk=;
+ b=pD+rsGXqB5h2UyYjWTeE/5WV3MnXYm2ncD0wlBFoUC9Bnr878e2gtvaD8g5qS/PUak
+ XHWK/EeiFn2VoIYUruvUjhYNUjnNgkAFfmyumXsLSsdPeCMRmr3ZmacJkCzwGMyhT2AL
+ fytOXm+BgAsL9z8VRVVw7r6QiafhTO4HHtc6j9jBXJLnLT8SLbRoXcuAEVbJ5Az2ldyr
+ VouSgK54PnG1Evkr7JTYHkvoxxnq+ISPT4eagVJXWNkkGageTV74CodeiH1EsqB9Uawv
+ OrC5bSSf4pSCve/Tp1ht3uD89/RFCfeRoUsstKp4CyzOZDW7hKm1mpKzXCofd+RSJoFN
+ ebOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715324019; x=1715928819;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=myUSGxZ6KvD2m50MweZ9w07eN6Ng2ZhuGkrMddDWFfY=;
- b=UQU6O/zO+lM/reRUHqioPOv/HLFprt6RIdvWX5NJg9P3EQR7TkGS1kRGgQLqtqK/oK
- iNSHinwvPJDGaQ6bxVHmD/imxgA/Plihe6Wql/93ujkY18LB+JTi02ziSv3jlsVxBziO
- tFd1qSWzdA5culwYQM9B9ZV2Ijo8daEG4Hzm3qrDEilYprjB74NutJ+nAZSry3aqmEmA
- tm30d/R4KaVbUxIy4We+In8gIKPqz4Tg+cmBmj8rDULj+IvIjBvW5ynu+WiuSWhw5Rxz
- DeVgsYT4AywWQGslLupExaiRjQ2zwSKSmXhxJE0RVGyoG3l7qBF48WW9Poz4ULz8dqAw
- yvug==
+ d=1e100.net; s=20230601; t=1715329791; x=1715934591;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=V6FtQwz2fn5OcDwvvleaqAYhew16SKaZD7a7Orw3Obk=;
+ b=eCAMyVBjrmAYFi8few+Tl7TVV27dJxDmwe0vMa4XNtewv4pYziWIYZCGdnG8rMRu2Y
+ IuA+7Z7+YhPnc0uBZdQGP8BuevlRLhmkBeOzcCeyxfu1juHht1VxLyU6K9oNZoBFK5iN
+ BL/xvHj+0yNgjYhwSoOdCi2G8RiKVOPX1Vj8JNk5+ic6RtEkASmPJW7V0gemYlqAXH91
+ qh+q+T9sxIten4mc3jf0zu9JFY3uqjWuneLRGnvIsDJErs5tEzfC6lGrt90ua+wJeX5S
+ 0QrOgD7ol+EsjTSnnJU7TWfnoUBTA6K/rk7PBf70TpHXSC2BrtlJJhbqEYnrNVo0d4ze
+ UH9w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWcGWd8quAmkVA0xLK0eMVfnqcAsbcxgfFtFOcPoD7LZlKX9hil2QALs8i6D6fnVAPvhqRZUHMkJvklOBtTEAYwFRLnjW0=
-X-Gm-Message-State: AOJu0YwrlTkCaMRUXvgeE5ep9WaJMLjtaOqa3Sfv6BSAZbRC1TBPaeuo
- 2Pl54pMfN6a9/cJtysmP3zodtO2cEXQey2rP7jdaRSI/SAk596Bxh/4byah91h4=
-X-Google-Smtp-Source: AGHT+IFGUFRFueFUDNZ9d5BFLoP8Hn1ZDnL5G0nYVH3EA/EArusX9dl1OazLYLdkHre6SLyO/nAP/g==
-X-Received: by 2002:a17:903:8c3:b0:1e8:a63b:d427 with SMTP id
- d9443c01a7336-1ef43f522b1mr22968315ad.49.1715324019119; 
- Thu, 09 May 2024 23:53:39 -0700 (PDT)
-Received: from hsinchu36-syssw02.internal.sifive.com
- (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
+ AJvYcCUXAZ2WMD2wyNlpkC3QXzNaxNVA7ZmMYPzOsfUD6Nn2L4hbyLS0yAwryhAqsVDm6zzAVpjL80FVV3rbA414fKxbIDXz02Q=
+X-Gm-Message-State: AOJu0Yw4QRy/yBdjqYK+UUtj3uc8bmm3X+t7Fp1eGYLrxpBPAIyOHy76
+ e/FQyXyONaGmlNnnIch7hKLSAD47JR+F+pgfAtwUypL8tJfE2W8x+beVv7N1wAg=
+X-Google-Smtp-Source: AGHT+IHTcrmg2ymf5lQucoZtwQvgz7KACu9cIJ2EsgU8OItVQOcXkj5Ja0gdLt0AnEqa56MYYOi+3Q==
+X-Received: by 2002:a05:600c:26cc:b0:418:4aac:a576 with SMTP id
+ 5b1f17b1804b1-41fead64fdemr18296705e9.39.1715329791401; 
+ Fri, 10 May 2024 01:29:51 -0700 (PDT)
+Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
+ [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1ef0bf31a7asm25579175ad.140.2024.05.09.23.53.37
+ 5b1f17b1804b1-41f87c2544esm89783845e9.16.2024.05.10.01.29.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 May 2024 23:53:38 -0700 (PDT)
-From: "Fea.Wang" <fea.wang@sifive.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: "Fea.Wang" <fea.wang@sifive.com>, Frank Chang <frank.chang@sifive.com>,
+ Fri, 10 May 2024 01:29:51 -0700 (PDT)
+Date: Fri, 10 May 2024 10:29:50 +0200
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: Rob Bradford <rbradford@rivosinc.com>, qemu-devel@nongnu.org, 
  Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH 3/5] target/riscv: Add 'P1P13' bit in SMSTATEEN0
-Date: Fri, 10 May 2024 14:58:53 +0800
-Message-Id: <20240510065856.2436870-4-fea.wang@sifive.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240510065856.2436870-1-fea.wang@sifive.com>
-References: <20240510065856.2436870-1-fea.wang@sifive.com>
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
+Subject: Re: [PATCH] target/riscv: Remove experimental prefix from "B"
+ extension
+Message-ID: <20240510-bd3888b24a94d2a7cbbb9b96@orel>
+References: <20240507102721.55845-1-rbradford@rivosinc.com>
+ <20240508-ff6bfb7f94499a3a8d6382f6@orel>
+ <a53ac495-4656-4786-ba90-d83169aaffad@ventanamicro.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
- envelope-from=fea.wang@sifive.com; helo=mail-pl1-x62d.google.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <a53ac495-4656-4786-ba90-d83169aaffad@ventanamicro.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wm1-x32c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -102,57 +102,55 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Based on privilege 1.13 spec, there should be a bit56 for 'P1P13' in
-SMSTATEEN0 that controls access to the hedeleg.
+On Thu, May 09, 2024 at 02:23:42PM GMT, Daniel Henrique Barboza wrote:
+> 
+> 
+> On 5/8/24 08:22, Andrew Jones wrote:
+> > On Tue, May 07, 2024 at 11:27:21AM GMT, Rob Bradford wrote:
+> > > This extension has now been ratified:
+> > > https://jira.riscv.org/browse/RVS-2006 so the "x-" prefix can be
+> > > removed.
+> > > 
+> > > Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
+> > > ---
+> > >   target/riscv/cpu.c | 2 +-
+> > >   1 file changed, 1 insertion(+), 1 deletion(-)
+> > > 
+> > > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> > > index eb1a2e7d6d..861d9f4350 100644
+> > > --- a/target/riscv/cpu.c
+> > > +++ b/target/riscv/cpu.c
+> > > @@ -1396,7 +1396,7 @@ static const MISAExtInfo misa_ext_info_arr[] = {
+> > >       MISA_EXT_INFO(RVJ, "x-j", "Dynamic translated languages"),
+> > >       MISA_EXT_INFO(RVV, "v", "Vector operations"),
+> > >       MISA_EXT_INFO(RVG, "g", "General purpose (IMAFD_Zicsr_Zifencei)"),
+> > > -    MISA_EXT_INFO(RVB, "x-b", "Bit manipulation (Zba_Zbb_Zbs)")
+> > > +    MISA_EXT_INFO(RVB, "b", "Bit manipulation (Zba_Zbb_Zbs)")
+> > >   };
+> > >   static void riscv_cpu_validate_misa_mxl(RISCVCPUClass *mcc)
+> > > -- 
+> > > 2.44.0
+> > > 
+> > > 
+> > 
+> > Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+> > 
+> > I think we should also either change the false to true for RVB in
+> > misa_ext_cfgs[] or at least ensure RVB is set for the 'max' cpu
+> > type in riscv_init_max_cpu_extensions().
+> 
+> I prefer if we keep misa_ext_cfgs[] as is. Changing the defaults in this array
+> will also change the defaults for rv64. IMO we should enable RVB manually in
+> riscv_init_max_cpu_extensions().
+> 
+> We already have some precedence for it: RVV is enabled in 'max' while is default
+> 'false' for rv64.
 
-Signed-off-by: Fea.Wang <fea.wang@sifive.com>
-Reviewed-by: Frank Chang <frank.chang@sifive.com>
----
- target/riscv/cpu_bits.h |  1 +
- target/riscv/csr.c      | 10 ++++++++++
- 2 files changed, 11 insertions(+)
+But do we care if rv64 gets B? rv64 doesn't have any particular set of
+extensions, afaik. And B seems like it should be generally adopted enough
+to be in a "general" cpu type like rv64. Anyway, either way works for me
+as long as 'max' gets B one way or another.
 
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 74318a925c..28bd3fb0b4 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -315,6 +315,7 @@
- #define SMSTATEEN0_CS       (1ULL << 0)
- #define SMSTATEEN0_FCSR     (1ULL << 1)
- #define SMSTATEEN0_JVT      (1ULL << 2)
-+#define SMSTATEEN0_P1P13    (1ULL << 56)
- #define SMSTATEEN0_HSCONTXT (1ULL << 57)
- #define SMSTATEEN0_IMSIC    (1ULL << 58)
- #define SMSTATEEN0_AIA      (1ULL << 59)
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 6b460ee0e8..d844ce770e 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -2248,6 +2248,11 @@ static RISCVException write_mstateen0(CPURISCVState *env, int csrno,
-         wr_mask |= SMSTATEEN0_FCSR;
-     }
- 
-+    RISCVCPU *cpu = env_archcpu(env);
-+    if (cpu->env.priv_ver >= PRIV_VERSION_1_13_0) {
-+        wr_mask |= SMSTATEEN0_P1P13;
-+    }
-+
-     return write_mstateen(env, csrno, wr_mask, new_val);
- }
- 
-@@ -2283,6 +2288,11 @@ static RISCVException write_mstateen0h(CPURISCVState *env, int csrno,
- {
-     uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
- 
-+    RISCVCPU *cpu = env_archcpu(env);
-+    if (cpu->env.priv_ver >= PRIV_VERSION_1_13_0) {
-+            wr_mask |= SMSTATEEN0_P1P13;
-+    }
-+
-     return write_mstateenh(env, csrno, wr_mask, new_val);
- }
- 
--- 
-2.34.1
-
+Thanks,
+drew
 
