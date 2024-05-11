@@ -4,93 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD096C25B5F
-	for <qemu-riscv@archiver.kernel.org>; Fri, 10 May 2024 11:14:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5329DC04FFE
+	for <qemu-riscv@archiver.kernel.org>; Sat, 11 May 2024 05:41:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s5OCy-0000Xb-MZ; Fri, 10 May 2024 07:14:37 -0400
+	id 1s5fUO-0002MY-F6; Sat, 11 May 2024 01:41:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1s5OCu-0000X4-JC
- for qemu-riscv@nongnu.org; Fri, 10 May 2024 07:14:32 -0400
-Received: from mail-lf1-x129.google.com ([2a00:1450:4864:20::129])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1s5OCo-0008QZ-A8
- for qemu-riscv@nongnu.org; Fri, 10 May 2024 07:14:32 -0400
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-51f4d2676d1so2019486e87.3
- for <qemu-riscv@nongnu.org>; Fri, 10 May 2024 04:14:25 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1s5fTd-00025r-D9; Sat, 11 May 2024 01:41:02 -0400
+Received: from out30-133.freemail.mail.aliyun.com ([115.124.30.133])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1s5fTa-0002J6-P3; Sat, 11 May 2024 01:40:57 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1715339664; x=1715944464; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=q+VyR4yQ//2IQBmod7fwSbuCPCJkuvP1E0TIuAzoI34=;
- b=BWRd2Tl+/KMoE7i88EVVxOD2dXpnbd3tOnF5+tBc0B6ewX+bkVnUKMX+qGjMfvou/n
- 9+Z7Ubq3y9f2ktinrwXgjp/1SLJhcHS021XYUp9ab40B/Y4+7GSNiOwUxHi1jx16nyHG
- JAUooFSnB5TpFwgApJwzs1DaBBZdOmjftHV6aoFBpx2Hy8XdsoQXurR1SFRg6tiOTpOl
- IhluFAOpikK/ULIHvDGXBzPj46eFSKuG9JF+nn7+K/AZU5hUZ0kqS5ZqRDLye3HQogWZ
- 2kl99xI92Mhg3VcX09tJYGPoW2n5Tckv2wgj8Sh03q11Jutt9YlDuTCWPH2G7Mz/TkwG
- xBoQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715339664; x=1715944464;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=q+VyR4yQ//2IQBmod7fwSbuCPCJkuvP1E0TIuAzoI34=;
- b=B216WPOO2xU4fYeItuDqALJ87ug9775rg1XFOjvnYl9iqxRJ4Ko7YvdQWCYoAWfMC5
- lRvnU4SzNdDgEPnLTN3+vqHsZxrxkH7l7Xg0/vEV/O8Ovp1LnsTd9HFG6Cq9YdX1AhDy
- TDelDHFt1pagBFfcfG20YLppmyUYMV4VRjIFUeX5MCDML4hy+qCNfbW7BFffZiIbTkm3
- D0BbzI4uJjpE9Xt4TciPwkhY1/ZvotXualumtd70w+XwKWBAvfyYcpH6sKlkCducPxIc
- 1tZe6WmEwydSFcUZh1qEz+257XFQpW9wPh6Uob63dbGmCPAHr1RikPxkxIGsFHe2JmUD
- gzkg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUEsmxafiD8BJwANDhH4nWciaMFTVlb9UacIXJJP1HaJWzPDR8+Mo1I4DuHFGtOBDuzlWS6DkGfUOKDAZyYU6A9ObflmtA=
-X-Gm-Message-State: AOJu0Yz1sEL0jqvVyn6iv4TLfjvCmESWxnfC3TCcOQe9DMsh7Fa2RIfx
- FSsjqNruhoQR4zLDa7BCtQBnmWuB7lVm6813P+8LpY/5oaoSALyAC9pYu2sO9V4=
-X-Google-Smtp-Source: AGHT+IEiFM4lpdWo2CML6STfhAdIIp0Fhz0V2cDwjyatiRb9GROxeknyJcVC5JHAsCh6uOZa+VF7Dw==
-X-Received: by 2002:ac2:54b9:0:b0:51f:d72:cd2d with SMTP id
- 2adb3069b0e04-5220fc7aeb4mr1388875e87.22.1715339664045; 
- Fri, 10 May 2024 04:14:24 -0700 (PDT)
-Received: from mail-lj1-f173.google.com (mail-lj1-f173.google.com.
- [209.85.208.173]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-521f38d7f7csm647687e87.189.2024.05.10.04.14.23
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 10 May 2024 04:14:23 -0700 (PDT)
-Received: by mail-lj1-f173.google.com with SMTP id
- 38308e7fff4ca-2e09138a2b1so22229581fa.3; 
- Fri, 10 May 2024 04:14:23 -0700 (PDT)
-X-Forwarded-Encrypted: i=1;
- AJvYcCVrd1iCxAEzohgE/4ucktyPMGXEKrFFd3pUE7FX3hxkN4dT6EGQeWjdTEZDtb4Rt9x4atgrF6/1XWKYJRVKZd/87X6BPWc=
-X-Received: by 2002:a2e:3305:0:b0:2df:fa4a:ef15 with SMTP id
- 38308e7fff4ca-2e5204ccee8mr14419491fa.39.1715339663484; Fri, 10 May 2024
- 04:14:23 -0700 (PDT)
+ d=linux.alibaba.com; s=default;
+ t=1715406042; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
+ bh=iJ3JYMGOKi4xjZMSBobbaZbPB7+BNAYFrAZUONAg71U=;
+ b=hO5sa4ns2FLiot6sJkjHxKlrS858jezVigM9n7pOJ4XOpS289JMJgfN1ME5Q5lDiEVauzZOLvsdKAizQ/qZKhQwQBSNO3nmfeswVX5+U2aQABQ3uyBeUWViV2pOTZXDlLgzgBKla9Ef39nC7AWE7hffOnNsXIhI8dFg8OzP3J/Y=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R431e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037067110;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
+ TI=SMTPD_---0W6CK2i._1715406040; 
+Received: from 30.198.0.209(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0W6CK2i._1715406040) by smtp.aliyun-inc.com;
+ Sat, 11 May 2024 13:40:41 +0800
+Message-ID: <67f13909-3512-4c69-9358-68ee214bec25@linux.alibaba.com>
+Date: Sat, 11 May 2024 13:39:53 +0800
 MIME-Version: 1.0
-References: <20240307160319.675044-1-dbarboza@ventanamicro.com>
-In-Reply-To: <20240307160319.675044-1-dbarboza@ventanamicro.com>
-From: Frank Chang <frank.chang@sifive.com>
-Date: Fri, 10 May 2024 19:14:12 +0800
-X-Gmail-Original-Message-ID: <CANzO1D0x5eyZKoNQfH1Q36ieMw21MjxFO30=gzADWNOV5gKXbw@mail.gmail.com>
-Message-ID: <CANzO1D0x5eyZKoNQfH1Q36ieMw21MjxFO30=gzADWNOV5gKXbw@mail.gmail.com>
-Subject: Re: [PATCH v2 00/15] riscv: QEMU RISC-V IOMMU Support
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com, ajones@ventanamicro.com, tjeznach@rivosinc.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::129;
- envelope-from=frank.chang@sifive.com; helo=mail-lf1-x129.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] target/riscv/cpu.c: fix Zvkb extension config
+To: Yangyu Chen <cyy@cyyself.name>, qemu-riscv@nongnu.org
+Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Max Chou <max.chou@sifive.com>
+References: <tencent_E56BF33996E1EAC7D0853035BAF05109B20A@qq.com>
+Content-Language: en-US
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <tencent_E56BF33996E1EAC7D0853035BAF05109B20A@qq.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=115.124.30.133;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-133.freemail.mail.aliyun.com
+X-Spam_score_int: -174
+X-Spam_score: -17.5
+X-Spam_bar: -----------------
+X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -106,118 +73,33 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Daniel,
 
-Thanks for the upstream work.
-Sorry that it took a while for me to review the patchset.
+On 2024/5/11 12:58, Yangyu Chen wrote:
+> This code has a typo that writes zvkb to zvkg, causing users can't
+> enable zvkb through the config. This patch gets this fixed.
+>
+> Signed-off-by: Yangyu Chen <cyy@cyyself.name>
+> Fixes: ea61ef7097d0 ("target/riscv: Move vector crypto extensions to riscv_cpu_extensions")
+> ---
+>   target/riscv/cpu.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index eb1a2e7d6d..13cd34adbd 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -1535,7 +1535,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
+>       /* Vector cryptography extensions */
+>       MULTI_EXT_CFG_BOOL("zvbb", ext_zvbb, false),
+>       MULTI_EXT_CFG_BOOL("zvbc", ext_zvbc, false),
+> -    MULTI_EXT_CFG_BOOL("zvkb", ext_zvkg, false),
+> +    MULTI_EXT_CFG_BOOL("zvkb", ext_zvkb, false),
 
-Please let me know if you need any help from us to update the IOMMU model.
-We would like to see it merged for QEMU 9.1.0.
+Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
-Regards,
-Frank Chang
+Zhiwei
 
-Daniel Henrique Barboza <dbarboza@ventanamicro.com> =E6=96=BC 2024=E5=B9=B4=
-3=E6=9C=888=E6=97=A5 =E9=80=B1=E4=BA=94 =E4=B8=8A=E5=8D=8812:04=E5=AF=AB=E9=
-=81=93=EF=BC=9A
->
-> Hi,
->
-> This is the second version of the work Tomasz sent in July 2023 [1].
-> I'll be helping Tomasz upstreaming it.
->
-> The core emulation code is left unchanged but a few tweaks were made in
-> v2:
->
-> - The most notable difference in this version is that the code was split
->   in smaller chunks. Patch 03 is still a 1700 lines patch, which is an
->   improvement from the 3800 lines patch from v1, but we can only go so
->   far when splitting the core components of the emulation. The reality
->   is that the IOMMU emulation is a rather complex piece of software and
->   there's not much we can do to alleviate it;
->
-> - I'm not contributing the HPM support that was present in v1. It shaved
->   off 600 lines of code from the series, which is already large enough
->   as is. We'll introduce HPM in later versions or as a follow-up;
->
-> - The riscv-iommu-header.h header was also trimmed. I shaved it of 300
->   or so from it, all of them from definitions that the emulation isn't
->   using it. The header will be eventually be imported from the Linux
->   driver (not upstream yet), so for now we can live with a trimmed
->   header for the emulation usage alone;
->
-> - I added libqos tests for the riscv-iommu-pci device. The idea of these
->   tests is to give us more confidence in the emulation code;
->
-> - 'edu' device support. The support was retrieved from Tomasz EDU branch
->   [2]. This device can then be used to test PCI passthrough to exercise
->   the IOMMU.
->
->
-> Patches based on alistair/riscv-to-apply.next.
->
-> v1 link: https://lore.kernel.org/qemu-riscv/cover.1689819031.git.tjeznach=
-@rivosinc.com/
->
-> [1] https://lore.kernel.org/qemu-riscv/cover.1689819031.git.tjeznach@rivo=
-sinc.com/
-> [2] https://github.com/tjeznach/qemu.git, branch 'riscv_iommu_edu_impl'
->
-> Andrew Jones (1):
->   hw/riscv/riscv-iommu: Add another irq for mrif notifications
->
-> Daniel Henrique Barboza (2):
->   test/qtest: add riscv-iommu-pci tests
->   qtest/riscv-iommu-test: add init queues test
->
-> Tomasz Jeznach (12):
->   exec/memtxattr: add process identifier to the transaction attributes
->   hw/riscv: add riscv-iommu-bits.h
->   hw/riscv: add RISC-V IOMMU base emulation
->   hw/riscv: add riscv-iommu-pci device
->   hw/riscv: add riscv-iommu-sys platform device
->   hw/riscv/virt.c: support for RISC-V IOMMU PCIDevice hotplug
->   hw/riscv/riscv-iommu: add Address Translation Cache (IOATC)
->   hw/riscv/riscv-iommu: add s-stage and g-stage support
->   hw/riscv/riscv-iommu: add ATS support
->   hw/riscv/riscv-iommu: add DBG support
->   hw/misc: EDU: added PASID support
->   hw/misc: EDU: add ATS/PRI capability
->
->  hw/misc/edu.c                    |  297 ++++-
->  hw/riscv/Kconfig                 |    4 +
->  hw/riscv/meson.build             |    1 +
->  hw/riscv/riscv-iommu-bits.h      |  407 ++++++
->  hw/riscv/riscv-iommu-pci.c       |  173 +++
->  hw/riscv/riscv-iommu-sys.c       |   93 ++
->  hw/riscv/riscv-iommu.c           | 2085 ++++++++++++++++++++++++++++++
->  hw/riscv/riscv-iommu.h           |  146 +++
->  hw/riscv/trace-events            |   15 +
->  hw/riscv/trace.h                 |    2 +
->  hw/riscv/virt.c                  |   33 +-
->  include/exec/memattrs.h          |    5 +
->  include/hw/riscv/iommu.h         |   40 +
->  meson.build                      |    1 +
->  tests/qtest/libqos/meson.build   |    4 +
->  tests/qtest/libqos/riscv-iommu.c |   79 ++
->  tests/qtest/libqos/riscv-iommu.h |   96 ++
->  tests/qtest/meson.build          |    1 +
->  tests/qtest/riscv-iommu-test.c   |  234 ++++
->  19 files changed, 3704 insertions(+), 12 deletions(-)
->  create mode 100644 hw/riscv/riscv-iommu-bits.h
->  create mode 100644 hw/riscv/riscv-iommu-pci.c
->  create mode 100644 hw/riscv/riscv-iommu-sys.c
->  create mode 100644 hw/riscv/riscv-iommu.c
->  create mode 100644 hw/riscv/riscv-iommu.h
->  create mode 100644 hw/riscv/trace-events
->  create mode 100644 hw/riscv/trace.h
->  create mode 100644 include/hw/riscv/iommu.h
->  create mode 100644 tests/qtest/libqos/riscv-iommu.c
->  create mode 100644 tests/qtest/libqos/riscv-iommu.h
->  create mode 100644 tests/qtest/riscv-iommu-test.c
->
-> --
-> 2.43.2
->
->
+>       MULTI_EXT_CFG_BOOL("zvkg", ext_zvkg, false),
+>       MULTI_EXT_CFG_BOOL("zvkned", ext_zvkned, false),
+>       MULTI_EXT_CFG_BOOL("zvknha", ext_zvknha, false),
 
