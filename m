@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B591FC04FFE
-	for <qemu-riscv@archiver.kernel.org>; Sat, 11 May 2024 14:43:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73C0CC04FFE
+	for <qemu-riscv@archiver.kernel.org>; Sat, 11 May 2024 14:46:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s5nwI-0000Yb-Vz; Sat, 11 May 2024 10:43:07 -0400
+	id 1s5nzM-0004eb-TH; Sat, 11 May 2024 10:46:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liwei1518@gmail.com>)
- id 1s5nvT-0000Qc-7e; Sat, 11 May 2024 10:42:16 -0400
-Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b])
+ id 1s5nzJ-0004e1-HH; Sat, 11 May 2024 10:46:15 -0400
+Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <liwei1518@gmail.com>)
- id 1s5nvQ-0002vB-4G; Sat, 11 May 2024 10:42:13 -0400
-Received: by mail-pf1-x42b.google.com with SMTP id
- d2e1a72fcca58-6f47787a0c3so2703862b3a.0; 
- Sat, 11 May 2024 07:42:10 -0700 (PDT)
+ id 1s5nzF-0003PY-QU; Sat, 11 May 2024 10:46:12 -0400
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-1ed96772f92so25285825ad.0; 
+ Sat, 11 May 2024 07:46:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1715438529; x=1716043329; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1715438768; x=1716043568; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=v4o7IfUNDFyqh1Ty4pyWiw8cej2kMpp85wO2vbWdQdU=;
- b=RMXGvWl9G8YWWI8bXIQHBN0NF6FtLQ4vKNhMlMhablzrZgBLZvargOpMZ0GgI1WHmp
- YJvQtYpCsmJEWCVgTP95dguXciggE0qgtQesLEyGvDqJFXszlbiykgmRYvAvdRD6xrWi
- yVO6venn7CC1i5BDkDopfj98wJOISNELgWdPABGPS50aHktsM/J6jYKIPxCbiWHk9yBH
- fZrmTBLZAY2iVbWEaxV4+9ZzGGu98l+89+JnsP7Ijq7Y3O1YL8XTiPju9W2jFY/kmhqr
- K8nk5Mdzzm6u8rADMQ6ExiqnW/ZIpoBMqa0ed4jqbHAY50EuX+H4jikfx6YJTYfuEksS
- b0ZA==
+ bh=4mHeM8v46H5GqBx8ufyPG6XyaVrl3itP3tCb1h5Q0Hk=;
+ b=KawPyY0X+cRG0QrG8tAzxJEbRrP1cL5H10nPYs7aZXa/3fH5MweHroSRpntrvR3GZb
+ lXOrwgs8+tZZEzCOojUuAAE73Dy1lmbWe8USgHvEVQCm7W6gCDe0j0LZaJI2LLScyHO6
+ eybNI8tHAacMJPLKEbor962UeFAG1fYYjW/Zx228N82qHEAxeOAvL2gzU+LPmDN3OpAD
+ tyPUEZLrVAZWKEqmPpxeq+HLwhN60IB7RqnVJW1CU4ZS6WwRC47CG6Y1AHDJyoIQoqxx
+ VLQ9co0VHwQ2N22rK8zSLpmhlc4+yYkMR7dFRSyBu/53Gd3sOUHaUxFs/N8qVSsz4MCU
+ 68JA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715438529; x=1716043329;
+ d=1e100.net; s=20230601; t=1715438768; x=1716043568;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=v4o7IfUNDFyqh1Ty4pyWiw8cej2kMpp85wO2vbWdQdU=;
- b=CFOMN6P7pERkbNfREzDBLhpqTDbbTRepoUrRN2pfeyIyQ2e+wHKOENC3Afl8GU6Lth
- dk3yf3Eimz/IbD3TAPqushEoT1eL/fvTTYEZvelqcH9rEf6ZEqDCz7c9bXW0nOXHqle9
- kxIrOftmid5AWMOLhiJ6M2/zD5o4s4uZu/vGDYJEzabrpIsa8/+hj2n2p4Gu4UxI/Qi2
- 87NTL0X0LnriMyN9b6R7bRP9Zsj+if5mEmvOG9FkEoPixvVHsW0a9TAhxvhWVOsaxBvi
- pS6FtQ2WcBal8jgsXmTozfYnumU0XvTPNwxtAq62p62j37mC8hlrvxXlwH+PZNJpUbrg
- eTiA==
+ bh=4mHeM8v46H5GqBx8ufyPG6XyaVrl3itP3tCb1h5Q0Hk=;
+ b=BfUT6TXNLe24OpxX+BYT/HpKNIPKH8dTTKjTaxvatI+mjITaG47ug7kwi9PVgg4RBN
+ mHbRI8gea5gER5EzNxHh0Rn/Pzk2rsm2Jo7Xr0lhr0ODbOWKrRkUKhH9738OSD+ohY6f
+ e5irEnaYWKVooqIC/xda/t6BlkVTgZCUBmgA04QWeoKoCadhgsgc3C9MQPTbs41Kmc/l
+ P8y000AZSjIuOt1UgT/V8Fu/bJJNchRqdrWi6D7aSLsc3qPI6xfgZxBIsgyzSP88GZQE
+ q9T794BgYhIC2boQoFrgWf6vjHxwEqs4t0Oy5ihawwefYP3SSL0asczHBT/Jv+glUQfY
+ N7+w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUvgaEkts3Za/apLKDejynof2RoCw9QBdR+/lWgD3Wx6MtLkg7LT4iKm6/nCLa8PC4xWSSnW3pcB38hr2MdsixBU5U7tDCy/875kjzOyyYDDAKPGRBsNUM3VVghAw==
-X-Gm-Message-State: AOJu0Yxy8pUHNDiPEeohmQ6o8ikS1zt6HL70oyM+IWnUxdruKO0eiI9j
- nfEIJKwlAXNH7h9RfbxU7LKnXKiqd9xBo0lFrCvB3IB18kP+I1km
-X-Google-Smtp-Source: AGHT+IFZAa6gH72e8YlZVWDS3KTFu/Len4k2D7gRBbDKbS3DFyJ+6IJIU5nG0zirkmjx4m0kkqEYVw==
-X-Received: by 2002:a05:6a00:1383:b0:6f3:ee9a:f38b with SMTP id
- d2e1a72fcca58-6f4e026b626mr7021353b3a.6.1715438529152; 
- Sat, 11 May 2024 07:42:09 -0700 (PDT)
+ AJvYcCXHR5JiTI9uvSOGqsMjbcUfg/7YCpoGixfS4LWfvQLmObX8SY2I53b2swJoDxAayFo6qkKXSQ8GpNwv44cMjwZ5T9UzsSW/it5oPd8BGxTt30fkzuf9A4CZNdKxAg==
+X-Gm-Message-State: AOJu0YznpL66e2tXQZvd6yoyx8gK8nlJYGyctCW6Q0U2Iy2MW/dls997
+ c//SIpafVgoNJU6PePVDvUcFrKQxaCDfs3ZNCd62dDrC77pFcdh6
+X-Google-Smtp-Source: AGHT+IHUD/rFfTgTMwuGDaZ34AgDLv8VRvMRr3bleX168NoEA5Mj8AI+q/RsY0oaNu2a8daLVntsTA==
+X-Received: by 2002:a17:902:6e01:b0:1eb:51a4:3685 with SMTP id
+ d9443c01a7336-1ef4404944emr54609265ad.52.1715438767864; 
+ Sat, 11 May 2024 07:46:07 -0700 (PDT)
 Received: from [192.168.0.120] ([114.95.238.28])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-6340c99b41dsm4786343a12.52.2024.05.11.07.42.05
+ d9443c01a7336-1ef0c264e68sm49708435ad.302.2024.05.11.07.46.04
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 11 May 2024 07:42:08 -0700 (PDT)
-Message-ID: <70a1c826-7ff3-4079-abb2-d3c2b042a88f@gmail.com>
-Date: Sat, 11 May 2024 22:42:04 +0800
+ Sat, 11 May 2024 07:46:07 -0700 (PDT)
+Message-ID: <fa17c12e-18d9-42b9-a58f-df05fae294fa@gmail.com>
+Date: Sat, 11 May 2024 22:46:02 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/5] target/riscv: Support the version for ss1p13
+Subject: Re: [PATCH 3/5] target/riscv: Add 'P1P13' bit in SMSTATEEN0
 To: "Fea.Wang" <fea.wang@sifive.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt
  <palmer@dabbelt.com>, Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Andrew Jones <ajones@ventanamicro.com>, Max Chou <max.chou@sifive.com>
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
 References: <20240510065856.2436870-1-fea.wang@sifive.com>
- <20240510065856.2436870-3-fea.wang@sifive.com>
+ <20240510065856.2436870-4-fea.wang@sifive.com>
 Content-Language: en-US
 From: liwei <liwei1518@gmail.com>
-In-Reply-To: <20240510065856.2436870-3-fea.wang@sifive.com>
+In-Reply-To: <20240510065856.2436870-4-fea.wang@sifive.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42b;
- envelope-from=liwei1518@gmail.com; helo=mail-pf1-x42b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
+ envelope-from=liwei1518@gmail.com; helo=mail-pl1-x631.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -89,7 +88,6 @@ X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sat, 11 May 2024 10:42:59 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -106,89 +104,57 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 On 2024/5/10 14:58, Fea.Wang wrote:
-> Add RISC-V privilege 1.13 support.
+> Based on privilege 1.13 spec, there should be a bit56 for 'P1P13' in
+> SMSTATEEN0 that controls access to the hedeleg.
 >
 > Signed-off-by: Fea.Wang <fea.wang@sifive.com>
 > Reviewed-by: Frank Chang <frank.chang@sifive.com>
 > ---
->   target/riscv/cpu.c         | 6 +++++-
->   target/riscv/cpu.h         | 4 +++-
->   target/riscv/cpu_cfg.h     | 1 +
->   target/riscv/tcg/tcg-cpu.c | 4 ++++
->   4 files changed, 13 insertions(+), 2 deletions(-)
+>   target/riscv/cpu_bits.h |  1 +
+>   target/riscv/csr.c      | 10 ++++++++++
+>   2 files changed, 11 insertions(+)
 Reviewed-by:  Weiwei Li <liwei1518@gmail.com>
 
 Weiwei Li
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index b6b48e5620..a6298c3298 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -1773,7 +1773,9 @@ int priv_spec_from_str(const char *priv_spec_str)
->   {
->       int priv_version = -1;
->   
-> -    if (!g_strcmp0(priv_spec_str, PRIV_VER_1_12_0_STR)) {
-> +    if (!g_strcmp0(priv_spec_str, PRIV_VER_1_13_0_STR)) {
-> +        priv_version = PRIV_VERSION_1_13_0;
-> +    } else if (!g_strcmp0(priv_spec_str, PRIV_VER_1_12_0_STR)) {
->           priv_version = PRIV_VERSION_1_12_0;
->       } else if (!g_strcmp0(priv_spec_str, PRIV_VER_1_11_0_STR)) {
->           priv_version = PRIV_VERSION_1_11_0;
-> @@ -1793,6 +1795,8 @@ const char *priv_spec_to_str(int priv_version)
->           return PRIV_VER_1_11_0_STR;
->       case PRIV_VERSION_1_12_0:
->           return PRIV_VER_1_12_0_STR;
-> +    case PRIV_VERSION_1_13_0:
-> +        return PRIV_VER_1_13_0_STR;
->       default:
->           return NULL;
->       }
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 7696102697..776939b56b 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -96,12 +96,14 @@ extern RISCVCPUProfile *riscv_profiles[];
->   #define PRIV_VER_1_10_0_STR "v1.10.0"
->   #define PRIV_VER_1_11_0_STR "v1.11.0"
->   #define PRIV_VER_1_12_0_STR "v1.12.0"
-> +#define PRIV_VER_1_13_0_STR "v1.13.0"
->   enum {
->       PRIV_VERSION_1_10_0 = 0,
->       PRIV_VERSION_1_11_0,
->       PRIV_VERSION_1_12_0,
-> +    PRIV_VERSION_1_13_0,
->   
-> -    PRIV_VERSION_LATEST = PRIV_VERSION_1_12_0,
-> +    PRIV_VERSION_LATEST = PRIV_VERSION_1_13_0,
->   };
->   
->   #define VEXT_VERSION_1_00_0 0x00010000
-> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-> index e1e4f32698..fb7eebde52 100644
-> --- a/target/riscv/cpu_cfg.h
-> +++ b/target/riscv/cpu_cfg.h
-> @@ -136,6 +136,7 @@ struct RISCVCPUConfig {
->        * TCG always implement/can't be user disabled,
->        * based on spec version.
->        */
-> +    bool has_priv_1_13;
->       bool has_priv_1_12;
->       bool has_priv_1_11;
->   
-> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-> index faa8de9b83..a9d188a9fd 100644
-> --- a/target/riscv/tcg/tcg-cpu.c
-> +++ b/target/riscv/tcg/tcg-cpu.c
-> @@ -320,6 +320,10 @@ static void riscv_cpu_update_named_features(RISCVCPU *cpu)
->           cpu->cfg.has_priv_1_12 = true;
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index 74318a925c..28bd3fb0b4 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -315,6 +315,7 @@
+>   #define SMSTATEEN0_CS       (1ULL << 0)
+>   #define SMSTATEEN0_FCSR     (1ULL << 1)
+>   #define SMSTATEEN0_JVT      (1ULL << 2)
+> +#define SMSTATEEN0_P1P13    (1ULL << 56)
+>   #define SMSTATEEN0_HSCONTXT (1ULL << 57)
+>   #define SMSTATEEN0_IMSIC    (1ULL << 58)
+>   #define SMSTATEEN0_AIA      (1ULL << 59)
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 6b460ee0e8..d844ce770e 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -2248,6 +2248,11 @@ static RISCVException write_mstateen0(CPURISCVState *env, int csrno,
+>           wr_mask |= SMSTATEEN0_FCSR;
 >       }
 >   
+> +    RISCVCPU *cpu = env_archcpu(env);
 > +    if (cpu->env.priv_ver >= PRIV_VERSION_1_13_0) {
-> +        cpu->cfg.has_priv_1_13 = true;
+> +        wr_mask |= SMSTATEEN0_P1P13;
 > +    }
 > +
->       /* zic64b is 1.12 or later */
->       cpu->cfg.ext_zic64b = cpu->cfg.cbom_blocksize == 64 &&
->                             cpu->cfg.cbop_blocksize == 64 &&
+>       return write_mstateen(env, csrno, wr_mask, new_val);
+>   }
+>   
+> @@ -2283,6 +2288,11 @@ static RISCVException write_mstateen0h(CPURISCVState *env, int csrno,
+>   {
+>       uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
+>   
+> +    RISCVCPU *cpu = env_archcpu(env);
+> +    if (cpu->env.priv_ver >= PRIV_VERSION_1_13_0) {
+> +            wr_mask |= SMSTATEEN0_P1P13;
+> +    }
+> +
+>       return write_mstateenh(env, csrno, wr_mask, new_val);
+>   }
+>   
 
