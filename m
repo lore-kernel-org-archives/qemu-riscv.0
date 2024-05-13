@@ -4,87 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C393C25B5F
-	for <qemu-riscv@archiver.kernel.org>; Mon, 13 May 2024 05:16:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CB93C25B10
+	for <qemu-riscv@archiver.kernel.org>; Mon, 13 May 2024 06:31:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s6O36-00053P-21; Mon, 13 May 2024 01:16:32 -0400
+	id 1s6PDa-00063T-AU; Mon, 13 May 2024 02:31:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1s6O2z-00051r-QL
- for qemu-riscv@nongnu.org; Mon, 13 May 2024 01:16:26 -0400
-Received: from mail-pg1-x52a.google.com ([2607:f8b0:4864:20::52a])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1s6O2v-0006f4-P9
- for qemu-riscv@nongnu.org; Mon, 13 May 2024 01:16:25 -0400
-Received: by mail-pg1-x52a.google.com with SMTP id
- 41be03b00d2f7-5c6bd3100fcso2302479a12.3
- for <qemu-riscv@nongnu.org>; Sun, 12 May 2024 22:16:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1715577379; x=1716182179; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=n2IOHQ65EfdwQczJm0hHK3bvEwyI09Ss5Cfek0liOFw=;
- b=OIioIRh958uI5jwEv1JVfJa+MfD1ebFj/7k8S27FIdjwS0rEuWLQcWTMOX3DEN1ArY
- m3T3Pg9ixD8+xpVZiGJb0ISZc6QdwmG/WB42VeqL5lSnbx8qCWLp2KtsJHE7VPOsMcS1
- SFeF7q08N3QGGTjpy1dBr7TzkjiQcofOqReGSU1AIn3B9Stdy7iDytiCzbhCjJ/X+EVb
- VJ6RCZyX6v9/DqinDwl9EL+DqTSNx6vR1r26xHYSwZELfMnI4uPjoZJ2aJboCa8X7SIE
- PTv2+OUxxUxf3SrxFAegsRqC8LMXoS9uIX3PGkmi/1fCl5eXxmCMY2SFMnVP6k56RFso
- tZDw==
+ (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1s6PDX-0005ra-6x
+ for qemu-riscv@nongnu.org; Mon, 13 May 2024 02:31:23 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1s6PDM-0003pT-0a
+ for qemu-riscv@nongnu.org; Mon, 13 May 2024 02:31:22 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1715581870;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=797dreJwwtDvwa5S8exMLXc4FHv7MqN20AnCWFX1jsY=;
+ b=NKJczLLwMyB30lXVVCrAqdK150X4ekVW+KozHFcRHS2Fz9yiW794b27B7e4Imi26Xce75N
+ ZXhm+v5V4GPUm6N73fJd6ddLHKbtn2BADo+JmlNaEjgscKHRSFycw2NBXKixmm5eh9ZkJg
+ bp1AKe++sj0bKu5V3f7BstvqrKT7LLk=
+Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
+ [209.85.218.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-620-0wQhtv3nPxmHGGtiy6lV9g-1; Mon, 13 May 2024 02:31:09 -0400
+X-MC-Unique: 0wQhtv3nPxmHGGtiy6lV9g-1
+Received: by mail-ej1-f72.google.com with SMTP id
+ a640c23a62f3a-a59a0014904so220406766b.2
+ for <qemu-riscv@nongnu.org>; Sun, 12 May 2024 23:31:08 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715577379; x=1716182179;
+ d=1e100.net; s=20230601; t=1715581868; x=1716186668;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=n2IOHQ65EfdwQczJm0hHK3bvEwyI09Ss5Cfek0liOFw=;
- b=xMNvkZDhA+sFfcjRi/aoHeODEBWbG1tqj5oFoM/a12FqU/RSA0PwfYgw6nWExFzirM
- vZLiSoeWQcH0anlowfhTcsLSYZ6ekezs7pWYCFkaURqr662G6xTejR0y4LQnKa85NkrH
- wH94foQyhuSwfuT0sxsz1IHnf05ZVDAqxTqzxlYAIG79pAyW+Lvg4xJ7h2a/ZNcoQEcR
- SETt7QofHZpgu0QDhgI4sPk7B3Ni0v0wDPBUk+XPLGo+atdjX06wiORGPDLtbaDyXMgv
- cyiG+//Q2+eR7I6HEWvXVpBpMdRGvlwH9DajAdNO5b4q+UgJZDayE3zN5mACAluHGrT+
- LhNQ==
+ bh=797dreJwwtDvwa5S8exMLXc4FHv7MqN20AnCWFX1jsY=;
+ b=ctK3r+8VwOl7OI5W9BJV5WqpFAZ1D5kWxsjc95cnmTTvqw0GWJVRZQbcC0LrHN1dHM
+ KRxQl3zFy68Yovo0t000pvTRCNSZau9Cy1a04RmM2vrJXDkLus5AUvj6zp1LfZKsKRGH
+ UAXif4+HsZA0WD/0m5+LD8rCZaTrvP1H6J6aW+jKtufV6WanXmxO5VYGz3sDaRQa7hw+
+ 62yTDipoi1ItDvwre0J6KCjL4xs2Q0JMud3dPiVjXPpggE1kH0E4pz1tesgzLAjFg/hx
+ cirn+SPQs08jjoHk5zIGa90a1bASqD4JxK/AVMLrCJ/ZG+UPa+ABrSJsah/6F89+5x5z
+ Ohnw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXy2KL3RXKkZMsVHa23gMG0xAEACFlYQhDvzawCIM44909dYK4H9QOrbMvwkzuWWhAjJBanthNI+s0/tQ9m786LnSbuKAQ=
-X-Gm-Message-State: AOJu0YyL4FHt/um5wE/BO+sk3KT5j84sWjG2Bo0cpUV+P1S8OslMqvEh
- zRPNPg9UCVVRD3HmpOUCorfWCxUfHkOo/+6V6d01btxP8q8rU5x7EJz9HAJ3FUo=
-X-Google-Smtp-Source: AGHT+IFpaskb5xClzeKMjlbSY4S+OO6xPemioOiA24IHeYIDUaQzWuRvjHUiWOL/Eli5kfVkgir44A==
-X-Received: by 2002:a05:6a20:729b:b0:1ad:9adf:febf with SMTP id
- adf61e73a8af0-1afde120efcmr9501373637.31.1715577379463; 
- Sun, 12 May 2024 22:16:19 -0700 (PDT)
-Received: from sunil-laptop ([106.51.188.31]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1ef0bf31229sm70072385ad.138.2024.05.12.22.16.15
+ AJvYcCVBzqJHSZOxZZh3VCsBxIHoPrJBqSl7U8Dvamjtogfifq3qqlcY6bBlBPtuVMa14ppqW072aj/cAUGnkXh4gbDBIiqJX2E=
+X-Gm-Message-State: AOJu0Yy8BJPlgYWwAZo8A9K4/cK9g3GhZmAyaQSKk94V7dm7nTQ9HyMV
+ WVJeFFHbee6pz0givE1oFMPrz1I7GKydx5g4o8Wz22lEo3LjIzliglkmIDTIaOIeHuz1+yArAy2
+ iQwxH1s0AwEtcklTOGcLC0tIm4ShXvWiFk148TkDxnIAsS/gGZqcO
+X-Received: by 2002:a17:906:3183:b0:a59:b784:ced4 with SMTP id
+ a640c23a62f3a-a5a2d67873fmr583206466b.75.1715581867827; 
+ Sun, 12 May 2024 23:31:07 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFUNuCqfXAxJSW1/WD5alA4d36gQpoD5AsTdvL4Ux3vlFNcigWdfJoy+KQV58sNhgynZGsLpQ==
+X-Received: by 2002:a17:906:3183:b0:a59:b784:ced4 with SMTP id
+ a640c23a62f3a-a5a2d67873fmr583203966b.75.1715581867265; 
+ Sun, 12 May 2024 23:31:07 -0700 (PDT)
+Received: from redhat.com ([31.187.78.170]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a5a17b0173asm557451066b.179.2024.05.12.23.31.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 May 2024 22:16:19 -0700 (PDT)
-Date: Mon, 13 May 2024 10:46:03 +0530
-From: Sunil V L <sunilvl@ventanamicro.com>
+ Sun, 12 May 2024 23:31:06 -0700 (PDT)
+Date: Mon, 13 May 2024 02:31:01 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
 To: Sia Jee Heng <jeeheng.sia@starfivetech.com>
 Cc: qemu-arm@nongnu.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- mst@redhat.com, imammedo@redhat.com, anisinha@redhat.com,
- peter.maydell@linaro.org, shannon.zhaosl@gmail.com,
+ imammedo@redhat.com, anisinha@redhat.com, peter.maydell@linaro.org,
+ shannon.zhaosl@gmail.com, sunilvl@ventanamicro.com,
  palmer@dabbelt.com, alistair.francis@wdc.com,
  bin.meng@windriver.com, liwei1518@gmail.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com
 Subject: Re: [PATCH v2 2/3] hw/acpi: Upgrade ACPI SPCR table to support SPCR
  table version 4 format
-Message-ID: <ZkGiE68wMiVwZi/E@sunil-laptop>
+Message-ID: <20240513023035-mutt-send-email-mst@kernel.org>
 References: <20240507052212.291137-1-jeeheng.sia@starfivetech.com>
  <20240507052212.291137-3-jeeheng.sia@starfivetech.com>
 MIME-Version: 1.0
+In-Reply-To: <20240507052212.291137-3-jeeheng.sia@starfivetech.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20240507052212.291137-3-jeeheng.sia@starfivetech.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52a;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pg1-x52a.google.com
-X-Spam_score_int: 12
-X-Spam_score: 1.2
-X-Spam_bar: +
-X-Spam_report: (1.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_SBL_CSS=3.335, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=mst@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -24
+X-Spam_score: -2.5
+X-Spam_bar: --
+X-Spam_report: (-2.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.332,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_MSPIKE_H4=-0.01, RCVD_IN_MSPIKE_WL=-0.01, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,8 +107,6 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Sia Jee Heng,
-
 On Mon, May 06, 2024 at 10:22:11PM -0700, Sia Jee Heng wrote:
 > Update the SPCR table to accommodate the SPCR Table version 4 [1].
 > The SPCR table has been modified to adhere to the version 4 format [2].
@@ -110,6 +115,11 @@ On Mon, May 06, 2024 at 10:22:11PM -0700, Sia Jee Heng wrote:
 > [2]: https://github.com/acpica/acpica/pull/931
 > 
 > Signed-off-by: Sia Jee Heng <jeeheng.sia@starfivetech.com>
+
+What does this achieve? We don't normally change unless it gets
+us some useful feature.
+
+
 > ---
 >  hw/acpi/aml-build.c         | 14 +++++++++++---
 >  hw/arm/virt-acpi-build.c    | 10 ++++++++--
@@ -148,13 +158,6 @@ On Mon, May 06, 2024 at 10:22:11PM -0700, Sia Jee Heng wrote:
 > +    /* NamespaceString[] */
 > +    g_array_append_vals(table_data, name, f->namespace_string_length);
 >  
-Is it possible to check the revision here and add new fields only if the
-revision supports it? ARM maintainers are better to comment but IMO, we
-better keep ARM's SPCR in the same current version since I don't know
-how consumers like linux (and other OSs) react to the change.
-
-Thanks!
-Sunil
 >      acpi_table_end(linker, &table);
 >  }
 > diff --git a/hw/arm/virt-acpi-build.c b/hw/arm/virt-acpi-build.c
@@ -267,5 +270,5 @@ Sunil
 >  #endif
 > -- 
 > 2.34.1
-> 
+
 
