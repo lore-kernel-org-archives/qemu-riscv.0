@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6248C25B5F
-	for <qemu-riscv@archiver.kernel.org>; Mon, 13 May 2024 03:30:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F5EDC25B10
+	for <qemu-riscv@archiver.kernel.org>; Mon, 13 May 2024 03:56:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s6MOF-0006Gn-9x; Sun, 12 May 2024 23:30:15 -0400
+	id 1s6Mna-0000be-Bq; Sun, 12 May 2024 23:56:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1s6MOB-0006FP-7f; Sun, 12 May 2024 23:30:11 -0400
-Received: from mail-vk1-xa29.google.com ([2607:f8b0:4864:20::a29])
+ id 1s6MnU-0000aD-6F; Sun, 12 May 2024 23:56:20 -0400
+Received: from mail-vs1-xe2b.google.com ([2607:f8b0:4864:20::e2b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1s6MO1-0003rp-Af; Sun, 12 May 2024 23:30:10 -0400
-Received: by mail-vk1-xa29.google.com with SMTP id
- 71dfb90a1353d-4e12478c3f8so189614e0c.3; 
- Sun, 12 May 2024 20:30:00 -0700 (PDT)
+ id 1s6MnS-0000eH-21; Sun, 12 May 2024 23:56:19 -0400
+Received: by mail-vs1-xe2b.google.com with SMTP id
+ ada2fe7eead31-47f1100e05bso731044137.2; 
+ Sun, 12 May 2024 20:56:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1715570999; x=1716175799; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1715572576; x=1716177376; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hKqoXSKL2OiQgLPxrNJOEgJBv5k5HlX2kE2+Xn9eBr8=;
- b=YIf2Q1PyZi1ULJa2OU+uHY8s9i4Lj4NkQGvUVQBPzuRVj211+c1cpXjtiCfKyx2123
- 7ztd3H0fbrRxRrX3mhz+NINzaRWKS/2TjB7/0lAgLfZRTuZbDZVRumL+GxJWrqwIEoR2
- cndS2HvbCxMILuHJrjglbRCiZNrOAS5p5qkatKBNjcTTddERZXP/kZf618dxziGDjHh5
- 7OxPxLP4PnjgaWSYtLpA2mBcNYaHoyfJQkHSN+NJfd4KvENifNM+FBdGMWxGxUOOAUkF
- 7mH1lZNGmyk5g3VwNgZvFOUaa3EEDCEzclIx32NMLlkKe7BygFn5SomU0TFi8QpUmw7M
- clrw==
+ bh=03sqOwm5zCap8IA9yNiAEqe6zbS/Z3wNJuNh5s4B7Vo=;
+ b=mqiyE3iLOdAIHqMCKEtUSGx25rpNdy+r8KY75e8TSUQed6u4bxAKic8/D9zuX1Zecf
+ fyhhRZRrL2xokdj3Ynb2MsQlNiFFLEfYhwrCPNWUsdnGaQe5NjQj5uxLL0W7Us+Of54i
+ pCoDmsLpRroV89/Dedt85FJKMolBP6uuVdDXKdPhjZ85ORWYKNKBg+1AaDe8Hjiht/WD
+ v3lhag6DyC5MuRlQD94rWk+LSYBl7/UHm0YCs1R2r3FIZLCQlnh1y/juLBfFDCztz6MD
+ gH7ggrP8IB5f5qcWS7H5lEYIVdCC2UkoslcEOGFLi4C2vCdl9Tkwd92vuW/+454z4tMO
+ w4/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715570999; x=1716175799;
+ d=1e100.net; s=20230601; t=1715572576; x=1716177376;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hKqoXSKL2OiQgLPxrNJOEgJBv5k5HlX2kE2+Xn9eBr8=;
- b=Vpy9edZCdvG3lyAMtecO2gzQ0EeOh5uSc6dfX4h2e20pmTbSbSEzUgL1Es8t7bGWHO
- tv+0qrYLrMjTjbPdsL5i8rLaLTGltLkuLa6IuieckapYHnq2atSkaiESSwVn89SqACt8
- CFFgOaswzCfIitG/eH+QyqUWXJgIjgFiCZT8kJk0QbihSphyTvnhoNIRDQZ0ExhCLrm6
- l/+UTAQVHh6sapZ7Ww/CIJsqQlUAPTeLn7EjfLIRwsWwasUsQL9oktie/0Oy9UQSrIgZ
- cMm4mcIGwCV3aTvo7duMjFxkaggYsQWz3nplLRx28gnm3xDW5MTbBNSxsCyFGZbaEX6w
- aaxw==
+ bh=03sqOwm5zCap8IA9yNiAEqe6zbS/Z3wNJuNh5s4B7Vo=;
+ b=G7xb2qZvXyP7pvMdllbYA65WVj6G23lqJ77NO+nL1HsB4po8S+NXuLCRdU9PoBGapx
+ ++55scyN+a0p3JAJnWm9/LTqQY6oMfewO9eGRVaQke+Fq/wr5ZX/ibpNVFduCiFHg8fp
+ oD01qVsT53Gji0r057WgrG8RHhVHcD2y6boVPZYH2BCHTtuhLOg6UAj7kEMi5MY+5xbV
+ pPui4O213yE2tdYCvA9/Ndq0X79b7ZLxSNCUtFCqaWYa5nKE8m1wsbfse/Y1WVpwYrp4
+ yPpbjH73EZAYaUI40Yb4REPV8Rz6/gHL62vGDNY7yL3S3+2hOD0ppN2BzUSGjGe4/lBE
+ 5Xtg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV4nwHWxg/fO6oS7cB/8j7aUwfgoH/4+iIrpXs7c4arRz7EbUlDg9u6qL4VC6t0gMsizcWg8VvT691aSf7E02iuADPlVss=
-X-Gm-Message-State: AOJu0YxhdSxrgD6bxlc1Proq+QejwdeaLzmDEOMVpWMHucBo/kjcQmKT
- LGlJNjVxlasygcsL+8bsTqopCC6FW8AHTikxO2aoAv/1ushQ8J5gT1H7xPlAbEydYAOszxZ8U+C
- KpMPtNt5Bhs6bIFGD24NIUAHuv7o=
-X-Google-Smtp-Source: AGHT+IGiajIcYAmGAl3FATzoLBR9f3iJY3Apify8Li1XcihuxVZiacGeab9CL8MU5pKgf62N4wtTlCgg0jBYdJYA658=
-X-Received: by 2002:a05:6122:178f:b0:4d8:690d:c02a with SMTP id
- 71dfb90a1353d-4df8829eb9bmr5678866e0c.6.1715570999251; Sun, 12 May 2024
- 20:29:59 -0700 (PDT)
+ AJvYcCX48MuSezdYidiu8YoxYO3jFHoe9gtjc4D4wSQ7C/qFtUimN2kaSDOs+vycesRs66JrYnKVICuAEEg+/d4W6OZSx98RwuI/KlYbt3hOaVAfzEo+yRvIa6QOsSPFjw==
+X-Gm-Message-State: AOJu0YwGR+4ipTDa0yrypidtjgGIBEQjOVUvnbEOAt27BMc+f2U/KQ/Z
+ cNiTJV9UA3fFJi1xcEqtJTEkIW39jJopkBFy10XfP8KEmtBzxetmJrGk02rJMSAa6o2Zj7aVgeE
+ +OnGzQS510uBJldw5IupMrhAidEY=
+X-Google-Smtp-Source: AGHT+IEQTrak1Phmu/TODOZag0u3wcRVXU1WngRuf6dFLt5+kiMqTjpB4UGgY9YpeyPJituAfl1Gry5SzegZS9j40qo=
+X-Received: by 2002:a05:6102:dcb:b0:47c:2d52:8c08 with SMTP id
+ ada2fe7eead31-48077e16d27mr6494190137.17.1715572576164; Sun, 12 May 2024
+ 20:56:16 -0700 (PDT)
 MIME-Version: 1.0
-References: <tencent_7E34EEF0F90B9A68BF38BEE09EC6D4877C0A@qq.com>
-In-Reply-To: <tencent_7E34EEF0F90B9A68BF38BEE09EC6D4877C0A@qq.com>
+References: <20240507052212.291137-1-jeeheng.sia@starfivetech.com>
+ <20240507052212.291137-2-jeeheng.sia@starfivetech.com>
+In-Reply-To: <20240507052212.291137-2-jeeheng.sia@starfivetech.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 13 May 2024 13:29:33 +1000
-Message-ID: <CAKmqyKPOmcJxXhb-RGqxj=hPWOk-dkSVb7kt9vBCFXfnzp-Hhw@mail.gmail.com>
-Subject: Re: [PATCH RESEND] target/riscv/cpu.c: fix Zvkb extension config
-To: Yangyu Chen <cyy@cyyself.name>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Max Chou <max.chou@sifive.com>
+Date: Mon, 13 May 2024 13:55:50 +1000
+Message-ID: <CAKmqyKOmt1UAbSnVbQ2fLVwoPP3u=6r5hX+gVO2xhLKidQ-8-A@mail.gmail.com>
+Subject: Re: [PATCH v2 1/3] qtest: allow SPCR acpi table changes
+To: Sia Jee Heng <jeeheng.sia@starfivetech.com>
+Cc: qemu-arm@nongnu.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ mst@redhat.com, imammedo@redhat.com, anisinha@redhat.com, 
+ peter.maydell@linaro.org, shannon.zhaosl@gmail.com, sunilvl@ventanamicro.com, 
+ palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
+ liwei1518@gmail.com, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a29;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa29.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2b;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2b.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -95,43 +95,31 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sat, May 11, 2024 at 9:28=E2=80=AFPM Yangyu Chen <cyy@cyyself.name> wrot=
-e:
->
-> This code has a typo that writes zvkb to zvkg, causing users can't
-> enable zvkb through the config. This patch gets this fixed.
->
-> Signed-off-by: Yangyu Chen <cyy@cyyself.name>
-> Fixes: ea61ef7097d0 ("target/riscv: Move vector crypto extensions to risc=
-v_cpu_extensions")
-> Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+On Tue, May 7, 2024 at 3:24=E2=80=AFPM Sia Jee Heng
+<jeeheng.sia@starfivetech.com> wrote:
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Can you describe why you are doing this and that it will be reverted
+in the commit message?
 
 Alistair
 
-> ---
->  target/riscv/cpu.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index eb1a2e7d6d..13cd34adbd 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -1535,7 +1535,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[]=
- =3D {
->      /* Vector cryptography extensions */
->      MULTI_EXT_CFG_BOOL("zvbb", ext_zvbb, false),
->      MULTI_EXT_CFG_BOOL("zvbc", ext_zvbc, false),
-> -    MULTI_EXT_CFG_BOOL("zvkb", ext_zvkg, false),
-> +    MULTI_EXT_CFG_BOOL("zvkb", ext_zvkb, false),
->      MULTI_EXT_CFG_BOOL("zvkg", ext_zvkg, false),
->      MULTI_EXT_CFG_BOOL("zvkned", ext_zvkned, false),
->      MULTI_EXT_CFG_BOOL("zvknha", ext_zvknha, false),
+> Signed-off-by: Sia Jee Heng <jeeheng.sia@starfivetech.com>
+> ---
+>  tests/qtest/bios-tables-test-allowed-diff.h | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git a/tests/qtest/bios-tables-test-allowed-diff.h b/tests/qtest/bi=
+os-tables-test-allowed-diff.h
+> index dfb8523c8b..3f12ca546b 100644
+> --- a/tests/qtest/bios-tables-test-allowed-diff.h
+> +++ b/tests/qtest/bios-tables-test-allowed-diff.h
+> @@ -1 +1,3 @@
+>  /* List of comma-separated changed AML files to ignore */
+> +"tests/data/acpi/virt/riscv64/SPCR",
+> +"tests/data/acpi/virt/aarch64/SPCR",
 > --
-> 2.43.0
+> 2.34.1
 >
 >
 
