@@ -4,72 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFD7AC04FFE
-	for <qemu-riscv@archiver.kernel.org>; Sat, 11 May 2024 18:13:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77608C25B4F
+	for <qemu-riscv@archiver.kernel.org>; Mon, 13 May 2024 02:45:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s5rD8-0004UO-9y; Sat, 11 May 2024 14:12:42 -0400
+	id 1s6LgJ-0005MN-SR; Sun, 12 May 2024 22:44:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <cyy@cyyself.name>)
- id 1s5rD1-0004TJ-Ul; Sat, 11 May 2024 14:12:36 -0400
-Received: from ec2-54-164-151-162.compute-1.amazonaws.com ([54.164.151.162]
- helo=qq.com)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1s6LgD-0005M5-Lp; Sun, 12 May 2024 22:44:46 -0400
+Received: from out30-133.freemail.mail.aliyun.com ([115.124.30.133])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <cyy@cyyself.name>)
- id 1s5rCu-0002ST-LJ; Sat, 11 May 2024 14:12:34 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
- t=1715451142; bh=ptDqAh+JyrxoTyU7jiEQOt6FQ3DkmM4RRxl41YjMsuQ=;
- h=Subject:From:In-Reply-To:Date:Cc:References:To;
- b=PPT3EDlKwsewtkP2//M0FhOa/XWcmA+gzxqiGJ9o8tRDDNm2OvgGw5oF1tjUZ1QPK
- u+zq48ndFSzmi3qy7BcZuke/m7Acv00KcTyzI4dCX6424TW9wZIG2jbjLGJbWLRng9
- HfZg98+ayZYr6fCwTI8fsw7BPGpNNksUiqbZ/4fU=
-Received: from smtpclient.apple ([114.253.253.76])
- by newxmesmtplogicsvrszb9-1.qq.com (NewEsmtp) with SMTP
- id EC62B8B7; Sun, 12 May 2024 01:59:06 +0800
-X-QQ-mid: xmsmtpt1715450346tsfzjzgsz
-Message-ID: <tencent_15B0A3132E564C6D8851A33F9F9360A8F606@qq.com>
-X-QQ-XMAILINFO: NvH2zBBgt3uTeVHmaSVjEgATpQzdvoHk9yzssfnb8ytJ7LHXhrm43LozF1xxDC
- s7rIqooNm1a193/eYrnBRnBuW2qGsi1X2YfB55VKnvcKtKqy+Q5e39r99mf8nRl6MdNpyfNunOo8
- mrANejJhqhoKz67N09/Ue4Gud+fBap39PPgCQfqABwyLbIUAhvB4xBkT3P4Tt+vLxwkn3eNvtiRt
- KQgi8E8SbdTMCLm8XvMU/cluy4B/tRXoHy9S95A0/P9NXnCbP27T77w8nu/0N5mS3D90jdZPU4bT
- 8MnvW5m2RUt2rufa5szxnQTdZ0c/t5t1/guY1EbyAO/LQP2E6CnAWKbyMJrZN3RyHf3lN5eJHhny
- Pk7bSJtOe3O6MD4jEADifk26QhrC4seO0BY60h9C3RXALLan1Ueom4WHoa6Pr2LuyDkqD7liZ/u8
- 5QPRcGllC7DcskAU9LqNflTuaHvx4YSCUoLCPTfcJlgYbf8z4ZqsJ40CiwWDLxQH+xbtKBC9BjW0
- +Po7gyAImgLtqROW1wQEhh3xBHa2UUQcLnL9GnNtBSf0df9dDVBB4fziBjSUfoMXi/uzpj4vwV0+
- s9vY3vLWfG1MXlNSP8xBjmZxCxB/qhzUVfNiPi2NkQSyB6LdGLaeqe8aUVQa/3yCJRqn5aiJPQK0
- Ge5ikD0t5EPWEmJ3Smq/sHm90DaCgAciriWn1yeq9CwTVrTY0uPIKz5yspMVt33E5sBzmmCqYU0k
- uoxddFYAVqVXmHIMrddsz9cqyEphha2pgFpwonAB3EC3M0s0sZbwKYiQ22cHo7uhaQjlV9x+JhTq
- OmbzYfj3DT8g39IzoRZAtBSrHMLXrU40v5qy0At1uyuqBIMzGwtKmQwjnACK/JerrfxqDpTSXuGR
- 5iZxmzcPFXskJCkpeBBAnSCG1CYsu65J1fC3Klj9sQ4+Hlm09oNK0HQfRrxnf/vqTMUq94ArR0EF
- V4ADLd5i/bhR0F4EI69g==
-X-QQ-XMRINFO: OD9hHCdaPRBwq3WW+NvGbIU=
-Content-Type: text/plain;
-	charset=us-ascii
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3774.500.171.1.1\))
-Subject: Re: [PATCH RESEND] target/riscv/cpu.c: fix Zvkb extension config
-From: Yangyu Chen <cyy@cyyself.name>
-In-Reply-To: <tencent_7E34EEF0F90B9A68BF38BEE09EC6D4877C0A@qq.com>
-Date: Sun, 12 May 2024 01:58:56 +0800
-Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Max Chou <max.chou@sifive.com>
-Content-Transfer-Encoding: quoted-printable
-X-OQ-MSGID: <D1676BE2-3962-4FC5-AAB0-32A89C8B50DC@cyyself.name>
-References: <tencent_7E34EEF0F90B9A68BF38BEE09EC6D4877C0A@qq.com>
-To: qemu-riscv@nongnu.org
-X-Mailer: Apple Mail (2.3774.500.171.1.1)
-Received-SPF: none client-ip=54.164.151.162; envelope-from=cyy@cyyself.name;
- helo=qq.com
-X-Spam_score_int: 1
-X-Spam_score: 0.1
-X-Spam_bar: /
-X-Spam_report: (0.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- FORGED_SPF_HELO=1, RDNS_DYNAMIC=0.982, SPF_HELO_PASS=-0.001,
- SPF_NONE=0.001 autolearn=no autolearn_force=no
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1s6LgA-0003dJ-Df; Sun, 12 May 2024 22:44:45 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linux.alibaba.com; s=default;
+ t=1715568269; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
+ bh=XQHmv1i0W/Q8+AmpTodW3ayY8bc7ZZVzesxk9TYCw9E=;
+ b=R8GMvrX9xtQRufrTcbWXVuexNWmW8Ih4bG7JTDD+DUakzW9TdN1IFdJ1iQoIAofmTgfMhLGQ1HlBdMtekA4MLcGwF48mvv2Ph4dZa9TXh72CkQ2OgyydCoAUttfE8Oc04JMYZhejRtijRsUNi1ZepUWJsaVdly8AVhjiKEGFUqg=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R171e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037067111;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
+ TI=SMTPD_---0W6Gydo0_1715568266; 
+Received: from 30.198.0.184(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0W6Gydo0_1715568266) by smtp.aliyun-inc.com;
+ Mon, 13 May 2024 10:44:27 +0800
+Message-ID: <d5ce7f2e-f967-4fc6-baf5-59d0d149d151@linux.alibaba.com>
+Date: Mon, 13 May 2024 10:43:41 +0800
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 5/5] target/riscv: Reserve exception codes for sw-check
+ and hw-err
+To: "Fea.Wang" <fea.wang@sifive.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt
+ <palmer@dabbelt.com>, Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+References: <20240510065856.2436870-1-fea.wang@sifive.com>
+ <20240510065856.2436870-6-fea.wang@sifive.com>
+Content-Language: en-US
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20240510065856.2436870-6-fea.wang@sifive.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=115.124.30.133;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-133.freemail.mail.aliyun.com
+X-Spam_score_int: -174
+X-Spam_score: -17.5
+X-Spam_bar: -----------------
+X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -85,37 +75,33 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Note: This patch should also backport to stable-v8.2.
 
-> On May 11, 2024, at 19:26, Yangyu Chen <cyy@cyyself.name> wrote:
->=20
-> This code has a typo that writes zvkb to zvkg, causing users can't
-> enable zvkb through the config. This patch gets this fixed.
->=20
-> Signed-off-by: Yangyu Chen <cyy@cyyself.name>
-> Fixes: ea61ef7097d0 ("target/riscv: Move vector crypto extensions to =
-riscv_cpu_extensions")
-> Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+On 2024/5/10 14:58, Fea.Wang wrote:
+> Based on the priv-1.13.0, add the exception codes for Software-check and
+> Hardware-error.
+>
+> Signed-off-by: Fea.Wang <fea.wang@sifive.com>
+> Reviewed-by: Frank Chang <frank.chang@sifive.com>
 > ---
-> target/riscv/cpu.c | 2 +-
-> 1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index eb1a2e7d6d..13cd34adbd 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -1535,7 +1535,7 @@ const RISCVCPUMultiExtConfig =
-riscv_cpu_extensions[] =3D {
->     /* Vector cryptography extensions */
->     MULTI_EXT_CFG_BOOL("zvbb", ext_zvbb, false),
->     MULTI_EXT_CFG_BOOL("zvbc", ext_zvbc, false),
-> -    MULTI_EXT_CFG_BOOL("zvkb", ext_zvkg, false),
-> +    MULTI_EXT_CFG_BOOL("zvkb", ext_zvkb, false),
->     MULTI_EXT_CFG_BOOL("zvkg", ext_zvkg, false),
->     MULTI_EXT_CFG_BOOL("zvkned", ext_zvkned, false),
->     MULTI_EXT_CFG_BOOL("zvknha", ext_zvknha, false),
-> --=20
-> 2.43.0
->=20
+>   target/riscv/cpu_bits.h | 2 ++
+>   1 file changed, 2 insertions(+)
+>
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index f888025c59..f037f727d9 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -673,6 +673,8 @@ typedef enum RISCVException {
+>       RISCV_EXCP_INST_PAGE_FAULT = 0xc, /* since: priv-1.10.0 */
+>       RISCV_EXCP_LOAD_PAGE_FAULT = 0xd, /* since: priv-1.10.0 */
+>       RISCV_EXCP_STORE_PAGE_FAULT = 0xf, /* since: priv-1.10.0 */
+> +    RISCV_EXCP_SW_CHECK = 0x12, /* since: priv-1.13.0 */
+> +    RISCV_EXCP_HW_ERR = 0x13, /* since: priv-1.13.0 */
 
+Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+
+Zhiwei
+
+>       RISCV_EXCP_INST_GUEST_PAGE_FAULT = 0x14,
+>       RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT = 0x15,
+>       RISCV_EXCP_VIRT_INSTRUCTION_FAULT = 0x16,
 
