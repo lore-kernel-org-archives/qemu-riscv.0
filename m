@@ -4,74 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5CE7C25B10
-	for <qemu-riscv@archiver.kernel.org>; Mon, 13 May 2024 07:20:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FD5DC25B10
+	for <qemu-riscv@archiver.kernel.org>; Mon, 13 May 2024 10:26:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s6PyD-0000p3-QO; Mon, 13 May 2024 03:19:42 -0400
+	id 1s6Ssf-0007XV-9z; Mon, 13 May 2024 06:26:05 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <cyy@cyyself.name>)
- id 1s6Py0-0000ne-BA; Mon, 13 May 2024 03:19:25 -0400
-Received: from out162-62-58-211.mail.qq.com ([162.62.58.211])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <cyy@cyyself.name>)
- id 1s6Pxw-0004Kg-Mx; Mon, 13 May 2024 03:19:24 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
- t=1715584747; bh=vSwRwYi9hyFCPmc9BLgEb7dYEu0fWGRRNdozl5bWeAA=;
- h=Subject:From:In-Reply-To:Date:Cc:References:To;
- b=pHsgVAOz7uj5sPLBsiHWo0qTwAT4KsGoO43P8Ya0lbMG3QwMnJ3l3Nnn7JCmAEFal
- v7S48wDe/pFc3PgYKO9TiF/MevFmP5l3kS2vCYrZwahKaQd44MpxkGnhDCkMta6P9s
- XNYB7S2GhjggklkKhR7nP9DZ/MFIgryClfBsE0s0=
-Received: from smtpclient.apple ([2408:8207:18a0:630f:e955:424f:3708:4c53])
- by newxmesmtplogicsvrsza29-0.qq.com (NewEsmtp) with SMTP
- id 4C3B489F; Mon, 13 May 2024 15:19:03 +0800
-X-QQ-mid: xmsmtpt1715584743th0ggrn96
-Message-ID: <tencent_8C6C872035C2F071090E689F3ADAE1E2C50A@qq.com>
-X-QQ-XMAILINFO: Od++Svt5p/Cha+L0C1WMxGJt5YQ1q2I5mbTnpBoCLeEm0IC2SOY3vlsg3Lnvdp
- vM4sz8XVl0sOox8IZEN1qE/AfsK57glw3FhhRGciH4Y8OFFYo8LRPjPqUoY0ObdSu4Cb6t9koKDJ
- 7ntdPl3wV6nkMo1VuVVMfOOOkOucvEbSVOBS3Ybio71Azn18SvByFjIThg6SdUacZvpF+6sFR9a4
- 2QHDVvds8CztpsbtGT5RzBx8ZXuLJV0VxvtAWxtPB2t01HI5/oRQ526hUfBNm8VGaqUGJoXzw39w
- 5huxXaYbfVlNUOShpKKy3c7bxvibjUMacnqxLh5lqbtCIKk9PrLvAKYJFBUZVCIDWXCv+bNKAFeq
- vsXp26NN78MN4O7sP16P8+/rK2VTRokPAFJPix5roAV9XHjWQZo6dhUzjM60zeI3KMwx5EdGWHGA
- qF5oaDwI2VHwQyqIxxa00vIQoviPt9S0KuLsJeYrnPMGzD72JfyMs7DG/aV2b6ZhzFYBvshOji14
- T7S7kaC9uiRZgHBGfKoGNkkbU5TW4xU8MgyQ+q3MfvwBZjxW3PskyVNkglGQTvuSn7p1B7FmfdaQ
- l41XepB/briC1CnKMtuw/4GmyVS6Cd0AdNt9yMCjqhgRTYEgoKx2ZEwrlCq1gGEiHgJh3ujtPW5/
- ezc5wcRKiQ8uF4+y066rDf6v8Dx5UXI2BvWEr8GMxAV8zdtOqGr0hB2Zr6LM5x0EtsgHfhC7mm/m
- ye8EJtmBQoLj6XYlvsTApFEOf9ujNucP5bWir0gR6kv5bLKyymBL3mxIRCy/dnYrDOwaMrRHDgqX
- MdOG2ZlmsPlJoijC8yAzep/Q19hhYrQoYt0JwyG36C1urlzPVKs+Mlzic6f6JKqhlF8PsssaE5qW
- dDd1hrBU49U/nSaKfgv+sqCaGL7A3ojv+5Iyg7mAwk5xFtmmhZ8RmyKdkE7/HslI53uwcD6B89N/
- Uusp/RdtTqONEGLWb0Zu3ipSXonWDqgeLjpEzCGL4Df61BJ0SbvuA8yKzBSO231VDcbYoAeaEXkO
- UV5kRhZCbFc/XqBJ16TqbVju575qE=
-X-QQ-XMRINFO: MPJ6Tf5t3I/ycC2BItcBVIA=
-Content-Type: text/plain;
-	charset=us-ascii
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3774.500.171.1.1\))
-Subject: Re: [PATCH RESEND] target/riscv/cpu.c: fix Zvkb extension config
-From: Yangyu Chen <cyy@cyyself.name>
-In-Reply-To: <tencent_7E34EEF0F90B9A68BF38BEE09EC6D4877C0A@qq.com>
-Date: Mon, 13 May 2024 15:18:53 +0800
-Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Max Chou <max.chou@sifive.com>,
- qemu-stable@nongnu.org
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1s6SsE-0007PO-Lb; Mon, 13 May 2024 06:25:41 -0400
+Received: from mail-vk1-xa2a.google.com ([2607:f8b0:4864:20::a2a])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1s6Srv-0000d8-HS; Mon, 13 May 2024 06:25:31 -0400
+Received: by mail-vk1-xa2a.google.com with SMTP id
+ 71dfb90a1353d-4df8ea40b2bso1047441e0c.2; 
+ Mon, 13 May 2024 03:25:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1715595907; x=1716200707; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=KI7c3nUCG8tvoPRR10lKSKPUTDE22S/poCKkROQ/+Tk=;
+ b=OhEFAr5e83aJQ8tfGoPtB5fuRLog4b694hLjgz40U1o/fskX/f3c/jZjhIJCAOwpcV
+ bedUajCsXP36/uS83Y9uUdW43LLgFMyt3cJrHQqX6x0L4xS2u9Wf3foau6TO6AT+4/G0
+ N/S8V9yg6grxohDGRbZKTel+PCnx69HZffQ2Rd4AOLmesWrctHF4kn/BT30VgLoUhQw3
+ V1ie6wHa46ewOLk470seGkmyIulUQA2cGugins4lGTcbOC60D5eJHORYwMcOKIWiI2WS
+ b+Gty/UNP5oszUs2GUy7FtZg7j5GfTvx18yVXXwrSDKDrdT2/a7eV3aMnY1V6jSGVshB
+ BUog==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1715595907; x=1716200707;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=KI7c3nUCG8tvoPRR10lKSKPUTDE22S/poCKkROQ/+Tk=;
+ b=nmo+yKMmH2CX4pbWsbPskCQ8TguqIGfCrwzFv6BeJiigBB5nN8r5QaX8s6RsLNla7k
+ FATXLorRqHrkDq14L/ZbsNxf0ULZT1cQMitSDTAqzWwf+MYq3dZOLoprXmAxnJBUpTPg
+ Y2jkmbp9K5SJiIcrL6Jjyjbe1idVUFDTmsgwvi3cmEsX5jPgMzINlfCxUnPjkDo3N3G/
+ dverlemjasloDyfr9ozqoU9U9qbcskRtFmKzWi2zlNCdo6gJzCWMM0a1Hh89ExczoxU3
+ rqcHjheTjAWRxBJRxyd7x1/xlxIm72laJyOFfgwokGF5anRkh1I04TwGL6gvdFWTc/17
+ oR4w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXrGTUEMPn33QhgENIZdYtb54EA0TLytAW8jWo2OQya0YtOJhB24NZOahcOGp/Od6l7N85yisq3CPQ5vYe6vkpIFrzttuoGMw+nVGjVouCvDBr2Y8TWzxpQgjoYqg==
+X-Gm-Message-State: AOJu0Ywvey8j8sQ1aDRinCxWWAXfG77avjSlFaXgcv1uNl7a5KBeYJiB
+ CUrPlvywPt/PZ09IeJl4F/bEwXQeED2p0hSTb8vUfZ/JdxdxQrQ+U+oPrYKciafxOPaiYL7rRi5
+ y1Y+f+jcWXA4JM9bklIw7Htqusfw=
+X-Google-Smtp-Source: AGHT+IGLKWcRFUpeRNSuOaY9LssOa5WcisBI32RiZpPjWNA+QLlTcheTKl1bGxloTuxgjXMcQpaqLzsLcu1WpmwJLUc=
+X-Received: by 2002:a05:6122:2a49:b0:4df:19c0:8702 with SMTP id
+ 71dfb90a1353d-4df88285831mr7345367e0c.1.1715595907409; Mon, 13 May 2024
+ 03:25:07 -0700 (PDT)
+MIME-Version: 1.0
+References: <20240511101053.1875596-1-me@deliversmonkey.space>
+ <b732f7bd-53d2-4c66-9821-a5bd589f6c56@gmail.com>
+In-Reply-To: <b732f7bd-53d2-4c66-9821-a5bd589f6c56@gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 13 May 2024 20:24:41 +1000
+Message-ID: <CAKmqyKM+2jhFdAL=3Z0De03hBFR6cn2xtVm3FrkPvn=U8tJLpg@mail.gmail.com>
+Subject: Re: [PATCH v9 0/6] Pointer Masking update for Zjpm v1.0
+To: liwei <liwei1518@gmail.com>
+Cc: Alexey Baturo <baturo.alexey@gmail.com>, richard.henderson@linaro.org, 
+ space.monkey.delivers@gmail.com, palmer@dabbelt.com, Alistair.Francis@wdc.com, 
+ sagark@eecs.berkeley.edu, kbastian@mail.uni-paderborn.de, 
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-OQ-MSGID: <2998C42A-B80C-4B11-86EC-27F6AE2466A9@cyyself.name>
-References: <tencent_7E34EEF0F90B9A68BF38BEE09EC6D4877C0A@qq.com>
-To: qemu-riscv@nongnu.org
-X-Mailer: Apple Mail (2.3774.500.171.1.1)
-Received-SPF: none client-ip=162.62.58.211; envelope-from=cyy@cyyself.name;
- helo=out162-62-58-211.mail.qq.com
-X-Spam_score_int: 10
-X-Spam_score: 1.0
-X-Spam_bar: +
-X-Spam_report: (1.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- HELO_DYNAMIC_IPADDR=1.951, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_MSPIKE_H2=-0.001, RDNS_DYNAMIC=0.982, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2a;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2a.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -87,39 +94,113 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-I think this patch also needs to back-port to stable-8.2.
+On Sun, May 12, 2024 at 12:44=E2=80=AFAM liwei <liwei1518@gmail.com> wrote:
+>
+>
+> On 2024/5/11 18:10, Alexey Baturo wrote:
+> > From: Alexey Baturo <baturo.alexey@gmail.com>
+> >
+> > Hi,
+> >
+> > It looks like Pointer Masking spec has reached v1.0 and been frozen,
+> > rebasing on riscv-to-apply.next branch and resubmitting patches.
+>
+> Hi, any change from v0.8 to v1.0?
 
-I added qemu-stable@nongnu.org to cc.
+Good question.
 
-> On May 11, 2024, at 19:26, Yangyu Chen <cyy@cyyself.name> wrote:
->=20
-> This code has a typo that writes zvkb to zvkg, causing users can't
-> enable zvkb through the config. This patch gets this fixed.
->=20
-> Signed-off-by: Yangyu Chen <cyy@cyyself.name>
-> Fixes: ea61ef7097d0 ("target/riscv: Move vector crypto extensions to =
-riscv_cpu_extensions")
-> Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-> ---
-> target/riscv/cpu.c | 2 +-
-> 1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index eb1a2e7d6d..13cd34adbd 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -1535,7 +1535,7 @@ const RISCVCPUMultiExtConfig =
-riscv_cpu_extensions[] =3D {
->     /* Vector cryptography extensions */
->     MULTI_EXT_CFG_BOOL("zvbb", ext_zvbb, false),
->     MULTI_EXT_CFG_BOOL("zvbc", ext_zvbc, false),
-> -    MULTI_EXT_CFG_BOOL("zvkb", ext_zvkg, false),
-> +    MULTI_EXT_CFG_BOOL("zvkb", ext_zvkb, false),
->     MULTI_EXT_CFG_BOOL("zvkg", ext_zvkg, false),
->     MULTI_EXT_CFG_BOOL("zvkned", ext_zvkned, false),
->     MULTI_EXT_CFG_BOOL("zvknha", ext_zvknha, false),
-> --=20
-> 2.43.0
->=20
+Also, this needs another rebase. Sorry, it seems to always have
+conflicts. If you re-send I'll apply it right away
 
+Alistair
+
+>
+> Regards,
+>
+> Weiwei Li
+>
+> >
+> > Thanks.
+> >
+> > [v8]:
+> > Rebasing patches on current qemu branch and resubmitting them.
+> >
+> >
+> > [v7]:
+> > I'm terribly sorry, but previous rebase went wrong and somehow I missed=
+ it.
+> > This time I double-checked rebased version.
+> > This patch series is properly rebased on https://github.com/alistair23/=
+qemu/tree/riscv-to-apply.next
+> >
+> > [v6]:
+> > This patch series is rebased on https://github.com/alistair23/qemu/tree=
+/riscv-to-apply.next
+> >
+> > [v5]:
+> > This patch series targets Zjpm v0.8 extension.
+> > The spec itself could be found here: https://github.com/riscv/riscv-j-e=
+xtension/blob/8088461d8d66a7676872b61c908cbeb7cf5c5d1d/zjpm-spec.pdf
+> > This patch series is updated after the suggested comments:
+> > - add "x-" to the extension names to indicate experimental
+> >
+> > [v4]:
+> > Patch series updated after the suggested comments:
+> > - removed J-letter extension as it's unused
+> > - renamed and fixed function to detect if address should be sign-extend=
+ed
+> > - zeroed unused context variables and moved computation logic to anothe=
+r patch
+> > - bumped pointer masking version_id and minimum_version_id by 1
+> >
+> > [v3]:
+> > There patches are updated after Richard's comments:
+> > - moved new tb flags to the end
+> > - used tcg_gen_(s)extract to get the final address
+> > - properly handle CONFIG_USER_ONLY
+> >
+> > [v2]:
+> > As per Richard's suggestion I made pmm field part of tb_flags.
+> > It allowed to get rid of global variable to store pmlen.
+> > Also it allowed to simplify all the machinery around it.
+> >
+> > [v1]:
+> > It looks like Zjpm v0.8 is almost frozen and we don't expect it change =
+drastically anymore.
+> > Compared to the original implementation with explicit base and mask CSR=
+s, we now only have
+> > several fixed options for number of masked bits which are set using exi=
+sting CSRs.
+> > The changes have been tested with handwritten assembly tests and LLVM H=
+WASAN
+> > test suite.
+> >
+> > Alexey Baturo (6):
+> >    target/riscv: Remove obsolete pointer masking  extension code.
+> >    target/riscv: Add new CSR fields for S{sn,mn,m}pm extensions as part
+> >      of Zjpm v0.8
+> >    target/riscv: Add helper functions to calculate current number of
+> >      masked bits for pointer masking
+> >    target/riscv: Add pointer masking tb flags
+> >    target/riscv: Update address modify functions to take into account
+> >      pointer masking
+> >    target/riscv: Enable updates for pointer masking variables and thus
+> >      enable pointer masking extension
+> >
+> >   target/riscv/cpu.c           |  21 +--
+> >   target/riscv/cpu.h           |  46 +++--
+> >   target/riscv/cpu_bits.h      |  90 +---------
+> >   target/riscv/cpu_cfg.h       |   3 +
+> >   target/riscv/cpu_helper.c    |  97 +++++-----
+> >   target/riscv/csr.c           | 337 ++--------------------------------=
+-
+> >   target/riscv/machine.c       |  20 +--
+> >   target/riscv/pmp.c           |  13 +-
+> >   target/riscv/pmp.h           |  11 +-
+> >   target/riscv/tcg/tcg-cpu.c   |   5 +-
+> >   target/riscv/translate.c     |  46 ++---
+> >   target/riscv/vector_helper.c |  15 +-
+> >   12 files changed, 158 insertions(+), 546 deletions(-)
+> >
+>
 
