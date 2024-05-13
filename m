@@ -4,86 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C95BCC25B10
-	for <qemu-riscv@archiver.kernel.org>; Mon, 13 May 2024 11:47:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C4FFC25B75
+	for <qemu-riscv@archiver.kernel.org>; Mon, 13 May 2024 12:13:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s6U8k-00025X-CK; Mon, 13 May 2024 07:46:46 -0400
+	id 1s6UXr-0005cq-6p; Mon, 13 May 2024 08:12:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <rkanwal@rivosinc.com>)
- id 1s6U8R-0001yn-KH
- for qemu-riscv@nongnu.org; Mon, 13 May 2024 07:46:30 -0400
-Received: from mail-lj1-x229.google.com ([2a00:1450:4864:20::229])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <rkanwal@rivosinc.com>)
- id 1s6U8N-0003sl-FJ
- for qemu-riscv@nongnu.org; Mon, 13 May 2024 07:46:27 -0400
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-2db17e8767cso61189111fa.3
- for <qemu-riscv@nongnu.org>; Mon, 13 May 2024 04:46:23 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1s6UXn-0005cB-PP; Mon, 13 May 2024 08:12:40 -0400
+Received: from out30-99.freemail.mail.aliyun.com ([115.124.30.99])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1s6UXk-0000hD-7T; Mon, 13 May 2024 08:12:39 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1715600781; x=1716205581;
- darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=sr91vFn+rXPWaLnBRul9mCHYW6rHsFULmgkxOyTre9M=;
- b=rUwSfuKxsXAoo0RcF09gAV/okH7wY8m/4AYk8mrfZWOmoa8KBYQu6bejXkXYyEum1P
- FbT0hJtyUk9fmLdWx+FbrVpT2NcU6gUuCK0jNXwzXLwCO04W0/svgkqf0qI4H+1bBIhj
- NXyeJcVwSjS9Dhv1Aq6LxMcABaZiBaS7792GOXzjcWM4ukUiH2ps+DLyYgmi02hwk3mm
- N+khv16EMf6svfxtQ4/+iegk/2IING582VRgFnRmfaGFt06Q6Yo2+0+7rCeTVB/giSh1
- cISFy4glAqbWF4B4XKyCcqTxCd2YqlOooxbIva4ep/XKHrH+9qdSEM67bBP30ag0EAX2
- F9aA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715600781; x=1716205581;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=sr91vFn+rXPWaLnBRul9mCHYW6rHsFULmgkxOyTre9M=;
- b=Daew6GODzAym6f2vEkvLanFE/FyNGyitk8wdPu+PG47wHS3sH5DtCuvbiRWhJlWc8q
- jvURNK5MXINxG6nNXFxNhCfp6SjfCWiSMY3xd7Pztoj6u/Y3cQiDDx0y0dIvmovssKl7
- 1NjzAWljY/FHeMTx00xE8nGDIsjSpDNY7HJS0Lj0BHaK9LIQUf//+G7jqvPmSL/SUo2Q
- Wjf5KaJ/z0JTN7093mfdFABe1pC/kEFtU4pQkSf84Jdi1vRV+Nr6Sq1/JILf70XcU++G
- ZXsEtDaX6IpU2jT8jsQXG5EXl9VNCI2LovmLi7FknPdbzfr96up1sUpgPndYfCOZLxk+
- jwiQ==
-X-Gm-Message-State: AOJu0YxvjlLJYItbHiRP1qa8U/B6Gq0Iaz786yUdMrzJL6CfqqWZd+SZ
- ZzAajMpehqDOoL+5qfQX24aTASwlVzVmtok5uiw2m0N8fffs8+V7Dq9WCHHdEpiIIHb4iUNtwRw
- aO2A=
-X-Google-Smtp-Source: AGHT+IGNLPHszQZcPyOGrbBmwIK5jU+MB148nAl806r+my1RWyUCmDO1xxNi1p1JEhoFbzxnd/xlRw==
-X-Received: by 2002:a2e:988f:0:b0:2e4:e7e3:67a9 with SMTP id
- 38308e7fff4ca-2e51fd2dd54mr53428811fa.7.1715600781074; 
- Mon, 13 May 2024 04:46:21 -0700 (PDT)
-Received: from rkanwal-XPS-15-9520.Home
- ([2a02:c7c:7527:ee00:45f9:e636:91a8:bb8e])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3502baacf47sm10907636f8f.78.2024.05.13.04.46.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 May 2024 04:46:20 -0700 (PDT)
-From: Rajnesh Kanwal <rkanwal@rivosinc.com>
-To: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-Cc: alistair.francis@wdc.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- atishp@rivosinc.com, apatel@ventanamicro.com, rkanwal@rivosinc.com
-Subject: [PATCH 1/2] target/riscv: Extend virtual irq csrs masks to be 64 bit
- wide.
-Date: Mon, 13 May 2024 12:46:01 +0100
-Message-Id: <20240513114602.72098-2-rkanwal@rivosinc.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240513114602.72098-1-rkanwal@rivosinc.com>
-References: <20240513114602.72098-1-rkanwal@rivosinc.com>
+ d=linux.alibaba.com; s=default;
+ t=1715602347; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
+ bh=3bsaTVSr0mjC0IjmYhqj/27PCFnH14V7jA4qFuLo6RY=;
+ b=MVAXlODoAd4FccbbRid/qL2RkrCLlOR8wDIpAfNwjTwDOqbvDIeA3jLsTDV+rws/XnSJ1Zdh0f+ovsjdBF46s14R3EeJHTb+43IAHLEObzsOP3r5LKe5AVXzkH24btF9yDxLMJjeSJ8qfzcFANPGa7gG3tRSXQzxACuVzVPvWjU=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R841e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037067111;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
+ TI=SMTPD_---0W6PXFHz_1715602344; 
+Received: from 30.198.0.184(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0W6PXFHz_1715602344) by smtp.aliyun-inc.com;
+ Mon, 13 May 2024 20:12:25 +0800
+Message-ID: <186ca6a0-0faf-4639-83e8-17fc211ef407@linux.alibaba.com>
+Date: Mon, 13 May 2024 20:11:39 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v9 3/6] target/riscv: Add helper functions to calculate
+ current number of masked bits for pointer masking
+To: Alexey Baturo <baturo.alexey@gmail.com>
+Cc: richard.henderson@linaro.org, space.monkey.delivers@gmail.com,
+ palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
+ kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+References: <20240511101053.1875596-1-me@deliversmonkey.space>
+ <20240511101053.1875596-4-me@deliversmonkey.space>
+Content-Language: en-US
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20240511101053.1875596-4-me@deliversmonkey.space>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::229;
- envelope-from=rkanwal@rivosinc.com; helo=mail-lj1-x229.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Received-SPF: pass client-ip=115.124.30.99;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-99.freemail.mail.aliyun.com
+X-Spam_score_int: -174
+X-Spam_score: -17.5
+X-Spam_bar: -----------------
+X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,54 +73,120 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-AIA extends the width of all IRQ CSRs to 64bit even
-in 32bit systems by adding missing half CSRs.
 
-This seems to be missed while adding support for
-virtual IRQs. The whole logic seems to be correct
-except the width of the masks.
+On 2024/5/11 18:10, Alexey Baturo wrote:
+> From: Alexey Baturo <baturo.alexey@gmail.com>
+>
+> Signed-off-by: Alexey Baturo <baturo.alexey@gmail.com>
+>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>   target/riscv/cpu.h        |  5 ++++
+>   target/riscv/cpu_helper.c | 58 +++++++++++++++++++++++++++++++++++++++
+>   2 files changed, 63 insertions(+)
+>
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 52b6ba73c8..9cac723b19 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -698,8 +698,13 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
+>   
+>   bool riscv_cpu_is_32bit(RISCVCPU *cpu);
+>   
+> +bool riscv_cpu_virt_mem_enabled(CPURISCVState *env);
+> +RISCVPmPmm riscv_pm_get_pmm(CPURISCVState *env);
+> +int riscv_pm_get_pmlen(RISCVPmPmm pmm);
+> +
+>   RISCVException riscv_csrr(CPURISCVState *env, int csrno,
+>                             target_ulong *ret_value);
+> +
+>   RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
+>                              target_ulong *ret_value,
+>                              target_ulong new_value, target_ulong write_mask);
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index bf58350669..e4a127ca84 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -142,6 +142,64 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
+>       *pflags = flags;
+>   }
+>   
+> +RISCVPmPmm riscv_pm_get_pmm(CPURISCVState *env)
+> +{
+> +    int pmm = 0;
+> +#ifndef CONFIG_USER_ONLY
+> +    int priv_mode = cpu_address_mode(env);
 
-Fixes: 1697837ed9 ("target/riscv: Add M-mode virtual
-interrupt and IRQ filtering support.")
-Fixes: 40336d5b1d ("target/riscv: Add HS-mode virtual
-interrupt and IRQ filtering support.")
+This takes care of the MPRV and MPP, but is not enough.
 
-Signed-off-by: Rajnesh Kanwal <rkanwal@rivosinc.com>
----
- target/riscv/csr.c | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
+When MPRV == 1 and MXR == 1, we should ignore the address. In this case, 
+we should return PMM_FIELD_DISABLED.
 
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 45b548eb0b..c9d685dcc5 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -1193,18 +1193,18 @@ static const target_ulong sstatus_v1_10_mask = SSTATUS_SIE | SSTATUS_SPIE |
-  */
- 
- /* Bit STIP can be an alias of mip.STIP that's why it's writable in mvip. */
--static const target_ulong mvip_writable_mask = MIP_SSIP | MIP_STIP | MIP_SEIP |
-+static const uint64_t mvip_writable_mask = MIP_SSIP | MIP_STIP | MIP_SEIP |
-                                     LOCAL_INTERRUPTS;
--static const target_ulong mvien_writable_mask = MIP_SSIP | MIP_SEIP |
-+static const uint64_t mvien_writable_mask = MIP_SSIP | MIP_SEIP |
-                                     LOCAL_INTERRUPTS;
- 
--static const target_ulong sip_writable_mask = SIP_SSIP | LOCAL_INTERRUPTS;
--static const target_ulong hip_writable_mask = MIP_VSSIP;
--static const target_ulong hvip_writable_mask = MIP_VSSIP | MIP_VSTIP |
-+static const uint64_t sip_writable_mask = SIP_SSIP | LOCAL_INTERRUPTS;
-+static const uint64_t hip_writable_mask = MIP_VSSIP;
-+static const uint64_t hvip_writable_mask = MIP_VSSIP | MIP_VSTIP |
-                                     MIP_VSEIP | LOCAL_INTERRUPTS;
--static const target_ulong hvien_writable_mask = LOCAL_INTERRUPTS;
-+static const uint64_t hvien_writable_mask = LOCAL_INTERRUPTS;
- 
--static const target_ulong vsip_writable_mask = MIP_VSSIP | LOCAL_INTERRUPTS;
-+static const uint64_t vsip_writable_mask = MIP_VSSIP | LOCAL_INTERRUPTS;
- 
- const bool valid_vm_1_10_32[16] = {
-     [VM_1_10_MBARE] = true,
--- 
-2.34.1
+We should also consider the MPV  field, see the  comments below.
 
+> +    /* Get current PMM field */
+> +    switch (priv_mode) {
+> +    case PRV_M:
+> +        pmm = riscv_cpu_cfg(env)->ext_smmpm ?
+> +                  get_field(env->mseccfg, MSECCFG_PMM) : PMM_FIELD_DISABLED;
+> +        break;
+> +    case PRV_S:
+> +        pmm = riscv_cpu_cfg(env)->ext_smnpm ?
+> +                  get_field(env->menvcfg, MENVCFG_PMM) : PMM_FIELD_DISABLED;
+When in virtualization mode, we should use henvcfg instead of menvcfg .
+> +        break;
+> +    case PRV_U:
+> +        pmm = riscv_cpu_cfg(env)->ext_ssnpm ?
+> +                  get_field(env->senvcfg, SENVCFG_PMM) : PMM_FIELD_DISABLED;
+
+When Smode is not implemented, we should use smnpm here.
+
+> +        break;
+> +    default:
+> +        g_assert_not_reached();
+> +    }
+> +#endif
+> +    return pmm;
+> +}
+> +
+> +bool riscv_cpu_virt_mem_enabled(CPURISCVState *env)
+> +{
+> +    bool virt_mem_en = false;
+> +#ifndef CONFIG_USER_ONLY
+> +    int satp_mode = 0;
+> +    int priv_mode = cpu_address_mode(env);
+
+Or S mode is not implemented.
+
+Zhiwei
+
+> +    /* Get current PMM field */
+> +    if (riscv_cpu_mxl(env) == MXL_RV32) {
+> +        satp_mode = get_field(env->satp, SATP32_MODE);
+> +    } else {
+> +        satp_mode = get_field(env->satp, SATP64_MODE);
+> +    }
+> +    virt_mem_en = ((satp_mode != VM_1_10_MBARE) && (priv_mode != PRV_M));
+> +#endif
+> +    return virt_mem_en;
+> +}
+> +
+> +int riscv_pm_get_pmlen(RISCVPmPmm pmm)
+> +{
+> +    switch (pmm) {
+> +    case PMM_FIELD_DISABLED:
+> +        return 0;
+> +    case PMM_FIELD_PMLEN7:
+> +        return 7;
+> +    case PMM_FIELD_PMLEN16:
+> +        return 16;
+> +    default:
+> +        g_assert_not_reached();
+> +    }
+> +    return -1;
+> +}
+> +
+>   #ifndef CONFIG_USER_ONLY
+>   
+>   /*
 
