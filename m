@@ -4,85 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE70DC25B75
-	for <qemu-riscv@archiver.kernel.org>; Tue, 14 May 2024 09:23:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 764FCC04FFE
+	for <qemu-riscv@archiver.kernel.org>; Tue, 14 May 2024 10:18:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s6oN8-0006VH-KD; Tue, 14 May 2024 05:22:58 -0400
+	id 1s6pF2-0005C9-NH; Tue, 14 May 2024 06:18:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1s6oN5-0006Q5-Lv
- for qemu-riscv@nongnu.org; Tue, 14 May 2024 05:22:55 -0400
-Received: from mail-ej1-x62f.google.com ([2a00:1450:4864:20::62f])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1s6pF1-0005Bb-2u; Tue, 14 May 2024 06:18:39 -0400
+Received: from mail-vs1-xe35.google.com ([2607:f8b0:4864:20::e35])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1s6oN3-0005Zg-Kl
- for qemu-riscv@nongnu.org; Tue, 14 May 2024 05:22:55 -0400
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-a59e4136010so1375798166b.3
- for <qemu-riscv@nongnu.org>; Tue, 14 May 2024 02:22:52 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1s6pEz-0004bW-KP; Tue, 14 May 2024 06:18:38 -0400
+Received: by mail-vs1-xe35.google.com with SMTP id
+ ada2fe7eead31-47f0a45375aso1387425137.1; 
+ Tue, 14 May 2024 03:18:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1715678572; x=1716283372; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1715681916; x=1716286716; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=sQqtgD0BAbOpn3bhvamG0qImrAv7heRdXbr5/huWwMA=;
- b=k4jNm+W/tEMmRFfJ4jgDomcD0a/P/bd5Brt5KicZiI2WkQqTWgHtNDynW5hQIXj1bE
- ceIW1iH0Id+Rpatou0VesxLacBUIl37A/CJYbsLPF8urh4ewtGCx0fjT4K9JIO0WUWlA
- eksDt+dysl5V9hH9x5SnddirdjJVPR3G3gw4BdTeXhtzSMQwcW+OvwPPRqpBJji8KYun
- BohKde2a0jvg6fDVjQ1GmitH3q4upvfCQccXRrbXa+bcYJoQ0nhowD6o4Qm/xK0E5fP+
- NH1v+Tp12MxEgqOfBOp0iVY0ERBcqUm1MVZE1SNawV1jwNxUlu7lN7H/nWu/rUErdzbj
- LORA==
+ bh=jfBxzd6n34jFahXpLZ/5c2Tc/xp13VYkDa1DK+MLurM=;
+ b=nPS2ethadwT6J+W8t0hMvoCzkB9v5e3lpong9vgivNd8a83DwBL8VaY9sSurL06o43
+ G8KMOkH33sxE1e1zlS+OaLITAK6+b2x/Q+Stt5Mk0zrhyIb7+Tqx5SUaG8i8C32KKeA7
+ IsB7/cYtyiNeHUc0hICmypdv+xpqLpK/e+sGvfWPZfU9FGKEbV2uNjzwDIQ/hG7+/xPl
+ iyVbOSfa697v11U9IOPNVkOXYIFDxsbpUZ8kWBusi4DMcYNm0YUoEqceVwyt9Z0hvREo
+ k+a7x6aSloppA2jdlA6BjSNFvFC4zegAqYEW+qpA1htxZxPDhudfXmYVZ+8obteqUmwb
+ X9Rw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715678572; x=1716283372;
+ d=1e100.net; s=20230601; t=1715681916; x=1716286716;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=sQqtgD0BAbOpn3bhvamG0qImrAv7heRdXbr5/huWwMA=;
- b=WSpWzmpaZujJ6ToUnXMrkIfh9Fq++HfZX/MASUIVEAqRQiP7ze6MjyjYciKGFBseoI
- e20CvGV6jAspjNeZf7lNgesAT69vnDSGX0gDXJfSBGb7la1d9mrCUGxDojNaWoIMiSWA
- +h3ZGEmOJRwuBXPZ9rV2Cjpbqq4FROu0bJ+mqGSAZxf2NkCaYUmBqpUVxtDSLZOmnPqP
- 0M7bVx2zad+jR2ZNY8K5S45bbwZqcl++aMS8OhB4zDNvbXiDZJeU16RH/x5XGnF6hfFi
- nz6W73IIa8QdByzLFflGnTZ5DS8GnR9Hz91Qq/sp8UMUOraKk2wqPnPZoEZVNHc5fMyV
- zXKA==
+ bh=jfBxzd6n34jFahXpLZ/5c2Tc/xp13VYkDa1DK+MLurM=;
+ b=TSLknZSUDmrdCtPjQBZHLbGomUmSe9Z+NC+ds3VANHBmme2z9eK1C4DC3hYNw7MW8m
+ 7iwiBF3nqrz+AQ7lZ5GZMQlV6XASJz4WrXZNIx/oxv7xtq8OZYQMY9MllUME9eGI27W4
+ 6treamx7SGR1sgT1ySjmLKhxqn0PC7jGjtJxRivG+MqxsmzEFDPbShV5Qohyb1UUTR4c
+ YnASTnexLdJqcyKKBdF8wNmIDRh4IVvjvcrnvEbiE1kLSj1nc+I14kXtPggkvZRUOkzc
+ 4LNHEx/qh42k8AkIKMbNqieNA6E5fLqrbg5QEPZPthaiVzysw3FIipZySIVizVEYttVg
+ 4cUA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXLKsyAFCylGzYh1rPhz6WS8jR7zspr1Wxi9SIPc1PrGKWftsQuFTXIOn+siiSFCuD4SMVATM+Tph8h1kjFSTRVT8GueOw=
-X-Gm-Message-State: AOJu0YzqCPSV6qEEtwhX+bAcBxcM+irWGePUA6RZp0x7mwphwTQpWehx
- FVFHzGf5h5UG6b+6daidguwdjx371noTf65rN0ifzcZFF/SFEks1fgZ4MMwvEqk+eVMBOyjcmXC
- 8wALY9c6Enlr8+Hr6L7G3hD4z6ePQhaJyzTGJlg==
-X-Google-Smtp-Source: AGHT+IEzaz0xIgkU+cMY+UYAZ8vU19SWKEFKsG/YhSczKL3pU62vvZ6VioSCQniszBpNYcXB5h1qLuegmj+5EwHomPg=
-X-Received: by 2002:a05:6402:1746:b0:573:50a6:d3b0 with SMTP id
- 4fb4d7f45d1cf-57350a6d402mr7933301a12.3.1715678571755; Tue, 14 May 2024
- 02:22:51 -0700 (PDT)
+ AJvYcCWEA1UGmCxSq4eFITCYPe59oIg/nddCbmFxck+/LId17fP8JjDKaTN+tJ/AY3LnvzBIU6ntoWQnJlxT4lSZ8fcWjo6wCM4=
+X-Gm-Message-State: AOJu0Yx9NdPlHX/7pr0qGXqIVNd7qqiFCUaNLiFgYR5anjeVFek0SwPv
+ L0ERQdVLBeoH7BgdeqDI5orlSyhyhNsWAOeg9TvlVKKYTV3xo2tBFIQ3w3LlGPlPGqmXeuaF04Z
+ qVFpIMUhI6MTxJSLqS+221Xy72AE=
+X-Google-Smtp-Source: AGHT+IG+YGP0J00iLGdfgfIcGND+YqvN0valNNyjrabOgIcEC8Hk4INB7n+cMqUYsB28SBwBlaeFyb6YZtdOBu6F808=
+X-Received: by 2002:a05:6102:38c7:b0:47c:33fc:4619 with SMTP id
+ ada2fe7eead31-48077de578dmr10376041137.9.1715681916234; Tue, 14 May 2024
+ 03:18:36 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240507052212.291137-1-jeeheng.sia@starfivetech.com>
- <20240507052212.291137-2-jeeheng.sia@starfivetech.com>
- <CAKmqyKOmt1UAbSnVbQ2fLVwoPP3u=6r5hX+gVO2xhLKidQ-8-A@mail.gmail.com>
- <20240513023110-mutt-send-email-mst@kernel.org>
- <CAKmqyKP1fmvyNsY0uXasK7jdHK9C_cizJdiqivK=Nxtfo37OxA@mail.gmail.com>
-In-Reply-To: <CAKmqyKP1fmvyNsY0uXasK7jdHK9C_cizJdiqivK=Nxtfo37OxA@mail.gmail.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Tue, 14 May 2024 10:22:39 +0100
-Message-ID: <CAFEAcA-cF7EXRd1VZAJ=ApuBuU8=zkjhLAKkcbms9wqJy_WObA@mail.gmail.com>
-Subject: Re: [PATCH v2 1/3] qtest: allow SPCR acpi table changes
-To: Alistair Francis <alistair23@gmail.com>
-Cc: "Michael S. Tsirkin" <mst@redhat.com>,
- Sia Jee Heng <jeeheng.sia@starfivetech.com>, qemu-arm@nongnu.org, 
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org, imammedo@redhat.com, 
- anisinha@redhat.com, shannon.zhaosl@gmail.com, sunilvl@ventanamicro.com, 
- palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
- liwei1518@gmail.com, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com
+References: <20240429-countinhibit_fix-v1-0-802ec1e99133@rivosinc.com>
+ <CAKmqyKN9W+xY-gBZD=6T-iOzrX0MAMcTE4Zd74hmgTtP8hnObQ@mail.gmail.com>
+ <CAHBxVyED-ji_pr=XfeDjxUht=9qvcizK3RniijpzX6xC26oshg@mail.gmail.com>
+In-Reply-To: <CAHBxVyED-ji_pr=XfeDjxUht=9qvcizK3RniijpzX6xC26oshg@mail.gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 14 May 2024 20:18:09 +1000
+Message-ID: <CAKmqyKMWgMGSsbgMctFaUnPDgDitJdK31xcg4h+HohiD4_Me6g@mail.gmail.com>
+Subject: Re: [PATCH 0/3] Assorted fixes for PMU
+To: Atish Kumar Patra <atishp@rivosinc.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, bin.meng@windriver.com, 
+ dbarboza@ventanamicro.com, alistair.francis@wdc.com, 
+ Rajnesh Kanwal <rkanwal@rivosinc.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::62f;
- envelope-from=peter.maydell@linaro.org; helo=mail-ej1-x62f.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e35;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe35.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -100,41 +95,88 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, 13 May 2024 at 11:36, Alistair Francis <alistair23@gmail.com> wrote=
-:
+On Tue, May 14, 2024 at 5:15=E2=80=AFPM Atish Kumar Patra <atishp@rivosinc.=
+com> wrote:
 >
-> On Mon, May 13, 2024 at 4:32=E2=80=AFPM Michael S. Tsirkin <mst@redhat.co=
+> On Mon, May 13, 2024 at 11:29=E2=80=AFPM Alistair Francis <alistair23@gma=
+il.com> wrote:
+> >
+> > On Tue, Apr 30, 2024 at 5:29=E2=80=AFAM Atish Patra <atishp@rivosinc.co=
 m> wrote:
-> >
-> > On Mon, May 13, 2024 at 01:55:50PM +1000, Alistair Francis wrote:
-> > > On Tue, May 7, 2024 at 3:24=E2=80=AFPM Sia Jee Heng
-> > > <jeeheng.sia@starfivetech.com> wrote:
 > > >
-> > > Can you describe why you are doing this and that it will be reverted
-> > > in the commit message?
+> > > This series contains few miscallenous fixes related to hpmcounters
+> > > and related code. The first patch fixes an issue with cycle/instret
+> > > counters overcouting while the remaining two are more for specificati=
+on
+> > > compliance.
 > > >
-> > > Alistair
+> > > Signed-off-by: Atish Patra <atishp@rivosinc.com>
+> > > ---
+> > > Atish Patra (3):
+> > >       target/riscv: Save counter values during countinhibit update
+> > >       target/riscv: Enforce WARL behavior for scounteren/hcounteren
+> > >       target/riscv: Fix the predicate functions for mhpmeventhX CSRs
 > >
-> > What motivation are you asking? This follows the normal acpi test updat=
-e
-> > procedure.
+> > Thanks!
+> >
+> > Applied to riscv-to-apply.next
+> >
 >
-> I find it clearer to have commits describe that they are disabling
-> tests for a specific reason. That way it's easier to track what's
-> going on.
+> Hi Alistair,
+> Thanks for your review. But the patch 1 had some comments about
+> vmstate which needs updating.
+
+Ah, I did read the comments but forgot that you were going to bump the vers=
+ion.
+
+> We also found a few more fixes that I was planning to include in v2.
+
+I found that patch `target/riscv: Save counter values during
+countinhibit update` gives me this error as well
+
+../target/riscv/csr.c: In function =E2=80=98write_mcountinhibit=E2=80=99:
+../target/riscv/csr.c:1981:44: error: too few arguments to function =E2=80=
+=98get_ticks=E2=80=99
+1981 |                 counter->mhpmcounter_val =3D get_ticks(false) -
+     |                                            ^~~~~~~~~
+../target/riscv/csr.c:765:21: note: declared here
+ 765 | static target_ulong get_ticks(bool shift, bool instructions)
+     |                     ^~~~~~~~~
+../target/riscv/csr.c:1985:49: error: too few arguments to function =E2=80=
+=98get_ticks=E2=80=99
+1985 |                     counter->mhpmcounterh_val =3D get_ticks(false) -
+     |                                                 ^~~~~~~~~
+../target/riscv/csr.c:765:21: note: declared here
+ 765 | static target_ulong get_ticks(bool shift, bool instructions)
+     |                     ^~~~~~~~~
+
+
+
 >
-> If ACPI test updates don't usually do that then that's fine with me
+> I can send a separate fixes series on top riscv-to-apply.next or this
+> series can be dropped for the time being.
 
-The only reason for the existence of this ignore-these-blobs file
-is for the purpose of the commit sequence:
- * add the blobs to the whitelist
- * make a change that alters what the expected blobs are
- * regenerate the golden-reference blobs and remove the items
-   from the whitelist
+I'm going to drop it due to the build error above
 
-So we don't usually say much in the commit that is adding a blob
-to the whitelist.
+Alistair
 
-thanks
--- PMM
+> You can queue it v2 later. Let me know what you prefer.
+>
+>
+> > Alistair
+> >
+> > >
+> > >  target/riscv/cpu.h     |   1 -
+> > >  target/riscv/csr.c     | 111 ++++++++++++++++++++++++++++++---------=
+----------
+> > >  target/riscv/machine.c |   1 -
+> > >  3 files changed, 68 insertions(+), 45 deletions(-)
+> > > ---
+> > > base-commit: 1642f979a71a5667a05070be2df82f48bd43ad7a
+> > > change-id: 20240428-countinhibit_fix-c6a1c11f4375
+> > > --
+> > > Regards,
+> > > Atish patra
+> > >
+> > >
 
