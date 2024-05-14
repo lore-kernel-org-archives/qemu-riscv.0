@@ -4,79 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C44CC04FFE
-	for <qemu-riscv@archiver.kernel.org>; Tue, 14 May 2024 06:30:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31D27C25B78
+	for <qemu-riscv@archiver.kernel.org>; Tue, 14 May 2024 07:10:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s6lfc-0005LB-0b; Tue, 14 May 2024 02:29:52 -0400
+	id 1s6mHt-0006g0-RY; Tue, 14 May 2024 03:09:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1s6lfa-0005Ki-Bv; Tue, 14 May 2024 02:29:50 -0400
-Received: from mail-vs1-xe2c.google.com ([2607:f8b0:4864:20::e2c])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1s6mHr-0006fX-5P
+ for qemu-riscv@nongnu.org; Tue, 14 May 2024 03:09:24 -0400
+Received: from mail-ej1-x62d.google.com ([2a00:1450:4864:20::62d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1s6lfY-0004hJ-Ps; Tue, 14 May 2024 02:29:50 -0400
-Received: by mail-vs1-xe2c.google.com with SMTP id
- ada2fe7eead31-47f2f9f2ac8so1949765137.2; 
- Mon, 13 May 2024 23:29:47 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1s6mHd-0003ky-92
+ for qemu-riscv@nongnu.org; Tue, 14 May 2024 03:09:22 -0400
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-a5a4bc9578cso676380966b.2
+ for <qemu-riscv@nongnu.org>; Tue, 14 May 2024 00:09:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1715668187; x=1716272987; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GRWTjSX8q/8ry4JuhiBEh7ENYW15WvPLy8od6AOg3M4=;
- b=lPXpMDNfrECJmwhlSDWfyEp7K7ot1n5fDK/ifmnJCaCNSWDr86RLI2nEmQmwZbCJf7
- 5HP0VbUQe0WFguQzT+QS+8sf5V9nExQrOaLBD1jqM2XLkGcttETFeghUKxa0MtJvnwwC
- S2cVdn8TrIgEgBjOJwgubhNk7HggqbXpSo8gG2humiou8qx9BxVGyJBF+io5nu/hh8G/
- RWYlgY4llbPi5/l4X24jMHC6Byj7Kg+45fzhQpRgShilUq9cs4X0PjMd40zyCC+PEttf
- Rq2Ty1VPlP4xipla1alVQw+LGONTig3lk+onBHTsOPbvrStJDG25/ywwZIvfrTeYV5Lb
- KBlA==
+ d=linaro.org; s=google; t=1715670546; x=1716275346; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=4+lWxFs2wtlX24WEMZeLIwE8PA1PCRV32w5dXu998A8=;
+ b=uR8p43RsZwZDMEDmjxJ9XC6YMhUgdhuuOown/bRBO8m5/TZKhy0ihWMIX4QfkiXN+G
+ ZZC7ntgptoSDCrBSW3Dg7RwchPTzY8cF8HPSvELXZB/VcnoJR6n7NTDom5yRehfoJQ7Q
+ IrNDkEZJnwdHZZxw51U8W+oD0KYBDSXVy5uEhMIPcGobWA00h/s9IREo9Z2O5+ogjfm8
+ cWQsCLoKLB0Y0bvhXuCLcDWjATw1oq4SaLoprzkaxwMPO/J0OF4YJ7ivCpOM2w4tuG7l
+ kTR865wu85kHiV/2/EhZfBBArUKEjpf6c1PIFqvwIHgMNdENTtZ55fa2tN4b0aVaf+yl
+ S3LA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715668187; x=1716272987;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=GRWTjSX8q/8ry4JuhiBEh7ENYW15WvPLy8od6AOg3M4=;
- b=t4v3vfYOZdV47agh6ZgKHa0Q+yDU6mY6FEkJ4WmuhmSC8MXcuUVg6NnVbP/C1/p2qy
- Z28lCQGLcafhT7CaYbg7pFHLN1v042YpNkv1WBtcIFU+0xHwm7QQCMS5YSLAKrCaSFcZ
- mPMAfBM+ybMLwl16lfYvq4RV9PxzC0opegU/Ne1UgRuFd7XtdxEpz4Dcrn/zB+PdTWDk
- bx5T87Lm8bRtkiFBDDnYXwR5ALs4XaTS90m9wnWOk7l4EbgzTITMWGod1P4JPKYsQCo0
- F/4XqI/YNDOBQwyh4j6Abj7O6CLE5cKNOW5PD9L/xJK0vIjZr6sjDDiYDsAU3/BsELs/
- N9PQ==
+ d=1e100.net; s=20230601; t=1715670546; x=1716275346;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=4+lWxFs2wtlX24WEMZeLIwE8PA1PCRV32w5dXu998A8=;
+ b=EJGeFOjl79p6qPgOPVYlaQAGRK2ftb2zXYB8pZ1MPtgRGrsyX+tGTiKl3ceSqtNB+M
+ v4GYVPEfPSgO0k75eU4VRDSeJIBrGuHryYRhOof7Hefn/juHAGnXVO6K7CevmJ2yCysa
+ Az2Ehb/ZhREmaClXNEjWBWRChXxtAbruKzGmZcDZ5jiQqJa7AknnIOYY63yz44KJYPkO
+ rmY5Jp6PxpCKZ9kk26SPU7o/isbtgM5C1tbf/KhlQcKIVTa0hAZUThgqGl0hOAjuvfsd
+ EQkoFoepwXMPaY6YulLkxULjVw0P7VZzj/nQRxbu5EVTxvP1OHDFCB9fjFYw5Jtt8uWN
+ cMXg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV2Zhkqf5F7DxPryK1QnY5zWlSMq9TJSroHbuN9zvnXdvAd/jVgY4YC/pX72J5ZzGapmYycejvV4kdqPtWGzoS1WpgP5r8=
-X-Gm-Message-State: AOJu0YznR7RTxTBbTRKTYLoprrjmK9xK679u2DUFoxwuaP+P0zPu14d1
- s+cn6OKABBTwBDM4y8b0YPUtKQItQvO4QWTLqMZ+yn7ooe9ZfKq2KbX7A3SqhlPEiBpryjQyIWg
- YJfa+czLMys2NtqlAGxpjs+jKTQY=
-X-Google-Smtp-Source: AGHT+IFnVT9gyewnXmAE3a2SeEKjreEnkW/B2esUsBC2qBzeZUS7+TiTs8YLaeEmv54hYLCptesvzss2iMuWKug9Tsc=
-X-Received: by 2002:a05:6102:2ac1:b0:47b:d787:9ca6 with SMTP id
- ada2fe7eead31-48077de307emr12236431137.18.1715668186827; Mon, 13 May 2024
- 23:29:46 -0700 (PDT)
+ AJvYcCUNnUSiXfzUvwpr8yQqvGFuYb3QXBVT0z/5d5nqe3NAp6p/fCRbESwEREF4snJTUpXjhfFC0bM9uH73nACtQEV+defxyxU=
+X-Gm-Message-State: AOJu0YzUdNbOH3XluDiEukQj6EQwF4RXsu+ZbxciA1b5ZO8oiaHgDayX
+ 9qb5RPc7zdugMpXenmfbLBztEJPFTas3OkSiJsdHgDWqDGqGZDvVF90Bf7Z4sIs=
+X-Google-Smtp-Source: AGHT+IFzE2tpwm0M5pqRJSGBmM+Mzi3oohh3wfIfiQ80AuN01NDSv9G/9uPsqF2rCf4okKedIps58A==
+X-Received: by 2002:a17:906:3512:b0:a59:a282:5dbd with SMTP id
+ a640c23a62f3a-a5a2d676474mr1121873666b.66.1715670545834; 
+ Tue, 14 May 2024 00:09:05 -0700 (PDT)
+Received: from [10.1.1.126] ([149.14.240.163])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a5a179c7fdasm684484966b.128.2024.05.14.00.09.05
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 14 May 2024 00:09:05 -0700 (PDT)
+Message-ID: <862d4e3a-a470-4157-bdce-e2037f7f44d6@linaro.org>
+Date: Tue, 14 May 2024 09:09:02 +0200
 MIME-Version: 1.0
-References: <20240429-countinhibit_fix-v1-0-802ec1e99133@rivosinc.com>
-In-Reply-To: <20240429-countinhibit_fix-v1-0-802ec1e99133@rivosinc.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 14 May 2024 16:29:20 +1000
-Message-ID: <CAKmqyKN9W+xY-gBZD=6T-iOzrX0MAMcTE4Zd74hmgTtP8hnObQ@mail.gmail.com>
-Subject: Re: [PATCH 0/3] Assorted fixes for PMU
-To: Atish Patra <atishp@rivosinc.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, bin.meng@windriver.com, 
- dbarboza@ventanamicro.com, alistair.francis@wdc.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2c;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2c.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] target/riscv: rvzicbo: Fixup CBO extension register
+ calculation
+To: Alistair Francis <alistair23@gmail.com>, qemu-riscv@nongnu.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com,
+ bin.meng@windriver.com, dbarboza@ventanamicro.com, qemu-devel@nongnu.org
+Cc: Alistair Francis <alistair.francis@wdc.com>, fabian.thomas@cispa.de,
+ Bin Meng <bmeng.cn@gmail.com>
+References: <20240514023910.301766-1-alistair.francis@wdc.com>
+Content-Language: en-US
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20240514023910.301766-1-alistair.francis@wdc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::62d;
+ envelope-from=richard.henderson@linaro.org; helo=mail-ej1-x62d.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -92,39 +100,39 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Apr 30, 2024 at 5:29=E2=80=AFAM Atish Patra <atishp@rivosinc.com> w=
-rote:
->
-> This series contains few miscallenous fixes related to hpmcounters
-> and related code. The first patch fixes an issue with cycle/instret
-> counters overcouting while the remaining two are more for specification
-> compliance.
->
-> Signed-off-by: Atish Patra <atishp@rivosinc.com>
+On 5/14/24 04:39, Alistair Francis wrote:
+> When running the instruction
+> 
+> ```
+>      cbo.flush 0(x0)
+> ```
+> 
+> QEMU would segfault.
+> 
+> The issue was in cpu_gpr[a->rs1] as QEMU does not have cpu_gpr[0]
+> allocated.
+> 
+> In order to fix this let's use the existing get_address()
+> helper. This also has the benefit of performing pointer mask
+> calculations on the address specified in rs1.
+> 
+> The pointer masking specificiation specifically states:
+> 
+> """
+> Cache Management Operations: All instructions in Zicbom, Zicbop and Zicboz
+> """
+> 
+> So this is the correct behaviour and we previously have been incorrectly
+> not masking the address.
+> 
+> Signed-off-by: Alistair Francis<alistair.francis@wdc.com>
+> Reported-by: Fabian Thomas<fabian.thomas@cispa.de>
+> Fixes: e05da09b7cfd ("target/riscv: implement Zicbom extension")
 > ---
-> Atish Patra (3):
->       target/riscv: Save counter values during countinhibit update
->       target/riscv: Enforce WARL behavior for scounteren/hcounteren
->       target/riscv: Fix the predicate functions for mhpmeventhX CSRs
+>   target/riscv/insn_trans/trans_rvzicbo.c.inc | 16 ++++++++++++----
+>   1 file changed, 12 insertions(+), 4 deletions(-)
 
-Thanks!
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-Applied to riscv-to-apply.next
-
-Alistair
-
->
->  target/riscv/cpu.h     |   1 -
->  target/riscv/csr.c     | 111 ++++++++++++++++++++++++++++++-------------=
-------
->  target/riscv/machine.c |   1 -
->  3 files changed, 68 insertions(+), 45 deletions(-)
-> ---
-> base-commit: 1642f979a71a5667a05070be2df82f48bd43ad7a
-> change-id: 20240428-countinhibit_fix-c6a1c11f4375
-> --
-> Regards,
-> Atish patra
->
->
+r~
 
