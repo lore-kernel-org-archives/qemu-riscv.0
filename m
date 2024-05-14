@@ -4,80 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3939C04FFE
-	for <qemu-riscv@archiver.kernel.org>; Tue, 14 May 2024 07:15:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD36CC04FFE
+	for <qemu-riscv@archiver.kernel.org>; Tue, 14 May 2024 09:11:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s6mNd-0000Sh-KE; Tue, 14 May 2024 03:15:21 -0400
+	id 1s6oBr-0001VZ-Hb; Tue, 14 May 2024 05:11:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1s6mNa-0000RV-NG
- for qemu-riscv@nongnu.org; Tue, 14 May 2024 03:15:18 -0400
-Received: from mail-lj1-x22b.google.com ([2a00:1450:4864:20::22b])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1s6oBd-0001Uc-U4
+ for qemu-riscv@nongnu.org; Tue, 14 May 2024 05:11:07 -0400
+Received: from mail-oo1-xc36.google.com ([2607:f8b0:4864:20::c36])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1s6mNX-0004tr-1m
- for qemu-riscv@nongnu.org; Tue, 14 May 2024 03:15:18 -0400
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-2e576057c06so31701661fa.0
- for <qemu-riscv@nongnu.org>; Tue, 14 May 2024 00:15:14 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1s6oBZ-0002s2-Ph
+ for qemu-riscv@nongnu.org; Tue, 14 May 2024 05:11:05 -0400
+Received: by mail-oo1-xc36.google.com with SMTP id
+ 006d021491bc7-5b277993a48so3054995eaf.1
+ for <qemu-riscv@nongnu.org>; Tue, 14 May 2024 02:11:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1715670912; x=1716275712;
- darn=nongnu.org; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RxksW1mGxFAaBNyYAzwQCnvb9fUXy05bkGDgBkqV794=;
- b=0jeB6zkRQ8Z1PlZbT9IMp7HAv1aLSPbZLZfFAqodcn7ZzxKto30paa6F0Is8xTTb65
- f/vIxjPLpIIacKfNScTu4CPFniWFYMTESEr0WXTyNSGOYUQcR7leeEvcEaW8/zlPRfRh
- UFjmP8uOnZBynG4WH6gmZD3UsmyDanYYmpzBXbgm/3H/FTfQrmToG/RVyKl+wOLI3/Jh
- Ru21KU6vtysjaZ2Tgubx82sjD9nIShPRrLBT4Ixs9OD5LsqMZvnRaNNQTWVHRzP6Seki
- yKt53SNpyqAsu+S959fsPIK796NNGutGEkP4z6c8YJyaE6QvVa8aQ5pK0efp3PskMUye
- Ha7Q==
+ d=ventanamicro.com; s=google; t=1715677860; x=1716282660; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=wFt2B2tmGMJZMVU9WuNI2mtLK6I1IwQaN12zG1udVDs=;
+ b=jnULYbvzQkHhUBqGXhGRMlMk1hWZYuxmQfPegJAr+MvyndifAGlFtaOi6VGjhWP27p
+ GxPUw29Va5WkvxPqoQYYXKhJghmMXnOYhUHtj+M9St7V4oLPEvixlwO3t7NR468nsIBf
+ +/I92vN9gGnjaAlhyh8/v32WwCmo7XPoZSNxoIUQ5V1HNn+G7c1bFS+yCeMyHtVB1g/4
+ 3aTf+X7JxpokfgZNlmfKBfosk1Oq7G1xzO8+lveicv2RTb+4qgc2iij85TlChG33MOsZ
+ sINTMsT+yWbBOFEWJxACmd17/bsAS65bKXF9DZs63u1YjZZOiFY4+SRj7vMq3+t09+Ec
+ +AdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715670912; x=1716275712;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=RxksW1mGxFAaBNyYAzwQCnvb9fUXy05bkGDgBkqV794=;
- b=fHLcEy/uzTp9kezv9JkAg4A2TmxLIRy2zkLSYWr4jLXf2FM/IZX2gYi5ZTHUCYeR23
- 423egKjTSMQ3HAUYOR+nZyxWQm94zZbK22VFjJDDTceBOldzsf9vYeVvYXrtVzQbGzCv
- eEuU4uLleWyTAi5TMrJYkWMRtS3sDULSY+IalCws7EqEGU8F9Hk8Cwf2+4mIJss4YgTg
- y4JAYSKiUhw3EFrlm9Ht/1qSqVplCSKYEVb1mzZl7DKTHKCZsKUSz+LFcHAUvdUbiBqR
- QEtZVw3yPnGOjCaRj3PMYddEX5ES8QKkWvhF7ZRn/EalyXg+Lsu7Fg4br4eXLCPQ3AZq
- d2Lw==
-X-Gm-Message-State: AOJu0Yzkov1/jzdM2PMTr6n2LaY/UsoJYwCnfAe0B89TF77v+cS57FTA
- go8FvIEiJjSVk+RQSf+SEbWrnJuuokL5CI+2/RXgowU1Ze0cyklkEk1rvlUi0/+4g8BGog3bBDp
- 8uZC2Lhtolx8idaGGhpT71R0lJ4oFDEVhiVMVqA==
-X-Google-Smtp-Source: AGHT+IHmE8C3tcKvNyFQQxm+Gi5twiCOHgYCtbxmWUtfsUVXzs1ryIiCd6VntOVn+mj5J7ASiONeZpLaRhnBqdlQKK4=
-X-Received: by 2002:a2e:bc06:0:b0:2dc:e69a:fdbc with SMTP id
- 38308e7fff4ca-2e51fd2dcd8mr94054481fa.1.1715670912122; Tue, 14 May 2024
- 00:15:12 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1715677860; x=1716282660;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=wFt2B2tmGMJZMVU9WuNI2mtLK6I1IwQaN12zG1udVDs=;
+ b=IxUKKIDo3bXozIhb3XSinwbiR7XSSWAUWzc7S6uI0AHt5AS0brKmzu6TfzRBP21xuK
+ NSw0AqVB8uL/rFhca1EjZbuzvHtdQVX3aClzrOvkPu+JPsJkaT/WA/suiQuS5ldUhZ4q
+ tUPuXG5O+r+TMMxNGC3vpNmCaL5tjQCojk7/y4l3ZouyOS4i91I4e8/kJs7lJiBsMOv/
+ MPxuSUbf9zx7UufGG4JyuMqyaq6WBacI45xRTtowNlvOE6dAt5xcDKCW1miLDfNCKWyQ
+ fDYtRrOJkmC0p2SqTk/4koJsDoDCDwb+9FtuK1kCs4cpAGXx2LJvAWdT/gWMUvtRypnX
+ JSxA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUxaegYCpeEpSzIJT/39pw9bqMpPkLdiZXtKFYmZOp8iAFqMinnbRtjbUS4Y9Mi6bQlg6jUJPWUbrsa8DuLhQHsP3FZIXw=
+X-Gm-Message-State: AOJu0YyCSBaA95JotcdqDzUnfSnSwDUxbUlEczV1mtEQSjG3RQX0ntO3
+ 3iZrG9kC7nLzOomG+xNZxJrpGImXNNAW0urNMHiuBebhNjcGPLMNxjgk1i+9EeY=
+X-Google-Smtp-Source: AGHT+IFwSqGeA5eWG79bjC1RGjAzgb6wDIiryQ4SH0yLb+ql0XeoO5VFrIbiVWtGjBtnidZEXL8rFA==
+X-Received: by 2002:a05:6358:4285:b0:193:f936:633a with SMTP id
+ e5c5f4694b2df-193f9366370mr954938155d.13.1715677860033; 
+ Tue, 14 May 2024 02:11:00 -0700 (PDT)
+Received: from [192.168.68.110] ([177.94.42.57])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-63411346dc1sm7870703a12.83.2024.05.14.02.10.55
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 14 May 2024 02:10:59 -0700 (PDT)
+Message-ID: <14e88990-963c-45ef-bf51-662d54857c6e@ventanamicro.com>
+Date: Tue, 14 May 2024 06:10:53 -0300
 MIME-Version: 1.0
-References: <20240429-countinhibit_fix-v1-0-802ec1e99133@rivosinc.com>
- <CAKmqyKN9W+xY-gBZD=6T-iOzrX0MAMcTE4Zd74hmgTtP8hnObQ@mail.gmail.com>
-In-Reply-To: <CAKmqyKN9W+xY-gBZD=6T-iOzrX0MAMcTE4Zd74hmgTtP8hnObQ@mail.gmail.com>
-From: Atish Kumar Patra <atishp@rivosinc.com>
-Date: Tue, 14 May 2024 00:15:01 -0700
-Message-ID: <CAHBxVyED-ji_pr=XfeDjxUht=9qvcizK3RniijpzX6xC26oshg@mail.gmail.com>
-Subject: Re: [PATCH 0/3] Assorted fixes for PMU
-To: Alistair Francis <alistair23@gmail.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, bin.meng@windriver.com, 
- dbarboza@ventanamicro.com, alistair.francis@wdc.com, 
- Rajnesh Kanwal <rkanwal@rivosinc.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::22b;
- envelope-from=atishp@rivosinc.com; helo=mail-lj1-x22b.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] target/riscv: rvzicbo: Fixup CBO extension register
+ calculation
+To: Alistair Francis <alistair23@gmail.com>, qemu-riscv@nongnu.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com,
+ bin.meng@windriver.com, qemu-devel@nongnu.org
+Cc: Alistair Francis <alistair.francis@wdc.com>, fabian.thomas@cispa.de,
+ Bin Meng <bmeng.cn@gmail.com>, =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?=
+ <philmd@linaro.org>, Richard Henderson <richard.henderson@linaro.org>
+References: <20240514023910.301766-1-alistair.francis@wdc.com>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20240514023910.301766-1-alistair.francis@wdc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c36;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc36.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -93,53 +102,94 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, May 13, 2024 at 11:29=E2=80=AFPM Alistair Francis <alistair23@gmail=
-.com> wrote:
->
-> On Tue, Apr 30, 2024 at 5:29=E2=80=AFAM Atish Patra <atishp@rivosinc.com>=
- wrote:
-> >
-> > This series contains few miscallenous fixes related to hpmcounters
-> > and related code. The first patch fixes an issue with cycle/instret
-> > counters overcouting while the remaining two are more for specification
-> > compliance.
-> >
-> > Signed-off-by: Atish Patra <atishp@rivosinc.com>
-> > ---
-> > Atish Patra (3):
-> >       target/riscv: Save counter values during countinhibit update
-> >       target/riscv: Enforce WARL behavior for scounteren/hcounteren
-> >       target/riscv: Fix the predicate functions for mhpmeventhX CSRs
->
-> Thanks!
->
-> Applied to riscv-to-apply.next
->
-
-Hi Alistair,
-Thanks for your review. But the patch 1 had some comments about
-vmstate which needs updating.
-We also found a few more fixes that I was planning to include in v2.
-
-I can send a separate fixes series on top riscv-to-apply.next or this
-series can be dropped for the time being.
-You can queue it v2 later. Let me know what you prefer.
 
 
-> Alistair
->
-> >
-> >  target/riscv/cpu.h     |   1 -
-> >  target/riscv/csr.c     | 111 ++++++++++++++++++++++++++++++-----------=
---------
-> >  target/riscv/machine.c |   1 -
-> >  3 files changed, 68 insertions(+), 45 deletions(-)
-> > ---
-> > base-commit: 1642f979a71a5667a05070be2df82f48bd43ad7a
-> > change-id: 20240428-countinhibit_fix-c6a1c11f4375
-> > --
-> > Regards,
-> > Atish patra
-> >
-> >
+On 5/13/24 23:39, Alistair Francis wrote:
+> When running the instruction
+> 
+> ```
+>      cbo.flush 0(x0)
+> ```
+> 
+> QEMU would segfault.
+> 
+> The issue was in cpu_gpr[a->rs1] as QEMU does not have cpu_gpr[0]
+> allocated.
+> 
+> In order to fix this let's use the existing get_address()
+> helper. This also has the benefit of performing pointer mask
+> calculations on the address specified in rs1.
+> 
+> The pointer masking specificiation specifically states:
+> 
+> """
+> Cache Management Operations: All instructions in Zicbom, Zicbop and Zicboz
+> """
+> 
+> So this is the correct behaviour and we previously have been incorrectly
+> not masking the address.
+> 
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> Reported-by: Fabian Thomas <fabian.thomas@cispa.de>
+> Fixes: e05da09b7cfd ("target/riscv: implement Zicbom extension")
+> ---
+
+LGTM but I wonder if this is the same fix as this one sent by Phil a month
+ago or so:
+
+https://lore.kernel.org/qemu-riscv/20240419110514.69697-1-philmd@linaro.org/
+("[PATCH] target/riscv: Use get_address() to get address with Zicbom extensions")
+
+
+Thanks,
+
+Daniel
+
+>   target/riscv/insn_trans/trans_rvzicbo.c.inc | 16 ++++++++++++----
+>   1 file changed, 12 insertions(+), 4 deletions(-)
+> 
+> diff --git a/target/riscv/insn_trans/trans_rvzicbo.c.inc b/target/riscv/insn_trans/trans_rvzicbo.c.inc
+> index d5d7095903..15711c3140 100644
+> --- a/target/riscv/insn_trans/trans_rvzicbo.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvzicbo.c.inc
+> @@ -31,27 +31,35 @@
+>   static bool trans_cbo_clean(DisasContext *ctx, arg_cbo_clean *a)
+>   {
+>       REQUIRE_ZICBOM(ctx);
+> -    gen_helper_cbo_clean_flush(tcg_env, cpu_gpr[a->rs1]);
+> +    TCGv src = get_address(ctx, a->rs1, 0);
+> +
+> +    gen_helper_cbo_clean_flush(tcg_env, src);
+>       return true;
+>   }
+>   
+>   static bool trans_cbo_flush(DisasContext *ctx, arg_cbo_flush *a)
+>   {
+>       REQUIRE_ZICBOM(ctx);
+> -    gen_helper_cbo_clean_flush(tcg_env, cpu_gpr[a->rs1]);
+> +    TCGv src = get_address(ctx, a->rs1, 0);
+> +
+> +    gen_helper_cbo_clean_flush(tcg_env, src);
+>       return true;
+>   }
+>   
+>   static bool trans_cbo_inval(DisasContext *ctx, arg_cbo_inval *a)
+>   {
+>       REQUIRE_ZICBOM(ctx);
+> -    gen_helper_cbo_inval(tcg_env, cpu_gpr[a->rs1]);
+> +    TCGv src = get_address(ctx, a->rs1, 0);
+> +
+> +    gen_helper_cbo_inval(tcg_env, src);
+>       return true;
+>   }
+>   
+>   static bool trans_cbo_zero(DisasContext *ctx, arg_cbo_zero *a)
+>   {
+>       REQUIRE_ZICBOZ(ctx);
+> -    gen_helper_cbo_zero(tcg_env, cpu_gpr[a->rs1]);
+> +    TCGv src = get_address(ctx, a->rs1, 0);
+> +
+> +    gen_helper_cbo_zero(tcg_env, src);
+>       return true;
+>   }
 
