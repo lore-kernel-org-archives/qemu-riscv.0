@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 566C2C04FFE
-	for <qemu-riscv@archiver.kernel.org>; Tue, 14 May 2024 06:23:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C44CC04FFE
+	for <qemu-riscv@archiver.kernel.org>; Tue, 14 May 2024 06:30:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s6lZn-0002tQ-Ty; Tue, 14 May 2024 02:23:51 -0400
+	id 1s6lfc-0005LB-0b; Tue, 14 May 2024 02:29:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1s6lZf-0002pb-QL; Tue, 14 May 2024 02:23:43 -0400
-Received: from mail-vk1-xa33.google.com ([2607:f8b0:4864:20::a33])
+ id 1s6lfa-0005Ki-Bv; Tue, 14 May 2024 02:29:50 -0400
+Received: from mail-vs1-xe2c.google.com ([2607:f8b0:4864:20::e2c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1s6lZV-00041c-8y; Tue, 14 May 2024 02:23:43 -0400
-Received: by mail-vk1-xa33.google.com with SMTP id
- 71dfb90a1353d-4df3da90b6cso2145526e0c.2; 
- Mon, 13 May 2024 23:23:31 -0700 (PDT)
+ id 1s6lfY-0004hJ-Ps; Tue, 14 May 2024 02:29:50 -0400
+Received: by mail-vs1-xe2c.google.com with SMTP id
+ ada2fe7eead31-47f2f9f2ac8so1949765137.2; 
+ Mon, 13 May 2024 23:29:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1715667810; x=1716272610; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1715668187; x=1716272987; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=u9BxGImZ7yb2DVgj2h4msXpaSc5PWY4eUd4882LFy0g=;
- b=geGXFj+HIqiGa/W2oec4FyfYULLfVClgLsmJ066KeNz5t8gyY/oDHnDQLQX7me8svC
- AaT2MnJMlAtV0UvlDrOsNcSGgZTaCu/YTuCBnHnKo3cDuyLp1YcQumIIqMDuTEHC/Z0y
- XLj6Eaj0CNMqrGuse+gUNTtcx2+NnLclzNz+qUnk9sfu1Sdolxuuk25psUFjOVFkJ41/
- /cBvAJR5cmy+hPI/pY7kQn89GMC/gxIJUZLBcWwCoE0uwqyLnit1Hd+9pB95aiWOYv2c
- xc+hr4su0fs2rOOHPuwzbl7ZYhTpBkD0RBvBUIH99+gG5a24WAzNIFe7pjBPVE4iIijS
- xxzw==
+ bh=GRWTjSX8q/8ry4JuhiBEh7ENYW15WvPLy8od6AOg3M4=;
+ b=lPXpMDNfrECJmwhlSDWfyEp7K7ot1n5fDK/ifmnJCaCNSWDr86RLI2nEmQmwZbCJf7
+ 5HP0VbUQe0WFguQzT+QS+8sf5V9nExQrOaLBD1jqM2XLkGcttETFeghUKxa0MtJvnwwC
+ S2cVdn8TrIgEgBjOJwgubhNk7HggqbXpSo8gG2humiou8qx9BxVGyJBF+io5nu/hh8G/
+ RWYlgY4llbPi5/l4X24jMHC6Byj7Kg+45fzhQpRgShilUq9cs4X0PjMd40zyCC+PEttf
+ Rq2Ty1VPlP4xipla1alVQw+LGONTig3lk+onBHTsOPbvrStJDG25/ywwZIvfrTeYV5Lb
+ KBlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715667810; x=1716272610;
+ d=1e100.net; s=20230601; t=1715668187; x=1716272987;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=u9BxGImZ7yb2DVgj2h4msXpaSc5PWY4eUd4882LFy0g=;
- b=PvIWK0iivWhSfB1qvlyyVdcuARZP5+9kvfZeitH3BSV9Yql7gifHt9vKTo8s+lNHDo
- G/xPQeTaeYoOIKTfBTCb8wo3i2odbV98gXYmzW4JQpEfFfrfVR5/fVxeXStKE4kLdsjS
- 7zbynu0jX23uA50vTfedMH8yYw9EhXBIR1a2KOX8aqmugSbl2rpMZVqQjqy7afWmyJk2
- n9A617mG9+l/NBWBfd1cbNzKcLcvOn65MV2aP1Rwer6rCY/VF5iMr3grjGOQH2AXa2E/
- MWXJf1LTYvDMT8LSUB6lusgQqKedHGMd1eRtg0c/ZTYTtzmkhMHjCeu7gbLpB/bpWUsu
- wt5w==
+ bh=GRWTjSX8q/8ry4JuhiBEh7ENYW15WvPLy8od6AOg3M4=;
+ b=t4v3vfYOZdV47agh6ZgKHa0Q+yDU6mY6FEkJ4WmuhmSC8MXcuUVg6NnVbP/C1/p2qy
+ Z28lCQGLcafhT7CaYbg7pFHLN1v042YpNkv1WBtcIFU+0xHwm7QQCMS5YSLAKrCaSFcZ
+ mPMAfBM+ybMLwl16lfYvq4RV9PxzC0opegU/Ne1UgRuFd7XtdxEpz4Dcrn/zB+PdTWDk
+ bx5T87Lm8bRtkiFBDDnYXwR5ALs4XaTS90m9wnWOk7l4EbgzTITMWGod1P4JPKYsQCo0
+ F/4XqI/YNDOBQwyh4j6Abj7O6CLE5cKNOW5PD9L/xJK0vIjZr6sjDDiYDsAU3/BsELs/
+ N9PQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVn+lQYpm0B00pW4rI+YaaB7sZ6UFe+v4skHFYZIvl3EIFLSD1/JzGduw5TKvqmMfmZBElk4Oqpt/9hSQ2Qya6LprTZ7Uw=
-X-Gm-Message-State: AOJu0YwaoHuDltNh2Z7eh+gy2csmOXyYAkTYnpcYhhJMCDUnxgnl6zeG
- pq2XjBJ1xRkJvfooOBxYN9Qe72PJPWU/oHIx0eM0f8AS2n7eLEkA9tsVI+EEP35Rho5k6pDCNDi
- YIxjrUypPZduOgmeyNUhw2ViD2cxaW5U+V2w=
-X-Google-Smtp-Source: AGHT+IEPxp814nRm2idT3t/I+haPAPuzZ/S7SI7DKWYZQWepedcdp1m4B6/jRTMEhsF/3qE/EbiC/Cu8DI34P3jRlc4=
-X-Received: by 2002:a05:6122:914:b0:4d3:3f2b:dc63 with SMTP id
- 71dfb90a1353d-4df882a16cdmr9478403e0c.5.1715667809707; Mon, 13 May 2024
- 23:23:29 -0700 (PDT)
+ AJvYcCV2Zhkqf5F7DxPryK1QnY5zWlSMq9TJSroHbuN9zvnXdvAd/jVgY4YC/pX72J5ZzGapmYycejvV4kdqPtWGzoS1WpgP5r8=
+X-Gm-Message-State: AOJu0YznR7RTxTBbTRKTYLoprrjmK9xK679u2DUFoxwuaP+P0zPu14d1
+ s+cn6OKABBTwBDM4y8b0YPUtKQItQvO4QWTLqMZ+yn7ooe9ZfKq2KbX7A3SqhlPEiBpryjQyIWg
+ YJfa+czLMys2NtqlAGxpjs+jKTQY=
+X-Google-Smtp-Source: AGHT+IFnVT9gyewnXmAE3a2SeEKjreEnkW/B2esUsBC2qBzeZUS7+TiTs8YLaeEmv54hYLCptesvzss2iMuWKug9Tsc=
+X-Received: by 2002:a05:6102:2ac1:b0:47b:d787:9ca6 with SMTP id
+ ada2fe7eead31-48077de307emr12236431137.18.1715668186827; Mon, 13 May 2024
+ 23:29:46 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240429-countinhibit_fix-v1-0-802ec1e99133@rivosinc.com>
- <20240429-countinhibit_fix-v1-2-802ec1e99133@rivosinc.com>
-In-Reply-To: <20240429-countinhibit_fix-v1-2-802ec1e99133@rivosinc.com>
+In-Reply-To: <20240429-countinhibit_fix-v1-0-802ec1e99133@rivosinc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 14 May 2024 16:23:02 +1000
-Message-ID: <CAKmqyKOz=W270USCi8aZ5teLwnifCWa93pLHAZN65_17Nk01dA@mail.gmail.com>
-Subject: Re: [PATCH 2/3] target/riscv: Enforce WARL behavior for
- scounteren/hcounteren
+Date: Tue, 14 May 2024 16:29:20 +1000
+Message-ID: <CAKmqyKN9W+xY-gBZD=6T-iOzrX0MAMcTE4Zd74hmgTtP8hnObQ@mail.gmail.com>
+Subject: Re: [PATCH 0/3] Assorted fixes for PMU
 To: Atish Patra <atishp@rivosinc.com>
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, bin.meng@windriver.com, 
  dbarboza@ventanamicro.com, alistair.francis@wdc.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a33;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa33.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2c;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2c.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
 X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, SPF_HELO_NONE=0.001,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -96,57 +95,36 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On Tue, Apr 30, 2024 at 5:29=E2=80=AFAM Atish Patra <atishp@rivosinc.com> w=
 rote:
 >
-> scounteren/hcountern are also WARL registers similar to mcountern.
-> Only set the bits for the available counters during the write to
-> preserve the WARL behavior.
+> This series contains few miscallenous fixes related to hpmcounters
+> and related code. The first patch fixes an issue with cycle/instret
+> counters overcouting while the remaining two are more for specification
+> compliance.
 >
 > Signed-off-by: Atish Patra <atishp@rivosinc.com>
+> ---
+> Atish Patra (3):
+>       target/riscv: Save counter values during countinhibit update
+>       target/riscv: Enforce WARL behavior for scounteren/hcounteren
+>       target/riscv: Fix the predicate functions for mhpmeventhX CSRs
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
+>
+>  target/riscv/cpu.h     |   1 -
+>  target/riscv/csr.c     | 111 ++++++++++++++++++++++++++++++-------------=
+------
+>  target/riscv/machine.c |   1 -
+>  3 files changed, 68 insertions(+), 45 deletions(-)
 > ---
->  target/riscv/csr.c | 12 ++++++++++--
->  1 file changed, 10 insertions(+), 2 deletions(-)
->
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 68ca31aff47d..a01911541d67 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -2843,7 +2843,11 @@ static RISCVException read_scounteren(CPURISCVStat=
-e *env, int csrno,
->  static RISCVException write_scounteren(CPURISCVState *env, int csrno,
->                                         target_ulong val)
->  {
-> -    env->scounteren =3D val;
-> +    RISCVCPU *cpu =3D env_archcpu(env);
-> +
-> +    /* WARL register - disable unavailable counters */
-> +    env->scounteren =3D val & (cpu->pmu_avail_ctrs | COUNTEREN_CY | COUN=
-TEREN_TM |
-> +                             COUNTEREN_IR);
->      return RISCV_EXCP_NONE;
->  }
->
-> @@ -3475,7 +3479,11 @@ static RISCVException read_hcounteren(CPURISCVStat=
-e *env, int csrno,
->  static RISCVException write_hcounteren(CPURISCVState *env, int csrno,
->                                         target_ulong val)
->  {
-> -    env->hcounteren =3D val;
-> +    RISCVCPU *cpu =3D env_archcpu(env);
-> +
-> +    /* WARL register - disable unavailable counters */
-> +    env->hcounteren =3D val & (cpu->pmu_avail_ctrs | COUNTEREN_CY | COUN=
-TEREN_TM |
-> +                             COUNTEREN_IR);
->      return RISCV_EXCP_NONE;
->  }
->
->
+> base-commit: 1642f979a71a5667a05070be2df82f48bd43ad7a
+> change-id: 20240428-countinhibit_fix-c6a1c11f4375
 > --
-> 2.34.1
+> Regards,
+> Atish patra
 >
 >
 
