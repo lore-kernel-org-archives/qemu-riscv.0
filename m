@@ -4,69 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C602C04FFE
-	for <qemu-riscv@archiver.kernel.org>; Tue, 14 May 2024 09:16:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE70DC25B75
+	for <qemu-riscv@archiver.kernel.org>; Tue, 14 May 2024 09:23:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s6oGS-0002l6-QH; Tue, 14 May 2024 05:16:04 -0400
+	id 1s6oN8-0006VH-KD; Tue, 14 May 2024 05:22:58 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1s6oGI-0002gq-3L
- for qemu-riscv@nongnu.org; Tue, 14 May 2024 05:15:56 -0400
-Received: from mail-ej1-x629.google.com ([2a00:1450:4864:20::629])
+ id 1s6oN5-0006Q5-Lv
+ for qemu-riscv@nongnu.org; Tue, 14 May 2024 05:22:55 -0400
+Received: from mail-ej1-x62f.google.com ([2a00:1450:4864:20::62f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1s6oGF-0003hc-QY
- for qemu-riscv@nongnu.org; Tue, 14 May 2024 05:15:53 -0400
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-a59b81d087aso1330711166b.3
- for <qemu-riscv@nongnu.org>; Tue, 14 May 2024 02:15:50 -0700 (PDT)
+ id 1s6oN3-0005Zg-Kl
+ for qemu-riscv@nongnu.org; Tue, 14 May 2024 05:22:55 -0400
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-a59e4136010so1375798166b.3
+ for <qemu-riscv@nongnu.org>; Tue, 14 May 2024 02:22:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1715678150; x=1716282950; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3kIbnS0lTiOmRMGPnEagmHyZQHMzjCCiO4kX1MmPS/A=;
- b=M9b3SufB9wsAjtcqanocYXllUKJe5yPseR6diomEHRb87Oom8ImhsGVeKiiLtj+erH
- 7MIemrycmCDftwQ+lsBNMoFGXd5TcDsqIkESrr3YQILpUmNbtdivn8qio+6zNhTaqAuq
- cRRvrLmP8+PK23Kh1kcCWPEzw3ACxoy6UdUMhQW10n8jJYQnRh8VqjdBEwGIh3KH71n8
- fZlCm8H1BTYmqZZR0AHZEkbww4WAmCLVQOAfXyW82c31lnew972IVymg+/K3Li1ib4YX
- JBKlotc4KBpSSbpVcU8GG2IA+DL1ABi76VQUJZw0KYybhdZmRj95chfozZ4QC2a/eyb2
- TAoA==
+ d=linaro.org; s=google; t=1715678572; x=1716283372; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=sQqtgD0BAbOpn3bhvamG0qImrAv7heRdXbr5/huWwMA=;
+ b=k4jNm+W/tEMmRFfJ4jgDomcD0a/P/bd5Brt5KicZiI2WkQqTWgHtNDynW5hQIXj1bE
+ ceIW1iH0Id+Rpatou0VesxLacBUIl37A/CJYbsLPF8urh4ewtGCx0fjT4K9JIO0WUWlA
+ eksDt+dysl5V9hH9x5SnddirdjJVPR3G3gw4BdTeXhtzSMQwcW+OvwPPRqpBJji8KYun
+ BohKde2a0jvg6fDVjQ1GmitH3q4upvfCQccXRrbXa+bcYJoQ0nhowD6o4Qm/xK0E5fP+
+ NH1v+Tp12MxEgqOfBOp0iVY0ERBcqUm1MVZE1SNawV1jwNxUlu7lN7H/nWu/rUErdzbj
+ LORA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715678150; x=1716282950;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=3kIbnS0lTiOmRMGPnEagmHyZQHMzjCCiO4kX1MmPS/A=;
- b=CW0YHaM/ylcbsyogQgWZt4eNDgT537cbbhs04m2Yvkk/yrZVveTDtmU7DnOPlT4wpF
- Mtj65sF8VYmdzYTyUfDsohFBP7H+yvXGyQnVDuBe3AOd3WKUp7tAVLJbrLtKXZX+ltE4
- pSffNm/NAwpEC+whNGTssFXaJavKHwCondYdUDkMlEuOKv07HzbseBu+bvuRCOtyCnLJ
- d0d8ETaFRNZvoDSTWB0lwsDlBXD5UHNi8cQ0JQEXNcvtk3NPsqYUyZ9SDQwJOF8sYhBC
- qavm5HuxKM4RgvnSMH1xVawHPlhfPNbyHAXw8W0galebqSAuuBRPy41MBCsoZGaK36qb
- QX2g==
-X-Gm-Message-State: AOJu0Yy0Z9D4SJTg5DjdZQn5Q7jCbuHFJwMa5x/FbQISGpqffU17mYnF
- kkE6s+bSj/hWaxbRXh1Ii57LU9R+exHvjD01aJUA5YcH0mP2TsMRIuyjVK6a0/neieiyNq5AHPh
- GW2EiUHc2jQhEOfiPoQra7ycrH6DbQ7g9dcTRYA==
-X-Google-Smtp-Source: AGHT+IHIQ5ejF4HqOkKMTuj16sAX8YMk45lgnbfrJSIzaZfi4oic7HLHSG0SCvjd/GkUSitdboV9Aw42MEejWdUBK34=
-X-Received: by 2002:aa7:d3ca:0:b0:574:d098:37b0 with SMTP id
- 4fb4d7f45d1cf-574d0983807mr4382619a12.7.1715678149617; Tue, 14 May 2024
- 02:15:49 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1715678572; x=1716283372;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=sQqtgD0BAbOpn3bhvamG0qImrAv7heRdXbr5/huWwMA=;
+ b=WSpWzmpaZujJ6ToUnXMrkIfh9Fq++HfZX/MASUIVEAqRQiP7ze6MjyjYciKGFBseoI
+ e20CvGV6jAspjNeZf7lNgesAT69vnDSGX0gDXJfSBGb7la1d9mrCUGxDojNaWoIMiSWA
+ +h3ZGEmOJRwuBXPZ9rV2Cjpbqq4FROu0bJ+mqGSAZxf2NkCaYUmBqpUVxtDSLZOmnPqP
+ 0M7bVx2zad+jR2ZNY8K5S45bbwZqcl++aMS8OhB4zDNvbXiDZJeU16RH/x5XGnF6hfFi
+ nz6W73IIa8QdByzLFflGnTZ5DS8GnR9Hz91Qq/sp8UMUOraKk2wqPnPZoEZVNHc5fMyV
+ zXKA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXLKsyAFCylGzYh1rPhz6WS8jR7zspr1Wxi9SIPc1PrGKWftsQuFTXIOn+siiSFCuD4SMVATM+Tph8h1kjFSTRVT8GueOw=
+X-Gm-Message-State: AOJu0YzqCPSV6qEEtwhX+bAcBxcM+irWGePUA6RZp0x7mwphwTQpWehx
+ FVFHzGf5h5UG6b+6daidguwdjx371noTf65rN0ifzcZFF/SFEks1fgZ4MMwvEqk+eVMBOyjcmXC
+ 8wALY9c6Enlr8+Hr6L7G3hD4z6ePQhaJyzTGJlg==
+X-Google-Smtp-Source: AGHT+IEzaz0xIgkU+cMY+UYAZ8vU19SWKEFKsG/YhSczKL3pU62vvZ6VioSCQniszBpNYcXB5h1qLuegmj+5EwHomPg=
+X-Received: by 2002:a05:6402:1746:b0:573:50a6:d3b0 with SMTP id
+ 4fb4d7f45d1cf-57350a6d402mr7933301a12.3.1715678571755; Tue, 14 May 2024
+ 02:22:51 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240429-countinhibit_fix-v1-0-802ec1e99133@rivosinc.com>
-In-Reply-To: <20240429-countinhibit_fix-v1-0-802ec1e99133@rivosinc.com>
+References: <20240507052212.291137-1-jeeheng.sia@starfivetech.com>
+ <20240507052212.291137-2-jeeheng.sia@starfivetech.com>
+ <CAKmqyKOmt1UAbSnVbQ2fLVwoPP3u=6r5hX+gVO2xhLKidQ-8-A@mail.gmail.com>
+ <20240513023110-mutt-send-email-mst@kernel.org>
+ <CAKmqyKP1fmvyNsY0uXasK7jdHK9C_cizJdiqivK=Nxtfo37OxA@mail.gmail.com>
+In-Reply-To: <CAKmqyKP1fmvyNsY0uXasK7jdHK9C_cizJdiqivK=Nxtfo37OxA@mail.gmail.com>
 From: Peter Maydell <peter.maydell@linaro.org>
-Date: Tue, 14 May 2024 10:15:36 +0100
-Message-ID: <CAFEAcA_33s35DmdEQ=+O_kSodgEUg=R49n+iXOqEcmgY4Ng_8w@mail.gmail.com>
-Subject: Re: [PATCH 0/3] Assorted fixes for PMU
-To: Atish Patra <atishp@rivosinc.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, bin.meng@windriver.com, 
- dbarboza@ventanamicro.com, alistair.francis@wdc.com
+Date: Tue, 14 May 2024 10:22:39 +0100
+Message-ID: <CAFEAcA-cF7EXRd1VZAJ=ApuBuU8=zkjhLAKkcbms9wqJy_WObA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/3] qtest: allow SPCR acpi table changes
+To: Alistair Francis <alistair23@gmail.com>
+Cc: "Michael S. Tsirkin" <mst@redhat.com>,
+ Sia Jee Heng <jeeheng.sia@starfivetech.com>, qemu-arm@nongnu.org, 
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org, imammedo@redhat.com, 
+ anisinha@redhat.com, shannon.zhaosl@gmail.com, sunilvl@ventanamicro.com, 
+ palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
+ liwei1518@gmail.com, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::629;
- envelope-from=peter.maydell@linaro.org; helo=mail-ej1-x629.google.com
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::62f;
+ envelope-from=peter.maydell@linaro.org; helo=mail-ej1-x62f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -89,22 +100,40 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, 29 Apr 2024 at 20:29, Atish Patra <atishp@rivosinc.com> wrote:
+On Mon, 13 May 2024 at 11:36, Alistair Francis <alistair23@gmail.com> wrote=
+:
 >
-> This series contains few miscallenous fixes related to hpmcounters
-> and related code. The first patch fixes an issue with cycle/instret
-> counters overcouting while the remaining two are more for specification
-> compliance.
+> On Mon, May 13, 2024 at 4:32=E2=80=AFPM Michael S. Tsirkin <mst@redhat.co=
+m> wrote:
+> >
+> > On Mon, May 13, 2024 at 01:55:50PM +1000, Alistair Francis wrote:
+> > > On Tue, May 7, 2024 at 3:24=E2=80=AFPM Sia Jee Heng
+> > > <jeeheng.sia@starfivetech.com> wrote:
+> > >
+> > > Can you describe why you are doing this and that it will be reverted
+> > > in the commit message?
+> > >
+> > > Alistair
+> >
+> > What motivation are you asking? This follows the normal acpi test updat=
+e
+> > procedure.
+>
+> I find it clearer to have commits describe that they are disabling
+> tests for a specific reason. That way it's easier to track what's
+> going on.
+>
+> If ACPI test updates don't usually do that then that's fine with me
 
-I've noticed a number of riscv patchsets from various people
-recently where the subject line for the cover letter doesn't
-include any indication that it's a riscv related patchset.
-For instance this one is just "Assorted fixes for PMU", which
-could easily be an Arm PMU series. Could you all try to make sure
-that cover letter subject lines indicate the architecture or
-other subcomponent they affect, please? This helps people who
-are skimming over the mailing list looking for patches relevant
-to them.
+The only reason for the existence of this ignore-these-blobs file
+is for the purpose of the commit sequence:
+ * add the blobs to the whitelist
+ * make a change that alters what the expected blobs are
+ * regenerate the golden-reference blobs and remove the items
+   from the whitelist
+
+So we don't usually say much in the commit that is adding a blob
+to the whitelist.
 
 thanks
 -- PMM
