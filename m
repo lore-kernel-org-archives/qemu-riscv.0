@@ -4,88 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0E55C04FFE
-	for <qemu-riscv@archiver.kernel.org>; Tue, 14 May 2024 20:06:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99085C25B75
+	for <qemu-riscv@archiver.kernel.org>; Wed, 15 May 2024 07:18:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s6yPi-0004fO-Hv; Tue, 14 May 2024 16:06:18 -0400
+	id 1s78t5-0003bd-P4; Wed, 15 May 2024 03:17:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1s6yPg-0004eb-Pi
- for qemu-riscv@nongnu.org; Tue, 14 May 2024 16:06:16 -0400
-Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1s78so-0003JD-7I
+ for qemu-riscv@nongnu.org; Wed, 15 May 2024 03:17:03 -0400
+Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1s6yPd-0002JN-P5
- for qemu-riscv@nongnu.org; Tue, 14 May 2024 16:06:16 -0400
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-1ec4b2400b6so50515095ad.3
- for <qemu-riscv@nongnu.org>; Tue, 14 May 2024 13:06:12 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1s78sk-0001UE-83
+ for qemu-riscv@nongnu.org; Wed, 15 May 2024 03:17:01 -0400
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-34da04e44a2so5098742f8f.1
+ for <qemu-riscv@nongnu.org>; Wed, 15 May 2024 00:16:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1715717172; x=1716321972; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=kGupuRAnds6XBIKYUFC/6KCwoXlCNsfWi1iPd70+UXk=;
- b=nKytrKjI73XmENtQTOpPaiDv9M2fdUMptRkfrFQNuUXLfIY7q8D6um5UlIr5Tvzf5e
- 6hxOwPKBV89vFI0Ri5EN5usii4ub1K77h7OM0EUDhK5MKsD7XXwXnqQZwULZuBt34z05
- 1bRV5GeXgH7BMKcRAxT6qMFnBdiEolwDf+3Anu12ev/OVnkHanHi29KfHWeHOJN1lnA3
- Ne7YdAGCfv8XvOuMLv5SzQJqsI5wAMrSOROYMNZEKeyn+qVuGIothu86i2rCFlrzjWCF
- h1fE8wfVa0omhyy/h0HZvxom4EGRKbs4QXp0TtaBmjPc69aIVaoSffQ+joinMF3LUPKF
- KZdg==
+ d=ventanamicro.com; s=google; t=1715757416; x=1716362216; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=JEO5nS1Ltc6s0RRTMWU9z75YB32XaWbC0d2I6gbMByY=;
+ b=FpcDilu9NzG+9Igtqllzm/TaNyOLWzwuIzBPUzJfipZGx9psytK8Obhdfohvbq0bPv
+ s2H3f1Np7zHwC3hJ2r6RBaXHLShMYU1wlrTpKQ+U1vULtXX+BLIrH3NHST4/2EMMu33I
+ zf9Wr6mG0ETAccINfsH8osNcj1RlQU2inZaxunhSqNKeP1CvkqF8gTtuAElrBu7ljZ5X
+ vMeTCUSySjoAcezIAA1hVyRL4/zHmkJjx3HhT1uu+/AbKZABqCNKxnXYFJebW7b3k0GE
+ v8sSdI7Zd7c5HW+vKLKRV5oW2ocCHfOZ7pWdbS83EtVlufVxnVTLUKoV0sEdjQ1tO7EF
+ zKbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715717172; x=1716321972;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=kGupuRAnds6XBIKYUFC/6KCwoXlCNsfWi1iPd70+UXk=;
- b=ihXZwXSP/uofFysuoSwAONM1WpnHspsGAK2Uv3M5kY30dRvHmRc7se2qf9/tgrHnKA
- kfQq0PpkbOQ8YEpeQSG+3dz59tX7Yg3KcaASeUo0PlZQG6SzyLHIr2O5SDl/qdJYvM/R
- pa73ZKIuO06MMlcrjDEiChQPduZbR70HmbnMrraSa4blJYliA2+CtfkaP9Jp9mAuiV6+
- D0C3oP38GeFU34EmBt5lTIq0tNzJRY9Fpj5zOsMbhus0AzS1cmDstLMNZKV3HdrnH9FC
- JVG4M1XClMQLJUYSI8OyWTez37bY67bG1/NwibFUR2fZeAjsKHePtOM8SM7gYldMrc6J
- 6JMw==
-X-Gm-Message-State: AOJu0YwEYNUqX4hYHkOIuEyql/oxomk04eD3enOg6p+CwHe6ehF2xYLK
- EmK5jbcdhEWgZimFKZiC7L5oKDe7OP0LreLepOyj6tJmA6L+mNFRNzaK5OIX+jU=
-X-Google-Smtp-Source: AGHT+IHfCDUCnBmDa6+WDXxXgjbnEt0vaWV92uk5YsENgGlQcKNDwnefuNdh1y0NnAMX9VXYDx8uZQ==
-X-Received: by 2002:a17:902:bd0b:b0:1eb:4c4a:e1a0 with SMTP id
- d9443c01a7336-1ef43d2e157mr117721275ad.27.1715717171199; 
- Tue, 14 May 2024 13:06:11 -0700 (PDT)
-Received: from ?IPV6:2804:7f0:bdcd:fb00:6501:2693:db52:c621?
- ([2804:7f0:bdcd:fb00:6501:2693:db52:c621])
+ d=1e100.net; s=20230601; t=1715757416; x=1716362216;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=JEO5nS1Ltc6s0RRTMWU9z75YB32XaWbC0d2I6gbMByY=;
+ b=rKoBa5m4rlap7P/vPa99nlTeBvd8lWWDklUcKHGhpmH8hbKL7kj0nAOvMW0A8x4oXF
+ Mxd1PFVKSxVb3GHuJB0m783WJAHdlOPpRXGzF2eV971JDknOUqbNCYUvH8q3saZmGN4D
+ CB6U2LE7LrcNKdChpH0dJ3Mi0qyagbcirkxwzS7N+TTOGTeHU3+KH1so5gP+K8Su/jSW
+ El9SnT5Y22YFGc0H6nIaBzzv+AnlAVVEiQt7YBi/iR6eZDIgWSTMNs/SgK4r/5+Xyqpf
+ dxUdzHDpGYdCuvJ7UqpWuBJ5q/lSildYjFuIstJEOjlVeI+DswJHL4V0SLiaGsi1Q7Mu
+ M1kA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVtZLfN7KgHNaZgFB/Ijw7Cg+Dequ4lwD9ap08XeBf1cjhTFl6+J2px7+u5oeBCN/j6v1uDMdu2CJkYBNhrq/kvAP6f42Q=
+X-Gm-Message-State: AOJu0YyCx/Kh+pocukQcqn9DlOREpApzVAGYKJOpmn5YEaXi9KUPgBUd
+ JGuJj6PdZdHVWOk8sGUNrX1bTjOSxkMz6IRz3aVvaIiZANJIUuYbYfv7qQULHNU=
+X-Google-Smtp-Source: AGHT+IHYHKI7oeogFK/Jyic4l2do0NwKmr34srMLA6NEg+9yCsYLDFuMq/Ju3jStsCSj9i/gmRcuzw==
+X-Received: by 2002:a5d:4577:0:b0:34d:bbcf:1ef with SMTP id
+ ffacd0b85a97d-3504a96d3a8mr10905267f8f.61.1715757416224; 
+ Wed, 15 May 2024 00:16:56 -0700 (PDT)
+Received: from localhost (cst2-173-78.cust.vodafone.cz. [31.30.173.78])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1ef0c134ce8sm102158635ad.243.2024.05.14.13.06.07
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 14 May 2024 13:06:10 -0700 (PDT)
-Message-ID: <534156a8-164c-4094-beba-380377460f00@ventanamicro.com>
-Date: Tue, 14 May 2024 17:06:05 -0300
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 03/15] hw/riscv: add RISC-V IOMMU base emulation
-To: Jason Chien <jason.chien@sifive.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- ajones@ventanamicro.com, tjeznach@rivosinc.com,
- Sebastien Boeuf <seb@rivosinc.com>
+ ffacd0b85a97d-3502baacf89sm15683615f8f.83.2024.05.15.00.16.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 15 May 2024 00:16:55 -0700 (PDT)
+Date: Wed, 15 May 2024 09:16:54 +0200
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Eric Cheng <eric.cheng.linux@gmail.com>
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com, tjeznach@rivosinc.com
+Subject: Re: [PATCH v2 06/15] hw/riscv/virt.c: support for RISC-V IOMMU
+ PCIDevice hotplug
+Message-ID: <20240515-e56bce8b02b918c106961996@orel>
 References: <20240307160319.675044-1-dbarboza@ventanamicro.com>
- <20240307160319.675044-4-dbarboza@ventanamicro.com>
- <212e7474-bf56-4699-970e-a4c8c37a68c2@sifive.com>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <212e7474-bf56-4699-970e-a4c8c37a68c2@sifive.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x634.google.com
+ <20240307160319.675044-7-dbarboza@ventanamicro.com>
+ <41835d3f-d9e2-4ace-8add-f5bb6c525c5f@gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <41835d3f-d9e2-4ace-8add-f5bb6c525c5f@gmail.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::42d;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x42d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,327 +100,66 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Jason,
-
-On 5/1/24 08:57, Jason Chien wrote:
-> Daniel Henrique Barboza 於 2024/3/8 上午 12:03 寫道:
->> From: Tomasz Jeznach<tjeznach@rivosinc.com>
->>
->> The RISC-V IOMMU specification is now ratified as-per the RISC-V
->> international process. The latest frozen specifcation can be found
->> at:
->>
->> https://github.com/riscv-non-isa/riscv-iommu/releases/download/v1.0/riscv-iommu.pdf
->>
->> Add the foundation of the device emulation for RISC-V IOMMU, which
->> includes an IOMMU that has no capabilities but MSI interrupt support and
->> fault queue interfaces. We'll add add more features incrementally in the
->> next patches.
->>
->> Co-developed-by: Sebastien Boeuf<seb@rivosinc.com>
->> Signed-off-by: Sebastien Boeuf<seb@rivosinc.com>
->> Signed-off-by: Tomasz Jeznach<tjeznach@rivosinc.com>
->> Signed-off-by: Daniel Henrique Barboza<dbarboza@ventanamicro.com>
->> ---
->>   hw/riscv/Kconfig         |    4 +
->>   hw/riscv/meson.build     |    1 +
->>   hw/riscv/riscv-iommu.c   | 1492 ++++++++++++++++++++++++++++++++++++++
->>   hw/riscv/riscv-iommu.h   |  141 ++++
->>   hw/riscv/trace-events    |   11 +
->>   hw/riscv/trace.h         |    2 +
->>   include/hw/riscv/iommu.h |   36 +
->>   meson.build              |    1 +
->>   8 files changed, 1688 insertions(+)
->>   create mode 100644 hw/riscv/riscv-iommu.c
->>   create mode 100644 hw/riscv/riscv-iommu.h
->>   create mode 100644 hw/riscv/trace-events
->>   create mode 100644 hw/riscv/trace.h
->>   create mode 100644 include/hw/riscv/iommu.h
->>
->> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
->> index 5d644eb7b1..faf6a10029 100644
->> --- a/hw/riscv/Kconfig
->> +++ b/hw/riscv/Kconfig
->> @@ -1,3 +1,6 @@
->> +config RISCV_IOMMU
->> +    bool
->> +
-
-(...)
-
->> +
->> +/* IOMMU index for transactions without PASID specified. */
->> +#define RISCV_IOMMU_NOPASID 0
->> +
->> +static void riscv_iommu_notify(RISCVIOMMUState *s, int vec)
->> +{
->> +    const uint32_t ipsr =
->> +        riscv_iommu_reg_mod32(s, RISCV_IOMMU_REG_IPSR, (1 << vec), 0);
->> +    const uint32_t ivec = riscv_iommu_reg_get32(s, RISCV_IOMMU_REG_IVEC);
->> +    if (s->notify && !(ipsr & (1 << vec))) {
->> +        s->notify(s, (ivec >> (vec * 4)) & 0x0F);
->> +    }
->> +}
-> The RISC-V IOMMU also supports WSI.
->> +
-
-I mentioned in the review with Frank that this impl does not support WSI, but
-it really seems clearer to do the check here nevertheless. I'll add it.
-
-
->> +static void riscv_iommu_fault(RISCVIOMMUState *s,
->> +                              struct riscv_iommu_fq_record *ev)
->> +{
-
-(...)
-
->> +
->> +    /*
->> +     * Check supported device id width (in bits).
->> +     * See IOMMU Specification, Chapter 6. Software guidelines.
->> +     * - if extended device-context format is used:
->> +     *   1LVL: 6, 2LVL: 15, 3LVL: 24
->> +     * - if base device-context format is used:
->> +     *   1LVL: 7, 2LVL: 16, 3LVL: 24
->> +     */
->> +    if (ctx->devid >= (1 << (depth * 9 + 6 + (dc_fmt && depth != 2)))) {
->> +        return RISCV_IOMMU_FQ_CAUSE_DDT_INVALID;
+On Wed, May 15, 2024 at 02:25:31PM GMT, Eric Cheng wrote:
+> On 3/8/2024 12:03 AM, Daniel Henrique Barboza wrote:
+> > From: Tomasz Jeznach <tjeznach@rivosinc.com>
+> > 
+> > Generate device tree entry for riscv-iommu PCI device, along with
+> > mapping all PCI device identifiers to the single IOMMU device instance.
+> > 
+> > Signed-off-by: Tomasz Jeznach <tjeznach@rivosinc.com>
+> > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> > ---
+> >   hw/riscv/virt.c | 33 ++++++++++++++++++++++++++++++++-
+> >   1 file changed, 32 insertions(+), 1 deletion(-)
+> > 
+> > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> > index a094af97c3..67a8267747 100644
+> > --- a/hw/riscv/virt.c
+> > +++ b/hw/riscv/virt.c
+> > @@ -32,6 +32,7 @@
+> >   #include "hw/core/sysbus-fdt.h"
+> >   #include "target/riscv/pmu.h"
+> >   #include "hw/riscv/riscv_hart.h"
+> > +#include "hw/riscv/iommu.h"
+> >   #include "hw/riscv/virt.h"
+> >   #include "hw/riscv/boot.h"
+> >   #include "hw/riscv/numa.h"
+> > @@ -1004,6 +1005,30 @@ static void create_fdt_virtio_iommu(RISCVVirtState *s, uint16_t bdf)
+> >                              bdf + 1, iommu_phandle, bdf + 1, 0xffff - bdf);
+> >   }
+> > +static void create_fdt_iommu(RISCVVirtState *s, uint16_t bdf)
+> > +{
+> > +    const char comp[] = "riscv,pci-iommu";
+> > +    void *fdt = MACHINE(s)->fdt;
+> > +    uint32_t iommu_phandle;
+> > +    g_autofree char *iommu_node = NULL;
+> > +    g_autofree char *pci_node = NULL;
+> > +
+> > +    pci_node = g_strdup_printf("/soc/pci@%lx",
+> > +                               (long) virt_memmap[VIRT_PCIE_ECAM].base);
+> > +    iommu_node = g_strdup_printf("%s/iommu@%x", pci_node, bdf);
+> > +    iommu_phandle = qemu_fdt_alloc_phandle(fdt);
+> > +    qemu_fdt_add_subnode(fdt, iommu_node);
+> > +
+> > +    qemu_fdt_setprop(fdt, iommu_node, "compatible", comp, sizeof(comp));
+> > +    qemu_fdt_setprop_cell(fdt, iommu_node, "#iommu-cells", 1);
+> > +    qemu_fdt_setprop_cell(fdt, iommu_node, "phandle", iommu_phandle);
+> > +    qemu_fdt_setprop_cells(fdt, iommu_node, "reg",
+> > +                           bdf << 8, 0, 0, 0, 0);
+> > +    qemu_fdt_setprop_cells(fdt, pci_node, "iommu-map",
+> > +                           0, iommu_phandle, 0, bdf,
+> > +                           bdf + 1, iommu_phandle, bdf + 1, 0xffff - bdf);
+> > +}
 > 
-> The cause should be 260 not 258.
-> 
->  From the RISC-V IOMMU Architecture Spec v1.0.0 section 2.3:
-> If the device_id is wider than that supported by the IOMMU mode, as determined by the following checks then stop and report "Transaction type disallowed" (cause = 260).
-> a. ddtp.iommu_mode is 2LVL and DDI[2] is not 0
-> b. ddtp.iommu_mode is 1LVL and either DDI[2] is not 0 or DDI[1] is not 0
-> 
+> Is it really necessary to add this iommu-pci device in riscv virt machine,
+> rather than other 'physical' machine type? virt machine already has its
+> virtio-iommu.
+>
 
-Changed.
-
->> +    }
->> +
->> +    /* Device directory tree walk */
->> +    for (; depth-- > 0; ) {
->> +        /*
->> +         * Select device id index bits based on device directory tree level
->> +         * and device context format.
->> +         * See IOMMU Specification, Chapter 2. Data Structures.
->> +         * - if extended device-context format is used:
->> +         *   device index: [23:15][14:6][5:0]
->> +         * - if base device-context format is used:
->> +         *   device index: [23:16][15:7][6:0]
->> +         */
->> +        const int split = depth * 9 + 6 + dc_fmt;
->> +        addr |= ((ctx->devid >> split) << 3) & ~TARGET_PAGE_MASK;
->> +        if (dma_memory_read(s->target_as, addr, &de, sizeof(de),
->> +                            MEMTXATTRS_UNSPECIFIED) != MEMTX_OK) {
->> +            return RISCV_IOMMU_FQ_CAUSE_DDT_LOAD_FAULT;
->> +        }
->> +        le64_to_cpus(&de);
->> +        if (!(de & RISCV_IOMMU_DDTE_VALID)) {
->> +            /* invalid directory entry */
->> +            return RISCV_IOMMU_FQ_CAUSE_DDT_INVALID;
->> +        }
->> +        if (de & ~(RISCV_IOMMU_DDTE_PPN | RISCV_IOMMU_DDTE_VALID)) {
->> +            /* reserved bits set */
->> +            return RISCV_IOMMU_FQ_CAUSE_DDT_INVALID;
-> 
-> The cause should be 259 not 258.
-> 
->  From RISC-V IOMMU Architecture Spec v1.0.0 section 2.3.1:
-> If any bits or encoding that are reserved for future standard use are set within ddte, stop and report "DDT entry misconfigured" (cause = 259).
-
-Changed
-
-> 
->> +        }
->> +        addr = PPN_PHYS(get_field(de, RISCV_IOMMU_DDTE_PPN));
->> +    }
->> +
->> +    /* index into device context entry page */
->> +    addr |= (ctx->devid * dc_len) & ~TARGET_PAGE_MASK;
->> +
->> +    memset(&dc, 0, sizeof(dc));
->> +    if (dma_memory_read(s->target_as, addr, &dc, dc_len,
->> +                        MEMTXATTRS_UNSPECIFIED) != MEMTX_OK) {
->> +        return RISCV_IOMMU_FQ_CAUSE_DDT_LOAD_FAULT;
->> +    }
->> +
->> +    /* Set translation context. */
->> +    ctx->tc = le64_to_cpu(dc.tc);
->> +    ctx->ta = le64_to_cpu(dc.ta);
->> +    ctx->msiptp = le64_to_cpu(dc.msiptp);
->> +    ctx->msi_addr_mask = le64_to_cpu(dc.msi_addr_mask);
->> +    ctx->msi_addr_pattern = le64_to_cpu(dc.msi_addr_pattern);
->> +
-> According to RISC-V IOMMU Architecture spec v1.0.0 section 2.1.4, we should do some checks for the found device context.
-
-I added a new helper to validate the device context at this point, following
-section 2.1.4 steps.
-
->> +    if (!(ctx->tc & RISCV_IOMMU_DC_TC_V)) {
->> +        return RISCV_IOMMU_FQ_CAUSE_DDT_INVALID;
->> +    }
->> +
->> +    if (!(ctx->tc & RISCV_IOMMU_DC_TC_PDTV)) {
->> +        if (ctx->pasid != RISCV_IOMMU_NOPASID) {
->> +            /* PASID is disabled */
->> +            return RISCV_IOMMU_FQ_CAUSE_TTYPE_BLOCKED;
->> +        }
->> +        return 0;
->> +    }
->> +
-
-(...)
-
->> +
->> +static void riscv_iommu_process_cq_control(RISCVIOMMUState *s)
->> +{
->> +    uint64_t base;
->> +    uint32_t ctrl_set = riscv_iommu_reg_get32(s, RISCV_IOMMU_REG_CQCSR);
->> +    uint32_t ctrl_clr;
->> +    bool enable = !!(ctrl_set & RISCV_IOMMU_CQCSR_CQEN);
->> +    bool active = !!(ctrl_set & RISCV_IOMMU_CQCSR_CQON);
->> +
->> +    if (enable && !active) {
->> +        base = riscv_iommu_reg_get64(s, RISCV_IOMMU_REG_CQB);
->> +        s->cq_mask = (2ULL << get_field(base, RISCV_IOMMU_CQB_LOG2SZ)) - 1;
->> +        s->cq_addr = PPN_PHYS(get_field(base, RISCV_IOMMU_CQB_PPN));
->> +        stl_le_p(&s->regs_ro[RISCV_IOMMU_REG_CQT], ~s->cq_mask);
->> +        stl_le_p(&s->regs_rw[RISCV_IOMMU_REG_CQH], 0);
->> +        stl_le_p(&s->regs_rw[RISCV_IOMMU_REG_CQT], 0);
->> +        ctrl_set = RISCV_IOMMU_CQCSR_CQON;
->> +        ctrl_clr = RISCV_IOMMU_CQCSR_BUSY | RISCV_IOMMU_CQCSR_CQMF |
->> +            RISCV_IOMMU_CQCSR_CMD_ILL | RISCV_IOMMU_CQCSR_CMD_TO;
-> cqcsr.fence_w_ip should be set to 0 as well.
-
-Done.
-
-
->> +    } else if (!enable && active) {
->> +        stl_le_p(&s->regs_ro[RISCV_IOMMU_REG_CQT], ~0);
->> +        ctrl_set = 0;
->> +        ctrl_clr = RISCV_IOMMU_CQCSR_BUSY | RISCV_IOMMU_CQCSR_CQON;
->> +    } else {
-
-(...)
-
->> +}
->> +
->> +static MemTxResult riscv_iommu_mmio_write(void *opaque, hwaddr addr,
->> +    uint64_t data, unsigned size, MemTxAttrs attrs)
->> +{
->> +    RISCVIOMMUState *s = opaque;
->> +    uint32_t regb = addr & ~3;
->> +    uint32_t busy = 0;
->> +    uint32_t exec = 0;
->> +
->> +    if (size == 0 || size > 8 || (addr & (size - 1)) != 0) {
->> +        /* Unsupported MMIO alignment or access size */
->> +        return MEMTX_ERROR;
->> +    }
->> +
->> +    if (addr + size > RISCV_IOMMU_REG_MSI_CONFIG) {
->> +        /* Unsupported MMIO access location. */
->> +        return MEMTX_ACCESS_ERROR;
->> +    }
->> +
->> +    /* Track actionable MMIO write. */
->> +    switch (regb) {
-> 
-> There should be a case for IPSR register.
-> 
->  From RISC-V IOMMU Architecture Spec v1.0.0 section 5.18:
-> If a bit in ipsr is 1 then a write of 1 to the bit transitions the bit from 1→0. If the conditions to set that bit are still present (See [IPSR_FIELDS]) or if they occur after the bit is cleared then that bit transitions again from 0→1.
-
-
-A new helper to handle ipsr updates via mmio_write was created.
-
->> +    case RISCV_IOMMU_REG_DDTP:
->> +    case RISCV_IOMMU_REG_DDTP + 4:
->> +        exec = BIT(RISCV_IOMMU_EXEC_DDTP);
-
-(...)
-
->> +static void riscv_iommu_realize(DeviceState *dev, Error **errp)
->> +{
->> +    RISCVIOMMUState *s = RISCV_IOMMU(dev);
->> +
->> +    s->cap = s->version & RISCV_IOMMU_CAP_VERSION;
->> +    if (s->enable_msi) {
->> +        s->cap |= RISCV_IOMMU_CAP_MSI_FLAT | RISCV_IOMMU_CAP_MSI_MRIF;
->> +    }
->> +    /* Report QEMU target physical address space limits */
->> +    s->cap = set_field(s->cap, RISCV_IOMMU_CAP_PAS,
->> +                       TARGET_PHYS_ADDR_SPACE_BITS);
->> +
->> +    /* TODO: method to report supported PASID bits */
->> +    s->pasid_bits = 8; /* restricted to size of MemTxAttrs.pasid */
->> +    s->cap |= RISCV_IOMMU_CAP_PD8;
->> +
->> +    /* Out-of-reset translation mode: OFF (DMA disabled) BARE (passthrough) */
->> +    s->ddtp = set_field(0, RISCV_IOMMU_DDTP_MODE, s->enable_off ?
->> +                        RISCV_IOMMU_DDTP_MODE_OFF : RISCV_IOMMU_DDTP_MODE_BARE);
->> +
->> +    /* register storage */
->> +    s->regs_rw = g_new0(uint8_t, RISCV_IOMMU_REG_SIZE);
->> +    s->regs_ro = g_new0(uint8_t, RISCV_IOMMU_REG_SIZE);
->> +    s->regs_wc = g_new0(uint8_t, RISCV_IOMMU_REG_SIZE);
->> +
->> +     /* Mark all registers read-only */
->> +    memset(s->regs_ro, 0xff, RISCV_IOMMU_REG_SIZE);
->> +
->> +    /*
->> +     * Register complete MMIO space, including MSI/PBA registers.
->> +     * Note, PCIDevice implementation will add overlapping MR for MSI/PBA,
->> +     * managed directly by the PCIDevice implementation.
->> +     */
->> +    memory_region_init_io(&s->regs_mr, OBJECT(dev), &riscv_iommu_mmio_ops, s,
->> +        "riscv-iommu-regs", RISCV_IOMMU_REG_SIZE);
->> +
->> +    /* Set power-on register state */
->> +    stq_le_p(&s->regs_rw[RISCV_IOMMU_REG_CAP], s->cap);
->> +    stq_le_p(&s->regs_rw[RISCV_IOMMU_REG_FCTL], s->fctl);
-> s->fctl is not initialized.
-
-I believe the idea is to init it as zero. I'll change it to init as zero
-explicitly.
-
->> +    stq_le_p(&s->regs_ro[RISCV_IOMMU_REG_DDTP],
->> +        ~(RISCV_IOMMU_DDTP_PPN | RISCV_IOMMU_DDTP_MODE));
->> +    stq_le_p(&s->regs_ro[RISCV_IOMMU_REG_CQB],
->> +        ~(RISCV_IOMMU_CQB_LOG2SZ | RISCV_IOMMU_CQB_PPN));
->> +    stq_le_p(&s->regs_ro[RISCV_IOMMU_REG_FQB],
-
-(...)
-
->> +void riscv_iommu_pci_setup_iommu(RISCVIOMMUState *iommu, PCIBus *bus,
->> +        Error **errp)
->> +{
->> +    if (bus->iommu_ops &&
->> +        bus->iommu_ops->get_address_space == riscv_iommu_find_as) {
->> +        /* Allow multiple IOMMUs on the same PCIe bus, link known devices */
->> +        RISCVIOMMUState *last = (RISCVIOMMUState *)bus->iommu_opaque;
->> +        QLIST_INSERT_AFTER(last, iommu, iommus);
->> +    } else if (bus->iommu_ops == NULL) {
->> +        pci_setup_iommu(bus, &riscv_iommu_ops, iommu);
-> The original bus->iommu_op and bus->iommu_opaque will be lost.
-
-Not sure what you meant with 'iommu_op'. We have 'iommu_ops', which is being checked
-for NULL before calling pci_setup_iommu().
-
-As for overwriting the original bus->iommu_opaque, I added an extra iommu_opaque == NULL
-check. We'll make:
-
-     } else if (!bus->iommu_ops && !bus->iommu_opaque) {
-         pci_setup_iommu(bus, &riscv_iommu_ops, iommu);
-
-This will guarantee that we're not overwriting any existing ops or opaque by accident.
-
-
+We need both, just as the Arm virt machine has both. virtio-iommu is for
+guests, but the Arm and RISCV virt machines are both also used as hosts.
 
 Thanks,
-
-
-Daniel
-
+drew
 
