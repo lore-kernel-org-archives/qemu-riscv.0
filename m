@@ -4,92 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10FB0C25B77
-	for <qemu-riscv@archiver.kernel.org>; Wed, 15 May 2024 08:02:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90AECC25B75
+	for <qemu-riscv@archiver.kernel.org>; Wed, 15 May 2024 08:02:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s79ZC-0002SG-BN; Wed, 15 May 2024 04:00:50 -0400
+	id 1s79ZK-0003TF-5D; Wed, 15 May 2024 04:00:58 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <fea.wang@sifive.com>)
- id 1s79ZA-0002CG-1t
- for qemu-riscv@nongnu.org; Wed, 15 May 2024 04:00:48 -0400
-Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c])
+ id 1s79ZI-0003FJ-0u
+ for qemu-riscv@nongnu.org; Wed, 15 May 2024 04:00:56 -0400
+Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <fea.wang@sifive.com>)
- id 1s79Z2-0006Uq-K7
- for qemu-riscv@nongnu.org; Wed, 15 May 2024 04:00:46 -0400
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-1ed904c2280so35059625ad.2
- for <qemu-riscv@nongnu.org>; Wed, 15 May 2024 01:00:40 -0700 (PDT)
+ id 1s79ZF-0006YA-PQ
+ for qemu-riscv@nongnu.org; Wed, 15 May 2024 04:00:55 -0400
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-1eeb1a4c10aso39864765ad.3
+ for <qemu-riscv@nongnu.org>; Wed, 15 May 2024 01:00:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1715760039; x=1716364839; darn=nongnu.org;
+ d=sifive.com; s=google; t=1715760052; x=1716364852; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7O3me2A3EyGgD+KWkf98RQrX1/WsA8xiG3u+UiJbo1c=;
- b=hcl1zckj+h28wxiYbH6r2EkGLjWYYYA1AFKh1bi4GVRqfUSHgNf/giOeI3vpmB/pdm
- AFGQYY0y1P57zu8bhJB0WDxJ1J4qzTgVVRiKl6c5dIZSKswsw8JJIoe1uyUgs/HCIX5r
- uMvqMCasY8pF/Ng2dEgt+X9Mwh6SLRJBEleSGVkDcu10O3hivIVpR1dVPxvcMDcdKZDe
- i4tetgo9g8JsKz8Ad15D8Fs7Cx7NJEz1yd1TgyQxTqAMH4noW+xtLzLtMtY/pKt2H1gU
- DqCn1JlCLXiU99yXhGX2f5fjYRnIfDZ8f3/adfn5C+SBi6WxoyzxpuG7494CMEjmaf2k
- mpDA==
+ bh=ldPciugSQGSMOBR5lY12EK6xTqHmCiheKzOXbbN7QuY=;
+ b=R0yf//N8UrWVu38yePImrYbtPRFKk4kEDG82XTJ1ofL47cegF7mWctfCDvmjLKnQdC
+ O0Oe+EKRftaerQChO/ZlSLb3NUdmF2ns6RS1pdy5HpnmnCEbrnlhwujOlRXQvzxKhoPR
+ Le2PITcvo0VuvOQ3Oe4Cl567hNTLgq1RW03h3oJG7dsHS/ZzRJiwt+MPEo8pqwNiy/0q
+ u5fMIBCVAH5wLEIl9si1dEb9U/cPjnz/ADkS9c23v8kOd27CLTKev45Mkf0+hVoDsYSV
+ HpovPF2+Bl+7ev2eve2/H0uZ74So+p5fyd37HywSTJa+/gmTW8wCUKAcHOvvZlyKveg1
+ Mt5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715760039; x=1716364839;
+ d=1e100.net; s=20230601; t=1715760052; x=1716364852;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7O3me2A3EyGgD+KWkf98RQrX1/WsA8xiG3u+UiJbo1c=;
- b=C9T3oR/dDtMYEmLLKzAvMaqEcpzK97iNzgW82CUfRhf09Mszxwbf4zfaYqXRYt9N4f
- RRcMDpy1g+SeuSRw+kFekzlZ89g1ETvlsoyP+lNnxBxOow6LOpidwsjJKQYuuBmoC60a
- qE3CxuYVt/9v/m329CpICQyaz7sbzxDS2rhpIPDw44PfEnOnaqPnf/XRVtxzHiKq65ar
- n4sTEG96iwmWx3qVnYpd5959f0GCPooNureQ9IzUfiiknqEQzENSyXncSjhzGlU1Hmqn
- mUOsw0dvqbsGS6bD/QQy+7T7imqO1kKYIkBK/zkboNTNsGsN1bHnJZqzyLdELf629OmI
- EyzA==
+ bh=ldPciugSQGSMOBR5lY12EK6xTqHmCiheKzOXbbN7QuY=;
+ b=FAUpgVCB/1OWIAKcTn3/XTMFdWVIv1LDiW4LfER254WIRrh8OgnN1hbDNXVTwkNjGe
+ zg1UlPSD6pTWsIcXDDZhb4+2AyKU6rJeWJbsi5hhGSw2XCsdOST3X0OJ+OOUs3on7iDa
+ wHXkwWKkdNpg2zeHTwNLKrwgI9NAIbouhOGzjdNTVgUI30/j8Y3fkSUga5NsxsSFEDWM
+ cZGO0/48b9Dl0+llQdIiBZkuXlZXt7M6dQEfrJ/49HB3ThCEtEJp/wLUk2T7JQJieF5Y
+ cRhFsuG8cirWzebGlJgEdTeuA2T0MwT+89BB/fGNiupdklAImtbFm6vCgxqpoV3qUe0K
+ ijpg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWzyTUlDbLv7xYDsEpphOH2VE7CMaXnvfb/A9UTOKiBie94s+LZhn9D0K7bXcdVsGilSDwQJ2gyi7/exjD05KRMg6ptmiE=
-X-Gm-Message-State: AOJu0Yy8wuLBB6ANbWUJyu/9DWK3iS1hz8YsIK4Ways8KFDoCC5wA9a0
- /zmDRnfo1KEFPQ1rbyg+MDuypc5g2fYu0b2Mcpj2ECyN2k6FZtD6pirIvgV6Ves=
-X-Google-Smtp-Source: AGHT+IFsF2SsjDxMWiE5pCrC83JDsiJQhsWJQQXkL6tbrZZwL759I3oHUiZsK3hX8mmHR1HYgRFCLA==
-X-Received: by 2002:a17:903:2381:b0:1e2:6b5d:5b18 with SMTP id
- d9443c01a7336-1ef43f4cf98mr183634425ad.51.1715760039134; 
- Wed, 15 May 2024 01:00:39 -0700 (PDT)
+ AJvYcCWA7CF68qE1MKctnWHf77EqnQeAqHPy9DVlcWbYjBirIzvFFZFKnzlNz1q/eRBDTXL6DrwrHJ9C5JxrVDShkj89gh9jXOg=
+X-Gm-Message-State: AOJu0YynCgvkm0X7CZg532L6ZS+Y133j59/+rniIbMKnWUxPLQe6P15p
+ MHtbYs6sHZm+ZmxOAU0j9uafWXWli3xwM2a+iSSA3kNta8UTpXDKPW48VmU/Pitp4GLK+yLBcOg
+ a
+X-Google-Smtp-Source: AGHT+IEOETcKfrrU1uEm0beUNbuBaQbb8htmFHEguldiAwieAU/FQ7BtokJxkdENNtndQ7ZDKFs0Kw==
+X-Received: by 2002:a17:902:e943:b0:1ea:fb65:a0c9 with SMTP id
+ d9443c01a7336-1ef43d170d2mr166415395ad.20.1715760052127; 
+ Wed, 15 May 2024 01:00:52 -0700 (PDT)
 Received: from hsinchu36-syssw02.internal.sifive.com
  (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1ef0b9d1642sm111418795ad.31.2024.05.15.01.00.36
+ d9443c01a7336-1ef0b9d1642sm111418795ad.31.2024.05.15.01.00.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 May 2024 01:00:38 -0700 (PDT)
+ Wed, 15 May 2024 01:00:51 -0700 (PDT)
 From: "Fea.Wang" <fea.wang@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Cc: Jim Shu <jim.shu@sifive.com>, "Fea . Wang" <fea.wang@sifive.com>,
- Frank Chang <frank.chang@sifive.com>,
+Cc: "Fea.Wang" <fea.wang@sifive.com>, Frank Chang <frank.chang@sifive.com>,
  LIU Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
  Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Andrew Jones <ajones@ventanamicro.com>, Max Chou <max.chou@sifive.com>
-Subject: [RESEND PATCH v2 1/5] target/riscv: Reuse the conversion function of
- priv_spec
-Date: Wed, 15 May 2024 16:05:58 +0800
-Message-Id: <20240515080605.2675399-2-fea.wang@sifive.com>
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [RESEND PATCH v2 4/5] target/riscv: Add MEDELEGH,
+ HEDELEGH csrs for RV32
+Date: Wed, 15 May 2024 16:06:01 +0800
+Message-Id: <20240515080605.2675399-5-fea.wang@sifive.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240515080605.2675399-1-fea.wang@sifive.com>
 References: <20240515080605.2675399-1-fea.wang@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
- envelope-from=fea.wang@sifive.com; helo=mail-pl1-x62c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
+ envelope-from=fea.wang@sifive.com; helo=mail-pl1-x633.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
- T_SPF_HELO_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,69 +104,82 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Jim Shu <jim.shu@sifive.com>
+Based on privileged spec 1.13, the RV32 needs to implement MEDELEGH
+and HEDELEGH for exception codes 32-47 for reserving and exception codes
+48-63 for custom use. Add the CSR number though the implementation is
+just reading zero and writing ignore. Besides, for accessing HEDELEGH, it
+should be controlled by mstateen0 'P1P13' bit.
 
-Public the conversion function of priv_spec in cpu.h, so that tcg-cpu.c
-could also use it.
-
-Signed-off-by: Jim Shu <jim.shu@sifive.com>
 Signed-off-by: Fea.Wang <fea.wang@sifive.com>
 Reviewed-by: Frank Chang <frank.chang@sifive.com>
 Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 ---
- target/riscv/cpu.c         |  2 +-
- target/riscv/cpu.h         |  1 +
- target/riscv/tcg/tcg-cpu.c | 13 ++++---------
- 3 files changed, 6 insertions(+), 10 deletions(-)
+ target/riscv/cpu_bits.h |  2 ++
+ target/riscv/csr.c      | 31 +++++++++++++++++++++++++++++++
+ 2 files changed, 33 insertions(+)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 2946ac298a..6dd3d7f4a3 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1786,7 +1786,7 @@ static int priv_spec_from_str(const char *priv_spec_str)
-     return priv_version;
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index 28bd3fb0b4..f888025c59 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -156,6 +156,8 @@
+ 
+ /* 32-bit only */
+ #define CSR_MSTATUSH        0x310
++#define CSR_MEDELEGH        0x312
++#define CSR_HEDELEGH        0x612
+ 
+ /* Machine Trap Handling */
+ #define CSR_MSCRATCH        0x340
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index bdbc8de0e2..c5ff40eed8 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -3225,6 +3225,33 @@ static RISCVException write_hedeleg(CPURISCVState *env, int csrno,
+     return RISCV_EXCP_NONE;
  }
  
--static const char *priv_spec_to_str(int priv_version)
-+const char *priv_spec_to_str(int priv_version)
- {
-     switch (priv_version) {
-     case PRIV_VERSION_1_10_0:
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 1501868008..140eb43fcb 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -833,4 +833,5 @@ const char *satp_mode_str(uint8_t satp_mode, bool is_32_bit);
- /* Implemented in th_csr.c */
- void th_register_custom_csrs(RISCVCPU *cpu);
- 
-+const char *priv_spec_to_str(int priv_version);
- #endif /* RISCV_CPU_H */
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index f59b5d7f2d..fa186093fb 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -76,16 +76,11 @@ static void riscv_cpu_write_misa_bit(RISCVCPU *cpu, uint32_t bit,
- 
- static const char *cpu_priv_ver_to_str(int priv_ver)
- {
--    switch (priv_ver) {
--    case PRIV_VERSION_1_10_0:
--        return "v1.10.0";
--    case PRIV_VERSION_1_11_0:
--        return "v1.11.0";
--    case PRIV_VERSION_1_12_0:
--        return "v1.12.0";
--    }
-+    const char *priv_spec_str = priv_spec_to_str(priv_ver);
- 
--    g_assert_not_reached();
-+    g_assert(priv_spec_str);
++static RISCVException read_hedelegh(CPURISCVState *env, int csrno,
++                                   target_ulong *val)
++{
++    RISCVException ret;
++    ret = smstateen_acc_ok(env, 0, SMSTATEEN0_P1P13);
++    if (ret != RISCV_EXCP_NONE) {
++        return ret;
++    }
 +
-+    return priv_spec_str;
- }
++    /* Reserved, now read zero */
++    *val = 0;
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException write_hedelegh(CPURISCVState *env, int csrno,
++                                    target_ulong val)
++{
++    RISCVException ret;
++    ret = smstateen_acc_ok(env, 0, SMSTATEEN0_P1P13);
++    if (ret != RISCV_EXCP_NONE) {
++        return ret;
++    }
++
++    /* Reserved, now write ignore */
++    return RISCV_EXCP_NONE;
++}
++
+ static RISCVException rmw_hvien64(CPURISCVState *env, int csrno,
+                                     uint64_t *ret_val,
+                                     uint64_t new_val, uint64_t wr_mask)
+@@ -4672,6 +4699,10 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
  
- static void riscv_cpu_synchronize_from_tb(CPUState *cs,
+     [CSR_MSTATUSH]    = { "mstatush",   any32, read_mstatush,
+                           write_mstatush                                   },
++    [CSR_MEDELEGH]    = { "medelegh",   any32, read_zero, write_ignore,
++                          .min_priv_ver = PRIV_VERSION_1_13_0              },
++    [CSR_HEDELEGH]    = { "hedelegh",   hmode32, read_hedelegh, write_hedelegh,
++                          .min_priv_ver = PRIV_VERSION_1_13_0              },
+ 
+     /* Machine Trap Handling */
+     [CSR_MSCRATCH] = { "mscratch", any,  read_mscratch, write_mscratch,
 -- 
 2.34.1
 
