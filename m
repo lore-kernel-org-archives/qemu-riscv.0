@@ -4,87 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B8D2C25B7A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 15 May 2024 09:12:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D9BBC25B75
+	for <qemu-riscv@archiver.kernel.org>; Wed, 15 May 2024 12:51:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s7Afl-0006Tg-R1; Wed, 15 May 2024 05:11:41 -0400
+	id 1s7E5I-0005tQ-Dx; Wed, 15 May 2024 08:50:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
- id 1s7Afl-0006TX-5A
- for qemu-riscv@nongnu.org; Wed, 15 May 2024 05:11:41 -0400
-Received: from mail-ot1-x32d.google.com ([2607:f8b0:4864:20::32d])
+ (Exim 4.90_1) (envelope-from <eric.cheng.linux@gmail.com>)
+ id 1s7858-0002Ji-9e; Wed, 15 May 2024 02:25:42 -0400
+Received: from mail-pg1-x544.google.com ([2607:f8b0:4864:20::544])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
- id 1s7Afi-00042Z-SH
- for qemu-riscv@nongnu.org; Wed, 15 May 2024 05:11:40 -0400
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-6f0f728d373so2297029a34.0
- for <qemu-riscv@nongnu.org>; Wed, 15 May 2024 02:11:38 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <eric.cheng.linux@gmail.com>)
+ id 1s7856-0003eE-EY; Wed, 15 May 2024 02:25:42 -0400
+Received: by mail-pg1-x544.google.com with SMTP id
+ 41be03b00d2f7-6001399f22bso4411213a12.0; 
+ Tue, 14 May 2024 23:25:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1715764297; x=1716369097; darn=nongnu.org;
- h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8kRSr0FPNBS06uaJY90nbU69nqRvDiNbITCiGOUP42c=;
- b=JG4ineVhOdsegYlhF7k5qmJmKYolzDbsqi/Yzkb4jB1t6vv3T3yBsXljY2dfIHCqzy
- i+KaHZQXNLM9G+0nitfWnHX+5basMN4YrLjel7oitIzRnh2y9SMZXcSXYyOboOv0FSnj
- fiw9ul21np9FNk5QQ7Xw4fW0gM5QJN0PT9pfl4azXeEFraPuJPq9ORL4OIJ8sbq3N1EJ
- iuou/lQBe77JRxIE5StNZy4SAHsF0zNvj7xrU0OvtwEUJkmzN+sO3/EW516/2TzVdpnR
- ebILCIqcB1CFi06VeTbwkjb78jrgXyhHSxzFEFxE/Dci616gs4unodOE94dkDSC+up6G
- xuOw==
+ d=gmail.com; s=20230601; t=1715754338; x=1716359138; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=VL3eWkqSKi0DqUXx6X9gpbwc7M71wrmWxptUiwzGgmA=;
+ b=czNytM2hkK7GaWoS6YaSVrz2o2hKrlg7Hi6DJgE0N0e80ZzNlY93ghEehBHEQzCzwg
+ ZT/9ga5zH6OOWjYk5cUcokOL3NEPlr5OoQgt+sTnmLdy025Kg1n6lGv3euuqdHCHpk0H
+ dWh6w55y+lQozTw147xbjCkhM67fn9RVzbfwLHKOAPJZmWroglLMfbZrlLJPAGsN2zMI
+ dMDo85nZy0CaXRGSsn2UmdeANh6bd95IGysq6+lrINR/vFgrRbM1QTPxBKzvaS2+VA7D
+ 0ifHxwteePQBMv4yUxa6CwHYPTPbzYksinOxcIRohPDEZkGBFQqV7mIzMxrresQS/UE9
+ STEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715764297; x=1716369097;
- h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=8kRSr0FPNBS06uaJY90nbU69nqRvDiNbITCiGOUP42c=;
- b=iw3u8lUv/EguNBVPnKjGVlWN9VRKuuIx0rLKG43Jqrau+aKlWE5Uzzrmy8rFdB+L/K
- 4B4DqIFvV8J2HDhqmgkYZEPS/cMskk1p6axK3kBW6B/NpU4jdMcEtFyjMMuG5o7zr7XU
- SIWqZCGDrp0dqHBd1Z53YOGOrEgodTrKNRgxD4F40G1V/0IcbkCokT2brHXYZv+ScN2m
- Qn+4HcxK9lD6wCNUyomIQ5MElZwxX+nWKPhkPZD+HsD5ARiR0yijnCsUMfsaIWAVErVh
- fF+HT0RWB4xb1TpwvYrLWV9TnKqiFrJt3dBy8JNrJLynU8NHqOdtpCrqdyS3tLWpO10R
- GqUw==
+ d=1e100.net; s=20230601; t=1715754338; x=1716359138;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=VL3eWkqSKi0DqUXx6X9gpbwc7M71wrmWxptUiwzGgmA=;
+ b=dQ0lTn1SwGLOl6kwAQyu77MmwyYCdy0nWMstxBaM3vxY8yLrEXx5OGhkqwznTzeT9C
+ jlmkLEbWTrkPJwlepnA3qZXPbgTYRd7Yt9H9H6GhW5Z/ZmreDmV75QSvrNxFZDOELoUr
+ v2G/zNDhqlNyIzuVtvky84QX4j3uH0yXo/pZvCtJakwUpMhIOwbSV0dgARx2lvWXnqvk
+ +269OZD7Oepm/9EsMUpANhip9ISp1ecyiuVIq9S3j1H0CtSrgf5cHijSnAPQDd5dVG2B
+ hqSP8Rmwa5webMzrbDiuy7haHj1aBKHnaNjQUffUI2V23cRc8lZZJ97Yf4MDWE7d4n00
+ /Hiw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUQgFGg65yUXs2zeq/vc7uRUj18weoaysFDlDkwbvgY9UBDcvCQ/lrE1/goXkedko8VgZdEuJ2dmFfEaJynxjJxV9vM+RM=
-X-Gm-Message-State: AOJu0YxkKB0T2Yh797Rl046aM7pTwIZRWFumVnvsiFQa0AQkxj5gjuyT
- lRJO3fOuxJNXXCmqKi+sDCxdHFlBbhVaZH2RRQhLJcMRJa7J44hdDRW1EXEVYmE=
-X-Google-Smtp-Source: AGHT+IF1k45tw7ROKqxjDefYgXyXuBA6qAPuDaO6Vz4Afc10xIA3hxKVD1P7wsZsoD3U45GQGSVzcA==
-X-Received: by 2002:a05:6870:7246:b0:241:98e4:5590 with SMTP id
- 586e51a60fabf-24198e4a118mr18307142fac.5.1715764297001; 
- Wed, 15 May 2024 02:11:37 -0700 (PDT)
-Received: from hsinchu26.internal.sifive.com
- (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
+ AJvYcCUiHa1CLLaJ+4ZAcSgo3k/UXth0/HFG1jTT3zI8haTfF9mhRfKtyKUyrwJXhEHIQGXVBcB4Y1Ts0q5MCW0PfefpZ0wx+DU=
+X-Gm-Message-State: AOJu0YxcOiGZzi+hDR/F4GWHWGuaPIo3pH3oOrXmFN93c3vBmMpMFCUu
+ Z93zTKOfec7ch2S/kowYWEZ78oEkALqo6w1WoX5bRBt0b+KYqksY
+X-Google-Smtp-Source: AGHT+IEtBLz0p61NdoN9T5a1ukaH7Cb4jvNohnNRtSNsyRVsSu5/fQK5VpbsqWGMor5sgyNuINO1uQ==
+X-Received: by 2002:a17:90a:4a15:b0:2b9:e3:3561 with SMTP id
+ 98e67ed59e1d1-2b900e336b2mr6478984a91.43.1715754337592; 
+ Tue, 14 May 2024 23:25:37 -0700 (PDT)
+Received: from [172.27.234.192]
+ (ec2-16-163-40-128.ap-east-1.compute.amazonaws.com. [16.163.40.128])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-654f2660b37sm785026a12.28.2024.05.15.02.11.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 May 2024 02:11:35 -0700 (PDT)
-From: Yong-Xuan Wang <yongxuan.wang@sifive.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: greentime.hu@sifive.com, vincent.chen@sifive.com, frank.chang@sifive.com,
- jim.shu@sifive.com, Yong-Xuan Wang <yongxuan.wang@sifive.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Andrew Jones <ajones@ventanamicro.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v2 1/1] target/riscv/kvm.c: Fix the hart bit setting of AIA
-Date: Wed, 15 May 2024 17:11:28 +0800
-Message-Id: <20240515091129.28116-1-yongxuan.wang@sifive.com>
-X-Mailer: git-send-email 2.17.1
-Received-SPF: pass client-ip=2607:f8b0:4864:20::32d;
- envelope-from=yongxuan.wang@sifive.com; helo=mail-ot1-x32d.google.com
+ 98e67ed59e1d1-2b62886d069sm12685522a91.25.2024.05.14.23.25.34
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 14 May 2024 23:25:37 -0700 (PDT)
+Message-ID: <41835d3f-d9e2-4ace-8add-f5bb6c525c5f@gmail.com>
+Date: Wed, 15 May 2024 14:25:31 +0800
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 06/15] hw/riscv/virt.c: support for RISC-V IOMMU
+ PCIDevice hotplug
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ ajones@ventanamicro.com, tjeznach@rivosinc.com
+References: <20240307160319.675044-1-dbarboza@ventanamicro.com>
+ <20240307160319.675044-7-dbarboza@ventanamicro.com>
+Content-Language: en-US
+From: Eric Cheng <eric.cheng.linux@gmail.com>
+In-Reply-To: <20240307160319.675044-7-dbarboza@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::544;
+ envelope-from=eric.cheng.linux@gmail.com; helo=mail-pg1-x544.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Wed, 15 May 2024 08:50:12 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -99,53 +101,89 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-In AIA spec, each hart (or each hart within a group) has a unique hart
-number to locate the memory pages of interrupt files in the address
-space. The number of bits required to represent any hart number is equal
-to ceil(log2(hmax + 1)), where hmax is the largest hart number among
-groups.
+On 3/8/2024 12:03 AM, Daniel Henrique Barboza wrote:
+> From: Tomasz Jeznach <tjeznach@rivosinc.com>
+> 
+> Generate device tree entry for riscv-iommu PCI device, along with
+> mapping all PCI device identifiers to the single IOMMU device instance.
+> 
+> Signed-off-by: Tomasz Jeznach <tjeznach@rivosinc.com>
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> ---
+>   hw/riscv/virt.c | 33 ++++++++++++++++++++++++++++++++-
+>   1 file changed, 32 insertions(+), 1 deletion(-)
+> 
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index a094af97c3..67a8267747 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -32,6 +32,7 @@
+>   #include "hw/core/sysbus-fdt.h"
+>   #include "target/riscv/pmu.h"
+>   #include "hw/riscv/riscv_hart.h"
+> +#include "hw/riscv/iommu.h"
+>   #include "hw/riscv/virt.h"
+>   #include "hw/riscv/boot.h"
+>   #include "hw/riscv/numa.h"
+> @@ -1004,6 +1005,30 @@ static void create_fdt_virtio_iommu(RISCVVirtState *s, uint16_t bdf)
+>                              bdf + 1, iommu_phandle, bdf + 1, 0xffff - bdf);
+>   }
+>   
+> +static void create_fdt_iommu(RISCVVirtState *s, uint16_t bdf)
+> +{
+> +    const char comp[] = "riscv,pci-iommu";
+> +    void *fdt = MACHINE(s)->fdt;
+> +    uint32_t iommu_phandle;
+> +    g_autofree char *iommu_node = NULL;
+> +    g_autofree char *pci_node = NULL;
+> +
+> +    pci_node = g_strdup_printf("/soc/pci@%lx",
+> +                               (long) virt_memmap[VIRT_PCIE_ECAM].base);
+> +    iommu_node = g_strdup_printf("%s/iommu@%x", pci_node, bdf);
+> +    iommu_phandle = qemu_fdt_alloc_phandle(fdt);
+> +    qemu_fdt_add_subnode(fdt, iommu_node);
+> +
+> +    qemu_fdt_setprop(fdt, iommu_node, "compatible", comp, sizeof(comp));
+> +    qemu_fdt_setprop_cell(fdt, iommu_node, "#iommu-cells", 1);
+> +    qemu_fdt_setprop_cell(fdt, iommu_node, "phandle", iommu_phandle);
+> +    qemu_fdt_setprop_cells(fdt, iommu_node, "reg",
+> +                           bdf << 8, 0, 0, 0, 0);
+> +    qemu_fdt_setprop_cells(fdt, pci_node, "iommu-map",
+> +                           0, iommu_phandle, 0, bdf,
+> +                           bdf + 1, iommu_phandle, bdf + 1, 0xffff - bdf);
+> +}
 
-However, if the largest hart number among groups is a power of 2, QEMU
-will pass an inaccurate hart-index-bit setting to Linux. For example, when
-the guest OS has 4 harts, only ceil(log2(3 + 1)) = 2 bits are sufficient
-to represent 4 harts, but we passes 3 to Linux. The code needs to be
-updated to ensure accurate hart-index-bit settings.
+Is it really necessary to add this iommu-pci device in riscv virt machine, 
+rather than other 'physical' machine type? virt machine already has its 
+virtio-iommu.
 
-Additionally, a Linux patch[1] is necessary to correctly recover the hart
-index when the guest OS has only 1 hart, where the hart-index-bit is 0.
-
-[1] https://lore.kernel.org/lkml/20240415064905.25184-1-yongxuan.wang@sifive.com/t/
-
-Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
----
-Changelog
-v2:
-- update commit message
----
- target/riscv/kvm/kvm-cpu.c | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
-
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index 473416649fda..235e2cdaca1a 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -1777,7 +1777,14 @@ void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
-         }
-     }
- 
--    hart_bits = find_last_bit(&max_hart_per_socket, BITS_PER_LONG) + 1;
-+
-+    if (max_hart_per_socket > 1) {
-+        max_hart_per_socket--;
-+        hart_bits = find_last_bit(&max_hart_per_socket, BITS_PER_LONG) + 1;
-+    } else {
-+        hart_bits = 0;
-+    }
-+
-     ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
-                             KVM_DEV_RISCV_AIA_CONFIG_HART_BITS,
-                             &hart_bits, true, NULL);
--- 
-2.17.1
+> +
+>   static void finalize_fdt(RISCVVirtState *s)
+>   {
+>       uint32_t phandle = 1, irq_mmio_phandle = 1, msi_pcie_phandle = 1;
+> @@ -1712,9 +1737,11 @@ static HotplugHandler *virt_machine_get_hotplug_handler(MachineState *machine,
+>       MachineClass *mc = MACHINE_GET_CLASS(machine);
+>   
+>       if (device_is_dynamic_sysbus(mc, dev) ||
+> -        object_dynamic_cast(OBJECT(dev), TYPE_VIRTIO_IOMMU_PCI)) {
+> +        object_dynamic_cast(OBJECT(dev), TYPE_VIRTIO_IOMMU_PCI) ||
+> +        object_dynamic_cast(OBJECT(dev), TYPE_RISCV_IOMMU_PCI)) {
+>           return HOTPLUG_HANDLER(machine);
+>       }
+> +
+>       return NULL;
+>   }
+>   
+> @@ -1735,6 +1762,10 @@ static void virt_machine_device_plug_cb(HotplugHandler *hotplug_dev,
+>       if (object_dynamic_cast(OBJECT(dev), TYPE_VIRTIO_IOMMU_PCI)) {
+>           create_fdt_virtio_iommu(s, pci_get_bdf(PCI_DEVICE(dev)));
+>       }
+> +
+> +    if (object_dynamic_cast(OBJECT(dev), TYPE_RISCV_IOMMU_PCI)) {
+> +        create_fdt_iommu(s, pci_get_bdf(PCI_DEVICE(dev)));
+> +    }
+>   }
+>   
+>   static void virt_machine_class_init(ObjectClass *oc, void *data)
 
 
