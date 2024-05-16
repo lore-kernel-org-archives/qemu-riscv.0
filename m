@@ -4,81 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B083BC25B74
-	for <qemu-riscv@archiver.kernel.org>; Thu, 16 May 2024 12:34:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E16F7C25B74
+	for <qemu-riscv@archiver.kernel.org>; Thu, 16 May 2024 14:00:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s7aJQ-0005qr-Sb; Thu, 16 May 2024 08:34:22 -0400
+	id 1s7beV-0004NH-Ho; Thu, 16 May 2024 10:00:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jerry.zhangjian@sifive.com>)
- id 1s7aJM-0005qX-Ji
- for qemu-riscv@nongnu.org; Thu, 16 May 2024 08:34:16 -0400
-Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1s7beS-0004LD-5f
+ for qemu-riscv@nongnu.org; Thu, 16 May 2024 10:00:08 -0400
+Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jerry.zhangjian@sifive.com>)
- id 1s7aJJ-0006PY-0k
- for qemu-riscv@nongnu.org; Thu, 16 May 2024 08:34:15 -0400
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-1ec486198b6so62072535ad.1
- for <qemu-riscv@nongnu.org>; Thu, 16 May 2024 05:34:10 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1s7beP-00054J-KR
+ for qemu-riscv@nongnu.org; Thu, 16 May 2024 10:00:07 -0400
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-1edf506b216so56462645ad.2
+ for <qemu-riscv@nongnu.org>; Thu, 16 May 2024 07:00:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1715862849; x=1716467649; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=lys27R2Wsf2SnXyQcY79ip1NkU6kkjSI5byaNvYzksM=;
- b=dBg+QdjHKRwY7lFijzi5PA/szhEL46/eBau1k5BuS6MqImqGVuI/YTRLlQ/KDy9ON6
- 8AYzORSUFsncR5T4yXvosRxnnKGHqH7pwUi0Z5E7Vmn3vOAdPqz0cZPdf38ClUtfs3RZ
- 3KOY6MpWzxVnaGxGBmV68V5uhOdOu/3C06+skN5QTioMfAVXqELk1+oNfTYgpefdlwAJ
- u/8ubIf40c3FRGHuR6g3cWJwL/87vWvP19QM5EJWBLIMVX/UR4f8G1jDpWIamXICnDIE
- OfAzkHSgBb763hI+4TyUZ7BHhlz0J2elDuICLNYZrOSIOFqaQNXPrq3ijjhIizMLwn8u
- hcXw==
+ d=ventanamicro.com; s=google; t=1715868000; x=1716472800; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=1+cLxh7WiJ2rnnRCEJ4O6GUBbbMkGy+/ZDUfnRBVYVc=;
+ b=E3s+uW/PF40I/hx++hYWrzdEq7AwjbyrebNWWiXKQmJvV5QeXf1v7eZLV/IHqtayhQ
+ Dt+CvVO6JcrK1F7VOYdBJkTcgF26yFoRIev5hpLVJxN2kp7gNkDrwOvw3UW/zlR2nAri
+ gd1UZubDN6uijxVbn001QEamuNBHa0I4XMzhiJ3WsDXM9+3AvzVQE22MiaOMJd3U8H6k
+ 6mZg78sp7syhD3t2AzifkiiE/fapKJ29Kdd//AAyRyS9gKtYsq8x3nfoG2TyxC1euV2B
+ NX979/8eyealZNkAdUaRdB7RLSzGMPfc+3Au4Pr7qMtN9tEx7HvAC6DLYvPaMck1xM1s
+ 0dmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715862849; x=1716467649;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=lys27R2Wsf2SnXyQcY79ip1NkU6kkjSI5byaNvYzksM=;
- b=hq+5Fqn2Y3ze3ghtyOXNsosyXwVf0tMJd9T92V5foP+5PvSKFgc3pXx18aQeL/h8e8
- /kMZITECvq2b/jAEcDdkohyutZcSW0lsvcAijaJgsvQozAT3XRThtow6aToujTtdNFsI
- GEPvY8bfxs5zbl96i2s3bAmHUA2qY/LEjc3g4K2y6U1VOZ0oXkXnBVIJOLCOBxEl4OhI
- uocFCbGDYfTUy1YSdQTo/JRwR8A+4wqK7MNDuMC3YUZ15j7AYUllsjqpNHktjd28SaYi
- a6oAYhIDUivZHUOiAU2x87wi9ZKFRy5VMkQfs0pd2oGO1d43SvdUnIG5ucJfR3usC91j
- ok9A==
+ d=1e100.net; s=20230601; t=1715868000; x=1716472800;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=1+cLxh7WiJ2rnnRCEJ4O6GUBbbMkGy+/ZDUfnRBVYVc=;
+ b=Y2KhwrrdIBOG3CMy0Hhazzz62MaBVMJr5xrSkoLgIcn8wAW3wLeAySnxT4dUZebSE3
+ bJTJ4S0jhg88NONgKJ4fjW+hQTcEpZvQEjBTku3JT0aiElCrfqZWC77414EhZ1M0PzYY
+ tlhD2MIRoGRpKK3424gklaNGeP5oQ6NUxjW50BDyefboJK0Yw+6v78OgjNalzXQ5TiUg
+ b+a+aNLwz55PJ1QTn+nVtwy5zyoCzQJN890nrE9y68sRzSRl31kGloaGNXUJj05ftt0K
+ zw7XqdA17g+XtOB6OxhW2j3bheR3lN0TyOrXu7Om+RVYrAxTxvRB5onjSQDAQPA71gLt
+ krrw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWg+KouphiN7gLNqWHMbEBubdZ95qYMvZ4MOZbROuiQQpNScxJuHNbovTwxMNuLubu8lveX2UCnVpTnjnP3TVU5jEk8Q/0=
-X-Gm-Message-State: AOJu0YzC4T/w2a1jL8RyXv9B7aQGaOTPs1aCqBOn3vZgOu+9C+iapmbO
- HrwGOctQtbzama/UxkOx7Ms3wCX8zTt0Vl4O2pT3HLad2AVIohjGcgiSPD1sKYo=
-X-Google-Smtp-Source: AGHT+IHo6Vk09P7Ol3/CXSwy16BGS4Mr11bBuWxmoWX1ScUr5AhvRquKnKkjD0kClOHksk15a0Mo0w==
-X-Received: by 2002:a17:902:f552:b0:1ed:1d37:267e with SMTP id
- d9443c01a7336-1ef43e281b0mr241238285ad.16.1715862849016; 
- Thu, 16 May 2024 05:34:09 -0700 (PDT)
-Received: from jerry-1818.internal.sifive.com ([136.226.240.171])
+ AJvYcCW4a6ZZOW/Dz30pcNIja6vEWCI1gaN/kL1rHrdZOTX7q3qydO5bDMbhU/E06eCKlNhAOkXMPUEx8NG9ie5FR1hX0mKXcoU=
+X-Gm-Message-State: AOJu0Yx00swTMgyPLdX1hJxncgWXDALKcZwOfzOhhsn/0qd8YI2KRavD
+ UsSKyNb9XeLRxKKrpAMpIC+cCXusYxPRHPKQQ4cjvUOG4MX/JAWR825fWb/o+uA=
+X-Google-Smtp-Source: AGHT+IGEIrwFD904mWvly+yZXXWRoO1/Wz7bT61a7cHFmA+LUZ2JVSa6yBhKorr99h/4V5FK0HwJig==
+X-Received: by 2002:a17:902:e5cb:b0:1eb:63d9:8d85 with SMTP id
+ d9443c01a7336-1ef43d2e27bmr245926885ad.14.1715867999522; 
+ Thu, 16 May 2024 06:59:59 -0700 (PDT)
+Received: from [192.168.68.110] ([177.94.42.57])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1ef0c136838sm137850155ad.232.2024.05.16.05.34.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 May 2024 05:34:08 -0700 (PDT)
-From: Jerry Zhang Jian <jerry.zhangjian@sifive.com>
-To: alistair.francis@wdc.com, palmer@dabbelt.com, frank.chang@sifive.com,
- max.chou@sifive.com, paul.walmsley@sifive.com, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: Jerry Zhang Jian <jerry.zhangjian@sifive.com>
-Subject: [PATCH] target/riscv: zvbb implies zvkb
-Date: Thu, 16 May 2024 20:33:36 +0800
-Message-ID: <20240516123336.63534-1-jerry.zhangjian@sifive.com>
-X-Mailer: git-send-email 2.42.0
+ d9443c01a7336-1ef0b9d44e0sm142377685ad.4.2024.05.16.06.59.56
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 16 May 2024 06:59:59 -0700 (PDT)
+Message-ID: <93b5d431-13db-4c44-8546-5b94e293b9e1@ventanamicro.com>
+Date: Thu, 16 May 2024 10:59:54 -0300
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 15/15] hw/misc: EDU: add ATS/PRI capability
+To: Frank Chang <frank.chang@sifive.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
+ palmer@rivosinc.com, ajones@ventanamicro.com, tjeznach@rivosinc.com
+References: <20240307160319.675044-1-dbarboza@ventanamicro.com>
+ <20240307160319.675044-16-dbarboza@ventanamicro.com>
+ <CANzO1D3sxSqXS6x1WkQDpyZ=T9nLQwHJCJRm=2FJn5OtrVN_mw@mail.gmail.com>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <CANzO1D3sxSqXS6x1WkQDpyZ=T9nLQwHJCJRm=2FJn5OtrVN_mw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
- envelope-from=jerry.zhangjian@sifive.com; helo=mail-pl1-x636.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -94,31 +101,136 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-- According to RISC-V crypto spec, Zvkb extension is a proper subset of the Zvbb extension.
+Hi Frank!
 
-- Reference: https://github.com/riscv/riscv-crypto/blob/1769c2609bf4535632e0c0fd715778f212bb272e/doc/vector/riscv-crypto-vector-zvkb.adoc?plain=1#L10
+On 5/7/24 12:32, Frank Chang wrote:
+> Hi Daniel,
+> 
+> Daniel Henrique Barboza <dbarboza@ventanamicro.com> 於 2024年3月8日 週五 上午12:05寫道：
+>>
+>> From: Tomasz Jeznach <tjeznach@rivosinc.com>
+>>
+>> Mimic ATS interface with IOMMU translate request with IOMMU_NONE.  If
+>> mapping exists, translation service will return current permission
+>> flags, otherwise will report no permissions.
+>>
+>> Implement and register the IOMMU memory region listener to be notified
+>> whenever an ATS invalidation request is sent from the IOMMU.
+>>
+>> Implement and register the IOMMU memory region listener to be notified
+>> whenever an ATS page request group response is triggered from the IOMMU.
+>>
+>> Introduces a retry mechanism to the timer design so that any page that's
+>> not available should be only accessed after the PRGR notification has
+>> been received.
+>>
+>> Signed-off-by: Tomasz Jeznach <tjeznach@rivosinc.com>
+>> Signed-off-by: Sebastien Boeuf <seb@rivosinc.com>
+>> ---
+>>   hw/misc/edu.c | 258 ++++++++++++++++++++++++++++++++++++++++++++++++--
+>>   1 file changed, 251 insertions(+), 7 deletions(-)
 
-Signed-off-by: Jerry Zhang Jian <jerry.zhangjian@sifive.com>
----
- target/riscv/tcg/tcg-cpu.c | 4 ++++
- 1 file changed, 4 insertions(+)
+(...)
 
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index 40054a391a..f1a1306ab2 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -658,6 +658,10 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
-         cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvbc), true);
-     }
- 
-+    if (cpu->cfg.ext_zvbb) {
-+        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvkb), true);
-+    }
-+
-     /*
-      * In principle Zve*x would also suffice here, were they supported
-      * in qemu
--- 
-2.42.0
 
+>> +
+>>   static void pci_edu_realize(PCIDevice *pdev, Error **errp)
+>>   {
+>>       EduState *edu = EDU(pdev);
+>> +    AddressSpace *dma_as = NULL;
+>>       uint8_t *pci_conf = pdev->config;
+>>       int pos;
+>>
+>> @@ -390,9 +603,28 @@ static void pci_edu_realize(PCIDevice *pdev, Error **errp)
+>>       pos = PCI_CONFIG_SPACE_SIZE;
+>>       if (edu->enable_pasid) {
+>>           /* PCIe Spec 7.8.9 PASID Extended Capability Structure */
+>> -        pcie_add_capability(pdev, 0x1b, 1, pos, 8);
+>> +        pcie_add_capability(pdev, PCI_EXT_CAP_ID_PASID, 1, pos, 8);
+> 
+> This should be included in the 14th commit.
+> 
+>>           pci_set_long(pdev->config + pos + 4, 0x00001400);
+>>           pci_set_long(pdev->wmask + pos + 4,  0xfff0ffff);
+>> +        pos += 8;
+>> +
+>> +        /* ATS Capability */
+>> +        pcie_ats_init(pdev, pos, true);
+>> +        pos += PCI_EXT_CAP_ATS_SIZEOF;
+>> +
+>> +        /* PRI Capability */
+>> +        pcie_add_capability(pdev, PCI_EXT_CAP_ID_PRI, 1, pos, 16);
+>> +        /* PRI STOPPED */
+>> +        pci_set_long(pdev->config + pos +  4, 0x01000000);
+>> +        /* PRI ENABLE bit writable */
+>> +        pci_set_long(pdev->wmask  + pos +  4, 0x00000001);
+>> +        /* PRI Capacity Supported */
+>> +        pci_set_long(pdev->config + pos +  8, 0x00000080);
+>> +        /* PRI Allocations Allowed, 32 */
+>> +        pci_set_long(pdev->config + pos + 12, 0x00000040);
+>> +        pci_set_long(pdev->wmask  + pos + 12, 0x0000007f);
+> 
+> We should use the defines declared in
+> include/standard-headers/linux/pci_regs.h for readability,
+> though some of the bitfields are not defined in the header file.
+> 
+> Regards,
+> Frank Chang
+> 
+>> +
+>> +        pos += 8;
+>>       }
+
+I'll reply here for both patches 14 and 15.
+
+I changed it to use the defines we have in pci_regs.h if we have the definition
+in the header. When we don't have the definition I ended up adding a manual
+comment in the line like it's being done up above.
+
+I'll also add doc changes for each new feature added.
+
+All this said, I'm inclined to remove these 2 patches from the series. It's a
+way of experiment with the riscv-iommu impl but it's not a crucial part of it.
+The changes I made so far, based on your review, were uploaded here:
+
+
+https://gitlab.com/danielhb/qemu/-/commits/edu_pasid_v3
+
+
+Thanks,
+
+Daniel
+
+
+>>
+>>       if (msi_init(pdev, 0, 1, true, false, errp)) {
+>> @@ -409,12 +641,24 @@ static void pci_edu_realize(PCIDevice *pdev, Error **errp)
+>>       memory_region_init_io(&edu->mmio, OBJECT(edu), &edu_mmio_ops, edu,
+>>                       "edu-mmio", 1 * MiB);
+>>       pci_register_bar(pdev, 0, PCI_BASE_ADDRESS_SPACE_MEMORY, &edu->mmio);
+>> +
+>> +    /* Register IOMMU listener */
+>> +    edu->iommu_listener = (MemoryListener) {
+>> +        .name = "edu-iommu",
+>> +        .region_add = edu_iommu_region_add,
+>> +        .region_del = edu_iommu_region_del,
+>> +    };
+>> +
+>> +    dma_as = pci_device_iommu_address_space(pdev);
+>> +    memory_listener_register(&edu->iommu_listener, dma_as);
+>>   }
+>>
+>>   static void pci_edu_uninit(PCIDevice *pdev)
+>>   {
+>>       EduState *edu = EDU(pdev);
+>>
+>> +    memory_listener_unregister(&edu->iommu_listener);
+>> +
+>>       qemu_mutex_lock(&edu->thr_mutex);
+>>       edu->stopping = true;
+>>       qemu_mutex_unlock(&edu->thr_mutex);
+>> --
+>> 2.43.2
+>>
+>>
 
