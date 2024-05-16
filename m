@@ -4,86 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8706C25B75
-	for <qemu-riscv@archiver.kernel.org>; Wed, 15 May 2024 14:34:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55F9FC25B77
+	for <qemu-riscv@archiver.kernel.org>; Thu, 16 May 2024 04:51:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s7Fi3-0005xj-9C; Wed, 15 May 2024 10:34:23 -0400
+	id 1s7T4o-00051E-1H; Thu, 16 May 2024 00:50:46 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1s7Fi1-0005v3-DD
- for qemu-riscv@nongnu.org; Wed, 15 May 2024 10:34:21 -0400
-Received: from mail-lf1-x12e.google.com ([2a00:1450:4864:20::12e])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1s7T4l-00050b-V9; Thu, 16 May 2024 00:50:43 -0400
+Received: from mail-vs1-xe35.google.com ([2607:f8b0:4864:20::e35])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1s7Fhx-0003xm-2A
- for qemu-riscv@nongnu.org; Wed, 15 May 2024 10:34:21 -0400
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-52389c1308dso1533767e87.3
- for <qemu-riscv@nongnu.org>; Wed, 15 May 2024 07:34:16 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1s7T4k-00072T-4W; Thu, 16 May 2024 00:50:43 -0400
+Received: by mail-vs1-xe35.google.com with SMTP id
+ ada2fe7eead31-47ef8c9991dso2239179137.0; 
+ Wed, 15 May 2024 21:50:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1715783655; x=1716388455; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=2KdtZ1u+WQ4YTJUTFSc8fW+OHiQwxQk4DxsVoRWF2GY=;
- b=EnWexb6HwWJ5SHzwp7FsY9aFQMRD4GqdKzhnKSQR1JHdo3V0JuUGg8wRySS4d7choq
- rqhdPW8wxKbpaQjqCffaKnL6RzfRKonIDAhXKB2m7Ho8qnKBZ+k8rz66WKJXglicGCEF
- 05MjJv6Tj5qzQG8J00Kgm3xI5FVxZKzpB/ilPtQ050zePHI++SoxLlXJaBx2UQIM6ctJ
- pwpQyyiocszSrUQNCcRYyzUlfCR8amwUvHUI+cR3TMhiyIS+HtzavmgVkMJfBXq0E4YH
- iP5PGld2mQt5vQd2d6HlVmfmZGIdGKMS6UgcyiYmVzwoHnEd1EhqRh/LOO2XbzwXxlVa
- hW7Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715783655; x=1716388455;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1715835040; x=1716439840; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2KdtZ1u+WQ4YTJUTFSc8fW+OHiQwxQk4DxsVoRWF2GY=;
- b=LplvSBEn/bwFFdpkDizFB9MYz5H9xjhEG9sC0X8aLkWYUfpMkIclMDbYYFnU52R5iQ
- IkOg9WJd4+aQyRDFe+5iPChlNLz/Li2hFavz4y7QibdTBCw0YkRZx6gKl787OEkmefRi
- VIJw0Q38cb6f2qcuLeHLvxGmjsFVhPClfswJv5+eP6/RnS7VJ7d+6n9LZOMSpvT0m6Hg
- QEVXb7eNhkFInogm9pCc+BYlz8EFWWQiEKgp+NEbEKHNashZXNUmG4Nbfb3GbV3iFFvM
- JPrOaEh6U8MvnHw3xYW3rdEPiJvg+HcGLYbrk4z5AzxnPkjV4KguoPiFrnOpiWzqnLTA
- NBVg==
+ bh=aZ1V+XeHZFFYo52QXcjvbrka+P5opxVsNXShzQBDDaM=;
+ b=bOLcFDEmvnJPpwvHwvDnTSaP0gM8sy5A5/WW85NsO0WJOXkxfxKzSXhFZa5Y9XF6mW
+ JCxrifTEPlBYAW2PxWMnHP6ibedd2gQIG+Kutp97PziFPbO5UQE8mFJRlQCMZ/VqxqZC
+ cX2bYt2xT3wXoS0Gxf+BOazDC6mLrGmgEinSNwqUqeoVZG7Jd59IbqwVad4v70C0WDWv
+ kNbCWpjyQR7Oje6paUxqL120EaLcUshkruqP59SMp3G5wuzVT0rl5gFCM+/MvR/rAxrp
+ SZBhccgmMuPzyHjA0eZtp60Xbm9LWrgkAMZZR+ylA18x4XIApdBNdfO/jWuifBf9Sp0r
+ oTZg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1715835040; x=1716439840;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=aZ1V+XeHZFFYo52QXcjvbrka+P5opxVsNXShzQBDDaM=;
+ b=T2ie/ZqAjJlk+L0OyR5PfEAf/ID5n7G7Iy/A7HWdGiqhsatnFwpBSUeY0N7QQQAHoH
+ SavRYpJQ6a3eJOI2T4PxClHIZ5W15zQlp0+RkWrbQFpaxw7wOVM2FYgH+I6wo5NlBezZ
+ F2fcdlY2LFRupEMvrAAXUryYJNEpGHozWdSL5egI5HzJN63G4pZDH8JkVMNb9vwrWlo0
+ 4RXqf7mqASJlNzJxHOYkxXtxsLBIumxw8xTnIDjXej0XlH+KjwvGyl9bksdEA1kGIqkq
+ 40PSxeTivjJCntLNe4Q9s4vhin38tYCjp0yIxYvHMxPkuoV920MMO6m3MwW4sARHisav
+ fRQg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVkupNejVUPzdCrHZnphv9VUgqALU4RHvYGwETJ7+uM7v/JZzz7KGJHrHqEtxWFfNlycUxstqaScqReovoRmIumtkurggk=
-X-Gm-Message-State: AOJu0YymamNY7w1Vdc6qpe/F4/VCRtXQaW54H+86CJXVqFiUmLac/uxX
- /CAUncDL4A4RcvaqsNznr2lZuRq662j7DY1Ny+tqtjcv6ASrjD32KlmFSwQweH8=
-X-Google-Smtp-Source: AGHT+IFPadRYhM/E3bwZqDqB3Dx5YOzzJeTA1TKJRuQqo2WA7PSnwdlDG7VkNnQXlgv/ND82GnjA+g==
-X-Received: by 2002:ac2:4c8c:0:b0:51d:a87e:27ec with SMTP id
- 2adb3069b0e04-5220fc735f1mr10383753e87.9.1715783654919; 
- Wed, 15 May 2024 07:34:14 -0700 (PDT)
-Received: from localhost (cst2-173-78.cust.vodafone.cz. [31.30.173.78])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3502b895731sm16763633f8f.42.2024.05.15.07.34.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 May 2024 07:34:14 -0700 (PDT)
-Date: Wed, 15 May 2024 16:34:13 +0200
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Yong-Xuan Wang <yongxuan.wang@sifive.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, greentime.hu@sifive.com, 
- vincent.chen@sifive.com, frank.chang@sifive.com, jim.shu@sifive.com, 
+ AJvYcCUgZVpIBKCeQUa0JuqPWChYwY9UA44DVuA2iEoJtXnj2mEv7OfMdmgaPjuE4CY+zro2MruP688v+IdDr/PawyEW4wzHVJw=
+X-Gm-Message-State: AOJu0Yxnm5JDi/HBVhTKQHC2wLsMrGjdMvmym6mmOXKlGTw2eMzg84U5
+ hxCinUmHSmEBxkoRHkh1OcPReSqtihQwOuKdmK4nGekhf83CZMOXnXi1NTgf1s5r1Wv3rbaRSNb
+ efdxm/zPhJk+ifDGNwh4xDGv9Sdg=
+X-Google-Smtp-Source: AGHT+IFMHY7ewiilsQkNuS/y0jBYA1Kksurfmm75XGYk77J/p9qY2YbU6qQR1kPjLfM+iA6h0DwhHOovkT/VZabAU9M=
+X-Received: by 2002:a05:6102:a4f:b0:47f:fe4:a39a with SMTP id
+ ada2fe7eead31-48077de53a8mr15686591137.9.1715835039135; Wed, 15 May 2024
+ 21:50:39 -0700 (PDT)
+MIME-Version: 1.0
+References: <20240514110217.22516-1-rbradford@rivosinc.com>
+In-Reply-To: <20240514110217.22516-1-rbradford@rivosinc.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 16 May 2024 14:50:12 +1000
+Message-ID: <CAKmqyKN6S3uD7nrp2z4js9Zrc249LH2V_h0H9HojO9sbjBh1CA@mail.gmail.com>
+Subject: Re: [PATCH v2] target/riscv: Remove experimental prefix from "B"
+ extension
+To: Rob Bradford <rbradford@rivosinc.com>
+Cc: qemu-devel@nongnu.org, Andrew Jones <ajones@ventanamicro.com>, 
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
  Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: Re: [PATCH v2 1/1] target/riscv/kvm.c: Fix the hart bit setting of AIA
-Message-ID: <20240515-aad670c0d802abedcd4a240d@orel>
-References: <20240515091129.28116-1-yongxuan.wang@sifive.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240515091129.28116-1-yongxuan.wang@sifive.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::12e;
- envelope-from=ajones@ventanamicro.com; helo=mail-lf1-x12e.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e35;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe35.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -101,56 +97,57 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, May 15, 2024 at 05:11:28PM GMT, Yong-Xuan Wang wrote:
-> In AIA spec, each hart (or each hart within a group) has a unique hart
-> number to locate the memory pages of interrupt files in the address
-> space. The number of bits required to represent any hart number is equal
-> to ceil(log2(hmax + 1)), where hmax is the largest hart number among
-> groups.
-> 
-> However, if the largest hart number among groups is a power of 2, QEMU
-> will pass an inaccurate hart-index-bit setting to Linux. For example, when
-> the guest OS has 4 harts, only ceil(log2(3 + 1)) = 2 bits are sufficient
-> to represent 4 harts, but we passes 3 to Linux. The code needs to be
-> updated to ensure accurate hart-index-bit settings.
-> 
-> Additionally, a Linux patch[1] is necessary to correctly recover the hart
-> index when the guest OS has only 1 hart, where the hart-index-bit is 0.
-> 
-> [1] https://lore.kernel.org/lkml/20240415064905.25184-1-yongxuan.wang@sifive.com/t/
-> 
-> Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
-> ---
-> Changelog
-> v2:
-> - update commit message
-> ---
->  target/riscv/kvm/kvm-cpu.c | 9 ++++++++-
->  1 file changed, 8 insertions(+), 1 deletion(-)
-> 
-> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-> index 473416649fda..235e2cdaca1a 100644
-> --- a/target/riscv/kvm/kvm-cpu.c
-> +++ b/target/riscv/kvm/kvm-cpu.c
-> @@ -1777,7 +1777,14 @@ void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
->          }
->      }
->  
-> -    hart_bits = find_last_bit(&max_hart_per_socket, BITS_PER_LONG) + 1;
-> +
-> +    if (max_hart_per_socket > 1) {
-> +        max_hart_per_socket--;
-> +        hart_bits = find_last_bit(&max_hart_per_socket, BITS_PER_LONG) + 1;
-> +    } else {
-> +        hart_bits = 0;
-> +    }
-> +
->      ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
->                              KVM_DEV_RISCV_AIA_CONFIG_HART_BITS,
->                              &hart_bits, true, NULL);
-> -- 
-> 2.17.1
+On Tue, May 14, 2024 at 9:04=E2=80=AFPM Rob Bradford <rbradford@rivosinc.co=
+m> wrote:
 >
+> This extension has now been ratified:
+> https://jira.riscv.org/browse/RVS-2006 so the "x-" prefix can be
+> removed.
+>
+> Since this is now a ratified extension add it to the list of extensions
+> included in the "max" CPU variant.
+>
+> Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
+> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 
-Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
+Alistair
+
+> ---
+>  target/riscv/cpu.c         | 2 +-
+>  target/riscv/tcg/tcg-cpu.c | 2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index eb1a2e7d6d..861d9f4350 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -1396,7 +1396,7 @@ static const MISAExtInfo misa_ext_info_arr[] =3D {
+>      MISA_EXT_INFO(RVJ, "x-j", "Dynamic translated languages"),
+>      MISA_EXT_INFO(RVV, "v", "Vector operations"),
+>      MISA_EXT_INFO(RVG, "g", "General purpose (IMAFD_Zicsr_Zifencei)"),
+> -    MISA_EXT_INFO(RVB, "x-b", "Bit manipulation (Zba_Zbb_Zbs)")
+> +    MISA_EXT_INFO(RVB, "b", "Bit manipulation (Zba_Zbb_Zbs)")
+>  };
+>
+>  static void riscv_cpu_validate_misa_mxl(RISCVCPUClass *mcc)
+> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+> index 40054a391a..164a13ad0f 100644
+> --- a/target/riscv/tcg/tcg-cpu.c
+> +++ b/target/riscv/tcg/tcg-cpu.c
+> @@ -1281,7 +1281,7 @@ static void riscv_init_max_cpu_extensions(Object *o=
+bj)
+>      const RISCVCPUMultiExtConfig *prop;
+>
+>      /* Enable RVG, RVJ and RVV that are disabled by default */
+> -    riscv_cpu_set_misa_ext(env, env->misa_ext | RVG | RVJ | RVV);
+> +    riscv_cpu_set_misa_ext(env, env->misa_ext | RVB | RVG | RVJ | RVV);
+>
+>      for (prop =3D riscv_cpu_extensions; prop && prop->name; prop++) {
+>          isa_ext_update_enabled(cpu, prop->offset, true);
+> --
+> 2.44.0
+>
+>
 
