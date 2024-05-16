@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EE08C25B77
-	for <qemu-riscv@archiver.kernel.org>; Thu, 16 May 2024 04:54:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BCCFC25B74
+	for <qemu-riscv@archiver.kernel.org>; Thu, 16 May 2024 05:11:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s7T8K-0007YY-M6; Thu, 16 May 2024 00:54:24 -0400
+	id 1s7TNv-0003vS-Fc; Thu, 16 May 2024 01:10:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1s7T8I-0007Xz-CH; Thu, 16 May 2024 00:54:22 -0400
-Received: from mail-vs1-xe2e.google.com ([2607:f8b0:4864:20::e2e])
+ id 1s7TNr-0003uz-NQ; Thu, 16 May 2024 01:10:28 -0400
+Received: from mail-vk1-xa35.google.com ([2607:f8b0:4864:20::a35])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1s7T8G-0008M0-Hz; Thu, 16 May 2024 00:54:22 -0400
-Received: by mail-vs1-xe2e.google.com with SMTP id
- ada2fe7eead31-47f39711c94so2064495137.1; 
- Wed, 15 May 2024 21:54:19 -0700 (PDT)
+ id 1s7TNp-0006AK-DW; Thu, 16 May 2024 01:10:27 -0400
+Received: by mail-vk1-xa35.google.com with SMTP id
+ 71dfb90a1353d-4e1513b8829so369544e0c.3; 
+ Wed, 15 May 2024 22:10:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1715835259; x=1716440059; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1715836224; x=1716441024; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PnTrxIAX4KMsTZTbMjsYJgBUC+Rk9NfYJot1ZZjej7M=;
- b=PR91dHkHYfbERcYGBs+nVlsCi+AAci+K4ljbYhE4/tQZY2PJzmMr7W2eRgrN3PbWWv
- xFZ+k/4ku2hQ2/JThv1dkXJZiqbbJEOcRJyaH+uMBUIW8We3g7zWq5k7Bfi/rOizbZz/
- IK2R93F6TZtGRhXG7NciWBfysHcRkTXJtVA2mN+9497vgUBtm3+E/rZ/ZhoqRoKXQcQ3
- vsBEBp6P/ULSA54Q9NxBEf9lknPyZ5Rt2yHapP3dWh6rLbEMogmoavdkK8KjL6pAq5gq
- IelMwRwUIrE/tVkoJoKesB+c3QeZ+OLDmZbbZKdkYZuilNIcILvJ0mp+hLLB2KYIH+wx
- YzmQ==
+ bh=mWiglJg0pVMLpd6q+xzywXY5WHRF0H5vl6FEj4Kvizc=;
+ b=AY/4X1kiozXDM91+NC0AEZfL9nzydvW5xUKCUZ/3WdAtTY0lsFcAJ2HOBiDkhSTq9y
+ 0toCh2eBFcuCOI5T90DRNGUTymJ2qaKIdgGJ1CKlWkgPhe9gtyfKnwAzUvlz41yteBgk
+ x8UUG3qFmfMPEMob6vTiXwd+iGM2Nym9gnW5MYy5cJ2IA9JIBfZAtgITq6ApzPq1dPVt
+ Zw3QH3A3kceWZV+3E5uQszNDfihdyHetSrFS4sWv2g1G+5uI0vONDldmqST1rq6Thd99
+ vV6OqLXEhUplOQmpjL8oTQYHHLKu0AJXUVBi1ixrMBJDqW0TJMVgQZ0rYGzaTriYAlkY
+ 1fGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715835259; x=1716440059;
+ d=1e100.net; s=20230601; t=1715836224; x=1716441024;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=PnTrxIAX4KMsTZTbMjsYJgBUC+Rk9NfYJot1ZZjej7M=;
- b=NR02IrcbIKw75XtRPF/TsS/ixkgVbojF26cY5rzcudy1s1NyzOH2wHv0vYl9ErWVec
- 7tTsrUavwprubRUiic5KLUBcpYd5Mco690sfRA+RB3Bj1Oy3WfIS6siMLAexzgX3EOEH
- tE4ZMtKMNt0kgbO7xkzE90bUhuYGvuI30HDxRVw/y+wq3D1IRQBibbhslZOSuz9Et1EP
- GyDod+kgvFxFNXT3yiZyN8BkcLhQYcgftU0oN5Bs8AGc6pbvW3IaVi7zCu3akOmXFr9u
- PVxJcm3MMgoOm06u4L1hqdIeiW8AyvBlpk6faUBKzKTMkTltl89CT6NlPpKchqCqBox3
- aQuw==
+ bh=mWiglJg0pVMLpd6q+xzywXY5WHRF0H5vl6FEj4Kvizc=;
+ b=TZLHT0vZBX6C7ZZcz4OX575Tbu4+r6ebg5fgcMUbvs6OiTmEcMtcFH0Niu1+A/Wm0b
+ RsKPl9IeYOR9rxsUM3SqSeUTLUfDzah8hec7oCO/sGaFQgKZCNIyLvTsN7O0993il5o2
+ f0sR2zhQ3n8oDUYpVGZm4iAdxUKcZpKCTpWbF7YzjzHQrz3Egg8vOXRKFaul+RL9/xxt
+ sB8DMb2IbE4kalAMYcoKs60Dy1cBq+9Ysf36UO66GQUQTKRfmYzBpF5Hml3bzaSl3KFb
+ SGOFTYw0jgXXqTa+yet4u8BEQCZxk63BWyadjz4e0RK6k9ohEZMTjBAb+YaU8QF9LPr2
+ 6hHg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXaXNsd2RUFCf+Af+S9+yLurIbjwEhETL2f8yvj73hDFQ7jOTR7j89FrNTMO0wFnWw+Cn5HW+e8E21A367kJ/Ism7kPpu4=
-X-Gm-Message-State: AOJu0Yy/yQqHwQlMgesTy6aWWP6x8NaNK34H8cN0NHn1EYK7tbF3aM9I
- 5lyAhfhzoRGnN1dUZWS6JnlJPZWylhgddXBRQ8Kq5ZkRUUIo9shlKkvmE9vNBPPcXiH7/KT+B+b
- WCh/e50Wfkujo9Oy+D5YIFX4isUc=
-X-Google-Smtp-Source: AGHT+IGeJFwljkFSXC9e3cM+vKBdcToX6OcUU+g47maSv40ikPyTyv+cyMbcDNOCLQkBYvDBMsJXDxBpZfWzB+Dvjr4=
-X-Received: by 2002:a05:6102:3e86:b0:47b:ce9f:93f3 with SMTP id
- ada2fe7eead31-480789e1648mr15046456137.20.1715835258573; Wed, 15 May 2024
- 21:54:18 -0700 (PDT)
+ AJvYcCXE13KFNRUdcg7fMbxr+zcrdfg17S83eoQ1c2mcFLE1xW+dsh8wBhE0sOdPdvH9Zkfm45qCzXcuI0WXDSh3TVzS1fKWLrk=
+X-Gm-Message-State: AOJu0Yww7mDBX1nzWV4OmXxtcAr1E298bK+Ir8rckfk2pryHiXf5hTca
+ jZ8ySQrI3yF735fzAdXhnuFJB0CmjU7ZS9hwHOrO3cDyzQ4ZYHcN5qzR1QighGyEp7NGjLPhg+K
+ 7fF/rkrjDnufq8cQ5kUZnFRyjx2A=
+X-Google-Smtp-Source: AGHT+IFMAWzRprTfVJoZWJFJrJQpRTRy2OHM1ehKdpGdzXImib9kJ3yH5Q2eV7Ox6WYEroEXitmn1xWiKwIy+TT4vNE=
+X-Received: by 2002:a05:6122:2018:b0:4d3:3846:73bb with SMTP id
+ 71dfb90a1353d-4df882c5cd8mr16886290e0c.7.1715836223738; Wed, 15 May 2024
+ 22:10:23 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240514110217.22516-1-rbradford@rivosinc.com>
-In-Reply-To: <20240514110217.22516-1-rbradford@rivosinc.com>
+References: <20240514023910.301766-1-alistair.francis@wdc.com>
+ <14e88990-963c-45ef-bf51-662d54857c6e@ventanamicro.com>
+In-Reply-To: <14e88990-963c-45ef-bf51-662d54857c6e@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 16 May 2024 14:53:52 +1000
-Message-ID: <CAKmqyKMx-Di2aHhjFa1=hsggMEf9cd9_n8xLs1+PTugyxRpQqQ@mail.gmail.com>
-Subject: Re: [PATCH v2] target/riscv: Remove experimental prefix from "B"
- extension
-To: Rob Bradford <rbradford@rivosinc.com>
-Cc: qemu-devel@nongnu.org, Andrew Jones <ajones@ventanamicro.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
+Date: Thu, 16 May 2024 15:09:57 +1000
+Message-ID: <CAKmqyKP5dwLnvuXDbJkDV=CCGAsoVuyES7m+NB=7KceFEHoKzQ@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: rvzicbo: Fixup CBO extension register
+ calculation
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-riscv@nongnu.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ palmer@dabbelt.com, bin.meng@windriver.com, qemu-devel@nongnu.org, 
+ Alistair Francis <alistair.francis@wdc.com>, fabian.thomas@cispa.de, 
+ Bin Meng <bmeng.cn@gmail.com>,
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
+ Richard Henderson <richard.henderson@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2e;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a35;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa35.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -97,59 +97,114 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, May 14, 2024 at 9:04=E2=80=AFPM Rob Bradford <rbradford@rivosinc.co=
-m> wrote:
+On Tue, May 14, 2024 at 7:11=E2=80=AFPM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
 >
-> This extension has now been ratified:
-> https://jira.riscv.org/browse/RVS-2006 so the "x-" prefix can be
-> removed.
 >
-> Since this is now a ratified extension add it to the list of extensions
-> included in the "max" CPU variant.
 >
-> Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
-> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+> On 5/13/24 23:39, Alistair Francis wrote:
+> > When running the instruction
+> >
+> > ```
+> >      cbo.flush 0(x0)
+> > ```
+> >
+> > QEMU would segfault.
+> >
+> > The issue was in cpu_gpr[a->rs1] as QEMU does not have cpu_gpr[0]
+> > allocated.
+> >
+> > In order to fix this let's use the existing get_address()
+> > helper. This also has the benefit of performing pointer mask
+> > calculations on the address specified in rs1.
+> >
+> > The pointer masking specificiation specifically states:
+> >
+> > """
+> > Cache Management Operations: All instructions in Zicbom, Zicbop and Zic=
+boz
+> > """
+> >
+> > So this is the correct behaviour and we previously have been incorrectl=
+y
+> > not masking the address.
+> >
+> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > Reported-by: Fabian Thomas <fabian.thomas@cispa.de>
+> > Fixes: e05da09b7cfd ("target/riscv: implement Zicbom extension")
+> > ---
+>
+> LGTM but I wonder if this is the same fix as this one sent by Phil a mont=
+h
+> ago or so:
+>
+> https://lore.kernel.org/qemu-riscv/20240419110514.69697-1-philmd@linaro.o=
+rg/
+> ("[PATCH] target/riscv: Use get_address() to get address with Zicbom exte=
+nsions")
 
-Thanks!
+It is the same fix!
 
-Applied to riscv-to-apply.next
+I somehow missed that patch at the time. Sorry Philippe!
+
+I'm going to merge this one as it includes the details about pointer
+masking, which I think is useful as that's why we are using
+get_address() instead of get_gpr()
 
 Alistair
 
-> ---
->  target/riscv/cpu.c         | 2 +-
->  target/riscv/tcg/tcg-cpu.c | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index eb1a2e7d6d..861d9f4350 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -1396,7 +1396,7 @@ static const MISAExtInfo misa_ext_info_arr[] =3D {
->      MISA_EXT_INFO(RVJ, "x-j", "Dynamic translated languages"),
->      MISA_EXT_INFO(RVV, "v", "Vector operations"),
->      MISA_EXT_INFO(RVG, "g", "General purpose (IMAFD_Zicsr_Zifencei)"),
-> -    MISA_EXT_INFO(RVB, "x-b", "Bit manipulation (Zba_Zbb_Zbs)")
-> +    MISA_EXT_INFO(RVB, "b", "Bit manipulation (Zba_Zbb_Zbs)")
->  };
->
->  static void riscv_cpu_validate_misa_mxl(RISCVCPUClass *mcc)
-> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-> index 40054a391a..164a13ad0f 100644
-> --- a/target/riscv/tcg/tcg-cpu.c
-> +++ b/target/riscv/tcg/tcg-cpu.c
-> @@ -1281,7 +1281,7 @@ static void riscv_init_max_cpu_extensions(Object *o=
-bj)
->      const RISCVCPUMultiExtConfig *prop;
->
->      /* Enable RVG, RVJ and RVV that are disabled by default */
-> -    riscv_cpu_set_misa_ext(env, env->misa_ext | RVG | RVJ | RVV);
-> +    riscv_cpu_set_misa_ext(env, env->misa_ext | RVB | RVG | RVJ | RVV);
->
->      for (prop =3D riscv_cpu_extensions; prop && prop->name; prop++) {
->          isa_ext_update_enabled(cpu, prop->offset, true);
-> --
-> 2.44.0
 >
 >
+> Thanks,
+>
+> Daniel
+>
+> >   target/riscv/insn_trans/trans_rvzicbo.c.inc | 16 ++++++++++++----
+> >   1 file changed, 12 insertions(+), 4 deletions(-)
+> >
+> > diff --git a/target/riscv/insn_trans/trans_rvzicbo.c.inc b/target/riscv=
+/insn_trans/trans_rvzicbo.c.inc
+> > index d5d7095903..15711c3140 100644
+> > --- a/target/riscv/insn_trans/trans_rvzicbo.c.inc
+> > +++ b/target/riscv/insn_trans/trans_rvzicbo.c.inc
+> > @@ -31,27 +31,35 @@
+> >   static bool trans_cbo_clean(DisasContext *ctx, arg_cbo_clean *a)
+> >   {
+> >       REQUIRE_ZICBOM(ctx);
+> > -    gen_helper_cbo_clean_flush(tcg_env, cpu_gpr[a->rs1]);
+> > +    TCGv src =3D get_address(ctx, a->rs1, 0);
+> > +
+> > +    gen_helper_cbo_clean_flush(tcg_env, src);
+> >       return true;
+> >   }
+> >
+> >   static bool trans_cbo_flush(DisasContext *ctx, arg_cbo_flush *a)
+> >   {
+> >       REQUIRE_ZICBOM(ctx);
+> > -    gen_helper_cbo_clean_flush(tcg_env, cpu_gpr[a->rs1]);
+> > +    TCGv src =3D get_address(ctx, a->rs1, 0);
+> > +
+> > +    gen_helper_cbo_clean_flush(tcg_env, src);
+> >       return true;
+> >   }
+> >
+> >   static bool trans_cbo_inval(DisasContext *ctx, arg_cbo_inval *a)
+> >   {
+> >       REQUIRE_ZICBOM(ctx);
+> > -    gen_helper_cbo_inval(tcg_env, cpu_gpr[a->rs1]);
+> > +    TCGv src =3D get_address(ctx, a->rs1, 0);
+> > +
+> > +    gen_helper_cbo_inval(tcg_env, src);
+> >       return true;
+> >   }
+> >
+> >   static bool trans_cbo_zero(DisasContext *ctx, arg_cbo_zero *a)
+> >   {
+> >       REQUIRE_ZICBOZ(ctx);
+> > -    gen_helper_cbo_zero(tcg_env, cpu_gpr[a->rs1]);
+> > +    TCGv src =3D get_address(ctx, a->rs1, 0);
+> > +
+> > +    gen_helper_cbo_zero(tcg_env, src);
+> >       return true;
+> >   }
 
