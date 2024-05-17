@@ -4,90 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C42FC04FFE
-	for <qemu-riscv@archiver.kernel.org>; Fri, 17 May 2024 17:56:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A6C2C04FFE
+	for <qemu-riscv@archiver.kernel.org>; Fri, 17 May 2024 20:31:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s81oa-0003fv-MG; Fri, 17 May 2024 13:56:20 -0400
+	id 1s84EY-0001gs-QQ; Fri, 17 May 2024 16:31:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1s81oY-0003fS-Ti
- for qemu-riscv@nongnu.org; Fri, 17 May 2024 13:56:18 -0400
-Received: from mail-lj1-x234.google.com ([2a00:1450:4864:20::234])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1s84EX-0001fJ-59
+ for qemu-riscv@nongnu.org; Fri, 17 May 2024 16:31:17 -0400
+Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1s81oX-0003pL-B0
- for qemu-riscv@nongnu.org; Fri, 17 May 2024 13:56:18 -0400
-Received: by mail-lj1-x234.google.com with SMTP id
- 38308e7fff4ca-2e1fa1f1d9bso16148671fa.0
- for <qemu-riscv@nongnu.org>; Fri, 17 May 2024 10:56:16 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1s84EK-0006C8-Gm
+ for qemu-riscv@nongnu.org; Fri, 17 May 2024 16:31:16 -0400
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-1ee7963db64so21003855ad.1
+ for <qemu-riscv@nongnu.org>; Fri, 17 May 2024 13:31:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1715968575; x=1716573375; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ILybd4uCFVq2sLCUT+bII60RqHgIew9z0KFEVI3h8bM=;
- b=mzbcZEjPcaRNvraxnX/q4KGy2GDImQLzTJKNw+IhCjJUAxdxrAQuZ3CLML3CqN5AoD
- rxwAM9cDavyU53HHJKNgSVw61W1lsyOEXznhNUvFFQWIra+HiGLPuN9qnEotD7lFArni
- 0p6/cts85llP1qEQhyWpmfOeZk8fmnpr0ezEGMVXnCFwCgJnnU2LBfLlCdy7xnIcxIOI
- Mw/Eou5r1QYpK3+B5T1DPC8/OCDYHIo/gx37lo5Q1izSRKRFxFv3Kz3TT6UE3/3+2ps5
- fiYcJtctzcZVt3YZc4qFxdQcal1TCTbeBAD6wvzIKHA4gGNXWprAn+NCqAZS53Xz6dT2
- Bvkw==
+ d=ventanamicro.com; s=google; t=1715977862; x=1716582662; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=/otRcnylFD4/SM0G7Gj1/b7/cCpabgU/G8YRbr4Vkyw=;
+ b=MKSwnjcQkYj2A45vnNDwypCbN7q+oZpsVhyolx8X1QN8rnAkvuKDwewsQ13lyDxw6n
+ 2s2fDBNQNq40uVNxKEUCcM9P0vSGBh7ZCnI6iFQ0O5zISf7pbpPtlAwu4LGg+XIKQvso
+ n1PjOxAU/W6VOzCy+1oY0cobT2DbckOAhe4j8/WL+wm0JklhWYaVl4mXfjXS0PDBbD/5
+ JivdXkln8ew0e6hIF/MvtwSCWrl2qdtwRTQocijceMfaLggb1OFKH6hox+eWIVijRZ+4
+ XQmCrperiLfKPXC+u9D8ma/cwCiztnujP2Kjj4Fra7mWdAEWg+cZuTfNY+ked23tvDvY
+ cxiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715968575; x=1716573375;
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ILybd4uCFVq2sLCUT+bII60RqHgIew9z0KFEVI3h8bM=;
- b=lsmbjvq8jzmxnuZwTgvGj2UyXKrRpB4hcZ2FZ/OipLMSqppuruWf0+vBGB24Hs5Yz2
- O36W3AOyXsD3pD1WSUmeQ6H2A+EC+Y+seznNSrYoAFw0QM3e63Xb3Hk2uo1BBnvK7sS7
- 9Xu/MiwR8RJDCWKTuqu62B29FZyu0AeHBjHsjkesnuhWWihv4VKeOvLBVsvEfUm4/N71
- Iks/dOh/NwqsvtvLeDVi+NwR91fzkVh/urMKcq1jgA+9VrdGfUJsmuaAMhhVOJ+NiiHU
- IuXsPymGrk4CH4nkrFhs40VufHZq77XDqYc/ZXPfy6Oh572zFAtP5/gL5zQ1Nv4cp/4B
- is2Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVm+PSagoHsrsk0r9aOo0ivZ26s7ybIXy6XXX2Ih6DK0xoh+S6h/5BpKxHKBpoeDi/6Qkw9g3r27goBtuIpv/TP7t+oRnE=
-X-Gm-Message-State: AOJu0Yz4fEExOEJW8XO85Q2GGXI1rLg0FF6jxw1QAcFBCaDRvbnwaskU
- 3QFH7UOAKwqNNj6xvGxh3hdvfWCT7131F9mE3XAgZ2mNPmv7OTih8sjZ3jYD2YQ=
-X-Google-Smtp-Source: AGHT+IFpF093pv0hwwRWaGrCgDekBb8/acHfg50zvqnRoU954uKhh2TpqwIJQ01ZiDYb3oJCq6+9uw==
-X-Received: by 2002:a05:651c:1055:b0:2d8:8fb6:a53d with SMTP id
- 38308e7fff4ca-2e52028a6cfmr172105691fa.42.1715968574635; 
- Fri, 17 May 2024 10:56:14 -0700 (PDT)
-Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a5a17891f87sm1129992066b.65.2024.05.17.10.56.13
+ d=1e100.net; s=20230601; t=1715977862; x=1716582662;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=/otRcnylFD4/SM0G7Gj1/b7/cCpabgU/G8YRbr4Vkyw=;
+ b=WntOb0vjfdelHlvxk4vq+yrLPIextUwQI3Yto9XKNLo/dWQk/1RuxFjH+FtV7xn7Bm
+ Rl8lrpFLtYcYlW2DNrqpBi55tUvfwGzZjgZanYMtN+oPLJiOHVysEhdBA8BXct55zZ0x
+ fjmr3YAzNXV2ZP7UTbOP/5RHnvdEPQzvoDJQ5Q/I8j5+/caPaD7Z3Yrfl1/kTRZob6iv
+ qSMgAEWJvUwq6RVV2UVKsceMuNu//OhCT4cOcIjBjpfJ+nwRhu/m4dlM0AHV+YbRofDR
+ 30/+TzgHeEtgS64RR7iDmL2vulb8bYZbZkE0uXuhnPz8LSUrMtCesCBqfOfISwC02Vs4
+ eYKw==
+X-Gm-Message-State: AOJu0YyXZ8RS+s1eYk1PtoRUAvHQn3W4fjuwrPPel8vOTNxcxlqiXCR/
+ xWAdVSm/OMVclICl/2OEqnqrfdetrJfcbgpWAmAp2RoBMbscERJfN64aY+FefRs=
+X-Google-Smtp-Source: AGHT+IGaydUr2aCQn49lewBZuhptNFUOeOTPmON/msfNLr9ya83v2ruC/Js4vQUCP1bWEpmbNpXmDg==
+X-Received: by 2002:a17:90b:2305:b0:2b1:782:8827 with SMTP id
+ 98e67ed59e1d1-2b6cc564325mr21263092a91.20.1715977861656; 
+ Fri, 17 May 2024 13:31:01 -0700 (PDT)
+Received: from grind.. ([177.94.42.57]) by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-2b62863a126sm17979775a91.5.2024.05.17.13.30.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 May 2024 10:56:14 -0700 (PDT)
-Received: from draig (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 3FAB75F88D;
- Fri, 17 May 2024 18:56:13 +0100 (BST)
-From: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org,  qemu-riscv@nongnu.org,
- alistair.francis@wdc.com,  bmeng@tinylab.org,  liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com,  palmer@rivosinc.com,
- akihiko.odaki@daynix.com,  mjt@tls.msk.ru,  Robin Dapp
- <rdapp.gcc@gmail.com>
-Subject: Re: [PATCH 1/1] riscv, gdbstub.c: fix reg_width in
- ricsv_gen_dynamic_vector_feature()
-In-Reply-To: <20240516171010.639591-2-dbarboza@ventanamicro.com> (Daniel
- Henrique Barboza's message of "Thu, 16 May 2024 14:10:10 -0300")
-References: <20240516171010.639591-1-dbarboza@ventanamicro.com>
- <20240516171010.639591-2-dbarboza@ventanamicro.com>
-Date: Fri, 17 May 2024 18:56:13 +0100
-Message-ID: <874jawqq4i.fsf@draig.linaro.org>
+ Fri, 17 May 2024 13:31:01 -0700 (PDT)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ alex.bennee@linaro.org, akihiko.odaki@daynix.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH v2 0/1] riscv,
+ gdbstub.c: fix reg_width in ricsv_gen_dynamic_vector_feature()
+Date: Fri, 17 May 2024 17:30:53 -0300
+Message-ID: <20240517203054.880861-1-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::234;
- envelope-from=alex.bennee@linaro.org; helo=mail-lj1-x234.google.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,48 +93,24 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Daniel Henrique Barboza <dbarboza@ventanamicro.com> writes:
+Hi,
 
-> Commit 33a24910ae changed 'reg_width' to use 'vlenb', i.e. vector length
-> in bytes, when in this context we want 'reg_width' as the length in
-> bits.
->
-> Fix 'reg_width' back to the value in bits like 7cb59921c05a
-> ("target/riscv/gdbstub.c: use 'vlenb' instead of shifting 'vlen'") set
-> beforehand.
->
-> Cc: Akihiko Odaki <akihiko.odaki@daynix.com>
-> Cc: Alex Benn=C3=A9e <alex.bennee@linaro.org>
-> Reported-by: Robin Dapp <rdapp.gcc@gmail.com>
-> Fixes: 33a24910ae ("target/riscv: Use GDBFeature for dynamic XML")
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> ---
->  target/riscv/gdbstub.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-> index d0cc5762c2..358158c42a 100644
-> --- a/target/riscv/gdbstub.c
-> +++ b/target/riscv/gdbstub.c
-> @@ -288,7 +288,7 @@ static GDBFeature *riscv_gen_dynamic_csr_feature(CPUS=
-tate *cs, int base_reg)
->  static GDBFeature *ricsv_gen_dynamic_vector_feature(CPUState *cs, int ba=
-se_reg)
->  {
->      RISCVCPU *cpu =3D RISCV_CPU(cs);
-> -    int reg_width =3D cpu->cfg.vlenb;
-> +    int reg_width =3D cpu->cfg.vlenb << 3;
+In this v2 'reg_width' was renamed to 'bitsize' to provide a bit more
+clarity about what's the value type of the variable. It is the same name
+used by riscv_gen_dynamic_csr_feature() for a variable that has the same
+purpose. The variable rename was suggested by Alex in v1.
 
-You could consider renaming the var to reg_bits for clarity but
-otherwise:
+Changes from v1:
+- rename 'reg_width' to 'bitsize'
+- v1 link: https://lore.kernel.org/qemu-riscv/20240516171010.639591-1-dbarboza@ventanamicro.com/
 
-Acked-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
+Daniel Henrique Barboza (1):
+  riscv, gdbstub.c: fix reg_width in ricsv_gen_dynamic_vector_feature()
 
+ target/riscv/gdbstub.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
->      GDBFeatureBuilder builder;
->      int i;
+-- 
+2.44.0
 
---=20
-Alex Benn=C3=A9e
-Virtualisation Tech Lead @ Linaro
 
