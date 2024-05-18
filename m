@@ -4,88 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10E2CC25B74
-	for <qemu-riscv@archiver.kernel.org>; Sat, 18 May 2024 13:05:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DC16C25B74
+	for <qemu-riscv@archiver.kernel.org>; Sat, 18 May 2024 16:26:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s8Jjz-0005ZA-MV; Sat, 18 May 2024 09:04:47 -0400
+	id 1s8Mt8-0005UT-2q; Sat, 18 May 2024 12:26:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1s8Jjx-0005Yt-Sy
- for qemu-riscv@nongnu.org; Sat, 18 May 2024 09:04:45 -0400
-Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
+ id 1s8Mt5-0005U7-A0
+ for qemu-riscv@nongnu.org; Sat, 18 May 2024 12:26:23 -0400
+Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1s8Jjs-0002Ya-7K
- for qemu-riscv@nongnu.org; Sat, 18 May 2024 09:04:45 -0400
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-1edfc57ac0cso33925195ad.3
- for <qemu-riscv@nongnu.org>; Sat, 18 May 2024 06:04:39 -0700 (PDT)
+ id 1s8Mt1-00076F-Q3
+ for qemu-riscv@nongnu.org; Sat, 18 May 2024 12:26:22 -0400
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-1ee12baa01cso40721585ad.0
+ for <qemu-riscv@nongnu.org>; Sat, 18 May 2024 09:26:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1716037479; x=1716642279; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1716049578; x=1716654378; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=ja4lE5SXHLzqVZjYOzV6CEw6ufW7YLiqgbVnTIF56qE=;
- b=RtVF+b6BEznSxdnp/hy+OSEMr7a4KpE1D+TB5MJmfmvXbejNkNp/OCXJzXg68cTrCO
- rSpsjNRQ/QRc6Lm2WzxeYggGe3N/YqrBEuAyKoX6EZaiQumxouYEsfSpRaJJ8wb/nhwg
- 95WVQl87FlsMAzuFngQWMZeFP8+rK3l/F9y9x5RnRzeXgUsXQarMqAXXcoyjyoBRpQB7
- 2Sm0uWRfUCXUASN0cMZcc5xjX/RyGnhqAtst4q3TWHWjwcKIyaKXPueBpFiOlxWSv1jl
- qPFQ3GpQzgPMCLnElbNj3iIYcccXKMc/N6SedP18t+HadY6II6tCVp+kwUakiS67De6w
- 741w==
+ bh=+9UPou2AN2Fv/+eWqMKIowE+zb44A6eT1n5SmEDY8qg=;
+ b=liOGr6etwsnQgXsZ5ErqXy8w4/t2A/iqaxpKnJ5+y7D6/fEPpXodSXHAvFQVApZHmo
+ J4HQa7+sPRFDFqU0LdkMDoQTHWEUgETHUS3H1PnAl5WPc8yndXlCCwEpkUUd4sRThZpL
+ eBAE1MouJTtEhsdbd1Rm0xK8vxcqWBpGfF5bS2jArSUjsP5tpyA4xwaONHPAlPwxgdxv
+ d0of4RuN60UDy0HUNN8Z4P1T7z2tIZ7I6yV/xEecp6lQxnyBKvBbojlRZULtEMjofDQO
+ HNxFXgBQxb0drLua6PJq7Ug/4oLCzXpxCLQ+WnkWm6EIn+yBFkFXSuwCVM4FW4iO3dvB
+ M3Ag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716037479; x=1716642279;
+ d=1e100.net; s=20230601; t=1716049578; x=1716654378;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ja4lE5SXHLzqVZjYOzV6CEw6ufW7YLiqgbVnTIF56qE=;
- b=aEnDrODVrBTVRY8e68Z2/gz+AuaWJGBnV8WdvfJa4d0quUnS1adAeQsnW/ZW4tzTDX
- kATUWAXo5Pi7DWkOFyx3MwTUS9xsmZ7jJHx6vVTwBQTMEW65/MaOCQqMUROax26h9WF/
- j8CAgnNQjPqvTAi6wpluFftUA/AJJoMR9Jba4oL5cCYuFMZmxPavTi035dXKqyRIx0Xm
- cJ0D4g5qs8aiQFkjuYwNiMz6npvOBVg1Y/pyURQyInX12ts0sBBV36JefVom1zRsr1hb
- i1ud32DKrRlHN1bWsanHgm0ZPsq74o0e/V1ZxD0Mot7xahDAJEZU/X3p4qapzZAwsmVv
- xfXw==
+ bh=+9UPou2AN2Fv/+eWqMKIowE+zb44A6eT1n5SmEDY8qg=;
+ b=Sp0qMFhh3jVFlE+INEGk8bbofQ+JyrOrs4fuOdnERBhkACdjHHVcpON+Hp3q20daj4
+ zx1xYMvzIiQDMMsJeUhMSl77DzWumiRiVwFalCwgF4QhVijt5KRWYqZO/CKJJJGPZwte
+ T5g9x7imhqCsg3iT8plKa9JkNfxwSqTzsc6TaMOHPcoYL6cZttks/urHMIcIKazuHJak
+ f8u5FhMftQriXQL2ebOEALyyqW1PuzOuePftFYQZjvWJljPlW/vXwZ1v+zvLo7gFvOGk
+ AVMomhfq3tXhLbjMcumjzwIYlQfqVvnILzuy9UAlKt/jIC8r8Vv62y5F9RxjyDN49zIu
+ GkfQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUgnMqITgtU89V9gyPJWPj8xV3/3F1icalvGzME+2kHLz/B/FuiDxfnGxMuEIVTOmU7HLN/EvSVv8he06zhgVOX395nvl4=
-X-Gm-Message-State: AOJu0Yz52Cb5ufC3qkGdnordBOg/Oa7RxX6/bMeEh6Viwrhqhi2iJSRQ
- 4rzJ5qMf/OTNNxo/xZPtKAVYGWV3nxg6m78DT1oS/6lWct9AGJB4/FSOXQX5c5w=
-X-Google-Smtp-Source: AGHT+IH0eZAWLw8tCSNKlkaeGR3YWirRQ+0y8Hddf3vNUYiWFUPDNWCSBUgVwSApyeTTUlKQEbaRyg==
-X-Received: by 2002:a05:6a21:2d8b:b0:1af:f6b9:e3e4 with SMTP id
- adf61e73a8af0-1aff6b9e5e8mr21057607637.12.1716037478398; 
- Sat, 18 May 2024 06:04:38 -0700 (PDT)
+ AJvYcCUmY730reZzSE2s5oyGBT04wo/evsI2LlItKRDthndJOz73pIru/t6dsITZNf7AfmxfusnOfy1RpbMPg0SiBLrbMolhGNA=
+X-Gm-Message-State: AOJu0YziFD0mSLYX7h3NclUqSebiAQhTAd8DG2jQ5lj1NCPElPhW9fr8
+ c9OQ13SoqoINC2eoUtnpepII7Wtpwb82J3hgIh2RjCP96tqMoZKsUEnSO/Y9FWg=
+X-Google-Smtp-Source: AGHT+IF5VohPVpt1/QFZMT4wrwSuILW2R85+jtc3CKFnA6AifS+pg5wWI6yLzH4aS3qcpYo5x4TTIg==
+X-Received: by 2002:a17:902:7284:b0:1e3:c419:35c2 with SMTP id
+ d9443c01a7336-1ef43e233bemr228243425ad.34.1716049577955; 
+ Sat, 18 May 2024 09:26:17 -0700 (PDT)
 Received: from [192.168.68.110] ([177.94.42.57])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-6f695362d8asm2503991b3a.148.2024.05.18.06.04.35
+ d9443c01a7336-1f09648bf4esm63789795ad.272.2024.05.18.09.26.14
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 18 May 2024 06:04:38 -0700 (PDT)
-Message-ID: <a1874b42-eab5-4a8d-b1ee-cbf69be41e72@ventanamicro.com>
-Date: Sat, 18 May 2024 10:04:33 -0300
+ Sat, 18 May 2024 09:26:17 -0700 (PDT)
+Message-ID: <719c8281-bf86-4be8-88c5-43b1eb0e91de@ventanamicro.com>
+Date: Sat, 18 May 2024 13:26:12 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] target/riscv: Move Guest irqs out of the core local
- irqs range.
-To: Rajnesh Kanwal <rkanwal@rivosinc.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: alistair.francis@wdc.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn,
- zhiwei_liu@linux.alibaba.com, atishp@rivosinc.com, apatel@ventanamicro.com
-References: <20240513114602.72098-1-rkanwal@rivosinc.com>
- <20240513114602.72098-3-rkanwal@rivosinc.com>
+Subject: Re: [PATCH] dias/riscv: Decode all of the pmpcfg and pmpaddr CSRs
+To: Alistair Francis <alistair23@gmail.com>, qemu-devel@nongnu.org,
+ bin.meng@windriver.com, qemu-riscv@nongnu.org, zhiwei_liu@linux.alibaba.com,
+ liwei1518@gmail.com, palmer@dabbelt.com
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, eric_devolder@yahoo.com
+References: <20240514051615.330979-1-alistair.francis@wdc.com>
 Content-Language: en-US
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240513114602.72098-3-rkanwal@rivosinc.com>
+In-Reply-To: <20240514051615.330979-1-alistair.francis@wdc.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x635.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x636.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,94 +99,122 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+^ typo in the commit subject: 'disas/riscv: ...'
 
+On 5/14/24 02:16, Alistair Francis wrote:
+> Previously we only listed a single pmpcfg CSR and the first 16 pmpaddr
+> CSRs. This patch fixes this to list all 16 pmpcfg and all 64 pmpaddr
+> CSRs are part of the dissassembly.
 
-On 5/13/24 08:46, Rajnesh Kanwal wrote:
-> Qemu maps IRQs 0:15 for core interrupts and 16 onward for
-> guest interrupts which are later translated to hgiep in
-> `riscv_cpu_set_irq()` function.
+I think the correct here is 'disassembly'.
+
 > 
-> With virtual IRQ support added, software now can fully
-> use the whole local interrupt range without any actual
-> hardware attached.
-> 
-> This change moves the guest interrupt range after the
-> core local interrupt range to avoid clash.
-> 
-> Fixes: 1697837ed9 ("target/riscv: Add M-mode virtual
-> interrupt and IRQ filtering support.")
-> Fixes: 40336d5b1d ("target/riscv: Add HS-mode virtual
-> interrupt and IRQ filtering support.")
-> 
-
-As I said in patch 1, please do not split the commit titles in a
-"Fixes" tag:
-
-> Fixes: 1697837ed9 ("target/riscv: Add M-mode virtual interrupt and IRQ filtering support.")
-> Fixes: 40336d5b1d ("target/riscv: Add HS-mode virtual interrupt and IRQ filtering support.")
-
-
-> Signed-off-by: Rajnesh Kanwal <rkanwal@rivosinc.com>
+> Reported-by: Eric DeVolder <eric_devolder@yahoo.com>
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->   target/riscv/cpu_bits.h | 3 ++-
->   target/riscv/csr.c      | 7 ++++++-
->   2 files changed, 8 insertions(+), 2 deletions(-)
+>   disas/riscv.c | 65 ++++++++++++++++++++++++++++++++++++++++++++++++++-
+>   1 file changed, 64 insertions(+), 1 deletion(-)
 > 
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index 13ce2218d1..33f28bb115 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -664,7 +664,8 @@ typedef enum RISCVException {
->   #define IRQ_M_EXT                          11
->   #define IRQ_S_GEXT                         12
->   #define IRQ_PMU_OVF                        13
-> -#define IRQ_LOCAL_MAX                      16
-> +#define IRQ_LOCAL_MAX                      64
-> +/* -1 is due to bit zero of hgeip and hgeie being ROZ. */
->   #define IRQ_LOCAL_GUEST_MAX                (TARGET_LONG_BITS - 1)
->   
->   /* mip masks */
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index c9d685dcc5..78f42fcae5 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -1141,7 +1141,12 @@ static RISCVException write_stimecmph(CPURISCVState *env, int csrno,
->   
->   #define VSTOPI_NUM_SRCS 5
->   
-> -#define LOCAL_INTERRUPTS (~0x1FFF)
-> +/* All core local interrupts except the fixed ones 0:12. This macro is for virtual
-> + * interrupts logic so please don't change this to avoid messing up the whole support,
-> + * For reference see AIA spec: `5.3 Interrupt filtering and virtual interrupts for
-> + * supervisor level` and `6.3.2 Virtual interrupts for VS level`.
-> + */
+> diff --git a/disas/riscv.c b/disas/riscv.c
+> index e236c8b5b7..297cfa2f63 100644
+> --- a/disas/riscv.c
+> +++ b/disas/riscv.c
+> @@ -2190,7 +2190,22 @@ static const char *csr_name(int csrno)
+>       case 0x0383: return "mibound";
+>       case 0x0384: return "mdbase";
+>       case 0x0385: return "mdbound";
+> -    case 0x03a0: return "pmpcfg3";
+> +    case 0x03a0: return "pmpcfg0";
 
-The comment format we use is capped at 80 chars per line and starts with a
-leading /*  on a separated line:
+Hmm it seems that the code for 'pmpcfg3' was incorrect from the get go.
+Perhaps it's worth adding a:
+
+Fixes: ea10325917 ("RISC-V Disassembler")
 
 
-> +/*
-> +/* All core local interrupts except the fixed ones 0:12. This macro is
-> +/* for virtual interrupts logic so please don't change this to avoid
-> +/* messing up the whole support. For reference see AIA spec:
-> +/* `5.3 Interrupt filtering and virtual interrupts for supervisor level`
-> +/* and `6.3.2 Virtual interrupts for VS level`.
-> + */
+Regardless of adding a 'Fixes' tag or not:
 
-You can run ./scripts/checkpatch.pl in the generated patch file to see if the
-patch is compliant with the expected code style.
+
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
 
 
 
 Thanks,
 
-
 Daniel
 
-
-
-> +#define LOCAL_INTERRUPTS   (~0x1FFFULL)
->   
->   static const uint64_t delegable_ints =
->       S_MODE_INTERRUPTS | VS_MODE_INTERRUPTS | MIP_LCOFIP;
+> +    case 0x03a1: return "pmpcfg1";
+> +    case 0x03a2: return "pmpcfg2";
+> +    case 0x03a3: return "pmpcfg3";
+> +    case 0x03a4: return "pmpcfg4";
+> +    case 0x03a5: return "pmpcfg5";
+> +    case 0x03a6: return "pmpcfg6";
+> +    case 0x03a7: return "pmpcfg7";
+> +    case 0x03a8: return "pmpcfg8";
+> +    case 0x03a9: return "pmpcfg9";
+> +    case 0x03aa: return "pmpcfg10";
+> +    case 0x03ab: return "pmpcfg11";
+> +    case 0x03ac: return "pmpcfg12";
+> +    case 0x03ad: return "pmpcfg13";
+> +    case 0x03ae: return "pmpcfg14";
+> +    case 0x03af: return "pmpcfg15";
+>       case 0x03b0: return "pmpaddr0";
+>       case 0x03b1: return "pmpaddr1";
+>       case 0x03b2: return "pmpaddr2";
+> @@ -2207,6 +2222,54 @@ static const char *csr_name(int csrno)
+>       case 0x03bd: return "pmpaddr13";
+>       case 0x03be: return "pmpaddr14";
+>       case 0x03bf: return "pmpaddr15";
+> +    case 0x03c0: return "pmpaddr16";
+> +    case 0x03c1: return "pmpaddr17";
+> +    case 0x03c2: return "pmpaddr18";
+> +    case 0x03c3: return "pmpaddr19";
+> +    case 0x03c4: return "pmpaddr20";
+> +    case 0x03c5: return "pmpaddr21";
+> +    case 0x03c6: return "pmpaddr22";
+> +    case 0x03c7: return "pmpaddr23";
+> +    case 0x03c8: return "pmpaddr24";
+> +    case 0x03c9: return "pmpaddr25";
+> +    case 0x03ca: return "pmpaddr26";
+> +    case 0x03cb: return "pmpaddr27";
+> +    case 0x03cc: return "pmpaddr28";
+> +    case 0x03cd: return "pmpaddr29";
+> +    case 0x03ce: return "pmpaddr30";
+> +    case 0x03cf: return "pmpaddr31";
+> +    case 0x03d0: return "pmpaddr32";
+> +    case 0x03d1: return "pmpaddr33";
+> +    case 0x03d2: return "pmpaddr34";
+> +    case 0x03d3: return "pmpaddr35";
+> +    case 0x03d4: return "pmpaddr36";
+> +    case 0x03d5: return "pmpaddr37";
+> +    case 0x03d6: return "pmpaddr38";
+> +    case 0x03d7: return "pmpaddr39";
+> +    case 0x03d8: return "pmpaddr40";
+> +    case 0x03d9: return "pmpaddr41";
+> +    case 0x03da: return "pmpaddr42";
+> +    case 0x03db: return "pmpaddr43";
+> +    case 0x03dc: return "pmpaddr44";
+> +    case 0x03dd: return "pmpaddr45";
+> +    case 0x03de: return "pmpaddr46";
+> +    case 0x03df: return "pmpaddr47";
+> +    case 0x03e0: return "pmpaddr48";
+> +    case 0x03e1: return "pmpaddr49";
+> +    case 0x03e2: return "pmpaddr50";
+> +    case 0x03e3: return "pmpaddr51";
+> +    case 0x03e4: return "pmpaddr52";
+> +    case 0x03e5: return "pmpaddr53";
+> +    case 0x03e6: return "pmpaddr54";
+> +    case 0x03e7: return "pmpaddr55";
+> +    case 0x03e8: return "pmpaddr56";
+> +    case 0x03e9: return "pmpaddr57";
+> +    case 0x03ea: return "pmpaddr58";
+> +    case 0x03eb: return "pmpaddr59";
+> +    case 0x03ec: return "pmpaddr60";
+> +    case 0x03ed: return "pmpaddr61";
+> +    case 0x03ee: return "pmpaddr62";
+> +    case 0x03ef: return "pmpaddr63";
+>       case 0x0780: return "mtohost";
+>       case 0x0781: return "mfromhost";
+>       case 0x0782: return "mreset";
 
