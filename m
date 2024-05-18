@@ -4,86 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A49EBC25B74
-	for <qemu-riscv@archiver.kernel.org>; Sat, 18 May 2024 06:58:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D367C25B74
+	for <qemu-riscv@archiver.kernel.org>; Sat, 18 May 2024 12:55:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s8E0y-000634-KJ; Sat, 18 May 2024 02:57:56 -0400
+	id 1s8JbJ-0003jX-Vz; Sat, 18 May 2024 08:55:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1s8E0v-00062K-Fb
- for qemu-riscv@nongnu.org; Sat, 18 May 2024 02:57:53 -0400
-Received: from mail-oa1-x31.google.com ([2001:4860:4864:20::31])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1s8Jb7-0003iz-E6
+ for qemu-riscv@nongnu.org; Sat, 18 May 2024 08:55:40 -0400
+Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1s8E0g-0001uO-CO
- for qemu-riscv@nongnu.org; Sat, 18 May 2024 02:57:53 -0400
-Received: by mail-oa1-x31.google.com with SMTP id
- 586e51a60fabf-23fba5759b2so993766fac.2
- for <qemu-riscv@nongnu.org>; Fri, 17 May 2024 23:57:37 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1s8Jb4-0001GO-Jm
+ for qemu-riscv@nongnu.org; Sat, 18 May 2024 08:55:36 -0400
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-1ec69e3dbcfso37354895ad.0
+ for <qemu-riscv@nongnu.org>; Sat, 18 May 2024 05:55:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1716015456; x=1716620256;
- darn=nongnu.org; 
+ d=ventanamicro.com; s=google; t=1716036931; x=1716641731; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=Y2qKxTfm34cqcZTDxP9E6kX4uYk5pkYFhnki3f7UR2s=;
- b=JYIlkZQg98ABDfQr/dCv73eqOZY/fiDy2VfJy9pHKCc4UZ61MGuw8Tl/7cflucZ1Rq
- Kj73frNkBJkOFj9WoyliMF9IPrOJCp8SzI1nvjgPHSRL49e4hmYIyTu5Z5aKC0JDHt5X
- zkP1DS0eyrQeHskPF//Ep597mp/WhQbZ0V1kgnZQOpo0Iko2+hCTPeAEwSrXoyUXyDlC
- Tsm0/34OciFJugAFxtKu6TjUKqhUaAHp3SUBvUWgMo0T9aai6FMv0oePeY37YhUpVoaz
- 1XXwA3ncPxJBXmPVv2yyv6BBRTKkhf5AtS+m1yy6SLj5KZwVq+0VYaqoNmco53bNjyFD
- JnSg==
+ bh=gEKwrSVDhciK5xljCqgvaJDYt+P8ob4tabXg53BBlts=;
+ b=lhcf+ZgUMtKKIXDAp3NyD0QL+3q+ssWd2ODjAUu6ZMadII1ksbFvTTeKmiN8N608Nr
+ 83QcbqJ3/FnErQU9mmYZFpsOmZn8VxPt5wqnBzDkRRDPcrBoEznjU48+IL0DcYmyx9rZ
+ 9mnr4PI64Z9hIrW0Kw7lDCrlOsmUZpEbOW7uG+p+Uf2hqIbCErKdEj9V3PPQVAdtN/eP
+ HrHJK85KjtpyAkNytT+I0hbtkoJ10Noy6d/XUwWJhSoLWkvUKrtR7YtR3limAWuK5Atj
+ 0RcAp6povDfmouxRKxTLsve5LpdbxCz3IZwwugxHDL08WXu0ZycXuwKv9nFl1QLULGdz
+ kUIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716015456; x=1716620256;
+ d=1e100.net; s=20230601; t=1716036931; x=1716641731;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Y2qKxTfm34cqcZTDxP9E6kX4uYk5pkYFhnki3f7UR2s=;
- b=tX9KQIIPqK6NGiOHQUiWZujzyHFWH1KanWebLDMK/kM8aWXrCq/pBsUPGeoSVMQerj
- ceHSc5NAlZtL3N4eT1BWpPipfRLY7yft91Nfj6HLdQN/Pt4rx/Vd735W5Hpzz3QiFyPP
- 9/C8XoLymBgHLxnaiSCEl7ErFa9qssy6i8aWN0l773wnoIrrUlbNOLwID25HID00nkYL
- LevFdcImMa64uFCiOpHlx/JFXvMg5Pg9B+S5l3Krh4xJ47aYIqnUifAuq0esGLVjZBMy
- bvRBW+0ShgZG+ZocRtAQGpkn4Y3wlZIpmGUFn44ET4sN7RINzhYilgI/L9EhImM7ZF/R
- 2Xow==
-X-Gm-Message-State: AOJu0YyQ728/FyPmD8GCZbnwVk6bM1Hh2NxU/WEapA1hjHeO7mAQ2O18
- bLmd1f7ppX8sk5qFdeA5kR12Fbw0tXp5GYSrHFKfFBdBfOku8iLnzxcTcAfu5P4=
-X-Google-Smtp-Source: AGHT+IHYf935xXdmvGlqoWSPyE409N7Wvm3VbC9rwIE7LgT/REej/WYs5sa7Msn4qQCaqV7rFvPbtQ==
-X-Received: by 2002:a05:6871:7987:b0:22e:7460:d2a8 with SMTP id
- 586e51a60fabf-24172be019emr25437190fac.42.1716015456456; 
- Fri, 17 May 2024 23:57:36 -0700 (PDT)
-Received: from [157.82.204.135] ([157.82.204.135])
+ bh=gEKwrSVDhciK5xljCqgvaJDYt+P8ob4tabXg53BBlts=;
+ b=gzeIR/sItiPC7Ej3cPVdNdzVczUvXBVRo2/LSMYo5TC3aNwDBC6YVWkZA3AxjjayX+
+ FgyShJtt3KFU2ZIvnWNgrHSjK7vK0aFJwf8wWgdLoZkTuPo926bon5hvDnk1wJcR+1Gh
+ 15P9c6S3r3sH32NwTZ0+7KB7AKulrw4wdMfolTslkafDPhz3tETwhZSYv4wClu63Hjka
+ COlA4CT+8SyIVPlqyswKyW50BHaM5pyJwcZSYptEHj6tNftjT5El9DQqfJr1BlkIBxIs
+ 1ATHMf88yjQNBAqaaNmAL9bk73W95KvW/FNB8tXo0JikrR4XSgQDl/yHhpYXrcsW4nSk
+ Hgrg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXfQMYcRMc5tRMrdatw6zBfSkcIgac2s6ix+ectyTkOY46GMENz9EXj2SH2GyyBpLLq+kV7d7rWCahGYcegYfSpPJKoomA=
+X-Gm-Message-State: AOJu0YwT6qMdeO0d99kNY5oopIJH35uZg+gYHX2IvvFrfnbYRTDzbDOd
+ pSbqgSSRhI83Pmny77bZZ5Uc4aR9fKXJWhiF3pmFCL5MK7lUsy+epROzXFN8/nk=
+X-Google-Smtp-Source: AGHT+IGpV5Ygjw01nuKNkrjlwPvatKRGPJg18mkfUFjRlyzO2keTDe4ExgwjrO0YkacKTXw6xsiYeA==
+X-Received: by 2002:a17:902:bf04:b0:1e2:1df:449b with SMTP id
+ d9443c01a7336-1ef44182635mr222683165ad.69.1716036930872; 
+ Sat, 18 May 2024 05:55:30 -0700 (PDT)
+Received: from [192.168.68.110] ([177.94.42.57])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-6f4d2a85f3fsm15708052b3a.82.2024.05.17.23.57.34
+ d9443c01a7336-1f2f3ed38a9sm5699185ad.158.2024.05.18.05.55.27
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 17 May 2024 23:57:36 -0700 (PDT)
-Message-ID: <6ac60e11-2d46-4f82-be3e-ef9ae741ede8@daynix.com>
-Date: Sat, 18 May 2024 15:57:32 +0900
+ Sat, 18 May 2024 05:55:30 -0700 (PDT)
+Message-ID: <586302b6-0e6e-438d-a218-48a577c5c3b8@ventanamicro.com>
+Date: Sat, 18 May 2024 09:55:25 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/1] riscv, gdbstub.c: fix reg_width in
- ricsv_gen_dynamic_vector_feature()
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- alex.bennee@linaro.org, Robin Dapp <rdapp.gcc@gmail.com>
-References: <20240517203054.880861-1-dbarboza@ventanamicro.com>
- <20240517203054.880861-2-dbarboza@ventanamicro.com>
+Subject: Re: [PATCH 1/2] target/riscv: Extend virtual irq csrs masks to be 64
+ bit wide.
+To: Rajnesh Kanwal <rkanwal@rivosinc.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: alistair.francis@wdc.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn,
+ zhiwei_liu@linux.alibaba.com, atishp@rivosinc.com, apatel@ventanamicro.com
+References: <20240513114602.72098-1-rkanwal@rivosinc.com>
+ <20240513114602.72098-2-rkanwal@rivosinc.com>
 Content-Language: en-US
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
-In-Reply-To: <20240517203054.880861-2-dbarboza@ventanamicro.com>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20240513114602.72098-2-rkanwal@rivosinc.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=2001:4860:4864:20::31;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-oa1-x31.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x630.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,27 +101,67 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2024/05/18 5:30, Daniel Henrique Barboza wrote:
-> Commit 33a24910ae changed 'reg_width' to use 'vlenb', i.e. vector length
-> in bytes, when in this context we want 'reg_width' as the length in
-> bits.
-> 
-> Fix 'reg_width' back to the value in bits like 7cb59921c05a
-> ("target/riscv/gdbstub.c: use 'vlenb' instead of shifting 'vlen'") set
-> beforehand.
-> 
-> While we're at it, rename 'reg_width' to 'bitsize' to provide a bit more
-> clarity about what the variable represents. 'bitsize' is also used in
-> riscv_gen_dynamic_csr_feature() with the same purpose, i.e. as an input to
-> gdb_feature_builder_append_reg().
-> 
-> Cc: Akihiko Odaki <akihiko.odaki@daynix.com>
-> Cc: Alex Bennée <alex.bennee@linaro.org>
-> Reported-by: Robin Dapp <rdapp.gcc@gmail.com>
-> Fixes: 33a24910ae ("target/riscv: Use GDBFeature for dynamic XML")
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-> Acked-by: Alex Bennée <alex.bennee@linaro.org>
 
-Reviewed-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+
+On 5/13/24 08:46, Rajnesh Kanwal wrote:
+> AIA extends the width of all IRQ CSRs to 64bit even
+> in 32bit systems by adding missing half CSRs.
+> 
+> This seems to be missed while adding support for
+> virtual IRQs. The whole logic seems to be correct
+> except the width of the masks.
+> 
+> Fixes: 1697837ed9 ("target/riscv: Add M-mode virtual
+> interrupt and IRQ filtering support.")
+> Fixes: 40336d5b1d ("target/riscv: Add HS-mode virtual
+> interrupt and IRQ filtering support.")
+> 
+
+Please avoid splitting the commit title when including them in a "Fixes"
+tag. It is ok if the commit this breaks the usual char limit:
+
+> Fixes: 1697837ed9 ("target/riscv: Add M-mode virtual interrupt and IRQ filtering support.")
+> Fixes: 40336d5b1d ("target/riscv: Add HS-mode virtual interrupt and IRQ filtering support.")
+
+
+As for the code:
+
+
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+> Signed-off-by: Rajnesh Kanwal <rkanwal@rivosinc.com>
+> ---
+>   target/riscv/csr.c | 14 +++++++-------
+>   1 file changed, 7 insertions(+), 7 deletions(-)
+> 
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 45b548eb0b..c9d685dcc5 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -1193,18 +1193,18 @@ static const target_ulong sstatus_v1_10_mask = SSTATUS_SIE | SSTATUS_SPIE |
+>    */
+>   
+>   /* Bit STIP can be an alias of mip.STIP that's why it's writable in mvip. */
+> -static const target_ulong mvip_writable_mask = MIP_SSIP | MIP_STIP | MIP_SEIP |
+> +static const uint64_t mvip_writable_mask = MIP_SSIP | MIP_STIP | MIP_SEIP |
+>                                       LOCAL_INTERRUPTS;
+> -static const target_ulong mvien_writable_mask = MIP_SSIP | MIP_SEIP |
+> +static const uint64_t mvien_writable_mask = MIP_SSIP | MIP_SEIP |
+>                                       LOCAL_INTERRUPTS;
+>   
+> -static const target_ulong sip_writable_mask = SIP_SSIP | LOCAL_INTERRUPTS;
+> -static const target_ulong hip_writable_mask = MIP_VSSIP;
+> -static const target_ulong hvip_writable_mask = MIP_VSSIP | MIP_VSTIP |
+> +static const uint64_t sip_writable_mask = SIP_SSIP | LOCAL_INTERRUPTS;
+> +static const uint64_t hip_writable_mask = MIP_VSSIP;
+> +static const uint64_t hvip_writable_mask = MIP_VSSIP | MIP_VSTIP |
+>                                       MIP_VSEIP | LOCAL_INTERRUPTS;
+> -static const target_ulong hvien_writable_mask = LOCAL_INTERRUPTS;
+> +static const uint64_t hvien_writable_mask = LOCAL_INTERRUPTS;
+>   
+> -static const target_ulong vsip_writable_mask = MIP_VSSIP | LOCAL_INTERRUPTS;
+> +static const uint64_t vsip_writable_mask = MIP_VSSIP | LOCAL_INTERRUPTS;
+>   
+>   const bool valid_vm_1_10_32[16] = {
+>       [VM_1_10_MBARE] = true,
 
