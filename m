@@ -4,89 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10E8DC25B77
-	for <qemu-riscv@archiver.kernel.org>; Mon, 20 May 2024 17:41:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18DBAC04FFE
+	for <qemu-riscv@archiver.kernel.org>; Mon, 20 May 2024 18:34:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s970Y-0000BC-CC; Mon, 20 May 2024 13:41:10 -0400
+	id 1s97pj-0000Na-MF; Mon, 20 May 2024 14:34:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1s970Q-0000AC-8W
- for qemu-riscv@nongnu.org; Mon, 20 May 2024 13:41:04 -0400
-Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1s970N-0002Lp-80
- for qemu-riscv@nongnu.org; Mon, 20 May 2024 13:41:01 -0400
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-1eeb1a4c10aso83247785ad.3
- for <qemu-riscv@nongnu.org>; Mon, 20 May 2024 10:40:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1716226857; x=1716831657; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=6IvwskBX+e6jBez0GdmP0Yi1G6CHZiMmTF7vZgk08YA=;
- b=T4sNjZ4JHtc7wySxlqOpxnkr0INWSE31y9qbEIDA03BcvQGEzxnc/GwTmDBw47mumg
- t+2ojnVlqy45fPq2yv1hvWLkDMsZBoy5rVICNyQqCwj21TfXV7Etlj3W7aKCr3jmJHec
- hKpobO9gITGIMqAyS6n4EuXiJiMGveLJz+eCKRBTj5Dgjb8Og7DVa/sEptVsVesruoii
- luaONYzGgFmZ0CmbCGachcsncbWUGnkGMTePVph+kuf3C/4VepuODLLjRAg4u2Hq/59B
- UJRGaW1egNVWWpSoodf1SSBQFx/Kx0rADZovbWdG7DhRf+XyE4RDOQxhxbJSOR8u17Kp
- aJAA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716226857; x=1716831657;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=6IvwskBX+e6jBez0GdmP0Yi1G6CHZiMmTF7vZgk08YA=;
- b=aJ1GUKnIWNW3li1/Jl8UnuXKkDnJcYkLlYPJphAJWAc/8NTX/6JCfCu16q7pDrO5un
- 4NSmv76qDBEWPx0GwCesMvUOzFW+wSRBQHsiKX/NyeOfMfj6xK6KHLh5qSH4eLQ4TGBn
- WG4S3yRxHLZth4gj55L5TYSLaaQMfjcEde83HX50D5AVUIb/hNV9llCZZjCHSwUF/f5i
- 7Q7rSDRkMMLLQQBoAqq1S3T7p/dN6EYHmKwOQtK4XUqFCJS1gunaBsmr0krWm2cB1vKo
- PlLGm100eHsy5wuDVaKHiR2gy2urU5VbEuigRjzOYcZe64UqAlFEtH5LQbJ7QrTTKhij
- nzEw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVia8XbFkWdSGUZrtRxfXYAUusc06CepRgpz50+33wQoxOnZzYxu3oCWrDiIsDSbldb9yJkx3P0Om1vMnW8Qhc08iFcdSk=
-X-Gm-Message-State: AOJu0Ywmmdc642xc3OChDfW7CX87LCAXmK7nSTYRGzv6XXlu03Gun2L7
- CdluE2smfluN4d9Ft05rXDf+zypwcQqxbykO45Y7JdF1vgvql30pxKd6hHEbz0w=
-X-Google-Smtp-Source: AGHT+IHx1pfRtQPNy8xDMSGdSN+fiID9Bu0RbJTSXQHruG2Zn/8gspgXpjpKTYlBAbmxlELfodmNMA==
-X-Received: by 2002:a05:6a20:9f4a:b0:1b0:278e:34a6 with SMTP id
- adf61e73a8af0-1b0278e367dmr11716242637.49.1716226857340; 
- Mon, 20 May 2024 10:40:57 -0700 (PDT)
-Received: from [192.168.68.110] ([177.94.42.57])
- by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-66f9b625815sm1012799a12.50.2024.05.20.10.40.54
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 20 May 2024 10:40:57 -0700 (PDT)
-Message-ID: <0c7b0674-4ba9-4c87-a130-0277ca0d7a9b@ventanamicro.com>
-Date: Mon, 20 May 2024 14:40:52 -0300
+ (Exim 4.90_1) (envelope-from <bjorn@kernel.org>)
+ id 1s97pd-0000MX-IA; Mon, 20 May 2024 14:33:57 -0400
+Received: from sin.source.kernel.org ([145.40.73.55])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <bjorn@kernel.org>)
+ id 1s97pa-0003Jn-QG; Mon, 20 May 2024 14:33:57 -0400
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 3571ECE0C47;
+ Mon, 20 May 2024 18:33:42 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C4803C2BD10;
+ Mon, 20 May 2024 18:33:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1716230021;
+ bh=xu+kl7kjSGnDX+nb2nk6EBZPHESM4Za/vrprxGJk3iU=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=J3dfIoWBHURqbrL0mpawzamLLyoMJQZS/pgs4+wBCVJxXYSzoIIl9ZwtjYNOTROee
+ zJz1Y8s+z7fQGRP2KX1dWulW7ed3pAFX0XrL47YQZnm9fwbZrd1dRvZ7fTryCZrCBT
+ I1zGsdBORo3MbfGoGMSiMayIMQWw9MtdAYxx0M0XZdZTKvVnxAbvUAHli9wWSY/8tK
+ /bslWyXmwvsEA+8KK60UVDNLU5S6I7sZ4ZqsWkhAo/Dkyz/5tUPxAHdl+ubJBE7M2p
+ CdbUL+ffzLkg9FmTjByA4itJBTtgxHKH+vwtmkLoYrDaua2Li7wOn4c1D5X3FKYx4k
+ I7N9LoreIsOKg==
+From: =?utf-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, Palmer Dabbelt
+ <palmer@dabbelt.com>, Alistair Francis <alistair.francis@wdc.com>, Bin
+ Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, David Hildenbrand <david@redhat.com>
+Cc: =?utf-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@rivosinc.com>, Sunil V L
+ <sunilvl@ventanamicro.com>,
+ Santosh Mamila <santosh.mamila@catalinasystems.io>, Chethan Seshadri
+ <Chethan.Seshadri@catalinasystems.io>, Sivakumar Munnangi
+ <siva.munnangi@catalinasystems.io>
+Subject: Re: [PATCH] hw/riscv/virt: Add hotplugging and virtio-md-pci support
+In-Reply-To: <3cb00bbb-7742-40b7-858c-4bdd2f9cc79b@ventanamicro.com>
+References: <20240514110615.399065-1-bjorn@kernel.org>
+ <3cb00bbb-7742-40b7-858c-4bdd2f9cc79b@ventanamicro.com>
+Date: Mon, 20 May 2024 20:33:37 +0200
+Message-ID: <875xv8wcxq.fsf@all.your.base.are.belong.to.us>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 0/1] pci: allocate a PCI ID for RISC-V IOMMU
-To: Frank Chang <frank.chang@sifive.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- ajones@ventanamicro.com, kraxel@redhat.com
-References: <20240503124244.8804-1-dbarboza@ventanamicro.com>
- <CAFEAcA_gu40QoTXUPP2f=8vGvEOTbGWKtqR3b-e7YYhbFG0aiw@mail.gmail.com>
- <d8fcb94e-86cf-4497-b450-1a32e4606512@ventanamicro.com>
- <CANzO1D1VmQhETKY7zFC7PTu-QntOnZVmXcYor3m2B+6RVcC5mQ@mail.gmail.com>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <CANzO1D1VmQhETKY7zFC7PTu-QntOnZVmXcYor3m2B+6RVcC5mQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62e.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=145.40.73.55; envelope-from=bjorn@kernel.org;
+ helo=sin.source.kernel.org
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -103,90 +77,94 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Daniel,
+
+Thanks for taking a look!
+
+Daniel Henrique Barboza <dbarboza@ventanamicro.com> writes:
+
+> Hi Bj=C3=B6rj,
+>
+> On 5/14/24 08:06, Bj=C3=B6rn T=C3=B6pel wrote:
+>> From: Bj=C3=B6rn T=C3=B6pel <bjorn@rivosinc.com>
+>>=20
+>> Virtio-based memory devices allows for dynamic resizing of virtual
+>> machine memory, and requires proper hotplugging (add/remove) support
+>> to work.
+>>=20
+>> Enable virtio-md-pci with the corresponding missing hotplugging
+>> callbacks for the RISC-V "virt" machine.
+>>=20
+>> Signed-off-by: Bj=C3=B6rn T=C3=B6pel <bjorn@rivosinc.com>
+>> ---
+>> This is basic support for MHP that works with DT. There some minor
+>> ACPI SRAT plumbing in there as well. Ideally we'd like proper ACPI MHP
+>> support as well. I have a branch [1], where I've applied this patch,
+>> plus ACPI GED/PC-DIMM MHP support on top of Sunil's QEMU branch
+>> (contains some ACPI DSDT additions) [2], for the curious/brave ones.
+>> However, the ACPI MHP support this is not testable on upstream Linux
+>> yet (ACPI AIA support, and ACPI NUMA SRAT series are ongoing).
+>>=20
+>> I'll follow-up with proper ACPI GED/PC-DIMM MHP patches, once the
+>> dependencies land (Linux kernel and QEMU).
+>>=20
+>> I'll post the Linux MHP/virtio-mem v2 patches later this week!
+>>=20
+>>=20
+>> Cheers,
+>> Bj=C3=B6rn
+>>=20
+>> [1] https://github.com/bjoto/qemu/commits/virtio-mem-pc-dimm-mhp-acpi/
+>> [2] https://lore.kernel.org/linux-riscv/20240501121742.1215792-1-sunilvl=
+@ventanamicro.com/
+>> ---
+>>   hw/riscv/Kconfig           |  2 ++
+>>   hw/riscv/virt-acpi-build.c |  7 +++++
+>>   hw/riscv/virt.c            | 64 +++++++++++++++++++++++++++++++++++++-
+>>   hw/virtio/virtio-mem.c     |  2 +-
+>>   4 files changed, 73 insertions(+), 2 deletions(-)
+>>=20
+>> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+>> index a2030e3a6ff0..08f82dbb681a 100644
+>> --- a/hw/riscv/Kconfig
+>> +++ b/hw/riscv/Kconfig
+>> @@ -56,6 +56,8 @@ config RISCV_VIRT
+>>       select PLATFORM_BUS
+>>       select ACPI
+>>       select ACPI_PCI
+>> +    select VIRTIO_MEM_SUPPORTED
+>> +    select VIRTIO_PMEM_SUPPORTED
+>>=20=20=20
+>>   config SHAKTI_C
+>>       bool
+>> diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
+>> index 0925528160f8..6dc3baa9ec86 100644
+>> --- a/hw/riscv/virt-acpi-build.c
+>> +++ b/hw/riscv/virt-acpi-build.c
+>> @@ -610,6 +610,13 @@ build_srat(GArray *table_data, BIOSLinker *linker, =
+RISCVVirtState *vms)
+>>           }
+>>       }
+>>=20=20=20
+>> +    if (ms->device_memory) {
+>> +        build_srat_memory(table_data, ms->device_memory->base,
+>> +                          memory_region_size(&ms->device_memory->mr),
+>> +                          ms->numa_state->num_nodes - 1,
+>> +                          MEM_AFFINITY_HOTPLUGGABLE | MEM_AFFINITY_ENAB=
+LED);
+>> +    }
+>> +
+>>       acpi_table_end(linker, &table);
+>
+> When the time comes I believe we'll want this chunk in a separated ACPI p=
+atch.
+
+Hmm, I first thought about adding this to the ACPI MHP series, but then
+realized that virtio-mem relies on SRAT for ACPI boots (again -- RISC-V
+Linux does not support that upstream yet...).
+
+Do you mean that you'd prefer this chunk in a separate patch?
 
 
-On 5/10/24 07:47, Frank Chang wrote:
-> Hi Daniel,
-> 
-> Daniel Henrique Barboza <dbarboza@ventanamicro.com> 於 2024年5月8日 週三 下午8:42寫道：
->>
->>
->>
->> On 5/7/24 12:44, Peter Maydell wrote:
->>> On Fri, 3 May 2024 at 13:43, Daniel Henrique Barboza
->>> <dbarboza@ventanamicro.com> wrote:
->>>>
->>>> Hi,
->>>>
->>>> In this RFC I want to check with Gerd and others if it's ok to add a PCI
->>>> id for the RISC-V IOMMU device. It's currently under review in [1]. The
->>>> idea is to fold this patch into the RISC-V IOMMU series if we're all ok
->>>> with this change.
->>>
->>> My question here would be "why is this risc-v specific?" (and more
->>> generally "what is this for?" -- the cover letter and patch and
->>> documentation page provide almost no information about what this
->>> device is and why it needs to exist rather than using either
->>> virtio-iommu or else a model of a real hardware IOMMU.)
->>
->> The RISC-V IOMMU device emulation under review ([1]) is a reference implementation of
->> the riscv-iommu spec [2]. AFAIK it is similar to what we already have with aarch64 'smmuv3'
->> 'virt' bus, i.e. an impl of ARM's SMMUv3 that isn't tied to a specific vendor.
->>
->> The difference here is that the riscv-iommu spec, ratified by RISC-V International (RVI),
->> predicts that the device could be implemented as a PCIe device. But RVI didn't bother
->> assigning a PCI ID for their reference IOMMU. The existing implementation in [1] is using
->> a Rivos PCI ID that we're treating as a placeholder only. We need an ID that reflects that
->> this is a device that adheres to the riscv-iommu spec, not to an IOMMU of any particular
->> vendor.
->>
->> Since RVI doesn't provide a PCI ID for it we went to Red Hat, and they were kind enough
->> to give us a PCI ID for the RISC-V IOMMU reference device.
-> 
-> That's great. Thanks to Red Hat.
-> I'm wondering do we have the plan to document the new PCI ID to the IOMMU spec
-> or somewhere else that's publicly accessible?
-
-It will be documented in QEMU, as you've already seen in this patch. I'm sure
-that this info will be cascaded for other databases but I'm not sure how or when.
-I think Gerd can give us more info about it.
-
-I guess we'll end up using this same generic ID from QEMU in the kernel side too.
-As of now the kernel IOMMU support is using a Rivos ID ([1], patch 3). Assuming that
-[1] stays this way (I'm not sure if the kernel driver is a Rivos implementation or a
-canonical implementation like we're doing here), we'll need to add a generic kernel
-support that uses the generic ID too.
-
-
-Thanks,
-
-Daniel
-
-[1] https://lore.kernel.org/linux-riscv/cover.1715708679.git.tjeznach@rivosinc.com/
-
-
-
-> 
-> Regards,
-> Frank Chang
-> 
->>
->> I'll do a proper job this time and add all this context in the commit msg. Including a
->> proper shout-out to Gerd and Red Hat.
->>
->>
->>
->> Thanks,
->>
->>
->> Daniel
->>
->>
->> [1] https://lore.kernel.org/qemu-riscv/20240307160319.675044-1-dbarboza@ventanamicro.com/
->> [2] https://github.com/riscv-non-isa/riscv-iommu/releases/tag/v1.0.0
->>
->>>
->>> thanks
->>> -- PMM
->>
+Bj=C3=B6rn
 
