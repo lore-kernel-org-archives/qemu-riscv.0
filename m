@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A165C25B7A
-	for <qemu-riscv@archiver.kernel.org>; Mon, 20 May 2024 19:24:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16823C25B77
+	for <qemu-riscv@archiver.kernel.org>; Mon, 20 May 2024 20:05:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s98cW-0003tY-ER; Mon, 20 May 2024 15:24:28 -0400
+	id 1s99Fx-0005cv-Ss; Mon, 20 May 2024 16:05:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1s98cU-0003su-4g
- for qemu-riscv@nongnu.org; Mon, 20 May 2024 15:24:26 -0400
-Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429])
+ id 1s99Fv-0005cA-Ns
+ for qemu-riscv@nongnu.org; Mon, 20 May 2024 16:05:11 -0400
+Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1s98cS-0004eM-0D
- for qemu-riscv@nongnu.org; Mon, 20 May 2024 15:24:25 -0400
-Received: by mail-pf1-x429.google.com with SMTP id
- d2e1a72fcca58-6f43ee95078so1353136b3a.1
- for <qemu-riscv@nongnu.org>; Mon, 20 May 2024 12:24:23 -0700 (PDT)
+ id 1s99Ft-0003n9-H8
+ for qemu-riscv@nongnu.org; Mon, 20 May 2024 16:05:11 -0400
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-1ecd3867556so89487745ad.0
+ for <qemu-riscv@nongnu.org>; Mon, 20 May 2024 13:05:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1716233062; x=1716837862; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1716235505; x=1716840305; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=ojHxLGdPp0BgwnVuH4SV3rTtMAWpd2lmvZ2KaDLb59Y=;
- b=KuC4jVLnGy9662HPosqzam8xtf/iK0kaoFGOTMRaa2g0x13Ft7n9oJ/yqUFYViTQGy
- g2lFQim6jBMPqMxGhw/4QmCZvu4T1akP1oezIf8gq3bm4ph0cOmx0GM0hlFgDjSGr5xQ
- kzTRGDksNpUQKrwcEHN4X8wVBMR5s9/5d4QlmxgTww12RyA9lkeaQtJUV8U5HTn4JXfy
- mRw55imxAn2b9rmgENEfE7NS4B8w1bxVxNLEeQ1VaJBAHCjTPeeSKljA7q4Z6W7R/3vA
- AdkYZnnpqrTs0D57XkBZg4m3F2st3VUC3g7CCFA0ZgzEPuZtj51SMK7Sn+HkIRGXBiJU
- J1Kg==
+ bh=4mvCA9w6FdFTW0YLCl1SxGRRGxyiZKa7vF0l/I6UfVw=;
+ b=KhAXEtDWG7alrsBRq848n9qYrR4E07cLi2gN5UUPPfcbQsmagrqhZR0VL6vxFJOfVP
+ ij5cQQB9Na/08wGwUxU5qaCa9KatKbQFakvbRCiL2krSFI+qYxJ4Teyy9N9XM+2zeROX
+ SqxtuMR0Qa+Wv0ox7dmnzFu+i6qQ4SwqLq1P0kGmcwsIzBpBW7g8pUTgO+v57LiOMjA8
+ tAOjiHOFQPJ3ZCPqQRKYRjJrLdQUWQIzvQVZHEWIJXCZBtpKIStZqUWSsghj47GOx/0T
+ VBINK1ChxZjC6AJe7AnAIk4oVhsa0WjTPz/ko2eG9TMGKR64d+2BkS8BcPriLFJkwr0T
+ VbOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716233062; x=1716837862;
+ d=1e100.net; s=20230601; t=1716235505; x=1716840305;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ojHxLGdPp0BgwnVuH4SV3rTtMAWpd2lmvZ2KaDLb59Y=;
- b=FII396NwHfiK81cbnSR0j95EnScLRVpnNeqH2/RKElu75bxNnEfxNE6ldtLMOm+LG9
- +zJZ/cddgI28RXHaS7Grh9b6cUgOE4NKgStZgA300c9om7pCS9NqAuppLqEJM4xD8XsQ
- QH5nBC4jbE+nDcrTCm2jzA+RMU6CVRKTfIMyXGaYy8UOZdTlCXnySvPONDEQb0Jd1R6w
- j9Cu6ixJgPmT+ErI4y3PMJTvY7MrqEzjkO7aPIeDycC/E3Y3oieuairwtiabrhokY8Wv
- SKWixGZcPUkxSRH9BY4ItssEbW/rA7P3ixWwprBxIfPKN8yggSodxGB6h64c71fzvT8Z
- oGcg==
+ bh=4mvCA9w6FdFTW0YLCl1SxGRRGxyiZKa7vF0l/I6UfVw=;
+ b=OH+F1UDQBcN311jUtD1GKTaPmL1FenttCPkCUrtVjsb1/AuKVyoE8s0APPm2EGeiEE
+ hfraMWak4HmsWlQ7F/hrR6LSvJdiORPeBrgu/BmP80gugDa/VEpVnekYX9g5KaioxrvR
+ 5IvJPpXTOjuQsgfaGGQEYwhy+/zXevibAh8EeSQtpb0f/bvJWqXA8zKjk8afwQi3w1nm
+ ZC1TYPGy9tKLf6OTFujhwcb5smM/bjHJHJwmQxUjq7FNXD6X3yYC2GjMGwvJqhyC9EoQ
+ Ft+NT93rAI6L6tI3CrQ6oQReZ/GaJUkPkFizundXPWke3G0HGhF5OgxzcZgKs/M/QCeT
+ RJRA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWBGkygmcHdpjfVqAvw/lNGpgbRu1FTIcZyowsmIv5NHzN6+6ro3LjI0T/kOJnXvlHtmDlVz0ieFQM0P7SBhkN2VFMRd/I=
-X-Gm-Message-State: AOJu0Yz6zNm7RNMwUgug+Z/I1gWboQwo3gR2PXaI1z0xuQ5s7UQ7qI8H
- l4E6c0/mh3snh+G3JeB0YvkVT5teY8H3cs/jpWZoGWQ59xCLDMn4wRcue5CcehQ=
-X-Google-Smtp-Source: AGHT+IEGcVHn876iYmzpwBQZIbW8MU/amP8HvzIjGzufYtXPqeKEa3Ytq750oJBaVZiboUzDIC9diw==
-X-Received: by 2002:a05:6a00:4f86:b0:6f3:e6ac:1a3f with SMTP id
- d2e1a72fcca58-6f4e02ad970mr35551506b3a.11.1716233062202; 
- Mon, 20 May 2024 12:24:22 -0700 (PDT)
+ AJvYcCVVgtQXRXBeFuHAo0QaSSXVQ8UjaQJG8Dpl12psWUpP9eA7Cduzu4UfURtKNPnoQuvOdFko3DOrSSj3vOyYxfnNhmoltsE=
+X-Gm-Message-State: AOJu0YyJ9WTz8Bknqnhyp2xGRngdwxEInwqkjuEZWHTVhdu4Mf3p2+Kh
+ lg28Sp4+40aPXsWXPRIsr0Y9KNiECZrpTvba/4nsHm8oVKPU8jcFqNaa0Vx29bc=
+X-Google-Smtp-Source: AGHT+IEFLRCu2IJdZL1uHp3RA9ZpBhTIE/6+jTWm5NAhke9OSOlFVllfnJvBjnP7w1vDmBAS7Bcoww==
+X-Received: by 2002:a17:902:f54e:b0:1f3:a22:7c4e with SMTP id
+ d9443c01a7336-1f30a228073mr17712195ad.17.1716235505493; 
+ Mon, 20 May 2024 13:05:05 -0700 (PDT)
 Received: from ?IPV6:2804:7f0:bcc0:4196:f8dc:1a46:f594:fa63?
  ([2804:7f0:bcc0:4196:f8dc:1a46:f594:fa63])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-6f694647472sm5683798b3a.199.2024.05.20.12.24.17
+ d9443c01a7336-1f3044a81c9sm19062075ad.43.2024.05.20.13.05.01
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 20 May 2024 12:24:21 -0700 (PDT)
-Message-ID: <20d0e737-0948-4df2-8a2d-bb438f323fa3@ventanamicro.com>
-Date: Mon, 20 May 2024 16:24:15 -0300
+ Mon, 20 May 2024 13:05:05 -0700 (PDT)
+Message-ID: <c9332de0-f36e-4e62-a46c-9d3fd8448795@ventanamicro.com>
+Date: Mon, 20 May 2024 17:04:59 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH] hw/riscv/virt: Add hotplugging and virtio-md-pci support
 To: =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
+ David Hildenbrand <david@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
  Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- David Hildenbrand <david@redhat.com>
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@rivosinc.com>,
  Sunil V L <sunilvl@ventanamicro.com>,
  Santosh Mamila <santosh.mamila@catalinasystems.io>,
@@ -79,14 +78,16 @@ Cc: =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@rivosinc.com>,
  Sivakumar Munnangi <siva.munnangi@catalinasystems.io>
 References: <20240514110615.399065-1-bjorn@kernel.org>
  <3cb00bbb-7742-40b7-858c-4bdd2f9cc79b@ventanamicro.com>
- <875xv8wcxq.fsf@all.your.base.are.belong.to.us>
+ <91086379-1fbc-4179-863a-6bb2e797d564@redhat.com>
+ <afbd3799-fa2a-4c7d-8097-aeaedecf4ec3@ventanamicro.com>
+ <87v838uxk5.fsf@all.your.base.are.belong.to.us>
 Content-Language: en-US
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <875xv8wcxq.fsf@all.your.base.are.belong.to.us>
+In-Reply-To: <87v838uxk5.fsf@all.your.base.are.belong.to.us>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::429;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x429.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x629.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -111,105 +112,149 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 5/20/24 15:33, Björn Töpel wrote:
-> Daniel,
-> 
-> Thanks for taking a look!
+On 5/20/24 15:51, Björn Töpel wrote:
+> Daniel/David,
 > 
 > Daniel Henrique Barboza <dbarboza@ventanamicro.com> writes:
 > 
->> Hi Björj,
+>> On 5/18/24 16:50, David Hildenbrand wrote:
+>>>
+>>> Hi,
+>>>
+>>>
+>>>>> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+>>>>> index 4fdb66052587..16c2bdbfe6b6 100644
+>>>>> --- a/hw/riscv/virt.c
+>>>>> +++ b/hw/riscv/virt.c
+>>>>> @@ -53,6 +53,8 @@
+>>>>>     #include "hw/pci-host/gpex.h"
+>>>>>     #include "hw/display/ramfb.h"
+>>>>>     #include "hw/acpi/aml-build.h"
+>>>>> +#include "hw/mem/memory-device.h"
+>>>>> +#include "hw/virtio/virtio-mem-pci.h"
+>>>>>     #include "qapi/qapi-visit-common.h"
+>>>>>     #include "hw/virtio/virtio-iommu.h"
+>>>>> @@ -1407,6 +1409,7 @@ static void virt_machine_init(MachineState *machine)
+>>>>>         DeviceState *mmio_irqchip, *virtio_irqchip, *pcie_irqchip;
+>>>>>         int i, base_hartid, hart_count;
+>>>>>         int socket_count = riscv_socket_count(machine);
+>>>>> +    hwaddr device_memory_base, device_memory_size;
+>>>>>         /* Check socket count limit */
+>>>>>         if (VIRT_SOCKETS_MAX < socket_count) {
+>>>>> @@ -1553,6 +1556,25 @@ static void virt_machine_init(MachineState *machine)
+>>>>>         memory_region_add_subregion(system_memory, memmap[VIRT_MROM].base,
+>>>>>                                     mask_rom);
+>>>>> +    device_memory_base = ROUND_UP(s->memmap[VIRT_DRAM].base + machine->ram_size,
+>>>>> +                                  GiB);
+>>>>> +    device_memory_size = machine->maxram_size - machine->ram_size;
+>>>>> +
+>>>>> +    if (riscv_is_32bit(&s->soc[0])) {
+>>>>> +        hwaddr memtop = device_memory_base + ROUND_UP(device_memory_size, GiB);
+>>>>> +
+>>>>> +        if (memtop > UINT32_MAX) {
+>>>>> +            error_report("Memory exceeds 32-bit limit by %lu bytes",
+>>>>> +                         memtop - UINT32_MAX);
+>>>>> +            exit(EXIT_FAILURE);
+>>>>> +        }
+>>>>> +    }
+>>>>> +
+>>>>> +    if (device_memory_size > 0) {
+>>>>> +        machine_memory_devices_init(machine, device_memory_base,
+>>>>> +                                    device_memory_size);
+>>>>> +    }
+>>>>> +
+>>>>
+>>>> I think we need a design discussion before proceeding here. You're allocating all
+>>>> available memory as a memory device area, but in theory we might also support
+>>>> pc-dimm hotplugs (which would be the equivalent of adding physical RAM dimms to
+>>>> the board.) in the future too. If you're not familiar with this feature you can
+>>>> check it out the docs in [1].
+>>>
+>>> Note that DIMMs are memory devices as well. You can plug into the memory device area both, ACPI-based memory devices (DIMM, NVDIMM) or virtio-based memory devices (virtio-mem, virtio-pmem).
+>>>
+>>>>
+>>>> As an example, the 'virt' ARM board (hw/arm/virt.c) reserves a space for this
+>>>> type of hotplug by checking how much 'ram_slots' we're allocating for it:
+>>>>
+>>>> device_memory_size = ms->maxram_size - ms->ram_size + ms->ram_slots * GiB;
+>>>>
+>>>
+>>> Note that we increased the region size to be able to fit most requests even if alignment of memory devices is weird. See below.
+>>>
+>>> In sane setups, this is usually not required (adding a single additional GB for some flexiility might be good enough).
+>>>
+>>>> Other boards do the same with ms->ram_slots. We should consider doing it as well,
+>>>> now, even if we're not up to the point of supporting pc-dimm hotplug, to avoid
+>>>> having to change the memory layout later in the road and breaking existing
+>>>> setups.
+>>>>
+>>>> If we want to copy the ARM board, ram_slots is capped to ACPI_MAX_RAM_SLOTS (256).
+>>>> Each RAM slot is considered to be a 1GiB dimm, i.e. we would reserve 256GiB for
+>>>> them.
+>>>
+>>> This only reserves some *additional* space to fixup weird alignment of memory devices. *not* the actual space for these devices.
+>>>
+>>> We don't consider each DIMM to be 1 GiB in size, but add an additional 1 GiB in case we have to align DIMMs in physical address space.
+>>>
+>>> I *think* this dates back to old x86 handling where we aligned the address of each DIMM to be at a 1 GiB boundary. So if you would have plugged two 128 MiB DIMMs, you'd have required more than 256 MiB of space in the area after aligning inside the memory device area.
+>>>
 >>
->> On 5/14/24 08:06, Björn Töpel wrote:
->>> From: Björn Töpel <bjorn@rivosinc.com>
->>>
->>> Virtio-based memory devices allows for dynamic resizing of virtual
->>> machine memory, and requires proper hotplugging (add/remove) support
->>> to work.
->>>
->>> Enable virtio-md-pci with the corresponding missing hotplugging
->>> callbacks for the RISC-V "virt" machine.
->>>
->>> Signed-off-by: Björn Töpel <bjorn@rivosinc.com>
->>> ---
->>> This is basic support for MHP that works with DT. There some minor
->>> ACPI SRAT plumbing in there as well. Ideally we'd like proper ACPI MHP
->>> support as well. I have a branch [1], where I've applied this patch,
->>> plus ACPI GED/PC-DIMM MHP support on top of Sunil's QEMU branch
->>> (contains some ACPI DSDT additions) [2], for the curious/brave ones.
->>> However, the ACPI MHP support this is not testable on upstream Linux
->>> yet (ACPI AIA support, and ACPI NUMA SRAT series are ongoing).
->>>
->>> I'll follow-up with proper ACPI GED/PC-DIMM MHP patches, once the
->>> dependencies land (Linux kernel and QEMU).
->>>
->>> I'll post the Linux MHP/virtio-mem v2 patches later this week!
->>>
->>>
->>> Cheers,
->>> Björn
->>>
->>> [1] https://github.com/bjoto/qemu/commits/virtio-mem-pc-dimm-mhp-acpi/
->>> [2] https://lore.kernel.org/linux-riscv/20240501121742.1215792-1-sunilvl@ventanamicro.com/
->>> ---
->>>    hw/riscv/Kconfig           |  2 ++
->>>    hw/riscv/virt-acpi-build.c |  7 +++++
->>>    hw/riscv/virt.c            | 64 +++++++++++++++++++++++++++++++++++++-
->>>    hw/virtio/virtio-mem.c     |  2 +-
->>>    4 files changed, 73 insertions(+), 2 deletions(-)
->>>
->>> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
->>> index a2030e3a6ff0..08f82dbb681a 100644
->>> --- a/hw/riscv/Kconfig
->>> +++ b/hw/riscv/Kconfig
->>> @@ -56,6 +56,8 @@ config RISCV_VIRT
->>>        select PLATFORM_BUS
->>>        select ACPI
->>>        select ACPI_PCI
->>> +    select VIRTIO_MEM_SUPPORTED
->>> +    select VIRTIO_PMEM_SUPPORTED
->>>    
->>>    config SHAKTI_C
->>>        bool
->>> diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
->>> index 0925528160f8..6dc3baa9ec86 100644
->>> --- a/hw/riscv/virt-acpi-build.c
->>> +++ b/hw/riscv/virt-acpi-build.c
->>> @@ -610,6 +610,13 @@ build_srat(GArray *table_data, BIOSLinker *linker, RISCVVirtState *vms)
->>>            }
->>>        }
->>>    
->>> +    if (ms->device_memory) {
->>> +        build_srat_memory(table_data, ms->device_memory->base,
->>> +                          memory_region_size(&ms->device_memory->mr),
->>> +                          ms->numa_state->num_nodes - 1,
->>> +                          MEM_AFFINITY_HOTPLUGGABLE | MEM_AFFINITY_ENABLED);
->>> +    }
->>> +
->>>        acpi_table_end(linker, &table);
+>> Thanks for the explanation. I missed the part where the ram_slots were being
+>> used just to solve potential alignment issues and pc-dimms could occupy the same
+>> space being allocated via machine_memory_devices_init().
 >>
->> When the time comes I believe we'll want this chunk in a separated ACPI patch.
+>> This patch isn't far off then. If we take care to avoid plugging unaligned memory
+>> we might not even need this spare area.
 > 
-> Hmm, I first thought about adding this to the ACPI MHP series, but then
-> realized that virtio-mem relies on SRAT for ACPI boots (again -- RISC-V
-> Linux does not support that upstream yet...).
-> 
-> Do you mean that you'd prefer this chunk in a separate patch?
+> I'm a bit lost here, so please bare with me. We don't require the 1 GiB
+> alignment on RV AFAIU. I'm having a hard time figuring out what missing
+> in my patch.
 
-TBH I wouldn't mind keeping this ACPI chunk here but I reckon that the ACPI
-subsystem review is usually done in separate, with a different set of people
-reviewing it and so on.
+Forget about the 1 GiB size. This is something that we won't need to deal with
+because we don't align in 1 Gib.
 
-We might as well keep it here for now. If more ACPI changes ended up being done
-(e.g. ACPI unit test changes) then doing a separated ACPI patch makes more sense.
+Let's say for example that we want to support pc-dimm hotplug of 256 slots like the
+'virt' ARM machine does. Let's also say that we will allow users to hotplug any
+DIMM size they want, taking care of any alignment issues by ourselves.
+
+In hw/riscv/boot.c I see that our alignment sizes are 4Mb for 32 bits and 2Mb for
+64 bits. Forget 32 bits a bit and let's say that our alignment is 2Mb.
+
+So, in a worst case scenario, an user could hotplug 256 slots, all of them unaligned,
+and then we would need to align each one of them by adding 2Mb. So, to account for
+this alignment fixup, we would need 256 * 2Mb RAM reserved for it.
+
+What I said about "If we take care to avoid plugging unaligned memory we might not even
+need this spare area" is a possible design where we would force every hotplugged DIMM
+to always be memory aligned, avoiding the need for this spare RAM for alignment. This
+would put a bit of extra straing in users/management apps to always deliver aligned
+DIMMs.
+
+In hindsight this is not needed. It's fairly easy to reserve ACPI_MAX_RAM_SLOTS * (2Mb/4Mb)
+and let users hotplug whatever DIMM size they want.
+
+Hope this explains the situation a bit. If we agree on allocating this spare RAM for
+hotplugged mem alignment, we'll probalby need a pre-patch to do a little handling of
+ms->ram_slots, limiting it to ACPI_MAX_RAM_SLOTS (ram_slots can be changed via command
+line). Then it's a matter of reserving ms->ram_slots * align_size when calculating
+device_memory_size.
 
 
 Thanks,
 
 Daniel
 
-
+> 
+> [...]
+> 
+>>>> I see that David Hildenbrand is also CCed in the patch so he'll let us know if
+>>>> I'm out of line with what I'm asking.
+>>>
+>>> Supporting PC-DIMMs might be required at some point when dealing with OSes that don't support virtio-mem and friends.
+> 
+> ...and also for testing the PC-DIMM ACPI patching path. ;-)
 > 
 > 
+> Cheers,
 > Björn
 
