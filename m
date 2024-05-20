@@ -4,94 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18A0EC25B75
-	for <qemu-riscv@archiver.kernel.org>; Sun, 19 May 2024 09:24:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5362C04FFE
+	for <qemu-riscv@archiver.kernel.org>; Mon, 20 May 2024 10:25:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s8cmX-0007X4-5r; Sun, 19 May 2024 05:24:41 -0400
+	id 1s90Cl-0006o7-Po; Mon, 20 May 2024 06:25:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1s8cmR-0007WZ-TP
- for qemu-riscv@nongnu.org; Sun, 19 May 2024 05:24:38 -0400
-Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1s8cmP-0001Sr-0T
- for qemu-riscv@nongnu.org; Sun, 19 May 2024 05:24:35 -0400
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-1ed835f3c3cso54240785ad.3
- for <qemu-riscv@nongnu.org>; Sun, 19 May 2024 02:24:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1716110671; x=1716715471; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=YV0NnIhXRzFdTmmqut057LfXxlesO2gOd0FPWMAf71Q=;
- b=KOM7r9uNAFJueRI8YheWStYwxVO/aTHxLYVk76BCxJxMKUVHbnVtR6+rM193JuX05m
- 5jjtxLeHg3jcpLAgWyZ6+GvM4SdYTPFBOr16wxsSaIM4agpOSKq9mJBqis8GfwWwy/IZ
- ld8sBjeKiSnYOtjnUAT55bpXlTQB38kB7MDk6eFFNMH1wl+C3s/4NA7M8UbotyFrX4Ft
- 7LSIfrAVTzb3bRMVWE2KV5t9TFCdE8pRdTbENEORq9iFVbdlJ8uD5zJuuM/nUZZgvdDs
- hcmEoeIt07eAleDKc0UWoXIpym4vAqZiFePwejVEmgDnt4S+ntZczLq8CX6+Ax+uZzZ5
- KXxA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716110671; x=1716715471;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=YV0NnIhXRzFdTmmqut057LfXxlesO2gOd0FPWMAf71Q=;
- b=uH39Fpdkz+aiQ6L5GqKkkX5eWDMHcGtpqKpk4lBaNMiCYNzr4RyclebLCfjerdeVOY
- 3Wn0fy3NEiK1wmiEpfDrwrAsiQSwz1eoqItxNS/zkTKB1Mr64T23glZG808HwGoEkAsn
- RpEEoCqvgDAdKntUVFXefCmVgLi0w5TmwW7/3kHk/3+vaGich9AqxZomGAGFF6fzPO/Z
- ImF5qhxccjfER39uoxHlfLERETBRCkLuEwJwH/SEMfTnxZCZyPeftHKHB1jL0fzJatbT
- x9rCJxUQq83bp7XNJmmlCsNXzPgq4rrR0cafJ1WoTBCyZqRz+Xg0OcTVbDAqqvANh1qF
- pOZw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWLn4Bdg/oOarZVGV1tDfBEJbA5b2Ap+oQ/QyxSQEhwJ/bC0TJB36AFipJT06buCYooxdbdTcbFn+Y/V/RiyI3tsFHVkUM=
-X-Gm-Message-State: AOJu0YzPLsB5bBrBUNNOVeCLVYLpysH5kl5mAanq6wH7IY4ubh1McGud
- ERb9cfYEysJOUnoW5weqbYJv3D87AM98T00UOV5V1VVfbcqFuzUNgROHQ4+HOeI=
-X-Google-Smtp-Source: AGHT+IG4Lg7YVayGWha2kblJdJje6RwdJ0zeG3A1RGVWpPQsXKXUQ7ZA4uvytiDjGCGupwlsC4I4uw==
-X-Received: by 2002:a17:90a:cb8b:b0:2bd:76f6:8d30 with SMTP id
- 98e67ed59e1d1-2bd76f68da6mr503251a91.32.1716110670757; 
- Sun, 19 May 2024 02:24:30 -0700 (PDT)
-Received: from [192.168.68.110] ([177.94.42.57])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2b6c51b3482sm16743763a91.20.2024.05.19.02.24.26
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 19 May 2024 02:24:30 -0700 (PDT)
-Message-ID: <afbd3799-fa2a-4c7d-8097-aeaedecf4ec3@ventanamicro.com>
-Date: Sun, 19 May 2024 06:24:23 -0300
+ (Exim 4.90_1) (envelope-from <duchao@eswincomputing.com>)
+ id 1s90Cj-0006mp-H3; Mon, 20 May 2024 06:25:17 -0400
+Received: from zg8tmja5ljk3lje4ms43mwaa.icoremail.net ([209.97.181.73])
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <duchao@eswincomputing.com>)
+ id 1s90Cf-0005fG-Ct; Mon, 20 May 2024 06:25:15 -0400
+Received: from duchao$eswincomputing.com ( [10.64.112.210] ) by
+ ajax-webmail-app1 (Coremail) ; Mon, 20 May 2024 18:22:57 +0800 (GMT+08:00)
+X-Originating-IP: [10.64.112.210]
+Date: Mon, 20 May 2024 18:22:57 +0800 (GMT+08:00)
+X-CM-HeaderCharset: UTF-8
+From: "Chao Du" <duchao@eswincomputing.com>
+To: pbonzini@redhat.com, "Daniel Henrique Barboza" <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair23@gmail.com, 
+ bin.meng@windriver.com, liweiwei@iscas.ac.cn, 
+ zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com, 
+ anup@brainfault.org, atishp@atishpatra.org
+Subject: Re: [RFC PATCH 0/4] target/riscv/kvm: QEMU support for KVM Guest
+ Debug on RISC-V
+X-Priority: 3
+X-Mailer: Coremail Webmail Server Version XT6.0.3 build 20220420(169d3f8c)
+ Copyright (c) 2002-2024 www.mailtech.cn
+ mispb-72143050-eaf5-4703-89e0-86624513b4ce-eswincomputing.com
+In-Reply-To: <b93f13c4-05a9-4772-8ed9-a74b2f5f9cef@ventanamicro.com>
+References: <20231221094923.7349-1-duchao@eswincomputing.com>
+ <846ec319-6026-4b14-b156-9e1f42c6dba1@ventanamicro.com>
+ <48d413a8.25e8.18ec23d85b9.Coremail.duchao@eswincomputing.com>
+ <b93f13c4-05a9-4772-8ed9-a74b2f5f9cef@ventanamicro.com>
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset=UTF-8
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] hw/riscv/virt: Add hotplugging and virtio-md-pci support
-To: David Hildenbrand <david@redhat.com>, =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?=
- <bjorn@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@rivosinc.com>,
- Sunil V L <sunilvl@ventanamicro.com>,
- Santosh Mamila <santosh.mamila@catalinasystems.io>,
- Chethan Seshadri <Chethan.Seshadri@catalinasystems.io>,
- Sivakumar Munnangi <siva.munnangi@catalinasystems.io>
-References: <20240514110615.399065-1-bjorn@kernel.org>
- <3cb00bbb-7742-40b7-858c-4bdd2f9cc79b@ventanamicro.com>
- <91086379-1fbc-4179-863a-6bb2e797d564@redhat.com>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <91086379-1fbc-4179-863a-6bb2e797d564@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x630.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Message-ID: <745db9ba.296.18f95869950.Coremail.duchao@eswincomputing.com>
+X-Coremail-Locale: zh_CN
+X-CM-TRANSID: TAJkCgC3S+OBJEtm+ysMAA--.3224W
+X-CM-SenderInfo: xgxfxt3r6h245lqf0zpsxwx03jof0z/1tbiAgEDDGZJyRMgfgAFsi
+X-Coremail-Antispam: 1Ur529EdanIXcx71UUUUU7IcSsGvfJ3iIAIbVAYjsxI4VWxJw
+ CS07vEb4IE77IF4wCS07vE1I0E4x80FVAKz4kxMIAIbVAFxVCaYxvI4VCIwcAKzIAtYxBI
+ daVFxhVjvjDU=
+Received-SPF: pass client-ip=209.97.181.73;
+ envelope-from=duchao@eswincomputing.com;
+ helo=zg8tmja5ljk3lje4ms43mwaa.icoremail.net
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_MSPIKE_H3=-0.01,
+ RCVD_IN_MSPIKE_WL=-0.01, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,125 +74,57 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
-On 5/18/24 16:50, David Hildenbrand wrote:
-> 
-> Hi,
-> 
-> 
->>> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
->>> index 4fdb66052587..16c2bdbfe6b6 100644
->>> --- a/hw/riscv/virt.c
->>> +++ b/hw/riscv/virt.c
->>> @@ -53,6 +53,8 @@
->>>    #include "hw/pci-host/gpex.h"
->>>    #include "hw/display/ramfb.h"
->>>    #include "hw/acpi/aml-build.h"
->>> +#include "hw/mem/memory-device.h"
->>> +#include "hw/virtio/virtio-mem-pci.h"
->>>    #include "qapi/qapi-visit-common.h"
->>>    #include "hw/virtio/virtio-iommu.h"
->>> @@ -1407,6 +1409,7 @@ static void virt_machine_init(MachineState *machine)
->>>        DeviceState *mmio_irqchip, *virtio_irqchip, *pcie_irqchip;
->>>        int i, base_hartid, hart_count;
->>>        int socket_count = riscv_socket_count(machine);
->>> +    hwaddr device_memory_base, device_memory_size;
->>>        /* Check socket count limit */
->>>        if (VIRT_SOCKETS_MAX < socket_count) {
->>> @@ -1553,6 +1556,25 @@ static void virt_machine_init(MachineState *machine)
->>>        memory_region_add_subregion(system_memory, memmap[VIRT_MROM].base,
->>>                                    mask_rom);
->>> +    device_memory_base = ROUND_UP(s->memmap[VIRT_DRAM].base + machine->ram_size,
->>> +                                  GiB);
->>> +    device_memory_size = machine->maxram_size - machine->ram_size;
->>> +
->>> +    if (riscv_is_32bit(&s->soc[0])) {
->>> +        hwaddr memtop = device_memory_base + ROUND_UP(device_memory_size, GiB);
->>> +
->>> +        if (memtop > UINT32_MAX) {
->>> +            error_report("Memory exceeds 32-bit limit by %lu bytes",
->>> +                         memtop - UINT32_MAX);
->>> +            exit(EXIT_FAILURE);
->>> +        }
->>> +    }
->>> +
->>> +    if (device_memory_size > 0) {
->>> +        machine_memory_devices_init(machine, device_memory_base,
->>> +                                    device_memory_size);
->>> +    }
->>> +
->>
->> I think we need a design discussion before proceeding here. You're allocating all
->> available memory as a memory device area, but in theory we might also support
->> pc-dimm hotplugs (which would be the equivalent of adding physical RAM dimms to
->> the board.) in the future too. If you're not familiar with this feature you can
->> check it out the docs in [1].
-> 
-> Note that DIMMs are memory devices as well. You can plug into the memory device area both, ACPI-based memory devices (DIMM, NVDIMM) or virtio-based memory devices (virtio-mem, virtio-pmem).
-> 
->>
->> As an example, the 'virt' ARM board (hw/arm/virt.c) reserves a space for this
->> type of hotplug by checking how much 'ram_slots' we're allocating for it:
->>
->> device_memory_size = ms->maxram_size - ms->ram_size + ms->ram_slots * GiB;
->>
-> 
-> Note that we increased the region size to be able to fit most requests even if alignment of memory devices is weird. See below.
-> 
-> In sane setups, this is usually not required (adding a single additional GB for some flexiility might be good enough).
-> 
->> Other boards do the same with ms->ram_slots. We should consider doing it as well,
->> now, even if we're not up to the point of supporting pc-dimm hotplug, to avoid
->> having to change the memory layout later in the road and breaking existing
->> setups.
->>
->> If we want to copy the ARM board, ram_slots is capped to ACPI_MAX_RAM_SLOTS (256).
->> Each RAM slot is considered to be a 1GiB dimm, i.e. we would reserve 256GiB for
->> them.
-> 
-> This only reserves some *additional* space to fixup weird alignment of memory devices. *not* the actual space for these devices.
-> 
-> We don't consider each DIMM to be 1 GiB in size, but add an additional 1 GiB in case we have to align DIMMs in physical address space.
-> 
-> I *think* this dates back to old x86 handling where we aligned the address of each DIMM to be at a 1 GiB boundary. So if you would have plugged two 128 MiB DIMMs, you'd have required more than 256 MiB of space in the area after aligning inside the memory device area.
-> 
-
-Thanks for the explanation. I missed the part where the ram_slots were being
-used just to solve potential alignment issues and pc-dimms could occupy the same
-space being allocated via machine_memory_devices_init().
-
-This patch isn't far off then. If we take care to avoid plugging unaligned memory
-we might not even need this spare area.
-
->>
->> Note: I do not have the visibility of discussions on the memory management space,
->> and I might be missing details such as "we don't care about pc-dimm hotplug
->> anymore, it's legacy, we're going to support only virtio-md-pci from now on". We
->> had a situation like that with virtio-balloon and virtio-mem in the past, and I'm
->> not sure if this might fall in the same category.
-> 
-> Not sure if I got your comment right, but virtio-mem was never supposed to be a virtio-balloon replacement (especially of the free-page-reporting and memory stats part).
-
-I was trying to refer to a situation we faced 3+ years ago in the powerpc machines,
-where we were trying to add virtio-mem support there given that virtio-mem is/was
-been seen (as far as I can remember anyways) as a more robust solution than
-virtio-balloon + DIMM hotplug for guest memory management from the host point of
-view.
-
-I'm probably misrepresenting the whole situation though, it has been awhile :)
-
-
-Thanks,
-
-
-Daniel
-
-
-> 
->>
->> I see that David Hildenbrand is also CCed in the patch so he'll let us know if
->> I'm out of line with what I'm asking.
-> 
-> Supporting PC-DIMMs might be required at some point when dealing with OSes that don't support virtio-mem and friends.
-> 
+SGkgUGFvbG8sCgpBcyBEYW5pZWwgc3VnZ2VzdGVkLCBjb3VsZCB5b3UgcGxlYXNlIHRha2UgYSBs
+b29rIGF0IHRoaXMgc2VyaWVzID8KClRoYW5rcywKQ2hhbwoKT24gMjAyNC0wNC0xNiAxNzoyNSwg
+RGFuaWVsIEhlbnJpcXVlIEJhcmJvemEgPGRiYXJib3phQHZlbnRhbmFtaWNyby5jb20+IHdyb3Rl
+Ogo+IAo+IE9uIDQvOS8yNCAwNjo0MywgQ2hhbyBEdSB3cm90ZToKPiA+IEhpIERhbmllbCBhbmQg
+YWxsLAo+ID4gCj4gPiBUaGUgS1ZNIHBhdGNoZXMgaGF2ZSBiZWVuIHJldmlld2QgYW5kIGFyZSBp
+biB0aGUgcXVldWUuCj4gPiBodHRwczovL2xvcmUua2VybmVsLm9yZy9hbGwvMjAyNDA0MDIwNjI2
+MjguNTQyNS0xLWR1Y2hhb0Blc3dpbmNvbXB1dGluZy5jb20vCj4gPiAKPiA+IENvdWxkIHlvdSBw
+bGVhc2UgcmV2aWV3IGluIHRoZSBRRU1VIHNpZGUgPwo+ID4gVGhlbiBJIHdpbGwgcmViYXNlIHRo
+aXMgc2VyaWVzIHdpdGggeW91ciBjb21tZW50cy4KPiA+IAo+ID4gU29tZSBOb3RlczoKPiA+IDEu
+IEFzIHRoZSBmaXJzdCBzdGFnZSwgb25seSB0aGUgc29mdHdhcmUgYnJlYWtwb2ludHMgaXMgaW1w
+bGVtZW50ZWQuCj4gPiAyLiBBICdjb3JuZXIgY2FzZScgaW4gd2hpY2ggdGhlIGRlYnVnIGV4Y2Vw
+dGlvbiBpcyBub3QgaW5zZXJ0ZWQgYnkgdGhlCj4gPiBkZWJ1Z2dlciwgbmVlZCB0byBiZSByZS1p
+bmplY3RlZCB0byB0aGUgZ3Vlc3QuIFRoaXMgaXMgbm90IGhhbmRsZWQgeWV0Cj4gPiBpbiB0aGlz
+IHNlcmllcy4KPiAKPiBBc2lkZSBmcm9tIHRoZSBjb21tZW50cyBJIG1hZGUgaW4gcGF0Y2ggMSB3
+LnIudCBjaGVja3MgdGhhdCAocGVyaGFwcykgY2FuIGJlIG1vdmVkCj4gdG8ga3ZtLWFsbC5jLCBp
+dCBsb29rcyBnb29kIHRvIG1lLgo+IAo+IFNpbmNlIHlvdSdyZSBjaGFuZ2luZyBrdm0tYWxsLmMg
+d2UnbGwgbmVlZCBQYW9sbyB0byBhY2sgdGhlIGNoYW5nZXMgaW4gcGF0Y2ggMSwgc28KPiBmZWVs
+IGZyZWUgdG8gd2FpdCBmb3IgaGltIHRvIHRha2UgYSBsb29rIGJlZm9yZSBzZW5kaW5nIHYyLgo+
+IAo+IAo+IFRoYW5rcywKPiAKPiAKPiBEYW5pZWwKPiAKPiA+IAo+ID4gVGhhbmtzLAo+ID4gQ2hh
+bwo+ID4gCj4gPiAKPiA+IE9uIDIwMjMtMTItMjIgMjI6MTYsIERhbmllbCBIZW5yaXF1ZSBCYXJi
+b3phIDxkYmFyYm96YUB2ZW50YW5hbWljcm8uY29tPiB3cm90ZToKPiA+Pgo+ID4+IEhpLAo+ID4+
+Cj4gPj4gSXQgc2VlbXMgdGhhdCB3ZSBzdGlsbCBuZWVkIHRoZSBrZXJuZWwgS1ZNIHNpZGUgdG8g
+YmUgc29ydGVkIG91dCBmaXJzdCBbMV0sCj4gPj4gc28gSSBiZWxpZXZlIHdlIHNob3VsZCB3YWl0
+IGEgYml0IHVudGlsIHdlIGNhbiByZXZpZXcgdGhpcyBSRkMuIE90aGVyd2lzZSB3ZQo+ID4+IG1p
+Z2h0IHJpc2sgcmV2aWV3aW5nIHNvbWV0aGluZyB0aGF0IGhhcyB0byBiZSBjaGFuZ2VkIGxhdGVy
+Lgo+ID4+Cj4gPj4KPiA+PiBbMV0gaHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcva3ZtLzIwMjMxMjIx
+MDk1MDAyLjc0MDQtMS1kdWNoYW9AZXN3aW5jb21wdXRpbmcuY29tLwo+ID4+Cj4gPj4KPiA+PiBU
+aGFua3MsCj4gPj4KPiA+PiBEYW5pZWwKPiA+Pgo+ID4+IE9uIDEyLzIxLzIzIDA2OjQ5LCBDaGFv
+IER1IHdyb3RlOgo+ID4+PiBUaGlzIHNlcmllcyBpbXBsZW1lbnRzIFFFTVUgS1ZNIEd1ZXN0IERl
+YnVnIG9uIFJJU0MtVi4gQ3VycmVudGx5LCB3ZSBjYW4KPiA+Pj4gZGVidWcgUklTQy1WIEtWTSBn
+dWVzdCBmcm9tIHRoZSBob3N0IHNpZGUsIHdpdGggc29mdHdhcmUgYnJlYWtwb2ludHMuCj4gPj4+
+Cj4gPj4+IEEgYnJpZWYgdGVzdCB3YXMgZG9uZSBvbiBRRU1VIFJJU0MtViBoeXBlcnZpc29yIGVt
+dWxhdG9yLgo+ID4+Pgo+ID4+PiBBIFRPRE8gbGlzdCB3aGljaCB3aWxsIGJlIGFkZGVkIGxhdGVy
+Ogo+ID4+PiAxLiBIVyBicmVha3BvaW50cyBzdXBwb3J0Cj4gPj4+IDIuIFRlc3QgY2FzZXMKPiA+
+Pj4KPiA+Pj4gVGhpcyBzZXJpZXMgaXMgYmFzZWQgb24gUUVNVSA4LjIuMC1yYzQgYW5kIGlzIGFs
+c28gYXZhaWxhYmxlIGF0Ogo+ID4+PiBodHRwczovL2dpdGh1Yi5jb20vRHUtQ2hhby9xZW11L3Ry
+ZWUvcmlzY3ZfZ2Rfc3cKPiA+Pj4KPiA+Pj4gVGhpcyBpcyBkZXBlbmRlbnQgb24gS1ZNIHNpZGUg
+Y2hhbmdlczoKPiA+Pj4gaHR0cHM6Ly9naXRodWIuY29tL0R1LUNoYW8vbGludXgvdHJlZS9yaXNj
+dl9nZF9zdwo+ID4+Pgo+ID4+PiBDaGFvIER1ICg0KToKPiA+Pj4gICAgIHRhcmdldC9yaXNjdi9r
+dm06IGFkZCBzb2Z0d2FyZSBicmVha3BvaW50cyBzdXBwb3J0Cj4gPj4+ICAgICB0YXJnZXQvcmlz
+Y3Yva3ZtOiBpbXBsZW1lbnQga3ZtX2FyY2hfdXBkYXRlX2d1ZXN0X2RlYnVnKCkKPiA+Pj4gICAg
+IHRhcmdldC9yaXNjdi9rdm06IGhhbmRsZSB0aGUgZXhpdCB3aXRoIGRlYnVnIHJlYXNvbgo+ID4+
+PiAgICAgbGludXgtaGVhZGVyczogZW5hYmxlIEtWTSBHVUVTVCBERUJVRyBmb3IgUklTQy1WCj4g
+Pj4+Cj4gPj4+ICAgIGFjY2VsL2t2bS9rdm0tYWxsLmMgICAgICAgICAgIHwgICA4ICstLQo+ID4+
+PiAgICBpbmNsdWRlL3N5c2VtdS9rdm0uaCAgICAgICAgICB8ICAgNiArLQo+ID4+PiAgICBsaW51
+eC1oZWFkZXJzL2FzbS1yaXNjdi9rdm0uaCB8ICAgMSArCj4gPj4+ICAgIHRhcmdldC9hcm0va3Zt
+NjQuYyAgICAgICAgICAgIHwgICA2ICstCj4gPj4+ICAgIHRhcmdldC9pMzg2L2t2bS9rdm0uYyAg
+ICAgICAgIHwgICA2ICstCj4gPj4+ICAgIHRhcmdldC9taXBzL2t2bS5jICAgICAgICAgICAgIHwg
+ICA2ICstCj4gPj4+ICAgIHRhcmdldC9wcGMva3ZtLmMgICAgICAgICAgICAgIHwgICA2ICstCj4g
+Pj4+ICAgIHRhcmdldC9yaXNjdi9rdm0va3ZtLWNwdS5jICAgIHwgMTAxICsrKysrKysrKysrKysr
+KysrKysrKysrKysrKysrKysrKysKPiA+Pj4gICAgdGFyZ2V0L3MzOTB4L2t2bS9rdm0uYyAgICAg
+ICAgfCAgIDYgKy0KPiA+Pj4gICAgOSBmaWxlcyBjaGFuZ2VkLCAxMzAgaW5zZXJ0aW9ucygrKSwg
+MTYgZGVsZXRpb25zKC0pCj4gPj4+Cj4gPj4+IC0tCj4gPj4+IDIuMTcuMQo+ID4+Pgo=
 
