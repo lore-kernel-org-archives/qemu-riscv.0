@@ -4,68 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13B93C25B74
-	for <qemu-riscv@archiver.kernel.org>; Tue, 21 May 2024 05:44:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87170C25B74
+	for <qemu-riscv@archiver.kernel.org>; Tue, 21 May 2024 06:50:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s9IIG-0003Pm-Et; Tue, 21 May 2024 01:44:15 -0400
+	id 1s9JKG-0005vE-Ak; Tue, 21 May 2024 02:50:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bjorn@kernel.org>)
- id 1s9II7-0003OR-M7; Tue, 21 May 2024 01:44:04 -0400
-Received: from sin.source.kernel.org ([2604:1380:40e1:4800::1])
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1s9JKE-0005ux-Qs; Tue, 21 May 2024 02:50:18 -0400
+Received: from out30-99.freemail.mail.aliyun.com ([115.124.30.99])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bjorn@kernel.org>)
- id 1s9II5-0001eD-4U; Tue, 21 May 2024 01:44:03 -0400
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 1DD8DCE0B60;
- Tue, 21 May 2024 05:43:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DC872C2BD11;
- Tue, 21 May 2024 05:43:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1716270234;
- bh=WMV9MBvRaoHU8emcq0A3mUlZojLsuE3PMtuTWtiXRYg=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=PGu2nDS3af12yRmND2KZ+uboQL/ohO/uxVOfY1jY4awUr00gfChVjackeoGSaDvu0
- fdQ01YuIn67AqFbIoHsr0O9ySMkfxG0mgXALO7nFN6Lr6oLT+XLSLj4NaNQmnoS1vM
- 9stE2oKjQz9TpfB8aGYKHTdB3e1+/e7Q+YiECfcHKtzXhv+UHgXUIOqgm7MZ1H57dZ
- kHU5ignXzLNDwrgPenaYJEMn4cKMgqM9rMGUtHWsWEsLiVmRKNmYQDDmc9AROGtRK6
- xpYdEiGFAnTn2sN+YGRBL4yAgUBfVwsUBL60aOgiuvnK4djvgdwfBKpkf55vgkh4Ks
- t6hGmdxWVl70g==
-From: =?utf-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, David Hildenbrand
- <david@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis
- <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>, Weiwei Li
- <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: =?utf-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@rivosinc.com>, Sunil V L
- <sunilvl@ventanamicro.com>,
- Santosh Mamila <santosh.mamila@catalinasystems.io>, Chethan Seshadri
- <Chethan.Seshadri@catalinasystems.io>, Sivakumar Munnangi
- <siva.munnangi@catalinasystems.io>
-Subject: Re: [PATCH] hw/riscv/virt: Add hotplugging and virtio-md-pci support
-In-Reply-To: <c9332de0-f36e-4e62-a46c-9d3fd8448795@ventanamicro.com>
-References: <20240514110615.399065-1-bjorn@kernel.org>
- <3cb00bbb-7742-40b7-858c-4bdd2f9cc79b@ventanamicro.com>
- <91086379-1fbc-4179-863a-6bb2e797d564@redhat.com>
- <afbd3799-fa2a-4c7d-8097-aeaedecf4ec3@ventanamicro.com>
- <87v838uxk5.fsf@all.your.base.are.belong.to.us>
- <c9332de0-f36e-4e62-a46c-9d3fd8448795@ventanamicro.com>
-Date: Tue, 21 May 2024 07:43:50 +0200
-Message-ID: <877cfniusp.fsf@all.your.base.are.belong.to.us>
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1s9JKB-0004X7-EW; Tue, 21 May 2024 02:50:18 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linux.alibaba.com; s=default;
+ t=1716274200; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
+ bh=OqBvPqHww5nfA/YQXtJiNIgceAbbHPWO2qBHLDh98h4=;
+ b=LywXAu3OuIdL4vO/eCIZyXLrgzGBxgyTP8wThO/GcczoQUlNfrNbwvLPWqp71by7xwwLM8VbW/IY9Z4+8IlIWp78KKidRlhrS3VdXLmr/FbqmsZ7v/lfw9yho4uqUuys4BZJ3kLhlM/P4xz+S8P1mBMa27HwZhlV0+3aHZcj1Hw=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R151e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037067113;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
+ TI=SMTPD_---0W6wjcGw_1716274197; 
+Received: from 30.198.0.165(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0W6wjcGw_1716274197) by smtp.aliyun-inc.com;
+ Tue, 21 May 2024 14:49:58 +0800
+Message-ID: <ac8efced-e0fb-4e02-8726-a0008c5671ff@linux.alibaba.com>
+Date: Tue, 21 May 2024 14:49:08 +0800
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2604:1380:40e1:4800::1;
- envelope-from=bjorn@kernel.org; helo=sin.source.kernel.org
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RESEND PATCH v2 3/5] target/riscv: Add 'P1P13' bit in SMSTATEEN0
+To: "Fea.Wang" <fea.wang@sifive.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: Frank Chang <frank.chang@sifive.com>, Weiwei Li <liwei1518@gmail.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+References: <20240515080605.2675399-1-fea.wang@sifive.com>
+ <20240515080605.2675399-4-fea.wang@sifive.com>
+Content-Language: en-US
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20240515080605.2675399-4-fea.wang@sifive.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=115.124.30.99;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-99.freemail.mail.aliyun.com
+X-Spam_score_int: -174
+X-Spam_score: -17.5
+X-Spam_bar: -----------------
+X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -81,198 +74,60 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Daniel Henrique Barboza <dbarboza@ventanamicro.com> writes:
 
-> On 5/20/24 15:51, Bj=C3=B6rn T=C3=B6pel wrote:
->> Daniel/David,
->>=20
->> Daniel Henrique Barboza <dbarboza@ventanamicro.com> writes:
->>=20
->>> On 5/18/24 16:50, David Hildenbrand wrote:
->>>>
->>>> Hi,
->>>>
->>>>
->>>>>> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
->>>>>> index 4fdb66052587..16c2bdbfe6b6 100644
->>>>>> --- a/hw/riscv/virt.c
->>>>>> +++ b/hw/riscv/virt.c
->>>>>> @@ -53,6 +53,8 @@
->>>>>>  =C2=A0=C2=A0 #include "hw/pci-host/gpex.h"
->>>>>>  =C2=A0=C2=A0 #include "hw/display/ramfb.h"
->>>>>>  =C2=A0=C2=A0 #include "hw/acpi/aml-build.h"
->>>>>> +#include "hw/mem/memory-device.h"
->>>>>> +#include "hw/virtio/virtio-mem-pci.h"
->>>>>>  =C2=A0=C2=A0 #include "qapi/qapi-visit-common.h"
->>>>>>  =C2=A0=C2=A0 #include "hw/virtio/virtio-iommu.h"
->>>>>> @@ -1407,6 +1409,7 @@ static void virt_machine_init(MachineState *ma=
-chine)
->>>>>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 DeviceState *mmio_irqchip, *vi=
-rtio_irqchip, *pcie_irqchip;
->>>>>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 int i, base_hartid, hart_count;
->>>>>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 int socket_count =3D riscv_soc=
-ket_count(machine);
->>>>>> +=C2=A0=C2=A0=C2=A0 hwaddr device_memory_base, device_memory_size;
->>>>>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /* Check socket count limit */
->>>>>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (VIRT_SOCKETS_MAX < socket_=
-count) {
->>>>>> @@ -1553,6 +1556,25 @@ static void virt_machine_init(MachineState *m=
-achine)
->>>>>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 memory_region_add_subregion(sy=
-stem_memory, memmap[VIRT_MROM].base,
->>>>>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 mask_rom);
->>>>>> +=C2=A0=C2=A0=C2=A0 device_memory_base =3D ROUND_UP(s->memmap[VIRT_D=
-RAM].base + machine->ram_size,
->>>>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 GiB);
->>>>>> +=C2=A0=C2=A0=C2=A0 device_memory_size =3D machine->maxram_size - ma=
-chine->ram_size;
->>>>>> +
->>>>>> +=C2=A0=C2=A0=C2=A0 if (riscv_is_32bit(&s->soc[0])) {
->>>>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 hwaddr memtop =3D device=
-_memory_base + ROUND_UP(device_memory_size, GiB);
->>>>>> +
->>>>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (memtop > UINT32_MAX)=
- {
->>>>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =
-error_report("Memory exceeds 32-bit limit by %lu bytes",
->>>>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0 memtop - UINT32_MAX);
->>>>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =
-exit(EXIT_FAILURE);
->>>>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
->>>>>> +=C2=A0=C2=A0=C2=A0 }
->>>>>> +
->>>>>> +=C2=A0=C2=A0=C2=A0 if (device_memory_size > 0) {
->>>>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 machine_memory_devices_i=
-nit(machine, device_memory_base,
->>>>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 devic=
-e_memory_size);
->>>>>> +=C2=A0=C2=A0=C2=A0 }
->>>>>> +
->>>>>
->>>>> I think we need a design discussion before proceeding here. You're al=
-locating all
->>>>> available memory as a memory device area, but in theory we might also=
- support
->>>>> pc-dimm hotplugs (which would be the equivalent of adding physical RA=
-M dimms to
->>>>> the board.) in the future too. If you're not familiar with this featu=
-re you can
->>>>> check it out the docs in [1].
->>>>
->>>> Note that DIMMs are memory devices as well. You can plug into the memo=
-ry device area both, ACPI-based memory devices (DIMM, NVDIMM) or virtio-bas=
-ed memory devices (virtio-mem, virtio-pmem).
->>>>
->>>>>
->>>>> As an example, the 'virt' ARM board (hw/arm/virt.c) reserves a space =
-for this
->>>>> type of hotplug by checking how much 'ram_slots' we're allocating for=
- it:
->>>>>
->>>>> device_memory_size =3D ms->maxram_size - ms->ram_size + ms->ram_slots=
- * GiB;
->>>>>
->>>>
->>>> Note that we increased the region size to be able to fit most requests=
- even if alignment of memory devices is weird. See below.
->>>>
->>>> In sane setups, this is usually not required (adding a single addition=
-al GB for some flexiility might be good enough).
->>>>
->>>>> Other boards do the same with ms->ram_slots. We should consider doing=
- it as well,
->>>>> now, even if we're not up to the point of supporting pc-dimm hotplug,=
- to avoid
->>>>> having to change the memory layout later in the road and breaking exi=
-sting
->>>>> setups.
->>>>>
->>>>> If we want to copy the ARM board, ram_slots is capped to ACPI_MAX_RAM=
-_SLOTS (256).
->>>>> Each RAM slot is considered to be a 1GiB dimm, i.e. we would reserve =
-256GiB for
->>>>> them.
->>>>
->>>> This only reserves some *additional* space to fixup weird alignment of=
- memory devices. *not* the actual space for these devices.
->>>>
->>>> We don't consider each DIMM to be 1 GiB in size, but add an additional=
- 1 GiB in case we have to align DIMMs in physical address space.
->>>>
->>>> I *think* this dates back to old x86 handling where we aligned the add=
-ress of each DIMM to be at a 1 GiB boundary. So if you would have plugged t=
-wo 128 MiB DIMMs, you'd have required more than 256 MiB of space in the are=
-a after aligning inside the memory device area.
->>>>
->>>
->>> Thanks for the explanation. I missed the part where the ram_slots were =
-being
->>> used just to solve potential alignment issues and pc-dimms could occupy=
- the same
->>> space being allocated via machine_memory_devices_init().
->>>
->>> This patch isn't far off then. If we take care to avoid plugging unalig=
-ned memory
->>> we might not even need this spare area.
->>=20
->> I'm a bit lost here, so please bare with me. We don't require the 1 GiB
->> alignment on RV AFAIU. I'm having a hard time figuring out what missing
->> in my patch.
+On 2024/5/15 16:06, Fea.Wang wrote:
+> Based on privilege 1.13 spec, there should be a bit56 for 'P1P13' in
+> SMSTATEEN0 that controls access to the hedeleg.
 >
-> Forget about the 1 GiB size. This is something that we won't need to deal=
- with
-> because we don't align in 1 Gib.
+> Signed-off-by: Fea.Wang <fea.wang@sifive.com>
+> Reviewed-by: Frank Chang <frank.chang@sifive.com>
+> Reviewed-by:  Weiwei Li <liwei1518@gmail.com>
+> ---
+>   target/riscv/cpu_bits.h | 1 +
+>   target/riscv/csr.c      | 8 ++++++++
+>   2 files changed, 9 insertions(+)
 >
-> Let's say for example that we want to support pc-dimm hotplug of 256 slot=
-s like the
-> 'virt' ARM machine does. Let's also say that we will allow users to hotpl=
-ug any
-> DIMM size they want, taking care of any alignment issues by ourselves.
->
-> In hw/riscv/boot.c I see that our alignment sizes are 4Mb for 32 bits and=
- 2Mb for
-> 64 bits. Forget 32 bits a bit and let's say that our alignment is 2Mb.
->
-> So, in a worst case scenario, an user could hotplug 256 slots, all of the=
-m unaligned,
-> and then we would need to align each one of them by adding 2Mb. So, to ac=
-count for
-> this alignment fixup, we would need 256 * 2Mb RAM reserved for it.
->
-> What I said about "If we take care to avoid plugging unaligned memory we =
-might not even
-> need this spare area" is a possible design where we would force every hot=
-plugged DIMM
-> to always be memory aligned, avoiding the need for this spare RAM for ali=
-gnment. This
-> would put a bit of extra straing in users/management apps to always deliv=
-er aligned
-> DIMMs.
->
-> In hindsight this is not needed. It's fairly easy to reserve ACPI_MAX_RAM=
-_SLOTS * (2Mb/4Mb)
-> and let users hotplug whatever DIMM size they want.
->
-> Hope this explains the situation a bit. If we agree on allocating this sp=
-are RAM for
-> hotplugged mem alignment, we'll probalby need a pre-patch to do a little =
-handling of
-> ms->ram_slots, limiting it to ACPI_MAX_RAM_SLOTS (ram_slots can be change=
-d via command
-> line). Then it's a matter of reserving ms->ram_slots * align_size when ca=
-lculating
-> device_memory_size.
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index 74318a925c..28bd3fb0b4 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -315,6 +315,7 @@
+>   #define SMSTATEEN0_CS       (1ULL << 0)
+>   #define SMSTATEEN0_FCSR     (1ULL << 1)
+>   #define SMSTATEEN0_JVT      (1ULL << 2)
+> +#define SMSTATEEN0_P1P13    (1ULL << 56)
+>   #define SMSTATEEN0_HSCONTXT (1ULL << 57)
+>   #define SMSTATEEN0_IMSIC    (1ULL << 58)
+>   #define SMSTATEEN0_AIA      (1ULL << 59)
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 6b460ee0e8..bdbc8de0e2 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -2248,6 +2248,10 @@ static RISCVException write_mstateen0(CPURISCVState *env, int csrno,
+>           wr_mask |= SMSTATEEN0_FCSR;
+>       }
+>   
+> +    if (env->priv_ver >= PRIV_VERSION_1_13_0) {
+> +        wr_mask |= SMSTATEEN0_P1P13;
+> +    }
+> +
+>       return write_mstateen(env, csrno, wr_mask, new_val);
+>   }
+>   
+> @@ -2283,6 +2287,10 @@ static RISCVException write_mstateen0h(CPURISCVState *env, int csrno,
+>   {
+>       uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
+>   
+> +    if (env->priv_ver >= PRIV_VERSION_1_13_0) {
+> +        wr_mask |= SMSTATEEN0_P1P13;
+> +    }
+> +
 
-Thanks for the elaborate explaination! I'll take a stab at it in v2.
+Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
+Zhiwei
 
-Bj=C3=B6rn
+>       return write_mstateenh(env, csrno, wr_mask, new_val);
+>   }
+>   
 
