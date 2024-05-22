@@ -4,47 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0F58C25B78
-	for <qemu-riscv@archiver.kernel.org>; Wed, 22 May 2024 06:30:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD83EC25B77
+	for <qemu-riscv@archiver.kernel.org>; Wed, 22 May 2024 06:31:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1s9fUU-0002HD-RD; Wed, 22 May 2024 02:30:22 -0400
+	id 1s9fUt-00030h-3P; Wed, 22 May 2024 02:30:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1s9fUO-0002B8-BL; Wed, 22 May 2024 02:30:16 -0400
-Received: from out30-101.freemail.mail.aliyun.com ([115.124.30.101])
+ id 1s9fUr-0002uI-4k; Wed, 22 May 2024 02:30:45 -0400
+Received: from out30-97.freemail.mail.aliyun.com ([115.124.30.97])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1s9fUJ-0006uD-U3; Wed, 22 May 2024 02:30:15 -0400
+ id 1s9fUn-0007Fz-Nl; Wed, 22 May 2024 02:30:44 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1716359404; h=From:To:Subject:Date:Message-Id:MIME-Version;
- bh=Grw3syHdHwI6aiEkZHx+zTjb9YtWEVK1Xq5i+3pa9ec=;
- b=VqWcgh91CvpgxbP5M8xSGLrZRx/eBqZnRdg3trsNyOrec1vP04lEd7Dmw/b/2WM7tQqYaHKE3BwqQX+BxUD08UnWzhv+A8/UHOA2/MK6IK93Iofdi364Dd/KsJVHS7MDWyKu0FGNmedpNy2X4ylzViwOnpSqFqQoSKLtJuqYOYY=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R551e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037067113;
+ t=1716359436; h=From:To:Subject:Date:Message-Id:MIME-Version;
+ bh=FktyKP61lKeNzicxmroJe7gWiSlkHGxGW4//4iQJVSw=;
+ b=J3FbIaNnrW8eWa/x8aCf7U6pRNZYdsjmT4g56sM37XaDcu1I9oUzUQj5/+Zf71KF1lUIHuxi7DnrTymT2w3sn42QkH5lK0x0cnVtKkkQQHU5EBYhbOj7rgrUwr1kwr5vvXNWQ8L7o4OvRzAOTOxgOxul9ue0nUOqa6RH2YaozNc=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R671e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033032014031;
  MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=8; SR=0;
- TI=SMTPD_---0W7-6sHZ_1716359401; 
+ TI=SMTPD_---0W7-6sXf_1716359433; 
 Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0W7-6sHZ_1716359401) by smtp.aliyun-inc.com;
- Wed, 22 May 2024 14:30:03 +0800
+ fp:SMTPD_---0W7-6sXf_1716359433) by smtp.aliyun-inc.com;
+ Wed, 22 May 2024 14:30:35 +0800
 From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, Alistair.Francis@wdc.com,
  dbarboza@ventanamicro.com, bmeng.cn@gmail.com, iwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com
-Subject: [PATCH 0/4] target/riscv: Implement May-Be-Operations(zimop)
- extension 
-Date: Wed, 22 May 2024 14:29:01 +0800
-Message-Id: <20240522062905.1799-1-zhiwei_liu@linux.alibaba.com>
+Subject: [PATCH 1/4] target/riscv: Add zimop extension
+Date: Wed, 22 May 2024 14:29:02 +0800
+Message-Id: <20240522062905.1799-2-zhiwei_liu@linux.alibaba.com>
 X-Mailer: git-send-email 2.23.0
+In-Reply-To: <20240522062905.1799-1-zhiwei_liu@linux.alibaba.com>
+References: <20240522062905.1799-1-zhiwei_liu@linux.alibaba.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.101;
+Received-SPF: pass client-ip=115.124.30.97;
  envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-101.freemail.mail.aliyun.com
+ helo=out30-97.freemail.mail.aliyun.com
 X-Spam_score_int: -174
 X-Spam_score: -17.5
 X-Spam_bar: -----------------
@@ -68,36 +69,153 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The may be operation means that it has an initial behavior which can be redefined
-by later extensions to perform some other action.
+Zimop extension defines an encoding space for 40 MOPs.The Zimop
+extension defines 32 MOP instructions named MOP.R.n, where n is
+an integer between 0 and 31, inclusive. The Zimop extension
+additionally defines 8 MOP instructions named MOP.RR.n, where n
+is an integer between 0 and 7.
 
-The May-Be-Operations includes two extension: zimop and zcmop. Zimop has 40
-instructions, whose initial behavior is writing zero to the destination register.
-Zcmop, which requires the Zca extension, has 8 instructions whose initial
-behavior is reading the source register.
+These 40 MOPs initially are defined to simply write zero to x[rd],
+but are designed to be redefined by later extensions to perform some
+other action.
 
-The more details on this specifcation is here:
-https://github.com/riscv/riscv-isa-manual/blob/main/src/zimop.adoc
-
-LIU Zhiwei (4):
-  target/riscv: Add zimop extension
-  disas/riscv: Support zimop disassemble
-  target/riscv: Add zcmop extension
-  disas/riscv: Support zcmop disassemble
-
- disas/riscv.c                               | 123 ++++++++++++++++++++
- target/riscv/cpu.c                          |   4 +
- target/riscv/cpu_cfg.h                      |   2 +
- target/riscv/insn16.decode                  |   1 +
- target/riscv/insn32.decode                  |  11 ++
- target/riscv/insn_trans/trans_rvzcmop.c.inc |  29 +++++
- target/riscv/insn_trans/trans_rvzimop.c.inc |  37 ++++++
- target/riscv/tcg/tcg-cpu.c                  |   5 +
- target/riscv/translate.c                    |   2 +
- 9 files changed, 214 insertions(+)
- create mode 100644 target/riscv/insn_trans/trans_rvzcmop.c.inc
+Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+---
+ target/riscv/cpu.c                          |  2 ++
+ target/riscv/cpu_cfg.h                      |  1 +
+ target/riscv/insn32.decode                  | 11 ++++++
+ target/riscv/insn_trans/trans_rvzimop.c.inc | 37 +++++++++++++++++++++
+ target/riscv/translate.c                    |  1 +
+ 5 files changed, 52 insertions(+)
  create mode 100644 target/riscv/insn_trans/trans_rvzimop.c.inc
 
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index eb1a2e7d6d..c1ac521142 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -175,6 +175,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(zvkt, PRIV_VERSION_1_12_0, ext_zvkt),
+     ISA_EXT_DATA_ENTRY(zhinx, PRIV_VERSION_1_12_0, ext_zhinx),
+     ISA_EXT_DATA_ENTRY(zhinxmin, PRIV_VERSION_1_12_0, ext_zhinxmin),
++    ISA_EXT_DATA_ENTRY(zimop, PRIV_VERSION_1_12_0, ext_zimop),
+     ISA_EXT_DATA_ENTRY(smaia, PRIV_VERSION_1_12_0, ext_smaia),
+     ISA_EXT_DATA_ENTRY(smepmp, PRIV_VERSION_1_12_0, ext_smepmp),
+     ISA_EXT_DATA_ENTRY(smstateen, PRIV_VERSION_1_12_0, ext_smstateen),
+@@ -1463,6 +1464,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
+     MULTI_EXT_CFG_BOOL("zicsr", ext_zicsr, true),
+     MULTI_EXT_CFG_BOOL("zihintntl", ext_zihintntl, true),
+     MULTI_EXT_CFG_BOOL("zihintpause", ext_zihintpause, true),
++    MULTI_EXT_CFG_BOOL("zimop", ext_zimop, false),
+     MULTI_EXT_CFG_BOOL("zacas", ext_zacas, false),
+     MULTI_EXT_CFG_BOOL("zaamo", ext_zaamo, false),
+     MULTI_EXT_CFG_BOOL("zalrsc", ext_zalrsc, false),
+diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+index cb750154bd..b547fbba9d 100644
+--- a/target/riscv/cpu_cfg.h
++++ b/target/riscv/cpu_cfg.h
+@@ -71,6 +71,7 @@ struct RISCVCPUConfig {
+     bool ext_zihintntl;
+     bool ext_zihintpause;
+     bool ext_zihpm;
++    bool ext_zimop;
+     bool ext_ztso;
+     bool ext_smstateen;
+     bool ext_sstc;
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index f22df04cfd..972a1e8fd1 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -38,6 +38,8 @@
+ %imm_bs   30:2                   !function=ex_shift_3
+ %imm_rnum 20:4
+ %imm_z6   26:1 15:5
++%imm_mop5 30:1 26:2 20:2
++%imm_mop3 30:1 26:2
+ 
+ # Argument sets:
+ &empty
+@@ -56,6 +58,8 @@
+ &r2nfvm    vm rd rs1 nf
+ &rnfvm     vm rd rs1 rs2 nf
+ &k_aes     shamt rs2 rs1 rd
++&mop5 imm rd rs1
++&mop3 imm rd rs1 rs2
+ 
+ # Formats 32:
+ @r       .......   ..... ..... ... ..... ....... &r                %rs2 %rs1 %rd
+@@ -98,6 +102,9 @@
+ @k_aes   .. ..... ..... .....  ... ..... ....... &k_aes  shamt=%imm_bs   %rs2 %rs1 %rd
+ @i_aes   .. ..... ..... .....  ... ..... ....... &i      imm=%imm_rnum        %rs1 %rd
+ 
++@mop5 . . .. .. .... .. ..... ... ..... ....... &mop5 imm=%imm_mop5 %rd %rs1
++@mop3 . . .. .. . ..... ..... ... ..... ....... &mop3 imm=%imm_mop3 %rd %rs1 %rs2
++
+ # Formats 64:
+ @sh5     .......  ..... .....  ... ..... ....... &shift  shamt=%sh5      %rs1 %rd
+ 
+@@ -1010,3 +1017,7 @@ amocas_w    00101 . . ..... ..... 010 ..... 0101111 @atom_st
+ amocas_d    00101 . . ..... ..... 011 ..... 0101111 @atom_st
+ # *** RV64 Zacas Standard Extension ***
+ amocas_q    00101 . . ..... ..... 100 ..... 0101111 @atom_st
++
++# *** Zimop may-be-operation extension ***
++mop_r_n     1 . 00 .. 0111 .. ..... 100 ..... 0111011 @mop5
++mop_rr_n    1 . 00 .. 1 ..... ..... 100 ..... 0111011 @mop3
+diff --git a/target/riscv/insn_trans/trans_rvzimop.c.inc b/target/riscv/insn_trans/trans_rvzimop.c.inc
+new file mode 100644
+index 0000000000..165aacd2b6
+--- /dev/null
++++ b/target/riscv/insn_trans/trans_rvzimop.c.inc
+@@ -0,0 +1,37 @@
++/*
++ * RISC-V translation routines for May-Be-Operation(zimop).
++ *
++ * Copyright (c) 2024 Alibaba Group.
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#define REQUIRE_ZIMOP(ctx) do {           \
++    if (!ctx->cfg_ptr->ext_zimop) {       \
++        return false;                     \
++    }                                     \
++} while (0)
++
++static bool trans_mop_r_n(DisasContext *ctx, arg_mop_r_n *a)
++{
++    REQUIRE_ZIMOP(ctx);
++    gen_set_gpr(ctx, a->rd, ctx->zero);
++    return true;
++}
++
++static bool trans_mop_rr_n(DisasContext *ctx, arg_mop_rr_n *a)
++{
++    REQUIRE_ZIMOP(ctx);
++    gen_set_gpr(ctx, a->rd, ctx->zero);
++    return true;
++}
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 2c27fd4ce1..77c6564834 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -1097,6 +1097,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
+ #include "insn_trans/trans_rvzacas.c.inc"
+ #include "insn_trans/trans_rvzawrs.c.inc"
+ #include "insn_trans/trans_rvzicbo.c.inc"
++#include "insn_trans/trans_rvzimop.c.inc"
+ #include "insn_trans/trans_rvzfa.c.inc"
+ #include "insn_trans/trans_rvzfh.c.inc"
+ #include "insn_trans/trans_rvk.c.inc"
 -- 
 2.25.1
 
