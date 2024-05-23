@@ -4,48 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E787DC25B75
-	for <qemu-riscv@archiver.kernel.org>; Thu, 23 May 2024 12:43:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC867C25B75
+	for <qemu-riscv@archiver.kernel.org>; Thu, 23 May 2024 12:43:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sA7mA-0007eY-0n; Thu, 23 May 2024 08:42:30 -0400
+	id 1sA7nJ-0001CD-4W; Thu, 23 May 2024 08:43:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1sA7m7-0007aq-50; Thu, 23 May 2024 08:42:27 -0400
-Received: from out30-118.freemail.mail.aliyun.com ([115.124.30.118])
+ id 1sA7n9-0000vg-Jc; Thu, 23 May 2024 08:43:33 -0400
+Received: from out30-99.freemail.mail.aliyun.com ([115.124.30.99])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1sA7m4-0001at-S9; Thu, 23 May 2024 08:42:26 -0400
+ id 1sA7n7-0001fN-62; Thu, 23 May 2024 08:43:31 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1716468139; h=From:To:Subject:Date:Message-Id:MIME-Version;
- bh=NmCWHDJ45R0Q1JsWlKs5SJu2/camQSDEZQGGLvLg5cw=;
- b=PXsJO0t0bQRJE/jeyw1yjUiIZOkZNcWLQ3FCrBgFxAYO/Qp/Jf5BMjJbHGsN0hkKwC3/Up5TrO95d2l+ZLrdj6sy0WiIS9jTaeW3qtZrFKaICh3mcZIyMv81F0wDzBZ+4ARVCg1but1j9d8Ch+7oOBvu1uW/ZyrSqDIY+MVs9C4=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R211e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037067111;
+ t=1716468204; h=From:To:Subject:Date:Message-Id:MIME-Version;
+ bh=8e9MdqOcLcDa6gWbPDcZ5VG5FgdgOiw69vJ/4j06Dno=;
+ b=t/iMNH1HUhW9Dr07/az7C6CE+B4RalXVpPZ8bBRHE/PsZO78nXRMpBoDcUDVLmrhnEYgo8iJzen1w6jLNdPgqTFgm5LWxKDTtR8f9FA826V0BlEPeUbapYxivVwxXETkGh7A+DpNaELitR7S575gyfxmqhrIh1GPbUtg8midN/I=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R131e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033032014031;
  MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=8; SR=0;
- TI=SMTPD_---0W72zXTn_1716468136; 
+ TI=SMTPD_---0W72zXpD_1716468200; 
 Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0W72zXTn_1716468136) by smtp.aliyun-inc.com;
- Thu, 23 May 2024 20:42:18 +0800
+ fp:SMTPD_---0W72zXpD_1716468200) by smtp.aliyun-inc.com;
+ Thu, 23 May 2024 20:43:21 +0800
 From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, Alistair.Francis@wdc.com,
  dbarboza@ventanamicro.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com
-Subject: [PATCH 1/6] target/riscv: Move gen_amo before implement Zabha
-Date: Thu, 23 May 2024 20:40:40 +0800
-Message-Id: <20240523124045.1964-2-zhiwei_liu@linux.alibaba.com>
+Subject: [PATCH 3/6] target/riscv: Move gen_cmpxchg before adding amocas.[b|h]
+Date: Thu, 23 May 2024 20:40:42 +0800
+Message-Id: <20240523124045.1964-4-zhiwei_liu@linux.alibaba.com>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <20240523124045.1964-1-zhiwei_liu@linux.alibaba.com>
 References: <20240523124045.1964-1-zhiwei_liu@linux.alibaba.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.118;
+Received-SPF: pass client-ip=115.124.30.99;
  envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-118.freemail.mail.aliyun.com
+ helo=out30-99.freemail.mail.aliyun.com
 X-Spam_score_int: -174
 X-Spam_score: -17.5
 X-Spam_bar: -----------------
@@ -71,66 +71,50 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 ---
- target/riscv/insn_trans/trans_rva.c.inc | 21 ---------------------
- target/riscv/translate.c                | 21 +++++++++++++++++++++
- 2 files changed, 21 insertions(+), 21 deletions(-)
+ target/riscv/insn_trans/trans_rvzacas.c.inc | 13 -------------
+ target/riscv/translate.c                    | 13 +++++++++++++
+ 2 files changed, 13 insertions(+), 13 deletions(-)
 
-diff --git a/target/riscv/insn_trans/trans_rva.c.inc b/target/riscv/insn_trans/trans_rva.c.inc
-index eb080baddd..39bbf60f3c 100644
---- a/target/riscv/insn_trans/trans_rva.c.inc
-+++ b/target/riscv/insn_trans/trans_rva.c.inc
-@@ -96,27 +96,6 @@ static bool gen_sc(DisasContext *ctx, arg_atomic *a, MemOp mop)
-     return true;
- }
+diff --git a/target/riscv/insn_trans/trans_rvzacas.c.inc b/target/riscv/insn_trans/trans_rvzacas.c.inc
+index 5d274d4c08..fcced99fc7 100644
+--- a/target/riscv/insn_trans/trans_rvzacas.c.inc
++++ b/target/riscv/insn_trans/trans_rvzacas.c.inc
+@@ -22,19 +22,6 @@
+     }                                     \
+ } while (0)
  
--static bool gen_amo(DisasContext *ctx, arg_atomic *a,
--                    void(*func)(TCGv, TCGv, TCGv, TCGArg, MemOp),
--                    MemOp mop)
+-static bool gen_cmpxchg(DisasContext *ctx, arg_atomic *a, MemOp mop)
 -{
--    TCGv dest = dest_gpr(ctx, a->rd);
--    TCGv src1, src2 = get_gpr(ctx, a->rs2, EXT_NONE);
--
--    if (ctx->cfg_ptr->ext_zama16b) {
--        mop |= MO_ATOM_WITHIN16;
--    } else {
--        mop |= MO_ALIGN;
--    }
+-    TCGv dest = get_gpr(ctx, a->rd, EXT_NONE);
+-    TCGv src1 = get_address(ctx, a->rs1, 0);
+-    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
 -
 -    decode_save_opc(ctx);
--    src1 = get_address(ctx, a->rs1, 0);
--    func(dest, src1, src2, ctx->mem_idx, mop);
+-    tcg_gen_atomic_cmpxchg_tl(dest, src1, dest, src2, ctx->mem_idx, mop);
 -
 -    gen_set_gpr(ctx, a->rd, dest);
 -    return true;
 -}
 -
- static bool trans_lr_w(DisasContext *ctx, arg_lr_w *a)
+ static bool trans_amocas_w(DisasContext *ctx, arg_amocas_w *a)
  {
-     REQUIRE_A_OR_ZALRSC(ctx);
+     REQUIRE_ZACAS(ctx);
 diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 51dfb03685..b160bcbfe0 100644
+index f597542f1c..0ce188bc91 100644
 --- a/target/riscv/translate.c
 +++ b/target/riscv/translate.c
-@@ -1075,6 +1075,27 @@ static bool gen_unary_per_ol(DisasContext *ctx, arg_r2 *a, DisasExtend ext,
-     return gen_unary(ctx, a, ext, f_tl);
+@@ -1097,6 +1097,19 @@ static bool gen_amo(DisasContext *ctx, arg_atomic *a,
+     return true;
  }
  
-+static bool gen_amo(DisasContext *ctx, arg_atomic *a,
-+                    void(*func)(TCGv, TCGv, TCGv, TCGArg, MemOp),
-+                    MemOp mop)
++static bool gen_cmpxchg(DisasContext *ctx, arg_atomic *a, MemOp mop)
 +{
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1, src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-+
-+    if (ctx->cfg_ptr->ext_zama16b) {
-+        mop |= MO_ATOM_WITHIN16;
-+    } else {
-+        mop |= MO_ALIGN;
-+    }
++    TCGv dest = get_gpr(ctx, a->rd, EXT_NONE);
++    TCGv src1 = get_address(ctx, a->rs1, 0);
++    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
 +
 +    decode_save_opc(ctx);
-+    src1 = get_address(ctx, a->rs1, 0);
-+    func(dest, src1, src2, ctx->mem_idx, mop);
++    tcg_gen_atomic_cmpxchg_tl(dest, src1, dest, src2, ctx->mem_idx, mop);
 +
 +    gen_set_gpr(ctx, a->rd, dest);
 +    return true;
