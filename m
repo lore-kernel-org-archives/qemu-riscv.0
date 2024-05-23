@@ -4,79 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F5DAC25B75
-	for <qemu-riscv@archiver.kernel.org>; Thu, 23 May 2024 17:41:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51FD9C41513
+	for <qemu-riscv@archiver.kernel.org>; Thu, 23 May 2024 17:41:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sACR8-0000i3-Hr; Thu, 23 May 2024 13:41:06 -0400
+	id 1sACRZ-00017e-TU; Thu, 23 May 2024 13:41:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1sACQa-0000bv-Q6
- for qemu-riscv@nongnu.org; Thu, 23 May 2024 13:40:34 -0400
-Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
+ id 1sACQk-0000f2-HJ
+ for qemu-riscv@nongnu.org; Thu, 23 May 2024 13:40:49 -0400
+Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1sACQT-0001Vp-RW
- for qemu-riscv@nongnu.org; Thu, 23 May 2024 13:40:28 -0400
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-1ee0132a6f3so20063535ad.0
- for <qemu-riscv@nongnu.org>; Thu, 23 May 2024 10:40:24 -0700 (PDT)
+ id 1sACQe-0001ZY-FX
+ for qemu-riscv@nongnu.org; Thu, 23 May 2024 13:40:40 -0400
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-1f082d92864so124760085ad.1
+ for <qemu-riscv@nongnu.org>; Thu, 23 May 2024 10:40:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1716486023; x=1717090823; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1716486035; x=1717090835; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vfuqroyjI8kqLzWg0XJqI6RuWQT/noyUzD/FR5+TOHo=;
- b=KOQlfSTHI+TTbVhX20KHYGwZpXV+pPTpydB4TRl8VnCm4J3TLcyRGzYRuPDJQOzz35
- 2sU1T7nGvJMSBzL0kC7qeJqAy813ctSb4SpSIxExtpGw6iH+ri9ZI1YUStLW/xAHmb5O
- zlsQkFEeH2c5AiQyeEeIjtOzsCi4Oxb2g9aznsXZVT63moxsT55BvfYlbrBLaorWhCq3
- cEbsBuDW27WRWbakB8YUzFg5i/BsUSgC5hRqqBcpVxSgMvJ1bofJ0zTRPrS+xZB+HxOi
- 0O1FySyOh+fUhF6wjPtI/rQnz+U1A49IRx+7RvCPfxMDhEv+CbdHo9NojWYM6CWblTvT
- ZycQ==
+ bh=sFYh/sZ/5aWV4UXAxOYIoojjxEy/AqrJwmzbsQkoddA=;
+ b=MlNm2Hw8IGK1tUCn8cFLlMTbEh+l6L+X/B4N8fNgQ1ZQx2MG8kTZo+PCVWzN9Lq964
+ DZYayk+hzv3npLuUyPrEy4fkHAPEjTNtoHSDpKFxAhZ3Guw2suY13PBfzubKtS0cxtIh
+ VoQS6nIBycMW/EOh1tUTGYwNfoCI378e8a/mDBWc4UBW9qSSaijIAHztK5JV53LrwlhY
+ Qoe4wyHtcxMWR9vy+EhZwUwdWEoRlslIYz+CdQHHqxzTF3y8OpCr9GrhnJEZYqG6aBL9
+ QYtl12lj75eZN/QFZ7ryvKFb9Mod3oK2D+mJ+4WyzAAHRuhupt1VuFNM5J9OSj8HAfKN
+ yJJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716486023; x=1717090823;
+ d=1e100.net; s=20230601; t=1716486035; x=1717090835;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vfuqroyjI8kqLzWg0XJqI6RuWQT/noyUzD/FR5+TOHo=;
- b=rVZ5iVy3SECuEQ6RuwLu+ZzcA9Hil0mqVMat/GE7BQsz43+sz7h4EIiy2udXp34gS1
- M/dBEryImwuCwnb7x9qsRuyruBQmc9Rej/SalCJIwc8XnpCv6ucrPX9jMuPi8LY5qXEL
- u7uCOPYZQuDFgsI4OnsCgB0XyM052b5pJhdM5J1+HqSinrP/uCRjcvowpz5iDEZ/S+io
- Hhu0dh3CXu1JbUz+IRv9Z6HM4EC+/GEp01Febn/j6ubgTzZhstIC9iq1Sf1rZ/gFEt1K
- gfQerMpCFlTHTAv7hN6jBFyr+3HDOTE9moHsSfd/4gpgaIdFDicIOsgdHHxAQiQaJS7I
- OL+Q==
-X-Gm-Message-State: AOJu0YyKMkCUiGzoMv2dxiSrs6a1zPfsYfgub8IeosE1+wK+Ni2DHS9C
- LVGN2Gz5f0LhKLhG66fKbdJrHzCAoNF9UcelHDCgzuM/CiM04/v1pxwu9CtJiidko2MY5QZnRA7
- k
-X-Google-Smtp-Source: AGHT+IF4ewjc0Om3+9EPP2JQkQWjCxP7kgxh55lrMk/F7fFCLkjngLJOgImWfK/h/yIclhm8VuluhA==
-X-Received: by 2002:a17:903:41ce:b0:1f2:f26f:268f with SMTP id
- d9443c01a7336-1f44873bf34mr395215ad.20.1716486023198; 
- Thu, 23 May 2024 10:40:23 -0700 (PDT)
+ bh=sFYh/sZ/5aWV4UXAxOYIoojjxEy/AqrJwmzbsQkoddA=;
+ b=eM1/oNtmkCV19ErHLFeDAltQv4TO3EfCF13U9HPYLPRM64H6rmrdR8SovIo0XZRi8b
+ q0kVxfMF9B24d9NqO2TswI1ZxvoV4o3QGsXS7FE5rVqhEu76A8/tggj2y2KWXn6pB/Qi
+ EXQQe34I6+rByXbsCllgViU0JvOiUniD9gvXDRsWOoBx8JDzimx37fpEAKCwej4aUE5R
+ 2lrr01khclEFVteUVRPYXXXyTU4P70mZWByBKG3CcvW5mzUdRXm/23SKVi+Y2j2wl/cl
+ VAosPlndXE8L3paFfwCVe4cQHCZfL0iuP8KvaWuQRAIo8zZspMLUINUkryBRGDT7C0CD
+ yz+A==
+X-Gm-Message-State: AOJu0YxecEa9uyhdLMZVYC/4niBJlOeVEQI7Q5dmAx2w9pkMGJb2ykCM
+ 1FpClxt5KAcoO6bXoAWUIMYkc0bo0a2kGsV5S7kxoFJxQ3LwSCjtPNekix0NAbM=
+X-Google-Smtp-Source: AGHT+IExWq1OkP2eT0Ay+5FkrMJxaRtf3umIB1YaFPRj4M5YwhHbFs3qlmYVmI4TUstFd9bmqYVk5A==
+X-Received: by 2002:a17:902:d4c7:b0:1e2:9ddc:f72d with SMTP id
+ d9443c01a7336-1f44870278dmr227055ad.26.1716486034811; 
+ Thu, 23 May 2024 10:40:34 -0700 (PDT)
 Received: from grind.dc1.ventanamicro.com ([177.94.42.4])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1f2fb4ca0ebsm81246535ad.119.2024.05.23.10.40.19
+ d9443c01a7336-1f2fb4ca0ebsm81246535ad.119.2024.05.23.10.40.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 May 2024 10:40:22 -0700 (PDT)
+ Thu, 23 May 2024 10:40:34 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  tjeznach@rivosinc.com, ajones@ventanamicro.com, frank.chang@sifive.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Gerd Hoffmann <kraxel@redhat.com>
-Subject: [PATCH v3 04/13] pci-ids.rst: add Red Hat pci-id for RISC-V IOMMU
- device
-Date: Thu, 23 May 2024 14:39:45 -0300
-Message-ID: <20240523173955.1940072-5-dbarboza@ventanamicro.com>
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH v3 07/13] test/qtest: add riscv-iommu-pci tests
+Date: Thu, 23 May 2024 14:39:48 -0300
+Message-ID: <20240523173955.1940072-8-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.44.0
 In-Reply-To: <20240523173955.1940072-1-dbarboza@ventanamicro.com>
 References: <20240523173955.1940072-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x632.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x631.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -99,57 +96,315 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The RISC-V IOMMU PCI device we're going to add next is a reference
-implementation of the riscv-iommu spec [1], which predicts that the
-IOMMU can be implemented as a PCIe device.
+To test the RISC-V IOMMU emulation we'll use its PCI representation.
+Create a new 'riscv-iommu-pci' libqos device that will be present with
+CONFIG_RISCV_IOMMU.  This config is only available for RISC-V, so this
+device will only be consumed by the RISC-V libqos machine.
 
-However, RISC-V International (RVI), the entity that ratified the
-riscv-iommu spec, didn't bother assigning a PCI ID for this IOMMU PCIe
-implementation that the spec predicts. This puts us in an uncommon
-situation because we want to add the reference IOMMU PCIe implementation
-but we don't have a PCI ID for it.
+Start with basic tests: a PCI sanity check and a reset state register
+test. The reset test was taken from the RISC-V IOMMU spec chapter 5.2,
+"Reset behavior".
 
-Given that RVI doesn't provide a PCI ID for it we reached out to Red Hat
-and Gerd Hoffman, and they were kind enough to give us a PCI ID for the
-RISC-V IOMMU PCI reference device.
+More tests will be added later.
 
-Thanks Red Hat and Gerd for this RISC-V IOMMU PCIe device ID.
-
-[1] https://github.com/riscv-non-isa/riscv-iommu/releases/tag/v1.0.0
-
-Cc: Gerd Hoffmann <kraxel@redhat.com>
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Reviewed-by: Frank Chang <frank.chang@sifive.com>
 ---
- docs/specs/pci-ids.rst | 2 ++
- include/hw/pci/pci.h   | 1 +
- 2 files changed, 3 insertions(+)
+ tests/qtest/libqos/meson.build   |  4 ++
+ tests/qtest/libqos/riscv-iommu.c | 76 ++++++++++++++++++++++++++
+ tests/qtest/libqos/riscv-iommu.h | 71 ++++++++++++++++++++++++
+ tests/qtest/meson.build          |  1 +
+ tests/qtest/riscv-iommu-test.c   | 93 ++++++++++++++++++++++++++++++++
+ 5 files changed, 245 insertions(+)
+ create mode 100644 tests/qtest/libqos/riscv-iommu.c
+ create mode 100644 tests/qtest/libqos/riscv-iommu.h
+ create mode 100644 tests/qtest/riscv-iommu-test.c
 
-diff --git a/docs/specs/pci-ids.rst b/docs/specs/pci-ids.rst
-index c0a3dec2e7..a89a9d0939 100644
---- a/docs/specs/pci-ids.rst
-+++ b/docs/specs/pci-ids.rst
-@@ -94,6 +94,8 @@ PCI devices (other than virtio):
-   PCI ACPI ERST device (``-device acpi-erst``)
- 1b36:0013
-   PCI UFS device (``-device ufs``)
-+1b36:0014
-+  PCI RISC-V IOMMU device
+diff --git a/tests/qtest/libqos/meson.build b/tests/qtest/libqos/meson.build
+index 3aed6efcb8..07fe20eacb 100644
+--- a/tests/qtest/libqos/meson.build
++++ b/tests/qtest/libqos/meson.build
+@@ -67,6 +67,10 @@ if have_virtfs
+   libqos_srcs += files('virtio-9p.c', 'virtio-9p-client.c')
+ endif
  
- All these devices are documented in :doc:`index`.
++if config_all_devices.has_key('CONFIG_RISCV_IOMMU')
++  libqos_srcs += files('riscv-iommu.c')
++endif
++
+ libqos = static_library('qos', libqos_srcs + genh,
+                         name_suffix: 'fa',
+                         build_by_default: false)
+diff --git a/tests/qtest/libqos/riscv-iommu.c b/tests/qtest/libqos/riscv-iommu.c
+new file mode 100644
+index 0000000000..01e3b31c0b
+--- /dev/null
++++ b/tests/qtest/libqos/riscv-iommu.c
+@@ -0,0 +1,76 @@
++/*
++ * libqos driver riscv-iommu-pci framework
++ *
++ * Copyright (c) 2024 Ventana Micro Systems Inc.
++ *
++ * This work is licensed under the terms of the GNU GPL, version 2 or (at your
++ * option) any later version.  See the COPYING file in the top-level directory.
++ *
++ */
++
++#include "qemu/osdep.h"
++#include "../libqtest.h"
++#include "qemu/module.h"
++#include "qgraph.h"
++#include "pci.h"
++#include "riscv-iommu.h"
++
++static void *riscv_iommu_pci_get_driver(void *obj, const char *interface)
++{
++    QRISCVIOMMU *r_iommu_pci = obj;
++
++    if (!g_strcmp0(interface, "pci-device")) {
++        return &r_iommu_pci->dev;
++    }
++
++    fprintf(stderr, "%s not present in riscv_iommu_pci\n", interface);
++    g_assert_not_reached();
++}
++
++static void riscv_iommu_pci_start_hw(QOSGraphObject *obj)
++{
++    QRISCVIOMMU *pci = (QRISCVIOMMU *)obj;
++    qpci_device_enable(&pci->dev);
++}
++
++static void riscv_iommu_pci_destructor(QOSGraphObject *obj)
++{
++    QRISCVIOMMU *pci = (QRISCVIOMMU *)obj;
++    qpci_iounmap(&pci->dev, pci->reg_bar);
++}
++
++static void *riscv_iommu_pci_create(void *pci_bus, QGuestAllocator *alloc,
++                                    void *addr)
++{
++    QRISCVIOMMU *r_iommu_pci = g_new0(QRISCVIOMMU, 1);
++    QPCIBus *bus = pci_bus;
++
++    qpci_device_init(&r_iommu_pci->dev, bus, addr);
++    r_iommu_pci->reg_bar = qpci_iomap(&r_iommu_pci->dev, 0, NULL);
++
++    r_iommu_pci->obj.get_driver = riscv_iommu_pci_get_driver;
++    r_iommu_pci->obj.start_hw = riscv_iommu_pci_start_hw;
++    r_iommu_pci->obj.destructor = riscv_iommu_pci_destructor;
++    return &r_iommu_pci->obj;
++}
++
++static void riscv_iommu_pci_register_nodes(void)
++{
++    QPCIAddress addr = {
++        .vendor_id = RISCV_IOMMU_PCI_VENDOR_ID,
++        .device_id = RISCV_IOMMU_PCI_DEVICE_ID,
++        .devfn = QPCI_DEVFN(1, 0),
++    };
++
++    QOSGraphEdgeOptions opts = {
++        .extra_device_opts = "addr=01.0",
++    };
++
++    add_qpci_address(&opts, &addr);
++
++    qos_node_create_driver("riscv-iommu-pci", riscv_iommu_pci_create);
++    qos_node_produces("riscv-iommu-pci", "pci-device");
++    qos_node_consumes("riscv-iommu-pci", "pci-bus", &opts);
++}
++
++libqos_init(riscv_iommu_pci_register_nodes);
+diff --git a/tests/qtest/libqos/riscv-iommu.h b/tests/qtest/libqos/riscv-iommu.h
+new file mode 100644
+index 0000000000..d123efb41f
+--- /dev/null
++++ b/tests/qtest/libqos/riscv-iommu.h
+@@ -0,0 +1,71 @@
++/*
++ * libqos driver riscv-iommu-pci framework
++ *
++ * Copyright (c) 2024 Ventana Micro Systems Inc.
++ *
++ * This work is licensed under the terms of the GNU GPL, version 2 or (at your
++ * option) any later version.  See the COPYING file in the top-level directory.
++ *
++ */
++
++#ifndef TESTS_LIBQOS_RISCV_IOMMU_H
++#define TESTS_LIBQOS_RISCV_IOMMU_H
++
++#include "qgraph.h"
++#include "pci.h"
++#include "qemu/bitops.h"
++
++#ifndef GENMASK_ULL
++#define GENMASK_ULL(h, l) (((~0ULL) >> (63 - (h) + (l))) << (l))
++#endif
++
++/*
++ * RISC-V IOMMU uses PCI_VENDOR_ID_REDHAT 0x1b36 and
++ * PCI_DEVICE_ID_REDHAT_RISCV_IOMMU 0x0014.
++ */
++#define RISCV_IOMMU_PCI_VENDOR_ID       0x1b36
++#define RISCV_IOMMU_PCI_DEVICE_ID       0x0014
++#define RISCV_IOMMU_PCI_DEVICE_CLASS    0x0806
++
++/* Common field positions */
++#define RISCV_IOMMU_QUEUE_ENABLE        BIT(0)
++#define RISCV_IOMMU_QUEUE_INTR_ENABLE   BIT(1)
++#define RISCV_IOMMU_QUEUE_MEM_FAULT     BIT(8)
++#define RISCV_IOMMU_QUEUE_ACTIVE        BIT(16)
++#define RISCV_IOMMU_QUEUE_BUSY          BIT(17)
++
++#define RISCV_IOMMU_REG_CAP             0x0000
++#define RISCV_IOMMU_CAP_VERSION         GENMASK_ULL(7, 0)
++
++#define RISCV_IOMMU_REG_DDTP            0x0010
++#define RISCV_IOMMU_DDTP_BUSY           BIT_ULL(4)
++#define RISCV_IOMMU_DDTP_MODE           GENMASK_ULL(3, 0)
++#define RISCV_IOMMU_DDTP_MODE_OFF       0
++
++#define RISCV_IOMMU_REG_CQCSR           0x0048
++#define RISCV_IOMMU_CQCSR_CQEN          RISCV_IOMMU_QUEUE_ENABLE
++#define RISCV_IOMMU_CQCSR_CIE           RISCV_IOMMU_QUEUE_INTR_ENABLE
++#define RISCV_IOMMU_CQCSR_CQON          RISCV_IOMMU_QUEUE_ACTIVE
++#define RISCV_IOMMU_CQCSR_BUSY          RISCV_IOMMU_QUEUE_BUSY
++
++#define RISCV_IOMMU_REG_FQCSR           0x004C
++#define RISCV_IOMMU_FQCSR_FQEN          RISCV_IOMMU_QUEUE_ENABLE
++#define RISCV_IOMMU_FQCSR_FIE           RISCV_IOMMU_QUEUE_INTR_ENABLE
++#define RISCV_IOMMU_FQCSR_FQON          RISCV_IOMMU_QUEUE_ACTIVE
++#define RISCV_IOMMU_FQCSR_BUSY          RISCV_IOMMU_QUEUE_BUSY
++
++#define RISCV_IOMMU_REG_PQCSR           0x0050
++#define RISCV_IOMMU_PQCSR_PQEN          RISCV_IOMMU_QUEUE_ENABLE
++#define RISCV_IOMMU_PQCSR_PIE           RISCV_IOMMU_QUEUE_INTR_ENABLE
++#define RISCV_IOMMU_PQCSR_PQON          RISCV_IOMMU_QUEUE_ACTIVE
++#define RISCV_IOMMU_PQCSR_BUSY          RISCV_IOMMU_QUEUE_BUSY
++
++#define RISCV_IOMMU_REG_IPSR            0x0054
++
++typedef struct QRISCVIOMMU {
++    QOSGraphObject obj;
++    QPCIDevice dev;
++    QPCIBar reg_bar;
++} QRISCVIOMMU;
++
++#endif
+diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
+index 86293051dc..1b81db2807 100644
+--- a/tests/qtest/meson.build
++++ b/tests/qtest/meson.build
+@@ -293,6 +293,7 @@ qos_test_ss.add(
+   'vmxnet3-test.c',
+   'igb-test.c',
+   'ufs-test.c',
++  'riscv-iommu-test.c',
+ )
  
-diff --git a/include/hw/pci/pci.h b/include/hw/pci/pci.h
-index eaa3fc99d8..462aed1503 100644
---- a/include/hw/pci/pci.h
-+++ b/include/hw/pci/pci.h
-@@ -115,6 +115,7 @@ extern bool pci_available;
- #define PCI_DEVICE_ID_REDHAT_PVPANIC     0x0011
- #define PCI_DEVICE_ID_REDHAT_ACPI_ERST   0x0012
- #define PCI_DEVICE_ID_REDHAT_UFS         0x0013
-+#define PCI_DEVICE_ID_REDHAT_RISCV_IOMMU 0x0014
- #define PCI_DEVICE_ID_REDHAT_QXL         0x0100
- 
- #define FMT_PCIBUS                      PRIx64
+ if config_all_devices.has_key('CONFIG_VIRTIO_SERIAL')
+diff --git a/tests/qtest/riscv-iommu-test.c b/tests/qtest/riscv-iommu-test.c
+new file mode 100644
+index 0000000000..7f0dbd0211
+--- /dev/null
++++ b/tests/qtest/riscv-iommu-test.c
+@@ -0,0 +1,93 @@
++/*
++ * QTest testcase for RISC-V IOMMU
++ *
++ * Copyright (c) 2024 Ventana Micro Systems Inc.
++ *
++ * This work is licensed under the terms of the GNU GPL, version 2 or (at your
++ * option) any later version.  See the COPYING file in the top-level directory.
++ *
++ */
++
++#include "qemu/osdep.h"
++#include "libqtest-single.h"
++#include "qemu/module.h"
++#include "libqos/qgraph.h"
++#include "libqos/riscv-iommu.h"
++#include "hw/pci/pci_regs.h"
++
++static uint32_t riscv_iommu_read_reg32(QRISCVIOMMU *r_iommu, int reg_offset)
++{
++    uint32_t reg;
++
++    qpci_memread(&r_iommu->dev, r_iommu->reg_bar, reg_offset,
++                 &reg, sizeof(reg));
++    return reg;
++}
++
++static uint64_t riscv_iommu_read_reg64(QRISCVIOMMU *r_iommu, int reg_offset)
++{
++    uint64_t reg;
++
++    qpci_memread(&r_iommu->dev, r_iommu->reg_bar, reg_offset,
++                 &reg, sizeof(reg));
++    return reg;
++}
++
++static void test_pci_config(void *obj, void *data, QGuestAllocator *t_alloc)
++{
++    QRISCVIOMMU *r_iommu = obj;
++    QPCIDevice *dev = &r_iommu->dev;
++    uint16_t vendorid, deviceid, classid;
++
++    vendorid = qpci_config_readw(dev, PCI_VENDOR_ID);
++    deviceid = qpci_config_readw(dev, PCI_DEVICE_ID);
++    classid = qpci_config_readw(dev, PCI_CLASS_DEVICE);
++
++    g_assert_cmpuint(vendorid, ==, RISCV_IOMMU_PCI_VENDOR_ID);
++    g_assert_cmpuint(deviceid, ==, RISCV_IOMMU_PCI_DEVICE_ID);
++    g_assert_cmpuint(classid, ==, RISCV_IOMMU_PCI_DEVICE_CLASS);
++}
++
++static void test_reg_reset(void *obj, void *data, QGuestAllocator *t_alloc)
++{
++    QRISCVIOMMU *r_iommu = obj;
++    uint64_t cap;
++    uint32_t reg;
++
++    cap = riscv_iommu_read_reg64(r_iommu, RISCV_IOMMU_REG_CAP);
++    g_assert_cmpuint(cap & RISCV_IOMMU_CAP_VERSION, ==, 0x10);
++
++    reg = riscv_iommu_read_reg32(r_iommu, RISCV_IOMMU_REG_CQCSR);
++    g_assert_cmpuint(reg & RISCV_IOMMU_CQCSR_CQEN, ==, 0);
++    g_assert_cmpuint(reg & RISCV_IOMMU_CQCSR_CIE, ==, 0);
++    g_assert_cmpuint(reg & RISCV_IOMMU_CQCSR_CQON, ==, 0);
++    g_assert_cmpuint(reg & RISCV_IOMMU_CQCSR_BUSY, ==, 0);
++
++    reg = riscv_iommu_read_reg32(r_iommu, RISCV_IOMMU_REG_FQCSR);
++    g_assert_cmpuint(reg & RISCV_IOMMU_FQCSR_FQEN, ==, 0);
++    g_assert_cmpuint(reg & RISCV_IOMMU_FQCSR_FIE, ==, 0);
++    g_assert_cmpuint(reg & RISCV_IOMMU_FQCSR_FQON, ==, 0);
++    g_assert_cmpuint(reg & RISCV_IOMMU_FQCSR_BUSY, ==, 0);
++
++    reg = riscv_iommu_read_reg32(r_iommu, RISCV_IOMMU_REG_PQCSR);
++    g_assert_cmpuint(reg & RISCV_IOMMU_PQCSR_PQEN, ==, 0);
++    g_assert_cmpuint(reg & RISCV_IOMMU_PQCSR_PIE, ==, 0);
++    g_assert_cmpuint(reg & RISCV_IOMMU_PQCSR_PQON, ==, 0);
++    g_assert_cmpuint(reg & RISCV_IOMMU_PQCSR_BUSY, ==, 0);
++
++    reg = riscv_iommu_read_reg32(r_iommu, RISCV_IOMMU_REG_DDTP);
++    g_assert_cmpuint(reg & RISCV_IOMMU_DDTP_BUSY, ==, 0);
++    g_assert_cmpuint(reg & RISCV_IOMMU_DDTP_MODE, ==,
++                     RISCV_IOMMU_DDTP_MODE_OFF);
++
++    reg = riscv_iommu_read_reg32(r_iommu, RISCV_IOMMU_REG_IPSR);
++    g_assert_cmpuint(reg, ==, 0);
++}
++
++static void register_riscv_iommu_test(void)
++{
++    qos_add_test("pci_config", "riscv-iommu-pci", test_pci_config, NULL);
++    qos_add_test("reg_reset", "riscv-iommu-pci", test_reg_reset, NULL);
++}
++
++libqos_init(register_riscv_iommu_test);
 -- 
 2.44.0
 
