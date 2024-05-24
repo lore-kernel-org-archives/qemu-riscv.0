@@ -4,84 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11474C25B7A
-	for <qemu-riscv@archiver.kernel.org>; Thu, 23 May 2024 17:44:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B2C1C25B74
+	for <qemu-riscv@archiver.kernel.org>; Fri, 24 May 2024 06:15:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sACRa-000183-3X; Thu, 23 May 2024 13:41:34 -0400
+	id 1sAOCF-0001sy-Ii; Fri, 24 May 2024 02:14:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1sACR8-0000qZ-QZ
- for qemu-riscv@nongnu.org; Thu, 23 May 2024 13:41:08 -0400
-Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1sAOCB-0001qq-7a
+ for qemu-riscv@nongnu.org; Fri, 24 May 2024 02:14:27 -0400
+Received: from mail-oo1-xc2c.google.com ([2607:f8b0:4864:20::c2c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1sACQz-0001h1-Cq
- for qemu-riscv@nongnu.org; Thu, 23 May 2024 13:41:02 -0400
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-1ee7963db64so56748665ad.1
- for <qemu-riscv@nongnu.org>; Thu, 23 May 2024 10:40:53 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1sAOC8-00012g-EO
+ for qemu-riscv@nongnu.org; Fri, 24 May 2024 02:14:26 -0400
+Received: by mail-oo1-xc2c.google.com with SMTP id
+ 006d021491bc7-5b27d9fe710so3189541eaf.3
+ for <qemu-riscv@nongnu.org>; Thu, 23 May 2024 23:14:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1716486053; x=1717090853; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=iLl55/bJh1yHD1iBGVA6rwfYMm2Sf8L3ZBHFooBrgVE=;
- b=WEDsECHkiucykNomLReN8yBY19zAh4yiB19HmwwX59VC9joJdMdUsQ/ylSRbL2OSt+
- hio3Br+Z89/+CbJjasCxzs9GGCgrmjq5vU0Ik4FEuVJ+mc481wdQ6VnDswPLZZ2ezJF8
- zDhNHGLudJimGEo23pdQjuOA2umOJLHKPPgCriCaaZohw2ZiNWy3kUXu+9kOkXI28SeV
- +WCAZwCAh6IUlV9Onxh8HkrMTUbDaeBmI7VnZXcPYiuZUheVwFNHFtZaksIx5Tk/Pl+G
- avzzWoplMz2WaRyUsvYCHniur7dcq8Ms9Xd5kun1LmkwcnU+sIJXMufCYOZ7z9cU2Ozl
- JHVQ==
+ d=ventanamicro.com; s=google; t=1716531262; x=1717136062; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=NjkOvgDbjVLbH8iHglbx6OMXoUkh/TvoCmLRRr9I1og=;
+ b=dieI3telKxSrzLwkPATeSv/WsN/mEbtT7CrzkYH6Y3UlYIQRg9a5OYG2ke/UHYFHWR
+ w50HHmfce84hROoh2DbvaHj8jciVhYMMwH8OMH5wOlQWZHqYOzbj7+RqW26Kx6oVBjQq
+ t7n/1ARwMoaJadCROnsFkDa+MKon5J8vORGuEiMHIylkUStYIE07ksamfMvxyatQFydO
+ 7D2Rit1905QhP7X4ASLr0TxEL8IhHmhXxXCt6VmV2Hvf9KtcHsRv9NgPq47+H016e9pR
+ +jAiOIx5s7/GkuQlaJJ3IoscKQZ0rTQ9hMWDHGGlt0uTWv0KYmYmoEeyCuxnWJzPMn08
+ kgjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716486053; x=1717090853;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=iLl55/bJh1yHD1iBGVA6rwfYMm2Sf8L3ZBHFooBrgVE=;
- b=nD98M3eMmZqFFM3OwY0nLgWHQmHO9dh3gSEVAOB9VhNQNRgJk08+7y9OxjXQis5rOM
- sqdnIpo2LF+UPfK52yfhjWKJ1shflWolVoMx2+UqWVw2sfUdMB6a2yj8mjGgfvJQajsS
- fb6ra8JrujzjWn6wR3FSqcsZpLPobdk3UDeImLjUTyqYm7EFkZ/Ky8VGpOE0u035AWad
- aSFJP1GDZL0TOhsMrC/8Ujzva7bhBTEVvNSjG6eA5nvFUJ5MZdcDnc90oa3OSnTGe83c
- XCUlDcW1096fM9TWwf8oXVsQYOBgHBNZwBB19DWfRdGFRMEsLM6InJL1hGIjX6taZdmc
- 0dcQ==
-X-Gm-Message-State: AOJu0YxY9ysa4p9B/zI59j9kujO/oKUMlZW6zTDOFuaFEAIsbLHT1iFF
- rAfxdPlfzHWpHA4AF+D35vwTEPRHpQcGi5D47k0a1NWizMFF0uu7m4KYwWcNyds=
-X-Google-Smtp-Source: AGHT+IH8oL/TNaU8XvODq0ci9dxVVS5FtUPn5Hy/5j7wkgMG/q4wmUUSiKnIGkEkmkrJkpEv5HXY/g==
-X-Received: by 2002:a17:902:e54e:b0:1f0:9964:c35f with SMTP id
- d9443c01a7336-1f4486f1951mr489765ad.26.1716486053012; 
- Thu, 23 May 2024 10:40:53 -0700 (PDT)
-Received: from grind.dc1.ventanamicro.com ([177.94.42.4])
+ d=1e100.net; s=20230601; t=1716531262; x=1717136062;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=NjkOvgDbjVLbH8iHglbx6OMXoUkh/TvoCmLRRr9I1og=;
+ b=v1rc6evPkKgaVgUJUpx+IUQvDC35IMLcXif9a6qvfE5TkuJPkBAw/Y6XUj4nqS8Y1W
+ EGMsI48A6AYB0q6Hor3vL5AaEsQvKyfvSHo21BzNCeksnJ70OVoN312Oyeru1U23YLl6
+ bPiD9uwf/qpwNh+xLDqGFqmMEsbzm5jKjH1Beb2eKux62oMiRr/ONcuplqeagC46fwpm
+ ES1GtGho1qMYkEgb2pnBKMgiQGjroNFhdaJGhL49qB5+90u6fTHhmR/cICa3rDE4Sg3V
+ AQ40WSjx81CEJtuifb3NC4UQcPboWZyV7hJyn9qSe4f/Q4sHOy9q83s92tWUfca63h+P
+ O12w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWZIwB7/yK/+GsrkwQxKohlYDahcdJEY7ZoIQnQIHWU0ZbRo6HNFdxL1FvDm4LHndKvnGFLa3I/CHK4t13c80arJM59SRk=
+X-Gm-Message-State: AOJu0YxWsV+VMGbtAIUy7uX85OFUQo3+N5mtxQVTeQtLRJtKNLkw4iNZ
+ 1pQshzko2mbNOyOLDaTUUbm+7R2JsSRHeM6dHi7Uq3lrDhASx2UowU2Bup0+w/U=
+X-Google-Smtp-Source: AGHT+IHYdAu9LEV9SYVhFJpXo/ncrfG/vec/ev1bfgPR1rpJ6+VvkvwTW+gc8eQUSxuyBtf3iaXXug==
+X-Received: by 2002:a05:6871:725:b0:245:41f0:ce13 with SMTP id
+ 586e51a60fabf-24ca11de76amr1505731fac.9.1716531261848; 
+ Thu, 23 May 2024 23:14:21 -0700 (PDT)
+Received: from sunil-pc.Dlink ([106.51.188.31])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1f2fb4ca0ebsm81246535ad.119.2024.05.23.10.40.49
+ d2e1a72fcca58-6f8fcbea487sm516106b3a.107.2024.05.23.23.14.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 May 2024 10:40:52 -0700 (PDT)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- tjeznach@rivosinc.com, ajones@ventanamicro.com, frank.chang@sifive.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v3 12/13] hw/riscv/riscv-iommu: Add another irq for mrif
- notifications
-Date: Thu, 23 May 2024 14:39:53 -0300
-Message-ID: <20240523173955.1940072-13-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.44.0
-In-Reply-To: <20240523173955.1940072-1-dbarboza@ventanamicro.com>
-References: <20240523173955.1940072-1-dbarboza@ventanamicro.com>
+ Thu, 23 May 2024 23:14:21 -0700 (PDT)
+From: Sunil V L <sunilvl@ventanamicro.com>
+To: qemu-devel@nongnu.org,
+	qemu-arm@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Paolo Bonzini <pbonzini@redhat.com>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+ Thomas Huth <thuth@redhat.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ "Michael S . Tsirkin" <mst@redhat.com>,
+ Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
+ Laurent Vivier <lvivier@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
+ Alistair Francis <alistair23@gmail.com>,
+ Sia Jee Heng <jeeheng.sia@starfivetech.com>,
+ Haibo1 Xu <haibo1.xu@intel.com>, Anup Patel <apatel@ventanamicro.com>,
+ Andrew Jones <ajones@ventanamicro.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Sunil V L <sunilvl@ventanamicro.com>
+Subject: [PATCH v2 00/12] Add support for RISC-V ACPI tests
+Date: Fri, 24 May 2024 11:43:59 +0530
+Message-Id: <20240524061411.341599-1-sunilvl@ventanamicro.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x636.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c2c;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-oo1-xc2c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,57 +110,117 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Andrew Jones <ajones@ventanamicro.com>
+Currently, bios-table-test doesn't support RISC-V. This series enables
+the framework changes required and basic testing. Things like NUMA
+related test cases will be added later.
 
-And add mrif notification trace.
+This needs refactoring/renaming of ARM64 bios table tests. Importantly,
+the test cases now look for the expected AML files under
+tests/data/acpi/virt/aarch64 path instead of directly under
+tests/data/acpi/virt. To keep test cases not to fail because of this
+movement, they are updated to look for both paths first.
 
-Signed-off-by: Andrew Jones <ajones@ventanamicro.com>
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Frank Chang <frank.chang@sifive.com>
----
- hw/riscv/riscv-iommu-pci.c | 2 +-
- hw/riscv/riscv-iommu.c     | 1 +
- hw/riscv/trace-events      | 1 +
- 3 files changed, 3 insertions(+), 1 deletion(-)
+As part of this effort, it is found that uefi-test-tools is currently
+broken to build. So, updated its Makefile as well to use python based
+edk2 build script.
 
-diff --git a/hw/riscv/riscv-iommu-pci.c b/hw/riscv/riscv-iommu-pci.c
-index 7635cc64ff..ad3df8ffe6 100644
---- a/hw/riscv/riscv-iommu-pci.c
-+++ b/hw/riscv/riscv-iommu-pci.c
-@@ -80,7 +80,7 @@ static void riscv_iommu_pci_realize(PCIDevice *dev, Error **errp)
-     pci_register_bar(dev, 0, PCI_BASE_ADDRESS_SPACE_MEMORY |
-                      PCI_BASE_ADDRESS_MEM_TYPE_64, &s->bar0);
- 
--    int ret = msix_init(dev, RISCV_IOMMU_INTR_COUNT,
-+    int ret = msix_init(dev, RISCV_IOMMU_INTR_COUNT + 1,
-                         &s->bar0, 0, RISCV_IOMMU_REG_MSI_CONFIG,
-                         &s->bar0, 0, RISCV_IOMMU_REG_MSI_CONFIG + 256, 0, &err);
- 
-diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-index 52f0851895..a27f56419a 100644
---- a/hw/riscv/riscv-iommu.c
-+++ b/hw/riscv/riscv-iommu.c
-@@ -623,6 +623,7 @@ static MemTxResult riscv_iommu_msi_write(RISCVIOMMUState *s,
-         cause = RISCV_IOMMU_FQ_CAUSE_MSI_WR_FAULT;
-         goto err;
-     }
-+    trace_riscv_iommu_mrif_notification(s->parent_obj.id, n190, addr);
- 
-     return MEMTX_OK;
- 
-diff --git a/hw/riscv/trace-events b/hw/riscv/trace-events
-index 4b486b6420..d69719a27a 100644
---- a/hw/riscv/trace-events
-+++ b/hw/riscv/trace-events
-@@ -6,6 +6,7 @@ riscv_iommu_flt(const char *id, unsigned b, unsigned d, unsigned f, uint64_t rea
- riscv_iommu_pri(const char *id, unsigned b, unsigned d, unsigned f, uint64_t iova) "%s: page request %04x:%02x.%u iova: 0x%"PRIx64
- riscv_iommu_dma(const char *id, unsigned b, unsigned d, unsigned f, unsigned pasid, const char *dir, uint64_t iova, uint64_t phys) "%s: translate %04x:%02x.%u #%u %s 0x%"PRIx64" -> 0x%"PRIx64
- riscv_iommu_msi(const char *id, unsigned b, unsigned d, unsigned f, uint64_t iova, uint64_t phys) "%s: translate %04x:%02x.%u MSI 0x%"PRIx64" -> 0x%"PRIx64
-+riscv_iommu_mrif_notification(const char *id, uint32_t nid, uint64_t phys) "%s: sent MRIF notification 0x%x to 0x%"PRIx64
- riscv_iommu_cmd(const char *id, uint64_t l, uint64_t u) "%s: command 0x%"PRIx64" 0x%"PRIx64
- riscv_iommu_notifier_add(const char *id) "%s: dev-iotlb notifier added"
- riscv_iommu_notifier_del(const char *id) "%s: dev-iotlb notifier removed"
+The changes are also available at branch
+https://gitlab.com/vlsunil/qemu/-/tree/riscv_bios_table_test_v2
+
+Changes since v1:
+	1) Addressed feedback from Gerd and Alistair
+	2) Rebased and added tags received
+
+Sunil V L (12):
+  uefi-test-tools/UefiTestToolsPkg: Add RISC-V support
+  uefi-test-tools: Add support for python based build script
+  tests/data/uefi-boot-images: Add RISC-V ISO image
+  qtest: bios-tables-test: Rename aarch64 tests with aarch64 in them
+  tests/qtest/bios-tables-test.c: Add support for arch in path
+  tests/data/acpi/virt: Move ACPI tables under aarch64
+  meson.build: Add RISC-V to the edk2-target list
+  pc-bios/meson.build: Add support for RISC-V in unpack_edk2_blobs
+  tests/data/acpi/rebuild-expected-aml.sh: Add RISC-V
+  tests/qtest/bios-tables-test: Add empty ACPI data files for RISC-V
+  tests/qtest/bios-tables-test.c: Enable basic testing for RISC-V
+  tests/qtest/bios-tables-test: Add expected ACPI data files for RISC-V
+
+ meson.build                                   |   2 +-
+ pc-bios/meson.build                           |   2 +
+ tests/data/acpi/rebuild-expected-aml.sh       |   5 +-
+ tests/data/acpi/virt/{ => aarch64}/APIC       | Bin
+ .../acpi/virt/{ => aarch64}/APIC.acpihmatvirt | Bin
+ .../acpi/virt/{ => aarch64}/APIC.topology     | Bin
+ tests/data/acpi/virt/{ => aarch64}/DBG2       | Bin
+ tests/data/acpi/virt/{ => aarch64}/DSDT       | Bin
+ .../acpi/virt/{ => aarch64}/DSDT.acpihmatvirt | Bin
+ tests/data/acpi/virt/{ => aarch64}/DSDT.memhp | Bin
+ tests/data/acpi/virt/{ => aarch64}/DSDT.pxb   | Bin
+ .../acpi/virt/{ => aarch64}/DSDT.topology     | Bin
+ tests/data/acpi/virt/{ => aarch64}/FACP       | Bin
+ tests/data/acpi/virt/{ => aarch64}/GTDT       | Bin
+ .../acpi/virt/{ => aarch64}/HMAT.acpihmatvirt | Bin
+ tests/data/acpi/virt/{ => aarch64}/IORT       | Bin
+ tests/data/acpi/virt/{ => aarch64}/MCFG       | Bin
+ tests/data/acpi/virt/{ => aarch64}/NFIT.memhp | Bin
+ tests/data/acpi/virt/{ => aarch64}/PPTT       | Bin
+ .../acpi/virt/{ => aarch64}/PPTT.acpihmatvirt | Bin
+ .../acpi/virt/{ => aarch64}/PPTT.topology     | Bin
+ tests/data/acpi/virt/{ => aarch64}/SLIT.memhp | Bin
+ tests/data/acpi/virt/{ => aarch64}/SPCR       | Bin
+ .../acpi/virt/{ => aarch64}/SRAT.acpihmatvirt | Bin
+ tests/data/acpi/virt/{ => aarch64}/SRAT.memhp | Bin
+ .../data/acpi/virt/{ => aarch64}/SRAT.numamem | Bin
+ tests/data/acpi/virt/{ => aarch64}/SSDT.memhp | Bin
+ tests/data/acpi/virt/{ => aarch64}/VIOT       | Bin
+ tests/data/acpi/virt/riscv64/APIC             | Bin 0 -> 116 bytes
+ tests/data/acpi/virt/riscv64/DSDT             | Bin 0 -> 3518 bytes
+ tests/data/acpi/virt/riscv64/FACP             | Bin 0 -> 276 bytes
+ tests/data/acpi/virt/riscv64/MCFG             | Bin 0 -> 60 bytes
+ tests/data/acpi/virt/riscv64/RHCT             | Bin 0 -> 314 bytes
+ tests/data/acpi/virt/riscv64/SPCR             | Bin 0 -> 80 bytes
+ .../bios-tables-test.riscv64.iso.qcow2        | Bin 0 -> 16896 bytes
+ tests/qtest/bios-tables-test.c                |  93 ++++++++++++++----
+ tests/qtest/meson.build                       |   3 +
+ tests/uefi-test-tools/Makefile                |  19 ++--
+ .../UefiTestToolsPkg/UefiTestToolsPkg.dsc     |   6 +-
+ tests/uefi-test-tools/uefi-test-build.config  |  52 ++++++++++
+ 40 files changed, 147 insertions(+), 35 deletions(-)
+ rename tests/data/acpi/virt/{ => aarch64}/APIC (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/APIC.acpihmatvirt (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/APIC.topology (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/DBG2 (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/DSDT (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/DSDT.acpihmatvirt (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/DSDT.memhp (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/DSDT.pxb (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/DSDT.topology (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/FACP (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/GTDT (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/HMAT.acpihmatvirt (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/IORT (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/MCFG (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/NFIT.memhp (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/PPTT (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/PPTT.acpihmatvirt (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/PPTT.topology (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/SLIT.memhp (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/SPCR (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/SRAT.acpihmatvirt (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/SRAT.memhp (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/SRAT.numamem (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/SSDT.memhp (100%)
+ rename tests/data/acpi/virt/{ => aarch64}/VIOT (100%)
+ create mode 100644 tests/data/acpi/virt/riscv64/APIC
+ create mode 100644 tests/data/acpi/virt/riscv64/DSDT
+ create mode 100644 tests/data/acpi/virt/riscv64/FACP
+ create mode 100644 tests/data/acpi/virt/riscv64/MCFG
+ create mode 100644 tests/data/acpi/virt/riscv64/RHCT
+ create mode 100644 tests/data/acpi/virt/riscv64/SPCR
+ create mode 100644 tests/data/uefi-boot-images/bios-tables-test.riscv64.iso.qcow2
+ create mode 100644 tests/uefi-test-tools/uefi-test-build.config
+
 -- 
-2.44.0
+2.40.1
 
 
