@@ -4,88 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06158C25B74
-	for <qemu-riscv@archiver.kernel.org>; Fri, 24 May 2024 09:10:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83137C25B79
+	for <qemu-riscv@archiver.kernel.org>; Fri, 24 May 2024 09:47:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sAQwk-0001T9-GM; Fri, 24 May 2024 05:10:42 -0400
+	id 1sARVi-0003Pl-Bw; Fri, 24 May 2024 05:46:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1sAQwj-0001SQ-0O
- for qemu-riscv@nongnu.org; Fri, 24 May 2024 05:10:41 -0400
-Received: from mail-pg1-x52c.google.com ([2607:f8b0:4864:20::52c])
+ id 1sARVg-0003PA-3J
+ for qemu-riscv@nongnu.org; Fri, 24 May 2024 05:46:48 -0400
+Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1sAQwg-0004Is-Kk
- for qemu-riscv@nongnu.org; Fri, 24 May 2024 05:10:40 -0400
-Received: by mail-pg1-x52c.google.com with SMTP id
- 41be03b00d2f7-681ad081695so477678a12.3
- for <qemu-riscv@nongnu.org>; Fri, 24 May 2024 02:10:37 -0700 (PDT)
+ id 1sARVd-0002n9-JK
+ for qemu-riscv@nongnu.org; Fri, 24 May 2024 05:46:47 -0400
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-1f44b4404dfso4512595ad.0
+ for <qemu-riscv@nongnu.org>; Fri, 24 May 2024 02:46:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1716541836; x=1717146636; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1716544004; x=1717148804; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=PUayGeUQIvfFZN4HQaKSEXR8r/IDAezjvjRrFIAqENI=;
- b=Ck7zf3astU+GjJSgFMgAzdWL7GXl8IZV5+G9izdw+AL6x5QsAa0eUQIogZbo9qjruX
- mhkR8ax8Gapq5wpgieEj8AkVLwQHd0HyEMTJsv8ro1VKtHcxnp2u0mp94nNrMhvcjQlq
- AraDRBK1ZrNuI4JX4jehx12bQXkmeJCzdcX6Y4fIpz1tvYE9DRgUfP9Fz8xPOiZKT/I0
- X9VtsfxEQOXJvbMjctkgNZH/oxtTvvoHJkJLS5enGGhcPbShPKvHFPQq2V+0g1u7aM0+
- yYlZVDUyqHAA+E7desr7E9Mu1GG5G5UUmfgZDqmQJ3Mbnwgxmj7Vh/5opYFI5480F/p5
- jOrg==
+ bh=2lfXR6QCwoyV9M+9/1P28Lh1+2iSol7vJwQ5+ilCIB8=;
+ b=QqlFNtB9/UbZcT0Jot0aVfplZRlpKvpq+qLgalmF0CmcEVKkaAzLOPB15HJVOcPV4j
+ zqGx87cNKTDcV7MzYzH5rN2xJqLkitLrrUA8f1zXpvYyT8tI6So5fOIOJtz//5EVZIel
+ 04Piy2P6QStRZdN+GYj7UVNVb1EOwlLJaIdzErAcUexngqZG9Ae83AeOmTVmWie4VRFK
+ f+kJh538C1V1szo2OSqkKpM4SHyVt3pgsMT0KRYUcnBX2E9R6W9YkIniUCxF1qqqCWJf
+ 6QW/acY8IFmy4VnAVhuyG+PSCZ0wwY4gZFPoO7MijrkBEMkWE16c5anjUyHZXGK2sWVy
+ st5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716541836; x=1717146636;
+ d=1e100.net; s=20230601; t=1716544004; x=1717148804;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=PUayGeUQIvfFZN4HQaKSEXR8r/IDAezjvjRrFIAqENI=;
- b=tYNWKj86tL//WlYlgfTUTSIh221KoW92WSBM4ejT+WWXaR2O02erJ3hc4/PZrwhQuv
- gKHP2RmOY3CFg/70T3EfpHLJdGwlW51w2Q9kNnTOnMy5VHhthJ+Vd5Xq3jXgjQ7mjIYo
- 5xQdAiFe4cTQ6FrzpaRvmagUYOYqMTC6s7fBsqWtskjS/Y9W8OyCrxJZJxaw14K+Vu3c
- IbX15ksJFepdO7A0YsP5wVkxfQru6rZ15Bm8tUqGVZoXiRohFClcTqUbo30r4WplpcY1
- Jc7zrXOLpPdGXmZo9E11G00Gj4M+gGyxPRMMx9F7tVDOc7viwRJR5CKlV54ofOALKx4b
- 2Xug==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVZiNM7e4EQv/j+xbV5HUJfSfaJ66+6ggJIe6+hY5zXS87isTTBOlhKfE870K/uE+H+MXNPB2lJPAdIHGdf6XUwhi7rrEI=
-X-Gm-Message-State: AOJu0Yz0/ynlOSNFqI3bRBBwfLRD2zzUKipg49WKdBn+d0ZvjB8IaNau
- zKPpfV8w6dCtV//iIClgvezyE/5GW5NyHDN0SJ1wZOv2FmobWNLe5FxymngS8l4=
-X-Google-Smtp-Source: AGHT+IFtl0v/+eHT1/HcbndRDjJ9LGwZVmpciGJxtcpwmcr6MShxJW+D++lfYFyAupILYZEixyldNQ==
-X-Received: by 2002:a05:6a20:d42f:b0:1af:dc83:75bc with SMTP id
- adf61e73a8af0-1b212d39189mr1689216637.3.1716541835836; 
- Fri, 24 May 2024 02:10:35 -0700 (PDT)
+ bh=2lfXR6QCwoyV9M+9/1P28Lh1+2iSol7vJwQ5+ilCIB8=;
+ b=P3W8fCyZKPwK+7QjLJscq5oxe9w5gYbr/kvJ/WjXmr/I3XDtJ1angaiRYSuBCyKpVy
+ gdNTqRT8hqyaV0cqEgVJFJ0L15ZXEmoTSXS1qltDzd/b/WBG7m0qQLWuwTTpyGHhmgdG
+ CQBJAPst03bxzjBjIAoK8GM7NF5kVksMz7tY9MJ1OPAoIkcUw3i//qlXhFblXREn2JmF
+ IJubqYTFaj0cusf9/jKAGZ5JllpQy0qWtw0fzZUapbPYy9yp2mSPFL7ubM0RveBoTf1+
+ cRaIRoBHRdm7Pw4RynOrOyr8kOLkU83b5ZZH4r4Ya+eObI9jhsKKjKrC6ljqDmsptCbr
+ 1z/Q==
+X-Gm-Message-State: AOJu0YzKk8/Qkug/baiyFx1DX3HNH9OVPFBOtitb8NmeYnF+BXURff/t
+ Ugu9RrwDCuXcWSZTSmrg4j+Z+LPxwX6suZh//R8GQJ8mx8TkllGBQd3y99bCc+o=
+X-Google-Smtp-Source: AGHT+IEIE9NjFXWobXVDn0JDLdC3Q9yvIVrlpA1ur42RtAVqjSZem/tcVYM4dDJNYClJXL+MrnjTRg==
+X-Received: by 2002:a17:902:f9c3:b0:1f3:26e2:cf9f with SMTP id
+ d9443c01a7336-1f44872cf54mr15598065ad.23.1716544003722; 
+ Fri, 24 May 2024 02:46:43 -0700 (PDT)
 Received: from [192.168.68.110] ([177.94.42.4])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1f44c7592c1sm9210285ad.57.2024.05.24.02.10.31
+ d9443c01a7336-1f44c9ba3f5sm9841735ad.265.2024.05.24.02.46.40
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 24 May 2024 02:10:35 -0700 (PDT)
-Message-ID: <40ae0cb9-1596-4cec-994c-71e0abaa0d1e@ventanamicro.com>
-Date: Fri, 24 May 2024 06:10:30 -0300
+ Fri, 24 May 2024 02:46:42 -0700 (PDT)
+Message-ID: <05cbd3c7-cf62-4a17-91a6-b73e3ff3ad04@ventanamicro.com>
+Date: Fri, 24 May 2024 06:46:38 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/3] hw/riscv/virt: Add ACPI GED and PC-DIMM MHP support
-To: =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- David Hildenbrand <david@redhat.com>, Atish Patra <atishp@atishpatra.org>,
- Atish Patra <atishp@rivosinc.com>
-Cc: =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@rivosinc.com>,
- Sunil V L <sunilvl@ventanamicro.com>,
- Santosh Mamila <santosh.mamila@catalinasystems.io>,
- Chethan Seshadri <Chethan.Seshadri@catalinasystems.io>,
- Sivakumar Munnangi <siva.munnangi@catalinasystems.io>
-References: <20240521105635.795211-1-bjorn@kernel.org>
- <20240521105635.795211-4-bjorn@kernel.org>
+Subject: Re: [PATCH 1/4] target/riscv: Add zimop extension
+To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, Alistair.Francis@wdc.com,
+ bmeng.cn@gmail.com, iwei1518@gmail.com
+References: <20240522062905.1799-1-zhiwei_liu@linux.alibaba.com>
+ <20240522062905.1799-2-zhiwei_liu@linux.alibaba.com>
 Content-Language: en-US
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240521105635.795211-4-bjorn@kernel.org>
+In-Reply-To: <20240522062905.1799-2-zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52c;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x52c.google.com
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x633.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -110,355 +99,166 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 5/21/24 07:56, Björn Töpel wrote:
-> From: Björn Töpel <bjorn@rivosinc.com>
+On 5/22/24 03:29, LIU Zhiwei wrote:
+> Zimop extension defines an encoding space for 40 MOPs.The Zimop
+> extension defines 32 MOP instructions named MOP.R.n, where n is
+> an integer between 0 and 31, inclusive. The Zimop extension
+> additionally defines 8 MOP instructions named MOP.RR.n, where n
+> is an integer between 0 and 7.
 > 
-> Add ACPI GED for the RISC-V "virt" machine, and wire up PC-DIMM memory
-> hotplugging support. Heavily based/copied from hw/arm/virt.c.
+> These 40 MOPs initially are defined to simply write zero to x[rd],
+> but are designed to be redefined by later extensions to perform some
+> other action.
 > 
-> Signed-off-by: Björn Töpel <bjorn@rivosinc.com>
+> Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 > ---
->   hw/riscv/Kconfig           |   3 ++
->   hw/riscv/virt-acpi-build.c |  16 ++++++
->   hw/riscv/virt.c            | 104 ++++++++++++++++++++++++++++++++++++-
->   include/hw/riscv/virt.h    |   6 ++-
->   4 files changed, 126 insertions(+), 3 deletions(-)
+>   target/riscv/cpu.c                          |  2 ++
+>   target/riscv/cpu_cfg.h                      |  1 +
+>   target/riscv/insn32.decode                  | 11 ++++++
+>   target/riscv/insn_trans/trans_rvzimop.c.inc | 37 +++++++++++++++++++++
+>   target/riscv/translate.c                    |  1 +
+>   5 files changed, 52 insertions(+)
+>   create mode 100644 target/riscv/insn_trans/trans_rvzimop.c.inc
 > 
-> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-> index 08f82dbb681a..bebe412f2107 100644
-> --- a/hw/riscv/Kconfig
-> +++ b/hw/riscv/Kconfig
-> @@ -56,6 +56,9 @@ config RISCV_VIRT
->       select PLATFORM_BUS
->       select ACPI
->       select ACPI_PCI
-> +    select MEM_DEVICE
-> +    select DIMM
-> +    select ACPI_HW_REDUCED
->       select VIRTIO_MEM_SUPPORTED
->       select VIRTIO_PMEM_SUPPORTED
->   
-> diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
-> index 6dc3baa9ec86..61813abdef3f 100644
-> --- a/hw/riscv/virt-acpi-build.c
-> +++ b/hw/riscv/virt-acpi-build.c
-> @@ -27,6 +27,8 @@
->   #include "hw/acpi/acpi-defs.h"
->   #include "hw/acpi/acpi.h"
->   #include "hw/acpi/aml-build.h"
-> +#include "hw/acpi/memory_hotplug.h"
-> +#include "hw/acpi/generic_event_device.h"
->   #include "hw/acpi/pci.h"
->   #include "hw/acpi/utils.h"
->   #include "hw/intc/riscv_aclint.h"
-> @@ -432,6 +434,20 @@ static void build_dsdt(GArray *table_data,
->           acpi_dsdt_add_gpex_host(scope, PCIE_IRQ + VIRT_IRQCHIP_NUM_SOURCES * 2);
->       }
->   
-> +    if (s->acpi_dev) {
-> +        uint32_t event = object_property_get_uint(OBJECT(s->acpi_dev),
-> +                                                  "ged-event", &error_abort);
-> +
-> +        build_ged_aml(scope, "\\_SB."GED_DEVICE, HOTPLUG_HANDLER(s->acpi_dev),
-> +                      GED_IRQ, AML_SYSTEM_MEMORY, memmap[VIRT_ACPI_GED].base);
-> +
-> +        if (event & ACPI_GED_MEM_HOTPLUG_EVT) {
-> +            build_memory_hotplug_aml(scope, ms->ram_slots, "\\_SB", NULL,
-> +                                     AML_SYSTEM_MEMORY,
-> +                                     memmap[VIRT_PCDIMM_ACPI].base);
-> +        }
-> +    }
-> +
->       aml_append(dsdt, scope);
->   
->       /* copy AML table into ACPI tables blob and patch header there */
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 443902f919d2..2e35890187f2 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -53,10 +53,13 @@
->   #include "hw/pci-host/gpex.h"
->   #include "hw/display/ramfb.h"
->   #include "hw/acpi/aml-build.h"
-> +#include "hw/acpi/generic_event_device.h"
-> +#include "hw/acpi/memory_hotplug.h"
->   #include "hw/mem/memory-device.h"
->   #include "hw/virtio/virtio-mem-pci.h"
->   #include "qapi/qapi-visit-common.h"
->   #include "hw/virtio/virtio-iommu.h"
-> +#include "hw/mem/pc-dimm.h"
->   
->   /* KVM AIA only supports APLIC MSI. APLIC Wired is always emulated by QEMU. */
->   static bool virt_use_kvm_aia(RISCVVirtState *s)
-> @@ -84,6 +87,8 @@ static const MemMapEntry virt_memmap[] = {
->       [VIRT_UART0] =        { 0x10000000,         0x100 },
->       [VIRT_VIRTIO] =       { 0x10001000,        0x1000 },
->       [VIRT_FW_CFG] =       { 0x10100000,          0x18 },
-> +    [VIRT_PCDIMM_ACPI] =  { 0x10200000, MEMORY_HOTPLUG_IO_LEN },
-> +    [VIRT_ACPI_GED] =     { 0x10210000, ACPI_GED_EVT_SEL_LEN },
->       [VIRT_FLASH] =        { 0x20000000,     0x4000000 },
->       [VIRT_IMSIC_M] =      { 0x24000000, VIRT_IMSIC_MAX_SIZE },
->       [VIRT_IMSIC_S] =      { 0x28000000, VIRT_IMSIC_MAX_SIZE },
-> @@ -1400,6 +1405,28 @@ static void virt_machine_done(Notifier *notifier, void *data)
->       }
->   }
->   
-> +static DeviceState *create_acpi_ged(RISCVVirtState *s)
-> +{
-> +    DeviceState *dev;
-> +    MachineState *ms = MACHINE(s);
-> +    uint32_t event = 0;
-> +
-> +    if (ms->ram_slots) {
-> +        event |= ACPI_GED_MEM_HOTPLUG_EVT;
-> +    }
-> +
-> +    dev = qdev_new(TYPE_ACPI_GED);
-> +    qdev_prop_set_uint32(dev, "ged-event", event);
-> +    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-> +
-> +    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, s->memmap[VIRT_ACPI_GED].base);
-> +    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 1, s->memmap[VIRT_PCDIMM_ACPI].base);
-> +    sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, qdev_get_gpio_in(s->irqchip[0],
-> +                                                                GED_IRQ));
-> +
-> +    return dev;
-> +}
-> +
->   static void virt_machine_init(MachineState *machine)
->   {
->       const MemMapEntry *memmap = virt_memmap;
-> @@ -1612,6 +1639,10 @@ static void virt_machine_init(MachineState *machine)
->   
->       gpex_pcie_init(system_memory, pcie_irqchip, s);
->   
-> +    if (virt_is_acpi_enabled(s)) {
-> +        s->acpi_dev = create_acpi_ged(s);
-> +    }
-> +
->       create_platform_bus(s, mmio_irqchip);
->   
->       serial_mm_init(system_memory, memmap[VIRT_UART0].base,
-> @@ -1752,6 +1783,7 @@ static HotplugHandler *virt_machine_get_hotplug_handler(MachineState *machine,
->       MachineClass *mc = MACHINE_GET_CLASS(machine);
->   
->       if (device_is_dynamic_sysbus(mc, dev) ||
-> +        object_dynamic_cast(OBJECT(dev), TYPE_PC_DIMM) ||
->           object_dynamic_cast(OBJECT(dev), TYPE_VIRTIO_IOMMU_PCI) ||
->           object_dynamic_cast(OBJECT(dev), TYPE_VIRTIO_MD_PCI)) {
->           return HOTPLUG_HANDLER(machine);
-> @@ -1759,14 +1791,42 @@ static HotplugHandler *virt_machine_get_hotplug_handler(MachineState *machine,
->       return NULL;
->   }
->   
-> +static void virt_memory_pre_plug(HotplugHandler *hotplug_dev, DeviceState *dev,
-> +                                 Error **errp)
-> +{
-> +    RISCVVirtState *s = RISCV_VIRT_MACHINE(hotplug_dev);
-> +
-> +    if (!s->acpi_dev) {
-> +        error_setg(errp,
-> +                   "memory hotplug is not enabled: missing acpi-ged device");
-> +        return;
-> +    }
-> +
-> +    pc_dimm_pre_plug(PC_DIMM(dev), MACHINE(hotplug_dev), NULL, errp);
-> +}
-> +
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index eb1a2e7d6d..c1ac521142 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -175,6 +175,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
+>       ISA_EXT_DATA_ENTRY(zvkt, PRIV_VERSION_1_12_0, ext_zvkt),
+>       ISA_EXT_DATA_ENTRY(zhinx, PRIV_VERSION_1_12_0, ext_zhinx),
+>       ISA_EXT_DATA_ENTRY(zhinxmin, PRIV_VERSION_1_12_0, ext_zhinxmin),
+> +    ISA_EXT_DATA_ENTRY(zimop, PRIV_VERSION_1_12_0, ext_zimop),
 
-Note that we're not doing any aligment checks in this pre_plug(), meaning that
-we're kind of accepting whatever the pc-dimm device throw at us.
+Shouldn't this be placed right after zihpm?
 
-Testing in an AMD x86 machine will force the pc-dimm to be 2Mb aligned:
-
-$ ./build/qemu-system-riscv64 -M virt -m 2G,slots=4,maxmem=8G -nographic
-(...)
-(qemu) object_add memory-backend-ram,id=ram0,size=111M
-(qemu) device_add pc-dimm,id=dimm0,memdev=ram0
-Error: backend memory size must be multiple of 0x200000
-(qemu) object_del ram0
-
-This happens because the DIMM must be aligned with its own backend, in this case
-the host memory itself (backends/hostmem.c).
-
-There's no guarantee that we'll always run in a host that is mem aligned with the board,
-so it would be nice to add align checks in virt_memory_pre_plug().
-
->   static void virt_machine_device_pre_plug_cb(HotplugHandler *hotplug_dev,
->                                               DeviceState *dev, Error **errp)
->   {
-> +    if (object_dynamic_cast(OBJECT(dev), TYPE_PC_DIMM)) {
-> +        virt_memory_pre_plug(hotplug_dev, dev, errp);
-> +    }
-> +
->       if (object_dynamic_cast(OBJECT(dev), TYPE_VIRTIO_MD_PCI)) {
->           virtio_md_pci_pre_plug(VIRTIO_MD_PCI(dev), MACHINE(hotplug_dev), errp);
->       }
->   }
->   
-> +static void virt_memory_plug(HotplugHandler *hotplug_dev,
-> +                             DeviceState *dev, Error **errp)
-> +{
-> +    RISCVVirtState *s = RISCV_VIRT_MACHINE(hotplug_dev);
-> +
-> +    pc_dimm_plug(PC_DIMM(dev), MACHINE(s));
-> +
-> +    hotplug_handler_plug(HOTPLUG_HANDLER(s->acpi_dev), dev, &error_abort);
-> +}
-> +
->   static void virt_machine_device_plug_cb(HotplugHandler *hotplug_dev,
->                                           DeviceState *dev, Error **errp)
->   {
-> @@ -1785,16 +1845,36 @@ static void virt_machine_device_plug_cb(HotplugHandler *hotplug_dev,
->           create_fdt_virtio_iommu(s, pci_get_bdf(PCI_DEVICE(dev)));
->       }
->   
-> +    if (object_dynamic_cast(OBJECT(dev), TYPE_PC_DIMM)) {
-> +        virt_memory_plug(hotplug_dev, dev, errp);
-> +    }
-> +
->       if (object_dynamic_cast(OBJECT(dev), TYPE_VIRTIO_MD_PCI)) {
->           virtio_md_pci_plug(VIRTIO_MD_PCI(dev), MACHINE(hotplug_dev), errp);
->       }
->   }
->   
-> +static void virt_dimm_unplug_request(HotplugHandler *hotplug_dev,
-> +                                     DeviceState *dev, Error **errp)
-> +{
-> +    RISCVVirtState *s = RISCV_VIRT_MACHINE(hotplug_dev);
-> +
-> +    if (!s->acpi_dev) {
-> +        error_setg(errp,
-> +                   "memory hotplug is not enabled: missing acpi-ged device");
-> +        return;
-> +    }
-> +
-> +    hotplug_handler_unplug_request(HOTPLUG_HANDLER(s->acpi_dev), dev, errp);
-> +}
-> +
-
-I'm unsure if we're ready to support both hotplug and hot-unplug, but I tested anyway.
-Hotplug seems to work but hot-unplug doesn't:
-
-$ ./build/qemu-system-riscv64 -M virt -m 2G,slots=4,maxmem=8G -nographic
-(...)
-(qemu) object_add memory-backend-ram,id=ram0,size=112M
-(qemu) device_add pc-dimm,id=dimm0,memdev=ram0
-(qemu)
-(qemu) info memory-devices
-Memory device [dimm]: "dimm0"
-   addr: 0x100000000
-   slot: 0
-   node: 0
-   size: 117440512
-   memdev: /objects/ram0
-   hotplugged: true
-   hotpluggable: true
-(qemu)
-(qemu) device_del dimm0
-(qemu) object_del ram0
-Error: object 'ram0' is in use, can not be deleted
-(qemu) info memory-devices
-Memory device [dimm]: "dimm0"
-   addr: 0x100000000
-   slot: 0
-   node: 0
-   size: 117440512
-   memdev: /objects/ram0
-   hotplugged: true
-   hotpluggable: true
-(qemu)
-
-In short: hotplugged a 112Mb DIMM, then tried to remove it. 'device_del' doesn't error
-out but doesn't let me remove the memory backing created, i.e. the dimm0 device is
-still around.
-
-In a quick digging I see that we're hitting virt_dimm_unplug_request() all the way
-down to acpi_memory_unplug_request_cb(), where an ACPI_MEMORY_HOTPLUG_STATUS is being
-sent. We never reach virt_dimm_unplug() afterwards, so the PC_DIMM is never removed.
-
-I'm not acquainted with ACPI enough to say if we're missing stuff in QEMU, or if we
-need SW to be aware of this ACPI HP event to trigger the release of the dimm, or
-anything in between.
-
-I consider this more as a FYI. If we're up to the point of hotplugging pc-dimms it's
-already an improvement worth having. Hot-unplugging can come later.
+     ISA_EXT_DATA_ENTRY(zihintpause, PRIV_VERSION_1_10_0, ext_zihintpause),
+     ISA_EXT_DATA_ENTRY(zihpm, PRIV_VERSION_1_12_0, ext_zihpm),
+> +    ISA_EXT_DATA_ENTRY(zimop, PRIV_VERSION_1_12_0, ext_zimop),
+     ISA_EXT_DATA_ENTRY(zmmul, PRIV_VERSION_1_12_0, ext_zmmul),
 
 
 Thanks,
 
 Daniel
 
->   static void virt_machine_device_unplug_request_cb(HotplugHandler *hotplug_dev,
->                                                     DeviceState *dev,
->                                                     Error **errp)
->   {
-> -    if (object_dynamic_cast(OBJECT(dev), TYPE_VIRTIO_MD_PCI)) {
-> +    if (object_dynamic_cast(OBJECT(dev), TYPE_PC_DIMM)) {
-> +        virt_dimm_unplug_request(hotplug_dev, dev, errp);
-> +    } else if (object_dynamic_cast(OBJECT(dev), TYPE_VIRTIO_MD_PCI)) {
->           virtio_md_pci_unplug_request(VIRTIO_MD_PCI(dev), MACHINE(hotplug_dev),
->                                        errp);
->       } else {
-> @@ -1804,10 +1884,30 @@ static void virt_machine_device_unplug_request_cb(HotplugHandler *hotplug_dev,
->       }
->   }
+
+>       ISA_EXT_DATA_ENTRY(smaia, PRIV_VERSION_1_12_0, ext_smaia),
+>       ISA_EXT_DATA_ENTRY(smepmp, PRIV_VERSION_1_12_0, ext_smepmp),
+>       ISA_EXT_DATA_ENTRY(smstateen, PRIV_VERSION_1_12_0, ext_smstateen),
+> @@ -1463,6 +1464,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
+>       MULTI_EXT_CFG_BOOL("zicsr", ext_zicsr, true),
+>       MULTI_EXT_CFG_BOOL("zihintntl", ext_zihintntl, true),
+>       MULTI_EXT_CFG_BOOL("zihintpause", ext_zihintpause, true),
+> +    MULTI_EXT_CFG_BOOL("zimop", ext_zimop, false),
+>       MULTI_EXT_CFG_BOOL("zacas", ext_zacas, false),
+>       MULTI_EXT_CFG_BOOL("zaamo", ext_zaamo, false),
+>       MULTI_EXT_CFG_BOOL("zalrsc", ext_zalrsc, false),
+> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+> index cb750154bd..b547fbba9d 100644
+> --- a/target/riscv/cpu_cfg.h
+> +++ b/target/riscv/cpu_cfg.h
+> @@ -71,6 +71,7 @@ struct RISCVCPUConfig {
+>       bool ext_zihintntl;
+>       bool ext_zihintpause;
+>       bool ext_zihpm;
+> +    bool ext_zimop;
+>       bool ext_ztso;
+>       bool ext_smstateen;
+>       bool ext_sstc;
+> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+> index f22df04cfd..972a1e8fd1 100644
+> --- a/target/riscv/insn32.decode
+> +++ b/target/riscv/insn32.decode
+> @@ -38,6 +38,8 @@
+>   %imm_bs   30:2                   !function=ex_shift_3
+>   %imm_rnum 20:4
+>   %imm_z6   26:1 15:5
+> +%imm_mop5 30:1 26:2 20:2
+> +%imm_mop3 30:1 26:2
 >   
-> +static void virt_dimm_unplug(HotplugHandler *hotplug_dev,
-> +                             DeviceState *dev, Error **errp)
+>   # Argument sets:
+>   &empty
+> @@ -56,6 +58,8 @@
+>   &r2nfvm    vm rd rs1 nf
+>   &rnfvm     vm rd rs1 rs2 nf
+>   &k_aes     shamt rs2 rs1 rd
+> +&mop5 imm rd rs1
+> +&mop3 imm rd rs1 rs2
+>   
+>   # Formats 32:
+>   @r       .......   ..... ..... ... ..... ....... &r                %rs2 %rs1 %rd
+> @@ -98,6 +102,9 @@
+>   @k_aes   .. ..... ..... .....  ... ..... ....... &k_aes  shamt=%imm_bs   %rs2 %rs1 %rd
+>   @i_aes   .. ..... ..... .....  ... ..... ....... &i      imm=%imm_rnum        %rs1 %rd
+>   
+> +@mop5 . . .. .. .... .. ..... ... ..... ....... &mop5 imm=%imm_mop5 %rd %rs1
+> +@mop3 . . .. .. . ..... ..... ... ..... ....... &mop3 imm=%imm_mop3 %rd %rs1 %rs2
+> +
+>   # Formats 64:
+>   @sh5     .......  ..... .....  ... ..... ....... &shift  shamt=%sh5      %rs1 %rd
+>   
+> @@ -1010,3 +1017,7 @@ amocas_w    00101 . . ..... ..... 010 ..... 0101111 @atom_st
+>   amocas_d    00101 . . ..... ..... 011 ..... 0101111 @atom_st
+>   # *** RV64 Zacas Standard Extension ***
+>   amocas_q    00101 . . ..... ..... 100 ..... 0101111 @atom_st
+> +
+> +# *** Zimop may-be-operation extension ***
+> +mop_r_n     1 . 00 .. 0111 .. ..... 100 ..... 0111011 @mop5
+> +mop_rr_n    1 . 00 .. 1 ..... ..... 100 ..... 0111011 @mop3
+> diff --git a/target/riscv/insn_trans/trans_rvzimop.c.inc b/target/riscv/insn_trans/trans_rvzimop.c.inc
+> new file mode 100644
+> index 0000000000..165aacd2b6
+> --- /dev/null
+> +++ b/target/riscv/insn_trans/trans_rvzimop.c.inc
+> @@ -0,0 +1,37 @@
+> +/*
+> + * RISC-V translation routines for May-Be-Operation(zimop).
+> + *
+> + * Copyright (c) 2024 Alibaba Group.
+> + *
+> + * This program is free software; you can redistribute it and/or modify it
+> + * under the terms and conditions of the GNU General Public License,
+> + * version 2 or later, as published by the Free Software Foundation.
+> + *
+> + * This program is distributed in the hope it will be useful, but WITHOUT
+> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+> + * more details.
+> + *
+> + * You should have received a copy of the GNU General Public License along with
+> + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> + */
+> +
+> +#define REQUIRE_ZIMOP(ctx) do {           \
+> +    if (!ctx->cfg_ptr->ext_zimop) {       \
+> +        return false;                     \
+> +    }                                     \
+> +} while (0)
+> +
+> +static bool trans_mop_r_n(DisasContext *ctx, arg_mop_r_n *a)
 > +{
-> +    RISCVVirtState *s = RISCV_VIRT_MACHINE(hotplug_dev);
-> +    Error *local_err = NULL;
-> +
-> +    hotplug_handler_unplug(HOTPLUG_HANDLER(s->acpi_dev), dev, &local_err);
-> +    if (local_err) {
-> +        goto out;
-> +    }
-> +
-> +    pc_dimm_unplug(PC_DIMM(dev), MACHINE(s));
-> +    qdev_unrealize(dev);
-> +
-> +out:
-> +    error_propagate(errp, local_err);
+> +    REQUIRE_ZIMOP(ctx);
+> +    gen_set_gpr(ctx, a->rd, ctx->zero);
+> +    return true;
 > +}
 > +
->   static void virt_machine_device_unplug_cb(HotplugHandler *hotplug_dev,
->                                             DeviceState *dev, Error **errp)
->   {
-> -    if (object_dynamic_cast(OBJECT(dev), TYPE_VIRTIO_MD_PCI)) {
-> +    if (object_dynamic_cast(OBJECT(dev), TYPE_PC_DIMM)) {
-> +        virt_dimm_unplug(hotplug_dev, dev, errp);
-> +    } else if (object_dynamic_cast(OBJECT(dev), TYPE_VIRTIO_MD_PCI)) {
->           virtio_md_pci_unplug(VIRTIO_MD_PCI(dev), MACHINE(hotplug_dev), errp);
->       } else {
->           error_setg(errp, "virt: device unplug for unsupported device"
-> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-> index 3db839160f95..adf460a4021e 100644
-> --- a/include/hw/riscv/virt.h
-> +++ b/include/hw/riscv/virt.h
-> @@ -62,6 +62,7 @@ struct RISCVVirtState {
->       OnOffAuto acpi;
->       const MemMapEntry *memmap;
->       struct GPEXHost *gpex_host;
-> +    DeviceState *acpi_dev;
->   };
->   
->   enum {
-> @@ -84,12 +85,15 @@ enum {
->       VIRT_PCIE_MMIO,
->       VIRT_PCIE_PIO,
->       VIRT_PLATFORM_BUS,
-> -    VIRT_PCIE_ECAM
-> +    VIRT_PCIE_ECAM,
-> +    VIRT_PCDIMM_ACPI,
-> +    VIRT_ACPI_GED,
->   };
->   
->   enum {
->       UART0_IRQ = 10,
->       RTC_IRQ = 11,
-> +    GED_IRQ = 12,
->       VIRTIO_IRQ = 1, /* 1 to 8 */
->       VIRTIO_COUNT = 8,
->       PCIE_IRQ = 0x20, /* 32 to 35 */
+> +static bool trans_mop_rr_n(DisasContext *ctx, arg_mop_rr_n *a)
+> +{
+> +    REQUIRE_ZIMOP(ctx);
+> +    gen_set_gpr(ctx, a->rd, ctx->zero);
+> +    return true;
+> +}
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index 2c27fd4ce1..77c6564834 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -1097,6 +1097,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
+>   #include "insn_trans/trans_rvzacas.c.inc"
+>   #include "insn_trans/trans_rvzawrs.c.inc"
+>   #include "insn_trans/trans_rvzicbo.c.inc"
+> +#include "insn_trans/trans_rvzimop.c.inc"
+>   #include "insn_trans/trans_rvzfa.c.inc"
+>   #include "insn_trans/trans_rvzfh.c.inc"
+>   #include "insn_trans/trans_rvk.c.inc"
 
