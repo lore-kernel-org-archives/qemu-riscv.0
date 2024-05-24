@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F110C25B79
-	for <qemu-riscv@archiver.kernel.org>; Fri, 24 May 2024 06:15:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A778C25B79
+	for <qemu-riscv@archiver.kernel.org>; Fri, 24 May 2024 06:16:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sAODB-0002Rl-M4; Fri, 24 May 2024 02:15:29 -0400
+	id 1sAOCP-0001xC-Dl; Fri, 24 May 2024 02:14:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1sAOCs-0002Kg-WC
- for qemu-riscv@nongnu.org; Fri, 24 May 2024 02:15:13 -0400
-Received: from mail-pg1-x530.google.com ([2607:f8b0:4864:20::530])
+ id 1sAOCN-0001wX-W8
+ for qemu-riscv@nongnu.org; Fri, 24 May 2024 02:14:40 -0400
+Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1sAOCg-0001GS-1X
- for qemu-riscv@nongnu.org; Fri, 24 May 2024 02:15:10 -0400
-Received: by mail-pg1-x530.google.com with SMTP id
- 41be03b00d2f7-6819b3c92bbso406080a12.2
- for <qemu-riscv@nongnu.org>; Thu, 23 May 2024 23:14:57 -0700 (PDT)
+ id 1sAOCE-000174-I8
+ for qemu-riscv@nongnu.org; Fri, 24 May 2024 02:14:39 -0400
+Received: by mail-pf1-x433.google.com with SMTP id
+ d2e1a72fcca58-6f8e9878514so480720b3a.1
+ for <qemu-riscv@nongnu.org>; Thu, 23 May 2024 23:14:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1716531297; x=1717136097; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1716531269; x=1717136069; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=77QEVMRELZi8HUu5rAEqjjLVKC1iehF0W9sw1N8UasQ=;
- b=daAcQZxK/c3iEC/lBaBRRazsGRT0ziVAgNdibtEtUYYWy3tHDIrm7AkE1TyiVyuNUG
- /kZeqBtdZm65dio+Q0H9pGXo5BngeSYdVz4CbtSfbpLe2qw0oxZoCu2Ceygf8/lr/gYk
- oPfVobs39uL8jfd0+a5EMfWJZMN59ksKIvrDlXVR4JPQLyHXzYalrEmMIt7ctetWTZfj
- RXitfl/6wAw4FBY6a4/SU7SeqEYK7O32rlPkDZ+Jx/K+i9kP4EjUxwtLCFe6sYfYTE/p
- 9vQ/hjrXLgRk+PHzdkKWLqD5qRAGXL/yitGZc5QKOG+8ewLqrHh62FdJz58i6cVtLJjR
- 1zEQ==
+ bh=Etm0+s3up2JqM8ph6JUMLJUOz4fBS6haqZNSI55ovMA=;
+ b=D2I1knQprli65yKXO8Z/WtGjbprH02kfLHM3G/KV51DDnp8r9ovN1GKI6XDw5ZcZVS
+ m/aa0BB0xxwADRs6kC4cnYQCiCKvFRe2uVkrbOeb9D7KX52t4o5WUngsNRHTsRK60nyl
+ R0ezPBGf74Fv/h5CbduWZ3GRoa6pdx4VHOXtchUlaP21Z3wlLUGqIYSt99gArfXBbecZ
+ RFASGdNyTTLuMh4HLC0uTQOJTjemCUS68RyiH5l46J6dpLCLkUvKqY0NvdLBr4NSgAx1
+ 4IWrJ/G8OYXMYSGOKwkHiGLtgq7C5kSIfoXQv9iz0hvLb77hdUDie2ciI8GIO4nG5azO
+ TMnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716531297; x=1717136097;
+ d=1e100.net; s=20230601; t=1716531269; x=1717136069;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=77QEVMRELZi8HUu5rAEqjjLVKC1iehF0W9sw1N8UasQ=;
- b=fHO2mVS4zJuFWrPKwQ/mwTFn7TqGzgAyau+o8PTmMYULL/54oRrSo8d9yKxH+I/LQW
- TEo4WtuxnLJ0dB5v9GLudKeqZF/XDriP484X2OzddTxbRytZPUSxIrAobW2wip3MQPrb
- OoFky5QB7MH1qkKqdAriwTz+4TvL8/ajTTxJ+jQ9Egmd/vAv3PovqqMnGGuCHryicAjt
- ccgKnSW5XFbzYP0OGHbssRO9nyPr6C34pGFjDPylTAxrZO+EmB5henZPuXSxCd7q0rB4
- N7ia8uWkmlgbElKtb0Vy52+1hfo5sEr6rzHIkfeNhuovOXnLnFBqG6KNMg6+5TyvMGj2
- jlgg==
+ bh=Etm0+s3up2JqM8ph6JUMLJUOz4fBS6haqZNSI55ovMA=;
+ b=pnF8tXjrcQSVOlt9CxuUl1+yfippYe09CH+RwRwGPI0QlPbTqc2kdpNch5FQsMYlmO
+ bxU0rCtvV683MuVGSzkBFQt6yU/qXDbQnArCpjJq6pcGXzJhwHZNu4i8Or4CNTX6d5gV
+ LY9ritXLwILwFSvP8xvgEMdSulfDG1HsVoUp4fYIDdXpnfNCFuhZBp2mAEQckdiwZjCN
+ O+Z3H4+KGu2xCTnAt+H6e7GYyDAexIXfFXHUTPhdN8E5Ej4k/8gIVmBPY0rB37y48jjh
+ BdXfUXKK+Vd+3JNQhOz5Kws98MqpOprE3kLi7Q63VonyrW0gmhIuDt02aVFxIPW7251V
+ XDXA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVwQKbcsCy3Q0ijG1anYCe3lVpzX1POHBKd8erAwb0h3pQ+XDz6GIGz4CCCaMu4d9Dfm5pyCzXdgmBlu13kZYTgb5ISVvY=
-X-Gm-Message-State: AOJu0YxlzeAp3Rn2652ml4REi5HkkHw6Rvxcb+5fIFQn60mLbia+o//R
- jPwpKq0xgn17CTPArihXoojNOvhr3m4vOWQKC76nOqgcnjh0Yw4YbdxeRqblnZc=
-X-Google-Smtp-Source: AGHT+IHysr8kUZwcP/FKgi2tFUHzZz5O812ay4ztm0aTP+wsTRAoKYDcyo4tc7U1PoLtm6NhBG9JeQ==
-X-Received: by 2002:a05:6a20:6a1d:b0:1af:f939:8553 with SMTP id
- adf61e73a8af0-1b212df0a3fmr2084071637.46.1716531296708; 
- Thu, 23 May 2024 23:14:56 -0700 (PDT)
+ AJvYcCWD3a0yhB6HaGNMlLsh1awM6SIMljDOf4PR/ObOC9IegKp5MvjKrZdVOcshHrO9Y5nooDt5IanKkgzlmYtIO1P1bwkIy/0=
+X-Gm-Message-State: AOJu0YxjuWls5ZCOHFQhCYh5+cNOG6O+xcxHvAwB+rNk22gAkQkmlozM
+ DICJxV0S90YMmxMQBW89cZZiZT/yeIXq8+qV/zgC4XxPjJT14jHgmfgvFvu8PA8=
+X-Google-Smtp-Source: AGHT+IGwVVhlhxIFzhnIvWCicRAcK0IONx8TaPqZSRou32PXzOv5pxSXgnACNtBXkqi/Un+CgS5DVA==
+X-Received: by 2002:a05:6a00:4007:b0:6ed:21b2:cb17 with SMTP id
+ d2e1a72fcca58-6f8f2c6dd92mr1353636b3a.4.1716531268908; 
+ Thu, 23 May 2024 23:14:28 -0700 (PDT)
 Received: from sunil-pc.Dlink ([106.51.188.31])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-6f8fcbea487sm516106b3a.107.2024.05.23.23.14.50
+ d2e1a72fcca58-6f8fcbea487sm516106b3a.107.2024.05.23.23.14.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 May 2024 23:14:56 -0700 (PDT)
+ Thu, 23 May 2024 23:14:28 -0700 (PDT)
 From: Sunil V L <sunilvl@ventanamicro.com>
 To: qemu-devel@nongnu.org,
 	qemu-arm@nongnu.org,
@@ -80,25 +80,24 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>,
  Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>,
  Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Sunil V L <sunilvl@ventanamicro.com>,
- Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v2 05/12] tests/qtest/bios-tables-test.c: Add support for arch
- in path
-Date: Fri, 24 May 2024 11:44:04 +0530
-Message-Id: <20240524061411.341599-6-sunilvl@ventanamicro.com>
+ Sunil V L <sunilvl@ventanamicro.com>
+Subject: [PATCH v2 01/12] uefi-test-tools/UefiTestToolsPkg: Add RISC-V support
+Date: Fri, 24 May 2024 11:44:00 +0530
+Message-Id: <20240524061411.341599-2-sunilvl@ventanamicro.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20240524061411.341599-1-sunilvl@ventanamicro.com>
 References: <20240524061411.341599-1-sunilvl@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::530;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pg1-x530.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pf1-x433.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -114,130 +113,39 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Since virt machine is common for multiple architectures, add "arch" in
-the path to search expected AML files. Since the AML files are still
-under old path, support both by searching with and without arch in the
-path.
+Enable building the test application for RISC-V with appropriate
+dependencies updated.
 
 Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Acked-by: Gerd Hoffmann <kraxel@redhat.com>
 ---
- tests/qtest/bios-tables-test.c | 31 ++++++++++++++++++++++++++++---
- 1 file changed, 28 insertions(+), 3 deletions(-)
+ tests/uefi-test-tools/UefiTestToolsPkg/UefiTestToolsPkg.dsc | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/tests/qtest/bios-tables-test.c b/tests/qtest/bios-tables-test.c
-index c4a4d1c7bf..c73174ad00 100644
---- a/tests/qtest/bios-tables-test.c
-+++ b/tests/qtest/bios-tables-test.c
-@@ -78,6 +78,7 @@
- typedef struct {
-     bool tcg_only;
-     const char *machine;
-+    const char *arch;
-     const char *machine_param;
-     const char *variant;
-     const char *uefi_fl1;
-@@ -262,8 +263,19 @@ static void dump_aml_files(test_data *data, bool rebuild)
-         g_assert(exp_sdt->aml);
+diff --git a/tests/uefi-test-tools/UefiTestToolsPkg/UefiTestToolsPkg.dsc b/tests/uefi-test-tools/UefiTestToolsPkg/UefiTestToolsPkg.dsc
+index c8511cd732..0902fd3c73 100644
+--- a/tests/uefi-test-tools/UefiTestToolsPkg/UefiTestToolsPkg.dsc
++++ b/tests/uefi-test-tools/UefiTestToolsPkg/UefiTestToolsPkg.dsc
+@@ -19,7 +19,7 @@
+   PLATFORM_VERSION        = 0.1
+   PLATFORM_NAME           = UefiTestTools
+   SKUID_IDENTIFIER        = DEFAULT
+-  SUPPORTED_ARCHITECTURES = ARM|AARCH64|IA32|X64
++  SUPPORTED_ARCHITECTURES = ARM|AARCH64|IA32|X64|RISCV64
+   BUILD_TARGETS           = DEBUG
  
-         if (rebuild) {
--            aml_file = g_strdup_printf("%s/%s/%.4s%s", data_dir, data->machine,
-+            aml_file = g_strdup_printf("%s/%s/%s/%.4s%s", data_dir,
-+                                       data->machine, data->arch,
-                                        sdt->aml, ext);
-+
-+            /*
-+             * To keep test cases not failing when the DATA files are moved to
-+             * ARCH under virt folder, add this check as well.
-+             */
-+            if (!g_file_test(aml_file, G_FILE_TEST_EXISTS)) {
-+                aml_file = g_strdup_printf("%s/%s/%.4s%s", data_dir,
-+                                           data->machine, sdt->aml, ext);
-+            }
-+
-             if (!g_file_test(aml_file, G_FILE_TEST_EXISTS) &&
-                 sdt->aml_len == exp_sdt->aml_len &&
-                 !memcmp(sdt->aml, exp_sdt->aml, sdt->aml_len)) {
-@@ -398,8 +410,13 @@ static GArray *load_expected_aml(test_data *data)
-         memset(&exp_sdt, 0, sizeof(exp_sdt));
+ [BuildOptions.IA32]
+@@ -60,6 +60,10 @@
  
- try_again:
--        aml_file = g_strdup_printf("%s/%s/%.4s%s", data_dir, data->machine,
--                                   sdt->aml, ext);
-+        aml_file = g_strdup_printf("%s/%s/%s/%.4s%s", data_dir, data->machine,
-+                                   data->arch, sdt->aml, ext);
-+        if (!g_file_test(aml_file, G_FILE_TEST_EXISTS)) {
-+            aml_file = g_strdup_printf("%s/%s/%.4s%s", data_dir, data->machine,
-+                                       sdt->aml, ext);
-+        }
+ [LibraryClasses.IA32, LibraryClasses.X64]
+   BaseMemoryLib|MdePkg/Library/BaseMemoryLibRepStr/BaseMemoryLibRepStr.inf
++  RegisterFilterLib|MdePkg/Library/RegisterFilterLibNull/RegisterFilterLibNull.inf
 +
-         if (verbosity_level >= 2) {
-             fprintf(stderr, "Looking for expected file '%s'\n", aml_file);
-         }
-@@ -1574,6 +1591,7 @@ static void test_acpi_aarch64_virt_tcg_memhp(void)
- {
-     test_data data = {
-         .machine = "virt",
-+        .arch = "aarch64",
-         .tcg_only = true,
-         .uefi_fl1 = "pc-bios/edk2-aarch64-code.fd",
-         .uefi_fl2 = "pc-bios/edk2-arm-vars.fd",
-@@ -1667,6 +1685,7 @@ static void test_acpi_aarch64_virt_tcg_numamem(void)
- {
-     test_data data = {
-         .machine = "virt",
-+        .arch = "aarch64",
-         .tcg_only = true,
-         .uefi_fl1 = "pc-bios/edk2-aarch64-code.fd",
-         .uefi_fl2 = "pc-bios/edk2-arm-vars.fd",
-@@ -1689,6 +1708,7 @@ static void test_acpi_aarch64_virt_tcg_pxb(void)
- {
-     test_data data = {
-         .machine = "virt",
-+        .arch = "aarch64",
-         .tcg_only = true,
-         .uefi_fl1 = "pc-bios/edk2-aarch64-code.fd",
-         .uefi_fl2 = "pc-bios/edk2-arm-vars.fd",
-@@ -1762,6 +1782,7 @@ static void test_acpi_aarch64_virt_tcg_acpi_hmat(void)
- {
-     test_data data = {
-         .machine = "virt",
-+        .arch = "aarch64",
-         .tcg_only = true,
-         .uefi_fl1 = "pc-bios/edk2-aarch64-code.fd",
-         .uefi_fl2 = "pc-bios/edk2-arm-vars.fd",
-@@ -1918,6 +1939,7 @@ static void test_acpi_aarch64_virt_tcg(void)
- {
-     test_data data = {
-         .machine = "virt",
-+        .arch = "aarch64",
-         .tcg_only = true,
-         .uefi_fl1 = "pc-bios/edk2-aarch64-code.fd",
-         .uefi_fl2 = "pc-bios/edk2-arm-vars.fd",
-@@ -1937,6 +1959,7 @@ static void test_acpi_aarch64_virt_tcg_topology(void)
- {
-     test_data data = {
-         .machine = "virt",
-+        .arch = "aarch64",
-         .variant = ".topology",
-         .tcg_only = true,
-         .uefi_fl1 = "pc-bios/edk2-aarch64-code.fd",
-@@ -2020,6 +2043,7 @@ static void test_acpi_aarch64_virt_viot(void)
- {
-     test_data data = {
-         .machine = "virt",
-+        .arch = "aarch64",
-         .tcg_only = true,
-         .uefi_fl1 = "pc-bios/edk2-aarch64-code.fd",
-         .uefi_fl2 = "pc-bios/edk2-arm-vars.fd",
-@@ -2196,6 +2220,7 @@ static void test_acpi_aarch64_virt_oem_fields(void)
- {
-     test_data data = {
-         .machine = "virt",
-+        .arch = "aarch64",
-         .tcg_only = true,
-         .uefi_fl1 = "pc-bios/edk2-aarch64-code.fd",
-         .uefi_fl2 = "pc-bios/edk2-arm-vars.fd",
++[LibraryClasses.RISCV64]
++  BaseMemoryLib|MdePkg/Library/BaseMemoryLib/BaseMemoryLib.inf
+ 
+ [PcdsFixedAtBuild]
+   gEfiMdePkgTokenSpaceGuid.PcdDebugPrintErrorLevel|0x8040004F
 -- 
 2.40.1
 
