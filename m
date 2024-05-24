@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A778C25B79
-	for <qemu-riscv@archiver.kernel.org>; Fri, 24 May 2024 06:16:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C09DDC25B7D
+	for <qemu-riscv@archiver.kernel.org>; Fri, 24 May 2024 06:16:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sAOCP-0001xC-Dl; Fri, 24 May 2024 02:14:41 -0400
+	id 1sAODE-0002jU-Cu; Fri, 24 May 2024 02:15:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1sAOCN-0001wX-W8
- for qemu-riscv@nongnu.org; Fri, 24 May 2024 02:14:40 -0400
-Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
+ id 1sAOCy-0002NC-GN
+ for qemu-riscv@nongnu.org; Fri, 24 May 2024 02:15:17 -0400
+Received: from mail-oa1-x34.google.com ([2001:4860:4864:20::34])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1sAOCE-000174-I8
- for qemu-riscv@nongnu.org; Fri, 24 May 2024 02:14:39 -0400
-Received: by mail-pf1-x433.google.com with SMTP id
- d2e1a72fcca58-6f8e9878514so480720b3a.1
- for <qemu-riscv@nongnu.org>; Thu, 23 May 2024 23:14:30 -0700 (PDT)
+ id 1sAOCv-0001Kb-Fx
+ for qemu-riscv@nongnu.org; Fri, 24 May 2024 02:15:16 -0400
+Received: by mail-oa1-x34.google.com with SMTP id
+ 586e51a60fabf-2454154e53aso3778850fac.3
+ for <qemu-riscv@nongnu.org>; Thu, 23 May 2024 23:15:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1716531269; x=1717136069; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1716531311; x=1717136111; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Etm0+s3up2JqM8ph6JUMLJUOz4fBS6haqZNSI55ovMA=;
- b=D2I1knQprli65yKXO8Z/WtGjbprH02kfLHM3G/KV51DDnp8r9ovN1GKI6XDw5ZcZVS
- m/aa0BB0xxwADRs6kC4cnYQCiCKvFRe2uVkrbOeb9D7KX52t4o5WUngsNRHTsRK60nyl
- R0ezPBGf74Fv/h5CbduWZ3GRoa6pdx4VHOXtchUlaP21Z3wlLUGqIYSt99gArfXBbecZ
- RFASGdNyTTLuMh4HLC0uTQOJTjemCUS68RyiH5l46J6dpLCLkUvKqY0NvdLBr4NSgAx1
- 4IWrJ/G8OYXMYSGOKwkHiGLtgq7C5kSIfoXQv9iz0hvLb77hdUDie2ciI8GIO4nG5azO
- TMnQ==
+ bh=2sFSRuC8+CxMlP5PVNh1RPxJK2RXSojBm6McPGcyLX8=;
+ b=K/FOn/3/zAEnbbCQfIuTccMln61Hn9789BkVcuOYDyjwVstGAAPF6H0xFI70TMwO80
+ U8X4jSamAmtz3Skaqi1dXpFrwXnO1vNA+1/v2YthdJaqH3wdNORV5wl70RRoKw5Hoy1v
+ w7EaGXXgPUICupVF+QmTrByKcHRs+b0ZpX2sybthQXYXBQCS/zHb0BoAHsJ+U9sELXeh
+ Sm5voLjPGC4zdY5EOZK/38N9wkBRMUIt2LMaq2iY2bx4pKyQxj9MHbkDB6zUVrL8f7+c
+ co8R6gdzvVgJj9XJ4aPTF85+/c+KzVt6NsPPKU/2P527n2SemgqUqobQPV6FACRre65k
+ 48RA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716531269; x=1717136069;
+ d=1e100.net; s=20230601; t=1716531311; x=1717136111;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Etm0+s3up2JqM8ph6JUMLJUOz4fBS6haqZNSI55ovMA=;
- b=pnF8tXjrcQSVOlt9CxuUl1+yfippYe09CH+RwRwGPI0QlPbTqc2kdpNch5FQsMYlmO
- bxU0rCtvV683MuVGSzkBFQt6yU/qXDbQnArCpjJq6pcGXzJhwHZNu4i8Or4CNTX6d5gV
- LY9ritXLwILwFSvP8xvgEMdSulfDG1HsVoUp4fYIDdXpnfNCFuhZBp2mAEQckdiwZjCN
- O+Z3H4+KGu2xCTnAt+H6e7GYyDAexIXfFXHUTPhdN8E5Ej4k/8gIVmBPY0rB37y48jjh
- BdXfUXKK+Vd+3JNQhOz5Kws98MqpOprE3kLi7Q63VonyrW0gmhIuDt02aVFxIPW7251V
- XDXA==
+ bh=2sFSRuC8+CxMlP5PVNh1RPxJK2RXSojBm6McPGcyLX8=;
+ b=fjN0vU2ByvL9YGUV+p4DZtQO+w5b0ccewNWH9282LlmIMiy9j309EdAQ0ufe+ME+gP
+ UyDWrscDrle716gwJqs+HE1CgL4eBB9kHtIEOi6YgsvGjIea8M+bm84IyKcfdic22GZP
+ tvfar+cTOAfwRH74St8YJgO3lnRWFWwOTpHAHvOj6XcjJaMED2OFaXQQg0wJcqyD8Rb/
+ 7AdZq0daRKcl2xhbyFn4h4vv/TtguInrC8WTG+YrVnJ3ANj4pRkci1ZbaVF8k5QMKS9H
+ E0WPnbU0mdwW3qd8jrCf7N9+o6LgjI2rcRjOus8lS6RLCNp+M1HwyGgAWA9qo7l4QbbW
+ sn/A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWD3a0yhB6HaGNMlLsh1awM6SIMljDOf4PR/ObOC9IegKp5MvjKrZdVOcshHrO9Y5nooDt5IanKkgzlmYtIO1P1bwkIy/0=
-X-Gm-Message-State: AOJu0YxjuWls5ZCOHFQhCYh5+cNOG6O+xcxHvAwB+rNk22gAkQkmlozM
- DICJxV0S90YMmxMQBW89cZZiZT/yeIXq8+qV/zgC4XxPjJT14jHgmfgvFvu8PA8=
-X-Google-Smtp-Source: AGHT+IGwVVhlhxIFzhnIvWCicRAcK0IONx8TaPqZSRou32PXzOv5pxSXgnACNtBXkqi/Un+CgS5DVA==
-X-Received: by 2002:a05:6a00:4007:b0:6ed:21b2:cb17 with SMTP id
- d2e1a72fcca58-6f8f2c6dd92mr1353636b3a.4.1716531268908; 
- Thu, 23 May 2024 23:14:28 -0700 (PDT)
+ AJvYcCWEEJ6f/YFwYbeE7wZiICVd04g9NatwhbzyTqIH8IvBsy70NPumZkDMB6+zl4d3yiuHFC84Hxbus8WUgSVnt4+89pCII8I=
+X-Gm-Message-State: AOJu0Yw1d0PBPjR5wsvqVqQyGb7Pgt3l4cHJ82IGjiOYcXwzwv5fdCSl
+ U6OWfc0g5F7hWSrlaHJ8dFseXRZoYIk5Qhum+BTq2FwqdcA+Q6sLo9NEbQcMR8M=
+X-Google-Smtp-Source: AGHT+IFq9mGYMgGQ3biwrKf9GU227to/Vc80af/X6Miwmz2YD5gv28eIFIuWTu+ooDDizcmw0esAdw==
+X-Received: by 2002:a05:6871:112:b0:24c:5d25:ed48 with SMTP id
+ 586e51a60fabf-24ca14e1c25mr1500113fac.46.1716531310853; 
+ Thu, 23 May 2024 23:15:10 -0700 (PDT)
 Received: from sunil-pc.Dlink ([106.51.188.31])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-6f8fcbea487sm516106b3a.107.2024.05.23.23.14.22
+ d2e1a72fcca58-6f8fcbea487sm516106b3a.107.2024.05.23.23.15.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 May 2024 23:14:28 -0700 (PDT)
+ Thu, 23 May 2024 23:15:10 -0700 (PDT)
 From: Sunil V L <sunilvl@ventanamicro.com>
 To: qemu-devel@nongnu.org,
 	qemu-arm@nongnu.org,
@@ -80,17 +80,18 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>,
  Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>,
  Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Sunil V L <sunilvl@ventanamicro.com>
-Subject: [PATCH v2 01/12] uefi-test-tools/UefiTestToolsPkg: Add RISC-V support
-Date: Fri, 24 May 2024 11:44:00 +0530
-Message-Id: <20240524061411.341599-2-sunilvl@ventanamicro.com>
+ Sunil V L <sunilvl@ventanamicro.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH v2 07/12] meson.build: Add RISC-V to the edk2-target list
+Date: Fri, 24 May 2024 11:44:06 +0530
+Message-Id: <20240524061411.341599-8-sunilvl@ventanamicro.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20240524061411.341599-1-sunilvl@ventanamicro.com>
 References: <20240524061411.341599-1-sunilvl@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pf1-x433.google.com
+Received-SPF: pass client-ip=2001:4860:4864:20::34;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-oa1-x34.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -113,39 +114,27 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Enable building the test application for RISC-V with appropriate
-dependencies updated.
+so that ACPI table test can be supported.
 
 Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-Acked-by: Gerd Hoffmann <kraxel@redhat.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- tests/uefi-test-tools/UefiTestToolsPkg/UefiTestToolsPkg.dsc | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ meson.build | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/tests/uefi-test-tools/UefiTestToolsPkg/UefiTestToolsPkg.dsc b/tests/uefi-test-tools/UefiTestToolsPkg/UefiTestToolsPkg.dsc
-index c8511cd732..0902fd3c73 100644
---- a/tests/uefi-test-tools/UefiTestToolsPkg/UefiTestToolsPkg.dsc
-+++ b/tests/uefi-test-tools/UefiTestToolsPkg/UefiTestToolsPkg.dsc
-@@ -19,7 +19,7 @@
-   PLATFORM_VERSION        = 0.1
-   PLATFORM_NAME           = UefiTestTools
-   SKUID_IDENTIFIER        = DEFAULT
--  SUPPORTED_ARCHITECTURES = ARM|AARCH64|IA32|X64
-+  SUPPORTED_ARCHITECTURES = ARM|AARCH64|IA32|X64|RISCV64
-   BUILD_TARGETS           = DEBUG
+diff --git a/meson.build b/meson.build
+index a9de71d450..576c803a8a 100644
+--- a/meson.build
++++ b/meson.build
+@@ -93,7 +93,7 @@ else
+   iasl = find_program(get_option('iasl'), required: true)
+ endif
  
- [BuildOptions.IA32]
-@@ -60,6 +60,10 @@
- 
- [LibraryClasses.IA32, LibraryClasses.X64]
-   BaseMemoryLib|MdePkg/Library/BaseMemoryLibRepStr/BaseMemoryLibRepStr.inf
-+  RegisterFilterLib|MdePkg/Library/RegisterFilterLibNull/RegisterFilterLibNull.inf
-+
-+[LibraryClasses.RISCV64]
-+  BaseMemoryLib|MdePkg/Library/BaseMemoryLib/BaseMemoryLib.inf
- 
- [PcdsFixedAtBuild]
-   gEfiMdePkgTokenSpaceGuid.PcdDebugPrintErrorLevel|0x8040004F
+-edk2_targets = [ 'arm-softmmu', 'aarch64-softmmu', 'i386-softmmu', 'x86_64-softmmu' ]
++edk2_targets = [ 'arm-softmmu', 'aarch64-softmmu', 'i386-softmmu', 'x86_64-softmmu', 'riscv64-softmmu' ]
+ unpack_edk2_blobs = false
+ foreach target : edk2_targets
+   if target in target_dirs
 -- 
 2.40.1
 
