@@ -4,66 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9130C25B74
-	for <qemu-riscv@archiver.kernel.org>; Mon, 27 May 2024 11:49:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 148E6C25B7C
+	for <qemu-riscv@archiver.kernel.org>; Mon, 27 May 2024 12:00:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sBYr5-0000m9-9B; Mon, 27 May 2024 07:49:31 -0400
+	id 1sBZ1c-0005jk-RY; Mon, 27 May 2024 08:00:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bjorn@kernel.org>)
- id 1sBYr3-0000lN-4N; Mon, 27 May 2024 07:49:29 -0400
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bjorn@kernel.org>)
- id 1sBYqz-0004v8-6x; Mon, 27 May 2024 07:49:27 -0400
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 71D026164B;
- Mon, 27 May 2024 11:49:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D8139C32781;
- Mon, 27 May 2024 11:49:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1716810556;
- bh=ANc93QpJU98kip+ce/cUfXu1x9xaQYAdf5V6F0ChfKg=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=TEcQWe5ObqSvEjnk52pqhipPWYk38kt1Ppo0bQk3hdlc+lafBIuv2RKY+hhUmnuL3
- zhD5hXqd5tdcQEZm6jtJOh7evKc8mtXxe1goGedk1XejaD/hrx4HRw22/DE7+Ov2fv
- r468CMQ1JoewfxaTwH8A/FW8O802Rxcl0sGXZ/V2QPiUaUvVwOWgcQKWbYU4AzY5VE
- 1mjigHVNTIyHOq6ZMFc4ubEc6NxkvAvKwoVTyk8CZGTcfIrqj4Cz99+SdKvP8R/237
- v45fSQRiF9ba3wzG20eTkcrfCZJpr24KqeUAzI7pWPlvKNHka8/BJ4D7EqBK8NGCm+
- RP7IbFJ+j3HdQ==
-From: =?utf-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, Palmer Dabbelt
- <palmer@dabbelt.com>, Alistair Francis <alistair.francis@wdc.com>, Bin
- Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei
- <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, David Hildenbrand <david@redhat.com>, Atish Patra
- <atishp@atishpatra.org>, Atish Patra <atishp@rivosinc.com>
-Cc: =?utf-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@rivosinc.com>, Sunil V L
- <sunilvl@ventanamicro.com>,
- Santosh Mamila <santosh.mamila@catalinasystems.io>, Chethan Seshadri
- <Chethan.Seshadri@catalinasystems.io>, Sivakumar Munnangi
- <siva.munnangi@catalinasystems.io>
-Subject: Re: [PATCH v2 1/3] hw/riscv/virt: Add memory hotplugging and
- virtio-md-pci support
-In-Reply-To: <f1513236-867f-4780-a51f-81b5ac91a485@ventanamicro.com>
-References: <20240521105635.795211-1-bjorn@kernel.org>
- <20240521105635.795211-2-bjorn@kernel.org>
- <f1513236-867f-4780-a51f-81b5ac91a485@ventanamicro.com>
-Date: Mon, 27 May 2024 13:49:11 +0200
-Message-ID: <87y17v8og8.fsf@all.your.base.are.belong.to.us>
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1sBZ1a-0005i0-5f
+ for qemu-riscv@nongnu.org; Mon, 27 May 2024 08:00:22 -0400
+Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1sBZ1V-0006xr-Gf
+ for qemu-riscv@nongnu.org; Mon, 27 May 2024 08:00:21 -0400
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-1f480624d10so10571465ad.1
+ for <qemu-riscv@nongnu.org>; Mon, 27 May 2024 05:00:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1716811214; x=1717416014; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=bUMELmB0AYitfjmLpnYSQijz+Wxrl9Ft/d8gLORCOVE=;
+ b=bRCTbptirckjHeThpmalbFXuwv0vJ5UVhU5rW0mqMlT6kdbnLWevIMPolWTH0ZkNVr
+ dncBVN0rnFdPmuQS4VHdHtVC6T6zcy99+N+vL+xdpdiG2d+OrqshVmIUgx3t7w3Wd9bm
+ ZTecOC7njLd5/rOGDsElisLgFu11ThMRNCYvbk1RiuHp+4p1azwjpLKSHXrVUGjYZRGV
+ ump/eor1lqUXZZUIkI58w7rlaFIPLZfWJS7NQkDdGmdeZfZuHxut6vVQvDSNPecMkt7D
+ eX63voxkumUe2jisS9C85HlRxQNobT6Sxj/CuZ7eFoRVu3VtVU2EM3MS0WZheqCicBAw
+ zY3g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1716811214; x=1717416014;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=bUMELmB0AYitfjmLpnYSQijz+Wxrl9Ft/d8gLORCOVE=;
+ b=Qkoxwv6CxDfQm8+GaRbAIAq25pKv2ANOcVLEBNgiX1SzDPAPxMYtLmSJJNo5X0Lcfg
+ /QAFjbpeFs0S7izTy++caawVB2k4p+jAuVxqggCKDjS8mgcEKDdB3wErAsNcoqkBq4EY
+ AuzjDdp4cDwiES8CUxbIo3EpqLw+La9ovw0jOtn3x1UQIzVSG7U8dovqc5mU/V82FLdH
+ gbgh7CRnOLFJXESzQ9a60nvllnJ+qOqyD58zViZ4kKo0y0FipEfrBhKW11B4eVzcNf+8
+ sT5xYKgPAW1xiEhTBTV9sFr3669/EFoo267vErZcULVIDQgEqwQcaa/vLCkn11lDB5FL
+ veYw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUKohBsAernc9FI9RbSjCnnGqP4IcQDq4wPHubgmu7wOcmPKps0JxWaT+XfpEN24vhKF883K4NvKXKF+KNEjmkPvEWZvXc=
+X-Gm-Message-State: AOJu0Yx71w6MFQOFblS3/x6altDmxi4d7RFDUVgZhul5gjRUmn5+La3o
+ ffZ6zZz3RzuYbMr4pY2RvBZoahojF8jrELKra0zbbOGWYJoVIN2Tg/YKZDzexqc=
+X-Google-Smtp-Source: AGHT+IGF/eFkUpfio/mKSJV/DfREeUqqEIrL3K+TY+D4xse1CXFuvHGjgoGdv6vDGoFX3VO7UTow/g==
+X-Received: by 2002:a17:902:cecd:b0:1f3:35e8:d309 with SMTP id
+ d9443c01a7336-1f4486d9f35mr101016925ad.20.1716811213906; 
+ Mon, 27 May 2024 05:00:13 -0700 (PDT)
+Received: from ?IPV6:2804:7f0:bdcd:fb00:6501:2693:db52:c621?
+ ([2804:7f0:bdcd:fb00:6501:2693:db52:c621])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-1f44c75e691sm59418335ad.42.2024.05.27.05.00.10
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 27 May 2024 05:00:13 -0700 (PDT)
+Message-ID: <610baa0c-1416-420b-8a89-4f233f5667ad@ventanamicro.com>
+Date: Mon, 27 May 2024 09:00:09 -0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=139.178.84.217; envelope-from=bjorn@kernel.org;
- helo=dfw.source.kernel.org
-X-Spam_score_int: -70
-X-Spam_score: -7.1
-X-Spam_bar: -------
-X-Spam_report: (-7.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.034,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_HI=-5, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 1/4] target/riscv/kvm: add software breakpoints support
+To: Chao Du <duchao@eswincomputing.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, pbonzini@redhat.com, alistair23@gmail.com,
+ bin.meng@windriver.com, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com,
+ palmer@dabbelt.com, anup@brainfault.org, duchao713@qq.com
+References: <20240527021916.12953-1-duchao@eswincomputing.com>
+ <20240527021916.12953-2-duchao@eswincomputing.com>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20240527021916.12953-2-duchao@eswincomputing.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x632.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -80,87 +101,296 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Daniel Henrique Barboza <dbarboza@ventanamicro.com> writes:
-
-> On 5/21/24 07:56, Bj=C3=B6rn T=C3=B6pel wrote:
->> From: Bj=C3=B6rn T=C3=B6pel <bjorn@rivosinc.com>
->>=20
->> Virtio-based memory devices (virtio-mem/virtio-pmem) allows for
->> dynamic resizing of virtual machine memory, and requires proper
->> hotplugging (add/remove) support to work.
->>=20
->> Add device memory support for RISC-V "virt" machine, and enable
->> virtio-md-pci with the corresponding missing hotplugging callbacks.
->>=20
->> Signed-off-by: Bj=C3=B6rn T=C3=B6pel <bjorn@rivosinc.com>
->> ---
->>   hw/riscv/Kconfig       |  2 +
->>   hw/riscv/virt.c        | 83 +++++++++++++++++++++++++++++++++++++++++-
->>   hw/virtio/virtio-mem.c |  5 ++-
->>   3 files changed, 87 insertions(+), 3 deletions(-)
->>=20
->> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
->> index a2030e3a6ff0..08f82dbb681a 100644
->> --- a/hw/riscv/Kconfig
->> +++ b/hw/riscv/Kconfig
->> @@ -56,6 +56,8 @@ config RISCV_VIRT
->>       select PLATFORM_BUS
->>       select ACPI
->>       select ACPI_PCI
->> +    select VIRTIO_MEM_SUPPORTED
->> +    select VIRTIO_PMEM_SUPPORTED
->>=20=20=20
->>   config SHAKTI_C
->>       bool
->> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
->> index 4fdb66052587..443902f919d2 100644
->> --- a/hw/riscv/virt.c
->> +++ b/hw/riscv/virt.c
->> @@ -53,6 +53,8 @@
->>   #include "hw/pci-host/gpex.h"
->>   #include "hw/display/ramfb.h"
->>   #include "hw/acpi/aml-build.h"
->> +#include "hw/mem/memory-device.h"
->> +#include "hw/virtio/virtio-mem-pci.h"
->>   #include "qapi/qapi-visit-common.h"
->>   #include "hw/virtio/virtio-iommu.h"
->>=20=20=20
->> @@ -1407,6 +1409,7 @@ static void virt_machine_init(MachineState *machin=
-e)
->>       DeviceState *mmio_irqchip, *virtio_irqchip, *pcie_irqchip;
->>       int i, base_hartid, hart_count;
->>       int socket_count =3D riscv_socket_count(machine);
->> +    hwaddr device_memory_base, device_memory_size;
->>=20=20=20
->>       /* Check socket count limit */
->>       if (VIRT_SOCKETS_MAX < socket_count) {
->> @@ -1420,6 +1423,12 @@ static void virt_machine_init(MachineState *machi=
-ne)
->>           exit(1);
->>       }
->>=20=20=20
->> +    if (machine->ram_slots > ACPI_MAX_RAM_SLOTS) {
->> +        error_report("unsupported amount of memory slots: %"PRIu64,
->> +                     machine->ram_slots);
->
-> Let's also add the maximum amount allowed in this message, e.g. this erro=
-r:
->
-> $ (...) -m 2G,slots=3D512,maxmem=3D8G
-> qemu-system-riscv64: unsupported amount of memory slots: 512
->
-> could be something like:
->
-> qemu-system-riscv64: unsupported amount of memory slots (512), maximum am=
-ount: 256
->
->
-> LGTM otherwise. Thanks,
-
-Thanks for getting back!
-
-Sure! I'll fix this in the next rev.
 
 
-Bj=C3=B6rn
+On 5/26/24 23:19, Chao Du wrote:
+> This patch implements insert/remove software breakpoint process:
+> 
+> Add an input parameter for kvm_arch_insert_sw_breakpoint() and
+> kvm_arch_remove_sw_breakpoint() to pass the length information,
+> which helps us to know whether it is a RVC instruction.
+> For some remove cases, we do not have the length info, so we need
+> to judge by ourselves.
+> 
+> For RISC-V, GDB treats single-step similarly to breakpoint: add a
+> breakpoint at the next step address, then continue. So this also
+> works for single-step debugging.
+> 
+> Add some stubs which are necessary for building, and will be
+> implemented later.
+> 
+> Signed-off-by: Chao Du <duchao@eswincomputing.com>
+> ---
+
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+
+>   accel/kvm/kvm-all.c        |  8 ++--
+>   include/sysemu/kvm.h       |  6 ++-
+>   target/arm/kvm.c           |  6 ++-
+>   target/i386/kvm/kvm.c      |  6 ++-
+>   target/mips/kvm.c          |  6 ++-
+>   target/ppc/kvm.c           |  6 ++-
+>   target/riscv/kvm/kvm-cpu.c | 79 ++++++++++++++++++++++++++++++++++++++
+>   target/s390x/kvm/kvm.c     |  6 ++-
+>   8 files changed, 107 insertions(+), 16 deletions(-)
+> 
+> diff --git a/accel/kvm/kvm-all.c b/accel/kvm/kvm-all.c
+> index c0be9f5eed..d27e77dbb2 100644
+> --- a/accel/kvm/kvm-all.c
+> +++ b/accel/kvm/kvm-all.c
+> @@ -3357,7 +3357,7 @@ int kvm_insert_breakpoint(CPUState *cpu, int type, vaddr addr, vaddr len)
+>           bp = g_new(struct kvm_sw_breakpoint, 1);
+>           bp->pc = addr;
+>           bp->use_count = 1;
+> -        err = kvm_arch_insert_sw_breakpoint(cpu, bp);
+> +        err = kvm_arch_insert_sw_breakpoint(cpu, bp, len);
+>           if (err) {
+>               g_free(bp);
+>               return err;
+> @@ -3396,7 +3396,7 @@ int kvm_remove_breakpoint(CPUState *cpu, int type, vaddr addr, vaddr len)
+>               return 0;
+>           }
+>   
+> -        err = kvm_arch_remove_sw_breakpoint(cpu, bp);
+> +        err = kvm_arch_remove_sw_breakpoint(cpu, bp, len);
+>           if (err) {
+>               return err;
+>           }
+> @@ -3426,10 +3426,10 @@ void kvm_remove_all_breakpoints(CPUState *cpu)
+>       CPUState *tmpcpu;
+>   
+>       QTAILQ_FOREACH_SAFE(bp, &s->kvm_sw_breakpoints, entry, next) {
+> -        if (kvm_arch_remove_sw_breakpoint(cpu, bp) != 0) {
+> +        if (kvm_arch_remove_sw_breakpoint(cpu, bp, 0) != 0) {
+>               /* Try harder to find a CPU that currently sees the breakpoint. */
+>               CPU_FOREACH(tmpcpu) {
+> -                if (kvm_arch_remove_sw_breakpoint(tmpcpu, bp) == 0) {
+> +                if (kvm_arch_remove_sw_breakpoint(tmpcpu, bp, 0) == 0) {
+>                       break;
+>                   }
+>               }
+> diff --git a/include/sysemu/kvm.h b/include/sysemu/kvm.h
+> index c31d9c7356..340e094ffb 100644
+> --- a/include/sysemu/kvm.h
+> +++ b/include/sysemu/kvm.h
+> @@ -391,9 +391,11 @@ struct kvm_sw_breakpoint *kvm_find_sw_breakpoint(CPUState *cpu,
+>   int kvm_sw_breakpoints_active(CPUState *cpu);
+>   
+>   int kvm_arch_insert_sw_breakpoint(CPUState *cpu,
+> -                                  struct kvm_sw_breakpoint *bp);
+> +                                  struct kvm_sw_breakpoint *bp,
+> +                                  vaddr len);
+>   int kvm_arch_remove_sw_breakpoint(CPUState *cpu,
+> -                                  struct kvm_sw_breakpoint *bp);
+> +                                  struct kvm_sw_breakpoint *bp,
+> +                                  vaddr len);
+>   int kvm_arch_insert_hw_breakpoint(vaddr addr, vaddr len, int type);
+>   int kvm_arch_remove_hw_breakpoint(vaddr addr, vaddr len, int type);
+>   void kvm_arch_remove_all_hw_breakpoints(void);
+> diff --git a/target/arm/kvm.c b/target/arm/kvm.c
+> index 7cf5cf31de..84593db544 100644
+> --- a/target/arm/kvm.c
+> +++ b/target/arm/kvm.c
+> @@ -2402,7 +2402,8 @@ void kvm_arch_on_sigbus_vcpu(CPUState *c, int code, void *addr)
+>   /* C6.6.29 BRK instruction */
+>   static const uint32_t brk_insn = 0xd4200000;
+>   
+> -int kvm_arch_insert_sw_breakpoint(CPUState *cs, struct kvm_sw_breakpoint *bp)
+> +int kvm_arch_insert_sw_breakpoint(CPUState *cs, struct kvm_sw_breakpoint *bp,
+> +                                  vaddr len)
+>   {
+>       if (cpu_memory_rw_debug(cs, bp->pc, (uint8_t *)&bp->saved_insn, 4, 0) ||
+>           cpu_memory_rw_debug(cs, bp->pc, (uint8_t *)&brk_insn, 4, 1)) {
+> @@ -2411,7 +2412,8 @@ int kvm_arch_insert_sw_breakpoint(CPUState *cs, struct kvm_sw_breakpoint *bp)
+>       return 0;
+>   }
+>   
+> -int kvm_arch_remove_sw_breakpoint(CPUState *cs, struct kvm_sw_breakpoint *bp)
+> +int kvm_arch_remove_sw_breakpoint(CPUState *cs, struct kvm_sw_breakpoint *bp,
+> +                                  vaddr len)
+>   {
+>       static uint32_t brk;
+>   
+> diff --git a/target/i386/kvm/kvm.c b/target/i386/kvm/kvm.c
+> index c5943605ee..6449f796d0 100644
+> --- a/target/i386/kvm/kvm.c
+> +++ b/target/i386/kvm/kvm.c
+> @@ -4992,7 +4992,8 @@ static int kvm_handle_tpr_access(X86CPU *cpu)
+>       return 1;
+>   }
+>   
+> -int kvm_arch_insert_sw_breakpoint(CPUState *cs, struct kvm_sw_breakpoint *bp)
+> +int kvm_arch_insert_sw_breakpoint(CPUState *cs, struct kvm_sw_breakpoint *bp,
+> +                                  vaddr len)
+>   {
+>       static const uint8_t int3 = 0xcc;
+>   
+> @@ -5003,7 +5004,8 @@ int kvm_arch_insert_sw_breakpoint(CPUState *cs, struct kvm_sw_breakpoint *bp)
+>       return 0;
+>   }
+>   
+> -int kvm_arch_remove_sw_breakpoint(CPUState *cs, struct kvm_sw_breakpoint *bp)
+> +int kvm_arch_remove_sw_breakpoint(CPUState *cs, struct kvm_sw_breakpoint *bp,
+> +                                  vaddr len)
+>   {
+>       uint8_t int3;
+>   
+> diff --git a/target/mips/kvm.c b/target/mips/kvm.c
+> index a631ab544f..129964cf6d 100644
+> --- a/target/mips/kvm.c
+> +++ b/target/mips/kvm.c
+> @@ -111,13 +111,15 @@ void kvm_mips_reset_vcpu(MIPSCPU *cpu)
+>       DPRINTF("%s\n", __func__);
+>   }
+>   
+> -int kvm_arch_insert_sw_breakpoint(CPUState *cs, struct kvm_sw_breakpoint *bp)
+> +int kvm_arch_insert_sw_breakpoint(CPUState *cs, struct kvm_sw_breakpoint *bp,
+> +                                  vaddr len)
+>   {
+>       DPRINTF("%s\n", __func__);
+>       return 0;
+>   }
+>   
+> -int kvm_arch_remove_sw_breakpoint(CPUState *cs, struct kvm_sw_breakpoint *bp)
+> +int kvm_arch_remove_sw_breakpoint(CPUState *cs, struct kvm_sw_breakpoint *bp,
+> +                                  vaddr len)
+>   {
+>       DPRINTF("%s\n", __func__);
+>       return 0;
+> diff --git a/target/ppc/kvm.c b/target/ppc/kvm.c
+> index 46fccff786..9b76bdaa05 100644
+> --- a/target/ppc/kvm.c
+> +++ b/target/ppc/kvm.c
+> @@ -1378,7 +1378,8 @@ static int kvmppc_handle_dcr_write(CPUPPCState *env,
+>       return 0;
+>   }
+>   
+> -int kvm_arch_insert_sw_breakpoint(CPUState *cs, struct kvm_sw_breakpoint *bp)
+> +int kvm_arch_insert_sw_breakpoint(CPUState *cs, struct kvm_sw_breakpoint *bp,
+> +                                  vaddr len)
+>   {
+>       /* Mixed endian case is not handled */
+>       uint32_t sc = debug_inst_opcode;
+> @@ -1392,7 +1393,8 @@ int kvm_arch_insert_sw_breakpoint(CPUState *cs, struct kvm_sw_breakpoint *bp)
+>       return 0;
+>   }
+>   
+> -int kvm_arch_remove_sw_breakpoint(CPUState *cs, struct kvm_sw_breakpoint *bp)
+> +int kvm_arch_remove_sw_breakpoint(CPUState *cs, struct kvm_sw_breakpoint *bp,
+> +                                  vaddr len)
+>   {
+>       uint32_t sc;
+>   
+> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+> index 473416649f..cba55c552d 100644
+> --- a/target/riscv/kvm/kvm-cpu.c
+> +++ b/target/riscv/kvm/kvm-cpu.c
+> @@ -1962,3 +1962,82 @@ static const TypeInfo riscv_kvm_cpu_type_infos[] = {
+>   };
+>   
+>   DEFINE_TYPES(riscv_kvm_cpu_type_infos)
+> +
+> +static const uint32_t ebreak_insn = 0x00100073;
+> +static const uint16_t c_ebreak_insn = 0x9002;
+> +
+> +int kvm_arch_insert_sw_breakpoint(CPUState *cs, struct kvm_sw_breakpoint *bp,
+> +                                  vaddr len)
+> +{
+> +    if (len != 4 && len != 2) {
+> +        return -EINVAL;
+> +    }
+> +
+> +    uint8_t * insn = (len == 4) ? (uint8_t *)&ebreak_insn :
+> +                                  (uint8_t *)&c_ebreak_insn;
+> +
+> +    if (cpu_memory_rw_debug(cs, bp->pc, (uint8_t *)&bp->saved_insn, len, 0) ||
+> +        cpu_memory_rw_debug(cs, bp->pc, insn, len, 1)) {
+> +        return -EINVAL;
+> +    }
+> +
+> +    return 0;
+> +}
+> +
+> +int kvm_arch_remove_sw_breakpoint(CPUState *cs, struct kvm_sw_breakpoint *bp,
+> +                                  vaddr len)
+> +{
+> +    uint8_t length;
+> +
+> +    if (len == 4 || len == 2) {
+> +        length = (uint8_t)len;
+> +    } else if (len == 0) {
+> +        /* Need to decide the instruction length in this case. */
+> +        uint32_t read_4_bytes;
+> +        uint16_t read_2_bytes;
+> +
+> +        if (cpu_memory_rw_debug(cs, bp->pc, (uint8_t *)&read_4_bytes, 4, 0) ||
+> +            cpu_memory_rw_debug(cs, bp->pc, (uint8_t *)&read_2_bytes, 2, 0)) {
+> +            return -EINVAL;
+> +        }
+> +
+> +        if (read_4_bytes == ebreak_insn) {
+> +            length = 4;
+> +        } else if (read_2_bytes == c_ebreak_insn) {
+> +            length = 2;
+> +        } else {
+> +            return -EINVAL;
+> +        }
+> +    } else {
+> +        return -EINVAL;
+> +    }
+> +
+> +    if (cpu_memory_rw_debug(cs, bp->pc, (uint8_t *)&bp->saved_insn,
+> +                            length, 1)) {
+> +        return -EINVAL;
+> +    }
+> +
+> +    return 0;
+> +}
+> +
+> +int kvm_arch_insert_hw_breakpoint(vaddr addr, vaddr len, int type)
+> +{
+> +    /* TODO; To be implemented later. */
+> +    return -EINVAL;
+> +}
+> +
+> +int kvm_arch_remove_hw_breakpoint(vaddr addr, vaddr len, int type)
+> +{
+> +    /* TODO; To be implemented later. */
+> +    return -EINVAL;
+> +}
+> +
+> +void kvm_arch_remove_all_hw_breakpoints(void)
+> +{
+> +    /* TODO; To be implemented later. */
+> +}
+> +
+> +void kvm_arch_update_guest_debug(CPUState *cs, struct kvm_guest_debug *dbg)
+> +{
+> +    /* TODO; To be implemented later. */
+> +}
+> diff --git a/target/s390x/kvm/kvm.c b/target/s390x/kvm/kvm.c
+> index 1b494ecc20..132952cc84 100644
+> --- a/target/s390x/kvm/kvm.c
+> +++ b/target/s390x/kvm/kvm.c
+> @@ -865,7 +865,8 @@ static void determine_sw_breakpoint_instr(void)
+>           }
+>   }
+>   
+> -int kvm_arch_insert_sw_breakpoint(CPUState *cs, struct kvm_sw_breakpoint *bp)
+> +int kvm_arch_insert_sw_breakpoint(CPUState *cs, struct kvm_sw_breakpoint *bp,
+> +                                  vaddr len)
+>   {
+>       determine_sw_breakpoint_instr();
+>   
+> @@ -877,7 +878,8 @@ int kvm_arch_insert_sw_breakpoint(CPUState *cs, struct kvm_sw_breakpoint *bp)
+>       return 0;
+>   }
+>   
+> -int kvm_arch_remove_sw_breakpoint(CPUState *cs, struct kvm_sw_breakpoint *bp)
+> +int kvm_arch_remove_sw_breakpoint(CPUState *cs, struct kvm_sw_breakpoint *bp,
+> +                                  vaddr len)
+>   {
+>       uint8_t t[MAX_ILEN];
+>   
 
