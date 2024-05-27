@@ -4,98 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B291C25B74
-	for <qemu-riscv@archiver.kernel.org>; Mon, 27 May 2024 10:12:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9130C25B74
+	for <qemu-riscv@archiver.kernel.org>; Mon, 27 May 2024 11:49:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sBXL2-0000tr-2E; Mon, 27 May 2024 06:12:20 -0400
+	id 1sBYr5-0000m9-9B; Mon, 27 May 2024 07:49:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1sBXL0-0000sp-4i
- for qemu-riscv@nongnu.org; Mon, 27 May 2024 06:12:18 -0400
-Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1sBXKy-0003Ae-IH
- for qemu-riscv@nongnu.org; Mon, 27 May 2024 06:12:17 -0400
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-3588cb76276so500411f8f.0
- for <qemu-riscv@nongnu.org>; Mon, 27 May 2024 03:12:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1716804735; x=1717409535; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=hejdxdT776/YXS6vd7fdFoEy259e/wrDau3iwUXTDU8=;
- b=AA9rp+913GFa4aMmYTGmfAgf3chrNzIJTjzmFrcKiho2BGrm+wux+T+uw/JcnLIwHs
- 6mHPuxW/VB5HeXXVEwQk13w0mIQa9Y8Y447rPMrjXLCgwUh+x2xrTazqYGGZZrbD0vXJ
- l3DSw4QJLpGOxQLl5fL7Sv3K6/YRY5B9bi0oWPoRxkA3kOrFxFYXV6QLDrLWm+qIsxc+
- Z6NVGch8GDbXR7oKLiUIqF594iHhh5gyZ/mRHIiTrC6jHyLXdFZ0TY0KoW4j7drMQ57U
- m7VbjDAhLeZMHbZSCdz/w1gfzae/0IwuztKPSjKNEseqdyZDJ32fwlaQYr9Rb9/g4f8d
- G05w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716804735; x=1717409535;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=hejdxdT776/YXS6vd7fdFoEy259e/wrDau3iwUXTDU8=;
- b=CgNd0eiKonzG9q/r4URsSrf+pSFoZnFzxbLqDyy7DXKIkdfDS07RDo0nYv0D72tNue
- WQwzz/fIj8nQnHMmf4LVm5lS6WvLJkvSLKP2VSWXGFvAdptkBFp2V9Ny/y6FoKlOksDL
- eYnnk7MHkVIUGFiiArvueyTkjP661bMK0qGiwguxvW259QkH7CcefbRDcKPaPJkOX6Oi
- gCaokjvrXA9yzCiTaAnLcLEsOqY5XKk/IL/BEf2YjgxGYqmInqUvzZoWdWGpjhX78+/N
- Bb0UlLIq2kHyMr3BJLCAJhyxQPp/1cGY0kF5AhXTAYtNyVEm1/yIMYKewE0yhbnxXZHu
- nrfw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW4vcS2TG7m4guYMCsR1C4YRRGGuhVvCATaCGmdCOr+r4elR1W3ExLxlqj6PeWJ61AcHAILkx70DdA2yfmSQA3rqHdFMUE=
-X-Gm-Message-State: AOJu0YxrgPoqmSRSoq8uYUk9aK1Qso8i8/ueD+tOMmgZqOrgFak4WUs6
- BycXT/+5FevAGoOum/QzXmer5WNOQrblZ6eD/btdO5fb4yWFsM8L7IlGbA7V2Do=
-X-Google-Smtp-Source: AGHT+IEdaIdDS/9O4rNxD8V9/HhXLgYxs06Dsg/AtvR8o/qCmCzDuFQ02qQBlUoX3xJz3GijLsRpKA==
-X-Received: by 2002:a05:6000:11cf:b0:351:debf:a39e with SMTP id
- ffacd0b85a97d-354f757d1a5mr10775266f8f.27.1716804734715; 
- Mon, 27 May 2024 03:12:14 -0700 (PDT)
-Received: from [192.168.69.100] ([176.176.152.134])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-35586a15f7csm8663904f8f.94.2024.05.27.03.12.12
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 May 2024 03:12:14 -0700 (PDT)
-Message-ID: <27cef750-262a-402a-97fe-c4a55700a376@linaro.org>
-Date: Mon, 27 May 2024 12:12:10 +0200
+ (Exim 4.90_1) (envelope-from <bjorn@kernel.org>)
+ id 1sBYr3-0000lN-4N; Mon, 27 May 2024 07:49:29 -0400
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <bjorn@kernel.org>)
+ id 1sBYqz-0004v8-6x; Mon, 27 May 2024 07:49:27 -0400
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 71D026164B;
+ Mon, 27 May 2024 11:49:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D8139C32781;
+ Mon, 27 May 2024 11:49:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1716810556;
+ bh=ANc93QpJU98kip+ce/cUfXu1x9xaQYAdf5V6F0ChfKg=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=TEcQWe5ObqSvEjnk52pqhipPWYk38kt1Ppo0bQk3hdlc+lafBIuv2RKY+hhUmnuL3
+ zhD5hXqd5tdcQEZm6jtJOh7evKc8mtXxe1goGedk1XejaD/hrx4HRw22/DE7+Ov2fv
+ r468CMQ1JoewfxaTwH8A/FW8O802Rxcl0sGXZ/V2QPiUaUvVwOWgcQKWbYU4AzY5VE
+ 1mjigHVNTIyHOq6ZMFc4ubEc6NxkvAvKwoVTyk8CZGTcfIrqj4Cz99+SdKvP8R/237
+ v45fSQRiF9ba3wzG20eTkcrfCZJpr24KqeUAzI7pWPlvKNHka8/BJ4D7EqBK8NGCm+
+ RP7IbFJ+j3HdQ==
+From: =?utf-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, Palmer Dabbelt
+ <palmer@dabbelt.com>, Alistair Francis <alistair.francis@wdc.com>, Bin
+ Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, David Hildenbrand <david@redhat.com>, Atish Patra
+ <atishp@atishpatra.org>, Atish Patra <atishp@rivosinc.com>
+Cc: =?utf-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@rivosinc.com>, Sunil V L
+ <sunilvl@ventanamicro.com>,
+ Santosh Mamila <santosh.mamila@catalinasystems.io>, Chethan Seshadri
+ <Chethan.Seshadri@catalinasystems.io>, Sivakumar Munnangi
+ <siva.munnangi@catalinasystems.io>
+Subject: Re: [PATCH v2 1/3] hw/riscv/virt: Add memory hotplugging and
+ virtio-md-pci support
+In-Reply-To: <f1513236-867f-4780-a51f-81b5ac91a485@ventanamicro.com>
+References: <20240521105635.795211-1-bjorn@kernel.org>
+ <20240521105635.795211-2-bjorn@kernel.org>
+ <f1513236-867f-4780-a51f-81b5ac91a485@ventanamicro.com>
+Date: Mon, 27 May 2024 13:49:11 +0200
+Message-ID: <87y17v8og8.fsf@all.your.base.are.belong.to.us>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 06/12] tests/data/acpi/virt: Move ACPI tables under
- aarch64
-To: Sunil V L <sunilvl@ventanamicro.com>, qemu-devel@nongnu.org,
- qemu-arm@nongnu.org, qemu-riscv@nongnu.org
-Cc: Paolo Bonzini <pbonzini@redhat.com>,
- =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
- =?UTF-8?Q?Daniel_P_=2E_Berrang=C3=A9?= <berrange@redhat.com>,
- Thomas Huth <thuth@redhat.com>, "Michael S . Tsirkin" <mst@redhat.com>,
- Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
- Laurent Vivier <lvivier@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
- Alistair Francis <alistair23@gmail.com>,
- Sia Jee Heng <jeeheng.sia@starfivetech.com>, Haibo1 Xu
- <haibo1.xu@intel.com>, Anup Patel <apatel@ventanamicro.com>,
- Andrew Jones <ajones@ventanamicro.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Peter Maydell <peter.maydell@linaro.org>, Palmer Dabbelt
- <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Alistair Francis <alistair.francis@wdc.com>
-References: <20240524061411.341599-1-sunilvl@ventanamicro.com>
- <20240524061411.341599-7-sunilvl@ventanamicro.com>
-Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20240524061411.341599-7-sunilvl@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42d;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42d.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=139.178.84.217; envelope-from=bjorn@kernel.org;
+ helo=dfw.source.kernel.org
+X-Spam_score_int: -70
+X-Spam_score: -7.1
+X-Spam_bar: -------
+X-Spam_report: (-7.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.034,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_HI=-5, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -112,37 +80,87 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Sunil,
+Daniel Henrique Barboza <dbarboza@ventanamicro.com> writes:
 
-On 24/5/24 08:14, Sunil V L wrote:
-> Since virt is a common machine name across architectures like ARM64 and
-> RISC-V, move existing ARM64 ACPI tables under aarch64 folder so that
-> RISC-V tables can be added under riscv64 folder in future.
-> 
-> Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->   tests/data/acpi/virt/{ => aarch64}/APIC             | Bin
+> On 5/21/24 07:56, Bj=C3=B6rn T=C3=B6pel wrote:
+>> From: Bj=C3=B6rn T=C3=B6pel <bjorn@rivosinc.com>
+>>=20
+>> Virtio-based memory devices (virtio-mem/virtio-pmem) allows for
+>> dynamic resizing of virtual machine memory, and requires proper
+>> hotplugging (add/remove) support to work.
+>>=20
+>> Add device memory support for RISC-V "virt" machine, and enable
+>> virtio-md-pci with the corresponding missing hotplugging callbacks.
+>>=20
+>> Signed-off-by: Bj=C3=B6rn T=C3=B6pel <bjorn@rivosinc.com>
+>> ---
+>>   hw/riscv/Kconfig       |  2 +
+>>   hw/riscv/virt.c        | 83 +++++++++++++++++++++++++++++++++++++++++-
+>>   hw/virtio/virtio-mem.c |  5 ++-
+>>   3 files changed, 87 insertions(+), 3 deletions(-)
+>>=20
+>> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+>> index a2030e3a6ff0..08f82dbb681a 100644
+>> --- a/hw/riscv/Kconfig
+>> +++ b/hw/riscv/Kconfig
+>> @@ -56,6 +56,8 @@ config RISCV_VIRT
+>>       select PLATFORM_BUS
+>>       select ACPI
+>>       select ACPI_PCI
+>> +    select VIRTIO_MEM_SUPPORTED
+>> +    select VIRTIO_PMEM_SUPPORTED
+>>=20=20=20
+>>   config SHAKTI_C
+>>       bool
+>> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+>> index 4fdb66052587..443902f919d2 100644
+>> --- a/hw/riscv/virt.c
+>> +++ b/hw/riscv/virt.c
+>> @@ -53,6 +53,8 @@
+>>   #include "hw/pci-host/gpex.h"
+>>   #include "hw/display/ramfb.h"
+>>   #include "hw/acpi/aml-build.h"
+>> +#include "hw/mem/memory-device.h"
+>> +#include "hw/virtio/virtio-mem-pci.h"
+>>   #include "qapi/qapi-visit-common.h"
+>>   #include "hw/virtio/virtio-iommu.h"
+>>=20=20=20
+>> @@ -1407,6 +1409,7 @@ static void virt_machine_init(MachineState *machin=
+e)
+>>       DeviceState *mmio_irqchip, *virtio_irqchip, *pcie_irqchip;
+>>       int i, base_hartid, hart_count;
+>>       int socket_count =3D riscv_socket_count(machine);
+>> +    hwaddr device_memory_base, device_memory_size;
+>>=20=20=20
+>>       /* Check socket count limit */
+>>       if (VIRT_SOCKETS_MAX < socket_count) {
+>> @@ -1420,6 +1423,12 @@ static void virt_machine_init(MachineState *machi=
+ne)
+>>           exit(1);
+>>       }
+>>=20=20=20
+>> +    if (machine->ram_slots > ACPI_MAX_RAM_SLOTS) {
+>> +        error_report("unsupported amount of memory slots: %"PRIu64,
+>> +                     machine->ram_slots);
+>
+> Let's also add the maximum amount allowed in this message, e.g. this erro=
+r:
+>
+> $ (...) -m 2G,slots=3D512,maxmem=3D8G
+> qemu-system-riscv64: unsupported amount of memory slots: 512
+>
+> could be something like:
+>
+> qemu-system-riscv64: unsupported amount of memory slots (512), maximum am=
+ount: 256
+>
+>
+> LGTM otherwise. Thanks,
 
-The usual pattern is {target}/{machine}, so instead of:
+Thanks for getting back!
 
-   microvm/
-   pc/
-   q35/
-   virt/aarch64/
-   virt/riscv64/
+Sure! I'll fix this in the next rev.
 
-(which is odd because q35 is the x86 'virt'), I'd rather see:
 
-   x86/microvm/
-   x86/pc/
-   x86/q35/
-   aarch64/virt/
-   riscv64/virt/
-
-Anyhow just my 2 cents, up to the ACPI maintainers :)
-
-Regards,
-
-Phil.
+Bj=C3=B6rn
 
