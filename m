@@ -4,62 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59732C25B7A
-	for <qemu-riscv@archiver.kernel.org>; Mon, 27 May 2024 02:25:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6111CC25B74
+	for <qemu-riscv@archiver.kernel.org>; Mon, 27 May 2024 05:07:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sBQ1y-0000rO-J1; Sun, 26 May 2024 22:24:10 -0400
+	id 1sBSZn-0002hY-0F; Mon, 27 May 2024 01:07:15 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <duchao@eswincomputing.com>)
- id 1sBQ1u-0000pD-Ky; Sun, 26 May 2024 22:24:06 -0400
-Received: from zg8tmja2lje4os43os4xodqa.icoremail.net ([206.189.79.184])
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <duchao@eswincomputing.com>)
- id 1sBQ1s-0003mE-AN; Sun, 26 May 2024 22:24:06 -0400
-Received: from localhost.localdomain (unknown [10.12.130.31])
- by app1 (Coremail) with SMTP id TAJkCgAXrOM07lNmsQANAA--.24375S6;
- Mon, 27 May 2024 10:21:45 +0800 (CST)
-From: Chao Du <duchao@eswincomputing.com>
-To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com,
- alistair23@gmail.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- palmer@dabbelt.com, anup@brainfault.org, duchao713@qq.com
-Subject: [PATCH v1 2/4] target/riscv/kvm: implement
- kvm_arch_update_guest_debug()
-Date: Mon, 27 May 2024 02:19:14 +0000
-Message-Id: <20240527021916.12953-3-duchao@eswincomputing.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20240527021916.12953-1-duchao@eswincomputing.com>
-References: <20240527021916.12953-1-duchao@eswincomputing.com>
-X-CM-TRANSID: TAJkCgAXrOM07lNmsQANAA--.24375S6
-X-Coremail-Antispam: 1UD129KBjvdXoWrKryrCrWDuFWDKF47uFykKrg_yoW3Gwc_Cr
- WxuFy8GryUWFy09F4DCw15AFy3G3yfC3W0qF13AF1jkrykWrWkJws5Xa47Zry7urW8Casr
- JwsrXF9xCry5GjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUIcSsGvfJTRUUUbq8YjsxI4VWxJwAYFVCjjxCrM7AC8VAFwI0_Wr0E3s1l1xkIjI8I
- 6I8E6xAIw20EY4v20xvaj40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l82xGYIkIc2x26280x7
- IE14v26r15M28IrcIa0xkI8VCY1x0267AKxVW5JVCq3wA2ocxC64kIII0Yj41l84x0c7CE
- w4AK67xGY2AK021l84ACjcxK6xIIjxv20xvE14v26w1j6s0DM28EF7xvwVC0I7IYx2IY6x
- kF7I0E14v26r4UJVWxJr1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIE
- c7CjxVAFwI0_GcCE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I
- 8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCF
- s4IE7xkEbVWUJVW8JwACjcxG0xvY0x0EwIxGrwACI402YVCY1x02628vn2kIc2xKxwCY02
- Avz4vE-syl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG
- 67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MI
- IYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E
- 14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJV
- W8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjxU7iFx
- UUUUU
-X-CM-SenderInfo: xgxfxt3r6h245lqf0zpsxwx03jof0z/
-Received-SPF: pass client-ip=206.189.79.184;
- envelope-from=duchao@eswincomputing.com;
- helo=zg8tmja2lje4os43os4xodqa.icoremail.net
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1sBSZX-0002dk-So; Mon, 27 May 2024 01:07:01 -0400
+Received: from mail-lf1-x12a.google.com ([2a00:1450:4864:20::12a])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1sBSZV-0007Qm-RF; Mon, 27 May 2024 01:06:59 -0400
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-52742fdd363so4285528e87.1; 
+ Sun, 26 May 2024 22:06:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1716786415; x=1717391215; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=AVadOk/gUWgZpMyESbbLJmo/S0d6X48+QUSqrwZ8+Sk=;
+ b=Wc0c1goaq2+MU+f8zOwfFGxB5oUQIJxJjAoEsxIHwMR6n0bJvCpVOtzyecR9vS+Ncq
+ 1I/pbuQLmmmfn4ZsIAU+N4mz8ILEaV0DXkWCDaZ2FlrPsCO7Bw+vb/p6uDi8usfj0Ams
+ g8WdsrpYr+nS22fP1IWZ3xCuVt9tltW+memQeoQZ3XStoaY9yZdqQIlKH0Hj8MTzUUk2
+ PnIdeLkGKV6uwcb4T/Q9umphpowGaiAMqiKzm+Eab5kVtbq6QKilcnUaRXY8PMSGANVe
+ TORufWpH2IpJaqlDUAS9/AXDVxzyMDD7lzyXD/qg2H9UrBGzKZfmQXHYAJwhhBlGDbQZ
+ z23Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1716786415; x=1717391215;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=AVadOk/gUWgZpMyESbbLJmo/S0d6X48+QUSqrwZ8+Sk=;
+ b=HeYhDuaBj777h+EedKbSbx9m1pTFu7uQR1/J+rlCZZPJS92CDUVEn3KXQZxE1iFSAr
+ WIKNeeLQ1MulJz8i8KXp6jZ5VF9cckJzC81o72e3K06vtTnwjIurEW0TIOgPEI6gibW3
+ fE8WM9jTawIUmMVS6imd/3l5nUR1yVgMGVC7/UbOulqVYD/zC0RCkX3pOvpdRqpkC9GC
+ WACM8p+GI7ZIZ13iSeLTM989iz1Uq3z154rWmZbKF6o/HJ5BtzkBB1+fhnG2tTfYesta
+ k0nYxYsfBq+13yZi+/2//xgdpgN0BvB+5SAw5RaibEoefU13bdw44NFlOcikyBNpTzi4
+ FSVQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWk66/noTTMltiq7jG65xXO4LY8wEKDqXhh870IygGhv4zmVTECE3Y+pOjhlAaNlftvni7UR3omknX3QnWbJXf9pVZLQBA=
+X-Gm-Message-State: AOJu0Yw/HgTqqvSWDum2nxX+SiSIJfiUDWFJIzuTCPQedDdOGvqfc8hV
+ pNwx/uWid1pzhbWM0ic+TkESJsKkuufF9TpCRvNQpOzCjobSb0/aFgnLAQccPV4qJKUXYdz5eHw
+ Z3h+Gt1VWVXLgxo2+DnvQdc68OVU=
+X-Google-Smtp-Source: AGHT+IHOdw14bogqzXayPj/YZ7ch6EYLiLkqVyy21aVMGHn5BC5wkXsp08Rc5DQm08jUAZS8AcrJ/JrNNXZfDZ8tCw0=
+X-Received: by 2002:ac2:4e94:0:b0:524:6cb:586b with SMTP id
+ 2adb3069b0e04-52964baf2ecmr3783806e87.23.1716786414864; Sun, 26 May 2024
+ 22:06:54 -0700 (PDT)
+MIME-Version: 1.0
+References: <20240515091129.28116-1-yongxuan.wang@sifive.com>
+In-Reply-To: <20240515091129.28116-1-yongxuan.wang@sifive.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 27 May 2024 15:06:06 +1000
+Message-ID: <CAKmqyKO-MTy7OrNvQiWUJ0zrgy6_QYBbUzNVQBubUdrppfArtQ@mail.gmail.com>
+Subject: Re: [PATCH v2 1/1] target/riscv/kvm.c: Fix the hart bit setting of AIA
+To: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, greentime.hu@sifive.com, 
+ vincent.chen@sifive.com, frank.chang@sifive.com, jim.shu@sifive.com, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Andrew Jones <ajones@ventanamicro.com>,
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::12a;
+ envelope-from=alistair23@gmail.com; helo=mail-lf1-x12a.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_MSPIKE_H3=-0.01,
- RCVD_IN_MSPIKE_WL=-0.01, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -76,28 +98,70 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Set the control flag when there are active breakpoints. This will
-help KVM to know the status in the userspace.
+On Wed, May 15, 2024 at 7:12=E2=80=AFPM Yong-Xuan Wang <yongxuan.wang@sifiv=
+e.com> wrote:
+>
+> In AIA spec, each hart (or each hart within a group) has a unique hart
+> number to locate the memory pages of interrupt files in the address
+> space. The number of bits required to represent any hart number is equal
+> to ceil(log2(hmax + 1)), where hmax is the largest hart number among
+> groups.
+>
+> However, if the largest hart number among groups is a power of 2, QEMU
+> will pass an inaccurate hart-index-bit setting to Linux. For example, whe=
+n
+> the guest OS has 4 harts, only ceil(log2(3 + 1)) =3D 2 bits are sufficien=
+t
+> to represent 4 harts, but we passes 3 to Linux. The code needs to be
+> updated to ensure accurate hart-index-bit settings.
+>
+> Additionally, a Linux patch[1] is necessary to correctly recover the hart
+> index when the guest OS has only 1 hart, where the hart-index-bit is 0.
+>
+> [1] https://lore.kernel.org/lkml/20240415064905.25184-1-yongxuan.wang@sif=
+ive.com/t/
+>
+> Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
 
-Signed-off-by: Chao Du <duchao@eswincomputing.com>
----
- target/riscv/kvm/kvm-cpu.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+Thanks!
 
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index cba55c552d..0bc3348b91 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -2039,5 +2039,7 @@ void kvm_arch_remove_all_hw_breakpoints(void)
- 
- void kvm_arch_update_guest_debug(CPUState *cs, struct kvm_guest_debug *dbg)
- {
--    /* TODO; To be implemented later. */
-+    if (kvm_sw_breakpoints_active(cs)) {
-+        dbg->control |= KVM_GUESTDBG_ENABLE;
-+    }
- }
--- 
-2.17.1
+Applied to riscv-to-apply.next
 
+Alistair
+
+> ---
+> Changelog
+> v2:
+> - update commit message
+> ---
+>  target/riscv/kvm/kvm-cpu.c | 9 ++++++++-
+>  1 file changed, 8 insertions(+), 1 deletion(-)
+>
+> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+> index 473416649fda..235e2cdaca1a 100644
+> --- a/target/riscv/kvm/kvm-cpu.c
+> +++ b/target/riscv/kvm/kvm-cpu.c
+> @@ -1777,7 +1777,14 @@ void kvm_riscv_aia_create(MachineState *machine, u=
+int64_t group_shift,
+>          }
+>      }
+>
+> -    hart_bits =3D find_last_bit(&max_hart_per_socket, BITS_PER_LONG) + 1=
+;
+> +
+> +    if (max_hart_per_socket > 1) {
+> +        max_hart_per_socket--;
+> +        hart_bits =3D find_last_bit(&max_hart_per_socket, BITS_PER_LONG)=
+ + 1;
+> +    } else {
+> +        hart_bits =3D 0;
+> +    }
+> +
+>      ret =3D kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
+>                              KVM_DEV_RISCV_AIA_CONFIG_HART_BITS,
+>                              &hart_bits, true, NULL);
+> --
+> 2.17.1
+>
+>
 
