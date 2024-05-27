@@ -4,85 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF76CC25B75
-	for <qemu-riscv@archiver.kernel.org>; Sun, 26 May 2024 17:16:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7909EC25B75
+	for <qemu-riscv@archiver.kernel.org>; Mon, 27 May 2024 01:54:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sBHTj-0006W0-9y; Sun, 26 May 2024 13:16:15 -0400
+	id 1sBPYa-0007wZ-DK; Sun, 26 May 2024 21:53:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1sBHTf-0006VO-PP
- for qemu-riscv@nongnu.org; Sun, 26 May 2024 13:16:12 -0400
-Received: from mail-pf1-x42c.google.com ([2607:f8b0:4864:20::42c])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1sBHTb-0005U7-Mq
- for qemu-riscv@nongnu.org; Sun, 26 May 2024 13:16:11 -0400
-Received: by mail-pf1-x42c.google.com with SMTP id
- d2e1a72fcca58-6f8f30712d3so1169705b3a.0
- for <qemu-riscv@nongnu.org>; Sun, 26 May 2024 10:16:06 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1sBPYZ-0007w9-6B; Sun, 26 May 2024 21:53:47 -0400
+Received: from out30-132.freemail.mail.aliyun.com ([115.124.30.132])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1sBPYT-0006o6-3d; Sun, 26 May 2024 21:53:46 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1716743766; x=1717348566; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=lxBTDxzOkpKcHWc+oV7moh6IE1OfEOSm934E6mbjuyM=;
- b=nZ5gT+ZF5eRO0cNAtLIC3MoUFq2Sij8zWesRqVS2TrwTUNzzNA4iC+H2GLXkPxbuUS
- /seUoSjP9v+Z0jPAC9GKLqAqx1mfGQxanXiZPh8pi3gnXkhBMpnHYTx2KtVdh3rcOlTA
- juflBh/JL4mMYYdDOzIOpo3d7EdlAbepAG77+gt6tL1NaO1hTzoX9bs5RqnGEVoHHpin
- 5c6F1D8ZX0MBSzwjugV/1enb7EDo8d+ku+2iPedH57JY+CF5OMCj0slVPMFfV7EvSkQO
- TRFtAWSwlYmgONxmwU+yyIvkZx/TqTT4cD/L7jZ53YX13nlpM1hCMbLExChK82ZNIp6z
- lmyg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716743766; x=1717348566;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=lxBTDxzOkpKcHWc+oV7moh6IE1OfEOSm934E6mbjuyM=;
- b=mS9nKSytlIo91mrfF4jnoNEu5oRuemJoLc/Avl3AjVzxdojKEfuRVV0+B0/zEqFU/U
- Rh8DZydMjktwG0fCVYieYYZZOEyEMh/UKMYwN0OibbQ6+jYLyxXWbIf5zluOTigUeZ7P
- dtsxA/uV9sN/kimWD8cWCUsJx3vAgZhXMz0my5lrbmZmfXhOPd2cKOlf7Uy6VwGFjZFu
- sj4ZBvmuknfaGNxleQXWtKXdgGmyismiE0qoafIksKckgr/w/xwb+Mf2Gb483jbmy0ns
- /JX7tbZPGX+x0+BXsRK2x+ujXQcnHIBC3l/pxGbZJfly2DW8ngPa+mYSe6UvAItjl2hl
- Gw0A==
-X-Gm-Message-State: AOJu0Yy3OCz6JdTIR5AfJqDFluwZGfs4XHTpjYzPbrz0T35HEoqSpM1F
- S2UvxfFeE0U4FFkwQHT48soBMrZDtl3oJbbW+gbrFYLsuWrLoec7TDNrdvtKQaM=
-X-Google-Smtp-Source: AGHT+IEI5kkIa7ixlOGNYU63Xm5t0WhSGCnMpc4CdKriNPM1/y4ht4f6YWc6EanJ85MqtHRNIk8WUQ==
-X-Received: by 2002:a05:6a20:2453:b0:1aa:965d:1332 with SMTP id
- adf61e73a8af0-1b212e135b8mr10134746637.26.1716743765752; 
- Sun, 26 May 2024 10:16:05 -0700 (PDT)
-Received: from [192.168.68.110] ([177.94.42.4])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-6f8fd4da8f6sm3690973b3a.210.2024.05.26.10.16.03
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 26 May 2024 10:16:05 -0700 (PDT)
-Message-ID: <c0b7bc36-35dd-4bab-a83e-7246c2c57473@ventanamicro.com>
-Date: Sun, 26 May 2024 14:16:00 -0300
+ d=linux.alibaba.com; s=default;
+ t=1716774808; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
+ bh=SIYgdMZl3vslHQGaao468umhN+9Hjx9ppexKgjceTcs=;
+ b=IIANX6ISrwC60Zbxivo0dtDsSaiUKHo5WnNlPI3LCtuyacUR70hDD3YWL+WGtV6x+n4/xSh7J2lkstVMpc9F1WqTrJn/OO696VzmHpiF+mkD0l/Z7eB3psOjkNVa8lJK5E3BZ0Irf9/inm17SxCictquQHL+kcrK4vCveKX40w0=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R901e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037067112;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=8; SR=0;
+ TI=SMTPD_---0W7Cyne8_1716774806; 
+Received: from 30.166.64.174(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0W7Cyne8_1716774806) by smtp.aliyun-inc.com;
+ Mon, 27 May 2024 09:53:27 +0800
+Message-ID: <935a8ec3-43c4-4a97-8e5c-21400df0a58f@linux.alibaba.com>
+Date: Mon, 27 May 2024 09:52:33 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 0/6] target/riscv: Support Zabha extension
-To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, Alistair.Francis@wdc.com,
- bmeng.cn@gmail.com, liwei1518@gmail.com
+ bmeng.cn@gmail.com, liwei1518@gmail.com,
+ Alexey Baturo <baturo.alexey@gmail.com>
 References: <20240523124045.1964-1-zhiwei_liu@linux.alibaba.com>
  <8cc80b22-d159-4c8a-8860-30d229bae8d6@ventanamicro.com>
  <fed99165-58da-458c-b68f-a9717fc15034@linux.alibaba.com>
+ <c0b7bc36-35dd-4bab-a83e-7246c2c57473@ventanamicro.com>
 Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <fed99165-58da-458c-b68f-a9717fc15034@linux.alibaba.com>
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <c0b7bc36-35dd-4bab-a83e-7246c2c57473@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42c;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x42c.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+Received-SPF: pass client-ip=115.124.30.132;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-132.freemail.mail.aliyun.com
+X-Spam_score_int: -174
+X-Spam_score: -17.5
+X-Spam_bar: -----------------
+X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01,
+ T_SPF_HELO_TEMPERROR=0.01, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,103 +75,134 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
-
-On 5/25/24 21:37, LIU Zhiwei wrote:
-> 
-> On 2024/5/24 19:44, Daniel Henrique Barboza wrote:
->> Hi Zhiwei!
+On 2024/5/27 1:16, Daniel Henrique Barboza wrote:
+>
+>
+> On 5/25/24 21:37, LIU Zhiwei wrote:
 >>
->>
->>
->> On 5/23/24 09:40, LIU Zhiwei wrote:
->>> Zabha adds support AMO operations for byte and half word. If zacas has been implemented,
->>> zabha also adds support amocas.b and amocas.h.
+>> On 2024/5/24 19:44, Daniel Henrique Barboza wrote:
+>>> Hi Zhiwei!
 >>>
->>> More details is on the specification here:
->>> https://github.com/riscv/riscv-zabha
 >>>
->>> The implemenation of zabha follows the way of AMOs and zacas.
 >>>
->>> This patch set is based on these two patch set:
->>> 1. https://mail.gnu.org/archive/html/qemu-riscv/2024-05/msg00207.html
->>> 2. https://mail.gnu.org/archive/html/qemu-riscv/2024-05/msg00212.html
+>>> On 5/23/24 09:40, LIU Zhiwei wrote:
+>>>> Zabha adds support AMO operations for byte and half word. If zacas 
+>>>> has been implemented,
+>>>> zabha also adds support amocas.b and amocas.h.
+>>>>
+>>>> More details is on the specification here:
+>>>> https://github.com/riscv/riscv-zabha
+>>>>
+>>>> The implemenation of zabha follows the way of AMOs and zacas.
+>>>>
+>>>> This patch set is based on these two patch set:
+>>>> 1. https://mail.gnu.org/archive/html/qemu-riscv/2024-05/msg00207.html
+>>>> 2. https://mail.gnu.org/archive/html/qemu-riscv/2024-05/msg00212.html
+>>>
+>>> These 2 series doesn't seem to apply on top of each other, doesn't 
+>>> matter which
+>>> order I try. Applying zimop/zcmop first, then zama16b:
+>>>
+>>> $ git am \[PATCH\ 1_1\]\ target_riscv\:\ Support\ Zama16b\ 
+>>> extension\ -\ LIU\ Zhiwei\ \<zhiwei_liu@linux.alibaba.com\>\ -\ 
+>>> 2024-05-22\ 0613.eml
+>>> Applying: target/riscv: Support Zama16b extension
+>>> error: patch failed: target/riscv/cpu.c:1464
+>>> error: target/riscv/cpu.c: patch does not apply
+>>> Patch failed at 0001 target/riscv: Support Zama16b extension
+>>> hint: Use 'git am --show-current-patch=diff' to see the failed patch
+>>>
+>>>
+>>> Applying zama16b first, then zimop/zcmop:
+>>>
+>>> $ git am \[PATCH\ 1_1\]\ target_riscv\:\ Support\ Zama16b\ 
+>>> extension\ -\ LIU\ Zhiwei\ \<zhiwei_liu@linux.alibaba.com\>\ -\ 
+>>> 2024-05-22\ 0613.eml
+>>> Applying: target/riscv: Support Zama16b extension
+>>> $
+>>> $ git am \[PATCH\ 1_4\]\ target_riscv\:\ Add\ zimop\ extension\ -\ 
+>>> LIU\ Zhiwei\ \<zhiwei_liu@linux.alibaba.com\>\ -\ 2024-05-22\ 
+>>> 0329.eml \[PATCH\ 2_4\]\ disas_riscv\:\ Support\ zimop\ disassemble\ 
+>>> -\ LIU\ Zhiwei\ \<zhiwei_liu@linux.alibaba.com\>\ -\ 2024-05-22\ 
+>>> 0329.eml
+>>> Applying: target/riscv: Add zimop extension
+>>> error: patch failed: target/riscv/cpu.c:1463
+>>> error: target/riscv/cpu.c: patch does not apply
+>>> Patch failed at 0001 target/riscv: Add zimop extension
+>>>
+>>>
+>>> If the series are dependent on each other perhaps it's easier to 
+>>> send everything
+>>> in a single 11 patches series.
 >>
->> These 2 series doesn't seem to apply on top of each other, doesn't matter which
->> order I try. Applying zimop/zcmop first, then zama16b:
->>
->> $ git am \[PATCH\ 1_1\]\ target_riscv\:\ Support\ Zama16b\ extension\ -\ LIU\ Zhiwei\ \<zhiwei_liu@linux.alibaba.com\>\ -\ 2024-05-22\ 0613.eml
->> Applying: target/riscv: Support Zama16b extension
->> error: patch failed: target/riscv/cpu.c:1464
->> error: target/riscv/cpu.c: patch does not apply
->> Patch failed at 0001 target/riscv: Support Zama16b extension
->> hint: Use 'git am --show-current-patch=diff' to see the failed patch
+>> They don't have dependency on each other. But if we both rebase them 
+>> to the master branch, they
+>> couldn't be merged at the time, as them both modify cpu.h and cpu.c 
+>> in the same place.
 >>
 >>
->> Applying zama16b first, then zimop/zcmop:
->>
->> $ git am \[PATCH\ 1_1\]\ target_riscv\:\ Support\ Zama16b\ extension\ -\ LIU\ Zhiwei\ \<zhiwei_liu@linux.alibaba.com\>\ -\ 2024-05-22\ 0613.eml
->> Applying: target/riscv: Support Zama16b extension
->> $
->> $ git am \[PATCH\ 1_4\]\ target_riscv\:\ Add\ zimop\ extension\ -\ LIU\ Zhiwei\ \<zhiwei_liu@linux.alibaba.com\>\ -\ 2024-05-22\ 0329.eml \[PATCH\ 2_4\]\ disas_riscv\:\ Support\ zimop\ disassemble\ -\ LIU\ Zhiwei\ \<zhiwei_liu@linux.alibaba.com\>\ -\ 2024-05-22\ 0329.eml
->> Applying: target/riscv: Add zimop extension
->> error: patch failed: target/riscv/cpu.c:1463
->> error: target/riscv/cpu.c: patch does not apply
->> Patch failed at 0001 target/riscv: Add zimop extension
->>
->>
->> If the series are dependent on each other perhaps it's easier to send everything
->> in a single 11 patches series.
-> 
-> They don't have dependency on each other. But if we both rebase them to the master branch, they
-> couldn't be merged at the time, as them both modify cpu.h and cpu.c in the same place.
-> 
-> 
-> I will send them as a whole patch set(RVA23 patch set) after I fix other issues on implementing the RVA23 profile.
+>> I will send them as a whole patch set(RVA23 patch set) after I fix 
+>> other issues on implementing the RVA23 profile.
+>
+>
+> Be aware that we have some RVA23 extensions that are implemented in 
+> the ML
+> but not merged no master yet. E.g. sstvala ended up being implemented 
+> after some
+> changes I did w.r.t tval and EBREAK. These patches are on 
+> riscv-to-apply.next.
+Yes. Besides these, there are some missing checks in Smstateen. And we 
+also need add named features for Sh* extensions.
+>
+> Also, I took another look at RVA23 mandatory exts and what we have. I 
+> think we're
+> not that far off after these extensions you're adding. What we really 
+> seems to be
+> missing is supm and ssnpm.
 
-
-Be aware that we have some RVA23 extensions that are implemented in the ML
-but not merged no master yet. E.g. sstvala ended up being implemented after some
-changes I did w.r.t tval and EBREAK. These patches are on riscv-to-apply.next.
-
-Also, I took another look at RVA23 mandatory exts and what we have. I think we're
-not that far off after these extensions you're adding. What we really seems to be
-missing is supm and ssnpm.
-
+Alexey is working on this. I have some comments and let's wait for his 
+next patch set.
 
 Thanks,
+Zhiwei
 
-Daniel
-
-> 
+>
+>
 > Thanks,
-> 
-> Zhiwei
-> 
->>
+>
+> Daniel
+>
 >>
 >> Thanks,
 >>
->> Daniel
+>> Zhiwei
 >>
 >>>
 >>>
->>> LIU Zhiwei (6):
->>>    target/riscv: Move gen_amo before implement Zabha
->>>    target/riscv: Add AMO instructions for Zabha
->>>    target/riscv: Move gen_cmpxchg before adding amocas.[b|h]
->>>    target/riscv: Add amocas.[b|h] for Zabha
->>>    target/riscv: Enable zabha for max cpu
->>>    disas/riscv: Support zabha disassemble
+>>> Thanks,
 >>>
->>>   disas/riscv.c                               |  60 ++++++++
->>>   target/riscv/cpu.c                          |   2 +
->>>   target/riscv/cpu_cfg.h                      |   1 +
->>>   target/riscv/insn32.decode                  |  22 +++
->>>   target/riscv/insn_trans/trans_rva.c.inc     |  21 ---
->>>   target/riscv/insn_trans/trans_rvzabha.c.inc | 145 ++++++++++++++++++++
->>>   target/riscv/insn_trans/trans_rvzacas.c.inc |  13 --
->>>   target/riscv/translate.c                    |  36 +++++
->>>   8 files changed, 266 insertions(+), 34 deletions(-)
->>>   create mode 100644 target/riscv/insn_trans/trans_rvzabha.c.inc
+>>> Daniel
 >>>
+>>>>
+>>>>
+>>>> LIU Zhiwei (6):
+>>>>    target/riscv: Move gen_amo before implement Zabha
+>>>>    target/riscv: Add AMO instructions for Zabha
+>>>>    target/riscv: Move gen_cmpxchg before adding amocas.[b|h]
+>>>>    target/riscv: Add amocas.[b|h] for Zabha
+>>>>    target/riscv: Enable zabha for max cpu
+>>>>    disas/riscv: Support zabha disassemble
+>>>>
+>>>>   disas/riscv.c                               |  60 ++++++++
+>>>>   target/riscv/cpu.c                          |   2 +
+>>>>   target/riscv/cpu_cfg.h                      |   1 +
+>>>>   target/riscv/insn32.decode                  |  22 +++
+>>>>   target/riscv/insn_trans/trans_rva.c.inc     |  21 ---
+>>>>   target/riscv/insn_trans/trans_rvzabha.c.inc | 145 
+>>>> ++++++++++++++++++++
+>>>>   target/riscv/insn_trans/trans_rvzacas.c.inc |  13 --
+>>>>   target/riscv/translate.c                    |  36 +++++
+>>>>   8 files changed, 266 insertions(+), 34 deletions(-)
+>>>>   create mode 100644 target/riscv/insn_trans/trans_rvzabha.c.inc
+>>>>
 
