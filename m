@@ -4,85 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CC3EC25B78
-	for <qemu-riscv@archiver.kernel.org>; Mon, 27 May 2024 15:04:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32AA7C25B74
+	for <qemu-riscv@archiver.kernel.org>; Mon, 27 May 2024 15:16:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sBbtS-0003FT-Ax; Mon, 27 May 2024 11:04:10 -0400
+	id 1sBc5f-0001oO-Di; Mon, 27 May 2024 11:16:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1sBbtM-0003BN-Bh
- for qemu-riscv@nongnu.org; Mon, 27 May 2024 11:04:04 -0400
-Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534])
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1sBc5d-0001ne-Gf
+ for qemu-riscv@nongnu.org; Mon, 27 May 2024 11:16:45 -0400
+Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1sBbtJ-00065K-ET
- for qemu-riscv@nongnu.org; Mon, 27 May 2024 11:04:04 -0400
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-5785c1e7448so3044631a12.2
- for <qemu-riscv@nongnu.org>; Mon, 27 May 2024 08:03:59 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1sBc5a-0008TY-S7
+ for qemu-riscv@nongnu.org; Mon, 27 May 2024 11:16:44 -0400
+Received: by mail-pf1-x433.google.com with SMTP id
+ d2e1a72fcca58-6f8ecafd28cso2668963b3a.3
+ for <qemu-riscv@nongnu.org>; Mon, 27 May 2024 08:16:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1716822238; x=1717427038; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=YCuHIYfqAavMgHQwiGsJIWdUWH2f+2IjOiWSwxCV8Aw=;
- b=G3qJ8eTC+tAXfg4bjccLcpM6JcI9Fyk+PlFc2IdQ/fzWPrUnhriXhzUt9OTcTyrfwj
- bp8HCzwEj+PefVzR76Kyf8/CkxNU+gKlE579/+zCG4rlxUQ8mShJoFe4sH4zbwtNI+vF
- p71FzrA0T6QsSp6q5bAOtihi3dyqrkNf+9aIuVk4keaCUOKgIY3AE+axNJYVYbXsAe6v
- BXvP556igsFwWkQMeTV609+JLlKVXkutYAbBL7vTrWi2IemsfrM4oAUn99cOhnxMXJ0j
- gTIXSsPsUEEXKxa7amjZK6NMMQ3q4pksB5o4J5CRmrdSItDIPyrKdU/3Otoc2KyrmYgl
- FYfQ==
+ d=ventanamicro.com; s=google; t=1716823001; x=1717427801; darn=nongnu.org;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=YNZCKIEg/wB7FBJ60uujpf+diVNX2hoPtBar8fDBLso=;
+ b=Ou3An3L9pqcy9wt2QNnRtpKQ1QROQ/xyy6Fi1DEh544yoaPPiPw7FAiKIMjsJ6FENg
+ 9AfyM5C/qfHaXRlqkinUnoa6jVm6KCF/dIFIkSsGZcg2b794YT45zpv2tl3yxVlg8HNs
+ EDZyGH29y8D1f/o9sMnyTWgQDDB6hCRFHT59s1JVX9zuIEIFlLLCVTFw8rF0u4NxKhg/
+ w6BJpgZVA9eu1Y2cQtaS28M4UkpAMeO7MQ9sdkKs8ufTtdR/0CEmKffTYnKiLXvfiYRW
+ 3WbferVNt3aRuXWwv8RUlXeCzJYFwqEmQ5aWB4vzhLilxFQyLKGDWIZIzp/6nV93QYtR
+ fBlg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716822238; x=1717427038;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=YCuHIYfqAavMgHQwiGsJIWdUWH2f+2IjOiWSwxCV8Aw=;
- b=f3H+XovDMIDtPuG975BSwy/dyyFfsNmwqg1mavnIJt6HlapKU8O31+Rv3UBDirle+K
- 3ma3XGwStCbqCvhOaELsK0EUgAW8jCJwwT2hkbV6OPPa1Lhrsw9J8y/bCqS7maAxwDbz
- 4iPsAkiQIknywSqMa+XAhXrJ4Qa66uhPxb1XWRoJ/mEHP3Gh3TmJO5royCSZsBd/5pZk
- r7epMyUhztCR9umsa47e264Zr1Hkxj+mUHOikyvxu2XdX+MWbSH3P6KypjQYcrj8Z91Y
- bCjAS43xUXGk1hO+gzCua8zXl+Ynmfygr5MaqVBI6Z1N57Jey2wlPl5wpRY7qaCaQFNs
- 77nA==
+ d=1e100.net; s=20230601; t=1716823001; x=1717427801;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=YNZCKIEg/wB7FBJ60uujpf+diVNX2hoPtBar8fDBLso=;
+ b=tB8kgz9QZBqLwTDWxSW38wu/k22Otu1+l4MtUHdE8j5hekmWoW5JVnOiQ9wZyk0HVB
+ toMmsyU9vXNZQ15aRGpC+1kwUv9WJEcqu5j2Cbj0thKYtc7pQDZLUiM/e89IByN2RJg0
+ 1dMe71PEvxvE1Bn+8A4RClDbVGDWFziqdDlYH4pBzrHwX0z23bcYDOW6JLVvrJx06LFt
+ UXoevhKsVkwmEXvdlfn9JM4LyJnuP4bz+/vVZPKyY6haaAkZi16rSnh4O7j/EmMES0U+
+ XfCPhhHZP56v9xN4uc2nvR6yd/by/QhouFkmbJUSWmti8Vru36KwZubQSZvnznIZ0Mm0
+ V8lQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVWE84x1nxZFtuwkEs1K23tpnSiR9PkKArECu0mEwUVlGj3U5UEZ4Sjw/DS9+os6ze6TZp9brRxsOzr1bHRl8/Nih89LAM=
-X-Gm-Message-State: AOJu0Yy/zZfpYbxeTCbSXGXvvzyvBMVbgNU+HfSjPIImnt5aAjwox4yd
- /QJPnW2Up1dMjbc4sptWDQ/LvSDB9s6FMFPuF7dRCMPTNPJ9DrkAgHOWABHrkjI=
-X-Google-Smtp-Source: AGHT+IETF0PIYzYrnU+nl5n56qB76Pxgp8hIbKqtjQ54CnXW4WpkbPEpeRdY/e12exxGZB1fi+JaHw==
-X-Received: by 2002:a50:9b12:0:b0:572:67d9:3400 with SMTP id
- 4fb4d7f45d1cf-578519ba232mr6170275a12.39.1716822238307; 
- Mon, 27 May 2024 08:03:58 -0700 (PDT)
-Received: from localhost ([176.74.158.132]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5785241214dsm5942760a12.55.2024.05.27.08.03.57
+ AJvYcCU2hxYpk/41RD5Un6O+lbFcdzFtTEfgt0GJXcivIogehYr09ZjyjywbC7aYx9BAG3QSnsqZaXewAsCVV14lU3zFPPa1QBA=
+X-Gm-Message-State: AOJu0YxGqnMob83SSjWmk+xz1C3J79dAkVcTfrOSEluSTGVDHWRXf8cm
+ 7B1ZUFbtTd2QJmC45EnwnT8IWntH0FXndfr25iROXb7fdc/Qz2vtk2SiR6bqCHg=
+X-Google-Smtp-Source: AGHT+IFiHIgKd/rnJEicqxIOXfdw3SGT+klsDYlCicD7ji3mZ5xjHknFLrAdPZ51WWQdybvlOg4hVw==
+X-Received: by 2002:aa7:9a85:0:b0:6eb:6:6b72 with SMTP id
+ d2e1a72fcca58-6f8f3b454a7mr7501875b3a.25.1716823000697; 
+ Mon, 27 May 2024 08:16:40 -0700 (PDT)
+Received: from sunil-laptop ([106.51.188.31]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-6f8fbf2e3d5sm4986549b3a.9.2024.05.27.08.16.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 May 2024 08:03:57 -0700 (PDT)
-Date: Mon, 27 May 2024 17:03:56 +0200
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Alexei Filippov <alexei.filippov@syntacore.com>
-Cc: alistair.francis@wdc.com, alistair23@gmail.com, 
- apatel@ventanamicro.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
- liwei1518@gmail.com, palmer@dabbelt.com, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, zhiwei_liu@linux.alibaba.com
-Subject: Re: [PATCH v7] target/riscv/kvm/kvm-cpu.c: kvm_riscv_handle_sbi()
- fail with vendor-specific SBI
-Message-ID: <20240527-3510206a25da720148c06a43@orel>
-References: <20240503-1417868a079951810dadb71c@orel>
- <20240527134811.342027-1-alexei.filippov@syntacore.com>
+ Mon, 27 May 2024 08:16:40 -0700 (PDT)
+Date: Mon, 27 May 2024 20:46:29 +0530
+From: Sunil V L <sunilvl@ventanamicro.com>
+To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>,
+ Daniel P =?utf-8?B?LiBCZXJyYW5nw6k=?= <berrange@redhat.com>,
+ Thomas Huth <thuth@redhat.com>, "Michael S . Tsirkin" <mst@redhat.com>,
+ Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
+ Laurent Vivier <lvivier@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
+ Alistair Francis <alistair23@gmail.com>,
+ Sia Jee Heng <jeeheng.sia@starfivetech.com>,
+ Haibo1 Xu <haibo1.xu@intel.com>, Anup Patel <apatel@ventanamicro.com>,
+ Andrew Jones <ajones@ventanamicro.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: Re: [PATCH v2 06/12] tests/data/acpi/virt: Move ACPI tables under
+ aarch64
+Message-ID: <ZlSjzfSj8MwDcJk6@sunil-laptop>
+References: <20240524061411.341599-1-sunilvl@ventanamicro.com>
+ <20240524061411.341599-7-sunilvl@ventanamicro.com>
+ <27cef750-262a-402a-97fe-c4a55700a376@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20240527134811.342027-1-alexei.filippov@syntacore.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::534;
- envelope-from=ajones@ventanamicro.com; helo=mail-ed1-x534.google.com
-X-Spam_score_int: 4
-X-Spam_score: 0.4
-X-Spam_bar: /
-X-Spam_report: (0.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
- SORTED_RECIPS=2.499, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <27cef750-262a-402a-97fe-c4a55700a376@linaro.org>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pf1-x433.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,103 +113,42 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, May 27, 2024 at 04:48:11PM GMT, Alexei Filippov wrote:
-> kvm_riscv_handle_sbi() may return not supported return code to not
-> trigger qemu abort with vendor-specific sbi.
+On Mon, May 27, 2024 at 12:12:10PM +0200, Philippe Mathieu-Daudé wrote:
+> Hi Sunil,
 > 
-> Add new error path to provide proper error in case of
-> qemu_chr_fe_read_all() may not return sizeof(ch), because exactly zero
-> just means we failed to read input, which can happen, so
-> telling the SBI caller we failed to read, but telling the caller of this
-> function that we successfully emulated the SBI call, is correct. However,
-> anything else, other than sizeof(ch), means something unexpected happened,
-> so we should return an error.
+> On 24/5/24 08:14, Sunil V L wrote:
+> > Since virt is a common machine name across architectures like ARM64 and
+> > RISC-V, move existing ARM64 ACPI tables under aarch64 folder so that
+> > RISC-V tables can be added under riscv64 folder in future.
+> > 
+> > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+> > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> > ---
+> >   tests/data/acpi/virt/{ => aarch64}/APIC             | Bin
 > 
-> Added SBI related return code's defines.
+> The usual pattern is {target}/{machine}, so instead of:
 > 
-> Signed-off-by: Alexei Filippov <alexei.filippov@syntacore.com>
-> Fixes: 4eb47125 ("target/riscv: Handle KVM_EXIT_RISCV_SBI exit")
-> ---
-> Changes since v6:
-> 		- Add appropriate commit message.
-> 		- Fix error handling according to Andrew Jones suggestion.
->  target/riscv/kvm/kvm-cpu.c         | 11 +++++++----
->  target/riscv/sbi_ecall_interface.h | 12 ++++++++++++
->  2 files changed, 19 insertions(+), 4 deletions(-)
+>   microvm/
+>   pc/
+>   q35/
+>   virt/aarch64/
+>   virt/riscv64/
 > 
-> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-> index f9dbc18a76..a84bcda9d9 100644
-> --- a/target/riscv/kvm/kvm-cpu.c
-> +++ b/target/riscv/kvm/kvm-cpu.c
-> @@ -1173,16 +1173,19 @@ static int kvm_riscv_handle_sbi(CPUState *cs, struct kvm_run *run)
->          ret = qemu_chr_fe_read_all(serial_hd(0)->be, &ch, sizeof(ch));
->          if (ret == sizeof(ch)) {
->              run->riscv_sbi.ret[0] = ch;
-> +            ret = 0;
+> (which is odd because q35 is the x86 'virt'), I'd rather see:
+> 
+>   x86/microvm/
+>   x86/pc/
+>   x86/q35/
+>   aarch64/virt/
+>   riscv64/virt/
+> 
+> Anyhow just my 2 cents, up to the ACPI maintainers :)
+> 
+Hi Phil,
 
-ret is already zero here, so this assignment isn't necessary.
-
->          } else {
-> -            run->riscv_sbi.ret[0] = -1;
-> +            if (ret == 0) {
-> +                run->riscv_sbi.ret[0] = SBI_ERR_FAILURE;
-> +            }
-> +            ret = -1;
->          }
-> -        ret = 0;
->          break;
-
-v6 was closer to being correct than this. It should be
-
-@@ -1515,21 +1516,24 @@ static int kvm_riscv_handle_sbi(CPUState *cs, struct kvm_run *run)
-         ret = qemu_chr_fe_read_all(serial_hd(0)->be, &ch, sizeof(ch));
-         if (ret == sizeof(ch)) {
-             run->riscv_sbi.ret[0] = ch;
--        } else {
-+        } else if (ret == 0) {
-             run->riscv_sbi.ret[0] = -1;
-+        } else {
-+            ret = -1;
-         }
--        ret = 0;
-         break;
-
-
->      default:
->          qemu_log_mask(LOG_UNIMP,
-> -                      "%s: un-handled SBI EXIT, specific reasons is %lu\n",
-> +                      "%s: Unhandled SBI exit with extension-id %lu\n",
->                        __func__, run->riscv_sbi.extension_id);
-> -        ret = -1;
-> +        run->riscv_sbi.ret[0] = SBI_ERR_NOT_SUPPORTED;
->          break;
->      }
->      return ret;
-> diff --git a/target/riscv/sbi_ecall_interface.h b/target/riscv/sbi_ecall_interface.h
-> index 43899d08f6..a2e21d9b8c 100644
-> --- a/target/riscv/sbi_ecall_interface.h
-> +++ b/target/riscv/sbi_ecall_interface.h
-> @@ -69,4 +69,16 @@
->  #define SBI_EXT_VENDOR_END              0x09FFFFFF
->  /* clang-format on */
->  
-> +/* SBI return error codes */
-> +#define SBI_SUCCESS                  0
-> +#define SBI_ERR_FAILURE             -1
-> +#define SBI_ERR_NOT_SUPPORTED       -2
-> +#define SBI_ERR_INVALID_PARAM       -3
-> +#define SBI_ERR_DENIED              -4
-> +#define SBI_ERR_INVALID_ADDRESS     -5
-> +#define SBI_ERR_ALREADY_AVAILABLE   -6
-> +#define SBI_ERR_ALREADY_STARTED     -7
-> +#define SBI_ERR_ALREADY_STOPPED     -8
-> +#define SBI_ERR_NO_SHMEM            -9
-> +
->  #endif
-> -- 
-> 2.34.1
->
+Your suggestion does make sense to me. Let me wait for feedback from
+ARM/ACPI maintainers.
 
 Thanks,
-drew
+Sunil
 
