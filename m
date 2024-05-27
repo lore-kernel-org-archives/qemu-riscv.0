@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2024AC25B74
-	for <qemu-riscv@archiver.kernel.org>; Mon, 27 May 2024 16:24:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38F11C25B74
+	for <qemu-riscv@archiver.kernel.org>; Mon, 27 May 2024 23:48:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sBd9O-0004Vl-Bz; Mon, 27 May 2024 12:24:42 -0400
+	id 1sBk4W-0007h4-O5; Mon, 27 May 2024 19:48:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1sBd9N-0004VN-7j
- for qemu-riscv@nongnu.org; Mon, 27 May 2024 12:24:41 -0400
-Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1sBk4U-0007ge-KZ; Mon, 27 May 2024 19:48:07 -0400
+Received: from mail-vk1-xa36.google.com ([2607:f8b0:4864:20::a36])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1sBd9K-0004Qt-To
- for qemu-riscv@nongnu.org; Mon, 27 May 2024 12:24:40 -0400
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-1f4a0050b9aso7878955ad.2
- for <qemu-riscv@nongnu.org>; Mon, 27 May 2024 09:24:38 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1sBk4S-0001ce-Qr; Mon, 27 May 2024 19:48:06 -0400
+Received: by mail-vk1-xa36.google.com with SMTP id
+ 71dfb90a1353d-4e4efcc3d8fso83724e0c.0; 
+ Mon, 27 May 2024 16:48:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1716827077; x=1717431877; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=+t+nYNb8j4qkGMe2U8+cATL9pT5/JjvSrVEfa8i+ft8=;
- b=UTrnDPmwXW486QsNeIiQcbU6oiTc+HmL0F9hYSrzx5nyGCixdFsECE7GOyNHD4ErWE
- xwGUWFwMgf5Fg8LFHyZ9nTRS1CB1G1TPkriU+9RyRs4owmOVBsjKCpAAlbAKxMFSuSEg
- 8JSoDmyS2l7ABv6wxXWRyFjBCerUW2C0sag9EkBzLgNHMJfL5W44IRnHfPlXe9YRbufD
- mnv1lDa/Os/oXPdrwgPI9KysC/ZY8unHaOGzGnkNPwsrlcl532DFc8WmiTUqLUbpQPTL
- EMJpvh/STqOgY27N7RvtwhTGtDsV7g+C3kRK+SdR5Bqso3NZ4LZzzN5b3Zz88s3Hn3M2
- KRDw==
+ d=gmail.com; s=20230601; t=1716853683; x=1717458483; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zDvCIqQ90gs3a611ZISeWsUzBiKPFFGa1iwWUZdPyiE=;
+ b=X2BQXws/lfoAYHT45HEuI/JHdekmnCMtoIRLwppuQ9nTCCdN25gUNHKMsDT3T8RQEu
+ i0qN8+EIX/+7KFy7HlaNhz9WxfGD+jsDRcS7WYxEBaClC3c55b/NoQtwsY1W3yz7ItNY
+ +fzoyE4jek9cQQ6TSnEg61MpsWpvJvhmA8yBHln6y5PPM0m5asUgZSB6JvfPaScyC/rn
+ TXbwuk19GfzaBusUDK42Eua/5TmKlv4cF4r7hsEAy3r730FourC8ca6b7m32bUGQLy7i
+ MEcMvEhCDYJ3Om6CsHzlQB+qlgRnbR7Qr00GCARbJmwibfMyvCeVfXzxA6PNkbcFkEdD
+ QtZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716827077; x=1717431877;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=+t+nYNb8j4qkGMe2U8+cATL9pT5/JjvSrVEfa8i+ft8=;
- b=hDJMumnZBkz6ldsrQFLq4VyuYkfwTxn8ZjhaSoC5JLynmhWkrjp9Z79hxJABG/hfu7
- S5UvORaaXYYA3Gl1x7NM8/hH/s+xezQQbImRrhp6qenY3U5uLQgQ7TmakqW/Za/kxhZ4
- KXUcrPOfJaAmLNiVLdTd9sMkMasXLMtcn6s0IrGsCNz3HYZ7nYYWgQhUqpzkBMGW0RbB
- +vljFL/l7cS1CmiCrb2YuVaXyxnP3d+3yGeZ4gHX+5SKqMdzlaBPIQgxFwHWAfKyhFTz
- EMliSbmerhIzwjQLbqCVJ4GYawwQ4Hn0MZQYCC8a9aQeVO0UVFjmiK95eVfmBAxHrhyI
- 7o4Q==
-X-Gm-Message-State: AOJu0YzG9Nykxjua0kCxo7JG3Jph7RKBA8YZ5fV1WSbLZGTZFQ0QNJX4
- dS2nXrtK/66jGVP2dTY0WjskUacBhjI2CFZmhIpWHdREqTNblX9OiZ4q8vt87mE=
-X-Google-Smtp-Source: AGHT+IEWalNe/B6bcVGFbAwFiMlTHCUEVlCVm+r9gPRnM0KElwHyhOuZpAKdSl7tqbKZDt4kx2qoqQ==
-X-Received: by 2002:a17:903:41ce:b0:1f3:ccc:7cb5 with SMTP id
- d9443c01a7336-1f4498f4067mr113059085ad.68.1716827077117; 
- Mon, 27 May 2024 09:24:37 -0700 (PDT)
-Received: from [192.168.68.110] ([177.94.42.4])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1f49c155d6bsm21115415ad.229.2024.05.27.09.24.34
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 May 2024 09:24:36 -0700 (PDT)
-Message-ID: <7c10662b-74ca-4a84-9d11-53b1c13aa97d@ventanamicro.com>
-Date: Mon, 27 May 2024 13:24:32 -0300
+ d=1e100.net; s=20230601; t=1716853683; x=1717458483;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=zDvCIqQ90gs3a611ZISeWsUzBiKPFFGa1iwWUZdPyiE=;
+ b=a9sD+3YZC2U/dy8SiHF47FF8oYuopDXIYfpBCFgueVWGDVMrsZn/eb0tWSjEoXdciw
+ 4Qg2qV9dhkNOkFIuGnZvLQmk+HVDJ5zYxygybdu6iUWNgbP4WPunm47DaMzVm4ohnDbH
+ Mdsa3SFocIg4NjTnAKnTYH2X1sQCwRNi5veHUB9M04viDAPoRTvxm9znNHwnJ8nHEqxj
+ Wcem1UpGGGDQ/gvkwXMk5ixdteinfJZbTJsWYqhXr2v8E2Y/Og5kwL1/6o8aWnyxvNjF
+ cu3LkmuimEniSP2ecPzKMEySth5e5T9/p1iajS6bfMENdKHpIXqXlDmX8MrSLp8wp/xj
+ uj6A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVenFst2FAyKQi4dpqV3+olpS9KNP8yuxJwZySnggAPDd4doURRQPACtuo8yTHhauGW8KkIQKCMLCs7wzPX5qntIc41aEo=
+X-Gm-Message-State: AOJu0Yx6PJLkP1uBwVA7xu/lN2gLBPfzW/wWytIXYzapDrPRsevg8Fu3
+ hRa+81mLA4iKPT6dh+R+nl9v5F+9bo0c0J+6hJ7Q0Gt3r9Q68aj9AiQemtyNWQrAp4BOJmgA3mm
+ xvSPBMpLJfN/U/Jck5QTuXa5ax4E=
+X-Google-Smtp-Source: AGHT+IFv0r64XNIQOjCymfhyRQorQXIfyoYTQHmD8cUvN8SSalKcwM4a9uZ31zUI8xgvak0AHlv1aJ+VQeKrFOxlpWc=
+X-Received: by 2002:a05:6122:1797:b0:4df:18bc:848b with SMTP id
+ 71dfb90a1353d-4e4f02f5184mr10936355e0c.16.1716853683147; Mon, 27 May 2024
+ 16:48:03 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] target/riscv: Support Zama16b extension
-To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, Alistair.Francis@wdc.com,
- bmeng.cn@gmail.com, iwei1518@gmail.com
-References: <20240522091305.1858-1-zhiwei_liu@linux.alibaba.com>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240522091305.1858-1-zhiwei_liu@linux.alibaba.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62b.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20240411113406.1301906-1-cleger@rivosinc.com>
+In-Reply-To: <20240411113406.1301906-1-cleger@rivosinc.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 28 May 2024 09:47:36 +1000
+Message-ID: <CAKmqyKPXVZxA6UMJ6LX4k33NG_cSMU_am0J_QEKk3XorLd=SCw@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: fix instructions count handling in icount
+ mode
+To: =?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@rivosinc.com>
+Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org, 
+ Atish Patra <atishp@rivosinc.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a36;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa36.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -96,342 +96,133 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Zhiwei,
+On Thu, Apr 11, 2024 at 9:34=E2=80=AFPM Cl=C3=A9ment L=C3=A9ger <cleger@riv=
+osinc.com> wrote:
+>
+> When icount is enabled, rather than returning the virtual CPU time, we
+> should return the instruction count itself. Add an instructions bool
+> parameter to get_ticks() to correctly return icount_get_raw() when
+> icount_enabled() =3D=3D 1 and instruction count is queried. This will mod=
+ify
+> the existing behavior which was returning an instructions count close to
+> the number of cycles (CPI ~=3D 1).
+>
+> Signed-off-by: Cl=C3=A9ment L=C3=A9ger <cleger@rivosinc.com>
 
-On 5/22/24 06:13, LIU Zhiwei wrote:
-> Zama16b is the property that misaligned load/stores/atomics within
-> a naturally aligned 16-byte region are atomic.
-> 
-> According to the specification, Zama16b applies only to AMOs, loads
-> and stores defined in the base ISAs, and loads and stores of no more
-> than XLEN bits defined in the F, D, and Q extensions. Thus it should
-> not apply to zacas or RVC instructions.
-> 
-> For an instruction in that set, if all accessed bytes lie within 16B granule,
-> the instruction will not raise an exception for reasons of address alignment,
-> and the instruction will give rise to only one memory operation for the
-> purposes of RVWMO—i.e., it will execute atomically.
-> 
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+This patch fails checkpatch
+
+Have a look at https://www.qemu.org/docs/master/devel/submitting-a-patch.ht=
+ml#id32
+for details on what tests to run before submitting patches
+
+Alistair
+
+>
 > ---
->   target/riscv/cpu.c                      |  2 ++
->   target/riscv/cpu_cfg.h                  |  1 +
->   target/riscv/insn_trans/trans_rva.c.inc | 42 ++++++++++++++-----------
->   target/riscv/insn_trans/trans_rvd.c.inc | 14 +++++++--
->   target/riscv/insn_trans/trans_rvf.c.inc | 14 +++++++--
->   target/riscv/insn_trans/trans_rvi.c.inc |  6 ++++
->   6 files changed, 57 insertions(+), 22 deletions(-)
-> 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index eb1a2e7d6d..911e9892ed 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -117,6 +117,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
->       ISA_EXT_DATA_ENTRY(za64rs, PRIV_VERSION_1_12_0, has_priv_1_11),
->       ISA_EXT_DATA_ENTRY(zaamo, PRIV_VERSION_1_12_0, ext_zaamo),
->       ISA_EXT_DATA_ENTRY(zacas, PRIV_VERSION_1_12_0, ext_zacas),
-> +    ISA_EXT_DATA_ENTRY(zama16b, PRIV_VERSION_1_12_0, ext_zama16b),
-
-
-Isn't zama16b a 1.13 spec extension? Looking it up I think it is.
-
-In this case I think it's wise to make this patch (and any other 1.13 extension
-that we might be adding now) dependent on
-
-"[RESEND PATCH v2 0/5] target/riscv: Support RISC-V privilege 1.13 spec​"
-
-And then we can set the proper spec versions for each one. Thanks,
-
-
-Daniel
-
->       ISA_EXT_DATA_ENTRY(zalrsc, PRIV_VERSION_1_12_0, ext_zalrsc),
->       ISA_EXT_DATA_ENTRY(zawrs, PRIV_VERSION_1_12_0, ext_zawrs),
->       ISA_EXT_DATA_ENTRY(zfa, PRIV_VERSION_1_12_0, ext_zfa),
-> @@ -1464,6 +1465,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
->       MULTI_EXT_CFG_BOOL("zihintntl", ext_zihintntl, true),
->       MULTI_EXT_CFG_BOOL("zihintpause", ext_zihintpause, true),
->       MULTI_EXT_CFG_BOOL("zacas", ext_zacas, false),
-> +    MULTI_EXT_CFG_BOOL("zama16b", ext_zama16b, false),
->       MULTI_EXT_CFG_BOOL("zaamo", ext_zaamo, false),
->       MULTI_EXT_CFG_BOOL("zalrsc", ext_zalrsc, false),
->       MULTI_EXT_CFG_BOOL("zawrs", ext_zawrs, true),
-> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-> index cb750154bd..eaa66eb4f8 100644
-> --- a/target/riscv/cpu_cfg.h
-> +++ b/target/riscv/cpu_cfg.h
-> @@ -81,6 +81,7 @@ struct RISCVCPUConfig {
->       bool ext_zdinx;
->       bool ext_zaamo;
->       bool ext_zacas;
-> +    bool ext_zama16b;
->       bool ext_zalrsc;
->       bool ext_zawrs;
->       bool ext_zfa;
-> diff --git a/target/riscv/insn_trans/trans_rva.c.inc b/target/riscv/insn_trans/trans_rva.c.inc
-> index 4a9e4591d1..eb080baddd 100644
-> --- a/target/riscv/insn_trans/trans_rva.c.inc
-> +++ b/target/riscv/insn_trans/trans_rva.c.inc
-> @@ -103,6 +103,12 @@ static bool gen_amo(DisasContext *ctx, arg_atomic *a,
->       TCGv dest = dest_gpr(ctx, a->rd);
->       TCGv src1, src2 = get_gpr(ctx, a->rs2, EXT_NONE);
->   
-> +    if (ctx->cfg_ptr->ext_zama16b) {
-> +        mop |= MO_ATOM_WITHIN16;
-> +    } else {
-> +        mop |= MO_ALIGN;
-> +    }
-> +
->       decode_save_opc(ctx);
->       src1 = get_address(ctx, a->rs1, 0);
->       func(dest, src1, src2, ctx->mem_idx, mop);
-> @@ -126,55 +132,55 @@ static bool trans_sc_w(DisasContext *ctx, arg_sc_w *a)
->   static bool trans_amoswap_w(DisasContext *ctx, arg_amoswap_w *a)
->   {
->       REQUIRE_A_OR_ZAAMO(ctx);
-> -    return gen_amo(ctx, a, &tcg_gen_atomic_xchg_tl, (MO_ALIGN | MO_TESL));
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_xchg_tl, MO_TESL);
->   }
->   
->   static bool trans_amoadd_w(DisasContext *ctx, arg_amoadd_w *a)
->   {
->       REQUIRE_A_OR_ZAAMO(ctx);
-> -    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_add_tl, (MO_ALIGN | MO_TESL));
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_add_tl, MO_TESL);
->   }
->   
->   static bool trans_amoxor_w(DisasContext *ctx, arg_amoxor_w *a)
->   {
->       REQUIRE_A_OR_ZAAMO(ctx);
-> -    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_xor_tl, (MO_ALIGN | MO_TESL));
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_xor_tl, MO_TESL);
->   }
->   
->   static bool trans_amoand_w(DisasContext *ctx, arg_amoand_w *a)
->   {
->       REQUIRE_A_OR_ZAAMO(ctx);
-> -    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_and_tl, (MO_ALIGN | MO_TESL));
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_and_tl, MO_TESL);
->   }
->   
->   static bool trans_amoor_w(DisasContext *ctx, arg_amoor_w *a)
->   {
->       REQUIRE_A_OR_ZAAMO(ctx);
-> -    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_or_tl, (MO_ALIGN | MO_TESL));
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_or_tl, MO_TESL);
->   }
->   
->   static bool trans_amomin_w(DisasContext *ctx, arg_amomin_w *a)
->   {
->       REQUIRE_A_OR_ZAAMO(ctx);
-> -    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smin_tl, (MO_ALIGN | MO_TESL));
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smin_tl, MO_TESL);
->   }
->   
->   static bool trans_amomax_w(DisasContext *ctx, arg_amomax_w *a)
->   {
->       REQUIRE_A_OR_ZAAMO(ctx);
-> -    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smax_tl, (MO_ALIGN | MO_TESL));
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smax_tl, MO_TESL);
->   }
->   
->   static bool trans_amominu_w(DisasContext *ctx, arg_amominu_w *a)
->   {
->       REQUIRE_A_OR_ZAAMO(ctx);
-> -    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umin_tl, (MO_ALIGN | MO_TESL));
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umin_tl, MO_TESL);
->   }
->   
->   static bool trans_amomaxu_w(DisasContext *ctx, arg_amomaxu_w *a)
->   {
->       REQUIRE_A_OR_ZAAMO(ctx);
-> -    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umax_tl, (MO_ALIGN | MO_TESL));
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umax_tl, MO_TESL);
->   }
->   
->   static bool trans_lr_d(DisasContext *ctx, arg_lr_d *a)
-> @@ -195,61 +201,61 @@ static bool trans_amoswap_d(DisasContext *ctx, arg_amoswap_d *a)
->   {
->       REQUIRE_64BIT(ctx);
->       REQUIRE_A_OR_ZAAMO(ctx);
-> -    return gen_amo(ctx, a, &tcg_gen_atomic_xchg_tl, (MO_ALIGN | MO_TEUQ));
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_xchg_tl, MO_TEUQ);
->   }
->   
->   static bool trans_amoadd_d(DisasContext *ctx, arg_amoadd_d *a)
->   {
->       REQUIRE_64BIT(ctx);
->       REQUIRE_A_OR_ZAAMO(ctx);
-> -    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_add_tl, (MO_ALIGN | MO_TEUQ));
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_add_tl, MO_TEUQ);
->   }
->   
->   static bool trans_amoxor_d(DisasContext *ctx, arg_amoxor_d *a)
->   {
->       REQUIRE_64BIT(ctx);
->       REQUIRE_A_OR_ZAAMO(ctx);
-> -    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_xor_tl, (MO_ALIGN | MO_TEUQ));
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_xor_tl, MO_TEUQ);
->   }
->   
->   static bool trans_amoand_d(DisasContext *ctx, arg_amoand_d *a)
->   {
->       REQUIRE_64BIT(ctx);
->       REQUIRE_A_OR_ZAAMO(ctx);
-> -    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_and_tl, (MO_ALIGN | MO_TEUQ));
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_and_tl, MO_TEUQ);
->   }
->   
->   static bool trans_amoor_d(DisasContext *ctx, arg_amoor_d *a)
->   {
->       REQUIRE_64BIT(ctx);
->       REQUIRE_A_OR_ZAAMO(ctx);
-> -    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_or_tl, (MO_ALIGN | MO_TEUQ));
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_or_tl, MO_TEUQ);
->   }
->   
->   static bool trans_amomin_d(DisasContext *ctx, arg_amomin_d *a)
->   {
->       REQUIRE_64BIT(ctx);
->       REQUIRE_A_OR_ZAAMO(ctx);
-> -    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smin_tl, (MO_ALIGN | MO_TEUQ));
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smin_tl, MO_TEUQ);
->   }
->   
->   static bool trans_amomax_d(DisasContext *ctx, arg_amomax_d *a)
->   {
->       REQUIRE_64BIT(ctx);
->       REQUIRE_A_OR_ZAAMO(ctx);
-> -    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smax_tl, (MO_ALIGN | MO_TEUQ));
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smax_tl, MO_TEUQ);
->   }
->   
->   static bool trans_amominu_d(DisasContext *ctx, arg_amominu_d *a)
->   {
->       REQUIRE_64BIT(ctx);
->       REQUIRE_A_OR_ZAAMO(ctx);
-> -    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umin_tl, (MO_ALIGN | MO_TEUQ));
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umin_tl, MO_TEUQ);
->   }
->   
->   static bool trans_amomaxu_d(DisasContext *ctx, arg_amomaxu_d *a)
->   {
->       REQUIRE_64BIT(ctx);
->       REQUIRE_A_OR_ZAAMO(ctx);
-> -    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umax_tl, (MO_ALIGN | MO_TEUQ));
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umax_tl, MO_TEUQ);
->   }
-> diff --git a/target/riscv/insn_trans/trans_rvd.c.inc b/target/riscv/insn_trans/trans_rvd.c.inc
-> index d9ce9e407f..1f5fac65a2 100644
-> --- a/target/riscv/insn_trans/trans_rvd.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvd.c.inc
-> @@ -42,13 +42,18 @@
->   static bool trans_fld(DisasContext *ctx, arg_fld *a)
->   {
->       TCGv addr;
-> +    MemOp memop = MO_TEUQ;
->   
->       REQUIRE_FPU;
->       REQUIRE_EXT(ctx, RVD);
->   
-> +    if (ctx->cfg_ptr->ext_zama16b && (ctx->cur_insn_len != 2)) {
-> +        memop |= MO_ATOM_WITHIN16;
-> +    }
-> +
->       decode_save_opc(ctx);
->       addr = get_address(ctx, a->rs1, a->imm);
-> -    tcg_gen_qemu_ld_i64(cpu_fpr[a->rd], addr, ctx->mem_idx, MO_TEUQ);
-> +    tcg_gen_qemu_ld_i64(cpu_fpr[a->rd], addr, ctx->mem_idx, memop);
->   
->       mark_fs_dirty(ctx);
->       return true;
-> @@ -57,13 +62,18 @@ static bool trans_fld(DisasContext *ctx, arg_fld *a)
->   static bool trans_fsd(DisasContext *ctx, arg_fsd *a)
->   {
->       TCGv addr;
-> +    MemOp memop = MO_TEUQ;
->   
->       REQUIRE_FPU;
->       REQUIRE_EXT(ctx, RVD);
->   
-> +    if (ctx->cfg_ptr->ext_zama16b && (ctx->cur_insn_len != 2)) {
-> +        memop |= MO_ATOM_WITHIN16;
-> +    }
-> +
->       decode_save_opc(ctx);
->       addr = get_address(ctx, a->rs1, a->imm);
-> -    tcg_gen_qemu_st_i64(cpu_fpr[a->rs2], addr, ctx->mem_idx, MO_TEUQ);
-> +    tcg_gen_qemu_st_i64(cpu_fpr[a->rs2], addr, ctx->mem_idx, memop);
->       return true;
->   }
->   
-> diff --git a/target/riscv/insn_trans/trans_rvf.c.inc b/target/riscv/insn_trans/trans_rvf.c.inc
-> index 97a368970b..f771aa1939 100644
-> --- a/target/riscv/insn_trans/trans_rvf.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvf.c.inc
-> @@ -43,14 +43,19 @@ static bool trans_flw(DisasContext *ctx, arg_flw *a)
->   {
->       TCGv_i64 dest;
->       TCGv addr;
-> +    MemOp memop = MO_TEUL;
->   
->       REQUIRE_FPU;
->       REQUIRE_EXT(ctx, RVF);
->   
-> +    if (ctx->cfg_ptr->ext_zama16b && (ctx->cur_insn_len != 2)) {
-> +        memop |= MO_ATOM_WITHIN16;
-> +    }
-> +
->       decode_save_opc(ctx);
->       addr = get_address(ctx, a->rs1, a->imm);
->       dest = cpu_fpr[a->rd];
-> -    tcg_gen_qemu_ld_i64(dest, addr, ctx->mem_idx, MO_TEUL);
-> +    tcg_gen_qemu_ld_i64(dest, addr, ctx->mem_idx, memop);
->       gen_nanbox_s(dest, dest);
->   
->       mark_fs_dirty(ctx);
-> @@ -60,13 +65,18 @@ static bool trans_flw(DisasContext *ctx, arg_flw *a)
->   static bool trans_fsw(DisasContext *ctx, arg_fsw *a)
->   {
->       TCGv addr;
-> +    MemOp memop = MO_TEUL;
->   
->       REQUIRE_FPU;
->       REQUIRE_EXT(ctx, RVF);
->   
-> +    if (ctx->cfg_ptr->ext_zama16b && (ctx->cur_insn_len != 2)) {
-> +        memop |= MO_ATOM_WITHIN16;
-> +    }
-> +
->       decode_save_opc(ctx);
->       addr = get_address(ctx, a->rs1, a->imm);
-> -    tcg_gen_qemu_st_i64(cpu_fpr[a->rs2], addr, ctx->mem_idx, MO_TEUL);
-> +    tcg_gen_qemu_st_i64(cpu_fpr[a->rs2], addr, ctx->mem_idx, memop);
->       return true;
->   }
->   
-> diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-> index ad40d3e87f..98e3806d5e 100644
-> --- a/target/riscv/insn_trans/trans_rvi.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvi.c.inc
-> @@ -268,6 +268,9 @@ static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
->   {
->       bool out;
->   
-> +    if (ctx->cfg_ptr->ext_zama16b && (ctx->cur_insn_len != 2)) {
-> +        memop |= MO_ATOM_WITHIN16;
-> +    }
->       decode_save_opc(ctx);
->       if (get_xl(ctx) == MXL_RV128) {
->           out = gen_load_i128(ctx, a, memop);
-> @@ -366,6 +369,9 @@ static bool gen_store_i128(DisasContext *ctx, arg_sb *a, MemOp memop)
->   
->   static bool gen_store(DisasContext *ctx, arg_sb *a, MemOp memop)
->   {
-> +    if (ctx->cfg_ptr->ext_zama16b && (ctx->cur_insn_len != 2)) {
-> +        memop |= MO_ATOM_WITHIN16;
-> +    }
->       decode_save_opc(ctx);
->       if (get_xl(ctx) == MXL_RV128) {
->           return gen_store_i128(ctx, a, memop);
+>  target/riscv/csr.c | 29 ++++++++++++++++-------------
+>  1 file changed, 16 insertions(+), 13 deletions(-)
+>
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 726096444f..5f1dcee102 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -762,14 +762,17 @@ static RISCVException write_vcsr(CPURISCVState *env=
+, int csrno,
+>  }
+>
+>  /* User Timers and Counters */
+> -static target_ulong get_ticks(bool shift)
+> +static target_ulong get_ticks(bool shift, bool instructions)
+>  {
+>      int64_t val;
+>      target_ulong result;
+>
+>  #if !defined(CONFIG_USER_ONLY)
+>      if (icount_enabled()) {
+> -        val =3D icount_get();
+> +        if (instructions)
+> +            val =3D icount_get_raw();
+> +        else
+> +            val =3D icount_get();
+>      } else {
+>          val =3D cpu_get_host_ticks();
+>      }
+> @@ -804,14 +807,14 @@ static RISCVException read_timeh(CPURISCVState *env=
+, int csrno,
+>  static RISCVException read_hpmcounter(CPURISCVState *env, int csrno,
+>                                        target_ulong *val)
+>  {
+> -    *val =3D get_ticks(false);
+> +    *val =3D get_ticks(false, (csrno =3D=3D CSR_INSTRET));
+>      return RISCV_EXCP_NONE;
+>  }
+>
+>  static RISCVException read_hpmcounterh(CPURISCVState *env, int csrno,
+>                                         target_ulong *val)
+>  {
+> -    *val =3D get_ticks(true);
+> +    *val =3D get_ticks(true, (csrno =3D=3D CSR_INSTRETH));
+>      return RISCV_EXCP_NONE;
+>  }
+>
+> @@ -875,11 +878,11 @@ static RISCVException write_mhpmcounter(CPURISCVSta=
+te *env, int csrno,
+>      int ctr_idx =3D csrno - CSR_MCYCLE;
+>      PMUCTRState *counter =3D &env->pmu_ctrs[ctr_idx];
+>      uint64_t mhpmctr_val =3D val;
+> +    bool instr =3D riscv_pmu_ctr_monitor_instructions(env, ctr_idx);
+>
+>      counter->mhpmcounter_val =3D val;
+> -    if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
+> -        riscv_pmu_ctr_monitor_instructions(env, ctr_idx)) {
+> -        counter->mhpmcounter_prev =3D get_ticks(false);
+> +    if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) || instr) {
+> +        counter->mhpmcounter_prev =3D get_ticks(false, instr);
+>          if (ctr_idx > 2) {
+>              if (riscv_cpu_mxl(env) =3D=3D MXL_RV32) {
+>                  mhpmctr_val =3D mhpmctr_val |
+> @@ -902,12 +905,12 @@ static RISCVException write_mhpmcounterh(CPURISCVSt=
+ate *env, int csrno,
+>      PMUCTRState *counter =3D &env->pmu_ctrs[ctr_idx];
+>      uint64_t mhpmctr_val =3D counter->mhpmcounter_val;
+>      uint64_t mhpmctrh_val =3D val;
+> +    bool instr =3D riscv_pmu_ctr_monitor_instructions(env, ctr_idx);
+>
+>      counter->mhpmcounterh_val =3D val;
+>      mhpmctr_val =3D mhpmctr_val | (mhpmctrh_val << 32);
+> -    if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
+> -        riscv_pmu_ctr_monitor_instructions(env, ctr_idx)) {
+> -        counter->mhpmcounterh_prev =3D get_ticks(true);
+> +    if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) || instr) {
+> +        counter->mhpmcounterh_prev =3D get_ticks(true, instr);
+>          if (ctr_idx > 2) {
+>              riscv_pmu_setup_timer(env, mhpmctr_val, ctr_idx);
+>          }
+> @@ -926,6 +929,7 @@ static RISCVException riscv_pmu_read_ctr(CPURISCVStat=
+e *env, target_ulong *val,
+>                                           counter->mhpmcounter_prev;
+>      target_ulong ctr_val =3D upper_half ? counter->mhpmcounterh_val :
+>                                          counter->mhpmcounter_val;
+> +    bool instr =3D riscv_pmu_ctr_monitor_instructions(env, ctr_idx);
+>
+>      if (get_field(env->mcountinhibit, BIT(ctr_idx))) {
+>          /*
+> @@ -946,9 +950,8 @@ static RISCVException riscv_pmu_read_ctr(CPURISCVStat=
+e *env, target_ulong *val,
+>       * The kernel computes the perf delta by subtracting the current val=
+ue from
+>       * the value it initialized previously (ctr_val).
+>       */
+> -    if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
+> -        riscv_pmu_ctr_monitor_instructions(env, ctr_idx)) {
+> -        *val =3D get_ticks(upper_half) - ctr_prev + ctr_val;
+> +    if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) || instr) {
+> +        *val =3D get_ticks(upper_half, instr) - ctr_prev + ctr_val;
+>      } else {
+>          *val =3D ctr_val;
+>      }
+> --
+> 2.43.0
+>
+>
 
