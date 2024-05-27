@@ -4,98 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 939A5C25B7C
-	for <qemu-riscv@archiver.kernel.org>; Mon, 27 May 2024 13:19:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10AAFC25B79
+	for <qemu-riscv@archiver.kernel.org>; Mon, 27 May 2024 13:49:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sBaGE-0001RS-Ic; Mon, 27 May 2024 09:19:34 -0400
+	id 1sBaiC-0004Zr-2q; Mon, 27 May 2024 09:48:28 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1sBaG9-0001M1-1V
- for qemu-riscv@nongnu.org; Mon, 27 May 2024 09:19:29 -0400
-Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1sBaG6-0004mw-NT
- for qemu-riscv@nongnu.org; Mon, 27 May 2024 09:19:28 -0400
-Received: by mail-pl1-x629.google.com with SMTP id
- d9443c01a7336-1f48bd643a0so8014995ad.3
- for <qemu-riscv@nongnu.org>; Mon, 27 May 2024 06:19:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1716815965; x=1717420765; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=8vfUxTZGJ+eSUTYdSnZrh0t/6pEj9cIoMqnbXJF5u3Y=;
- b=hLCiK9kQL1E3Yyat8QavhO4Pgzfo2J7qpUwkFxtZbN8ldgQso4kAsQqwWBJwAg3gTn
- kPog4oFTZmmnbiMEvIp1ZCL2JRKTVu0X+RMMUZVm4vlci3x8kt1YbhUyzo2ZzeydvVP6
- A61C5hFae4BmCD8qLaZpFBMcY8so3ALkB2okqRINdPXXCYLceGN35XtLl4KEl9Lt4/pv
- JSLYsBTs+hzEiBysOu3xPlIzrNejMnagvExthHKOlzM7LGUuB6fEucXx+uq2TSIT6R7+
- 8IIGME4pwkkvyMdf2L7QkgJDjxlmMQVLpTfG6ANxTk/7tSXOXO5gHrPt5zcYmeZxajDe
- dAJQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716815965; x=1717420765;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=8vfUxTZGJ+eSUTYdSnZrh0t/6pEj9cIoMqnbXJF5u3Y=;
- b=L5C77P97hu1uoHZtCB67ABv153rKGjfhxUQhAsM6ObxEX8splwoEbnCLUW7U0Fa9JG
- 1JWmSlarLg9Mz1HghoarPgD2r3v1kypHHaa4aPbzZl/eIp7Nsna1LeIwht2/EjxIiS0N
- FMtMXJR5/nbi7tLcLNSyp41VkWYTVz33KStNQpV+6BeqQ+FnYjw8uG703eda7BhEB06O
- FQwGOVKRm+LwzCiBBpqeXYcpjQz72qujVqp7rAPFf5SnuVfYV6vWgIjhcKkwwM6+3bX1
- lOGS0ThZwccEMit9pTHEivgukiSbILzjQeO4S9YPMnW9nOwmscJX52zXyaN5Jnllwl2+
- l28Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXLVVxSWD0BI5xz3fhql7uQYBu7qzzBFNCNLSHYp4Fzaa972u8zFnl4eLU0ZCo5BnZJOxwXvMoaL+D1trOgljrlKVMdK0U=
-X-Gm-Message-State: AOJu0YyMOx8cZw+PB0yMYTNv8u7BNIe0lwmKqBtIc2MN0vLepDgsM++2
- kRlQmB6G1R/L+TNUFiiUeSgzBHsL1bQNG8NKqhq0j9/1rzmzB7Lv4F3YgwfI5/0=
-X-Google-Smtp-Source: AGHT+IHBSUk4YNFT/m9hTvb2N2kKNQepDrMSt+iYW43E1ccXseEkfydTxPOYY2rzxs38RUs0IL9ECA==
-X-Received: by 2002:a17:903:41ce:b0:1f3:2d51:17a with SMTP id
- d9443c01a7336-1f4486fe1ddmr108097335ad.18.1716815964791; 
- Mon, 27 May 2024 06:19:24 -0700 (PDT)
-Received: from [192.168.68.110] ([177.94.42.4])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1f44c7c114fsm60508925ad.97.2024.05.27.06.19.20
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 May 2024 06:19:24 -0700 (PDT)
-Message-ID: <69bb0364-e2a8-4de1-afa7-e9cb5b569f77@ventanamicro.com>
-Date: Mon, 27 May 2024 10:19:18 -0300
+ (Exim 4.90_1) (envelope-from <alexei.filippov@syntacore.com>)
+ id 1sBai9-0004V8-5h; Mon, 27 May 2024 09:48:25 -0400
+Received: from mta-04.yadro.com ([89.207.88.248])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <alexei.filippov@syntacore.com>)
+ id 1sBai7-0001pj-7s; Mon, 27 May 2024 09:48:24 -0400
+DKIM-Filter: OpenDKIM Filter v2.11.0 mta-04.yadro.com 764C2C0002
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
+ s=mta-04; t=1716817698;
+ bh=lalzhHjkbamM4OCsreBFCTmyuWBZzQdSrCFnUTmsOKE=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=C7jjSEL3pjnDJfOXpZy9hNt65Sq/eJ8Vy7/Mur9OKFBckfmyU0CVFWrbcnfRqmFX6
+ NOgX4IaOabKsOXiHxWtYETbHBU8nDtocLgjntGwI5lNOeXNO//XQtz3BvrmY72zkvX
+ Am6P8ki7MR4EcM/rSIiZrlKePpct2oUMlc9WPUn/WmxhXGnorMBRCk2Uga8kF9NXcK
+ gcY7E6UXbFRnwtGpPgkoUsvBoMHZIp4MKdQFkta8jWvAHfnvxTEClF+DOR+ujJpoY3
+ AzFeOq756MdSR0EfU+osIcOcEWDemSfr21sk0A8HihiIKZFb36xCIzU+CcG6D6HVfp
+ zZpUHcW210ulw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
+ s=mta-03; t=1716817698;
+ bh=lalzhHjkbamM4OCsreBFCTmyuWBZzQdSrCFnUTmsOKE=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=wwOBUsyqTUxtqtInVFkIjwEGp4zcJFEA47J0tpo/MMotfWIFF396cWvanHEvYIn9J
+ CkdZifjTvhSJQKIQUqEfMLp+VusZA77/bTPk9WmdyclZntE5315md5EaLAUQ0Afq6L
+ 1k8vck9BtAkaea7HTjsvyw9yhDf1vRMUrK0SXzx4La0+fAtobhaxhDlBCBZ5eaglbt
+ 43XsjyTQHkuzH6c83zjqVcC758PN7MlJjPskdgBGo1rXWopg1XBmjfHjBB/5jzhDNj
+ hNH7vTY2c/VV6dd52rjcUChuJeaf4Sw7K8OnH5biLTiSC1Rk8dYjGg1yGtDlik4rcs
+ 8iwUAoT7aQ2gw==
+From: Alexei Filippov <alexei.filippov@syntacore.com>
+To: <ajones@ventanamicro.com>
+CC: <alexei.filippov@syntacore.com>, <alistair.francis@wdc.com>,
+ <alistair23@gmail.com>, <apatel@ventanamicro.com>, <bin.meng@windriver.com>,
+ <dbarboza@ventanamicro.com>, <liwei1518@gmail.com>, <palmer@dabbelt.com>,
+ <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>,
+ <zhiwei_liu@linux.alibaba.com>
+Subject: [PATCH v7] target/riscv/kvm/kvm-cpu.c: kvm_riscv_handle_sbi() fail
+ with vendor-specific SBI
+Date: Mon, 27 May 2024 16:48:11 +0300
+Message-ID: <20240527134811.342027-1-alexei.filippov@syntacore.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240503-1417868a079951810dadb71c@orel>
+References: <20240503-1417868a079951810dadb71c@orel>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/3] hw/riscv/virt: Add memory hotplugging and
- virtio-md-pci support
-To: =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>,
- David Hildenbrand <david@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Atish Patra <atishp@atishpatra.org>, Atish Patra <atishp@rivosinc.com>
-Cc: =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@rivosinc.com>,
- Sunil V L <sunilvl@ventanamicro.com>,
- Santosh Mamila <santosh.mamila@catalinasystems.io>,
- Chethan Seshadri <Chethan.Seshadri@catalinasystems.io>,
- Sivakumar Munnangi <siva.munnangi@catalinasystems.io>
-References: <20240521105635.795211-1-bjorn@kernel.org>
- <20240521105635.795211-2-bjorn@kernel.org>
- <55810d52-0360-40ad-a8d2-3b6a8aa220ae@ventanamicro.com>
- <51ef570c-da63-4e25-9c48-dbdf8a40a34d@redhat.com>
- <87sey38nsf.fsf@all.your.base.are.belong.to.us>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <87sey38nsf.fsf@all.your.base.are.belong.to.us>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x629.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+Content-Type: text/plain
+X-ClientProxiedBy: T-EXCH-09.corp.yadro.com (172.17.11.59) To
+ T-EXCH-12.corp.yadro.com (172.17.11.143)
+Received-SPF: permerror client-ip=89.207.88.248;
+ envelope-from=alexei.filippov@syntacore.com; helo=mta-04.yadro.com
+X-Spam_score_int: 4
+X-Spam_score: 0.4
+X-Spam_bar: /
+X-Spam_report: (0.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SORTED_RECIPS=2.499,
+ SPF_HELO_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01,
+ T_SPF_PERMERROR=0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -111,191 +82,79 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+kvm_riscv_handle_sbi() may return not supported return code to not
+trigger qemu abort with vendor-specific sbi.
 
+Add new error path to provide proper error in case of
+qemu_chr_fe_read_all() may not return sizeof(ch), because exactly zero
+just means we failed to read input, which can happen, so
+telling the SBI caller we failed to read, but telling the caller of this
+function that we successfully emulated the SBI call, is correct. However,
+anything else, other than sizeof(ch), means something unexpected happened,
+so we should return an error.
 
-On 5/27/24 09:03, Björn Töpel wrote:
-> David Hildenbrand <david@redhat.com> writes:
-> 
->> On 24.05.24 15:14, Daniel Henrique Barboza wrote:
->>>
->>>
->>> On 5/21/24 07:56, Björn Töpel wrote:
->>>> From: Björn Töpel <bjorn@rivosinc.com>
->>>>
->>>> Virtio-based memory devices (virtio-mem/virtio-pmem) allows for
->>>> dynamic resizing of virtual machine memory, and requires proper
->>>> hotplugging (add/remove) support to work.
->>>>
->>>> Add device memory support for RISC-V "virt" machine, and enable
->>>> virtio-md-pci with the corresponding missing hotplugging callbacks.
->>>>
->>>> Signed-off-by: Björn Töpel <bjorn@rivosinc.com>
->>>> ---
->>>>     hw/riscv/Kconfig       |  2 +
->>>>     hw/riscv/virt.c        | 83 +++++++++++++++++++++++++++++++++++++++++-
->>>>     hw/virtio/virtio-mem.c |  5 ++-
->>>>     3 files changed, 87 insertions(+), 3 deletions(-)
->>>>
->>>> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
->>>> index a2030e3a6ff0..08f82dbb681a 100644
->>>> --- a/hw/riscv/Kconfig
->>>> +++ b/hw/riscv/Kconfig
->>>> @@ -56,6 +56,8 @@ config RISCV_VIRT
->>>>         select PLATFORM_BUS
->>>>         select ACPI
->>>>         select ACPI_PCI
->>>> +    select VIRTIO_MEM_SUPPORTED
->>>> +    select VIRTIO_PMEM_SUPPORTED
->>>>     
->>>>     config SHAKTI_C
->>>>         bool
->>>> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
->>>> index 4fdb66052587..443902f919d2 100644
->>>> --- a/hw/riscv/virt.c
->>>> +++ b/hw/riscv/virt.c
->>>> @@ -53,6 +53,8 @@
->>>>     #include "hw/pci-host/gpex.h"
->>>>     #include "hw/display/ramfb.h"
->>>>     #include "hw/acpi/aml-build.h"
->>>> +#include "hw/mem/memory-device.h"
->>>> +#include "hw/virtio/virtio-mem-pci.h"
->>>>     #include "qapi/qapi-visit-common.h"
->>>>     #include "hw/virtio/virtio-iommu.h"
->>>>     
->>>> @@ -1407,6 +1409,7 @@ static void virt_machine_init(MachineState *machine)
->>>>         DeviceState *mmio_irqchip, *virtio_irqchip, *pcie_irqchip;
->>>>         int i, base_hartid, hart_count;
->>>>         int socket_count = riscv_socket_count(machine);
->>>> +    hwaddr device_memory_base, device_memory_size;
->>>>     
->>>>         /* Check socket count limit */
->>>>         if (VIRT_SOCKETS_MAX < socket_count) {
->>>> @@ -1420,6 +1423,12 @@ static void virt_machine_init(MachineState *machine)
->>>>             exit(1);
->>>>         }
->>>>     
->>>> +    if (machine->ram_slots > ACPI_MAX_RAM_SLOTS) {
->>>> +        error_report("unsupported amount of memory slots: %"PRIu64,
->>>> +                     machine->ram_slots);
->>>> +        exit(EXIT_FAILURE);
->>>> +    }
->>>> +
->>>>         /* Initialize sockets */
->>>>         mmio_irqchip = virtio_irqchip = pcie_irqchip = NULL;
->>>>         for (i = 0; i < socket_count; i++) {
->>>> @@ -1553,6 +1562,37 @@ static void virt_machine_init(MachineState *machine)
->>>>         memory_region_add_subregion(system_memory, memmap[VIRT_MROM].base,
->>>>                                     mask_rom);
->>>>     
->>>> +    /* device memory */
->>>> +    device_memory_base = ROUND_UP(s->memmap[VIRT_DRAM].base + machine->ram_size,
->>>> +                                  GiB);
->>>> +    device_memory_size = machine->maxram_size - machine->ram_size;
->>>> +    if (device_memory_size > 0) {
->>>> +        /*
->>>> +         * Each DIMM is aligned based on the backend's alignment value.
->>>> +         * Assume max 1G hugepage alignment per slot.
->>>> +         */
->>>> +        device_memory_size += machine->ram_slots * GiB;
->>>
->>> We don't need to align to 1GiB. This calc can use 2MiB instead (or 4MiB if we're
->>> running 32 bits).
->>>
->>>> +
->>>> +        if (riscv_is_32bit(&s->soc[0])) {
->>>> +            hwaddr memtop = device_memory_base + ROUND_UP(device_memory_size,
->>>> +                                                          GiB);
->>>
->>> Same here - alignment is 2/4 MiB.
->>>
->>>> +
->>>> +            if (memtop > UINT32_MAX) {
->>>> +                error_report("memory exceeds 32-bit limit by %lu bytes",
->>>> +                             memtop - UINT32_MAX);
->>>> +                exit(EXIT_FAILURE);
->>>> +            }
->>>> +        }
->>>> +
->>>> +        if (device_memory_base + device_memory_size < device_memory_size) {
->>>> +            error_report("unsupported amount of device memory");
->>>> +            exit(EXIT_FAILURE);
->>>> +        }
->>>
->>> Took another look and found this a bit strange. These are all unsigned vars, so
->>> if (unsigned a + unsigned b < unsigned b) will always be 'false'. The compiler is
->>> probably cropping this out.
->>
->> No. Unsigned interger overflow is defined behavior and this is a common
->> check to detect such overflow. tI's consistent with what we do for other
->> architectures.
->>
->>>
->>> The calc we need to do is to ensure that the extra ram_slots * alignment will fit into
->>> the VIRT_DRAM block, i.e. maxram_size + (ram_slots * alignment) < memmap[VIRT_DRAM].size.
->>>
->>>
->>> TBH I'm starting to have second thoughts about letting users hotplug whatever they want.
->>> It seems cleaner to just force the 2/4 Mb alignment in pre_plug() and be done with it,
->>> no need to allocate ram_slots * alignment and doing all these extra checks.
->>
->> It's worth noting that if user space decides to specify addresses
->> manually, it can mess up everything already. There are other events that
->> can result in fragmentation of the memory device area (repeated
->> hot(un)plug of differing DIMMs).
->>
->> Assume you have 1 GiB range and hotplug a 512 MiB DIMM at offset 256
->> MiB. You won't be able to hotplug another 512 MiB DIMM even though we
->> reserved space.
->>
->> My take so far is: if the user wants to do such stuff it should size the
->> area (maxmem) much larger or deal with the concequences (not being able
->> to hotplug memory).
->>
->> It usually does not happen in practice ...
-> 
-> Daniel/David, again thanks for spending time on the patches.
-> 
-> The reason I picked 1 GiB per slot was because the alignment is also
-> dependent on the backend AFAIU. Rationale in commit 085f8e88ba73 ("pc:
-> count in 1Gb hugepage alignment when sizing hotplug-memory container").
-> 
-> What I'm reading from you guys are: Just depend on whatever maxmem says
-> (modulo 2/4M alignment), and leave at that. I agree that that's much
-> easier to reason about.
-> 
-> Correct?
+Added SBI related return code's defines.
 
-We could opt for the more conservative approach and keep the 1Gb per dimm to
-account for hugepage mem fragmentation that the commit is talking about, assuming
-that this scenario is still feasible to happen.
+Signed-off-by: Alexei Filippov <alexei.filippov@syntacore.com>
+Fixes: 4eb47125 ("target/riscv: Handle KVM_EXIT_RISCV_SBI exit")
+---
+Changes since v6:
+		- Add appropriate commit message.
+		- Fix error handling according to Andrew Jones suggestion.
+ target/riscv/kvm/kvm-cpu.c         | 11 +++++++----
+ target/riscv/sbi_ecall_interface.h | 12 ++++++++++++
+ 2 files changed, 19 insertions(+), 4 deletions(-)
 
-riscv64 can take this extra restriction (i.e. an extra 256GiB RAM just for that)
-but I'm afraid this would eradicate hotplug support for riscv32 since it'll never
-has enough memory to deal with a spare 1Gb per slot.
+diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+index f9dbc18a76..a84bcda9d9 100644
+--- a/target/riscv/kvm/kvm-cpu.c
++++ b/target/riscv/kvm/kvm-cpu.c
+@@ -1173,16 +1173,19 @@ static int kvm_riscv_handle_sbi(CPUState *cs, struct kvm_run *run)
+         ret = qemu_chr_fe_read_all(serial_hd(0)->be, &ch, sizeof(ch));
+         if (ret == sizeof(ch)) {
+             run->riscv_sbi.ret[0] = ch;
++            ret = 0;
+         } else {
+-            run->riscv_sbi.ret[0] = -1;
++            if (ret == 0) {
++                run->riscv_sbi.ret[0] = SBI_ERR_FAILURE;
++            }
++            ret = -1;
+         }
+-        ret = 0;
+         break;
+     default:
+         qemu_log_mask(LOG_UNIMP,
+-                      "%s: un-handled SBI EXIT, specific reasons is %lu\n",
++                      "%s: Unhandled SBI exit with extension-id %lu\n",
+                       __func__, run->riscv_sbi.extension_id);
+-        ret = -1;
++        run->riscv_sbi.ret[0] = SBI_ERR_NOT_SUPPORTED;
+         break;
+     }
+     return ret;
+diff --git a/target/riscv/sbi_ecall_interface.h b/target/riscv/sbi_ecall_interface.h
+index 43899d08f6..a2e21d9b8c 100644
+--- a/target/riscv/sbi_ecall_interface.h
++++ b/target/riscv/sbi_ecall_interface.h
+@@ -69,4 +69,16 @@
+ #define SBI_EXT_VENDOR_END              0x09FFFFFF
+ /* clang-format on */
+ 
++/* SBI return error codes */
++#define SBI_SUCCESS                  0
++#define SBI_ERR_FAILURE             -1
++#define SBI_ERR_NOT_SUPPORTED       -2
++#define SBI_ERR_INVALID_PARAM       -3
++#define SBI_ERR_DENIED              -4
++#define SBI_ERR_INVALID_ADDRESS     -5
++#define SBI_ERR_ALREADY_AVAILABLE   -6
++#define SBI_ERR_ALREADY_STARTED     -7
++#define SBI_ERR_ALREADY_STOPPED     -8
++#define SBI_ERR_NO_SHMEM            -9
++
+ #endif
+-- 
+2.34.1
 
-I'm aware that you're working in the RISC-V kernel support for memory hotplug, so
-you can answer this better than I can: do we care about hugepage support for
-riscv32? Assuming we don't, then we could keep 4MiB alignment for riscv32 but do
-1GiB for riscv64 to account for this potential hugepage fragmentation.
-
-
-Thanks,
-
-Daniel
-
-> 
->>> As I sent in an earlier email, users must already comply to the alignment of the host
->>> memory when plugging pc-dimms, so I'm not sure our value/proposition with all this
->>> extra code is worth it - the alignment will most likely be forced by the host memory
->>> backend, so might as well force ourselves in pre_plug().
->>
->> At least on x86-64, the 2 MiB alignment requirement is handled
->> automatically. QEMU_VMALLOC_ALIGN implicitly enforces that.
->>
->> Maybe RISCV also wants to set QEMU_VMALLOC_ALIGN?
-> 
-> I'll look into this for the next rev!
-> 
-> 
-> Björn
 
