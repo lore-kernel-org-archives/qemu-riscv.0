@@ -4,61 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E82AC25B78
-	for <qemu-riscv@archiver.kernel.org>; Tue, 28 May 2024 07:27:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C590FC25B78
+	for <qemu-riscv@archiver.kernel.org>; Tue, 28 May 2024 07:31:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sBrDW-0007lj-DA; Tue, 28 May 2024 03:25:54 -0400
+	id 1sBrIl-0003ak-Na; Tue, 28 May 2024 03:31:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <duchao@eswincomputing.com>)
- id 1sBrDT-0007kc-C7; Tue, 28 May 2024 03:25:51 -0400
-Received: from zg8tmja2lje4os43os4xodqa.icoremail.net ([206.189.79.184])
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <duchao@eswincomputing.com>)
- id 1sBrDN-0000UX-MO; Tue, 28 May 2024 03:25:51 -0400
-Received: from localhost.localdomain (unknown [10.12.130.31])
- by app2 (Coremail) with SMTP id TQJkCgCHjLlhhlVmgzQNAA--.46423S4;
- Tue, 28 May 2024 15:23:13 +0800 (CST)
-From: Chao Du <duchao@eswincomputing.com>
-To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com,
- ajones@ventanamicro.com, alistair23@gmail.com, bin.meng@windriver.com,
- liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com, anup@brainfault.org,
- duchao713@qq.com
-Subject: [PATCH v2 0/3] target/riscv/kvm: QEMU support for KVM Guest Debug on
- RISC-V
-Date: Tue, 28 May 2024 07:20:45 +0000
-Message-Id: <20240528072048.25529-1-duchao@eswincomputing.com>
-X-Mailer: git-send-email 2.17.1
-X-CM-TRANSID: TQJkCgCHjLlhhlVmgzQNAA--.46423S4
-X-Coremail-Antispam: 1UD129KBjvJXoW7Zw1xZryDZr1UKr1xtw18Zrb_yoW8Xr4Dpa
- 1F9F98CrZIqrWfG3ySk3WkWr15Zws5Cr1UZw1xZw4Sqr45ZayrArn2g398Wr17A3y8GFyj
- kFnI9r9F9F1qvrJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUvIb7Iv0xC_KF4lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
- 0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
- A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xII
- jxv20xvEc7CjxVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwV
- C2z280aVCY1x0267AKxVW0oVCq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC
- 0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr
- 1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcxkI7VAKI48JM4IIrI8v6xkF7I0E8cxan2IY
- 04v7MxkIecxEwVCm-wCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s
- 026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_
- Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20x
- vEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE
- 14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf
- 9x07j04E_UUUUU=
-X-CM-SenderInfo: xgxfxt3r6h245lqf0zpsxwx03jof0z/
-Received-SPF: pass client-ip=206.189.79.184;
- envelope-from=duchao@eswincomputing.com;
- helo=zg8tmja2lje4os43os4xodqa.icoremail.net
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_MSPIKE_H2=-0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01,
- T_SPF_HELO_TEMPERROR=0.01 autolearn=ham autolearn_force=no
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1sBrIk-0003aW-NR
+ for qemu-riscv@nongnu.org; Tue, 28 May 2024 03:31:18 -0400
+Received: from mail-pf1-x434.google.com ([2607:f8b0:4864:20::434])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1sBrIi-0001dM-Rt
+ for qemu-riscv@nongnu.org; Tue, 28 May 2024 03:31:18 -0400
+Received: by mail-pf1-x434.google.com with SMTP id
+ d2e1a72fcca58-6f4ed9dc7beso389391b3a.1
+ for <qemu-riscv@nongnu.org>; Tue, 28 May 2024 00:31:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1716881475; x=1717486275; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=uqmGp1q1QLZg7tcFOz2rAYVe/1SozcmikYc8Vhl1qtE=;
+ b=fS40hUgGv+c2jckRg5Ki4Zp0Hf/gbPk9Kvi5Eyg1/BXbK+/y3iVxbVINBypmp701Lb
+ koDUFvwtMO5s7BPJIGQKYa+mHC/hFIgJX9SgSGR4Zm+Bt7XoxMJyn7sWxFVSyJLH4Hwu
+ +L2mYOWWUcvTSJ8n2W9BqiU1s9mhFKErtIsTnq2E0603RQu8OoKl2qwRPXd+vQTuubHU
+ w3uTptdpitW3aA+yu6z4Uvx9pNySNmZTPB5VFH6FYidIS9YSRrjob+xYDduTG+QMOZMJ
+ 0oquqSPH2VJ3WiAJsTsRjf8bw1W3Tn7/ZmFViNbcY1WM3snG3yujkxdOdieX91nF0VLO
+ cDPA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1716881475; x=1717486275;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=uqmGp1q1QLZg7tcFOz2rAYVe/1SozcmikYc8Vhl1qtE=;
+ b=qxJzxNYH2LQlEyWT7FgY2xQ5oMvcOvsb8wVyPVZQqAAGMUZlXBRziyl4bePpSdJZFb
+ t2xtTAmbH3zJohEAIrE5c7mUXkEThvtxHfBY/DPU0pFXEgcAVQp122vuEhytJ/lrpUID
+ xSks8JXqUfk51DJ1CdgNUJGaOhxBOyl+JF6S5RRqdol231HzihfGw0RfCU0+AOUzIlnO
+ X+9V6FEx5vlfgOUZaGz0qib4lJiXlNWB1xgsA5pcPU5NsJ8aeYSVyKvfgGtVGUqhQW4r
+ FkO3Hd0ksD1UblBHfTGG0ecy66KWgF0AlDFVf+QLkEKy0HIdUvLRabhf6/kdzOokiq/q
+ NSaA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVUCyAR+v/ekpvWZPprnHDi0hyGGE8S33q+NxXB6djXQAdp2M5ceT/h5CQHXfMCtILodu9ouqU1GxJS+fgDrdOSvnLoEdc=
+X-Gm-Message-State: AOJu0Yw7lSUn1LUTZNU6UYhvePN4Oel8pDMBLAe6PRNlmay4tGWrc8pV
+ jdZbP15dab1UDXwhKi0n4YBRDWuy3G0p30X/YFZLLcgPe7oQBl9kfLcgcmow1QU=
+X-Google-Smtp-Source: AGHT+IH6YJfvYVJlSfNqhIVKjk5TAWaDXKz+x34edxD07Hvvo9bhIL70qKCEs+7bVXas+ZoSm2A1fg==
+X-Received: by 2002:a05:6a00:1d8d:b0:6ec:ef1c:4dcd with SMTP id
+ d2e1a72fcca58-6f8e955aa5fmr16073812b3a.6.1716881475343; 
+ Tue, 28 May 2024 00:31:15 -0700 (PDT)
+Received: from sunil-pc.Dlink ([106.51.188.31])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-6f8fd4d51a2sm5881080b3a.189.2024.05.28.00.31.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 28 May 2024 00:31:14 -0700 (PDT)
+From: Sunil V L <sunilvl@ventanamicro.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Andrew Jones <ajones@ventanamicro.com>,
+ Sunil V L <sunilvl@ventanamicro.com>
+Subject: [PATCH 1/3] gpex-acpi: Support PCI link devices outside the host
+ bridge
+Date: Tue, 28 May 2024 13:01:01 +0530
+Message-Id: <20240528073103.1075812-2-sunilvl@ventanamicro.com>
+X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20240528073103.1075812-1-sunilvl@ventanamicro.com>
+References: <20240528073103.1075812-1-sunilvl@ventanamicro.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::434;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pf1-x434.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -74,46 +103,151 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This series implements QEMU KVM Guest Debug on RISC-V, with which we
-could debug RISC-V KVM guest from the host side, using software
-breakpoints.
+Currently, PCI link devices (PNP0C0F) are always created within the
+scope of the PCI root complex. However, RISC-V needs PCI link devices to
+be outside the scope of the PCI host bridge to properly enable the probe
+order. This matches the example given in the ACPI specification section
+6.2.13.1 as well.
 
-This series is based on riscv-to-apply.next branch (v9.0.0) and is also
-available at:
-https://github.com/Du-Chao/alistair23-qemu/tree/riscv-to-apply.next.0528
+Enable creating link devices outside the scope of PCI root complex based
+on the flag which gets set currently only for RISC-V.
 
-The corresponding KVM side patches have been merged already:
-https://lore.kernel.org/kvm/20240402062628.5425-1-duchao@eswincomputing.com/
+Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+---
+ hw/pci-host/gpex-acpi.c    | 29 ++++++++++++++++++++++++-----
+ hw/riscv/virt-acpi-build.c |  8 +++++---
+ include/hw/pci-host/gpex.h |  5 ++++-
+ 3 files changed, 33 insertions(+), 9 deletions(-)
 
-A TODO list which will be added later:
-1. HW breakpoints support
-2. A 'corner case' in which the debug exception is not inserted by the
-debugger, need to be re-injected to the guest.
-
-v1->v2:
-- squash patch #2 into #1
-- check the instruction length from the tail two bits, instead of passing the
-  length information by parameters.
-
-RFC->v1:
-- Rebased on riscv-to-apply.next
-- use configs/ definition to conditionalize debug support
-
-v1 link:
-https://lore.kernel.org/qemu-riscv/20240527021916.12953-1-duchao@eswincomputing.com/
-RFC link:
-https://lore.kernel.org/qemu-riscv/20231221094923.7349-1-duchao@eswincomputing.com/
-
-Chao Du (3):
-  target/riscv/kvm: add software breakpoints support
-  target/riscv/kvm: handle the exit with debug reason
-  target/riscv/kvm: define TARGET_KVM_HAVE_GUEST_DEBUG
-
- configs/targets/riscv64-softmmu.mak |  1 +
- target/riscv/kvm/kvm-cpu.c          | 89 +++++++++++++++++++++++++++++
- 2 files changed, 90 insertions(+)
-
---
-2.17.1
+diff --git a/hw/pci-host/gpex-acpi.c b/hw/pci-host/gpex-acpi.c
+index f69413ea2c..cea89a3ed8 100644
+--- a/hw/pci-host/gpex-acpi.c
++++ b/hw/pci-host/gpex-acpi.c
+@@ -7,7 +7,7 @@
+ #include "hw/pci/pcie_host.h"
+ #include "hw/acpi/cxl.h"
+ 
+-static void acpi_dsdt_add_pci_route_table(Aml *dev, uint32_t irq)
++static void acpi_dsdt_add_pci_route_table(Aml *scope, Aml *dev, uint32_t irq)
+ {
+     Aml *method, *crs;
+     int i, slot_no;
+@@ -45,7 +45,17 @@ static void acpi_dsdt_add_pci_route_table(Aml *dev, uint32_t irq)
+         aml_append(dev_gsi, aml_name_decl("_CRS", crs));
+         method = aml_method("_SRS", 1, AML_NOTSERIALIZED);
+         aml_append(dev_gsi, method);
+-        aml_append(dev, dev_gsi);
++
++        /*
++         * Some architectures like RISC-V need PCI link devices created
++         * outside the scope of the PCI host bridge similar to the example
++         * given in the section 6.2.13.1 of ACPI spec 6.5.
++         */
++         if (scope) {
++            aml_append(scope, dev_gsi);
++        } else {
++            aml_append(dev, dev_gsi);
++        }
+     }
+ }
+ 
+@@ -174,7 +184,11 @@ void acpi_dsdt_add_gpex(Aml *scope, struct GPEXConfig *cfg)
+                 aml_append(dev, aml_name_decl("_PXM", aml_int(numa_node)));
+             }
+ 
+-            acpi_dsdt_add_pci_route_table(dev, cfg->irq);
++            if (cfg->flags & GPEX_FLAGS_EXT_GSI_LINK) {
++                acpi_dsdt_add_pci_route_table(scope, dev, cfg->irq);
++            } else {
++                acpi_dsdt_add_pci_route_table(NULL, dev, cfg->irq);
++            }
+ 
+             /*
+              * Resources defined for PXBs are composed of the following parts:
+@@ -205,7 +219,11 @@ void acpi_dsdt_add_gpex(Aml *scope, struct GPEXConfig *cfg)
+     aml_append(dev, aml_name_decl("_STR", aml_unicode("PCIe 0 Device")));
+     aml_append(dev, aml_name_decl("_CCA", aml_int(1)));
+ 
+-    acpi_dsdt_add_pci_route_table(dev, cfg->irq);
++    if (cfg->flags & GPEX_FLAGS_EXT_GSI_LINK) {
++        acpi_dsdt_add_pci_route_table(scope, dev, cfg->irq);
++    } else {
++        acpi_dsdt_add_pci_route_table(NULL, dev, cfg->irq);
++    }
+ 
+     method = aml_method("_CBA", 0, AML_NOTSERIALIZED);
+     aml_append(method, aml_return(aml_int(cfg->ecam.base)));
+@@ -282,7 +300,7 @@ void acpi_dsdt_add_gpex(Aml *scope, struct GPEXConfig *cfg)
+     crs_range_set_free(&crs_range_set);
+ }
+ 
+-void acpi_dsdt_add_gpex_host(Aml *scope, uint32_t irq)
++void acpi_dsdt_add_gpex_host(Aml *scope, uint32_t irq, uint32_t flags)
+ {
+     bool ambig;
+     Object *obj = object_resolve_path_type("", TYPE_GPEX_HOST, &ambig);
+@@ -292,5 +310,6 @@ void acpi_dsdt_add_gpex_host(Aml *scope, uint32_t irq)
+     }
+ 
+     GPEX_HOST(obj)->gpex_cfg.irq = irq;
++    GPEX_HOST(obj)->gpex_cfg.flags = flags;
+     acpi_dsdt_add_gpex(scope, &GPEX_HOST(obj)->gpex_cfg);
+ }
+diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
+index 0925528160..832a3acb8d 100644
+--- a/hw/riscv/virt-acpi-build.c
++++ b/hw/riscv/virt-acpi-build.c
+@@ -417,19 +417,21 @@ static void build_dsdt(GArray *table_data,
+         virtio_acpi_dsdt_add(scope, memmap[VIRT_VIRTIO].base,
+                              memmap[VIRT_VIRTIO].size,
+                              VIRTIO_IRQ, 0, VIRTIO_COUNT);
+-        acpi_dsdt_add_gpex_host(scope, PCIE_IRQ);
++        acpi_dsdt_add_gpex_host(scope, PCIE_IRQ, GPEX_FLAGS_EXT_GSI_LINK);
+     } else if (socket_count == 2) {
+         virtio_acpi_dsdt_add(scope, memmap[VIRT_VIRTIO].base,
+                              memmap[VIRT_VIRTIO].size,
+                              VIRTIO_IRQ + VIRT_IRQCHIP_NUM_SOURCES, 0,
+                              VIRTIO_COUNT);
+-        acpi_dsdt_add_gpex_host(scope, PCIE_IRQ + VIRT_IRQCHIP_NUM_SOURCES);
++        acpi_dsdt_add_gpex_host(scope, PCIE_IRQ + VIRT_IRQCHIP_NUM_SOURCES,
++                                GPEX_FLAGS_EXT_GSI_LINK);
+     } else {
+         virtio_acpi_dsdt_add(scope, memmap[VIRT_VIRTIO].base,
+                              memmap[VIRT_VIRTIO].size,
+                              VIRTIO_IRQ + VIRT_IRQCHIP_NUM_SOURCES, 0,
+                              VIRTIO_COUNT);
+-        acpi_dsdt_add_gpex_host(scope, PCIE_IRQ + VIRT_IRQCHIP_NUM_SOURCES * 2);
++        acpi_dsdt_add_gpex_host(scope, PCIE_IRQ + VIRT_IRQCHIP_NUM_SOURCES * 2,
++                                GPEX_FLAGS_EXT_GSI_LINK);
+     }
+ 
+     aml_append(dsdt, scope);
+diff --git a/include/hw/pci-host/gpex.h b/include/hw/pci-host/gpex.h
+index dce883573b..bee17d62c5 100644
+--- a/include/hw/pci-host/gpex.h
++++ b/include/hw/pci-host/gpex.h
+@@ -47,8 +47,11 @@ struct GPEXConfig {
+     MemMapEntry pio;
+     int         irq;
+     PCIBus      *bus;
++    uint32_t    flags;
+ };
+ 
++#define GPEX_FLAGS_EXT_GSI_LINK BIT(0)
++
+ struct GPEXHost {
+     /*< private >*/
+     PCIExpressHost parent_obj;
+@@ -71,7 +74,7 @@ struct GPEXHost {
+ int gpex_set_irq_num(GPEXHost *s, int index, int gsi);
+ 
+ void acpi_dsdt_add_gpex(Aml *scope, struct GPEXConfig *cfg);
+-void acpi_dsdt_add_gpex_host(Aml *scope, uint32_t irq);
++void acpi_dsdt_add_gpex_host(Aml *scope, uint32_t irq, uint32_t flags);
+ 
+ #define PCI_HOST_PIO_BASE               "x-pio-base"
+ #define PCI_HOST_PIO_SIZE               "x-pio-size"
+-- 
+2.40.1
 
 
