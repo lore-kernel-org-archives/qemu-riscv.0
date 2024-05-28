@@ -4,84 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE593C25B7C
-	for <qemu-riscv@archiver.kernel.org>; Tue, 28 May 2024 13:05:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66AE3C27C44
+	for <qemu-riscv@archiver.kernel.org>; Tue, 28 May 2024 13:42:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sBwVQ-0004jR-5G; Tue, 28 May 2024 09:04:44 -0400
+	id 1sBx5W-00015X-Vh; Tue, 28 May 2024 09:42:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jerry.zhangjian@sifive.com>)
- id 1sBwVN-0004iM-9E
- for qemu-riscv@nongnu.org; Tue, 28 May 2024 09:04:41 -0400
-Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1sBx5U-00014R-JZ
+ for qemu-riscv@nongnu.org; Tue, 28 May 2024 09:42:00 -0400
+Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jerry.zhangjian@sifive.com>)
- id 1sBwVK-0003pO-2l
- for qemu-riscv@nongnu.org; Tue, 28 May 2024 09:04:40 -0400
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-1f4a52b9589so7044215ad.3
- for <qemu-riscv@nongnu.org>; Tue, 28 May 2024 06:04:37 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1sBx5S-0002bK-QV
+ for qemu-riscv@nongnu.org; Tue, 28 May 2024 09:42:00 -0400
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-4202cea9a2fso5904385e9.3
+ for <qemu-riscv@nongnu.org>; Tue, 28 May 2024 06:41:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1716901476; x=1717506276; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TkWDWLJe6ifCLfRxbVy6kaBipu+b3OffSbkRgfkqXg0=;
- b=VrR84w7i8k+eYVQKKiHyrea14CvMvKWYfSgu/tniICbgA+S8+nZ6g/iaBzOLyhKGfN
- 5WrRuM9UqKxScQWvoJQSb36qlhcU3/4AypU3mkDoujztkA1jHSbWr31LeHLnHgCvrY6g
- sZAXnJJmD6d/u0BBLhlx6X90nyZy1zvVOnxrTEUmuau37UsPyZczwcnnTOm2V8XVb1NN
- ubs4nDwnt285o3+B7bUyj7Pcl3ISQ4o8PO3XbVbkzQEKCAx1RrqoTZ0jO029vEVakkcl
- 17CDC41iRCRk6X5WJpHuWEBTYqzs0eY7Ufg6onogGdrg0Uzf8o5qCyB3oI4xqcrrfVWJ
- 9WBw==
+ d=ventanamicro.com; s=google; t=1716903717; x=1717508517; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ublzVFutB1HyFEg/ymKAbgFU8dLLAzP5QKRUL6B91Sk=;
+ b=dm0uoQKyRk1HS63yBLHv7spascp/GfyXGWuEUM+JFx211eDE010pSSzP54MeUBKLg7
+ JIuohFc+CuQFBYnKGx/YzNLOztj69/Rvj5RZ504zZvViyEdp0+Sqo0DW4aqs+AheUR9a
+ U/Ih1kKfiY8XZh87/Oe1642VhBC7cK8oy5PruS6wVDqyHunWd1h8BghiUYyycsO5AXPA
+ m0iww4QF/DszENCBe35OpboZ6TKA1wRuDwk7o4vI5h7z239WsK6dh8E/eagvCHe2jMgn
+ uvrAa004gEICoEQFTp8LyNtsXhbIIaPqRZ4a5jQced/xOxWd4u5ZpB0Rs7JKEsyKPeOS
+ D90Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716901476; x=1717506276;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=TkWDWLJe6ifCLfRxbVy6kaBipu+b3OffSbkRgfkqXg0=;
- b=pvAT6k3s92AgsXw9CL63sx7tmBjr0OJ2RkyGGB03RQooPT2YXFSsl2VbvNEp1Y6iT7
- 1Agji1JbzoIhflwL/+cAAk1PhjEHYCIPZ4mGxrfnfS7zdOj+w+poPVFYrokdip621Vp4
- gCxUB/pHu64d2rfNcPecOTqvmdhQxjbBVYx+Kg0xuT/6+0gnp15RR7mKrHDwaYYe6Pof
- AE5QzoNHyalMGbm1VStkRHuK14U4cyenPhq/9S1AjHhv13lF+PJCckl/I97DCxlOMgme
- uaTep4E2U0HUPdLmsLIJJXyqAHoxGknTpEEWw+fTfGrDZ0S5mzuTsV4z6GkAXOZGAi/s
- o+9g==
+ d=1e100.net; s=20230601; t=1716903717; x=1717508517;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ublzVFutB1HyFEg/ymKAbgFU8dLLAzP5QKRUL6B91Sk=;
+ b=YcBQ4USnDPtsIVyx/5AKVfLrBP8gGMGJZSK8H6smOmc8ZQa4L9YgLO6lnfUq3qYZvZ
+ c3wjlZtdRNvF6B8xCFpWZEyFsFR4p7aP3QjcdAYXfFoeRrJsrKw5hZRDAdSPbAsUrM1B
+ GQ9nbmtPGaohcWr+INqZcG4phqThQo5TZQHZc1GK8hGpASSuEyU3mIEPkvNzefDHXyxa
+ 0QTgxipyjdU327aGnUGUZNQG8cp5GkpdTyReULN5N6yuBCUztg6hyAGLp17SNs9hquO8
+ fmX/AxYgpXfQXdfgs3Y7oZ+gUmhc8jd02BGfyjtZMPpm0x81GBrxvipJBRhXJzSRXTt8
+ 43ug==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX+7eMoixbbIYQVf++MjjGtxUhTo+7ihVRw0x2f0AI0L7MKszbCIl2YISDw7UbK2hA4aEM1CUlT7HfNIAICscDCWx5Qbzw=
-X-Gm-Message-State: AOJu0YwSMyreJVC9YSDDOcr0WlakEciUvUSHqkA6KnaB8xvrnHW2kufz
- c6zxyEB0dl8UHM6NpEnc0dYXSZvlcoL5hHW5qWn2idM9/7+YOtMm4J6i7v0Diu4=
-X-Google-Smtp-Source: AGHT+IFaCmHXurXlxjQhMH+5Sl1ud38kk4HTNfVgoY+HDisd5J7h/p6LyFY8jCzoNwR+aPzn7hN1Sg==
-X-Received: by 2002:a17:903:192:b0:1f4:5477:4bf2 with SMTP id
- d9443c01a7336-1f454774e12mr128639375ad.42.1716901476194; 
- Tue, 28 May 2024 06:04:36 -0700 (PDT)
-Received: from localhost.localdomain (114-34-225-151.hinet-ip.hinet.net.
- [114.34.225.151]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1f44c9a4fadsm79481175ad.224.2024.05.28.06.04.34
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 28 May 2024 06:04:35 -0700 (PDT)
-From: Jerry Zhang Jian <jerry.zhangjian@sifive.com>
-To: alistair.francis@wdc.com, palmer@dabbelt.com, frank.chang@sifive.com,
- max.chou@sifive.com, paul.walmsley@sifive.com, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: Jerry Zhang Jian <jerry.zhangjian@sifive.com>
-Subject: [PATCH v2] target/riscv: zvbb implies zvkb
-Date: Tue, 28 May 2024 21:03:49 +0800
-Message-ID: <20240528130349.20193-1-jerry.zhangjian@sifive.com>
-X-Mailer: git-send-email 2.44.0
-In-Reply-To: <20240516123336.63534-1-jerry.zhangjian@sifive.com>
-References: <20240516123336.63534-1-jerry.zhangjian@sifive.com>
+ AJvYcCWlt+51UMfJKC9NLBbNZIJPsg4Oi97L+3rAgArcHMAN4IKuIH2BBch6UXO8CV2+w63YRAj74le202UA4oTCTNRc3VhK1oI=
+X-Gm-Message-State: AOJu0YzSXyrWcHmcpEQuiIpFMtV/QjxLYmLIM6/jedpSxUrV6ddEXIQ1
+ wLp/Ngz9Et/gU5LWN8BWMfLN/6FCJOOQRAHduD32RDM0CTWPphU0xmcXB6P7Qsk=
+X-Google-Smtp-Source: AGHT+IHOzU5le4fTSI4XHp3s7ZIw8xVERCreVBh5bfKMVJUp0yGFtIp61UqsQSiCXidCWruQZQmeXw==
+X-Received: by 2002:a7b:c04f:0:b0:420:355f:1c07 with SMTP id
+ 5b1f17b1804b1-421089f8665mr98809655e9.13.1716903716507; 
+ Tue, 28 May 2024 06:41:56 -0700 (PDT)
+Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
+ [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-42100f1ad4bsm175774865e9.19.2024.05.28.06.41.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 28 May 2024 06:41:56 -0700 (PDT)
+Date: Tue, 28 May 2024 15:41:55 +0200
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Chao Du <duchao@eswincomputing.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com, 
+ alistair23@gmail.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn, 
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com, 
+ anup@brainfault.org, duchao713@qq.com
+Subject: Re: [PATCH RESEND v2 1/3] target/riscv/kvm: add software breakpoints
+ support
+Message-ID: <20240528-d45f1806e04d913e1d2de9e5@orel>
+References: <20240528080759.26439-1-duchao@eswincomputing.com>
+ <20240528080759.26439-2-duchao@eswincomputing.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
- envelope-from=jerry.zhangjian@sifive.com; helo=mail-pl1-x633.google.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240528080759.26439-2-duchao@eswincomputing.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::336;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wm1-x336.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,31 +100,105 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-- According to RISC-V crypto spec, Zvkb extension is a proper subset of the Zvbb extension.
+On Tue, May 28, 2024 at 08:07:57AM GMT, Chao Du wrote:
+> This patch implements insert/remove software breakpoint process.
+> 
+> For RISC-V, GDB treats single-step similarly to breakpoint: add a
+> breakpoint at the next step address, then continue. So this also
+> works for single-step debugging.
+> 
+> Implement kvm_arch_update_guest_debug(): Set the control flag
+> when there are active breakpoints. This will help KVM to know
+> the status in the userspace.
+> 
+> Add some stubs which are necessary for building, and will be
+> implemented later.
+> 
+> Signed-off-by: Chao Du <duchao@eswincomputing.com>
+> ---
+>  target/riscv/kvm/kvm-cpu.c | 69 ++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 69 insertions(+)
+> 
+> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+> index 235e2cdaca..c50f058aff 100644
+> --- a/target/riscv/kvm/kvm-cpu.c
+> +++ b/target/riscv/kvm/kvm-cpu.c
+> @@ -1969,3 +1969,72 @@ static const TypeInfo riscv_kvm_cpu_type_infos[] = {
+>  };
+> 
+>  DEFINE_TYPES(riscv_kvm_cpu_type_infos)
+> +
+> +static const uint32_t ebreak_insn = 0x00100073;
+> +static const uint16_t c_ebreak_insn = 0x9002;
+> +
+> +int kvm_arch_insert_sw_breakpoint(CPUState *cs, struct kvm_sw_breakpoint *bp)
+> +{
+> +    if (cpu_memory_rw_debug(cs, bp->pc, (uint8_t *)&bp->saved_insn, 2, 0)) {
+> +        return -EINVAL;
+> +    }
+> +
+> +    if ((bp->saved_insn & 0x3) == 0x3) {
+> +        if (cpu_memory_rw_debug(cs, bp->pc, (uint8_t *)&bp->saved_insn, 4, 0)
+> +            || cpu_memory_rw_debug(cs, bp->pc, (uint8_t *)&ebreak_insn, 4, 1)) {
+> +            return -EINVAL;
+> +        }
+> +    } else {
+> +        if (cpu_memory_rw_debug(cs, bp->pc, (uint8_t *)&c_ebreak_insn, 2, 1)) {
+> +            return -EINVAL;
+> +        }
+> +    }
+> +
+> +    return 0;
+> +}
+> +
+> +int kvm_arch_remove_sw_breakpoint(CPUState *cs, struct kvm_sw_breakpoint *bp)
+> +{
+> +    uint32_t ebreak;
+> +    uint16_t c_ebreak;
+> +
+> +    if ((bp->saved_insn & 0x3) == 0x3) {
+> +        if (cpu_memory_rw_debug(cs, bp->pc, (uint8_t *)&ebreak, 4, 0) ||
+> +            ebreak != ebreak_insn ||
+> +            cpu_memory_rw_debug(cs, bp->pc, (uint8_t *)&bp->saved_insn, 4, 1)) {
+> +            return -EINVAL;
+> +        }
+> +    } else {
+> +        if (cpu_memory_rw_debug(cs, bp->pc, (uint8_t *)&c_ebreak, 2, 0) ||
+> +            c_ebreak != c_ebreak_insn ||
+> +            cpu_memory_rw_debug(cs, bp->pc, (uint8_t *)&bp->saved_insn, 2, 1)) {
+> +            return -EINVAL;
+> +        }
+> +    }
+> +
+> +    return 0;
+> +}
+> +
+> +int kvm_arch_insert_hw_breakpoint(vaddr addr, vaddr len, int type)
+> +{
+> +    /* TODO; To be implemented later. */
+> +    return -EINVAL;
+> +}
+> +
+> +int kvm_arch_remove_hw_breakpoint(vaddr addr, vaddr len, int type)
+> +{
+> +    /* TODO; To be implemented later. */
+> +    return -EINVAL;
+> +}
+> +
+> +void kvm_arch_remove_all_hw_breakpoints(void)
+> +{
+> +    /* TODO; To be implemented later. */
+> +}
+> +
+> +void kvm_arch_update_guest_debug(CPUState *cs, struct kvm_guest_debug *dbg)
+> +{
+> +    if (kvm_sw_breakpoints_active(cs)) {
+> +        dbg->control |= KVM_GUESTDBG_ENABLE;
+> +    }
+> +}
+> --
+> 2.17.1
+>
 
-- Reference: https://github.com/riscv/riscv-crypto/blob/1769c2609bf4535632e0c0fd715778f212bb272e/doc/vector/riscv-crypto-vector-zvkb.adoc?plain=1#L10
-
-Signed-off-by: Jerry Zhang Jian <jerry.zhangjian@sifive.com>
----
- target/riscv/tcg/tcg-cpu.c | 4 ++++
- 1 file changed, 4 insertions(+)
-
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index 40054a391a..f1a1306ab2 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -658,6 +658,10 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
-         cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvbc), true);
-     }
- 
-+    if (cpu->cfg.ext_zvbb) {
-+        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvkb), true);
-+    }
-+
-     /*
-      * In principle Zve*x would also suffice here, were they supported
-      * in qemu
--- 
-2.44.0
-
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 
