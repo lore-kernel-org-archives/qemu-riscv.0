@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C2C2C41513
-	for <qemu-riscv@archiver.kernel.org>; Tue, 28 May 2024 08:13:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 168AFC25B78
+	for <qemu-riscv@archiver.kernel.org>; Tue, 28 May 2024 08:13:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sBrx8-0000s5-5H; Tue, 28 May 2024 04:13:02 -0400
+	id 1sBrx8-0000rt-1O; Tue, 28 May 2024 04:13:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <duchao@eswincomputing.com>)
- id 1sBrwp-0000ni-Pd; Tue, 28 May 2024 04:12:45 -0400
-Received: from zg8tmja5ljk3lje4ms43mwaa.icoremail.net ([209.97.181.73])
+ id 1sBrwx-0000oh-KG; Tue, 28 May 2024 04:12:51 -0400
+Received: from azure-sdnproxy.icoremail.net ([207.46.229.174])
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <duchao@eswincomputing.com>)
- id 1sBrwn-0000HE-W8; Tue, 28 May 2024 04:12:43 -0400
+ id 1sBrws-0000Lc-OP; Tue, 28 May 2024 04:12:51 -0400
 Received: from localhost.localdomain (unknown [10.12.130.31])
- by app2 (Coremail) with SMTP id TQJkCgAnObtlkVVmsDYNAA--.12486S5;
- Tue, 28 May 2024 16:10:18 +0800 (CST)
+ by app2 (Coremail) with SMTP id TQJkCgAnObtlkVVmsDYNAA--.12486S7;
+ Tue, 28 May 2024 16:10:22 +0800 (CST)
 From: Chao Du <duchao@eswincomputing.com>
 To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com,
  ajones@ventanamicro.com, alistair23@gmail.com, bin.meng@windriver.com,
  liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com,
  zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com, anup@brainfault.org,
  duchao713@qq.com
-Subject: [PATCH RESEND v2 1/3] target/riscv/kvm: add software breakpoints
- support
-Date: Tue, 28 May 2024 08:07:57 +0000
-Message-Id: <20240528080759.26439-2-duchao@eswincomputing.com>
+Subject: [PATCH RESEND v2 3/3] target/riscv/kvm: define
+ TARGET_KVM_HAVE_GUEST_DEBUG
+Date: Tue, 28 May 2024 08:07:59 +0000
+Message-Id: <20240528080759.26439-4-duchao@eswincomputing.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20240528080759.26439-1-duchao@eswincomputing.com>
 References: <20240528080759.26439-1-duchao@eswincomputing.com>
-X-CM-TRANSID: TQJkCgAnObtlkVVmsDYNAA--.12486S5
-X-Coremail-Antispam: 1UD129KBjvJXoWxWw4xAr48Cw1ftrykWr18uFg_yoW5XFWDpF
- sxWrs5Jr4rJa43Gw1fJrsrAF13Xrs7u39rG34fZa4fGFy3Jr15WrykKwsFyry5Jr10gr1a
- yrn0vFWfua4jq3DanT9S1TB71UUUUjUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUQYb7Iv0xC_Zr1lb4IE77IF4wAFF20E14v26rWj6s0DM7CY07I2
- 0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI
- 8067AKxVWUGwA2048vs2IY020Ec7CjxVAFwI0_Gr0_Xr1l8cAvFVAK0II2c7xJM28CjxkF
- 64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVWDJVCq3wA2z4x0Y4vE2Ix0cI8IcV
- CY1x0267AKxVWxJr0_GcWl84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIE
- c7CjxVAFwI0_GcCE3s1ln4kS14v26r1Y6r17M2AIxVAIcxkEcVAq07x20xvEncxIr21l5I
- 8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1Y6r17McIj6I8E87Iv67AK
- xVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lFIxGxcIEc7CjxV
- A2Y2ka0xkIwI1lc7CjxVAaw2AFwI0_Jw0_GFylc2xSY4AK6svPMxAIw28IcxkI7VAKI48J
- MxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwV
- AFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv2
- 0xvE14v26r4j6ryUMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4
+X-CM-TRANSID: TQJkCgAnObtlkVVmsDYNAA--.12486S7
+X-Coremail-Antispam: 1UD129KBjvdXoWrKFyrJr1UXF48XFWxXryrJFb_yoWfWFX_GF
+ W5Jw4I9rW5Xay09Fy8ZrZ8ur1rAayrAF1fGanrKFs0gr4UWF1UAw4kKa1kAFyUuw4xAr1x
+ urZ3XFyxCrnxtjkaLaAFLSUrUUUU8b8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+ 9fnUUIcSsGvfJTRUUUbm8YjsxI4VWxJwAYFVCjjxCrM7AC8VAFwI0_Wr0E3s1l1xkIjI8I
+ 6I8E6xAIw20EY4v20xvaj40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l82xGYIkIc2x26280x7
+ IE14v26r1rM28IrcIa0xkI8VCY1x0267AKxVW5JVCq3wA2ocxC64kIII0Yj41l84x0c7CE
+ w4AK67xGY2AK021l84ACjcxK6xIIjxv20xvE14v26w1j6s0DM28EF7xvwVC0I7IYx2IY6x
+ kF7I0E14v26F4UJVW0owA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY
+ 1x0267AKxVW0oVCq3wAaw2AFwI0_Jrv_JF1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4
+ xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_Jrv_JF1lYx0Ex4A2jsIE14v2
+ 6r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvY0x0EwIxGrwACI402YVCY1x0262
+ 8vn2kIc2xKxwCY1x0262kKe7AKxVWUtVW8ZwCY02Avz4vE-syl42xK82IYc2Ij64vIr41l
+ 4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67
+ AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8I
+ cVAFwI0_Gr0_Xr1lIxAIcVC0I7IYx2IY6xkF7I0E14v26F4j6r4UJwCI42IY6xAIw20EY4
  v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr0_Cr1lIxAIcVC2z280aVCY1x0267AK
- xVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IU0asjUUUUUU==
+ xVW8Jr0_Cr1UYxBIdaVFxhVjvjDU0xZFpf9x07jnb18UUUUU=
 X-CM-SenderInfo: xgxfxt3r6h245lqf0zpsxwx03jof0z/
-Received-SPF: pass client-ip=209.97.181.73;
- envelope-from=duchao@eswincomputing.com;
- helo=zg8tmja5ljk3lje4ms43mwaa.icoremail.net
-X-Spam_score_int: -5
-X-Spam_score: -0.6
-X-Spam_bar: /
-X-Spam_report: (-0.6 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_MSPIKE_H2=-0.001,
- RCVD_IN_VALIDITY_RPBL=1.31, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=207.46.229.174;
+ envelope-from=duchao@eswincomputing.com; helo=azure-sdnproxy.icoremail.net
+X-Spam_score_int: -12
+X-Spam_score: -1.3
+X-Spam_bar: -
+X-Spam_report: (-1.3 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_LOW=-0.7,
+ RCVD_IN_MSPIKE_H2=-0.001, RCVD_IN_VALIDITY_RPBL=1.31, SPF_HELO_NONE=0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01,
+ T_SPF_TEMPERROR=0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -77,101 +77,27 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This patch implements insert/remove software breakpoint process.
-
-For RISC-V, GDB treats single-step similarly to breakpoint: add a
-breakpoint at the next step address, then continue. So this also
-works for single-step debugging.
-
-Implement kvm_arch_update_guest_debug(): Set the control flag
-when there are active breakpoints. This will help KVM to know
-the status in the userspace.
-
-Add some stubs which are necessary for building, and will be
-implemented later.
+To enable the KVM GUEST DEBUG for RISC-V at QEMU side.
 
 Signed-off-by: Chao Du <duchao@eswincomputing.com>
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 ---
- target/riscv/kvm/kvm-cpu.c | 69 ++++++++++++++++++++++++++++++++++++++
- 1 file changed, 69 insertions(+)
+ configs/targets/riscv64-softmmu.mak | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index 235e2cdaca..c50f058aff 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -1969,3 +1969,72 @@ static const TypeInfo riscv_kvm_cpu_type_infos[] = {
- };
-
- DEFINE_TYPES(riscv_kvm_cpu_type_infos)
-+
-+static const uint32_t ebreak_insn = 0x00100073;
-+static const uint16_t c_ebreak_insn = 0x9002;
-+
-+int kvm_arch_insert_sw_breakpoint(CPUState *cs, struct kvm_sw_breakpoint *bp)
-+{
-+    if (cpu_memory_rw_debug(cs, bp->pc, (uint8_t *)&bp->saved_insn, 2, 0)) {
-+        return -EINVAL;
-+    }
-+
-+    if ((bp->saved_insn & 0x3) == 0x3) {
-+        if (cpu_memory_rw_debug(cs, bp->pc, (uint8_t *)&bp->saved_insn, 4, 0)
-+            || cpu_memory_rw_debug(cs, bp->pc, (uint8_t *)&ebreak_insn, 4, 1)) {
-+            return -EINVAL;
-+        }
-+    } else {
-+        if (cpu_memory_rw_debug(cs, bp->pc, (uint8_t *)&c_ebreak_insn, 2, 1)) {
-+            return -EINVAL;
-+        }
-+    }
-+
-+    return 0;
-+}
-+
-+int kvm_arch_remove_sw_breakpoint(CPUState *cs, struct kvm_sw_breakpoint *bp)
-+{
-+    uint32_t ebreak;
-+    uint16_t c_ebreak;
-+
-+    if ((bp->saved_insn & 0x3) == 0x3) {
-+        if (cpu_memory_rw_debug(cs, bp->pc, (uint8_t *)&ebreak, 4, 0) ||
-+            ebreak != ebreak_insn ||
-+            cpu_memory_rw_debug(cs, bp->pc, (uint8_t *)&bp->saved_insn, 4, 1)) {
-+            return -EINVAL;
-+        }
-+    } else {
-+        if (cpu_memory_rw_debug(cs, bp->pc, (uint8_t *)&c_ebreak, 2, 0) ||
-+            c_ebreak != c_ebreak_insn ||
-+            cpu_memory_rw_debug(cs, bp->pc, (uint8_t *)&bp->saved_insn, 2, 1)) {
-+            return -EINVAL;
-+        }
-+    }
-+
-+    return 0;
-+}
-+
-+int kvm_arch_insert_hw_breakpoint(vaddr addr, vaddr len, int type)
-+{
-+    /* TODO; To be implemented later. */
-+    return -EINVAL;
-+}
-+
-+int kvm_arch_remove_hw_breakpoint(vaddr addr, vaddr len, int type)
-+{
-+    /* TODO; To be implemented later. */
-+    return -EINVAL;
-+}
-+
-+void kvm_arch_remove_all_hw_breakpoints(void)
-+{
-+    /* TODO; To be implemented later. */
-+}
-+
-+void kvm_arch_update_guest_debug(CPUState *cs, struct kvm_guest_debug *dbg)
-+{
-+    if (kvm_sw_breakpoints_active(cs)) {
-+        dbg->control |= KVM_GUESTDBG_ENABLE;
-+    }
-+}
+diff --git a/configs/targets/riscv64-softmmu.mak b/configs/targets/riscv64-softmmu.mak
+index f688ffa7bc..917980e63e 100644
+--- a/configs/targets/riscv64-softmmu.mak
++++ b/configs/targets/riscv64-softmmu.mak
+@@ -1,6 +1,7 @@
+ TARGET_ARCH=riscv64
+ TARGET_BASE_ARCH=riscv
+ TARGET_SUPPORTS_MTTCG=y
++TARGET_KVM_HAVE_GUEST_DEBUG=y
+ TARGET_XML_FILES= gdb-xml/riscv-64bit-cpu.xml gdb-xml/riscv-32bit-fpu.xml gdb-xml/riscv-64bit-fpu.xml gdb-xml/riscv-64bit-virtual.xml
+ # needed by boot.c
+ TARGET_NEED_FDT=y
 --
 2.17.1
 
