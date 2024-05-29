@@ -4,80 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66AE3C27C44
-	for <qemu-riscv@archiver.kernel.org>; Tue, 28 May 2024 13:42:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A897C25B75
+	for <qemu-riscv@archiver.kernel.org>; Wed, 29 May 2024 04:56:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sBx5W-00015X-Vh; Tue, 28 May 2024 09:42:03 -0400
+	id 1sCBMJ-0003Zl-Us; Wed, 29 May 2024 00:56:21 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1sBx5U-00014R-JZ
- for qemu-riscv@nongnu.org; Tue, 28 May 2024 09:42:00 -0400
-Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1sCBMI-0003Z6-EH
+ for qemu-riscv@nongnu.org; Wed, 29 May 2024 00:56:18 -0400
+Received: from mail-lf1-x12c.google.com ([2a00:1450:4864:20::12c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1sBx5S-0002bK-QV
- for qemu-riscv@nongnu.org; Tue, 28 May 2024 09:42:00 -0400
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-4202cea9a2fso5904385e9.3
- for <qemu-riscv@nongnu.org>; Tue, 28 May 2024 06:41:58 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1sCBMG-00023L-3p
+ for qemu-riscv@nongnu.org; Wed, 29 May 2024 00:56:18 -0400
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-52ae14e78e5so249746e87.3
+ for <qemu-riscv@nongnu.org>; Tue, 28 May 2024 21:56:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1716903717; x=1717508517; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ublzVFutB1HyFEg/ymKAbgFU8dLLAzP5QKRUL6B91Sk=;
- b=dm0uoQKyRk1HS63yBLHv7spascp/GfyXGWuEUM+JFx211eDE010pSSzP54MeUBKLg7
- JIuohFc+CuQFBYnKGx/YzNLOztj69/Rvj5RZ504zZvViyEdp0+Sqo0DW4aqs+AheUR9a
- U/Ih1kKfiY8XZh87/Oe1642VhBC7cK8oy5PruS6wVDqyHunWd1h8BghiUYyycsO5AXPA
- m0iww4QF/DszENCBe35OpboZ6TKA1wRuDwk7o4vI5h7z239WsK6dh8E/eagvCHe2jMgn
- uvrAa004gEICoEQFTp8LyNtsXhbIIaPqRZ4a5jQced/xOxWd4u5ZpB0Rs7JKEsyKPeOS
- D90Q==
+ d=linaro.org; s=google; t=1716958574; x=1717563374; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=RjQLcO+jti6a0l4UzCHBRgK9x2OIJpQajNqtYvux1Gs=;
+ b=px88/112qtgkdEjwCJFE2RZob5/EDRhmThq+MqYONT45zzexaPPiSceuXEfV7Dp3Cv
+ 6ujvc9gCxxGnyTugdJVogpDFbHPDKXkLhmmH3jJmiO0SRc+HMqqxcbw8Q5why4FDAhuZ
+ dMzn4ANZvPdPPknbsU7uhS+8qy4rdo18b+CiAy7jQWLqx6NNrm5OIey6tPkv03VNcVpX
+ X+IewI3gjDxCropJJTfavi7l9uiDo2wv1HmH+/On04FOL/OHIaqVIW9N/SJYFah+3Ssu
+ x/BER5ES9IYBw/TJOITfYIDgSrEZG2kVucFtBig6wae75ibQS7Snq8eAZck7Yz+wz602
+ Gz5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1716903717; x=1717508517;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ublzVFutB1HyFEg/ymKAbgFU8dLLAzP5QKRUL6B91Sk=;
- b=YcBQ4USnDPtsIVyx/5AKVfLrBP8gGMGJZSK8H6smOmc8ZQa4L9YgLO6lnfUq3qYZvZ
- c3wjlZtdRNvF6B8xCFpWZEyFsFR4p7aP3QjcdAYXfFoeRrJsrKw5hZRDAdSPbAsUrM1B
- GQ9nbmtPGaohcWr+INqZcG4phqThQo5TZQHZc1GK8hGpASSuEyU3mIEPkvNzefDHXyxa
- 0QTgxipyjdU327aGnUGUZNQG8cp5GkpdTyReULN5N6yuBCUztg6hyAGLp17SNs9hquO8
- fmX/AxYgpXfQXdfgs3Y7oZ+gUmhc8jd02BGfyjtZMPpm0x81GBrxvipJBRhXJzSRXTt8
- 43ug==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWlt+51UMfJKC9NLBbNZIJPsg4Oi97L+3rAgArcHMAN4IKuIH2BBch6UXO8CV2+w63YRAj74le202UA4oTCTNRc3VhK1oI=
-X-Gm-Message-State: AOJu0YzSXyrWcHmcpEQuiIpFMtV/QjxLYmLIM6/jedpSxUrV6ddEXIQ1
- wLp/Ngz9Et/gU5LWN8BWMfLN/6FCJOOQRAHduD32RDM0CTWPphU0xmcXB6P7Qsk=
-X-Google-Smtp-Source: AGHT+IHOzU5le4fTSI4XHp3s7ZIw8xVERCreVBh5bfKMVJUp0yGFtIp61UqsQSiCXidCWruQZQmeXw==
-X-Received: by 2002:a7b:c04f:0:b0:420:355f:1c07 with SMTP id
- 5b1f17b1804b1-421089f8665mr98809655e9.13.1716903716507; 
- Tue, 28 May 2024 06:41:56 -0700 (PDT)
-Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
- [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
+ d=1e100.net; s=20230601; t=1716958574; x=1717563374;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=RjQLcO+jti6a0l4UzCHBRgK9x2OIJpQajNqtYvux1Gs=;
+ b=Q8HDmXNbD4VqVQs6WdgKFlwIlX/oFjeS8+bvriQMkQE8R8hJAlTsDFDYWRNTnELhzt
+ svr/38l4Y7wESZashxUgP/GkNUAz4xG/kRAbvUZnhtARp519J9DpfBUnbBYb3R5U5Osr
+ b5etCxvDQjubYawQ4lpjE0+g11DnUgTLaxPU+ug2ROaVMZZDWXykmZMn+0uFdEcfKXSB
+ alXmgWE3CWZ4WfkLFQlaHdtUGbkFhUSYaA6eDYSqTx7hBok6jjOiN4Ho3xO55h4ge5UK
+ fublUobnJgCZvC84vFcQsGgOwbUEVXhrN43oXA0DDBprUXoW+ccKhqqThsEn05WM6wIu
+ qBbw==
+X-Gm-Message-State: AOJu0Yzw5IRCecwJWNkE/tR/Nak60E3K3ZoKVcEljG8HHaY2B38Lx9yk
+ cTjWYAYF46lcoI9edPQa0jAWyiaHAcAo4uApljpGLRJ84GNUnOuIaPwqTyj9jQpo6mNXV6mZal/
+ S
+X-Google-Smtp-Source: AGHT+IFcL7ZWs9vLZjW7XUeP+QY60hoD+A5njo8CuJalM3wyzhhx7mp4aZRhDsZ4kCV/FBefAulNsg==
+X-Received: by 2002:a05:6512:3096:b0:523:87b6:2ac2 with SMTP id
+ 2adb3069b0e04-52965199527mr11586460e87.40.1716958574179; 
+ Tue, 28 May 2024 21:56:14 -0700 (PDT)
+Received: from [192.168.69.100] ([176.187.204.141])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42100f1ad4bsm175774865e9.19.2024.05.28.06.41.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 May 2024 06:41:56 -0700 (PDT)
-Date: Tue, 28 May 2024 15:41:55 +0200
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Chao Du <duchao@eswincomputing.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com, 
- alistair23@gmail.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn, 
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com, 
- anup@brainfault.org, duchao713@qq.com
-Subject: Re: [PATCH RESEND v2 1/3] target/riscv/kvm: add software breakpoints
- support
-Message-ID: <20240528-d45f1806e04d913e1d2de9e5@orel>
-References: <20240528080759.26439-1-duchao@eswincomputing.com>
- <20240528080759.26439-2-duchao@eswincomputing.com>
+ a640c23a62f3a-a626c9776e2sm681725966b.91.2024.05.28.21.56.12
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 28 May 2024 21:56:13 -0700 (PDT)
+Message-ID: <fcbe4473-b460-4eae-ab33-e6e1ed723878@linaro.org>
+Date: Wed, 29 May 2024 06:56:11 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240528080759.26439-2-duchao@eswincomputing.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::336;
- envelope-from=ajones@ventanamicro.com; helo=mail-wm1-x336.google.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] target/riscv: Use get_address() to get address with
+ Zicbom extensions
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Bin Meng <bin.meng@windriver.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Christoph Muellner <cmuellner@linux.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Weiwei Li <liwei1518@gmail.com>,
+ Palmer Dabbelt <palmer@rivosinc.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Zhiwei Jiang <jiangzw@tecorigin.com>
+References: <20240419110514.69697-1-philmd@linaro.org>
+Content-Language: en-US
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20240419110514.69697-1-philmd@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::12c;
+ envelope-from=philmd@linaro.org; helo=mail-lf1-x12c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -100,105 +103,54 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, May 28, 2024 at 08:07:57AM GMT, Chao Du wrote:
-> This patch implements insert/remove software breakpoint process.
-> 
-> For RISC-V, GDB treats single-step similarly to breakpoint: add a
-> breakpoint at the next step address, then continue. So this also
-> works for single-step debugging.
-> 
-> Implement kvm_arch_update_guest_debug(): Set the control flag
-> when there are active breakpoints. This will help KVM to know
-> the status in the userspace.
-> 
-> Add some stubs which are necessary for building, and will be
-> implemented later.
-> 
-> Signed-off-by: Chao Du <duchao@eswincomputing.com>
-> ---
->  target/riscv/kvm/kvm-cpu.c | 69 ++++++++++++++++++++++++++++++++++++++
->  1 file changed, 69 insertions(+)
-> 
-> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-> index 235e2cdaca..c50f058aff 100644
-> --- a/target/riscv/kvm/kvm-cpu.c
-> +++ b/target/riscv/kvm/kvm-cpu.c
-> @@ -1969,3 +1969,72 @@ static const TypeInfo riscv_kvm_cpu_type_infos[] = {
->  };
-> 
->  DEFINE_TYPES(riscv_kvm_cpu_type_infos)
-> +
-> +static const uint32_t ebreak_insn = 0x00100073;
-> +static const uint16_t c_ebreak_insn = 0x9002;
-> +
-> +int kvm_arch_insert_sw_breakpoint(CPUState *cs, struct kvm_sw_breakpoint *bp)
-> +{
-> +    if (cpu_memory_rw_debug(cs, bp->pc, (uint8_t *)&bp->saved_insn, 2, 0)) {
-> +        return -EINVAL;
-> +    }
-> +
-> +    if ((bp->saved_insn & 0x3) == 0x3) {
-> +        if (cpu_memory_rw_debug(cs, bp->pc, (uint8_t *)&bp->saved_insn, 4, 0)
-> +            || cpu_memory_rw_debug(cs, bp->pc, (uint8_t *)&ebreak_insn, 4, 1)) {
-> +            return -EINVAL;
-> +        }
-> +    } else {
-> +        if (cpu_memory_rw_debug(cs, bp->pc, (uint8_t *)&c_ebreak_insn, 2, 1)) {
-> +            return -EINVAL;
-> +        }
-> +    }
-> +
-> +    return 0;
-> +}
-> +
-> +int kvm_arch_remove_sw_breakpoint(CPUState *cs, struct kvm_sw_breakpoint *bp)
-> +{
-> +    uint32_t ebreak;
-> +    uint16_t c_ebreak;
-> +
-> +    if ((bp->saved_insn & 0x3) == 0x3) {
-> +        if (cpu_memory_rw_debug(cs, bp->pc, (uint8_t *)&ebreak, 4, 0) ||
-> +            ebreak != ebreak_insn ||
-> +            cpu_memory_rw_debug(cs, bp->pc, (uint8_t *)&bp->saved_insn, 4, 1)) {
-> +            return -EINVAL;
-> +        }
-> +    } else {
-> +        if (cpu_memory_rw_debug(cs, bp->pc, (uint8_t *)&c_ebreak, 2, 0) ||
-> +            c_ebreak != c_ebreak_insn ||
-> +            cpu_memory_rw_debug(cs, bp->pc, (uint8_t *)&bp->saved_insn, 2, 1)) {
-> +            return -EINVAL;
-> +        }
-> +    }
-> +
-> +    return 0;
-> +}
-> +
-> +int kvm_arch_insert_hw_breakpoint(vaddr addr, vaddr len, int type)
-> +{
-> +    /* TODO; To be implemented later. */
-> +    return -EINVAL;
-> +}
-> +
-> +int kvm_arch_remove_hw_breakpoint(vaddr addr, vaddr len, int type)
-> +{
-> +    /* TODO; To be implemented later. */
-> +    return -EINVAL;
-> +}
-> +
-> +void kvm_arch_remove_all_hw_breakpoints(void)
-> +{
-> +    /* TODO; To be implemented later. */
-> +}
-> +
-> +void kvm_arch_update_guest_debug(CPUState *cs, struct kvm_guest_debug *dbg)
-> +{
-> +    if (kvm_sw_breakpoints_active(cs)) {
-> +        dbg->control |= KVM_GUESTDBG_ENABLE;
-> +    }
-> +}
-> --
-> 2.17.1
->
+ping?
 
-Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+On 19/4/24 13:05, Philippe Mathieu-Daudé wrote:
+> We need to use get_address() to get an address from cpu_gpr[],
+> since $zero is "special" (NULL).
+> 
+> Fixes: e05da09b7c ("target/riscv: implement Zicbom extension")
+> Reported-by: Zhiwei Jiang (姜智伟) <jiangzw@tecorigin.com>
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> ---
+>   target/riscv/insn_trans/trans_rvzicbo.c.inc | 8 ++++----
+>   1 file changed, 4 insertions(+), 4 deletions(-)
+> 
+> diff --git a/target/riscv/insn_trans/trans_rvzicbo.c.inc b/target/riscv/insn_trans/trans_rvzicbo.c.inc
+> index d5d7095903..6f6b29598d 100644
+> --- a/target/riscv/insn_trans/trans_rvzicbo.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvzicbo.c.inc
+> @@ -31,27 +31,27 @@
+>   static bool trans_cbo_clean(DisasContext *ctx, arg_cbo_clean *a)
+>   {
+>       REQUIRE_ZICBOM(ctx);
+> -    gen_helper_cbo_clean_flush(tcg_env, cpu_gpr[a->rs1]);
+> +    gen_helper_cbo_clean_flush(tcg_env, get_address(ctx, a->rs1, 0));
+>       return true;
+>   }
+>   
+>   static bool trans_cbo_flush(DisasContext *ctx, arg_cbo_flush *a)
+>   {
+>       REQUIRE_ZICBOM(ctx);
+> -    gen_helper_cbo_clean_flush(tcg_env, cpu_gpr[a->rs1]);
+> +    gen_helper_cbo_clean_flush(tcg_env, get_address(ctx, a->rs1, 0));
+>       return true;
+>   }
+>   
+>   static bool trans_cbo_inval(DisasContext *ctx, arg_cbo_inval *a)
+>   {
+>       REQUIRE_ZICBOM(ctx);
+> -    gen_helper_cbo_inval(tcg_env, cpu_gpr[a->rs1]);
+> +    gen_helper_cbo_inval(tcg_env, get_address(ctx, a->rs1, 0));
+>       return true;
+>   }
+>   
+>   static bool trans_cbo_zero(DisasContext *ctx, arg_cbo_zero *a)
+>   {
+>       REQUIRE_ZICBOZ(ctx);
+> -    gen_helper_cbo_zero(tcg_env, cpu_gpr[a->rs1]);
+> +    gen_helper_cbo_zero(tcg_env, get_address(ctx, a->rs1, 0));
+>       return true;
+>   }
+
 
