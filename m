@@ -4,80 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D592FC25B7E
-	for <qemu-riscv@archiver.kernel.org>; Thu, 30 May 2024 10:02:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D290DC25B74
+	for <qemu-riscv@archiver.kernel.org>; Thu, 30 May 2024 10:38:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sCcaL-0002qZ-6v; Thu, 30 May 2024 06:00:37 -0400
+	id 1sCdAP-00040Q-Cb; Thu, 30 May 2024 06:37:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1sCcaJ-0002pA-6Q; Thu, 30 May 2024 06:00:35 -0400
-Received: from mgamail.intel.com ([198.175.65.10])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1sCcaF-0003PT-HA; Thu, 30 May 2024 06:00:34 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1717063232; x=1748599232;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=++BnYcoBcNAMGwyagrFEnDwmOHTuHk7IscfvAsNyKo8=;
- b=Hd1tiokNdV7kAdcrpHmxZT9ZOTqtVx4CyZMJbO3DRkMX5heSeiQ6Zpey
- yeKbcy7sbivn9vE6xNBWZhBgR4lPk62rCHdE/Nbq21yBJw1dT8+oJuC2L
- EXhf+lo4izYysRt52oSI3/NHT/uFbvp8/Z3QN2dw4sJTTkrrzFS2hyo4g
- vfevoqf0bbYLthJ5KkKlqixofGztKXAn5gyuD6viPfTCHcJzQWg1QXrdE
- NdQbvHDUee7b/9Ps4+9xXDShQOp/kBPL1CZEoahFazhXCucAVh7j8KFz3
- eZBv0wkL6aiicppOwGBJuFIYcpNKdSSYyMDZQxIdKAT4PxMjS7Ah0/rjs w==;
-X-CSE-ConnectionGUID: peo12KAvTY2qFteyAxK9eQ==
-X-CSE-MsgGUID: rmpM7QFRTnau65jAoY7jJw==
-X-IronPort-AV: E=McAfee;i="6600,9927,11087"; a="31032419"
-X-IronPort-AV: E=Sophos;i="6.08,201,1712646000"; d="scan'208";a="31032419"
-Received: from orviesa010.jf.intel.com ([10.64.159.150])
- by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 May 2024 03:00:28 -0700
-X-CSE-ConnectionGUID: 2d6OwtX6Q7utcO6iS5tUWQ==
-X-CSE-MsgGUID: Cq1pm51+TiWOBn8Wfc6VnA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.08,201,1712646000"; d="scan'208";a="35704936"
-Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
- by orviesa010.jf.intel.com with ESMTP; 30 May 2024 03:00:23 -0700
-From: Zhao Liu <zhao1.liu@intel.com>
-To: =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
- Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Yanan Wang <wangyanan55@huawei.com>,
- "Michael S . Tsirkin" <mst@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Eric Blake <eblake@redhat.com>, Markus Armbruster <armbru@redhat.com>,
- Marcelo Tosatti <mtosatti@redhat.com>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Peter Maydell <peter.maydell@linaro.org>,
- Jonathan Cameron <Jonathan.Cameron@huawei.com>,
- Sia Jee Heng <jeeheng.sia@starfivetech.com>
-Cc: qemu-devel@nongnu.org, kvm@vger.kernel.org, qemu-riscv@nongnu.org,
- qemu-arm@nongnu.org, Zhenyu Wang <zhenyu.z.wang@intel.com>,
- Dapeng Mi <dapeng1.mi@linux.intel.com>, Yongwei Ma <yongwei.ma@intel.com>,
- Zhao Liu <zhao1.liu@intel.com>
-Subject: [RFC v2 1/7] hw/core: Make CPU topology enumeration arch-agnostic
-Date: Thu, 30 May 2024 18:15:33 +0800
-Message-Id: <20240530101539.768484-2-zhao1.liu@intel.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240530101539.768484-1-zhao1.liu@intel.com>
-References: <20240530101539.768484-1-zhao1.liu@intel.com>
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1sCdAN-0003yo-Jy
+ for qemu-riscv@nongnu.org; Thu, 30 May 2024 06:37:51 -0400
+Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1sCdAL-00023v-8E
+ for qemu-riscv@nongnu.org; Thu, 30 May 2024 06:37:51 -0400
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-354dfe54738so431060f8f.3
+ for <qemu-riscv@nongnu.org>; Thu, 30 May 2024 03:37:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1717065467; x=1717670267; darn=nongnu.org;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=ix9YcMBkAGWhacciiXlNRjqjC3hlgKJfQIWB9MKqA6A=;
+ b=KDhu/uJU0tl01DwRwTAcCurzy1uo3M0v6pfGosqroXsWFI/aVB7C/t6iascdGFpWV+
+ 6NELHYZlIiIeia2EqAvmhzRatNDW3eY/PZjPQhbt7YpX+7fTiVAUniAQzahVTk5vWjjA
+ YzTk9e9wUlpfNkLQoyNW0azvwg8RcArKAKOcFvyK9HnUEX0kEFFU7BxBW1jh4S/qMadq
+ 3rMG/GO6eZm3lFddARBGDxCHatTSXSnR5l/lhgnlBE8rURR4ZSD7M6mtpHl/1CrMBAmV
+ wX7JTlIbW4u0lnkmFYcShyU9vV0jf42n2EKj6HZ21THLA5gPyK4xq0gIhpxtMd61PChc
+ RcfA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1717065467; x=1717670267;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=ix9YcMBkAGWhacciiXlNRjqjC3hlgKJfQIWB9MKqA6A=;
+ b=HuKAIpIKukBh5alr2wJM7Zt6WJR3lyiWDO5J7a5hk3q05FuvDI6EsscJAZ7wPAqEu9
+ 9ZAHRcUGEQl4P5wl992iSSsn9yfGKE1PDMAn77EIudU8gkxRhJ7XOoqoCU8Pw8otsIb/
+ cqW9iGsevdllYAWokNEHe5WsFcx3szgRmGHWn6ATVz9FPnWRkylpqiRNeDBXjZbxTgHC
+ wD4RTjC0M6/tehQ4z+HEx3oPHifMEFt+MBQ9QV4GXbk+Ny2yOEKxu24Lzlk67KeQXcyw
+ WQf6aViCPtxyI0+OS1G3dHhSoRkH8YH8c6WhdBJ+Mct+pdsUqUFgxTG4BCNsFabpA3oX
+ QkRw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUgcZdxQgkltG9vO+EKFcYNMbxni2x/wvvfdszr/Ty7kyXaoew6l79pqGa33M1GgKtUcQ0ss57N58Zed6mGvYu/V3DCNrU=
+X-Gm-Message-State: AOJu0YyITxsWLL5pwLuwnxv3+dw+eVF7uPhCMxxyWRshHog16WK6zEUI
+ aMCxyBJYj5bUaBffDkrBFTvTQcz2mxLkOyBCZMbfnKQagH5zFFSfgLWYfs1567Gk4745LYfLnuh
+ GvRM=
+X-Google-Smtp-Source: AGHT+IE0+pkry5KGA9UGfMuiFv24hqY8pX6R/SZGjW55FP69zfFjYotPw++H9P4F+abboPjrQi3LXA==
+X-Received: by 2002:adf:fd47:0:b0:349:8ba8:e26d with SMTP id
+ ffacd0b85a97d-35dc008674amr1301017f8f.13.1717065467198; 
+ Thu, 30 May 2024 03:37:47 -0700 (PDT)
+Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
+ [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-35579d7dba2sm16923930f8f.17.2024.05.30.03.37.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 30 May 2024 03:37:46 -0700 (PDT)
+Date: Thu, 30 May 2024 12:37:46 +0200
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Fea Wang <fea.wang@sifive.com>
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Subject: Re: [RESEND PATCH v2 0/5] target/riscv: Support RISC-V privilege
+ 1.13 spec
+Message-ID: <20240530-0521d05b9924d724568bd6a2@orel>
+References: <20240515080605.2675399-1-fea.wang@sifive.com>
+ <4d2d56aa-5758-4320-a5ef-53ebb87ab494@ventanamicro.com>
+ <CAKhCfseJgRzyeg1seuZ15SR=f78E5rnbgfrzY_VeRDhPMOAhwA@mail.gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=198.175.65.10; envelope-from=zhao1.liu@intel.com;
- helo=mgamail.intel.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.036,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+In-Reply-To: <CAKhCfseJgRzyeg1seuZ15SR=f78E5rnbgfrzY_VeRDhPMOAhwA@mail.gmail.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::42d;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x42d.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -94,369 +105,115 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Cache topology needs to be defined based on CPU topology levels. Thus,
-define CPU topology enumeration in qapi/machine.json to make it generic
-for all architectures.
+On Thu, May 30, 2024 at 11:30:28AM GMT, Fea Wang wrote:
+> Hi Daniel,
+> thank you for your help.
+> 
+> I found that only the cover is without many maintainers. I used to send
+> patches by git send-email --dry-run --to 'qemu-devel@nongnu.org,
+> qemu-riscv@nongnu.org' --cc-cmd='scripts/get_maintainer.pl -i' patches/*.
+> Do you have a better script for me?
+> Thank you.
 
-To match the general topology naming style, rename CPU_TOPO_LEVEL_SMT
-and CPU_TOPO_LEVEL_PACKAGE to CPU_TOPO_LEVEL_THREAD and
-CPU_TOPO_LEVEL_SOCKET.
+Some maintainers frown on that because they prefer the whole series,
+even if only a few patches touch code they maintain. And, the cover
+letter is quite important to get the context. Also, depending on
+mail client and filter configurations, CC's that are per patch can
+mess up the threading, making a mess of the mailbox. I tend to
+use scripts/get_maintainer.pl to pull together a set of people/lists
+to CC as an independent step, dump the contents into a file and then
+do 'git send-email $(cat my-series.to-list) patches/my-series'
 
-Also, enumerate additional topology levels for non-i386 arches, and add
-helpers for topology enumeration and string conversion.
+git-publish can help with that too by capturing the "to list" and
+maintaining it for you.
 
-Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
----
-Changes since RFC v1:
- * Use QAPI to enumerate CPU topology levels.
- * Drop string_to_cpu_topo() since QAPI will help to parse the topo
-   levels.
----
- MAINTAINERS                    |  2 ++
- hw/core/cpu-topology.c         | 36 ++++++++++++++++++++++++++++++
- hw/core/meson.build            |  1 +
- include/hw/core/cpu-topology.h | 20 +++++++++++++++++
- include/hw/i386/topology.h     | 18 +--------------
- qapi/machine.json              | 40 ++++++++++++++++++++++++++++++++++
- target/i386/cpu.c              | 30 ++++++++++++-------------
- target/i386/cpu.h              |  4 ++--
- 8 files changed, 117 insertions(+), 34 deletions(-)
- create mode 100644 hw/core/cpu-topology.c
- create mode 100644 include/hw/core/cpu-topology.h
+Thanks,
+drew
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 448dc951c509..09173e8c953d 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1875,6 +1875,7 @@ R: Yanan Wang <wangyanan55@huawei.com>
- S: Supported
- F: hw/core/cpu-common.c
- F: hw/core/cpu-sysemu.c
-+F: hw/core/cpu-topology.c
- F: hw/core/machine-qmp-cmds.c
- F: hw/core/machine.c
- F: hw/core/machine-smp.c
-@@ -1886,6 +1887,7 @@ F: qapi/machine-common.json
- F: qapi/machine-target.json
- F: include/hw/boards.h
- F: include/hw/core/cpu.h
-+F: include/hw/core/cpu-topology.h
- F: include/hw/cpu/cluster.h
- F: include/sysemu/numa.h
- F: tests/unit/test-smp-parse.c
-diff --git a/hw/core/cpu-topology.c b/hw/core/cpu-topology.c
-new file mode 100644
-index 000000000000..20b5d708cb54
---- /dev/null
-+++ b/hw/core/cpu-topology.c
-@@ -0,0 +1,36 @@
-+/*
-+ * QEMU CPU Topology Representation
-+ *
-+ * Copyright (c) 2024 Intel Corporation
-+ *
-+ * Authors:
-+ *  Zhao Liu <zhao1.liu@intel.com>
-+ *
-+ * This work is licensed under the terms of the GNU GPL, version 2 or
-+ * later.  See the COPYING file in the top-level directory.
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "hw/core/cpu-topology.h"
-+
-+typedef struct CPUTopoInfo {
-+    const char *name;
-+} CPUTopoInfo;
-+
-+CPUTopoInfo cpu_topo_descriptors[] = {
-+    [CPU_TOPO_LEVEL_INVALID] = { .name = "invalid", },
-+    [CPU_TOPO_LEVEL_THREAD]  = { .name = "thread",  },
-+    [CPU_TOPO_LEVEL_CORE]    = { .name = "core",    },
-+    [CPU_TOPO_LEVEL_MODULE]  = { .name = "module",  },
-+    [CPU_TOPO_LEVEL_CLUSTER] = { .name = "cluster", },
-+    [CPU_TOPO_LEVEL_DIE]     = { .name = "die",     },
-+    [CPU_TOPO_LEVEL_SOCKET]  = { .name = "socket",  },
-+    [CPU_TOPO_LEVEL_BOOK]    = { .name = "book",    },
-+    [CPU_TOPO_LEVEL_DRAWER]  = { .name = "drawer",  },
-+    [CPU_TOPO_LEVEL__MAX]    = { .name = NULL,      },
-+};
-+
-+const char *cpu_topo_to_string(CPUTopoLevel topo)
-+{
-+    return cpu_topo_descriptors[topo].name;
-+}
-diff --git a/hw/core/meson.build b/hw/core/meson.build
-index a3d9bab9f42a..71dc396e9bfc 100644
---- a/hw/core/meson.build
-+++ b/hw/core/meson.build
-@@ -13,6 +13,7 @@ hwcore_ss.add(files(
- ))
- 
- common_ss.add(files('cpu-common.c'))
-+common_ss.add(files('cpu-topology.c'))
- common_ss.add(files('machine-smp.c'))
- system_ss.add(when: 'CONFIG_FITLOADER', if_true: files('loader-fit.c'))
- system_ss.add(when: 'CONFIG_GENERIC_LOADER', if_true: files('generic-loader.c'))
-diff --git a/include/hw/core/cpu-topology.h b/include/hw/core/cpu-topology.h
-new file mode 100644
-index 000000000000..0e21fe8a9bf8
---- /dev/null
-+++ b/include/hw/core/cpu-topology.h
-@@ -0,0 +1,20 @@
-+/*
-+ * QEMU CPU Topology Representation Header
-+ *
-+ * Copyright (c) 2024 Intel Corporation
-+ *
-+ * Authors:
-+ *  Zhao Liu <zhao1.liu@intel.com>
-+ *
-+ * This work is licensed under the terms of the GNU GPL, version 2 or
-+ * later.  See the COPYING file in the top-level directory.
-+ */
-+
-+#ifndef CPU_TOPOLOGY_H
-+#define CPU_TOPOLOGY_H
-+
-+#include "qapi/qapi-types-machine.h"
-+
-+const char *cpu_topo_to_string(CPUTopoLevel topo);
-+
-+#endif /* CPU_TOPOLOGY_H */
-diff --git a/include/hw/i386/topology.h b/include/hw/i386/topology.h
-index dff49fce1154..c6ff75f23991 100644
---- a/include/hw/i386/topology.h
-+++ b/include/hw/i386/topology.h
-@@ -39,7 +39,7 @@
-  *  CPUID Fn8000_0008_ECX[ApicIdCoreIdSize[3:0]] is set to apicid_core_width().
-  */
- 
--
-+#include "hw/core/cpu-topology.h"
- #include "qemu/bitops.h"
- 
- /*
-@@ -62,22 +62,6 @@ typedef struct X86CPUTopoInfo {
-     unsigned threads_per_core;
- } X86CPUTopoInfo;
- 
--/*
-- * CPUTopoLevel is the general i386 topology hierarchical representation,
-- * ordered by increasing hierarchical relationship.
-- * Its enumeration value is not bound to the type value of Intel (CPUID[0x1F])
-- * or AMD (CPUID[0x80000026]).
-- */
--enum CPUTopoLevel {
--    CPU_TOPO_LEVEL_INVALID,
--    CPU_TOPO_LEVEL_SMT,
--    CPU_TOPO_LEVEL_CORE,
--    CPU_TOPO_LEVEL_MODULE,
--    CPU_TOPO_LEVEL_DIE,
--    CPU_TOPO_LEVEL_PACKAGE,
--    CPU_TOPO_LEVEL_MAX,
--};
--
- /* Return the bit width needed for 'count' IDs */
- static unsigned apicid_bitwidth_for_count(unsigned count)
- {
-diff --git a/qapi/machine.json b/qapi/machine.json
-index bce6e1bbc412..7ac5a05bb9c9 100644
---- a/qapi/machine.json
-+++ b/qapi/machine.json
-@@ -1667,6 +1667,46 @@
-      '*reboot-timeout': 'int',
-      '*strict': 'bool' } }
- 
-+##
-+# @CPUTopoLevel:
-+#
-+# An enumeration of CPU topology levels.
-+#
-+# @invalid: Invalid topology level, used as a placeholder.
-+#
-+# @thread: thread level, which would also be called SMT level or logical
-+#     processor level. The @threads option in -smp is used to configure
-+#     the topology of this level.
-+#
-+# @core: core level. The @cores option in -smp is used to configure the
-+#     topology of this level.
-+#
-+# @module: module level. The @modules option in -smp is used to
-+#     configure the topology of this level.
-+#
-+# @cluster: cluster level. The @clusters option in -smp is used to
-+#     configure the topology of this level.
-+#
-+# @die: die level. The @dies option in -smp is used to configure the
-+#     topology of this level.
-+#
-+# @socket: socket level, which would also be called package level. The
-+#     @sockets option in -smp is used to configure the topology of this
-+#     level.
-+#
-+# @book: book level. The @books option in -smp is used to configure the
-+#     topology of this level.
-+#
-+# @drawer: drawer level. The @drawers option in -smp is used to
-+#     configure the topology of this level.
-+#
-+# Since: 9.1
-+##
-+{ 'enum': 'CPUTopoLevel',
-+  'prefix': 'CPU_TOPO_LEVEL',
-+  'data': [ 'invalid', 'thread', 'core', 'module', 'cluster',
-+            'die', 'socket', 'book', 'drawer' ] }
-+
- ##
- # @SMPConfiguration:
- #
-diff --git a/target/i386/cpu.c b/target/i386/cpu.c
-index bc2dceb647fa..b11097b5bafd 100644
---- a/target/i386/cpu.c
-+++ b/target/i386/cpu.c
-@@ -247,12 +247,12 @@ static uint32_t max_thread_ids_for_cache(X86CPUTopoInfo *topo_info,
-     case CPU_TOPO_LEVEL_DIE:
-         num_ids = 1 << apicid_die_offset(topo_info);
-         break;
--    case CPU_TOPO_LEVEL_PACKAGE:
-+    case CPU_TOPO_LEVEL_SOCKET:
-         num_ids = 1 << apicid_pkg_offset(topo_info);
-         break;
-     default:
-         /*
--         * Currently there is no use case for SMT and MODULE, so use
-+         * Currently there is no use case for THREAD and MODULE, so use
-          * assert directly to facilitate debugging.
-          */
-         g_assert_not_reached();
-@@ -304,7 +304,7 @@ static uint32_t num_threads_by_topo_level(X86CPUTopoInfo *topo_info,
-                                           enum CPUTopoLevel topo_level)
- {
-     switch (topo_level) {
--    case CPU_TOPO_LEVEL_SMT:
-+    case CPU_TOPO_LEVEL_THREAD:
-         return 1;
-     case CPU_TOPO_LEVEL_CORE:
-         return topo_info->threads_per_core;
-@@ -313,7 +313,7 @@ static uint32_t num_threads_by_topo_level(X86CPUTopoInfo *topo_info,
-     case CPU_TOPO_LEVEL_DIE:
-         return topo_info->threads_per_core * topo_info->cores_per_module *
-                topo_info->modules_per_die;
--    case CPU_TOPO_LEVEL_PACKAGE:
-+    case CPU_TOPO_LEVEL_SOCKET:
-         return topo_info->threads_per_core * topo_info->cores_per_module *
-                topo_info->modules_per_die * topo_info->dies_per_pkg;
-     default:
-@@ -326,7 +326,7 @@ static uint32_t apicid_offset_by_topo_level(X86CPUTopoInfo *topo_info,
-                                             enum CPUTopoLevel topo_level)
- {
-     switch (topo_level) {
--    case CPU_TOPO_LEVEL_SMT:
-+    case CPU_TOPO_LEVEL_THREAD:
-         return 0;
-     case CPU_TOPO_LEVEL_CORE:
-         return apicid_core_offset(topo_info);
-@@ -334,7 +334,7 @@ static uint32_t apicid_offset_by_topo_level(X86CPUTopoInfo *topo_info,
-         return apicid_module_offset(topo_info);
-     case CPU_TOPO_LEVEL_DIE:
-         return apicid_die_offset(topo_info);
--    case CPU_TOPO_LEVEL_PACKAGE:
-+    case CPU_TOPO_LEVEL_SOCKET:
-         return apicid_pkg_offset(topo_info);
-     default:
-         g_assert_not_reached();
-@@ -347,7 +347,7 @@ static uint32_t cpuid1f_topo_type(enum CPUTopoLevel topo_level)
-     switch (topo_level) {
-     case CPU_TOPO_LEVEL_INVALID:
-         return CPUID_1F_ECX_TOPO_LEVEL_INVALID;
--    case CPU_TOPO_LEVEL_SMT:
-+    case CPU_TOPO_LEVEL_THREAD:
-         return CPUID_1F_ECX_TOPO_LEVEL_SMT;
-     case CPU_TOPO_LEVEL_CORE:
-         return CPUID_1F_ECX_TOPO_LEVEL_CORE;
-@@ -371,7 +371,7 @@ static void encode_topo_cpuid1f(CPUX86State *env, uint32_t count,
-     unsigned long level, next_level;
-     uint32_t num_threads_next_level, offset_next_level;
- 
--    assert(count + 1 < CPU_TOPO_LEVEL_MAX);
-+    assert(count + 1 < CPU_TOPO_LEVEL__MAX);
- 
-     /*
-      * Find the No.(count + 1) topology level in avail_cpu_topo bitmap.
-@@ -380,7 +380,7 @@ static void encode_topo_cpuid1f(CPUX86State *env, uint32_t count,
-     level = CPU_TOPO_LEVEL_INVALID;
-     for (int i = 0; i <= count; i++) {
-         level = find_next_bit(env->avail_cpu_topo,
--                              CPU_TOPO_LEVEL_PACKAGE,
-+                              CPU_TOPO_LEVEL_SOCKET,
-                               level + 1);
- 
-         /*
-@@ -388,7 +388,7 @@ static void encode_topo_cpuid1f(CPUX86State *env, uint32_t count,
-          * and it just encodes the invalid level (all fields are 0)
-          * into the last subleaf of 0x1f.
-          */
--        if (level == CPU_TOPO_LEVEL_PACKAGE) {
-+        if (level == CPU_TOPO_LEVEL_SOCKET) {
-             level = CPU_TOPO_LEVEL_INVALID;
-             break;
-         }
-@@ -399,7 +399,7 @@ static void encode_topo_cpuid1f(CPUX86State *env, uint32_t count,
-         offset_next_level = 0;
-     } else {
-         next_level = find_next_bit(env->avail_cpu_topo,
--                                   CPU_TOPO_LEVEL_PACKAGE,
-+                                   CPU_TOPO_LEVEL_SOCKET,
-                                    level + 1);
-         num_threads_next_level = num_threads_by_topo_level(topo_info,
-                                                            next_level);
-@@ -6435,7 +6435,7 @@ void cpu_x86_cpuid(CPUX86State *env, uint32_t index, uint32_t count,
- 
-                     /* Share the cache at package level. */
-                     *eax |= max_thread_ids_for_cache(&topo_info,
--                                CPU_TOPO_LEVEL_PACKAGE) << 14;
-+                                CPU_TOPO_LEVEL_SOCKET) << 14;
-                 }
-             }
-         } else if (cpu->vendor_cpuid_only && IS_AMD_CPU(env)) {
-@@ -7935,10 +7935,10 @@ static void x86_cpu_init_default_topo(X86CPU *cpu)
-     env->nr_modules = 1;
-     env->nr_dies = 1;
- 
--    /* SMT, core and package levels are set by default. */
--    set_bit(CPU_TOPO_LEVEL_SMT, env->avail_cpu_topo);
-+    /* thread, core and socket levels are set by default. */
-+    set_bit(CPU_TOPO_LEVEL_THREAD, env->avail_cpu_topo);
-     set_bit(CPU_TOPO_LEVEL_CORE, env->avail_cpu_topo);
--    set_bit(CPU_TOPO_LEVEL_PACKAGE, env->avail_cpu_topo);
-+    set_bit(CPU_TOPO_LEVEL_SOCKET, env->avail_cpu_topo);
- }
- 
- static void x86_cpu_initfn(Object *obj)
-diff --git a/target/i386/cpu.h b/target/i386/cpu.h
-index c64ef0c1a287..c6d07f38a1e8 100644
---- a/target/i386/cpu.h
-+++ b/target/i386/cpu.h
-@@ -1606,7 +1606,7 @@ typedef struct CPUCacheInfo {
-      * Used to encode CPUID[4].EAX[bits 25:14] or
-      * CPUID[0x8000001D].EAX[bits 25:14].
-      */
--    enum CPUTopoLevel share_level;
-+    CPUTopoLevel share_level;
- } CPUCacheInfo;
- 
- 
-@@ -1921,7 +1921,7 @@ typedef struct CPUArchState {
-     unsigned nr_modules;
- 
-     /* Bitmap of available CPU topology levels for this CPU. */
--    DECLARE_BITMAP(avail_cpu_topo, CPU_TOPO_LEVEL_MAX);
-+    DECLARE_BITMAP(avail_cpu_topo, CPU_TOPO_LEVEL__MAX);
- } CPUX86State;
- 
- struct kvm_msrs;
--- 
-2.34.1
-
+> 
+> Sincerely,
+> Fea
+> 
+> On Mon, May 27, 2024 at 5:21 PM Daniel Henrique Barboza <
+> dbarboza@ventanamicro.com> wrote:
+> 
+> > Fea,
+> >
+> > Please try to also add all RISC-V QEMU maintainers and reviewers when
+> > sending
+> > patches. It will get your patches reviewed and queued faster. Otherwise the
+> > maintainers can miss you your series due to high ML traffic.
+> >
+> > You can fetch who you want to CC using the get_maintainer.pl script with
+> > the
+> > patch files or any source file in particular, e.g.:
+> >
+> > $ ./scripts/get_maintainer.pl -f target/riscv/cpu.c
+> > Palmer Dabbelt <palmer@dabbelt.com> (supporter:RISC-V TCG CPUs)
+> > Alistair Francis <alistair.francis@wdc.com> (supporter:RISC-V TCG CPUs)
+> > Bin Meng <bmeng.cn@gmail.com> (supporter:RISC-V TCG CPUs)
+> > Weiwei Li <liwei1518@gmail.com> (reviewer:RISC-V TCG CPUs)
+> > Daniel Henrique Barboza <dbarboza@ventanamicro.com> (reviewer:RISC-V TCG
+> > CPUs)
+> > Liu Zhiwei <zhiwei_liu@linux.alibaba.com> (reviewer:RISC-V TCG CPUs)
+> > qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
+> > qemu-devel@nongnu.org (open list:All patches CC here)
+> >
+> >
+> > I added the extra folk in the CC for this reply so don't worry about it.
+> >
+> >
+> > Alistair, please queue this series. It's already fully acked and I would
+> > like to add
+> > some bits on top of the priv_spec 1.13 support.
+> >
+> >
+> > Thanks,
+> >
+> >
+> > Daniel
+> >
+> > On 5/15/24 05:05, Fea.Wang wrote:
+> > > Based on the change log for the RISC-V privilege 1.13 spec, add the
+> > > support for ss1p13.
+> > >
+> > > Ref:
+> > https://github.com/riscv/riscv-isa-manual/blob/a7d93c9/src/priv-preface.adoc?plain=1#L40-L72
+> > >
+> > > Lists what to do without clarification or document format.
+> > > * Redefined misa.MXL to be read-only, making MXLEN a constant.(Skip,
+> > implementation ignored)
+> > > * Added the constraint that SXLEN≥UXLEN.(Skip, implementation ignored)
+> > > * Defined the misa.V field to reflect that the V extension has been
+> > implemented.(Skip, existed)
+> > > * Defined the RV32-only medelegh and hedelegh CSRs.(Done in these
+> > patches)
+> > > * Defined the misaligned atomicity granule PMA, superseding the proposed
+> > Zam extension..(Skip, implementation ignored)
+> > > * Allocated interrupt 13 for Sscofpmf LCOFI interrupt.(Skip, existed)
+> > > * Defined hardware error and software check exception codes.(Done in
+> > these patches)
+> > > * Specified synchronization requirements when changing the PBMTE fields
+> > in menvcfg and henvcfg.(Skip, implementation ignored)
+> > > * Incorporated Svade and Svadu extension specifications.(Skip, existed)
+> > >
+> > >
+> > > Fea.Wang (4):
+> > >    target/riscv: Support the version for ss1p13
+> > >    target/riscv: Add 'P1P13' bit in SMSTATEEN0
+> > >    target/riscv: Add MEDELEGH, HEDELEGH csrs for RV32
+> > >    target/riscv: Reserve exception codes for sw-check and hw-err
+> > >
+> > > Jim Shu (1):
+> > >    target/riscv: Reuse the conversion function of priv_spec
+> > >
+> > >   target/riscv/cpu.c         |  8 ++++++--
+> > >   target/riscv/cpu.h         |  5 ++++-
+> > >   target/riscv/cpu_bits.h    |  5 +++++
+> > >   target/riscv/cpu_cfg.h     |  1 +
+> > >   target/riscv/csr.c         | 39 ++++++++++++++++++++++++++++++++++++++
+> > >   target/riscv/tcg/tcg-cpu.c | 17 ++++++++---------
+> > >   6 files changed, 63 insertions(+), 12 deletions(-)
+> > >
+> >
 
