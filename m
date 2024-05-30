@@ -4,90 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E503C25B78
-	for <qemu-riscv@archiver.kernel.org>; Thu, 30 May 2024 09:22:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F68FC25B74
+	for <qemu-riscv@archiver.kernel.org>; Thu, 30 May 2024 10:01:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sCbya-0006ba-3g; Thu, 30 May 2024 05:21:36 -0400
+	id 1sCcaj-0002za-41; Thu, 30 May 2024 06:01:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1sCbyZ-0006bC-5r
- for qemu-riscv@nongnu.org; Thu, 30 May 2024 05:21:35 -0400
-Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1sCbyX-0004mq-1g
- for qemu-riscv@nongnu.org; Thu, 30 May 2024 05:21:34 -0400
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-1f612d7b0f5so4197655ad.0
- for <qemu-riscv@nongnu.org>; Thu, 30 May 2024 02:21:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1717060891; x=1717665691; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=QIbHu3Kdqvk8YcJ4y5r4cxdsFNVnkXC+egIcYodGTY0=;
- b=WXfFla8wvvFh5lscj31h7VeicmKU+O8F+6qPfaEFvb2KwTEjaChvOtvjD6nsJQSr1H
- 3y9WXumKo7EKpdMTHEigEH5KKowx51Xpha8r/O07L3WiGyhYCOiTLbNhanwWe4YhoXFb
- lkRSk9sachQ93jFot6kvLY3hC1Xx6b5wL9azHRlCMvWIsUvUBKFtcBBwA3/GTIvGO5MD
- N6g8gG7zE88IBnotumQ95YXfQjJM27i+N3bCC8xYVZEFVZMdw0VV5JxN/wJ7cR+Z77Hv
- zMufRcHP2+GHKxyPQSOaTs8gSwPjlE1Axj8wZUJH4b5zLqu7bR0PmSGHvST1CdrVEgN/
- KBlA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717060891; x=1717665691;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=QIbHu3Kdqvk8YcJ4y5r4cxdsFNVnkXC+egIcYodGTY0=;
- b=hfBhBOWzrnXiZh0RZWssXo7lSwIVgnrDreXzxiFrCj9o19ZgO9HVtvTpxGBnops5EV
- /QKWJmjyfH3VnDhYf74B4e2T9lwshcc5rHPKfcMkj83qD4nOLb3m0BvyeZRKPTQD5//v
- Slk4TUg2PiBnR8LbzC573BdbpiTq7LuIlIB5jdY8kc74SbPbWrHuvI8SmgBU6y9/xDRM
- U9cdRKujv0dMQRy7RoV2xl3s2PxVixSvLkApfLoC6bTf0EIQXWT+k4ZHU1ippeTqeyqQ
- ccjaeawZ6zyZyC25RvF1OCUU849JzfOhvMoPWZ7H2hKBMeGDdhSb2PWPfqVHOJ0UghTA
- mdXg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUpmB6n7NOmDw1EoN5l3F1vK0At/fx8aliAWhw9iH1bOJw+b/7FB2lkAHLveVsdehGgoCBvLIyspTH7slom+uu5900VgIQ=
-X-Gm-Message-State: AOJu0YzFDJYPAhZTjjxnyJYYNgMQSX9iSLx2EY1cpIPTdhYISplZJB0r
- pEYjv9/8bTe/oKE0JP1eGi2xFtmOwZud8qGoMotFTM2rQDbj439Yg5DXdKuoLMA=
-X-Google-Smtp-Source: AGHT+IH3i0I8/ut3w7JOQcz3tJuhZoXMc8sK1IEYXrmnOJ0mhsFR6T6k7ezqb/MGN1gIbFr8bAvHDQ==
-X-Received: by 2002:a17:903:183:b0:1f4:9b48:7561 with SMTP id
- d9443c01a7336-1f61bddd04amr21028245ad.6.1717060891357; 
- Thu, 30 May 2024 02:21:31 -0700 (PDT)
-Received: from [192.168.68.110] ([177.94.15.33])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1f46dca2529sm94359215ad.247.2024.05.30.02.21.28
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 30 May 2024 02:21:31 -0700 (PDT)
-Message-ID: <712bb03a-688a-45d5-bb25-620f4af956e9@ventanamicro.com>
-Date: Thu, 30 May 2024 06:21:26 -0300
+ (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
+ id 1sCcaY-0002w8-Sx; Thu, 30 May 2024 06:00:56 -0400
+Received: from mgamail.intel.com ([198.175.65.10])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
+ id 1sCcaX-0003Sx-1O; Thu, 30 May 2024 06:00:50 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1717063249; x=1748599249;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=iUVuwDv8IlCBNKOZ1ofL/GWf0HNwQI4LTyFUGM4Cs7g=;
+ b=VfEuOr+QX1ASwjl+nSGURtOC/ex45RXbFStWU4TEo0/NS3sHMTbIRzAQ
+ 1j31KNrdJLW9xrECwwtjzVKVkTynivraoogpxhR/dZA1MZgi53EkYdLwR
+ Qsvbt9CYMWU1GWzGJGJR/1b8d9x5oB9CMzrm3nXZyaog2mUUmSFefs0aF
+ /KBOZS/kEyGO/uty7pXG6qmJIHD1zvbhNepP1gBGCI5LA2QykdAFWW0Pz
+ vQK0hdgchImCnAjiXtZpYGvKQ4LDySF8snwTYFl/n+YBXZ0y0hC4w7qx5
+ xgFrNxva5MeUKpiggE2sfQ7NcGsHc+NFEl3IWWBfjJGNmIF0Wdw2rU9Ex Q==;
+X-CSE-ConnectionGUID: gDohoUzlQnyQpQtlaMUk2g==
+X-CSE-MsgGUID: tnTs8aaKQtm5sz9GG3pJYA==
+X-IronPort-AV: E=McAfee;i="6600,9927,11087"; a="31032538"
+X-IronPort-AV: E=Sophos;i="6.08,201,1712646000"; d="scan'208";a="31032538"
+Received: from orviesa010.jf.intel.com ([10.64.159.150])
+ by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 30 May 2024 03:00:47 -0700
+X-CSE-ConnectionGUID: 9uWka8WTQZqxrJEPByh1OA==
+X-CSE-MsgGUID: 5Q3UyZ3qRfeH+DYgEY/FpQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.08,201,1712646000"; d="scan'208";a="35705073"
+Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
+ by orviesa010.jf.intel.com with ESMTP; 30 May 2024 03:00:42 -0700
+From: Zhao Liu <zhao1.liu@intel.com>
+To: =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+ Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Yanan Wang <wangyanan55@huawei.com>,
+ "Michael S . Tsirkin" <mst@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Eric Blake <eblake@redhat.com>, Markus Armbruster <armbru@redhat.com>,
+ Marcelo Tosatti <mtosatti@redhat.com>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+ Sia Jee Heng <jeeheng.sia@starfivetech.com>
+Cc: qemu-devel@nongnu.org, kvm@vger.kernel.org, qemu-riscv@nongnu.org,
+ qemu-arm@nongnu.org, Zhenyu Wang <zhenyu.z.wang@intel.com>,
+ Dapeng Mi <dapeng1.mi@linux.intel.com>, Yongwei Ma <yongwei.ma@intel.com>,
+ Zhao Liu <zhao1.liu@intel.com>
+Subject: [RFC v2 4/7] i386/cpu: Support thread and module level cache topology
+Date: Thu, 30 May 2024 18:15:36 +0800
+Message-Id: <20240530101539.768484-5-zhao1.liu@intel.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240530101539.768484-1-zhao1.liu@intel.com>
+References: <20240530101539.768484-1-zhao1.liu@intel.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RESEND PATCH v2 0/5] target/riscv: Support RISC-V privilege 1.13
- spec
-To: Fea Wang <fea.wang@sifive.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-References: <20240515080605.2675399-1-fea.wang@sifive.com>
- <4d2d56aa-5758-4320-a5ef-53ebb87ab494@ventanamicro.com>
- <CAKhCfseJgRzyeg1seuZ15SR=f78E5rnbgfrzY_VeRDhPMOAhwA@mail.gmail.com>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <CAKhCfseJgRzyeg1seuZ15SR=f78E5rnbgfrzY_VeRDhPMOAhwA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x631.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+Received-SPF: pass client-ip=198.175.65.10; envelope-from=zhao1.liu@intel.com;
+ helo=mgamail.intel.com
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.036,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -104,111 +94,46 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Fea,
+Allows cache to be defined at the thread and module level. This
+increases flexibility for x86 users to customize their cache topology.
 
-On 5/30/24 00:30, Fea Wang wrote:
-> Hi Daniel,
-> thank you for your help.
-> 
-> I found that only the cover is without many maintainers. I used to send patches by git send-email --dry-run --to 'qemu-devel@nongnu.org <mailto:qemu-devel@nongnu.org>,qemu-riscv@nongnu.org <mailto:qemu-riscv@nongnu.org>' --cc-cmd='scripts/get_maintainer.pl <http://get_maintainer.pl> -i' patches/*. Do you have a better script for me?
+Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
+---
+ target/i386/cpu.c | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
 
-Hmmm no I don't actually :) my script is worse than yours. I just use a git
-alias that hardcode everyone in the CC:
+diff --git a/target/i386/cpu.c b/target/i386/cpu.c
+index b11097b5bafd..3a2dadb4bce0 100644
+--- a/target/i386/cpu.c
++++ b/target/i386/cpu.c
+@@ -241,9 +241,15 @@ static uint32_t max_thread_ids_for_cache(X86CPUTopoInfo *topo_info,
+     uint32_t num_ids = 0;
+ 
+     switch (share_level) {
++    case CPU_TOPO_LEVEL_THREAD:
++        num_ids = 1;
++        break;
+     case CPU_TOPO_LEVEL_CORE:
+         num_ids = 1 << apicid_core_offset(topo_info);
+         break;
++    case CPU_TOPO_LEVEL_MODULE:
++        num_ids = 1 << apicid_module_offset(topo_info);
++        break;
+     case CPU_TOPO_LEVEL_DIE:
+         num_ids = 1 << apicid_die_offset(topo_info);
+         break;
+@@ -251,10 +257,6 @@ static uint32_t max_thread_ids_for_cache(X86CPUTopoInfo *topo_info,
+         num_ids = 1 << apicid_pkg_offset(topo_info);
+         break;
+     default:
+-        /*
+-         * Currently there is no use case for THREAD and MODULE, so use
+-         * assert directly to facilitate debugging.
+-         */
+         g_assert_not_reached();
+     }
+ 
+-- 
+2.34.1
 
-	askreview-riscv = send-email --suppress-cc=sob --to qemu-devel@nongnu.org \
-		--cc qemu-riscv@nongnu.org \
-		--cc (everyone from the output of get_maintainers.pl for RISC-V files)
-
-And then "git askreview-riscv (patches)"
-
- From reading git docs it seems like one detail with your script is that the CC
-is calculated patch by patch via the "--cc-cmd" output, but the cover letter is
-considered an empty commit, so the script returns nothing. This is why every
-other patch has a CC but the cover doesn't.
-
-This is more a get_maintainer.pl detail than anything, so don't worry about it.
-Having the patches properly CCed is enough. We'll go after the cover-letter
-manually if needed.
-
-
-Thanks,
-
-Daniel
-
-
-> Thank you.
-> 
-> Sincerely,
-> Fea
-> 
-> On Mon, May 27, 2024 at 5:21 PM Daniel Henrique Barboza <dbarboza@ventanamicro.com <mailto:dbarboza@ventanamicro.com>> wrote:
-> 
->     Fea,
-> 
->     Please try to also add all RISC-V QEMU maintainers and reviewers when sending
->     patches. It will get your patches reviewed and queued faster. Otherwise the
->     maintainers can miss you your series due to high ML traffic.
-> 
->     You can fetch who you want to CC using the get_maintainer.pl <http://get_maintainer.pl> script with the
->     patch files or any source file in particular, e.g.:
-> 
->     $ ./scripts/get_maintainer.pl <http://get_maintainer.pl> -f target/riscv/cpu.c
->     Palmer Dabbelt <palmer@dabbelt.com <mailto:palmer@dabbelt.com>> (supporter:RISC-V TCG CPUs)
->     Alistair Francis <alistair.francis@wdc.com <mailto:alistair.francis@wdc.com>> (supporter:RISC-V TCG CPUs)
->     Bin Meng <bmeng.cn@gmail.com <mailto:bmeng.cn@gmail.com>> (supporter:RISC-V TCG CPUs)
->     Weiwei Li <liwei1518@gmail.com <mailto:liwei1518@gmail.com>> (reviewer:RISC-V TCG CPUs)
->     Daniel Henrique Barboza <dbarboza@ventanamicro.com <mailto:dbarboza@ventanamicro.com>> (reviewer:RISC-V TCG CPUs)
->     Liu Zhiwei <zhiwei_liu@linux.alibaba.com <mailto:zhiwei_liu@linux.alibaba.com>> (reviewer:RISC-V TCG CPUs)
->     qemu-riscv@nongnu.org <mailto:qemu-riscv@nongnu.org> (open list:RISC-V TCG CPUs)
->     qemu-devel@nongnu.org <mailto:qemu-devel@nongnu.org> (open list:All patches CC here)
-> 
-> 
->     I added the extra folk in the CC for this reply so don't worry about it.
-> 
-> 
->     Alistair, please queue this series. It's already fully acked and I would like to add
->     some bits on top of the priv_spec 1.13 support.
-> 
-> 
->     Thanks,
-> 
-> 
->     Daniel
-> 
->     On 5/15/24 05:05, Fea.Wang wrote:
->      > Based on the change log for the RISC-V privilege 1.13 spec, add the
->      > support for ss1p13.
->      >
->      > Ref:https://github.com/riscv/riscv-isa-manual/blob/a7d93c9/src/priv-preface.adoc?plain=1#L40-L72 <https://github.com/riscv/riscv-isa-manual/blob/a7d93c9/src/priv-preface.adoc?plain=1#L40-L72>
->      >
->      > Lists what to do without clarification or document format.
->      > * Redefined misa.MXL to be read-only, making MXLEN a constant.(Skip, implementation ignored)
->      > * Added the constraint that SXLEN≥UXLEN.(Skip, implementation ignored)
->      > * Defined the misa.V field to reflect that the V extension has been implemented.(Skip, existed)
->      > * Defined the RV32-only medelegh and hedelegh CSRs.(Done in these patches)
->      > * Defined the misaligned atomicity granule PMA, superseding the proposed Zam extension..(Skip, implementation ignored)
->      > * Allocated interrupt 13 for Sscofpmf LCOFI interrupt.(Skip, existed)
->      > * Defined hardware error and software check exception codes.(Done in these patches)
->      > * Specified synchronization requirements when changing the PBMTE fields in menvcfg and henvcfg.(Skip, implementation ignored)
->      > * Incorporated Svade and Svadu extension specifications.(Skip, existed)
->      >
->      >
->      > Fea.Wang (4):
->      >    target/riscv: Support the version for ss1p13
->      >    target/riscv: Add 'P1P13' bit in SMSTATEEN0
->      >    target/riscv: Add MEDELEGH, HEDELEGH csrs for RV32
->      >    target/riscv: Reserve exception codes for sw-check and hw-err
->      >
->      > Jim Shu (1):
->      >    target/riscv: Reuse the conversion function of priv_spec
->      >
->      >   target/riscv/cpu.c         |  8 ++++++--
->      >   target/riscv/cpu.h         |  5 ++++-
->      >   target/riscv/cpu_bits.h    |  5 +++++
->      >   target/riscv/cpu_cfg.h     |  1 +
->      >   target/riscv/csr.c         | 39 ++++++++++++++++++++++++++++++++++++++
->      >   target/riscv/tcg/tcg-cpu.c | 17 ++++++++---------
->      >   6 files changed, 63 insertions(+), 12 deletions(-)
->      >
-> 
 
