@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC646C27C44
-	for <qemu-riscv@archiver.kernel.org>; Fri, 31 May 2024 17:46:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE2F1C27C50
+	for <qemu-riscv@archiver.kernel.org>; Fri, 31 May 2024 17:47:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sD6KK-0002Aa-VL; Fri, 31 May 2024 13:46:05 -0400
+	id 1sD6Ju-0001s8-JP; Fri, 31 May 2024 13:45:38 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1sD6K0-0001z5-IB
- for qemu-riscv@nongnu.org; Fri, 31 May 2024 13:45:46 -0400
-Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
+ id 1sD6Jr-0001qx-5p
+ for qemu-riscv@nongnu.org; Fri, 31 May 2024 13:45:35 -0400
+Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1sD6Jx-0007iA-T7
- for qemu-riscv@nongnu.org; Fri, 31 May 2024 13:45:43 -0400
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-1f4a5344ec7so17660345ad.1
- for <qemu-riscv@nongnu.org>; Fri, 31 May 2024 10:45:41 -0700 (PDT)
+ id 1sD6Jp-0007bu-83
+ for qemu-riscv@nongnu.org; Fri, 31 May 2024 13:45:34 -0400
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-1f6342c5faaso9415855ad.2
+ for <qemu-riscv@nongnu.org>; Fri, 31 May 2024 10:45:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1717177540; x=1717782340; darn=nongnu.org;
+ d=sifive.com; s=google; t=1717177532; x=1717782332; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gCcFfZSpG0DTooCBgGsai6/Bi/5BGaMYihmO+rZ2ifU=;
- b=isYsAmttyyh9vC+iPAA2FP9Mo6P9vYNO+5Whcjmhf5WFdJHj0wDglJnYgRBk/xTWCB
- jJ2yrkXGhyvcW7AQofOiE0L+8NRsglkUp3lpuhKQGnYNYpfhepXZCygQ5tP6AJqL4zwf
- GbsG/Z4J6b/RvePDkn+Ywiqm4UXGdbjI+PqbJO2VQeUsoTn+v38mgIL6WHki+c73nXFT
- pMy1jyJ1b+53zJ14ftThkHRoFFE7vV73bppDPSZQBKt4vzcrYxj1Z+5PAIKVAGA/hULd
- Q2K3smGXJ3ZcECM3LWcuBKc0oUuOEr0u5Ia3AjhFwJpMTZm/ieCUKs8EUsVEiAPtk167
- g5Qw==
+ bh=VglV/qt6rHvbvSgSjaTMT0boXZYOnbayc2OjwjqMVsk=;
+ b=Rvi7d5AWZrvm3VJKexTywZB/I2w6wKfkF5sgJ+mTSvjqE32Fc6N5gC6bX64cEYJqGC
+ qZN6hott+L2dy2Zz3ykM+RybSMszuzrRU/dBFCsh67AYYltLHCIevLQkbNb/rG5NRxXt
+ Na9R8xBlESB06aS4+rhghZns4o/AFbUIhQDk2QsrwNjbMj5qFjorDgO//XDIpZRExJAn
+ L4GcvvXJcvwIazXJsE2jzDB2yaKdLdgENh774ZiH3EpQ6FfpTVDE9+KisWTdvEZis++L
+ MmpAmaMcndkkAE8GPEX/NkkOkCwzHKHM89fxeNchlZv6suu3LnMb/MdGEO0dmUu5aQMQ
+ Fmtw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717177540; x=1717782340;
+ d=1e100.net; s=20230601; t=1717177532; x=1717782332;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=gCcFfZSpG0DTooCBgGsai6/Bi/5BGaMYihmO+rZ2ifU=;
- b=is10paGYfSpjfvKIWsTmXkTBnvCYxPB1FISlTr9vjfiMnk7/6Z4CUuPJdEvNftNJRH
- VEJ9YD4LaxaHh1ywMVqT12Pe8SEkf6I6JraCk370wxAecq/v9lDtvzcTk9FMdmOhSkXA
- kGC06xgWa9xvIPwhMZ4BvSfhRvSthBoKFyueGnE3ksjWA7vQZgz0GiDbMSOC5+t2qsLy
- q/lOZe4mHYlVhzlFnVfggRJPxHABpMbatqcEsAAP+DmvdJQCmqc1jseI6jA3N/0vBxbq
- iYBS8R0Gs2GIyOPKjX7OY4Rcnhti6QoMBIM8Rpa37InG+aBeh9OIEOym2+7wZ+++Wiv9
- za7w==
+ bh=VglV/qt6rHvbvSgSjaTMT0boXZYOnbayc2OjwjqMVsk=;
+ b=Y2i6ZJpVDcx5umXwAJ9V1tan3uIQM6eYPvhw08BH80Nxtyhmxq6qSwuBqfP57dzPYx
+ DK3xnBTgT0PeocvgchPniypm6hBCaUFTr3bOymgZolub7sQ9j7B8yBbjBQSOatQrsDuE
+ Nc00fCR4JQapjqZQq9FEEmjY0CHGJ/Pe1gkzlOZGX4Fhbl5zEuhwdjkAMJ2kRn5R+31u
+ l6f7oRF9ctiQzqax0AduYh8KrWHjsIEuH71+IIK6zJclNDO2m9QkvdEYHk/JflcppmTT
+ X8wnhm3gKhPdoOhrZA9ktbsm6Yg734nbsAVoLNEgzxnRS/9guot1pxk7gh/zj25Eh4P/
+ +rEQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW/qQyZXosABXo81Op1CW9msI7oUp7Ad2UP1asf3ix23ysxEtd/dD2Qgx64lXeOaNH1Kh5P3q0T9g6tSObJkKVPoss/RPs=
-X-Gm-Message-State: AOJu0YzhlPXgcbaZHwfIe0YKFE+2wBWPPN2wpz/TWX7T13z3ksP7yTWC
- PeLJwHgnUeIYM31/lOHTxyxD2EK7o8OsQAVtWwIMuiI2ieHonAWrUIYU714Stu8=
-X-Google-Smtp-Source: AGHT+IFtLgu8sT264xYDuQlZcz7mHFjTM8M3L7/mtylmHcLtt/e8zP6zBA5ztZLACl5ufm+3GwGwxA==
-X-Received: by 2002:a17:902:6806:b0:1f4:8a31:5a4c with SMTP id
- d9443c01a7336-1f635a4f54bmr34390495ad.24.1717177540488; 
- Fri, 31 May 2024 10:45:40 -0700 (PDT)
+ AJvYcCW/cuj0IHR8NmfaGpflr8DJTlQ4+hoNDm6lP3XuWub6D7taEGt5j2fG3wWtRst9u2ESA/5uiJ49oZ0TBcNvgndk4ssaoOQ=
+X-Gm-Message-State: AOJu0Yxm3R3itVbVl9tMfWGyqTX7h+0VrYfOYCIuZ1ZMAOdwnwfrtfKr
+ yoDULk7cvIJdcpC4rfry6CdYRf+Z9qdjpX2ea5bN5aUaoFKuNWB8WAnALgZnOQs=
+X-Google-Smtp-Source: AGHT+IGrW1WvAV7CGEKP3jIuTMxCbXh4eSRvs9djyfvLCiCC4NI739KLdE7MiF4C/Z4Da1o5Am7XiQ==
+X-Received: by 2002:a17:903:22cb:b0:1f4:8372:db24 with SMTP id
+ d9443c01a7336-1f63704b335mr33008705ad.38.1717177531741; 
+ Fri, 31 May 2024 10:45:31 -0700 (PDT)
 Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
  [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1f63236ce6dsm19389875ad.95.2024.05.31.10.45.38
+ d9443c01a7336-1f63236ce6dsm19389875ad.95.2024.05.31.10.45.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 31 May 2024 10:45:40 -0700 (PDT)
+ Fri, 31 May 2024 10:45:31 -0700 (PDT)
 From: Max Chou <max.chou@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: dbarboza@ventanamicro.com, Max Chou <max.chou@sifive.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Richard Henderson <richard.henderson@linaro.org>
-Subject: [RFC PATCH v2 6/6] target/riscv: rvv: Optimize vl8re8.v/vs8r.v with
- limitations
-Date: Sat,  1 Jun 2024 01:44:53 +0800
-Message-Id: <20240531174504.281461-7-max.chou@sifive.com>
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Subject: [RFC PATCH v2 4/6] target/riscv: Add check_probe_[read|write] helper
+ functions
+Date: Sat,  1 Jun 2024 01:44:51 +0800
+Message-Id: <20240531174504.281461-5-max.chou@sifive.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240531174504.281461-1-max.chou@sifive.com>
 References: <20240531174504.281461-1-max.chou@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
- envelope-from=max.chou@sifive.com; helo=mail-pl1-x634.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
+ envelope-from=max.chou@sifive.com; helo=mail-pl1-x631.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -101,236 +100,54 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The vector load/store whole register instructions (e.g. vl8re8.v/vs8r.v)
-perform unmasked continuous load/store. We can optimize these
-instructions by replacing the corresponding helper functions by TCG ops
-to copy more data at a time with following assumptions:
-
-* Host and target are little endian
+The helper_check_probe_[read|write] functions wrap the probe_pages
+function to perform virtual address resolution for continuous vector
+load/store instructions.
 
 Signed-off-by: Max Chou <max.chou@sifive.com>
 ---
- target/riscv/insn_trans/trans_rvv.c.inc | 196 +++++++++++++++++++++++-
- 1 file changed, 194 insertions(+), 2 deletions(-)
+ target/riscv/helper.h        |  4 ++++
+ target/riscv/vector_helper.c | 12 ++++++++++++
+ 2 files changed, 16 insertions(+)
 
-diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index bbac73bb12b..44763ccec06 100644
---- a/target/riscv/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -1402,11 +1402,108 @@ GEN_LDST_WHOLE_TRANS(vl4re8_v,  4)
- GEN_LDST_WHOLE_TRANS(vl4re16_v, 4)
- GEN_LDST_WHOLE_TRANS(vl4re32_v, 4)
- GEN_LDST_WHOLE_TRANS(vl4re64_v, 4)
--GEN_LDST_WHOLE_TRANS(vl8re8_v,  8)
- GEN_LDST_WHOLE_TRANS(vl8re16_v, 8)
- GEN_LDST_WHOLE_TRANS(vl8re32_v, 8)
- GEN_LDST_WHOLE_TRANS(vl8re64_v, 8)
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index aaf68eadfb7..f4bc907e85f 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -1,6 +1,10 @@
+ /* Exceptions */
+ DEF_HELPER_2(raise_exception, noreturn, env, i32)
  
-+static bool trans_vl8re8_v(DisasContext *s, arg_r2 * a)
++/* Probe page */
++DEF_HELPER_FLAGS_3(check_probe_read, TCG_CALL_NO_WG, void, env, tl, tl)
++DEF_HELPER_FLAGS_3(check_probe_write, TCG_CALL_NO_WG, void, env, tl, tl)
++
+ /* Floating Point - rounding mode */
+ DEF_HELPER_FLAGS_2(set_rounding_mode, TCG_CALL_NO_WG, void, env, i32)
+ DEF_HELPER_FLAGS_2(set_rounding_mode_chkfrm, TCG_CALL_NO_WG, void, env, i32)
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index cb7267c3217..9263ab26b19 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -136,6 +136,18 @@ static void probe_pages(CPURISCVState *env, target_ulong addr,
+     }
+ }
+ 
++void HELPER(check_probe_read)(CPURISCVState *env, target_ulong addr,
++                              target_ulong len)
 +{
-+    if (require_rvv(s) && QEMU_IS_ALIGNED(a->rd, 8)) {
-+        if (!HOST_BIG_ENDIAN && s->vstart_eq_zero) {
-+            uint32_t vofs = vreg_ofs(s, a->rd);
-+            uint32_t midx = s->mem_idx;
-+            uint32_t evl = s->cfg_ptr->vlenb << 3;
-+
-+            TCGv_i64 t0, t1;
-+            TCGv_i128 t16;
-+            TCGv_ptr tp;
-+            TCGv_ptr i = tcg_temp_new_ptr();
-+            TCGv len_remain = tcg_temp_new();
-+            TCGv rs1 = get_gpr(s, a->rs1, EXT_NONE);
-+            TCGv addr = tcg_temp_new();
-+
-+            TCGLabel *loop_128 = gen_new_label();
-+            TCGLabel *remain_64 = gen_new_label();
-+            TCGLabel *remain_32 = gen_new_label();
-+            TCGLabel *remain_16 = gen_new_label();
-+            TCGLabel *remain_8 = gen_new_label();
-+            TCGLabel *over = gen_new_label();
-+
-+            tcg_gen_mov_tl(addr, rs1);
-+            tcg_gen_movi_tl(len_remain, evl);
-+            tcg_gen_movi_ptr(i, 0);
-+
-+            tcg_gen_brcondi_tl(TCG_COND_GEU, cpu_vstart, evl, over);
-+            gen_helper_check_probe_read(tcg_env, addr, len_remain);
-+
-+            tcg_gen_brcondi_tl(TCG_COND_LTU, len_remain, 16, remain_64);
-+
-+            gen_set_label(loop_128);
-+
-+            t16 = tcg_temp_new_i128();
-+            tcg_gen_qemu_ld_i128(t16, addr, midx,
-+                                 MO_LE | MO_128 | MO_ATOM_NONE);
-+            tcg_gen_addi_tl(addr, addr, 16);
-+
-+            tp = tcg_temp_new_ptr();
-+            tcg_gen_add_ptr(tp, tcg_env, i);
-+            tcg_gen_addi_ptr(i, i, 16);
-+
-+            t0 = tcg_temp_new_i64();
-+            t1 = tcg_temp_new_i64();
-+            tcg_gen_extr_i128_i64(t0, t1, t16);
-+
-+            tcg_gen_st_i64(t0, tp, vofs);
-+            tcg_gen_st_i64(t1, tp, vofs + 8);
-+            tcg_gen_subi_tl(len_remain, len_remain, 16);
-+
-+            tcg_gen_brcondi_tl(TCG_COND_GEU, len_remain, 16, loop_128);
-+
-+            gen_set_label(remain_64);
-+            tcg_gen_brcondi_tl(TCG_COND_LTU, len_remain, 8, remain_32);
-+            tcg_gen_qemu_ld_i64(t0, addr, midx, MO_LEUQ | MO_ATOM_NONE);
-+            tcg_gen_addi_tl(addr, addr, 8);
-+            tcg_gen_add_ptr(tp, tcg_env, i);
-+            tcg_gen_addi_ptr(i, i, 8);
-+            tcg_gen_st_i64(t0, tp, vofs);
-+            tcg_gen_subi_tl(len_remain, len_remain, 8);
-+
-+            gen_set_label(remain_32);
-+            tcg_gen_brcondi_tl(TCG_COND_LTU, len_remain, 4, remain_16);
-+            tcg_gen_qemu_ld_i64(t0, addr, midx, MO_LEUL | MO_ATOM_NONE);
-+            tcg_gen_addi_tl(addr, addr, 4);
-+            tcg_gen_add_ptr(tp, tcg_env, i);
-+            tcg_gen_addi_ptr(i, i, 4);
-+            tcg_gen_st32_i64(t0, tp, vofs);
-+            tcg_gen_subi_tl(len_remain, len_remain, 4);
-+
-+            gen_set_label(remain_16);
-+            tcg_gen_brcondi_tl(TCG_COND_LTU, len_remain, 2, remain_8);
-+            tcg_gen_qemu_ld_i64(t0, addr, midx, MO_LEUW | MO_ATOM_NONE);
-+            tcg_gen_addi_tl(addr, addr, 2);
-+            tcg_gen_add_ptr(tp, tcg_env, i);
-+            tcg_gen_addi_ptr(i, i, 2);
-+            tcg_gen_st16_i64(t0, tp, vofs);
-+            tcg_gen_subi_tl(len_remain, len_remain, 2);
-+
-+            gen_set_label(remain_8);
-+            tcg_gen_brcondi_tl(TCG_COND_EQ, len_remain, 0, over);
-+            tcg_gen_qemu_ld_i64(t0, addr, midx,
-+                                MO_LE | MO_8 | MO_ATOM_NONE);
-+            tcg_gen_add_ptr(tp, tcg_env, i);
-+            tcg_gen_st8_i64(t0, tp, vofs);
-+
-+            gen_set_label(over);
-+
-+            finalize_rvv_inst(s);
-+        } else {
-+            return ldst_whole_trans(a->rd, a->rs1, 8, gen_helper_vl8re8_v, s);
-+        }
-+        return true;
-+    }
-+    return false;
++    probe_pages(env, addr, len, GETPC(), MMU_DATA_LOAD);
 +}
 +
- /*
-  * The vector whole register store instructions are encoded similar to
-  * unmasked unit-stride store of elements with EEW=8.
-@@ -1414,7 +1511,102 @@ GEN_LDST_WHOLE_TRANS(vl8re64_v, 8)
- GEN_LDST_WHOLE_TRANS(vs1r_v, 1)
- GEN_LDST_WHOLE_TRANS(vs2r_v, 2)
- GEN_LDST_WHOLE_TRANS(vs4r_v, 4)
--GEN_LDST_WHOLE_TRANS(vs8r_v, 8)
-+
-+static bool trans_vs8r_v(DisasContext *s, arg_r2 * a)
++void HELPER(check_probe_write)(CPURISCVState *env, target_ulong addr,
++                               target_ulong len)
 +{
-+    if (require_rvv(s) && QEMU_IS_ALIGNED(a->rd, 8)) {
-+        if (!HOST_BIG_ENDIAN && s->vstart_eq_zero) {
-+            uint32_t vofs = vreg_ofs(s, a->rd);
-+            uint32_t midx = s->mem_idx;
-+            uint32_t evl = s->cfg_ptr->vlenb << 3;
-+
-+            TCGv_i64 t0, t1;
-+            TCGv_i128 t16;
-+            TCGv_ptr tp;
-+            TCGv_ptr i = tcg_temp_new_ptr();
-+            TCGv len_remain = tcg_temp_new();
-+            TCGv rs1 = get_gpr(s, a->rs1, EXT_NONE);
-+            TCGv addr = tcg_temp_new();
-+
-+            TCGLabel *loop_128 = gen_new_label();
-+            TCGLabel *remain_64 = gen_new_label();
-+            TCGLabel *remain_32 = gen_new_label();
-+            TCGLabel *remain_16 = gen_new_label();
-+            TCGLabel *remain_8 = gen_new_label();
-+            TCGLabel *over = gen_new_label();
-+
-+            tcg_gen_mov_tl(addr, rs1);
-+            tcg_gen_movi_tl(len_remain, evl);
-+            tcg_gen_movi_ptr(i, 0);
-+
-+            tcg_gen_brcondi_tl(TCG_COND_GEU, cpu_vstart, evl, over);
-+            gen_helper_check_probe_write(tcg_env, addr, len_remain);
-+
-+            tcg_gen_brcondi_tl(TCG_COND_LTU, len_remain, 16, remain_64);
-+
-+            gen_set_label(loop_128);
-+
-+            t0 = tcg_temp_new_i64();
-+            t1 = tcg_temp_new_i64();
-+            tp = tcg_temp_new_ptr();
-+            tcg_gen_add_ptr(tp, tcg_env, i);
-+            tcg_gen_ld_i64(t0, tp, vofs);
-+            tcg_gen_ld_i64(t1, tp, vofs + 8);
-+            tcg_gen_addi_ptr(i, i, 16);
-+
-+            t16 = tcg_temp_new_i128();
-+            tcg_gen_concat_i64_i128(t16, t0, t1);
-+
-+            tcg_gen_qemu_st_i128(t16, addr, midx,
-+                                 MO_LE | MO_128 | MO_ATOM_NONE);
-+            tcg_gen_addi_tl(addr, addr, 16);
-+            tcg_gen_subi_tl(len_remain, len_remain, 16);
-+
-+            tcg_gen_brcondi_tl(TCG_COND_GEU, len_remain, 16, loop_128);
-+
-+            gen_set_label(remain_64);
-+            tcg_gen_brcondi_tl(TCG_COND_LTU, len_remain, 8, remain_32);
-+            tcg_gen_add_ptr(tp, tcg_env, i);
-+            tcg_gen_ld_i64(t0, tp, vofs);
-+            tcg_gen_addi_ptr(i, i, 8);
-+            tcg_gen_qemu_st_i64(t0, addr, midx, MO_LEUQ | MO_ATOM_NONE);
-+            tcg_gen_addi_tl(addr, addr, 8);
-+            tcg_gen_subi_tl(len_remain, len_remain, 8);
-+
-+            gen_set_label(remain_32);
-+            tcg_gen_brcondi_tl(TCG_COND_LTU, len_remain, 4, remain_16);
-+            tcg_gen_add_ptr(tp, tcg_env, i);
-+            tcg_gen_ld_i64(t0, tp, vofs);
-+            tcg_gen_addi_ptr(i, i, 4);
-+            tcg_gen_qemu_st_i64(t0, addr, midx, MO_LEUL | MO_ATOM_NONE);
-+            tcg_gen_addi_tl(addr, addr, 4);
-+            tcg_gen_subi_tl(len_remain, len_remain, 4);
-+
-+            gen_set_label(remain_16);
-+            tcg_gen_brcondi_tl(TCG_COND_LTU, len_remain, 2, remain_8);
-+            tcg_gen_add_ptr(tp, tcg_env, i);
-+            tcg_gen_ld_i64(t0, tp, vofs);
-+            tcg_gen_addi_ptr(i, i, 2);
-+            tcg_gen_qemu_st_i64(t0, addr, midx, MO_LEUW | MO_ATOM_NONE);
-+            tcg_gen_addi_tl(addr, addr, 2);
-+            tcg_gen_subi_tl(len_remain, len_remain, 2);
-+
-+            gen_set_label(remain_8);
-+            tcg_gen_brcondi_tl(TCG_COND_EQ, len_remain, 0, over);
-+            tcg_gen_add_ptr(tp, tcg_env, i);
-+            tcg_gen_ld_i64(t0, tp, vofs);
-+            tcg_gen_qemu_st_i64(t0, addr, midx, MO_LE | MO_8 | MO_ATOM_NONE);
-+
-+            gen_set_label(over);
-+
-+            finalize_rvv_inst(s);
-+        } else {
-+            return ldst_whole_trans(a->rd, a->rs1, 8, gen_helper_vl8re8_v, s);
-+        }
-+        return true;
-+    }
-+    return false;
++    probe_pages(env, addr, len, GETPC(), MMU_DATA_STORE);
 +}
- 
- /*
-  *** Vector Integer Arithmetic Instructions
++
+ static inline void vext_set_elem_mask(void *v0, int index,
+                                       uint8_t value)
+ {
 -- 
 2.34.1
 
