@@ -4,84 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A812C25B75
-	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Jun 2024 12:26:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49F6EC25B75
+	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Jun 2024 15:51:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sE6ky-000256-4g; Mon, 03 Jun 2024 08:25:44 -0400
+	id 1sE9xT-0005Xz-WC; Mon, 03 Jun 2024 11:50:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1sE6kx-00024c-3K
- for qemu-riscv@nongnu.org; Mon, 03 Jun 2024 08:25:43 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1sE6kv-0004aa-2Q
- for qemu-riscv@nongnu.org; Mon, 03 Jun 2024 08:25:42 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1717417540;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=Efb5Ek9FsC2ECwoOU3U6omc2wMgF8Ch8l1dKcamqGD4=;
- b=N13xVfC60ZF5mJnB7hmA8FhxNn/ztc7k/RHc/PkBwCIf0NADYNzUo/MAalx6Om94mvVgop
- GcQ3oaAWZOgUNQgOzYzyg4i0lfdkXwZ2lI/NYkPi1aJ7sj/rKYE6Mvv1ap2Ad75NS8zsz9
- DuEWZVTGmdfMj4NT1wueqztDoPdslIk=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-591-9n3jOQJNMxmz9d8CAE3qzw-1; Mon, 03 Jun 2024 08:25:38 -0400
-X-MC-Unique: 9n3jOQJNMxmz9d8CAE3qzw-1
-Received: from smtp.corp.redhat.com (int-mx09.intmail.prod.int.rdu2.redhat.com
- [10.11.54.9])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 64875101A54F;
- Mon,  3 Jun 2024 12:25:37 +0000 (UTC)
-Received: from blackfin.pond.sub.org (unknown [10.39.192.93])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 18AFD40147E;
- Mon,  3 Jun 2024 12:25:37 +0000 (UTC)
-Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 3F38D21E66E5; Mon,  3 Jun 2024 14:25:36 +0200 (CEST)
-From: Markus Armbruster <armbru@redhat.com>
-To: Zhao Liu <zhao1.liu@intel.com>
-Cc: Daniel P . =?utf-8?Q?Berrang=C3=A9?= <berrange@redhat.com>,  Eduardo
- Habkost
- <eduardo@habkost.net>,  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,  Yanan Wang
- <wangyanan55@huawei.com>,  "Michael S . Tsirkin" <mst@redhat.com>,  Paolo
- Bonzini <pbonzini@redhat.com>,  Richard Henderson
- <richard.henderson@linaro.org>,  Eric Blake <eblake@redhat.com>,  Markus
- Armbruster <armbru@redhat.com>,  Marcelo Tosatti <mtosatti@redhat.com>,
- Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>,  Peter Maydell
- <peter.maydell@linaro.org>,  Jonathan Cameron
- <Jonathan.Cameron@huawei.com>,  Sia Jee Heng
- <jeeheng.sia@starfivetech.com>,  qemu-devel@nongnu.org,
- kvm@vger.kernel.org,  qemu-riscv@nongnu.org,  qemu-arm@nongnu.org,
- Zhenyu Wang <zhenyu.z.wang@intel.com>,  Dapeng Mi
- <dapeng1.mi@linux.intel.com>,  Yongwei Ma <yongwei.ma@intel.com>
-Subject: Re: [RFC v2 1/7] hw/core: Make CPU topology enumeration arch-agnostic
-In-Reply-To: <20240530101539.768484-2-zhao1.liu@intel.com> (Zhao Liu's message
- of "Thu, 30 May 2024 18:15:33 +0800")
-References: <20240530101539.768484-1-zhao1.liu@intel.com>
- <20240530101539.768484-2-zhao1.liu@intel.com>
-Date: Mon, 03 Jun 2024 14:25:36 +0200
-Message-ID: <87plsyfc1r.fsf@pond.sub.org>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1sE9xT-0005Xh-Fe
+ for qemu-riscv@nongnu.org; Mon, 03 Jun 2024 11:50:51 -0400
+Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1sE9xR-0004Kv-V2
+ for qemu-riscv@nongnu.org; Mon, 03 Jun 2024 11:50:51 -0400
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-2c19e6dc3dcso3710828a91.3
+ for <qemu-riscv@nongnu.org>; Mon, 03 Jun 2024 08:50:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sifive.com; s=google; t=1717429848; x=1718034648; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=QoW/nxIl4dcOnHCwat6JlRacAMOvrHIs2V+96TGk/MM=;
+ b=dclHzgQfN/88f9F3RiBt+65Mv2Rw2O8cPY+qMO3khsmjWuR485SX18W3c8amLj5noR
+ jUttZq/L49Kw+g2wWNiLGDWsyiPQyLuYVBxznGa+YzukwcAUwCvvt02o2QTxmsJ+btyM
+ f0OKzJu7bJ01bYI/Q6f9/SLU9UfR6GSPqx/sqMOqG2xnAL4W8hy3WFI96yuR7AKJ1MoH
+ 19+POUKNTxOKjWZRXXDz/3MlNMxacdjHQbfq9FMPOwp84WPVbKz70jNkGjZHfT/843H2
+ DdmuZgW6sKV5sND5ceQIsy1jVlgs4GPFbsPzlreWZbMYe4S/atiYSo1GPLZw8BCJEwAM
+ xxfA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1717429848; x=1718034648;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=QoW/nxIl4dcOnHCwat6JlRacAMOvrHIs2V+96TGk/MM=;
+ b=WxD4ajp93+N2bshn9yFIr9rT5dojhUMr2qgyDZtYz9q9Fk3jMTTM7w5KKN5juJJIZt
+ 2U1k1OlmzDgjDgT1jh13C1ldW89Txwr1s5WRrNkNetbzQ7o39WK+I5XiEK1Qq70XABJY
+ MMIqHRHomeXViJ/DkZT4FgcTJz4hIvwdOGXY40V1YFooxA+EB7W5Ec9tSXQPlFD6qXiE
+ qkhQjSQMwC+eoyV5pnjtYfuYC/5Tavd30PLTKLxupyRbqd5z/3tq8qDQFB9o30y5H33+
+ fkb61ndF/08RY04J9nu3IZrtITrLKXj+uXpjY451zLQJwdY4+SP08GGo8lMVDvIf609v
+ FvOg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWOGvtEhIya9h/6YJCL3Z3DvlGYiupZF3RWCbtPzTPvks9IdhCpBrYcJGbU20KuyLbQkxrAe2CJ9V7/TBTpOiPro1/OFiE=
+X-Gm-Message-State: AOJu0Yzx26HfzyWQdF0XI9uq6MhDTZZoy4as20sOHnSTKOgUGpZIw51r
+ PzWO9j1Bnj0UeJV7TofzMSEUNyRw+tbidpddGSXqmHoJTI0X62oEXfiCnrD9Xv4=
+X-Google-Smtp-Source: AGHT+IHq4fpvclaUiYntHQa5JbuzYJ7+JQwgSlAWfZtaoz+aPENDBGnfLtLmVIk/W+AW2D1GxQdwUA==
+X-Received: by 2002:a17:90b:1918:b0:2a2:c16:d673 with SMTP id
+ 98e67ed59e1d1-2c1dc5cce83mr8933619a91.36.1717429848065; 
+ Mon, 03 Jun 2024 08:50:48 -0700 (PDT)
+Received: from [100.64.0.1] ([136.226.240.169])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-2c1c28425ecsm6446943a91.53.2024.06.03.08.50.46
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 03 Jun 2024 08:50:47 -0700 (PDT)
+Message-ID: <595c3be7-7a33-4812-a80c-975b2eaaf5a6@sifive.com>
+Date: Mon, 3 Jun 2024 23:50:45 +0800
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.9
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH v2 5/6] target/riscv: rvv: Optimize v[l|s]e8.v with
+ limitations
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: dbarboza@ventanamicro.com, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+References: <20240531174504.281461-1-max.chou@sifive.com>
+ <20240531174504.281461-6-max.chou@sifive.com>
+ <1016c817-d1e0-4dbd-8fd9-921bcdc23a0a@linaro.org>
+Content-Language: en-US
+From: Max Chou <max.chou@sifive.com>
+In-Reply-To: <1016c817-d1e0-4dbd-8fd9-921bcdc23a0a@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
+ envelope-from=max.chou@sifive.com; helo=mail-pj1-x1029.google.com
+X-Spam_score_int: 12
+X-Spam_score: 1.2
+X-Spam_bar: +
+X-Spam_report: (1.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_SBL_CSS=3.335, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,88 +103,40 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Zhao Liu <zhao1.liu@intel.com> writes:
+Hi Richart,
 
-> Cache topology needs to be defined based on CPU topology levels. Thus,
-> define CPU topology enumeration in qapi/machine.json to make it generic
-> for all architectures.
+Thank you for your feedback.
+This version is created by referencing the gen_sve_ldr translation 
+function with the similar assumptions that no mask(predication)/no tail 
+agnostic/continuous load & store.
+You are right, the expansion is large in this version (over 20 TCG 
+instructions that suggested in tcg-op doc).
+I will provide next version with the helper function implementation like 
+sve_ldN_r in ARM target.
+
+Thank you,
+Max
+
+On 2024/6/3 1:45 AM, Richard Henderson wrote:
+> On 5/31/24 12:44, Max Chou wrote:
+>> The vector unit-stride load/store instructions (e.g. vle8.v/vse8.v)
+>> perform continuous load/store. We can replace the corresponding helper
+>> functions by TCG ops to copy more data at a time with following
+>> assumptions:
+>>
+>> * Perform virtual address resolution once for entire vector at beginning
+>> * Without mask
+>> * Without tail agnostic
+>> * Both host and target are little endian
+>>
+>> Signed-off-by: Max Chou <max.chou@sifive.com>
 >
-> To match the general topology naming style, rename CPU_TOPO_LEVEL_SMT
-> and CPU_TOPO_LEVEL_PACKAGE to CPU_TOPO_LEVEL_THREAD and
-> CPU_TOPO_LEVEL_SOCKET.
+> Why are you generating all of this inline?  This expansion is very 
+> large.  I would expect you to get better performance with a helper 
+> function.
 >
-> Also, enumerate additional topology levels for non-i386 arches, and add
-> helpers for topology enumeration and string conversion.
+> AGAIN, please see the Arm implementation.
 >
-> Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
-
-[...]
-
-> diff --git a/qapi/machine.json b/qapi/machine.json
-> index bce6e1bbc412..7ac5a05bb9c9 100644
-> --- a/qapi/machine.json
-> +++ b/qapi/machine.json
-> @@ -1667,6 +1667,46 @@
->       '*reboot-timeout': 'int',
->       '*strict': 'bool' } }
->  
-> +##
-> +# @CPUTopoLevel:
-
-I understand you're moving existing enum CPUTopoLevel into the QAPI
-schema.  I think the idiomatic QAPI name would be CpuTopologyLevel.
-Would you be willing to rename it, or would that be too much churn?
-
-> +#
-> +# An enumeration of CPU topology levels.
-> +#
-> +# @invalid: Invalid topology level, used as a placeholder.
-> +#
-> +# @thread: thread level, which would also be called SMT level or logical
-> +#     processor level. The @threads option in -smp is used to configure
-> +#     the topology of this level.
-> +#
-> +# @core: core level. The @cores option in -smp is used to configure the
-> +#     topology of this level.
-> +#
-> +# @module: module level. The @modules option in -smp is used to
-> +#     configure the topology of this level.
-> +#
-> +# @cluster: cluster level. The @clusters option in -smp is used to
-> +#     configure the topology of this level.
-> +#
-> +# @die: die level. The @dies option in -smp is used to configure the
-> +#     topology of this level.
-> +#
-> +# @socket: socket level, which would also be called package level. The
-> +#     @sockets option in -smp is used to configure the topology of this
-> +#     level.
-> +#
-> +# @book: book level. The @books option in -smp is used to configure the
-> +#     topology of this level.
-> +#
-> +# @drawer: drawer level. The @drawers option in -smp is used to
-> +#     configure the topology of this level.
-
-docs/devel/qapi-code-gen.rst section Documentation markup:
-
-    For legibility, wrap text paragraphs so every line is at most 70
-    characters long.
-
-    Separate sentences with two spaces.
-
-> +#
-> +# Since: 9.1
-> +##
-> +{ 'enum': 'CPUTopoLevel',
-> +  'prefix': 'CPU_TOPO_LEVEL',
-> +  'data': [ 'invalid', 'thread', 'core', 'module', 'cluster',
-> +            'die', 'socket', 'book', 'drawer' ] }
-> +
->  ##
->  # @SMPConfiguration:
->  #
-
-[...]
-
+>
+> r~
 
