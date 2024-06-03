@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8A56C25B75
-	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Jun 2024 05:48:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2045CC25B76
+	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Jun 2024 05:49:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sE0YG-00008a-NX; Mon, 03 Jun 2024 01:48:12 -0400
+	id 1sE0YM-0000CO-1D; Mon, 03 Jun 2024 01:48:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <fea.wang@sifive.com>)
- id 1sE0YE-00007M-Jg
- for qemu-riscv@nongnu.org; Mon, 03 Jun 2024 01:48:10 -0400
-Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c])
+ id 1sE0YK-0000B0-5P
+ for qemu-riscv@nongnu.org; Mon, 03 Jun 2024 01:48:16 -0400
+Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <fea.wang@sifive.com>)
- id 1sE0YC-0005Ho-Ly
- for qemu-riscv@nongnu.org; Mon, 03 Jun 2024 01:48:10 -0400
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-1f480624d04so32647325ad.2
- for <qemu-riscv@nongnu.org>; Sun, 02 Jun 2024 22:48:08 -0700 (PDT)
+ id 1sE0YI-0005O1-Hp
+ for qemu-riscv@nongnu.org; Mon, 03 Jun 2024 01:48:15 -0400
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-1f44b594deeso28857305ad.2
+ for <qemu-riscv@nongnu.org>; Sun, 02 Jun 2024 22:48:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1717393687; x=1717998487; darn=nongnu.org;
+ d=sifive.com; s=google; t=1717393693; x=1717998493; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cIMV2nOWBCTz/Oo6LeglZMbxXhMl+MsC5E+aszYQKEM=;
- b=ABMpQgkximJF4pdY0/0yqQ4X1Wq55FXsv8VWPfGkbL0/qi5Tg0g+u7DPtYaLbhFTqZ
- 4j/T5yDY8BJ416mk9DCh7i5/p2QZtXpkpdiiSqBu5Wqu8zNtg1jfik7/OXa9sDX3/ELe
- A32jh1f96EITmVeyxQ/RXNPLmWlzF5rKg9sJEo1Gu9gDU6BJF1ZssLpntiAmOqECQwdG
- p5zUdaBOXnd+dYqUAnoTMFtEN+ry89YuYp3fwWgRp11XNiqMldiKnQFqVNYx4pSCvXXf
- /H0vI8NadFGkwEK0TeXCNTH/wX0JDGMjzeGKn21t02mBdO4uuw7M6waqzH731CWRKKNI
- ixjQ==
+ bh=GVZpJhKtEcd9YCJGkGQF9gaW6VhHFLErv6FyXahbmsc=;
+ b=DtdQalAwp3XkTppTR1nIifPAc7lC7PDZiJeVE07pXmA+CGa0cMTIvfBQbgA9XXZu9C
+ GqHXtXB8JgU5ShZLZCdVIRb2HdxdQb5VzZ9u/0VK1XK6BNgjqEVIhfSLfkXZq47lLBwM
+ z63zjrwJ/dkr8yWEwKEcN9IPa6Lb2PPaer6zHcq1/axOHlDqy+HYd+WZN86qd8PFoM6y
+ lUCv1bC8wkAmYIzQGzoppTbN1Ao7wIuLc2qqdz7Pjvb8srdCSdPyIqn1up3wC0KrgVia
+ p8pyhokf9JyuMZEz+VjExw1KGDYb16TstlsQI+omQpIWTTDg9LSudc4UxUaRPBqAlHrJ
+ E6mg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717393687; x=1717998487;
+ d=1e100.net; s=20230601; t=1717393693; x=1717998493;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cIMV2nOWBCTz/Oo6LeglZMbxXhMl+MsC5E+aszYQKEM=;
- b=FpYONOiZwAjso28YxVgUjigwJYgxoCDBA7d+0uLN+SmhyWc9xBEKQ9Rzwy/66UBoKz
- 1tokQIij78a7nE3z3ICAFqLsg7gJ+tO2XHe08gEzMdbOfJ7CCYjr/7LfOta5Grgxn231
- wu9TF3R0jdm5r/S+2OX4QjuzJGHuxPn9F4GuvTbRsFcpPViPneFNyXteWVWaez0CKF2F
- 4wLXPhrl2UyhABj8dHdo2dp7NnCgULW5WAzLEIicb2MypGUgqN9YW7XKrkA141gRMZWE
- lIs3ezcnL6bnq4ITPTsZSbi7GpokuOZ10tA065YN7S/w3QE5kdjufi+Q/g4Le5xKJxui
- gc6Q==
+ bh=GVZpJhKtEcd9YCJGkGQF9gaW6VhHFLErv6FyXahbmsc=;
+ b=D9ZfLgOKLMxPMZKR0QIWLpS6tsMJR1Wll5i24TBzQUG3+XQvCVh2aIu52GtY0fRma6
+ +YIPlaRm69XBl87JFat6v/tcRa92ICGNbQS9a2QiZIxvnWXAT3E+NmbXUwD1xRPCT0mN
+ yO9IgJX+WXkADoCyD5844DImFILcF1CjCOUmxWH+poTl0ITRiVztJ7pDWOkvUNa1o0yd
+ 9U1K7t70TG0XxK7BWaHVQ4ksKervhljdgBZNzK/Xb29XKz/X0O2NG7Gk7r5zQV0ftnC9
+ JaZ0o3hr1oNlCmw0p5E+wweWXXott8cEw/mMJeR/MbDiCE75gu7WCM1r6WJenh/eu/TQ
+ eVmg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUJY09ZKbFAXwReo9eE4RKz/s2H07CGuCCqoaLS/WR6w7utRebjjKUeujnMYwZCAztBPbWZZbRNW6laG6O/Z5O0hElCQn4=
-X-Gm-Message-State: AOJu0YwHpInm8IaucoY0pQ7FIFjICdY4xVqVVb7IAhbYPC/BK/Z/1GsS
- /rwwUuFSwH0OWNnjRGq5ZNf+sTImkqKb0omqc7yK6WF8Eb+9r3msra0K0xA/Ma8=
-X-Google-Smtp-Source: AGHT+IG9sR3Lbk0P2DrcGCvVv+0dBNBdvurAmpPa/q3lq8CpggaeU1psBMaEZu7/E42HSZVYjCLTrQ==
-X-Received: by 2002:a17:903:30cd:b0:1f4:7d47:b889 with SMTP id
- d9443c01a7336-1f6370209femr66241885ad.30.1717393686959; 
- Sun, 02 Jun 2024 22:48:06 -0700 (PDT)
+ AJvYcCX9gJtJs6qggRrcl2cFmhS9hyIuWseOGsudX1UX8so8ShJ7mrguzK53bmY7Z9UOwbmblNUgycD9aSnysNzKq8t+lQVZbM8=
+X-Gm-Message-State: AOJu0YwsC2Hn+/0Pfo3ay9DoY+fyUZw2HNsQC+fT4XMsxkyqNra7UITv
+ BXspDjDh9kCrANl5ZRY5bsYoLUG5S0KYXA/CzchEdFqkraDwEn/BBdxUmB+CPJA=
+X-Google-Smtp-Source: AGHT+IF/NhAHUv5NOzJAxHVrM0NCdw27QFO4bXQgcjKCUBHyY61JMxxZUcQGLtEgnjIVyb5Iua3rDg==
+X-Received: by 2002:a17:902:f908:b0:1f4:8faa:cd68 with SMTP id
+ d9443c01a7336-1f63702346cmr69194085ad.29.1717393693229; 
+ Sun, 02 Jun 2024 22:48:13 -0700 (PDT)
 Received: from hsinchu36-syssw02.internal.sifive.com
  (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1f63241e085sm55824135ad.299.2024.06.02.22.48.05
+ d9443c01a7336-1f63241e085sm55824135ad.299.2024.06.02.22.48.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 02 Jun 2024 22:48:06 -0700 (PDT)
+ Sun, 02 Jun 2024 22:48:12 -0700 (PDT)
 From: "Fea.Wang" <fea.wang@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -69,16 +69,16 @@ Cc: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
  Peter Maydell <peter.maydell@linaro.org>, Jason Wang <jasowang@redhat.com>,
  qemu-arm@nongnu.org (open list:Xilinx Zynq),
  "Fea.Wang" <fea.wang@sifive.com>
-Subject: [PATCH 2/4] hw/dma: Break the loop when loading descriptions fails
-Date: Mon,  3 Jun 2024 13:52:46 +0800
-Message-Id: <20240603055248.3928469-3-fea.wang@sifive.com>
+Subject: [PATCH 4/4] hw/net: Fix the transmission return size
+Date: Mon,  3 Jun 2024 13:52:48 +0800
+Message-Id: <20240603055248.3928469-5-fea.wang@sifive.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240603055248.3928469-1-fea.wang@sifive.com>
 References: <20240603055248.3928469-1-fea.wang@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
- envelope-from=fea.wang@sifive.com; helo=mail-pl1-x62c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
+ envelope-from=fea.wang@sifive.com; helo=mail-pl1-x631.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -101,41 +101,28 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-When calling the loading a description function, it should be noticed
-that the function may return a failure value. Breaking the loop is one
-of the possible ways to handle it.
+Fix the transmission return size because not all bytes could be
+transmitted successfully. So, return a successful length instead of a
+constant value.
 
 Signed-off-by: Fea.Wang <fea.wang@sifive.com>
 ---
- hw/dma/xilinx_axidma.c | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+ hw/net/xilinx_axienet.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/hw/dma/xilinx_axidma.c b/hw/dma/xilinx_axidma.c
-index 4b475e5484..b8ab5a423d 100644
---- a/hw/dma/xilinx_axidma.c
-+++ b/hw/dma/xilinx_axidma.c
-@@ -291,7 +291,9 @@ static void stream_process_mem2s(struct Stream *s, StreamSink *tx_data_dev,
-     }
+diff --git a/hw/net/xilinx_axienet.c b/hw/net/xilinx_axienet.c
+index 7d1fd37b4a..05d41bd548 100644
+--- a/hw/net/xilinx_axienet.c
++++ b/hw/net/xilinx_axienet.c
+@@ -847,7 +847,7 @@ static ssize_t eth_rx(NetClientState *nc, const uint8_t *buf, size_t size)
+     axienet_eth_rx_notify(s);
  
-     while (1) {
--        stream_desc_load(s, s->regs[R_CURDESC]);
-+        if (MEMTX_OK != stream_desc_load(s, s->regs[R_CURDESC])) {
-+            break;
-+        }
+     enet_update_irq(s);
+-    return size;
++    return s->rxpos;
+ }
  
-         if (s->desc.status & SDESC_STATUS_COMPLETE) {
-             s->regs[R_DMASR] |= DMASR_HALTED;
-@@ -348,7 +350,9 @@ static size_t stream_process_s2mem(struct Stream *s, unsigned char *buf,
-     }
- 
-     while (len) {
--        stream_desc_load(s, s->regs[R_CURDESC]);
-+        if (MEMTX_OK != stream_desc_load(s, s->regs[R_CURDESC])) {
-+            break;
-+        }
- 
-         if (s->desc.status & SDESC_STATUS_COMPLETE) {
-             s->regs[R_DMASR] |= DMASR_HALTED;
+ static size_t
 -- 
 2.34.1
 
