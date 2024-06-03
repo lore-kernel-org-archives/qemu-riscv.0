@@ -4,82 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DF98C25B74
-	for <qemu-riscv@archiver.kernel.org>; Sun,  2 Jun 2024 06:39:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49C7AC25B76
+	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Jun 2024 03:47:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sDesF-0005Yl-C6; Sun, 02 Jun 2024 02:39:23 -0400
+	id 1sDyfV-0000xH-De; Sun, 02 Jun 2024 23:47:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1sDesE-0005YX-QI
- for qemu-riscv@nongnu.org; Sun, 02 Jun 2024 02:39:22 -0400
-Received: from mail-lf1-x129.google.com ([2a00:1450:4864:20::129])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1sDesC-0002qf-Q4
- for qemu-riscv@nongnu.org; Sun, 02 Jun 2024 02:39:22 -0400
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-52b840cfecdso3061574e87.3
- for <qemu-riscv@nongnu.org>; Sat, 01 Jun 2024 23:39:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1717310358; x=1717915158;
- darn=nongnu.org; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=veBUIKp4QyFIyRCP5s0efdhDjrubQVc8r9wefmDpjlc=;
- b=0YxcSTIvXkRElxSkGlWZXaRo9WWa/L8S4fJeBgvElMp5I+MrUBptWbNRNzt9Ogmm9o
- N/pxt9aekjyGLPteU3bW9159rhYAMi/jYblMQLNC96BHKEFMv4wAMxK1jERx2E+i0WMX
- nKifHOB7ZWc867/dR+v95yb7+3ctziCwErIQxGUDCK6TcROqRy53Fyl56R9A2IddbQo9
- Bcg95ZgVg6qC9f1xP0TLKzHIvcRbuCRYwCF6puHAL1NtzmAHY1Zr/UhYLMCn5iJC6wmw
- I84XndBVdrYKxodTIm1fLMl+sWjhtEVV51QWoqSzb3kBbqO1cg+kxxmNXMwd8ONMCFF1
- GDUQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717310358; x=1717915158;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=veBUIKp4QyFIyRCP5s0efdhDjrubQVc8r9wefmDpjlc=;
- b=PT5/I6q8MafTgg0sfe224aPCbcCUcMBSjsXFTYWGDDQAULYRIm51V0UD0itgEjIPxv
- 3lm9WsEk/ib/BvQT54FR0xN5MBsHnf6Y+LtU6QV7MiARtTX6KguuM4c27535BuqZPyvh
- QsyLu80rs1wF/f1xs9w2A3NzyjHbamSVCr8r2HZ5AVucN1udqXz+/pKGo0VnzlhvSWaE
- WGkLyqsE2D+xgHaFjW09ogwAKrBqWzP0L+F+FFiVPPQ4cY+b4UdJr+WHO4+hhC9Hfbb0
- A4a9AWDjVQ2bTtp1quX+/mjnM/A7LIRIkJVjTphS7kKOhMaTDbGtjrxuVEsvrhR4NWX2
- lB7A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWprh7Vb9VZ58sXmwvyElRQLGVoy2j0PQOi5WSXfkmBE0bgBi0SY2REkty92g9QeRPk/5cG36dEaM2ALzX6FH82SGmwM3w=
-X-Gm-Message-State: AOJu0Yzxhmmm+tp27LdLIw7UgEGiTQyJ9x04G3XGu53nXaI+G1ldfxSo
- wyX4ZvG5CQWeFs5T9gaYU/ePQnCwgbrrraX63RWd4bfNHex69Xw5bcljCl08kDUZ9rEvWx8NvzM
- pgvaTtChNSKQSyqgZsFB0OwPKiCtXL3T8uQqSNw==
-X-Google-Smtp-Source: AGHT+IGxBDUEzvezMfkXgPG9rOgfq/HAVQ9z9BFbI467c48MYRkicUJAxFsPfxHnfm5Fr29Hi9iwbURauHuIvZBEmZU=
-X-Received: by 2002:ac2:5a4c:0:b0:529:ed29:dc94 with SMTP id
- 2adb3069b0e04-52b896c7adcmr3834752e87.44.1717310357711; Sat, 01 Jun 2024
- 23:39:17 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240217000134.3634191-1-atishp@rivosinc.com>
- <6ae5689d-d4d7-46b9-b1a6-3878a8bb83c7@ventanamicro.com>
-In-Reply-To: <6ae5689d-d4d7-46b9-b1a6-3878a8bb83c7@ventanamicro.com>
-From: Atish Kumar Patra <atishp@rivosinc.com>
-Date: Sat, 1 Jun 2024 23:39:06 -0700
-Message-ID: <CAHBxVyE9PD2WmwTD7HnKvmj=sOOG-F4pJAsMLvPGR1_B=Sp9zg@mail.gmail.com>
-Subject: Re: [PATCH RFC 0/8] Add Counter delegation ISA extension support
+ (Exim 4.90_1) (envelope-from <ethan84@andestech.com>)
+ id 1sDyfT-0000wU-8f; Sun, 02 Jun 2024 23:47:31 -0400
+Received: from 60-248-80-70.hinet-ip.hinet.net ([60.248.80.70]
+ helo=Atcsqr.andestech.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <ethan84@andestech.com>)
+ id 1sDyfQ-0003ri-4L; Sun, 02 Jun 2024 23:47:30 -0400
+Received: from Atcsqr.andestech.com (localhost [127.0.0.2] (may be forged))
+ by Atcsqr.andestech.com with ESMTP id 4533DGrc015663;
+ Mon, 3 Jun 2024 11:13:16 +0800 (+08)
+ (envelope-from ethan84@andestech.com)
+Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
+ by Atcsqr.andestech.com with ESMTP id 4533Ctcq015602;
+ Mon, 3 Jun 2024 11:12:55 +0800 (+08)
+ (envelope-from ethan84@andestech.com)
+Received: from ethan84-VirtualBox (10.0.12.12) by ATCPCS16.andestech.com
+ (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0; Mon, 3 Jun 2024
+ 11:12:50 +0800
+Date: Mon, 3 Jun 2024 11:12:44 +0800
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
- Weiwei Li <liwei1518@gmail.com>, kaiwenxue1@gmail.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::129;
- envelope-from=atishp@rivosinc.com; helo=mail-lf1-x129.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+CC: <qemu-devel@nongnu.org>, <pbonzini@redhat.com>, <palmer@dabbelt.com>,
+ <alistair.francis@wdc.com>, <bin.meng@windriver.com>,
+ <liwei1518@gmail.com>, <zhiwei_liu@linux.alibaba.com>,
+ <qemu-riscv@nongnu.org>
+Subject: Re: [PATCH v6 0/3] Support RISC-V IOPMP
+Message-ID: <Zl00rIvxrkLohQi6@ethan84-VirtualBox>
+References: <20240207093444.249112-1-ethan84@andestech.com>
+ <6e46adc9-9e0a-4488-938f-fbf781e72996@ventanamicro.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <6e46adc9-9e0a-4488-938f-fbf781e72996@ventanamicro.com>
+User-Agent: Mutt/2.1.4 (2021-12-11)
+X-Originating-IP: [10.0.12.12]
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 4533DGrc015663
+Received-SPF: pass client-ip=60.248.80.70; envelope-from=ethan84@andestech.com;
+ helo=Atcsqr.andestech.com
+X-Spam_score_int: -8
+X-Spam_score: -0.9
+X-Spam_bar: /
+X-Spam_report: (-0.9 / 5.0 requ) BAYES_00=-1.9, RDNS_DYNAMIC=0.982,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001, TVD_RCVD_IP=0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -92,117 +68,77 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-to:  Ethan Chen <ethan84@andestech.com>
+From:  Ethan Chen via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Daniel,
+Hi Dainel,
 
-On Sat, Jun 1, 2024 at 2:52=E2=80=AFAM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
->
-> Hi Atish,
->
->
-> I see that Rajnesh sent some patches that were built on top of this
-> work [1], and this series no longer applies neither to alistair's
-> risc-to-apply.next nor to master.
->
-> If you could send a rebased version of this series that would be great.
->
->
+Sorry for the delayed response. I've been busy over the past two months.
+I plan to submit the next version of the patch within two weeks.
 
-Yes. I am planning to send revised series for counter delegation,
-Smcntrpmf and a few other miscellaneous fixes
-soon.
+Thanks,
+Ethan Chen
 
+On Mon, May 27, 2024 at 09:09:49AM -0300, Daniel Henrique Barboza wrote:
+> Hi Ethan,
+> 
+> 
+> Did you send v7 already and I somehow missed it? This is the latest version I
+> have for this IOPMP work in my inbox.
+> 
+> If this is the latest, do you plan to send a new version? Most of the comments
+> made in patche 2 are simple code style changes and there's no technical reason to
+> not get this work merged for this release.
+> 
+> 
 > Thanks,
->
->
+> 
 > Daniel
->
->
->
-> [1] https://lore.kernel.org/qemu-riscv/20240529160950.132754-1-rkanwal@ri=
-vosinc.com/
->
->
-> On 2/16/24 21:01, Atish Patra wrote:
-> > This series adds the counter delegation extension support. The counter
-> > delegation ISA extension(Smcdeleg/Ssccfg) actually depends on multiple =
-ISA
-> > extensions.
-> >
-> > 1. S[m|s]csrind : The indirect CSR extension[1] which defines additiona=
-l
-> >     5 ([M|S|VS]IREG2-[M|S|VS]IREG6) register to address size limitation=
- of
-> >     RISC-V CSR address space.
-> > 2. Smstateen: The stateen bit[60] controls the access to the registers
-> >     indirectly via the above indirect registers.
-> > 3. Smcdeleg/Ssccfg: The counter delegation extensions[2]
-> >
-> > The counter delegation extension allows Supervisor mode to program the
-> > hpmevent and hpmcounters directly without needing the assistance from t=
-he
-> > M-mode via SBI calls. This results in a faster perf profiling and very
-> > few traps. This extension also introduces a scountinhibit CSR which all=
-ows
-> > to stop/start any counter directly from the S-mode. As the counter
-> > delegation extension potentially can have more than 100 CSRs, the speci=
-ficaiton
-> > leverages the indirect CSR extension to save the precious CSR address r=
-ange.
-> >
-> > Due to the dependancy of these extensions, the following extensions mus=
-t be
-> > enabled to use the counter delegation feature in S-mode.
-> >
-> > "smstateen=3Dtrue,sscofpmf=3Dtrue,ssccfg=3Dtrue,smcdeleg=3Dtrue,smcsrin=
-d=3Dtrue,sscsrind=3Dtrue"
-> >
-> > This makes the qemu command line quite tedious. In stead of that, I thi=
-nk we
-> > can enable these features by default if there is no objection.
-> >
-> > The first 2 patches decouple the indirect CSR usage from AIA implementa=
-tion
-> > while patch3 adds stateen bits validation for AIA.
-> > The PATCH4 implements indirect CSR extensions while remaining patches
-> > implement the counter delegation extensions.
-> >
-> > The Qemu patches can be found here:
-> > https://github.com/atishp04/qemu/tree/counter_delegation_rfc
-> >
-> > The opensbi patch can be found here:
-> > https://github.com/atishp04/opensbi/tree/counter_delegation_v1
-> >
-> > The Linux kernel patches can be found here:
-> > https://github.com/atishp04/linux/tree/counter_delegation_rfc
-> >
-> > [1] https://github.com/riscv/riscv-indirect-csr-access
-> > [2] https://github.com/riscv/riscv-smcdeleg-ssccfg
-> >
-> > Atish Patra (1):
-> > target/riscv: Enable S*stateen bits for AIA
-> >
-> > Kaiwen Xue (7):
-> > target/riscv: Add properties for Indirect CSR Access extension
-> > target/riscv: Decouple AIA processing from xiselect and xireg
-> > target/riscv: Support generic CSR indirect access
-> > target/riscv: Add smcdeleg/ssccfg properties
-> > target/riscv: Add counter delegation definitions
-> > target/riscv: Add select value range check for counter delegation
-> > target/riscv: Add counter delegation/configuration support
-> >
-> > target/riscv/cpu.c      |   8 +
-> > target/riscv/cpu.h      |   1 +
-> > target/riscv/cpu_bits.h |  34 +-
-> > target/riscv/cpu_cfg.h  |   4 +
-> > target/riscv/csr.c      | 713 +++++++++++++++++++++++++++++++++++++---
-> > target/riscv/machine.c  |   1 +
-> > 6 files changed, 722 insertions(+), 39 deletions(-)
-> >
-> > --
-> > 2.34.1
-> >
+> 
+> On 2/7/24 06:34, Ethan Chen wrote:
+> > This series implements IOPMP specification v1.0.0-draft4 rapid-k model and add
+> > IOPMP device to RISC-V virt machine.
+> > 
+> > Patch 1 add config STREAM make other device can reuse /hw/core/stream.c, IOPMP
+> > implementation will use it. Patch 2 implement IOPMP deivce. Patch 3 add IOPMP
+> > device to RISC-V virt machine.
+> > 
+> > The IOPMP specification url:
+> > https://github.com/riscv-non-isa/iopmp-spec/blob/main/riscv_iopmp_specification.pdf
+> > 
+> > Changes for v6:
+> >    - Rebased
+> >    - IOPMP: Fix MDLCK_MD and ENTRYLCK_F did not lock correspond registers
+> >             Fix iopmp_write for ENTRY_ADDRH and ENTRYLCK_L
+> >    - Refine coding style (Daniel Henrique Barboza)
+> > 
+> > Thanks,
+> > Ethan Chen
+> > 
+> > Ethan Chen (3):
+> >    hw/core: Add config stream
+> >    Add RISC-V IOPMP support
+> >    hw/riscv/virt: Add IOPMP support
+> > 
+> >   docs/system/riscv/virt.rst                    |   12 +
+> >   hw/Kconfig                                    |    1 +
+> >   hw/core/Kconfig                               |    3 +
+> >   hw/core/meson.build                           |    2 +-
+> >   hw/misc/Kconfig                               |    4 +
+> >   hw/misc/meson.build                           |    1 +
+> >   hw/misc/riscv_iopmp.c                         | 1202 +++++++++++++++++
+> >   hw/misc/trace-events                          |    4 +
+> >   hw/riscv/Kconfig                              |    1 +
+> >   hw/riscv/virt.c                               |  110 +-
+> >   include/hw/misc/riscv_iopmp.h                 |  187 +++
+> >   .../hw/misc/riscv_iopmp_transaction_info.h    |   28 +
+> >   include/hw/riscv/virt.h                       |    8 +-
+> >   13 files changed, 1559 insertions(+), 4 deletions(-)
+> >   create mode 100644 hw/misc/riscv_iopmp.c
+> >   create mode 100644 include/hw/misc/riscv_iopmp.h
+> >   create mode 100644 include/hw/misc/riscv_iopmp_transaction_info.h
+> > 
+> 
 
