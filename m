@@ -4,89 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7FFCC25B75
-	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Jun 2024 06:07:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2D38C25B76
+	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Jun 2024 06:37:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sE0pX-00053Z-Mz; Mon, 03 Jun 2024 02:06:03 -0400
+	id 1sE1Js-0004Yd-Di; Mon, 03 Jun 2024 02:37:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1sE0pV-00050X-Mq
- for qemu-riscv@nongnu.org; Mon, 03 Jun 2024 02:06:01 -0400
-Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b])
+ (Exim 4.90_1) (envelope-from <fea.wang@sifive.com>)
+ id 1sE1Jp-0004Y2-7q
+ for qemu-riscv@nongnu.org; Mon, 03 Jun 2024 02:37:21 -0400
+Received: from mail-vk1-xa34.google.com ([2607:f8b0:4864:20::a34])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1sE0pT-0008G6-OO
- for qemu-riscv@nongnu.org; Mon, 03 Jun 2024 02:06:01 -0400
-Received: by mail-pf1-x42b.google.com with SMTP id
- d2e1a72fcca58-7026ad046a2so432372b3a.2
- for <qemu-riscv@nongnu.org>; Sun, 02 Jun 2024 23:05:58 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <fea.wang@sifive.com>)
+ id 1sE1Jm-0005Mw-KS
+ for qemu-riscv@nongnu.org; Mon, 03 Jun 2024 02:37:21 -0400
+Received: by mail-vk1-xa34.google.com with SMTP id
+ 71dfb90a1353d-4eb25f3c203so63438e0c.0
+ for <qemu-riscv@nongnu.org>; Sun, 02 Jun 2024 23:37:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1717394757; x=1717999557; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=EQb1n1ECxF1IqRCQkv43N/m9qyx1XX+jyCXZ5YT/P34=;
- b=DXdJUs1kJQLGpMK4IFp/jtfw03tKVDyCnZtMXB+59IG36NnUFzWS5+i0TKwnrQQXIA
- 4hMCmogA6zoZCamfg2M0zaTrm2Ola8xKQ1yYfAHWIUiv2X88JvhN2hfJx0lbfWcJ5fh7
- AXwWhjCyYX1liTI69gkmZrkDi4Eeqg8YN7T8vaSQspCBz0/C7XFJEb72byNKbNzMNdUU
- 1WaVefsVBR/mta4Esm9SgDIx6lBWl6bOsvg9bMkGqzo2yksQR1USKZt4hDbLNJmmd2+U
- EVJL1qiDiSPRqyLJnb1Gzz3wrcGxA0Xtyr8cz+a2s8XwE/77wR4A4wKYjeD/DuMVMGND
- 7uxg==
+ d=sifive.com; s=google; t=1717396637; x=1718001437; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Qy8WFJ8ZfUfAEdW6TkkGFLhkCjtDAKJfPIexM1vz6hA=;
+ b=AIcpvKOJVS6OZ3gJVzISq55Jur7V345HuVZ00CWJpFsGIRTSaWsOWQWIfaeJpUn3VZ
+ FV4WgjwtLqgX2t/XhBUMtPdv6fp2/ZoMYxmu81cHOAJOWQMzXWnJL7YeTAK/iwH1r7T4
+ FPzuwNHVMIa5JyuiGl8aYNJa2AOjFuJZyQZk9wODICVzLcmNTfOYkRkNxJkzfQRQ96Vr
+ XJ2pURkKyTmEN0nTo3NITYkZJ/UnGId7ja5jMQ5XCPeMDXRo5lMJRllZ+25r0YLPjSLE
+ WswjF2GlK7CTRU7w+O1LSJ4lMXsjiBiDCQZWB9AWR2gwp7AsoQxjgtnwAcs2SQE9n9RU
+ eioQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717394757; x=1717999557;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=EQb1n1ECxF1IqRCQkv43N/m9qyx1XX+jyCXZ5YT/P34=;
- b=i1aVos5R7mBWexiLuVirjVjaRP8PPL2vt0y7pBInW2lM3+jkF3tqzr9vFvRP+nyahY
- wt6S3Ol3pRMndQIUd5a91ghJEPwkBcvNRMvEMcEUETWncWYUA9sCE6SPjBOG3cbfCGhm
- UGxpzrQrZbagxib3C5vUWx9LsD2+HRJzsr5i9ZKKRoXtYv0C3pDKS8yDredC6Z5U8s77
- W7k+ixk0on4olPboN/RUwUAqPWKmqrStgTQHdvVeI2YdoB8W//FZYheSQ90hvVXRVKaw
- itUzdClE4mdMqTyMWenmIknt1t6b3hagPrvgIHRUMSi77S9tTK+icWsJCwoN76w6kV4Q
- NYDw==
+ d=1e100.net; s=20230601; t=1717396637; x=1718001437;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Qy8WFJ8ZfUfAEdW6TkkGFLhkCjtDAKJfPIexM1vz6hA=;
+ b=J2whyWC8WGFbN5BAkff5Mqlt+3njsTtBkwj7iP40yCBzAhfFf3/EN+pViehaOIweTu
+ U19v8uhgpv/vtPRNb3xIj+1P/tAF6ThwvukwSKihd8Kt9+Wgk5OXAIPDuQG/FQzmFwcV
+ rBh5jc4rG4yQo0CB0LJfmwkkgZrnD+gw+g52jBu1yIIKcbdmU/PLJB4DztNp/6OihOdH
+ wSmig33CvL2PimX7NfCzlIXQz9bL6jtrB9HfX5q13PEJjaT25zCz5JbAlTyZOBIwbZ4S
+ nSsXtNN4kSK6LtWzhWAGnKu7uFRlIsKWOxX4kj7Hfth6yls4taAYtzvUlIJQ/Eq8LqIr
+ O3FQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWS5d30VoyEKahEAj/E1xP9R7kSO1cen7JzmpGO0TWPnfGFXyfDf+F3w3FQtx+4YTrEURnPxdnMOpHgjkcfdUJmIjhdELI=
-X-Gm-Message-State: AOJu0Yy8RMePF237tQTAkupJSlKt2oWzKEdyawRkH/GU5i8ZBvimNDpt
- bEKCDGaazPb3wDL1FmhhxHF9+LTe8sfFR5BsJoAtLDcrSUcijoWCSDHg1SO7iUw=
-X-Google-Smtp-Source: AGHT+IGwY9h/eyrRjkVf+JMYGcmKiCKzJiTlPhPv8jPQQ3tohylKHC3cMUxP1vaC1w288eTxXS2bkw==
-X-Received: by 2002:a05:6a20:7345:b0:1af:d017:c14b with SMTP id
- adf61e73a8af0-1b26f205d19mr8991721637.30.1717394756753; 
- Sun, 02 Jun 2024 23:05:56 -0700 (PDT)
-Received: from hsinchu16.internal.sifive.com
- (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2c1a77afa1fsm7149291a91.42.2024.06.02.23.05.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 02 Jun 2024 23:05:56 -0700 (PDT)
-From: frank.chang@sifive.com
-To: qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs),
- Frank Chang <frank.chang@sifive.com>,
- Jerry Zhang Jian <jerry.zhangjian@sifive.com>
-Subject: [PATCH 6/6] target/riscv: Remove extension auto-update check
- statements
-Date: Mon,  3 Jun 2024 14:05:22 +0800
-Message-ID: <20240603060522.2180-7-frank.chang@sifive.com>
-X-Mailer: git-send-email 2.43.2
-In-Reply-To: <20240603060522.2180-1-frank.chang@sifive.com>
-References: <20240603060522.2180-1-frank.chang@sifive.com>
+ AJvYcCX9BHtBxKqNnMB/GlFEEsxrjog3nCq/0jGYPyHxudTJfihZY0AePHVE2WI+jLVETWHU2k1JY5gW7bANRXHG1cJW9mATtEE=
+X-Gm-Message-State: AOJu0Yzd0UQiN11Odjb9EiJRWCKZNqjyzOSDDtU2eZWtDkyHiSy3KSSU
+ NuM1kb9reT8vd8CQVybPDYzD0iF5e29/2raNdnatRend8ogCt1RycK5/SNrUmDd2MLyvfGJpkGs
+ NRYoSf+3+KwLDQj4Vi+lw4+WhOFEl4Odv6nhmIA==
+X-Google-Smtp-Source: AGHT+IGUZHRllQgZyyNCauqzDYw6fAzpfSX8N8dKYJ0we+jo5Y5uPYmFCvVZ+SyCRBqXzUHWKlfyO0DIFwrNv5r4cG4=
+X-Received: by 2002:a1f:f483:0:b0:4d4:ef9:71b0 with SMTP id
+ 71dfb90a1353d-4eb02e126f1mr6022606e0c.7.1717396636860; Sun, 02 Jun 2024
+ 23:37:16 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42b;
- envelope-from=frank.chang@sifive.com; helo=mail-pf1-x42b.google.com
+References: <20240515080605.2675399-1-fea.wang@sifive.com>
+ <4d2d56aa-5758-4320-a5ef-53ebb87ab494@ventanamicro.com>
+ <CAKhCfseJgRzyeg1seuZ15SR=f78E5rnbgfrzY_VeRDhPMOAhwA@mail.gmail.com>
+ <20240530-0521d05b9924d724568bd6a2@orel>
+In-Reply-To: <20240530-0521d05b9924d724568bd6a2@orel>
+From: Fea Wang <fea.wang@sifive.com>
+Date: Mon, 3 Jun 2024 14:37:05 +0800
+Message-ID: <CAKhCfsc7=fUsq9+2rWNN=oYvWd0pR28ONNaYSNsqjRUx7ZY14g@mail.gmail.com>
+Subject: Re: [RESEND PATCH v2 0/5] target/riscv: Support RISC-V privilege 1.13
+ spec
+To: Andrew Jones <ajones@ventanamicro.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Content-Type: multipart/alternative; boundary="0000000000007a9ff70619f690ae"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a34;
+ envelope-from=fea.wang@sifive.com; helo=mail-vk1-xa34.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -104,193 +98,344 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Frank Chang <frank.chang@sifive.com>
+--0000000000007a9ff70619f690ae
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Remove the old-fashioned extension auto-update check statements as
-they are replaced by the extension implied rules.
+Hi Daniel, Andrew:
 
-Signed-off-by: Frank Chang <frank.chang@sifive.com>
-Reviewed-by: Jerry Zhang Jian <jerry.zhangjian@sifive.com>
----
- target/riscv/tcg/tcg-cpu.c | 115 -------------------------------------
- 1 file changed, 115 deletions(-)
+Thank you for giving me the feedback.
+I found a new command set to cc the related maintainer's email. It also
+includes these emails for the cover letter.
+git send-email --dry-run --to=3D'qemu-devel@nongnu.org,qemu-riscv@nongnu.or=
+g'
+--cc=3D"$(scripts/get_maintainer.pl XXXPATCH/* |sed -e 's/$/,/')" /XXXPATCH=
+/*
 
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index c78da393bc..570dff16cb 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -469,10 +469,6 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
-         return;
-     }
+Sincerely,
+Fea
 
--    if (cpu->cfg.ext_zfh) {
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zfhmin), true);
--    }
--
-     if (cpu->cfg.ext_zfhmin && !riscv_has_ext(env, RVF)) {
-         error_setg(errp, "Zfh/Zfhmin extensions require F extension");
-         return;
-@@ -494,9 +490,6 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
-             error_propagate(errp, local_err);
-             return;
-         }
--
--        /* The V vector extension depends on the Zve64d extension */
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zve64d), true);
-     }
+On Thu, May 30, 2024 at 6:37=E2=80=AFPM Andrew Jones <ajones@ventanamicro.c=
+om>
+wrote:
 
-     /* The Zve64d extension depends on the Zve64f extension */
-@@ -505,18 +498,6 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
-             error_setg(errp, "Zve64d/V extensions require D extension");
-             return;
-         }
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zve64f), true);
--    }
--
--    /* The Zve64f extension depends on the Zve64x and Zve32f extensions */
--    if (cpu->cfg.ext_zve64f) {
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zve64x), true);
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zve32f), true);
--    }
--
--    /* The Zve64x extension depends on the Zve32x extension */
--    if (cpu->cfg.ext_zve64x) {
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zve32x), true);
-     }
+> On Thu, May 30, 2024 at 11:30:28AM GMT, Fea Wang wrote:
+> > Hi Daniel,
+> > thank you for your help.
+> >
+> > I found that only the cover is without many maintainers. I used to send
+> > patches by git send-email --dry-run --to 'qemu-devel@nongnu.org,
+> > qemu-riscv@nongnu.org' --cc-cmd=3D'scripts/get_maintainer.pl -i'
+> patches/*.
+> > Do you have a better script for me?
+> > Thank you.
+>
+> Some maintainers frown on that because they prefer the whole series,
+> even if only a few patches touch code they maintain. And, the cover
+> letter is quite important to get the context. Also, depending on
+> mail client and filter configurations, CC's that are per patch can
+> mess up the threading, making a mess of the mailbox. I tend to
+> use scripts/get_maintainer.pl to pull together a set of people/lists
+> to CC as an independent step, dump the contents into a file and then
+> do 'git send-email $(cat my-series.to-list) patches/my-series'
+>
+> git-publish can help with that too by capturing the "to list" and
+> maintaining it for you.
+>
+> Thanks,
+> drew
+>
+> >
+> > Sincerely,
+> > Fea
+> >
+> > On Mon, May 27, 2024 at 5:21=E2=80=AFPM Daniel Henrique Barboza <
+> > dbarboza@ventanamicro.com> wrote:
+> >
+> > > Fea,
+> > >
+> > > Please try to also add all RISC-V QEMU maintainers and reviewers when
+> > > sending
+> > > patches. It will get your patches reviewed and queued faster.
+> Otherwise the
+> > > maintainers can miss you your series due to high ML traffic.
+> > >
+> > > You can fetch who you want to CC using the get_maintainer.pl script
+> with
+> > > the
+> > > patch files or any source file in particular, e.g.:
+> > >
+> > > $ ./scripts/get_maintainer.pl -f target/riscv/cpu.c
+> > > Palmer Dabbelt <palmer@dabbelt.com> (supporter:RISC-V TCG CPUs)
+> > > Alistair Francis <alistair.francis@wdc.com> (supporter:RISC-V TCG
+> CPUs)
+> > > Bin Meng <bmeng.cn@gmail.com> (supporter:RISC-V TCG CPUs)
+> > > Weiwei Li <liwei1518@gmail.com> (reviewer:RISC-V TCG CPUs)
+> > > Daniel Henrique Barboza <dbarboza@ventanamicro.com> (reviewer:RISC-V
+> TCG
+> > > CPUs)
+> > > Liu Zhiwei <zhiwei_liu@linux.alibaba.com> (reviewer:RISC-V TCG CPUs)
+> > > qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
+> > > qemu-devel@nongnu.org (open list:All patches CC here)
+> > >
+> > >
+> > > I added the extra folk in the CC for this reply so don't worry about
+> it.
+> > >
+> > >
+> > > Alistair, please queue this series. It's already fully acked and I
+> would
+> > > like to add
+> > > some bits on top of the priv_spec 1.13 support.
+> > >
+> > >
+> > > Thanks,
+> > >
+> > >
+> > > Daniel
+> > >
+> > > On 5/15/24 05:05, Fea.Wang wrote:
+> > > > Based on the change log for the RISC-V privilege 1.13 spec, add the
+> > > > support for ss1p13.
+> > > >
+> > > > Ref:
+> > >
+> https://github.com/riscv/riscv-isa-manual/blob/a7d93c9/src/priv-preface.a=
+doc?plain=3D1#L40-L72
+> > > >
+> > > > Lists what to do without clarification or document format.
+> > > > * Redefined misa.MXL to be read-only, making MXLEN a constant.(Skip=
+,
+> > > implementation ignored)
+> > > > * Added the constraint that SXLEN=E2=89=A5UXLEN.(Skip, implementati=
+on
+> ignored)
+> > > > * Defined the misa.V field to reflect that the V extension has been
+> > > implemented.(Skip, existed)
+> > > > * Defined the RV32-only medelegh and hedelegh CSRs.(Done in these
+> > > patches)
+> > > > * Defined the misaligned atomicity granule PMA, superseding the
+> proposed
+> > > Zam extension..(Skip, implementation ignored)
+> > > > * Allocated interrupt 13 for Sscofpmf LCOFI interrupt.(Skip, existe=
+d)
+> > > > * Defined hardware error and software check exception codes.(Done i=
+n
+> > > these patches)
+> > > > * Specified synchronization requirements when changing the PBMTE
+> fields
+> > > in menvcfg and henvcfg.(Skip, implementation ignored)
+> > > > * Incorporated Svade and Svadu extension specifications.(Skip,
+> existed)
+> > > >
+> > > >
+> > > > Fea.Wang (4):
+> > > >    target/riscv: Support the version for ss1p13
+> > > >    target/riscv: Add 'P1P13' bit in SMSTATEEN0
+> > > >    target/riscv: Add MEDELEGH, HEDELEGH csrs for RV32
+> > > >    target/riscv: Reserve exception codes for sw-check and hw-err
+> > > >
+> > > > Jim Shu (1):
+> > > >    target/riscv: Reuse the conversion function of priv_spec
+> > > >
+> > > >   target/riscv/cpu.c         |  8 ++++++--
+> > > >   target/riscv/cpu.h         |  5 ++++-
+> > > >   target/riscv/cpu_bits.h    |  5 +++++
+> > > >   target/riscv/cpu_cfg.h     |  1 +
+> > > >   target/riscv/csr.c         | 39
+> ++++++++++++++++++++++++++++++++++++++
+> > > >   target/riscv/tcg/tcg-cpu.c | 17 ++++++++---------
+> > > >   6 files changed, 63 insertions(+), 12 deletions(-)
+> > > >
+> > >
+>
 
-     /* The Zve32f extension depends on the Zve32x extension */
-@@ -525,11 +506,6 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
-             error_setg(errp, "Zve32f/Zve64f extensions require F extension");
-             return;
-         }
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zve32x), true);
--    }
--
--    if (cpu->cfg.ext_zvfh) {
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvfhmin), true);
-     }
+--0000000000007a9ff70619f690ae
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-     if (cpu->cfg.ext_zvfhmin && !cpu->cfg.ext_zve32f) {
-@@ -552,11 +528,6 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
-         return;
-     }
+<div dir=3D"ltr">Hi Daniel, Andrew:<div><br></div><div>Thank you for giving=
+ me the feedback.</div><div>I found a new command set to cc the related mai=
+ntainer&#39;s email. It also includes these emails for the cover letter.</d=
+iv><div><span style=3D"background-color:rgb(204,204,204)">git send-email --=
+dry-run --to=3D&#39;<a href=3D"mailto:qemu-devel@nongnu.org">qemu-devel@non=
+gnu.org</a>,<a href=3D"mailto:qemu-riscv@nongnu.org">qemu-riscv@nongnu.org<=
+/a>&#39; --cc=3D&quot;$(scripts/<a href=3D"http://get_maintainer.pl">get_ma=
+intainer.pl</a>=C2=A0</span><span style=3D"background-color:rgb(204,204,204=
+)">XXXPATCH</span><span style=3D"background-color:rgb(204,204,204)">/* |sed=
+ -e &#39;s/$/,/&#39;)&quot; /XXXPATCH/*</span><br></div><div><span style=3D=
+"background-color:rgb(204,204,204)"><br></span></div><div>Sincerely,<br></d=
+iv><div>Fea</div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" clas=
+s=3D"gmail_attr">On Thu, May 30, 2024 at 6:37=E2=80=AFPM Andrew Jones &lt;<=
+a href=3D"mailto:ajones@ventanamicro.com">ajones@ventanamicro.com</a>&gt; w=
+rote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0p=
+x 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">On Thu, Ma=
+y 30, 2024 at 11:30:28AM GMT, Fea Wang wrote:<br>
+&gt; Hi Daniel,<br>
+&gt; thank you for your help.<br>
+&gt; <br>
+&gt; I found that only the cover is without many maintainers. I used to sen=
+d<br>
+&gt; patches by git send-email --dry-run --to &#39;<a href=3D"mailto:qemu-d=
+evel@nongnu.org" target=3D"_blank">qemu-devel@nongnu.org</a>,<br>
+&gt; <a href=3D"mailto:qemu-riscv@nongnu.org" target=3D"_blank">qemu-riscv@=
+nongnu.org</a>&#39; --cc-cmd=3D&#39;scripts/<a href=3D"http://get_maintaine=
+r.pl" rel=3D"noreferrer" target=3D"_blank">get_maintainer.pl</a> -i&#39; pa=
+tches/*.<br>
+&gt; Do you have a better script for me?<br>
+&gt; Thank you.<br>
+<br>
+Some maintainers frown on that because they prefer the whole series,<br>
+even if only a few patches touch code they maintain. And, the cover<br>
+letter is quite important to get the context. Also, depending on<br>
+mail client and filter configurations, CC&#39;s that are per patch can<br>
+mess up the threading, making a mess of the mailbox. I tend to<br>
+use scripts/<a href=3D"http://get_maintainer.pl" rel=3D"noreferrer" target=
+=3D"_blank">get_maintainer.pl</a> to pull together a set of people/lists<br=
+>
+to CC as an independent step, dump the contents into a file and then<br>
+do &#39;git send-email $(cat my-series.to-list) patches/my-series&#39;<br>
+<br>
+git-publish can help with that too by capturing the &quot;to list&quot; and=
+<br>
+maintaining it for you.<br>
+<br>
+Thanks,<br>
+drew<br>
+<br>
+&gt; <br>
+&gt; Sincerely,<br>
+&gt; Fea<br>
+&gt; <br>
+&gt; On Mon, May 27, 2024 at 5:21=E2=80=AFPM Daniel Henrique Barboza &lt;<b=
+r>
+&gt; <a href=3D"mailto:dbarboza@ventanamicro.com" target=3D"_blank">dbarboz=
+a@ventanamicro.com</a>&gt; wrote:<br>
+&gt; <br>
+&gt; &gt; Fea,<br>
+&gt; &gt;<br>
+&gt; &gt; Please try to also add all RISC-V QEMU maintainers and reviewers =
+when<br>
+&gt; &gt; sending<br>
+&gt; &gt; patches. It will get your patches reviewed and queued faster. Oth=
+erwise the<br>
+&gt; &gt; maintainers can miss you your series due to high ML traffic.<br>
+&gt; &gt;<br>
+&gt; &gt; You can fetch who you want to CC using the <a href=3D"http://get_=
+maintainer.pl" rel=3D"noreferrer" target=3D"_blank">get_maintainer.pl</a> s=
+cript with<br>
+&gt; &gt; the<br>
+&gt; &gt; patch files or any source file in particular, e.g.:<br>
+&gt; &gt;<br>
+&gt; &gt; $ ./scripts/<a href=3D"http://get_maintainer.pl" rel=3D"noreferre=
+r" target=3D"_blank">get_maintainer.pl</a> -f target/riscv/cpu.c<br>
+&gt; &gt; Palmer Dabbelt &lt;<a href=3D"mailto:palmer@dabbelt.com" target=
+=3D"_blank">palmer@dabbelt.com</a>&gt; (supporter:RISC-V TCG CPUs)<br>
+&gt; &gt; Alistair Francis &lt;<a href=3D"mailto:alistair.francis@wdc.com" =
+target=3D"_blank">alistair.francis@wdc.com</a>&gt; (supporter:RISC-V TCG CP=
+Us)<br>
+&gt; &gt; Bin Meng &lt;<a href=3D"mailto:bmeng.cn@gmail.com" target=3D"_bla=
+nk">bmeng.cn@gmail.com</a>&gt; (supporter:RISC-V TCG CPUs)<br>
+&gt; &gt; Weiwei Li &lt;<a href=3D"mailto:liwei1518@gmail.com" target=3D"_b=
+lank">liwei1518@gmail.com</a>&gt; (reviewer:RISC-V TCG CPUs)<br>
+&gt; &gt; Daniel Henrique Barboza &lt;<a href=3D"mailto:dbarboza@ventanamic=
+ro.com" target=3D"_blank">dbarboza@ventanamicro.com</a>&gt; (reviewer:RISC-=
+V TCG<br>
+&gt; &gt; CPUs)<br>
+&gt; &gt; Liu Zhiwei &lt;<a href=3D"mailto:zhiwei_liu@linux.alibaba.com" ta=
+rget=3D"_blank">zhiwei_liu@linux.alibaba.com</a>&gt; (reviewer:RISC-V TCG C=
+PUs)<br>
+&gt; &gt; <a href=3D"mailto:qemu-riscv@nongnu.org" target=3D"_blank">qemu-r=
+iscv@nongnu.org</a> (open list:RISC-V TCG CPUs)<br>
+&gt; &gt; <a href=3D"mailto:qemu-devel@nongnu.org" target=3D"_blank">qemu-d=
+evel@nongnu.org</a> (open list:All patches CC here)<br>
+&gt; &gt;<br>
+&gt; &gt;<br>
+&gt; &gt; I added the extra folk in the CC for this reply so don&#39;t worr=
+y about it.<br>
+&gt; &gt;<br>
+&gt; &gt;<br>
+&gt; &gt; Alistair, please queue this series. It&#39;s already fully acked =
+and I would<br>
+&gt; &gt; like to add<br>
+&gt; &gt; some bits on top of the priv_spec 1.13 support.<br>
+&gt; &gt;<br>
+&gt; &gt;<br>
+&gt; &gt; Thanks,<br>
+&gt; &gt;<br>
+&gt; &gt;<br>
+&gt; &gt; Daniel<br>
+&gt; &gt;<br>
+&gt; &gt; On 5/15/24 05:05, Fea.Wang wrote:<br>
+&gt; &gt; &gt; Based on the change log for the RISC-V privilege 1.13 spec, =
+add the<br>
+&gt; &gt; &gt; support for ss1p13.<br>
+&gt; &gt; &gt;<br>
+&gt; &gt; &gt; Ref:<br>
+&gt; &gt; <a href=3D"https://github.com/riscv/riscv-isa-manual/blob/a7d93c9=
+/src/priv-preface.adoc?plain=3D1#L40-L72" rel=3D"noreferrer" target=3D"_bla=
+nk">https://github.com/riscv/riscv-isa-manual/blob/a7d93c9/src/priv-preface=
+.adoc?plain=3D1#L40-L72</a><br>
+&gt; &gt; &gt;<br>
+&gt; &gt; &gt; Lists what to do without clarification or document format.<b=
+r>
+&gt; &gt; &gt; * Redefined misa.MXL to be read-only, making MXLEN a constan=
+t.(Skip,<br>
+&gt; &gt; implementation ignored)<br>
+&gt; &gt; &gt; * Added the constraint that SXLEN=E2=89=A5UXLEN.(Skip, imple=
+mentation ignored)<br>
+&gt; &gt; &gt; * Defined the misa.V field to reflect that the V extension h=
+as been<br>
+&gt; &gt; implemented.(Skip, existed)<br>
+&gt; &gt; &gt; * Defined the RV32-only medelegh and hedelegh CSRs.(Done in =
+these<br>
+&gt; &gt; patches)<br>
+&gt; &gt; &gt; * Defined the misaligned atomicity granule PMA, superseding =
+the proposed<br>
+&gt; &gt; Zam extension..(Skip, implementation ignored)<br>
+&gt; &gt; &gt; * Allocated interrupt 13 for Sscofpmf LCOFI interrupt.(Skip,=
+ existed)<br>
+&gt; &gt; &gt; * Defined hardware error and software check exception codes.=
+(Done in<br>
+&gt; &gt; these patches)<br>
+&gt; &gt; &gt; * Specified synchronization requirements when changing the P=
+BMTE fields<br>
+&gt; &gt; in menvcfg and henvcfg.(Skip, implementation ignored)<br>
+&gt; &gt; &gt; * Incorporated Svade and Svadu extension specifications.(Ski=
+p, existed)<br>
+&gt; &gt; &gt;<br>
+&gt; &gt; &gt;<br>
+&gt; &gt; &gt; Fea.Wang (4):<br>
+&gt; &gt; &gt;=C2=A0 =C2=A0 target/riscv: Support the version for ss1p13<br=
+>
+&gt; &gt; &gt;=C2=A0 =C2=A0 target/riscv: Add &#39;P1P13&#39; bit in SMSTAT=
+EEN0<br>
+&gt; &gt; &gt;=C2=A0 =C2=A0 target/riscv: Add MEDELEGH, HEDELEGH csrs for R=
+V32<br>
+&gt; &gt; &gt;=C2=A0 =C2=A0 target/riscv: Reserve exception codes for sw-ch=
+eck and hw-err<br>
+&gt; &gt; &gt;<br>
+&gt; &gt; &gt; Jim Shu (1):<br>
+&gt; &gt; &gt;=C2=A0 =C2=A0 target/riscv: Reuse the conversion function of =
+priv_spec<br>
+&gt; &gt; &gt;<br>
+&gt; &gt; &gt;=C2=A0 =C2=A0target/riscv/cpu.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0|=C2=A0 8 ++++++--<br>
+&gt; &gt; &gt;=C2=A0 =C2=A0target/riscv/cpu.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0|=C2=A0 5 ++++-<br>
+&gt; &gt; &gt;=C2=A0 =C2=A0target/riscv/cpu_bits.h=C2=A0 =C2=A0 |=C2=A0 5 +=
+++++<br>
+&gt; &gt; &gt;=C2=A0 =C2=A0target/riscv/cpu_cfg.h=C2=A0 =C2=A0 =C2=A0|=C2=
+=A0 1 +<br>
+&gt; &gt; &gt;=C2=A0 =C2=A0target/riscv/csr.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0| 39 ++++++++++++++++++++++++++++++++++++++<br>
+&gt; &gt; &gt;=C2=A0 =C2=A0target/riscv/tcg/tcg-cpu.c | 17 ++++++++--------=
+-<br>
+&gt; &gt; &gt;=C2=A0 =C2=A06 files changed, 63 insertions(+), 12 deletions(=
+-)<br>
+&gt; &gt; &gt;<br>
+&gt; &gt;<br>
+</blockquote></div>
 
--    /* Set the ISA extensions, checks should have happened above */
--    if (cpu->cfg.ext_zhinx) {
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zca), true);
--    }
--
-     if ((cpu->cfg.ext_zdinx || cpu->cfg.ext_zhinxmin) && !cpu->cfg.ext_zfinx) {
-         error_setg(errp, "Zdinx/Zhinx/Zhinxmin extensions require Zfinx");
-         return;
-@@ -574,27 +545,6 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
-         }
-     }
-
--    if (cpu->cfg.ext_zce) {
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zca), true);
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zcb), true);
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zcmp), true);
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zcmt), true);
--        if (riscv_has_ext(env, RVF) && mcc->misa_mxl_max == MXL_RV32) {
--            cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zcf), true);
--        }
--    }
--
--    /* zca, zcd and zcf has a PRIV 1.12.0 restriction */
--    if (riscv_has_ext(env, RVC) && env->priv_ver >= PRIV_VERSION_1_12_0) {
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zca), true);
--        if (riscv_has_ext(env, RVF) && mcc->misa_mxl_max == MXL_RV32) {
--            cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zcf), true);
--        }
--        if (riscv_has_ext(env, RVD)) {
--            cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zcd), true);
--        }
--    }
--
-     if (mcc->misa_mxl_max != MXL_RV32 && cpu->cfg.ext_zcf) {
-         error_setg(errp, "Zcf extension is only relevant to RV32");
-         return;
-@@ -628,48 +578,6 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
-         return;
-     }
-
--    /*
--     * Shorthand vector crypto extensions
--     */
--    if (cpu->cfg.ext_zvknc) {
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvkn), true);
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvbc), true);
--    }
--
--    if (cpu->cfg.ext_zvkng) {
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvkn), true);
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvkg), true);
--    }
--
--    if (cpu->cfg.ext_zvkn) {
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvkned), true);
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvknhb), true);
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvkb), true);
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvkt), true);
--    }
--
--    if (cpu->cfg.ext_zvksc) {
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvks), true);
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvbc), true);
--    }
--
--    if (cpu->cfg.ext_zvksg) {
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvks), true);
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvkg), true);
--    }
--
--    if (cpu->cfg.ext_zvks) {
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvksed), true);
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvksh), true);
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvkb), true);
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvkt), true);
--    }
--
--    if (cpu->cfg.ext_zvkt) {
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvbb), true);
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvbc), true);
--    }
--
-     if ((cpu->cfg.ext_zvbb || cpu->cfg.ext_zvkb || cpu->cfg.ext_zvkg ||
-          cpu->cfg.ext_zvkned || cpu->cfg.ext_zvknha || cpu->cfg.ext_zvksed ||
-          cpu->cfg.ext_zvksh) && !cpu->cfg.ext_zve32x) {
-@@ -685,29 +593,6 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
-         return;
-     }
-
--    if (cpu->cfg.ext_zk) {
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zkn), true);
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zkr), true);
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zkt), true);
--    }
--
--    if (cpu->cfg.ext_zkn) {
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zbkb), true);
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zbkc), true);
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zbkx), true);
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zkne), true);
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zknd), true);
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zknh), true);
--    }
--
--    if (cpu->cfg.ext_zks) {
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zbkb), true);
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zbkc), true);
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zbkx), true);
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zksed), true);
--        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zksh), true);
--    }
--
-     if (cpu->cfg.ext_zicntr && !cpu->cfg.ext_zicsr) {
-         if (cpu_cfg_ext_is_user_set(CPU_CFG_OFFSET(ext_zicntr))) {
-             error_setg(errp, "zicntr requires zicsr");
---
-2.43.2
-
+--0000000000007a9ff70619f690ae--
 
