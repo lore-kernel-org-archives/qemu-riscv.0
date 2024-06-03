@@ -4,78 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D63CDC25B75
-	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Jun 2024 10:32:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8500C25B75
+	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Jun 2024 12:19:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sE4yo-0006R7-4U; Mon, 03 Jun 2024 06:31:54 -0400
+	id 1sE6ei-0007BX-5z; Mon, 03 Jun 2024 08:19:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <edgar.iglesias@gmail.com>)
- id 1sE4yj-0006QO-KJ; Mon, 03 Jun 2024 06:31:50 -0400
-Received: from mail-ed1-x52c.google.com ([2a00:1450:4864:20::52c])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <edgar.iglesias@gmail.com>)
- id 1sE4yU-0005EO-5o; Mon, 03 Jun 2024 06:31:49 -0400
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-57a50ac2ca1so1777493a12.0; 
- Mon, 03 Jun 2024 03:31:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1717410690; x=1718015490; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=SvLRwyIBI3cbGGaqHKdWaAaofQdbiKv1o3OWz8axq+8=;
- b=gLF67TKU6xgZXFDWk1RtUcAaO81qpK6abrS/is92vw0eXs2ngHw81iFsY/xTdunKdC
- auOLcEIHcIZ+PGeS0vSFMgovzGUdfQyWOik6UK1syhullApojLn/FLAXzOI2v/OrD8zZ
- shhsd6rcSD8PM9ti21fsvHRwae74TQk3h5SWoC6MjmO3qVC34MVzpTaoL8W5lYBezvOs
- UxZ01Ibn/QGHS9m8zOdUyHJ8X8xi7jH3woVD+6jXcDwhwn14W4gugNVOinc57+NyGe+V
- 6THsWw9g9NO0Iir7pPdMHaEdzku9mtMirMhsa8jvVSB1Ar+nrkp4AGtpUaHR+Bywz4Dy
- 5G3A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717410690; x=1718015490;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=SvLRwyIBI3cbGGaqHKdWaAaofQdbiKv1o3OWz8axq+8=;
- b=KzT0uTIQRNIYIUnKzMpC4cbRQrT0nrX+6/gNklzTF86PD1tI8oP/gXH3FioI1J9jHN
- yxH/VfNwKLHLRW3Dru3sny2LYPXtPd3p9eFdFB/MfDOAfQHblFa9APO30ADG6lyCSllx
- ZqK1X7jhhfFNIyZ9jVkDMlMhoZPwyhlqb+5zR/sEwKgjxu58JxSr1AHpt+txJu8iDq0t
- GIkJTDWeo1aD+6G+p5M6oYHGLlHul+SpFJDdYi4v/4SvTOiClncb22XZ1Vx5frV5CSJO
- +k0wJ6FahLlz4pCiP6LVgcq/aq4PNFp85m6QyDsRFC4UsUggnHKqeq23Nvh3uDM1Ljak
- z7pg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWARpT3N32RCdzMgXHInWH+FLFFqP7lALlKz003IXvFKf+/kHCJqwAnUJg8jS+ZDQm2lJpPFrfodmnyoQM9kWLfi46EaqymhkWPdW7/5Ds7OkXVzObRQRSQ+fI=
-X-Gm-Message-State: AOJu0YwdST54e/enIHbgpSH4tIZo+2ju5N3kaa6WQJnwOjtdAIlaDUxt
- Gjk/46Gp2UKUjg2E4zeNfI+ikP2D9HWZIuhGEzR/rGdb/7jzoluZaQnGNIKJJ6iIKhm9rreRmNw
- +pETIJOU17vyFj2nE3HBc/ywA5mo=
-X-Google-Smtp-Source: AGHT+IGPzoBlIp1geNtRipM04zjzqaIysllMNv/eS4i2kqiaSJulT3gJeQHUXRRxEevLooMLu/mz6/8z+PpSy0MeAHg=
-X-Received: by 2002:a50:8e04:0:b0:57a:1ef8:da99 with SMTP id
- 4fb4d7f45d1cf-57a365400d4mr5742455a12.32.1717410690204; Mon, 03 Jun 2024
- 03:31:30 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1sE6ef-00078h-Rf
+ for qemu-riscv@nongnu.org; Mon, 03 Jun 2024 08:19:14 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1sE6ed-0003GJ-Rr
+ for qemu-riscv@nongnu.org; Mon, 03 Jun 2024 08:19:13 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1717417151;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=jpPGUxRfLC9lufqxPrIETHhm/prOnpC8Fj4J3nxx8w4=;
+ b=EwBadnHWNTyiDl3HG3SbJCxBEAM8Gda/cUvmu9QbYz/MCDsMmiOSngqXsb+qp0w2bnIijg
+ ZN+YJgF9nrWdxX52eMbbjS4fF7t4yo6Pfl8wP9hHLkMTdaY/Y91W6Zsy3UiRscxcfMFkvI
+ GzSRnCihx9YowAV8zNZc4SIpprcdNyM=
+Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
+ by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-118-Abl5ND4MMDyk-ELq31WW2w-1; Mon,
+ 03 Jun 2024 08:19:05 -0400
+X-MC-Unique: Abl5ND4MMDyk-ELq31WW2w-1
+Received: from smtp.corp.redhat.com (int-mx09.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.9])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id E01023806703;
+ Mon,  3 Jun 2024 12:19:03 +0000 (UTC)
+Received: from blackfin.pond.sub.org (unknown [10.39.192.93])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id F3C6E402EB4;
+ Mon,  3 Jun 2024 12:19:02 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id 2063C21E66E5; Mon,  3 Jun 2024 14:19:02 +0200 (CEST)
+From: Markus Armbruster <armbru@redhat.com>
+To: Zhao Liu <zhao1.liu@intel.com>
+Cc: Daniel P . =?utf-8?Q?Berrang=C3=A9?= <berrange@redhat.com>,  Eduardo
+ Habkost
+ <eduardo@habkost.net>,  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,  Yanan Wang
+ <wangyanan55@huawei.com>,  "Michael S . Tsirkin" <mst@redhat.com>,  Paolo
+ Bonzini <pbonzini@redhat.com>,  Richard Henderson
+ <richard.henderson@linaro.org>,  Eric Blake <eblake@redhat.com>,  Marcelo
+ Tosatti <mtosatti@redhat.com>,  Alex =?utf-8?Q?Benn=C3=A9e?=
+ <alex.bennee@linaro.org>,
+ Peter Maydell <peter.maydell@linaro.org>,  Jonathan Cameron
+ <Jonathan.Cameron@huawei.com>,  Sia Jee Heng
+ <jeeheng.sia@starfivetech.com>,  qemu-devel@nongnu.org,
+ kvm@vger.kernel.org,  qemu-riscv@nongnu.org,  qemu-arm@nongnu.org,
+ Zhenyu Wang <zhenyu.z.wang@intel.com>,  Dapeng Mi
+ <dapeng1.mi@linux.intel.com>,  Yongwei Ma <yongwei.ma@intel.com>
+Subject: Re: [RFC v2 1/7] hw/core: Make CPU topology enumeration arch-agnostic
+In-Reply-To: <20240530101539.768484-2-zhao1.liu@intel.com> (Zhao Liu's message
+ of "Thu, 30 May 2024 18:15:33 +0800")
+References: <20240530101539.768484-1-zhao1.liu@intel.com>
+ <20240530101539.768484-2-zhao1.liu@intel.com>
+Date: Mon, 03 Jun 2024 14:19:02 +0200
+Message-ID: <87y17mfccp.fsf@pond.sub.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-References: <20240603055248.3928469-1-fea.wang@sifive.com>
- <20240603055248.3928469-5-fea.wang@sifive.com>
-In-Reply-To: <20240603055248.3928469-5-fea.wang@sifive.com>
-From: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
-Date: Mon, 3 Jun 2024 12:31:18 +0200
-Message-ID: <CAJy5ezocZnmYec5TenZNtOe6+2-OxzaRaSXLW1XYHL5X0Xd8dw@mail.gmail.com>
-Subject: Re: [PATCH 4/4] hw/net: Fix the transmission return size
-To: "Fea.Wang" <fea.wang@sifive.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Alistair Francis <alistair@alistair23.me>,
- Peter Maydell <peter.maydell@linaro.org>, 
- Jason Wang <jasowang@redhat.com>, "open list:Xilinx Zynq" <qemu-arm@nongnu.org>
-Content-Type: multipart/alternative; boundary="0000000000001f8d350619f9d604"
-Received-SPF: pass client-ip=2a00:1450:4864:20::52c;
- envelope-from=edgar.iglesias@gmail.com; helo=mail-ed1-x52c.google.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, FREEMAIL_FROM=0.001, HTML_MESSAGE=0.001, SPF_HELO_NONE=0.001,
- T_SCC_BODY_TEXT_LINE=-0.01,
- T_SPF_TEMPERROR=0.01 autolearn=no autolearn_force=no
+Content-Type: text/plain
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.9
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=armbru@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -91,93 +97,255 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---0000000000001f8d350619f9d604
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Zhao Liu <zhao1.liu@intel.com> writes:
 
-On Mon, Jun 3, 2024 at 7:48=E2=80=AFAM Fea.Wang <fea.wang@sifive.com> wrote=
-:
-
-> Fix the transmission return size because not all bytes could be
-> transmitted successfully. So, return a successful length instead of a
-> constant value.
+> Cache topology needs to be defined based on CPU topology levels. Thus,
+> define CPU topology enumeration in qapi/machine.json to make it generic
+> for all architectures.
 >
+> To match the general topology naming style, rename CPU_TOPO_LEVEL_SMT
+> and CPU_TOPO_LEVEL_PACKAGE to CPU_TOPO_LEVEL_THREAD and
+> CPU_TOPO_LEVEL_SOCKET.
 >
-How did you test this patch, on Linux or something else? I have some
-memory that we had some trouble with similar patches before.
-
-Anyway, the change looks good to me:
-Reviewed-by: Edgar E. Iglesias <edgar.iglesias@amd.com>
-
-
-
-> Signed-off-by: Fea.Wang <fea.wang@sifive.com>
+> Also, enumerate additional topology levels for non-i386 arches, and add
+> helpers for topology enumeration and string conversion.
+>
+> Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
 > ---
->  hw/net/xilinx_axienet.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> Changes since RFC v1:
+>  * Use QAPI to enumerate CPU topology levels.
+>  * Drop string_to_cpu_topo() since QAPI will help to parse the topo
+>    levels.
+> ---
+>  MAINTAINERS                    |  2 ++
+>  hw/core/cpu-topology.c         | 36 ++++++++++++++++++++++++++++++
+>  hw/core/meson.build            |  1 +
+>  include/hw/core/cpu-topology.h | 20 +++++++++++++++++
+>  include/hw/i386/topology.h     | 18 +--------------
+>  qapi/machine.json              | 40 ++++++++++++++++++++++++++++++++++
+>  target/i386/cpu.c              | 30 ++++++++++++-------------
+>  target/i386/cpu.h              |  4 ++--
+>  8 files changed, 117 insertions(+), 34 deletions(-)
+>  create mode 100644 hw/core/cpu-topology.c
+>  create mode 100644 include/hw/core/cpu-topology.h
 >
-> diff --git a/hw/net/xilinx_axienet.c b/hw/net/xilinx_axienet.c
-> index 7d1fd37b4a..05d41bd548 100644
-> --- a/hw/net/xilinx_axienet.c
-> +++ b/hw/net/xilinx_axienet.c
-> @@ -847,7 +847,7 @@ static ssize_t eth_rx(NetClientState *nc, const
-> uint8_t *buf, size_t size)
->      axienet_eth_rx_notify(s);
->
->      enet_update_irq(s);
-> -    return size;
-> +    return s->rxpos;
->  }
->
->  static size_t
-> --
-> 2.34.1
->
->
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 448dc951c509..09173e8c953d 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -1875,6 +1875,7 @@ R: Yanan Wang <wangyanan55@huawei.com>
+>  S: Supported
+>  F: hw/core/cpu-common.c
+>  F: hw/core/cpu-sysemu.c
+> +F: hw/core/cpu-topology.c
+>  F: hw/core/machine-qmp-cmds.c
+>  F: hw/core/machine.c
+>  F: hw/core/machine-smp.c
+> @@ -1886,6 +1887,7 @@ F: qapi/machine-common.json
+>  F: qapi/machine-target.json
+>  F: include/hw/boards.h
+>  F: include/hw/core/cpu.h
+> +F: include/hw/core/cpu-topology.h
+>  F: include/hw/cpu/cluster.h
+>  F: include/sysemu/numa.h
+>  F: tests/unit/test-smp-parse.c
+> diff --git a/hw/core/cpu-topology.c b/hw/core/cpu-topology.c
+> new file mode 100644
+> index 000000000000..20b5d708cb54
+> --- /dev/null
+> +++ b/hw/core/cpu-topology.c
+> @@ -0,0 +1,36 @@
+> +/*
+> + * QEMU CPU Topology Representation
+> + *
+> + * Copyright (c) 2024 Intel Corporation
+> + *
+> + * Authors:
+> + *  Zhao Liu <zhao1.liu@intel.com>
+> + *
+> + * This work is licensed under the terms of the GNU GPL, version 2 or
+> + * later.  See the COPYING file in the top-level directory.
+> + */
+> +
+> +#include "qemu/osdep.h"
+> +#include "hw/core/cpu-topology.h"
+> +
+> +typedef struct CPUTopoInfo {
+> +    const char *name;
+> +} CPUTopoInfo;
+> +
+> +CPUTopoInfo cpu_topo_descriptors[] = {
+> +    [CPU_TOPO_LEVEL_INVALID] = { .name = "invalid", },
+> +    [CPU_TOPO_LEVEL_THREAD]  = { .name = "thread",  },
+> +    [CPU_TOPO_LEVEL_CORE]    = { .name = "core",    },
+> +    [CPU_TOPO_LEVEL_MODULE]  = { .name = "module",  },
+> +    [CPU_TOPO_LEVEL_CLUSTER] = { .name = "cluster", },
+> +    [CPU_TOPO_LEVEL_DIE]     = { .name = "die",     },
+> +    [CPU_TOPO_LEVEL_SOCKET]  = { .name = "socket",  },
+> +    [CPU_TOPO_LEVEL_BOOK]    = { .name = "book",    },
+> +    [CPU_TOPO_LEVEL_DRAWER]  = { .name = "drawer",  },
+> +    [CPU_TOPO_LEVEL__MAX]    = { .name = NULL,      },
+> +};
 
---0000000000001f8d350619f9d604
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+This looks redundant with generated
 
-<div dir=3D"ltr"><div dir=3D"ltr">On Mon, Jun 3, 2024 at 7:48=E2=80=AFAM Fe=
-a.Wang &lt;<a href=3D"mailto:fea.wang@sifive.com">fea.wang@sifive.com</a>&g=
-t; wrote:<br></div><div class=3D"gmail_quote"><blockquote class=3D"gmail_qu=
-ote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,20=
-4);padding-left:1ex">Fix the transmission return size because not all bytes=
- could be<br>
-transmitted successfully. So, return a successful length instead of a<br>
-constant value.<br>
-<br></blockquote><div><br></div><div>How did you test this patch, on Linux =
-or something else? I have some</div><div>memory that we had some trouble wi=
-th similar patches before.</div><div><br></div><div>Anyway, the change look=
-s good to me:</div><div>Reviewed-by: Edgar E. Iglesias &lt;<a href=3D"mailt=
-o:edgar.iglesias@amd.com">edgar.iglesias@amd.com</a>&gt;<br></div><div><br>=
-</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0p=
-x 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-Signed-off-by: Fea.Wang &lt;<a href=3D"mailto:fea.wang@sifive.com" target=
-=3D"_blank">fea.wang@sifive.com</a>&gt;<br>
----<br>
-=C2=A0hw/net/xilinx_axienet.c | 2 +-<br>
-=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
-<br>
-diff --git a/hw/net/xilinx_axienet.c b/hw/net/xilinx_axienet.c<br>
-index 7d1fd37b4a..05d41bd548 100644<br>
---- a/hw/net/xilinx_axienet.c<br>
-+++ b/hw/net/xilinx_axienet.c<br>
-@@ -847,7 +847,7 @@ static ssize_t eth_rx(NetClientState *nc, const uint8_t=
- *buf, size_t size)<br>
-=C2=A0 =C2=A0 =C2=A0axienet_eth_rx_notify(s);<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0enet_update_irq(s);<br>
--=C2=A0 =C2=A0 return size;<br>
-+=C2=A0 =C2=A0 return s-&gt;rxpos;<br>
-=C2=A0}<br>
-<br>
-=C2=A0static size_t<br>
--- <br>
-2.34.1<br>
-<br>
-</blockquote></div></div>
+    const QEnumLookup CPUTopoLevel_lookup = {
+        .array = (const char *const[]) {
+            [CPU_TOPO_LEVEL_INVALID] = "invalid",
+            [CPU_TOPO_LEVEL_THREAD] = "thread",
+            [CPU_TOPO_LEVEL_CORE] = "core",
+            [CPU_TOPO_LEVEL_MODULE] = "module",
+            [CPU_TOPO_LEVEL_CLUSTER] = "cluster",
+            [CPU_TOPO_LEVEL_DIE] = "die",
+            [CPU_TOPO_LEVEL_SOCKET] = "socket",
+            [CPU_TOPO_LEVEL_BOOK] = "book",
+            [CPU_TOPO_LEVEL_DRAWER] = "drawer",
+        },
+        .size = CPU_TOPO_LEVEL__MAX
+    };
 
---0000000000001f8d350619f9d604--
+> +
+> +const char *cpu_topo_to_string(CPUTopoLevel topo)
+> +{
+> +    return cpu_topo_descriptors[topo].name;
+> +}
+
+And this with generated CPUTopoLevel_str().
+
+> diff --git a/hw/core/meson.build b/hw/core/meson.build
+> index a3d9bab9f42a..71dc396e9bfc 100644
+> --- a/hw/core/meson.build
+> +++ b/hw/core/meson.build
+> @@ -13,6 +13,7 @@ hwcore_ss.add(files(
+>  ))
+>  
+>  common_ss.add(files('cpu-common.c'))
+> +common_ss.add(files('cpu-topology.c'))
+>  common_ss.add(files('machine-smp.c'))
+>  system_ss.add(when: 'CONFIG_FITLOADER', if_true: files('loader-fit.c'))
+>  system_ss.add(when: 'CONFIG_GENERIC_LOADER', if_true: files('generic-loader.c'))
+> diff --git a/include/hw/core/cpu-topology.h b/include/hw/core/cpu-topology.h
+> new file mode 100644
+> index 000000000000..0e21fe8a9bf8
+> --- /dev/null
+> +++ b/include/hw/core/cpu-topology.h
+> @@ -0,0 +1,20 @@
+> +/*
+> + * QEMU CPU Topology Representation Header
+> + *
+> + * Copyright (c) 2024 Intel Corporation
+> + *
+> + * Authors:
+> + *  Zhao Liu <zhao1.liu@intel.com>
+> + *
+> + * This work is licensed under the terms of the GNU GPL, version 2 or
+> + * later.  See the COPYING file in the top-level directory.
+> + */
+> +
+> +#ifndef CPU_TOPOLOGY_H
+> +#define CPU_TOPOLOGY_H
+> +
+> +#include "qapi/qapi-types-machine.h"
+> +
+> +const char *cpu_topo_to_string(CPUTopoLevel topo);
+> +
+> +#endif /* CPU_TOPOLOGY_H */
+> diff --git a/include/hw/i386/topology.h b/include/hw/i386/topology.h
+> index dff49fce1154..c6ff75f23991 100644
+> --- a/include/hw/i386/topology.h
+> +++ b/include/hw/i386/topology.h
+> @@ -39,7 +39,7 @@
+>   *  CPUID Fn8000_0008_ECX[ApicIdCoreIdSize[3:0]] is set to apicid_core_width().
+>   */
+>  
+> -
+> +#include "hw/core/cpu-topology.h"
+>  #include "qemu/bitops.h"
+>  
+>  /*
+> @@ -62,22 +62,6 @@ typedef struct X86CPUTopoInfo {
+>      unsigned threads_per_core;
+>  } X86CPUTopoInfo;
+>  
+> -/*
+> - * CPUTopoLevel is the general i386 topology hierarchical representation,
+> - * ordered by increasing hierarchical relationship.
+> - * Its enumeration value is not bound to the type value of Intel (CPUID[0x1F])
+> - * or AMD (CPUID[0x80000026]).
+> - */
+> -enum CPUTopoLevel {
+> -    CPU_TOPO_LEVEL_INVALID,
+> -    CPU_TOPO_LEVEL_SMT,
+> -    CPU_TOPO_LEVEL_CORE,
+> -    CPU_TOPO_LEVEL_MODULE,
+> -    CPU_TOPO_LEVEL_DIE,
+> -    CPU_TOPO_LEVEL_PACKAGE,
+> -    CPU_TOPO_LEVEL_MAX,
+> -};
+> -
+>  /* Return the bit width needed for 'count' IDs */
+>  static unsigned apicid_bitwidth_for_count(unsigned count)
+>  {
+> diff --git a/qapi/machine.json b/qapi/machine.json
+> index bce6e1bbc412..7ac5a05bb9c9 100644
+> --- a/qapi/machine.json
+> +++ b/qapi/machine.json
+> @@ -1667,6 +1667,46 @@
+>       '*reboot-timeout': 'int',
+>       '*strict': 'bool' } }
+>  
+> +##
+> +# @CPUTopoLevel:
+> +#
+> +# An enumeration of CPU topology levels.
+> +#
+> +# @invalid: Invalid topology level, used as a placeholder.
+
+Placeholder for what?
+
+> +#
+> +# @thread: thread level, which would also be called SMT level or logical
+> +#     processor level. The @threads option in -smp is used to configure
+> +#     the topology of this level.
+> +#
+> +# @core: core level. The @cores option in -smp is used to configure the
+> +#     topology of this level.
+> +#
+> +# @module: module level. The @modules option in -smp is used to
+> +#     configure the topology of this level.
+> +#
+> +# @cluster: cluster level. The @clusters option in -smp is used to
+> +#     configure the topology of this level.
+> +#
+> +# @die: die level. The @dies option in -smp is used to configure the
+> +#     topology of this level.
+> +#
+> +# @socket: socket level, which would also be called package level. The
+> +#     @sockets option in -smp is used to configure the topology of this
+> +#     level.
+> +#
+> +# @book: book level. The @books option in -smp is used to configure the
+> +#     topology of this level.
+> +#
+> +# @drawer: drawer level. The @drawers option in -smp is used to
+> +#     configure the topology of this level.
+
+As far as I can tell, -smp is sugar for machine property "smp" of QAPI
+type SMPConfiguration.  Should we refer to SMPConfiguration instead of
+-smp?
+
+> +#
+> +# Since: 9.1
+> +##
+> +{ 'enum': 'CPUTopoLevel',
+> +  'prefix': 'CPU_TOPO_LEVEL',
+> +  'data': [ 'invalid', 'thread', 'core', 'module', 'cluster',
+> +            'die', 'socket', 'book', 'drawer' ] }
+> +
+>  ##
+>  # @SMPConfiguration:
+>  #
+
+[...]
+
 
