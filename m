@@ -4,85 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2D38C25B76
-	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Jun 2024 06:37:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B36ADC25B75
+	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Jun 2024 10:19:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sE1Js-0004Yd-Di; Mon, 03 Jun 2024 02:37:24 -0400
+	id 1sE4me-0007TP-1Z; Mon, 03 Jun 2024 06:19:21 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <fea.wang@sifive.com>)
- id 1sE1Jp-0004Y2-7q
- for qemu-riscv@nongnu.org; Mon, 03 Jun 2024 02:37:21 -0400
-Received: from mail-vk1-xa34.google.com ([2607:f8b0:4864:20::a34])
+ (Exim 4.90_1) (envelope-from <edgar.iglesias@gmail.com>)
+ id 1sE4mV-0007SK-Q9; Mon, 03 Jun 2024 06:19:11 -0400
+Received: from mail-ed1-x52a.google.com ([2a00:1450:4864:20::52a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <fea.wang@sifive.com>)
- id 1sE1Jm-0005Mw-KS
- for qemu-riscv@nongnu.org; Mon, 03 Jun 2024 02:37:21 -0400
-Received: by mail-vk1-xa34.google.com with SMTP id
- 71dfb90a1353d-4eb25f3c203so63438e0c.0
- for <qemu-riscv@nongnu.org>; Sun, 02 Jun 2024 23:37:18 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <edgar.iglesias@gmail.com>)
+ id 1sE4mT-0002Kd-J3; Mon, 03 Jun 2024 06:19:11 -0400
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-572c65cea55so7260358a12.0; 
+ Mon, 03 Jun 2024 03:19:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1717396637; x=1718001437; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1717409946; x=1718014746; darn=nongnu.org;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Qy8WFJ8ZfUfAEdW6TkkGFLhkCjtDAKJfPIexM1vz6hA=;
- b=AIcpvKOJVS6OZ3gJVzISq55Jur7V345HuVZ00CWJpFsGIRTSaWsOWQWIfaeJpUn3VZ
- FV4WgjwtLqgX2t/XhBUMtPdv6fp2/ZoMYxmu81cHOAJOWQMzXWnJL7YeTAK/iwH1r7T4
- FPzuwNHVMIa5JyuiGl8aYNJa2AOjFuJZyQZk9wODICVzLcmNTfOYkRkNxJkzfQRQ96Vr
- XJ2pURkKyTmEN0nTo3NITYkZJ/UnGId7ja5jMQ5XCPeMDXRo5lMJRllZ+25r0YLPjSLE
- WswjF2GlK7CTRU7w+O1LSJ4lMXsjiBiDCQZWB9AWR2gwp7AsoQxjgtnwAcs2SQE9n9RU
- eioQ==
+ bh=23lg4niCLpouQl9oZZ4W9GefWlftzip5Spi8jpU1ZJE=;
+ b=l9tdsu86m0/osfAedfJRI7GjfHPgn8w4vjN/bUk/xWDrh8BKyEUHsp4WE390EmE9sa
+ HhHfUNHToCgEKIPfqELJA+x0fYCLv4Q4Q9xMoBvzsSYbf1gh+lZG3AlWuGNBULU38bG8
+ 9rB1ihlO4OxNcrUbF0nJ9Kvo2bsu6flLMkfKZ5RlbG8WZMLSrAM1i7V57i4CcszxJ+L5
+ d5hZmaNXOFNOGD5ON7tOTgQQAdp6HxbKQmm30fcZi7M1FlAmjtODlvezqiaRFeriyRxZ
+ Nt/6zn+nrQBjhx99B8VQIFE0AKKQIOL6Lws/g1RJnZg74ZV9PePgPH4T+k99FEIuoIri
+ merQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717396637; x=1718001437;
+ d=1e100.net; s=20230601; t=1717409946; x=1718014746;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Qy8WFJ8ZfUfAEdW6TkkGFLhkCjtDAKJfPIexM1vz6hA=;
- b=J2whyWC8WGFbN5BAkff5Mqlt+3njsTtBkwj7iP40yCBzAhfFf3/EN+pViehaOIweTu
- U19v8uhgpv/vtPRNb3xIj+1P/tAF6ThwvukwSKihd8Kt9+Wgk5OXAIPDuQG/FQzmFwcV
- rBh5jc4rG4yQo0CB0LJfmwkkgZrnD+gw+g52jBu1yIIKcbdmU/PLJB4DztNp/6OihOdH
- wSmig33CvL2PimX7NfCzlIXQz9bL6jtrB9HfX5q13PEJjaT25zCz5JbAlTyZOBIwbZ4S
- nSsXtNN4kSK6LtWzhWAGnKu7uFRlIsKWOxX4kj7Hfth6yls4taAYtzvUlIJQ/Eq8LqIr
- O3FQ==
+ bh=23lg4niCLpouQl9oZZ4W9GefWlftzip5Spi8jpU1ZJE=;
+ b=A403cafPySa3Jg0qQ35npzUOMPoM1qbANF0IpD0Occ3C1maUNeJyg06gcE2THf9mik
+ B3geTlIdMPZKNEoAhfiFjTA07nCKPo064WoMO0XgG04nWbmBt34/GbKHHCSNiQ9DX5Te
+ uI9zhDZtuLBQwEHYaZNTQubYx+LYaYMfR+7ERRaAZ3DcL5jYnBFXhj+agBP7jJvUoJ9l
+ 7Gdo22gbvWplZqQZ5rNE34Ny8YVsNkn/UAHHIGYT/OULdzSdH3UlY2gkntJejtI47B8e
+ zIN7kCBwPUlJHpLZ7J/WzmWQbzicc0tyWUxEmm2HkWkK1RF8BACFdfY8ZH5EuzyS93Ke
+ yTig==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX9BHtBxKqNnMB/GlFEEsxrjog3nCq/0jGYPyHxudTJfihZY0AePHVE2WI+jLVETWHU2k1JY5gW7bANRXHG1cJW9mATtEE=
-X-Gm-Message-State: AOJu0Yzd0UQiN11Odjb9EiJRWCKZNqjyzOSDDtU2eZWtDkyHiSy3KSSU
- NuM1kb9reT8vd8CQVybPDYzD0iF5e29/2raNdnatRend8ogCt1RycK5/SNrUmDd2MLyvfGJpkGs
- NRYoSf+3+KwLDQj4Vi+lw4+WhOFEl4Odv6nhmIA==
-X-Google-Smtp-Source: AGHT+IGUZHRllQgZyyNCauqzDYw6fAzpfSX8N8dKYJ0we+jo5Y5uPYmFCvVZ+SyCRBqXzUHWKlfyO0DIFwrNv5r4cG4=
-X-Received: by 2002:a1f:f483:0:b0:4d4:ef9:71b0 with SMTP id
- 71dfb90a1353d-4eb02e126f1mr6022606e0c.7.1717396636860; Sun, 02 Jun 2024
- 23:37:16 -0700 (PDT)
+ AJvYcCXKlonpF4KtVt4g7jkIIyWIlPX38A/qAsYYpO9c/1NAe1QCVHYOqMiAK3C7Q+n13PRNjnPyI+moMb2uVRMh/ySJymA9JMaef81vCfyLdtYa9zAysnHgw4db4nQ=
+X-Gm-Message-State: AOJu0Yx6pUBTJZgcEmU0KsxwOB73sTfa5klgQkOPcZ/EfnnNdUC+vzwX
+ 7UVasI80BLmGBkrOHfVdHDHgpf8uCet5EOou8DAMananZJ5uriMVPgcLKlOo5cI1Pk3VbRnB0nz
+ lyy/YmPn+DQhqou5wB2b/ohezybI=
+X-Google-Smtp-Source: AGHT+IHs+tCX0+txTq4TlzNuD26Gl/B8Qr3dNZDcjXl47WSU5aYwe+b8rZQ8yr0DXlNJUZ0WqT9oDqB+BAvryIqHaT4=
+X-Received: by 2002:a50:cd9a:0:b0:578:5c1e:45e5 with SMTP id
+ 4fb4d7f45d1cf-57a363b66eemr8045749a12.9.1717409945372; Mon, 03 Jun 2024
+ 03:19:05 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240515080605.2675399-1-fea.wang@sifive.com>
- <4d2d56aa-5758-4320-a5ef-53ebb87ab494@ventanamicro.com>
- <CAKhCfseJgRzyeg1seuZ15SR=f78E5rnbgfrzY_VeRDhPMOAhwA@mail.gmail.com>
- <20240530-0521d05b9924d724568bd6a2@orel>
-In-Reply-To: <20240530-0521d05b9924d724568bd6a2@orel>
-From: Fea Wang <fea.wang@sifive.com>
-Date: Mon, 3 Jun 2024 14:37:05 +0800
-Message-ID: <CAKhCfsc7=fUsq9+2rWNN=oYvWd0pR28ONNaYSNsqjRUx7ZY14g@mail.gmail.com>
-Subject: Re: [RESEND PATCH v2 0/5] target/riscv: Support RISC-V privilege 1.13
- spec
-To: Andrew Jones <ajones@ventanamicro.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+References: <20240603055248.3928469-1-fea.wang@sifive.com>
+ <20240603055248.3928469-2-fea.wang@sifive.com>
+In-Reply-To: <20240603055248.3928469-2-fea.wang@sifive.com>
+From: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
+Date: Mon, 3 Jun 2024 12:18:52 +0200
+Message-ID: <CAJy5ezr-_xnjXqtZnqaWSagMD8pGgU2bDUD0TsHxfkYvQYeHpw@mail.gmail.com>
+Subject: Re: [PATCH 1/4] hw/dma: Enhance error handling in loading description
+To: "Fea.Wang" <fea.wang@sifive.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Content-Type: multipart/alternative; boundary="0000000000007a9ff70619f690ae"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a34;
- envelope-from=fea.wang@sifive.com; helo=mail-vk1-xa34.google.com
+ Alistair Francis <alistair@alistair23.me>,
+ Peter Maydell <peter.maydell@linaro.org>, 
+ Jason Wang <jasowang@redhat.com>, "open list:Xilinx Zynq" <qemu-arm@nongnu.org>
+Content-Type: multipart/alternative; boundary="000000000000ba4de90619f9a9e9"
+Received-SPF: pass client-ip=2a00:1450:4864:20::52a;
+ envelope-from=edgar.iglesias@gmail.com; helo=mail-ed1-x52a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,344 +91,188 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---0000000000007a9ff70619f690ae
+--000000000000ba4de90619f9a9e9
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hi Daniel, Andrew:
+On Mon, Jun 3, 2024 at 7:47=E2=80=AFAM Fea.Wang <fea.wang@sifive.com> wrote=
+:
 
-Thank you for giving me the feedback.
-I found a new command set to cc the related maintainer's email. It also
-includes these emails for the cover letter.
-git send-email --dry-run --to=3D'qemu-devel@nongnu.org,qemu-riscv@nongnu.or=
-g'
---cc=3D"$(scripts/get_maintainer.pl XXXPATCH/* |sed -e 's/$/,/')" /XXXPATCH=
-/*
+> Loading a description from memory may cause a bus-error. In this
+> case, the DMA should stop working, set the error flag, and return
+> the error value.
+>
+> Signed-off-by: Fea.Wang <fea.wang@sifive.com>
+>
 
-Sincerely,
-Fea
 
-On Thu, May 30, 2024 at 6:37=E2=80=AFPM Andrew Jones <ajones@ventanamicro.c=
-om>
-wrote:
+Hi Fea,
 
-> On Thu, May 30, 2024 at 11:30:28AM GMT, Fea Wang wrote:
-> > Hi Daniel,
-> > thank you for your help.
-> >
-> > I found that only the cover is without many maintainers. I used to send
-> > patches by git send-email --dry-run --to 'qemu-devel@nongnu.org,
-> > qemu-riscv@nongnu.org' --cc-cmd=3D'scripts/get_maintainer.pl -i'
-> patches/*.
-> > Do you have a better script for me?
-> > Thank you.
+I've got a couple of small comments:
+
+
+---
+>  hw/dma/xilinx_axidma.c | 16 ++++++++++++++--
+>  1 file changed, 14 insertions(+), 2 deletions(-)
 >
-> Some maintainers frown on that because they prefer the whole series,
-> even if only a few patches touch code they maintain. And, the cover
-> letter is quite important to get the context. Also, depending on
-> mail client and filter configurations, CC's that are per patch can
-> mess up the threading, making a mess of the mailbox. I tend to
-> use scripts/get_maintainer.pl to pull together a set of people/lists
-> to CC as an independent step, dump the contents into a file and then
-> do 'git send-email $(cat my-series.to-list) patches/my-series'
+> diff --git a/hw/dma/xilinx_axidma.c b/hw/dma/xilinx_axidma.c
+> index 0ae056ed06..4b475e5484 100644
+> --- a/hw/dma/xilinx_axidma.c
+> +++ b/hw/dma/xilinx_axidma.c
+> @@ -71,8 +71,10 @@ enum {
+>  enum {
+>      DMASR_HALTED =3D 1,
+>      DMASR_IDLE  =3D 2,
+> +    DMASR_SLVERR =3D 1 << 5,
 >
-> git-publish can help with that too by capturing the "to list" and
-> maintaining it for you.
+
+We should also add DMASR_DECERR =3D 1 << 6
+
+
+>      DMASR_IOC_IRQ  =3D 1 << 12,
+>      DMASR_DLY_IRQ  =3D 1 << 13,
+> +    DMASR_ERR_IRQ  =3D 1 << 14,
 >
-> Thanks,
-> drew
+>      DMASR_IRQ_MASK =3D 7 << 12
+>  };
+> @@ -190,17 +192,27 @@ static inline int streamid_from_addr(hwaddr addr)
+>      return sid;
+>  }
 >
-> >
-> > Sincerely,
-> > Fea
-> >
-> > On Mon, May 27, 2024 at 5:21=E2=80=AFPM Daniel Henrique Barboza <
-> > dbarboza@ventanamicro.com> wrote:
-> >
-> > > Fea,
-> > >
-> > > Please try to also add all RISC-V QEMU maintainers and reviewers when
-> > > sending
-> > > patches. It will get your patches reviewed and queued faster.
-> Otherwise the
-> > > maintainers can miss you your series due to high ML traffic.
-> > >
-> > > You can fetch who you want to CC using the get_maintainer.pl script
-> with
-> > > the
-> > > patch files or any source file in particular, e.g.:
-> > >
-> > > $ ./scripts/get_maintainer.pl -f target/riscv/cpu.c
-> > > Palmer Dabbelt <palmer@dabbelt.com> (supporter:RISC-V TCG CPUs)
-> > > Alistair Francis <alistair.francis@wdc.com> (supporter:RISC-V TCG
-> CPUs)
-> > > Bin Meng <bmeng.cn@gmail.com> (supporter:RISC-V TCG CPUs)
-> > > Weiwei Li <liwei1518@gmail.com> (reviewer:RISC-V TCG CPUs)
-> > > Daniel Henrique Barboza <dbarboza@ventanamicro.com> (reviewer:RISC-V
-> TCG
-> > > CPUs)
-> > > Liu Zhiwei <zhiwei_liu@linux.alibaba.com> (reviewer:RISC-V TCG CPUs)
-> > > qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-> > > qemu-devel@nongnu.org (open list:All patches CC here)
-> > >
-> > >
-> > > I added the extra folk in the CC for this reply so don't worry about
-> it.
-> > >
-> > >
-> > > Alistair, please queue this series. It's already fully acked and I
-> would
-> > > like to add
-> > > some bits on top of the priv_spec 1.13 support.
-> > >
-> > >
-> > > Thanks,
-> > >
-> > >
-> > > Daniel
-> > >
-> > > On 5/15/24 05:05, Fea.Wang wrote:
-> > > > Based on the change log for the RISC-V privilege 1.13 spec, add the
-> > > > support for ss1p13.
-> > > >
-> > > > Ref:
-> > >
-> https://github.com/riscv/riscv-isa-manual/blob/a7d93c9/src/priv-preface.a=
-doc?plain=3D1#L40-L72
-> > > >
-> > > > Lists what to do without clarification or document format.
-> > > > * Redefined misa.MXL to be read-only, making MXLEN a constant.(Skip=
+> -static void stream_desc_load(struct Stream *s, hwaddr addr)
+> +static MemTxResult stream_desc_load(struct Stream *s, hwaddr addr)
+>  {
+>      struct SDesc *d =3D &s->desc;
+>
+> -    address_space_read(&s->dma->as, addr, MEMTXATTRS_UNSPECIFIED, d,
+> sizeof *d);
+> +    MemTxResult result =3D address_space_read(&s->dma->as,
+> +                                            addr, MEMTXATTRS_UNSPECIFIED=
 ,
-> > > implementation ignored)
-> > > > * Added the constraint that SXLEN=E2=89=A5UXLEN.(Skip, implementati=
-on
-> ignored)
-> > > > * Defined the misa.V field to reflect that the V extension has been
-> > > implemented.(Skip, existed)
-> > > > * Defined the RV32-only medelegh and hedelegh CSRs.(Done in these
-> > > patches)
-> > > > * Defined the misaligned atomicity granule PMA, superseding the
-> proposed
-> > > Zam extension..(Skip, implementation ignored)
-> > > > * Allocated interrupt 13 for Sscofpmf LCOFI interrupt.(Skip, existe=
-d)
-> > > > * Defined hardware error and software check exception codes.(Done i=
-n
-> > > these patches)
-> > > > * Specified synchronization requirements when changing the PBMTE
-> fields
-> > > in menvcfg and henvcfg.(Skip, implementation ignored)
-> > > > * Incorporated Svade and Svadu extension specifications.(Skip,
-> existed)
-> > > >
-> > > >
-> > > > Fea.Wang (4):
-> > > >    target/riscv: Support the version for ss1p13
-> > > >    target/riscv: Add 'P1P13' bit in SMSTATEEN0
-> > > >    target/riscv: Add MEDELEGH, HEDELEGH csrs for RV32
-> > > >    target/riscv: Reserve exception codes for sw-check and hw-err
-> > > >
-> > > > Jim Shu (1):
-> > > >    target/riscv: Reuse the conversion function of priv_spec
-> > > >
-> > > >   target/riscv/cpu.c         |  8 ++++++--
-> > > >   target/riscv/cpu.h         |  5 ++++-
-> > > >   target/riscv/cpu_bits.h    |  5 +++++
-> > > >   target/riscv/cpu_cfg.h     |  1 +
-> > > >   target/riscv/csr.c         | 39
-> ++++++++++++++++++++++++++++++++++++++
-> > > >   target/riscv/tcg/tcg-cpu.c | 17 ++++++++---------
-> > > >   6 files changed, 63 insertions(+), 12 deletions(-)
-> > > >
-> > >
+> +                                            d, sizeof *d);
+> +    if (result !=3D MEMTX_OK) {
+> +        s->regs[R_DMACR] &=3D ~DMACR_RUNSTOP;
+> +        s->regs[R_DMASR] |=3D DMASR_HALTED;
+> +        s->regs[R_DMASR] |=3D DMASR_SLVERR;
 >
 
---0000000000007a9ff70619f690ae
+... and map MEMTX_DECODE_ERROR to DMASR_DECERR and everything else to
+SLVERR, for example:
+if (result =3D=3D MEMTX_DECODE_ERROR) {
+    s->regs[R_DMASR] |=3D DMASR_DECERR;
+} else {
+    s->regs[R_DMASR] |=3D DMASR_SLVERR;
+}
+
+
+> +        s->regs[R_DMASR] |=3D DMASR_ERR_IRQ;
+> +        return result;
+> +    }
+>
+>      /* Convert from LE into host endianness.  */
+>      d->buffer_address =3D le64_to_cpu(d->buffer_address);
+>      d->nxtdesc =3D le64_to_cpu(d->nxtdesc);
+>      d->control =3D le32_to_cpu(d->control);
+>      d->status =3D le32_to_cpu(d->status);
+> +    return result;
+>  }
+>
+>  static void stream_desc_store(struct Stream *s, hwaddr addr)
+> --
+> 2.34.1
+>
+>
+
+--000000000000ba4de90619f9a9e9
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">Hi Daniel, Andrew:<div><br></div><div>Thank you for giving=
- me the feedback.</div><div>I found a new command set to cc the related mai=
-ntainer&#39;s email. It also includes these emails for the cover letter.</d=
-iv><div><span style=3D"background-color:rgb(204,204,204)">git send-email --=
-dry-run --to=3D&#39;<a href=3D"mailto:qemu-devel@nongnu.org">qemu-devel@non=
-gnu.org</a>,<a href=3D"mailto:qemu-riscv@nongnu.org">qemu-riscv@nongnu.org<=
-/a>&#39; --cc=3D&quot;$(scripts/<a href=3D"http://get_maintainer.pl">get_ma=
-intainer.pl</a>=C2=A0</span><span style=3D"background-color:rgb(204,204,204=
-)">XXXPATCH</span><span style=3D"background-color:rgb(204,204,204)">/* |sed=
- -e &#39;s/$/,/&#39;)&quot; /XXXPATCH/*</span><br></div><div><span style=3D=
-"background-color:rgb(204,204,204)"><br></span></div><div>Sincerely,<br></d=
-iv><div>Fea</div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" clas=
-s=3D"gmail_attr">On Thu, May 30, 2024 at 6:37=E2=80=AFPM Andrew Jones &lt;<=
-a href=3D"mailto:ajones@ventanamicro.com">ajones@ventanamicro.com</a>&gt; w=
-rote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0p=
-x 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">On Thu, Ma=
-y 30, 2024 at 11:30:28AM GMT, Fea Wang wrote:<br>
-&gt; Hi Daniel,<br>
-&gt; thank you for your help.<br>
-&gt; <br>
-&gt; I found that only the cover is without many maintainers. I used to sen=
-d<br>
-&gt; patches by git send-email --dry-run --to &#39;<a href=3D"mailto:qemu-d=
-evel@nongnu.org" target=3D"_blank">qemu-devel@nongnu.org</a>,<br>
-&gt; <a href=3D"mailto:qemu-riscv@nongnu.org" target=3D"_blank">qemu-riscv@=
-nongnu.org</a>&#39; --cc-cmd=3D&#39;scripts/<a href=3D"http://get_maintaine=
-r.pl" rel=3D"noreferrer" target=3D"_blank">get_maintainer.pl</a> -i&#39; pa=
-tches/*.<br>
-&gt; Do you have a better script for me?<br>
-&gt; Thank you.<br>
+<div dir=3D"ltr"><div dir=3D"ltr">On Mon, Jun 3, 2024 at 7:47=E2=80=AFAM Fe=
+a.Wang &lt;<a href=3D"mailto:fea.wang@sifive.com">fea.wang@sifive.com</a>&g=
+t; wrote:<br></div><div class=3D"gmail_quote"><blockquote class=3D"gmail_qu=
+ote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,20=
+4);padding-left:1ex">Loading a description from memory may cause a bus-erro=
+r. In this<br>
+case, the DMA should stop working, set the error flag, and return<br>
+the error value.<br>
 <br>
-Some maintainers frown on that because they prefer the whole series,<br>
-even if only a few patches touch code they maintain. And, the cover<br>
-letter is quite important to get the context. Also, depending on<br>
-mail client and filter configurations, CC&#39;s that are per patch can<br>
-mess up the threading, making a mess of the mailbox. I tend to<br>
-use scripts/<a href=3D"http://get_maintainer.pl" rel=3D"noreferrer" target=
-=3D"_blank">get_maintainer.pl</a> to pull together a set of people/lists<br=
->
-to CC as an independent step, dump the contents into a file and then<br>
-do &#39;git send-email $(cat my-series.to-list) patches/my-series&#39;<br>
+Signed-off-by: Fea.Wang &lt;<a href=3D"mailto:fea.wang@sifive.com" target=
+=3D"_blank">fea.wang@sifive.com</a>&gt;<br></blockquote><div><br></div><div=
+><br></div><div>Hi Fea,</div><div><br></div><div>I&#39;ve got a couple of s=
+mall comments:</div><div>=C2=A0</div><div><br></div><blockquote class=3D"gm=
+ail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,=
+204,204);padding-left:1ex">
+---<br>
+=C2=A0hw/dma/xilinx_axidma.c | 16 ++++++++++++++--<br>
+=C2=A01 file changed, 14 insertions(+), 2 deletions(-)<br>
 <br>
-git-publish can help with that too by capturing the &quot;to list&quot; and=
+diff --git a/hw/dma/xilinx_axidma.c b/hw/dma/xilinx_axidma.c<br>
+index 0ae056ed06..4b475e5484 100644<br>
+--- a/hw/dma/xilinx_axidma.c<br>
++++ b/hw/dma/xilinx_axidma.c<br>
+@@ -71,8 +71,10 @@ enum {<br>
+=C2=A0enum {<br>
+=C2=A0 =C2=A0 =C2=A0DMASR_HALTED =3D 1,<br>
+=C2=A0 =C2=A0 =C2=A0DMASR_IDLE=C2=A0 =3D 2,<br>
++=C2=A0 =C2=A0 DMASR_SLVERR =3D 1 &lt;&lt; 5,<br></blockquote><div><br></di=
+v><div>We should also add DMASR_DECERR =3D 1 &lt;&lt; 6</div><div>=C2=A0</d=
+iv><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bord=
+er-left:1px solid rgb(204,204,204);padding-left:1ex">
+=C2=A0 =C2=A0 =C2=A0DMASR_IOC_IRQ=C2=A0 =3D 1 &lt;&lt; 12,<br>
+=C2=A0 =C2=A0 =C2=A0DMASR_DLY_IRQ=C2=A0 =3D 1 &lt;&lt; 13,<br>
++=C2=A0 =C2=A0 DMASR_ERR_IRQ=C2=A0 =3D 1 &lt;&lt; 14,<br>
 <br>
-maintaining it for you.<br>
+=C2=A0 =C2=A0 =C2=A0DMASR_IRQ_MASK =3D 7 &lt;&lt; 12<br>
+=C2=A0};<br>
+@@ -190,17 +192,27 @@ static inline int streamid_from_addr(hwaddr addr)<br>
+=C2=A0 =C2=A0 =C2=A0return sid;<br>
+=C2=A0}<br>
 <br>
-Thanks,<br>
-drew<br>
+-static void stream_desc_load(struct Stream *s, hwaddr addr)<br>
++static MemTxResult stream_desc_load(struct Stream *s, hwaddr addr)<br>
+=C2=A0{<br>
+=C2=A0 =C2=A0 =C2=A0struct SDesc *d =3D &amp;s-&gt;desc;<br>
 <br>
-&gt; <br>
-&gt; Sincerely,<br>
-&gt; Fea<br>
-&gt; <br>
-&gt; On Mon, May 27, 2024 at 5:21=E2=80=AFPM Daniel Henrique Barboza &lt;<b=
+-=C2=A0 =C2=A0 address_space_read(&amp;s-&gt;dma-&gt;as, addr, MEMTXATTRS_U=
+NSPECIFIED, d, sizeof *d);<br>
++=C2=A0 =C2=A0 MemTxResult result =3D address_space_read(&amp;s-&gt;dma-&gt=
+;as,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 addr, MEMTXATTRS_UNSPECIFIED,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 d, sizeof *d);<br>
++=C2=A0 =C2=A0 if (result !=3D MEMTX_OK) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 s-&gt;regs[R_DMACR] &amp;=3D ~DMACR_RUNSTOP;<b=
 r>
-&gt; <a href=3D"mailto:dbarboza@ventanamicro.com" target=3D"_blank">dbarboz=
-a@ventanamicro.com</a>&gt; wrote:<br>
-&gt; <br>
-&gt; &gt; Fea,<br>
-&gt; &gt;<br>
-&gt; &gt; Please try to also add all RISC-V QEMU maintainers and reviewers =
-when<br>
-&gt; &gt; sending<br>
-&gt; &gt; patches. It will get your patches reviewed and queued faster. Oth=
-erwise the<br>
-&gt; &gt; maintainers can miss you your series due to high ML traffic.<br>
-&gt; &gt;<br>
-&gt; &gt; You can fetch who you want to CC using the <a href=3D"http://get_=
-maintainer.pl" rel=3D"noreferrer" target=3D"_blank">get_maintainer.pl</a> s=
-cript with<br>
-&gt; &gt; the<br>
-&gt; &gt; patch files or any source file in particular, e.g.:<br>
-&gt; &gt;<br>
-&gt; &gt; $ ./scripts/<a href=3D"http://get_maintainer.pl" rel=3D"noreferre=
-r" target=3D"_blank">get_maintainer.pl</a> -f target/riscv/cpu.c<br>
-&gt; &gt; Palmer Dabbelt &lt;<a href=3D"mailto:palmer@dabbelt.com" target=
-=3D"_blank">palmer@dabbelt.com</a>&gt; (supporter:RISC-V TCG CPUs)<br>
-&gt; &gt; Alistair Francis &lt;<a href=3D"mailto:alistair.francis@wdc.com" =
-target=3D"_blank">alistair.francis@wdc.com</a>&gt; (supporter:RISC-V TCG CP=
-Us)<br>
-&gt; &gt; Bin Meng &lt;<a href=3D"mailto:bmeng.cn@gmail.com" target=3D"_bla=
-nk">bmeng.cn@gmail.com</a>&gt; (supporter:RISC-V TCG CPUs)<br>
-&gt; &gt; Weiwei Li &lt;<a href=3D"mailto:liwei1518@gmail.com" target=3D"_b=
-lank">liwei1518@gmail.com</a>&gt; (reviewer:RISC-V TCG CPUs)<br>
-&gt; &gt; Daniel Henrique Barboza &lt;<a href=3D"mailto:dbarboza@ventanamic=
-ro.com" target=3D"_blank">dbarboza@ventanamicro.com</a>&gt; (reviewer:RISC-=
-V TCG<br>
-&gt; &gt; CPUs)<br>
-&gt; &gt; Liu Zhiwei &lt;<a href=3D"mailto:zhiwei_liu@linux.alibaba.com" ta=
-rget=3D"_blank">zhiwei_liu@linux.alibaba.com</a>&gt; (reviewer:RISC-V TCG C=
-PUs)<br>
-&gt; &gt; <a href=3D"mailto:qemu-riscv@nongnu.org" target=3D"_blank">qemu-r=
-iscv@nongnu.org</a> (open list:RISC-V TCG CPUs)<br>
-&gt; &gt; <a href=3D"mailto:qemu-devel@nongnu.org" target=3D"_blank">qemu-d=
-evel@nongnu.org</a> (open list:All patches CC here)<br>
-&gt; &gt;<br>
-&gt; &gt;<br>
-&gt; &gt; I added the extra folk in the CC for this reply so don&#39;t worr=
-y about it.<br>
-&gt; &gt;<br>
-&gt; &gt;<br>
-&gt; &gt; Alistair, please queue this series. It&#39;s already fully acked =
-and I would<br>
-&gt; &gt; like to add<br>
-&gt; &gt; some bits on top of the priv_spec 1.13 support.<br>
-&gt; &gt;<br>
-&gt; &gt;<br>
-&gt; &gt; Thanks,<br>
-&gt; &gt;<br>
-&gt; &gt;<br>
-&gt; &gt; Daniel<br>
-&gt; &gt;<br>
-&gt; &gt; On 5/15/24 05:05, Fea.Wang wrote:<br>
-&gt; &gt; &gt; Based on the change log for the RISC-V privilege 1.13 spec, =
-add the<br>
-&gt; &gt; &gt; support for ss1p13.<br>
-&gt; &gt; &gt;<br>
-&gt; &gt; &gt; Ref:<br>
-&gt; &gt; <a href=3D"https://github.com/riscv/riscv-isa-manual/blob/a7d93c9=
-/src/priv-preface.adoc?plain=3D1#L40-L72" rel=3D"noreferrer" target=3D"_bla=
-nk">https://github.com/riscv/riscv-isa-manual/blob/a7d93c9/src/priv-preface=
-.adoc?plain=3D1#L40-L72</a><br>
-&gt; &gt; &gt;<br>
-&gt; &gt; &gt; Lists what to do without clarification or document format.<b=
-r>
-&gt; &gt; &gt; * Redefined misa.MXL to be read-only, making MXLEN a constan=
-t.(Skip,<br>
-&gt; &gt; implementation ignored)<br>
-&gt; &gt; &gt; * Added the constraint that SXLEN=E2=89=A5UXLEN.(Skip, imple=
-mentation ignored)<br>
-&gt; &gt; &gt; * Defined the misa.V field to reflect that the V extension h=
-as been<br>
-&gt; &gt; implemented.(Skip, existed)<br>
-&gt; &gt; &gt; * Defined the RV32-only medelegh and hedelegh CSRs.(Done in =
-these<br>
-&gt; &gt; patches)<br>
-&gt; &gt; &gt; * Defined the misaligned atomicity granule PMA, superseding =
-the proposed<br>
-&gt; &gt; Zam extension..(Skip, implementation ignored)<br>
-&gt; &gt; &gt; * Allocated interrupt 13 for Sscofpmf LCOFI interrupt.(Skip,=
- existed)<br>
-&gt; &gt; &gt; * Defined hardware error and software check exception codes.=
-(Done in<br>
-&gt; &gt; these patches)<br>
-&gt; &gt; &gt; * Specified synchronization requirements when changing the P=
-BMTE fields<br>
-&gt; &gt; in menvcfg and henvcfg.(Skip, implementation ignored)<br>
-&gt; &gt; &gt; * Incorporated Svade and Svadu extension specifications.(Ski=
-p, existed)<br>
-&gt; &gt; &gt;<br>
-&gt; &gt; &gt;<br>
-&gt; &gt; &gt; Fea.Wang (4):<br>
-&gt; &gt; &gt;=C2=A0 =C2=A0 target/riscv: Support the version for ss1p13<br=
->
-&gt; &gt; &gt;=C2=A0 =C2=A0 target/riscv: Add &#39;P1P13&#39; bit in SMSTAT=
-EEN0<br>
-&gt; &gt; &gt;=C2=A0 =C2=A0 target/riscv: Add MEDELEGH, HEDELEGH csrs for R=
-V32<br>
-&gt; &gt; &gt;=C2=A0 =C2=A0 target/riscv: Reserve exception codes for sw-ch=
-eck and hw-err<br>
-&gt; &gt; &gt;<br>
-&gt; &gt; &gt; Jim Shu (1):<br>
-&gt; &gt; &gt;=C2=A0 =C2=A0 target/riscv: Reuse the conversion function of =
-priv_spec<br>
-&gt; &gt; &gt;<br>
-&gt; &gt; &gt;=C2=A0 =C2=A0target/riscv/cpu.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0|=C2=A0 8 ++++++--<br>
-&gt; &gt; &gt;=C2=A0 =C2=A0target/riscv/cpu.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0|=C2=A0 5 ++++-<br>
-&gt; &gt; &gt;=C2=A0 =C2=A0target/riscv/cpu_bits.h=C2=A0 =C2=A0 |=C2=A0 5 +=
-++++<br>
-&gt; &gt; &gt;=C2=A0 =C2=A0target/riscv/cpu_cfg.h=C2=A0 =C2=A0 =C2=A0|=C2=
-=A0 1 +<br>
-&gt; &gt; &gt;=C2=A0 =C2=A0target/riscv/csr.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0| 39 ++++++++++++++++++++++++++++++++++++++<br>
-&gt; &gt; &gt;=C2=A0 =C2=A0target/riscv/tcg/tcg-cpu.c | 17 ++++++++--------=
--<br>
-&gt; &gt; &gt;=C2=A0 =C2=A06 files changed, 63 insertions(+), 12 deletions(=
--)<br>
-&gt; &gt; &gt;<br>
-&gt; &gt;<br>
-</blockquote></div>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 s-&gt;regs[R_DMASR] |=3D DMASR_HALTED;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 s-&gt;regs[R_DMASR] |=3D DMASR_SLVERR;<br></bl=
+ockquote><div><br></div><div>... and map MEMTX_DECODE_ERROR to DMASR_DECERR=
+ and everything else to SLVERR, for example:</div><div>if (result =3D=3D ME=
+MTX_DECODE_ERROR) {</div><div>=C2=A0 =C2=A0 s-&gt;regs[R_DMASR] |=3D DMASR_=
+DECERR;</div><div>} else {<br><div>=C2=A0 =C2=A0 s-&gt;regs[R_DMASR] |=3D D=
+MASR_SLVERR;</div></div><div>}</div><div>=C2=A0</div><blockquote class=3D"g=
+mail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204=
+,204,204);padding-left:1ex">
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 s-&gt;regs[R_DMASR] |=3D DMASR_ERR_IRQ;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 return result;<br>
++=C2=A0 =C2=A0 }<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0/* Convert from LE into host endianness.=C2=A0 */<br>
+=C2=A0 =C2=A0 =C2=A0d-&gt;buffer_address =3D le64_to_cpu(d-&gt;buffer_addre=
+ss);<br>
+=C2=A0 =C2=A0 =C2=A0d-&gt;nxtdesc =3D le64_to_cpu(d-&gt;nxtdesc);<br>
+=C2=A0 =C2=A0 =C2=A0d-&gt;control =3D le32_to_cpu(d-&gt;control);<br>
+=C2=A0 =C2=A0 =C2=A0d-&gt;status =3D le32_to_cpu(d-&gt;status);<br>
++=C2=A0 =C2=A0 return result;<br>
+=C2=A0}<br>
+<br>
+=C2=A0static void stream_desc_store(struct Stream *s, hwaddr addr)<br>
+-- <br>
+2.34.1<br>
+<br>
+</blockquote></div></div>
 
---0000000000007a9ff70619f690ae--
+--000000000000ba4de90619f9a9e9--
 
