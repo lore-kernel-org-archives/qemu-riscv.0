@@ -4,90 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E5EDC25B74
-	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Jun 2024 06:23:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE5EEC25B7E
+	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Jun 2024 06:42:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sENZA-00075c-Pb; Tue, 04 Jun 2024 02:22:40 -0400
+	id 1sENrP-00086i-6u; Tue, 04 Jun 2024 02:41:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <fea.wang@sifive.com>)
- id 1sENZ9-00075F-3R
- for qemu-riscv@nongnu.org; Tue, 04 Jun 2024 02:22:39 -0400
-Received: from mail-pj1-x1036.google.com ([2607:f8b0:4864:20::1036])
+ id 1sENrK-00086H-3h
+ for qemu-riscv@nongnu.org; Tue, 04 Jun 2024 02:41:26 -0400
+Received: from mail-vk1-xa2f.google.com ([2607:f8b0:4864:20::a2f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <fea.wang@sifive.com>)
- id 1sENZ7-0006dn-HL
- for qemu-riscv@nongnu.org; Tue, 04 Jun 2024 02:22:38 -0400
-Received: by mail-pj1-x1036.google.com with SMTP id
- 98e67ed59e1d1-2bfff08fc29so629091a91.1
- for <qemu-riscv@nongnu.org>; Mon, 03 Jun 2024 23:22:37 -0700 (PDT)
+ id 1sENrH-0006X7-Dj
+ for qemu-riscv@nongnu.org; Tue, 04 Jun 2024 02:41:25 -0400
+Received: by mail-vk1-xa2f.google.com with SMTP id
+ 71dfb90a1353d-4eb14d993c6so708084e0c.0
+ for <qemu-riscv@nongnu.org>; Mon, 03 Jun 2024 23:41:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1717482156; x=1718086956; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=hjK9w4dqjAkqFbNC+54zCtsFUYuidAUsOJ629MgVBnU=;
- b=EFWUEwVYick/V1DdyIX0TkpmlPMmjlQ0L6wte8OiRLfl1Y5gb5N2XcKgqykAvS/8oM
- ih1+jcg/GqvpEBYx9fIDJnj0j/sGcQadLw+B4G+xRf+pDF8wonx9lEXuwkAhOUScAIyY
- gJXE5ev6ffykHVdPfLFgfb0Uyr15TttNyvCcu5pxKpcLrRJvfALNCNfXO4qaclScwYRz
- OOUeCTM18KH1AsW5zqqqS4UsXWQ6yKJb4fIKs8NydZYhvbTCE8xY1hWkFWQEtjblRhop
- pDNv0qwxpzewGHXhYVSC7SgiMfM5t6rnGJt68zSzye+IorlQsRcyLF+VxYN5rttfPnk9
- oQZA==
+ d=sifive.com; s=google; t=1717483281; x=1718088081; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=zm2gmNUyLiYeot720PZVrFYl2KkhT9X1YFFONMEoscE=;
+ b=ayjLK7LKa1k70BmfAAxATqmdQQBzhZeO+u1Y53YubpL1V63mj+4tVk3UYP3qfE7W1j
+ 5ArF3i7k0zEM4gBGz+8LcvmrdeoTUN+XL5X2oPKXqw7E3pSwuhyaHjr7hWtVH0zsvoUl
+ 34+gaO1B6RbyWNeHlZ2Y6KkpkuanNlXgxPgOb4eLGaeImBjVYFbH4JGtAtQcOT4HKY8q
+ ty7G+j2uj416EmtfheJMv8Lp1mk627xDgVmYMdT9GNJoHlKDsRYg4GEcVHSEVMGvnKkc
+ TYMZuN8T+ZgdExr0kadDKzc5S8NE9A/OckimY3doK7km9S0Ilc+BbOozleRP4weKI2yE
+ 7Hrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717482156; x=1718086956;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=hjK9w4dqjAkqFbNC+54zCtsFUYuidAUsOJ629MgVBnU=;
- b=IZrJ+fkqTitKKvGu9XEp30xU6EonhCXn/IWUSpKJu82nu4r5WqC/gMaD8eu1esqytM
- HUpSYB8sj9jn34/62itNyNn0QU2uES653lhaWYKJ1XNaGkk57nr57m2eVa49KVVR9/XT
- AZQjguxITSKDXUT+o0f2W9jydDiMkgXg1eTTFeAFU9u3tQyoUcdz6LklEUkbi8XdVVU3
- ddb/0OtVOwaczaUVrfXvJ2jwJczf4CY7Tg+SY4ZC43cg7/1ej7zpLkeuTbq6/5YEwAKx
- l2l5rFvz5GLX5DUvk4lamtLEtchogD77YS9+r8AzaRiDDRA3YBAAS/bJqWwitGEQqE0t
- P4gQ==
+ d=1e100.net; s=20230601; t=1717483281; x=1718088081;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=zm2gmNUyLiYeot720PZVrFYl2KkhT9X1YFFONMEoscE=;
+ b=qHGZSsfWALbtclrPsunSTss+ImZgxAnNBZz1TG2V7YV/hsmb4GTVVs64kn849RDhWf
+ i6uEuZKuTaQKYaAM24Ycr7FRhx6cnoSUEPpgcIyJSqFS/VZ6iyEtqkdWKN7qrM38ngOT
+ 7TZZv77dsgn0VzfPekeXzAmSlHCdeZvNe0FYuUxbCl4+xoOAWXd2rUWHTRxorTvqsmqR
+ HQWmNeYmzJgp+Kz9xl67CSsKXf2Q51xibl7FAlxPjLJixRLX8Hko/wS2U6sZMldw2zfv
+ kNTvteIF57/Up/XearW9a4xo96vxICo+Khj0SgY6OGeR9KTPJSpR8JkofVHeaATYzJWE
+ cXQQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVxdQzYVayFqx3QhPKqNeHOZ0ALEqnkbQYXXVfjyqXMO6QoF+WcPjZlOt1oyNNFOwzu5WOakZ1cSays6Z3epW8oX6my6Yo=
-X-Gm-Message-State: AOJu0YxJKZyiruDUKiQSJbMLcq+gmaNDxgmzzMfdhF/VeLS+UmY4RPnk
- H767A3AGm4Tn/mkIvbRU6BNZH/ruxGSF4uONjVZBR37UlI/d7mhTW5h/NzARmuE=
-X-Google-Smtp-Source: AGHT+IEpxCWsnqHJ3JU4zZqgzja9LurmvDnkE1Xp7m6V2es63sIYon7WTc65lp7mYXVEKPLrHufFLw==
-X-Received: by 2002:a17:90a:df96:b0:2be:b9:da18 with SMTP id
- 98e67ed59e1d1-2c1dc560b85mr9587083a91.2.1717482156182; 
- Mon, 03 Jun 2024 23:22:36 -0700 (PDT)
-Received: from hsinchu36-syssw02.internal.sifive.com
- (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2c1dcb56014sm7115617a91.25.2024.06.03.23.22.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Jun 2024 23:22:35 -0700 (PDT)
-From: "Fea.Wang" <fea.wang@sifive.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Jim Shu <jim.shu@sifive.com>,
- "Fea . Wang" <fea.wang@sifive.com>, Frank Chang <frank.chang@sifive.com>
-Subject: [PATCH v3 1/6] target/riscv: Reuse the conversion function of
- priv_spec
-Date: Tue,  4 Jun 2024 14:27:42 +0800
-Message-Id: <20240604062747.9212-2-fea.wang@sifive.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240604062747.9212-1-fea.wang@sifive.com>
-References: <20240604062747.9212-1-fea.wang@sifive.com>
+ AJvYcCUBLp6m1Omt7OHbnrXHhF+3wkj74LxAJgHPOYeO0YSOcnlNeHh8Ekrt8RYkdt086jRveDlYngYbHnMFLxNVsjJwsUvwYc4=
+X-Gm-Message-State: AOJu0YxW86A9zqQfgwFikALtV8/w/MZLhT8p8nSxHndu/CCaajXslH6F
+ O8UGkUB0ZUhG0VOqArltRBX7j9nu7uA8GOprRcm0iPGJoJhAr+C8go9YLdruAPsQXgxnr4g5/MR
+ V9Kho66RvXLV5yVPBlLgw/RIhd/447tS639IVmg==
+X-Google-Smtp-Source: AGHT+IG45rJsRmI49kOjiXKUIYqrAnz2yUq+LkPMrhma6QwCgLxIkt+fFFcgzvwKsK7E0s+tYFTK5w+IrtGzbqthfrE=
+X-Received: by 2002:a05:6122:910:b0:4eb:1b53:47a8 with SMTP id
+ 71dfb90a1353d-4eb1b5357bdmr4491058e0c.15.1717483281356; Mon, 03 Jun 2024
+ 23:41:21 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
- envelope-from=fea.wang@sifive.com; helo=mail-pj1-x1036.google.com
+References: <20240603055248.3928469-1-fea.wang@sifive.com>
+ <20240603055248.3928469-2-fea.wang@sifive.com>
+ <CAJy5ezr-_xnjXqtZnqaWSagMD8pGgU2bDUD0TsHxfkYvQYeHpw@mail.gmail.com>
+In-Reply-To: <CAJy5ezr-_xnjXqtZnqaWSagMD8pGgU2bDUD0TsHxfkYvQYeHpw@mail.gmail.com>
+From: Fea Wang <fea.wang@sifive.com>
+Date: Tue, 4 Jun 2024 14:41:10 +0800
+Message-ID: <CAKhCfscTZ7PVosWxoozYOpJUhVj=vYPChnEZzK0SYrd6KORi_g@mail.gmail.com>
+Subject: Re: [PATCH 1/4] hw/dma: Enhance error handling in loading description
+To: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Alistair Francis <alistair@alistair23.me>,
+ Peter Maydell <peter.maydell@linaro.org>, 
+ Jason Wang <jasowang@redhat.com>, "open list:Xilinx Zynq" <qemu-arm@nongnu.org>
+Content-Type: multipart/alternative; boundary="000000000000e4b1c2061a0abc6e"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2f;
+ envelope-from=fea.wang@sifive.com; helo=mail-vk1-xa2f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,71 +94,207 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Jim Shu <jim.shu@sifive.com>
+--000000000000e4b1c2061a0abc6e
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Public the conversion function of priv_spec in cpu.h, so that tcg-cpu.c
-could also use it.
+Hi Edgar,
+Thank you for recommending to me. I will make the change in the next
+version of the patch series.
 
-Signed-off-by: Jim Shu <jim.shu@sifive.com>
-Signed-off-by: Fea.Wang <fea.wang@sifive.com>
-Reviewed-by: Frank Chang <frank.chang@sifive.com>
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/cpu.c         |  2 +-
- target/riscv/cpu.h         |  1 +
- target/riscv/tcg/tcg-cpu.c | 13 ++++---------
- 3 files changed, 6 insertions(+), 10 deletions(-)
+Sincerely,
+Fea
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index cee6fc4a9a..e9e69b9863 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1786,7 +1786,7 @@ static int priv_spec_from_str(const char *priv_spec_str)
-     return priv_version;
- }
- 
--static const char *priv_spec_to_str(int priv_version)
-+const char *priv_spec_to_str(int priv_version)
- {
-     switch (priv_version) {
-     case PRIV_VERSION_1_10_0:
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 12d8b5344a..94600b91fa 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -829,4 +829,5 @@ const char *satp_mode_str(uint8_t satp_mode, bool is_32_bit);
- /* Implemented in th_csr.c */
- void th_register_custom_csrs(RISCVCPU *cpu);
- 
-+const char *priv_spec_to_str(int priv_version);
- #endif /* RISCV_CPU_H */
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index 683f604d9f..60fe0fd060 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -76,16 +76,11 @@ static void riscv_cpu_write_misa_bit(RISCVCPU *cpu, uint32_t bit,
- 
- static const char *cpu_priv_ver_to_str(int priv_ver)
- {
--    switch (priv_ver) {
--    case PRIV_VERSION_1_10_0:
--        return "v1.10.0";
--    case PRIV_VERSION_1_11_0:
--        return "v1.11.0";
--    case PRIV_VERSION_1_12_0:
--        return "v1.12.0";
--    }
-+    const char *priv_spec_str = priv_spec_to_str(priv_ver);
- 
--    g_assert_not_reached();
-+    g_assert(priv_spec_str);
-+
-+    return priv_spec_str;
- }
- 
- static void riscv_cpu_synchronize_from_tb(CPUState *cs,
--- 
-2.34.1
+On Mon, Jun 3, 2024 at 6:19=E2=80=AFPM Edgar E. Iglesias <edgar.iglesias@gm=
+ail.com>
+wrote:
 
+> On Mon, Jun 3, 2024 at 7:47=E2=80=AFAM Fea.Wang <fea.wang@sifive.com> wro=
+te:
+>
+>> Loading a description from memory may cause a bus-error. In this
+>> case, the DMA should stop working, set the error flag, and return
+>> the error value.
+>>
+>> Signed-off-by: Fea.Wang <fea.wang@sifive.com>
+>>
+>
+>
+> Hi Fea,
+>
+> I've got a couple of small comments:
+>
+>
+> ---
+>>  hw/dma/xilinx_axidma.c | 16 ++++++++++++++--
+>>  1 file changed, 14 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/hw/dma/xilinx_axidma.c b/hw/dma/xilinx_axidma.c
+>> index 0ae056ed06..4b475e5484 100644
+>> --- a/hw/dma/xilinx_axidma.c
+>> +++ b/hw/dma/xilinx_axidma.c
+>> @@ -71,8 +71,10 @@ enum {
+>>  enum {
+>>      DMASR_HALTED =3D 1,
+>>      DMASR_IDLE  =3D 2,
+>> +    DMASR_SLVERR =3D 1 << 5,
+>>
+>
+> We should also add DMASR_DECERR =3D 1 << 6
+>
+>
+>>      DMASR_IOC_IRQ  =3D 1 << 12,
+>>      DMASR_DLY_IRQ  =3D 1 << 13,
+>> +    DMASR_ERR_IRQ  =3D 1 << 14,
+>>
+>>      DMASR_IRQ_MASK =3D 7 << 12
+>>  };
+>> @@ -190,17 +192,27 @@ static inline int streamid_from_addr(hwaddr addr)
+>>      return sid;
+>>  }
+>>
+>> -static void stream_desc_load(struct Stream *s, hwaddr addr)
+>> +static MemTxResult stream_desc_load(struct Stream *s, hwaddr addr)
+>>  {
+>>      struct SDesc *d =3D &s->desc;
+>>
+>> -    address_space_read(&s->dma->as, addr, MEMTXATTRS_UNSPECIFIED, d,
+>> sizeof *d);
+>> +    MemTxResult result =3D address_space_read(&s->dma->as,
+>> +                                            addr, MEMTXATTRS_UNSPECIFIE=
+D,
+>> +                                            d, sizeof *d);
+>> +    if (result !=3D MEMTX_OK) {
+>> +        s->regs[R_DMACR] &=3D ~DMACR_RUNSTOP;
+>> +        s->regs[R_DMASR] |=3D DMASR_HALTED;
+>> +        s->regs[R_DMASR] |=3D DMASR_SLVERR;
+>>
+>
+> ... and map MEMTX_DECODE_ERROR to DMASR_DECERR and everything else to
+> SLVERR, for example:
+> if (result =3D=3D MEMTX_DECODE_ERROR) {
+>     s->regs[R_DMASR] |=3D DMASR_DECERR;
+> } else {
+>     s->regs[R_DMASR] |=3D DMASR_SLVERR;
+> }
+>
+>
+>> +        s->regs[R_DMASR] |=3D DMASR_ERR_IRQ;
+>> +        return result;
+>> +    }
+>>
+>>      /* Convert from LE into host endianness.  */
+>>      d->buffer_address =3D le64_to_cpu(d->buffer_address);
+>>      d->nxtdesc =3D le64_to_cpu(d->nxtdesc);
+>>      d->control =3D le32_to_cpu(d->control);
+>>      d->status =3D le32_to_cpu(d->status);
+>> +    return result;
+>>  }
+>>
+>>  static void stream_desc_store(struct Stream *s, hwaddr addr)
+>> --
+>> 2.34.1
+>>
+>>
+
+--000000000000e4b1c2061a0abc6e
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hi=C2=A0Edgar,<div>Thank you for recommending to me. I wil=
+l make the change in the next version of the patch series.</div><div><br></=
+div><div>Sincerely,</div><div>Fea</div></div><br><div class=3D"gmail_quote"=
+><div dir=3D"ltr" class=3D"gmail_attr">On Mon, Jun 3, 2024 at 6:19=E2=80=AF=
+PM Edgar E. Iglesias &lt;<a href=3D"mailto:edgar.iglesias@gmail.com">edgar.=
+iglesias@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote=
+" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);=
+padding-left:1ex"><div dir=3D"ltr"><div dir=3D"ltr">On Mon, Jun 3, 2024 at =
+7:47=E2=80=AFAM Fea.Wang &lt;<a href=3D"mailto:fea.wang@sifive.com" target=
+=3D"_blank">fea.wang@sifive.com</a>&gt; wrote:<br></div><div class=3D"gmail=
+_quote"><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex=
+;border-left:1px solid rgb(204,204,204);padding-left:1ex">Loading a descrip=
+tion from memory may cause a bus-error. In this<br>
+case, the DMA should stop working, set the error flag, and return<br>
+the error value.<br>
+<br>
+Signed-off-by: Fea.Wang &lt;<a href=3D"mailto:fea.wang@sifive.com" target=
+=3D"_blank">fea.wang@sifive.com</a>&gt;<br></blockquote><div><br></div><div=
+><br></div><div>Hi Fea,</div><div><br></div><div>I&#39;ve got a couple of s=
+mall comments:</div><div>=C2=A0</div><div><br></div><blockquote class=3D"gm=
+ail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,=
+204,204);padding-left:1ex">
+---<br>
+=C2=A0hw/dma/xilinx_axidma.c | 16 ++++++++++++++--<br>
+=C2=A01 file changed, 14 insertions(+), 2 deletions(-)<br>
+<br>
+diff --git a/hw/dma/xilinx_axidma.c b/hw/dma/xilinx_axidma.c<br>
+index 0ae056ed06..4b475e5484 100644<br>
+--- a/hw/dma/xilinx_axidma.c<br>
++++ b/hw/dma/xilinx_axidma.c<br>
+@@ -71,8 +71,10 @@ enum {<br>
+=C2=A0enum {<br>
+=C2=A0 =C2=A0 =C2=A0DMASR_HALTED =3D 1,<br>
+=C2=A0 =C2=A0 =C2=A0DMASR_IDLE=C2=A0 =3D 2,<br>
++=C2=A0 =C2=A0 DMASR_SLVERR =3D 1 &lt;&lt; 5,<br></blockquote><div><br></di=
+v><div>We should also add DMASR_DECERR =3D 1 &lt;&lt; 6</div><div>=C2=A0</d=
+iv><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bord=
+er-left:1px solid rgb(204,204,204);padding-left:1ex">
+=C2=A0 =C2=A0 =C2=A0DMASR_IOC_IRQ=C2=A0 =3D 1 &lt;&lt; 12,<br>
+=C2=A0 =C2=A0 =C2=A0DMASR_DLY_IRQ=C2=A0 =3D 1 &lt;&lt; 13,<br>
++=C2=A0 =C2=A0 DMASR_ERR_IRQ=C2=A0 =3D 1 &lt;&lt; 14,<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0DMASR_IRQ_MASK =3D 7 &lt;&lt; 12<br>
+=C2=A0};<br>
+@@ -190,17 +192,27 @@ static inline int streamid_from_addr(hwaddr addr)<br>
+=C2=A0 =C2=A0 =C2=A0return sid;<br>
+=C2=A0}<br>
+<br>
+-static void stream_desc_load(struct Stream *s, hwaddr addr)<br>
++static MemTxResult stream_desc_load(struct Stream *s, hwaddr addr)<br>
+=C2=A0{<br>
+=C2=A0 =C2=A0 =C2=A0struct SDesc *d =3D &amp;s-&gt;desc;<br>
+<br>
+-=C2=A0 =C2=A0 address_space_read(&amp;s-&gt;dma-&gt;as, addr, MEMTXATTRS_U=
+NSPECIFIED, d, sizeof *d);<br>
++=C2=A0 =C2=A0 MemTxResult result =3D address_space_read(&amp;s-&gt;dma-&gt=
+;as,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 addr, MEMTXATTRS_UNSPECIFIED,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 d, sizeof *d);<br>
++=C2=A0 =C2=A0 if (result !=3D MEMTX_OK) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 s-&gt;regs[R_DMACR] &amp;=3D ~DMACR_RUNSTOP;<b=
+r>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 s-&gt;regs[R_DMASR] |=3D DMASR_HALTED;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 s-&gt;regs[R_DMASR] |=3D DMASR_SLVERR;<br></bl=
+ockquote><div><br></div><div>... and map MEMTX_DECODE_ERROR to DMASR_DECERR=
+ and everything else to SLVERR, for example:</div><div>if (result =3D=3D ME=
+MTX_DECODE_ERROR) {</div><div>=C2=A0 =C2=A0 s-&gt;regs[R_DMASR] |=3D DMASR_=
+DECERR;</div><div>} else {<br><div>=C2=A0 =C2=A0 s-&gt;regs[R_DMASR] |=3D D=
+MASR_SLVERR;</div></div><div>}</div><div>=C2=A0</div><blockquote class=3D"g=
+mail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204=
+,204,204);padding-left:1ex">
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 s-&gt;regs[R_DMASR] |=3D DMASR_ERR_IRQ;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 return result;<br>
++=C2=A0 =C2=A0 }<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0/* Convert from LE into host endianness.=C2=A0 */<br>
+=C2=A0 =C2=A0 =C2=A0d-&gt;buffer_address =3D le64_to_cpu(d-&gt;buffer_addre=
+ss);<br>
+=C2=A0 =C2=A0 =C2=A0d-&gt;nxtdesc =3D le64_to_cpu(d-&gt;nxtdesc);<br>
+=C2=A0 =C2=A0 =C2=A0d-&gt;control =3D le32_to_cpu(d-&gt;control);<br>
+=C2=A0 =C2=A0 =C2=A0d-&gt;status =3D le32_to_cpu(d-&gt;status);<br>
++=C2=A0 =C2=A0 return result;<br>
+=C2=A0}<br>
+<br>
+=C2=A0static void stream_desc_store(struct Stream *s, hwaddr addr)<br>
+-- <br>
+2.34.1<br>
+<br>
+</blockquote></div></div>
+</blockquote></div>
+
+--000000000000e4b1c2061a0abc6e--
 
