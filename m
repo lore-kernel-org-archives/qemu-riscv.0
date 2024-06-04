@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2441C25B7E
-	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Jun 2024 04:42:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96D9FC25B74
+	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Jun 2024 04:42:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sELze-00084k-0H; Tue, 04 Jun 2024 00:41:54 -0400
+	id 1sELzn-0008Dw-F7; Tue, 04 Jun 2024 00:42:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alvinga@andestech.com>)
- id 1sELzH-0007yp-BJ
- for qemu-riscv@nongnu.org; Tue, 04 Jun 2024 00:41:33 -0400
+ id 1sELzl-0008DS-Oe
+ for qemu-riscv@nongnu.org; Tue, 04 Jun 2024 00:42:01 -0400
 Received: from 60-248-80-70.hinet-ip.hinet.net ([60.248.80.70]
  helo=Atcsqr.andestech.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alvinga@andestech.com>)
- id 1sELzD-0000Iw-Oo
- for qemu-riscv@nongnu.org; Tue, 04 Jun 2024 00:41:30 -0400
+ id 1sELzj-0000LA-UK
+ for qemu-riscv@nongnu.org; Tue, 04 Jun 2024 00:42:01 -0400
 Received: from Atcsqr.andestech.com (localhost [127.0.0.2] (may be forged))
- by Atcsqr.andestech.com with ESMTP id 4544F9vL080383
- for <qemu-riscv@nongnu.org>; Tue, 4 Jun 2024 12:15:09 +0800 (+08)
+ by Atcsqr.andestech.com with ESMTP id 4544FJpC080433
+ for <qemu-riscv@nongnu.org>; Tue, 4 Jun 2024 12:15:19 +0800 (+08)
  (envelope-from alvinga@andestech.com)
 Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 4544F4o1080350;
- Tue, 4 Jun 2024 12:15:04 +0800 (+08)
+ by Atcsqr.andestech.com with ESMTP id 4544FEpH080405;
+ Tue, 4 Jun 2024 12:15:14 +0800 (+08)
  (envelope-from alvinga@andestech.com)
 Received: from alvinga-VirtualBox.andestech.com (10.0.13.68) by
  ATCPCS16.andestech.com (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0; 
- Tue, 4 Jun 2024 12:15:04 +0800
+ Tue, 4 Jun 2024 12:15:11 +0800
 To: <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>
 CC: <alistair.francis@wdc.com>, <bin.meng@windriver.com>,
  <liwei1518@gmail.com>, <dbarboza@ventanamicro.com>,
  <zhiwei_liu@linux.alibaba.com>, Alvin Chang <alvinga@andestech.com>
-Subject: [PATCH v5 2/4] target/riscv: Apply modularized matching conditions
- for breakpoint
-Date: Tue, 4 Jun 2024 12:14:43 +0800
-Message-ID: <20240604041445.244768-3-alvinga@andestech.com>
+Subject: [PATCH v5 4/4] target/riscv: Apply modularized matching conditions
+ for icount trigger
+Date: Tue, 4 Jun 2024 12:14:45 +0800
+Message-ID: <20240604041445.244768-5-alvinga@andestech.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240604041445.244768-1-alvinga@andestech.com>
 References: <20240604041445.244768-1-alvinga@andestech.com>
@@ -48,7 +48,7 @@ Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [10.0.13.68]
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 4544F9vL080383
+X-MAIL: Atcsqr.andestech.com 4544FJpC080433
 Received-SPF: pass client-ip=60.248.80.70; envelope-from=alvinga@andestech.com;
  helo=Atcsqr.andestech.com
 X-Spam_score_int: -8
@@ -75,80 +75,29 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 We have implemented trigger_common_match(), which checks if the enabled
-privilege levels of the trigger match CPU's current privilege level.
-Remove the related code in riscv_cpu_debug_check_breakpoint() and invoke
-trigger_common_match() to check the privilege levels of the type 2 and
-type 6 triggers for the breakpoints.
-
-This commit also changes the behavior of looping the triggers. In
-previous implementation, if we have a type 2 trigger and
-env->virt_enabled is true, we directly return false to stop the loop.
-Now we keep looping all the triggers until we find a matched trigger.
-
-Only the execution bit and the executed PC should be futher checked in
-riscv_cpu_debug_check_breakpoint().
+privilege levels of the trigger match CPU's current privilege level. We
+can invoke trigger_common_match() to check the privilege levels of the
+type 3 triggers.
 
 Signed-off-by: Alvin Chang <alvinga@andestech.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/debug.c | 31 ++++++++-----------------------
- 1 file changed, 8 insertions(+), 23 deletions(-)
+ target/riscv/debug.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/target/riscv/debug.c b/target/riscv/debug.c
-index 05e001d041..11125f333b 100644
+index c290d6002e..0b5099ff9a 100644
 --- a/target/riscv/debug.c
 +++ b/target/riscv/debug.c
-@@ -855,22 +855,18 @@ bool riscv_cpu_debug_check_breakpoint(CPUState *cs)
-         for (i = 0; i < RV_MAX_TRIGGERS; i++) {
-             trigger_type = get_trigger_type(env, i);
- 
-+            if (!trigger_common_match(env, trigger_type, i)) {
-+                continue;
-+            }
-+
-             switch (trigger_type) {
-             case TRIGGER_TYPE_AD_MATCH:
--                /* type 2 trigger cannot be fired in VU/VS mode */
--                if (env->virt_enabled) {
--                    return false;
--                }
--
-                 ctrl = env->tdata1[i];
-                 pc = env->tdata2[i];
- 
-                 if ((ctrl & TYPE2_EXEC) && (bp->pc == pc)) {
--                    /* check U/S/M bit against current privilege level */
--                    if ((ctrl >> 3) & BIT(env->priv)) {
--                        env->badaddr = pc;
--                        return true;
--                    }
-+                    env->badaddr = pc;
-+                    return true;
-                 }
-                 break;
-             case TRIGGER_TYPE_AD_MATCH6:
-@@ -878,19 +874,8 @@ bool riscv_cpu_debug_check_breakpoint(CPUState *cs)
-                 pc = env->tdata2[i];
- 
-                 if ((ctrl & TYPE6_EXEC) && (bp->pc == pc)) {
--                    if (env->virt_enabled) {
--                        /* check VU/VS bit against current privilege level */
--                        if ((ctrl >> 23) & BIT(env->priv)) {
--                            env->badaddr = pc;
--                            return true;
--                        }
--                    } else {
--                        /* check U/S/M bit against current privilege level */
--                        if ((ctrl >> 3) & BIT(env->priv)) {
--                            env->badaddr = pc;
--                            return true;
--                        }
--                    }
-+                    env->badaddr = pc;
-+                    return true;
-                 }
-                 break;
-             default:
+@@ -624,7 +624,7 @@ void helper_itrigger_match(CPURISCVState *env)
+         if (get_trigger_type(env, i) != TRIGGER_TYPE_INST_CNT) {
+             continue;
+         }
+-        if (check_itrigger_priv(env, i)) {
++        if (!trigger_common_match(env, TRIGGER_TYPE_INST_CNT, i)) {
+             continue;
+         }
+         count = itrigger_get_count(env, i);
 -- 
 2.34.1
 
