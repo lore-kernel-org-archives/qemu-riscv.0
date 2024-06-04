@@ -4,56 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 185D6C25B7E
-	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Jun 2024 09:15:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7783DC25B7E
+	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Jun 2024 09:30:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sEQGC-0006cJ-Dt; Tue, 04 Jun 2024 05:15:17 -0400
+	id 1sEQTy-0002Zz-Hs; Tue, 04 Jun 2024 05:29:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <yumin686@andestech.com>)
- id 1sEQFw-0006ag-Q4; Tue, 04 Jun 2024 05:15:01 -0400
-Received: from 60-248-80-70.hinet-ip.hinet.net ([60.248.80.70]
- helo=Atcsqr.andestech.com)
+ (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
+ id 1sEQTw-0002ZS-Qf
+ for qemu-riscv@nongnu.org; Tue, 04 Jun 2024 05:29:28 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <yumin686@andestech.com>)
- id 1sEQFt-0003QL-ED; Tue, 04 Jun 2024 05:15:00 -0400
-Received: from Atcsqr.andestech.com (localhost [127.0.0.2] (may be forged))
- by Atcsqr.andestech.com with ESMTP id 45494wWf090663;
- Tue, 4 Jun 2024 17:04:58 +0800 (+08)
- (envelope-from yumin686@andestech.com)
-Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 45494epg090481;
- Tue, 4 Jun 2024 17:04:40 +0800 (+08)
- (envelope-from yumin686@andestech.com)
-Received: from lubuntu-vb.andestech.com (10.0.12.32) by ATCPCS16.andestech.com
- (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0;
- Tue, 4 Jun 2024 17:04:40 +0800
-To: <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>
-CC: <palmer@dabbelt.com>, <alistair.francis@wdc.com>, <bin.meng@windriver.com>,
- <liwei1518@gmail.com>, <dbarboza@ventanamicro.com>,
- <zhiwei_liu@linux.alibaba.com>, <yumin686@andestech.com>, Alvin Chang
- <alvinga@andestech.com>
-Subject: [PATCH v4] target/riscv: raise an exception when CSRRS/CSRRC writes a
- read-only CSR
-Date: Tue, 4 Jun 2024 17:04:34 +0800
-Message-ID: <20240604090434.37136-1-yumin686@andestech.com>
-X-Mailer: git-send-email 2.34.1
+ (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
+ id 1sEQTu-0007PS-QS
+ for qemu-riscv@nongnu.org; Tue, 04 Jun 2024 05:29:28 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1717493365;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=hZ6BR7ZP0R1ebLkNmGoehN6rlFVKuR/AxIITl0TNwfA=;
+ b=ePiq7JhqqDPYLr5bq7LnDQPjMgtd7Gph1+gbhFjDZuxE6JdYBS0AwGONUITuAhSkByFl/p
+ hZBrA4p7UfcvvGON/KrAHb76S5tU1ZVUlN+6WPRE5L8RcjxhDq1f1bS+5xatWPv/r2nI8Q
+ aw7ZKVzwfw/jItKEUSPQVwEVnyRM9o8=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-436-ryezyYoeOaegVds3xkxEaw-1; Tue, 04 Jun 2024 05:29:21 -0400
+X-MC-Unique: ryezyYoeOaegVds3xkxEaw-1
+Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.10])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id CCF16803C81;
+ Tue,  4 Jun 2024 09:29:20 +0000 (UTC)
+Received: from redhat.com (unknown [10.42.28.51])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 25571492BCD;
+ Tue,  4 Jun 2024 09:29:17 +0000 (UTC)
+Date: Tue, 4 Jun 2024 10:29:15 +0100
+From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
+To: Zhao Liu <zhao1.liu@intel.com>
+Cc: Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Yanan Wang <wangyanan55@huawei.com>,
+ "Michael S . Tsirkin" <mst@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Eric Blake <eblake@redhat.com>, Markus Armbruster <armbru@redhat.com>,
+ Marcelo Tosatti <mtosatti@redhat.com>,
+ Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+ Sia Jee Heng <jeeheng.sia@starfivetech.com>, qemu-devel@nongnu.org,
+ kvm@vger.kernel.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
+ Zhenyu Wang <zhenyu.z.wang@intel.com>,
+ Dapeng Mi <dapeng1.mi@linux.intel.com>, Yongwei Ma <yongwei.ma@intel.com>
+Subject: Re: [RFC v2 0/7] Introduce SMP Cache Topology
+Message-ID: <Zl7ea2o2aaxXMj9X@redhat.com>
+References: <20240530101539.768484-1-zhao1.liu@intel.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.0.12.32]
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 45494wWf090663
-Received-SPF: pass client-ip=60.248.80.70; envelope-from=yumin686@andestech.com;
- helo=Atcsqr.andestech.com
-X-Spam_score_int: -8
-X-Spam_score: -0.9
-X-Spam_bar: /
-X-Spam_report: (-0.9 / 5.0 requ) BAYES_00=-1.9, RDNS_DYNAMIC=0.982,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001, TVD_RCVD_IP=0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+In-Reply-To: <20240530101539.768484-1-zhao1.liu@intel.com>
+User-Agent: Mutt/2.2.12 (2023-09-09)
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.10
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=berrange@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -66,187 +97,188 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-to:  Yu-Ming Chang <yumin686@andestech.com>
-From:  Yu-Ming Chang via <qemu-riscv@nongnu.org>
+Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Both CSRRS and CSRRC always read the addressed CSR and cause any read side
-effects regardless of rs1 and rd fields. Note that if rs1 specifies a register
-holding a zero value other than x0, the instruction will still attempt to write
-the unmodified value back to the CSR and will cause any attendant side effects.
+On Thu, May 30, 2024 at 06:15:32PM +0800, Zhao Liu wrote:
+> Hi,
+> 
+> Now that the i386 cache model has been able to define the topology
+> clearly, it's time to move on to discussing/advancing this feature about
+> configuring the cache topology with -smp as the following example:
+> 
+> -smp 32,sockets=2,dies=2,modules=2,cores=2,threads=2,maxcpus=32,\
+>      l1d-cache=core,l1i-cache=core,l2-cache=core,l3-cache=die
+> 
+> With the new cache topology options ("l1d-cache", "l1i-cache",
+> "l2-cache" and "l3-cache"), we could adjust the cache topology via -smp.
 
-So if CSRRS or CSRRC tries to write a read-only CSR with rs1 which specifies
-a register holding a zero value, an illegal instruction exception should be
-raised.
+Switching to QAPI for a second, your proposal is effectively
 
-Signed-off-by: Yu-Ming Chang <yumin686@andestech.com>
-Signed-off-by: Alvin Chang <alvinga@andestech.com>
----
-Hi Alistair,
-    This fixed the issue of riscv_csrrw_debug().
+    { 'enum': 'SMPCacheTopo',
+      'data': [ 'default','socket','die','cluster','module','core','thread'] }
 
-Best regards,
-Yuming
+   { 'struct': 'SMPConfiguration',
+     'data': {
+       '*cpus': 'int',
+       '*drawers': 'int',
+       '*books': 'int',
+       '*sockets': 'int',
+       '*dies': 'int',
+       '*clusters': 'int',
+       '*modules': 'int',
+       '*cores': 'int',
+       '*threads': 'int',
+       '*maxcpus': 'int',
+       '*l1d-cache': 'SMPCacheTopo',
+       '*l1i-cache': 'SMPCacheTopo',
+       '*l2-cache': 'SMPCacheTopo',
+       '*l3-cache': 'SMPCacheTopo',
+     } }
 
- target/riscv/cpu.h       |  4 +++
- target/riscv/csr.c       | 57 ++++++++++++++++++++++++++++++++++++----
- target/riscv/op_helper.c |  6 ++---
- 3 files changed, 58 insertions(+), 9 deletions(-)
+I think that would be more natural to express as an array of structs
+thus:
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 2d0c02c35b..72921bafc0 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -708,6 +708,8 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
- void riscv_cpu_update_mask(CPURISCVState *env);
- bool riscv_cpu_is_32bit(RISCVCPU *cpu);
- 
-+RISCVException riscv_csrr(CPURISCVState *env, int csrno,
-+                          target_ulong *ret_value);
- RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
-                            target_ulong *ret_value,
-                            target_ulong new_value, target_ulong write_mask);
-@@ -740,6 +742,8 @@ typedef RISCVException (*riscv_csr_op_fn)(CPURISCVState *env, int csrno,
-                                           target_ulong new_value,
-                                           target_ulong write_mask);
- 
-+RISCVException riscv_csrr_i128(CPURISCVState *env, int csrno,
-+                               Int128 *ret_value);
- RISCVException riscv_csrrw_i128(CPURISCVState *env, int csrno,
-                                 Int128 *ret_value,
-                                 Int128 new_value, Int128 write_mask);
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 726096444f..aa765678b9 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -4312,7 +4312,7 @@ static RISCVException rmw_seed(CPURISCVState *env, int csrno,
- 
- static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
-                                                int csrno,
--                                               bool write_mask)
-+                                               bool write)
- {
-     /* check privileges and return RISCV_EXCP_ILLEGAL_INST if check fails */
-     bool read_only = get_field(csrno, 0xC00) == 3;
-@@ -4334,7 +4334,7 @@ static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
-     }
- 
-     /* read / write check */
--    if (write_mask && read_only) {
-+    if (write && read_only) {
-         return RISCV_EXCP_ILLEGAL_INST;
-     }
- 
-@@ -4421,11 +4421,22 @@ static RISCVException riscv_csrrw_do64(CPURISCVState *env, int csrno,
-     return RISCV_EXCP_NONE;
- }
- 
-+RISCVException riscv_csrr(CPURISCVState *env, int csrno,
-+                           target_ulong *ret_value)
-+{
-+    RISCVException ret = riscv_csrrw_check(env, csrno, false);
-+    if (ret != RISCV_EXCP_NONE) {
-+        return ret;
-+    }
-+
-+    return riscv_csrrw_do64(env, csrno, ret_value, 0, 0);
-+}
-+
- RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
-                            target_ulong *ret_value,
-                            target_ulong new_value, target_ulong write_mask)
- {
--    RISCVException ret = riscv_csrrw_check(env, csrno, write_mask);
-+    RISCVException ret = riscv_csrrw_check(env, csrno, true);
-     if (ret != RISCV_EXCP_NONE) {
-         return ret;
-     }
-@@ -4473,13 +4484,45 @@ static RISCVException riscv_csrrw_do128(CPURISCVState *env, int csrno,
-     return RISCV_EXCP_NONE;
- }
- 
-+RISCVException riscv_csrr_i128(CPURISCVState *env, int csrno,
-+                               Int128 *ret_value)
-+{
-+    RISCVException ret;
-+
-+    ret = riscv_csrrw_check(env, csrno, false);
-+    if (ret != RISCV_EXCP_NONE) {
-+        return ret;
-+    }
-+
-+    if (csr_ops[csrno].read128) {
-+        return riscv_csrrw_do128(env, csrno, ret_value,
-+                                 int128_zero(), int128_zero());
-+    }
-+
-+    /*
-+     * Fall back to 64-bit version for now, if the 128-bit alternative isn't
-+     * at all defined.
-+     * Note, some CSRs don't need to extend to MXLEN (64 upper bits non
-+     * significant), for those, this fallback is correctly handling the
-+     * accesses
-+     */
-+    target_ulong old_value;
-+    ret = riscv_csrrw_do64(env, csrno, &old_value,
-+                           (target_ulong)0,
-+                           (target_ulong)0);
-+    if (ret == RISCV_EXCP_NONE && ret_value) {
-+        *ret_value = int128_make64(old_value);
-+    }
-+    return ret;
-+}
-+
- RISCVException riscv_csrrw_i128(CPURISCVState *env, int csrno,
-                                 Int128 *ret_value,
-                                 Int128 new_value, Int128 write_mask)
- {
-     RISCVException ret;
- 
--    ret = riscv_csrrw_check(env, csrno, int128_nz(write_mask));
-+    ret = riscv_csrrw_check(env, csrno, true);
-     if (ret != RISCV_EXCP_NONE) {
-         return ret;
-     }
-@@ -4518,7 +4561,11 @@ RISCVException riscv_csrrw_debug(CPURISCVState *env, int csrno,
- #if !defined(CONFIG_USER_ONLY)
-     env->debugger = true;
- #endif
--    ret = riscv_csrrw(env, csrno, ret_value, new_value, write_mask);
-+    if (!write_mask) {
-+        ret = riscv_csrr(env, csrno, ret_value);
-+    } else {
-+        ret = riscv_csrrw(env, csrno, ret_value, new_value, write_mask);
-+    }
- #if !defined(CONFIG_USER_ONLY)
-     env->debugger = false;
- #endif
-diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-index f414aaebdb..b95d47e9ac 100644
---- a/target/riscv/op_helper.c
-+++ b/target/riscv/op_helper.c
-@@ -51,7 +51,7 @@ target_ulong helper_csrr(CPURISCVState *env, int csr)
-     }
- 
-     target_ulong val = 0;
--    RISCVException ret = riscv_csrrw(env, csr, &val, 0, 0);
-+    RISCVException ret = riscv_csrr(env, csr, &val);
- 
-     if (ret != RISCV_EXCP_NONE) {
-         riscv_raise_exception(env, ret, GETPC());
-@@ -84,9 +84,7 @@ target_ulong helper_csrrw(CPURISCVState *env, int csr,
- target_ulong helper_csrr_i128(CPURISCVState *env, int csr)
- {
-     Int128 rv = int128_zero();
--    RISCVException ret = riscv_csrrw_i128(env, csr, &rv,
--                                          int128_zero(),
--                                          int128_zero());
-+    RISCVException ret = riscv_csrr_i128(env, csr, &rv);
- 
-     if (ret != RISCV_EXCP_NONE) {
-         riscv_raise_exception(env, ret, GETPC());
+    { 'enum': 'SMPCacheTopo',
+      'data': [ 'default','socket','die','cluster','module','core','thread'] }
+
+    { 'enum': 'SMPCacheType',
+      'data': [ 'l1d', 'l1i', 'l2', 'l3' ] }
+     
+    { 'struct': 'SMPCache',
+      'data': {
+        'type': 'SMPCacheType',
+        'topo': 'SMPCacheTopo',
+      } }
+
+   { 'struct': 'SMPConfiguration',
+     'data': {
+       '*cpus': 'int',
+       '*drawers': 'int',
+       '*books': 'int',
+       '*sockets': 'int',
+       '*dies': 'int',
+       '*clusters': 'int',
+       '*modules': 'int',
+       '*cores': 'int',
+       '*threads': 'int',
+       '*maxcpus': 'int',
+       'caches': [ 'SMPCache' ]
+     } }
+
+Giving an example in (hypothetical) JSON cli syntax of:
+
+  -smp  "{'cpus':32,'sockets':2,'dies':2,'modules':2,
+          'cores':2,'threads':2,'maxcpus':32,'caches': [
+	    {'type':'l1d','topo':'core' },
+	    {'type':'l1i','topo':'core' },
+	    {'type':'l2','topo':'core' },
+	    {'type':'l3','topo':'die' },
+	  ]}"
+
+
+> Open about How to Handle the Default Options
+> ============================================
+> 
+> (For the detailed description of this series, pls skip this "long"
+> section and review the subsequent content.)
+> 
+> 
+> Background of OPEN
+> ------------------
+> 
+> Daniel and I discussed initial thoughts on cache topology, and there was
+> an idea that the default *cache_topo is on the CORE level [3]:
+> 
+> > simply preferring "cores" for everything is a reasonable
+> > default long term plan for everything, unless the specific
+> > architecture target has no concept of "cores".
+
+FYI, when I wrote that I wasn't specifically thinking about cache
+mappings. I just meant that when exposing SMP topology to guests,
+'cores' is a good default, compared to 'sockets', or 'threads',etc.
+
+Defaults for cache <-> topology  mappings should be whatever makes
+most sense to the architecture target/cpu.
+
+> Problem with this OPEN
+> ----------------------
+> 
+> Some arches have their own arch-specific cache topology, such as l1 per
+> core/l2 per core/l3 per die for i386. And as Jeehang proposed for
+> RISC-V, the cache topologies are like: l1/l2 per core and l3 per
+> cluster. 
+> 
+> Taking L3 as an example, logically there is a difference between the two
+> starting points of user-specified core level and with the default core
+> level.
+> 
+> For example,
+> 
+> "(user-specified) l3-cache-topo=core" should override i386's default l3
+> per core, but i386's default l3 per core should also override
+> "(default) l3-cache-topo=core" because this default value is like a
+> placeholder that specifies nothing.
+> 
+> However, from a command line parsing perspective, it's impossible to
+> tell what the “l3-cache-topo=core” setting is for...
+
+Yes, we need to explicitly distinguish built-in defaults from
+user specified data, otherwise we risk too many mistakes.
+
+> Options to solve OPEN
+> ---------------------
+> 
+> So, I think we have the following options:
+> 
+> 
+> 1. Can we avoid such default parameters?
+> ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> 
+> This would reduce the pain in QEMU, but I'm not sure if it's possible to
+> make libvirt happy?
+
+I think having an explicit "defualt" value is inevitable, not simply
+because of libvirt. Long experiance with QEMU shows that we need to
+be able to reliably distinguish direct user input from  built-in
+defaults in cases like this.
+
+> 
+> It is also possible to expose Cache topology information as the CPU
+> properties in “query-cpu-model-expansion type=full”, but that adds
+> arch-specific work.
+> 
+> If omitted, I think it's just like omitting “cores”/“sockets”,
+> leaving it up to the machine to decide based on the specific CPU model
+> (and now the cache topology is indeed determined by the CPU model as
+> well).
+> 
+> 
+> 2. If default is required, can we use a specific abstract word?
+> ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> 
+> That is, is it possible to use a specific word like “auto”/“invalid”
+> /“default” and avoid a specific topology level?
+
+"invalid" feels a bit wierd, but 'auto' or 'default' are fine,
+and possibly "unspecified"
+
+> Like setting “l3-cache-topo=invalid” (since I've only added the invalid
+> hierarchy so far ;-) ).
+> 
+> I found the cache topology of arches varies so much that I'm sorry to
+> say it's hard to have a uniform default cache topology.
+> 
+> 
+> I apologize for the very lengthy note and appreciate you reviewing it
+> here as well as your time!
+
+With regards,
+Daniel
 -- 
-2.34.1
+|: https://berrange.com      -o-    https://www.flickr.com/photos/dberrange :|
+|: https://libvirt.org         -o-            https://fstop138.berrange.com :|
+|: https://entangle-photo.org    -o-    https://www.instagram.com/dberrange :|
 
 
