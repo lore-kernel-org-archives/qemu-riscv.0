@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9C73C27C52
-	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Jun 2024 03:10:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A7F2C25B74
+	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Jun 2024 03:15:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sEKZ2-0007Gu-ME; Mon, 03 Jun 2024 23:10:20 -0400
+	id 1sEKeK-0000cW-0Y; Mon, 03 Jun 2024 23:15:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sEKZ1-0007Gf-9f; Mon, 03 Jun 2024 23:10:19 -0400
-Received: from mail-vk1-xa32.google.com ([2607:f8b0:4864:20::a32])
+ id 1sEKeH-0000cC-Nl; Mon, 03 Jun 2024 23:15:45 -0400
+Received: from mail-vk1-xa2e.google.com ([2607:f8b0:4864:20::a2e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sEKYz-0004dV-2v; Mon, 03 Jun 2024 23:10:19 -0400
-Received: by mail-vk1-xa32.google.com with SMTP id
- 71dfb90a1353d-4eb270d92eeso452975e0c.1; 
- Mon, 03 Jun 2024 20:10:16 -0700 (PDT)
+ id 1sEKeG-0007dB-4d; Mon, 03 Jun 2024 23:15:45 -0400
+Received: by mail-vk1-xa2e.google.com with SMTP id
+ 71dfb90a1353d-4e8a6159479so1960638e0c.3; 
+ Mon, 03 Jun 2024 20:15:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1717470615; x=1718075415; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1717470942; x=1718075742; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=phxOgEhIvFafXP9D4K8fApCkyVK8rdLJ9u0IJP/kP4M=;
- b=OSlvx0k88tNx452gvYIl2z2oK7z5OK3IPG6MMAuow2oBoDeKqKGmNKWdV1wxY38K4m
- SCiwTQG9EHsNH0mUwiCQy3skb/f5Ed0z4MgXvAq/Ec+CA/Zv0golUPLgE75Uuoxbt/WU
- OLcjolkTFMVPNm097o29VDVXHuOfCREvgWfcKtVZJ2bGGX8nXTGH+xYF2OEY3v4SbuXo
- /drTWS187DmbSCgPG16DgX+lV8gMEfhbyUzsMr3aMRwCbawK5RhR6Dh8X1H16/0qUzUf
- L0v8nmYc4xeYwCIYP87LwGMFAQipOERG574X/AU4l2pgI+2J4qGaFF1KSUzMO0kOGSa3
- EftQ==
+ bh=oa42MayHyGq46VBIQiJ1rcFmB0Wx74uG1AqTT7LifkA=;
+ b=lzEjbBWF35AniCe6+m/V+q6apnuRn1uTQ3HSOI2qdRiGIF4ftKJ54yQRBp/krGOJyF
+ H1AEmkK21yos14tf7oovJF7517Qt4C4IW4Wi/wjYg20E4MtVFs19/A3dhKmCmA2lJf7b
+ ZBND8i40ZnwamrF+aTDEudMJr8dq63BtqvyZ+Kbb6FppiK1n3D6XyH/xMamINB3VsiKf
+ rK6NR3KFuhuoXpAn4IGrZU2E+hBtHt6sSHTHlWZz3urPM4o2vPuZBx1g5cmP5zubabOm
+ yKiRcLU/dMNE2sNFo6f2pxz7c+Rrq7v5M+cOi97Ids4oLOhS65G9d2CmzfCTOK+je4We
+ WYTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717470615; x=1718075415;
+ d=1e100.net; s=20230601; t=1717470942; x=1718075742;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=phxOgEhIvFafXP9D4K8fApCkyVK8rdLJ9u0IJP/kP4M=;
- b=Oe2fD8oVf/jhLN3i7zTk6FVJm544BuWJNEdPiAUQQHsDM59ctPrdurCG7+m3Va2Jw1
- Ok8dAbwUnv5EUFtaahOwzVf38/rBuqh86NGUOnKvadvKwNCymyBB4yahBiV3llRtQ+L+
- Xy77A78+HJF08Vvc12QhKs2oMKLRb5Fxd4Cdblm9/amII3sFYfMLy1M6cWHdsGJFgpnX
- NuTAHEvqSFDTatq0YR2b4E9qzzoiBhHJ96IWenpAkRX6B8lMmhhwrAdUvaw9BUbPowaQ
- scnObQ2Uhn8zL6JTJfnWmp7pB8sJYg0od707Mf8T3ASU8Zz/Il1euADagCp07ICnP/ne
- 4Bgw==
+ bh=oa42MayHyGq46VBIQiJ1rcFmB0Wx74uG1AqTT7LifkA=;
+ b=rynY0F6KY00BbQu3fECV5cV52bxAmfYhDxVP346LFIdD2Bo9fQ5P5Zj1G0YAE+I+bw
+ ZC0eyaKdzrX3af/agWOCyOpB5WjweZCWbhKTmiw1ecqD9VJFM3KPGH1u5UIM70Fe7IsC
+ yimv0zdahrS2BItSSrZ7OTNYpONW/9zj6HjWKo9bPq1kU7NkH6jirwYGOKfWhgCFU9zm
+ Fx1m2YhUWssG8wzKGF70Z4WPD65pEmC0CDBDCz6qjFxI+G6A9vaXrqixXjVqmMWP8AFJ
+ NVFfA6C5KOJ6w7rKBnJIsHCSeWa8YQytlmUotBKQwEMmaPEO3mwf8Kp4iUUl0GrLNi9g
+ EOpA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUu2z5eF4kMtiLw6p6sEEXXPNY/20KJUHIzZEhfehK4S3p2h7cohjLw23AqbtWOo+Q9Q4MqIDqV558X8cn/KF2OW5+vOiE=
-X-Gm-Message-State: AOJu0YzUp9mCscql7AJmNIO3zffFq30iKaTgt5DO93hFZVqMGahpGCz+
- deRlDj9akpgYcPKKs2Q++HEj++X7xIWu0kWHW+aoY+K3kJWpqT26eKF6TTlkoa/u/RxmJony+4U
- RUe3YlJsk3Pcuj+PXcllfXbjtsTA=
-X-Google-Smtp-Source: AGHT+IE1uxXIa8NcXIQ9WZQDWABtYbkm5672RIF6k87qlFJ+36k+jyM8BMotoHGoLHVliMgO4riDQHnrBgd8XI1/X2I=
-X-Received: by 2002:ac5:cbc6:0:b0:4d3:39c3:717c with SMTP id
- 71dfb90a1353d-4eb02d7623dmr9831589e0c.1.1717470613878; Mon, 03 Jun 2024
- 20:10:13 -0700 (PDT)
+ AJvYcCVK5S+afhuGLaezuLm5yeeDH/soH6Zalwu48HOxp3aCNuWkqnZzWd0fokaoQVEY2dbH0rpaR2UpLBngQQtLkMppJn/9aZk=
+X-Gm-Message-State: AOJu0YymvIgc304wBDOnszR8lacRfVMjEBNG+Nx/cwCzJ5n4Q1MIM10y
+ YjD1TARL7G4lrQgyXEJOfLCAapvFnq5nRi/Ka4JLdjjH6WJodNiTlacMG4M8xQ/JqL9Y/uIoq0e
+ tEiDHn37AFl3g8QIYOIs1ChoQB/2jFCYh
+X-Google-Smtp-Source: AGHT+IGLP8nQhj5a9SwKCGnJoc4gKK66dWvSnZMWkOwFKHqPKRZ19ruFsJc4BAmYD4yIi+JSeUaPbYxWvMPnSybe6Js=
+X-Received: by 2002:a1f:e483:0:b0:4df:235b:8ba1 with SMTP id
+ 71dfb90a1353d-4eb02da89aemr10351036e0c.7.1717470942401; Mon, 03 Jun 2024
+ 20:15:42 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240523124045.1964-1-zhiwei_liu@linux.alibaba.com>
- <20240523124045.1964-3-zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20240523124045.1964-3-zhiwei_liu@linux.alibaba.com>
+ <20240523124045.1964-4-zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20240523124045.1964-4-zhiwei_liu@linux.alibaba.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 4 Jun 2024 13:09:47 +1000
-Message-ID: <CAKmqyKOe5GdCy4eDxP4v+uGoOQU19pYF2dOGQyCX97ByV4dEkA@mail.gmail.com>
-Subject: Re: [PATCH 2/6] target/riscv: Add AMO instructions for Zabha
+Date: Tue, 4 Jun 2024 13:15:16 +1000
+Message-ID: <CAKmqyKPGfCY-ZN+R2hv7Eei=vcTYvdCATQV_=7q2zWpCBgYEpw@mail.gmail.com>
+Subject: Re: [PATCH 3/6] target/riscv: Move gen_cmpxchg before adding
+ amocas.[b|h]
 To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com, 
  Alistair.Francis@wdc.com, dbarboza@ventanamicro.com, bmeng.cn@gmail.com, 
  liwei1518@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a32;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa32.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2e;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2e.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -103,221 +104,62 @@ Acked-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/cpu_cfg.h                      |   1 +
->  target/riscv/insn32.decode                  |  20 +++
->  target/riscv/insn_trans/trans_rvzabha.c.inc | 131 ++++++++++++++++++++
->  target/riscv/translate.c                    |   4 +-
->  4 files changed, 155 insertions(+), 1 deletion(-)
->  create mode 100644 target/riscv/insn_trans/trans_rvzabha.c.inc
+>  target/riscv/insn_trans/trans_rvzacas.c.inc | 13 -------------
+>  target/riscv/translate.c                    | 13 +++++++++++++
+>  2 files changed, 13 insertions(+), 13 deletions(-)
 >
-> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-> index b327b144d7..f241b0b173 100644
-> --- a/target/riscv/cpu_cfg.h
-> +++ b/target/riscv/cpu_cfg.h
-> @@ -84,6 +84,7 @@ struct RISCVCPUConfig {
->      bool ext_zaamo;
->      bool ext_zacas;
->      bool ext_zama16b;
-> +    bool ext_zabha;
->      bool ext_zalrsc;
->      bool ext_zawrs;
->      bool ext_zfa;
-> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-> index 972a1e8fd1..8a4801d442 100644
-> --- a/target/riscv/insn32.decode
-> +++ b/target/riscv/insn32.decode
-> @@ -1021,3 +1021,23 @@ amocas_q    00101 . . ..... ..... 100 ..... 010111=
-1 @atom_st
->  # *** Zimop may-be-operation extension ***
->  mop_r_n     1 . 00 .. 0111 .. ..... 100 ..... 0111011 @mop5
->  mop_rr_n    1 . 00 .. 1 ..... ..... 100 ..... 0111011 @mop3
-> +
-> +# *** Zabhb Standard Extension ***
-> +amoswap_b  00001 . . ..... ..... 000 ..... 0101111 @atom_st
-> +amoadd_b   00000 . . ..... ..... 000 ..... 0101111 @atom_st
-> +amoxor_b   00100 . . ..... ..... 000 ..... 0101111 @atom_st
-> +amoand_b   01100 . . ..... ..... 000 ..... 0101111 @atom_st
-> +amoor_b    01000 . . ..... ..... 000 ..... 0101111 @atom_st
-> +amomin_b   10000 . . ..... ..... 000 ..... 0101111 @atom_st
-> +amomax_b   10100 . . ..... ..... 000 ..... 0101111 @atom_st
-> +amominu_b  11000 . . ..... ..... 000 ..... 0101111 @atom_st
-> +amomaxu_b  11100 . . ..... ..... 000 ..... 0101111 @atom_st
-> +amoswap_h  00001 . . ..... ..... 001 ..... 0101111 @atom_st
-> +amoadd_h   00000 . . ..... ..... 001 ..... 0101111 @atom_st
-> +amoxor_h   00100 . . ..... ..... 001 ..... 0101111 @atom_st
-> +amoand_h   01100 . . ..... ..... 001 ..... 0101111 @atom_st
-> +amoor_h    01000 . . ..... ..... 001 ..... 0101111 @atom_st
-> +amomin_h   10000 . . ..... ..... 001 ..... 0101111 @atom_st
-> +amomax_h   10100 . . ..... ..... 001 ..... 0101111 @atom_st
-> +amominu_h  11000 . . ..... ..... 001 ..... 0101111 @atom_st
-> +amomaxu_h  11100 . . ..... ..... 001 ..... 0101111 @atom_st
-> diff --git a/target/riscv/insn_trans/trans_rvzabha.c.inc b/target/riscv/i=
-nsn_trans/trans_rvzabha.c.inc
-> new file mode 100644
-> index 0000000000..9093a1cfc1
-> --- /dev/null
-> +++ b/target/riscv/insn_trans/trans_rvzabha.c.inc
-> @@ -0,0 +1,131 @@
-> +/*
-> + * RISC-V translation routines for the Zabha Standard Extension.
-> + *
-> + * Copyright (c) 2024 Alibaba Group
-> + *
-> + * This program is free software; you can redistribute it and/or modify =
-it
-> + * under the terms and conditions of the GNU General Public License,
-> + * version 2 or later, as published by the Free Software Foundation.
-> + *
-> + * This program is distributed in the hope it will be useful, but WITHOU=
-T
-> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License=
- for
-> + * more details.
-> + *
-> + * You should have received a copy of the GNU General Public License alo=
-ng with
-> + * this program.  If not, see <http://www.gnu.org/licenses/>.
-> + */
-> +
-> +#define REQUIRE_ZABHA(ctx) do {           \
-> +    if (!ctx->cfg_ptr->ext_zabha) {       \
-> +        return false;                     \
-> +    }                                     \
-> +} while (0)
-> +
-> +static bool trans_amoswap_b(DisasContext *ctx, arg_amoswap_b *a)
-> +{
-> +    REQUIRE_ZABHA(ctx);
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_xchg_tl, MO_SB);
-> +}
-> +
-> +static bool trans_amoadd_b(DisasContext *ctx, arg_amoadd_b *a)
-> +{
-> +    REQUIRE_ZABHA(ctx);
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_add_tl, MO_SB);
-> +}
-> +
-> +static bool trans_amoxor_b(DisasContext *ctx, arg_amoxor_b *a)
-> +{
-> +    REQUIRE_ZABHA(ctx);
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_xor_tl, MO_SB);
-> +}
-> +
-> +static bool trans_amoand_b(DisasContext *ctx, arg_amoand_b *a)
-> +{
-> +    REQUIRE_ZABHA(ctx);
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_and_tl, MO_SB);
-> +}
-> +
-> +static bool trans_amoor_b(DisasContext *ctx, arg_amoor_b *a)
-> +{
-> +    REQUIRE_ZABHA(ctx);
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_or_tl, MO_SB);
-> +}
-> +
-> +static bool trans_amomin_b(DisasContext *ctx, arg_amomin_b *a)
-> +{
-> +    REQUIRE_ZABHA(ctx);
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smin_tl, MO_SB);
-> +}
-> +
-> +static bool trans_amomax_b(DisasContext *ctx, arg_amomax_b *a)
-> +{
-> +    REQUIRE_ZABHA(ctx);
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smax_tl, MO_SB);
-> +}
-> +
-> +static bool trans_amominu_b(DisasContext *ctx, arg_amominu_b *a)
-> +{
-> +    REQUIRE_ZABHA(ctx);
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umin_tl, MO_SB);
-> +}
-> +
-> +static bool trans_amomaxu_b(DisasContext *ctx, arg_amomaxu_b *a)
-> +{
-> +    REQUIRE_ZABHA(ctx);
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umax_tl, MO_SB);
-> +}
-> +
-> +static bool trans_amoswap_h(DisasContext *ctx, arg_amoswap_h *a)
-> +{
-> +    REQUIRE_ZABHA(ctx);
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_xchg_tl, MO_TESW);
-> +}
-> +
-> +static bool trans_amoadd_h(DisasContext *ctx, arg_amoadd_h *a)
-> +{
-> +    REQUIRE_ZABHA(ctx);
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_add_tl, MO_TESW);
-> +}
-> +
-> +static bool trans_amoxor_h(DisasContext *ctx, arg_amoxor_h *a)
-> +{
-> +    REQUIRE_ZABHA(ctx);
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_xor_tl, MO_TESW);
-> +}
-> +
-> +static bool trans_amoand_h(DisasContext *ctx, arg_amoand_h *a)
-> +{
-> +    REQUIRE_ZABHA(ctx);
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_and_tl, MO_TESW);
-> +}
-> +
-> +static bool trans_amoor_h(DisasContext *ctx, arg_amoor_h *a)
-> +{
-> +    REQUIRE_ZABHA(ctx);
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_or_tl, MO_TESW);
-> +}
-> +
-> +static bool trans_amomin_h(DisasContext *ctx, arg_amomin_h *a)
-> +{
-> +    REQUIRE_ZABHA(ctx);
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smin_tl, MO_TESW);
-> +}
-> +
-> +static bool trans_amomax_h(DisasContext *ctx, arg_amomax_h *a)
-> +{
-> +    REQUIRE_ZABHA(ctx);
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smax_tl, MO_TESW);
-> +}
-> +
-> +static bool trans_amominu_h(DisasContext *ctx, arg_amominu_h *a)
-> +{
-> +    REQUIRE_ZABHA(ctx);
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umin_tl, MO_TESW);
-> +}
-> +
-> +static bool trans_amomaxu_h(DisasContext *ctx, arg_amomaxu_h *a)
-> +{
-> +    REQUIRE_ZABHA(ctx);
-> +    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umax_tl, MO_TESW);
-> +}
+> diff --git a/target/riscv/insn_trans/trans_rvzacas.c.inc b/target/riscv/i=
+nsn_trans/trans_rvzacas.c.inc
+> index 5d274d4c08..fcced99fc7 100644
+> --- a/target/riscv/insn_trans/trans_rvzacas.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvzacas.c.inc
+> @@ -22,19 +22,6 @@
+>      }                                     \
+>  } while (0)
+>
+> -static bool gen_cmpxchg(DisasContext *ctx, arg_atomic *a, MemOp mop)
+> -{
+> -    TCGv dest =3D get_gpr(ctx, a->rd, EXT_NONE);
+> -    TCGv src1 =3D get_address(ctx, a->rs1, 0);
+> -    TCGv src2 =3D get_gpr(ctx, a->rs2, EXT_NONE);
+> -
+> -    decode_save_opc(ctx);
+> -    tcg_gen_atomic_cmpxchg_tl(dest, src1, dest, src2, ctx->mem_idx, mop)=
+;
+> -
+> -    gen_set_gpr(ctx, a->rd, dest);
+> -    return true;
+> -}
+> -
+>  static bool trans_amocas_w(DisasContext *ctx, arg_amocas_w *a)
+>  {
+>      REQUIRE_ZACAS(ctx);
 > diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index b160bcbfe0..f597542f1c 100644
+> index f597542f1c..0ce188bc91 100644
 > --- a/target/riscv/translate.c
 > +++ b/target/riscv/translate.c
-> @@ -1081,8 +1081,9 @@ static bool gen_amo(DisasContext *ctx, arg_atomic *=
-a,
->  {
->      TCGv dest =3D dest_gpr(ctx, a->rd);
->      TCGv src1, src2 =3D get_gpr(ctx, a->rs2, EXT_NONE);
-> +    MemOp size =3D mop & MO_SIZE;
+> @@ -1097,6 +1097,19 @@ static bool gen_amo(DisasContext *ctx, arg_atomic =
+*a,
+>      return true;
+>  }
 >
-> -    if (ctx->cfg_ptr->ext_zama16b) {
-> +    if (ctx->cfg_ptr->ext_zama16b && size >=3D MO_32) {
->          mop |=3D MO_ATOM_WITHIN16;
->      } else {
->          mop |=3D MO_ALIGN;
-> @@ -1116,6 +1117,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase,=
- target_ulong pc)
->  #include "insn_trans/trans_rvb.c.inc"
->  #include "insn_trans/trans_rvzicond.c.inc"
->  #include "insn_trans/trans_rvzacas.c.inc"
-> +#include "insn_trans/trans_rvzabha.c.inc"
->  #include "insn_trans/trans_rvzawrs.c.inc"
->  #include "insn_trans/trans_rvzicbo.c.inc"
->  #include "insn_trans/trans_rvzimop.c.inc"
+> +static bool gen_cmpxchg(DisasContext *ctx, arg_atomic *a, MemOp mop)
+> +{
+> +    TCGv dest =3D get_gpr(ctx, a->rd, EXT_NONE);
+> +    TCGv src1 =3D get_address(ctx, a->rs1, 0);
+> +    TCGv src2 =3D get_gpr(ctx, a->rs2, EXT_NONE);
+> +
+> +    decode_save_opc(ctx);
+> +    tcg_gen_atomic_cmpxchg_tl(dest, src1, dest, src2, ctx->mem_idx, mop)=
+;
+> +
+> +    gen_set_gpr(ctx, a->rd, dest);
+> +    return true;
+> +}
+> +
+>  static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
+>  {
+>      DisasContext *ctx =3D container_of(dcbase, DisasContext, base);
 > --
 > 2.25.1
 >
