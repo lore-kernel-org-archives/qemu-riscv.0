@@ -4,90 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49F6EC25B75
-	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Jun 2024 15:51:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03BD1C25B75
+	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Jun 2024 00:21:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sE9xT-0005Xz-WC; Mon, 03 Jun 2024 11:50:52 -0400
+	id 1sEHve-0005Pt-4K; Mon, 03 Jun 2024 20:21:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1sE9xT-0005Xh-Fe
- for qemu-riscv@nongnu.org; Mon, 03 Jun 2024 11:50:51 -0400
-Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1sEHvc-0005Na-1i; Mon, 03 Jun 2024 20:21:28 -0400
+Received: from mail-vs1-xe2e.google.com ([2607:f8b0:4864:20::e2e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1sE9xR-0004Kv-V2
- for qemu-riscv@nongnu.org; Mon, 03 Jun 2024 11:50:51 -0400
-Received: by mail-pj1-x1029.google.com with SMTP id
- 98e67ed59e1d1-2c19e6dc3dcso3710828a91.3
- for <qemu-riscv@nongnu.org>; Mon, 03 Jun 2024 08:50:49 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1sEHvY-0007Af-QI; Mon, 03 Jun 2024 20:21:27 -0400
+Received: by mail-vs1-xe2e.google.com with SMTP id
+ ada2fe7eead31-48bf6ab0838so36908137.1; 
+ Mon, 03 Jun 2024 17:21:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1717429848; x=1718034648; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=QoW/nxIl4dcOnHCwat6JlRacAMOvrHIs2V+96TGk/MM=;
- b=dclHzgQfN/88f9F3RiBt+65Mv2Rw2O8cPY+qMO3khsmjWuR485SX18W3c8amLj5noR
- jUttZq/L49Kw+g2wWNiLGDWsyiPQyLuYVBxznGa+YzukwcAUwCvvt02o2QTxmsJ+btyM
- f0OKzJu7bJ01bYI/Q6f9/SLU9UfR6GSPqx/sqMOqG2xnAL4W8hy3WFI96yuR7AKJ1MoH
- 19+POUKNTxOKjWZRXXDz/3MlNMxacdjHQbfq9FMPOwp84WPVbKz70jNkGjZHfT/843H2
- DdmuZgW6sKV5sND5ceQIsy1jVlgs4GPFbsPzlreWZbMYe4S/atiYSo1GPLZw8BCJEwAM
- xxfA==
+ d=gmail.com; s=20230601; t=1717460483; x=1718065283; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=AWaIlcKaZCeNCXTohAw9RJ/RUwG112CVVVSPBMxrlXs=;
+ b=cmRavhFrwegpWTuy3AVjzOwnVnxPrb6sfFRXOCpUg1SjCiunqAadj8wzSM1Io2f7U8
+ UEcT8Iqzp/GPj9XuYX2SuGxgsgyWlfIeJSchmGllYXIIjTTR3DTtHFOI6qLMFzq2j7xE
+ RlMRJIJA+V5ZNh5UsmO6rG1cW990W+L3Gt7yw8v+q++ILmoXcjjt1faYj2EAGx6dB/GE
+ PDx3ezpjCTXRAqBsvWYp13SunMZNA3Oi+hues1P9EbkIqTogRsv7GHmwQplThcuOeOMx
+ yhlOWKSmMqQdylp4ry1A8G5hcLoMxn1Myeol8t8tZGfSoU778XAWU7OIU5TO8PzfUMFS
+ n37A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717429848; x=1718034648;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=QoW/nxIl4dcOnHCwat6JlRacAMOvrHIs2V+96TGk/MM=;
- b=WxD4ajp93+N2bshn9yFIr9rT5dojhUMr2qgyDZtYz9q9Fk3jMTTM7w5KKN5juJJIZt
- 2U1k1OlmzDgjDgT1jh13C1ldW89Txwr1s5WRrNkNetbzQ7o39WK+I5XiEK1Qq70XABJY
- MMIqHRHomeXViJ/DkZT4FgcTJz4hIvwdOGXY40V1YFooxA+EB7W5Ec9tSXQPlFD6qXiE
- qkhQjSQMwC+eoyV5pnjtYfuYC/5Tavd30PLTKLxupyRbqd5z/3tq8qDQFB9o30y5H33+
- fkb61ndF/08RY04J9nu3IZrtITrLKXj+uXpjY451zLQJwdY4+SP08GGo8lMVDvIf609v
- FvOg==
+ d=1e100.net; s=20230601; t=1717460483; x=1718065283;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=AWaIlcKaZCeNCXTohAw9RJ/RUwG112CVVVSPBMxrlXs=;
+ b=fUyXkpqPvGl25R2ik1foBUH5/qACxVHn2ylGfsw79EeMUfes4L7lZtNZUyXtbQRkuY
+ eSOJvFKz/dBaD4B1S0DmPpH4ShWePFgPCmfbO+AY47kBPvbFrigbkv5mj+uPGCNtlcuR
+ xpOlCoNk1HzKy/eEPgQeZdxFg61bD/vBHY8JjhCZiF27ev59izPrFMOnhXl3SHmgMiJN
+ dukiCiBPQ7/fbwspoIHNlfGPvekSyFPSwdRn+VQ2KrR/WG7d5u8uuMx0vkYQdUZw46Nx
+ ej+VU8dhh2z1LII9DkosMzJQhEEYJp7EQYw1J5kSAP/m4f7uydlcSx93itTc5f/Rc4MF
+ 9BAA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWOGvtEhIya9h/6YJCL3Z3DvlGYiupZF3RWCbtPzTPvks9IdhCpBrYcJGbU20KuyLbQkxrAe2CJ9V7/TBTpOiPro1/OFiE=
-X-Gm-Message-State: AOJu0Yzx26HfzyWQdF0XI9uq6MhDTZZoy4as20sOHnSTKOgUGpZIw51r
- PzWO9j1Bnj0UeJV7TofzMSEUNyRw+tbidpddGSXqmHoJTI0X62oEXfiCnrD9Xv4=
-X-Google-Smtp-Source: AGHT+IHq4fpvclaUiYntHQa5JbuzYJ7+JQwgSlAWfZtaoz+aPENDBGnfLtLmVIk/W+AW2D1GxQdwUA==
-X-Received: by 2002:a17:90b:1918:b0:2a2:c16:d673 with SMTP id
- 98e67ed59e1d1-2c1dc5cce83mr8933619a91.36.1717429848065; 
- Mon, 03 Jun 2024 08:50:48 -0700 (PDT)
-Received: from [100.64.0.1] ([136.226.240.169])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2c1c28425ecsm6446943a91.53.2024.06.03.08.50.46
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 03 Jun 2024 08:50:47 -0700 (PDT)
-Message-ID: <595c3be7-7a33-4812-a80c-975b2eaaf5a6@sifive.com>
-Date: Mon, 3 Jun 2024 23:50:45 +0800
+ AJvYcCUX+VhbCPdlo85DBc1B/+1oZ3hfppj4dORIQT1QfBkMLP87RKRbvZhDQv5N1WnBL26wiwJJCYNCa2OmHFyIM0xGhAsX378=
+X-Gm-Message-State: AOJu0YwQ8fknOouxee8Ib9PmsaKgaqP3G5/oVzlFDfeqas44HohjVpLB
+ Og9iBw/wvqidA2PA6g2XPb7qw5ykolzmrHRpHQBLRP5QM13rkNh+dZ+HGEVk8FCmRtH4qZw21VS
+ HaknokcPNWU1bllpT50gDV+LieNQ=
+X-Google-Smtp-Source: AGHT+IGNR7MlsqegceTdgumsBVAVSy9Owu9sozt9BkqvVsSPMYtOoR6f4MRHrCuskBXVr9SbtqjSPjWLYnVudWbHFac=
+X-Received: by 2002:a05:6102:c3:b0:48b:bc7f:75f1 with SMTP id
+ ada2fe7eead31-48bc2124578mr10304441137.9.1717460482723; Mon, 03 Jun 2024
+ 17:21:22 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v2 5/6] target/riscv: rvv: Optimize v[l|s]e8.v with
- limitations
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: dbarboza@ventanamicro.com, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-References: <20240531174504.281461-1-max.chou@sifive.com>
- <20240531174504.281461-6-max.chou@sifive.com>
- <1016c817-d1e0-4dbd-8fd9-921bcdc23a0a@linaro.org>
-Content-Language: en-US
-From: Max Chou <max.chou@sifive.com>
-In-Reply-To: <1016c817-d1e0-4dbd-8fd9-921bcdc23a0a@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
- envelope-from=max.chou@sifive.com; helo=mail-pj1-x1029.google.com
-X-Spam_score_int: 12
-X-Spam_score: 1.2
-X-Spam_bar: +
-X-Spam_report: (1.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_SBL_CSS=3.335, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+References: <20240419110514.69697-1-philmd@linaro.org>
+ <fcbe4473-b460-4eae-ab33-e6e1ed723878@linaro.org>
+In-Reply-To: <fcbe4473-b460-4eae-ab33-e6e1ed723878@linaro.org>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 4 Jun 2024 10:20:56 +1000
+Message-ID: <CAKmqyKMefPOn3Wq8DJpH-85zO7+7DhLtEGymRvstQj4TjPGewA@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Use get_address() to get address with
+ Zicbom extensions
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ Christoph Muellner <cmuellner@linux.com>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Weiwei Li <liwei1518@gmail.com>, Palmer Dabbelt <palmer@rivosinc.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Zhiwei Jiang <jiangzw@tecorigin.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2e;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2e.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,40 +100,67 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Richart,
+On Wed, May 29, 2024 at 2:56=E2=80=AFPM Philippe Mathieu-Daud=C3=A9
+<philmd@linaro.org> wrote:
+>
+> ping?
 
-Thank you for your feedback.
-This version is created by referencing the gen_sve_ldr translation 
-function with the similar assumptions that no mask(predication)/no tail 
-agnostic/continuous load & store.
-You are right, the expansion is large in this version (over 20 TCG 
-instructions that suggested in tcg-op doc).
-I will provide next version with the helper function implementation like 
-sve_ldN_r in ARM target.
+I originally missed this patch somehow and it has then been fixed
+separately as part of
+https://patchew.org/QEMU/20240514023910.301766-1-alistair.francis@wdc.com/
 
-Thank you,
-Max
+Alistair
 
-On 2024/6/3 1:45 AM, Richard Henderson wrote:
-> On 5/31/24 12:44, Max Chou wrote:
->> The vector unit-stride load/store instructions (e.g. vle8.v/vse8.v)
->> perform continuous load/store. We can replace the corresponding helper
->> functions by TCG ops to copy more data at a time with following
->> assumptions:
->>
->> * Perform virtual address resolution once for entire vector at beginning
->> * Without mask
->> * Without tail agnostic
->> * Both host and target are little endian
->>
->> Signed-off-by: Max Chou <max.chou@sifive.com>
 >
-> Why are you generating all of this inline?  This expansion is very 
-> large.  I would expect you to get better performance with a helper 
-> function.
+> On 19/4/24 13:05, Philippe Mathieu-Daud=C3=A9 wrote:
+> > We need to use get_address() to get an address from cpu_gpr[],
+> > since $zero is "special" (NULL).
+> >
+> > Fixes: e05da09b7c ("target/riscv: implement Zicbom extension")
+> > Reported-by: Zhiwei Jiang (=E5=A7=9C=E6=99=BA=E4=BC=9F) <jiangzw@tecori=
+gin.com>
+> > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+> > ---
+> >   target/riscv/insn_trans/trans_rvzicbo.c.inc | 8 ++++----
+> >   1 file changed, 4 insertions(+), 4 deletions(-)
+> >
+> > diff --git a/target/riscv/insn_trans/trans_rvzicbo.c.inc b/target/riscv=
+/insn_trans/trans_rvzicbo.c.inc
+> > index d5d7095903..6f6b29598d 100644
+> > --- a/target/riscv/insn_trans/trans_rvzicbo.c.inc
+> > +++ b/target/riscv/insn_trans/trans_rvzicbo.c.inc
+> > @@ -31,27 +31,27 @@
+> >   static bool trans_cbo_clean(DisasContext *ctx, arg_cbo_clean *a)
+> >   {
+> >       REQUIRE_ZICBOM(ctx);
+> > -    gen_helper_cbo_clean_flush(tcg_env, cpu_gpr[a->rs1]);
+> > +    gen_helper_cbo_clean_flush(tcg_env, get_address(ctx, a->rs1, 0));
+> >       return true;
+> >   }
+> >
+> >   static bool trans_cbo_flush(DisasContext *ctx, arg_cbo_flush *a)
+> >   {
+> >       REQUIRE_ZICBOM(ctx);
+> > -    gen_helper_cbo_clean_flush(tcg_env, cpu_gpr[a->rs1]);
+> > +    gen_helper_cbo_clean_flush(tcg_env, get_address(ctx, a->rs1, 0));
+> >       return true;
+> >   }
+> >
+> >   static bool trans_cbo_inval(DisasContext *ctx, arg_cbo_inval *a)
+> >   {
+> >       REQUIRE_ZICBOM(ctx);
+> > -    gen_helper_cbo_inval(tcg_env, cpu_gpr[a->rs1]);
+> > +    gen_helper_cbo_inval(tcg_env, get_address(ctx, a->rs1, 0));
+> >       return true;
+> >   }
+> >
+> >   static bool trans_cbo_zero(DisasContext *ctx, arg_cbo_zero *a)
+> >   {
+> >       REQUIRE_ZICBOZ(ctx);
+> > -    gen_helper_cbo_zero(tcg_env, cpu_gpr[a->rs1]);
+> > +    gen_helper_cbo_zero(tcg_env, get_address(ctx, a->rs1, 0));
+> >       return true;
+> >   }
 >
-> AGAIN, please see the Arm implementation.
 >
->
-> r~
 
