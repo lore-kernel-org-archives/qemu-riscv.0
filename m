@@ -4,79 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03BD1C25B75
-	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Jun 2024 00:21:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F74EC25B75
+	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Jun 2024 00:27:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sEHve-0005Pt-4K; Mon, 03 Jun 2024 20:21:30 -0400
+	id 1sEI1c-0006uO-FL; Mon, 03 Jun 2024 20:27:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sEHvc-0005Na-1i; Mon, 03 Jun 2024 20:21:28 -0400
-Received: from mail-vs1-xe2e.google.com ([2607:f8b0:4864:20::e2e])
+ id 1sEI1b-0006u3-JP; Mon, 03 Jun 2024 20:27:39 -0400
+Received: from mail-vk1-xa32.google.com ([2607:f8b0:4864:20::a32])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sEHvY-0007Af-QI; Mon, 03 Jun 2024 20:21:27 -0400
-Received: by mail-vs1-xe2e.google.com with SMTP id
- ada2fe7eead31-48bf6ab0838so36908137.1; 
- Mon, 03 Jun 2024 17:21:23 -0700 (PDT)
+ id 1sEI1a-00037g-2v; Mon, 03 Jun 2024 20:27:39 -0400
+Received: by mail-vk1-xa32.google.com with SMTP id
+ 71dfb90a1353d-4eb236e27adso373623e0c.2; 
+ Mon, 03 Jun 2024 17:27:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1717460483; x=1718065283; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1717460856; x=1718065656; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AWaIlcKaZCeNCXTohAw9RJ/RUwG112CVVVSPBMxrlXs=;
- b=cmRavhFrwegpWTuy3AVjzOwnVnxPrb6sfFRXOCpUg1SjCiunqAadj8wzSM1Io2f7U8
- UEcT8Iqzp/GPj9XuYX2SuGxgsgyWlfIeJSchmGllYXIIjTTR3DTtHFOI6qLMFzq2j7xE
- RlMRJIJA+V5ZNh5UsmO6rG1cW990W+L3Gt7yw8v+q++ILmoXcjjt1faYj2EAGx6dB/GE
- PDx3ezpjCTXRAqBsvWYp13SunMZNA3Oi+hues1P9EbkIqTogRsv7GHmwQplThcuOeOMx
- yhlOWKSmMqQdylp4ry1A8G5hcLoMxn1Myeol8t8tZGfSoU778XAWU7OIU5TO8PzfUMFS
- n37A==
+ bh=gWTOe/tfjCXcGk0EYbvwZ35kxJOpjCa7a+Qs0WXKG6c=;
+ b=OixzbgKaUsRk8kbqe55RTcJCUHh5HL83905NJPPmk9Ey+1EoBUAlHWWS/m/TUel7hl
+ 46Iu8IYeC26nOSo6YUmt8jSVSr5PDA78YDGpqsf9dLxHj//9WJMjCe1oPtB4+UOkGF9E
+ esViN3owWzl5cBIbL+8EUclRwsogR8NLbttDJs8Jk0lOHb4yaGKJktFjCz86+lMUXLXX
+ jCldMU6CAHsrvl/ZyA6qvyKmdiNVs+0IegxNI2X5DDd/JTNg/Op8EKXXDbfxdUfZQmOp
+ 3Tu9rlfjHcrhXEFvzmVD2We2EfuTCfjGHXNQ/EOW7g9FVbZiGP6EECA2pQySv+ogUVGv
+ w30A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717460483; x=1718065283;
+ d=1e100.net; s=20230601; t=1717460856; x=1718065656;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AWaIlcKaZCeNCXTohAw9RJ/RUwG112CVVVSPBMxrlXs=;
- b=fUyXkpqPvGl25R2ik1foBUH5/qACxVHn2ylGfsw79EeMUfes4L7lZtNZUyXtbQRkuY
- eSOJvFKz/dBaD4B1S0DmPpH4ShWePFgPCmfbO+AY47kBPvbFrigbkv5mj+uPGCNtlcuR
- xpOlCoNk1HzKy/eEPgQeZdxFg61bD/vBHY8JjhCZiF27ev59izPrFMOnhXl3SHmgMiJN
- dukiCiBPQ7/fbwspoIHNlfGPvekSyFPSwdRn+VQ2KrR/WG7d5u8uuMx0vkYQdUZw46Nx
- ej+VU8dhh2z1LII9DkosMzJQhEEYJp7EQYw1J5kSAP/m4f7uydlcSx93itTc5f/Rc4MF
- 9BAA==
+ bh=gWTOe/tfjCXcGk0EYbvwZ35kxJOpjCa7a+Qs0WXKG6c=;
+ b=NlAy4g/F8y+x4wGzTYrl7OeAumMQVeFeSkOUv19o+jBlZcJDU+eijTq9+wbqWPyMDB
+ Z+GyAQkvhQ8MDpZJ8bjKuu9ipXXoIDgShm378dAhOP3O2zAHDnGsJEX9oDFizKvXhPA4
+ 5SsVcdWYtQg929YtkzFtD9fntTDjSMQGj2X/K/2clLUe0Y+mEK0+4mfTySaOn9PTsvip
+ RxwTeG+ogqpjorCucfopYT6sLBMpTihTwjelrD1Kx+moI0tRC7OzBP+6gg+Bu2ATXiks
+ tCodmPAupMJfWVBG39JrKeNIJ6hRg91ENNpQ8VQ3yrai6d9a6pXCbpjS6HDSbqMvBIhF
+ zuFw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUX+VhbCPdlo85DBc1B/+1oZ3hfppj4dORIQT1QfBkMLP87RKRbvZhDQv5N1WnBL26wiwJJCYNCa2OmHFyIM0xGhAsX378=
-X-Gm-Message-State: AOJu0YwQ8fknOouxee8Ib9PmsaKgaqP3G5/oVzlFDfeqas44HohjVpLB
- Og9iBw/wvqidA2PA6g2XPb7qw5ykolzmrHRpHQBLRP5QM13rkNh+dZ+HGEVk8FCmRtH4qZw21VS
- HaknokcPNWU1bllpT50gDV+LieNQ=
-X-Google-Smtp-Source: AGHT+IGNR7MlsqegceTdgumsBVAVSy9Owu9sozt9BkqvVsSPMYtOoR6f4MRHrCuskBXVr9SbtqjSPjWLYnVudWbHFac=
-X-Received: by 2002:a05:6102:c3:b0:48b:bc7f:75f1 with SMTP id
- ada2fe7eead31-48bc2124578mr10304441137.9.1717460482723; Mon, 03 Jun 2024
- 17:21:22 -0700 (PDT)
+ AJvYcCXSCkZWpCwGZFDWpISRMLL65AwpwQUHmHdAhKVlSKcG1+01ASFbFTBRWAyu+VbuWWBn4OjzuedeLTqqNShhdzTGnTODb0o=
+X-Gm-Message-State: AOJu0YyJD4m8cEZ/afRY9eL70tcF2nPbuAEiVB9gJvrqqmGC7mf35Lfa
+ AJj6aUNyYfo+sYRjICsEntcprJNP9gX6dxdno/Q34HI66StaJGQPHb6YlUsoBY6UFO7pmmP4ieM
+ uQz0QNBQ6F9vp6xYddn6HrbDTKEXlGg==
+X-Google-Smtp-Source: AGHT+IFXWlQpNPABdImP9NmpdxYMillxWqogf9cC0uWf6POiY40zlfOo9zfm8xrPG4EQkphCCdeQLfZBZLYUo2L0y7A=
+X-Received: by 2002:a05:6122:3126:b0:4eb:1219:b8c4 with SMTP id
+ 71dfb90a1353d-4eb1219e5d8mr7490982e0c.5.1717460854741; Mon, 03 Jun 2024
+ 17:27:34 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240419110514.69697-1-philmd@linaro.org>
- <fcbe4473-b460-4eae-ab33-e6e1ed723878@linaro.org>
-In-Reply-To: <fcbe4473-b460-4eae-ab33-e6e1ed723878@linaro.org>
+References: <20240227012405.71650-1-alvinga@andestech.com>
+ <20240227012405.71650-4-alvinga@andestech.com>
+In-Reply-To: <20240227012405.71650-4-alvinga@andestech.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 4 Jun 2024 10:20:56 +1000
-Message-ID: <CAKmqyKMefPOn3Wq8DJpH-85zO7+7DhLtEGymRvstQj4TjPGewA@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Use get_address() to get address with
- Zicbom extensions
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>, 
- Alistair Francis <alistair.francis@wdc.com>,
- Christoph Muellner <cmuellner@linux.com>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Weiwei Li <liwei1518@gmail.com>, Palmer Dabbelt <palmer@rivosinc.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Zhiwei Jiang <jiangzw@tecorigin.com>
+Date: Tue, 4 Jun 2024 10:27:08 +1000
+Message-ID: <CAKmqyKMZN4Re05PoLWcWvDPJWZ_CuK9BDuoj2-CcFz9fZDzggQ@mail.gmail.com>
+Subject: Re: [PATCH v4 3/4] target/riscv: Apply modularized matching
+ conditions for watchpoint
+To: Alvin Chang <alvinga@andestech.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, alistair.francis@wdc.com, 
+ bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com, 
+ zhiwei_liu@linux.alibaba.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2e;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a32;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa32.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -100,67 +94,93 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, May 29, 2024 at 2:56=E2=80=AFPM Philippe Mathieu-Daud=C3=A9
-<philmd@linaro.org> wrote:
+On Tue, Feb 27, 2024 at 11:26=E2=80=AFAM Alvin Chang via <qemu-devel@nongnu=
+.org> wrote:
 >
-> ping?
+> We have implemented trigger_common_match(), which checks if the enabled
+> privilege levels of the trigger match CPU's current privilege level.
+> Remove the related code in riscv_cpu_debug_check_watchpoint() and invoke
+> trigger_common_match() to check the privilege levels of the type 2 and
+> type 6 triggers for the watchpoints.
+>
+> This commit also changes the behavior of looping the triggers. In
+> previous implementation, if we have a type 2 trigger and
+> env->virt_enabled is true, we directly return false to stop the loop.
+> Now we keep looping all the triggers until we find a matched trigger.
+>
+> Only load/store bits and loaded/stored address should be further checked
+> in riscv_cpu_debug_check_watchpoint().
+>
+> Signed-off-by: Alvin Chang <alvinga@andestech.com>
 
-I originally missed this patch somehow and it has then been fixed
-separately as part of
-https://patchew.org/QEMU/20240514023910.301766-1-alistair.francis@wdc.com/
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
+>  target/riscv/debug.c | 26 ++++++--------------------
+>  1 file changed, 6 insertions(+), 20 deletions(-)
 >
-> On 19/4/24 13:05, Philippe Mathieu-Daud=C3=A9 wrote:
-> > We need to use get_address() to get an address from cpu_gpr[],
-> > since $zero is "special" (NULL).
-> >
-> > Fixes: e05da09b7c ("target/riscv: implement Zicbom extension")
-> > Reported-by: Zhiwei Jiang (=E5=A7=9C=E6=99=BA=E4=BC=9F) <jiangzw@tecori=
-gin.com>
-> > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
-> > ---
-> >   target/riscv/insn_trans/trans_rvzicbo.c.inc | 8 ++++----
-> >   1 file changed, 4 insertions(+), 4 deletions(-)
-> >
-> > diff --git a/target/riscv/insn_trans/trans_rvzicbo.c.inc b/target/riscv=
-/insn_trans/trans_rvzicbo.c.inc
-> > index d5d7095903..6f6b29598d 100644
-> > --- a/target/riscv/insn_trans/trans_rvzicbo.c.inc
-> > +++ b/target/riscv/insn_trans/trans_rvzicbo.c.inc
-> > @@ -31,27 +31,27 @@
-> >   static bool trans_cbo_clean(DisasContext *ctx, arg_cbo_clean *a)
-> >   {
-> >       REQUIRE_ZICBOM(ctx);
-> > -    gen_helper_cbo_clean_flush(tcg_env, cpu_gpr[a->rs1]);
-> > +    gen_helper_cbo_clean_flush(tcg_env, get_address(ctx, a->rs1, 0));
-> >       return true;
-> >   }
-> >
-> >   static bool trans_cbo_flush(DisasContext *ctx, arg_cbo_flush *a)
-> >   {
-> >       REQUIRE_ZICBOM(ctx);
-> > -    gen_helper_cbo_clean_flush(tcg_env, cpu_gpr[a->rs1]);
-> > +    gen_helper_cbo_clean_flush(tcg_env, get_address(ctx, a->rs1, 0));
-> >       return true;
-> >   }
-> >
-> >   static bool trans_cbo_inval(DisasContext *ctx, arg_cbo_inval *a)
-> >   {
-> >       REQUIRE_ZICBOM(ctx);
-> > -    gen_helper_cbo_inval(tcg_env, cpu_gpr[a->rs1]);
-> > +    gen_helper_cbo_inval(tcg_env, get_address(ctx, a->rs1, 0));
-> >       return true;
-> >   }
-> >
-> >   static bool trans_cbo_zero(DisasContext *ctx, arg_cbo_zero *a)
-> >   {
-> >       REQUIRE_ZICBOZ(ctx);
-> > -    gen_helper_cbo_zero(tcg_env, cpu_gpr[a->rs1]);
-> > +    gen_helper_cbo_zero(tcg_env, get_address(ctx, a->rs1, 0));
-> >       return true;
-> >   }
+> diff --git a/target/riscv/debug.c b/target/riscv/debug.c
+> index b7b0fa8945..9f9f332019 100644
+> --- a/target/riscv/debug.c
+> +++ b/target/riscv/debug.c
+> @@ -899,13 +899,12 @@ bool riscv_cpu_debug_check_watchpoint(CPUState *cs,=
+ CPUWatchpoint *wp)
+>      for (i =3D 0; i < RV_MAX_TRIGGERS; i++) {
+>          trigger_type =3D get_trigger_type(env, i);
+>
+> +        if (!trigger_common_match(env, trigger_type, i)) {
+> +            continue;
+> +        }
+> +
+>          switch (trigger_type) {
+>          case TRIGGER_TYPE_AD_MATCH:
+> -            /* type 2 trigger cannot be fired in VU/VS mode */
+> -            if (env->virt_enabled) {
+> -                return false;
+> -            }
+> -
+>              ctrl =3D env->tdata1[i];
+>              addr =3D env->tdata2[i];
+>              flags =3D 0;
+> @@ -918,10 +917,7 @@ bool riscv_cpu_debug_check_watchpoint(CPUState *cs, =
+CPUWatchpoint *wp)
+>              }
+>
+>              if ((wp->flags & flags) && (wp->vaddr =3D=3D addr)) {
+> -                /* check U/S/M bit against current privilege level */
+> -                if ((ctrl >> 3) & BIT(env->priv)) {
+> -                    return true;
+> -                }
+> +                return true;
+>              }
+>              break;
+>          case TRIGGER_TYPE_AD_MATCH6:
+> @@ -937,17 +933,7 @@ bool riscv_cpu_debug_check_watchpoint(CPUState *cs, =
+CPUWatchpoint *wp)
+>              }
+>
+>              if ((wp->flags & flags) && (wp->vaddr =3D=3D addr)) {
+> -                if (env->virt_enabled) {
+> -                    /* check VU/VS bit against current privilege level *=
+/
+> -                    if ((ctrl >> 23) & BIT(env->priv)) {
+> -                        return true;
+> -                    }
+> -                } else {
+> -                    /* check U/S/M bit against current privilege level *=
+/
+> -                    if ((ctrl >> 3) & BIT(env->priv)) {
+> -                        return true;
+> -                    }
+> -                }
+> +                return true;
+>              }
+>              break;
+>          default:
+> --
+> 2.34.1
 >
 >
 
