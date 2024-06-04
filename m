@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A513C25B75
-	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Jun 2024 01:10:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44D86C25B78
+	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Jun 2024 01:56:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sEIhM-0005b8-Uw; Mon, 03 Jun 2024 21:10:48 -0400
+	id 1sEJP0-0004eX-Si; Mon, 03 Jun 2024 21:55:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sEIhJ-0005aU-TS; Mon, 03 Jun 2024 21:10:45 -0400
-Received: from mail-ua1-x929.google.com ([2607:f8b0:4864:20::929])
+ id 1sEJOz-0004dP-2N; Mon, 03 Jun 2024 21:55:53 -0400
+Received: from mail-vk1-xa35.google.com ([2607:f8b0:4864:20::a35])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sEIhI-0003Oe-7D; Mon, 03 Jun 2024 21:10:45 -0400
-Received: by mail-ua1-x929.google.com with SMTP id
- a1e0cc1a2514c-80a8770ff33so1680488241.0; 
- Mon, 03 Jun 2024 18:10:43 -0700 (PDT)
+ id 1sEJOx-0003Bs-A5; Mon, 03 Jun 2024 21:55:52 -0400
+Received: by mail-vk1-xa35.google.com with SMTP id
+ 71dfb90a1353d-4e4efcc3d8fso191698e0c.0; 
+ Mon, 03 Jun 2024 18:55:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1717463443; x=1718068243; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1717466149; x=1718070949; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NQQr0yO2f2k5lhQE2ZGtWqWllPfCIwCEyaxAd/VsTE4=;
- b=H7hKgwSsbWCPKjpEc/20kwZE/o/WJ0qvtjK2gaAWPuqDxO4CzLtz4AbrVW9Ezgyk9b
- 9hPj2tPOObF44Pa5X9EAmJrTjFbDSgL7p64NrBP1BIy0+k9tMRgoAeoJVYfBkJBZRFpI
- Txiro3SrpSKFgw17z56wlK9GojVSQskf0HfdWSPpPXeBlluA8dsh24fbPn1QMdXMAAeM
- m0q5CJEq6ijAJ/fMMhI68wIuK8L1dZd29aqA8jNzwgXua9DrYZg65y8ER2tCqP97FOtp
- alKKUR0/dreomWSTm9t/djgc8ffC+bbfoi+KcocILb4mYGxe/o7qHCBynQ2AGULjN1I6
- IY4g==
+ bh=AifoIVClhFyTY/kVE3LzqwChPaDbD1HWrb5HkCwMW5s=;
+ b=UaHSzBjbI2hzPAsrxE9jds/QlWBYXHVqO5tFa0i3EcTAoTB5aq34tYDgf7ZMayjNr1
+ QLNXtGv6Qim+Wp34Tbz2gAQi0+udqdSboy1MSizsHTKSxDN7UEZzACrjaRiuiiz60gkR
+ DigQufZZkw1RLj7qQgbZPM9eqvqt7o6410XqxyIdcT6WmdeAXyztRfH2+xzQeDNuN7zw
+ U4wutZjKgpQiPKJWOV4BzuF4vXckKK60TSRxrG1pgzApgZtQxcXBSy56kaCmfZIi028V
+ UCYLAQKDd0na+nlDpJFm0Nm/cnDoueUGblnfrEzSqBtWRAkFm3SFdh83QPbhUCK6B80J
+ iY3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717463443; x=1718068243;
+ d=1e100.net; s=20230601; t=1717466149; x=1718070949;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NQQr0yO2f2k5lhQE2ZGtWqWllPfCIwCEyaxAd/VsTE4=;
- b=EgpaxEU5lw+AwO0wMmBfi/iVxbMv+Kee7CQXT84dU3G12G1owjrEFFk/wi+5gY4qR0
- iMjLCf/7Vs36IzyIhQtn6W34bD50eBcRk4WA1BnuO01d+V1bvMBwhXoYo+TZPE00b/oe
- pGUe2rnbi9dDoFHmJbEcfNLJiMuxI4k4BvKH+fZPv+HFX9uTvWfjpE/uOy6slMtoUpDF
- yDY6VAaGynjyTrER0b3scoj5AFIpyu4bpgJ0hFDsXTFyYArCpqGpfAmgfmV6kGRRDFeI
- gsPVA/s6E4ZT4WXvQ+beJHh8E6BUBRHj/om39+F5kcQX/SgQ+ivLmKgGYGjbQj3V/J1J
- wC2A==
+ bh=AifoIVClhFyTY/kVE3LzqwChPaDbD1HWrb5HkCwMW5s=;
+ b=MM6FX3i+ZtXbmrhtStHNctSO+rYfahS6XTVHXTQfU8ZOvzYK2UqbIfedJ862oiUBd7
+ 4cn4KXp6kIS7N7hZY371aGR0YWzZcRMgQGfExPo+HVDTJPX3IAMpw0wzThaSu6crcbOO
+ rB8qB44zt6oDtKubTVkpG/rYqZ7EYl2NAF/tNNEXQDuxMsi9CCZTlime5DOmVzS8bYBk
+ YcfUqpl15rHBJLhSJkL1iJ+GTaa3OTmIeAWEGKhXrr3twHOBCFxGF9D395ap1fMwLizZ
+ 3nqb6GN9vctsKfBefBiovJcd7U3LkOUmk7gVh448sxqSZgRbskAE0TfPP1xPOS9REx7x
+ jZHw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWkcfZw4jVTOACb87MbC+65XUi40k2Ihb1sNqYmrMXbLyM0NNmz0JmR/tvI7wl+bOD1Z5TIDOObeF9LGARv6j7XsxxrfEI=
-X-Gm-Message-State: AOJu0YwzMVG/7pJGSWOAzXR9N6PgGVXWjS/kObfvI2EIeQiv9qw04A6R
- N5PSt2k2dR3FQYpXMVYCKHI0t5mVWwXTtHd0BjBiG2VtOcCA2v+RY4Xk8qBZXH1zcjZ3JT8Lj1C
- CmWO8AMpD8ZAjsYz+YcOG/20FfRU=
-X-Google-Smtp-Source: AGHT+IErMXFhrlb/C1CDJtPLZeAbZ8re2wAn1kW9AFj5PAKXLKs/DGXjweLjcGHYYK2evjlzaZ2XFneYX1Vi4x1z4x8=
-X-Received: by 2002:a1f:ddc2:0:b0:4e4:ef76:3843 with SMTP id
- 71dfb90a1353d-4eb02d6d349mr9414489e0c.2.1717463442679; Mon, 03 Jun 2024
- 18:10:42 -0700 (PDT)
+ AJvYcCWUy5Wl5tBZiaDPQx+s4+eWdgd58mbgwIeqw3xjuop6cBbSY8hCxx+i5N3lD5500lB/IEnEdcsBlujElx/0/MqFlZhsSQY=
+X-Gm-Message-State: AOJu0YwCi4OjuvRJuMXjuzrYqeZzYjz/dd0lw4RMY1kdT9hEf1UCyuYJ
+ w3E9GznPpyqImKS+Ry7jD561JG1BICaW9MUlva15dno5VCU7gP8ymVoy9U4DeXUSS/qbdYf7fxV
+ E9mG4D7nG0srCzLUwrjUtOqb2t9g=
+X-Google-Smtp-Source: AGHT+IE+33EG7Jli7ObDU1ckZJohLri5dQVTBJXJepYYQl1kconkUAwR5KPvjASsPG9HlcfYNQ12W2EC0XRfO9bUgBE=
+X-Received: by 2002:a1f:fc0b:0:b0:4d3:36b9:2c26 with SMTP id
+ 71dfb90a1353d-4eb02f45d3emr10348321e0c.14.1717466147858; Mon, 03 Jun 2024
+ 18:55:47 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240324150949.20822-1-irina.ryapolova@syntacore.com>
- <20240324150949.20822-2-irina.ryapolova@syntacore.com>
-In-Reply-To: <20240324150949.20822-2-irina.ryapolova@syntacore.com>
+References: <20240520125157.311503-1-rkanwal@rivosinc.com>
+ <20240520125157.311503-2-rkanwal@rivosinc.com>
+In-Reply-To: <20240520125157.311503-2-rkanwal@rivosinc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 4 Jun 2024 11:10:16 +1000
-Message-ID: <CAKmqyKPSjYz0mHyGvaLwdqHjPETMr_UiMda2FnCyAghiFXCYfw@mail.gmail.com>
-Subject: Re: [PATCH v3 1/2] target/riscv/csr.c: Add functional of hvictl CSR
-To: Irina Ryapolova <irina.ryapolova@syntacore.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com, 
- alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com, 
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com
+Date: Tue, 4 Jun 2024 11:55:21 +1000
+Message-ID: <CAKmqyKPn95XCZPxVXqY+ZBC8o3Mip_jaC7k693DV4Z2QLMSe0A@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] target/riscv: Extend virtual irq csrs masks to be
+ 64 bit wide.
+To: Rajnesh Kanwal <rkanwal@rivosinc.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, alistair.francis@wdc.com, 
+ bin.meng@windriver.com, liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, 
+ zhiwei_liu@linux.alibaba.com, atishp@rivosinc.com, apatel@ventanamicro.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::929;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x929.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a35;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa35.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -93,86 +94,71 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Mar 25, 2024 at 1:11=E2=80=AFAM Irina Ryapolova
-<irina.ryapolova@syntacore.com> wrote:
+On Mon, May 20, 2024 at 10:53=E2=80=AFPM Rajnesh Kanwal <rkanwal@rivosinc.c=
+om> wrote:
 >
-> CSR hvictl (Hypervisor Virtual Interrupt Control) provides further flexib=
-ility
-> for injecting interrupts into VS level in situations not fully supported =
-by the
-> facilities described thus far, but only with more active involvement of t=
-he hypervisor.
+> AIA extends the width of all IRQ CSRs to 64bit even
+> in 32bit systems by adding missing half CSRs.
 >
-> A hypervisor must use hvictl for any of the following:
-> =E2=80=A2 asserting for VS level a major interrupt not supported by hvien=
- and hvip;
-> =E2=80=A2 implementing configurability of priorities at VS level for majo=
-r interrupts beyond those sup-
-> ported by hviprio1 and hviprio2; or
-> =E2=80=A2 emulating an external interrupt controller for a virtual hart w=
-ithout the use of an IMSIC=E2=80=99s
-> guest interrupt file, while also supporting configurable priorities both =
-for external interrupts
-> and for major interrupts to the virtual hart.
+> This seems to be missed while adding support for
+> virtual IRQs. The whole logic seems to be correct
+> except the width of the masks.
 >
-> All hvictl fields together can affect the value of CSR vstopi (Virtual Su=
-pervisor Top Interrupt)
-> and therefore the interrupt identity reported in vscause when an interrup=
-t traps to VS-mode.
-> When hvictl.VTI =3D 1, the absence of an interrupt for VS level can be in=
-dicated only by setting
-> hvictl.IID =3D 9. Software might want to use the pair IID =3D 9, IPRIO =
-=3D 0 generally to represent
-> no interrupt in hvictl.
+> Fixes: 1697837ed9 ("target/riscv: Add M-mode virtual interrupt and IRQ fi=
+ltering support.")
+> Fixes: 40336d5b1d ("target/riscv: Add HS-mode virtual interrupt and IRQ f=
+iltering support.")
 >
-> (See riscv-interrupts-1.0: Interrupts at VS level)
->
-> Signed-off-by: Irina Ryapolova <irina.ryapolova@syntacore.com>
+> Signed-off-by: Rajnesh Kanwal <rkanwal@rivosinc.com>
+> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
 Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
-> Changes for v2:
->   -added more information in commit message
-> Changes for v3:
->   -applied patch in master
-> ---
->  target/riscv/csr.c | 15 +++++++++++++++
->  1 file changed, 15 insertions(+)
+>  target/riscv/csr.c | 14 +++++++-------
+>  1 file changed, 7 insertions(+), 7 deletions(-)
 >
 > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 726096444f..4c2cbcd59f 100644
+> index 6b460ee0e8..152796ebc0 100644
 > --- a/target/riscv/csr.c
 > +++ b/target/riscv/csr.c
-> @@ -3613,6 +3613,21 @@ static RISCVException write_hvictl(CPURISCVState *=
-env, int csrno,
->                                     target_ulong val)
->  {
->      env->hvictl =3D val & HVICTL_VALID_MASK;
-> +    if (env->hvictl & HVICTL_VTI)
-> +    {
-> +        uint32_t hviid =3D get_field(env->hvictl, HVICTL_IID);
-> +        uint32_t hviprio =3D get_field(env->hvictl, HVICTL_IPRIO);
-> +        /* the pair IID =3D 9, IPRIO =3D 0 generally to represent no int=
-errupt in hvictl. */
-> +        if (!(hviid =3D=3D IRQ_S_EXT && hviprio =3D=3D 0)) {
-> +            uint64_t new_val =3D BIT(hviid) ;
-> +             if (new_val & S_MODE_INTERRUPTS) {
-> +                rmw_hvip64(env, csrno, NULL, new_val << 1, new_val << 1)=
-;
-> +            } else if (new_val & LOCAL_INTERRUPTS) {
-> +                rmw_hvip64(env, csrno, NULL, new_val, new_val);
-> +            }
-> +        }
-> +    }
-> +
->      return RISCV_EXCP_NONE;
->  }
+> @@ -1200,18 +1200,18 @@ static const target_ulong sstatus_v1_10_mask =3D =
+SSTATUS_SIE | SSTATUS_SPIE |
+>   */
 >
+>  /* Bit STIP can be an alias of mip.STIP that's why it's writable in mvip=
+. */
+> -static const target_ulong mvip_writable_mask =3D MIP_SSIP | MIP_STIP | M=
+IP_SEIP |
+> +static const uint64_t mvip_writable_mask =3D MIP_SSIP | MIP_STIP | MIP_S=
+EIP |
+>                                      LOCAL_INTERRUPTS;
+> -static const target_ulong mvien_writable_mask =3D MIP_SSIP | MIP_SEIP |
+> +static const uint64_t mvien_writable_mask =3D MIP_SSIP | MIP_SEIP |
+>                                      LOCAL_INTERRUPTS;
+>
+> -static const target_ulong sip_writable_mask =3D SIP_SSIP | LOCAL_INTERRU=
+PTS;
+> -static const target_ulong hip_writable_mask =3D MIP_VSSIP;
+> -static const target_ulong hvip_writable_mask =3D MIP_VSSIP | MIP_VSTIP |
+> +static const uint64_t sip_writable_mask =3D SIP_SSIP | LOCAL_INTERRUPTS;
+> +static const uint64_t hip_writable_mask =3D MIP_VSSIP;
+> +static const uint64_t hvip_writable_mask =3D MIP_VSSIP | MIP_VSTIP |
+>                                      MIP_VSEIP | LOCAL_INTERRUPTS;
+> -static const target_ulong hvien_writable_mask =3D LOCAL_INTERRUPTS;
+> +static const uint64_t hvien_writable_mask =3D LOCAL_INTERRUPTS;
+>
+> -static const target_ulong vsip_writable_mask =3D MIP_VSSIP | LOCAL_INTER=
+RUPTS;
+> +static const uint64_t vsip_writable_mask =3D MIP_VSSIP | LOCAL_INTERRUPT=
+S;
+>
+>  const bool valid_vm_1_10_32[16] =3D {
+>      [VM_1_10_MBARE] =3D true,
 > --
-> 2.25.1
+> 2.34.1
 >
 >
 
