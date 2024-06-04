@@ -4,73 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94FFBC25B75
-	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Jun 2024 01:57:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 837ECC25B75
+	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Jun 2024 01:59:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sEJQ8-0005sE-RH; Mon, 03 Jun 2024 21:57:04 -0400
+	id 1sEJRo-0007Tc-1y; Mon, 03 Jun 2024 21:58:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sEJQ7-0005re-H3; Mon, 03 Jun 2024 21:57:03 -0400
-Received: from mail-ua1-x934.google.com ([2607:f8b0:4864:20::934])
+ id 1sEJRl-0007Se-Pg; Mon, 03 Jun 2024 21:58:45 -0400
+Received: from mail-vk1-xa2f.google.com ([2607:f8b0:4864:20::a2f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sEJQ5-0004Tt-VT; Mon, 03 Jun 2024 21:57:03 -0400
-Received: by mail-ua1-x934.google.com with SMTP id
- a1e0cc1a2514c-80ae09dce7eso168414241.2; 
- Mon, 03 Jun 2024 18:57:01 -0700 (PDT)
+ id 1sEJRk-0004jS-4g; Mon, 03 Jun 2024 21:58:45 -0400
+Received: by mail-vk1-xa2f.google.com with SMTP id
+ 71dfb90a1353d-4eb0c729c2eso166886e0c.3; 
+ Mon, 03 Jun 2024 18:58:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1717466220; x=1718071020; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1717466322; x=1718071122; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ySfa1CDkr0sLjP7zH5puGDrbClQ4fIy+R9Wm2VOGKR4=;
- b=VJ0gPn6+YFGnsNn7NFQ4OqBa5onGvXEZgsTWdOiHQotZ/S7+F5dC+YLxSEDP8aLXi6
- jZt9f4RFsGhZG/mBhXiJpMR2HgHpjEZV0HAdgbk269UIrmFX3Is3h0mzIa3EBbXCUP3w
- JQbc09R56eh6+9XB8W6Zjn0+AGVVdS+NVA6fVNbS4sTUOt/gqAYLDnPJD12RPwhxGCtA
- l0tltP4xQN5h8ELh1anTfoFGTseEf3mIZvkEdQTouTzv0AU49LH6hIsRaaBaUHDlWe6Q
- 1XbftAOz6tfNEzzqtSpiOz2TDHGBIa+dJ5AQfW89sasNRtRXj5sco6ljZutyRTP0uSgh
- bj9w==
+ bh=bJuj2RFH0dFtelfSdxHxxfez/21ZSAxFzVTSpj1uwm4=;
+ b=U1ksQg8/0JuPHTnxYftgC09v3EvoynexGmDUrvY6L3OZGEvCu7LLR/yrUgaE3Yh6pJ
+ tdJoYvAqW/DPsOfIA3YbcukTVQSTTH72tlL2bxSbiImaGdR6FvzTVccuCNmaAbzG1QjA
+ y7QSvcy28rZfN49Okt7IyagnXvZQXaanGc/uvJnlF6i090eQmtSpcMLisqtMGe+AHAmW
+ 5tAswmsmr9OSFP0v48VbiWopM5K0GYnAQDg47JAy5sk3RMGyygiwOIqgG6IusE4X20gD
+ 047jE/vKzuwqOQ2b5TZTjaxp9U7cEijcQl3KoXhs6G8ZoaGVsyzhIQWvvv4aJRbx7Fac
+ RxrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717466220; x=1718071020;
+ d=1e100.net; s=20230601; t=1717466322; x=1718071122;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ySfa1CDkr0sLjP7zH5puGDrbClQ4fIy+R9Wm2VOGKR4=;
- b=bniawz+FGgrrDE1AbXisvrk6EomBet0lsB1vbvwwiHsBN/vj2oc6pQesajngib1d7Q
- g4gCiaVUz3gzfKvQmj3bAbcbXvFL6wkOmPy+h0XvS//4vFkOZjSTpjRkJwS9Uoa9PSsJ
- mjGDcCsuUnvXW6ME0IXTyUODi9nMxF+/AAegs+kY06ZXFK9FoxNJ8BnAAYX55+6RI7B+
- J/hHyTGwkCqngvZwxRPyPaj1+bjyQS4SuhbkK5zVMp5f+oGrAKLo0/p9Gc17U6uFLPpP
- N9mrUasDWa+Jh+nsSTX62HbbQbHsrSph7PVe9l0QhNjByEkr0u0R8OM6mW3PHu+hRCse
- Ihhw==
+ bh=bJuj2RFH0dFtelfSdxHxxfez/21ZSAxFzVTSpj1uwm4=;
+ b=Uk+GiMRu3tnifHA7Em7JP/1CZC3Pnhthcc/YzS1BpcrOLpnjjypjQ15OKI7TiGMHb0
+ OJbzHGcSOIgUP/udcKfrRu4/hqmUInAGDIXM4Y7aArsMVWYipoMZytoi7oSs9amJzuWE
+ 6PvPYCCx5b7doTA9keC0q9jV4QlCpELVfGx886cW5WrB6XcqmKSjB98RvCUlowgEmBth
+ uoczZOkeUrWIcp04nazhcqCD6eRfZ+jP2rka6jnPn+I/Zi3h45xYeBRYEQAkVm+qHW77
+ 7fkrv+xNHBhRkOwh8VfOHEDP4mtp223tl27CDL7+R6AVUegXFUsntOCXLjMJxu+FD1kp
+ ciFg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXEs8UlehtY3EG5apUKjTU28LCpMfNYne2vRdBXRAgDVh3lT77Mv9KFgqguY99JdEZUBHqa7KrcRI9T5mueuedYz0O2ELA=
-X-Gm-Message-State: AOJu0Yzh0uVPstfl05AF7btfFCI4T0Sh0HcO/KvlLQAUS+YD8lepv/bI
- RXnluEqEtXEz4b/qenPQZs9Y8oXO1tQPMq2J9xGGmNBugTT0Oj1kgoz7aVHSh5JJOxq28fwCWm/
- wi37D4q1yT3BkyfhhSCO8Nynt+qE=
-X-Google-Smtp-Source: AGHT+IFbk+yafazl/sYZI/ewoTuvuJ7udH85/8RNvqBeNeX5M0MukuoeIhw5JmcB8lN3BH9li9YwXqznb01Cw33pEbw=
-X-Received: by 2002:a67:c788:0:b0:48b:a903:bdbc with SMTP id
- ada2fe7eead31-48bc22d8bcamr10542449137.28.1717466220409; Mon, 03 Jun 2024
- 18:57:00 -0700 (PDT)
+ AJvYcCWrkEN2VKhOElWuX+6iC8NBtMKfB/XAMpWU8DAJDYTPcMs0mH+LUHlh8PKqn5xk3tunfrZuDEMbzTUzQVWzN3CDHHIr7sQ=
+X-Gm-Message-State: AOJu0YySdmrZwHRcFI4+VvXJJOutbgnzQiTUDuGNxohu/hQ7WrODKMmi
+ 9pqooLg6yZvl17akMNjJX+oZ/JFz775TBLWMDqq5e+AR0zNLhI/hIIUwIP2lyQvkCRT4a4D+OV4
+ HME2DUzSjDpVjWcOys/XKtnslXGA=
+X-Google-Smtp-Source: AGHT+IHvg3iO3Of846QvT1bukC9j240Ohyb+a9kkm5pKCBK6p/c5e9Xv/e58sCehz33Q89V3itQZzIJunlXEWR5gEZU=
+X-Received: by 2002:a1f:fc0b:0:b0:4d3:36b9:2c26 with SMTP id
+ 71dfb90a1353d-4eb02f45d3emr10352373e0c.14.1717466322476; Mon, 03 Jun 2024
+ 18:58:42 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240520125157.311503-1-rkanwal@rivosinc.com>
- <20240520125157.311503-3-rkanwal@rivosinc.com>
-In-Reply-To: <20240520125157.311503-3-rkanwal@rivosinc.com>
+References: <20240227012405.71650-1-alvinga@andestech.com>
+ <SEYPR03MB6700853CCA2198D3E7DA7E7DA8202@SEYPR03MB6700.apcprd03.prod.outlook.com>
+In-Reply-To: <SEYPR03MB6700853CCA2198D3E7DA7E7DA8202@SEYPR03MB6700.apcprd03.prod.outlook.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 4 Jun 2024 11:56:34 +1000
-Message-ID: <CAKmqyKPaRyh4vM0UgT4iDmDvJKYk1wxwLsz3Sj9PNFvqO_JMjA@mail.gmail.com>
-Subject: Re: [PATCH v2 2/2] target/riscv: Move Guest irqs out of the core
- local irqs range.
-To: Rajnesh Kanwal <rkanwal@rivosinc.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, alistair.francis@wdc.com, 
- bin.meng@windriver.com, liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, 
- zhiwei_liu@linux.alibaba.com, atishp@rivosinc.com, apatel@ventanamicro.com
+Date: Tue, 4 Jun 2024 11:58:16 +1000
+Message-ID: <CAKmqyKPT35UqF3xFqKbGgOx7ba_nDBVWjg20czMeJYfsJY8zvw@mail.gmail.com>
+Subject: Re: [PATCH v4 0/4] RISC-V: Modularize common match conditions for
+ trigger
+To: =?UTF-8?B?QWx2aW4gQ2hlLUNoaWEgQ2hhbmco5by15ZOy5ZiJKQ==?=
+ <alvinga@andestech.com>
+Cc: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, 
+ "alistair.francis@wdc.com" <alistair.francis@wdc.com>, 
+ "bin.meng@windriver.com" <bin.meng@windriver.com>,
+ "liwei1518@gmail.com" <liwei1518@gmail.com>, 
+ "dbarboza@ventanamicro.com" <dbarboza@ventanamicro.com>, 
+ "zhiwei_liu@linux.alibaba.com" <zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::934;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x934.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2f;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2f.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -94,77 +99,93 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, May 20, 2024 at 10:52=E2=80=AFPM Rajnesh Kanwal <rkanwal@rivosinc.c=
-om> wrote:
+On Thu, Mar 7, 2024 at 12:36=E2=80=AFPM Alvin Che-Chia Chang(=E5=BC=B5=E5=
+=93=B2=E5=98=89)
+<alvinga@andestech.com> wrote:
 >
-> Qemu maps IRQs 0:15 for core interrupts and 16 onward for
-> guest interrupts which are later translated to hgiep in
-> `riscv_cpu_set_irq()` function.
+> Hi Alistair,
 >
-> With virtual IRQ support added, software now can fully
-> use the whole local interrupt range without any actual
-> hardware attached.
->
-> This change moves the guest interrupt range after the
-> core local interrupt range to avoid clash.
->
-> Fixes: 1697837ed9 ("target/riscv: Add M-mode virtual interrupt and IRQ fi=
-ltering support.")
-> Fixes: 40336d5b1d ("target/riscv: Add HS-mode virtual interrupt and IRQ f=
-iltering support.")
->
-> Signed-off-by: Rajnesh Kanwal <rkanwal@rivosinc.com>
+> Please also take a look at this series, I guess it is ready to be applied=
+, thanks!
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+This is all acked now, do you mind rebasing on
+https://github.com/alistair23/qemu/tree/riscv-to-apply.next and
+sending a new version
 
 Alistair
 
-> ---
->  target/riscv/cpu_bits.h | 3 ++-
->  target/riscv/csr.c      | 9 ++++++++-
->  2 files changed, 10 insertions(+), 2 deletions(-)
->
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index 74318a925c..a470fda9be 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -695,7 +695,8 @@ typedef enum RISCVException {
->  #define IRQ_M_EXT                          11
->  #define IRQ_S_GEXT                         12
->  #define IRQ_PMU_OVF                        13
-> -#define IRQ_LOCAL_MAX                      16
-> +#define IRQ_LOCAL_MAX                      64
-> +/* -1 is due to bit zero of hgeip and hgeie being ROZ. */
->  #define IRQ_LOCAL_GUEST_MAX                (TARGET_LONG_BITS - 1)
->
->  /* mip masks */
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 152796ebc0..464e0e57a3 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -1148,7 +1148,14 @@ static RISCVException write_stimecmph(CPURISCVStat=
-e *env, int csrno,
->
->  #define VSTOPI_NUM_SRCS 5
->
-> -#define LOCAL_INTERRUPTS (~0x1FFF)
-> +/*
-> + * All core local interrupts except the fixed ones 0:12. This macro is f=
-or
-> + * virtual interrupts logic so please don't change this to avoid messing=
- up
-> + * the whole support, For reference see AIA spec: `5.3 Interrupt filteri=
-ng and
-> + * virtual interrupts for supervisor level` and `6.3.2 Virtual interrupt=
-s for
-> + * VS level`.
-> + */
-> +#define LOCAL_INTERRUPTS   (~0x1FFFULL)
->
->  static const uint64_t delegable_ints =3D
->      S_MODE_INTERRUPTS | VS_MODE_INTERRUPTS | MIP_LCOFIP;
-> --
-> 2.34.1
 >
 >
+> BRs,
+> Alvin
+>
+> > -----Original Message-----
+> > From: Alvin Che-Chia Chang(=E5=BC=B5=E5=93=B2=E5=98=89) <alvinga@andest=
+ech.com>
+> > Sent: Tuesday, February 27, 2024 9:24 AM
+> > To: qemu-riscv@nongnu.org; qemu-devel@nongnu.org
+> > Cc: alistair.francis@wdc.com; bin.meng@windriver.com;
+> > liwei1518@gmail.com; dbarboza@ventanamicro.com;
+> > zhiwei_liu@linux.alibaba.com; Alvin Che-Chia Chang(=E5=BC=B5=E5=93=B2=
+=E5=98=89)
+> > <alvinga@andestech.com>
+> > Subject: [PATCH v4 0/4] RISC-V: Modularize common match conditions for
+> > trigger
+> >
+> > According to RISC-V Debug specification ratified version 0.13 [1] (also=
+ applied
+> > to version 1.0 [2] but it has not been ratified yet), the enabled privi=
+lege levels
+> > of the trigger is common match conditions for all the types of the trig=
+ger.
+> >
+> > This series modularize the code for checking the privilege levels of ty=
+pe 2/3/6
+> > triggers by implementing functions trigger_common_match() and
+> > trigger_priv_match().
+> >
+> > Additional match conditions, such as CSR tcontrol and textra, can be fu=
+rther
+> > implemented into trigger_common_match() in the future.
+> >
+> > [1]: https://github.com/riscv/riscv-debug-spec/releases/tag/task_group_=
+vote
+> > [2]: https://github.com/riscv/riscv-debug-spec/releases/tag/1.0.0-rc1-a=
+sciidoc
+> >
+> > Changes from v3:
+> > - Change this series to target Debug Spec. version 0.13
+> >
+> > Changes from v2:
+> > - Explicitly mention the targeting version of RISC-V Debug Spec.
+> >
+> > Changes from v1:
+> > - Fix typo
+> > - Add commit description for changing behavior of looping the triggers
+> >   when we check type 2 triggers.
+> >
+> > Alvin Chang (4):
+> >   target/riscv: Add functions for common matching conditions of trigger
+> >   target/riscv: Apply modularized matching conditions for breakpoint
+> >   target/riscv: Apply modularized matching conditions for watchpoint
+> >   target/riscv: Apply modularized matching conditions for icount trigge=
+r
+> >
+> >  target/riscv/debug.c | 124 +++++++++++++++++++++++++++++--------------
+> >  1 file changed, 83 insertions(+), 41 deletions(-)
+> >
+> > --
+> > 2.34.1
+>
+> CONFIDENTIALITY NOTICE:
+>
+> This e-mail (and its attachments) may contain confidential and legally pr=
+ivileged information or information protected from disclosure. If you are n=
+ot the intended recipient, you are hereby notified that any disclosure, cop=
+ying, distribution, or use of the information contained herein is strictly =
+prohibited. In this case, please immediately notify the sender by return e-=
+mail, delete the message (and any accompanying documents) and destroy all p=
+rinted hard copies. Thank you for your cooperation.
+>
+> Copyright ANDES TECHNOLOGY CORPORATION - All Rights Reserved.
 
