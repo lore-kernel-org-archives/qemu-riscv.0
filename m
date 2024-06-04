@@ -4,73 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19FE4C25B75
-	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Jun 2024 00:28:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 244F5C25B75
+	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Jun 2024 00:31:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sEI2g-0007TT-0i; Mon, 03 Jun 2024 20:28:46 -0400
+	id 1sEI4s-0002NB-T0; Mon, 03 Jun 2024 20:31:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sEI2d-0007MI-3M; Mon, 03 Jun 2024 20:28:43 -0400
-Received: from mail-vk1-xa36.google.com ([2607:f8b0:4864:20::a36])
+ id 1sEI4n-0002Mk-A4; Mon, 03 Jun 2024 20:30:57 -0400
+Received: from mail-vk1-xa2f.google.com ([2607:f8b0:4864:20::a2f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sEI2a-0003Cj-P4; Mon, 03 Jun 2024 20:28:42 -0400
-Received: by mail-vk1-xa36.google.com with SMTP id
- 71dfb90a1353d-4eb0089b4a2so166065e0c.2; 
- Mon, 03 Jun 2024 17:28:37 -0700 (PDT)
+ id 1sEI4l-0003g2-H4; Mon, 03 Jun 2024 20:30:56 -0400
+Received: by mail-vk1-xa2f.google.com with SMTP id
+ 71dfb90a1353d-4eb02c0c851so1535781e0c.0; 
+ Mon, 03 Jun 2024 17:30:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1717460917; x=1718065717; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1717461054; x=1718065854; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1XlkvZagI0/biGibflFteTod8KWoRms0TIY5VStJWzk=;
- b=PrKMT025cm0OgEM3PUWgG46CqSvw4j82eZEHRK7K9J6/tkeWNDT+gzb4zJ/614svKW
- WD3HIJ2u6ZrknhTThbES//yeci0YCIXCSwXy7w3BPd2FAQcNAlX4tUxF8PYud+6x7o+B
- In3/x8ddKMWa5MQuCxTbAgiW9tVJMhUWmXWVd6ZmE8hEHWxELFkaMuOhsZTaWy15COHm
- DEOnECghL23Nb/wij8FXp1xYp9hNgQ9+Zcbe2xgwgTD+q9SjfQ7CN/QKS+SZAqOWJuOV
- gJ36B9a/gkk9sS9zN5JOdDCi0n+EnG13GFPYjeNnrvNU4GH1LoeCCZlLyxod37PMcyMg
- IB4g==
+ bh=X6VFLo7QK93O4DyvtWEzd63UAnTIpPgFf5wl+jFB00E=;
+ b=KP3YsVO45PuS41e6fRT3ZsogRfM8llEJnxag1VSKOsBIUuQap0GBAWHNiJacK21Zkj
+ G7+STb4m9COMoL9JXx3DoQmZ+wbtv3dQArMkHFntMZgeVKcRxr9NRVLOZoHXGrmTFxWg
+ q13jNGSxyosh/6q0d+SokDBPt9C/r/gioZqS3fvHnzFdg/LNcZ90/F7rHABLKUPqdpQD
+ kPiTg8G3yyTT+s6K2MFz0CwPNYwcpt7ytWaA84nZ+zGjnjHFBTWrZhXfC8wFR1DRfLkm
+ 3YmbbZQ8NPpKpK9ukQf3GY6nCJQxqz2jPHpsICzw8FsKPI68FHHxUtoLu+tCJ65qWUjY
+ DoFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717460917; x=1718065717;
+ d=1e100.net; s=20230601; t=1717461054; x=1718065854;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=1XlkvZagI0/biGibflFteTod8KWoRms0TIY5VStJWzk=;
- b=PkSjsqBrPAvr5mBRR7uGLgdTlWYTQhS4EH737iL0f9fU/vE8jKryA8eII7j9ggKEfs
- KDfNY6cHGV+Wo/+6f3O16ULdcnajIT1c6D3InwfKGKa0N3TSBckDcMxrK97HmpKhEm6P
- A9arXoyGTeseRd+D6W8Ni9kErlzwsB4vgVWB0eJsoKyWXL7cyTddbc4dFqXa5BgWzP06
- T0YfRlBWl9g+VYraGuGFrcmTXmvg2OR8owE+kx89jhWbiDubZ/e6otWlaKGP7vVo+Eo7
- sXmrKOyu07Ha2At3AEUPFUHjdaeFLfgWxQk+dIp3esB14qSKhrpWEVNmfgYAXCvVLHTM
- NhbQ==
+ bh=X6VFLo7QK93O4DyvtWEzd63UAnTIpPgFf5wl+jFB00E=;
+ b=ndztw8y04UxhKNsHmaziKGuyg5ljnAxJ/SncT8nNR98Y18C9psBTZgmczXNui664BC
+ 9YDjIdXV34IZeBF0aJCG8mrKqKVnS0yga3FRczL3ynmQXZOqW6R6wvRpEPCguYkKRxKR
+ ffQqKaycElWOpWxramSqDkRJSvUgoTQniOLFeVTeACYgF+4nRbt1td0G/A6kUz0fr/f9
+ e71vukVNkXTa5tzytO/ODeVD/vmgKn4lMk0Z4myq8/paRKKG5o/4LNI1EWl1/BkFsGrT
+ y6pCHOzBuWA+aTR79qOHQBCtBl8s9Ts5E6YHC+XrhKl/g7pT5GyqGffuX7bUtv5/2RA6
+ icLA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVKe+49nzvoEU74V4LWuqYa/XdNVF39FCPEmxP6gU7JkNtJo8DAvPS/Olw9TGJKGQYhIgkdRPU8TpGLG+AbfrdSlSCq7TY=
-X-Gm-Message-State: AOJu0YzcnVF6ueU0otO9sn0uEAVQyVVYkfvHe8tA7ongEB2JeGOR9IvD
- uqHfCW08M3GSQfnBdFpEDvHHbTGHjfLA/YPFtj7E5b+Vzozmrn663YPbmgcp5XYh3W9hNjd0Yd2
- TVjjIPrMXYFyuAAKySHxpONQNqEg9Wg==
-X-Google-Smtp-Source: AGHT+IG4jCGP2yVq4UlbVy+/dAFqMEG3EEGMkY4ng3VGxa8Jf+uUbbHnd9lMhid0iYkoWw1KNkNQotWI9BC8UhPq9X0=
-X-Received: by 2002:a1f:f847:0:b0:4ea:fe74:fe4a with SMTP id
- 71dfb90a1353d-4eb02e0962cmr10047722e0c.1.1717460915351; Mon, 03 Jun 2024
- 17:28:35 -0700 (PDT)
+ AJvYcCU4scse9vLOr4TdTuKWbDo1K120hLHDkbzgEZ34f/T8Qrk9k8O04KVPQ+QRDfBfzjR3IyvJF8k5ewp0IWfBpadpw1tpsIU=
+X-Gm-Message-State: AOJu0Yzn0En7GvvaOm7n/gBP9wVtqLlew+ZtJOn0g/HCPF2vumC36Nfm
+ LJ+zuBnX2t3NXj7+HZ8E7cYdwpgto0vb/K7oc10KkLUX93eF8edbd+pg4/wgz9NWh8s5aT9NYpR
+ r47BEfRQqWnK3D4y5IhKSxx0ajfc=
+X-Google-Smtp-Source: AGHT+IHXoFjVScHl2Ipu1jF2y4cCHt1G1Aa+kfJ/5WD7cSta18DYJ+BrJdZ8GxYlUROx61E81MWbsm+pfZr62NEffiQ=
+X-Received: by 2002:a05:6122:e6f:b0:4e4:ed90:27cc with SMTP id
+ 71dfb90a1353d-4eb02d7cb9dmr8227476e0c.2.1717461053803; Mon, 03 Jun 2024
+ 17:30:53 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240227012405.71650-1-alvinga@andestech.com>
- <20240227012405.71650-2-alvinga@andestech.com>
-In-Reply-To: <20240227012405.71650-2-alvinga@andestech.com>
+References: <20240515080605.2675399-1-fea.wang@sifive.com>
+ <20240515080605.2675399-2-fea.wang@sifive.com>
+In-Reply-To: <20240515080605.2675399-2-fea.wang@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 4 Jun 2024 10:28:09 +1000
-Message-ID: <CAKmqyKNgRvkFr0Tp2E4P_LB08XZFQ18xKZSZ471fXm-=JXzbeQ@mail.gmail.com>
-Subject: Re: [PATCH v4 1/4] target/riscv: Add functions for common matching
- conditions of trigger
-To: Alvin Chang <alvinga@andestech.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, alistair.francis@wdc.com, 
- bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com, 
- zhiwei_liu@linux.alibaba.com
+Date: Tue, 4 Jun 2024 10:30:27 +1000
+Message-ID: <CAKmqyKPKqt03UbMYyssX8kqAqkMM6hE+OTbDkhPxaffs8+FxUw@mail.gmail.com>
+Subject: Re: [RESEND PATCH v2 1/5] target/riscv: Reuse the conversion function
+ of priv_spec
+To: "Fea.Wang" <fea.wang@sifive.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, Jim Shu <jim.shu@sifive.com>,
+ Frank Chang <frank.chang@sifive.com>, LIU Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Andrew Jones <ajones@ventanamicro.com>, Max Chou <max.chou@sifive.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a36;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa36.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2f;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2f.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -94,121 +98,80 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Feb 27, 2024 at 11:26=E2=80=AFAM Alvin Chang via <qemu-devel@nongnu=
-.org> wrote:
+On Wed, May 15, 2024 at 6:03=E2=80=AFPM Fea.Wang <fea.wang@sifive.com> wrot=
+e:
 >
-> According to RISC-V Debug specification version 0.13 [1] (also applied
-> to version 1.0 [2] but it has not been ratified yet), there are several
-> common matching conditions before firing a trigger, including the
-> enabled privilege levels of the trigger.
+> From: Jim Shu <jim.shu@sifive.com>
 >
-> This commit adds trigger_common_match() to prepare the common matching
-> conditions for the type 2/3/6 triggers. For now, we just implement
-> trigger_priv_match() to check if the enabled privilege levels of the
-> trigger match CPU's current privilege level.
+> Public the conversion function of priv_spec in cpu.h, so that tcg-cpu.c
+> could also use it.
 >
-> [1]: https://github.com/riscv/riscv-debug-spec/releases/tag/task_group_vo=
-te
-> [2]: https://github.com/riscv/riscv-debug-spec/releases/tag/1.0.0-rc1-asc=
-iidoc
->
-> Signed-off-by: Alvin Chang <alvinga@andestech.com>
+> Signed-off-by: Jim Shu <jim.shu@sifive.com>
+> Signed-off-by: Fea.Wang <fea.wang@sifive.com>
+> Reviewed-by: Frank Chang <frank.chang@sifive.com>
+> Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/debug.c | 70 ++++++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 70 insertions(+)
+>  target/riscv/cpu.c         |  2 +-
+>  target/riscv/cpu.h         |  1 +
+>  target/riscv/tcg/tcg-cpu.c | 13 ++++---------
+>  3 files changed, 6 insertions(+), 10 deletions(-)
 >
-> diff --git a/target/riscv/debug.c b/target/riscv/debug.c
-> index e30d99cc2f..3891236b82 100644
-> --- a/target/riscv/debug.c
-> +++ b/target/riscv/debug.c
-> @@ -241,6 +241,76 @@ static void do_trigger_action(CPURISCVState *env, ta=
-rget_ulong trigger_index)
->      }
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 2946ac298a..6dd3d7f4a3 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -1786,7 +1786,7 @@ static int priv_spec_from_str(const char *priv_spec=
+_str)
+>      return priv_version;
 >  }
 >
-> +/*
-> + * Check the privilege level of specific trigger matches CPU's current p=
-rivilege
-> + * level.
-> + */
-> +static bool trigger_priv_match(CPURISCVState *env, trigger_type_t type,
-> +                               int trigger_index)
-> +{
-> +    target_ulong ctrl =3D env->tdata1[trigger_index];
-> +
-> +    switch (type) {
-> +    case TRIGGER_TYPE_AD_MATCH:
-> +        /* type 2 trigger cannot be fired in VU/VS mode */
-> +        if (env->virt_enabled) {
-> +            return false;
-> +        }
-> +        /* check U/S/M bit against current privilege level */
-> +        if ((ctrl >> 3) & BIT(env->priv)) {
-> +            return true;
-> +        }
-> +        break;
-> +    case TRIGGER_TYPE_AD_MATCH6:
-> +        if (env->virt_enabled) {
-> +            /* check VU/VS bit against current privilege level */
-> +            if ((ctrl >> 23) & BIT(env->priv)) {
-> +                return true;
-> +            }
-> +        } else {
-> +            /* check U/S/M bit against current privilege level */
-> +            if ((ctrl >> 3) & BIT(env->priv)) {
-> +                return true;
-> +            }
-> +        }
-> +        break;
-> +    case TRIGGER_TYPE_INST_CNT:
-> +        if (env->virt_enabled) {
-> +            /* check VU/VS bit against current privilege level */
-> +            if ((ctrl >> 25) & BIT(env->priv)) {
-> +                return true;
-> +            }
-> +        } else {
-> +            /* check U/S/M bit against current privilege level */
-> +            if ((ctrl >> 6) & BIT(env->priv)) {
-> +                return true;
-> +            }
-> +        }
-> +        break;
-> +    case TRIGGER_TYPE_INT:
-> +    case TRIGGER_TYPE_EXCP:
-> +    case TRIGGER_TYPE_EXT_SRC:
-> +        qemu_log_mask(LOG_UNIMP, "trigger type: %d is not supported\n", =
-type);
-> +        break;
-> +    case TRIGGER_TYPE_NO_EXIST:
-> +    case TRIGGER_TYPE_UNAVAIL:
-> +        qemu_log_mask(LOG_GUEST_ERROR, "trigger type: %d does not exist\=
-n",
-> +                      type);
-> +        break;
-> +    default:
-> +        g_assert_not_reached();
-> +    }
-> +
-> +    return false;
-> +}
-> +
-> +/* Common matching conditions for all types of the triggers. */
-> +static bool trigger_common_match(CPURISCVState *env, trigger_type_t type=
-,
-> +                                 int trigger_index)
-> +{
-> +    return trigger_priv_match(env, type, trigger_index);
-> +}
-> +
->  /* type 2 trigger */
+> -static const char *priv_spec_to_str(int priv_version)
+> +const char *priv_spec_to_str(int priv_version)
+>  {
+>      switch (priv_version) {
+>      case PRIV_VERSION_1_10_0:
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 1501868008..140eb43fcb 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -833,4 +833,5 @@ const char *satp_mode_str(uint8_t satp_mode, bool is_=
+32_bit);
+>  /* Implemented in th_csr.c */
+>  void th_register_custom_csrs(RISCVCPU *cpu);
 >
->  static uint32_t type2_breakpoint_size(CPURISCVState *env, target_ulong c=
-trl)
+> +const char *priv_spec_to_str(int priv_version);
+>  #endif /* RISCV_CPU_H */
+> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+> index f59b5d7f2d..fa186093fb 100644
+> --- a/target/riscv/tcg/tcg-cpu.c
+> +++ b/target/riscv/tcg/tcg-cpu.c
+> @@ -76,16 +76,11 @@ static void riscv_cpu_write_misa_bit(RISCVCPU *cpu, u=
+int32_t bit,
+>
+>  static const char *cpu_priv_ver_to_str(int priv_ver)
+>  {
+> -    switch (priv_ver) {
+> -    case PRIV_VERSION_1_10_0:
+> -        return "v1.10.0";
+> -    case PRIV_VERSION_1_11_0:
+> -        return "v1.11.0";
+> -    case PRIV_VERSION_1_12_0:
+> -        return "v1.12.0";
+> -    }
+> +    const char *priv_spec_str =3D priv_spec_to_str(priv_ver);
+>
+> -    g_assert_not_reached();
+> +    g_assert(priv_spec_str);
+> +
+> +    return priv_spec_str;
+>  }
+>
+>  static void riscv_cpu_synchronize_from_tb(CPUState *cs,
 > --
 > 2.34.1
 >
