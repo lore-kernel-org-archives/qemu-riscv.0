@@ -4,90 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6058C25B76
-	for <qemu-riscv@archiver.kernel.org>; Wed,  5 Jun 2024 06:33:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD372C25B76
+	for <qemu-riscv@archiver.kernel.org>; Wed,  5 Jun 2024 06:54:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sEkC8-0000qp-Sc; Wed, 05 Jun 2024 02:32:24 -0400
+	id 1sEkXW-0000Mu-7k; Wed, 05 Jun 2024 02:54:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1sEkC4-0000q3-JN
- for qemu-riscv@nongnu.org; Wed, 05 Jun 2024 02:32:20 -0400
-Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
+ id 1sEkXU-0000Ma-PI
+ for qemu-riscv@nongnu.org; Wed, 05 Jun 2024 02:54:28 -0400
+Received: from mail-lf1-x134.google.com ([2a00:1450:4864:20::134])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1sEkC2-0007DR-KN
- for qemu-riscv@nongnu.org; Wed, 05 Jun 2024 02:32:20 -0400
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-1f44b4404dfso57185465ad.0
- for <qemu-riscv@nongnu.org>; Tue, 04 Jun 2024 23:32:18 -0700 (PDT)
+ id 1sEkXS-0004wI-Ps
+ for qemu-riscv@nongnu.org; Wed, 05 Jun 2024 02:54:28 -0400
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-5295e488248so6702104e87.2
+ for <qemu-riscv@nongnu.org>; Tue, 04 Jun 2024 23:54:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1717569137; x=1718173937; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=oMInlFL188ZWR1mMyu2viiuWqvKsDnAijhCCsb0k4W8=;
- b=kJ4e4Zhr7cKUHg3TCZz26Fs15OlgU4hRtBsc4th24uuqAEAs4BIn0iMQucfuwCSDJk
- ZpJdlAd4A2SJolXgmYhWOzkMSx8rV9zl6CkIPfKphvVAv2aDwvIbO8d2uaXSLmHQxD4w
- 7uDV77BprYCNHg7EN283DrkSBuGk1USvXM5K3yXzvm13e1AECa8DryKsSx3aNDL2qL+6
- 6pG9aP3h5QQVJgQUm3AeZw1r8hHCXprez9UU5G3AaYv/DolqguDyVHh9gxO3i+nFJcgW
- 87TqbifgXObHYAnYle2B38zdXEjUmBPMTRvvqqRFE6hqgq7MuOBW2Y3kA+qxY19EK+IA
- fSFA==
+ d=sifive.com; s=google; t=1717570464; x=1718175264; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=uBwcSOZYh/4MTPhOsMtm0h2mC+vZOF2zoXnL2tTnJSU=;
+ b=lPt/RcSuF23PbDFgaf5E/4F5kXaFkvA+vz8X1LkB1sH8Bfqdt5VCx5h9/mM6kfFrIu
+ QkjRDvPe+Nb+4L0rn8IU4oQm82S/itYCYM8+F/dh/pDBpHPNR1JYEaPhKhQfnmzTqRPH
+ PVkllsJKdPLvkLdBST+ljzkAX4GqNM4zmHWE6iq2/YAZFJ0r0INcE2EvU+HpHIY956ai
+ Hf9Lg/K8ewXhOXR3rrGvA64Pi+ulTQWtVnOwnNAhU2PYlCtxw6UmjgF+VOgv04lMW9UN
+ UyeUk7SqB1jWd3YCSMH7MHiSdweTfZ4kLejwM7mvd3vaDPHIZPQt3WYy3gfkrfO2qPOK
+ ZHJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717569137; x=1718173937;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=oMInlFL188ZWR1mMyu2viiuWqvKsDnAijhCCsb0k4W8=;
- b=WulROwbwLl4nVQHJ4h3GKjw42z0wYzUmqNLZ7hZY9MXWAr0cK0ra1lk0EE1QTk+W1N
- sb3BvjkYENEm2JSdJqJMW+VI3gyoy84g+G7K/7V5tPXhWzwJlNlcE/DLJOJNrOdiopaw
- Y+JTaKKhXgOC9d0ubR9u49XBHQV9qr6y/EcIm87/1NoRjamsA2PgLfZUvtp9ywdJw9fx
- /pRFYaFZGwqnhQZc8iTOsex0ijcd7pdmZxcv1CgdEDFsnlyjoxvT8XfT2ehvYN9BwTMX
- M2Z0cx/nahefBvFWMlw0l48vjC7h7UfQbff8bhxQkuoxNtgSn3rGVxnW35dE+8Hg+X8/
- TFJQ==
+ d=1e100.net; s=20230601; t=1717570464; x=1718175264;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=uBwcSOZYh/4MTPhOsMtm0h2mC+vZOF2zoXnL2tTnJSU=;
+ b=VeEyqfhHAuLvCIgyM4t64NOylVjKhnILvOvyTTYZQaF0SHLpzCQHm83UM35mu3+RrG
+ 3SgEvEot4TcL3CSyRKu9RCT67hFb0Q1ssArKDi2pW8GDgD2fayOZ5mf716RwtF/Ctq1q
+ C33TdSICC5UiWF65Jl+1JEgmFP8+/6WhOiNui1ys/i0/UbOI1Gta9EvtOgwenZl2g+EW
+ gIuKhkXFysxULptiWVlg6DvcAz7Gtbs0LMxncNzrZ5QC1MPTbWTdC13NcQ6oL0AzPFUA
+ QTovqV594aNZVnDfr3Tk3vYt2PvoVAIFYNQsc1DmdsYjxYhfGszQB2f9+0EM1EnPs5sM
+ S//g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVVDIfUJpMYiBLxmGdh1ziL7zz9UyGhe7uJdEGuepBZl/gLXUNS7LDM4C9tL+KSHHjayWLizdNTZv5oEnk1SmR76HpKGro=
-X-Gm-Message-State: AOJu0Yw8ZA3BHoGPNPHTlFr7kZZfUBGsm9LqKHeAeaESIF3Qf1O80bFZ
- N8UAJGpTEVGdDNRfm3XIcYRBV+eDp9kSJzAJxqFWqpm9JgntNQ3FdOEXHpeMI2Y=
-X-Google-Smtp-Source: AGHT+IETueM9ksvD6vVqcJB3LQOyBzxGxemLZ1c1L+mmE2eDxivg/MvSHHzqPj9smz/ieh9VY7IiWw==
-X-Received: by 2002:a17:902:dac1:b0:1f6:6a85:7ab3 with SMTP id
- d9443c01a7336-1f6a5a874acmr20349375ad.66.1717569137122; 
- Tue, 04 Jun 2024 23:32:17 -0700 (PDT)
-Received: from hsinchu16.internal.sifive.com
- (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1f632356c84sm94819725ad.76.2024.06.04.23.32.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Jun 2024 23:32:16 -0700 (PDT)
-From: frank.chang@sifive.com
-To: qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs),
- Frank Chang <frank.chang@sifive.com>
-Subject: [PATCH RESEND 4/6] target/riscv: Add standard extension implied rules
-Date: Wed,  5 Jun 2024 14:31:52 +0800
-Message-ID: <20240605063154.31298-5-frank.chang@sifive.com>
-X-Mailer: git-send-email 2.43.2
-In-Reply-To: <20240605063154.31298-1-frank.chang@sifive.com>
-References: <20240605063154.31298-1-frank.chang@sifive.com>
+ AJvYcCUPRV2KmLMo3rrIsjhN9nrLW+O+Z3EbiCHEAAniW2mTEj24BBxWlPPDmipFGCZEacmeg7cgDSP/G+dt5twrMDERJc8E4hU=
+X-Gm-Message-State: AOJu0YyQyCXbzTW9OYFR1RO8kzIQmjLmMm2C/gTowvxtxBvdPXoHH/la
+ iiqLvstqPQO7a4mjh2EyZv7n19H+AFdvcVgLCPF4bEaVpFs3/9I/EyQraAyI9PEn3/sOInqivhJ
+ 4naA=
+X-Google-Smtp-Source: AGHT+IG+6Jl6UVPkMUko9rnz4iGpJroOedZNvkKskbNDxb6hTFb4NTspdmGjpTc5IuFTre4Wh1aQEg==
+X-Received: by 2002:a05:6512:21c7:b0:52b:8909:58b0 with SMTP id
+ 2adb3069b0e04-52bab4fc5bamr711530e87.52.1717570464435; 
+ Tue, 04 Jun 2024 23:54:24 -0700 (PDT)
+Received: from mail-lj1-f172.google.com (mail-lj1-f172.google.com.
+ [209.85.208.172]) by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-52b84d828a1sm1684103e87.221.2024.06.04.23.54.24
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 04 Jun 2024 23:54:24 -0700 (PDT)
+Received: by mail-lj1-f172.google.com with SMTP id
+ 38308e7fff4ca-2eab0bc74cdso35814711fa.3; 
+ Tue, 04 Jun 2024 23:54:24 -0700 (PDT)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWTNxSTkEJExjA+0CWxlEUyN1NJoSjgS2YWtwRdxkxb6AYqgedmbwqv4xH6jZZ/IZ/hw1xh4ygXklUQU5tPjeAi4RGmHK0=
+X-Received: by 2002:a2e:2a06:0:b0:2df:c2b:8c84 with SMTP id
+ 38308e7fff4ca-2eac79baa50mr7512771fa.1.1717570463920; Tue, 04 Jun 2024
+ 23:54:23 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
- envelope-from=frank.chang@sifive.com; helo=mail-pl1-x635.google.com
+References: <20240603060522.2180-1-frank.chang@sifive.com>
+In-Reply-To: <20240603060522.2180-1-frank.chang@sifive.com>
+From: Frank Chang <frank.chang@sifive.com>
+Date: Wed, 5 Jun 2024 14:54:12 +0800
+X-Gmail-Original-Message-ID: <CANzO1D3xmGRrCfTFUQ4550WYkJes4AMV1_Q+bDkD0Wp+KwUuDg@mail.gmail.com>
+Message-ID: <CANzO1D3xmGRrCfTFUQ4550WYkJes4AMV1_Q+bDkD0Wp+KwUuDg@mail.gmail.com>
+Subject: Re: [PATCH 0/6] Introduce extension implied rules
+To: frank.chang@sifive.com
+Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>, 
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
+Content-Type: multipart/alternative; boundary="000000000000610538061a1f092d"
+Received-SPF: pass client-ip=2a00:1450:4864:20::134;
+ envelope-from=frank.chang@sifive.com; helo=mail-lf1-x134.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01,
- UPPERCASE_50_75=0.008 autolearn=no autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,374 +108,111 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Frank Chang <frank.chang@sifive.com>
+--000000000000610538061a1f092d
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Add standard extension implied rules to enable the implied extensions of
-the standard extension recursively.
+Patchset resend:
+https://lists.gnu.org/archive/html/qemu-riscv/2024-06/msg00130.html
 
-Signed-off-by: Frank Chang <frank.chang@sifive.com>
----
- target/riscv/cpu.c | 340 +++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 340 insertions(+)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index a6e9055c5f..80b238060a 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -2289,12 +2289,352 @@ static RISCVCPUImpliedExtsRule RVV_IMPLIED = {
-     },
- };
- 
-+static RISCVCPUImpliedExtsRule ZCB_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zcb),
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zca),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
-+static RISCVCPUImpliedExtsRule ZCD_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zcd),
-+    .implied_misas = RVD,
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zca),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
-+static RISCVCPUImpliedExtsRule ZCE_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zce),
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zcb), CPU_CFG_OFFSET(ext_zcmp),
-+        CPU_CFG_OFFSET(ext_zcmt),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
-+static RISCVCPUImpliedExtsRule ZCF_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zcf),
-+    .implied_misas = RVF,
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zca),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
-+static RISCVCPUImpliedExtsRule ZCMP_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zcmp),
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zca),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
-+static RISCVCPUImpliedExtsRule ZCMT_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zcmt),
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zca), CPU_CFG_OFFSET(ext_zicsr),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
-+static RISCVCPUImpliedExtsRule ZDINX_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zdinx),
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zfinx),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
-+static RISCVCPUImpliedExtsRule ZFA_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zfa),
-+    .implied_misas = RVF,
-+    .implied_exts = { RISCV_IMPLIED_EXTS_RULE_END },
-+};
-+
-+static RISCVCPUImpliedExtsRule ZFBFMIN_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zfbfmin),
-+    .implied_misas = RVF,
-+    .implied_exts = { RISCV_IMPLIED_EXTS_RULE_END },
-+};
-+
-+static RISCVCPUImpliedExtsRule ZFH_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zfh),
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zfhmin),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
-+static RISCVCPUImpliedExtsRule ZFHMIN_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zfhmin),
-+    .implied_misas = RVF,
-+    .implied_exts = { RISCV_IMPLIED_EXTS_RULE_END },
-+};
-+
-+static RISCVCPUImpliedExtsRule ZFINX_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zfinx),
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zicsr),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
-+static RISCVCPUImpliedExtsRule ZHINX_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zhinx),
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zhinxmin),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
-+static RISCVCPUImpliedExtsRule ZHINXMIN_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zhinxmin),
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zfinx),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
-+static RISCVCPUImpliedExtsRule ZICNTR_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zicntr),
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zicsr),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
-+static RISCVCPUImpliedExtsRule ZIHPM_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zihpm),
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zicsr),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
-+static RISCVCPUImpliedExtsRule ZK_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zk),
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zkn), CPU_CFG_OFFSET(ext_zkr),
-+        CPU_CFG_OFFSET(ext_zkt),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
-+static RISCVCPUImpliedExtsRule ZKN_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zkn),
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zbkb), CPU_CFG_OFFSET(ext_zbkc),
-+        CPU_CFG_OFFSET(ext_zbkx), CPU_CFG_OFFSET(ext_zkne),
-+        CPU_CFG_OFFSET(ext_zknd), CPU_CFG_OFFSET(ext_zknh),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
-+static RISCVCPUImpliedExtsRule ZKS_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zks),
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zbkb), CPU_CFG_OFFSET(ext_zbkc),
-+        CPU_CFG_OFFSET(ext_zbkx), CPU_CFG_OFFSET(ext_zksed),
-+        CPU_CFG_OFFSET(ext_zksh),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
-+static RISCVCPUImpliedExtsRule ZVBB_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zvbb),
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zvkb),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
-+static RISCVCPUImpliedExtsRule ZVE32F_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zve32f),
-+    .implied_misas = RVF,
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zve32x),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
-+static RISCVCPUImpliedExtsRule ZVE32X_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zve32x),
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zicsr),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
-+static RISCVCPUImpliedExtsRule ZVE64D_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zve64d),
-+    .implied_misas = RVD,
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zve64f),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
-+static RISCVCPUImpliedExtsRule ZVE64F_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zve64f),
-+    .implied_misas = RVF,
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zve32f), CPU_CFG_OFFSET(ext_zve64x),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
-+static RISCVCPUImpliedExtsRule ZVE64X_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zve64x),
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zve32x),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
-+static RISCVCPUImpliedExtsRule ZVFBFMIN_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zvfbfmin),
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zve32f),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
-+static RISCVCPUImpliedExtsRule ZVFBFWMA_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zvfbfwma),
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zvfbfmin), CPU_CFG_OFFSET(ext_zfbfmin),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
-+static RISCVCPUImpliedExtsRule ZVFH_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zvfh),
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zvfhmin), CPU_CFG_OFFSET(ext_zfhmin),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
-+static RISCVCPUImpliedExtsRule ZVFHMIN_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zvfhmin),
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zve32f),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
-+static RISCVCPUImpliedExtsRule ZVKN_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zvkn),
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zvkned), CPU_CFG_OFFSET(ext_zvknhb),
-+        CPU_CFG_OFFSET(ext_zvkb), CPU_CFG_OFFSET(ext_zvkt),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
-+static RISCVCPUImpliedExtsRule ZVKNC_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zvknc),
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zvkn), CPU_CFG_OFFSET(ext_zvbc),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
-+static RISCVCPUImpliedExtsRule ZVKNG_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zvkng),
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zvkn), CPU_CFG_OFFSET(ext_zvkg),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
-+static RISCVCPUImpliedExtsRule ZVKNHB_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zvknhb),
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zve64x),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
-+static RISCVCPUImpliedExtsRule ZVKS_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zvks),
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zvksed), CPU_CFG_OFFSET(ext_zvksh),
-+        CPU_CFG_OFFSET(ext_zvkb), CPU_CFG_OFFSET(ext_zvkt),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
-+static RISCVCPUImpliedExtsRule ZVKSC_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zvksc),
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zvks), CPU_CFG_OFFSET(ext_zvbc),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
-+static RISCVCPUImpliedExtsRule ZVKSG_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_zvksg),
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zvks), CPU_CFG_OFFSET(ext_zvkg),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
- RISCVCPUImpliedExtsRule *riscv_misa_implied_rules[] = {
-     &RVA_IMPLIED, &RVD_IMPLIED, &RVF_IMPLIED,
-     &RVM_IMPLIED, &RVV_IMPLIED, NULL
- };
- 
- RISCVCPUImpliedExtsRule *riscv_ext_implied_rules[] = {
-+    &ZCB_IMPLIED, &ZCD_IMPLIED, &ZCE_IMPLIED,
-+    &ZCF_IMPLIED, &ZCMP_IMPLIED, &ZCMT_IMPLIED,
-+    &ZDINX_IMPLIED, &ZFA_IMPLIED, &ZFBFMIN_IMPLIED,
-+    &ZFH_IMPLIED, &ZFHMIN_IMPLIED, &ZFINX_IMPLIED,
-+    &ZHINX_IMPLIED, &ZHINXMIN_IMPLIED, &ZICNTR_IMPLIED,
-+    &ZIHPM_IMPLIED, &ZK_IMPLIED, &ZKN_IMPLIED,
-+    &ZKS_IMPLIED, &ZVBB_IMPLIED, &ZVE32F_IMPLIED,
-+    &ZVE32X_IMPLIED, &ZVE64D_IMPLIED, &ZVE64F_IMPLIED,
-+    &ZVE64X_IMPLIED, &ZVFBFMIN_IMPLIED, &ZVFBFWMA_IMPLIED,
-+    &ZVFH_IMPLIED, &ZVFHMIN_IMPLIED, &ZVKN_IMPLIED,
-+    &ZVKNC_IMPLIED, &ZVKNG_IMPLIED, &ZVKNHB_IMPLIED,
-+    &ZVKS_IMPLIED,  &ZVKSC_IMPLIED, &ZVKSG_IMPLIED,
-     NULL
- };
- 
--- 
-2.43.2
+<frank.chang@sifive.com> =E6=96=BC 2024=E5=B9=B46=E6=9C=883=E6=97=A5 =E9=80=
+=B1=E4=B8=80 =E4=B8=8B=E5=8D=882:07=E5=AF=AB=E9=81=93=EF=BC=9A
 
+> From: Frank Chang <frank.chang@sifive.com>
+>
+> Currently, the implied extensions are enabled and checked in
+> riscv_cpu_validate_set_extensions(). However, the order of enabling the
+> implied extensions must follow a strict sequence, which is error-prone.
+>
+> This patchset introduce extension implied rule helpers to enable the
+> implied extensions. This also eliminates the old-fashioned ordering
+> requirement. For example, Zvksg implies Zvks, Zvks implies Zvksed, etc.,
+> removing the need to check the implied rules of Zvksg before Zvks.
+>
+> The idea [1] and the implied rules [2] are referenced from LLVM.
+>
+> [1]
+> https://github.com/llvm/llvm-project/blob/main/llvm/lib/TargetParser/RISC=
+VISAInfo.cpp#L875
+> [2]
+> https://github.com/llvm/llvm-project/blob/main/llvm/lib/Target/RISCV/RISC=
+VFeatures.td
+>
+> Frank Chang (6):
+>   target/riscv: Introduce extension implied rules definition
+>   target/riscv: Introduce extension implied rule helpers
+>   target/riscv: Add MISA implied rules
+>   target/riscv: Add standard extension implied rules
+>   target/riscv: Add Zc extension implied rule
+>   target/riscv: Remove extension auto-update check statements
+>
+>  target/riscv/cpu.c         | 396 +++++++++++++++++++++++++++++++++++++
+>  target/riscv/cpu.h         |  17 ++
+>  target/riscv/tcg/tcg-cpu.c | 233 +++++++++++-----------
+>  3 files changed, 531 insertions(+), 115 deletions(-)
+>
+> --
+> 2.43.2
+>
+>
+>
+
+--000000000000610538061a1f092d
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Patchset resend: <a href=3D"https://lists.gnu.org/archive/=
+html/qemu-riscv/2024-06/msg00130.html">https://lists.gnu.org/archive/html/q=
+emu-riscv/2024-06/msg00130.html</a></div><br><br><div class=3D"gmail_quote"=
+><div dir=3D"ltr" class=3D"gmail_attr">&lt;<a href=3D"mailto:frank.chang@si=
+five.com">frank.chang@sifive.com</a>&gt; =E6=96=BC 2024=E5=B9=B46=E6=9C=883=
+=E6=97=A5 =E9=80=B1=E4=B8=80 =E4=B8=8B=E5=8D=882:07=E5=AF=AB=E9=81=93=EF=BC=
+=9A<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px =
+0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">From: Frank =
+Chang &lt;<a href=3D"mailto:frank.chang@sifive.com" target=3D"_blank">frank=
+.chang@sifive.com</a>&gt;<br>
+<br>
+Currently, the implied extensions are enabled and checked in<br>
+riscv_cpu_validate_set_extensions(). However, the order of enabling the<br>
+implied extensions must follow a strict sequence, which is error-prone.<br>
+<br>
+This patchset introduce extension implied rule helpers to enable the<br>
+implied extensions. This also eliminates the old-fashioned ordering<br>
+requirement. For example, Zvksg implies Zvks, Zvks implies Zvksed, etc.,<br=
+>
+removing the need to check the implied rules of Zvksg before Zvks.<br>
+<br>
+The idea [1] and the implied rules [2] are referenced from LLVM.<br>
+<br>
+[1] <a href=3D"https://github.com/llvm/llvm-project/blob/main/llvm/lib/Targ=
+etParser/RISCVISAInfo.cpp#L875" rel=3D"noreferrer" target=3D"_blank">https:=
+//github.com/llvm/llvm-project/blob/main/llvm/lib/TargetParser/RISCVISAInfo=
+.cpp#L875</a><br>
+[2] <a href=3D"https://github.com/llvm/llvm-project/blob/main/llvm/lib/Targ=
+et/RISCV/RISCVFeatures.td" rel=3D"noreferrer" target=3D"_blank">https://git=
+hub.com/llvm/llvm-project/blob/main/llvm/lib/Target/RISCV/RISCVFeatures.td<=
+/a><br>
+<br>
+Frank Chang (6):<br>
+=C2=A0 target/riscv: Introduce extension implied rules definition<br>
+=C2=A0 target/riscv: Introduce extension implied rule helpers<br>
+=C2=A0 target/riscv: Add MISA implied rules<br>
+=C2=A0 target/riscv: Add standard extension implied rules<br>
+=C2=A0 target/riscv: Add Zc extension implied rule<br>
+=C2=A0 target/riscv: Remove extension auto-update check statements<br>
+<br>
+=C2=A0target/riscv/cpu.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 396 +++++++++++=
+++++++++++++++++++++++++++<br>
+=C2=A0target/riscv/cpu.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 17 ++<br>
+=C2=A0target/riscv/tcg/tcg-cpu.c | 233 +++++++++++-----------<br>
+=C2=A03 files changed, 531 insertions(+), 115 deletions(-)<br>
+<br>
+--<br>
+2.43.2<br>
+<br>
+<br>
+</blockquote></div>
+
+--000000000000610538061a1f092d--
 
