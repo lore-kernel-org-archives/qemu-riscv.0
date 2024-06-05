@@ -4,91 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D20CC25B76
-	for <qemu-riscv@archiver.kernel.org>; Wed,  5 Jun 2024 03:35:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29960C25B76
+	for <qemu-riscv@archiver.kernel.org>; Wed,  5 Jun 2024 03:42:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sEhPy-0000tO-TV; Tue, 04 Jun 2024 23:34:30 -0400
+	id 1sEhXA-0002xD-GA; Tue, 04 Jun 2024 23:41:56 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
- id 1sEhPv-0000t3-H3
- for qemu-riscv@nongnu.org; Tue, 04 Jun 2024 23:34:27 -0400
-Received: from mail-pj1-x102f.google.com ([2607:f8b0:4864:20::102f])
+ (Exim 4.90_1) (envelope-from <beeman@rivosinc.com>)
+ id 1sEhX8-0002uK-R4
+ for qemu-riscv@nongnu.org; Tue, 04 Jun 2024 23:41:54 -0400
+Received: from mail-yw1-x1133.google.com ([2607:f8b0:4864:20::1133])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
- id 1sEhPt-0007Ev-Ag
- for qemu-riscv@nongnu.org; Tue, 04 Jun 2024 23:34:27 -0400
-Received: by mail-pj1-x102f.google.com with SMTP id
- 98e67ed59e1d1-2c24115469bso356467a91.0
- for <qemu-riscv@nongnu.org>; Tue, 04 Jun 2024 20:34:24 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <beeman@rivosinc.com>)
+ id 1sEhX6-0001pj-G7
+ for qemu-riscv@nongnu.org; Tue, 04 Jun 2024 23:41:54 -0400
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-62a2424ec50so66638647b3.3
+ for <qemu-riscv@nongnu.org>; Tue, 04 Jun 2024 20:41:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1717558463; x=1718163263; darn=nongnu.org;
- h=in-reply-to:from:content-language:references:cc:to:subject
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=V5VAYHFU492pz04tgjhSTWj5MtVeGwNywFm4FrzJrfs=;
- b=dUdc0h9C0Fpa3FBfXmi3ugKC2imdwB89uQrewON7q/DIBl7mGyk2BBxLEpdvAGJzWJ
- VYB26Lz8xFoM+I3aBRC5bqmX5ht04fdzLbAV6b6qF9ocRY8LovcHx7UHFN/BKYRBeCwr
- sIfeVtzrOmLJnJ1JN5ZBkPc3X7lsGAT4Cb57ljzpj7zDE6mI2xV+rI3CpeoECawNh2dG
- qASnrL0eOywFYTpO+/gx037bGKE2tMMhHrOuEQT2WLr0uqu8kF+elusWYf9De0mbDB6+
- +e9hT8QwId+PHy7hxBS/XFdVOxbuJoZqYEeIeZpw7nuBrayIXBkbdtdpToeSMgUWxREp
- 6YxQ==
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1717558911; x=1718163711;
+ darn=nongnu.org; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=wcgJ3drr8pV4xw/cHtgE6c0a2yyBLTVLB5GHHo0K4h8=;
+ b=ECdA3d5QUuAE3p5jCgcI8h7Wo/NXDxafegpnXRgj++14MbrNwaACN+ScwH6z7axbck
+ o/1k1Qzu35d0VIACC5OINZrPsOVDRuvjjuOZ4x4ioclqfG9DXd6zMqPopg9xyvZNct1C
+ 4qnfBF0d8yXlcHn891S41IqBx6Xg9FHNIDoAcloAed56JseTIrzT5xBr6T/6DeM6BrCO
+ Ouy9lsVDt4fswhdW6n5dxsJ/sVe85fEO19A7ppr/sORJ0ElYAU/vpl8y3jyKgL3F439+
+ LzlTfsmWmscCZa8J1cyrMUh0TCgbjPmVGLdeXR7Bh7q+z9fUA7kfXSUmzvDSS5nVD00N
+ z5hQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717558463; x=1718163263;
- h=in-reply-to:from:content-language:references:cc:to:subject
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=V5VAYHFU492pz04tgjhSTWj5MtVeGwNywFm4FrzJrfs=;
- b=Xc96tZh7yXfWI11OL3S0qH30JBxPH0SaJvVdD4kQLa6FZaMIVxBnBHIkcF4q7aGuk2
- uwx/yTsp1BedDz0h8OaxFyLJUug4KC4rK4vhI527OSPYmLfzZ31rn/29fAsK62IHspWD
- ElRggjL15svCSi0T51KVG7Mdx/QZXE/P9s9JCTqCwP3CLrouhA3DlRonUfpm086GXx77
- D/HqTYVxYnm4uI+18YbItLhiSQnT/jo1cBK9/HQZ+zfyp9rc9BCQF7XqVSh/NDDiZzSw
- 71wDbFp2NTovdDEC7cE5+0e/R4fdSS6+DZVvPFT77qGF0Go9eTsMg6VXN3ADKcYfX3Y7
- g0xw==
+ d=1e100.net; s=20230601; t=1717558911; x=1718163711;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=wcgJ3drr8pV4xw/cHtgE6c0a2yyBLTVLB5GHHo0K4h8=;
+ b=ZAIkpuNnNVcAM5TtLWiIccwHWjmF1dMM/dj4BFT/NTL6HDkjhzDeovyCbkZvBc0jLW
+ 8X78mpyBaKyT6gHkqCoTVJ9Dz4eQV7g/CosYdwcqK9g6c/TiRkJArdDZtNMbwyBAqvk7
+ 8tYlNcpR6k20sUBAIdiFZYVovXM9nyeSPkxIq0H/BFefSGR2jHK0YHr3Fcjz3NeoS8UH
+ ii/uz+yCzbvBYhHcUv9NAuyHbL/I3BDbairkJyG0+S6UbRac/LgX2sVQjV6H5+Sgn7Pe
+ g3gQk6u+A/71GWIYNxHdB7PvpvcvWCKlEqqbsSIE773AMexGWWo/ybrZ8ctYJepFN6GX
+ 9rlw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXAbdpK+Jh7C44GnMM+RHldMsDMfJSCYD7vargoOCkVnF+keVc60Dil4AiPcxeaGvO1cLEsUfkrzasFSwtgPQAZqa8SM+k=
-X-Gm-Message-State: AOJu0YzYREdj8q50X0aeA4aD87k8lVSrJ7DVgpr/usYUt8h5W+/yyap9
- 4xaJCtMy+SQaBOnUwJdnj7qZE+/9oczP0QxInFSuBYLpGYR3FPEe954rG5C0Xco=
-X-Google-Smtp-Source: AGHT+IEqb9vtxMBSEwBbZUNtsCqXE5xyBD+LbeP2TQNQe51kDTXcSlkrUEgYd+rXk4ufEJWZeI3x5w==
-X-Received: by 2002:a17:90b:1e11:b0:2ab:8324:1b47 with SMTP id
- 98e67ed59e1d1-2c27cc3d5fdmr2232235a91.15.1717558463222; 
- Tue, 04 Jun 2024 20:34:23 -0700 (PDT)
-Received: from [192.168.100.252] (59-124-168-89.hinet-ip.hinet.net.
- [59.124.168.89]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2c28067b192sm309929a91.30.2024.06.04.20.34.20
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 04 Jun 2024 20:34:22 -0700 (PDT)
-Content-Type: multipart/alternative;
- boundary="------------WYIS1LWe0NRq2HXlYwrkjJfU"
-Message-ID: <d294f246-c31f-4329-979a-ceef0d8e7bea@sifive.com>
-Date: Wed, 5 Jun 2024 11:34:19 +0800
+ AJvYcCXIVJlY5+AfNHYiRn6mo/4f3230v3uk9kLHAVZhnXC9Pz9pWRewI8wG9J45jeNtRyBudZCvVxIBspq7F7zKg9NFh5c0oEM=
+X-Gm-Message-State: AOJu0YwjRlgFLugIY6ilPvhMEo+J4BqojsWjiSkj2wHMKAvkw1XOF4WH
+ BlervYJE0QChGG6BcgXvZ5Ub5iNwAxrwmXn1m6wLtmbSOB6fFHSp/c7BwGkFvPgjNntyoEZECnc
+ HWNr40UTm1VoJI5LnHExuUn6zlmgFhaKjofUReg==
+X-Google-Smtp-Source: AGHT+IEGAXb3zuwgbU79ut+ukFh1xcwuBBXz/QiikcjaIIPIIyeZJNcPARVr1ST4H/sxgauQrprYG1vQgeTy43dyQVs=
+X-Received: by 2002:a81:404b:0:b0:628:c1f0:d8fd with SMTP id
+ 00721157ae682-62cbb5dbc96mr11691497b3.52.1717558911247; Tue, 04 Jun 2024
+ 20:41:51 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/6] target/riscv: Add support for Control Transfer
- Records Ext.
-To: Beeman Strong <beeman@rivosinc.com>
-Cc: Rajnesh Kanwal <rkanwal@rivosinc.com>, alistair.francis@wdc.com,
- apatel@ventanamicro.com, atishp@rivosinc.com, bin.meng@windriver.com,
- dbarboza@ventanamicro.com, liweiwei@iscas.ac.cn, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, tech-control-transfer-records@lists.riscv.org,
- zhiwei_liu@linux.alibaba.com
 References: <20240529160950.132754-1-rkanwal@rivosinc.com>
  <da896d6b-7b7f-4246-9750-f7bc11e54d3b@sifive.com>
  <CAP55G9B4u8M__rDsEoPR1_U-AQYicU4-KVVCkVwD+pc+RhvhMg@mail.gmail.com>
-Content-Language: en-US
-From: Jason Chien <jason.chien@sifive.com>
-In-Reply-To: <CAP55G9B4u8M__rDsEoPR1_U-AQYicU4-KVVCkVwD+pc+RhvhMg@mail.gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
- envelope-from=jason.chien@sifive.com; helo=mail-pj1-x102f.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ <d294f246-c31f-4329-979a-ceef0d8e7bea@sifive.com>
+In-Reply-To: <d294f246-c31f-4329-979a-ceef0d8e7bea@sifive.com>
+From: Beeman Strong <beeman@rivosinc.com>
+Date: Tue, 4 Jun 2024 20:41:39 -0700
+Message-ID: <CAP55G9BQLKLjqrvpiZc+hXH4urRehWDGp4zVL0gG1okNLYeWDw@mail.gmail.com>
+Subject: Re: [PATCH 0/6] target/riscv: Add support for Control Transfer
+ Records Ext.
+To: Jason Chien <jason.chien@sifive.com>
+Cc: Rajnesh Kanwal <rkanwal@rivosinc.com>, alistair.francis@wdc.com,
+ apatel@ventanamicro.com, 
+ atishp@rivosinc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
+ liweiwei@iscas.ac.cn, qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ tech-control-transfer-records@lists.riscv.org, zhiwei_liu@linux.alibaba.com
+Content-Type: multipart/alternative; boundary="000000000000c941d1061a1c58b7"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1133;
+ envelope-from=beeman@rivosinc.com; helo=mail-yw1-x1133.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,128 +98,143 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This is a multi-part message in MIME format.
---------------WYIS1LWe0NRq2HXlYwrkjJfU
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+--000000000000c941d1061a1c58b7
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Thank you for pointing that out. CTR does not use miselect and mireg*. 
-There is no dependency on Smcsrind. I believe the spec needs to be 
-corrected.
+Ah, good catch.  We removed that dependency late.  I'll fix it.
 
-Chapter 1 states that:
-Smctr depends on the Smcsrind extension, while Ssctr depends on the 
-Sscsrind extension. Further, both Smctr and Ssctr depend upon 
-implementation of S-mode.
+On Tue, Jun 4, 2024 at 8:34=E2=80=AFPM Jason Chien <jason.chien@sifive.com>=
+ wrote:
 
-Beeman Strong 於 2024/6/5 上午 06:32 寫道:
+> Thank you for pointing that out. CTR does not use miselect and mireg*.
+> There is no dependency on Smcsrind. I believe the spec needs to be
+> corrected.
+>
+> Chapter 1 states that:
+> Smctr depends on the Smcsrind extension, while Ssctr depends on the
+> Sscsrind extension. Further, both Smctr and Ssctr depend upon
+> implementation of S-mode.
+> Beeman Strong =E6=96=BC 2024/6/5 =E4=B8=8A=E5=8D=88 06:32 =E5=AF=AB=E9=81=
+=93:
+>
 > There is no dependency on Smcsrind, only Sscsrind.
 >
-> On Tue, Jun 4, 2024 at 12:29 AM Jason Chien <jason.chien@sifive.com> 
+> On Tue, Jun 4, 2024 at 12:29=E2=80=AFAM Jason Chien <jason.chien@sifive.c=
+om>
 > wrote:
 >
->     Smctr depends on the Smcsrind extension, Ssctr depends on the
->     Sscsrind
->     extension, and both Smctr and Ssctr depend upon implementation of
->     S-mode.
->     There should be a dependency check in
->     riscv_cpu_validate_set_extensions().
+>> Smctr depends on the Smcsrind extension, Ssctr depends on the Sscsrind
+>> extension, and both Smctr and Ssctr depend upon implementation of S-mode=
+.
+>> There should be a dependency check in riscv_cpu_validate_set_extensions(=
+).
+>>
+>> Rajnesh Kanwal =E6=96=BC 2024/5/30 =E4=B8=8A=E5=8D=88 12:09 =E5=AF=AB=E9=
+=81=93:
+>> > This series enables Control Transfer Records extension support on risc=
+v
+>> > platform. This extension is similar to Arch LBR in x86 and BRBE in ARM=
+.
+>> > The Extension has been stable and the latest release can be found here
+>> [0]
+>> >
+>> > CTR extension depends on couple of other extensions:
+>> >
+>> > 1. S[m|s]csrind : The indirect CSR extension [1] which defines
+>> additional
+>> >     ([M|S|VS]IREG2-[M|S|VS]IREG6) register to address size limitation =
+of
+>> >     RISC-V CSR address space. CTR access ctrsource, ctrtartget and
+>> ctrdata
+>> >     CSRs using sscsrind extension.
+>> >
+>> > 2. Smstateen: The mstateen bit[54] controls the access to the CTR ext =
+to
+>> >     S-mode.
+>> >
+>> > 3. Sscofpmf: Counter overflow and privilege mode filtering. [2]
+>> >
+>> > The series is based on Smcdeleg/Ssccfg counter delegation extension [3=
+]
+>> > patches. CTR itself doesn't depend on counter delegation support. This
+>> > rebase is basically to include the Smcsrind patches.
+>> >
+>> > Due to the dependency of these extensions, the following extensions
+>> must be
+>> > enabled to use the control transfer records feature.
+>> >
+>> >
+>> "smstateen=3Dtrue,sscofpmf=3Dtrue,smcsrind=3Dtrue,sscsrind=3Dtrue,smctr=
+=3Dtrue,ssctr=3Dtrue"
+>> >
+>> > Here is the link to a quick guide [5] to setup and run a basic perf
+>> demo on
+>> > Linux to use CTR Ext.
+>> >
+>> > The Qemu patches can be found here:
+>> > https://github.com/rajnesh-kanwal/qemu/tree/ctr_upstream
+>> >
+>> > The opensbi patch can be found here:
+>> > https://github.com/rajnesh-kanwal/opensbi/tree/ctr_upstream
+>> >
+>> > The Linux kernel patches can be found here:
+>> > https://github.com/rajnesh-kanwal/linux/tree/ctr_upstream
+>> >
+>> > [0]:https://github.com/riscv/riscv-control-transfer-records/release
+>> > [1]:https://github.com/riscv/riscv-indirect-csr-access
+>> > [2]:https://github.com/riscvarchive/riscv-count-overflow/tree/main
+>> > [3]:https://github.com/riscv/riscv-smcdeleg-ssccfg
+>> > [4]:
+>> https://lore.kernel.org/all/20240217000134.3634191-1-atishp@rivosinc.com=
+/
+>> > [5]:
+>> https://github.com/rajnesh-kanwal/linux/wiki/Running-CTR-basic-demo-on-Q=
+EMU-RISC%E2%80%90V-Virt-machine
+>> >
+>> > Rajnesh Kanwal (6):
+>> >    target/riscv: Remove obsolete sfence.vm instruction
+>> >    target/riscv: Add Control Transfer Records CSR definitions.
+>> >    target/riscv: Add support for Control Transfer Records extension
+>> CSRs.
+>> >    target/riscv: Add support to record CTR entries.
+>> >    target/riscv: Add CTR sctrclr instruction.
+>> >    target/riscv: Add support to access ctrsource, ctrtarget, ctrdata
+>> >      regs.
+>> >
+>> >   target/riscv/cpu.c                            |   4 +
+>> >   target/riscv/cpu.h                            |  14 +
+>> >   target/riscv/cpu_bits.h                       | 154 +++++++++
+>> >   target/riscv/cpu_cfg.h                        |   2 +
+>> >   target/riscv/cpu_helper.c                     | 213 ++++++++++++
+>> >   target/riscv/csr.c                            | 312 ++++++++++++++++=
++-
+>> >   target/riscv/helper.h                         |   8 +-
+>> >   target/riscv/insn32.decode                    |   2 +-
+>> >   .../riscv/insn_trans/trans_privileged.c.inc   |  21 +-
+>> >   target/riscv/insn_trans/trans_rvi.c.inc       |  27 ++
+>> >   target/riscv/op_helper.c                      | 117 ++++++-
+>> >   target/riscv/translate.c                      |   9 +
+>> >   12 files changed, 870 insertions(+), 13 deletions(-)
+>> >
+>>
 >
->     Rajnesh Kanwal 於 2024/5/30 上午 12:09 寫道:
->     > This series enables Control Transfer Records extension support
->     on riscv
->     > platform. This extension is similar to Arch LBR in x86 and BRBE
->     in ARM.
->     > The Extension has been stable and the latest release can be
->     found here [0]
->     >
->     > CTR extension depends on couple of other extensions:
->     >
->     > 1. S[m|s]csrind : The indirect CSR extension [1] which defines
->     additional
->     >     ([M|S|VS]IREG2-[M|S|VS]IREG6) register to address size
->     limitation of
->     >     RISC-V CSR address space. CTR access ctrsource, ctrtartget
->     and ctrdata
->     >     CSRs using sscsrind extension.
->     >
->     > 2. Smstateen: The mstateen bit[54] controls the access to the
->     CTR ext to
->     >     S-mode.
->     >
->     > 3. Sscofpmf: Counter overflow and privilege mode filtering. [2]
->     >
->     > The series is based on Smcdeleg/Ssccfg counter delegation
->     extension [3]
->     > patches. CTR itself doesn't depend on counter delegation
->     support. This
->     > rebase is basically to include the Smcsrind patches.
->     >
->     > Due to the dependency of these extensions, the following
->     extensions must be
->     > enabled to use the control transfer records feature.
->     >
->     >
->     "smstateen=true,sscofpmf=true,smcsrind=true,sscsrind=true,smctr=true,ssctr=true"
->     >
->     > Here is the link to a quick guide [5] to setup and run a basic
->     perf demo on
->     > Linux to use CTR Ext.
->     >
->     > The Qemu patches can be found here:
->     > https://github.com/rajnesh-kanwal/qemu/tree/ctr_upstream
->     >
->     > The opensbi patch can be found here:
->     > https://github.com/rajnesh-kanwal/opensbi/tree/ctr_upstream
->     >
->     > The Linux kernel patches can be found here:
->     > https://github.com/rajnesh-kanwal/linux/tree/ctr_upstream
->     >
->     > [0]:https://github.com/riscv/riscv-control-transfer-records/release
->     > [1]:https://github.com/riscv/riscv-indirect-csr-access
->     > [2]:https://github.com/riscvarchive/riscv-count-overflow/tree/main
->     > [3]:https://github.com/riscv/riscv-smcdeleg-ssccfg
->     >
->     [4]:https://lore.kernel.org/all/20240217000134.3634191-1-atishp@rivosinc.com/
->     >
->     [5]:https://github.com/rajnesh-kanwal/linux/wiki/Running-CTR-basic-demo-on-QEMU-RISC%E2%80%90V-Virt-machine
->     >
->     > Rajnesh Kanwal (6):
->     >    target/riscv: Remove obsolete sfence.vm instruction
->     >    target/riscv: Add Control Transfer Records CSR definitions.
->     >    target/riscv: Add support for Control Transfer Records
->     extension CSRs.
->     >    target/riscv: Add support to record CTR entries.
->     >    target/riscv: Add CTR sctrclr instruction.
->     >    target/riscv: Add support to access ctrsource, ctrtarget, ctrdata
->     >      regs.
->     >
->     >   target/riscv/cpu.c                            |   4 +
->     >   target/riscv/cpu.h                            |  14 +
->     >   target/riscv/cpu_bits.h                       | 154 +++++++++
->     >   target/riscv/cpu_cfg.h                        |   2 +
->     >   target/riscv/cpu_helper.c                     | 213 ++++++++++++
->     >   target/riscv/csr.c                            | 312
->     +++++++++++++++++-
->     >   target/riscv/helper.h                         |   8 +-
->     >   target/riscv/insn32.decode                    |   2 +-
->     >   .../riscv/insn_trans/trans_privileged.c.inc   |  21 +-
->     >   target/riscv/insn_trans/trans_rvi.c.inc       |  27 ++
->     >   target/riscv/op_helper.c                      | 117 ++++++-
->     >   target/riscv/translate.c                      |   9 +
->     >   12 files changed, 870 insertions(+), 13 deletions(-)
->     >
->
---------------WYIS1LWe0NRq2HXlYwrkjJfU
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
+--000000000000c941d1061a1c58b7
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Ah, good catch.=C2=A0 We removed that dependency late.=C2=
+=A0 I&#39;ll fix it.</div><br><div class=3D"gmail_quote"><div dir=3D"ltr" c=
+lass=3D"gmail_attr">On Tue, Jun 4, 2024 at 8:34=E2=80=AFPM Jason Chien &lt;=
+<a href=3D"mailto:jason.chien@sifive.com">jason.chien@sifive.com</a>&gt; wr=
+ote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px=
+ 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><u></u>
+
+ =20
+   =20
+ =20
+  <div>
     <p>Thank you for pointing that out. CTR does not use miselect and
       mireg*. There is no dependency on Smcsrind. I believe the spec
       needs to be corrected.<br>
@@ -235,25 +244,24 @@ Content-Transfer-Encoding: 8bit
       the Sscsrind extension. Further, both Smctr and Ssctr depend upon
       implementation of S-mode.<br>
     </p>
-    <div class="moz-cite-prefix">Beeman Strong 於 2024/6/5 上午 06:32 寫道:<br>
+    <div>Beeman Strong =E6=96=BC 2024/6/5 =E4=B8=8A=E5=8D=88 06:32 =E5=AF=
+=AB=E9=81=93:<br>
     </div>
-    <blockquote type="cite"
-cite="mid:CAP55G9B4u8M__rDsEoPR1_U-AQYicU4-KVVCkVwD+pc+RhvhMg@mail.gmail.com">
-      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-      <div dir="ltr">
-        <div dir="auto">There is no dependency on Smcsrind, only
-          Sscsrind. </div>
+    <blockquote type=3D"cite">
+     =20
+      <div dir=3D"ltr">
+        <div dir=3D"auto">There is no dependency on Smcsrind, only
+          Sscsrind.=C2=A0</div>
       </div>
       <div><br>
-        <div class="gmail_quote">
-          <div dir="ltr" class="gmail_attr">On Tue, Jun 4, 2024 at
-            12:29 AM Jason Chien &lt;<a
-              href="mailto:jason.chien@sifive.com" target="_blank"
-              moz-do-not-send="true" class="moz-txt-link-freetext">jason.chien@sifive.com</a>&gt;
+        <div class=3D"gmail_quote">
+          <div dir=3D"ltr" class=3D"gmail_attr">On Tue, Jun 4, 2024 at
+            12:29=E2=80=AFAM Jason Chien &lt;<a href=3D"mailto:jason.chien@=
+sifive.com" target=3D"_blank">jason.chien@sifive.com</a>&gt;
             wrote:<br>
           </div>
-          <blockquote class="gmail_quote"
-style="margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Smctr
+          <blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8=
+ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Smctr
             depends on the Smcsrind extension, Ssctr depends on the
             Sscsrind <br>
             extension, and both Smctr and Ssctr depend upon
@@ -261,7 +269,8 @@ style="margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-l
             There should be a dependency check in
             riscv_cpu_validate_set_extensions().<br>
             <br>
-            Rajnesh Kanwal 於 2024/5/30 上午 12:09 寫道:<br>
+            Rajnesh Kanwal =E6=96=BC 2024/5/30 =E4=B8=8A=E5=8D=88 12:09 =E5=
+=AF=AB=E9=81=93:<br>
             &gt; This series enables Control Transfer Records extension
             support on riscv<br>
             &gt; platform. This extension is similar to Arch LBR in x86
@@ -273,22 +282,24 @@ style="margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-l
             &gt;<br>
             &gt; 1. S[m|s]csrind : The indirect CSR extension [1] which
             defines additional<br>
-            &gt;     ([M|S|VS]IREG2-[M|S|VS]IREG6) register to address
+            &gt;=C2=A0 =C2=A0 =C2=A0([M|S|VS]IREG2-[M|S|VS]IREG6) register =
+to address
             size limitation of<br>
-            &gt;     RISC-V CSR address space. CTR access ctrsource,
+            &gt;=C2=A0 =C2=A0 =C2=A0RISC-V CSR address space. CTR access ct=
+rsource,
             ctrtartget and ctrdata<br>
-            &gt;     CSRs using sscsrind extension.<br>
+            &gt;=C2=A0 =C2=A0 =C2=A0CSRs using sscsrind extension.<br>
             &gt;<br>
             &gt; 2. Smstateen: The mstateen bit[54] controls the access
             to the CTR ext to<br>
-            &gt;     S-mode.<br>
+            &gt;=C2=A0 =C2=A0 =C2=A0S-mode.<br>
             &gt;<br>
             &gt; 3. Sscofpmf: Counter overflow and privilege mode
             filtering. [2]<br>
             &gt;<br>
             &gt; The series is based on Smcdeleg/Ssccfg counter
             delegation extension [3]<br>
-            &gt; patches. CTR itself doesn't depend on counter
+            &gt; patches. CTR itself doesn&#39;t depend on counter
             delegation support. This<br>
             &gt; rebase is basically to include the Smcsrind patches.<br>
             &gt;<br>
@@ -297,95 +308,113 @@ style="margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-l
             &gt; enabled to use the control transfer records feature.<br>
             &gt;<br>
             &gt;
-"smstateen=true,sscofpmf=true,smcsrind=true,sscsrind=true,smctr=true,ssctr=true"<br>
+&quot;smstateen=3Dtrue,sscofpmf=3Dtrue,smcsrind=3Dtrue,sscsrind=3Dtrue,smct=
+r=3Dtrue,ssctr=3Dtrue&quot;<br>
             &gt;<br>
             &gt; Here is the link to a quick guide [5] to setup and run
             a basic perf demo on<br>
             &gt; Linux to use CTR Ext.<br>
             &gt;<br>
             &gt; The Qemu patches can be found here:<br>
-            &gt; <a
-href="https://github.com/rajnesh-kanwal/qemu/tree/ctr_upstream"
-              rel="noreferrer" target="_blank" moz-do-not-send="true"
-              class="moz-txt-link-freetext">https://github.com/rajnesh-kanwal/qemu/tree/ctr_upstream</a><br>
+            &gt; <a href=3D"https://github.com/rajnesh-kanwal/qemu/tree/ctr=
+_upstream" rel=3D"noreferrer" target=3D"_blank">https://github.com/rajnesh-=
+kanwal/qemu/tree/ctr_upstream</a><br>
             &gt;<br>
             &gt; The opensbi patch can be found here:<br>
-            &gt; <a
-href="https://github.com/rajnesh-kanwal/opensbi/tree/ctr_upstream"
-              rel="noreferrer" target="_blank" moz-do-not-send="true"
-              class="moz-txt-link-freetext">https://github.com/rajnesh-kanwal/opensbi/tree/ctr_upstream</a><br>
+            &gt; <a href=3D"https://github.com/rajnesh-kanwal/opensbi/tree/=
+ctr_upstream" rel=3D"noreferrer" target=3D"_blank">https://github.com/rajne=
+sh-kanwal/opensbi/tree/ctr_upstream</a><br>
             &gt;<br>
             &gt; The Linux kernel patches can be found here:<br>
-            &gt; <a
-href="https://github.com/rajnesh-kanwal/linux/tree/ctr_upstream"
-              rel="noreferrer" target="_blank" moz-do-not-send="true"
-              class="moz-txt-link-freetext">https://github.com/rajnesh-kanwal/linux/tree/ctr_upstream</a><br>
+            &gt; <a href=3D"https://github.com/rajnesh-kanwal/linux/tree/ct=
+r_upstream" rel=3D"noreferrer" target=3D"_blank">https://github.com/rajnesh=
+-kanwal/linux/tree/ctr_upstream</a><br>
             &gt;<br>
-            &gt; [0]:<a
-href="https://github.com/riscv/riscv-control-transfer-records/release"
-              rel="noreferrer" target="_blank" moz-do-not-send="true"
-              class="moz-txt-link-freetext">https://github.com/riscv/riscv-control-transfer-records/release</a><br>
-            &gt; [1]:<a
-              href="https://github.com/riscv/riscv-indirect-csr-access"
-              rel="noreferrer" target="_blank" moz-do-not-send="true"
-              class="moz-txt-link-freetext">https://github.com/riscv/riscv-indirect-csr-access</a><br>
-            &gt; [2]:<a
-href="https://github.com/riscvarchive/riscv-count-overflow/tree/main"
-              rel="noreferrer" target="_blank" moz-do-not-send="true"
-              class="moz-txt-link-freetext">https://github.com/riscvarchive/riscv-count-overflow/tree/main</a><br>
-            &gt; [3]:<a
-              href="https://github.com/riscv/riscv-smcdeleg-ssccfg"
-              rel="noreferrer" target="_blank" moz-do-not-send="true"
-              class="moz-txt-link-freetext">https://github.com/riscv/riscv-smcdeleg-ssccfg</a><br>
-            &gt; [4]:<a
-href="https://lore.kernel.org/all/20240217000134.3634191-1-atishp@rivosinc.com/"
-              rel="noreferrer" target="_blank" moz-do-not-send="true"
-              class="moz-txt-link-freetext">https://lore.kernel.org/all/20240217000134.3634191-1-atishp@rivosinc.com/</a><br>
-            &gt; [5]:<a
-href="https://github.com/rajnesh-kanwal/linux/wiki/Running-CTR-basic-demo-on-QEMU-RISC%E2%80%90V-Virt-machine"
-              rel="noreferrer" target="_blank" moz-do-not-send="true"
-              class="moz-txt-link-freetext">https://github.com/rajnesh-kanwal/linux/wiki/Running-CTR-basic-demo-on-QEMU-RISC%E2%80%90V-Virt-machine</a><br>
+            &gt; [0]:<a href=3D"https://github.com/riscv/riscv-control-tran=
+sfer-records/release" rel=3D"noreferrer" target=3D"_blank">https://github.c=
+om/riscv/riscv-control-transfer-records/release</a><br>
+            &gt; [1]:<a href=3D"https://github.com/riscv/riscv-indirect-csr=
+-access" rel=3D"noreferrer" target=3D"_blank">https://github.com/riscv/risc=
+v-indirect-csr-access</a><br>
+            &gt; [2]:<a href=3D"https://github.com/riscvarchive/riscv-count=
+-overflow/tree/main" rel=3D"noreferrer" target=3D"_blank">https://github.co=
+m/riscvarchive/riscv-count-overflow/tree/main</a><br>
+            &gt; [3]:<a href=3D"https://github.com/riscv/riscv-smcdeleg-ssc=
+cfg" rel=3D"noreferrer" target=3D"_blank">https://github.com/riscv/riscv-sm=
+cdeleg-ssccfg</a><br>
+            &gt; [4]:<a href=3D"https://lore.kernel.org/all/20240217000134.=
+3634191-1-atishp@rivosinc.com/" rel=3D"noreferrer" target=3D"_blank">https:=
+//lore.kernel.org/all/20240217000134.3634191-1-atishp@rivosinc.com/</a><br>
+            &gt; [5]:<a href=3D"https://github.com/rajnesh-kanwal/linux/wik=
+i/Running-CTR-basic-demo-on-QEMU-RISC%E2%80%90V-Virt-machine" rel=3D"norefe=
+rrer" target=3D"_blank">https://github.com/rajnesh-kanwal/linux/wiki/Runnin=
+g-CTR-basic-demo-on-QEMU-RISC%E2%80%90V-Virt-machine</a><br>
             &gt;<br>
             &gt; Rajnesh Kanwal (6):<br>
-            &gt;    target/riscv: Remove obsolete sfence.vm instruction<br>
-            &gt;    target/riscv: Add Control Transfer Records CSR
+            &gt;=C2=A0 =C2=A0 target/riscv: Remove obsolete sfence.vm instr=
+uction<br>
+            &gt;=C2=A0 =C2=A0 target/riscv: Add Control Transfer Records CS=
+R
             definitions.<br>
-            &gt;    target/riscv: Add support for Control Transfer
+            &gt;=C2=A0 =C2=A0 target/riscv: Add support for Control Transfe=
+r
             Records extension CSRs.<br>
-            &gt;    target/riscv: Add support to record CTR entries.<br>
-            &gt;    target/riscv: Add CTR sctrclr instruction.<br>
-            &gt;    target/riscv: Add support to access ctrsource,
+            &gt;=C2=A0 =C2=A0 target/riscv: Add support to record CTR entri=
+es.<br>
+            &gt;=C2=A0 =C2=A0 target/riscv: Add CTR sctrclr instruction.<br=
+>
+            &gt;=C2=A0 =C2=A0 target/riscv: Add support to access ctrsource=
+,
             ctrtarget, ctrdata<br>
-            &gt;      regs.<br>
+            &gt;=C2=A0 =C2=A0 =C2=A0 regs.<br>
             &gt;<br>
-            &gt;   target/riscv/cpu.c                            |   4 +<br>
-            &gt;   target/riscv/cpu.h                            |  14 +<br>
-            &gt;   target/riscv/cpu_bits.h                       | 154
+            &gt;=C2=A0 =C2=A0target/riscv/cpu.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=
+=A0 =C2=A04 +<br>
+            &gt;=C2=A0 =C2=A0target/riscv/cpu.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=
+=A0 14 +<br>
+            &gt;=C2=A0 =C2=A0target/riscv/cpu_bits.h=C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 154
             +++++++++<br>
-            &gt;   target/riscv/cpu_cfg.h                        |   2 +<br>
-            &gt;   target/riscv/cpu_helper.c                     | 213
+            &gt;=C2=A0 =C2=A0target/riscv/cpu_cfg.h=C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A02=
+ +<br>
+            &gt;=C2=A0 =C2=A0target/riscv/cpu_helper.c=C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 213
             ++++++++++++<br>
-            &gt;   target/riscv/csr.c                            | 312
+            &gt;=C2=A0 =C2=A0target/riscv/csr.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 312
             +++++++++++++++++-<br>
-            &gt;   target/riscv/helper.h                         |   8
+            &gt;=C2=A0 =C2=A0target/riscv/helper.h=C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =
+=C2=A08
             +-<br>
-            &gt;   target/riscv/insn32.decode                    |   2
+            &gt;=C2=A0 =C2=A0target/riscv/insn32.decode=C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A02
             +-<br>
-            &gt;   .../riscv/insn_trans/trans_privileged.c.inc   |  21
+            &gt;=C2=A0 =C2=A0.../riscv/insn_trans/trans_privileged.c.inc=C2=
+=A0 =C2=A0|=C2=A0 21
             +-<br>
-            &gt;   target/riscv/insn_trans/trans_rvi.c.inc       |  27
+            &gt;=C2=A0 =C2=A0target/riscv/insn_trans/trans_rvi.c.inc=C2=A0 =
+=C2=A0 =C2=A0 =C2=A0|=C2=A0 27
             ++<br>
-            &gt;   target/riscv/op_helper.c                      | 117
+            &gt;=C2=A0 =C2=A0target/riscv/op_helper.c=C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 117
             ++++++-<br>
-            &gt;   target/riscv/translate.c                      |   9 +<br>
-            &gt;   12 files changed, 870 insertions(+), 13 deletions(-)<br>
+            &gt;=C2=A0 =C2=A0target/riscv/translate.c=C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A09 +<b=
+r>
+            &gt;=C2=A0 =C2=A012 files changed, 870 insertions(+), 13 deleti=
+ons(-)<br>
             &gt;<br>
           </blockquote>
         </div>
       </div>
     </blockquote>
-  </body>
-</html>
+  </div>
 
---------------WYIS1LWe0NRq2HXlYwrkjJfU--
+</blockquote></div>
+
+--000000000000c941d1061a1c58b7--
 
