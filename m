@@ -4,85 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFE94C25B76
-	for <qemu-riscv@archiver.kernel.org>; Wed,  5 Jun 2024 15:17:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1355C25B76
+	for <qemu-riscv@archiver.kernel.org>; Wed,  5 Jun 2024 17:35:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sEsO3-0003EZ-Fn; Wed, 05 Jun 2024 11:17:15 -0400
+	id 1sEuXQ-0006nG-OV; Wed, 05 Jun 2024 13:35:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <beeman@rivosinc.com>)
- id 1sEsO2-0003E0-20
- for qemu-riscv@nongnu.org; Wed, 05 Jun 2024 11:17:14 -0400
-Received: from mail-yb1-xb2d.google.com ([2607:f8b0:4864:20::b2d])
+ (Exim 4.90_1) (envelope-from <tjeznach@rivosinc.com>)
+ id 1sEuXN-0006kh-MW
+ for qemu-riscv@nongnu.org; Wed, 05 Jun 2024 13:35:01 -0400
+Received: from mail-pf1-x42c.google.com ([2607:f8b0:4864:20::42c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <beeman@rivosinc.com>)
- id 1sEsNw-0004Q2-Ij
- for qemu-riscv@nongnu.org; Wed, 05 Jun 2024 11:17:13 -0400
-Received: by mail-yb1-xb2d.google.com with SMTP id
- 3f1490d57ef6-dfa727cde2dso5641305276.0
- for <qemu-riscv@nongnu.org>; Wed, 05 Jun 2024 08:17:07 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <tjeznach@rivosinc.com>)
+ id 1sEuXK-0006mE-LA
+ for qemu-riscv@nongnu.org; Wed, 05 Jun 2024 13:35:01 -0400
+Received: by mail-pf1-x42c.google.com with SMTP id
+ d2e1a72fcca58-702621d8725so56871b3a.0
+ for <qemu-riscv@nongnu.org>; Wed, 05 Jun 2024 10:34:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1717600626; x=1718205426;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1717608897; x=1718213697;
  darn=nongnu.org; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Jlb7ESxOsRm5KDgEYeQVXYTQfK40jOTSEa/j09EcSOQ=;
- b=ToGPbICOyeYS5+aIPuzjjnnFWfx0nvJby3575Fgmw4O0yXyd+QR7UaBb9V6czmOTDR
- /2ytQ/tT4epObUFvLIvLrgdyfzk9/sfTWbbn3wLzpmJ79CKqAhfPtbsM9Ow3MX8uCRoN
- phnPfE6azfjyur7m9ljMB9UFP/yMbDMveRGGIVwF9THnHCo9bfycbzjLMcdWfQAiUB1x
- JoeyFKLPP1DnYuRtQhbxc0P2g30sWHbcjZvazRDmZvDhX1+wkzWvzIoiBkus1nKRzEKG
- va6Kz3Ry6W6REyYw4JjcIllwi6/Gey/sbjCTsXX0JAYnOOirU+sHOQerbVwDpChmF3Hd
- UxaQ==
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vlOa1fd1Am6tmTNeZbxQ94sUldfrKKaaJOLSlsxhO1w=;
+ b=zxW20aNmLf/3wmM2+oyZk/9jkeuRSZVkAnMG08vsnipCBeb1DaPoMYp8GXHZ55ld7x
+ NtsTSZzmzqJa3LWPHgj/h4kNKGT1e6OTE7TCW4o7jqp4gCDvYsDiWXps1Gf4qRkoZ/S0
+ +hDbuDUQgFsmj0v3Ryp8PVteVns425Zd00ft7OyBHtKzw9Bv1cCo4Cy7Hlzw5ZsNzgs3
+ txgDvkvm/gVbikxB9ipI/i09TL6qkj4T3JyBUJfFRVCjWygdW/lXciNfHifLNAWGD0/J
+ 0fL053RBXBQDPnke2X543QWtUdkRCCNu3NEIYHKS475XXyA06SeAAcha5j2oF6viL4Gh
+ orRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717600626; x=1718205426;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Jlb7ESxOsRm5KDgEYeQVXYTQfK40jOTSEa/j09EcSOQ=;
- b=PdLW/mIAVFNUCnY1DMCDpfndMDIToTfJnz7D9CMGsO4DkZWqAheS6N5Orq9X4+lOV7
- bKLBO/exqxngdSLK9cKbHw5T4rU1daw0lIcs+JiVjN8wcsGOjnKU2EeWxS/qM8iHJivU
- eaNNz3ERPXcwz3IHKpdJijFSyYNv/7xJ1478vv4xmSZ/AwtUwtjnJl7+ebW6lbzanbvz
- DroMG50QWO86SOfxxO73Ldnprfq0rZYRueJ1C4nrhL7xfxFLfUBDSP5jtDdshHW9DOLc
- hYih1X6R9Vr3QppppRZn2BlGHSG+D40iS4Ihca1OuXbD8LdtTD7qPtzMSj4Rd851uw2F
- +21g==
+ d=1e100.net; s=20230601; t=1717608897; x=1718213697;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=vlOa1fd1Am6tmTNeZbxQ94sUldfrKKaaJOLSlsxhO1w=;
+ b=Z9OTh3z9OJFvHKCwUqOxvLSc4ALo6RlNe1lCvHXSIgeGuT54+D4DtT/Nx1c+0oF+Tt
+ nhcZZFUKKLO8V6o0+FKqrCBh9btj3EYHKIY7gS452YGRXOG+h5eo+5s70y5Xq81YnS2C
+ DyXP5qIuF/RNnsfB5Xbs4EKTCgmA7bqNA7ww1PWEz4xU8X7JREySBLN7L/UXJ1Z7DmmI
+ xs8GD8RdWV1jw4wh/1cgXOu2N3egjfaGQtKsD9DIP97KlMPtI6Z7K3ViHqr+kKdo2RXV
+ zeH9vt+ypVbUEf32Jm7Lp4jzHkrmm3mUzIX/TPA600QTeLQ2Hvx6mggVLjtbcwd3U0PI
+ PMrw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUN/Oa2KbUd+SPpNhaFGO/dmRMKrMDGrid1ALNbyyvMQbIpZdLYQSTD0hN0Bv4wQ+r4LPAev2iZgB7ws5JzvsHZyC58mL0=
-X-Gm-Message-State: AOJu0Yy6QWxxrkh68zjig0KuJnqO/3SmACKzDhBHmuEnX+4NiTOclP3y
- rg16TDfUgLD74Fv+whNscWsMf7KqZU6zAYo2+i84oVr7Y3Z6mgSroby2YESs2SVMBfFD9cMnNdS
- DJD9ZfxyHhtK1cEbpGUl9BTXqAw2OXjYzHYWa0Q==
-X-Google-Smtp-Source: AGHT+IGucXdZ/GTRJNvz8GzD9tUz4SV5iqoz7G997laSxYtLInu9UDA6Y+qpm40kt6aLeiAdxfVdf438KfqLfDKQ6JU=
-X-Received: by 2002:a25:dc93:0:b0:df7:94d3:5555 with SMTP id
- 3f1490d57ef6-dfacacf8cf7mr2931997276.41.1717600625685; Wed, 05 Jun 2024
- 08:17:05 -0700 (PDT)
+ AJvYcCUo4p6oVTlbEDeskoYdbqdV4WgtpOuTBJG0WE1cy5ydrjMcF2oA1liCUPOcumXdQUwII2VB3zin3NyMclRvZdpPt0UapFw=
+X-Gm-Message-State: AOJu0YwqrMueBBQWKs2eIXMIMKBntX4gxkIgYpPcyXieLIHuuBbImSQS
+ ldEny0baZ2z9GPzGElAto01MH78zrWu9v3eBfpoUJwedNCc+yrmAji88ItJ0G3WcGNq9+DKPgPz
+ 8sNJzs5HKYri3oHIkeQ5rK7kwks9VGH0/+5jBZw==
+X-Google-Smtp-Source: AGHT+IGmSKc1JqQHL1ybz4VbCOtOyY5Ktvat1zgdXStMRXtLOT3fqs4bIGVIKpO3nkbiiSH8fmgBmfo4eErn6oRptuw=
+X-Received: by 2002:a05:6a21:193:b0:1b2:b60a:a425 with SMTP id
+ adf61e73a8af0-1b2b713c70bmr3905443637.46.1717608896673; Wed, 05 Jun 2024
+ 10:34:56 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240529160950.132754-1-rkanwal@rivosinc.com>
- <20240529160950.132754-6-rkanwal@rivosinc.com>
- <71bc36b9-cc17-4036-91b2-e7ddd81f0c07@sifive.com>
- <CAP55G9AAF9wwPEkNdG60Mnie8p=f-+ZzcjDBJU_RCSL+KSU77w@mail.gmail.com>
- <7a32916e-00f5-4244-8f4a-a39388136573@sifive.com>
-In-Reply-To: <7a32916e-00f5-4244-8f4a-a39388136573@sifive.com>
-From: Beeman Strong <beeman@rivosinc.com>
-Date: Wed, 5 Jun 2024 08:16:53 -0700
-Message-ID: <CAP55G9CDnz41wusJT-xxbs5=9F0b6tcdO97-uqNQYGYPdvnn=Q@mail.gmail.com>
-Subject: Re: [PATCH 5/6] target/riscv: Add CTR sctrclr instruction.
-To: Jason Chien <jason.chien@sifive.com>
-Cc: Rajnesh Kanwal <rkanwal@rivosinc.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, 
- alistair.francis@wdc.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn, 
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, atishp@rivosinc.com, 
- apatel@ventanamicro.com, tech-control-transfer-records@lists.riscv.org
-Content-Type: multipart/alternative; boundary="0000000000002932fc061a260ff8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b2d;
- envelope-from=beeman@rivosinc.com; helo=mail-yb1-xb2d.google.com
+References: <20240523173955.1940072-1-dbarboza@ventanamicro.com>
+ <20240523173955.1940072-9-dbarboza@ventanamicro.com>
+In-Reply-To: <20240523173955.1940072-9-dbarboza@ventanamicro.com>
+From: Tomasz Jeznach <tjeznach@rivosinc.com>
+Date: Wed, 5 Jun 2024 10:34:45 -0700
+Message-ID: <CAH2o1u79UaPJ4SGRV-GKaKHCxO68eq--xBxxSEfprbMWNz+qAg@mail.gmail.com>
+Subject: Re: [PATCH v3 08/13] hw/riscv/riscv-iommu: add Address Translation
+ Cache (IOATC)
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com, ajones@ventanamicro.com, frank.chang@sifive.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42c;
+ envelope-from=tjeznach@rivosinc.com; helo=mail-pf1-x42c.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,596 +95,456 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---0000000000002932fc061a260ff8
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Daniel,
 
-On Tue, Jun 4, 2024 at 11:28=E2=80=AFPM Jason Chien <jason.chien@sifive.com=
-> wrote:
+Thank you for your upstreaming work!
 
-> Chapter 5 describes the CTR behavior when Smstaten is enabled, but it doe=
-s
-> not talk about the CTR behavior when Smstateen is disabled, that is, ther=
-e
-> is no mstateen0 and hstateen0 CSR.
->
-If Smstateen is not implemented then chapter 5 can be ignored, and the
-behavior is as described in the other chapters.
+I've synchronized the private branch with v3 changes, and noticed
+there is an important change missing in this patchset. We need
+reader-writer lock around access to GLib.HashTable as it's not
+MT-safe.  Diff added below, also available on github [1] branch
+riscv_iommu_v4-rc1.
 
-> The spec states:
->
->    - Attempts to access sctrdepth from VS-mode or VU-mode raise a
->    virtual-instruction exception, unless CTR state enable access restrict=
-ions
->    apply.
->
->
->    - sctrdepth is not included in the above list of supervisor CTR state
->    controlled by hstateen0.CTR since accesses to sctrdepth from VS-mode r=
-aise
->    a virtual-instruction exception regardless of the value of hstateen0.C=
-TR.
->
-> Below is my understanding:
->
->    - If Smstateen is enabled:
->       - If mstateen0.CTR=3D0:
->          - Attempts to access sctrctl, vsctrctl, sctrdepth, or sctrstatus
->          raise an illegal-instruction exception for privilege modes less =
-privileged
->          than M-mode.
->          - Attempts to access sireg* when siselect is in 0x200..0x2FF, or
->          vsireg* when vsiselect is in 0x200..0x2FF raise an illegal-instr=
-uction
->          exception for privilege modes less privileged than M-mode.
->          - Execution of the SCTRCLR instruction raises an
->          illegal-instruction exception for privilege modes less privilege=
-d than
->          M-mode.
->          - If mstateen.CTR=3D1:
->          - Attempts to access sctrctl, vsctrctl, sctrdepth, or sctrstatus
->          raise an illegal-instruction exception for U-mode.
->          - Attempts to access sireg* when siselect is in 0x200..0x2FF, or
->          vsireg* when vsiselect is in 0x200..0x2FF raise an illegal-instr=
-uction
->          exception for U-mode.
->          - Execution of the SCTRCLR instruction raises an
->          illegal-instruction exception for U-mode.
->          - If H extension is enabled:
->             - If hstateen0.CTR =3D 0:
->             - Attempts to access sctrctl, vsctrctl, sctrdepth, or
->                sctrstatus raise an virtual-instruction exception for VU-m=
-ode and VS-mode.
->                - Attempts to access sireg* when siselect is in
->                0x200..0x2FF, or vsireg* when vsiselect is in 0x200..0x2FF=
- raise an
->                virtual-instruction exception for VU-mode and VS-mode.
->                - Execution of the SCTRCLR instruction raises an
->                virtual-instruction exception for VU-mode and VS-mode.
->             - If hstateen0.CTR =3D 1:
->                - Attempts to access sctrctl, vsctrctl, sctrdepth, or
->                sctrstatus raise an virtual-instruction exception for VU-m=
-ode.
->                - *Attempts to access sctrdepth raise an
->                virtual-instruction exception for "VS-mode".*
->                - Attempts to access sireg* when siselect is in
->                0x200..0x2FF, or vsireg* when vsiselect is in 0x200..0x2FF=
- raise an
->                virtual-instruction exception for VU-mode.
->                - Execution of the SCTRCLR instruction raises an
->                virtual-instruction exception for VU-mode.
->             - If Smstateen is disabled:
->       - Attempts to access sctrctl, vsctrctl, sctrdepth, or sctrstatus
->       raise an illegal-instruction exception for U-mode.
->       - Attempts to access sireg* when siselect is in 0x200..0x2FF, or
->       vsireg* when vsiselect is in 0x200..0x2FF raise an illegal-instruct=
-ion
->       exception for U-mode.
->       - Execution of the SCTRCLR instruction raises an
->       illegal-instruction exception for U-mode.
->       - If H extension is enabled:
->          - Attempts to access sctrctl, vsctrctl, sctrdepth, or sctrstatus
->          raise an virtual-instruction exception for VU-mode.
->          - *Attempts to access sctrdepth raise an virtual-instruction
->          exception for "VS-mode".*
->          - Attempts to access sireg* when siselect is in 0x200..0x2FF, or
->          vsireg* when vsiselect is in 0x200..0x2FF raise an virtual-instr=
-uction
->          exception for VU-mode.
->          - Execution of the SCTRCLR instruction raises an
->          virtual-instruction exception for VU-mode.
->
-> If there is any misunderstanding, please let me know. Also Sstateen0 does
-> not involve in CTR. Am I correct?
->
-That all looks correct.  sctrdepth gets that special treatment in VS-mode
-(bold and underlined above) because it is expected that a hypervisor will
-wish to limit the depth options available to a guest, for the purposes of
-VM-migration.
+[1] link: https://github.com/tjeznach/qemu/tree/riscv_iommu_v4-rc1
 
-And yes, there is no U/VU-mode access to CTR, so Ssstaten does not apply to
-CTR.
+Thanks!
+- Tomasz Jeznach
+
+diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+index a27f56419a..75c5d645fc 100644
+--- a/hw/riscv/riscv-iommu.c
++++ b/hw/riscv/riscv-iommu.c
+@@ -991,7 +991,9 @@ static void riscv_iommu_ctx_inval(RISCVIOMMUState
+*s, GHFunc func,
+         .pasid =3D pasid,
+     };
+     ctx_cache =3D g_hash_table_ref(s->ctx_cache);
++    pthread_rwlock_wrlock(&s->ctx_lock);
+     g_hash_table_foreach(ctx_cache, func, &key);
++    pthread_rwlock_unlock(&s->ctx_lock);
+     g_hash_table_unref(ctx_cache);
+ }
+
+@@ -1007,26 +1009,31 @@ static RISCVIOMMUContext
+*riscv_iommu_ctx(RISCVIOMMUState *s,
+     };
+
+     ctx_cache =3D g_hash_table_ref(s->ctx_cache);
++    pthread_rwlock_rdlock(&s->ctx_lock);
+     ctx =3D g_hash_table_lookup(ctx_cache, &key);
++    pthread_rwlock_unlock(&s->ctx_lock);
+
+     if (ctx && (ctx->tc & RISCV_IOMMU_DC_TC_V)) {
+         *ref =3D ctx_cache;
+         return ctx;
+     }
+
+-    if (g_hash_table_size(s->ctx_cache) >=3D LIMIT_CACHE_CTX) {
+-        ctx_cache =3D g_hash_table_new_full(__ctx_hash, __ctx_equal,
+-                                          g_free, NULL);
+-        g_hash_table_unref(qatomic_xchg(&s->ctx_cache, ctx_cache));
+-    }
+-
+     ctx =3D g_new0(RISCVIOMMUContext, 1);
+     ctx->devid =3D devid;
+     ctx->pasid =3D pasid;
+
+     int fault =3D riscv_iommu_ctx_fetch(s, ctx);
+     if (!fault) {
++        pthread_rwlock_wrlock(&s->ctx_lock);
++        if (g_hash_table_size(ctx_cache) >=3D LIMIT_CACHE_CTX) {
++            g_hash_table_unref(ctx_cache);
++            ctx_cache =3D g_hash_table_new_full(__ctx_hash, __ctx_equal,
++                                              g_free, NULL);
++            g_hash_table_ref(ctx_cache);
++            g_hash_table_unref(qatomic_xchg(&s->ctx_cache, ctx_cache));
++        }
+         g_hash_table_add(ctx_cache, ctx);
++        pthread_rwlock_unlock(&s->ctx_lock);
+         *ref =3D ctx_cache;
+         return ctx;
+     }
+@@ -1176,12 +1183,14 @@ static void riscv_iommu_iot_update(RISCVIOMMUState =
+*s,
+         return;
+     }
+
++    pthread_rwlock_wrlock(&s->iot_lock);
+     if (g_hash_table_size(s->iot_cache) >=3D s->iot_limit) {
+         iot_cache =3D g_hash_table_new_full(__iot_hash, __iot_equal,
+                                           g_free, NULL);
+         g_hash_table_unref(qatomic_xchg(&s->iot_cache, iot_cache));
+     }
+     g_hash_table_add(iot_cache, iot);
++    pthread_rwlock_unlock(&s->iot_lock);
+ }
+
+ static void riscv_iommu_iot_inval(RISCVIOMMUState *s, GHFunc func,
+@@ -1195,7 +1204,9 @@ static void
+riscv_iommu_iot_inval(RISCVIOMMUState *s, GHFunc func,
+     };
+
+     iot_cache =3D g_hash_table_ref(s->iot_cache);
++    pthread_rwlock_wrlock(&s->iot_lock);
+     g_hash_table_foreach(iot_cache, func, &key);
++    pthread_rwlock_unlock(&s->iot_lock);
+     g_hash_table_unref(iot_cache);
+ }
+
+@@ -1227,7 +1238,9 @@ static int riscv_iommu_translate(RISCVIOMMUState
+*s, RISCVIOMMUContext *ctx,
+         }
+     }
+
++    pthread_rwlock_rdlock(&s->iot_lock);
+     iot =3D riscv_iommu_iot_lookup(ctx, iot_cache, iotlb->iova);
++    pthread_rwlock_unlock(&s->iot_lock);
+     perm =3D iot ? iot->perm : IOMMU_NONE;
+     if (perm !=3D IOMMU_NONE) {
+         iotlb->translated_addr =3D PPN_PHYS(iot->phys);
+@@ -2085,6 +2098,8 @@ static void riscv_iommu_realize(DeviceState
+*dev, Error **errp)
+                                          g_free, NULL);
+     s->iot_cache =3D g_hash_table_new_full(__iot_hash, __iot_equal,
+                                          g_free, NULL);
++    pthread_rwlock_init(&s->ctx_lock, NULL);
++    pthread_rwlock_init(&s->iot_lock, NULL);
+
+     s->iommus.le_next =3D NULL;
+     s->iommus.le_prev =3D NULL;
+diff --git a/hw/riscv/riscv-iommu.h b/hw/riscv/riscv-iommu.h
+index 26236c3cee..041b3b9e05 100644
+--- a/hw/riscv/riscv-iommu.h
++++ b/hw/riscv/riscv-iommu.h
+@@ -71,7 +71,9 @@ struct RISCVIOMMUState {
+     MemoryRegion trap_mr;
+
+     GHashTable *ctx_cache;          /* Device translation Context Cache */
++    pthread_rwlock_t ctx_lock;      /* Device translation Cache update loc=
+k */
+     GHashTable *iot_cache;          /* IO Translated Address Cache */
++    pthread_rwlock_t iot_lock;      /* IO TLB Cache update lock */
+     unsigned iot_limit;             /* IO Translation Cache size limit */
+
+     /* MMIO Hardware Interface */
 
 
-> Thanks in advance.
-> Beeman Strong =E6=96=BC 2024/6/5 =E4=B8=8A=E5=8D=88 02:46 =E5=AF=AB=E9=81=
-=93:
+On Thu, May 23, 2024 at 10:40=E2=80=AFAM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
 >
+> From: Tomasz Jeznach <tjeznach@rivosinc.com>
 >
+> The RISC-V IOMMU spec predicts that the IOMMU can use translation caches
+> to hold entries from the DDT. This includes implementation for all cache
+> commands that are marked as 'not implemented'.
 >
-> On Tue, Jun 4, 2024 at 10:19=E2=80=AFAM Jason Chien <jason.chien@sifive.c=
-om>
-> wrote:
+> There are some artifacts included in the cache that predicts s-stage and
+> g-stage elements, although we don't support it yet. We'll introduce them
+> next.
 >
->>
->> Rajnesh Kanwal =E6=96=BC 2024/5/30 =E4=B8=8A=E5=8D=88 12:09 =E5=AF=AB=E9=
-=81=93:
->> > CTR extension adds a new instruction sctrclr to quickly
->> > clear the recorded entries buffer.
->> >
->> > Signed-off-by: Rajnesh Kanwal <rkanwal@rivosinc.com>
->> > ---
->> >   target/riscv/cpu.h                             |  1 +
->> >   target/riscv/cpu_helper.c                      |  7 +++++++
->> >   target/riscv/insn32.decode                     |  1 +
->> >   target/riscv/insn_trans/trans_privileged.c.inc | 10 ++++++++++
->> >   target/riscv/op_helper.c                       |  5 +++++
->> >   5 files changed, 24 insertions(+)
->> >
->> > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
->> > index a294a5372a..fade71aa09 100644
->> > --- a/target/riscv/cpu.h
->> > +++ b/target/riscv/cpu.h
->> > @@ -572,6 +572,7 @@ void riscv_cpu_set_mode(CPURISCVState *env,
->> target_ulong newpriv, bool virt_en);
->> >   void riscv_ctr_freeze(CPURISCVState *env, uint64_t freeze_mask);
->> >   void riscv_ctr_add_entry(CPURISCVState *env, target_long src,
->> target_long dst,
->> >                            uint64_t type, target_ulong prev_priv, bool
->> prev_virt);
->> > +void riscv_ctr_clear(CPURISCVState *env);
->> >
->> >   void riscv_translate_init(void);
->> >   G_NORETURN void riscv_raise_exception(CPURISCVState *env,
->> > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
->> > index e064a7306e..45502f50a7 100644
->> > --- a/target/riscv/cpu_helper.c
->> > +++ b/target/riscv/cpu_helper.c
->> > @@ -704,6 +704,13 @@ void riscv_ctr_freeze(CPURISCVState *env, uint64_=
-t
->> freeze_mask)
->> >       }
->> >   }
->> >
->> > +void riscv_ctr_clear(CPURISCVState *env)
->> > +{
->> > +    memset(env->ctr_src, 0x0, sizeof(env->ctr_src));
->> > +    memset(env->ctr_dst, 0x0, sizeof(env->ctr_dst));
->> > +    memset(env->ctr_data, 0x0, sizeof(env->ctr_data));
->> > +}
->> > +
->> >   static uint64_t riscv_ctr_priv_to_mask(target_ulong priv, bool virt)
->> >   {
->> >       switch (priv) {
->> > diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
->> > index 9cb1a1b4ec..d3d38c7c68 100644
->> > --- a/target/riscv/insn32.decode
->> > +++ b/target/riscv/insn32.decode
->> > @@ -107,6 +107,7 @@
->> >   # *** Privileged Instructions ***
->> >   ecall       000000000000     00000 000 00000 1110011
->> >   ebreak      000000000001     00000 000 00000 1110011
->> > +sctrclr     000100000100     00000 000 00000 1110011
->> >   uret        0000000    00010 00000 000 00000 1110011
->> >   sret        0001000    00010 00000 000 00000 1110011
->> >   mret        0011000    00010 00000 000 00000 1110011
->> > diff --git a/target/riscv/insn_trans/trans_privileged.c.inc
->> b/target/riscv/insn_trans/trans_privileged.c.inc
->> > index 339d659151..dd9da8651f 100644
->> > --- a/target/riscv/insn_trans/trans_privileged.c.inc
->> > +++ b/target/riscv/insn_trans/trans_privileged.c.inc
->> > @@ -69,6 +69,16 @@ static bool trans_ebreak(DisasContext *ctx,
->> arg_ebreak *a)
->> >       return true;
->> >   }
->> >
->> > +static bool trans_sctrclr(DisasContext *ctx, arg_sctrclr *a)
->> > +{
->> > +#ifndef CONFIG_USER_ONLY
->> If both of smctr and ssctr are not enabled, it is an illegal instruction=
-.
->> > +    gen_helper_ctr_clear(tcg_env);
->> > +    return true;
->> > +#else
->> > +    return false;
->> > +#endif
->> > +}
->> > +
->> >   static bool trans_uret(DisasContext *ctx, arg_uret *a)
->> >   {
->> >       return false;
->> > diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
->> > index c8053d9c2f..89423c04b3 100644
->> > --- a/target/riscv/op_helper.c
->> > +++ b/target/riscv/op_helper.c
->> > @@ -461,6 +461,11 @@ void helper_ctr_branch(CPURISCVState *env,
->> target_ulong src, target_ulong dest,
->> >       }
->> >   }
->> >
->> > +void helper_ctr_clear(CPURISCVState *env)
->> > +{
->>
->> There should be some checks here.
->> The spec states:
->> SCTRCLR raises an illegal-instruction exception in U-mode, and a
->> virtual-instruction exception in VU-mode, unless CTR state enable access
->> restrictions apply.
->>
->> I don't quite understand "unless CTR state enable access restrictions
->> apply" though.
->>
+> Signed-off-by: Tomasz Jeznach <tjeznach@rivosinc.com>
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Reviewed-by: Frank Chang <frank.chang@sifive.com>
+> ---
+>  hw/riscv/riscv-iommu.c | 189 ++++++++++++++++++++++++++++++++++++++++-
+>  hw/riscv/riscv-iommu.h |   2 +
+>  2 files changed, 187 insertions(+), 4 deletions(-)
 >
-> The next sentence says "See Chapter 5", which states that execution of
-> SCTRCLR raises an illegal instruction exception if mstateen0.CTR=3D0 and =
-the
-> priv mode is not M-mode, and it raises a virtual instruction exception if
-> mstateen0.CTR=3D0 && hstateen0.CTR=3D1 and the priv mode is VS-mode.
+> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+> index 39b4ff1405..abf6ae7726 100644
+> --- a/hw/riscv/riscv-iommu.c
+> +++ b/hw/riscv/riscv-iommu.c
+> @@ -63,6 +63,16 @@ struct RISCVIOMMUContext {
+>      uint64_t msiptp;            /* MSI redirection page table pointer */
+>  };
 >
-> When mstateen0.CTR=3D0, hstateen0.CTR is read-only 0. I guess you meant
-> "mstateen0.CTR=3D1 && hstateen0.CTR=3D0" here.
+> +/* Address translation cache entry */
+> +struct RISCVIOMMUEntry {
+> +    uint64_t iova:44;           /* IOVA Page Number */
+> +    uint64_t pscid:20;          /* Process Soft-Context identifier */
+> +    uint64_t phys:44;           /* Physical Page Number */
+> +    uint64_t gscid:16;          /* Guest Soft-Context identifier */
+> +    uint64_t perm:2;            /* IOMMU_RW flags */
+> +    uint64_t __rfu:2;
+> +};
+> +
+>  /* IOMMU index for transactions without PASID specified. */
+>  #define RISCV_IOMMU_NOPASID 0
 >
-
-You're right, thanks.
-
+> @@ -751,13 +761,125 @@ static AddressSpace *riscv_iommu_space(RISCVIOMMUS=
+tate *s, uint32_t devid)
+>      return &as->iova_as;
+>  }
 >
+> +/* Translation Object cache support */
+> +static gboolean __iot_equal(gconstpointer v1, gconstpointer v2)
+> +{
+> +    RISCVIOMMUEntry *t1 =3D (RISCVIOMMUEntry *) v1;
+> +    RISCVIOMMUEntry *t2 =3D (RISCVIOMMUEntry *) v2;
+> +    return t1->gscid =3D=3D t2->gscid && t1->pscid =3D=3D t2->pscid &&
+> +           t1->iova =3D=3D t2->iova;
+> +}
+> +
+> +static guint __iot_hash(gconstpointer v)
+> +{
+> +    RISCVIOMMUEntry *t =3D (RISCVIOMMUEntry *) v;
+> +    return (guint)t->iova;
+> +}
+> +
+> +/* GV: 1 PSCV: 1 AV: 1 */
+> +static void __iot_inval_pscid_iova(gpointer key, gpointer value, gpointe=
+r data)
+> +{
+> +    RISCVIOMMUEntry *iot =3D (RISCVIOMMUEntry *) value;
+> +    RISCVIOMMUEntry *arg =3D (RISCVIOMMUEntry *) data;
+> +    if (iot->gscid =3D=3D arg->gscid &&
+> +        iot->pscid =3D=3D arg->pscid &&
+> +        iot->iova =3D=3D arg->iova) {
+> +        iot->perm =3D IOMMU_NONE;
+> +    }
+> +}
+> +
+> +/* GV: 1 PSCV: 1 AV: 0 */
+> +static void __iot_inval_pscid(gpointer key, gpointer value, gpointer dat=
+a)
+> +{
+> +    RISCVIOMMUEntry *iot =3D (RISCVIOMMUEntry *) value;
+> +    RISCVIOMMUEntry *arg =3D (RISCVIOMMUEntry *) data;
+> +    if (iot->gscid =3D=3D arg->gscid &&
+> +        iot->pscid =3D=3D arg->pscid) {
+> +        iot->perm =3D IOMMU_NONE;
+> +    }
+> +}
+> +
+> +/* GV: 1 GVMA: 1 */
+> +static void __iot_inval_gscid_gpa(gpointer key, gpointer value, gpointer=
+ data)
+> +{
+> +    RISCVIOMMUEntry *iot =3D (RISCVIOMMUEntry *) value;
+> +    RISCVIOMMUEntry *arg =3D (RISCVIOMMUEntry *) data;
+> +    if (iot->gscid =3D=3D arg->gscid) {
+> +        /* simplified cache, no GPA matching */
+> +        iot->perm =3D IOMMU_NONE;
+> +    }
+> +}
+> +
+> +/* GV: 1 GVMA: 0 */
+> +static void __iot_inval_gscid(gpointer key, gpointer value, gpointer dat=
+a)
+> +{
+> +    RISCVIOMMUEntry *iot =3D (RISCVIOMMUEntry *) value;
+> +    RISCVIOMMUEntry *arg =3D (RISCVIOMMUEntry *) data;
+> +    if (iot->gscid =3D=3D arg->gscid) {
+> +        iot->perm =3D IOMMU_NONE;
+> +    }
+> +}
+> +
+> +/* GV: 0 */
+> +static void __iot_inval_all(gpointer key, gpointer value, gpointer data)
+> +{
+> +    RISCVIOMMUEntry *iot =3D (RISCVIOMMUEntry *) value;
+> +    iot->perm =3D IOMMU_NONE;
+> +}
+> +
+> +/* caller should keep ref-count for iot_cache object */
+> +static RISCVIOMMUEntry *riscv_iommu_iot_lookup(RISCVIOMMUContext *ctx,
+> +    GHashTable *iot_cache, hwaddr iova)
+> +{
+> +    RISCVIOMMUEntry key =3D {
+> +        .pscid =3D get_field(ctx->ta, RISCV_IOMMU_DC_TA_PSCID),
+> +        .iova  =3D PPN_DOWN(iova),
+> +    };
+> +    return g_hash_table_lookup(iot_cache, &key);
+> +}
+> +
+> +/* caller should keep ref-count for iot_cache object */
+> +static void riscv_iommu_iot_update(RISCVIOMMUState *s,
+> +    GHashTable *iot_cache, RISCVIOMMUEntry *iot)
+> +{
+> +    if (!s->iot_limit) {
+> +        return;
+> +    }
+> +
+> +    if (g_hash_table_size(s->iot_cache) >=3D s->iot_limit) {
+> +        iot_cache =3D g_hash_table_new_full(__iot_hash, __iot_equal,
+> +                                          g_free, NULL);
+> +        g_hash_table_unref(qatomic_xchg(&s->iot_cache, iot_cache));
+> +    }
+> +    g_hash_table_add(iot_cache, iot);
+> +}
+> +
+> +static void riscv_iommu_iot_inval(RISCVIOMMUState *s, GHFunc func,
+> +    uint32_t gscid, uint32_t pscid, hwaddr iova)
+> +{
+> +    GHashTable *iot_cache;
+> +    RISCVIOMMUEntry key =3D {
+> +        .gscid =3D gscid,
+> +        .pscid =3D pscid,
+> +        .iova  =3D PPN_DOWN(iova),
+> +    };
+> +
+> +    iot_cache =3D g_hash_table_ref(s->iot_cache);
+> +    g_hash_table_foreach(iot_cache, func, &key);
+> +    g_hash_table_unref(iot_cache);
+> +}
+> +
+>  static int riscv_iommu_translate(RISCVIOMMUState *s, RISCVIOMMUContext *=
+ctx,
+> -    IOMMUTLBEntry *iotlb)
+> +    IOMMUTLBEntry *iotlb, bool enable_cache)
+>  {
+> +    RISCVIOMMUEntry *iot;
+> +    IOMMUAccessFlags perm;
+>      bool enable_pasid;
+>      bool enable_pri;
+> +    GHashTable *iot_cache;
+>      int fault;
 >
->>
->> > +    riscv_ctr_clear(env);
->> > +}
->> > +
->> >   void helper_wfi(CPURISCVState *env)
->> >   {
->> >       CPUState *cs =3D env_cpu(env);
->>
+> +    iot_cache =3D g_hash_table_ref(s->iot_cache);
+>      /*
+>       * TC[32] is reserved for custom extensions, used here to temporaril=
+y
+>       * enable automatic page-request generation for ATS queries.
+> @@ -765,9 +887,36 @@ static int riscv_iommu_translate(RISCVIOMMUState *s,=
+ RISCVIOMMUContext *ctx,
+>      enable_pri =3D (iotlb->perm =3D=3D IOMMU_NONE) && (ctx->tc & BIT_ULL=
+(32));
+>      enable_pasid =3D (ctx->tc & RISCV_IOMMU_DC_TC_PDTV);
 >
-
---0000000000002932fc061a260ff8
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Tue, Jun 4, 2024 at 11:28=E2=80=AF=
-PM Jason Chien &lt;<a href=3D"mailto:jason.chien@sifive.com">jason.chien@si=
-five.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D=
-"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-le=
-ft:1ex"><u></u>
-
- =20
-   =20
- =20
-  <div>
-    <p>Chapter 5 describes the CTR behavior when Smstaten is enabled,
-      but it does not talk about the CTR behavior when Smstateen is
-      disabled, that is, there is no mstateen0 and hstateen0 CSR.</p></div>=
-</blockquote><div>If Smstateen is not implemented then chapter 5 can be ign=
-ored, and the behavior is as described in the other chapters.=C2=A0<br></di=
-v><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;borde=
-r-left:1px solid rgb(204,204,204);padding-left:1ex"><div>
-    <p>The spec states:<br>
-    </p>
-    <ul>
-      <li>Attempts to access sctrdepth from VS-mode or VU-mode raise a
-        virtual-instruction exception, unless CTR state enable access
-        restrictions apply.</li>
-    </ul>
-    <ul>
-      <li>sctrdepth is not included in the above list of supervisor CTR
-        state controlled by hstateen0.CTR since accesses to sctrdepth
-        from VS-mode raise a virtual-instruction exception regardless of
-        the value of hstateen0.CTR.</li>
-    </ul>
-    <p>Below is my understanding:<br>
-    </p>
-    <ul>
-      <li>If Smstateen is enabled:</li>
-      <ul>
-        <li>If mstateen0.CTR=3D0:</li>
-        <ul>
-          <li>Attempts to access sctrctl, vsctrctl, sctrdepth, or
-            sctrstatus raise an illegal-instruction exception for
-            privilege modes less privileged than M-mode.</li>
-          <li>Attempts to access sireg* when siselect is in
-            0x200..0x2FF, or vsireg* when vsiselect is in 0x200..0x2FF
-            raise an illegal-instruction exception for privilege modes
-            less privileged than M-mode.</li>
-          <li>Execution of the SCTRCLR instruction raises an
-            illegal-instruction exception for privilege modes less
-            privileged than M-mode.<br>
-          </li>
-        </ul>
-        <li>If mstateen.CTR=3D1:</li>
-        <ul>
-          <li>Attempts to access sctrctl, vsctrctl, sctrdepth, or
-            sctrstatus raise an illegal-instruction exception for
-            U-mode.</li>
-          <li>Attempts to access sireg* when siselect is in
-            0x200..0x2FF, or vsireg* when vsiselect is in 0x200..0x2FF
-            raise an illegal-instruction exception for U-mode.</li>
-          <li>Execution of the SCTRCLR instruction raises an
-            illegal-instruction exception for U-mode.</li>
-          <li>If H extension is enabled:</li>
-          <ul>
-            <li>If hstateen0.CTR =3D 0:<br>
-            </li>
-            <ul>
-              <li>Attempts to access sctrctl, vsctrctl, sctrdepth, or
-                sctrstatus raise an virtual-instruction exception for
-                VU-mode and VS-mode.</li>
-              <li>Attempts to access sireg* when siselect is in
-                0x200..0x2FF, or vsireg* when vsiselect is in
-                0x200..0x2FF raise an virtual-instruction exception for
-                VU-mode and VS-mode.</li>
-              <li>Execution of the SCTRCLR instruction raises an
-                virtual-instruction exception for VU-mode and VS-mode.</li>
-            </ul>
-            <li>If hstateen0.CTR =3D 1:</li>
-            <ul>
-              <li>Attempts to access sctrctl, vsctrctl, sctrdepth, or
-                sctrstatus raise an virtual-instruction exception for
-                VU-mode.</li>
-              <li><b><u><i>Attempts to access sctrdepth raise an
-                      virtual-instruction exception for &quot;VS-mode&quot;=
-</i>.</u></b></li>
-              <li>Attempts to access sireg* when siselect is in
-                0x200..0x2FF, or vsireg* when vsiselect is in
-                0x200..0x2FF raise an virtual-instruction exception for
-                VU-mode.</li>
-              <li>Execution of the SCTRCLR instruction raises an
-                virtual-instruction exception for VU-mode.</li>
-            </ul>
-          </ul>
-        </ul>
-      </ul>
-      <li>If Smstateen is disabled:</li>
-      <ul>
-        <li>Attempts to access sctrctl, vsctrctl, sctrdepth, or
-          sctrstatus raise an illegal-instruction exception for U-mode.</li=
+> +    iot =3D riscv_iommu_iot_lookup(ctx, iot_cache, iotlb->iova);
+> +    perm =3D iot ? iot->perm : IOMMU_NONE;
+> +    if (perm !=3D IOMMU_NONE) {
+> +        iotlb->translated_addr =3D PPN_PHYS(iot->phys);
+> +        iotlb->addr_mask =3D ~TARGET_PAGE_MASK;
+> +        iotlb->perm =3D perm;
+> +        fault =3D 0;
+> +        goto done;
+> +    }
+> +
+>      /* Translate using device directory / page table information. */
+>      fault =3D riscv_iommu_spa_fetch(s, ctx, iotlb);
 >
-        <li>Attempts to access sireg* when siselect is in 0x200..0x2FF,
-          or vsireg* when vsiselect is in 0x200..0x2FF raise an
-          illegal-instruction exception for U-mode.</li>
-        <li>Execution of the SCTRCLR instruction raises an
-          illegal-instruction exception for U-mode.</li>
-        <li>If H extension is enabled:</li>
-        <ul>
-          <li>Attempts to access sctrctl, vsctrctl, sctrdepth, or
-            sctrstatus raise an virtual-instruction exception for
-            VU-mode.</li>
-          <li><b><i><u>Attempts to access sctrdepth raise an
-                  virtual-instruction exception for &quot;VS-mode&quot;.</u=
-></i></b></li>
-          <li>Attempts to access sireg* when siselect is in
-            0x200..0x2FF, or vsireg* when vsiselect is in 0x200..0x2FF
-            raise an virtual-instruction exception for VU-mode.</li>
-          <li>Execution of the SCTRCLR instruction raises an
-            virtual-instruction exception for VU-mode.</li>
-        </ul>
-      </ul>
-    </ul>
-    <p>If there is any misunderstanding, please let me know. Also
-      Sstateen0 does not involve in CTR. Am I correct?<br></p></div></block=
-quote><div>That all looks correct.=C2=A0 sctrdepth gets that special treatm=
-ent in VS-mode (bold and underlined above) because it is expected that a hy=
-pervisor will wish to limit the depth options available to a guest, for the=
- purposes of VM-migration.</div><div><br></div><div>And yes, there is no U/=
-VU-mode access to CTR, so Ssstaten does not apply to CTR.</div><div>=C2=A0<=
-/div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bo=
-rder-left:1px solid rgb(204,204,204);padding-left:1ex"><div><p>
-    </p>
-    <p>Thanks in advance.<br>
-    </p>
-    <div>Beeman Strong =E6=96=BC 2024/6/5 =E4=B8=8A=E5=8D=88 02:46 =E5=AF=
-=AB=E9=81=93:<br>
-    </div>
-    <blockquote type=3D"cite">
-     =20
-      <div dir=3D"ltr">
-        <div dir=3D"ltr"><br>
-        </div>
-        <br>
-        <div class=3D"gmail_quote">
-          <div dir=3D"ltr" class=3D"gmail_attr">On Tue, Jun 4, 2024 at
-            10:19=E2=80=AFAM Jason Chien &lt;<a href=3D"mailto:jason.chien@=
-sifive.com" target=3D"_blank">jason.chien@sifive.com</a>&gt;
-            wrote:<br>
-          </div>
-          <blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8=
-ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><br>
-            Rajnesh Kanwal =E6=96=BC 2024/5/30 =E4=B8=8A=E5=8D=88 12:09 =E5=
-=AF=AB=E9=81=93:<br>
-            &gt; CTR extension adds a new instruction sctrclr to quickly<br=
+> +    if (!fault && iotlb->target_as =3D=3D &s->trap_as) {
+> +        /* Do not cache trapped MSI translations */
+> +        goto done;
+> +    }
+> +
+> +    if (!fault && iotlb->translated_addr !=3D iotlb->iova && enable_cach=
+e) {
+> +        iot =3D g_new0(RISCVIOMMUEntry, 1);
+> +        iot->iova =3D PPN_DOWN(iotlb->iova);
+> +        iot->phys =3D PPN_DOWN(iotlb->translated_addr);
+> +        iot->pscid =3D get_field(ctx->ta, RISCV_IOMMU_DC_TA_PSCID);
+> +        iot->perm =3D iotlb->perm;
+> +        riscv_iommu_iot_update(s, iot_cache, iot);
+> +    }
+> +
+> +done:
+> +    g_hash_table_unref(iot_cache);
+> +
+>      if (enable_pri && fault) {
+>          struct riscv_iommu_pq_record pr =3D {0};
+>          if (enable_pasid) {
+> @@ -907,13 +1056,40 @@ static void riscv_iommu_process_cq_tail(RISCVIOMMU=
+State *s)
+>              if (cmd.dword0 & RISCV_IOMMU_CMD_IOTINVAL_PSCV) {
+>                  /* illegal command arguments IOTINVAL.GVMA & PSCV =3D=3D=
+ 1 */
+>                  goto cmd_ill;
+> +            } else if (!(cmd.dword0 & RISCV_IOMMU_CMD_IOTINVAL_GV)) {
+> +                /* invalidate all cache mappings */
+> +                func =3D __iot_inval_all;
+> +            } else if (!(cmd.dword0 & RISCV_IOMMU_CMD_IOTINVAL_AV)) {
+> +                /* invalidate cache matching GSCID */
+> +                func =3D __iot_inval_gscid;
+> +            } else {
+> +                /* invalidate cache matching GSCID and ADDR (GPA) */
+> +                func =3D __iot_inval_gscid_gpa;
+>              }
+> -            /* translation cache not implemented yet */
+> +            riscv_iommu_iot_inval(s, func,
+> +                get_field(cmd.dword0, RISCV_IOMMU_CMD_IOTINVAL_GSCID), 0=
+,
+> +                cmd.dword1 & TARGET_PAGE_MASK);
+>              break;
 >
-            &gt; clear the recorded entries buffer.<br>
-            &gt;<br>
-            &gt; Signed-off-by: Rajnesh Kanwal &lt;<a href=3D"mailto:rkanwa=
-l@rivosinc.com" target=3D"_blank">rkanwal@rivosinc.com</a>&gt;<br>
-            &gt; ---<br>
-            &gt;=C2=A0 =C2=A0target/riscv/cpu.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0|=C2=A0 1 +<br>
-            &gt;=C2=A0 =C2=A0target/riscv/cpu_helper.c=C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 7
-            +++++++<br>
-            &gt;=C2=A0 =C2=A0target/riscv/insn32.decode=C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 1 +<br>
-            &gt;=C2=A0 =C2=A0target/riscv/insn_trans/trans_privileged.c.inc=
- | 10
-            ++++++++++<br>
-            &gt;=C2=A0 =C2=A0target/riscv/op_helper.c=C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 5
-            +++++<br>
-            &gt;=C2=A0 =C2=A05 files changed, 24 insertions(+)<br>
-            &gt;<br>
-            &gt; diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h<br>
-            &gt; index a294a5372a..fade71aa09 100644<br>
-            &gt; --- a/target/riscv/cpu.h<br>
-            &gt; +++ b/target/riscv/cpu.h<br>
-            &gt; @@ -572,6 +572,7 @@ void
-            riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv,
-            bool virt_en);<br>
-            &gt;=C2=A0 =C2=A0void riscv_ctr_freeze(CPURISCVState *env, uint=
-64_t
-            freeze_mask);<br>
-            &gt;=C2=A0 =C2=A0void riscv_ctr_add_entry(CPURISCVState *env,
-            target_long src, target_long dst,<br>
-            &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 uint64_t type, target_ulong
-            prev_priv, bool prev_virt);<br>
-            &gt; +void riscv_ctr_clear(CPURISCVState *env);<br>
-            &gt;=C2=A0 =C2=A0<br>
-            &gt;=C2=A0 =C2=A0void riscv_translate_init(void);<br>
-            &gt;=C2=A0 =C2=A0G_NORETURN void riscv_raise_exception(CPURISCV=
-State
-            *env,<br>
-            &gt; diff --git a/target/riscv/cpu_helper.c
-            b/target/riscv/cpu_helper.c<br>
-            &gt; index e064a7306e..45502f50a7 100644<br>
-            &gt; --- a/target/riscv/cpu_helper.c<br>
-            &gt; +++ b/target/riscv/cpu_helper.c<br>
-            &gt; @@ -704,6 +704,13 @@ void
-            riscv_ctr_freeze(CPURISCVState *env, uint64_t freeze_mask)<br>
-            &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-            &gt;=C2=A0 =C2=A0}<br>
-            &gt;=C2=A0 =C2=A0<br>
-            &gt; +void riscv_ctr_clear(CPURISCVState *env)<br>
-            &gt; +{<br>
-            &gt; +=C2=A0 =C2=A0 memset(env-&gt;ctr_src, 0x0,
-            sizeof(env-&gt;ctr_src));<br>
-            &gt; +=C2=A0 =C2=A0 memset(env-&gt;ctr_dst, 0x0,
-            sizeof(env-&gt;ctr_dst));<br>
-            &gt; +=C2=A0 =C2=A0 memset(env-&gt;ctr_data, 0x0,
-            sizeof(env-&gt;ctr_data));<br>
-            &gt; +}<br>
-            &gt; +<br>
-            &gt;=C2=A0 =C2=A0static uint64_t riscv_ctr_priv_to_mask(target_=
-ulong
-            priv, bool virt)<br>
-            &gt;=C2=A0 =C2=A0{<br>
-            &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0switch (priv) {<br>
-            &gt; diff --git a/target/riscv/insn32.decode
-            b/target/riscv/insn32.decode<br>
-            &gt; index 9cb1a1b4ec..d3d38c7c68 100644<br>
-            &gt; --- a/target/riscv/insn32.decode<br>
-            &gt; +++ b/target/riscv/insn32.decode<br>
-            &gt; @@ -107,6 +107,7 @@<br>
-            &gt;=C2=A0 =C2=A0# *** Privileged Instructions ***<br>
-            &gt;=C2=A0 =C2=A0ecall=C2=A0 =C2=A0 =C2=A0 =C2=A0000000000000=
-=C2=A0 =C2=A0 =C2=A000000 000 00000 1110011<br>
-            &gt;=C2=A0 =C2=A0ebreak=C2=A0 =C2=A0 =C2=A0 000000000001=C2=A0 =
-=C2=A0 =C2=A000000 000 00000 1110011<br>
-            &gt; +sctrclr=C2=A0 =C2=A0 =C2=A0000100000100=C2=A0 =C2=A0 =C2=
-=A000000 000 00000 1110011<br>
-            &gt;=C2=A0 =C2=A0uret=C2=A0 =C2=A0 =C2=A0 =C2=A0 0000000=C2=A0 =
-=C2=A0 00010 00000 000 00000 1110011<br>
-            &gt;=C2=A0 =C2=A0sret=C2=A0 =C2=A0 =C2=A0 =C2=A0 0001000=C2=A0 =
-=C2=A0 00010 00000 000 00000 1110011<br>
-            &gt;=C2=A0 =C2=A0mret=C2=A0 =C2=A0 =C2=A0 =C2=A0 0011000=C2=A0 =
-=C2=A0 00010 00000 000 00000 1110011<br>
-            &gt; diff --git
-            a/target/riscv/insn_trans/trans_privileged.c.inc
-            b/target/riscv/insn_trans/trans_privileged.c.inc<br>
-            &gt; index 339d659151..dd9da8651f 100644<br>
-            &gt; --- a/target/riscv/insn_trans/trans_privileged.c.inc<br>
-            &gt; +++ b/target/riscv/insn_trans/trans_privileged.c.inc<br>
-            &gt; @@ -69,6 +69,16 @@ static bool
-            trans_ebreak(DisasContext *ctx, arg_ebreak *a)<br>
-            &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0return true;<br>
-            &gt;=C2=A0 =C2=A0}<br>
-            &gt;=C2=A0 =C2=A0<br>
-            &gt; +static bool trans_sctrclr(DisasContext *ctx,
-            arg_sctrclr *a)<br>
-            &gt; +{<br>
-            &gt; +#ifndef CONFIG_USER_ONLY<br>
-            If both of smctr and ssctr are not enabled, it is an illegal
-            instruction.<br>
-            &gt; +=C2=A0 =C2=A0 gen_helper_ctr_clear(tcg_env);<br>
-            &gt; +=C2=A0 =C2=A0 return true;<br>
-            &gt; +#else<br>
-            &gt; +=C2=A0 =C2=A0 return false;<br>
-            &gt; +#endif<br>
-            &gt; +}<br>
-            &gt; +<br>
-            &gt;=C2=A0 =C2=A0static bool trans_uret(DisasContext *ctx, arg_=
-uret
-            *a)<br>
-            &gt;=C2=A0 =C2=A0{<br>
-            &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0return false;<br>
-            &gt; diff --git a/target/riscv/op_helper.c
-            b/target/riscv/op_helper.c<br>
-            &gt; index c8053d9c2f..89423c04b3 100644<br>
-            &gt; --- a/target/riscv/op_helper.c<br>
-            &gt; +++ b/target/riscv/op_helper.c<br>
-            &gt; @@ -461,6 +461,11 @@ void
-            helper_ctr_branch(CPURISCVState *env, target_ulong src,
-            target_ulong dest,<br>
-            &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-            &gt;=C2=A0 =C2=A0}<br>
-            &gt;=C2=A0 =C2=A0<br>
-            &gt; +void helper_ctr_clear(CPURISCVState *env)<br>
-            &gt; +{<br>
-            <br>
-            There should be some checks here.<br>
-            The spec states:<br>
-            SCTRCLR raises an illegal-instruction exception in U-mode,
-            and a <br>
-            virtual-instruction exception in VU-mode, unless CTR state
-            enable access <br>
-            restrictions apply.<br>
-            <br>
-            I don&#39;t quite understand &quot;unless CTR state enable acce=
-ss
-            restrictions <br>
-            apply&quot; though.<br>
-          </blockquote>
-          <div><br>
-          </div>
-          <div>The next sentence says &quot;See Chapter 5&quot;, which stat=
-es that
-            execution of SCTRCLR raises an illegal instruction exception
-            if mstateen0.CTR=3D0 and the priv mode is not M-mode, and it
-            raises a virtual instruction exception if mstateen0.CTR=3D0
-            &amp;&amp; hstateen0.CTR=3D1 and the priv mode is VS-mode.</div=
+>          case RISCV_IOMMU_CMD(RISCV_IOMMU_CMD_IOTINVAL_FUNC_VMA,
+>                               RISCV_IOMMU_CMD_IOTINVAL_OPCODE):
+> -            /* translation cache not implemented yet */
+> +            if (!(cmd.dword0 & RISCV_IOMMU_CMD_IOTINVAL_GV)) {
+> +                /* invalidate all cache mappings, simplified model */
+> +                func =3D __iot_inval_all;
+> +            } else if (!(cmd.dword0 & RISCV_IOMMU_CMD_IOTINVAL_PSCV)) {
+> +                /* invalidate cache matching GSCID, simplified model */
+> +                func =3D __iot_inval_gscid;
+> +            } else if (!(cmd.dword0 & RISCV_IOMMU_CMD_IOTINVAL_AV)) {
+> +                /* invalidate cache matching GSCID and PSCID */
+> +                func =3D __iot_inval_pscid;
+> +            } else {
+> +                /* invalidate cache matching GSCID and PSCID and ADDR (I=
+OVA) */
+> +                func =3D __iot_inval_pscid_iova;
+> +            }
+> +            riscv_iommu_iot_inval(s, func,
+> +                get_field(cmd.dword0, RISCV_IOMMU_CMD_IOTINVAL_GSCID),
+> +                get_field(cmd.dword0, RISCV_IOMMU_CMD_IOTINVAL_PSCID),
+> +                cmd.dword1 & TARGET_PAGE_MASK);
+>              break;
 >
-        </div>
-      </div>
-    </blockquote>
-    When mstateen0.CTR=3D0, hstateen0.CTR is read-only 0. I guess you
-    meant &quot;mstateen0.CTR=3D1 &amp;&amp; hstateen0.CTR=3D0&quot; here.<=
-br></div></blockquote><div><br></div><div>You&#39;re right, thanks.=C2=A0</=
-div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bor=
-der-left:1px solid rgb(204,204,204);padding-left:1ex"><div>
-    <blockquote type=3D"cite">
-      <div dir=3D"ltr">
-        <div class=3D"gmail_quote">
-          <div>=C2=A0</div>
-          <blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8=
-ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-            <br>
-            &gt; +=C2=A0 =C2=A0 riscv_ctr_clear(env);<br>
-            &gt; +}<br>
-            &gt; +<br>
-            &gt;=C2=A0 =C2=A0void helper_wfi(CPURISCVState *env)<br>
-            &gt;=C2=A0 =C2=A0{<br>
-            &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0CPUState *cs =3D env_cpu(env);<b=
-r>
-          </blockquote>
-        </div>
-      </div>
-    </blockquote>
-  </div>
-
-</blockquote></div></div>
-
---0000000000002932fc061a260ff8--
+>          case RISCV_IOMMU_CMD(RISCV_IOMMU_CMD_IODIR_FUNC_INVAL_DDT,
+> @@ -1410,6 +1586,8 @@ static void riscv_iommu_realize(DeviceState *dev, E=
+rror **errp)
+>      /* Device translation context cache */
+>      s->ctx_cache =3D g_hash_table_new_full(__ctx_hash, __ctx_equal,
+>                                           g_free, NULL);
+> +    s->iot_cache =3D g_hash_table_new_full(__iot_hash, __iot_equal,
+> +                                         g_free, NULL);
+>
+>      s->iommus.le_next =3D NULL;
+>      s->iommus.le_prev =3D NULL;
+> @@ -1423,6 +1601,7 @@ static void riscv_iommu_unrealize(DeviceState *dev)
+>      RISCVIOMMUState *s =3D RISCV_IOMMU(dev);
+>
+>      qemu_mutex_destroy(&s->core_lock);
+> +    g_hash_table_unref(s->iot_cache);
+>      g_hash_table_unref(s->ctx_cache);
+>  }
+>
+> @@ -1430,6 +1609,8 @@ static Property riscv_iommu_properties[] =3D {
+>      DEFINE_PROP_UINT32("version", RISCVIOMMUState, version,
+>          RISCV_IOMMU_SPEC_DOT_VER),
+>      DEFINE_PROP_UINT32("bus", RISCVIOMMUState, bus, 0x0),
+> +    DEFINE_PROP_UINT32("ioatc-limit", RISCVIOMMUState, iot_limit,
+> +        LIMIT_CACHE_IOT),
+>      DEFINE_PROP_BOOL("intremap", RISCVIOMMUState, enable_msi, TRUE),
+>      DEFINE_PROP_BOOL("off", RISCVIOMMUState, enable_off, TRUE),
+>      DEFINE_PROP_LINK("downstream-mr", RISCVIOMMUState, target_mr,
+> @@ -1482,7 +1663,7 @@ static IOMMUTLBEntry riscv_iommu_memory_region_tran=
+slate(
+>          /* Translation disabled or invalid. */
+>          iotlb.addr_mask =3D 0;
+>          iotlb.perm =3D IOMMU_NONE;
+> -    } else if (riscv_iommu_translate(as->iommu, ctx, &iotlb)) {
+> +    } else if (riscv_iommu_translate(as->iommu, ctx, &iotlb, true)) {
+>          /* Translation disabled or fault reported. */
+>          iotlb.addr_mask =3D 0;
+>          iotlb.perm =3D IOMMU_NONE;
+> diff --git a/hw/riscv/riscv-iommu.h b/hw/riscv/riscv-iommu.h
+> index 31d3907d33..3afee9f3e8 100644
+> --- a/hw/riscv/riscv-iommu.h
+> +++ b/hw/riscv/riscv-iommu.h
+> @@ -68,6 +68,8 @@ struct RISCVIOMMUState {
+>      MemoryRegion trap_mr;
+>
+>      GHashTable *ctx_cache;          /* Device translation Context Cache =
+*/
+> +    GHashTable *iot_cache;          /* IO Translated Address Cache */
+> +    unsigned iot_limit;             /* IO Translation Cache size limit *=
+/
+>
+>      /* MMIO Hardware Interface */
+>      MemoryRegion regs_mr;
+> --
+> 2.44.0
+>
 
