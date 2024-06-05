@@ -4,73 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5712C27C5E
-	for <qemu-riscv@archiver.kernel.org>; Wed,  5 Jun 2024 23:52:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E21E5C25B76
+	for <qemu-riscv@archiver.kernel.org>; Wed,  5 Jun 2024 23:54:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sF0QD-0004WQ-Gn; Wed, 05 Jun 2024 19:52:01 -0400
+	id 1sF0Rs-0006B0-2h; Wed, 05 Jun 2024 19:53:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sF0QA-0004SP-Up; Wed, 05 Jun 2024 19:51:58 -0400
-Received: from mail-vk1-xa29.google.com ([2607:f8b0:4864:20::a29])
+ id 1sF0Rq-00069U-8K; Wed, 05 Jun 2024 19:53:42 -0400
+Received: from mail-vk1-xa2a.google.com ([2607:f8b0:4864:20::a2a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sF0Q9-0000KG-BD; Wed, 05 Jun 2024 19:51:58 -0400
-Received: by mail-vk1-xa29.google.com with SMTP id
- 71dfb90a1353d-4eb2b07f660so126996e0c.0; 
- Wed, 05 Jun 2024 16:51:56 -0700 (PDT)
+ id 1sF0Ro-0000Vg-Lh; Wed, 05 Jun 2024 19:53:42 -0400
+Received: by mail-vk1-xa2a.google.com with SMTP id
+ 71dfb90a1353d-4eb05e29e69so150420e0c.3; 
+ Wed, 05 Jun 2024 16:53:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1717631515; x=1718236315; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1717631619; x=1718236419; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=h/otAz/3UoNcr66COi2pXQHUN3MAshJlRuUFHqqaOs0=;
- b=lEAA5pke6o9HQ1OyFpgk+hBHyx5a1CoE62oFU5k5036XL4vOyIdybJfdmSUFVAM7GP
- r8zjDSGBVI9q5iJE9RCs0PNXJeWoEBzshp9k0QLr4a1KwkhpRVXTrltxQFOZR885YRdf
- IiNYBUQx8FEEfSQ8iVmUDIG7R2px4typdABrYTTuhR7MnDuxhzbTyibxq7Vayt9icLOe
- HPjmrS/pBxO6fsz3NNBl1q9QQ5Lhixwcx7cKpaElKuiYsVG1aU8n1+8bd9cZ+mLBvl2w
- 2JGfJ6cx0lgrB8ZsFjzBU4HjtecOQs03jLN/otvy4gbVh1zTjNp3E0m612++hdqeRUUi
- Wkqg==
+ bh=aF7i7hU14oOVTsKR++BSoNSVqwNNWrllTV4l6fGE1iU=;
+ b=baR2flDXBpn+vZ0CrENfnQmAjLDHAH1/nwVqdkQnzh70TnFxiBIlBHQfW7JP9QkP1F
+ IZzgDI16pu7OzCNCuUzcluY2lcGqhDHdIP9O89oG2VOtsK2Cc+aO+dmTnTeJM3FIsKgj
+ ov7Zwtg14uvlUmBfwNFvyHoAvkPcHOIIOBHiHoQLPsPCj7LB9t+kqxHWu3OdbUnRLnBA
+ NCIWmz/86gfD56lLnlesrzP8Ek3Yf5TJAWbMTAr3V/xaOVt52sVTGGbnZWtp3VSv4Fag
+ F0Gxla8z1KzEFYczxqnXkwIq5O2l0Qx80Y/pWiPh7FaDXCHNcTZhPyyFjMz5Itgk1JBU
+ yJuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717631515; x=1718236315;
+ d=1e100.net; s=20230601; t=1717631619; x=1718236419;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=h/otAz/3UoNcr66COi2pXQHUN3MAshJlRuUFHqqaOs0=;
- b=n+uHirvuX79L8t1DXG2iqkR267ju+2TUHt+oQWXI+rkBCAw7fp4p+1mYUukLoaD5tV
- y/oUOCVaHec59ibjsAJXwKu0LKyx099H5RCoyEdXqOzRSVJCDJrtP/cYqdb04pBTZDAa
- nL+lWgd1VyXq71oLRsflhL8/QBrc9KrfCImMzKwvX3iRN6IlbqNxsbCQk+1ZhtR+qh9B
- Vhc8AGyVkK5YKdWt3ljEtEjZmvd5LdxCFSJF1yLe/nSljJCsh1X6czM7dijdVn6juAbO
- fKXgMt22gGBZ6ftvI/RKtyq+tF+f5EvWEsetTdYdDsZ120z1CclpsxR6Y8fCur9WDcNZ
- auHw==
+ bh=aF7i7hU14oOVTsKR++BSoNSVqwNNWrllTV4l6fGE1iU=;
+ b=p24RNPSlmnQIsZ/y+EkLS6uUX4xiwDNtMQy2YIWEzX977y51RI/LkUmqLBLg99BYih
+ 4n0BE6xNli/3X6Acy+EzBKAZ6QmkBoUVUIW9JnzSBelQQgxmojHanY8Q5Xy5V0Yw1QTS
+ muS7s9gTwq/rP3HGwkADCHiUl04Z9XnR5pE6l0uCRcWw5Bd1Gun9QYLppSJbfiUhKU9g
+ e1DVOSclAkxkfY93iVd8SwHnllJfLHJiqEVl4qpSckjH4sIpvzyQuDAf0slq6+XLD4Vd
+ YS/vgdVQ6RGnH2XLflVzi52XjuAV2GT03spzlpmZgdjDxljZPqjgdSwrrZCwi35a88D/
+ vbzQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU/S9ny1uIqzVZUUQnil3q9Q7GyOsD8p93XSpFQktqxS+lYg2CWgy/6zh7djRR4qBdpS6zU+htZyYtN4SzIfn/pA6Ovano=
-X-Gm-Message-State: AOJu0YzYgQ+AOZb1o7l+IfEBgm8WOhsxrIRMWIfDvBhqecLWqQ68dZoB
- NMDBptQ/eafZwC0cCdAvizk1KvnHgVIlAzUJHxkFjBs7yWVYjfnWJuLmY+CloAdKZQtopAJUbS+
- BzQrRg9XUN6LtrTm/DyTWUb34GDI=
-X-Google-Smtp-Source: AGHT+IGIm7QNkfb8hZiMWXeJYAj/y4lnWIZu4ebxbaGgfzbj6Zi2yi1/kJ4ZQvbSGEl3DTS5pYbCanY5IcabYKTQ5Nk=
-X-Received: by 2002:a05:6122:25dc:b0:4da:ced8:b09a with SMTP id
- 71dfb90a1353d-4eb3a26beefmr4174896e0c.0.1717631515500; Wed, 05 Jun 2024
- 16:51:55 -0700 (PDT)
+ AJvYcCVW9X3g9fozuRczU4DiYx0QPxjG9Ih/fj/nt3kH5qoe3Kn2W1fNNgSIPTGvkqGjEU7ChnLfGFjKGXN7Y+ilMyPtzfOWliM=
+X-Gm-Message-State: AOJu0YytpztkEAyT+Jl5MMgRxYW2pjcjeBU2RCEeqtvKg52WrlBHPO3V
+ 963ooGyYqbgAQWVBFqxhRUtgNNhx859Q4Kllj0q7DaYHWKz0K13Oi1esGeblXyhkaYZo7QNjgcR
+ qG6TRow3OFk2+tuVsNLwnbUkBfSPAmg==
+X-Google-Smtp-Source: AGHT+IEj0FIFGwdwfsOobR6tPYwZA5kAuPCBCr/dtwYcWRQjLEQl1qkQOLhPtWJEC9CbrYGIj6A+KcoT4reVokmnIOo=
+X-Received: by 2002:a05:6122:2528:b0:4eb:3789:4bcb with SMTP id
+ 71dfb90a1353d-4eb3a4c5495mr5536844e0c.10.1717631619011; Wed, 05 Jun 2024
+ 16:53:39 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240605025527.11711-1-duchao@eswincomputing.com>
-In-Reply-To: <20240605025527.11711-1-duchao@eswincomputing.com>
+References: <20240604062747.9212-1-fea.wang@sifive.com>
+ <20240604062747.9212-3-fea.wang@sifive.com>
+In-Reply-To: <20240604062747.9212-3-fea.wang@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 6 Jun 2024 09:51:29 +1000
-Message-ID: <CAKmqyKNL5xtB-XPqC1Yma6v7_T=dFp1edDmf6oE0dTr5nctd0g@mail.gmail.com>
-Subject: Re: [PATCH v3 0/3] target/riscv/kvm: QEMU support for KVM Guest Debug
- on RISC-V
-To: Chao Du <duchao@eswincomputing.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com, 
- ajones@ventanamicro.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn, 
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com, 
- anup@brainfault.org, duchao713@qq.com
+Date: Thu, 6 Jun 2024 09:53:13 +1000
+Message-ID: <CAKmqyKOp0a4nusSc2XcVsnVekB=pv9hPKXdq-kW19DXDQ5Scrw@mail.gmail.com>
+Subject: Re: [PATCH v3 2/6] target/riscv: Define macros and variables for
+ ss1p13
+To: "Fea.Wang" <fea.wang@sifive.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Frank Chang <frank.chang@sifive.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a29;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa29.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2a;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2a.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -94,68 +98,59 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Jun 5, 2024 at 1:00=E2=80=AFPM Chao Du <duchao@eswincomputing.com> =
-wrote:
+On Tue, Jun 4, 2024 at 4:23=E2=80=AFPM Fea.Wang <fea.wang@sifive.com> wrote=
+:
 >
-> This series implements QEMU KVM Guest Debug on RISC-V, with which we
-> could debug RISC-V KVM guest from the host side, using software
-> breakpoints.
+> Add macros and variables for RISC-V privilege 1.13 support.
 >
-> This series is based on riscv-to-apply.next branch and is also
-> available at:
-> https://github.com/Du-Chao/alistair23-qemu/tree/riscv-to-apply.next.0605
->
-> The corresponding KVM side patches have been merged already:
-> https://lore.kernel.org/kvm/20240402062628.5425-1-duchao@eswincomputing.c=
-om/
->
-> A TODO list which will be added later:
-> 1. HW breakpoints support
-> 2. A 'corner case' in which the debug exception is not inserted by the
-> debugger, need to be re-injected to the guest.
->
-> v2 resend->v3:
-> - rebased.
+> Signed-off-by: Fea.Wang <fea.wang@sifive.com>
+> Reviewed-by: Frank Chang <frank.chang@sifive.com>
+> Reviewed-by: Weiwei Li <liwei1518@gmail.com>
+> Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
-I think you rebased on the wrong tree. Do you mind rebasing on
-https://github.com/alistair23/qemu/tree/riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
+>  target/riscv/cpu.h     | 4 +++-
+>  target/riscv/cpu_cfg.h | 1 +
+>  2 files changed, 4 insertions(+), 1 deletion(-)
 >
-> v2->v2 resend:
-> - add the type conversion in patch #1 to avoid warnings
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 94600b91fa..4d73486ea2 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -96,12 +96,14 @@ extern RISCVCPUProfile *riscv_profiles[];
+>  #define PRIV_VER_1_10_0_STR "v1.10.0"
+>  #define PRIV_VER_1_11_0_STR "v1.11.0"
+>  #define PRIV_VER_1_12_0_STR "v1.12.0"
+> +#define PRIV_VER_1_13_0_STR "v1.13.0"
+>  enum {
+>      PRIV_VERSION_1_10_0 =3D 0,
+>      PRIV_VERSION_1_11_0,
+>      PRIV_VERSION_1_12_0,
+> +    PRIV_VERSION_1_13_0,
 >
-> v1->v2:
-> - squash patch #2 into #1
-> - check the instruction length from the tail two bits, instead of passing=
- the
->   length information by parameters.
+> -    PRIV_VERSION_LATEST =3D PRIV_VERSION_1_12_0,
+> +    PRIV_VERSION_LATEST =3D PRIV_VERSION_1_13_0,
+>  };
 >
-> RFC->v1:
-> - Rebased on riscv-to-apply.next
-> - use configs/ definition to conditionalize debug support
->
-> v2 link:
-> https://lore.kernel.org/qemu-riscv/20240528080759.26439-1-duchao@eswincom=
-puting.com/
-> v1 link:
-> https://lore.kernel.org/qemu-riscv/20240527021916.12953-1-duchao@eswincom=
-puting.com/
-> RFC link:
-> https://lore.kernel.org/qemu-riscv/20231221094923.7349-1-duchao@eswincomp=
-uting.com/
->
-> Chao Du (3):
->   target/riscv/kvm: add software breakpoints support
->   target/riscv/kvm: handle the exit with debug reason
->   target/riscv/kvm: define TARGET_KVM_HAVE_GUEST_DEBUG
->
->  configs/targets/riscv64-softmmu.mak |  1 +
->  target/riscv/kvm/kvm-cpu.c          | 90 +++++++++++++++++++++++++++++
->  2 files changed, 91 insertions(+)
+>  #define VEXT_VERSION_1_00_0 0x00010000
+> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+> index e1e4f32698..fb7eebde52 100644
+> --- a/target/riscv/cpu_cfg.h
+> +++ b/target/riscv/cpu_cfg.h
+> @@ -136,6 +136,7 @@ struct RISCVCPUConfig {
+>       * TCG always implement/can't be user disabled,
+>       * based on spec version.
+>       */
+> +    bool has_priv_1_13;
+>      bool has_priv_1_12;
+>      bool has_priv_1_11;
 >
 > --
-> 2.17.1
+> 2.34.1
+>
 >
 
