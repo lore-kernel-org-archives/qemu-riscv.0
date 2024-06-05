@@ -4,64 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED841C27C50
-	for <qemu-riscv@archiver.kernel.org>; Wed,  5 Jun 2024 00:36:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EE92C25B78
+	for <qemu-riscv@archiver.kernel.org>; Wed,  5 Jun 2024 00:44:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sEedz-0001RM-L0; Tue, 04 Jun 2024 20:36:47 -0400
+	id 1sEelA-0004TI-Fq; Tue, 04 Jun 2024 20:44:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sEedw-0001Ju-Ua; Tue, 04 Jun 2024 20:36:44 -0400
-Received: from mail-vk1-xa32.google.com ([2607:f8b0:4864:20::a32])
+ id 1sEel8-0004Si-44; Tue, 04 Jun 2024 20:44:10 -0400
+Received: from mail-vs1-xe2a.google.com ([2607:f8b0:4864:20::e2a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sEedv-0005ra-27; Tue, 04 Jun 2024 20:36:44 -0400
-Received: by mail-vk1-xa32.google.com with SMTP id
- 71dfb90a1353d-4eb0089b4a2so608863e0c.2; 
- Tue, 04 Jun 2024 17:36:40 -0700 (PDT)
+ id 1sEel6-0008Gq-15; Tue, 04 Jun 2024 20:44:09 -0400
+Received: by mail-vs1-xe2a.google.com with SMTP id
+ ada2fe7eead31-48bd4cefe5cso959739137.0; 
+ Tue, 04 Jun 2024 17:44:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1717547800; x=1718152600; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1717548246; x=1718153046; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0EZ04c60HZkWwTOTASAKGAPRvkH82+UpvsxrCXveySg=;
- b=JDly1TYgJuSNt6C97PcQZ6VjQNWzy720YuC5uKKSsb/C0tGANTZF4CTc0ZPogFx0EW
- R1/VaLHtV9oPHfLcjMiP3WgLx+5K11cPfy6BQn11V1eJoI3CIh+STqsUcoTxp3Q4f1To
- tTkP8rTMks4Zb8g7GNQNGMLxMQnAsEM76Vno5v96j3RlYciZxpAesM34bANzR3qlVZAX
- gO8PfxmQNBofHM7jmuMZOBAfL3/mzD9wyv2MVL53lKiJ9wgWr2oCw2W11EcxHu8m3i7q
- 8ZLpvGIUnAhfaYLrD1v5JsU7tuK0Gat5smQlggGRLSl/WI0qVPgKqoBEGzOW3emKX/Kn
- PgwQ==
+ bh=jOnQhGH+rNrbgwmTuemA85hqYhTTiZIEkEqdvHMaZGg=;
+ b=i8RTCP1CN8eFsF7Dpquap/G0O+yB2WknuDXDdfTNUIOmn7pmtJPz/zneZoVBVE72vn
+ wmFkIWG+WoIJelv3/Weuir0crC/fA4f+Kz8N0uP39Jl6+3KYFMl4Hl+AtdDR+o1vU3g1
+ 8e3CObBaulDDVUbFgJT31ZdI57IAssMhts5MdcihsBUXeqZJ2hUm45SAgiHs80GmxYuU
+ DD+wf3gUfmQ6rdSm3/1An5zFJ71zRiDJNinR60FsuRsVv/qyU71edMMR8pqhFvwUbb50
+ aqOGF8IchT1Oma/KBCuHn8NrzZc++7oI98MDfowNo/WJ6YjD3GnJGbc1vi4fPyAKGMh9
+ mDGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717547800; x=1718152600;
+ d=1e100.net; s=20230601; t=1717548246; x=1718153046;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0EZ04c60HZkWwTOTASAKGAPRvkH82+UpvsxrCXveySg=;
- b=Gmj+Dvo/pymTAhxBTrvfe0rYRbVftXGrJtuvTjL2HtZUbIhy7ITtx7jofc/SkddCAg
- S/EDgwds58O+vl80BevTR6vfR2v3DYTjzdOo6P+v28p5nI7hyVuUhukfbs3c/aIjrY9p
- DHKT1JQ7SmpubT8cTmrg9NWMroddHJiq6lfKBNvJeOz3qXX9yFF/zw29aL8FYHPJtQ4a
- 5zakpQJsd/cBPov7jejo+803xDCrFhV0tSGmQNVvvc8gfGI+x9igEWxQPQnGJ/nNV8f9
- 4cLSd86Q4PFOj01ED3rP1Wt+uwZwxGNtJpBqOgvxstPsQTCfajRya9+NB+pyzND8kvqY
- SMiA==
+ bh=jOnQhGH+rNrbgwmTuemA85hqYhTTiZIEkEqdvHMaZGg=;
+ b=wJpTf+ksk4LsF5kXUaaGMizDnJCesv4Nesza0/KBzKRBVVFX59tIdfMEjjLUdZNoa0
+ 2CAG+oV/9C6g0F6qJwMFzeoRHo3NZCjLAIkenRdrLcCSnyjL1KLyVp6+3Kemo7oC5NIZ
+ SKBUgGc6OAQKo8IkJI121HXPFe3Fv6guChQXOMDrzY58HHPg3+Vl8R8gWQQGEmHUHGD/
+ DsZdvj+zRT94GdXKJsioKRex18rEk36iqAHHPABMyb4xSdx/wIRVy42IpG+PXiZNX3us
+ K2wdGQVsH7R2wc5EDRF13Gm4Ey6UWCDJwzdZ2PkCgbTGSua8ejXI2C97Sbs8tALRGI/s
+ inww==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXU5HgqLhCtx+FGiQUFh/bE0z6PTBYZXQeZ2gu0yVI/P/fJUw4feOHY+mypxHxnj3QuVb3VLkLwAbIie0Jn8MlXROJtbGA=
-X-Gm-Message-State: AOJu0YwWza+QsSD2s3nj9ig4ExeKIA9qjwQIWP9bC8ZMsimbVVmB6DY4
- oD+ldHvLHO98T3C31dklp/Nspg45yrTPfr/h1Fo1/rqV1+QvLPEmSkrGPcHFZ40J3rgXJxUy1kR
- 7lWt2lzq98xXPb4h2gXgnRmsdFfY=
-X-Google-Smtp-Source: AGHT+IFWcemRNypBv57tHZtpu2+3Jx97obt7JU+ukRB1r+4YneDKhi/8OYJ4UCM3iXHQKqqnOXQhJR+pXQUaClNzacg=
-X-Received: by 2002:a05:6122:1784:b0:4eb:a09:63df with SMTP id
- 71dfb90a1353d-4eb3a40dcbcmr1437285e0c.7.1717547800117; Tue, 04 Jun 2024
- 17:36:40 -0700 (PDT)
+ AJvYcCXozywil+Hc8/BYvmavjdmACHwOIrByLchHNNsrVSHEsi2jnxO2Zmuv31DYr/ZtUUWp4lugHENcr9CoQkvlsxtZjYBCzec=
+X-Gm-Message-State: AOJu0Yzw1OlIjp2GblgZCo7Y5CjlM325IPeROzIxPkKx5aRa73L722u+
+ QHDhFhZGfO+AtGbYoeBD3pjMD3NoTJ+m3zCQR12xCjwNvVWTtgR05eg+QNsTxY+euzPOD3FFuAr
+ H15AEOKRBswBqbFt3cmfTkZPmhC0=
+X-Google-Smtp-Source: AGHT+IHbclVyWw7PcP7ktcd5wQGHPV6NUh8843i+z18dT22zs0IjQAEcEgFGwRupJ2JV6clRXJBAhn5iFZaradSw1fE=
+X-Received: by 2002:a67:f790:0:b0:48b:ae47:c11 with SMTP id
+ ada2fe7eead31-48c047f37d9mr1326150137.4.1717548246219; Tue, 04 Jun 2024
+ 17:44:06 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240531202759.911601-1-dbarboza@ventanamicro.com>
- <20240531202759.911601-9-dbarboza@ventanamicro.com>
-In-Reply-To: <20240531202759.911601-9-dbarboza@ventanamicro.com>
+In-Reply-To: <20240531202759.911601-1-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 5 Jun 2024 10:36:13 +1000
-Message-ID: <CAKmqyKPSLt_ykvfbJdTzMQz=nFZAzmWwH6dZJp5URkAgdnS-0Q@mail.gmail.com>
-Subject: Re: [PATCH v2 8/8] hw/riscv/virt.c: imsics DT: add '#msi-cells'
+Date: Wed, 5 Jun 2024 10:43:40 +1000
+Message-ID: <CAKmqyKNidQcVM6Vw07pmOz_7O_=SSZckhxUKKxcjhRN_xhLthQ@mail.gmail.com>
+Subject: Re: [PATCH v2 0/8] hw/riscv/virt.c: aplic/imsic DT fixes
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
@@ -69,8 +68,8 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
  conor@kernel.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a32;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa32.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2a;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2a.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -94,42 +93,105 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sat, Jun 1, 2024 at 6:31=E2=80=AFAM Daniel Henrique Barboza
+On Sat, Jun 1, 2024 at 6:30=E2=80=AFAM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
-> The DT docs for riscv,imsics [1] requires a 'msi-cell' property. Add one
-> and set it zero.
+> Hi,
 >
-> [1] Documentation/devicetree/bindings/interrupt-controller/riscv,imsics.y=
-aml
+> This is a series that is being spun from the reviews given on patch 1
+> [1]. We'll fix some DT validation issues we have in the 'virt' machine
+> [2] that aren't related to missing extensions in the DT spec.
 >
-> Reported-by: Conor Dooley <conor@kernel.org>
-> Fixes: 28d8c281200f ("hw/riscv: virt: Add optional AIA IMSIC support to v=
-irt machine")
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> I'll leave to maintainers to squash the patches as they see fit. I
+> split it this way to make it easier to bissect possible bugs that these
+> individual changes can cause.
+>
+> These are the types of DT warnings solved by this series:
+>
+> /home/danielhb/work/qemu/riscv64_virt.dtb: aplic@d000000: $nodename:0: 'a=
+plic@d000000' does not match '^interrupt-controller(@[0-9a-f,]+)*$'
+>         from schema $id: http://devicetree.org/schemas/interrupt-controll=
+er/riscv,aplic.yaml#
+> /home/danielhb/work/qemu/riscv64_virt.dtb: aplic@d000000: compatible:0: '=
+riscv,aplic' is not one of ['qemu,aplic']
+>         from schema $id: http://devicetree.org/schemas/interrupt-controll=
+er/riscv,aplic.yaml#
+> /home/danielhb/work/qemu/riscv64_virt.dtb: aplic@d000000: compatible: ['r=
+iscv,aplic'] is too short
+>         from schema $id: http://devicetree.org/schemas/interrupt-controll=
+er/riscv,aplic.yaml#
+> /home/danielhb/work/qemu/riscv64_virt.dtb: aplic@d000000: Unevaluated pro=
+perties are not allowed ('compatible' was unexpected)
+>         from schema $id: http://devicetree.org/schemas/interrupt-controll=
+er/riscv,aplic.yaml#
+> (...)
+> /home/danielhb/work/qemu/riscv64_virt.dtb: imsics@28000000: $nodename:0: =
+'imsics@28000000' does not match '^interrupt-controller(@[0-9a-f,]+)*$'
+>         from schema $id: http://devicetree.org/schemas/interrupt-controll=
+er/riscv,imsics.yaml#
+> /home/danielhb/work/qemu/riscv64_virt.dtb: imsics@28000000: compatible:0:=
+ 'riscv,imsics' is not one of ['qemu,imsics']
+>         from schema $id: http://devicetree.org/schemas/interrupt-controll=
+er/riscv,imsics.yaml#
+> /home/danielhb/work/qemu/riscv64_virt.dtb: imsics@28000000: compatible: [=
+'riscv,imsics'] is too short
+>         from schema $id: http://devicetree.org/schemas/interrupt-controll=
+er/riscv,imsics.yaml#
+> /home/danielhb/work/qemu/riscv64_virt.dtb: imsics@28000000: '#msi-cells' =
+is a required property
+>         from schema $id: http://devicetree.org/schemas/interrupt-controll=
+er/riscv,imsics.yaml#
+> /home/danielhb/work/qemu/riscv64_virt.dtb: imsics@28000000: Unevaluated p=
+roperties are not allowed ('compatible' was unexpected)
+>         from schema $id: http://devicetree.org/schemas/interrupt-controll=
+er/riscv,imsics.yaml#
+>
+> [3] explains how to run 'dt-validate' to reproduce them. To generate a
+> 'processed schema' file what I did was:
+>
+> - in the Linux kernel tree, run 'make dt_binding_check'. Please note
+>   that this might require installation of additional python stuff
+>   (e.g.swig, python3-devel)
+>
+> - I used the generated file 'Documentation/devicetree/bindings/processed-=
+schema.json'
+>   as a 'processed schema'.
+>
+> Series applicable on both master and alistair/riscv-to-apply.next.
+>
+> Changes from v1:
+> - added patches 2 to 7 to fix the dt-validate warnings on imsics and
+>   aplic notes
+> - v1 link: https://lore.kernel.org/qemu-riscv/20240530084949.761034-1-dba=
+rboza@ventanamicro.com/
+>
+> [1] https://lore.kernel.org/qemu-riscv/20240530084949.761034-1-dbarboza@v=
+entanamicro.com/
+> [2] https://lore.kernel.org/all/20240529-rust-tile-a05517a6260f@spud/
+> [3] https://lore.kernel.org/qemu-riscv/20240530-landed-shriek-9362981afad=
+e@spud/
+>
+> Daniel Henrique Barboza (8):
+>   hw/riscv/virt.c: add address-cells in create_fdt_one_aplic()
+>   hw/riscv/virt.c: add aplic nodename helper
+>   hw/riscv/virt.c: rename aplic nodename to 'interrupt-controller'
+>   hw/riscv/virt.c: aplic DT: add 'qemu,aplic' to 'compatible'
+>   hw/riscv/virt.c: aplic DT: rename prop to 'riscv,delegation'
+>   hw/riscv/virt.c: change imsic nodename to 'interrupt-controller'
+>   hw/riscv/virt.c: imsics DT: add 'qemu,imsics' to 'compatible'
+>   hw/riscv/virt.c: imsics DT: add '#msi-cells'
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
-> ---
->  hw/riscv/virt.c | 1 +
->  1 file changed, 1 insertion(+)
 >
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index ac70993679..8675c3a7d1 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -552,6 +552,7 @@ static void create_fdt_one_imsic(RISCVVirtState *s, h=
-waddr base_addr,
->                            FDT_IMSIC_INT_CELLS);
->      qemu_fdt_setprop(ms->fdt, imsic_name, "interrupt-controller", NULL, =
-0);
->      qemu_fdt_setprop(ms->fdt, imsic_name, "msi-controller", NULL, 0);
-> +    qemu_fdt_setprop_cell(ms->fdt, imsic_name, "#msi-cells", 0);
->      qemu_fdt_setprop(ms->fdt, imsic_name, "interrupts-extended",
->                       imsic_cells, ms->smp.cpus * sizeof(uint32_t) * 2);
->      qemu_fdt_setprop(ms->fdt, imsic_name, "reg", imsic_regs,
+>  hw/riscv/virt.c         | 36 +++++++++++++++++++++++++++---------
+>  include/hw/riscv/virt.h |  1 +
+>  2 files changed, 28 insertions(+), 9 deletions(-)
+>
 > --
 > 2.45.1
 >
