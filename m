@@ -4,60 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FE16C27C5F
-	for <qemu-riscv@archiver.kernel.org>; Thu,  6 Jun 2024 01:51:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 806E7C25B76
+	for <qemu-riscv@archiver.kernel.org>; Thu,  6 Jun 2024 01:51:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sF2GZ-0000gS-Ew; Wed, 05 Jun 2024 21:50:11 -0400
+	id 1sF2Gd-0000i4-Jf; Wed, 05 Jun 2024 21:50:15 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <duchao@eswincomputing.com>)
- id 1sF2GT-0000f6-UR; Wed, 05 Jun 2024 21:50:05 -0400
-Received: from zg8tmja2lje4os4yms4ymjma.icoremail.net ([206.189.21.223])
+ id 1sF2GV-0000fh-8s; Wed, 05 Jun 2024 21:50:07 -0400
+Received: from zg8tmtu5ljy1ljeznc42.icoremail.net ([159.65.134.6])
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <duchao@eswincomputing.com>)
- id 1sF2GR-0003cm-OC; Wed, 05 Jun 2024 21:50:05 -0400
+ id 1sF2GS-0003eB-Ow; Wed, 05 Jun 2024 21:50:07 -0400
 Received: from localhost.localdomain (unknown [10.12.130.31])
- by app1 (Coremail) with SMTP id TAJkCgC3WOUsFWFmO5IOAA--.39860S4;
- Thu, 06 Jun 2024 09:47:25 +0800 (CST)
+ by app1 (Coremail) with SMTP id TAJkCgC3WOUsFWFmO5IOAA--.39860S6;
+ Thu, 06 Jun 2024 09:47:29 +0800 (CST)
 From: Chao Du <duchao@eswincomputing.com>
 To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com,
  ajones@ventanamicro.com, alistair23@gmail.com, bin.meng@windriver.com,
  liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com,
  zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com, anup@brainfault.org,
  duchao713@qq.com
-Subject: [PATCH v4 0/3] target/riscv/kvm: QEMU support for KVM Guest Debug on
- RISC-V
-Date: Thu,  6 Jun 2024 01:44:58 +0000
-Message-Id: <20240606014501.20763-1-duchao@eswincomputing.com>
+Subject: [PATCH v4 2/3] target/riscv/kvm: handle the exit with debug reason
+Date: Thu,  6 Jun 2024 01:45:00 +0000
+Message-Id: <20240606014501.20763-3-duchao@eswincomputing.com>
 X-Mailer: git-send-email 2.17.1
-X-CM-TRANSID: TAJkCgC3WOUsFWFmO5IOAA--.39860S4
-X-Coremail-Antispam: 1UD129KBjvJXoW7Zw1xZryDZr1UtrW3Gw1xZrb_yoW8WFW7pa
- 1F9F98CrZIqrWfG3ySk3Z7Gr15Xws5Cr1UXw1xZw4Fgr45Zay8Ars2g398Wr17A3y8GFy2
- kFnIvr9F9F1qvrJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUvIb7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
- 0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
- A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_tr0E3s1l84ACjcxK6xII
- jxv20xvEc7CjxVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwV
- C2z280aVCY1x0267AKxVW0oVCq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC
- 0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr
- 1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcxkI7VAKI48JM4IIrI8v6xkF7I0E8cxan2IY
- 04v7MxkIecxEwVCm-wCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s
- 026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_
- Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20x
- vEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE
- 14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf
- 9x07beAp5UUUUU=
+In-Reply-To: <20240606014501.20763-1-duchao@eswincomputing.com>
+References: <20240606014501.20763-1-duchao@eswincomputing.com>
+X-CM-TRANSID: TAJkCgC3WOUsFWFmO5IOAA--.39860S6
+X-Coremail-Antispam: 1UD129KBjvJXoW7uw4kJF4UCryUWr4rZw47urg_yoW8Gw4kpr
+ 45uay5Crs3J347G3ySyFWkAF43Ars7uFsxJ3y7Ga4agw4aqrs8Wr1vg39xKFZ8CFZ3uF1a
+ yF47ur1fCF4Utr7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUP2b7Iv0xC_tr1lb4IE77IF4wAFF20E14v26rWj6s0DM7CY07I2
+ 0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI
+ 8067AKxVWUXwA2048vs2IY020Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28CjxkF
+ 64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVWDJVCq3wA2z4x0Y4vE2Ix0cI8IcV
+ CY1x0267AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv
+ 6xkF7I0E14v26rxl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c
+ 02F40Ex7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE
+ 4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lFIxGxcIEc7CjxVA2Y2ka0xkIwI1lc2
+ xSY4AK6svPMxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8C
+ rVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8Zw
+ CIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x02
+ 67AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr
+ 0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IU8sI
+ D7UUUUU==
 X-CM-SenderInfo: xgxfxt3r6h245lqf0zpsxwx03jof0z/
-Received-SPF: pass client-ip=206.189.21.223;
+Received-SPF: pass client-ip=159.65.134.6;
  envelope-from=duchao@eswincomputing.com;
- helo=zg8tmja2lje4os4yms4ymjma.icoremail.net
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ helo=zg8tmtu5ljy1ljeznc42.icoremail.net
+X-Spam_score_int: -5
+X-Spam_score: -0.6
+X-Spam_bar: /
+X-Spam_report: (-0.6 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_MSPIKE_BL=0.001,
+ RCVD_IN_MSPIKE_L5=0.001, RCVD_IN_VALIDITY_RPBL=1.31, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -73,54 +76,55 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This series implements QEMU KVM Guest Debug on RISC-V, with which we
-could debug RISC-V KVM guest from the host side, using software
-breakpoints.
+If the breakpoint belongs to the userspace then set the ret value.
 
-This series is based on riscv-to-apply.next branch and is also
-available at:
-https://github.com/Du-Chao/alistair23-qemu/tree/riscv-to-apply.next.0606
+Signed-off-by: Chao Du <duchao@eswincomputing.com>
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/kvm/kvm-cpu.c | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
 
-The corresponding KVM side patches have been merged already:
-https://lore.kernel.org/kvm/20240402062628.5425-1-duchao@eswincomputing.com/
-
-A TODO list which will be added later:
-1. HW breakpoints support
-2. A 'corner case' in which the debug exception is not inserted by the
-debugger, need to be re-injected to the guest.
-
-v3,v4:
-- rebased.
-
-v2->v2 resend:
-- add the type conversion in patch #1 to avoid warnings
-
-v1->v2:
-- squash patch #2 into #1
-- check the instruction length from the tail two bits, instead of passing the
-  length information by parameters.
-
-RFC->v1:
-- Rebased on riscv-to-apply.next
-- use configs/ definition to conditionalize debug support
-
-v2 link:
-https://lore.kernel.org/qemu-riscv/20240528080759.26439-1-duchao@eswincomputing.com/
-v1 link:
-https://lore.kernel.org/qemu-riscv/20240527021916.12953-1-duchao@eswincomputing.com/
-RFC link:
-https://lore.kernel.org/qemu-riscv/20231221094923.7349-1-duchao@eswincomputing.com/
-
-Chao Du (3):
-  target/riscv/kvm: add software breakpoints support
-  target/riscv/kvm: handle the exit with debug reason
-  target/riscv/kvm: define TARGET_KVM_HAVE_GUEST_DEBUG
-
- configs/targets/riscv64-softmmu.mak |  1 +
- target/riscv/kvm/kvm-cpu.c          | 89 +++++++++++++++++++++++++++++
- 2 files changed, 90 insertions(+)
-
---
+diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+index 748fe5980f..1047961fed 100644
+--- a/target/riscv/kvm/kvm-cpu.c
++++ b/target/riscv/kvm/kvm-cpu.c
+@@ -1555,6 +1555,21 @@ static int kvm_riscv_handle_csr(CPUState *cs, struct kvm_run *run)
+     return ret;
+ }
+ 
++static bool kvm_riscv_handle_debug(CPUState *cs)
++{
++    RISCVCPU *cpu = RISCV_CPU(cs);
++    CPURISCVState *env = &cpu->env;
++
++    /* Ensure PC is synchronised */
++    kvm_cpu_synchronize_state(cs);
++
++    if (kvm_find_sw_breakpoint(cs, env->pc)) {
++        return true;
++    }
++
++    return false;
++}
++
+ int kvm_arch_handle_exit(CPUState *cs, struct kvm_run *run)
+ {
+     int ret = 0;
+@@ -1565,6 +1580,11 @@ int kvm_arch_handle_exit(CPUState *cs, struct kvm_run *run)
+     case KVM_EXIT_RISCV_CSR:
+         ret = kvm_riscv_handle_csr(cs, run);
+         break;
++    case KVM_EXIT_DEBUG:
++        if (kvm_riscv_handle_debug(cs)) {
++            ret = EXCP_DEBUG;
++        }
++        break;
+     default:
+         qemu_log_mask(LOG_UNIMP, "%s: un-handled exit reason %d\n",
+                       __func__, run->exit_reason);
+-- 
 2.17.1
 
 
