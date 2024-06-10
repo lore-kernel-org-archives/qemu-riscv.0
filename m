@@ -4,80 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AE7BC27C53
-	for <qemu-riscv@archiver.kernel.org>; Sun,  9 Jun 2024 09:10:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF4D8C27C53
+	for <qemu-riscv@archiver.kernel.org>; Mon, 10 Jun 2024 00:36:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sGEZ1-0007rx-5T; Sun, 09 Jun 2024 05:10:11 -0400
+	id 1sGT0X-00039l-QF; Sun, 09 Jun 2024 20:35:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1sGEYx-0007rV-JL
- for qemu-riscv@nongnu.org; Sun, 09 Jun 2024 05:10:07 -0400
-Received: from mail-lj1-x22c.google.com ([2a00:1450:4864:20::22c])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1sGT0V-00038k-0d; Sun, 09 Jun 2024 20:35:31 -0400
+Received: from mail-vk1-xa31.google.com ([2607:f8b0:4864:20::a31])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1sGEYv-00026N-K9
- for qemu-riscv@nongnu.org; Sun, 09 Jun 2024 05:10:07 -0400
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-2eaea28868dso23264181fa.3
- for <qemu-riscv@nongnu.org>; Sun, 09 Jun 2024 02:10:04 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1sGT0S-0003J7-RT; Sun, 09 Jun 2024 20:35:30 -0400
+Received: by mail-vk1-xa31.google.com with SMTP id
+ 71dfb90a1353d-4eb39c45a9aso996098e0c.1; 
+ Sun, 09 Jun 2024 17:35:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1717924203; x=1718529003; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1717979727; x=1718584527; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CG2GMcL4HaU0pfX9p0QfNncQIFJDq/B4ZfPwDBxmIrs=;
- b=UGm67k1Xcx5t29Xlu8W9eIMc/wbZ7s1nlRDq0jVFLMbdBJhmLbZ2ru0kqVTej18tSi
- kBXmB/f/IeANSeJks4bc/6ikv0R5/YSEfucvX5/HU9DJ3g0eoT6HvhtPA8jY/A/ZOx+Y
- BU+FHa4O8xZTA8fk4wGGkilL/hOs1JeUHF+LdZd8lHuJm0gdt4QYTbt+W16zbw8Rz+ru
- rp7wYMJYqn3TzvIt1X+p3+Vizas3gp8SiIk6lLc/13SYgG+9OOVmbcQObjUKC6lxwN80
- XfWMiFDGaU1VJNfCVnBidEuSYAibaiKDWf2DxBjviZyB2xZe3zBSvvgoAW1i2jBovyCb
- Yaxg==
+ bh=yG4RTiukvfATmSmu94FRby5JUphXqXxepItYfyr8T5c=;
+ b=aadsIZGGh7S4LD9z1kMZqL53QXYZh2RO4bc2BVYkOIml5QQExcHVWB6d5bDGfDB4vy
+ CqduarnidpxOMEE0/x0ctgUNFSNKJSctn0goTBDSbwC2avb1L0F5r+lEhlS6G/sb0jgz
+ gxAxpZuKgkMvPdcv6BSBiUhEG19A4IOGvT2ryU7lwP18nK0yJxowvLgqe+BUygyTLHef
+ SKcHmqldoWArCTZS3F98hU0R6AJ0fLgLnSZV3/PSKkfJk8GRm9KofRHC1yE6wcj2MXUw
+ 598eEjJHRCt2HdSOStrX/e6oOxEj8fQVDV7vMrkecS0X+zCt27EiyM8xHJLtJyDbs5FG
+ pO2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1717924203; x=1718529003;
+ d=1e100.net; s=20230601; t=1717979727; x=1718584527;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=CG2GMcL4HaU0pfX9p0QfNncQIFJDq/B4ZfPwDBxmIrs=;
- b=Bul39lGiS8JJvU4fCILzvJoNU7tkA6NQx8Xmn9cQp1Ds+DkkjaeKvF0VzSkHvW3gK1
- esvdrhGA3JBYfJNRZJzrHdf++ngowhg2q5HlxOrRqJfJPBd2SdjrMuW6RT3zz6qMFLel
- DlCP4ZdBTyP0TXhlzrO/BAIz/HqKm/7JfSlek8eyiBPegQmkCu3viYVikDPNcoXSAyJ3
- MANsPGz0c9JVTvggX6I3zPsRFGIlm6AYibBpGQ9GyQdPmbjaelAjOLR2zIfTZ2AzvYGd
- hrRd7ield5Geiv1JkgnK2zfAHCYkzWj5wcXVbln5W1eO8nGTrBTtFlZVpD09PCr83Mu5
- 3rYg==
+ bh=yG4RTiukvfATmSmu94FRby5JUphXqXxepItYfyr8T5c=;
+ b=r3SG5s/lHwGJa2vetVxcq+JDFlKkUlysXEVd+WGg5YcTdHHUfwqsKKPHxuznsoMnaQ
+ z6NUoWUM9mx196RIgdxggtYALuF41YTtfxkDqz9Q2cCQcHtbR9zOGRaKdKXAVVz0iADW
+ 8ACKJ5pStDmQpd2uNu9qi6wT9vhKo5DKoVg4Gd5gD9an6ZO5BWyCaITbvPVGBrJsVqXa
+ o3VJVYKFDzdn2JSPCSYOduV6D25XE1XSPa8MmSF1JehbEKf5+tisbQQQKfAy23hvA+pw
+ J7RAnRHsKsuXrFDeWrhjfxXKAemZuwa5C80xMuWs5KK3TqcJwSSz9sjd00Q+4fmoq6+a
+ d47w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWKs4peNpPyJ4CIS+ljBzf8i3pmhODd+LMfD5ZPCPCwVrSFGFbyWIa+3OCfLwRx3WF9DCBTjpCVKaI4wMnmjsyBV4dtDtg=
-X-Gm-Message-State: AOJu0YynqUaDhsYIZ2kYVV7ChjBsNVXiFbovlVg/86hJNzcOqXP2wo5r
- CLkbJkFxrxaUCrPG1MiGkBRxRoaQHJ6jgOdUS1w73+tbYLDb4BSAtEsPl56tGxk8XBflNcOCL0A
- WZRE=
-X-Google-Smtp-Source: AGHT+IEMegAXMYrTJxf9PV/04aZa0vHllJGUuK0ar7VGiM1gvVcDSCswrLnc36+am+tbL0v0EeIlIA==
-X-Received: by 2002:a2e:9bd8:0:b0:2eb:dc5f:52f with SMTP id
- 38308e7fff4ca-2ebdc5f07fcmr14976701fa.16.1717924203219; 
- Sun, 09 Jun 2024 02:10:03 -0700 (PDT)
-Received: from mail-lf1-f52.google.com (mail-lf1-f52.google.com.
- [209.85.167.52]) by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-2eaea4235a9sm7342911fa.8.2024.06.09.02.10.02
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 09 Jun 2024 02:10:03 -0700 (PDT)
-Received: by mail-lf1-f52.google.com with SMTP id
- 2adb3069b0e04-52c82101407so1225444e87.3; 
- Sun, 09 Jun 2024 02:10:02 -0700 (PDT)
-X-Forwarded-Encrypted: i=1;
- AJvYcCUsCLjYi0LCSnZyX3R7C0hyCEIRMCn5SPwrgUMnqFyhrUT8ZNV1PDT4oswiTSlvJ5+EfNoFbyyjcBBee4T9aMHjLvmce4g=
-X-Received: by 2002:a05:6512:20cd:b0:52c:8214:ae36 with SMTP id
- 2adb3069b0e04-52c8214ae8dmr1664877e87.69.1717924202319; Sun, 09 Jun 2024
- 02:10:02 -0700 (PDT)
+ AJvYcCUWii8Ts9RacLa1+whPFcCfEVpqUp3ar+noFN7yNdfISukvNWhe/JTTTn4SUTnVodkKykKZZ8kbPk2lV6w/Mictnuz7GYE=
+X-Gm-Message-State: AOJu0YzP+BedK9aBXakSYgVwpcCB6o5mmOfcn8cuZIOIOTRa/meroVXT
+ fo/VxDzyzBLIIi2TtTZcqR/hFBkXOjKCZ5tGua7QENeDcByQy0YA7zmpNmQBx0azmIwcbULcPwz
+ 6RpOs/E43bnJZaD2/v7t8PXaP4zk=
+X-Google-Smtp-Source: AGHT+IESe4FoaMR54hKw1YVVpGZpaAizYfhKxoqY9UlJnPEPCetJ3PO++iGw5DtzYxHz2yDMLWBKZ2KuS0Ur3jCa4EE=
+X-Received: by 2002:ac5:cdb4:0:b0:4ea:f128:7adb with SMTP id
+ 71dfb90a1353d-4eb562bba21mr5490934e0c.10.1717979724746; Sun, 09 Jun 2024
+ 17:35:24 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240523173955.1940072-1-dbarboza@ventanamicro.com>
- <20240523173955.1940072-12-dbarboza@ventanamicro.com>
-In-Reply-To: <20240523173955.1940072-12-dbarboza@ventanamicro.com>
-From: Frank Chang <frank.chang@sifive.com>
-Date: Sun, 9 Jun 2024 17:09:51 +0800
-X-Gmail-Original-Message-ID: <CANzO1D1+YgdoK3GMar_PnZEySBJMBdTyJGeZjwy_FFspanmm5Q@mail.gmail.com>
-Message-ID: <CANzO1D1+YgdoK3GMar_PnZEySBJMBdTyJGeZjwy_FFspanmm5Q@mail.gmail.com>
-Subject: Re: [PATCH v3 11/13] hw/riscv/riscv-iommu: add DBG support
+In-Reply-To: <20240523173955.1940072-1-dbarboza@ventanamicro.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 10 Jun 2024 10:34:58 +1000
+Message-ID: <CAKmqyKNd2BL-B12RnXu6ZRC0ApqgFXeZSTxggSxJSnbvcN=aSA@mail.gmail.com>
+Subject: Re: [PATCH v3 00/13] riscv: QEMU RISC-V IOMMU Support
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
@@ -85,15 +68,16 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
  frank.chang@sifive.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::22c;
- envelope-from=frank.chang@sifive.com; helo=mail-lj1-x22c.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a31;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa31.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -109,161 +93,222 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Reviewed-by: Frank Chang <frank.chang@sifive.com>
+On Fri, May 24, 2024 at 3:43=E2=80=AFAM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
+>
+> Hi,
+>
+> In this new version a lot of changes were made throughout all the code,
+> most notably on patch 3. Link for the previous version is [1].
+>
+> * How it was tested *
+>
+> This series was tested using an emulated QEMU RISC-V host booting a QEMU
+> KVM guest, passing through an emulated e1000 network card from the host
+> to the guest. I can provide more details (e.g. QEMU command lines) if
+> required, just let me know. For now this cover-letter is too much of an
+> essay as is.
 
-Daniel Henrique Barboza <dbarboza@ventanamicro.com> =E6=96=BC 2024=E5=B9=B4=
-5=E6=9C=8824=E6=97=A5 =E9=80=B1=E4=BA=94 =E4=B8=8A=E5=8D=881:42=E5=AF=AB=E9=
-=81=93=EF=BC=9A
+It would probably be helpful to document these somewhere, so others
+can use them as a starting point for running this
+
+Alistair
+
 >
-> From: Tomasz Jeznach <tjeznach@rivosinc.com>
+> The Linux kernel used for tests can be found here:
 >
-> DBG support adds three additional registers: tr_req_iova, tr_req_ctl and
-> tr_response.
+> https://github.com/tjeznach/linux/tree/riscv_iommu_v6-rc3
 >
-> The DBG cap is always enabled. No on/off toggle is provided for it.
+> This is a newer version of the following work from Tomasz:
 >
-> Signed-off-by: Tomasz Jeznach <tjeznach@rivosinc.com>
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> ---
->  hw/riscv/riscv-iommu-bits.h | 17 +++++++++++
->  hw/riscv/riscv-iommu.c      | 59 +++++++++++++++++++++++++++++++++++++
->  2 files changed, 76 insertions(+)
+> https://lore.kernel.org/linux-riscv/cover.1715708679.git.tjeznach@rivosin=
+c.com/
+> ("[PATCH v5 0/7] Linux RISC-V IOMMU Support")
 >
-> diff --git a/hw/riscv/riscv-iommu-bits.h b/hw/riscv/riscv-iommu-bits.h
-> index e253b29b16..f143c4a926 100644
-> --- a/hw/riscv/riscv-iommu-bits.h
-> +++ b/hw/riscv/riscv-iommu-bits.h
-> @@ -84,6 +84,7 @@ struct riscv_iommu_pq_record {
->  #define RISCV_IOMMU_CAP_ATS             BIT_ULL(25)
->  #define RISCV_IOMMU_CAP_T2GPA           BIT_ULL(26)
->  #define RISCV_IOMMU_CAP_IGS             GENMASK_ULL(29, 28)
-> +#define RISCV_IOMMU_CAP_DBG             BIT_ULL(31)
->  #define RISCV_IOMMU_CAP_PAS             GENMASK_ULL(37, 32)
->  #define RISCV_IOMMU_CAP_PD8             BIT_ULL(38)
->  #define RISCV_IOMMU_CAP_PD17            BIT_ULL(39)
-> @@ -185,6 +186,22 @@ enum {
->      RISCV_IOMMU_INTR_COUNT
->  };
+> The v5 wasn't enough for the testing being done. v6-rc3 did the trick.
 >
-> +/* 5.24 Translation request IOVA (64bits) */
-> +#define RISCV_IOMMU_REG_TR_REQ_IOVA     0x0258
-> +
-> +/* 5.25 Translation request control (64bits) */
-> +#define RISCV_IOMMU_REG_TR_REQ_CTL      0x0260
-> +#define RISCV_IOMMU_TR_REQ_CTL_GO_BUSY  BIT_ULL(0)
-> +#define RISCV_IOMMU_TR_REQ_CTL_NW       BIT_ULL(3)
-> +#define RISCV_IOMMU_TR_REQ_CTL_PID      GENMASK_ULL(31, 12)
-> +#define RISCV_IOMMU_TR_REQ_CTL_DID      GENMASK_ULL(63, 40)
-> +
-> +/* 5.26 Translation request response (64bits) */
-> +#define RISCV_IOMMU_REG_TR_RESPONSE     0x0268
-> +#define RISCV_IOMMU_TR_RESPONSE_FAULT   BIT_ULL(0)
-> +#define RISCV_IOMMU_TR_RESPONSE_S       BIT_ULL(9)
-> +#define RISCV_IOMMU_TR_RESPONSE_PPN     RISCV_IOMMU_PPN_FIELD
-> +
->  /* 5.27 Interrupt cause to vector (64bits) */
->  #define RISCV_IOMMU_REG_IVEC            0x02F8
+> Note that to test this work using riscv-iommu-pci we'll need to provide
+> the Rivos PCI ID in the command line. More details down below.
 >
-> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-> index 3516b82081..52f0851895 100644
-> --- a/hw/riscv/riscv-iommu.c
-> +++ b/hw/riscv/riscv-iommu.c
-> @@ -1655,6 +1655,50 @@ static void riscv_iommu_process_pq_control(RISCVIO=
-MMUState *s)
->      riscv_iommu_reg_mod32(s, RISCV_IOMMU_REG_PQCSR, ctrl_set, ctrl_clr);
->  }
+> * Highlights of this version *
 >
-> +static void riscv_iommu_process_dbg(RISCVIOMMUState *s)
-> +{
-> +    uint64_t iova =3D riscv_iommu_reg_get64(s, RISCV_IOMMU_REG_TR_REQ_IO=
-VA);
-> +    uint64_t ctrl =3D riscv_iommu_reg_get64(s, RISCV_IOMMU_REG_TR_REQ_CT=
-L);
-> +    unsigned devid =3D get_field(ctrl, RISCV_IOMMU_TR_REQ_CTL_DID);
-> +    unsigned pid =3D get_field(ctrl, RISCV_IOMMU_TR_REQ_CTL_PID);
-> +    RISCVIOMMUContext *ctx;
-> +    void *ref;
-> +
-> +    if (!(ctrl & RISCV_IOMMU_TR_REQ_CTL_GO_BUSY)) {
-> +        return;
-> +    }
-> +
-> +    ctx =3D riscv_iommu_ctx(s, devid, pid, &ref);
-> +    if (ctx =3D=3D NULL) {
-> +        riscv_iommu_reg_set64(s, RISCV_IOMMU_REG_TR_RESPONSE,
-> +                                 RISCV_IOMMU_TR_RESPONSE_FAULT |
-> +                                 (RISCV_IOMMU_FQ_CAUSE_DMA_DISABLED << 1=
-0));
-> +    } else {
-> +        IOMMUTLBEntry iotlb =3D {
-> +            .iova =3D iova,
-> +            .perm =3D ctrl & RISCV_IOMMU_TR_REQ_CTL_NW ? IOMMU_RO : IOMM=
-U_RW,
-> +            .addr_mask =3D ~0,
-> +            .target_as =3D NULL,
-> +        };
-> +        int fault =3D riscv_iommu_translate(s, ctx, &iotlb, false);
-> +        if (fault) {
-> +            iova =3D RISCV_IOMMU_TR_RESPONSE_FAULT | (((uint64_t) fault)=
- << 10);
-> +        } else {
-> +            iova =3D iotlb.translated_addr & ~iotlb.addr_mask;
-> +            iova >>=3D TARGET_PAGE_BITS;
-> +            iova &=3D RISCV_IOMMU_TR_RESPONSE_PPN;
-> +
-> +            /* We do not support superpages (> 4kbs) for now */
-> +            iova &=3D ~RISCV_IOMMU_TR_RESPONSE_S;
-> +        }
-> +        riscv_iommu_reg_set64(s, RISCV_IOMMU_REG_TR_RESPONSE, iova);
-> +    }
-> +
-> +    riscv_iommu_reg_mod64(s, RISCV_IOMMU_REG_TR_REQ_CTL, 0,
-> +        RISCV_IOMMU_TR_REQ_CTL_GO_BUSY);
-> +    riscv_iommu_ctx_put(s, ref);
-> +}
-> +
->  typedef void riscv_iommu_process_fn(RISCVIOMMUState *s);
+> - patches removed from v2: platform driver (riscv-iommu-sys, former
+> patch 05) and the EDU changes (patches 14 and 15). The platform driver
+> will be sent later with a working example on the 'virt' machine,
+> either on a newer version of this series or via a follow-up series. We
+> already have a PoC on [2] created by Sunil. More tests are needed, so
+> it'll be left behind for now. The EDU changes will be sent in separate
+> after I finish the doc changes that Frank cited in v2.
 >
->  static void riscv_iommu_update_ipsr(RISCVIOMMUState *s, uint64_t data)
-> @@ -1778,6 +1822,12 @@ static MemTxResult riscv_iommu_mmio_write(void *op=
-aque, hwaddr addr,
+> - patch 3 contains the bulk of changes made from v2. Please give special
+> attention to the following functions since this is entirely new code I
+> ended up adding:
 >
->          return MEMTX_OK;
+>  - riscv_iommu_report_fault()
+>  - riscv_iommu_validate_device_ctx()
+>  - riscv_iommu_update_ipsr()
 >
-> +    case RISCV_IOMMU_REG_TR_REQ_CTL:
-> +        process_fn =3D riscv_iommu_process_dbg;
-> +        regb =3D RISCV_IOMMU_REG_TR_REQ_CTL;
-> +        busy =3D RISCV_IOMMU_TR_REQ_CTL_GO_BUSY;
-> +        break;
-> +
->      default:
->          break;
->      }
-> @@ -1950,6 +2000,9 @@ static void riscv_iommu_realize(DeviceState *dev, E=
-rror **errp)
->          s->cap |=3D RISCV_IOMMU_CAP_SV32X4 | RISCV_IOMMU_CAP_SV39X4 |
->                    RISCV_IOMMU_CAP_SV48X4 | RISCV_IOMMU_CAP_SV57X4;
->      }
-> +    /* Enable translation debug interface */
-> +    s->cap |=3D RISCV_IOMMU_CAP_DBG;
-> +
->      /* Report QEMU target physical address space limits */
->      s->cap =3D set_field(s->cap, RISCV_IOMMU_CAP_PAS,
->                         TARGET_PHYS_ADDR_SPACE_BITS);
-> @@ -2004,6 +2057,12 @@ static void riscv_iommu_realize(DeviceState *dev, =
-Error **errp)
->      stl_le_p(&s->regs_wc[RISCV_IOMMU_REG_IPSR], ~0);
->      stl_le_p(&s->regs_ro[RISCV_IOMMU_REG_IVEC], 0);
->      stq_le_p(&s->regs_rw[RISCV_IOMMU_REG_DDTP], s->ddtp);
-> +    /* If debug registers enabled. */
-> +    if (s->cap & RISCV_IOMMU_CAP_DBG) {
-> +        stq_le_p(&s->regs_ro[RISCV_IOMMU_REG_TR_REQ_IOVA], 0);
-> +        stq_le_p(&s->regs_ro[RISCV_IOMMU_REG_TR_REQ_CTL],
-> +            RISCV_IOMMU_TR_REQ_CTL_GO_BUSY);
-> +    }
+>   Aside from these helpers most of the changes made in this patch 3 were
+> punctual.
 >
->      /* Memory region for downstream access, if specified. */
->      if (s->target_mr) {
+> - Red HAT PCI ID related changes. A new patch (4) that introduces a
+> generic RISC-V IOMMU PCI ID was added. This PCI ID was gracefully given
+> to us by Red Hat and Gerd Hoffman from their ID space. The
+> riscv-iommu-pci device now defaults to this PCI ID instead of Rivos PCI
+> ID. The device was changed slightly to allow vendor-id and device-id to
+> be set in the command-line, so it's now possible to use this reference
+> device as another RISC-V IOMMU PCI device to ease the burden of
+> testing/development.
+>
+>   To instantiate the riscv-iommu-pci device using the previous Rivos PCI
+> ID, use the following cmd line:
+>
+>   -device riscv-iommu-pci,vendor-id=3D0x1efd,device-id=3D0xedf1
+>
+>   I'm using these options to test the series with the existing Linux RISC=
+-V
+> IOMMU support that uses just a Rivos ID to identify the device.
+>
+>
+> Series based on alistair/riscv-to-apply.next. It's also applicable on
+> current QEMU master. It can also be fetched from:
+>
+> https://gitlab.com/danielhb/qemu/-/tree/riscv_iommu_v3
+>
+>
+> Patches missing reviews/acks: 3, 5, 9, 10, 11.
+>
+> Changes from v2 [1]:
+> - patch 05 (hw/riscv: add riscv-iommu-sys platform device): dropped
+>   - will be reintroduced in a later review or as a follow-up series
+>
+> - patches 14 and 15: dropped
+>   - will be sent in separate
+>
+> - patches 2, 3, 4 and 5:
+>   - removed all 'Ziommu' references
+>
+> - patch 2:
+>   - added extra bits that patch 3 ended up using
+>
+> - patch 3:
+>   - fixed blank line at EOF in hw/riscv/trace.h
+>   - added a riscv_iommu_report_fault() helper to report faults. The helpe=
+r checks if
+>     a given fault is eligible to be reported if DTF is 1
+>   - Use riscv_iommu_report_fault() in riscv_iommu_ctx() and riscv_iommu_t=
+ranslate()
+>     to avoid code repetition
+>   - added a riscv_iommu_validate_device_ctx() helper to validate the devi=
+ce context
+>     as specified in "Device configuration checks" section. This helper is=
+ being used
+>     in riscv_iommu_ctx_fetch()
+>   - added a new riscv_iommu_update_ipsr() helper to handle IPSR updates
+>     in riscv_iommu_mmio_write()
+>   - riscv_iommmu_msi_write() now reports a fault in all error paths
+>   - check for fctl.WSI before issuing a MSI interrupt in riscv_iommu_noti=
+fy()
+>   - change riscv-iommu region name to 'riscv-iommu'
+>   - change address_space_init() name for PCI devices to 'name' instead of=
+ using TYPE_RISCV_IOMMU_PCI
+>   - changed riscv_iommu_mmio_ops min_access_size to 4
+>   - do not check for min and max sizes on riscv_iommu_mmio_write()
+>   - changed riscv_iommu_trap_ops  min_access_size to 4
+>   - removed IOMMU qemu_thread thread:
+>     - riscv_iommu_mmio_write() will now execute a riscv_iommu_process_fn =
+by holding
+>       'core_lock'
+>   - init FSCR as zero explicitly
+>   - check for bus->iommu_opaque =3D=3D NULL before calling pci_setup_iomm=
+u()
+>
+> - patch 4 (new):
+>   - add Red-Hat PCI RISC-V IOMMU ID
+>
+> - patch 5 (former 4):
+>   - create vendor-id and device-id properties
+>   - set Red-hat PCI RISC-V IOMMU ID as default ID
+>
+> - patch 8:
+>   - use IOMMU_NONE instead of '0' in relevant 'iot->perm =3D 0' instances
+>
+> - patch 9:
+>   - add s-stage and g-stage steps in riscv_iommu_validate_device_ctx()
+>   - removed 'gpa' boolean from riscv_iommu_spa_fetch()
+>   - 'en_s' is no longer used for early MSI address match
+>
+> - patch 10:
+>   - add ATS steps in riscv_iommu_validate_device_ctx()
+>   - check for 's->enable_ats' before adding RISCV_IOMMU_DC_TC_EN_ATS in d=
+evice context
+>   - check for 's->enable_ats' before processing ATS commands in riscv_iom=
+mu_process_cq_tail()
+>   - remove ambiguous trace_riscv_iommu_ats() from riscv_iommu_translate()
+>
+> - patch 11:
+>   - removed unused bits
+>   - added RISCV_IOMMU_TR_REQ_CTL_NW and RISCV_IOMMU_TR_RESPONSE_S
+>     bits
+>   - set IOMMUTLBEntry 'perm' using RISCV_IOMMU_TR_REQ_CTL_NW in riscv_iom=
+mu_process_dbg()
+>   - clear RISCV_IOMMU_TR_RESPONSE_S in riscv_iommu_process_dbg(). Added a=
+ comment talking about the (lack of) superpage support
+>
+> [1] https://lore.kernel.org/qemu-riscv/20240307160319.675044-1-dbarboza@v=
+entanamicro.com/
+> [2] https://github.com/vlsunil/qemu/commits/acpi_rimt_poc_v1/
+>
+> Andrew Jones (1):
+>   hw/riscv/riscv-iommu: Add another irq for mrif notifications
+>
+> Daniel Henrique Barboza (3):
+>   pci-ids.rst: add Red Hat pci-id for RISC-V IOMMU device
+>   test/qtest: add riscv-iommu-pci tests
+>   qtest/riscv-iommu-test: add init queues test
+>
+> Tomasz Jeznach (9):
+>   exec/memtxattr: add process identifier to the transaction attributes
+>   hw/riscv: add riscv-iommu-bits.h
+>   hw/riscv: add RISC-V IOMMU base emulation
+>   hw/riscv: add riscv-iommu-pci reference device
+>   hw/riscv/virt.c: support for RISC-V IOMMU PCIDevice hotplug
+>   hw/riscv/riscv-iommu: add Address Translation Cache (IOATC)
+>   hw/riscv/riscv-iommu: add s-stage and g-stage support
+>   hw/riscv/riscv-iommu: add ATS support
+>   hw/riscv/riscv-iommu: add DBG support
+>
+>  docs/specs/pci-ids.rst           |    2 +
+>  hw/riscv/Kconfig                 |    4 +
+>  hw/riscv/meson.build             |    1 +
+>  hw/riscv/riscv-iommu-bits.h      |  416 ++++++
+>  hw/riscv/riscv-iommu-pci.c       |  177 +++
+>  hw/riscv/riscv-iommu.c           | 2283 ++++++++++++++++++++++++++++++
+>  hw/riscv/riscv-iommu.h           |  146 ++
+>  hw/riscv/trace-events            |   15 +
+>  hw/riscv/trace.h                 |    1 +
+>  hw/riscv/virt.c                  |   33 +-
+>  include/exec/memattrs.h          |    5 +
+>  include/hw/pci/pci.h             |    1 +
+>  include/hw/riscv/iommu.h         |   36 +
+>  meson.build                      |    1 +
+>  tests/qtest/libqos/meson.build   |    4 +
+>  tests/qtest/libqos/riscv-iommu.c |   76 +
+>  tests/qtest/libqos/riscv-iommu.h |  100 ++
+>  tests/qtest/meson.build          |    1 +
+>  tests/qtest/riscv-iommu-test.c   |  234 +++
+>  19 files changed, 3535 insertions(+), 1 deletion(-)
+>  create mode 100644 hw/riscv/riscv-iommu-bits.h
+>  create mode 100644 hw/riscv/riscv-iommu-pci.c
+>  create mode 100644 hw/riscv/riscv-iommu.c
+>  create mode 100644 hw/riscv/riscv-iommu.h
+>  create mode 100644 hw/riscv/trace-events
+>  create mode 100644 hw/riscv/trace.h
+>  create mode 100644 include/hw/riscv/iommu.h
+>  create mode 100644 tests/qtest/libqos/riscv-iommu.c
+>  create mode 100644 tests/qtest/libqos/riscv-iommu.h
+>  create mode 100644 tests/qtest/riscv-iommu-test.c
+>
 > --
 > 2.44.0
 >
