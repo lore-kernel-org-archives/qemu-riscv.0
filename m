@@ -4,82 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C94D5C27C55
-	for <qemu-riscv@archiver.kernel.org>; Mon, 10 Jun 2024 14:59:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6E02C27C55
+	for <qemu-riscv@archiver.kernel.org>; Mon, 10 Jun 2024 18:28:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sGgTn-0008Gn-Qt; Mon, 10 Jun 2024 10:58:39 -0400
+	id 1sGjke-0006cW-9W; Mon, 10 Jun 2024 14:28:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1sGgTi-0008EU-8l
- for qemu-riscv@nongnu.org; Mon, 10 Jun 2024 10:58:34 -0400
-Received: from mail-ej1-x62d.google.com ([2a00:1450:4864:20::62d])
+ (Exim 4.90_1) (envelope-from <jcmvbkbc@gmail.com>)
+ id 1sGjkO-0006UG-Ok; Mon, 10 Jun 2024 14:28:01 -0400
+Received: from mail-oo1-xc35.google.com ([2607:f8b0:4864:20::c35])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1sGgTg-0004WJ-NC
- for qemu-riscv@nongnu.org; Mon, 10 Jun 2024 10:58:34 -0400
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a6f09b457fdso180504366b.2
- for <qemu-riscv@nongnu.org>; Mon, 10 Jun 2024 07:58:31 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <jcmvbkbc@gmail.com>)
+ id 1sGjkN-0007Et-CQ; Mon, 10 Jun 2024 14:28:00 -0400
+Received: by mail-oo1-xc35.google.com with SMTP id
+ 006d021491bc7-5b9776123a3so2413132eaf.0; 
+ Mon, 10 Jun 2024 11:27:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718031510; x=1718636310; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=uWQ9swtHKmaOCXCNUZVXDCsGfJqeWobhkzplnSNVd9c=;
- b=eomjwc4Mggzbg48c0kjh42Ltp0iWg0nUEywKYPo9fYL+KFljzIVjZJ+9T5HzOXAG/l
- r9JMYGXee0jKapPzsTREd+OT+zFefCKapynhnIs0QxJ7V95vOWlxb6muCnh+p1RHrcjd
- Uui6haG8968yA6HQlJHx8nyDuL0ZrfIgQ+coSg4OWWY9zCggzsZfn5ossyzCAuZiHWTT
- eJP1lbIWFA1V4SujLokQyF7c13Ukh31LCD/pUsUXJAy1soIArgGmGjCU33egS1c1B/Az
- 4DLBTyQtM5z45cRAxzRK6lkDRSb+utmmSgETruCPgWRXzgqcPtAYNW5G+rxt9hZwjIdT
- I8+A==
+ d=gmail.com; s=20230601; t=1718044077; x=1718648877; darn=nongnu.org;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=e+vKsbcoleOYuc4PiNiO5dWwOmRc3lrgxALbS5CidGo=;
+ b=JdSKYIGvtsePQtNTysA7P3T0lthA1bxO7I+D8ocNFxoSr5hw23E+qOK5ozNmlJoSp7
+ jXmpVp6F7rGJbStNyo7hQaApP06upQLhcKhU4aZXfqRJQqnBoQ/LNfxB7qS7qWd8t63j
+ 8WBir+aoPBilw4QXCamMiL8IJbBP73V9JiyMZFxXEE/Jzo2c/x8Zwpr81ueoTy2den9v
+ DzSwEPn+VSAdR3/c4sFGUTu8ynZzh19FvmWSu3BghgFKDu60DdLU0FBbeEdAboidN7sK
+ bdSNmCnEHalAlQouCJ7VLHuBxVOMEDF3MgeyJu8R4hNCqjGV8KdgzwO6C0thLL2QkGeB
+ BAwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718031510; x=1718636310;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=uWQ9swtHKmaOCXCNUZVXDCsGfJqeWobhkzplnSNVd9c=;
- b=wA6IVKJ6Q+RhMBsne951+lHFRwge7urGj+iE/XHc0D7qXkNr9hxn9uRyEHuqaYwm40
- Trt3Ncu4apDt6V6ibI4qb1mAhSZP6wE93P8QcNsao6IZWkhLK2A9r5theW7Mjs2yy3w6
- uvoYcGwpnfWQLprvDH/3HrNRRA0wntx7whSUZQv/Bjb5oqrSxnWXE6KDNdZe3nt43KEL
- LhzhI11NVwjr9xMgo8S03U3wxUqCggiN/OWk4W4hsE7hDy755xFWRoOhs2i+yDV85quz
- 4FnpxZSaEUpPR2dh32JQRkVCmrfRx+p68ZJJzuFhJaxuml+piHU/ocpCsNufm78q8D35
- mu3w==
-X-Gm-Message-State: AOJu0YykWMP0HYi9PaNxk7VjPFqH3Sb+GzBsRSbCcw2kt2vB/1vjeQkY
- 4NPejuP1lsQKB2rwEJIUe0Gv5HD2Rsj1fT4cUzXuSq1kQYf+06oOyhQvF0VRTo8=
-X-Google-Smtp-Source: AGHT+IHItSRvMt7/f1/CyMEwNOb0OMLMYHgxJlBwSTMHzhWx8AXW2mpAQHyo31zA2fH7As/cnih98g==
-X-Received: by 2002:a17:906:eea:b0:a68:e7df:350b with SMTP id
- a640c23a62f3a-a6cd7891b58mr633603366b.35.1718031508926; 
- Mon, 10 Jun 2024 07:58:28 -0700 (PDT)
-Received: from m1x-phil.lan ([176.176.129.242])
+ d=1e100.net; s=20230601; t=1718044077; x=1718648877;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=e+vKsbcoleOYuc4PiNiO5dWwOmRc3lrgxALbS5CidGo=;
+ b=w7v1nxvOTZyXVG7V8vPV+qXyu5ixvCazcWI9t/A8qkKz3rlA7LILy/ykl3FKN8hhFe
+ kk0ay7/08qvsS0DWxcn+LZr1OnaLexvNMjmsoq4PwNV6FU/Q6sil+H5ScwTIAAYQvHAt
+ iVWus6dYtVxDz26HUEhg6xFTjLiT++RmmMDy5kj5J2SmSVls4HIYOYMCJ++S33HIZWP8
+ Wdgr41qik/1c5XIiYh3Nuw34ni2OkpF2U3n69PLAy7HkThxWyoJDWy6bmh530igdEkLU
+ dRdsuuACsklFxlqFEZp5TpdxLMX/I2R4dthniyEDTy5LZuujf68x3CL15eh6D8aHNn7R
+ steA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWXfGfxsHPsgSy0pmRB2U+6Ho/zsioDiUjD5AvBvSVPJiAQmoa5uZuX0fq0c2IC0d0EgTMhP1uxd3wGXwKCNckPxRLpeR0=
+X-Gm-Message-State: AOJu0Yz2B6yFttwEXdCyi9YNbxk2EVhbYdDILLzHhkrrbGl0GFLM0Pc+
+ 00mdmlRY4X/tL86UweGZWuImQjSLD0AvJg41DiXEkCWhZ6UEF5Ad
+X-Google-Smtp-Source: AGHT+IEwmKEH6z/CY/zIgNlLA9Tqlm97IGgsC1LzdRAHBxjg+uYHjMfMy9KfPk/JYB97Guk40ReDew==
+X-Received: by 2002:a05:6358:50cc:b0:19f:45ca:c1cb with SMTP id
+ e5c5f4694b2df-19f45cac9a8mr768851455d.7.1718044076662; 
+ Mon, 10 Jun 2024 11:27:56 -0700 (PDT)
+Received: from octofox.metropolis ([2601:646:a200:bbd0:3ffd:29c9:236f:9968])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a6f20563a26sm123065266b.129.2024.06.10.07.58.27
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 10 Jun 2024 07:58:28 -0700 (PDT)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ 41be03b00d2f7-6f5e09e5261sm120053a12.19.2024.06.10.11.27.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 10 Jun 2024 11:27:56 -0700 (PDT)
+Date: Mon, 10 Jun 2024 11:27:11 -0700
+From: Max Filippov <jcmvbkbc@gmail.com>
+To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Alex =?iso-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>,
  Anton Johansson <anjo@rev.ng>,
  Richard Henderson <richard.henderson@linaro.org>,
- Max Filippov <jcmvbkbc@gmail.com>, Laurent Vivier <laurent@vivier.eu>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v3 3/5] target/mips: Restrict semihosting to TCG
-Date: Mon, 10 Jun 2024 16:58:05 +0200
-Message-ID: <20240610145808.2267-4-philmd@linaro.org>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20240610145808.2267-1-philmd@linaro.org>
+ Laurent Vivier <laurent@vivier.eu>
+Subject: Re: [PATCH v3 2/5] target/xtensa: Restrict semihosting to TCG
+Message-ID: <ZmdFfyzwWs_YREPx@octofox.metropolis>
 References: <20240610145808.2267-1-philmd@linaro.org>
+ <20240610145808.2267-3-philmd@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::62d;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x62d.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+In-Reply-To: <20240610145808.2267-3-philmd@linaro.org>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c35;
+ envelope-from=jcmvbkbc@gmail.com; helo=mail-oo1-xc35.google.com
+X-Spam_score_int: -15
+X-Spam_score: -1.6
+X-Spam_bar: -
+X-Spam_report: (-1.6 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ FROM_LOCAL_NOVOWEL=0.5, HK_RANDOM_ENVFROM=0.001, HK_RANDOM_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -97,30 +101,21 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Semihosting currently uses the TCG probe_access API. To prepare for
-encoding the TCG dependency in Kconfig, do not enable it unless TCG
-is available.
+On Mon, Jun 10, 2024 at 04:58:04PM +0200, Philippe Mathieu-Daudé wrote:
+> The semihosting feature depends on TCG (due to the probe_access
+> API access). Although TCG is the single accelerator currently
+> available for the xtensa target, use the Kconfig "imply" directive
+> which is more correct (if we were to support a different accel).
+> 
+> Reported-by: Anton Johansson <anjo@rev.ng>
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> ---
+>  target/xtensa/Kconfig | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-Suggested-by: Paolo Bonzini <pbonzini@redhat.com>
-Signed-off-by: Philippe Mathieu-DaudÃ© <philmd@linaro.org>
-Reviewed-by: Anton Johansson <anjo@rev.ng>
----
- target/mips/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Acked-by: Max Filippov <jcmvbkbc@gmail.com>
 
-diff --git a/target/mips/Kconfig b/target/mips/Kconfig
-index eb19c94c7d..876048b150 100644
---- a/target/mips/Kconfig
-+++ b/target/mips/Kconfig
-@@ -1,6 +1,6 @@
- config MIPS
-     bool
--    select SEMIHOSTING
-+    imply SEMIHOSTING if TCG
- 
- config MIPS64
-     bool
 -- 
-2.41.0
-
+Thanks.
+-- Max
 
