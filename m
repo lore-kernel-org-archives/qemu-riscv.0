@@ -4,43 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B6C8C25B76
-	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Jun 2024 08:58:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C48EFC25B76
+	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Jun 2024 10:07:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sGxKQ-0002da-CV; Tue, 11 Jun 2024 04:58:06 -0400
+	id 1sGyPd-0000jO-8a; Tue, 11 Jun 2024 06:07:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dilfridge@gentoo.org>)
- id 1sGxKN-0002cf-Bc; Tue, 11 Jun 2024 04:58:03 -0400
-Received: from dev.gentoo.org ([2001:470:ea4a:1:5054:ff:fec7:86e4]
- helo=smtp.gentoo.org)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim 4.90_1) (envelope-from <dilfridge@gentoo.org>)
- id 1sGxKK-0001RS-Qc; Tue, 11 Jun 2024 04:58:03 -0400
-From: "Andreas K. Huettel" <dilfridge@gentoo.org>
-To: Alistair Francis <alistair23@gmail.com>
-Cc: qemu-devel@nongnu.org, "open list:RISC-V" <qemu-riscv@nongnu.org>,
- LIU Zhiwei <baxiantai@gmail.com>, Alistair Francis <alistair.francis@wdc.com>
-Subject: Re: qemu-riscv32 usermode still broken?
-Date: Tue, 11 Jun 2024 10:57:37 +0200
-Message-ID: <4038765.Mh6RI2rZIc@pinacolada>
-Organization: Gentoo Linux
-In-Reply-To: <CAKmqyKMRpSis8uaQVs_FTawtC-nwsFj8t7AVjrTNM4DQr-5pYw@mail.gmail.com>
-References: <10817413.NyiUUSuA9g@pinacolada> <5239676.BddDVKsqQX@pinacolada>
- <CAKmqyKMRpSis8uaQVs_FTawtC-nwsFj8t7AVjrTNM4DQr-5pYw@mail.gmail.com>
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1sGyPY-0000i0-HE
+ for qemu-riscv@nongnu.org; Tue, 11 Jun 2024 06:07:30 -0400
+Received: from mail-ej1-x62d.google.com ([2a00:1450:4864:20::62d])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1sGyPW-0006E4-6z
+ for qemu-riscv@nongnu.org; Tue, 11 Jun 2024 06:07:28 -0400
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-a6ef8bf500dso100642566b.0
+ for <qemu-riscv@nongnu.org>; Tue, 11 Jun 2024 03:07:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1718100444; x=1718705244; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=/a5FtD6rQV+VlTF/jdGlUtxkFwtZpYBmDFOOJ7ZNAMA=;
+ b=ErF2NOK1CSbUGbdIu0g1bVUrsC3IF8SO4M6atSLrMzPwc1sTL8OEzRs4S0xM8h+C3z
+ UuuSvwUJHH1HHHwWgFnOOgr0CciCjiZjkLaozKlAE56aQzgXytrJW4jbOpkWWjdvmcgu
+ rs5PYhJaqVm414QH8yUiveSujlFYzGwWUyhzcPtJKtsg4Xy4XG/jky7zKIogR350nwOm
+ e2sHux+N5G0alSZtZVFYy94Zn4MvxyhuWtt5bs862veZ5ltDVs8ewinsh6uOfh82tyst
+ LK3cSc0PXzH3sNdiHPRShPXD3MRZRrcHow23X+CPP7b5fh5fca20kshe9L+mEe8EhKDv
+ C8zA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718100444; x=1718705244;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=/a5FtD6rQV+VlTF/jdGlUtxkFwtZpYBmDFOOJ7ZNAMA=;
+ b=jZeQJoRBbZhKwPfausMQSBjSl8AqbEPL+lHCzHl238Jme5HwRDF7jZ65Ck3ArnICwr
+ KwP08flrcY54ssVjhLlC1/CrarNdBtKiUqfCPgO70P4m2ZFQOx5OxaT0/cbm7/VYbaIg
+ n0BrLB66YFvqOR+kWZHfvpwdWjnYv5oZW5n0BgLCM571ud70UrJt1k7mJT6iNFyKIyZu
+ zmh3bF0Gbvkp7vgBdMdbXjfFRNXbx2a5I5R7B+mthcMAKGB7TD62NRV4M9eVcJELQzmI
+ DrV7qgSOfycPmBatR/NAp9aF2LyqVvpzVeHqDidmf6ckcvwRyCg0aw94ULzSBVgMxP99
+ c6kg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVL5rpt9VaZyq+FNhrGNj4xKAyLvWAbcKl37GUqNirIWrzvin90l7bt8jR04C9t4o+O34rePH7MJdSujiJei8QzB8aDy7I=
+X-Gm-Message-State: AOJu0YwRJa7ZeQ4kPYZPEP0p4cpL/3QS0NbenAUqMnXpNFUGuBhqR8cU
+ KltkoSxPgOfeoUyULX7QBn//zuhk0A9iPehl4kVRt+TEoPKlbdmMNiWgMHXyL5g=
+X-Google-Smtp-Source: AGHT+IEz38bzmOML/AYUwKaHhwyJTdG/Bt7w6mZ0+Gy4FBEGjVtcYiq3Oz7WY61UmkbI0d+UjH4tfQ==
+X-Received: by 2002:a17:906:705:b0:a6f:1dbb:d38b with SMTP id
+ a640c23a62f3a-a6f1dbbd3e7mr318969966b.28.1718100444473; 
+ Tue, 11 Jun 2024 03:07:24 -0700 (PDT)
+Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a6f0557b1c3sm431069666b.209.2024.06.11.03.07.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 11 Jun 2024 03:07:23 -0700 (PDT)
+Received: from draig (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id A110D5F898;
+ Tue, 11 Jun 2024 11:07:22 +0100 (BST)
+From: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Cc: qemu-devel@nongnu.org,  qemu-riscv@nongnu.org,  Paolo Bonzini
+ <pbonzini@redhat.com>,  Anton Johansson <anjo@rev.ng>,  Richard Henderson
+ <richard.henderson@linaro.org>,  Max Filippov <jcmvbkbc@gmail.com>,
+ Laurent Vivier <laurent@vivier.eu>
+Subject: Re: [PATCH v3 0/5] semihosting: Restrict to TCG
+In-Reply-To: <20240610145808.2267-1-philmd@linaro.org> ("Philippe
+ =?utf-8?Q?Mathieu-Daud=C3=A9=22's?= message of "Mon, 10 Jun 2024 16:58:02
+ +0200")
+References: <20240610145808.2267-1-philmd@linaro.org>
+Date: Tue, 11 Jun 2024 11:07:22 +0100
+Message-ID: <87ed93ztb9.fsf@draig.linaro.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="nextPart5471991.R56niFO833";
- micalg="pgp-sha512"; protocol="application/pgp-signature"
-Received-SPF: pass client-ip=2001:470:ea4a:1:5054:ff:fec7:86e4;
- envelope-from=dilfridge@gentoo.org; helo=smtp.gentoo.org
-X-Spam_score_int: -25
-X-Spam_score: -2.6
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::62d;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x62d.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.6 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_LOW=-0.7,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -56,115 +101,22 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---nextPart5471991.R56niFO833
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"; protected-headers="v1"
-From: "Andreas K. Huettel" <dilfridge@gentoo.org>
-To: Alistair Francis <alistair23@gmail.com>
-Subject: Re: qemu-riscv32 usermode still broken?
-Date: Tue, 11 Jun 2024 10:57:37 +0200
-Message-ID: <4038765.Mh6RI2rZIc@pinacolada>
-Organization: Gentoo Linux
-MIME-Version: 1.0
+Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> writes:
 
-Hi Alistair,=20
+> v3: Address Anton's comment
+> v2: Address Paolo's comment
+>
+> Semihosting currently uses the TCG probe_access API,
+> so it is pointless to have it in the binary when TCG
+> isn't.
+>
+> It could be implemented for other accelerators, but
+> work need to be done. Meanwhile, do not enable it
+> unless TCG is available.
 
->=20
-> Ok!
->=20
-> So on my x86 machine I see this
->=20
-> --- SIGCHLD {si_signo=3DSIGCHLD, si_code=3DCLD_EXITED, si_pid=3D285545,
-> si_uid=3D1000, si_status=3D0, si_utime=3D0, si_stime=3D0} ---
-> wait4(-1, [{WIFEXITED(s) && WEXITSTATUS(s) =3D=3D 0}],
-> WNOHANG|WSTOPPED|WCONTINUED, NULL) =3D 285545
-> wait4(-1, 0x7ffe3eeb8210, WNOHANG|WSTOPPED|WCONTINUED, NULL) =3D 0
-> rt_sigreturn({mask=3D[INT]})              =3D 0
-> close(3)                                =3D 0
->=20
-> It all looks ok.
+Queued to semihosting/next, thanks.
 
-This was fixed in the meantime (hooray!), sorry I didn't think anyone
-would still look at the old thread. The commit is given below.
-
-Since then we've been able to build riscv32 stages for Gentoo just fine
-using qemu-user, see
-https://www.gentoo.org/downloads/#riscv
-
-Cheers,
-Andreas
-
-commit f0907ff4cae743f1a4ef3d0a55a047029eed06ff
-Author:     Richard Henderson <richard.henderson@linaro.org>
-AuthorDate: Fri Apr 5 11:58:14 2024 -1000
-Commit:     Richard Henderson <richard.henderson@linaro.org>
-CommitDate: Tue Apr 9 07:43:11 2024 -1000
-
-    linux-user: Fix waitid return of siginfo_t and rusage
-   =20
-    The copy back to siginfo_t should be conditional only on arg3,
-    not the specific values that might have been written.
-    The copy back to rusage was missing entirely.
-   =20
-    Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2262
-    Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-    Tested-by: Alex Fan <alex.fan.q@gmail.com>
-    Reviewed-by: Philippe Mathieu-Daud=E9 <philmd@linaro.org>
-
-
-
->=20
-> Maybe the host_to_target_siginfo() function in QEMU is the issue?
-> Something in here?
-> https://github.com/qemu/qemu/blob/master/linux-user/signal.c#L335
->=20
-> Nothing jumps out with a quick look though
->=20
-> Alistair
->=20
-> >
-> >
-> >
-> > --
-> > Andreas K. H=FCttel
-> > dilfridge@gentoo.org
-> > Gentoo Linux developer
-> > (council, toolchain, base-system, perl, libreoffice)
->=20
-
-
-=2D-=20
-Andreas K. H=FCttel
-dilfridge@gentoo.org
-Gentoo Linux developer
-(council, toolchain, base-system, perl, libreoffice)
---nextPart5471991.R56niFO833
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part.
-Content-Transfer-Encoding: 7Bit
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iQKTBAABCgB9FiEE/Rnm0xsZLuTcY+rT3CsWIV7VQSoFAmZoEYFfFIAAAAAALgAo
-aXNzdWVyLWZwckBub3RhdGlvbnMub3BlbnBncC5maWZ0aGhvcnNlbWFuLm5ldEZE
-MTlFNkQzMUIxOTJFRTREQzYzRUFEM0RDMkIxNjIxNUVENTQxMkEACgkQ3CsWIV7V
-QSr7Ug/+JedTyiXKUdMnVtDB7wGQB1tysRevlKHd3hYSTGQO4mxMC9lKRg8DneCM
-TQjYl8a/WhkVKqQj/m6LnzKIgP6f1zT5KXqdSGwF+crQEe4JRWtSVHa7iKkPlGm9
-3DiJCvWqtEM6eraOzkziF51zfamaWsbOopnwIN3YEqSCKff/otn5sRsSPJndtHJy
-NkfQ3bVj9WWllSobDmcAq8ri5lMKnPJOnaDzNNJ5F8B1iIukfTatYBcpp2HyXU6/
-+sAglZNF5JVM6cjtZeg6fooNcFiylCFSPjg2qr4pHUJMIDRk8uyRhh/AyEZH0wle
-8L0l92PxZ99oXq4PCt6betkDyX2tXrR+zGF/H8xp90Y6cMLFILQh95lxhUTtDLWX
-peycwWVBVVEepUHGsNYkuy/J1PQHeZPWhlU8maAfTlf4Ns4NSbNax2JptJUHSsZr
-I2D6t9sK1S7lIp+lsdPpFmIh5i4+qCnSEZ4ZK8GGxvdh7TdRgX3iZM6m+ZQ+6ZCk
-1iYHybiKkg0+bigDwGa8gLwrP/hUFcXUUORoY1TFN3LqWSSEoSMeZELQkbF9hFQp
-pFCoFkTK5t8t5gt/IE3nmdUg3vYNHeWdhl8ps4u4fHyZ/LbAKM/aNQgjKmP1KbW1
-nKgNyCVUlo5s+l+esFiTjFoBDhQXUqv/GnkWjlMGsQKR5vSCSVE=
-=agI0
------END PGP SIGNATURE-----
-
---nextPart5471991.R56niFO833--
-
-
-
+--=20
+Alex Benn=C3=A9e
+Virtualisation Tech Lead @ Linaro
 
