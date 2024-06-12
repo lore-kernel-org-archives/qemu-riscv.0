@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6C5FC27C77
-	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Jun 2024 08:16:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9782C27C53
+	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Jun 2024 08:16:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sHJ8x-0003UC-0L; Wed, 12 Jun 2024 04:15:43 -0400
+	id 1sHJ9Q-0005Hp-Ja; Wed, 12 Jun 2024 04:16:14 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1sHJ8l-00034G-GC
- for qemu-riscv@nongnu.org; Wed, 12 Jun 2024 04:15:38 -0400
-Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
+ id 1sHJ9M-0005D3-0d
+ for qemu-riscv@nongnu.org; Wed, 12 Jun 2024 04:16:08 -0400
+Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1sHJ8j-0006Sr-CV
- for qemu-riscv@nongnu.org; Wed, 12 Jun 2024 04:15:31 -0400
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-1f6da06ba24so40419195ad.2
- for <qemu-riscv@nongnu.org>; Wed, 12 Jun 2024 01:15:28 -0700 (PDT)
+ id 1sHJ9I-0006p1-5J
+ for qemu-riscv@nongnu.org; Wed, 12 Jun 2024 04:16:07 -0400
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-1f7274a453bso19233155ad.2
+ for <qemu-riscv@nongnu.org>; Wed, 12 Jun 2024 01:16:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1718180128; x=1718784928; darn=nongnu.org;
+ d=sifive.com; s=google; t=1718180163; x=1718784963; darn=nongnu.org;
  h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
  :cc:subject:date:message-id:reply-to;
- bh=h0z/gLbV7H1AqreyjOU1SY6iFOr0/svp6XKbzOXxi3c=;
- b=fZpfN0rHuApg4517dvvFDaqtyc2VL/WAYAVrGBUz1VY1pYp5M/JXPz1hBRHOP4ho3E
- uwggaaHmfWYx6ElduZ/7VpurwzLvN/eXe0MEqBwtgCAhh7Upt6zajTIcDME800Y4OnFg
- 6jOgbPqOm54xENl3cNCPv+gXqsh8HpHnNnTB/XswzOOMcytGxCLNo3bH2fG0dhGR225f
- hJF2LKysnl7klEFx8+9gJowyBnb2CcQUA9LMBVBSd8G6MINMAAbagAFI6zRcjMqIcEDa
- X6wDGCjkypXzOfNa93iHwN/ahnhiQ1X6bSpr/tlPTpRE3S21HwOQtxdXOGv3nrKcERic
- tJvA==
+ bh=YBsKz2cXW2irXTYX6EDVGeIkb/sGQaekYYfYimSeHNs=;
+ b=HYYkazSea+v0kWRPaUOkwuoPTLEmjqUJsBfA4nWFPULem3yUJeZSrugi5ah1sLVbOB
+ XMhsg8eXUF1dMp43rjyQeAn9RBXbsiElnypCR7Y2CGZEv+CcQF83KT9LjRalS3En7l+R
+ IkGWoYlpQFDgLwrwd96SNo/SKcomLnhH3ZWVW62g6v2ciq24hRvXLyEaJHR2FTC2vEtt
+ ae2l8wb93Sy97BzIS0cCz9WOtVephP+kMOle9bnKS2zTzq+UB84JCHeO1MdtrpZhi830
+ wlQQppL2ohlst/JLRbiMCv/d1M5Yh+EtyOBjQkniHGCvlPv8ES9l58rB4Ks1EQDjQTTt
+ YHYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718180128; x=1718784928;
+ d=1e100.net; s=20230601; t=1718180163; x=1718784963;
  h=references:in-reply-to:message-id:date:subject:cc:to:from
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=h0z/gLbV7H1AqreyjOU1SY6iFOr0/svp6XKbzOXxi3c=;
- b=d17giRjmO1a62vz1O5Shgqhum3aWEv7vggq5fC8qVq3HOCuPFpVF/y0UPsKxX/g8nU
- 4oD00glMT0HxVA3z5678111QezdITAgY33isnDlzHtSRHwHAjq48EDwqIVyRL5T5H+1+
- IJeUvsWXujpxuhOmrOE5N6eVuLCgNoCyugdpE/ZLaGYloH1GlETbn3pPc7yidmeJMXVK
- Av80kHlUVM1r4lOfHDKkJQAaYm6ZTPr9oiXkg2u1VrirK1FsPx31m6xNiBoILidraCQX
- BtxZhaVtBqbSMroaeSEIFLzUu/k6CioJ0JRduOh41TQ7szfRUuCyIC2znfoAYMMTvf0C
- Hjdw==
+ bh=YBsKz2cXW2irXTYX6EDVGeIkb/sGQaekYYfYimSeHNs=;
+ b=fihd/JI7t0ctPj7l18Y2L3RFSSHcKXxVB0SiifsFnjcA7/0d1/TOFOf7PfO9ir6jOw
+ GdG69j2V8BnPanP8NdphoC+IDffUOQmwplbM4pOBBZ8b/rB7q7QCUqwRcOe5HD8lNgO5
+ SFtq0dUo+GX/z7z6JoyU38giyF1017AG/ZwyKo6hierVr1Wexrt7NUghnBCeoNjNzjOM
+ lSdQWi8Is70z9VRjtEoWgWDtPM3FjPdjVjbkRC+BZ4WWiu4XRr2YfklBBl23+LFpZ371
+ Je7w1GZseCMt5ivh30oGYY3QMiqB3nYX0+U+1XiMifmbYW4yB3oo6l/wBoYZYO+TcnrR
+ OnSw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXYbXF8hed6fEhHib+92qmGrwowfVdH7ivU/ehyKJsliXakSKrvfJW7y/mi8icM9eTUozdm50XA3WatZ1oUqX3hSE1kiFI=
-X-Gm-Message-State: AOJu0YxeeuRiJYZLGM73eMdRo5SYolJ1RyA3ucxNrD5Imsu02fCl05ac
- FGPntkKlayoJsiOct0+HYiIcFz+6NBicTnUt8V2fceLwlSPl/NKXzV48dSsRdm0=
-X-Google-Smtp-Source: AGHT+IElBXpniJAtgpcO8h7wvvvpFvELLrYUqd6ldIz07LJ9f8BCphhJY5JR+yJoS8Eo7TnfJ1dFrA==
-X-Received: by 2002:a17:902:e80a:b0:1f7:1931:7a9c with SMTP id
- d9443c01a7336-1f83b5df346mr14898975ad.15.1718180127879; 
- Wed, 12 Jun 2024 01:15:27 -0700 (PDT)
+ AJvYcCXDPVhzp0DXWiJeglD96tazLYyyjmzb23e8hCz0FEXinvceXM0DoHF0OyvxITkB6lNuunC0Yp6tuLjrO98Nlse5Ibwpgwg=
+X-Gm-Message-State: AOJu0YwwShXv0IbiQaWgu1sEQ1sM/aKV6QO4Cezk/zXsDKqgRHmiXFo1
+ 5Gx/jhfqV71sY0gPz1an5q0NP488Gjl2O98VTTPS1DLIVhdCM/Ijm/u6b/ZCB+A=
+X-Google-Smtp-Source: AGHT+IG37UdgaXu8P2JE+gz6Z04qZbuplDZsS5uh0eTnm+7cZyvd+6A2KsrYWqSuWBp0hb0P1u7NNA==
+X-Received: by 2002:a17:902:d2c6:b0:1f7:178e:60a4 with SMTP id
+ d9443c01a7336-1f83b517aabmr13665965ad.7.1718180162752; 
+ Wed, 12 Jun 2024 01:16:02 -0700 (PDT)
 Received: from hsinchu26.internal.sifive.com
  (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1f8393e8e53sm11363875ad.16.2024.06.12.01.15.22
+ d9443c01a7336-1f8393e8e53sm11363875ad.16.2024.06.12.01.15.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Jun 2024 01:15:27 -0700 (PDT)
+ Wed, 12 Jun 2024 01:16:02 -0700 (PDT)
 From: Jim Shu <jim.shu@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -91,14 +91,15 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  qemu-ppc@nongnu.org (open list:PowerPC TCG CPUs),
  qemu-s390x@nongnu.org (open list:S390 TCG CPUs),
  Jim Shu <jim.shu@sifive.com>
-Subject: [RFC PATCH 09/16] target/riscv: Implement WorldGuard CSRs
-Date: Wed, 12 Jun 2024 16:14:09 +0800
-Message-Id: <20240612081416.29704-10-jim.shu@sifive.com>
+Subject: [RFC PATCH 15/16] hw/misc: riscv_wgchecker: Check the slot settings
+ in translate
+Date: Wed, 12 Jun 2024 16:14:15 +0800
+Message-Id: <20240612081416.29704-16-jim.shu@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20240612081416.29704-1-jim.shu@sifive.com>
 References: <20240612081416.29704-1-jim.shu@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
- envelope-from=jim.shu@sifive.com; helo=mail-pl1-x631.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
+ envelope-from=jim.shu@sifive.com; helo=mail-pl1-x633.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -121,175 +122,151 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The WG v0.4 specification adds 3 CSRs to configure S/U/HS/VS-mode WIDs
-of CPUs in the higher privileged modes.
+The final part of wgChecker we need to implement is actually using the
+wgChecker slots programmed by guest to determine whether to block the
+transaction or not.
 
-The Smwg extension at least requires a RISC-V HART to have M/U-mode, and
-the Sswg/Smwgd extension at least requires a RISC-V HART to have
-M/S/U-mode.
+Since this means we now change transaction mappings when
+the guest writes to wgChecker slots, we must also call the IOMMU
+notifiers at that point.
+
+One tricky part here is that the perm of 'blocked_io_as' is the
+condition of deny access. For example, if wgChecker only permits RO
+access, the perm of 'downstream_as' will be IOMMU_RO and the perm of
+'blocked_io_as' will be IOMMU_WO.
 
 Signed-off-by: Jim Shu <jim.shu@sifive.com>
 ---
- target/riscv/cpu.c |   4 ++
- target/riscv/cpu.h |   5 +++
- target/riscv/csr.c | 107 +++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 116 insertions(+)
+ hw/misc/riscv_wgchecker.c | 70 ++++++++++++++++++++++++++++++++++++---
+ hw/misc/trace-events      |  1 +
+ 2 files changed, 67 insertions(+), 4 deletions(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 4e87fa4d5b..ff1c22c71c 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1022,6 +1022,10 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
-         riscv_trigger_reset_hold(env);
-     }
+diff --git a/hw/misc/riscv_wgchecker.c b/hw/misc/riscv_wgchecker.c
+index 55e5e8127f..cab4e40921 100644
+--- a/hw/misc/riscv_wgchecker.c
++++ b/hw/misc/riscv_wgchecker.c
+@@ -100,6 +100,52 @@ REG32(SLOT_CFG,             0x010)
+ #define P_READ                  (1 << 0)
+ #define P_WRITE                 (1 << 1)
  
-+    if (riscv_cpu_cfg(env)->ext_smwg && env->wg_reset) {
-+        env->wg_reset(env);
++static IOMMUAccessFlags wgc_perm_to_iommu_flags(int wgc_perm)
++{
++    if (wgc_perm == (P_READ | P_WRITE)) {
++        return IOMMU_RW;
++    } else if (wgc_perm & P_WRITE) {
++        return IOMMU_WO;
++    } else if (wgc_perm & P_READ) {
++        return IOMMU_RO;
++    } else {
++        return IOMMU_NONE;
 +    }
++}
 +
-     if (kvm_enabled()) {
-         kvm_riscv_reset_vcpu(cpu);
-     }
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 50a0fba127..43ab558111 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -432,6 +432,11 @@ struct CPUArchState {
-     uint64_t kvm_timer_frequency;
- #endif /* CONFIG_KVM */
++static void wgchecker_iommu_notify_all(RISCVWgCheckerState *s)
++{
++    /*
++     * Do tlb_flush() to whole address space via memory_region_notify_iommu()
++     * when wgChecker changes it's config.
++     */
++
++    IOMMUTLBEvent event = {
++        .entry = {
++            .addr_mask = -1ULL,
++        }
++    };
++
++    trace_riscv_wgc_iommu_notify_all();
++
++    for (int i=0; i<WGC_NUM_REGIONS; i++) {
++        WgCheckerRegion *region = &s->mem_regions[i];
++        uint32_t nworlds = worldguard_config->nworlds;
++
++        if (!region->downstream) {
++            continue;
++        }
++        event.entry.iova = 0;
++        event.entry.translated_addr = 0;
++        event.type = IOMMU_NOTIFIER_UNMAP;
++        event.entry.perm = IOMMU_NONE;
++
++        for (int wid=0; wid<nworlds; wid++) {
++            memory_region_notify_iommu(&region->upstream, wid, event);
++        }
++    }
++}
++
+ static void decode_napot(hwaddr a, hwaddr *sa, hwaddr *ea)
+ {
+     /*
+@@ -309,6 +355,9 @@ static IOMMUTLBEntry riscv_wgc_translate(IOMMUMemoryRegion *iommu,
+ {
+     WgCheckerRegion *region = container_of(iommu, WgCheckerRegion, upstream);
+     RISCVWgCheckerState *s = RISCV_WGCHECKER(region->wgchecker);
++    bool is_write;
++    WgAccessResult result;
++    int wgc_perm;
+     hwaddr phys_addr;
+     uint64_t region_size;
  
-+    /* RISC-V WorldGuard */
-+    target_ulong mlwid;
-+    target_ulong slwid;
-+    target_ulong mwiddeleg;
+@@ -327,18 +376,25 @@ static IOMMUTLBEntry riscv_wgc_translate(IOMMUMemoryRegion *iommu,
+      * Look at the wgChecker configuration for this address, and
+      * return a TLB entry directing the transaction at either
+      * downstream_as or blocked_io_as, as appropriate.
+-     * For the moment, always permit accesses.
+      */
+ 
+     /* Use physical address instead of offset */
+     phys_addr = addr + region->region_offset;
++    is_write = (flags == IOMMU_WO);
+ 
+-    is_success = true;
++    result = wgc_check_access(s, phys_addr, iommu_idx, is_write);
+ 
+     trace_riscv_wgc_translate(phys_addr, flags,
+-        iommu_idx, is_success ? "pass" : "block");
++        iommu_idx, result.is_success ? "pass" : "block");
+ 
+-    ret.target_as = is_success ? &region->downstream_as : &region->blocked_io_as;
++    wgc_perm = result.perm;
++    if (!result.is_success) {
++        /* if target_as is blocked_io_as, the perm is the condition of deny access. */
++        wgc_perm ^= (P_READ | P_WRITE);
++    }
++    ret.perm = wgc_perm_to_iommu_flags(wgc_perm);
 +
-     /* machine specific WorldGuard callback */
-     void (*wg_reset)(CPURISCVState *env);
-     void (*wid_to_mem_attrs)(MemTxAttrs *attrs, uint32_t wid);
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 58ef7079dc..f3536e9e5d 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -4264,6 +4264,109 @@ static RISCVException write_upmbase(CPURISCVState *env, int csrno,
-     return RISCV_EXCP_NONE;
++    ret.target_as = result.is_success ? &region->downstream_as : &region->blocked_io_as;
+     return ret;
  }
  
-+/* RISC-V Worldguard */
-+static RISCVException worldguard_umode(CPURISCVState *env, int csrno)
-+{
-+    if (!riscv_cpu_cfg(env)->ext_smwg) {
-+        return RISCV_EXCP_ILLEGAL_INST;
-+    }
-+
-+    return umode(env, csrno);
-+}
-+
-+static RISCVException worldguard_sumode(CPURISCVState *env, int csrno)
-+{
-+    RISCVException ret;
-+
-+    if (!riscv_cpu_cfg(env)->ext_sswg) {
-+        return RISCV_EXCP_ILLEGAL_INST;
-+    }
-+
-+    ret = smode(env, csrno);
-+
-+    if (ret != RISCV_EXCP_NONE) {
-+        return ret;
-+    }
-+
-+    return umode(env, csrno);
-+}
-+
-+static RISCVException rmw_mlwid(CPURISCVState *env, int csrno,
-+                                target_ulong *ret_val,
-+                                target_ulong new_val, target_ulong wr_mask)
-+{
-+    CPUState *cs = env_cpu(env);
-+    RISCVCPU *cpu = RISCV_CPU(cs);
-+    target_ulong new_mlwid = (env->mlwid & ~wr_mask) | (new_val & wr_mask);
-+
-+    if (ret_val) {
-+        *ret_val = env->mlwid;
-+    }
-+
-+    g_assert(cpu->cfg.mwidlist);
-+    if (!(BIT(new_mlwid) & cpu->cfg.mwidlist)) {
-+        /* Set WID to lowest legal value if writing illegal value (WARL) */
-+        new_mlwid = find_first_bit((unsigned long *)&cpu->cfg.mwidlist, 32);
-+    }
-+
-+    if (env->mlwid != new_mlwid) {
-+        env->mlwid = new_mlwid;
-+        tlb_flush(cs);
-+    }
-+
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException rmw_slwid(CPURISCVState *env, int csrno,
-+                                target_ulong *ret_val,
-+                                target_ulong new_val, target_ulong wr_mask)
-+{
-+    target_ulong new_slwid = (env->slwid & ~wr_mask) | (new_val & wr_mask);
-+
-+    if (!env->mwiddeleg) {
-+        /*
-+         * When mwiddeleg CSR is zero, access to slwid raises an illegal
-+         * instruction exception.
-+         */
-+        return RISCV_EXCP_ILLEGAL_INST;
-+    }
-+
-+    if (ret_val) {
-+        *ret_val = env->slwid;
-+    }
-+
-+    if (!(BIT(new_slwid) & env->mwiddeleg)) {
-+        /* Set WID to lowest legal value if writing illegal value (WARL) */
-+        new_slwid = find_first_bit(
-+            (unsigned long *)&env->mwiddeleg, TARGET_LONG_BITS);
-+    }
-+
-+    if (env->slwid != new_slwid) {
-+        env->slwid = new_slwid;
-+        tlb_flush(env_cpu(env));
-+    }
-+
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException rmw_mwiddeleg(CPURISCVState *env, int csrno,
-+                                    target_ulong *ret_val,
-+                                    target_ulong new_val, target_ulong wr_mask)
-+{
-+    CPUState *cs = env_cpu(env);
-+    RISCVCPU *cpu = RISCV_CPU(cs);
-+
-+    if (ret_val) {
-+        *ret_val = env->mwiddeleg;
-+    }
-+
-+    env->mwiddeleg = (env->mwiddeleg & ~wr_mask) | (new_val & wr_mask);
-+
-+    /* Core wgMarker can only have WID value in mwidlist. */
-+    env->mwiddeleg &= cpu->cfg.mwidlist;
-+
-+    return RISCV_EXCP_NONE;
-+}
- #endif
+@@ -604,6 +660,9 @@ static void riscv_wgchecker_writeq(void *opaque, hwaddr addr,
+             break;
+         }
  
- /* Crypto Extension */
-@@ -5230,5 +5333,9 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-     [CSR_SCOUNTOVF]      = { "scountovf", sscofpmf,  read_scountovf,
-                              .min_priv_ver = PRIV_VERSION_1_12_0 },
++        /* Flush softmmu TLB when wgChecker changes config. */
++        wgchecker_iommu_notify_all(s);
++
+         return;
+     }
  
-+    /* RISC-V WorldGuard */
-+    [CSR_MLWID]     = { "mlwid",     worldguard_umode,  NULL, NULL, rmw_mlwid },
-+    [CSR_SLWID]     = { "slwid",     worldguard_sumode, NULL, NULL, rmw_slwid },
-+    [CSR_MWIDDELEG] = { "mwiddeleg", worldguard_sumode, NULL, NULL, rmw_mwiddeleg },
- #endif /* !CONFIG_USER_ONLY */
- };
+@@ -699,6 +758,9 @@ static void riscv_wgchecker_writel(void *opaque, hwaddr addr,
+             break;
+         }
+ 
++        /* Flush softmmu TLB when wgChecker changes config. */
++        wgchecker_iommu_notify_all(s);
++
+         return;
+     }
+ 
+diff --git a/hw/misc/trace-events b/hw/misc/trace-events
+index a64c7f0f9f..80907c45d2 100644
+--- a/hw/misc/trace-events
++++ b/hw/misc/trace-events
+@@ -359,3 +359,4 @@ riscv_wgchecker_mmio_write(uint64_t base, uint64_t offset, unsigned int size, ui
+ riscv_wgc_mem_blocked_read(uint64_t addr, unsigned size, uint32_t wid) "wgChecker blocked read: offset 0x%" PRIx64 " size %u wid %" PRIu32
+ riscv_wgc_mem_blocked_write(uint64_t addr, uint64_t data, unsigned size, uint32_t wid) "wgChecker blocked write: offset 0x%" PRIx64 " data 0x%" PRIx64 " size %u wid %" PRIu32
+ riscv_wgc_translate(uint64_t addr, int flags, int wid, const char *res) "wgChecker translate: addr 0x%016" PRIx64 " flags 0x%x wid %d: %s"
++riscv_wgc_iommu_notify_all(void) "wgChecker iommu: notifying UNMAP for all"
 -- 
 2.17.1
 
