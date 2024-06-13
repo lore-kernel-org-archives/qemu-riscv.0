@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 956B1C27C53
-	for <qemu-riscv@archiver.kernel.org>; Thu, 13 Jun 2024 01:30:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57578C27C6E
+	for <qemu-riscv@archiver.kernel.org>; Thu, 13 Jun 2024 01:31:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sHZHp-0001rF-Mb; Wed, 12 Jun 2024 21:29:57 -0400
+	id 1sHZI2-0001xB-01; Wed, 12 Jun 2024 21:30:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <fea.wang@sifive.com>)
- id 1sHZHo-0001qV-1J
- for qemu-riscv@nongnu.org; Wed, 12 Jun 2024 21:29:56 -0400
-Received: from mail-pg1-x52b.google.com ([2607:f8b0:4864:20::52b])
+ id 1sHZHx-0001vm-Av
+ for qemu-riscv@nongnu.org; Wed, 12 Jun 2024 21:30:05 -0400
+Received: from mail-pg1-x52e.google.com ([2607:f8b0:4864:20::52e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <fea.wang@sifive.com>)
- id 1sHZHm-00088p-H7
- for qemu-riscv@nongnu.org; Wed, 12 Jun 2024 21:29:55 -0400
-Received: by mail-pg1-x52b.google.com with SMTP id
- 41be03b00d2f7-681ad081695so349833a12.3
- for <qemu-riscv@nongnu.org>; Wed, 12 Jun 2024 18:29:54 -0700 (PDT)
+ id 1sHZHv-0008Dr-L4
+ for qemu-riscv@nongnu.org; Wed, 12 Jun 2024 21:30:05 -0400
+Received: by mail-pg1-x52e.google.com with SMTP id
+ 41be03b00d2f7-681ad081695so349887a12.3
+ for <qemu-riscv@nongnu.org>; Wed, 12 Jun 2024 18:30:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1718242193; x=1718846993; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=pUxeVtXFywMjJ65TgYZqpczOCAAoUYi5WukUsqHRsHg=;
- b=GBAu9FhCfUdSdB7O7zgjUFuIWknEUDALYXwLFlLV5/vfuKXkHibJ3HUOSP670jzNZ9
- UcqCgmKvnvD3a1ucnF0hY+Z/e38V9oO3QByVUfPHKEI4P261TqhOOurmJ0wOESOuwgh4
- a0T6Pah7Czh2FnpDcz7IdvTTyT49s1iR6loImipZZ+AVgiWfiyO3Fd3rpVOYig+MtmTp
- KjUNaobzUoaXIdxflhLicUEh3e+sf1tjYbgC7S4Q6bx5U5ntOWyDULqxu9ZJ+Vc9oqZZ
- q7Azm9+WTR5JVcLUPZ3i1GhdsjSuJuSpEigQDhXQlO4PqP1AqjW3//FfGwV8jW0TtZbi
- z59A==
+ d=sifive.com; s=google; t=1718242202; x=1718847002; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=wMVIvPPDyIsXb0IIrUQL6wLJN2o+AMmh9m6vpVCxHFY=;
+ b=Rov1rsbJdg0OSKfC8G/xvxY1dLR7g3pddeG/OKTLoeZrOGHC28wxYRCBaTzLtJZqXi
+ zKS2DILs3rAfBU74LnYz75RKTMTgG3TcWqf64kMmmdoAy38brmrk89m2cOduLeGoPHma
+ D4dCRRJUjYsnqAn6X/bxzpWEFg/BCSqET8qpwOfy93m3H0KIKa51lhXtCo0w0xqHFqXB
+ u/SzIYajWA0M3sz+6wAzdsVH3tgO8qN5bLJz3zX1FP3XNO0Yk2AgvRPmSAObRM7VDTIo
+ C0tDblw1BKho738oZePPEgLmLno5otUqbYYAo5k4Q6fc5Z7h2XHSKX1Ge9e/0O14rFq3
+ 3OUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718242193; x=1718846993;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=pUxeVtXFywMjJ65TgYZqpczOCAAoUYi5WukUsqHRsHg=;
- b=dWOJBGcMZo1WxetFWB2vk76+pM8eCVakuCOHvpsamMBNFxxyIwBQLbideuLnQuVveK
- mABdqj1BrkKi9mgSmIP8O/t2ZqbhlghZgNzVIyt5jU0vUBmnauiALXYOeLP+geEmlK76
- DXAwVyIpnFoRePJRrsEHwFkuii+1d8scQal1us2M0mE31+Q1NHFXSufkb6D9BbFBw4VB
- D4sajGQCkY4SRyIgm/3KP0jfhDrW/6EBEZNAy/EaedPUpM3D/PSgaFbJkFe4fsrljnGz
- iqP4UupgR3HvBBBLY0i/E0QpgbTySxncQiPL2dHsqBUSdoodhs9y8Q+19hlUPvJXQ9Oi
- z2Jw==
+ d=1e100.net; s=20230601; t=1718242202; x=1718847002;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=wMVIvPPDyIsXb0IIrUQL6wLJN2o+AMmh9m6vpVCxHFY=;
+ b=MIxtr4jy7XjGbgd2m4r9MveDbl4xXvqCHizvABupvTRhSiXjPZDNjqw/l13NBgdhR/
+ 30lBVDUbaiWsCiyOfg3GqkCarBJ5lnKQUxL9aozz+DC7ezIMNft6Lm/1amZ9l2iuaMV0
+ Kta6qZ4QjSSPSwWIpAF7IE5afIhzYd6KFIMdkiYY3H4XMn/iv4gCcHOjn9gCRzo6RQl+
+ 9Rk6njUxwx9ppgJBuB0L3PYRfPjQg1M6HBGh7QZmJqC0mBn4Ve6i2qgNn++Bcblamzca
+ +vUvXa/ZlUrjeoqMGxOn85oPZywikVtQhEAr4hDjvin6xT/CauNh7w3SMqyh4LHvIXyS
+ KZKA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWPoJkgWASHvGXd6qliS1LymH2FpYWotKjKQcN5debzqXjIDbao9cU3SRHrzjUu2r5r9xgLNXgHwgSTLBo/t/PvgRzLZ8Y=
-X-Gm-Message-State: AOJu0Yz+TxSxzswwQKQVDvTjlzU+NRqL0cxoFWdxdjqzzwMRbsAY485m
- 1mtJB7b0Djm0iZ8VJCpXt8570WbWq9YFXPw5qVYs+soE2kyjhvDWon/FOp/QfwhaPxfpRy5BnJL
- s
-X-Google-Smtp-Source: AGHT+IG9S9an4bUXa4pAukc7+QeLlxmaoZz7ad+StH+Key/HS6w0n1sILvuE6PIebBiwOpLaJZJkRA==
-X-Received: by 2002:a05:6a20:daa2:b0:1b8:3ddc:913b with SMTP id
- adf61e73a8af0-1b8a8dfb0ecmr3813796637.0.1718242192896; 
- Wed, 12 Jun 2024 18:29:52 -0700 (PDT)
+ AJvYcCXLq8R+nZhczz+plXGiQe6qWZZsVVKU6aBaVRIvXDqdA8cljEpULHF7/hXachqBdMQQqqP2pEWinEgXyVUbBfJGEVt5mvM=
+X-Gm-Message-State: AOJu0Yy742x4atxZBkyIn/tLCmM2IYH4BalUtS5jNVQfWBL4wN2VRs5t
+ eF9dKI5IqU4rm8YldV+nbwE/5oo5XEAoTRVxuijvpz/5vdJfP8F9Aggj+Pgymhg=
+X-Google-Smtp-Source: AGHT+IEIm5KyI5vCn8sVO7D3GSrJORUnbs5AB/aRH/spttJR0DR4FaKE7mCo7Zlx8rJV0IGbVA2H6g==
+X-Received: by 2002:a05:6a20:43a3:b0:1af:939b:d477 with SMTP id
+ adf61e73a8af0-1b8a9b8dfbamr4030446637.36.1718242202296; 
+ Wed, 12 Jun 2024 18:30:02 -0700 (PDT)
 Received: from hsinchu36-syssw02.internal.sifive.com
  (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1f855e723fasm1264155ad.97.2024.06.12.18.29.51
+ d9443c01a7336-1f855e723fasm1264155ad.97.2024.06.12.18.30.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Jun 2024 18:29:52 -0700 (PDT)
+ Wed, 12 Jun 2024 18:30:02 -0700 (PDT)
 From: "Fea.Wang" <fea.wang@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -68,16 +68,19 @@ Cc: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
  Alistair Francis <alistair@alistair23.me>,
  Peter Maydell <peter.maydell@linaro.org>, Jason Wang <jasowang@redhat.com>,
  qemu-arm@nongnu.org (open list:Xilinx Zynq),
- "Fea.Wang" <fea.wang@sifive.com>
-Subject: [PATCH v3 0/3] hw/dma: Add error handling for loading descriptions
- failing
-Date: Thu, 13 Jun 2024 09:34:58 +0800
-Message-Id: <20240613013501.426905-1-fea.wang@sifive.com>
+ "Fea.Wang" <fea.wang@sifive.com>,
+ "Edgar E . Iglesias" <edgar.iglesias@amd.com>,
+ Frank Chang <frank.chang@sifive.com>
+Subject: [PATCH v3 3/3] hw/net: Fix the transmission return size
+Date: Thu, 13 Jun 2024 09:35:01 +0800
+Message-Id: <20240613013501.426905-4-fea.wang@sifive.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240613013501.426905-1-fea.wang@sifive.com>
+References: <20240613013501.426905-1-fea.wang@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52b;
- envelope-from=fea.wang@sifive.com; helo=mail-pg1-x52b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52e;
+ envelope-from=fea.wang@sifive.com; helo=mail-pg1-x52e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -100,42 +103,30 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The original code assumes that memory transmission is always successful,
-but in some cases, it gets bus-error.
+Fix the transmission return size because not all bytes could be
+transmitted successfully. So, return a successful length instead of a
+constant value.
 
-Add error handling for DMA reading description failures. Do some
-reasonable settings, and return the corrected transmission size.
-Finally, return the error status.
+Signed-off-by: Fea.Wang <fea.wang@sifive.com>
+Reviewed-by: Edgar E. Iglesias <edgar.iglesias@amd.com>
+Reviewed-by: Frank Chang <frank.chang@sifive.com>
+---
+ hw/net/xilinx_axienet.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-* Fix the trace format for an unsigned variable
-
-base-commit: d82f37faf5643897b2e61abb229499d64a51aa26
-
-[v2]
-* Add DMASR_DECERR case
-* Squash the two commits to one
-
-base-commit: 915758c537b5fe09575291f4acd87e2d377a93de
-
-
-[v1]
-base-commit: 1806da76cb81088ea026ca3441551782b850e393
-
-Fea.Wang (3):
-  hw/dma: Enhance error handling in loading description
-  hw/dma: Add a trace log for a description loading failure
-  hw/net: Fix the transmission return size
-
-Fea.Wang (3):
-  hw/dma: Enhance error handling in loading description
-  hw/dma: Add a trace log for a description loading failure
-  hw/net: Fix the transmission return size
-
- hw/dma/trace-events     |  3 +++
- hw/dma/xilinx_axidma.c  | 33 +++++++++++++++++++++++++++++----
- hw/net/xilinx_axienet.c |  2 +-
- 3 files changed, 33 insertions(+), 5 deletions(-)
-
+diff --git a/hw/net/xilinx_axienet.c b/hw/net/xilinx_axienet.c
+index 7d1fd37b4a..05d41bd548 100644
+--- a/hw/net/xilinx_axienet.c
++++ b/hw/net/xilinx_axienet.c
+@@ -847,7 +847,7 @@ static ssize_t eth_rx(NetClientState *nc, const uint8_t *buf, size_t size)
+     axienet_eth_rx_notify(s);
+ 
+     enet_update_irq(s);
+-    return size;
++    return s->rxpos;
+ }
+ 
+ static size_t
 -- 
 2.34.1
 
