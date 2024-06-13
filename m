@@ -4,136 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD129C27C7B
-	for <qemu-riscv@archiver.kernel.org>; Thu, 13 Jun 2024 10:14:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0D82C27C4F
+	for <qemu-riscv@archiver.kernel.org>; Thu, 13 Jun 2024 10:38:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sHhTS-0003t6-BP; Thu, 13 Jun 2024 06:14:30 -0400
+	id 1sHhqD-0008LD-5t; Thu, 13 Jun 2024 06:38:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1sHhTQ-0003sX-0R
- for qemu-riscv@nongnu.org; Thu, 13 Jun 2024 06:14:28 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1sHhTO-0006Uq-F7
- for qemu-riscv@nongnu.org; Thu, 13 Jun 2024 06:14:27 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1718273665;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=U9TqOQ3d9tpAIBh4M/ou7IR1CrTE4i2d0ftuymzPeps=;
- b=aAcysE5zKIsJmo1T7PpMLtn4R4COpybp5hLIV5c3s6PVZfQ7hmhEeSS09HiY6tritcDTuA
- 9syhPU+fr711s4B0Qu/U0elhrqC9vMRxN388vR5EYbA7eBkCtCW7x4c8CmdJUtqi5Py6BH
- xn6O9ygseIBkg8WU1ofkDncAlM858Ys=
-Received: from mail-lf1-f72.google.com (mail-lf1-f72.google.com
- [209.85.167.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-436-XYVHTbkXMGmXxP8eLnAW-A-1; Thu, 13 Jun 2024 06:14:24 -0400
-X-MC-Unique: XYVHTbkXMGmXxP8eLnAW-A-1
-Received: by mail-lf1-f72.google.com with SMTP id
- 2adb3069b0e04-52bc0027a29so613075e87.3
- for <qemu-riscv@nongnu.org>; Thu, 13 Jun 2024 03:14:23 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
+ id 1sHhqB-0008KU-GT
+ for qemu-riscv@nongnu.org; Thu, 13 Jun 2024 06:37:59 -0400
+Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
+ id 1sHhq7-0002qW-Pd
+ for qemu-riscv@nongnu.org; Thu, 13 Jun 2024 06:37:59 -0400
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-57a30dbdb7fso1007645a12.3
+ for <qemu-riscv@nongnu.org>; Thu, 13 Jun 2024 03:37:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sifive.com; s=google; t=1718275074; x=1718879874; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=h/PjgeUaNpQowSVnVk5Zr8r7gvj7MML55rmD+zmLDE8=;
+ b=Ak38qUkklOF3ckRFMuMtcqy8mogS1RQ6uSIdan+g2zyyMY0cLu4gwEyPr8vXOjoMUw
+ 433WGquaUaPcprAmtcNceeVAMi3VoutU68gOHs0gm25kxRU+G0jgj2U5+ylRsak9FYez
+ D4+AblwScRKTiPDvUSejb0tYU6rvcQzEvB46JiS0A1n6ynrrctSzyvojV0kUgdb7Wd47
+ ++qehh5nS8FTaBp8q2B5FLcm8zRcagYx41SAm3TaDGpA0EdKuf7sV09F8VCrJxDjMn2M
+ wJgB1vw+cvSAGit3/4x0XfL70CNhLEReUjTr11Mb3HJr12osXL0G76m5e4dLWFnSD4uX
+ TSTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718273662; x=1718878462;
- h=content-transfer-encoding:in-reply-to:autocrypt:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=U9TqOQ3d9tpAIBh4M/ou7IR1CrTE4i2d0ftuymzPeps=;
- b=C0QgpHBaH42zZRqN6OXJ8Skb49PzzULyGMhw876lIrQwT0X9YjrKcxOErIeM6jik1u
- 9Oh2TEfaH3LC6R9Wc6SphH7O2+9fg3Nyd6VTvVYwRwQXtibE1EZ0IPJIypDNjRETMYCB
- TBPRxI2Izbb9ejz3ZGNil+T7jFiWCW9IR8fOYjplbnTt4bbhuhErSoSZqalswWNSMCOQ
- QYilcr51+EX6Whu3caKAJHtgMrTbct722ImzkNsCnGFUyHX1KnLQ9EmmiFwSFbITqbqq
- RW7ISXaO/SbDV5QqrGnuhgyxcOERJ4nqRDVon2ZWaEc0iHbZvqp5DU0ipeKQnUhmBH5/
- gjXA==
-X-Gm-Message-State: AOJu0YzgxG8aq1XQnc/5VaEqYKowoUf3Qf9xyyFNGCoTbssPWp/mQlcs
- cmpC/lhIY432POiMp7EUAP6d+qZ8dcHcb7MzaNTWRu2FTpjMaAN51cLQF+gaGQLAmKHuzJtgdBi
- fdlrDz8Bmy8lOdCT4nuG/mVQs7R9q9iGNjtucXoJ9wqhbirc2Hl/I
-X-Received: by 2002:a05:6512:3d18:b0:52c:8339:d09c with SMTP id
- 2adb3069b0e04-52c9a3be48emr3758978e87.3.1718273662654; 
- Thu, 13 Jun 2024 03:14:22 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IERvhu/sxfULwLgkNsxEpRtfrsM1lfSV3fkWVhH1rvWiReCDC/mtq6rldHRuiNJ05Rbjxcz7g==
-X-Received: by 2002:a05:6512:3d18:b0:52c:8339:d09c with SMTP id
- 2adb3069b0e04-52c9a3be48emr3758952e87.3.1718273662207; 
- Thu, 13 Jun 2024 03:14:22 -0700 (PDT)
-Received: from [192.168.0.4] (ip-109-43-242-210.web.vodafone.de.
- [109.43.242.210]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3607510340fsm1255428f8f.93.2024.06.13.03.14.21
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 13 Jun 2024 03:14:21 -0700 (PDT)
-Message-ID: <ce50dc2f-2111-49a1-9b45-cb59a44a8239@redhat.com>
-Date: Thu, 13 Jun 2024 12:14:20 +0200
+ d=1e100.net; s=20230601; t=1718275074; x=1718879874;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=h/PjgeUaNpQowSVnVk5Zr8r7gvj7MML55rmD+zmLDE8=;
+ b=vYiYvZur1Fse89mnqWdrUbVHa8Z1SI9rjaA5ibSvczzNZMwBPpyKpDdwHH0GYXzz0V
+ rK+q6Wr7MwJZ+tvXvPWj+6lNP0MH00dY0btq4tWXaSFEzn/RGpX+n5EEbw61wEOlCgeK
+ C7kLuimRfX8svGqBjWA4kvKtOtVOSVFnExIyx8+5tiGKhAyxOEZlIRJqo3k4MDGoBGQX
+ DPH3I6cg/2m2rUl57PhrAx31Lxb7+xbYLzYskmiDMuBDqp/NqxJD5HdOgw25LciCOPon
+ a7vrdJ3WzxT0vrv9E4rST79SIyMh+dKhjy+al0aBZIBqSAkbvufP+eLJIV92TLrLr7Kd
+ jv2A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX3yTfnW6YRM0dOr0CO3kpvYEP1Z1oAeXMXTExmvznb4Y/dgCkKYBHK1HHaICB3ozASqr8wJixkHTgLuJ7QfVD5ONDYaak=
+X-Gm-Message-State: AOJu0YwHiDRis8m4q+v6kHncvHGiUFbioReSnyxLpJ2P3PW9FA2JM5hc
+ /EuG0z2/C4EviXwpiWPBwk1DCXOc6PignRSkArtpazibi4bFhmPyiov/af7QQnFTwo4nRHYpz+L
+ +UHCj0n0vQfa4mea5dYJaGgi4S695sUDDCyHBmQ==
+X-Google-Smtp-Source: AGHT+IGf9vfw5h2qj8NsTRIKvqqkWBI3ojzBmBm0Q9SfIxSab/UGRFRbp55qCeWda0USzK9UivtIYzXT+UUB4MBI8fc=
+X-Received: by 2002:a50:9e24:0:b0:578:57b7:9f32 with SMTP id
+ 4fb4d7f45d1cf-57caaabf033mr3168003a12.35.1718275072870; Thu, 13 Jun 2024
+ 03:37:52 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] QTest example for RISC-V CSR register
-To: Ivan Klokov <ivan.klokov@syntacore.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, bmeng.cn@gmail.com,
- liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, lvivier@redhat.com, pbonzini@redhat.com
-References: <20240613095601.16299-1-ivan.klokov@syntacore.com>
- <20240613095601.16299-3-ivan.klokov@syntacore.com>
-From: Thomas Huth <thuth@redhat.com>
-Autocrypt: addr=thuth@redhat.com; keydata=
- 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
-In-Reply-To: <20240613095601.16299-3-ivan.klokov@syntacore.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -22
-X-Spam_score: -2.3
+References: <20240612081416.29704-1-jim.shu@sifive.com>
+ <20240612081416.29704-2-jim.shu@sifive.com>
+ <501987cc-d8c1-47d8-b553-d81e95eadb1c@linux.alibaba.com>
+In-Reply-To: <501987cc-d8c1-47d8-b553-d81e95eadb1c@linux.alibaba.com>
+From: Jim Shu <jim.shu@sifive.com>
+Date: Thu, 13 Jun 2024 18:37:39 +0800
+Message-ID: <CALw707r1-94NOZ6CYV-aE-buXCh8v3mOQjUSm=wQrpLf0Pro9g@mail.gmail.com>
+Subject: Re: [RFC PATCH 01/16] accel/tcg: Store section pointer in
+ CPUTLBEntryFull
+To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Richard Henderson <richard.henderson@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Eduardo Habkost <eduardo@habkost.net>, 
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
+ Yanan Wang <wangyanan55@huawei.com>, Peter Xu <peterx@redhat.com>, 
+ David Hildenbrand <david@redhat.com>, Peter Maydell <peter.maydell@linaro.org>,
+ Michael Rolnik <mrolnik@gmail.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
+ Song Gao <gaosong@loongson.cn>, Laurent Vivier <laurent@vivier.eu>, 
+ Aurelien Jarno <aurelien@aurel32.net>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Aleksandar Rikalo <arikalo@gmail.com>, Stafford Horne <shorne@gmail.com>, 
+ Nicholas Piggin <npiggin@gmail.com>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>, 
+ Ilya Leoshkevich <iii@linux.ibm.com>, Thomas Huth <thuth@redhat.com>, 
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Artyom Tarasenko <atar4qemu@gmail.com>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Max Filippov <jcmvbkbc@gmail.com>, 
+ "open list:ARM TCG CPUs" <qemu-arm@nongnu.org>,
+ "open list:PowerPC TCG CPUs" <qemu-ppc@nongnu.org>, 
+ "open list:S390 TCG CPUs" <qemu-s390x@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::530;
+ envelope-from=jim.shu@sifive.com; helo=mail-ed1-x530.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.3 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.143,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -149,116 +119,185 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 13/06/2024 11.56, Ivan Klokov wrote:
-> Added demo for reading CSR register from qtest environment.
-> 
-> Signed-off-by: Ivan Klokov <ivan.klokov@syntacore.com>
-> ---
->   tests/qtest/meson.build      |  2 ++
->   tests/qtest/riscv-csr-test.c | 68 ++++++++++++++++++++++++++++++++++++
->   2 files changed, 70 insertions(+)
->   create mode 100644 tests/qtest/riscv-csr-test.c
-> 
-> diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
-> index 12792948ff..45d651da99 100644
-> --- a/tests/qtest/meson.build
-> +++ b/tests/qtest/meson.build
-> @@ -259,6 +259,8 @@ qtests_s390x = \
->   qtests_riscv32 = \
->     (config_all_devices.has_key('CONFIG_SIFIVE_E_AON') ? ['sifive-e-aon-watchdog-test'] : [])
->   
-> +qtests_riscv32 += ['riscv-csr-test']
-> +
->   qos_test_ss = ss.source_set()
->   qos_test_ss.add(
->     'ac97-test.c',
-> diff --git a/tests/qtest/riscv-csr-test.c b/tests/qtest/riscv-csr-test.c
-> new file mode 100644
-> index 0000000000..715d5fe4b7
-> --- /dev/null
-> +++ b/tests/qtest/riscv-csr-test.c
-> @@ -0,0 +1,68 @@
-> +/*
-> + * QTest testcase for RISC-V CSRs
-> + *
-> + * Copyright (c) 2024 Syntacore.
-> + *
-> + * This program is free software; you can redistribute it and/or modify it
-> + * under the terms of the GNU General Public License as published by the
-> + * Free Software Foundation; either version 2 of the License, or
-> + * (at your option) any later version.
-> + *
-> + * This program is distributed in the hope that it will be useful, but WITHOUT
-> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-> + * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
-> + * for more details.
-> + */
-> +
-> +#include "qemu/osdep.h"
-> +#include "libqtest-single.h"
-> +#include "qemu/error-report.h"
-> +
-> +#include "qapi/qmp/qdict.h"
-> +#include "qapi/qmp/qjson.h"
-> +#include "qapi/qmp/qlist.h"
-> +#include "qapi/qmp/qstring.h"
-> +#include "qapi/qmp/qobject.h"
-> +#include "qapi/qobject-input-visitor.h"
-> +#include "qapi/qobject-output-visitor.h"
-> +#include "qom/object_interfaces.h"
+Hi Zhiwei,
 
-Do you really need all these headers for the short code below? Please double 
-check and trim the list.
+Common IOMMU devices will not have IOMMUMemoryRegion in the path of
+CPU access since It only affects DMA access.
+In QEMU, it usually places this IOMMU MR as the parent of
+"system_memory", and changes the target_mr of DMA from "system_memory"
+to IOMMU MR.
 
-> +#include "qemu/osdep.h"
-> +#include "qapi/error.h"
-> +#include "qemu/error-report.h"
-> +#include "hw/qdev-properties.h"
-> +
-> +#include "qemu/osdep.h"
+For the wgChecker, it is in front of memory or device MMIO and
+protects both CPU/DMA access to memory or device MMIO.
+In QEMU, wgChecker re-use IOMMUMemoryRegion to implement the memory
+protection inside the translate() function of IOMMU MR.
+In the machine code, wgChecker replaces the MemoryRegion of protected
+resources with the checker's IOMMU MR in the MemoryRegion tree of
+"system_memory".
+Both CPU/DMA access will go through the "system_memory". They will go
+through the checker's IOMMU MR when accessing the protected resources.
 
-Duplicate include statement, please remove.
+This mechanism is used by Cortex-M MPC devices (hw/misc/tz-mpc.c)
+originally. I have leveraged it and extended it little (in patch 2) as
+MPC doesn't support RO/WO permission.
+If we'd like to have a device to do the memory protection of both CPU
+& DMA access, we could implement it in this mechanism.
+(p.s. Cortex-A TZASC is not supported in QEMU, which is similar to MPC
+or wgChecker device.)
 
-> +#include "qemu/cutils.h"
-> +#include "libqtest.h"
-> +
-> +#include "libqos/csr.h"
-> +#include "libqos/libqos.h"
-> +
-> +static void run_test_csr(void)
-> +{
-> +
-> +    uint64_t res;
-> +    uint64_t val = 0;
-> +
-> +    res = qcsr_get_csr(global_qtest, 0, 0xf11, &val);
-> +
-> +    g_assert_cmpint(res, ==, 0);
-> +    g_assert_cmpint(val, ==, 0x100);
-> +}
-> +
-> +int main(int argc, char **argv)
-> +{
-> +    g_test_init(&argc, &argv, NULL);
-> +
-> +    qtest_add_func("/cpu/csr", run_test_csr);
-> +
-> +    qtest_start("--nographic -machine virt -cpu any,mvendorid=0x100");
+Thanks,
+Jim Shu
 
-You don't need --nographic, it's been taken care off by the libqtest 
-framework already.
 
-> +    g_test_run();
-> +
-> +    qtest_quit(global_qtest);
-> +
-> +    return 0;
 
-You should return the result of g_test_run() here, otherwise your test will 
-look like it always succeeds.
 
-> +}
 
-  Thomas
-
+On Thu, Jun 13, 2024 at 2:23=E2=80=AFPM LIU Zhiwei <zhiwei_liu@linux.alibab=
+a.com> wrote:
+>
+> On 2024/6/12 16:14, Jim Shu wrote:
+> > 'CPUTLBEntryFull.xlat_section' stores section_index in last 12 bits to
+> > find the correct section when CPU access the IO region over the IOTLB
+> > (iotlb_to_section()).
+> >
+> > However, section_index is only unique inside single AddressSpace. If
+> > address space translation is over IOMMUMemoryRegion, it could return
+> > section from other AddressSpace. 'iotlb_to_section()' API only finds th=
+e
+> > sections from CPU's AddressSpace so that it couldn't find section in
+> > other AddressSpace. Thus, using 'iotlb_to_section()' API will find the
+> > wrong section and QEMU will have wrong load/store access.
+> >
+> > To fix this bug, store complete MemoryRegionSection pointer in
+> > CPUTLBEntryFull instead of section_index.
+> >
+> > This bug occurs only when
+> > (1) IOMMUMemoryRegion is in the path of CPU access.
+>
+> Hi Jim,
+>
+> Can you explain a little more on when IOMMUMemoryRegion is in the path
+> of CPU access?
+>
+> Thanks,
+> Zhiwei
+>
+> > (2) IOMMUMemoryRegion returns different target_as and the section is in
+> > the IO region.
+> >
+> > Common IOMMU devices don't have this issue since they are only in the
+> > path of DMA access. Currently, the bug only occurs when ARM MPC device
+> > (hw/misc/tz-mpc.c) returns 'blocked_io_as' to emulate blocked access
+> > handling. Upcoming RISC-V wgChecker device is also affected by this bug=
+.
+> >
+> > Signed-off-by: Jim Shu <jim.shu@sifive.com>
+> > ---
+> >   accel/tcg/cputlb.c    | 19 +++++++++----------
+> >   include/hw/core/cpu.h |  3 +++
+> >   2 files changed, 12 insertions(+), 10 deletions(-)
+> >
+> > diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
+> > index 117b516739..8cf124b760 100644
+> > --- a/accel/tcg/cputlb.c
+> > +++ b/accel/tcg/cputlb.c
+> > @@ -1169,6 +1169,7 @@ void tlb_set_page_full(CPUState *cpu, int mmu_idx=
+,
+> >       desc->fulltlb[index] =3D *full;
+> >       full =3D &desc->fulltlb[index];
+> >       full->xlat_section =3D iotlb - addr_page;
+> > +    full->section =3D section;
+> >       full->phys_addr =3D paddr_page;
+> >
+> >       /* Now calculate the new entry */
+> > @@ -1248,14 +1249,14 @@ static inline void cpu_unaligned_access(CPUStat=
+e *cpu, vaddr addr,
+> >   }
+> >
+> >   static MemoryRegionSection *
+> > -io_prepare(hwaddr *out_offset, CPUState *cpu, hwaddr xlat,
+> > +io_prepare(hwaddr *out_offset, CPUState *cpu, CPUTLBEntryFull *full,
+> >              MemTxAttrs attrs, vaddr addr, uintptr_t retaddr)
+> >   {
+> >       MemoryRegionSection *section;
+> >       hwaddr mr_offset;
+> >
+> > -    section =3D iotlb_to_section(cpu, xlat, attrs);
+> > -    mr_offset =3D (xlat & TARGET_PAGE_MASK) + addr;
+> > +    section =3D full->section;
+> > +    mr_offset =3D (full->xlat_section & TARGET_PAGE_MASK) + addr;
+> >       cpu->mem_io_pc =3D retaddr;
+> >       if (!cpu->neg.can_do_io) {
+> >           cpu_io_recompile(cpu, retaddr);
+> > @@ -1571,9 +1572,7 @@ bool tlb_plugin_lookup(CPUState *cpu, vaddr addr,=
+ int mmu_idx,
+> >
+> >       /* We must have an iotlb entry for MMIO */
+> >       if (tlb_addr & TLB_MMIO) {
+> > -        MemoryRegionSection *section =3D
+> > -            iotlb_to_section(cpu, full->xlat_section & ~TARGET_PAGE_MA=
+SK,
+> > -                             full->attrs);
+> > +        MemoryRegionSection *section =3D full->section;
+> >           data->is_io =3D true;
+> >           data->mr =3D section->mr;
+> >       } else {
+> > @@ -1972,7 +1971,7 @@ static uint64_t do_ld_mmio_beN(CPUState *cpu, CPU=
+TLBEntryFull *full,
+> >       tcg_debug_assert(size > 0 && size <=3D 8);
+> >
+> >       attrs =3D full->attrs;
+> > -    section =3D io_prepare(&mr_offset, cpu, full->xlat_section, attrs,=
+ addr, ra);
+> > +    section =3D io_prepare(&mr_offset, cpu, full, attrs, addr, ra);
+> >       mr =3D section->mr;
+> >
+> >       BQL_LOCK_GUARD();
+> > @@ -1993,7 +1992,7 @@ static Int128 do_ld16_mmio_beN(CPUState *cpu, CPU=
+TLBEntryFull *full,
+> >       tcg_debug_assert(size > 8 && size <=3D 16);
+> >
+> >       attrs =3D full->attrs;
+> > -    section =3D io_prepare(&mr_offset, cpu, full->xlat_section, attrs,=
+ addr, ra);
+> > +    section =3D io_prepare(&mr_offset, cpu, full, attrs, addr, ra);
+> >       mr =3D section->mr;
+> >
+> >       BQL_LOCK_GUARD();
+> > @@ -2513,7 +2512,7 @@ static uint64_t do_st_mmio_leN(CPUState *cpu, CPU=
+TLBEntryFull *full,
+> >       tcg_debug_assert(size > 0 && size <=3D 8);
+> >
+> >       attrs =3D full->attrs;
+> > -    section =3D io_prepare(&mr_offset, cpu, full->xlat_section, attrs,=
+ addr, ra);
+> > +    section =3D io_prepare(&mr_offset, cpu, full, attrs, addr, ra);
+> >       mr =3D section->mr;
+> >
+> >       BQL_LOCK_GUARD();
+> > @@ -2533,7 +2532,7 @@ static uint64_t do_st16_mmio_leN(CPUState *cpu, C=
+PUTLBEntryFull *full,
+> >       tcg_debug_assert(size > 8 && size <=3D 16);
+> >
+> >       attrs =3D full->attrs;
+> > -    section =3D io_prepare(&mr_offset, cpu, full->xlat_section, attrs,=
+ addr, ra);
+> > +    section =3D io_prepare(&mr_offset, cpu, full, attrs, addr, ra);
+> >       mr =3D section->mr;
+> >
+> >       BQL_LOCK_GUARD();
+> > diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
+> > index a2c8536943..3f6c10897b 100644
+> > --- a/include/hw/core/cpu.h
+> > +++ b/include/hw/core/cpu.h
+> > @@ -217,6 +217,9 @@ typedef struct CPUTLBEntryFull {
+> >        */
+> >       hwaddr xlat_section;
+> >
+> > +    /* @section contains physical section. */
+> > +    MemoryRegionSection *section;
+> > +
+> >       /*
+> >        * @phys_addr contains the physical address in the address space
+> >        * given by cpu_asidx_from_attrs(cpu, @attrs).
 
