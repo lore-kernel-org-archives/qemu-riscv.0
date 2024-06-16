@@ -4,85 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 465E3C27C6E
-	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Jun 2024 13:30:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87945C27C4F
+	for <qemu-riscv@archiver.kernel.org>; Sun, 16 Jun 2024 02:47:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sI709-0007YH-OT; Fri, 14 Jun 2024 09:29:58 -0400
+	id 1sIfvP-0007TK-VR; Sat, 15 Jun 2024 22:47:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1sI705-0007Xe-PJ; Fri, 14 Jun 2024 09:29:55 -0400
-Received: from out30-131.freemail.mail.aliyun.com ([115.124.30.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1sI700-0001Ul-Of; Fri, 14 Jun 2024 09:29:53 -0400
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1sIfvO-0007S9-JO
+ for qemu-riscv@nongnu.org; Sat, 15 Jun 2024 22:47:22 -0400
+Received: from mail-ot1-x333.google.com ([2607:f8b0:4864:20::333])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1sIfvM-0001ip-Pd
+ for qemu-riscv@nongnu.org; Sat, 15 Jun 2024 22:47:22 -0400
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-6f9774a556cso1983466a34.0
+ for <qemu-riscv@nongnu.org>; Sat, 15 Jun 2024 19:47:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux.alibaba.com; s=default;
- t=1718371779; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
- bh=NPAFKapehhOX/iQyykCUU+B2VPosHg4/5JSFSzTtVNA=;
- b=D5rMGetrk46o/dh96OHJ/URzD/TbV0sn0O7JrfiLnfl6WrfsRIJgLITSRlubtTNIYh9onYNAuYDEN1KId46PQaR8BM/0zrz22VmFs4yMkciHwtzJEkDRHcOsc7T3LnhOxH0GdblHIRdwQAujjorLf92OjIsAhnKiTGRPZFDnFYk=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R241e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037067113;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=36; SR=0;
- TI=SMTPD_---0W8RCFqL_1718371772; 
-Received: from 30.166.65.72(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0W8RCFqL_1718371772) by smtp.aliyun-inc.com;
- Fri, 14 Jun 2024 21:29:33 +0800
-Message-ID: <c48aabc6-f5da-4e71-b65a-1fc35603e6e5@linux.alibaba.com>
-Date: Fri, 14 Jun 2024 21:28:22 +0800
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 01/16] accel/tcg: Store section pointer in
- CPUTLBEntryFull
-To: Jim Shu <jim.shu@sifive.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Richard Henderson <richard.henderson@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ d=sifive.com; s=google; t=1718506039; x=1719110839; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=OmFiATPm95+4kWSDn9aSKWPJ0UC08eg4l8qOQUPIprs=;
+ b=doSi+e5bf+4PZ61Y/x1a+hMeK85eEf6Npdz/8xPxJvvWJLQyexoOhwz8LEK7AmQA1k
+ GpQuPYtbLq1TKRh3ERI/Y6A2mwvEizQJiY6RZudo5oHmJHH8sWeuengLZPguLzHSj4sL
+ 4inBMTFSCWeZSSVZAM1baNdUCslQ+CvTiZBdte4Z9tI/9v1i0aCYvUEm7kdEMUDvyPmY
+ ksXHK7gWJryMe9XgH2NhAdqjPV4FUck0wBfVyqC4vOZKn+/u8geAXUaahS1boG+dkTqe
+ MpeSH8SEeQ4Vmg7AVHisG7NWxKEBP1ILhVKPWic8GVcmoH++Lli2ZkAICePRjbD5L4mB
+ pV8w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718506039; x=1719110839;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=OmFiATPm95+4kWSDn9aSKWPJ0UC08eg4l8qOQUPIprs=;
+ b=JuNURwuArurxxqgAEgFfjyqrvA0mImtyYCEdFC+olcY3gII+j5jpfIzkFRBneP91Or
+ 5CKbKyxi3WXIR37UgVBZny6L8Y5zS+AG9TtFerOU6yXNmoBielLs98fYFdRv6u1apaVv
+ WrOm4Rh81c6QHz6/U3zAEzLkzrxvBLFUnz8E023nn7pZh8mbnn/iEWkilsJW97kV2Aj7
+ winDwDHbhK18JLBCoGqsPvCoGbLN/vFKwDofRW6xyJ4vnCMCVsDSH0PA4dGtyMJxZJUL
+ SZ+J12yfTAT3CBrGaLOhAicAhk5sI/u1YeB2akYu96WIHRjWOoTsgCVlaVFkpM7fqeU+
+ aXOA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVCheD+P5sET0hQfI6k3n1bbLcc+B2yYLoiMi/bvr81kN99GhEOCkfQPZnhZnU+cYK9W1AGpnbWJ10rbyPsCg2B7STJkRc=
+X-Gm-Message-State: AOJu0YyUJ1TLFjgAUxaGQTPirsRGWRqbu85fvNqDprakelm18zB4tMXo
+ vYawGsbehmOMYlcFSQ87s/LR7A03llsPeSz+DbCsc/Qeu4jxiSHMWY4L9X93fMs=
+X-Google-Smtp-Source: AGHT+IGIGNdf8H4+ttp0asKeVEKhyFwPrQHuW9kxhEgoGo8whK873Nq6JJ5PFsWsbWxNvdO3db7VOw==
+X-Received: by 2002:a05:6358:938c:b0:19f:3ee1:d1c4 with SMTP id
+ e5c5f4694b2df-19fa9dcf95dmr857367855d.2.1718506039371; 
+ Sat, 15 Jun 2024 19:47:19 -0700 (PDT)
+Received: from hsinchu16.internal.sifive.com
+ (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-1f855e7ca78sm56258705ad.106.2024.06.15.19.47.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 15 Jun 2024 19:47:19 -0700 (PDT)
+From: frank.chang@sifive.com
+To: qemu-devel@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
  Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Yanan Wang <wangyanan55@huawei.com>, Peter Xu <peterx@redhat.com>,
- David Hildenbrand <david@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>, Michael Rolnik
- <mrolnik@gmail.com>, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Song Gao <gaosong@loongson.cn>, Laurent Vivier <laurent@vivier.eu>,
- Aurelien Jarno <aurelien@aurel32.net>, Jiaxun Yang
- <jiaxun.yang@flygoat.com>, Aleksandar Rikalo <arikalo@gmail.com>,
- Stafford Horne <shorne@gmail.com>, Nicholas Piggin <npiggin@gmail.com>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Ilya Leoshkevich <iii@linux.ibm.com>, Thomas Huth <thuth@redhat.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Artyom Tarasenko <atar4qemu@gmail.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Max Filippov <jcmvbkbc@gmail.com>,
- "open list:ARM TCG CPUs" <qemu-arm@nongnu.org>,
- "open list:PowerPC TCG CPUs" <qemu-ppc@nongnu.org>,
- "open list:S390 TCG CPUs" <qemu-s390x@nongnu.org>
-References: <20240612081416.29704-1-jim.shu@sifive.com>
- <20240612081416.29704-2-jim.shu@sifive.com>
- <501987cc-d8c1-47d8-b553-d81e95eadb1c@linux.alibaba.com>
- <CALw707r1-94NOZ6CYV-aE-buXCh8v3mOQjUSm=wQrpLf0Pro9g@mail.gmail.com>
-Content-Language: en-US
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <CALw707r1-94NOZ6CYV-aE-buXCh8v3mOQjUSm=wQrpLf0Pro9g@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs),
+ Frank Chang <frank.chang@sifive.com>,
+ Jerry Zhang Jian <jerry.zhangjian@sifive.com>,
+ Max Chou <max.chou@sifive.com>
+Subject: [PATCH v2 6/6] target/riscv: Remove extension auto-update check
+ statements
+Date: Sun, 16 Jun 2024 10:46:57 +0800
+Message-ID: <20240616024657.17948-7-frank.chang@sifive.com>
+X-Mailer: git-send-email 2.43.2
+In-Reply-To: <20240616024657.17948-1-frank.chang@sifive.com>
+References: <20240616024657.17948-1-frank.chang@sifive.com>
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.131;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-131.freemail.mail.aliyun.com
-X-Spam_score_int: -174
-X-Spam_score: -17.5
-X-Spam_bar: -----------------
-X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::333;
+ envelope-from=frank.chang@sifive.com; helo=mail-ot1-x333.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,175 +105,198 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+From: Frank Chang <frank.chang@sifive.com>
 
-On 2024/6/13 18:37, Jim Shu wrote:
-> Hi Zhiwei,
->
-> Common IOMMU devices will not have IOMMUMemoryRegion in the path of
-> CPU access since It only affects DMA access.
-> In QEMU, it usually places this IOMMU MR as the parent of
-> "system_memory", and changes the target_mr of DMA from "system_memory"
-> to IOMMU MR.
->
-> For the wgChecker, it is in front of memory or device MMIO and
-> protects both CPU/DMA access to memory or device MMIO.
-> In QEMU, wgChecker re-use IOMMUMemoryRegion to implement the memory
-> protection inside the translate() function of IOMMU MR.
-> In the machine code, wgChecker replaces the MemoryRegion of protected
-> resources with the checker's IOMMU MR in the MemoryRegion tree of
-> "system_memory".
-> Both CPU/DMA access will go through the "system_memory". They will go
-> through the checker's IOMMU MR when accessing the protected resources.
+Remove the old-fashioned extension auto-update check statements as
+they are replaced by the extension implied rules.
 
-Thanks. It is clear and very helpful.
+Signed-off-by: Frank Chang <frank.chang@sifive.com>
+Reviewed-by: Jerry Zhang Jian <jerry.zhangjian@sifive.com>
+Tested-by: Max Chou <max.chou@sifive.com>
+---
+ target/riscv/tcg/tcg-cpu.c | 119 -------------------------------------
+ 1 file changed, 119 deletions(-)
 
-Zhiwei
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index fe84d4402e..94875c8ec9 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -468,10 +468,6 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+         return;
+     }
+ 
+-    if (cpu->cfg.ext_zfh) {
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zfhmin), true);
+-    }
+-
+     if (cpu->cfg.ext_zfhmin && !riscv_has_ext(env, RVF)) {
+         error_setg(errp, "Zfh/Zfhmin extensions require F extension");
+         return;
+@@ -493,9 +489,6 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+             error_propagate(errp, local_err);
+             return;
+         }
+-
+-        /* The V vector extension depends on the Zve64d extension */
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zve64d), true);
+     }
+ 
+     /* The Zve64d extension depends on the Zve64f extension */
+@@ -504,18 +497,6 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+             error_setg(errp, "Zve64d/V extensions require D extension");
+             return;
+         }
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zve64f), true);
+-    }
+-
+-    /* The Zve64f extension depends on the Zve64x and Zve32f extensions */
+-    if (cpu->cfg.ext_zve64f) {
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zve64x), true);
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zve32f), true);
+-    }
+-
+-    /* The Zve64x extension depends on the Zve32x extension */
+-    if (cpu->cfg.ext_zve64x) {
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zve32x), true);
+     }
+ 
+     /* The Zve32f extension depends on the Zve32x extension */
+@@ -524,11 +505,6 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+             error_setg(errp, "Zve32f/Zve64f extensions require F extension");
+             return;
+         }
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zve32x), true);
+-    }
+-
+-    if (cpu->cfg.ext_zvfh) {
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvfhmin), true);
+     }
+ 
+     if (cpu->cfg.ext_zvfhmin && !cpu->cfg.ext_zve32f) {
+@@ -551,11 +527,6 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+         return;
+     }
+ 
+-    /* Set the ISA extensions, checks should have happened above */
+-    if (cpu->cfg.ext_zhinx) {
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zca), true);
+-    }
+-
+     if ((cpu->cfg.ext_zdinx || cpu->cfg.ext_zhinxmin) && !cpu->cfg.ext_zfinx) {
+         error_setg(errp, "Zdinx/Zhinx/Zhinxmin extensions require Zfinx");
+         return;
+@@ -573,27 +544,6 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+         }
+     }
+ 
+-    if (cpu->cfg.ext_zce) {
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zca), true);
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zcb), true);
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zcmp), true);
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zcmt), true);
+-        if (riscv_has_ext(env, RVF) && mcc->misa_mxl_max == MXL_RV32) {
+-            cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zcf), true);
+-        }
+-    }
+-
+-    /* zca, zcd and zcf has a PRIV 1.12.0 restriction */
+-    if (riscv_has_ext(env, RVC) && env->priv_ver >= PRIV_VERSION_1_12_0) {
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zca), true);
+-        if (riscv_has_ext(env, RVF) && mcc->misa_mxl_max == MXL_RV32) {
+-            cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zcf), true);
+-        }
+-        if (riscv_has_ext(env, RVD)) {
+-            cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zcd), true);
+-        }
+-    }
+-
+     if (mcc->misa_mxl_max != MXL_RV32 && cpu->cfg.ext_zcf) {
+         error_setg(errp, "Zcf extension is only relevant to RV32");
+         return;
+@@ -627,52 +577,6 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+         return;
+     }
+ 
+-    /*
+-     * Shorthand vector crypto extensions
+-     */
+-    if (cpu->cfg.ext_zvknc) {
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvkn), true);
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvbc), true);
+-    }
+-
+-    if (cpu->cfg.ext_zvkng) {
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvkn), true);
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvkg), true);
+-    }
+-
+-    if (cpu->cfg.ext_zvkn) {
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvkned), true);
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvknhb), true);
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvkb), true);
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvkt), true);
+-    }
+-
+-    if (cpu->cfg.ext_zvksc) {
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvks), true);
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvbc), true);
+-    }
+-
+-    if (cpu->cfg.ext_zvksg) {
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvks), true);
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvkg), true);
+-    }
+-
+-    if (cpu->cfg.ext_zvks) {
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvksed), true);
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvksh), true);
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvkb), true);
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvkt), true);
+-    }
+-
+-    if (cpu->cfg.ext_zvkt) {
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvbb), true);
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvbc), true);
+-    }
+-
+-    if (cpu->cfg.ext_zvbb) {
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zvkb), true);
+-    }
+-
+     if ((cpu->cfg.ext_zvbb || cpu->cfg.ext_zvkb || cpu->cfg.ext_zvkg ||
+          cpu->cfg.ext_zvkned || cpu->cfg.ext_zvknha || cpu->cfg.ext_zvksed ||
+          cpu->cfg.ext_zvksh) && !cpu->cfg.ext_zve32x) {
+@@ -688,29 +592,6 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+         return;
+     }
+ 
+-    if (cpu->cfg.ext_zk) {
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zkn), true);
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zkr), true);
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zkt), true);
+-    }
+-
+-    if (cpu->cfg.ext_zkn) {
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zbkb), true);
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zbkc), true);
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zbkx), true);
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zkne), true);
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zknd), true);
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zknh), true);
+-    }
+-
+-    if (cpu->cfg.ext_zks) {
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zbkb), true);
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zbkc), true);
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zbkx), true);
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zksed), true);
+-        cpu_cfg_ext_auto_update(cpu, CPU_CFG_OFFSET(ext_zksh), true);
+-    }
+-
+     if (cpu->cfg.ext_zicntr && !cpu->cfg.ext_zicsr) {
+         if (cpu_cfg_ext_is_user_set(CPU_CFG_OFFSET(ext_zicntr))) {
+             error_setg(errp, "zicntr requires zicsr");
+-- 
+2.43.2
 
->
-> This mechanism is used by Cortex-M MPC devices (hw/misc/tz-mpc.c)
-> originally. I have leveraged it and extended it little (in patch 2) as
-> MPC doesn't support RO/WO permission.
-> If we'd like to have a device to do the memory protection of both CPU
-> & DMA access, we could implement it in this mechanism.
-> (p.s. Cortex-A TZASC is not supported in QEMU, which is similar to MPC
-> or wgChecker device.)
->
-> Thanks,
-> Jim Shu
->
->
->
->
->
-> On Thu, Jun 13, 2024 at 2:23 PM LIU Zhiwei <zhiwei_liu@linux.alibaba.com> wrote:
->> On 2024/6/12 16:14, Jim Shu wrote:
->>> 'CPUTLBEntryFull.xlat_section' stores section_index in last 12 bits to
->>> find the correct section when CPU access the IO region over the IOTLB
->>> (iotlb_to_section()).
->>>
->>> However, section_index is only unique inside single AddressSpace. If
->>> address space translation is over IOMMUMemoryRegion, it could return
->>> section from other AddressSpace. 'iotlb_to_section()' API only finds the
->>> sections from CPU's AddressSpace so that it couldn't find section in
->>> other AddressSpace. Thus, using 'iotlb_to_section()' API will find the
->>> wrong section and QEMU will have wrong load/store access.
->>>
->>> To fix this bug, store complete MemoryRegionSection pointer in
->>> CPUTLBEntryFull instead of section_index.
->>>
->>> This bug occurs only when
->>> (1) IOMMUMemoryRegion is in the path of CPU access.
->> Hi Jim,
->>
->> Can you explain a little more on when IOMMUMemoryRegion is in the path
->> of CPU access?
->>
->> Thanks,
->> Zhiwei
->>
->>> (2) IOMMUMemoryRegion returns different target_as and the section is in
->>> the IO region.
->>>
->>> Common IOMMU devices don't have this issue since they are only in the
->>> path of DMA access. Currently, the bug only occurs when ARM MPC device
->>> (hw/misc/tz-mpc.c) returns 'blocked_io_as' to emulate blocked access
->>> handling. Upcoming RISC-V wgChecker device is also affected by this bug.
->>>
->>> Signed-off-by: Jim Shu <jim.shu@sifive.com>
->>> ---
->>>    accel/tcg/cputlb.c    | 19 +++++++++----------
->>>    include/hw/core/cpu.h |  3 +++
->>>    2 files changed, 12 insertions(+), 10 deletions(-)
->>>
->>> diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
->>> index 117b516739..8cf124b760 100644
->>> --- a/accel/tcg/cputlb.c
->>> +++ b/accel/tcg/cputlb.c
->>> @@ -1169,6 +1169,7 @@ void tlb_set_page_full(CPUState *cpu, int mmu_idx,
->>>        desc->fulltlb[index] = *full;
->>>        full = &desc->fulltlb[index];
->>>        full->xlat_section = iotlb - addr_page;
->>> +    full->section = section;
->>>        full->phys_addr = paddr_page;
->>>
->>>        /* Now calculate the new entry */
->>> @@ -1248,14 +1249,14 @@ static inline void cpu_unaligned_access(CPUState *cpu, vaddr addr,
->>>    }
->>>
->>>    static MemoryRegionSection *
->>> -io_prepare(hwaddr *out_offset, CPUState *cpu, hwaddr xlat,
->>> +io_prepare(hwaddr *out_offset, CPUState *cpu, CPUTLBEntryFull *full,
->>>               MemTxAttrs attrs, vaddr addr, uintptr_t retaddr)
->>>    {
->>>        MemoryRegionSection *section;
->>>        hwaddr mr_offset;
->>>
->>> -    section = iotlb_to_section(cpu, xlat, attrs);
->>> -    mr_offset = (xlat & TARGET_PAGE_MASK) + addr;
->>> +    section = full->section;
->>> +    mr_offset = (full->xlat_section & TARGET_PAGE_MASK) + addr;
->>>        cpu->mem_io_pc = retaddr;
->>>        if (!cpu->neg.can_do_io) {
->>>            cpu_io_recompile(cpu, retaddr);
->>> @@ -1571,9 +1572,7 @@ bool tlb_plugin_lookup(CPUState *cpu, vaddr addr, int mmu_idx,
->>>
->>>        /* We must have an iotlb entry for MMIO */
->>>        if (tlb_addr & TLB_MMIO) {
->>> -        MemoryRegionSection *section =
->>> -            iotlb_to_section(cpu, full->xlat_section & ~TARGET_PAGE_MASK,
->>> -                             full->attrs);
->>> +        MemoryRegionSection *section = full->section;
->>>            data->is_io = true;
->>>            data->mr = section->mr;
->>>        } else {
->>> @@ -1972,7 +1971,7 @@ static uint64_t do_ld_mmio_beN(CPUState *cpu, CPUTLBEntryFull *full,
->>>        tcg_debug_assert(size > 0 && size <= 8);
->>>
->>>        attrs = full->attrs;
->>> -    section = io_prepare(&mr_offset, cpu, full->xlat_section, attrs, addr, ra);
->>> +    section = io_prepare(&mr_offset, cpu, full, attrs, addr, ra);
->>>        mr = section->mr;
->>>
->>>        BQL_LOCK_GUARD();
->>> @@ -1993,7 +1992,7 @@ static Int128 do_ld16_mmio_beN(CPUState *cpu, CPUTLBEntryFull *full,
->>>        tcg_debug_assert(size > 8 && size <= 16);
->>>
->>>        attrs = full->attrs;
->>> -    section = io_prepare(&mr_offset, cpu, full->xlat_section, attrs, addr, ra);
->>> +    section = io_prepare(&mr_offset, cpu, full, attrs, addr, ra);
->>>        mr = section->mr;
->>>
->>>        BQL_LOCK_GUARD();
->>> @@ -2513,7 +2512,7 @@ static uint64_t do_st_mmio_leN(CPUState *cpu, CPUTLBEntryFull *full,
->>>        tcg_debug_assert(size > 0 && size <= 8);
->>>
->>>        attrs = full->attrs;
->>> -    section = io_prepare(&mr_offset, cpu, full->xlat_section, attrs, addr, ra);
->>> +    section = io_prepare(&mr_offset, cpu, full, attrs, addr, ra);
->>>        mr = section->mr;
->>>
->>>        BQL_LOCK_GUARD();
->>> @@ -2533,7 +2532,7 @@ static uint64_t do_st16_mmio_leN(CPUState *cpu, CPUTLBEntryFull *full,
->>>        tcg_debug_assert(size > 8 && size <= 16);
->>>
->>>        attrs = full->attrs;
->>> -    section = io_prepare(&mr_offset, cpu, full->xlat_section, attrs, addr, ra);
->>> +    section = io_prepare(&mr_offset, cpu, full, attrs, addr, ra);
->>>        mr = section->mr;
->>>
->>>        BQL_LOCK_GUARD();
->>> diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
->>> index a2c8536943..3f6c10897b 100644
->>> --- a/include/hw/core/cpu.h
->>> +++ b/include/hw/core/cpu.h
->>> @@ -217,6 +217,9 @@ typedef struct CPUTLBEntryFull {
->>>         */
->>>        hwaddr xlat_section;
->>>
->>> +    /* @section contains physical section. */
->>> +    MemoryRegionSection *section;
->>> +
->>>        /*
->>>         * @phys_addr contains the physical address in the address space
->>>         * given by cpu_asidx_from_attrs(cpu, @attrs).
 
