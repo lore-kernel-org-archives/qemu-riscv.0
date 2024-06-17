@@ -4,104 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02A36C2BA15
-	for <qemu-riscv@archiver.kernel.org>; Mon, 17 Jun 2024 12:09:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5887FC27C79
+	for <qemu-riscv@archiver.kernel.org>; Mon, 17 Jun 2024 13:12:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sJBBF-0004BI-RQ; Mon, 17 Jun 2024 08:09:49 -0400
+	id 1sJCA1-00052o-O8; Mon, 17 Jun 2024 09:12:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sw@weilnetz.de>)
- id 1sJBB9-0004Ad-S9; Mon, 17 Jun 2024 08:09:44 -0400
-Received: from mail.weilnetz.de ([37.120.169.71]
- helo=mail.v2201612906741603.powersrv.de)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1sJCA0-00052I-57
+ for qemu-riscv@nongnu.org; Mon, 17 Jun 2024 09:12:36 -0400
+Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <sw@weilnetz.de>)
- id 1sJBB7-00032C-BJ; Mon, 17 Jun 2024 08:09:43 -0400
-Received: from [192.168.178.59] (pd9ec3da0.dip0.t-ipconnect.de
- [217.236.61.160])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mail.v2201612906741603.powersrv.de (Postfix) with ESMTPSA id 2825FDA0D63;
- Mon, 17 Jun 2024 14:09:35 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=weilnetz.de; s=dkim;
- t=1718626175;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=fz7Gk/Q/VEwClSUAo+9VCSy+gxVGwQSiLH8xhZwWzGE=;
- b=r5tAJlv4epCtjvKV6NNvJH9B0ZJgtLecjsBcTVxjkRkkR+Gwxn8L2YWTVYERtRidzQE1fx
- iEzekMN+wq011Agp9L3R7eHH1mqzAwpBjf5IOHBHfrcK6kj2An1cstt+ODBIaIGM8KqKBB
- cI2tOlzIJOpFcqKZfFhVNBRRAkulocWRDN+N96pN8s46kycx9Wwru438YQSfWYXb5Fmezt
- sHedQyX7/JsO/s3hfVMKUeG6KMn1NEC3Flx2QaCjBqJ6B9GngW4Zcm0EdfBoCP1iHC13rX
- 6lRmiBWDGQhNsT5/i8wSeSzkPPllF/MyJkde9mX4Oo0/I4RLiuZTvPkUQB8JDA==
-Message-ID: <8def1779-6fc8-4e53-9542-20fe83651c0b@weilnetz.de>
-Date: Mon, 17 Jun 2024 14:09:34 +0200
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1sJC9y-0006D3-BV
+ for qemu-riscv@nongnu.org; Mon, 17 Jun 2024 09:12:35 -0400
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-1f44b5b9de6so34085425ad.3
+ for <qemu-riscv@nongnu.org>; Mon, 17 Jun 2024 06:12:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1718629952; x=1719234752; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=HwdKiVxFxtY9V1sqqmu+3oeUqV4LqIYMRLmi22/1Z24=;
+ b=d5DbvHIJt3puWGo5QslDRBUjYqlEXESJCNiYoY1CxHIBbujUe33tkcQFtm9wkOshjs
+ uMMuFfi4SmQKMjGsviGEaSyGb5uPMfINfpCYBzxSI49yx4wWKpr6I5Dp6IXIgK/lC0FZ
+ +4HczNKGGm3J95P/VxNLblmA91Y+Iw5L5n8Oi6p22KKt8SjbgX6mdjFPlansStM1NyRX
+ Hc8FbEpJZoV1ZzTG3+6Fzyp0yG/rgS2l9HW47VG06ZoeOH+/FQNFRh09il9kX9Q/F4o0
+ CMAIaN++IIwQMfFaTTxFib2WazfYAWn6Dgq/RdN17SWYabCXWadn2BVFzbFayXZ7jVQ7
+ DAJw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718629952; x=1719234752;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=HwdKiVxFxtY9V1sqqmu+3oeUqV4LqIYMRLmi22/1Z24=;
+ b=iOwmbe+6agl4G7Q07DL2vSYFWImOoJATycRsHiRIFHSzjbbto0Ibs90HQkeYzXd4Sx
+ RBy6IlMdZ6YB7wkQqBwLnPjwiwnqxPbdaY3zHsrviVsn3OWyEQ9CxFmkvUnqHgkIqXC1
+ 6kO74oDrIH+AxtbPODUsfedGKgT/+2U0A+txGw8hnVO1MgyVM4v9YzI4gjHzcEBitMxW
+ nlxdTILNRNcqq/+cFcrVzmXoK4kZlYNNgU6gidZPo28GP+cXpV7pPTMbbBPLMUsmhivM
+ K99IzOY4XbXCAo1+JJ0qaw2kqzN70aEQMHgEpa8nNhhvFQ/ds9l3RBb8WctkZo7tNwPK
+ fLmw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW46ouNwXbh8V07SJPDAgusigDTIMT8SveBVghsT4bfHSti+dwq1nYBJK1tsQQ5P6tvJrVujFHdWv9J9sFxTSL5jTQThVg=
+X-Gm-Message-State: AOJu0Yw0/gd7ZvIyR46Hdfl+8C40y+1yUFJ2xVCk9My4ajkGZY21EvVG
+ 1MP+vplV1zQxrrU6CLkFxfMSKpfwPD/swTDZbiFtC7av+Yq2VtJf22URDCyVjio=
+X-Google-Smtp-Source: AGHT+IEssVBoSBOPMgL5sKctR0s8+YnNASjwoZ8VjJHw7TlBjCHRV5ySF3uFK4f2D+11R3Ueh31D3w==
+X-Received: by 2002:a17:902:c40f:b0:1f6:f298:e69 with SMTP id
+ d9443c01a7336-1f8625d4e3bmr95711675ad.13.1718629952225; 
+ Mon, 17 Jun 2024 06:12:32 -0700 (PDT)
+Received: from [192.168.68.109] ([179.193.8.144])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-1f855e80899sm78753595ad.110.2024.06.17.06.12.30
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 17 Jun 2024 06:12:31 -0700 (PDT)
+Message-ID: <d2d6b4e5-5c67-4d60-aed4-711516e82359@ventanamicro.com>
+Date: Mon, 17 Jun 2024 10:12:28 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 1/2] hw/misc/riscv_iopmp: Add RISC-V IOPMP device
-To: Ethan Chen <ethan84@andestech.com>, qemu-devel@nongnu.org
-Cc: pbonzini@redhat.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- bmeng.cn@gmail.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org
-References: <20240612031706.2927602-1-ethan84@andestech.com>
- <20240612031706.2927602-2-ethan84@andestech.com>
-Autocrypt: addr=sw@weilnetz.de; keydata=
- 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
-In-Reply-To: <20240612031706.2927602-2-ethan84@andestech.com>
+Subject: Re: Can I utilize the RISC-V vector extension with QEMU?
+To: bithamr <bithamr@pm.me>, "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
+References: <36ZoNSXT5RGlpioKZQ9MNoGQIkfIrbYrGvZoO1dEDYPislzbwlGo7eHJBx8vPfhwKiJIBnSkbMw5umxr2WuUltrDIRBvnl8SW_6hKyb3YCY=@pm.me>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <36ZoNSXT5RGlpioKZQ9MNoGQIkfIrbYrGvZoO1dEDYPislzbwlGo7eHJBx8vPfhwKiJIBnSkbMw5umxr2WuUltrDIRBvnl8SW_6hKyb3YCY=@pm.me>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=37.120.169.71; envelope-from=sw@weilnetz.de;
- helo=mail.v2201612906741603.powersrv.de
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x634.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -114,39 +93,92 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-to:  Stefan Weil <sw@weilnetz.de>
-From:  Stefan Weil via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Am 12.06.24 um 05:17 schrieb Ethan Chen via:
-> Support basic functions of IOPMP specification v0.9.1 rapid-k model.
-> The specification url:
-> https://github.com/riscv-non-isa/iopmp-spec/releases/tag/v0.9.1
+Hi!
+On 6/13/24 9:41 PM, bithamr wrote:
+> Hello!
 > 
-> IOPMP check memory access from device is valid or not. This implementation uses
-> IOMMU to change address space that device access. There are three possible
-> results of an access: valid, blocked, and stalled(stall is not supported in this
->   patch).
+> For the last few days I've been trying to see if it's possible to run a RISC-V QEMU instance that has v1.0 vector extension enabled:
 > 
-> If an access is valid, target address space is downstream_as.
-> If an access is blocked, it will go to blocked_io_as. The operation of
-> blocked_io_as could be a bus error, or it can respond a success with fabricated
-> data depending on IOPMP ERR_CFG register value.
-> 
-> Signed-off-by: Ethan Chen <ethan84@andestech.com>
-> ---
->   hw/misc/Kconfig               |    3 +
->   hw/misc/meson.build           |    1 +
->   hw/misc/riscv_iopmp.c         | 1002 +++++++++++++++++++++++++++++++++
->   hw/misc/trace-events          |    4 +
->   include/hw/misc/riscv_iopmp.h |  152 +++++
->   5 files changed, 1162 insertions(+)
->   create mode 100644 hw/misc/riscv_iopmp.c
->   create mode 100644 include/hw/misc/riscv_iopmp.h
+> https://github.com/riscv/riscv-v-spec/blob/master/v-spec.adoc
 
-Should both new files have SPDX license identifiers?
 
-Regards,
-Stefan W.
+To enable vector you need to add the option 'v=true' when declaring the
+CPU. For both qemu-system-riscv64 and qemu-riscv64, this command line would
+enable the Vector extension:
+
+$ qemu-system-riscv64 -M virt -cpu rv64,v=true
+$ qemu-riscv64 -cpu rv64,v=true
+
+'-cpu rv64' is the default CPU QEMU users for RISC-V 64 bits. With this option
+you'll add Vector support to the default CPU.
+
+Depending on the QEMU version you're using you'll also have a 'max' CPU
+type that will enable (almost) all extensions that QEMU implements,
+including Vector.
+
+
+> 
+> I found the following documentation:
+> 
+> https://wiki.qemu.org/Documentation/Platforms/RISCV
+> https://www.qemu.org/docs/master/system/target-riscv.html
+> 
+> In that documentation it references extensions, and how some of them might be enabled with "-x", so it seems like it might be possible? But overall between both the wiki and the documentation is was unclear if any of the virtual CPUs present in qemu today actually support the vector extensions (and if so how to enable that).
+
+The "x-" in an extension/option name means that the extension is being added
+in an experimental state, most likely to allow for early development of other
+parts of the SW stack (kernel, toolchain, etc). When the spec is at least on
+'frozen' we remove the 'x-' from the name.
+
+As for the docs, yeah ... we're missing a scalable way of displaying all
+available extensions a CPU has. We have a dozen extensions added in QEMU
+every release and that would be nice to have. We had some efforts in that
+area in the past and hopefully we'll get back to them soon.
+
+
+Thanks,
+
+Daniel
+
+
+
+> 
+> What I have so far is a copy of Fedora running in a RISC-V virtual machine for testing. I found the following virtual CPUs come packaged in with qemu-riscv64-static:
+> 
+> ```
+> rv64
+> shakti-c
+> sifive-e51
+> sifive-u54
+> thead-c906
+> veyron-v1
+> x-rv128
+> ```
+> 
+> However I have started the virtual machine up with each of these CPUs and tested them using the following program:
+> 
+> ```
+> .section .text
+> .global _start
+> 
+> _start:
+>      vsetvli x0, x0, e8, m1
+>      li a7, 93
+>      li a0, 0
+>      ecall
+> ```
+> 
+> Each of them returns the following:
+> 
+> ```
+> $ as -o check.o check.s
+> check.s:5: Error: unrecognized opcode `vsetvli x0,x0,e8,m1', extension `v' or `zve64x' or `zve32x' required
+> ```
+> 
+> I'm kinda getting stuck so I thought maybe it was time to reach out for some help, I really appreciate any you can provide: can I, and then HOW can I run a RISC-V qemu instance that has the vector extension present?
+> 
+> Thank you!
 
