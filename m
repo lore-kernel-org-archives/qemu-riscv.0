@@ -4,84 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96094C27C4F
-	for <qemu-riscv@archiver.kernel.org>; Sun, 16 Jun 2024 02:48:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9E70C27C6E
+	for <qemu-riscv@archiver.kernel.org>; Mon, 17 Jun 2024 09:36:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sIfvM-0007Qw-1A; Sat, 15 Jun 2024 22:47:20 -0400
+	id 1sJ8mn-00054C-Uw; Mon, 17 Jun 2024 05:36:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1sIfvG-0007NY-Uh
- for qemu-riscv@nongnu.org; Sat, 15 Jun 2024 22:47:17 -0400
-Received: from mail-pg1-x529.google.com ([2607:f8b0:4864:20::529])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1sJ8mj-00053t-0z
+ for qemu-riscv@nongnu.org; Mon, 17 Jun 2024 05:36:21 -0400
+Received: from mail-wr1-x42b.google.com ([2a00:1450:4864:20::42b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1sIfvF-0001hg-EQ
- for qemu-riscv@nongnu.org; Sat, 15 Jun 2024 22:47:14 -0400
-Received: by mail-pg1-x529.google.com with SMTP id
- 41be03b00d2f7-6819d785528so2545070a12.3
- for <qemu-riscv@nongnu.org>; Sat, 15 Jun 2024 19:47:13 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1sJ8mh-0000nt-Bo
+ for qemu-riscv@nongnu.org; Mon, 17 Jun 2024 05:36:20 -0400
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-35e1fcd0c0fso3270206f8f.0
+ for <qemu-riscv@nongnu.org>; Mon, 17 Jun 2024 02:36:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1718506032; x=1719110832; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wqwE76CQo0Svp3wf95GRe/VgtMvrGF7qfdx6aXlVV2E=;
- b=Efh1i7C4cSBV4MPDdzwdG56GvezwwzE/fSFBV7obh5FpY6ZfLs5VXyFYFmgYnTSAnE
- uBKXzoIE/2RUYMD4QbH/0/NWHzY9LbR6GhK6jQ+gkMEjwMlgHKIy8K9ImFEAV3NZap7k
- C2LgPApF0ww/szZ8oaFZMVLZNrtr9nawCTTJKn+DH3axCIkDrePERBd7fg2+hwrjcRE4
- uoihCIV/wa/KwQTYyqfM6oNS6E8O+ki0AQPZ3fR717ZIZ8uFK6u9WOLdpyWIJsOLN4kl
- WbPyv0Y/xVAAH8byIWnoHRKV99IR2tIY+fkrjOCHths6vq709T389PI+NkSp2DEtiDji
- jldQ==
+ d=linaro.org; s=google; t=1718616977; x=1719221777; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Z/avWU+IzGZgbM/rGmF1u0JeDoOVOXAVch7IyWFSeyU=;
+ b=gWS8zvyy9HCfsaKPXlAf9yNQ7dPslj9gwvO4omQ8KTAVDHS085JwgbjYJicvxMkz6l
+ gDJoVf/6ls5jKXiLu29EEsfKYHE6I9vIEUXX8LNhF2r6K2/sS6EhrRXcLXXnhH02TQLX
+ w8se9hxUX8Lt4SdwR1VVhqYGNT/3j6yu2F7ufgOc45umhGTQjF/dwXtXOd8VU9yEkemA
+ EXr9NR6ivN38pc1LfNZENo6jgqlfnUE5sJgveL116brAPRelh+lCUmpLWXz3ykSxkTy2
+ ABdW9aeHcwbdmyNtvRAx8UPTTC+NRlBaP+MwEd/Ehv53lpIhcVcQ2ZAIFU0RWhe6CvKQ
+ mxVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718506032; x=1719110832;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=wqwE76CQo0Svp3wf95GRe/VgtMvrGF7qfdx6aXlVV2E=;
- b=qR2/jpz69E0TBsFTy19QBFsTs5EXCT9W9SyiXFRlPvf1seBaWFD2u00UjjAq60pTcC
- aJcYqCsF3bqAdQmq1uOqzdWrI/2IjjLlTiKHnIokFojkXhh3oyEKhHjVJelPh4YSor5G
- E/mjhw2Stsgzwp4XXAtRvlgcChYdvmor/GgbB4uVAQJjdjMX/d4MK9hx9X/1dTXnGfck
- WfkIfG2gIS09xmHYWbLiG9f2Aw8/qBy+gbmXz/InDfXZ95hxYdkdqfzsU0sHLQeB+BFD
- rbkPeZwIGvm+hFyhDXZbUMWEmkQ/M6UWw8/2tqOTM9gl3Z1vUlbRhWHvyBtep6lj0aWX
- agqw==
+ d=1e100.net; s=20230601; t=1718616977; x=1719221777;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Z/avWU+IzGZgbM/rGmF1u0JeDoOVOXAVch7IyWFSeyU=;
+ b=aRraA46A4VdGKf9FSk7rLm77OuUiQ1cH+mR7fwGBc6Ub9KQehEr0VUU1zq8QJwD1iN
+ cXuBZMMHKEwVOxJmIloAhmuHQqSuxJtfJvr1HbcMAI2+yIhyz+F9rLhIfodsqyRXJENW
+ UnNCRyXK2RA0Yca1cj7nDij77IYaGCmn3EzrdT4vaZVMfANpM2XR20VwIcsCAxWb+Lwo
+ LXwLFWA1dHPfCWN3deuIdI9Mn3R6LypiaUiomRsBeHpMOI7tJNqHb4Zs1hJ11j7r9eDF
+ N5X0dCcHuUfAlxoURh6Linhj2eKuAcuCdbjZecc6zylEIxfbuMetc35pR2FwiKAD3Wf9
+ KTJA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWQnyiEZt0yY7ozzAe1Lx6TA0JxG19bRxI5DQm8jkCjgSQraVbACjyEcJkXmu7U7jJAHsW1yqw4QYpe1rMRfOFr4X2Mvhk=
-X-Gm-Message-State: AOJu0YwqboTKMli6PScHM5FTNjXQ0rnB3LbHfcOcDlia9jygPr0DkPT7
- 58HGcpHheXrkkIbw4rSKQv+EmMzcs6Qgg0vulv+Lp5m/lMRBsno79I+G0E13dRo=
-X-Google-Smtp-Source: AGHT+IHXX137WNtDA7G1jtTkWSmPNDhh34VM5ttJo/6kxH2m14azQysbNIxhtDWcM7atKf4QUe+ocg==
-X-Received: by 2002:a17:902:c94d:b0:1f7:1688:9e36 with SMTP id
- d9443c01a7336-1f86290073cmr72887745ad.48.1718506031945; 
- Sat, 15 Jun 2024 19:47:11 -0700 (PDT)
-Received: from hsinchu16.internal.sifive.com
- (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
+ AJvYcCWCUtjhf1uixw5YrYFXOcMbfSZtYXByz1iB7+qn0uAphwmj/+5izKjEV0aE5hGhnSwOSyg6am0aH1qWMlb86voSrqjtQTs=
+X-Gm-Message-State: AOJu0Yw8AqcYCeRQVPZSkbtWNyoSMsZrZXVgB1yBieCRaYHE+bV1lG2A
+ vrTNYvTsWWgcNHA69Z0FSqXZ42uzUNMXXZ9qgt3xePye6LtlmHuvSj2hOfg+E08=
+X-Google-Smtp-Source: AGHT+IE5FGLANvHOYbi+3Xm4JigtqMdm/DQmq2ctWnSy84eagGyg4iM5uQXpSP+PLls0BwDODYiOzw==
+X-Received: by 2002:a5d:4a4c:0:b0:35f:1d29:db8d with SMTP id
+ ffacd0b85a97d-3607a76374dmr5324132f8f.25.1718616977087; 
+ Mon, 17 Jun 2024 02:36:17 -0700 (PDT)
+Received: from [192.168.69.100] ([176.176.169.90])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1f855e7ca78sm56258705ad.106.2024.06.15.19.47.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 15 Jun 2024 19:47:11 -0700 (PDT)
-From: frank.chang@sifive.com
-To: qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs),
- Frank Chang <frank.chang@sifive.com>,
- Jerry Zhang Jian <jerry.zhangjian@sifive.com>,
- Max Chou <max.chou@sifive.com>
-Subject: [PATCH v2 3/6] target/riscv: Add MISA implied rules
-Date: Sun, 16 Jun 2024 10:46:54 +0800
-Message-ID: <20240616024657.17948-4-frank.chang@sifive.com>
-X-Mailer: git-send-email 2.43.2
-In-Reply-To: <20240616024657.17948-1-frank.chang@sifive.com>
-References: <20240616024657.17948-1-frank.chang@sifive.com>
+ ffacd0b85a97d-3609d95bc02sm32232f8f.18.2024.06.17.02.36.15
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 17 Jun 2024 02:36:16 -0700 (PDT)
+Message-ID: <c77dc7ce-a205-4dcb-a63b-451cac00de5d@linaro.org>
+Date: Mon, 17 Jun 2024 11:36:14 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] hw/arm/virt: Avoid unexpected warning from Linux guest
+ on host with Fujitsu CPUs
+To: Zhenyu Zhang <zhenyzha@redhat.com>, Robin Murphy <robin.murphy@arm.com>,
+ Peter Maydell <peter.maydell@linaro.org>
+Cc: qemu-arm@nongnu.org, qemu-devel@nongnu.org, Jonathan.Cameron@huawei.com,
+ gshan@redhat.com, eauger@redhat.com, sebott@redhat.com, cohuck@redhat.com,
+ ddutile@redhat.com, shahuang@redhat.com, qemu-riscv <qemu-riscv@nongnu.org>,
+ qemu-ppc <qemu-ppc@nongnu.org>, Song Gao <gaosong@loongson.cn>
+References: <20240612020506.307793-1-zhenyzha@redhat.com>
+ <69649622-e52c-4d24-809b-3d8a97786a69@linaro.org>
+ <CAFEAcA9wEjONgLfTObNYwJbwn5Gs1BDJiDivc9PEwmfOeZW6ww@mail.gmail.com>
+ <8d7e111b-4f74-4a67-b01b-2af5ce009a06@linaro.org>
+ <ed3df37e-fddd-465c-8ae9-1c5791966995@arm.com>
+ <CAJFLiBLt4ig0XpDScq0M1EAPo1PEvZNiumf9kKMOErSE_OJ_cQ@mail.gmail.com>
+Content-Language: en-US
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <CAJFLiBLt4ig0XpDScq0M1EAPo1PEvZNiumf9kKMOErSE_OJ_cQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::529;
- envelope-from=frank.chang@sifive.com; helo=mail-pg1-x529.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42b;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -104,82 +105,72 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Frank Chang <frank.chang@sifive.com>
+On 17/6/24 07:26, Zhenyu Zhang wrote:
+> On Thu, Jun 13, 2024 at 1:48 AM Robin Murphy <robin.murphy@arm.com> wrote:
+>>
+>> On 2024-06-12 1:50 pm, Philippe Mathieu-Daudé wrote:
+>>> On 12/6/24 14:48, Peter Maydell wrote:
+>>>> On Wed, 12 Jun 2024 at 13:33, Philippe Mathieu-Daudé
+>>>> <philmd@linaro.org> wrote:
+>>>>>
+>>>>> Hi Zhenyu,
+>>>>>
+> Hello Philippe,
+> 
+>>>>> On 12/6/24 04:05, Zhenyu Zhang wrote:
+>>>>>> diff --git a/hw/arm/virt.c b/hw/arm/virt.c
+>>>>>> index 3c93c0c0a6..3cefac6d43 100644
+>>>>>> --- a/hw/arm/virt.c
+>>>>>> +++ b/hw/arm/virt.c
+>>>>>> @@ -271,6 +271,17 @@ static void create_fdt(VirtMachineState *vms)
+>>>>>>         qemu_fdt_setprop_cell(fdt, "/", "#size-cells", 0x2);
+>>>>>>         qemu_fdt_setprop_string(fdt, "/", "model", "linux,dummy-virt");
+>>>>>>
+>>>>>> +    /*
+>>>>>> +     * For QEMU, all DMA is coherent. Advertising this in the root
+>>>>>> node
+>>>>>> +     * has two benefits:
+>>>>>> +     *
+>>>>>> +     * - It avoids potential bugs where we forget to mark a DMA
+>>>>>> +     *   capable device as being dma-coherent
+>>>>>> +     * - It avoids spurious warnings from the Linux kernel about
+>>>>>> +     *   devices which can't do DMA at all
+>>>>>> +     */
+>>>>>> +    qemu_fdt_setprop(fdt, "/", "dma-coherent", NULL, 0);
+>>>>>
+>>>>> OK, but why restrict that to the Aarch64 virt machine?
+>>>>> Shouldn't advertise this generically in create_device_tree()?
+>>>>> Or otherwise at least in the other virt machines?
+>>>>
+>>>> create_device_tree() creates an empty device tree, not one
+>>>> with stuff in it. It seems reasonable to me for this property
+>>>> on the root to be set in the same place we set other properties
+>>>> of the root node.
+>>>
+>>> OK. Still the question about other virt machines remains
+>>> unanswered :)
+>>
+>>   From the DT consumer point of view, the interpretation and assumptions
+>> around coherency *are* generally architecture- or platform-specific. For
+>> instance on RISC-V, many platforms want to assume coherency by default
+>> (and potentially use "dma-noncoherent" to mark individual devices that
+>> aren't), while others may still want to do the opposite and use
+>> "dma-coherent" in the same manner as Arm and AArch64. Neither property
+>> existed back in ePAPR, so typical PowerPC systems wouldn't even be
+>> looking and will just make their own assumptions by other means.
 
-Add MISA extension implied rules to enable the implied extensions
-of MISA recursively.
+TIL :)
 
-Signed-off-by: Frank Chang <frank.chang@sifive.com>
-Reviewed-by: Jerry Zhang Jian <jerry.zhangjian@sifive.com>
-Tested-by: Max Chou <max.chou@sifive.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/cpu.c | 50 +++++++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 49 insertions(+), 1 deletion(-)
+> As Robin's comment says, each platform wants to assume coherency
+> by default may be different. Adding it to all virt machines may
+> introduce new risks. Currently, the issue is only valid on Fujitsu CPUs
+> where the cache line size is 256 bytes, meaning the combination of
+> kvm+virt-platform is needed to trigger the warning. So I'd be inclined
+> to add this "dma-coherent" property for the "virt" platform first
+> and advertise the property to other platforms if we hit the issue
+> on those platforms.
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index bacbb32120..d09b5e9e62 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -2250,8 +2250,56 @@ RISCVCPUProfile *riscv_profiles[] = {
-     NULL,
- };
- 
-+static RISCVCPUImpliedExtsRule RVA_IMPLIED = {
-+    .is_misa = true,
-+    .ext = RVA,
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zalrsc), CPU_CFG_OFFSET(ext_zaamo),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
-+static RISCVCPUImpliedExtsRule RVD_IMPLIED = {
-+    .is_misa = true,
-+    .ext = RVD,
-+    .implied_misas = RVF,
-+    .implied_exts = { RISCV_IMPLIED_EXTS_RULE_END },
-+};
-+
-+static RISCVCPUImpliedExtsRule RVF_IMPLIED = {
-+    .is_misa = true,
-+    .ext = RVF,
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zicsr),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
-+static RISCVCPUImpliedExtsRule RVM_IMPLIED = {
-+    .is_misa = true,
-+    .ext = RVM,
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zmmul),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
-+static RISCVCPUImpliedExtsRule RVV_IMPLIED = {
-+    .is_misa = true,
-+    .ext = RVV,
-+    .implied_exts = {
-+        CPU_CFG_OFFSET(ext_zve64d),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
- RISCVCPUImpliedExtsRule *riscv_misa_implied_rules[] = {
--    NULL
-+    &RVA_IMPLIED, &RVD_IMPLIED, &RVF_IMPLIED,
-+    &RVM_IMPLIED, &RVV_IMPLIED, NULL
- };
- 
- RISCVCPUImpliedExtsRule *riscv_ext_implied_rules[] = {
--- 
-2.43.2
+Thanks Robin & Zhenyu,
 
+Phil.
 
