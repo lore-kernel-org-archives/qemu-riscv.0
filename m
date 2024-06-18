@@ -4,85 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89DA1C2BA15
-	for <qemu-riscv@archiver.kernel.org>; Tue, 18 Jun 2024 11:28:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01D0DC27C4F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 18 Jun 2024 12:35:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sJX02-0003nG-IA; Tue, 18 Jun 2024 07:27:42 -0400
+	id 1sJY31-0004lS-Ox; Tue, 18 Jun 2024 08:34:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
- id 1sJWzo-0003fN-CN
- for qemu-riscv@nongnu.org; Tue, 18 Jun 2024 07:27:33 -0400
-Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
- id 1sJWzk-0007yq-OX
- for qemu-riscv@nongnu.org; Tue, 18 Jun 2024 07:27:27 -0400
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-422948b9140so3764985e9.1
- for <qemu-riscv@nongnu.org>; Tue, 18 Jun 2024 04:27:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1718710041; x=1719314841;
- darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=RENz7JQaP3Z2DOpOHwzXYz8SHC4pTV+PRNaAMchOSfk=;
- b=kj4Vhmj74j8I+6I0wz86xS5UN7OSNLNKWE7DoigBWAchsqdgp4CY2ge5oEWB5srH0t
- j4GTxqtDF7Anb8uvOUIXGvi5v1jbZWqCE8VQ5279sBqi7pDeDrrMgB9/b7fSGfubUwe1
- IWkbTm/NrduAuHRgl8cuRCxyIfbw7K1MujMNw/BCDTKhsVeLMuV3JJ40PYDI/JAZDiAb
- OReszrFRj3rTqCLjIUFAw8NGMW2vBsYRMoFncJyv0YjuknZwB6fEDxsGhKtjhSnQ/+OB
- NK6TkzyeOBmn9LFDvpB1bvo1NvN5+36Z4Z5tGzAl7BLvmvtTJFsDleY1QrsjPB4qH/uL
- 23Yg==
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1sJY2x-0004k1-Ju
+ for qemu-riscv@nongnu.org; Tue, 18 Jun 2024 08:34:47 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1sJY2u-0003LJ-AM
+ for qemu-riscv@nongnu.org; Tue, 18 Jun 2024 08:34:45 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1718714081;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=soFDg/JDY7uG8Ly+ZcdmlCyJ+aAaVEHDj25czzys79w=;
+ b=DdotZgxKfWkdO0a+dnKMV35DG7MaSQYUhbhym3FOq7pq3IcmiMML0qKMZvAZbEVyWoKJoG
+ EebICDm65zVWxJ2RvhT5SwGlgNQ9k5zZGvCq+twBCl6w7bB8m9VnUjkof40+UQwhXIzmyM
+ /pYFudXCYqB7RG2Bhy4mqMTg8vM+RFw=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-263-0gKmrqDwM5G7VftaB9jQDQ-1; Tue, 18 Jun 2024 08:34:39 -0400
+X-MC-Unique: 0gKmrqDwM5G7VftaB9jQDQ-1
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-42108822a8eso32376355e9.0
+ for <qemu-riscv@nongnu.org>; Tue, 18 Jun 2024 05:34:38 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718710041; x=1719314841;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=RENz7JQaP3Z2DOpOHwzXYz8SHC4pTV+PRNaAMchOSfk=;
- b=WE0FwBjYy8q3rmAOvkFqdrHWQOkj99Hde7q9EodL/bpSZzzkCTaf+Swio+mNrI0+j1
- IgKP5CM+wHE3EvMGyz+HwzErDw/f2LMRVfv8fwM0O2So1z68rJzLWQw7tW+oVjt9uh1f
- vkiTsEKGbkEFOQTtKlmUKvakmqadgyKEUrTypNjQ+PE0kPqo90AQtHyeu8IS5I0GPVTP
- 1RPA/YIMhSfFoknNQ+uRPujyZA+calEIPAvrtJNALMg6yKopRxcxKi6NC8ZhhKtGIsXK
- 1eZMUFd80gW+6bpXLeVC7r2rbwRq1KxbnaBJw4idqsuXYsq5b7lPjECQhBMAGGaiEj51
- ssIw==
-X-Gm-Message-State: AOJu0YxHmRWRO2/F0zNE9VCGvmngonXc3kg72w1+BUN1X5rIc2pELQqJ
- WTJMYfGcEM6OAJrpDSeMCy59tmPwxA2++/eot2SUEq3e/txMFOQhtYMXnrU9Zcqa0SSlwn39E5t
- hvvg=
-X-Google-Smtp-Source: AGHT+IGQUR+ItdVrGYzNnFg9ogR/DwQcqbsRLzOvVokKC/gCBXZ6gXTycVfOl9MRlib76ORUT1ThQA==
-X-Received: by 2002:a05:6000:1844:b0:35f:2584:76e9 with SMTP id
- ffacd0b85a97d-3607a76aa50mr9707645f8f.2.1718710040861; 
- Tue, 18 Jun 2024 04:27:20 -0700 (PDT)
-Received: from carbon-x1.. ([2a01:e0a:999:a3a0:45f5:4d94:4aa8:def4])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-36077536f78sm13747059f8f.7.2024.06.18.04.27.20
+ d=1e100.net; s=20230601; t=1718714078; x=1719318878;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=soFDg/JDY7uG8Ly+ZcdmlCyJ+aAaVEHDj25czzys79w=;
+ b=viRJqGwBdzk38COJvphv+sceAmYJoVkJTuiNQbbfUmajXBqgdAWqnpUPje+D+ztdV3
+ PW8fFwphSo42sAJ9S1dgHVJhvmk76cRsJbTGK5fCQOc+er7ZYL5rKuB4L0sMhsMhmkqn
+ 7y+iKnUwwHsVEugPktQY8leV1qJ12csu0AuYHNftP64X/DfjoR9odCjxwwoG9WY4Rhek
+ vIwpfb46Vtr35KsvYI7lkLAHa6JZq1mRiAu7leC0mWj8AQ3FnemzZ1XRRTLDisVrsLh7
+ qDbOzsE2uLqW7n7Hzi/EH8KGXrG6FiWofsBHxWZlteV+puYMrOuoV2DjQQVRugRvsRC3
+ AQ9A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX94bsZtsdzvwjula4OWg7rtAbUJSzSw2iM1qQv9cTb19YfdWwdxPLvngTVK5y6o+vOu0UM/ztj7TXsSCWh8/WL5kCUhsI=
+X-Gm-Message-State: AOJu0YztXqmbM0BX4wl9MU8QX9EeJ4Sa7t4fRAlUP95N4jhlJ6zVP2GI
+ D/UhAYW2HUaZDbsXtskNiVnqNGPDapVnXkjfsSMgXmhOGfFi8oXN6YF/Fze+ZTek3cxSO4SzsLH
+ 2uUv8/fRGOFQ5B0mDEP189W+XMlo61jYUw7PMpqywaiMnUxB4HXX6
+X-Received: by 2002:a05:600c:54e4:b0:41b:d6ca:eefa with SMTP id
+ 5b1f17b1804b1-4246f5ae5famr21873815e9.16.1718714078007; 
+ Tue, 18 Jun 2024 05:34:38 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEHDBDQ190fyaiWWB2k2IcuL9V4oRkfhwdsETDW0ZM5CJpKksrTkvybipLzjV2sLzb4n3mmog==
+X-Received: by 2002:a05:600c:54e4:b0:41b:d6ca:eefa with SMTP id
+ 5b1f17b1804b1-4246f5ae5famr21873415e9.16.1718714077589; 
+ Tue, 18 Jun 2024 05:34:37 -0700 (PDT)
+Received: from imammedo.users.ipa.redhat.com (nat-pool-brq-t.redhat.com.
+ [213.175.37.10]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4246bddc59bsm50478065e9.5.2024.06.18.05.34.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Jun 2024 04:27:20 -0700 (PDT)
-From: =?UTF-8?q?Cl=C3=A9ment=20L=C3=A9ger?= <cleger@rivosinc.com>
-To: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Cc: =?UTF-8?q?Cl=C3=A9ment=20L=C3=A9ger?= <cleger@rivosinc.com>,
- qemu-devel@nongnu.org, Atish Patra <atishp@rivosinc.com>
-Subject: [PATCH v2] target/riscv: fix instructions count handling in icount
- mode
-Date: Tue, 18 Jun 2024 13:26:45 +0200
-Message-ID: <20240618112649.76683-1-cleger@rivosinc.com>
-X-Mailer: git-send-email 2.45.2
+ Tue, 18 Jun 2024 05:34:37 -0700 (PDT)
+Date: Tue, 18 Jun 2024 14:34:36 +0200
+From: Igor Mammedov <imammedo@redhat.com>
+To: Sunil V L <sunilvl@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org, Paolo
+ Bonzini <pbonzini@redhat.com>, =?UTF-8?B?TWFyYy1BbmRyw6k=?= Lureau
+ <marcandre.lureau@redhat.com>, "Daniel P . =?UTF-8?B?QmVycmFuZ8Op?="
+ <berrange@redhat.com>, Thomas Huth <thuth@redhat.com>, Philippe
+ =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?= <philmd@linaro.org>, "Michael S . Tsirkin"
+ <mst@redhat.com>, Ani Sinha <anisinha@redhat.com>, Laurent Vivier
+ <lvivier@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>, Alistair Francis
+ <alistair23@gmail.com>, Sia Jee Heng <jeeheng.sia@starfivetech.com>, Haibo1
+ Xu <haibo1.xu@intel.com>, Anup Patel <apatel@ventanamicro.com>, Andrew
+ Jones <ajones@ventanamicro.com>, Daniel Henrique Barboza
+ <dbarboza@ventanamicro.com>, Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>, Weiwei
+ Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: Re: [PATCH v2 04/12] qtest: bios-tables-test: Rename aarch64 tests
+ with aarch64 in them
+Message-ID: <20240618143436.0981cb2c@imammedo.users.ipa.redhat.com>
+In-Reply-To: <20240524061411.341599-5-sunilvl@ventanamicro.com>
+References: <20240524061411.341599-1-sunilvl@ventanamicro.com>
+ <20240524061411.341599-5-sunilvl@ventanamicro.com>
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.42; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::334;
- envelope-from=cleger@rivosinc.com; helo=mail-wm1-x334.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001,
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=imammedo@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -22
+X-Spam_score: -2.3
+X-Spam_bar: --
+X-Spam_report: (-2.3 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.148,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -99,118 +121,125 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-When icount is enabled, rather than returning the virtual CPU time, we
-should return the instruction count itself. Add an instructions bool
-parameter to get_ticks() to correctly return icount_get_raw() when
-icount_enabled() == 1 and instruction count is queried. This will modify
-the existing behavior which was returning an instructions count close to
-the number of cycles (CPI ~= 1).
+On Fri, 24 May 2024 11:44:03 +0530
+Sunil V L <sunilvl@ventanamicro.com> wrote:
 
-Signed-off-by: Clément Léger <cleger@rivosinc.com>
+> Existing AARCH64 virt test functions do not have AARCH64 in their name.
+> To add RISC-V virt related test cases, better to rename existing
+> functions to indicate they are ARM only.
+> 
+> Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
----
+Reviewed-by: Igor Mammedov <imammedo@redhat.com>
 
-v2:
- - Apply checkpatch and fixed missing braces
-
----
- target/riscv/csr.c | 30 +++++++++++++++++-------------
- 1 file changed, 17 insertions(+), 13 deletions(-)
-
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 58ef7079dc..b8915e32a2 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -762,14 +762,18 @@ static RISCVException write_vcsr(CPURISCVState *env, int csrno,
- }
- 
- /* User Timers and Counters */
--static target_ulong get_ticks(bool shift)
-+static target_ulong get_ticks(bool shift, bool instructions)
- {
-     int64_t val;
-     target_ulong result;
- 
- #if !defined(CONFIG_USER_ONLY)
-     if (icount_enabled()) {
--        val = icount_get();
-+        if (instructions) {
-+            val = icount_get_raw();
-+        } else {
-+            val = icount_get();
-+        }
-     } else {
-         val = cpu_get_host_ticks();
-     }
-@@ -804,14 +808,14 @@ static RISCVException read_timeh(CPURISCVState *env, int csrno,
- static RISCVException read_hpmcounter(CPURISCVState *env, int csrno,
-                                       target_ulong *val)
- {
--    *val = get_ticks(false);
-+    *val = get_ticks(false, (csrno == CSR_INSTRET));
-     return RISCV_EXCP_NONE;
- }
- 
- static RISCVException read_hpmcounterh(CPURISCVState *env, int csrno,
-                                        target_ulong *val)
- {
--    *val = get_ticks(true);
-+    *val = get_ticks(true, (csrno == CSR_INSTRETH));
-     return RISCV_EXCP_NONE;
- }
- 
-@@ -875,11 +879,11 @@ static RISCVException write_mhpmcounter(CPURISCVState *env, int csrno,
-     int ctr_idx = csrno - CSR_MCYCLE;
-     PMUCTRState *counter = &env->pmu_ctrs[ctr_idx];
-     uint64_t mhpmctr_val = val;
-+    bool instr = riscv_pmu_ctr_monitor_instructions(env, ctr_idx);
- 
-     counter->mhpmcounter_val = val;
--    if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
--        riscv_pmu_ctr_monitor_instructions(env, ctr_idx)) {
--        counter->mhpmcounter_prev = get_ticks(false);
-+    if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) || instr) {
-+        counter->mhpmcounter_prev = get_ticks(false, instr);
-         if (ctr_idx > 2) {
-             if (riscv_cpu_mxl(env) == MXL_RV32) {
-                 mhpmctr_val = mhpmctr_val |
-@@ -902,12 +906,12 @@ static RISCVException write_mhpmcounterh(CPURISCVState *env, int csrno,
-     PMUCTRState *counter = &env->pmu_ctrs[ctr_idx];
-     uint64_t mhpmctr_val = counter->mhpmcounter_val;
-     uint64_t mhpmctrh_val = val;
-+    bool instr = riscv_pmu_ctr_monitor_instructions(env, ctr_idx);
- 
-     counter->mhpmcounterh_val = val;
-     mhpmctr_val = mhpmctr_val | (mhpmctrh_val << 32);
--    if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
--        riscv_pmu_ctr_monitor_instructions(env, ctr_idx)) {
--        counter->mhpmcounterh_prev = get_ticks(true);
-+    if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) || instr) {
-+        counter->mhpmcounterh_prev = get_ticks(true, instr);
-         if (ctr_idx > 2) {
-             riscv_pmu_setup_timer(env, mhpmctr_val, ctr_idx);
-         }
-@@ -926,6 +930,7 @@ static RISCVException riscv_pmu_read_ctr(CPURISCVState *env, target_ulong *val,
-                                          counter->mhpmcounter_prev;
-     target_ulong ctr_val = upper_half ? counter->mhpmcounterh_val :
-                                         counter->mhpmcounter_val;
-+    bool instr = riscv_pmu_ctr_monitor_instructions(env, ctr_idx);
- 
-     if (get_field(env->mcountinhibit, BIT(ctr_idx))) {
-         /*
-@@ -946,9 +951,8 @@ static RISCVException riscv_pmu_read_ctr(CPURISCVState *env, target_ulong *val,
-      * The kernel computes the perf delta by subtracting the current value from
-      * the value it initialized previously (ctr_val).
-      */
--    if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
--        riscv_pmu_ctr_monitor_instructions(env, ctr_idx)) {
--        *val = get_ticks(upper_half) - ctr_prev + ctr_val;
-+    if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) || instr) {
-+        *val = get_ticks(upper_half, instr) - ctr_prev + ctr_val;
-     } else {
-         *val = ctr_val;
-     }
--- 
-2.45.2
+> ---
+>  tests/qtest/bios-tables-test.c | 35 ++++++++++++++++++----------------
+>  1 file changed, 19 insertions(+), 16 deletions(-)
+> 
+> diff --git a/tests/qtest/bios-tables-test.c b/tests/qtest/bios-tables-test.c
+> index d1ff4db7a2..c4a4d1c7bf 100644
+> --- a/tests/qtest/bios-tables-test.c
+> +++ b/tests/qtest/bios-tables-test.c
+> @@ -1570,7 +1570,7 @@ static void test_acpi_piix4_tcg_dimm_pxm(void)
+>      test_acpi_tcg_dimm_pxm(MACHINE_PC);
+>  }
+>  
+> -static void test_acpi_virt_tcg_memhp(void)
+> +static void test_acpi_aarch64_virt_tcg_memhp(void)
+>  {
+>      test_data data = {
+>          .machine = "virt",
+> @@ -1663,7 +1663,7 @@ static void test_acpi_microvm_ioapic2_tcg(void)
+>      free_test_data(&data);
+>  }
+>  
+> -static void test_acpi_virt_tcg_numamem(void)
+> +static void test_acpi_aarch64_virt_tcg_numamem(void)
+>  {
+>      test_data data = {
+>          .machine = "virt",
+> @@ -1685,7 +1685,7 @@ static void test_acpi_virt_tcg_numamem(void)
+>  
+>  }
+>  
+> -static void test_acpi_virt_tcg_pxb(void)
+> +static void test_acpi_aarch64_virt_tcg_pxb(void)
+>  {
+>      test_data data = {
+>          .machine = "virt",
+> @@ -1758,7 +1758,7 @@ static void test_acpi_piix4_tcg_acpi_hmat(void)
+>      test_acpi_tcg_acpi_hmat(MACHINE_PC);
+>  }
+>  
+> -static void test_acpi_virt_tcg_acpi_hmat(void)
+> +static void test_acpi_aarch64_virt_tcg_acpi_hmat(void)
+>  {
+>      test_data data = {
+>          .machine = "virt",
+> @@ -1914,7 +1914,7 @@ static void test_acpi_microvm_acpi_erst(void)
+>  }
+>  #endif /* CONFIG_POSIX */
+>  
+> -static void test_acpi_virt_tcg(void)
+> +static void test_acpi_aarch64_virt_tcg(void)
+>  {
+>      test_data data = {
+>          .machine = "virt",
+> @@ -1933,7 +1933,7 @@ static void test_acpi_virt_tcg(void)
+>      free_test_data(&data);
+>  }
+>  
+> -static void test_acpi_virt_tcg_topology(void)
+> +static void test_acpi_aarch64_virt_tcg_topology(void)
+>  {
+>      test_data data = {
+>          .machine = "virt",
+> @@ -2016,7 +2016,7 @@ static void test_acpi_q35_cxl(void)
+>  }
+>  #endif /* CONFIG_POSIX */
+>  
+> -static void test_acpi_virt_viot(void)
+> +static void test_acpi_aarch64_virt_viot(void)
+>  {
+>      test_data data = {
+>          .machine = "virt",
+> @@ -2192,7 +2192,7 @@ static void test_acpi_microvm_oem_fields(void)
+>      g_free(args);
+>  }
+>  
+> -static void test_acpi_virt_oem_fields(void)
+> +static void test_acpi_aarch64_virt_oem_fields(void)
+>  {
+>      test_data data = {
+>          .machine = "virt",
+> @@ -2364,16 +2364,19 @@ int main(int argc, char *argv[])
+>          }
+>      } else if (strcmp(arch, "aarch64") == 0) {
+>          if (has_tcg && qtest_has_device("virtio-blk-pci")) {
+> -            qtest_add_func("acpi/virt", test_acpi_virt_tcg);
+> +            qtest_add_func("acpi/virt", test_acpi_aarch64_virt_tcg);
+>              qtest_add_func("acpi/virt/acpihmatvirt",
+> -                            test_acpi_virt_tcg_acpi_hmat);
+> -            qtest_add_func("acpi/virt/topology", test_acpi_virt_tcg_topology);
+> -            qtest_add_func("acpi/virt/numamem", test_acpi_virt_tcg_numamem);
+> -            qtest_add_func("acpi/virt/memhp", test_acpi_virt_tcg_memhp);
+> -            qtest_add_func("acpi/virt/pxb", test_acpi_virt_tcg_pxb);
+> -            qtest_add_func("acpi/virt/oem-fields", test_acpi_virt_oem_fields);
+> +                           test_acpi_aarch64_virt_tcg_acpi_hmat);
+> +            qtest_add_func("acpi/virt/topology",
+> +                           test_acpi_aarch64_virt_tcg_topology);
+> +            qtest_add_func("acpi/virt/numamem",
+> +                           test_acpi_aarch64_virt_tcg_numamem);
+> +            qtest_add_func("acpi/virt/memhp", test_acpi_aarch64_virt_tcg_memhp);
+> +            qtest_add_func("acpi/virt/pxb", test_acpi_aarch64_virt_tcg_pxb);
+> +            qtest_add_func("acpi/virt/oem-fields",
+> +                           test_acpi_aarch64_virt_oem_fields);
+>              if (qtest_has_device("virtio-iommu-pci")) {
+> -                qtest_add_func("acpi/virt/viot", test_acpi_virt_viot);
+> +                qtest_add_func("acpi/virt/viot", test_acpi_aarch64_virt_viot);
+>              }
+>          }
+>      }
 
 
