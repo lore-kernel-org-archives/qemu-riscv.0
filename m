@@ -4,89 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 834A9C2BA15
-	for <qemu-riscv@archiver.kernel.org>; Tue, 18 Jun 2024 10:55:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89DA1C2BA15
+	for <qemu-riscv@archiver.kernel.org>; Tue, 18 Jun 2024 11:28:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sJWUA-0003eL-EB; Tue, 18 Jun 2024 06:54:46 -0400
+	id 1sJX02-0003nG-IA; Tue, 18 Jun 2024 07:27:42 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1sJWU9-0003dj-Aq
- for qemu-riscv@nongnu.org; Tue, 18 Jun 2024 06:54:45 -0400
-Received: from mail-ej1-x62e.google.com ([2a00:1450:4864:20::62e])
+ (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
+ id 1sJWzo-0003fN-CN
+ for qemu-riscv@nongnu.org; Tue, 18 Jun 2024 07:27:33 -0400
+Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1sJWU6-0001fp-Bo
- for qemu-riscv@nongnu.org; Tue, 18 Jun 2024 06:54:45 -0400
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a6f04afcce1so674314466b.2
- for <qemu-riscv@nongnu.org>; Tue, 18 Jun 2024 03:54:41 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
+ id 1sJWzk-0007yq-OX
+ for qemu-riscv@nongnu.org; Tue, 18 Jun 2024 07:27:27 -0400
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-422948b9140so3764985e9.1
+ for <qemu-riscv@nongnu.org>; Tue, 18 Jun 2024 04:27:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718708080; x=1719312880; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=xgIw9IKUSsnidIbwU0XCTiXGMITo0Ef+Km6UW4Y49Fk=;
- b=aCF/d6nfyQ5Q/E4n0kz/gKvAxgGNZrpfaBwv4JTHxjnTOnrruB+YJBvKkcKqMa/17y
- SjBhFdk8pI0uuPfl7djQVDDvUnWl0JXAACTqudqZzAXacywrDE7AWXzWJTz3x3v90q0e
- GsdnGy8j59l3GJU2I6Z/ZOi3UAut9XbxmlZgzeTTpqfoYpMgH8OGkYauyOy0vTZRjAM5
- sOG6kdtGbdenis97fmqXj1NpqM8i+1rqm0tW/eDGqfMAGo60HpIBhGgPv53kHtPeFNw6
- 0Zf+PJ110IhkzdDIu34vakkgmALSJdODAjKIN8KfasfBie9pmn1uGng2hG/Eq1+exwAN
- J1hQ==
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1718710041; x=1719314841;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=RENz7JQaP3Z2DOpOHwzXYz8SHC4pTV+PRNaAMchOSfk=;
+ b=kj4Vhmj74j8I+6I0wz86xS5UN7OSNLNKWE7DoigBWAchsqdgp4CY2ge5oEWB5srH0t
+ j4GTxqtDF7Anb8uvOUIXGvi5v1jbZWqCE8VQ5279sBqi7pDeDrrMgB9/b7fSGfubUwe1
+ IWkbTm/NrduAuHRgl8cuRCxyIfbw7K1MujMNw/BCDTKhsVeLMuV3JJ40PYDI/JAZDiAb
+ OReszrFRj3rTqCLjIUFAw8NGMW2vBsYRMoFncJyv0YjuknZwB6fEDxsGhKtjhSnQ/+OB
+ NK6TkzyeOBmn9LFDvpB1bvo1NvN5+36Z4Z5tGzAl7BLvmvtTJFsDleY1QrsjPB4qH/uL
+ 23Yg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718708080; x=1719312880;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=xgIw9IKUSsnidIbwU0XCTiXGMITo0Ef+Km6UW4Y49Fk=;
- b=liHPVnK/qQgtIUn4WcCxKi5YnfgYpL3L/hdHHa4w6FRIazvdulw/aIrC8v0Yi6cPlC
- WnTL8BIR9Qdd9ldaSugUzD18II6ppR4jCoh2+SgMWU6NTMkI8FqfbPCQJArr7PK5e4hz
- jfdKw5gDHHAeKyyBc35bvr95fcxtFHLJGIq818errjIIF5EeRhUEUlSOwTBpJ03NdgkV
- QLyuE0MClbHSX73N/G6IZl31U8JdUBpJSQ6Z0IYjKJa9J2C/JbHI5veojVqpdVy/PPe6
- mqmfzHm2OPzpm/FsHQpNP9hIcZqvL8K4b6uG0n8S4/oC7LWBQ6DaRU/X1oYSdnKu0a6v
- 8M4g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWEaq0Is4KJSfSPSq8TAyaRQLMTnpU5BhXDu3HSKaPrhy6cUc2Wd00AFUiJd/2drVSY+AZf/b0cXcBuTKyG3GAZEmI1Q8E=
-X-Gm-Message-State: AOJu0YxCqL46jYF1p76yT/JImXJ2yX9TZU5Y8vuTWjlglReEYcr7db3F
- U3VVvPWH/jM0jMplEe7oUKcGNpwWx7YzJ0bvL9ELC5Nrko1gVDV94kMq1coGHJg=
-X-Google-Smtp-Source: AGHT+IGxZyGzG0jvmNQ4ewG7UzcAp3hQC312ZJdOYdHrBTypjKckzf6MmQlGUmP6AUsp7l3GaJ6Igw==
-X-Received: by 2002:a17:907:c086:b0:a6f:6389:4aba with SMTP id
- a640c23a62f3a-a6f63894c9cmr1099538566b.3.1718708080320; 
- Tue, 18 Jun 2024 03:54:40 -0700 (PDT)
-Received: from [192.168.69.100] ([176.187.212.55])
+ d=1e100.net; s=20230601; t=1718710041; x=1719314841;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=RENz7JQaP3Z2DOpOHwzXYz8SHC4pTV+PRNaAMchOSfk=;
+ b=WE0FwBjYy8q3rmAOvkFqdrHWQOkj99Hde7q9EodL/bpSZzzkCTaf+Swio+mNrI0+j1
+ IgKP5CM+wHE3EvMGyz+HwzErDw/f2LMRVfv8fwM0O2So1z68rJzLWQw7tW+oVjt9uh1f
+ vkiTsEKGbkEFOQTtKlmUKvakmqadgyKEUrTypNjQ+PE0kPqo90AQtHyeu8IS5I0GPVTP
+ 1RPA/YIMhSfFoknNQ+uRPujyZA+calEIPAvrtJNALMg6yKopRxcxKi6NC8ZhhKtGIsXK
+ 1eZMUFd80gW+6bpXLeVC7r2rbwRq1KxbnaBJw4idqsuXYsq5b7lPjECQhBMAGGaiEj51
+ ssIw==
+X-Gm-Message-State: AOJu0YxHmRWRO2/F0zNE9VCGvmngonXc3kg72w1+BUN1X5rIc2pELQqJ
+ WTJMYfGcEM6OAJrpDSeMCy59tmPwxA2++/eot2SUEq3e/txMFOQhtYMXnrU9Zcqa0SSlwn39E5t
+ hvvg=
+X-Google-Smtp-Source: AGHT+IGQUR+ItdVrGYzNnFg9ogR/DwQcqbsRLzOvVokKC/gCBXZ6gXTycVfOl9MRlib76ORUT1ThQA==
+X-Received: by 2002:a05:6000:1844:b0:35f:2584:76e9 with SMTP id
+ ffacd0b85a97d-3607a76aa50mr9707645f8f.2.1718710040861; 
+ Tue, 18 Jun 2024 04:27:20 -0700 (PDT)
+Received: from carbon-x1.. ([2a01:e0a:999:a3a0:45f5:4d94:4aa8:def4])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a6f5f1c8d6fsm546611866b.0.2024.06.18.03.54.38
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 18 Jun 2024 03:54:39 -0700 (PDT)
-Message-ID: <dfa19fc2-b049-4856-b118-b7e5cc6a92ae@linaro.org>
-Date: Tue, 18 Jun 2024 12:54:37 +0200
+ ffacd0b85a97d-36077536f78sm13747059f8f.7.2024.06.18.04.27.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 18 Jun 2024 04:27:20 -0700 (PDT)
+From: =?UTF-8?q?Cl=C3=A9ment=20L=C3=A9ger?= <cleger@rivosinc.com>
+To: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Cc: =?UTF-8?q?Cl=C3=A9ment=20L=C3=A9ger?= <cleger@rivosinc.com>,
+ qemu-devel@nongnu.org, Atish Patra <atishp@rivosinc.com>
+Subject: [PATCH v2] target/riscv: fix instructions count handling in icount
+ mode
+Date: Tue, 18 Jun 2024 13:26:45 +0200
+Message-ID: <20240618112649.76683-1-cleger@rivosinc.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/3] hw/dma: Add a trace log for a description loading
- failure
-To: "Fea.Wang" <fea.wang@sifive.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Alistair Francis <alistair@alistair23.me>,
- Peter Maydell <peter.maydell@linaro.org>, Jason Wang <jasowang@redhat.com>,
- "open list:Xilinx Zynq" <qemu-arm@nongnu.org>,
- "Edgar E . Iglesias" <edgar.iglesias@amd.com>,
- Frank Chang <frank.chang@sifive.com>
-References: <20240613013501.426905-1-fea.wang@sifive.com>
- <20240613013501.426905-3-fea.wang@sifive.com>
-Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20240613013501.426905-3-fea.wang@sifive.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::62e;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x62e.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+Received-SPF: pass client-ip=2a00:1450:4864:20::334;
+ envelope-from=cleger@rivosinc.com; helo=mail-wm1-x334.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -103,18 +99,118 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 13/6/24 03:35, Fea.Wang wrote:
-> Due to a description loading failure, adding a trace log makes observing
-> the DMA behavior easy.
-> 
-> Signed-off-by: Fea.Wang <fea.wang@sifive.com>
-> Reviewed-by: Edgar E. Iglesias <edgar.iglesias@amd.com>
-> Reviewed-by: Frank Chang <frank.chang@sifive.com>
-> ---
->   hw/dma/trace-events    | 3 +++
->   hw/dma/xilinx_axidma.c | 3 +++
->   2 files changed, 6 insertions(+)
+When icount is enabled, rather than returning the virtual CPU time, we
+should return the instruction count itself. Add an instructions bool
+parameter to get_ticks() to correctly return icount_get_raw() when
+icount_enabled() == 1 and instruction count is queried. This will modify
+the existing behavior which was returning an instructions count close to
+the number of cycles (CPI ~= 1).
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Signed-off-by: Clément Léger <cleger@rivosinc.com>
+
+---
+
+v2:
+ - Apply checkpatch and fixed missing braces
+
+---
+ target/riscv/csr.c | 30 +++++++++++++++++-------------
+ 1 file changed, 17 insertions(+), 13 deletions(-)
+
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 58ef7079dc..b8915e32a2 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -762,14 +762,18 @@ static RISCVException write_vcsr(CPURISCVState *env, int csrno,
+ }
+ 
+ /* User Timers and Counters */
+-static target_ulong get_ticks(bool shift)
++static target_ulong get_ticks(bool shift, bool instructions)
+ {
+     int64_t val;
+     target_ulong result;
+ 
+ #if !defined(CONFIG_USER_ONLY)
+     if (icount_enabled()) {
+-        val = icount_get();
++        if (instructions) {
++            val = icount_get_raw();
++        } else {
++            val = icount_get();
++        }
+     } else {
+         val = cpu_get_host_ticks();
+     }
+@@ -804,14 +808,14 @@ static RISCVException read_timeh(CPURISCVState *env, int csrno,
+ static RISCVException read_hpmcounter(CPURISCVState *env, int csrno,
+                                       target_ulong *val)
+ {
+-    *val = get_ticks(false);
++    *val = get_ticks(false, (csrno == CSR_INSTRET));
+     return RISCV_EXCP_NONE;
+ }
+ 
+ static RISCVException read_hpmcounterh(CPURISCVState *env, int csrno,
+                                        target_ulong *val)
+ {
+-    *val = get_ticks(true);
++    *val = get_ticks(true, (csrno == CSR_INSTRETH));
+     return RISCV_EXCP_NONE;
+ }
+ 
+@@ -875,11 +879,11 @@ static RISCVException write_mhpmcounter(CPURISCVState *env, int csrno,
+     int ctr_idx = csrno - CSR_MCYCLE;
+     PMUCTRState *counter = &env->pmu_ctrs[ctr_idx];
+     uint64_t mhpmctr_val = val;
++    bool instr = riscv_pmu_ctr_monitor_instructions(env, ctr_idx);
+ 
+     counter->mhpmcounter_val = val;
+-    if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
+-        riscv_pmu_ctr_monitor_instructions(env, ctr_idx)) {
+-        counter->mhpmcounter_prev = get_ticks(false);
++    if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) || instr) {
++        counter->mhpmcounter_prev = get_ticks(false, instr);
+         if (ctr_idx > 2) {
+             if (riscv_cpu_mxl(env) == MXL_RV32) {
+                 mhpmctr_val = mhpmctr_val |
+@@ -902,12 +906,12 @@ static RISCVException write_mhpmcounterh(CPURISCVState *env, int csrno,
+     PMUCTRState *counter = &env->pmu_ctrs[ctr_idx];
+     uint64_t mhpmctr_val = counter->mhpmcounter_val;
+     uint64_t mhpmctrh_val = val;
++    bool instr = riscv_pmu_ctr_monitor_instructions(env, ctr_idx);
+ 
+     counter->mhpmcounterh_val = val;
+     mhpmctr_val = mhpmctr_val | (mhpmctrh_val << 32);
+-    if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
+-        riscv_pmu_ctr_monitor_instructions(env, ctr_idx)) {
+-        counter->mhpmcounterh_prev = get_ticks(true);
++    if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) || instr) {
++        counter->mhpmcounterh_prev = get_ticks(true, instr);
+         if (ctr_idx > 2) {
+             riscv_pmu_setup_timer(env, mhpmctr_val, ctr_idx);
+         }
+@@ -926,6 +930,7 @@ static RISCVException riscv_pmu_read_ctr(CPURISCVState *env, target_ulong *val,
+                                          counter->mhpmcounter_prev;
+     target_ulong ctr_val = upper_half ? counter->mhpmcounterh_val :
+                                         counter->mhpmcounter_val;
++    bool instr = riscv_pmu_ctr_monitor_instructions(env, ctr_idx);
+ 
+     if (get_field(env->mcountinhibit, BIT(ctr_idx))) {
+         /*
+@@ -946,9 +951,8 @@ static RISCVException riscv_pmu_read_ctr(CPURISCVState *env, target_ulong *val,
+      * The kernel computes the perf delta by subtracting the current value from
+      * the value it initialized previously (ctr_val).
+      */
+-    if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
+-        riscv_pmu_ctr_monitor_instructions(env, ctr_idx)) {
+-        *val = get_ticks(upper_half) - ctr_prev + ctr_val;
++    if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) || instr) {
++        *val = get_ticks(upper_half, instr) - ctr_prev + ctr_val;
+     } else {
+         *val = ctr_val;
+     }
+-- 
+2.45.2
 
 
