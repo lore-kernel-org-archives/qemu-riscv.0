@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FFD9C27C53
-	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Jun 2024 09:44:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61866C27C53
+	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Jun 2024 10:13:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sJrrN-0005Y7-T9; Wed, 19 Jun 2024 05:44:09 -0400
+	id 1sJsJJ-0002p6-KR; Wed, 19 Jun 2024 06:13:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1sJrrM-0005Xs-Sc
- for qemu-riscv@nongnu.org; Wed, 19 Jun 2024 05:44:08 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ id 1sJsJH-0002o2-Pe
+ for qemu-riscv@nongnu.org; Wed, 19 Jun 2024 06:13:00 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1sJrrL-0008I8-Am
- for qemu-riscv@nongnu.org; Wed, 19 Jun 2024 05:44:08 -0400
+ id 1sJsJF-0004mi-Sg
+ for qemu-riscv@nongnu.org; Wed, 19 Jun 2024 06:12:59 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1718790246;
+ s=mimecast20190719; t=1718791977;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=M6vw6i1zs4S6dXIulGSdWCYSlKQMxZo7phN6ifKBiWw=;
- b=GQU6yrghaxGtgVwrA6AK23insLL61J/glQY8c0qGANXyYgIq89A94eUtycabwuL1T5BDD/
- xsU2GAokZWTNFmfs04WiyJ3F7eRHK10ElFqfaumYwLuSgJJw4i7EnO12oTNILhI6zAi7Dy
- zDbon7x7hYe4zEauH25oJNfKE6PQY2M=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=yxcEACsROowAyIbQBJWZ0dhTLTQHNsHOEPITA/EhrVs=;
+ b=V6gsh+Iix90Ocix94M1o1M5sA1wdrKbiuEuPpHws6GvZnFz0kXbBO7Mo90yl9UUemaV5qZ
+ R7Al8yH+WmzXZqGeXzW80g/+UwbKTAmTO7LPWzMTMRFGHcugbJW9zMGK9vbCZ0JKcjETn5
+ 8SwOaXez9k0HOh8BkYNj4MCeagA4jI8=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-218-zYv0s8S2ORiSUJvsuzifqA-1; Wed, 19 Jun 2024 05:44:04 -0400
-X-MC-Unique: zYv0s8S2ORiSUJvsuzifqA-1
-Received: by mail-wm1-f72.google.com with SMTP id
- 5b1f17b1804b1-4217b3d2044so49774775e9.0
- for <qemu-riscv@nongnu.org>; Wed, 19 Jun 2024 02:44:04 -0700 (PDT)
+ us-mta-327-aegFPTXeOLmPUzsSC2XEXQ-1; Wed, 19 Jun 2024 06:12:53 -0400
+X-MC-Unique: aegFPTXeOLmPUzsSC2XEXQ-1
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-42476eda16cso3960135e9.2
+ for <qemu-riscv@nongnu.org>; Wed, 19 Jun 2024 03:12:53 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718790243; x=1719395043;
+ d=1e100.net; s=20230601; t=1718791972; x=1719396772;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=M6vw6i1zs4S6dXIulGSdWCYSlKQMxZo7phN6ifKBiWw=;
- b=MbFiQQ9+zzfDLjnTetJjUfLyaqa8x8VNiNMiJC4l1oXQB/+LM9J2Xkiby7amJkm1TT
- F33ksbR5/8GWFWg1PxuFAj7ohAXhQ7TAbcF468cxx6wcz2KWmvoaIxnXOcefI+jdDYGE
- gyLYm0rNICUUV+8tlP1FV8jCdFWRrii0v7BWIDOdyVLtapJs78ko1EtHW9i0q6Dr2Qxf
- GhVQ8CSnyoV0Vsd1lnEFH8gj78ylgtrv5Bf8hYMxEukjTI6KF4MpcOpIu2gNOPogZe5E
- nd1bbs9BQmqOB/CnEVmtma0yW+lU0a24XbbedbNtdumC2PHRhFxN0CDOVR0TWUTppHS1
- lX7Q==
+ bh=yxcEACsROowAyIbQBJWZ0dhTLTQHNsHOEPITA/EhrVs=;
+ b=r4xAZWs+/+qI6DnbsyksPLjKANjICv/r6Ok7oq+d0mQj7qE4CkUEH85/ELnymuXmvV
+ TalF+TBtf1U0HKaoBO01JVPT+JQsmqijWsaateFFe7UywbsmPwEspuHF0/lPJ7Sm/E+T
+ lNbYGIEr1U5cPbokSybGaLq8chWNtst+9+14Z/p7UHlBdSj8E/Tp9s8EEeSabYaASrws
+ fQftMKY47gV9dYKB34YcVN4C56e02gNZQZAVdpSy6hJWP/TAdwaopfTbu1ypTDwPwjCf
+ /yRkAtkUSr3HR2f75E3b1eHYXK47rxQLQvpVlpVjIN9DnVmaiMX3sheffxS199NBPVdW
+ 3wEA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVfEDez3C1x+YVXxiRi3e0lI3yXDanoZf4ny/tZ+c0VgbN6Jr9U7Zgc+VZTdylADMyAJz/WESRDy9VS7u6PdWhNJG+Y/ZE=
-X-Gm-Message-State: AOJu0Yy446JxhTzaocZOUBhBtxfPICI6rfI63kLaMA2Mc/2lbn9ixwvi
- Qz8+7LP7i/03MQWXZYJLQLuWXOt+XDxKulBjB9kEOTNGiE5ws1/kMknv/lnOYCnRX5F284LKlmR
- MWeYlKMN3y2pAH/JeH+wHJ9glRmfR7YTY/AB4ZuLOjdFnxdUTzv/k
-X-Received: by 2002:a5d:4535:0:b0:362:ea80:db0d with SMTP id
- ffacd0b85a97d-363170ec9f8mr1527492f8f.11.1718790243686; 
- Wed, 19 Jun 2024 02:44:03 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IG/izN7Sr9uGGlbFZ+Cw/K+pa4dgmvtXVmSGac/iEvOg63vwHAqza/pczestxedpH1qxhrLsg==
-X-Received: by 2002:a5d:4535:0:b0:362:ea80:db0d with SMTP id
- ffacd0b85a97d-363170ec9f8mr1527463f8f.11.1718790243248; 
- Wed, 19 Jun 2024 02:44:03 -0700 (PDT)
+ AJvYcCUbxDKDcrUG3g3fI5eMPdW8wnpvOqynZMIImL411Dr+Dt6c6aFbPkdYflJCn4KnQHsyLjtKxNWnxoI/pdO2PeJ+DIo2/MQ=
+X-Gm-Message-State: AOJu0YyMbMfDxyRf4cR7cZ3Hmhbpjt9q+RmNhneQaKhePayuJAewJ7Hq
+ UzyHIUXxToonHXSodvQy48SwDEs2b2ip7MygONa+a70uQA9cLY9Nr2wujbRzREuZOxV/o2FzjEa
+ Xr0yG6tw3ya7BMKbK6jqYPW64VCIHkxpYtIqSmDLMlClCiyQNgiZe
+X-Received: by 2002:a05:600c:3587:b0:422:6e65:a4cb with SMTP id
+ 5b1f17b1804b1-4247507865fmr15130895e9.3.1718791972551; 
+ Wed, 19 Jun 2024 03:12:52 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHjBSjMJ2/B3FndbIHKgreaVhYjyIQLl2w9f1caZ/dsb5i8nbfceMaH27XuzHEYtOaWHByyWA==
+X-Received: by 2002:a05:600c:3587:b0:422:6e65:a4cb with SMTP id
+ 5b1f17b1804b1-4247507865fmr15130675e9.3.1718791972222; 
+ Wed, 19 Jun 2024 03:12:52 -0700 (PDT)
 Received: from imammedo.users.ipa.redhat.com (nat-pool-brq-t.redhat.com.
  [213.175.37.10]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-36075104a26sm16684241f8f.97.2024.06.19.02.44.02
+ 5b1f17b1804b1-42307d5b78fsm174578745e9.6.2024.06.19.03.12.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Jun 2024 02:44:02 -0700 (PDT)
-Date: Wed, 19 Jun 2024 11:44:01 +0200
+ Wed, 19 Jun 2024 03:12:51 -0700 (PDT)
+Date: Wed, 19 Jun 2024 12:12:50 +0200
 From: Igor Mammedov <imammedo@redhat.com>
 To: Sunil V L <sunilvl@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org, Paolo
@@ -83,19 +83,19 @@ Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org, Paolo
  <dbarboza@ventanamicro.com>, Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>, Weiwei
  Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: Re: [PATCH v2 10/12] tests/qtest/bios-tables-test: Add empty ACPI
- data files for RISC-V
-Message-ID: <20240619114401.534292f1@imammedo.users.ipa.redhat.com>
-In-Reply-To: <20240524061411.341599-11-sunilvl@ventanamicro.com>
+Subject: Re: [PATCH v2 11/12] tests/qtest/bios-tables-test.c: Enable basic
+ testing for RISC-V
+Message-ID: <20240619121250.38040a20@imammedo.users.ipa.redhat.com>
+In-Reply-To: <20240524061411.341599-12-sunilvl@ventanamicro.com>
 References: <20240524061411.341599-1-sunilvl@ventanamicro.com>
- <20240524061411.341599-11-sunilvl@ventanamicro.com>
+ <20240524061411.341599-12-sunilvl@ventanamicro.com>
 X-Mailer: Claws Mail 4.2.0 (GTK 3.24.42; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=imammedo@redhat.com;
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=imammedo@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -22
 X-Spam_score: -2.3
@@ -120,62 +120,63 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, 24 May 2024 11:44:09 +0530
+On Fri, 24 May 2024 11:44:10 +0530
 Sunil V L <sunilvl@ventanamicro.com> wrote:
 
-> As per process documented (steps 1-3) in bios-tables-test.c, add empty
-> AML data files for RISC-V ACPI tables and add the entries in
-> bios-tables-test-allowed-diff.h.
+> Add basic ACPI table test case for RISC-V.
 > 
 > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-
-Reviewed-by: Igor Mammedov <imammedo@redhat.com>
-
 > ---
->  tests/data/acpi/virt/riscv64/APIC           | 0
->  tests/data/acpi/virt/riscv64/DSDT           | 0
->  tests/data/acpi/virt/riscv64/FACP           | 0
->  tests/data/acpi/virt/riscv64/MCFG           | 0
->  tests/data/acpi/virt/riscv64/RHCT           | 0
->  tests/data/acpi/virt/riscv64/SPCR           | 0
->  tests/qtest/bios-tables-test-allowed-diff.h | 6 ++++++
->  7 files changed, 6 insertions(+)
->  create mode 100644 tests/data/acpi/virt/riscv64/APIC
->  create mode 100644 tests/data/acpi/virt/riscv64/DSDT
->  create mode 100644 tests/data/acpi/virt/riscv64/FACP
->  create mode 100644 tests/data/acpi/virt/riscv64/MCFG
->  create mode 100644 tests/data/acpi/virt/riscv64/RHCT
->  create mode 100644 tests/data/acpi/virt/riscv64/SPCR
+>  tests/qtest/bios-tables-test.c | 27 +++++++++++++++++++++++++++
+>  1 file changed, 27 insertions(+)
 > 
-> diff --git a/tests/data/acpi/virt/riscv64/APIC b/tests/data/acpi/virt/riscv64/APIC
-> new file mode 100644
-> index 0000000000..e69de29bb2
-> diff --git a/tests/data/acpi/virt/riscv64/DSDT b/tests/data/acpi/virt/riscv64/DSDT
-> new file mode 100644
-> index 0000000000..e69de29bb2
-> diff --git a/tests/data/acpi/virt/riscv64/FACP b/tests/data/acpi/virt/riscv64/FACP
-> new file mode 100644
-> index 0000000000..e69de29bb2
-> diff --git a/tests/data/acpi/virt/riscv64/MCFG b/tests/data/acpi/virt/riscv64/MCFG
-> new file mode 100644
-> index 0000000000..e69de29bb2
-> diff --git a/tests/data/acpi/virt/riscv64/RHCT b/tests/data/acpi/virt/riscv64/RHCT
-> new file mode 100644
-> index 0000000000..e69de29bb2
-> diff --git a/tests/data/acpi/virt/riscv64/SPCR b/tests/data/acpi/virt/riscv64/SPCR
-> new file mode 100644
-> index 0000000000..e69de29bb2
-> diff --git a/tests/qtest/bios-tables-test-allowed-diff.h b/tests/qtest/bios-tables-test-allowed-diff.h
-> index dfb8523c8b..d8610c8d72 100644
-> --- a/tests/qtest/bios-tables-test-allowed-diff.h
-> +++ b/tests/qtest/bios-tables-test-allowed-diff.h
-> @@ -1 +1,7 @@
->  /* List of comma-separated changed AML files to ignore */
-> +"tests/data/acpi/virt/riscv64/APIC",
-> +"tests/data/acpi/virt/riscv64/DSDT",
-> +"tests/data/acpi/virt/riscv64/FACP",
-> +"tests/data/acpi/virt/riscv64/MCFG",
-> +"tests/data/acpi/virt/riscv64/RHCT",
-> +"tests/data/acpi/virt/riscv64/SPCR",
+> diff --git a/tests/qtest/bios-tables-test.c b/tests/qtest/bios-tables-test.c
+> index c73174ad00..880435a5fa 100644
+> --- a/tests/qtest/bios-tables-test.c
+> +++ b/tests/qtest/bios-tables-test.c
+> @@ -1935,6 +1935,29 @@ static void test_acpi_microvm_acpi_erst(void)
+>  }
+>  #endif /* CONFIG_POSIX */
+>  
+> +static void test_acpi_riscv64_virt_tcg(void)
+> +{
+> +    ->cd data = {
+> +        .machine = "virt",
+> +        .arch = "riscv64",
+> +        .tcg_only = true,
+> +        .uefi_fl1 = "pc-bios/edk2-riscv-code.fd",
+> +        .uefi_fl2 = "pc-bios/edk2-riscv-vars.fd",
+> +        .ram_start = 0x80000000ULL,
+> +        .scan_len = 128ULL * 1024 * 1024,
+> +    };
+> +
+> +    /*
+> +     * RHCT will have ISA string encoded. To reduce the effort
+> +     * of updating expected AML file for any new default ISA extension,
+> +     * use the profile rva22s64.
+> +     */
+> +    test_acpi_one("-cpu rva22s64 -device virtio-blk-device,drive=hd0 "
+> +                  "-drive file=tests/data/uefi-boot-images/bios-tables-test.riscv64.iso.qcow2,id=hd0",
+
+Can you reuse test_data->cd, instead of specifying disk here? 
+
+> +                  &data);
+> +    free_test_data(&data);
+> +}
+> +
+>  static void test_acpi_aarch64_virt_tcg(void)
+>  {
+>      test_data data = {
+> @@ -2404,6 +2427,10 @@ int main(int argc, char *argv[])
+>                  qtest_add_func("acpi/virt/viot", test_acpi_aarch64_virt_viot);
+>              }
+>          }
+> +    } else if (strcmp(arch, "riscv64") == 0) {
+> +        if (has_tcg && qtest_has_device("virtio-blk-pci")) {
+> +            qtest_add_func("acpi/virt", test_acpi_riscv64_virt_tcg);
+> +        }
+>      }
+>      ret = g_test_run();
+>      boot_sector_cleanup(disk);
 
 
