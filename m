@@ -4,88 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F5A0C27C53
-	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Jun 2024 15:29:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E625C27C53
+	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Jun 2024 15:51:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sJxDm-0005YU-Ke; Wed, 19 Jun 2024 11:27:38 -0400
+	id 1sJxaM-000328-JW; Wed, 19 Jun 2024 11:50:58 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <rkanwal@rivosinc.com>)
- id 1sJxDi-0005UQ-Jv
- for qemu-riscv@nongnu.org; Wed, 19 Jun 2024 11:27:34 -0400
-Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
+ (Exim 4.90_1) (envelope-from <shobhit32t@gmail.com>)
+ id 1sJxaL-0002zn-5d
+ for qemu-riscv@nongnu.org; Wed, 19 Jun 2024 11:50:57 -0400
+Received: from mail-qk1-x72e.google.com ([2607:f8b0:4864:20::72e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <rkanwal@rivosinc.com>)
- id 1sJxDg-0005so-HF
- for qemu-riscv@nongnu.org; Wed, 19 Jun 2024 11:27:34 -0400
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-1f7274a453bso58027945ad.2
- for <qemu-riscv@nongnu.org>; Wed, 19 Jun 2024 08:27:32 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <shobhit32t@gmail.com>)
+ id 1sJxaJ-0001yB-2q
+ for qemu-riscv@nongnu.org; Wed, 19 Jun 2024 11:50:56 -0400
+Received: by mail-qk1-x72e.google.com with SMTP id
+ af79cd13be357-795ca45c54cso362467585a.0
+ for <qemu-riscv@nongnu.org>; Wed, 19 Jun 2024 08:50:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1718810851; x=1719415651;
- darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=a/Haw6h0NMogk0m9baqrbppzlik8qxWnPEs/BFAYo5E=;
- b=dWiLHDaJl1hiasjw6zbvuh5nt+WoRFdcWV1GL5HEhPm+KqbioRbqGzZJ47mCm0HqE6
- PD7VOSOLM5QBJMHpJnuiDCfkibRZJMrGdNO6XQHswBXvmr9irdKDJNHZRO+etjduWA6Y
- eDdZpFOyzrCnglfQymKOmg/KAQqHyolBmovqVO66WsZG6oZfzgOP4cLSbw7OD6pH8wM+
- McXfqqvpIYC86wLwU22un05xfIl6QpVHjfKbYJ7j+CVFrtc7Vr4n+7AKLf4srmaV/ytT
- cj762AISzxVlYvmlSSx48hks1ZCX1W/bqL0Fm7ZunKKlxdOuCYSIu9AYSDw0TgFnhPId
- 9BNg==
+ d=gmail.com; s=20230601; t=1718812254; x=1719417054; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=CXGylIt191ZPjT0pcbv0WtYaap4stpvpraqzUj/hXlU=;
+ b=ExyuXslAErR6ylXHn1/oyn4m0lvLSFlKF8ecaWRS8HmVOufWm9rM1DKmVLIoyh6BxI
+ wTzoxnetL++lynKceJ6ochsC37u0uJzjeEpffmas3QmHMMgHPWY8TNM1mdH2ClvgPS70
+ 3aQD8nohDdai49ODtA5zuJVnUBx/6cfyb9ZHLKHctiDzbz5Eze7zLCYgt1m674fpclk8
+ vKdYAnVUSQK5WGFivEB5Jf+Y255PzSD8ZT3eCWNTIUTa4ofpvDZLFzaWEu5Q7ySy2H22
+ aSj5AO8mM/eoZLT2SFyHs/67UBVXrDa6dvAOBeGEPZcfq9hoe+F5R3jG71LBBWD5s684
+ WK9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718810851; x=1719415651;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=a/Haw6h0NMogk0m9baqrbppzlik8qxWnPEs/BFAYo5E=;
- b=DahzBOkfI5pBQvUSEV2wRlvXS/USZRV6DbTNQjR3IUIE1PCsrU4tvd9Eu9t2BTqpOg
- x3ZV4BWNGKI2lMwSC+xGSLfCMOKPb/vbglvGA/w4WSrpGQq9mBimYlRi868AvdX2YC9/
- vcaHPx112fD53gD74tEIHgSmzDE+F55D/9reuyV+zfzQHJ/DKxNKn8cqKXB21j+qPAQA
- EY1mDvS+onaB3RFWOf2TLlNBzk7xBnrY5DSjnzBAjyREjnLyIjl5nLpOJ3jYscKN1SXk
- DSYZFqOBklJjC75SRJp/LkMuvQG1OxvrIhSgB5rvC401u3a0qb+HuMLSagSSZtMU+FTI
- NYJA==
-X-Gm-Message-State: AOJu0YyGCjxje+6orSa87sAr0XFJbba1UV2Mmv0/FsQXwHPtbJaV0JEK
- CjxEB4+FLfz9ZO8hP/2qTep8ZByu2De0dQ3SIpzUAF1Rc20Ahh8lPPgBGO4hkiz2JplMBC9aRWr
- s
-X-Google-Smtp-Source: AGHT+IGUKaLnKwRXjEJuncigv0CARgVoclQHkRuRVYEsQIXFBvtYetH9P9hyy605UTKKra7ja7K+Cw==
-X-Received: by 2002:a17:902:dad1:b0:1f6:fcd9:5b8d with SMTP id
- d9443c01a7336-1f9aa3ed915mr34381915ad.9.1718810850880; 
- Wed, 19 Jun 2024 08:27:30 -0700 (PDT)
-Received: from localhost.localdomain ([51.52.155.79])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1f9afada50dsm15956865ad.166.2024.06.19.08.27.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Jun 2024 08:27:30 -0700 (PDT)
-From: Rajnesh Kanwal <rkanwal@rivosinc.com>
-To: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-Cc: alistair.francis@wdc.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- atishp@rivosinc.com, apatel@ventanamicro.com, rkanwal@rivosinc.com,
- beeman@rivosinc.com, tech-control-transfer-records@lists.riscv.org,
- jason.chien@sifive.com
-Subject: [PATCH v2 2/6] target/riscv: Add Control Transfer Records CSR
- definitions.
-Date: Wed, 19 Jun 2024 16:27:04 +0100
-Message-Id: <20240619152708.135991-3-rkanwal@rivosinc.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240619152708.135991-1-rkanwal@rivosinc.com>
-References: <20240619152708.135991-1-rkanwal@rivosinc.com>
+ d=1e100.net; s=20230601; t=1718812254; x=1719417054;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=CXGylIt191ZPjT0pcbv0WtYaap4stpvpraqzUj/hXlU=;
+ b=X86x06ld05/MjjdYy1UhFOYmG7XYtwjJmpzQL2C3LCQp5d3YbKIHps4HCmqSuSlKFu
+ yLYKHE5vD53GrgSEKSL0mlHU2MLBw8bUTtCy3GBdcaPTjl7KWOcOnlThEjJuzPE6ygoH
+ 5e20WWuk31qDxGtS+RuTik9l70wKRoUaHEgXRYaNhiKu+XETb67UrFAFpqgpYAMgmtaA
+ 0VddON+6PuxTXNmFmo6aWpLBRFR4OQJNc4YSSwEsNtptSJEs/PqgYcPokk1FY1LJgpin
+ 4AVijkvV8vQIyvaSgmmbRvo20KPEL1wI628ptyXyA7qiTl4MHk1iopS/hYhNseAxlhKK
+ 5/aw==
+X-Gm-Message-State: AOJu0YwmM+O4EiqPwWMSNQ38xlBA7pngfiXOs4hA8RgWkZea4DZ3sNaq
+ dvpRP38VL9Din/rcVvWywLylGF1TE8TEhLOVQdbpb6QQIywAf5PzThKfI9Ge7m5NLFO4mXGEDPx
+ axIZDXMXmlqiDOScTo5Ou2QGoeM0=
+X-Google-Smtp-Source: AGHT+IH3SuRpOYVuQ6+yW3X0NCDhKNl6piQtLiHurq0mYPckRNsDPSv0Pw3l6t3i0Ahz2NBwqICKXEBlNjV36kz0imM=
+X-Received: by 2002:ad4:4f31:0:b0:6b0:7c8d:805d with SMTP id
+ 6a1803df08f44-6b501e0bf5bmr24875856d6.6.1718812253979; Wed, 19 Jun 2024
+ 08:50:53 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
- envelope-from=rkanwal@rivosinc.com; helo=mail-pl1-x62f.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01,
- UPPERCASE_50_75=0.008 autolearn=no autolearn_force=no
+References: <CANnUGEkHqnecxFa63ESQoQRN8RwKWm0AAmQ=4zKe3VkDDYCLXw@mail.gmail.com>
+ <E5CDC0A3-8CC9-9641-9F01-2C4F88EA2767@hxcore.ol>
+In-Reply-To: <E5CDC0A3-8CC9-9641-9F01-2C4F88EA2767@hxcore.ol>
+From: Shobhit <shobhit32t@gmail.com>
+Date: Wed, 19 Jun 2024 21:20:42 +0530
+Message-ID: <CANnUGE=uWzN-g5+vx46bbLdHmKrQ1K9nq9MZ=npE06kovdm5Sw@mail.gmail.com>
+Subject: Re: Is there a way to check values of registers before and after
+ running a program on qemu-system-risc64v?
+To: "hchauhan@ventanamicro.com" <hchauhan@ventanamicro.com>
+Cc: qemu-riscv@nongnu.org
+Content-Type: multipart/alternative; boundary="000000000000d58ee8061b402954"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::72e;
+ envelope-from=shobhit32t@gmail.com; helo=mail-qk1-x72e.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_KAM_HTML_FONT_INVALID=0.01,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,199 +90,182 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The Control Transfer Records (CTR) extension provides a method to
-record a limited branch history in register-accessible internal chip
-storage.
+--000000000000d58ee8061b402954
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-This extension is similar to Arch LBR in x86 and BRBE in ARM.
-The Extension has been stable and the latest release can be found here
-https://github.com/riscv/riscv-control-transfer-records/release
+Thank you for responding, Himanshu.
 
-Signed-off-by: Rajnesh Kanwal <rkanwal@rivosinc.com>
----
- target/riscv/cpu_bits.h | 154 ++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 154 insertions(+)
+Actually I wanted to check the value of registers, in order to verify if I
+am able to correctly load the program to the qemu.
 
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 86e15381c8..71ddccaf1a 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -242,6 +242,17 @@
- #define CSR_SIEH            0x114
- #define CSR_SIPH            0x154
- 
-+/* Machine-Level Control transfer records CSRs */
-+#define CSR_MCTRCTL         0x34e
-+
-+/* Supervisor-Level Control transfer records CSRs */
-+#define CSR_SCTRCTL         0x14e
-+#define CSR_SCTRSTATUS      0x14f
-+#define CSR_SCTRDEPTH       0x15f
-+
-+/* VS-Level Control transfer records CSRs */
-+#define CSR_VSCTRCTL        0x24e
-+
- /* Hpervisor CSRs */
- #define CSR_HSTATUS         0x600
- #define CSR_HEDELEG         0x602
-@@ -339,6 +350,7 @@
- #define SMSTATEEN0_CS       (1ULL << 0)
- #define SMSTATEEN0_FCSR     (1ULL << 1)
- #define SMSTATEEN0_JVT      (1ULL << 2)
-+#define SMSTATEEN0_CTR      (1ULL << 54)
- #define SMSTATEEN0_HSCONTXT (1ULL << 57)
- #define SMSTATEEN0_IMSIC    (1ULL << 58)
- #define SMSTATEEN0_AIA      (1ULL << 59)
-@@ -854,6 +866,148 @@ typedef enum RISCVException {
- #define UMTE_U_PM_INSN      U_PM_INSN
- #define UMTE_MASK     (UMTE_U_PM_ENABLE | MMTE_U_PM_CURRENT | UMTE_U_PM_INSN)
- 
-+/* mctrctl CSR bits. */
-+#define MCTRCTL_U_ENABLE        BIT(0)
-+#define MCTRCTL_S_ENABLE        BIT(1)
-+#define MCTRCTL_M_ENABLE        BIT(2)
-+#define MCTRCTL_RASEMU          BIT(7)
-+#define MCTRCTL_STE             BIT(8)
-+#define MCTRCTL_MTE             BIT(9)
-+#define MCTRCTL_BPFRZ           BIT(11)
-+#define MCTRCTL_LCOFIFRZ        BIT(12)
-+#define MCTRCTL_EXCINH          BIT(33)
-+#define MCTRCTL_INTRINH         BIT(34)
-+#define MCTRCTL_TRETINH         BIT(35)
-+#define MCTRCTL_NTBREN          BIT(36)
-+#define MCTRCTL_TKBRINH         BIT(37)
-+#define MCTRCTL_INDCALL_INH     BIT(40)
-+#define MCTRCTL_DIRCALL_INH     BIT(41)
-+#define MCTRCTL_INDJUMP_INH     BIT(42)
-+#define MCTRCTL_DIRJUMP_INH     BIT(43)
-+#define MCTRCTL_CORSWAP_INH     BIT(44)
-+#define MCTRCTL_RET_INH         BIT(45)
-+#define MCTRCTL_INDOJUMP_INH    BIT(46)
-+#define MCTRCTL_DIROJUMP_INH    BIT(47)
-+
-+#define MCTRCTL_INH_START       32U
-+
-+#define MCTRCTL_MASK (MCTRCTL_M_ENABLE | MCTRCTL_S_ENABLE |       \
-+                      MCTRCTL_U_ENABLE | MCTRCTL_RASEMU |         \
-+                      MCTRCTL_MTE | MCTRCTL_STE |                 \
-+                      MCTRCTL_BPFRZ | MCTRCTL_LCOFIFRZ |          \
-+                      MCTRCTL_EXCINH | MCTRCTL_INTRINH |          \
-+                      MCTRCTL_TRETINH | MCTRCTL_NTBREN |          \
-+                      MCTRCTL_TKBRINH | MCTRCTL_INDCALL_INH |     \
-+                      MCTRCTL_DIRCALL_INH | MCTRCTL_INDJUMP_INH | \
-+                      MCTRCTL_DIRJUMP_INH | MCTRCTL_CORSWAP_INH | \
-+                      MCTRCTL_RET_INH | MCTRCTL_INDOJUMP_INH |    \
-+                      MCTRCTL_DIROJUMP_INH)
-+
-+/* sctrctl CSR bits. */
-+#define SCTRCTL_U_ENABLE          MCTRCTL_U_ENABLE
-+#define SCTRCTL_S_ENABLE          MCTRCTL_S_ENABLE
-+#define SCTRCTL_RASEMU            MCTRCTL_RASEMU
-+#define SCTRCTL_STE               MCTRCTL_STE
-+#define SCTRCTL_BPFRZ             MCTRCTL_BPFRZ
-+#define SCTRCTL_LCOFIFRZ          MCTRCTL_LCOFIFRZ
-+#define SCTRCTL_EXCINH            MCTRCTL_EXCINH
-+#define SCTRCTL_INTRINH           MCTRCTL_INTRINH
-+#define SCTRCTL_TRETINH           MCTRCTL_TRETINH
-+#define SCTRCTL_NTBREN            MCTRCTL_NTBREN
-+#define SCTRCTL_TKBRINH           MCTRCTL_TKBRINH
-+#define SCTRCTL_INDCALL_INH       MCTRCTL_INDCALL_INH
-+#define SCTRCTL_DIRCALL_INH       MCTRCTL_DIRCALL_INH
-+#define SCTRCTL_INDJUMP_INH       MCTRCTL_INDJUMP_INH
-+#define SCTRCTL_DIRJUMP_INH       MCTRCTL_DIRJUMP_INH
-+#define SCTRCTL_CORSWAP_INH       MCTRCTL_CORSWAP_INH
-+#define SCTRCTL_RET_INH           MCTRCTL_RET_INH
-+#define SCTRCTL_INDOJUMP_INH      MCTRCTL_INDOJUMP_INH
-+#define SCTRCTL_DIROJUMP_INH      MCTRCTL_DIROJUMP_INH
-+
-+#define SCTRCTL_MASK (SCTRCTL_S_ENABLE | SCTRCTL_U_ENABLE |       \
-+                      SCTRCTL_RASEMU | SCTRCTL_STE |              \
-+                      SCTRCTL_BPFRZ | SCTRCTL_LCOFIFRZ |          \
-+                      SCTRCTL_EXCINH | SCTRCTL_INTRINH |          \
-+                      SCTRCTL_TRETINH | SCTRCTL_NTBREN |          \
-+                      SCTRCTL_TKBRINH | SCTRCTL_INDCALL_INH |     \
-+                      SCTRCTL_DIRCALL_INH | SCTRCTL_INDJUMP_INH | \
-+                      SCTRCTL_DIRJUMP_INH | SCTRCTL_CORSWAP_INH | \
-+                      SCTRCTL_RET_INH | SCTRCTL_INDOJUMP_INH |    \
-+                      SCTRCTL_DIROJUMP_INH)
-+
-+/* sctrstatus CSR bits. */
-+#define SCTRSTATUS_WRPTR_MASK       0xFF
-+#define SCTRSTATUS_FROZEN           BIT(31)
-+#define SCTRSTATUS_MASK             (SCTRSTATUS_WRPTR_MASK | SCTRSTATUS_FROZEN)
-+
-+/* sctrdepth CSR bits. */
-+#define SCTRDEPTH_MASK              0x7
-+#define SCTRDEPTH_MIN               0U  /* 16 Entries. */
-+#define SCTRDEPTH_MAX               4U  /* 256 Entries. */
-+
-+/* vsctrctl CSR bits. */
-+#define VSCTRCTL_VU_ENABLE         MCTRCTL_U_ENABLE
-+#define VSCTRCTL_VS_ENABLE         MCTRCTL_S_ENABLE
-+#define VSCTRCTL_RASEMU            MCTRCTL_RASEMU
-+#define VSCTRCTL_VSTE              MCTRCTL_STE
-+#define VSCTRCTL_BPFRZ             MCTRCTL_BPFRZ
-+#define VSCTRCTL_LCOFIFRZ          MCTRCTL_LCOFIFRZ
-+#define VSCTRCTL_EXCINH            MCTRCTL_EXCINH
-+#define VSCTRCTL_INTRINH           MCTRCTL_INTRINH
-+#define VSCTRCTL_TRETINH           MCTRCTL_TRETINH
-+#define VSCTRCTL_NTBREN            MCTRCTL_NTBREN
-+#define VSCTRCTL_TKBRINH           MCTRCTL_TKBRINH
-+#define VSCTRCTL_INDCALL_INH       MCTRCTL_INDCALL_INH
-+#define VSCTRCTL_DIRCALL_INH       MCTRCTL_DIRCALL_INH
-+#define VSCTRCTL_INDJUMP_INH       MCTRCTL_INDJUMP_INH
-+#define VSCTRCTL_DIRJUMP_INH       MCTRCTL_DIRJUMP_INH
-+#define VSCTRCTL_CORSWAP_INH       MCTRCTL_CORSWAP_INH
-+#define VSCTRCTL_RET_INH           MCTRCTL_RET_INH
-+#define VSCTRCTL_INDOJUMP_INH      MCTRCTL_INDOJUMP_INH
-+#define VSCTRCTL_DIROJUMP_INH      MCTRCTL_DIROJUMP_INH
-+
-+#define VSCTRCTL_MASK (VSCTRCTL_VS_ENABLE | VSCTRCTL_VU_ENABLE |     \
-+                       VSCTRCTL_RASEMU | VSCTRCTL_VSTE |             \
-+                       VSCTRCTL_BPFRZ | VSCTRCTL_LCOFIFRZ |          \
-+                       VSCTRCTL_EXCINH | VSCTRCTL_INTRINH |          \
-+                       VSCTRCTL_TRETINH | VSCTRCTL_NTBREN |          \
-+                       VSCTRCTL_TKBRINH | VSCTRCTL_INDCALL_INH |     \
-+                       VSCTRCTL_DIRCALL_INH | VSCTRCTL_INDJUMP_INH | \
-+                       VSCTRCTL_DIRJUMP_INH | VSCTRCTL_CORSWAP_INH | \
-+                       VSCTRCTL_RET_INH | VSCTRCTL_INDOJUMP_INH |    \
-+                       VSCTRCTL_DIROJUMP_INH)
-+
-+#define CTR_ENTRIES_FIRST                  0x200
-+#define CTR_ENTRIES_LAST                   0x2ff
-+
-+#define CTRSOURCE_VALID                    BIT(0)
-+#define CTRTARGET_MISP                     BIT(0)
-+
-+#define CTRDATA_TYPE_MASK                   0xF
-+#define CTRDATA_CCV                         BIT(15)
-+#define CTRDATA_CCM_MASK                    0xFFF0000
-+#define CTRDATA_CCE_MASK                    0xF0000000
-+
-+#define CTRDATA_MASK            (CTRDATA_TYPE_MASK | CTRDATA_CCV |  \
-+                                 CTRDATA_CCM_MASK | CTRDATA_CCE_MASK)
-+
-+#define CTRDATA_TYPE_NONE                   0
-+#define CTRDATA_TYPE_EXCEPTION              1
-+#define CTRDATA_TYPE_INTERRUPT              2
-+#define CTRDATA_TYPE_EXCEP_INT_RET          3
-+#define CTRDATA_TYPE_NONTAKEN_BRANCH        4
-+#define CTRDATA_TYPE_TAKEN_BRANCH           5
-+#define CTRDATA_TYPE_RESERVED_0             6
-+#define CTRDATA_TYPE_RESERVED_1             7
-+#define CTRDATA_TYPE_INDIRECT_CALL          8
-+#define CTRDATA_TYPE_DIRECT_CALL            9
-+#define CTRDATA_TYPE_INDIRECT_JUMP          10
-+#define CTRDATA_TYPE_DIRECT_JUMP            11
-+#define CTRDATA_TYPE_CO_ROUTINE_SWAP        12
-+#define CTRDATA_TYPE_RETURN                 13
-+#define CTRDATA_TYPE_OTHER_INDIRECT_JUMP    14
-+#define CTRDATA_TYPE_OTHER_DIRECT_JUMP      15
-+
- /* MISELECT, SISELECT, and VSISELECT bits (AIA) */
- #define ISELECT_IPRIO0                     0x30
- #define ISELECT_IPRIO15                    0x3f
--- 
-2.34.1
+I used the command you recommended.
+Using the "-S -s" command opens the qemu window with a black screen, with
+the word "PAUSED" written in the title bar. After that when I run riscv-gdb
+and do target remote, I get the following lines
 
+>> Remote debugging using :1234
+>> 0x0000000000001000 in ?? ()
+
+And if I try to do run, I get the following error
+
+>> The "remote" target does not support "run".  Try "help target" or
+"continue".
+
+Typing "continue", leads to the terminal printing "Continuing.", followed
+by no blinking cursor (what looks like an infinite loop or pause).
+
+Regards
+Shobhit
+
+On Wed, 19 Jun 2024 at 10:11, hchauhan@ventanamicro.com <
+hchauhan@ventanamicro.com> wrote:
+
+> Hi Shobhit,
+>
+> Add "-S -s=E2=80=9D to qemu command line.
+>
+> riscv64-unknown-linux-gnu-gdb new.elf
+>
+> Then, on GDB command line
+>
+> "target remote :1234"
+>
+> Run: =E2=80=9Cinfo registers=E2=80=9D
+>
+> Regards
+> Himanshu
+>
+> From: qemu-riscv-bounces+hchauhan=3Dventanamicro.com@nongnu.org
+> <qemu-riscv-bounces+hchauhan=3Dventanamicro.com@nongnu.org> on behalf of
+> Shobhit <shobhit32t@gmail.com>
+> Date: Tuesday, 18 June 2024 at 10:20=E2=80=AFPM
+> To: qemu-riscv@nongnu.org <qemu-riscv@nongnu.org>
+> Subject: Is there a way to check values of registers before and after
+> running a program on qemu-system-risc64v?
+>
+> I am trying to run a very basic RISC V assembly program on
+> qemu-system-riscv64, is there a way to check/monitor the value of some
+> particular registers before and after loading the program? I have tried
+> passing -monitor stdio flag to qemu-system-risc64v, but it doesn't give m=
+e
+> the values of registers.
+>
+> This is the program I am running on bare metal risc64v emulator
+>
+> .option norvc
+>
+> .section .text.init
+> .global _start
+>
+> _start:
+>     addi x5, x0, 6
+>
+>     addi x5, x0, 4
+>
+> And I am using ld script to load the program at the location 0x80000000 i=
+n
+> memory.
+>
+> This is the command I am using to start the emulator: qemu-system-riscv64
+> -machine virt -monitor stdio -cpu rv64 -smp 4 -m 128M -bios default new.e=
+lf
+>
+> Here new.elf is the executable elf file created after compiling the above
+> assembly program.
+>
+
+--000000000000d58ee8061b402954
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><div>Thank you for responding, Himanshu.=
+=C2=A0</div><div><br></div><div>Actually I wanted to check the value of reg=
+isters, in order to verify if I am able to correctly load the program to th=
+e qemu.</div><div><br></div><div>I used the command you recommended.=C2=A0<=
+/div><div>Using the &quot;-S -s&quot; command opens the qemu window with a =
+black screen, with the word &quot;PAUSED&quot; written in the title bar. Af=
+ter that when I run riscv-gdb and do target remote, I get the following lin=
+es <br></div><div><br></div><div style=3D"background-color:transparent">&gt=
+;&gt; Remote debugging using :1234<br>&gt;&gt; 0x0000000000001000 in ?? ()<=
+/div><div><br></div><div>And if I try to do run, I get the following error<=
+/div><div><br></div><div>&gt;&gt; The &quot;remote&quot; target does not su=
+pport &quot;run&quot;.=C2=A0 Try &quot;help target&quot; or &quot;continue&=
+quot;.<br></div><div><br></div><div>Typing &quot;continue&quot;, leads to t=
+he terminal printing &quot;Continuing.&quot;, followed by no blinking curso=
+r (what looks like an infinite loop or pause).</div><div><br></div><div>Reg=
+ards</div><div>Shobhit<br></div></div><br><div class=3D"gmail_quote"><div d=
+ir=3D"ltr" class=3D"gmail_attr">On Wed, 19 Jun 2024 at 10:11, <a href=3D"ma=
+ilto:hchauhan@ventanamicro.com">hchauhan@ventanamicro.com</a> &lt;<a href=
+=3D"mailto:hchauhan@ventanamicro.com">hchauhan@ventanamicro.com</a>&gt; wro=
+te:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px =
+0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div><div di=
+r=3D"ltr"><div dir=3D"ltr" style=3D"font-family:Aptos,Arial,Helvetica,sans-=
+serif;font-size:12pt">Hi Shobhit,</div><div dir=3D"ltr" style=3D"font-famil=
+y:Aptos,Arial,Helvetica,sans-serif;font-size:12pt"><br></div><div dir=3D"lt=
+r" style=3D"font-family:Aptos,Arial,Helvetica,sans-serif;font-size:12pt">Ad=
+d &quot;-S -s=E2=80=9D to qemu command line.</div><div dir=3D"ltr" style=3D=
+"font-family:Aptos,Arial,Helvetica,sans-serif;font-size:12pt"><br></div><di=
+v dir=3D"ltr" style=3D"font-family:Aptos,Arial,Helvetica,sans-serif;font-si=
+ze:12pt">riscv64-unknown-linux-gnu-gdb new.elf<br></div><div dir=3D"ltr" st=
+yle=3D"font-family:Aptos,Arial,Helvetica,sans-serif;font-size:12pt"><br></d=
+iv><div dir=3D"ltr" style=3D"font-family:Aptos,Arial,Helvetica,sans-serif;f=
+ont-size:12pt">Then, on GDB command line</div><div dir=3D"ltr" style=3D"fon=
+t-family:Aptos,Arial,Helvetica,sans-serif;font-size:12pt"><br></div><div di=
+r=3D"ltr" style=3D"font-family:Aptos,Arial,Helvetica,sans-serif;font-size:1=
+2pt">&quot;target remote :1234&quot;</div><div dir=3D"ltr" style=3D"font-fa=
+mily:Aptos,Arial,Helvetica,sans-serif;font-size:12pt"><br></div><div dir=3D=
+"ltr" style=3D"font-family:Aptos,Arial,Helvetica,sans-serif;font-size:12pt"=
+>Run: =E2=80=9Cinfo registers=E2=80=9D</div><div dir=3D"ltr" style=3D"font-=
+family:Aptos,Arial,Helvetica,sans-serif;font-size:12pt"><br></div><div dir=
+=3D"ltr" style=3D"font-family:Aptos,Arial,Helvetica,sans-serif;font-size:12=
+pt">Regards</div><div dir=3D"ltr" style=3D"font-family:Aptos,Arial,Helvetic=
+a,sans-serif;font-size:12pt">Himanshu</div><div dir=3D"ltr" style=3D"font-f=
+amily:Aptos,Arial,Helvetica,sans-serif;font-size:12pt"><br></div><div id=3D=
+"m_2803145273736131556ms-outlook-mobile-signature" dir=3D"ltr"></div><div i=
+d=3D"m_2803145273736131556mail-editor-reference-message-container"><div sty=
+le=3D"font-family:Aptos;font-size:12pt;text-align:left;border-width:1pt med=
+ium medium;border-style:solid none none;border-color:rgb(181,196,223) curre=
+ntcolor currentcolor;padding:3pt 0in 0in;color:black"><span style=3D"font-w=
+eight:bold">From: </span> qemu-riscv-bounces+hchauhan=3D<a href=3D"mailto:v=
+entanamicro.com@nongnu.org" target=3D"_blank">ventanamicro.com@nongnu.org</=
+a> &lt;qemu-riscv-bounces+hchauhan=3D<a href=3D"mailto:ventanamicro.com@non=
+gnu.org" target=3D"_blank">ventanamicro.com@nongnu.org</a>&gt; on behalf of=
+ Shobhit &lt;<a href=3D"mailto:shobhit32t@gmail.com" target=3D"_blank">shob=
+hit32t@gmail.com</a>&gt;<br><span style=3D"font-weight:bold">Date: </span> =
+Tuesday, 18 June 2024 at 10:20=E2=80=AFPM<br><span style=3D"font-weight:bol=
+d">To: </span> <a href=3D"mailto:qemu-riscv@nongnu.org" target=3D"_blank">q=
+emu-riscv@nongnu.org</a> &lt;<a href=3D"mailto:qemu-riscv@nongnu.org" targe=
+t=3D"_blank">qemu-riscv@nongnu.org</a>&gt;<br><span style=3D"font-weight:bo=
+ld">Subject: </span> Is there a way to check values of registers before and=
+ after running a program on qemu-system-risc64v?<br><br></div><div id=3D"m_=
+2803145273736131556mail-editor-reference-message-container"><span><div dir=
+=3D"ltr"><p>I am trying to run a very basic RISC V assembly program on=20
+qemu-system-riscv64, is there a way to check/monitor the value of some=20
+particular registers before and after loading the program? I have tried=20
+passing -monitor stdio flag to qemu-system-risc64v, but it doesn&#39;t give=
+=20
+me the values of registers.</p>
+<p>This is the program I am running on bare metal risc64v emulator</p>
+<p>.option norvc<br>
+  <br>
+.section .text.init<br>
+.global _start<br>
+  <br>
+_start:<br>
+=C2=A0=C2=A0=C2=A0 addi x5, x0, 6</p>
+<p>=C2=A0=C2=A0=C2=A0 addi x5, x0, 4</p><div><br></div>
+
+<p>And I am using ld script to load the program at the location 0x80000000 =
+in memory.</p>
+<p>This is the command I am using to start the emulator:=20
+qemu-system-riscv64 -machine virt -monitor stdio -cpu rv64 -smp 4 -m=20
+128M -bios default new.elf</p>
+<p>Here new.elf is the executable elf file created after compiling the abov=
+e assembly program.</p>
+</div>
+</span></div></div></div></div>
+</blockquote></div></div>
+
+--000000000000d58ee8061b402954--
 
