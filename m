@@ -4,77 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47944C27C4F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 18 Jun 2024 16:55:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46461C2BA15
+	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Jun 2024 09:18:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sJc76-0006Nu-Po; Tue, 18 Jun 2024 12:55:20 -0400
+	id 1sJrS1-0005Gb-7G; Wed, 19 Jun 2024 05:17:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sJc75-0006Nd-Ls
- for qemu-riscv@nongnu.org; Tue, 18 Jun 2024 12:55:19 -0400
-Received: from mail-yw1-x1130.google.com ([2607:f8b0:4864:20::1130])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sJc73-0007gA-Eq
- for qemu-riscv@nongnu.org; Tue, 18 Jun 2024 12:55:19 -0400
-Received: by mail-yw1-x1130.google.com with SMTP id
- 00721157ae682-633629c3471so34220907b3.1
- for <qemu-riscv@nongnu.org>; Tue, 18 Jun 2024 09:55:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1718729716; x=1719334516;
- darn=nongnu.org; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Tl/Mj8rNH3nOY3YJIxVCHEsntKc7JBaLQligg3wy17Q=;
- b=VLec/1viZ+UOgxa19SC9CU/4E5zPIj+WuUqp3mWbN94RLFIvM9/bL+rLiNHb7NNLtF
- iA3LIBGtfX5HvQOG67kVCV7TaE5TJMbMMYas2L1y3SIaykIWmeJ4DT2PFG343vksJgqJ
- 7rnice9cQD/lyBkCvdmk/WuIht7Q7eOTlZF22JVZEHpucRTfT9E8Nkm3lvdiYoVtjC7P
- F4EynXW1V7L18zl0pQ0LWwdotQx/4U0BWzcm6diYef90Hrmu/5fjA6zW6X5KAvwg0lbF
- WH2xE1X8L8CNSy/bC2CYRZS1QaovPBM8BCSE/RLTl7hLR1NBLzTvBXK17mlcWvu1uE+4
- 18dQ==
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1sJrRw-0004vI-CZ
+ for qemu-riscv@nongnu.org; Wed, 19 Jun 2024 05:17:52 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1sJrRu-0003w8-IF
+ for qemu-riscv@nongnu.org; Wed, 19 Jun 2024 05:17:52 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1718788668;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=5GC+hv8iinl3emo8lYof8BsSRuYtckLmPNXIswLbt2E=;
+ b=Hd+ZotcYIg0iOBD0W5H015bo6bM8qRxG08UwrjihhYMZIUoG4uk0fiG5ckTr4cN8VdxSUQ
+ w/JB9ZZnZgJEwso/cfywse1GyNK1djD18Zkz/i32x6rCI3ERai7srmd6L2bBQuycxHshEg
+ gcpnz/htL4Zoi/WKs/fIpKapKbMhzRk=
+Received: from mail-lj1-f200.google.com (mail-lj1-f200.google.com
+ [209.85.208.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-287-wkLskl66MJaAWCElmZsgYg-1; Wed, 19 Jun 2024 05:17:47 -0400
+X-MC-Unique: wkLskl66MJaAWCElmZsgYg-1
+Received: by mail-lj1-f200.google.com with SMTP id
+ 38308e7fff4ca-2ea892f8441so45339771fa.1
+ for <qemu-riscv@nongnu.org>; Wed, 19 Jun 2024 02:17:47 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718729716; x=1719334516;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1718788665; x=1719393465;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Tl/Mj8rNH3nOY3YJIxVCHEsntKc7JBaLQligg3wy17Q=;
- b=nSWyrDm+60WJV5vIkU/gGuBWrcp9ee6mUcwekOzl/KVd/+zqiLttR/40cLqS8/OEly
- dGEz77sVJSQbIN1mX3mc9iwN9Rc3LyVviH3QPONlIiD+C+hehwVhsrECrLEf+DGpHBCs
- JaU/DbdoYkOzcYs9qb+5Fs+bvygM3kWE00wPCuQpDczX0oNYaJphBW+FMvbBgYKYHMcR
- 3Jd/YYNNP33a/1tB6YOAWJvFkAJfPQ3QI4Ix80phComyVnDVJixM+dfZM5CM9E+PaSeh
- d+edXcjSJJF0smy72rS3pS7tUaqQ590+mnCPMF3LFrIqHEtbG0qJJqju84MMJKrg8iMA
- PMmA==
-X-Gm-Message-State: AOJu0YzF3KeEh5Afoop41GH1kjFazjTVMvW85pMQ5yN0AQsMiP3xl3zv
- BlIWBm/TZRLNEy1adimCfaXb6OA2DoArDseZt967sPhEZKpdqt+icHtmkM+4yztenV5uwLqUZXA
- v7QUMgI10bzavvgjtK+KUg7IDfZ3NrJtXtE1sgw==
-X-Google-Smtp-Source: AGHT+IGVlRcsBnlClfQmXQALRw7/UvJ5xHs8u9HjNKMPDlRG3L8AiUYxHWwl8Ou/Ouk2mP1rak2UDVQKYhNK4R3ktSE=
-X-Received: by 2002:a81:ae07:0:b0:628:c1f0:d8fd with SMTP id
- 00721157ae682-63a903a43aemr3000147b3.52.1718729715799; Tue, 18 Jun 2024
- 09:55:15 -0700 (PDT)
+ bh=5GC+hv8iinl3emo8lYof8BsSRuYtckLmPNXIswLbt2E=;
+ b=iHBAEiBsMqzO8NHIsF4iMl2hIZJbmCT55fZr4pIJ6pJVm0KRPO5aTv9TaNhHBmYekr
+ kqJXFqHrZ7sjUNzHc1BmTbvTK3Sczp/dBYjPBAQt8TCOxUFy5jYADI+mt8jSenSjqSu/
+ WdqpOwwMgJ00oy7OklZK0fROI1zgTimsKb2KV1+YC9McTxV7je2Xdtn4dgLu8tx8TCCh
+ ECMKmPKQz0KEklV/OgpcMmznitaKWZ+SecZ0iyUox6PjNoh8zSNv13EtIu3KLaYu6XON
+ klh+4KUub+WxLl5EFPSX8NRl8FRE7vVkV5djyhNNdRRIeLpyW5lYoMB6n9QI150QoFkG
+ u4HQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXqdYIWdjsMlFFki15qzwjtJ9m8FLvHEFT6+Z/5nTgYXSnT8XxKsjcFs1HR+RFMctazKJc2I0Cuv5uMdOh/+QmmbxLvT4o=
+X-Gm-Message-State: AOJu0YwZpVnWibYupFUB2A7bp49JoxnAKEk9Hr2srOLLsDh4yXbnvJId
+ fG15PpNWK6mABBlcAiDRnLWqdiJhk9HGGEeRI6ZLMZHx2+2X4mbTTHX5jRw1I6KVzz4pX5P7jMa
+ CnhFajM2nnW0CQMThEySx83yB6B2F2ybUbjqz2S1fVA/P2M5ZB6I4
+X-Received: by 2002:a2e:be93:0:b0:2ec:4096:4bc6 with SMTP id
+ 38308e7fff4ca-2ec40965033mr7105351fa.7.1718788665563; 
+ Wed, 19 Jun 2024 02:17:45 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IE0B5WaLWPRj9oPygysfhHieKtXBUf5T/kk8ziat0RwgGhq3MrYjMUXLan7Cd+S60+vXFl6Cw==
+X-Received: by 2002:a2e:be93:0:b0:2ec:4096:4bc6 with SMTP id
+ 38308e7fff4ca-2ec40965033mr7105201fa.7.1718788665183; 
+ Wed, 19 Jun 2024 02:17:45 -0700 (PDT)
+Received: from imammedo.users.ipa.redhat.com (nat-pool-brq-t.redhat.com.
+ [213.175.37.10]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-42471584311sm31892615e9.0.2024.06.19.02.17.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 19 Jun 2024 02:17:44 -0700 (PDT)
+Date: Wed, 19 Jun 2024 11:17:43 +0200
+From: Igor Mammedov <imammedo@redhat.com>
+To: Sunil V L <sunilvl@ventanamicro.com>
+Cc: Philippe =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org, Paolo
+ Bonzini <pbonzini@redhat.com>, =?UTF-8?B?TWFyYy1BbmRyw6k=?= Lureau
+ <marcandre.lureau@redhat.com>, "Daniel P . =?UTF-8?B?QmVycmFuZ8Op?="
+ <berrange@redhat.com>, Thomas Huth <thuth@redhat.com>, "Michael S .
+ Tsirkin" <mst@redhat.com>, Ani Sinha <anisinha@redhat.com>, Laurent Vivier
+ <lvivier@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>, Alistair Francis
+ <alistair23@gmail.com>, Sia Jee Heng <jeeheng.sia@starfivetech.com>, Haibo1
+ Xu <haibo1.xu@intel.com>, Anup Patel <apatel@ventanamicro.com>, Andrew
+ Jones <ajones@ventanamicro.com>, Daniel Henrique Barboza
+ <dbarboza@ventanamicro.com>, Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>, Weiwei
+ Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: Re: [PATCH v2 06/12] tests/data/acpi/virt: Move ACPI tables under
+ aarch64
+Message-ID: <20240619111743.58930119@imammedo.users.ipa.redhat.com>
+In-Reply-To: <ZlSjzfSj8MwDcJk6@sunil-laptop>
+References: <20240524061411.341599-1-sunilvl@ventanamicro.com>
+ <20240524061411.341599-7-sunilvl@ventanamicro.com>
+ <27cef750-262a-402a-97fe-c4a55700a376@linaro.org>
+ <ZlSjzfSj8MwDcJk6@sunil-laptop>
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.42; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-References: <CANnUGEkHqnecxFa63ESQoQRN8RwKWm0AAmQ=4zKe3VkDDYCLXw@mail.gmail.com>
-In-Reply-To: <CANnUGEkHqnecxFa63ESQoQRN8RwKWm0AAmQ=4zKe3VkDDYCLXw@mail.gmail.com>
-From: Deepak Gupta <debug@rivosinc.com>
-Date: Tue, 18 Jun 2024 09:55:00 -0700
-Message-ID: <CAKC1njTWK0ceAagMErA0Pmnfc0WTeQrZsX=yz_cuWC=UQKdnjg@mail.gmail.com>
-Subject: Re: Is there a way to check values of registers before and after
- running a program on qemu-system-risc64v?
-To: Shobhit <shobhit32t@gmail.com>
-Cc: qemu-riscv@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1130;
- envelope-from=debug@rivosinc.com; helo=mail-yw1-x1130.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=imammedo@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -22
+X-Spam_score: -2.3
+X-Spam_bar: --
+X-Spam_report: (-2.3 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.148,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -90,16 +123,51 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jun 18, 2024 at 9:50=E2=80=AFAM Shobhit <shobhit32t@gmail.com> wrot=
-e:
->
-> I am trying to run a very basic RISC V assembly program on qemu-system-ri=
-scv64, is there a way to check/monitor the value of some particular registe=
-rs before and after loading the program? I have tried passing -monitor stdi=
-o flag to qemu-system-risc64v, but it doesn't give me the values of registe=
-rs.
+On Mon, 27 May 2024 20:46:29 +0530
+Sunil V L <sunilvl@ventanamicro.com> wrote:
 
-Try `-d cpu` option
+> On Mon, May 27, 2024 at 12:12:10PM +0200, Philippe Mathieu-Daud=C3=A9 wro=
+te:
+> > Hi Sunil,
+> >=20
+> > On 24/5/24 08:14, Sunil V L wrote: =20
+> > > Since virt is a common machine name across architectures like ARM64 a=
+nd
+> > > RISC-V, move existing ARM64 ACPI tables under aarch64 folder so that
+> > > RISC-V tables can be added under riscv64 folder in future.
+> > >=20
+> > > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+> > > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> > > ---
+> > >   tests/data/acpi/virt/{ =3D> aarch64}/APIC             | Bin =20
+> >=20
+> > The usual pattern is {target}/{machine}, so instead of:
+> >=20
+> >   microvm/
+> >   pc/
+> >   q35/
+> >   virt/aarch64/
+> >   virt/riscv64/
+> >=20
+> > (which is odd because q35 is the x86 'virt'), I'd rather see:
+> >=20
+> >   x86/microvm/
+> >   x86/pc/
+> >   x86/q35/
+> >   aarch64/virt/
+> >   riscv64/virt/
+> >=20
+> > Anyhow just my 2 cents, up to the ACPI maintainers :)
+> >  =20
+> Hi Phil,
+>=20
+> Your suggestion does make sense to me. Let me wait for feedback from
+> ARM/ACPI maintainers.
 
--Deepak
+I'd prefer  {target}/{machine} hierarchy like Philippe suggests
+
+> Thanks,
+> Sunil
+>=20
+
 
