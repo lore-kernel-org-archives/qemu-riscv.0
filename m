@@ -4,69 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 621FEC27C79
-	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Jun 2024 04:41:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 640BBC27C79
+	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Jun 2024 04:44:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sK9bq-0004nH-BV; Thu, 20 Jun 2024 00:41:18 -0400
+	id 1sK9eq-0005f2-TH; Thu, 20 Jun 2024 00:44:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sK9bj-0004mk-3I
- for qemu-riscv@nongnu.org; Thu, 20 Jun 2024 00:41:12 -0400
-Received: from mail-pf1-x434.google.com ([2607:f8b0:4864:20::434])
+ id 1sK9eo-0005eU-Nk
+ for qemu-riscv@nongnu.org; Thu, 20 Jun 2024 00:44:22 -0400
+Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sK9bh-00084V-Is
- for qemu-riscv@nongnu.org; Thu, 20 Jun 2024 00:41:10 -0400
-Received: by mail-pf1-x434.google.com with SMTP id
- d2e1a72fcca58-6f6a045d476so442246b3a.1
- for <qemu-riscv@nongnu.org>; Wed, 19 Jun 2024 21:41:09 -0700 (PDT)
+ id 1sK9en-0008HJ-6F
+ for qemu-riscv@nongnu.org; Thu, 20 Jun 2024 00:44:22 -0400
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-1f44b594deeso4247395ad.2
+ for <qemu-riscv@nongnu.org>; Wed, 19 Jun 2024 21:44:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718858468; x=1719463268; darn=nongnu.org;
+ d=linaro.org; s=google; t=1718858658; x=1719463458; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=lu8rJ6r7nPMlvNnHFcTtIOCItHTW7QTi8MCBXF9EjL8=;
- b=Bg+nS2CSEeFVLVt27Fecp6boB7j5zp4gqexjlOvH4M3R+oFs3azwbiTTE+axwQthHS
- RTwMmW5avjkSOFFnqwBufrUjuhyDvKsLaAIPtRHYceI4QoLZo3nEplJI4jx6o9eii6yt
- 8fbnW+Ew8dZS5/7ZCgsBHoJv5Hj74pxmIzraGNdwuFH3YsnAH3v19JkIVL9aOVryH0JV
- McGlq3/fxWxgcKUoXmqV2S4gb7eBn58KsFVWLpFNpnCnTJvXrFLvxHdwIrh8rBG5w2bT
- P+RXg2TcWYRuFtsCQrC3Bko6LUoxFyODoeQrFlGqBYKsrn8+Cx5Kbv5+XsQ4bNMShrOP
- sXVw==
+ bh=KZAcnkf7yF9i3TOMOotRM41aD6ReAy02AiCP96c7YeA=;
+ b=hpp8SxPNJCeGksAKR2vJSesBkE9Z070LjJKROkq3ARY7b7pJpDh0oAhNTSV9UH5+d0
+ 7NAOm8ygwTLub4X8yysNiAZAVQeJxosF/Ckn7yv6uGNVjmYjpPlW4wxzF3y5XNJ1TI6h
+ aZuJNqEeFLrqQ/bPgmFFLv67SqNti3SUn7jmZbXe8tjdg3cosK9QVvgvGVb//wkX/FPQ
+ AO+CrB+sCUg/bi6ZtR5Jjah5RJTF7eKXtaTD6cy/KT+mwUKEHV/QUWYdsTEI4fVIQywV
+ v+nUH5HHRkl1qhj936BGDyWFFnd7Ni2+Q8CvsxgMAsZrEOMl/5w1O8CVnkZYG+SlNKfB
+ 2dhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718858468; x=1719463268;
+ d=1e100.net; s=20230601; t=1718858658; x=1719463458;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=lu8rJ6r7nPMlvNnHFcTtIOCItHTW7QTi8MCBXF9EjL8=;
- b=mUiJYcVwiIt/Ng8KZdcq3QdbcG9YGx9y90kkoqduoEiGD8s3jLQbEXU96BTnof+VhV
- vz0OVmm3KJxZAg9MaWH+zkOjCX2OVYpZvCT5jE0Zqk0N+2fPzTJls8MvoVNTIPOf5G7f
- L2ec+wlkXsQpF0joRW0oCLmaaWuzELOOo0VJCDm3wFYm2CXwPe7+pWbVdHdMiSOaePSZ
- NeJOM5upt3+OC1w44HmwGyyW8McvcaML4V7JoSR9ByrMAs4Lx6wgB+tU0hooNIYzEUd3
- 2NsdmYORtx9x2Fk0lr5lOdFpt3lBzeTF2NB9XzdjDKwH96LDyoaah2r+OtQVtKjNv6SJ
- NUDA==
+ bh=KZAcnkf7yF9i3TOMOotRM41aD6ReAy02AiCP96c7YeA=;
+ b=MQaXp7kCNESu5pE2FgMewAEANBWy+qmo25xyNr53JJwwK2G9zre5lCYhyOE09tkNL2
+ sfWfjzp0TtoOZgTc8oDgWD1E7bdXLCQdSnS3mvDGfyyrQKSpKWdfHx5t4GetHtWsaAUv
+ DJOMahQe2VjBKhJhgXRAzEaYFBefpq7z2NWLsGFqFZMwFzHC0RPts9X4DQFIcZzYe6Pe
+ kq/L/LflDegX4SUygEDDMuxWeoYMegrJG2zJaDFailKIkVsGcMHsv6N9WfeCInyMGewq
+ HdokRGvjHufnWDB2oI3NaXIG6huZLeOyAiS9zJvXD8leAKyAEaYglpR9FfZSf5yMKzWh
+ VDzA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVN5/pRnnrPXB6KVq1TnDAL5ymIIq6+GThjAk94zEpCeB/j5CgoDrM71H87Wuhca1FyrkIB4EpOWMIED9Ge576TYJ51edw=
-X-Gm-Message-State: AOJu0Yz0bnwmd3nSNyqfHMmuVlYbsQLFm0bbUDln18+lprMEB4Thspwc
- 9ldQNMeXZmXRhCy9SvMRY9J6proabt+3htC+5kaYpXTn8M3zFfwscyuEP0o6hKmY96tpaDkXpwP
- m
-X-Google-Smtp-Source: AGHT+IE65bXSTGakoVBJGgy+atxig5hzJ0gc2RYqJH8Ou8wkCbZQYbhWY6YNS6boLQnoBjRXGT0Tng==
-X-Received: by 2002:aa7:8c04:0:b0:706:3329:5533 with SMTP id
- d2e1a72fcca58-70633295798mr3831081b3a.24.1718858467840; 
- Wed, 19 Jun 2024 21:41:07 -0700 (PDT)
+ AJvYcCVHf32ARnjz1GiCJkoh+Xa0Tg1uvWPHxwbkR+74uNC22WZZkT8h5gvE7iAN07LVQloMFHAohQBRQLTiilg6Aj8a2hiGRqE=
+X-Gm-Message-State: AOJu0YzY/J1FnhKYw5Bfrhp99P1Sm95ey5xTio44CCxlOTp2uWX7yIJF
+ QVvf/54mEH5EhViSAn2mj2ikPWNYorNymyB8LTOhK7k4xcH11/gxrv+AJ8pwYTo=
+X-Google-Smtp-Source: AGHT+IF/NgvYOeuJ8UpeAxrsAAr7M6Wn/VGZCk3IAlcC9tg4qBxhz8RHhPbxKqB1hOms3K/vcS+4Rg==
+X-Received: by 2002:a17:902:ced0:b0:1f8:6cf8:232d with SMTP id
+ d9443c01a7336-1f9aa3ec4e9mr46294145ad.10.1718858657818; 
+ Wed, 19 Jun 2024 21:44:17 -0700 (PDT)
 Received: from [192.168.0.4] ([71.212.132.216])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-70644fe0d63sm287710b3a.12.2024.06.19.21.41.07
+ d9443c01a7336-1f88fe6a1e8sm62629265ad.288.2024.06.19.21.44.17
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 19 Jun 2024 21:41:07 -0700 (PDT)
-Message-ID: <936bcf68-d080-46dc-bf53-5bcc326fd063@linaro.org>
-Date: Wed, 19 Jun 2024 21:41:05 -0700
+ Wed, 19 Jun 2024 21:44:17 -0700 (PDT)
+Message-ID: <e60e7b66-e04d-4e55-98ad-bf89aa75c68e@linaro.org>
+Date: Wed, 19 Jun 2024 21:44:15 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v4 2/5] target/riscv: rvv: Provide a fast path using
- direct access to host ram for unmasked unit-stride load/store
+Subject: Re: [RFC PATCH v4 5/5] target/riscv: Inline unit-stride ld/st and
+ corresponding functions for performance
 To: Max Chou <max.chou@sifive.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
@@ -75,21 +74,21 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
 References: <20240613175122.1299212-1-max.chou@sifive.com>
- <20240613175122.1299212-3-max.chou@sifive.com>
+ <20240613175122.1299212-6-max.chou@sifive.com>
 Content-Language: en-US
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240613175122.1299212-3-max.chou@sifive.com>
+In-Reply-To: <20240613175122.1299212-6-max.chou@sifive.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::434;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x434.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x633.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -106,27 +105,18 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 6/13/24 10:51, Max Chou wrote:
-> +#define GEN_VEXT_LD_ELEM(NAME, ETYPE, H, LDSUF)                         \
-> +static void NAME##_tlb(CPURISCVState *env, abi_ptr addr,                \
-> +                       uint32_t byte_off, void *vd, uintptr_t retaddr)  \
-> +{                                                                       \
-> +    uint8_t *reg = ((uint8_t *)vd + byte_off);                          \
-> +    ETYPE *cur = ((ETYPE *)reg);                                        \
-> +    *cur = cpu_##LDSUF##_data_ra(env, addr, retaddr);                   \
-> +}                                                                       \
-> +                                                                        \
-> +static void NAME##_host(void *vd, uint32_t byte_off, void *host)        \
-> +{                                                                       \
-> +    ETYPE val = LDSUF##_p(host);                                        \
-> +    uint8_t *reg = (uint8_t *)(vd + byte_off);                          \
-> +    *(ETYPE *)(reg) = val;                                              \
-> +}
+> In the vector unit-stride load/store helper functions. the vext_ldst_us
+> & vext_ldst_whole functions corresponding most of the execution time.
+> Inline the functions can avoid the function call overhead to improve the
+> helper function performance.
+> 
+> Signed-off-by: Max Chou <max.chou@sifive.com>
+> ---
+>   target/riscv/vector_helper.c | 64 +++++++++++++++++++-----------------
+>   1 file changed, 34 insertions(+), 30 deletions(-)
 
-Why are you casting to and from uint8_t* ?
 
-Surely this is cleaner as
-
-     ETYPE *cur = vd + byte_off;
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 
 r~
