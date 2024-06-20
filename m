@@ -4,88 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41A7DC27C79
-	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Jun 2024 06:48:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DC4DC27C79
+	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Jun 2024 07:50:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sKBa5-0002V4-OK; Thu, 20 Jun 2024 02:47:37 -0400
+	id 1sKCZ3-00064F-Pd; Thu, 20 Jun 2024 03:50:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1sKBa4-0002Ui-5r
- for qemu-riscv@nongnu.org; Thu, 20 Jun 2024 02:47:36 -0400
-Received: from mail-qv1-xf2e.google.com ([2607:f8b0:4864:20::f2e])
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1sKCYw-00063j-VC
+ for qemu-riscv@nongnu.org; Thu, 20 Jun 2024 03:50:30 -0400
+Received: from mail-lj1-x22e.google.com ([2a00:1450:4864:20::22e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1sKBa2-0004Jy-Pi
- for qemu-riscv@nongnu.org; Thu, 20 Jun 2024 02:47:35 -0400
-Received: by mail-qv1-xf2e.google.com with SMTP id
- 6a1803df08f44-6ad8243dba8so2935966d6.3
- for <qemu-riscv@nongnu.org>; Wed, 19 Jun 2024 23:47:34 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1sKCYu-0007Is-TQ
+ for qemu-riscv@nongnu.org; Thu, 20 Jun 2024 03:50:30 -0400
+Received: by mail-lj1-x22e.google.com with SMTP id
+ 38308e7fff4ca-2ec3f875e68so6256951fa.0
+ for <qemu-riscv@nongnu.org>; Thu, 20 Jun 2024 00:50:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1718866053; x=1719470853; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=XXZPwB/KCQGzcH47VzVAAPMuBPHuKn5n1lAk8lM+KDo=;
- b=LpVSwcwMNp664QQbV5wDaP7RPtS18XGnGfwZS1MHIRbDSAhf7guKJPqy91rfSK3M/C
- vNg2c5RDVnYMHR2pX2fwBGEY84xVyzQZAN/exO8hP9U4aOwvKit3/xAR03CvJu3SeBSO
- Tpyxmlx4mVq8JjtQ1Y9nAdO99zdKq5Y/0c1BXaoMKrAy2cFt8+qadxhm5w6BsBNu08Rs
- pYfCGkYCxDB1IF3OAhiAh9XCdu8NAumdLnSU5Cu1vg9xTUEcUbAFUdr1lv/9GJdz4b48
- GsuAs6UvtJ1Rp0zWV8JuU2jtRfRyZ+vZFat0lOU+OsuiQXv/wLOoMN8MUtr5ZyHsZSQi
- uh+Q==
+ d=sifive.com; s=google; t=1718869821; x=1719474621; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=qmvkKLFrAnVOzJzAWCPbqsQqK73OL6BibxebFQJ5USQ=;
+ b=ipIvtqXZViCZJWq+TLeaOastw0XEOoA4zTKzD3kvTdYnkWBpr/YVyoNkQ5yvfGH65i
+ 7gqGbDOL2eK1IzBmJ+790KVftPJf5/aI1dJhp21YdRgvCfwx3KMBJJbaPz0GR+xSci9k
+ P1RG+c0e6qPZn9Fwmr0NY1buonlNbLbAXa2ST4oK1mzjylypYcw7MOYRRGGy+nmrEbk6
+ 5AP3oXKHC4OTTPShBEnLHlKRssRToFBYSgIUUglxf2B+J8gKqj9gLswQbvEUxrctInBN
+ lIZ8I0xbEHI6aSkyfwX5cjsUPxnzV9xil1b2rYlkdOMLYUfwXZfVOLxTxTv24n49cZpQ
+ jQ4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718866053; x=1719470853;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=XXZPwB/KCQGzcH47VzVAAPMuBPHuKn5n1lAk8lM+KDo=;
- b=VzaFEPQKfjlvnVXqPT6klwtofK1AOyObQo1SuK5I8zPTUIX0Vui7+642TqEZytTqb5
- MapH+JAAPeVZvmoE5vr9MoyVwDO63gwlJnvjBjYXflUle6an76aOYd1ExAzPmri0agpJ
- CAA/AGaE69wA4rtrMISnt7dU5A2Bd24QTw6iGkdkaWEDC6iyZwYKRLf2xht8fy7K8HDR
- glPLToBdPhcoQa8DfAONDwpMQitrs7zCeTYThBoXaCCidmNO+ypTFk3xqkb9JmnYL4C7
- 0lEA3s13SRLVwlWsGZtfKVtKqVznGMGqeOVsuJgl9Hfl4J+LlvQ2tiSwfNrjAL240G17
- y2TQ==
-X-Gm-Message-State: AOJu0YzXvTLTbPzyBrJp4V/SRQq8I5QYcEEDt7tnhpIJjuoqaOjXBHRG
- 7yBhz9CqToBto8KkhTKu11zcFrX9acR4YdVoRjda6pI7kxcbjIl+2mn3BTeoUANypk0UbfGrb8a
- U
-X-Google-Smtp-Source: AGHT+IGjryhrJtkn68tTwP2D3tYbf6mUBAftzPdslhAA2r+4zgccBimycDAs8kMEBambnXWWk1s8vQ==
-X-Received: by 2002:ad4:5749:0:b0:6b0:8abb:2f29 with SMTP id
- 6a1803df08f44-6b501e9cd38mr68600136d6.44.1718866052910; 
- Wed, 19 Jun 2024 23:47:32 -0700 (PDT)
-Received: from sunil-laptop.dc1.ventanamicro.com ([106.51.83.242])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6b2a5c68ff3sm85144666d6.74.2024.06.19.23.47.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Jun 2024 23:47:32 -0700 (PDT)
-From: Sunil V L <sunilvl@ventanamicro.com>
-To: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Anup Patel <apatel@ventanamicro.com>,
- Andrew Jones <ajones@ventanamicro.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Sunil V L <sunilvl@ventanamicro.com>
-Subject: [PATCH] hw/riscv/virt.c: Make block devices default to virtio
-Date: Thu, 20 Jun 2024 12:17:18 +0530
-Message-Id: <20240620064718.275427-1-sunilvl@ventanamicro.com>
-X-Mailer: git-send-email 2.34.1
+ d=1e100.net; s=20230601; t=1718869821; x=1719474621;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=qmvkKLFrAnVOzJzAWCPbqsQqK73OL6BibxebFQJ5USQ=;
+ b=O6Ldb3gmaIpGpIv8KuwtkbNgBAOvs5gkFFaeoZ0zh+WH/+WYBjCFibZgImfpj0EipW
+ SY+fy72hbguIg+sMriyKZ9QBkqc213pA1HwqHQBJ3QGKvha4rToLPvMGwBLoivZ2/EY8
+ fWVpnkSoul4XrCn5w54nOTCNAMqR8IuiPutM5nElledI18kzihjJ1AvWtpqh4eT6Qf8c
+ lxmo296v60AW1LTZimEuFqxD/drrWqW5IdTJu2BgOTeSS9mTRedaM3u5bk0auIVUCSPr
+ p4ZnZNVA65Mlt2iYkK6zfQfyDIsseUSoI95dG7+4BekW4f77LE46T7/yglM+ZFfcaxTf
+ 0ksg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXVBImgyuUAYUUCaePt/uO2/9du2KYKQ8YVWF4lTLdtNQqStnXSZ2/5pn9/RbgVEYvgHGUhcdN01i5CDD8R6iUARF48Uq8=
+X-Gm-Message-State: AOJu0Yw5g6/6IF2/YdcDgZ24EAkzAPZcV3TykdWlnSCMwffvhHhyLrc+
+ OjE0Z1uAKBa+3nlwG3g5a3eOGY5008ItFHKP0OcHkYdyQvMkXr2MpSeFtHDM5lKfT34GNagqvNZ
+ aGok=
+X-Google-Smtp-Source: AGHT+IF2ixeyspbkIIPLJ9ia+arAnqWVrkUi92D4ejN1yp3VYf+T+RLKoIXi6ADPfjxOPDj/QHQ74Q==
+X-Received: by 2002:a2e:80c9:0:b0:2eb:1ac4:c9cc with SMTP id
+ 38308e7fff4ca-2ec3cfe1c38mr25972341fa.52.1718869821141; 
+ Thu, 20 Jun 2024 00:50:21 -0700 (PDT)
+Received: from mail-lf1-f50.google.com (mail-lf1-f50.google.com.
+ [209.85.167.50]) by smtp.gmail.com with ESMTPSA id
+ 38308e7fff4ca-2ec05c783e3sm21623471fa.77.2024.06.20.00.50.20
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 20 Jun 2024 00:50:20 -0700 (PDT)
+Received: by mail-lf1-f50.google.com with SMTP id
+ 2adb3069b0e04-5295e488248so702422e87.2; 
+ Thu, 20 Jun 2024 00:50:20 -0700 (PDT)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWh3/MBIA/zjH+WDOxLJc0AVLqpjx8Y3d/KJ/2oBsbPIg6zRJoUN2VA5zGaclu9ie0e9KHtixy1Pkft8TvlFQUZMXYBPtg=
+X-Received: by 2002:a05:6512:a92:b0:52c:851a:a0f2 with SMTP id
+ 2adb3069b0e04-52ccaa57aa5mr3171088e87.50.1718869820458; Thu, 20 Jun 2024
+ 00:50:20 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::f2e;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-qv1-xf2e.google.com
+References: <20240613175122.1299212-1-max.chou@sifive.com>
+ <20240613175122.1299212-2-max.chou@sifive.com>
+In-Reply-To: <20240613175122.1299212-2-max.chou@sifive.com>
+From: Frank Chang <frank.chang@sifive.com>
+Date: Thu, 20 Jun 2024 15:50:08 +0800
+X-Gmail-Original-Message-ID: <CANzO1D0MBHREjQgY0D+bWXMu_y=dXoXfGMhsWX-fhFaKRrDELg@mail.gmail.com>
+Message-ID: <CANzO1D0MBHREjQgY0D+bWXMu_y=dXoXfGMhsWX-fhFaKRrDELg@mail.gmail.com>
+Subject: Re: [RFC PATCH v4 1/5] accel/tcg: Avoid unnecessary call overhead
+ from qemu_plugin_vcpu_mem_cb
+To: Max Chou <max.chou@sifive.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Richard Henderson <richard.henderson@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::22e;
+ envelope-from=frank.chang@sifive.com; helo=mail-lj1-x22e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,32 +113,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-RISC-V virt is currently missing default type for block devices. Without
-this being set, proper backend is not created when option like -cdrom
-is used. So, make the virt board's default block device type be
-IF_VIRTIO similar to other architectures.
+Reviewed-by: Frank Chang <frank.chang@sifive.com>
 
-We also need to set no_cdrom to avoid getting a default cdrom device.
-
-Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
----
- hw/riscv/virt.c | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 8675c3a7d1..b0871b7f81 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -1764,6 +1764,8 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
-     mc->init = virt_machine_init;
-     mc->max_cpus = VIRT_CPUS_MAX;
-     mc->default_cpu_type = TYPE_RISCV_CPU_BASE;
-+    mc->block_default_type = IF_VIRTIO;
-+    mc->no_cdrom = 1;
-     mc->pci_allow_0_address = true;
-     mc->possible_cpu_arch_ids = riscv_numa_possible_cpu_arch_ids;
-     mc->cpu_index_to_instance_props = riscv_numa_cpu_index_to_props;
--- 
-2.34.1
-
+Max Chou <max.chou@sifive.com> =E6=96=BC 2024=E5=B9=B46=E6=9C=8814=E6=97=A5=
+ =E9=80=B1=E4=BA=94 =E4=B8=8A=E5=8D=881:52=E5=AF=AB=E9=81=93=EF=BC=9A
+>
+> If there are not any QEMU plugin memory callback functions, checking
+> before calling the qemu_plugin_vcpu_mem_cb function can reduce the
+> function call overhead.
+>
+> Signed-off-by: Max Chou <max.chou@sifive.com>
+> ---
+>  accel/tcg/ldst_common.c.inc | 8 ++++++--
+>  1 file changed, 6 insertions(+), 2 deletions(-)
+>
+> diff --git a/accel/tcg/ldst_common.c.inc b/accel/tcg/ldst_common.c.inc
+> index c82048e377e..87ceb954873 100644
+> --- a/accel/tcg/ldst_common.c.inc
+> +++ b/accel/tcg/ldst_common.c.inc
+> @@ -125,7 +125,9 @@ void helper_st_i128(CPUArchState *env, uint64_t addr,=
+ Int128 val, MemOpIdx oi)
+>
+>  static void plugin_load_cb(CPUArchState *env, abi_ptr addr, MemOpIdx oi)
+>  {
+> -    qemu_plugin_vcpu_mem_cb(env_cpu(env), addr, oi, QEMU_PLUGIN_MEM_R);
+> +    if (cpu_plugin_mem_cbs_enabled(env_cpu(env))) {
+> +        qemu_plugin_vcpu_mem_cb(env_cpu(env), addr, oi, QEMU_PLUGIN_MEM_=
+R);
+> +    }
+>  }
+>
+>  uint8_t cpu_ldb_mmu(CPUArchState *env, abi_ptr addr, MemOpIdx oi, uintpt=
+r_t ra)
+> @@ -188,7 +190,9 @@ Int128 cpu_ld16_mmu(CPUArchState *env, abi_ptr addr,
+>
+>  static void plugin_store_cb(CPUArchState *env, abi_ptr addr, MemOpIdx oi=
+)
+>  {
+> -    qemu_plugin_vcpu_mem_cb(env_cpu(env), addr, oi, QEMU_PLUGIN_MEM_W);
+> +    if (cpu_plugin_mem_cbs_enabled(env_cpu(env))) {
+> +        qemu_plugin_vcpu_mem_cb(env_cpu(env), addr, oi, QEMU_PLUGIN_MEM_=
+W);
+> +    }
+>  }
+>
+>  void cpu_stb_mmu(CPUArchState *env, abi_ptr addr, uint8_t val,
+> --
+> 2.34.1
+>
+>
 
