@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1C6CC27C79
-	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Jun 2024 04:29:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 893D0C2BA18
+	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Jun 2024 04:39:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sK9QM-0001yC-Mr; Thu, 20 Jun 2024 00:29:26 -0400
+	id 1sK9ZS-0003rj-MA; Thu, 20 Jun 2024 00:38:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sK9QL-0001xx-Vx
- for qemu-riscv@nongnu.org; Thu, 20 Jun 2024 00:29:26 -0400
-Received: from mail-oo1-xc2e.google.com ([2607:f8b0:4864:20::c2e])
+ id 1sK9ZN-0003pI-5O
+ for qemu-riscv@nongnu.org; Thu, 20 Jun 2024 00:38:45 -0400
+Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sK9QK-0005p0-0Y
- for qemu-riscv@nongnu.org; Thu, 20 Jun 2024 00:29:25 -0400
-Received: by mail-oo1-xc2e.google.com with SMTP id
- 006d021491bc7-5b97539a4a5so240511eaf.2
- for <qemu-riscv@nongnu.org>; Wed, 19 Jun 2024 21:29:23 -0700 (PDT)
+ id 1sK9ZK-0007YA-CF
+ for qemu-riscv@nongnu.org; Thu, 20 Jun 2024 00:38:44 -0400
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-7046211e455so342070b3a.3
+ for <qemu-riscv@nongnu.org>; Wed, 19 Jun 2024 21:38:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1718857762; x=1719462562; darn=nongnu.org;
+ d=linaro.org; s=google; t=1718858320; x=1719463120; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=w1YdU5qz3XNjiVXUxby189CyNSPwxWQ54YJxbDibKdQ=;
- b=IM8HVbkHG1HiuMNrKuBL6RTDk2Bl+yMj+UUBAMttA6qGqAP9LhJwXvciW5ydySamWh
- i8HvW9bX1PlQn7+88krdA7SC7ORa/lsmK6M65MqK+bG6dLDXUAJs+Hl9vbQXJGHhEmNn
- EaCb9HKiFmRj7m7GWyT21BpZ4/ajOEbHGSY8xZFevvdY0zVXGOh9I5g+0gMieFpYLHPB
- R71g78UoZytCn0QYOqM+9Tt9XREh/fNxr6UgVnFhIZjM+4FmTQPFmR3B+84kOau/Oo4O
- CfhCU7LGMW19CQjOatpIlWLyte8kyPwYIA9xLk0BB4c+zNb/XgvMY3A9oqg8YIwy1eMW
- k3oA==
+ bh=Im8yJA/+Zd1PBYEorHzfG1mN4IAbdyoHRV2y4xjnmjc=;
+ b=P5+R55zycGoz/UJ7xLiBw03RMJE5kcIjgv976wTzx8iixo1NPf9dLAIc1vtuxBTcGW
+ TLf4mANusQpRp4YRxWqHkb27HClX2i61lSg5Mia1DOp+0eCCYWBCUFc6uTD2wVt9dvZc
+ JQEuySpCFJCIbPX4LuLGLjEML9B0TbNWWLikZDUEa3G2hT4ioFw6YB28k0FohDdeyCk2
+ cNUMw5AZXkBLIbCG7QnphrxbLQA75yIsKc5QBSUADxT6yLM+4YaO8oIxQDda0HTUOD6O
+ HKLzfsvVFBPPUKZl9ha2ogyPE9p/j6TopbaB4wTi6/q/h4W3GulwREYAuPsSB77vcA7e
+ 3jfg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718857762; x=1719462562;
+ d=1e100.net; s=20230601; t=1718858320; x=1719463120;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=w1YdU5qz3XNjiVXUxby189CyNSPwxWQ54YJxbDibKdQ=;
- b=SpiPt4c847eeXHbXElShe2qb6UPL7W4AqW/A0rqExfhRWugxss9pbFu7oTx8PGWh27
- rZ+GYuUAu4EplZRW1izikvoUbxJoO6l6GOkVK2bTOUYDSQRKyI6QrPs88/IrnOedb681
- R+yNaXnRgPUt3ZjHz5ldG3hYFxcysYzqSOmp2yfDc1eZxDkQeTSY/Ir+VkELRuIzjXd/
- Hoha7tuV/L/yD2WAyhuOUeMErGgBWC4PytFroyF5v5eaLfs/1thLkd7gUpth/GB9UJb6
- E1x+xP9JrTVfQ+056u7ARYga4Zd6n7KXXoYe/weRZ5Ni1Nah+3XY71ocX9/X1qQab9vX
- cx1Q==
+ bh=Im8yJA/+Zd1PBYEorHzfG1mN4IAbdyoHRV2y4xjnmjc=;
+ b=kVaHoAm1Y3MO3PD/16OfCePIaTQJHUJ0wHBEt4gC2fY24dgI2fRKhhVaecYk7dyBe4
+ bWRs4FM5z1b7N7OSq75BOPG1lfkv/IVBRNsnwvBhOdTxehmwTIDyl/21bFqbr6RAahWb
+ fSAo/q66UCk8XIjnab+N94YsnvFLxdb+tYHE61fT6xpQcaoTcuiDdcWUnaYnKuESXXwO
+ uIzPQ+Z9jTVdKkCet8ypBXwAvFsQ1shLJ23nMNWgnlEP+D7OBIBzICh7/LRgvoa+2H1S
+ WDzE2hgpRRdyzXxN9AhJSGu8GVxD3HCCokhrt8V5xNBeIecCZlDoCTOcDSczbXX4hzvV
+ e0kg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVnA6wTiFuG0MvhGCELsFffqbC2urCzd0gM7BwjfOw7NDdtqylCb9WXWPvsonRzao+7dd86rDCpEFj1mZoIx6Z2JkMKwxw=
-X-Gm-Message-State: AOJu0YxqT1mZn2oEiGJpC0s3dURsowzBR7ag0uLHy0HWOkjhR7QNjXVc
- u0uSi6lKoE/fi4MYLhdEjthMPvR1XNTyqQmxNyUfmsQB7zQUbj3vuieZa3yTiSs=
-X-Google-Smtp-Source: AGHT+IGB39CXclgraf1uS0E9A/+NWGjdHSCXh31tXdnVSp6ogfyuzEONlAQ5J9gRJzth4B5zqiUx/w==
-X-Received: by 2002:a05:6358:6f19:b0:1a1:f9fa:bb8b with SMTP id
- e5c5f4694b2df-1a1fd60c317mr509688755d.20.1718857762283; 
- Wed, 19 Jun 2024 21:29:22 -0700 (PDT)
+ AJvYcCVJhXARLnJkhmlC1LLLCbJhOXeG8JAaxA+gn33diZYfCGeZTEvLFzouJTGS3qJS+X+iT4Jf7kdautw/w5mRzRuP6eQpIUU=
+X-Gm-Message-State: AOJu0YyTC8gBoHHwDKexf7b8/K0CilnakVmqc8CdTroCCvHq5II1mFFs
+ jGt2MfGs5b3VYvTEZFhhZjTLNqXscT9ImT1Vo1VSGg8iQWzDGolLLUXu9l88QOacgQ8EnCG13Wn
+ G
+X-Google-Smtp-Source: AGHT+IESnB1vMyfI+qXvjru1WmnR+bzkfrIo/5KB28nV3sJ6INxVcXusHoI2QgfY56APZMdpbW505A==
+X-Received: by 2002:a62:ee11:0:b0:706:3204:fa4e with SMTP id
+ d2e1a72fcca58-70632050bb2mr3433780b3a.0.1718858320349; 
+ Wed, 19 Jun 2024 21:38:40 -0700 (PDT)
 Received: from [192.168.0.4] ([71.212.132.216])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-6fee3ba4241sm8757009a12.82.2024.06.19.21.29.20
+ d2e1a72fcca58-705ccb6af7fsm11489604b3a.159.2024.06.19.21.38.39
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 19 Jun 2024 21:29:21 -0700 (PDT)
-Message-ID: <4d7d0813-2ba3-416e-9bb9-3f0ef00818f1@linaro.org>
-Date: Wed, 19 Jun 2024 21:29:19 -0700
+ Wed, 19 Jun 2024 21:38:39 -0700 (PDT)
+Message-ID: <acbf0fae-51be-4aa1-ba79-94345ecfbb21@linaro.org>
+Date: Wed, 19 Jun 2024 21:38:38 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v4 2/5] target/riscv: rvv: Provide a fast path using
- direct access to host ram for unmasked unit-stride load/store
+Subject: Re: [RFC PATCH v4 4/5] target/riscv: rvv: Provide group continuous
+ ld/st flow for unit-stride ld/st instructions
 To: Max Chou <max.chou@sifive.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
@@ -74,14 +75,14 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
 References: <20240613175122.1299212-1-max.chou@sifive.com>
- <20240613175122.1299212-3-max.chou@sifive.com>
+ <20240613175122.1299212-5-max.chou@sifive.com>
 Content-Language: en-US
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240613175122.1299212-3-max.chou@sifive.com>
+In-Reply-To: <20240613175122.1299212-5-max.chou@sifive.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c2e;
- envelope-from=richard.henderson@linaro.org; helo=mail-oo1-xc2e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42f;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x42f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -105,105 +106,90 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 6/13/24 10:51, Max Chou wrote:
-> This commit references the sve_ldN_r/sve_stN_r helper functions in ARM
-> target to optimize the vector unmasked unit-stride load/store
-> instructions by following items:
-> 
-> * Get the loose bound of activate elements
-> * Probing pages/resolving host memory address/handling watchpoint at beginning
-> * Provide new interface to direct access host memory
-> 
-> The original element load/store interface is replaced by the new element
-> load/store functions with _tlb & _host postfix that means doing the
-> element load/store through the original softmmu flow and the direct
-> access host memory flow.
+> The vector unmasked unit-stride and whole register load/store
+> instructions will load/store continuous memory. If the endian of both
+> the host and guest architecture are the same, then we can group the
+> element load/store to load/store more data at a time.
 > 
 > Signed-off-by: Max Chou <max.chou@sifive.com>
 > ---
->   target/riscv/insn_trans/trans_rvv.c.inc |   3 +
->   target/riscv/vector_helper.c            | 637 +++++++++++++++++++-----
->   target/riscv/vector_internals.h         |  48 ++
->   3 files changed, 551 insertions(+), 137 deletions(-)
+>   target/riscv/vector_helper.c | 160 +++++++++++++++++++++++++----------
+>   1 file changed, 117 insertions(+), 43 deletions(-)
 > 
-> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-> index 3a3896ba06c..14e10568bd7 100644
-> --- a/target/riscv/insn_trans/trans_rvv.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-> @@ -770,6 +770,7 @@ static bool ld_us_mask_op(DisasContext *s, arg_vlm_v *a, uint8_t eew)
->       /* Mask destination register are always tail-agnostic */
->       data = FIELD_DP32(data, VDATA, VTA, s->cfg_vta_all_1s);
->       data = FIELD_DP32(data, VDATA, VMA, s->vma);
-> +    data = FIELD_DP32(data, VDATA, VM, 1);
->       return ldst_us_trans(a->rd, a->rs1, data, fn, s, false);
->   }
+> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+> index 793337a6f96..cba46ef16a5 100644
+> --- a/target/riscv/vector_helper.c
+> +++ b/target/riscv/vector_helper.c
+> @@ -457,6 +457,69 @@ GEN_VEXT_ST_ELEM(ste_h, uint16_t, H2, stw)
+>   GEN_VEXT_ST_ELEM(ste_w, uint32_t, H4, stl)
+>   GEN_VEXT_ST_ELEM(ste_d, uint64_t, H8, stq)
 >   
-> @@ -787,6 +788,7 @@ static bool st_us_mask_op(DisasContext *s, arg_vsm_v *a, uint8_t eew)
->       /* EMUL = 1, NFIELDS = 1 */
->       data = FIELD_DP32(data, VDATA, LMUL, 0);
->       data = FIELD_DP32(data, VDATA, NF, 1);
-> +    data = FIELD_DP32(data, VDATA, VM, 1);
->       return ldst_us_trans(a->rd, a->rs1, data, fn, s, true);
->   }
->   
-> @@ -1106,6 +1108,7 @@ static bool ldst_whole_trans(uint32_t vd, uint32_t rs1, uint32_t nf,
->       TCGv_i32 desc;
->   
->       uint32_t data = FIELD_DP32(0, VDATA, NF, nf);
-> +    data = FIELD_DP32(data, VDATA, VM, 1);
->       dest = tcg_temp_new_ptr();
->       desc = tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb,
->                                         s->cfg_ptr->vlenb, data));
-
-This is ok, and would warrant a separate patch.
-
-
-> +    if (vm == 0) {
-> +        for (i = vstart; i < evl; ++i) {
-> +            if (vext_elem_mask(v0, i)) {
-> +                reg_idx_last = i;
-> +                if (reg_idx_first < 0) {
-> +                    reg_idx_first = i;
-> +                }
-> +            }
-> +        }
-
-This isn't great, and isn't used for now, since only unmasked unit-stride is handled so 
-far.  I think this first patch should be simpler and *assume* VM is set.
-
-> +/*
-> + * Resolve the guest virtual addresses to info->page[].
-> + * Control the generation of page faults with @fault.  Return false if
-> + * there is no work to do, which can only happen with @fault == FAULT_NO.
-> + */
-> +static bool vext_cont_ldst_pages(CPURISCVState *env, RVVContLdSt *info,
-> +                                 target_ulong addr, bool is_load,
-> +                                 uint32_t desc, uint32_t esz, uintptr_t ra,
-> +                                 bool is_us_whole)
+> +static inline uint32_t
+> +vext_group_ldst_host(CPURISCVState *env, void *vd, uint32_t byte_end,
+> +                     uint32_t byte_offset, void *host, uint32_t esz,
+> +                     bool is_load)
 > +{
-> +    uint32_t vm = vext_vm(desc);
-> +    uint32_t nf = vext_nf(desc);
-> +    bool nofault = (vm == 1 ? false : true);
+> +    uint32_t group_size;
+> +    static vext_ldst_elem_fn_host * const fns[2][4] = {
+> +        /* Store */
+> +        { ste_b_host, ste_h_host, ste_w_host, ste_d_host },
+> +        /* Load */
+> +        { lde_b_host, lde_h_host, lde_w_host, lde_d_host }
+> +    };
+> +    vext_ldst_elem_fn_host *fn;
+> +
+> +    if (byte_offset + 8 < byte_end) {
+> +        group_size = MO_64;
+> +    } else if (byte_offset + 4 < byte_end) {
+> +        group_size = MO_32;
+> +    } else if (byte_offset + 2 < byte_end) {
+> +        group_size = MO_16;
+> +    } else {
+> +        group_size = MO_8;
+> +    }
+> +
+> +    fn = fns[is_load][group_size];
+> +    fn(vd, byte_offset, host + byte_offset);
 
-Why is nofault == "!vm"?
+This is a really bad idea.  The table and indirect call means that none of these will be 
+properly inlined.  Anyway...
 
-Also, it's silly to use ?: with true/false -- use the proper boolean expression in the 
-first place.
+> +
+> +    return 1 << group_size;
+> +}
+> +
+> +static inline void
+> +vext_continus_ldst_tlb(CPURISCVState *env, vext_ldst_elem_fn_tlb *ldst_tlb,
+> +                       void *vd, uint32_t evl, target_ulong addr,
+> +                       uint32_t reg_start, uintptr_t ra, uint32_t esz,
+> +                       bool is_load)
+> +{
+> +    for (; reg_start < evl; reg_start++, addr += esz) {
+> +        ldst_tlb(env, adjust_addr(env, addr), reg_start * esz, vd, ra);
+> +    }
+> +}
+> +
+> +static inline void
+> +vext_continus_ldst_host(CPURISCVState *env, vext_ldst_elem_fn_host *ldst_host,
+> +                        void *vd, uint32_t evl, uint32_t reg_start, void *host,
+> +                        uint32_t esz, bool is_load)
+> +{
+> +#if TARGET_BIG_ENDIAN != HOST_BIG_ENDIAN
+> +    for (; reg_start < evl; reg_start++) {
+> +        uint32_t byte_off = reg_start * esz;
+> +        ldst_host(vd, byte_off, host + byte_off);
+> +    }
+> +#else
+> +    uint32_t group_byte;
+> +    uint32_t byte_start = reg_start * esz;
+> +    uint32_t byte_end = evl * esz;
+> +    while (byte_start < byte_end) {
+> +        group_byte = vext_group_ldst_host(env, vd, byte_end, byte_start, host,
+> +                                          esz, is_load);
+> +        byte_start += group_byte;
+> +    }
 
-That said... faults with RVV must interact with vstart.
-
-I'm not sure what the best code organization is.
-
-Perhaps a subroutine, passed the first and last elements for a single page.
-
-   Update vstart, resolve the page, allowing the exception.
-   If watchpoints, one call to cpu_check_watchpoint for the entire memory range.
-   If ram, iterate through the rest of the page using host accesses; otherwise,
-   iterate through the rest of the page using tlb accesses, making sure vstart
-   is always up-to-date.
-
-The main routine looks for the page_split, invokes the subroutine for the first (and 
-likely only) page.  Special case any split-page element.  Invoke the subroutine for the 
-second page.
+... this is much better handled with memcpy, given that you know endianness matches.
 
 
 r~
