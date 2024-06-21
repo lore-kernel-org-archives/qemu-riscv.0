@@ -4,62 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95175C27C4F
-	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Jun 2024 12:02:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E93D9C27C4F
+	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Jun 2024 12:02:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sKcwA-0004tY-Cb; Fri, 21 Jun 2024 08:00:14 -0400
+	id 1sKcvK-00040s-HS; Fri, 21 Jun 2024 07:59:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1sKcw5-0004hU-I8
- for qemu-riscv@nongnu.org; Fri, 21 Jun 2024 08:00:10 -0400
-Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629])
+ id 1sKcvH-0003zN-Qm
+ for qemu-riscv@nongnu.org; Fri, 21 Jun 2024 07:59:19 -0400
+Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1sKcw2-0003H3-U8
- for qemu-riscv@nongnu.org; Fri, 21 Jun 2024 08:00:09 -0400
-Received: by mail-pl1-x629.google.com with SMTP id
- d9443c01a7336-1f862f7c7edso15792825ad.3
- for <qemu-riscv@nongnu.org>; Fri, 21 Jun 2024 05:00:06 -0700 (PDT)
+ id 1sKcvF-00032h-3R
+ for qemu-riscv@nongnu.org; Fri, 21 Jun 2024 07:59:19 -0400
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-1f9c6e59d34so17082735ad.2
+ for <qemu-riscv@nongnu.org>; Fri, 21 Jun 2024 04:59:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1718971205; x=1719576005; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=WKNi6lq36bv5TWlqb2KOWZ2bg9IA6omKJmFT+eQbeCs=;
- b=kOwE8anCsbRTQsGeqaVoQVNqHm57aWt/ZqfJggutYs9G3dg9+H5oegTw7BghfEAtI6
- euoB1+lYXFN0OWztWqh7XoMAAh6uPD2D4AGPZYMXB/LXuvz4AhnwZ1eVGdAvGH4z/ROX
- JMAaa09r2eXF6S5XD9tIKbeiphS+9yxWhdv0A1W1rPNoKU14YNSMrU1dmPmsHERDYVal
- FMBLAMbDXpJXh7sDlEp+eqZKJ0HDYeTOGqgtfjRxKo95VBrX2vQxEXat2a/KPSeBTjYT
- sj7PfkHN1mnDy+yZCJCdcS1fjicoP1Vm8sDHvdo7t7qwXRFnMvc+DXlla2CbbTdM0toW
- JaSw==
+ d=ventanamicro.com; s=google; t=1718971155; x=1719575955; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=N8SW3M+Jw2WPyFDDnpJOKhkS8a0TIqDczKk8oeBdly0=;
+ b=lXPpEUjK2p8iCh59jvpufPqxhm5Oe3U0vrG8FYArGD22pTVKyf7N9gOFa1EqSs6BcF
+ u/evNPajHiH8uhpdkr0s5kgaGO2kx4KlNRgT/u7lDeDqOJipsWCWgeSkkIu3yMtNTy5Z
+ CJmxO5QgssMue/IUKOtAtetPQK9C+ZGb4KTNuiVAobI2SytQkDwlFRbqIXyZ0TAF5zyA
+ 4HGGhaF4LXdI5WlJHqT5Ww2vCHhDBPky26jH/5efj2mkQ9+EyjKL6O48AtJE6NibKmLs
+ U4kWJqlsvvdWZu37fvMzpODM79YefIZ1+DABDMvMCiuC6h7v63z92MPLL/AWbuUpR7Ht
+ d+VQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718971205; x=1719576005;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=WKNi6lq36bv5TWlqb2KOWZ2bg9IA6omKJmFT+eQbeCs=;
- b=qZt6Q13pDT+MvD5TUa9YREsKTfFunFlfrkepS1N+doaqisTa0lSr+haunCX3RInkfX
- MSFyJDxKBkZkTHc5NJ+8qyhiEX8KGTaka0thXLF75SeOncXlddwXl62yMduiLulREJzV
- +54+6+cErQE7grStmCDGpM3sNaQIspJ7teyPEO+bxZEKgAPHk6mv9z7BOmNNaiJgYqI7
- iDpdARh3pZ2T2kUuB3gY5oxQn0zeRZU/SLazOAwnESkt7fiCgb/WmG85mNNrXztWHhvJ
- 1TcAUsSfzi8rFVkh5FkfNjh8hB64ChiN64dn3OzqktfiXc2Dgl6mH8zeviYmD5BttnPh
- P/ZA==
+ d=1e100.net; s=20230601; t=1718971155; x=1719575955;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=N8SW3M+Jw2WPyFDDnpJOKhkS8a0TIqDczKk8oeBdly0=;
+ b=XaJRn7V8d/POdLOHLsmco6cNOSbhuDqOXbUPrW4+pUb9l8vF715XUTs9MmHnNy3KYS
+ OexHQ9hnpxx9wdUaohZMH7Vvy2dnaaqXFx2HKUBoi8UDwfg0OA9RfhvKjMNTYTVmH26U
+ WDtaXabPhBMA5LNhVY7vYSVHsryD7ufLWKuFmnftcdrNkc3WJtXoInTayB9dp6tWwScv
+ DdT3TKYlge4KGdCAvfcnhB6wDRWink59RUvMb1IEnHJZc5l14hgkBflDv0vXSTK4PHyW
+ f8PEfpHlUdOaV5ZQ93rKHvodh+o2dvApxHqBTLSqI3PEms1Bij2JchKvr8usuyYXgVPA
+ b5iw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUrDX9eFV5jVfPRGYwEih1NW36aBH4wlTopXSwxV/UbTF0xapwaQPOIkENqqOLcRYXMipEtfDjpCqOjzMnbajQMsyhRRNM=
-X-Gm-Message-State: AOJu0Yz+uy/akWgzmQjrIovLo6jZJWh6y7rJJrvIrmIM865d/hiZnMdL
- zkPJd5iCgfIxF9zQuu3gr43i9W2o87NnAnw92WMjQoYbTvtPFe09MSi+7x7x3k8=
-X-Google-Smtp-Source: AGHT+IH365pellRS0pUqxegGyZlDdhjewLfAS68jFKadvcGFoDQ83ah9qJjFsHcfLv9qq7LaQyocOA==
-X-Received: by 2002:a17:902:d487:b0:1f6:7cc9:fb2c with SMTP id
- d9443c01a7336-1f9aa44f803mr93283735ad.49.1718971205498; 
- Fri, 21 Jun 2024 05:00:05 -0700 (PDT)
+ AJvYcCWdzZpXNrNeabla+HODiSfDh8jyjLdllhDi9NNYOtTSLMHTMXf3y8knsr09z/4ZqsmiEHiQkOX9HD+gs3GldQHFG+zZWGU=
+X-Gm-Message-State: AOJu0YwC6GHcjUAo+ygVu5dYqD8EWKZdHNno9NrbdWEfINxhSCgtDZsp
+ kvXoNZ2xpFkBWMKswXdxIKSz1VwrfZNn1kUPJorjxonmVhdoD2GhuDFHBEGozYk=
+X-Google-Smtp-Source: AGHT+IHqR78vaUPf6QAXQCrEfJP0tkk2yCvQoiCUmXOokW2z0YDmsokggwAHHFI9Jn5BnRwDbjCrrQ==
+X-Received: by 2002:a17:902:e54c:b0:1f6:93a0:9a45 with SMTP id
+ d9443c01a7336-1f9aa3ebf85mr102099045ad.36.1718971154864; 
+ Fri, 21 Jun 2024 04:59:14 -0700 (PDT)
 Received: from sunil-pc.Dlink ([106.51.187.237])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1f9ebbb606dsm12422995ad.270.2024.06.21.05.00.00
+ d9443c01a7336-1f9ebbb606dsm12422995ad.270.2024.06.21.04.59.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Jun 2024 05:00:04 -0700 (PDT)
+ Fri, 21 Jun 2024 04:59:14 -0700 (PDT)
 From: Sunil V L <sunilvl@ventanamicro.com>
 To: qemu-devel@nongnu.org,
 	qemu-arm@nongnu.org,
@@ -78,24 +77,21 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>,
  Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Sunil V L <sunilvl@ventanamicro.com>
-Subject: [PATCH v3 09/15] tests/data/acpi/virt: Move ARM64 ACPI tables under
- aarch64/${machine} path
-Date: Fri, 21 Jun 2024 17:29:00 +0530
-Message-Id: <20240621115906.1049832-10-sunilvl@ventanamicro.com>
+Subject: [PATCH v3 00/15] Add support for RISC-V ACPI tests
+Date: Fri, 21 Jun 2024 17:28:51 +0530
+Message-Id: <20240621115906.1049832-1-sunilvl@ventanamicro.com>
 X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20240621115906.1049832-1-sunilvl@ventanamicro.com>
-References: <20240621115906.1049832-1-sunilvl@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pl1-x629.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pl1-x62f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -111,38 +107,214 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Same machine name can be used by different architectures. Hence, create
-aarch64 folder and move all aarch64 related AML files for virt machine
-inside.
+Currently, bios-table-test doesn't support RISC-V. This series enables
+the framework changes required and basic testing. Things like NUMA
+related test cases will be added later.
 
-Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
----
- tests/data/acpi/{ => aarch64}/virt/APIC             | Bin
- .../data/acpi/{ => aarch64}/virt/APIC.acpihmatvirt  | Bin
- tests/data/acpi/{ => aarch64}/virt/APIC.topology    | Bin
- tests/data/acpi/{ => aarch64}/virt/DBG2             | Bin
- tests/data/acpi/{ => aarch64}/virt/DSDT             | Bin
- .../data/acpi/{ => aarch64}/virt/DSDT.acpihmatvirt  | Bin
- tests/data/acpi/{ => aarch64}/virt/DSDT.memhp       | Bin
- tests/data/acpi/{ => aarch64}/virt/DSDT.pxb         | Bin
- tests/data/acpi/{ => aarch64}/virt/DSDT.topology    | Bin
- tests/data/acpi/{ => aarch64}/virt/FACP             | Bin
- tests/data/acpi/{ => aarch64}/virt/GTDT             | Bin
- .../data/acpi/{ => aarch64}/virt/HMAT.acpihmatvirt  | Bin
- tests/data/acpi/{ => aarch64}/virt/IORT             | Bin
- tests/data/acpi/{ => aarch64}/virt/MCFG             | Bin
- tests/data/acpi/{ => aarch64}/virt/NFIT.memhp       | Bin
- tests/data/acpi/{ => aarch64}/virt/PPTT             | Bin
- .../data/acpi/{ => aarch64}/virt/PPTT.acpihmatvirt  | Bin
- tests/data/acpi/{ => aarch64}/virt/PPTT.topology    | Bin
- tests/data/acpi/{ => aarch64}/virt/SLIT.memhp       | Bin
- tests/data/acpi/{ => aarch64}/virt/SPCR             | Bin
- .../data/acpi/{ => aarch64}/virt/SRAT.acpihmatvirt  | Bin
- tests/data/acpi/{ => aarch64}/virt/SRAT.memhp       | Bin
- tests/data/acpi/{ => aarch64}/virt/SRAT.numamem     | Bin
- tests/data/acpi/{ => aarch64}/virt/SSDT.memhp       | Bin
- tests/data/acpi/{ => aarch64}/virt/VIOT             | Bin
- 25 files changed, 0 insertions(+), 0 deletions(-)
+This needs refactoring/renaming of ARM64 and x86 bios table tests.
+Importantly, the test cases now look for the expected AML files under
+tests/data/acpi/${arch}/${machine} path instead of directly under
+tests/data/acpi/${machine}. To keep test cases not to fail because of
+this movement, they are updated to look for both paths first.
+
+As part of this effort, it is found that uefi-test-tools is currently
+broken to build. So, updated its Makefile as well to use python based
+edk2 build script.
+
+The changes are also available at branch
+https://gitlab.com/vlsunil/qemu/-/tree/riscv_bios_table_test_v3
+
+Changes since v2:
+	1) Used ${arch}/${machine} path instead of {machine}/${arch} as
+	   per the feedback.
+	2) Updated x86 AML files and test cases as well to use new path.
+	3) Used data->cd for RISC-V test which internally uses -cdrom
+	   option. This needs a fix in RISC-V virt machine [1]. So,
+	   the patch [1] is a dependency for this series.
+	3) Updated tags.
+
+Changes since v1:
+	1) Addressed feedback from Gerd and Alistair
+	2) Rebased and added tags received
+
+[1]: https://mail.gnu.org/archive/html/qemu-devel/2024-06/msg03683.html
+
+Sunil V L (15):
+  uefi-test-tools/UefiTestToolsPkg: Add RISC-V support
+  uefi-test-tools: Add support for python based build script
+  tests/data/uefi-boot-images: Add RISC-V ISO image
+  qtest: bios-tables-test: Rename aarch64 tests with aarch64 in them
+  tests/qtest/bios-tables-test.c: Add support for arch in path
+  tests/qtest/bios-tables-test.c: Set "arch" for aarch64 tests
+  tests/qtest/bios-tables-test.c: Set "arch" for x86 tests
+  tests/data/acpi: Move x86 ACPI tables under x86/${machine} path
+  tests/data/acpi/virt: Move ARM64 ACPI tables under aarch64/${machine}
+    path
+  meson.build: Add RISC-V to the edk2-target list
+  pc-bios/meson.build: Add support for RISC-V in unpack_edk2_blobs
+  tests/data/acpi/rebuild-expected-aml.sh: Add RISC-V
+  tests/qtest/bios-tables-test: Add empty ACPI data files for RISC-V
+  tests/qtest/bios-tables-test.c: Enable basic testing for RISC-V
+  tests/qtest/bios-tables-test: Add expected ACPI data files for RISC-V
+
+ meson.build                                   |   2 +-
+ pc-bios/meson.build                           |   2 +
+ tests/data/acpi/{ => aarch64}/virt/APIC       | Bin
+ .../acpi/{ => aarch64}/virt/APIC.acpihmatvirt | Bin
+ .../acpi/{ => aarch64}/virt/APIC.topology     | Bin
+ tests/data/acpi/{ => aarch64}/virt/DBG2       | Bin
+ tests/data/acpi/{ => aarch64}/virt/DSDT       | Bin
+ .../acpi/{ => aarch64}/virt/DSDT.acpihmatvirt | Bin
+ tests/data/acpi/{ => aarch64}/virt/DSDT.memhp | Bin
+ tests/data/acpi/{ => aarch64}/virt/DSDT.pxb   | Bin
+ .../acpi/{ => aarch64}/virt/DSDT.topology     | Bin
+ tests/data/acpi/{ => aarch64}/virt/FACP       | Bin
+ tests/data/acpi/{ => aarch64}/virt/GTDT       | Bin
+ .../acpi/{ => aarch64}/virt/HMAT.acpihmatvirt | Bin
+ tests/data/acpi/{ => aarch64}/virt/IORT       | Bin
+ tests/data/acpi/{ => aarch64}/virt/MCFG       | Bin
+ tests/data/acpi/{ => aarch64}/virt/NFIT.memhp | Bin
+ tests/data/acpi/{ => aarch64}/virt/PPTT       | Bin
+ .../acpi/{ => aarch64}/virt/PPTT.acpihmatvirt | Bin
+ .../acpi/{ => aarch64}/virt/PPTT.topology     | Bin
+ .../data/acpi/{pc => aarch64/virt}/SLIT.memhp | Bin
+ tests/data/acpi/{ => aarch64}/virt/SPCR       | Bin
+ .../acpi/{ => aarch64}/virt/SRAT.acpihmatvirt | Bin
+ tests/data/acpi/{ => aarch64}/virt/SRAT.memhp | Bin
+ .../data/acpi/{ => aarch64}/virt/SRAT.numamem | Bin
+ tests/data/acpi/{ => aarch64}/virt/SSDT.memhp | Bin
+ tests/data/acpi/{ => aarch64}/virt/VIOT       | Bin
+ tests/data/acpi/rebuild-expected-aml.sh       |   5 +-
+ tests/data/acpi/riscv64/virt/APIC             | Bin 0 -> 116 bytes
+ .../{microvm/DSDT.pcie => riscv64/virt/DSDT}  | Bin 3023 -> 3518 bytes
+ tests/data/acpi/riscv64/virt/FACP             | Bin 0 -> 276 bytes
+ tests/data/acpi/riscv64/virt/MCFG             | Bin 0 -> 60 bytes
+ tests/data/acpi/riscv64/virt/RHCT             | Bin 0 -> 314 bytes
+ tests/data/acpi/riscv64/virt/SPCR             | Bin 0 -> 80 bytes
+ tests/data/acpi/{ => x86}/microvm/APIC        | Bin
+ .../data/acpi/{ => x86}/microvm/APIC.ioapic2  | Bin
+ tests/data/acpi/{ => x86}/microvm/APIC.pcie   | Bin
+ tests/data/acpi/{ => x86}/microvm/DSDT        | Bin
+ .../data/acpi/{ => x86}/microvm/DSDT.ioapic2  | Bin
+ tests/data/acpi/{ => x86}/microvm/DSDT.pcie   | Bin
+ tests/data/acpi/{ => x86}/microvm/DSDT.rtc    | Bin
+ tests/data/acpi/{ => x86}/microvm/DSDT.usb    | Bin
+ tests/data/acpi/{ => x86}/microvm/ERST.pcie   | Bin
+ tests/data/acpi/{ => x86}/microvm/FACP        | Bin
+ tests/data/acpi/{ => x86}/pc/APIC             | Bin
+ tests/data/acpi/{ => x86}/pc/APIC.acpihmat    | Bin
+ tests/data/acpi/{ => x86}/pc/APIC.cphp        | Bin
+ tests/data/acpi/{ => x86}/pc/APIC.dimmpxm     | Bin
+ tests/data/acpi/{ => x86}/pc/DSDT             | Bin
+ tests/data/acpi/{ => x86}/pc/DSDT.acpierst    | Bin
+ tests/data/acpi/{ => x86}/pc/DSDT.acpihmat    | Bin
+ tests/data/acpi/{ => x86}/pc/DSDT.bridge      | Bin
+ tests/data/acpi/{ => x86}/pc/DSDT.cphp        | Bin
+ tests/data/acpi/{ => x86}/pc/DSDT.dimmpxm     | Bin
+ tests/data/acpi/{ => x86}/pc/DSDT.hpbridge    | Bin
+ tests/data/acpi/{ => x86}/pc/DSDT.hpbrroot    | Bin
+ tests/data/acpi/{ => x86}/pc/DSDT.ipmikcs     | Bin
+ tests/data/acpi/{ => x86}/pc/DSDT.memhp       | Bin
+ tests/data/acpi/{ => x86}/pc/DSDT.nohpet      | Bin
+ tests/data/acpi/{ => x86}/pc/DSDT.numamem     | Bin
+ tests/data/acpi/{ => x86}/pc/DSDT.roothp      | Bin
+ tests/data/acpi/{ => x86}/pc/ERST.acpierst    | Bin
+ tests/data/acpi/{ => x86}/pc/FACP             | Bin
+ tests/data/acpi/{ => x86}/pc/FACP.nosmm       | Bin
+ tests/data/acpi/{ => x86}/pc/FACS             | Bin
+ tests/data/acpi/{ => x86}/pc/HMAT.acpihmat    | Bin
+ tests/data/acpi/{ => x86}/pc/HPET             | Bin
+ tests/data/acpi/{ => x86}/pc/NFIT.dimmpxm     | Bin
+ tests/data/acpi/{ => x86}/pc/SLIT.cphp        | Bin
+ tests/data/acpi/{q35 => x86/pc}/SLIT.memhp    | Bin
+ tests/data/acpi/{ => x86}/pc/SRAT.acpihmat    | Bin
+ tests/data/acpi/{ => x86}/pc/SRAT.cphp        | Bin
+ tests/data/acpi/{ => x86}/pc/SRAT.dimmpxm     | Bin
+ tests/data/acpi/{ => x86}/pc/SRAT.memhp       | Bin
+ tests/data/acpi/{ => x86}/pc/SRAT.numamem     | Bin
+ tests/data/acpi/{ => x86}/pc/SSDT.dimmpxm     | Bin
+ tests/data/acpi/{ => x86}/pc/WAET             | Bin
+ tests/data/acpi/{ => x86}/q35/APIC            | Bin
+ tests/data/acpi/{ => x86}/q35/APIC.acpihmat   | Bin
+ .../{ => x86}/q35/APIC.acpihmat-noinitiator   | Bin
+ tests/data/acpi/{ => x86}/q35/APIC.core-count | Bin
+ .../data/acpi/{ => x86}/q35/APIC.core-count2  | Bin
+ tests/data/acpi/{ => x86}/q35/APIC.cphp       | Bin
+ tests/data/acpi/{ => x86}/q35/APIC.dimmpxm    | Bin
+ .../data/acpi/{ => x86}/q35/APIC.thread-count | Bin
+ .../acpi/{ => x86}/q35/APIC.thread-count2     | Bin
+ .../data/acpi/{ => x86}/q35/APIC.type4-count  | Bin
+ tests/data/acpi/{ => x86}/q35/APIC.xapic      | Bin
+ tests/data/acpi/{ => x86}/q35/CEDT.cxl        | Bin
+ tests/data/acpi/{ => x86}/q35/DMAR.dmar       | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT            | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.acpierst   | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.acpihmat   | Bin
+ .../{ => x86}/q35/DSDT.acpihmat-noinitiator   | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.applesmc   | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.bridge     | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.core-count | Bin
+ .../data/acpi/{ => x86}/q35/DSDT.core-count2  | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.cphp       | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.cxl        | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.dimmpxm    | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.ipmibt     | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.ipmismbus  | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.ivrs       | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.memhp      | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.mmio64     | Bin
+ .../data/acpi/{ => x86}/q35/DSDT.multi-bridge | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.noacpihp   | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.nohpet     | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.numamem    | Bin
+ .../data/acpi/{ => x86}/q35/DSDT.pvpanic-isa  | Bin
+ .../data/acpi/{ => x86}/q35/DSDT.thread-count | Bin
+ .../acpi/{ => x86}/q35/DSDT.thread-count2     | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.tis.tpm12  | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.tis.tpm2   | Bin
+ .../data/acpi/{ => x86}/q35/DSDT.type4-count  | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.viot       | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.xapic      | Bin
+ tests/data/acpi/{ => x86}/q35/ERST.acpierst   | Bin
+ tests/data/acpi/{ => x86}/q35/FACP            | Bin
+ tests/data/acpi/{ => x86}/q35/FACP.core-count | Bin
+ .../data/acpi/{ => x86}/q35/FACP.core-count2  | Bin
+ tests/data/acpi/{ => x86}/q35/FACP.nosmm      | Bin
+ tests/data/acpi/{ => x86}/q35/FACP.slic       | Bin
+ .../data/acpi/{ => x86}/q35/FACP.thread-count | Bin
+ .../acpi/{ => x86}/q35/FACP.thread-count2     | Bin
+ .../data/acpi/{ => x86}/q35/FACP.type4-count  | Bin
+ tests/data/acpi/{ => x86}/q35/FACP.xapic      | Bin
+ tests/data/acpi/{ => x86}/q35/FACS            | Bin
+ tests/data/acpi/{ => x86}/q35/HMAT.acpihmat   | Bin
+ .../{ => x86}/q35/HMAT.acpihmat-noinitiator   | Bin
+ tests/data/acpi/{ => x86}/q35/HPET            | Bin
+ tests/data/acpi/{ => x86}/q35/IVRS.ivrs       | Bin
+ tests/data/acpi/{ => x86}/q35/MCFG            | Bin
+ tests/data/acpi/{ => x86}/q35/NFIT.dimmpxm    | Bin
+ tests/data/acpi/{ => x86}/q35/SLIC.slic       | Bin
+ tests/data/acpi/{ => x86}/q35/SLIT.cphp       | Bin
+ tests/data/acpi/{virt => x86/q35}/SLIT.memhp  | Bin
+ tests/data/acpi/{ => x86}/q35/SRAT.acpihmat   | Bin
+ .../{ => x86}/q35/SRAT.acpihmat-noinitiator   | Bin
+ tests/data/acpi/{ => x86}/q35/SRAT.cphp       | Bin
+ tests/data/acpi/{ => x86}/q35/SRAT.dimmpxm    | Bin
+ tests/data/acpi/{ => x86}/q35/SRAT.memhp      | Bin
+ tests/data/acpi/{ => x86}/q35/SRAT.mmio64     | Bin
+ tests/data/acpi/{ => x86}/q35/SRAT.numamem    | Bin
+ tests/data/acpi/{ => x86}/q35/SRAT.xapic      | Bin
+ tests/data/acpi/{ => x86}/q35/SSDT.dimmpxm    | Bin
+ tests/data/acpi/{ => x86}/q35/TCPA.tis.tpm12  | Bin
+ tests/data/acpi/{ => x86}/q35/TPM2.tis.tpm2   | Bin
+ tests/data/acpi/{ => x86}/q35/VIOT.viot       | Bin
+ tests/data/acpi/{ => x86}/q35/WAET            | Bin
+ .../bios-tables-test.riscv64.iso.qcow2        | Bin 0 -> 16896 bytes
+ tests/qtest/bios-tables-test.c                | 169 ++++++++++++++----
+ tests/qtest/meson.build                       |   3 +
+ tests/uefi-test-tools/Makefile                |  19 +-
+ .../UefiTestToolsPkg/UefiTestToolsPkg.dsc     |   6 +-
+ tests/uefi-test-tools/uefi-test-build.config  |  52 ++++++
+ 157 files changed, 210 insertions(+), 48 deletions(-)
  rename tests/data/acpi/{ => aarch64}/virt/APIC (100%)
  rename tests/data/acpi/{ => aarch64}/virt/APIC.acpihmatvirt (100%)
  rename tests/data/acpi/{ => aarch64}/virt/APIC.topology (100%)
@@ -161,114 +333,139 @@ Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
  rename tests/data/acpi/{ => aarch64}/virt/PPTT (100%)
  rename tests/data/acpi/{ => aarch64}/virt/PPTT.acpihmatvirt (100%)
  rename tests/data/acpi/{ => aarch64}/virt/PPTT.topology (100%)
- rename tests/data/acpi/{ => aarch64}/virt/SLIT.memhp (100%)
+ rename tests/data/acpi/{pc => aarch64/virt}/SLIT.memhp (100%)
  rename tests/data/acpi/{ => aarch64}/virt/SPCR (100%)
  rename tests/data/acpi/{ => aarch64}/virt/SRAT.acpihmatvirt (100%)
  rename tests/data/acpi/{ => aarch64}/virt/SRAT.memhp (100%)
  rename tests/data/acpi/{ => aarch64}/virt/SRAT.numamem (100%)
  rename tests/data/acpi/{ => aarch64}/virt/SSDT.memhp (100%)
  rename tests/data/acpi/{ => aarch64}/virt/VIOT (100%)
+ create mode 100644 tests/data/acpi/riscv64/virt/APIC
+ copy tests/data/acpi/{microvm/DSDT.pcie => riscv64/virt/DSDT} (62%)
+ create mode 100644 tests/data/acpi/riscv64/virt/FACP
+ create mode 100644 tests/data/acpi/riscv64/virt/MCFG
+ create mode 100644 tests/data/acpi/riscv64/virt/RHCT
+ create mode 100644 tests/data/acpi/riscv64/virt/SPCR
+ rename tests/data/acpi/{ => x86}/microvm/APIC (100%)
+ rename tests/data/acpi/{ => x86}/microvm/APIC.ioapic2 (100%)
+ rename tests/data/acpi/{ => x86}/microvm/APIC.pcie (100%)
+ rename tests/data/acpi/{ => x86}/microvm/DSDT (100%)
+ rename tests/data/acpi/{ => x86}/microvm/DSDT.ioapic2 (100%)
+ rename tests/data/acpi/{ => x86}/microvm/DSDT.pcie (100%)
+ rename tests/data/acpi/{ => x86}/microvm/DSDT.rtc (100%)
+ rename tests/data/acpi/{ => x86}/microvm/DSDT.usb (100%)
+ rename tests/data/acpi/{ => x86}/microvm/ERST.pcie (100%)
+ rename tests/data/acpi/{ => x86}/microvm/FACP (100%)
+ rename tests/data/acpi/{ => x86}/pc/APIC (100%)
+ rename tests/data/acpi/{ => x86}/pc/APIC.acpihmat (100%)
+ rename tests/data/acpi/{ => x86}/pc/APIC.cphp (100%)
+ rename tests/data/acpi/{ => x86}/pc/APIC.dimmpxm (100%)
+ rename tests/data/acpi/{ => x86}/pc/DSDT (100%)
+ rename tests/data/acpi/{ => x86}/pc/DSDT.acpierst (100%)
+ rename tests/data/acpi/{ => x86}/pc/DSDT.acpihmat (100%)
+ rename tests/data/acpi/{ => x86}/pc/DSDT.bridge (100%)
+ rename tests/data/acpi/{ => x86}/pc/DSDT.cphp (100%)
+ rename tests/data/acpi/{ => x86}/pc/DSDT.dimmpxm (100%)
+ rename tests/data/acpi/{ => x86}/pc/DSDT.hpbridge (100%)
+ rename tests/data/acpi/{ => x86}/pc/DSDT.hpbrroot (100%)
+ rename tests/data/acpi/{ => x86}/pc/DSDT.ipmikcs (100%)
+ rename tests/data/acpi/{ => x86}/pc/DSDT.memhp (100%)
+ rename tests/data/acpi/{ => x86}/pc/DSDT.nohpet (100%)
+ rename tests/data/acpi/{ => x86}/pc/DSDT.numamem (100%)
+ rename tests/data/acpi/{ => x86}/pc/DSDT.roothp (100%)
+ rename tests/data/acpi/{ => x86}/pc/ERST.acpierst (100%)
+ rename tests/data/acpi/{ => x86}/pc/FACP (100%)
+ rename tests/data/acpi/{ => x86}/pc/FACP.nosmm (100%)
+ rename tests/data/acpi/{ => x86}/pc/FACS (100%)
+ rename tests/data/acpi/{ => x86}/pc/HMAT.acpihmat (100%)
+ rename tests/data/acpi/{ => x86}/pc/HPET (100%)
+ rename tests/data/acpi/{ => x86}/pc/NFIT.dimmpxm (100%)
+ rename tests/data/acpi/{ => x86}/pc/SLIT.cphp (100%)
+ rename tests/data/acpi/{q35 => x86/pc}/SLIT.memhp (100%)
+ rename tests/data/acpi/{ => x86}/pc/SRAT.acpihmat (100%)
+ rename tests/data/acpi/{ => x86}/pc/SRAT.cphp (100%)
+ rename tests/data/acpi/{ => x86}/pc/SRAT.dimmpxm (100%)
+ rename tests/data/acpi/{ => x86}/pc/SRAT.memhp (100%)
+ rename tests/data/acpi/{ => x86}/pc/SRAT.numamem (100%)
+ rename tests/data/acpi/{ => x86}/pc/SSDT.dimmpxm (100%)
+ rename tests/data/acpi/{ => x86}/pc/WAET (100%)
+ rename tests/data/acpi/{ => x86}/q35/APIC (100%)
+ rename tests/data/acpi/{ => x86}/q35/APIC.acpihmat (100%)
+ rename tests/data/acpi/{ => x86}/q35/APIC.acpihmat-noinitiator (100%)
+ rename tests/data/acpi/{ => x86}/q35/APIC.core-count (100%)
+ rename tests/data/acpi/{ => x86}/q35/APIC.core-count2 (100%)
+ rename tests/data/acpi/{ => x86}/q35/APIC.cphp (100%)
+ rename tests/data/acpi/{ => x86}/q35/APIC.dimmpxm (100%)
+ rename tests/data/acpi/{ => x86}/q35/APIC.thread-count (100%)
+ rename tests/data/acpi/{ => x86}/q35/APIC.thread-count2 (100%)
+ rename tests/data/acpi/{ => x86}/q35/APIC.type4-count (100%)
+ rename tests/data/acpi/{ => x86}/q35/APIC.xapic (100%)
+ rename tests/data/acpi/{ => x86}/q35/CEDT.cxl (100%)
+ rename tests/data/acpi/{ => x86}/q35/DMAR.dmar (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.acpierst (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.acpihmat (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.acpihmat-noinitiator (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.applesmc (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.bridge (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.core-count (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.core-count2 (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.cphp (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.cxl (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.dimmpxm (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.ipmibt (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.ipmismbus (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.ivrs (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.memhp (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.mmio64 (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.multi-bridge (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.noacpihp (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.nohpet (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.numamem (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.pvpanic-isa (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.thread-count (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.thread-count2 (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.tis.tpm12 (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.tis.tpm2 (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.type4-count (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.viot (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.xapic (100%)
+ rename tests/data/acpi/{ => x86}/q35/ERST.acpierst (100%)
+ rename tests/data/acpi/{ => x86}/q35/FACP (100%)
+ rename tests/data/acpi/{ => x86}/q35/FACP.core-count (100%)
+ rename tests/data/acpi/{ => x86}/q35/FACP.core-count2 (100%)
+ rename tests/data/acpi/{ => x86}/q35/FACP.nosmm (100%)
+ rename tests/data/acpi/{ => x86}/q35/FACP.slic (100%)
+ rename tests/data/acpi/{ => x86}/q35/FACP.thread-count (100%)
+ rename tests/data/acpi/{ => x86}/q35/FACP.thread-count2 (100%)
+ rename tests/data/acpi/{ => x86}/q35/FACP.type4-count (100%)
+ rename tests/data/acpi/{ => x86}/q35/FACP.xapic (100%)
+ rename tests/data/acpi/{ => x86}/q35/FACS (100%)
+ rename tests/data/acpi/{ => x86}/q35/HMAT.acpihmat (100%)
+ rename tests/data/acpi/{ => x86}/q35/HMAT.acpihmat-noinitiator (100%)
+ rename tests/data/acpi/{ => x86}/q35/HPET (100%)
+ rename tests/data/acpi/{ => x86}/q35/IVRS.ivrs (100%)
+ rename tests/data/acpi/{ => x86}/q35/MCFG (100%)
+ rename tests/data/acpi/{ => x86}/q35/NFIT.dimmpxm (100%)
+ rename tests/data/acpi/{ => x86}/q35/SLIC.slic (100%)
+ rename tests/data/acpi/{ => x86}/q35/SLIT.cphp (100%)
+ rename tests/data/acpi/{virt => x86/q35}/SLIT.memhp (100%)
+ rename tests/data/acpi/{ => x86}/q35/SRAT.acpihmat (100%)
+ rename tests/data/acpi/{ => x86}/q35/SRAT.acpihmat-noinitiator (100%)
+ rename tests/data/acpi/{ => x86}/q35/SRAT.cphp (100%)
+ rename tests/data/acpi/{ => x86}/q35/SRAT.dimmpxm (100%)
+ rename tests/data/acpi/{ => x86}/q35/SRAT.memhp (100%)
+ rename tests/data/acpi/{ => x86}/q35/SRAT.mmio64 (100%)
+ rename tests/data/acpi/{ => x86}/q35/SRAT.numamem (100%)
+ rename tests/data/acpi/{ => x86}/q35/SRAT.xapic (100%)
+ rename tests/data/acpi/{ => x86}/q35/SSDT.dimmpxm (100%)
+ rename tests/data/acpi/{ => x86}/q35/TCPA.tis.tpm12 (100%)
+ rename tests/data/acpi/{ => x86}/q35/TPM2.tis.tpm2 (100%)
+ rename tests/data/acpi/{ => x86}/q35/VIOT.viot (100%)
+ rename tests/data/acpi/{ => x86}/q35/WAET (100%)
+ create mode 100644 tests/data/uefi-boot-images/bios-tables-test.riscv64.iso.qcow2
+ create mode 100644 tests/uefi-test-tools/uefi-test-build.config
 
-diff --git a/tests/data/acpi/virt/APIC b/tests/data/acpi/aarch64/virt/APIC
-similarity index 100%
-rename from tests/data/acpi/virt/APIC
-rename to tests/data/acpi/aarch64/virt/APIC
-diff --git a/tests/data/acpi/virt/APIC.acpihmatvirt b/tests/data/acpi/aarch64/virt/APIC.acpihmatvirt
-similarity index 100%
-rename from tests/data/acpi/virt/APIC.acpihmatvirt
-rename to tests/data/acpi/aarch64/virt/APIC.acpihmatvirt
-diff --git a/tests/data/acpi/virt/APIC.topology b/tests/data/acpi/aarch64/virt/APIC.topology
-similarity index 100%
-rename from tests/data/acpi/virt/APIC.topology
-rename to tests/data/acpi/aarch64/virt/APIC.topology
-diff --git a/tests/data/acpi/virt/DBG2 b/tests/data/acpi/aarch64/virt/DBG2
-similarity index 100%
-rename from tests/data/acpi/virt/DBG2
-rename to tests/data/acpi/aarch64/virt/DBG2
-diff --git a/tests/data/acpi/virt/DSDT b/tests/data/acpi/aarch64/virt/DSDT
-similarity index 100%
-rename from tests/data/acpi/virt/DSDT
-rename to tests/data/acpi/aarch64/virt/DSDT
-diff --git a/tests/data/acpi/virt/DSDT.acpihmatvirt b/tests/data/acpi/aarch64/virt/DSDT.acpihmatvirt
-similarity index 100%
-rename from tests/data/acpi/virt/DSDT.acpihmatvirt
-rename to tests/data/acpi/aarch64/virt/DSDT.acpihmatvirt
-diff --git a/tests/data/acpi/virt/DSDT.memhp b/tests/data/acpi/aarch64/virt/DSDT.memhp
-similarity index 100%
-rename from tests/data/acpi/virt/DSDT.memhp
-rename to tests/data/acpi/aarch64/virt/DSDT.memhp
-diff --git a/tests/data/acpi/virt/DSDT.pxb b/tests/data/acpi/aarch64/virt/DSDT.pxb
-similarity index 100%
-rename from tests/data/acpi/virt/DSDT.pxb
-rename to tests/data/acpi/aarch64/virt/DSDT.pxb
-diff --git a/tests/data/acpi/virt/DSDT.topology b/tests/data/acpi/aarch64/virt/DSDT.topology
-similarity index 100%
-rename from tests/data/acpi/virt/DSDT.topology
-rename to tests/data/acpi/aarch64/virt/DSDT.topology
-diff --git a/tests/data/acpi/virt/FACP b/tests/data/acpi/aarch64/virt/FACP
-similarity index 100%
-rename from tests/data/acpi/virt/FACP
-rename to tests/data/acpi/aarch64/virt/FACP
-diff --git a/tests/data/acpi/virt/GTDT b/tests/data/acpi/aarch64/virt/GTDT
-similarity index 100%
-rename from tests/data/acpi/virt/GTDT
-rename to tests/data/acpi/aarch64/virt/GTDT
-diff --git a/tests/data/acpi/virt/HMAT.acpihmatvirt b/tests/data/acpi/aarch64/virt/HMAT.acpihmatvirt
-similarity index 100%
-rename from tests/data/acpi/virt/HMAT.acpihmatvirt
-rename to tests/data/acpi/aarch64/virt/HMAT.acpihmatvirt
-diff --git a/tests/data/acpi/virt/IORT b/tests/data/acpi/aarch64/virt/IORT
-similarity index 100%
-rename from tests/data/acpi/virt/IORT
-rename to tests/data/acpi/aarch64/virt/IORT
-diff --git a/tests/data/acpi/virt/MCFG b/tests/data/acpi/aarch64/virt/MCFG
-similarity index 100%
-rename from tests/data/acpi/virt/MCFG
-rename to tests/data/acpi/aarch64/virt/MCFG
-diff --git a/tests/data/acpi/virt/NFIT.memhp b/tests/data/acpi/aarch64/virt/NFIT.memhp
-similarity index 100%
-rename from tests/data/acpi/virt/NFIT.memhp
-rename to tests/data/acpi/aarch64/virt/NFIT.memhp
-diff --git a/tests/data/acpi/virt/PPTT b/tests/data/acpi/aarch64/virt/PPTT
-similarity index 100%
-rename from tests/data/acpi/virt/PPTT
-rename to tests/data/acpi/aarch64/virt/PPTT
-diff --git a/tests/data/acpi/virt/PPTT.acpihmatvirt b/tests/data/acpi/aarch64/virt/PPTT.acpihmatvirt
-similarity index 100%
-rename from tests/data/acpi/virt/PPTT.acpihmatvirt
-rename to tests/data/acpi/aarch64/virt/PPTT.acpihmatvirt
-diff --git a/tests/data/acpi/virt/PPTT.topology b/tests/data/acpi/aarch64/virt/PPTT.topology
-similarity index 100%
-rename from tests/data/acpi/virt/PPTT.topology
-rename to tests/data/acpi/aarch64/virt/PPTT.topology
-diff --git a/tests/data/acpi/virt/SLIT.memhp b/tests/data/acpi/aarch64/virt/SLIT.memhp
-similarity index 100%
-rename from tests/data/acpi/virt/SLIT.memhp
-rename to tests/data/acpi/aarch64/virt/SLIT.memhp
-diff --git a/tests/data/acpi/virt/SPCR b/tests/data/acpi/aarch64/virt/SPCR
-similarity index 100%
-rename from tests/data/acpi/virt/SPCR
-rename to tests/data/acpi/aarch64/virt/SPCR
-diff --git a/tests/data/acpi/virt/SRAT.acpihmatvirt b/tests/data/acpi/aarch64/virt/SRAT.acpihmatvirt
-similarity index 100%
-rename from tests/data/acpi/virt/SRAT.acpihmatvirt
-rename to tests/data/acpi/aarch64/virt/SRAT.acpihmatvirt
-diff --git a/tests/data/acpi/virt/SRAT.memhp b/tests/data/acpi/aarch64/virt/SRAT.memhp
-similarity index 100%
-rename from tests/data/acpi/virt/SRAT.memhp
-rename to tests/data/acpi/aarch64/virt/SRAT.memhp
-diff --git a/tests/data/acpi/virt/SRAT.numamem b/tests/data/acpi/aarch64/virt/SRAT.numamem
-similarity index 100%
-rename from tests/data/acpi/virt/SRAT.numamem
-rename to tests/data/acpi/aarch64/virt/SRAT.numamem
-diff --git a/tests/data/acpi/virt/SSDT.memhp b/tests/data/acpi/aarch64/virt/SSDT.memhp
-similarity index 100%
-rename from tests/data/acpi/virt/SSDT.memhp
-rename to tests/data/acpi/aarch64/virt/SSDT.memhp
-diff --git a/tests/data/acpi/virt/VIOT b/tests/data/acpi/aarch64/virt/VIOT
-similarity index 100%
-rename from tests/data/acpi/virt/VIOT
-rename to tests/data/acpi/aarch64/virt/VIOT
 -- 
 2.40.1
 
