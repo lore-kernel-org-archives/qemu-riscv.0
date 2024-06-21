@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89A23C2BA1A
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 956C9C41513
 	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Jun 2024 12:00:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sKcva-00049N-TF; Fri, 21 Jun 2024 07:59:38 -0400
+	id 1sKcwB-00051E-E6; Fri, 21 Jun 2024 08:00:15 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1sKcvY-00048N-KV
- for qemu-riscv@nongnu.org; Fri, 21 Jun 2024 07:59:36 -0400
-Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
+ id 1sKcw1-0004ZJ-N0
+ for qemu-riscv@nongnu.org; Fri, 21 Jun 2024 08:00:08 -0400
+Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1sKcvV-00037C-6d
- for qemu-riscv@nongnu.org; Fri, 21 Jun 2024 07:59:36 -0400
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-1f65a3abd01so15721455ad.3
- for <qemu-riscv@nongnu.org>; Fri, 21 Jun 2024 04:59:32 -0700 (PDT)
+ id 1sKcvx-0003Ew-Ay
+ for qemu-riscv@nongnu.org; Fri, 21 Jun 2024 08:00:05 -0400
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-1f9b364faddso17068195ad.3
+ for <qemu-riscv@nongnu.org>; Fri, 21 Jun 2024 05:00:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1718971172; x=1719575972; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1718971200; x=1719576000; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bnj/fB+5q+zHB6qdu5B/YW6RBiT37w2OCUrm/zjtmQU=;
- b=Ct1gaynTxxn/Xy0blIuSwSXKbmcVjdAThlC4JUdQpXdgTLhhlvQBdX/5WCss2NMZPg
- UOj5pftgKE90QlRZZTkOHw1jsCP4XZp5sMO8jJjgdv4m8Dw+TFtXmFd8WKkH62KATS+d
- bGITq+tDhGy7E1zh/bnTPSdoIzLHEZoRtNq6vRlRFyiP1m3F+6LbadTwJuKacQFww0bU
- Ys0TtMhrtNxvJKhGpgzRUaXH0TdC7WCmaqFh6WRYNnJTvRI4pwhNIseF0OiWqWTG5LkJ
- Gs+jHW6puVzUDUM6AKNKdG/up7WHICejUR4DJ1/592g7N3mMHTtJ1CwMd8ug68ttZZLh
- xPwA==
+ bh=Fx+JG5cYFRa1NLv3VZQLwj2YkLNpxMjlekBRMtEdgnA=;
+ b=IVhBOJ3u0Fq2jBJDn6bNDg6n1MQpcGc/5sozFxqIO0FDmJRIjH6jNGLtNs7JKxRtup
+ eVeJv/+nM5jphP7vvtxlZJgoG4iPxHlRWwRATPEeTAal0+hT23bIEBpKYseCIRJJOtE8
+ twAkoUgWVppEgqe6tnMzBT1YFLv7XfqQ1OV/s156jfsEVtL8QP9l7E5P1ATqALE7hMi1
+ /LfmPISZkqTcPPS0RtVZ6O5R8MLHIQJgisyLi8VikHYPDEFMQpeWrAvp9/x/MLSqgHrl
+ Lh9iKxLo4mpxCf7/uEGhJhUVaxN84dqsqMY9G8d0UGj785TVcHN2bcUHga/JB3H+UKnj
+ y+Kg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718971172; x=1719575972;
+ d=1e100.net; s=20230601; t=1718971200; x=1719576000;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bnj/fB+5q+zHB6qdu5B/YW6RBiT37w2OCUrm/zjtmQU=;
- b=o0VmwXsA3CllaYJsR7CYI4g2H53leqs+HEQBBlwWDcu72mnSyHdmZwMH69Bo/gmbUo
- csoiO9h3fCbl4RfbSwq7KWjeW+ugOCuHMc8W+Yd3uKN1lXC4ODmEiv2mcsp9jLI7TS/y
- rir25HoASY8hCQYJp7CIcpTJiNWKDsPq6Qr2uyq3boOhsl357tO+q2OhdvLyxu6t3zcS
- OOOiu87BzsfMvZVaX62L+/xNONpgC8FKeEVKW+ljs2sXXQ23laZhyLZ9J6mwOxGIMy2i
- GRdcCv/g04gZy8dUoDMP9Bd6FRro4bfG9Bz+ZWQdkO5I2+qw7gPVI2HbBQjybte91eWh
- obJg==
+ bh=Fx+JG5cYFRa1NLv3VZQLwj2YkLNpxMjlekBRMtEdgnA=;
+ b=KZr1F3j3oG5u6OQQWipwhq1SdJp55Y6hW1c1kd0JM0Fr8Rk7ZrIS4cnkQ8wl5lo1ku
+ 47K6YOrZP/xeFX0TCliJQfphe1PiFrXRpEDaZbY/kUCQUlNwJ/CLQEbBfMDhg2BAgpUM
+ 8jFsvZ2YVXXXFlJPca6pafKTic2yT3BVyYzmXJH5qwXvtZ7og59wQm6oy0KGnO5/RydS
+ PSyvDY0ycurToOpUnEY2mfFWKYU1HHT4quO+1Zok+SP9EA5Vl4wBQkgG3qbkK0pL1V4w
+ ACl/lD+Q7IoWkd6TVuc7szUhPQyU/+cJCHD5fOM3i8Rxw/cn9DrUIgG2S+eiWb9mI95J
+ 2Z/Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXLdKYC1bsY/LignTVroXusMenYUjMSQ4+KO6bC1WH4fyiTzLh/QYoj1vWW+gkC56myFoXqOyy5eZ9iF/myIiLr9VaTzL8=
-X-Gm-Message-State: AOJu0Yzdqek2GxAB+1nG4FtLSZ6EMwQo0IdsNtbV5z7yVvzmt4qm5q+Y
- GjViUb23GnfB6Y8aATeTw96gKkKXnNLz9KA5NtYhA1EnM/SbuWAZfZiqoqgd/eA=
-X-Google-Smtp-Source: AGHT+IEbVplcLg/zh0E0Z5ugA6eak1PPnmKi6KfqAdAFmm2OAXyUcwioG+OUnSC7gSbXT/HhDaUiSA==
-X-Received: by 2002:a17:902:e548:b0:1f9:9b57:3dfb with SMTP id
- d9443c01a7336-1f9aa3b1494mr90358895ad.8.1718971171830; 
- Fri, 21 Jun 2024 04:59:31 -0700 (PDT)
+ AJvYcCXa85MXJtHFczOCP9AMbTzJ70uSCkDSw2tlLAZiUEBsJgTAVO9OE2QD4U7uDSQU6gd8t0xD2e5q9RgI3b2nKC1sJZhgSC0=
+X-Gm-Message-State: AOJu0Yy/gfaygTvrQtSxzYaBTqLyKPOLO71065yLUZ+D1H45VPVaBrWT
+ 9+Gf2tFOTKXEq34HYnYTNkgpCd+0LRhFsBA2BgCI1DKekqIrIGrlffrVdSYqUZs=
+X-Google-Smtp-Source: AGHT+IETFnVFEYgSCuA9sZBDbWRQRaw0rrGvOhQgM00UJrG72e/l9kA8rcYUd9Ap+Hvd0XVBInR2qg==
+X-Received: by 2002:a17:903:2443:b0:1f9:cbe1:af0 with SMTP id
+ d9443c01a7336-1f9cbe10de9mr43911675ad.5.1718971199696; 
+ Fri, 21 Jun 2024 04:59:59 -0700 (PDT)
 Received: from sunil-pc.Dlink ([106.51.187.237])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1f9ebbb606dsm12422995ad.270.2024.06.21.04.59.26
+ d9443c01a7336-1f9ebbb606dsm12422995ad.270.2024.06.21.04.59.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Jun 2024 04:59:31 -0700 (PDT)
+ Fri, 21 Jun 2024 04:59:59 -0700 (PDT)
 From: Sunil V L <sunilvl@ventanamicro.com>
 To: qemu-devel@nongnu.org,
 	qemu-arm@nongnu.org,
@@ -78,16 +78,17 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>,
  Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Sunil V L <sunilvl@ventanamicro.com>
-Subject: [PATCH v3 03/15] tests/data/uefi-boot-images: Add RISC-V ISO image
-Date: Fri, 21 Jun 2024 17:28:54 +0530
-Message-Id: <20240621115906.1049832-4-sunilvl@ventanamicro.com>
+Subject: [PATCH v3 08/15] tests/data/acpi: Move x86 ACPI tables under
+ x86/${machine} path
+Date: Fri, 21 Jun 2024 17:28:59 +0530
+Message-Id: <20240621115906.1049832-9-sunilvl@ventanamicro.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20240621115906.1049832-1-sunilvl@ventanamicro.com>
 References: <20240621115906.1049832-1-sunilvl@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pl1-x636.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pl1-x62f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -110,299 +111,715 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-To test ACPI tables, edk2 needs to be booted with a disk image having
-EFI partition. This image is created using UefiTestToolsPkg.
-
-The image is generated using tests/uefi-test-tools source.
+To support multiple architectures using same machine name, create x86
+folder and move all x86 related AML files for each machine type inside.
 
 Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
 ---
- .../bios-tables-test.riscv64.iso.qcow2          | Bin 0 -> 16896 bytes
- tests/uefi-test-tools/uefi-test-build.config    |   2 +-
- 2 files changed, 1 insertion(+), 1 deletion(-)
- create mode 100644 tests/data/uefi-boot-images/bios-tables-test.riscv64.iso.qcow2
+ tests/data/acpi/{ => x86}/microvm/APIC              | Bin
+ tests/data/acpi/{ => x86}/microvm/APIC.ioapic2      | Bin
+ tests/data/acpi/{ => x86}/microvm/APIC.pcie         | Bin
+ tests/data/acpi/{ => x86}/microvm/DSDT              | Bin
+ tests/data/acpi/{ => x86}/microvm/DSDT.ioapic2      | Bin
+ tests/data/acpi/{ => x86}/microvm/DSDT.pcie         | Bin
+ tests/data/acpi/{ => x86}/microvm/DSDT.rtc          | Bin
+ tests/data/acpi/{ => x86}/microvm/DSDT.usb          | Bin
+ tests/data/acpi/{ => x86}/microvm/ERST.pcie         | Bin
+ tests/data/acpi/{ => x86}/microvm/FACP              | Bin
+ tests/data/acpi/{ => x86}/pc/APIC                   | Bin
+ tests/data/acpi/{ => x86}/pc/APIC.acpihmat          | Bin
+ tests/data/acpi/{ => x86}/pc/APIC.cphp              | Bin
+ tests/data/acpi/{ => x86}/pc/APIC.dimmpxm           | Bin
+ tests/data/acpi/{ => x86}/pc/DSDT                   | Bin
+ tests/data/acpi/{ => x86}/pc/DSDT.acpierst          | Bin
+ tests/data/acpi/{ => x86}/pc/DSDT.acpihmat          | Bin
+ tests/data/acpi/{ => x86}/pc/DSDT.bridge            | Bin
+ tests/data/acpi/{ => x86}/pc/DSDT.cphp              | Bin
+ tests/data/acpi/{ => x86}/pc/DSDT.dimmpxm           | Bin
+ tests/data/acpi/{ => x86}/pc/DSDT.hpbridge          | Bin
+ tests/data/acpi/{ => x86}/pc/DSDT.hpbrroot          | Bin
+ tests/data/acpi/{ => x86}/pc/DSDT.ipmikcs           | Bin
+ tests/data/acpi/{ => x86}/pc/DSDT.memhp             | Bin
+ tests/data/acpi/{ => x86}/pc/DSDT.nohpet            | Bin
+ tests/data/acpi/{ => x86}/pc/DSDT.numamem           | Bin
+ tests/data/acpi/{ => x86}/pc/DSDT.roothp            | Bin
+ tests/data/acpi/{ => x86}/pc/ERST.acpierst          | Bin
+ tests/data/acpi/{ => x86}/pc/FACP                   | Bin
+ tests/data/acpi/{ => x86}/pc/FACP.nosmm             | Bin
+ tests/data/acpi/{ => x86}/pc/FACS                   | Bin
+ tests/data/acpi/{ => x86}/pc/HMAT.acpihmat          | Bin
+ tests/data/acpi/{ => x86}/pc/HPET                   | Bin
+ tests/data/acpi/{ => x86}/pc/NFIT.dimmpxm           | Bin
+ tests/data/acpi/{ => x86}/pc/SLIT.cphp              | Bin
+ tests/data/acpi/{ => x86}/pc/SLIT.memhp             | Bin
+ tests/data/acpi/{ => x86}/pc/SRAT.acpihmat          | Bin
+ tests/data/acpi/{ => x86}/pc/SRAT.cphp              | Bin
+ tests/data/acpi/{ => x86}/pc/SRAT.dimmpxm           | Bin
+ tests/data/acpi/{ => x86}/pc/SRAT.memhp             | Bin
+ tests/data/acpi/{ => x86}/pc/SRAT.numamem           | Bin
+ tests/data/acpi/{ => x86}/pc/SSDT.dimmpxm           | Bin
+ tests/data/acpi/{ => x86}/pc/WAET                   | Bin
+ tests/data/acpi/{ => x86}/q35/APIC                  | Bin
+ tests/data/acpi/{ => x86}/q35/APIC.acpihmat         | Bin
+ .../acpi/{ => x86}/q35/APIC.acpihmat-noinitiator    | Bin
+ tests/data/acpi/{ => x86}/q35/APIC.core-count       | Bin
+ tests/data/acpi/{ => x86}/q35/APIC.core-count2      | Bin
+ tests/data/acpi/{ => x86}/q35/APIC.cphp             | Bin
+ tests/data/acpi/{ => x86}/q35/APIC.dimmpxm          | Bin
+ tests/data/acpi/{ => x86}/q35/APIC.thread-count     | Bin
+ tests/data/acpi/{ => x86}/q35/APIC.thread-count2    | Bin
+ tests/data/acpi/{ => x86}/q35/APIC.type4-count      | Bin
+ tests/data/acpi/{ => x86}/q35/APIC.xapic            | Bin
+ tests/data/acpi/{ => x86}/q35/CEDT.cxl              | Bin
+ tests/data/acpi/{ => x86}/q35/DMAR.dmar             | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT                  | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.acpierst         | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.acpihmat         | Bin
+ .../acpi/{ => x86}/q35/DSDT.acpihmat-noinitiator    | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.applesmc         | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.bridge           | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.core-count       | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.core-count2      | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.cphp             | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.cxl              | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.dimmpxm          | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.ipmibt           | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.ipmismbus        | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.ivrs             | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.memhp            | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.mmio64           | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.multi-bridge     | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.noacpihp         | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.nohpet           | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.numamem          | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.pvpanic-isa      | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.thread-count     | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.thread-count2    | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.tis.tpm12        | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.tis.tpm2         | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.type4-count      | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.viot             | Bin
+ tests/data/acpi/{ => x86}/q35/DSDT.xapic            | Bin
+ tests/data/acpi/{ => x86}/q35/ERST.acpierst         | Bin
+ tests/data/acpi/{ => x86}/q35/FACP                  | Bin
+ tests/data/acpi/{ => x86}/q35/FACP.core-count       | Bin
+ tests/data/acpi/{ => x86}/q35/FACP.core-count2      | Bin
+ tests/data/acpi/{ => x86}/q35/FACP.nosmm            | Bin
+ tests/data/acpi/{ => x86}/q35/FACP.slic             | Bin
+ tests/data/acpi/{ => x86}/q35/FACP.thread-count     | Bin
+ tests/data/acpi/{ => x86}/q35/FACP.thread-count2    | Bin
+ tests/data/acpi/{ => x86}/q35/FACP.type4-count      | Bin
+ tests/data/acpi/{ => x86}/q35/FACP.xapic            | Bin
+ tests/data/acpi/{ => x86}/q35/FACS                  | Bin
+ tests/data/acpi/{ => x86}/q35/HMAT.acpihmat         | Bin
+ .../acpi/{ => x86}/q35/HMAT.acpihmat-noinitiator    | Bin
+ tests/data/acpi/{ => x86}/q35/HPET                  | Bin
+ tests/data/acpi/{ => x86}/q35/IVRS.ivrs             | Bin
+ tests/data/acpi/{ => x86}/q35/MCFG                  | Bin
+ tests/data/acpi/{ => x86}/q35/NFIT.dimmpxm          | Bin
+ tests/data/acpi/{ => x86}/q35/SLIC.slic             | Bin
+ tests/data/acpi/{ => x86}/q35/SLIT.cphp             | Bin
+ tests/data/acpi/{ => x86}/q35/SLIT.memhp            | Bin
+ tests/data/acpi/{ => x86}/q35/SRAT.acpihmat         | Bin
+ .../acpi/{ => x86}/q35/SRAT.acpihmat-noinitiator    | Bin
+ tests/data/acpi/{ => x86}/q35/SRAT.cphp             | Bin
+ tests/data/acpi/{ => x86}/q35/SRAT.dimmpxm          | Bin
+ tests/data/acpi/{ => x86}/q35/SRAT.memhp            | Bin
+ tests/data/acpi/{ => x86}/q35/SRAT.mmio64           | Bin
+ tests/data/acpi/{ => x86}/q35/SRAT.numamem          | Bin
+ tests/data/acpi/{ => x86}/q35/SRAT.xapic            | Bin
+ tests/data/acpi/{ => x86}/q35/SSDT.dimmpxm          | Bin
+ tests/data/acpi/{ => x86}/q35/TCPA.tis.tpm12        | Bin
+ tests/data/acpi/{ => x86}/q35/TPM2.tis.tpm2         | Bin
+ tests/data/acpi/{ => x86}/q35/VIOT.viot             | Bin
+ tests/data/acpi/{ => x86}/q35/WAET                  | Bin
+ 117 files changed, 0 insertions(+), 0 deletions(-)
+ rename tests/data/acpi/{ => x86}/microvm/APIC (100%)
+ rename tests/data/acpi/{ => x86}/microvm/APIC.ioapic2 (100%)
+ rename tests/data/acpi/{ => x86}/microvm/APIC.pcie (100%)
+ rename tests/data/acpi/{ => x86}/microvm/DSDT (100%)
+ rename tests/data/acpi/{ => x86}/microvm/DSDT.ioapic2 (100%)
+ rename tests/data/acpi/{ => x86}/microvm/DSDT.pcie (100%)
+ rename tests/data/acpi/{ => x86}/microvm/DSDT.rtc (100%)
+ rename tests/data/acpi/{ => x86}/microvm/DSDT.usb (100%)
+ rename tests/data/acpi/{ => x86}/microvm/ERST.pcie (100%)
+ rename tests/data/acpi/{ => x86}/microvm/FACP (100%)
+ rename tests/data/acpi/{ => x86}/pc/APIC (100%)
+ rename tests/data/acpi/{ => x86}/pc/APIC.acpihmat (100%)
+ rename tests/data/acpi/{ => x86}/pc/APIC.cphp (100%)
+ rename tests/data/acpi/{ => x86}/pc/APIC.dimmpxm (100%)
+ rename tests/data/acpi/{ => x86}/pc/DSDT (100%)
+ rename tests/data/acpi/{ => x86}/pc/DSDT.acpierst (100%)
+ rename tests/data/acpi/{ => x86}/pc/DSDT.acpihmat (100%)
+ rename tests/data/acpi/{ => x86}/pc/DSDT.bridge (100%)
+ rename tests/data/acpi/{ => x86}/pc/DSDT.cphp (100%)
+ rename tests/data/acpi/{ => x86}/pc/DSDT.dimmpxm (100%)
+ rename tests/data/acpi/{ => x86}/pc/DSDT.hpbridge (100%)
+ rename tests/data/acpi/{ => x86}/pc/DSDT.hpbrroot (100%)
+ rename tests/data/acpi/{ => x86}/pc/DSDT.ipmikcs (100%)
+ rename tests/data/acpi/{ => x86}/pc/DSDT.memhp (100%)
+ rename tests/data/acpi/{ => x86}/pc/DSDT.nohpet (100%)
+ rename tests/data/acpi/{ => x86}/pc/DSDT.numamem (100%)
+ rename tests/data/acpi/{ => x86}/pc/DSDT.roothp (100%)
+ rename tests/data/acpi/{ => x86}/pc/ERST.acpierst (100%)
+ rename tests/data/acpi/{ => x86}/pc/FACP (100%)
+ rename tests/data/acpi/{ => x86}/pc/FACP.nosmm (100%)
+ rename tests/data/acpi/{ => x86}/pc/FACS (100%)
+ rename tests/data/acpi/{ => x86}/pc/HMAT.acpihmat (100%)
+ rename tests/data/acpi/{ => x86}/pc/HPET (100%)
+ rename tests/data/acpi/{ => x86}/pc/NFIT.dimmpxm (100%)
+ rename tests/data/acpi/{ => x86}/pc/SLIT.cphp (100%)
+ rename tests/data/acpi/{ => x86}/pc/SLIT.memhp (100%)
+ rename tests/data/acpi/{ => x86}/pc/SRAT.acpihmat (100%)
+ rename tests/data/acpi/{ => x86}/pc/SRAT.cphp (100%)
+ rename tests/data/acpi/{ => x86}/pc/SRAT.dimmpxm (100%)
+ rename tests/data/acpi/{ => x86}/pc/SRAT.memhp (100%)
+ rename tests/data/acpi/{ => x86}/pc/SRAT.numamem (100%)
+ rename tests/data/acpi/{ => x86}/pc/SSDT.dimmpxm (100%)
+ rename tests/data/acpi/{ => x86}/pc/WAET (100%)
+ rename tests/data/acpi/{ => x86}/q35/APIC (100%)
+ rename tests/data/acpi/{ => x86}/q35/APIC.acpihmat (100%)
+ rename tests/data/acpi/{ => x86}/q35/APIC.acpihmat-noinitiator (100%)
+ rename tests/data/acpi/{ => x86}/q35/APIC.core-count (100%)
+ rename tests/data/acpi/{ => x86}/q35/APIC.core-count2 (100%)
+ rename tests/data/acpi/{ => x86}/q35/APIC.cphp (100%)
+ rename tests/data/acpi/{ => x86}/q35/APIC.dimmpxm (100%)
+ rename tests/data/acpi/{ => x86}/q35/APIC.thread-count (100%)
+ rename tests/data/acpi/{ => x86}/q35/APIC.thread-count2 (100%)
+ rename tests/data/acpi/{ => x86}/q35/APIC.type4-count (100%)
+ rename tests/data/acpi/{ => x86}/q35/APIC.xapic (100%)
+ rename tests/data/acpi/{ => x86}/q35/CEDT.cxl (100%)
+ rename tests/data/acpi/{ => x86}/q35/DMAR.dmar (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.acpierst (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.acpihmat (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.acpihmat-noinitiator (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.applesmc (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.bridge (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.core-count (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.core-count2 (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.cphp (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.cxl (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.dimmpxm (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.ipmibt (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.ipmismbus (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.ivrs (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.memhp (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.mmio64 (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.multi-bridge (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.noacpihp (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.nohpet (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.numamem (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.pvpanic-isa (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.thread-count (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.thread-count2 (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.tis.tpm12 (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.tis.tpm2 (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.type4-count (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.viot (100%)
+ rename tests/data/acpi/{ => x86}/q35/DSDT.xapic (100%)
+ rename tests/data/acpi/{ => x86}/q35/ERST.acpierst (100%)
+ rename tests/data/acpi/{ => x86}/q35/FACP (100%)
+ rename tests/data/acpi/{ => x86}/q35/FACP.core-count (100%)
+ rename tests/data/acpi/{ => x86}/q35/FACP.core-count2 (100%)
+ rename tests/data/acpi/{ => x86}/q35/FACP.nosmm (100%)
+ rename tests/data/acpi/{ => x86}/q35/FACP.slic (100%)
+ rename tests/data/acpi/{ => x86}/q35/FACP.thread-count (100%)
+ rename tests/data/acpi/{ => x86}/q35/FACP.thread-count2 (100%)
+ rename tests/data/acpi/{ => x86}/q35/FACP.type4-count (100%)
+ rename tests/data/acpi/{ => x86}/q35/FACP.xapic (100%)
+ rename tests/data/acpi/{ => x86}/q35/FACS (100%)
+ rename tests/data/acpi/{ => x86}/q35/HMAT.acpihmat (100%)
+ rename tests/data/acpi/{ => x86}/q35/HMAT.acpihmat-noinitiator (100%)
+ rename tests/data/acpi/{ => x86}/q35/HPET (100%)
+ rename tests/data/acpi/{ => x86}/q35/IVRS.ivrs (100%)
+ rename tests/data/acpi/{ => x86}/q35/MCFG (100%)
+ rename tests/data/acpi/{ => x86}/q35/NFIT.dimmpxm (100%)
+ rename tests/data/acpi/{ => x86}/q35/SLIC.slic (100%)
+ rename tests/data/acpi/{ => x86}/q35/SLIT.cphp (100%)
+ rename tests/data/acpi/{ => x86}/q35/SLIT.memhp (100%)
+ rename tests/data/acpi/{ => x86}/q35/SRAT.acpihmat (100%)
+ rename tests/data/acpi/{ => x86}/q35/SRAT.acpihmat-noinitiator (100%)
+ rename tests/data/acpi/{ => x86}/q35/SRAT.cphp (100%)
+ rename tests/data/acpi/{ => x86}/q35/SRAT.dimmpxm (100%)
+ rename tests/data/acpi/{ => x86}/q35/SRAT.memhp (100%)
+ rename tests/data/acpi/{ => x86}/q35/SRAT.mmio64 (100%)
+ rename tests/data/acpi/{ => x86}/q35/SRAT.numamem (100%)
+ rename tests/data/acpi/{ => x86}/q35/SRAT.xapic (100%)
+ rename tests/data/acpi/{ => x86}/q35/SSDT.dimmpxm (100%)
+ rename tests/data/acpi/{ => x86}/q35/TCPA.tis.tpm12 (100%)
+ rename tests/data/acpi/{ => x86}/q35/TPM2.tis.tpm2 (100%)
+ rename tests/data/acpi/{ => x86}/q35/VIOT.viot (100%)
+ rename tests/data/acpi/{ => x86}/q35/WAET (100%)
 
-diff --git a/tests/data/uefi-boot-images/bios-tables-test.riscv64.iso.qcow2 b/tests/data/uefi-boot-images/bios-tables-test.riscv64.iso.qcow2
-new file mode 100644
-index 0000000000000000000000000000000000000000..c720bf99a45fab6d1e21963cca563ee0ea059b82
-GIT binary patch
-literal 16896
-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
-
-literal 0
-HcmV?d00001
-
-diff --git a/tests/uefi-test-tools/uefi-test-build.config b/tests/uefi-test-tools/uefi-test-build.config
-index 1f389ae541..a4c61fc97a 100644
---- a/tests/uefi-test-tools/uefi-test-build.config
-+++ b/tests/uefi-test-tools/uefi-test-build.config
-@@ -24,7 +24,7 @@ cpy1 = AARCH64/BiosTablesTest.efi  bios-tables-test.aarch64.efi
- ####################################################################################
- # riscv64
- 
--[build.riscv]
-+[build.riscv64]
- conf = UefiTestToolsPkg/UefiTestToolsPkg.dsc
- plat = UefiTestTools
- dest = ./Build
+diff --git a/tests/data/acpi/microvm/APIC b/tests/data/acpi/x86/microvm/APIC
+similarity index 100%
+rename from tests/data/acpi/microvm/APIC
+rename to tests/data/acpi/x86/microvm/APIC
+diff --git a/tests/data/acpi/microvm/APIC.ioapic2 b/tests/data/acpi/x86/microvm/APIC.ioapic2
+similarity index 100%
+rename from tests/data/acpi/microvm/APIC.ioapic2
+rename to tests/data/acpi/x86/microvm/APIC.ioapic2
+diff --git a/tests/data/acpi/microvm/APIC.pcie b/tests/data/acpi/x86/microvm/APIC.pcie
+similarity index 100%
+rename from tests/data/acpi/microvm/APIC.pcie
+rename to tests/data/acpi/x86/microvm/APIC.pcie
+diff --git a/tests/data/acpi/microvm/DSDT b/tests/data/acpi/x86/microvm/DSDT
+similarity index 100%
+rename from tests/data/acpi/microvm/DSDT
+rename to tests/data/acpi/x86/microvm/DSDT
+diff --git a/tests/data/acpi/microvm/DSDT.ioapic2 b/tests/data/acpi/x86/microvm/DSDT.ioapic2
+similarity index 100%
+rename from tests/data/acpi/microvm/DSDT.ioapic2
+rename to tests/data/acpi/x86/microvm/DSDT.ioapic2
+diff --git a/tests/data/acpi/microvm/DSDT.pcie b/tests/data/acpi/x86/microvm/DSDT.pcie
+similarity index 100%
+rename from tests/data/acpi/microvm/DSDT.pcie
+rename to tests/data/acpi/x86/microvm/DSDT.pcie
+diff --git a/tests/data/acpi/microvm/DSDT.rtc b/tests/data/acpi/x86/microvm/DSDT.rtc
+similarity index 100%
+rename from tests/data/acpi/microvm/DSDT.rtc
+rename to tests/data/acpi/x86/microvm/DSDT.rtc
+diff --git a/tests/data/acpi/microvm/DSDT.usb b/tests/data/acpi/x86/microvm/DSDT.usb
+similarity index 100%
+rename from tests/data/acpi/microvm/DSDT.usb
+rename to tests/data/acpi/x86/microvm/DSDT.usb
+diff --git a/tests/data/acpi/microvm/ERST.pcie b/tests/data/acpi/x86/microvm/ERST.pcie
+similarity index 100%
+rename from tests/data/acpi/microvm/ERST.pcie
+rename to tests/data/acpi/x86/microvm/ERST.pcie
+diff --git a/tests/data/acpi/microvm/FACP b/tests/data/acpi/x86/microvm/FACP
+similarity index 100%
+rename from tests/data/acpi/microvm/FACP
+rename to tests/data/acpi/x86/microvm/FACP
+diff --git a/tests/data/acpi/pc/APIC b/tests/data/acpi/x86/pc/APIC
+similarity index 100%
+rename from tests/data/acpi/pc/APIC
+rename to tests/data/acpi/x86/pc/APIC
+diff --git a/tests/data/acpi/pc/APIC.acpihmat b/tests/data/acpi/x86/pc/APIC.acpihmat
+similarity index 100%
+rename from tests/data/acpi/pc/APIC.acpihmat
+rename to tests/data/acpi/x86/pc/APIC.acpihmat
+diff --git a/tests/data/acpi/pc/APIC.cphp b/tests/data/acpi/x86/pc/APIC.cphp
+similarity index 100%
+rename from tests/data/acpi/pc/APIC.cphp
+rename to tests/data/acpi/x86/pc/APIC.cphp
+diff --git a/tests/data/acpi/pc/APIC.dimmpxm b/tests/data/acpi/x86/pc/APIC.dimmpxm
+similarity index 100%
+rename from tests/data/acpi/pc/APIC.dimmpxm
+rename to tests/data/acpi/x86/pc/APIC.dimmpxm
+diff --git a/tests/data/acpi/pc/DSDT b/tests/data/acpi/x86/pc/DSDT
+similarity index 100%
+rename from tests/data/acpi/pc/DSDT
+rename to tests/data/acpi/x86/pc/DSDT
+diff --git a/tests/data/acpi/pc/DSDT.acpierst b/tests/data/acpi/x86/pc/DSDT.acpierst
+similarity index 100%
+rename from tests/data/acpi/pc/DSDT.acpierst
+rename to tests/data/acpi/x86/pc/DSDT.acpierst
+diff --git a/tests/data/acpi/pc/DSDT.acpihmat b/tests/data/acpi/x86/pc/DSDT.acpihmat
+similarity index 100%
+rename from tests/data/acpi/pc/DSDT.acpihmat
+rename to tests/data/acpi/x86/pc/DSDT.acpihmat
+diff --git a/tests/data/acpi/pc/DSDT.bridge b/tests/data/acpi/x86/pc/DSDT.bridge
+similarity index 100%
+rename from tests/data/acpi/pc/DSDT.bridge
+rename to tests/data/acpi/x86/pc/DSDT.bridge
+diff --git a/tests/data/acpi/pc/DSDT.cphp b/tests/data/acpi/x86/pc/DSDT.cphp
+similarity index 100%
+rename from tests/data/acpi/pc/DSDT.cphp
+rename to tests/data/acpi/x86/pc/DSDT.cphp
+diff --git a/tests/data/acpi/pc/DSDT.dimmpxm b/tests/data/acpi/x86/pc/DSDT.dimmpxm
+similarity index 100%
+rename from tests/data/acpi/pc/DSDT.dimmpxm
+rename to tests/data/acpi/x86/pc/DSDT.dimmpxm
+diff --git a/tests/data/acpi/pc/DSDT.hpbridge b/tests/data/acpi/x86/pc/DSDT.hpbridge
+similarity index 100%
+rename from tests/data/acpi/pc/DSDT.hpbridge
+rename to tests/data/acpi/x86/pc/DSDT.hpbridge
+diff --git a/tests/data/acpi/pc/DSDT.hpbrroot b/tests/data/acpi/x86/pc/DSDT.hpbrroot
+similarity index 100%
+rename from tests/data/acpi/pc/DSDT.hpbrroot
+rename to tests/data/acpi/x86/pc/DSDT.hpbrroot
+diff --git a/tests/data/acpi/pc/DSDT.ipmikcs b/tests/data/acpi/x86/pc/DSDT.ipmikcs
+similarity index 100%
+rename from tests/data/acpi/pc/DSDT.ipmikcs
+rename to tests/data/acpi/x86/pc/DSDT.ipmikcs
+diff --git a/tests/data/acpi/pc/DSDT.memhp b/tests/data/acpi/x86/pc/DSDT.memhp
+similarity index 100%
+rename from tests/data/acpi/pc/DSDT.memhp
+rename to tests/data/acpi/x86/pc/DSDT.memhp
+diff --git a/tests/data/acpi/pc/DSDT.nohpet b/tests/data/acpi/x86/pc/DSDT.nohpet
+similarity index 100%
+rename from tests/data/acpi/pc/DSDT.nohpet
+rename to tests/data/acpi/x86/pc/DSDT.nohpet
+diff --git a/tests/data/acpi/pc/DSDT.numamem b/tests/data/acpi/x86/pc/DSDT.numamem
+similarity index 100%
+rename from tests/data/acpi/pc/DSDT.numamem
+rename to tests/data/acpi/x86/pc/DSDT.numamem
+diff --git a/tests/data/acpi/pc/DSDT.roothp b/tests/data/acpi/x86/pc/DSDT.roothp
+similarity index 100%
+rename from tests/data/acpi/pc/DSDT.roothp
+rename to tests/data/acpi/x86/pc/DSDT.roothp
+diff --git a/tests/data/acpi/pc/ERST.acpierst b/tests/data/acpi/x86/pc/ERST.acpierst
+similarity index 100%
+rename from tests/data/acpi/pc/ERST.acpierst
+rename to tests/data/acpi/x86/pc/ERST.acpierst
+diff --git a/tests/data/acpi/pc/FACP b/tests/data/acpi/x86/pc/FACP
+similarity index 100%
+rename from tests/data/acpi/pc/FACP
+rename to tests/data/acpi/x86/pc/FACP
+diff --git a/tests/data/acpi/pc/FACP.nosmm b/tests/data/acpi/x86/pc/FACP.nosmm
+similarity index 100%
+rename from tests/data/acpi/pc/FACP.nosmm
+rename to tests/data/acpi/x86/pc/FACP.nosmm
+diff --git a/tests/data/acpi/pc/FACS b/tests/data/acpi/x86/pc/FACS
+similarity index 100%
+rename from tests/data/acpi/pc/FACS
+rename to tests/data/acpi/x86/pc/FACS
+diff --git a/tests/data/acpi/pc/HMAT.acpihmat b/tests/data/acpi/x86/pc/HMAT.acpihmat
+similarity index 100%
+rename from tests/data/acpi/pc/HMAT.acpihmat
+rename to tests/data/acpi/x86/pc/HMAT.acpihmat
+diff --git a/tests/data/acpi/pc/HPET b/tests/data/acpi/x86/pc/HPET
+similarity index 100%
+rename from tests/data/acpi/pc/HPET
+rename to tests/data/acpi/x86/pc/HPET
+diff --git a/tests/data/acpi/pc/NFIT.dimmpxm b/tests/data/acpi/x86/pc/NFIT.dimmpxm
+similarity index 100%
+rename from tests/data/acpi/pc/NFIT.dimmpxm
+rename to tests/data/acpi/x86/pc/NFIT.dimmpxm
+diff --git a/tests/data/acpi/pc/SLIT.cphp b/tests/data/acpi/x86/pc/SLIT.cphp
+similarity index 100%
+rename from tests/data/acpi/pc/SLIT.cphp
+rename to tests/data/acpi/x86/pc/SLIT.cphp
+diff --git a/tests/data/acpi/pc/SLIT.memhp b/tests/data/acpi/x86/pc/SLIT.memhp
+similarity index 100%
+rename from tests/data/acpi/pc/SLIT.memhp
+rename to tests/data/acpi/x86/pc/SLIT.memhp
+diff --git a/tests/data/acpi/pc/SRAT.acpihmat b/tests/data/acpi/x86/pc/SRAT.acpihmat
+similarity index 100%
+rename from tests/data/acpi/pc/SRAT.acpihmat
+rename to tests/data/acpi/x86/pc/SRAT.acpihmat
+diff --git a/tests/data/acpi/pc/SRAT.cphp b/tests/data/acpi/x86/pc/SRAT.cphp
+similarity index 100%
+rename from tests/data/acpi/pc/SRAT.cphp
+rename to tests/data/acpi/x86/pc/SRAT.cphp
+diff --git a/tests/data/acpi/pc/SRAT.dimmpxm b/tests/data/acpi/x86/pc/SRAT.dimmpxm
+similarity index 100%
+rename from tests/data/acpi/pc/SRAT.dimmpxm
+rename to tests/data/acpi/x86/pc/SRAT.dimmpxm
+diff --git a/tests/data/acpi/pc/SRAT.memhp b/tests/data/acpi/x86/pc/SRAT.memhp
+similarity index 100%
+rename from tests/data/acpi/pc/SRAT.memhp
+rename to tests/data/acpi/x86/pc/SRAT.memhp
+diff --git a/tests/data/acpi/pc/SRAT.numamem b/tests/data/acpi/x86/pc/SRAT.numamem
+similarity index 100%
+rename from tests/data/acpi/pc/SRAT.numamem
+rename to tests/data/acpi/x86/pc/SRAT.numamem
+diff --git a/tests/data/acpi/pc/SSDT.dimmpxm b/tests/data/acpi/x86/pc/SSDT.dimmpxm
+similarity index 100%
+rename from tests/data/acpi/pc/SSDT.dimmpxm
+rename to tests/data/acpi/x86/pc/SSDT.dimmpxm
+diff --git a/tests/data/acpi/pc/WAET b/tests/data/acpi/x86/pc/WAET
+similarity index 100%
+rename from tests/data/acpi/pc/WAET
+rename to tests/data/acpi/x86/pc/WAET
+diff --git a/tests/data/acpi/q35/APIC b/tests/data/acpi/x86/q35/APIC
+similarity index 100%
+rename from tests/data/acpi/q35/APIC
+rename to tests/data/acpi/x86/q35/APIC
+diff --git a/tests/data/acpi/q35/APIC.acpihmat b/tests/data/acpi/x86/q35/APIC.acpihmat
+similarity index 100%
+rename from tests/data/acpi/q35/APIC.acpihmat
+rename to tests/data/acpi/x86/q35/APIC.acpihmat
+diff --git a/tests/data/acpi/q35/APIC.acpihmat-noinitiator b/tests/data/acpi/x86/q35/APIC.acpihmat-noinitiator
+similarity index 100%
+rename from tests/data/acpi/q35/APIC.acpihmat-noinitiator
+rename to tests/data/acpi/x86/q35/APIC.acpihmat-noinitiator
+diff --git a/tests/data/acpi/q35/APIC.core-count b/tests/data/acpi/x86/q35/APIC.core-count
+similarity index 100%
+rename from tests/data/acpi/q35/APIC.core-count
+rename to tests/data/acpi/x86/q35/APIC.core-count
+diff --git a/tests/data/acpi/q35/APIC.core-count2 b/tests/data/acpi/x86/q35/APIC.core-count2
+similarity index 100%
+rename from tests/data/acpi/q35/APIC.core-count2
+rename to tests/data/acpi/x86/q35/APIC.core-count2
+diff --git a/tests/data/acpi/q35/APIC.cphp b/tests/data/acpi/x86/q35/APIC.cphp
+similarity index 100%
+rename from tests/data/acpi/q35/APIC.cphp
+rename to tests/data/acpi/x86/q35/APIC.cphp
+diff --git a/tests/data/acpi/q35/APIC.dimmpxm b/tests/data/acpi/x86/q35/APIC.dimmpxm
+similarity index 100%
+rename from tests/data/acpi/q35/APIC.dimmpxm
+rename to tests/data/acpi/x86/q35/APIC.dimmpxm
+diff --git a/tests/data/acpi/q35/APIC.thread-count b/tests/data/acpi/x86/q35/APIC.thread-count
+similarity index 100%
+rename from tests/data/acpi/q35/APIC.thread-count
+rename to tests/data/acpi/x86/q35/APIC.thread-count
+diff --git a/tests/data/acpi/q35/APIC.thread-count2 b/tests/data/acpi/x86/q35/APIC.thread-count2
+similarity index 100%
+rename from tests/data/acpi/q35/APIC.thread-count2
+rename to tests/data/acpi/x86/q35/APIC.thread-count2
+diff --git a/tests/data/acpi/q35/APIC.type4-count b/tests/data/acpi/x86/q35/APIC.type4-count
+similarity index 100%
+rename from tests/data/acpi/q35/APIC.type4-count
+rename to tests/data/acpi/x86/q35/APIC.type4-count
+diff --git a/tests/data/acpi/q35/APIC.xapic b/tests/data/acpi/x86/q35/APIC.xapic
+similarity index 100%
+rename from tests/data/acpi/q35/APIC.xapic
+rename to tests/data/acpi/x86/q35/APIC.xapic
+diff --git a/tests/data/acpi/q35/CEDT.cxl b/tests/data/acpi/x86/q35/CEDT.cxl
+similarity index 100%
+rename from tests/data/acpi/q35/CEDT.cxl
+rename to tests/data/acpi/x86/q35/CEDT.cxl
+diff --git a/tests/data/acpi/q35/DMAR.dmar b/tests/data/acpi/x86/q35/DMAR.dmar
+similarity index 100%
+rename from tests/data/acpi/q35/DMAR.dmar
+rename to tests/data/acpi/x86/q35/DMAR.dmar
+diff --git a/tests/data/acpi/q35/DSDT b/tests/data/acpi/x86/q35/DSDT
+similarity index 100%
+rename from tests/data/acpi/q35/DSDT
+rename to tests/data/acpi/x86/q35/DSDT
+diff --git a/tests/data/acpi/q35/DSDT.acpierst b/tests/data/acpi/x86/q35/DSDT.acpierst
+similarity index 100%
+rename from tests/data/acpi/q35/DSDT.acpierst
+rename to tests/data/acpi/x86/q35/DSDT.acpierst
+diff --git a/tests/data/acpi/q35/DSDT.acpihmat b/tests/data/acpi/x86/q35/DSDT.acpihmat
+similarity index 100%
+rename from tests/data/acpi/q35/DSDT.acpihmat
+rename to tests/data/acpi/x86/q35/DSDT.acpihmat
+diff --git a/tests/data/acpi/q35/DSDT.acpihmat-noinitiator b/tests/data/acpi/x86/q35/DSDT.acpihmat-noinitiator
+similarity index 100%
+rename from tests/data/acpi/q35/DSDT.acpihmat-noinitiator
+rename to tests/data/acpi/x86/q35/DSDT.acpihmat-noinitiator
+diff --git a/tests/data/acpi/q35/DSDT.applesmc b/tests/data/acpi/x86/q35/DSDT.applesmc
+similarity index 100%
+rename from tests/data/acpi/q35/DSDT.applesmc
+rename to tests/data/acpi/x86/q35/DSDT.applesmc
+diff --git a/tests/data/acpi/q35/DSDT.bridge b/tests/data/acpi/x86/q35/DSDT.bridge
+similarity index 100%
+rename from tests/data/acpi/q35/DSDT.bridge
+rename to tests/data/acpi/x86/q35/DSDT.bridge
+diff --git a/tests/data/acpi/q35/DSDT.core-count b/tests/data/acpi/x86/q35/DSDT.core-count
+similarity index 100%
+rename from tests/data/acpi/q35/DSDT.core-count
+rename to tests/data/acpi/x86/q35/DSDT.core-count
+diff --git a/tests/data/acpi/q35/DSDT.core-count2 b/tests/data/acpi/x86/q35/DSDT.core-count2
+similarity index 100%
+rename from tests/data/acpi/q35/DSDT.core-count2
+rename to tests/data/acpi/x86/q35/DSDT.core-count2
+diff --git a/tests/data/acpi/q35/DSDT.cphp b/tests/data/acpi/x86/q35/DSDT.cphp
+similarity index 100%
+rename from tests/data/acpi/q35/DSDT.cphp
+rename to tests/data/acpi/x86/q35/DSDT.cphp
+diff --git a/tests/data/acpi/q35/DSDT.cxl b/tests/data/acpi/x86/q35/DSDT.cxl
+similarity index 100%
+rename from tests/data/acpi/q35/DSDT.cxl
+rename to tests/data/acpi/x86/q35/DSDT.cxl
+diff --git a/tests/data/acpi/q35/DSDT.dimmpxm b/tests/data/acpi/x86/q35/DSDT.dimmpxm
+similarity index 100%
+rename from tests/data/acpi/q35/DSDT.dimmpxm
+rename to tests/data/acpi/x86/q35/DSDT.dimmpxm
+diff --git a/tests/data/acpi/q35/DSDT.ipmibt b/tests/data/acpi/x86/q35/DSDT.ipmibt
+similarity index 100%
+rename from tests/data/acpi/q35/DSDT.ipmibt
+rename to tests/data/acpi/x86/q35/DSDT.ipmibt
+diff --git a/tests/data/acpi/q35/DSDT.ipmismbus b/tests/data/acpi/x86/q35/DSDT.ipmismbus
+similarity index 100%
+rename from tests/data/acpi/q35/DSDT.ipmismbus
+rename to tests/data/acpi/x86/q35/DSDT.ipmismbus
+diff --git a/tests/data/acpi/q35/DSDT.ivrs b/tests/data/acpi/x86/q35/DSDT.ivrs
+similarity index 100%
+rename from tests/data/acpi/q35/DSDT.ivrs
+rename to tests/data/acpi/x86/q35/DSDT.ivrs
+diff --git a/tests/data/acpi/q35/DSDT.memhp b/tests/data/acpi/x86/q35/DSDT.memhp
+similarity index 100%
+rename from tests/data/acpi/q35/DSDT.memhp
+rename to tests/data/acpi/x86/q35/DSDT.memhp
+diff --git a/tests/data/acpi/q35/DSDT.mmio64 b/tests/data/acpi/x86/q35/DSDT.mmio64
+similarity index 100%
+rename from tests/data/acpi/q35/DSDT.mmio64
+rename to tests/data/acpi/x86/q35/DSDT.mmio64
+diff --git a/tests/data/acpi/q35/DSDT.multi-bridge b/tests/data/acpi/x86/q35/DSDT.multi-bridge
+similarity index 100%
+rename from tests/data/acpi/q35/DSDT.multi-bridge
+rename to tests/data/acpi/x86/q35/DSDT.multi-bridge
+diff --git a/tests/data/acpi/q35/DSDT.noacpihp b/tests/data/acpi/x86/q35/DSDT.noacpihp
+similarity index 100%
+rename from tests/data/acpi/q35/DSDT.noacpihp
+rename to tests/data/acpi/x86/q35/DSDT.noacpihp
+diff --git a/tests/data/acpi/q35/DSDT.nohpet b/tests/data/acpi/x86/q35/DSDT.nohpet
+similarity index 100%
+rename from tests/data/acpi/q35/DSDT.nohpet
+rename to tests/data/acpi/x86/q35/DSDT.nohpet
+diff --git a/tests/data/acpi/q35/DSDT.numamem b/tests/data/acpi/x86/q35/DSDT.numamem
+similarity index 100%
+rename from tests/data/acpi/q35/DSDT.numamem
+rename to tests/data/acpi/x86/q35/DSDT.numamem
+diff --git a/tests/data/acpi/q35/DSDT.pvpanic-isa b/tests/data/acpi/x86/q35/DSDT.pvpanic-isa
+similarity index 100%
+rename from tests/data/acpi/q35/DSDT.pvpanic-isa
+rename to tests/data/acpi/x86/q35/DSDT.pvpanic-isa
+diff --git a/tests/data/acpi/q35/DSDT.thread-count b/tests/data/acpi/x86/q35/DSDT.thread-count
+similarity index 100%
+rename from tests/data/acpi/q35/DSDT.thread-count
+rename to tests/data/acpi/x86/q35/DSDT.thread-count
+diff --git a/tests/data/acpi/q35/DSDT.thread-count2 b/tests/data/acpi/x86/q35/DSDT.thread-count2
+similarity index 100%
+rename from tests/data/acpi/q35/DSDT.thread-count2
+rename to tests/data/acpi/x86/q35/DSDT.thread-count2
+diff --git a/tests/data/acpi/q35/DSDT.tis.tpm12 b/tests/data/acpi/x86/q35/DSDT.tis.tpm12
+similarity index 100%
+rename from tests/data/acpi/q35/DSDT.tis.tpm12
+rename to tests/data/acpi/x86/q35/DSDT.tis.tpm12
+diff --git a/tests/data/acpi/q35/DSDT.tis.tpm2 b/tests/data/acpi/x86/q35/DSDT.tis.tpm2
+similarity index 100%
+rename from tests/data/acpi/q35/DSDT.tis.tpm2
+rename to tests/data/acpi/x86/q35/DSDT.tis.tpm2
+diff --git a/tests/data/acpi/q35/DSDT.type4-count b/tests/data/acpi/x86/q35/DSDT.type4-count
+similarity index 100%
+rename from tests/data/acpi/q35/DSDT.type4-count
+rename to tests/data/acpi/x86/q35/DSDT.type4-count
+diff --git a/tests/data/acpi/q35/DSDT.viot b/tests/data/acpi/x86/q35/DSDT.viot
+similarity index 100%
+rename from tests/data/acpi/q35/DSDT.viot
+rename to tests/data/acpi/x86/q35/DSDT.viot
+diff --git a/tests/data/acpi/q35/DSDT.xapic b/tests/data/acpi/x86/q35/DSDT.xapic
+similarity index 100%
+rename from tests/data/acpi/q35/DSDT.xapic
+rename to tests/data/acpi/x86/q35/DSDT.xapic
+diff --git a/tests/data/acpi/q35/ERST.acpierst b/tests/data/acpi/x86/q35/ERST.acpierst
+similarity index 100%
+rename from tests/data/acpi/q35/ERST.acpierst
+rename to tests/data/acpi/x86/q35/ERST.acpierst
+diff --git a/tests/data/acpi/q35/FACP b/tests/data/acpi/x86/q35/FACP
+similarity index 100%
+rename from tests/data/acpi/q35/FACP
+rename to tests/data/acpi/x86/q35/FACP
+diff --git a/tests/data/acpi/q35/FACP.core-count b/tests/data/acpi/x86/q35/FACP.core-count
+similarity index 100%
+rename from tests/data/acpi/q35/FACP.core-count
+rename to tests/data/acpi/x86/q35/FACP.core-count
+diff --git a/tests/data/acpi/q35/FACP.core-count2 b/tests/data/acpi/x86/q35/FACP.core-count2
+similarity index 100%
+rename from tests/data/acpi/q35/FACP.core-count2
+rename to tests/data/acpi/x86/q35/FACP.core-count2
+diff --git a/tests/data/acpi/q35/FACP.nosmm b/tests/data/acpi/x86/q35/FACP.nosmm
+similarity index 100%
+rename from tests/data/acpi/q35/FACP.nosmm
+rename to tests/data/acpi/x86/q35/FACP.nosmm
+diff --git a/tests/data/acpi/q35/FACP.slic b/tests/data/acpi/x86/q35/FACP.slic
+similarity index 100%
+rename from tests/data/acpi/q35/FACP.slic
+rename to tests/data/acpi/x86/q35/FACP.slic
+diff --git a/tests/data/acpi/q35/FACP.thread-count b/tests/data/acpi/x86/q35/FACP.thread-count
+similarity index 100%
+rename from tests/data/acpi/q35/FACP.thread-count
+rename to tests/data/acpi/x86/q35/FACP.thread-count
+diff --git a/tests/data/acpi/q35/FACP.thread-count2 b/tests/data/acpi/x86/q35/FACP.thread-count2
+similarity index 100%
+rename from tests/data/acpi/q35/FACP.thread-count2
+rename to tests/data/acpi/x86/q35/FACP.thread-count2
+diff --git a/tests/data/acpi/q35/FACP.type4-count b/tests/data/acpi/x86/q35/FACP.type4-count
+similarity index 100%
+rename from tests/data/acpi/q35/FACP.type4-count
+rename to tests/data/acpi/x86/q35/FACP.type4-count
+diff --git a/tests/data/acpi/q35/FACP.xapic b/tests/data/acpi/x86/q35/FACP.xapic
+similarity index 100%
+rename from tests/data/acpi/q35/FACP.xapic
+rename to tests/data/acpi/x86/q35/FACP.xapic
+diff --git a/tests/data/acpi/q35/FACS b/tests/data/acpi/x86/q35/FACS
+similarity index 100%
+rename from tests/data/acpi/q35/FACS
+rename to tests/data/acpi/x86/q35/FACS
+diff --git a/tests/data/acpi/q35/HMAT.acpihmat b/tests/data/acpi/x86/q35/HMAT.acpihmat
+similarity index 100%
+rename from tests/data/acpi/q35/HMAT.acpihmat
+rename to tests/data/acpi/x86/q35/HMAT.acpihmat
+diff --git a/tests/data/acpi/q35/HMAT.acpihmat-noinitiator b/tests/data/acpi/x86/q35/HMAT.acpihmat-noinitiator
+similarity index 100%
+rename from tests/data/acpi/q35/HMAT.acpihmat-noinitiator
+rename to tests/data/acpi/x86/q35/HMAT.acpihmat-noinitiator
+diff --git a/tests/data/acpi/q35/HPET b/tests/data/acpi/x86/q35/HPET
+similarity index 100%
+rename from tests/data/acpi/q35/HPET
+rename to tests/data/acpi/x86/q35/HPET
+diff --git a/tests/data/acpi/q35/IVRS.ivrs b/tests/data/acpi/x86/q35/IVRS.ivrs
+similarity index 100%
+rename from tests/data/acpi/q35/IVRS.ivrs
+rename to tests/data/acpi/x86/q35/IVRS.ivrs
+diff --git a/tests/data/acpi/q35/MCFG b/tests/data/acpi/x86/q35/MCFG
+similarity index 100%
+rename from tests/data/acpi/q35/MCFG
+rename to tests/data/acpi/x86/q35/MCFG
+diff --git a/tests/data/acpi/q35/NFIT.dimmpxm b/tests/data/acpi/x86/q35/NFIT.dimmpxm
+similarity index 100%
+rename from tests/data/acpi/q35/NFIT.dimmpxm
+rename to tests/data/acpi/x86/q35/NFIT.dimmpxm
+diff --git a/tests/data/acpi/q35/SLIC.slic b/tests/data/acpi/x86/q35/SLIC.slic
+similarity index 100%
+rename from tests/data/acpi/q35/SLIC.slic
+rename to tests/data/acpi/x86/q35/SLIC.slic
+diff --git a/tests/data/acpi/q35/SLIT.cphp b/tests/data/acpi/x86/q35/SLIT.cphp
+similarity index 100%
+rename from tests/data/acpi/q35/SLIT.cphp
+rename to tests/data/acpi/x86/q35/SLIT.cphp
+diff --git a/tests/data/acpi/q35/SLIT.memhp b/tests/data/acpi/x86/q35/SLIT.memhp
+similarity index 100%
+rename from tests/data/acpi/q35/SLIT.memhp
+rename to tests/data/acpi/x86/q35/SLIT.memhp
+diff --git a/tests/data/acpi/q35/SRAT.acpihmat b/tests/data/acpi/x86/q35/SRAT.acpihmat
+similarity index 100%
+rename from tests/data/acpi/q35/SRAT.acpihmat
+rename to tests/data/acpi/x86/q35/SRAT.acpihmat
+diff --git a/tests/data/acpi/q35/SRAT.acpihmat-noinitiator b/tests/data/acpi/x86/q35/SRAT.acpihmat-noinitiator
+similarity index 100%
+rename from tests/data/acpi/q35/SRAT.acpihmat-noinitiator
+rename to tests/data/acpi/x86/q35/SRAT.acpihmat-noinitiator
+diff --git a/tests/data/acpi/q35/SRAT.cphp b/tests/data/acpi/x86/q35/SRAT.cphp
+similarity index 100%
+rename from tests/data/acpi/q35/SRAT.cphp
+rename to tests/data/acpi/x86/q35/SRAT.cphp
+diff --git a/tests/data/acpi/q35/SRAT.dimmpxm b/tests/data/acpi/x86/q35/SRAT.dimmpxm
+similarity index 100%
+rename from tests/data/acpi/q35/SRAT.dimmpxm
+rename to tests/data/acpi/x86/q35/SRAT.dimmpxm
+diff --git a/tests/data/acpi/q35/SRAT.memhp b/tests/data/acpi/x86/q35/SRAT.memhp
+similarity index 100%
+rename from tests/data/acpi/q35/SRAT.memhp
+rename to tests/data/acpi/x86/q35/SRAT.memhp
+diff --git a/tests/data/acpi/q35/SRAT.mmio64 b/tests/data/acpi/x86/q35/SRAT.mmio64
+similarity index 100%
+rename from tests/data/acpi/q35/SRAT.mmio64
+rename to tests/data/acpi/x86/q35/SRAT.mmio64
+diff --git a/tests/data/acpi/q35/SRAT.numamem b/tests/data/acpi/x86/q35/SRAT.numamem
+similarity index 100%
+rename from tests/data/acpi/q35/SRAT.numamem
+rename to tests/data/acpi/x86/q35/SRAT.numamem
+diff --git a/tests/data/acpi/q35/SRAT.xapic b/tests/data/acpi/x86/q35/SRAT.xapic
+similarity index 100%
+rename from tests/data/acpi/q35/SRAT.xapic
+rename to tests/data/acpi/x86/q35/SRAT.xapic
+diff --git a/tests/data/acpi/q35/SSDT.dimmpxm b/tests/data/acpi/x86/q35/SSDT.dimmpxm
+similarity index 100%
+rename from tests/data/acpi/q35/SSDT.dimmpxm
+rename to tests/data/acpi/x86/q35/SSDT.dimmpxm
+diff --git a/tests/data/acpi/q35/TCPA.tis.tpm12 b/tests/data/acpi/x86/q35/TCPA.tis.tpm12
+similarity index 100%
+rename from tests/data/acpi/q35/TCPA.tis.tpm12
+rename to tests/data/acpi/x86/q35/TCPA.tis.tpm12
+diff --git a/tests/data/acpi/q35/TPM2.tis.tpm2 b/tests/data/acpi/x86/q35/TPM2.tis.tpm2
+similarity index 100%
+rename from tests/data/acpi/q35/TPM2.tis.tpm2
+rename to tests/data/acpi/x86/q35/TPM2.tis.tpm2
+diff --git a/tests/data/acpi/q35/VIOT.viot b/tests/data/acpi/x86/q35/VIOT.viot
+similarity index 100%
+rename from tests/data/acpi/q35/VIOT.viot
+rename to tests/data/acpi/x86/q35/VIOT.viot
+diff --git a/tests/data/acpi/q35/WAET b/tests/data/acpi/x86/q35/WAET
+similarity index 100%
+rename from tests/data/acpi/q35/WAET
+rename to tests/data/acpi/x86/q35/WAET
 -- 
 2.40.1
 
