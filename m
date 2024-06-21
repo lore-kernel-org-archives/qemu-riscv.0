@@ -4,79 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2825C27C4F
-	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Jun 2024 05:55:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25F2BC27C4F
+	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Jun 2024 06:51:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sKXEU-0004ki-J4; Fri, 21 Jun 2024 01:54:46 -0400
+	id 1sKY6x-0006gK-RB; Fri, 21 Jun 2024 02:51:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sKXET-0004k2-1o; Fri, 21 Jun 2024 01:54:45 -0400
-Received: from mail-vs1-xe32.google.com ([2607:f8b0:4864:20::e32])
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1sKY6w-0006fx-9o
+ for qemu-riscv@nongnu.org; Fri, 21 Jun 2024 02:51:02 -0400
+Received: from mail-ed1-x52d.google.com ([2a00:1450:4864:20::52d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sKXER-0000Ru-6o; Fri, 21 Jun 2024 01:54:44 -0400
-Received: by mail-vs1-xe32.google.com with SMTP id
- ada2fe7eead31-48c4f2ff8c2so510239137.0; 
- Thu, 20 Jun 2024 22:54:42 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1sKY6t-0003HI-MC
+ for qemu-riscv@nongnu.org; Fri, 21 Jun 2024 02:51:02 -0400
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-57d251b5fccso1205833a12.0
+ for <qemu-riscv@nongnu.org>; Thu, 20 Jun 2024 23:50:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1718949281; x=1719554081; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=eG0VzWzhFRIIrZGPHESycEZGThZj/rlEvuJmzj1AfFw=;
- b=GshrOzNhpN6cx64En7yV9OPC/YlGBAgkhMs+2LG/9nk4wxTALr6KFjqjV6XqlqcyT+
- UWKnG871VsqMa61ofMD8CVk2sSYBqkHLipersm3eiMFmoWHZWFTFOzKbg5M2qgx4oS8e
- UOCzsnuaRlLhchjTT1sT+xXaVgencNhM8w6lqyIWpm7MivBvzXUgxqyc4QBQ2LG5nqmQ
- 7WVqgfwWYHIt7uj3ywLuJLPbftj/oO/5qffoSYbRFzl1k8VptyAVakimiG8f7HSsJi8J
- 8PjQ72Almnkhyhh0c/QzoH8aBOcRyzAPD9v+M+fRjfGn476iLLQ5GZewPPQxyd5dt64F
- yycg==
+ d=sifive.com; s=google; t=1718952658; x=1719557458; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=PkX5Q3gJbgqn4dlu9z28iZs7sw8W3cChZ8y9pqqxBh8=;
+ b=QbuqUIwWDR9fBENnxg3QHgQAcI5yhK2+Cj0R5NHDh7SWlG4/fW2BS1jM/CuZ5KBYLS
+ +r2mqhkHldqmlbTpPpOCek85qSjRmJ5lcT9mDrFjRYgM6h3H46CvV1WbdwUS0LLRSdPg
+ Z3oaoenRWEskj22DTNjy6zbPY43+h1XA+CtUjr+aeLwZgnNgPnYsnIRZ3phdbtU+dErG
+ ZA42T3CwKmi7WlG7OGtSLgdpvY2Ex6VTamOC+hezQtNRm5LlM00pQflHP2c+Iqv4nBX0
+ 2HivfeNKuU+sUgtYVcPJZL42YqctN3mWpLc3qH8+YAz0IFKm9ffpuB5/0/Wa76uUyMMK
+ PEDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718949281; x=1719554081;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=eG0VzWzhFRIIrZGPHESycEZGThZj/rlEvuJmzj1AfFw=;
- b=iMosrnGgsMpLAzo+0kBELn/zp8j+mh+A5ejCWfZd17pHBdp7QEv9660qRGLg9YgTA5
- sF5+YBCwRCHy70kfJway1wLxNJi46rfYCVhlbpLXW8xYSSWX7UqN+871Giac4zwEhpmn
- ak3kKKo8xroSAvPvT3IGPlCS/lha/F6goMhqrxggCQVKlW0Pv9T+qazQ0I7nYO/vfdmI
- 2UiK/BZFyoTJ+/dECtEbsJePFbUP9IIgQ2yKvIlyHyvgBrBV0DtD2QOWAFIC0Nx3X41R
- 9k7elbhC8ploagjGa9O47aCmlbT6btoX9rr0DXDokwH2XdGL4Rooj49DvVSz4hx2/H4/
- FKAQ==
+ d=1e100.net; s=20230601; t=1718952658; x=1719557458;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=PkX5Q3gJbgqn4dlu9z28iZs7sw8W3cChZ8y9pqqxBh8=;
+ b=PCO0EOv/0iGMU9f8Zs4921E5qSz6oY6HcBxbN1NbAEVBSqLEf36d0OVrVRWdX9dZ8O
+ i4e8l38zfghNQSIVFFhPYVDndK8C6aJFj0SLPUtigVxFs7btujgf0SFLR9HBI9espPXP
+ 3jgQBILr7CLNMuHG9/tKILJYLf9A3pSJPi5xwa1Jsnc5BvPkRQgrElnsjt9rAHRu9P9j
+ MHm0AE+5tk6WtqGwk4kUNuUwrL+aUiljKrIx5qqD9WMOtoNTox0qVTVv3K+nEPcgrCnQ
+ yemUXQkLD8HIOcqyq6UzPFbwk6/nvxgALRQ9qmiNl9itYOIBHB+KQQSvSneb+n0YiZO/
+ YTow==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWot15tvemgsPp0hvEKhPO8M6uks7be/OWTt5IIsGLlgloX9kBiPV6/EX5OzwHxu1iObmrtbnTwdKikuQPmJauRVPDlTvs=
-X-Gm-Message-State: AOJu0YxFb6dZ/Y9Fwanemuu/RIkQSY/F/j719xHjHBZpfZu+gwKVyT81
- QZeZcNge6UUqZFvwEzIlPeu4dxjy8IIvEP0NGetRWfyWYuy0d9L3WVIRgtEWx1oo0S+1MVJ6pKP
- cXn160Sg5Sp89isTlfDQYu9JXmMc=
-X-Google-Smtp-Source: AGHT+IH6P7kjZ18QI1Zsh6xoWjC+ZSZnw3j+/mL7MwMMSNt+KjaJzqMaPxQzuRdT40jGdXHNC02rSQMA7ILqUnLCisY=
-X-Received: by 2002:a67:ce02:0:b0:48d:9106:362c with SMTP id
- ada2fe7eead31-48f13097574mr8410212137.27.1718949281404; Thu, 20 Jun 2024
- 22:54:41 -0700 (PDT)
+ AJvYcCU+ANkj0xN0313xmMLAfeKmNE/1BOd8yq6hMv+o3AIZeTyHpnRaBmfFeV7sr9axD686De22AqDG/s5kVYn3owulnpvEKi8=
+X-Gm-Message-State: AOJu0YyTJJy46gJxcQfwBhrC2f6WQl1SAEULEolTmDw+63b8jvEAf+1p
+ 57zfF/P8P4++S+jzauC3ovkqKtUNYo4tNEDC0YWSc8SMXgbVYX8MOEhZMn/X5q1o5OoWBn8PIfx
+ KSp2LE7FcyjPUBk0xXEqLX7tigNUGW+F0n/qeDQ==
+X-Google-Smtp-Source: AGHT+IH/Hndw4pP+r5hH9n5IgWY/p7/iD3n/lef7LF6bohd8Nse2kVmnYlQEdB//+a1kDaaGhX48SAz4q2NVw59JC+I=
+X-Received: by 2002:a50:c014:0:b0:57c:935d:2881 with SMTP id
+ 4fb4d7f45d1cf-57d07eb274bmr5450735a12.32.1718952657759; Thu, 20 Jun 2024
+ 23:50:57 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240612031706.2927602-1-ethan84@andestech.com>
- <20240612031706.2927602-3-ethan84@andestech.com>
-In-Reply-To: <20240612031706.2927602-3-ethan84@andestech.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 21 Jun 2024 15:54:15 +1000
-Message-ID: <CAKmqyKM+dSQfGAUcU9w+hHA1SVA-OSLhsfYHh7rV1uutaeppfw@mail.gmail.com>
-Subject: Re: [PATCH v7 2/2] hw/riscv/virt: Add IOPMP support
-To: Ethan Chen <ethan84@andestech.com>
-Cc: qemu-devel@nongnu.org, pbonzini@redhat.com, palmer@dabbelt.com, 
- alistair.francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com, 
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
- qemu-riscv@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e32;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe32.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+References: <20240616024657.17948-1-frank.chang@sifive.com>
+ <20240616024657.17948-3-frank.chang@sifive.com>
+ <CAKmqyKOVg=KND_YER=b61gFAUX8yk6SHZvxiNxKuKoPH1_8wnA@mail.gmail.com>
+In-Reply-To: <CAKmqyKOVg=KND_YER=b61gFAUX8yk6SHZvxiNxKuKoPH1_8wnA@mail.gmail.com>
+From: Frank Chang <frank.chang@sifive.com>
+Date: Fri, 21 Jun 2024 14:50:45 +0800
+Message-ID: <CAE_xrPijscrtEtV=+SeKyd0XwnfC4FbcyBfSTNh4wakUZno+Xg@mail.gmail.com>
+Subject: Re: [PATCH v2 2/6] target/riscv: Introduce extension implied rule
+ helpers
+To: Alistair Francis <alistair23@gmail.com>
+Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>, 
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
+ Jerry Zhang Jian <jerry.zhangjian@sifive.com>, 
+ Max Chou <max.chou@sifive.com>
+Content-Type: multipart/alternative; boundary="0000000000008d7c7a061b60dad6"
+Received-SPF: pass client-ip=2a00:1450:4864:20::52d;
+ envelope-from=frank.chang@sifive.com; helo=mail-ed1-x52d.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -94,236 +99,407 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Jun 12, 2024 at 1:25=E2=80=AFPM Ethan Chen via <qemu-devel@nongnu.o=
-rg> wrote:
->
-> If a requestor device is connected to the IOPMP device, its memory access=
- will
-> be checked by the IOPMP rule.
->
-> - Add 'iopmp=3Don' option to add an iopmp device and make the Generic PCI=
- Express
->   Bridge connect to IOPMP.
+--0000000000008d7c7a061b60dad6
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-I have only had a chance to have a quick look at this series and the spec.
+On Fri, Jun 21, 2024 at 12:15=E2=80=AFPM Alistair Francis <alistair23@gmail=
+.com>
+wrote:
 
-But the IOPMP spec applies to all devices right, but this series seems
-to only work with PCI. Am I missing something?
+> On Sun, Jun 16, 2024 at 12:48=E2=80=AFPM <frank.chang@sifive.com> wrote:
+> >
+> > From: Frank Chang <frank.chang@sifive.com>
+> >
+> > Introduce helpers to enable the extensions based on the implied rules.
+> > The implied extensions are enabled recursively, so we don't have to
+> > expand all of them manually. This also eliminates the old-fashioned
+> > ordering requirement. For example, Zvksg implies Zvks, Zvks implies
+> > Zvksed, etc., removing the need to check the implied rules of Zvksg
+> > before Zvks.
+> >
+> > Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> > Reviewed-by: Jerry Zhang Jian <jerry.zhangjian@sifive.com>
+> > Tested-by: Max Chou <max.chou@sifive.com>
+> > ---
+> >  target/riscv/tcg/tcg-cpu.c | 91 ++++++++++++++++++++++++++++++++++++++
+> >  1 file changed, 91 insertions(+)
+> >
+> > diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+> > index eb6f7b9d12..f8d6371764 100644
+> > --- a/target/riscv/tcg/tcg-cpu.c
+> > +++ b/target/riscv/tcg/tcg-cpu.c
+> > @@ -36,6 +36,9 @@
+> >  static GHashTable *multi_ext_user_opts;
+> >  static GHashTable *misa_ext_user_opts;
+> >
+> > +static GHashTable *misa_implied_rules;
+> > +static GHashTable *ext_implied_rules;
+> > +
+> >  static bool cpu_cfg_ext_is_user_set(uint32_t ext_offset)
+> >  {
+> >      return g_hash_table_contains(multi_ext_user_opts,
+> > @@ -836,11 +839,97 @@ static void riscv_cpu_validate_profiles(RISCVCPU
+> *cpu)
+> >      }
+> >  }
+> >
+> > +static void riscv_cpu_init_implied_exts_rules(void)
+> > +{
+> > +    RISCVCPUImpliedExtsRule *rule;
+> > +    int i;
+> > +
+> > +    for (i =3D 0; (rule =3D riscv_misa_implied_rules[i]); i++) {
+> > +        g_hash_table_insert(misa_implied_rules,
+> GUINT_TO_POINTER(rule->ext),
+> > +                            (gpointer)rule);
+> > +    }
+> > +
+> > +    for (i =3D 0; (rule =3D riscv_ext_implied_rules[i]); i++) {
+> > +        g_hash_table_insert(ext_implied_rules,
+> GUINT_TO_POINTER(rule->ext),
+> > +                            (gpointer)rule);
+> > +    }
+> > +}
+> > +
+> > +static void cpu_enable_implied_rule(RISCVCPU *cpu,
+> > +                                    RISCVCPUImpliedExtsRule *rule)
+> > +{
+> > +    CPURISCVState *env =3D &cpu->env;
+> > +    RISCVCPUImpliedExtsRule *ir;
+> > +    bool enabled =3D false;
+> > +    int i;
+> > +
+> > +#ifndef CONFIG_USER_ONLY
+> > +    enabled =3D qatomic_read(&rule->enabled) & BIT_ULL(cpu->env.mharti=
+d);
+>
+> enabled is a uint64_t, so this limits us to 64 harts right?
+>
+> The virt machine currently has a limit of 512, so this won't work right?
+>
+> Alistair
+>
 
-Alistair
+Yes, that's true.
+Though it wouldn't impact the result as this is just the optimization
+of not iterating the rules that have been applied already.
+
+Maybe I can replace it with the dynamic hart bitmask.
+
+Regards,
+Frank Chang
+
 
 >
-> Signed-off-by: Ethan Chen <ethan84@andestech.com>
-> ---
->  docs/system/riscv/virt.rst |  6 ++++
->  hw/riscv/Kconfig           |  1 +
->  hw/riscv/virt.c            | 57 ++++++++++++++++++++++++++++++++++++--
->  include/hw/riscv/virt.h    |  5 +++-
->  4 files changed, 66 insertions(+), 3 deletions(-)
+> > +#endif
+> > +
+> > +    if (!enabled) {
+> > +        /* Enable the implied MISAs. */
+> > +        if (rule->implied_misas) {
+> > +            riscv_cpu_set_misa_ext(env, env->misa_ext |
+> rule->implied_misas);
+> > +
+> > +            for (i =3D 0; misa_bits[i] !=3D 0; i++) {
+> > +                if (rule->implied_misas & misa_bits[i]) {
+> > +                    ir =3D g_hash_table_lookup(misa_implied_rules,
+> > +
+>  GUINT_TO_POINTER(misa_bits[i]));
+> > +
+> > +                    if (ir) {
+> > +                        cpu_enable_implied_rule(cpu, ir);
+> > +                    }
+> > +                }
+> > +            }
+> > +        }
+> > +
+> > +        /* Enable the implied extensions. */
+> > +        for (i =3D 0; rule->implied_exts[i] !=3D
+> RISCV_IMPLIED_EXTS_RULE_END; i++) {
+> > +            cpu_cfg_ext_auto_update(cpu, rule->implied_exts[i], true);
+> > +
+> > +            ir =3D g_hash_table_lookup(ext_implied_rules,
+> > +
+>  GUINT_TO_POINTER(rule->implied_exts[i]));
+> > +
+> > +            if (ir) {
+> > +                cpu_enable_implied_rule(cpu, ir);
+> > +            }
+> > +        }
+> > +
+> > +#ifndef CONFIG_USER_ONLY
+> > +        qatomic_or(&rule->enabled, BIT_ULL(cpu->env.mhartid));
+> > +#endif
+> > +    }
+> > +}
+> > +
+> > +static void riscv_cpu_enable_implied_rules(RISCVCPU *cpu)
+> > +{
+> > +    RISCVCPUImpliedExtsRule *rule;
+> > +    int i;
+> > +
+> > +    /* Enable the implied MISAs. */
+> > +    for (i =3D 0; (rule =3D riscv_misa_implied_rules[i]); i++) {
+> > +        if (riscv_has_ext(&cpu->env, rule->ext)) {
+> > +            cpu_enable_implied_rule(cpu, rule);
+> > +        }
+> > +    }
+> > +
+> > +    /* Enable the implied extensions. */
+> > +    for (i =3D 0; (rule =3D riscv_ext_implied_rules[i]); i++) {
+> > +        if (isa_ext_is_enabled(cpu, rule->ext)) {
+> > +            cpu_enable_implied_rule(cpu, rule);
+> > +        }
+> > +    }
+> > +}
+> > +
+> >  void riscv_tcg_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
+> >  {
+> >      CPURISCVState *env =3D &cpu->env;
+> >      Error *local_err =3D NULL;
+> >
+> > +    riscv_cpu_init_implied_exts_rules();
+> > +    riscv_cpu_enable_implied_rules(cpu);
+> > +
+> >      riscv_cpu_validate_misa_priv(env, &local_err);
+> >      if (local_err !=3D NULL) {
+> >          error_propagate(errp, local_err);
+> > @@ -1346,6 +1435,8 @@ static void riscv_tcg_cpu_instance_init(CPUState
+> *cs)
+> >
+> >      misa_ext_user_opts =3D g_hash_table_new(NULL, g_direct_equal);
+> >      multi_ext_user_opts =3D g_hash_table_new(NULL, g_direct_equal);
+> > +    misa_implied_rules =3D g_hash_table_new(NULL, g_direct_equal);
+> > +    ext_implied_rules =3D g_hash_table_new(NULL, g_direct_equal);
+> >      riscv_cpu_add_user_properties(obj);
+> >
+> >      if (riscv_cpu_has_max_extensions(obj)) {
+> > --
+> > 2.43.2
+> >
+> >
 >
-> diff --git a/docs/system/riscv/virt.rst b/docs/system/riscv/virt.rst
-> index 9a06f95a34..3b2576f905 100644
-> --- a/docs/system/riscv/virt.rst
-> +++ b/docs/system/riscv/virt.rst
-> @@ -116,6 +116,12 @@ The following machine-specific options are supported=
-:
->    having AIA IMSIC (i.e. "aia=3Daplic-imsic" selected). When not specifi=
-ed,
->    the default number of per-HART VS-level AIA IMSIC pages is 0.
+
+--0000000000008d7c7a061b60dad6
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr">On Fri, Jun 21, 2024 at 12:15=E2=80=AFPM =
+Alistair Francis &lt;<a href=3D"mailto:alistair23@gmail.com">alistair23@gma=
+il.com</a>&gt; wrote:<br></div><div class=3D"gmail_quote"><blockquote class=
+=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
+b(204,204,204);padding-left:1ex">On Sun, Jun 16, 2024 at 12:48=E2=80=AFPM &=
+lt;<a href=3D"mailto:frank.chang@sifive.com" target=3D"_blank">frank.chang@=
+sifive.com</a>&gt; wrote:<br>
+&gt;<br>
+&gt; From: Frank Chang &lt;<a href=3D"mailto:frank.chang@sifive.com" target=
+=3D"_blank">frank.chang@sifive.com</a>&gt;<br>
+&gt;<br>
+&gt; Introduce helpers to enable the extensions based on the implied rules.=
+<br>
+&gt; The implied extensions are enabled recursively, so we don&#39;t have t=
+o<br>
+&gt; expand all of them manually. This also eliminates the old-fashioned<br=
 >
-> +- iopmp=3D[on|off]
-> +
-> +  When this option is "on", an IOPMP device is added to machine. It chec=
-ks dma
-> +  operations from the generic PCIe host bridge. This option is assumed t=
-o be
-> +  "off".
-> +
->  Running Linux kernel
->  --------------------
+&gt; ordering requirement. For example, Zvksg implies Zvks, Zvks implies<br=
 >
-> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-> index a2030e3a6f..0b45a5ade2 100644
-> --- a/hw/riscv/Kconfig
-> +++ b/hw/riscv/Kconfig
-> @@ -56,6 +56,7 @@ config RISCV_VIRT
->      select PLATFORM_BUS
->      select ACPI
->      select ACPI_PCI
-> +    select RISCV_IOPMP
+&gt; Zvksed, etc., removing the need to check the implied rules of Zvksg<br=
 >
->  config SHAKTI_C
->      bool
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 4fdb660525..53a1b71c71 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -55,6 +55,7 @@
->  #include "hw/acpi/aml-build.h"
->  #include "qapi/qapi-visit-common.h"
->  #include "hw/virtio/virtio-iommu.h"
-> +#include "hw/misc/riscv_iopmp.h"
+&gt; before Zvks.<br>
+&gt;<br>
+&gt; Signed-off-by: Frank Chang &lt;<a href=3D"mailto:frank.chang@sifive.co=
+m" target=3D"_blank">frank.chang@sifive.com</a>&gt;<br>
+&gt; Reviewed-by: Jerry Zhang Jian &lt;<a href=3D"mailto:jerry.zhangjian@si=
+five.com" target=3D"_blank">jerry.zhangjian@sifive.com</a>&gt;<br>
+&gt; Tested-by: Max Chou &lt;<a href=3D"mailto:max.chou@sifive.com" target=
+=3D"_blank">max.chou@sifive.com</a>&gt;<br>
+&gt; ---<br>
+&gt;=C2=A0 target/riscv/tcg/tcg-cpu.c | 91 ++++++++++++++++++++++++++++++++=
+++++++<br>
+&gt;=C2=A0 1 file changed, 91 insertions(+)<br>
+&gt;<br>
+&gt; diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c<b=
+r>
+&gt; index eb6f7b9d12..f8d6371764 100644<br>
+&gt; --- a/target/riscv/tcg/tcg-cpu.c<br>
+&gt; +++ b/target/riscv/tcg/tcg-cpu.c<br>
+&gt; @@ -36,6 +36,9 @@<br>
+&gt;=C2=A0 static GHashTable *multi_ext_user_opts;<br>
+&gt;=C2=A0 static GHashTable *misa_ext_user_opts;<br>
+&gt;<br>
+&gt; +static GHashTable *misa_implied_rules;<br>
+&gt; +static GHashTable *ext_implied_rules;<br>
+&gt; +<br>
+&gt;=C2=A0 static bool cpu_cfg_ext_is_user_set(uint32_t ext_offset)<br>
+&gt;=C2=A0 {<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 return g_hash_table_contains(multi_ext_user_opts,<=
+br>
+&gt; @@ -836,11 +839,97 @@ static void riscv_cpu_validate_profiles(RISCVCPU=
+ *cpu)<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 }<br>
+&gt;=C2=A0 }<br>
+&gt;<br>
+&gt; +static void riscv_cpu_init_implied_exts_rules(void)<br>
+&gt; +{<br>
+&gt; +=C2=A0 =C2=A0 RISCVCPUImpliedExtsRule *rule;<br>
+&gt; +=C2=A0 =C2=A0 int i;<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 for (i =3D 0; (rule =3D riscv_misa_implied_rules[i]); i=
+++) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 g_hash_table_insert(misa_implied_rules, G=
+UINT_TO_POINTER(rule-&gt;ext),<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 (gpointer)rule);<br>
+&gt; +=C2=A0 =C2=A0 }<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 for (i =3D 0; (rule =3D riscv_ext_implied_rules[i]); i+=
++) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 g_hash_table_insert(ext_implied_rules, GU=
+INT_TO_POINTER(rule-&gt;ext),<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 (gpointer)rule);<br>
+&gt; +=C2=A0 =C2=A0 }<br>
+&gt; +}<br>
+&gt; +<br>
+&gt; +static void cpu_enable_implied_rule(RISCVCPU *cpu,<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 RISCVCPUImpliedExt=
+sRule *rule)<br>
+&gt; +{<br>
+&gt; +=C2=A0 =C2=A0 CPURISCVState *env =3D &amp;cpu-&gt;env;<br>
+&gt; +=C2=A0 =C2=A0 RISCVCPUImpliedExtsRule *ir;<br>
+&gt; +=C2=A0 =C2=A0 bool enabled =3D false;<br>
+&gt; +=C2=A0 =C2=A0 int i;<br>
+&gt; +<br>
+&gt; +#ifndef CONFIG_USER_ONLY<br>
+&gt; +=C2=A0 =C2=A0 enabled =3D qatomic_read(&amp;rule-&gt;enabled) &amp; B=
+IT_ULL(cpu-&gt;env.mhartid);<br>
+<br>
+enabled is a uint64_t, so this limits us to 64 harts right?<br>
+<br>
+The virt machine currently has a limit of 512, so this won&#39;t work right=
+?<br>
+<br>
+Alistair<br></blockquote><div><br></div><div>Yes, that&#39;s true.</div><di=
+v>Though it wouldn&#39;t impact the result as this is just the optimization=
+</div><div>of not iterating the rules that have been applied already.</div>=
+<div><br></div><div>Maybe I can replace it with the dynamic hart bitmask.</=
+div><div><br></div><div>Regards,</div><div>Frank Chang</div><div>=C2=A0</di=
+v><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;borde=
+r-left:1px solid rgb(204,204,204);padding-left:1ex">
+<br>
+&gt; +#endif<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 if (!enabled) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 /* Enable the implied MISAs. */<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (rule-&gt;implied_misas) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 riscv_cpu_set_misa_ext(env,=
+ env-&gt;misa_ext | rule-&gt;implied_misas);<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 for (i =3D 0; misa_bits[i] =
+!=3D 0; i++) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (rule-&gt;=
+implied_misas &amp; misa_bits[i]) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ ir =3D g_hash_table_lookup(misa_implied_rules,<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0GUINT_TO_POINTER(misa_bits[i]));<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ if (ir) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 cpu_enable_implied_rule(cpu, ir);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ }<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 /* Enable the implied extensions. */<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 for (i =3D 0; rule-&gt;implied_exts[i] !=
+=3D RISCV_IMPLIED_EXTS_RULE_END; i++) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 cpu_cfg_ext_auto_update(cpu=
+, rule-&gt;implied_exts[i], true);<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ir =3D g_hash_table_lookup(=
+ext_implied_rules,<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0GUINT_TO_POI=
+NTER(rule-&gt;implied_exts[i]));<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (ir) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 cpu_enable_im=
+plied_rule(cpu, ir);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+&gt; +<br>
+&gt; +#ifndef CONFIG_USER_ONLY<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 qatomic_or(&amp;rule-&gt;enabled, BIT_ULL=
+(cpu-&gt;env.mhartid));<br>
+&gt; +#endif<br>
+&gt; +=C2=A0 =C2=A0 }<br>
+&gt; +}<br>
+&gt; +<br>
+&gt; +static void riscv_cpu_enable_implied_rules(RISCVCPU *cpu)<br>
+&gt; +{<br>
+&gt; +=C2=A0 =C2=A0 RISCVCPUImpliedExtsRule *rule;<br>
+&gt; +=C2=A0 =C2=A0 int i;<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 /* Enable the implied MISAs. */<br>
+&gt; +=C2=A0 =C2=A0 for (i =3D 0; (rule =3D riscv_misa_implied_rules[i]); i=
+++) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (riscv_has_ext(&amp;cpu-&gt;env, rule-=
+&gt;ext)) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 cpu_enable_implied_rule(cpu=
+, rule);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+&gt; +=C2=A0 =C2=A0 }<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 /* Enable the implied extensions. */<br>
+&gt; +=C2=A0 =C2=A0 for (i =3D 0; (rule =3D riscv_ext_implied_rules[i]); i+=
++) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (isa_ext_is_enabled(cpu, rule-&gt;ext)=
+) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 cpu_enable_implied_rule(cpu=
+, rule);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+&gt; +=C2=A0 =C2=A0 }<br>
+&gt; +}<br>
+&gt; +<br>
+&gt;=C2=A0 void riscv_tcg_cpu_finalize_features(RISCVCPU *cpu, Error **errp=
+)<br>
+&gt;=C2=A0 {<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 CPURISCVState *env =3D &amp;cpu-&gt;env;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 Error *local_err =3D NULL;<br>
+&gt;<br>
+&gt; +=C2=A0 =C2=A0 riscv_cpu_init_implied_exts_rules();<br>
+&gt; +=C2=A0 =C2=A0 riscv_cpu_enable_implied_rules(cpu);<br>
+&gt; +<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 riscv_cpu_validate_misa_priv(env, &amp;local_err);=
+<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 if (local_err !=3D NULL) {<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 error_propagate(errp, local_err);<br=
 >
->  /* KVM AIA only supports APLIC MSI. APLIC Wired is always emulated by QE=
-MU. */
->  static bool virt_use_kvm_aia(RISCVVirtState *s)
-> @@ -82,6 +83,7 @@ static const MemMapEntry virt_memmap[] =3D {
->      [VIRT_UART0] =3D        { 0x10000000,         0x100 },
->      [VIRT_VIRTIO] =3D       { 0x10001000,        0x1000 },
->      [VIRT_FW_CFG] =3D       { 0x10100000,          0x18 },
-> +    [VIRT_IOPMP] =3D        { 0x10200000,      0x100000 },
->      [VIRT_FLASH] =3D        { 0x20000000,     0x4000000 },
->      [VIRT_IMSIC_M] =3D      { 0x24000000, VIRT_IMSIC_MAX_SIZE },
->      [VIRT_IMSIC_S] =3D      { 0x28000000, VIRT_IMSIC_MAX_SIZE },
-> @@ -1006,6 +1008,24 @@ static void create_fdt_virtio_iommu(RISCVVirtState=
- *s, uint16_t bdf)
->                             bdf + 1, iommu_phandle, bdf + 1, 0xffff - bdf=
-);
->  }
->
-> +static void create_fdt_iopmp(RISCVVirtState *s, const MemMapEntry *memma=
-p,
-> +                             uint32_t irq_mmio_phandle) {
-> +    g_autofree char *name =3D NULL;
-> +    MachineState *ms =3D MACHINE(s);
-> +
-> +    name =3D g_strdup_printf("/soc/iopmp@%lx", (long)memmap[VIRT_IOPMP].=
-base);
-> +    qemu_fdt_add_subnode(ms->fdt, name);
-> +    qemu_fdt_setprop_string(ms->fdt, name, "compatible", "riscv_iopmp");
-> +    qemu_fdt_setprop_cells(ms->fdt, name, "reg", 0x0, memmap[VIRT_IOPMP]=
-.base,
-> +        0x0, memmap[VIRT_IOPMP].size);
-> +    qemu_fdt_setprop_cell(ms->fdt, name, "interrupt-parent", irq_mmio_ph=
-andle);
-> +    if (s->aia_type =3D=3D VIRT_AIA_TYPE_NONE) {
-> +        qemu_fdt_setprop_cell(ms->fdt, name, "interrupts", IOPMP_IRQ);
-> +    } else {
-> +        qemu_fdt_setprop_cells(ms->fdt, name, "interrupts", IOPMP_IRQ, 0=
-x4);
-> +    }
-> +}
-> +
->  static void finalize_fdt(RISCVVirtState *s)
->  {
->      uint32_t phandle =3D 1, irq_mmio_phandle =3D 1, msi_pcie_phandle =3D=
- 1;
-> @@ -1024,6 +1044,10 @@ static void finalize_fdt(RISCVVirtState *s)
->      create_fdt_uart(s, virt_memmap, irq_mmio_phandle);
->
->      create_fdt_rtc(s, virt_memmap, irq_mmio_phandle);
-> +
-> +    if (s->have_iopmp) {
-> +        create_fdt_iopmp(s, virt_memmap, irq_mmio_phandle);
-> +    }
->  }
->
->  static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap)
-> @@ -1404,7 +1428,7 @@ static void virt_machine_init(MachineState *machine=
-)
->      RISCVVirtState *s =3D RISCV_VIRT_MACHINE(machine);
->      MemoryRegion *system_memory =3D get_system_memory();
->      MemoryRegion *mask_rom =3D g_new(MemoryRegion, 1);
-> -    DeviceState *mmio_irqchip, *virtio_irqchip, *pcie_irqchip;
-> +    DeviceState *mmio_irqchip, *virtio_irqchip, *pcie_irqchip, *gpex_dev=
-;
->      int i, base_hartid, hart_count;
->      int socket_count =3D riscv_socket_count(machine);
->
-> @@ -1570,7 +1594,7 @@ static void virt_machine_init(MachineState *machine=
-)
->              qdev_get_gpio_in(virtio_irqchip, VIRTIO_IRQ + i));
->      }
->
-> -    gpex_pcie_init(system_memory, pcie_irqchip, s);
-> +    gpex_dev =3D gpex_pcie_init(system_memory, pcie_irqchip, s);
->
->      create_platform_bus(s, mmio_irqchip);
->
-> @@ -1581,6 +1605,14 @@ static void virt_machine_init(MachineState *machin=
-e)
->      sysbus_create_simple("goldfish_rtc", memmap[VIRT_RTC].base,
->          qdev_get_gpio_in(mmio_irqchip, RTC_IRQ));
->
-> +    if (s->have_iopmp) {
-> +        DeviceState *iopmp_dev =3D sysbus_create_simple(TYPE_IOPMP,
-> +            memmap[VIRT_IOPMP].base,
-> +            qdev_get_gpio_in(DEVICE(mmio_irqchip), IOPMP_IRQ));
-> +
-> +        iopmp_setup_pci(iopmp_dev, PCI_HOST_BRIDGE(gpex_dev)->bus);
-> +    }
-> +
->      for (i =3D 0; i < ARRAY_SIZE(s->flash); i++) {
->          /* Map legacy -drive if=3Dpflash to machine properties */
->          pflash_cfi01_legacy_drive(s->flash[i],
-> @@ -1684,6 +1716,21 @@ static void virt_set_aclint(Object *obj, bool valu=
-e, Error **errp)
->      s->have_aclint =3D value;
->  }
->
-> +static bool virt_get_iopmp(Object *obj, Error **errp)
-> +{
-> +    RISCVVirtState *s =3D RISCV_VIRT_MACHINE(obj);
-> +
-> +    return s->have_iopmp;
-> +}
-> +
-> +static void virt_set_iopmp(Object *obj, bool value, Error **errp)
-> +{
-> +    RISCVVirtState *s =3D RISCV_VIRT_MACHINE(obj);
-> +
-> +    s->have_iopmp =3D value;
-> +}
-> +
-> +
->  bool virt_is_acpi_enabled(RISCVVirtState *s)
->  {
->      return s->acpi !=3D ON_OFF_AUTO_OFF;
-> @@ -1794,6 +1841,12 @@ static void virt_machine_class_init(ObjectClass *o=
-c, void *data)
->                                NULL, NULL);
->      object_class_property_set_description(oc, "acpi",
->                                            "Enable ACPI");
-> +
-> +    object_class_property_add_bool(oc, "iopmp", virt_get_iopmp,
-> +                                   virt_set_iopmp);
-> +    object_class_property_set_description(oc, "iopmp",
-> +                                          "Set on/off to enable/disable =
-"
-> +                                          "iopmp device");
->  }
->
->  static const TypeInfo virt_machine_typeinfo =3D {
-> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-> index 3db839160f..81460e29c4 100644
-> --- a/include/hw/riscv/virt.h
-> +++ b/include/hw/riscv/virt.h
-> @@ -55,6 +55,7 @@ struct RISCVVirtState {
->
->      int fdt_size;
->      bool have_aclint;
-> +    bool have_iopmp;
->      RISCVVirtAIAType aia_type;
->      int aia_guests;
->      char *oem_id;
-> @@ -84,12 +85,14 @@ enum {
->      VIRT_PCIE_MMIO,
->      VIRT_PCIE_PIO,
->      VIRT_PLATFORM_BUS,
-> -    VIRT_PCIE_ECAM
-> +    VIRT_PCIE_ECAM,
-> +    VIRT_IOPMP,
->  };
->
->  enum {
->      UART0_IRQ =3D 10,
->      RTC_IRQ =3D 11,
-> +    IOPMP_IRQ =3D 12,
->      VIRTIO_IRQ =3D 1, /* 1 to 8 */
->      VIRTIO_COUNT =3D 8,
->      PCIE_IRQ =3D 0x20, /* 32 to 35 */
-> --
-> 2.34.1
->
->
+&gt; @@ -1346,6 +1435,8 @@ static void riscv_tcg_cpu_instance_init(CPUState=
+ *cs)<br>
+&gt;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 misa_ext_user_opts =3D g_hash_table_new(NULL, g_di=
+rect_equal);<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 multi_ext_user_opts =3D g_hash_table_new(NULL, g_d=
+irect_equal);<br>
+&gt; +=C2=A0 =C2=A0 misa_implied_rules =3D g_hash_table_new(NULL, g_direct_=
+equal);<br>
+&gt; +=C2=A0 =C2=A0 ext_implied_rules =3D g_hash_table_new(NULL, g_direct_e=
+qual);<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 riscv_cpu_add_user_properties(obj);<br>
+&gt;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 if (riscv_cpu_has_max_extensions(obj)) {<br>
+&gt; --<br>
+&gt; 2.43.2<br>
+&gt;<br>
+&gt;<br>
+</blockquote></div></div>
+
+--0000000000008d7c7a061b60dad6--
 
