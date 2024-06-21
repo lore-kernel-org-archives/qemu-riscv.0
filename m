@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 682A9C2BA1A
-	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Jun 2024 12:04:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6F48C27C4F
+	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Jun 2024 12:05:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sKcwH-0005XT-Uk; Fri, 21 Jun 2024 08:00:22 -0400
+	id 1sKcx2-000749-I9; Fri, 21 Jun 2024 08:01:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1sKcwE-0005O1-SL
- for qemu-riscv@nongnu.org; Fri, 21 Jun 2024 08:00:19 -0400
-Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629])
+ id 1sKcwW-0005nu-Uc
+ for qemu-riscv@nongnu.org; Fri, 21 Jun 2024 08:00:40 -0400
+Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1sKcwA-0003Ja-EB
- for qemu-riscv@nongnu.org; Fri, 21 Jun 2024 08:00:18 -0400
-Received: by mail-pl1-x629.google.com with SMTP id
- d9443c01a7336-1f44b5b9de6so15738175ad.3
- for <qemu-riscv@nongnu.org>; Fri, 21 Jun 2024 05:00:13 -0700 (PDT)
+ id 1sKcwR-0003fn-94
+ for qemu-riscv@nongnu.org; Fri, 21 Jun 2024 08:00:35 -0400
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-1f862f7c7edso15796025ad.3
+ for <qemu-riscv@nongnu.org>; Fri, 21 Jun 2024 05:00:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1718971213; x=1719576013; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1718971229; x=1719576029; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zjJ8FiIwLlRUxUj7SFESB41Mk+cqdsNDBhRKpyJyimk=;
- b=o2L99lklWFaPgd1psayupquJRguySckEcihHrKS1137NlFbWpuDtFEbLrFi87plfX/
- ZNeXVu9nLOqFvXMeb7+OKD5nHjpY7dWEr2l6GHgnf260c6HPGgxKNpaNCA8OaJVTQa7g
- ghAh3XUlur07HSaXJ2Im0KfB2+GYEA0MOuqCa3vYMPQbGdckCX5WK+o4rHTXNHkuCxyA
- hWomFp+I8FuO13DujhwIQ1l7J9NR1/SrDJk3uM8HdE1b+WUP3S7qR0OqWgL2Di/D0ZhP
- NXsk3b83WnKSjAVw29QQ66odsXrYWSoNSFbU9o2e3ogGtBCUM2QzsK7FhSw59gJYeoP2
- X/Iw==
+ bh=RHCVHGsnm67vgclIl82zPh5XLBIaF6XqB4NGAAUBUiE=;
+ b=PuQ8CqSFNkCzv2vaMZHSEuS6fcHYH9nugu+6FuT9i2F4h1OXhLOdbOSxMIwlwRPK8B
+ BKV7WS8Ri5QvXWstFwfxGsMKdZDRiNJ9mOVGF+wTh7VyLVbCS/28dSR7J6ZTT/tVkoWz
+ Fxjs9eGakGx5KRTrm9riGUWKwMuBVTMwqrGpVpDj2MMuG0hh5qgqaUW812GCnmBRB9+b
+ 5ZvR5Gxka6koJFzUBM/lXjxdNEkaykXjSFUQD2rLyggFRp8j9/gZ1c63L4AOWBfhM3I/
+ UWNPBHQMJ3r6Idb8JRos9MrgsAWmBR7Z5gq/5Gmpoc7+JBu7YZ2o3xfuwgKMtEI6hpyh
+ EPhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718971213; x=1719576013;
+ d=1e100.net; s=20230601; t=1718971229; x=1719576029;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zjJ8FiIwLlRUxUj7SFESB41Mk+cqdsNDBhRKpyJyimk=;
- b=abAl7LO7zsYxYjBr63XT7O6RWeTf2QjOnoa1kFAZvopsx22ZhCG1k1MM0QmPtdBeT7
- OHYwyOL5SIZB9ZEbbfmm0K4kF/EqOLpZ0EIOz9zVb0Z4WHjtH1lb7DzGAZ3vQxccRBDA
- WAXwq8mlDI+Wekc3OmlJU4brjUHaxN6YRGHevwzHwEStyIDCIxcNkSqv30a69AtLO4rP
- Z+iZIxagIhIWhPTZF5jkUM/inPq35ccYjo8j0kE3h3dlSoOSpCRcRN1o7JtAwVQXx87B
- ZrtAeq0wm0lXivgSQ8OTrHmRg11lZmxCZyiL/RyJhIbyXY9sZDwOd9rBFYqoQzJKZSfV
- 0Tzg==
+ bh=RHCVHGsnm67vgclIl82zPh5XLBIaF6XqB4NGAAUBUiE=;
+ b=r5WPLY6qs9xouTB2v958ptFpsSpryH0wCz1CxkbbSMzDucRQlXLeDG+B14N4jUMbDx
+ NbEgcMGDVXHJ82jMh+DW/uoxWOmMQPlMUpq9TwhUIYm5FA09Pe1VDIq7T95JMEptBpLH
+ xe2LxLPzi+ImxYBOjXdFYIsKnivTb7Gk5G1Wm6w+h++vsceeqPIxeGsej/6DoWs1141p
+ 0s8j4QDVRR1Qf6CXfWtyExn9bX77KfQ69yvFp8TiNn7oqWUWtrLiLfG8pAtePMlzn2vY
+ 2YB+vfrKWfiJHpjvrS7+bMujWx1HCh17gcjLIIaizrr+DS04Aa/UUULX/7AFU+qP1kAz
+ YxPQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXI3CSpw3Oevf80BcBcqKpX83GFHGB3hfWbLHpzx9pBvS0pY4S7EoB19mVvSvzILXuh4ryylnzncsdJydHu1klNpckrc4s=
-X-Gm-Message-State: AOJu0YztAQVL1yJzF2cHGJTxM8+NhcgIz1myq/RXFkGtC8Fojb0SnSEs
- njC5AAdnimAVjAGyTdeBdSlxeZpHdmYcXVOZoOXohQTDnWw6SWEsA4Oyd0cdYjw=
-X-Google-Smtp-Source: AGHT+IG/EfMQeEn8XpVHYTU46v8NO5eSy15FQurzKf8aspudolJ7Qi/0MC0QCFqLKDi6C9vwVWsE8A==
-X-Received: by 2002:a17:902:cec6:b0:1f6:62cb:7c22 with SMTP id
- d9443c01a7336-1f9aa45a631mr93210575ad.46.1718971211354; 
- Fri, 21 Jun 2024 05:00:11 -0700 (PDT)
+ AJvYcCWQHgnSXJDsH+7jU85Zvv22iw+s9w0xDOdM5OFFwd83ldMFhHoELGvIf8mISo+omr90HtIcWunc7ZZBXbIAqtEN3T7JqOs=
+X-Gm-Message-State: AOJu0YzIgT/zuUHLtDdEiv7t8Cm89wojbfaLJArFGhxjw3oTsS74TK3n
+ XrJ65eW/0DY0dKr90EG9pqoXB5MyEr9iJJHUwu51v4lABCqqdik+jzlpdVxPzM8=
+X-Google-Smtp-Source: AGHT+IG5W+oECOfWWouyOeKKNsxRM1HEQojpBJhiZNzdfM/fgUA1B0PXr+2e5ABQur4UiDjoTclz/g==
+X-Received: by 2002:a17:902:e743:b0:1f9:f9be:b131 with SMTP id
+ d9443c01a7336-1f9f9beb3a3mr6242625ad.51.1718971229040; 
+ Fri, 21 Jun 2024 05:00:29 -0700 (PDT)
 Received: from sunil-pc.Dlink ([106.51.187.237])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1f9ebbb606dsm12422995ad.270.2024.06.21.05.00.05
+ d9443c01a7336-1f9ebbb606dsm12422995ad.270.2024.06.21.05.00.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Jun 2024 05:00:10 -0700 (PDT)
+ Fri, 21 Jun 2024 05:00:28 -0700 (PDT)
 From: Sunil V L <sunilvl@ventanamicro.com>
 To: qemu-devel@nongnu.org,
 	qemu-arm@nongnu.org,
@@ -79,23 +79,24 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>,
  Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Sunil V L <sunilvl@ventanamicro.com>,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v3 10/15] meson.build: Add RISC-V to the edk2-target list
-Date: Fri, 21 Jun 2024 17:29:01 +0530
-Message-Id: <20240621115906.1049832-11-sunilvl@ventanamicro.com>
+Subject: [PATCH v3 13/15] tests/qtest/bios-tables-test: Add empty ACPI data
+ files for RISC-V
+Date: Fri, 21 Jun 2024 17:29:04 +0530
+Message-Id: <20240621115906.1049832-14-sunilvl@ventanamicro.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20240621115906.1049832-1-sunilvl@ventanamicro.com>
 References: <20240621115906.1049832-1-sunilvl@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pl1-x629.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pl1-x62a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -111,28 +112,59 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-so that ACPI table test can be supported.
+As per process documented (steps 1-3) in bios-tables-test.c, add empty
+AML data files for RISC-V ACPI tables and add the entries in
+bios-tables-test-allowed-diff.h.
 
 Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 Reviewed-by: Igor Mammedov <imammedo@redhat.com>
 ---
- meson.build | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ tests/data/acpi/riscv64/virt/APIC           | 0
+ tests/data/acpi/riscv64/virt/DSDT           | 0
+ tests/data/acpi/riscv64/virt/FACP           | 0
+ tests/data/acpi/riscv64/virt/MCFG           | 0
+ tests/data/acpi/riscv64/virt/RHCT           | 0
+ tests/data/acpi/riscv64/virt/SPCR           | 0
+ tests/qtest/bios-tables-test-allowed-diff.h | 6 ++++++
+ 7 files changed, 6 insertions(+)
+ create mode 100644 tests/data/acpi/riscv64/virt/APIC
+ create mode 100644 tests/data/acpi/riscv64/virt/DSDT
+ create mode 100644 tests/data/acpi/riscv64/virt/FACP
+ create mode 100644 tests/data/acpi/riscv64/virt/MCFG
+ create mode 100644 tests/data/acpi/riscv64/virt/RHCT
+ create mode 100644 tests/data/acpi/riscv64/virt/SPCR
 
-diff --git a/meson.build b/meson.build
-index 97e00d6f59..b54b0463a4 100644
---- a/meson.build
-+++ b/meson.build
-@@ -93,7 +93,7 @@ else
-   iasl = find_program(get_option('iasl'), required: true)
- endif
- 
--edk2_targets = [ 'arm-softmmu', 'aarch64-softmmu', 'i386-softmmu', 'x86_64-softmmu' ]
-+edk2_targets = [ 'arm-softmmu', 'aarch64-softmmu', 'i386-softmmu', 'x86_64-softmmu', 'riscv64-softmmu' ]
- unpack_edk2_blobs = false
- foreach target : edk2_targets
-   if target in target_dirs
+diff --git a/tests/data/acpi/riscv64/virt/APIC b/tests/data/acpi/riscv64/virt/APIC
+new file mode 100644
+index 0000000000..e69de29bb2
+diff --git a/tests/data/acpi/riscv64/virt/DSDT b/tests/data/acpi/riscv64/virt/DSDT
+new file mode 100644
+index 0000000000..e69de29bb2
+diff --git a/tests/data/acpi/riscv64/virt/FACP b/tests/data/acpi/riscv64/virt/FACP
+new file mode 100644
+index 0000000000..e69de29bb2
+diff --git a/tests/data/acpi/riscv64/virt/MCFG b/tests/data/acpi/riscv64/virt/MCFG
+new file mode 100644
+index 0000000000..e69de29bb2
+diff --git a/tests/data/acpi/riscv64/virt/RHCT b/tests/data/acpi/riscv64/virt/RHCT
+new file mode 100644
+index 0000000000..e69de29bb2
+diff --git a/tests/data/acpi/riscv64/virt/SPCR b/tests/data/acpi/riscv64/virt/SPCR
+new file mode 100644
+index 0000000000..e69de29bb2
+diff --git a/tests/qtest/bios-tables-test-allowed-diff.h b/tests/qtest/bios-tables-test-allowed-diff.h
+index dfb8523c8b..70474a097f 100644
+--- a/tests/qtest/bios-tables-test-allowed-diff.h
++++ b/tests/qtest/bios-tables-test-allowed-diff.h
+@@ -1 +1,7 @@
+ /* List of comma-separated changed AML files to ignore */
++"tests/data/acpi/riscv64/virt/APIC",
++"tests/data/acpi/riscv64/virt/DSDT",
++"tests/data/acpi/riscv64/virt/FACP",
++"tests/data/acpi/riscv64/virt/MCFG",
++"tests/data/acpi/riscv64/virt/RHCT",
++"tests/data/acpi/riscv64/virt/SPCR",
 -- 
 2.40.1
 
