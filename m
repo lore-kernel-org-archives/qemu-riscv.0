@@ -4,104 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8085CC30653
-	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Jun 2024 08:43:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D192EC2BBCA
+	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Jun 2024 09:06:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sM1lR-0007gf-2v; Tue, 25 Jun 2024 04:42:57 -0400
+	id 1sM27w-00044l-0Y; Tue, 25 Jun 2024 05:06:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1sM1lQ-0007gS-8B
- for qemu-riscv@nongnu.org; Tue, 25 Jun 2024 04:42:56 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1sM1lO-00080l-CE
- for qemu-riscv@nongnu.org; Tue, 25 Jun 2024 04:42:56 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1719304973;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=08qKOr8cHlB7UBSUb30uitrrrKzkUWBWOKCvsLF8vlY=;
- b=P2UiMT8zOtC5uziXZjt6F1fyVxHBTcQS2WioWT5GYkSkQKK2cjuOee8n2aZAY9S6poeS27
- zBJwrhLsJVPO2AJVH0Pxw81Invr05amxGuaxQ5mtO+5UbBth8BdY8FhXmNLGcDsbPu1SA7
- 96LKbWjmZedQfm+b3yYen1MnDSJWtKY=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-674-STXzOw_8NFOAtRvUHGUPvA-1; Tue, 25 Jun 2024 04:42:50 -0400
-X-MC-Unique: STXzOw_8NFOAtRvUHGUPvA-1
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-42488bec55cso13454395e9.0
- for <qemu-riscv@nongnu.org>; Tue, 25 Jun 2024 01:42:50 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
+ id 1sM27r-000446-PP
+ for qemu-riscv@nongnu.org; Tue, 25 Jun 2024 05:06:07 -0400
+Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
+ id 1sM27n-00046s-54
+ for qemu-riscv@nongnu.org; Tue, 25 Jun 2024 05:06:07 -0400
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-1f9b52ef481so42563555ad.1
+ for <qemu-riscv@nongnu.org>; Tue, 25 Jun 2024 02:06:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sifive.com; s=google; t=1719306361; x=1719911161; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=l1mjy6PFHzw51e2+khPMMeLEFIU2iOYItBpJX4sz8Ng=;
+ b=mIsc29tQTzEPJsM1Vil6XmnLKo+qZWIgB/4kj05bhKlV5KpI1oZdhU3OLvE6bQ5AsR
+ 2oOolTrB8EFwXBGvw8FA5qbURWEZh8nWF0ALns9qP1gPh4KNQDXzLAZBv6ASaFjDaD37
+ g+GSlvyHdXnP0M9fTOqRBc5ijtNEiksvKwKBqvQI2uIcOnqQGO4KzemwGpUhOljxQDtH
+ esJ//ZQGDotGaTyYa9wBonwHsPbwBTr+I3vQ57ETTT34Oy7Mt4ExdD7EmzTjOSjbWFCn
+ /uA6yvl8RYSweXLYRsHuCJgkjInlAwCok2Ydn/UHgRK19vwfSon8Ff7mmoW5uTC1Wb1x
+ YSjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719304969; x=1719909769;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=08qKOr8cHlB7UBSUb30uitrrrKzkUWBWOKCvsLF8vlY=;
- b=jTBHpuqetAxWnBK9upW4rNfmqnAYEW9oeIN3F/82sP2IOrYh6WGqQpG+S3dcnWfFwC
- zVWmL0JQ6jxdc1MMTduNs5d9zaoP/hDAkHnG2dcfA4j/w50tdN6mxL/CABdSecXkq6Il
- tFE+zRU+AStMuWJ3mwmDm6LLGTsdj3XYFVaJtE35VDq9p1vtYpYZITxgD3f66WVRwJaZ
- dMC+kKwUnBB5m1fEdsF4XGMyZeFJsmjKNln+SP/TFljciMo1WsGPZPYa5NKbiN/pstBh
- it55j50l95Sl4h4oE/+xQ4XJFNg/i5d7u9xmAGI7Tug00AF8L8ZdrfylPNKgE69pUSxf
- 1D0w==
+ d=1e100.net; s=20230601; t=1719306361; x=1719911161;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=l1mjy6PFHzw51e2+khPMMeLEFIU2iOYItBpJX4sz8Ng=;
+ b=JJDcc+Qfpq+tENkh6tFLDCiS7meYpk4HS3i6J9XtosxyEYr91BmSPSMB/YFZPaK7bc
+ ReO0sJgK4xu9LtB8w7gbeiSwFpDSBIbGXJ+2FIIvvBCXxWaNrmaB2f8e54KHO3Fr3V7o
+ 3dKAQoZ2IyIyjIc94fCKpbklGHgp8JtDNj+7uHW/PDGjF/ce5GmQ+GF7eT1xi2MGrndC
+ o5NQ2rJVQRfNCkBlgeAW0sRxhRVl8/dgfuDeqcqWcZNq4w+fQTtgHR1qY5OtoAM9aekK
+ ZQDyebYa23lNfMQuEWtOC0cZj4WwffQqiMRiH6mxFwxJMOIGH3sELHKBxLHF/ShZ8x7b
+ UbBg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXPZ298hN1De3wUYzJ14t8oN9OytTVmLMBzn4pxM64DYgElYVYaPdTgrDCV5wYXfF8zf2iXqnfmBkCYOIP52kCT7naNaMk=
-X-Gm-Message-State: AOJu0YwE+vMxjqSlF1SgQi+B/0bOoZz1u8l/0cATysfOGU5OYGGq1svp
- OeFbrTDVzfk4Q0Pnst0+N2P+HJ/GhVRi0aM4JHFbN6KosFhm6lasJDuvF5HwNRMD9wWd5Aqb8qa
- TEwkqVQbDRm0Mn+31L1rLK95CfKpxxEdEUcXdLOHnDZK6Ug9UfBot
-X-Received: by 2002:a05:600c:1604:b0:424:7443:e6d8 with SMTP id
- 5b1f17b1804b1-424895dad6dmr70386325e9.9.1719304969129; 
- Tue, 25 Jun 2024 01:42:49 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGHm/o97jrwQTiGGDWCT3essWM3feFBLvlnMdnGqwnRBFU5o68GHGe6PBSB8xkZ/Ug6hx41/Q==
-X-Received: by 2002:a05:600c:1604:b0:424:7443:e6d8 with SMTP id
- 5b1f17b1804b1-424895dad6dmr70385965e9.9.1719304968705; 
- Tue, 25 Jun 2024 01:42:48 -0700 (PDT)
-Received: from imammedo.users.ipa.redhat.com (nat-pool-brq-t.redhat.com.
- [213.175.37.10]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-424817b5554sm167960325e9.26.2024.06.25.01.42.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Jun 2024 01:42:48 -0700 (PDT)
-Date: Tue, 25 Jun 2024 10:42:47 +0200
-From: Igor Mammedov <imammedo@redhat.com>
-To: Sunil V L <sunilvl@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org, Paolo
- Bonzini <pbonzini@redhat.com>, =?UTF-8?B?TWFyYy1BbmRyw6k=?= Lureau
- <marcandre.lureau@redhat.com>, "Daniel P . =?UTF-8?B?QmVycmFuZ8Op?="
- <berrange@redhat.com>, Thomas Huth <thuth@redhat.com>, Philippe
- =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?= <philmd@linaro.org>, "Michael S . Tsirkin"
- <mst@redhat.com>, Ani Sinha <anisinha@redhat.com>, Laurent Vivier
- <lvivier@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>, Sia Jee Heng
- <jeeheng.sia@starfivetech.com>, Alistair Francis <alistair23@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, Palmer Dabbelt
- <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>, Weiwei Li
- <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: Re: [PATCH v3 02/15] uefi-test-tools: Add support for python based
- build script
-Message-ID: <20240625104247.54ea00ab@imammedo.users.ipa.redhat.com>
-In-Reply-To: <20240621115906.1049832-3-sunilvl@ventanamicro.com>
-References: <20240621115906.1049832-1-sunilvl@ventanamicro.com>
- <20240621115906.1049832-3-sunilvl@ventanamicro.com>
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.42; x86_64-redhat-linux-gnu)
+ AJvYcCUhkg7tmrsviL7TaS9hPC4bJTGXJqyl8cd5nkGUOglDnzr+03Uohnz+Hd31zwLSbdX0Zkag77QSodZeFzFrPH5q3YG2kxU=
+X-Gm-Message-State: AOJu0Yy2mq5SuIAG4z8F0/9a7ri/OJPxTS63n6PfPFoahvRwNj1h15aT
+ VZQYBPlrkIByL9ESoYNs9JGoweW0b64pTVGHwzOWniNHyj14pzs96zBTDEF4imA=
+X-Google-Smtp-Source: AGHT+IHLHFbeWG+NtuGHkLd9s73kMeb8fVoFomS7Lu9vvy0RgRTHAc6J1A89ZExvGK/Weyhs9T4c1g==
+X-Received: by 2002:a17:902:e846:b0:1f9:f217:83d with SMTP id
+ d9443c01a7336-1fa23be177dmr84791505ad.2.1719306360977; 
+ Tue, 25 Jun 2024 02:06:00 -0700 (PDT)
+Received: from [192.168.100.252] (59-124-168-89.hinet-ip.hinet.net.
+ [59.124.168.89]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-1f9eb2f1187sm76511555ad.56.2024.06.25.02.05.57
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 25 Jun 2024 02:06:00 -0700 (PDT)
+Message-ID: <0d741790-b9ef-475c-b147-9fbefdc9dac5@sifive.com>
+Date: Tue, 25 Jun 2024 17:05:56 +0800
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=imammedo@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -22
-X-Spam_score: -2.3
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 5/6] target/riscv: Add CTR sctrclr instruction.
+To: Rajnesh Kanwal <rkanwal@rivosinc.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: alistair.francis@wdc.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ atishp@rivosinc.com, apatel@ventanamicro.com, beeman@rivosinc.com,
+ tech-control-transfer-records@lists.riscv.org
+References: <20240619152708.135991-1-rkanwal@rivosinc.com>
+ <20240619152708.135991-6-rkanwal@rivosinc.com>
+Content-Language: en-US
+From: Jason Chien <jason.chien@sifive.com>
+In-Reply-To: <20240619152708.135991-6-rkanwal@rivosinc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
+ envelope-from=jason.chien@sifive.com; helo=mail-pl1-x634.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.3 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.207,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -117,132 +102,142 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, 21 Jun 2024 17:28:53 +0530
-Sunil V L <sunilvl@ventanamicro.com> wrote:
+Hi Rajnesh,
 
-> edk2-funcs.sh which is used in this Makefile, was removed in the commit
-> c28a2891f3 ("edk2: update build script"). It is replaced with a python
-> based script. So, update the Makefile and add the configuration file as
-> required to support the python based build script.
-> 
-> Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-
-Acked-by: Igor Mammedov <imammedo@redhat.com>
-
+On 2024/6/19 下午 11:27, Rajnesh Kanwal wrote:
+> CTR extension adds a new instruction sctrclr to quickly
+> clear the recorded entries buffer.
+>
+> Signed-off-by: Rajnesh Kanwal <rkanwal@rivosinc.com>
 > ---
->  tests/uefi-test-tools/Makefile               | 19 +++----
->  tests/uefi-test-tools/uefi-test-build.config | 52 ++++++++++++++++++++
->  2 files changed, 59 insertions(+), 12 deletions(-)
->  create mode 100644 tests/uefi-test-tools/uefi-test-build.config
-> 
-> diff --git a/tests/uefi-test-tools/Makefile b/tests/uefi-test-tools/Makefile
-> index 0c003f2877..f4eaebd8ff 100644
-> --- a/tests/uefi-test-tools/Makefile
-> +++ b/tests/uefi-test-tools/Makefile
-> @@ -12,7 +12,7 @@
->  
->  edk2_dir              := ../../roms/edk2
->  images_dir            := ../data/uefi-boot-images
-> -emulation_targets     := arm aarch64 i386 x86_64
-> +emulation_targets     := arm aarch64 i386 x86_64 riscv64
->  uefi_binaries         := bios-tables-test
->  intermediate_suffixes := .efi .fat .iso.raw
->  
-> @@ -56,7 +56,8 @@ Build/%.iso.raw: Build/%.fat
->  # stripped from, the argument.
->  map_arm_to_uefi     = $(subst arm,ARM,$(1))
->  map_aarch64_to_uefi = $(subst aarch64,AA64,$(call map_arm_to_uefi,$(1)))
-> -map_i386_to_uefi    = $(subst i386,IA32,$(call map_aarch64_to_uefi,$(1)))
-> +map_riscv64_to_uefi = $(subst riscv64,RISCV64,$(call map_aarch64_to_uefi,$(1)))
-> +map_i386_to_uefi    = $(subst i386,IA32,$(call map_riscv64_to_uefi,$(1)))
->  map_x86_64_to_uefi  = $(subst x86_64,X64,$(call map_i386_to_uefi,$(1)))
->  map_to_uefi         = $(subst .,,$(call map_x86_64_to_uefi,$(1)))
->  
-> @@ -70,7 +71,7 @@ Build/%.fat: Build/%.efi
->  	uefi_bin_b=$$(stat --format=%s -- $<) && \
->  		uefi_fat_kb=$$(( (uefi_bin_b * 11 / 10 + 1023) / 1024 )) && \
->  		uefi_fat_kb=$$(( uefi_fat_kb >= 64 ? uefi_fat_kb : 64 )) && \
-> -		mkdosfs -C $@ -n $(basename $(@F)) -- $$uefi_fat_kb
-> +		mkdosfs -C $@ -n "bios-test" -- $$uefi_fat_kb
->  	MTOOLS_SKIP_CHECK=1 mmd -i $@ ::EFI
->  	MTOOLS_SKIP_CHECK=1 mmd -i $@ ::EFI/BOOT
->  	MTOOLS_SKIP_CHECK=1 mcopy -i $@ -- $< \
-> @@ -95,15 +96,9 @@ Build/%.fat: Build/%.efi
->  # we must mark the recipe manually as recursive, by using the "+" indicator.
->  # This way, when the inner "make" starts a parallel build of the target edk2
->  # module, it can communicate with the outer "make"'s job server.
-> -Build/bios-tables-test.%.efi: build-edk2-tools
-> -	+./build.sh $(edk2_dir) BiosTablesTest $* $@
-> -
-> -build-edk2-tools:
-> -	cd $(edk2_dir)/BaseTools && git submodule update --init --force
-> -	$(MAKE) -C $(edk2_dir)/BaseTools \
-> -		PYTHON_COMMAND=$${EDK2_PYTHON_COMMAND:-python3} \
-> -		EXTRA_OPTFLAGS='$(EDK2_BASETOOLS_OPTFLAGS)' \
-> -		EXTRA_LDFLAGS='$(EDK2_BASETOOLS_LDFLAGS)'
-> +Build/bios-tables-test.%.efi:
-> +	$(PYTHON) ../../roms/edk2-build.py --config uefi-test-build.config \
-> +		--match $*
->  
->  clean:
->  	rm -rf Build Conf log
-> diff --git a/tests/uefi-test-tools/uefi-test-build.config b/tests/uefi-test-tools/uefi-test-build.config
-> new file mode 100644
-> index 0000000000..1f389ae541
-> --- /dev/null
-> +++ b/tests/uefi-test-tools/uefi-test-build.config
-> @@ -0,0 +1,52 @@
-> +[global]
-> +core = ../../roms/edk2
+>   target/riscv/cpu.h                            |  1 +
+>   target/riscv/cpu_helper.c                     |  7 ++++
+>   target/riscv/helper.h                         |  1 +
+>   target/riscv/insn32.decode                    |  1 +
+>   .../riscv/insn_trans/trans_privileged.c.inc   | 10 ++++++
+>   target/riscv/op_helper.c                      | 33 +++++++++++++++++++
+>   6 files changed, 53 insertions(+)
+>
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index e32f5ab146..fdc18a782a 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -572,6 +572,7 @@ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv, bool virt_en);
+>   void riscv_ctr_freeze(CPURISCVState *env, uint64_t freeze_mask, bool virt);
+>   void riscv_ctr_add_entry(CPURISCVState *env, target_long src, target_long dst,
+>                            uint64_t type, target_ulong prev_priv, bool prev_virt);
+> +void riscv_ctr_clear(CPURISCVState *env);
+>   
+>   void riscv_translate_init(void);
+>   G_NORETURN void riscv_raise_exception(CPURISCVState *env,
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 1537602e1b..d98628cfe3 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -702,6 +702,13 @@ void riscv_ctr_freeze(CPURISCVState *env, uint64_t freeze_mask, bool virt)
+>       }
+>   }
+>   
+> +void riscv_ctr_clear(CPURISCVState *env)
+> +{
+> +    memset(env->ctr_src, 0x0, sizeof(env->ctr_src));
+> +    memset(env->ctr_dst, 0x0, sizeof(env->ctr_dst));
+> +    memset(env->ctr_data, 0x0, sizeof(env->ctr_data));
+> +}
 > +
-> +####################################################################################
-> +# arm
+>   static uint64_t riscv_ctr_priv_to_mask(target_ulong priv, bool virt)
+>   {
+>       switch (priv) {
+> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+> index b8fb7c8734..a3b2d87527 100644
+> --- a/target/riscv/helper.h
+> +++ b/target/riscv/helper.h
+> @@ -131,6 +131,7 @@ DEF_HELPER_6(csrrw_i128, tl, env, int, tl, tl, tl, tl)
+>   #ifndef CONFIG_USER_ONLY
+>   DEF_HELPER_2(sret, tl, env, tl)
+>   DEF_HELPER_2(mret, tl, env, tl)
+> +DEF_HELPER_1(ctr_clear, void, env)
+>   DEF_HELPER_1(wfi, void, env)
+>   DEF_HELPER_1(wrs_nto, void, env)
+>   DEF_HELPER_1(tlb_flush, void, env)
+> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+> index 9cb1a1b4ec..d3d38c7c68 100644
+> --- a/target/riscv/insn32.decode
+> +++ b/target/riscv/insn32.decode
+> @@ -107,6 +107,7 @@
+>   # *** Privileged Instructions ***
+>   ecall       000000000000     00000 000 00000 1110011
+>   ebreak      000000000001     00000 000 00000 1110011
+> +sctrclr     000100000100     00000 000 00000 1110011
+>   uret        0000000    00010 00000 000 00000 1110011
+>   sret        0001000    00010 00000 000 00000 1110011
+>   mret        0011000    00010 00000 000 00000 1110011
+> diff --git a/target/riscv/insn_trans/trans_privileged.c.inc b/target/riscv/insn_trans/trans_privileged.c.inc
+> index 339d659151..dd9da8651f 100644
+> --- a/target/riscv/insn_trans/trans_privileged.c.inc
+> +++ b/target/riscv/insn_trans/trans_privileged.c.inc
+> @@ -69,6 +69,16 @@ static bool trans_ebreak(DisasContext *ctx, arg_ebreak *a)
+>       return true;
+>   }
+>   
+> +static bool trans_sctrclr(DisasContext *ctx, arg_sctrclr *a)
+> +{
+> +#ifndef CONFIG_USER_ONLY
+> +    gen_helper_ctr_clear(tcg_env);
+This will always generate a helper function call, which can be avoided 
+by checking the existence of Smctr and Ssctr here instead of checking 
+them in the helper function.
+> +    return true;
+> +#else
+> +    return false;
+> +#endif
+> +}
 > +
-> +[build.arm]
-> +conf = UefiTestToolsPkg/UefiTestToolsPkg.dsc
-> +plat = UefiTestTools
-> +dest = ./Build
-> +arch = ARM
-> +cpy1 = ARM/BiosTablesTest.efi  bios-tables-test.arm.efi
+>   static bool trans_uret(DisasContext *ctx, arg_uret *a)
+>   {
+>       return false;
+> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+> index 5a1e92c45e..15a770360e 100644
+> --- a/target/riscv/op_helper.c
+> +++ b/target/riscv/op_helper.c
+> @@ -475,6 +475,39 @@ void helper_ctr_branch(CPURISCVState *env, target_ulong src, target_ulong dest,
+>       }
+>   }
+>   
+> +void helper_ctr_clear(CPURISCVState *env)
+> +{
+> +    if (!riscv_cpu_cfg(env)->ext_ssctr && !riscv_cpu_cfg(env)->ext_smctr) {
+> +        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+> +    }
 > +
-> +####################################################################################
-> +# aarch64
+> +    /*
+> +     * It's safe to call smstateen_acc_ok() for umode access regardless of the
+> +     * state of bit 54 (CTR bit in case of m/hstateen) of sstateen. If the bit
+> +     * is zero, smstateen_acc_ok() will return the correct exception code and
+> +     * if it's one, smstateen_acc_ok() will return RISCV_EXCP_NONE. In that
+> +     * scenario the U-mode check below will handle that case.
+> +     */
+> +    RISCVException ret = smstateen_acc_ok(env, 0, SMSTATEEN0_CTR);
+> +    if (ret != RISCV_EXCP_NONE) {
+> +        riscv_raise_exception(env, ret, GETPC());
+> +    }
 > +
-> +[build.aarch64]
-> +conf = UefiTestToolsPkg/UefiTestToolsPkg.dsc
-> +plat = UefiTestTools
-> +dest = ./Build
-> +arch = AARCH64
-> +cpy1 = AARCH64/BiosTablesTest.efi  bios-tables-test.aarch64.efi
+> +    if (env->priv == PRV_U) {
+> +        /*
+> +         * One corner case is when sctrclr is executed from VU-mode and
+> +         * mstateen.CTR = 0, in which case we are supposed to raise
+> +         * RISCV_EXCP_ILLEGAL_INST. This case is already handled in
+> +         * smstateen_acc_ok().
+> +         */
+> +        uint32_t excep = env->virt_enabled ? RISCV_EXCP_VIRT_INSTRUCTION_FAULT :
+> +            RISCV_EXCP_ILLEGAL_INST;
+> +        riscv_raise_exception(env, excep, GETPC());
+> +    }
 > +
-> +####################################################################################
-> +# riscv64
+> +    riscv_ctr_clear(env);
+> +}
 > +
-> +[build.riscv]
-> +conf = UefiTestToolsPkg/UefiTestToolsPkg.dsc
-> +plat = UefiTestTools
-> +dest = ./Build
-> +arch = RISCV64
-> +cpy1 = RISCV64/BiosTablesTest.efi  bios-tables-test.riscv64.efi
-> +
-> +####################################################################################
-> +# ia32
-> +
-> +[build.ia32]
-> +conf = UefiTestToolsPkg/UefiTestToolsPkg.dsc
-> +plat = UefiTestTools
-> +dest = ./Build
-> +arch = IA32
-> +cpy1 = IA32/BiosTablesTest.efi  bios-tables-test.i386.efi
-> +
-> +####################################################################################
-> +# x64
-> +
-> +[build.x64]
-> +conf = UefiTestToolsPkg/UefiTestToolsPkg.dsc
-> +plat = UefiTestTools
-> +dest = ./Build
-> +arch = X64
-> +cpy1 = X64/BiosTablesTest.efi  bios-tables-test.x86_64.efi
-
+>   void helper_wfi(CPURISCVState *env)
+>   {
+>       CPUState *cs = env_cpu(env);
 
