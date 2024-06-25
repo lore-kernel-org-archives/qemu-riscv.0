@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94854C2BBCA
-	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Jun 2024 10:50:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 816C7C30658
+	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Jun 2024 11:20:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sM3k8-0006TX-AA; Tue, 25 Jun 2024 06:49:44 -0400
+	id 1sM4DX-00062o-LR; Tue, 25 Jun 2024 07:20:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1sM3k7-0006Pq-0b
- for qemu-riscv@nongnu.org; Tue, 25 Jun 2024 06:49:43 -0400
+ id 1sM4DW-00062N-AK
+ for qemu-riscv@nongnu.org; Tue, 25 Jun 2024 07:20:06 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1sM3k3-0006D1-JV
- for qemu-riscv@nongnu.org; Tue, 25 Jun 2024 06:49:42 -0400
+ id 1sM4DU-0003RZ-IP
+ for qemu-riscv@nongnu.org; Tue, 25 Jun 2024 07:20:05 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1719312578;
+ s=mimecast20190719; t=1719314403;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=ClBPLObsjREV7Vn6vlOcFVrGHVT+p9j8iKNWAZlhSSU=;
- b=GKTu1Lq9uFPZBQw6u3UQgFZ6eErPg3LZ3CiRg6ElvPlKugj40AeQ2i5vAbAzhgvXLR+cVu
- ujxvPWq0iKnpMvJFSW4Bb7Koo35hs7BiDLdIfm0nKrXPotz58wI2WHU/jxPaxVRM67m5l3
- u/b+7wvBbaV1rYhHD7FXpzJWojY1QZo=
-Received: from mail-lj1-f199.google.com (mail-lj1-f199.google.com
- [209.85.208.199]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=TxfK50CM39AgyHMqWIsuemzgcz5lpe3wAS/FH8p5QME=;
+ b=Xlo8dGkF2gnAdtBwQlJJbTXhsHRe0RDK6iY/U15obCcc5qicOBhiNZGtBCKkweAKaAcMuA
+ nqWeBN7zYdBENQDGVSZti6owC16HVjtk+twL760QCuOrTY0IpLv6wq2Y06eqpBM7bBZwsL
+ lrDpRb6brt/H+h5vL33NtwFjjZYmv00=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-411-NhMIB46wO_GzGk9EHaZ1UQ-1; Tue, 25 Jun 2024 06:49:37 -0400
-X-MC-Unique: NhMIB46wO_GzGk9EHaZ1UQ-1
-Received: by mail-lj1-f199.google.com with SMTP id
- 38308e7fff4ca-2ebd982d244so39314011fa.3
- for <qemu-riscv@nongnu.org>; Tue, 25 Jun 2024 03:49:37 -0700 (PDT)
+ us-mta-33-hKmHuxraO3et0Nw7J7_S7A-1; Tue, 25 Jun 2024 07:20:02 -0400
+X-MC-Unique: hKmHuxraO3et0Nw7J7_S7A-1
+Received: by mail-wr1-f71.google.com with SMTP id
+ ffacd0b85a97d-3643d0e3831so3517487f8f.0
+ for <qemu-riscv@nongnu.org>; Tue, 25 Jun 2024 04:20:02 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719312576; x=1719917376;
+ d=1e100.net; s=20230601; t=1719314401; x=1719919201;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ClBPLObsjREV7Vn6vlOcFVrGHVT+p9j8iKNWAZlhSSU=;
- b=l+07zdcuav3Vg6VhNHIeXOPI8b+AzpZLpKG1roumK1eU0D5VRo83bYlXTOv9mNnKr8
- OtbA1POZepkZJz8+y5Sf8xIs5tZ2OFTw6r/jmY5GvW89yfKec1+M7d+qhlkyEumVaFwZ
- qpqiSl32ByycwGmD0vU6LacZ9zyJ4CG2qcul1feLc46oEWJ1Mx7PYZdhHzs1esMbvXno
- bu3CrM58TTo4sleDw8mtZJduGxB4U3ijDKcFDQTNUKm1wHCJjPgk54U//zjqUCsoql5Y
- 2Uhb5vQptYhoBIDElfwfChLlQtGE4/x/T4sjKRePcKApR4Xr/uyjxoAYKizTZeElZ5nJ
- VeaQ==
+ bh=TxfK50CM39AgyHMqWIsuemzgcz5lpe3wAS/FH8p5QME=;
+ b=G1bZR4KQ9QxmRGhoUwxFGw2gnZJ//jc1tWApYLMfwGcqA278TiXlzgKUQYNJHSg2Yg
+ IlclAiTCnavcOx1UiMwuWz5CAcVnmEKThGW5EgEcF8XIOMsFqijZab/ccbH2IICcxs35
+ agquF44EufoNAYkmAlYYLUrFgbEbYoY2Ty3UhG1nJdYW7vlSzQjAqTCQtaJP/Ull1/No
+ B+O6AM47X31SPajHMkcUoySfFB51+O3Yp4xhw53v7GrPOZBTDLruwu99dX7CXei2YkP2
+ P48XnT6JMhHFWy+ka1av4ICnWvrK/xgysELJ5CtkoxU4cii0Q24AR9osoiMPe863XQ/9
+ nnmQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWZr1BjWNB02RLdPyoteti08XYu9cdQceV39WcyKCSGFW6ipM2cmm43TYL6NiJ9YPsyZoFoSYaK/6t1TwenJvkL/fUFalM=
-X-Gm-Message-State: AOJu0YxSZhYlP0no3ibWX/zI40pzNlTL/gMFk/gP7DMp6dhOBzMfpe77
- Y134N3km+Q3ZZgaXejDYi+JtG9v1ylZWVPv+ymIU0UJ8PiXdj7YwMR94fTsQ6YVIZ+VbFLMFgbj
- xDTUBVQ39i5naBiQACa3l0Kos2o6T8Ft7PK26QZNoPqJq4teuDdPd
-X-Received: by 2002:a2e:9495:0:b0:2ec:529e:6522 with SMTP id
- 38308e7fff4ca-2ec5b2b208cmr36358151fa.31.1719312576080; 
- Tue, 25 Jun 2024 03:49:36 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFbCzWgf3lkabBWkz8LJpcWPGWIg0DWZyziKgliIlaEDOGVHSLMQeDASJnb+BImt+xdZd7pQA==
-X-Received: by 2002:a2e:9495:0:b0:2ec:529e:6522 with SMTP id
- 38308e7fff4ca-2ec5b2b208cmr36357991fa.31.1719312575824; 
- Tue, 25 Jun 2024 03:49:35 -0700 (PDT)
+ AJvYcCVhEbHCNvJeMnIM7pDIgtlI4Snua0shKDDPrg+uFcW+dOfJNLgWOM9eYgrGjLv6qI+u/PjzdRE8W/+Fj9AbcGs64gooRUA=
+X-Gm-Message-State: AOJu0Yx8ZKo+kt2Cibfp+ZjJUPu77/Ghl465eFMOGoZ1LTW/DUJigQWy
+ f9qpqFaj5EByIdmWKaygEcFsSD51MPKpfWqsqKD+bJK3hmZq3clHWH0jLJf2vkTmZnMqKlebRx+
+ yd8P6ORnpXf00x1BwRvldb40U7P2eAvaH4ag5BST4b06iFBKpOQQm
+X-Received: by 2002:adf:e58b:0:b0:35f:1dce:8671 with SMTP id
+ ffacd0b85a97d-366e948eb63mr4549696f8f.25.1719314401142; 
+ Tue, 25 Jun 2024 04:20:01 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFcLxacYR4nykxujNhQdXMes9ZuyxkAAaFrXTW1/Li9bQClY0Za9ENc9OchVqJwrOj5T++SoQ==
+X-Received: by 2002:adf:e58b:0:b0:35f:1dce:8671 with SMTP id
+ ffacd0b85a97d-366e948eb63mr4549679f8f.25.1719314400680; 
+ Tue, 25 Jun 2024 04:20:00 -0700 (PDT)
 Received: from imammedo.users.ipa.redhat.com (nat-pool-brq-t.redhat.com.
  [213.175.37.10]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-366387cf523sm12614911f8f.25.2024.06.25.03.49.34
+ ffacd0b85a97d-36638f858fbsm12641652f8f.65.2024.06.25.04.19.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Jun 2024 03:49:35 -0700 (PDT)
-Date: Tue, 25 Jun 2024 12:49:34 +0200
+ Tue, 25 Jun 2024 04:20:00 -0700 (PDT)
+Date: Tue, 25 Jun 2024 13:19:59 +0200
 From: Igor Mammedov <imammedo@redhat.com>
 To: Sunil V L <sunilvl@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org, Paolo
@@ -80,13 +80,14 @@ Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org, Paolo
  <jeeheng.sia@starfivetech.com>, Alistair Francis <alistair23@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>, Palmer Dabbelt
  <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>, Weiwei Li
- <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: Re: [PATCH v3 09/15] tests/data/acpi/virt: Move ARM64 ACPI tables
- under aarch64/${machine} path
-Message-ID: <20240625124934.23f86cb3@imammedo.users.ipa.redhat.com>
-In-Reply-To: <20240621115906.1049832-10-sunilvl@ventanamicro.com>
+ <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Alistair
+ Francis <alistair.francis@wdc.com>
+Subject: Re: [PATCH v3 14/15] tests/qtest/bios-tables-test.c: Enable basic
+ testing for RISC-V
+Message-ID: <20240625131959.67c2fc74@imammedo.users.ipa.redhat.com>
+In-Reply-To: <20240621115906.1049832-15-sunilvl@ventanamicro.com>
 References: <20240621115906.1049832-1-sunilvl@ventanamicro.com>
- <20240621115906.1049832-10-sunilvl@ventanamicro.com>
+ <20240621115906.1049832-15-sunilvl@ventanamicro.com>
 X-Mailer: Claws Mail 4.2.0 (GTK 3.24.42; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
@@ -117,169 +118,63 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, 21 Jun 2024 17:29:00 +0530
+On Fri, 21 Jun 2024 17:29:05 +0530
 Sunil V L <sunilvl@ventanamicro.com> wrote:
 
-> Same machine name can be used by different architectures. Hence, create
-> aarch64 folder and move all aarch64 related AML files for virt machine
-> inside.
+> Add basic ACPI table test case for RISC-V.
 > 
 > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Reviewed-by: Igor Mammedov <imammedo@redhat.com>
 
 > ---
->  tests/data/acpi/{ => aarch64}/virt/APIC             | Bin
->  .../data/acpi/{ => aarch64}/virt/APIC.acpihmatvirt  | Bin
->  tests/data/acpi/{ => aarch64}/virt/APIC.topology    | Bin
->  tests/data/acpi/{ => aarch64}/virt/DBG2             | Bin
->  tests/data/acpi/{ => aarch64}/virt/DSDT             | Bin
->  .../data/acpi/{ => aarch64}/virt/DSDT.acpihmatvirt  | Bin
->  tests/data/acpi/{ => aarch64}/virt/DSDT.memhp       | Bin
->  tests/data/acpi/{ => aarch64}/virt/DSDT.pxb         | Bin
->  tests/data/acpi/{ => aarch64}/virt/DSDT.topology    | Bin
->  tests/data/acpi/{ => aarch64}/virt/FACP             | Bin
->  tests/data/acpi/{ => aarch64}/virt/GTDT             | Bin
->  .../data/acpi/{ => aarch64}/virt/HMAT.acpihmatvirt  | Bin
->  tests/data/acpi/{ => aarch64}/virt/IORT             | Bin
->  tests/data/acpi/{ => aarch64}/virt/MCFG             | Bin
->  tests/data/acpi/{ => aarch64}/virt/NFIT.memhp       | Bin
->  tests/data/acpi/{ => aarch64}/virt/PPTT             | Bin
->  .../data/acpi/{ => aarch64}/virt/PPTT.acpihmatvirt  | Bin
->  tests/data/acpi/{ => aarch64}/virt/PPTT.topology    | Bin
->  tests/data/acpi/{ => aarch64}/virt/SLIT.memhp       | Bin
->  tests/data/acpi/{ => aarch64}/virt/SPCR             | Bin
->  .../data/acpi/{ => aarch64}/virt/SRAT.acpihmatvirt  | Bin
->  tests/data/acpi/{ => aarch64}/virt/SRAT.memhp       | Bin
->  tests/data/acpi/{ => aarch64}/virt/SRAT.numamem     | Bin
->  tests/data/acpi/{ => aarch64}/virt/SSDT.memhp       | Bin
->  tests/data/acpi/{ => aarch64}/virt/VIOT             | Bin
->  25 files changed, 0 insertions(+), 0 deletions(-)
->  rename tests/data/acpi/{ => aarch64}/virt/APIC (100%)
->  rename tests/data/acpi/{ => aarch64}/virt/APIC.acpihmatvirt (100%)
->  rename tests/data/acpi/{ => aarch64}/virt/APIC.topology (100%)
->  rename tests/data/acpi/{ => aarch64}/virt/DBG2 (100%)
->  rename tests/data/acpi/{ => aarch64}/virt/DSDT (100%)
->  rename tests/data/acpi/{ => aarch64}/virt/DSDT.acpihmatvirt (100%)
->  rename tests/data/acpi/{ => aarch64}/virt/DSDT.memhp (100%)
->  rename tests/data/acpi/{ => aarch64}/virt/DSDT.pxb (100%)
->  rename tests/data/acpi/{ => aarch64}/virt/DSDT.topology (100%)
->  rename tests/data/acpi/{ => aarch64}/virt/FACP (100%)
->  rename tests/data/acpi/{ => aarch64}/virt/GTDT (100%)
->  rename tests/data/acpi/{ => aarch64}/virt/HMAT.acpihmatvirt (100%)
->  rename tests/data/acpi/{ => aarch64}/virt/IORT (100%)
->  rename tests/data/acpi/{ => aarch64}/virt/MCFG (100%)
->  rename tests/data/acpi/{ => aarch64}/virt/NFIT.memhp (100%)
->  rename tests/data/acpi/{ => aarch64}/virt/PPTT (100%)
->  rename tests/data/acpi/{ => aarch64}/virt/PPTT.acpihmatvirt (100%)
->  rename tests/data/acpi/{ => aarch64}/virt/PPTT.topology (100%)
->  rename tests/data/acpi/{ => aarch64}/virt/SLIT.memhp (100%)
->  rename tests/data/acpi/{ => aarch64}/virt/SPCR (100%)
->  rename tests/data/acpi/{ => aarch64}/virt/SRAT.acpihmatvirt (100%)
->  rename tests/data/acpi/{ => aarch64}/virt/SRAT.memhp (100%)
->  rename tests/data/acpi/{ => aarch64}/virt/SRAT.numamem (100%)
->  rename tests/data/acpi/{ => aarch64}/virt/SSDT.memhp (100%)
->  rename tests/data/acpi/{ => aarch64}/virt/VIOT (100%)
+>  tests/qtest/bios-tables-test.c | 26 ++++++++++++++++++++++++++
+>  1 file changed, 26 insertions(+)
 > 
-> diff --git a/tests/data/acpi/virt/APIC b/tests/data/acpi/aarch64/virt/APIC
-> similarity index 100%
-> rename from tests/data/acpi/virt/APIC
-> rename to tests/data/acpi/aarch64/virt/APIC
-> diff --git a/tests/data/acpi/virt/APIC.acpihmatvirt b/tests/data/acpi/aarch64/virt/APIC.acpihmatvirt
-> similarity index 100%
-> rename from tests/data/acpi/virt/APIC.acpihmatvirt
-> rename to tests/data/acpi/aarch64/virt/APIC.acpihmatvirt
-> diff --git a/tests/data/acpi/virt/APIC.topology b/tests/data/acpi/aarch64/virt/APIC.topology
-> similarity index 100%
-> rename from tests/data/acpi/virt/APIC.topology
-> rename to tests/data/acpi/aarch64/virt/APIC.topology
-> diff --git a/tests/data/acpi/virt/DBG2 b/tests/data/acpi/aarch64/virt/DBG2
-> similarity index 100%
-> rename from tests/data/acpi/virt/DBG2
-> rename to tests/data/acpi/aarch64/virt/DBG2
-> diff --git a/tests/data/acpi/virt/DSDT b/tests/data/acpi/aarch64/virt/DSDT
-> similarity index 100%
-> rename from tests/data/acpi/virt/DSDT
-> rename to tests/data/acpi/aarch64/virt/DSDT
-> diff --git a/tests/data/acpi/virt/DSDT.acpihmatvirt b/tests/data/acpi/aarch64/virt/DSDT.acpihmatvirt
-> similarity index 100%
-> rename from tests/data/acpi/virt/DSDT.acpihmatvirt
-> rename to tests/data/acpi/aarch64/virt/DSDT.acpihmatvirt
-> diff --git a/tests/data/acpi/virt/DSDT.memhp b/tests/data/acpi/aarch64/virt/DSDT.memhp
-> similarity index 100%
-> rename from tests/data/acpi/virt/DSDT.memhp
-> rename to tests/data/acpi/aarch64/virt/DSDT.memhp
-> diff --git a/tests/data/acpi/virt/DSDT.pxb b/tests/data/acpi/aarch64/virt/DSDT.pxb
-> similarity index 100%
-> rename from tests/data/acpi/virt/DSDT.pxb
-> rename to tests/data/acpi/aarch64/virt/DSDT.pxb
-> diff --git a/tests/data/acpi/virt/DSDT.topology b/tests/data/acpi/aarch64/virt/DSDT.topology
-> similarity index 100%
-> rename from tests/data/acpi/virt/DSDT.topology
-> rename to tests/data/acpi/aarch64/virt/DSDT.topology
-> diff --git a/tests/data/acpi/virt/FACP b/tests/data/acpi/aarch64/virt/FACP
-> similarity index 100%
-> rename from tests/data/acpi/virt/FACP
-> rename to tests/data/acpi/aarch64/virt/FACP
-> diff --git a/tests/data/acpi/virt/GTDT b/tests/data/acpi/aarch64/virt/GTDT
-> similarity index 100%
-> rename from tests/data/acpi/virt/GTDT
-> rename to tests/data/acpi/aarch64/virt/GTDT
-> diff --git a/tests/data/acpi/virt/HMAT.acpihmatvirt b/tests/data/acpi/aarch64/virt/HMAT.acpihmatvirt
-> similarity index 100%
-> rename from tests/data/acpi/virt/HMAT.acpihmatvirt
-> rename to tests/data/acpi/aarch64/virt/HMAT.acpihmatvirt
-> diff --git a/tests/data/acpi/virt/IORT b/tests/data/acpi/aarch64/virt/IORT
-> similarity index 100%
-> rename from tests/data/acpi/virt/IORT
-> rename to tests/data/acpi/aarch64/virt/IORT
-> diff --git a/tests/data/acpi/virt/MCFG b/tests/data/acpi/aarch64/virt/MCFG
-> similarity index 100%
-> rename from tests/data/acpi/virt/MCFG
-> rename to tests/data/acpi/aarch64/virt/MCFG
-> diff --git a/tests/data/acpi/virt/NFIT.memhp b/tests/data/acpi/aarch64/virt/NFIT.memhp
-> similarity index 100%
-> rename from tests/data/acpi/virt/NFIT.memhp
-> rename to tests/data/acpi/aarch64/virt/NFIT.memhp
-> diff --git a/tests/data/acpi/virt/PPTT b/tests/data/acpi/aarch64/virt/PPTT
-> similarity index 100%
-> rename from tests/data/acpi/virt/PPTT
-> rename to tests/data/acpi/aarch64/virt/PPTT
-> diff --git a/tests/data/acpi/virt/PPTT.acpihmatvirt b/tests/data/acpi/aarch64/virt/PPTT.acpihmatvirt
-> similarity index 100%
-> rename from tests/data/acpi/virt/PPTT.acpihmatvirt
-> rename to tests/data/acpi/aarch64/virt/PPTT.acpihmatvirt
-> diff --git a/tests/data/acpi/virt/PPTT.topology b/tests/data/acpi/aarch64/virt/PPTT.topology
-> similarity index 100%
-> rename from tests/data/acpi/virt/PPTT.topology
-> rename to tests/data/acpi/aarch64/virt/PPTT.topology
-> diff --git a/tests/data/acpi/virt/SLIT.memhp b/tests/data/acpi/aarch64/virt/SLIT.memhp
-> similarity index 100%
-> rename from tests/data/acpi/virt/SLIT.memhp
-> rename to tests/data/acpi/aarch64/virt/SLIT.memhp
-> diff --git a/tests/data/acpi/virt/SPCR b/tests/data/acpi/aarch64/virt/SPCR
-> similarity index 100%
-> rename from tests/data/acpi/virt/SPCR
-> rename to tests/data/acpi/aarch64/virt/SPCR
-> diff --git a/tests/data/acpi/virt/SRAT.acpihmatvirt b/tests/data/acpi/aarch64/virt/SRAT.acpihmatvirt
-> similarity index 100%
-> rename from tests/data/acpi/virt/SRAT.acpihmatvirt
-> rename to tests/data/acpi/aarch64/virt/SRAT.acpihmatvirt
-> diff --git a/tests/data/acpi/virt/SRAT.memhp b/tests/data/acpi/aarch64/virt/SRAT.memhp
-> similarity index 100%
-> rename from tests/data/acpi/virt/SRAT.memhp
-> rename to tests/data/acpi/aarch64/virt/SRAT.memhp
-> diff --git a/tests/data/acpi/virt/SRAT.numamem b/tests/data/acpi/aarch64/virt/SRAT.numamem
-> similarity index 100%
-> rename from tests/data/acpi/virt/SRAT.numamem
-> rename to tests/data/acpi/aarch64/virt/SRAT.numamem
-> diff --git a/tests/data/acpi/virt/SSDT.memhp b/tests/data/acpi/aarch64/virt/SSDT.memhp
-> similarity index 100%
-> rename from tests/data/acpi/virt/SSDT.memhp
-> rename to tests/data/acpi/aarch64/virt/SSDT.memhp
-> diff --git a/tests/data/acpi/virt/VIOT b/tests/data/acpi/aarch64/virt/VIOT
-> similarity index 100%
-> rename from tests/data/acpi/virt/VIOT
-> rename to tests/data/acpi/aarch64/virt/VIOT
+> diff --git a/tests/qtest/bios-tables-test.c b/tests/qtest/bios-tables-test.c
+> index f4c4704bab..0f9c654e96 100644
+> --- a/tests/qtest/bios-tables-test.c
+> +++ b/tests/qtest/bios-tables-test.c
+> @@ -1977,6 +1977,28 @@ static void test_acpi_microvm_acpi_erst(void)
+>  }
+>  #endif /* CONFIG_POSIX */
+>  
+> +static void test_acpi_riscv64_virt_tcg(void)
+> +{
+> +    test_data data = {
+> +        .machine = "virt",
+> +        .arch = "riscv64",
+> +        .tcg_only = true,
+> +        .uefi_fl1 = "pc-bios/edk2-riscv-code.fd",
+> +        .uefi_fl2 = "pc-bios/edk2-riscv-vars.fd",
+> +        .cd = "tests/data/uefi-boot-images/bios-tables-test.riscv64.iso.qcow2",
+> +        .ram_start = 0x80000000ULL,
+> +        .scan_len = 128ULL * 1024 * 1024,
+> +    };
+> +
+> +    /*
+> +     * RHCT will have ISA string encoded. To reduce the effort
+> +     * of updating expected AML file for any new default ISA extension,
+> +     * use the profile rva22s64.
+> +     */
+> +    test_acpi_one("-cpu rva22s64 ", &data);
+> +    free_test_data(&data);
+> +}
+> +
+>  static void test_acpi_aarch64_virt_tcg(void)
+>  {
+>      test_data data = {
+> @@ -2455,6 +2477,10 @@ int main(int argc, char *argv[])
+>                  qtest_add_func("acpi/virt/viot", test_acpi_aarch64_virt_viot);
+>              }
+>          }
+> +    } else if (strcmp(arch, "riscv64") == 0) {
+> +        if (has_tcg && qtest_has_device("virtio-blk-pci")) {
+> +            qtest_add_func("acpi/virt", test_acpi_riscv64_virt_tcg);
+> +        }
+>      }
+>      ret = g_test_run();
+>      boot_sector_cleanup(disk);
 
 
