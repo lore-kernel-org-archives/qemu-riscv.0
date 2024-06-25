@@ -4,83 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 566E8C2BD09
-	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Jun 2024 01:48:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85E68C30653
+	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Jun 2024 07:59:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sLvHc-0000y6-5u; Mon, 24 Jun 2024 21:47:44 -0400
+	id 1sM14x-0006rD-5k; Tue, 25 Jun 2024 03:59:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sLvHa-0000xS-5M; Mon, 24 Jun 2024 21:47:42 -0400
-Received: from mail-ua1-x929.google.com ([2607:f8b0:4864:20::929])
+ (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
+ id 1sM14v-0006qV-PT
+ for qemu-riscv@nongnu.org; Tue, 25 Jun 2024 03:59:01 -0400
+Received: from mail-pj1-x1036.google.com ([2607:f8b0:4864:20::1036])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sLvHY-0000K1-Cp; Mon, 24 Jun 2024 21:47:41 -0400
-Received: by mail-ua1-x929.google.com with SMTP id
- a1e0cc1a2514c-80f6efd265bso835995241.2; 
- Mon, 24 Jun 2024 18:47:39 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
+ id 1sM14u-0007zL-6k
+ for qemu-riscv@nongnu.org; Tue, 25 Jun 2024 03:59:01 -0400
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-2c8911c84daso1164882a91.3
+ for <qemu-riscv@nongnu.org>; Tue, 25 Jun 2024 00:58:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1719280058; x=1719884858; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=b3+2dI9jw2wIxX3Q1wIulYvWEsyEGuowr8n1zlrbdVY=;
- b=ZYBS9GiZ5Vh5ii5xG7fK1QzYUsiOrb3RBxwJuDYap7TpK1PYRvL+Z1+4VQMKgAFoyh
- vKC+8swkf0dEMgR9xBwMdJEhFD44WcaFDMHrdlGDgKPeNDESIW+hp1JkV3gnxth/Ipau
- 0+Xn3Z+NF7NeIGlxsOzEhWXzG7NIDPJGyde1mqEW8ZTlhaN7ZomlkZv/MANxWulIVQYn
- wP4zRIl8gyElBcKUQHTNSW+h7JOR70L8cTKPfzZUzydkh/1gNzkfVkn8FGCQbsy/dcAE
- Xvs4YA2LCiJq9r2KaPTQjrIJewMI6eSB4CHQGkzCFwrrXXueaPGJQydlFA1JPQaJd/ZG
- blcQ==
+ d=sifive.com; s=google; t=1719302338; x=1719907138; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=J5EWQDpYPjghYw2Z/VvVN0nVOQLNpy4Ko5kctFLpJcI=;
+ b=lQLA+5luPkaLUOqDZ5uIEmJIJPWblub8/hGFIudGOfjnxXZy+c3Sg0ppsRKzdsERtF
+ IbDcONhH5MVDwQrHWuB53QilwpYC6MLSzp7GxOdWhqx120rA9mfCteKGaH/9N4fg0cS8
+ oLtW0VfOOoOIaAK1XquyJnVGTqSJWmUQt2ZDElG8w4m9qTU5uBdnaSkEis3+VBFCzZQL
+ JFRCZkbGmIpX168N6gzcZc/Ucp4ediiN79pP4Ng6E0QtzicHNvMdcsizB8Ll8DBUUJj1
+ 04xJbRrZKqdUkQU+NJJtsCBnxe+lk60nIWdugwV2ynw1pu9nwsTeoo2SONMHw1ABLmzR
+ zxIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719280058; x=1719884858;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=b3+2dI9jw2wIxX3Q1wIulYvWEsyEGuowr8n1zlrbdVY=;
- b=MtkxQkFyz/Tji9qV0r3jCHClidVM1y1X9tsrgLR/1nf97W+G9ZCLqmInRStymqpcRO
- 51/aVSHQHAOtRB39UrLpCUWwf+SaAC7JjnDxqzlDaoRiCCBECiUxYrqJLfhGIiBLz+5o
- IGFrFU7HWU8mrjtDNogpAdfAohj1XWsEyTGxn8yq94wV6xeOqQllU7MGysaSbAb53m7C
- 2BdJyh9AWkSANTtxk2sdUYOV3/2EgnoWGhJPQYhSnEvPHtn7/QBYesG+AxxYfxr2pqRM
- bOBmiWSjZyL150YNjtq5l/r/3ckGtfkAXtg6cyMC8R3zilCUpCJJ6f7oz7Ez3Nfd3uSY
- AC5A==
+ d=1e100.net; s=20230601; t=1719302338; x=1719907138;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=J5EWQDpYPjghYw2Z/VvVN0nVOQLNpy4Ko5kctFLpJcI=;
+ b=uFute4x7QV+XoMH32D9moyKZDm4MYaOhKveUAGz5c6otm2/wXQhEl0KaIX1luA8DpD
+ A7l+aALR2vUJcNQkqYzc8WmMKMdrc6IbiUT30qVOUbMRBCSBJXUaRIiSb5Z+iEbKqBxj
+ 4NLpNrcTQhPDkGsmrFzM1atVLbHrU82LSGzEWJMGjlIneV9uXDi6sP/otq/JwDdbZz/F
+ 3JDRCrBpSf5tRl096uwIfc1bWT7HZpP2m0XU+K6ewRNRGYH+ecnWSkxyj8QFiCpdCN6h
+ E1+e/j7gUym5gFk7PbyyMQurYH8U10Wln7+V6S9qVsM8thXOp7tPQ/KE2KczISC5yKfP
+ ARvg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVctoOIO3bOPvYc68DGm1BnpThkBiTL/oR1feqS3cVQnsCuzUauPirnvccrxgKSAVQZjxY115DAG/ltie+mwW/KxfVIPMA=
-X-Gm-Message-State: AOJu0YwjQlY47YSpngVOffVHAhKxIAl+NOnwfu9tRY04RV0nliuDx2Ro
- e0AFcIixYsz290KuJXbFO9xBVjN3J3ECDwqHfNR/yCbZTvKEbInXHNiZrSKC4mg8RPQTspMS2fP
- l8BC+YJ38d8DxUPe46v/+4ujB8WY=
-X-Google-Smtp-Source: AGHT+IEWmJN4ANFcBmHcUeeFf6w+/OODVCDkQUP75in0i0edk7C3N+0TFowYfzwidqYve7xxjBGlbu9UT9wVrsXzPcA=
-X-Received: by 2002:a67:fd95:0:b0:48f:5383:c7b3 with SMTP id
- ada2fe7eead31-48f5383c9f4mr4229647137.11.1719280058563; Mon, 24 Jun 2024
- 18:47:38 -0700 (PDT)
+ AJvYcCUw3AkC5G15tjxwK26P5fOTtwxbG8n+aIjLsKg86AH9cvaZygRAFRyd96z3Jm6Ow0Nzc7PTWjLSweJwAoBqK3FpalCaG1o=
+X-Gm-Message-State: AOJu0YyizSSdfd7ciDesMiya5ImWrVgQsVNpf8YPc1BxJmZAI9szSTfG
+ t9FUbr0P1oyHKTBd25Muk3WNN934y8x9AaaNbR4DPIHYDxvtoQjkSZrDAoNLccg=
+X-Google-Smtp-Source: AGHT+IFNKSLOYYYzl98eLjVBqfDLfAJHUoxJ4Llvi+DWTGxBZPzbaBvHw1Jacvbbu2yKEOkaEa9ytQ==
+X-Received: by 2002:a17:90a:b97:b0:2c4:e2a6:dcd3 with SMTP id
+ 98e67ed59e1d1-2c861297efbmr6351656a91.6.1719302337656; 
+ Tue, 25 Jun 2024 00:58:57 -0700 (PDT)
+Received: from [192.168.100.252] (59-124-168-89.hinet-ip.hinet.net.
+ [59.124.168.89]) by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-2c7e4f03c4esm10248269a91.6.2024.06.25.00.58.54
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 25 Jun 2024 00:58:57 -0700 (PDT)
+Message-ID: <9831c088-f683-4483-9c40-84d7a80e8989@sifive.com>
+Date: Tue, 25 Jun 2024 15:58:52 +0800
 MIME-Version: 1.0
-References: <20240618112649.76683-1-cleger@rivosinc.com>
-In-Reply-To: <20240618112649.76683-1-cleger@rivosinc.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 25 Jun 2024 11:47:12 +1000
-Message-ID: <CAKmqyKOH+KaRZipBUubFTpHUmzLc=-cLH0aXUNsttZ5s3CDbhw@mail.gmail.com>
-Subject: Re: [PATCH v2] target/riscv: fix instructions count handling in
- icount mode
-To: =?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@rivosinc.com>
-Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org, 
- Atish Patra <atishp@rivosinc.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::929;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x929.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/6] target/riscv: Remove obsolete sfence.vm instruction
+To: Rajnesh Kanwal <rkanwal@rivosinc.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: alistair.francis@wdc.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ atishp@rivosinc.com, apatel@ventanamicro.com, beeman@rivosinc.com,
+ tech-control-transfer-records@lists.riscv.org
+References: <20240619152708.135991-1-rkanwal@rivosinc.com>
+ <20240619152708.135991-2-rkanwal@rivosinc.com>
+Content-Language: en-US
+From: Jason Chien <jason.chien@sifive.com>
+In-Reply-To: <20240619152708.135991-2-rkanwal@rivosinc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
+ envelope-from=jason.chien@sifive.com; helo=mail-pj1-x1036.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,137 +102,39 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jun 18, 2024 at 9:28=E2=80=AFPM Cl=C3=A9ment L=C3=A9ger <cleger@riv=
-osinc.com> wrote:
->
-> When icount is enabled, rather than returning the virtual CPU time, we
-> should return the instruction count itself. Add an instructions bool
-> parameter to get_ticks() to correctly return icount_get_raw() when
-> icount_enabled() =3D=3D 1 and instruction count is queried. This will mod=
-ify
-> the existing behavior which was returning an instructions count close to
-> the number of cycles (CPI ~=3D 1).
->
-> Signed-off-by: Cl=C3=A9ment L=C3=A9ger <cleger@rivosinc.com>
+Reviewed-by: Jason Chien <jason.chien@sifive.com>
 
-Thanks!
-
-Applied to riscv-to-apply.next
-
-Alistair
-
->
+On 2024/6/19 下午 11:27, Rajnesh Kanwal wrote:
+> Signed-off-by: Rajnesh Kanwal <rkanwal@rivosinc.com>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
+>   target/riscv/insn32.decode                     | 1 -
+>   target/riscv/insn_trans/trans_privileged.c.inc | 5 -----
+>   2 files changed, 6 deletions(-)
 >
-> v2:
->  - Apply checkpatch and fixed missing braces
->
-> ---
->  target/riscv/csr.c | 30 +++++++++++++++++-------------
->  1 file changed, 17 insertions(+), 13 deletions(-)
->
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 58ef7079dc..b8915e32a2 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -762,14 +762,18 @@ static RISCVException write_vcsr(CPURISCVState *env=
-, int csrno,
->  }
->
->  /* User Timers and Counters */
-> -static target_ulong get_ticks(bool shift)
-> +static target_ulong get_ticks(bool shift, bool instructions)
->  {
->      int64_t val;
->      target_ulong result;
->
->  #if !defined(CONFIG_USER_ONLY)
->      if (icount_enabled()) {
-> -        val =3D icount_get();
-> +        if (instructions) {
-> +            val =3D icount_get_raw();
-> +        } else {
-> +            val =3D icount_get();
-> +        }
->      } else {
->          val =3D cpu_get_host_ticks();
->      }
-> @@ -804,14 +808,14 @@ static RISCVException read_timeh(CPURISCVState *env=
-, int csrno,
->  static RISCVException read_hpmcounter(CPURISCVState *env, int csrno,
->                                        target_ulong *val)
->  {
-> -    *val =3D get_ticks(false);
-> +    *val =3D get_ticks(false, (csrno =3D=3D CSR_INSTRET));
->      return RISCV_EXCP_NONE;
->  }
->
->  static RISCVException read_hpmcounterh(CPURISCVState *env, int csrno,
->                                         target_ulong *val)
->  {
-> -    *val =3D get_ticks(true);
-> +    *val =3D get_ticks(true, (csrno =3D=3D CSR_INSTRETH));
->      return RISCV_EXCP_NONE;
->  }
->
-> @@ -875,11 +879,11 @@ static RISCVException write_mhpmcounter(CPURISCVSta=
-te *env, int csrno,
->      int ctr_idx =3D csrno - CSR_MCYCLE;
->      PMUCTRState *counter =3D &env->pmu_ctrs[ctr_idx];
->      uint64_t mhpmctr_val =3D val;
-> +    bool instr =3D riscv_pmu_ctr_monitor_instructions(env, ctr_idx);
->
->      counter->mhpmcounter_val =3D val;
-> -    if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
-> -        riscv_pmu_ctr_monitor_instructions(env, ctr_idx)) {
-> -        counter->mhpmcounter_prev =3D get_ticks(false);
-> +    if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) || instr) {
-> +        counter->mhpmcounter_prev =3D get_ticks(false, instr);
->          if (ctr_idx > 2) {
->              if (riscv_cpu_mxl(env) =3D=3D MXL_RV32) {
->                  mhpmctr_val =3D mhpmctr_val |
-> @@ -902,12 +906,12 @@ static RISCVException write_mhpmcounterh(CPURISCVSt=
-ate *env, int csrno,
->      PMUCTRState *counter =3D &env->pmu_ctrs[ctr_idx];
->      uint64_t mhpmctr_val =3D counter->mhpmcounter_val;
->      uint64_t mhpmctrh_val =3D val;
-> +    bool instr =3D riscv_pmu_ctr_monitor_instructions(env, ctr_idx);
->
->      counter->mhpmcounterh_val =3D val;
->      mhpmctr_val =3D mhpmctr_val | (mhpmctrh_val << 32);
-> -    if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
-> -        riscv_pmu_ctr_monitor_instructions(env, ctr_idx)) {
-> -        counter->mhpmcounterh_prev =3D get_ticks(true);
-> +    if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) || instr) {
-> +        counter->mhpmcounterh_prev =3D get_ticks(true, instr);
->          if (ctr_idx > 2) {
->              riscv_pmu_setup_timer(env, mhpmctr_val, ctr_idx);
->          }
-> @@ -926,6 +930,7 @@ static RISCVException riscv_pmu_read_ctr(CPURISCVStat=
-e *env, target_ulong *val,
->                                           counter->mhpmcounter_prev;
->      target_ulong ctr_val =3D upper_half ? counter->mhpmcounterh_val :
->                                          counter->mhpmcounter_val;
-> +    bool instr =3D riscv_pmu_ctr_monitor_instructions(env, ctr_idx);
->
->      if (get_field(env->mcountinhibit, BIT(ctr_idx))) {
->          /*
-> @@ -946,9 +951,8 @@ static RISCVException riscv_pmu_read_ctr(CPURISCVStat=
-e *env, target_ulong *val,
->       * The kernel computes the perf delta by subtracting the current val=
-ue from
->       * the value it initialized previously (ctr_val).
->       */
-> -    if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
-> -        riscv_pmu_ctr_monitor_instructions(env, ctr_idx)) {
-> -        *val =3D get_ticks(upper_half) - ctr_prev + ctr_val;
-> +    if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) || instr) {
-> +        *val =3D get_ticks(upper_half, instr) - ctr_prev + ctr_val;
->      } else {
->          *val =3D ctr_val;
->      }
-> --
-> 2.45.2
->
->
+> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+> index f22df04cfd..9cb1a1b4ec 100644
+> --- a/target/riscv/insn32.decode
+> +++ b/target/riscv/insn32.decode
+> @@ -112,7 +112,6 @@ sret        0001000    00010 00000 000 00000 1110011
+>   mret        0011000    00010 00000 000 00000 1110011
+>   wfi         0001000    00101 00000 000 00000 1110011
+>   sfence_vma  0001001    ..... ..... 000 00000 1110011 @sfence_vma
+> -sfence_vm   0001000    00100 ..... 000 00000 1110011 @sfence_vm
+>   
+>   # *** RV32I Base Instruction Set ***
+>   lui      ....................       ..... 0110111 @u
+> diff --git a/target/riscv/insn_trans/trans_privileged.c.inc b/target/riscv/insn_trans/trans_privileged.c.inc
+> index bc5263a4e0..4eccdddeaa 100644
+> --- a/target/riscv/insn_trans/trans_privileged.c.inc
+> +++ b/target/riscv/insn_trans/trans_privileged.c.inc
+> @@ -127,8 +127,3 @@ static bool trans_sfence_vma(DisasContext *ctx, arg_sfence_vma *a)
+>   #endif
+>       return false;
+>   }
+> -
+> -static bool trans_sfence_vm(DisasContext *ctx, arg_sfence_vm *a)
+> -{
+> -    return false;
+> -}
 
