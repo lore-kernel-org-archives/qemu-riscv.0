@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81460C3064D
-	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Jun 2024 15:10:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C2E3C3064D
+	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Jun 2024 15:10:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sM7o6-0002F1-3Y; Tue, 25 Jun 2024 11:10:06 -0400
+	id 1sM7n3-0001DR-1R; Tue, 25 Jun 2024 11:09:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1sM7o4-0002DQ-6E
- for qemu-riscv@nongnu.org; Tue, 25 Jun 2024 11:10:04 -0400
+ id 1sM7n1-0001Ce-7t
+ for qemu-riscv@nongnu.org; Tue, 25 Jun 2024 11:08:59 -0400
 Received: from mail-pf1-x42a.google.com ([2607:f8b0:4864:20::42a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1sM7o2-0006bX-9I
- for qemu-riscv@nongnu.org; Tue, 25 Jun 2024 11:10:03 -0400
+ id 1sM7my-0006PY-JA
+ for qemu-riscv@nongnu.org; Tue, 25 Jun 2024 11:08:58 -0400
 Received: by mail-pf1-x42a.google.com with SMTP id
- d2e1a72fcca58-7066cba4ebbso2114515b3a.3
- for <qemu-riscv@nongnu.org>; Tue, 25 Jun 2024 08:10:01 -0700 (PDT)
+ d2e1a72fcca58-70679845d69so1899170b3a.1
+ for <qemu-riscv@nongnu.org>; Tue, 25 Jun 2024 08:08:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1719328200; x=1719933000; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1719328135; x=1719932935; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=SPyOu1IwMNogunIuIjBkDIc9zx4X6xTuQJ4OgT7GMUM=;
- b=gdcinpQj4ZvT3LyNE4xelFmA3twwUgYNl1XQ76IvVqil82T3qX0igbP5JblLH/MHhL
- F8SI81RL8OhVpaAZcJ+4r35RlRXvo+uT4aWDMkz9CQbIfZPSbpwU20xuZovYmKQnUU+4
- La5t61ryCKulmh8v07ZqttvD7sjLPUs5NnGuw8bCn+8cgXVhAwxkQi+EcTEQZBFbURyW
- MlaqWGmmMGqujGUUnKlodzyQmY74EUQ++kSFbavH5dt+6j9vPlfgL3/Z9hBAij/zFAuM
- UkityWCuT8vJmcylA86Hks15pzGGEkYNN48joi0HWYELDMIE9vIa3CrXOGGgKbmRrtX7
- IjJA==
+ bh=TlnNdGhu04ossposrlJzR1bD3NKaX/zo3I7lspvtgbQ=;
+ b=k+euOehwtAsnCIXdp+q1irZu49z1Z5GVos5dpwHH+ORDa34pNDHnfe0C5lnspYeRV3
+ PluWG2uAaytIyrI4WMx0u+z/LkM4eMA4bncPrRR22yUy67EoVb7HwA+I1eXWRjL6kl/i
+ 5WGVycZcQQ5HIz498vJHX0MEcBiWilpp8HlfhkcRA45Y0xs5KQkv9K8vzaK8Dnu+uZG/
+ S574oY9K2oYVDN5dh7qcq8FwpfKIBhr/2niCkpjs2MEWffZ2EmYjRzvybbIV+IxSjDR1
+ aW3Yt5fLHezBTq2Y7qvuRnrJgRewqKZVGxewh7xiuK6g0p+664Ysfp1Lu7JT5WsS3qyc
+ rJxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719328200; x=1719933000;
+ d=1e100.net; s=20230601; t=1719328135; x=1719932935;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=SPyOu1IwMNogunIuIjBkDIc9zx4X6xTuQJ4OgT7GMUM=;
- b=NLR3ljo5R3O57MfxIlzOxhFHQ9BzlPW6LF2xvZWmL31qu/L9xH7kby5+A90vk9jUcU
- 5bvvdGm/UwuYT9HHR4txdrTwnmZZsVBolIHeKzB3cxx66z1ASHwMbeyxoASzJnVpMNN+
- Sj6rkIN6g+e0YyHt0j0IVXGR6x4EYAAYvo04CL1vZSresNxBFoUhkPB1AGp10yy4C6xU
- tC0Ksk0nltwXQ4dmk0pLNN1Psi5BaaqruLCga8nMEOS3lfZvBOLTEv6+B7HBoDkLWmCy
- cdg/0YTjvu2aVDU8sP7ZI+779bA9C5J386fJWFzDTPcDCQMt5Rb6BYo3qFUbCCUeZld0
- FQVQ==
+ bh=TlnNdGhu04ossposrlJzR1bD3NKaX/zo3I7lspvtgbQ=;
+ b=Biya/JdJExKZHj2RrEn7ue/lngt+9pSvu+gzSOR2us5/fi5slQEAL4wnQzSVdD1OoN
+ /5A4FKIS7p/yItmIrETT5lgoux3DsBK3hFM/jNwY+6/b5qhAc0URMTDJiJPP745eCOgr
+ An7jtNOC0fwDmWNxc6oWb81CZDJDC/oovg//eRz+3+D/94o8iAkH0e4p6Y3HuNHkeMUX
+ dPY8xWd2CNa3tuwHhyhj8RA/Q82TtDaXiUh9jd4s6ire6MDwiFrYkBWCljIHfu2yNY2y
+ KlVp6JlqT8elNOEmsafG/Uvv6wDkibbkAu8wdhVzwtYkwH8ZuuVjVBPLct4ekWWZCFvw
+ OcXg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWHNPGYdIg0fjtlBsJLWoJMpOmL20lYY2jhqttQNS3IfsgVX74Ensma1hT34Ajt+IV/vKBRmrIB7SLCulJbgdv2N1SxKAU=
-X-Gm-Message-State: AOJu0YwErLvUduEXgIgM14QCBzJc7pDFIV/E7jj3Amx9d/pqTlVeBAcV
- W7Um/T6WlrX0W/zudcMPBDmz0o5No2Bn8K7C0/7RcYay9aiV0Q6NojgxKXXq5xw=
-X-Google-Smtp-Source: AGHT+IEa/98rIsNeBVi1pCyL7gL4Ra7UJdymGObXwZqtPnPctM1yFFvw4Z9gt5kXUtmXT4jc8G+RaQ==
-X-Received: by 2002:a05:6a00:139f:b0:706:3204:fa4e with SMTP id
- d2e1a72fcca58-7066cbd0820mr11148032b3a.0.1719328200343; 
- Tue, 25 Jun 2024 08:10:00 -0700 (PDT)
+ AJvYcCVHIlApzczJ8rxJcsl7Y1FmQvlE+lQRYAte1SkujJwftJw3vfUs+eZP7LOJqaDyQyoOuIiXCUusYovtPhLzQ2ndBpdakFo=
+X-Gm-Message-State: AOJu0YwNwTIR/neI28lg7oQkNPZ5XRoP7YuaOGoCy3II3x4P1G9Nxxfe
+ qHd/kzb+6R67n1KqXQYOxv/uOIh+vLMrC+E3ekFoyZ2IFYuo2oz7Pe5HG+W5Rdw=
+X-Google-Smtp-Source: AGHT+IEWhCGGVsdSdXYdszp20qjdFCwLDSPgYVmzdVbzlp2oBsp4/hgyj4aqS8zkzvji0pDrTZnCWA==
+X-Received: by 2002:a05:6a00:4fcd:b0:706:8066:5cd8 with SMTP id
+ d2e1a72fcca58-70680665dc3mr7938064b3a.11.1719328134781; 
+ Tue, 25 Jun 2024 08:08:54 -0700 (PDT)
 Received: from sunil-pc.Dlink ([106.51.187.237])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-70681722219sm4142636b3a.73.2024.06.25.08.09.54
+ d2e1a72fcca58-70681722219sm4142636b3a.73.2024.06.25.08.08.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Jun 2024 08:09:59 -0700 (PDT)
+ Tue, 25 Jun 2024 08:08:53 -0700 (PDT)
 From: Sunil V L <sunilvl@ventanamicro.com>
 To: qemu-devel@nongnu.org,
 	qemu-arm@nongnu.org,
@@ -79,10 +79,9 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>,
  Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Sunil V L <sunilvl@ventanamicro.com>,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v4 12/16] pc-bios/meson.build: Add support for RISC-V in
- unpack_edk2_blobs
-Date: Tue, 25 Jun 2024 20:38:35 +0530
-Message-Id: <20240625150839.1358279-13-sunilvl@ventanamicro.com>
+Subject: [PATCH v4 01/16] hw/riscv/virt.c: Make block devices default to virtio
+Date: Tue, 25 Jun 2024 20:38:24 +0530
+Message-Id: <20240625150839.1358279-2-sunilvl@ventanamicro.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20240625150839.1358279-1-sunilvl@ventanamicro.com>
 References: <20240625150839.1358279-1-sunilvl@ventanamicro.com>
@@ -112,44 +111,33 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Update list of images supported in unpack_edk2_blobs to enable RISC-V
-ACPI table testing.
+RISC-V virt is currently missing default type for block devices. Without
+this being set, proper backend is not created when option like -cdrom
+is used. So, make the virt board's default block device type be
+IF_VIRTIO similar to other architectures.
+
+We also need to set no_cdrom to avoid getting a default cdrom device.
 
 Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Igor Mammedov <imammedo@redhat.com>
 ---
- pc-bios/meson.build     | 2 ++
- tests/qtest/meson.build | 3 +++
- 2 files changed, 5 insertions(+)
+ hw/riscv/virt.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/pc-bios/meson.build b/pc-bios/meson.build
-index 0760612bea..8602b45b9b 100644
---- a/pc-bios/meson.build
-+++ b/pc-bios/meson.build
-@@ -4,6 +4,8 @@ if unpack_edk2_blobs
-     'edk2-aarch64-code.fd',
-     'edk2-arm-code.fd',
-     'edk2-arm-vars.fd',
-+    'edk2-riscv-code.fd',
-+    'edk2-riscv-vars.fd',
-     'edk2-i386-code.fd',
-     'edk2-i386-secure-code.fd',
-     'edk2-i386-vars.fd',
-diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
-index 12792948ff..6508bfb1a2 100644
---- a/tests/qtest/meson.build
-+++ b/tests/qtest/meson.build
-@@ -259,6 +259,9 @@ qtests_s390x = \
- qtests_riscv32 = \
-   (config_all_devices.has_key('CONFIG_SIFIVE_E_AON') ? ['sifive-e-aon-watchdog-test'] : [])
- 
-+qtests_riscv64 = \
-+  (unpack_edk2_blobs ? ['bios-tables-test'] : [])
-+
- qos_test_ss = ss.source_set()
- qos_test_ss.add(
-   'ac97-test.c',
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 5676d66d12..e578c6dba7 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -1746,6 +1746,8 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
+     mc->init = virt_machine_init;
+     mc->max_cpus = VIRT_CPUS_MAX;
+     mc->default_cpu_type = TYPE_RISCV_CPU_BASE;
++    mc->block_default_type = IF_VIRTIO;
++    mc->no_cdrom = 1;
+     mc->pci_allow_0_address = true;
+     mc->possible_cpu_arch_ids = riscv_numa_possible_cpu_arch_ids;
+     mc->cpu_index_to_instance_props = riscv_numa_cpu_index_to_props;
 -- 
 2.40.1
 
