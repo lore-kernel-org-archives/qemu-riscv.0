@@ -4,82 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13951C27C4F
-	for <qemu-riscv@archiver.kernel.org>; Wed, 26 Jun 2024 09:42:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF1CFC27C4F
+	for <qemu-riscv@archiver.kernel.org>; Wed, 26 Jun 2024 10:12:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sMPAA-00046m-01; Wed, 26 Jun 2024 05:42:02 -0400
+	id 1sMPcf-00038C-3L; Wed, 26 Jun 2024 06:11:29 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <rbradford@rivosinc.com>)
- id 1sMPA8-00046D-LP
- for qemu-riscv@nongnu.org; Wed, 26 Jun 2024 05:42:00 -0400
-Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1sMPcd-00037c-1S
+ for qemu-riscv@nongnu.org; Wed, 26 Jun 2024 06:11:27 -0400
+Received: from mail-il1-x133.google.com ([2607:f8b0:4864:20::133])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <rbradford@rivosinc.com>)
- id 1sMPA6-0003iz-MM
- for qemu-riscv@nongnu.org; Wed, 26 Jun 2024 05:42:00 -0400
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-364c9ec17d1so4033621f8f.0
- for <qemu-riscv@nongnu.org>; Wed, 26 Jun 2024 02:41:57 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1sMPcR-0001lZ-Q7
+ for qemu-riscv@nongnu.org; Wed, 26 Jun 2024 06:11:26 -0400
+Received: by mail-il1-x133.google.com with SMTP id
+ e9e14a558f8ab-375df5af253so28137255ab.0
+ for <qemu-riscv@nongnu.org>; Wed, 26 Jun 2024 03:11:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1719394916; x=1719999716;
- darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=P8qYPYgonjwo1wpMx8C0ssT0R3HItE5CU4PlGsXXMOY=;
- b=BsZivs9hle7JUBJm50+doOfoyWd9EzphjH+Fbr1+vtnrmBWFKfTf2LBrf+NAVoo7e5
- DG0AUiq8A3JneplFjYMJZy0JSzP7PV2v9mZuQ/BULvyyE5UbXiEE7J4JLKY3qhoyAFaY
- kWPvHF6iMFdvKH5ZsprS5aQe7OpBvOVUTMK/HMlzCpcGyB4ryk1hdq0CogGl3/KI7SnX
- 4pewjZmb3/834qWxUiyMzomS9a+ocpLlyNunoDbTfhl/NniCYVWWlWbTbLwDN2nl4CnR
- UKjFhoYsvhgQzknRoHnGPefNSYhy2DVhUGbSX/wfYZKI4DG02TTsy83pNTkxvuGXdMML
- mWDg==
+ d=ventanamicro.com; s=google; t=1719396674; x=1720001474; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=DjiWWnM1hfvZbOjlqPiz3jEFnnZGaZ5yXq21OIMhuJA=;
+ b=e3cJGjb/TFJXmHtfjxgYW54XFOfGsdIGSYUgI/BAIJeotZf29nrI3cpvYTneKdUZu6
+ MuyzLJ4BUYTImj70BCgUc1sRmgIN9jypZqDITAuRsRzXDGxzUm6bg7NcjWw2frvA532Y
+ FxbZzG7WKqPq0i33GQz5cNMp0NtOVMdgv1xbV6T9ZMQhWp4iKVBvFX/mnwwEjGPhqZVX
+ B46PrNw9y3huCFN5VWwdz2+jBhECs3CPbwYK23/LDK72nd1yhnu+5MrMSTlc+o3P5j7o
+ SyVL8bDoemqDki8Jv6yLxW0RrFtoDpuNbez12Ekxuki0166ollGk8XX0yWi3ET6r3dmI
+ toRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719394916; x=1719999716;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=P8qYPYgonjwo1wpMx8C0ssT0R3HItE5CU4PlGsXXMOY=;
- b=LCk//EFOYStWPtOCrUvborBVzx7SBSX+Y1uxwWSApPdsd6TCSvQWo7dVE/rjWmO/3b
- 9go2Le/nHF+cyoGhBkPdOZbFEKV5oDArm9DJYXfEbCqNYYPoUrxYxATEnHX2YwqM2Cc/
- yt15qz5SbhV4hQu5+ay6GS1dWRmG0uAxFUcF9Tnh8rWL/wzZ6JKhRsmiwuMTlc4scfXD
- fvaXh+fs3wtoqocCkrvO9Lp6Xfy7KOpZHbD9FFb/rPxR/87UBEIvKCE4qT6Un9BlrzvK
- Yf1NtRI6fNI/4wBCtuYdXkd4LjN1iglchuF2cP7NkP8njmczXQj1TwCHRwSmzAhwObp1
- yqvA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV1lFv/Ukcp8QysLPYmpCVGfCpfzv/Yk3y68xLwrJEAf+8DASniIk7KGogVJKVZdT6fXDrIwzAZwGfs7EpmXUZYKl/zsag=
-X-Gm-Message-State: AOJu0YwAv8RGwqyUVm6W43I+wqzOBdsalwZzhYZwjaAzjkTL9+zOdfp3
- GKZ8SDuAESfK48a/mwx6zDus35feTEM8OQqnnt/VQquNydJzRMwPFv7y1Z/F4Lk=
-X-Google-Smtp-Source: AGHT+IFaVsHtv2TTJ05s6O2Qc+z9kE7NWjbSKzQ+feh14fJNM+wFxYTLAJ/4yKShv5Pmif13VDZUTw==
-X-Received: by 2002:a5d:47a8:0:b0:366:f64b:288 with SMTP id
- ffacd0b85a97d-366f64b03e2mr7339359f8f.29.1719394916470; 
- Wed, 26 Jun 2024 02:41:56 -0700 (PDT)
-Received: from rockhopper.. (214.11.169.217.in-addr.arpa. [217.169.11.214])
+ d=1e100.net; s=20230601; t=1719396674; x=1720001474;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=DjiWWnM1hfvZbOjlqPiz3jEFnnZGaZ5yXq21OIMhuJA=;
+ b=qaPD7MMENfgJ5Hzo3FBftxHsz75nadxHel3uKDTWHRvuzuEX1y4Fl5lGK1smK84a0x
+ ZQ/6OCbYw05e8IdNqse0Le0or8umjYzoMNEhvJyFMe7eRtSYg+VTEIsCM2g1nwEWPoQu
+ GzWPM8zKLLhkY1ZdTP2nLHMLgrx7mIKavW7L/nOnDJxyKW4+1tqsEwfP1lRF4YA6aitt
+ YuGANXe0F63DBNk0qHbKALIdmgYZZ8N2E06OExCSCrGBgo9xAl0EHq7Nt/JnLicc8Eh0
+ nIo17BstCqwFArurFvkOtBvWVsp4kZ28x9ZfPfururQ2hF2oKNqCRFL1vBsxrsGDrS8o
+ a2sQ==
+X-Gm-Message-State: AOJu0Ywg/AzwmlR3EJqMlJtUb/ozQWybHzy8A28VaJplL/sgvutDAXV2
+ rqOSd++KjnSta7S8MdYbqtV/3X1oZMd62gsUblKoJ3AvSXjJLrwRytV9Y+jCkFU=
+X-Google-Smtp-Source: AGHT+IGNjI/c0gGiFMVYbC/+u5GmcntuDmGC2ltRRqadpfeZkIP0/aQY0dCifgsO6Btd1/n1FKZbag==
+X-Received: by 2002:a05:6e02:1568:b0:376:1fae:4635 with SMTP id
+ e9e14a558f8ab-3763f682e99mr134939565ab.24.1719396673840; 
+ Wed, 26 Jun 2024 03:11:13 -0700 (PDT)
+Received: from [192.168.68.109] ([179.193.8.43])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-36638e90cbesm15266645f8f.58.2024.06.26.02.41.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Jun 2024 02:41:56 -0700 (PDT)
-From: Rob Bradford <rbradford@rivosinc.com>
-To: qemu-devel@nongnu.org
-Cc: Balaji Ravikumar <bravikumar@rivosinc.com>,
- Rob Bradford <rbradford@rivosinc.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG target)
-Subject: [PATCH] disas/riscv: Add decode for Zawrs extension
-Date: Wed, 26 Jun 2024 10:41:53 +0100
-Message-ID: <20240626094153.27208-1-rbradford@rivosinc.com>
-X-Mailer: git-send-email 2.45.2
+ 41be03b00d2f7-716b3ee7d8dsm8526250a12.25.2024.06.26.03.11.11
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 26 Jun 2024 03:11:13 -0700 (PDT)
+Message-ID: <d2878e19-4913-4a67-a3da-7e2165d357d9@ventanamicro.com>
+Date: Wed, 26 Jun 2024 07:11:09 -0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::432;
- envelope-from=rbradford@rivosinc.com; helo=mail-wr1-x432.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] tcg/riscv: Fix building on OpenBSD/riscv64
+To: Brad Smith <brad@comstyle.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Richard Henderson <richard.henderson@linaro.org>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+References: <Znu-pXYjX2ImMUda@humpty.home.comstyle.com>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <Znu-pXYjX2ImMUda@humpty.home.comstyle.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::133;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-il1-x133.google.com
+X-Spam_score_int: -16
+X-Spam_score: -1.7
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
+ DKIM_SIGNED=0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -95,51 +96,44 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Balaji Ravikumar <bravikumar@rivosinc.com>
 
-Add disassembly support for these instructions from Zawrs:
 
-* wrs.sto
-* wrs.nto
+On 6/26/24 4:09 AM, Brad Smith wrote:
+> tcg/riscv: Fix building on OpenBSD/riscv64
+> 
+> Signed-off-by: Brad Smith <brad@comstyle.com>
+> ---
 
-Signed-off-by: Balaji Ravikumar <bravikumar@rivosinc.com>
-Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
----
- disas/riscv.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+Please add in the commit msg a short description on the problem you're
+facing in the OpenBSD build and how this change fixes it. We want to keep
+a history on this kind of OS specific changes. There's also the possibility
+that an alternative fix might apply.
 
-diff --git a/disas/riscv.c b/disas/riscv.c
-index 90d6b26de9..e79788ea0a 100644
---- a/disas/riscv.c
-+++ b/disas/riscv.c
-@@ -906,6 +906,8 @@ typedef enum {
-     rv_op_amocas_w = 875,
-     rv_op_amocas_d = 876,
-     rv_op_amocas_q = 877,
-+    rv_op_wrs_sto = 878,
-+    rv_op_wrs_nto = 879,
- } rv_op;
- 
- /* register names */
-@@ -2096,6 +2098,8 @@ const rv_opcode_data rvi_opcode_data[] = {
-     { "amocas.w", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-     { "amocas.d", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-     { "amocas.q", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-+    { "wrs.sto", rv_codec_none, rv_fmt_none, NULL, 0, 0, 0 },
-+    { "wrs.nto", rv_codec_none, rv_fmt_none, NULL, 0, 0, 0 },
- };
- 
- /* CSR names */
-@@ -3817,6 +3821,8 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
-                     case 0: op = rv_op_ecall; break;
-                     case 32: op = rv_op_ebreak; break;
-                     case 64: op = rv_op_uret; break;
-+                    case 416: op = rv_op_wrs_nto; break;
-+                    case 928: op = rv_op_wrs_sto; break;
-                     }
-                     break;
-                 case 256:
--- 
-2.45.2
 
+Thanks,
+
+
+Daniel
+
+
+>   tcg/riscv/tcg-target.c.inc | 5 +++++
+>   1 file changed, 5 insertions(+)
+> 
+> diff --git a/tcg/riscv/tcg-target.c.inc b/tcg/riscv/tcg-target.c.inc
+> index 639363039b..aeae9a8ad8 100644
+> --- a/tcg/riscv/tcg-target.c.inc
+> +++ b/tcg/riscv/tcg-target.c.inc
+> @@ -2116,7 +2116,12 @@ static void sigill_handler(int signo, siginfo_t *si, void *data)
+>   {
+>       /* Skip the faulty instruction */
+>       ucontext_t *uc = (ucontext_t *)data;
+> +
+> +#ifdef __OpenBSD__
+> +    uc->sc_sepc += 4;
+> +#else
+>       uc->uc_mcontext.__gregs[REG_PC] += 4;
+> +#endif
+>   
+>       got_sigill = 1;
+>   }
 
