@@ -4,83 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC1A2C27C4F
-	for <qemu-riscv@archiver.kernel.org>; Wed, 26 Jun 2024 03:24:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5260BC27C4F
+	for <qemu-riscv@archiver.kernel.org>; Wed, 26 Jun 2024 03:50:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sMJGy-0003Xc-Kl; Tue, 25 Jun 2024 23:24:40 -0400
+	id 1sMJfA-0002D1-Hm; Tue, 25 Jun 2024 23:49:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sMJGx-0003XG-I7
- for qemu-riscv@nongnu.org; Tue, 25 Jun 2024 23:24:39 -0400
-Received: from mail-pg1-x534.google.com ([2607:f8b0:4864:20::534])
+ (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
+ id 1sMJf8-0002C8-HV
+ for qemu-riscv@nongnu.org; Tue, 25 Jun 2024 23:49:38 -0400
+Received: from mail-oo1-xc34.google.com ([2607:f8b0:4864:20::c34])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sMJGv-0000Ds-GY
- for qemu-riscv@nongnu.org; Tue, 25 Jun 2024 23:24:39 -0400
-Received: by mail-pg1-x534.google.com with SMTP id
- 41be03b00d2f7-6c5bcb8e8edso4489978a12.2
- for <qemu-riscv@nongnu.org>; Tue, 25 Jun 2024 20:24:37 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
+ id 1sMJf5-0007My-3r
+ for qemu-riscv@nongnu.org; Tue, 25 Jun 2024 23:49:38 -0400
+Received: by mail-oo1-xc34.google.com with SMTP id
+ 006d021491bc7-5bfa5f9bbe6so3033096eaf.3
+ for <qemu-riscv@nongnu.org>; Tue, 25 Jun 2024 20:49:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1719372276; x=1719977076; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6ulOsqEBoRq4wsE5vBZVR3s8sA5wvMKN2EKSzXkPW/w=;
- b=fxSgLdvcg1tvlrNWMo2y6Fh8vxYoUmqt/80NT6ki2E35dkKnTzIN/8Z2w3hEoIvDp7
- lIv4X4vLgOAkzgmi4aOYjjmiCX/bZQ2vp8WWb6f9EeIkYhttm2mHfvXjQ2xWsPO2oX8z
- cqJUXcyPhWrn+8F2EqOQBzGR9EMnlVHg7z/G39gs7Bwr11wUgIOk8gm3tBusnG71728R
- F+c9Ef94q9F5b43GSGzBauR8XOEAJO8aPSupV7kv08rezOHCX+HWlyxNDOpDvlZ+fBNv
- D/HFg+/b+oYTXpPIq4u6HsZaqnT5HU9+7xW0dCHQZj9c46sbBUcG+1g5uDGeetQkSRm+
- 7Sfg==
+ d=sifive.com; s=google; t=1719373773; x=1719978573; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=JUu4CChI60FiUjA43r7mN2xQIEakQJfGc7BbtSx3/UE=;
+ b=FmOzljIuv+M0AJ6e/n4khCr8ihC2v9OpghovxWaoQN/x6ot6NmaiNvTQeGGf6+9DFX
+ abgZzmXgk8zbN8fG4Fyufy/paTFuMHoUf6zA1+fabq0NuXmMoy6SN5n4iFBQiPjIHIgc
+ xy3BEHhsWEe1udL1JvJxSJlecQkvJRfCRfkuKLbJixdPjD1NRacmJjM2cCxCrA1EkU3s
+ 2lrIwfDoxCVRE2gZ+/xWdsJpsvPpgsA8vSo9VW+WHJ3gsHHe/ZMuxVvq9/tf2nFzuMw3
+ i7HnkAdPAJR+xNB2AUFGkYLUX2C+QmMvoyXZrV8BQOifji+v0/ZkpHaQyX0bEfDVZ7jz
+ r5Eg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719372276; x=1719977076;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=6ulOsqEBoRq4wsE5vBZVR3s8sA5wvMKN2EKSzXkPW/w=;
- b=VEMHfzeiyJn8yd3/6Jlj3WLTLLxr0mbmepdR15jz2xyWtqk45Ah92tcQB2lxwzJ9gR
- Y/t7VkVGvaI8QpwJtcpF34u3ji2CuY41hs3eBAbTx4QT72xjI4Be+B8QELkJDZc9U6DU
- tZvgwK2oTWFQ94udE0XQoLA3agEg02EDFsiv4trGzztE8A+G4ztBu68gY3mg2XLAR1F2
- 1lY/gG/iaaZROXiwJ5fuv8EeLYiLpwhUNJOjdQYUrnntI2I/+/0e1z+3rRv7M4ZonvdM
- YCMyKQKaYNaGgT3MhRgF16Nq7+ZobNHV3noD8NsqjhLLZUiKWmn1+noe7kFq4CdaezRG
- paHw==
+ d=1e100.net; s=20230601; t=1719373773; x=1719978573;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=JUu4CChI60FiUjA43r7mN2xQIEakQJfGc7BbtSx3/UE=;
+ b=ZeBspM5TylxdJhUXUy0wKdOIgrCIDf3O56C+etKeKdszg7mVfWCDOmsT3KN/wdKi9M
+ sqFua/gvuH5PCmrzBW0U68KI8ZvSECCMcF8PQmWJ6RXBdHFqgCI0JD04aBLR0OA/JDZY
+ qHltyE6pBnuP4qdfqxz2RJ4s75zTZ3969SzaNHIjwaLuZSw1C7g7Tzb+sK+5pwgd5564
+ RqqonoFM1YTGxE1K82+v0g5bHVCtbd++T2O/a2/d3rl8psbS4H6x97KiXy98xOeXxyB7
+ imkErkIVljaducB/XjCo9zr6pYmrH2GBaJH7Mkdh2VMQ/+lRFHAp6UV9sLtOAGW7cA57
+ eaYQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX5jVOW3ay8Zr4kg8eSMAmJlnHE2VKORgIhyWU28B6WK8UOuPORqe4DOOF8LVxv0lOLD/a03KfW/uCwBD0ItcfcYX0XklM=
-X-Gm-Message-State: AOJu0YyhFAIGz+kRvU858sywRpZsRebPoaAQyXykTBlCZtyC4QY0DOJa
- EDfFkAaJVtXXuHLah9Dq+nMDPHdlcnftV92YIGeJYXuSSbw6LSaJhnoFupbWYOxo6TrJWarAYXT
- wiDIBJdmoVY2lnIfrg6AZrfC4Dj7m7w==
-X-Google-Smtp-Source: AGHT+IEImWBt8rsBXSb38G1jYPsmNlEfHzgwSKekjTWAACAsg83/OjrFlczP0JoSXohsvGMNA+XWvhyH5gmINsDBhr0=
-X-Received: by 2002:a67:f401:0:b0:48f:4261:2d4a with SMTP id
- ada2fe7eead31-48f52c3d62amr9288428137.34.1719364726719; Tue, 25 Jun 2024
- 18:18:46 -0700 (PDT)
+ AJvYcCUASH+b3W5xc5zDI1kZvMJVIQnyAxdRMmslyzXyEea/8pEa8kYYy9hqZDgzOF+EwZEs02lNFI3GS4mETHNQ+VtfbkCNHJc=
+X-Gm-Message-State: AOJu0YznQl3UKlNbW5fPRHjHxiGdNiH4avtNwf/4GgJSsyvS7h8SdG7X
+ Y6FXwyU9u+KQglh7AaiSH1V73knAZCAe/hCTqLjvKDJ0LZnpikBj3NDfleLV3Bo=
+X-Google-Smtp-Source: AGHT+IEQAjfgcA91GJwCupkEgKZ3tFmne3mPwta44vODQMPPFO3FNJTU8JJ7JM4EqUjzSGW9nkiopQ==
+X-Received: by 2002:a05:6358:6f9b:b0:1a2:46b:9278 with SMTP id
+ e5c5f4694b2df-1a5d0627475mr54956255d.19.1719373772987; 
+ Tue, 25 Jun 2024 20:49:32 -0700 (PDT)
+Received: from [192.168.100.252] (59-124-168-89.hinet-ip.hinet.net.
+ [59.124.168.89]) by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-2c8d807c00dsm460976a91.38.2024.06.25.20.49.30
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 25 Jun 2024 20:49:32 -0700 (PDT)
+Message-ID: <0eae6e8c-200e-419d-a3ce-e7c756c9bb85@sifive.com>
+Date: Wed, 26 Jun 2024 11:49:28 +0800
 MIME-Version: 1.0
-References: <20240624201825.1054980-1-dbarboza@ventanamicro.com>
- <20240624201825.1054980-15-dbarboza@ventanamicro.com>
-In-Reply-To: <20240624201825.1054980-15-dbarboza@ventanamicro.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 26 Jun 2024 11:18:20 +1000
-Message-ID: <CAKmqyKM6g46UHZq=FxRrMeEw=rj-So9Q0zmvyHMfC9XFxR53fg@mail.gmail.com>
-Subject: Re: [PATCH v4 14/14] docs/specs: add riscv-iommu
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com, ajones@ventanamicro.com, tjeznach@rivosinc.com, 
- frank.chang@sifive.com, jason.chien@sifive.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::534;
- envelope-from=alistair23@gmail.com; helo=mail-pg1-x534.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 4/6] target/riscv: Add support to record CTR entries.
+To: Rajnesh Kanwal <rkanwal@rivosinc.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: alistair.francis@wdc.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ atishp@rivosinc.com, apatel@ventanamicro.com, beeman@rivosinc.com,
+ tech-control-transfer-records@lists.riscv.org
+References: <20240619152708.135991-1-rkanwal@rivosinc.com>
+ <20240619152708.135991-5-rkanwal@rivosinc.com>
+Content-Language: en-US
+From: Jason Chien <jason.chien@sifive.com>
+In-Reply-To: <20240619152708.135991-5-rkanwal@rivosinc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c34;
+ envelope-from=jason.chien@sifive.com; helo=mail-oo1-xc34.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,139 +102,698 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jun 25, 2024 at 6:20=E2=80=AFAM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+Hi Rajnesh,
+
+On 2024/6/19 下午 11:27, Rajnesh Kanwal wrote:
+> This commit adds logic to records CTR entries of different types
+> and adds required hooks in TCG and interrupt/Exception logic to
+> record events.
 >
-> Add a simple guideline to use the existing RISC-V IOMMU support we just
-> added.
+> This commit also adds support to invoke freeze CTR logic for breakpoint
+> exceptions and counter overflow interrupts.
 >
-> This doc will be updated once we add the riscv-iommu-sys device.
->
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Signed-off-by: Rajnesh Kanwal <rkanwal@rivosinc.com>
 > ---
->  docs/specs/index.rst       |  1 +
->  docs/specs/riscv-iommu.rst | 55 ++++++++++++++++++++++++++++++++++++++
->  docs/system/riscv/virt.rst | 13 +++++++++
->  3 files changed, 69 insertions(+)
->  create mode 100644 docs/specs/riscv-iommu.rst
+>   target/riscv/cpu.h                            |   8 +
+>   target/riscv/cpu_helper.c                     | 258 ++++++++++++++++++
+>   target/riscv/helper.h                         |   8 +-
+>   .../riscv/insn_trans/trans_privileged.c.inc   |   6 +-
+>   target/riscv/insn_trans/trans_rvi.c.inc       |  31 +++
+>   target/riscv/insn_trans/trans_rvzce.c.inc     |  20 ++
+>   target/riscv/op_helper.c                      | 126 ++++++++-
+>   target/riscv/translate.c                      |  10 +
+>   8 files changed, 461 insertions(+), 6 deletions(-)
 >
-> diff --git a/docs/specs/index.rst b/docs/specs/index.rst
-> index 1484e3e760..c68cd9ae6c 100644
-> --- a/docs/specs/index.rst
-> +++ b/docs/specs/index.rst
-> @@ -33,3 +33,4 @@ guest hardware that is specific to QEMU.
->     virt-ctlr
->     vmcoreinfo
->     vmgenid
-> +   riscv-iommu
-> diff --git a/docs/specs/riscv-iommu.rst b/docs/specs/riscv-iommu.rst
-> new file mode 100644
-> index 0000000000..fa38ff7667
-> --- /dev/null
-> +++ b/docs/specs/riscv-iommu.rst
-> @@ -0,0 +1,55 @@
-> +.. _riscv-iommu:
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 3d4d5172b8..e32f5ab146 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -268,6 +268,10 @@ struct CPUArchState {
+>       uint32_t sctrstatus;
+>       uint64_t vsctrctl;
+>   
+> +    uint64_t ctr_src[16 << SCTRDEPTH_MAX];
+> +    uint64_t ctr_dst[16 << SCTRDEPTH_MAX];
+> +    uint64_t ctr_data[16 << SCTRDEPTH_MAX];
 > +
-> +RISC-V IOMMU support for RISC-V machines
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>       /* Machine and Supervisor interrupt priorities */
+>       uint8_t miprio[64];
+>       uint8_t siprio[64];
+> @@ -565,6 +569,10 @@ RISCVException smstateen_acc_ok(CPURISCVState *env, int index, uint64_t bit);
+>   #endif
+>   void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv, bool virt_en);
+>   
+> +void riscv_ctr_freeze(CPURISCVState *env, uint64_t freeze_mask, bool virt);
+It looks like riscv_ctr_freeze() is only used in 
+target/riscv/cpu_helper.c. We can make it a static function.
+> +void riscv_ctr_add_entry(CPURISCVState *env, target_long src, target_long dst,
+> +                         uint64_t type, target_ulong prev_priv, bool prev_virt);
 > +
-> +QEMU implements a RISC-V IOMMU emulation based on the RISC-V IOMMU spec
-> +version 1.0 [1].
+>   void riscv_translate_init(void);
+>   G_NORETURN void riscv_raise_exception(CPURISCVState *env,
+>                                         uint32_t exception, uintptr_t pc);
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index a441a03ef4..1537602e1b 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -691,6 +691,246 @@ void riscv_cpu_set_aia_ireg_rmw_fn(CPURISCVState *env, uint32_t priv,
+>       }
+>   }
+>   
+> +void riscv_ctr_freeze(CPURISCVState *env, uint64_t freeze_mask, bool virt)
+> +{
+> +    uint64_t ctl = virt ? env->mctrctl : env->vsctrctl;
 > +
-> +The emulation includes a PCI reference device, riscv-iommu-pci, that QEM=
-U
-> +RISC-V boards can use.  The 'virt' RISC-V machine is compatible with thi=
-s
-> +device.
+> +    assert((freeze_mask & (~(MCTRCTL_BPFRZ | MCTRCTL_LCOFIFRZ))) == 0);
 > +
-> +A platform device that implements the RISC-V IOMMU will be added in the
-> +future.
+> +    if (ctl & freeze_mask) {
+> +        env->sctrstatus |= SCTRSTATUS_FROZEN;
+> +    }
+> +}
 > +
+> +static uint64_t riscv_ctr_priv_to_mask(target_ulong priv, bool virt)
+> +{
+> +    switch (priv) {
+> +    case PRV_M:
+> +        return MCTRCTL_M_ENABLE;
+> +    case PRV_S:
+> +        if (virt) {
+> +            return VSCTRCTL_VS_ENABLE;
+> +        }
+> +        return MCTRCTL_S_ENABLE;
+> +    case PRV_U:
+> +        if (virt) {
+> +            return VSCTRCTL_VU_ENABLE;
+> +        }
+> +        return MCTRCTL_U_ENABLE;
+> +    }
 > +
-> +riscv-iommu-pci reference device
-> +--------------------------------
+> +    g_assert_not_reached();
+> +}
 > +
-> +This device implements the RISC-V IOMMU emulation as recommended by the =
-section
-> +"Integrating an IOMMU as a PCIe device" of [1]: a PCI device with base c=
-lass 08h,
-> +sub-class 06h and programming interface 00h.
+> +static uint64_t riscv_ctr_get_control(CPURISCVState *env, target_long priv,
+> +                                      bool virt)
+> +{
+> +    switch (priv) {
+> +    case PRV_M:
+> +        return env->mctrctl;
+> +    case PRV_S:
+> +    case PRV_U:
+> +        if (virt) {
+> +            return env->vsctrctl;
+> +        }
+> +        return env->mctrctl;
+> +    }
 > +
-> +As a reference device it doesn't implement anything outside of the speci=
-fication,
-> +so it uses a generic default PCI ID given by QEMU: 1b36:0014.
+> +    g_assert_not_reached();
+> +}
 > +
-> +To include the device in the 'virt' machine:
+> +/*
+> + * This function assumes that src privilege and target privilege are not same
+> + * and src privilege is less than target privilege. This includes the virtual
+> + * state as well.
+> + */
+> +static bool riscv_ctr_check_xte(CPURISCVState *env, target_long src_prv,
+> +                                bool src_virt)
+This function is problematic. Suppose an external trap traps from U mode 
+to M mode. We need to check both sctrctl.STE and mctrctl.MTE, but this 
+function only checks sctrctl.STE.
+> +{
+> +    target_long tgt_prv = env->priv;
+> +    bool res = true;
 > +
-> +.. code-block:: bash
+> +    /*
+> +     * VS and U mode are same in terms of xTE bits required to record an
+> +     * external trap. See 6.1.2. External Traps, table 8 External Trap Enable
+> +     * Requirements. This changes VS to U to simplify the logic a bit.
+> +     */
+> +    if (src_virt && src_prv == PRV_S) {
+> +        src_prv = PRV_U;
+> +    } else if (env->virt_enabled && tgt_prv == PRV_S) {
+> +        tgt_prv = PRV_U;
+> +    }
 > +
-> +  $ qemu-system-riscv64 -M virt -device riscv-iommu-pci (...)
+> +    /* VU mode is an outlier here. */
+> +    if (src_virt && src_prv == PRV_U) {
+> +        res &= !!(env->vsctrctl & VSCTRCTL_VSTE);
+> +    }
 > +
-> +As of this writing the existing Linux kernel support [2], not yet merged=
-, is being
-> +created as a Rivos device, i.e. it uses Rivos vendor ID.  To use the ris=
-cv-iommu-pci
-> +device with the existing kernel support we need to emulate a Rivos PCI I=
-OMMU by
-> +setting 'vendor-id' and 'device-id':
+> +    switch (src_prv) {
+> +    case PRV_U:
+> +        if (tgt_prv == PRV_U) {
+> +            break;
+> +        }
+> +        res &= !!(env->mctrctl & SCTRCTL_STE);
+> +        /* fall-through */
+> +    case PRV_S:
+> +        if (tgt_prv == PRV_S) {
+> +            break;
+> +        }
+> +        res &= !!(env->mctrctl & MCTRCTL_MTE);
+> +        /* fall-through */
+> +    case PRV_M:
+> +        break;
+> +    }
 > +
-> +.. code-block:: bash
+> +    return res;
+> +}
 > +
-> +  $ qemu-system-riscv64 -M virt        \
-> +     -device riscv-iommu-pci,vendor-id=3D0x1efd,device-id=3D0xedf1 (...)
+> +/*
+> + * Special cases for traps and trap returns:
+> + *
+> + * 1- Traps, and trap returns, between enabled modes are recorded as normal.
+> + * 2- Traps from an inhibited mode to an enabled mode, and trap returns from an
+> + * enabled mode back to an inhibited mode, are partially recorded.  In such
+> + * cases, the PC from the inhibited mode (source PC for traps, and target PC
+> + * for trap returns) is 0.
+> + *
+> + * 3- Trap returns from an inhibited mode to an enabled mode are not recorded.
+> + * Traps from an enabled mode to an inhibited mode, known as external traps,
+> + * receive special handling.
+> + * By default external traps are not recorded, but a handshake mechanism exists
+> + * to allow partial recording.  Software running in the target mode of the trap
+> + * can opt-in to allowing CTR to record traps into that mode even when the mode
+> + * is inhibited.  The MTE, STE, and VSTE bits allow M-mode, S-mode, and VS-mode,
+> + * respectively, to opt-in. When an External Trap occurs, and xTE=1, such that
+> + * x is the target privilege mode of the trap, will CTR record the trap. In such
+> + * cases, the target PC is 0.
+> + */
+> +/*
+> + * CTR arrays are implemented as circular buffers and new entry is stored at
+> + * sctrstatus.WRPTR, but they are presented to software as moving circular
+> + * buffers. Which means, software get's the illusion that whenever a new entry
+> + * is added the whole buffer is moved by one place and the new entry is added at
+> + * the start keeping new entry at idx 0 and older ones follow.
+> + *
+> + * Depth = 16.
+> + *
+> + * buffer [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] [A] [B] [C] [D] [E] [F]
+> + * WRPTR                                   W
+> + * entry   7   6   5   4   3   2   1   0   F   E   D   C   B   A   9   8
+> + *
+> + * When a new entry is added:
+> + * buffer [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] [A] [B] [C] [D] [E] [F]
+> + * WRPTR                                       W
+> + * entry   8   7   6   5   4   3   2   1   0   F   E   D   C   B   A   9
+> + *
+> + * entry here denotes the logical entry number that software can access
+> + * using ctrsource, ctrtarget and ctrdata registers. So xiselect 0x200
+> + * will return entry 0 i-e buffer[8] and 0x201 will return entry 1 i-e
+> + * buffer[7]. Here is how we convert entry to buffer idx.
+> + *
+> + *    entry = isel - CTR_ENTRIES_FIRST;
+> + *    idx = (sctrstatus.WRPTR - entry - 1) & (depth - 1);
+> + */
+> +void riscv_ctr_add_entry(CPURISCVState *env, target_long src, target_long dst,
+> +                         uint64_t type, target_ulong src_priv, bool src_virt)
+> +{
+> +    bool tgt_virt = env->virt_enabled;
+> +    uint64_t src_mask = riscv_ctr_priv_to_mask(src_priv, src_virt);
+> +    uint64_t tgt_mask = riscv_ctr_priv_to_mask(env->priv, tgt_virt);
+> +    uint64_t src_ctrl = riscv_ctr_get_control(env, src_priv, src_virt);
+> +    uint64_t tgt_ctrl = riscv_ctr_get_control(env, env->priv, tgt_virt);
+> +    uint64_t depth, head;
+> +    bool ext_trap = false;
 > +
-> +Several options are available to control the capabilities of the device,=
- namely:
+> +    /*
+> +     * Return immediately if both target and src recording is disabled or if
+> +     * CTR is in frozen state.
+> +     */
+> +    if ((!(src_ctrl & src_mask) && !(tgt_ctrl & tgt_mask)) ||
+> +        env->sctrstatus & SCTRSTATUS_FROZEN) {
+> +        return;
+> +    }
 > +
-> +- "bus"
-> +- "ioatc-limit"
-> +- "intremap"
-> +- "ats"
-> +- "off" (Out-of-reset translation mode: 'on' for DMA disabled, 'off' for=
- 'BARE' (passthrough))
-> +- "s-stage"
-> +- "g-stage"
+> +    /*
+> +     * With RAS Emul enabled, only allow Indirect, direct calls, Function
+> +     * returns and Co-routine swap types.
+> +     */
+> +    if (env->mctrctl & MCTRCTL_RASEMU &&
+I think we should check vsctrctl.RASEMU for VS and VU mode.
+You can consider defining a variable here as it will be used multiple 
+times below.
+bool rasemu = MCTRCTL_RASEMU & ((env->virt_enabled) ? env->vsctrctl : 
+env->mctrctl);
+> +        type != CTRDATA_TYPE_INDIRECT_CALL &&
+> +        type != CTRDATA_TYPE_DIRECT_CALL &&
+> +        type != CTRDATA_TYPE_RETURN &&
+> +        type != CTRDATA_TYPE_CO_ROUTINE_SWAP) {
+> +        return;
+> +    }
+> +
+> +    if (type == CTRDATA_TYPE_EXCEPTION || type == CTRDATA_TYPE_INTERRUPT) {
+> +        /* Case 2 for traps. */
+> +        if (!(src_ctrl & src_mask)) {
+> +            src = 0;
+> +        } else if (!(tgt_ctrl & tgt_mask)) {
+> +            /* Check if target priv-mode has allowed external trap recording. */
+> +            if (!riscv_ctr_check_xte(env, src_priv, src_virt)) {
+> +                return;
+> +            }
+> +
+> +            ext_trap = true;
+> +            dst = 0;
+> +        }
+> +    } else if (type == CTRDATA_TYPE_EXCEP_INT_RET) {
+> +        /*
+> +         * Case 3 for trap returns.  Trap returns from inhibited mode are not
+> +         * recorded.
+> +         */
+> +        if (!(src_ctrl & src_mask)) {
+> +            return;
+> +        }
+> +
+> +        /* Case 2 for trap returns. */
+> +        if (!(tgt_ctrl & tgt_mask)) {
+> +            dst = 0;
+> +        }
+> +    }
+> +
+> +    /* Ignore filters in case of RASEMU mode or External trap. */
+> +    if (!(tgt_ctrl & MCTRCTL_RASEMU) && !ext_trap) {
+> +        /*
+> +         * Check if the specific type is inhibited. Not taken branch filter is
+> +         * an enable bit and needs to be checked separatly.
+> +         */
+> +        bool check = tgt_ctrl & BIT_ULL(type + MCTRCTL_INH_START);
+> +        if ((type == CTRDATA_TYPE_NONTAKEN_BRANCH && !check) ||
+> +            (type != CTRDATA_TYPE_NONTAKEN_BRANCH && check)) {
+> +            return;
+> +        }
+> +    }
+> +
+> +    head = get_field(env->sctrstatus, SCTRSTATUS_WRPTR_MASK);
+> +
+> +    depth = 16 << get_field(env->sctrdepth, SCTRDEPTH_MASK);
+> +    if (tgt_ctrl & MCTRCTL_RASEMU && type == CTRDATA_TYPE_RETURN) {
+> +        head = (head - 1) & (depth - 1);
+> +
+> +        env->ctr_src[head] &= ~CTRSOURCE_VALID;
+> +        env->sctrstatus =
+> +            set_field(env->sctrstatus, SCTRSTATUS_WRPTR_MASK, head);
+> +        return;
+> +    }
+> +
+> +    /* In case of Co-routine SWAP we overwrite latest entry. */
+> +    if (tgt_ctrl & MCTRCTL_RASEMU && type == CTRDATA_TYPE_CO_ROUTINE_SWAP) {
+> +        head = (head - 1) & (depth - 1);
+> +    }
 
-These names don't jump out of the spec, so we probably want to at
-least provide a sentence on what they mean/do.
+The code can be reduced here.
 
-Alistair
+if (rasemu) {
+     head = (head - 1) & (depth - 1);
+     if (CTRDATA_TYPE_CO_ROUTINE_SWAP) { ... }
+     else if (CTRDATA_TYPE_CO_ROUTINE_SWAP) { ... }
+}
 
 > +
+> +    env->ctr_src[head] = src | CTRSOURCE_VALID;
+> +    env->ctr_dst[head] = dst & ~CTRTARGET_MISP;
+> +    env->ctr_data[head] = set_field(0, CTRDATA_TYPE_MASK, type);
 > +
-> +[1] https://github.com/riscv-non-isa/riscv-iommu/releases/download/v1.0/=
-riscv-iommu.pdf
-> +[2] https://lore.kernel.org/linux-riscv/cover.1718388908.git.tjeznach@ri=
-vosinc.com/
-> diff --git a/docs/system/riscv/virt.rst b/docs/system/riscv/virt.rst
-> index 9a06f95a34..8e9a2e4dda 100644
-> --- a/docs/system/riscv/virt.rst
-> +++ b/docs/system/riscv/virt.rst
-> @@ -84,6 +84,19 @@ none``, as in
->
->  Firmware images used for pflash must be exactly 32 MiB in size.
->
-> +riscv-iommu support
-> +-------------------
+> +    head = (head + 1) & (depth - 1);
 > +
-> +The board has support for the riscv-iommu-pci device by using the follow=
-ing
-> +command line:
+> +    env->sctrstatus = set_field(env->sctrstatus, SCTRSTATUS_WRPTR_MASK, head);
+> +}
 > +
-> +.. code-block:: bash
+>   void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv, bool virt_en)
+>   {
+>       g_assert(newpriv <= PRV_M && newpriv != PRV_RESERVED);
+> @@ -1669,10 +1909,13 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>           !(env->mip & (1 << cause));
+>       bool vs_injected = env->hvip & (1 << cause) & env->hvien &&
+>           !(env->mip & (1 << cause));
+> +    const bool prev_virt = env->virt_enabled;
+> +    const target_ulong prev_priv = env->priv;
+>       target_ulong tval = 0;
+>       target_ulong tinst = 0;
+>       target_ulong htval = 0;
+>       target_ulong mtval2 = 0;
+> +    target_ulong src;
+>   
+>       if (!async) {
+>           /* set tval to badaddr for traps with address information */
+> @@ -1807,6 +2050,8 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>           env->pc = (env->stvec >> 2 << 2) +
+>                     ((async && (env->stvec & 3) == 1) ? cause * 4 : 0);
+>           riscv_cpu_set_mode(env, PRV_S, virt);
 > +
-> +  $ qemu-system-riscv64 -M virt -device riscv-iommu-pci (...)
+> +        src = env->sepc;
+>       } else {
+>           /* handle the trap in M-mode */
+>           if (riscv_has_ext(env, RVH)) {
+> @@ -1838,6 +2083,19 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>           env->pc = (env->mtvec >> 2 << 2) +
+>                     ((async && (env->mtvec & 3) == 1) ? cause * 4 : 0);
+>           riscv_cpu_set_mode(env, PRV_M, virt);
+> +        src = env->mepc;
+> +    }
 > +
-> +Refer to :ref:`riscv-iommu` for more information on how the RISC-V IOMMU=
- support
-> +works.
+> +    if (riscv_cpu_cfg(env)->ext_smctr || riscv_cpu_cfg(env)->ext_ssctr) {
+> +        if (async && cause == IRQ_PMU_OVF) {
+> +            riscv_ctr_freeze(env, MCTRCTL_LCOFIFRZ, virt);
+> +        } else if (!async && cause == RISCV_EXCP_BREAKPOINT) {
+> +            riscv_ctr_freeze(env, MCTRCTL_BPFRZ, virt);
+> +        }
 > +
->  Machine-specific options
->  ------------------------
->
-> --
-> 2.45.2
->
->
+> +        riscv_ctr_add_entry(env, src, env->pc,
+> +                        async ? CTRDATA_TYPE_INTERRUPT : CTRDATA_TYPE_EXCEPTION,
+> +                        prev_priv, prev_virt);
+>       }
+>   
+>       /*
+> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+> index 451261ce5a..b8fb7c8734 100644
+> --- a/target/riscv/helper.h
+> +++ b/target/riscv/helper.h
+> @@ -129,12 +129,16 @@ DEF_HELPER_2(csrr_i128, tl, env, int)
+>   DEF_HELPER_4(csrw_i128, void, env, int, tl, tl)
+>   DEF_HELPER_6(csrrw_i128, tl, env, int, tl, tl, tl, tl)
+>   #ifndef CONFIG_USER_ONLY
+> -DEF_HELPER_1(sret, tl, env)
+> -DEF_HELPER_1(mret, tl, env)
+> +DEF_HELPER_2(sret, tl, env, tl)
+> +DEF_HELPER_2(mret, tl, env, tl)
+>   DEF_HELPER_1(wfi, void, env)
+>   DEF_HELPER_1(wrs_nto, void, env)
+>   DEF_HELPER_1(tlb_flush, void, env)
+>   DEF_HELPER_1(tlb_flush_all, void, env)
+> +DEF_HELPER_4(ctr_branch, void, env, tl, tl, tl)
+> +DEF_HELPER_4(ctr_jal, void, env, tl, tl, tl)
+> +DEF_HELPER_5(ctr_jalr, void, env, tl, tl, tl, tl)
+> +DEF_HELPER_3(ctr_popret, void, env, tl, tl)
+>   /* Native Debug */
+>   DEF_HELPER_1(itrigger_match, void, env)
+>   #endif
+> diff --git a/target/riscv/insn_trans/trans_privileged.c.inc b/target/riscv/insn_trans/trans_privileged.c.inc
+> index 4eccdddeaa..339d659151 100644
+> --- a/target/riscv/insn_trans/trans_privileged.c.inc
+> +++ b/target/riscv/insn_trans/trans_privileged.c.inc
+> @@ -78,9 +78,10 @@ static bool trans_sret(DisasContext *ctx, arg_sret *a)
+>   {
+>   #ifndef CONFIG_USER_ONLY
+>       if (has_ext(ctx, RVS)) {
+> +        TCGv src = tcg_constant_tl(ctx->base.pc_next);
+>           decode_save_opc(ctx);
+>           translator_io_start(&ctx->base);
+> -        gen_helper_sret(cpu_pc, tcg_env);
+> +        gen_helper_sret(cpu_pc, tcg_env, src);
+>           exit_tb(ctx); /* no chaining */
+>           ctx->base.is_jmp = DISAS_NORETURN;
+>       } else {
+> @@ -95,9 +96,10 @@ static bool trans_sret(DisasContext *ctx, arg_sret *a)
+>   static bool trans_mret(DisasContext *ctx, arg_mret *a)
+>   {
+>   #ifndef CONFIG_USER_ONLY
+> +    TCGv src = tcg_constant_tl(ctx->base.pc_next);
+>       decode_save_opc(ctx);
+>       translator_io_start(&ctx->base);
+> -    gen_helper_mret(cpu_pc, tcg_env);
+> +    gen_helper_mret(cpu_pc, tcg_env, src);
+>       exit_tb(ctx); /* no chaining */
+>       ctx->base.is_jmp = DISAS_NORETURN;
+>       return true;
+> diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
+> index ad40d3e87f..26633569a8 100644
+> --- a/target/riscv/insn_trans/trans_rvi.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvi.c.inc
+> @@ -75,6 +75,14 @@ static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
+>       gen_set_gpr(ctx, a->rd, succ_pc);
+>   
+>       tcg_gen_mov_tl(cpu_pc, target_pc);
+> +#ifndef CONFIG_USER_ONLY
+> +    if (ctx->cfg_ptr->ext_smctr || ctx->cfg_ptr->ext_ssctr) {
+> +        TCGv src = tcg_constant_tl(ctx->base.pc_next);
+> +        TCGv rs1 = tcg_constant_tl(a->rs1);
+> +        TCGv rd = tcg_constant_tl(a->rd);
+> +        gen_helper_ctr_jalr(tcg_env, src, cpu_pc, rd, rs1);
+> +    }
+> +#endif
+>       lookup_and_goto_ptr(ctx);
+>   
+>       if (misaligned) {
+> @@ -164,6 +172,11 @@ static bool gen_branch(DisasContext *ctx, arg_b *a, TCGCond cond)
+>       TCGv src1 = get_gpr(ctx, a->rs1, EXT_SIGN);
+>       TCGv src2 = get_gpr(ctx, a->rs2, EXT_SIGN);
+>       target_ulong orig_pc_save = ctx->pc_save;
+> +#ifndef CONFIG_USER_ONLY
+> +    TCGv src = tcg_constant_tl(ctx->base.pc_next);
+> +    TCGv taken;
+> +    TCGv dest;
+> +#endif
+>   
+>       if (get_xl(ctx) == MXL_RV128) {
+>           TCGv src1h = get_gprh(ctx, a->rs1);
+> @@ -176,6 +189,16 @@ static bool gen_branch(DisasContext *ctx, arg_b *a, TCGCond cond)
+>       } else {
+>           tcg_gen_brcond_tl(cond, src1, src2, l);
+>       }
+> +
+> +#ifndef CONFIG_USER_ONLY
+> +    if (ctx->cfg_ptr->ext_smctr || ctx->cfg_ptr->ext_ssctr) {
+> +        dest = tcg_constant_tl(ctx->base.pc_next + ctx->cur_insn_len);
+> +        taken = tcg_constant_tl(0);
+> +
+> +        gen_helper_ctr_branch(tcg_env, src, dest, taken);
+> +    }
+> +#endif
+> +
+>       gen_goto_tb(ctx, 1, ctx->cur_insn_len);
+>       ctx->pc_save = orig_pc_save;
+>   
+> @@ -188,6 +211,14 @@ static bool gen_branch(DisasContext *ctx, arg_b *a, TCGCond cond)
+>           gen_pc_plus_diff(target_pc, ctx, a->imm);
+>           gen_exception_inst_addr_mis(ctx, target_pc);
+>       } else {
+> +#ifndef CONFIG_USER_ONLY
+> +        if (ctx->cfg_ptr->ext_smctr || ctx->cfg_ptr->ext_ssctr) {
+> +            dest = tcg_constant_tl(ctx->base.pc_next + a->imm);
+> +            taken = tcg_constant_tl(1);
+> +
+> +            gen_helper_ctr_branch(tcg_env, src, dest, taken);
+> +        }
+> +#endif
+>           gen_goto_tb(ctx, 0, a->imm);
+>       }
+>       ctx->pc_save = -1;
+> diff --git a/target/riscv/insn_trans/trans_rvzce.c.inc b/target/riscv/insn_trans/trans_rvzce.c.inc
+> index cd234ad960..377d3fff70 100644
+> --- a/target/riscv/insn_trans/trans_rvzce.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvzce.c.inc
+> @@ -204,6 +204,12 @@ static bool gen_pop(DisasContext *ctx, arg_cmpp *a, bool ret, bool ret_val)
+>       if (ret) {
+>           TCGv ret_addr = get_gpr(ctx, xRA, EXT_SIGN);
+>           tcg_gen_mov_tl(cpu_pc, ret_addr);
+> +#ifndef CONFIG_USER_ONLY
+> +        if (ctx->cfg_ptr->ext_smctr || ctx->cfg_ptr->ext_ssctr) {
+> +            TCGv src = tcg_constant_tl(ctx->base.pc_next);
+> +            gen_helper_ctr_popret(tcg_env, src, cpu_pc);
+> +        }
+> +#endif
+>           tcg_gen_lookup_and_goto_ptr();
+>           ctx->base.is_jmp = DISAS_NORETURN;
+>       }
+> @@ -309,6 +315,20 @@ static bool trans_cm_jalt(DisasContext *ctx, arg_cm_jalt *a)
+>           gen_set_gpr(ctx, xRA, succ_pc);
+>       }
+>   
+> +#ifndef CONFIG_USER_ONLY
+> +    if (ctx->cfg_ptr->ext_smctr || ctx->cfg_ptr->ext_ssctr) {
+> +        /*
+> +         * We are reusing helper_ctr_jal() here. If rd is x1 or x5,
+> +         * this will record a direct call (cm.jalt) and if it's x0
+> +         * then this will record a direct jump (cm.jt).
+> +         */
+> +        TCGv rd = tcg_constant_tl(a->index >= 32 ? 1 : 0);
+> +        TCGv src = tcg_constant_tl(ctx->base.pc_next);
+> +        gen_helper_ctr_jal(tcg_env, src, addr, rd);
+> +    }
+> +#endif
+> +
+> +
+>       tcg_gen_mov_tl(cpu_pc, addr);
+>   
+>       tcg_gen_lookup_and_goto_ptr();
+> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+> index 25a5263573..5a1e92c45e 100644
+> --- a/target/riscv/op_helper.c
+> +++ b/target/riscv/op_helper.c
+> @@ -259,10 +259,12 @@ void helper_cbo_inval(CPURISCVState *env, target_ulong address)
+>   
+>   #ifndef CONFIG_USER_ONLY
+>   
+> -target_ulong helper_sret(CPURISCVState *env)
+> +target_ulong helper_sret(CPURISCVState *env, target_ulong curr_pc)
+>   {
+>       uint64_t mstatus;
+>       target_ulong prev_priv, prev_virt = env->virt_enabled;
+> +    const target_ulong src_priv = env->priv;
+> +    const bool src_virt = env->virt_enabled;
+>   
+>       if (!(env->priv >= PRV_S)) {
+>           riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+> @@ -309,10 +311,15 @@ target_ulong helper_sret(CPURISCVState *env)
+>   
+>       riscv_cpu_set_mode(env, prev_priv, prev_virt);
+>   
+> +    if (riscv_cpu_cfg(env)->ext_smctr || riscv_cpu_cfg(env)->ext_ssctr) {
+> +        riscv_ctr_add_entry(env, curr_pc, retpc, CTRDATA_TYPE_EXCEP_INT_RET,
+> +                            src_priv, src_virt);
+> +    }
+> +
+>       return retpc;
+>   }
+>   
+> -target_ulong helper_mret(CPURISCVState *env)
+> +target_ulong helper_mret(CPURISCVState *env, target_ulong curr_pc)
+>   {
+>       if (!(env->priv >= PRV_M)) {
+>           riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+> @@ -350,9 +357,124 @@ target_ulong helper_mret(CPURISCVState *env)
+>   
+>       riscv_cpu_set_mode(env, prev_priv, prev_virt);
+>   
+> +    if (riscv_cpu_cfg(env)->ext_smctr || riscv_cpu_cfg(env)->ext_ssctr) {
+> +        riscv_ctr_add_entry(env, curr_pc, retpc, CTRDATA_TYPE_EXCEP_INT_RET,
+> +                            PRV_M, false);
+> +    }
+> +
+>       return retpc;
+>   }
+>   
+> +/*
+> + * Indirect calls
+> + * - jalr x1, rs where rs != x5;
+> + * - jalr x5, rs where rs != x1;
+> + * - c.jalr rs1 where rs1 != x5;
+> + *
+> + * Indirect jumps
+> + * - jalr x0, rs where rs != x1 and rs != x5;
+> + * - c.jr rs1 where rs1 != x1 and rs1 != x5.
+> + *
+> + * Returns
+> + * - jalr rd, rs where (rs == x1 or rs == x5) and rd != x1 and rd != x5;
+> + * - c.jr rs1 where rs1 == x1 or rs1 == x5.
+> + *
+> + * Co-routine swap
+> + * - jalr x1, x5;
+> + * - jalr x5, x1;
+> + * - c.jalr x5.
+> + *
+> + * Other indirect jumps
+> + * - jalr rd, rs where rs != x1, rs != x5, rd != x0, rd != x1 and rd != x5.
+> + */
+> +void helper_ctr_jalr(CPURISCVState *env, target_ulong src, target_ulong dest,
+> +                     target_ulong rd, target_ulong rs1)
+> +{
+> +    target_ulong curr_priv = env->priv;
+> +    bool curr_virt = env->virt_enabled;
+> +
+> +    if ((rd == 1 && rs1 != 5) || (rd == 5 && rs1 != 1)) {
+> +        riscv_ctr_add_entry(env, src, dest, CTRDATA_TYPE_INDIRECT_CALL,
+> +                            curr_priv, curr_virt);
+> +    } else if (rd == 0 && rs1 != 1 && rs1 != 5) {
+> +        riscv_ctr_add_entry(env, src, dest, CTRDATA_TYPE_INDIRECT_JUMP,
+> +                            curr_priv, curr_virt);
+> +    } else if ((rs1 == 1 || rs1 == 5) && (rd != 1 && rd != 5)) {
+> +        riscv_ctr_add_entry(env, src, dest, CTRDATA_TYPE_RETURN,
+> +                            curr_priv, curr_virt);
+> +    } else if ((rs1 == 1 && rd == 5) || (rs1 == 5 && rd == 1)) {
+> +        riscv_ctr_add_entry(env, src, dest, CTRDATA_TYPE_CO_ROUTINE_SWAP,
+> +                            curr_priv, curr_virt);
+> +    } else {
+> +        riscv_ctr_add_entry(env, src, dest,
+> +                            CTRDATA_TYPE_OTHER_INDIRECT_JUMP, curr_priv,
+> +                            curr_virt);
+> +    }
+> +}
+> +
+> +/*
+> + * Direct calls
+> + * - jal x1;
+> + * - jal x5;
+> + * - c.jal.
+> + * - cm.jalt.
+> + *
+> + * Direct jumps
+> + * - jal x0;
+> + * - c.j;
+> + * - cm.jt.
+> + *
+> + * Other direct jumps
+> + * - jal rd where rd != x1 and rd != x5 and rd != x0;
+> + */
+> +void helper_ctr_jal(CPURISCVState *env, target_ulong src, target_ulong dest,
+> +                    target_ulong rd)
+> +{
+> +    target_ulong priv = env->priv;
+> +    bool virt = env->virt_enabled;
+> +
+> +    /*
+> +     * If rd is x1 or x5 link registers, treat this as direct call otherwise
+> +     * its a direct jump.
+> +     */
+> +    if (rd == 1 || rd == 5) {
+> +        riscv_ctr_add_entry(env, src, dest, CTRDATA_TYPE_DIRECT_CALL, priv,
+> +                            virt);
+> +    } else if (rd == 0) {
+> +        riscv_ctr_add_entry(env, src, dest, CTRDATA_TYPE_DIRECT_JUMP, priv,
+> +                            virt);
+> +    } else {
+> +        riscv_ctr_add_entry(env, src, dest, CTRDATA_TYPE_OTHER_DIRECT_JUMP,
+> +                            priv, virt);
+> +    }
+> +}
+> +
+> +/*
+> + * Returns
+> + * - cm.popret
+> + * - cm.popretz
+> + */
+> +void helper_ctr_popret(CPURISCVState *env, target_ulong src, target_ulong dest)
+> +{
+> +    riscv_ctr_add_entry(env, src, dest, CTRDATA_TYPE_RETURN,
+> +                            env->priv, env->virt_enabled);
+> +}
+> +
+> +void helper_ctr_branch(CPURISCVState *env, target_ulong src, target_ulong dest,
+> +                       target_ulong branch_taken)
+> +{
+> +    target_ulong curr_priv = env->priv;
+> +    bool curr_virt = env->virt_enabled;
+> +
+> +    if (branch_taken) {
+> +        riscv_ctr_add_entry(env, src, dest, CTRDATA_TYPE_TAKEN_BRANCH,
+> +                            curr_priv, curr_virt);
+> +    } else {
+> +        riscv_ctr_add_entry(env, src, dest, CTRDATA_TYPE_NONTAKEN_BRANCH,
+> +                            curr_priv, curr_virt);
+> +    }
+> +}
+> +
+>   void helper_wfi(CPURISCVState *env)
+>   {
+>       CPUState *cs = env_cpu(env);
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index 15e7123a68..07391297e8 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -572,6 +572,16 @@ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
+>           }
+>       }
+>   
+> +#ifndef CONFIG_USER_ONLY
+> +    if (ctx->cfg_ptr->ext_smctr || ctx->cfg_ptr->ext_ssctr) {
+> +        TCGv dest = tcg_constant_tl(ctx->base.pc_next + imm);
+> +        TCGv src = tcg_constant_tl(ctx->base.pc_next);
+> +        TCGv tcg_rd = tcg_constant_tl((target_ulong)rd);
+> +
+> +        gen_helper_ctr_jal(tcg_env, src, dest, tcg_rd);
+> +    }
+> +#endif
+> +
+>       gen_pc_plus_diff(succ_pc, ctx, ctx->cur_insn_len);
+>       gen_set_gpr(ctx, rd, succ_pc);
+>   
 
