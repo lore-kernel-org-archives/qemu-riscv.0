@@ -4,89 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FBC7C2BBCA
-	for <qemu-riscv@archiver.kernel.org>; Wed, 26 Jun 2024 00:06:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39E14C30653
+	for <qemu-riscv@archiver.kernel.org>; Wed, 26 Jun 2024 00:12:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sMGAk-0003wu-Lh; Tue, 25 Jun 2024 20:06:09 -0400
-Received: from [2001:470:142:3::10] (helo=eggs.gnu.org)
+	id 1sMGGp-0005D1-3I; Tue, 25 Jun 2024 20:12:28 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sMG91-0003PC-J7
- for qemu-riscv@nongnu.org; Tue, 25 Jun 2024 20:04:20 -0400
-Received: from [2607:f8b0:4864:20::a2f] (helo=mail-vk1-xa2f.google.com)
+ id 1sMGGe-0005Bw-JK; Tue, 25 Jun 2024 20:12:10 -0400
+Received: from [2607:f8b0:4864:20::133] (helo=mail-il1-x133.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sMG7k-0008Lg-0g
- for qemu-riscv@nongnu.org; Tue, 25 Jun 2024 20:03:58 -0400
-Received: by mail-vk1-xa2f.google.com with SMTP id
- 71dfb90a1353d-4ef748596d7so931490e0c.0; 
- Tue, 25 Jun 2024 17:01:14 -0700 (PDT)
+ id 1sMGG4-0001KW-Tu; Tue, 25 Jun 2024 20:11:58 -0400
+Received: by mail-il1-x133.google.com with SMTP id
+ e9e14a558f8ab-375af3538f2so25784285ab.3; 
+ Tue, 25 Jun 2024 17:09:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1719360065; x=1719964865; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1719360556; x=1719965356; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Fbp/p0rJJv8e2G4lRh69XillF98ah82eoVD3RJE9QZM=;
- b=gJ5Tvb/cLv0NVJ3ysdquPhUxKigqQf4aVFWO+hevodU5B4Cd9k+sKZYeOUYgGdcV9U
- t/B4guxCOYVqlRwTlELv5A/K4hK+uCM2Fj2c+2vflwZNWlWfppEP11yvmTz/9YtjOJr1
- cOsapqNAvo1bY679pmAEOG7dwJu7T5QF9RNQ+FHFDdoC56NtuV2gMcp91c+LQpA998HW
- 1e4iOyd1nR8fOaK2v5dfL0+VEAFbiHfvC7jJsD5CeHBPjgDhK5xCr3OyVZ52t8Cunr/8
- sjg8PSdMSM8aT/kv0uRTYZILYPnZnrnBW6t+rEhJ2Flcod1D7DgaeKteHOMSBQAsos1D
- mn7A==
+ bh=2I/RRyjy32rpLEN/2PREzx1XYtolfEdHqntV0lk0IC0=;
+ b=hwftffw9h0dwbOPj8BPtJgIOajUJyvL0nJM1PtZFMoHLHVw8afCidS05bULJRV9wYu
+ fqM1ZKAqcrFyRftezjf5BKKnPvGZzAn1JminUvSRWMaNXK0Bj80A6n/v+5mbFifpltJi
+ N+UGxAdKDlqJDRtK/cZHu99Zhl0ySjtFE6zsDUGnmg+yzzTJjG/bK0KYj7Td5xgkYQb5
+ +Ypps8HIxAzfork5dDGdvTqDFVExcAUuuYXQK/WI5fb/TvZ6pd78UETbJkN+51hPxSn2
+ 6Cp3LDo3N0naxe4BGmpIANO1F+aONWe7BksELug7Td1hr3+Ak2+L68GdPIxDRP2bKrnz
+ 0eHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719360065; x=1719964865;
+ d=1e100.net; s=20230601; t=1719360556; x=1719965356;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Fbp/p0rJJv8e2G4lRh69XillF98ah82eoVD3RJE9QZM=;
- b=g9WL2RGSGVuu0UCF0CsVC85150U33zCULMs9uAmBaoB1cWnegX1l5KL/RuSYXoGJo1
- VenCTJcwgJj6vF58IFrFLB36ihzHuXNP/RFeqoa+YsdxtzYzh1RB70p6HIXIs1XepIRu
- JfDCklkxuKhYWsJZ13V8DYl9ch+cGarfB2T8tDxhz/7rIGhSUQWNv28igndxqAh/pZEx
- Uidn+aQFqoRLteFOp76SIivoxT5PVJ0AaZM3ttmHOKSbSK3wUqci9UvAbiNW1+6b62ge
- JMoivKrDYo+SfZVfGiE1Ypt4zFuxHjZx2sQ/3461gvIfOCuyGz3tUzfAlt8TQ2lDfPtw
- /lIA==
+ bh=2I/RRyjy32rpLEN/2PREzx1XYtolfEdHqntV0lk0IC0=;
+ b=jltvUl3/GlTfHuaLO+FOzRkBwLLkK0Pd7+YNwY6COTwHyDyaGyuidTy4fbxKFPYr9c
+ qspkgWNRmz/8FHvovDmu7sbJk9qPdwYcdHnueeGqT4O+kO9HWbZnFt0pUsW/H5KnxR34
+ ArEamaLqcF8G8hyikCYHtdyitfbsyZPLRdKfNCU92xDpZ4Loboc9j0sgLo3hhpMM9eP+
+ pdbn53Lzl4gC1LVSqCXnxIqIJKQmkYdm1PCL6AdUxHDUde8HqLrLVuZoMeficWO9WyJZ
+ oF9192FPBmirUXRMamo+xq72hpzKJJ8VgNZh6qG4DcG2BaQVJRZesZId4yy3VqyHaL11
+ HcuA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV4XMWHIqHfNolCapyHDTjV27Xce1FZTYsWO6GAmF8p6azG8/mdSGdIoXB9cY0UKG6kDga8YfnEkR3TykRYKhL9NxlIYg4=
-X-Gm-Message-State: AOJu0YwcefsBLl1EqsActy1UABbY3zuK3aoN67yAxr4VD1eyODbQ/s+4
- IwqtCY+Ks43nrPHqkw9us2QJvWu7+9kOEgRXVSIgAxphoOtNINSD9DCIJr2IjMwiz24t29URkre
- vOjUAYrKNsqIQqAgkqTFqX04M4gJ/9A==
-X-Google-Smtp-Source: AGHT+IGSulW5NySdGWHKmNhJudYLsEgTAxBqXOYbIi9guoYzOMJN+ELfChd/HcSLO2Tz1I1MNai2oDFbf9we6IV5UUs=
-X-Received: by 2002:a05:6122:1827:b0:4ef:5b2c:df25 with SMTP id
- 71dfb90a1353d-4ef6d8094eemr8011295e0c.6.1719359629029; Tue, 25 Jun 2024
- 16:53:49 -0700 (PDT)
+ AJvYcCXhdVhL2ekAX5R2Q8cLgWVW7Zf8t1bupN2QrWwyBRn7XPIsZxi901sCwruvNS9sL0vMzN+aOk9ErevvondAKcd0t7KEXZo=
+X-Gm-Message-State: AOJu0YzVY+3xJFAqXxp2UF6T+YtjB4x/oSl/ndHqDvDhipAZ1OGMx3nT
+ bXZfns+1JpQX8X9Bv87KLgzM/ppCW0KBQwImugakL4j9cQSjRDnSq+N2/mEZro9AMGm5pV2M56P
+ +Bz/oAVZqHZeC++6SctPx4jvhjcclguqr
+X-Google-Smtp-Source: AGHT+IHw+pLB8jRKyJW34KshC/x2I7vDrJFKQNlz6t1ON4TmjE3KhUCioFXDPwUhs8nZS6inJOlPHnmYlEm9vL7PXTQ=
+X-Received: by 2002:a05:6122:469f:b0:4ef:4b35:896f with SMTP id
+ 71dfb90a1353d-4ef6d82ffb5mr8197072e0c.7.1719360103067; Tue, 25 Jun 2024
+ 17:01:43 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240625114629.27793-1-frank.chang@sifive.com>
- <20240625114629.27793-2-frank.chang@sifive.com>
-In-Reply-To: <20240625114629.27793-2-frank.chang@sifive.com>
+References: <20240619152708.135991-1-rkanwal@rivosinc.com>
+In-Reply-To: <20240619152708.135991-1-rkanwal@rivosinc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 26 Jun 2024 09:53:22 +1000
-Message-ID: <CAKmqyKOdM3_2tQKN=kJn5sR2YCR8xvHT-bqR10oqnvhrNhin6w@mail.gmail.com>
-Subject: Re: [PATCH v3 1/6] target/riscv: Introduce extension implied rules
- definition
-To: frank.chang@sifive.com
-Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
- Jerry Zhang Jian <jerry.zhangjian@sifive.com>, 
- Max Chou <max.chou@sifive.com>
+Date: Wed, 26 Jun 2024 10:01:17 +1000
+Message-ID: <CAKmqyKP4sau8vANRBnq7ua0gjjCmVsVxzOCYgbjQR7irhBeQfg@mail.gmail.com>
+Subject: Re: [PATCH v2 0/6] target/riscv: Add support for Control Transfer
+ Records Ext.
+To: Rajnesh Kanwal <rkanwal@rivosinc.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, alistair.francis@wdc.com, 
+ bin.meng@windriver.com, liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, 
+ zhiwei_liu@linux.alibaba.com, atishp@rivosinc.com, apatel@ventanamicro.com, 
+ beeman@rivosinc.com, tech-control-transfer-records@lists.riscv.org, 
+ jason.chien@sifive.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::a2f
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::133
  (deferred)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2f;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::133;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x133.google.com
 X-Spam_score_int: -5
 X-Spam_score: -0.6
 X-Spam_bar: /
 X-Spam_report: (-0.6 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
  DKIM_SIGNED=0.1, FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- PDS_HP_HELO_NORDNS=0.001, RDNS_NONE=0.793, SPOOFED_FREEMAIL_NO_RDNS=0.001,
- T_SPF_HELO_TEMPERROR=0.01,
+ PDS_HP_HELO_NORDNS=0.001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
+ SPOOFED_FREEMAIL_NO_RDNS=0.001,
  T_SPF_TEMPERROR=0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -103,88 +97,121 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jun 25, 2024 at 9:47=E2=80=AFPM <frank.chang@sifive.com> wrote:
+On Thu, Jun 20, 2024 at 1:28=E2=80=AFAM Rajnesh Kanwal <rkanwal@rivosinc.co=
+m> wrote:
 >
-> From: Frank Chang <frank.chang@sifive.com>
->
-> RISCVCPUImpliedExtsRule is created to store the implied rules.
-> 'is_misa' flag is used to distinguish whether the rule is derived
-> from the MISA or other extensions.
-> 'ext' stores the MISA bit if 'is_misa' is true. Otherwise, it stores
-> the offset of the extension defined in RISCVCPUConfig. 'ext' will also
-> serve as the key of the hash tables to look up the rule in the following
-> commit.
->
-> Signed-off-by: Frank Chang <frank.chang@sifive.com>
-> Reviewed-by: Jerry Zhang Jian <jerry.zhangjian@sifive.com>
-> Tested-by: Max Chou <max.chou@sifive.com>
-> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> This series enables Control Transfer Records extension support on riscv
+> platform. This extension is similar to Arch LBR in x86 and BRBE in ARM.
+> The Extension has been stable and the latest release can be found here [0=
+]
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Can you be explicit about the exact version. RISC-V specs have a
+tendency to change and the latest release today might not be the
+latest tomorrow.
+
+v1.0.0_rc2  at https://github.com/riscv/riscv-control-transfer-records/rele=
+ases/tag/v1.0.0_rc2
+for example would be really helpful
+
+>
+> CTR extension depends on couple of other extensions:
+>
+> 1. S[m|s]csrind : The indirect CSR extension [1] which defines additional
+>    ([M|S|VS]IREG2-[M|S|VS]IREG6) register to address size limitation of
+>    RISC-V CSR address space. CTR access ctrsource, ctrtartget and ctrdata
+>    CSRs using sscsrind extension.
+>
+> 2. Smstateen: The mstateen bit[54] controls the access to the CTR ext to
+>    S-mode.
+>
+> 3. Sscofpmf: Counter overflow and privilege mode filtering. [2]
+>
+> The series is based on Smcdeleg/Ssccfg counter delegation extension [3]
+> patches. CTR itself doesn't depend on counter delegation support. This
+> rebase is basically to include the Smcsrind patches.
+
+Same comment here about specific versions
+
+>
+> Due to the dependency of these extensions, the following extensions must =
+be
+> enabled to use the control transfer records feature.
+>
+> "smstateen=3Dtrue,sscofpmf=3Dtrue,smcsrind=3Dtrue,sscsrind=3Dtrue,smctr=
+=3Dtrue,ssctr=3Dtrue"
+
+We shouldn't have this dependency if the actual spec doesn't have it.
+
+Even if the spec does have the dependency we should the implication
+rules to enable the required extensions if a user asks for CTR
 
 Alistair
 
-> ---
->  target/riscv/cpu.c |  8 ++++++++
->  target/riscv/cpu.h | 23 +++++++++++++++++++++++
->  2 files changed, 31 insertions(+)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 4760cb2cc1..7b071ade04 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -2250,6 +2250,14 @@ RISCVCPUProfile *riscv_profiles[] =3D {
->      NULL,
->  };
+> Here is the link to a quick guide [5] to setup and run a basic perf demo =
+on
+> Linux to use CTR Ext.
 >
-> +RISCVCPUImpliedExtsRule *riscv_misa_ext_implied_rules[] =3D {
-> +    NULL
-> +};
-> +
-> +RISCVCPUImpliedExtsRule *riscv_multi_ext_implied_rules[] =3D {
-> +    NULL
-> +};
-> +
->  static Property riscv_cpu_properties[] =3D {
->      DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
+> The Qemu patches can be found here:
+> https://github.com/rajnesh-kanwal/qemu/tree/ctr_upstream_v2
 >
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 90b8f1b08f..87742047ce 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -124,6 +124,29 @@ typedef enum {
->      EXT_STATUS_DIRTY,
->  } RISCVExtStatus;
+> The opensbi patch can be found here:
+> https://github.com/rajnesh-kanwal/opensbi/tree/ctr_upstream_v2
 >
-> +typedef struct riscv_cpu_implied_exts_rule {
-> +#ifndef CONFIG_USER_ONLY
-> +    /*
-> +     * Bitmask indicates the rule enabled status for the harts.
-> +     * This enhancement is only available in system-mode QEMU,
-> +     * as we don't have a good way (e.g. mhartid) to distinguish
-> +     * the SMP cores in user-mode QEMU.
-> +     */
-> +    unsigned long *enabled;
-> +#endif
-> +    /* True if this is a MISA implied rule. */
-> +    bool is_misa;
-> +    /* ext is MISA bit if is_misa flag is true, else multi extension off=
-set. */
-> +    const uint32_t ext;
-> +    const uint32_t implied_misa_exts;
-> +    const uint32_t implied_multi_exts[];
-> +} RISCVCPUImpliedExtsRule;
-> +
-> +extern RISCVCPUImpliedExtsRule *riscv_misa_ext_implied_rules[];
-> +extern RISCVCPUImpliedExtsRule *riscv_multi_ext_implied_rules[];
-> +
-> +#define RISCV_IMPLIED_EXTS_RULE_END -1
-> +
->  #define MMU_USER_IDX 3
+> The Linux kernel patches can be found here:
+> https://github.com/rajnesh-kanwal/linux/tree/ctr_upstream_v2
 >
->  #define MAX_RISCV_PMPS (16)
+> [0]: https://github.com/riscv/riscv-control-transfer-records/release
+> [1]: https://github.com/riscv/riscv-indirect-csr-access
+> [2]: https://github.com/riscvarchive/riscv-count-overflow/tree/main
+> [3]: https://github.com/riscv/riscv-smcdeleg-ssccfg
+> [4]: https://lore.kernel.org/all/20240217000134.3634191-1-atishp@rivosinc=
+.com/
+> [5]: https://github.com/rajnesh-kanwal/linux/wiki/Running-CTR-basic-demo-=
+on-QEMU-RISC%E2%80%90V-Virt-machine
+>
+> Changelog:
+>
+> v2: Lots of improvements based on Jason Chien's feedback including:
+>   - Added CTR recording for cm.jalt, cm.jt, cm.popret, cm.popretz.
+>   - Fixed and added more CTR extension enable checks.
+>   - Fixed CTR CSR predicate functions.
+>   - Fixed external trap xTE bit checks.
+>   - One fix in freeze function for VS-mode.
+>   - Lots of minor code improvements.
+>   - Added checks in sctrclr instruction helper.
+>
+> v1:
+>   - https://github.com/rajnesh-kanwal/qemu/tree/ctr_upstream
+>
+>
+> Rajnesh Kanwal (6):
+>   target/riscv: Remove obsolete sfence.vm instruction
+>   target/riscv: Add Control Transfer Records CSR definitions.
+>   target/riscv: Add support for Control Transfer Records extension CSRs.
+>   target/riscv: Add support to record CTR entries.
+>   target/riscv: Add CTR sctrclr instruction.
+>   target/riscv: Add support to access ctrsource, ctrtarget, ctrdata
+>     regs.
+>
+>  target/riscv/cpu.c                            |   4 +
+>  target/riscv/cpu.h                            |  14 +
+>  target/riscv/cpu_bits.h                       | 154 ++++++++++
+>  target/riscv/cpu_cfg.h                        |   2 +
+>  target/riscv/cpu_helper.c                     | 265 +++++++++++++++++
+>  target/riscv/csr.c                            | 276 +++++++++++++++++-
+>  target/riscv/helper.h                         |   9 +-
+>  target/riscv/insn32.decode                    |   2 +-
+>  .../riscv/insn_trans/trans_privileged.c.inc   |  21 +-
+>  target/riscv/insn_trans/trans_rvi.c.inc       |  31 ++
+>  target/riscv/insn_trans/trans_rvzce.c.inc     |  20 ++
+>  target/riscv/op_helper.c                      | 159 +++++++++-
+>  target/riscv/tcg/tcg-cpu.c                    |   6 +
+>  target/riscv/translate.c                      |  10 +
+>  14 files changed, 960 insertions(+), 13 deletions(-)
+>
 > --
-> 2.43.2
+> 2.34.1
 >
 >
 
