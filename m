@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BD2FC2BD09
-	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Jun 2024 07:18:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EF82C2BD09
+	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Jun 2024 07:43:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sMjOp-0001Es-6m; Thu, 27 Jun 2024 03:18:31 -0400
+	id 1sMjmV-0006op-8I; Thu, 27 Jun 2024 03:42:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1sMjOn-0001ET-FI
- for qemu-riscv@nongnu.org; Thu, 27 Jun 2024 03:18:29 -0400
-Received: from mail-lf1-x12c.google.com ([2a00:1450:4864:20::12c])
+ id 1sMjmR-0006od-Cs
+ for qemu-riscv@nongnu.org; Thu, 27 Jun 2024 03:42:55 -0400
+Received: from mail-lj1-x232.google.com ([2a00:1450:4864:20::232])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1sMjOb-000727-7X
- for qemu-riscv@nongnu.org; Thu, 27 Jun 2024 03:18:29 -0400
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-52ccc40e72eso5562160e87.3
- for <qemu-riscv@nongnu.org>; Thu, 27 Jun 2024 00:18:16 -0700 (PDT)
+ id 1sMjmP-00030u-ED
+ for qemu-riscv@nongnu.org; Thu, 27 Jun 2024 03:42:55 -0400
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-2ee4ae13aabso3249021fa.2
+ for <qemu-riscv@nongnu.org>; Thu, 27 Jun 2024 00:42:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1719472695; x=1720077495; darn=nongnu.org;
+ d=sifive.com; s=google; t=1719474171; x=1720078971; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HuhJ9bxWM37Y0RFLvqK4WEUkZFkFc9DIgt5LKGlvjPI=;
- b=negQC/bwpoSw1M8AMksLSDPRawRKP8GTgzYeNxgCFTGUjrq+M3DZVkHxNj7+Mh1F8E
- agknMqMEuQY4UnMnGMp9GqhKJ63757HmhyF5K11PGvqdcSHFEPfjaIEqQUKsP5CE3Uh3
- Ic/BEL99lAh8xZHcI8Z4kn/xjsnFYqeFosw//1LudMpAa4zySEvX9qFGWTlQsWCsI3oz
- u8kgAY1/qCWqHzPpzQYtpewV0k1NMqOvoKcEveNF+GiDJLijkyCJZzm9eSig6JchoufB
- BHMBQ6dIllKx2ruKMMRlPnyOw3bWdRneTdHHQMwNxksedqMl3v+d55hfoUTH/TvRAsUP
- ZnCg==
+ bh=kPA72iFt6LSCWamT70aYHGyxDE234T1gCoIVZuw4Sj4=;
+ b=g8E3Jegh6eNRReVJp1GsNVtDkUJ25QK9PtaPMLZqdLDdrC1nnM0x5NBgp5ARvGQmzV
+ kocs6HIiL1rM9FxrpdsH2IPEMYUP9N23ffvAOadDoQzy3zWLGCOhvq4PZ3FTI1Ql/fAK
+ q5dpxEl6p3NFpayg7VTbxdoGu3clUcJEddlwhkOfP8rkJKzIbLpHVG8bos2mVHAQMCiJ
+ pKh/Gii77JNPhJo77/VKHIjtsCE5bVPUAJOPb5gdW0gJc7/kDgLrymr5x3TG0kc/LuTa
+ wg+5SVQfYoeIP1ZEDHcrdoZGrRHobILtysJNBtsz6c5+RjIq0ByLu8bN9G1Yd+MmK9Kz
+ bf5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719472695; x=1720077495;
+ d=1e100.net; s=20230601; t=1719474171; x=1720078971;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HuhJ9bxWM37Y0RFLvqK4WEUkZFkFc9DIgt5LKGlvjPI=;
- b=j0iJvqp+/MTxsa3xGm66cXYG35Uh6FbfOfzCgaKdESq5M1t5h/kNgJcUOcHK2cVHE5
- f9pCC9L0VjZNkiYRXtnhlH3xwHjcGkABX7VS83TfaQKp6bCcMZ+/5DPTmoFn803caaIb
- 0mufnu7tkxkbPUiFwfAtR2rE3pPEVDv3MT1DKXQq2ZufbZ5nbZycFB5Iew9wV2CzuZsd
- 97ahMZLFhTxPnMtX3dJB+RyPUPV48fvl8RPFqw6FJUukUsbP0fhONYBeraxXEvRELhE5
- Rk8pp0OYNjCCRVcYAzFnx1s7yfy9Ps7O6TTowyO6pibuMbaL39hfHHwXPnyRaktMsABF
- QroA==
+ bh=kPA72iFt6LSCWamT70aYHGyxDE234T1gCoIVZuw4Sj4=;
+ b=ZEZV4+DyjdAFzY3k9xyVunauPt9+tHrlBAPxKj1tK9OT4ULqK7n9qz74cOx3mfC9eP
+ XFe1mN4AvubS+IWSiBKqywDYEZdLfHQ5iA6ce+v1WNh/54PRE3cWD+SV/ghyG3Wt/YUa
+ qO01RaoF6UnHw1NHnlXL1sFR9AY/jnTXlHnlTV1fiEEYIFaYfi7yzuA9yTk0gw5DWHpy
+ Ksnw6qLgeZkbR4EBclj+UZzIdceRiRs/g4ErNLzpgbGt6av1ZcLrBPKkLMawGoD5x0hI
+ 818lPW6bliF1xcPwYgSUJtgaWqnXjTWXZE+JDfOI630Y9Jo3UX4ZHbJ6rC0DuaiJa0di
+ 3vPQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVCEa5LnFtX2iK+D25I6y8tCzv/Vxwmla0203ISFF/DQ7gFHUN62zFqsPiCLPaWYM2cpxxHjlcuWtkKT39ANkJpXcuGakU=
-X-Gm-Message-State: AOJu0YzvAQtQadrwk+wnnyAOnIbgFHNbwtc9+xfOPJgZD/Ca8LJQNtQX
- Do37S9iqHIXVvd5vKPoGa7pEVDqU9FriPTv4mSYu8ZCjJIa44QjumQnhApInC3k=
-X-Google-Smtp-Source: AGHT+IFPgs+La/j78IZWXjvStMUrrog8wLhh2WB7de9cSWE+3nZbBkOD6o2aRec25V0MW3dJ80eCNQ==
-X-Received: by 2002:a05:6512:10c7:b0:52b:9c8a:734f with SMTP id
- 2adb3069b0e04-52ce185d33amr12320143e87.50.1719472694857; 
- Thu, 27 Jun 2024 00:18:14 -0700 (PDT)
-Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com.
- [209.85.167.53]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-52e712a75c0sm104000e87.45.2024.06.27.00.18.14
+ AJvYcCXQxu0Bnv1MIxPa00mddsJK0TsBfxlZLUF77Q6jqbhUKdhPxmGWaFT3imfn2gTyf4v4ugUgIah2WAXisUyMgOqOJ50Uk3A=
+X-Gm-Message-State: AOJu0YyvTOr26vTPMCeoLbhjW0Kr8jY0X8VjC/H9kXOjT114BLAvqfcR
+ EIhPZ0J2KVa8HMiynwePJXn8a4UxJHK+NX2Wrh2ORyIfrTzyO9NxMGNeZFWwNz0=
+X-Google-Smtp-Source: AGHT+IEIno+TW5ASrbXOJ7VXmuYN5oE7h90SEedLonXMunUa43RFQ29EMsO0AEoQRm/wp1D99Wt+vg==
+X-Received: by 2002:a2e:bc19:0:b0:2ec:617b:4757 with SMTP id
+ 38308e7fff4ca-2ec617b47a6mr80678661fa.13.1719474171343; 
+ Thu, 27 Jun 2024 00:42:51 -0700 (PDT)
+Received: from mail-lf1-f50.google.com (mail-lf1-f50.google.com.
+ [209.85.167.50]) by smtp.gmail.com with ESMTPSA id
+ 38308e7fff4ca-2ee4a34f66fsm1493061fa.30.2024.06.27.00.42.51
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 27 Jun 2024 00:18:14 -0700 (PDT)
-Received: by mail-lf1-f53.google.com with SMTP id
- 2adb3069b0e04-52ce674da85so4568416e87.2; 
- Thu, 27 Jun 2024 00:18:14 -0700 (PDT)
+ Thu, 27 Jun 2024 00:42:51 -0700 (PDT)
+Received: by mail-lf1-f50.google.com with SMTP id
+ 2adb3069b0e04-5295e488248so8969582e87.2; 
+ Thu, 27 Jun 2024 00:42:51 -0700 (PDT)
 X-Forwarded-Encrypted: i=1;
- AJvYcCUM5CIahKcROBo82Gh6MjgHXuvQJ8Xq64M9EHxBKpStIP7nphl03awtbRA0+wmJ9/FXupLhKpiid63B6V41rI0K8iKcdt+XlQNgNHiSlajkQE2cC7EFreel2QPFIg==
-X-Received: by 2002:a05:6512:3054:b0:52d:215b:9028 with SMTP id
- 2adb3069b0e04-52d215b914dmr5829301e87.60.1719472694089; Thu, 27 Jun 2024
- 00:18:14 -0700 (PDT)
+ AJvYcCWHz5OqsvP7aLCfTQuqSt7CcgyKuip4qQJlxegIFyhWfdjmXH5dKDhgLV1xB4MwWv1pIBh+oeoelexif06InfWS3cwbiFeb7Qpk0y+B691P5QJKFdSwSd9bYm/v0Q==
+X-Received: by 2002:ac2:596e:0:b0:52c:de91:590c with SMTP id
+ 2adb3069b0e04-52ce18358edmr7480690e87.24.1719474170745; Thu, 27 Jun 2024
+ 00:42:50 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240511101053.1875596-1-me@deliversmonkey.space>
  <20240511101053.1875596-3-me@deliversmonkey.space>
 In-Reply-To: <20240511101053.1875596-3-me@deliversmonkey.space>
 From: Frank Chang <frank.chang@sifive.com>
-Date: Thu, 27 Jun 2024 15:18:02 +0800
-X-Gmail-Original-Message-ID: <CANzO1D2A+Er2zQeLoTXGHx_GH613yDycdrdw0cgghhBu-MarYg@mail.gmail.com>
-Message-ID: <CANzO1D2A+Er2zQeLoTXGHx_GH613yDycdrdw0cgghhBu-MarYg@mail.gmail.com>
+Date: Thu, 27 Jun 2024 15:42:39 +0800
+X-Gmail-Original-Message-ID: <CANzO1D13X_ybOueTWY8C36xSvtVLh=vwhZT+_Z9Q=R91YZsAow@mail.gmail.com>
+Message-ID: <CANzO1D13X_ybOueTWY8C36xSvtVLh=vwhZT+_Z9Q=R91YZsAow@mail.gmail.com>
 Subject: Re: [PATCH v9 2/6] target/riscv: Add new CSR fields for S{sn, mn,
  m}pm extensions as part of Zjpm v0.8
 To: Alexey Baturo <baturo.alexey@gmail.com>
@@ -84,8 +84,8 @@ Cc: richard.henderson@linaro.org, space.monkey.delivers@gmail.com,
  kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::12c;
- envelope-from=frank.chang@sifive.com; helo=mail-lf1-x12c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::232;
+ envelope-from=frank.chang@sifive.com; helo=mail-lj1-x232.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -209,6 +209,15 @@ Alexey Baturo <baturo.alexey@gmail.com> =E6=96=BC 2024=E5=B9=B45=E6=9C=8811=
 > +    /* Update PMM field only if the value is valid according to Zjpm v0.=
 8 */
 > +    if (((val & MENVCFG_PMM) >> 32) !=3D PMM_FIELD_RESERVED) {
+
+It's also possible that val is 32-bit for RV32 QEMU.
+Right shifting more than 31 bits would generate the error:
+'error: right shift count >=3D width of type [-Werror=3Dshift-count-overflo=
+w]'
+
+Regards,
+Frank Chang
+
 > +        mask |=3D MENVCFG_PMM;
 > +    }
 >      env->menvcfg =3D (env->menvcfg & ~mask) | (val & mask);
@@ -313,15 +322,6 @@ long val)
 > +    MSECCFG_USEED     =3D 1 << 8,
 > +    MSECCFG_SSEED     =3D 1 << 9,
 > +    MSECCFG_PMM       =3D 3UL << 32,
-
-Should use '3ULL' to left shift bits more than 31 bits.
-Otherwise, it would generate the error:
-"error: left shift count >=3D width of type [-Werror=3Dshift-count-overflow=
-]"
-
-Regards,
-Frank Chang
-
 >  } mseccfg_field_t;
 >
 >  typedef struct {
