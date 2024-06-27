@@ -4,80 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65308C2BD09
-	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Jun 2024 09:54:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41D9EC2BD09
+	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Jun 2024 12:18:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sMlpB-0002Qr-RD; Thu, 27 Jun 2024 05:53:53 -0400
+	id 1sMo4u-0005RX-7b; Thu, 27 Jun 2024 08:18:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sMlpA-0002QA-Ih; Thu, 27 Jun 2024 05:53:52 -0400
-Received: from mail-ua1-x936.google.com ([2607:f8b0:4864:20::936])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sMlp9-0008ET-11; Thu, 27 Jun 2024 05:53:52 -0400
-Received: by mail-ua1-x936.google.com with SMTP id
- a1e0cc1a2514c-80fc528a4ccso462742241.0; 
- Thu, 27 Jun 2024 02:53:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1719482029; x=1720086829; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=fRkVQSX0SfYSuqjqmeNXmE2yHuROLzRDLocc86yFqqE=;
- b=ETRhEuvL8G8ZW8kMRWFbALxptmn629EDntdXEfMQI1bkM1JmdF4q0gAGqW14AqTB54
- oskcVzd1GVzdAboJtv7VPJ3uNrRIGPNCVTIsxPPYP5ZeuVRgdd4dvS01aEofpdR6Jg+h
- l1z/gac2Iij1qKjnGzuWi7f4Z5XYtg/MEbI7VV9X8OfTwIDuUKsMf4Z0GZCJ582ueCcE
- AxXc1XNAkiQdd/K7NAUdbGNPb2sU5zMQeCfy8nUnokSOP7erMCcErOA669lyriWLR+CO
- SxUn4jPmGtx4XMfRQ7mTkcgVhv7su12+2hRCp5BiQ8vZ3io5yNBwTlwQ/nMY1BMgTALC
- bo4g==
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1sMo4s-0005R6-8j
+ for qemu-riscv@nongnu.org; Thu, 27 Jun 2024 08:18:14 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1sMo4q-0007tu-4S
+ for qemu-riscv@nongnu.org; Thu, 27 Jun 2024 08:18:13 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1719490689;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=DOfBuSXECtx0UP9l63YBv/eJ7RzU+OwpeKGre3jkOBc=;
+ b=d+3P45XtTKFO4VWqel2EdartByLBOa/0SsDYRkjxFiTcvOTqMFmOXEvkS2Dy9rVMNjcwby
+ W2bwdyCrgoQrB3PavYvN5RhONTf7cddeD4tMre0b0gxVWb2+u11BHi53RX1AWFHn0rQcOo
+ Vce1WVe46o0EnIARPbcVKKlbc+bwwvI=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-265-Gz-tRroxM4anHEECRV4t6A-1; Thu, 27 Jun 2024 08:18:08 -0400
+X-MC-Unique: Gz-tRroxM4anHEECRV4t6A-1
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-363edcf12a3so4023228f8f.3
+ for <qemu-riscv@nongnu.org>; Thu, 27 Jun 2024 05:18:07 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719482029; x=1720086829;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1719490687; x=1720095487;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=fRkVQSX0SfYSuqjqmeNXmE2yHuROLzRDLocc86yFqqE=;
- b=q/Lvauc1JnanBXZQBToIcBQUthDDHsbM+Blng0C7lYl20Z8bwdrm3W09X1s//04QOP
- 8Wa+L8rxfCTuf+GwNNA8b44PTSZcjw/m4+ygWBu+PsClO6Ni1VJTrBY8XCWawczlQ7h/
- T1HQV0XUutWe+rP+r7DLqtN7vzyEKswpob0v42Aap5if7rSmLxfxqsVS10cxyywiQEXs
- fhHVwb3jK2REKx5VfoZAKmd3d2bpKQW1jczB7Xp5fEg557IfhI7fOLR/Te/yNGFBjM7w
- tHc8aqHUyqiCSpI8vNhGEQ7J73irmqHrwdpw6YU4lZLt7xBXxOwjXKYMypmlhvFCfgak
- Ii4w==
+ bh=DOfBuSXECtx0UP9l63YBv/eJ7RzU+OwpeKGre3jkOBc=;
+ b=irRJ/7A0OScvB6J1vi/2SGRf4R3UVPrRtnLWyKoNeRCd4DrHG+Ph2S1AMUmhVMYzVC
+ bxsd2+69x2XpuMN202vJLseHDBiHPA+g73VAxUIGeiJ7rr86uvKnLD+1tPxrM5NjBDm/
+ o+IH6vFtVj4X1GVy5RD5LtphRF+UZUQUI0otJ2f0A4H1TXuu9lzBPXxB+jtP+vgzFeC+
+ Tjz9bh9riR3wYqtNCdJ/ktZ+2iD/mRiYCap7YVMW1mTbnKP+Oq2981duKTSSVG7gRlhJ
+ +AVy2rqHZZdJTKuMlQem6GL/KhkZSmGqU+l2G6AUtLd2AYwxPW2IoXWgX1Saqhypi9Jd
+ Ki6g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUmK/DzjrvqSYtfgma/y6OB3vHICdIXAC5lQ8AulHpBKP2KCrGn1bDjRZn885wHc2mCMPSz24CTlnqeqGvlQ87XLWda64M=
-X-Gm-Message-State: AOJu0YyAH9DXr24/oCAWWdm8dWqVxO4gB3gBtIq7p4trF33/s5OR+6bc
- UWTixuszFo4qqVg9HK12mMnbGERLBDoWxDdXIZo+6FY028kj1GwatDaV5aHHMWUqyXeAWvS1qGu
- tVZCRhZPdTMqnwOje5yp6IXQWAXI=
-X-Google-Smtp-Source: AGHT+IGQO+ES4kCFWHmoAQke6PJt+Qr7+dikcxv/FOxctgxnu5xYg/ODLJZpdWV+geurdkZdAB8uBAmukBMQfiSPiEc=
-X-Received: by 2002:a05:6102:5121:b0:48f:5923:d12 with SMTP id
- ada2fe7eead31-48f59230dcemr15727278137.34.1719482029581; Thu, 27 Jun 2024
- 02:53:49 -0700 (PDT)
+ AJvYcCV5w6lVM6rN0MW1o9g/tPDy9/PXtbi/cu8jjrektg7IQ0QgZLDJxlXbqgbBwmxN79nUslXFhveeDy8QZTCb5vVVcXZeS/M=
+X-Gm-Message-State: AOJu0YzaickYNIq7qK8sYv5i8WlndXxvEelK2+vEBzE2odC5UYn4j7KL
+ OIRg6GKeRu5OVlyMTINeim3Vs37H0Bo8/b4avThtQy4BuXWx2cGPfb3l1gX/5oWW7EsBFPKYGzI
+ QpWXhHj7CN5y1Qn4Rq/k8pukmr6eSlVgSkH6HysnbTTR2QeUzRKRx
+X-Received: by 2002:a5d:5f49:0:b0:367:4dfe:3e8d with SMTP id
+ ffacd0b85a97d-3674dfe4007mr1032485f8f.13.1719490686847; 
+ Thu, 27 Jun 2024 05:18:06 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEyz9CgmaOooUqzP26VQOe9V1BJfvThoCJRAibyhfBGTxEUG2sW0MB1baKx9FixdR1cIqf0WA==
+X-Received: by 2002:a5d:5f49:0:b0:367:4dfe:3e8d with SMTP id
+ ffacd0b85a97d-3674dfe4007mr1032454f8f.13.1719490686487; 
+ Thu, 27 Jun 2024 05:18:06 -0700 (PDT)
+Received: from imammedo.users.ipa.redhat.com (nat-pool-brq-t.redhat.com.
+ [213.175.37.10]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3674357c1e3sm1710255f8f.2.2024.06.27.05.18.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 27 Jun 2024 05:18:06 -0700 (PDT)
+Date: Thu, 27 Jun 2024 14:18:03 +0200
+From: Igor Mammedov <imammedo@redhat.com>
+To: Sunil V L <sunilvl@ventanamicro.com>, "Michael S . Tsirkin"
+ <mst@redhat.com>
+Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org, Paolo
+ Bonzini <pbonzini@redhat.com>, =?UTF-8?B?TWFyYy1BbmRyw6k=?= Lureau
+ <marcandre.lureau@redhat.com>, "Daniel P . =?UTF-8?B?QmVycmFuZ8Op?="
+ <berrange@redhat.com>, Thomas Huth <thuth@redhat.com>, Philippe
+ =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?= <philmd@linaro.org>, Ani Sinha
+ <anisinha@redhat.com>, Laurent Vivier <lvivier@redhat.com>, Gerd Hoffmann
+ <kraxel@redhat.com>, Sia Jee Heng <jeeheng.sia@starfivetech.com>, Alistair
+ Francis <alistair23@gmail.com>, Daniel Henrique Barboza
+ <dbarboza@ventanamicro.com>, Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng
+ <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>, Alistair Francis <alistair.francis@wdc.com>
+Subject: Re: [PATCH v4 16/16] tests/qtest/bios-tables-test: Add expected
+ ACPI data files for RISC-V
+Message-ID: <20240627141803.42cd46c1@imammedo.users.ipa.redhat.com>
+In-Reply-To: <20240625150839.1358279-17-sunilvl@ventanamicro.com>
+References: <20240625150839.1358279-1-sunilvl@ventanamicro.com>
+ <20240625150839.1358279-17-sunilvl@ventanamicro.com>
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.42; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-References: <20240626132247.2761286-1-alvinga@andestech.com>
-In-Reply-To: <20240626132247.2761286-1-alvinga@andestech.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 27 Jun 2024 19:53:23 +1000
-Message-ID: <CAKmqyKPcN2J=YbvbE0Gk03CzfppT6M1cs=Y=e4jv28bVGug-cQ@mail.gmail.com>
-Subject: Re: [PATCH v6 0/3] RISC-V: Modularize common match conditions for
- trigger
-To: Alvin Chang <alvinga@andestech.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, alistair.francis@wdc.com, 
- bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com, 
- zhiwei_liu@linux.alibaba.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::936;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x936.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=imammedo@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -22
+X-Spam_score: -2.3
+X-Spam_bar: --
+X-Spam_report: (-2.3 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.212,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -93,60 +118,130 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Jun 26, 2024 at 11:23=E2=80=AFPM Alvin Chang via <qemu-devel@nongnu=
-.org> wrote:
->
-> According to RISC-V Debug specification ratified version 0.13 [1]
-> (also applied to version 1.0 [2] but it has not been ratified yet), the
-> enabled privilege levels of the trigger is common match conditions for
-> all the types of the trigger.
->
-> This series modularize the code for checking the privilege levels of
-> type 2/3/6 triggers by implementing functions trigger_common_match()
-> and trigger_priv_match().
->
-> Additional match conditions, such as CSR tcontrol and textra, can be
-> further implemented into trigger_common_match() in the future.
->
-> [1]: https://github.com/riscv/riscv-debug-spec/releases/tag/task_group_vo=
-te
-> [2]: https://github.com/riscv/riscv-debug-spec/releases/tag/1.0.0-rc1-asc=
-iidoc
->
-> Changes from v5:
-> - Merge first two commits to avoid build error
->
-> Changes from v4:
-> - Rebasing on riscv-to-apply.next
->
-> Changes from v3:
-> - Change this series to target Debug Spec. version 0.13
->
-> Changes from v2:
-> - Explicitly mention the targeting version of RISC-V Debug Spec.
->
-> Changes from v1:
-> - Fix typo
-> - Add commit description for changing behavior of looping the triggers
->   when we check type 2 triggers.
->
-> Alvin Chang (3):
->   target/riscv: Add functions for common matching conditions of trigger
->   target/riscv: Apply modularized matching conditions for watchpoint
->   target/riscv: Apply modularized matching conditions for icount trigger
+On Tue, 25 Jun 2024 20:38:39 +0530
+Sunil V L <sunilvl@ventanamicro.com> wrote:
 
-Thanks!
+> As per the step 5 in the process documented in bios-tables-test.c,
+> generate the expected ACPI AML data files for RISC-V using the
+> rebuild-expected-aml.sh script and update the
+> bios-tables-test-allowed-diff.h.
+> 
+> These are all new files being added for the first time. Hence, iASL diff
+> output is not added.
+> 
+> Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+> Acked-by: Alistair Francis <alistair.francis@wdc.com>
+> Acked-by: Igor Mammedov <imammedo@redhat.com>
 
-Applied to riscv-to-apply.next
+Michael,
+can it go via risc-v tree or
+do you plan to merge it via your tree?
 
-Alistair
+> ---
+>  tests/data/acpi/riscv64/virt/APIC           | Bin 0 -> 116 bytes
+>  tests/data/acpi/riscv64/virt/DSDT           | Bin 0 -> 3518 bytes
+>  tests/data/acpi/riscv64/virt/FACP           | Bin 0 -> 276 bytes
+>  tests/data/acpi/riscv64/virt/MCFG           | Bin 0 -> 60 bytes
+>  tests/data/acpi/riscv64/virt/RHCT           | Bin 0 -> 314 bytes
+>  tests/data/acpi/riscv64/virt/SPCR           | Bin 0 -> 80 bytes
+>  tests/qtest/bios-tables-test-allowed-diff.h |   6 ------
+>  7 files changed, 6 deletions(-)
+> 
+> diff --git a/tests/data/acpi/riscv64/virt/APIC b/tests/data/acpi/riscv64/virt/APIC
+> index e69de29bb2d1d6434b8b29ae775ad8c2e48c5391..66a25dfd2d6ea2b607c024722b2eab95873a01e9 100644
+> GIT binary patch
+> literal 116
+> zcmZ<^@N_O=U|?X|;^gn_5v<@85#X!<1dKp25F13pfP@Mo12P{Zj?R|`s)2!c7=s}J
+> I#NvT*0o0BN0RR91
+> 
+> literal 0
+> HcmV?d00001
+> 
+> diff --git a/tests/data/acpi/riscv64/virt/DSDT b/tests/data/acpi/riscv64/virt/DSDT
+> index e69de29bb2d1d6434b8b29ae775ad8c2e48c5391..0fb2d5e0e389541209b765d5092d0706f40298f6 100644
+> GIT binary patch
+> literal 3518
+> zcmZvf%WvaU6vnR;w@IBxlQexl(t(j!ppl%0(ryq<oOYV3X-%9`q=14{b;M9K6c~^O
+> zgcx<fqhd2ti4B_~D)B!c1W2sdvE#L7!#}_>eCJ*}oI`D?w!iChKA+$9t$orAn%(bn
+> zN+n)t?0eh6a^of6TgGN7rRbcFh1Tyc_k%{iceZVNuIr}z+pT7<?)fc<HI?okw3^tr
+> z>)qm0&dr&dmZB`a{a^Ra*0&D5Eo1b;X8Qm}E3gQ<btjYVdtTkbz7rISPX6ODvMUs3
+> zVE91w&KfCiza7@#@A>YkTOF1_DRa)WNl^t#{A^TNmZNji{btZCtt5&QPNDqU;E!+b  
+> zecnEQ^xc;~?0jvN=B?69B6sx0n@1<N?!0~c*1N~|jvlD2+E~Xu>-LMCh<kUhvyXCD
+> z|GVk1+UV8=+`16nn$W3iZBaGE(t=R0Su8V)L_|(iti)M3i8v3Jc_g_<E!HC$=dr;&
+> zZ0_+)tcM-v;WLjB?y(x{F%swTD)SiS9?!;ljK+DKGLIDZSc~;Y#d$nr9_i3y=NsQ^
+> zu@zZ&*ReP}{EyK3th+T@*_*eqZ#4FX%O>b{iWO(USDtFAW3{YY{55g*p1P}!a8zWX
+> z7lz;IPVBzpJS=7G%wV8y2Q62ba|`EHRm#%1lYm%>L=vK=N;x|_7+?*WxKL3R0`umY
+> z&O>M<DHHxW7E8~>hKe$y(1g;N2-TU8l!<C|EEb%J4HacZp-Gd8P@M@$nW#v|VwsuP  
+> zP=$;-)Haz>@sOMoiwl`i1tW@cj+o4-cu3BPCB-VhD+4MD9hIDroD&Pl#Oi8OIy2%-
+> zNlr-4iRFXLXr|LTGn$gL<b>p$V}cX!M^n3=p)tt`$vN>NG_kr`M{qil6Owag1ZPHY
+> zW+W#h=gbPutl-Q_PDsv)?-Htwo@Y*Q<|HR1=gbSvyx`1BPDsu<E;z>p=eXpA<eYfp
+> zv*(GAkEvZhm4f7i<eWvpSrnW_$qC6hOM<f`I7^Zfl5<W7&I!ReAvqyAXIXHT1!q}u
+> zLUPVY!8s{7CnYB&=bRFpQ-X6!azb*>X~8)yIHx5iB<DoK!Jg-g;GB`1keqW?aLx+O
+> zS;+~>Ip+lDoZy_3oRFMzUU1F}&UwiR$vGDU=Yrr|kera5b5U?E3eH8z3CTH^1m}|A  
+> zT#}rSoU<Z0D}u8kIUx;a@2q9hqcop+`Y3zu*6>5@qiM`L8Qmx@>rXnqyVu6bqy3;0
+> zSfN$e$O$X-aop-gjFlN1TJ2C(VM8aZsGs9rPsDhcG3gaHcG3%d9rt=N#><R_Ugd1x
+> zYt+>h-rEXOMpLn!a_)bcQwbVUYCt>d6Z~go(OKwiV=x$e6rJOWm8FJLZ)jL(gSOQ9  
+> z(=101Q%{N90rg{iGreXyIPiUy_PU*2Ro)uw?+2cJexkhQVfAu5b@3W?^1b$-wSOuL
+> z8($pWumAYmuXoN*92)^EIHqx|osu9QI;oM>2efl4w7)DozPM|Bh$~ecUA>%od=bT&  
+> z;R0PerC=JrI{7MZ#_1;2tCR9A{Hkc%mp4o`zpVZISFrki`_c5@?b)Ba_T|{c>*}hQ  
+> pv@F`;cR<_jYzAT_(hnb+<eKANn;)0v1k>|8pBtRxTSGr9{slF`>K_0A
+> 
+> literal 0
+> HcmV?d00001
+> 
+> diff --git a/tests/data/acpi/riscv64/virt/FACP b/tests/data/acpi/riscv64/virt/FACP
+> index e69de29bb2d1d6434b8b29ae775ad8c2e48c5391..a5276b65ea8ce46cc9b40d96d98f0669c9089ed4 100644
+> GIT binary patch
+> literal 276
+> zcmZ>BbPf<<WME(ucJg=j2v%^42yj*a0-z8Bhz+8t3k1-OV?`GjD1M-;Zz#xa0OIBc  
+> A0RR91
+> 
+> literal 0
+> HcmV?d00001
+> 
+> diff --git a/tests/data/acpi/riscv64/virt/MCFG b/tests/data/acpi/riscv64/virt/MCFG
+> index e69de29bb2d1d6434b8b29ae775ad8c2e48c5391..37eb923a9320f5573c0c2cdb90bd98409cc7eb6f 100644
+> GIT binary patch
+> literal 60
+> rcmeZuc5}C3U|?Y6aq@Te2v%^42yj*a0!E-1hz+8VfB}^KA4CHH3`GY4
+> 
+> literal 0
+> HcmV?d00001
+> 
+> diff --git a/tests/data/acpi/riscv64/virt/RHCT b/tests/data/acpi/riscv64/virt/RHCT
+> index e69de29bb2d1d6434b8b29ae775ad8c2e48c5391..beaa961bbf0f0486c0dee25f543377c928354f84 100644
+> GIT binary patch
+> literal 314
+> zcmXAlu}%Xq42FGxD#XNyI`tt=C&buWx`A2-wkXNvbP-K1O46&8iKjrk6)SI3ey5h~
+> z@3-SPa`wCa{iPvl)b_RC9X8vKw|)adiC8n)zP^7d?+~A>`lE(^DK1@Wog4=(iq&1K
+> z7;1J`gewX|OE=3Z>{xM3wM)ljIQKa+635YaZ7jrOeGc+eJEnks*|jl=GEUBVQ8WhX  
+> zK@<flJgso_nMF!k2aE&flg}m^e@2oQd6bm~m(n5!gJ?a<U{EgOALs#2D_Y&qJuA9g
+> Pp1|9>GjINg;u`)Bd);9H  
+> 
+> literal 0
+> HcmV?d00001
+> 
+> diff --git a/tests/data/acpi/riscv64/virt/SPCR b/tests/data/acpi/riscv64/virt/SPCR
+> index e69de29bb2d1d6434b8b29ae775ad8c2e48c5391..4da9daf65f71a13ac2b488d4e9728f194b569a43 100644
+> GIT binary patch
+> literal 80
+> zcmWFza1IJ!U|?X{>E!S15v<@85#X!<1dKp25F12;fdT`FDF9*%FmM4$c8~z`e;@#f  
+> G!2kgKJqrN<
+> 
+> literal 0
+> HcmV?d00001
+> 
+> diff --git a/tests/qtest/bios-tables-test-allowed-diff.h b/tests/qtest/bios-tables-test-allowed-diff.h
+> index 70474a097f..dfb8523c8b 100644
+> --- a/tests/qtest/bios-tables-test-allowed-diff.h
+> +++ b/tests/qtest/bios-tables-test-allowed-diff.h
+> @@ -1,7 +1 @@
+>  /* List of comma-separated changed AML files to ignore */
+> -"tests/data/acpi/riscv64/virt/APIC",
+> -"tests/data/acpi/riscv64/virt/DSDT",
+> -"tests/data/acpi/riscv64/virt/FACP",
+> -"tests/data/acpi/riscv64/virt/MCFG",
+> -"tests/data/acpi/riscv64/virt/RHCT",
+> -"tests/data/acpi/riscv64/virt/SPCR",
 
->
->  target/riscv/debug.c | 129 ++++++++++++++++++++++++++++---------------
->  1 file changed, 85 insertions(+), 44 deletions(-)
->
-> --
-> 2.34.1
->
->
 
