@@ -4,84 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD7D5C27C4F
-	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Jun 2024 00:02:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3945C27C4F
+	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Jun 2024 02:19:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sMcWO-0007qM-Qd; Wed, 26 Jun 2024 19:57:52 -0400
+	id 1sMeiq-0002sg-SQ; Wed, 26 Jun 2024 22:18:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1sMcWK-0007n9-Rv
- for qemu-riscv@nongnu.org; Wed, 26 Jun 2024 19:57:48 -0400
-Received: from mail-pf1-x434.google.com ([2607:f8b0:4864:20::434])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1sMeij-0002sQ-6w; Wed, 26 Jun 2024 22:18:45 -0400
+Received: from mail-vk1-xa31.google.com ([2607:f8b0:4864:20::a31])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1sMcWI-0005XV-U6
- for qemu-riscv@nongnu.org; Wed, 26 Jun 2024 19:57:48 -0400
-Received: by mail-pf1-x434.google.com with SMTP id
- d2e1a72fcca58-70679845d69so3130760b3a.1
- for <qemu-riscv@nongnu.org>; Wed, 26 Jun 2024 16:57:46 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1sMeif-000762-SY; Wed, 26 Jun 2024 22:18:43 -0400
+Received: by mail-vk1-xa31.google.com with SMTP id
+ 71dfb90a1353d-4ef6e79b47dso635420e0c.0; 
+ Wed, 26 Jun 2024 19:18:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1719446264; x=1720051064;
- darn=nongnu.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=mTWjU6qZpbsY/NAdHVA4r9+MI5HJUzE0yl/WBRgqzHs=;
- b=c0ljIHIHeZD+koKbRcMlF9yU9RmuI7vAxVnWLK+Dx/5eWm8bk1aollW93lgB4/nZVs
- 4YPMVI1LA8q/nn/53c4Fo8w0J95+Ig5wZEY1JqX2Z/VqNkIe5xaRvXgpjpshspnPoskl
- G/c4H6FgDJxmM+Vclg2fcPO/51H7DHsSxFixdlslceh02jO2aaVMe/HT22VLffLRfbTj
- Z2yMbaxy7x3/qWOqRA2adNwwwAbHFZ8eRj5LkkvBP8Zz/egeDKEoKscgUp1ClPS82D4P
- 9L9rLVkOJFTqIoaCHYwjgJjcMnEZZULsZR7LyOyolApyOfL/iFjeK9d4QGENy4aBIHez
- exCQ==
+ d=gmail.com; s=20230601; t=1719454720; x=1720059520; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=1BjHIdMGmy2ukY1HHVb8Nzgic1CWWfFgSSCj4zTqEgM=;
+ b=Drk/K1N43S/oc3uUPUTMBToZXFnVrEjFe2QzPQ2RB/HE9NNgFtLSY92AHyRe9CTPLs
+ KdWKwAp14QBgLMXBxidzA182ml6b6o9kmpFQwBomxXRKSrUMbsFmP7FtBkTQIrESPts8
+ OMhLCmyxeJSFyoo5+a240rMfFyAX7GIggQnboePjybbm0k2/g2JO4iioGtf1QQqJ0fGJ
+ g+kduif6hsSsk2UkXKKlqp2dFTj0MkRQJgeRCmNaON3dvMLg2hx1I/GhR+DT+oEPXEci
+ PqWMf/xvcq23qLB4HDp3WFCUfmL8pvxhv9xp56gwY/33w7rN4l6FqoRnlT9nkhIfRGls
+ 8n/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719446264; x=1720051064;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1719454720; x=1720059520;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mTWjU6qZpbsY/NAdHVA4r9+MI5HJUzE0yl/WBRgqzHs=;
- b=v+xnmsJjqiBiEMGWfyHT+mtVjT8O4wYEXVUd3uQkGxgyXEaPO7ZBY1uQBIgoyciXiU
- PIZKNRi96DBun915V6+AxpjsjNyYS0VaoyQyBZp9o5XyLSiAZtGGxlGC6z2O1P5pbOjD
- lue1zYVOfs+4pPsTjAuhZBaugZ4NpsxAl6rGRD7NUJ70cWRyfm0wfSXcMqekN47uXWg0
- DWos+cNq4rI73CrfC5YA6yFNowycKDPhHqWJqnazhl3WpazrDwwci653aPrvVSQR7Ap9
- Jm25UzHB7Knd5a9FMqbnk8yazrjmGWFSOT4d7+4I/0yS6VxKDTwDoOUzvi11v3WmejGY
- f/ZA==
-X-Gm-Message-State: AOJu0YzHa6BcTG+GxA0c2EqH7zjvJg5CbVENKDa9b1+FN2AFthIlEpnp
- 00pc7dxR6ZpbDCQ2YIxtJWXz43CXtXVjUydhZGseFZyZYulPnDwJDQlQdFeLJDs=
-X-Google-Smtp-Source: AGHT+IHxL4TEA/2BqbOOa55499cFfIwl21VlwLpHycHdYmHiH5Rgk4OQh9W623iKHDwiu/BwJ87odg==
-X-Received: by 2002:a05:6a20:af8f:b0:1b5:fd58:30e8 with SMTP id
- adf61e73a8af0-1bcf7ead900mr9466689637.18.1719446264215; 
- Wed, 26 Jun 2024 16:57:44 -0700 (PDT)
-Received: from atishp.ba.rivosinc.com ([64.71.180.162])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1faac998398sm630965ad.225.2024.06.26.16.57.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Jun 2024 16:57:43 -0700 (PDT)
-From: Atish Patra <atishp@rivosinc.com>
-Date: Wed, 26 Jun 2024 16:57:27 -0700
-Subject: [PATCH v7 07/11] target/riscv: Save counter values during
- countinhibit update
+ bh=1BjHIdMGmy2ukY1HHVb8Nzgic1CWWfFgSSCj4zTqEgM=;
+ b=Ggb+gXL1bkbEAKMgmbjKpyETli1EmF0TNE8AVwrsAFGsdrvJI8kTRJ65VD+F2Twznd
+ wDs3PnXkZs9FkIIXQT5pgBNcoUoaa1GbeyW1h+8kxR+0e/JvY2tHim2B1x1DQUcAoDXa
+ +mZEeQPffP4hcmR6grFK9OAb/gMVjDpKfs5+VL4iy8Uk+5BY5+CidlozN5o6SFjkku9H
+ 5DDqhqcq9+WKmWEnAW5SR34oAjkXdnATkTawvkhLYqJ+OB2rMJwvLTdBO/Hls7xMDMwU
+ nS7fpckMEHfLm9KR+gyIaZrrRSGJWsWIy3ATBNi2bzvZr9U/c34WexyOpwFY72TRXAhC
+ x5Rg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVbXGwJfqjkVBhq95zRGXMs1ElB+tHTbYztGBV6+sV+lBwyBe9ba9MlaxC8KA+HyPI+9gh3qjogJ3XCbnd4C6spq9gtTcQ=
+X-Gm-Message-State: AOJu0YyMyKlAFwHqTmrGmnaoZmmmL+mSx+Ox7X4ejDZfZ0R85/i7fYo+
+ lIX6emsA5ItlauMMgPPyqWiuTWfJVQZ1WY93U1B/GLGPvMRVcofi7sHJibvmq7/Xkc2x/SXgYzB
+ 6XXVRqCUAbOisHtId0eJMhtn3vWI=
+X-Google-Smtp-Source: AGHT+IEva/4jXMo7G/wpFvv0EqXuK1jhuQyM8RF/l1rDwJXqm6hoJPtwFgFRMtjAtar9CrPkyhyJ8wtFyiAw6YerFCo=
+X-Received: by 2002:a05:6122:9a9:b0:4d3:34f4:7e99 with SMTP id
+ 71dfb90a1353d-4ef88b89565mr7109738e0c.0.1719454719910; Wed, 26 Jun 2024
+ 19:18:39 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240626-smcntrpmf_v7-v7-7-bb0f10af7fa9@rivosinc.com>
-References: <20240626-smcntrpmf_v7-v7-0-bb0f10af7fa9@rivosinc.com>
-In-Reply-To: <20240626-smcntrpmf_v7-v7-0-bb0f10af7fa9@rivosinc.com>
-To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: Rajnesh Kanwal <rkanwal@rivosinc.com>, 
- Atish Patra <atishp@rivosinc.com>, palmer@dabbelt.com, liwei1518@gmail.com, 
- zhiwei_liu@linux.alibaba.com, bin.meng@windriver.com, 
- dbarboza@ventanamicro.com, alistair.francis@wdc.com
-X-Mailer: b4 0.15-dev-13183
-Received-SPF: pass client-ip=2607:f8b0:4864:20::434;
- envelope-from=atishp@rivosinc.com; helo=mail-pf1-x434.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+References: <20240626132247.2761286-1-alvinga@andestech.com>
+ <20240626132247.2761286-2-alvinga@andestech.com>
+In-Reply-To: <20240626132247.2761286-2-alvinga@andestech.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 27 Jun 2024 12:18:13 +1000
+Message-ID: <CAKmqyKPv5rcLisLhMvcSYswqgzsqW4VWX5V62Lf1rSgs9NvMUA@mail.gmail.com>
+Subject: Re: [PATCH v6 1/3] target/riscv: Add functions for common matching
+ conditions of trigger
+To: Alvin Chang <alvinga@andestech.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, alistair.francis@wdc.com, 
+ bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com, 
+ zhiwei_liu@linux.alibaba.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a31;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa31.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,113 +94,192 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Currently, if a counter monitoring cycle/instret is stopped via
-mcountinhibit we just update the state while the value is saved
-during the next read. This is not accurate as the read may happen
-many cycles after the counter is stopped. Ideally, the read should
-return the value saved when the counter is stopped.
+On Wed, Jun 26, 2024 at 11:25=E2=80=AFPM Alvin Chang via <qemu-devel@nongnu=
+.org> wrote:
+>
+> From: Alvin Chang via <qemu-devel@nongnu.org>
 
-Thus, save the value of the counter during the inhibit update
-operation and return that value during the read if corresponding bit
-in mcountihibit is set.
+Something is still strange with your From
 
-Signed-off-by: Atish Patra <atishp@rivosinc.com>
----
- target/riscv/cpu.h     |  1 -
- target/riscv/csr.c     | 34 ++++++++++++++++++++++------------
- target/riscv/machine.c |  5 ++---
- 3 files changed, 24 insertions(+), 16 deletions(-)
+Alistair
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index d56d640b06be..91fe2a46ba35 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -153,7 +153,6 @@ typedef struct PMUCTRState {
-     target_ulong mhpmcounter_prev;
-     /* Snapshort value of a counter in RV32 */
-     target_ulong mhpmcounterh_prev;
--    bool started;
-     /* Value beyond UINT32_MAX/UINT64_MAX before overflow interrupt trigger */
-     target_ulong irq_overflow_left;
- } PMUCTRState;
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index c292d036bcb2..e4adfa324efe 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -1062,17 +1062,11 @@ static RISCVException riscv_pmu_read_ctr(CPURISCVState *env, target_ulong *val,
- 
-     if (get_field(env->mcountinhibit, BIT(ctr_idx))) {
-         /*
--         * Counter should not increment if inhibit bit is set. We can't really
--         * stop the icount counting. Just return the counter value written by
--         * the supervisor to indicate that counter was not incremented.
-+         * Counter should not increment if inhibit bit is set. Just return the
-+         * current counter value.
-          */
--        if (!counter->started) {
--            *val = ctr_val;
--            return RISCV_EXCP_NONE;
--        } else {
--            /* Mark that the counter has been stopped */
--            counter->started = false;
--        }
-+         *val = ctr_val;
-+         return RISCV_EXCP_NONE;
-     }
- 
-     /*
-@@ -2114,9 +2108,25 @@ static RISCVException write_mcountinhibit(CPURISCVState *env, int csrno,
- 
-     /* Check if any other counter is also monitoring cycles/instructions */
-     for (cidx = 0; cidx < RV_MAX_MHPMCOUNTERS; cidx++) {
--        if (!get_field(env->mcountinhibit, BIT(cidx))) {
-             counter = &env->pmu_ctrs[cidx];
--            counter->started = true;
-+        if (get_field(env->mcountinhibit, BIT(cidx)) && (val & BIT(cidx))) {
-+            /*
-+             * Update the counter value for cycle/instret as we can't stop the
-+             * host ticks. But we should show the current value at this moment.
-+             */
-+            if (riscv_pmu_ctr_monitor_cycles(env, cidx) ||
-+                riscv_pmu_ctr_monitor_instructions(env, cidx)) {
-+                counter->mhpmcounter_val =
-+                    riscv_pmu_ctr_get_fixed_counters_val(env, cidx, false) -
-+                                           counter->mhpmcounter_prev +
-+                                           counter->mhpmcounter_val;
-+                if (riscv_cpu_mxl(env) == MXL_RV32) {
-+                    counter->mhpmcounterh_val =
-+                        riscv_pmu_ctr_get_fixed_counters_val(env, cidx, true) -
-+                                                counter->mhpmcounterh_prev +
-+                                                counter->mhpmcounterh_val;
-+                }
-+            }
-         }
-     }
- 
-diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index 76f2150f78b5..492c2c6d9d79 100644
---- a/target/riscv/machine.c
-+++ b/target/riscv/machine.c
-@@ -320,15 +320,14 @@ static bool pmu_needed(void *opaque)
- 
- static const VMStateDescription vmstate_pmu_ctr_state = {
-     .name = "cpu/pmu",
--    .version_id = 1,
--    .minimum_version_id = 1,
-+    .version_id = 2,
-+    .minimum_version_id = 2,
-     .needed = pmu_needed,
-     .fields = (const VMStateField[]) {
-         VMSTATE_UINTTL(mhpmcounter_val, PMUCTRState),
-         VMSTATE_UINTTL(mhpmcounterh_val, PMUCTRState),
-         VMSTATE_UINTTL(mhpmcounter_prev, PMUCTRState),
-         VMSTATE_UINTTL(mhpmcounterh_prev, PMUCTRState),
--        VMSTATE_BOOL(started, PMUCTRState),
-         VMSTATE_END_OF_LIST()
-     }
- };
-
--- 
-2.34.1
-
+>
+> According to RISC-V Debug specification version 0.13 [1] (also applied
+> to version 1.0 [2] but it has not been ratified yet), there are several
+> common matching conditions before firing a trigger, including the
+> enabled privilege levels of the trigger.
+>
+> This commit adds trigger_common_match() to prepare the common matching
+> conditions for the type 2/3/6 triggers. For now, we just implement
+> trigger_priv_match() to check if the enabled privilege levels of the
+> trigger match CPU's current privilege level.
+>
+> Remove the related code in riscv_cpu_debug_check_breakpoint() and invoke
+> trigger_common_match() to check the privilege levels of the type 2 and
+> type 6 triggers for the breakpoints.
+>
+> This commit also changes the behavior of looping the triggers. In
+> previous implementation, if we have a type 2 trigger and
+> env->virt_enabled is true, we directly return false to stop the loop.
+> Now we keep looping all the triggers until we find a matched trigger.
+>
+> Only the execution bit and the executed PC should be futher checked in
+> riscv_cpu_debug_check_breakpoint().
+>
+> [1]: https://github.com/riscv/riscv-debug-spec/releases/tag/task_group_vo=
+te
+> [2]: https://github.com/riscv/riscv-debug-spec/releases/tag/1.0.0-rc1-asc=
+iidoc
+>
+> Signed-off-by: Alvin Chang <alvinga@andestech.com>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  target/riscv/debug.c | 101 +++++++++++++++++++++++++++++++++----------
+>  1 file changed, 78 insertions(+), 23 deletions(-)
+>
+> diff --git a/target/riscv/debug.c b/target/riscv/debug.c
+> index b110370e..11125f33 100644
+> --- a/target/riscv/debug.c
+> +++ b/target/riscv/debug.c
+> @@ -241,6 +241,76 @@ static void do_trigger_action(CPURISCVState *env, ta=
+rget_ulong trigger_index)
+>      }
+>  }
+>
+> +/*
+> + * Check the privilege level of specific trigger matches CPU's current p=
+rivilege
+> + * level.
+> + */
+> +static bool trigger_priv_match(CPURISCVState *env, trigger_type_t type,
+> +                               int trigger_index)
+> +{
+> +    target_ulong ctrl =3D env->tdata1[trigger_index];
+> +
+> +    switch (type) {
+> +    case TRIGGER_TYPE_AD_MATCH:
+> +        /* type 2 trigger cannot be fired in VU/VS mode */
+> +        if (env->virt_enabled) {
+> +            return false;
+> +        }
+> +        /* check U/S/M bit against current privilege level */
+> +        if ((ctrl >> 3) & BIT(env->priv)) {
+> +            return true;
+> +        }
+> +        break;
+> +    case TRIGGER_TYPE_AD_MATCH6:
+> +        if (env->virt_enabled) {
+> +            /* check VU/VS bit against current privilege level */
+> +            if ((ctrl >> 23) & BIT(env->priv)) {
+> +                return true;
+> +            }
+> +        } else {
+> +            /* check U/S/M bit against current privilege level */
+> +            if ((ctrl >> 3) & BIT(env->priv)) {
+> +                return true;
+> +            }
+> +        }
+> +        break;
+> +    case TRIGGER_TYPE_INST_CNT:
+> +        if (env->virt_enabled) {
+> +            /* check VU/VS bit against current privilege level */
+> +            if ((ctrl >> 25) & BIT(env->priv)) {
+> +                return true;
+> +            }
+> +        } else {
+> +            /* check U/S/M bit against current privilege level */
+> +            if ((ctrl >> 6) & BIT(env->priv)) {
+> +                return true;
+> +            }
+> +        }
+> +        break;
+> +    case TRIGGER_TYPE_INT:
+> +    case TRIGGER_TYPE_EXCP:
+> +    case TRIGGER_TYPE_EXT_SRC:
+> +        qemu_log_mask(LOG_UNIMP, "trigger type: %d is not supported\n", =
+type);
+> +        break;
+> +    case TRIGGER_TYPE_NO_EXIST:
+> +    case TRIGGER_TYPE_UNAVAIL:
+> +        qemu_log_mask(LOG_GUEST_ERROR, "trigger type: %d does not exist\=
+n",
+> +                      type);
+> +        break;
+> +    default:
+> +        g_assert_not_reached();
+> +    }
+> +
+> +    return false;
+> +}
+> +
+> +/* Common matching conditions for all types of the triggers. */
+> +static bool trigger_common_match(CPURISCVState *env, trigger_type_t type=
+,
+> +                                 int trigger_index)
+> +{
+> +    return trigger_priv_match(env, type, trigger_index);
+> +}
+> +
+>  /* type 2 trigger */
+>
+>  static uint32_t type2_breakpoint_size(CPURISCVState *env, target_ulong c=
+trl)
+> @@ -785,22 +855,18 @@ bool riscv_cpu_debug_check_breakpoint(CPUState *cs)
+>          for (i =3D 0; i < RV_MAX_TRIGGERS; i++) {
+>              trigger_type =3D get_trigger_type(env, i);
+>
+> +            if (!trigger_common_match(env, trigger_type, i)) {
+> +                continue;
+> +            }
+> +
+>              switch (trigger_type) {
+>              case TRIGGER_TYPE_AD_MATCH:
+> -                /* type 2 trigger cannot be fired in VU/VS mode */
+> -                if (env->virt_enabled) {
+> -                    return false;
+> -                }
+> -
+>                  ctrl =3D env->tdata1[i];
+>                  pc =3D env->tdata2[i];
+>
+>                  if ((ctrl & TYPE2_EXEC) && (bp->pc =3D=3D pc)) {
+> -                    /* check U/S/M bit against current privilege level *=
+/
+> -                    if ((ctrl >> 3) & BIT(env->priv)) {
+> -                        env->badaddr =3D pc;
+> -                        return true;
+> -                    }
+> +                    env->badaddr =3D pc;
+> +                    return true;
+>                  }
+>                  break;
+>              case TRIGGER_TYPE_AD_MATCH6:
+> @@ -808,19 +874,8 @@ bool riscv_cpu_debug_check_breakpoint(CPUState *cs)
+>                  pc =3D env->tdata2[i];
+>
+>                  if ((ctrl & TYPE6_EXEC) && (bp->pc =3D=3D pc)) {
+> -                    if (env->virt_enabled) {
+> -                        /* check VU/VS bit against current privilege lev=
+el */
+> -                        if ((ctrl >> 23) & BIT(env->priv)) {
+> -                            env->badaddr =3D pc;
+> -                            return true;
+> -                        }
+> -                    } else {
+> -                        /* check U/S/M bit against current privilege lev=
+el */
+> -                        if ((ctrl >> 3) & BIT(env->priv)) {
+> -                            env->badaddr =3D pc;
+> -                            return true;
+> -                        }
+> -                    }
+> +                    env->badaddr =3D pc;
+> +                    return true;
+>                  }
+>                  break;
+>              default:
+> --
+> 2.34.1
+>
+>
 
