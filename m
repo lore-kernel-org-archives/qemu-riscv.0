@@ -4,31 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76F73C2BD09
-	for <qemu-riscv@archiver.kernel.org>; Fri, 28 Jun 2024 13:27:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 255A4C2BD09
+	for <qemu-riscv@archiver.kernel.org>; Fri, 28 Jun 2024 13:28:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sNBdX-0006bO-Rs; Fri, 28 Jun 2024 09:27:35 -0400
+	id 1sNBdW-0006b7-DT; Fri, 28 Jun 2024 09:27:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jiangzw@tecorigin.com>)
- id 1sN84j-00014T-0U
- for qemu-riscv@nongnu.org; Fri, 28 Jun 2024 05:39:25 -0400
-Received: from out28-3.mail.aliyun.com ([115.124.28.3])
+ id 1sN85c-0001Go-UG
+ for qemu-riscv@nongnu.org; Fri, 28 Jun 2024 05:40:20 -0400
+Received: from out28-49.mail.aliyun.com ([115.124.28.49])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jiangzw@tecorigin.com>)
- id 1sN84g-0007AS-NG
- for qemu-riscv@nongnu.org; Fri, 28 Jun 2024 05:39:24 -0400
+ id 1sN85b-0007iy-2M
+ for qemu-riscv@nongnu.org; Fri, 28 Jun 2024 05:40:20 -0400
 X-Alimail-AntiSpam: AC=CONTINUE; BC=0.1466847|-1; CH=green; DM=|CONTINUE|false|;
- DS=CONTINUE|ham_alarm|0.0229282-0.000699653-0.976372; FP=0|0|0|0|0|-1|-1|-1;
- HT=maildocker-contentspam033037136014; MF=jiangzw@tecorigin.com; NM=1; PH=DS;
- RN=9; RT=9; SR=0; TI=SMTPD_---.YCN6KcB_1719567227; 
+ DS=CONTINUE|ham_alarm|0.0229282-0.000699653-0.976372;
+ FP=12600308759697844946|1|1|6|0|-1|-1|-1;
+ HT=maildocker-contentspam033070021165; MF=jiangzw@tecorigin.com; NM=1; PH=DS;
+ RN=9; RT=9; SR=0; TI=SMTPD_---.YCNrY5._1719567605; 
 Received: from localhost.localdomain(mailfrom:jiangzw@tecorigin.com
- fp:SMTPD_---.YCN6KcB_1719567227) by smtp.aliyun-inc.com;
- Fri, 28 Jun 2024 17:33:55 +0800
+ fp:SMTPD_---.YCNrY5._1719567605) by smtp.aliyun-inc.com;
+ Fri, 28 Jun 2024 17:40:11 +0800
 From: Zhiwei Jiang <jiangzw@tecorigin.com>
-To: emu-devel@nongnu.org
+To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Weiwei Li <liwei1518@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
@@ -36,11 +37,11 @@ Cc: qemu-riscv@nongnu.org, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, Zhiwei Jiang <jiangzw@tecorigin.com>
 Subject: [PATCH] target/riscv: Fix the check with vector register multiples of
  LMUL
-Date: Fri, 28 Jun 2024 09:33:40 +0000
-Message-Id: <20240628093340.94056-1-jiangzw@tecorigin.com>
+Date: Fri, 28 Jun 2024 09:40:03 +0000
+Message-Id: <20240628094003.94182-1-jiangzw@tecorigin.com>
 X-Mailer: git-send-email 2.17.1
-Received-SPF: pass client-ip=115.124.28.3; envelope-from=jiangzw@tecorigin.com;
- helo=out28-3.mail.aliyun.com
+Received-SPF: pass client-ip=115.124.28.49; envelope-from=jiangzw@tecorigin.com;
+ helo=out28-49.mail.aliyun.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
