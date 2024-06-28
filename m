@@ -4,81 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CDECC3064D
-	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Jun 2024 18:05:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76F73C2BD09
+	for <qemu-riscv@archiver.kernel.org>; Fri, 28 Jun 2024 13:27:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sMtTR-00017e-4y; Thu, 27 Jun 2024 14:03:57 -0400
+	id 1sNBdX-0006bO-Rs; Fri, 28 Jun 2024 09:27:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sMtTP-00017C-Jm
- for qemu-riscv@nongnu.org; Thu, 27 Jun 2024 14:03:55 -0400
-Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sMtTN-0001LX-SO
- for qemu-riscv@nongnu.org; Thu, 27 Jun 2024 14:03:55 -0400
-Received: by mail-pf1-x433.google.com with SMTP id
- d2e1a72fcca58-70685ab8fb1so3925112b3a.2
- for <qemu-riscv@nongnu.org>; Thu, 27 Jun 2024 11:03:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1719511432; x=1720116232; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=DxICO0F0UJwA9kf7MHQo5KZWHjxvwUlAc5IoQOIpIPQ=;
- b=YfW1Bm5IFGEc6/qEGvzbAB7+KCNtI5GQRDFBwuJHeW6UzRgwOi1E2PY2sDXkZt+kjN
- Pcbsqf+yf4SyOuLVkqlFeCS8Fa9amEWThIKtXPx4BxB7/kXFjSK4mtt/bTKAqWnXG/xj
- Rs6cQa7ZmzkXZJAyjQmtvbzyFSI7wUoEi6y20yVgAKLHVloFlyqTH6ssu7/HTSvmtBf/
- x784qnzYxO9x0NOdJHW0Fhxcr+/37JA9ywfA3aPvELxc26bHma/GPA6QZtTW7NRQs1hv
- bLyGt8s5AkABsBnoHKK0hIh2V02ejCR/jF5OMlLPZk8uKZKxsZhxVS7TrusibanstEAn
- ZYjQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719511432; x=1720116232;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=DxICO0F0UJwA9kf7MHQo5KZWHjxvwUlAc5IoQOIpIPQ=;
- b=dKx5LWX+Qi7Xq3D32jPdbOsZMVCQfyQ4ObmergXn87npIPLSYi6/tmbHvvUWz5GbwS
- 7UqS/2XB294e3afhtqvgOHpML4EUYd6tYM5WAoan0mv9z1bS5/BHQXFMqCCWvPjpjSeP
- 5y9YU+zcIEw3/taSHyfMJv9O+GG+E4TVFgffGE4k3RfKWhNT4h0W3JMH43HCPyL7yxg8
- G3ylNPmdfWIYXgWdcXztjE+vR1A4zid5t1dpTo4ohUXxDUkj+2zcDbFqsKokZNgyBns9
- z9MXMRzGwqVavAzJNtFTSBfPc4yKVwh9y4u1qb0NMMeNhwGepdJ3jZOYVNV+ikm1fqM9
- nNcQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXfzs7iYt99FIzTGJiGUmyZD4q2Q4iP9+cdfSFF4eGY2Bjt/YhoMk+955GR3D2Z21mwMw2fzpJRKCaarDCCViZHt7FHsac=
-X-Gm-Message-State: AOJu0Yx61ge5JqiiTTxDn+oRHwXmXDNjslrbRWfscr81+3tAsNHD5QBf
- jxBtKOvqp10gA/B3U0bBo5daMevEkj9aaA5OWH3XEDRNi4T4z1BiiKEvJ8uiZz8=
-X-Google-Smtp-Source: AGHT+IEYKhu6juYqZWS/IjBBWxmc7Mm7kpR8o+6dr4QCIKxo2aEm9TBOxS7bwAxef7cgk1nOKlYMQQ==
-X-Received: by 2002:a05:6a00:2fcc:b0:704:2f65:4996 with SMTP id
- d2e1a72fcca58-706745b45cemr13741508b3a.11.1719511431951; 
- Thu, 27 Jun 2024 11:03:51 -0700 (PDT)
-Received: from stoup.. (174-21-76-141.tukw.qwest.net. [174.21.76.141])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-70803ecf764sm2170b3a.106.2024.06.27.11.03.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Jun 2024 11:03:51 -0700 (PDT)
-From: Richard Henderson <richard.henderson@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: brad@comstyle.com, Alistair.Francis@wdc.com, palmer@dabbelt.com,
- qemu-riscv@nongnu.org
-Subject: [PATCH 0/3] util: Add cpuinfo support for riscv
-Date: Thu, 27 Jun 2024 11:03:47 -0700
-Message-Id: <20240627180350.128575-1-richard.henderson@linaro.org>
-X-Mailer: git-send-email 2.34.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x433.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ (Exim 4.90_1) (envelope-from <jiangzw@tecorigin.com>)
+ id 1sN84j-00014T-0U
+ for qemu-riscv@nongnu.org; Fri, 28 Jun 2024 05:39:25 -0400
+Received: from out28-3.mail.aliyun.com ([115.124.28.3])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <jiangzw@tecorigin.com>)
+ id 1sN84g-0007AS-NG
+ for qemu-riscv@nongnu.org; Fri, 28 Jun 2024 05:39:24 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.1466847|-1; CH=green; DM=|CONTINUE|false|;
+ DS=CONTINUE|ham_alarm|0.0229282-0.000699653-0.976372; FP=0|0|0|0|0|-1|-1|-1;
+ HT=maildocker-contentspam033037136014; MF=jiangzw@tecorigin.com; NM=1; PH=DS;
+ RN=9; RT=9; SR=0; TI=SMTPD_---.YCN6KcB_1719567227; 
+Received: from localhost.localdomain(mailfrom:jiangzw@tecorigin.com
+ fp:SMTPD_---.YCN6KcB_1719567227) by smtp.aliyun-inc.com;
+ Fri, 28 Jun 2024 17:33:55 +0800
+From: Zhiwei Jiang <jiangzw@tecorigin.com>
+To: emu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Weiwei Li <liwei1518@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Zhiwei Jiang <jiangzw@tecorigin.com>
+Subject: [PATCH] target/riscv: Fix the check with vector register multiples of
+ LMUL
+Date: Fri, 28 Jun 2024 09:33:40 +0000
+Message-Id: <20240628093340.94056-1-jiangzw@tecorigin.com>
+X-Mailer: git-send-email 2.17.1
+Received-SPF: pass client-ip=115.124.28.3; envelope-from=jiangzw@tecorigin.com;
+ helo=out28-3.mail.aliyun.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Fri, 28 Jun 2024 09:27:32 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -93,28 +63,28 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Do cpu feature detection in util, like other hosts.
-Support the OpenBSD ucontext_t.
-Support the Linux __riscv_hwprobe syscall.
+In the original extract32(val, 0, lmul) logic, when lmul is 2 and val is v10 or v12,
+there is an issue with this check condition. I think a simple mod operation is sufficient.
 
-r~
+Signed-off-by: Zhiwei Jiang <jiangzw@tecorigin.com>
+---
+ target/riscv/insn_trans/trans_rvv.c.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Richard Henderson (3):
-  util/cpuinfo-riscv: Support host/cpuinfo.h for riscv
-  util/cpuinfo-riscv: Support OpenBSD signal frame
-  util/cpuinfo-riscv: Use linux __riscv_hwprobe syscall
-
- meson.build                       |   6 ++
- host/include/riscv/host/cpuinfo.h |  23 ++++++
- tcg/riscv/tcg-target.h            |  46 ++++++------
- util/cpuinfo-riscv.c              | 118 ++++++++++++++++++++++++++++++
- tcg/riscv/tcg-target.c.inc        |  84 ++-------------------
- util/meson.build                  |   2 +
- 6 files changed, 178 insertions(+), 101 deletions(-)
- create mode 100644 host/include/riscv/host/cpuinfo.h
- create mode 100644 util/cpuinfo-riscv.c
-
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+index 3a3896ba06..e89b0f2b1e 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -118,7 +118,7 @@ static bool require_nf(int vd, int nf, int lmul)
+  */
+ static bool require_align(const int8_t val, const int8_t lmul)
+ {
+-    return lmul <= 0 || extract32(val, 0, lmul) == 0;
++    return lmul <= 0 || val % lmul == 0;
+ }
+ 
+ /*
 -- 
-2.34.1
+2.17.1
 
 
