@@ -4,48 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BA44C30658
-	for <qemu-riscv@archiver.kernel.org>; Sun, 30 Jun 2024 03:13:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69935C2BD09
+	for <qemu-riscv@archiver.kernel.org>; Mon,  1 Jul 2024 03:39:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sNl0Y-0005Ie-PU; Sat, 29 Jun 2024 23:13:42 -0400
+	id 1sO7se-00055M-5M; Sun, 30 Jun 2024 23:39:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1sNl0V-0005Er-SP; Sat, 29 Jun 2024 23:13:39 -0400
-Received: from out30-99.freemail.mail.aliyun.com ([115.124.30.99])
+ id 1sO7sc-00054w-7g; Sun, 30 Jun 2024 23:39:02 -0400
+Received: from out30-110.freemail.mail.aliyun.com ([115.124.30.110])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1sNl0T-0000Ru-Os; Sat, 29 Jun 2024 23:13:39 -0400
+ id 1sO7sZ-0005HV-DW; Sun, 30 Jun 2024 23:39:01 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1719717212; h=From:To:Subject:Date:Message-Id:MIME-Version;
- bh=ohFNyLeh/YYmrdNAiBYGCjWl84gpsnh49OT9k3DmuPs=;
- b=lXsUh18Mmf++LiK8stqruz0DGddmUF9qjRkiCN0YX89up7snNPuGGBhUFFZabro5oHxsj7/B1WvKBMYVxJoaFvNs34N+hpcFbwdeFBSbm1CGEU+mJWkoqT4vRt1z4IrGZvkMoym2jU8Yl0WC2NTvdi2UoBiUHexgrVjqHMXQAOw=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R161e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037067111;
+ t=1719805127; h=From:To:Subject:Date:Message-Id:MIME-Version;
+ bh=fv0330CMgYf+cwa0a7U4PQFK68rmk5XY9FRKRR4A34Q=;
+ b=id5s4VhhZhH8xIeMdf9OzPm3UOZGJSXkQlSDoKs+klbrqMFP7iBk4DlUnRJ6ahFmleTMQUAa70tbG8nRFo4/0k5jHIuLAKnfNmaTaM8mbXWi9KMe05nKEmShIld+X9RA+s98t3ry3m7jTIwdRfzqSUpcdTnKPfQQ1FpQxMgoTrM=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R171e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033032014031;
  MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=8; SR=0;
- TI=SMTPD_---0W9UUKFE_1719717211; 
+ TI=SMTPD_---0W9YPs85_1719805124; 
 Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0W9UUKFE_1719717211) by smtp.aliyun-inc.com;
- Sun, 30 Jun 2024 11:13:32 +0800
+ fp:SMTPD_---0W9YPs85_1719805124) by smtp.aliyun-inc.com;
+ Mon, 01 Jul 2024 11:38:45 +0800
 From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  dbarboza@ventanamicro.com, liwei1518@gmail.com, bmeng.cn@gmail.com,
- LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH v2 11/11] disas/riscv: Support zabha disassemble
-Date: Sun, 30 Jun 2024 11:05:59 +0800
-Message-Id: <20240630030559.877-12-zhiwei_liu@linux.alibaba.com>
+ TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
+Subject: [PATCH 0/6] target/riscv: Expose RV32 cpu to RV64 QEMU
+Date: Mon,  1 Jul 2024 11:37:16 +0800
+Message-Id: <20240701033722.954-1-zhiwei_liu@linux.alibaba.com>
 X-Mailer: git-send-email 2.23.0
-In-Reply-To: <20240630030559.877-1-zhiwei_liu@linux.alibaba.com>
-References: <20240630030559.877-1-zhiwei_liu@linux.alibaba.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.99;
+Received-SPF: pass client-ip=115.124.30.110;
  envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-99.freemail.mail.aliyun.com
+ helo=out30-110.freemail.mail.aliyun.com
 X-Spam_score_int: -174
 X-Spam_score: -17.5
 X-Spam_bar: -----------------
@@ -69,129 +67,89 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
----
- disas/riscv.c | 60 +++++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 60 insertions(+)
+From: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
 
-diff --git a/disas/riscv.c b/disas/riscv.c
-index 2e315b4936..05b663ebfe 100644
---- a/disas/riscv.c
-+++ b/disas/riscv.c
-@@ -954,6 +954,26 @@ typedef enum {
-     rv_c_mop_11    = 923,
-     rv_c_mop_13    = 924,
-     rv_c_mop_15    = 925,
-+    rv_op_amoswap_b = 926,
-+    rv_op_amoadd_b  = 927,
-+    rv_op_amoxor_b  = 928,
-+    rv_op_amoor_b   = 929,
-+    rv_op_amoand_b  = 930,
-+    rv_op_amomin_b  = 931,
-+    rv_op_amomax_b  = 932,
-+    rv_op_amominu_b = 933,
-+    rv_op_amomaxu_b = 934,
-+    rv_op_amoswap_h = 935,
-+    rv_op_amoadd_h  = 936,
-+    rv_op_amoxor_h  = 937,
-+    rv_op_amoor_h   = 938,
-+    rv_op_amoand_h  = 939,
-+    rv_op_amomin_h  = 940,
-+    rv_op_amomax_h  = 941,
-+    rv_op_amominu_h = 942,
-+    rv_op_amomaxu_h = 943,
-+    rv_op_amocas_b  = 944,
-+    rv_op_amocas_h  = 945,
- } rv_op;
- 
- /* register names */
-@@ -2192,6 +2212,26 @@ const rv_opcode_data rvi_opcode_data[] = {
-     { "c.mop.11", rv_codec_ci_none, rv_fmt_none, NULL, 0, 0, 0 },
-     { "c.mop.13", rv_codec_ci_none, rv_fmt_none, NULL, 0, 0, 0 },
-     { "c.mop.15", rv_codec_ci_none, rv_fmt_none, NULL, 0, 0, 0 },
-+    { "amoswap.b", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-+    { "amoadd.b", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-+    { "amoxor.b", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-+    { "amoor.b", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-+    { "amoand.b", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-+    { "amomin.b", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-+    { "amomax.b", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-+    { "amominu.b", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-+    { "amomaxu.b", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-+    { "amoswap.h", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-+    { "amoadd.h", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-+    { "amoxor.h", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-+    { "amoor.h", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-+    { "amoand.h", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-+    { "amomin.h", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-+    { "amomax.h", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-+    { "amominu.h", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-+    { "amomaxu.h", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-+    { "amocas.b", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-+    { "amocas.h", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
- };
- 
- /* CSR names */
-@@ -2986,9 +3026,13 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
-         case 11:
-             switch (((inst >> 24) & 0b11111000) |
-                     ((inst >> 12) & 0b00000111)) {
-+            case 0: op = rv_op_amoadd_b; break;
-+            case 1: op = rv_op_amoadd_h; break;
-             case 2: op = rv_op_amoadd_w; break;
-             case 3: op = rv_op_amoadd_d; break;
-             case 4: op = rv_op_amoadd_q; break;
-+            case 8: op = rv_op_amoswap_b; break;
-+            case 9: op = rv_op_amoswap_h; break;
-             case 10: op = rv_op_amoswap_w; break;
-             case 11: op = rv_op_amoswap_d; break;
-             case 12: op = rv_op_amoswap_q; break;
-@@ -3010,27 +3054,43 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
-             case 26: op = rv_op_sc_w; break;
-             case 27: op = rv_op_sc_d; break;
-             case 28: op = rv_op_sc_q; break;
-+            case 32: op = rv_op_amoxor_b; break;
-+            case 33: op = rv_op_amoxor_h; break;
-             case 34: op = rv_op_amoxor_w; break;
-             case 35: op = rv_op_amoxor_d; break;
-             case 36: op = rv_op_amoxor_q; break;
-+            case 40: op = rv_op_amocas_b; break;
-+            case 41: op = rv_op_amocas_h; break;
-             case 42: op = rv_op_amocas_w; break;
-             case 43: op = rv_op_amocas_d; break;
-             case 44: op = rv_op_amocas_q; break;
-+            case 64: op = rv_op_amoor_b; break;
-+            case 65: op = rv_op_amoor_h; break;
-             case 66: op = rv_op_amoor_w; break;
-             case 67: op = rv_op_amoor_d; break;
-             case 68: op = rv_op_amoor_q; break;
-+            case 96: op = rv_op_amoand_b; break;
-+            case 97: op = rv_op_amoand_h; break;
-             case 98: op = rv_op_amoand_w; break;
-             case 99: op = rv_op_amoand_d; break;
-             case 100: op = rv_op_amoand_q; break;
-+            case 128: op = rv_op_amomin_b; break;
-+            case 129: op = rv_op_amomin_h; break;
-             case 130: op = rv_op_amomin_w; break;
-             case 131: op = rv_op_amomin_d; break;
-             case 132: op = rv_op_amomin_q; break;
-+            case 160: op = rv_op_amomax_b; break;
-+            case 161: op = rv_op_amomax_h; break;
-             case 162: op = rv_op_amomax_w; break;
-             case 163: op = rv_op_amomax_d; break;
-             case 164: op = rv_op_amomax_q; break;
-+            case 192: op = rv_op_amominu_b; break;
-+            case 193: op = rv_op_amominu_h; break;
-             case 194: op = rv_op_amominu_w; break;
-             case 195: op = rv_op_amominu_d; break;
-             case 196: op = rv_op_amominu_q; break;
-+            case 224: op = rv_op_amomaxu_b; break;
-+            case 225: op = rv_op_amomaxu_h; break;
-             case 226: op = rv_op_amomaxu_w; break;
-             case 227: op = rv_op_amomaxu_d; break;
-             case 228: op = rv_op_amomaxu_q; break;
+This patch set aims to expose 32-bit RISC-V cpu to RV64 QEMU. Thus
+qemu-system-riscv64 can directly boot a RV32 Linux.
+
+This patch set has been tested with 6.9.0 Linux Image.
+
+- Run RV64 QEMU with RV32 CPU
+qemu-system-riscv64 -cpu rv32 -M virt -nographic \
+    -kernel Image \
+    -append "root=/dev/vda ro console=ttyS0" \
+    -drive file=rootfs.ext2,format=raw,id=hd0 \
+    -device virtio-blk-device,drive=hd0 -netdev user,id=net0 \
+    -device virtio-net-device,netdev=net0
+
+OpenSBI v1.4
+QEMU emulator version 9.0.50 (v9.0.0-1132-g7799dc2e3b)
+[    0.000000] Linux version 6.9.0 (developer@11109ca35736) (riscv32-unknown-linux-gnu-gcc (gc891d8dc23e-dirty) 13.2.0, GNU ld (GNU Binutils) 2.42) #3 SMP Fri May 31 08:42:15 UTC 2024
+[    0.000000] random: crng init done
+[    0.000000] OF: fdt: Ignoring memory range 0x80000000 - 0x80400000
+[    0.000000] Machine model: riscv-virtio,qemu
+[    0.000000] SBI specification v2.0 detected
+[    0.000000] SBI implementation ID=0x1 Version=0x10004
+[    0.000000] SBI TIME extension detected
+[    0.000000] SBI IPI extension detected
+[    0.000000] SBI RFENCE extension detected
+[    0.000000] SBI SRST extension detected
+[    0.000000] SBI DBCN extension detected
+[    0.000000] efi: UEFI not found.
+[    0.000000] OF: reserved mem: 0x80000000..0x8003ffff (256 KiB) nomap non-reusable mmode_resv1@80000000
+[    0.000000] OF: reserved mem: 0x80040000..0x8004ffff (64 KiB) nomap non-reusable mmode_resv0@80040000
+[    0.000000] Zone ranges:
+[    0.000000]   Normal   [mem 0x0000000080400000-0x0000000087ffffff]
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000080400000-0x0000000087ffffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000080400000-0x0000000087ffffff]
+[    0.000000] On node 0, zone Normal: 1024 pages in unavailable ranges
+[    0.000000] SBI HSM extension detected
+[    0.000000] riscv: base ISA extensions acdfhim
+[    0.000000] riscv: ELF capabilities acdfim
+[    0.000000] percpu: Embedded 17 pages/cpu s37728 r8192 d23712 u69632
+[    0.000000] Kernel command line: root=/dev/vda ro console=ttyS0
+[    0.000000] Dentry cache hash table entries: 16384 (order: 4, 65536 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 8192 (order: 3, 32768 bytes, linear)
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 31465
+[    0.000000] mem auto-init: stack:all(zero), heap alloc:off, heap free:off
+[    0.000000] Virtual kernel memory layout:
+[    0.000000]       fixmap : 0x9c800000 - 0x9d000000   (8192 kB)
+[    0.000000]       pci io : 0x9d000000 - 0x9e000000   (  16 MB)
+[    0.000000]      vmemmap : 0x9e000000 - 0xa0000000   (  32 MB)
+[    0.000000]      vmalloc : 0xa0000000 - 0xc0000000   ( 512 MB)
+[    0.000000]       lowmem : 0xc0000000 - 0xc7c00000   ( 124 MB)
+[    0.000000] Memory: 95700K/126976K available (9090K kernel code, 8845K rwdata, 4096K rodata, 4231K init, 341K bss, 31276K reserved, 0K cma-reserved)
+...
+Welcome to Buildroot
+buildroot login: root
+# cat /proc/cpuinfo
+processor       : 0
+hart            : 0
+isa             : rv32imafdch_zicbom_zicboz_zicntr_zicsr_zifencei_zihintntl_zihintpause_zihpm_zfa_zba_zbb_zbc_zbs_sstc
+mmu             : sv32
+
+TANG Tiancheng (6):
+  target/riscv: Add fw_dynamic_info32 for booting RV32 OpenSBI
+  target/riscv: Adjust PMP size for no-MMU RV64 QEMU running RV32
+  target/riscv: Correct SXL return value for RV32 in RV64 QEMU
+  target/riscv: Detect sxl to set bit width for RV32 in RV64
+  target/riscv: Correct mcause/scause bit width for RV32 in RV64 QEMU
+  target/riscv: Enable RV32 CPU support in RV64 QEMU
+
+ configs/targets/riscv64-softmmu.mak |  2 +-
+ hw/riscv/boot.c                     | 35 +++++++++++++++++++----------
+ hw/riscv/sifive_u.c                 |  3 ++-
+ include/hw/riscv/boot.h             |  4 +++-
+ include/hw/riscv/boot_opensbi.h     | 29 ++++++++++++++++++++++++
+ target/riscv/cpu.c                  | 17 ++++++++++----
+ target/riscv/cpu.h                  |  5 ++++-
+ target/riscv/cpu_helper.c           | 23 ++++++++++++++-----
+ target/riscv/pmp.c                  |  2 +-
+ 9 files changed, 93 insertions(+), 27 deletions(-)
+
 -- 
-2.25.1
+2.43.0
 
 
