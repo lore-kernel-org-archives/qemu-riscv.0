@@ -4,67 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E52B6C3064D
-	for <qemu-riscv@archiver.kernel.org>; Tue,  2 Jul 2024 14:03:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 426C0C3064D
+	for <qemu-riscv@archiver.kernel.org>; Tue,  2 Jul 2024 14:25:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sOe5p-0007s3-LB; Tue, 02 Jul 2024 10:02:49 -0400
+	id 1sOeLs-0000jU-Rm; Tue, 02 Jul 2024 10:19:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jonathan.cameron@huawei.com>)
- id 1sOe5n-0007rQ-PW; Tue, 02 Jul 2024 10:02:47 -0400
-Received: from frasgout.his.huawei.com ([185.176.79.56])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jonathan.cameron@huawei.com>)
- id 1sOe5k-0003HE-KU; Tue, 02 Jul 2024 10:02:47 -0400
-Received: from mail.maildlp.com (unknown [172.18.186.31])
- by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4WD4Lk1Hn8z67k9Y;
- Tue,  2 Jul 2024 22:00:46 +0800 (CST)
-Received: from lhrpeml500005.china.huawei.com (unknown [7.191.163.240])
- by mail.maildlp.com (Postfix) with ESMTPS id 75B93140A70;
- Tue,  2 Jul 2024 22:02:37 +0800 (CST)
-Received: from localhost (10.203.174.77) by lhrpeml500005.china.huawei.com
- (7.191.163.240) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.1.2507.39; Tue, 2 Jul
- 2024 15:02:36 +0100
-Date: Tue, 2 Jul 2024 15:02:36 +0100
-To: "Michael S. Tsirkin" <mst@redhat.com>
-CC: Igor Mammedov <imammedo@redhat.com>, Sunil V L <sunilvl@ventanamicro.com>, 
- <qemu-devel@nongnu.org>, <qemu-arm@nongnu.org>, <qemu-riscv@nongnu.org>,
- Paolo Bonzini <pbonzini@redhat.com>, =?ISO-8859-1?Q?Marc-Andr=E9?= Lureau
- <marcandre.lureau@redhat.com>, "Daniel P . =?ISO-8859-1?Q?Berrang=E9?="
- <berrange@redhat.com>, Thomas Huth <thuth@redhat.com>, Philippe
- =?ISO-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>, Ani Sinha
- <anisinha@redhat.com>, Laurent Vivier <lvivier@redhat.com>, Gerd Hoffmann
- <kraxel@redhat.com>, Sia Jee Heng <jeeheng.sia@starfivetech.com>, Alistair
- Francis <alistair23@gmail.com>, Daniel Henrique Barboza
- <dbarboza@ventanamicro.com>, Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng
- <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei
- <zhiwei_liu@linux.alibaba.com>, "Alistair Francis" <alistair.francis@wdc.com>
-Subject: Re: [PATCH v4 16/16] tests/qtest/bios-tables-test: Add expected
- ACPI data files for RISC-V
-Message-ID: <20240702150236.000042eb@Huawei.com>
-In-Reply-To: <20240701170330-mutt-send-email-mst@kernel.org>
-References: <20240625150839.1358279-1-sunilvl@ventanamicro.com>
- <20240625150839.1358279-17-sunilvl@ventanamicro.com>
- <20240627141803.42cd46c1@imammedo.users.ipa.redhat.com>
- <20240701170330-mutt-send-email-mst@kernel.org>
-Organization: Huawei Technologies Research and Development (UK) Ltd.
-X-Mailer: Claws Mail 4.1.0 (GTK 3.24.33; x86_64-w64-mingw32)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1sOeLb-0000VN-1d
+ for qemu-riscv@nongnu.org; Tue, 02 Jul 2024 10:19:08 -0400
+Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1sOeLZ-0007Hr-3u
+ for qemu-riscv@nongnu.org; Tue, 02 Jul 2024 10:19:06 -0400
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-424acf3226fso32981985e9.1
+ for <qemu-riscv@nongnu.org>; Tue, 02 Jul 2024 07:19:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1719929942; x=1720534742; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=XsgGTvTlNoxE2PA6imqpfUttw4MzXq9eE6nVA8ZM0LI=;
+ b=e0YjmpYC6cfPMwVGxqnCdK5gcOZyp/a/Vs2KrmdXlqA5J9/Eaa/bc+Ezdv5wTiBAlU
+ 40PuiZ/8HCaojifmFddZirmlachoV0JmA9UaBgmw7DRslnUn7t5siTMd9zZ3bLmQiWbQ
+ 37bOXza2J1ZYZ46zZSmHyc/boMbhXOhkBqCjz0is92C8eP36ni6moZ/hQ6tVUPpsghNV
+ I+mHVc1nlv8oy/a4377kCxBwKznV34JdVQ2mEPFRVUh/g8Q2YDVLIY9OJQJunPxTFD7G
+ TjfgUeTOt212ybC4esdR3sU/iBRQ4oQqJsIdFBZ6fvG4P6uunKWXb+pfYd/v+i7B/xGZ
+ MMYg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1719929942; x=1720534742;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=XsgGTvTlNoxE2PA6imqpfUttw4MzXq9eE6nVA8ZM0LI=;
+ b=PH9a17Q9kaArorg2AUOzSuqQh+hZizDOcVRJhIy0cEjWq6utT1q4DS2xKbF6YwMY19
+ vemRNR6XrnFx2E9F8y0gzf0dDEju4EBD4wmjuh6J+PT+RMXcrbDfWniBKFBVaeNByTpc
+ 7CI2/2LJKETHT88UDmONtimorcX3O+5cFnpFIWItZ5AwemzTsyK+IYsKc9GZb7o37lNE
+ wBhfzjseZkzs38GSA3O1lVsVWrLdkynMkjwad3xLhWI2OfvFA1YvcuG8LoUhaDKKJ43v
+ kVtm40z2a9S7UyfPKsw4A19alQsNqveAyREbzcF8tjknM5P4g36O0q0bPlw6si/8fm50
+ b80w==
+X-Gm-Message-State: AOJu0YwjuP60MfDXfr+HYvIMQlgpjS1LE+yYdSPd81Zct2tCzh6f2aza
+ 9HLvBJ6gliXLkwck8aRTOWHf5H7B5hWHqETmXtF18bu08YskXR495LsHf2ROUxs=
+X-Google-Smtp-Source: AGHT+IHB2KW4HfFI/kszd+A6pIMVdT+U6nAPiVRQ+9IWkRYmVuR5cqGXj2SRz9QG5th+nRHL8kDA1g==
+X-Received: by 2002:a05:600c:4f12:b0:425:675a:d52e with SMTP id
+ 5b1f17b1804b1-4257a02147cmr59664885e9.2.1719929942351; 
+ Tue, 02 Jul 2024 07:19:02 -0700 (PDT)
+Received: from [192.168.69.100] ([176.187.209.58])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4256b0c19eesm204892695e9.45.2024.07.02.07.19.00
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 02 Jul 2024 07:19:01 -0700 (PDT)
+Message-ID: <cad162ba-db4e-4acb-b45e-39053ebb02b0@linaro.org>
+Date: Tue, 2 Jul 2024 16:18:59 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="US-ASCII"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/6] target/riscv: Expose RV32 cpu to RV64 QEMU
+To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ dbarboza@ventanamicro.com, liwei1518@gmail.com, bmeng.cn@gmail.com,
+ TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
+References: <20240701033722.954-1-zhiwei_liu@linux.alibaba.com>
+Content-Language: en-US
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20240701033722.954-1-zhiwei_liu@linux.alibaba.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.203.174.77]
-X-ClientProxiedBy: lhrpeml100003.china.huawei.com (7.191.160.210) To
- lhrpeml500005.china.huawei.com (7.191.163.240)
-Received-SPF: pass client-ip=185.176.79.56;
- envelope-from=jonathan.cameron@huawei.com; helo=frasgout.his.huawei.com
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
+Received-SPF: pass client-ip=2a00:1450:4864:20::331;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x331.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -78,150 +92,78 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-to:  Jonathan Cameron <Jonathan.Cameron@Huawei.com>
-From:  Jonathan Cameron via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, 1 Jul 2024 17:03:43 -0400
-"Michael S. Tsirkin" <mst@redhat.com> wrote:
+Hi Zhiwei,
 
-> On Thu, Jun 27, 2024 at 02:18:03PM +0200, Igor Mammedov wrote:
-> > On Tue, 25 Jun 2024 20:38:39 +0530
-> > Sunil V L <sunilvl@ventanamicro.com> wrote:
-> >   
-> > > As per the step 5 in the process documented in bios-tables-test.c,
-> > > generate the expected ACPI AML data files for RISC-V using the
-> > > rebuild-expected-aml.sh script and update the
-> > > bios-tables-test-allowed-diff.h.
-> > > 
-> > > These are all new files being added for the first time. Hence, iASL diff
-> > > output is not added.
-> > > 
-> > > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-> > > Acked-by: Alistair Francis <alistair.francis@wdc.com>
-> > > Acked-by: Igor Mammedov <imammedo@redhat.com>  
-> > 
-> > Michael,
-> > can it go via risc-v tree or
-> > do you plan to merge it via your tree?  
+On 1/7/24 05:37, LIU Zhiwei wrote:
+> From: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
 > 
-> given patch 1 is merged, I took the rest.
-
-Looks like your CI runs are catching this as well but
-RHCT here is failing.  I rebased the GI/GP set on top of this
-and ignored that failure by skipping riscv64 tests.
-
-Jonathan
-
+> This patch set aims to expose 32-bit RISC-V cpu to RV64 QEMU. Thus
+> qemu-system-riscv64 can directly boot a RV32 Linux.
 > 
-> > > ---
-> > >  tests/data/acpi/riscv64/virt/APIC           | Bin 0 -> 116 bytes
-> > >  tests/data/acpi/riscv64/virt/DSDT           | Bin 0 -> 3518 bytes
-> > >  tests/data/acpi/riscv64/virt/FACP           | Bin 0 -> 276 bytes
-> > >  tests/data/acpi/riscv64/virt/MCFG           | Bin 0 -> 60 bytes
-> > >  tests/data/acpi/riscv64/virt/RHCT           | Bin 0 -> 314 bytes
-> > >  tests/data/acpi/riscv64/virt/SPCR           | Bin 0 -> 80 bytes
-> > >  tests/qtest/bios-tables-test-allowed-diff.h |   6 ------
-> > >  7 files changed, 6 deletions(-)
-> > > 
-> > > diff --git a/tests/data/acpi/riscv64/virt/APIC b/tests/data/acpi/riscv64/virt/APIC
-> > > index e69de29bb2d1d6434b8b29ae775ad8c2e48c5391..66a25dfd2d6ea2b607c024722b2eab95873a01e9 100644
-> > > GIT binary patch
-> > > literal 116
-> > > zcmZ<^@N_O=U|?X|;^gn_5v<@85#X!<1dKp25F13pfP@Mo12P{Zj?R|`s)2!c7=s}J
-> > > I#NvT*0o0BN0RR91
-> > > 
-> > > literal 0
-> > > HcmV?d00001
-> > > 
-> > > diff --git a/tests/data/acpi/riscv64/virt/DSDT b/tests/data/acpi/riscv64/virt/DSDT
-> > > index e69de29bb2d1d6434b8b29ae775ad8c2e48c5391..0fb2d5e0e389541209b765d5092d0706f40298f6 100644
-> > > GIT binary patch
-> > > literal 3518
-> > > zcmZvf%WvaU6vnR;w@IBxlQexl(t(j!ppl%0(ryq<oOYV3X-%9`q=14{b;M9K6c~^O
-> > > zgcx<fqhd2ti4B_~D)B!c1W2sdvE#L7!#}_>eCJ*}oI`D?w!iChKA+$9t$orAn%(bn
-> > > zN+n)t?0eh6a^of6TgGN7rRbcFh1Tyc_k%{iceZVNuIr}z+pT7<?)fc<HI?okw3^tr  
-> > > z>)qm0&dr&dmZB`a{a^Ra*0&D5Eo1b;X8Qm}E3gQ<btjYVdtTkbz7rISPX6ODvMUs3
-> > > zVE91w&KfCiza7@#@A>YkTOF1_DRa)WNl^t#{A^TNmZNji{btZCtt5&QPNDqU;E!+b    
-> > > zecnEQ^xc;~?0jvN=B?69B6sx0n@1<N?!0~c*1N~|jvlD2+E~Xu>-LMCh<kUhvyXCD
-> > > z|GVk1+UV8=+`16nn$W3iZBaGE(t=R0Su8V)L_|(iti)M3i8v3Jc_g_<E!HC$=dr;&
-> > > zZ0_+)tcM-v;WLjB?y(x{F%swTD)SiS9?!;ljK+DKGLIDZSc~;Y#d$nr9_i3y=NsQ^  
-> > > zu@zZ&*ReP}{EyK3th+T@*_*eqZ#4FX%O>b{iWO(USDtFAW3{YY{55g*p1P}!a8zWX
-> > > z7lz;IPVBzpJS=7G%wV8y2Q62ba|`EHRm#%1lYm%>L=vK=N;x|_7+?*WxKL3R0`umY
-> > > z&O>M<DHHxW7E8~>hKe$y(1g;N2-TU8l!<C|EEb%J4HacZp-Gd8P@M@$nW#v|VwsuP    
-> > > zP=$;-)Haz>@sOMoiwl`i1tW@cj+o4-cu3BPCB-VhD+4MD9hIDroD&Pl#Oi8OIy2%-
-> > > zNlr-4iRFXLXr|LTGn$gL<b>p$V}cX!M^n3=p)tt`$vN>NG_kr`M{qil6Owag1ZPHY
-> > > zW+W#h=gbPutl-Q_PDsv)?-Htwo@Y*Q<|HR1=gbSvyx`1BPDsu<E;z>p=eXpA<eYfp
-> > > zv*(GAkEvZhm4f7i<eWvpSrnW_$qC6hOM<f`I7^Zfl5<W7&I!ReAvqyAXIXHT1!q}u
-> > > zLUPVY!8s{7CnYB&=bRFpQ-X6!azb*>X~8)yIHx5iB<DoK!Jg-g;GB`1keqW?aLx+O  
-> > > zS;+~>Ip+lDoZy_3oRFMzUU1F}&UwiR$vGDU=Yrr|kera5b5U?E3eH8z3CTH^1m}|A    
-> > > zT#}rSoU<Z0D}u8kIUx;a@2q9hqcop+`Y3zu*6>5@qiM`L8Qmx@>rXnqyVu6bqy3;0
-> > > zSfN$e$O$X-aop-gjFlN1TJ2C(VM8aZsGs9rPsDhcG3gaHcG3%d9rt=N#><R_Ugd1x  
-> > > zYt+>h-rEXOMpLn!a_)bcQwbVUYCt>d6Z~go(OKwiV=x$e6rJOWm8FJLZ)jL(gSOQ9    
-> > > z(=101Q%{N90rg{iGreXyIPiUy_PU*2Ro)uw?+2cJexkhQVfAu5b@3W?^1b$-wSOuL  
-> > > z8($pWumAYmuXoN*92)^EIHqx|osu9QI;oM>2efl4w7)DozPM|Bh$~ecUA>%od=bT&    
-> > > z;R0PerC=JrI{7MZ#_1;2tCR9A{Hkc%mp4o`zpVZISFrki`_c5@?b)Ba_T|{c>*}hQ    
-> > > pv@F`;cR<_jYzAT_(hnb+<eKANn;)0v1k>|8pBtRxTSGr9{slF`>K_0A
-> > > 
-> > > literal 0
-> > > HcmV?d00001
-> > > 
-> > > diff --git a/tests/data/acpi/riscv64/virt/FACP b/tests/data/acpi/riscv64/virt/FACP
-> > > index e69de29bb2d1d6434b8b29ae775ad8c2e48c5391..a5276b65ea8ce46cc9b40d96d98f0669c9089ed4 100644
-> > > GIT binary patch
-> > > literal 276  
-> > > zcmZ>BbPf<<WME(ucJg=j2v%^42yj*a0-z8Bhz+8t3k1-OV?`GjD1M-;Zz#xa0OIBc    
-> > > A0RR91
-> > > 
-> > > literal 0
-> > > HcmV?d00001
-> > > 
-> > > diff --git a/tests/data/acpi/riscv64/virt/MCFG b/tests/data/acpi/riscv64/virt/MCFG
-> > > index e69de29bb2d1d6434b8b29ae775ad8c2e48c5391..37eb923a9320f5573c0c2cdb90bd98409cc7eb6f 100644
-> > > GIT binary patch
-> > > literal 60
-> > > rcmeZuc5}C3U|?Y6aq@Te2v%^42yj*a0!E-1hz+8VfB}^KA4CHH3`GY4
-> > > 
-> > > literal 0
-> > > HcmV?d00001
-> > > 
-> > > diff --git a/tests/data/acpi/riscv64/virt/RHCT b/tests/data/acpi/riscv64/virt/RHCT
-> > > index e69de29bb2d1d6434b8b29ae775ad8c2e48c5391..beaa961bbf0f0486c0dee25f543377c928354f84 100644
-> > > GIT binary patch
-> > > literal 314
-> > > zcmXAlu}%Xq42FGxD#XNyI`tt=C&buWx`A2-wkXNvbP-K1O46&8iKjrk6)SI3ey5h~
-> > > z@3-SPa`wCa{iPvl)b_RC9X8vKw|)adiC8n)zP^7d?+~A>`lE(^DK1@Wog4=(iq&1K  
-> > > z7;1J`gewX|OE=3Z>{xM3wM)ljIQKa+635YaZ7jrOeGc+eJEnks*|jl=GEUBVQ8WhX    
-> > > zK@<flJgso_nMF!k2aE&flg}m^e@2oQd6bm~m(n5!gJ?a<U{EgOALs#2D_Y&qJuA9g  
-> > > Pp1|9>GjINg;u`)Bd);9H    
-> > > 
-> > > literal 0
-> > > HcmV?d00001
-> > > 
-> > > diff --git a/tests/data/acpi/riscv64/virt/SPCR b/tests/data/acpi/riscv64/virt/SPCR
-> > > index e69de29bb2d1d6434b8b29ae775ad8c2e48c5391..4da9daf65f71a13ac2b488d4e9728f194b569a43 100644
-> > > GIT binary patch
-> > > literal 80  
-> > > zcmWFza1IJ!U|?X{>E!S15v<@85#X!<1dKp25F12;fdT`FDF9*%FmM4$c8~z`e;@#f    
-> > > G!2kgKJqrN<
-> > > 
-> > > literal 0
-> > > HcmV?d00001
-> > > 
-> > > diff --git a/tests/qtest/bios-tables-test-allowed-diff.h b/tests/qtest/bios-tables-test-allowed-diff.h
-> > > index 70474a097f..dfb8523c8b 100644
-> > > --- a/tests/qtest/bios-tables-test-allowed-diff.h
-> > > +++ b/tests/qtest/bios-tables-test-allowed-diff.h
-> > > @@ -1,7 +1 @@
-> > >  /* List of comma-separated changed AML files to ignore */
-> > > -"tests/data/acpi/riscv64/virt/APIC",
-> > > -"tests/data/acpi/riscv64/virt/DSDT",
-> > > -"tests/data/acpi/riscv64/virt/FACP",
-> > > -"tests/data/acpi/riscv64/virt/MCFG",
-> > > -"tests/data/acpi/riscv64/virt/RHCT",
-> > > -"tests/data/acpi/riscv64/virt/SPCR",  
+> This patch set has been tested with 6.9.0 Linux Image.
 > 
+> - Run RV64 QEMU with RV32 CPU
+> qemu-system-riscv64 -cpu rv32 -M virt -nographic \
+>      -kernel Image \
+>      -append "root=/dev/vda ro console=ttyS0" \
+>      -drive file=rootfs.ext2,format=raw,id=hd0 \
+>      -device virtio-blk-device,drive=hd0 -netdev user,id=net0 \
+>      -device virtio-net-device,netdev=net0
 > 
+> OpenSBI v1.4
+> QEMU emulator version 9.0.50 (v9.0.0-1132-g7799dc2e3b)
+> [    0.000000] Linux version 6.9.0 (developer@11109ca35736) (riscv32-unknown-linux-gnu-gcc (gc891d8dc23e-dirty) 13.2.0, GNU ld (GNU Binutils) 2.42) #3 SMP Fri May 31 08:42:15 UTC 2024
+> [    0.000000] random: crng init done
+> [    0.000000] OF: fdt: Ignoring memory range 0x80000000 - 0x80400000
+> [    0.000000] Machine model: riscv-virtio,qemu
+> [    0.000000] SBI specification v2.0 detected
+> [    0.000000] SBI implementation ID=0x1 Version=0x10004
+> [    0.000000] SBI TIME extension detected
+> [    0.000000] SBI IPI extension detected
+> [    0.000000] SBI RFENCE extension detected
+> [    0.000000] SBI SRST extension detected
+> [    0.000000] SBI DBCN extension detected
+> [    0.000000] efi: UEFI not found.
+> [    0.000000] OF: reserved mem: 0x80000000..0x8003ffff (256 KiB) nomap non-reusable mmode_resv1@80000000
+> [    0.000000] OF: reserved mem: 0x80040000..0x8004ffff (64 KiB) nomap non-reusable mmode_resv0@80040000
+> [    0.000000] Zone ranges:
+> [    0.000000]   Normal   [mem 0x0000000080400000-0x0000000087ffffff]
+> [    0.000000] Movable zone start for each node
+> [    0.000000] Early memory node ranges
+> [    0.000000]   node   0: [mem 0x0000000080400000-0x0000000087ffffff]
+> [    0.000000] Initmem setup node 0 [mem 0x0000000080400000-0x0000000087ffffff]
+> [    0.000000] On node 0, zone Normal: 1024 pages in unavailable ranges
+> [    0.000000] SBI HSM extension detected
+> [    0.000000] riscv: base ISA extensions acdfhim
+> [    0.000000] riscv: ELF capabilities acdfim
+> [    0.000000] percpu: Embedded 17 pages/cpu s37728 r8192 d23712 u69632
+> [    0.000000] Kernel command line: root=/dev/vda ro console=ttyS0
+> [    0.000000] Dentry cache hash table entries: 16384 (order: 4, 65536 bytes, linear)
+> [    0.000000] Inode-cache hash table entries: 8192 (order: 3, 32768 bytes, linear)
+> [    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 31465
+> [    0.000000] mem auto-init: stack:all(zero), heap alloc:off, heap free:off
+> [    0.000000] Virtual kernel memory layout:
+> [    0.000000]       fixmap : 0x9c800000 - 0x9d000000   (8192 kB)
+> [    0.000000]       pci io : 0x9d000000 - 0x9e000000   (  16 MB)
+> [    0.000000]      vmemmap : 0x9e000000 - 0xa0000000   (  32 MB)
+> [    0.000000]      vmalloc : 0xa0000000 - 0xc0000000   ( 512 MB)
+> [    0.000000]       lowmem : 0xc0000000 - 0xc7c00000   ( 124 MB)
+> [    0.000000] Memory: 95700K/126976K available (9090K kernel code, 8845K rwdata, 4096K rodata, 4231K init, 341K bss, 31276K reserved, 0K cma-reserved)
+> ...
+> Welcome to Buildroot
+> buildroot login: root
+> # cat /proc/cpuinfo
+> processor       : 0
+> hart            : 0
+> isa             : rv32imafdch_zicbom_zicboz_zicntr_zicsr_zifencei_zihintntl_zihintpause_zihpm_zfa_zba_zbb_zbc_zbs_sstc
+> mmu             : sv32
 
+Please provide an Avocado test (i.e. checking /proc/cpuinfo
+contains "isa             : rv32"). See for reference
+tests/avocado/boot_linux_console.py.
+
+Thanks!
 
