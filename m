@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46A4BC30658
-	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Jul 2024 02:29:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16A28C30658
+	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Jul 2024 02:34:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sOpjn-0007DJ-GV; Tue, 02 Jul 2024 22:28:53 -0400
+	id 1sOpoX-0001Iy-P8; Tue, 02 Jul 2024 22:33:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sOpjd-0007Av-Nq; Tue, 02 Jul 2024 22:28:41 -0400
-Received: from mail-vs1-xe34.google.com ([2607:f8b0:4864:20::e34])
+ id 1sOpoV-0001Hq-Nv; Tue, 02 Jul 2024 22:33:43 -0400
+Received: from mail-vs1-xe36.google.com ([2607:f8b0:4864:20::e36])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sOpjX-0000Qx-SO; Tue, 02 Jul 2024 22:28:41 -0400
-Received: by mail-vs1-xe34.google.com with SMTP id
- ada2fe7eead31-48fba334e95so1126484137.3; 
- Tue, 02 Jul 2024 19:28:34 -0700 (PDT)
+ id 1sOpoU-00016H-8N; Tue, 02 Jul 2024 22:33:43 -0400
+Received: by mail-vs1-xe36.google.com with SMTP id
+ ada2fe7eead31-48f415262f5so1646765137.1; 
+ Tue, 02 Jul 2024 19:33:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1719973713; x=1720578513; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1719974021; x=1720578821; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NiXduaWiYD5qIkM01mZLNm3kaGNDHrb5nF8q+7P8K+M=;
- b=HJqnvL6L+7auc20TGqoijz1aEMmwj+RjA/3cMr2gZHoWvqF30NSxMv9Gg8TjCwF1y/
- FHTn8JauaZnpfZRNotHL/8HIhCp7HadUPEGxlqNf8ZEbbGucCiBNnKdxwSD4Xjx0ZNnR
- W4WCDfG5XKK+CmWZQM9T+iHEsVCrFgw2toelN97PRqyJdpE9YV7+A6qnxEdPDSd+YPHh
- /EFRMSdHX8W4HB55dlVNWOQ77+UE2pnIOirXxQznxiZdLpjVLTpZrGBNaFN+HL+fS2xV
- bc8gYFeCyCLg1xfLX2c9UaaZFIEfpZOePGOeCEm7x6oG71p8kh/4/jvCSyNWj4MWmKg5
- QVnQ==
+ bh=Mw6tAMuoTW5Vj+xyoeT94JsWwl8HEiRb0KtBEG6/rpY=;
+ b=Kl7qxnk8C4ZbV8eyU79zijcn/YAp4bowBkypL0TCRmsC4bmbT9FY21xuC0kke1BGLv
+ FVySDIj8RU1oAmvmdW0YgefkjgTaIitcr25jEVY5U/+4Qwq+ZrU9Pi31/91vtCQjlZUe
+ 3exdNNTvkFuzpVnvQiLxpFkWHDf54RRWOpVptzPkb8/ZYYxId9mjMUFgLdB/dIAy1ZnJ
+ XuGTlb+1e6YCZSci3OZIB401/9GY+Q/Kx/fIH4xnGIw+0+mROWRL0PkpZqOuu5poNqGE
+ AP4EpO7UQIjgdmQCBbTf6L8c8v4fIvEbY8Z/UqLusIU2xhrfUtlwx/mBps11w6Eh7bij
+ Zj6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719973713; x=1720578513;
+ d=1e100.net; s=20230601; t=1719974021; x=1720578821;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NiXduaWiYD5qIkM01mZLNm3kaGNDHrb5nF8q+7P8K+M=;
- b=WmnbNDWbpyNypepIA6AxvADXIjGc+J/UHqglKJmoHKLKZQ3uNZaQ8jmIo5aTxxZnEK
- f5khOcRSbp5pNt7Kr3KaQTm7+0+AzfXqdrUlWQ9ZwJxYahMW7Or2qcagv2WzLpWCzOi8
- pbH3pzwXASPKudn2aHzq3PVRmoqiogvyfHbJpMhh8i9AhPC/fMyR5wbKjRbb8xWsWDqc
- uk6GsgsZPqSNX6Gq3dtwtciKW2LXDhI9kItUMDma8vPkuhjW02kKUTzFJHJpFSP8l75P
- w1NJ2q+ABHmrAWo3AzERqgWFxCXDLvCzTgIMna0MlBgPbIy1AnBpcwsgjASKlwpHjD0O
- lTRA==
+ bh=Mw6tAMuoTW5Vj+xyoeT94JsWwl8HEiRb0KtBEG6/rpY=;
+ b=aLGf+lwB3C+Ho9r0VplVGtLUS0PCRWnzzTJHf5YCXfLJfbMjCV/n88whRRRHIqW05Y
+ A8vtdHYOqAAdQ0ri3ZhCNs2jU4fqWQ8cIomSEuDlWl3W6nigjYA7/+oDgcn45LZTrLGP
+ qY4G/WEAqXHfNs3QBlqmrd1PRQHrX6wvxzXIgcLeF6t6Nr1sBfSY3Vh8VEcbSWBUHC73
+ xKzddYuFdEvlaU0ZU6byg5cGCTkF62gZQPGf7ukUYKqKd4/9UC62q3/Zf5x4R9X8FMJ4
+ ITbK0p9AM6bryzfpDNHsoGRYyn7uIdGc/jZfiEHziyGpPPFshnNR+MQXzkdh/SkOr7wb
+ MyzA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUTNRtutDs7XZOtNzgvSO6JTDgs9Qh8+F9yio/EYSZqFZ7Sg0ZdSciwoJI1I7i2I+tjWif/snBbEP7Ivqun6ezobUw9E/s=
-X-Gm-Message-State: AOJu0Yy48Rv0F+Nsxl3XIqXNXtRhhjJGGL5/olG+myyNCp8+8cbP36sP
- RFi8Uuz4ZuF4KBCcdNoZdFnqD79wCqrkzawPx4ePbRktwTlTGQGR7SQ7mKHcJJBZzhcsXFxwt7S
- nKslWk6Pb8Mm2sryb2K1DYxXPzT8=
-X-Google-Smtp-Source: AGHT+IE1EOe2lrn6YlbMdB7EN2CBH+miWh4iES7eq5fxPIH120aHo2MHIqpdSxkZG72BHyBs1tge/jAPtfJHUwj/h4w=
-X-Received: by 2002:a05:6102:3051:b0:48f:79de:909e with SMTP id
- ada2fe7eead31-48faf0cf385mr14421031137.18.1719973713187; Tue, 02 Jul 2024
- 19:28:33 -0700 (PDT)
+ AJvYcCVF9n6PqVGqoIUGozlHoNPUBUg9sr0TtrqiT2djXJEk2EdEjbxDMSTxlT9iqG5oLc8ICHzD/DyZOVL1FLq7W/N/03AFrWM=
+X-Gm-Message-State: AOJu0YwyVdmWtpls5Rd5A5YzEaJxTzOhz3kuWeoI6WuXM3BgektNEXTZ
+ wyEnZYG8G6gUCh53YYlA+qfB3v4afUSWijEzZV0x8LQ8ygQtll/qkjD/HSS5E44w4fcoxKPfOux
+ fcSKvINf5eCC73AA3kmyqi0XGcSTAIl+i
+X-Google-Smtp-Source: AGHT+IGyya1UrxRJEXfENJ6PY2srB36odp4fn50bha3gnl9XY14cULbf3biUpGKBMB0l+uJpiCGjaYP5jXnbh+i24R8=
+X-Received: by 2002:a05:6102:290b:b0:48f:a4ee:6d73 with SMTP id
+ ada2fe7eead31-48faf09ba65mr13297419137.11.1719974020732; Tue, 02 Jul 2024
+ 19:33:40 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240701033722.954-1-zhiwei_liu@linux.alibaba.com>
- <20240701033722.954-3-zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20240701033722.954-3-zhiwei_liu@linux.alibaba.com>
+ <20240701033722.954-5-zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20240701033722.954-5-zhiwei_liu@linux.alibaba.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 3 Jul 2024 12:28:07 +1000
-Message-ID: <CAKmqyKODJjaYJi8AOWNr_VrRB12JOsxhZyt_xD7axAVUVp5rMQ@mail.gmail.com>
-Subject: Re: [PATCH 2/6] target/riscv: Adjust PMP size for no-MMU RV64 QEMU
- running RV32
+Date: Wed, 3 Jul 2024 12:33:14 +1000
+Message-ID: <CAKmqyKPsCWRy2Fwpnv3LB5QXVujBHVBHqLUNrVDnG4rfXH5TVA@mail.gmail.com>
+Subject: Re: [PATCH 4/6] target/riscv: Detect sxl to set bit width for RV32 in
+ RV64
 To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com, 
  alistair.francis@wdc.com, dbarboza@ventanamicro.com, liwei1518@gmail.com, 
  bmeng.cn@gmail.com, TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e34;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe34.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e36;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe36.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -94,39 +94,80 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Jul 1, 2024 at 1:40=E2=80=AFPM LIU Zhiwei <zhiwei_liu@linux.alibaba=
+On Mon, Jul 1, 2024 at 1:41=E2=80=AFPM LIU Zhiwei <zhiwei_liu@linux.alibaba=
 .com> wrote:
 >
 > From: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
 >
-> Ensure pmp_size is correctly determined using mxl for RV32
-> in RV64 QEMU.
+> Ensure correct bit width based on sxl when running RV32 on RV64 QEMU.
+> This is required as MMU address translations run in S-mode.
 >
 > Signed-off-by: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
 > Reviewed-by: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+> ---
+>  target/riscv/cpu_helper.c | 15 +++++++++++----
+>  1 file changed, 11 insertions(+), 4 deletions(-)
+>
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 6709622dd3..1af83a0a36 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -887,12 +887,14 @@ static int get_physical_address(CPURISCVState *env,=
+ hwaddr *physical,
+>
+>      CPUState *cs =3D env_cpu(env);
+>      int va_bits =3D PGSHIFT + levels * ptidxbits + widened;
+> +    int sxlen =3D 16UL << riscv_cpu_sxl(env);
+> +    int sxlen_bytes =3D sxlen / 8;
+>
+>      if (first_stage =3D=3D true) {
+>          target_ulong mask, masked_msbs;
+>
+> -        if (TARGET_LONG_BITS > (va_bits - 1)) {
+> -            mask =3D (1L << (TARGET_LONG_BITS - (va_bits - 1))) - 1;
+> +        if (sxlen > (va_bits - 1)) {
+> +            mask =3D (1L << (sxlen - (va_bits - 1))) - 1;
+>          } else {
+>              mask =3D 0;
+>          }
+> @@ -961,7 +963,7 @@ restart:
+>
+>          int pmp_prot;
+>          int pmp_ret =3D get_physical_address_pmp(env, &pmp_prot, pte_add=
+r,
+> -                                               sizeof(target_ulong),
+> +                                               sxlen_bytes,
+>                                                 MMU_DATA_LOAD, PRV_S);
+>          if (pmp_ret !=3D TRANSLATE_SUCCESS) {
+>              return TRANSLATE_PMP_FAIL;
+> @@ -1113,7 +1115,7 @@ restart:
+>           *   it is no longer valid and we must re-walk the page table.
+>           */
+>          MemoryRegion *mr;
+> -        hwaddr l =3D sizeof(target_ulong), addr1;
+> +        hwaddr l =3D sxlen_bytes, addr1;
+>          mr =3D address_space_translate(cs->as, pte_addr, &addr1, &l,
+>                                       false, MEMTXATTRS_UNSPECIFIED);
+>          if (memory_region_is_ram(mr)) {
+> @@ -1126,6 +1128,11 @@ restart:
+>              *pte_pa =3D pte =3D updated_pte;
+>  #else
+>              target_ulong old_pte =3D qatomic_cmpxchg(pte_pa, pte, update=
+d_pte);
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+I think you missed removing this line
 
 Alistair
 
-> ---
->  target/riscv/pmp.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-> index 9eea397e72..f65aa3dba7 100644
-> --- a/target/riscv/pmp.c
-> +++ b/target/riscv/pmp.c
-> @@ -326,7 +326,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, hwaddr ad=
-dr,
->               */
->              pmp_size =3D -(addr | TARGET_PAGE_MASK);
->          } else {
-> -            pmp_size =3D sizeof(target_ulong);
-> +            pmp_size =3D 2UL << riscv_cpu_mxl(env);
->          }
->      } else {
->          pmp_size =3D size;
+> +            if (riscv_cpu_sxl(env) =3D=3D MXL_RV32) {
+> +                old_pte =3D qatomic_cmpxchg((uint32_t *)pte_pa, pte, upd=
+ated_pte);
+> +            } else {
+> +                old_pte =3D qatomic_cmpxchg(pte_pa, pte, updated_pte);
+> +            }
+>              if (old_pte !=3D pte) {
+>                  goto restart;
+>              }
 > --
 > 2.43.0
 >
