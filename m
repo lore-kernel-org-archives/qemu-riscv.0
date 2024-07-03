@@ -4,61 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E60CC30658
-	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Jul 2024 02:49:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03AE6C2BD09
+	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Jul 2024 07:33:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sOq33-0000pQ-59; Tue, 02 Jul 2024 22:48:45 -0400
+	id 1sOuUB-0005pp-Gb; Wed, 03 Jul 2024 03:33:05 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1sOq2y-0000oT-2a; Tue, 02 Jul 2024 22:48:40 -0400
-Received: from out30-99.freemail.mail.aliyun.com ([115.124.30.99])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1sOq2u-0003wv-1Y; Tue, 02 Jul 2024 22:48:38 -0400
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1sOuU3-0005o9-F3
+ for qemu-riscv@nongnu.org; Wed, 03 Jul 2024 03:32:55 -0400
+Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1sOuTz-0003Nb-Ty
+ for qemu-riscv@nongnu.org; Wed, 03 Jul 2024 03:32:55 -0400
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-367940c57ddso185601f8f.3
+ for <qemu-riscv@nongnu.org>; Wed, 03 Jul 2024 00:32:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux.alibaba.com; s=default;
- t=1719974902; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
- bh=oZQfr0Jy5PLi0K+/m6W0/6hdH8dA03lJTjwO0NUJGI8=;
- b=gi8GxTccdGKKUtfBEPNwcjzOEdsWJK5+Jokal5xV/xsDhwk+3iZK7dqhJEFFgLC66qxdChRXqj2ECo4tjHBrAZ7Ca9XIjitR82J5z++7SyAm4j62bAm/5aOzLWkGsuwbxkoYGCWU/Qua5TH3o2RQpHG4buW2v1ErG7eDQT+SgjA=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R121e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037067110;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
- TI=SMTPD_---0W9kOmtV_1719974901; 
-Received: from 30.166.64.126(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0W9kOmtV_1719974901) by smtp.aliyun-inc.com;
- Wed, 03 Jul 2024 10:48:21 +0800
-Message-ID: <8b300457-7cf6-4a43-9f4a-521dd8725f44@linux.alibaba.com>
-Date: Wed, 3 Jul 2024 10:46:58 +0800
+ d=linaro.org; s=google; t=1719991970; x=1720596770; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=FpsB9s20UCTB0SZs0L1kH+zkRRB/ERXs9I1d0JuM5TA=;
+ b=MgX5QA/STMKh7vcr/k/GNdAbnb+ttlUy0YJp548f+jBDJ8UAfIQVgDonpetdH67SYN
+ erZBjGCkaf2JoFboOkHYILolnLfeuIhK88OfVZWRjaYvJhtYV/A4Bge9ZY33DI/9mJWN
+ SDRMlC0GtA9ORoe+lyXnAaAGHP4ED1FucA58koh3Xpx5kaip84ib6gn4cvMGVDhTaf7R
+ V5MKobJaRqa2/+F6UVWMlFgZovy35/KNT8F4EGPIwAW7fVDxqU1VzRPkrjx0HkZbCOIn
+ 5VNZyo+TWAqWgsN+HG/4ElPAg2zOJHm5IBnZImCdd/nebe+akP6eQmJmN/+tc00sI3r0
+ /OKA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1719991970; x=1720596770;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=FpsB9s20UCTB0SZs0L1kH+zkRRB/ERXs9I1d0JuM5TA=;
+ b=WFpLAoZz4021k9wbf+DGlxpARgGMZ/pjex9+OEIoafbCiEyW8cW7qr3Qw5yc94i64G
+ nj8LtveB7PvgJdVsG4EW2q0UBA4BAQgnpq+rkx/MZ6sYDwISQNJAOFUw0DkMA63sI1Hb
+ EU9xxVAj3gPpr+WsMaEN76CyikhuSQhPzf8cmqwocjTXEI/jxG4yeUIcbW20XmbzGOgH
+ nYisnpiji8ESxmewe0Tmx5b4I7Jsr4txSvvJpsJ1yIJCx04LdZnNmbIj5UxGrW/GnMfJ
+ gW7saokEopz0VKqiGvnM3Dh+2bOMg3CjHr470zkZswtKWP4Dbs+G1e9rxriCym40x1Q8
+ lIRQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWF8t8Q5M+NtupuQKaff2EcNGYSPyrNk6xW8AbYuuqjvBMKH3pU0HRGgzYrr9lCdI/wfx6v+kKlBWE6kHAZXnUU5VLakCM=
+X-Gm-Message-State: AOJu0YzsGnb36mbzndzQRWAK8zZPXrIE0cZ2oqB6vN8Ylh13mLdCTL9p
+ ubTx03pBQuu/ph+qYALr9haV6ktgbgKcL3Zt+Nt4nmzocdW87KNjW4xT1IwsHYU=
+X-Google-Smtp-Source: AGHT+IEJo7nTX0DRFWc7yq0X7A6wDfzCwcy/Qn1RtUC+O+q6SSohP94k6lUO4Gp9smh+C3RDs0KSOw==
+X-Received: by 2002:a5d:6708:0:b0:366:e31a:500e with SMTP id
+ ffacd0b85a97d-3677572ffb1mr6151228f8f.63.1719991969714; 
+ Wed, 03 Jul 2024 00:32:49 -0700 (PDT)
+Received: from [192.168.69.100] ([176.187.220.97])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3675a103e5esm15070956f8f.108.2024.07.03.00.32.48
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 03 Jul 2024 00:32:49 -0700 (PDT)
+Message-ID: <d024c596-bc89-41aa-8c41-0aa170daa6ed@linaro.org>
+Date: Wed, 3 Jul 2024 09:32:47 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/6] target/riscv: Detect sxl to set bit width for RV32 in
- RV64
-To: Alistair Francis <alistair23@gmail.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com,
- alistair.francis@wdc.com, dbarboza@ventanamicro.com, liwei1518@gmail.com,
- bmeng.cn@gmail.com, TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
-References: <20240701033722.954-1-zhiwei_liu@linux.alibaba.com>
- <20240701033722.954-5-zhiwei_liu@linux.alibaba.com>
- <CAKmqyKPsCWRy2Fwpnv3LB5QXVujBHVBHqLUNrVDnG4rfXH5TVA@mail.gmail.com>
+Subject: Re: [PATCH 1/3] util/cpuinfo-riscv: Support host/cpuinfo.h for riscv
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Cc: brad@comstyle.com, Alistair.Francis@wdc.com, palmer@dabbelt.com,
+ qemu-riscv@nongnu.org
+References: <20240627180350.128575-1-richard.henderson@linaro.org>
+ <20240627180350.128575-2-richard.henderson@linaro.org>
+ <360734c3-df2a-49cb-892a-0eb7953fa1c1@linaro.org>
+ <57829ece-acde-4719-a82c-e3eef0daca84@linaro.org>
 Content-Language: en-US
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <CAKmqyKPsCWRy2Fwpnv3LB5QXVujBHVBHqLUNrVDnG4rfXH5TVA@mail.gmail.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <57829ece-acde-4719-a82c-e3eef0daca84@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.99;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-99.freemail.mail.aliyun.com
-X-Spam_score_int: -174
-X-Spam_score: -17.5
-X-Spam_bar: -----------------
-X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::42d;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42d.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -74,83 +99,17 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On 3/7/24 01:04, Richard Henderson wrote:
+> On 7/2/24 12:55, Philippe Mathieu-Daudé wrote:
+>> On 27/6/24 20:03, Richard Henderson wrote:
+> ...
+>>> +            info |= !got_sigill * CPUINFO_ZBA;
+>>
+>> A bit too optimized to my taste, 'if (sigill) info|=ZBA' would be 
+>> simpler to follow. 
+> 
+> I switched to "info |= got_sigill ? 0 : CPUINFO_ZBA".
 
-On 2024/7/3 10:33, Alistair Francis wrote:
-> On Mon, Jul 1, 2024 at 1:41 PM LIU Zhiwei <zhiwei_liu@linux.alibaba.com> wrote:
->> From: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
->>
->> Ensure correct bit width based on sxl when running RV32 on RV64 QEMU.
->> This is required as MMU address translations run in S-mode.
->>
->> Signed-off-by: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
->> Reviewed-by: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
->> ---
->>   target/riscv/cpu_helper.c | 15 +++++++++++----
->>   1 file changed, 11 insertions(+), 4 deletions(-)
->>
->> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
->> index 6709622dd3..1af83a0a36 100644
->> --- a/target/riscv/cpu_helper.c
->> +++ b/target/riscv/cpu_helper.c
->> @@ -887,12 +887,14 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
->>
->>       CPUState *cs = env_cpu(env);
->>       int va_bits = PGSHIFT + levels * ptidxbits + widened;
->> +    int sxlen = 16UL << riscv_cpu_sxl(env);
->> +    int sxlen_bytes = sxlen / 8;
->>
->>       if (first_stage == true) {
->>           target_ulong mask, masked_msbs;
->>
->> -        if (TARGET_LONG_BITS > (va_bits - 1)) {
->> -            mask = (1L << (TARGET_LONG_BITS - (va_bits - 1))) - 1;
->> +        if (sxlen > (va_bits - 1)) {
->> +            mask = (1L << (sxlen - (va_bits - 1))) - 1;
->>           } else {
->>               mask = 0;
->>           }
->> @@ -961,7 +963,7 @@ restart:
->>
->>           int pmp_prot;
->>           int pmp_ret = get_physical_address_pmp(env, &pmp_prot, pte_addr,
->> -                                               sizeof(target_ulong),
->> +                                               sxlen_bytes,
->>                                                  MMU_DATA_LOAD, PRV_S);
->>           if (pmp_ret != TRANSLATE_SUCCESS) {
->>               return TRANSLATE_PMP_FAIL;
->> @@ -1113,7 +1115,7 @@ restart:
->>            *   it is no longer valid and we must re-walk the page table.
->>            */
->>           MemoryRegion *mr;
->> -        hwaddr l = sizeof(target_ulong), addr1;
->> +        hwaddr l = sxlen_bytes, addr1;
->>           mr = address_space_translate(cs->as, pte_addr, &addr1, &l,
->>                                        false, MEMTXATTRS_UNSPECIFIED);
->>           if (memory_region_is_ram(mr)) {
->> @@ -1126,6 +1128,11 @@ restart:
->>               *pte_pa = pte = updated_pte;
->>   #else
->>               target_ulong old_pte = qatomic_cmpxchg(pte_pa, pte, updated_pte);
-> I think you missed removing this line
+Thanks :)
 
-Good catch.  We will fix this in v2 patch set.
-
-Thanks,
-Zhiwei
-
->
-> Alistair
->
->> +            if (riscv_cpu_sxl(env) == MXL_RV32) {
->> +                old_pte = qatomic_cmpxchg((uint32_t *)pte_pa, pte, updated_pte);
->> +            } else {
->> +                old_pte = qatomic_cmpxchg(pte_pa, pte, updated_pte);
->> +            }
->>               if (old_pte != pte) {
->>                   goto restart;
->>               }
->> --
->> 2.43.0
->>
->>
 
