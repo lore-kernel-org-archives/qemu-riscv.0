@@ -4,51 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74C67C2BD09
-	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Jul 2024 08:20:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9AF5C30653
+	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Jul 2024 08:20:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sOvDc-0008J3-FU; Wed, 03 Jul 2024 04:20:00 -0400
+	id 1sOvDv-0008Uk-3s; Wed, 03 Jul 2024 04:20:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ivan.klokov@syntacore.com>)
- id 1sOvDb-0008Ii-Cz; Wed, 03 Jul 2024 04:19:59 -0400
+ id 1sOvDj-0008Mb-3u; Wed, 03 Jul 2024 04:20:07 -0400
 Received: from mta-04.yadro.com ([89.207.88.248])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ivan.klokov@syntacore.com>)
- id 1sOvDV-0001Xe-Tx; Wed, 03 Jul 2024 04:19:58 -0400
-DKIM-Filter: OpenDKIM Filter v2.11.0 mta-04.yadro.com B03A6C0002
+ id 1sOvDV-0001YK-VT; Wed, 03 Jul 2024 04:20:06 -0400
+DKIM-Filter: OpenDKIM Filter v2.11.0 mta-04.yadro.com 9CBF6C0002
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
- s=mta-04; t=1719994787;
- bh=9LATfpfQH0xegHF6pdgkY3cHmRMwVxUDQ65gzLu8DDY=;
+ s=mta-04; t=1719994790;
+ bh=prcsTwi5I7mEiXMEbBIgQFKX18SycA5CTnU1CIbDC7w=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=JEMekhkG/rA0WGDUr91QSFEiebHSPWasIt/zMME8XyeRDjeDZx8HMrYEiGNrWwMZM
- EiwBd1n2+AeuM99HxUSJy+eBDNIhobDpE7XEE1tGlQa9FxL8uUa0SE80GSOx10xVtQ
- v4+sei1nsl8riVRfI3HjAaVMAmc6lLurPHMENE+X1lJVjXoVEz6Om+DP4B58ZnyL3x
- Nw8XkQbJULpPJoY6HBrSwXkUvmG06v3Zs1u4XrX78UiqU04kweGSBMed+xJQ0iqFjg
- HZhhMW8TdLlsgFLMVlZjueQOmYMQrhScBikOquTQ7lFQOdOSB4lB4IzXfQ8NU08rcv
- Ex0N4EGbn1B/g==
+ b=uONaH8QNHDE2kHkJXURkWhjWF0t+OqLdjrSsJUZ5tgt5w27GSvwrHoDzCFNAPY0QH
+ HKToSbod/i5ovRxDGb/t2fsPAJzP2ivkuQbkRgTLc/cJQ08xglY98kUKnvbT7RygrX
+ gVzyNiNEV6kOmwqckFyQScqhdZMM9L4mBPxlPWP/DGNF9mTKEnRryLBEeZ6DBSBABa
+ RbroXLIE6XCHuzMBqOn7TxpwgLF7zPpWNVMnjwlEaTCWq1pzt+cGCceKT3Igdg9afN
+ FJoDQYpx36IZgZ1vvQO3m0vCeb2hPlD9uKvgMNWRbjxb6X+oCH7WACKRbWqyCyin9q
+ qKZyodpbDipAw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
- s=mta-03; t=1719994787;
- bh=9LATfpfQH0xegHF6pdgkY3cHmRMwVxUDQ65gzLu8DDY=;
+ s=mta-03; t=1719994790;
+ bh=prcsTwi5I7mEiXMEbBIgQFKX18SycA5CTnU1CIbDC7w=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=QZ7NSmenaFGeVgiul6DCPWXhYB0HkBIZpQAjFEGEXO69dpTB7zInA2Njd7JPXk/F+
- +1Fd1sU5G9CVy8kP8VzVaKQs1Ovpr1mBKwuXdEHVAnlxswQM8kOhvAj18ZVjfSn7gl
- zPHwtLu04xf7IOnuitoTUyKT/y7c5HhqIhCCTgpRVN0B7Znjj6cAkno/SVCs+0riZc
- pSrmLdyB5AzkMvSBkz8gQhQZqiqzyJeZ17bkRkkRCGAKu0RLgwNju6ikLY6OSvPxtK
- ePjwNnCod0BLGxLJx4PwJLv80oI5dlq0uKycIw7CFMut4ZGHLtnoV/EJZdbD9GWzUM
- q6ImvGBi0Ac8Q==
+ b=o+bbl1I8Wbm/cwHhSU46nbawZAZKvuP7L/kasrWA465H2C3AVQ4RYZz0gQPC/od46
+ owHkn5fxRqJfEN3bloRwLx032lJU5QyX1lCe22k/qUKfkSN52SZiDRy1KeNTu9mD04
+ mNAJcxSeu8kTjTdtvDOF5QxIecaCS9GX6elJ2yipdUsndRC0JpF/3diKRHXIeTun5y
+ Hmw8EchJgWh66oCA10zTrwmyFGGEnuilghxxtPqgvCDMkX0duIIku8fe3kvnfV+k+s
+ Mmn3giiZxHYPIGqGTfXXLZSspO1okEaAtgoc4Of9uWy+HSNqFnpJDp20mXhZClAGV/
+ s5IAoAC2GChFQ==
 From: Ivan Klokov <ivan.klokov@syntacore.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-riscv@nongnu.org>, <palmer@dabbelt.com>, <bmeng.cn@gmail.com>,
  <liwei1518@gmail.com>, <dbarboza@ventanamicro.com>,
  <zhiwei_liu@linux.alibaba.com>, <thuth@redhat.com>, <lvivier@redhat.com>,
  <pbonzini@redhat.com>, Ivan Klokov <ivan.klokov@syntacore.com>
-Subject: [RFC PATCH v4 0/2] Support RISC-V CSR read/write in Qtest environment
-Date: Wed, 3 Jul 2024 11:19:37 +0300
-Message-ID: <20240703081939.498641-1-ivan.klokov@syntacore.com>
+Subject: [RFC PATCH v4 2/2] tests/qtest: QTest example for RISC-V CSR register
+Date: Wed, 3 Jul 2024 11:19:39 +0300
+Message-ID: <20240703081939.498641-3-ivan.klokov@syntacore.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240703081939.498641-1-ivan.klokov@syntacore.com>
+References: <20240703081939.498641-1-ivan.klokov@syntacore.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -60,7 +62,8 @@ X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ T_SPF_HELO_TEMPERROR=0.01,
  T_SPF_PERMERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -77,28 +80,120 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-These patches add functionality for unit testing RISC-V-specific registers.
-The first patch adds a Qtest backend, and the second implements a simple test.
+Added demo for reading CSR register from qtest environment.
 
+Signed-off-by: Ivan Klokov <ivan.klokov@syntacore.com>
 ---
-v4:
-   - Change wrapper to direct call
----
-
-Ivan Klokov (2):
-  target/riscv: Add RISC-V CSR qtest support
-  tests/qtest: QTest example for RISC-V CSR register
-
- target/riscv/cpu.c           | 17 +++++++
- target/riscv/cpu.h           |  3 ++
- target/riscv/csr.c           | 53 +++++++++++++++++++++-
- tests/qtest/libqtest.c       | 27 +++++++++++
- tests/qtest/libqtest.h       | 14 ++++++
  tests/qtest/meson.build      |  2 +
  tests/qtest/riscv-csr-test.c | 86 ++++++++++++++++++++++++++++++++++++
- 7 files changed, 201 insertions(+), 1 deletion(-)
+ 2 files changed, 88 insertions(+)
  create mode 100644 tests/qtest/riscv-csr-test.c
 
+diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
+index 12792948ff..45d651da99 100644
+--- a/tests/qtest/meson.build
++++ b/tests/qtest/meson.build
+@@ -259,6 +259,8 @@ qtests_s390x = \
+ qtests_riscv32 = \
+   (config_all_devices.has_key('CONFIG_SIFIVE_E_AON') ? ['sifive-e-aon-watchdog-test'] : [])
+ 
++qtests_riscv32 += ['riscv-csr-test']
++
+ qos_test_ss = ss.source_set()
+ qos_test_ss.add(
+   'ac97-test.c',
+diff --git a/tests/qtest/riscv-csr-test.c b/tests/qtest/riscv-csr-test.c
+new file mode 100644
+index 0000000000..e9af9ca724
+--- /dev/null
++++ b/tests/qtest/riscv-csr-test.c
+@@ -0,0 +1,86 @@
++/*
++ * QTest testcase for RISC-V CSRs
++ *
++ * Copyright (c) 2024 Syntacore.
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms of the GNU General Public License as published by the
++ * Free Software Foundation; either version 2 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
++ * for more details.
++ */
++
++#include "qemu/osdep.h"
++#include "libqtest-single.h"
++#include "libqtest.h"
++
++static uint64_t qcsr_call(QTestState *qts, const char *name, uint64_t cpu,
++                           int csrno, uint64_t *val)
++{
++    uint64_t res = 0;
++
++    res = qtest_csr_call(qts, name, cpu, csrno, val);
++
++    return res;
++}
++
++static int qcsr_get_csr(QTestState *qts, uint64_t cpu,
++        int csrno, uint64_t *val)
++{
++    int res;
++
++    res = qcsr_call(qts, "get_csr", cpu, csrno, val);
++
++    return res;
++}
++
++static int qcsr_set_csr(QTestState *qts, uint64_t cpu,
++        int csrno, uint64_t *val)
++{
++    int res;
++
++    res = qcsr_call(qts, "set_csr", cpu, csrno, val);
++
++    return res;
++}
++
++static void run_test_csr(void)
++{
++
++    uint64_t res;
++    uint64_t val = 0;
++
++    res = qcsr_call(global_qtest, "get_csr", 0, 0xf11, &val);
++
++    g_assert_cmpint(res, ==, 0);
++    g_assert_cmpint(val, ==, 0x100);
++
++    val = 0xff;
++    res = qcsr_call(global_qtest, "set_csr", 0, 0x342, &val);
++
++    g_assert_cmpint(res, ==, 0);
++
++    val = 0;
++    res = qcsr_call(global_qtest, "get_csr", 0, 0x342, &val);
++
++    g_assert_cmpint(res, ==, 0);
++    g_assert_cmpint(val, ==, 0xff);
++
++    qtest_quit(global_qtest);
++}
++
++int main(int argc, char **argv)
++{
++    g_test_init(&argc, &argv, NULL);
++
++    qtest_add_func("/cpu/csr", run_test_csr);
++
++    qtest_start("-machine virt -cpu any,mvendorid=0x100");
++
++    return g_test_run();
++
++}
 -- 
 2.34.1
 
