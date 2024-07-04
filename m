@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F7B7C31D97
-	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Jul 2024 03:01:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AA8DC2BD09
+	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Jul 2024 03:01:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sPCiw-0004eB-LR; Wed, 03 Jul 2024 23:01:30 -0400
+	id 1sPCiP-0004HE-6V; Wed, 03 Jul 2024 23:00:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1sPCiZ-0004NW-3C; Wed, 03 Jul 2024 23:01:12 -0400
+ id 1sPCiN-0004G5-QB; Wed, 03 Jul 2024 23:00:55 -0400
 Received: from mgamail.intel.com ([198.175.65.9])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1sPCiX-0003xS-4Q; Wed, 03 Jul 2024 23:01:06 -0400
+ id 1sPCiM-0003xS-3g; Wed, 03 Jul 2024 23:00:55 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1720062065; x=1751598065;
+ t=1720062054; x=1751598054;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=fujCsC8Dys68Pql9dJtKAju+zQdGhBxq4c+kPZSh5nE=;
- b=HHPDjDlo5MWu8JLbTqS+H2ZzSyGJgbG+v8Xa4U3qGXouW8Syw+TA0snZ
- w/t1HHmubvNKciW3bbIdKFTBCgxXJKHmtCxNWPai5ET0Ulslw/3iRalDx
- +ts7gdhJstGeit2suyfLFnCvSzAXpEHySyJz8oSGz5uQP4smh8NiwgM+u
- fkOPf7koiFeDUEuPN1qCiBoUipHMSy+ABf4exZR95xSZBD6cqorH9HU8z
- j3SFqNRbUx2reyqH/WQmtZ++Cry9S+ngXEV+ECncNF6qai+3JZmrj6/XR
- 28a/XLbpxx9OBX3aUpIAjLmPg1WPA2OIZr5vD5Afrinsfan80oE9eq12j Q==;
-X-CSE-ConnectionGUID: 5553mfo1SjearwrrZt3f6g==
-X-CSE-MsgGUID: rP7cm1wRQ0ib0B0zLEKefA==
-X-IronPort-AV: E=McAfee;i="6700,10204,11122"; a="39838143"
-X-IronPort-AV: E=Sophos;i="6.09,183,1716274800"; d="scan'208";a="39838143"
+ bh=O2y+4W7xDQI5Ehrauiwct9/OVeYocKJKMH4u39+XG9I=;
+ b=BnSROBXNpjhR31sCzG7B7fnbTJcuedD2sHZLx9s5fupqr17eWLrQvx3z
+ F+UOIaAuQ+EVQfYegWUoVMIETw1jTTHB8Q2x2JS01r9M0bIW1CpuZg2yM
+ x3IHK+ZlZo8MXhQ7E1Pts9D3YcyyEYUQQlgUaK6+e5yWXpvYpkR5wKI+F
+ 0NUvMX+kIY9f6pZKiJuVNBHm56S6gh3iVS1joPvVIIQ1/8SgGIOCFDK0J
+ 8VqGxBTvTN2p7zCJPUn8bHox9j/XOSYH1C8xY6T8hhPNuPluULmKQdCdi
+ LTKsIs4fBaR5kUc8x4B7RbSD3WM+mk9nZ+0pTIc0/GqkR6bLLdY3QQrTg w==;
+X-CSE-ConnectionGUID: Q3u6i+pLTv2190uI0+3MEA==
+X-CSE-MsgGUID: ql6Buj0JTwqNGae5/csNAA==
+X-IronPort-AV: E=McAfee;i="6700,10204,11122"; a="39838113"
+X-IronPort-AV: E=Sophos;i="6.09,183,1716274800"; d="scan'208";a="39838113"
 Received: from fmviesa004.fm.intel.com ([10.60.135.144])
  by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 03 Jul 2024 20:01:03 -0700
-X-CSE-ConnectionGUID: SWw29a7FTiSSxRr5IbNo7w==
-X-CSE-MsgGUID: P2ER7FN4T+qcoemaxtpO5w==
+ 03 Jul 2024 20:00:51 -0700
+X-CSE-ConnectionGUID: /7A5MSBTTam4dTB6DCKBFg==
+X-CSE-MsgGUID: azFKFs3BSMWR4qbPeaPRsg==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.09,183,1716274800"; d="scan'208";a="51052438"
+X-IronPort-AV: E=Sophos;i="6.09,183,1716274800"; d="scan'208";a="51052203"
 Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
- by fmviesa004.fm.intel.com with ESMTP; 03 Jul 2024 20:00:58 -0700
+ by fmviesa004.fm.intel.com with ESMTP; 03 Jul 2024 20:00:43 -0700
 From: Zhao Liu <zhao1.liu@intel.com>
 To: =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
  Eduardo Habkost <eduardo@habkost.net>,
@@ -62,10 +62,9 @@ Cc: qemu-devel@nongnu.org, kvm@vger.kernel.org, qemu-riscv@nongnu.org,
  qemu-arm@nongnu.org, Zhenyu Wang <zhenyu.z.wang@intel.com>,
  Dapeng Mi <dapeng1.mi@linux.intel.com>, Yongwei Ma <yongwei.ma@intel.com>,
  Zhao Liu <zhao1.liu@intel.com>
-Subject: [PATCH 6/8] i386/cpu: Update cache topology with machine's
- configuration
-Date: Thu,  4 Jul 2024 11:16:01 +0800
-Message-Id: <20240704031603.1744546-7-zhao1.liu@intel.com>
+Subject: [PATCH 3/8] hw/core: Add smp cache topology for machine
+Date: Thu,  4 Jul 2024 11:15:58 +0800
+Message-Id: <20240704031603.1744546-4-zhao1.liu@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240704031603.1744546-1-zhao1.liu@intel.com>
 References: <20240704031603.1744546-1-zhao1.liu@intel.com>
@@ -95,75 +94,91 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-User will configure smp cache topology via smp-cache object.
+With smp-cache object support, add smp cache topology for machine by
+linking the smp-cache object.
 
-For this case, update the x86 CPUs' cache topology with user's
-configuration in MachineState.
+Also add a helper to access cache topology level.
 
 Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
 ---
 Changes since RFC v2:
- * Used smp_cache array to override cache topology.
- * Wrapped the updating into a function.
+ * Linked machine's smp_cache to smp-cache object instead of a builtin
+   structure. This is to get around the fact that the keyval format of
+   -machine can't support JSON.
+ * Wrapped the cache topology level access into a helper.
 ---
- target/i386/cpu.c | 37 +++++++++++++++++++++++++++++++++++++
- 1 file changed, 37 insertions(+)
+ hw/core/machine-smp.c | 6 ++++++
+ hw/core/machine.c     | 9 +++++++++
+ include/hw/boards.h   | 5 ++++-
+ 3 files changed, 19 insertions(+), 1 deletion(-)
 
-diff --git a/target/i386/cpu.c b/target/i386/cpu.c
-index 0ddbfa577caf..403a089111ca 100644
---- a/target/i386/cpu.c
-+++ b/target/i386/cpu.c
-@@ -7568,6 +7568,38 @@ static void x86_cpu_hyperv_realize(X86CPU *cpu)
-     cpu->hyperv_limits[2] = 0;
- }
- 
-+#ifndef CONFIG_USER_ONLY
-+static void x86_cpu_update_smp_cache_topo(MachineState *ms, X86CPU *cpu)
-+{
-+    CPUX86State *env = &cpu->env;
-+    CpuTopologyLevel level;
-+
-+    level = machine_get_cache_topo_level(ms, SMP_CACHE_L1D);
-+    if (level != CPU_TOPO_LEVEL_DEFAULT) {
-+        env->cache_info_cpuid4.l1d_cache->share_level = level;
-+        env->cache_info_amd.l1d_cache->share_level = level;
-+    }
-+
-+    level = machine_get_cache_topo_level(ms, SMP_CACHE_L1I);
-+    if (level != CPU_TOPO_LEVEL_DEFAULT) {
-+        env->cache_info_cpuid4.l1i_cache->share_level = level;
-+        env->cache_info_amd.l1i_cache->share_level = level;
-+    }
-+
-+    level = machine_get_cache_topo_level(ms, SMP_CACHE_L2);
-+    if (level != CPU_TOPO_LEVEL_DEFAULT) {
-+        env->cache_info_cpuid4.l2_cache->share_level = level;
-+        env->cache_info_amd.l2_cache->share_level = level;
-+    }
-+
-+    level = machine_get_cache_topo_level(ms, SMP_CACHE_L3);
-+    if (level != CPU_TOPO_LEVEL_DEFAULT) {
-+        env->cache_info_cpuid4.l3_cache->share_level = level;
-+        env->cache_info_amd.l3_cache->share_level = level;
-+    }
-+}
-+#endif
-+
- static void x86_cpu_realizefn(DeviceState *dev, Error **errp)
+diff --git a/hw/core/machine-smp.c b/hw/core/machine-smp.c
+index 5d8d7edcbd3f..88a73743eb1c 100644
+--- a/hw/core/machine-smp.c
++++ b/hw/core/machine-smp.c
+@@ -270,3 +270,9 @@ unsigned int machine_topo_get_threads_per_socket(const MachineState *ms)
  {
-     CPUState *cs = CPU(dev);
-@@ -7792,6 +7824,11 @@ static void x86_cpu_realizefn(DeviceState *dev, Error **errp)
- 
- #ifndef CONFIG_USER_ONLY
-     MachineState *ms = MACHINE(qdev_get_machine());
+     return ms->smp.threads * machine_topo_get_cores_per_socket(ms);
+ }
 +
-+    if (ms->smp_cache) {
-+        x86_cpu_update_smp_cache_topo(ms, cpu);
-+    }
-+
-     qemu_register_reset(x86_cpu_machine_reset_cb, cpu);
++CpuTopologyLevel machine_get_cache_topo_level(const MachineState *ms,
++                                              SMPCacheName cache)
++{
++    return ms->smp_cache->props[cache].topo;
++}
+diff --git a/hw/core/machine.c b/hw/core/machine.c
+index 655d75c21fc1..09ef9fcd4a0b 100644
+--- a/hw/core/machine.c
++++ b/hw/core/machine.c
+@@ -1045,6 +1045,15 @@ static void machine_class_init(ObjectClass *oc, void *data)
+     object_class_property_set_description(oc, "smp",
+         "CPU topology");
  
-     if (cpu->env.features[FEAT_1_EDX] & CPUID_APIC || ms->smp.cpus > 1) {
++    /* TODO: Implement check() method based on machine support. */
++    object_class_property_add_link(oc, "smp-cache",
++                                   TYPE_SMP_CACHE,
++                                   offsetof(MachineState, smp_cache),
++                                   object_property_allow_set_link,
++                                   OBJ_PROP_LINK_STRONG);
++    object_class_property_set_description(oc, "smp-cache",
++        "SMP cache property");
++
+     object_class_property_add(oc, "phandle-start", "int",
+         machine_get_phandle_start, machine_set_phandle_start,
+         NULL, NULL);
+diff --git a/include/hw/boards.h b/include/hw/boards.h
+index ef6f18f2c1a7..56fa252cfcd2 100644
+--- a/include/hw/boards.h
++++ b/include/hw/boards.h
+@@ -6,10 +6,10 @@
+ #include "exec/memory.h"
+ #include "sysemu/hostmem.h"
+ #include "sysemu/blockdev.h"
+-#include "qapi/qapi-types-machine.h"
+ #include "qemu/module.h"
+ #include "qom/object.h"
+ #include "hw/core/cpu.h"
++#include "hw/core/smp-cache.h"
+ 
+ #define TYPE_MACHINE_SUFFIX "-machine"
+ 
+@@ -45,6 +45,8 @@ void machine_parse_smp_config(MachineState *ms,
+                               const SMPConfiguration *config, Error **errp);
+ unsigned int machine_topo_get_cores_per_socket(const MachineState *ms);
+ unsigned int machine_topo_get_threads_per_socket(const MachineState *ms);
++CpuTopologyLevel machine_get_cache_topo_level(const MachineState *ms,
++                                              SMPCacheName cache);
+ void machine_memory_devices_init(MachineState *ms, hwaddr base, uint64_t size);
+ 
+ /**
+@@ -409,6 +411,7 @@ struct MachineState {
+     AccelState *accelerator;
+     CPUArchIdList *possible_cpus;
+     CpuTopology smp;
++    SMPCache *smp_cache;
+     struct NVDIMMState *nvdimms_state;
+     struct NumaState *numa_state;
+ };
 -- 
 2.34.1
 
