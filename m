@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3A2AC31D97
-	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Jul 2024 03:01:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8BF3C2BD09
+	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Jul 2024 03:01:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sPCiC-00048G-2e; Wed, 03 Jul 2024 23:00:44 -0400
+	id 1sPCiI-0004BR-Q1; Wed, 03 Jul 2024 23:00:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1sPCi7-000478-UP; Wed, 03 Jul 2024 23:00:39 -0400
+ id 1sPCiG-0004AB-UH; Wed, 03 Jul 2024 23:00:48 -0400
 Received: from mgamail.intel.com ([198.175.65.9])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1sPCi5-0003uz-Q4; Wed, 03 Jul 2024 23:00:39 -0400
+ id 1sPCiE-0003xS-PA; Wed, 03 Jul 2024 23:00:48 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1720062038; x=1751598038;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=KBoR7Jmf7Pr5F6X5IGhcrEKtNKryr9HfJ/qoLYd34tM=;
- b=edPyGbco9XyA5E6z1Gu4klSHOVg6N7hR0jzoUGxULZQyTb83HtwgIo9U
- 2wJH40rzRVHxcKN2RPjvTDCJANoxCezIeDIMAVarGuKAPsGY6wVKabZ9a
- CiJXgeEwT0Hs+ve62OYKcwtPPzxEqr1uWLrAF5FQ4xtkY/Mpxf2VDCuQi
- RJ99q9+dRrZsW6hBA5QGgAuGRdGKQKqH9YTEqzLEG0pTSr4yHaPSv/PyY
- 5R9ZkJS4xB2VdghKUXLPhthKsteisOtwRIfXtE1Ny5KNxOx22m8tK+2No
- 8+CZur1dbLhD/TjHEX0ldDCZ6Hx2h2S7SzH6/U7WJ58lWn7jJy9fgiicM g==;
-X-CSE-ConnectionGUID: CkuLZ9OPSkSkp7cTO3VHuw==
-X-CSE-MsgGUID: qKcQkr1tTimXoPd1hMunJA==
-X-IronPort-AV: E=McAfee;i="6700,10204,11122"; a="39838046"
-X-IronPort-AV: E=Sophos;i="6.09,183,1716274800"; d="scan'208";a="39838046"
+ t=1720062047; x=1751598047;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=4VH/b1FVdYaezQBLyS+kZwfI3T4jbK9VUPHg1kOSC0s=;
+ b=W4TI8R1UWBpzFdh9hxDJdTxNXaWluF90bHNPMUMegHz8+qqe0aC6OYR3
+ kNCVsBe2xBOCz6mTndrCNwiIsSV0qGYijwAAEHSu60fWP2BD0EUtbP2zM
+ /KbGPC6NfdpDMTgZTMmLV2+uiMrZLfWT3XDxU7OXj+U5HNNv+vAs23HZV
+ AXxSKaCFg2rbdJCQwe/VLWOkbT4TW2VfpttWSqsnpQUsGv27CLG0tDv3R
+ sTw1UkX0GddoxAf9N+Ffd1GQDvyk8w2ckmxMFkqpsfYB6hs07S2njI12S
+ NNjYpboT80WYm+RDlR1mFheTit64kn+RWnVImqJ1Mqrln75nOliS8PZIb Q==;
+X-CSE-ConnectionGUID: xaavcG8+SeiklKurRVCjpA==
+X-CSE-MsgGUID: TiMQn1onSMyT44+kD/LN9Q==
+X-IronPort-AV: E=McAfee;i="6700,10204,11122"; a="39838090"
+X-IronPort-AV: E=Sophos;i="6.09,183,1716274800"; d="scan'208";a="39838090"
 Received: from fmviesa004.fm.intel.com ([10.60.135.144])
  by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 03 Jul 2024 20:00:33 -0700
-X-CSE-ConnectionGUID: dGDY2TfnTCKtQ4Qs7N3qfQ==
-X-CSE-MsgGUID: R7lm3lAoSgCI7aZI4Ltnlg==
+ 03 Jul 2024 20:00:43 -0700
+X-CSE-ConnectionGUID: MdfPppBnTPiNsHH28MY2fQ==
+X-CSE-MsgGUID: 9PGc1LQSSqCR74sBHleRWQ==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.09,183,1716274800"; d="scan'208";a="51052086"
+X-IronPort-AV: E=Sophos;i="6.09,183,1716274800"; d="scan'208";a="51052151"
 Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
- by fmviesa004.fm.intel.com with ESMTP; 03 Jul 2024 20:00:27 -0700
+ by fmviesa004.fm.intel.com with ESMTP; 03 Jul 2024 20:00:38 -0700
 From: Zhao Liu <zhao1.liu@intel.com>
 To: =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
  Eduardo Habkost <eduardo@habkost.net>,
@@ -62,10 +62,12 @@ Cc: qemu-devel@nongnu.org, kvm@vger.kernel.org, qemu-riscv@nongnu.org,
  qemu-arm@nongnu.org, Zhenyu Wang <zhenyu.z.wang@intel.com>,
  Dapeng Mi <dapeng1.mi@linux.intel.com>, Yongwei Ma <yongwei.ma@intel.com>,
  Zhao Liu <zhao1.liu@intel.com>
-Subject: [PATCH 0/8] Introduce SMP Cache Topology
-Date: Thu,  4 Jul 2024 11:15:55 +0800
-Message-Id: <20240704031603.1744546-1-zhao1.liu@intel.com>
+Subject: [PATCH 2/8] qapi/qom: Introduce smp-cache object
+Date: Thu,  4 Jul 2024 11:15:57 +0800
+Message-Id: <20240704031603.1744546-3-zhao1.liu@intel.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240704031603.1744546-1-zhao1.liu@intel.com>
+References: <20240704031603.1744546-1-zhao1.liu@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=198.175.65.9; envelope-from=zhao1.liu@intel.com;
@@ -92,119 +94,328 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi all,
+Introduce smp-cache object so that user could define cache properties.
 
-Since the previous RFC v2, I've reimplemented smp-cache object based on
-Daniel's comment (thanks Daniel!), which is both flexible to support
-current cache topology requirements and extensible.
+In smp-cache object, define cache topology based on CPU topology level
+with two reasons:
 
-So, I officially convert the RFC to PATCH.
+1. In practice, a cache will always be bound to the CPU container
+   (either private in the CPU container or shared among multiple
+   containers), and CPU container is often expressed in terms of CPU
+   topology level.
+2. The x86's cache-related CPUIDs encode cache topology based on APIC
+   ID's CPU topology layout. And the ACPI PPTT table that ARM/RISCV
+   relies on also requires CPU containers to help indicate the private
+   shared hierarchy of the cache. Therefore, for SMP systems, it is
+   natural to use the CPU topology hierarchy directly in QEMU to define
+   the cache topology.
 
-Background on smp cache topology can be found in the previous RFC v2
-cover letter:
+Currently, separated L1 cache (L1 data cache and L1 instruction cache)
+with unified higher-level cache (e.g., unified L2 and L3 caches), is the
+most common cache architectures.
 
-https://lore.kernel.org/qemu-devel/20240530101539.768484-1-zhao1.liu@intel.com/
+Therefore, enumerate the L1 D-cache, L1 I-cache, L2 cache and L3 cache
+with smp-cache object to add the basic cache topology support.
 
-The following content focuses on this series implementation of the
-smp-cache object.
-
-
-About smp-cache
-===============
-
-In fact, the smp-cache object introduced in this series is a bit
-different from Daniel's original suggestion. Instead of being integrated
-into -smp, it is created explicitly via -object, and the smp-cache
-property is added to -machine to link to this object.
-
-An example is as follows:
-
--object '{"qom-type":"smp-cache","id":"cache0","caches":[{"name":"l1d","topo":"core"},{"name":"l1i","topo":"core"},{"name":"l2","topo":"module"},{"name":"l3","topo":"socket"}]}'
--machine smp-cache=cache0
-
-
-Such the design change is based on the following 2 reasons:
- * Defining the cache with a JSON list is very extensible and can
-   support more cache properties.
-
- * But -smp, as the sugar of machine property "smp", is based on keyval
-   format, and doesn't support options with JSON format. Thus it's not
-   possible to add a JSON format based option to -smp/-machine for now.
-
-So, I decoupled the creation of the smp-cache object from the -machine
-to make both -machine and -object happy!
-
-
-Welcome your feedback!
-
-
-Thanks and Best Regards,
-Zhao
+Suggested-by: Daniel P. Berrange <berrange@redhat.com>
+Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
 ---
-Changelog:
-
-Main changes since RFC v2:
- * Dropped cpu-topology.h and cpu-topology.c since QAPI has the helper
-   (CpuTopologyLevel_str) to convert enum to string. (Markus)
- * Fixed text format in machine.json (CpuTopologyLevel naming, 2 spaces
-   between sentences). (Markus)
- * Added a new level "default" to de-compatibilize some arch-specific
-   topo settings. (Daniel)
- * Moved CpuTopologyLevel to qapi/machine-common.json, at where the
-   cache enumeration and smp-cache object would be added.
-   - If smp-cache object is defined in qapi/machine.json, storage-daemon
-     will complain about the qmp cmds in qapi/machine.json during
-     compiling.
+Suggested by credit:
  * Referred to Daniel's suggestion to introduce cache JSON list, though
    as a standalone object since -smp/-machine can't support JSON.
- * Linked machine's smp_cache to smp-cache object instead of a builtin
-   structure. This is to get around the fact that the keyval format of
-   -machine can't support JSON.
- * Wrapped the cache topology level access into a helper.
- * Split as a separate commit to just include compatibility checking and
-   topology checking.
- * Allow setting "default" topology level even though the cache
-   isn't supported by machine. (Daniel)
- * Rewrote the document of smp-cache object.
-
-Main changes since RFC v1:
- * Split CpuTopology renaimg out of this RFC.
- * Use QAPI to enumerate CPU topology levels.
- * Drop string_to_cpu_topo() since QAPI will help to parse the topo
-   levels.
- * Set has_*_cache field in machine_get_smp(). (JeeHeng)
- * Use "*_cache=topo_level" as -smp example as the original "level"
-   term for a cache has a totally different meaning. (Jonathan)
 ---
-Zhao Liu (8):
-  hw/core: Make CPU topology enumeration arch-agnostic
-  qapi/qom: Introduce smp-cache object
-  hw/core: Add smp cache topology for machine
-  hw/core: Check smp cache topology support for machine
-  i386/cpu: Support thread and module level cache topology
-  i386/cpu: Update cache topology with machine's configuration
-  i386/pc: Support cache topology in -machine for PC machine
-  qemu-options: Add the description of smp-cache object
-
+Changes since RFC v2:
+ * New commit to implement cache list with JSON format instead of
+   multiple sub-options in -smp.
+---
  MAINTAINERS                 |   2 +
- hw/core/machine-smp.c       |  86 ++++++++++++++++++++++++++++++
- hw/core/machine.c           |  22 ++++++++
  hw/core/meson.build         |   1 +
  hw/core/smp-cache.c         | 103 ++++++++++++++++++++++++++++++++++++
- hw/i386/pc.c                |   4 ++
- include/hw/boards.h         |  11 +++-
  include/hw/core/smp-cache.h |  27 ++++++++++
- include/hw/i386/topology.h  |  18 +------
- qapi/machine-common.json    |  97 ++++++++++++++++++++++++++++++++-
+ qapi/machine-common.json    |  50 +++++++++++++++++
  qapi/qapi-schema.json       |   4 +-
  qapi/qom.json               |   3 ++
- qemu-options.hx             |  58 ++++++++++++++++++++
- target/i386/cpu.c           |  83 +++++++++++++++++++++--------
- target/i386/cpu.h           |   4 +-
- 15 files changed, 478 insertions(+), 45 deletions(-)
+ 7 files changed, 188 insertions(+), 2 deletions(-)
  create mode 100644 hw/core/smp-cache.c
  create mode 100644 include/hw/core/smp-cache.h
 
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 6725913c8b3a..b5391a7538de 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1885,12 +1885,14 @@ F: hw/core/machine.c
+ F: hw/core/machine-smp.c
+ F: hw/core/null-machine.c
+ F: hw/core/numa.c
++F: hw/core/smp-cache.c
+ F: hw/cpu/cluster.c
+ F: qapi/machine.json
+ F: qapi/machine-common.json
+ F: qapi/machine-target.json
+ F: include/hw/boards.h
+ F: include/hw/core/cpu.h
++F: include/hw/core/smp-cache.h
+ F: include/hw/cpu/cluster.h
+ F: include/sysemu/numa.h
+ F: tests/unit/test-smp-parse.c
+diff --git a/hw/core/meson.build b/hw/core/meson.build
+index a3d9bab9f42a..6d3dae3af62e 100644
+--- a/hw/core/meson.build
++++ b/hw/core/meson.build
+@@ -14,6 +14,7 @@ hwcore_ss.add(files(
+ 
+ common_ss.add(files('cpu-common.c'))
+ common_ss.add(files('machine-smp.c'))
++common_ss.add(files('smp-cache.c'))
+ system_ss.add(when: 'CONFIG_FITLOADER', if_true: files('loader-fit.c'))
+ system_ss.add(when: 'CONFIG_GENERIC_LOADER', if_true: files('generic-loader.c'))
+ system_ss.add(when: 'CONFIG_GUEST_LOADER', if_true: files('guest-loader.c'))
+diff --git a/hw/core/smp-cache.c b/hw/core/smp-cache.c
+new file mode 100644
+index 000000000000..c0157ce51c8f
+--- /dev/null
++++ b/hw/core/smp-cache.c
+@@ -0,0 +1,103 @@
++/*
++ * Cache Object for SMP machine
++ *
++ * Copyright (C) 2024 Intel Corporation.
++ *
++ * Author: Zhao Liu <zhao1.liu@intel.com>
++ *
++ * This work is licensed under the terms of the GNU GPL, version 2 or
++ * later.  See the COPYING file in the top-level directory.
++ */
++
++#include "qemu/osdep.h"
++
++#include "hw/core/smp-cache.h"
++#include "qapi/error.h"
++#include "qapi/qapi-visit-machine-common.h"
++#include "qom/object_interfaces.h"
++
++static void
++smp_cache_get_cache_prop(Object *obj, Visitor *v, const char *name,
++                         void *opaque, Error **errp)
++{
++    SMPCache *cache = SMP_CACHE(obj);
++    SMPCachePropertyList *head = NULL;
++    SMPCachePropertyList **tail = &head;
++
++    for (int i = 0; i < SMP_CACHE__MAX; i++) {
++        SMPCacheProperty *node = g_new(SMPCacheProperty, 1);
++
++        node->name = cache->props[i].name;
++        node->topo = cache->props[i].topo;
++        QAPI_LIST_APPEND(tail, node);
++    }
++
++    if (!visit_type_SMPCachePropertyList(v, name, &head, errp)) {
++        return;
++    }
++    qapi_free_SMPCachePropertyList(head);
++}
++
++static void
++smp_cache_set_cache_prop(Object *obj, Visitor *v, const char *name,
++                         void *opaque, Error **errp)
++{
++    SMPCache *cache = SMP_CACHE(obj);
++    SMPCachePropertyList *list, *node;
++
++    if (!visit_type_SMPCachePropertyList(v, name, &list, errp)) {
++        return;
++    }
++
++    for (node = list; node; node = node->next) {
++        if (node->value->topo == CPU_TOPO_LEVEL_INVALID) {
++            error_setg(errp,
++                       "Invalid topology level: %s. "
++                       "The topology should match the valid CPU topology level",
++                       CpuTopologyLevel_str(node->value->topo));
++            goto out;
++        }
++        cache->props[node->value->name].topo = node->value->topo;
++    }
++
++out:
++    qapi_free_SMPCachePropertyList(list);
++}
++
++static void smp_cache_class_init(ObjectClass *oc, void *data)
++{
++    object_class_property_add(oc, "caches", "SMPCacheProperties",
++                              smp_cache_get_cache_prop,
++                              smp_cache_set_cache_prop,
++                              NULL, NULL);
++    object_class_property_set_description(oc, "caches",
++            "Cache property list for SMP machine");
++}
++
++static void smp_cache_instance_init(Object *obj)
++{
++    SMPCache *cache = SMP_CACHE(obj);
++    for (int i = 0; i < SMP_CACHE__MAX; i++) {
++        cache->props[i].name = (SMPCacheName)i;
++        cache->props[i].topo = CPU_TOPO_LEVEL_DEFAULT;
++    }
++}
++
++static const TypeInfo smp_cache_info = {
++    .parent = TYPE_OBJECT,
++    .name = TYPE_SMP_CACHE,
++    .class_init = smp_cache_class_init,
++    .instance_size = sizeof(SMPCache),
++    .instance_init = smp_cache_instance_init,
++    .interfaces = (InterfaceInfo[]) {
++        { TYPE_USER_CREATABLE },
++        { }
++    }
++};
++
++static void smp_cache_register_type(void)
++{
++    type_register_static(&smp_cache_info);
++}
++
++type_init(smp_cache_register_type);
+diff --git a/include/hw/core/smp-cache.h b/include/hw/core/smp-cache.h
+new file mode 100644
+index 000000000000..c6b4d9efc290
+--- /dev/null
++++ b/include/hw/core/smp-cache.h
+@@ -0,0 +1,27 @@
++/*
++ * Cache Object for SMP machine
++ *
++ * Copyright (C) 2024 Intel Corporation.
++ *
++ * Author: Zhao Liu <zhao1.liu@intel.com>
++ *
++ * This work is licensed under the terms of the GNU GPL, version 2 or
++ * later.  See the COPYING file in the top-level directory.
++ */
++
++#ifndef SMP_CACHE_H
++#define SMP_CACHE_H
++
++#include "qapi/qapi-types-machine-common.h"
++#include "qom/object.h"
++
++#define TYPE_SMP_CACHE "smp-cache"
++OBJECT_DECLARE_SIMPLE_TYPE(SMPCache, SMP_CACHE)
++
++struct SMPCache {
++    Object parent_obj;
++
++    SMPCacheProperty props[SMP_CACHE__MAX];
++};
++
++#endif /* SMP_CACHE_H */
+diff --git a/qapi/machine-common.json b/qapi/machine-common.json
+index 82413c668bdb..8b8c0e9eeb86 100644
+--- a/qapi/machine-common.json
++++ b/qapi/machine-common.json
+@@ -64,3 +64,53 @@
+   'prefix': 'CPU_TOPO_LEVEL',
+   'data': [ 'invalid', 'thread', 'core', 'module', 'cluster',
+             'die', 'socket', 'book', 'drawer', 'default' ] }
++
++##
++# @SMPCacheName:
++#
++# An enumeration of cache for SMP systems.  The cache name here is
++# a combination of cache level and cache type.
++#
++# @l1d: L1 data cache.
++#
++# @l1i: L1 instruction cache.
++#
++# @l2: L2 (unified) cache.
++#
++# @l3: L3 (unified) cache
++#
++# Since: 9.1
++##
++{ 'enum': 'SMPCacheName',
++  'prefix': 'SMP_CACHE',
++  'data': [ 'l1d', 'l1i', 'l2', 'l3' ] }
++
++##
++# @SMPCacheProperty:
++#
++# Cache information for SMP systems.
++#
++# @name: Cache name.
++#
++# @topo: Cache topology level.  It accepts the CPU topology
++#     enumeration as the parameter, i.e., CPUs in the same
++#     topology container share the same cache.
++#
++# Since: 9.1
++##
++{ 'struct': 'SMPCacheProperty',
++  'data': {
++  'name': 'SMPCacheName',
++  'topo': 'CpuTopologyLevel' } }
++
++##
++# @SMPCacheProperties:
++#
++# List wrapper of SMPCacheProperty.
++#
++# @caches: the SMPCacheProperty list.
++#
++# Since 9.1
++##
++{ 'struct': 'SMPCacheProperties',
++  'data': { 'caches': ['SMPCacheProperty'] } }
+diff --git a/qapi/qapi-schema.json b/qapi/qapi-schema.json
+index b1581988e4eb..25394f2cda50 100644
+--- a/qapi/qapi-schema.json
++++ b/qapi/qapi-schema.json
+@@ -64,11 +64,11 @@
+ { 'include': 'compat.json' }
+ { 'include': 'control.json' }
+ { 'include': 'introspect.json' }
+-{ 'include': 'qom.json' }
+-{ 'include': 'qdev.json' }
+ { 'include': 'machine-common.json' }
+ { 'include': 'machine.json' }
+ { 'include': 'machine-target.json' }
++{ 'include': 'qom.json' }
++{ 'include': 'qdev.json' }
+ { 'include': 'replay.json' }
+ { 'include': 'yank.json' }
+ { 'include': 'misc.json' }
+diff --git a/qapi/qom.json b/qapi/qom.json
+index 8bd299265e39..797dd58a61f5 100644
+--- a/qapi/qom.json
++++ b/qapi/qom.json
+@@ -8,6 +8,7 @@
+ { 'include': 'block-core.json' }
+ { 'include': 'common.json' }
+ { 'include': 'crypto.json' }
++{ 'include': 'machine-common.json' }
+ 
+ ##
+ # = QEMU Object Model (QOM)
+@@ -1064,6 +1065,7 @@
+       'if': 'CONFIG_SECRET_KEYRING' },
+     'sev-guest',
+     'sev-snp-guest',
++    'smp-cache',
+     'thread-context',
+     's390-pv-guest',
+     'throttle-group',
+@@ -1135,6 +1137,7 @@
+                                       'if': 'CONFIG_SECRET_KEYRING' },
+       'sev-guest':                  'SevGuestProperties',
+       'sev-snp-guest':              'SevSnpGuestProperties',
++      'smp-cache':                  'SMPCacheProperties',
+       'thread-context':             'ThreadContextProperties',
+       'throttle-group':             'ThrottleGroupProperties',
+       'tls-creds-anon':             'TlsCredsAnonProperties',
 -- 
 2.34.1
 
