@@ -4,59 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3146BC30653
-	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Jul 2024 04:03:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1E35C30653
+	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Jul 2024 09:32:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sPDg1-0001X6-KJ; Thu, 04 Jul 2024 00:02:33 -0400
+	id 1sPIpa-0006Yb-O0; Thu, 04 Jul 2024 05:32:46 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alvinga@andestech.com>)
- id 1sPDfz-0001UO-UM
- for qemu-riscv@nongnu.org; Thu, 04 Jul 2024 00:02:31 -0400
-Received: from 60-248-80-70.hinet-ip.hinet.net ([60.248.80.70]
- helo=Atcsqr.andestech.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alvinga@andestech.com>)
- id 1sPDfw-0003T9-Bz
- for qemu-riscv@nongnu.org; Thu, 04 Jul 2024 00:02:31 -0400
-Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 46442KK0005709
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
- Thu, 4 Jul 2024 12:02:20 +0800 (+08)
- (envelope-from alvinga@andestech.com)
-Received: from atctrx.andestech.com (10.0.15.190) by ATCPCS34.andestech.com
- (10.0.1.134) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 4 Jul
- 2024 12:02:20 +0800
-To: <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>
-CC: <alistair.francis@wdc.com>, <bin.meng@windriver.com>,
- <liwei1518@gmail.com>, <dbarboza@ventanamicro.com>,
- <zhiwei_liu@linux.alibaba.com>, Alvin Chang <alvinga@andestech.com>
-Subject: [PATCH 1/2] target/riscv: Preliminary textra trigger CSR writting
- support
-Date: Thu, 4 Jul 2024 12:01:59 +0800
-Message-ID: <20240704040200.243892-2-alvinga@andestech.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240704040200.243892-1-alvinga@andestech.com>
-References: <20240704040200.243892-1-alvinga@andestech.com>
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1sPIpY-0006Vz-U6
+ for qemu-riscv@nongnu.org; Thu, 04 Jul 2024 05:32:44 -0400
+Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1sPIpX-00023z-6b
+ for qemu-riscv@nongnu.org; Thu, 04 Jul 2024 05:32:44 -0400
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-57ccd1111aeso592401a12.0
+ for <qemu-riscv@nongnu.org>; Thu, 04 Jul 2024 02:32:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1720085561; x=1720690361; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Wg5r9sYSQsAvjhQ+CRVIQveWls8q4Cp7ZuTqAA6lFzA=;
+ b=qDw9DZlPPlu8o0cFuH9Of8+aeCMdVYNsYNNsHUqpEBWmZKqfMLVKlSGT5qEEXjXsRB
+ f1WEc6AU+wS8Vl41uZwJ+z2liX/aWtlhDsopuJ8tZupvvWEuaHFd5Pp4C8V3se2d124K
+ tG/eSZITlAfPQjNWi5Kv1CjRz5p1Q7hUWSp+sf5cgKwtcUz08Eaz2OKDgPXgxOBIeupN
+ 3WQJf7HxiVfgerVer7diSHQfU2o0qYXUEJ8GfplnUhf3fHJUz4UOmM3v+VqpFNAh68gr
+ jsVGm2EDw4ErGEt3/ZrxsswL+6FXppGNW6j2Sodp9rVJGer41Z3etAsiC+V+s5psR5nq
+ 29/w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1720085561; x=1720690361;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Wg5r9sYSQsAvjhQ+CRVIQveWls8q4Cp7ZuTqAA6lFzA=;
+ b=IsTDifI+CFT7FzB5HwluZ6pmXDx7XHZa0njQeFRfa5Bb1F5CiqKzvoB/AH7bAfDX7d
+ EjlxrAqz0lkuL+8o1Fm4P0OEiOfO//I0D284sbnFOtJlp/hjkbp7ktlasx9WvwvndBoy
+ XWsmX9+/VzFLHAnJYj7bX/UZM3ZqR02G9OvlGXCJK8R/EoVqwga6M/t1soFg9iutcZOa
+ jPbOQ387HuIYXwP7TdK09W+P6jIIu60YPrCZOwVHdpSwJS1AqIQWvsJ4rB6o9EOOQfjl
+ 89kUJIoMubGry8y46nvAbJBPQHUyqcbS9uanXyI7Bm55zxA2ooWTk9ThKZS8CsXHDsRV
+ oTJg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXyElWXOKYlaeDA6P5XJF1EUMFlPbCePx4XSauRq6caCp9GC/51TnZDa3E7m7E5FEVlN20z2B/4mZNZVr1FVzplqQbNiEE=
+X-Gm-Message-State: AOJu0YxeA4ZX4JozuF9Gsu8LgX5H+KgWSUJlajwTnFXoXr1hdX733fdr
+ BwBr0YxAxrBLQiC1z1a1ScXg0vlvqGqmxM6L6wlFOoksHvg6HdJBUDMXgjwldTd8Szwi6nfTtXG
+ U0mYfJKx0gG6nF2hhrLBm2O4rcnq469dZnt9g8A==
+X-Google-Smtp-Source: AGHT+IE7qXHKBYmBeRGY9jO1i6pr9B2inR+WbVBPpgVsf7Cvbh+WgpRKmtihOw20IuEFvTewixVo7sDHvFXPMqFBQk0=
+X-Received: by 2002:a05:6402:34c1:b0:587:2fa6:496a with SMTP id
+ 4fb4d7f45d1cf-58e5abdc863mr784969a12.15.1720085560867; Thu, 04 Jul 2024
+ 02:32:40 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.0.15.190]
-X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
- ATCPCS34.andestech.com (10.0.1.134)
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 46442KK0005709
-Received-SPF: pass client-ip=60.248.80.70; envelope-from=alvinga@andestech.com;
- helo=Atcsqr.andestech.com
-X-Spam_score_int: -8
-X-Spam_score: -0.9
-X-Spam_bar: /
-X-Spam_report: (-0.9 / 5.0 requ) BAYES_00=-1.9, RDNS_DYNAMIC=0.982,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- TVD_RCVD_IP=0.001 autolearn=no autolearn_force=no
+References: <20240703213102.254927-1-zheyuma97@gmail.com>
+In-Reply-To: <20240703213102.254927-1-zheyuma97@gmail.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Thu, 4 Jul 2024 10:32:29 +0100
+Message-ID: <CAFEAcA_9_fymBmp4Ei+ZxP3PB6u3JckTxufLcJn6JKuf4Yjkaw@mail.gmail.com>
+Subject: Re: [PATCH] hw/intc: sifive_plic: Fix heap-buffer-overflow in SiFive
+ PLIC read operation
+To: Zheyu Ma <zheyuma97@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2a00:1450:4864:20::529;
+ envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x529.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -69,163 +89,68 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-to:  Alvin Chang <alvinga@andestech.com>
-From:  Alvin Chang via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This commit allows program to write textra trigger CSR for type 2, 3, 6
-triggers. In this preliminary patch, the textra.MHVALUE and the
-textra.MHSELECT fields are allowed to be configured. Other fields, such
-as textra.SBYTEMASK, textra.SVALUE, and textra.SSELECT, are hardwired to
-zero for now.
+On Wed, 3 Jul 2024 at 22:32, Zheyu Ma <zheyuma97@gmail.com> wrote:
+>
+> The sifive_plic_read function in hw/intc/sifive_plic.c had a potential
+> heap-buffer-overflow issue when reading from the pending_base region.
+> This occurred because the code did not check if the calculated word index
+> was within valid bounds before accessing the pending array.
+>
+> This fix prevents out-of-bounds memory access, ensuring safer and more
+> robust handling of PLIC reads.
+>
+> ASAN log:
+> ==78800==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x602000038a14 at pc 0x5baf49d0d6cb bp 0x7ffc2ea4e180 sp 0x7ffc2ea4e178
+> READ of size 4 at 0x602000038a14 thread T0
+>     #0 0x5baf49d0d6ca in sifive_plic_read hw/intc/sifive_plic.c:151:16
+>     #1 0x5baf49f7f3bb in memory_region_read_accessor system/memory.c:445:11
+>
+> Reproducer:
+> cat << EOF | qemu-system-riscv64  -display \
+> none -machine accel=qtest, -m 512M -machine shakti_c -m 2G -qtest stdio
+> readl 0xc001004
+> EOF
+>
+> Signed-off-by: Zheyu Ma <zheyuma97@gmail.com>
+> ---
+>  hw/intc/sifive_plic.c | 9 ++++++++-
+>  1 file changed, 8 insertions(+), 1 deletion(-)
+>
+> diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
+> index e559f11805..d2a90dfd3a 100644
+> --- a/hw/intc/sifive_plic.c
+> +++ b/hw/intc/sifive_plic.c
+> @@ -147,7 +147,14 @@ static uint64_t sifive_plic_read(void *opaque, hwaddr addr, unsigned size)
+>                              (plic->num_sources + 31) >> 3)) {
+>          uint32_t word = (addr - plic->pending_base) >> 2;
+>
+> -        return plic->pending[word];
+> +        if (word < plic->bitfield_words) {
+> +            return plic->pending[word];
+> +        } else {
+> +            qemu_log_mask(LOG_GUEST_ERROR,
+> +                          "sifive_plic_read: Word out of bounds for pending_base read: word=%u\n",
+> +                          word);
+> +            return 0;
+> +        }
 
-For textra.MHSELECT field, the only legal values are 0 (ignore) and 4
-(mcontext). Writing 1~3 into textra.MHSELECT will be changed to 0, and
-writing 5~7 into textra.MHSELECT will be changed to 4. This behavior is
-aligned to RISC-V SPIKE simulator.
+This seems a bit odd. This part of the code is guarded by
 
-Signed-off-by: Alvin Chang <alvinga@andestech.com>
----
- target/riscv/cpu_bits.h | 10 +++++
- target/riscv/debug.c    | 81 ++++++++++++++++++++++++++++++++++++++---
- 2 files changed, 85 insertions(+), 6 deletions(-)
+    } else if (addr_between(addr, plic->pending_base,
+                            (plic->num_sources + 31) >> 3)) {
 
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index c257c5ed7d..0530b4f9f4 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -906,6 +906,16 @@ typedef enum RISCVException {
- #define JVT_BASE                           (~0x3F)
- 
- /* Debug Sdtrig CSR masks */
-+#define TEXTRA32_MHVALUE                   0xFC000000
-+#define TEXTRA32_MHSELECT                  0x03800000
-+#define TEXTRA32_SBYTEMASK                 0x000C0000
-+#define TEXTRA32_SVALUE                    0x0003FFFC
-+#define TEXTRA32_SSELECT                   0x00000003
-+#define TEXTRA64_MHVALUE                   0xFFF8000000000000ULL
-+#define TEXTRA64_MHSELECT                  0x0007000000000000ULL
-+#define TEXTRA64_SBYTEMASK                 0x000000F000000000ULL
-+#define TEXTRA64_SVALUE                    0x00000003FFFFFFFCULL
-+#define TEXTRA64_SSELECT                   0x0000000000000003ULL
- #define MCONTEXT32                         0x0000003F
- #define MCONTEXT64                         0x0000000000001FFFULL
- #define MCONTEXT32_HCONTEXT                0x0000007F
-diff --git a/target/riscv/debug.c b/target/riscv/debug.c
-index 0b5099ff9a..f7d8f5e320 100644
---- a/target/riscv/debug.c
-+++ b/target/riscv/debug.c
-@@ -217,6 +217,69 @@ static inline void warn_always_zero_bit(target_ulong val, target_ulong mask,
-     }
- }
- 
-+static target_ulong textra_validate(CPURISCVState *env, target_ulong tdata3)
-+{
-+    target_ulong mhvalue, mhselect;
-+    target_ulong mhselect_new;
-+    target_ulong textra;
-+    const uint32_t mhselect_no_rvh[8] = { 0, 0, 0, 0, 4, 4, 4, 4 };
-+
-+    switch (riscv_cpu_mxl(env)) {
-+    case MXL_RV32:
-+        mhvalue  = get_field(tdata3, TEXTRA32_MHVALUE);
-+        mhselect = get_field(tdata3, TEXTRA32_MHSELECT);
-+        /* Validate unimplemented (always zero) bits */
-+        warn_always_zero_bit(tdata3, (target_ulong)TEXTRA32_SBYTEMASK,
-+                             "sbytemask");
-+        warn_always_zero_bit(tdata3, (target_ulong)TEXTRA32_SVALUE,
-+                             "svalue");
-+        warn_always_zero_bit(tdata3, (target_ulong)TEXTRA32_SSELECT,
-+                             "sselect");
-+        break;
-+    case MXL_RV64:
-+    case MXL_RV128:
-+        mhvalue  = get_field(tdata3, TEXTRA64_MHVALUE);
-+        mhselect = get_field(tdata3, TEXTRA64_MHSELECT);
-+        /* Validate unimplemented (always zero) bits */
-+        warn_always_zero_bit(tdata3, (target_ulong)TEXTRA64_SBYTEMASK,
-+                             "sbytemask");
-+        warn_always_zero_bit(tdata3, (target_ulong)TEXTRA64_SVALUE,
-+                             "svalue");
-+        warn_always_zero_bit(tdata3, (target_ulong)TEXTRA64_SSELECT,
-+                             "sselect");
-+        break;
-+    default:
-+        g_assert_not_reached();
-+    }
-+
-+    /* Validate mhselect. */
-+    mhselect_new = mhselect_no_rvh[mhselect];
-+
-+    /* Write legal values into textra */
-+    textra = 0;
-+    switch (riscv_cpu_mxl(env)) {
-+    case MXL_RV32:
-+        textra = set_field(textra, TEXTRA32_MHVALUE,  mhvalue);
-+        textra = set_field(textra, TEXTRA32_MHSELECT, mhselect_new);
-+        break;
-+    case MXL_RV64:
-+    case MXL_RV128:
-+        textra = set_field(textra, TEXTRA64_MHVALUE,  mhvalue);
-+        textra = set_field(textra, TEXTRA64_MHSELECT, mhselect_new);
-+        break;
-+    default:
-+        g_assert_not_reached();
-+    }
-+
-+    if (textra != tdata3) {
-+        qemu_log_mask(LOG_GUEST_ERROR,
-+                      "different value 0x" TARGET_FMT_lx " write to tdata3\n",
-+                      textra);
-+    }
-+
-+    return textra;
-+}
-+
- static void do_trigger_action(CPURISCVState *env, target_ulong trigger_index)
- {
-     trigger_action_t action = get_trigger_action(env, trigger_index);
-@@ -441,8 +504,10 @@ static void type2_reg_write(CPURISCVState *env, target_ulong index,
-         }
-         break;
-     case TDATA3:
--        qemu_log_mask(LOG_UNIMP,
--                      "tdata3 is not supported for type 2 trigger\n");
-+        new_val = textra_validate(env, val);
-+        if (new_val != env->tdata3[index]) {
-+            env->tdata3[index] = new_val;
-+        }
-         break;
-     default:
-         g_assert_not_reached();
-@@ -558,8 +623,10 @@ static void type6_reg_write(CPURISCVState *env, target_ulong index,
-         }
-         break;
-     case TDATA3:
--        qemu_log_mask(LOG_UNIMP,
--                      "tdata3 is not supported for type 6 trigger\n");
-+        new_val = textra_validate(env, val);
-+        if (new_val != env->tdata3[index]) {
-+            env->tdata3[index] = new_val;
-+        }
-         break;
-     default:
-         g_assert_not_reached();
-@@ -741,8 +808,10 @@ static void itrigger_reg_write(CPURISCVState *env, target_ulong index,
-                       "tdata2 is not supported for icount trigger\n");
-         break;
-     case TDATA3:
--        qemu_log_mask(LOG_UNIMP,
--                      "tdata3 is not supported for icount trigger\n");
-+        new_val = textra_validate(env, val);
-+        if (new_val != env->tdata3[index]) {
-+            env->tdata3[index] = new_val;
-+        }
-         break;
-     default:
-         g_assert_not_reached();
--- 
-2.34.1
+and we calculate plic->bitfield_words in realize based on
+plic->num_sources:
+    s->bitfield_words = (s->num_sources + 31) >> 5;
 
+so presumably the intention was that we put enough words
+in the bitfield for the number of sources we have, so that
+the array access wouldn't overrun. Maybe we got the
+calculation wrong?
+
+thanks
+-- PMM
 
