@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8BF3C2BD09
-	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Jul 2024 03:01:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB6AAC31D97
+	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Jul 2024 03:01:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sPCiI-0004BR-Q1; Wed, 03 Jul 2024 23:00:50 -0400
+	id 1sPCiw-0004Zl-C3; Wed, 03 Jul 2024 23:01:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1sPCiG-0004AB-UH; Wed, 03 Jul 2024 23:00:48 -0400
+ id 1sPCiW-0004LO-Fg; Wed, 03 Jul 2024 23:01:05 -0400
 Received: from mgamail.intel.com ([198.175.65.9])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1sPCiE-0003xS-PA; Wed, 03 Jul 2024 23:00:48 -0400
+ id 1sPCiO-0003yr-OI; Wed, 03 Jul 2024 23:01:04 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1720062047; x=1751598047;
+ t=1720062057; x=1751598057;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=4VH/b1FVdYaezQBLyS+kZwfI3T4jbK9VUPHg1kOSC0s=;
- b=W4TI8R1UWBpzFdh9hxDJdTxNXaWluF90bHNPMUMegHz8+qqe0aC6OYR3
- kNCVsBe2xBOCz6mTndrCNwiIsSV0qGYijwAAEHSu60fWP2BD0EUtbP2zM
- /KbGPC6NfdpDMTgZTMmLV2+uiMrZLfWT3XDxU7OXj+U5HNNv+vAs23HZV
- AXxSKaCFg2rbdJCQwe/VLWOkbT4TW2VfpttWSqsnpQUsGv27CLG0tDv3R
- sTw1UkX0GddoxAf9N+Ffd1GQDvyk8w2ckmxMFkqpsfYB6hs07S2njI12S
- NNjYpboT80WYm+RDlR1mFheTit64kn+RWnVImqJ1Mqrln75nOliS8PZIb Q==;
-X-CSE-ConnectionGUID: xaavcG8+SeiklKurRVCjpA==
-X-CSE-MsgGUID: TiMQn1onSMyT44+kD/LN9Q==
-X-IronPort-AV: E=McAfee;i="6700,10204,11122"; a="39838090"
-X-IronPort-AV: E=Sophos;i="6.09,183,1716274800"; d="scan'208";a="39838090"
+ bh=cJpn7XSiZ7Mb8L0aHM8P5RDmFvQhG9OIMsLWeDo6r70=;
+ b=KaDSsFDh/aopBEIl169N9sUHIMBqIBz8/L2E946UB2X6NjfX+Tv4chDG
+ yStlW/HnnUW3Fpg0tVotFdhq5f+2TbLaLFKkF3Mb1/FUyreEvod0CVdbi
+ ecU6fGuSBaHxgvEVKwRWhRdbIC59sVPKWhz8TXsdE4ahTPKug1669sK2K
+ eIpehRqX6NyC1D2c+vgYFoclzSHQfL8N+cjHH8r4WpO4bSdQ3/sbcBW+n
+ cNB+dcnHP4auVNULMlhQ1DddwQX7Bh4nZXoP4N+2X57LWiga1iatXrWVO
+ FVSAiC7CO934YyA5cXlqlNJo2fwIMOyPxWKmmhXAXDJdmhIKr2ybaLyvT g==;
+X-CSE-ConnectionGUID: Q1oiVusgRBeunUu7eQQEMA==
+X-CSE-MsgGUID: R157gb1fRlSE7fFXHpMxfQ==
+X-IronPort-AV: E=McAfee;i="6700,10204,11122"; a="39838125"
+X-IronPort-AV: E=Sophos;i="6.09,183,1716274800"; d="scan'208";a="39838125"
 Received: from fmviesa004.fm.intel.com ([10.60.135.144])
  by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 03 Jul 2024 20:00:43 -0700
-X-CSE-ConnectionGUID: MdfPppBnTPiNsHH28MY2fQ==
-X-CSE-MsgGUID: 9PGc1LQSSqCR74sBHleRWQ==
+ 03 Jul 2024 20:00:53 -0700
+X-CSE-ConnectionGUID: ng4MCgfcS9SjCwgQvP5iWg==
+X-CSE-MsgGUID: AHgzNJo6RNOHpJb5KadZig==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.09,183,1716274800"; d="scan'208";a="51052151"
+X-IronPort-AV: E=Sophos;i="6.09,183,1716274800"; d="scan'208";a="51052298"
 Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
- by fmviesa004.fm.intel.com with ESMTP; 03 Jul 2024 20:00:38 -0700
+ by fmviesa004.fm.intel.com with ESMTP; 03 Jul 2024 20:00:48 -0700
 From: Zhao Liu <zhao1.liu@intel.com>
 To: =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
  Eduardo Habkost <eduardo@habkost.net>,
@@ -62,9 +62,9 @@ Cc: qemu-devel@nongnu.org, kvm@vger.kernel.org, qemu-riscv@nongnu.org,
  qemu-arm@nongnu.org, Zhenyu Wang <zhenyu.z.wang@intel.com>,
  Dapeng Mi <dapeng1.mi@linux.intel.com>, Yongwei Ma <yongwei.ma@intel.com>,
  Zhao Liu <zhao1.liu@intel.com>
-Subject: [PATCH 2/8] qapi/qom: Introduce smp-cache object
-Date: Thu,  4 Jul 2024 11:15:57 +0800
-Message-Id: <20240704031603.1744546-3-zhao1.liu@intel.com>
+Subject: [PATCH 4/8] hw/core: Check smp cache topology support for machine
+Date: Thu,  4 Jul 2024 11:15:59 +0800
+Message-Id: <20240704031603.1744546-5-zhao1.liu@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240704031603.1744546-1-zhao1.liu@intel.com>
 References: <20240704031603.1744546-1-zhao1.liu@intel.com>
@@ -94,328 +94,183 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Introduce smp-cache object so that user could define cache properties.
+Add cache_supported flags in SMPCompatProps to allow machines to
+configure various caches support.
 
-In smp-cache object, define cache topology based on CPU topology level
-with two reasons:
+And implement check() method for machine's "smp-cache" link property,
+which will check the compatibility of the cache properties with the
+machine support.
 
-1. In practice, a cache will always be bound to the CPU container
-   (either private in the CPU container or shared among multiple
-   containers), and CPU container is often expressed in terms of CPU
-   topology level.
-2. The x86's cache-related CPUIDs encode cache topology based on APIC
-   ID's CPU topology layout. And the ACPI PPTT table that ARM/RISCV
-   relies on also requires CPU containers to help indicate the private
-   shared hierarchy of the cache. Therefore, for SMP systems, it is
-   natural to use the CPU topology hierarchy directly in QEMU to define
-   the cache topology.
-
-Currently, separated L1 cache (L1 data cache and L1 instruction cache)
-with unified higher-level cache (e.g., unified L2 and L3 caches), is the
-most common cache architectures.
-
-Therefore, enumerate the L1 D-cache, L1 I-cache, L2 cache and L3 cache
-with smp-cache object to add the basic cache topology support.
-
-Suggested-by: Daniel P. Berrange <berrange@redhat.com>
 Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
 ---
-Suggested by credit:
- * Referred to Daniel's suggestion to introduce cache JSON list, though
-   as a standalone object since -smp/-machine can't support JSON.
----
 Changes since RFC v2:
- * New commit to implement cache list with JSON format instead of
-   multiple sub-options in -smp.
+ * Split as a separate commit to just include compatibility checking and
+   topology checking.
+ * Allow setting "default" topology level even though the cache
+   isn't supported by machine. (Daniel)
 ---
- MAINTAINERS                 |   2 +
- hw/core/meson.build         |   1 +
- hw/core/smp-cache.c         | 103 ++++++++++++++++++++++++++++++++++++
- include/hw/core/smp-cache.h |  27 ++++++++++
- qapi/machine-common.json    |  50 +++++++++++++++++
- qapi/qapi-schema.json       |   4 +-
- qapi/qom.json               |   3 ++
- 7 files changed, 188 insertions(+), 2 deletions(-)
- create mode 100644 hw/core/smp-cache.c
- create mode 100644 include/hw/core/smp-cache.h
+ hw/core/machine-smp.c | 80 +++++++++++++++++++++++++++++++++++++++++++
+ hw/core/machine.c     | 17 +++++++--
+ include/hw/boards.h   |  6 ++++
+ 3 files changed, 101 insertions(+), 2 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 6725913c8b3a..b5391a7538de 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1885,12 +1885,14 @@ F: hw/core/machine.c
- F: hw/core/machine-smp.c
- F: hw/core/null-machine.c
- F: hw/core/numa.c
-+F: hw/core/smp-cache.c
- F: hw/cpu/cluster.c
- F: qapi/machine.json
- F: qapi/machine-common.json
- F: qapi/machine-target.json
- F: include/hw/boards.h
- F: include/hw/core/cpu.h
-+F: include/hw/core/smp-cache.h
- F: include/hw/cpu/cluster.h
- F: include/sysemu/numa.h
- F: tests/unit/test-smp-parse.c
-diff --git a/hw/core/meson.build b/hw/core/meson.build
-index a3d9bab9f42a..6d3dae3af62e 100644
---- a/hw/core/meson.build
-+++ b/hw/core/meson.build
-@@ -14,6 +14,7 @@ hwcore_ss.add(files(
- 
- common_ss.add(files('cpu-common.c'))
- common_ss.add(files('machine-smp.c'))
-+common_ss.add(files('smp-cache.c'))
- system_ss.add(when: 'CONFIG_FITLOADER', if_true: files('loader-fit.c'))
- system_ss.add(when: 'CONFIG_GENERIC_LOADER', if_true: files('generic-loader.c'))
- system_ss.add(when: 'CONFIG_GUEST_LOADER', if_true: files('guest-loader.c'))
-diff --git a/hw/core/smp-cache.c b/hw/core/smp-cache.c
-new file mode 100644
-index 000000000000..c0157ce51c8f
---- /dev/null
-+++ b/hw/core/smp-cache.c
-@@ -0,0 +1,103 @@
-+/*
-+ * Cache Object for SMP machine
-+ *
-+ * Copyright (C) 2024 Intel Corporation.
-+ *
-+ * Author: Zhao Liu <zhao1.liu@intel.com>
-+ *
-+ * This work is licensed under the terms of the GNU GPL, version 2 or
-+ * later.  See the COPYING file in the top-level directory.
-+ */
+diff --git a/hw/core/machine-smp.c b/hw/core/machine-smp.c
+index 88a73743eb1c..bf6f2f91070d 100644
+--- a/hw/core/machine-smp.c
++++ b/hw/core/machine-smp.c
+@@ -276,3 +276,83 @@ CpuTopologyLevel machine_get_cache_topo_level(const MachineState *ms,
+ {
+     return ms->smp_cache->props[cache].topo;
+ }
 +
-+#include "qemu/osdep.h"
-+
-+#include "hw/core/smp-cache.h"
-+#include "qapi/error.h"
-+#include "qapi/qapi-visit-machine-common.h"
-+#include "qom/object_interfaces.h"
-+
-+static void
-+smp_cache_get_cache_prop(Object *obj, Visitor *v, const char *name,
-+                         void *opaque, Error **errp)
++static bool machine_check_topo_support(MachineState *ms,
++                                       CpuTopologyLevel topo,
++                                       Error **errp)
 +{
-+    SMPCache *cache = SMP_CACHE(obj);
-+    SMPCachePropertyList *head = NULL;
-+    SMPCachePropertyList **tail = &head;
++    MachineClass *mc = MACHINE_GET_CLASS(ms);
 +
-+    for (int i = 0; i < SMP_CACHE__MAX; i++) {
-+        SMPCacheProperty *node = g_new(SMPCacheProperty, 1);
-+
-+        node->name = cache->props[i].name;
-+        node->topo = cache->props[i].topo;
-+        QAPI_LIST_APPEND(tail, node);
++    if ((topo == CPU_TOPO_LEVEL_MODULE && !mc->smp_props.modules_supported) ||
++        (topo == CPU_TOPO_LEVEL_CLUSTER && !mc->smp_props.clusters_supported) ||
++        (topo == CPU_TOPO_LEVEL_DIE && !mc->smp_props.dies_supported) ||
++        (topo == CPU_TOPO_LEVEL_BOOK && !mc->smp_props.books_supported) ||
++        (topo == CPU_TOPO_LEVEL_DRAWER && !mc->smp_props.drawers_supported)) {
++        error_setg(errp,
++                   "Invalid topology level: %s. "
++                   "The topology level is not supported by this machine",
++                   CpuTopologyLevel_str(topo));
++        return false;
 +    }
 +
-+    if (!visit_type_SMPCachePropertyList(v, name, &head, errp)) {
-+        return;
-+    }
-+    qapi_free_SMPCachePropertyList(head);
++    return true;
 +}
 +
-+static void
-+smp_cache_set_cache_prop(Object *obj, Visitor *v, const char *name,
-+                         void *opaque, Error **errp)
++/*
++ * When both cache1 and cache2 are configured with specific topology levels
++ * (not default level), is cache1's topology level higher than cache2?
++ */
++static bool smp_cache_topo_cmp(const SMPCache *smp_cache,
++                               SMPCacheName cache1,
++                               SMPCacheName cache2)
 +{
-+    SMPCache *cache = SMP_CACHE(obj);
-+    SMPCachePropertyList *list, *node;
-+
-+    if (!visit_type_SMPCachePropertyList(v, name, &list, errp)) {
-+        return;
++    if (smp_cache->props[cache1].topo != CPU_TOPO_LEVEL_DEFAULT &&
++        smp_cache->props[cache1].topo > smp_cache->props[cache2].topo) {
++        return true;
 +    }
++    return false;
++}
 +
-+    for (node = list; node; node = node->next) {
-+        if (node->value->topo == CPU_TOPO_LEVEL_INVALID) {
++bool machine_check_smp_cache_support(MachineState *ms,
++                                     const SMPCache *smp_cache,
++                                     Error **errp)
++{
++    MachineClass *mc = MACHINE_GET_CLASS(ms);
++
++    for (int i = 0; i < SMP_CACHE__MAX; i++) {
++        const SMPCacheProperty *prop = &smp_cache->props[i];
++
++        /*
++         * Allow setting "default" topology level even though the cache
++         * isn't supported by machine.
++         */
++        if (prop->topo != CPU_TOPO_LEVEL_DEFAULT &&
++            !mc->smp_props.cache_supported[prop->name]) {
 +            error_setg(errp,
-+                       "Invalid topology level: %s. "
-+                       "The topology should match the valid CPU topology level",
-+                       CpuTopologyLevel_str(node->value->topo));
-+            goto out;
++                       "%s cache topology not supported by this machine",
++                       SMPCacheName_str(prop->name));
++            return false;
 +        }
-+        cache->props[node->value->name].topo = node->value->topo;
++
++        if (!machine_check_topo_support(ms, prop->topo, errp)) {
++            return false;
++        }
 +    }
 +
-+out:
-+    qapi_free_SMPCachePropertyList(list);
-+}
-+
-+static void smp_cache_class_init(ObjectClass *oc, void *data)
-+{
-+    object_class_property_add(oc, "caches", "SMPCacheProperties",
-+                              smp_cache_get_cache_prop,
-+                              smp_cache_set_cache_prop,
-+                              NULL, NULL);
-+    object_class_property_set_description(oc, "caches",
-+            "Cache property list for SMP machine");
-+}
-+
-+static void smp_cache_instance_init(Object *obj)
-+{
-+    SMPCache *cache = SMP_CACHE(obj);
-+    for (int i = 0; i < SMP_CACHE__MAX; i++) {
-+        cache->props[i].name = (SMPCacheName)i;
-+        cache->props[i].topo = CPU_TOPO_LEVEL_DEFAULT;
++    if (smp_cache_topo_cmp(smp_cache, SMP_CACHE_L1D, SMP_CACHE_L2) ||
++        smp_cache_topo_cmp(smp_cache, SMP_CACHE_L1I, SMP_CACHE_L2)) {
++        error_setg(errp,
++                   "Invalid smp cache topology. "
++                   "L2 cache topology level shouldn't be lower than L1 cache");
++        return false;
 +    }
-+}
 +
-+static const TypeInfo smp_cache_info = {
-+    .parent = TYPE_OBJECT,
-+    .name = TYPE_SMP_CACHE,
-+    .class_init = smp_cache_class_init,
-+    .instance_size = sizeof(SMPCache),
-+    .instance_init = smp_cache_instance_init,
-+    .interfaces = (InterfaceInfo[]) {
-+        { TYPE_USER_CREATABLE },
-+        { }
++    if (smp_cache_topo_cmp(smp_cache, SMP_CACHE_L2, SMP_CACHE_L3)) {
++        error_setg(errp,
++                   "Invalid smp cache topology. "
++                   "L3 cache topology level shouldn't be lower than L2 cache");
++        return false;
 +    }
-+};
 +
-+static void smp_cache_register_type(void)
-+{
-+    type_register_static(&smp_cache_info);
++    return true;
 +}
-+
-+type_init(smp_cache_register_type);
-diff --git a/include/hw/core/smp-cache.h b/include/hw/core/smp-cache.h
-new file mode 100644
-index 000000000000..c6b4d9efc290
---- /dev/null
-+++ b/include/hw/core/smp-cache.h
-@@ -0,0 +1,27 @@
-+/*
-+ * Cache Object for SMP machine
-+ *
-+ * Copyright (C) 2024 Intel Corporation.
-+ *
-+ * Author: Zhao Liu <zhao1.liu@intel.com>
-+ *
-+ * This work is licensed under the terms of the GNU GPL, version 2 or
-+ * later.  See the COPYING file in the top-level directory.
-+ */
-+
-+#ifndef SMP_CACHE_H
-+#define SMP_CACHE_H
-+
-+#include "qapi/qapi-types-machine-common.h"
-+#include "qom/object.h"
-+
-+#define TYPE_SMP_CACHE "smp-cache"
-+OBJECT_DECLARE_SIMPLE_TYPE(SMPCache, SMP_CACHE)
-+
-+struct SMPCache {
-+    Object parent_obj;
-+
-+    SMPCacheProperty props[SMP_CACHE__MAX];
-+};
-+
-+#endif /* SMP_CACHE_H */
-diff --git a/qapi/machine-common.json b/qapi/machine-common.json
-index 82413c668bdb..8b8c0e9eeb86 100644
---- a/qapi/machine-common.json
-+++ b/qapi/machine-common.json
-@@ -64,3 +64,53 @@
-   'prefix': 'CPU_TOPO_LEVEL',
-   'data': [ 'invalid', 'thread', 'core', 'module', 'cluster',
-             'die', 'socket', 'book', 'drawer', 'default' ] }
-+
-+##
-+# @SMPCacheName:
-+#
-+# An enumeration of cache for SMP systems.  The cache name here is
-+# a combination of cache level and cache type.
-+#
-+# @l1d: L1 data cache.
-+#
-+# @l1i: L1 instruction cache.
-+#
-+# @l2: L2 (unified) cache.
-+#
-+# @l3: L3 (unified) cache
-+#
-+# Since: 9.1
-+##
-+{ 'enum': 'SMPCacheName',
-+  'prefix': 'SMP_CACHE',
-+  'data': [ 'l1d', 'l1i', 'l2', 'l3' ] }
-+
-+##
-+# @SMPCacheProperty:
-+#
-+# Cache information for SMP systems.
-+#
-+# @name: Cache name.
-+#
-+# @topo: Cache topology level.  It accepts the CPU topology
-+#     enumeration as the parameter, i.e., CPUs in the same
-+#     topology container share the same cache.
-+#
-+# Since: 9.1
-+##
-+{ 'struct': 'SMPCacheProperty',
-+  'data': {
-+  'name': 'SMPCacheName',
-+  'topo': 'CpuTopologyLevel' } }
-+
-+##
-+# @SMPCacheProperties:
-+#
-+# List wrapper of SMPCacheProperty.
-+#
-+# @caches: the SMPCacheProperty list.
-+#
-+# Since 9.1
-+##
-+{ 'struct': 'SMPCacheProperties',
-+  'data': { 'caches': ['SMPCacheProperty'] } }
-diff --git a/qapi/qapi-schema.json b/qapi/qapi-schema.json
-index b1581988e4eb..25394f2cda50 100644
---- a/qapi/qapi-schema.json
-+++ b/qapi/qapi-schema.json
-@@ -64,11 +64,11 @@
- { 'include': 'compat.json' }
- { 'include': 'control.json' }
- { 'include': 'introspect.json' }
--{ 'include': 'qom.json' }
--{ 'include': 'qdev.json' }
- { 'include': 'machine-common.json' }
- { 'include': 'machine.json' }
- { 'include': 'machine-target.json' }
-+{ 'include': 'qom.json' }
-+{ 'include': 'qdev.json' }
- { 'include': 'replay.json' }
- { 'include': 'yank.json' }
- { 'include': 'misc.json' }
-diff --git a/qapi/qom.json b/qapi/qom.json
-index 8bd299265e39..797dd58a61f5 100644
---- a/qapi/qom.json
-+++ b/qapi/qom.json
-@@ -8,6 +8,7 @@
- { 'include': 'block-core.json' }
- { 'include': 'common.json' }
- { 'include': 'crypto.json' }
-+{ 'include': 'machine-common.json' }
+diff --git a/hw/core/machine.c b/hw/core/machine.c
+index 09ef9fcd4a0b..802dd56ba717 100644
+--- a/hw/core/machine.c
++++ b/hw/core/machine.c
+@@ -926,6 +926,20 @@ static void machine_set_smp(Object *obj, Visitor *v, const char *name,
+     machine_parse_smp_config(ms, config, errp);
+ }
  
- ##
- # = QEMU Object Model (QOM)
-@@ -1064,6 +1065,7 @@
-       'if': 'CONFIG_SECRET_KEYRING' },
-     'sev-guest',
-     'sev-snp-guest',
-+    'smp-cache',
-     'thread-context',
-     's390-pv-guest',
-     'throttle-group',
-@@ -1135,6 +1137,7 @@
-                                       'if': 'CONFIG_SECRET_KEYRING' },
-       'sev-guest':                  'SevGuestProperties',
-       'sev-snp-guest':              'SevSnpGuestProperties',
-+      'smp-cache':                  'SMPCacheProperties',
-       'thread-context':             'ThreadContextProperties',
-       'throttle-group':             'ThrottleGroupProperties',
-       'tls-creds-anon':             'TlsCredsAnonProperties',
++static void machine_check_smp_cache(const Object *obj, const char *name,
++                                    Object *child, Error **errp)
++{
++    MachineState *ms = MACHINE(obj);
++    SMPCache *smp_cache = SMP_CACHE(child);
++
++    if (ms->smp_cache) {
++        error_setg(errp, "Invalid smp cache property. which has been set");
++        return;
++    }
++
++    machine_check_smp_cache_support(ms, smp_cache, errp);
++}
++
+ static void machine_get_boot(Object *obj, Visitor *v, const char *name,
+                             void *opaque, Error **errp)
+ {
+@@ -1045,11 +1059,10 @@ static void machine_class_init(ObjectClass *oc, void *data)
+     object_class_property_set_description(oc, "smp",
+         "CPU topology");
+ 
+-    /* TODO: Implement check() method based on machine support. */
+     object_class_property_add_link(oc, "smp-cache",
+                                    TYPE_SMP_CACHE,
+                                    offsetof(MachineState, smp_cache),
+-                                   object_property_allow_set_link,
++                                   machine_check_smp_cache,
+                                    OBJ_PROP_LINK_STRONG);
+     object_class_property_set_description(oc, "smp-cache",
+         "SMP cache property");
+diff --git a/include/hw/boards.h b/include/hw/boards.h
+index 56fa252cfcd2..5455848c3e58 100644
+--- a/include/hw/boards.h
++++ b/include/hw/boards.h
+@@ -47,6 +47,9 @@ unsigned int machine_topo_get_cores_per_socket(const MachineState *ms);
+ unsigned int machine_topo_get_threads_per_socket(const MachineState *ms);
+ CpuTopologyLevel machine_get_cache_topo_level(const MachineState *ms,
+                                               SMPCacheName cache);
++bool machine_check_smp_cache_support(MachineState *ms,
++                                     const SMPCache *smp_cache,
++                                     Error **errp);
+ void machine_memory_devices_init(MachineState *ms, hwaddr base, uint64_t size);
+ 
+ /**
+@@ -147,6 +150,8 @@ typedef struct {
+  * @books_supported - whether books are supported by the machine
+  * @drawers_supported - whether drawers are supported by the machine
+  * @modules_supported - whether modules are supported by the machine
++ * @cache_supported - whether cache topologies (l1d, l1i, l2 and l3) are
++ *                    supported by the machine
+  */
+ typedef struct {
+     bool prefer_sockets;
+@@ -156,6 +161,7 @@ typedef struct {
+     bool books_supported;
+     bool drawers_supported;
+     bool modules_supported;
++    bool cache_supported[SMP_CACHE__MAX];
+ } SMPCompatProps;
+ 
+ /**
 -- 
 2.34.1
 
