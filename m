@@ -4,82 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5400DC3271E
-	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jul 2024 16:53:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF1E5C38150
+	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jul 2024 21:12:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sPmBe-0000ON-34; Fri, 05 Jul 2024 12:53:30 -0400
+	id 1sPqDo-0003HD-VN; Fri, 05 Jul 2024 17:12:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <rbradford@rivosinc.com>)
- id 1sPmBa-0000NN-2b
- for qemu-riscv@nongnu.org; Fri, 05 Jul 2024 12:53:26 -0400
-Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1sPqDn-0003Gz-3F
+ for qemu-riscv@nongnu.org; Fri, 05 Jul 2024 17:11:59 -0400
+Received: from mail-oi1-x22c.google.com ([2607:f8b0:4864:20::22c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <rbradford@rivosinc.com>)
- id 1sPmBY-0000Cv-Fn
- for qemu-riscv@nongnu.org; Fri, 05 Jul 2024 12:53:25 -0400
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-4257a390a4eso12620785e9.0
- for <qemu-riscv@nongnu.org>; Fri, 05 Jul 2024 09:53:23 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1sPqDh-0005NM-Kp
+ for qemu-riscv@nongnu.org; Fri, 05 Jul 2024 17:11:58 -0400
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-3d853305abfso1143103b6e.2
+ for <qemu-riscv@nongnu.org>; Fri, 05 Jul 2024 14:11:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1720198402; x=1720803202;
- darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=LOa9Ak+x1ZCP6AAKN93g7PoxLp1f3FV1h6D+ky8VeJM=;
- b=H0xrMFUO0DCKg5A8WUn1uXn/TPc0I0/YKsQQkWQBFUnf7Chw2gmS942TJqWDdfoZFo
- yc7hzN0u+8nWGoPeFRHmKB0YqkB+hNauIwvtbbvagfS3fMdipAv9stN4WgdbPkFEKU6z
- o9tQ6mU8vhlWuwIu7DsLDi0Ddg1qw93qL75ULm8yH+8LPA+P8wpI2fEgr3G2HlB1Locr
- cRZDg5liQyjI0Mq7n3otdSWzJkGdZWqwRAI4xeOC5ifsNCu90a+amquY2TcxbpM38mDA
- ZjV7E+YB8Livdwm+GdwQ43sQcpWa1acEyPok2AoWJqryWz3/JXJO6corOyRbh5r6W4Zs
- qB+Q==
+ d=ventanamicro.com; s=google; t=1720213912; x=1720818712; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=JBWZquwUDTsMhD6kpe8vj2ETAMSHV3Jy5bFDy/xKF7M=;
+ b=UhemtHwjfoufmr5jmSoeoFYtf1sYuyojkz0Et7RkH1IfKo64qviqJOr2lEo4B7ZBTA
+ Oua+hNXp5iQrNd+HCZ7ToarAsjg4bYQcbr+cQcrP7Qq0f+TTUPukGv6Y95JveDm5FSH2
+ WXg+UIUljZRwR7uiCqkMsMSuNZRcQ8O7Ym6dmZnl6msFx/9p35MF+j9rvDEY/OKwJ75W
+ h+O0yLrZ9Uz/umqBu50vKYNoR+6mOdHeYXWX4mJsRQF6c50H9EZTkFDxxTT67a+ASXOC
+ 1HYjJRuCLuaN+K/c++vE7LwoUPhEKePdvRC1LsLBk4vbnErser7vreIPySzPkCrTA1H0
+ CscA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720198402; x=1720803202;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=LOa9Ak+x1ZCP6AAKN93g7PoxLp1f3FV1h6D+ky8VeJM=;
- b=xHcNMt+QoasdCJdDPPAnk3LZofIwCVQ66RhY5sTSl3qaUTbRcgLDJdrj59GGCBXN19
- GJ0NIpkheIkQQwKUviYD7lfoXTNwFi0HCAvCyQWU8iHzmHmSyNlUIylA1NYyvp1WquiM
- qbGfBl7sG39KXfxFvG0NNHzgmccNJwEJ2RUKMPW+WA0y9A0YC3IsGd55ginG3z7yR98u
- 2gcD09D5VL9ZPgXzJpoexHUpDYXpmwDBfVAVc7cPrX57IO39z0d0mQYuFtrtFOxUPL/g
- ZGxnlL+shKlcUZ16mO31ZifXEsj+IyE46jmLP88t6KAWfEcNw8DfaUDQySMb9vURYITo
- K6mA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVo4z2udlqjWIf+y0XISUZNZ0EjpJPaThjIctBNS+M5Te5xV7yktONt2g8Qw+UijinBUdBjEDkMWsPoPq+4F2Fl5BjX1oM=
-X-Gm-Message-State: AOJu0YwETNHrKO0jrBEAxYmuoBch/0hMO/rexEmGEVp1UOMFla8sOj4E
- 36WEPxyyJdeuEtu215WBZt+HCz1k7XAbtFaYYrwYzXWCuN9S1yYz/szN6rabO4Y=
-X-Google-Smtp-Source: AGHT+IGoEMpY0ly+N/wT1Wyu5UNmV1ZPStf9LBXSmZ1zfttcixLWGjjJ1TpGkWsfPQaZqM3FKbuxpQ==
-X-Received: by 2002:a05:600c:4fd3:b0:425:73c9:e60e with SMTP id
- 5b1f17b1804b1-4264a429065mr39141385e9.25.1720198401943; 
- Fri, 05 Jul 2024 09:53:21 -0700 (PDT)
-Received: from rockhopper.ba.rivosinc.com (214.11.169.217.in-addr.arpa.
- [217.169.11.214]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4264a1d1692sm70231075e9.9.2024.07.05.09.53.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Jul 2024 09:53:21 -0700 (PDT)
-From: Rob Bradford <rbradford@rivosinc.com>
-To: qemu-devel@nongnu.org
-Cc: Balaji Ravikumar <bravikumar@rivosinc.com>,
- Rob Bradford <rbradford@rivosinc.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG target)
-Subject: [PATCH v2] disas/riscv: Add decode for Zawrs extension
-Date: Fri,  5 Jul 2024 17:53:16 +0100
-Message-ID: <20240705165316.127494-1-rbradford@rivosinc.com>
-X-Mailer: git-send-email 2.45.2
+ d=1e100.net; s=20230601; t=1720213912; x=1720818712;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=JBWZquwUDTsMhD6kpe8vj2ETAMSHV3Jy5bFDy/xKF7M=;
+ b=SWqLllc5zKBpXchaCDpLdmX9pEg8D2+ESnKrrvjpN7rdG77Z97hiJlj+AwKyb9w+Nz
+ 7PYJ5UDGUm+2EuhoeJtvypHGBUa+a4SkkCjDg8/ik8TolTIguvgsWaOWnX8XaXwdeNeq
+ ODK26YD/VKH9mQti3mThxAKkkQkfoMC2gYPCct67aMZR5qAdKkoJZrwvUlQeZPaSBeyL
+ sYQDOtzcQwNMis0xJ4iojQBttCbKGpMsCxwTYTJ4VK+NqCiHJDs7rSJRkQOtJTvTeFcn
+ JhYkf61KUDOLDNqI9E3vRj/WL3kG6D7iAYfCfgxonSWFhIpMSj8erAWZ4tqPAXK1mIBA
+ haiQ==
+X-Gm-Message-State: AOJu0YyvLkKoEwVEO2cd5uerX1gKu0slSAsub/91j1ZUrQMxrweDaUEE
+ iEUW9edIlhVhm38ilzzB3EynOMuUYcQ/ia6y4dzLfJIOokwYHZXMDJk/zELdiTs=
+X-Google-Smtp-Source: AGHT+IEz8eau+8YysWtcxqMm53xQb5RzZje8TfG/Oijc2P54u12yBdNInY+y+VR7PmTJLi1Q1mVJBg==
+X-Received: by 2002:a05:6808:1b2b:b0:3d6:35c7:7172 with SMTP id
+ 5614622812f47-3d914e9f3eamr6290313b6e.46.1720213911599; 
+ Fri, 05 Jul 2024 14:11:51 -0700 (PDT)
+Received: from [192.168.68.109] ([179.193.8.43])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-70b15e0cefcsm686088b3a.166.2024.07.05.14.11.47
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 05 Jul 2024 14:11:51 -0700 (PDT)
+Message-ID: <a0b303ba-e5b6-4fa1-b9df-b86a1e5652bd@ventanamicro.com>
+Date: Fri, 5 Jul 2024 18:11:45 -0300
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 03/14] hw/riscv: add RISC-V IOMMU base emulation
+To: Jason Chien <jason.chien@sifive.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ ajones@ventanamicro.com, tjeznach@rivosinc.com, frank.chang@sifive.com,
+ Sebastien Boeuf <seb@rivosinc.com>
+References: <20240624201825.1054980-1-dbarboza@ventanamicro.com>
+ <20240624201825.1054980-4-dbarboza@ventanamicro.com>
+ <a1be0779-cbb5-42d2-8ced-7567c66f2bd0@sifive.com>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <a1be0779-cbb5-42d2-8ced-7567c66f2bd0@sifive.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::334;
- envelope-from=rbradford@rivosinc.com; helo=mail-wm1-x334.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::22c;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x22c.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -95,51 +100,196 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Balaji Ravikumar <bravikumar@rivosinc.com>
+Hi,
 
-Add disassembly support for these instructions from Zawrs:
+On 7/4/24 11:20 AM, Jason Chien wrote:
+> Hi Danial,
+> 
+> On 2024/6/25 上午 04:18, Daniel Henrique Barboza wrote:
+>> From: Tomasz Jeznach <tjeznach@rivosinc.com>
+>>
+>> The RISC-V IOMMU specification is now ratified as-per the RISC-V
+>> international process. The latest frozen specifcation can be found at:
+>>
+>> https://github.com/riscv-non-isa/riscv-iommu/releases/download/v1.0/riscv-iommu.pdf
+>>
+>> Add the foundation of the device emulation for RISC-V IOMMU, which
+>> includes an IOMMU that has no capabilities but MSI interrupt support and
+>> fault queue interfaces. We'll add more features incrementally in the
+>> next patches.
+>>
+>> Co-developed-by: Sebastien Boeuf <seb@rivosinc.com>
+>> Signed-off-by: Sebastien Boeuf <seb@rivosinc.com>
+>> Signed-off-by: Tomasz Jeznach <tjeznach@rivosinc.com>
+>> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>> ---
+>>   hw/riscv/Kconfig            |    4 +
+>>   hw/riscv/meson.build        |    1 +
+>>   hw/riscv/riscv-iommu-bits.h |    2 +
+>>   hw/riscv/riscv-iommu.c      | 1641 +++++++++++++++++++++++++++++++++++
+>>   hw/riscv/riscv-iommu.h      |  142 +++
+>>   hw/riscv/trace-events       |   11 +
+>>   hw/riscv/trace.h            |    1 +
+>>   include/hw/riscv/iommu.h    |   36 +
+>>   meson.build                 |    1 +
+>>   9 files changed, 1839 insertions(+)
+>>   create mode 100644 hw/riscv/riscv-iommu.c
+>>   create mode 100644 hw/riscv/riscv-iommu.h
+>>   create mode 100644 hw/riscv/trace-events
+>>   create mode 100644 hw/riscv/trace.h
+>>   create mode 100644 include/hw/riscv/iommu.h
+>>
+>> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+>> index a2030e3a6f..f69d6e3c8e 100644
 
-* wrs.sto
-* wrs.nto
+(...)
 
-Signed-off-by: Balaji Ravikumar <bravikumar@rivosinc.com>
-Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
----
- disas/riscv.c | 6 ++++++
- 1 file changed, 6 insertions(+)
 
-diff --git a/disas/riscv.c b/disas/riscv.c
-index 05b663ebfe..ff0323f0dd 100644
---- a/disas/riscv.c
-+++ b/disas/riscv.c
-@@ -974,6 +974,8 @@ typedef enum {
-     rv_op_amomaxu_h = 943,
-     rv_op_amocas_b  = 944,
-     rv_op_amocas_h  = 945,
-+    rv_op_wrs_sto = 946,
-+    rv_op_wrs_nto = 947,
- } rv_op;
- 
- /* register names */
-@@ -2232,6 +2234,8 @@ const rv_opcode_data rvi_opcode_data[] = {
-     { "amomaxu.h", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-     { "amocas.b", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-     { "amocas.h", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-+    { "wrs.sto", rv_codec_none, rv_fmt_none, NULL, 0, 0, 0 },
-+    { "wrs.nto", rv_codec_none, rv_fmt_none, NULL, 0, 0, 0 },
- };
- 
- /* CSR names */
-@@ -4000,6 +4004,8 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
-                     case 0: op = rv_op_ecall; break;
-                     case 32: op = rv_op_ebreak; break;
-                     case 64: op = rv_op_uret; break;
-+                    case 416: op = rv_op_wrs_nto; break;
-+                    case 928: op = rv_op_wrs_sto; break;
-                     }
-                     break;
-                 case 256:
--- 
-2.45.2
+>> +/* IOMMU index for transactions without process_id specified. */
+>> +#define RISCV_IOMMU_NOPROCID 0
+>> +
+>> +static void riscv_iommu_notify(RISCVIOMMUState *s, int vec)
+>> +{
+>> +    const uint32_t fctl = riscv_iommu_reg_get32(s, RISCV_IOMMU_REG_FCTL);
+>> +    uint32_t ipsr, ivec;
+>> +
+>> +    if (fctl & RISCV_IOMMU_FCTL_WSI || !s->notify) {
+> For WSI, we can assert INTx by invoking pci_set_irq().
 
+For now we're not advertising WSI support because we don't have a way to test it
+(riscv-iommu-pci only supports MSI). In fact riscv_iommu_notify() isn't called
+for any WSI capable device, at least for now.
+
+I'm finishing some patches where we'll re-introduce riscv-iommu-sys in the 'virt'
+machine with WSI. At that point we'll pay more attention with the WSI bits that
+we're ignoring for now.
+
+>> +        return;
+>> +    }
+>> +
+>> +    ipsr = riscv_iommu_reg_mod32(s, RISCV_IOMMU_REG_IPSR, (1 << vec), 0);
+>> +    ivec = riscv_iommu_reg_get32(s, RISCV_IOMMU_REG_IVEC);
+>> +
+>> +    if (!(ipsr & (1 << vec))) {
+>> +        s->notify(s, (ivec >> (vec * 4)) & 0x0F);
+>> +    }
+>> +}
+>> +
+
+(...)
+
+>> +
+>> +/* Check if GPA matches MSI/MRIF pattern. */
+>> +static bool riscv_iommu_msi_check(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
+>> +    dma_addr_t gpa)
+>> +{
+> 
+> If IOMMU does not support MSI, that is, s->enable_msi is false, we can return false.
+> 
+
+Done.
+
+>> +    if (get_field(ctx->msiptp, RISCV_IOMMU_DC_MSIPTP_MODE) !=
+>> +        RISCV_IOMMU_DC_MSIPTP_MODE_FLAT) {
+>> +        return false; /* Invalid MSI/MRIF mode */
+>> +    }
+>> +
+>> +    if ((PPN_DOWN(gpa) ^ ctx->msi_addr_pattern) & ~ctx->msi_addr_mask) {
+>> +        return false; /* GPA not in MSI range defined by AIA IMSIC rules. */
+>> +    }
+>> +
+>> +    return true;
+>> +}
+>> +
+>> +/* RISCV IOMMU Address Translation Lookup - Page Table Walk */
+>> +static int riscv_iommu_spa_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
+>> +    IOMMUTLBEntry *iotlb)
+>> +{
+>> +    /* Early check for MSI address match when IOVA == GPA */
+>> +    if (iotlb->perm & IOMMU_WO &&
+>> +        riscv_iommu_msi_check(s, ctx, iotlb->iova)) {
+>> +        iotlb->target_as = &s->trap_as;
+>> +        iotlb->translated_addr = iotlb->iova;
+>> +        iotlb->addr_mask = ~TARGET_PAGE_MASK;
+>> +        return 0;
+>> +    }
+>  From spec 2.3, step 17 and step 18 state that the MSI address translation is always done after the first stage translation is done.
+
+This piece of code isn't doing MSI addr translation. It's preventing the lookup
+process by doing an early exit if IOVA==GPA, i.e. there's nothing to translate.
+
+What you described is being done in patch 8 with s-stage and g-stage support.
+
+(...)
+
+>> +/* Redirect MSI write for given GPA. */
+>> +static MemTxResult riscv_iommu_msi_write(RISCVIOMMUState *s,
+>> +    RISCVIOMMUContext *ctx, uint64_t gpa, uint64_t data,
+>> +    unsigned size, MemTxAttrs attrs)
+>> +{
+>> +    MemTxResult res;
+>> +    dma_addr_t addr;
+>> +    uint64_t intn;
+>> +    uint32_t n190;
+>> +    uint64_t pte[2];
+>> +    int fault_type = RISCV_IOMMU_FQ_TTYPE_UADDR_WR;
+>> +    int cause;
+>> +
+>> +    if (!riscv_iommu_msi_check(s, ctx, gpa)) {
+> I think we have invoked riscv_iommu_msi_check() before writing to s->trap_as. Do we need this check?
+
+
+You're right. Removed.
+
+(...)
+
+>> +
+>> +    if (data & RISCV_IOMMU_IPSR_PIP) {
+>> +        pqcsr = riscv_iommu_reg_get32(s, RISCV_IOMMU_REG_PQCSR);
+>> +
+>> +        if (pqcsr & RISCV_IOMMU_PQCSR_PIE &&
+>> +            (pqcsr & RISCV_IOMMU_PQCSR_PQOF ||
+>> +             pqcsr & RISCV_IOMMU_PQCSR_PQMF)) {
+>> +            ipsr_set |= RISCV_IOMMU_IPSR_PIP;
+>> +        } else {
+>> +            ipsr_clr |= RISCV_IOMMU_IPSR_PIP;
+>> +        }
+>> +    } else {
+>> +        ipsr_clr |= RISCV_IOMMU_IPSR_PIP;
+>> +    }
+>> +
+>> +    riscv_iommu_reg_mod32(s, RISCV_IOMMU_REG_IPSR, ipsr_set, ipsr_clr);
+> If the pending bit is cleared, we can deassert the WSI.
+
+
+I'll make a note to remind about this later when we add WSI support.
+
+
+(...)
+
+
+>> +#ifndef HW_RISCV_IOMMU_STATE_H
+>> +#define HW_RISCV_IOMMU_STATE_H
+>> +
+>> +#include "qemu/osdep.h"
+>> +#include "qom/object.h"
+>> +
+>> +#include "hw/riscv/iommu.h"
+>> +
+>> +struct RISCVIOMMUState {
+>> +    /*< private >*/
+>> +    DeviceState parent_obj;
+>> +
+>> +    /*< public >*/
+>> +    uint32_t version;     /* Reported interface version number */
+>> +    uint32_t pasid_bits;  /* process identifier width */
+> Do you mind renaming pasid_bits to something like pid_bits to remain consistency?
+
+
+Done. In fact I also renamed 'pasid' from the first patch to 'pid' as well.
+
+
+Thanks,
+
+Daniel
 
