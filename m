@@ -4,62 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6273AC3271E
-	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jul 2024 11:48:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92207C3271E
+	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jul 2024 11:48:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sQmqn-0001eR-0v; Mon, 08 Jul 2024 07:48:09 -0400
+	id 1sQmqf-0001Wg-9Q; Mon, 08 Jul 2024 07:48:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1sQmqd-0001Wn-DY
- for qemu-riscv@nongnu.org; Mon, 08 Jul 2024 07:47:59 -0400
-Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f])
+ id 1sQmqV-0001V0-SC
+ for qemu-riscv@nongnu.org; Mon, 08 Jul 2024 07:47:51 -0400
+Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1sQmqb-0000zS-Pn
- for qemu-riscv@nongnu.org; Mon, 08 Jul 2024 07:47:59 -0400
-Received: by mail-pf1-x42f.google.com with SMTP id
- d2e1a72fcca58-70b13791a5eso2079390b3a.1
- for <qemu-riscv@nongnu.org>; Mon, 08 Jul 2024 04:47:57 -0700 (PDT)
+ id 1sQmqU-0000yi-1F
+ for qemu-riscv@nongnu.org; Mon, 08 Jul 2024 07:47:51 -0400
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-70b07bdbfbcso2047881b3a.0
+ for <qemu-riscv@nongnu.org>; Mon, 08 Jul 2024 04:47:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1720439276; x=1721044076; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VrHiIjwct91ht0i7PHZglY7Dj7SLTZxWTqnnPukeXL0=;
- b=KiMcmSKV/zXN1fmVB12IrfAge2RP7iMw2zKzj18Hg9e2yei2SXQh0dJG9ZKj1rwlkW
- Oz0I0+nkgyGJFQjhcjAZPwrW837CNyjqK7YU6SL4NedCg9XSGcKXIfHWzqSP6GPEJ0Qy
- FRIFPZTosb+PHg0Ylr5VPsyG18tz0ofmvImTMjsmcVz+C64CrRx9JcifbJoVhKVhfehh
- QMo1G665m7el+FiqWoWPKXokqQBQI75RlT/9+78AfO3oflhdIYXrYdESdML52hRhEkCz
- E85bts3VCt2jeFRlJxnBd+SewvrFvt4IHTUz6oL+VdcIK0sWJYToP1IKCZ+HBI8Lejn0
- sYcg==
+ d=ventanamicro.com; s=google; t=1720439269; x=1721044069; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ssh9Ma5QgQhP/BtP7tTXA/GVszx1SV/i+1JHJhg9ESA=;
+ b=gxaGU/JE96JSn80dUi2ePw94OlhIgzyXSGj2XXSTmQKAjrAMLt+FTpw15rXCkvOJO9
+ KDHan7vX6T+/9DMbPRpVtKzro//hEamLAUWcBQryAfMD+sDzVESo+ddWRw/7LsHj5gEZ
+ Anm+vxXemmpGT9KVGo8AtVb7QrV/lC+b4htj44DBseExO7+J8cgKOXKkFqNHkXm3cE4I
+ u/fzz1bDJ4g1YPCT2WAWw5mlYh7tGnmJe29+Eoqq0xkSq5YggjoXPOeYpqUcU9YQ4Fgz
+ Yg43Ib1wjG/zKkd5FzDBtIE6q1mEjYgT23zqDSYJG+SbTNKnl+Ke2TEC0wsTrynkWW9/
+ fGlg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720439276; x=1721044076;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=VrHiIjwct91ht0i7PHZglY7Dj7SLTZxWTqnnPukeXL0=;
- b=U+U4ijYikEz9WODMv+95ZxvBqFGwhJtBiTTCFN3RGwzyi3/giL5y5lJvOkv3BYcuyO
- s/a6+JfkV2mKSwOxMB5vGy+ymQpOqrmnT4Fc5yVA6kVApKljifsLoe6XP5As82iDRIqL
- QIA6REbbvn0pk6ELSd9JzSjLh+0XWOhd+2icWYEPBcBL8QOPVRB1C7ENGuBMGpnCfmHs
- 0EhvULlJIsa52Woabjxj0w3p648xm3+IBWqv9GLqwiaGkegOHuPwxEXEV7LQnPm2yXaW
- s9ndHmJoU6qTPgSN8rpmKLMWNGBEgDyAxNcoW6Lw8Tt6WrPDIcyEw/SYRu1QFimyF3KG
- oewg==
+ d=1e100.net; s=20230601; t=1720439269; x=1721044069;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ssh9Ma5QgQhP/BtP7tTXA/GVszx1SV/i+1JHJhg9ESA=;
+ b=fd2VZLyXtfgLFUvlZuhYK31TDcEAZ9zkx4x7orm+ipuTC6FAuDN34QzuSWQDEhy6Oy
+ RgtjBW18rAckoDRANOqON345JFArvo5yemNjow02gDSB9gt7HX9NTdmKTMn4DMhIGrAY
+ LHDQQfrhNyI4reXGDiEMJQFzt17Gh8nODL81PUyFEplkBvOnEfjnzNztKSehg+vlFcyw
+ hHMALGhNz9bU6Nb2o2/FTEuCF9Bcda5PGVO48Fuif2doSaIkXtkYpGUMzsgfyu/PRuUP
+ eHEAUsBg1iEIadgdAoMISlJSxYCevS9MlJUL6AL28j0ta43UPGRnhttJS+g/uoYQ8PQH
+ m9jA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVpOPvhQyd/U6nOc/YwtsNxpRIYM41bhR0+8PnOvS4RhnVg40zTeN0repepLEvzRj8ioB5YAquASQFseHhx2+ZKshqV2KQ=
-X-Gm-Message-State: AOJu0Ywr0A66hK9Fa2YynrE8+xVI+Qb/YO/8U1ucxmWLIIJhXETkNp8S
- xAa6tbHMaeKVkm6NhHjqPPCzHdu6P+gRpC5i0GCzCgoviaT9sWIphB0zIvQEGUA=
-X-Google-Smtp-Source: AGHT+IHFlU+rWwSr6KtFsPmwPzz0lGrvPirNNcURX2ncYjd0ANVTO+zJXJY3S9fVvYAWII6Nx36ouQ==
-X-Received: by 2002:a05:6a00:4b16:b0:705:be21:f2be with SMTP id
- d2e1a72fcca58-70b00960b21mr15176007b3a.18.1720439276283; 
- Mon, 08 Jul 2024 04:47:56 -0700 (PDT)
+ AJvYcCVq33aU/7ygB4uszNxweLBzkKTpwFIYRUzODRVPPNSaVqJZAImlB9EwDfhKR9bE2UB9UoAeN636OYHv/de6oPMqBq2VAaQ=
+X-Gm-Message-State: AOJu0YwCbdWZb0UgW86iIvcrUsE9nwxrOGZ5LTkGf7UxnNgKrySFryP8
+ vPZj4MQzpaFSAsxwkBg3e+IrRmrC/FWHvF2cPnvDdhp8DrB4h9sdsAh219PPKOQ=
+X-Google-Smtp-Source: AGHT+IHhFf90uJYjckUVJiyJIN5pTNRa742f7177KFnSlPLgblkecaZn1VQ0Dik7DxH5gdlDw1E8Jw==
+X-Received: by 2002:a05:6a20:3ca1:b0:1c0:f0af:60d with SMTP id
+ adf61e73a8af0-1c0f0af0874mr4923498637.6.1720439268636; 
+ Mon, 08 Jul 2024 04:47:48 -0700 (PDT)
 Received: from sunil-pc.tail07344b.ts.net ([106.51.187.237])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-70b2a432ac6sm2769642b3a.94.2024.07.08.04.47.52
+ d2e1a72fcca58-70b2a432ac6sm2769642b3a.94.2024.07.08.04.47.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jul 2024 04:47:55 -0700 (PDT)
+ Mon, 08 Jul 2024 04:47:48 -0700 (PDT)
 From: Sunil V L <sunilvl@ventanamicro.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -71,17 +70,14 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  "Michael S . Tsirkin" <mst@redhat.com>,
  Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
  Sunil V L <sunilvl@ventanamicro.com>
-Subject: [PATCH v2 2/9] hw/riscv/virt-acpi-build.c: Update the HID of RISC-V
- UART
-Date: Mon,  8 Jul 2024 17:17:34 +0530
-Message-ID: <20240708114741.3499585-3-sunilvl@ventanamicro.com>
+Subject: [PATCH v2 0/9] RISC-V: ACPI: Namespace updates
+Date: Mon,  8 Jul 2024 17:17:32 +0530
+Message-ID: <20240708114741.3499585-1-sunilvl@ventanamicro.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240708114741.3499585-1-sunilvl@ventanamicro.com>
-References: <20240708114741.3499585-1-sunilvl@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42f;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pf1-x42f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pf1-x42d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -104,30 +100,71 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The RISC-V BRS specification [1] requires NS16550 compatible UART to
-have the HID RSCV0003. So, update the HID for the UART.
+This series adds few updates to RISC-V ACPI namespace for virt platform.
+Additionally, it has patches to enable ACPI table testing for RISC-V.
+
+1) PCI Link devices need to be created outside the scope of the PCI root
+complex to ensure correct probe ordering by the OS. This matches the
+example given in ACPI spec as well.
+
+2) Add PLIC and APLIC as platform devices as well to ensure probing
+order as per BRS spec [1] requirement.
+
+3) BRS spec requires RISC-V to use new ACPI ID for the generic UART. So,
+update the HID of the UART.
+
+4) Enabled ACPI tables tests for RISC-V which were originally part of
+[2] but couldn't get merged due to updates required in the expected AML
+files. I think combining those patches with this series makes it easier
+to merge since expected AML files are updated.
 
 [1] - https://github.com/riscv-non-isa/riscv-brs
+[2] - https://lists.gnu.org/archive/html/qemu-devel/2024-06/msg04734.html
 
-Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
----
- hw/riscv/virt-acpi-build.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Changes since v1:
+	1) Made changes in gpex-acpi.c generic as per feedback from
+	   Michael. This changes the DSDT for aarch64/virt and microvm
+	   machines. Hence, few patches are added to update the expected
+	   DSDT files for those machine so that CI tests don't fail.
+	2) Added patches to enable ACPI tables tests for RISC-V
+	   including a patch to remove the fallback path to
+	   search for expected AML files.
+	3) Rebased and added tags.
 
-diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
-index 87fe882af0..939f951e45 100644
---- a/hw/riscv/virt-acpi-build.c
-+++ b/hw/riscv/virt-acpi-build.c
-@@ -192,7 +192,7 @@ acpi_dsdt_add_uart(Aml *scope, const MemMapEntry *uart_memmap,
-                     uint32_t uart_irq)
- {
-     Aml *dev = aml_device("COM0");
--    aml_append(dev, aml_name_decl("_HID", aml_string("PNP0501")));
-+    aml_append(dev, aml_name_decl("_HID", aml_string("RSCV0003")));
-     aml_append(dev, aml_name_decl("_UID", aml_int(0)));
- 
-     Aml *crs = aml_resource_template();
+Sunil V L (9):
+  hw/riscv/virt-acpi-build.c: Add namespace devices for PLIC and APLIC
+  hw/riscv/virt-acpi-build.c: Update the HID of RISC-V UART
+  tests/acpi: Allow DSDT acpi table changes for aarch64
+  acpi/gpex: Create PCI link devices outside PCI root bridge
+  tests/acpi: update expected DSDT blob for aarch64 and  microvm
+  tests/qtest/bios-tables-test.c: Remove the fall back path
+  tests/acpi: Add empty ACPI data files for RISC-V
+  tests/qtest/bios-tables-test.c: Enable basic testing for RISC-V
+  tests/acpi: Add expected ACPI AML files for RISC-V
+
+ hw/pci-host/gpex-acpi.c                       |  13 ++---
+ hw/riscv/virt-acpi-build.c                    |  49 +++++++++++++++++-
+ tests/data/acpi/aarch64/virt/DSDT             | Bin 5196 -> 5196 bytes
+ .../data/acpi/aarch64/virt/DSDT.acpihmatvirt  | Bin 5282 -> 5282 bytes
+ tests/data/acpi/aarch64/virt/DSDT.memhp       | Bin 6557 -> 6557 bytes
+ tests/data/acpi/aarch64/virt/DSDT.pxb         | Bin 7679 -> 7679 bytes
+ tests/data/acpi/aarch64/virt/DSDT.topology    | Bin 5398 -> 5398 bytes
+ tests/data/acpi/riscv64/virt/APIC             | Bin 0 -> 116 bytes
+ tests/data/acpi/riscv64/virt/DSDT             | Bin 0 -> 3576 bytes
+ tests/data/acpi/riscv64/virt/FACP             | Bin 0 -> 276 bytes
+ tests/data/acpi/riscv64/virt/MCFG             | Bin 0 -> 60 bytes
+ tests/data/acpi/riscv64/virt/RHCT             | Bin 0 -> 332 bytes
+ tests/data/acpi/riscv64/virt/SPCR             | Bin 0 -> 80 bytes
+ tests/data/acpi/x86/microvm/DSDT.pcie         | Bin 3023 -> 3023 bytes
+ tests/qtest/bios-tables-test.c                |  40 +++++++++-----
+ 15 files changed, 81 insertions(+), 21 deletions(-)
+ create mode 100644 tests/data/acpi/riscv64/virt/APIC
+ create mode 100644 tests/data/acpi/riscv64/virt/DSDT
+ create mode 100644 tests/data/acpi/riscv64/virt/FACP
+ create mode 100644 tests/data/acpi/riscv64/virt/MCFG
+ create mode 100644 tests/data/acpi/riscv64/virt/RHCT
+ create mode 100644 tests/data/acpi/riscv64/virt/SPCR
+
 -- 
 2.43.0
 
