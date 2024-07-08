@@ -4,73 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51B63C3271E
-	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jul 2024 04:02:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD518C3DA45
+	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jul 2024 04:17:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sQfZI-0000y6-To; Mon, 08 Jul 2024 00:01:36 -0400
+	id 1sQfoV-0007hY-Dv; Mon, 08 Jul 2024 00:17:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sQfZH-0000xI-GE; Mon, 08 Jul 2024 00:01:35 -0400
-Received: from mail-vk1-xa35.google.com ([2607:f8b0:4864:20::a35])
+ id 1sQfoP-0007YZ-Qj; Mon, 08 Jul 2024 00:17:15 -0400
+Received: from mail-ua1-x92b.google.com ([2607:f8b0:4864:20::92b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sQfZE-0005Th-Uo; Mon, 08 Jul 2024 00:01:35 -0400
-Received: by mail-vk1-xa35.google.com with SMTP id
- 71dfb90a1353d-4f2f24f6470so1098045e0c.1; 
- Sun, 07 Jul 2024 21:01:32 -0700 (PDT)
+ id 1sQfoO-0008Rz-7j; Mon, 08 Jul 2024 00:17:13 -0400
+Received: by mail-ua1-x92b.google.com with SMTP id
+ a1e0cc1a2514c-81014df3028so1010150241.3; 
+ Sun, 07 Jul 2024 21:17:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1720411291; x=1721016091; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1720412230; x=1721017030; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/IgqoEwgv+DINvQ6vAi3HF5PHgWJa35xvqdZD/FL0eY=;
- b=ienZc6GIckm/g11f5xQi6SUL8zwf37yXrcldRV9b+ueauKHn8rp8lkXPsygcoweB5X
- BXfQdAD+vP+lOyKcnYHd/2e+xAULm9/pFrsJ+6ap0jONqJpYxzp1rBWuxyAfQB4SVDXC
- gNv9VCoyacrkEQNyAyJm9QxB2IxjmTQRFBw0XX32L4VblFH1DtJtt2KI+ci2hvCZFS9K
- Y1+FpAlQxXwl+Ptid7l/jHpbsFiL+S+buDeufAXACVzMF5mNR+xVVnvr/15s8KOYXnpN
- /EtxrJ/KZi8VUB6R7awQ0AF69My5GdMIsFbnden2Tr48sUjlC2nDb9dNR1jrRKATHshM
- j8og==
+ bh=JgS+tC40bbSUGfrHjNXrIbzvCY5/v5MKld6YKCNg/o4=;
+ b=gNt3ITjGdiU38G4Ci/HEkQeCql2QwXEDSIgHLRvOcnhNAOF3Zy0l42GH9s6cOCloug
+ sBbd19OHxhK64DBhbddSmqkNA1rsxa7i6ww1dfF9hfQWh8LT8ODPO6cGKZGURQvrATQq
+ FWUSLpvjzGynnjBiQaVG9PjzB+yiGGEP7iMndIjorUys5SfOda09tPJpQcuCSy38y8uh
+ /f/WwpVi3roQPRqLwk/eDrXsaDVWwrxB/tzE8ktJXKeCngBOF0nSsR7SprNyulFRumTJ
+ G0MRDJiwQq01YkKown0ve2oCz4KPgp03HkJ4EjrJNltcIQUgPsT2gvHwnNh25zh+tQ+s
+ QE4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720411291; x=1721016091;
+ d=1e100.net; s=20230601; t=1720412230; x=1721017030;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/IgqoEwgv+DINvQ6vAi3HF5PHgWJa35xvqdZD/FL0eY=;
- b=hE1IpEdzs65qmCHoG0QH89j3+pj5iJdrDTUSF/x20vWXkh6g9QBVN/J+uKKUjg0pvF
- +a77iDip//od24cMOpEmzkq5qCkoW8hitKfDLShesM8WPhA++0gHEhJwYgKqEnxD8Yp6
- Cr1FRENTXNnjQSf1ylAeXqKT/4dUlqEQ9Wuh4GESG5+w10FKh/9pQfk4ng36hb3TYZNm
- pCIi5Yh72w7rDn7xPemnM1Hck2+k0xSjC2xYWkWU6r+UfPVDv2QQYc7ydQ4EwXzqM7nB
- aqsw6DQY2y4CG86c1fvqiFjAPuZBkA9vJ83C81XIdgzv/16+7V5sXptXjqzWbuLqk3sO
- 6Iug==
+ bh=JgS+tC40bbSUGfrHjNXrIbzvCY5/v5MKld6YKCNg/o4=;
+ b=szLAc5BD3EfVMzW4dYNqJu2G8CRIc07Rb8lBeQOdJI33ngzFRNdDtyDQDO9/GXXRLt
+ ZwYkeFq7MprnzqBHZC+JP0n32e6QVuxuDDhhUbHHxHrS4q8y4pXIglAOMdyHaekDU3m6
+ ktNhyt4GBlFwNVSvV6+te0WnuyqMrbLcKC+TTWH+uxhNLhdoP+rSFQ8arhUdW+gIGOHn
+ fCItS9i6GpzdhxlX1K4Dqe0czub8tczaYOobJLKeYsb5fX4yle38MpH5DbQqYU+ZqhUm
+ k3hh0aN/6A8HBf8iZyexLUi3As6XvLtBI4X6BwnuUCY3cHoXOwcWhki2+2z5CFapMbDR
+ nrPw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUNywBu1PpsC7m6OhjWJHuCdW0aOZB3uI3EwGP85H4JDt4f/Sjwvp5AWg+qpA/+O62tfNgWGgda561uwMDciG6wOvVkzBc=
-X-Gm-Message-State: AOJu0YwkfWahlBgKaSzME4zjsieYHW16RPms2AjgyFFzAoZJArKAGk/f
- WuJqTlnygYFpbl0JWz3T4rwTF+08o4qhukT0YlHWuB5yrQ6Is38k/L8/yGnn/J7F+AAT2cdPmlr
- LePH9EHvf2dOp04qjxozJCl/OBKQ=
-X-Google-Smtp-Source: AGHT+IEc0zDtcRHh2+ngazxUiO6pALfm6uI9kIik4lUk/Ej/3h+4csYyU5910hARyA36PmIPNVwiGaLFKN2LP4Y8jV0=
-X-Received: by 2002:a05:6122:4891:b0:4ef:6618:fd5c with SMTP id
- 71dfb90a1353d-4f2f3edf456mr11772668e0c.3.1720411291165; Sun, 07 Jul 2024
- 21:01:31 -0700 (PDT)
+ AJvYcCVcaYscu/G8z9q/WPg/BtvqBek99zjIlIm5Dl9tbfuoj2FCEpap8YUa403Ob8uSn2blPN3KFioqdO3m35o4E5XDkz5ZXhk=
+X-Gm-Message-State: AOJu0YwnBzRgo3B90WYwA7bHhNTaz0x6ths6GtfzB5LxSAktUFxl3qOD
+ a+WMUEtRtvcq89yV9xficiFEsgzTBxdMFOiatcE2okCQTecRTANFsGoqaxWIwcudIpVMM4dy03P
+ X3SFyW7nRJopsaY4KKfRGZA7a0YQ=
+X-Google-Smtp-Source: AGHT+IE4Q+3mBX9WqJhDadGOTA39TEpJx09cg3UsUtNaBmYnwy16b13gylARmr+Nxnf4M6zx6vnS9n/kQaLzwfHn3Ec=
+X-Received: by 2002:a05:6102:21c9:b0:48f:90be:78a8 with SMTP id
+ ada2fe7eead31-48fee871505mr10017922137.9.1720412230401; Sun, 07 Jul 2024
+ 21:17:10 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240604090434.37136-1-yumin686@andestech.com>
-In-Reply-To: <20240604090434.37136-1-yumin686@andestech.com>
+References: <20240628094003.94182-1-jiangzw@tecorigin.com>
+In-Reply-To: <20240628094003.94182-1-jiangzw@tecorigin.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 8 Jul 2024 14:01:05 +1000
-Message-ID: <CAKmqyKOZ=MRQOkB8C4Ofe5WER2in4_zG9pzW8AEzzkYM8ca-Jw@mail.gmail.com>
-Subject: Re: [PATCH v4] target/riscv: raise an exception when CSRRS/CSRRC
- writes a read-only CSR
-To: Yu-Ming Chang <yumin686@andestech.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
- alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com, 
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
- Alvin Chang <alvinga@andestech.com>
+Date: Mon, 8 Jul 2024 14:16:44 +1000
+Message-ID: <CAKmqyKMUa+_puqeEBA-KqxrvYgdobrqddnhYftrCpxYTTyU9=w@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Fix the check with vector register
+ multiples of LMUL
+To: Zhiwei Jiang <jiangzw@tecorigin.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Weiwei Li <liwei1518@gmail.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Alistair Francis <alistair.francis@wdc.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a35;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa35.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92b;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92b.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -94,211 +96,42 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jun 4, 2024 at 7:15=E2=80=AFPM Yu-Ming Chang via <qemu-devel@nongnu=
-.org> wrote:
+On Fri, Jun 28, 2024 at 7:46=E2=80=AFPM Zhiwei Jiang <jiangzw@tecorigin.com=
+> wrote:
 >
-> Both CSRRS and CSRRC always read the addressed CSR and cause any read sid=
-e
-> effects regardless of rs1 and rd fields. Note that if rs1 specifies a reg=
-ister
-> holding a zero value other than x0, the instruction will still attempt to=
- write
-> the unmodified value back to the CSR and will cause any attendant side ef=
-fects.
->
-> So if CSRRS or CSRRC tries to write a read-only CSR with rs1 which specif=
-ies
-> a register holding a zero value, an illegal instruction exception should =
-be
-> raised.
->
-> Signed-off-by: Yu-Ming Chang <yumin686@andestech.com>
-> Signed-off-by: Alvin Chang <alvinga@andestech.com>
+> In the original extract32(val, 0, lmul) logic, when lmul is 2 and val is =
+v10 or v12,
+> there is an issue with this check condition. I think a simple mod operati=
+on is sufficient.
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Overall looks ok. Do you mind updating the commit message to describe
+what exactly this fixes (as in what issue you had) and why this fixes
+it
 
 Alistair
 
+>
+> Signed-off-by: Zhiwei Jiang <jiangzw@tecorigin.com>
 > ---
-> Hi Alistair,
->     This fixed the issue of riscv_csrrw_debug().
+>  target/riscv/insn_trans/trans_rvv.c.inc | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> Best regards,
-> Yuming
->
->  target/riscv/cpu.h       |  4 +++
->  target/riscv/csr.c       | 57 ++++++++++++++++++++++++++++++++++++----
->  target/riscv/op_helper.c |  6 ++---
->  3 files changed, 58 insertions(+), 9 deletions(-)
->
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 2d0c02c35b..72921bafc0 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -708,6 +708,8 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *=
-pc,
->  void riscv_cpu_update_mask(CPURISCVState *env);
->  bool riscv_cpu_is_32bit(RISCVCPU *cpu);
->
-> +RISCVException riscv_csrr(CPURISCVState *env, int csrno,
-> +                          target_ulong *ret_value);
->  RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
->                             target_ulong *ret_value,
->                             target_ulong new_value, target_ulong write_ma=
-sk);
-> @@ -740,6 +742,8 @@ typedef RISCVException (*riscv_csr_op_fn)(CPURISCVSta=
-te *env, int csrno,
->                                            target_ulong new_value,
->                                            target_ulong write_mask);
->
-> +RISCVException riscv_csrr_i128(CPURISCVState *env, int csrno,
-> +                               Int128 *ret_value);
->  RISCVException riscv_csrrw_i128(CPURISCVState *env, int csrno,
->                                  Int128 *ret_value,
->                                  Int128 new_value, Int128 write_mask);
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 726096444f..aa765678b9 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -4312,7 +4312,7 @@ static RISCVException rmw_seed(CPURISCVState *env, =
-int csrno,
->
->  static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
->                                                 int csrno,
-> -                                               bool write_mask)
-> +                                               bool write)
+> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_=
+trans/trans_rvv.c.inc
+> index 3a3896ba06..e89b0f2b1e 100644
+> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+> @@ -118,7 +118,7 @@ static bool require_nf(int vd, int nf, int lmul)
+>   */
+>  static bool require_align(const int8_t val, const int8_t lmul)
 >  {
->      /* check privileges and return RISCV_EXCP_ILLEGAL_INST if check fail=
-s */
->      bool read_only =3D get_field(csrno, 0xC00) =3D=3D 3;
-> @@ -4334,7 +4334,7 @@ static inline RISCVException riscv_csrrw_check(CPUR=
-ISCVState *env,
->      }
->
->      /* read / write check */
-> -    if (write_mask && read_only) {
-> +    if (write && read_only) {
->          return RISCV_EXCP_ILLEGAL_INST;
->      }
->
-> @@ -4421,11 +4421,22 @@ static RISCVException riscv_csrrw_do64(CPURISCVSt=
-ate *env, int csrno,
->      return RISCV_EXCP_NONE;
+> -    return lmul <=3D 0 || extract32(val, 0, lmul) =3D=3D 0;
+> +    return lmul <=3D 0 || val % lmul =3D=3D 0;
 >  }
 >
-> +RISCVException riscv_csrr(CPURISCVState *env, int csrno,
-> +                           target_ulong *ret_value)
-> +{
-> +    RISCVException ret =3D riscv_csrrw_check(env, csrno, false);
-> +    if (ret !=3D RISCV_EXCP_NONE) {
-> +        return ret;
-> +    }
-> +
-> +    return riscv_csrrw_do64(env, csrno, ret_value, 0, 0);
-> +}
-> +
->  RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
->                             target_ulong *ret_value,
->                             target_ulong new_value, target_ulong write_ma=
-sk)
->  {
-> -    RISCVException ret =3D riscv_csrrw_check(env, csrno, write_mask);
-> +    RISCVException ret =3D riscv_csrrw_check(env, csrno, true);
->      if (ret !=3D RISCV_EXCP_NONE) {
->          return ret;
->      }
-> @@ -4473,13 +4484,45 @@ static RISCVException riscv_csrrw_do128(CPURISCVS=
-tate *env, int csrno,
->      return RISCV_EXCP_NONE;
->  }
->
-> +RISCVException riscv_csrr_i128(CPURISCVState *env, int csrno,
-> +                               Int128 *ret_value)
-> +{
-> +    RISCVException ret;
-> +
-> +    ret =3D riscv_csrrw_check(env, csrno, false);
-> +    if (ret !=3D RISCV_EXCP_NONE) {
-> +        return ret;
-> +    }
-> +
-> +    if (csr_ops[csrno].read128) {
-> +        return riscv_csrrw_do128(env, csrno, ret_value,
-> +                                 int128_zero(), int128_zero());
-> +    }
-> +
-> +    /*
-> +     * Fall back to 64-bit version for now, if the 128-bit alternative i=
-sn't
-> +     * at all defined.
-> +     * Note, some CSRs don't need to extend to MXLEN (64 upper bits non
-> +     * significant), for those, this fallback is correctly handling the
-> +     * accesses
-> +     */
-> +    target_ulong old_value;
-> +    ret =3D riscv_csrrw_do64(env, csrno, &old_value,
-> +                           (target_ulong)0,
-> +                           (target_ulong)0);
-> +    if (ret =3D=3D RISCV_EXCP_NONE && ret_value) {
-> +        *ret_value =3D int128_make64(old_value);
-> +    }
-> +    return ret;
-> +}
-> +
->  RISCVException riscv_csrrw_i128(CPURISCVState *env, int csrno,
->                                  Int128 *ret_value,
->                                  Int128 new_value, Int128 write_mask)
->  {
->      RISCVException ret;
->
-> -    ret =3D riscv_csrrw_check(env, csrno, int128_nz(write_mask));
-> +    ret =3D riscv_csrrw_check(env, csrno, true);
->      if (ret !=3D RISCV_EXCP_NONE) {
->          return ret;
->      }
-> @@ -4518,7 +4561,11 @@ RISCVException riscv_csrrw_debug(CPURISCVState *en=
-v, int csrno,
->  #if !defined(CONFIG_USER_ONLY)
->      env->debugger =3D true;
->  #endif
-> -    ret =3D riscv_csrrw(env, csrno, ret_value, new_value, write_mask);
-> +    if (!write_mask) {
-> +        ret =3D riscv_csrr(env, csrno, ret_value);
-> +    } else {
-> +        ret =3D riscv_csrrw(env, csrno, ret_value, new_value, write_mask=
-);
-> +    }
->  #if !defined(CONFIG_USER_ONLY)
->      env->debugger =3D false;
->  #endif
-> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-> index f414aaebdb..b95d47e9ac 100644
-> --- a/target/riscv/op_helper.c
-> +++ b/target/riscv/op_helper.c
-> @@ -51,7 +51,7 @@ target_ulong helper_csrr(CPURISCVState *env, int csr)
->      }
->
->      target_ulong val =3D 0;
-> -    RISCVException ret =3D riscv_csrrw(env, csr, &val, 0, 0);
-> +    RISCVException ret =3D riscv_csrr(env, csr, &val);
->
->      if (ret !=3D RISCV_EXCP_NONE) {
->          riscv_raise_exception(env, ret, GETPC());
-> @@ -84,9 +84,7 @@ target_ulong helper_csrrw(CPURISCVState *env, int csr,
->  target_ulong helper_csrr_i128(CPURISCVState *env, int csr)
->  {
->      Int128 rv =3D int128_zero();
-> -    RISCVException ret =3D riscv_csrrw_i128(env, csr, &rv,
-> -                                          int128_zero(),
-> -                                          int128_zero());
-> +    RISCVException ret =3D riscv_csrr_i128(env, csr, &rv);
->
->      if (ret !=3D RISCV_EXCP_NONE) {
->          riscv_raise_exception(env, ret, GETPC());
+>  /*
 > --
-> 2.34.1
+> 2.17.1
 >
 >
 
