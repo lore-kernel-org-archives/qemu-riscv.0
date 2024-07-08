@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFC7FC3271E
-	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jul 2024 17:36:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AE0FC3271E
+	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jul 2024 17:36:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sQsHL-0006ml-9S; Mon, 08 Jul 2024 13:35:55 -0400
+	id 1sQsHd-0008Ge-8d; Mon, 08 Jul 2024 13:36:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1sQsH0-0005qg-Aq
- for qemu-riscv@nongnu.org; Mon, 08 Jul 2024 13:35:41 -0400
-Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
+ id 1sQsHZ-000845-LJ
+ for qemu-riscv@nongnu.org; Mon, 08 Jul 2024 13:36:10 -0400
+Received: from mail-pg1-x529.google.com ([2607:f8b0:4864:20::529])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1sQsGx-00083m-R0
- for qemu-riscv@nongnu.org; Mon, 08 Jul 2024 13:35:33 -0400
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-1fb53bfb6easo15549935ad.2
- for <qemu-riscv@nongnu.org>; Mon, 08 Jul 2024 10:35:31 -0700 (PDT)
+ id 1sQsHV-0008FR-Rb
+ for qemu-riscv@nongnu.org; Mon, 08 Jul 2024 13:36:09 -0400
+Received: by mail-pg1-x529.google.com with SMTP id
+ 41be03b00d2f7-75a6c290528so2166898a12.1
+ for <qemu-riscv@nongnu.org>; Mon, 08 Jul 2024 10:35:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1720460130; x=1721064930; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1720460157; x=1721064957; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bSV5rwJs1l/4AVT07lE41oPs9+do5UeVJi0VZ15LYnU=;
- b=ccQpdZjzk3nIFNtUi+amEGIASasBHzLZILKI7dWFbMctJHIGOPK8+PUJz1oFUHBJSO
- PiR9IbeXGhq8mQLpXXrYq3mUnfs2tksV1D0Au0v+yOVAKHjhG0KvyWkjFpCvM5ghX7db
- Xss2pB98+RJUNIIff8kdz/TRBJ5D168L20HXgO1ldAU73FCZ1d2XNkga9zr0XCzfdfn8
- vRsTdfjxpnDgQ+5j4qtU3V0QgAE/jI+wv9mwxVn9wjcmshyiRd6OOm6sGQGyIQABKQ09
- cjj5nOH2szh550NQR9Nx354Wo45pmX80+u3g9IIyBmq7fhqiUq36jcREqNA7Wc6jDd8A
- PR5Q==
+ bh=Ybl4nvVqnampJxkKuJ8/OQ5kDOcVjbQC5dv9c96s0KU=;
+ b=eebzaZR4NkTGS0uDwzR+uuBm2i9WBBvIPLur+PhfYD2PbM5SKg9KYE5qyOyqK1Ofk6
+ CnG5UxTJOsI6z/Mww/pTKFMhkOQ7c9H1G88wRwyQYTCBqNifozoFLhmIt1m8LjrJ34H7
+ Dr+j8L848dnhu4J2R7tMDyxORe/3UJe+yV4ZgkctEqmNEs14CUAIiwlYJra/SD6Zg36S
+ 8KWsM3vdVc+qq9HN59Gm5Oyz6WjMBH7cDaSQPj7FB5e3FZUMAH1WYPjN/I7MGA+Q9dvy
+ Ks8mp97NLH67n/TqD/FZwPe3BIJ5V5ZCIxndqCOEAjFi3tNLfX9GR6w69xzU0+LLHV6A
+ YX0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720460130; x=1721064930;
+ d=1e100.net; s=20230601; t=1720460157; x=1721064957;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bSV5rwJs1l/4AVT07lE41oPs9+do5UeVJi0VZ15LYnU=;
- b=sObTRR6XxzrPhV4KVTKo8/mCZo6zCP9FE7roNxtxjRR8jx6lrbEMyWWgzPRnFItxYK
- 8Zj1iI4BDKZ4tC7Q5RuUMiv0fjZ6bg2oTHbTLRP1rw0z3OV2xo6iTRpF/F7FpyKewdWd
- EHZm0iPTEqNuFr5AvdN8gGREWLkSEOHBSImCHs7UGJjXE/oHCvyk3fNEcuX93HP5Hee8
- 2PL0uxkTjDwBKbD/cFsHWqP4luL1QfZLIAkS1ZXcoX5Dfx37l/qATz5Nqhids9S9GqUX
- Tz8iso8ryDyK4JWq0jB9iJzz5UUlK7ajk2TPB1UlIvHSSwHU5ZeK12vBUiBys+x28dbk
- q+Ww==
-X-Gm-Message-State: AOJu0YwTJl3jUpctAW8MYq1RKHP36U6aq7B+eTU6di4fZPFAX9AgfOWj
- lxNiTc6aUq2tFwnBmoIBl6IlVdbYW5AfhzVMVN8uufe7/RELmap5Ps2OYXm962s=
-X-Google-Smtp-Source: AGHT+IFt8DUMlq0xIKksdvztxxnc6TxhAvPq7zjCwadjVGGB9lC7KpUTwFglYkBggMKbOqRL4/3F9g==
-X-Received: by 2002:a17:902:ec8a:b0:1f9:c3e4:4c0f with SMTP id
- d9443c01a7336-1fbb6d2a53cmr2141845ad.34.1720460130126; 
- Mon, 08 Jul 2024 10:35:30 -0700 (PDT)
+ bh=Ybl4nvVqnampJxkKuJ8/OQ5kDOcVjbQC5dv9c96s0KU=;
+ b=bf4aHWhds3ibEL/EQlp5TwPP6OK063S8y9P6UsMc0+eS7kGJ3295UGga5rbhmVji11
+ gSFFC2tObyC5ytukyjNqaNHKhJXm2Cm1RRmX0qsChtCL3G1yu2VbtW12NdXiqgT8vfWR
+ zxZ2OuwSWuC45sC/WqR4qBcIcdN3Ix0x4Zu5nSoRJe4eqSywxEnt8MFEj9Mj14jHQU6J
+ 5VO8RyXVFCFjSTyhy9F4ZNHdgUCfri91RKHhVy+5g6hg1QcEgGohCtSjvIOrpq6XZGf6
+ kGDF0JB5Wke8CjkbrTg2A1hZPXl2Dnv2YPMlsOJ1+vgNjCN0++kjfVvcfMi853GoNuuW
+ IedQ==
+X-Gm-Message-State: AOJu0Yytzp9z/s/i+TPmI+4nQeDQxvqSrc6cWE1E21ZOmbO5HMQUdqE4
+ tOqRq/BCNqpseJjg6c7P0TfmlX/DTVfzPJ8YQDnSg8l/NiaSgux86h72a2TW3Tgn2agrpM++zz6
+ T
+X-Google-Smtp-Source: AGHT+IHDKQSftbcFxl5ayeD2AEv/Mj+QS744+RJURbFPXBIRqmejk/qlFjhXZN/ZoIvHmC5zZ6/6dQ==
+X-Received: by 2002:a05:6a20:7f96:b0:1c2:93a7:2556 with SMTP id
+ adf61e73a8af0-1c2984cf106mr84529637.41.1720460156715; 
+ Mon, 08 Jul 2024 10:35:56 -0700 (PDT)
 Received: from grind.dc1.ventanamicro.com ([179.193.8.43])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1fbb6ad3829sm1153765ad.299.2024.07.08.10.35.27
+ d9443c01a7336-1fbb6ad3829sm1153765ad.299.2024.07.08.10.35.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jul 2024 10:35:29 -0700 (PDT)
+ Mon, 08 Jul 2024 10:35:56 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  frank.chang@sifive.com, tjeznach@rivosinc.com, jason.chien@sifive.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v5 06/13] hw/riscv/virt.c: support for RISC-V IOMMU PCIDevice
- hotplug
-Date: Mon,  8 Jul 2024 14:34:53 -0300
-Message-ID: <20240708173501.426225-7-dbarboza@ventanamicro.com>
+Subject: [PATCH v5 13/13] docs/specs: add riscv-iommu
+Date: Mon,  8 Jul 2024 14:35:00 -0300
+Message-ID: <20240708173501.426225-14-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20240708173501.426225-1-dbarboza@ventanamicro.com>
 References: <20240708173501.426225-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x632.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::529;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x529.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -97,86 +97,113 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Tomasz Jeznach <tjeznach@rivosinc.com>
+Add a simple guideline to use the existing RISC-V IOMMU support we just
+added.
 
-Generate device tree entry for riscv-iommu PCI device, along with
-mapping all PCI device identifiers to the single IOMMU device instance.
+This doc will be updated once we add the riscv-iommu-sys device.
 
-Signed-off-by: Tomasz Jeznach <tjeznach@rivosinc.com>
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Frank Chang <frank.chang@sifive.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- hw/riscv/virt.c | 33 ++++++++++++++++++++++++++++++++-
- 1 file changed, 32 insertions(+), 1 deletion(-)
+ docs/specs/index.rst       |  1 +
+ docs/specs/riscv-iommu.rst | 55 ++++++++++++++++++++++++++++++++++++++
+ docs/system/riscv/virt.rst | 13 +++++++++
+ 3 files changed, 69 insertions(+)
+ create mode 100644 docs/specs/riscv-iommu.rst
 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index bc0893e087..8da1f1c9e9 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -32,6 +32,7 @@
- #include "hw/core/sysbus-fdt.h"
- #include "target/riscv/pmu.h"
- #include "hw/riscv/riscv_hart.h"
-+#include "hw/riscv/iommu.h"
- #include "hw/riscv/virt.h"
- #include "hw/riscv/boot.h"
- #include "hw/riscv/numa.h"
-@@ -1024,6 +1025,30 @@ static void create_fdt_virtio_iommu(RISCVVirtState *s, uint16_t bdf)
-                            bdf + 1, iommu_phandle, bdf + 1, 0xffff - bdf);
- }
+diff --git a/docs/specs/index.rst b/docs/specs/index.rst
+index 1484e3e760..c68cd9ae6c 100644
+--- a/docs/specs/index.rst
++++ b/docs/specs/index.rst
+@@ -33,3 +33,4 @@ guest hardware that is specific to QEMU.
+    virt-ctlr
+    vmcoreinfo
+    vmgenid
++   riscv-iommu
+diff --git a/docs/specs/riscv-iommu.rst b/docs/specs/riscv-iommu.rst
+new file mode 100644
+index 0000000000..fa38ff7667
+--- /dev/null
++++ b/docs/specs/riscv-iommu.rst
+@@ -0,0 +1,55 @@
++.. _riscv-iommu:
++
++RISC-V IOMMU support for RISC-V machines
++========================================
++
++QEMU implements a RISC-V IOMMU emulation based on the RISC-V IOMMU spec
++version 1.0 [1].
++
++The emulation includes a PCI reference device, riscv-iommu-pci, that QEMU
++RISC-V boards can use.  The 'virt' RISC-V machine is compatible with this
++device.
++
++A platform device that implements the RISC-V IOMMU will be added in the
++future.
++
++
++riscv-iommu-pci reference device
++--------------------------------
++
++This device implements the RISC-V IOMMU emulation as recommended by the section
++"Integrating an IOMMU as a PCIe device" of [1]: a PCI device with base class 08h,
++sub-class 06h and programming interface 00h.
++
++As a reference device it doesn't implement anything outside of the specification,
++so it uses a generic default PCI ID given by QEMU: 1b36:0014.
++
++To include the device in the 'virt' machine:
++
++.. code-block:: bash
++
++  $ qemu-system-riscv64 -M virt -device riscv-iommu-pci (...)
++
++As of this writing the existing Linux kernel support [2], not yet merged, is being
++created as a Rivos device, i.e. it uses Rivos vendor ID.  To use the riscv-iommu-pci
++device with the existing kernel support we need to emulate a Rivos PCI IOMMU by
++setting 'vendor-id' and 'device-id':
++
++.. code-block:: bash
++
++  $ qemu-system-riscv64 -M virt	\
++     -device riscv-iommu-pci,vendor-id=0x1efd,device-id=0xedf1 (...)
++
++Several options are available to control the capabilities of the device, namely:
++
++- "bus"
++- "ioatc-limit"
++- "intremap"
++- "ats"
++- "off" (Out-of-reset translation mode: 'on' for DMA disabled, 'off' for 'BARE' (passthrough))
++- "s-stage"
++- "g-stage"
++
++
++[1] https://github.com/riscv-non-isa/riscv-iommu/releases/download/v1.0/riscv-iommu.pdf
++[2] https://lore.kernel.org/linux-riscv/cover.1718388908.git.tjeznach@rivosinc.com/
+diff --git a/docs/system/riscv/virt.rst b/docs/system/riscv/virt.rst
+index 9a06f95a34..8e9a2e4dda 100644
+--- a/docs/system/riscv/virt.rst
++++ b/docs/system/riscv/virt.rst
+@@ -84,6 +84,19 @@ none``, as in
  
-+static void create_fdt_iommu(RISCVVirtState *s, uint16_t bdf)
-+{
-+    const char comp[] = "riscv,pci-iommu";
-+    void *fdt = MACHINE(s)->fdt;
-+    uint32_t iommu_phandle;
-+    g_autofree char *iommu_node = NULL;
-+    g_autofree char *pci_node = NULL;
-+
-+    pci_node = g_strdup_printf("/soc/pci@%lx",
-+                               (long) virt_memmap[VIRT_PCIE_ECAM].base);
-+    iommu_node = g_strdup_printf("%s/iommu@%x", pci_node, bdf);
-+    iommu_phandle = qemu_fdt_alloc_phandle(fdt);
-+    qemu_fdt_add_subnode(fdt, iommu_node);
-+
-+    qemu_fdt_setprop(fdt, iommu_node, "compatible", comp, sizeof(comp));
-+    qemu_fdt_setprop_cell(fdt, iommu_node, "#iommu-cells", 1);
-+    qemu_fdt_setprop_cell(fdt, iommu_node, "phandle", iommu_phandle);
-+    qemu_fdt_setprop_cells(fdt, iommu_node, "reg",
-+                           bdf << 8, 0, 0, 0, 0);
-+    qemu_fdt_setprop_cells(fdt, pci_node, "iommu-map",
-+                           0, iommu_phandle, 0, bdf,
-+                           bdf + 1, iommu_phandle, bdf + 1, 0xffff - bdf);
-+}
-+
- static void finalize_fdt(RISCVVirtState *s)
- {
-     uint32_t phandle = 1, irq_mmio_phandle = 1, msi_pcie_phandle = 1;
-@@ -1730,9 +1755,11 @@ static HotplugHandler *virt_machine_get_hotplug_handler(MachineState *machine,
-     MachineClass *mc = MACHINE_GET_CLASS(machine);
+ Firmware images used for pflash must be exactly 32 MiB in size.
  
-     if (device_is_dynamic_sysbus(mc, dev) ||
--        object_dynamic_cast(OBJECT(dev), TYPE_VIRTIO_IOMMU_PCI)) {
-+        object_dynamic_cast(OBJECT(dev), TYPE_VIRTIO_IOMMU_PCI) ||
-+        object_dynamic_cast(OBJECT(dev), TYPE_RISCV_IOMMU_PCI)) {
-         return HOTPLUG_HANDLER(machine);
-     }
++riscv-iommu support
++-------------------
 +
-     return NULL;
- }
- 
-@@ -1753,6 +1780,10 @@ static void virt_machine_device_plug_cb(HotplugHandler *hotplug_dev,
-     if (object_dynamic_cast(OBJECT(dev), TYPE_VIRTIO_IOMMU_PCI)) {
-         create_fdt_virtio_iommu(s, pci_get_bdf(PCI_DEVICE(dev)));
-     }
++The board has support for the riscv-iommu-pci device by using the following
++command line:
 +
-+    if (object_dynamic_cast(OBJECT(dev), TYPE_RISCV_IOMMU_PCI)) {
-+        create_fdt_iommu(s, pci_get_bdf(PCI_DEVICE(dev)));
-+    }
- }
++.. code-block:: bash
++
++  $ qemu-system-riscv64 -M virt -device riscv-iommu-pci (...)
++
++Refer to :ref:`riscv-iommu` for more information on how the RISC-V IOMMU support
++works.
++
+ Machine-specific options
+ ------------------------
  
- static void virt_machine_class_init(ObjectClass *oc, void *data)
 -- 
 2.45.2
 
