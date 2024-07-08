@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81060C3271E
-	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jul 2024 17:37:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDA38C3DA41
+	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jul 2024 17:38:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sQsHF-0006OQ-KW; Mon, 08 Jul 2024 13:35:49 -0400
+	id 1sQsHE-0006Hg-1H; Mon, 08 Jul 2024 13:35:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1sQsHA-00064F-AT
- for qemu-riscv@nongnu.org; Mon, 08 Jul 2024 13:35:44 -0400
+ id 1sQsGx-0005pw-Ao
+ for qemu-riscv@nongnu.org; Mon, 08 Jul 2024 13:35:33 -0400
 Received: from mail-pg1-x533.google.com ([2607:f8b0:4864:20::533])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1sQsH5-00088B-MD
- for qemu-riscv@nongnu.org; Mon, 08 Jul 2024 13:35:43 -0400
+ id 1sQsGv-00083R-6k
+ for qemu-riscv@nongnu.org; Mon, 08 Jul 2024 13:35:31 -0400
 Received: by mail-pg1-x533.google.com with SMTP id
- 41be03b00d2f7-710437d0affso2261932a12.3
- for <qemu-riscv@nongnu.org>; Mon, 08 Jul 2024 10:35:39 -0700 (PDT)
+ 41be03b00d2f7-707040e3018so2727328a12.1
+ for <qemu-riscv@nongnu.org>; Mon, 08 Jul 2024 10:35:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1720460138; x=1721064938; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1720460127; x=1721064927; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8JdSdXe/AXg70AS+TaZpeXnXbDvPfuGdYlWEQJX3Gvo=;
- b=PdvgsupDNzuX9U3qxDgRreuXZngECOt8b2xOVf/UoI7m49gSPzAp2FyTnMHYaozasT
- 6FINBhCv/uLKjs5W6HX+0gNkdtcOJFLdSaS6fEc24jFOlf/+atjEutglGJZ7VJJ1JT7E
- 3KpRcReGO32hFC6pEvh2cCh+ln7Yh7KfeYYGQHqN4wc3ekT4ksDxRmnqpm0V3mF+mDiY
- g9AiM5feJ/EGsV2Bdfr30xXg9a14UofT6OmEUhPqtEu6F4n3jV7epasFjeyjoG0tnuIN
- cODqQD1u7nRjrO9IfcTVfTcuNiLg+QzO2TB6HAhcejcSqFxS0fSWvgFaZn2b6Rz0TJdR
- 69Iw==
+ bh=2T8IEiuSBYa9AMo9fm6dIa4irZ9moI/CdLoLt8G4WnI=;
+ b=VcmyspSisLig+TDiW34t0lfu3mOJfZ+4BOCCDEn7ZK+qoWmBjtQIfZABDoEKNNFvsY
+ Z9fBZaWNn37ygkD3MLl06HKKVLgE30q0fRBkhpKdNqGxs2Qsxg1dunbgU6QA+zjMIb9e
+ vAzhLqnvkWbNor2ToR4l6V2B45jmfAVnlUvRvPrEzu+90TJZ8rXZ70PDcIFdjuaxdu1F
+ 5nqWlo14XJGe5gPnRTUkyLCOOR2IxBCzQaczgvOQKOMfNujdTZcGPaQFRAh8pzjvf/el
+ t7XuPw4SSx1zbND5tTD7e/z7La+MyYgr6ovFLaQex5USJnp05B+drLiXIiNOrWkWcwPy
+ xTHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720460138; x=1721064938;
+ d=1e100.net; s=20230601; t=1720460127; x=1721064927;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8JdSdXe/AXg70AS+TaZpeXnXbDvPfuGdYlWEQJX3Gvo=;
- b=pxQ3ZcA35WYrxgn0LMcrtpsiMyzV49TPxBfITbbUmXKbZ+S1pEptTvTeNQ8lrHrbbK
- yayrlZK5ZRd1c4oSKBn+JhfbE2WPmIXOmLI5pDPT4W5dQfo85SsFyMvpkScO/Y2QbGVG
- C5Ufiij4NJEZjxd6P0rkYW6UXRTBRCKlMfPFKo0UWF5qjlCioLIiplRNil3s1A7Kol6h
- u/XG1dS1aKHnG/byHVWXmvENY7+IRLhm/6A4iTosoJpIVVI3lGTmPSa5JUBcIqb1F0Rv
- c4qWhPphNdyNc88uMCpWv9+YSuZU+CL4FkoPx9hlqLY1CHv04id1rRaijhIdsUhaJu9J
- iElA==
-X-Gm-Message-State: AOJu0Yxrirp7fQ3CKh/92lIg6olhIgcqG78IpXRBqorrqqmcbDeIpiW9
- Jl1R9S6HEMg5XEOSy2cgxsyMVGN+RkV3fruLL8DEqByZGZdfjX9kI7nwDBftkz8=
-X-Google-Smtp-Source: AGHT+IGegY9k6zG2wWQ406vbGYG0pWNKl5QkJv6tF+5H9SmzRmVGWvq4+PzbMUPgDrziOoOpPfE7Lw==
-X-Received: by 2002:a05:6a21:32a1:b0:1c0:f5ea:d447 with SMTP id
- adf61e73a8af0-1c29824e3bemr109082637.31.1720460137581; 
- Mon, 08 Jul 2024 10:35:37 -0700 (PDT)
+ bh=2T8IEiuSBYa9AMo9fm6dIa4irZ9moI/CdLoLt8G4WnI=;
+ b=JQLiaekGhdmgM1xOv6AISWW/ufyfFViewUE4uRkj7qRmvyxQt0SAR+7gd1hL49Rgjw
+ 5zGmU54Wu2nAXOmRq0mC7ZPjpGrSwYnSc9ftt6EQqJF/98crvQl/ElBydybxD2hY8kwq
+ AVkNgEaYpkDR4eNVwJu6XYr7/XA9Kv5ihB7T/1rFpW5x7ojZR2WiHuCsYiwaftLi4E4B
+ 6KO7WW4lQ/F0LP9vkJ0DvTuorWsmVe8DWTWOmUF+hC6uq0Qz/kSr/3tyrtmbXQogBkax
+ u8U76uhkvfyFA/txVgnvLJbp0Z3VeBpdkACerlWreSChq0Rsw9M1m8AFbDHhA8yC+Lw5
+ nDqQ==
+X-Gm-Message-State: AOJu0Yxw+y00bZLCRXlCP6/xnlRZbDAxKfuCcP+R+Bzk5PtgXvtd4FLI
+ C42qvP87q4JABuWHHDq9mQKtLTeqRLYD12jeN898Rjvp3ifhhd9EFDRVqK/0EYo=
+X-Google-Smtp-Source: AGHT+IGFYWrEgp1kvnwtdRONJroKiuljllnUUVBFuEminMF61ESiYy0Un6XN6D2pBXlpNNbPM/Xfww==
+X-Received: by 2002:a05:6a21:18e:b0:1be:e4dd:179b with SMTP id
+ adf61e73a8af0-1c2984d7a87mr74392637.61.1720460126806; 
+ Mon, 08 Jul 2024 10:35:26 -0700 (PDT)
 Received: from grind.dc1.ventanamicro.com ([179.193.8.43])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1fbb6ad3829sm1153765ad.299.2024.07.08.10.35.34
+ d9443c01a7336-1fbb6ad3829sm1153765ad.299.2024.07.08.10.35.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jul 2024 10:35:37 -0700 (PDT)
+ Mon, 08 Jul 2024 10:35:26 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  frank.chang@sifive.com, tjeznach@rivosinc.com, jason.chien@sifive.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v5 08/13] hw/riscv/riscv-iommu: add Address Translation Cache
- (IOATC)
-Date: Mon,  8 Jul 2024 14:34:55 -0300
-Message-ID: <20240708173501.426225-9-dbarboza@ventanamicro.com>
+Subject: [PATCH v5 05/13] hw/riscv: add riscv-iommu-pci reference device
+Date: Mon,  8 Jul 2024 14:34:52 -0300
+Message-ID: <20240708173501.426225-6-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20240708173501.426225-1-dbarboza@ventanamicro.com>
 References: <20240708173501.426225-1-dbarboza@ventanamicro.com>
@@ -99,309 +98,215 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Tomasz Jeznach <tjeznach@rivosinc.com>
 
-The RISC-V IOMMU spec predicts that the IOMMU can use translation caches
-to hold entries from the DDT. This includes implementation for all cache
-commands that are marked as 'not implemented'.
-
-There are some artifacts included in the cache that predicts s-stage and
-g-stage elements, although we don't support it yet. We'll introduce them
-next.
+The RISC-V IOMMU can be modelled as a PCIe device following the
+guidelines of the RISC-V IOMMU spec, chapter 7.1, "Integrating an IOMMU
+as a PCIe device".
 
 Signed-off-by: Tomasz Jeznach <tjeznach@rivosinc.com>
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Reviewed-by: Frank Chang <frank.chang@sifive.com>
 ---
- hw/riscv/riscv-iommu.c | 199 ++++++++++++++++++++++++++++++++++++++++-
- hw/riscv/riscv-iommu.h |   3 +
- 2 files changed, 198 insertions(+), 4 deletions(-)
+ hw/riscv/meson.build       |   2 +-
+ hw/riscv/riscv-iommu-pci.c | 178 +++++++++++++++++++++++++++++++++++++
+ 2 files changed, 179 insertions(+), 1 deletion(-)
+ create mode 100644 hw/riscv/riscv-iommu-pci.c
 
-diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-index 5faa76a904..76728baa77 100644
---- a/hw/riscv/riscv-iommu.c
-+++ b/hw/riscv/riscv-iommu.c
-@@ -65,6 +65,16 @@ struct RISCVIOMMUContext {
-     uint64_t msiptp;            /* MSI redirection page table pointer */
- };
+diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
+index cbc99c6e8e..adbef8a9b2 100644
+--- a/hw/riscv/meson.build
++++ b/hw/riscv/meson.build
+@@ -10,6 +10,6 @@ riscv_ss.add(when: 'CONFIG_SIFIVE_U', if_true: files('sifive_u.c'))
+ riscv_ss.add(when: 'CONFIG_SPIKE', if_true: files('spike.c'))
+ riscv_ss.add(when: 'CONFIG_MICROCHIP_PFSOC', if_true: files('microchip_pfsoc.c'))
+ riscv_ss.add(when: 'CONFIG_ACPI', if_true: files('virt-acpi-build.c'))
+-riscv_ss.add(when: 'CONFIG_RISCV_IOMMU', if_true: files('riscv-iommu.c'))
++riscv_ss.add(when: 'CONFIG_RISCV_IOMMU', if_true: files('riscv-iommu.c', 'riscv-iommu-pci.c'))
  
-+/* Address translation cache entry */
-+struct RISCVIOMMUEntry {
-+    uint64_t iova:44;           /* IOVA Page Number */
-+    uint64_t pscid:20;          /* Process Soft-Context identifier */
-+    uint64_t phys:44;           /* Physical Page Number */
-+    uint64_t gscid:16;          /* Guest Soft-Context identifier */
-+    uint64_t perm:2;            /* IOMMU_RW flags */
-+    uint64_t __rfu:2;
-+};
+ hw_arch += {'riscv': riscv_ss}
+diff --git a/hw/riscv/riscv-iommu-pci.c b/hw/riscv/riscv-iommu-pci.c
+new file mode 100644
+index 0000000000..7b82ce0645
+--- /dev/null
++++ b/hw/riscv/riscv-iommu-pci.c
+@@ -0,0 +1,178 @@
++/*
++ * QEMU emulation of an RISC-V IOMMU
++ *
++ * Copyright (C) 2022-2023 Rivos Inc.
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License along
++ * with this program; if not, see <http://www.gnu.org/licenses/>.
++ */
 +
- /* IOMMU index for transactions without process_id specified. */
- #define RISCV_IOMMU_NOPROCID 0
- 
-@@ -1130,13 +1140,130 @@ static AddressSpace *riscv_iommu_space(RISCVIOMMUState *s, uint32_t devid)
-     return &as->iova_as;
- }
- 
-+/* Translation Object cache support */
-+static gboolean __iot_equal(gconstpointer v1, gconstpointer v2)
-+{
-+    RISCVIOMMUEntry *t1 = (RISCVIOMMUEntry *) v1;
-+    RISCVIOMMUEntry *t2 = (RISCVIOMMUEntry *) v2;
-+    return t1->gscid == t2->gscid && t1->pscid == t2->pscid &&
-+           t1->iova == t2->iova;
-+}
++#include "qemu/osdep.h"
++#include "hw/pci/msi.h"
++#include "hw/pci/msix.h"
++#include "hw/pci/pci_bus.h"
++#include "hw/qdev-properties.h"
++#include "hw/riscv/riscv_hart.h"
++#include "migration/vmstate.h"
++#include "qapi/error.h"
++#include "qemu/error-report.h"
++#include "qemu/host-utils.h"
++#include "qom/object.h"
 +
-+static guint __iot_hash(gconstpointer v)
-+{
-+    RISCVIOMMUEntry *t = (RISCVIOMMUEntry *) v;
-+    return (guint)t->iova;
-+}
++#include "cpu_bits.h"
++#include "riscv-iommu.h"
++#include "riscv-iommu-bits.h"
 +
-+/* GV: 1 PSCV: 1 AV: 1 */
-+static void __iot_inval_pscid_iova(gpointer key, gpointer value, gpointer data)
++/* RISC-V IOMMU PCI Device Emulation */
++#define RISCV_PCI_CLASS_SYSTEM_IOMMU     0x0806
++
++typedef struct RISCVIOMMUStatePci {
++    PCIDevice        pci;     /* Parent PCIe device state */
++    uint16_t         vendor_id;
++    uint16_t         device_id;
++    uint8_t          revision;
++    MemoryRegion     bar0;    /* PCI BAR (including MSI-x config) */
++    RISCVIOMMUState  iommu;   /* common IOMMU state */
++} RISCVIOMMUStatePci;
++
++/* interrupt delivery callback */
++static void riscv_iommu_pci_notify(RISCVIOMMUState *iommu, unsigned vector)
 +{
-+    RISCVIOMMUEntry *iot = (RISCVIOMMUEntry *) value;
-+    RISCVIOMMUEntry *arg = (RISCVIOMMUEntry *) data;
-+    if (iot->gscid == arg->gscid &&
-+        iot->pscid == arg->pscid &&
-+        iot->iova == arg->iova) {
-+        iot->perm = IOMMU_NONE;
++    RISCVIOMMUStatePci *s = container_of(iommu, RISCVIOMMUStatePci, iommu);
++
++    if (msix_enabled(&(s->pci))) {
++        msix_notify(&(s->pci), vector);
 +    }
 +}
 +
-+/* GV: 1 PSCV: 1 AV: 0 */
-+static void __iot_inval_pscid(gpointer key, gpointer value, gpointer data)
++static void riscv_iommu_pci_realize(PCIDevice *dev, Error **errp)
 +{
-+    RISCVIOMMUEntry *iot = (RISCVIOMMUEntry *) value;
-+    RISCVIOMMUEntry *arg = (RISCVIOMMUEntry *) data;
-+    if (iot->gscid == arg->gscid &&
-+        iot->pscid == arg->pscid) {
-+        iot->perm = IOMMU_NONE;
++    RISCVIOMMUStatePci *s = DO_UPCAST(RISCVIOMMUStatePci, pci, dev);
++    RISCVIOMMUState *iommu = &s->iommu;
++    uint8_t *pci_conf = dev->config;
++    Error *err = NULL;
++
++    pci_set_word(pci_conf + PCI_VENDOR_ID, s->vendor_id);
++    pci_set_word(pci_conf + PCI_SUBSYSTEM_VENDOR_ID, s->vendor_id);
++    pci_set_word(pci_conf + PCI_DEVICE_ID, s->device_id);
++    pci_set_word(pci_conf + PCI_SUBSYSTEM_ID, s->device_id);
++    pci_set_byte(pci_conf + PCI_REVISION_ID, s->revision);
++
++    /* Set device id for trace / debug */
++    DEVICE(iommu)->id = g_strdup_printf("%02x:%02x.%01x",
++        pci_dev_bus_num(dev), PCI_SLOT(dev->devfn), PCI_FUNC(dev->devfn));
++    qdev_realize(DEVICE(iommu), NULL, errp);
++
++    memory_region_init(&s->bar0, OBJECT(s), "riscv-iommu-bar0",
++        QEMU_ALIGN_UP(memory_region_size(&iommu->regs_mr), TARGET_PAGE_SIZE));
++    memory_region_add_subregion(&s->bar0, 0, &iommu->regs_mr);
++
++    pcie_endpoint_cap_init(dev, 0);
++
++    pci_register_bar(dev, 0, PCI_BASE_ADDRESS_SPACE_MEMORY |
++                     PCI_BASE_ADDRESS_MEM_TYPE_64, &s->bar0);
++
++    int ret = msix_init(dev, RISCV_IOMMU_INTR_COUNT,
++                        &s->bar0, 0, RISCV_IOMMU_REG_MSI_CONFIG,
++                        &s->bar0, 0, RISCV_IOMMU_REG_MSI_CONFIG + 256, 0, &err);
++
++    if (ret == -ENOTSUP) {
++        /*
++         * MSI-x is not supported by the platform.
++         * Driver should use timer/polling based notification handlers.
++         */
++        warn_report_err(err);
++    } else if (ret < 0) {
++        error_propagate(errp, err);
++        return;
++    } else {
++        /* mark all allocated MSIx vectors as used. */
++        msix_vector_use(dev, RISCV_IOMMU_INTR_CQ);
++        msix_vector_use(dev, RISCV_IOMMU_INTR_FQ);
++        msix_vector_use(dev, RISCV_IOMMU_INTR_PM);
++        msix_vector_use(dev, RISCV_IOMMU_INTR_PQ);
++        iommu->notify = riscv_iommu_pci_notify;
 +    }
-+}
 +
-+/* GV: 1 GVMA: 1 */
-+static void __iot_inval_gscid_gpa(gpointer key, gpointer value, gpointer data)
-+{
-+    RISCVIOMMUEntry *iot = (RISCVIOMMUEntry *) value;
-+    RISCVIOMMUEntry *arg = (RISCVIOMMUEntry *) data;
-+    if (iot->gscid == arg->gscid) {
-+        /* simplified cache, no GPA matching */
-+        iot->perm = IOMMU_NONE;
-+    }
-+}
-+
-+/* GV: 1 GVMA: 0 */
-+static void __iot_inval_gscid(gpointer key, gpointer value, gpointer data)
-+{
-+    RISCVIOMMUEntry *iot = (RISCVIOMMUEntry *) value;
-+    RISCVIOMMUEntry *arg = (RISCVIOMMUEntry *) data;
-+    if (iot->gscid == arg->gscid) {
-+        iot->perm = IOMMU_NONE;
-+    }
-+}
-+
-+/* GV: 0 */
-+static void __iot_inval_all(gpointer key, gpointer value, gpointer data)
-+{
-+    RISCVIOMMUEntry *iot = (RISCVIOMMUEntry *) value;
-+    iot->perm = IOMMU_NONE;
-+}
-+
-+/* caller should keep ref-count for iot_cache object */
-+static RISCVIOMMUEntry *riscv_iommu_iot_lookup(RISCVIOMMUContext *ctx,
-+    GHashTable *iot_cache, hwaddr iova)
-+{
-+    RISCVIOMMUEntry key = {
-+        .gscid = get_field(ctx->gatp, RISCV_IOMMU_DC_IOHGATP_GSCID),
-+        .pscid = get_field(ctx->ta, RISCV_IOMMU_DC_TA_PSCID),
-+        .iova  = PPN_DOWN(iova),
-+    };
-+    return g_hash_table_lookup(iot_cache, &key);
-+}
-+
-+/* caller should keep ref-count for iot_cache object */
-+static void riscv_iommu_iot_update(RISCVIOMMUState *s,
-+    GHashTable *iot_cache, RISCVIOMMUEntry *iot)
-+{
-+    if (!s->iot_limit) {
++    PCIBus *bus = pci_device_root_bus(dev);
++    if (!bus) {
++        error_setg(errp, "can't find PCIe root port for %02x:%02x.%x",
++            pci_bus_num(pci_get_bus(dev)), PCI_SLOT(dev->devfn),
++            PCI_FUNC(dev->devfn));
 +        return;
 +    }
 +
-+    qemu_mutex_lock(&s->iot_lock);
-+    if (g_hash_table_size(s->iot_cache) >= s->iot_limit) {
-+        iot_cache = g_hash_table_new_full(__iot_hash, __iot_equal,
-+                                          g_free, NULL);
-+        g_hash_table_unref(qatomic_xchg(&s->iot_cache, iot_cache));
-+    }
-+    g_hash_table_add(iot_cache, iot);
-+    qemu_mutex_unlock(&s->iot_lock);
++    riscv_iommu_pci_setup_iommu(iommu, bus, errp);
 +}
 +
-+static void riscv_iommu_iot_inval(RISCVIOMMUState *s, GHFunc func,
-+    uint32_t gscid, uint32_t pscid, hwaddr iova)
++static void riscv_iommu_pci_exit(PCIDevice *pci_dev)
 +{
-+    GHashTable *iot_cache;
-+    RISCVIOMMUEntry key = {
-+        .gscid = gscid,
-+        .pscid = pscid,
-+        .iova  = PPN_DOWN(iova),
-+    };
-+
-+    iot_cache = g_hash_table_ref(s->iot_cache);
-+    qemu_mutex_lock(&s->iot_lock);
-+    g_hash_table_foreach(iot_cache, func, &key);
-+    qemu_mutex_unlock(&s->iot_lock);
-+    g_hash_table_unref(iot_cache);
++    pci_setup_iommu(pci_device_root_bus(pci_dev), NULL, NULL);
 +}
 +
- static int riscv_iommu_translate(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
--    IOMMUTLBEntry *iotlb)
-+    IOMMUTLBEntry *iotlb, bool enable_cache)
- {
-+    RISCVIOMMUEntry *iot;
-+    IOMMUAccessFlags perm;
-     bool enable_pid;
-     bool enable_pri;
-+    GHashTable *iot_cache;
-     int fault;
- 
-+    iot_cache = g_hash_table_ref(s->iot_cache);
-     /*
-      * TC[32] is reserved for custom extensions, used here to temporarily
-      * enable automatic page-request generation for ATS queries.
-@@ -1144,9 +1271,39 @@ static int riscv_iommu_translate(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
-     enable_pri = (iotlb->perm == IOMMU_NONE) && (ctx->tc & BIT_ULL(32));
-     enable_pid = (ctx->tc & RISCV_IOMMU_DC_TC_PDTV);
- 
-+    qemu_mutex_lock(&s->iot_lock);
-+    iot = riscv_iommu_iot_lookup(ctx, iot_cache, iotlb->iova);
-+    qemu_mutex_unlock(&s->iot_lock);
-+    perm = iot ? iot->perm : IOMMU_NONE;
-+    if (perm != IOMMU_NONE) {
-+        iotlb->translated_addr = PPN_PHYS(iot->phys);
-+        iotlb->addr_mask = ~TARGET_PAGE_MASK;
-+        iotlb->perm = perm;
-+        fault = 0;
-+        goto done;
-+    }
++static const VMStateDescription riscv_iommu_vmstate = {
++    .name = "riscv-iommu",
++    .unmigratable = 1
++};
 +
-     /* Translate using device directory / page table information. */
-     fault = riscv_iommu_spa_fetch(s, ctx, iotlb);
- 
-+    if (!fault && iotlb->target_as == &s->trap_as) {
-+        /* Do not cache trapped MSI translations */
-+        goto done;
-+    }
++static void riscv_iommu_pci_init(Object *obj)
++{
++    RISCVIOMMUStatePci *s = RISCV_IOMMU_PCI(obj);
++    RISCVIOMMUState *iommu = &s->iommu;
 +
-+    if (!fault && iotlb->translated_addr != iotlb->iova && enable_cache) {
-+        iot = g_new0(RISCVIOMMUEntry, 1);
-+        iot->iova = PPN_DOWN(iotlb->iova);
-+        iot->phys = PPN_DOWN(iotlb->translated_addr);
-+        iot->gscid = get_field(ctx->gatp, RISCV_IOMMU_DC_IOHGATP_GSCID);
-+        iot->pscid = get_field(ctx->ta, RISCV_IOMMU_DC_TA_PSCID);
-+        iot->perm = iotlb->perm;
-+        riscv_iommu_iot_update(s, iot_cache, iot);
-+    }
++    object_initialize_child(obj, "iommu", iommu, TYPE_RISCV_IOMMU);
++    qdev_alias_all_properties(DEVICE(iommu), obj);
++}
 +
-+done:
-+    g_hash_table_unref(iot_cache);
++static Property riscv_iommu_pci_properties[] = {
++    DEFINE_PROP_UINT16("vendor-id", RISCVIOMMUStatePci, vendor_id,
++                       PCI_VENDOR_ID_REDHAT),
++    DEFINE_PROP_UINT16("device-id", RISCVIOMMUStatePci, device_id,
++                       PCI_DEVICE_ID_REDHAT_RISCV_IOMMU),
++    DEFINE_PROP_UINT8("revision", RISCVIOMMUStatePci, revision, 0x01),
++    DEFINE_PROP_END_OF_LIST(),
++};
 +
-     if (enable_pri && fault) {
-         struct riscv_iommu_pq_record pr = {0};
-         if (enable_pid) {
-@@ -1286,13 +1443,40 @@ static void riscv_iommu_process_cq_tail(RISCVIOMMUState *s)
-             if (cmd.dword0 & RISCV_IOMMU_CMD_IOTINVAL_PSCV) {
-                 /* illegal command arguments IOTINVAL.GVMA & PSCV == 1 */
-                 goto cmd_ill;
-+            } else if (!(cmd.dword0 & RISCV_IOMMU_CMD_IOTINVAL_GV)) {
-+                /* invalidate all cache mappings */
-+                func = __iot_inval_all;
-+            } else if (!(cmd.dword0 & RISCV_IOMMU_CMD_IOTINVAL_AV)) {
-+                /* invalidate cache matching GSCID */
-+                func = __iot_inval_gscid;
-+            } else {
-+                /* invalidate cache matching GSCID and ADDR (GPA) */
-+                func = __iot_inval_gscid_gpa;
-             }
--            /* translation cache not implemented yet */
-+            riscv_iommu_iot_inval(s, func,
-+                get_field(cmd.dword0, RISCV_IOMMU_CMD_IOTINVAL_GSCID), 0,
-+                cmd.dword1 & TARGET_PAGE_MASK);
-             break;
- 
-         case RISCV_IOMMU_CMD(RISCV_IOMMU_CMD_IOTINVAL_FUNC_VMA,
-                              RISCV_IOMMU_CMD_IOTINVAL_OPCODE):
--            /* translation cache not implemented yet */
-+            if (!(cmd.dword0 & RISCV_IOMMU_CMD_IOTINVAL_GV)) {
-+                /* invalidate all cache mappings, simplified model */
-+                func = __iot_inval_all;
-+            } else if (!(cmd.dword0 & RISCV_IOMMU_CMD_IOTINVAL_PSCV)) {
-+                /* invalidate cache matching GSCID, simplified model */
-+                func = __iot_inval_gscid;
-+            } else if (!(cmd.dword0 & RISCV_IOMMU_CMD_IOTINVAL_AV)) {
-+                /* invalidate cache matching GSCID and PSCID */
-+                func = __iot_inval_pscid;
-+            } else {
-+                /* invalidate cache matching GSCID and PSCID and ADDR (IOVA) */
-+                func = __iot_inval_pscid_iova;
-+            }
-+            riscv_iommu_iot_inval(s, func,
-+                get_field(cmd.dword0, RISCV_IOMMU_CMD_IOTINVAL_GSCID),
-+                get_field(cmd.dword0, RISCV_IOMMU_CMD_IOTINVAL_PSCID),
-+                cmd.dword1 & TARGET_PAGE_MASK);
-             break;
- 
-         case RISCV_IOMMU_CMD(RISCV_IOMMU_CMD_IODIR_FUNC_INVAL_DDT,
-@@ -1801,6 +1985,10 @@ static void riscv_iommu_realize(DeviceState *dev, Error **errp)
-                                          g_free, NULL);
-     qemu_mutex_init(&s->ctx_lock);
- 
-+    s->iot_cache = g_hash_table_new_full(__iot_hash, __iot_equal,
-+                                         g_free, NULL);
-+    qemu_mutex_init(&s->iot_lock);
++static void riscv_iommu_pci_class_init(ObjectClass *klass, void *data)
++{
++    DeviceClass *dc = DEVICE_CLASS(klass);
++    PCIDeviceClass *k = PCI_DEVICE_CLASS(klass);
 +
-     s->iommus.le_next = NULL;
-     s->iommus.le_prev = NULL;
-     QLIST_INIT(&s->spaces);
-@@ -1813,6 +2001,7 @@ static void riscv_iommu_unrealize(DeviceState *dev)
-     RISCVIOMMUState *s = RISCV_IOMMU(dev);
- 
-     qemu_mutex_destroy(&s->core_lock);
-+    g_hash_table_unref(s->iot_cache);
-     g_hash_table_unref(s->ctx_cache);
- }
- 
-@@ -1820,6 +2009,8 @@ static Property riscv_iommu_properties[] = {
-     DEFINE_PROP_UINT32("version", RISCVIOMMUState, version,
-         RISCV_IOMMU_SPEC_DOT_VER),
-     DEFINE_PROP_UINT32("bus", RISCVIOMMUState, bus, 0x0),
-+    DEFINE_PROP_UINT32("ioatc-limit", RISCVIOMMUState, iot_limit,
-+        LIMIT_CACHE_IOT),
-     DEFINE_PROP_BOOL("intremap", RISCVIOMMUState, enable_msi, TRUE),
-     DEFINE_PROP_BOOL("off", RISCVIOMMUState, enable_off, TRUE),
-     DEFINE_PROP_BOOL("s-stage", RISCVIOMMUState, enable_s_stage, TRUE),
-@@ -1874,7 +2065,7 @@ static IOMMUTLBEntry riscv_iommu_memory_region_translate(
-         /* Translation disabled or invalid. */
-         iotlb.addr_mask = 0;
-         iotlb.perm = IOMMU_NONE;
--    } else if (riscv_iommu_translate(as->iommu, ctx, &iotlb)) {
-+    } else if (riscv_iommu_translate(as->iommu, ctx, &iotlb, true)) {
-         /* Translation disabled or fault reported. */
-         iotlb.addr_mask = 0;
-         iotlb.perm = IOMMU_NONE;
-diff --git a/hw/riscv/riscv-iommu.h b/hw/riscv/riscv-iommu.h
-index a3f858d978..0594e654f9 100644
---- a/hw/riscv/riscv-iommu.h
-+++ b/hw/riscv/riscv-iommu.h
-@@ -71,6 +71,9 @@ struct RISCVIOMMUState {
- 
-     GHashTable *ctx_cache;          /* Device translation Context Cache */
-     QemuMutex ctx_lock;      /* Device translation Cache update lock */
-+    GHashTable *iot_cache;          /* IO Translated Address Cache */
-+    QemuMutex iot_lock;      /* IO TLB Cache update lock */
-+    unsigned iot_limit;             /* IO Translation Cache size limit */
- 
-     /* MMIO Hardware Interface */
-     MemoryRegion regs_mr;
++    k->realize = riscv_iommu_pci_realize;
++    k->exit = riscv_iommu_pci_exit;
++    k->class_id = RISCV_PCI_CLASS_SYSTEM_IOMMU;
++    dc->desc = "RISCV-IOMMU DMA Remapping device";
++    dc->vmsd = &riscv_iommu_vmstate;
++    dc->hotpluggable = false;
++    dc->user_creatable = true;
++    set_bit(DEVICE_CATEGORY_MISC, dc->categories);
++    device_class_set_props(dc, riscv_iommu_pci_properties);
++}
++
++static const TypeInfo riscv_iommu_pci = {
++    .name = TYPE_RISCV_IOMMU_PCI,
++    .parent = TYPE_PCI_DEVICE,
++    .class_init = riscv_iommu_pci_class_init,
++    .instance_init = riscv_iommu_pci_init,
++    .instance_size = sizeof(RISCVIOMMUStatePci),
++    .interfaces = (InterfaceInfo[]) {
++        { INTERFACE_PCIE_DEVICE },
++        { },
++    },
++};
++
++static void riscv_iommu_register_pci_types(void)
++{
++    type_register_static(&riscv_iommu_pci);
++}
++
++type_init(riscv_iommu_register_pci_types);
 -- 
 2.45.2
 
