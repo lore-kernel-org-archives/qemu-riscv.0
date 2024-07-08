@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 944D0C38150
-	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jul 2024 02:02:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE478C3DA41
+	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jul 2024 02:18:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sQdhH-00007v-39; Sun, 07 Jul 2024 22:01:43 -0400
+	id 1sQdx6-0005xd-N6; Sun, 07 Jul 2024 22:18:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sQdhE-0008TJ-MX; Sun, 07 Jul 2024 22:01:40 -0400
-Received: from mail-ua1-x92c.google.com ([2607:f8b0:4864:20::92c])
+ id 1sQdx5-0005wg-AU; Sun, 07 Jul 2024 22:18:03 -0400
+Received: from mail-vk1-xa2d.google.com ([2607:f8b0:4864:20::a2d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sQdhD-0007mM-08; Sun, 07 Jul 2024 22:01:40 -0400
-Received: by mail-ua1-x92c.google.com with SMTP id
- a1e0cc1a2514c-8101b144fddso806858241.3; 
- Sun, 07 Jul 2024 19:01:38 -0700 (PDT)
+ id 1sQdx3-0001f0-NG; Sun, 07 Jul 2024 22:18:03 -0400
+Received: by mail-vk1-xa2d.google.com with SMTP id
+ 71dfb90a1353d-4f2faade55dso818589e0c.1; 
+ Sun, 07 Jul 2024 19:18:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1720404097; x=1721008897; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1720405080; x=1721009880; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=j8KuolbZbpJz3+BmmHTAiTNBanrZbLCa5wxZZONf+54=;
- b=UB/IuwwIc5YAjS39ljHcauH8kHPI3iUzj+BMHLVnex8wsKyqs/3w35brZ/7LLc8Sax
- H3OZbTKQcEIdK6TYAG/bu5LSTOOUyd0UnQrxDzYtSNFGZZ1F9Fyu2rXDmw/YkuekNSpJ
- C9MIp89r5UjUpjtov/UgJyzSiQDLzkxAv0j6QUNIAfvmMNJnpNgDHR89fau9AKoZP5zY
- TZPXYiaanD8MZhESSz8OIjEuvU8eOaoy4L2C5i2bMhkQMt5cV0LAcK8XegnA1c4aUf6H
- ZjjE1cX5EW003NJDTR7ItKBpWHg4JERXmws2Y+N2TzvBodFbb67pbr+rq1yUNdlrqlLx
- lCCA==
+ bh=AFd01aSinDCDSIJRGZ8lfM1/Yd4+kDLHBz7S4maifSQ=;
+ b=bVXfO079PyvfQSnwucgQxjaKIJV9C3FAwdftID7Ir5xGLwdvwVgUpHW0XKfQkl3mqH
+ VOIAhU9UIktiLs25ABw/Fr50yWOVDjNkn8sdrJcayKsq/9VZ7HqEDl/HRqWlJeoYY+nx
+ WTwRFnGPqKSGU8XuQEQ3P/GWPqkwgS0ZKmvUN8Rk4B8ru3LYu3MYyKbx19c1XQd78rT1
+ twLU627+YXEl1dTy0jyP98QQAJTY4czo9PK/epqVHSUH0ok8774CJeHXIDQfbw5Z1f4h
+ O2cs5tg2ZlbyCzFzbAcKnZjzqSPhF8q/1SrIo96HuCPgtQ7VY40ZZi7K5cioBOFLJ29O
+ 1CiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720404097; x=1721008897;
+ d=1e100.net; s=20230601; t=1720405080; x=1721009880;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=j8KuolbZbpJz3+BmmHTAiTNBanrZbLCa5wxZZONf+54=;
- b=A2ntDAHPqeTSTxSpy+DWjjmvjPEvXI6RjKV6jHMvROHAyWt/U6/+VQgLKxvG+615W8
- HsDDCHbJEE5P37T1+XEv2AnRnH/XmZtVTrV0I3FDbJpVn+liYyGcKJ3xfr56LMWu5+7x
- ZucZU8oSxcPOAjXSjaPhtTm78yaMSmNCxpz8KP0g3TUocoGcZYUiRNoPAKHQjwKW12Cf
- kahsZiTZ7bI70ByXeFHlPvE1aexuRjuP4K7LVyw78KEWSphJ0rD506lrq9QiMCML+Vjx
- A6fO7n3H8thKJjNy1hpIgXmAfoqqJCx5iPJZllo2LXmpyoifVzedVnMnBkmrug8kAm8y
- V7Nw==
+ bh=AFd01aSinDCDSIJRGZ8lfM1/Yd4+kDLHBz7S4maifSQ=;
+ b=l7BapZJnOK3ynaFE0dQ11t7rXF1KfpQ3dVZ9H0g/lQIi/PCLbBLUG3X5eEBIsN2KdG
+ 3ANwC6vTvX4v6Ex5XxbzHjNMqiRMZupXV0oiQiyYh+MvU8yg4MsOERt+B7QmljV6E1AI
+ ynm3JbO38F6KF/TqeL49jbm0OD9dvEe4EHqTOivFcCEsTisb0IEr6R8Rrl0/NxZuHHV2
+ 2eorUJG6MqXkbZH+uDr6h74CShtyGRbFVCv3zk6Xc8ziuQQzM6IhZ/dwehXrxPzd8XKo
+ BG7KOCZMJDb54iGxkM3QyqhgAnnbc3jGOw/dNnppVNeM5YXscFJi+qvOHKMZ5NWSx6aG
+ rjwA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUXMh4cFlTzHF/ZEUy/2Ek/+86O9UDVTpPgUd1b01gP69U2iomPr132f8ETmZWBEBq7y1zBDrE1zGq9rTkTs/685m2HERE=
-X-Gm-Message-State: AOJu0YyHCeMQjxn00LhCBZ0P6VgMCmMWQ/JXsDhClcbBw+h/4AqB9Wwp
- S0y2GYOgJw1Um9y2BkgNbpn2yaQxWBW2fhuggXCFCCtaIa/ujRHc4b0Dwl1H02pfSBWKJ+FefZV
- 8S+9+Kczda90zhfmKmUGEWo7ELIM=
-X-Google-Smtp-Source: AGHT+IELvzKzZT6HXpcgEdE8YIVgHpBKi0abZvUerIaLn7230gCoflxJbITp846b034X+BLRErezluZzzvzftKqrSTw=
-X-Received: by 2002:a05:6122:6607:b0:4f2:f1df:89c3 with SMTP id
- 71dfb90a1353d-4f2f3adde5amr11429499e0c.0.1720404097127; Sun, 07 Jul 2024
- 19:01:37 -0700 (PDT)
+ AJvYcCU9DDq1Q6qLNMfaML3fVMzXw5XkCAV2FHUNRI5K5XMSklIqDyaekm4l5XjcglTb20RtIxc5rMcCa3r53D+elzFYbQEG3vPLfqIMbPf63CSd49ZR35gJsvTnAdX4Wg==
+X-Gm-Message-State: AOJu0Yx8F1gASe0rESYCZ+G8csaSBtwk7C3TjtadvqrntmaxjRlt/jXR
+ w/qf9tvi2HRibrjaLkDZ2UJ6ltV8UpbppIzAaeZyOdguYhkSbbZsvCE+Hr8EIM2Vall4xWYdfmq
+ MbZw03rfLSZmZr65Zl1w/evj6oFw=
+X-Google-Smtp-Source: AGHT+IHhKzY5U5RdZv94MjI4ajI/auti668gQU0AKWEOghbQavHM+TbGTCNnoMAkcza18kc9hl6QFWc67p2neeDCQVc=
+X-Received: by 2002:a1f:7246:0:b0:4f3:62b:84eb with SMTP id
+ 71dfb90a1353d-4f3062b8822mr6195950e0c.9.1720405080013; Sun, 07 Jul 2024
+ 19:18:00 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240703144921.1281-1-zhiwei_liu@linux.alibaba.com>
- <20240703144921.1281-4-zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20240703144921.1281-4-zhiwei_liu@linux.alibaba.com>
+References: <20240703213102.254927-1-zheyuma97@gmail.com>
+ <CAFEAcA_9_fymBmp4Ei+ZxP3PB6u3JckTxufLcJn6JKuf4Yjkaw@mail.gmail.com>
+In-Reply-To: <CAFEAcA_9_fymBmp4Ei+ZxP3PB6u3JckTxufLcJn6JKuf4Yjkaw@mail.gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 8 Jul 2024 12:01:10 +1000
-Message-ID: <CAKmqyKOXuOtonzLY775VbcA92eHFE7N7TgAMm9yXQHG2f=Td+Q@mail.gmail.com>
-Subject: Re: [PATCH v3 3/7] target/riscv: Correct SXL return value for RV32 in
- RV64 QEMU
-To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com, 
- alistair.francis@wdc.com, dbarboza@ventanamicro.com, liwei1518@gmail.com, 
- bmeng.cn@gmail.com, TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
+Date: Mon, 8 Jul 2024 12:17:34 +1000
+Message-ID: <CAKmqyKN0nzbNReKrpH3_Qw7bJu2k8r5yddJPcYxN4ji1X2QQ9w@mail.gmail.com>
+Subject: Re: [PATCH] hw/intc: sifive_plic: Fix heap-buffer-overflow in SiFive
+ PLIC read operation
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: Zheyu Ma <zheyuma97@gmail.com>, Alistair Francis <Alistair.Francis@wdc.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92c;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2d;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2d.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -94,46 +94,97 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Jul 4, 2024 at 12:53=E2=80=AFAM LIU Zhiwei <zhiwei_liu@linux.alibab=
-a.com> wrote:
+On Thu, Jul 4, 2024 at 7:33=E2=80=AFPM Peter Maydell <peter.maydell@linaro.=
+org> wrote:
 >
-> From: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
+> On Wed, 3 Jul 2024 at 22:32, Zheyu Ma <zheyuma97@gmail.com> wrote:
+> >
+> > The sifive_plic_read function in hw/intc/sifive_plic.c had a potential
+> > heap-buffer-overflow issue when reading from the pending_base region.
+> > This occurred because the code did not check if the calculated word ind=
+ex
+> > was within valid bounds before accessing the pending array.
+> >
+> > This fix prevents out-of-bounds memory access, ensuring safer and more
+> > robust handling of PLIC reads.
+> >
+> > ASAN log:
+> > =3D=3D78800=3D=3DERROR: AddressSanitizer: heap-buffer-overflow on addre=
+ss 0x602000038a14 at pc 0x5baf49d0d6cb bp 0x7ffc2ea4e180 sp 0x7ffc2ea4e178
+> > READ of size 4 at 0x602000038a14 thread T0
+> >     #0 0x5baf49d0d6ca in sifive_plic_read hw/intc/sifive_plic.c:151:16
+> >     #1 0x5baf49f7f3bb in memory_region_read_accessor system/memory.c:44=
+5:11
+> >
+> > Reproducer:
+> > cat << EOF | qemu-system-riscv64  -display \
+> > none -machine accel=3Dqtest, -m 512M -machine shakti_c -m 2G -qtest std=
+io
+> > readl 0xc001004
+> > EOF
+> >
+> > Signed-off-by: Zheyu Ma <zheyuma97@gmail.com>
+> > ---
+> >  hw/intc/sifive_plic.c | 9 ++++++++-
+> >  1 file changed, 8 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
+> > index e559f11805..d2a90dfd3a 100644
+> > --- a/hw/intc/sifive_plic.c
+> > +++ b/hw/intc/sifive_plic.c
+> > @@ -147,7 +147,14 @@ static uint64_t sifive_plic_read(void *opaque, hwa=
+ddr addr, unsigned size)
+> >                              (plic->num_sources + 31) >> 3)) {
+> >          uint32_t word =3D (addr - plic->pending_base) >> 2;
+> >
+> > -        return plic->pending[word];
+> > +        if (word < plic->bitfield_words) {
+> > +            return plic->pending[word];
+> > +        } else {
+> > +            qemu_log_mask(LOG_GUEST_ERROR,
+> > +                          "sifive_plic_read: Word out of bounds for pe=
+nding_base read: word=3D%u\n",
+> > +                          word);
+> > +            return 0;
+> > +        }
 >
-> Ensure that riscv_cpu_sxl returns MXL_RV32 when runningRV32 in an
-> RV64 QEMU.
+> This seems a bit odd. This part of the code is guarded by
 >
-> Signed-off-by: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
-> Fixes: 05e6ca5e156 ("target/riscv: Ignore reserved bits in PTE for RV64")
-> Reviewed-by: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+>     } else if (addr_between(addr, plic->pending_base,
+>                             (plic->num_sources + 31) >> 3)) {
+>
+> and we calculate plic->bitfield_words in realize based on
+> plic->num_sources:
+>     s->bitfield_words =3D (s->num_sources + 31) >> 5;
+>
+> so presumably the intention was that we put enough words
+> in the bitfield for the number of sources we have, so that
+> the array access wouldn't overrun. Maybe we got the
+> calculation wrong?
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Yeah, the calculation is wrong here.
+
+We have
+
+s->bitfield_words =3D (s->num_sources + 31) >> 5;
+...
+s->pending =3D g_new0(uint32_t, s->bitfield_words);
+
+But then the check is
+
+    } else if (addr_between(addr, plic->pending_base,
+                            (plic->num_sources + 31) >> 3)) {
+
+So when we allocate we shift by 5, but then when we check we only shift by =
+3.
+
+So that's the bug. It's not immediately obvious what the correct fix
+is though, do you mind having a look?
 
 Alistair
 
-> ---
->  target/riscv/cpu.h | 5 ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
 >
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 87742047ce..49de81be7e 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -693,8 +693,11 @@ static inline RISCVMXL riscv_cpu_sxl(CPURISCVState *=
-env)
->  #ifdef CONFIG_USER_ONLY
->      return env->misa_mxl;
->  #else
-> -    return get_field(env->mstatus, MSTATUS64_SXL);
-> +    if (env->misa_mxl !=3D MXL_RV32) {
-> +        return get_field(env->mstatus, MSTATUS64_SXL);
-> +    }
->  #endif
-> +    return MXL_RV32;
->  }
->  #endif
->
-> --
-> 2.25.1
->
+> thanks
+> -- PMM
 >
 
