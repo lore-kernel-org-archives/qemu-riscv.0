@@ -4,78 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 347D1C3DA41
-	for <qemu-riscv@archiver.kernel.org>; Tue,  9 Jul 2024 08:55:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EA70C2BD09
+	for <qemu-riscv@archiver.kernel.org>; Tue,  9 Jul 2024 09:58:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sR6cc-0002PF-CR; Tue, 09 Jul 2024 04:54:50 -0400
+	id 1sR7bV-0006EQ-5O; Tue, 09 Jul 2024 05:57:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1sR6ca-0002NE-DU
- for qemu-riscv@nongnu.org; Tue, 09 Jul 2024 04:54:48 -0400
-Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1sR6cR-0004jM-I4
- for qemu-riscv@nongnu.org; Tue, 09 Jul 2024 04:54:48 -0400
-Received: by mail-pf1-x42f.google.com with SMTP id
- d2e1a72fcca58-70af5fbf0d5so3046122b3a.1
- for <qemu-riscv@nongnu.org>; Tue, 09 Jul 2024 01:54:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1720515277; x=1721120077; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=t4XOj0192kA0RnTaXr1GTQiddDsoEl68lknMyxqi+Pc=;
- b=Fq0mdzZCq8B3fM3cJ9Gxe1llZ78WncUAh5gQ58kDyTri8iqD0UM99w0DJGg5eM0nSI
- q0o86uNRLNxv1n39ATJnV6CF7FnxTFKpRxq8iBVxBtnibDm+7TPS3xf4kkAgZu5Kf/AA
- mnUQiOr3IXQGMYzIt1L8wW+IRMSOK8nmmSSkT2rkmhm2+ND+1E4VeTT9i4TXXfbWV7TO
- Q3oGFso1TjTDiDN/hMqo18EAVw5Xl4y5dxBwg29Bbub7+hapkkvxzZdkBAVo2EmQdN5j
- QPI5H5rKKdc0a0PTeqv23tKhx6JAaznzpDopSzfLPEqIFY4mxHJ2Ze6cyVdGB8sOHnJJ
- OZ2w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720515277; x=1721120077;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=t4XOj0192kA0RnTaXr1GTQiddDsoEl68lknMyxqi+Pc=;
- b=DKuN/O98Lc+RHFnHi9uEgvtZ1YmDZMBBTP/j28VLfBgpGKIAsUUN2xdGypVQGRz1hN
- nfo5i9Casl1VsSkB+tduNVWsEPw9viC2Xw7/8PUDMBIQyOdzXvlVirHvYIEOF4AHwLT/
- TbfRbf16kF95ujz60ekpXdgN0xQ6TWb6NsETuOPfwaly+yojD5GiDxXT9Y86hcU8kDnh
- OJEi7AC+CuwRB210E7owsy/YWc5BCnhSFHKN3dUtvqNEN5pBXvUafK+6oaRcBXQbYkKk
- bDyR1aO5TZDkie/If2nl5viXReATihfMnm7i0qvoKIKPZNe/ImfH7NEd7M7nGX9hTxlS
- kw2Q==
-X-Gm-Message-State: AOJu0YxmAqYmbShyq/wQa47PXQjEvUnUiZ5/yyb9O4Hzl84EWrq1QeL+
- xINBYchsQ8VNP+ZZNxsotd5ApidQXT7mrHcjDYKidljA9WbrkCKVeIzx2NRVizk=
-X-Google-Smtp-Source: AGHT+IHFzIljcf6zTPr4lXuYJkm5DMFriaHuEmq2CaZenhdgq2zNUl9yeUCE14AhjvakCXys9bPULg==
-X-Received: by 2002:a05:6a00:22cf:b0:706:aa4b:4 with SMTP id
- d2e1a72fcca58-70b44da55abmr2510022b3a.13.1720515277063; 
- Tue, 09 Jul 2024 01:54:37 -0700 (PDT)
-Received: from grind.dc1.ventanamicro.com ([179.193.8.43])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-70b438995a8sm1316013b3a.10.2024.07.09.01.54.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Jul 2024 01:54:36 -0700 (PDT)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH] target/riscv/kvm: update KVM regs to Linux 6.10-rc5
-Date: Tue,  9 Jul 2024 05:54:31 -0300
-Message-ID: <20240709085431.455541-1-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.45.2
+ (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
+ id 1sR7bP-0006BO-EJ; Tue, 09 Jul 2024 05:57:39 -0400
+Received: from mgamail.intel.com ([192.198.163.12])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
+ id 1sR7bM-0008B2-0N; Tue, 09 Jul 2024 05:57:38 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1720519056; x=1752055056;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=ql3XWi50DdULpswcLK+rmYBSYuNy0QrKcY67jvFg2+g=;
+ b=ap57HpPEYs3Z4opA5a6hgzLAy/UdCbZUlr/katMMuDULZK+kDRjeMAi7
+ W748wsR8MOxVa9LSq5I76e1eJiqzXWmb39hMe8nDnPStOW3Qe8n2MQLoS
+ 3ya2RWkCHlV4nv8igSfiQEA9fJz/GgboMBOcZolryrBvU0a/oigfdukBR
+ TSQEF7dfBcV/cr5zTe3VrxuY4QNrgJG8X0r3k4QXj08ho1ZUz97rBADil
+ aIwcfsH1RlK7DAwTLu8v4H7yoH3E71IPSga6/k6MxHPAExLrPoz/bs71l
+ 9m6RNKoj+pDYnHCrmza70kZTny8AWzKlOXjXl73gXT5Cyz/8Wdlx7fqBA g==;
+X-CSE-ConnectionGUID: dVM6ljAhTWObC80TGxcm5Q==
+X-CSE-MsgGUID: FwULKwtaS+SQiYef0GL4Nw==
+X-IronPort-AV: E=McAfee;i="6700,10204,11127"; a="21630499"
+X-IronPort-AV: E=Sophos;i="6.09,194,1716274800"; d="scan'208";a="21630499"
+Received: from orviesa001.jf.intel.com ([10.64.159.141])
+ by fmvoesa106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 Jul 2024 02:57:30 -0700
+X-CSE-ConnectionGUID: ijrOueipQbWj08U6YPj+LA==
+X-CSE-MsgGUID: GQMV+uZ1SlynX0EEJuSMAQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.09,194,1716274800"; d="scan'208";a="85349963"
+Received: from liuzhao-optiplex-7080.sh.intel.com (HELO localhost)
+ ([10.239.160.36])
+ by orviesa001.jf.intel.com with ESMTP; 09 Jul 2024 02:57:25 -0700
+Date: Tue, 9 Jul 2024 18:13:04 +0800
+From: Zhao Liu <zhao1.liu@intel.com>
+To: Daniel P =?iso-8859-1?Q?=2E_Berrang=E9?= <berrange@redhat.com>,
+ Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>,
+ Yanan Wang <wangyanan55@huawei.com>,
+ "Michael S . Tsirkin" <mst@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Eric Blake <eblake@redhat.com>, Markus Armbruster <armbru@redhat.com>,
+ Marcelo Tosatti <mtosatti@redhat.com>,
+ Alex =?iso-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+ Sia Jee Heng <jeeheng.sia@starfivetech.com>
+Cc: qemu-devel@nongnu.org, kvm@vger.kernel.org, qemu-riscv@nongnu.org,
+ qemu-arm@nongnu.org, Zhenyu Wang <zhenyu.z.wang@intel.com>,
+ Dapeng Mi <dapeng1.mi@linux.intel.com>, Yongwei Ma <yongwei.ma@intel.com>
+Subject: Re: [PATCH 2/8] qapi/qom: Introduce smp-cache object
+Message-ID: <Zo0NMDmYKRVWe9Ht@intel.com>
+References: <20240704031603.1744546-1-zhao1.liu@intel.com>
+ <20240704031603.1744546-3-zhao1.liu@intel.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42f;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x42f.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240704031603.1744546-3-zhao1.liu@intel.com>
+Received-SPF: pass client-ip=192.198.163.12; envelope-from=zhao1.liu@intel.com;
+ helo=mgamail.intel.com
+X-Spam_score_int: -44
+X-Spam_score: -4.5
+X-Spam_bar: ----
+X-Spam_report: (-4.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.142,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -91,34 +95,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Two new regs added: ztso and zacas.
+> diff --git a/hw/core/smp-cache.c b/hw/core/smp-cache.c
+> new file mode 100644
+> index 000000000000..c0157ce51c8f
+> --- /dev/null
+> +++ b/hw/core/smp-cache.c
+> @@ -0,0 +1,103 @@
+> +/*
+> + * Cache Object for SMP machine
+> + *
+> + * Copyright (C) 2024 Intel Corporation.
+> + *
+> + * Author: Zhao Liu <zhao1.liu@intel.com>
+> + *
+> + * This work is licensed under the terms of the GNU GPL, version 2 or
+> + * later.  See the COPYING file in the top-level directory.
+> + */
+> +
+> +#include "qemu/osdep.h"
+> +
+> +#include "hw/core/smp-cache.h"
+> +#include "qapi/error.h"
+> +#include "qapi/qapi-visit-machine-common.h"
+> +#include "qom/object_interfaces.h"
+> +
+> +static void
+> +smp_cache_get_cache_prop(Object *obj, Visitor *v, const char *name,
+> +                         void *opaque, Error **errp)
+> +{
+> +    SMPCache *cache = SMP_CACHE(obj);
+> +    SMPCachePropertyList *head = NULL;
+> +    SMPCachePropertyList **tail = &head;
+> +
+> +    for (int i = 0; i < SMP_CACHE__MAX; i++) {
+> +        SMPCacheProperty *node = g_new(SMPCacheProperty, 1);
+> +
+> +        node->name = cache->props[i].name;
+> +        node->topo = cache->props[i].topo;
+> +        QAPI_LIST_APPEND(tail, node);
+> +    }
+> +
+> +    if (!visit_type_SMPCachePropertyList(v, name, &head, errp)) {
+> +        return;
 
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- target/riscv/kvm/kvm-cpu.c | 2 ++
- 1 file changed, 2 insertions(+)
+Oops, here I shouldn't return. Whether it succeeds or not, I should
+continue with the following free().
 
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index 1047961fed..f6e3156b8d 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -281,6 +281,7 @@ static KVMCPUConfig kvm_multi_ext_cfgs[] = {
-     KVM_EXT_CFG("zihintntl", ext_zihintntl, KVM_RISCV_ISA_EXT_ZIHINTNTL),
-     KVM_EXT_CFG("zihintpause", ext_zihintpause, KVM_RISCV_ISA_EXT_ZIHINTPAUSE),
-     KVM_EXT_CFG("zihpm", ext_zihpm, KVM_RISCV_ISA_EXT_ZIHPM),
-+    KVM_EXT_CFG("zacas", ext_zacas, KVM_RISCV_ISA_EXT_ZACAS),
-     KVM_EXT_CFG("zfa", ext_zfa, KVM_RISCV_ISA_EXT_ZFA),
-     KVM_EXT_CFG("zfh", ext_zfh, KVM_RISCV_ISA_EXT_ZFH),
-     KVM_EXT_CFG("zfhmin", ext_zfhmin, KVM_RISCV_ISA_EXT_ZFHMIN),
-@@ -298,6 +299,7 @@ static KVMCPUConfig kvm_multi_ext_cfgs[] = {
-     KVM_EXT_CFG("zksed", ext_zksed, KVM_RISCV_ISA_EXT_ZKSED),
-     KVM_EXT_CFG("zksh", ext_zksh, KVM_RISCV_ISA_EXT_ZKSH),
-     KVM_EXT_CFG("zkt", ext_zkt, KVM_RISCV_ISA_EXT_ZKT),
-+    KVM_EXT_CFG("ztso", ext_ztso, KVM_RISCV_ISA_EXT_ZTSO),
-     KVM_EXT_CFG("zvbb", ext_zvbb, KVM_RISCV_ISA_EXT_ZVBB),
-     KVM_EXT_CFG("zvbc", ext_zvbc, KVM_RISCV_ISA_EXT_ZVBC),
-     KVM_EXT_CFG("zvfh", ext_zvfh, KVM_RISCV_ISA_EXT_ZVFH),
--- 
-2.45.2
-
+> +    }
+> +    qapi_free_SMPCachePropertyList(head);
+> +}
 
