@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D41EAC3DA42
-	for <qemu-riscv@archiver.kernel.org>; Wed, 10 Jul 2024 14:37:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EB74C3DA42
+	for <qemu-riscv@archiver.kernel.org>; Wed, 10 Jul 2024 14:42:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sRYRR-0006WB-5r; Wed, 10 Jul 2024 10:37:09 -0400
+	id 1sRYW1-0004QO-3a; Wed, 10 Jul 2024 10:41:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sRYRP-0006Qp-7f
- for qemu-riscv@nongnu.org; Wed, 10 Jul 2024 10:37:07 -0400
-Received: from mail-pj1-x102f.google.com ([2607:f8b0:4864:20::102f])
+ id 1sRYW0-0004Pp-6o
+ for qemu-riscv@nongnu.org; Wed, 10 Jul 2024 10:41:52 -0400
+Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sRYRM-0008Cn-FD
- for qemu-riscv@nongnu.org; Wed, 10 Jul 2024 10:37:06 -0400
-Received: by mail-pj1-x102f.google.com with SMTP id
- 98e67ed59e1d1-2c980b08b4bso4481612a91.1
- for <qemu-riscv@nongnu.org>; Wed, 10 Jul 2024 07:37:03 -0700 (PDT)
+ id 1sRYVu-0000j6-3v
+ for qemu-riscv@nongnu.org; Wed, 10 Jul 2024 10:41:51 -0400
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-1fb0d7e4ee9so41939645ad.3
+ for <qemu-riscv@nongnu.org>; Wed, 10 Jul 2024 07:41:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1720622222; x=1721227022; darn=nongnu.org;
+ d=linaro.org; s=google; t=1720622504; x=1721227304; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=KPjBhqTMQQz+zEW5BDmFbWOo9n0F1MrwOUwA8+Jpr6g=;
- b=vze2vlo9U+iTXnLH0w3Ici/vjKXoD1Nc+Io9Ci6z/zVmI4KkJD3+6TQ2j/ugr/xPbo
- /Qb8ROFl1DDt2QyLj0cl90KEHzn6fOF4ZRI6PFo7Nn5xNiSRl9UFYGwq4rpxfD5qOnEj
- gEXD5J+79gIbFsyoGkEAR2l5QMYekYXD7/Q2HR6gKJ57w0xr/qw2xTmek3SrUdO2Umiq
- +dxBRdktGdoBnKDAc7vzBcBkblzQeBTo7nLYzOLAbVzs0f55GpEVTwt0HZVcFuOxKjl8
- wsX5pd0/f6RutU9aFo9B7HZugVJ2Afqr01V+K1jgxuolrR0Q/nU+A5xAttg82tKmqWkY
- xQmw==
+ bh=oqPuOV35hS4wUFu0YtiEejYDbu7rppufXjp6qX6lfOg=;
+ b=NRctRgcSZBN79rLvLG4xpH4hXQ5ABFjc3QEwZZh6HkWvNACnhCOffcDh85QOmEbz/3
+ CqDv2FEG6YyoJVB+pLmhF0YZuFPCz48iE8nhchYRqbV1/Ma/Y6m0diJ5pmL2UBIRv+wD
+ R4cpsHA1eeb0icyoYxkavnqkAs9hoAWEndAMNHJM1L5BwuPb9FpF8mg+lOw3267VeXDw
+ +jTNs2Qg6F5/Fa6VIUrPqpwpZFZqxO64DDgHVOdKXIKv2oUyUHMGJU8tuYboSF3EM+hJ
+ IwK9f5EJnKuZ3DJQOFw0aNqhyAVWXmjyhoDOw+/T2jOFMcuGRI3v7moevUcHm/MCqq1y
+ UYUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720622222; x=1721227022;
+ d=1e100.net; s=20230601; t=1720622504; x=1721227304;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=KPjBhqTMQQz+zEW5BDmFbWOo9n0F1MrwOUwA8+Jpr6g=;
- b=PrHsiwWjE6r3hMYjV4if5bp9HRAeqblylxU+y9G208n4GNWgh/rKH5fML/LlfOn+Oj
- 6nJ78hM2CH1ZKnpMZeRfDabFLMT6MM6IlnkQIIwRaBMk3E5JeKGlI7f/eSWEJrgNRS9I
- hIvk4pvh+DZP4E2x638fGNcIuX3TYC7KYQFocWuTXnBd8EeMKJRZctxm7AJ9XFD5Gl/+
- 4RZhgRZtqLoaRXcVAqUD4P941b/fIYV1YdS/WNOZxwiGl2+cQ/GfLiRdLpV8yhDasD0O
- +Dz+G4J7Dfk8wY8lW8mKlKTUVLj84Ywzxg8df0OT7f9m8s1v84nbRa2RD52alarSrf1r
- gSog==
+ bh=oqPuOV35hS4wUFu0YtiEejYDbu7rppufXjp6qX6lfOg=;
+ b=SiQMsfuMY01YVgpTCV5WyMNr+x1bvkxFeiUXlDNbLENTJi93kgxVFkc1TOtrB7mpd0
+ zRseSLxF9nw6R2lS/dGeYUyI0GGpSYxflv8gXIlguTlWluWl18LRKC3BCpu3ZE87tmYH
+ hrJ7xV0UQFhTdaGyTjTDkUXEl20JeNuKPrGvxiisc6kEUnUXgVufRawWu9PhuxMN7Qzy
+ 9MId5TjahYqQh9KUrWPur84mQDzRmnYJyLzBwyADsLO8ImrDicfyxAjNtwPfKU1uGfsd
+ Ummihuhq1m5qVbC+19kGfKsiPXKC9zMwr9+kwf+51N7ALY0HwmkDgduQjMbglZ5GQ5Bs
+ EfnQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWifLwvrgTRTzrg6KBqkgpDWLm38F2rn3ismG6WmwLBFoBpdCmSv3lyJB2NdmmMNqjJVi5MK+4PFVB7GZFr+JskpQYiHgI=
-X-Gm-Message-State: AOJu0Yz2AUZZWNAwyFmzTeIhDOKjp+DRSdK71bnF+Oc7cLcLCaLE/7Eq
- bgZQSUfxDTXREBME7ifn9GiC5Zt2mS3jL8UN5CTtRJxk+iScZmlEK05bdyM69ABTjHOddsf0bDo
- QTg4=
-X-Google-Smtp-Source: AGHT+IFjx9GNWv+yEnsm84ZlfU0gpq7J1Z1SKA4pJ/tlrGPEaj3CqT3D2sULOmObJv/adFi2TgrMYg==
-X-Received: by 2002:a17:90b:3a84:b0:2ca:7636:2214 with SMTP id
- 98e67ed59e1d1-2ca763625e3mr1859187a91.4.1720622222226; 
- Wed, 10 Jul 2024 07:37:02 -0700 (PDT)
+ AJvYcCVhc/xdD9bicn/UiGJK9QROeL7Tfku5HVHwJZwWAilL4tkKL4N/lei1+8jEhU+5uhBp2/knok7CEpdM/WMyjB4/BjDGB9A=
+X-Gm-Message-State: AOJu0Yw3jD5ettkRefxz93pv3Dx7eP0CAah19jh8DetEUd0Uj5UsmS0n
+ +oqa5G6joO1fo+ttj1ih3hhDfjTWAq3uDrLu783aPJptppDZpLuSyV6nqwTg6nc=
+X-Google-Smtp-Source: AGHT+IFbs4TT7vMCDH+ubHVbFwrUacP6v93UFF/qlSYXIZ8TQ3lYyyVWLvvhxJ/ujFGbFXavrC2Zug==
+X-Received: by 2002:a17:902:e54d:b0:1fb:44e1:b5d6 with SMTP id
+ d9443c01a7336-1fbb6d43a23mr46456035ad.23.1720622504208; 
+ Wed, 10 Jul 2024 07:41:44 -0700 (PDT)
 Received: from [192.168.0.4] (174-21-76-141.tukw.qwest.net. [174.21.76.141])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2c99aabab9dsm11978185a91.57.2024.07.10.07.37.01
+ d9443c01a7336-1fbb6a1083bsm34569895ad.37.2024.07.10.07.41.43
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 10 Jul 2024 07:37:01 -0700 (PDT)
-Message-ID: <7059ae89-1181-48ce-b828-0837f7a62c93@linaro.org>
-Date: Wed, 10 Jul 2024 07:36:59 -0700
+ Wed, 10 Jul 2024 07:41:43 -0700 (PDT)
+Message-ID: <884fdcec-f1ba-483d-99e5-ec22ed7187fa@linaro.org>
+Date: Wed, 10 Jul 2024 07:41:41 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 06/13] target/ppc: Hoist dcbz_size out of dcbz_common
+Subject: Re: [PATCH v2 08/13] target/ppc: Merge helper_{dcbz,dcbzep}
 To: BALATON Zoltan <balaton@eik.bme.hu>
 Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongu.org,
  qemu-s390x@nongnu.org, qemu-riscv@nongnu.org, max.chou@sifive.com
 References: <20240710032814.104643-1-richard.henderson@linaro.org>
- <20240710032814.104643-7-richard.henderson@linaro.org>
- <aedda59d-2a8f-94bd-246d-d32ee6cf19be@eik.bme.hu>
+ <20240710032814.104643-9-richard.henderson@linaro.org>
+ <e5887250-eabd-f04b-e95f-0ea27ad8876a@eik.bme.hu>
 Content-Language: en-US
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <aedda59d-2a8f-94bd-246d-d32ee6cf19be@eik.bme.hu>
+In-Reply-To: <e5887250-eabd-f04b-e95f-0ea27ad8876a@eik.bme.hu>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102f.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x633.google.com
 X-Spam_score_int: 4
 X-Spam_score: 0.4
 X-Spam_bar: /
@@ -101,19 +100,38 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 7/10/24 05:11, BALATON Zoltan wrote:
+On 7/10/24 05:20, BALATON Zoltan wrote:
 > On Tue, 9 Jul 2024, Richard Henderson wrote:
->> The 970 logic does not apply to dcbzep, which is an e500 insn.
+>> Merge the two and pass the mmu_idx directly from translation.
+>> Swap the argument order in dcbz_common to avoid extra swaps.
 >>
 >> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+>> ---
+>> target/ppc/helper.h     |  3 +--
+>> target/ppc/mem_helper.c | 14 ++++----------
+>> target/ppc/translate.c  |  4 ++--
+>> 3 files changed, 7 insertions(+), 14 deletions(-)
+>>
+>> diff --git a/target/ppc/helper.h b/target/ppc/helper.h
+>> index afc56855ff..4fa089cbf9 100644
+>> --- a/target/ppc/helper.h
+>> +++ b/target/ppc/helper.h
+>> @@ -46,8 +46,7 @@ DEF_HELPER_FLAGS_3(stmw, TCG_CALL_NO_WG, void, env, tl, i32)
+>> DEF_HELPER_4(lsw, void, env, tl, i32, i32)
+>> DEF_HELPER_5(lswx, void, env, tl, i32, i32, i32)
+>> DEF_HELPER_FLAGS_4(stsw, TCG_CALL_NO_WG, void, env, tl, i32, i32)
+>> -DEF_HELPER_FLAGS_2(dcbz, TCG_CALL_NO_WG, void, env, tl)
+>> -DEF_HELPER_FLAGS_2(dcbzep, TCG_CALL_NO_WG, void, env, tl)
+>> +DEF_HELPER_FLAGS_3(dcbz, TCG_CALL_NO_WG, void, env, tl, int)
+>> #ifdef TARGET_PPC64
+>> DEF_HELPER_FLAGS_2(dcbzl, TCG_CALL_NO_WG, void, env, tl)
 > 
-> Reviewed-by: BALATON Zoltan <balaton@eik.bme.hu>
-> 
-> As all callers pass GETPC() to retaddr maybe that could be moved into dcbz_common() as i 
-> had in my patch.
+> Why only dcbz but not dcbzl as well to make them uniform?
 
-No, that would be incorrect usage of GETPC.
-It *must* be used in the HELPER directly called from TCG.
+Because dcbzl has extra logic, so doesn't get merged.
+The expansion of ppc_env_mmu_index() is not large, so there's no gain in passing it in.
+
+The point was to eliminate duplication where it was easy.
 
 
 r~
