@@ -4,47 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6696C3DA42
-	for <qemu-riscv@archiver.kernel.org>; Wed, 10 Jul 2024 12:11:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7612C3DA42
+	for <qemu-riscv@archiver.kernel.org>; Wed, 10 Jul 2024 12:18:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sRWAb-0000IW-D7; Wed, 10 Jul 2024 08:11:37 -0400
+	id 1sRWGp-0001se-Nu; Wed, 10 Jul 2024 08:18:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
- id 1sRWAQ-00006H-9M; Wed, 10 Jul 2024 08:11:27 -0400
-Received: from zero.eik.bme.hu ([2001:738:2001:2001::2001])
+ id 1sRWGn-0001qs-BK; Wed, 10 Jul 2024 08:18:01 -0400
+Received: from zero.eik.bme.hu ([152.66.115.2])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
- id 1sRWAN-0005zs-BZ; Wed, 10 Jul 2024 08:11:26 -0400
+ id 1sRWGc-0007DY-Sh; Wed, 10 Jul 2024 08:17:53 -0400
 Received: from zero.eik.bme.hu (localhost [127.0.0.1])
- by zero.eik.bme.hu (Postfix) with ESMTP id 714CE4E600F;
- Wed, 10 Jul 2024 14:11:16 +0200 (CEST)
+ by zero.eik.bme.hu (Postfix) with ESMTP id 7E6BC4E601B;
+ Wed, 10 Jul 2024 14:17:47 +0200 (CEST)
 X-Virus-Scanned: amavisd-new at eik.bme.hu
 Received: from zero.eik.bme.hu ([127.0.0.1])
  by zero.eik.bme.hu (zero.eik.bme.hu [127.0.0.1]) (amavisd-new, port 10028)
- with ESMTP id OXSFRbNrVm4M; Wed, 10 Jul 2024 14:11:14 +0200 (CEST)
+ with ESMTP id djzZqR-pUrO3; Wed, 10 Jul 2024 14:17:45 +0200 (CEST)
 Received: by zero.eik.bme.hu (Postfix, from userid 432)
- id 76BEF4E6005; Wed, 10 Jul 2024 14:11:14 +0200 (CEST)
+ id 8B4354E6005; Wed, 10 Jul 2024 14:17:45 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by zero.eik.bme.hu (Postfix) with ESMTP id 74E99746E3B;
- Wed, 10 Jul 2024 14:11:14 +0200 (CEST)
-Date: Wed, 10 Jul 2024 14:11:14 +0200 (CEST)
+ by zero.eik.bme.hu (Postfix) with ESMTP id 8983A746E3B;
+ Wed, 10 Jul 2024 14:17:45 +0200 (CEST)
+Date: Wed, 10 Jul 2024 14:17:45 +0200 (CEST)
 From: BALATON Zoltan <balaton@eik.bme.hu>
 To: Richard Henderson <richard.henderson@linaro.org>
 cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongu.org, 
  qemu-s390x@nongnu.org, qemu-riscv@nongnu.org, max.chou@sifive.com
-Subject: Re: [PATCH v2 06/13] target/ppc: Hoist dcbz_size out of
- dcbz_common
-In-Reply-To: <20240710032814.104643-7-richard.henderson@linaro.org>
-Message-ID: <aedda59d-2a8f-94bd-246d-d32ee6cf19be@eik.bme.hu>
+Subject: Re: [PATCH v2 07/13] target/ppc: Split out helper_dbczl for 970
+In-Reply-To: <20240710032814.104643-8-richard.henderson@linaro.org>
+Message-ID: <66e91236-02d1-5e81-20df-5db4146b624b@eik.bme.hu>
 References: <20240710032814.104643-1-richard.henderson@linaro.org>
- <20240710032814.104643-7-richard.henderson@linaro.org>
+ <20240710032814.104643-8-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII; format=flowed
-Received-SPF: pass client-ip=2001:738:2001:2001::2001;
- envelope-from=balaton@eik.bme.hu; helo=zero.eik.bme.hu
+Received-SPF: pass client-ip=152.66.115.2; envelope-from=balaton@eik.bme.hu;
+ helo=zero.eik.bme.hu
 X-Spam_score_int: 6
 X-Spam_score: 0.6
 X-Spam_bar: /
@@ -66,38 +65,55 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On Tue, 9 Jul 2024, Richard Henderson wrote:
-> The 970 logic does not apply to dcbzep, which is an e500 insn.
+> We can determine at translation time whether the insn is or
+> is not dbczl.  We must retain a runtime check against the
+> HID5 register, but we can move that to a separate function
+> that never affects other ppc models.
 >
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 
 Reviewed-by: BALATON Zoltan <balaton@eik.bme.hu>
 
-As all callers pass GETPC() to retaddr maybe that could be moved into 
-dcbz_common() as i had in my patch.
-
 Regards,
 BALATON Zoltan
 
 > ---
-> target/ppc/mem_helper.c | 30 +++++++++++++++---------------
-> 1 file changed, 15 insertions(+), 15 deletions(-)
+> target/ppc/helper.h     |  7 +++++--
+> target/ppc/mem_helper.c | 34 +++++++++++++++++++++-------------
+> target/ppc/translate.c  | 24 ++++++++++++++----------
+> 3 files changed, 40 insertions(+), 25 deletions(-)
 >
+> diff --git a/target/ppc/helper.h b/target/ppc/helper.h
+> index 76b8f25c77..afc56855ff 100644
+> --- a/target/ppc/helper.h
+> +++ b/target/ppc/helper.h
+> @@ -46,8 +46,11 @@ DEF_HELPER_FLAGS_3(stmw, TCG_CALL_NO_WG, void, env, tl, i32)
+> DEF_HELPER_4(lsw, void, env, tl, i32, i32)
+> DEF_HELPER_5(lswx, void, env, tl, i32, i32, i32)
+> DEF_HELPER_FLAGS_4(stsw, TCG_CALL_NO_WG, void, env, tl, i32, i32)
+> -DEF_HELPER_FLAGS_3(dcbz, TCG_CALL_NO_WG, void, env, tl, i32)
+> -DEF_HELPER_FLAGS_3(dcbzep, TCG_CALL_NO_WG, void, env, tl, i32)
+> +DEF_HELPER_FLAGS_2(dcbz, TCG_CALL_NO_WG, void, env, tl)
+> +DEF_HELPER_FLAGS_2(dcbzep, TCG_CALL_NO_WG, void, env, tl)
+> +#ifdef TARGET_PPC64
+> +DEF_HELPER_FLAGS_2(dcbzl, TCG_CALL_NO_WG, void, env, tl)
+> +#endif
+> DEF_HELPER_FLAGS_2(icbi, TCG_CALL_NO_WG, void, env, tl)
+> DEF_HELPER_FLAGS_2(icbiep, TCG_CALL_NO_WG, void, env, tl)
+> DEF_HELPER_5(lscbx, tl, env, tl, i32, i32, i32)
 > diff --git a/target/ppc/mem_helper.c b/target/ppc/mem_helper.c
-> index 361fd72226..5067919ff8 100644
+> index 5067919ff8..d4957efd6e 100644
 > --- a/target/ppc/mem_helper.c
 > +++ b/target/ppc/mem_helper.c
-> @@ -271,22 +271,12 @@ void helper_stsw(CPUPPCState *env, target_ulong addr, uint32_t nb,
+> @@ -296,26 +296,34 @@ static void dcbz_common(CPUPPCState *env, target_ulong addr,
+>     }
 > }
 >
-> static void dcbz_common(CPUPPCState *env, target_ulong addr,
-> -                        uint32_t opcode, int mmu_idx, uintptr_t retaddr)
-> +                        int dcbz_size, int mmu_idx, uintptr_t retaddr)
+> -void helper_dcbz(CPUPPCState *env, target_ulong addr, uint32_t opcode)
+> +void helper_dcbz(CPUPPCState *env, target_ulong addr)
 > {
-> -    target_ulong mask, dcbz_size = env->dcache_line_size;
-> -    uint32_t i;
-> +    target_ulong mask = ~(target_ulong)(dcbz_size - 1);
->     void *haddr;
->
+> -    int dcbz_size = env->dcache_line_size;
+> -
 > -#if defined(TARGET_PPC64)
 > -    /* Check for dcbz vs dcbzl on 970 */
 > -    if (env->excp_model == POWERPC_EXCP_970 &&
@@ -106,44 +122,96 @@ BALATON Zoltan
 > -    }
 > -#endif
 > -
->     /* Align address */
-> -    mask = ~(dcbz_size - 1);
->     addr &= mask;
+> -    dcbz_common(env, addr, dcbz_size, ppc_env_mmu_index(env, false), GETPC());
+> +    dcbz_common(env, addr, env->dcache_line_size,
+> +                ppc_env_mmu_index(env, false), GETPC());
+> }
 >
->     /* Check reservation */
-> @@ -300,7 +290,7 @@ static void dcbz_common(CPUPPCState *env, target_ulong addr,
->         memset(haddr, 0, dcbz_size);
->     } else {
->         /* Slow path */
-> -        for (i = 0; i < dcbz_size; i += 8) {
-> +        for (int i = 0; i < dcbz_size; i += 8) {
->             cpu_stq_mmuidx_ra(env, addr + i, 0, mmu_idx, retaddr);
->         }
->     }
-> @@ -308,12 +298,22 @@ static void dcbz_common(CPUPPCState *env, target_ulong addr,
->
-> void helper_dcbz(CPUPPCState *env, target_ulong addr, uint32_t opcode)
+> -void helper_dcbzep(CPUPPCState *env, target_ulong addr, uint32_t opcode)
+> +void helper_dcbzep(CPUPPCState *env, target_ulong addr)
 > {
-> -    dcbz_common(env, addr, opcode, ppc_env_mmu_index(env, false), GETPC());
+>     dcbz_common(env, addr, env->dcache_line_size, PPC_TLB_EPID_STORE, GETPC());
+> }
+>
+> +#ifdef TARGET_PPC64
+> +void helper_dcbzl(CPUPPCState *env, target_ulong addr)
+> +{
 > +    int dcbz_size = env->dcache_line_size;
 > +
-> +#if defined(TARGET_PPC64)
-> +    /* Check for dcbz vs dcbzl on 970 */
-> +    if (env->excp_model == POWERPC_EXCP_970 &&
-> +        !(opcode & 0x00200000) && ((env->spr[SPR_970_HID5] >> 7) & 0x3) == 1) {
+> +    /*
+> +     * The translator checked for POWERPC_EXCP_970.
+> +     * All that's left is to check HID5.
+> +     */
+> +    if (((env->spr[SPR_970_HID5] >> 7) & 0x3) == 1) {
 > +        dcbz_size = 32;
+> +    }
+> +
+> +    dcbz_common(env, addr, dcbz_size, ppc_env_mmu_index(env, false), GETPC());
+> +}
+> +#endif
+> +
+> void helper_icbi(CPUPPCState *env, target_ulong addr)
+> {
+>     addr &= ~(env->dcache_line_size - 1);
+> diff --git a/target/ppc/translate.c b/target/ppc/translate.c
+> index 0bc16d7251..2664c94522 100644
+> --- a/target/ppc/translate.c
+> +++ b/target/ppc/translate.c
+> @@ -200,6 +200,7 @@ struct DisasContext {
+>     uint32_t flags;
+>     uint64_t insns_flags;
+>     uint64_t insns_flags2;
+> +    powerpc_excp_t excp_model;
+> };
+>
+> #define DISAS_EXIT         DISAS_TARGET_0  /* exit to main loop, pc updated */
+> @@ -4445,27 +4446,29 @@ static void gen_dcblc(DisasContext *ctx)
+> /* dcbz */
+> static void gen_dcbz(DisasContext *ctx)
+> {
+> -    TCGv tcgv_addr;
+> -    TCGv_i32 tcgv_op;
+> +    TCGv tcgv_addr = tcg_temp_new();
+>
+>     gen_set_access_type(ctx, ACCESS_CACHE);
+> -    tcgv_addr = tcg_temp_new();
+> -    tcgv_op = tcg_constant_i32(ctx->opcode & 0x03FF000);
+>     gen_addr_reg_index(ctx, tcgv_addr);
+> -    gen_helper_dcbz(tcg_env, tcgv_addr, tcgv_op);
+> +
+> +#ifdef TARGET_PPC64
+> +    if (ctx->excp_model == POWERPC_EXCP_970 && !(ctx->opcode & 0x00200000)) {
+> +        gen_helper_dcbzl(tcg_env, tcgv_addr);
+> +        return;
 > +    }
 > +#endif
 > +
-> +    dcbz_common(env, addr, dcbz_size, ppc_env_mmu_index(env, false), GETPC());
+> +    gen_helper_dcbz(tcg_env, tcgv_addr);
 > }
 >
-> void helper_dcbzep(CPUPPCState *env, target_ulong addr, uint32_t opcode)
+> /* dcbzep */
+> static void gen_dcbzep(DisasContext *ctx)
 > {
-> -    dcbz_common(env, addr, opcode, PPC_TLB_EPID_STORE, GETPC());
-> +    dcbz_common(env, addr, env->dcache_line_size, PPC_TLB_EPID_STORE, GETPC());
+> -    TCGv tcgv_addr;
+> -    TCGv_i32 tcgv_op;
+> +    TCGv tcgv_addr = tcg_temp_new();
+>
+>     gen_set_access_type(ctx, ACCESS_CACHE);
+> -    tcgv_addr = tcg_temp_new();
+> -    tcgv_op = tcg_constant_i32(ctx->opcode & 0x03FF000);
+>     gen_addr_reg_index(ctx, tcgv_addr);
+> -    gen_helper_dcbzep(tcg_env, tcgv_addr, tcgv_op);
+> +    gen_helper_dcbzep(tcg_env, tcgv_addr);
 > }
 >
-> void helper_icbi(CPUPPCState *env, target_ulong addr)
+> /* dst / dstt */
+> @@ -6480,6 +6483,7 @@ static void ppc_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+>     ctx->hv = (hflags >> HFLAGS_HV) & 1;
+>     ctx->insns_flags = env->insns_flags;
+>     ctx->insns_flags2 = env->insns_flags2;
+> +    ctx->excp_model = env->excp_model;
+>     ctx->access_type = -1;
+>     ctx->need_access_type = !mmu_is_64bit(env->mmu_model);
+>     ctx->le_mode = (hflags >> HFLAGS_LE) & 1;
 >
 
