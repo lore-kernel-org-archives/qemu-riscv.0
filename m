@@ -4,83 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 280F8C3DA41
-	for <qemu-riscv@archiver.kernel.org>; Wed, 10 Jul 2024 03:31:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5034C38150
+	for <qemu-riscv@archiver.kernel.org>; Wed, 10 Jul 2024 04:10:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sRO0W-0000cb-9W; Tue, 09 Jul 2024 23:28:40 -0400
+	id 1sROeB-0003kz-2W; Wed, 10 Jul 2024 00:09:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sRO0U-0000X8-0E
- for qemu-riscv@nongnu.org; Tue, 09 Jul 2024 23:28:38 -0400
-Received: from mail-ot1-x32e.google.com ([2607:f8b0:4864:20::32e])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1sROe7-0003dy-2L; Wed, 10 Jul 2024 00:09:35 -0400
+Received: from mail-vs1-xe33.google.com ([2607:f8b0:4864:20::e33])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sRO0E-0003jp-6g
- for qemu-riscv@nongnu.org; Tue, 09 Jul 2024 23:28:37 -0400
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-7037c464792so585603a34.2
- for <qemu-riscv@nongnu.org>; Tue, 09 Jul 2024 20:28:21 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1sROe5-0001yQ-GX; Wed, 10 Jul 2024 00:09:34 -0400
+Received: by mail-vs1-xe33.google.com with SMTP id
+ ada2fe7eead31-48c2d353b01so2014552137.2; 
+ Tue, 09 Jul 2024 21:09:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1720582100; x=1721186900; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1720584571; x=1721189371; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=sb62XWFDa9Gh05Ca0jxdQeAaMaUiQWBTgpRySguRiT4=;
- b=LPpU++pfEDsPqHCSHfgECniQSRYYT6Ll+4OuFGhVGdriXQinohYfIxOXxlVDVTkeM1
- 8fy8Hfu/fmwHfVZL4KOGXq3FKCd0zTK28iLOcg0GTL7WvY2TWjXPAM1atrHSPgoxab2Q
- v9xa716IvRE5V1uURP8QMLXYCSwbYjQ+ER6topnnFqaq58/FPk2oW3n9qRvWoJ2ecYZz
- ZhzR+Em5eDQ91q20t3rqjPZI+suAdOrIslmAl+GveoEOrUrHVWtwL5sms6nMsRMRj6kA
- odrMgsgy65vdJL9pr5cRdWYDMpMTBrutbzQrWfzyTQx1tZRIPdPaGZxx6cvfNwahKRve
- WaXg==
+ bh=f6Ck1eU6ncsjc03ndkznoCEqd3/vOvUdkUl2pQNwovw=;
+ b=eB7dZF0Ci8tUjgZthRV+v+G+gQJ01/FoLkDl0pKc/ycY1b7n2PQ6mRpjh5WlyDFaOO
+ LkaWb57Gy92YdJL5zcHDKor+MtpNp04sZUmW/A2aOkHO9W6tm0sSHDUKGGjFb7N7cPeY
+ tC7Jrv9Nx7gAnD3nZqJue5He+1/2dw9d/mT8qjeaXaR3ad6om91w4E1iF1KhTBrBDFU8
+ dNQbrcGT95+5t8sxXbwufN4v7na70fIyIrurYnwYcQxaY/xTAT4BHOL2iLMMdtpzfWih
+ TLeSDMhmR4xYgt/+3rdJxPxbcHVj+3EhysWRl6OlLSG2RQ2SNayac5RMzPES62DS7zcL
+ H8gw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720582100; x=1721186900;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1720584571; x=1721189371;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=sb62XWFDa9Gh05Ca0jxdQeAaMaUiQWBTgpRySguRiT4=;
- b=kt+RTA+Jnv4ABSYDFJAq3gHhfum8oP2Isx5CgGgp3uA1o9TCQyHnAxxmgCn8D22bAV
- aqhMTW6BxAhnKUaL5v3uF/jwv5mqS7feFu6/nfcfJx4eDEF6HXhApTNAikgngddI+zLS
- ih+tx9AtKRq4tFq5M9IpeqxcHInCvDBIvSdLa/lrTpXWKCA5reON3pqsfQKza43PMy2z
- CHPCOMJTGWAm+vzH5j81EFdMX/gFX7USvOhcjTMaGe1HtQrBiDWzzb3ms/Edazx93YeY
- JDGHWBru3TfWvPgFf0HoLVuo1FS+TOupnVZr39TvjIuHBahIvkGzARSqRNddC1Fi5/Xv
- QW6Q==
+ bh=f6Ck1eU6ncsjc03ndkznoCEqd3/vOvUdkUl2pQNwovw=;
+ b=MOFk7UJpehQRuSaCfKdO4aPVa7NcvB5ApRDM6qvlLEog4zAtWWMMl/e4vCBnix2I45
+ poi4e5dyuoGduSRMUftFEa27z/oTOKO6l8S+9L7y237glXQ6dM9gJnrrfj9dJYfCKsOl
+ +dysMF+MSKv72g5inINpacdiUh16Z0dTuBec3ORTRgEazxFlrOpgYW0yL02pDrfqZGpJ
+ rBksa8dMZaSv6AiQa58TtZaJ7OCksA01j5wbZJJ58EFfQyDARw0F28DQaO3m3lXK0JVw
+ Zkry7jbJSLiYCp6n14G8NFjVjk/cKB5d/MBTrAbt+ZZ/6iyHcIXkzfanSUfgjZWmkcV8
+ A7eA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW6HVFI9uxNiND5V31TxIal3zLAUjRj8npRur/N9OQWc7/Bpw1AJEvEx/07NHbzV1RMG3+HU9CfCOj83WQ0Zn7wQKVLOZM=
-X-Gm-Message-State: AOJu0Yyp5HYSn0ZoJjGRXdatWaMD3Re62ssRNRUsH+9NiMe5dnA0g4cn
- D0rBXafn8/R5XDUkkMVtT8qKp2utSbmczzCZ4SpHV9/XE18Jm23r26S1+ig7TIo=
-X-Google-Smtp-Source: AGHT+IGeuI6x01YqqLWdGbry7s1eRKV87b7Ie0UuYSmJs7eHAfCrppAtzwxRD9i52UpxfwIcm7MWLQ==
-X-Received: by 2002:a9d:66d6:0:b0:704:45b5:6464 with SMTP id
- 46e09a7af769-70445b56aafmr2493074a34.29.1720582100227; 
- Tue, 09 Jul 2024 20:28:20 -0700 (PDT)
-Received: from stoup.. (174-21-76-141.tukw.qwest.net. [174.21.76.141])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-70b438f5679sm2687280b3a.90.2024.07.09.20.28.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Jul 2024 20:28:19 -0700 (PDT)
-From: Richard Henderson <richard.henderson@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: qemu-arm@nongnu.org, qemu-ppc@nongu.org, qemu-s390x@nongnu.org,
- qemu-riscv@nongnu.org, balaton@eik.bme.hu, max.chou@sifive.com
-Subject: [PATCH v2 04/13] target/arm: Use set/clear_helper_retaddr in SVE and
- SME helpers
-Date: Tue,  9 Jul 2024 20:28:05 -0700
-Message-ID: <20240710032814.104643-5-richard.henderson@linaro.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240710032814.104643-1-richard.henderson@linaro.org>
-References: <20240710032814.104643-1-richard.henderson@linaro.org>
+ AJvYcCXUjVWrGFe4mneFZIIQyLUBaz14lSRgtppigdqGEgJ48Ac6AggyAy21TI5WjW87S+l3WdYdgLKsb1CNFsMmu4Pgu5mphjhlFlpCoHl88GpyPhFA3d9sb/hFxSVZ1hLDEbF7uoDvnPWS5MHNRCZb/upBzg==
+X-Gm-Message-State: AOJu0Yyi63GQyyCx15N5l+2wYM46uz39G8J35l56VHSCBzQEd5FIfB7O
+ GiEc5g6tyd0gNrOHtrrljTO3VIKxnTe+eYmfWW+xXwri6ax/9IDchVTjgZmZmA8uCTKmMFlAi9k
+ uLmzZMxjEUc+6A/UQ2CGlz7v+ZEk=
+X-Google-Smtp-Source: AGHT+IGEV/SmVBT7AhyeTE5R/YEz09Ko3fM3FobVJA4n26D2Q/ceJB2jHg9+XdC3enfvUlugYM4vLBrcVeixsKl1YPg=
+X-Received: by 2002:a05:6102:b14:b0:48f:831d:cea6 with SMTP id
+ ada2fe7eead31-490321f7ffbmr5013693137.25.1720584571303; Tue, 09 Jul 2024
+ 21:09:31 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::32e;
- envelope-from=richard.henderson@linaro.org; helo=mail-ot1-x32e.google.com
-X-Spam_score_int: 4
-X-Spam_score: 0.4
-X-Spam_bar: /
-X-Spam_report: (0.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- SUSPICIOUS_RECIPS=2.51 autolearn=no autolearn_force=no
+References: <20240710032814.104643-1-richard.henderson@linaro.org>
+ <20240710032814.104643-14-richard.henderson@linaro.org>
+In-Reply-To: <20240710032814.104643-14-richard.henderson@linaro.org>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 10 Jul 2024 14:09:04 +1000
+Message-ID: <CAKmqyKNWdDrfR+RA+SVtQVUafmsBWgq9srXpQQKhAE3tte6mhQ@mail.gmail.com>
+Subject: Re: [PATCH v2 13/13] target/riscv: Simplify probing in vext_ldff
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongu.org, 
+ qemu-s390x@nongnu.org, qemu-riscv@nongnu.org, balaton@eik.bme.hu, 
+ max.chou@sifive.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e33;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe33.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,218 +93,97 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Avoid a race condition with munmap in another thread.
-Use around blocks that exclusively use "host_fn".
-Keep the blocks as small as possible, but without setting
-and clearing for every operation on one page.
+On Wed, Jul 10, 2024 at 1:30=E2=80=AFPM Richard Henderson
+<richard.henderson@linaro.org> wrote:
+>
+> The current pairing of tlb_vaddr_to_host with extra is either
+> inefficient (user-only, with page_check_range) or incorrect
+> (system, with probe_pages).
+>
+> For proper non-fault behaviour, use probe_access_flags with
+> its nonfault parameter set to true.
+>
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 
-Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
----
- target/arm/tcg/sme_helper.c | 16 ++++++++++++++++
- target/arm/tcg/sve_helper.c | 26 ++++++++++++++++++++++++++
- 2 files changed, 42 insertions(+)
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
-diff --git a/target/arm/tcg/sme_helper.c b/target/arm/tcg/sme_helper.c
-index e2e0575039..ab40ced38f 100644
---- a/target/arm/tcg/sme_helper.c
-+++ b/target/arm/tcg/sme_helper.c
-@@ -517,6 +517,8 @@ void sme_ld1(CPUARMState *env, void *za, uint64_t *vg,
-         clr_fn(za, 0, reg_off);
-     }
- 
-+    set_helper_retaddr(ra);
-+
-     while (reg_off <= reg_last) {
-         uint64_t pg = vg[reg_off >> 6];
-         do {
-@@ -529,6 +531,8 @@ void sme_ld1(CPUARMState *env, void *za, uint64_t *vg,
-         } while (reg_off <= reg_last && (reg_off & 63));
-     }
- 
-+    clear_helper_retaddr();
-+
-     /*
-      * Use the slow path to manage the cross-page misalignment.
-      * But we know this is RAM and cannot trap.
-@@ -543,6 +547,8 @@ void sme_ld1(CPUARMState *env, void *za, uint64_t *vg,
-         reg_last = info.reg_off_last[1];
-         host = info.page[1].host;
- 
-+        set_helper_retaddr(ra);
-+
-         do {
-             uint64_t pg = vg[reg_off >> 6];
-             do {
-@@ -554,6 +560,8 @@ void sme_ld1(CPUARMState *env, void *za, uint64_t *vg,
-                 reg_off += esize;
-             } while (reg_off & 63);
-         } while (reg_off <= reg_last);
-+
-+        clear_helper_retaddr();
-     }
- }
- 
-@@ -701,6 +709,8 @@ void sme_st1(CPUARMState *env, void *za, uint64_t *vg,
-     reg_last = info.reg_off_last[0];
-     host = info.page[0].host;
- 
-+    set_helper_retaddr(ra);
-+
-     while (reg_off <= reg_last) {
-         uint64_t pg = vg[reg_off >> 6];
-         do {
-@@ -711,6 +721,8 @@ void sme_st1(CPUARMState *env, void *za, uint64_t *vg,
-         } while (reg_off <= reg_last && (reg_off & 63));
-     }
- 
-+    clear_helper_retaddr();
-+
-     /*
-      * Use the slow path to manage the cross-page misalignment.
-      * But we know this is RAM and cannot trap.
-@@ -725,6 +737,8 @@ void sme_st1(CPUARMState *env, void *za, uint64_t *vg,
-         reg_last = info.reg_off_last[1];
-         host = info.page[1].host;
- 
-+        set_helper_retaddr(ra);
-+
-         do {
-             uint64_t pg = vg[reg_off >> 6];
-             do {
-@@ -734,6 +748,8 @@ void sme_st1(CPUARMState *env, void *za, uint64_t *vg,
-                 reg_off += 1 << esz;
-             } while (reg_off & 63);
-         } while (reg_off <= reg_last);
-+
-+        clear_helper_retaddr();
-     }
- }
- 
-diff --git a/target/arm/tcg/sve_helper.c b/target/arm/tcg/sve_helper.c
-index dd49e67d7a..8d0af4bb1c 100644
---- a/target/arm/tcg/sve_helper.c
-+++ b/target/arm/tcg/sve_helper.c
-@@ -5738,6 +5738,8 @@ void sve_ldN_r(CPUARMState *env, uint64_t *vg, const target_ulong addr,
-     reg_last = info.reg_off_last[0];
-     host = info.page[0].host;
- 
-+    set_helper_retaddr(retaddr);
-+
-     while (reg_off <= reg_last) {
-         uint64_t pg = vg[reg_off >> 6];
-         do {
-@@ -5752,6 +5754,8 @@ void sve_ldN_r(CPUARMState *env, uint64_t *vg, const target_ulong addr,
-         } while (reg_off <= reg_last && (reg_off & 63));
-     }
- 
-+    clear_helper_retaddr();
-+
-     /*
-      * Use the slow path to manage the cross-page misalignment.
-      * But we know this is RAM and cannot trap.
-@@ -5771,6 +5775,8 @@ void sve_ldN_r(CPUARMState *env, uint64_t *vg, const target_ulong addr,
-         reg_last = info.reg_off_last[1];
-         host = info.page[1].host;
- 
-+        set_helper_retaddr(retaddr);
-+
-         do {
-             uint64_t pg = vg[reg_off >> 6];
-             do {
-@@ -5784,6 +5790,8 @@ void sve_ldN_r(CPUARMState *env, uint64_t *vg, const target_ulong addr,
-                 mem_off += N << msz;
-             } while (reg_off & 63);
-         } while (reg_off <= reg_last);
-+
-+        clear_helper_retaddr();
-     }
- }
- 
-@@ -6093,6 +6101,8 @@ void sve_ldnfff1_r(CPUARMState *env, void *vg, const target_ulong addr,
-     reg_last = info.reg_off_last[0];
-     host = info.page[0].host;
- 
-+    set_helper_retaddr(retaddr);
-+
-     do {
-         uint64_t pg = *(uint64_t *)(vg + (reg_off >> 3));
-         do {
-@@ -6113,6 +6123,8 @@ void sve_ldnfff1_r(CPUARMState *env, void *vg, const target_ulong addr,
-         } while (reg_off <= reg_last && (reg_off & 63));
-     } while (reg_off <= reg_last);
- 
-+    clear_helper_retaddr();
-+
-     /*
-      * MemSingleNF is allowed to fail for any reason.  We have special
-      * code above to handle the first element crossing a page boundary.
-@@ -6348,6 +6360,8 @@ void sve_stN_r(CPUARMState *env, uint64_t *vg, target_ulong addr,
-     reg_last = info.reg_off_last[0];
-     host = info.page[0].host;
- 
-+    set_helper_retaddr(retaddr);
-+
-     while (reg_off <= reg_last) {
-         uint64_t pg = vg[reg_off >> 6];
-         do {
-@@ -6362,6 +6376,8 @@ void sve_stN_r(CPUARMState *env, uint64_t *vg, target_ulong addr,
-         } while (reg_off <= reg_last && (reg_off & 63));
-     }
- 
-+    clear_helper_retaddr();
-+
-     /*
-      * Use the slow path to manage the cross-page misalignment.
-      * But we know this is RAM and cannot trap.
-@@ -6381,6 +6397,8 @@ void sve_stN_r(CPUARMState *env, uint64_t *vg, target_ulong addr,
-         reg_last = info.reg_off_last[1];
-         host = info.page[1].host;
- 
-+        set_helper_retaddr(retaddr);
-+
-         do {
-             uint64_t pg = vg[reg_off >> 6];
-             do {
-@@ -6394,6 +6412,8 @@ void sve_stN_r(CPUARMState *env, uint64_t *vg, target_ulong addr,
-                 mem_off += N << msz;
-             } while (reg_off & 63);
-         } while (reg_off <= reg_last);
-+
-+        clear_helper_retaddr();
-     }
- }
- 
-@@ -6560,7 +6580,9 @@ void sve_ld1_z(CPUARMState *env, void *vd, uint64_t *vg, void *vm,
-                     if (unlikely(info.flags & TLB_MMIO)) {
-                         tlb_fn(env, &scratch, reg_off, addr, retaddr);
-                     } else {
-+                        set_helper_retaddr(retaddr);
-                         host_fn(&scratch, reg_off, info.host);
-+                        clear_helper_retaddr();
-                     }
-                 } else {
-                     /* Element crosses the page boundary. */
-@@ -6782,7 +6804,9 @@ void sve_ldff1_z(CPUARMState *env, void *vd, uint64_t *vg, void *vm,
-                     goto fault;
-                 }
- 
-+                set_helper_retaddr(retaddr);
-                 host_fn(vd, reg_off, info.host);
-+                clear_helper_retaddr();
-             }
-             reg_off += esize;
-         } while (reg_off & 63);
-@@ -6986,7 +7010,9 @@ void sve_st1_z(CPUARMState *env, void *vd, uint64_t *vg, void *vm,
-     do {
-         void *h = host[i];
-         if (likely(h != NULL)) {
-+            set_helper_retaddr(retaddr);
-             host_fn(vd, reg_off, h);
-+            clear_helper_retaddr();
-         } else if ((vg[reg_off >> 6] >> (reg_off & 63)) & 1) {
-             target_ulong addr = base + (off_fn(vm, reg_off) << scale);
-             tlb_fn(env, vd, reg_off, addr, retaddr);
--- 
-2.43.0
+Alistair
 
+> ---
+>  target/riscv/vector_helper.c | 34 ++++++++++++++++++----------------
+>  1 file changed, 18 insertions(+), 16 deletions(-)
+>
+> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+> index 1b4d5a8e37..4d72eb74d3 100644
+> --- a/target/riscv/vector_helper.c
+> +++ b/target/riscv/vector_helper.c
+> @@ -474,7 +474,6 @@ vext_ldff(void *vd, void *v0, target_ulong base,
+>            vext_ldst_elem_fn *ldst_elem,
+>            uint32_t log2_esz, uintptr_t ra)
+>  {
+> -    void *host;
+>      uint32_t i, k, vl =3D 0;
+>      uint32_t nf =3D vext_nf(desc);
+>      uint32_t vm =3D vext_vm(desc);
+> @@ -493,27 +492,31 @@ vext_ldff(void *vd, void *v0, target_ulong base,
+>          }
+>          addr =3D adjust_addr(env, base + i * (nf << log2_esz));
+>          if (i =3D=3D 0) {
+> +            /* Allow fault on first element. */
+>              probe_pages(env, addr, nf << log2_esz, ra, MMU_DATA_LOAD);
+>          } else {
+> -            /* if it triggers an exception, no need to check watchpoint =
+*/
+>              remain =3D nf << log2_esz;
+>              while (remain > 0) {
+> +                void *host;
+> +                int flags;
+> +
+>                  offset =3D -(addr | TARGET_PAGE_MASK);
+> -                host =3D tlb_vaddr_to_host(env, addr, MMU_DATA_LOAD, mmu=
+_index);
+> -                if (host) {
+> -#ifdef CONFIG_USER_ONLY
+> -                    if (!page_check_range(addr, offset, PAGE_READ)) {
+> -                        vl =3D i;
+> -                        goto ProbeSuccess;
+> -                    }
+> -#else
+> -                    probe_pages(env, addr, offset, ra, MMU_DATA_LOAD);
+> -#endif
+> -                } else {
+> +
+> +                /* Probe nonfault on subsequent elements. */
+> +                flags =3D probe_access_flags(env, addr, offset, MMU_DATA=
+_LOAD,
+> +                                           mmu_index, true, &host, 0);
+> +                if (flags) {
+> +                    /*
+> +                     * Stop any flag bit set:
+> +                     *   invalid (unmapped)
+> +                     *   mmio (transaction failed)
+> +                     *   watchpoint (debug)
+> +                     * In all cases, handle as the first load next time.
+> +                     */
+>                      vl =3D i;
+> -                    goto ProbeSuccess;
+> +                    break;
+>                  }
+> -                if (remain <=3D  offset) {
+> +                if (remain <=3D offset) {
+>                      break;
+>                  }
+>                  remain -=3D offset;
+> @@ -521,7 +524,6 @@ vext_ldff(void *vd, void *v0, target_ulong base,
+>              }
+>          }
+>      }
+> -ProbeSuccess:
+>      /* load bytes from guest memory */
+>      if (vl !=3D 0) {
+>          env->vl =3D vl;
+> --
+> 2.43.0
+>
+>
 
