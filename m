@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D776AC2BD09
-	for <qemu-riscv@archiver.kernel.org>; Wed, 10 Jul 2024 03:31:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFDA5C3DA41
+	for <qemu-riscv@archiver.kernel.org>; Wed, 10 Jul 2024 03:31:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sRO0g-0001QI-Bm; Tue, 09 Jul 2024 23:28:50 -0400
+	id 1sRO0R-0000N5-Lq; Tue, 09 Jul 2024 23:28:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sRO0d-0001Db-Ja
- for qemu-riscv@nongnu.org; Tue, 09 Jul 2024 23:28:47 -0400
-Received: from mail-io1-xd2c.google.com ([2607:f8b0:4864:20::d2c])
+ id 1sRO0P-0000DF-Sr
+ for qemu-riscv@nongnu.org; Tue, 09 Jul 2024 23:28:33 -0400
+Received: from mail-ot1-x32f.google.com ([2607:f8b0:4864:20::32f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sRO0M-0003p5-Sa
- for qemu-riscv@nongnu.org; Tue, 09 Jul 2024 23:28:47 -0400
-Received: by mail-io1-xd2c.google.com with SMTP id
- ca18e2360f4ac-7ebde93bf79so241303639f.1
- for <qemu-riscv@nongnu.org>; Tue, 09 Jul 2024 20:28:30 -0700 (PDT)
+ id 1sRO0G-0003km-7K
+ for qemu-riscv@nongnu.org; Tue, 09 Jul 2024 23:28:33 -0400
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-7035d5eec5aso2388360a34.1
+ for <qemu-riscv@nongnu.org>; Tue, 09 Jul 2024 20:28:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1720582108; x=1721186908; darn=nongnu.org;
+ d=linaro.org; s=google; t=1720582101; x=1721186901; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9235SwuPYciaNgHcgxJSqCnrZAaLdfCzJnWaiSnsh94=;
- b=rWdcLaCzYHfCuM9S3ZmqerFqaLOjyp/8lAWKqBwrDI6bVok5aPrIw9L0gY6G9FhTvW
- dFwtul5yQRz0vy2/qODHI21XuramSUJrj8vFOjRPtGkCbSr85G07IwZjrGtrqqUJAey1
- 0xHlya1ZxceIWchxZdjk0oqUQo4OSV4jGXPJ1bqIPXIOuwg0zDGHxOp9v1hRVcsrHOHD
- Og+OdCR+K+SSj4qfgmXF5YKfDH7MnXfntt8UKAAK9VjtJospAcrkZ1JEXerlTZMZxIL+
- 4Z4jIiKWBIHjoumlqaue5Hb5PUVuc7PZoc8fnANrQD3Ub/6djBuY40+i6Stgx49ZoHDz
- IZ+w==
+ bh=EUYGnB0iFJYfFcduqyWfe3U13R89iRgamOgAr45s1Xw=;
+ b=M7VadgY/pD2ao240HXSVry1FsnDhLFG3ztsQYfsCxr57ztMJo0QLS1aVFSyK8/+05D
+ x+aJy1tDByGwujjvnsuCejWWHtYIeu18P1LSgBbX+Wf2TkR9v1KL1/cHO3B2D2RDrruM
+ LIjhgxzTW8Hd10KpcJ6qytRvW3/UXyqlqn9ZdGE+S47v1r7VVam/+1/V/5YQr7rCWsyv
+ sxqkylsJYOTicPqoZGeeKfoUnZKyvG6BCLY7TKi1HGaUabMH96k1SRsWoKoVgsPA8Lfg
+ 6+nnzmYmnPaCTtxmTk6L0tTC/KQeaCdMmUqip5TXxEbDU9NMn/t5x4m4KYhGn+Q6pJcb
+ xK9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720582108; x=1721186908;
+ d=1e100.net; s=20230601; t=1720582101; x=1721186901;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9235SwuPYciaNgHcgxJSqCnrZAaLdfCzJnWaiSnsh94=;
- b=jpMWfObbEa6bebYiQOGacmSHvY4mKeLSxSh2deBLRFqUdQ+34QRVWg/ZBSxDu/Fdw9
- xcl3WdUZqTZ8GJiZTJWhorGeq94tFYMPm1svLkAkqRddpnRawO6u4/O7L6riHWL4N/6p
- 0GMl0Elnnllq1xlTcpif89zQwokfncwEic/Ns7bc6xkC3VVDUwfmd6YwMK6V+DZJIaLc
- 0uEGkoS+6M3vk5pSqfy2GJDciYh9JlUVueoEVSEo2v0XqQeLfCafYYBWoGCkrnPDvyQt
- TD7sS+EdAe4scfO3Wht93QbIwNyBl5wYxfXpoFpLDkF04L7oq0xKrUMBGe4UYZSB3znv
- TURQ==
+ bh=EUYGnB0iFJYfFcduqyWfe3U13R89iRgamOgAr45s1Xw=;
+ b=AJ6BHAqevQ1SqALv1C2uhBDT/m/UsMfn2udQWPmDcVIdRjmQjIXf7tJj1essRuLu/q
+ TBq0D+b2dFIkIb1TJM0wELWuzmRBGEfj3lYyU6KfVIoNtnwPhuroP7Q5AB+sXSTFpY8y
+ 6wKMvBPzsg/dSmQ65/+O57iPrZhDRoCpbvenVKm5HExV9CxLLwSrjKXcC/TZpJCXmu00
+ 1U2ZoIxpxa7DZcSHTPqdqtDudlHP860scfPeNzpHD8rqpwKsbuPTDPq0rOsxJkDkifoE
+ TP7MkW6DLrW288lsNadeEppzheRsXasNR2zPveSbXNgA6uf3VcKskP1BBVYaIUCdZAQu
+ ww0A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXHYjupaAmZjIoplLqoYiPBTY2I5SF2IY2yqEMlWqg7i72j7mTe7U1GK6oXr0d4NiBScfuImL8pPn5A+MxyI72TsIirXO4=
-X-Gm-Message-State: AOJu0Ywlx7avwcWdvodXhtaf2U3iwX8IV6TrGFNEuXWUp1CS6Xw8EmYK
- SUJ7tdWKHQv3tZtbZV/ofFzuwY/Ct9sQPZxcdExnEWf+INuvqdWRMBRbyVIn6d33Jx29VXWGuW3
- TrkU=
-X-Google-Smtp-Source: AGHT+IGnfygNzFSwUDSv6fpwaba1gaMHpFGBuorQz08w2rloejJqbnmlC0qVSX+Mu3x0gLm8y6aWkw==
-X-Received: by 2002:a05:6e02:1585:b0:374:9a3f:d197 with SMTP id
- e9e14a558f8ab-38a57fb18a1mr43418875ab.15.1720582108481; 
- Tue, 09 Jul 2024 20:28:28 -0700 (PDT)
+ AJvYcCV+/kckm5oKU/48YfhxrTklnS3KtCTncI0WWG1x/7zESuXQa2e3RGjz1bQkJr963U2f7R0+lrxzEKaq3rdDpeFekciR79U=
+X-Gm-Message-State: AOJu0YwG/1YcISaG0IzBjnSqv2Heq+mA3F1GLKYfHeiStNLP3f2cv2n2
+ zNtk4Qz5W2n49MkWS0xamKBWrw63fVqqIkbucqIIip42aboKkgQCmkRQQ1sDIa4=
+X-Google-Smtp-Source: AGHT+IEvyOKdZeqqiDs0BX5+vg15SjeR4CDQqg8OZkbSAxkYcotTSRtN91wP6pDRDElAzsSGxy9Gyg==
+X-Received: by 2002:a05:6830:19d7:b0:703:65ff:5163 with SMTP id
+ 46e09a7af769-70375b4057cmr4621107a34.26.1720582101246; 
+ Tue, 09 Jul 2024 20:28:21 -0700 (PDT)
 Received: from stoup.. (174-21-76-141.tukw.qwest.net. [174.21.76.141])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-70b438f5679sm2687280b3a.90.2024.07.09.20.28.27
+ d2e1a72fcca58-70b438f5679sm2687280b3a.90.2024.07.09.20.28.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Jul 2024 20:28:28 -0700 (PDT)
+ Tue, 09 Jul 2024 20:28:20 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongu.org, qemu-s390x@nongnu.org,
  qemu-riscv@nongnu.org, balaton@eik.bme.hu, max.chou@sifive.com
-Subject: [PATCH v2 13/13] target/riscv: Simplify probing in vext_ldff
-Date: Tue,  9 Jul 2024 20:28:14 -0700
-Message-ID: <20240710032814.104643-14-richard.henderson@linaro.org>
+Subject: [PATCH v2 05/13] target/ppc/mem_helper.c: Remove a conditional from
+ dcbz_common()
+Date: Tue,  9 Jul 2024 20:28:06 -0700
+Message-ID: <20240710032814.104643-6-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240710032814.104643-1-richard.henderson@linaro.org>
 References: <20240710032814.104643-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2c;
- envelope-from=richard.henderson@linaro.org; helo=mail-io1-xd2c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::32f;
+ envelope-from=richard.henderson@linaro.org; helo=mail-ot1-x32f.google.com
 X-Spam_score_int: 4
 X-Spam_score: 0.4
 X-Spam_bar: /
@@ -97,84 +97,55 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The current pairing of tlb_vaddr_to_host with extra is either
-inefficient (user-only, with page_check_range) or incorrect
-(system, with probe_pages).
+From: BALATON Zoltan <balaton@eik.bme.hu>
 
-For proper non-fault behaviour, use probe_access_flags with
-its nonfault parameter set to true.
+Instead of passing a bool and select a value within dcbz_common() let
+the callers pass in the right value to avoid this conditional
+statement. On PPC dcbz is often used to zero memory and some code uses
+it a lot. This change improves the run time of a test case that copies
+memory with a dcbz call in every iteration from 6.23 to 5.83 seconds.
 
+Signed-off-by: BALATON Zoltan <balaton@eik.bme.hu>
+Message-Id: <20240622204833.5F7C74E6000@zero.eik.bme.hu>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/vector_helper.c | 34 ++++++++++++++++++----------------
- 1 file changed, 18 insertions(+), 16 deletions(-)
+ target/ppc/mem_helper.c | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 1b4d5a8e37..4d72eb74d3 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -474,7 +474,6 @@ vext_ldff(void *vd, void *v0, target_ulong base,
-           vext_ldst_elem_fn *ldst_elem,
-           uint32_t log2_esz, uintptr_t ra)
+diff --git a/target/ppc/mem_helper.c b/target/ppc/mem_helper.c
+index f88155ad45..361fd72226 100644
+--- a/target/ppc/mem_helper.c
++++ b/target/ppc/mem_helper.c
+@@ -271,12 +271,11 @@ void helper_stsw(CPUPPCState *env, target_ulong addr, uint32_t nb,
+ }
+ 
+ static void dcbz_common(CPUPPCState *env, target_ulong addr,
+-                        uint32_t opcode, bool epid, uintptr_t retaddr)
++                        uint32_t opcode, int mmu_idx, uintptr_t retaddr)
  {
--    void *host;
-     uint32_t i, k, vl = 0;
-     uint32_t nf = vext_nf(desc);
-     uint32_t vm = vext_vm(desc);
-@@ -493,27 +492,31 @@ vext_ldff(void *vd, void *v0, target_ulong base,
-         }
-         addr = adjust_addr(env, base + i * (nf << log2_esz));
-         if (i == 0) {
-+            /* Allow fault on first element. */
-             probe_pages(env, addr, nf << log2_esz, ra, MMU_DATA_LOAD);
-         } else {
--            /* if it triggers an exception, no need to check watchpoint */
-             remain = nf << log2_esz;
-             while (remain > 0) {
-+                void *host;
-+                int flags;
-+
-                 offset = -(addr | TARGET_PAGE_MASK);
--                host = tlb_vaddr_to_host(env, addr, MMU_DATA_LOAD, mmu_index);
--                if (host) {
--#ifdef CONFIG_USER_ONLY
--                    if (!page_check_range(addr, offset, PAGE_READ)) {
--                        vl = i;
--                        goto ProbeSuccess;
--                    }
--#else
--                    probe_pages(env, addr, offset, ra, MMU_DATA_LOAD);
--#endif
--                } else {
-+
-+                /* Probe nonfault on subsequent elements. */
-+                flags = probe_access_flags(env, addr, offset, MMU_DATA_LOAD,
-+                                           mmu_index, true, &host, 0);
-+                if (flags) {
-+                    /*
-+                     * Stop any flag bit set:
-+                     *   invalid (unmapped)
-+                     *   mmio (transaction failed)
-+                     *   watchpoint (debug)
-+                     * In all cases, handle as the first load next time.
-+                     */
-                     vl = i;
--                    goto ProbeSuccess;
-+                    break;
-                 }
--                if (remain <=  offset) {
-+                if (remain <= offset) {
-                     break;
-                 }
-                 remain -= offset;
-@@ -521,7 +524,6 @@ vext_ldff(void *vd, void *v0, target_ulong base,
-             }
-         }
-     }
--ProbeSuccess:
-     /* load bytes from guest memory */
-     if (vl != 0) {
-         env->vl = vl;
+     target_ulong mask, dcbz_size = env->dcache_line_size;
+     uint32_t i;
+     void *haddr;
+-    int mmu_idx = epid ? PPC_TLB_EPID_STORE : ppc_env_mmu_index(env, false);
+ 
+ #if defined(TARGET_PPC64)
+     /* Check for dcbz vs dcbzl on 970 */
+@@ -309,12 +308,12 @@ static void dcbz_common(CPUPPCState *env, target_ulong addr,
+ 
+ void helper_dcbz(CPUPPCState *env, target_ulong addr, uint32_t opcode)
+ {
+-    dcbz_common(env, addr, opcode, false, GETPC());
++    dcbz_common(env, addr, opcode, ppc_env_mmu_index(env, false), GETPC());
+ }
+ 
+ void helper_dcbzep(CPUPPCState *env, target_ulong addr, uint32_t opcode)
+ {
+-    dcbz_common(env, addr, opcode, true, GETPC());
++    dcbz_common(env, addr, opcode, PPC_TLB_EPID_STORE, GETPC());
+ }
+ 
+ void helper_icbi(CPUPPCState *env, target_ulong addr)
 -- 
 2.43.0
 
