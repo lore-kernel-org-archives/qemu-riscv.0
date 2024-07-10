@@ -4,82 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A265C2BD09
-	for <qemu-riscv@archiver.kernel.org>; Wed, 10 Jul 2024 03:30:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D776AC2BD09
+	for <qemu-riscv@archiver.kernel.org>; Wed, 10 Jul 2024 03:31:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sRO0d-00019c-9s; Tue, 09 Jul 2024 23:28:47 -0400
+	id 1sRO0g-0001QI-Bm; Tue, 09 Jul 2024 23:28:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sRO0c-00017h-68
- for qemu-riscv@nongnu.org; Tue, 09 Jul 2024 23:28:46 -0400
-Received: from mail-il1-x131.google.com ([2607:f8b0:4864:20::131])
+ id 1sRO0d-0001Db-Ja
+ for qemu-riscv@nongnu.org; Tue, 09 Jul 2024 23:28:47 -0400
+Received: from mail-io1-xd2c.google.com ([2607:f8b0:4864:20::d2c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sRO0K-0003oF-37
- for qemu-riscv@nongnu.org; Tue, 09 Jul 2024 23:28:45 -0400
-Received: by mail-il1-x131.google.com with SMTP id
- e9e14a558f8ab-380deeb250eso20793265ab.1
- for <qemu-riscv@nongnu.org>; Tue, 09 Jul 2024 20:28:27 -0700 (PDT)
+ id 1sRO0M-0003p5-Sa
+ for qemu-riscv@nongnu.org; Tue, 09 Jul 2024 23:28:47 -0400
+Received: by mail-io1-xd2c.google.com with SMTP id
+ ca18e2360f4ac-7ebde93bf79so241303639f.1
+ for <qemu-riscv@nongnu.org>; Tue, 09 Jul 2024 20:28:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1720582107; x=1721186907; darn=nongnu.org;
+ d=linaro.org; s=google; t=1720582108; x=1721186908; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=58kkK6wdwKfqQgQ7rCeYXt0gAI3/Luy3O1KMAnd3I2Y=;
- b=exjV27dcGEKyxDKU87mNPd9cTNcnH5x1vNsz/EPFsxUbQ9mzeY4Wwuh3zf1o4FPGmm
- YNd9ZYqk1UVFiaBaCrNmJhVhTd8lvtGiuZnCU3Ek6OYZ4zdlJx6DwTPeo7J8ZH+GHWG1
- 0MDp5uNraGw8g8jG6dWOK19A2cwmiWL2YYfd8MOJfunebhGoqxYNX4fSL3Iv61FDcGMz
- E6e9p+VF/MfA1NCVeNGvtWwBNfRilMExJiVWZABSpJxJeJk3+5xe6U0acU4rcUH7IW9a
- ga6lVTZietyP9AP/JQDpLF6PDENezElLax2x9LJrwnhqYOLxtWCJ+TFtFxOvsaD2caXH
- qsIw==
+ bh=9235SwuPYciaNgHcgxJSqCnrZAaLdfCzJnWaiSnsh94=;
+ b=rWdcLaCzYHfCuM9S3ZmqerFqaLOjyp/8lAWKqBwrDI6bVok5aPrIw9L0gY6G9FhTvW
+ dFwtul5yQRz0vy2/qODHI21XuramSUJrj8vFOjRPtGkCbSr85G07IwZjrGtrqqUJAey1
+ 0xHlya1ZxceIWchxZdjk0oqUQo4OSV4jGXPJ1bqIPXIOuwg0zDGHxOp9v1hRVcsrHOHD
+ Og+OdCR+K+SSj4qfgmXF5YKfDH7MnXfntt8UKAAK9VjtJospAcrkZ1JEXerlTZMZxIL+
+ 4Z4jIiKWBIHjoumlqaue5Hb5PUVuc7PZoc8fnANrQD3Ub/6djBuY40+i6Stgx49ZoHDz
+ IZ+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720582107; x=1721186907;
+ d=1e100.net; s=20230601; t=1720582108; x=1721186908;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=58kkK6wdwKfqQgQ7rCeYXt0gAI3/Luy3O1KMAnd3I2Y=;
- b=m+8TxxXi9wKtkVzxUoFd24nspE7GYrmiIAmMZrX/MmpMtANffDjVgwOEjs7A0ZMpGo
- UZsk4kRKYfcP4dBsif8MM4VUEgjp1FlNqKogJe/7ZzuywQt2srtSEve6UAbDM28ZJb3F
- kT2hU4m1yVkGVOnRXXpE9/YB7Wp3LsAmBhJlrc3+5Ang4+2mNj2dNmCm+suIcUSuMxdL
- LLNAkcb9Vumwp18bZPo1lXr/Ge9WTU3dCF7bzgKWcTJqOXkhwfLzMlg9SmRciU3Ca9lD
- LOiXcD0jHAkt9Gn4nJUx13zF5SJvUvk/Cfg3z0BOOV8hOL8VsCI0QYH3ChdIYPGWqPbD
- NJeA==
+ bh=9235SwuPYciaNgHcgxJSqCnrZAaLdfCzJnWaiSnsh94=;
+ b=jpMWfObbEa6bebYiQOGacmSHvY4mKeLSxSh2deBLRFqUdQ+34QRVWg/ZBSxDu/Fdw9
+ xcl3WdUZqTZ8GJiZTJWhorGeq94tFYMPm1svLkAkqRddpnRawO6u4/O7L6riHWL4N/6p
+ 0GMl0Elnnllq1xlTcpif89zQwokfncwEic/Ns7bc6xkC3VVDUwfmd6YwMK6V+DZJIaLc
+ 0uEGkoS+6M3vk5pSqfy2GJDciYh9JlUVueoEVSEo2v0XqQeLfCafYYBWoGCkrnPDvyQt
+ TD7sS+EdAe4scfO3Wht93QbIwNyBl5wYxfXpoFpLDkF04L7oq0xKrUMBGe4UYZSB3znv
+ TURQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUdJH+U+w+WSWEbw8wTkQR0wF8sdnVXfFwec+FNl/KKMTK2q0fhBoH6EswvYfPtz7WaY1qhrmPP1JxC52CuidYho1SjLo8=
-X-Gm-Message-State: AOJu0Yzfks7LO+Mjke+1frDn0C+E3Fm24jS/gcYpz/GVUIC7MlmGa6cP
- 10b1ezdfHxD+7q0t8879ddfEN7uof/kSlfvRfaDvXZG49Pl/vnDtDAzEtesMPkM=
-X-Google-Smtp-Source: AGHT+IFBae8GX5XIygcnsRmbRmPQae2k+cIo4jbEhE517qfthhCcMHfhWFkB2DyRsd6v/zYpj8rdgA==
-X-Received: by 2002:a92:cdab:0:b0:375:a3d8:97be with SMTP id
- e9e14a558f8ab-38a57213d0amr52860625ab.9.1720582106761; 
- Tue, 09 Jul 2024 20:28:26 -0700 (PDT)
+ AJvYcCXHYjupaAmZjIoplLqoYiPBTY2I5SF2IY2yqEMlWqg7i72j7mTe7U1GK6oXr0d4NiBScfuImL8pPn5A+MxyI72TsIirXO4=
+X-Gm-Message-State: AOJu0Ywlx7avwcWdvodXhtaf2U3iwX8IV6TrGFNEuXWUp1CS6Xw8EmYK
+ SUJ7tdWKHQv3tZtbZV/ofFzuwY/Ct9sQPZxcdExnEWf+INuvqdWRMBRbyVIn6d33Jx29VXWGuW3
+ TrkU=
+X-Google-Smtp-Source: AGHT+IGnfygNzFSwUDSv6fpwaba1gaMHpFGBuorQz08w2rloejJqbnmlC0qVSX+Mu3x0gLm8y6aWkw==
+X-Received: by 2002:a05:6e02:1585:b0:374:9a3f:d197 with SMTP id
+ e9e14a558f8ab-38a57fb18a1mr43418875ab.15.1720582108481; 
+ Tue, 09 Jul 2024 20:28:28 -0700 (PDT)
 Received: from stoup.. (174-21-76-141.tukw.qwest.net. [174.21.76.141])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-70b438f5679sm2687280b3a.90.2024.07.09.20.28.26
+ d2e1a72fcca58-70b438f5679sm2687280b3a.90.2024.07.09.20.28.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Jul 2024 20:28:26 -0700 (PDT)
+ Tue, 09 Jul 2024 20:28:28 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongu.org, qemu-s390x@nongnu.org,
  qemu-riscv@nongnu.org, balaton@eik.bme.hu, max.chou@sifive.com
-Subject: [PATCH v2 11/13] target/s390x: Use user_or_likely in access_memmove
-Date: Tue,  9 Jul 2024 20:28:12 -0700
-Message-ID: <20240710032814.104643-12-richard.henderson@linaro.org>
+Subject: [PATCH v2 13/13] target/riscv: Simplify probing in vext_ldff
+Date: Tue,  9 Jul 2024 20:28:14 -0700
+Message-ID: <20240710032814.104643-14-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240710032814.104643-1-richard.henderson@linaro.org>
 References: <20240710032814.104643-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::131;
- envelope-from=richard.henderson@linaro.org; helo=mail-il1-x131.google.com
-X-Spam_score_int: 8
-X-Spam_score: 0.8
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2c;
+ envelope-from=richard.henderson@linaro.org; helo=mail-io1-xd2c.google.com
+X-Spam_score_int: 4
+X-Spam_score: 0.4
 X-Spam_bar: /
-X-Spam_report: (0.8 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, SUSPICIOUS_RECIPS=2.51 autolearn=no autolearn_force=no
+X-Spam_report: (0.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ SUSPICIOUS_RECIPS=2.51 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -95,86 +97,84 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Invert the conditional, indent the block, and use the macro
-that expands to true for user-only.
+The current pairing of tlb_vaddr_to_host with extra is either
+inefficient (user-only, with page_check_range) or incorrect
+(system, with probe_pages).
+
+For proper non-fault behaviour, use probe_access_flags with
+its nonfault parameter set to true.
 
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/s390x/tcg/mem_helper.c | 54 +++++++++++++++++------------------
- 1 file changed, 26 insertions(+), 28 deletions(-)
+ target/riscv/vector_helper.c | 34 ++++++++++++++++++----------------
+ 1 file changed, 18 insertions(+), 16 deletions(-)
 
-diff --git a/target/s390x/tcg/mem_helper.c b/target/s390x/tcg/mem_helper.c
-index 5311a15a09..a76eb6182f 100644
---- a/target/s390x/tcg/mem_helper.c
-+++ b/target/s390x/tcg/mem_helper.c
-@@ -296,41 +296,39 @@ static void access_memmove(CPUS390XState *env, S390Access *desta,
-                            S390Access *srca, uintptr_t ra)
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index 1b4d5a8e37..4d72eb74d3 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -474,7 +474,6 @@ vext_ldff(void *vd, void *v0, target_ulong base,
+           vext_ldst_elem_fn *ldst_elem,
+           uint32_t log2_esz, uintptr_t ra)
  {
-     int len = desta->size1 + desta->size2;
--    int diff;
- 
-     assert(len == srca->size1 + srca->size2);
- 
-     /* Fallback to slow access in case we don't have access to all host pages */
--    if (unlikely(!desta->haddr1 || (desta->size2 && !desta->haddr2) ||
--                 !srca->haddr1 || (srca->size2 && !srca->haddr2))) {
--        int i;
-+    if (user_or_likely(desta->haddr &&
-+                       srca->haddr &&
-+                       (!desta->size2 || desta->haddr2) &&
-+                       (!srca->size2 || srca->haddr2))) {
-+        int diff = desta->size1 - srca->size1;
- 
--        for (i = 0; i < len; i++) {
--            uint8_t byte = access_get_byte(env, srca, i, ra);
--
--            access_set_byte(env, desta, i, byte, ra);
--        }
--        return;
--    }
--
--    diff = desta->size1 - srca->size1;
--    if (likely(diff == 0)) {
--        memmove(desta->haddr1, srca->haddr1, srca->size1);
--        if (unlikely(srca->size2)) {
--            memmove(desta->haddr2, srca->haddr2, srca->size2);
--        }
--    } else if (diff > 0) {
--        memmove(desta->haddr1, srca->haddr1, srca->size1);
--        memmove(desta->haddr1 + srca->size1, srca->haddr2, diff);
--        if (likely(desta->size2)) {
--            memmove(desta->haddr2, srca->haddr2 + diff, desta->size2);
-+        if (likely(diff == 0)) {
-+            memmove(desta->haddr1, srca->haddr1, srca->size1);
-+            if (unlikely(srca->size2)) {
-+                memmove(desta->haddr2, srca->haddr2, srca->size2);
-+            }
-+        } else if (diff > 0) {
-+            memmove(desta->haddr1, srca->haddr1, srca->size1);
-+            memmove(desta->haddr1 + srca->size1, srca->haddr2, diff);
-+            if (likely(desta->size2)) {
-+                memmove(desta->haddr2, srca->haddr2 + diff, desta->size2);
-+            }
-+        } else {
-+            diff = -diff;
-+            memmove(desta->haddr1, srca->haddr1, desta->size1);
-+            memmove(desta->haddr2, srca->haddr1 + desta->size1, diff);
-+            if (likely(srca->size2)) {
-+                memmove(desta->haddr2 + diff, srca->haddr2, srca->size2);
-+            }
+-    void *host;
+     uint32_t i, k, vl = 0;
+     uint32_t nf = vext_nf(desc);
+     uint32_t vm = vext_vm(desc);
+@@ -493,27 +492,31 @@ vext_ldff(void *vd, void *v0, target_ulong base,
          }
-     } else {
--        diff = -diff;
--        memmove(desta->haddr1, srca->haddr1, desta->size1);
--        memmove(desta->haddr2, srca->haddr1 + desta->size1, diff);
--        if (likely(srca->size2)) {
--            memmove(desta->haddr2 + diff, srca->haddr2, srca->size2);
-+        for (int i = 0; i < len; i++) {
-+            uint8_t byte = access_get_byte(env, srca, i, ra);
-+            access_set_byte(env, desta, i, byte, ra);
+         addr = adjust_addr(env, base + i * (nf << log2_esz));
+         if (i == 0) {
++            /* Allow fault on first element. */
+             probe_pages(env, addr, nf << log2_esz, ra, MMU_DATA_LOAD);
+         } else {
+-            /* if it triggers an exception, no need to check watchpoint */
+             remain = nf << log2_esz;
+             while (remain > 0) {
++                void *host;
++                int flags;
++
+                 offset = -(addr | TARGET_PAGE_MASK);
+-                host = tlb_vaddr_to_host(env, addr, MMU_DATA_LOAD, mmu_index);
+-                if (host) {
+-#ifdef CONFIG_USER_ONLY
+-                    if (!page_check_range(addr, offset, PAGE_READ)) {
+-                        vl = i;
+-                        goto ProbeSuccess;
+-                    }
+-#else
+-                    probe_pages(env, addr, offset, ra, MMU_DATA_LOAD);
+-#endif
+-                } else {
++
++                /* Probe nonfault on subsequent elements. */
++                flags = probe_access_flags(env, addr, offset, MMU_DATA_LOAD,
++                                           mmu_index, true, &host, 0);
++                if (flags) {
++                    /*
++                     * Stop any flag bit set:
++                     *   invalid (unmapped)
++                     *   mmio (transaction failed)
++                     *   watchpoint (debug)
++                     * In all cases, handle as the first load next time.
++                     */
+                     vl = i;
+-                    goto ProbeSuccess;
++                    break;
+                 }
+-                if (remain <=  offset) {
++                if (remain <= offset) {
+                     break;
+                 }
+                 remain -= offset;
+@@ -521,7 +524,6 @@ vext_ldff(void *vd, void *v0, target_ulong base,
+             }
          }
      }
- }
+-ProbeSuccess:
+     /* load bytes from guest memory */
+     if (vl != 0) {
+         env->vl = vl;
 -- 
 2.43.0
 
