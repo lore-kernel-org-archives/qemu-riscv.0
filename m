@@ -4,79 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5034C38150
-	for <qemu-riscv@archiver.kernel.org>; Wed, 10 Jul 2024 04:10:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45E9CC38150
+	for <qemu-riscv@archiver.kernel.org>; Wed, 10 Jul 2024 07:04:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sROeB-0003kz-2W; Wed, 10 Jul 2024 00:09:39 -0400
+	id 1sRRN7-0007Dg-7g; Wed, 10 Jul 2024 03:04:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sROe7-0003dy-2L; Wed, 10 Jul 2024 00:09:35 -0400
-Received: from mail-vs1-xe33.google.com ([2607:f8b0:4864:20::e33])
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1sRRN5-00076x-0A
+ for qemu-riscv@nongnu.org; Wed, 10 Jul 2024 03:04:11 -0400
+Received: from mail-lf1-x12c.google.com ([2a00:1450:4864:20::12c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sROe5-0001yQ-GX; Wed, 10 Jul 2024 00:09:34 -0400
-Received: by mail-vs1-xe33.google.com with SMTP id
- ada2fe7eead31-48c2d353b01so2014552137.2; 
- Tue, 09 Jul 2024 21:09:32 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1sRRN3-0006xH-3d
+ for qemu-riscv@nongnu.org; Wed, 10 Jul 2024 03:04:10 -0400
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-52ea5dc3c66so8407669e87.3
+ for <qemu-riscv@nongnu.org>; Wed, 10 Jul 2024 00:04:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1720584571; x=1721189371; darn=nongnu.org;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1720595046; x=1721199846;
+ darn=nongnu.org; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=f6Ck1eU6ncsjc03ndkznoCEqd3/vOvUdkUl2pQNwovw=;
- b=eB7dZF0Ci8tUjgZthRV+v+G+gQJ01/FoLkDl0pKc/ycY1b7n2PQ6mRpjh5WlyDFaOO
- LkaWb57Gy92YdJL5zcHDKor+MtpNp04sZUmW/A2aOkHO9W6tm0sSHDUKGGjFb7N7cPeY
- tC7Jrv9Nx7gAnD3nZqJue5He+1/2dw9d/mT8qjeaXaR3ad6om91w4E1iF1KhTBrBDFU8
- dNQbrcGT95+5t8sxXbwufN4v7na70fIyIrurYnwYcQxaY/xTAT4BHOL2iLMMdtpzfWih
- TLeSDMhmR4xYgt/+3rdJxPxbcHVj+3EhysWRl6OlLSG2RQ2SNayac5RMzPES62DS7zcL
- H8gw==
+ bh=vzDbRblYb4j4HpZf7wgsha8ZuZj+nldecx8F/cKfveM=;
+ b=llW1eQl10GkoPrzrjzt8ibiJoIZTWztFz3hvkATEXKT7woPTFMR6XT0FIWPVFWo0BT
+ yBv9PTNhANqSS3qVISP+lg56uvAhYHMI4zoXWryousNECb4fsOQJiu2l6WXaJUOZ9NZt
+ F3m3FsCP9bmVvwSQvbrk575/tazZHnJjeTSB/aDBYRUtl8y+kW1H2zPwdggTP0TT+uP9
+ seHaL/bdC9KQJgdjtmRy/NMrsqI5G3kcTUBqDjwC0oSAk+0txbttd6ob0iv87CG/pNrg
+ MdPMaNf+uAegvmXaWVATwZofAR750Z5CD4bg25YnzmgoJsB7jEcu6BkoyzH1WM44MCJD
+ U3/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720584571; x=1721189371;
+ d=1e100.net; s=20230601; t=1720595046; x=1721199846;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=f6Ck1eU6ncsjc03ndkznoCEqd3/vOvUdkUl2pQNwovw=;
- b=MOFk7UJpehQRuSaCfKdO4aPVa7NcvB5ApRDM6qvlLEog4zAtWWMMl/e4vCBnix2I45
- poi4e5dyuoGduSRMUftFEa27z/oTOKO6l8S+9L7y237glXQ6dM9gJnrrfj9dJYfCKsOl
- +dysMF+MSKv72g5inINpacdiUh16Z0dTuBec3ORTRgEazxFlrOpgYW0yL02pDrfqZGpJ
- rBksa8dMZaSv6AiQa58TtZaJ7OCksA01j5wbZJJ58EFfQyDARw0F28DQaO3m3lXK0JVw
- Zkry7jbJSLiYCp6n14G8NFjVjk/cKB5d/MBTrAbt+ZZ/6iyHcIXkzfanSUfgjZWmkcV8
- A7eA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXUjVWrGFe4mneFZIIQyLUBaz14lSRgtppigdqGEgJ48Ac6AggyAy21TI5WjW87S+l3WdYdgLKsb1CNFsMmu4Pgu5mphjhlFlpCoHl88GpyPhFA3d9sb/hFxSVZ1hLDEbF7uoDvnPWS5MHNRCZb/upBzg==
-X-Gm-Message-State: AOJu0Yyi63GQyyCx15N5l+2wYM46uz39G8J35l56VHSCBzQEd5FIfB7O
- GiEc5g6tyd0gNrOHtrrljTO3VIKxnTe+eYmfWW+xXwri6ax/9IDchVTjgZmZmA8uCTKmMFlAi9k
- uLmzZMxjEUc+6A/UQ2CGlz7v+ZEk=
-X-Google-Smtp-Source: AGHT+IGEV/SmVBT7AhyeTE5R/YEz09Ko3fM3FobVJA4n26D2Q/ceJB2jHg9+XdC3enfvUlugYM4vLBrcVeixsKl1YPg=
-X-Received: by 2002:a05:6102:b14:b0:48f:831d:cea6 with SMTP id
- ada2fe7eead31-490321f7ffbmr5013693137.25.1720584571303; Tue, 09 Jul 2024
- 21:09:31 -0700 (PDT)
+ bh=vzDbRblYb4j4HpZf7wgsha8ZuZj+nldecx8F/cKfveM=;
+ b=plaNGGGC8grR2RWcS5xLYHzPKxm885vVhnvyPBUGMx42jnbyTS4jFirc4oiyZwgJeE
+ NOGR9Vdd81x46qnT40IB6kvBXgeFaES2tsfZg/utn5CSnFQpH+aTqxWjoqIdbjPReUFC
+ dTpRBv5wLmg5LUyaS9aj7az9RxWKfcaRSsjiBIoadBJOF0U5kHVNd+YotzjMhBz0WmhR
+ wxqCNeP/7/ryRyZRA9lyO21pj8wXKn0a9fYG8bKgzGzBRIvG8NygCtnr514ANvbPsK+t
+ SXbrQUQwPwo3wvrWygUsw+EfvxKVKDDn29M4tb3Qv0C7M3auC7q1eEyNOAGFgohBgUYB
+ q5Ig==
+X-Gm-Message-State: AOJu0YxT/ItcNiTNVEFiaUezGpUz27Zi1UqxdvZam1SdwjBLt9cJxXo4
+ E/9+GLIxt7tx73y/lfBa9FXfF3jFbymgC8AWTKb1WuEZwNim5cRgZwh0TBKQiHpUPpeCr6b37wO
+ kRF7aSE1EdSuGG+YiP+phniekaN1LmU8nLUuFBg==
+X-Google-Smtp-Source: AGHT+IFNR0A34ueVjpkhYERuaarAt4/VrUdWFnkO+FWIVL+lqs1lGrrIlzWeI/x5/zisMJ2/zMdGDwVeUqa7ZIXnkNU=
+X-Received: by 2002:a05:6512:555:b0:52e:a03f:ef53 with SMTP id
+ 2adb3069b0e04-52eb999c211mr2920195e87.24.1720595045802; Wed, 10 Jul 2024
+ 00:04:05 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240710032814.104643-1-richard.henderson@linaro.org>
- <20240710032814.104643-14-richard.henderson@linaro.org>
-In-Reply-To: <20240710032814.104643-14-richard.henderson@linaro.org>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 10 Jul 2024 14:09:04 +1000
-Message-ID: <CAKmqyKNWdDrfR+RA+SVtQVUafmsBWgq9srXpQQKhAE3tte6mhQ@mail.gmail.com>
-Subject: Re: [PATCH v2 13/13] target/riscv: Simplify probing in vext_ldff
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongu.org, 
- qemu-s390x@nongnu.org, qemu-riscv@nongnu.org, balaton@eik.bme.hu, 
- max.chou@sifive.com
+References: <20240626-smcntrpmf_v7-v7-0-bb0f10af7fa9@rivosinc.com>
+ <20240626-smcntrpmf_v7-v7-3-bb0f10af7fa9@rivosinc.com>
+ <CAKmqyKOjmnvmCe9PvhLeowTT-nHz+pdnF4itEfEjh_C8xmiOOg@mail.gmail.com>
+In-Reply-To: <CAKmqyKOjmnvmCe9PvhLeowTT-nHz+pdnF4itEfEjh_C8xmiOOg@mail.gmail.com>
+From: Atish Kumar Patra <atishp@rivosinc.com>
+Date: Wed, 10 Jul 2024 00:03:54 -0700
+Message-ID: <CAHBxVyHqj9b1LV+h5A5MtyY9WoMsj-fhJYE86_frmaj49XbmLg@mail.gmail.com>
+Subject: Re: [PATCH v7 03/11] target/riscv: Add cycle & instret privilege mode
+ filtering properties
+To: Alistair Francis <alistair23@gmail.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ Rajnesh Kanwal <rkanwal@rivosinc.com>, palmer@dabbelt.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, bin.meng@windriver.com, 
+ dbarboza@ventanamicro.com, alistair.francis@wdc.com, 
+ Kaiwen Xue <kaiwenx@rivosinc.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e33;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe33.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
+Received-SPF: pass client-ip=2a00:1450:4864:20::12c;
+ envelope-from=atishp@rivosinc.com; helo=mail-lf1-x12c.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -93,97 +96,69 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Jul 10, 2024 at 1:30=E2=80=AFPM Richard Henderson
-<richard.henderson@linaro.org> wrote:
+On Tue, Jul 2, 2024 at 7:03=E2=80=AFPM Alistair Francis <alistair23@gmail.c=
+om> wrote:
 >
-> The current pairing of tlb_vaddr_to_host with extra is either
-> inefficient (user-only, with page_check_range) or incorrect
-> (system, with probe_pages).
+> On Thu, Jun 27, 2024 at 9:59=E2=80=AFAM Atish Patra <atishp@rivosinc.com>=
+ wrote:
+> >
+> > From: Kaiwen Xue <kaiwenx@rivosinc.com>
+> >
+> > This adds the properties for ISA extension smcntrpmf. Patches
+> > implementing it will follow.
+> >
+> > Signed-off-by: Atish Patra <atishp@rivosinc.com>
+> > Signed-off-by: Kaiwen Xue <kaiwenx@rivosinc.com>
+> > ---
+> >  target/riscv/cpu.c     | 2 ++
+> >  target/riscv/cpu_cfg.h | 1 +
+> >  2 files changed, 3 insertions(+)
+> >
+> > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> > index 4760cb2cc17f..ef50130a91e7 100644
+> > --- a/target/riscv/cpu.c
+> > +++ b/target/riscv/cpu.c
+> > @@ -178,6 +178,7 @@ const RISCVIsaExtData isa_edata_arr[] =3D {
+> >      ISA_EXT_DATA_ENTRY(zhinx, PRIV_VERSION_1_12_0, ext_zhinx),
+> >      ISA_EXT_DATA_ENTRY(zhinxmin, PRIV_VERSION_1_12_0, ext_zhinxmin),
+> >      ISA_EXT_DATA_ENTRY(smaia, PRIV_VERSION_1_12_0, ext_smaia),
+> > +    ISA_EXT_DATA_ENTRY(smcntrpmf, PRIV_VERSION_1_12_0, ext_smcntrpmf),
+> >      ISA_EXT_DATA_ENTRY(smepmp, PRIV_VERSION_1_12_0, ext_smepmp),
+> >      ISA_EXT_DATA_ENTRY(smstateen, PRIV_VERSION_1_12_0, ext_smstateen),
+> >      ISA_EXT_DATA_ENTRY(ssaia, PRIV_VERSION_1_12_0, ext_ssaia),
+> > @@ -1467,6 +1468,7 @@ const char *riscv_get_misa_ext_description(uint32=
+_t bit)
+> >  const RISCVCPUMultiExtConfig riscv_cpu_extensions[] =3D {
+> >      /* Defaults for standard extensions */
+> >      MULTI_EXT_CFG_BOOL("sscofpmf", ext_sscofpmf, false),
+> > +    MULTI_EXT_CFG_BOOL("smcntrpmf", ext_smcntrpmf, false),
 >
-> For proper non-fault behaviour, use probe_access_flags with
-> its nonfault parameter set to true.
+> Exposing the config should be at the end of the series. Implement then ex=
+pose
 >
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Sure. I will move this to the end of the series.
 
-Alistair
-
-> ---
->  target/riscv/vector_helper.c | 34 ++++++++++++++++++----------------
->  1 file changed, 18 insertions(+), 16 deletions(-)
+> Alistair
 >
-> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index 1b4d5a8e37..4d72eb74d3 100644
-> --- a/target/riscv/vector_helper.c
-> +++ b/target/riscv/vector_helper.c
-> @@ -474,7 +474,6 @@ vext_ldff(void *vd, void *v0, target_ulong base,
->            vext_ldst_elem_fn *ldst_elem,
->            uint32_t log2_esz, uintptr_t ra)
->  {
-> -    void *host;
->      uint32_t i, k, vl =3D 0;
->      uint32_t nf =3D vext_nf(desc);
->      uint32_t vm =3D vext_vm(desc);
-> @@ -493,27 +492,31 @@ vext_ldff(void *vd, void *v0, target_ulong base,
->          }
->          addr =3D adjust_addr(env, base + i * (nf << log2_esz));
->          if (i =3D=3D 0) {
-> +            /* Allow fault on first element. */
->              probe_pages(env, addr, nf << log2_esz, ra, MMU_DATA_LOAD);
->          } else {
-> -            /* if it triggers an exception, no need to check watchpoint =
-*/
->              remain =3D nf << log2_esz;
->              while (remain > 0) {
-> +                void *host;
-> +                int flags;
-> +
->                  offset =3D -(addr | TARGET_PAGE_MASK);
-> -                host =3D tlb_vaddr_to_host(env, addr, MMU_DATA_LOAD, mmu=
-_index);
-> -                if (host) {
-> -#ifdef CONFIG_USER_ONLY
-> -                    if (!page_check_range(addr, offset, PAGE_READ)) {
-> -                        vl =3D i;
-> -                        goto ProbeSuccess;
-> -                    }
-> -#else
-> -                    probe_pages(env, addr, offset, ra, MMU_DATA_LOAD);
-> -#endif
-> -                } else {
-> +
-> +                /* Probe nonfault on subsequent elements. */
-> +                flags =3D probe_access_flags(env, addr, offset, MMU_DATA=
-_LOAD,
-> +                                           mmu_index, true, &host, 0);
-> +                if (flags) {
-> +                    /*
-> +                     * Stop any flag bit set:
-> +                     *   invalid (unmapped)
-> +                     *   mmio (transaction failed)
-> +                     *   watchpoint (debug)
-> +                     * In all cases, handle as the first load next time.
-> +                     */
->                      vl =3D i;
-> -                    goto ProbeSuccess;
-> +                    break;
->                  }
-> -                if (remain <=3D  offset) {
-> +                if (remain <=3D offset) {
->                      break;
->                  }
->                  remain -=3D offset;
-> @@ -521,7 +524,6 @@ vext_ldff(void *vd, void *v0, target_ulong base,
->              }
->          }
->      }
-> -ProbeSuccess:
->      /* load bytes from guest memory */
->      if (vl !=3D 0) {
->          env->vl =3D vl;
-> --
-> 2.43.0
->
->
+> >      MULTI_EXT_CFG_BOOL("zifencei", ext_zifencei, true),
+> >      MULTI_EXT_CFG_BOOL("zicsr", ext_zicsr, true),
+> >      MULTI_EXT_CFG_BOOL("zihintntl", ext_zihintntl, true),
+> > diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+> > index fb7eebde523b..b1376beb1dab 100644
+> > --- a/target/riscv/cpu_cfg.h
+> > +++ b/target/riscv/cpu_cfg.h
+> > @@ -74,6 +74,7 @@ struct RISCVCPUConfig {
+> >      bool ext_ztso;
+> >      bool ext_smstateen;
+> >      bool ext_sstc;
+> > +    bool ext_smcntrpmf;
+> >      bool ext_svadu;
+> >      bool ext_svinval;
+> >      bool ext_svnapot;
+> >
+> > --
+> > 2.34.1
+> >
+> >
 
