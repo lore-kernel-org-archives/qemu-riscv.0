@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34224C3DA41
-	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Jul 2024 13:53:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7367BC3DA45
+	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Jul 2024 13:54:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sRuEh-0004oC-Hm; Thu, 11 Jul 2024 09:53:27 -0400
+	id 1sRuF3-0006FX-2i; Thu, 11 Jul 2024 09:53:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1sRuEg-0004iu-6Z
- for qemu-riscv@nongnu.org; Thu, 11 Jul 2024 09:53:26 -0400
+ id 1sRuEz-00061d-GZ
+ for qemu-riscv@nongnu.org; Thu, 11 Jul 2024 09:53:45 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1sRuEU-0003U8-QM
- for qemu-riscv@nongnu.org; Thu, 11 Jul 2024 09:53:25 -0400
+ id 1sRuEx-0003XK-WA
+ for qemu-riscv@nongnu.org; Thu, 11 Jul 2024 09:53:45 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1720705994;
+ s=mimecast20190719; t=1720706023;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Lxk5YZf7FVMgsc3glhDTzLAvcLoX3al/3jsWvTicxYg=;
- b=YNhAYafrnfscrWYRb4vK3QQQgTjpa1HC954Cs2lF7uxP/mXwzmEk6lQdsziZgsb8Mdyrpk
- eGQc+0+uzoryTapv0EBGjkg7Mei8qN5fEgbSHcvTJHSpJmTFcqBX9eN6KBo2ip4PX+PStD
- wXNe2uBZfB1XeAWsBhedF9SF/QlsvEY=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=BsVFyrqM6xMtC0qPFWQczYn15b+TcsSFnyWP0wMs6Pk=;
+ b=bQnwxfFbMe1bWMYN3mCjNj7fvVdbMebhDanxcagPso4UFsmFDPFmwsbHICT08YDlP1gvsT
+ MK+YOIjueMPqoHkzgVs64YqKeMFKgvo41+IuPJP0N98KwYwBEnY4BnK+ynjgy3YVqIvVGw
+ QJiIkO47GfNHzDsuUK0irPl5iTwh8xo=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-436-PLFF6CBpPrmrPKxRxr6acg-1; Thu, 11 Jul 2024 09:53:10 -0400
-X-MC-Unique: PLFF6CBpPrmrPKxRxr6acg-1
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-367a3052cfaso633809f8f.0
- for <qemu-riscv@nongnu.org>; Thu, 11 Jul 2024 06:53:10 -0700 (PDT)
+ us-mta-668-JjF0M4xdPT6z-0HQpHK7nA-1; Thu, 11 Jul 2024 09:53:41 -0400
+X-MC-Unique: JjF0M4xdPT6z-0HQpHK7nA-1
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-4265d3bf59dso7594405e9.3
+ for <qemu-riscv@nongnu.org>; Thu, 11 Jul 2024 06:53:41 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720705989; x=1721310789;
+ d=1e100.net; s=20230601; t=1720706020; x=1721310820;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Lxk5YZf7FVMgsc3glhDTzLAvcLoX3al/3jsWvTicxYg=;
- b=rtM8x1tRsXVeMxaJ98fV8Ea/txJYylJxNYP25ZsO1F0ywhsa9DfWDNO5PaiAvPKpP3
- U9umBgBBgVd7lnzERSCe9m353Sv91gAhuaPSj53J8d+1TXN16j3IgKOMoBxGJcGBDFqf
- xyl2JZ51+LGqXhISLePKcUGKLMVdDiXzJhAouxctWJk2EnxMWhzgUN1IgsHscB4JSEVy
- 57U4idtn1LDwqm86tzjZP/HELMFndDq6CfskHXbAkBSfUN3e+Al0+z14HOHAoKEUONy4
- YxxKFxTvWTn3EerxWUo6XC2kZbCBDRUWsawrGVG5c5ZnVFfxOQlAvPSDpfzovkqPCQif
- x9wA==
+ bh=BsVFyrqM6xMtC0qPFWQczYn15b+TcsSFnyWP0wMs6Pk=;
+ b=Dg9Ysov0lyyux4gxg9sVwy46YeXsNi/Nzq2jObFWdkmdnmJ7jZP/REQjsKcpJbV95Y
+ 69VkF5zP6NFj0hXMrbFHy8CLa3ZWrBdpq4+Yer5VkCLQKVMDZ3pAwxJHnIlbs/bBIheG
+ syeRBWuOiFfkrehiEtkxiEXqlBx+VeufhWfy9FOufS7TiS6shFUJm1h4Kf+30NcxPiMu
+ zxXhY+SZwSkYy2vtEcfQpvMbCUwGDS50r/kOgRHGwmFNXSM7YaBe8Cv9xO40ojTmQPDc
+ rW/ApF1JcdIc0Ysh6Yi4apEEd8jrrcV+oHpZDOnZrusMUtR/0ObrlOlEIirxXbYbrDGd
+ KHYg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUO40RuQwXobBDTfZIowF39giVKdrHn5XCMJ2jFNAOEaMcIIDxrw4MSIOqUrA6AYttzGFLCzJAHzmn5xLBh0RlrW6fPu9U=
-X-Gm-Message-State: AOJu0Yxz5GqNKXEsy4q/4Mqsf2FXHTCLXOjEOhx8GgyQ15fnPiAnX0tz
- ati8LE84cWL/RJuNqzRis0OTtygIJIphzSfwWN+JLiH9GPXKUgXhL2A9885iQOMmJLvtoEdko+J
- EP8KTIywCBXjM2JTTilBsEkDX0Dzwq/YaS7pb2XOvAesoZzhsnLl6
-X-Received: by 2002:a05:6000:884:b0:367:9049:da36 with SMTP id
- ffacd0b85a97d-367cead121dmr7746939f8f.44.1720705989643; 
- Thu, 11 Jul 2024 06:53:09 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFEZtoYfdsctch1MmTh/P4kIFNu2VCKbrAzsmkeegIwLxi7k8IuVKqSB0x1hbqgOuwkOUCkgA==
-X-Received: by 2002:a05:6000:884:b0:367:9049:da36 with SMTP id
- ffacd0b85a97d-367cead121dmr7746928f8f.44.1720705989318; 
- Thu, 11 Jul 2024 06:53:09 -0700 (PDT)
+ AJvYcCVOpP0+YbOQPzRT05zvj5eBC4c+cPIJ799lyCFDx3qFXhZ2HQh4buqX+7Nj0eTVVtUZqm2QIdoBSKPGf7Yk4GssLEznYcg=
+X-Gm-Message-State: AOJu0YyC6Vw+FaEe0Y2rFTg1yZmqK5Ky5Qn10FGBWMCYF5YLwV4S37bZ
+ eiXjexYHukrhViX4eMEy3k1XqocL6vS1y4/iHEmzweDfDX1xjhgoHpewbvyMG2j6Tc4aiiWjCl1
+ +BXsBRTJZxTcEjNHyxVxjflPE/qx+dznkt0tycAWs3CVYFv6HyPPn
+X-Received: by 2002:a5d:5f46:0:b0:367:9881:7d5e with SMTP id
+ ffacd0b85a97d-367cea46d84mr7625369f8f.8.1720706020670; 
+ Thu, 11 Jul 2024 06:53:40 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFGl+/7+IK1ot3XWNPHNOvqgMuA+2a4o1kffay7hjj11MlkyLw3rEfbWW04dYJDp4tz0eBf2g==
+X-Received: by 2002:a5d:5f46:0:b0:367:9881:7d5e with SMTP id
+ ffacd0b85a97d-367cea46d84mr7625352f8f.8.1720706020383; 
+ Thu, 11 Jul 2024 06:53:40 -0700 (PDT)
 Received: from imammedo.users.ipa.redhat.com (nat-pool-brq-t.redhat.com.
  [213.175.37.10]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-367cde7e32asm7823914f8f.10.2024.07.11.06.53.08
+ ffacd0b85a97d-367cdfa06absm7773138f8f.80.2024.07.11.06.53.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Jul 2024 06:53:08 -0700 (PDT)
-Date: Thu, 11 Jul 2024 15:53:08 +0200
+ Thu, 11 Jul 2024 06:53:40 -0700 (PDT)
+Date: Thu, 11 Jul 2024 15:53:39 +0200
 From: Igor Mammedov <imammedo@redhat.com>
 To: Sunil V L <sunilvl@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, Palmer Dabbelt
@@ -76,12 +76,12 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, Palmer Dabbelt
  Barboza <dbarboza@ventanamicro.com>, Liu Zhiwei
  <zhiwei_liu@linux.alibaba.com>, "Michael S . Tsirkin" <mst@redhat.com>, Ani
  Sinha <anisinha@redhat.com>
-Subject: Re: [PATCH v2 3/9] tests/acpi: Allow DSDT acpi table changes for
- aarch64
-Message-ID: <20240711155308.61adccfe@imammedo.users.ipa.redhat.com>
-In-Reply-To: <20240708114741.3499585-4-sunilvl@ventanamicro.com>
+Subject: Re: [PATCH v2 6/9] tests/qtest/bios-tables-test.c: Remove the fall
+ back path
+Message-ID: <20240711155339.7d8f867b@imammedo.users.ipa.redhat.com>
+In-Reply-To: <20240708114741.3499585-7-sunilvl@ventanamicro.com>
 References: <20240708114741.3499585-1-sunilvl@ventanamicro.com>
- <20240708114741.3499585-4-sunilvl@ventanamicro.com>
+ <20240708114741.3499585-7-sunilvl@ventanamicro.com>
 X-Mailer: Claws Mail 4.3.0 (GTK 3.24.42; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
@@ -112,31 +112,54 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon,  8 Jul 2024 17:17:35 +0530
+On Mon,  8 Jul 2024 17:17:38 +0530
 Sunil V L <sunilvl@ventanamicro.com> wrote:
 
-> so that CI tests don't fail when those ACPI tables are updated in the
-> next patch. This is as per the documentation in bios-tables-tests.c.
+> The expected ACPI AML files are moved now under ${arch}/{machine} path.
+> Hence, there is no need to search in old path which didn't have ${arch}.
+> Remove the code which searches for the expected AML files under old path
+> as well.
 > 
+> Suggested-by: Igor Mammedov <imammedo@redhat.com>
 > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
 
 Reviewed-by: Igor Mammedov <imammedo@redhat.com>
 
 > ---
->  tests/qtest/bios-tables-test-allowed-diff.h | 6 ++++++
->  1 file changed, 6 insertions(+)
+>  tests/qtest/bios-tables-test.c | 14 --------------
+>  1 file changed, 14 deletions(-)
 > 
-> diff --git a/tests/qtest/bios-tables-test-allowed-diff.h b/tests/qtest/bios-tables-test-allowed-diff.h
-> index dfb8523c8b..9282ea0fb2 100644
-> --- a/tests/qtest/bios-tables-test-allowed-diff.h
-> +++ b/tests/qtest/bios-tables-test-allowed-diff.h
-> @@ -1 +1,7 @@
->  /* List of comma-separated changed AML files to ignore */
-> +"tests/data/acpi/aarch64/virt/DSDT",
-> +"tests/data/acpi/aarch64/virt/DSDT.memhp",
-> +"tests/data/acpi/aarch64/virt/DSDT.topology",
-> +"tests/data/acpi/aarch64/virt/DSDT.acpihmatvirt",
-> +"tests/data/acpi/aarch64/virt/DSDT.pxb",
-> +"tests/data/acpi/x86/microvm/DSDT.pcie",
+> diff --git a/tests/qtest/bios-tables-test.c b/tests/qtest/bios-tables-test.c
+> index f4c4704bab..498e0e35d9 100644
+> --- a/tests/qtest/bios-tables-test.c
+> +++ b/tests/qtest/bios-tables-test.c
+> @@ -267,15 +267,6 @@ static void dump_aml_files(test_data *data, bool rebuild)
+>                                         data->arch, data->machine,
+>                                         sdt->aml, ext);
+>  
+> -            /*
+> -             * To keep test cases not failing before the DATA files are moved to
+> -             * ${arch}/${machine} folder, add this check as well.
+> -             */
+> -            if (!g_file_test(aml_file, G_FILE_TEST_EXISTS)) {
+> -                aml_file = g_strdup_printf("%s/%s/%.4s%s", data_dir,
+> -                                           data->machine, sdt->aml, ext);
+> -            }
+> -
+>              if (!g_file_test(aml_file, G_FILE_TEST_EXISTS) &&
+>                  sdt->aml_len == exp_sdt->aml_len &&
+>                  !memcmp(sdt->aml, exp_sdt->aml, sdt->aml_len)) {
+> @@ -412,11 +403,6 @@ static GArray *load_expected_aml(test_data *data)
+>  try_again:
+>          aml_file = g_strdup_printf("%s/%s/%s/%.4s%s", data_dir, data->arch,
+>                                     data->machine, sdt->aml, ext);
+> -        if (!g_file_test(aml_file, G_FILE_TEST_EXISTS)) {
+> -            aml_file = g_strdup_printf("%s/%s/%.4s%s", data_dir, data->machine,
+> -                                       sdt->aml, ext);
+> -        }
+> -
+>          if (verbosity_level >= 2) {
+>              fprintf(stderr, "Looking for expected file '%s'\n", aml_file);
+>          }
 
 
