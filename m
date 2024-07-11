@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E418C3DA4A
-	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Jul 2024 13:17:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9192DC3DA49
+	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Jul 2024 13:24:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sRtfe-0002c8-9s; Thu, 11 Jul 2024 09:17:14 -0400
+	id 1sRtkE-0001HL-Pf; Thu, 11 Jul 2024 09:21:58 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1sRtfc-0002Sx-Qp
- for qemu-riscv@nongnu.org; Thu, 11 Jul 2024 09:17:12 -0400
+ id 1sRtk5-0000nG-2A
+ for qemu-riscv@nongnu.org; Thu, 11 Jul 2024 09:21:50 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1sRtfb-000530-5h
- for qemu-riscv@nongnu.org; Thu, 11 Jul 2024 09:17:12 -0400
+ id 1sRtk2-0006j6-FH
+ for qemu-riscv@nongnu.org; Thu, 11 Jul 2024 09:21:48 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1720703826;
+ s=mimecast20190719; t=1720704105;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=qR7+dq4RntKn/Wt+dvu7fOma5iUOEeYDbWxxMKTjZcM=;
- b=TCi9VeYTtGtROPfXPERwlBrfYWld2aVkQmIpj5XNiS5MDR93wCcRZ9ZUtAeJEkpDXOHIee
- de625bbAjOJXMWP6rHiWp4oDJRjkvyIPVzAOeAyA3AZShM9OdZgJ2jizBS9zbYH4Kvlddz
- kIBsdNiLlwHKbI23NdGfrsrnxGXmxQQ=
-Received: from mail-lj1-f200.google.com (mail-lj1-f200.google.com
- [209.85.208.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=mN0sRZ3bdsO54hnVlLYkoH6g7lrAo+ChghkMqg7jdgg=;
+ b=R6tNkvBrlKWRzioAYzN62ankJGoznZQQN6JciX2Dvq7GBDE3MzAMj0Bns5h/vtPn1zIjzO
+ cv7MZqR818N0UgYj2h36edITbt1FqdH/BorwvtO0+4mfKxEp0Co37YZaP/KB8+ZIRiLv6M
+ piaV2uizCGS+DDZIXtiKhJGm+zAdQ+M=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-66-6fgODzXuOxaUruUTTXHeGQ-1; Thu, 11 Jul 2024 09:17:04 -0400
-X-MC-Unique: 6fgODzXuOxaUruUTTXHeGQ-1
-Received: by mail-lj1-f200.google.com with SMTP id
- 38308e7fff4ca-2ee890f0cecso9150851fa.0
- for <qemu-riscv@nongnu.org>; Thu, 11 Jul 2024 06:17:03 -0700 (PDT)
+ us-mta-156-wesaFDyZPaObDyIyX8jydw-1; Thu, 11 Jul 2024 09:21:44 -0400
+X-MC-Unique: wesaFDyZPaObDyIyX8jydw-1
+Received: by mail-wr1-f72.google.com with SMTP id
+ ffacd0b85a97d-36789def10eso486167f8f.0
+ for <qemu-riscv@nongnu.org>; Thu, 11 Jul 2024 06:21:44 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720703822; x=1721308622;
+ d=1e100.net; s=20230601; t=1720704102; x=1721308902;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=qR7+dq4RntKn/Wt+dvu7fOma5iUOEeYDbWxxMKTjZcM=;
- b=eZI2zJL95M4O2/uWYyVsrjEQFm3e+M4tgVbwgJwxUQoygG3GFE0moMAJUeux5FddXP
- WHejoRDjmKJwGBsZV0m+tb9K551pPZ8lbntJGyvZJJqDAPHRF0WlIGOXSrvRQVoRCbuL
- +crUcsRHHKMmunyhX0xpMvuaurVQal3nCJ6MbrqW/PhutZqs5fmb563bTIpZXBydn2Ov
- 56GkyRlVilzdY2npy0NkDEN6/z5yG7d5NE+PCFFkhwMiQ1o4vlKJ7W8liPT9EqrhEh9i
- 0xtuboqGHXuWtbo4RR+GGWsqCUIPaCdZ9Y0nhq2HJkd0miSXRfMMN8MNwJi3HjBCdZZE
- v1UQ==
+ bh=mN0sRZ3bdsO54hnVlLYkoH6g7lrAo+ChghkMqg7jdgg=;
+ b=GAPhs2HRHsLP9447N+qOQ6PO4SRaMfBVl/yP/NoEZ/Hs+W6OgiM41JNeHBXTVE5uRN
+ xkyugW1MMb38HEaZ+4RNruZs4Xrv2r5BGGMRqw5T0HUzRpG4uq69jkl9Wb2EHsbQZ8MD
+ cd7F4XqR70/xJ4EJZFkdwiTPv2685mRpjSohCafjMiRC4EnK4wW1kIVgmeaXzEzZOr5b
+ 03mzsNpiOM5hDpH0N+oEusmqoTLq6vH5lVHgrVJnSsErH5FLSw24Pxsa/y2ZUshEvoej
+ bAQIYSiLsbYyr0rwKATKZA3aLnXw3lHgCLvdeJ3vBvMIiJrfmtsKtYIcbKTgLt12c/Cd
+ b0Ig==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU/WITS+WqvPjgLGoHCHSYHfaSukX4reNvyNY7gJgU3ZfYKPJo4xoY96Qg02QYonNKL9S1G6RRUh448R1oqxxNYvrXsR28=
-X-Gm-Message-State: AOJu0YxqcVULftdZbfxkSRMcEtbzIGF0Zf90TE3MkKrLmVYEL/NBDn4d
- pDK4Pg8cs+CaWWTl+vHFUv0s8CrHvVFfPCRjgpMIbcmfLN6KE4bo3d8XjA5rTpt0gN7VSGiSsOA
- Amw7/FpZz19ttDvZKSGmYwMydP5jKR91mBvDXWhnAac3+UQPmKo4c
-X-Received: by 2002:a2e:a582:0:b0:2ec:5964:9c0d with SMTP id
- 38308e7fff4ca-2eeb304bbdamr78774651fa.0.1720703822465; 
- Thu, 11 Jul 2024 06:17:02 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFZKV/YliEzyWRXDvSMj1CZz9/z/mPUW/fFJRQErRT9XG89dYK83lCtvqWHB/CgHTCrzmnfyw==
-X-Received: by 2002:a2e:a582:0:b0:2ec:5964:9c0d with SMTP id
- 38308e7fff4ca-2eeb304bbdamr78774301fa.0.1720703822045; 
- Thu, 11 Jul 2024 06:17:02 -0700 (PDT)
+ AJvYcCWoMompgVUfy2Sc0Uzqad2FQq2h2u/oVgISZ4gsXinizP3ZYiKlDVsoHj9olDP9DVF3M+Gqre6VsqOFRFI8POxJxtOyJlE=
+X-Gm-Message-State: AOJu0YxchfGkiUDaFYtK6swpfDugN2D43clV2WdiWFuVjwbIaGEnqjXr
+ gGf3LRjkdLdbnQgvxPVwNlTd90mKTsE10rukFsPzfw4ZzxgNpSLpWoXk9oMx1hqePfv8DiDchYe
+ YQHBV5qW0LwhRL6xigVYga4Awc4WRTJeCBmo2legbFqf19iAbi4hOvR/VFv53
+X-Received: by 2002:a05:6000:c6:b0:367:963b:ab81 with SMTP id
+ ffacd0b85a97d-367ceacaa90mr5688402f8f.46.1720704102623; 
+ Thu, 11 Jul 2024 06:21:42 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEM+q02fComieQSyE7QIb0XjvJJ4i3vmG8SrqxyvMG5hmF6IoBW7pWtouX48NWKFK/PIGPXBA==
+X-Received: by 2002:a05:6000:c6:b0:367:963b:ab81 with SMTP id
+ ffacd0b85a97d-367ceacaa90mr5688387f8f.46.1720704102274; 
+ Thu, 11 Jul 2024 06:21:42 -0700 (PDT)
 Received: from imammedo.users.ipa.redhat.com (nat-pool-brq-t.redhat.com.
  [213.175.37.10]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42797100f55sm46398045e9.1.2024.07.11.06.17.01
+ ffacd0b85a97d-367cde890bdsm7787326f8f.50.2024.07.11.06.21.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Jul 2024 06:17:01 -0700 (PDT)
-Date: Thu, 11 Jul 2024 15:17:00 +0200
+ Thu, 11 Jul 2024 06:21:41 -0700 (PDT)
+Date: Thu, 11 Jul 2024 15:21:41 +0200
 From: Igor Mammedov <imammedo@redhat.com>
 To: Sunil V L <sunilvl@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, Palmer Dabbelt
@@ -78,7 +78,7 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, Palmer Dabbelt
  Sinha <anisinha@redhat.com>
 Subject: Re: [PATCH v2 1/9] hw/riscv/virt-acpi-build.c: Add namespace
  devices for PLIC and APLIC
-Message-ID: <20240711151700.59f32bb3@imammedo.users.ipa.redhat.com>
+Message-ID: <20240711152141.741d5bc5@imammedo.users.ipa.redhat.com>
 In-Reply-To: <20240708114741.3499585-2-sunilvl@ventanamicro.com>
 References: <20240708114741.3499585-1-sunilvl@ventanamicro.com>
  <20240708114741.3499585-2-sunilvl@ventanamicro.com>
@@ -117,10 +117,6 @@ Sunil V L <sunilvl@ventanamicro.com> wrote:
 
 > PLIC and APLIC should be in namespace as well. So, add them using the
 > defined HID.
-
-defined where? REader shouldn't be forced to go over all web to find
-source. Cite it here.
-
 > 
 > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
 > Acked-by: Alistair Francis <alistair.francis@wdc.com>
@@ -146,6 +142,11 @@ source. Cite it here.
 > +    if (s->aia_type == VIRT_AIA_TYPE_NONE) {
 > +        /* PLICs */
 > +        for (socket = 0; socket < riscv_socket_count(ms); socket++) {
+
+you have socket_count in caller already, pass it as argument and
+drop  MachineState *ms = MACHINE(s) above.
+
+
 > +            plic_aplic_addr = s->memmap[VIRT_PLIC].base +
 > +                         s->memmap[VIRT_PLIC].size * socket;
 > +            gsi_base = VIRT_IRQCHIP_NUM_SOURCES * socket;
@@ -190,7 +191,11 @@ source. Cite it here.
 >      socket_count = riscv_socket_count(ms);
 >  
 > +    acpi_dsdt_add_plic_aplic(scope, s);
+Perhaps do the same for memmap/RISCVVirtState vvvv
+
 >      acpi_dsdt_add_uart(scope, &memmap[VIRT_UART0], UART0_IRQ);
+
+
 >  
 >      if (socket_count == 1) {
 
