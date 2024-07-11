@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1418BC3DA4A
-	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Jul 2024 22:33:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F78AC3DA45
+	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Jul 2024 22:33:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sS2K8-0008QZ-QA; Thu, 11 Jul 2024 18:31:36 -0400
+	id 1sS2KP-0000yw-Lv; Thu, 11 Jul 2024 18:31:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1sS2K6-0008Ne-OO
- for qemu-riscv@nongnu.org; Thu, 11 Jul 2024 18:31:34 -0400
-Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
+ id 1sS2KM-0000qO-FF
+ for qemu-riscv@nongnu.org; Thu, 11 Jul 2024 18:31:50 -0400
+Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1sS2K4-0001YC-KU
- for qemu-riscv@nongnu.org; Thu, 11 Jul 2024 18:31:34 -0400
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-1fb8781ef1bso12127535ad.3
- for <qemu-riscv@nongnu.org>; Thu, 11 Jul 2024 15:31:31 -0700 (PDT)
+ id 1sS2KK-0001eQ-Iv
+ for qemu-riscv@nongnu.org; Thu, 11 Jul 2024 18:31:50 -0400
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-1fbc0a1494dso9817605ad.3
+ for <qemu-riscv@nongnu.org>; Thu, 11 Jul 2024 15:31:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1720737091; x=1721341891;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1720737106; x=1721341906;
  darn=nongnu.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=sq6ZPtLM8cZpjKl0EALHfFJyJDausZH14SH/XMvmzaY=;
- b=i8GhUYZHr9HnomUP8iloRqDQMc/lAqv1RxmTJN3Qu4nNdvsyXzP0sqo5p4YLiqJ34S
- gZ0n5rhvN2BFR0syGPnkAT0XWJcs57OeT56XLUgGYch+FN0BZEcKmICJnhuec1hY4UzH
- wcr3Ym1H963JZGRTNmwrT9Zxb4wdg0e+3Uabg4lqFBsIHVlFaPWat/R9yO29k8fcaDOA
- m9zdIXUeD0437jeBkrQDn40fH8rAl3+wyAXgdrJ++LcOcW0dCbj4s6DXCMLQ2wspPJUH
- VMgeHD98ijqer0K53RpHwYTPqOafpDLyHs1fiavtd/kNwWdRHo5gFmRxr/W9hFwcatRq
- gdhA==
+ :reply-to; bh=A3cArR5WRmWK1k/DcuOegvGiYxXTXfx2ryu99Fjf2H4=;
+ b=InmEqWY4z3RdgZKc56iF6QLBoMismQpOaZBeqInwww0VZGsid7ZqR8zOb1H041PzlK
+ nZiexQlrzUcintB2KEITVxCJAiW5S6rCooRttBoqwsodYEEkyDVp6eETqt3eHgHlpJZe
+ b4cJxIQ+w4YdxD1o8bCMKfWbvEQGF8OfNMzJ/JRRinFNUJh0dMo+hM14NMSTCOe5Lp5h
+ neHE07eZkvg4BcJht87U0azzdC4Np4G0J5W8dIjlMsew6pgQW13fYvCY98WplOQc/K1F
+ Cjlf3sOFP+ubZuxuxumde5PBq3ZEafJvRlbJ2WONH6hllgatO3iGqbM1Yl+/idGkyPTS
+ USFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720737091; x=1721341891;
+ d=1e100.net; s=20230601; t=1720737106; x=1721341906;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=sq6ZPtLM8cZpjKl0EALHfFJyJDausZH14SH/XMvmzaY=;
- b=XETXGF3yb7tcf7zh0G9hQDd/lerpuw4K/rjWdkR5oBYf3M9FIi6ISJmn3FYfc9zFZS
- gxdOGhkXCqheTMuHw6WM9kgSqbuLtrW+ac+Q08OaqXrq9QoS7PgRrFkuptnWJ0FzNlSM
- MYfkbMpgMfIXfb9Mu0TOtiZmwr/5qYeblKOde4hR/rR+os8QsXLWBjiFKWH/8UHmtgUY
- fXOW2Nwnk4ZI00t+tR3xPo6rgfGvBZl4QNQocA+lo/Sc4fbcZs2DgyZswCqMf56wqfkp
- L2n7PcEJCj2N91bKvq0lWfNVVt6Wvly38/s738ExvCTfb1z0TGieWHmMJViXYIwTbl8M
- DtHg==
-X-Gm-Message-State: AOJu0YwuVK1tTwMgBKERJ4pQntTvYHUcfVkW087F3LtP6sBZ2hucS//3
- kmwyzfJKktXyFGf5A/TLQlq5RJSEtzVEWoIMKwOobJ2WQwIHe2fUjILRF7M2G5w=
-X-Google-Smtp-Source: AGHT+IEtRllJw58z5xoeI0uAXNqfsZR17+zreonrSt2yP+iSgMMPrIVcYAX/uaxpldPIaUa4WHsMdQ==
-X-Received: by 2002:a17:902:dacb:b0:1fb:284b:b39a with SMTP id
- d9443c01a7336-1fbb6d044a5mr91533685ad.21.1720737090565; 
- Thu, 11 Jul 2024 15:31:30 -0700 (PDT)
+ bh=A3cArR5WRmWK1k/DcuOegvGiYxXTXfx2ryu99Fjf2H4=;
+ b=MkO2SBC0+edjt9dyFYJA8jcgXsdaFfddSqZBMeKzobNg0T2LA8oSQWhqyP5axjaPLS
+ h3jnhudzTF2XO/ashP/Qd2bNE+cyUW78Z3zftHGfMEMUH1lO6Lg447novO1E4o1gbq4Z
+ WFa5/KkvLKmtI2D0qkV4OS4ewzeKkVzi0wHUHdP7MgLOUKaPMz/aRH3sOEx9xpib06tV
+ jLYKXOvdpvSSzHKyuc8B4qlYFuPtvr8cgX0Q6fjDwaFG10mMbyFptv/W/HdvhnsqhsXQ
+ gcEzDcyk5fD2N4pONhYu62HKoBnGw/+3V1NGZTmMzizTk9QZOQs7VJqygnazCYGHB8dS
+ WTYA==
+X-Gm-Message-State: AOJu0Yyd80UQcpFt9QCC9JLGrLifqgnQ9f4Y73VejfuOgwU83uGRj3Xy
+ SBcgu/nPXYP84KvsH+fPHNxOn6lzGo9o615wsaf0J9O691saXJLYzIM0yEjE5+g=
+X-Google-Smtp-Source: AGHT+IGLnCReZd+vBiltlGXAwSbb53RogOi0iOxNrgwbCTCvXUBFfQFT5YK89pyLXaZUKJ+T8r6MvA==
+X-Received: by 2002:a17:902:ce85:b0:1fb:5b83:48e4 with SMTP id
+ d9443c01a7336-1fbb6ce52e0mr86611055ad.9.1720737106133; 
+ Thu, 11 Jul 2024 15:31:46 -0700 (PDT)
 Received: from atishp.ba.rivosinc.com ([64.71.180.162])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1fbb6b34ca2sm55161565ad.53.2024.07.11.15.31.29
+ d9443c01a7336-1fbb6b34ca2sm55161565ad.53.2024.07.11.15.31.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Jul 2024 15:31:30 -0700 (PDT)
+ Thu, 11 Jul 2024 15:31:45 -0700 (PDT)
 From: Atish Patra <atishp@rivosinc.com>
-Date: Thu, 11 Jul 2024 15:31:04 -0700
-Subject: [PATCH v8 01/13] target/riscv: Combine set_mode and set_virt
- functions.
+Date: Thu, 11 Jul 2024 15:31:13 -0700
+Subject: [PATCH v8 10/13] target/riscv: Start counters from both
+ mhpmcounter and mcountinhibit
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240711-smcntrpmf_v7-v8-1-b7c38ae7b263@rivosinc.com>
+Message-Id: <20240711-smcntrpmf_v7-v8-10-b7c38ae7b263@rivosinc.com>
 References: <20240711-smcntrpmf_v7-v8-0-b7c38ae7b263@rivosinc.com>
 In-Reply-To: <20240711-smcntrpmf_v7-v8-0-b7c38ae7b263@rivosinc.com>
 To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: palmer@dabbelt.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
  bin.meng@windriver.com, dbarboza@ventanamicro.com, alistair.francis@wdc.com
 X-Mailer: b4 0.15-dev-13183
-Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
- envelope-from=atishp@rivosinc.com; helo=mail-pl1-x634.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
+ envelope-from=atishp@rivosinc.com; helo=mail-pl1-x62b.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -97,202 +97,144 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Rajnesh Kanwal <rkanwal@rivosinc.com>
 
-Combining riscv_cpu_set_virt_enabled() and riscv_cpu_set_mode()
-functions. This is to make complete mode change information
-available through a single function.
+Currently we start timer counter from write_mhpmcounter path only
+without checking for mcountinhibit bit. This changes adds mcountinhibit
+check and also programs the counter from write_mcountinhibit as well.
 
-This allows to easily differentiate between HS->VS, VS->HS
-and VS->VS transitions when executing state update codes.
-For example: One use-case which inspired this change is
-to update mode-specific instruction and cycle counters
-which requires information of both prev mode and current
-mode.
+When a counter is stopped using mcountinhibit we simply update
+the value of the counter based on current host ticks and save
+it for future reads.
+
+We don't need to disable running timer as pmu_timer_trigger_irq
+will discard the interrupt if the counter has been inhibited.
 
 Signed-off-by: Rajnesh Kanwal <rkanwal@rivosinc.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- target/riscv/cpu.h        |  2 +-
- target/riscv/cpu_helper.c | 57 +++++++++++++++++++++++------------------------
- target/riscv/op_helper.c  | 17 +++++---------
- 3 files changed, 35 insertions(+), 41 deletions(-)
+ target/riscv/csr.c | 75 ++++++++++++++++++++++++++++++++++++++----------------
+ target/riscv/pmu.c |  3 +--
+ 2 files changed, 54 insertions(+), 24 deletions(-)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 90b8f1b08f83..46faefd24e09 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -544,7 +544,7 @@ void riscv_cpu_set_aia_ireg_rmw_fn(CPURISCVState *env, uint32_t priv,
- RISCVException smstateen_acc_ok(CPURISCVState *env, int index, uint64_t bit);
- #endif /* !CONFIG_USER_ONLY */
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 5ef641918120..ff06276192dd 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -1077,8 +1077,9 @@ static RISCVException write_mhpmcounter(CPURISCVState *env, int csrno,
+     uint64_t mhpmctr_val = val;
  
--void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv);
-+void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv, bool virt_en);
+     counter->mhpmcounter_val = val;
+-    if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
+-        riscv_pmu_ctr_monitor_instructions(env, ctr_idx)) {
++    if (!get_field(env->mcountinhibit, BIT(ctr_idx)) &&
++        (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
++         riscv_pmu_ctr_monitor_instructions(env, ctr_idx))) {
+         counter->mhpmcounter_prev = riscv_pmu_ctr_get_fixed_counters_val(env,
+                                                                 ctr_idx, false);
+         if (ctr_idx > 2) {
+@@ -1106,8 +1107,9 @@ static RISCVException write_mhpmcounterh(CPURISCVState *env, int csrno,
  
- void riscv_translate_init(void);
- G_NORETURN void riscv_raise_exception(CPURISCVState *env,
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 6709622dd3ab..10d3fdaed376 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -619,30 +619,6 @@ void riscv_cpu_set_geilen(CPURISCVState *env, target_ulong geilen)
-     env->geilen = geilen;
- }
+     counter->mhpmcounterh_val = val;
+     mhpmctr_val = mhpmctr_val | (mhpmctrh_val << 32);
+-    if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
+-        riscv_pmu_ctr_monitor_instructions(env, ctr_idx)) {
++    if (!get_field(env->mcountinhibit, BIT(ctr_idx)) &&
++        (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
++         riscv_pmu_ctr_monitor_instructions(env, ctr_idx))) {
+         counter->mhpmcounterh_prev = riscv_pmu_ctr_get_fixed_counters_val(env,
+                                                                  ctr_idx, true);
+         if (ctr_idx > 2) {
+@@ -2170,31 +2172,60 @@ static RISCVException write_mcountinhibit(CPURISCVState *env, int csrno,
+     int cidx;
+     PMUCTRState *counter;
+     RISCVCPU *cpu = env_archcpu(env);
++    uint32_t present_ctrs = cpu->pmu_avail_ctrs | COUNTEREN_CY | COUNTEREN_IR;
++    target_ulong updated_ctrs = (env->mcountinhibit ^ val) & present_ctrs;
++    uint64_t mhpmctr_val, prev_count, curr_count;
  
--/* This function can only be called to set virt when RVH is enabled */
--void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable)
--{
--    /* Flush the TLB on all virt mode changes. */
--    if (env->virt_enabled != enable) {
--        tlb_flush(env_cpu(env));
--    }
--
--    env->virt_enabled = enable;
--
--    if (enable) {
--        /*
--         * The guest external interrupts from an interrupt controller are
--         * delivered only when the Guest/VM is running (i.e. V=1). This means
--         * any guest external interrupt which is triggered while the Guest/VM
--         * is not running (i.e. V=0) will be missed on QEMU resulting in guest
--         * with sluggish response to serial console input and other I/O events.
--         *
--         * To solve this, we check and inject interrupt after setting V=1.
--         */
--        riscv_cpu_update_mip(env, 0, 0);
--    }
--}
--
- int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint64_t interrupts)
- {
-     CPURISCVState *env = &cpu->env;
-@@ -715,7 +691,7 @@ void riscv_cpu_set_aia_ireg_rmw_fn(CPURISCVState *env, uint32_t priv,
-     }
- }
+     /* WARL register - disable unavailable counters; TM bit is always 0 */
+-    env->mcountinhibit =
+-        val & (cpu->pmu_avail_ctrs | COUNTEREN_CY | COUNTEREN_IR);
++    env->mcountinhibit = val & present_ctrs;
  
--void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
-+void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv, bool virt_en)
- {
-     g_assert(newpriv <= PRV_M && newpriv != PRV_RESERVED);
- 
-@@ -736,6 +712,28 @@ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
-      * preemptive context switch. As a result, do both.
-      */
-     env->load_res = -1;
-+
-+    if (riscv_has_ext(env, RVH)) {
-+        /* Flush the TLB on all virt mode changes. */
-+        if (env->virt_enabled != virt_en) {
-+            tlb_flush(env_cpu(env));
+     /* Check if any other counter is also monitoring cycles/instructions */
+     for (cidx = 0; cidx < RV_MAX_MHPMCOUNTERS; cidx++) {
+-            counter = &env->pmu_ctrs[cidx];
+-        if (get_field(env->mcountinhibit, BIT(cidx)) && (val & BIT(cidx))) {
+-            /*
+-             * Update the counter value for cycle/instret as we can't stop the
+-             * host ticks. But we should show the current value at this moment.
+-             */
+-            if (riscv_pmu_ctr_monitor_cycles(env, cidx) ||
+-                riscv_pmu_ctr_monitor_instructions(env, cidx)) {
+-                counter->mhpmcounter_val =
+-                    riscv_pmu_ctr_get_fixed_counters_val(env, cidx, false) -
+-                                           counter->mhpmcounter_prev +
+-                                           counter->mhpmcounter_val;
++        if (!(updated_ctrs & BIT(cidx)) ||
++            (!riscv_pmu_ctr_monitor_cycles(env, cidx) &&
++            !riscv_pmu_ctr_monitor_instructions(env, cidx))) {
++            continue;
 +        }
 +
-+        env->virt_enabled = virt_en;
-+        if (virt_en) {
-+            /*
-+             * The guest external interrupts from an interrupt controller are
-+             * delivered only when the Guest/VM is running (i.e. V=1). This
-+             * means any guest external interrupt which is triggered while the
-+             * Guest/VM is not running (i.e. V=0) will be missed on QEMU
-+             * resulting in guest with sluggish response to serial console
-+             * input and other I/O events.
-+             *
-+             * To solve this, we check and inject interrupt after setting V=1.
-+             */
-+            riscv_cpu_update_mip(env, 0, 0);
-+        }
-+    }
- }
- 
- /*
-@@ -1648,6 +1646,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
- {
-     RISCVCPU *cpu = RISCV_CPU(cs);
-     CPURISCVState *env = &cpu->env;
-+    bool virt = env->virt_enabled;
-     bool write_gva = false;
-     uint64_t s;
- 
-@@ -1778,7 +1777,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
- 
-                 htval = env->guest_phys_fault_addr;
- 
--                riscv_cpu_set_virt_enabled(env, 0);
-+                virt = false;
-             } else {
-                 /* Trap into HS mode */
-                 env->hstatus = set_field(env->hstatus, HSTATUS_SPV, false);
-@@ -1799,7 +1798,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-         env->htinst = tinst;
-         env->pc = (env->stvec >> 2 << 2) +
-                   ((async && (env->stvec & 3) == 1) ? cause * 4 : 0);
--        riscv_cpu_set_mode(env, PRV_S);
-+        riscv_cpu_set_mode(env, PRV_S, virt);
-     } else {
-         /* handle the trap in M-mode */
-         if (riscv_has_ext(env, RVH)) {
-@@ -1815,7 +1814,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-             mtval2 = env->guest_phys_fault_addr;
- 
-             /* Trapping to M mode, virt is disabled */
--            riscv_cpu_set_virt_enabled(env, 0);
-+            virt = false;
-         }
- 
-         s = env->mstatus;
-@@ -1830,7 +1829,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-         env->mtinst = tinst;
-         env->pc = (env->mtvec >> 2 << 2) +
-                   ((async && (env->mtvec & 3) == 1) ? cause * 4 : 0);
--        riscv_cpu_set_mode(env, PRV_M);
-+        riscv_cpu_set_mode(env, PRV_M, virt);
-     }
- 
-     /*
-diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-index 2baf5bc3ca19..ec1408ba0fb1 100644
---- a/target/riscv/op_helper.c
-+++ b/target/riscv/op_helper.c
-@@ -264,7 +264,7 @@ void helper_cbo_inval(CPURISCVState *env, target_ulong address)
- target_ulong helper_sret(CPURISCVState *env)
- {
-     uint64_t mstatus;
--    target_ulong prev_priv, prev_virt;
-+    target_ulong prev_priv, prev_virt = env->virt_enabled;
- 
-     if (!(env->priv >= PRV_S)) {
-         riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-@@ -307,11 +307,9 @@ target_ulong helper_sret(CPURISCVState *env)
-         if (prev_virt) {
-             riscv_cpu_swap_hypervisor_regs(env);
-         }
--
--        riscv_cpu_set_virt_enabled(env, prev_virt);
-     }
- 
--    riscv_cpu_set_mode(env, prev_priv);
-+    riscv_cpu_set_mode(env, prev_priv, prev_virt);
- 
-     return retpc;
- }
-@@ -347,16 +345,13 @@ target_ulong helper_mret(CPURISCVState *env)
-         mstatus = set_field(mstatus, MSTATUS_MPRV, 0);
-     }
-     env->mstatus = mstatus;
--    riscv_cpu_set_mode(env, prev_priv);
--
--    if (riscv_has_ext(env, RVH)) {
--        if (prev_virt) {
--            riscv_cpu_swap_hypervisor_regs(env);
--        }
- 
--        riscv_cpu_set_virt_enabled(env, prev_virt);
-+    if (riscv_has_ext(env, RVH) && prev_virt) {
-+        riscv_cpu_swap_hypervisor_regs(env);
-     }
- 
-+    riscv_cpu_set_mode(env, prev_priv, prev_virt);
++        counter = &env->pmu_ctrs[cidx];
 +
-     return retpc;
- }
++        if (!get_field(env->mcountinhibit, BIT(cidx))) {
++            counter->mhpmcounter_prev =
++                riscv_pmu_ctr_get_fixed_counters_val(env, cidx, false);
++            if (riscv_cpu_mxl(env) == MXL_RV32) {
++                counter->mhpmcounterh_prev =
++                    riscv_pmu_ctr_get_fixed_counters_val(env, cidx, true);
++            }
++
++            if (cidx > 2) {
++                mhpmctr_val = counter->mhpmcounter_val;
+                 if (riscv_cpu_mxl(env) == MXL_RV32) {
+-                    counter->mhpmcounterh_val =
+-                        riscv_pmu_ctr_get_fixed_counters_val(env, cidx, true) -
+-                                                counter->mhpmcounterh_prev +
+-                                                counter->mhpmcounterh_val;
++                    mhpmctr_val = mhpmctr_val |
++                            ((uint64_t)counter->mhpmcounterh_val << 32);
+                 }
++                riscv_pmu_setup_timer(env, mhpmctr_val, cidx);
++            }
++        } else {
++            curr_count = riscv_pmu_ctr_get_fixed_counters_val(env, cidx, false);
++
++            mhpmctr_val = counter->mhpmcounter_val;
++            prev_count = counter->mhpmcounter_prev;
++            if (riscv_cpu_mxl(env) == MXL_RV32) {
++                uint64_t tmp =
++                    riscv_pmu_ctr_get_fixed_counters_val(env, cidx, true);
++
++                curr_count = curr_count | (tmp << 32);
++                mhpmctr_val = mhpmctr_val |
++                    ((uint64_t)counter->mhpmcounterh_val << 32);
++                prev_count = prev_count |
++                    ((uint64_t)counter->mhpmcounterh_prev << 32);
++            }
++
++            /* Adjust the counter for later reads. */
++            mhpmctr_val = curr_count - prev_count + mhpmctr_val;
++            counter->mhpmcounter_val = mhpmctr_val;
++            if (riscv_cpu_mxl(env) == MXL_RV32) {
++                counter->mhpmcounterh_val = mhpmctr_val >> 32;
+             }
+         }
+     }
+diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
+index ac648cff8d7c..63420d9f3679 100644
+--- a/target/riscv/pmu.c
++++ b/target/riscv/pmu.c
+@@ -285,8 +285,7 @@ int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx event_idx)
+     }
+ 
+     ctr_idx = GPOINTER_TO_UINT(value);
+-    if (!riscv_pmu_counter_enabled(cpu, ctr_idx) ||
+-        get_field(env->mcountinhibit, BIT(ctr_idx))) {
++    if (!riscv_pmu_counter_enabled(cpu, ctr_idx)) {
+         return -1;
+     }
  
 
 -- 
