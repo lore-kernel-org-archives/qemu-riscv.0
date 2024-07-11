@@ -4,87 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54CF1C3DA41
-	for <qemu-riscv@archiver.kernel.org>; Wed, 10 Jul 2024 14:42:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E418C3DA4A
+	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Jul 2024 13:17:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sRYWg-0005rL-Er; Wed, 10 Jul 2024 10:42:34 -0400
+	id 1sRtfe-0002c8-9s; Thu, 11 Jul 2024 09:17:14 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sRYWe-0005kL-7L
- for qemu-riscv@nongnu.org; Wed, 10 Jul 2024 10:42:32 -0400
-Received: from mail-il1-x136.google.com ([2607:f8b0:4864:20::136])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sRYWa-0000nI-CS
- for qemu-riscv@nongnu.org; Wed, 10 Jul 2024 10:42:31 -0400
-Received: by mail-il1-x136.google.com with SMTP id
- e9e14a558f8ab-381f24d6bc4so25648825ab.2
- for <qemu-riscv@nongnu.org>; Wed, 10 Jul 2024 07:42:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1720622547; x=1721227347; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=0chmTPrpv/QcEAGL+GHmIW/+wnaH1ufbuQMbsep2CrU=;
- b=yc7r0ro9l6+AAHt6t2TCKq2M2Y4CHze1QW2ZnC++89WRAWMeqm6NPHbqWjtD00ohAC
- Q5z4xaAm6qmmETpnn7ukj6cjCw6zR2LVUL54f54dgeqJhaFZWXXQ3vQ03s3/8y2Ck47/
- eZFQo0xMw/NvdYBKQ+MbqSCqpV0jyTU8pW8jI50iZnPw8k58p/BdjNf21BaphjknFyO0
- JAevylWg1Bpj8tBQbtKZIC0riwRxK8q7f/dCiiEQfaoJeDds9nCyY+fz3MseE4p/agVV
- sSkqNiE1qQiZjfKEVi/VolmQOUqX8NOkgSrYjWZPV41WdE/Zfosf5PBqIjiqZo023GgX
- LDpQ==
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1sRtfc-0002Sx-Qp
+ for qemu-riscv@nongnu.org; Thu, 11 Jul 2024 09:17:12 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1sRtfb-000530-5h
+ for qemu-riscv@nongnu.org; Thu, 11 Jul 2024 09:17:12 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1720703826;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=qR7+dq4RntKn/Wt+dvu7fOma5iUOEeYDbWxxMKTjZcM=;
+ b=TCi9VeYTtGtROPfXPERwlBrfYWld2aVkQmIpj5XNiS5MDR93wCcRZ9ZUtAeJEkpDXOHIee
+ de625bbAjOJXMWP6rHiWp4oDJRjkvyIPVzAOeAyA3AZShM9OdZgJ2jizBS9zbYH4Kvlddz
+ kIBsdNiLlwHKbI23NdGfrsrnxGXmxQQ=
+Received: from mail-lj1-f200.google.com (mail-lj1-f200.google.com
+ [209.85.208.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-66-6fgODzXuOxaUruUTTXHeGQ-1; Thu, 11 Jul 2024 09:17:04 -0400
+X-MC-Unique: 6fgODzXuOxaUruUTTXHeGQ-1
+Received: by mail-lj1-f200.google.com with SMTP id
+ 38308e7fff4ca-2ee890f0cecso9150851fa.0
+ for <qemu-riscv@nongnu.org>; Thu, 11 Jul 2024 06:17:03 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720622547; x=1721227347;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=0chmTPrpv/QcEAGL+GHmIW/+wnaH1ufbuQMbsep2CrU=;
- b=rFqGgUh32lDOFUlreTboH08vMiOEKf+yb9Xui4RozDhppNGoyr14czbuK9NTVnjWUt
- B2TbhRXwZl0Re9T9yjh7JDLOIPXdNXkwreIivb7oRE2ySpe9N3dMDauSv65c0kmYyGOo
- mQJauenVgKCgFyylFhsNOUyRQz77zuYiFpMRbVhZKMGvjY0tyELOL5pjTfLl+wb4sqKY
- XBXTI9BNnQoNaDDy+y9dNTGR0Kvk6OlFxs6xZgBmWS1qexbe5Ujhktvysweh3h9xJ+4j
- b4mumRjDc4/sf36qQGfFylWC16N7+TFajnari9zEAFW+osN23HLbthJcrvKl2b5R2WgD
- mhNQ==
+ d=1e100.net; s=20230601; t=1720703822; x=1721308622;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=qR7+dq4RntKn/Wt+dvu7fOma5iUOEeYDbWxxMKTjZcM=;
+ b=eZI2zJL95M4O2/uWYyVsrjEQFm3e+M4tgVbwgJwxUQoygG3GFE0moMAJUeux5FddXP
+ WHejoRDjmKJwGBsZV0m+tb9K551pPZ8lbntJGyvZJJqDAPHRF0WlIGOXSrvRQVoRCbuL
+ +crUcsRHHKMmunyhX0xpMvuaurVQal3nCJ6MbrqW/PhutZqs5fmb563bTIpZXBydn2Ov
+ 56GkyRlVilzdY2npy0NkDEN6/z5yG7d5NE+PCFFkhwMiQ1o4vlKJ7W8liPT9EqrhEh9i
+ 0xtuboqGHXuWtbo4RR+GGWsqCUIPaCdZ9Y0nhq2HJkd0miSXRfMMN8MNwJi3HjBCdZZE
+ v1UQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVc0YPpAdJHRYjzvG5j3ulP6X7X+y9p/FIco4aR3jdJuNwvOv8xJAXse9fIBuL9tsVzP7hy37mLsXIS06LTMMW2iDJ94rM=
-X-Gm-Message-State: AOJu0Yz5jt7XodObeErBatFYmvuiAi3ABs4fspZDMNjYsGgrJg5/kBv9
- mZbE6hLebrJky0xlt/zfU23n40i4Inb4cnfIDejOGSnNms3k+x70yd0/DobWkUw=
-X-Google-Smtp-Source: AGHT+IEdw3c8Kd1FF590o1pPV/su74B1J7sPja8A1ftRMAaIxw8RALj6nadiibddxaKky+2V5BrNCw==
-X-Received: by 2002:a05:6e02:b26:b0:382:db50:6ebd with SMTP id
- e9e14a558f8ab-38a5910a09bmr66302045ab.27.1720622546903; 
- Wed, 10 Jul 2024 07:42:26 -0700 (PDT)
-Received: from [192.168.0.4] (174-21-76-141.tukw.qwest.net. [174.21.76.141])
- by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-77d680cae23sm3037812a12.78.2024.07.10.07.42.26
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 10 Jul 2024 07:42:26 -0700 (PDT)
-Message-ID: <92a009d9-e5bc-44f7-a1ae-31e007bc6c76@linaro.org>
-Date: Wed, 10 Jul 2024 07:42:24 -0700
+ AJvYcCU/WITS+WqvPjgLGoHCHSYHfaSukX4reNvyNY7gJgU3ZfYKPJo4xoY96Qg02QYonNKL9S1G6RRUh448R1oqxxNYvrXsR28=
+X-Gm-Message-State: AOJu0YxqcVULftdZbfxkSRMcEtbzIGF0Zf90TE3MkKrLmVYEL/NBDn4d
+ pDK4Pg8cs+CaWWTl+vHFUv0s8CrHvVFfPCRjgpMIbcmfLN6KE4bo3d8XjA5rTpt0gN7VSGiSsOA
+ Amw7/FpZz19ttDvZKSGmYwMydP5jKR91mBvDXWhnAac3+UQPmKo4c
+X-Received: by 2002:a2e:a582:0:b0:2ec:5964:9c0d with SMTP id
+ 38308e7fff4ca-2eeb304bbdamr78774651fa.0.1720703822465; 
+ Thu, 11 Jul 2024 06:17:02 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFZKV/YliEzyWRXDvSMj1CZz9/z/mPUW/fFJRQErRT9XG89dYK83lCtvqWHB/CgHTCrzmnfyw==
+X-Received: by 2002:a2e:a582:0:b0:2ec:5964:9c0d with SMTP id
+ 38308e7fff4ca-2eeb304bbdamr78774301fa.0.1720703822045; 
+ Thu, 11 Jul 2024 06:17:02 -0700 (PDT)
+Received: from imammedo.users.ipa.redhat.com (nat-pool-brq-t.redhat.com.
+ [213.175.37.10]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-42797100f55sm46398045e9.1.2024.07.11.06.17.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 11 Jul 2024 06:17:01 -0700 (PDT)
+Date: Thu, 11 Jul 2024 15:17:00 +0200
+From: Igor Mammedov <imammedo@redhat.com>
+To: Sunil V L <sunilvl@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, Palmer Dabbelt
+ <palmer@dabbelt.com>, Alistair Francis <alistair.francis@wdc.com>, Bin Meng
+ <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, Daniel Henrique
+ Barboza <dbarboza@ventanamicro.com>, Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>, "Michael S . Tsirkin" <mst@redhat.com>, Ani
+ Sinha <anisinha@redhat.com>
+Subject: Re: [PATCH v2 1/9] hw/riscv/virt-acpi-build.c: Add namespace
+ devices for PLIC and APLIC
+Message-ID: <20240711151700.59f32bb3@imammedo.users.ipa.redhat.com>
+In-Reply-To: <20240708114741.3499585-2-sunilvl@ventanamicro.com>
+References: <20240708114741.3499585-1-sunilvl@ventanamicro.com>
+ <20240708114741.3499585-2-sunilvl@ventanamicro.com>
+X-Mailer: Claws Mail 4.3.0 (GTK 3.24.42; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 09/13] target/ppc: Improve helper_dcbz for user-only
-To: BALATON Zoltan <balaton@eik.bme.hu>
-Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongu.org,
- qemu-s390x@nongnu.org, qemu-riscv@nongnu.org, max.chou@sifive.com
-References: <20240710032814.104643-1-richard.henderson@linaro.org>
- <20240710032814.104643-10-richard.henderson@linaro.org>
- <6b2f8ee5-0715-5040-403e-943a16ec170e@eik.bme.hu>
-Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <6b2f8ee5-0715-5040-403e-943a16ec170e@eik.bme.hu>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::136;
- envelope-from=richard.henderson@linaro.org; helo=mail-il1-x136.google.com
-X-Spam_score_int: 4
-X-Spam_score: 0.4
-X-Spam_bar: /
-X-Spam_report: (0.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- SUSPICIOUS_RECIPS=2.51 autolearn=no autolearn_force=no
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=imammedo@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -21
+X-Spam_score: -2.2
+X-Spam_bar: --
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.142,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,52 +112,86 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 7/10/24 05:25, BALATON Zoltan wrote:
-> On Tue, 9 Jul 2024, Richard Henderson wrote:
->> Mark the reserve_addr check unlikely.  Use tlb_vaddr_to_host
->> instead of probe_write, relying on the memset itself to test
->> for page writability.  Use set/clear_helper_retaddr so that
->> we can properly unwind on segfault.
->>
->> With this, a trivial loop around guest memset will spend
->> nearly 50% of runtime within helper_dcbz and host memset.
->>
->> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
->> ---
->> target/ppc/mem_helper.c | 14 ++++++++++----
->> 1 file changed, 10 insertions(+), 4 deletions(-)
->>
->> diff --git a/target/ppc/mem_helper.c b/target/ppc/mem_helper.c
->> index 24bae3b80c..fa4c4f9fa9 100644
->> --- a/target/ppc/mem_helper.c
->> +++ b/target/ppc/mem_helper.c
->> @@ -280,20 +280,26 @@ static void dcbz_common(CPUPPCState *env, target_ulong addr,
->>     addr &= mask;
->>
->>     /* Check reservation */
->> -    if ((env->reserve_addr & mask) == addr)  {
->> +    if (unlikely((env->reserve_addr & mask) == addr))  {
->>         env->reserve_addr = (target_ulong)-1ULL;
->>     }
->>
->>     /* Try fast path translate */
->> +#ifdef CONFIG_USER_ONLY
->> +    haddr = tlb_vaddr_to_host(env, addr, MMU_DATA_STORE, mmu_idx);
->> +#else
->>     haddr = probe_write(env, addr, dcbz_size, mmu_idx, retaddr);
->> -    if (haddr) {
->> -        memset(haddr, 0, dcbz_size);
->> -    } else {
->> +    if (unlikely(!haddr)) {
->>         /* Slow path */
->>         for (int i = 0; i < dcbz_size; i += 8) {
->>             cpu_stq_mmuidx_ra(env, addr + i, 0, mmu_idx, retaddr);
->>         }
+On Mon,  8 Jul 2024 17:17:33 +0530
+Sunil V L <sunilvl@ventanamicro.com> wrote:
+
+> PLIC and APLIC should be in namespace as well. So, add them using the
+> defined HID.
+
+defined where? REader shouldn't be forced to go over all web to find
+source. Cite it here.
+
 > 
-> Is a return needed here to only get to memset below when haddr != NULL?
+> Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+> Acked-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  hw/riscv/virt-acpi-build.c | 47 ++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 47 insertions(+)
+> 
+> diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
+> index 0925528160..87fe882af0 100644
+> --- a/hw/riscv/virt-acpi-build.c
+> +++ b/hw/riscv/virt-acpi-build.c
+> @@ -141,6 +141,52 @@ static void acpi_dsdt_add_cpus(Aml *scope, RISCVVirtState *s)
+>      }
+>  }
+>  
+> +static void acpi_dsdt_add_plic_aplic(Aml *scope, RISCVVirtState *s)
+> +{
+> +    MachineState *ms = MACHINE(s);
+> +    uint64_t plic_aplic_addr;
+> +    uint32_t gsi_base;
+> +    uint8_t  socket;
+> +
+> +    if (s->aia_type == VIRT_AIA_TYPE_NONE) {
+> +        /* PLICs */
+> +        for (socket = 0; socket < riscv_socket_count(ms); socket++) {
+> +            plic_aplic_addr = s->memmap[VIRT_PLIC].base +
+> +                         s->memmap[VIRT_PLIC].size * socket;
+> +            gsi_base = VIRT_IRQCHIP_NUM_SOURCES * socket;
+> +            Aml *dev = aml_device("IC%.02X", socket);
+> +            aml_append(dev, aml_name_decl("_HID", aml_string("RSCV0001")));
+> +            aml_append(dev, aml_name_decl("_UID", aml_int(socket)));
+> +            aml_append(dev, aml_name_decl("_GSB", aml_int(gsi_base)));
+> +
+> +            Aml *crs = aml_resource_template();
+> +            aml_append(crs, aml_memory32_fixed(plic_aplic_addr,
+> +                                               s->memmap[VIRT_PLIC].size,
+> +                                               AML_READ_WRITE));
+> +            aml_append(dev, aml_name_decl("_CRS", crs));
+> +            aml_append(scope, dev);
+> +        }
+> +    } else {
+> +        /* APLICs */
+> +        for (socket = 0; socket < riscv_socket_count(ms); socket++) {
+> +            plic_aplic_addr = s->memmap[VIRT_APLIC_S].base +
+> +                             s->memmap[VIRT_APLIC_S].size * socket;
+> +            gsi_base = VIRT_IRQCHIP_NUM_SOURCES * socket;
+> +            Aml *dev = aml_device("IC%.02X", socket);
+> +            aml_append(dev, aml_name_decl("_HID", aml_string("RSCV0002")));
+> +            aml_append(dev, aml_name_decl("_UID", aml_int(socket)));
+> +            aml_append(dev, aml_name_decl("_GSB", aml_int(gsi_base)));
+> +
+> +            Aml *crs = aml_resource_template();
+> +            aml_append(crs, aml_memory32_fixed(plic_aplic_addr,
+> +                                               s->memmap[VIRT_APLIC_S].size,
+> +                                               AML_READ_WRITE));
+> +            aml_append(dev, aml_name_decl("_CRS", crs));
+> +            aml_append(scope, dev);
+> +        }
+> +    }
+> +}
+> +
+>  static void
+>  acpi_dsdt_add_uart(Aml *scope, const MemMapEntry *uart_memmap,
+>                      uint32_t uart_irq)
+> @@ -411,6 +457,7 @@ static void build_dsdt(GArray *table_data,
+>  
+>      socket_count = riscv_socket_count(ms);
+>  
+> +    acpi_dsdt_add_plic_aplic(scope, s);
+>      acpi_dsdt_add_uart(scope, &memmap[VIRT_UART0], UART0_IRQ);
+>  
+>      if (socket_count == 1) {
 
-Oops, yes.
-
-
-r~
 
