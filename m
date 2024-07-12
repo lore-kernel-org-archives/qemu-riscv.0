@@ -4,76 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB85EC2BD09
-	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Jul 2024 12:52:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E69D7C2BD09
+	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Jul 2024 12:54:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sSFkY-0000ab-UO; Fri, 12 Jul 2024 08:51:49 -0400
+	id 1sSFnI-00041t-QA; Fri, 12 Jul 2024 08:54:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1sSFkA-0008NO-VJ
- for qemu-riscv@nongnu.org; Fri, 12 Jul 2024 08:51:25 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1sSFk8-0002IH-Bs
- for qemu-riscv@nongnu.org; Fri, 12 Jul 2024 08:51:22 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1720788678;
- h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:in-reply-to:in-reply-to:  references:references;
- bh=+fMXABX8IQTooeTgWrg+I2pCs1k0fwLsAX5r4YC1le4=;
- b=Q/u7FmGMHbIYLR4vj+4vUEJNcaWOGjPD9CbBB5M6CDf6Wzq/aYvgl04PCLGZdhwmz69yvq
- N9vNb7Ibd3iEELbkjl9FM/piERL1Z9z4WiS6SfjIm1d4bXlgPVWoxDf9GqTT3GMZ1IML4Z
- 03uKlItcZDpryzc+z8hFv25j1NJWvNc=
-Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-421-vuD0kHE1PV2CtE0wUGFyxw-1; Fri,
- 12 Jul 2024 08:51:15 -0400
-X-MC-Unique: vuD0kHE1PV2CtE0wUGFyxw-1
-Received: from mx-prod-int-04.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-04.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.40])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 8983319560B5; Fri, 12 Jul 2024 12:51:13 +0000 (UTC)
-Received: from redhat.com (unknown [10.42.28.56])
- by mx-prod-int-04.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 8063A195606C; Fri, 12 Jul 2024 12:51:08 +0000 (UTC)
-Date: Fri, 12 Jul 2024 13:51:04 +0100
-From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-To: Igor Mammedov <imammedo@redhat.com>
-Cc: Sunil V L <sunilvl@ventanamicro.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- "Michael S . Tsirkin" <mst@redhat.com>, Ani Sinha <anisinha@redhat.com>
-Subject: Re: [PATCH v2 0/9] RISC-V: ACPI: Namespace updates
-Message-ID: <ZpEmuB6xyh2K77Ic@redhat.com>
-References: <20240708114741.3499585-1-sunilvl@ventanamicro.com>
- <20240712144319.233c19a7@imammedo.users.ipa.redhat.com>
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1sSFmx-0002YL-PM
+ for qemu-riscv@nongnu.org; Fri, 12 Jul 2024 08:54:15 -0400
+Received: from mail-lj1-x232.google.com ([2a00:1450:4864:20::232])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1sSFmv-0002oy-5H
+ for qemu-riscv@nongnu.org; Fri, 12 Jul 2024 08:54:15 -0400
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-2ee98947f70so21194841fa.1
+ for <qemu-riscv@nongnu.org>; Fri, 12 Jul 2024 05:54:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1720788850; x=1721393650; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=w3LFhu/HGc++2pHpMUYF9LvJeoWIcHgg9CKQjzdkSME=;
+ b=wPshzpHmVZK6dZkeKHfmaHpCEtYpOUEHyGdWUPeThj0evv7Sq/AUrGkTQOa6/YdKse
+ uXreh3GNKERMVzQqad+pdKGXAALyGI5/z77enngPKJDH4vV00cDa1L/6kabWMuvvVBYE
+ n0iVKIvLSRqXAKPEFDax2qXnPhfDv4DeeKKWDPQZ37DoX1hJALKpFy2p65Htx7piGU6m
+ D5BI5U9udOqDMyMNy1cbYRuTI7VgdWE2/9Rg66XtX1OGHPbFRFaZ0lj7vOfyptUogBrb
+ Lqz/U1jC5VMcvDkLTS2hN9375agAQmTNiGIC2Ks92+LR71fK7H/oVtBF5J4NutPlLbyy
+ XxTw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1720788850; x=1721393650;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=w3LFhu/HGc++2pHpMUYF9LvJeoWIcHgg9CKQjzdkSME=;
+ b=fsuXBAWUip3gAAby8be1CZxZ7ikjYqIIFpfGrnuJmaq0EebxDCyZBQTySE081wPBE4
+ 0ipV0Hq379obdJbLlpo11Ou9wHTM8lPE7FvBYz7jKl39HnG7hOMsx1g3vTYB5QzqbLs/
+ P3pc36v1HUGF6LYPa9igLsYRsnYi6bMSmVVrCXZKo/wLrbRZcWOPHmCF1zOvLug0Jmdx
+ ZPzbjOtNT5eRgycanKDfyu/ocxiOHYtdB1rF7s3oDEmhUclCHLOrKaggC5xTPJvf8Pas
+ X+CS5ABrUGF7hpfcl9PKJNU72GTmtj9sN37QVRw+6qIpOTJYBafcqYHoCBwr2RccXtMm
+ REqA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVkFyOUOzT2eGyt3T8EmdH7s5j+j8oGK0fEa7mYL+O/P6tnC0bhnNlYsNEP2211AeRdyzgOoEoFLEaCe6Oi37jkNQyo5iM=
+X-Gm-Message-State: AOJu0YyiiASno+qb/8tf9ztlJ0gQ12Fa/I/128ttsHh1H6/X3wg8Rju1
+ dt1PRGyDJ0ajUWh9Sr+O3/dGsOEwaYllHcwit4Sp6njoEncJ0pOXEEbU8QxG+bachgAEePbBs2+
+ XUp0j+oypge0Bg/D1ffaM4F5Fc5rKNZLqy5Xm0w==
+X-Google-Smtp-Source: AGHT+IHvsiXbJZfiT+tDoGV6NEyE37LZBu7tNnmbeM60eFwO59ekAiVd6dFaXALTflTG2fnHlUosXMr9AVTHLGVcHIo=
+X-Received: by 2002:a2e:9d88:0:b0:2ee:db2c:5754 with SMTP id
+ 38308e7fff4ca-2eedb2c5827mr139581fa.42.1720788850328; Fri, 12 Jul 2024
+ 05:54:10 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20240712144319.233c19a7@imammedo.users.ipa.redhat.com>
-User-Agent: Mutt/2.2.12 (2023-09-09)
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.40
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=berrange@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
+References: <20240710032814.104643-1-richard.henderson@linaro.org>
+ <20240710032814.104643-4-richard.henderson@linaro.org>
+In-Reply-To: <20240710032814.104643-4-richard.henderson@linaro.org>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Fri, 12 Jul 2024 13:53:58 +0100
+Message-ID: <CAFEAcA-R7Bh9oLcxPPx+Nr6DmsqKkMKzc0NF5Q8jpw206YtyUA@mail.gmail.com>
+Subject: Re: [PATCH v2 03/13] target/arm: Use set/clear_helper_retaddr in
+ helper-a64.c
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongu.org, 
+ qemu-s390x@nongnu.org, qemu-riscv@nongnu.org, balaton@eik.bme.hu, 
+ max.chou@sifive.com
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2a00:1450:4864:20::232;
+ envelope-from=peter.maydell@linaro.org; helo=mail-lj1-x232.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.138,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -86,55 +90,85 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Jul 12, 2024 at 02:43:19PM +0200, Igor Mammedov wrote:
-> On Mon,  8 Jul 2024 17:17:32 +0530
-> Sunil V L <sunilvl@ventanamicro.com> wrote:
-> 
-> > This series adds few updates to RISC-V ACPI namespace for virt platform.
-> > Additionally, it has patches to enable ACPI table testing for RISC-V.
-> > 
-> > 1) PCI Link devices need to be created outside the scope of the PCI root
-> > complex to ensure correct probe ordering by the OS. This matches the
-> > example given in ACPI spec as well.
-> > 
-> > 2) Add PLIC and APLIC as platform devices as well to ensure probing
-> > order as per BRS spec [1] requirement.
-> > 
-> > 3) BRS spec requires RISC-V to use new ACPI ID for the generic UART. So,
-> > update the HID of the UART.
-> > 
-> > 4) Enabled ACPI tables tests for RISC-V which were originally part of
-> > [2] but couldn't get merged due to updates required in the expected AML
-> > files. I think combining those patches with this series makes it easier
-> > to merge since expected AML files are updated.
-> > 
-> > [1] - https://github.com/riscv-non-isa/riscv-brs
-> > [2] - https://lists.gnu.org/archive/html/qemu-devel/2024-06/msg04734.html
-> 
-> btw: CI is not happy about series, see:
->  https://gitlab.com/imammedo/qemu/-/pipelines/1371119552
-> also 'cross-i686-tci' job routinely timeouts on bios-tables-test
-> but we still keep adding more tests to it.
-> We should either bump timeout to account for slowness or
-> disable bios-tables-test for that job.
+On Wed, 10 Jul 2024 at 04:29, Richard Henderson
+<richard.henderson@linaro.org> wrote:
+>
+> Use these in helper_dc_dva and the FEAT_MOPS routines to
+> avoid a race condition with munmap in another thread.
+>
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> ---
+>  target/arm/tcg/helper-a64.c | 14 ++++++++++++--
+>  1 file changed, 12 insertions(+), 2 deletions(-)
+>
+> diff --git a/target/arm/tcg/helper-a64.c b/target/arm/tcg/helper-a64.c
+> index 0ea8668ab4..c60d2a7ec9 100644
+> --- a/target/arm/tcg/helper-a64.c
+> +++ b/target/arm/tcg/helper-a64.c
+> @@ -928,6 +928,8 @@ uint32_t HELPER(sqrt_f16)(uint32_t a, void *fpstp)
+>
+>  void HELPER(dc_zva)(CPUARMState *env, uint64_t vaddr_in)
+>  {
+> +    uintptr_t ra = GETPC();
+> +
+>      /*
+>       * Implement DC ZVA, which zeroes a fixed-length block of memory.
+>       * Note that we do not implement the (architecturally mandated)
+> @@ -948,8 +950,6 @@ void HELPER(dc_zva)(CPUARMState *env, uint64_t vaddr_in)
+>
+>  #ifndef CONFIG_USER_ONLY
+>      if (unlikely(!mem)) {
+> -        uintptr_t ra = GETPC();
+> -
+>          /*
+>           * Trap if accessing an invalid page.  DC_ZVA requires that we supply
+>           * the original pointer for an invalid page.  But watchpoints require
+> @@ -971,7 +971,9 @@ void HELPER(dc_zva)(CPUARMState *env, uint64_t vaddr_in)
+>      }
+>  #endif
+>
+> +    set_helper_retaddr(ra);
+>      memset(mem, 0, blocklen);
+> +    clear_helper_retaddr();
+>  }
+>
+>  void HELPER(unaligned_access)(CPUARMState *env, uint64_t addr,
+> @@ -1120,7 +1122,9 @@ static uint64_t set_step(CPUARMState *env, uint64_t toaddr,
+>      }
+>  #endif
+>      /* Easy case: just memset the host memory */
+> +    set_helper_retaddr(ra);
+>      memset(mem, data, setsize);
+> +    clear_helper_retaddr();
+>      return setsize;
+>  }
+>
+> @@ -1163,7 +1167,9 @@ static uint64_t set_step_tags(CPUARMState *env, uint64_t toaddr,
+>      }
+>  #endif
+>      /* Easy case: just memset the host memory */
+> +    set_helper_retaddr(ra);
+>      memset(mem, data, setsize);
+> +    clear_helper_retaddr();
+>      mte_mops_set_tags(env, toaddr, setsize, *mtedesc);
+>      return setsize;
+>  }
 
-Asumming the test is functionally correct, and not hanging, then bumping
-the timeout is the right answer. You can do this in the meson.build
-file
+I was briefly uncertain about this, but since we restrict
+the size of the amount of memory we're setting to not cross
+a guest page, if the memset() does fault it should only
+be for the case of "the whole block went away", so you never
+get the situation of "successfully wrote a chunk and then
+faulted partway through, and we should have written the
+tags for the partial write and did not".
 
-We should never disable tests only in CI, because non-CI users
-are just as likely to hit timeouts.
+So
 
+Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
 
-With regards,
-Daniel
--- 
-|: https://berrange.com      -o-    https://www.flickr.com/photos/dberrange :|
-|: https://libvirt.org         -o-            https://fstop138.berrange.com :|
-|: https://entangle-photo.org    -o-    https://www.instagram.com/dberrange :|
-
+thanks
+-- PMM
 
