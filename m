@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E69D7C2BD09
-	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Jul 2024 12:54:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 553B0C3DA4B
+	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Jul 2024 13:01:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sSFnI-00041t-QA; Fri, 12 Jul 2024 08:54:36 -0400
+	id 1sSFti-0005pJ-HZ; Fri, 12 Jul 2024 09:01:14 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1sSFmx-0002YL-PM
- for qemu-riscv@nongnu.org; Fri, 12 Jul 2024 08:54:15 -0400
-Received: from mail-lj1-x232.google.com ([2a00:1450:4864:20::232])
+ id 1sSFtY-0005K5-UV
+ for qemu-riscv@nongnu.org; Fri, 12 Jul 2024 09:01:05 -0400
+Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1sSFmv-0002oy-5H
- for qemu-riscv@nongnu.org; Fri, 12 Jul 2024 08:54:15 -0400
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-2ee98947f70so21194841fa.1
- for <qemu-riscv@nongnu.org>; Fri, 12 Jul 2024 05:54:12 -0700 (PDT)
+ id 1sSFtM-00059u-Sy
+ for qemu-riscv@nongnu.org; Fri, 12 Jul 2024 09:01:03 -0400
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-58ba3e38028so2678442a12.0
+ for <qemu-riscv@nongnu.org>; Fri, 12 Jul 2024 06:00:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1720788850; x=1721393650; darn=nongnu.org;
+ d=linaro.org; s=google; t=1720789250; x=1721394050; darn=nongnu.org;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=w3LFhu/HGc++2pHpMUYF9LvJeoWIcHgg9CKQjzdkSME=;
- b=wPshzpHmVZK6dZkeKHfmaHpCEtYpOUEHyGdWUPeThj0evv7Sq/AUrGkTQOa6/YdKse
- uXreh3GNKERMVzQqad+pdKGXAALyGI5/z77enngPKJDH4vV00cDa1L/6kabWMuvvVBYE
- n0iVKIvLSRqXAKPEFDax2qXnPhfDv4DeeKKWDPQZ37DoX1hJALKpFy2p65Htx7piGU6m
- D5BI5U9udOqDMyMNy1cbYRuTI7VgdWE2/9Rg66XtX1OGHPbFRFaZ0lj7vOfyptUogBrb
- Lqz/U1jC5VMcvDkLTS2hN9375agAQmTNiGIC2Ks92+LR71fK7H/oVtBF5J4NutPlLbyy
- XxTw==
+ bh=XTGrjiuBE8ZAPhvRWlQ8HaI2d2Kh/eTTboY51XDwLU0=;
+ b=LEgBFNrB6GBqyRbTJ5Nb6atFXMTQgGAZl+c9YZFMcxFgijWD8CoyKJXS8W3DLr4fTE
+ rzuWZ+CqOHNLNylku+wcvdWMV2LrWITEr+bCulo13ZIEjLo4Bbp3N2dvdfvy376mJm00
+ nyEnIi/2k0HxtBgtmjFWxpa2v58z36ZNT1zgY6Ko6kz0TFcRXxBpbqYcfqriXmK6s28P
+ CG5Qf6FW/AJN7hCHJb7hB1akrLHZKm0pwEaSOOii0Bzq7UfJFZuccDPYORpshDBfteUT
+ apZdJvmin8mwQgsTVjx4vKPgZ/bFGaGXSzd2W8HhW+Nyq/CyRS+LgTZ9UvAtyRhAzZn6
+ v9ZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720788850; x=1721393650;
+ d=1e100.net; s=20230601; t=1720789250; x=1721394050;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=w3LFhu/HGc++2pHpMUYF9LvJeoWIcHgg9CKQjzdkSME=;
- b=fsuXBAWUip3gAAby8be1CZxZ7ikjYqIIFpfGrnuJmaq0EebxDCyZBQTySE081wPBE4
- 0ipV0Hq379obdJbLlpo11Ou9wHTM8lPE7FvBYz7jKl39HnG7hOMsx1g3vTYB5QzqbLs/
- P3pc36v1HUGF6LYPa9igLsYRsnYi6bMSmVVrCXZKo/wLrbRZcWOPHmCF1zOvLug0Jmdx
- ZPzbjOtNT5eRgycanKDfyu/ocxiOHYtdB1rF7s3oDEmhUclCHLOrKaggC5xTPJvf8Pas
- X+CS5ABrUGF7hpfcl9PKJNU72GTmtj9sN37QVRw+6qIpOTJYBafcqYHoCBwr2RccXtMm
- REqA==
+ bh=XTGrjiuBE8ZAPhvRWlQ8HaI2d2Kh/eTTboY51XDwLU0=;
+ b=wnvi7RCopr7ybtPXkCAi0R1zknZekjfl2sR/jmvwU02rcM2E+hg6CslS+Jq9BwUPuJ
+ 0Ll+jVmPUiWg8RbvC6d3S2SuSKY1f0RKn5oljBfn4hez5mkW9ZQvNd93gI2twDm9AWVu
+ xXSpZsWllZwDBxZqulMYdkbFeGCTf4GxOc5JutlW29hwrjpBFljnXK/fU92jxJduGcEQ
+ VqD/R5FV5thK1zEcGsOZGUTLgL4AqcJ1dIxuu+JXnmiFki6amzWNEorasY3Jsr80PK7B
+ zVmFOt+11LKZFU94qP/V413Mnh5iTXvI17ltcVzKSQbUBeqN/0XsRXPtxpBey+5jLNKi
+ B2eg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVkFyOUOzT2eGyt3T8EmdH7s5j+j8oGK0fEa7mYL+O/P6tnC0bhnNlYsNEP2211AeRdyzgOoEoFLEaCe6Oi37jkNQyo5iM=
-X-Gm-Message-State: AOJu0YyiiASno+qb/8tf9ztlJ0gQ12Fa/I/128ttsHh1H6/X3wg8Rju1
- dt1PRGyDJ0ajUWh9Sr+O3/dGsOEwaYllHcwit4Sp6njoEncJ0pOXEEbU8QxG+bachgAEePbBs2+
- XUp0j+oypge0Bg/D1ffaM4F5Fc5rKNZLqy5Xm0w==
-X-Google-Smtp-Source: AGHT+IHvsiXbJZfiT+tDoGV6NEyE37LZBu7tNnmbeM60eFwO59ekAiVd6dFaXALTflTG2fnHlUosXMr9AVTHLGVcHIo=
-X-Received: by 2002:a2e:9d88:0:b0:2ee:db2c:5754 with SMTP id
- 38308e7fff4ca-2eedb2c5827mr139581fa.42.1720788850328; Fri, 12 Jul 2024
- 05:54:10 -0700 (PDT)
+ AJvYcCVp8/VacKwkim6bqT5FKHBEw6cAnlaSAuLfT9WkZUuCsjIOonGXfrJUXCuEIgEB0DvWcwaLXk+eoPQFD9TB1hQzmW3NCH8=
+X-Gm-Message-State: AOJu0Yw3lr4+KT09By4rlJW3Ih0iYyA0UWgcw/sn4DFsmaMvlTHMsPe1
+ ZcLzBzCAW4TF7Einqux1sHKnm641/hC1DKxXIp79Zu0jRNHzvagFB+77uxvvtBqQr6oBnM0E2Jk
+ 2ABxoZ9BYRmEP2Cqj6bCtELQ4ZX6hWChnWMURsw==
+X-Google-Smtp-Source: AGHT+IHpsBCnBfmbge0GGFPg/rF0By96DUTBCeUqH6Cz9jDdaK6UdgfCYwn4r+u6jsRbVUeBbugWYYHvmcUlIuPVtsw=
+X-Received: by 2002:a05:6402:2689:b0:599:8471:be42 with SMTP id
+ 4fb4d7f45d1cf-5998471beb4mr1814061a12.29.1720789249840; Fri, 12 Jul 2024
+ 06:00:49 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240710032814.104643-1-richard.henderson@linaro.org>
- <20240710032814.104643-4-richard.henderson@linaro.org>
-In-Reply-To: <20240710032814.104643-4-richard.henderson@linaro.org>
+ <20240710032814.104643-5-richard.henderson@linaro.org>
+In-Reply-To: <20240710032814.104643-5-richard.henderson@linaro.org>
 From: Peter Maydell <peter.maydell@linaro.org>
-Date: Fri, 12 Jul 2024 13:53:58 +0100
-Message-ID: <CAFEAcA-R7Bh9oLcxPPx+Nr6DmsqKkMKzc0NF5Q8jpw206YtyUA@mail.gmail.com>
-Subject: Re: [PATCH v2 03/13] target/arm: Use set/clear_helper_retaddr in
- helper-a64.c
+Date: Fri, 12 Jul 2024 14:00:39 +0100
+Message-ID: <CAFEAcA-GCKq_t24zOf_sCtQHE4svtvi67Zr0mrLpo+GV1uWeMA@mail.gmail.com>
+Subject: Re: [PATCH v2 04/13] target/arm: Use set/clear_helper_retaddr in SVE
+ and SME helpers
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongu.org, 
  qemu-s390x@nongnu.org, qemu-riscv@nongnu.org, balaton@eik.bme.hu, 
  max.chou@sifive.com
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::232;
- envelope-from=peter.maydell@linaro.org; helo=mail-lj1-x232.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::530;
+ envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x530.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -93,81 +93,62 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, 10 Jul 2024 at 04:29, Richard Henderson
+On Wed, 10 Jul 2024 at 04:31, Richard Henderson
 <richard.henderson@linaro.org> wrote:
 >
-> Use these in helper_dc_dva and the FEAT_MOPS routines to
-> avoid a race condition with munmap in another thread.
+> Avoid a race condition with munmap in another thread.
+> Use around blocks that exclusively use "host_fn".
+> Keep the blocks as small as possible, but without setting
+> and clearing for every operation on one page.
 >
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
->  target/arm/tcg/helper-a64.c | 14 ++++++++++++--
->  1 file changed, 12 insertions(+), 2 deletions(-)
+>  target/arm/tcg/sme_helper.c | 16 ++++++++++++++++
+>  target/arm/tcg/sve_helper.c | 26 ++++++++++++++++++++++++++
+>  2 files changed, 42 insertions(+)
+
+
+> @@ -6093,6 +6101,8 @@ void sve_ldnfff1_r(CPUARMState *env, void *vg, const target_ulong addr,
+>      reg_last = info.reg_off_last[0];
+>      host = info.page[0].host;
 >
-> diff --git a/target/arm/tcg/helper-a64.c b/target/arm/tcg/helper-a64.c
-> index 0ea8668ab4..c60d2a7ec9 100644
-> --- a/target/arm/tcg/helper-a64.c
-> +++ b/target/arm/tcg/helper-a64.c
-> @@ -928,6 +928,8 @@ uint32_t HELPER(sqrt_f16)(uint32_t a, void *fpstp)
+> +    set_helper_retaddr(retaddr);
+> +
+>      do {
+>          uint64_t pg = *(uint64_t *)(vg + (reg_off >> 3));
+>          do {
+> @@ -6113,6 +6123,8 @@ void sve_ldnfff1_r(CPUARMState *env, void *vg, const target_ulong addr,
+>          } while (reg_off <= reg_last && (reg_off & 63));
+>      } while (reg_off <= reg_last);
 >
->  void HELPER(dc_zva)(CPUARMState *env, uint64_t vaddr_in)
->  {
-> +    uintptr_t ra = GETPC();
+> +    clear_helper_retaddr();
 > +
 >      /*
->       * Implement DC ZVA, which zeroes a fixed-length block of memory.
->       * Note that we do not implement the (architecturally mandated)
-> @@ -948,8 +950,6 @@ void HELPER(dc_zva)(CPUARMState *env, uint64_t vaddr_in)
->
->  #ifndef CONFIG_USER_ONLY
->      if (unlikely(!mem)) {
-> -        uintptr_t ra = GETPC();
-> -
->          /*
->           * Trap if accessing an invalid page.  DC_ZVA requires that we supply
->           * the original pointer for an invalid page.  But watchpoints require
-> @@ -971,7 +971,9 @@ void HELPER(dc_zva)(CPUARMState *env, uint64_t vaddr_in)
->      }
->  #endif
->
-> +    set_helper_retaddr(ra);
->      memset(mem, 0, blocklen);
-> +    clear_helper_retaddr();
->  }
->
->  void HELPER(unaligned_access)(CPUARMState *env, uint64_t addr,
-> @@ -1120,7 +1122,9 @@ static uint64_t set_step(CPUARMState *env, uint64_t toaddr,
->      }
->  #endif
->      /* Easy case: just memset the host memory */
-> +    set_helper_retaddr(ra);
->      memset(mem, data, setsize);
-> +    clear_helper_retaddr();
->      return setsize;
->  }
->
-> @@ -1163,7 +1167,9 @@ static uint64_t set_step_tags(CPUARMState *env, uint64_t toaddr,
->      }
->  #endif
->      /* Easy case: just memset the host memory */
-> +    set_helper_retaddr(ra);
->      memset(mem, data, setsize);
-> +    clear_helper_retaddr();
->      mte_mops_set_tags(env, toaddr, setsize, *mtedesc);
->      return setsize;
->  }
+>       * MemSingleNF is allowed to fail for any reason.  We have special
+>       * code above to handle the first element crossing a page boundary.
 
-I was briefly uncertain about this, but since we restrict
-the size of the amount of memory we're setting to not cross
-a guest page, if the memset() does fault it should only
-be for the case of "the whole block went away", so you never
-get the situation of "successfully wrote a chunk and then
-faulted partway through, and we should have written the
-tags for the partial write and did not".
+There's a "goto do_fault" inside the loop that we've bracketed here with
+the set/clear_helper_retaddr() calls -- don't we need to call
+clear_helper_retaddr() on that failure path too?
 
-So
+There's a TODO comment at the top of this file:
 
-Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
+/*
+ * Load contiguous data, first-fault and no-fault.
+ *
+ * For user-only, one could argue that we should hold the mmap_lock during
+ * the operation so that there is no race between page_check_range and the
+ * load operation.  However, unmapping pages out from under a running thread
+ * is extraordinarily unlikely.  This theoretical race condition also affects
+ * linux-user/ in its get_user/put_user macros.
+ *
+ * TODO: Construct some helpers, written in assembly, that interact with
+ * host_signal_handler to produce memory ops which can properly report errors
+ * without racing.
+ */
+
+Should we update it to note that we make at least some attempt to
+handle the pages-unmapped-from-under-a-running-thread situation now?
 
 thanks
 -- PMM
