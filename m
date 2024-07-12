@@ -4,83 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2421EC3DA4A
-	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Jul 2024 22:34:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C06BC3DA49
+	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Jul 2024 01:35:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sS2KM-0000p2-53; Thu, 11 Jul 2024 18:31:50 -0400
+	id 1sS5BP-0002Du-K8; Thu, 11 Jul 2024 21:34:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1sS2KI-0000ak-Hw
- for qemu-riscv@nongnu.org; Thu, 11 Jul 2024 18:31:46 -0400
-Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1sS5BN-0002B0-Py; Thu, 11 Jul 2024 21:34:45 -0400
+Received: from mail-vk1-xa32.google.com ([2607:f8b0:4864:20::a32])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1sS2KG-0001d5-GS
- for qemu-riscv@nongnu.org; Thu, 11 Jul 2024 18:31:46 -0400
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-1fb472eacf4so9104615ad.1
- for <qemu-riscv@nongnu.org>; Thu, 11 Jul 2024 15:31:44 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1sS5BM-00082N-3U; Thu, 11 Jul 2024 21:34:45 -0400
+Received: by mail-vk1-xa32.google.com with SMTP id
+ 71dfb90a1353d-4f30d197e5cso820980e0c.0; 
+ Thu, 11 Jul 2024 18:34:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1720737103; x=1721341903;
- darn=nongnu.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=BW5+TxeQ3j3oHVi+BKnOm1Q4Ol2XxFfjITvZ7dSErUo=;
- b=phzZ6RjUciSySo+rMQlBqyDp6uXxtXV5wuIt5DnhOCtpp2dSQgJ3EGSE3+MeVArgXi
- ocOfnNvbjzz85mLufGU7OWUXUkOkUY+LGArouizZZxQZ/tz3WvmZGXVdljcKDJaWAwUs
- IEy/zGVaOL18mGYl84SpIWl7YWid2Wv7Ls0z19YoQvIriPS9QBFyAIpNkS2wzNg+M9+V
- 4nY+5RHQgDSsxewvT5HpL3khuQheipM95zciXLO6FOG67Oy9G304//iyz1+yCrO6SOuN
- qvpwFjfgLDljdonh3mThVKKAb3rBICjcU4Z6wPBoTuFJ/er35AEUY44J6bl4qff2ccth
- 99ew==
+ d=gmail.com; s=20230601; t=1720748082; x=1721352882; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=XPwA6Gz6CR5g2s2o0AVSkI8pMIHcCfAoOUvo2+T6Yfc=;
+ b=jM7mE6jGLEOt2L1ca8PpFmvzqMpuAWYxlVpsPR+tuK6TxlmEdDtR2XByhMATb/rCJq
+ Ec+pOFUWkzX1h9c5BvdxVzeZ8IoOgl8XKCUg3dYphe4WVFFYoP1FaFzOrx0LbwiurQAa
+ oeoDey2ncXC3yULwWv3V/XiEQ7Bl/1L/9oOo0JYO0bfX3hRga21vR1XzxfQgohGsTh/b
+ 9gD018Veluy4i3xoNUchXJX432voQqfaC3IJe/MRboyyBu2BnbyUngFtiejd0kWS/OjB
+ trzLqot3i9IvB4BWlLzX40Pc9QPoWPqquwq2EffOWGTbFpXUHdo3ITuL+brSBOBASgL4
+ Tihw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720737103; x=1721341903;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1720748082; x=1721352882;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BW5+TxeQ3j3oHVi+BKnOm1Q4Ol2XxFfjITvZ7dSErUo=;
- b=JLHHT3doJwCxkajIIlj5Wxvb+rA8hKuxzDZQL09LXScItiTGntfYoAjYgp63fMGv7g
- qgRtCPyTCobaIJldZkgxfE629X4mRqx5mAT7x+P17RsoARUxkZa6/FHrtK+b8OPi+pzB
- RxIY8C4m5uPXU9bdlcYhnhiry1mLBLZ5R7DVr7ZS7zPuH+Njz0tiY7JJXVGLLqW0utqj
- ld+Uq/eNwTZfp++Nx9HO2sntmW2bgwP+/d5m3NISbtTLV3js4LnfzyR79LDIJBx0MAah
- BStIYwsPNhDkX5Xq+GzlJYoqOyptIOa4vbpyaMSyZtV3YNihHCi8dThgbjsl3N0VqlFB
- /1Ew==
-X-Gm-Message-State: AOJu0YyWkt8Ts9r4FVcBEb+1clvmcBR3BG3LBHzg7lUoi58NwkkvIazN
- PirPZF2WgsPcqMf6qYVtvd26vTmpsxkhQdfalLcFanp/409gPrGHvycWz4gjmKvdJf/HRSYE5g0
- N
-X-Google-Smtp-Source: AGHT+IHOrYKTeUloSRwMvcoSCH4k/m7NJQwDYvZ03jOgWvmyL1/tJWRS7wgrCQJ3SvEdFh5uvcc+YA==
-X-Received: by 2002:a17:903:1cc:b0:1fb:9a61:6fe with SMTP id
- d9443c01a7336-1fbb6edf5d2mr69698785ad.58.1720737103105; 
- Thu, 11 Jul 2024 15:31:43 -0700 (PDT)
-Received: from atishp.ba.rivosinc.com ([64.71.180.162])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1fbb6b34ca2sm55161565ad.53.2024.07.11.15.31.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Jul 2024 15:31:41 -0700 (PDT)
-From: Atish Patra <atishp@rivosinc.com>
-Date: Thu, 11 Jul 2024 15:31:11 -0700
-Subject: [PATCH v8 08/13] target/riscv: Save counter values during
- countinhibit update
+ bh=XPwA6Gz6CR5g2s2o0AVSkI8pMIHcCfAoOUvo2+T6Yfc=;
+ b=QPTrIXQtPGJf92TfStmr8zmvkRg/LQAqh2zXxI67NI9vwf8Bv5rqz8a/AVEEzpFmgc
+ 5+kcYCTUFRPx/7rBx1afdA4BCU5CCPKn/vMriT9/OYr58szHnnjtVTwu1md2n0/ZwP6E
+ gFaCIrS65Jf6MgvdR8R2rakcNGcvvDDnjljNkdxXI8r7/4L1hRhMY49PBF+8P/MFvjnq
+ iAerA1x3Mr68oIeN0CgcYUu99WG0t1NgVkjifeBWmFMJtwRWrX5TGGy0i02mmLNoWdvo
+ i6h7hIhw72tR7Q2C1j2V3wD390CtaHAvrloRKVVMUfMlT0UPK7IFy+0OUZpd2VyHcm5B
+ jkOQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWiwTDae8mFLghZR8o34fd6/mgJk/ARh5DP0SX2tRgSNumQXBdjeZrJ8TFES/9gGb0bvB/Gq6qlw0xcUKYpK+k+F0Ryay0=
+X-Gm-Message-State: AOJu0YzVNR9URmpsiPxWKA5LUsgeI7tvYBNnbuqg7FScej6FOIa03Iws
+ WiBlee7DJKFAWQCH99IHOJ9Ovaa0N7S/gmemvDfe5axnNV0S+d1nMfJCVOS0YDjzlngz8I5j9gN
+ qDTS256bNf3wzdPzQhaSVO2Kribc=
+X-Google-Smtp-Source: AGHT+IFoPK3VurG0P+oxY94e9sKFjSw3evdFOswdP7qUzRo/4y7DSCDKLBLYI3wirWn8SWK7vUmg4nRH1sASWhqca0g=
+X-Received: by 2002:a05:6122:411a:b0:4f2:ffa6:dbd5 with SMTP id
+ 71dfb90a1353d-4f492518e1cmr1204053e0c.6.1720748081895; Thu, 11 Jul 2024
+ 18:34:41 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240711-smcntrpmf_v7-v8-8-b7c38ae7b263@rivosinc.com>
-References: <20240711-smcntrpmf_v7-v8-0-b7c38ae7b263@rivosinc.com>
-In-Reply-To: <20240711-smcntrpmf_v7-v8-0-b7c38ae7b263@rivosinc.com>
-To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- bin.meng@windriver.com, dbarboza@ventanamicro.com, alistair.francis@wdc.com
-X-Mailer: b4 0.15-dev-13183
-Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
- envelope-from=atishp@rivosinc.com; helo=mail-pl1-x632.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+References: <20240710022430.1306-1-zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20240710022430.1306-1-zhiwei_liu@linux.alibaba.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 12 Jul 2024 11:34:15 +1000
+Message-ID: <CAKmqyKN_+Hir5W1MPqpRhW_1b3M0kiRufX1M2__KcPrZY5guUg@mail.gmail.com>
+Subject: Re: [PATCH v5 0/7] target/riscv: Expose RV32 cpu to RV64 QEMU
+To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com, 
+ alistair.francis@wdc.com, dbarboza@ventanamicro.com, liwei1518@gmail.com, 
+ bmeng.cn@gmail.com, =?UTF-8?B?55Sy5LiA?= <lzw194868@alibaba-inc.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a32;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa32.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,115 +92,85 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Currently, if a counter monitoring cycle/instret is stopped via
-mcountinhibit we just update the state while the value is saved
-during the next read. This is not accurate as the read may happen
-many cycles after the counter is stopped. Ideally, the read should
-return the value saved when the counter is stopped.
-
-Thus, save the value of the counter during the inhibit update
-operation and return that value during the read if corresponding bit
-in mcountihibit is set.
+On Wed, Jul 10, 2024 at 12:27=E2=80=AFPM LIU Zhiwei
+<zhiwei_liu@linux.alibaba.com> wrote:
+>
+> From: =E7=94=B2=E4=B8=80 <lzw194868@alibaba-inc.com>
+>
+> This patch set aims to expose 32-bit RISC-V cpu to RV64 QEMU. Thus
+> qemu-system-riscv64 can directly boot a RV32 Linux.
+>
+> This patch set has been tested with 6.9.0 Linux Image.
+> And add an avocado test in tests/avocado.
+>
+> # make check-avocado AVOCADO_TESTS=3D/home/jenkins/git/qemu/tests/avocado=
+/boot_linux_console.py:BootLinuxConsole.test_riscv64_virt_rv32i
+>   VENVPIP install -e /home/jenkins/git/qemu/python/
+> /home/jenkins/git/qemu/build/pyvenv/bin/python3 -B /home/jenkins/git/qemu=
+/python/scripts/mkvenv.py ensuregroup  --online /home/jenkins/git/qemu/pyth=
+ondeps.toml avocado
+> mkvenv: checking for avocado-framework(>=3D88.1, <93.0)
+> mkvenv: checking for pycdlib>=3D1.11.0
+> mkvenv: installing avocado-framework=3D=3D88.1, pycdlib>=3D1.11.0
+>   AVOCADO tests/avocado
+> Fetching asset from /home/jenkins/git/qemu/tests/avocado/boot_linux_conso=
+le.py:BootLinuxConsole.test_riscv64_virt_rv32i
+> Fetching asset from /home/jenkins/git/qemu/tests/avocado/boot_linux_conso=
+le.py:BootLinuxConsole.test_riscv64_virt_rv32i
+> JOB ID     : 8c2e1ff918d3111d078a52eba9956893afaf9e1d
+> JOB LOG    : /home/jenkins/git/qemu/build/tests/results/job-2024-07-10T09=
+.55-8c2e1ff/job.log
+>  (1/1) /home/jenkins/git/qemu/tests/avocado/boot_linux_console.py:BootLin=
+uxConsole.test_riscv64_virt_rv32i: PASS (17.50 s)
+> RESULTS    : PASS 1 | ERROR 0 | FAIL 0 | SKIP 0 | WARN 0 | INTERRUPT 0 | =
+CANCEL 0
+> JOB TIME   : 29.50 s
+>
+> v5:
+>   Rebase to master and add tags
+>
+> v4:
+>   Drop UL completely in PATCH v3 2/7, 4/7, 5/7.
+>   Avocado: Add "if=3Dnone" to "-drive" option in QEMU command line
+>
+> v3:
+>   Rebase to the master branch
+>
+> v2:
+>   Remove the line that was inadvertently left in PATCH v1 4/6.
+>   Add an avocado test.
+>
+> v1:
+>   https://mail.gnu.org/archive/html/qemu-riscv/2024-06/msg00501.html
+>
+> TANG Tiancheng (7):
+>   target/riscv: Add fw_dynamic_info32 for booting RV32 OpenSBI
+>   target/riscv: Adjust PMP size for no-MMU RV64 QEMU running RV32
+>   target/riscv: Correct SXL return value for RV32 in RV64 QEMU
+>   target/riscv: Detect sxl to set bit width for RV32 in RV64
+>   target/riscv: Correct mcause/scause bit width for RV32 in RV64 QEMU
+>   target/riscv: Enable RV32 CPU support in RV64 QEMU
+>   tests/avocado: Add an avocado test for riscv64
 
 Acked-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Signed-off-by: Atish Patra <atishp@rivosinc.com>
----
- target/riscv/cpu.h     |  1 -
- target/riscv/csr.c     | 34 ++++++++++++++++++++++------------
- target/riscv/machine.c |  5 ++---
- 3 files changed, 24 insertions(+), 16 deletions(-)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index d56d640b06be..91fe2a46ba35 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -153,7 +153,6 @@ typedef struct PMUCTRState {
-     target_ulong mhpmcounter_prev;
-     /* Snapshort value of a counter in RV32 */
-     target_ulong mhpmcounterh_prev;
--    bool started;
-     /* Value beyond UINT32_MAX/UINT64_MAX before overflow interrupt trigger */
-     target_ulong irq_overflow_left;
- } PMUCTRState;
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 53f1a7ff00db..5e76ad5a350c 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -1131,17 +1131,11 @@ static RISCVException riscv_pmu_read_ctr(CPURISCVState *env, target_ulong *val,
- 
-     if (get_field(env->mcountinhibit, BIT(ctr_idx))) {
-         /*
--         * Counter should not increment if inhibit bit is set. We can't really
--         * stop the icount counting. Just return the counter value written by
--         * the supervisor to indicate that counter was not incremented.
-+         * Counter should not increment if inhibit bit is set. Just return the
-+         * current counter value.
-          */
--        if (!counter->started) {
--            *val = ctr_val;
--            return RISCV_EXCP_NONE;
--        } else {
--            /* Mark that the counter has been stopped */
--            counter->started = false;
--        }
-+         *val = ctr_val;
-+         return RISCV_EXCP_NONE;
-     }
- 
-     /*
-@@ -2183,9 +2177,25 @@ static RISCVException write_mcountinhibit(CPURISCVState *env, int csrno,
- 
-     /* Check if any other counter is also monitoring cycles/instructions */
-     for (cidx = 0; cidx < RV_MAX_MHPMCOUNTERS; cidx++) {
--        if (!get_field(env->mcountinhibit, BIT(cidx))) {
-             counter = &env->pmu_ctrs[cidx];
--            counter->started = true;
-+        if (get_field(env->mcountinhibit, BIT(cidx)) && (val & BIT(cidx))) {
-+            /*
-+             * Update the counter value for cycle/instret as we can't stop the
-+             * host ticks. But we should show the current value at this moment.
-+             */
-+            if (riscv_pmu_ctr_monitor_cycles(env, cidx) ||
-+                riscv_pmu_ctr_monitor_instructions(env, cidx)) {
-+                counter->mhpmcounter_val =
-+                    riscv_pmu_ctr_get_fixed_counters_val(env, cidx, false) -
-+                                           counter->mhpmcounter_prev +
-+                                           counter->mhpmcounter_val;
-+                if (riscv_cpu_mxl(env) == MXL_RV32) {
-+                    counter->mhpmcounterh_val =
-+                        riscv_pmu_ctr_get_fixed_counters_val(env, cidx, true) -
-+                                                counter->mhpmcounterh_prev +
-+                                                counter->mhpmcounterh_val;
-+                }
-+            }
-         }
-     }
- 
-diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index 76f2150f78b5..492c2c6d9d79 100644
---- a/target/riscv/machine.c
-+++ b/target/riscv/machine.c
-@@ -320,15 +320,14 @@ static bool pmu_needed(void *opaque)
- 
- static const VMStateDescription vmstate_pmu_ctr_state = {
-     .name = "cpu/pmu",
--    .version_id = 1,
--    .minimum_version_id = 1,
-+    .version_id = 2,
-+    .minimum_version_id = 2,
-     .needed = pmu_needed,
-     .fields = (const VMStateField[]) {
-         VMSTATE_UINTTL(mhpmcounter_val, PMUCTRState),
-         VMSTATE_UINTTL(mhpmcounterh_val, PMUCTRState),
-         VMSTATE_UINTTL(mhpmcounter_prev, PMUCTRState),
-         VMSTATE_UINTTL(mhpmcounterh_prev, PMUCTRState),
--        VMSTATE_BOOL(started, PMUCTRState),
-         VMSTATE_END_OF_LIST()
-     }
- };
+Alistair
 
--- 
-2.34.1
-
+>
+>  configs/targets/riscv64-softmmu.mak |  2 +-
+>  hw/riscv/boot.c                     | 35 +++++++++++++++++---------
+>  hw/riscv/sifive_u.c                 |  3 ++-
+>  include/hw/riscv/boot.h             |  4 ++-
+>  include/hw/riscv/boot_opensbi.h     | 29 ++++++++++++++++++++++
+>  target/riscv/cpu.c                  | 17 ++++++++++---
+>  target/riscv/cpu.h                  |  5 +++-
+>  target/riscv/cpu_helper.c           | 25 +++++++++++++------
+>  target/riscv/pmp.c                  |  2 +-
+>  tests/avocado/boot_linux_console.py | 38 +++++++++++++++++++++++++++++
+>  10 files changed, 132 insertions(+), 28 deletions(-)
+>
+> --
+> 2.25.1
+>
+>
 
