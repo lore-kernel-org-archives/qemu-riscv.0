@@ -4,53 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5913C2BD09
-	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Jul 2024 07:19:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17D25C2BD09
+	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Jul 2024 09:05:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sSAZK-0005Zj-QI; Fri, 12 Jul 2024 03:19:51 -0400
+	id 1sSCDu-0001f9-P5; Fri, 12 Jul 2024 05:05:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <yumin686@andestech.com>)
- id 1sSAZF-0005XL-LD; Fri, 12 Jul 2024 03:19:46 -0400
-Received: from 60-248-80-70.hinet-ip.hinet.net ([60.248.80.70]
- helo=Atcsqr.andestech.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <yumin686@andestech.com>)
- id 1sSAZB-0008Cs-PF; Fri, 12 Jul 2024 03:19:45 -0400
-Received: from mail.andestech.com (ATCPCS31.andestech.com [10.0.1.89])
- by Atcsqr.andestech.com with ESMTPS id 46C7JFs8094463
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 12 Jul 2024 15:19:15 +0800 (+08)
- (envelope-from yumin686@andestech.com)
-Received: from atcsi01.andestech.com (10.0.15.167) by ATCPCS31.andestech.com
- (10.0.1.89) with Microsoft SMTP Server id 14.3.498.0; Fri, 12 Jul 2024
- 15:19:15 +0800
-To: <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>
-CC: <palmer@dabbelt.com>, <alistair.francis@wdc.com>, <bin.meng@windriver.com>,
- <liwei1518@gmail.com>, <dbarboza@ventanamicro.com>,
- <zhiwei_liu@linux.alibaba.com>, <yumin686@andestech.com>, Alvin Chang
- <alvinga@andestech.com>
-Subject: [PATCH v4] target/riscv: raise an exception when CSRRS/CSRRC writes a
- read-only CSR
-Date: Fri, 12 Jul 2024 15:12:12 +0800
-Message-ID: <20240712071716.3122204-3-yumin686@andestech.com>
-X-Mailer: git-send-email 2.42.0.345.gaab89be2eb.dirty
+ (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
+ id 1sSCDq-0001aV-4T
+ for qemu-riscv@nongnu.org; Fri, 12 Jul 2024 05:05:46 -0400
+Received: from mail-ej1-x62a.google.com ([2a00:1450:4864:20::62a])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
+ id 1sSCDk-000056-4N
+ for qemu-riscv@nongnu.org; Fri, 12 Jul 2024 05:05:45 -0400
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-a77e7420697so251010766b.1
+ for <qemu-riscv@nongnu.org>; Fri, 12 Jul 2024 02:05:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sifive.com; s=google; t=1720775138; x=1721379938; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=z2HhYTDuUyAei8pbIc/0A8poefJBCRADplcR/zMSHO0=;
+ b=Cqbma9sZHPUsTSdH1LejQBw/Hg2eoxZVH3v9++6hpf8N356B/BMivD/zLBX+db7x90
+ BAqsP3/arA3ZOXcZ10wBc/T8hpDcqXNHYIBr1Jdo5NC5XY4assR3h+54hz+U/lJ3fANX
+ d0hZq/5JOb/If8gIMBY8xYpKnthzKLIoChAtJSRzHl3FQAy2i1rvMghdjzC2noVkm8UY
+ YHh/4obwFCZgDLyXnsDv6HRcBGVmboTrO+rPtNf0FV38PvZo/pPxlu5avJvGtCMJnNir
+ lfHZpvjax1trk5H2AYW1YsKEb1OgHA+yeUBMT2q1iPMWv1oWJOaT5aOOX0cYpUF3rWaQ
+ NAjA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1720775138; x=1721379938;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=z2HhYTDuUyAei8pbIc/0A8poefJBCRADplcR/zMSHO0=;
+ b=c97EoaFK2ThQ3lI4/yYWZSe33jgq1YT8M4FbE2XqWnD+u3RK1M29Pi6UPgUlhftR/Y
+ CA0IzCz3L2WgjybOXA9SJ8++pEBraJDZBPJWTzLXvJPgx5tpXqv6Aci3KH1OTaW45FKw
+ jPE6BtAUgG0fay2N0+LvGri7cLzXu3So6PkFU7jBdHkX29wikrUA4JY3uzVA9lrWUlL1
+ W6Nra0864qmY+zdorhYWy7gz+2kUFXPTMf1iiu+7E2Gs/VycI0RpUGqEQf1J0hYzYN3p
+ 2VtEQWCZIlXPBWMXmOYsP+D9Ip7nPk+Q7vCn3EmckQUcJhaNl1J5sZ1zhO+Fn7t3OawV
+ d6VA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWvjfpfeqlGhwbAnV6gBglAJAAq1VpYePqfiuulgVEYYWanH1IGH+yY1rdwwm002k+tppX/rXnM97Ha+N641+1scVK9IbU=
+X-Gm-Message-State: AOJu0YwljtHBMJpqoDGP23j7fPUk/dGbvg7UYWxtk1cBsr94levpoevM
+ GP9FsnMvBtbsWB0tQedwwVa/qnhwyJIplyWmdPMvic3uiDne4EW7+PAQqNkSTo44XT787GAjPrE
+ Adwb6Xu84r8M4q0QSihQ9n2t1z+kRQ/3P9bUgrw==
+X-Google-Smtp-Source: AGHT+IFbPO3+pUDhpg1aWz29w8RiVg9QxyJUqR9S5cIQToBc0y7mY7yo0MUauZarU97FLJke+KHkEeOY3XrsrGZHuEQ=
+X-Received: by 2002:a17:906:1787:b0:a75:23bb:6087 with SMTP id
+ a640c23a62f3a-a780b6b1baemr675829966b.29.1720775137893; Fri, 12 Jul 2024
+ 02:05:37 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.0.15.167]
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 46C7JFs8094463
-Received-SPF: pass client-ip=60.248.80.70; envelope-from=yumin686@andestech.com;
- helo=Atcsqr.andestech.com
-X-Spam_score_int: -8
-X-Spam_score: -0.9
-X-Spam_bar: /
-X-Spam_report: (-0.9 / 5.0 requ) BAYES_00=-1.9, RDNS_DYNAMIC=0.982,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- TVD_RCVD_IP=0.001 autolearn=no autolearn_force=no
+References: <20240709113652.1239-1-zhiwei_liu@linux.alibaba.com>
+ <20240709113652.1239-2-zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20240709113652.1239-2-zhiwei_liu@linux.alibaba.com>
+From: Jim Shu <jim.shu@sifive.com>
+Date: Fri, 12 Jul 2024 17:05:26 +0800
+Message-ID: <CALw707rMkPo2B4DEhpn3S+RJLTER_HKh9vFNDXu9eg3bHLwZmA@mail.gmail.com>
+Subject: Re: [PATCH v4 01/11] target/riscv: Add zimop extension
+To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com, 
+ alistair.francis@wdc.com, dbarboza@ventanamicro.com, liwei1518@gmail.com, 
+ bmeng.cn@gmail.com, Deepak Gupta <debug@rivosinc.com>
+Content-Type: multipart/alternative; boundary="000000000000d53982061d092e8b"
+Received-SPF: pass client-ip=2a00:1450:4864:20::62a;
+ envelope-from=jim.shu@sifive.com; helo=mail-ej1-x62a.google.com
+X-Spam_score_int: -16
+X-Spam_score: -1.7
+X-Spam_bar: -
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
+ DKIM_SIGNED=0.1, HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -63,188 +88,405 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-to:  Yu-Ming Chang <yumin686@andestech.com>
-From:  Yu-Ming Chang via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Both CSRRS and CSRRC always read the addressed CSR and cause any read side
-effects regardless of rs1 and rd fields. Note that if rs1 specifies a register
-holding a zero value other than x0, the instruction will still attempt to write
-the unmodified value back to the CSR and will cause any attendant side effects.
+--000000000000d53982061d092e8b
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-So if CSRRS or CSRRC tries to write a read-only CSR with rs1 which specifies
-a register holding a zero value, an illegal instruction exception should be
-raised.
+Reviewed-by: Jim Shu <jim.shu@sifive.com>
 
-Signed-off-by: Yu-Ming Chang <yumin686@andestech.com>
-Signed-off-by: Alvin Chang <alvinga@andestech.com>
----
-Hi Alistair,
-    This fixed the issue of riscv_csrrw_debug().
-    And the issue of `From` email address.
+On Tue, Jul 9, 2024 at 7:39=E2=80=AFPM LIU Zhiwei <zhiwei_liu@linux.alibaba=
+.com>
+wrote:
 
-Best regards,
-Yuming
+> Zimop extension defines an encoding space for 40 MOPs.The Zimop
+> extension defines 32 MOP instructions named MOP.R.n, where n is
+> an integer between 0 and 31, inclusive. The Zimop extension
+> additionally defines 8 MOP instructions named MOP.RR.n, where n
+> is an integer between 0 and 7.
+>
+> These 40 MOPs initially are defined to simply write zero to x[rd],
+> but are designed to be redefined by later extensions to perform some
+> other action.
+>
+> Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> Reviewed-by: Deepak Gupta <debug@rivosinc.com>
+> ---
+>  target/riscv/cpu.c                          |  2 ++
+>  target/riscv/cpu_cfg.h                      |  1 +
+>  target/riscv/insn32.decode                  | 11 ++++++
+>  target/riscv/insn_trans/trans_rvzimop.c.inc | 37 +++++++++++++++++++++
+>  target/riscv/translate.c                    |  1 +
+>  5 files changed, 52 insertions(+)
+>  create mode 100644 target/riscv/insn_trans/trans_rvzimop.c.inc
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index a2640cf259..d3853a5804 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -113,6 +113,7 @@ const RISCVIsaExtData isa_edata_arr[] =3D {
+>      ISA_EXT_DATA_ENTRY(zihintntl, PRIV_VERSION_1_10_0, ext_zihintntl),
+>      ISA_EXT_DATA_ENTRY(zihintpause, PRIV_VERSION_1_10_0, ext_zihintpause=
+),
+>      ISA_EXT_DATA_ENTRY(zihpm, PRIV_VERSION_1_12_0, ext_zihpm),
+> +    ISA_EXT_DATA_ENTRY(zimop, PRIV_VERSION_1_13_0, ext_zimop),
+>      ISA_EXT_DATA_ENTRY(zmmul, PRIV_VERSION_1_12_0, ext_zmmul),
+>      ISA_EXT_DATA_ENTRY(za64rs, PRIV_VERSION_1_12_0, has_priv_1_11),
+>      ISA_EXT_DATA_ENTRY(zaamo, PRIV_VERSION_1_12_0, ext_zaamo),
+> @@ -1471,6 +1472,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[]
+> =3D {
+>      MULTI_EXT_CFG_BOOL("zicsr", ext_zicsr, true),
+>      MULTI_EXT_CFG_BOOL("zihintntl", ext_zihintntl, true),
+>      MULTI_EXT_CFG_BOOL("zihintpause", ext_zihintpause, true),
+> +    MULTI_EXT_CFG_BOOL("zimop", ext_zimop, false),
+>      MULTI_EXT_CFG_BOOL("zacas", ext_zacas, false),
+>      MULTI_EXT_CFG_BOOL("zaamo", ext_zaamo, false),
+>      MULTI_EXT_CFG_BOOL("zalrsc", ext_zalrsc, false),
+> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+> index fb7eebde52..9f53512053 100644
+> --- a/target/riscv/cpu_cfg.h
+> +++ b/target/riscv/cpu_cfg.h
+> @@ -71,6 +71,7 @@ struct RISCVCPUConfig {
+>      bool ext_zihintntl;
+>      bool ext_zihintpause;
+>      bool ext_zihpm;
+> +    bool ext_zimop;
+>      bool ext_ztso;
+>      bool ext_smstateen;
+>      bool ext_sstc;
+> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+> index f22df04cfd..60da673153 100644
+> --- a/target/riscv/insn32.decode
+> +++ b/target/riscv/insn32.decode
+> @@ -38,6 +38,8 @@
+>  %imm_bs   30:2                   !function=3Dex_shift_3
+>  %imm_rnum 20:4
+>  %imm_z6   26:1 15:5
+> +%imm_mop5 30:1 26:2 20:2
+> +%imm_mop3 30:1 26:2
+>
+>  # Argument sets:
+>  &empty
+> @@ -56,6 +58,8 @@
+>  &r2nfvm    vm rd rs1 nf
+>  &rnfvm     vm rd rs1 rs2 nf
+>  &k_aes     shamt rs2 rs1 rd
+> +&mop5 imm rd rs1
+> +&mop3 imm rd rs1 rs2
+>
+>  # Formats 32:
+>  @r       .......   ..... ..... ... ..... ....... &r                %rs2
+> %rs1 %rd
+> @@ -98,6 +102,9 @@
+>  @k_aes   .. ..... ..... .....  ... ..... ....... &k_aes  shamt=3D%imm_bs
+>  %rs2 %rs1 %rd
+>  @i_aes   .. ..... ..... .....  ... ..... ....... &i      imm=3D%imm_rnum
+>     %rs1 %rd
+>
+> +@mop5 . . .. .. .... .. ..... ... ..... ....... &mop5 imm=3D%imm_mop5 %r=
+d
+> %rs1
+> +@mop3 . . .. .. . ..... ..... ... ..... ....... &mop3 imm=3D%imm_mop3 %r=
+d
+> %rs1 %rs2
+> +
+>  # Formats 64:
+>  @sh5     .......  ..... .....  ... ..... ....... &shift  shamt=3D%sh5
+> %rs1 %rd
+>
+> @@ -1010,3 +1017,7 @@ amocas_w    00101 . . ..... ..... 010 ..... 0101111
+> @atom_st
+>  amocas_d    00101 . . ..... ..... 011 ..... 0101111 @atom_st
+>  # *** RV64 Zacas Standard Extension ***
+>  amocas_q    00101 . . ..... ..... 100 ..... 0101111 @atom_st
+> +
+> +# *** Zimop may-be-operation extension ***
+> +mop_r_n     1 . 00 .. 0111 .. ..... 100 ..... 1110011 @mop5
+> +mop_rr_n    1 . 00 .. 1 ..... ..... 100 ..... 1110011 @mop3
+> diff --git a/target/riscv/insn_trans/trans_rvzimop.c.inc
+> b/target/riscv/insn_trans/trans_rvzimop.c.inc
+> new file mode 100644
+> index 0000000000..165aacd2b6
+> --- /dev/null
+> +++ b/target/riscv/insn_trans/trans_rvzimop.c.inc
+> @@ -0,0 +1,37 @@
+> +/*
+> + * RISC-V translation routines for May-Be-Operation(zimop).
+> + *
+> + * Copyright (c) 2024 Alibaba Group.
+> + *
+> + * This program is free software; you can redistribute it and/or modify =
+it
+> + * under the terms and conditions of the GNU General Public License,
+> + * version 2 or later, as published by the Free Software Foundation.
+> + *
+> + * This program is distributed in the hope it will be useful, but WITHOU=
+T
+> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+> for
+> + * more details.
+> + *
+> + * You should have received a copy of the GNU General Public License
+> along with
+> + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> + */
+> +
+> +#define REQUIRE_ZIMOP(ctx) do {           \
+> +    if (!ctx->cfg_ptr->ext_zimop) {       \
+> +        return false;                     \
+> +    }                                     \
+> +} while (0)
+> +
+> +static bool trans_mop_r_n(DisasContext *ctx, arg_mop_r_n *a)
+> +{
+> +    REQUIRE_ZIMOP(ctx);
+> +    gen_set_gpr(ctx, a->rd, ctx->zero);
+> +    return true;
+> +}
+> +
+> +static bool trans_mop_rr_n(DisasContext *ctx, arg_mop_rr_n *a)
+> +{
+> +    REQUIRE_ZIMOP(ctx);
+> +    gen_set_gpr(ctx, a->rd, ctx->zero);
+> +    return true;
+> +}
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index 0569224e53..379b68289f 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -1099,6 +1099,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase,
+> target_ulong pc)
+>  #include "insn_trans/trans_rvzacas.c.inc"
+>  #include "insn_trans/trans_rvzawrs.c.inc"
+>  #include "insn_trans/trans_rvzicbo.c.inc"
+> +#include "insn_trans/trans_rvzimop.c.inc"
+>  #include "insn_trans/trans_rvzfa.c.inc"
+>  #include "insn_trans/trans_rvzfh.c.inc"
+>  #include "insn_trans/trans_rvk.c.inc"
+> --
+> 2.25.1
+>
+>
+>
 
- target/riscv/cpu.h       |  4 +++
- target/riscv/csr.c       | 57 ++++++++++++++++++++++++++++++++++++----
- target/riscv/op_helper.c |  6 ++---
- 3 files changed, 58 insertions(+), 9 deletions(-)
+--000000000000d53982061d092e8b
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 87742047ce..6db92e0c58 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -735,6 +735,8 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
- void riscv_cpu_update_mask(CPURISCVState *env);
- bool riscv_cpu_is_32bit(RISCVCPU *cpu);
- 
-+RISCVException riscv_csrr(CPURISCVState *env, int csrno,
-+                          target_ulong *ret_value);
- RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
-                            target_ulong *ret_value,
-                            target_ulong new_value, target_ulong write_mask);
-@@ -767,6 +769,8 @@ typedef RISCVException (*riscv_csr_op_fn)(CPURISCVState *env, int csrno,
-                                           target_ulong new_value,
-                                           target_ulong write_mask);
- 
-+RISCVException riscv_csrr_i128(CPURISCVState *env, int csrno,
-+                               Int128 *ret_value);
- RISCVException riscv_csrrw_i128(CPURISCVState *env, int csrno,
-                                 Int128 *ret_value,
-                                 Int128 new_value, Int128 write_mask);
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 432c59dc66..e6939f62bb 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -4368,7 +4368,7 @@ static RISCVException rmw_seed(CPURISCVState *env, int csrno,
- 
- static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
-                                                int csrno,
--                                               bool write_mask)
-+                                               bool write)
- {
-     /* check privileges and return RISCV_EXCP_ILLEGAL_INST if check fails */
-     bool read_only = get_field(csrno, 0xC00) == 3;
-@@ -4390,7 +4390,7 @@ static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
-     }
- 
-     /* read / write check */
--    if (write_mask && read_only) {
-+    if (write && read_only) {
-         return RISCV_EXCP_ILLEGAL_INST;
-     }
- 
-@@ -4477,11 +4477,22 @@ static RISCVException riscv_csrrw_do64(CPURISCVState *env, int csrno,
-     return RISCV_EXCP_NONE;
- }
- 
-+RISCVException riscv_csrr(CPURISCVState *env, int csrno,
-+                           target_ulong *ret_value)
-+{
-+    RISCVException ret = riscv_csrrw_check(env, csrno, false);
-+    if (ret != RISCV_EXCP_NONE) {
-+        return ret;
-+    }
-+
-+    return riscv_csrrw_do64(env, csrno, ret_value, 0, 0);
-+}
-+
- RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
-                            target_ulong *ret_value,
-                            target_ulong new_value, target_ulong write_mask)
- {
--    RISCVException ret = riscv_csrrw_check(env, csrno, write_mask);
-+    RISCVException ret = riscv_csrrw_check(env, csrno, true);
-     if (ret != RISCV_EXCP_NONE) {
-         return ret;
-     }
-@@ -4529,13 +4540,45 @@ static RISCVException riscv_csrrw_do128(CPURISCVState *env, int csrno,
-     return RISCV_EXCP_NONE;
- }
- 
-+RISCVException riscv_csrr_i128(CPURISCVState *env, int csrno,
-+                               Int128 *ret_value)
-+{
-+    RISCVException ret;
-+
-+    ret = riscv_csrrw_check(env, csrno, false);
-+    if (ret != RISCV_EXCP_NONE) {
-+        return ret;
-+    }
-+
-+    if (csr_ops[csrno].read128) {
-+        return riscv_csrrw_do128(env, csrno, ret_value,
-+                                 int128_zero(), int128_zero());
-+    }
-+
-+    /*
-+     * Fall back to 64-bit version for now, if the 128-bit alternative isn't
-+     * at all defined.
-+     * Note, some CSRs don't need to extend to MXLEN (64 upper bits non
-+     * significant), for those, this fallback is correctly handling the
-+     * accesses
-+     */
-+    target_ulong old_value;
-+    ret = riscv_csrrw_do64(env, csrno, &old_value,
-+                           (target_ulong)0,
-+                           (target_ulong)0);
-+    if (ret == RISCV_EXCP_NONE && ret_value) {
-+        *ret_value = int128_make64(old_value);
-+    }
-+    return ret;
-+}
-+
- RISCVException riscv_csrrw_i128(CPURISCVState *env, int csrno,
-                                 Int128 *ret_value,
-                                 Int128 new_value, Int128 write_mask)
- {
-     RISCVException ret;
- 
--    ret = riscv_csrrw_check(env, csrno, int128_nz(write_mask));
-+    ret = riscv_csrrw_check(env, csrno, true);
-     if (ret != RISCV_EXCP_NONE) {
-         return ret;
-     }
-@@ -4574,7 +4617,11 @@ RISCVException riscv_csrrw_debug(CPURISCVState *env, int csrno,
- #if !defined(CONFIG_USER_ONLY)
-     env->debugger = true;
- #endif
--    ret = riscv_csrrw(env, csrno, ret_value, new_value, write_mask);
-+    if (!write_mask) {
-+        ret = riscv_csrr(env, csrno, ret_value);
-+    } else {
-+        ret = riscv_csrrw(env, csrno, ret_value, new_value, write_mask);
-+    }
- #if !defined(CONFIG_USER_ONLY)
-     env->debugger = false;
- #endif
-diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-index 2baf5bc3ca..84fb2a35e5 100644
---- a/target/riscv/op_helper.c
-+++ b/target/riscv/op_helper.c
-@@ -51,7 +51,7 @@ target_ulong helper_csrr(CPURISCVState *env, int csr)
-     }
- 
-     target_ulong val = 0;
--    RISCVException ret = riscv_csrrw(env, csr, &val, 0, 0);
-+    RISCVException ret = riscv_csrr(env, csr, &val);
- 
-     if (ret != RISCV_EXCP_NONE) {
-         riscv_raise_exception(env, ret, GETPC());
-@@ -84,9 +84,7 @@ target_ulong helper_csrrw(CPURISCVState *env, int csr,
- target_ulong helper_csrr_i128(CPURISCVState *env, int csr)
- {
-     Int128 rv = int128_zero();
--    RISCVException ret = riscv_csrrw_i128(env, csr, &rv,
--                                          int128_zero(),
--                                          int128_zero());
-+    RISCVException ret = riscv_csrr_i128(env, csr, &rv);
- 
-     if (ret != RISCV_EXCP_NONE) {
-         riscv_raise_exception(env, ret, GETPC());
--- 
-2.42.0.345.gaab89be2eb.dirty
+<div dir=3D"ltr">Reviewed-by: Jim Shu &lt;<a href=3D"mailto:jim.shu@sifive.=
+com">jim.shu@sifive.com</a>&gt;<br></div><br><div class=3D"gmail_quote"><di=
+v dir=3D"ltr" class=3D"gmail_attr">On Tue, Jul 9, 2024 at 7:39=E2=80=AFPM L=
+IU Zhiwei &lt;<a href=3D"mailto:zhiwei_liu@linux.alibaba.com">zhiwei_liu@li=
+nux.alibaba.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" s=
+tyle=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);pad=
+ding-left:1ex">Zimop extension defines an encoding space for 40 MOPs.The Zi=
+mop<br>
+extension defines 32 MOP instructions named MOP.R.n, where n is<br>
+an integer between 0 and 31, inclusive. The Zimop extension<br>
+additionally defines 8 MOP instructions named MOP.RR.n, where n<br>
+is an integer between 0 and 7.<br>
+<br>
+These 40 MOPs initially are defined to simply write zero to x[rd],<br>
+but are designed to be redefined by later extensions to perform some<br>
+other action.<br>
+<br>
+Signed-off-by: LIU Zhiwei &lt;<a href=3D"mailto:zhiwei_liu@linux.alibaba.co=
+m" target=3D"_blank">zhiwei_liu@linux.alibaba.com</a>&gt;<br>
+Reviewed-by: Alistair Francis &lt;<a href=3D"mailto:alistair.francis@wdc.co=
+m" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
+Reviewed-by: Deepak Gupta &lt;<a href=3D"mailto:debug@rivosinc.com" target=
+=3D"_blank">debug@rivosinc.com</a>&gt;<br>
+---<br>
+=C2=A0target/riscv/cpu.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 2 ++<br>
+=C2=A0target/riscv/cpu_cfg.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 1 +<br>
+=C2=A0target/riscv/insn32.decode=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 | 11 ++++++<br>
+=C2=A0target/riscv/insn_trans/trans_rvzimop.c.inc | 37 ++++++++++++++++++++=
++<br>
+=C2=A0target/riscv/translate.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 1 +<br>
+=C2=A05 files changed, 52 insertions(+)<br>
+=C2=A0create mode 100644 target/riscv/insn_trans/trans_rvzimop.c.inc<br>
+<br>
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c<br>
+index a2640cf259..d3853a5804 100644<br>
+--- a/target/riscv/cpu.c<br>
++++ b/target/riscv/cpu.c<br>
+@@ -113,6 +113,7 @@ const RISCVIsaExtData isa_edata_arr[] =3D {<br>
+=C2=A0 =C2=A0 =C2=A0ISA_EXT_DATA_ENTRY(zihintntl, PRIV_VERSION_1_10_0, ext_=
+zihintntl),<br>
+=C2=A0 =C2=A0 =C2=A0ISA_EXT_DATA_ENTRY(zihintpause, PRIV_VERSION_1_10_0, ex=
+t_zihintpause),<br>
+=C2=A0 =C2=A0 =C2=A0ISA_EXT_DATA_ENTRY(zihpm, PRIV_VERSION_1_12_0, ext_zihp=
+m),<br>
++=C2=A0 =C2=A0 ISA_EXT_DATA_ENTRY(zimop, PRIV_VERSION_1_13_0, ext_zimop),<b=
+r>
+=C2=A0 =C2=A0 =C2=A0ISA_EXT_DATA_ENTRY(zmmul, PRIV_VERSION_1_12_0, ext_zmmu=
+l),<br>
+=C2=A0 =C2=A0 =C2=A0ISA_EXT_DATA_ENTRY(za64rs, PRIV_VERSION_1_12_0, has_pri=
+v_1_11),<br>
+=C2=A0 =C2=A0 =C2=A0ISA_EXT_DATA_ENTRY(zaamo, PRIV_VERSION_1_12_0, ext_zaam=
+o),<br>
+@@ -1471,6 +1472,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] =
+=3D {<br>
+=C2=A0 =C2=A0 =C2=A0MULTI_EXT_CFG_BOOL(&quot;zicsr&quot;, ext_zicsr, true),=
+<br>
+=C2=A0 =C2=A0 =C2=A0MULTI_EXT_CFG_BOOL(&quot;zihintntl&quot;, ext_zihintntl=
+, true),<br>
+=C2=A0 =C2=A0 =C2=A0MULTI_EXT_CFG_BOOL(&quot;zihintpause&quot;, ext_zihintp=
+ause, true),<br>
++=C2=A0 =C2=A0 MULTI_EXT_CFG_BOOL(&quot;zimop&quot;, ext_zimop, false),<br>
+=C2=A0 =C2=A0 =C2=A0MULTI_EXT_CFG_BOOL(&quot;zacas&quot;, ext_zacas, false)=
+,<br>
+=C2=A0 =C2=A0 =C2=A0MULTI_EXT_CFG_BOOL(&quot;zaamo&quot;, ext_zaamo, false)=
+,<br>
+=C2=A0 =C2=A0 =C2=A0MULTI_EXT_CFG_BOOL(&quot;zalrsc&quot;, ext_zalrsc, fals=
+e),<br>
+diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h<br>
+index fb7eebde52..9f53512053 100644<br>
+--- a/target/riscv/cpu_cfg.h<br>
++++ b/target/riscv/cpu_cfg.h<br>
+@@ -71,6 +71,7 @@ struct RISCVCPUConfig {<br>
+=C2=A0 =C2=A0 =C2=A0bool ext_zihintntl;<br>
+=C2=A0 =C2=A0 =C2=A0bool ext_zihintpause;<br>
+=C2=A0 =C2=A0 =C2=A0bool ext_zihpm;<br>
++=C2=A0 =C2=A0 bool ext_zimop;<br>
+=C2=A0 =C2=A0 =C2=A0bool ext_ztso;<br>
+=C2=A0 =C2=A0 =C2=A0bool ext_smstateen;<br>
+=C2=A0 =C2=A0 =C2=A0bool ext_sstc;<br>
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode<br>
+index f22df04cfd..60da673153 100644<br>
+--- a/target/riscv/insn32.decode<br>
++++ b/target/riscv/insn32.decode<br>
+@@ -38,6 +38,8 @@<br>
+=C2=A0%imm_bs=C2=A0 =C2=A030:2=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0!function=3Dex_shift_3<br>
+=C2=A0%imm_rnum 20:4<br>
+=C2=A0%imm_z6=C2=A0 =C2=A026:1 15:5<br>
++%imm_mop5 30:1 26:2 20:2<br>
++%imm_mop3 30:1 26:2<br>
+<br>
+=C2=A0# Argument sets:<br>
+=C2=A0&amp;empty<br>
+@@ -56,6 +58,8 @@<br>
+=C2=A0&amp;r2nfvm=C2=A0 =C2=A0 vm rd rs1 nf<br>
+=C2=A0&amp;rnfvm=C2=A0 =C2=A0 =C2=A0vm rd rs1 rs2 nf<br>
+=C2=A0&amp;k_aes=C2=A0 =C2=A0 =C2=A0shamt rs2 rs1 rd<br>
++&amp;mop5 imm rd rs1<br>
++&amp;mop3 imm rd rs1 rs2<br>
+<br>
+=C2=A0# Formats 32:<br>
+=C2=A0@r=C2=A0 =C2=A0 =C2=A0 =C2=A0.......=C2=A0 =C2=A0..... ..... ... ....=
+. ....... &amp;r=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 %rs=
+2 %rs1 %rd<br>
+@@ -98,6 +102,9 @@<br>
+=C2=A0@k_aes=C2=A0 =C2=A0.. ..... ..... .....=C2=A0 ... ..... ....... &amp;=
+k_aes=C2=A0 shamt=3D%imm_bs=C2=A0 =C2=A0%rs2 %rs1 %rd<br>
+=C2=A0@i_aes=C2=A0 =C2=A0.. ..... ..... .....=C2=A0 ... ..... ....... &amp;=
+i=C2=A0 =C2=A0 =C2=A0 imm=3D%imm_rnum=C2=A0 =C2=A0 =C2=A0 =C2=A0 %rs1 %rd<b=
+r>
+<br>
++@mop5 . . .. .. .... .. ..... ... ..... ....... &amp;mop5 imm=3D%imm_mop5 =
+%rd %rs1<br>
++@mop3 . . .. .. . ..... ..... ... ..... ....... &amp;mop3 imm=3D%imm_mop3 =
+%rd %rs1 %rs2<br>
++<br>
+=C2=A0# Formats 64:<br>
+=C2=A0@sh5=C2=A0 =C2=A0 =C2=A0.......=C2=A0 ..... .....=C2=A0 ... ..... ...=
+.... &amp;shift=C2=A0 shamt=3D%sh5=C2=A0 =C2=A0 =C2=A0 %rs1 %rd<br>
+<br>
+@@ -1010,3 +1017,7 @@ amocas_w=C2=A0 =C2=A0 00101 . . ..... ..... 010 .....=
+ 0101111 @atom_st<br>
+=C2=A0amocas_d=C2=A0 =C2=A0 00101 . . ..... ..... 011 ..... 0101111 @atom_s=
+t<br>
+=C2=A0# *** RV64 Zacas Standard Extension ***<br>
+=C2=A0amocas_q=C2=A0 =C2=A0 00101 . . ..... ..... 100 ..... 0101111 @atom_s=
+t<br>
++<br>
++# *** Zimop may-be-operation extension ***<br>
++mop_r_n=C2=A0 =C2=A0 =C2=A01 . 00 .. 0111 .. ..... 100 ..... 1110011 @mop5=
+<br>
++mop_rr_n=C2=A0 =C2=A0 1 . 00 .. 1 ..... ..... 100 ..... 1110011 @mop3<br>
+diff --git a/target/riscv/insn_trans/trans_rvzimop.c.inc b/target/riscv/ins=
+n_trans/trans_rvzimop.c.inc<br>
+new file mode 100644<br>
+index 0000000000..165aacd2b6<br>
+--- /dev/null<br>
++++ b/target/riscv/insn_trans/trans_rvzimop.c.inc<br>
+@@ -0,0 +1,37 @@<br>
++/*<br>
++ * RISC-V translation routines for May-Be-Operation(zimop).<br>
++ *<br>
++ * Copyright (c) 2024 Alibaba Group.<br>
++ *<br>
++ * This program is free software; you can redistribute it and/or modify it=
+<br>
++ * under the terms and conditions of the GNU General Public License,<br>
++ * version 2 or later, as published by the Free Software Foundation.<br>
++ *<br>
++ * This program is distributed in the hope it will be useful, but WITHOUT<=
+br>
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or<b=
+r>
++ * FITNESS FOR A PARTICULAR PURPOSE.=C2=A0 See the GNU General Public Lice=
+nse for<br>
++ * more details.<br>
++ *<br>
++ * You should have received a copy of the GNU General Public License along=
+ with<br>
++ * this program.=C2=A0 If not, see &lt;<a href=3D"http://www.gnu.org/licen=
+ses/" rel=3D"noreferrer" target=3D"_blank">http://www.gnu.org/licenses/</a>=
+&gt;.<br>
++ */<br>
++<br>
++#define REQUIRE_ZIMOP(ctx) do {=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\<=
+br>
++=C2=A0 =C2=A0 if (!ctx-&gt;cfg_ptr-&gt;ext_zimop) {=C2=A0 =C2=A0 =C2=A0 =
+=C2=A0\<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 return false;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\<br>
++=C2=A0 =C2=A0 }=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\<=
+br>
++} while (0)<br>
++<br>
++static bool trans_mop_r_n(DisasContext *ctx, arg_mop_r_n *a)<br>
++{<br>
++=C2=A0 =C2=A0 REQUIRE_ZIMOP(ctx);<br>
++=C2=A0 =C2=A0 gen_set_gpr(ctx, a-&gt;rd, ctx-&gt;zero);<br>
++=C2=A0 =C2=A0 return true;<br>
++}<br>
++<br>
++static bool trans_mop_rr_n(DisasContext *ctx, arg_mop_rr_n *a)<br>
++{<br>
++=C2=A0 =C2=A0 REQUIRE_ZIMOP(ctx);<br>
++=C2=A0 =C2=A0 gen_set_gpr(ctx, a-&gt;rd, ctx-&gt;zero);<br>
++=C2=A0 =C2=A0 return true;<br>
++}<br>
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c<br>
+index 0569224e53..379b68289f 100644<br>
+--- a/target/riscv/translate.c<br>
++++ b/target/riscv/translate.c<br>
+@@ -1099,6 +1099,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase, t=
+arget_ulong pc)<br>
+=C2=A0#include &quot;insn_trans/trans_rvzacas.c.inc&quot;<br>
+=C2=A0#include &quot;insn_trans/trans_rvzawrs.c.inc&quot;<br>
+=C2=A0#include &quot;insn_trans/trans_rvzicbo.c.inc&quot;<br>
++#include &quot;insn_trans/trans_rvzimop.c.inc&quot;<br>
+=C2=A0#include &quot;insn_trans/trans_rvzfa.c.inc&quot;<br>
+=C2=A0#include &quot;insn_trans/trans_rvzfh.c.inc&quot;<br>
+=C2=A0#include &quot;insn_trans/trans_rvk.c.inc&quot;<br>
+-- <br>
+2.25.1<br>
+<br>
+<br>
+</blockquote></div>
 
+--000000000000d53982061d092e8b--
 
