@@ -4,83 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88864C2BD09
-	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Jul 2024 09:57:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B914C2BD09
+	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Jul 2024 12:43:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sSD22-0001Y0-7d; Fri, 12 Jul 2024 05:57:38 -0400
+	id 1sSFcb-0001Nj-GO; Fri, 12 Jul 2024 08:43:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1sSD20-0001Wx-9t
- for qemu-riscv@nongnu.org; Fri, 12 Jul 2024 05:57:36 -0400
-Received: from mail-il1-x133.google.com ([2607:f8b0:4864:20::133])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1sSD1m-0006GL-75
- for qemu-riscv@nongnu.org; Fri, 12 Jul 2024 05:57:35 -0400
-Received: by mail-il1-x133.google.com with SMTP id
- e9e14a558f8ab-38b4e08c3e5so7747515ab.3
- for <qemu-riscv@nongnu.org>; Fri, 12 Jul 2024 02:57:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1720778241; x=1721383041; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=eqydqafD3kBXYFTMCSsrPDm0JQ1bvA7go1HRfadFKQM=;
- b=bSHyTmsMnoTYYJY+D3bzTSc3xMkSAc3JLeWyY5RZgCh+IDt/Ughuvk+NKM9TkEy+m8
- pBbDe7TACvVnPTrMrkNRHyTUZXuz3KDJo/frgOWlIJ9JSe5ORHvOknXI4Iuun1r6aBHi
- eGPOGZkoaR8vtqllHW/6fuvojhxXd8S9yZswc8dACsPnoz8e/w9xw4JYhP0H29gfcHE0
- JGMZFYk9I5dDAbj5nRaGJQspUs84DOdI77qE5+DpJKo2IRibH4NdeOR9bZ0tRAAqoGrO
- idq1zBHRxqNmY2V6Y+vtjBRU0cAJbNcIumRAUT2IbunYRUXkIl1e84wnAbVihZS1R1XZ
- WwVg==
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1sSFcV-0001N1-PO
+ for qemu-riscv@nongnu.org; Fri, 12 Jul 2024 08:43:27 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1sSFcS-0000G2-VC
+ for qemu-riscv@nongnu.org; Fri, 12 Jul 2024 08:43:27 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1720788203;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=C1OlqYp3prCTYsg4T2pRkw+AIIXE1wLWyasdZ+NgxOo=;
+ b=LHjrE+NtPLb88Ws9bxQSYIvKQMBVCz8NtPgjPzAOyOsWiWBS7nsIwPD1zmooZsYDmgr1yv
+ GaDTIxAVnR7j7dz2V6awjlc49Dk2wE12YkdLUWhBL3bS5NxRzFDlh3VSmf0Wv6OTKg6oxN
+ fMkkTmfllxg4g7h1qQ9hG4hwpiKaPVs=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-483-jwdo1WNDNLm32rUHwnJW-A-1; Fri, 12 Jul 2024 08:43:21 -0400
+X-MC-Unique: jwdo1WNDNLm32rUHwnJW-A-1
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-42725ef39e2so15340435e9.0
+ for <qemu-riscv@nongnu.org>; Fri, 12 Jul 2024 05:43:21 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720778241; x=1721383041;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=eqydqafD3kBXYFTMCSsrPDm0JQ1bvA7go1HRfadFKQM=;
- b=vYS552pUaBO+zM34kb3y8L+0mRc9uJl9xbQXkWYFv0nOU2PzLuev4pyvK+887FTmlg
- RBsPfu8N4a2aWIkH5LslnMPZJ20nNJRIEIQkxChydIFXXmYaDaQjBF0TfaktCCwQ+URk
- N/PEMoPcksDyVLqwYj+8pj1R2cVtWx5zKjxcdbSXOKHoKXU4pRRtWONZ6+lQA1hRqV2h
- ZHR1ygGcTQsFtZTTgLSSO9M69v0VR6rfeAVqjM4FTOhyeqqGLlTEwo44SEUcl86IO7ow
- q3zqUigoOi3osv/PBMmcH7fJVaHRLqe5HFcJv2944RYOWyyMUF4YIlZDwuxY+lWjLN4c
- aT0A==
-X-Gm-Message-State: AOJu0YxYSkVd6evKwZAYBlVOei8ezwIK6uWDh+agu/PR7IQJ7ufDba1m
- tGYmMxLDVG4dI2DDKH2xraSpVp7v0y2xSkkiU6FndsU+CQa078DNewO4TfczpK8=
-X-Google-Smtp-Source: AGHT+IHKuuueD0V711CG4W4g5gLv5lqq0F4C8vVH9XnL67iBild06iyzUtLJYyrd4OaaHNmyHOnwOg==
-X-Received: by 2002:a92:ca45:0:b0:382:759d:60f1 with SMTP id
- e9e14a558f8ab-38a5848df9fmr134465915ab.18.1720778240731; 
- Fri, 12 Jul 2024 02:57:20 -0700 (PDT)
-Received: from [192.168.68.109] ([179.193.8.43])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-70b439b220esm7292862b3a.176.2024.07.12.02.57.18
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 12 Jul 2024 02:57:20 -0700 (PDT)
-Message-ID: <d46477b2-b0f0-4bf4-8c20-2ff2466d4d5f@ventanamicro.com>
-Date: Fri, 12 Jul 2024 06:57:16 -0300
+ d=1e100.net; s=20230601; t=1720788201; x=1721393001;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=C1OlqYp3prCTYsg4T2pRkw+AIIXE1wLWyasdZ+NgxOo=;
+ b=C1zwu1K4QA43sGp08nnjzzdO+6SrozjmW9JYohPoZn7P1iJ2Sulc9hjKMZD4RmtyOt
+ OMKZq4XIFcP2++C7ZcXgVyHouJUYWqTIesZOX4pIrJNR4v+L/pKZ+TSZLtmCKTJK2O+e
+ eG8LT1NooTWaXpGVWA5nyFKu42VcVcrRCn9TNByzYgrKgGSGAGAkVRjjD0I8QqhKRdmt
+ 2oUghZvEq+1/QD+3t9tBfen7s9NRTft0iS1awX4A0CbAq6lp20fxfDMKL5sypDlomBCY
+ rWMGrYBl7q6ZZsSsfhgbemdF82QjC5v9UkRLm/uFiTt+KTMVgoTChf8woxsqdmp1Wuvl
+ IzSw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCURIo0qq4O7zBBFnNiL7+SbN98mw9B+Va3TLVcKettzqcNDXJOBxlkIkl7d5CXCKSOn/OJp/DnjA99NnmJ3RROGKd8XaYc=
+X-Gm-Message-State: AOJu0Yw/ipTEllNXDYwBX/1xBmZSabmDkMAiO17oKlPhBHcLvqs1F4RM
+ 5N18nqtAou2eBWnH1toBjrUQf5C7L/sjDsoz3kRsv9lXtXoAQhyS12B5SS8U5/a2vMCLUZXCnDa
+ VDT5lKKxKeqcWqHt+Yao7ITnG5sCQdDXQwXw5SkGeEjZUD3mlCY6k
+X-Received: by 2002:a05:600c:894:b0:426:5e1c:1ad0 with SMTP id
+ 5b1f17b1804b1-426708f202cmr69327485e9.37.1720788200874; 
+ Fri, 12 Jul 2024 05:43:20 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHrlO+RIL0juXBskpDuCr6RMgmGMVeP8KgpYNOp91l4h4dZGORfy3ZKLuNpYLbYXtBC3tZerw==
+X-Received: by 2002:a05:600c:894:b0:426:5e1c:1ad0 with SMTP id
+ 5b1f17b1804b1-426708f202cmr69327305e9.37.1720788200460; 
+ Fri, 12 Jul 2024 05:43:20 -0700 (PDT)
+Received: from imammedo.users.ipa.redhat.com (nat-pool-brq-t.redhat.com.
+ [213.175.37.10]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-367cde847bdsm10093738f8f.41.2024.07.12.05.43.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 12 Jul 2024 05:43:20 -0700 (PDT)
+Date: Fri, 12 Jul 2024 14:43:19 +0200
+From: Igor Mammedov <imammedo@redhat.com>
+To: Sunil V L <sunilvl@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, Palmer Dabbelt
+ <palmer@dabbelt.com>, Alistair Francis <alistair.francis@wdc.com>, Bin Meng
+ <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, Daniel Henrique
+ Barboza <dbarboza@ventanamicro.com>, Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>, "Michael S . Tsirkin" <mst@redhat.com>, Ani
+ Sinha <anisinha@redhat.com>
+Subject: Re: [PATCH v2 0/9] RISC-V: ACPI: Namespace updates
+Message-ID: <20240712144319.233c19a7@imammedo.users.ipa.redhat.com>
+In-Reply-To: <20240708114741.3499585-1-sunilvl@ventanamicro.com>
+References: <20240708114741.3499585-1-sunilvl@ventanamicro.com>
+X-Mailer: Claws Mail 4.3.0 (GTK 3.24.42; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 0/7] target/riscv: Expose RV32 cpu to RV64 QEMU
-To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- liwei1518@gmail.com, bmeng.cn@gmail.com, =?UTF-8?B?55Sy5LiA?=
- <lzw194868@alibaba-inc.com>
-References: <20240710022430.1306-1-zhiwei_liu@linux.alibaba.com>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240710022430.1306-1-zhiwei_liu@linux.alibaba.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::133;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-il1-x133.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=imammedo@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -21
+X-Spam_score: -2.2
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.138,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,84 +110,81 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On Mon,  8 Jul 2024 17:17:32 +0530
+Sunil V L <sunilvl@ventanamicro.com> wrote:
+
+> This series adds few updates to RISC-V ACPI namespace for virt platform.
+> Additionally, it has patches to enable ACPI table testing for RISC-V.
+> 
+> 1) PCI Link devices need to be created outside the scope of the PCI root
+> complex to ensure correct probe ordering by the OS. This matches the
+> example given in ACPI spec as well.
+> 
+> 2) Add PLIC and APLIC as platform devices as well to ensure probing
+> order as per BRS spec [1] requirement.
+> 
+> 3) BRS spec requires RISC-V to use new ACPI ID for the generic UART. So,
+> update the HID of the UART.
+> 
+> 4) Enabled ACPI tables tests for RISC-V which were originally part of
+> [2] but couldn't get merged due to updates required in the expected AML
+> files. I think combining those patches with this series makes it easier
+> to merge since expected AML files are updated.
+> 
+> [1] - https://github.com/riscv-non-isa/riscv-brs
+> [2] - https://lists.gnu.org/archive/html/qemu-devel/2024-06/msg04734.html
+
+btw: CI is not happy about series, see:
+ https://gitlab.com/imammedo/qemu/-/pipelines/1371119552
+also 'cross-i686-tci' job routinely timeouts on bios-tables-test
+but we still keep adding more tests to it.
+We should either bump timeout to account for slowness or
+disable bios-tables-test for that job.
 
 
-On 7/9/24 11:24 PM, LIU Zhiwei wrote:
-> From: 甲一 <lzw194868@alibaba-inc.com>
+> Changes since v1:
+> 	1) Made changes in gpex-acpi.c generic as per feedback from
+> 	   Michael. This changes the DSDT for aarch64/virt and microvm
+> 	   machines. Hence, few patches are added to update the expected
+> 	   DSDT files for those machine so that CI tests don't fail.
+> 	2) Added patches to enable ACPI tables tests for RISC-V
+> 	   including a patch to remove the fallback path to
+> 	   search for expected AML files.
+> 	3) Rebased and added tags.
 > 
-> This patch set aims to expose 32-bit RISC-V cpu to RV64 QEMU. Thus
-> qemu-system-riscv64 can directly boot a RV32 Linux.
+> Sunil V L (9):
+>   hw/riscv/virt-acpi-build.c: Add namespace devices for PLIC and APLIC
+>   hw/riscv/virt-acpi-build.c: Update the HID of RISC-V UART
+>   tests/acpi: Allow DSDT acpi table changes for aarch64
+>   acpi/gpex: Create PCI link devices outside PCI root bridge
+>   tests/acpi: update expected DSDT blob for aarch64 and  microvm
+>   tests/qtest/bios-tables-test.c: Remove the fall back path
+>   tests/acpi: Add empty ACPI data files for RISC-V
+>   tests/qtest/bios-tables-test.c: Enable basic testing for RISC-V
+>   tests/acpi: Add expected ACPI AML files for RISC-V
 > 
-> This patch set has been tested with 6.9.0 Linux Image.
-> And add an avocado test in tests/avocado.
+>  hw/pci-host/gpex-acpi.c                       |  13 ++---
+>  hw/riscv/virt-acpi-build.c                    |  49 +++++++++++++++++-
+>  tests/data/acpi/aarch64/virt/DSDT             | Bin 5196 -> 5196 bytes
+>  .../data/acpi/aarch64/virt/DSDT.acpihmatvirt  | Bin 5282 -> 5282 bytes
+>  tests/data/acpi/aarch64/virt/DSDT.memhp       | Bin 6557 -> 6557 bytes
+>  tests/data/acpi/aarch64/virt/DSDT.pxb         | Bin 7679 -> 7679 bytes
+>  tests/data/acpi/aarch64/virt/DSDT.topology    | Bin 5398 -> 5398 bytes
+>  tests/data/acpi/riscv64/virt/APIC             | Bin 0 -> 116 bytes
+>  tests/data/acpi/riscv64/virt/DSDT             | Bin 0 -> 3576 bytes
+>  tests/data/acpi/riscv64/virt/FACP             | Bin 0 -> 276 bytes
+>  tests/data/acpi/riscv64/virt/MCFG             | Bin 0 -> 60 bytes
+>  tests/data/acpi/riscv64/virt/RHCT             | Bin 0 -> 332 bytes
+>  tests/data/acpi/riscv64/virt/SPCR             | Bin 0 -> 80 bytes
+>  tests/data/acpi/x86/microvm/DSDT.pcie         | Bin 3023 -> 3023 bytes
+>  tests/qtest/bios-tables-test.c                |  40 +++++++++-----
+>  15 files changed, 81 insertions(+), 21 deletions(-)
+>  create mode 100644 tests/data/acpi/riscv64/virt/APIC
+>  create mode 100644 tests/data/acpi/riscv64/virt/DSDT
+>  create mode 100644 tests/data/acpi/riscv64/virt/FACP
+>  create mode 100644 tests/data/acpi/riscv64/virt/MCFG
+>  create mode 100644 tests/data/acpi/riscv64/virt/RHCT
+>  create mode 100644 tests/data/acpi/riscv64/virt/SPCR
+> 
 
-Thanks for this work and sorry for the late review.
-
-One thing to look out as a follow-up is the 'max' CPU. It has the same name
-in both 32 and 64 bits so it'll result in a conflict with the 'max' CPU for
-rv64.
-
-One easy way out is to add a new 'max32' bit CPU for riscv32, which would be an
-alias for the 'max' CPU, then adding 'max32' support in rv64.
-
-
-Thanks,
-
-Daniel
-
-
-> 
-> # make check-avocado AVOCADO_TESTS=/home/jenkins/git/qemu/tests/avocado/boot_linux_console.py:BootLinuxConsole.test_riscv64_virt_rv32i
->    VENVPIP install -e /home/jenkins/git/qemu/python/
-> /home/jenkins/git/qemu/build/pyvenv/bin/python3 -B /home/jenkins/git/qemu/python/scripts/mkvenv.py ensuregroup  --online /home/jenkins/git/qemu/pythondeps.toml avocado
-> mkvenv: checking for avocado-framework(>=88.1, <93.0)
-> mkvenv: checking for pycdlib>=1.11.0
-> mkvenv: installing avocado-framework==88.1, pycdlib>=1.11.0
->    AVOCADO tests/avocado
-> Fetching asset from /home/jenkins/git/qemu/tests/avocado/boot_linux_console.py:BootLinuxConsole.test_riscv64_virt_rv32i
-> Fetching asset from /home/jenkins/git/qemu/tests/avocado/boot_linux_console.py:BootLinuxConsole.test_riscv64_virt_rv32i
-> JOB ID     : 8c2e1ff918d3111d078a52eba9956893afaf9e1d
-> JOB LOG    : /home/jenkins/git/qemu/build/tests/results/job-2024-07-10T09.55-8c2e1ff/job.log
->   (1/1) /home/jenkins/git/qemu/tests/avocado/boot_linux_console.py:BootLinuxConsole.test_riscv64_virt_rv32i: PASS (17.50 s)
-> RESULTS    : PASS 1 | ERROR 0 | FAIL 0 | SKIP 0 | WARN 0 | INTERRUPT 0 | CANCEL 0
-> JOB TIME   : 29.50 s
-> 
-> v5:
->    Rebase to master and add tags
-> 
-> v4:
->    Drop UL completely in PATCH v3 2/7, 4/7, 5/7.
->    Avocado: Add "if=none" to "-drive" option in QEMU command line
-> 
-> v3:
->    Rebase to the master branch
-> 
-> v2:
->    Remove the line that was inadvertently left in PATCH v1 4/6.
->    Add an avocado test.
-> 
-> v1:
->    https://mail.gnu.org/archive/html/qemu-riscv/2024-06/msg00501.html
-> 
-> TANG Tiancheng (7):
->    target/riscv: Add fw_dynamic_info32 for booting RV32 OpenSBI
->    target/riscv: Adjust PMP size for no-MMU RV64 QEMU running RV32
->    target/riscv: Correct SXL return value for RV32 in RV64 QEMU
->    target/riscv: Detect sxl to set bit width for RV32 in RV64
->    target/riscv: Correct mcause/scause bit width for RV32 in RV64 QEMU
->    target/riscv: Enable RV32 CPU support in RV64 QEMU
->    tests/avocado: Add an avocado test for riscv64
-> 
->   configs/targets/riscv64-softmmu.mak |  2 +-
->   hw/riscv/boot.c                     | 35 +++++++++++++++++---------
->   hw/riscv/sifive_u.c                 |  3 ++-
->   include/hw/riscv/boot.h             |  4 ++-
->   include/hw/riscv/boot_opensbi.h     | 29 ++++++++++++++++++++++
->   target/riscv/cpu.c                  | 17 ++++++++++---
->   target/riscv/cpu.h                  |  5 +++-
->   target/riscv/cpu_helper.c           | 25 +++++++++++++------
->   target/riscv/pmp.c                  |  2 +-
->   tests/avocado/boot_linux_console.py | 38 +++++++++++++++++++++++++++++
->   10 files changed, 132 insertions(+), 28 deletions(-)
-> 
 
