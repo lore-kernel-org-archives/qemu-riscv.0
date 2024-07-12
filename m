@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5A66C3DA4B
-	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Jul 2024 12:49:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59E4FC2BD09
+	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Jul 2024 12:50:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sSFhm-0001lP-OY; Fri, 12 Jul 2024 08:48:54 -0400
+	id 1sSFit-0005gV-Jf; Fri, 12 Jul 2024 08:50:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1sSFhl-0001iR-QQ
- for qemu-riscv@nongnu.org; Fri, 12 Jul 2024 08:48:53 -0400
-Received: from mail-ed1-x532.google.com ([2a00:1450:4864:20::532])
+ id 1sSFib-0004wx-QY
+ for qemu-riscv@nongnu.org; Fri, 12 Jul 2024 08:49:48 -0400
+Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1sSFhj-0001P2-7j
- for qemu-riscv@nongnu.org; Fri, 12 Jul 2024 08:48:53 -0400
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-58b966b4166so2438153a12.1
- for <qemu-riscv@nongnu.org>; Fri, 12 Jul 2024 05:48:50 -0700 (PDT)
+ id 1sSFiX-0001bS-7i
+ for qemu-riscv@nongnu.org; Fri, 12 Jul 2024 08:49:44 -0400
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-58b447c511eso2466245a12.2
+ for <qemu-riscv@nongnu.org>; Fri, 12 Jul 2024 05:49:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1720788528; x=1721393328; darn=nongnu.org;
+ d=linaro.org; s=google; t=1720788576; x=1721393376; darn=nongnu.org;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vdOFy6dxjkSCrkZ+P1e1QlY6kQ0YliHjTaABQ6io8rQ=;
- b=tosNO/Nu6xHyDgZPu1VLZpQCnWSl+TV0sBey5zxHPEb8XQvo7ROudCT9pfdVuQeYbU
- Ddcc1j9Y/HZIqXQwxSHuIyNpFB+UlBQsHf2554DPqo1Iyp9RQvs9f7JTUZqyWX6HM3Qh
- DUPXMFCY35MGkqT4e71xKQ4wt+GZrQRUnnKi2z98Xz9gTpe9wOYJXHkTt5La8engSNAq
- 7f9FGIMUZ3fH6KkfIqKsdS10XtDRv2U1WZp0vt+2M7O2oKrNaBDhcHcwnFcu99DGxVNz
- udSSTpVKbl1osRFb3KPOPr8mQUId/XuJRAqxfd7HbF5fOT5w4poa0dg6I+ooKqPjAUIG
- NtOg==
+ bh=CCudL+2uFh9uJpKv9cJcXhgbDu85xfNNfQx4hvGfI60=;
+ b=mUngZlpKNAqtDM+kJ8IgQp2mGMx8v4TKOf+nHVmjdrNROn6W2jEIKaa5fyttML0OUH
+ DdcuhbK+S92RmUWfy9Vm6MYQf99n7ByAico6NGG9PKbVytgEm7BsM4MDL3bPMiQ31U8u
+ CfsbzpTo1tKZBEZ2Z67aidCcHESWmOXHUCqqYXS1V+pgU6ERYrM8mTKsOiJ33EcFirmz
+ d2R1p1UcWQLJqwR4wJigN13tN79QD5QzbWdwV/4+zRc4Mk9ow4gwn1RYIfCzsaTFohy5
+ v1sQ0C1KHdfYaiY0lKtBImRDjyshLYgcZaLP7ZTojWiKY6xLYkbt2qaJkQuPYwJDxhXp
+ LTrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720788528; x=1721393328;
+ d=1e100.net; s=20230601; t=1720788576; x=1721393376;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=vdOFy6dxjkSCrkZ+P1e1QlY6kQ0YliHjTaABQ6io8rQ=;
- b=c8FjhVGCyl7bSVx4sv4IKadckuZmvoELRdBzQQkKZJo0G/qAA1N08SwyEJPtEP5Sxt
- 5vSTsrsHz+cqvX5VrlfYxzI3s4F+XkJoOlvhC/AuIgsdp06TrMkxzxd4iNTJ+BT9hCiJ
- pyoslzDXU622JC9b2tknnlFMibPqvIArXK7p2GFzH+KYbmxZQzOyPjL1Ga/zZK/QxVw6
- bxPECWPTPfappEYzh002FgztzlhlQoi6F1cPZQUmnIBw6d+AnREuL6BY4clegzl3D0b0
- zDEGBDy6B3GHQ9/ce7gS6WrBadFoHQ4sZ2NpMbn/9lGcKHULxfmgk9SUGUQgCwbfk3tN
- 7iGg==
+ bh=CCudL+2uFh9uJpKv9cJcXhgbDu85xfNNfQx4hvGfI60=;
+ b=Y+MrzDi3jJjYaD1SH4JhEVmO92w6BU0CXeYMhOBaZws3edaCLQc0OuaQCnuNnYOJLY
+ ZseaYp5MFCSkwNxPzttmIeG++hfm8pT6foUIRRlm8VhTmeF55ndCIhsVXc/8s43meC5i
+ ZwtsP8schcn62Y2rBSrMvc+x0wjeETlj9fDz3HYXrd5TMD8kRafzIaZZexiRWJ8NAL22
+ MBXyw+OgLFgVkCnjMICX/LOIw0pKZropofOLEBA9Obi/OIYMSYXJSei3HjmnFDx3KB8t
+ oiD2/w3JiHepCNm1vwlESLI7T6kimgM9dHo6iyeFNWsANBrpfSOoOJAT6YYRg1idWBwQ
+ SvIA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWo69Hg8NCk7diEmSecbE+4CY4uGjIXrHGyf6adrY9a8BbF2pZjpGulJv6WoaYCnqQu6+0esJV7XiIZa7DEHLSDZJJ5nRM=
-X-Gm-Message-State: AOJu0Yz5Dk3zM4/3CJw9b/7A0gJSlc4LF7umsJnDf0vGAeklVH/G5kly
- fQoiUNvNkR41kyxF/PWyrlfKnOv29H7uArRb59+xd5o2AewRhKoJsX9/hp+HgkUmS3mskHt9xej
- e4A2QZs1Vq3N3rzUhGe02pBHUwnYL4GYMAwp/JQ==
-X-Google-Smtp-Source: AGHT+IEnkOW/XZVm9n+PCbXy26cBw54AAv+itGuFwGWAS+HDO+EeZzUBoH6x8qdHCiObZlDgiL0iIKOlp98vpzsV6+w=
-X-Received: by 2002:a05:6402:34d5:b0:58d:45af:43dd with SMTP id
- 4fb4d7f45d1cf-594bcba7d38mr8801006a12.36.1720788527970; Fri, 12 Jul 2024
- 05:48:47 -0700 (PDT)
+ AJvYcCXsGT0wrxICbujEILcIr3goeJkPUjLBKXtBUeYbyI0pCNU2/sgIGGXNtgF7cpxgDsCmJnMeLDC+sOs3D7+dhZcBQQUNkDI=
+X-Gm-Message-State: AOJu0YzfVholiewop/wFmdZikGcNsoScl2Q8BMZUBM7VgR11utB+qtLw
+ O+xMlbhv7lR5v+OuTPIewIeOrB6fJBWefQUr/Yr+e3IRxl/F97NMkNp/p/IogqbPjbT9zZ0Q57x
+ En3gpMtpNgZrzyf9Dv1Oiq2lNvwTrNQP+RaiSjdvJ5mTcz91A
+X-Google-Smtp-Source: AGHT+IHqxoU+gpj9yOgjjiEJNocgYqRV/czK1W/CuOaLnDGUdsvWDdmUekcEUehsnEaV/Ne1NmbIEXc0ZxeKC+ieU7A=
+X-Received: by 2002:a05:6402:26d3:b0:58e:2783:242f with SMTP id
+ 4fb4d7f45d1cf-594baf91224mr9068100a12.10.1720788576604; Fri, 12 Jul 2024
+ 05:49:36 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240710032814.104643-1-richard.henderson@linaro.org>
- <20240710032814.104643-2-richard.henderson@linaro.org>
-In-Reply-To: <20240710032814.104643-2-richard.henderson@linaro.org>
+ <20240710032814.104643-3-richard.henderson@linaro.org>
+In-Reply-To: <20240710032814.104643-3-richard.henderson@linaro.org>
 From: Peter Maydell <peter.maydell@linaro.org>
-Date: Fri, 12 Jul 2024 13:48:36 +0100
-Message-ID: <CAFEAcA_BsY1mSJ=BBfHzNemQkfy9FqD_x_38RkRdST4cur5bhg@mail.gmail.com>
-Subject: Re: [PATCH v2 01/13] accel/tcg: Move {set,
- clear}_helper_retaddr to cpu_ldst.h
+Date: Fri, 12 Jul 2024 13:49:25 +0100
+Message-ID: <CAFEAcA-PKsW-PfGqOK3RgfyfJUsEHWYMeTyikgrEWSYvAmMEow@mail.gmail.com>
+Subject: Re: [PATCH v2 02/13] target/arm: Use cpu_env in cpu_untagged_addr
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongu.org, 
  qemu-s390x@nongnu.org, qemu-riscv@nongnu.org, balaton@eik.bme.hu, 
  max.chou@sifive.com
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::532;
- envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x532.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::531;
+ envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x531.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -96,20 +95,32 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On Wed, 10 Jul 2024 at 04:30, Richard Henderson
 <richard.henderson@linaro.org> wrote:
 >
-> Use of these in helpers goes hand-in-hand with tlb_vaddr_to_host
-> and other probing functions.
+> In a completely artifical memset benchmark object_dynamic_cast_assert
+> dominates the profile, even above guest address resolution and
+> the underlying host memset.
 >
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
->  accel/tcg/user-retaddr.h | 28 ----------------------------
->  include/exec/cpu_ldst.h  | 34 ++++++++++++++++++++++++++++++++++
->  accel/tcg/cpu-exec.c     |  3 ---
->  accel/tcg/user-exec.c    |  1 -
->  4 files changed, 34 insertions(+), 32 deletions(-)
->  delete mode 100644 accel/tcg/user-retaddr.h
+>  target/arm/cpu.h | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/target/arm/cpu.h b/target/arm/cpu.h
+> index d8eb986a04..ccfb9349a3 100644
+> --- a/target/arm/cpu.h
+> +++ b/target/arm/cpu.h
+> @@ -3309,8 +3309,8 @@ extern const uint64_t pred_esz_masks[5];
+>   */
+>  static inline target_ulong cpu_untagged_addr(CPUState *cs, target_ulong x)
+>  {
+> -    ARMCPU *cpu = ARM_CPU(cs);
+> -    if (cpu->env.tagged_addr_enable) {
+> +    CPUARMState *env = cpu_env(cs);
+> +    if (env->tagged_addr_enable) {
+>          /*
+>           * TBI is enabled for userspace but not kernelspace addresses.
+>           * Only clear the tag if bit 55 is clear.
 
-Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
+(This one's now upstream as commit efceb7d2bd5c.)
 
-thanks
 -- PMM
 
