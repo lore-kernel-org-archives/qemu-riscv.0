@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 740B6C2BD09
-	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Jul 2024 09:07:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8BC9C3DA4A
+	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Jul 2024 09:08:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sSCF9-0006ND-OD; Fri, 12 Jul 2024 05:07:07 -0400
+	id 1sSCFz-0001h5-P1; Fri, 12 Jul 2024 05:08:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1sSCF6-0006DZ-SB
- for qemu-riscv@nongnu.org; Fri, 12 Jul 2024 05:07:05 -0400
-Received: from mail-ed1-x536.google.com ([2a00:1450:4864:20::536])
+ id 1sSCFs-0001Mj-OQ
+ for qemu-riscv@nongnu.org; Fri, 12 Jul 2024 05:07:54 -0400
+Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1sSCF4-0000IZ-GY
- for qemu-riscv@nongnu.org; Fri, 12 Jul 2024 05:07:04 -0400
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-57d05e0017aso2373346a12.1
- for <qemu-riscv@nongnu.org>; Fri, 12 Jul 2024 02:07:02 -0700 (PDT)
+ id 1sSCFr-0000OV-0Q
+ for qemu-riscv@nongnu.org; Fri, 12 Jul 2024 05:07:52 -0400
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-58b447c511eso2185838a12.2
+ for <qemu-riscv@nongnu.org>; Fri, 12 Jul 2024 02:07:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1720775220; x=1721380020; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=H6drIpNSAG4O2Lq+VdYMCtUtd/YL/OtX2wKOhTwAZlk=;
- b=V3gdUdK+Qz9B4tqPQnbJ0Dq/80JNhMFG4DRb5d6Ls14b+iU4PWxlq//IUzVVxAm+MH
- Li2XRZsz/T1WSFUC2ztQy056Nyh6wLd7pNCobkGQ01z4OJplPtYGSPLJ3jgH/AGz9kB4
- 5z1846AQSgCIhgXqQyp8QxaJrbC2W6gDK4dDGX++srPOEpEgDgBnMEuEq590biqJH+IE
- R+NLRnV18H7oXXU3ZXMJRMVydAFE2csJzuMm6V7dnvUeVHksZwoPFBpFbKoiZd+I8X2m
- VzF0Cow9oCXco0x6E93+wGut6eEmHYUptBfv2pzeOgpA5ftag2OJS85RC/1r+I6FviKW
- 6UaQ==
+ d=sifive.com; s=google; t=1720775269; x=1721380069; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=70fpKTV7vrS7+zVA9+1Xo3Gc7LA6ZjoXNJVfSTaG14w=;
+ b=PJH1E1wxDgruoAAuqSrWM4VK9kZk9bP4du/rpU+JEbu2JmZHSHrUJhKTtrkFaNhfqW
+ KagXBUC/LzMFSwJm1J6VGyQVq8E5q+bzTIAfw5P6S7PQdrRhUpu1GR4tMeiGQbmgkOpy
+ fdgrzvb2P2XdTehdtxEoFe8jerPYBg59Pzmbn4wSif7hsMoqmLIDLslnHCiMrNlikDDG
+ w6hpqIWmTaZkRHi176XwsPxtNbmBbaP3DD6itr/i0UHBwkQ5js36zUtLHGFXkUkCl6kH
+ UAHM4y8WpT3J6oCSIIKq6aBbPYg+GjBHFvtzifMyOIqpp8Itbgy9tuFlHMeeDUUg2En5
+ W02Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720775220; x=1721380020;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=H6drIpNSAG4O2Lq+VdYMCtUtd/YL/OtX2wKOhTwAZlk=;
- b=guru85+mMSEMYaZr4hZO6LGPp+/Xz5lzSW9iNul9pFNPXqbYr7nnOIQyKy2wmg+Fdt
- U4KYLDfSD32J+GhUeVFRv5JjFZPaRChZE/eVCDa8j2SFzE2yy9H9/3S5rOAkcokFq6Vr
- +y8LZzeJbn5q4SmuntK3DDV9sDxAoaFj3yhHR3Drb107aCkcvQ+iDpa70GGUlrBeJ3Gv
- nVHFVVDNyddwr/TFrUNw0EerhFhRo9AGpFCifVpaP56JJpqw6M8TPu6DrxrZ3pkFpvUz
- tLRW8IYxWu1CO3DykmGF/mq59ITGa1XfLq83/TNd4+rRTcND/E6L8CovuTneNL6D+Tud
- Qvug==
+ d=1e100.net; s=20230601; t=1720775269; x=1721380069;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=70fpKTV7vrS7+zVA9+1Xo3Gc7LA6ZjoXNJVfSTaG14w=;
+ b=FwoH9SO9lSIxu5yEj0/PcjcfketzaKQXjSu3GpY1pIZl7NIiQQ793FXBgs5QkVKTmf
+ pC4LmOgEX3s7cY11J456r17G4IORLa804jirXV9u3ZX5OJOH3poW6k2Z9Ub9gKDshe4s
+ j6h6CDQsVJh9OpHKf8XT+2bmd6KLw6wpNMg3sGC8uj1RSPFV7YN48nvovQ47fkJQboI2
+ PLffj79QP++k4t659qtry6higjjPBhaSdWcgAnW0qX2ZFm7pUP5eSEZplJHOVsqv2PMy
+ dHyv/L5AO20uNXwejNTVs//fOpSuMSQryGXbBEGhlky0tSz7+XCgTd9LRHySkvL1zqVt
+ Eytw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWdNjIlL85KeByiuCD1mvwsomCUg+/m7WZDasnXP5LjPGyTPKvD4UKgU1pHgVtWXbzp5gQjbDnLT4vYQD9bFBBZV4ds/lQ=
-X-Gm-Message-State: AOJu0YwXJo5DUnsaeQTFL0j/tMKRpg6AJqoa3GHPPgbSn2IYUbgBgW64
- Bn8/JI1ouAsCcvV+lsKWUXzHykF0uOVHY/yXnkqDwQP5UvfBY4qOV1lDAaxHqu2QKNJyb9ZNgt7
- hgYbIobCDjjauhPN3XkEPDbN3ShIsB74+tSzLHQ==
-X-Google-Smtp-Source: AGHT+IHrQuWfRa72YN4TTgMo0+6ry9rOsG+quSW1b+x4L+IPZCwTKtaD6dc6uzZgB1RWh5rjgbd4m17w7KU2kN6kBZA=
-X-Received: by 2002:a05:6402:2071:b0:58b:565d:ac92 with SMTP id
- 4fb4d7f45d1cf-594ba6953c2mr6359999a12.22.1720775220369; Fri, 12 Jul 2024
- 02:07:00 -0700 (PDT)
+ AJvYcCVgchbQhAW7N+vLhIJtsTdzKoiPTRcOy486RdYca7y1fZMbMp+GF+DaRSgbPzXf/VUOlKVriNzv2N3JGJ9RQnDIH6qgSi4=
+X-Gm-Message-State: AOJu0YyRuDUdHqfuw8sCFP7QWKV0LeylDzAuPZVeBhXIigsMufjdfA8/
+ S0nOMfcQrH0LxSzLkFAyOZjwWS309sGaO/JprFsxbgZcEZTup+o7DgGE8xQAp8zdOnjtIAOd0bu
+ 76l0sILU+hbo+Ht8HIcnc/cAcj+IPIn1OW8rAFA==
+X-Google-Smtp-Source: AGHT+IHFxMvDe6KG5yuo6sWl+uSRc+qlgvDkoP3O3VeEnRHKhclqJDkhKbSdNubsEfNL9BBX/PTg4DBPKJs4TCypQJU=
+X-Received: by 2002:a05:6402:33d5:b0:57d:3ea:3862 with SMTP id
+ 4fb4d7f45d1cf-594bc7c9133mr6840141a12.27.1720775269506; Fri, 12 Jul 2024
+ 02:07:49 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240709113652.1239-1-zhiwei_liu@linux.alibaba.com>
- <20240709113652.1239-3-zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20240709113652.1239-3-zhiwei_liu@linux.alibaba.com>
+ <20240709113652.1239-4-zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20240709113652.1239-4-zhiwei_liu@linux.alibaba.com>
 From: Jim Shu <jim.shu@sifive.com>
-Date: Fri, 12 Jul 2024 17:06:49 +0800
-Message-ID: <CALw707oVpuFBVeDDu65EcghuNS9nJGum4EtUvQe4oQNDEMSxGA@mail.gmail.com>
-Subject: Re: [PATCH v4 02/11] disas/riscv: Support zimop disassemble
+Date: Fri, 12 Jul 2024 17:07:38 +0800
+Message-ID: <CALw707qQ9NqZfQj7xLy0X9HnSfc8uQmUAF66ibKBP_6qW-AqWA@mail.gmail.com>
+Subject: Re: [PATCH v4 03/11] target/riscv: Add zcmop extension
 To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com, 
  alistair.francis@wdc.com, dbarboza@ventanamicro.com, liwei1518@gmail.com, 
  bmeng.cn@gmail.com, Deepak Gupta <debug@rivosinc.com>
-Content-Type: multipart/alternative; boundary="000000000000bfb3a5061d0933ae"
-Received-SPF: pass client-ip=2a00:1450:4864:20::536;
- envelope-from=jim.shu@sifive.com; helo=mail-ed1-x536.google.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::534;
+ envelope-from=jim.shu@sifive.com; helo=mail-ed1-x534.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -92,39 +94,33 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---000000000000bfb3a5061d0933ae
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Jul 9, 2024 at 7:41=E2=80=AFPM LIU Zhiwei <zhiwei_liu@linux.alibaba=
-.com>
-wrote:
-
+On Tue, Jul 9, 2024 at 7:40=E2=80=AFPM LIU Zhiwei <zhiwei_liu@linux.alibaba=
+.com> wrote:
+>
+> Zcmop defines eight 16-bit MOP instructions named C.MOP.n, where n is
+> an odd integer between 1 and 15, inclusive. C.MOP.n is encoded in
+> the reserved encoding space corresponding to C.LUI xn, 0.
+>
+> Unlike the MOPs defined in the Zimop extension, the C.MOP.n instructions
+> are defined to not write any register.
+>
+> In current implementation, C.MOP.n only has an check function, without an=
+y
+> other more behavior.
+>
 > Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-> Acked-by: Alistair Francis <alistair.francis@wdc.com>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 > Reviewed-by: Deepak Gupta <debug@rivosinc.com>
+> ---
+>  target/riscv/cpu.c                          |  2 ++
+>  target/riscv/cpu_cfg.h                      |  1 +
+>  target/riscv/insn16.decode                  |  1 +
+>  target/riscv/insn_trans/trans_rvzcmop.c.inc | 29 +++++++++++++++++++++
+>  target/riscv/tcg/tcg-cpu.c                  |  5 ++++
+>  target/riscv/translate.c                    |  1 +
+>  6 files changed, 39 insertions(+)
+>  create mode 100644 target/riscv/insn_trans/trans_rvzcmop.c.inc
 >
 
 Reviewed-by: Jim Shu <jim.shu@sifive.com>
-
---000000000000bfb3a5061d0933ae
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr">On Tue, Jul 9, 2024 at 7:41=E2=80=AFPM LI=
-U Zhiwei &lt;<a href=3D"mailto:zhiwei_liu@linux.alibaba.com" target=3D"_bla=
-nk">zhiwei_liu@linux.alibaba.com</a>&gt; wrote:<br></div><div class=3D"gmai=
-l_quote"><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8e=
-x;border-left:1px solid rgb(204,204,204);padding-left:1ex">Signed-off-by: L=
-IU Zhiwei &lt;<a href=3D"mailto:zhiwei_liu@linux.alibaba.com" target=3D"_bl=
-ank">zhiwei_liu@linux.alibaba.com</a>&gt;<br>
-Acked-by: Alistair Francis &lt;<a href=3D"mailto:alistair.francis@wdc.com" =
-target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
-Reviewed-by: Deepak Gupta &lt;<a href=3D"mailto:debug@rivosinc.com" target=
-=3D"_blank">debug@rivosinc.com</a>&gt;<br></blockquote><div><br>Reviewed-by=
-: Jim Shu &lt;<a href=3D"mailto:jim.shu@sifive.com" target=3D"_blank">jim.s=
-hu@sifive.com</a>&gt;=C2=A0=C2=A0=C2=A0</div></div>
-</div>
-
---000000000000bfb3a5061d0933ae--
 
