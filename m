@@ -4,59 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44EF8C3DA42
-	for <qemu-riscv@archiver.kernel.org>; Sat, 13 Jul 2024 18:57:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D3C2C3DA49
+	for <qemu-riscv@archiver.kernel.org>; Sun, 14 Jul 2024 07:47:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sShwB-0004dA-Md; Sat, 13 Jul 2024 14:57:39 -0400
+	id 1sStwb-0008Jr-2t; Sun, 14 Jul 2024 03:46:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <conor@kernel.org>)
- id 1sShwA-0004at-Em; Sat, 13 Jul 2024 14:57:38 -0400
-Received: from dfw.source.kernel.org ([2604:1380:4641:c500::1])
+ (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1sStwZ-0008Fy-Cj
+ for qemu-riscv@nongnu.org; Sun, 14 Jul 2024 03:46:51 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <conor@kernel.org>)
- id 1sShw8-0001cd-Qo; Sat, 13 Jul 2024 14:57:38 -0400
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 41E6F60AC9;
- Sat, 13 Jul 2024 18:57:25 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EA41DC32781;
- Sat, 13 Jul 2024 18:57:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1720897044;
- bh=sxkTQKhKJZkxaA9+SahGtwPnweSHl9Wseh7YPQtVl+0=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=s/WZOjlddIQmxmf29lyn08qGeSZeYqwRRGj/0T3JCmQFnhYySVXYL86Qj/hW0UsIh
- Of6BB514koTIH3RLVxJTNAkMINn/U5qmsaBwpDPn6YRKhMgkADFD61HIv4TQWzU8Mv
- ZnqJqoi5oqtNZscYDB4vQPd/m4DF1S4ywEDZBoxdoR7WynU2+i22B88XpxWK01+L9s
- HpIXlmqgYY6N86WoXSQAlb7LADfHgnfv46efTI8S0yi/1gI0FNLvAuzmiicuDmDprS
- Hr8wX6/AOfNZfGJILeRb9GwaOj47lB/ygLlb4SEOVEobHxLWl/OYkkmGHq5N1MdBHg
- i9HqUSsB5Hvfw==
-Date: Sat, 13 Jul 2024 19:57:20 +0100
-From: Conor Dooley <conor@kernel.org>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- bmeng@tinylab.org, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- Anup Patel <apatel@ventanamicro.com>
-Subject: Re: [PATCH] hw/riscv/virt.c: re-insert and deprecate 'riscv, delegate'
-Message-ID: <20240713-wreckage-humid-79c9acd37542@spud>
-References: <20240713174325.107685-1-dbarboza@ventanamicro.com>
+ (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1sStwX-0005mc-4j
+ for qemu-riscv@nongnu.org; Sun, 14 Jul 2024 03:46:51 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1720943207;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=/WHD3oTajkUFk9t4DLQ9JCWDvoQfv3i/z/ncx3CwhAk=;
+ b=Wes56DD58v/Z5nBmE0rtAxvwMONyQc6EYdbMPFk28pcvPUQZRZN8xCX1Hidc2XVeFHwabp
+ Zj5adImwj1Uzvtk/XQ9KARw1HnumvW3p4rUHJGfPnS1h+/R2n64NVzypoabkszYoRAc0vy
+ aGJE5UJWp7y91k2NmS1k2JrfW82EggY=
+Received: from mail-lf1-f69.google.com (mail-lf1-f69.google.com
+ [209.85.167.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-354-2TmmubTJOKW5hSC18eEQZw-1; Sun, 14 Jul 2024 03:46:45 -0400
+X-MC-Unique: 2TmmubTJOKW5hSC18eEQZw-1
+Received: by mail-lf1-f69.google.com with SMTP id
+ 2adb3069b0e04-52e9b943e6dso3170919e87.2
+ for <qemu-riscv@nongnu.org>; Sun, 14 Jul 2024 00:46:45 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1720943204; x=1721548004;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=/WHD3oTajkUFk9t4DLQ9JCWDvoQfv3i/z/ncx3CwhAk=;
+ b=PBKNM513SWIbKvoWroNaoCnWVrjDQUc6fBzvNoAKg7Oj7zPL4yAZQDRAcQs3QImTxN
+ zYHsFG+Gc+nFEqwSzw8ekZJELxKywA8T9uI/XMMZhu18k+iHxf/+rIxWYzZ/ot4PndOi
+ tAFtMDe4MBPbksRo/nvxIqDKS4zMyqT++UVQRfMsjN1xg1lPyV0/M0iZCuBAyAbs3hIg
+ PUDtKheNF3T8m3E6yJY24M2qVCAOJJzsqEMR1GzEXisO9bK1whhFgvw6AgOHl4Bg+BX1
+ j9zpwvUjWJl5z/l+G8XIrce1Id8k4+P4vn64l3JIgUDODIN3Zt9o4KaWO+9R3q1U9U41
+ TmDQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWj/P2Tl5iJD2AOlp9pP3i1JXoN1f+k8Tw8HkYq95Amp5rry3534HMEyw2IPL120TG74r+bbMkGa+/ksrQuGtF67fdVm1k=
+X-Gm-Message-State: AOJu0Yx7uCo3jDS5mtRzRwxWSVUwLZBN+GY/c8GMsrluJ4rSMADknmo9
+ CU/kx5G3KgoA1jY5XUw1/yfMJ1VozL6nATdre0Rh0fabB3gKetMs1EbeSDk6+V1tegbhGUXB35e
+ kYfdxmcsuDFGVZ7srr4OsQSBg8F/0/4uG5deQDKePGmIHm6YdX3cm
+X-Received: by 2002:a05:6512:3ca4:b0:52c:859c:91dd with SMTP id
+ 2adb3069b0e04-52eb998e6aemr12911365e87.5.1720943204240; 
+ Sun, 14 Jul 2024 00:46:44 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEF9Zjyqo7KkW28tMLk2o5m/EjC3XgCNWJhOzoE1SXdZTSA0ib155F8cHkIO3U/hyZIJbPmiQ==
+X-Received: by 2002:a05:6512:3ca4:b0:52c:859c:91dd with SMTP id
+ 2adb3069b0e04-52eb998e6aemr12911308e87.5.1720943202492; 
+ Sun, 14 Jul 2024 00:46:42 -0700 (PDT)
+Received: from redhat.com ([2a0d:6fc7:240:5146:27c:20a3:47d4:904])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4279f276c52sm78255915e9.22.2024.07.14.00.46.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 14 Jul 2024 00:46:41 -0700 (PDT)
+Date: Sun, 14 Jul 2024 03:46:36 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Igor Mammedov <imammedo@redhat.com>
+Cc: Daniel =?iso-8859-1?Q?P=2E_Berrang=E9?= <berrange@redhat.com>,
+ Sunil V L <sunilvl@ventanamicro.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Ani Sinha <anisinha@redhat.com>
+Subject: Re: [PATCH v2 0/9] RISC-V: ACPI: Namespace updates
+Message-ID: <20240714034105-mutt-send-email-mst@kernel.org>
+References: <20240708114741.3499585-1-sunilvl@ventanamicro.com>
+ <20240712144319.233c19a7@imammedo.users.ipa.redhat.com>
+ <ZpEmuB6xyh2K77Ic@redhat.com>
+ <20240712155010.3756bb82@imammedo.users.ipa.redhat.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="vPxhV5sTL/Svjn3I"
+In-Reply-To: <20240712155010.3756bb82@imammedo.users.ipa.redhat.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
-In-Reply-To: <20240713174325.107685-1-dbarboza@ventanamicro.com>
-Received-SPF: pass client-ip=2604:1380:4641:c500::1;
- envelope-from=conor@kernel.org; helo=dfw.source.kernel.org
-X-Spam_score_int: -44
-X-Spam_score: -4.5
-X-Spam_bar: ----
-X-Spam_report: (-4.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.143,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=mst@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -21
+X-Spam_score: -2.2
+X-Spam_bar: --
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.143,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -72,45 +112,67 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On Fri, Jul 12, 2024 at 03:50:10PM +0200, Igor Mammedov wrote:
+> On Fri, 12 Jul 2024 13:51:04 +0100
+> Daniel P. Berrangé <berrange@redhat.com> wrote:
+> 
+> > On Fri, Jul 12, 2024 at 02:43:19PM +0200, Igor Mammedov wrote:
+> > > On Mon,  8 Jul 2024 17:17:32 +0530
+> > > Sunil V L <sunilvl@ventanamicro.com> wrote:
+> > >   
+> > > > This series adds few updates to RISC-V ACPI namespace for virt platform.
+> > > > Additionally, it has patches to enable ACPI table testing for RISC-V.
+> > > > 
+> > > > 1) PCI Link devices need to be created outside the scope of the PCI root
+> > > > complex to ensure correct probe ordering by the OS. This matches the
+> > > > example given in ACPI spec as well.
+> > > > 
+> > > > 2) Add PLIC and APLIC as platform devices as well to ensure probing
+> > > > order as per BRS spec [1] requirement.
+> > > > 
+> > > > 3) BRS spec requires RISC-V to use new ACPI ID for the generic UART. So,
+> > > > update the HID of the UART.
+> > > > 
+> > > > 4) Enabled ACPI tables tests for RISC-V which were originally part of
+> > > > [2] but couldn't get merged due to updates required in the expected AML
+> > > > files. I think combining those patches with this series makes it easier
+> > > > to merge since expected AML files are updated.
+> > > > 
+> > > > [1] - https://github.com/riscv-non-isa/riscv-brs
+> > > > [2] - https://lists.gnu.org/archive/html/qemu-devel/2024-06/msg04734.html  
+> > > 
+> > > btw: CI is not happy about series, see:
+> > >  https://gitlab.com/imammedo/qemu/-/pipelines/1371119552
+> > > also 'cross-i686-tci' job routinely timeouts on bios-tables-test
+> > > but we still keep adding more tests to it.
+> > > We should either bump timeout to account for slowness or
+> > > disable bios-tables-test for that job.  
+> > 
+> > Asumming the test is functionally correct, and not hanging, then bumping
+> > the timeout is the right answer. You can do this in the meson.build
+> > file
+> 
+> I think test is fine, since once in a while it passes (I guess it depends on runner host/load)
+> 
+> Overal job timeout is 1h, but that's not what fails.
+> What I see is, the test aborts after 10min timeout.
+> it's likely we hit boot_sector_test()/acpi_find_rsdp_address_uefi() timeout.
+> That's what we should try to bump.
+> 
+> PS:
+> I've just started the job with 5min bump, lets see if it is enough.
 
---vPxhV5sTL/Svjn3I
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Sat, Jul 13, 2024 at 02:43:25PM -0300, Daniel Henrique Barboza wrote:
-> Commit b1f1e9dcfa renamed 'riscv,delegate' to 'riscv,delegation' since
-> it is the correct name as per dt-bindings, and the absence of the
-> correct name will result in validation fails when dumping the dtb and
-> using dt-validate.
->=20
-> But this change has a side-effect: every other firmware available that
-> is AIA capable is using 'riscv,delegate', and it will fault/misbehave if
-> this property isn't present. The property was added back in QEMU 7.0,
-> meaning we have 2 years of firmware development using the wrong
-> property.
->=20
-> Re-introducing 'riscv,delegate' while keeping 'riscv,delegation' will
-> make current firmwares to keep booting with the 'virt' machine and
-> dt-validate won't complain about it since we're still using the expected
-> property 'riscv,delegation'. 'riscv,delegate' is then marked for future
-> deprecation and its use is being discouraged.
-
-dt-validate /should/ complain about it - does yours not? It's probably a
-bug if it doesn't. Whether dt-validate complains or not here I don't
-think is relevant though, only the impact on firmware of removing it.
+Because we should wait for 5min CPU time, not wall time.
+Why don't we do that?
+Something like getrusage should work I think.
 
 
---vPxhV5sTL/Svjn3I
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
+> > We should never disable tests only in CI, because non-CI users
+> > are just as likely to hit timeouts.
+> > 
+> > 
+> > With regards,
+> > Daniel
 
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZpLOEAAKCRB4tDGHoIJi
-0iPUAQCaQSKdKXmHJBVuukCRlxy7xTGbdMorMWTjSqTOAuvqvQEAzzCBlRSvxqFY
-pQads1ldLWix/eVQ1vprDzknufVS4g4=
-=jeVf
------END PGP SIGNATURE-----
-
---vPxhV5sTL/Svjn3I--
 
