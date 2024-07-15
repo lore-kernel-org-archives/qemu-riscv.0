@@ -4,59 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94320C3DA5E
-	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Jul 2024 10:15:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31952C3DA59
+	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Jul 2024 12:44:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sTIjV-0002wG-CT; Mon, 15 Jul 2024 06:15:01 -0400
+	id 1sTL3h-0007Gl-Ll; Mon, 15 Jul 2024 08:44:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ethan84@andestech.com>)
- id 1sTIjT-0002pS-AW; Mon, 15 Jul 2024 06:14:59 -0400
-Received: from 60-248-80-70.hinet-ip.hinet.net ([60.248.80.70]
- helo=Atcsqr.andestech.com)
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1sTL3g-0007Fm-BW
+ for qemu-riscv@nongnu.org; Mon, 15 Jul 2024 08:44:00 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ethan84@andestech.com>)
- id 1sTIjR-0003Fw-3M; Mon, 15 Jul 2024 06:14:59 -0400
-Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 46FAEdjG081451
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
- Mon, 15 Jul 2024 18:14:39 +0800 (+08)
- (envelope-from ethan84@andestech.com)
-Received: from atcpcw16.andestech.com (10.0.1.106) by ATCPCS34.andestech.com
- (10.0.1.134) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 15 Jul
- 2024 18:14:40 +0800
-To: <qemu-devel@nongnu.org>
-CC: <richard.henderson@linaro.org>, <pbonzini@redhat.com>, <peterx@redhat.com>,
- <david@redhat.com>, <philmd@linaro.org>, <palmer@dabbelt.com>,
- <alistair.francis@wdc.com>, <bmeng.cn@gmail.com>,
- <liwei1518@gmail.com>, <dbarboza@ventanamicro.com>,
- <zhiwei_liu@linux.alibaba.com>, <qemu-riscv@nongnu.org>, Ethan Chen
- <ethan84@andestech.com>
-Subject: [PATCH v8 8/8] hw/riscv/virt: Add IOPMP support
-Date: Mon, 15 Jul 2024 18:14:34 +0800
-Message-ID: <20240715101434.1249621-1-ethan84@andestech.com>
-X-Mailer: git-send-email 2.42.0.345.gaab89be2eb.dirty
-In-Reply-To: <20240715095702.1222213-1-ethan84@andestech.com>
-References: <20240715095702.1222213-1-ethan84@andestech.com>
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1sTL3e-0004bE-K5
+ for qemu-riscv@nongnu.org; Mon, 15 Jul 2024 08:44:00 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1721047437;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=h35hl/jHrebhXaw3QkF2/ztgJRYyFPTkbphcaT1d35Q=;
+ b=Nj52cIJcqt9l97riGfrHvQHweXaZYQSSId2r1F2Il9+nr8hMgfUcGOlR+l0C4FxUv47fuX
+ ehamS2/tkJWDMka1k3s4J1LgzBdPzyvowR19kKWz6EuMf0o0N9T8BQ0VAc0ghdtx3dX139
+ QCJwiakNFZEGCpcVNgdybYxvwYbHcoc=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-248-rrw7P4yNPmGJrBf0IOi71A-1; Mon, 15 Jul 2024 08:43:55 -0400
+X-MC-Unique: rrw7P4yNPmGJrBf0IOi71A-1
+Received: by mail-wr1-f71.google.com with SMTP id
+ ffacd0b85a97d-36789def10eso2955172f8f.0
+ for <qemu-riscv@nongnu.org>; Mon, 15 Jul 2024 05:43:55 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1721047434; x=1721652234;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=h35hl/jHrebhXaw3QkF2/ztgJRYyFPTkbphcaT1d35Q=;
+ b=w3fs3Si25FmkFU9E0PXAgO19sXUloREm97S9SDB0CbYLLciYpFClxKJhj0nr92eQ1R
+ QKTR1zUvqIxq7iO1/NWajWi9VlPqP1N5paoaZyqbf8kNbgWf+XgiaydDpPNasomwzNw3
+ 676SWaT1NIOK/wRUdWH7CZWcOGNjaKUM9F3Q4j0TqXqBj2ub+ajFVSHc/nbKYrXFwDqh
+ mFeRZuSwvZGyijJHj/Z8pETbmIAWeqJtZ4Im1mZAE0MNV6wOm+rVmD/qF+WWv72wfrFD
+ dnyKl6EDwbhVipnj6q8rP5TpJxfAreHbOBRITUaweqe6qNkb4PLlueAM+siiaZOS5ejU
+ LMhQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV1AVR+tdsQC8SVfAGubYtUIWxMyPTm6vhb1MHPccxLZpldhYP/8tn7df/n5vTaA6Yy/m4a3UcfgIga/P1LD/k+OmHmaBM=
+X-Gm-Message-State: AOJu0YyaFM/wTcyYiC2NQ2u4vkzBepGM4ICMPfclQhFNxK0cBVaaXzbS
+ 1XpYNJNtIeEG/FQao9lnuYoqYQRe5/comUN6DXUu5JVan+HHEX36xXxfx6wfyjbxefVh5MvmDAc
+ fpSCOWSk2f8/s+o+Jsq5eTgVZTEl0f+j10qJP87FSHUGKhTcldkS0
+X-Received: by 2002:adf:fe4f:0:b0:367:8e59:4220 with SMTP id
+ ffacd0b85a97d-367cea73793mr10804481f8f.24.1721047434683; 
+ Mon, 15 Jul 2024 05:43:54 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFeAvfzCZJBLDfLMpiQ2JlaXq0Qarct8k0py/4TEXpe6htkXAcg8Q2z4KEHXVQLaxiZzzHOjA==
+X-Received: by 2002:adf:fe4f:0:b0:367:8e59:4220 with SMTP id
+ ffacd0b85a97d-367cea73793mr10804472f8f.24.1721047434296; 
+ Mon, 15 Jul 2024 05:43:54 -0700 (PDT)
+Received: from imammedo.users.ipa.redhat.com (nat-pool-brq-t.redhat.com.
+ [213.175.37.10]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3680db03851sm6280421f8f.90.2024.07.15.05.43.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 15 Jul 2024 05:43:53 -0700 (PDT)
+Date: Mon, 15 Jul 2024 14:43:52 +0200
+From: Igor Mammedov <imammedo@redhat.com>
+To: "Michael S. Tsirkin" <mst@redhat.com>
+Cc: "Daniel P. =?UTF-8?B?QmVycmFuZ8Op?=" <berrange@redhat.com>, Sunil V L
+ <sunilvl@ventanamicro.com>, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis
+ <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>, Weiwei Li
+ <liwei1518@gmail.com>, Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Ani Sinha <anisinha@redhat.com>
+Subject: Re: [PATCH v2 0/9] RISC-V: ACPI: Namespace updates
+Message-ID: <20240715144352.22d36779@imammedo.users.ipa.redhat.com>
+In-Reply-To: <20240714034105-mutt-send-email-mst@kernel.org>
+References: <20240708114741.3499585-1-sunilvl@ventanamicro.com>
+ <20240712144319.233c19a7@imammedo.users.ipa.redhat.com>
+ <ZpEmuB6xyh2K77Ic@redhat.com>
+ <20240712155010.3756bb82@imammedo.users.ipa.redhat.com>
+ <20240714034105-mutt-send-email-mst@kernel.org>
+X-Mailer: Claws Mail 4.3.0 (GTK 3.24.42; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.0.1.106]
-X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
- ATCPCS34.andestech.com (10.0.1.134)
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 46FAEdjG081451
-Received-SPF: pass client-ip=60.248.80.70; envelope-from=ethan84@andestech.com;
- helo=Atcsqr.andestech.com
-X-Spam_score_int: -8
-X-Spam_score: -0.9
-X-Spam_bar: /
-X-Spam_report: (-0.9 / 5.0 requ) BAYES_00=-1.9, RDNS_DYNAMIC=0.982,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- TVD_RCVD_IP=0.001 autolearn=no autolearn_force=no
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=imammedo@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -69,209 +111,90 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-to:  Ethan Chen <ethan84@andestech.com>
-From:  Ethan Chen via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-- Add 'iopmp=on' option to enable IOPMP. It adds an iopmp device virt machine
-  to protect all regions of system memory, and configures RRID of CPU.
+On Sun, 14 Jul 2024 03:46:36 -0400
+"Michael S. Tsirkin" <mst@redhat.com> wrote:
 
-Signed-off-by: Ethan Chen <ethan84@andestech.com>
----
- docs/system/riscv/virt.rst |  5 +++
- hw/riscv/Kconfig           |  1 +
- hw/riscv/virt.c            | 63 ++++++++++++++++++++++++++++++++++++++
- include/hw/riscv/virt.h    |  5 ++-
- 4 files changed, 73 insertions(+), 1 deletion(-)
+> On Fri, Jul 12, 2024 at 03:50:10PM +0200, Igor Mammedov wrote:
+> > On Fri, 12 Jul 2024 13:51:04 +0100
+> > Daniel P. Berrang=C3=A9 <berrange@redhat.com> wrote:
+> >  =20
+> > > On Fri, Jul 12, 2024 at 02:43:19PM +0200, Igor Mammedov wrote: =20
+> > > > On Mon,  8 Jul 2024 17:17:32 +0530
+> > > > Sunil V L <sunilvl@ventanamicro.com> wrote:
+> > > >    =20
+> > > > > This series adds few updates to RISC-V ACPI namespace for virt pl=
+atform.
+> > > > > Additionally, it has patches to enable ACPI table testing for RIS=
+C-V.
+> > > > >=20
+> > > > > 1) PCI Link devices need to be created outside the scope of the P=
+CI root
+> > > > > complex to ensure correct probe ordering by the OS. This matches =
+the
+> > > > > example given in ACPI spec as well.
+> > > > >=20
+> > > > > 2) Add PLIC and APLIC as platform devices as well to ensure probi=
+ng
+> > > > > order as per BRS spec [1] requirement.
+> > > > >=20
+> > > > > 3) BRS spec requires RISC-V to use new ACPI ID for the generic UA=
+RT. So,
+> > > > > update the HID of the UART.
+> > > > >=20
+> > > > > 4) Enabled ACPI tables tests for RISC-V which were originally par=
+t of
+> > > > > [2] but couldn't get merged due to updates required in the expect=
+ed AML
+> > > > > files. I think combining those patches with this series makes it =
+easier
+> > > > > to merge since expected AML files are updated.
+> > > > >=20
+> > > > > [1] - https://github.com/riscv-non-isa/riscv-brs
+> > > > > [2] - https://lists.gnu.org/archive/html/qemu-devel/2024-06/msg04=
+734.html   =20
+> > > >=20
+> > > > btw: CI is not happy about series, see:
+> > > >  https://gitlab.com/imammedo/qemu/-/pipelines/1371119552
+> > > > also 'cross-i686-tci' job routinely timeouts on bios-tables-test
+> > > > but we still keep adding more tests to it.
+> > > > We should either bump timeout to account for slowness or
+> > > > disable bios-tables-test for that job.   =20
+> > >=20
+> > > Asumming the test is functionally correct, and not hanging, then bump=
+ing
+> > > the timeout is the right answer. You can do this in the meson.build
+> > > file =20
+> >=20
+> > I think test is fine, since once in a while it passes (I guess it depen=
+ds on runner host/load)
+> >=20
+> > Overal job timeout is 1h, but that's not what fails.
+> > What I see is, the test aborts after 10min timeout.
+> > it's likely we hit boot_sector_test()/acpi_find_rsdp_address_uefi() tim=
+eout.
+> > That's what we should try to bump.
+> >=20
+> > PS:
+> > I've just started the job with 5min bump, lets see if it is enough. =20
+>=20
+> Because we should wait for 5min CPU time, not wall time.
+> Why don't we do that?
+> Something like getrusage should work I think.
+>=20
 
-diff --git a/docs/system/riscv/virt.rst b/docs/system/riscv/virt.rst
-index 9a06f95a34..9fd006ccc2 100644
---- a/docs/system/riscv/virt.rst
-+++ b/docs/system/riscv/virt.rst
-@@ -116,6 +116,11 @@ The following machine-specific options are supported:
-   having AIA IMSIC (i.e. "aia=aplic-imsic" selected). When not specified,
-   the default number of per-HART VS-level AIA IMSIC pages is 0.
- 
-+- iopmp=[on|off]
-+
-+  When this option is "on", an IOPMP device is added to machine. IOPMP checks
-+  memory transcations in system memory. This option is assumed to be "off".
-+
- Running Linux kernel
- --------------------
- 
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index a2030e3a6f..0b45a5ade2 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -56,6 +56,7 @@ config RISCV_VIRT
-     select PLATFORM_BUS
-     select ACPI
-     select ACPI_PCI
-+    select RISCV_IOPMP
- 
- config SHAKTI_C
-     bool
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index bc0893e087..5a03c03c4a 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -55,6 +55,7 @@
- #include "hw/acpi/aml-build.h"
- #include "qapi/qapi-visit-common.h"
- #include "hw/virtio/virtio-iommu.h"
-+#include "hw/misc/riscv_iopmp.h"
- 
- /* KVM AIA only supports APLIC MSI. APLIC Wired is always emulated by QEMU. */
- static bool virt_use_kvm_aia(RISCVVirtState *s)
-@@ -82,6 +83,7 @@ static const MemMapEntry virt_memmap[] = {
-     [VIRT_UART0] =        { 0x10000000,         0x100 },
-     [VIRT_VIRTIO] =       { 0x10001000,        0x1000 },
-     [VIRT_FW_CFG] =       { 0x10100000,          0x18 },
-+    [VIRT_IOPMP] =        { 0x10200000,      0x100000 },
-     [VIRT_FLASH] =        { 0x20000000,     0x4000000 },
-     [VIRT_IMSIC_M] =      { 0x24000000, VIRT_IMSIC_MAX_SIZE },
-     [VIRT_IMSIC_S] =      { 0x28000000, VIRT_IMSIC_MAX_SIZE },
-@@ -90,6 +92,11 @@ static const MemMapEntry virt_memmap[] = {
-     [VIRT_DRAM] =         { 0x80000000,           0x0 },
- };
- 
-+static const MemMapEntry iopmp_protect_memmap[] = {
-+    /* IOPMP protect all regions by default */
-+    {0, 0xFFFFFFFF},
-+};
-+
- /* PCIe high mmio is fixed for RV32 */
- #define VIRT32_HIGH_PCIE_MMIO_BASE  0x300000000ULL
- #define VIRT32_HIGH_PCIE_MMIO_SIZE  (4 * GiB)
-@@ -1024,6 +1031,24 @@ static void create_fdt_virtio_iommu(RISCVVirtState *s, uint16_t bdf)
-                            bdf + 1, iommu_phandle, bdf + 1, 0xffff - bdf);
- }
- 
-+static void create_fdt_iopmp(RISCVVirtState *s, const MemMapEntry *memmap,
-+                             uint32_t irq_mmio_phandle) {
-+    g_autofree char *name = NULL;
-+    MachineState *ms = MACHINE(s);
-+
-+    name = g_strdup_printf("/soc/iopmp@%lx", (long)memmap[VIRT_IOPMP].base);
-+    qemu_fdt_add_subnode(ms->fdt, name);
-+    qemu_fdt_setprop_string(ms->fdt, name, "compatible", "riscv_iopmp");
-+    qemu_fdt_setprop_cells(ms->fdt, name, "reg", 0x0, memmap[VIRT_IOPMP].base,
-+        0x0, memmap[VIRT_IOPMP].size);
-+    qemu_fdt_setprop_cell(ms->fdt, name, "interrupt-parent", irq_mmio_phandle);
-+    if (s->aia_type == VIRT_AIA_TYPE_NONE) {
-+        qemu_fdt_setprop_cell(ms->fdt, name, "interrupts", IOPMP_IRQ);
-+    } else {
-+        qemu_fdt_setprop_cells(ms->fdt, name, "interrupts", IOPMP_IRQ, 0x4);
-+    }
-+}
-+
- static void finalize_fdt(RISCVVirtState *s)
- {
-     uint32_t phandle = 1, irq_mmio_phandle = 1, msi_pcie_phandle = 1;
-@@ -1042,6 +1067,10 @@ static void finalize_fdt(RISCVVirtState *s)
-     create_fdt_uart(s, virt_memmap, irq_mmio_phandle);
- 
-     create_fdt_rtc(s, virt_memmap, irq_mmio_phandle);
-+
-+    if (s->have_iopmp) {
-+        create_fdt_iopmp(s, virt_memmap, irq_mmio_phandle);
-+    }
- }
- 
- static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap)
-@@ -1425,6 +1454,7 @@ static void virt_machine_init(MachineState *machine)
-     DeviceState *mmio_irqchip, *virtio_irqchip, *pcie_irqchip;
-     int i, base_hartid, hart_count;
-     int socket_count = riscv_socket_count(machine);
-+    int cpu, socket;
- 
-     /* Check socket count limit */
-     if (VIRT_SOCKETS_MAX < socket_count) {
-@@ -1606,6 +1636,19 @@ static void virt_machine_init(MachineState *machine)
-     }
-     virt_flash_map(s, system_memory);
- 
-+    if (s->have_iopmp) {
-+        DeviceState *iopmp_dev = sysbus_create_simple(TYPE_IOPMP,
-+            memmap[VIRT_IOPMP].base,
-+            qdev_get_gpio_in(DEVICE(mmio_irqchip), IOPMP_IRQ));
-+
-+        for (socket = 0; socket < socket_count; socket++) {
-+            for (cpu = s->soc[socket].num_harts - 1; cpu >= 0; cpu--) {
-+                iopmp_setup_cpu(&s->soc[socket].harts[cpu], 0);
-+            }
-+        }
-+        iopmp_setup_system_memory(iopmp_dev, iopmp_protect_memmap, 1);
-+    }
-+
-     /* load/create device tree */
-     if (machine->dtb) {
-         machine->fdt = load_device_tree(machine->dtb, &s->fdt_size);
-@@ -1702,6 +1745,20 @@ static void virt_set_aclint(Object *obj, bool value, Error **errp)
-     s->have_aclint = value;
- }
- 
-+static bool virt_get_iopmp(Object *obj, Error **errp)
-+{
-+    RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
-+
-+    return s->have_iopmp;
-+}
-+
-+static void virt_set_iopmp(Object *obj, bool value, Error **errp)
-+{
-+    RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
-+
-+    s->have_iopmp = value;
-+}
-+
- bool virt_is_acpi_enabled(RISCVVirtState *s)
- {
-     return s->acpi != ON_OFF_AUTO_OFF;
-@@ -1814,6 +1871,12 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
-                               NULL, NULL);
-     object_class_property_set_description(oc, "acpi",
-                                           "Enable ACPI");
-+
-+    object_class_property_add_bool(oc, "iopmp", virt_get_iopmp,
-+                                   virt_set_iopmp);
-+    object_class_property_set_description(oc, "iopmp",
-+                                          "Set on/off to enable/disable "
-+                                          "iopmp device");
- }
- 
- static const TypeInfo virt_machine_typeinfo = {
-diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-index c0dc41ff9a..009b4ebea7 100644
---- a/include/hw/riscv/virt.h
-+++ b/include/hw/riscv/virt.h
-@@ -55,6 +55,7 @@ struct RISCVVirtState {
- 
-     int fdt_size;
-     bool have_aclint;
-+    bool have_iopmp;
-     RISCVVirtAIAType aia_type;
-     int aia_guests;
-     char *oem_id;
-@@ -84,12 +85,14 @@ enum {
-     VIRT_PCIE_MMIO,
-     VIRT_PCIE_PIO,
-     VIRT_PLATFORM_BUS,
--    VIRT_PCIE_ECAM
-+    VIRT_PCIE_ECAM,
-+    VIRT_IOPMP,
- };
- 
- enum {
-     UART0_IRQ = 10,
-     RTC_IRQ = 11,
-+    IOPMP_IRQ = 12,
-     VIRTIO_IRQ = 1, /* 1 to 8 */
-     VIRTIO_COUNT = 8,
-     PCIE_IRQ = 0x20, /* 32 to 35 */
--- 
-2.34.1
+It turned out to be a meson timeout that's set individually per test file.
+I'll send a patch later on.
+
+>=20
+> > > We should never disable tests only in CI, because non-CI users
+> > > are just as likely to hit timeouts.
+> > >=20
+> > >=20
+> > > With regards,
+> > > Daniel =20
+>=20
 
 
