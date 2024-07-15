@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7525EC3DA4A
-	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Jul 2024 17:13:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC0D6C3DA4A
+	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Jul 2024 17:13:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sTPEx-00057k-Cd; Mon, 15 Jul 2024 13:11:55 -0400
+	id 1sTPFK-0006Fa-5d; Mon, 15 Jul 2024 13:12:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1sTPEq-0004w5-G8
- for qemu-riscv@nongnu.org; Mon, 15 Jul 2024 13:11:50 -0400
-Received: from mail-pg1-x536.google.com ([2607:f8b0:4864:20::536])
+ id 1sTPFI-00066p-FZ
+ for qemu-riscv@nongnu.org; Mon, 15 Jul 2024 13:12:16 -0400
+Received: from mail-pf1-x42c.google.com ([2607:f8b0:4864:20::42c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1sTPEn-0007EV-QH
- for qemu-riscv@nongnu.org; Mon, 15 Jul 2024 13:11:47 -0400
-Received: by mail-pg1-x536.google.com with SMTP id
- 41be03b00d2f7-78512d44a13so3043203a12.1
- for <qemu-riscv@nongnu.org>; Mon, 15 Jul 2024 10:11:44 -0700 (PDT)
+ id 1sTPFE-0007U0-Va
+ for qemu-riscv@nongnu.org; Mon, 15 Jul 2024 13:12:16 -0400
+Received: by mail-pf1-x42c.google.com with SMTP id
+ d2e1a72fcca58-70af8062039so3002766b3a.0
+ for <qemu-riscv@nongnu.org>; Mon, 15 Jul 2024 10:12:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1721063503; x=1721668303; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1721063531; x=1721668331; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OnHpblZbVd3FRfJ45qGiQCVGtJlN2GB4v5fdYVeQ9C0=;
- b=cp6g9yMm3OGhMUQKBt8eWoskYZcfZQAE/2nxsQc2xLHn3dqXvlN9xqn2YVjhTQgBO2
- sNKKOx4e8Z72Lc8R4DqIPHi9AeJEDiU6VQhZaz5P4o1o6EzfZNfdw5hFkEjQgM5iMynh
- bRxb9Ky5K7V8K4o+18zItVmIeXBi3OQEYK0Gf3CrzPnTaryP3HH899glSGY833Cne/wt
- LA6jxgD5uuE2ai+CEsNwNc2TzpoWjlxgJcKjOFumq7Jh2JflrosXDddeR1mb938h3dwU
- 2msM1Ol0YjZQoVOGCVuZWPlhShAb6LJOg77DvPZVnLPOQmAhZQHzu5cp/HJbaL8SjRxt
- xmMg==
+ bh=dq7QFPQUVP3Ynbd/KPSkrs4w0szD0VlYjXKC1M1eAR0=;
+ b=LC/TD+kzFirDQ+PiOmTZ1v7EnYMQrZ8GFgSfmcF/JlkED9IHespsa2EXGJ/a6JCk3m
+ WKDzeshO7a2CRai3qNbCbV7rGY9ElDkhOlkRFO7SIVJJQndSSLHCL68pcdLSTtAkkms+
+ /ODcviwKGtifk6oMT/CgV8jgBSvDEbK6AcElDjHhN/W9lhST0jqMsSRTITprdjd85Vi+
+ SUcmOWXwFxY6iKwBn7R74SqUi2Nw7+GzvDMo6ItdXdYkK21tTWR4rvW9YtDHjZcEu+yQ
+ SGiTgoOA2d2RWETymbNRQ9zg0izL4Iz/qYWLe6kKYMJOgeNK5qcagfopFPIsqvbttwHW
+ XVCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721063503; x=1721668303;
+ d=1e100.net; s=20230601; t=1721063531; x=1721668331;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=OnHpblZbVd3FRfJ45qGiQCVGtJlN2GB4v5fdYVeQ9C0=;
- b=RpY8q4Y7ldCS6ObCEsilxqL4Q0ddt1TjXJcieYCIgEbZnvKgyHWV2BxMQufiph/j6A
- aucgOVCChsyN4uz+SuQ4qKbm85Wx9yB6O34GUFCjR+e0nOkMuKOriobOAipjt+qmRckU
- L/mrb3fks1ZaQfrS72MSkVkbgNgxcTjVEdU09bQH9DYE8BE2wUuVJMgN1aC8lFz/5W8A
- qLttXBs9EIgQBc9rGxRByqpusM7QEeZlhIag8JgvzOSjZlYW+1ZZa76ZjimlRUmk8jTa
- ht0b9t21Nc14nQUExTpj9tZ8Zd/3NXB9pVfNTqd+z9R3CpR0OdF0ki/RxNSEwf3rq19P
- 1mQw==
+ bh=dq7QFPQUVP3Ynbd/KPSkrs4w0szD0VlYjXKC1M1eAR0=;
+ b=Q+ZSNSSBh5h05PNBip2F5sJdzl83lKRzwFPMA0TyoqlvHvFgYOCifSknMHLn18f6lK
+ aB1KPrEZqkVyIYzAIeITHZEg0qYYywF50E0wqFTZawDahMNuSz5r9Zx20LqE2oWYeJwe
+ ccvBT72n5lCb5RpEI5D1kvPZO6WauZcKtuRsUoVMErVi3HF6Afd5Sh7nXijlUfSRA41S
+ Tw8gNK1zjcbkWHKPqBrfAX8+QXBgFq9RxSGNzBSS20mAB7aTIMKIq62RSSKtVjPZZcgt
+ 1GNgwi42ORGvBwpugJpacRB1L3uiZ/O+Hienwi4rSUYZgm+8+yt3CikKuYNeJPQB61vc
+ TbEw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVXC1e22Q4I7v0Y8Zn1kLxDxHR/WUVPYlmLd1PtMDcATFXV74v4khKnnmnAamCwXxw+UlmTQDDE8NxttZJBeReS93UVp6s=
-X-Gm-Message-State: AOJu0YwXRbdu1Y/3LrWOFarTsDveQ1wvnruimEo1HMaguRpI6enWESNW
- 7EDooe3RJREFLmRNyP/DmhTpmHLl/IypYYSDpTH4kUSUDzW8LkSp1wPbtfLGpAg=
-X-Google-Smtp-Source: AGHT+IEZvzfAzfb26V65Qnelq7TR1JaOpHc8pEN0webbBfMjmZwc5mEwUqAhkW3GvT2MZX35yCowjA==
-X-Received: by 2002:a05:6a20:430c:b0:1c0:f267:11ad with SMTP id
- adf61e73a8af0-1c3ee4d120emr747976637.19.1721063503459; 
- Mon, 15 Jul 2024 10:11:43 -0700 (PDT)
+ AJvYcCUDw27iup7JR3rs06n9KqPo2KHN5PTWRpBwIYuWe/WImD6hf/zlPds9fbdHPWJU8Uutl40UFKO3MagL7UmMMw4uCkpv5Jw=
+X-Gm-Message-State: AOJu0Yz3o4s0Ud8GSi0mYuOrYJ2xZttMjCym4+PVF7s0rITkjzNRtNfW
+ n0JLa6FsQRinotCUUCcUkPSWija4nvQYXSCLv98FmL4oe7OHEwux5Ep0x01QwqY=
+X-Google-Smtp-Source: AGHT+IGKOUvdXbpNewQq+zGdjeonHCkT3Ako0JWQtnhQjm0KkJ0iwZ4Xs2ph9A0576FXjSgHdr1tbA==
+X-Received: by 2002:a05:6a20:3944:b0:1c0:f33e:aaec with SMTP id
+ adf61e73a8af0-1c3ee6548ffmr644604637.49.1721063531163; 
+ Mon, 15 Jul 2024 10:12:11 -0700 (PDT)
 Received: from sunil-pc.tail07344b.ts.net ([106.51.187.237])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-70b7eca85ccsm4752618b3a.178.2024.07.15.10.11.39
+ d2e1a72fcca58-70b7eca85ccsm4752618b3a.178.2024.07.15.10.12.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Jul 2024 10:11:42 -0700 (PDT)
+ Mon, 15 Jul 2024 10:12:10 -0700 (PDT)
 From: Sunil V L <sunilvl@ventanamicro.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -71,24 +71,23 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  "Michael S . Tsirkin" <mst@redhat.com>,
  Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
  Sunil V L <sunilvl@ventanamicro.com>
-Subject: [PATCH v3 2/9] hw/riscv/virt-acpi-build.c: Update the HID of RISC-V
- UART
-Date: Mon, 15 Jul 2024 22:41:22 +0530
-Message-ID: <20240715171129.1168896-3-sunilvl@ventanamicro.com>
+Subject: [PATCH v3 9/9] tests/acpi: Add expected ACPI AML files for RISC-V
+Date: Mon, 15 Jul 2024 22:41:29 +0530
+Message-ID: <20240715171129.1168896-10-sunilvl@ventanamicro.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240715171129.1168896-1-sunilvl@ventanamicro.com>
 References: <20240715171129.1168896-1-sunilvl@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::536;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pg1-x536.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42c;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pf1-x42c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,32 +103,124 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The requirement ACPI_060 in the RISC-V BRS specification [1], requires
-NS16550 compatible UART to have the HID RSCV0003. So, update the HID for
-the UART.
+As per the step 5 in the process documented in bios-tables-test.c,
+generate the expected ACPI AML data files for RISC-V using the
+rebuild-expected-aml.sh script and update the
+bios-tables-test-allowed-diff.h.
 
-[1] - https://github.com/riscv-non-isa/riscv-brs/commits/main/acpi.adoc
-      (commit: 7bfa87e86ad5658283731207dbfc8ab3744d3265)
+These are all new files being added for the first time. Hence, iASL diff
+output is not added.
 
 Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
 Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Acked-by: Igor Mammedov <imammedo@redhat.com>
 ---
- hw/riscv/virt-acpi-build.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ tests/data/acpi/riscv64/virt/APIC           | Bin 0 -> 116 bytes
+ tests/data/acpi/riscv64/virt/DSDT           | Bin 0 -> 3576 bytes
+ tests/data/acpi/riscv64/virt/FACP           | Bin 0 -> 276 bytes
+ tests/data/acpi/riscv64/virt/MCFG           | Bin 0 -> 60 bytes
+ tests/data/acpi/riscv64/virt/RHCT           | Bin 0 -> 332 bytes
+ tests/data/acpi/riscv64/virt/SPCR           | Bin 0 -> 80 bytes
+ tests/qtest/bios-tables-test-allowed-diff.h |   6 ------
+ 7 files changed, 6 deletions(-)
 
-diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
-index 5f5082a35b..36d6a3a412 100644
---- a/hw/riscv/virt-acpi-build.c
-+++ b/hw/riscv/virt-acpi-build.c
-@@ -170,7 +170,7 @@ acpi_dsdt_add_uart(Aml *scope, const MemMapEntry *uart_memmap,
-                     uint32_t uart_irq)
- {
-     Aml *dev = aml_device("COM0");
--    aml_append(dev, aml_name_decl("_HID", aml_string("PNP0501")));
-+    aml_append(dev, aml_name_decl("_HID", aml_string("RSCV0003")));
-     aml_append(dev, aml_name_decl("_UID", aml_int(0)));
- 
-     Aml *crs = aml_resource_template();
+diff --git a/tests/data/acpi/riscv64/virt/APIC b/tests/data/acpi/riscv64/virt/APIC
+index e69de29bb2d1d6434b8b29ae775ad8c2e48c5391..66a25dfd2d6ea2b607c024722b2eab95873a01e9 100644
+GIT binary patch
+literal 116
+zcmZ<^@N_O=U|?X|;^gn_5v<@85#X!<1dKp25F13pfP@Mo12P{Zj?R|`s)2!c7=s}J
+I#NvT*0o0BN0RR91
+
+literal 0
+HcmV?d00001
+
+diff --git a/tests/data/acpi/riscv64/virt/DSDT b/tests/data/acpi/riscv64/virt/DSDT
+index e69de29bb2d1d6434b8b29ae775ad8c2e48c5391..6a33f5647ddd6de3a0f000f718b58f6fff44f0fd 100644
+GIT binary patch
+literal 3576
+zcmZvfO>Y}j6o&8Elh_%5#CDu-Cr+Uf3sh+w6Os)g_Bd%=*~#E>8YCmRQk04kR6;38
+z1tF>|_=woFL2TFrkzaw3Kw`y?9SFpd4SxW3<~{d%%sFI6^31%~=e+kk*Z0mHH-bj@
+zpNvwm2lYK~Cs?V!>U%3VETt6P(>3S)@mfEq_j{*1w&%KTvcJ=8WNMz@gjiR}{(iH8
+zbGz2fKj&PZyKX7U;>Z7W?{s7Pz}q%PuWYsVVYCX1pj&fN$-d{+ESx(*KJR2do*=ti
+zZVrZzRPS`Xi5g61C-80~vob2-W>CkyNK|R1?&w4>;qA3$W_6TFISbCL=}hIQ%g@G@
+zWjVUnWWNzK3ahdFl#?s|I{59|`=7VZo_zP!_qV>W3X4`@E|xib^R2_<8+RWZz5VXd
+z{liD-c5?&O*6iDzu-w*eXAkAB{nzP;GweEtu5-h#Y0wB*TT~3Ow4gz{VzI(3Vnd5M
+zRk0dn;l!dmT;>ty9@R*Xc$CK`^RT(c3y~gnl!wne#<<5?q{mp4#~tP|&OKg?^cauw
+zIAI<M?y(-}k%;nm%si4qkEY$igfJfduJ3y8_GohWn2}j0rDx%aj)&`&w&Hj{=mb{p
+zR9g*aiLk;X;a1lotW4X;>K0WsoGrqNCJXm^Cc?|KNw49okzSZI-0Rs0FVi;iYJK5*
+zO*UFJcY{_to<-zbb7?gPTQ_m8*LO$b7<4=NvQzSvr<&?Wttc0t2JYTd_tYV-icIt}
+z@;lwB);rGQLds4J28w<gW$rE9S5zTQ?M{q_Clqmrsw!mc^k85q%0b*vQ5FKT<~yB-
+z&`?q){B<lAs)-#c$_zteN@pTeXF^hD*bA1YiPf2LMVVn}++-qDXF^gYD$=o7lqPnl
+zhKxGYHko1Zkem}s5t(5HW4g~Ubj)Oi#Y1vVEI?KP9<Weh=(yyB<eXS`CRSIQ5S$6g
+z3CTIJ*pL~HbW&%ALz0x7keqWuaAF@awd)a@kera56WfM~)zvzJ(~+EzoHHdjQ-U)k
+zIUzYGHaf<c7My9x3CTIJ|06T}Ju`wcBRL^CXI5}#1!q=rLUPVY!8s{7CnYB&=fwWV
+zII&fm+V!uJlbn#8GcP#vf-^5UAvtG3a25n-L2^QJ&MCn;B{-)fCnV=A3eKY7EJ{vD
+z&N(eOrv>M<<b>p$GlFwQaL!0hNX|JcIA;attmK5`oOrQgzvrCboRgf8oO51q&I`_Y
+z$qC6h7X;^m;9QWLkeqW-a4rhYMac=tIZJ}GBsfcw6OwZ-3C<<Kxg<FuIp?zATo#<m
+zk`t11mIY^7aF!(}q~R>4`(C}KF7YH%*r(}jWhdc0{4}Ft)TGpaPSz)wD{1VN`q&%{
+z1|Nm@_{K`p3#UG?1=9g-sk7%<j&7!RO5_gceT*OGT{9W%`@Twg-A+ptw<r30foGo`
+zE3a`-x!6gZzfN!Rz4q_bzsse~FApBpet7AZyJyFajeu2Llekt-NRSWRRLSZCIyq%J
+zU*w*i-?Ki%Hx(USxtMu+9>$sG9DR90!PI_v{B_o}Qzw<n<Khkct7zL7*Gx4(umALC
+zu=alY$?RY4`5(RZ#l-m=>M|d<EIQ$TK-=zY1?=_5(|?(0kgJY+Wqe#36AaJGd~9%!
+Jrzicb_!p&=*&hG^
+
+literal 0
+HcmV?d00001
+
+diff --git a/tests/data/acpi/riscv64/virt/FACP b/tests/data/acpi/riscv64/virt/FACP
+index e69de29bb2d1d6434b8b29ae775ad8c2e48c5391..a5276b65ea8ce46cc9b40d96d98f0669c9089ed4 100644
+GIT binary patch
+literal 276
+zcmZ>BbPf<<WME(ucJg=j2v%^42yj*a0-z8Bhz+8t3k1-OV?`GjD1M-;Zz#xa0OIBc
+A0RR91
+
+literal 0
+HcmV?d00001
+
+diff --git a/tests/data/acpi/riscv64/virt/MCFG b/tests/data/acpi/riscv64/virt/MCFG
+index e69de29bb2d1d6434b8b29ae775ad8c2e48c5391..37eb923a9320f5573c0c2cdb90bd98409cc7eb6f 100644
+GIT binary patch
+literal 60
+rcmeZuc5}C3U|?Y6aq@Te2v%^42yj*a0!E-1hz+8VfB}^KA4CHH3`GY4
+
+literal 0
+HcmV?d00001
+
+diff --git a/tests/data/acpi/riscv64/virt/RHCT b/tests/data/acpi/riscv64/virt/RHCT
+index e69de29bb2d1d6434b8b29ae775ad8c2e48c5391..4f231735abad925435c3cd052e6641b1b4187278 100644
+GIT binary patch
+literal 332
+zcmXAlu};J=42E3}oe;y#j3;Kss=E2Q+<*iE2DT_kQ#GPVt0XN_CY}QEe2l!r@jGY9
+z{(f6docQI`zCBh%)$aJzo?iFI_vdyGLy1^3*}lGi3a=3lMg37lzZBM{wodk)7TM~i
+zRtz<{3+4+lLrXWwB5YqU#?qxjG@Sbs7?ERdyfzkMus+RlDILR%e&?1^WZBdq0=N=!
+z3=z}&!C5b|#thwwtU!g=DD-_K5u?^KCV<o8lL^LuB1x+pWud{LxXR8TT8}a~E0^%g
+ZTR3fLdqp>_=zP8dH)RXFi+dCw;Qyc2X#oHL
+
+literal 0
+HcmV?d00001
+
+diff --git a/tests/data/acpi/riscv64/virt/SPCR b/tests/data/acpi/riscv64/virt/SPCR
+index e69de29bb2d1d6434b8b29ae775ad8c2e48c5391..4da9daf65f71a13ac2b488d4e9728f194b569a43 100644
+GIT binary patch
+literal 80
+zcmWFza1IJ!U|?X{>E!S15v<@85#X!<1dKp25F12;fdT`FDF9*%FmM4$c8~z`e;@#f
+G!2kgKJqrN<
+
+literal 0
+HcmV?d00001
+
+diff --git a/tests/qtest/bios-tables-test-allowed-diff.h b/tests/qtest/bios-tables-test-allowed-diff.h
+index 70474a097f..dfb8523c8b 100644
+--- a/tests/qtest/bios-tables-test-allowed-diff.h
++++ b/tests/qtest/bios-tables-test-allowed-diff.h
+@@ -1,7 +1 @@
+ /* List of comma-separated changed AML files to ignore */
+-"tests/data/acpi/riscv64/virt/APIC",
+-"tests/data/acpi/riscv64/virt/DSDT",
+-"tests/data/acpi/riscv64/virt/FACP",
+-"tests/data/acpi/riscv64/virt/MCFG",
+-"tests/data/acpi/riscv64/virt/RHCT",
+-"tests/data/acpi/riscv64/virt/SPCR",
 -- 
 2.43.0
 
