@@ -4,101 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31952C3DA59
-	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Jul 2024 12:44:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD806C3DA4B
+	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Jul 2024 17:12:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sTL3h-0007Gl-Ll; Mon, 15 Jul 2024 08:44:01 -0400
+	id 1sTPEy-0005D8-M4; Mon, 15 Jul 2024 13:11:56 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1sTL3g-0007Fm-BW
- for qemu-riscv@nongnu.org; Mon, 15 Jul 2024 08:44:00 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1sTL3e-0004bE-K5
- for qemu-riscv@nongnu.org; Mon, 15 Jul 2024 08:44:00 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1721047437;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=h35hl/jHrebhXaw3QkF2/ztgJRYyFPTkbphcaT1d35Q=;
- b=Nj52cIJcqt9l97riGfrHvQHweXaZYQSSId2r1F2Il9+nr8hMgfUcGOlR+l0C4FxUv47fuX
- ehamS2/tkJWDMka1k3s4J1LgzBdPzyvowR19kKWz6EuMf0o0N9T8BQ0VAc0ghdtx3dX139
- QCJwiakNFZEGCpcVNgdybYxvwYbHcoc=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-248-rrw7P4yNPmGJrBf0IOi71A-1; Mon, 15 Jul 2024 08:43:55 -0400
-X-MC-Unique: rrw7P4yNPmGJrBf0IOi71A-1
-Received: by mail-wr1-f71.google.com with SMTP id
- ffacd0b85a97d-36789def10eso2955172f8f.0
- for <qemu-riscv@nongnu.org>; Mon, 15 Jul 2024 05:43:55 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721047434; x=1721652234;
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1sTPEx-000575-8Y
+ for qemu-riscv@nongnu.org; Mon, 15 Jul 2024 13:11:55 -0400
+Received: from mail-oa1-x30.google.com ([2001:4860:4864:20::30])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1sTPEv-0007Lv-3f
+ for qemu-riscv@nongnu.org; Mon, 15 Jul 2024 13:11:54 -0400
+Received: by mail-oa1-x30.google.com with SMTP id
+ 586e51a60fabf-25e00f348e6so2570895fac.1
+ for <qemu-riscv@nongnu.org>; Mon, 15 Jul 2024 10:11:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1721063511; x=1721668311; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=LsTPK9gu7Y7sN5IwpWcQvzEP0O1X5VjGLs177fAzIU0=;
+ b=HJSn68JhJxwnmorusvKsvfHfemrtL0Xtq5liZUQpMXgXivzGjhisyZv11zGOKQ1f5a
+ gg2XKyS3MveEUIArBFo5U1ASmzIU8kHR79LkseBfsqYxQuhDqc8JO1aC/Ch8UAYFdvvy
+ VHpKeUjhR2VywZGNW6bvUjn+qQWRU1m+9nHPRD2Qjdf3c+pSF2HvB1Toviohp6rcmElN
+ 3SllywEL34YGEe7+OP2JP4azl3dHlps568u+YNNMsj9GiQeEE1t8blLD13WCa9/OPgfJ
+ TBAboiybjOlicVCCr4K+nmYnjLVmpuc9wZJVM+ATlO59eaBueSm0v04qg9B9vLMKbZxt
+ a//w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1721063511; x=1721668311;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=h35hl/jHrebhXaw3QkF2/ztgJRYyFPTkbphcaT1d35Q=;
- b=w3fs3Si25FmkFU9E0PXAgO19sXUloREm97S9SDB0CbYLLciYpFClxKJhj0nr92eQ1R
- QKTR1zUvqIxq7iO1/NWajWi9VlPqP1N5paoaZyqbf8kNbgWf+XgiaydDpPNasomwzNw3
- 676SWaT1NIOK/wRUdWH7CZWcOGNjaKUM9F3Q4j0TqXqBj2ub+ajFVSHc/nbKYrXFwDqh
- mFeRZuSwvZGyijJHj/Z8pETbmIAWeqJtZ4Im1mZAE0MNV6wOm+rVmD/qF+WWv72wfrFD
- dnyKl6EDwbhVipnj6q8rP5TpJxfAreHbOBRITUaweqe6qNkb4PLlueAM+siiaZOS5ejU
- LMhQ==
+ bh=LsTPK9gu7Y7sN5IwpWcQvzEP0O1X5VjGLs177fAzIU0=;
+ b=LrohRpw7IZ3Mp9S0ovhh9g1225WJeITURT8BXj59S5kiN1+W2vvIaqrNgyfz1EIA3/
+ oHAqWhwdzjDnDKnjC8Yu3imeSTTFPmL1Q05PYAc62JtAeloTIYE7BiDvUBfbjrTt6/Zz
+ N4YaIluB24Ek9sVN+AcHVamrQSOYu3T/N0Xrt5V5qaQcFQPcHTSBprPVGW3yKZKa0u4D
+ Kv/QjGoQqCFQc0ROIGnhYJEoEAIV8+jOJljwAzIWXjpZvO0t9fJLQ1PHxGrWrJ4seffR
+ NqcNcq2Yj9l7xzyQQHR23UMjxoaIHtNpFvYcM6j3Cj0FTbGTsN0ZE+xFc/CEG5aK/oiO
+ nnGQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV1AVR+tdsQC8SVfAGubYtUIWxMyPTm6vhb1MHPccxLZpldhYP/8tn7df/n5vTaA6Yy/m4a3UcfgIga/P1LD/k+OmHmaBM=
-X-Gm-Message-State: AOJu0YyaFM/wTcyYiC2NQ2u4vkzBepGM4ICMPfclQhFNxK0cBVaaXzbS
- 1XpYNJNtIeEG/FQao9lnuYoqYQRe5/comUN6DXUu5JVan+HHEX36xXxfx6wfyjbxefVh5MvmDAc
- fpSCOWSk2f8/s+o+Jsq5eTgVZTEl0f+j10qJP87FSHUGKhTcldkS0
-X-Received: by 2002:adf:fe4f:0:b0:367:8e59:4220 with SMTP id
- ffacd0b85a97d-367cea73793mr10804481f8f.24.1721047434683; 
- Mon, 15 Jul 2024 05:43:54 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFeAvfzCZJBLDfLMpiQ2JlaXq0Qarct8k0py/4TEXpe6htkXAcg8Q2z4KEHXVQLaxiZzzHOjA==
-X-Received: by 2002:adf:fe4f:0:b0:367:8e59:4220 with SMTP id
- ffacd0b85a97d-367cea73793mr10804472f8f.24.1721047434296; 
- Mon, 15 Jul 2024 05:43:54 -0700 (PDT)
-Received: from imammedo.users.ipa.redhat.com (nat-pool-brq-t.redhat.com.
- [213.175.37.10]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3680db03851sm6280421f8f.90.2024.07.15.05.43.53
+ AJvYcCWah+2vWLu6k90LwaxgW24Y2s/YSQN8jWs0fB4i7NdXwUB/3ou3/LpCSpRCA61yBuCaQkMmfPMY+EhzUdumf7DnyYTpHSQ=
+X-Gm-Message-State: AOJu0Yz5fBBZ4ctBI7Gikgd+1pZ10MOJVBgNFO0ZRU0cEa1PT+5aIg80
+ zn5T1HTUmtvsmKz/BmOlyHihZqfIczbd7lgSVB7jPHizMYMIVzhl0JX5r4a0eyA=
+X-Google-Smtp-Source: AGHT+IHWtnAIPWySla0d9Y3xTdhOD673DZnFPfy1LG8pPLWsFLjmT5TBN0JyR1pasjFrv957t7P+IQ==
+X-Received: by 2002:a05:6870:c110:b0:254:a89e:acc1 with SMTP id
+ 586e51a60fabf-25eae832650mr15902283fac.28.1721063511477; 
+ Mon, 15 Jul 2024 10:11:51 -0700 (PDT)
+Received: from sunil-pc.tail07344b.ts.net ([106.51.187.237])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-70b7eca85ccsm4752618b3a.178.2024.07.15.10.11.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Jul 2024 05:43:53 -0700 (PDT)
-Date: Mon, 15 Jul 2024 14:43:52 +0200
-From: Igor Mammedov <imammedo@redhat.com>
-To: "Michael S. Tsirkin" <mst@redhat.com>
-Cc: "Daniel P. =?UTF-8?B?QmVycmFuZ8Op?=" <berrange@redhat.com>, Sunil V L
- <sunilvl@ventanamicro.com>, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis
- <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>, Weiwei Li
- <liwei1518@gmail.com>, Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Ani Sinha <anisinha@redhat.com>
-Subject: Re: [PATCH v2 0/9] RISC-V: ACPI: Namespace updates
-Message-ID: <20240715144352.22d36779@imammedo.users.ipa.redhat.com>
-In-Reply-To: <20240714034105-mutt-send-email-mst@kernel.org>
-References: <20240708114741.3499585-1-sunilvl@ventanamicro.com>
- <20240712144319.233c19a7@imammedo.users.ipa.redhat.com>
- <ZpEmuB6xyh2K77Ic@redhat.com>
- <20240712155010.3756bb82@imammedo.users.ipa.redhat.com>
- <20240714034105-mutt-send-email-mst@kernel.org>
-X-Mailer: Claws Mail 4.3.0 (GTK 3.24.42; x86_64-redhat-linux-gnu)
+ Mon, 15 Jul 2024 10:11:50 -0700 (PDT)
+From: Sunil V L <sunilvl@ventanamicro.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ "Michael S . Tsirkin" <mst@redhat.com>,
+ Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
+ Sunil V L <sunilvl@ventanamicro.com>
+Subject: [PATCH v3 4/9] acpi/gpex: Create PCI link devices outside PCI root
+ bridge
+Date: Mon, 15 Jul 2024 22:41:24 +0530
+Message-ID: <20240715171129.1168896-5-sunilvl@ventanamicro.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240715171129.1168896-1-sunilvl@ventanamicro.com>
+References: <20240715171129.1168896-1-sunilvl@ventanamicro.com>
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=imammedo@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2001:4860:4864:20::30;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-oa1-x30.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -114,87 +104,87 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sun, 14 Jul 2024 03:46:36 -0400
-"Michael S. Tsirkin" <mst@redhat.com> wrote:
+Currently, PCI link devices (PNP0C0F) are always created within the
+scope of the PCI root bridge. However, RISC-V needs these link devices
+to be created outside to ensure the probing order in the OS. This
+matches the example given in the ACPI specification [1] as well. Hence,
+create these link devices directly under _SB instead of under the PCI
+root bridge.
 
-> On Fri, Jul 12, 2024 at 03:50:10PM +0200, Igor Mammedov wrote:
-> > On Fri, 12 Jul 2024 13:51:04 +0100
-> > Daniel P. Berrang=C3=A9 <berrange@redhat.com> wrote:
-> >  =20
-> > > On Fri, Jul 12, 2024 at 02:43:19PM +0200, Igor Mammedov wrote: =20
-> > > > On Mon,  8 Jul 2024 17:17:32 +0530
-> > > > Sunil V L <sunilvl@ventanamicro.com> wrote:
-> > > >    =20
-> > > > > This series adds few updates to RISC-V ACPI namespace for virt pl=
-atform.
-> > > > > Additionally, it has patches to enable ACPI table testing for RIS=
-C-V.
-> > > > >=20
-> > > > > 1) PCI Link devices need to be created outside the scope of the P=
-CI root
-> > > > > complex to ensure correct probe ordering by the OS. This matches =
-the
-> > > > > example given in ACPI spec as well.
-> > > > >=20
-> > > > > 2) Add PLIC and APLIC as platform devices as well to ensure probi=
-ng
-> > > > > order as per BRS spec [1] requirement.
-> > > > >=20
-> > > > > 3) BRS spec requires RISC-V to use new ACPI ID for the generic UA=
-RT. So,
-> > > > > update the HID of the UART.
-> > > > >=20
-> > > > > 4) Enabled ACPI tables tests for RISC-V which were originally par=
-t of
-> > > > > [2] but couldn't get merged due to updates required in the expect=
-ed AML
-> > > > > files. I think combining those patches with this series makes it =
-easier
-> > > > > to merge since expected AML files are updated.
-> > > > >=20
-> > > > > [1] - https://github.com/riscv-non-isa/riscv-brs
-> > > > > [2] - https://lists.gnu.org/archive/html/qemu-devel/2024-06/msg04=
-734.html   =20
-> > > >=20
-> > > > btw: CI is not happy about series, see:
-> > > >  https://gitlab.com/imammedo/qemu/-/pipelines/1371119552
-> > > > also 'cross-i686-tci' job routinely timeouts on bios-tables-test
-> > > > but we still keep adding more tests to it.
-> > > > We should either bump timeout to account for slowness or
-> > > > disable bios-tables-test for that job.   =20
-> > >=20
-> > > Asumming the test is functionally correct, and not hanging, then bump=
-ing
-> > > the timeout is the right answer. You can do this in the meson.build
-> > > file =20
-> >=20
-> > I think test is fine, since once in a while it passes (I guess it depen=
-ds on runner host/load)
-> >=20
-> > Overal job timeout is 1h, but that's not what fails.
-> > What I see is, the test aborts after 10min timeout.
-> > it's likely we hit boot_sector_test()/acpi_find_rsdp_address_uefi() tim=
-eout.
-> > That's what we should try to bump.
-> >=20
-> > PS:
-> > I've just started the job with 5min bump, lets see if it is enough. =20
->=20
-> Because we should wait for 5min CPU time, not wall time.
-> Why don't we do that?
-> Something like getrusage should work I think.
->=20
+To keep these link device names unique for multiple PCI bridges, change
+the device name from GSIx to LXXY format where XX is the PCI bus number
+and Y is the INTx.
 
-It turned out to be a meson timeout that's set individually per test file.
-I'll send a patch later on.
+GPEX is currently used by riscv, aarch64/virt and x86/microvm machines.
+So, this change will alter the DSDT for those systems.
 
->=20
-> > > We should never disable tests only in CI, because non-CI users
-> > > are just as likely to hit timeouts.
-> > >=20
-> > >=20
-> > > With regards,
-> > > Daniel =20
->=20
+[1] - ACPI 5.1: 6.2.13.1 Example: Using _PRT to Describe PCI IRQ Routing
+
+Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+---
+ hw/pci-host/gpex-acpi.c | 13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
+
+diff --git a/hw/pci-host/gpex-acpi.c b/hw/pci-host/gpex-acpi.c
+index f69413ea2c..391fabb8a8 100644
+--- a/hw/pci-host/gpex-acpi.c
++++ b/hw/pci-host/gpex-acpi.c
+@@ -7,7 +7,8 @@
+ #include "hw/pci/pcie_host.h"
+ #include "hw/acpi/cxl.h"
+ 
+-static void acpi_dsdt_add_pci_route_table(Aml *dev, uint32_t irq)
++static void acpi_dsdt_add_pci_route_table(Aml *dev, uint32_t irq,
++                                          Aml *scope, uint8_t bus_num)
+ {
+     Aml *method, *crs;
+     int i, slot_no;
+@@ -20,7 +21,7 @@ static void acpi_dsdt_add_pci_route_table(Aml *dev, uint32_t irq)
+             Aml *pkg = aml_package(4);
+             aml_append(pkg, aml_int((slot_no << 16) | 0xFFFF));
+             aml_append(pkg, aml_int(i));
+-            aml_append(pkg, aml_name("GSI%d", gsi));
++            aml_append(pkg, aml_name("L%.02X%X", bus_num, gsi));
+             aml_append(pkg, aml_int(0));
+             aml_append(rt_pkg, pkg);
+         }
+@@ -30,7 +31,7 @@ static void acpi_dsdt_add_pci_route_table(Aml *dev, uint32_t irq)
+     /* Create GSI link device */
+     for (i = 0; i < PCI_NUM_PINS; i++) {
+         uint32_t irqs = irq + i;
+-        Aml *dev_gsi = aml_device("GSI%d", i);
++        Aml *dev_gsi = aml_device("L%.02X%X", bus_num, i);
+         aml_append(dev_gsi, aml_name_decl("_HID", aml_string("PNP0C0F")));
+         aml_append(dev_gsi, aml_name_decl("_UID", aml_int(i)));
+         crs = aml_resource_template();
+@@ -45,7 +46,7 @@ static void acpi_dsdt_add_pci_route_table(Aml *dev, uint32_t irq)
+         aml_append(dev_gsi, aml_name_decl("_CRS", crs));
+         method = aml_method("_SRS", 1, AML_NOTSERIALIZED);
+         aml_append(dev_gsi, method);
+-        aml_append(dev, dev_gsi);
++        aml_append(scope, dev_gsi);
+     }
+ }
+ 
+@@ -174,7 +175,7 @@ void acpi_dsdt_add_gpex(Aml *scope, struct GPEXConfig *cfg)
+                 aml_append(dev, aml_name_decl("_PXM", aml_int(numa_node)));
+             }
+ 
+-            acpi_dsdt_add_pci_route_table(dev, cfg->irq);
++            acpi_dsdt_add_pci_route_table(dev, cfg->irq, scope, bus_num);
+ 
+             /*
+              * Resources defined for PXBs are composed of the following parts:
+@@ -205,7 +206,7 @@ void acpi_dsdt_add_gpex(Aml *scope, struct GPEXConfig *cfg)
+     aml_append(dev, aml_name_decl("_STR", aml_unicode("PCIe 0 Device")));
+     aml_append(dev, aml_name_decl("_CCA", aml_int(1)));
+ 
+-    acpi_dsdt_add_pci_route_table(dev, cfg->irq);
++    acpi_dsdt_add_pci_route_table(dev, cfg->irq, scope, 0);
+ 
+     method = aml_method("_CBA", 0, AML_NOTSERIALIZED);
+     aml_append(method, aml_return(aml_int(cfg->ecam.base)));
+-- 
+2.43.0
 
 
