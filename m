@@ -4,87 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D38DAC3DA59
-	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Jul 2024 21:43:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C781EC3DA59
+	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Jul 2024 23:13:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sTTTO-0007tf-KP; Mon, 15 Jul 2024 17:43:06 -0400
+	id 1sTUtF-0000ja-7P; Mon, 15 Jul 2024 19:13:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sTTTM-0007s7-5t
- for qemu-riscv@nongnu.org; Mon, 15 Jul 2024 17:43:04 -0400
-Received: from mail-pg1-x52d.google.com ([2607:f8b0:4864:20::52d])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1sTUtC-0000gH-QV; Mon, 15 Jul 2024 19:13:50 -0400
+Received: from mail-vk1-xa2b.google.com ([2607:f8b0:4864:20::a2b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sTTTK-0000uk-CR
- for qemu-riscv@nongnu.org; Mon, 15 Jul 2024 17:43:03 -0400
-Received: by mail-pg1-x52d.google.com with SMTP id
- 41be03b00d2f7-767506e1136so3487073a12.0
- for <qemu-riscv@nongnu.org>; Mon, 15 Jul 2024 14:43:01 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1sTUt4-0008W9-AL; Mon, 15 Jul 2024 19:13:50 -0400
+Received: by mail-vk1-xa2b.google.com with SMTP id
+ 71dfb90a1353d-4f2ee99e2d0so1431237e0c.0; 
+ Mon, 15 Jul 2024 16:13:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721079780; x=1721684580; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=qFlJThacqRcUbiwz/H0Z0GPMFjEVS/7KcMwKMYneQwU=;
- b=HezLn9xnu1Hawn9UhCN0+Ubdy4LvecBS/6KvggRxafYfSpZzEeZ/v2I1ItV/hwS1WM
- 3GngV0FTsvc2rs70rSmGG3jyqfAuTUsumGEy++rBS6k4Ht2Z0DpWhTu/s7igbpI061T/
- uYFJ7lmi+Optryha49aWAxDl/xDBliLAH0hLBUVDRQoFCXtSHtsk3LqZOQA1ELhhGTIE
- UzguNTfc4bFuVTigpjjXzG/ocj6pAa8ya+JFHgfN1coEmVeeqYNrm7GwVZrroLAipdmv
- gv4ju+WC6lCXnL4Nhs/CTlAJCY7NHY37WB9ME2dMHuADutuTITHArExPhQ9A72c7uk6f
- Bgsw==
+ d=gmail.com; s=20230601; t=1721085220; x=1721690020; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YP2pa5m2p/qQSsKudUcc+T1gLsbfHKca4hCaD7YWDLo=;
+ b=jSI7IjYwmJLm9mZ7hLRE3KYEnSLO+FxT9rspCWbZDU5MELif2kvZR40Li1gnxfbn9L
+ M7kmsTLR/f9IR10uUoyIuteQdZZylKq3sX3koZe2bTYGF1ohygjnf71lOAbaMShDuqZa
+ BJFCfpwRj2KY7MBAnFu0KiuS6ItZT1BeYKX8rqrq4qubA9gUe9ULQogiVEKt9RP8GmDS
+ XfdS9yMpFqWUfsKuhb1ZrP4iHaCDoPgmBeAxakosbVZ7tsryWF7EhH2YgjTTOELfFlVL
+ ODh5FwyQ7hfJFvjEcPX7l9gOFHO+9OqykLUoNceIQWBEir43KFTZD4HNkccSR1JKt4tM
+ VkbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721079780; x=1721684580;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=qFlJThacqRcUbiwz/H0Z0GPMFjEVS/7KcMwKMYneQwU=;
- b=fm6GjyN9GiWdY2C8c2iE0ZKJIEHP67Z51dCPDLvy4KZgxdr4UjYzpmY/BrxL+m30IM
- xyDXcCyZzHE9dpa5C6KwvarJd/N5I3mEcBIxo2BvH3bqaDZuXQwx7P+D+3/3iPb8rxfa
- Gw1MOJgNdZeazpZ4Rd0UGjAC1VF65FJm/IU+ce55I3gCaXClCgvvVmQXUQT2gRtLKAXN
- XjV92MUoVvz2/exOA/utqugUHfjggakQiDKRPXkbaXU72TpRJXuG6q9ccoUkh6+5KOJH
- FmrsHDQII0ZLYoTdENjpZdpcgeO0tMJBNLZTo7LXjZxU4ElNh95qYVdJmJduo/w3F5P5
- fsTg==
+ d=1e100.net; s=20230601; t=1721085220; x=1721690020;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=YP2pa5m2p/qQSsKudUcc+T1gLsbfHKca4hCaD7YWDLo=;
+ b=tDAKHLc7hEDVw0tpdd7RTDZbxHBvGorNRagQiCgS+HaCkHr8nkvbxVVervv4dm1VGF
+ hkkGU0ZKh1R5xBkQsiHByDNhn+mUhq+K7cCWfo0nh4KK14jyp+Uv0NtgqgoF8QD0pNH6
+ XuVUqPJoZF03gMJg31SLTnou7MGyoNEcXhb8DBgV+DCh3ZlSv3FEUD+9RduBQ6w4LtoH
+ H872xJ/+e2dvwUphRwj+r93SkMecZFQvvOu8yznUYpnKu9rvM9wlO43rjP+VpTl1azwn
+ TBg1BaWkOtMMnwr/zCdlzRyK1NSRPEr36ccuHZuHgQA069ltEahpFLRxLPt4mqXeF/bx
+ oixw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWW23Al3oJkpfkCK2fJ3Ae+1Wd5N0/qLBvTeZZnm222PEil8dBDk42Zc91g41jBdLYPma/bs3eKx+5WlumFl3ljzmw6KHo=
-X-Gm-Message-State: AOJu0YyOASt4dwULR3tgyFR6UpL9S9wUdQKIfIZ7Y/Vyg157RVyj/iFW
- 3WcwqIrL8jmec9WL1sPP8BXmienScxkVUs84H4IRGJMFRdBmq6xppArFHQqWqp8=
-X-Google-Smtp-Source: AGHT+IEFoUEYnh4G61GkZ4kVJACf/CLNX5mrTbN0nJQL3t4ib4OO6rGhjG89Nwaa7tXh79VQzn4dtQ==
-X-Received: by 2002:a17:90a:6881:b0:2c8:2cd1:881b with SMTP id
- 98e67ed59e1d1-2cb373389a9mr256669a91.20.1721079780052; 
- Mon, 15 Jul 2024 14:43:00 -0700 (PDT)
-Received: from [192.168.1.113] ([203.56.128.103])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2caedc1709esm4865416a91.34.2024.07.15.14.42.56
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 15 Jul 2024 14:42:59 -0700 (PDT)
-Message-ID: <3d86bfd4-e6ef-464a-a663-21e95e1f6cf6@linaro.org>
-Date: Tue, 16 Jul 2024 07:42:51 +1000
+ AJvYcCUgmdCJ+63vjyZfPIBqdxJl7GcAxnzSk0KkYb8HbYuauDrl6NWHrtKtF4xI8s5iovUvXwqdUFT6Te2YFmhaXMrq+XQlepA=
+X-Gm-Message-State: AOJu0YwEKkWBWta7w3JxQMVT2QcBjCdxmArNJtJqJg4IG07B9NsTTjL1
+ WlNt+VH1gF59yBt+Nx2pJcJgih7JVJCuKtXwvWKXiQHh0Uu5fFhTEb6FmWVInUhvMqCCGC2Yqjq
+ QKZJc0pseINTyv9/jYz1N5VEudM8=
+X-Google-Smtp-Source: AGHT+IHjLrzFuSBkYc327CA6YxaV6lK+0UEULzNoG+do9/XliWKanqiHo+A2jjJe2lmuVYxsIJhHdFbBZgo0T7w+jmY=
+X-Received: by 2002:a05:6122:3124:b0:4d4:21cc:5f4f with SMTP id
+ 71dfb90a1353d-4f4d08636femr459984e0c.11.1721085219978; Mon, 15 Jul 2024
+ 16:13:39 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 13/13] target/riscv: Simplify probing in vext_ldff
-To: Max Chou <max.chou@sifive.com>, qemu-devel@nongnu.org
-Cc: qemu-arm@nongnu.org, qemu-ppc@nongu.org, qemu-s390x@nongnu.org,
- qemu-riscv@nongnu.org, balaton@eik.bme.hu
-References: <20240710032814.104643-1-richard.henderson@linaro.org>
- <20240710032814.104643-14-richard.henderson@linaro.org>
- <5a83ce12-9a9c-4c9d-9fee-e37fb6afd19d@sifive.com>
-Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <5a83ce12-9a9c-4c9d-9fee-e37fb6afd19d@sifive.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52d;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x52d.google.com
-X-Spam_score_int: 37
-X-Spam_score: 3.7
-X-Spam_bar: +++
-X-Spam_report: (3.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_SBL_CSS=3.335, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- SUSPICIOUS_RECIPS=2.51 autolearn=no autolearn_force=no
+References: <20240715090455.145888-1-dbarboza@ventanamicro.com>
+In-Reply-To: <20240715090455.145888-1-dbarboza@ventanamicro.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 16 Jul 2024 09:13:13 +1000
+Message-ID: <CAKmqyKO5Gi=pr=fFmqXJ8qgLNQ7tzecjRkdYns7syxEmZDKAXQ@mail.gmail.com>
+Subject: Re: [PATCH v2] hw/riscv/virt.c: re-insert and deprecate 'riscv,
+ delegate'
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com, Conor Dooley <conor@kernel.org>, 
+ Anup Patel <apatel@ventanamicro.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2b;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2b.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,102 +93,94 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 7/15/24 17:06, Max Chou wrote:
->> +                /* Probe nonfault on subsequent elements. */
->> +                flags = probe_access_flags(env, addr, offset, MMU_DATA_LOAD,
->> +                                           mmu_index, true, &host, 0);
->> +                if (flags) {
-> According to the section 7.7. Unit-stride Fault-Only-First Loads in the v spec (v1.0)
-> 
->       When the fault-only- data-watchpoint trap on an element after the      
-> implementations should not reduce vl but instead should trigger the debug trap as 
-> otherwise the event might be lost.
+On Mon, Jul 15, 2024 at 7:05=E2=80=AFPM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
+>
+> Commit b1f1e9dcfa renamed 'riscv,delegate' to 'riscv,delegation' since
+> it is the correct name as per dt-bindings, and the absence of the
+> correct name will result in validation fails when dumping the dtb and
+> using dt-validate.
+>
+> But this change has a side-effect: every other firmware available that
+> is AIA capable is using 'riscv,delegate', and it will fault/misbehave if
+> this property isn't present. The property was added back in QEMU 7.0,
+> meaning we have 2 years of firmware development using the wrong
+> property.
+>
+> Re-introducing 'riscv,delegate' while keeping 'riscv,delegation' allows
+> older firmwares to keep booting with the 'virt' machine.
+> 'riscv,delegate' is then marked for future deprecation with its use
+> being discouraged from now on.
+>
+> Cc: Conor Dooley <conor@kernel.org>
+> Cc: Anup Patel <apatel@ventanamicro.com>
+> Fixes: b1f1e9dcfa ("hw/riscv/virt.c: aplic DT: rename prop to 'riscv, del=
+egation'")
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Hmm, ok.  Interesting.
+Thanks!
 
+Applied to riscv-to-apply.next
 
-> And I think that there is a potential issue in the original implementation that maybe we 
-> can fix in this patch.
-> 
-> We need to assign the correct element load size to the probe_access_internal function 
-> called by tlb_vaddr_to_host in original implementation or is called directly in this patch.
-> The size parameter will be used by the pmp_hart_has_privs function to do the physical 
-> memory protection (PMP) checking.
-> If we set the size parameter to the remain page size, we may get unexpected trap caused by 
-> the PMP rules that covered the regions of masked-off elements.
-> 
-> Maybe we can replace the while loop liked below.
-> 
-> 
-> vext_ldff(void *vd, void *v0, target_ulong base,
->            ...
-> {
->      ...
->      uint32_t size = nf << log2_esz;
-> 
->      VSTART_CHECK_EARLY_EXIT(env);
-> 
->      /* probe every access */
->      for (i = env->vstart; i < env->vl; i++) {
->          if (!vm && !vext_elem_mask(v0, i)) {
->              continue;
->          }
->          addr = adjust_addr(env, base + i * size);
->          if (i == 0) {
->              probe_pages(env, addr, size, ra, MMU_DATA_LOAD);
->          } else {
->              /* if it triggers an exception, no need to check watchpoint */
->              void *host;
->              int flags;
-> 
->              /* Probe nonfault on subsequent elements. */
->              flags = probe_access_flags(env, addr, size, MMU_DATA_LOAD,
->                      mmu_index, true, &host, 0);
->              if (flags & ~TLB_WATCHPOINT) {
->                  /*
->                   * Stop any flag bit set:
->                   *   invalid (unmapped)
->                   *   mmio (transaction failed)
->                   * In all cases, handle as the first load next time.
->                   */
->                  vl = i;
->                  break;
->              }
->          }
->      }
+Alistair
 
-No, I don't think repeated probing is a good idea.
-You'll lose everything you attempted to gain with the other improvements.
-
-It seems, to handle watchpoints, you need to start by probing the entire length non-fault. 
-  That will tell you if any portion of the length has any of the problem cases.  The fast 
-path will not, of course.
-
-After probing, you have flags for the 1 or two pages, and you can make a choice about the 
-actual load length:
-
-   - invalid on first page: either the first element faults,
-     or you need to check PMP via some alternate mechanism.
-     Do not be afraid to add something to CPUTLBEntryFull.extra.riscv
-     during tlb_fill in order to accelerate this, if needed.
-
-   - mmio on first page: just one element, as the second might fault
-     during the transaction.
-
-     It would be possible to enhance riscv_cpu_do_transaction_failed to
-     suppress the fault and set a flag noting the fault.  This would allow
-     multiple elements to be loaded, at the expense of another check after
-     each element within the slow tlb-load path.  I don't know if this is
-     desirable, really.  Using vector operations on mmio is usually a
-     programming error.  :-)
-
-   - invalid or mmio on second page, continue to the end of the first page.
-
-Once we have the actual load length, handle watchpoints by hand.
-See sve_cont_ldst_watchpoints.
-
-Finally, the loop loading the elements, likely in ram via host pointer.
-
-
-r~
+> ---
+>
+> v2:
+>  - changed commit msg to remove the 'dt-validate won't complain about
+>    it' bit since that was incorrect.
+>
+>  docs/about/deprecated.rst | 11 +++++++++++
+>  hw/riscv/virt.c           |  9 +++++++++
+>  2 files changed, 20 insertions(+)
+>
+> diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
+> index 20b7a17cf0..88f0f03786 100644
+> --- a/docs/about/deprecated.rst
+> +++ b/docs/about/deprecated.rst
+> @@ -479,6 +479,17 @@ versions, aliases will point to newer CPU model vers=
+ions
+>  depending on the machine type, so management software must
+>  resolve CPU model aliases before starting a virtual machine.
+>
+> +RISC-V "virt" board "riscv,delegate" DT property (since 9.1)
+> +''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+> +
+> +The "riscv,delegate" DT property was added in QEMU 7.0 as part of
+> +the AIA APLIC support.  The property changed name during the review
+> +process in Linux and the correct name ended up being
+> +"riscv,delegation".  Changing the DT property name will break all
+> +available firmwares that are using the current (wrong) name.  The
+> +property is kept as is in 9.1, together with "riscv,delegation", to
+> +give more time for firmware developers to change their code.
+> +
+>  Migration
+>  ---------
+>
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index bc0893e087..9981e0f6c9 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -651,6 +651,15 @@ static void create_fdt_one_aplic(RISCVVirtState *s, =
+int socket,
+>          qemu_fdt_setprop_cells(ms->fdt, aplic_name, "riscv,delegation",
+>                                 aplic_child_phandle, 0x1,
+>                                 VIRT_IRQCHIP_NUM_SOURCES);
+> +        /*
+> +         * DEPRECATED_9.1: Compat property kept temporarily
+> +         * to allow old firmwares to work with AIA. Do *not*
+> +         * use 'riscv,delegate' in new code: use
+> +         * 'riscv,delegation' instead.
+> +         */
+> +        qemu_fdt_setprop_cells(ms->fdt, aplic_name, "riscv,delegate",
+> +                               aplic_child_phandle, 0x1,
+> +                               VIRT_IRQCHIP_NUM_SOURCES);
+>      }
+>
+>      riscv_socket_fdt_write_id(ms, aplic_name, socket);
+> --
+> 2.45.2
+>
+>
 
