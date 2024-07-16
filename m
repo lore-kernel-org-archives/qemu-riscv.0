@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC834C3DA49
-	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Jul 2024 14:28:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3FFBC3DA59
+	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Jul 2024 14:34:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sTjAC-00024k-7o; Tue, 16 Jul 2024 10:28:20 -0400
+	id 1sTjFi-00056s-Kj; Tue, 16 Jul 2024 10:34:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1sTjAA-000221-LN
- for qemu-riscv@nongnu.org; Tue, 16 Jul 2024 10:28:18 -0400
+ id 1sTjFg-0004zb-NK
+ for qemu-riscv@nongnu.org; Tue, 16 Jul 2024 10:34:00 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1sTjA8-0008QJ-UQ
- for qemu-riscv@nongnu.org; Tue, 16 Jul 2024 10:28:18 -0400
+ id 1sTjFe-0000st-4t
+ for qemu-riscv@nongnu.org; Tue, 16 Jul 2024 10:34:00 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1721140094;
+ s=mimecast20190719; t=1721140436;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=U7fQEKAlrbhjeHrh8dvan/uCka3kqpu1rzhr/5qTmQg=;
- b=beNAYm6IDk1u1uGWh+ReGVP1xfiXee7rarewoI8iMts43BIztW9cvhbx6YWEx7F+BZ71g0
- y510TVXpa4gF+/oZQxkX9TRqopvxzgvPAi+EZ6Tgajm7gtfZdtJ3DV/e+d0XnOdllDPrbR
- DJEF8fkQxCfRSTF8Sp+xHUkMn2fW7R4=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=Vb2X5N2ZZqycUSXkLk9Jqt3vWjMI04G4E/lCvQ/UQpw=;
+ b=ZKsZCoMJW3nMwiEOocRU8DE/RlpBA4BQhZWWxLrfz9uuhKPBD5Im7qzq1u/Kg42arCwrKl
+ eHnZS2kv3bAvr+a1FqPUU5Mc3BLTCcqGNK5J8YTm8j4mWkIwQHNQ23jEH3ypgQ13vvl772
+ WjKkM9QXWt8jsp9AOMPVclRNy5srC28=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-689-Q3lz1HkyN2e3rbtGuLQAyA-1; Tue, 16 Jul 2024 10:28:13 -0400
-X-MC-Unique: Q3lz1HkyN2e3rbtGuLQAyA-1
-Received: by mail-wr1-f69.google.com with SMTP id
- ffacd0b85a97d-36789dfcc8bso3392883f8f.3
- for <qemu-riscv@nongnu.org>; Tue, 16 Jul 2024 07:28:13 -0700 (PDT)
+ us-mta-335-a1JcdjMnMxCWzTKzaKXTTA-1; Tue, 16 Jul 2024 10:33:55 -0400
+X-MC-Unique: a1JcdjMnMxCWzTKzaKXTTA-1
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-42725ec6e0aso41470935e9.0
+ for <qemu-riscv@nongnu.org>; Tue, 16 Jul 2024 07:33:55 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721140089; x=1721744889;
+ d=1e100.net; s=20230601; t=1721140431; x=1721745231;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lvZ99WZGHNNJL/1pbkXp9By1bGmdjsSz0FHFOR+ydPs=;
- b=iSk8LMv7SWlzZaR+byzBAP7vI2LIwf1O3yQBTrDU+25jxhAGeGOdtV502enwjKj7/H
- S60NAzppeUT8oVYIBY7To28zcm4QQi9SmpCa7yp/pRhgD7TAanYbOf+sjTcftAzJd4sD
- FfZg3vE9mDgra/clSys4zNehieHmPjYLOunSDiOeCUQ5Xja3FiHWxqslvNfMqo0O5SXH
- 0GNYVs4IAI5VvkLbbX0OUa4EKeHIDxHc71jA9FRKq3LXffsoXtYKM40D5SlZatVeDJah
- DyV4Rugy0QWiCTLd3UvxS/R7IJ6i8RTP+KsVEhKV9VbhCDCQfWBY3oWmJ04B3UkN3re0
- q6nA==
+ bh=Z2VPQtBS+xun1o1WdBSq+3OeKZ9z8HE5BK0kVY5+MDw=;
+ b=nioHvubMgOAt/kWzxhtyNWdTK06HQ37l81G1UTjY1ld8/IVkNO9/3OnCFiVeqbRgqk
+ aCcvRRiauejKZ5T16rcx8DiWku1Ly/yutC+i1+70REXI2AbAdmw31dJTueBM/EdegJ8r
+ UHh7PUHQHvMyF1QcEbHR1RgjH4P6MLY273zetAolu5SVKqucYa9cl3NR9Nobrg+ESE6k
+ Fgoe9Nnwqw7OVVHQVVA8grxFOQ7Cz+u/5txjiOU8WYETfg4HXAKX3JcdIkJnkYomAcBn
+ d2QBWJV4RgmNBAT8Jez7YfYOg8OYzF0+yRIcajCTX8jjwS6alYCOXd24pS6qU2BwMTvJ
+ 8RfQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXCpzQT2x4JUQf6lxWo/GM4MJ95OHgd0b/gQhgqnAJbGF1rlrqam7DbX7Ak4t3GyE5HC9wZB+hmh/xtSLEz0NtaQCvH6uQ=
-X-Gm-Message-State: AOJu0YxQQELkAg4umKIdwUFmnPjGBEEzyviM2E7cCLs93GgHZFxIRYi0
- BNkDU6J1XhEaCWy0vtWLEy4SYuleTfV6CIpA1+7urnBjnruYCCCed48wichUkIECliBn2VzS63v
- FFknZT33bi99cDS2xwiDpIxgceRsGzAIm8ejH0FW6bN1FkrCMMztF
-X-Received: by 2002:adf:9b83:0:b0:367:f281:260e with SMTP id
- ffacd0b85a97d-36825f65dfcmr1493568f8f.3.1721140089537; 
- Tue, 16 Jul 2024 07:28:09 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGBiI/Rz6MbcptMVBR6eBR522D9sI5H+9GNR6dib3RCPLy1CUI7f6DflnvUTEBa7L4VbujMvA==
-X-Received: by 2002:adf:9b83:0:b0:367:f281:260e with SMTP id
- ffacd0b85a97d-36825f65dfcmr1493549f8f.3.1721140089144; 
- Tue, 16 Jul 2024 07:28:09 -0700 (PDT)
+ AJvYcCXUjknOYjSSgMX6be5ZdjPdtsPTxvaHrqZbry2H6G8mD24dbMcsvu2snt4MiQQInzvt00UGwd2HRqTIz+gGZHxROge+9r4=
+X-Gm-Message-State: AOJu0Yyx7S7Udo9GgbYc1SZ5E2TjZ8tELVK0Fuz7a9O01z7y4ROJyOH+
+ WrKBEIcyLy5W7XuLnPMMovbJm/ehGlft34Zriz5XFnH62uXfrZe752i2jk2CtuPiL72mQtFU1MM
+ QQeQVj/DbprAp60rgrdZn7fcDH6bXxZ7nAWYVB5C+dFslGanMjuHZ
+X-Received: by 2002:a05:600c:12c9:b0:427:9dad:181d with SMTP id
+ 5b1f17b1804b1-427ba684f2amr14261185e9.11.1721140431359; 
+ Tue, 16 Jul 2024 07:33:51 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGn9UgaDarL/emNSFJ+ykKIIsSTbnd1yLdbTvYchpv8267RqZcjgaGCks56CBA/JFFTRtbrlA==
+X-Received: by 2002:a05:600c:12c9:b0:427:9dad:181d with SMTP id
+ 5b1f17b1804b1-427ba684f2amr14260875e9.11.1721140430935; 
+ Tue, 16 Jul 2024 07:33:50 -0700 (PDT)
 Received: from imammedo.users.ipa.redhat.com (nat-pool-brq-t.redhat.com.
  [213.175.37.10]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3680dafbf29sm9272528f8f.70.2024.07.16.07.28.08
+ 5b1f17b1804b1-4279f2d6ef8sm162676905e9.39.2024.07.16.07.33.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jul 2024 07:28:08 -0700 (PDT)
-Date: Tue, 16 Jul 2024 16:28:07 +0200
+ Tue, 16 Jul 2024 07:33:49 -0700 (PDT)
+Date: Tue, 16 Jul 2024 16:33:48 +0200
 From: Igor Mammedov <imammedo@redhat.com>
 To: Sunil V L <sunilvl@ventanamicro.com>
 Cc: "Michael S. Tsirkin" <mst@redhat.com>, "Daniel P. =?UTF-8?B?QmVycmFu?=
@@ -76,10 +76,11 @@ Cc: "Michael S. Tsirkin" <mst@redhat.com>, "Daniel P. =?UTF-8?B?QmVycmFu?=
  Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>, Weiwei
  Li <liwei1518@gmail.com>, Daniel Henrique Barboza
  <dbarboza@ventanamicro.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Ani
- Sinha <anisinha@redhat.com>
+ Sinha <anisinha@redhat.com>, atar4qemu@gmail.com, atar4qemu@gmail.com,
+ thuth@redhat.com
 Subject: Re: [PATCH v2 0/9] RISC-V: ACPI: Namespace updates
-Message-ID: <20240716162807.3aa78399@imammedo.users.ipa.redhat.com>
-In-Reply-To: <ZpZm48s9zt/glU/H@sunil-laptop>
+Message-ID: <20240716163348.3d179c93@imammedo.users.ipa.redhat.com>
+In-Reply-To: <20240716162807.3aa78399@imammedo.users.ipa.redhat.com>
 References: <20240708114741.3499585-1-sunilvl@ventanamicro.com>
  <20240712144319.233c19a7@imammedo.users.ipa.redhat.com>
  <ZpEmuB6xyh2K77Ic@redhat.com>
@@ -87,6 +88,7 @@ References: <20240708114741.3499585-1-sunilvl@ventanamicro.com>
  <20240714034105-mutt-send-email-mst@kernel.org>
  <20240715144352.22d36779@imammedo.users.ipa.redhat.com>
  <ZpZm48s9zt/glU/H@sunil-laptop>
+ <20240716162807.3aa78399@imammedo.users.ipa.redhat.com>
 X-Mailer: Claws Mail 4.3.0 (GTK 3.24.42; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
@@ -101,7 +103,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -117,105 +119,117 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, 16 Jul 2024 17:56:11 +0530
-Sunil V L <sunilvl@ventanamicro.com> wrote:
+On Tue, 16 Jul 2024 16:28:07 +0200
+Igor Mammedov <imammedo@redhat.com> wrote:
 
-> On Mon, Jul 15, 2024 at 02:43:52PM +0200, Igor Mammedov wrote:
-> > On Sun, 14 Jul 2024 03:46:36 -0400
-> > "Michael S. Tsirkin" <mst@redhat.com> wrote:
-> >  =20
-> > > On Fri, Jul 12, 2024 at 03:50:10PM +0200, Igor Mammedov wrote: =20
-> > > > On Fri, 12 Jul 2024 13:51:04 +0100
-> > > > Daniel P. Berrang=C3=A9 <berrange@redhat.com> wrote:
-> > > >    =20
-> > > > > On Fri, Jul 12, 2024 at 02:43:19PM +0200, Igor Mammedov wrote:   =
+> On Tue, 16 Jul 2024 17:56:11 +0530
+> Sunil V L <sunilvl@ventanamicro.com> wrote:
+>=20
+> > On Mon, Jul 15, 2024 at 02:43:52PM +0200, Igor Mammedov wrote: =20
+> > > On Sun, 14 Jul 2024 03:46:36 -0400
+> > > "Michael S. Tsirkin" <mst@redhat.com> wrote:
+> > >    =20
+> > > > On Fri, Jul 12, 2024 at 03:50:10PM +0200, Igor Mammedov wrote:   =
 =20
-> > > > > > On Mon,  8 Jul 2024 17:17:32 +0530
-> > > > > > Sunil V L <sunilvl@ventanamicro.com> wrote:
-> > > > > >      =20
-> > > > > > > This series adds few updates to RISC-V ACPI namespace for vir=
-t platform.
-> > > > > > > Additionally, it has patches to enable ACPI table testing for=
- RISC-V.
+> > > > > On Fri, 12 Jul 2024 13:51:04 +0100
+> > > > > Daniel P. Berrang=C3=A9 <berrange@redhat.com> wrote:
+> > > > >      =20
+> > > > > > On Fri, Jul 12, 2024 at 02:43:19PM +0200, Igor Mammedov wrote: =
+    =20
+> > > > > > > On Mon,  8 Jul 2024 17:17:32 +0530
+> > > > > > > Sunil V L <sunilvl@ventanamicro.com> wrote:
+> > > > > > >        =20
+> > > > > > > > This series adds few updates to RISC-V ACPI namespace for v=
+irt platform.
+> > > > > > > > Additionally, it has patches to enable ACPI table testing f=
+or RISC-V.
+> > > > > > > >=20
+> > > > > > > > 1) PCI Link devices need to be created outside the scope of=
+ the PCI root
+> > > > > > > > complex to ensure correct probe ordering by the OS. This ma=
+tches the
+> > > > > > > > example given in ACPI spec as well.
+> > > > > > > >=20
+> > > > > > > > 2) Add PLIC and APLIC as platform devices as well to ensure=
+ probing
+> > > > > > > > order as per BRS spec [1] requirement.
+> > > > > > > >=20
+> > > > > > > > 3) BRS spec requires RISC-V to use new ACPI ID for the gene=
+ric UART. So,
+> > > > > > > > update the HID of the UART.
+> > > > > > > >=20
+> > > > > > > > 4) Enabled ACPI tables tests for RISC-V which were original=
+ly part of
+> > > > > > > > [2] but couldn't get merged due to updates required in the =
+expected AML
+> > > > > > > > files. I think combining those patches with this series mak=
+es it easier
+> > > > > > > > to merge since expected AML files are updated.
+> > > > > > > >=20
+> > > > > > > > [1] - https://github.com/riscv-non-isa/riscv-brs
+> > > > > > > > [2] - https://lists.gnu.org/archive/html/qemu-devel/2024-06=
+/msg04734.html       =20
 > > > > > > >=20
-> > > > > > > 1) PCI Link devices need to be created outside the scope of t=
-he PCI root
-> > > > > > > complex to ensure correct probe ordering by the OS. This matc=
-hes the
-> > > > > > > example given in ACPI spec as well.
-> > > > > > >=20
-> > > > > > > 2) Add PLIC and APLIC as platform devices as well to ensure p=
-robing
-> > > > > > > order as per BRS spec [1] requirement.
-> > > > > > >=20
-> > > > > > > 3) BRS spec requires RISC-V to use new ACPI ID for the generi=
-c UART. So,
-> > > > > > > update the HID of the UART.
-> > > > > > >=20
-> > > > > > > 4) Enabled ACPI tables tests for RISC-V which were originally=
- part of
-> > > > > > > [2] but couldn't get merged due to updates required in the ex=
-pected AML
-> > > > > > > files. I think combining those patches with this series makes=
- it easier
-> > > > > > > to merge since expected AML files are updated.
-> > > > > > >=20
-> > > > > > > [1] - https://github.com/riscv-non-isa/riscv-brs
-> > > > > > > [2] - https://lists.gnu.org/archive/html/qemu-devel/2024-06/m=
-sg04734.html     =20
+> > > > > > > btw: CI is not happy about series, see:
+> > > > > > >  https://gitlab.com/imammedo/qemu/-/pipelines/1371119552
+> > > > > > > also 'cross-i686-tci' job routinely timeouts on bios-tables-t=
+est
+> > > > > > > but we still keep adding more tests to it.
+> > > > > > > We should either bump timeout to account for slowness or
+> > > > > > > disable bios-tables-test for that job.       =20
 > > > > > >=20
-> > > > > > btw: CI is not happy about series, see:
-> > > > > >  https://gitlab.com/imammedo/qemu/-/pipelines/1371119552
-> > > > > > also 'cross-i686-tci' job routinely timeouts on bios-tables-tes=
-t
-> > > > > > but we still keep adding more tests to it.
-> > > > > > We should either bump timeout to account for slowness or
-> > > > > > disable bios-tables-test for that job.     =20
+> > > > > > Asumming the test is functionally correct, and not hanging, the=
+n bumping
+> > > > > > the timeout is the right answer. You can do this in the meson.b=
+uild
+> > > > > > file     =20
 > > > > >=20
-> > > > > Asumming the test is functionally correct, and not hanging, then =
-bumping
-> > > > > the timeout is the right answer. You can do this in the meson.bui=
-ld
-> > > > > file   =20
+> > > > > I think test is fine, since once in a while it passes (I guess it=
+ depends on runner host/load)
+> > > > >=20
+> > > > > Overal job timeout is 1h, but that's not what fails.
+> > > > > What I see is, the test aborts after 10min timeout.
+> > > > > it's likely we hit boot_sector_test()/acpi_find_rsdp_address_uefi=
+() timeout.
+> > > > > That's what we should try to bump.
+> > > > >=20
+> > > > > PS:
+> > > > > I've just started the job with 5min bump, lets see if it is enoug=
+h.     =20
 > > > >=20
-> > > > I think test is fine, since once in a while it passes (I guess it d=
-epends on runner host/load)
-> > > >=20
-> > > > Overal job timeout is 1h, but that's not what fails.
-> > > > What I see is, the test aborts after 10min timeout.
-> > > > it's likely we hit boot_sector_test()/acpi_find_rsdp_address_uefi()=
- timeout.
-> > > > That's what we should try to bump.
-> > > >=20
-> > > > PS:
-> > > > I've just started the job with 5min bump, lets see if it is enough.=
-   =20
+> > > > Because we should wait for 5min CPU time, not wall time.
+> > > > Why don't we do that?
+> > > > Something like getrusage should work I think.
+> > > >    =20
 > > >=20
-> > > Because we should wait for 5min CPU time, not wall time.
-> > > Why don't we do that?
-> > > Something like getrusage should work I think.
-> > >  =20
+> > > It turned out to be a meson timeout that's set individually per test =
+file.
+> > > I'll send a patch later on.
+> > >    =20
+> > Hi Igor,
 > >=20
-> > It turned out to be a meson timeout that's set individually per test fi=
-le.
-> > I'll send a patch later on.
+> > I am unable to get msys2-64bit test in CI to pass. I tried including
+> > your change in meson as well but no luck. I can't guess how enabling
+> > bios-tables-test for RISC-V is affecting this particular test. Does thi=
+s
+> > pass for you?=20
+> >=20
+> > https://gitlab.com/vlsunil/qemu/-/jobs/7343701148 =20
+>=20
+> it doesn't pass for me either,
+> but bios-tables-test is not among those that timed out,
+> so I'd ignore failure in this case
+
+as in your case it was sparc target tests that timed out:
+https://gitlab.com/imammedo/qemu/-/jobs/7352989984
+
+CCIng sparc folks as well
+
+>=20
+> >=20
+> > Thanks!
+> > Sunil
 > >  =20
-> Hi Igor,
->=20
-> I am unable to get msys2-64bit test in CI to pass. I tried including
-> your change in meson as well but no luck. I can't guess how enabling
-> bios-tables-test for RISC-V is affecting this particular test. Does this
-> pass for you?=20
->=20
-> https://gitlab.com/vlsunil/qemu/-/jobs/7343701148
-
-it doesn't pass for me either,
-but bios-tables-test is not among those that timed out,
-so I'd ignore failure in this case
-
->=20
-> Thanks!
-> Sunil
 >=20
 
 
