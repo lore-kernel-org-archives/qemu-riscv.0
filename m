@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79459C3DA49
-	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Jul 2024 10:28:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7147C3DA49
+	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Jul 2024 10:33:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sTfQ6-0004PT-UW; Tue, 16 Jul 2024 06:28:30 -0400
+	id 1sTfUd-00027d-Nu; Tue, 16 Jul 2024 06:33:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1sTfQ5-0004Lm-Lm
- for qemu-riscv@nongnu.org; Tue, 16 Jul 2024 06:28:29 -0400
+ id 1sTfUc-000265-0p
+ for qemu-riscv@nongnu.org; Tue, 16 Jul 2024 06:33:10 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1sTfQ4-0000JZ-2t
- for qemu-riscv@nongnu.org; Tue, 16 Jul 2024 06:28:29 -0400
+ id 1sTfUa-00018P-5U
+ for qemu-riscv@nongnu.org; Tue, 16 Jul 2024 06:33:09 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1721125706;
+ s=mimecast20190719; t=1721125986;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=9dMyt5tLR62A+MRxjYYv0VkPrjjUrb3m20z3ATaoyZs=;
- b=QN63vHvXT/J6nStfuRSSY0sZ0TWNr8EwCBJj/qvAxDN3bH3AhxxLqtv4jyizsqlGC7GWNB
- jGBgT8Z3/sHVoArRUt0Lyz31zD1J38lpUcwm9728VKjmCON8jNZtzg6jVvtABKKazgHTIX
- E7b+ldFla1/qr9e+LVxFEZl+pyPYmXk=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=oa5fi65WycZwAqSJWG1m+J7qWDGFkeGnvVUZmIZeBEw=;
+ b=bgnbSUyadV1dUFDfJJlj5gRsvHQN+p4ijN2M9hLHN9GxRAUKamZAl55FJ3fZ/BzdIFx9VA
+ R3jTTp7dHBki+I799TwrI3gecmWxqHdIHgryXmiDgkcEdiapv0945ay3VT+HZ3hR/TkE5w
+ dz06PTfzjbG4nyT6bKA5zod+l9OI0pI=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-354-ebFNeoM6PsGLteNAL2Di8g-1; Tue, 16 Jul 2024 06:28:24 -0400
-X-MC-Unique: ebFNeoM6PsGLteNAL2Di8g-1
-Received: by mail-wr1-f69.google.com with SMTP id
- ffacd0b85a97d-367f1dc92e3so3290418f8f.0
- for <qemu-riscv@nongnu.org>; Tue, 16 Jul 2024 03:28:24 -0700 (PDT)
+ us-mta-54-NTwxpRg6NpqtmjDzpQadRQ-1; Tue, 16 Jul 2024 06:33:04 -0400
+X-MC-Unique: NTwxpRg6NpqtmjDzpQadRQ-1
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-4272718b9b0so38160005e9.1
+ for <qemu-riscv@nongnu.org>; Tue, 16 Jul 2024 03:33:04 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721125702; x=1721730502;
+ d=1e100.net; s=20230601; t=1721125984; x=1721730784;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9dMyt5tLR62A+MRxjYYv0VkPrjjUrb3m20z3ATaoyZs=;
- b=bbK4NYeYqin4B8nZGJDDOA49rxaR7MvAbQYqb82s7/zbBfuS6BdgMD9cKrK869ocTo
- LEhhjrEl6xOzxi9WrWevid+OtKNi7EearQ0/vN3ze0UigWAsd5wq9n5I+gD7/Oz50USj
- +e92tF9F5PZdUp4pV+BNCrW8IinAYnOA3FUrmr2ykCppdtHCFBYipNzWk4C3NvLvw/fS
- XzhoPSh7IDmPud+v4xP0/gsrpSwsZdQi33z+Uubn6eeT64kk8QKUcAYfdnatS2WfgzD6
- KOAonPBj/VswNMcAsb272tAcO49iBi1n32ItDReLvNAMtA40lHQMFL3DFpkdhGzpI5LS
- twmA==
+ bh=oa5fi65WycZwAqSJWG1m+J7qWDGFkeGnvVUZmIZeBEw=;
+ b=SRtY55eyazwKWvMZffloaC0ckcm7Pm5phblsF4Q0c89K0niT5KHyntQ9j/9QKyPRWT
+ Ffr5PhmCVSqXXp47Gkr/x3phiR1/WCezs/iTElL5dABay1Ip0M1Q1e2kagbbySrBJf5f
+ kgTNdvmS8LvGPLDgha24m8g4KFVGOLmI/L2rTHG4WXPzXyHwdyjnYRMzNTnF7tVmRDpx
+ qlbnl+pZ8WIIrdvzpvGtW/Qbs/graj2CcTjSmVlrxGkjisOdUaRHn/B3RNPOWWB9YCZ8
+ BFDF3WR6YCHT9MEgNiZ/ytTKOyIevdzem8ZOESgd/TUfdOp7/qX9sPe2dRHcJxGSfGe9
+ m2Qw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVbx8hF+n1ZQBrXDN4VOTTGJ47PrXWwdl1Sx8PBlgYj3Bjl2J3Qs9ZKJuxxzeaqJG0YKN8JixVLMPTPH9wtIm5OGUAXI3A=
-X-Gm-Message-State: AOJu0YwKtDG43ffvXECoaFu8rSrFQviDnbKm4/huS6eS/7xrxPx/pEsV
- h4XVzyVHNauVP8+Z+kqwHOpNzbaGB62I4x85nBzK7jXML7AmzKi4HnTx01RMECtXYVz4+leSwOQ
- QSCi8XpIt6w8zYFvyPfeuha7J8VKJ5GqiNwz/L2+7MI84Ia+YcGiP
-X-Received: by 2002:a5d:5f4d:0:b0:367:9088:fecc with SMTP id
- ffacd0b85a97d-36825f66d1cmr1190656f8f.7.1721125702673; 
- Tue, 16 Jul 2024 03:28:22 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHjoYHzXVsHHoaQEjzjY1ErcKTwlmyc62XKKdwu2Mf+qlLjExjK2dmnpgcwe9CUvSxhqLrShg==
-X-Received: by 2002:a5d:5f4d:0:b0:367:9088:fecc with SMTP id
- ffacd0b85a97d-36825f66d1cmr1190639f8f.7.1721125702321; 
- Tue, 16 Jul 2024 03:28:22 -0700 (PDT)
+ AJvYcCXSlMZWdURjRIckPsBjcQccvnL61oMkT4YW00wNBu2PQmcDPooyIVAH4Bc5woKY6vIKvAC2jBHI31HVFh53e1AyhId+FFI=
+X-Gm-Message-State: AOJu0Yzz3r7yRFEq2F7ou9Ex5Mld/TecDFmzmmaKeCl1VurpKuULbiRQ
+ /VF6Qx1WOsRnAw/L+4nGfMkv0ARjMgjaqcJtk/7YdG4iC+2BplKjuoqiWvDQ2x1O+8JntCpyPSg
+ G3VtQvBGnKrUZIM/mvTGJzRd6vSd6FhQcVRwJt7suuq1vcMZLkBUi
+X-Received: by 2002:a05:600c:3589:b0:426:6f3e:feef with SMTP id
+ 5b1f17b1804b1-427ba69775cmr13440915e9.29.1721125983818; 
+ Tue, 16 Jul 2024 03:33:03 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEj/xOJC43KEA16TIO/zWZTTRwsIgxSGgyFOsmXekzLfYedmXrbimmrUPRG5TsnKyYXgVKOcw==
+X-Received: by 2002:a05:600c:3589:b0:426:6f3e:feef with SMTP id
+ 5b1f17b1804b1-427ba69775cmr13440585e9.29.1721125983423; 
+ Tue, 16 Jul 2024 03:33:03 -0700 (PDT)
 Received: from imammedo.users.ipa.redhat.com (nat-pool-brq-t.redhat.com.
  [213.175.37.10]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3680dafbea9sm8702502f8f.82.2024.07.16.03.28.21
+ 5b1f17b1804b1-427b8609d54sm31479865e9.42.2024.07.16.03.33.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jul 2024 03:28:21 -0700 (PDT)
-Date: Tue, 16 Jul 2024 12:28:21 +0200
+ Tue, 16 Jul 2024 03:33:03 -0700 (PDT)
+Date: Tue, 16 Jul 2024 12:33:02 +0200
 From: Igor Mammedov <imammedo@redhat.com>
 To: Sunil V L <sunilvl@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, Palmer Dabbelt
@@ -76,12 +76,12 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, Palmer Dabbelt
  Barboza <dbarboza@ventanamicro.com>, Liu Zhiwei
  <zhiwei_liu@linux.alibaba.com>, "Michael S . Tsirkin" <mst@redhat.com>, Ani
  Sinha <anisinha@redhat.com>
-Subject: Re: [PATCH v3 2/9] hw/riscv/virt-acpi-build.c: Update the HID of
- RISC-V UART
-Message-ID: <20240716122821.2480bdc5@imammedo.users.ipa.redhat.com>
-In-Reply-To: <20240715171129.1168896-3-sunilvl@ventanamicro.com>
+Subject: Re: [PATCH v3 4/9] acpi/gpex: Create PCI link devices outside PCI
+ root bridge
+Message-ID: <20240716123302.01f6b93c@imammedo.users.ipa.redhat.com>
+In-Reply-To: <20240715171129.1168896-5-sunilvl@ventanamicro.com>
 References: <20240715171129.1168896-1-sunilvl@ventanamicro.com>
- <20240715171129.1168896-3-sunilvl@ventanamicro.com>
+ <20240715171129.1168896-5-sunilvl@ventanamicro.com>
 X-Mailer: Claws Mail 4.3.0 (GTK 3.24.42; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
@@ -112,40 +112,91 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, 15 Jul 2024 22:41:22 +0530
+On Mon, 15 Jul 2024 22:41:24 +0530
 Sunil V L <sunilvl@ventanamicro.com> wrote:
 
-> The requirement ACPI_060 in the RISC-V BRS specification [1], requires
-> NS16550 compatible UART to have the HID RSCV0003. So, update the HID for
-> the UART.
+> Currently, PCI link devices (PNP0C0F) are always created within the
+> scope of the PCI root bridge. However, RISC-V needs these link devices
+> to be created outside to ensure the probing order in the OS. This
+> matches the example given in the ACPI specification [1] as well. Hence,
+> create these link devices directly under _SB instead of under the PCI
+> root bridge.
 > 
-> [1] - https://github.com/riscv-non-isa/riscv-brs/commits/main/acpi.adoc
-this should point to text like in previous patch and not to commit 
-
->       (commit: 7bfa87e86ad5658283731207dbfc8ab3744d3265)
+> To keep these link device names unique for multiple PCI bridges, change
+> the device name from GSIx to LXXY format where XX is the PCI bus number
+> and Y is the INTx.
+> 
+> GPEX is currently used by riscv, aarch64/virt and x86/microvm machines.
+> So, this change will alter the DSDT for those systems.
+> 
+> [1] - ACPI 5.1: 6.2.13.1 Example: Using _PRT to Describe PCI IRQ Routing
 > 
 > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-> Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
-with above fixed:
-Reviewed-by: Igor Mammedov <imammedo@redhat.com>
+Acked-by: Igor Mammedov <imammedo@redhat.com>
 
 > ---
->  hw/riscv/virt-acpi-build.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  hw/pci-host/gpex-acpi.c | 13 +++++++------
+>  1 file changed, 7 insertions(+), 6 deletions(-)
 > 
-> diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
-> index 5f5082a35b..36d6a3a412 100644
-> --- a/hw/riscv/virt-acpi-build.c
-> +++ b/hw/riscv/virt-acpi-build.c
-> @@ -170,7 +170,7 @@ acpi_dsdt_add_uart(Aml *scope, const MemMapEntry *uart_memmap,
->                      uint32_t uart_irq)
->  {
->      Aml *dev = aml_device("COM0");
-> -    aml_append(dev, aml_name_decl("_HID", aml_string("PNP0501")));
-> +    aml_append(dev, aml_name_decl("_HID", aml_string("RSCV0003")));
->      aml_append(dev, aml_name_decl("_UID", aml_int(0)));
+> diff --git a/hw/pci-host/gpex-acpi.c b/hw/pci-host/gpex-acpi.c
+> index f69413ea2c..391fabb8a8 100644
+> --- a/hw/pci-host/gpex-acpi.c
+> +++ b/hw/pci-host/gpex-acpi.c
+> @@ -7,7 +7,8 @@
+>  #include "hw/pci/pcie_host.h"
+>  #include "hw/acpi/cxl.h"
 >  
->      Aml *crs = aml_resource_template();
+> -static void acpi_dsdt_add_pci_route_table(Aml *dev, uint32_t irq)
+> +static void acpi_dsdt_add_pci_route_table(Aml *dev, uint32_t irq,
+> +                                          Aml *scope, uint8_t bus_num)
+>  {
+>      Aml *method, *crs;
+>      int i, slot_no;
+> @@ -20,7 +21,7 @@ static void acpi_dsdt_add_pci_route_table(Aml *dev, uint32_t irq)
+>              Aml *pkg = aml_package(4);
+>              aml_append(pkg, aml_int((slot_no << 16) | 0xFFFF));
+>              aml_append(pkg, aml_int(i));
+> -            aml_append(pkg, aml_name("GSI%d", gsi));
+> +            aml_append(pkg, aml_name("L%.02X%X", bus_num, gsi));
+>              aml_append(pkg, aml_int(0));
+>              aml_append(rt_pkg, pkg);
+>          }
+> @@ -30,7 +31,7 @@ static void acpi_dsdt_add_pci_route_table(Aml *dev, uint32_t irq)
+>      /* Create GSI link device */
+>      for (i = 0; i < PCI_NUM_PINS; i++) {
+>          uint32_t irqs = irq + i;
+> -        Aml *dev_gsi = aml_device("GSI%d", i);
+> +        Aml *dev_gsi = aml_device("L%.02X%X", bus_num, i);
+>          aml_append(dev_gsi, aml_name_decl("_HID", aml_string("PNP0C0F")));
+>          aml_append(dev_gsi, aml_name_decl("_UID", aml_int(i)));
+>          crs = aml_resource_template();
+> @@ -45,7 +46,7 @@ static void acpi_dsdt_add_pci_route_table(Aml *dev, uint32_t irq)
+>          aml_append(dev_gsi, aml_name_decl("_CRS", crs));
+>          method = aml_method("_SRS", 1, AML_NOTSERIALIZED);
+>          aml_append(dev_gsi, method);
+> -        aml_append(dev, dev_gsi);
+> +        aml_append(scope, dev_gsi);
+>      }
+>  }
+>  
+> @@ -174,7 +175,7 @@ void acpi_dsdt_add_gpex(Aml *scope, struct GPEXConfig *cfg)
+>                  aml_append(dev, aml_name_decl("_PXM", aml_int(numa_node)));
+>              }
+>  
+> -            acpi_dsdt_add_pci_route_table(dev, cfg->irq);
+> +            acpi_dsdt_add_pci_route_table(dev, cfg->irq, scope, bus_num);
+>  
+>              /*
+>               * Resources defined for PXBs are composed of the following parts:
+> @@ -205,7 +206,7 @@ void acpi_dsdt_add_gpex(Aml *scope, struct GPEXConfig *cfg)
+>      aml_append(dev, aml_name_decl("_STR", aml_unicode("PCIe 0 Device")));
+>      aml_append(dev, aml_name_decl("_CCA", aml_int(1)));
+>  
+> -    acpi_dsdt_add_pci_route_table(dev, cfg->irq);
+> +    acpi_dsdt_add_pci_route_table(dev, cfg->irq, scope, 0);
+>  
+>      method = aml_method("_CBA", 0, AML_NOTSERIALIZED);
+>      aml_append(method, aml_return(aml_int(cfg->ecam.base)));
 
 
