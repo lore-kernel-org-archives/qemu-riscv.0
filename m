@@ -4,90 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 768B8C3DA42
-	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Jul 2024 13:41:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77D56C3DA4B
+	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Jul 2024 15:48:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sU4sy-0000cT-MF; Wed, 17 Jul 2024 09:40:00 -0400
+	id 1sU6sy-0006yx-OL; Wed, 17 Jul 2024 11:48:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1sU4sw-0000TW-Ej
- for qemu-riscv@nongnu.org; Wed, 17 Jul 2024 09:39:58 -0400
-Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
+ (Exim 4.90_1) (envelope-from <paolo.savini@embecosm.com>)
+ id 1sU6fN-00036y-7m
+ for qemu-riscv@nongnu.org; Wed, 17 Jul 2024 11:34:05 -0400
+Received: from mail-wr1-x42f.google.com ([2a00:1450:4864:20::42f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1sU4su-0007Sg-D3
- for qemu-riscv@nongnu.org; Wed, 17 Jul 2024 09:39:58 -0400
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-1fb8781ef1bso54156195ad.3
- for <qemu-riscv@nongnu.org>; Wed, 17 Jul 2024 06:39:56 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <paolo.savini@embecosm.com>)
+ id 1sU6fL-0004lu-6b
+ for qemu-riscv@nongnu.org; Wed, 17 Jul 2024 11:34:04 -0400
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-3678aa359b7so601887f8f.1
+ for <qemu-riscv@nongnu.org>; Wed, 17 Jul 2024 08:34:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1721223594; x=1721828394; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=embecosm.com; s=google; t=1721230441; x=1721835241; darn=nongnu.org;
+ h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AgdC7+ev+17fl87ruXR55XIU4+t2//DA3K4P/cKC9yA=;
- b=jRHPO91zyD3PeU5/jU8j7Ayy6H1L0dYV8iOO6lgc3CY7+1dg1LSEx3vpIFr9stvWTP
- yheZIhqGz1j+GXre+zCumh44R+TLErppYWLITxWnLYchrHeubCVEiOhcS/sXfgDBqcJQ
- U4n4et5OcGEt9Wkh8ZICsqxSRrzJ3VV1b7TJFMwPJ+c89MGh4YTbtwCLCZwLkcdvAxjU
- pcxoHHAfoiZlwT1FT8iVKORwf7ws2HPnZNZZuHQ0J3ZB+2gx73HjXNkSAjUqP1KFCEQN
- zOpS00Ujk8tfjzKMVtBt/di5iVC/mGlEEI3281H+p0vIpTazW6xI4Y3tUR/hkb6twzKx
- R4oA==
+ bh=N+ZTCTDtsPvM+z8F1C+LwAra8ZB+wrMRdsWgS+nPMOA=;
+ b=RgpFrWQP4W+LzsYwVUVCzcL/++lUCShRIhaF3QPqgolDm4e4+VsIkhbRQfXXtC2nh6
+ 4lIeQgLxkCZlhO959fBPV7/+DV09vZFKC0KGXAs1NU5ZDf6xVfBfxGdw2f5lFemGR+rd
+ BD61Uq25W4GY9lciHwA4e4Aqx0z1L+JSCE9fE021YMAGOUDtgGffqFLQ/zlLrwKVixID
+ du0V7kulsbXIaDlsxugAuVs1yaibeB16A5EVgd1TkfOrbCu2SeHzP5mbCQnua+dlN8GS
+ FiPVG13FKEbfrszUxzQQMgFBAXBTGbPuthMevscbXuqm6kmF4/U4ZbwGR2tJzBwvCEG4
+ lbQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721223594; x=1721828394;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1721230441; x=1721835241;
+ h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AgdC7+ev+17fl87ruXR55XIU4+t2//DA3K4P/cKC9yA=;
- b=WfUrCwH4OsUjnea4vpy4DR6E4BdWKKBvOWmkPxkFacu4Shdfz6rAy6HobatvUMALQ7
- UPIHu4SthIFeXDnzb2p+9l2+zO42upppZ0SLgtt9jGTAEf9bTiYHeJ/ibrNEPNEGbNuz
- +yJASFV+yQzVeP7J9XpVsb1vFrJWf7s8dtfA3zWtehjek2iqMqLXTp+C3Lovp0JtkYrd
- 03gMg6pUxqpdwceWmBwOf3pFnqznkx8BMntJO33pj4DPCl9cSZ5TAB3WvbdVboYHSDLA
- wjSEsLHYT+R8Xz4/bx1Dt30l7EAgvLEv8e4OYY6Q/daD72twlg6jWNz8SUsFnS7ClIgp
- XAOA==
+ bh=N+ZTCTDtsPvM+z8F1C+LwAra8ZB+wrMRdsWgS+nPMOA=;
+ b=SRSusQlwB9AJcuroOJH5qrJ9x3Le1x8+MTG8MLZ8ksammMVqoqi1lWH1wkf+lFvZfA
+ +tE9DNM5MokRv1CO5lO37Y6wqMIWoSlIwKQexZXEJrgII2dw1Mz7h+JiXJCX88DDOSeQ
+ GVhwCHEC/N7f4TUyIPGhdPqHz8g01YSP8DwgXarGXHquSYwGdgBA8KYEfHcNVTdKbUJH
+ 0GZ7TvMpdEwMIhDAMSgEduMhftYD6UYps3+qwjPsSB+6xjGjcd51c13qpKntShSwGrlC
+ XFLX4yBHX4QVQBjdqzQ0UI+GOAGXAVGNnRJcP3IiHPVSE934o3YALfI7m60ytXqG9Mio
+ RUlA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXtO4S76lDdmu5OROtwbh46VfgeOWBVuSUNYaoJ/C1lQQLTSMFu1h8xaa8ylDdSeJeMgLXWcawBXQGjrBT0H3jy34cmycs=
-X-Gm-Message-State: AOJu0YxtK3a6N/o8Zh/oESSmXxJ4mf6SADJ+molbu7TfBUO/avE9ykLC
- nUtMu0LX1NfK7LlbeyfF8epLl6yuag6dnDzkt8pas/oBeFYO3rJ56Hf3eB2NZUE=
-X-Google-Smtp-Source: AGHT+IEnRb7c1roUlDRyF+f17QD0fG9J5BjOWX4PSelCmqG85q5wJF9H7/Cz+lwm5Z9iy+IdI3/3wA==
-X-Received: by 2002:a17:902:d4cb:b0:1f8:44f8:a364 with SMTP id
- d9443c01a7336-1fc4e6886e0mr13809345ad.48.1721223594102; 
- Wed, 17 Jul 2024 06:39:54 -0700 (PDT)
-Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
- [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1fc0bc5aa6esm74903495ad.299.2024.07.17.06.39.52
+ AJvYcCUeutZaLJPhOa5OsXwbxONCdloKyAKVoRuLSlPIqHMDlneEKuP9nQ8vTOlwHSfzCbwNPvIxQFPKurCEMzjLLn8a+YJd6m0=
+X-Gm-Message-State: AOJu0Yzz19/lqSL8y6mae1ZrpEff/4fzdUTP/Y8ARDdj/3P1A9p33EM+
+ Jpzu2ox+3PT0HE2qsMCF3LZcIDQxWRfC0NAS5cbUwwekGmao1HiDMIBhCfTEXOw=
+X-Google-Smtp-Source: AGHT+IHlmlrvBECmCgQko/Z3tK7w4ct4kXB4pUFWvsoYAfOA6HmKLwKBhnwzMphNQh1JWP1GgJBdLw==
+X-Received: by 2002:a5d:6dad:0:b0:365:aec0:e191 with SMTP id
+ ffacd0b85a97d-3682753bd5dmr4877115f8f.21.1721230441002; 
+ Wed, 17 Jul 2024 08:34:01 -0700 (PDT)
+Received: from paolo-ThinkPad-T490.sou.embecosm-corp.com ([212.69.42.53])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-427c779839bsm2369475e9.7.2024.07.17.08.34.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Jul 2024 06:39:53 -0700 (PDT)
-From: Max Chou <max.chou@sifive.com>
+ Wed, 17 Jul 2024 08:34:00 -0700 (PDT)
+From: Paolo Savini <paolo.savini@embecosm.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+Cc: Paolo Savini <paolo.savini@embecosm.com>,
+ Richard Handerson <richard.henderson@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
  Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, richard.henderson@linaro.org,
- Max Chou <max.chou@sifive.com>
-Subject: [RFC PATCH v5 3/5] target/riscv: rvv: Provide a fast path using
- direct access to host ram for unit-stride whole register load/store
-Date: Wed, 17 Jul 2024 21:39:34 +0800
-Message-Id: <20240717133936.713642-4-max.chou@sifive.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240717133936.713642-1-max.chou@sifive.com>
-References: <20240717133936.713642-1-max.chou@sifive.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
- envelope-from=max.chou@sifive.com; helo=mail-pl1-x62f.google.com
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Helene Chelin <helene.chelin@embecosm.com>, Max Chou <max.chou@sifive.com>
+Subject: [RFC 0/2] Improve the performance of unit-stride RVV ld/st on
+Date: Wed, 17 Jul 2024 16:30:38 +0100
+Message-Id: <20240717153040.11073-1-paolo.savini@embecosm.com>
+X-Mailer: git-send-email 2.17.1
+Received-SPF: pass client-ip=2a00:1450:4864:20::42f;
+ envelope-from=paolo.savini@embecosm.com; helo=mail-wr1-x42f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Wed, 17 Jul 2024 11:48:06 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -102,166 +98,62 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The vector unit-stride whole register load/store instructions are
-similar to unmasked unit-stride load/store instructions that is suitable
-to be optimized by using a direct access to host ram fast path.
+This series of patches builds on top of Max Chou's patches:
 
-Because the vector whole register load/store instructions do not need to
-handle the tail agnostic, so remove the vstart early exit checking.
+https://lore.kernel.org/all/20240613175122.1299212-1-max.chou@sifive.com/
 
-Signed-off-by: Max Chou <max.chou@sifive.com>
----
- target/riscv/vector_helper.c | 123 +++++++++++++++++------------------
- 1 file changed, 61 insertions(+), 62 deletions(-)
+The aim of these patches is to improve the performance of QEMU emulation
+of RVV unit-stride load and store instructions in the following cases
 
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 23396a1b750..5343a08e6ad 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -653,81 +653,80 @@ GEN_VEXT_LDFF(vle64ff_v, int64_t, lde_d_tlb)
-  */
- static void
- vext_ldst_whole(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
--                vext_ldst_elem_fn_tlb *ldst_elem, uint32_t log2_esz,
--                uintptr_t ra)
-+                vext_ldst_elem_fn_tlb *ldst_tlb,
-+                vext_ldst_elem_fn_host *ldst_host, uint32_t log2_esz,
-+                uintptr_t ra, bool is_load)
- {
--    uint32_t i, k, off, pos;
-+    target_ulong page_split, elems, addr;
-     uint32_t nf = vext_nf(desc);
-     uint32_t vlenb = riscv_cpu_cfg(env)->vlenb;
-     uint32_t max_elems = vlenb >> log2_esz;
-+    uint32_t evl = nf * max_elems;
-+    uint32_t esz = 1 << log2_esz;
- 
--    if (env->vstart >= ((vlenb * nf) >> log2_esz)) {
--        env->vstart = 0;
--        return;
--    }
--
--    k = env->vstart / max_elems;
--    off = env->vstart % max_elems;
--
--    if (off) {
--        /* load/store rest of elements of current segment pointed by vstart */
--        for (pos = off; pos < max_elems; pos++, env->vstart++) {
--            target_ulong addr = base + ((pos + k * max_elems) << log2_esz);
--            ldst_elem(env, adjust_addr(env, addr),
--                      (pos + k * max_elems) << log2_esz, vd, ra);
-+    while (env->vstart < evl) {
-+        /* Calculate page range */
-+        addr = base + (env->vstart << log2_esz);
-+        page_split = -(addr | TARGET_PAGE_MASK);
-+        /* Get number of elements */
-+        elems = page_split / esz;
-+        if (unlikely(env->vstart + elems >= evl)) {
-+            elems = evl - env->vstart;
-         }
--        k++;
--    }
- 
--    /* load/store elements for rest of segments */
--    for (; k < nf; k++) {
--        for (i = 0; i < max_elems; i++, env->vstart++) {
--            target_ulong addr = base + ((i + k * max_elems) << log2_esz);
--            ldst_elem(env, adjust_addr(env, addr),
--                      (i + k * max_elems) << log2_esz, vd, ra);
-+        /* Load/store elements in page */
-+        vext_page_ldst_us(env, vd, addr, elems, 1, max_elems, log2_esz,
-+                          is_load, ldst_tlb, ldst_host, ra);
-+
-+        /* Cross page element */
-+        if (unlikely((page_split % esz) != 0 && (env->vstart + 1) < evl)) {
-+            addr = base + (env->vstart << log2_esz);
-+            ldst_tlb(env, adjust_addr(env, addr), (env->vstart << log2_esz),
-+                     vd, ra);
-+            env->vstart++;
-         }
-     }
- 
-     env->vstart = 0;
- }
- 
--#define GEN_VEXT_LD_WHOLE(NAME, ETYPE, LOAD_FN)      \
--void HELPER(NAME)(void *vd, target_ulong base,       \
--                  CPURISCVState *env, uint32_t desc) \
--{                                                    \
--    vext_ldst_whole(vd, base, env, desc, LOAD_FN,    \
--                    ctzl(sizeof(ETYPE)), GETPC());   \
--}
--
--GEN_VEXT_LD_WHOLE(vl1re8_v,  int8_t,  lde_b_tlb)
--GEN_VEXT_LD_WHOLE(vl1re16_v, int16_t, lde_h_tlb)
--GEN_VEXT_LD_WHOLE(vl1re32_v, int32_t, lde_w_tlb)
--GEN_VEXT_LD_WHOLE(vl1re64_v, int64_t, lde_d_tlb)
--GEN_VEXT_LD_WHOLE(vl2re8_v,  int8_t,  lde_b_tlb)
--GEN_VEXT_LD_WHOLE(vl2re16_v, int16_t, lde_h_tlb)
--GEN_VEXT_LD_WHOLE(vl2re32_v, int32_t, lde_w_tlb)
--GEN_VEXT_LD_WHOLE(vl2re64_v, int64_t, lde_d_tlb)
--GEN_VEXT_LD_WHOLE(vl4re8_v,  int8_t,  lde_b_tlb)
--GEN_VEXT_LD_WHOLE(vl4re16_v, int16_t, lde_h_tlb)
--GEN_VEXT_LD_WHOLE(vl4re32_v, int32_t, lde_w_tlb)
--GEN_VEXT_LD_WHOLE(vl4re64_v, int64_t, lde_d_tlb)
--GEN_VEXT_LD_WHOLE(vl8re8_v,  int8_t,  lde_b_tlb)
--GEN_VEXT_LD_WHOLE(vl8re16_v, int16_t, lde_h_tlb)
--GEN_VEXT_LD_WHOLE(vl8re32_v, int32_t, lde_w_tlb)
--GEN_VEXT_LD_WHOLE(vl8re64_v, int64_t, lde_d_tlb)
--
--#define GEN_VEXT_ST_WHOLE(NAME, ETYPE, STORE_FN)     \
--void HELPER(NAME)(void *vd, target_ulong base,       \
--                  CPURISCVState *env, uint32_t desc) \
--{                                                    \
--    vext_ldst_whole(vd, base, env, desc, STORE_FN,   \
--                    ctzl(sizeof(ETYPE)), GETPC());   \
--}
--
--GEN_VEXT_ST_WHOLE(vs1r_v, int8_t, ste_b_tlb)
--GEN_VEXT_ST_WHOLE(vs2r_v, int8_t, ste_b_tlb)
--GEN_VEXT_ST_WHOLE(vs4r_v, int8_t, ste_b_tlb)
--GEN_VEXT_ST_WHOLE(vs8r_v, int8_t, ste_b_tlb)
-+#define GEN_VEXT_LD_WHOLE(NAME, ETYPE, LOAD_FN_TLB, LOAD_FN_HOST)   \
-+void HELPER(NAME)(void *vd, target_ulong base, CPURISCVState *env,  \
-+                  uint32_t desc)                                    \
-+{                                                                   \
-+    vext_ldst_whole(vd, base, env, desc, LOAD_FN_TLB, LOAD_FN_HOST, \
-+                    ctzl(sizeof(ETYPE)), GETPC(), true);            \
-+}
-+
-+GEN_VEXT_LD_WHOLE(vl1re8_v,  int8_t,  lde_b_tlb, lde_b_host)
-+GEN_VEXT_LD_WHOLE(vl1re16_v, int16_t, lde_h_tlb, lde_h_host)
-+GEN_VEXT_LD_WHOLE(vl1re32_v, int32_t, lde_w_tlb, lde_w_host)
-+GEN_VEXT_LD_WHOLE(vl1re64_v, int64_t, lde_d_tlb, lde_d_host)
-+GEN_VEXT_LD_WHOLE(vl2re8_v,  int8_t,  lde_b_tlb, lde_b_host)
-+GEN_VEXT_LD_WHOLE(vl2re16_v, int16_t, lde_h_tlb, lde_h_host)
-+GEN_VEXT_LD_WHOLE(vl2re32_v, int32_t, lde_w_tlb, lde_w_host)
-+GEN_VEXT_LD_WHOLE(vl2re64_v, int64_t, lde_d_tlb, lde_d_host)
-+GEN_VEXT_LD_WHOLE(vl4re8_v,  int8_t,  lde_b_tlb, lde_b_host)
-+GEN_VEXT_LD_WHOLE(vl4re16_v, int16_t, lde_h_tlb, lde_h_host)
-+GEN_VEXT_LD_WHOLE(vl4re32_v, int32_t, lde_w_tlb, lde_w_host)
-+GEN_VEXT_LD_WHOLE(vl4re64_v, int64_t, lde_d_tlb, lde_d_host)
-+GEN_VEXT_LD_WHOLE(vl8re8_v,  int8_t,  lde_b_tlb, lde_b_host)
-+GEN_VEXT_LD_WHOLE(vl8re16_v, int16_t, lde_h_tlb, lde_h_host)
-+GEN_VEXT_LD_WHOLE(vl8re32_v, int32_t, lde_w_tlb, lde_w_host)
-+GEN_VEXT_LD_WHOLE(vl8re64_v, int64_t, lde_d_tlb, lde_d_host)
-+
-+#define GEN_VEXT_ST_WHOLE(NAME, ETYPE, STORE_FN_TLB, STORE_FN_HOST)     \
-+void HELPER(NAME)(void *vd, target_ulong base, CPURISCVState *env,      \
-+                  uint32_t desc)                                        \
-+{                                                                       \
-+    vext_ldst_whole(vd, base, env, desc, STORE_FN_TLB, STORE_FN_HOST,   \
-+                    ctzl(sizeof(ETYPE)), GETPC(), false);               \
-+}
-+
-+GEN_VEXT_ST_WHOLE(vs1r_v, int8_t, ste_b_tlb, ste_b_host)
-+GEN_VEXT_ST_WHOLE(vs2r_v, int8_t, ste_b_tlb, ste_b_host)
-+GEN_VEXT_ST_WHOLE(vs4r_v, int8_t, ste_b_tlb, ste_b_host)
-+GEN_VEXT_ST_WHOLE(vs8r_v, int8_t, ste_b_tlb, ste_b_host)
- 
- /*
-  * Vector Integer Arithmetic Instructions
+1. when the data being loaded/stored per iteration amounts to 8 bytes or less.
+2. when the vector length is 16 bytes (VLEN=128) and there is no grouping of the
+   vector registers (LMUL=1).
+3. when the data being loaded/stored per iteration is more than 64 bytes.
+
+In the first two cases the optimization consists of avoiding the
+overhead of probing the RAM of the host machine and perform a simple loop
+load/store on the data grouped in chunks of as many bytes as possible (8,4,2 or 1).
+
+The third case is optimized by calling the __builtin_memcpy function on
+data chuncks of 128 bytes and 256 bytes per time.
+
+These patches on top of Max Chou's patches have been tested with SPEC
+CPU 2017 and achieve an average reduction of 13% of the time needed by
+QEMU for running the benchmarks compared with the master branch of QEMU.
+
+You can find the source code being developed here: https://github.com/embecosm/rise-rvv-tcg-qemu
+and regular updates and more statistics about the patch here: https://github.com/embecosm/rise-rvv-tcg-qemu-reports
+
+Changes:
+- patch 1:
+  - Modify vext_ldst_us to run the simple loop load/store if we
+    are in one of the two cases above.
+- patch 2:
+  - Modify vext_group_ldst_host to use __builtin_memcpy for data sizes
+    of 128 bits and above.
+
+Cc: Richard Handerson <richard.henderson@linaro.org>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>
+Cc: Bin Meng <bmeng.cn@gmail.com>
+Cc: Weiwei Li <liwei1518@gmail.com>
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Cc: Helene Chelin <helene.chelin@embecosm.com>
+Cc: Max Chou <max.chou@sifive.com>
+
+Helene CHELIN (1):
+  target/riscv: rvv: reduce the overhead for simple RISC-V vector
+    unit-stride loads and stores
+
+Paolo Savini (1):
+  target/riscv: rvv: improve performance of RISC-V vector loads and
+    stores on large amounts of data.
+
+ target/riscv/vector_helper.c | 63 +++++++++++++++++++++++++++++++++++-
+ 1 file changed, 62 insertions(+), 1 deletion(-)
+
 -- 
-2.34.1
+2.17.1
 
 
