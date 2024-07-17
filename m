@@ -4,85 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C298C3DA42
-	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Jul 2024 10:59:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B8C6C3DA42
+	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Jul 2024 13:39:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sU2Ly-00034Q-Rx; Wed, 17 Jul 2024 06:57:46 -0400
+	id 1sU4sq-0008U4-RJ; Wed, 17 Jul 2024 09:39:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1sU2Lx-00030k-UL
- for qemu-riscv@nongnu.org; Wed, 17 Jul 2024 06:57:45 -0400
-Received: from mail-lf1-x136.google.com ([2a00:1450:4864:20::136])
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1sU4sp-0008OX-Ct
+ for qemu-riscv@nongnu.org; Wed, 17 Jul 2024 09:39:51 -0400
+Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1sU2Lw-0005dg-BC
- for qemu-riscv@nongnu.org; Wed, 17 Jul 2024 06:57:45 -0400
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-52ea2ce7abaso10798126e87.0
- for <qemu-riscv@nongnu.org>; Wed, 17 Jul 2024 03:57:43 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1sU4sn-0007Ql-Mw
+ for qemu-riscv@nongnu.org; Wed, 17 Jul 2024 09:39:51 -0400
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-1fc2a194750so34030775ad.1
+ for <qemu-riscv@nongnu.org>; Wed, 17 Jul 2024 06:39:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721213862; x=1721818662; darn=nongnu.org;
+ d=sifive.com; s=google; t=1721223588; x=1721828388; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ou+CSdE+RsteI59EhF42GcubahUccwY83pILcCuYj94=;
- b=CM0u5MtwfXcnWbs3/CQInB6/zftJoFQfHgjXPa7CaQs4l2a/DuFq5Qnb7uWEXTj/w/
- 2MLuDOTyHcnmR4cA484qmBlcT/3E192x5i+JchhqwN4LaID9nQd5yQIl0mGyjSwPTYoc
- 5sDW7uI+NHfIkaDN4iSPWjXlMZ0Rt5vTgLMhhi0L2HX4EtowaqIcISO8fr2HBvvW3i2Q
- QCtXHtE5wnGq+ZHPQ9BubdiSu+VUx0BMnH1U9eGW+1t11P+JJ4vk9xRDUkSiV6wuqTIX
- HZI8NU2Xl7Fmqlb2yT8RAoSKzbLA2o8NcQ/yA+KzeG6PfIzMc75rGxdx+6OV01XRdL3E
- 4L4w==
+ bh=Nfs9IDqgQpVVigMZU11K8UdOmxP2QGM7nTxJBjJv74w=;
+ b=h3hZhDEm8ps3HIcANJe0SMW043NsAhDZZgDAta6dcNhO/AD9Zy8r843UTUQs8tZ8n5
+ GOtQjPkftk7aH0Sh/HXTofZgDJ+lXA9nXXYvu1QjEoP3B7dDkTNFUd+87YIRIaYd+gRd
+ dHJD2aU4UJW8lJyFgmUk4Jj0TPXC+cvbLOHZXjWfoKsNoMAwMzKMb/cJjPwR7Oa5q8C0
+ 882C6yeKw2E8OI8ZeO4mXZqqLWWSdlUhEsp7MGd8q0TBtDMCq5JXHn2Q+2beEME+egkj
+ yAVw75p05ZhM5+UXnVf0qvzlDBalNPsyZf0N/hR7kO1Jg5qvK44dykeB0lhQY08m3C44
+ B6vw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721213862; x=1721818662;
+ d=1e100.net; s=20230601; t=1721223588; x=1721828388;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ou+CSdE+RsteI59EhF42GcubahUccwY83pILcCuYj94=;
- b=MCVMr2zKnGjLeTYboPGz/uAnZOYzrpBG6NtF7umHQsIKGXn/xABF0iY/P17EvHi9ED
- JT0xiwxM/KIOeUUssi6PkRtLvgIcwr5Cd/eCUF6/nfK/Ps7NIcjKUCsVvuIfVvoAiiAx
- OBBZcpkcP21KfqyMMRFM632GZ6cq6s5n6tLMsikDUfznsQCnvyHbDA/4LsCrgK2bA68G
- Ca8eF/aDv/R6anBWBc7Mgrk5MI7K+U3EZXR5RSJG5dWIi3rao2XsUmdNKH6IANY4/jRa
- ccW6NRieBo20vwoz2IYhi3Ku/L9obwUeqmr2DqT7R+6XpKQK8B11qxLRDfBSgB3BlJwv
- 5+GA==
+ bh=Nfs9IDqgQpVVigMZU11K8UdOmxP2QGM7nTxJBjJv74w=;
+ b=UG1yddnP2dZWP+pOOivDrA9hTcx/F68ACOBbCgTzhjwZYXYSBxfQjok3ZVAgD2aWXm
+ 8Sx3LbgRy0yZZ+KxMmxQTyOjtThotOka0ImjNj0J8gbcj9Fxf948KOVzsKHko8QJyZUr
+ 0D4LBfTwJEE+g/Ve+69CRzCoQEmsFWXZzcq3VnFEqy9aHyLq647cnOmdwcNXYg3LeQ/t
+ UK70XM0D5nf0Jkg/ccuBtY+U8grLMSjX5yuMec2lAEkRHaamZ5ktXYM15f0u74kWU/p1
+ rR9LzgoKNobcm2h08YVh7ScKNJ5ZdRZH2i+iz+i+VnTica0I18LSBl3Q6NmbYCNvDNhR
+ gJSg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXGSH4bzY62n0ihMvvr1wJ7otJTp4Y+3+aumg7YbvAgN/4yA+kJ84UrxINpE+/9QE5Pj0DXn6Gsaw1ABXFSgzov7V2kOJk=
-X-Gm-Message-State: AOJu0Yxfp3B5vzXCMC+G1ZJsoirkl7vSQ6VMTZZ99pVy03uqEfn3pzIG
- i6NK1/5cyLzz6i1v40y8uiqu5GFwWu2y9apUQCT5EADLBbS1euJNG+9/KZuXASo=
-X-Google-Smtp-Source: AGHT+IFPg+DItzAcEnxpiOtkR+wnPj14zG+bGUCK80yc79bIL8YTw7OIF1FlI5soLa5Ja4AryhUu4Q==
-X-Received: by 2002:a05:6512:ac7:b0:52b:9c8a:734f with SMTP id
- 2adb3069b0e04-52ee5411e3dmr1222139e87.50.1721213862089; 
- Wed, 17 Jul 2024 03:57:42 -0700 (PDT)
-Received: from localhost.localdomain ([176.187.208.21])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-427a5e81f0dsm165095375e9.12.2024.07.17.03.57.40
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 17 Jul 2024 03:57:41 -0700 (PDT)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: Richard Henderson <richard.henderson@linaro.org>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Anton Johansson <anjo@rev.ng>, qemu-riscv@nongnu.org,
- Paolo Bonzini <pbonzini@redhat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v4 3/8] target/mips: Add semihosting stub
-Date: Wed, 17 Jul 2024 12:57:18 +0200
-Message-ID: <20240717105723.58965-4-philmd@linaro.org>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20240717105723.58965-1-philmd@linaro.org>
-References: <20240717105723.58965-1-philmd@linaro.org>
+ AJvYcCUiKK5u25RyCWkS0I9e/ijI+zW1ZmdGNKRjGvk1rb2meaLkAAQbvyE98P1u1raCsW1JPq87dZZMWOoY/Ayd6+kojqEwgnA=
+X-Gm-Message-State: AOJu0YzznYB4B3Hc6VdgVFFqRYx3nXx0l+bgpb1VH/khGv4q6sYmA+a9
+ KafmjWqgqyggRSEjb71xVpWorb8pS18xSZoaRB1O7ofqid09Ka3UGtF9uTuijrs=
+X-Google-Smtp-Source: AGHT+IE8pc+hJ9pD+Tt81iKqmPfRNNbZNqlasHOE/UP9cJmMOu7HUIy004Z4Qo7CKRfgVJ67kMIDCA==
+X-Received: by 2002:a17:902:db01:b0:1fa:d3d:a68d with SMTP id
+ d9443c01a7336-1fc4e17c7d9mr16685155ad.22.1721223588113; 
+ Wed, 17 Jul 2024 06:39:48 -0700 (PDT)
+Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
+ [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-1fc0bc5aa6esm74903495ad.299.2024.07.17.06.39.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 17 Jul 2024 06:39:47 -0700 (PDT)
+From: Max Chou <max.chou@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, richard.henderson@linaro.org,
+ Max Chou <max.chou@sifive.com>
+Subject: [RFC PATCH v5 1/5] target/riscv: Set vdata.vm field for vector
+ load/store whole register instructions
+Date: Wed, 17 Jul 2024 21:39:32 +0800
+Message-Id: <20240717133936.713642-2-max.chou@sifive.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240717133936.713642-1-max.chou@sifive.com>
+References: <20240717133936.713642-1-max.chou@sifive.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::136;
- envelope-from=philmd@linaro.org; helo=mail-lf1-x136.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
+ envelope-from=max.chou@sifive.com; helo=mail-pl1-x634.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,57 +102,45 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Since the SEMIHOSTING feature is optional, we need
-a stub to link when it is disabled.
+The vm field of the vector load/store whole register instruction's
+encoding is 1.
+The helper function of the vector load/store whole register instructions
+may need the vdata.vm field to do some optimizations.
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Signed-off-by: Max Chou <max.chou@sifive.com>
 ---
- target/mips/tcg/sysemu/semihosting-stub.c | 15 +++++++++++++++
- target/mips/tcg/sysemu/meson.build        |  6 ++++--
- 2 files changed, 19 insertions(+), 2 deletions(-)
- create mode 100644 target/mips/tcg/sysemu/semihosting-stub.c
+ target/riscv/insn_trans/trans_rvv.c.inc | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/target/mips/tcg/sysemu/semihosting-stub.c b/target/mips/tcg/sysemu/semihosting-stub.c
-new file mode 100644
-index 0000000000..7ae27d746f
---- /dev/null
-+++ b/target/mips/tcg/sysemu/semihosting-stub.c
-@@ -0,0 +1,15 @@
-+/*
-+ *  MIPS semihosting stub
-+ *
-+ * SPDX-FileContributor: Philippe Mathieu-Daudé <philmd@linaro.org>
-+ * SPDX-FileCopyrightText: 2024 Linaro Ltd.
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "internal.h"
-+
-+void mips_semihosting(CPUMIPSState *env)
-+{
-+    g_assert_not_reached();
-+}
-diff --git a/target/mips/tcg/sysemu/meson.build b/target/mips/tcg/sysemu/meson.build
-index ec665a4b1e..911341ac37 100644
---- a/target/mips/tcg/sysemu/meson.build
-+++ b/target/mips/tcg/sysemu/meson.build
-@@ -1,10 +1,12 @@
- mips_system_ss.add(files(
-   'cp0_helper.c',
--  'mips-semi.c',
-   'special_helper.c',
-   'tlb_helper.c',
- ))
--
-+mips_system_ss.add(when: ['CONFIG_SEMIHOSTING'],
-+  if_true: files('mips-semi.c'),
-+  if_false: files('semihosting-stub.c')
-+)
- mips_system_ss.add(when: 'TARGET_MIPS64', if_true: files(
-   'lcsr_helper.c',
- ))
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+index 3a3896ba06c..14e10568bd7 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -770,6 +770,7 @@ static bool ld_us_mask_op(DisasContext *s, arg_vlm_v *a, uint8_t eew)
+     /* Mask destination register are always tail-agnostic */
+     data = FIELD_DP32(data, VDATA, VTA, s->cfg_vta_all_1s);
+     data = FIELD_DP32(data, VDATA, VMA, s->vma);
++    data = FIELD_DP32(data, VDATA, VM, 1);
+     return ldst_us_trans(a->rd, a->rs1, data, fn, s, false);
+ }
+ 
+@@ -787,6 +788,7 @@ static bool st_us_mask_op(DisasContext *s, arg_vsm_v *a, uint8_t eew)
+     /* EMUL = 1, NFIELDS = 1 */
+     data = FIELD_DP32(data, VDATA, LMUL, 0);
+     data = FIELD_DP32(data, VDATA, NF, 1);
++    data = FIELD_DP32(data, VDATA, VM, 1);
+     return ldst_us_trans(a->rd, a->rs1, data, fn, s, true);
+ }
+ 
+@@ -1106,6 +1108,7 @@ static bool ldst_whole_trans(uint32_t vd, uint32_t rs1, uint32_t nf,
+     TCGv_i32 desc;
+ 
+     uint32_t data = FIELD_DP32(0, VDATA, NF, nf);
++    data = FIELD_DP32(data, VDATA, VM, 1);
+     dest = tcg_temp_new_ptr();
+     desc = tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb,
+                                       s->cfg_ptr->vlenb, data));
 -- 
-2.41.0
+2.34.1
 
 
