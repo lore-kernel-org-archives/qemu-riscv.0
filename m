@@ -4,61 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22470C3DA4B
-	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Jul 2024 13:40:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99FE4C3DA42
+	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Jul 2024 13:40:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sU4sq-0008R5-0d; Wed, 17 Jul 2024 09:39:52 -0400
+	id 1sU4tB-0001Vx-PQ; Wed, 17 Jul 2024 09:40:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1sU4sn-0008L0-QA
- for qemu-riscv@nongnu.org; Wed, 17 Jul 2024 09:39:49 -0400
-Received: from mail-pg1-x534.google.com ([2607:f8b0:4864:20::534])
+ id 1sU4t9-0001Lp-DI
+ for qemu-riscv@nongnu.org; Wed, 17 Jul 2024 09:40:11 -0400
+Received: from mail-pg1-x535.google.com ([2607:f8b0:4864:20::535])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1sU4sl-0007QV-Ve
- for qemu-riscv@nongnu.org; Wed, 17 Jul 2024 09:39:49 -0400
-Received: by mail-pg1-x534.google.com with SMTP id
- 41be03b00d2f7-78aeee1068aso3540382a12.2
- for <qemu-riscv@nongnu.org>; Wed, 17 Jul 2024 06:39:46 -0700 (PDT)
+ id 1sU4sz-0007Tr-B5
+ for qemu-riscv@nongnu.org; Wed, 17 Jul 2024 09:40:10 -0400
+Received: by mail-pg1-x535.google.com with SMTP id
+ 41be03b00d2f7-71871d5e087so4923361a12.1
+ for <qemu-riscv@nongnu.org>; Wed, 17 Jul 2024 06:40:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1721223585; x=1721828385; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=6iQEcEdK2rJ0EkOTo/BBteq5KGoTSIo2iyL+QTvd6mc=;
- b=mJqFFsA3KeCPMAk01sJ7de9d3ZSGwtHrbFZaDg0eBiEwFqnIK1qjFfH2/hg5GR0PeF
- 2aOKxKASOXS5OdJUkPmvW4gtbano3f8dxIZ5b/hwxVa/rK/9Cnr0C3iyXmTP8TDV5uNB
- 1W/jQuLz0OmYFsB31pq6XWBSiZFrh466NRzdTR67nAE/UiMr13dhH7ybRV/jtoLCpEw3
- VCth1825risGW3/rdnuHYTROzH7sYVAIVd+b/WygpfDOov/SXgJSIixg75dtssXalWUB
- SEdQxJjdq/1mQ+y4mzFPaLrRbqkxZcrJ0l03QTwSsJLAEBZXkvenctr0gh+0aZUyx+3E
- Md6Q==
+ d=sifive.com; s=google; t=1721223600; x=1721828400; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YXRnQrR7vltoXSYXHi7IhAgNjpxq9maTne8vi5kmaO0=;
+ b=TobRxArKJEkOB3Lwmfv4UXNmkO92uBIZqpXywTZcjWz0iscPFK2liWi0jQpPy3IEiD
+ n5eJVwsMYreTdVi9RVHfq2llzTkAHfT9TIYeADWV+VEAXZFhtpYakBh4cwsEFoXCF8HR
+ vMcsJLfeJi+IjlGmWJtGhMLQ4rdT69iVknW6HPUNuEKuS8uzV9q7zo0DjC1He5CE5FwM
+ 2IifLDb3qyL/ORGcK5QjsbhdfGQdrCj/SvqRl0RIkr5P83pONRphsA/JIMAJd6J1tJBD
+ ed9glj/W189Ipu/OPVwsGcY6liXvELIofNTscHYufyHp6ipqpkPLlgmqXwQ/DcjMp4+J
+ eooQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721223585; x=1721828385;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=6iQEcEdK2rJ0EkOTo/BBteq5KGoTSIo2iyL+QTvd6mc=;
- b=b7p0AuUUFUdIy2SmGQvZPymevV8Hhvqht0d7DhpQD3lmgqkuOfwcHbZ1pN+vgwQx0R
- JWOyWdkD8vxrCCAZYZuKuvOrJJKJwoxLfoV6G+eVBxNpX8kwsXBG9pdBer/LP3JFkl1X
- DDDr1vT+J0M1d8DhbB+Pe+R+hEyPjSxiMC2+/M8jWlbbtE5G/QoftD3XkqKDkGvsVduR
- gfc4a9gqpKw4NcMTHrZG5HkvRCfb+MSXSW7wCymgBTDQmjV6FmSxT+MUW2Vhp3uIPnDM
- e7Xgu39G0A//X7CjXAiiQTIgLpsteONnKGl9wxCwr4Vtb8eKreRa+Ma5GrgWo2WD8TbP
- PJ6g==
+ d=1e100.net; s=20230601; t=1721223600; x=1721828400;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=YXRnQrR7vltoXSYXHi7IhAgNjpxq9maTne8vi5kmaO0=;
+ b=pPB0gJsmMwre8MO3EUc1qPSJqlnQESQHiIhy77UDJ7PUCysJNKeHTIcjs0cPkXo0PP
+ q1zAuUigORf2neAUkcXGJGHNq2igRHGHjn6h3VrMpQKHwkEheUiZeVFR6ZEFrJ31yMn5
+ s/hj2XV1+zPY/yPQlb9vdrZSVY/DRDVPj1ZS29mWDp9y9PqH0YWEDBNpz72x5hDegmhy
+ lSm7jVrnhUYOPp4FMP+rOEWTywDSMLo16e7bb24qlj11PxpTGPdgrob3f2WlFwX4S+/n
+ DyfLzQ01zKKfcc+GXpw+3iAhYXZrEIo4797mkgbprm55Ht1SfodtgR/9iT0T+IqOk4iQ
+ i6iA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWE11ljxU1CE0laxN25S+jiHRsyQ+V3FJn6FO0dg8OTRaWphMrKRjMIHdG8Mbvp2Y2KK9SASvqh1wX0XYM1LDi0CdzLWcE=
-X-Gm-Message-State: AOJu0YzxQk9Ad01S5TpQP3s22FpMu4O7iBHrjUf9YkDxvMTV4MxAFjAR
- Kfpat2Bj0zO9lwMcZnsgHmjyASMnvZQ+9M64fcskQNMwb5U2CF8pBWbLlwCJUfY=
-X-Google-Smtp-Source: AGHT+IE5Qh+iAyHsbJEDaov8fcucnztXOOU9nd4u5kMgWOBWt1lnUMIaDR0OWBnXxt5KbMgUzzm3oQ==
-X-Received: by 2002:a05:6300:4041:b0:1c0:f0ad:6ca9 with SMTP id
- adf61e73a8af0-1c3fdd79e6dmr1446790637.58.1721223584743; 
- Wed, 17 Jul 2024 06:39:44 -0700 (PDT)
+ AJvYcCUY8NKoRsoEc7aHmUZR1N1T2s/QAPkKvpK7Cii3aKqe02LOsS53t1n+YY3PNUSafJqvN91nUieFZo9CUX4huQtvhA6blWw=
+X-Gm-Message-State: AOJu0YwI1TEvwGlV7bDbUu0O7lkpEu1m/u3FEAly+b/fOUmbKDouSTkG
+ pPicgvedU2lZtNmW5bcoaWuO0s69e+ysW9psgSea1VCA/EREX9oo6bGc5jLNWvI=
+X-Google-Smtp-Source: AGHT+IEhFYiPKAJcmMHCQiAv/RxC9Qf0bgVvf4GhEV0jMHuHpRo9DU2lJ6A2ptelZafr7Wr+zeOkaA==
+X-Received: by 2002:a05:6a21:6e4b:b0:1c0:dd3d:ef3a with SMTP id
+ adf61e73a8af0-1c3fdcd0ac1mr1943388637.29.1721223599905; 
+ Wed, 17 Jul 2024 06:39:59 -0700 (PDT)
 Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
  [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1fc0bc5aa6esm74903495ad.299.2024.07.17.06.39.42
+ d9443c01a7336-1fc0bc5aa6esm74903495ad.299.2024.07.17.06.39.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Jul 2024 06:39:44 -0700 (PDT)
+ Wed, 17 Jul 2024 06:39:59 -0700 (PDT)
 From: Max Chou <max.chou@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -68,15 +69,17 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, richard.henderson@linaro.org,
  Max Chou <max.chou@sifive.com>
-Subject: [RFC PATCH v5 0/5] Improve the performance of RISC-V vector
- unit-stride/whole register ld/st instructions
-Date: Wed, 17 Jul 2024 21:39:31 +0800
-Message-Id: <20240717133936.713642-1-max.chou@sifive.com>
+Subject: [RFC PATCH v5 5/5] target/riscv: Inline unit-stride ld/st and
+ corresponding functions for performance
+Date: Wed, 17 Jul 2024 21:39:36 +0800
+Message-Id: <20240717133936.713642-6-max.chou@sifive.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240717133936.713642-1-max.chou@sifive.com>
+References: <20240717133936.713642-1-max.chou@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::534;
- envelope-from=max.chou@sifive.com; helo=mail-pg1-x534.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::535;
+ envelope-from=max.chou@sifive.com; helo=mail-pg1-x535.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -99,81 +102,105 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
+In the vector unit-stride load/store helper functions. the vext_ldst_us
+& vext_ldst_whole functions corresponding most of the execution time.
+Inline the functions can avoid the function call overhead to improve the
+helper function performance.
 
-This version provides subroutine to iterate the load/store operations
-per page and replaces the original continuous load/store loop by the
-memcpy call.
+Signed-off-by: Max Chou <max.chou@sifive.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+---
+ target/riscv/vector_helper.c | 56 +++++++++++++++++++-----------------
+ 1 file changed, 30 insertions(+), 26 deletions(-)
 
-And thank for Richard Henderson's patch set to the user-only munmap
-race issue, this version rebases on it and apply the
-[set|clear]_helper_retaddr calls.
-
-I'm preparing the v6 version that will include
-* Improve the vector unit-stride fault-only-first load instructions
-* Try to handle the watchpoints by hand to increase the possibility to
-    do host direct access
-
-
-Some performance result of this version 
-1. Test case provided in 
-    https://gitlab.com/qemu-project/qemu/-/issues/2137#note_1757501369
-    - QEMU user mode (vlen=512):
-        - Original:   ~40.1 sec
-        - v4:          ~4.7 sec
-        - v5:          ~2.9 sec
-    - QEMU system mode (vlen=512):
-        - Original:  ~112.5 sec
-        - v4:          ~6.5 sec
-        - v5:          ~3.1 sec
-2. SPEC CPU2006 INT (ref input)
-    - QEMU user mode (vlen=512)
-        - Original:   ~37.4 hr
-        - v4:         ~12.2 hr
-        - v5:         ~10.0 hr
-
-
-Based-on: 20240710032814.104643-1-richard.henderson@linaro.org
-
-Changes from v4:
-- v4 patch 1
-    - Queued
-- patch 1
-    - Separated from the patch 2 of v4
-- patch 2
-    - Remove mask bound checking flow
-    - Provide a subroutine to iterate pages accessed by the instruction
-    - Add [set|clear]_helper_retaddr to avoid the munmap race issue on
-      user mode
-- patch 3
-    - Apply the subroutine to the unit-stride whole register load/store
-      instructions
-- patch 4
-    - Replace the original loop by memcpy call when the endian of both
-      host and guest are the same
-
-Previous version:
-- v1: https://lore.kernel.org/all/20240215192823.729209-1-max.chou@sifive.com/
-- v2: https://lore.kernel.org/all/20240531174504.281461-1-max.chou@sifive.com/
-- v3: https://lore.kernel.org/all/20240613141906.1276105-1-max.chou@sifive.com/
-- v4: https://lore.kernel.org/all/20240613175122.1299212-1-max.chou@sifive.com/
-
-Max Chou (5):
-  target/riscv: Set vdata.vm field for vector load/store whole register
-    instructions
-  target/riscv: rvv: Provide a fast path using direct access to host ram
-    for unmasked unit-stride load/store
-  target/riscv: rvv: Provide a fast path using direct access to host ram
-    for unit-stride whole register load/store
-  target/riscv: rvv: Provide group continuous ld/st flow for unit-stride
-    ld/st instructions
-  target/riscv: Inline unit-stride ld/st and corresponding functions for
-    performance
-
- target/riscv/insn_trans/trans_rvv.c.inc |   3 +
- target/riscv/vector_helper.c            | 482 +++++++++++++++---------
- 2 files changed, 307 insertions(+), 178 deletions(-)
-
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index 2e675b4220c..95394c425ed 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -150,18 +150,20 @@ typedef void vext_ldst_elem_fn_tlb(CPURISCVState *env, abi_ptr addr,
+                                    uint32_t idx, void *vd, uintptr_t retaddr);
+ typedef void vext_ldst_elem_fn_host(void *vd, uint32_t idx, void *host);
+ 
+-#define GEN_VEXT_LD_ELEM(NAME, ETYPE, H, LDSUF)                         \
+-static void NAME##_tlb(CPURISCVState *env, abi_ptr addr,                \
+-                       uint32_t byte_off, void *vd, uintptr_t retaddr)  \
+-{                                                                       \
+-    ETYPE *cur = vd + byte_off;                                         \
+-    *cur = cpu_##LDSUF##_data_ra(env, addr, retaddr);                   \
+-}                                                                       \
+-                                                                        \
+-static void NAME##_host(void *vd, uint32_t byte_off, void *host)        \
+-{                                                                       \
+-    ETYPE val = LDSUF##_p(host);                                        \
+-    *(ETYPE *)(vd + byte_off) = val;                                    \
++#define GEN_VEXT_LD_ELEM(NAME, ETYPE, H, LDSUF)                 \
++static inline QEMU_ALWAYS_INLINE                                \
++void NAME##_tlb(CPURISCVState *env, abi_ptr addr,               \
++                uint32_t byte_off, void *vd, uintptr_t retaddr) \
++{                                                               \
++    ETYPE *cur = vd + byte_off;                                 \
++    *cur = cpu_##LDSUF##_data_ra(env, addr, retaddr);           \
++}                                                               \
++                                                                \
++static inline QEMU_ALWAYS_INLINE                                \
++void NAME##_host(void *vd, uint32_t byte_off, void *host)       \
++{                                                               \
++    ETYPE val = LDSUF##_p(host);                                \
++    *(ETYPE *)(vd + byte_off) = val;                            \
+ }
+ 
+ GEN_VEXT_LD_ELEM(lde_b, uint8_t,  H1, ldub)
+@@ -169,18 +171,20 @@ GEN_VEXT_LD_ELEM(lde_h, uint16_t, H2, lduw)
+ GEN_VEXT_LD_ELEM(lde_w, uint32_t, H4, ldl)
+ GEN_VEXT_LD_ELEM(lde_d, uint64_t, H8, ldq)
+ 
+-#define GEN_VEXT_ST_ELEM(NAME, ETYPE, H, STSUF)                         \
+-static void NAME##_tlb(CPURISCVState *env, abi_ptr addr,                \
+-                       uint32_t byte_off, void *vd, uintptr_t retaddr)  \
+-{                                                                       \
+-    ETYPE data = *(ETYPE *)(vd + byte_off);                             \
+-    cpu_##STSUF##_data_ra(env, addr, data, retaddr);                    \
+-}                                                                       \
+-                                                                        \
+-static void NAME##_host(void *vd, uint32_t byte_off, void *host)        \
+-{                                                                       \
+-    ETYPE val = *(ETYPE *)(vd + byte_off);                              \
+-    STSUF##_p(host, val);                                               \
++#define GEN_VEXT_ST_ELEM(NAME, ETYPE, H, STSUF)                 \
++static inline QEMU_ALWAYS_INLINE                                \
++void NAME##_tlb(CPURISCVState *env, abi_ptr addr,               \
++                uint32_t byte_off, void *vd, uintptr_t retaddr) \
++{                                                               \
++    ETYPE data = *(ETYPE *)(vd + byte_off);                     \
++    cpu_##STSUF##_data_ra(env, addr, data, retaddr);            \
++}                                                               \
++                                                                \
++static inline QEMU_ALWAYS_INLINE                                \
++void NAME##_host(void *vd, uint32_t byte_off, void *host)       \
++{                                                               \
++    ETYPE val = *(ETYPE *)(vd + byte_off);                      \
++    STSUF##_p(host, val);                                       \
+ }
+ 
+ GEN_VEXT_ST_ELEM(ste_b, uint8_t,  H1, stb)
+@@ -366,7 +370,7 @@ vext_page_ldst_us(CPURISCVState *env, void *vd, target_ulong addr,
+     }
+ }
+ 
+-static void
++static inline QEMU_ALWAYS_INLINE void
+ vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
+              vext_ldst_elem_fn_tlb *ldst_tlb,
+              vext_ldst_elem_fn_host *ldst_host, uint32_t log2_esz,
+@@ -695,7 +699,7 @@ GEN_VEXT_LDFF(vle64ff_v, int64_t, lde_d_tlb)
+ /*
+  * load and store whole register instructions
+  */
+-static void
++static inline QEMU_ALWAYS_INLINE void
+ vext_ldst_whole(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
+                 vext_ldst_elem_fn_tlb *ldst_tlb,
+                 vext_ldst_elem_fn_host *ldst_host, uint32_t log2_esz,
 -- 
 2.34.1
 
