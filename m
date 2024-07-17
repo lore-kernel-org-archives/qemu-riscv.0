@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE5B2C3DA42
-	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Jul 2024 10:59:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2473C3DA42
+	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Jul 2024 10:59:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sU2MK-0004Zy-J3; Wed, 17 Jul 2024 06:58:08 -0400
+	id 1sU2MA-0003qK-CA; Wed, 17 Jul 2024 06:57:58 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1sU2MI-0004T5-Si
- for qemu-riscv@nongnu.org; Wed, 17 Jul 2024 06:58:06 -0400
-Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1sU2M8-0003hB-2q
+ for qemu-riscv@nongnu.org; Wed, 17 Jul 2024 06:57:56 -0400
+Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1sU2MH-0005h0-A5
- for qemu-riscv@nongnu.org; Wed, 17 Jul 2024 06:58:06 -0400
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-36798779d75so5974170f8f.3
- for <qemu-riscv@nongnu.org>; Wed, 17 Jul 2024 03:58:04 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1sU2M6-0005f2-Id
+ for qemu-riscv@nongnu.org; Wed, 17 Jul 2024 06:57:55 -0400
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-367a3d1a378so5780336f8f.1
+ for <qemu-riscv@nongnu.org>; Wed, 17 Jul 2024 03:57:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721213884; x=1721818684; darn=nongnu.org;
+ d=linaro.org; s=google; t=1721213873; x=1721818673; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vQhy8hrl81u7GNgqWNgI0Q8CnNR/8+x5QLQF6iXo760=;
- b=EAxCSOQs309zoqCvVDuCu9kcojJ7PnBRxPOQudSgZp2NM1XmfpXsliIaHVZuG83eML
- JgSg914huZIFitrBQF2gxV7lqERr+DQhGndRhi4mt+sExdZhKLbd5KhRLj5pnPbueTgF
- KtkIfawDA9m39BA6g0blAQhV3PZGl68LU3oLXuVlPnS2fMYM1h2r7b35uqUo2YkCMeJN
- UDyR3Eb/aMQvO8W23IrZRu3zFAAzmNsezzTqtM4hFqxVt7JcJ1x9t4uJ8m5qKtqPCxCG
- di/ncXobQSO964Bl1knDDmr/tWOxRnu7tDv6CIdSBdG9zR0XMazue7V86sj1KpMLur2Z
- 92ZQ==
+ bh=uWQ9swtHKmaOCXCNUZVXDCsGfJqeWobhkzplnSNVd9c=;
+ b=YToaASXDkV4C+iCeXboIBwteD7hud5CWdRl8dYVyN1vOmHoN5mbxtFf6b81EB2krok
+ ol6F4irt+UEMbVfLC9rIcwm1y9//VfynkzCtzyACbChFaEFwO9aJpjKOq/LWii/xb5NK
+ 7BDag9K4240/lss4B60T7gYqEjSKbHCn2WcpEOuMZKor3d0iMP0GcbMNEsyWOmR+K0vI
+ xUreYh2ChTE0/0FET1SdC1a9N5KQKgVPKC3dMFZmWCCe4UIoopgxAdzLtfV9MbDmkhPS
+ +DmcPPvG1eS5XswQSQQXdL2NT7dsjgPsozzCj0DhSsPui/2Fl9APv9fBB9qdZRaTl7Nh
+ e+wg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721213884; x=1721818684;
+ d=1e100.net; s=20230601; t=1721213873; x=1721818673;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vQhy8hrl81u7GNgqWNgI0Q8CnNR/8+x5QLQF6iXo760=;
- b=PCXx1+ncnzEb/FiR1ZlRo6cCD2Zb3WG8yV1GWUWflNKk9IKlBL6FJrDyTk/DEp0ZOz
- bJLQA4bPuiazWbSxh+1XyutaNgKBZ4mqu5zzrpN9K1IrClGtn3Y7ILoJdey9PxXhRf3j
- FlIFttsW8X7CmZPWb4Epgynl6KuE3AlGFx3a9HFzSl/B8WL5cQJtaJJdrRvQLVrm1/rj
- K9y2AbAONNUFme1B+5WAW2wkc/FX56yQysBhPmBvMWoQaJ9A5zd+kYzWRLGdr/VZqM9N
- otq2TQTLpsjF8fJmijnIHF2BchY5VJxUqFtR9uurtNwk2sDVHT9drRL7EwUuaj/Sjvhz
- Nn7A==
+ bh=uWQ9swtHKmaOCXCNUZVXDCsGfJqeWobhkzplnSNVd9c=;
+ b=m6IxQy6WyeOqVPWpXJjFQ9ooBq4zUFibBDRwWAJLlZeYY/C5ZjeGYZ7TgHJF2vorFj
+ bd0NDgY56uNG1lwNhFIcinvZrdeC9DcSvT0t3/foSz0a1dObph6vCeic3BlpORFPhDYR
+ ugRIxFQpaPxiTBcuLMBUklybC67jQtvwQLUK3QZBFddLCW8MkeFjGhLSSclHjso4hXMz
+ G0LBLx1rLSCZtWc6bo7I2Jb6XjYJG5KP3asIduwVGtsKW0NOEYQJ68LMkx5D0RWwOwwZ
+ 34cDjIvWcD713rQzZ7xFw0sOTq2aYfc2DFYWyLJ0mTGsMKB2vYR8lq9deAVXdhImabmY
+ 5PNA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXHi9YOV/4KsAsHqQ/BlgjZYGTs9hA3ALDzKFiW/eW1ZfKBgJmtJVkHxVUioNtVjqK6ecvbOjN8mKT5f/KRgy5AoQeBEQI=
-X-Gm-Message-State: AOJu0YzOSlkCFGIxGfhE37tQQgYQrA9I8HvPwS9cyOTFXD39K9zLLdRV
- VJN/WL1/TpjBz1KcRZxcUD64Fw1N4z2NUHPonsZtyshmWg7sXtGHRW/AaPIjlgQ=
-X-Google-Smtp-Source: AGHT+IHj1D6egyRizVLhAmUWoLS0647TnuQwqHYn5D1nM1mUW6PDpKnneJ0AC07v/mqX/DqaHrpo1w==
-X-Received: by 2002:a05:6000:244:b0:367:8607:daa9 with SMTP id
- ffacd0b85a97d-368315fe1d3mr1166903f8f.15.1721213883801; 
- Wed, 17 Jul 2024 03:58:03 -0700 (PDT)
+ AJvYcCVQZipMlDOlleMVNBdygoFdLNhESwQHhjC9RVT1uvqzaoc4qqMMKTRXySzK8/Yrv5p8gB3KAPQV98iOIVFOCcSYZx679Us=
+X-Gm-Message-State: AOJu0YwKX/9h7XKy/VZV40ze72ZZWIEyaCsYrjPtObXcifDO3b1YQ8xH
+ rdGWoJBfulaLopftkpWwThiFbi+o40J24pOHCtfMvCTW26NLBGWvmvU12uImsA8=
+X-Google-Smtp-Source: AGHT+IEDi9ZiWTj2WFUcpd41lKdGXpUIdw4o7sNbplPMZH+PTKtOvBXAms50j19yvQM5vl6jWaWZHg==
+X-Received: by 2002:adf:cd12:0:b0:368:255e:ab17 with SMTP id
+ ffacd0b85a97d-368315f1f50mr1310879f8f.9.1721213873068; 
+ Wed, 17 Jul 2024 03:57:53 -0700 (PDT)
 Received: from localhost.localdomain ([176.187.208.21])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3680dabefa6sm11331239f8f.44.2024.07.17.03.58.02
+ ffacd0b85a97d-3680db0484dsm11522763f8f.110.2024.07.17.03.57.51
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 17 Jul 2024 03:58:03 -0700 (PDT)
+ Wed, 17 Jul 2024 03:57:52 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -65,17 +65,17 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Anton Johansson <anjo@rev.ng>, qemu-riscv@nongnu.org,
  Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v4 7/8] target/xtensa: Restrict semihosting to TCG
-Date: Wed, 17 Jul 2024 12:57:22 +0200
-Message-ID: <20240717105723.58965-8-philmd@linaro.org>
+Subject: [PATCH v4 5/8] target/mips: Restrict semihosting to TCG
+Date: Wed, 17 Jul 2024 12:57:20 +0200
+Message-ID: <20240717105723.58965-6-philmd@linaro.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240717105723.58965-1-philmd@linaro.org>
 References: <20240717105723.58965-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42e;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::430;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x430.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -98,26 +98,29 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The semihosting feature depends on TCG (due to the probe_access
-API access). Although TCG is the single accelerator currently
-available for the xtensa target, use the Kconfig "imply" directive
-which is more correct (if we were to support a different accel).
+Semihosting currently uses the TCG probe_access API. To prepare for
+encoding the TCG dependency in Kconfig, do not enable it unless TCG
+is available.
 
-Reported-by: Anton Johansson <anjo@rev.ng>
+Suggested-by: Paolo Bonzini <pbonzini@redhat.com>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Anton Johansson <anjo@rev.ng>
 ---
- target/xtensa/Kconfig | 2 +-
+ target/mips/Kconfig | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/target/xtensa/Kconfig b/target/xtensa/Kconfig
-index 5e46049262..e8c2598c4d 100644
---- a/target/xtensa/Kconfig
-+++ b/target/xtensa/Kconfig
-@@ -1,3 +1,3 @@
- config XTENSA
+diff --git a/target/mips/Kconfig b/target/mips/Kconfig
+index eb19c94c7d..876048b150 100644
+--- a/target/mips/Kconfig
++++ b/target/mips/Kconfig
+@@ -1,6 +1,6 @@
+ config MIPS
      bool
 -    select SEMIHOSTING
 +    imply SEMIHOSTING if TCG
+ 
+ config MIPS64
+     bool
 -- 
 2.41.0
 
