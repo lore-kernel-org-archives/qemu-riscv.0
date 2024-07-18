@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24CF2C3DA60
-	for <qemu-riscv@archiver.kernel.org>; Thu, 18 Jul 2024 09:46:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C4FFC3DA49
+	for <qemu-riscv@archiver.kernel.org>; Thu, 18 Jul 2024 09:46:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sUNhj-0003ja-W7; Thu, 18 Jul 2024 05:45:40 -0400
+	id 1sUNhn-00040p-Ru; Thu, 18 Jul 2024 05:45:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sUNhh-0003YO-Ki
- for qemu-riscv@nongnu.org; Thu, 18 Jul 2024 05:45:37 -0400
-Received: from mail-ej1-x635.google.com ([2a00:1450:4864:20::635])
+ id 1sUNhk-0003l8-EM
+ for qemu-riscv@nongnu.org; Thu, 18 Jul 2024 05:45:40 -0400
+Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sUNhb-0007dC-Lz
- for qemu-riscv@nongnu.org; Thu, 18 Jul 2024 05:45:37 -0400
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-a77c1658c68so62453366b.0
- for <qemu-riscv@nongnu.org>; Thu, 18 Jul 2024 02:45:31 -0700 (PDT)
+ id 1sUNhe-0007eI-2L
+ for qemu-riscv@nongnu.org; Thu, 18 Jul 2024 05:45:40 -0400
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-5a1337cfbb5so734439a12.3
+ for <qemu-riscv@nongnu.org>; Thu, 18 Jul 2024 02:45:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721295930; x=1721900730; darn=nongnu.org;
+ d=linaro.org; s=google; t=1721295932; x=1721900732; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2cfYyhSqeU6lh61PrlYddSdndv7Xezjj0qPHaR6Sb3o=;
- b=dMAHTH8xBY2EHU2pf2H0Y3UDAFhH+mmoc4LWBCoD5uaIX2u82EerR+l2OLNW7a7PzD
- XNz7XPSvfTuF5GEzbkFamRjon/rBu0tsnhbFszqN1O+BKsT+E5iz6pdqiPd16J+RjgS6
- u8XUHhQo8fEzFpj6Be2M7PBu3BabKF2Y2fJrdz/Y0vHgxpbGytRdBii0PL2p2FGpXPrk
- RTO9zEBn7G7ozP6rHb5A5l+M48/vw/Yoyv4v4HqjYs7zTYsyQ5+LU23aPHoFJhCDycFn
- rTOE/uLSFzjXlJUUGIZZF2+4VUCGXfyIZaHG/pU0VjTXJ1L/P5jZZzFyzbMWQp9uJpLO
- eMdg==
+ bh=31PAAvqWVfPeuheMTgufizM0WJ/VodpQVnBOiKhybJo=;
+ b=kJ5RiiAa/3L/YPqk0F0FMzVwsYLkdnT5QqE5IWM5GVjBFeXKBGxhVR0pVPLdCBAph4
+ dB7RmUyL5fSRXdBy4ra9flzjDeDrHD4PjS1zQSgfxNJNaNV+u3y0hF1+j+De7dz3ywqu
+ j/hVPFa4G5d5J3wMqxH91zFh5mZUlU2LRAlMp0hF9vEruh/nBHay3NDCMnAoUs1CjPkr
+ HXgj6fJRZBv861MBTmEPtIrBHa+u5GEPJ1MXd1MtXw6pvHzf3QnZJ90MoF6AAroHyH5e
+ lp91G/N7jLfH6QOQRGmPcpmqLaMRUKzWMUO+fnHi7OLiCCC8+0P0Cjin9yE5cnwG+SCc
+ rPyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721295930; x=1721900730;
+ d=1e100.net; s=20230601; t=1721295932; x=1721900732;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2cfYyhSqeU6lh61PrlYddSdndv7Xezjj0qPHaR6Sb3o=;
- b=NrNeW6HQnLlkgU8FVhR0HrxRyq7HiQtZtQsNM9ZDOcx8ct6Bo7BrnbDa6QD5BALxUK
- LfYc++c1PBN2yQ3zzneQ3B0SVoH53NF4GmVawt29u/NLmpPiZkgPNik3p7ooeOjBLYov
- Kv/O2XC3JLFBZgW8a2atIdp3/m6/Ij/xE63aAvY82Mpo1iCT5eUFE9WiIgEZDYz5VODD
- nVYTLK94lUH2T79kF2Hvsf5icQsnfN7biIOLvWIoMd74qxt6mcBHIxjzIvQTGgE+haso
- 6lNjxPCieQNfH6pvubHsrRSCjbk50R7FQlbdTMKuAbzHaWoE1HkR/V3QqsS8hFtcqP5j
- OTlA==
+ bh=31PAAvqWVfPeuheMTgufizM0WJ/VodpQVnBOiKhybJo=;
+ b=lthDcVnRFBJ+rar9M+Yx/iIdMdKhbWxo+uIstzKffVpdd64zJXMKB/08qV2FLwPkxm
+ KB1/Hetmjtq7iuyEvX7i5gK7UhbaKOxHhlwpTLUIy2ahojgdLr90Elq+PEQPBMtxbKfZ
+ 9WDAZ+n6Wj/o7ZMpdgCW8D/bhlx+J4Oc9EVjCab/D0s3srUOuBWoxk43oV6wGndVcczI
+ 7hHcItGx3ZSzmNhQL44M2H3Itgd0U3AUstcdhCSc9MCosympTKJeuAiQPYwuc/asDeb6
+ AHKUDphLGl0X8wgQAzVYY/GpZhZKlglhbVtcuxStRMkIhf40aeAtXqsUtJcG6rXM25t5
+ wsKw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVT9RvRezEkJGI0pWlJ2R2OhLbAfCVhEKdCCXaUgQb5wOO3irxD4uE8iK9xNT6wKuIkaKYDQBcs6ZHHNJ5d5mmy3FjkeJ8=
-X-Gm-Message-State: AOJu0Yw7/feRnndWnjCw9zLryIdIKQXsVhTEWbfhLOy9PJ52JCAW4e9Y
- 13yBCP5swE8hfyy5kE/kQ1mgk6kv+9vG1A2Aiy37eUFXQd/YWgQ1Ut0Ez+JVIEQ=
-X-Google-Smtp-Source: AGHT+IEz+wd0NIA66sJzZOQgn+jHutMe3W/oA0yxyNS/fVUDbi7YoClWPrtzZCWXVj50rxlTpbhQhw==
-X-Received: by 2002:a17:906:fd8b:b0:a77:a630:cf89 with SMTP id
- a640c23a62f3a-a7a00ef47a6mr364181766b.0.1721295929671; 
- Thu, 18 Jul 2024 02:45:29 -0700 (PDT)
+ AJvYcCU3Ib+/O5qqXKKCDzyzhgG2I+oZFjFpr2DE0zBeNtLczLMQEuvjjVzKyWMxScHj74ti2PkCFtj2Cp5tsfOdNfLYXX0ePGM=
+X-Gm-Message-State: AOJu0YyV5rypKzQx7FzT6JUj3fKEWWI7IKso4ZrpnlBalCriSMEOHD4G
+ vqe+QktvmyW0XhwF08+e/hW8SXO1vyj4TSIV7aSwpPywLsdIu7XeB3azCkVQmUU=
+X-Google-Smtp-Source: AGHT+IF0wmH/Xfrk1d9lLYichHwO53hsdhT6jY8BIJJZH/wL0d8YBKSvhu5GGm8gnc1CbBkDPd6isA==
+X-Received: by 2002:a17:906:6411:b0:a77:cc46:80f7 with SMTP id
+ a640c23a62f3a-a7a011a6d55mr277345766b.28.1721295932139; 
+ Thu, 18 Jul 2024 02:45:32 -0700 (PDT)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a79bc5b7e50sm537503566b.69.2024.07.18.02.45.26
+ a640c23a62f3a-a79bc5a394fsm539425566b.31.2024.07.18.02.45.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Thu, 18 Jul 2024 02:45:28 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id AB4EC5FA3B;
+ by draig.lan (Postfix) with ESMTP id DAE685FA3F;
  Thu, 18 Jul 2024 10:45:24 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -82,20 +82,18 @@ Cc: Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Weiwei Li <liwei1518@gmail.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Max Filippov <jcmvbkbc@gmail.com>, Mahmoud Mandour <ma.mandourr@gmail.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Laurent Vivier <laurent@vivier.eu>,
- =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
- <frederic.petrot@univ-grenoble-alpes.fr>
-Subject: [PATCH 07/15] plugins/execlog.c: correct dump of registers values
-Date: Thu, 18 Jul 2024 10:45:15 +0100
-Message-Id: <20240718094523.1198645-8-alex.bennee@linaro.org>
+ Paolo Bonzini <pbonzini@redhat.com>, Laurent Vivier <laurent@vivier.eu>
+Subject: [PATCH 09/15] target/m68k: Add semihosting stub
+Date: Thu, 18 Jul 2024 10:45:17 +0100
+Message-Id: <20240718094523.1198645-10-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240718094523.1198645-1-alex.bennee@linaro.org>
 References: <20240718094523.1198645-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::635;
- envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x635.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::530;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x530.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -118,32 +116,60 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
+From: Philippe Mathieu-Daudé <philmd@linaro.org>
 
-Register values are dumped as 'sz' chunks of two nibbles in the execlog
-plugin, sz was 1 too big.
+Since the SEMIHOSTING feature is optional, we need
+a stub to link when it is disabled.
 
-Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
-Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Message-Id: <20240620083805.73603-1-frederic.petrot@univ-grenoble-alpes.fr>
+Suggested-by: Paolo Bonzini <pbonzini@redhat.com>
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Message-Id: <20240717105723.58965-3-philmd@linaro.org>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- contrib/plugins/execlog.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ target/m68k/semihosting-stub.c | 15 +++++++++++++++
+ target/m68k/meson.build        |  5 ++++-
+ 2 files changed, 19 insertions(+), 1 deletion(-)
+ create mode 100644 target/m68k/semihosting-stub.c
 
-diff --git a/contrib/plugins/execlog.c b/contrib/plugins/execlog.c
-index 371db97eb1..1c1601cc0b 100644
---- a/contrib/plugins/execlog.c
-+++ b/contrib/plugins/execlog.c
-@@ -101,7 +101,7 @@ static void insn_check_regs(CPU *cpu)
-             GByteArray *temp = reg->last;
-             g_string_append_printf(cpu->last_exec, ", %s -> 0x", reg->name);
-             /* TODO: handle BE properly */
--            for (int i = sz; i >= 0; i--) {
-+            for (int i = sz - 1; i >= 0; i--) {
-                 g_string_append_printf(cpu->last_exec, "%02x",
-                                        reg->new->data[i]);
-             }
+diff --git a/target/m68k/semihosting-stub.c b/target/m68k/semihosting-stub.c
+new file mode 100644
+index 0000000000..d6a5965e29
+--- /dev/null
++++ b/target/m68k/semihosting-stub.c
+@@ -0,0 +1,15 @@
++/*
++ *  m68k/ColdFire semihosting stub
++ *
++ * SPDX-FileContributor: Philippe Mathieu-Daudé <philmd@linaro.org>
++ * SPDX-FileCopyrightText: 2024 Linaro Ltd.
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#include "qemu/osdep.h"
++#include "cpu.h"
++
++void do_m68k_semihosting(CPUM68KState *env, int nr)
++{
++    g_assert_not_reached();
++}
+diff --git a/target/m68k/meson.build b/target/m68k/meson.build
+index 8d3f9ce288..4d213daaf6 100644
+--- a/target/m68k/meson.build
++++ b/target/m68k/meson.build
+@@ -11,9 +11,12 @@ m68k_ss.add(files(
+ 
+ m68k_system_ss = ss.source_set()
+ m68k_system_ss.add(files(
+-  'm68k-semi.c',
+   'monitor.c'
+ ))
++m68k_system_ss.add(when: ['CONFIG_SEMIHOSTING'],
++  if_true: files('m68k-semi.c'),
++  if_false: files('semihosting-stub.c')
++)
+ 
+ target_arch += {'m68k': m68k_ss}
+ target_system_arch += {'m68k': m68k_system_ss}
 -- 
 2.39.2
 
