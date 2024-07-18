@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81176C3DA49
-	for <qemu-riscv@archiver.kernel.org>; Thu, 18 Jul 2024 09:48:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3850C3DA49
+	for <qemu-riscv@archiver.kernel.org>; Thu, 18 Jul 2024 09:48:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sUNhl-0003nq-0M; Thu, 18 Jul 2024 05:45:41 -0400
+	id 1sUNht-0004VB-MU; Thu, 18 Jul 2024 05:45:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sUNhj-0003gf-Ay
- for qemu-riscv@nongnu.org; Thu, 18 Jul 2024 05:45:39 -0400
-Received: from mail-ej1-x62e.google.com ([2a00:1450:4864:20::62e])
+ id 1sUNhp-00047l-Ak
+ for qemu-riscv@nongnu.org; Thu, 18 Jul 2024 05:45:45 -0400
+Received: from mail-ej1-x62f.google.com ([2a00:1450:4864:20::62f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sUNhd-0007dz-IA
- for qemu-riscv@nongnu.org; Thu, 18 Jul 2024 05:45:39 -0400
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a79fe8e6282so62631766b.2
- for <qemu-riscv@nongnu.org>; Thu, 18 Jul 2024 02:45:33 -0700 (PDT)
+ id 1sUNhj-0007ha-Gy
+ for qemu-riscv@nongnu.org; Thu, 18 Jul 2024 05:45:45 -0400
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-a77dc08db60so63155066b.1
+ for <qemu-riscv@nongnu.org>; Thu, 18 Jul 2024 02:45:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721295932; x=1721900732; darn=nongnu.org;
+ d=linaro.org; s=google; t=1721295938; x=1721900738; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/y96L2Gm/13AJ5RhhShqLNnx0hUTQIR5fDVZBbdIxXM=;
- b=yOgMT/ZjMuDtH1ZTaQF/WMemtnEGu8H7XJaJsSq7C0ScksGdA4WmNu/EjxhJCQTYH9
- DgOSjzemBeb3A670wuHSBZZyVIof11L60BQ8keSGCBzwLk6XpQkhdcMHAvIlvAWSdGD5
- r6cVWJ49NIshYiFPXld2n+eV1dVV1zbTc0HBj+RHZ69ycfAQ0p/a9RdL/yoPvipy63Oq
- 5nPTRgHKTLmZcSSa3JPQJTNDoE3rlLIVDarBy2HE7I1zX7SD33ZE/lLBP5AkjRvrRRcC
- IKNK3p4pEGf0IqiKsnPyXNwLXK/Zb9YjnjsxIYJmBlCDBelbGqHog7b/kYNNH2EGtGdz
- 7P2Q==
+ bh=fNz+AOYp7KBdTk9g+6bf31v47vR5RhTCmRUMfVqRcT0=;
+ b=xtUkIWCzeGHZr4PM7SOHaNSGuSMm5/q2BMPb4lJcdt7rmInQTJTg0oVJQeMxwZOuQx
+ r7OZprzCBk+tPPJchsoYM2INZ1hdIe3siKNT4tzh2dqcN5ub5Qtr5gliXkzcQwa1aBjl
+ GS6q93xzLjDuGOCNColST48dD/vnCuOyt9ytwZnKYUgZ8L7xr6NHWlTlzZSb/7VjFLSi
+ XA2CFSVppVlVHHpXK2PUKEl4njD2vojd4oKaXNZedCahhUA8IXFkXj9kaJGYx1+Zs/Iv
+ 2D/GMcmgERRiH7AXrSnuW6PSC3ZFYisGyR9y9siAZHQ28XUHSP0DGYJBj5atGk5O0sJx
+ VYJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721295932; x=1721900732;
+ d=1e100.net; s=20230601; t=1721295938; x=1721900738;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/y96L2Gm/13AJ5RhhShqLNnx0hUTQIR5fDVZBbdIxXM=;
- b=ZN71zidpEHTVPxaMGNK+J86pDZB4h0ge+U/HCMaaPQ87Hp9KROO0mlU2bMlF/1xxI+
- 9cIgOQ5qUuPU41ENirDJcCTqibVaNLfTeLFftbqgcao44iwCPzhqrCWfr8u3amxCeCEn
- IATqoUhgnDJd69ixJ520mZQcXbS+pBHChsR6uER9Uirg9NY3vzRXQsPQ5ZmGZHDi0kaD
- TSyGpqlX77dy5xKCoU/EfJLQiIv5oc+M+BpewPcC7y0BR0dEba4xc8hm+eGO+67cabz+
- Pi2u/4kudkrv67di3JvHrlX4JOYHe3TLJ5ZlITr8l3ezOysYKiMiJmfCKl7K0QPeKRbQ
- QSPA==
+ bh=fNz+AOYp7KBdTk9g+6bf31v47vR5RhTCmRUMfVqRcT0=;
+ b=cjxc3jUkWN2mcOc8wZzG3W7gBbsZICRgqunyPKQzbgiNKEXUB0AQqDjIEwQ5Yk2hXK
+ fMXIUXZVeJ5W1XC+bfErXXwPjMiqkJD4BvT2yeLWoldRmleBmU0+wvrCbQrFekjNcr/p
+ e7NTO5cOwRNIu6STWiJinBC/catRzAoizAZ/2GFIwnxkCWIzUp6obaAfigzZ0+YrnnOJ
+ yWTfgJlvrvslhCb/FsKTM7UAlAFY55F7WdwGbHf9o+6EXixzNrgQuNMRf/tW+DmbDuN8
+ WoKNsqqIALMcYwHSsNN+bWF+zX288UZfLhhQb+L/YxP33g5BOLqWcKKva2m4wjhUZTWH
+ dO2A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU/nfg3W7R2SD1+1zna1emRXZTVs5f8In6EWXBulcQyHGLG58MQAw9v0DInEkCrrdHY3E4tc8PCghBIjz1n5Y5jpvzZQZk=
-X-Gm-Message-State: AOJu0Yw+qhPhRLmTBaQvIye0Wz8UZhaBxrb7M2SGU9ykwKDPgfQbb2+t
- fCx07AvJdLaHPkyi9RAVDNAw6sviwRfkIWOHsHPWZVthSXDWlYikuV68RLhAQM8=
-X-Google-Smtp-Source: AGHT+IEMtgQWa2SWM8LGmU7v2S283Kd75ZJnOHlBnAjVQMBqZRp26CAKLl31k2ZBNLXywoJsS8YIvw==
-X-Received: by 2002:a17:906:5fd7:b0:a77:d8c9:ae23 with SMTP id
- a640c23a62f3a-a7a013bf072mr309693766b.59.1721295931807; 
- Thu, 18 Jul 2024 02:45:31 -0700 (PDT)
+ AJvYcCWL9xwOrU45BhW6lBUejt8guwMEvYEBK7jgexvHC7gpQs90Rf0/7ZOpQVva5bN9PfOM/P/3rGrpo8Kx5vksnLIaSKwx9CY=
+X-Gm-Message-State: AOJu0YyMb0XpZA9hT8RiRxmFaGy+zD6/SqPd8QntVVuHTbnyFDaALAx4
+ +zg6aRCRDP4cRJakeVdIqu23jW7hBD6gK1mFPUaN6BLQ0II6E3CjREwqv7qJ8zc=
+X-Google-Smtp-Source: AGHT+IFxJn99jT+7A93/GH5Ylxwy9gBFz6JvOE7+0ukSbPdld+xkmNDiM856MPKdse8cDajmF2ty9Q==
+X-Received: by 2002:a17:907:da3:b0:a6f:bf5d:b365 with SMTP id
+ a640c23a62f3a-a7a012f6e5emr432518266b.33.1721295937667; 
+ Thu, 18 Jul 2024 02:45:37 -0700 (PDT)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a79bc5b7f28sm535903766b.70.2024.07.18.02.45.26
+ a640c23a62f3a-a79bc7f1e20sm536964166b.116.2024.07.18.02.45.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Jul 2024 02:45:28 -0700 (PDT)
+ Thu, 18 Jul 2024 02:45:34 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 9404F5FA39;
- Thu, 18 Jul 2024 10:45:24 +0100 (BST)
+ by draig.lan (Postfix) with ESMTP id 453315FD74;
+ Thu, 18 Jul 2024 10:45:25 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Jiaxun Yang <jiaxun.yang@flygoat.com>,
@@ -82,25 +82,26 @@ Cc: Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Weiwei Li <liwei1518@gmail.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Max Filippov <jcmvbkbc@gmail.com>, Mahmoud Mandour <ma.mandourr@gmail.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Laurent Vivier <laurent@vivier.eu>
-Subject: [PATCH 06/15] tests/plugins: use qemu_plugin_outs for inline stats
-Date: Thu, 18 Jul 2024 10:45:14 +0100
-Message-Id: <20240718094523.1198645-7-alex.bennee@linaro.org>
+ Paolo Bonzini <pbonzini@redhat.com>, Laurent Vivier <laurent@vivier.eu>,
+ Anton Johansson <anjo@rev.ng>
+Subject: [PATCH 13/15] target/riscv: Restrict semihosting to TCG
+Date: Thu, 18 Jul 2024 10:45:21 +0100
+Message-Id: <20240718094523.1198645-14-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240718094523.1198645-1-alex.bennee@linaro.org>
 References: <20240718094523.1198645-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::62e;
- envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x62e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62f;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x62f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -116,113 +117,37 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Using bare printf's in plugins is perfectly acceptable but they do
-rather mess up the output of "make check-tcg". Convert the printfs to
-use g_string and then output with the plugin output helper which will
-already be captured to .pout files by the test harness.
+From: Philippe Mathieu-Daudé <philmd@linaro.org>
 
+Semihosting currently uses the TCG probe_access API. To prepare for
+encoding the TCG dependency in Kconfig, do not enable it unless TCG
+is available.
+
+Suggested-by: Paolo Bonzini <pbonzini@redhat.com>
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Anton Johansson <anjo@rev.ng>
+Message-Id: <20240717105723.58965-7-philmd@linaro.org>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- tests/plugin/inline.c | 58 ++++++++++++++++++++++++-------------------
- 1 file changed, 33 insertions(+), 25 deletions(-)
+ target/riscv/Kconfig | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/tests/plugin/inline.c b/tests/plugin/inline.c
-index cd63827b7d..73dde99578 100644
---- a/tests/plugin/inline.c
-+++ b/tests/plugin/inline.c
-@@ -71,10 +71,12 @@ static void stats_insn(void)
-     const uint64_t cond_track_left = qemu_plugin_u64_sum(insn_cond_track_count);
-     const uint64_t conditional =
-         cond_num_trigger * cond_trigger_limit + cond_track_left;
--    printf("insn: %" PRIu64 "\n", expected);
--    printf("insn: %" PRIu64 " (per vcpu)\n", per_vcpu);
--    printf("insn: %" PRIu64 " (per vcpu inline)\n", inl_per_vcpu);
--    printf("insn: %" PRIu64 " (cond cb)\n", conditional);
-+    g_autoptr(GString) stats = g_string_new("");
-+    g_string_append_printf(stats, "insn: %" PRIu64 "\n", expected);
-+    g_string_append_printf(stats, "insn: %" PRIu64 " (per vcpu)\n", per_vcpu);
-+    g_string_append_printf(stats, "insn: %" PRIu64 " (per vcpu inline)\n", inl_per_vcpu);
-+    g_string_append_printf(stats, "insn: %" PRIu64 " (cond cb)\n", conditional);
-+    qemu_plugin_outs(stats->str);
-     g_assert(expected > 0);
-     g_assert(per_vcpu == expected);
-     g_assert(inl_per_vcpu == expected);
-@@ -91,10 +93,12 @@ static void stats_tb(void)
-     const uint64_t cond_track_left = qemu_plugin_u64_sum(tb_cond_track_count);
-     const uint64_t conditional =
-         cond_num_trigger * cond_trigger_limit + cond_track_left;
--    printf("tb: %" PRIu64 "\n", expected);
--    printf("tb: %" PRIu64 " (per vcpu)\n", per_vcpu);
--    printf("tb: %" PRIu64 " (per vcpu inline)\n", inl_per_vcpu);
--    printf("tb: %" PRIu64 " (conditional cb)\n", conditional);
-+    g_autoptr(GString) stats = g_string_new("");
-+    g_string_append_printf(stats, "tb: %" PRIu64 "\n", expected);
-+    g_string_append_printf(stats, "tb: %" PRIu64 " (per vcpu)\n", per_vcpu);
-+    g_string_append_printf(stats, "tb: %" PRIu64 " (per vcpu inline)\n", inl_per_vcpu);
-+    g_string_append_printf(stats, "tb: %" PRIu64 " (conditional cb)\n", conditional);
-+    qemu_plugin_outs(stats->str);
-     g_assert(expected > 0);
-     g_assert(per_vcpu == expected);
-     g_assert(inl_per_vcpu == expected);
-@@ -107,9 +111,11 @@ static void stats_mem(void)
-     const uint64_t per_vcpu = qemu_plugin_u64_sum(count_mem);
-     const uint64_t inl_per_vcpu =
-         qemu_plugin_u64_sum(count_mem_inline);
--    printf("mem: %" PRIu64 "\n", expected);
--    printf("mem: %" PRIu64 " (per vcpu)\n", per_vcpu);
--    printf("mem: %" PRIu64 " (per vcpu inline)\n", inl_per_vcpu);
-+    g_autoptr(GString) stats = g_string_new("");
-+    g_string_append_printf(stats, "mem: %" PRIu64 "\n", expected);
-+    g_string_append_printf(stats, "mem: %" PRIu64 " (per vcpu)\n", per_vcpu);
-+    g_string_append_printf(stats, "mem: %" PRIu64 " (per vcpu inline)\n", inl_per_vcpu);
-+    qemu_plugin_outs(stats->str);
-     g_assert(expected > 0);
-     g_assert(per_vcpu == expected);
-     g_assert(inl_per_vcpu == expected);
-@@ -118,6 +124,7 @@ static void stats_mem(void)
- static void plugin_exit(qemu_plugin_id_t id, void *udata)
- {
-     const unsigned int num_cpus = qemu_plugin_num_vcpus();
-+    g_autoptr(GString) stats = g_string_new("");
-     g_assert(num_cpus == max_cpu_index + 1);
+diff --git a/target/riscv/Kconfig b/target/riscv/Kconfig
+index 5f30df22f2..c332616d36 100644
+--- a/target/riscv/Kconfig
++++ b/target/riscv/Kconfig
+@@ -1,9 +1,9 @@
+ config RISCV32
+     bool
+-    select ARM_COMPATIBLE_SEMIHOSTING # for do_common_semihosting()
++    imply ARM_COMPATIBLE_SEMIHOSTING if TCG
+     select DEVICE_TREE # needed by boot.c
  
-     for (int i = 0; i < num_cpus ; ++i) {
-@@ -135,20 +142,21 @@ static void plugin_exit(qemu_plugin_id_t id, void *udata)
-             qemu_plugin_u64_get(insn_cond_num_trigger, i);
-         const uint64_t insn_cond_left =
-             qemu_plugin_u64_get(insn_cond_track_count, i);
--        printf("cpu %d: tb (%" PRIu64 ", %" PRIu64
--               ", %" PRIu64 " * %" PRIu64 " + %" PRIu64
--               ") | "
--               "insn (%" PRIu64 ", %" PRIu64
--               ", %" PRIu64 " * %" PRIu64 " + %" PRIu64
--               ") | "
--               "mem (%" PRIu64 ", %" PRIu64 ")"
--               "\n",
--               i,
--               tb, tb_inline,
--               tb_cond_trigger, cond_trigger_limit, tb_cond_left,
--               insn, insn_inline,
--               insn_cond_trigger, cond_trigger_limit, insn_cond_left,
--               mem, mem_inline);
-+        g_string_printf(stats, "cpu %d: tb (%" PRIu64 ", %" PRIu64
-+                        ", %" PRIu64 " * %" PRIu64 " + %" PRIu64
-+                        ") | "
-+                        "insn (%" PRIu64 ", %" PRIu64
-+                        ", %" PRIu64 " * %" PRIu64 " + %" PRIu64
-+                        ") | "
-+                        "mem (%" PRIu64 ", %" PRIu64 ")"
-+                        "\n",
-+                        i,
-+                        tb, tb_inline,
-+                        tb_cond_trigger, cond_trigger_limit, tb_cond_left,
-+                        insn, insn_inline,
-+                        insn_cond_trigger, cond_trigger_limit, insn_cond_left,
-+                        mem, mem_inline);
-+        qemu_plugin_outs(stats->str);
-         g_assert(tb == tb_inline);
-         g_assert(insn == insn_inline);
-         g_assert(mem == mem_inline);
+ config RISCV64
+     bool
+-    select ARM_COMPATIBLE_SEMIHOSTING # for do_common_semihosting()
++    imply ARM_COMPATIBLE_SEMIHOSTING if TCG
+     select DEVICE_TREE # needed by boot.c
 -- 
 2.39.2
 
