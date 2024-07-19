@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 573C4C3DA61
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAD80C3DA49
 	for <qemu-riscv@archiver.kernel.org>; Fri, 19 Jul 2024 01:09:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sUc6q-0006ci-J4; Thu, 18 Jul 2024 21:08:32 -0400
+	id 1sUc6j-0005eH-A1; Thu, 18 Jul 2024 21:08:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sUc6M-0004Fb-Qh
- for qemu-riscv@nongnu.org; Thu, 18 Jul 2024 21:08:05 -0400
-Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435])
+ id 1sUc6D-0003xZ-Py
+ for qemu-riscv@nongnu.org; Thu, 18 Jul 2024 21:07:56 -0400
+Received: from mail-pg1-x52b.google.com ([2607:f8b0:4864:20::52b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sUc6K-0000wI-0A
- for qemu-riscv@nongnu.org; Thu, 18 Jul 2024 21:08:02 -0400
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-70b5117ae06so311870b3a.2
- for <qemu-riscv@nongnu.org>; Thu, 18 Jul 2024 18:07:58 -0700 (PDT)
+ id 1sUc6A-0000sS-3E
+ for qemu-riscv@nongnu.org; Thu, 18 Jul 2024 21:07:51 -0400
+Received: by mail-pg1-x52b.google.com with SMTP id
+ 41be03b00d2f7-7611b6a617cso839203a12.3
+ for <qemu-riscv@nongnu.org>; Thu, 18 Jul 2024 18:07:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721351277; x=1721956077; darn=nongnu.org;
+ d=linaro.org; s=google; t=1721351267; x=1721956067; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wN2PEtP+rz1MoCCGhce/mKwLbs1GmxS63nYc3i7jjaE=;
- b=GIS28H9gxYaJWBJymaxkuh1fOecsIoYL7Dl83TWmR8h1ntX059QDEKjAv4R9euVO9L
- 6I0figjFdEWQrkOExWHM/qxVkhUBcTVkXaVkD0BKTA1oa08XqAy6mIzQiRJKUu1JLmq3
- ry7nEs1DUwactNHxoT98P6Wvi3PSp0oF4E4mdtma1eb0yT84d2Zm1heG44Cs9P88PHap
- oreeVqHVSeFR+AS/UbFjpl7vodxP75hkfetUt9WSPdDdkGd6g2JaJoU8C3RQMHXMojLo
- Q0IeJ7T7HDDHnuzHD31Lr8A+UjNWHE+9ByrhYyn92IuwO3f1nsACi8MX3SmnG6kYHzNZ
- jDlg==
+ bh=0Aw83kLLuGjCQHx2MdR2LGZJ7cF9lloOkwjusYN+Kq0=;
+ b=Xnq1hW9U8AKohHX1kvqaD9LobrReHnOJ2YqtRWPqzKSs5wf8RcSywsG83TOfNa2YvO
+ 7OY2p2Ma9au4xVzohyukefYYfrvm5suQ1aAET8T/ZB2bnXjaXWoeP1PxLxIt90whmXrG
+ l11PjIZPsWsVK40JaMY8m0UxddI/RulehRKdokvQFFglprgiDP4HXSR+mbxgGcnikkGJ
+ rf3L1hDd8cgM7d4c2b5yWCscCJdCfAzOTm9CisDT6KgqK0tc5at76y35efAHsqtR9lJq
+ L1OJfxyujNh5rbTZFGLa2jYv2cIPqc7cDkGRwrhUq5hBxcxT9olSIPnfCxG/fkm0oPED
+ UVZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721351277; x=1721956077;
+ d=1e100.net; s=20230601; t=1721351267; x=1721956067;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=wN2PEtP+rz1MoCCGhce/mKwLbs1GmxS63nYc3i7jjaE=;
- b=nWxWNK5CyKGdo+K9QxofIjubsUltMgOXAkGK9GpcShr762r846a4mU26p8SHWVhCdc
- qId0B9R5le9iK+bvxQr7UNgJLSNMbrVgT64httf7VXIKhfrOXK0I4LV5Dr2UqhNhDhJs
- dsEkuHNjNZglFVuxIV3TaYSVGBA1tWg6zt5NiHhIoW+fFu9yXH3YG5uCbkHmgliFgarC
- BzwyY6JGe0szGz/BdrR6Rw1VFLhuxAc+qpa/f5F/SM3psorq7qTVL8id6v7YA5AoKmrU
- f+iKxH7yUQtHerj5U6xr3OEgDSzN/6gwefDHV/fMGxQN5Xz9/l86JvgD9wpBbirHCDGT
- NSxw==
+ bh=0Aw83kLLuGjCQHx2MdR2LGZJ7cF9lloOkwjusYN+Kq0=;
+ b=WUC0/f/Ak/U9mJUUaWirqk4UjyxAxrJT9knDQkCTsWXdBtlFZt6cU9giMLHMNc5LFn
+ PXC8m5+q32q2Mu9s8dCPHIsB5JN6zBJmlUCDqlfWJXwIqNijJeq8bjNp7ICeVcnR+n3Z
+ rX8MbQZuELyH5IPU0buES801dDOgJ4auPkb9jtPptaCF+CX9oicosubvzkX4hndw2HnV
+ BvLBWAcUIltFvYWVnLv1GKZgDtuKqao8D1G4XKVztSjnI6q3lRSnj6TiyS5luCUXrua5
+ Wi17DRvt4H3F2jW1w+zcHg0j4wIJF8RGDxLzOvi9WHRrMZ5G7bvG+4DdJSXqBXqxO0EN
+ bzOQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXL9M8o9YOYj6qLVsT5bXZQg6lKg9xwZ7mURhbUtCVerRn1Ms8czdcrWnK2p888vuMNywibjv9HSx9Ib1ClihkqUwAJMVM=
-X-Gm-Message-State: AOJu0YwUNrKa9fypO9bZjgUTnHnUYUQKh/rTNUFwBpufUfhz7qkHE8C6
- bByqvLsIOA8ORBhAkfv1UX/y+zX91kwJD4n38VGLQsfA77HjVuDwsZnWQTuj6+g=
-X-Google-Smtp-Source: AGHT+IGhPxajhxgOVWiFmtLIIONpvdhohDePDWcIIWw5XK3xyb7NGQNt6fxO3hE1cGBghDFH+OynBQ==
-X-Received: by 2002:a05:6a21:6da3:b0:1c3:a760:9757 with SMTP id
- adf61e73a8af0-1c3fddf4e40mr9104790637.49.1721351276741; 
- Thu, 18 Jul 2024 18:07:56 -0700 (PDT)
+ AJvYcCXrNdBuJnfYJbBf9hRTVKcEEGscgPZHbzksWeY+sCqP6mhJlMQl8Egu1f6J/yhcQcs/1lqgeFvSDbdetWELfZpW9/A98HM=
+X-Gm-Message-State: AOJu0YwWeVfxxyJGVWRPRqIt2LtZKHboNz92ya9CR+v3sxCJVh48LJrS
+ Qpl9I9fUP1v4mrc9RMfRI2Yr49enoXR4V0Qj+rwsqK1D7YfGM024pNgpCxvX8S0=
+X-Google-Smtp-Source: AGHT+IFSyPl69oz/xs+PHCm6FusTx0aEAUtFuiEuArzuXkqzmMGVp1fpiQTiM4eVikaIxUjJJayEqQ==
+X-Received: by 2002:a05:6a21:99a0:b0:1c4:17e1:14df with SMTP id
+ adf61e73a8af0-1c417e116f0mr1350522637.48.1721351266616; 
+ Thu, 18 Jul 2024 18:07:46 -0700 (PDT)
 Received: from stoup.. ([203.56.128.103]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1fd64d07ad9sm2067415ad.177.2024.07.18.18.07.53
+ d9443c01a7336-1fd64d07ad9sm2067415ad.177.2024.07.18.18.07.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Jul 2024 18:07:56 -0700 (PDT)
+ Thu, 18 Jul 2024 18:07:46 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongu.org, qemu-s390x@nongnu.org,
- qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v3 12/12] target/riscv: Simplify probing in vext_ldff
-Date: Fri, 19 Jul 2024 11:07:07 +1000
-Message-ID: <20240719010707.1319675-13-richard.henderson@linaro.org>
+ qemu-riscv@nongnu.org, Peter Maydell <peter.maydell@linaro.org>
+Subject: [PATCH v3 09/12] target/s390x: Use user_or_likely in do_access_memset
+Date: Fri, 19 Jul 2024 11:07:04 +1000
+Message-ID: <20240719010707.1319675-10-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240719010707.1319675-1-richard.henderson@linaro.org>
 References: <20240719010707.1319675-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::435;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x435.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52b;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x52b.google.com
 X-Spam_score_int: 37
 X-Spam_score: 3.7
 X-Spam_bar: +++
@@ -95,76 +95,39 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The current pairing of tlb_vaddr_to_host with extra is either
-inefficient (user-only, with page_check_range) or incorrect
-(system, with probe_pages).
+Eliminate the ifdef by using a predicate that is
+always true with CONFIG_USER_ONLY.
 
-For proper non-fault behaviour, use probe_access_flags with
-its nonfault parameter set to true.
-
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/vector_helper.c | 31 +++++++++++++++++--------------
- 1 file changed, 17 insertions(+), 14 deletions(-)
+ target/s390x/tcg/mem_helper.c | 6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
 
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 1b4d5a8e37..10a52ceb5b 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -474,7 +474,6 @@ vext_ldff(void *vd, void *v0, target_ulong base,
-           vext_ldst_elem_fn *ldst_elem,
-           uint32_t log2_esz, uintptr_t ra)
+diff --git a/target/s390x/tcg/mem_helper.c b/target/s390x/tcg/mem_helper.c
+index 6cdbc34178..5311a15a09 100644
+--- a/target/s390x/tcg/mem_helper.c
++++ b/target/s390x/tcg/mem_helper.c
+@@ -225,10 +225,7 @@ static void do_access_memset(CPUS390XState *env, vaddr vaddr, char *haddr,
+                              uint8_t byte, uint16_t size, int mmu_idx,
+                              uintptr_t ra)
  {
--    void *host;
-     uint32_t i, k, vl = 0;
-     uint32_t nf = vext_nf(desc);
-     uint32_t vm = vext_vm(desc);
-@@ -493,27 +492,31 @@ vext_ldff(void *vd, void *v0, target_ulong base,
-         }
-         addr = adjust_addr(env, base + i * (nf << log2_esz));
-         if (i == 0) {
-+            /* Allow fault on first element. */
-             probe_pages(env, addr, nf << log2_esz, ra, MMU_DATA_LOAD);
-         } else {
--            /* if it triggers an exception, no need to check watchpoint */
-             remain = nf << log2_esz;
-             while (remain > 0) {
-+                void *host;
-+                int flags;
-+
-                 offset = -(addr | TARGET_PAGE_MASK);
--                host = tlb_vaddr_to_host(env, addr, MMU_DATA_LOAD, mmu_index);
--                if (host) {
 -#ifdef CONFIG_USER_ONLY
--                    if (!page_check_range(addr, offset, PAGE_READ)) {
--                        vl = i;
--                        goto ProbeSuccess;
--                    }
+-    memset(haddr, byte, size);
 -#else
--                    probe_pages(env, addr, offset, ra, MMU_DATA_LOAD);
+-    if (likely(haddr)) {
++    if (user_or_likely(haddr)) {
+         memset(haddr, byte, size);
+     } else {
+         MemOpIdx oi = make_memop_idx(MO_UB, mmu_idx);
+@@ -236,7 +233,6 @@ static void do_access_memset(CPUS390XState *env, vaddr vaddr, char *haddr,
+             cpu_stb_mmu(env, vaddr + i, byte, oi, ra);
+         }
+     }
 -#endif
--                } else {
-+
-+                /* Probe nonfault on subsequent elements. */
-+                flags = probe_access_flags(env, addr, offset, MMU_DATA_LOAD,
-+                                           mmu_index, true, &host, 0);
-+
-+                /*
-+                 * Stop if invalid (unmapped) or mmio (transaction may fail).
-+                 * Do not stop if watchpoint, as the spec says that
-+                 * first-fault should continue to access the same
-+                 * elements regardless of any watchpoint.
-+                 */
-+                if (flags & ~TLB_WATCHPOINT) {
-                     vl = i;
-                     goto ProbeSuccess;
-                 }
--                if (remain <=  offset) {
-+                if (remain <= offset) {
-                     break;
-                 }
-                 remain -= offset;
+ }
+ 
+ static void access_memset(CPUS390XState *env, S390Access *desta,
 -- 
 2.43.0
 
