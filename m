@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAD80C3DA49
-	for <qemu-riscv@archiver.kernel.org>; Fri, 19 Jul 2024 01:09:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B7E5C3DA61
+	for <qemu-riscv@archiver.kernel.org>; Fri, 19 Jul 2024 01:09:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sUc6j-0005eH-A1; Thu, 18 Jul 2024 21:08:25 -0400
+	id 1sUc6j-0005c2-1k; Thu, 18 Jul 2024 21:08:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sUc6D-0003xZ-Py
- for qemu-riscv@nongnu.org; Thu, 18 Jul 2024 21:07:56 -0400
-Received: from mail-pg1-x52b.google.com ([2607:f8b0:4864:20::52b])
+ id 1sUc5y-0003H9-QA
+ for qemu-riscv@nongnu.org; Thu, 18 Jul 2024 21:07:40 -0400
+Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sUc6A-0000sS-3E
- for qemu-riscv@nongnu.org; Thu, 18 Jul 2024 21:07:51 -0400
-Received: by mail-pg1-x52b.google.com with SMTP id
- 41be03b00d2f7-7611b6a617cso839203a12.3
- for <qemu-riscv@nongnu.org>; Thu, 18 Jul 2024 18:07:47 -0700 (PDT)
+ id 1sUc5u-0000mn-I6
+ for qemu-riscv@nongnu.org; Thu, 18 Jul 2024 21:07:36 -0400
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-1fc65329979so9632275ad.0
+ for <qemu-riscv@nongnu.org>; Thu, 18 Jul 2024 18:07:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721351267; x=1721956067; darn=nongnu.org;
+ d=linaro.org; s=google; t=1721351253; x=1721956053; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0Aw83kLLuGjCQHx2MdR2LGZJ7cF9lloOkwjusYN+Kq0=;
- b=Xnq1hW9U8AKohHX1kvqaD9LobrReHnOJ2YqtRWPqzKSs5wf8RcSywsG83TOfNa2YvO
- 7OY2p2Ma9au4xVzohyukefYYfrvm5suQ1aAET8T/ZB2bnXjaXWoeP1PxLxIt90whmXrG
- l11PjIZPsWsVK40JaMY8m0UxddI/RulehRKdokvQFFglprgiDP4HXSR+mbxgGcnikkGJ
- rf3L1hDd8cgM7d4c2b5yWCscCJdCfAzOTm9CisDT6KgqK0tc5at76y35efAHsqtR9lJq
- L1OJfxyujNh5rbTZFGLa2jYv2cIPqc7cDkGRwrhUq5hBxcxT9olSIPnfCxG/fkm0oPED
- UVZQ==
+ bh=qQ06f1POln3X8Sb8fDa8/CDLulrLL54olCBz3brWMPA=;
+ b=HIgrXQvijkfwIOy0gZzA5J5UwBcIKZUzRC+Jyo3xzqNlBZG4WjXb3zP5Mb0Ews37sp
+ 0iBkAH7iQ45kgAHY8gZbIHvCdAZghfZVxpP8I8wBtDhyqYuS9EttXICk4j1Vv2E9aaoe
+ Waw8jD2rR3gFQIqI64edXjGldGJlrSyUsc9cOeRbRsvQ4dg8I4a/Kh8/4kNHDT3rUulJ
+ F8LWIZmTizxMwc6odIaVZEy2Wnwau1haoVXONYkO2ZWErSgZRezY3aNERNszuUsaSRrY
+ ab+neIXBox/Z0eqeKqKcynXOKjEU+5b4CWOhpKQ+9LZvTQhZZ8Rbvi7+dZMsygRSIV6R
+ WDlQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721351267; x=1721956067;
+ d=1e100.net; s=20230601; t=1721351253; x=1721956053;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0Aw83kLLuGjCQHx2MdR2LGZJ7cF9lloOkwjusYN+Kq0=;
- b=WUC0/f/Ak/U9mJUUaWirqk4UjyxAxrJT9knDQkCTsWXdBtlFZt6cU9giMLHMNc5LFn
- PXC8m5+q32q2Mu9s8dCPHIsB5JN6zBJmlUCDqlfWJXwIqNijJeq8bjNp7ICeVcnR+n3Z
- rX8MbQZuELyH5IPU0buES801dDOgJ4auPkb9jtPptaCF+CX9oicosubvzkX4hndw2HnV
- BvLBWAcUIltFvYWVnLv1GKZgDtuKqao8D1G4XKVztSjnI6q3lRSnj6TiyS5luCUXrua5
- Wi17DRvt4H3F2jW1w+zcHg0j4wIJF8RGDxLzOvi9WHRrMZ5G7bvG+4DdJSXqBXqxO0EN
- bzOQ==
+ bh=qQ06f1POln3X8Sb8fDa8/CDLulrLL54olCBz3brWMPA=;
+ b=omMMoc7E6iQVCblrKUje1ivNLAeoCwnxOLc3w6/ccTlNXh3xoj5IRTV2abvYrVamQL
+ QcLOis1DQUKZp7LHUZz3zQLTJWi6siG2h4o4QRfSvSm8tCCGVIRLnxut71rPBmBt54Xy
+ YelysfnVyEZEtRSaciP5dW7MnbTmvYQhSWikG8rBrK4rNnV3ubirQSPDOWRh7iwyCLc7
+ 3eYQDb/rYh5nqzNSKGvhdsxy9gCrv1zPlQkrFxN1ydbgBTQinWwsgIYhNmtYuEdJdVKG
+ BJRaQNoR4PR6EqhCO9xHGIWXMLkfKO+GGAgU3ukH1Q+NNW+0C8gQxuxR5fjLqozMMXt+
+ YH/w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXrNdBuJnfYJbBf9hRTVKcEEGscgPZHbzksWeY+sCqP6mhJlMQl8Egu1f6J/yhcQcs/1lqgeFvSDbdetWELfZpW9/A98HM=
-X-Gm-Message-State: AOJu0YwWeVfxxyJGVWRPRqIt2LtZKHboNz92ya9CR+v3sxCJVh48LJrS
- Qpl9I9fUP1v4mrc9RMfRI2Yr49enoXR4V0Qj+rwsqK1D7YfGM024pNgpCxvX8S0=
-X-Google-Smtp-Source: AGHT+IFSyPl69oz/xs+PHCm6FusTx0aEAUtFuiEuArzuXkqzmMGVp1fpiQTiM4eVikaIxUjJJayEqQ==
-X-Received: by 2002:a05:6a21:99a0:b0:1c4:17e1:14df with SMTP id
- adf61e73a8af0-1c417e116f0mr1350522637.48.1721351266616; 
- Thu, 18 Jul 2024 18:07:46 -0700 (PDT)
+ AJvYcCXzg72Za1av4ZRFCRmAdaoOGW/nkyrCeRuYOmBv9617GW8e//KKxadt4Px5aU80HZxLpHF/usDPdRXzTyv2I0YDwDaHfHk=
+X-Gm-Message-State: AOJu0Yzt5bDXdLaZVD2+RtxBPm0++wNhEV2IJI85tViyx2w04gUOc5vj
+ 4Rf3ZYKnNHddDCkQgQxOa1z0rS32JBc/oIj4SDMFiDPTA+vJf0Fcv4vsD5uA514=
+X-Google-Smtp-Source: AGHT+IF3mRrWGCj3N1CNJB9+cHrjqJbSl0d9QpMI2YvmWRQp+oVn40+gO9c7c0oioTT97sybP5Wl6Q==
+X-Received: by 2002:a17:903:41c7:b0:1fa:8f64:8b0d with SMTP id
+ d9443c01a7336-1fc4e154b4fmr67172795ad.4.1721351252633; 
+ Thu, 18 Jul 2024 18:07:32 -0700 (PDT)
 Received: from stoup.. ([203.56.128.103]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1fd64d07ad9sm2067415ad.177.2024.07.18.18.07.43
+ d9443c01a7336-1fd64d07ad9sm2067415ad.177.2024.07.18.18.07.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Jul 2024 18:07:46 -0700 (PDT)
+ Thu, 18 Jul 2024 18:07:32 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongu.org, qemu-s390x@nongnu.org,
- qemu-riscv@nongnu.org, Peter Maydell <peter.maydell@linaro.org>
-Subject: [PATCH v3 09/12] target/s390x: Use user_or_likely in do_access_memset
-Date: Fri, 19 Jul 2024 11:07:04 +1000
-Message-ID: <20240719010707.1319675-10-richard.henderson@linaro.org>
+ qemu-riscv@nongnu.org, Nicholas Piggin <npiggin@gmail.com>,
+ BALATON Zoltan <balaton@eik.bme.hu>
+Subject: [PATCH v3 05/12] target/ppc: Hoist dcbz_size out of dcbz_common
+Date: Fri, 19 Jul 2024 11:07:00 +1000
+Message-ID: <20240719010707.1319675-6-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240719010707.1319675-1-richard.henderson@linaro.org>
 References: <20240719010707.1319675-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52b;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x52b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62d.google.com
 X-Spam_score_int: 37
 X-Spam_score: 3.7
 X-Spam_bar: +++
@@ -95,39 +96,78 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Eliminate the ifdef by using a predicate that is
-always true with CONFIG_USER_ONLY.
+The 970 logic does not apply to dcbzep, which is an e500 insn.
 
-Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
+Reviewed-by: Nicholas Piggin <npiggin@gmail.com>
+Reviewed-by: BALATON Zoltan <balaton@eik.bme.hu>
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/s390x/tcg/mem_helper.c | 6 +-----
- 1 file changed, 1 insertion(+), 5 deletions(-)
+ target/ppc/mem_helper.c | 30 +++++++++++++++---------------
+ 1 file changed, 15 insertions(+), 15 deletions(-)
 
-diff --git a/target/s390x/tcg/mem_helper.c b/target/s390x/tcg/mem_helper.c
-index 6cdbc34178..5311a15a09 100644
---- a/target/s390x/tcg/mem_helper.c
-+++ b/target/s390x/tcg/mem_helper.c
-@@ -225,10 +225,7 @@ static void do_access_memset(CPUS390XState *env, vaddr vaddr, char *haddr,
-                              uint8_t byte, uint16_t size, int mmu_idx,
-                              uintptr_t ra)
- {
--#ifdef CONFIG_USER_ONLY
--    memset(haddr, byte, size);
--#else
--    if (likely(haddr)) {
-+    if (user_or_likely(haddr)) {
-         memset(haddr, byte, size);
-     } else {
-         MemOpIdx oi = make_memop_idx(MO_UB, mmu_idx);
-@@ -236,7 +233,6 @@ static void do_access_memset(CPUS390XState *env, vaddr vaddr, char *haddr,
-             cpu_stb_mmu(env, vaddr + i, byte, oi, ra);
-         }
-     }
--#endif
+diff --git a/target/ppc/mem_helper.c b/target/ppc/mem_helper.c
+index 361fd72226..5067919ff8 100644
+--- a/target/ppc/mem_helper.c
++++ b/target/ppc/mem_helper.c
+@@ -271,22 +271,12 @@ void helper_stsw(CPUPPCState *env, target_ulong addr, uint32_t nb,
  }
  
- static void access_memset(CPUS390XState *env, S390Access *desta,
+ static void dcbz_common(CPUPPCState *env, target_ulong addr,
+-                        uint32_t opcode, int mmu_idx, uintptr_t retaddr)
++                        int dcbz_size, int mmu_idx, uintptr_t retaddr)
+ {
+-    target_ulong mask, dcbz_size = env->dcache_line_size;
+-    uint32_t i;
++    target_ulong mask = ~(target_ulong)(dcbz_size - 1);
+     void *haddr;
+ 
+-#if defined(TARGET_PPC64)
+-    /* Check for dcbz vs dcbzl on 970 */
+-    if (env->excp_model == POWERPC_EXCP_970 &&
+-        !(opcode & 0x00200000) && ((env->spr[SPR_970_HID5] >> 7) & 0x3) == 1) {
+-        dcbz_size = 32;
+-    }
+-#endif
+-
+     /* Align address */
+-    mask = ~(dcbz_size - 1);
+     addr &= mask;
+ 
+     /* Check reservation */
+@@ -300,7 +290,7 @@ static void dcbz_common(CPUPPCState *env, target_ulong addr,
+         memset(haddr, 0, dcbz_size);
+     } else {
+         /* Slow path */
+-        for (i = 0; i < dcbz_size; i += 8) {
++        for (int i = 0; i < dcbz_size; i += 8) {
+             cpu_stq_mmuidx_ra(env, addr + i, 0, mmu_idx, retaddr);
+         }
+     }
+@@ -308,12 +298,22 @@ static void dcbz_common(CPUPPCState *env, target_ulong addr,
+ 
+ void helper_dcbz(CPUPPCState *env, target_ulong addr, uint32_t opcode)
+ {
+-    dcbz_common(env, addr, opcode, ppc_env_mmu_index(env, false), GETPC());
++    int dcbz_size = env->dcache_line_size;
++
++#if defined(TARGET_PPC64)
++    /* Check for dcbz vs dcbzl on 970 */
++    if (env->excp_model == POWERPC_EXCP_970 &&
++        !(opcode & 0x00200000) && ((env->spr[SPR_970_HID5] >> 7) & 0x3) == 1) {
++        dcbz_size = 32;
++    }
++#endif
++
++    dcbz_common(env, addr, dcbz_size, ppc_env_mmu_index(env, false), GETPC());
+ }
+ 
+ void helper_dcbzep(CPUPPCState *env, target_ulong addr, uint32_t opcode)
+ {
+-    dcbz_common(env, addr, opcode, PPC_TLB_EPID_STORE, GETPC());
++    dcbz_common(env, addr, env->dcache_line_size, PPC_TLB_EPID_STORE, GETPC());
+ }
+ 
+ void helper_icbi(CPUPPCState *env, target_ulong addr)
 -- 
 2.43.0
 
