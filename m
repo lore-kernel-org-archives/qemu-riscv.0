@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B999CC3DA70
-	for <qemu-riscv@archiver.kernel.org>; Fri, 19 Jul 2024 01:09:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 573C4C3DA61
+	for <qemu-riscv@archiver.kernel.org>; Fri, 19 Jul 2024 01:09:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sUc6c-00050z-9E; Thu, 18 Jul 2024 21:08:18 -0400
+	id 1sUc6q-0006ci-J4; Thu, 18 Jul 2024 21:08:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sUc5n-0002u3-Fo
- for qemu-riscv@nongnu.org; Thu, 18 Jul 2024 21:07:29 -0400
-Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
+ id 1sUc6M-0004Fb-Qh
+ for qemu-riscv@nongnu.org; Thu, 18 Jul 2024 21:08:05 -0400
+Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sUc5k-0000jM-0P
- for qemu-riscv@nongnu.org; Thu, 18 Jul 2024 21:07:26 -0400
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-1fc6ee64512so7178915ad.0
- for <qemu-riscv@nongnu.org>; Thu, 18 Jul 2024 18:07:22 -0700 (PDT)
+ id 1sUc6K-0000wI-0A
+ for qemu-riscv@nongnu.org; Thu, 18 Jul 2024 21:08:02 -0400
+Received: by mail-pf1-x435.google.com with SMTP id
+ d2e1a72fcca58-70b5117ae06so311870b3a.2
+ for <qemu-riscv@nongnu.org>; Thu, 18 Jul 2024 18:07:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721351242; x=1721956042; darn=nongnu.org;
+ d=linaro.org; s=google; t=1721351277; x=1721956077; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lffTC77hfuBCBlcm53ysSfFxUjHJ9OXDuax++3VtjJ0=;
- b=gftxvehNrfN5FV6jZov2DcfkBumsBw37zrftGYDBZ1J8NhUQDznwtS41HFALXN/gCQ
- dG4V4vw52P+NKd/Za7IR1HG49ZqOBxeWpr9qlAXg+n3WMZ3GsCZlb9P86FNASAlVkws9
- zi+qUE9W4VIjV0qFao2npxR63DAFsS5TuMhYa/bTocAyAvIu/Dh+yTcLc1D8u/Wi3UGn
- buZXhtLWoDJeBR7ZfuLUSGFVrp2s7FTgtYjyQ6b5qvJ53WPB8G2cYuSKoUePB+4HW2lm
- NcBbnDLd8WisInBv5LpYXbuDFuv6MNFG+AKqTyikIusHhd2mgXT6EkT/yggj8O0CXWTj
- Znww==
+ bh=wN2PEtP+rz1MoCCGhce/mKwLbs1GmxS63nYc3i7jjaE=;
+ b=GIS28H9gxYaJWBJymaxkuh1fOecsIoYL7Dl83TWmR8h1ntX059QDEKjAv4R9euVO9L
+ 6I0figjFdEWQrkOExWHM/qxVkhUBcTVkXaVkD0BKTA1oa08XqAy6mIzQiRJKUu1JLmq3
+ ry7nEs1DUwactNHxoT98P6Wvi3PSp0oF4E4mdtma1eb0yT84d2Zm1heG44Cs9P88PHap
+ oreeVqHVSeFR+AS/UbFjpl7vodxP75hkfetUt9WSPdDdkGd6g2JaJoU8C3RQMHXMojLo
+ Q0IeJ7T7HDDHnuzHD31Lr8A+UjNWHE+9ByrhYyn92IuwO3f1nsACi8MX3SmnG6kYHzNZ
+ jDlg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721351242; x=1721956042;
+ d=1e100.net; s=20230601; t=1721351277; x=1721956077;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lffTC77hfuBCBlcm53ysSfFxUjHJ9OXDuax++3VtjJ0=;
- b=hCdzc63kjhTheZbKbQt/ngziaHLCl/8+AYUuUoRgUQN3h0mcQaxaa0FY0/Cb32bqT8
- bJSs+nWjwVU7IQH6oYvYGbyuGXojR7kg+C1htuAemkLjOiR4LRiSqMBwqgSwzKxqxslT
- E2wf1AOg+m+kZPLt0DiTb6ufyBakJjdhsTGfJXNh10/8kk1T96KEPf3+HhH7CPgt0Snt
- WvYr7pgT9FzxbMSeq8CBEnn7lJgaoHX6a431VvGps59O+jN6dPz+n9+TeELc8c3VqmWD
- Wc+pYPfZegd4dYb52zw3yvB1xTquid5o8tNV8rgyrizxSW1GaaGwrsj1OTb6Ed9LocoF
- nXgA==
+ bh=wN2PEtP+rz1MoCCGhce/mKwLbs1GmxS63nYc3i7jjaE=;
+ b=nWxWNK5CyKGdo+K9QxofIjubsUltMgOXAkGK9GpcShr762r846a4mU26p8SHWVhCdc
+ qId0B9R5le9iK+bvxQr7UNgJLSNMbrVgT64httf7VXIKhfrOXK0I4LV5Dr2UqhNhDhJs
+ dsEkuHNjNZglFVuxIV3TaYSVGBA1tWg6zt5NiHhIoW+fFu9yXH3YG5uCbkHmgliFgarC
+ BzwyY6JGe0szGz/BdrR6Rw1VFLhuxAc+qpa/f5F/SM3psorq7qTVL8id6v7YA5AoKmrU
+ f+iKxH7yUQtHerj5U6xr3OEgDSzN/6gwefDHV/fMGxQN5Xz9/l86JvgD9wpBbirHCDGT
+ NSxw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWtFozwFXM6liBi4pCv4ukfzEV93jUQ9W5ZayiJfWe8BWgkLauFMusGFKa1aeKxCgafixYwwe/BUs9LbBzDqjxWsGhpLec=
-X-Gm-Message-State: AOJu0YyejagFAU+wPYSg2unMMB9I1bOZt6CsaoYQddtZxR4ERewMjwqH
- JAJbFqnL3iZs0PfFyPDm/GCkI9FzidCETcQ9XX7w+783hG6yylGIYw1nPgnilvs=
-X-Google-Smtp-Source: AGHT+IERzcxqQd9TBc5XTG0h+EZpjTUk4fb4kk4jAFlNS2wKpK+1ohtWm9kb6U9kAdd4xseTrLC5Hg==
-X-Received: by 2002:a17:902:d506:b0:1fc:327a:1f48 with SMTP id
- d9443c01a7336-1fc4e1077a8mr63280235ad.12.1721351241529; 
- Thu, 18 Jul 2024 18:07:21 -0700 (PDT)
+ AJvYcCXL9M8o9YOYj6qLVsT5bXZQg6lKg9xwZ7mURhbUtCVerRn1Ms8czdcrWnK2p888vuMNywibjv9HSx9Ib1ClihkqUwAJMVM=
+X-Gm-Message-State: AOJu0YwUNrKa9fypO9bZjgUTnHnUYUQKh/rTNUFwBpufUfhz7qkHE8C6
+ bByqvLsIOA8ORBhAkfv1UX/y+zX91kwJD4n38VGLQsfA77HjVuDwsZnWQTuj6+g=
+X-Google-Smtp-Source: AGHT+IGhPxajhxgOVWiFmtLIIONpvdhohDePDWcIIWw5XK3xyb7NGQNt6fxO3hE1cGBghDFH+OynBQ==
+X-Received: by 2002:a05:6a21:6da3:b0:1c3:a760:9757 with SMTP id
+ adf61e73a8af0-1c3fddf4e40mr9104790637.49.1721351276741; 
+ Thu, 18 Jul 2024 18:07:56 -0700 (PDT)
 Received: from stoup.. ([203.56.128.103]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1fd64d07ad9sm2067415ad.177.2024.07.18.18.07.18
+ d9443c01a7336-1fd64d07ad9sm2067415ad.177.2024.07.18.18.07.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Jul 2024 18:07:21 -0700 (PDT)
+ Thu, 18 Jul 2024 18:07:56 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongu.org, qemu-s390x@nongnu.org,
- qemu-riscv@nongnu.org, Peter Maydell <peter.maydell@linaro.org>
-Subject: [PATCH v3 02/12] target/arm: Use set/clear_helper_retaddr in
- helper-a64.c
-Date: Fri, 19 Jul 2024 11:06:57 +1000
-Message-ID: <20240719010707.1319675-3-richard.henderson@linaro.org>
+ qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH v3 12/12] target/riscv: Simplify probing in vext_ldff
+Date: Fri, 19 Jul 2024 11:07:07 +1000
+Message-ID: <20240719010707.1319675-13-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240719010707.1319675-1-richard.henderson@linaro.org>
 References: <20240719010707.1319675-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x632.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::435;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x435.google.com
 X-Spam_score_int: 37
 X-Spam_score: 3.7
 X-Spam_bar: +++
@@ -96,87 +95,76 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Use these in helper_dc_dva and the FEAT_MOPS routines to
-avoid a race condition with munmap in another thread.
+The current pairing of tlb_vaddr_to_host with extra is either
+inefficient (user-only, with page_check_range) or incorrect
+(system, with probe_pages).
 
-Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
+For proper non-fault behaviour, use probe_access_flags with
+its nonfault parameter set to true.
+
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/arm/tcg/helper-a64.c | 14 ++++++++++++--
- 1 file changed, 12 insertions(+), 2 deletions(-)
+ target/riscv/vector_helper.c | 31 +++++++++++++++++--------------
+ 1 file changed, 17 insertions(+), 14 deletions(-)
 
-diff --git a/target/arm/tcg/helper-a64.c b/target/arm/tcg/helper-a64.c
-index 0ea8668ab4..c60d2a7ec9 100644
---- a/target/arm/tcg/helper-a64.c
-+++ b/target/arm/tcg/helper-a64.c
-@@ -928,6 +928,8 @@ uint32_t HELPER(sqrt_f16)(uint32_t a, void *fpstp)
- 
- void HELPER(dc_zva)(CPUARMState *env, uint64_t vaddr_in)
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index 1b4d5a8e37..10a52ceb5b 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -474,7 +474,6 @@ vext_ldff(void *vd, void *v0, target_ulong base,
+           vext_ldst_elem_fn *ldst_elem,
+           uint32_t log2_esz, uintptr_t ra)
  {
-+    uintptr_t ra = GETPC();
+-    void *host;
+     uint32_t i, k, vl = 0;
+     uint32_t nf = vext_nf(desc);
+     uint32_t vm = vext_vm(desc);
+@@ -493,27 +492,31 @@ vext_ldff(void *vd, void *v0, target_ulong base,
+         }
+         addr = adjust_addr(env, base + i * (nf << log2_esz));
+         if (i == 0) {
++            /* Allow fault on first element. */
+             probe_pages(env, addr, nf << log2_esz, ra, MMU_DATA_LOAD);
+         } else {
+-            /* if it triggers an exception, no need to check watchpoint */
+             remain = nf << log2_esz;
+             while (remain > 0) {
++                void *host;
++                int flags;
 +
-     /*
-      * Implement DC ZVA, which zeroes a fixed-length block of memory.
-      * Note that we do not implement the (architecturally mandated)
-@@ -948,8 +950,6 @@ void HELPER(dc_zva)(CPUARMState *env, uint64_t vaddr_in)
- 
- #ifndef CONFIG_USER_ONLY
-     if (unlikely(!mem)) {
--        uintptr_t ra = GETPC();
--
-         /*
-          * Trap if accessing an invalid page.  DC_ZVA requires that we supply
-          * the original pointer for an invalid page.  But watchpoints require
-@@ -971,7 +971,9 @@ void HELPER(dc_zva)(CPUARMState *env, uint64_t vaddr_in)
-     }
- #endif
- 
-+    set_helper_retaddr(ra);
-     memset(mem, 0, blocklen);
-+    clear_helper_retaddr();
- }
- 
- void HELPER(unaligned_access)(CPUARMState *env, uint64_t addr,
-@@ -1120,7 +1122,9 @@ static uint64_t set_step(CPUARMState *env, uint64_t toaddr,
-     }
- #endif
-     /* Easy case: just memset the host memory */
-+    set_helper_retaddr(ra);
-     memset(mem, data, setsize);
-+    clear_helper_retaddr();
-     return setsize;
- }
- 
-@@ -1163,7 +1167,9 @@ static uint64_t set_step_tags(CPUARMState *env, uint64_t toaddr,
-     }
- #endif
-     /* Easy case: just memset the host memory */
-+    set_helper_retaddr(ra);
-     memset(mem, data, setsize);
-+    clear_helper_retaddr();
-     mte_mops_set_tags(env, toaddr, setsize, *mtedesc);
-     return setsize;
- }
-@@ -1497,7 +1503,9 @@ static uint64_t copy_step(CPUARMState *env, uint64_t toaddr, uint64_t fromaddr,
-     }
- #endif
-     /* Easy case: just memmove the host memory */
-+    set_helper_retaddr(ra);
-     memmove(wmem, rmem, copysize);
-+    clear_helper_retaddr();
-     return copysize;
- }
- 
-@@ -1572,7 +1580,9 @@ static uint64_t copy_step_rev(CPUARMState *env, uint64_t toaddr,
-      * Easy case: just memmove the host memory. Note that wmem and
-      * rmem here point to the *last* byte to copy.
-      */
-+    set_helper_retaddr(ra);
-     memmove(wmem - (copysize - 1), rmem - (copysize - 1), copysize);
-+    clear_helper_retaddr();
-     return copysize;
- }
- 
+                 offset = -(addr | TARGET_PAGE_MASK);
+-                host = tlb_vaddr_to_host(env, addr, MMU_DATA_LOAD, mmu_index);
+-                if (host) {
+-#ifdef CONFIG_USER_ONLY
+-                    if (!page_check_range(addr, offset, PAGE_READ)) {
+-                        vl = i;
+-                        goto ProbeSuccess;
+-                    }
+-#else
+-                    probe_pages(env, addr, offset, ra, MMU_DATA_LOAD);
+-#endif
+-                } else {
++
++                /* Probe nonfault on subsequent elements. */
++                flags = probe_access_flags(env, addr, offset, MMU_DATA_LOAD,
++                                           mmu_index, true, &host, 0);
++
++                /*
++                 * Stop if invalid (unmapped) or mmio (transaction may fail).
++                 * Do not stop if watchpoint, as the spec says that
++                 * first-fault should continue to access the same
++                 * elements regardless of any watchpoint.
++                 */
++                if (flags & ~TLB_WATCHPOINT) {
+                     vl = i;
+                     goto ProbeSuccess;
+                 }
+-                if (remain <=  offset) {
++                if (remain <= offset) {
+                     break;
+                 }
+                 remain -= offset;
 -- 
 2.43.0
 
