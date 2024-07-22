@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88161C3DA5D
-	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jul 2024 11:57:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E227C3DA59
+	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jul 2024 12:08:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sVrey-0005KD-GA; Mon, 22 Jul 2024 07:56:56 -0400
+	id 1sVrqF-00030S-BR; Mon, 22 Jul 2024 08:08:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1sVrew-0005BC-BA
- for qemu-riscv@nongnu.org; Mon, 22 Jul 2024 07:56:54 -0400
-Received: from mail-lf1-x12e.google.com ([2a00:1450:4864:20::12e])
+ id 1sVrq0-00029u-LG
+ for qemu-riscv@nongnu.org; Mon, 22 Jul 2024 08:08:25 -0400
+Received: from mail-ej1-x634.google.com ([2a00:1450:4864:20::634])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1sVreu-0005VW-OZ
- for qemu-riscv@nongnu.org; Mon, 22 Jul 2024 07:56:54 -0400
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-52efa16aad9so47844e87.0
- for <qemu-riscv@nongnu.org>; Mon, 22 Jul 2024 04:56:51 -0700 (PDT)
+ id 1sVrpz-0008A7-1h
+ for qemu-riscv@nongnu.org; Mon, 22 Jul 2024 08:08:20 -0400
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-a77cc44f8aaso218670166b.3
+ for <qemu-riscv@nongnu.org>; Mon, 22 Jul 2024 05:08:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721649410; x=1722254210; darn=nongnu.org;
+ d=linaro.org; s=google; t=1721650097; x=1722254897; darn=nongnu.org;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=GW53BARDoHWD00cOBNaBMr/nIXFp8X8VrLnIPXNfOYc=;
- b=tpF6/HHznAzles/kesbsNdG9niaCcRq36rZSzPo3jkU1wQq85vWx19HrftlXJC3KqW
- Jr/78XM3Y9mwdrovHbUBMyHzCwIlD7t5MF8VeUd1VD/cTmuTFBEtSrIL4IQOXdAnySNl
- J1PodGISWnERdjuBwF81Sf4QeMsc69EketA1a2Q435oyesMqRCRtOBnrkV2w1BDUkNO2
- z92DMlB9R8IPYFeBBeqNTMpZKq8/yHyZu1SY7l5fNhra2xI+UZOCUq/dMd0F0apXqPcr
- svU0yxpXMmP8GbbrPPw/AsI2zHPGa+Hgh7Xf84OmF/pfz3jm1ZlyefkocgSSwZBVcLYw
- kEIg==
+ bh=tNhx5XCbDz2ES+x3Bn09OzYyRx83+WywVAD5VUceAnw=;
+ b=MolMc0VT2S7JFA2+oZPbDfLLQR0yhvNZ+jcQDuL/Gg6yWx7c1Z+Lw2m6ShvDhau5jy
+ 69wxWP97xr6vBBG834fImvg4BgSjQKX4VfVNXAJYgQeD9pxn/z+of0z+zVKob45JstKx
+ 3JYv1hemjwAWKtpU9AJJ83cba6KR0bRryolxJ3/MaqH0L8/iUHI+b5ZfwmPNZE9wSTxZ
+ EzHsQopzFJLRxSAC3sK8OtVeLUwyjVIN8yxdDfKREYanTX+vo43aIluSnEby/Iotq0A4
+ zyXK4fDeEVf29nynt+U7SVZCLtI2PCjCxxxAEAOt94K5FJrZPx/2CLa8qrc5WTr187Tv
+ Wdag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721649410; x=1722254210;
+ d=1e100.net; s=20230601; t=1721650097; x=1722254897;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=GW53BARDoHWD00cOBNaBMr/nIXFp8X8VrLnIPXNfOYc=;
- b=PkRnF/C+uk+wUjvbkvITtR36kVb5xm/tXMH1z06Tt1UvExykRRETZsE+gvfFydNDW4
- QsRsHOnBtacekc1UznJDfkCx3rqAkNwffkXXg2Syj9XFpAo3h10r32gI8T1OHj+M5lss
- DpHA9tRSSMVmE74UReITmI6/xaEvBNSHX0U9r4Sedf8oa7XoP2gPIGAmLVkBr8ZVFfBJ
- SK+824Lkm/LaojGpi0PyI4wUSUwNnKxpdWVdTY0d5DwoD3Ux0ZzXiJLebUn5xWriFhCJ
- py793GNtWECbMkCktbrveqPuIROeLAwuDOivrI8+iA07CKOikJF5wV9E/oCudReb5Anr
- 0aWA==
+ bh=tNhx5XCbDz2ES+x3Bn09OzYyRx83+WywVAD5VUceAnw=;
+ b=NMvYWmzqIk/ignXp3iHgmKFHAKmotNGI5MHyhLDXOTrrM/XUSMjTsocZ06gj8WwDos
+ Ld+Uxh405lzLAMnOkOPAV5e/pTtdcKVzFFh+Ku2elN6WWeORDmoeCjgBh/Ve6OwaBswS
+ +JSU/UW1s7HaQhNjrzLWPEx7L1Z6tPkWcbkKgQ1yhVyQouje1oTL6U3mdF0qj9Fls4bK
+ Tx+c8f0D066Gfzwbd0Ikb5iQZF33Xl7nrNO54uwDxBrQF3s1t1H0UZmtZl/ROhIJHrZe
+ NEOLFd+srHrzEUpZjhdhg32I9+mVJ3thhWpoMWEcd5sMT+MlQTUw6oNfqUXZBCP/ZMYe
+ PHww==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUJvbXnLmUfdYlZfLqRtRVQuAc07QsOui+R75wTJTjQnQ2v8owYfMRHviwDNiTw6vbdSB2OlQ0D69YNTE9q9EWkKnpZ540=
-X-Gm-Message-State: AOJu0Yy7opMJd/H3dTVJ0Q9TItlgsYLuJiNbdqgKMorZZYmxJu8sCXuG
- 6iz57sQD4aisfc8029jQriTaRUbDlRCxjFPlgHtlhk1KZsw2bnRmfxiR8jMEpEQcEnJp6TdZJZx
- 6pnAUyDrYAW/Pke2gyDYNdb7Hp+qDZIe7zeRjeg==
-X-Google-Smtp-Source: AGHT+IGJGQOfPTvYKB0SFLZP5usuIDbVStysQPsWc3u9+2G9gSzZMjlr8lzY2VpLGSZ8Rx6FpdmPMDIAU9bqAaTozls=
-X-Received: by 2002:a05:6512:3d1a:b0:52e:7684:a385 with SMTP id
- 2adb3069b0e04-52efb7e8f75mr4258408e87.52.1721649410248; Mon, 22 Jul 2024
- 04:56:50 -0700 (PDT)
+ AJvYcCXX05SpSkU4t2yXRYpaArAWnwIPmGBPYW3hppP9hLo2y+mCsgMCpt1VVbtD0zLXjIifb/Yd5kxYEQamVL1uQeytmbWqvEY=
+X-Gm-Message-State: AOJu0YyCiq5dNmrRyVrs9XMcicUf4sqieut1/tiTO/dcvv33kSFG9YJz
+ l2ZaOV7rc/i1F4RxUzZ7DJvJik0B4FfcRXqkcjVoaNFtgUsW7fCOOmfClFxj9nrAyt6Brd5/clP
+ Z+iUZ7oW7vbMxTSXGB+AVraxErI8X0iXonUwubw==
+X-Google-Smtp-Source: AGHT+IFk/sRPFT7ntlKIpcbEDYk92bIFDYiAB96cwYrkiSaj9/WugrTyEQAgEfWBGltNeNgze6A4uizf0uQfmAhbj7M=
+X-Received: by 2002:a05:6402:50c8:b0:5a2:c1b1:4d3 with SMTP id
+ 4fb4d7f45d1cf-5a47b1dee89mr6199567a12.28.1721650097158; Mon, 22 Jul 2024
+ 05:08:17 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240719010707.1319675-1-richard.henderson@linaro.org>
- <20240719010707.1319675-4-richard.henderson@linaro.org>
-In-Reply-To: <20240719010707.1319675-4-richard.henderson@linaro.org>
+ <20240719010707.1319675-9-richard.henderson@linaro.org>
+In-Reply-To: <20240719010707.1319675-9-richard.henderson@linaro.org>
 From: Peter Maydell <peter.maydell@linaro.org>
-Date: Mon, 22 Jul 2024 12:56:38 +0100
-Message-ID: <CAFEAcA_+vkQfkDY9eYF02gQ_89CrCb8t8gW2wbo2m+3pHskK0w@mail.gmail.com>
-Subject: Re: [PATCH v3 03/12] target/arm: Use set/clear_helper_retaddr in SVE
- and SME helpers
+Date: Mon, 22 Jul 2024 13:08:06 +0100
+Message-ID: <CAFEAcA8HxomNgX2pALS7M0BMiqxcCtBV932WDDXE-KO+00HZkg@mail.gmail.com>
+Subject: Re: [PATCH v3 08/12] target/ppc: Improve helper_dcbz for user-only
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongu.org, 
  qemu-s390x@nongnu.org, qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::12e;
- envelope-from=peter.maydell@linaro.org; helo=mail-lf1-x12e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::634;
+ envelope-from=peter.maydell@linaro.org; helo=mail-ej1-x634.google.com
 X-Spam_score_int: 4
 X-Spam_score: 0.4
 X-Spam_bar: /
@@ -95,13 +94,20 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On Fri, 19 Jul 2024 at 02:08, Richard Henderson
 <richard.henderson@linaro.org> wrote:
 >
-> Avoid a race condition with munmap in another thread.
-> Use around blocks that exclusively use "host_fn".
-> Keep the blocks as small as possible, but without setting
-> and clearing for every operation on one page.
+> Mark the reserve_addr check unlikely.  Use tlb_vaddr_to_host
+> instead of probe_write, relying on the memset itself to test
+> for page writability.  Use set/clear_helper_retaddr so that
+> we can properly unwind on segfault.
+>
+> With this, a trivial loop around guest memset will spend
+> nearly 50% of runtime within helper_dcbz and host memset.
+
+I find this a bit difficult to interpret -- maybe add
+what it was before (presumably spending too much time
+somewhere else) ?
+
 >
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-> ---
 
 Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
 
