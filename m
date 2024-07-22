@@ -4,79 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B6EAC3DA5D
-	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jul 2024 12:16:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D810C3DA59
+	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jul 2024 13:26:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sVrxo-0002AI-1d; Mon, 22 Jul 2024 08:16:24 -0400
+	id 1sVt38-0008HG-0R; Mon, 22 Jul 2024 09:25:58 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1sVrxO-0000aQ-UK
- for qemu-riscv@nongnu.org; Mon, 22 Jul 2024 08:16:03 -0400
-Received: from mail-lj1-x22b.google.com ([2a00:1450:4864:20::22b])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1sVrxK-0001eT-Bf
- for qemu-riscv@nongnu.org; Mon, 22 Jul 2024 08:15:57 -0400
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-2ef283c58f4so17153401fa.1
- for <qemu-riscv@nongnu.org>; Mon, 22 Jul 2024 05:15:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721650551; x=1722255351; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=TqlB7XkmOv2gcWdklQRtGqt6OgLVM+VAhGIbvGdK15Q=;
- b=gDaQ5k8tXaQmYOi5OpGPtxsdDIDrIrw04v0HvwNKQT1mrtTIUA9y4m+3OwPlOprTvI
- hY7bnLWZFgVqSqEsw21X1ByZkbEN7fZeEnixHniyO2MesQX2GeOlqBczfdpub8SshQNQ
- 3L6hJskUx8Gc2yYKUiJ0fQQw/FtWsPKwK3vaCXdPsY6It+GhiYycFizJARgWVrzBku9R
- 8395U8WOSYktGa7oJcC+Y3C/kvCsbw7WmnoBT8qbmRjCe6wbqDa+DPENmJnh6y2dySkq
- SibAdgjwrCQvZPx5o1o1nlxyHOD746lVl+lGT5FYW3fOrGbNKtL4s9sCveZq7jpNdCuf
- Iu8A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721650551; x=1722255351;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=TqlB7XkmOv2gcWdklQRtGqt6OgLVM+VAhGIbvGdK15Q=;
- b=Np2BM2KATfFnQFXpcnLYcMKCvMuDgmAIZM7EEFIyiFXWLiBHepban1eTxEDCWWWnQO
- paZqg0LV4ZE5oE4JviJ4e/MsT2Xoc53gAjFVZNFOTZsSFEDMYNkZnPmPbc9lLJBYSmJP
- sd6TB1FztsE8HflVHKnocsdqcFgU8r93gC/J9za/Al1+WYfBauKIlFxn9IbN14u+WQdv
- 3uVS/n85j8zKMKVWAhPOkg4x7O9xMLlgb5jo7fsoLL5MDF4F6L9B3hcdatcPyvrz7Bmx
- RXRoUrkm32U54JhvuC3ugBNQXxDTRAEAOKtn+dBvqaSGvvYQVEDsxy+8/CMQG+tXrjDt
- Ic4A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVmv/eS4ki3qfDTAYjdmeGgde47dhRzgLifmhkYURnSVXy+f+WOVgfIvaXRafqNXlkneoB/zoMuaWnCVGt+t/hZO65DfHE=
-X-Gm-Message-State: AOJu0YwNm1W0vxJ/eCd14S+bxIzzTftNvfPCkPxVMBJfpz5UaKf/UWFx
- BKjydKimX/7MfqZitXdDpF36QCn/xO0dY9Bnvh5UMkcEBb+ZDc2zS6RpUis6ROsxt4Nmh+N2Mxj
- TDf79jnTxqDkTo4kFj9yQMgiCXvG/OEScSPX0nZWYDiqf+jJf
-X-Google-Smtp-Source: AGHT+IFUIvf7+O3wvJHY6qDQBZ1da3l28u2HYN0OHXIelu2ghjunSIrq84qrxxUFpmTM2s21RD3fYwPylAjr3tqFkv0=
-X-Received: by 2002:a05:651c:549:b0:2ef:32fb:6c4c with SMTP id
- 38308e7fff4ca-2ef32fb6e8amr14789411fa.45.1721650550970; Mon, 22 Jul 2024
- 05:15:50 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1sVt36-0008Cr-J1
+ for qemu-riscv@nongnu.org; Mon, 22 Jul 2024 09:25:56 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1sVt34-0000r3-En
+ for qemu-riscv@nongnu.org; Mon, 22 Jul 2024 09:25:56 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1721654752;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=04tgYp28H6fbQsDrXzcIGR3NEN71W7VaA3H2XpdKMHI=;
+ b=YQ2BmYby8vwQACu+/OXXvjYoSND2jlpnwkZqyuSy27XmhHUTtK6U+BWcRKj5ghpAQs29sf
+ bGje8LAWUhiZm7xh9reXA1uuA7KDf/0ATYtIFABgZw+nV8l2QD+L28Uk9mFoyVcqu5SQcG
+ OlrXOdKFzBx/Ds0rLoOMyB9SCj+vELQ=
+Received: from mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-157-t16BuqhTMX6bzZ0XjL_oaw-1; Mon,
+ 22 Jul 2024 09:25:47 -0400
+X-MC-Unique: t16BuqhTMX6bzZ0XjL_oaw-1
+Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id B2CE71978CF2; Mon, 22 Jul 2024 13:25:22 +0000 (UTC)
+Received: from blackfin.pond.sub.org (unknown [10.39.192.65])
+ by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 649091932AA9; Mon, 22 Jul 2024 13:24:28 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id 60CC721E669B; Mon, 22 Jul 2024 15:24:24 +0200 (CEST)
+From: Markus Armbruster <armbru@redhat.com>
+To: Zhao Liu <zhao1.liu@intel.com>
+Cc: Daniel P . =?utf-8?Q?Berrang=C3=A9?= <berrange@redhat.com>,  Eduardo
+ Habkost
+ <eduardo@habkost.net>,  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,  Yanan Wang
+ <wangyanan55@huawei.com>,  "Michael S . Tsirkin" <mst@redhat.com>,  Paolo
+ Bonzini <pbonzini@redhat.com>,  Richard Henderson
+ <richard.henderson@linaro.org>,  Eric Blake <eblake@redhat.com>,  Marcelo
+ Tosatti <mtosatti@redhat.com>,  Alex =?utf-8?Q?Benn=C3=A9e?=
+ <alex.bennee@linaro.org>,
+ Peter Maydell <peter.maydell@linaro.org>,  Jonathan Cameron
+ <Jonathan.Cameron@huawei.com>,  Sia Jee Heng
+ <jeeheng.sia@starfivetech.com>,  qemu-devel@nongnu.org,
+ kvm@vger.kernel.org,  qemu-riscv@nongnu.org,  qemu-arm@nongnu.org,
+ Zhenyu Wang <zhenyu.z.wang@intel.com>,  Dapeng Mi
+ <dapeng1.mi@linux.intel.com>,  Yongwei Ma <yongwei.ma@intel.com>
+Subject: Re: [PATCH 1/8] hw/core: Make CPU topology enumeration arch-agnostic
+In-Reply-To: <20240704031603.1744546-2-zhao1.liu@intel.com> (Zhao Liu's
+ message of "Thu, 4 Jul 2024 11:15:56 +0800")
+References: <20240704031603.1744546-1-zhao1.liu@intel.com>
+ <20240704031603.1744546-2-zhao1.liu@intel.com>
+Date: Mon, 22 Jul 2024 15:24:24 +0200
+Message-ID: <875xsx4l13.fsf@pond.sub.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-References: <20240719010707.1319675-1-richard.henderson@linaro.org>
- <20240719010707.1319675-12-richard.henderson@linaro.org>
-In-Reply-To: <20240719010707.1319675-12-richard.henderson@linaro.org>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Mon, 22 Jul 2024 13:15:40 +0100
-Message-ID: <CAFEAcA895VodF0Ejfuy5aA44cL7UvmoaWU0WiGrngk7gyU5mHQ@mail.gmail.com>
-Subject: Re: [PATCH v3 11/12] target/s390x: Use set/clear_helper_retaddr in
- mem_helper.c
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-s390x@nongnu.org, 
- qemu-riscv@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::22b;
- envelope-from=peter.maydell@linaro.org; helo=mail-lj1-x22b.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+Content-Type: text/plain
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -21
+X-Spam_score: -2.2
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.133,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -92,21 +97,92 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, 19 Jul 2024 at 02:09, Richard Henderson
-<richard.henderson@linaro.org> wrote:
->
-> Avoid a race condition with munmap in another thread.
-> For access_memset and access_memmove, manage the value
-> within the helper.  For uses of access_{get,set}_byte,
-> manage the value across the for loops.
->
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-> ---
->  target/s390x/tcg/mem_helper.c | 43 ++++++++++++++++++++++++++++++-----
->  1 file changed, 37 insertions(+), 6 deletions(-)
+One little thing...
 
-Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
+Zhao Liu <zhao1.liu@intel.com> writes:
 
-thanks
--- PMM
+> Cache topology needs to be defined based on CPU topology levels. Thus,
+> define CPU topology enumeration in qapi/machine.json to make it generic
+> for all architectures.
+>
+> To match the general topology naming style, rename CPU_TOPO_LEVEL_SMT
+> and CPU_TOPO_LEVEL_PACKAGE to CPU_TOPO_LEVEL_THREAD and
+> CPU_TOPO_LEVEL_SOCKET.
+>
+> Also, enumerate additional topology levels for non-i386 arches, and add
+> a CPU_TOPO_LEVEL_DEFAULT to help future smp-cache object de-compatibilize
+> arch-specific cache topology settings.
+>
+> Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
+
+[...]
+
+> diff --git a/qapi/machine-common.json b/qapi/machine-common.json
+> index fa6bd71d1280..82413c668bdb 100644
+> --- a/qapi/machine-common.json
+> +++ b/qapi/machine-common.json
+> @@ -5,7 +5,7 @@
+>  # See the COPYING file in the top-level directory.
+>  
+>  ##
+> -# = Machines S390 data types
+> +# = Common machine types
+>  ##
+>  
+>  ##
+> @@ -19,3 +19,48 @@
+>  { 'enum': 'CpuS390Entitlement',
+>    'prefix': 'S390_CPU_ENTITLEMENT',
+>    'data': [ 'auto', 'low', 'medium', 'high' ] }
+> +
+> +##
+> +# @CpuTopologyLevel:
+> +#
+> +# An enumeration of CPU topology levels.
+> +#
+> +# @invalid: Invalid topology level.
+> +#
+> +# @thread: thread level, which would also be called SMT level or
+> +#     logical processor level.  The @threads option in
+> +#     SMPConfiguration is used to configure the topology of this
+> +#     level.
+> +#
+> +# @core: core level.  The @cores option in SMPConfiguration is used
+> +#     to configure the topology of this level.
+> +#
+> +# @module: module level.  The @modules option in SMPConfiguration is
+> +#     used to configure the topology of this level.
+> +#
+> +# @cluster: cluster level.  The @clusters option in SMPConfiguration
+> +#     is used to configure the topology of this level.
+> +#
+> +# @die: die level.  The @dies option in SMPConfiguration is used to
+> +#     configure the topology of this level.
+> +#
+> +# @socket: socket level, which would also be called package level.
+> +#     The @sockets option in SMPConfiguration is used to configure
+> +#     the topology of this level.
+> +#
+> +# @book: book level.  The @books option in SMPConfiguration is used
+> +#     to configure the topology of this level.
+> +#
+> +# @drawer: drawer level.  The @drawers option in SMPConfiguration is
+> +#     used to configure the topology of this level.
+> +#
+> +# @default: default level.  Some architectures will have default
+> +#     topology settings (e.g., cache topology), and this special
+> +#     level means following the architecture-specific settings.
+> +#
+> +# Since: 9.1
+> +##
+> +{ 'enum': 'CpuTopologyLevel',
+> +  'prefix': 'CPU_TOPO_LEVEL',
+
+Why set a 'prefix'?
+
+> +  'data': [ 'invalid', 'thread', 'core', 'module', 'cluster',
+> +            'die', 'socket', 'book', 'drawer', 'default' ] }
+
+[...]
+
 
