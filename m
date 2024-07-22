@@ -4,83 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69AC5C3DA59
-	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jul 2024 14:27:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7369C3DA59
+	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jul 2024 16:50:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sVtzx-00014G-Iz; Mon, 22 Jul 2024 10:26:45 -0400
+	id 1sVwE2-0005FM-PW; Mon, 22 Jul 2024 12:49:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1sVtzv-00011Q-9d; Mon, 22 Jul 2024 10:26:43 -0400
-Received: from mgamail.intel.com ([198.175.65.12])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1sVtzs-000586-76; Mon, 22 Jul 2024 10:26:43 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1721658401; x=1753194401;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=OsrIUd37YeYaTA7dO/rYy+a/KCssuHBkjLNEx5suQu0=;
- b=hSy0PDa5l4BjzoKO+qruCPMD8eV2cxIblGpKaiZk0q8sBpx/3SCUBgX+
- e2gW6+IlgvsMscaRb8H+jPewCEuV8zvdw10wY77JamicExpNWx2Qe1YL6
- qjsxHa59Vi3pZDjBh2Gu0KEVrQ2Wy8Hy3F1upHTf8G8r7eJsEXzxxSP90
- +cK7zHqIbiT6yiJ7NMKhdzylKEUfmp6cSwC7mvNgHW35ohyL0089XCDOL
- 6Vy5pdKbkSoDjDSKixOtwgpCRkLhoDVFhw0w08czvyVOWr1hD9uk56ejE
- BHvj82WWvWUaVG9K0Px+C9vwUTXK7hnt41HeuZRm8WySQqKjX8NMSzRUO g==;
-X-CSE-ConnectionGUID: Tu7lbsH3SXqLzG1Or8lVwg==
-X-CSE-MsgGUID: MtyZea+2RhOpcy2+dXY8fg==
-X-IronPort-AV: E=McAfee;i="6700,10204,11141"; a="30617142"
-X-IronPort-AV: E=Sophos;i="6.09,228,1716274800"; d="scan'208";a="30617142"
-Received: from fmviesa006.fm.intel.com ([10.60.135.146])
- by orvoesa104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 22 Jul 2024 07:26:37 -0700
-X-CSE-ConnectionGUID: +SEajsCAQSm91RWdetg5tQ==
-X-CSE-MsgGUID: RxjqKHH3QVySpkXovI9GSA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.09,228,1716274800"; d="scan'208";a="51555979"
-Received: from liuzhao-optiplex-7080.sh.intel.com (HELO localhost)
- ([10.239.160.36])
- by fmviesa006.fm.intel.com with ESMTP; 22 Jul 2024 07:26:30 -0700
-Date: Mon, 22 Jul 2024 22:42:14 +0800
-From: Zhao Liu <zhao1.liu@intel.com>
-To: Markus Armbruster <armbru@redhat.com>
-Cc: Daniel P =?iso-8859-1?Q?=2E_Berrang=E9?= <berrange@redhat.com>,
- Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>,
- Yanan Wang <wangyanan55@huawei.com>,
- "Michael S . Tsirkin" <mst@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Eric Blake <eblake@redhat.com>, Marcelo Tosatti <mtosatti@redhat.com>,
- Alex =?iso-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>,
- Peter Maydell <peter.maydell@linaro.org>,
- Jonathan Cameron <Jonathan.Cameron@huawei.com>,
- Sia Jee Heng <jeeheng.sia@starfivetech.com>, qemu-devel@nongnu.org,
- kvm@vger.kernel.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
- Zhenyu Wang <zhenyu.z.wang@intel.com>,
- Dapeng Mi <dapeng1.mi@linux.intel.com>, Yongwei Ma <yongwei.ma@intel.com>
-Subject: Re: [PATCH 8/8] qemu-options: Add the description of smp-cache object
-Message-ID: <Zp5vxtXWDeHAdPok@intel.com>
-References: <20240704031603.1744546-1-zhao1.liu@intel.com>
- <20240704031603.1744546-9-zhao1.liu@intel.com>
- <87r0bl35ug.fsf@pond.sub.org>
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1sVwE0-000567-Mh
+ for qemu-riscv@nongnu.org; Mon, 22 Jul 2024 12:49:24 -0400
+Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1sVwDx-0007LA-JW
+ for qemu-riscv@nongnu.org; Mon, 22 Jul 2024 12:49:24 -0400
+Received: by mail-pf1-x432.google.com with SMTP id
+ d2e1a72fcca58-70d24ee678cso881180b3a.0
+ for <qemu-riscv@nongnu.org>; Mon, 22 Jul 2024 09:49:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sifive.com; s=google; t=1721666958; x=1722271758; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=ojd67kYJwQNwCJ7C4DJs/GgdGhSFvQnplRWu/lP131A=;
+ b=MB1YZUnEBw/nasA+5UHIddjm3KtLCyswmXdLOPmEi5LuZsqvYhLjeJgyHC2bisfRxT
+ n1PqaoFNXlpfXkRE/keVcJDs2tCOm75aMl6y3RfbitO9NxzIUI7zPVFBfG8mMoZFmmy3
+ 7IN/xBxRSvEjRbaBnRfUbKst3+fqB+Qj8hEMGdBTScmp23I2en8VdQrgORRx4TadS+I1
+ 4n+9sTqCsYU0wujm4y4bbZjXLwwB+apveEHEMMsfgTsM73rUP94/o2H/TumT+0eFaTti
+ udFDg0X1io2vmGcDG4KDEEzK2Rwno5HzBawS/ycqJp/omKhsr+NXbMMj94IfKN8eHsf/
+ ElnQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1721666958; x=1722271758;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=ojd67kYJwQNwCJ7C4DJs/GgdGhSFvQnplRWu/lP131A=;
+ b=d0UyhduSDha0RbiooSfQ2PFGXSQGZLGB3cBiOv8sNy3NsskmvG5l863qaKe1c4nUso
+ 1V3LQZaSmgyzbz30fcpCbV6/HCXffV+YpWtix+NkvGHqn5aehdDCIkfC8GlZ2BqqiosS
+ 19NcjbjJvWuWqdgWvUcfsCy4oUpK7R0gdtzV9M5EvJjZo+4c2Qi/0M+oGatbH4Ew2Uss
+ 7ZZuRcbE9u0pioC8qGdJx+ekbh91ILcIiclwOqKCGfsCwMYLw98lgyHuRKtrDuxhaYxc
+ uI3Xr44qx4S0bdthUjGLUvx+ZCVg1RZhZqnDCgnQyeg/SnDle/vpnKF3QReeC1zMURdx
+ Tshw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWqHvx2l7LKqAYEbxfXbwWl5yinovX3PPR4p7LwcQkDVXYoZt+FYB4N/Cz3ndMgB/bIeNFZ+EvO2JfQhr+aN3omrZzeiuY=
+X-Gm-Message-State: AOJu0Yxul7kbF8aOSBHFic54C7AUdPptToySe3JTJUyZWHqeJmIFoIbL
+ VCXpXckfCh8RRHKOiu/GNKsiS42XAdXP2VeVDLKg5PZ1DVzNZ3rBfdOka60+iCs=
+X-Google-Smtp-Source: AGHT+IFWc15RCjb9dB08HdxgnTQQZpVJGNH8Z4+qSSdqBJ5a7WIkTpT5xXLMYfztPhOU/QCYTspaCA==
+X-Received: by 2002:a05:6a20:430e:b0:1c2:8bcc:bb09 with SMTP id
+ adf61e73a8af0-1c42857336cmr6308503637.8.1721666957556; 
+ Mon, 22 Jul 2024 09:49:17 -0700 (PDT)
+Received: from [100.64.0.1] (114-35-142-126.hinet-ip.hinet.net.
+ [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-1fd6f28e87esm56848115ad.66.2024.07.22.09.49.15
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 22 Jul 2024 09:49:17 -0700 (PDT)
+Message-ID: <c96ad0e8-bb2b-4af3-b706-57cd93653f9d@sifive.com>
+Date: Tue, 23 Jul 2024 00:49:14 +0800
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <87r0bl35ug.fsf@pond.sub.org>
-Received-SPF: pass client-ip=198.175.65.12; envelope-from=zhao1.liu@intel.com;
- helo=mgamail.intel.com
-X-Spam_score_int: -44
-X-Spam_score: -4.5
-X-Spam_bar: ----
-X-Spam_report: (-4.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.133,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 12/12] target/riscv: Simplify probing in vext_ldff
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Cc: qemu-arm@nongnu.org, qemu-ppc@nongu.org, qemu-s390x@nongnu.org,
+ qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>
+References: <20240719010707.1319675-1-richard.henderson@linaro.org>
+ <20240719010707.1319675-13-richard.henderson@linaro.org>
+Content-Language: en-US
+From: Max Chou <max.chou@sifive.com>
+In-Reply-To: <20240719010707.1319675-13-richard.henderson@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
+ envelope-from=max.chou@sifive.com; helo=mail-pf1-x432.google.com
+X-Spam_score_int: 4
+X-Spam_score: 0.4
+X-Spam_bar: /
+X-Spam_report: (0.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ SUSPICIOUS_RECIPS=2.51 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,122 +99,78 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Markus,
+Reviewed-by: Max Chou <max.chou@sifive.com>
 
-On Mon, Jul 22, 2024 at 03:37:43PM +0200, Markus Armbruster wrote:
-> Date: Mon, 22 Jul 2024 15:37:43 +0200
-> From: Markus Armbruster <armbru@redhat.com>
-> Subject: Re: [PATCH 8/8] qemu-options: Add the description of smp-cache
->  object
-> 
-> Zhao Liu <zhao1.liu@intel.com> writes:
-> 
-> > Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
-> 
-> This patch is just documentation.  The code got added in some previous
-> patch.  Would it make sense to squash this patch into that previous
-> patch?
+On 2024/7/19 9:07 AM, Richard Henderson wrote:
+> The current pairing of tlb_vaddr_to_host with extra is either
+> inefficient (user-only, with page_check_range) or incorrect
+> (system, with probe_pages).
+>
+> For proper non-fault behaviour, use probe_access_flags with
+> its nonfault parameter set to true.
+>
+> Acked-by: Alistair Francis <alistair.francis@wdc.com>
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> ---
+>   target/riscv/vector_helper.c | 31 +++++++++++++++++--------------
+>   1 file changed, 17 insertions(+), 14 deletions(-)
+>
+> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+> index 1b4d5a8e37..10a52ceb5b 100644
+> --- a/target/riscv/vector_helper.c
+> +++ b/target/riscv/vector_helper.c
+> @@ -474,7 +474,6 @@ vext_ldff(void *vd, void *v0, target_ulong base,
+>             vext_ldst_elem_fn *ldst_elem,
+>             uint32_t log2_esz, uintptr_t ra)
+>   {
+> -    void *host;
+>       uint32_t i, k, vl = 0;
+>       uint32_t nf = vext_nf(desc);
+>       uint32_t vm = vext_vm(desc);
+> @@ -493,27 +492,31 @@ vext_ldff(void *vd, void *v0, target_ulong base,
+>           }
+>           addr = adjust_addr(env, base + i * (nf << log2_esz));
+>           if (i == 0) {
+> +            /* Allow fault on first element. */
+>               probe_pages(env, addr, nf << log2_esz, ra, MMU_DATA_LOAD);
+>           } else {
+> -            /* if it triggers an exception, no need to check watchpoint */
+>               remain = nf << log2_esz;
+>               while (remain > 0) {
+> +                void *host;
+> +                int flags;
+> +
+>                   offset = -(addr | TARGET_PAGE_MASK);
+> -                host = tlb_vaddr_to_host(env, addr, MMU_DATA_LOAD, mmu_index);
+> -                if (host) {
+> -#ifdef CONFIG_USER_ONLY
+> -                    if (!page_check_range(addr, offset, PAGE_READ)) {
+> -                        vl = i;
+> -                        goto ProbeSuccess;
+> -                    }
+> -#else
+> -                    probe_pages(env, addr, offset, ra, MMU_DATA_LOAD);
+> -#endif
+> -                } else {
+> +
+> +                /* Probe nonfault on subsequent elements. */
+> +                flags = probe_access_flags(env, addr, offset, MMU_DATA_LOAD,
+> +                                           mmu_index, true, &host, 0);
+> +
+> +                /*
+> +                 * Stop if invalid (unmapped) or mmio (transaction may fail).
+> +                 * Do not stop if watchpoint, as the spec says that
+> +                 * first-fault should continue to access the same
+> +                 * elements regardless of any watchpoint.
+> +                 */
+> +                if (flags & ~TLB_WATCHPOINT) {
+>                       vl = i;
+>                       goto ProbeSuccess;
+>                   }
+> -                if (remain <=  offset) {
+> +                if (remain <= offset) {
+>                       break;
+>                   }
+>                   remain -= offset;
 
-OK, I'll merge them.
-
-> > ---
-> > Changes since RFC v2:
-> >  * Rewrote the document of smp-cache object.
-> >
-> > Changes since RFC v1:
-> >  * Use "*_cache=topo_level" as -smp example as the original "level"
-> >    term for a cache has a totally different meaning. (Jonathan)
-> > ---
-> >  qemu-options.hx | 58 +++++++++++++++++++++++++++++++++++++++++++++++++
-> >  1 file changed, 58 insertions(+)
-> >
-> > diff --git a/qemu-options.hx b/qemu-options.hx
-> > index 8ca7f34ef0c8..4b84f4508a6e 100644
-> > --- a/qemu-options.hx
-> > +++ b/qemu-options.hx
-> > @@ -159,6 +159,15 @@ SRST
-> >          ::
-> >  
-> >              -machine cxl-fmw.0.targets.0=cxl.0,cxl-fmw.0.targets.1=cxl.1,cxl-fmw.0.size=128G,cxl-fmw.0.interleave-granularity=512
-> > +
-> > +    ``smp-cache='id'``
-> > +        Allows to configure cache property (now only the cache topology level).
-> > +
-> > +        For example:
-> > +        ::
-> > +
-> > +            -object '{"qom-type":"smp-cache","id":"cache","caches":[{"name":"l1d","topo":"core"},{"name":"l1i","topo":"core"},{"name":"l2","topo":"module"},{"name":"l3","topo":"die"}]}'
-> > +            -machine smp-cache=cache
-> >  ERST
-> >  
-> >  DEF("M", HAS_ARG, QEMU_OPTION_M,
-> > @@ -5871,6 +5880,55 @@ SRST
-> >          ::
-> >  
-> >              (qemu) qom-set /objects/iothread1 poll-max-ns 100000
-> > +
-> > +    ``-object '{"qom-type":"smp-cache","id":id,"caches":[{"name":cache_name,"topo":cache_topo}]}'``
-> > +        Create an smp-cache object that configures machine's cache
-> > +        property. Currently, cache property only include cache topology
-> > +        level.
-> > +
-> > +        This option must be written in JSON format to support JSON list.
-> 
-> Why?
-
-I'm not familiar with this, so I hope you could educate me if I'm wrong.
-
-All I know so far is for -object that defining a list can only be done in
-JSON format and not with a numeric index like a keyval based option, like:
-
--object smp-cache,id=cache0,caches.0.name=l1i,caches.0.topo=core: Parameter 'caches' is missing
-
-the above doesn't work.
-
-Is there any other way to specify a list in command line?
-
-> > +
-> > +        The ``caches`` parameter accepts a list of cache property in JSON
-> > +        format.
-> > +
-> > +        A list element requires the cache name to be specified in the
-> > +        ``name`` parameter (currently ``l1d``, ``l1i``, ``l2`` and ``l3``
-> > +        are supported). ``topo`` parameter accepts CPU topology levels
-> > +        including ``thread``, ``core``, ``module``, ``cluster``, ``die``,
-> > +        ``socket``, ``book``, ``drawer`` and ``default``. The ``topo``
-> > +        parameter indicates CPUs winthin the same CPU topology container
-> > +        are sharing the same cache.
-> > +
-> > +        Some machines may have their own cache topology model, and this
-> > +        object may override the machine-specific cache topology setting
-> > +        by specifying smp-cache object in the -machine. When specifying
-> > +        the cache topology level of ``default``, it will honor the default
-> > +        machine-specific cache topology setting. For other topology levels,
-> > +        they will override the default setting.
-> > +
-> > +        An example list of caches to configure the cache model (l1d cache
-> > +        per core, l1i cache per core, l2 cache per module and l3 cache per
-> > +        socket) supported by PC machine might look like:
-> > +
-> > +        ::
-> > +
-> > +              {
-> > +                "caches": [
-> > +                   { "name": "l1d", "topo": "core" },
-> > +                   { "name": "l1i", "topo": "core" },
-> > +                   { "name": "l2", "topo": "module" },
-> > +                   { "name": "l3", "topo": "socket" },
-> > +                ]
-> > +              }
-> > +
-> > +        An example smp-cache object would look like:()
-> > +
-> > +        .. parsed-literal::
-> > +
-> > +             # |qemu_system| \\
-> > +                 ... \\
-> > +                 -object '{"qom-type":"smp-cache","id":id,"caches":[{"name":cache_name,"topo":cache_topo}]}' \\
-> > +                 ...
-> >  ERST
-> 
 
