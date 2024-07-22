@@ -4,83 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5949CC3DA5D
-	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jul 2024 07:18:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E606EC3DA59
+	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jul 2024 07:50:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sVnJO-0003Bq-6S; Mon, 22 Jul 2024 03:18:22 -0400
+	id 1sVnnR-0000Fj-N7; Mon, 22 Jul 2024 03:49:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1sVnJG-0002hX-9f; Mon, 22 Jul 2024 03:18:15 -0400
-Received: from mgamail.intel.com ([192.198.163.9])
+ (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1sVnnP-0000CM-TY
+ for qemu-riscv@nongnu.org; Mon, 22 Jul 2024 03:49:23 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1sVnJD-0001Bm-J7; Mon, 22 Jul 2024 03:18:14 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1721632692; x=1753168692;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:content-transfer-encoding:in-reply-to;
- bh=PWz4Ht0qlbweAS5o60cJFbGqE0cijiCuaXDbGXRSJ3Q=;
- b=XBx4TgKu3q8b14A+G3b43wRf6uJObklYzONohPCGvLBMJC41eiN13pPd
- vZ2QYfCQ1GZuKszknLcWDKlDGFANou7T6j6at/EycXp7GvDL5suKcNUS0
- jc6kUCQe2GVyT2lJtpRJbhhIKihlxZF+tJ4g2ZoJaiSVEJBfEDIcHE3Vf
- f6ookgnogqeU0CFP4HFhcb5lqIToTKCRs/JhDwlAVgZNVdHtkPQvikrhL
- WuhO4CU+nXYhsVbIRgWg4KlHDmdSTHC9uYH5ZLkEkPHuN+b9hPmIwYR4s
- iiQ/KVsXVULPF/Xnz50YYZGfG6orMKrsNZBsl3869yEdOTiVZw+lwgR8l A==;
-X-CSE-ConnectionGUID: 2+it0vNZQbm3Be1s14/BBQ==
-X-CSE-MsgGUID: C1lpF1pOSnahfp5Bt1kr0w==
-X-IronPort-AV: E=McAfee;i="6700,10204,11140"; a="29843695"
-X-IronPort-AV: E=Sophos;i="6.09,227,1716274800"; d="scan'208";a="29843695"
-Received: from fmviesa004.fm.intel.com ([10.60.135.144])
- by fmvoesa103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 22 Jul 2024 00:17:59 -0700
-X-CSE-ConnectionGUID: S294LoMoTdKgKC7BnmarJQ==
-X-CSE-MsgGUID: cpwVM0ovRbS97rMy+BQXAg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.09,227,1716274800"; d="scan'208";a="56350156"
-Received: from liuzhao-optiplex-7080.sh.intel.com (HELO localhost)
- ([10.239.160.36])
- by fmviesa004.fm.intel.com with ESMTP; 22 Jul 2024 00:17:53 -0700
-Date: Mon, 22 Jul 2024 15:33:37 +0800
-From: Zhao Liu <zhao1.liu@intel.com>
-To: Daniel P =?iso-8859-1?Q?=2E_Berrang=E9?= <berrange@redhat.com>,
- Markus Armbruster <armbru@redhat.com>
-Cc: Eduardo Habkost <eduardo@habkost.net>,
+ (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1sVnnO-00072q-Fk
+ for qemu-riscv@nongnu.org; Mon, 22 Jul 2024 03:49:23 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1721634560;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=nDLhW/EvsV4foDiw7atelQzE6sEnxMcaTf6f1U6EU8Q=;
+ b=eKfJvgrCtjJ6HTiz4gQTKItyz1PxH6+J1fwCYh21LrhJKtQRDVZ7awODfwTGm0RgJQGs19
+ JmsgTgSh1E/gIvpCoprF/7nsXduKG2fyQxiDYE3emQtJUVPIbNSXmk5upzRyjzrj6ItMAp
+ ySQyDVapq0EvNYRyZ0pNfeTwYt/bZmA=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-411-hqMAGsVMPi2RqkI1vmqvBA-1; Mon, 22 Jul 2024 03:49:17 -0400
+X-MC-Unique: hqMAGsVMPi2RqkI1vmqvBA-1
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-3687529b63fso2278353f8f.2
+ for <qemu-riscv@nongnu.org>; Mon, 22 Jul 2024 00:49:17 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1721634556; x=1722239356;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=nDLhW/EvsV4foDiw7atelQzE6sEnxMcaTf6f1U6EU8Q=;
+ b=MbO8U4B5QaG9th0e3mWZvHOqi2Z8xmb+55LHEa3qjHhFmJiZvevm3vUvpbs+yb31s8
+ xMh/IiYAwZGI944Url4dUg2QmSxziREHs734OpI0kvaTl7hz9lYuDhSGKhDOlkNQzau7
+ /1NqnqjbUQW3H8iaAA8EXTDRwjt/zJuCi/0o9fNG6C0PYAUgQqRHWd6EC2O8PJMrs7tI
+ prdievpL5Qx5QXYXciKJC4T3WRa79gqNWnNp7k4xK7V/syk60bTLLxIp7odr56oYk7As
+ H9hcl1gjl6ETt/hn1OOGHI3fjDpg8VKE2yjaXplAcCFeycpDJGhx6Zas5EcilgCDUNUG
+ CBxg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWQaTzTEYjtdxjW/SPYUqLMhGxeLuZrmUzR3COWYO6R88drHiKF7axoY9Fnz74LePwM/v2Q3vco70qF6FjAHk5D5VQAhoE=
+X-Gm-Message-State: AOJu0YxIISEscxbjHllJhbI3GxWYeJyicLQiL02yLv8+Z9GLm/JbdyYF
+ WRqlZKVmN4RSkIAhkduKr4Wum71lZZCsLQGQGR8sK1O17tQwzEbfr/Db+L/Ox8jPtaxb3synDfW
+ Ht0cGeqQtn3DL2aDYIfeDUAPzrpqieVkPSgZDBLPq5hleVmsPYWEy
+X-Received: by 2002:a5d:6592:0:b0:368:334d:aad4 with SMTP id
+ ffacd0b85a97d-369bbbb3200mr3493385f8f.4.1721634556284; 
+ Mon, 22 Jul 2024 00:49:16 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGQpkb+l1/5zh9gSQJ8TazoT1/1nNlG0GIr0WTsIP23uDq0RjdA30Tjl5jp4P4w6UNcmOh2ww==
+X-Received: by 2002:a5d:6592:0:b0:368:334d:aad4 with SMTP id
+ ffacd0b85a97d-369bbbb3200mr3493366f8f.4.1721634555570; 
+ Mon, 22 Jul 2024 00:49:15 -0700 (PDT)
+Received: from redhat.com (mob-5-90-115-88.net.vodafone.it. [5.90.115.88])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-368787ced56sm7758092f8f.80.2024.07.22.00.49.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 22 Jul 2024 00:49:14 -0700 (PDT)
+Date: Mon, 22 Jul 2024 03:49:11 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Zhao Liu <zhao1.liu@intel.com>
+Cc: Daniel P =?iso-8859-1?Q?=2E_Berrang=E9?= <berrange@redhat.com>,
+ Markus Armbruster <armbru@redhat.com>,
+ Eduardo Habkost <eduardo@habkost.net>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>,
- Yanan Wang <wangyanan55@huawei.com>,
- "Michael S . Tsirkin" <mst@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
+ Yanan Wang <wangyanan55@huawei.com>, Paolo Bonzini <pbonzini@redhat.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Eric Blake <eblake@redhat.com>, Marcelo Tosatti <mtosatti@redhat.com>,
  Alex =?iso-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>,
  Peter Maydell <peter.maydell@linaro.org>,
  Jonathan Cameron <Jonathan.Cameron@huawei.com>,
- Sia Jee Heng <jeeheng.sia@starfivetech.com>,
- Zhao Liu <zhao1.liu@intel.com>, qemu-devel@nongnu.org,
+ Sia Jee Heng <jeeheng.sia@starfivetech.com>, qemu-devel@nongnu.org,
  kvm@vger.kernel.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
  Zhenyu Wang <zhenyu.z.wang@intel.com>,
  Dapeng Mi <dapeng1.mi@linux.intel.com>, Yongwei Ma <yongwei.ma@intel.com>
 Subject: Re: [PATCH 0/8] Introduce SMP Cache Topology
-Message-ID: <Zp4LUSXlwXqI880x@intel.com>
+Message-ID: <20240722034820-mutt-send-email-mst@kernel.org>
 References: <20240704031603.1744546-1-zhao1.liu@intel.com>
+ <Zp4LUSXlwXqI880x@intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=gb2312
+In-Reply-To: <Zp4LUSXlwXqI880x@intel.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20240704031603.1744546-1-zhao1.liu@intel.com>
-Received-SPF: pass client-ip=192.198.163.9; envelope-from=zhao1.liu@intel.com;
- helo=mgamail.intel.com
-X-Spam_score_int: -44
-X-Spam_score: -4.5
-X-Spam_bar: ----
-X-Spam_report: (-4.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.141,
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=mst@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -22
+X-Spam_score: -2.3
+X-Spam_bar: --
+X-Spam_report: (-2.3 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.141,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=-0.01, RCVD_IN_MSPIKE_WL=-0.01,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,134 +118,19 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Daniel and Markus,
-
-A gentle ping. Would you kindly have a look at this version of the API
-design? If it could meet your satisfaction, I¡¯ll continue iterating.
-
-Thanks,
-Zhao
-
-On Thu, Jul 04, 2024 at 11:15:55AM +0800, Zhao Liu wrote:
-> Date: Thu, 4 Jul 2024 11:15:55 +0800
-> From: Zhao Liu <zhao1.liu@intel.com>
-> Subject: [PATCH 0/8] Introduce SMP Cache Topology
-> X-Mailer: git-send-email 2.34.1
+On Mon, Jul 22, 2024 at 03:33:37PM +0800, Zhao Liu wrote:
+> Hi Daniel and Markus,
 > 
-> Hi all,
+> A gentle ping. Would you kindly have a look at this version of the API
+> design? If it could meet your satisfaction, Iâ€™ll continue iterating.
 > 
-> Since the previous RFC v2, I've reimplemented smp-cache object based on
-> Daniel's comment (thanks Daniel!), which is both flexible to support
-> current cache topology requirements and extensible.
-> 
-> So, I officially convert the RFC to PATCH.
-> 
-> Background on smp cache topology can be found in the previous RFC v2
-> cover letter:
-> 
-> https://lore.kernel.org/qemu-devel/20240530101539.768484-1-zhao1.liu@intel.com/
-> 
-> The following content focuses on this series implementation of the
-> smp-cache object.
-> 
-> 
-> About smp-cache
-> ===============
-> 
-> In fact, the smp-cache object introduced in this series is a bit
-> different from Daniel's original suggestion. Instead of being integrated
-> into -smp, it is created explicitly via -object, and the smp-cache
-> property is added to -machine to link to this object.
-> 
-> An example is as follows:
-> 
-> -object '{"qom-type":"smp-cache","id":"cache0","caches":[{"name":"l1d","topo":"core"},{"name":"l1i","topo":"core"},{"name":"l2","topo":"module"},{"name":"l3","topo":"socket"}]}'
-> -machine smp-cache=cache0
-> 
-> 
-> Such the design change is based on the following 2 reasons:
->  * Defining the cache with a JSON list is very extensible and can
->    support more cache properties.
-> 
->  * But -smp, as the sugar of machine property "smp", is based on keyval
->    format, and doesn't support options with JSON format. Thus it's not
->    possible to add a JSON format based option to -smp/-machine for now.
-> 
-> So, I decoupled the creation of the smp-cache object from the -machine
-> to make both -machine and -object happy!
-> 
-> 
-> Welcome your feedback!
-> 
-> 
-> Thanks and Best Regards,
+> Thanks,
 > Zhao
-> ---
-> Changelog:
-> 
-> Main changes since RFC v2:
->  * Dropped cpu-topology.h and cpu-topology.c since QAPI has the helper
->    (CpuTopologyLevel_str) to convert enum to string. (Markus)
->  * Fixed text format in machine.json (CpuTopologyLevel naming, 2 spaces
->    between sentences). (Markus)
->  * Added a new level "default" to de-compatibilize some arch-specific
->    topo settings. (Daniel)
->  * Moved CpuTopologyLevel to qapi/machine-common.json, at where the
->    cache enumeration and smp-cache object would be added.
->    - If smp-cache object is defined in qapi/machine.json, storage-daemon
->      will complain about the qmp cmds in qapi/machine.json during
->      compiling.
->  * Referred to Daniel's suggestion to introduce cache JSON list, though
->    as a standalone object since -smp/-machine can't support JSON.
->  * Linked machine's smp_cache to smp-cache object instead of a builtin
->    structure. This is to get around the fact that the keyval format of
->    -machine can't support JSON.
->  * Wrapped the cache topology level access into a helper.
->  * Split as a separate commit to just include compatibility checking and
->    topology checking.
->  * Allow setting "default" topology level even though the cache
->    isn't supported by machine. (Daniel)
->  * Rewrote the document of smp-cache object.
-> 
-> Main changes since RFC v1:
->  * Split CpuTopology renaimg out of this RFC.
->  * Use QAPI to enumerate CPU topology levels.
->  * Drop string_to_cpu_topo() since QAPI will help to parse the topo
->    levels.
->  * Set has_*_cache field in machine_get_smp(). (JeeHeng)
->  * Use "*_cache=topo_level" as -smp example as the original "level"
->    term for a cache has a totally different meaning. (Jonathan)
-> ---
-> Zhao Liu (8):
->   hw/core: Make CPU topology enumeration arch-agnostic
->   qapi/qom: Introduce smp-cache object
->   hw/core: Add smp cache topology for machine
->   hw/core: Check smp cache topology support for machine
->   i386/cpu: Support thread and module level cache topology
->   i386/cpu: Update cache topology with machine's configuration
->   i386/pc: Support cache topology in -machine for PC machine
->   qemu-options: Add the description of smp-cache object
-> 
->  MAINTAINERS                 |   2 +
->  hw/core/machine-smp.c       |  86 ++++++++++++++++++++++++++++++
->  hw/core/machine.c           |  22 ++++++++
->  hw/core/meson.build         |   1 +
->  hw/core/smp-cache.c         | 103 ++++++++++++++++++++++++++++++++++++
->  hw/i386/pc.c                |   4 ++
->  include/hw/boards.h         |  11 +++-
->  include/hw/core/smp-cache.h |  27 ++++++++++
->  include/hw/i386/topology.h  |  18 +------
->  qapi/machine-common.json    |  97 ++++++++++++++++++++++++++++++++-
->  qapi/qapi-schema.json       |   4 +-
->  qapi/qom.json               |   3 ++
->  qemu-options.hx             |  58 ++++++++++++++++++++
->  target/i386/cpu.c           |  83 +++++++++++++++++++++--------
->  target/i386/cpu.h           |   4 +-
->  15 files changed, 478 insertions(+), 45 deletions(-)
->  create mode 100644 hw/core/smp-cache.c
->  create mode 100644 include/hw/core/smp-cache.h
-> 
-> -- 
-> 2.34.1
-> 
+
+
+I'm not really a QMP guy, you want Markus.
+
+-- 
+MST
+
 
