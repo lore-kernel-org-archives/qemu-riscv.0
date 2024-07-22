@@ -4,98 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33FC4C3DA61
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2876C3DA5D
 	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jul 2024 00:29:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sVglt-0004Xk-1m; Sun, 21 Jul 2024 20:19:21 -0400
+	id 1sVgvW-0007rs-Lm; Sun, 21 Jul 2024 20:29:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1sVglL-0002BB-Qh
- for qemu-riscv@nongnu.org; Sun, 21 Jul 2024 20:18:48 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ (Exim 4.90_1) (envelope-from <yfliu2008@qq.com>) id 1sVgvU-0007fd-7r
+ for qemu-riscv@nongnu.org; Sun, 21 Jul 2024 20:29:16 -0400
+Received: from out162-62-57-210.mail.qq.com ([162.62.57.210])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1sVglJ-0005w6-E0
- for qemu-riscv@nongnu.org; Sun, 21 Jul 2024 20:18:47 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1721607523;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=2MFU5YluLJy3dMwMtCRKC5eZxelIcmwO+t8tRGjROFc=;
- b=BA/5/V2D81f/jXEGayWwW3gVJWdFFaibzIS1+ZLXHH3Tx9mwpaph3zk/KUp44clxvZRSLC
- IVQuH9jG+ew9KPMHicOlnONyp/g7bKqhOKuCmbzX51aBC4wvP2EjMiuPvWcH18NKaLS7KD
- ssISUDwOTj6DjJ1EJX6IX+wx5yFaec4=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-402-sDTItCFXNSSKB_WsE_IFwA-1; Sun, 21 Jul 2024 20:18:42 -0400
-X-MC-Unique: sDTItCFXNSSKB_WsE_IFwA-1
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-3688010b3bfso2269483f8f.3
- for <qemu-riscv@nongnu.org>; Sun, 21 Jul 2024 17:18:42 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721607521; x=1722212321;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2MFU5YluLJy3dMwMtCRKC5eZxelIcmwO+t8tRGjROFc=;
- b=HY/VW8QpZsi2QSqWY+RO6kdJ+Qo3iJBvgf9eXQz6awQvWlZQpoP8ZUUdIEZqPMCWUQ
- l89MGQSNlM/sR3VzrQr6rjnx5mSdH0dgms5UAUZZr8nga9SmGjXMFLwLEvpHyjWvPB+1
- NuP0HDqI53wqhLPWGRb+2Qk4bl3rmQj/96Mml+bgE7uonYNWH+V47j38tDYW2srvgbVa
- sUZ8tw38c1d2bujOOB4YNiqU5lWOnqt4PzAkpBWAgVe6jf80v20D04eMUMIKn8KFd2y7
- CP/Abnmlmr3xlQnwmwIImB9cH69gf+Sbt/GGvDQhrFE+fFsonIMij7KBV/Ljb9SjcwSD
- 6NnQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXBASC5z5hpXfIzyG8a1gDGm1atYyPwMboNIImUwQRKLYXftfh2FybKgkGnMLG/Fi3c4BsQLsJ+IkVco0WZax31Vsvz+pY=
-X-Gm-Message-State: AOJu0YztbUChcEvkTCRjzDCJFvB9RgLM1vGtZEEM5be1iUH+KTr5jJUR
- uvz0uAeuiWbOLgjtaBRjiPdc+j1ohG3sjmewLF6wotYOc8WYd+UMACiYdZexyBhmnxiOrLlwgjk
- StMZPvi8yE/PxBNZb3TdmcwffWWYdfQGGfwlK+Qh5kCobY265E1mC
-X-Received: by 2002:a5d:4604:0:b0:368:7282:51d6 with SMTP id
- ffacd0b85a97d-369bae4d54dmr4227544f8f.21.1721607521169; 
- Sun, 21 Jul 2024 17:18:41 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEWzKtRRYHll+mm01uoqHoCxQ2/pCyfQk0/jmxFlqOHMnxJDo0jZlLMmPQiMvL27rYFpYlwMQ==
-X-Received: by 2002:a5d:4604:0:b0:368:7282:51d6 with SMTP id
- ffacd0b85a97d-369bae4d54dmr4227530f8f.21.1721607520599; 
- Sun, 21 Jul 2024 17:18:40 -0700 (PDT)
-Received: from redhat.com (mob-5-90-113-158.net.vodafone.it. [5.90.113.158])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-36878684204sm7029703f8f.2.2024.07.21.17.18.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 21 Jul 2024 17:18:40 -0700 (PDT)
-Date: Sun, 21 Jul 2024 20:18:38 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: qemu-devel@nongnu.org
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Sunil V L <sunilvl@ventanamicro.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Igor Mammedov <imammedo@redhat.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org
-Subject: [PULL 51/63] hw/riscv/virt-acpi-build.c: Add namespace devices for
- PLIC and APLIC
-Message-ID: <dbd4cc00ca249b75170c2c0fd60ee2db452352a9.1721607331.git.mst@redhat.com>
-References: <cover.1721607331.git.mst@redhat.com>
-MIME-Version: 1.0
-In-Reply-To: <cover.1721607331.git.mst@redhat.com>
-X-Mailer: git-send-email 2.27.0.106.g8ac3dc51b1
-X-Mutt-Fcc: =sent
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=mst@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -22
-X-Spam_score: -2.3
-X-Spam_bar: --
-X-Spam_report: (-2.3 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.141,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=-0.01, RCVD_IN_MSPIKE_WL=-0.01,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ (Exim 4.90_1) (envelope-from <yfliu2008@qq.com>) id 1sVgvQ-0007mw-5F
+ for qemu-riscv@nongnu.org; Sun, 21 Jul 2024 20:29:15 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
+ t=1721608144; bh=LyERTDlLU7zSa9W4GD3zmtCPZAUrDMLT67LiG50Lsm8=;
+ h=From:To:Subject:Date;
+ b=sxIykbFpW0TjaJrIpa84xqekBvHWviI0KYQPJdCOW5JEz3/6CrcIk9cCOxuYnqLEc
+ E66lDLaHibzywFpIDRWMaDNsRfo6tj3FNkJM3r85rMactQuqc9Uuc6StQfagFU71jK
+ fYUJ4n9mzTKB5UVrPpH0BawUkiZdeNFeJ0b/5Gxs=
+X-QQ-XMRINFO: OD9hHCdaPRBwq3WW+NvGbIU=
+X-QQ-XMAILINFO: M2pBd1R7V2XaMWrqQGkn/nGdp8O51JuawgOUzLhPsoFQ2Tl3JYwzahoLs7S0Uq
+ 7wwsEUdn4OJDXaL/K/CZ81jz7zD0RJg8vhKmfxMtSttlllwLtauk5iK6AJd1pi/s7URDa/FfIfZBC
+ gKqyUvydZ4zd3hAeywG6qinvJ7ag/v8hkGYLHAp+hltDSQngSpntg1LdyI+DKCYVd+U9xZv+jHPfU
+ gepTMcl4PEbXW2k6vsUSaTQNJmshnUUmXLdM7il7OmAdLwqDav6bRCT08KgA0a9cs6Cc6UJbmd5Zz
+ w+3HHprKFYRS99pVk1/FJgtcv2nqcNR7mJw2bOe1uTBfi6tWQ5k0832lPz+aHGdDYocwmhJ5FBjRK
+ +3XELmFsp8oTSJXBsuaaVqgSFc2AfRlPlDJmdRtmt5nQuvDXnxjw7duGAmjVBARV4088byfoDOuoh
+ 0N6swK848O9iQa7pOp0wCzFwbO2QChi9QkN1OYVA7fYh3eDGzOEeqJJCFusi+F3FYt3XDY1x+HiAn
+ LlsXuQWBHN6B910tifZzuc2+XaoJp8rE9lE0iVfII6DLYUv0PRo661eL2ezvwK3iMbkE+I3d+zFF5
+ K/rRH75VN+OTYw+UoizdJTtbXj6/tMp1bY+KQR2ti8qALBGeTRiyq20p45yi3QpOSU1RUMB4Jg6NT
+ yy7BzDGODMSLktD2PLoKtrWibN9Ygb5fOaxsFD4Zt77qlp5K+2RfKC02wpvv7jZv8ZEwC3vHBgIcK
+ ivkBg2sgpdsvmz8vGqS+6i8zbadUsUhWVZNopLnnaHq6tY5Ba99SnaN3sEU6t27QbSJp8DjjMlZO+
+ ndIgAX9VL3tDBNpYeLlaEvZg2LHsh5He7zUJCyRLBu0U7iIM58XZCnbBh9Z7i5bGcdZD6xhy8OhZ1
+ rzVG/T+xw7WR+Z+K3XSy7sB6lEECcj9DRQjMb5SxiqNr/Tz6iM3v/Ofv4HvrNUUnoKsQ78RvRQ+0n
+ 5Xx4gOrw==
+From: "=?utf-8?B?eWZsaXUyMDA4?=" <yfliu2008@qq.com>
+To: "=?utf-8?B?cWVtdS1yaXNjdg==?=" <qemu-riscv@nongnu.org>
+Subject: usage question
+Mime-Version: 1.0
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: base64
+Date: Mon, 22 Jul 2024 08:21:46 +0800
+X-Priority: 3
+Message-ID: <tencent_9B09697D9EC1EF8E6CD97DF881432A612D05@qq.com>
+X-QQ-MIME: TCMime 1.0 by Tencent
+X-Mailer: QQMail 2.x
+X-QQ-Mailer: QQMail 2.x
+X-QQ-mid: xmseszc7-0t1721607706tkul6fzmw
+Received-SPF: pass client-ip=162.62.57.210; envelope-from=yfliu2008@qq.com;
+ helo=out162-62-57-210.mail.qq.com
+X-Spam_score_int: 25
+X-Spam_score: 2.5
+X-Spam_bar: ++
+X-Spam_report: (2.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_ENVFROM_END_DIGIT=0.25,
+ FREEMAIL_FROM=0.001, FROM_EXCESS_BASE64=0.001, HELO_DYNAMIC_IPADDR=1.951,
+ PYZOR_CHECK=1.392, RCVD_IN_DNSWL_NONE=-0.0001, RDNS_DYNAMIC=0.982,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ TVD_SPACE_RATIO=0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -111,76 +79,19 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Sunil V L <sunilvl@ventanamicro.com>
-
-As per the requirement ACPI_080 in the RISC-V Boot and Runtime Services
-(BRS) specification [1],  PLIC and APLIC should be in namespace as well.
-So, add them using the defined HID.
-
-[1] - https://github.com/riscv-non-isa/riscv-brs/releases/download/v0.0.2/riscv-brs-spec.pdf
-      (Chapter 6)
-
-Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
-Acked-by: Igor Mammedov <imammedo@redhat.com>
-Message-Id: <20240716144306.2432257-2-sunilvl@ventanamicro.com>
-Reviewed-by: Michael S. Tsirkin <mst@redhat.com>
-Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
----
- hw/riscv/virt-acpi-build.c | 32 ++++++++++++++++++++++++++++++++
- 1 file changed, 32 insertions(+)
-
-diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
-index 0925528160..5f5082a35b 100644
---- a/hw/riscv/virt-acpi-build.c
-+++ b/hw/riscv/virt-acpi-build.c
-@@ -141,6 +141,30 @@ static void acpi_dsdt_add_cpus(Aml *scope, RISCVVirtState *s)
-     }
- }
- 
-+static void acpi_dsdt_add_plic_aplic(Aml *scope, uint8_t socket_count,
-+                                     uint64_t mmio_base, uint64_t mmio_size,
-+                                     const char *hid)
-+{
-+    uint64_t plic_aplic_addr;
-+    uint32_t gsi_base;
-+    uint8_t  socket;
-+
-+    for (socket = 0; socket < socket_count; socket++) {
-+        plic_aplic_addr = mmio_base + mmio_size * socket;
-+        gsi_base = VIRT_IRQCHIP_NUM_SOURCES * socket;
-+        Aml *dev = aml_device("IC%.02X", socket);
-+        aml_append(dev, aml_name_decl("_HID", aml_string("%s", hid)));
-+        aml_append(dev, aml_name_decl("_UID", aml_int(socket)));
-+        aml_append(dev, aml_name_decl("_GSB", aml_int(gsi_base)));
-+
-+        Aml *crs = aml_resource_template();
-+        aml_append(crs, aml_memory32_fixed(plic_aplic_addr, mmio_size,
-+                                           AML_READ_WRITE));
-+        aml_append(dev, aml_name_decl("_CRS", crs));
-+        aml_append(scope, dev);
-+    }
-+}
-+
- static void
- acpi_dsdt_add_uart(Aml *scope, const MemMapEntry *uart_memmap,
-                     uint32_t uart_irq)
-@@ -411,6 +435,14 @@ static void build_dsdt(GArray *table_data,
- 
-     socket_count = riscv_socket_count(ms);
- 
-+    if (s->aia_type == VIRT_AIA_TYPE_NONE) {
-+        acpi_dsdt_add_plic_aplic(scope, socket_count, memmap[VIRT_PLIC].base,
-+                                 memmap[VIRT_PLIC].size, "RSCV0001");
-+    } else {
-+        acpi_dsdt_add_plic_aplic(scope, socket_count, memmap[VIRT_APLIC_S].base,
-+                                 memmap[VIRT_APLIC_S].size, "RSCV0002");
-+    }
-+
-     acpi_dsdt_add_uart(scope, &memmap[VIRT_UART0], UART0_IRQ);
- 
-     if (socket_count == 1) {
--- 
-MST
+RGVhciZuYnNwO2V4cGVydHMsPGJyLz48YnIvPkkmbmJzcDtoYXZlJm5ic3A7YSZuYnNwO3Vz
+YWdlJm5ic3A7cXVlc3Rpb24mbmJzcDtoZXJlLCZuYnNwO2FzJm5ic3A7SSZuYnNwO2NhbiYj
+Mzk7dCZuYnNwO3JlZ2lzdGVyJm5ic3A7aW4mbmJzcDtHaXRsYWImbmJzcDt0byZuYnNwO2Ny
+ZWF0ZSZuYnNwO2lzc3VlcywmbmJzcDthbmQmbmJzcDt0aGUmbmJzcDtHaXRodWImbmJzcDty
+ZXBvc2l0b3J5Jm5ic3A7ZG9lc24mIzM5O3QmbmJzcDthY2NlcHQmbmJzcDtpc3N1ZXMuPGJy
+Lz48YnIvPk15Jm5ic3A7cXVlc3Rpb24mbmJzcDtpcyZuYnNwO2hvdyZuYnNwO3RvJm5ic3A7
+dXNlJm5ic3A7JnF1b3Q7cWVtdS1zeXN0ZW0tcmlzY3YmcXVvdDsmbmJzcDtmb3ImbmJzcDth
+Jm5ic3A7bWFjaGluZSZuYnNwO2xpa2UmbmJzcDsmcXVvdDstTSZuYnNwO3ZpcnQmcXVvdDsm
+bmJzcDtidXQmbmJzcDt3aXRoJm5ic3A7dHdvJm5ic3A7Q1BVcyZuYnNwO2FuZCZuYnNwO2Nh
+biZuYnNwO3J1biZuYnNwO3R3byZuYnNwO09TJm5ic3A7KG5vdCZuYnNwO2ZvciZuYnNwO1NN
+UCkuJm5ic3A7T25lJm5ic3A7Y29yZXMmbmJzcDtjYW4mbmJzcDtldmVuJm5ic3A7ZGlmZmVy
+Jm5ic3A7b24mbmJzcDtmZWF0dXJlcyZuYnNwOyhlLmcuJm5ic3A7b25lJm5ic3A7d2l0aG91
+dCZuYnNwO3ZlY3RvciwmbmJzcDt0aGUmbmJzcDtvdGhlciZuYnNwO3dpdGgmbmJzcDt2ZWN0
+b3ImbmJzcDtleHRlbnNpb24pLjxici8+PGJyLz5SZWdhcmRzLDxici8+eWY=
 
 
