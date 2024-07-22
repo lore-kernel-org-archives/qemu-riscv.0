@@ -4,66 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BE27C3DA61
-	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jul 2024 01:48:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5949CC3DA5D
+	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jul 2024 07:18:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sViA2-0002oJ-RV; Sun, 21 Jul 2024 21:48:22 -0400
+	id 1sVnJO-0003Bq-6S; Mon, 22 Jul 2024 03:18:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <yfliu2008@qq.com>) id 1sVi9z-0002mo-BD
- for qemu-riscv@nongnu.org; Sun, 21 Jul 2024 21:48:19 -0400
-Received: from out203-205-221-235.mail.qq.com ([203.205.221.235])
+ (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
+ id 1sVnJG-0002hX-9f; Mon, 22 Jul 2024 03:18:15 -0400
+Received: from mgamail.intel.com ([192.198.163.9])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <yfliu2008@qq.com>) id 1sVi9w-0005la-5B
- for qemu-riscv@nongnu.org; Sun, 21 Jul 2024 21:48:19 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
- t=1721612886; bh=uiYVbF6/dcGHcyl+rifbG03cbqlH1QnHnR90pMYLIsA=;
- h=From:To:Subject:Date;
- b=xr5C0ZgelrxGsU8WCICs0jGF8qzFudqMGKdHwE31xXJnLKqG+xkSI06aT7xyQmIW1
- C/ywvGPIM40iy0lt6krrf5p5fHBCPczjPXPjFy37qAz/AgAHUAuaKEC1aL5V0jmx3t
- lym1Eevg6EFA8PkYfk8RkVUWAH5uYlryMRvtZNOw=
-X-QQ-XMRINFO: MSVp+SPm3vtS1Vd6Y4Mggwc=
-X-QQ-XMAILINFO: MvBKtgduchMIBh9AJFFR9Vbt/qakaqj21GcL9V3PhemG3NjUKGwukDiZ1YXxVr
- teKmo4d6QZ8DKv6eFZKwiMDkjC07PJLOx34hmDwj0xUN7yvLA4etadfkp9LV4fq5wbg7J80Ayw3jK
- 3Si4QUb6mps0mmapTl8iihMPZJBpiVMxpLWw+w+Z8RMh00Am6QpqJK7jhvF3LecVCrJmG29VUXfZL
- D7qv3x0BzEKPv1NQAbWW+FoYXYlNFZKD1vORC9S5PhVgKRxwPiN5TouyTHDsW1/DV3DTKdBT1zo5B
- 9p4+fNpokjNsB/8kjMn2+Ijg2kpRSShndB7+mpK9MYp8Jms9NrG9ipesx4KzmzVug7pNPMbSYTay7
- YqL3uUIQn4vU7kBdqCMPbRV+OjPVWz+8jhuPiARCgX0qy/1e+xxSK3bdq8f7dOeN2Q8PJb+DugA8f
- jLqpFqXwJN4eor9UO2UVXAb/XvRZmA00vHQ++A5TIBb+cg/t4GIlOMZtRJvgoe1sF591iNyeNvdO/
- cFenS0s/yCdz3kaE2Xc/bnrW9BgOf33YxxhOmmRfnGSm3wGlIZZ0iz0SgapCSpy8fQa9z0lkyPjsj
- gb9Qj/mdWSZcfuM4+bVqy2ekeYkbj+aQmQc+0g2UcLcGPM5ZiT5hsr5ODpd4RJaNrOq2f4BUygJkA
- 1fSp7W82DE5A/v05ntkdtCaFqLBpRwHA4/+2a4+yhS8K18S6lVyq9A4h/3bqRNX04U9KHVfj+UvIz
- 4aYBwwVok9dY5gt+wzf4v0Cf8LJXOwCW19y9vbHcLuTviHpkFvtHQIGxfAHTtimO1KMOzPkDbPjAy
- bpZkml6+RQrUel9liFOyLz8hK5jPq9f7LL1HmxIt5J/gTU0psSijb81ez18Sb4+jwDJqB69VT+ZLQ
- fwe3k3Tnpggwr3DH0MaSGKoql5KU8VmPv3gqoKTgur+BpJQcH1pgrkrBfvRJTTgPAjYbPzunhJOmg
- dktXiFLg==
-From: "=?utf-8?B?eWZsaXUyMDA4?=" <yfliu2008@qq.com>
-To: "=?utf-8?B?cWVtdS1yaXNjdg==?=" <qemu-riscv@nongnu.org>
-Subject: non-SMP multi core usage
-Mime-Version: 1.0
-Content-Type: multipart/alternative;
- boundary="----=_NextPart_669DBA55_3C91D0E0_1DCC61BB"
-Content-Transfer-Encoding: 8Bit
-Date: Mon, 22 Jul 2024 09:48:05 +0800
-X-Priority: 3
-Message-ID: <tencent_8469F790872829C4B573249079063F7A3207@qq.com>
-X-QQ-MIME: TCMime 1.0 by Tencent
-X-Mailer: QQMail 2.x
-X-QQ-Mailer: QQMail 2.x
-X-QQ-mid: xmseszc7-0t1721612885tpfjeqrq5
-Received-SPF: pass client-ip=203.205.221.235; envelope-from=yfliu2008@qq.com;
- helo=out203-205-221-235.mail.qq.com
-X-Spam_score_int: 11
-X-Spam_score: 1.1
-X-Spam_bar: +
-X-Spam_report: (1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_ENVFROM_END_DIGIT=0.25,
- FREEMAIL_FROM=0.001, FROM_EXCESS_BASE64=0.001, HELO_DYNAMIC_IPADDR=1.951,
- HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=-0.01,
- RCVD_IN_MSPIKE_WL=-0.01, RDNS_DYNAMIC=0.982, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
+ id 1sVnJD-0001Bm-J7; Mon, 22 Jul 2024 03:18:14 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1721632692; x=1753168692;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:content-transfer-encoding:in-reply-to;
+ bh=PWz4Ht0qlbweAS5o60cJFbGqE0cijiCuaXDbGXRSJ3Q=;
+ b=XBx4TgKu3q8b14A+G3b43wRf6uJObklYzONohPCGvLBMJC41eiN13pPd
+ vZ2QYfCQ1GZuKszknLcWDKlDGFANou7T6j6at/EycXp7GvDL5suKcNUS0
+ jc6kUCQe2GVyT2lJtpRJbhhIKihlxZF+tJ4g2ZoJaiSVEJBfEDIcHE3Vf
+ f6ookgnogqeU0CFP4HFhcb5lqIToTKCRs/JhDwlAVgZNVdHtkPQvikrhL
+ WuhO4CU+nXYhsVbIRgWg4KlHDmdSTHC9uYH5ZLkEkPHuN+b9hPmIwYR4s
+ iiQ/KVsXVULPF/Xnz50YYZGfG6orMKrsNZBsl3869yEdOTiVZw+lwgR8l A==;
+X-CSE-ConnectionGUID: 2+it0vNZQbm3Be1s14/BBQ==
+X-CSE-MsgGUID: C1lpF1pOSnahfp5Bt1kr0w==
+X-IronPort-AV: E=McAfee;i="6700,10204,11140"; a="29843695"
+X-IronPort-AV: E=Sophos;i="6.09,227,1716274800"; d="scan'208";a="29843695"
+Received: from fmviesa004.fm.intel.com ([10.60.135.144])
+ by fmvoesa103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 22 Jul 2024 00:17:59 -0700
+X-CSE-ConnectionGUID: S294LoMoTdKgKC7BnmarJQ==
+X-CSE-MsgGUID: cpwVM0ovRbS97rMy+BQXAg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.09,227,1716274800"; d="scan'208";a="56350156"
+Received: from liuzhao-optiplex-7080.sh.intel.com (HELO localhost)
+ ([10.239.160.36])
+ by fmviesa004.fm.intel.com with ESMTP; 22 Jul 2024 00:17:53 -0700
+Date: Mon, 22 Jul 2024 15:33:37 +0800
+From: Zhao Liu <zhao1.liu@intel.com>
+To: Daniel P =?iso-8859-1?Q?=2E_Berrang=E9?= <berrange@redhat.com>,
+ Markus Armbruster <armbru@redhat.com>
+Cc: Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>,
+ Yanan Wang <wangyanan55@huawei.com>,
+ "Michael S . Tsirkin" <mst@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Eric Blake <eblake@redhat.com>, Marcelo Tosatti <mtosatti@redhat.com>,
+ Alex =?iso-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+ Sia Jee Heng <jeeheng.sia@starfivetech.com>,
+ Zhao Liu <zhao1.liu@intel.com>, qemu-devel@nongnu.org,
+ kvm@vger.kernel.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
+ Zhenyu Wang <zhenyu.z.wang@intel.com>,
+ Dapeng Mi <dapeng1.mi@linux.intel.com>, Yongwei Ma <yongwei.ma@intel.com>
+Subject: Re: [PATCH 0/8] Introduce SMP Cache Topology
+Message-ID: <Zp4LUSXlwXqI880x@intel.com>
+References: <20240704031603.1744546-1-zhao1.liu@intel.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=gb2312
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20240704031603.1744546-1-zhao1.liu@intel.com>
+Received-SPF: pass client-ip=192.198.163.9; envelope-from=zhao1.liu@intel.com;
+ helo=mgamail.intel.com
+X-Spam_score_int: -44
+X-Spam_score: -4.5
+X-Spam_bar: ----
+X-Spam_report: (-4.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.141,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -79,76 +96,134 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This is a multi-part message in MIME format.
+Hi Daniel and Markus,
 
-------=_NextPart_669DBA55_3C91D0E0_1DCC61BB
-Content-Type: text/plain;
-	charset="utf-8"
-Content-Transfer-Encoding: base64
+A gentle ping. Would you kindly have a look at this version of the API
+design? If it could meet your satisfaction, I¡¯ll continue iterating.
 
-RGVhciZuYnNwO2V4cGVydHMsDQoNCg0KDQpJIGFtIHJlc2VuZGluZyBhcyBteSBsYXN0IG1h
-aWwgaXMgaW4gc3RyYW5nZSBmb3JtYXQgdGhvdWdoICJwbGFpbiB0ZXh0IiBpcyBzZWxlY3Rl
-ZCBoZXJlLiBTb3JyeSBhYm91dCB0aGlzLg0KDQoNCg0KSSZuYnNwO2hhdmUmbmJzcDthJm5i
-c3A7dXNhZ2UmbmJzcDtxdWVzdGlvbiZuYnNwO2hlcmUsJm5ic3A7YXMmbmJzcDtJJm5ic3A7
-Y2FuJ3QmbmJzcDtyZWdpc3RlciZuYnNwO2luJm5ic3A7R2l0bGFiJm5ic3A7dG8mbmJzcDtj
-cmVhdGUmbmJzcDtpc3N1ZXMsJm5ic3A7YW5kJm5ic3A7dGhlJm5ic3A7R2l0aHViJm5ic3A7
-cmVwb3NpdG9yeSZuYnNwO2RvZXNuJ3QmbmJzcDthY2NlcHQmbmJzcDtpc3N1ZXMuDQoNCk15
-Jm5ic3A7cXVlc3Rpb24mbmJzcDtpcyZuYnNwO2hvdyZuYnNwO3RvJm5ic3A7dXNlJm5ic3A7
-InFlbXUtc3lzdGVtLXJpc2N2IC1NIHZpcnQiJm5ic3A7Zm9yJm5ic3A7YSZuYnNwO21hY2hp
-bmUgd2l0aCZuYnNwO3R3byZuYnNwO0NQVXMmbmJzcDthbmQgcnVuJm5ic3A7dHdvIHByb2dy
-YW1zIHNlcGFyYXRlbHkgKG5vdCZuYnNwO2ZvciZuYnNwO1NNUCkuIA0KDQoNClJlZ2FyZHMs
-DQp5Zg==
+Thanks,
+Zhao
 
-------=_NextPart_669DBA55_3C91D0E0_1DCC61BB
-Content-Type: text/html;
-	charset="utf-8"
-Content-Transfer-Encoding: base64
-
-PGRpdiBjbGFzcz0icW1ib3giPjxkaXYgc3R5bGU9ImZvbnQtZmFtaWx5OiAtYXBwbGUtc3lz
-dGVtLCBCbGlua01hY1N5c3RlbUZvbnQsICZxdW90O1BpbmdGYW5nIFNDJnF1b3Q7LCAmcXVv
-dDtNaWNyb3NvZnQgWWFIZWkmcXVvdDssIHNhbnMtc2VyaWY7IGZvbnQtc2l6ZTogMTAuNXB0
-OyBjb2xvcjogcmdiKDQ2LCA0OCwgNTEpOyAtLWRhcmtyZWFkZXItaW5saW5lLWNvbG9yOiAj
-YzljNWJlOyBtYXJnaW4tdG9wOiAwcHg7IG1hcmdpbi1ib3R0b206IDBweDsiIGRhdGEtZGFy
-a3JlYWRlci1pbmxpbmUtY29sb3I9IiI+RGVhciZuYnNwO2V4cGVydHMsPGJyICAvPjwvZGl2
-PjxkaXYgc3R5bGU9ImZvbnQtZmFtaWx5OiAtYXBwbGUtc3lzdGVtLCBCbGlua01hY1N5c3Rl
-bUZvbnQsICZxdW90O1BpbmdGYW5nIFNDJnF1b3Q7LCAmcXVvdDtNaWNyb3NvZnQgWWFIZWkm
-cXVvdDssIHNhbnMtc2VyaWY7IGZvbnQtc2l6ZTogMTAuNXB0OyBjb2xvcjogcmdiKDQ2LCA0
-OCwgNTEpOyAtLWRhcmtyZWFkZXItaW5saW5lLWNvbG9yOiAjYzljNWJlOyBtYXJnaW4tdG9w
-OiAwcHg7IG1hcmdpbi1ib3R0b206IDBweDsiIGRhdGEtZGFya3JlYWRlci1pbmxpbmUtY29s
-b3I9IiI+PGJyICAvPjwvZGl2PjxkaXYgc3R5bGU9ImZvbnQtZmFtaWx5OiAtYXBwbGUtc3lz
-dGVtLCBCbGlua01hY1N5c3RlbUZvbnQsICZxdW90O1BpbmdGYW5nIFNDJnF1b3Q7LCAmcXVv
-dDtNaWNyb3NvZnQgWWFIZWkmcXVvdDssIHNhbnMtc2VyaWY7IGZvbnQtc2l6ZTogMTAuNXB0
-OyBjb2xvcjogcmdiKDQ2LCA0OCwgNTEpOyAtLWRhcmtyZWFkZXItaW5saW5lLWNvbG9yOiAj
-YzljNWJlOyBtYXJnaW4tdG9wOiAwcHg7IG1hcmdpbi1ib3R0b206IDBweDsiIGRhdGEtZGFy
-a3JlYWRlci1pbmxpbmUtY29sb3I9IiI+SSBhbSByZXNlbmRpbmcgYXMgbXkgbGFzdCBtYWls
-IGlzIGluIHN0cmFuZ2UgZm9ybWF0IHRob3VnaCAicGxhaW4gdGV4dCIgaXMgc2VsZWN0ZWQg
-aGVyZS4gU29ycnkgYWJvdXQgdGhpcy48YnIgIC8+PC9kaXY+PGRpdiBzdHlsZT0iZm9udC1m
-YW1pbHk6IC1hcHBsZS1zeXN0ZW0sIEJsaW5rTWFjU3lzdGVtRm9udCwgJnF1b3Q7UGluZ0Zh
-bmcgU0MmcXVvdDssICZxdW90O01pY3Jvc29mdCBZYUhlaSZxdW90Oywgc2Fucy1zZXJpZjsg
-Zm9udC1zaXplOiAxMC41cHQ7IGNvbG9yOiByZ2IoNDYsIDQ4LCA1MSk7IC0tZGFya3JlYWRl
-ci1pbmxpbmUtY29sb3I6ICNjOWM1YmU7IG1hcmdpbi10b3A6IDBweDsgbWFyZ2luLWJvdHRv
-bTogMHB4OyIgZGF0YS1kYXJrcmVhZGVyLWlubGluZS1jb2xvcj0iIj48YnIgIC8+PC9kaXY+
-PGRpdiBzdHlsZT0iZm9udC1mYW1pbHk6IC1hcHBsZS1zeXN0ZW0sIEJsaW5rTWFjU3lzdGVt
-Rm9udCwgJnF1b3Q7UGluZ0ZhbmcgU0MmcXVvdDssICZxdW90O01pY3Jvc29mdCBZYUhlaSZx
-dW90Oywgc2Fucy1zZXJpZjsgZm9udC1zaXplOiAxMC41cHQ7IGNvbG9yOiByZ2IoNDYsIDQ4
-LCA1MSk7IC0tZGFya3JlYWRlci1pbmxpbmUtY29sb3I6ICNjOWM1YmU7IG1hcmdpbi10b3A6
-IDBweDsgbWFyZ2luLWJvdHRvbTogMHB4OyIgZGF0YS1kYXJrcmVhZGVyLWlubGluZS1jb2xv
-cj0iIj5JJm5ic3A7aGF2ZSZuYnNwO2EmbmJzcDt1c2FnZSZuYnNwO3F1ZXN0aW9uJm5ic3A7
-aGVyZSwmbmJzcDthcyZuYnNwO0kmbmJzcDtjYW4ndCZuYnNwO3JlZ2lzdGVyJm5ic3A7aW4m
-bmJzcDtHaXRsYWImbmJzcDt0byZuYnNwO2NyZWF0ZSZuYnNwO2lzc3VlcywmbmJzcDthbmQm
-bmJzcDt0aGUmbmJzcDtHaXRodWImbmJzcDtyZXBvc2l0b3J5Jm5ic3A7ZG9lc24ndCZuYnNw
-O2FjY2VwdCZuYnNwO2lzc3Vlcy48YnIgIC8+PGJyICAvPk15Jm5ic3A7cXVlc3Rpb24mbmJz
-cDtpcyZuYnNwO2hvdyZuYnNwO3RvJm5ic3A7dXNlJm5ic3A7InFlbXUtc3lzdGVtLXJpc2N2
-IC1NIHZpcnQiJm5ic3A7Zm9yJm5ic3A7YSZuYnNwO21hY2hpbmUgd2l0aCZuYnNwO3R3byZu
-YnNwO0NQVXMmbmJzcDthbmQgcnVuJm5ic3A7dHdvIHByb2dyYW1zIHNlcGFyYXRlbHkgKG5v
-dCZuYnNwO2ZvciZuYnNwO1NNUCkuIDxiciAgLz48L2Rpdj48ZGl2IHN0eWxlPSJmb250LWZh
-bWlseTogLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNTeXN0ZW1Gb250LCAmcXVvdDtQaW5nRmFu
-ZyBTQyZxdW90OywgJnF1b3Q7TWljcm9zb2Z0IFlhSGVpJnF1b3Q7LCBzYW5zLXNlcmlmOyBm
-b250LXNpemU6IDEwLjVwdDsgY29sb3I6IHJnYig0NiwgNDgsIDUxKTsgLS1kYXJrcmVhZGVy
-LWlubGluZS1jb2xvcjogI2M5YzViZTsgbWFyZ2luLXRvcDogMHB4OyBtYXJnaW4tYm90dG9t
-OiAwcHg7IiBkYXRhLWRhcmtyZWFkZXItaW5saW5lLWNvbG9yPSIiPjxiciAgLz5SZWdhcmRz
-LDxiciAgLz55ZjxiciAgLz48L2Rpdj48L2Rpdj4=
-
-------=_NextPart_669DBA55_3C91D0E0_1DCC61BB--
-
+On Thu, Jul 04, 2024 at 11:15:55AM +0800, Zhao Liu wrote:
+> Date: Thu, 4 Jul 2024 11:15:55 +0800
+> From: Zhao Liu <zhao1.liu@intel.com>
+> Subject: [PATCH 0/8] Introduce SMP Cache Topology
+> X-Mailer: git-send-email 2.34.1
+> 
+> Hi all,
+> 
+> Since the previous RFC v2, I've reimplemented smp-cache object based on
+> Daniel's comment (thanks Daniel!), which is both flexible to support
+> current cache topology requirements and extensible.
+> 
+> So, I officially convert the RFC to PATCH.
+> 
+> Background on smp cache topology can be found in the previous RFC v2
+> cover letter:
+> 
+> https://lore.kernel.org/qemu-devel/20240530101539.768484-1-zhao1.liu@intel.com/
+> 
+> The following content focuses on this series implementation of the
+> smp-cache object.
+> 
+> 
+> About smp-cache
+> ===============
+> 
+> In fact, the smp-cache object introduced in this series is a bit
+> different from Daniel's original suggestion. Instead of being integrated
+> into -smp, it is created explicitly via -object, and the smp-cache
+> property is added to -machine to link to this object.
+> 
+> An example is as follows:
+> 
+> -object '{"qom-type":"smp-cache","id":"cache0","caches":[{"name":"l1d","topo":"core"},{"name":"l1i","topo":"core"},{"name":"l2","topo":"module"},{"name":"l3","topo":"socket"}]}'
+> -machine smp-cache=cache0
+> 
+> 
+> Such the design change is based on the following 2 reasons:
+>  * Defining the cache with a JSON list is very extensible and can
+>    support more cache properties.
+> 
+>  * But -smp, as the sugar of machine property "smp", is based on keyval
+>    format, and doesn't support options with JSON format. Thus it's not
+>    possible to add a JSON format based option to -smp/-machine for now.
+> 
+> So, I decoupled the creation of the smp-cache object from the -machine
+> to make both -machine and -object happy!
+> 
+> 
+> Welcome your feedback!
+> 
+> 
+> Thanks and Best Regards,
+> Zhao
+> ---
+> Changelog:
+> 
+> Main changes since RFC v2:
+>  * Dropped cpu-topology.h and cpu-topology.c since QAPI has the helper
+>    (CpuTopologyLevel_str) to convert enum to string. (Markus)
+>  * Fixed text format in machine.json (CpuTopologyLevel naming, 2 spaces
+>    between sentences). (Markus)
+>  * Added a new level "default" to de-compatibilize some arch-specific
+>    topo settings. (Daniel)
+>  * Moved CpuTopologyLevel to qapi/machine-common.json, at where the
+>    cache enumeration and smp-cache object would be added.
+>    - If smp-cache object is defined in qapi/machine.json, storage-daemon
+>      will complain about the qmp cmds in qapi/machine.json during
+>      compiling.
+>  * Referred to Daniel's suggestion to introduce cache JSON list, though
+>    as a standalone object since -smp/-machine can't support JSON.
+>  * Linked machine's smp_cache to smp-cache object instead of a builtin
+>    structure. This is to get around the fact that the keyval format of
+>    -machine can't support JSON.
+>  * Wrapped the cache topology level access into a helper.
+>  * Split as a separate commit to just include compatibility checking and
+>    topology checking.
+>  * Allow setting "default" topology level even though the cache
+>    isn't supported by machine. (Daniel)
+>  * Rewrote the document of smp-cache object.
+> 
+> Main changes since RFC v1:
+>  * Split CpuTopology renaimg out of this RFC.
+>  * Use QAPI to enumerate CPU topology levels.
+>  * Drop string_to_cpu_topo() since QAPI will help to parse the topo
+>    levels.
+>  * Set has_*_cache field in machine_get_smp(). (JeeHeng)
+>  * Use "*_cache=topo_level" as -smp example as the original "level"
+>    term for a cache has a totally different meaning. (Jonathan)
+> ---
+> Zhao Liu (8):
+>   hw/core: Make CPU topology enumeration arch-agnostic
+>   qapi/qom: Introduce smp-cache object
+>   hw/core: Add smp cache topology for machine
+>   hw/core: Check smp cache topology support for machine
+>   i386/cpu: Support thread and module level cache topology
+>   i386/cpu: Update cache topology with machine's configuration
+>   i386/pc: Support cache topology in -machine for PC machine
+>   qemu-options: Add the description of smp-cache object
+> 
+>  MAINTAINERS                 |   2 +
+>  hw/core/machine-smp.c       |  86 ++++++++++++++++++++++++++++++
+>  hw/core/machine.c           |  22 ++++++++
+>  hw/core/meson.build         |   1 +
+>  hw/core/smp-cache.c         | 103 ++++++++++++++++++++++++++++++++++++
+>  hw/i386/pc.c                |   4 ++
+>  include/hw/boards.h         |  11 +++-
+>  include/hw/core/smp-cache.h |  27 ++++++++++
+>  include/hw/i386/topology.h  |  18 +------
+>  qapi/machine-common.json    |  97 ++++++++++++++++++++++++++++++++-
+>  qapi/qapi-schema.json       |   4 +-
+>  qapi/qom.json               |   3 ++
+>  qemu-options.hx             |  58 ++++++++++++++++++++
+>  target/i386/cpu.c           |  83 +++++++++++++++++++++--------
+>  target/i386/cpu.h           |   4 +-
+>  15 files changed, 478 insertions(+), 45 deletions(-)
+>  create mode 100644 hw/core/smp-cache.c
+>  create mode 100644 include/hw/core/smp-cache.h
+> 
+> -- 
+> 2.34.1
+> 
 
