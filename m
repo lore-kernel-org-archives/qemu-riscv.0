@@ -4,93 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 598B8C3DA5D
-	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jul 2024 11:14:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A29F5C3DA5D
+	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jul 2024 11:56:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sVqzn-0002bc-1L; Mon, 22 Jul 2024 07:14:23 -0400
+	id 1sVreZ-0003Ji-E3; Mon, 22 Jul 2024 07:56:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sVqzk-0002Rz-6q
- for qemu-riscv@nongnu.org; Mon, 22 Jul 2024 07:14:20 -0400
-Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sVqzi-0004Jx-0M
- for qemu-riscv@nongnu.org; Mon, 22 Jul 2024 07:14:19 -0400
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-427b9dcbb09so31062595e9.3
- for <qemu-riscv@nongnu.org>; Mon, 22 Jul 2024 04:14:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721646856; x=1722251656; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=mrk2g2iMtnBRvtrBAoapMSBcMDfcCWKQff90zKvNuK8=;
- b=uH9Bt1diQUxDNNipwH2hOzfCbKNutV7bzf44MeMYBL+cYStDlFjT+V2b3sc9GF2dO3
- EekDqJSAJuZw76oVAXQqnjpaHMngyLWYAdIl8zDtBKHEJ3pRNiYb5uvSBH84QMO0388P
- iAXlTPTzr93jBLG8UL3CIJ2RqiFYjjrPgsV/PE6Uc7iONMCqkNqK6Ex3JyBYBM+wwx7h
- w5Kol6NFiWQakxH3qlC4Se4RgEiCk+4X976GiUZF/Y0LL/leo6wNGdjluUOSPZrRw4hy
- 1AZ6bowTsiBDBJxcBq8JZNvHNQCgZ9lI0u20bR6RymGwIw+YB+7W+DUkvnjOeHUJuLI5
- ew9Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721646856; x=1722251656;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=mrk2g2iMtnBRvtrBAoapMSBcMDfcCWKQff90zKvNuK8=;
- b=OvacOSBnlIgjJGuOLdkrFFXDxx+FXltPYiIm+p/8axzNdAdAURTXT3VjNqStAp/1AJ
- vkZyfkZXOshgy0EsVVFbWn/oLMtFmm+WFQouVmmmF0OtfiLFmd7gsT3dsNCcDcUI7GMh
- xoJopkjctGUEEKqXZBdgI8NHYYd73Q/FpPU/+LieIOvLtcre4A0k5DoIa9EgFI0Tl3v4
- paKaE14EkAlmkPzS5+0eAvVsYF7KMG8IGaX2YLigobGUn5hn9grqqWeYCSB22pwT53qK
- 2tBLJJdPt4ii/GjtDnNJlVqi+ruSEJwUxQzXi8q6bYA88wCDzRSzwzcBD1zklAxQoAm1
- x7jg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWKtJxDOGewitLxGg0t9+YrRK4S1XedZRf4mqyzS7c5iNMjBcU+cssq4UhLekyDx5CNYsh/t6qB9J4Kh+905SG7sa3If14=
-X-Gm-Message-State: AOJu0YwT/1lrpEUjIOfikvMxo0Lz3OsByFg59iANjaNeU91BHGKGks3V
- JF4QAdJmNoHrqy8YDYQVttbWuYc13s3c8I/h+gtZqIjE2+Y/GHFm9XIKa4RdMkQ=
-X-Google-Smtp-Source: AGHT+IHog/oFTJy6XYNf/ScBPInZxgsN2XaercaybmALj6e1X5srF1S4TLQ28yr2hOa93bnEzwBQ2g==
-X-Received: by 2002:a5d:5f8d:0:b0:368:445e:91cc with SMTP id
- ffacd0b85a97d-369bae13627mr5096890f8f.21.1721646855413; 
- Mon, 22 Jul 2024 04:14:15 -0700 (PDT)
-Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-368787ebd50sm8179498f8f.93.2024.07.22.04.14.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Jul 2024 04:14:09 -0700 (PDT)
-Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id CF7E962102;
- Mon, 22 Jul 2024 12:04:14 +0100 (BST)
-From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>, Anton Johansson <anjo@rev.ng>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Subject: [PULL 13/16] target/riscv: Restrict semihosting to TCG
-Date: Mon, 22 Jul 2024 12:04:10 +0100
-Message-Id: <20240722110413.118418-14-alex.bennee@linaro.org>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240722110413.118418-1-alex.bennee@linaro.org>
-References: <20240722110413.118418-1-alex.bennee@linaro.org>
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1sVreQ-00030k-Gc
+ for qemu-riscv@nongnu.org; Mon, 22 Jul 2024 07:56:22 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1sVreO-0005R0-RX
+ for qemu-riscv@nongnu.org; Mon, 22 Jul 2024 07:56:22 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1721649379;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=lYDl5sIhPvDgTfoHlN8PA/tdUOLQIuS/j96hYp8nn7w=;
+ b=R/ygNOOHV+il7H2upJcpLr1qTiex0Jk2kNGgurDLn0PU1dYIxKBk5rYAYXwthB85J9Fgw1
+ 06PjTdkmBkSUu2vYg4DurUuUZuGkVqO+oX/6XtF2ud37MnN5phkyCn47lydYW9yoYSbb0K
+ y7/swvO1GLc3oCTdWXyYisvut95PSKE=
+Received: from mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-665-aZ5uOBE9M22_s-WhrSY-7w-1; Mon,
+ 22 Jul 2024 07:56:15 -0400
+X-MC-Unique: aZ5uOBE9M22_s-WhrSY-7w-1
+Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 1ECAE1944B29; Mon, 22 Jul 2024 11:56:12 +0000 (UTC)
+Received: from blackfin.pond.sub.org (unknown [10.39.192.65])
+ by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 669573000188; Mon, 22 Jul 2024 11:56:10 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id 67E0E21E668F; Mon, 22 Jul 2024 13:56:08 +0200 (CEST)
+From: Markus Armbruster <armbru@redhat.com>
+To: Zhao Liu <zhao1.liu@intel.com>
+Cc: Daniel P . =?utf-8?Q?Berrang=C3=A9?= <berrange@redhat.com>,  Eduardo
+ Habkost
+ <eduardo@habkost.net>,  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,  Yanan Wang
+ <wangyanan55@huawei.com>,  "Michael S . Tsirkin" <mst@redhat.com>,  Paolo
+ Bonzini <pbonzini@redhat.com>,  Richard Henderson
+ <richard.henderson@linaro.org>,  Eric Blake <eblake@redhat.com>,  Marcelo
+ Tosatti <mtosatti@redhat.com>,  Alex =?utf-8?Q?Benn=C3=A9e?=
+ <alex.bennee@linaro.org>,
+ Peter Maydell <peter.maydell@linaro.org>,  Jonathan Cameron
+ <Jonathan.Cameron@huawei.com>,  Sia Jee Heng
+ <jeeheng.sia@starfivetech.com>,  qemu-devel@nongnu.org,
+ kvm@vger.kernel.org,  qemu-riscv@nongnu.org,  qemu-arm@nongnu.org,
+ Zhenyu Wang <zhenyu.z.wang@intel.com>,  Dapeng Mi
+ <dapeng1.mi@linux.intel.com>,  Yongwei Ma <yongwei.ma@intel.com>
+Subject: Re: [PATCH 1/8] hw/core: Make CPU topology enumeration arch-agnostic
+In-Reply-To: <20240704031603.1744546-2-zhao1.liu@intel.com> (Zhao Liu's
+ message of "Thu, 4 Jul 2024 11:15:56 +0800")
+References: <20240704031603.1744546-1-zhao1.liu@intel.com>
+ <20240704031603.1744546-2-zhao1.liu@intel.com>
+Date: Mon, 22 Jul 2024 13:56:08 +0200
+Message-ID: <87wmld4p47.fsf@pond.sub.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32f.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+Content-Type: text/plain
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -21
+X-Spam_score: -2.2
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.133,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -106,36 +97,40 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Philippe Mathieu-Daudé <philmd@linaro.org>
+Zhao Liu <zhao1.liu@intel.com> writes:
 
-Semihosting currently uses the TCG probe_access API. To prepare for
-encoding the TCG dependency in Kconfig, do not enable it unless TCG
-is available.
+> Cache topology needs to be defined based on CPU topology levels. Thus,
+> define CPU topology enumeration in qapi/machine.json to make it generic
+> for all architectures.
+>
+> To match the general topology naming style, rename CPU_TOPO_LEVEL_SMT
+> and CPU_TOPO_LEVEL_PACKAGE to CPU_TOPO_LEVEL_THREAD and
+> CPU_TOPO_LEVEL_SOCKET.
+>
+> Also, enumerate additional topology levels for non-i386 arches, and add
+> a CPU_TOPO_LEVEL_DEFAULT to help future smp-cache object de-compatibilize
+> arch-specific cache topology settings.
+>
+> Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
 
-Suggested-by: Paolo Bonzini <pbonzini@redhat.com>
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Anton Johansson <anjo@rev.ng>
-Message-Id: <20240717105723.58965-7-philmd@linaro.org>
-Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Message-Id: <20240718094523.1198645-14-alex.bennee@linaro.org>
+QAPI schema
+Acked-by: Markus Armbruster <armbru@redhat.com>
 
-diff --git a/target/riscv/Kconfig b/target/riscv/Kconfig
-index 5f30df22f2..c332616d36 100644
---- a/target/riscv/Kconfig
-+++ b/target/riscv/Kconfig
-@@ -1,9 +1,9 @@
- config RISCV32
-     bool
--    select ARM_COMPATIBLE_SEMIHOSTING # for do_common_semihosting()
-+    imply ARM_COMPATIBLE_SEMIHOSTING if TCG
-     select DEVICE_TREE # needed by boot.c
- 
- config RISCV64
-     bool
--    select ARM_COMPATIBLE_SEMIHOSTING # for do_common_semihosting()
-+    imply ARM_COMPATIBLE_SEMIHOSTING if TCG
-     select DEVICE_TREE # needed by boot.c
--- 
-2.39.2
+> ---
+> Changes since RFC v2:
+>  * Dropped cpu-topology.h and cpu-topology.c since QAPI has the helper
+>    (CpuTopologyLevel_str) to convert enum to string. (Markus)
+>  * Fixed text format in machine.json (CpuTopologyLevel naming, 2 spaces
+>    between sentences). (Markus)
+>  * Added a new level "default" to de-compatibilize some arch-specific
+>    topo settings. (Daniel)
+>  * Moved CpuTopologyLevel to qapi/machine-common.json, at where the
+>    cache enumeration and smp-cache object would be added.
+>    - If smp-cache object is defined in qapi/machine.json, storage-daemon
+>      will complain about the qmp cmds in qapi/machine.json during
+>      compiling.
+
+At some point, we may have to rethink the split between machine.json,
+machine-target.json, and machine-common.json.  Not this patch's problem.
 
 
