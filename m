@@ -4,96 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61441C3DA63
-	for <qemu-riscv@archiver.kernel.org>; Tue, 23 Jul 2024 06:56:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 733B1C3DA49
+	for <qemu-riscv@archiver.kernel.org>; Tue, 23 Jul 2024 10:15:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sW9Rh-0003Uj-AB; Tue, 23 Jul 2024 02:56:25 -0400
+	id 1sWCXi-000076-FS; Tue, 23 Jul 2024 06:14:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1sW9Rg-0003Tl-Bg
- for qemu-riscv@nongnu.org; Tue, 23 Jul 2024 02:56:24 -0400
-Received: from mail-lf1-x12f.google.com ([2a00:1450:4864:20::12f])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1sW9Rd-0007yi-M3
- for qemu-riscv@nongnu.org; Tue, 23 Jul 2024 02:56:24 -0400
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-52fc4388a64so1117959e87.1
- for <qemu-riscv@nongnu.org>; Mon, 22 Jul 2024 23:56:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1721717779; x=1722322579; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VSeZsR/zaG1TI5fyB6D5J5Z++8OL1hLqur9S1OD07Xw=;
- b=ItXFUshCh1oFPBBUgH+9P+GvUUFCGIfA1iPteNZqbCVafJ4KBJ4AoGF4pgS8L/GaP/
- XW9K9/6XGmR4ZUYwY54/wg7a7R6TBenR7nK2QfoGFa+Sve3JhTXNNd92ZGkMf7QAkkEj
- 5R1AUonJtJb1cKQo4OGftQrnq7M/qXNT1G3XeStjWgZKU22scWMmyohxzTY+/QwUvDaF
- xl6qs5nLikMxCirxoDrfF/oWtdQj+7w8rOf85YhZ69vi+UmIhj2TVNFbTEwWLgh+m0Hr
- O3Iv9tPKisfgOkodCIbpD0JNUerYULuFtq/doiOdqBGh989rRfS4re3N6jdzkrZfkDPg
- TvvA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721717779; x=1722322579;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=VSeZsR/zaG1TI5fyB6D5J5Z++8OL1hLqur9S1OD07Xw=;
- b=Mr0YVc3N6SZeRT5js6iLkj9mhf+/VQzGFvQqzKnGgFniXYtiQh81SMSVksN8jKi97F
- SqafrqZsdbCDXOAhLUqYsVEnM3/b/uwGmDWmqV4GrK5EY8GJT0g3t3gNrEmyPOC8mnCm
- N8L2LPq9j310BZJIZO0htzUEdOU4gj1SEkoUBpbu44uzr7j6eWX+Tld/sH/BMiIjw0yM
- c+VXndM2qh4LOeG3a+dS0qs/2Mrwa/XGmol4vlgiYx8983AOeRh98bZydlhLVMz3C/xr
- KCYeFUBwiaLJUSmPqK9prRkh62FjdSPCgOw9gQQcFRf/RpJfaKGs7FMkpUBpEIgZuIE6
- wUoA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXDkp2j8kO3oIC1gp066a3j5mcLYHHxGanXqOGJve7u1gCrNicF9PjBSFDwDZLbQOWEf6jbXn3lyMIU2kITsHgQyqvZryE=
-X-Gm-Message-State: AOJu0YzSGoPsxB4T7A0sbvYMSYXcFtYmBu+ZiXP3iStykSe3wV7lDXmD
- Wqvz3W8i31iocVv9+k5VBe72tjFSWwodl6fObX7jGy19x1e47nbqmQOP0GjBZUQ=
-X-Google-Smtp-Source: AGHT+IEkpspkicCyCs72PVOynJk524h991pdMEVZYly1g6pG7maHS1JKMtWz6zeZUEvspytopBSFAw==
-X-Received: by 2002:a05:6512:684:b0:52e:9670:e40b with SMTP id
- 2adb3069b0e04-52fc404f3f7mr1414713e87.39.1721717779035; 
- Mon, 22 Jul 2024 23:56:19 -0700 (PDT)
-Received: from mail-lf1-f52.google.com (mail-lf1-f52.google.com.
- [209.85.167.52]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-52ef55781f6sm1481107e87.293.2024.07.22.23.56.18
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 22 Jul 2024 23:56:18 -0700 (PDT)
-Received: by mail-lf1-f52.google.com with SMTP id
- 2adb3069b0e04-52f01ec08d6so2686904e87.2; 
- Mon, 22 Jul 2024 23:56:18 -0700 (PDT)
-X-Forwarded-Encrypted: i=1;
- AJvYcCWszTN+/ggZzEMaqi0ZTyEb3INc+wPt7S8bWrzTquyfi3NVijTq+xF4vie8YH7Xs+YMqz7o1mWbYVT+nF3rPloFjDn1Trk=
-X-Received: by 2002:a05:6512:2215:b0:52c:d13e:3785 with SMTP id
- 2adb3069b0e04-52fc404de47mr1452596e87.30.1721717778466; Mon, 22 Jul 2024
- 23:56:18 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1sWCXe-0008TS-01
+ for qemu-riscv@nongnu.org; Tue, 23 Jul 2024 06:14:46 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1sWCXa-0000dG-P4
+ for qemu-riscv@nongnu.org; Tue, 23 Jul 2024 06:14:45 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1721729681;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=u1Ky8nShwUmqI5mAf40wP6UVa7xKKOXsCs1JoLQsga0=;
+ b=Ml/lR8iZZEALY32DqU/pMOvvyVbzxtm+uqnPbC93d7w7uJ0S5ju07ytwdHiLenqw1CB+y9
+ gpDL+drse3ddp4pUn0XI00+csgHEP2wky8iluXXH/uICN37i2J4mFQS9153uhrlKW12dfh
+ vni96KN3JFjyQFE79sSTvZ2UAvt54L4=
+Received: from mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-607-oacb-EhlMuG1IpFQzC6EFg-1; Tue,
+ 23 Jul 2024 06:14:37 -0400
+X-MC-Unique: oacb-EhlMuG1IpFQzC6EFg-1
+Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 1BD0D1955F43; Tue, 23 Jul 2024 10:14:34 +0000 (UTC)
+Received: from blackfin.pond.sub.org (unknown [10.39.192.65])
+ by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id B272D3000192; Tue, 23 Jul 2024 10:14:32 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id 9E80221E6682; Tue, 23 Jul 2024 12:14:30 +0200 (CEST)
+From: Markus Armbruster <armbru@redhat.com>
+To: Zhao Liu <zhao1.liu@intel.com>
+Cc: Daniel P . =?utf-8?Q?Berrang=C3=A9?= <berrange@redhat.com>,  Eduardo
+ Habkost
+ <eduardo@habkost.net>,  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,  Yanan Wang
+ <wangyanan55@huawei.com>,  "Michael S . Tsirkin" <mst@redhat.com>,  Paolo
+ Bonzini <pbonzini@redhat.com>,  Richard Henderson
+ <richard.henderson@linaro.org>,  Eric Blake <eblake@redhat.com>,  Marcelo
+ Tosatti <mtosatti@redhat.com>,  Alex =?utf-8?Q?Benn=C3=A9e?=
+ <alex.bennee@linaro.org>,
+ Peter Maydell <peter.maydell@linaro.org>,  Jonathan Cameron
+ <Jonathan.Cameron@huawei.com>,  Sia Jee Heng
+ <jeeheng.sia@starfivetech.com>,  qemu-devel@nongnu.org,
+ kvm@vger.kernel.org,  qemu-riscv@nongnu.org,  qemu-arm@nongnu.org,
+ Zhenyu Wang <zhenyu.z.wang@intel.com>,  Dapeng Mi
+ <dapeng1.mi@linux.intel.com>,  Yongwei Ma <yongwei.ma@intel.com>
+Subject: Re: [PATCH 1/8] hw/core: Make CPU topology enumeration arch-agnostic
+In-Reply-To: <Zp5mRrjuZWnE+9gz@intel.com> (Zhao Liu's message of "Mon, 22 Jul
+ 2024 22:01:42 +0800")
+References: <20240704031603.1744546-1-zhao1.liu@intel.com>
+ <20240704031603.1744546-2-zhao1.liu@intel.com>
+ <875xsx4l13.fsf@pond.sub.org> <Zp5mRrjuZWnE+9gz@intel.com>
+Date: Tue, 23 Jul 2024 12:14:30 +0200
+Message-ID: <87ed7kwh2x.fsf@pond.sub.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-References: <20240722175004.23666-1-jason.chien@sifive.com>
-In-Reply-To: <20240722175004.23666-1-jason.chien@sifive.com>
-From: Frank Chang <frank.chang@sifive.com>
-Date: Tue, 23 Jul 2024 14:56:07 +0800
-X-Gmail-Original-Message-ID: <CANzO1D1S3ZJ20zFVDFPKJ_9R6ezWy6tzUEUzzW0Hkq_JdfmumA@mail.gmail.com>
-Message-ID: <CANzO1D1S3ZJ20zFVDFPKJ_9R6ezWy6tzUEUzzW0Hkq_JdfmumA@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Add a property to set vl to ceil(AVL/2)
-To: Jason Chien <jason.chien@sifive.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::12f;
- envelope-from=frank.chang@sifive.com; helo=mail-lf1-x12f.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+Content-Type: text/plain
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -21
+X-Spam_score: -2.2
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.133,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -109,66 +98,115 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Reviewed-by: Frank Chang <frank.chang@sifive.com>
+Zhao Liu <zhao1.liu@intel.com> writes:
 
-Jason Chien <jason.chien@sifive.com> =E6=96=BC 2024=E5=B9=B47=E6=9C=8823=E6=
-=97=A5 =E9=80=B1=E4=BA=8C =E4=B8=8A=E5=8D=881:51=E5=AF=AB=E9=81=93=EF=BC=9A
+> Hi Markus,
 >
-> RVV spec allows implementations to set vl with values within
-> [ceil(AVL/2),VLMAX] when VLMAX < AVL < 2*VLMAX. This commit adds a
-> property "rvv_vl_half_avl" to enable setting vl =3D ceil(AVL/2). This
-> behavior helps identify compiler issues and bugs.
+> On Mon, Jul 22, 2024 at 03:24:24PM +0200, Markus Armbruster wrote:
+>> Date: Mon, 22 Jul 2024 15:24:24 +0200
+>> From: Markus Armbruster <armbru@redhat.com>
+>> Subject: Re: [PATCH 1/8] hw/core: Make CPU topology enumeration
+>>  arch-agnostic
+>> 
+>> One little thing...
+>> 
+>> Zhao Liu <zhao1.liu@intel.com> writes:
+>> 
+>> > Cache topology needs to be defined based on CPU topology levels. Thus,
+>> > define CPU topology enumeration in qapi/machine.json to make it generic
+>> > for all architectures.
+>> >
+>> > To match the general topology naming style, rename CPU_TOPO_LEVEL_SMT
+>> > and CPU_TOPO_LEVEL_PACKAGE to CPU_TOPO_LEVEL_THREAD and
+>> > CPU_TOPO_LEVEL_SOCKET.
+>> >
+>> > Also, enumerate additional topology levels for non-i386 arches, and add
+>> > a CPU_TOPO_LEVEL_DEFAULT to help future smp-cache object de-compatibilize
+>> > arch-specific cache topology settings.
+>> >
+>> > Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
+>> 
+>> [...]
+>> 
+>> > diff --git a/qapi/machine-common.json b/qapi/machine-common.json
+>> > index fa6bd71d1280..82413c668bdb 100644
+>> > --- a/qapi/machine-common.json
+>> > +++ b/qapi/machine-common.json
+>> > @@ -5,7 +5,7 @@
+>> >  # See the COPYING file in the top-level directory.
+>> >  
+>> >  ##
+>> > -# = Machines S390 data types
+>> > +# = Common machine types
+>> >  ##
+>> >  
+>> >  ##
+>> > @@ -19,3 +19,48 @@
+>> >  { 'enum': 'CpuS390Entitlement',
+>> >    'prefix': 'S390_CPU_ENTITLEMENT',
+>> >    'data': [ 'auto', 'low', 'medium', 'high' ] }
+>> > +
+>> > +##
+>> > +# @CpuTopologyLevel:
+>> > +#
+>> > +# An enumeration of CPU topology levels.
+>> > +#
+>> > +# @invalid: Invalid topology level.
+>> > +#
+>> > +# @thread: thread level, which would also be called SMT level or
+>> > +#     logical processor level.  The @threads option in
+>> > +#     SMPConfiguration is used to configure the topology of this
+>> > +#     level.
+>> > +#
+>> > +# @core: core level.  The @cores option in SMPConfiguration is used
+>> > +#     to configure the topology of this level.
+>> > +#
+>> > +# @module: module level.  The @modules option in SMPConfiguration is
+>> > +#     used to configure the topology of this level.
+>> > +#
+>> > +# @cluster: cluster level.  The @clusters option in SMPConfiguration
+>> > +#     is used to configure the topology of this level.
+>> > +#
+>> > +# @die: die level.  The @dies option in SMPConfiguration is used to
+>> > +#     configure the topology of this level.
+>> > +#
+>> > +# @socket: socket level, which would also be called package level.
+>> > +#     The @sockets option in SMPConfiguration is used to configure
+>> > +#     the topology of this level.
+>> > +#
+>> > +# @book: book level.  The @books option in SMPConfiguration is used
+>> > +#     to configure the topology of this level.
+>> > +#
+>> > +# @drawer: drawer level.  The @drawers option in SMPConfiguration is
+>> > +#     used to configure the topology of this level.
+>> > +#
+>> > +# @default: default level.  Some architectures will have default
+>> > +#     topology settings (e.g., cache topology), and this special
+>> > +#     level means following the architecture-specific settings.
+>> > +#
+>> > +# Since: 9.1
+>> > +##
+>> > +{ 'enum': 'CpuTopologyLevel',
+>> > +  'prefix': 'CPU_TOPO_LEVEL',
+>> 
+>> Why set a 'prefix'?
+>> 
 >
-> Signed-off-by: Jason Chien <jason.chien@sifive.com>
-> ---
->  target/riscv/cpu.c           | 1 +
->  target/riscv/cpu_cfg.h       | 1 +
->  target/riscv/vector_helper.c | 2 ++
->  3 files changed, 4 insertions(+)
+> Because my previous i386 commit 6ddeb0ec8c29 ("i386/cpu: Introduce bitmap
+> to cache available CPU topology levels") introduced the level
+> enumeration with such prefix. For naming consistency, and to shorten the
+> length of the name, I've used the same prefix here as well.
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index a90808a3ba..8f21171ffa 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -2687,6 +2687,7 @@ static Property riscv_cpu_properties[] =3D {
->
->      DEFINE_PROP_BOOL("rvv_ta_all_1s", RISCVCPU, cfg.rvv_ta_all_1s, false=
-),
->      DEFINE_PROP_BOOL("rvv_ma_all_1s", RISCVCPU, cfg.rvv_ma_all_1s, false=
-),
-> +    DEFINE_PROP_BOOL("rvv_vl_half_avl", RISCVCPU, cfg.rvv_vl_half_avl, f=
-alse),
->
->      /*
->       * write_misa() is marked as experimental for now so mark
-> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-> index 8b272fb826..96fe26d4ea 100644
-> --- a/target/riscv/cpu_cfg.h
-> +++ b/target/riscv/cpu_cfg.h
-> @@ -127,6 +127,7 @@ struct RISCVCPUConfig {
->      bool ext_smepmp;
->      bool rvv_ta_all_1s;
->      bool rvv_ma_all_1s;
-> +    bool rvv_vl_half_avl;
->
->      uint32_t mvendorid;
->      uint64_t marchid;
-> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index 1b4d5a8e37..825312552b 100644
-> --- a/target/riscv/vector_helper.c
-> +++ b/target/riscv/vector_helper.c
-> @@ -75,6 +75,8 @@ target_ulong HELPER(vsetvl)(CPURISCVState *env, target_=
-ulong s1,
->      vlmax =3D vext_get_vlmax(cpu->cfg.vlenb, vsew, lmul);
->      if (s1 <=3D vlmax) {
->          vl =3D s1;
-> +    } else if (s1 < 2 * vlmax && cpu->cfg.rvv_vl_half_avl) {
-> +        vl =3D (s1 + 1) >> 1;
->      } else {
->          vl =3D vlmax;
->      }
-> --
-> 2.43.2
->
->
+> I've sensed that you don't like the TOPO abbreviation and I'll remove the
+> prefix :-).
+
+Consistency is good, but I'd rather achieve it by consistently using
+"topology".
+
+I never liked the 'prefix' feature much.  We have it because the mapping
+from camel case to upper case with underscores is heuristical, and can
+result in something undesirable.  See commit 351d36e454c (qapi: allow
+override of default enum prefix naming).  Using it just to shorten
+generated identifiers is a bad idea.
+
 
