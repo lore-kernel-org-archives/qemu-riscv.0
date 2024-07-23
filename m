@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6624C3DA49
-	for <qemu-riscv@archiver.kernel.org>; Tue, 23 Jul 2024 23:32:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B22BFC3DA63
+	for <qemu-riscv@archiver.kernel.org>; Tue, 23 Jul 2024 23:32:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sWOy1-0002a7-An; Tue, 23 Jul 2024 19:30:49 -0400
+	id 1sWOyU-00050J-0R; Tue, 23 Jul 2024 19:31:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1sWOxd-00021S-3M
- for qemu-riscv@nongnu.org; Tue, 23 Jul 2024 19:30:30 -0400
-Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
+ id 1sWOxz-0002Tu-UL
+ for qemu-riscv@nongnu.org; Tue, 23 Jul 2024 19:30:47 -0400
+Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1sWOxY-0007nl-SG
- for qemu-riscv@nongnu.org; Tue, 23 Jul 2024 19:30:24 -0400
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-1fc491f9b55so11476585ad.3
- for <qemu-riscv@nongnu.org>; Tue, 23 Jul 2024 16:30:20 -0700 (PDT)
+ id 1sWOxt-0007zd-PW
+ for qemu-riscv@nongnu.org; Tue, 23 Jul 2024 19:30:45 -0400
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-2cb510cd097so3591919a91.1
+ for <qemu-riscv@nongnu.org>; Tue, 23 Jul 2024 16:30:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1721777419; x=1722382219;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1721777439; x=1722382239;
  darn=nongnu.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ZgJi5SQCSbMcc3JoLYiq60wkxC/rvzt57z6OyFhCuXg=;
- b=KACedaErwKC0sgOzESimiqM0prM8urh4rQEMH8LtUsRbKZySjvysEq/1FbXIgiMbq3
- Ut57Zv4Itvi1cZSFM3d3VSKLbbbSbnFRzGyQRiYK/XHRrEdE64/tpwPjY+GvPD7CMrxs
- S1HFediU6JgEDrtnzU94askZ0C4FmlLKx2lo6eJdLz1GvoDnDv0iCXyfw11kQA76yFOw
- +G0IY2EkMGUfEMh/6nTCQ+aIZz52peqJNm78RaXI8Feq1Uj89iTJnTaY+dBSp91MUWoG
- wjH0BdiayIMHqNV2w6GIQHU+NYwVMqoM8D23jUAvYkhDrmoN+W1Z77HmiYNwOq/Ymzwi
- xkRQ==
+ :reply-to; bh=xoi8tQlmstuJQE5BtIWLC+NlXYaPeyqDg2JVEoxweos=;
+ b=gGqnxuWvMvnUep896uXT7C50W3a4UdQRkZV36bHbxKdScPrRQOU7SfszWdb3gJSQ9F
+ ellMISAEhvZKfIXzKkVh0SN1LcAfNeMcdJTa+R1q3D9InSrwWmy8IABwiP9587Cwv4Ej
+ ZYoEO+PfueQMT/zr2faK8+W7EvlCtLIQxHhm7ZCNiClDT4bI2uM+CyAJ/w151/snPCK+
+ /7jQMu+bQv6A5AXVP5zD4Ry6n+2IcRWnXFuIPgM/aOR3an7n+w1fRlW1FqaYZdHco2Xg
+ mAqjJjC4irxzm2tb6+CuVtavcrF+a9ukiOQqSnSXMvaqlA8oaOiwAJUsrsrM6VZRxbvC
+ +Ddw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721777419; x=1722382219;
+ d=1e100.net; s=20230601; t=1721777439; x=1722382239;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ZgJi5SQCSbMcc3JoLYiq60wkxC/rvzt57z6OyFhCuXg=;
- b=jYdMwY5PN33topSfYbTNUfm1dLcLuj/WbE6VkQh1q6yeH82xm8Lm7qrf3fr6kI1Mea
- 5gsz/nS6MyvKnr+70ezRgZSJHTyCXvM91OvV2yFdpkp2pk5P8nGAsV3turHlHdjRTuL1
- kdr9fqgukLR9M+14DAMpW8DTPWFOqhlqB2bMEuLuX5JT5DLLTs3siZ5YiHQKZ/oYlapf
- hlhlHApqA7Pwf5BtTycnsURdKyp9DlItJxH772N1KPjzfSA7u0+ZTGEFbo+27XDwaJTO
- F6eS3+Zpdl4fOhAzG0zAG+dYnOLVvSkuhmI7uQHs2dqkceW2llBfPvgOkHlyIs7+e66G
- W4kQ==
-X-Gm-Message-State: AOJu0YxnKbtJbuUMNJzgrOf/9eRvC21U1P0GY+mIE+tg645mW/bYIPfr
- oZZz+mlhP9RApir4uJX6FZirPcBqQb9YluhA3dgqDMv77EzVGKVwaUjpTbH1dwE=
-X-Google-Smtp-Source: AGHT+IH9mMKm7G+VL4TF6/KVmF34yzCRT45M12U+7GwjiBVgJ5/6n8D+tV0UJaSd5ggsmRVTUMpitw==
-X-Received: by 2002:a17:90b:1090:b0:2c9:5f1e:1a62 with SMTP id
- 98e67ed59e1d1-2cdaf779b22mr1373930a91.36.1721777419203; 
- Tue, 23 Jul 2024 16:30:19 -0700 (PDT)
+ bh=xoi8tQlmstuJQE5BtIWLC+NlXYaPeyqDg2JVEoxweos=;
+ b=H4i8k8e3Pb3jIVQEonM53gmBXWNG3DHfs6zymvjrOrIhN4B1r7Bfs7iQx/UdanIa3V
+ dFHnw9+n4whcQUpE74tPEs83eE0VBGx+3ztkgoW1ZgJn6KhJAn8E/z3DQ0r/l4hPY4vL
+ Rl5OwDqwn3cJ6UQETJBSYmW/E7K2GebvrIs9UbgzPx6Qwf4N0sHhSjI6cRY5lPDTo3m8
+ mu+R2zzCQ3BVoWvHFVXvLjYnXPlX1Hd39zfKy8EhYsDOqypuH7QAL4rqmj1nGjXCebKb
+ ZZ/N7Tfw2XnoeqCqqlct2nggPuNlsFzCHV47FIRo++TwxqsF9K8XO4p9MFyNKwrukHqA
+ FmcA==
+X-Gm-Message-State: AOJu0Yx8ikojX7QIYx6d6NdGt+FbGmNELdxV2XEF0IGwNV9l3coFT7NL
+ NYfHaqlazZZibq6Mvrn+6hxz302DJvUqVgudGxWWQ7cHM4DyTG6E45o5HhU35vA=
+X-Google-Smtp-Source: AGHT+IF6UbMkHQ+IeO2x0d8mYCC8dzs0JCjlRdGh0Lg3sEh4YYIWpQwu3frc/rBq7VIcgYvwRWOJnQ==
+X-Received: by 2002:a17:90a:f28e:b0:2cb:e429:f525 with SMTP id
+ 98e67ed59e1d1-2cdb51a6543mr585954a91.33.1721777439152; 
+ Tue, 23 Jul 2024 16:30:39 -0700 (PDT)
 Received: from atishp.ba.rivosinc.com ([64.71.180.162])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2cdb74e894csm179217a91.41.2024.07.23.16.30.17
+ 98e67ed59e1d1-2cdb74e894csm179217a91.41.2024.07.23.16.30.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 23 Jul 2024 16:30:18 -0700 (PDT)
+ Tue, 23 Jul 2024 16:30:38 -0700 (PDT)
 From: Atish Patra <atishp@rivosinc.com>
-Date: Tue, 23 Jul 2024 16:29:59 -0700
-Subject: [PATCH v2 02/13] target/riscv: Decouple AIA processing from
- xiselect and xireg
+Date: Tue, 23 Jul 2024 16:30:10 -0700
+Subject: [PATCH v2 13/13] target/riscv: Enable PMU related extensions to
+ preferred rule
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240723-counter_delegation-v2-2-c4170a5348ca@rivosinc.com>
+Message-Id: <20240723-counter_delegation-v2-13-c4170a5348ca@rivosinc.com>
 References: <20240723-counter_delegation-v2-0-c4170a5348ca@rivosinc.com>
 In-Reply-To: <20240723-counter_delegation-v2-0-c4170a5348ca@rivosinc.com>
 To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: palmer@dabbelt.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
  bin.meng@windriver.com, dbarboza@ventanamicro.com, alistair.francis@wdc.com
 X-Mailer: b4 0.15-dev-13183
-Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
- envelope-from=atishp@rivosinc.com; helo=mail-pl1-x630.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
+ envelope-from=atishp@rivosinc.com; helo=mail-pj1-x1033.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -95,295 +95,52 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Kaiwen Xue <kaiwenx@rivosinc.com>
+Counter delegation/configuration extension requires the following
+extensions to be enabled.
 
-Since xiselect and xireg also will be of use in sxcsrind, AIA should
-have its own separated interface when those CSRs are accessed.
+1. Smcdeleg - To enable counter delegation from M to S
+2. S[m|s]csrind - To enable indirect access CSRs
+3. Smstateen - Indirect CSR extensions depend on it.
+4. Sscofpmf - To enable counter overflow feature
+5. S[m|s]aia - To enable counter overflow feature in virtualization
+6. Smcntrpmf - To enable privilege mode filtering for cycle/instret
+
+While first 3 are mandatory to enable the counter delegation,
+next 3 set of extension are preferred to enable all the PMU related
+features. That's why, enable all of these if Ssccfg extension is
+enabled from the commandline.
 
 Signed-off-by: Atish Patra <atishp@rivosinc.com>
-Signed-off-by: Kaiwen Xue <kaiwenx@rivosinc.com>
 ---
- target/riscv/csr.c | 165 ++++++++++++++++++++++++++++++++++++++++++++---------
- 1 file changed, 139 insertions(+), 26 deletions(-)
+ target/riscv/cpu.c | 14 +++++++++++++-
+ 1 file changed, 13 insertions(+), 1 deletion(-)
 
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index ea3560342c4f..58be8bc3cc8c 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -29,6 +29,7 @@
- #include "sysemu/cpu-timers.h"
- #include "qemu/guest-random.h"
- #include "qapi/error.h"
-+#include <stdbool.h>
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 22ba43c7ff2a..abebfcc46dea 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -2665,8 +2665,20 @@ RISCVCPUImpliedExtsRule *riscv_multi_ext_implied_rules[] = {
+     NULL
+ };
  
- /* CSR function table public API */
- void riscv_get_csr_ops(int csrno, riscv_csr_operations *ops)
-@@ -286,6 +287,15 @@ static RISCVException aia_any32(CPURISCVState *env, int csrno)
-     return any32(env, csrno);
- }
- 
-+static RISCVException csrind_or_aia_any(CPURISCVState *env, int csrno)
-+{
-+    if (!riscv_cpu_cfg(env)->ext_smaia && !riscv_cpu_cfg(env)->ext_smcsrind) {
-+        return RISCV_EXCP_ILLEGAL_INST;
-+    }
++static RISCVCPUPreferredExtsRule SSCCFG_PREFERRED = {
++    .ext = CPU_CFG_OFFSET(ext_ssccfg),
++    .preferred_multi_exts = {
++        CPU_CFG_OFFSET(ext_smcsrind), CPU_CFG_OFFSET(ext_sscsrind),
++        CPU_CFG_OFFSET(ext_ssaia), CPU_CFG_OFFSET(ext_smaia),
++        CPU_CFG_OFFSET(ext_smstateen), CPU_CFG_OFFSET(ext_sscofpmf),
++        CPU_CFG_OFFSET(ext_smcntrpmf), CPU_CFG_OFFSET(ext_smcdeleg),
 +
-+    return any(env, csrno);
-+}
++        RISCV_PREFRRED_EXTS_RULE_END
++    },
++};
 +
- static RISCVException smode(CPURISCVState *env, int csrno)
- {
-     if (riscv_has_ext(env, RVS)) {
-@@ -322,6 +332,30 @@ static RISCVException aia_smode32(CPURISCVState *env, int csrno)
-     return smode32(env, csrno);
- }
+ RISCVCPUPreferredExtsRule *riscv_multi_ext_preferred_rules[] = {
+-    NULL
++    &SSCCFG_PREFERRED, NULL
+ };
  
-+static bool csrind_extensions_present(CPURISCVState *env)
-+{
-+    return riscv_cpu_cfg(env)->ext_smcsrind || riscv_cpu_cfg(env)->ext_sscsrind;
-+}
-+
-+static bool aia_extensions_present(CPURISCVState *env)
-+{
-+    return riscv_cpu_cfg(env)->ext_smaia || riscv_cpu_cfg(env)->ext_ssaia;
-+}
-+
-+static bool csrind_or_aia_extensions_present(CPURISCVState *env)
-+{
-+    return csrind_extensions_present(env) || aia_extensions_present(env);
-+}
-+
-+static RISCVException csrind_or_aia_smode(CPURISCVState *env, int csrno)
-+{
-+    if (!csrind_or_aia_extensions_present(env)) {
-+        return RISCV_EXCP_ILLEGAL_INST;
-+    }
-+
-+    return smode(env, csrno);
-+}
-+
- static RISCVException hmode(CPURISCVState *env, int csrno)
- {
-     if (riscv_has_ext(env, RVH)) {
-@@ -341,6 +375,15 @@ static RISCVException hmode32(CPURISCVState *env, int csrno)
- 
- }
- 
-+static RISCVException csrind_or_aia_hmode(CPURISCVState *env, int csrno)
-+{
-+    if (!csrind_or_aia_extensions_present(env)) {
-+        return RISCV_EXCP_ILLEGAL_INST;
-+    }
-+
-+    return hmode(env, csrno);
-+}
-+
- static RISCVException umode(CPURISCVState *env, int csrno)
- {
-     if (riscv_has_ext(env, RVU)) {
-@@ -1928,6 +1971,22 @@ static int aia_xlate_vs_csrno(CPURISCVState *env, int csrno)
-     };
- }
- 
-+static int csrind_xlate_vs_csrno(CPURISCVState *env, int csrno)
-+{
-+    if (!env->virt_enabled) {
-+        return csrno;
-+    }
-+
-+    switch (csrno) {
-+    case CSR_SISELECT:
-+        return CSR_VSISELECT;
-+    case CSR_SIREG:
-+        return CSR_VSIREG;
-+    default:
-+        return csrno;
-+    };
-+}
-+
- static RISCVException rmw_xiselect(CPURISCVState *env, int csrno,
-                                    target_ulong *val, target_ulong new_val,
-                                    target_ulong wr_mask)
-@@ -1935,7 +1994,7 @@ static RISCVException rmw_xiselect(CPURISCVState *env, int csrno,
-     target_ulong *iselect;
- 
-     /* Translate CSR number for VS-mode */
--    csrno = aia_xlate_vs_csrno(env, csrno);
-+    csrno = csrind_xlate_vs_csrno(env, csrno);
- 
-     /* Find the iselect CSR based on CSR number */
-     switch (csrno) {
-@@ -1964,6 +2023,12 @@ static RISCVException rmw_xiselect(CPURISCVState *env, int csrno,
-     return RISCV_EXCP_NONE;
- }
- 
-+static bool xiselect_aia_range(target_ulong isel)
-+{
-+    return (ISELECT_IPRIO0 <= isel && isel <= ISELECT_IPRIO15) ||
-+           (ISELECT_IMSIC_FIRST <= isel && isel <= ISELECT_IMSIC_LAST);
-+}
-+
- static int rmw_iprio(target_ulong xlen,
-                      target_ulong iselect, uint8_t *iprio,
-                      target_ulong *val, target_ulong new_val,
-@@ -2009,45 +2074,44 @@ static int rmw_iprio(target_ulong xlen,
-     return 0;
- }
- 
--static RISCVException rmw_xireg(CPURISCVState *env, int csrno,
--                                target_ulong *val, target_ulong new_val,
--                                target_ulong wr_mask)
-+static RISCVException rmw_xireg_aia(CPURISCVState *env, int csrno,
-+                         target_ulong isel, target_ulong *val,
-+                         target_ulong new_val, target_ulong wr_mask)
- {
--    bool virt, isel_reserved;
--    uint8_t *iprio;
-+    bool virt = false, isel_reserved = false;
-     int ret = -EINVAL;
--    target_ulong priv, isel, vgein;
--
--    /* Translate CSR number for VS-mode */
--    csrno = aia_xlate_vs_csrno(env, csrno);
-+    uint8_t *iprio;
-+    target_ulong priv, vgein;
- 
--    /* Decode register details from CSR number */
--    virt = false;
--    isel_reserved = false;
-+    /* VS-mode CSR number passed in has already been translated */
-     switch (csrno) {
-     case CSR_MIREG:
-+        if (!riscv_cpu_cfg(env)->ext_smaia) {
-+            goto done;
-+        }
-         iprio = env->miprio;
--        isel = env->miselect;
-         priv = PRV_M;
-         break;
-     case CSR_SIREG:
--        if (env->priv == PRV_S && env->mvien & MIP_SEIP &&
-+        if (!riscv_cpu_cfg(env)->ext_ssaia ||
-+            (env->priv == PRV_S && env->mvien & MIP_SEIP &&
-             env->siselect >= ISELECT_IMSIC_EIDELIVERY &&
--            env->siselect <= ISELECT_IMSIC_EIE63) {
-+            env->siselect <= ISELECT_IMSIC_EIE63)) {
-             goto done;
-         }
-         iprio = env->siprio;
--        isel = env->siselect;
-         priv = PRV_S;
-         break;
-     case CSR_VSIREG:
-+        if (!riscv_cpu_cfg(env)->ext_ssaia) {
-+            goto done;
-+        }
-         iprio = env->hviprio;
--        isel = env->vsiselect;
-         priv = PRV_S;
-         virt = true;
-         break;
-     default:
--         goto done;
-+        goto done;
-     };
- 
-     /* Find the selected guest interrupt file */
-@@ -2078,10 +2142,54 @@ static RISCVException rmw_xireg(CPURISCVState *env, int csrno,
-     }
- 
- done:
-+    /*
-+     * If AIA is not enabled, illegal instruction exception is always
-+     * returned regardless of whether we are in VS-mode or not
-+     */
-     if (ret) {
-         return (env->virt_enabled && virt && !isel_reserved) ?
-                RISCV_EXCP_VIRT_INSTRUCTION_FAULT : RISCV_EXCP_ILLEGAL_INST;
-     }
-+
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException rmw_xireg(CPURISCVState *env, int csrno,
-+                                target_ulong *val, target_ulong new_val,
-+                                target_ulong wr_mask)
-+{
-+    bool virt = false;
-+    int ret = -EINVAL;
-+    target_ulong isel;
-+
-+    /* Translate CSR number for VS-mode */
-+    csrno = csrind_xlate_vs_csrno(env, csrno);
-+
-+    /* Decode register details from CSR number */
-+    switch (csrno) {
-+    case CSR_MIREG:
-+        isel = env->miselect;
-+        break;
-+    case CSR_SIREG:
-+        isel = env->siselect;
-+        break;
-+    case CSR_VSIREG:
-+        isel = env->vsiselect;
-+        virt = true;
-+        break;
-+    default:
-+         goto done;
-+    };
-+
-+    if (xiselect_aia_range(isel)) {
-+        return rmw_xireg_aia(env, csrno, isel, val, new_val, wr_mask);
-+    }
-+
-+done:
-+    if (ret) {
-+        return (env->virt_enabled && virt) ?
-+               RISCV_EXCP_VIRT_INSTRUCTION_FAULT : RISCV_EXCP_ILLEGAL_INST;
-+    }
-     return RISCV_EXCP_NONE;
- }
- 
-@@ -4981,8 +5089,10 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-     [CSR_MIP]      = { "mip",      any,  NULL,    NULL, rmw_mip        },
- 
-     /* Machine-Level Window to Indirectly Accessed Registers (AIA) */
--    [CSR_MISELECT] = { "miselect", aia_any,   NULL, NULL,    rmw_xiselect },
--    [CSR_MIREG]    = { "mireg",    aia_any,   NULL, NULL,    rmw_xireg },
-+    [CSR_MISELECT] = { "miselect", csrind_or_aia_any,   NULL, NULL,
-+                       rmw_xiselect                                    },
-+    [CSR_MIREG]    = { "mireg",    csrind_or_aia_any,   NULL, NULL,
-+                       rmw_xireg                                       },
- 
-     /* Machine-Level Interrupts (AIA) */
-     [CSR_MTOPEI]   = { "mtopei",   aia_any, NULL, NULL, rmw_xtopei },
-@@ -5100,8 +5210,10 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-     [CSR_SATP]     = { "satp",     satp, read_satp,     write_satp     },
- 
-     /* Supervisor-Level Window to Indirectly Accessed Registers (AIA) */
--    [CSR_SISELECT]   = { "siselect",   aia_smode, NULL, NULL, rmw_xiselect },
--    [CSR_SIREG]      = { "sireg",      aia_smode, NULL, NULL, rmw_xireg },
-+    [CSR_SISELECT]   = { "siselect",   csrind_or_aia_smode, NULL, NULL,
-+                         rmw_xiselect                                       },
-+    [CSR_SIREG]      = { "sireg",      csrind_or_aia_smode, NULL, NULL,
-+                         rmw_xireg                                          },
- 
-     /* Supervisor-Level Interrupts (AIA) */
-     [CSR_STOPEI]     = { "stopei",     aia_smode, NULL, NULL, rmw_xtopei },
-@@ -5180,9 +5292,10 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-     /*
-      * VS-Level Window to Indirectly Accessed Registers (H-extension with AIA)
-      */
--    [CSR_VSISELECT]   = { "vsiselect",   aia_hmode, NULL, NULL,
--                          rmw_xiselect                                     },
--    [CSR_VSIREG]      = { "vsireg",      aia_hmode, NULL, NULL, rmw_xireg  },
-+    [CSR_VSISELECT]   = { "vsiselect",   csrind_or_aia_hmode, NULL, NULL,
-+                          rmw_xiselect                                      },
-+    [CSR_VSIREG]      = { "vsireg",      csrind_or_aia_hmode, NULL, NULL,
-+                          rmw_xireg                                         },
- 
-     /* VS-Level Interrupts (H-extension with AIA) */
-     [CSR_VSTOPEI]     = { "vstopei",     aia_hmode, NULL, NULL, rmw_xtopei },
+ static Property riscv_cpu_properties[] = {
 
 -- 
 2.34.1
