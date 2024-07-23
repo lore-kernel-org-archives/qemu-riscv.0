@@ -4,79 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66B04C3DA63
-	for <qemu-riscv@archiver.kernel.org>; Tue, 23 Jul 2024 06:00:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61441C3DA63
+	for <qemu-riscv@archiver.kernel.org>; Tue, 23 Jul 2024 06:56:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sW8Z4-0007LC-OU; Tue, 23 Jul 2024 02:00:00 -0400
+	id 1sW9Rh-0003Uj-AB; Tue, 23 Jul 2024 02:56:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sW8Yu-0007Jy-Et
- for qemu-riscv@nongnu.org; Tue, 23 Jul 2024 01:59:52 -0400
-Received: from mail-pg1-x52d.google.com ([2607:f8b0:4864:20::52d])
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1sW9Rg-0003Tl-Bg
+ for qemu-riscv@nongnu.org; Tue, 23 Jul 2024 02:56:24 -0400
+Received: from mail-lf1-x12f.google.com ([2a00:1450:4864:20::12f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sW8Ys-0004u5-IV
- for qemu-riscv@nongnu.org; Tue, 23 Jul 2024 01:59:48 -0400
-Received: by mail-pg1-x52d.google.com with SMTP id
- 41be03b00d2f7-7a103ac7be3so175306a12.3
- for <qemu-riscv@nongnu.org>; Mon, 22 Jul 2024 22:59:46 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1sW9Rd-0007yi-M3
+ for qemu-riscv@nongnu.org; Tue, 23 Jul 2024 02:56:24 -0400
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-52fc4388a64so1117959e87.1
+ for <qemu-riscv@nongnu.org>; Mon, 22 Jul 2024 23:56:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721714385; x=1722319185; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Zfqy+KQKyoi2Q8Kn/90Lwx07X5p6KKXjr7MHcp1h5h0=;
- b=Bm/XggqO95paUVEujtTojrq/co9AQ8GYhnAzyMbo2H5wTm7YTCCLdjNHBI9mJtbvJj
- tqjcdU0tCN9Unke3BaVeHbwm1CTAVfGJXUOIEohtDn6Y3CI7MuZSqCdKc8GRmzd//054
- KkRyDCUWS+2Iu0RHA19oI4jAz8FmUt4aTTMjwcEmh9okEbIbJ5V5OrFKf97phQ2fT9YQ
- pGYxrYYjRDZMHrz2RJnI96pyOVxvfHVKHHj4m0Ur5mBiKgh/Yee5QA7BOHOYQjMGb5dw
- 07AhQ3Bsmlko67v4VmNDyUvHjf553tp71zxtSLXMtVf9wPL46CumAC9cFje9SMkSu8ZJ
- z7Tg==
+ d=sifive.com; s=google; t=1721717779; x=1722322579; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=VSeZsR/zaG1TI5fyB6D5J5Z++8OL1hLqur9S1OD07Xw=;
+ b=ItXFUshCh1oFPBBUgH+9P+GvUUFCGIfA1iPteNZqbCVafJ4KBJ4AoGF4pgS8L/GaP/
+ XW9K9/6XGmR4ZUYwY54/wg7a7R6TBenR7nK2QfoGFa+Sve3JhTXNNd92ZGkMf7QAkkEj
+ 5R1AUonJtJb1cKQo4OGftQrnq7M/qXNT1G3XeStjWgZKU22scWMmyohxzTY+/QwUvDaF
+ xl6qs5nLikMxCirxoDrfF/oWtdQj+7w8rOf85YhZ69vi+UmIhj2TVNFbTEwWLgh+m0Hr
+ O3Iv9tPKisfgOkodCIbpD0JNUerYULuFtq/doiOdqBGh989rRfS4re3N6jdzkrZfkDPg
+ TvvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721714385; x=1722319185;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Zfqy+KQKyoi2Q8Kn/90Lwx07X5p6KKXjr7MHcp1h5h0=;
- b=AJICZXat0B3N/k1O3QWVGDImiTXyqbnd5zY6ACvLl2xtH1LwZonQ4yaax7gXGIVNEf
- vH7s8Ja1UjoUG9jNDQEMsO57cvu8bZVTsPDmnBwdmFz1lF3LKWdpgp57/7q/S/a4gAUH
- g9C6ad5jXttDeLgDCkq5/dXrRA356R8I8YUGbkivDWN1FUYK9+lyJjwh50FPObdwXA/H
- CKP+Xx2UMHUBYsXcXA/zel4eHavDgS2/WaZYxr1uChGqGecRZePEasCFUUj5Zovj26Dr
- WOE8rTcEdxWm8N4yuMCVduIhBVr9IiaODbjfavY7nw4Oyz7jSwRgS7EbIy7CGcMZKWRs
- ye9Q==
-X-Gm-Message-State: AOJu0Yyy0PMaj25vGOPSY3Zp8mGYW0nmmEkDeFFwB1VFb3xDgPEd/ksr
- 2RtMCO7ZY5Ot6XVQDOSneFNI+h+ivs0eoQH7WLwZdvRP+ti7gCeauEhszGIX0Xs=
-X-Google-Smtp-Source: AGHT+IEMO8eILTuyHzWn5WGfeVw74N7mimmUn05HTdbNPzCoQss52bzypyRGYQTzug+e6FgqPc8H9w==
-X-Received: by 2002:a05:6a20:842a:b0:1c0:f677:e98f with SMTP id
- adf61e73a8af0-1c4229b453emr9967283637.46.1721714384680; 
- Mon, 22 Jul 2024 22:59:44 -0700 (PDT)
-Received: from [192.168.1.113] ([203.56.128.103])
- by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-79f0af5e618sm5591652a12.25.2024.07.22.22.59.41
+ d=1e100.net; s=20230601; t=1721717779; x=1722322579;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=VSeZsR/zaG1TI5fyB6D5J5Z++8OL1hLqur9S1OD07Xw=;
+ b=Mr0YVc3N6SZeRT5js6iLkj9mhf+/VQzGFvQqzKnGgFniXYtiQh81SMSVksN8jKi97F
+ SqafrqZsdbCDXOAhLUqYsVEnM3/b/uwGmDWmqV4GrK5EY8GJT0g3t3gNrEmyPOC8mnCm
+ N8L2LPq9j310BZJIZO0htzUEdOU4gj1SEkoUBpbu44uzr7j6eWX+Tld/sH/BMiIjw0yM
+ c+VXndM2qh4LOeG3a+dS0qs/2Mrwa/XGmol4vlgiYx8983AOeRh98bZydlhLVMz3C/xr
+ KCYeFUBwiaLJUSmPqK9prRkh62FjdSPCgOw9gQQcFRf/RpJfaKGs7FMkpUBpEIgZuIE6
+ wUoA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXDkp2j8kO3oIC1gp066a3j5mcLYHHxGanXqOGJve7u1gCrNicF9PjBSFDwDZLbQOWEf6jbXn3lyMIU2kITsHgQyqvZryE=
+X-Gm-Message-State: AOJu0YzSGoPsxB4T7A0sbvYMSYXcFtYmBu+ZiXP3iStykSe3wV7lDXmD
+ Wqvz3W8i31iocVv9+k5VBe72tjFSWwodl6fObX7jGy19x1e47nbqmQOP0GjBZUQ=
+X-Google-Smtp-Source: AGHT+IEkpspkicCyCs72PVOynJk524h991pdMEVZYly1g6pG7maHS1JKMtWz6zeZUEvspytopBSFAw==
+X-Received: by 2002:a05:6512:684:b0:52e:9670:e40b with SMTP id
+ 2adb3069b0e04-52fc404f3f7mr1414713e87.39.1721717779035; 
+ Mon, 22 Jul 2024 23:56:19 -0700 (PDT)
+Received: from mail-lf1-f52.google.com (mail-lf1-f52.google.com.
+ [209.85.167.52]) by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-52ef55781f6sm1481107e87.293.2024.07.22.23.56.18
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 22 Jul 2024 22:59:44 -0700 (PDT)
-Message-ID: <8d12202f-7170-4127-a1a6-c23c03835cf6@linaro.org>
-Date: Tue, 23 Jul 2024 15:59:35 +1000
+ Mon, 22 Jul 2024 23:56:18 -0700 (PDT)
+Received: by mail-lf1-f52.google.com with SMTP id
+ 2adb3069b0e04-52f01ec08d6so2686904e87.2; 
+ Mon, 22 Jul 2024 23:56:18 -0700 (PDT)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWszTN+/ggZzEMaqi0ZTyEb3INc+wPt7S8bWrzTquyfi3NVijTq+xF4vie8YH7Xs+YMqz7o1mWbYVT+nF3rPloFjDn1Trk=
+X-Received: by 2002:a05:6512:2215:b0:52c:d13e:3785 with SMTP id
+ 2adb3069b0e04-52fc404de47mr1452596e87.30.1721717778466; Mon, 22 Jul 2024
+ 23:56:18 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] target/riscv: Remove redundant insn length check for
- zama16b
-To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- dbarboza@ventanamicro.com, liwei1518@gmail.com, bmeng.cn@gmail.com
-References: <20240723013012.1443-1-zhiwei_liu@linux.alibaba.com>
- <dea63117-cabd-4669-bffd-e8c0cb8d9147@linaro.org>
- <df37fdc2-79c6-420c-bcf4-e7c3649fe446@linux.alibaba.com>
-Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <df37fdc2-79c6-420c-bcf4-e7c3649fe446@linux.alibaba.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52d;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x52d.google.com
+References: <20240722175004.23666-1-jason.chien@sifive.com>
+In-Reply-To: <20240722175004.23666-1-jason.chien@sifive.com>
+From: Frank Chang <frank.chang@sifive.com>
+Date: Tue, 23 Jul 2024 14:56:07 +0800
+X-Gmail-Original-Message-ID: <CANzO1D1S3ZJ20zFVDFPKJ_9R6ezWy6tzUEUzzW0Hkq_JdfmumA@mail.gmail.com>
+Message-ID: <CANzO1D1S3ZJ20zFVDFPKJ_9R6ezWy6tzUEUzzW0Hkq_JdfmumA@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Add a property to set vl to ceil(AVL/2)
+To: Jason Chien <jason.chien@sifive.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::12f;
+ envelope-from=frank.chang@sifive.com; helo=mail-lf1-x12f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -99,41 +109,66 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 7/23/24 15:29, LIU Zhiwei wrote:
-> The more detailed information about its meaning is in priviledged 1.13 specification. More 
-> exactly, in 3.6.4. Misaligned Atomicity Granule PMA.
-> 
-> The specification said:
-> 
-> "The misaligned atomicity granule PMA applies only to AMOs, loads and stores defined in the base
-> ISAs, and loads and stores of no more than MXLEN bits defined in the F, D, and Q extensions. For an
-> instruction in that set, if all accessed bytes lie within the same misaligned atomicity granule, the
-> instruction will not raise an exception for reasons of address alignment, and the instruction will give
-> rise to only one memory operation for the purposes of RVWMO—i.e., it will execute atomically."
-> 
-> That's the reason why I do not apply zama16b to compressed instructions.
-Given the non-specificity of this paragraph, I think not specifically calling out 
-compressed forms of the base ISA is simply a documentation error.  In general, the 
-compressed ISA is supposed to be a smaller encoding of the exact same instruction as the 
-standard ISA.
+Reviewed-by: Frank Chang <frank.chang@sifive.com>
 
-However!  It does explicitly say "no more than MXLEN bits", which means that an RV32/RV64 
-check is appropriate for FLD/FSD, since MXLEN may be less than 64.
-
-In addition, your change for AMOs is incomplete.  From the text:
-
-   If a misaligned AMO accesses a region that does not specify a misaligned
-   atomicity granule PMA, or if not all accessed bytes lie within the same
-   misaligned atomicity granule, then an exception is raised.
-
-The second clause corresponds exactly with the Arm FEAT_LSE2.
-See check_lse2_align in target/arm/tcg/translate-a64.c.
-
-
-r~
-
-
-PS: The first clause is similar to Arm access to pages marked as Device memory, for which 
-all misaligned accesses trap.  I didn't dig deep enough to see how PMAs are defined to 
-suggest how that might be applied.
+Jason Chien <jason.chien@sifive.com> =E6=96=BC 2024=E5=B9=B47=E6=9C=8823=E6=
+=97=A5 =E9=80=B1=E4=BA=8C =E4=B8=8A=E5=8D=881:51=E5=AF=AB=E9=81=93=EF=BC=9A
+>
+> RVV spec allows implementations to set vl with values within
+> [ceil(AVL/2),VLMAX] when VLMAX < AVL < 2*VLMAX. This commit adds a
+> property "rvv_vl_half_avl" to enable setting vl =3D ceil(AVL/2). This
+> behavior helps identify compiler issues and bugs.
+>
+> Signed-off-by: Jason Chien <jason.chien@sifive.com>
+> ---
+>  target/riscv/cpu.c           | 1 +
+>  target/riscv/cpu_cfg.h       | 1 +
+>  target/riscv/vector_helper.c | 2 ++
+>  3 files changed, 4 insertions(+)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index a90808a3ba..8f21171ffa 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -2687,6 +2687,7 @@ static Property riscv_cpu_properties[] =3D {
+>
+>      DEFINE_PROP_BOOL("rvv_ta_all_1s", RISCVCPU, cfg.rvv_ta_all_1s, false=
+),
+>      DEFINE_PROP_BOOL("rvv_ma_all_1s", RISCVCPU, cfg.rvv_ma_all_1s, false=
+),
+> +    DEFINE_PROP_BOOL("rvv_vl_half_avl", RISCVCPU, cfg.rvv_vl_half_avl, f=
+alse),
+>
+>      /*
+>       * write_misa() is marked as experimental for now so mark
+> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+> index 8b272fb826..96fe26d4ea 100644
+> --- a/target/riscv/cpu_cfg.h
+> +++ b/target/riscv/cpu_cfg.h
+> @@ -127,6 +127,7 @@ struct RISCVCPUConfig {
+>      bool ext_smepmp;
+>      bool rvv_ta_all_1s;
+>      bool rvv_ma_all_1s;
+> +    bool rvv_vl_half_avl;
+>
+>      uint32_t mvendorid;
+>      uint64_t marchid;
+> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+> index 1b4d5a8e37..825312552b 100644
+> --- a/target/riscv/vector_helper.c
+> +++ b/target/riscv/vector_helper.c
+> @@ -75,6 +75,8 @@ target_ulong HELPER(vsetvl)(CPURISCVState *env, target_=
+ulong s1,
+>      vlmax =3D vext_get_vlmax(cpu->cfg.vlenb, vsew, lmul);
+>      if (s1 <=3D vlmax) {
+>          vl =3D s1;
+> +    } else if (s1 < 2 * vlmax && cpu->cfg.rvv_vl_half_avl) {
+> +        vl =3D (s1 + 1) >> 1;
+>      } else {
+>          vl =3D vlmax;
+>      }
+> --
+> 2.43.2
+>
+>
 
