@@ -4,83 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 374E6C3DA49
-	for <qemu-riscv@archiver.kernel.org>; Tue, 23 Jul 2024 14:25:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E40D4C3DA63
+	for <qemu-riscv@archiver.kernel.org>; Tue, 23 Jul 2024 15:26:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sWGRy-0005MT-04; Tue, 23 Jul 2024 10:25:10 -0400
+	id 1sWHOa-0000ut-Jm; Tue, 23 Jul 2024 11:25:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1sWGRl-0004cW-1A; Tue, 23 Jul 2024 10:24:57 -0400
-Received: from mgamail.intel.com ([198.175.65.9])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1sWGRd-0000OD-1n; Tue, 23 Jul 2024 10:24:51 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1721744690; x=1753280690;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=596BeOYL/C3YYG4gWapj0nT35ULqFklo7XcRsaU+a60=;
- b=aTD2zwAwsIe509jYLMn73190qOa7EuXx6sNbkYEaMhrlo9goZ5JbsgVV
- TQc5YckbFEB8j3EOfWBhS3tI76vWAmOr8DXCMg64sM7Arpe3S36/rjnTU
- SrV+uK7X/g/9DzaakKZ88IM9cMZcX8vqb1n0AG3xfBHDmR+WbDJ30wres
- RRGZ0jRQ1je/NHa9tnnlHVnt4joRQx9APX6D3cEJ4dVMEnOiRrkxQ9C9L
- 8/XCNR8k3pz8/eCPO5b3qUSeJ4rcy0FCx+ylyS7G8NjSbPOPNbnomBew1
- xUJD/KFdzwuAjygO9aO97wULtvz3Ku817Tblon2xX5rvvo4s9NZ93CN+5 Q==;
-X-CSE-ConnectionGUID: p+t/JGkPSrSZxFaG+r1WPA==
-X-CSE-MsgGUID: m9ifGGQnRtyIhmhM8fNmxg==
-X-IronPort-AV: E=McAfee;i="6700,10204,11142"; a="41900222"
-X-IronPort-AV: E=Sophos;i="6.09,230,1716274800"; d="scan'208";a="41900222"
-Received: from fmviesa009.fm.intel.com ([10.60.135.149])
- by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 23 Jul 2024 07:24:47 -0700
-X-CSE-ConnectionGUID: hXBJ3rbPRQalpxStCGyFjw==
-X-CSE-MsgGUID: 4ge7qOlyTr2QSQ3s+KE7WA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.09,230,1716274800"; d="scan'208";a="52188455"
-Received: from liuzhao-optiplex-7080.sh.intel.com (HELO localhost)
- ([10.239.160.36])
- by fmviesa009.fm.intel.com with ESMTP; 23 Jul 2024 07:24:41 -0700
-Date: Tue, 23 Jul 2024 22:40:25 +0800
-From: Zhao Liu <zhao1.liu@intel.com>
-To: Markus Armbruster <armbru@redhat.com>
-Cc: Daniel P =?iso-8859-1?Q?=2E_Berrang=E9?= <berrange@redhat.com>,
- Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>,
- Yanan Wang <wangyanan55@huawei.com>,
- "Michael S . Tsirkin" <mst@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Eric Blake <eblake@redhat.com>, Marcelo Tosatti <mtosatti@redhat.com>,
- Alex =?iso-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>,
- Peter Maydell <peter.maydell@linaro.org>,
- Jonathan Cameron <Jonathan.Cameron@huawei.com>,
- Sia Jee Heng <jeeheng.sia@starfivetech.com>, qemu-devel@nongnu.org,
- kvm@vger.kernel.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
- Zhenyu Wang <zhenyu.z.wang@intel.com>,
- Dapeng Mi <dapeng1.mi@linux.intel.com>, Yongwei Ma <yongwei.ma@intel.com>
-Subject: Re: [PATCH 1/8] hw/core: Make CPU topology enumeration arch-agnostic
-Message-ID: <Zp/A2W5A0BqjRjR2@intel.com>
-References: <20240704031603.1744546-1-zhao1.liu@intel.com>
- <20240704031603.1744546-2-zhao1.liu@intel.com>
- <875xsx4l13.fsf@pond.sub.org> <Zp5mRrjuZWnE+9gz@intel.com>
- <87ed7kwh2x.fsf@pond.sub.org>
+ (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
+ id 1sWHOX-0000tM-Vl
+ for qemu-riscv@nongnu.org; Tue, 23 Jul 2024 11:25:42 -0400
+Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
+ id 1sWHOW-0004Dc-1R
+ for qemu-riscv@nongnu.org; Tue, 23 Jul 2024 11:25:41 -0400
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-1fd640a6454so6525055ad.3
+ for <qemu-riscv@nongnu.org>; Tue, 23 Jul 2024 08:25:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sifive.com; s=google; t=1721748338; x=1722353138; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=aJkAx4EHIeHmpUCYkvujTomFkcKCvo5v1MjjhWkEhRU=;
+ b=BsCz6XPVz9GvzmyLx51DAxlOGeVbfqPv3tmtsr0JWSGap7Fs6hT3oQo3Idbmw19OjN
+ /8QqGXeOE2PRrd7b2ZjlB4I6irClnnEVyGxkC9gyhplkPIFdh0W9ZTZHO+fCQBxaHDcS
+ nna6OMCZKL+fcAPwfk5oK65Qpwri+DHkvBfH4pHjFqjbc0v6JuBfNtmejLbYrW8Kp5/B
+ vbXMLq1oVGaYb4Ymy83UXb4mZ7IS4rpaty3E4MAtchQoUm3MiXaA6uUz6Cvlffr9LVKA
+ 9LuTff9D5a3RYuMuwbwNo/WvQ9psBeJXBpM5zIamI166YsL7OiyOwdkD0wZIaVxG01qC
+ e7uA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1721748338; x=1722353138;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=aJkAx4EHIeHmpUCYkvujTomFkcKCvo5v1MjjhWkEhRU=;
+ b=jkdpV8PttmipZgQnCtz0Ra6UEzwbuSGG+dlk4f1txglQIMwLeL122wn/0kl6tYgVS8
+ oMhZdBGsK2zsfIWAywSLOQwAfHv/RKprx1pgz0+3nkYyM+tOcwKv6gNo4BZwQ2e4CrBX
+ EzExgdxmZUE5ucWWB+EGxBBnbsJ+aZsOLPl7BdINXBTlN7VOp66fxx8b7klufOo5eWW5
+ i8XvX0wPdvjj+si7N0ozeH+xVp44t+/PP1bAd6M9OsnGlsV43+5cchIMNa2fNpcreLz5
+ FzFlbclUdmtoM6g9cqmRvPu7G9Er/wZvFtx9oG+I1a9GgD0ugx76QGOktOL6xm24cBMV
+ 4NZQ==
+X-Gm-Message-State: AOJu0YygupqsIlNee58u35ZQKMRVHp8+zqXiS07isBT8lp9hoX3pykMa
+ dZz+lQa6fQRy506dreenqDh4e9+EDjNqZ6/pEJFVEJHHc1htpGPUmEvvdARxxZA=
+X-Google-Smtp-Source: AGHT+IErtpyfkU5cwJvNyt7SRiFAiSi74NNRi4IybkN9L06j/ObceUmcXf4rxLmJGPINu3Mv1UHkfw==
+X-Received: by 2002:a17:903:230a:b0:1fd:6529:744c with SMTP id
+ d9443c01a7336-1fdd20f8dd7mr999895ad.1.1721748338122; 
+ Tue, 23 Jul 2024 08:25:38 -0700 (PDT)
+Received: from [192.168.100.252] (59-124-168-89.hinet-ip.hinet.net.
+ [59.124.168.89]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-1fd6f318462sm75921135ad.140.2024.07.23.08.25.35
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 23 Jul 2024 08:25:37 -0700 (PDT)
+Message-ID: <8e54f48e-379b-42b8-8017-886ead154415@sifive.com>
+Date: Tue, 23 Jul 2024 23:25:33 +0800
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <87ed7kwh2x.fsf@pond.sub.org>
-Received-SPF: pass client-ip=198.175.65.9; envelope-from=zhao1.liu@intel.com;
- helo=mgamail.intel.com
-X-Spam_score_int: -44
-X-Spam_score: -4.5
-X-Spam_bar: ----
-X-Spam_report: (-4.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.133,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 11/13] hw/riscv/riscv-iommu: Add another irq for mrif
+ notifications
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ frank.chang@sifive.com, tjeznach@rivosinc.com,
+ Andrew Jones <ajones@ventanamicro.com>
+References: <20240708173501.426225-1-dbarboza@ventanamicro.com>
+ <20240708173501.426225-12-dbarboza@ventanamicro.com>
+Content-Language: en-US
+From: Jason Chien <jason.chien@sifive.com>
+In-Reply-To: <20240708173501.426225-12-dbarboza@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
+ envelope-from=jason.chien@sifive.com; helo=mail-pl1-x62d.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -97,127 +100,58 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jul 23, 2024 at 12:14:30PM +0200, Markus Armbruster wrote:
-> Date: Tue, 23 Jul 2024 12:14:30 +0200
-> From: Markus Armbruster <armbru@redhat.com>
-> Subject: Re: [PATCH 1/8] hw/core: Make CPU topology enumeration
->  arch-agnostic
-> 
-> Zhao Liu <zhao1.liu@intel.com> writes:
-> 
-> > Hi Markus,
-> >
-> > On Mon, Jul 22, 2024 at 03:24:24PM +0200, Markus Armbruster wrote:
-> >> Date: Mon, 22 Jul 2024 15:24:24 +0200
-> >> From: Markus Armbruster <armbru@redhat.com>
-> >> Subject: Re: [PATCH 1/8] hw/core: Make CPU topology enumeration
-> >>  arch-agnostic
-> >> 
-> >> One little thing...
-> >> 
-> >> Zhao Liu <zhao1.liu@intel.com> writes:
-> >> 
-> >> > Cache topology needs to be defined based on CPU topology levels. Thus,
-> >> > define CPU topology enumeration in qapi/machine.json to make it generic
-> >> > for all architectures.
-> >> >
-> >> > To match the general topology naming style, rename CPU_TOPO_LEVEL_SMT
-> >> > and CPU_TOPO_LEVEL_PACKAGE to CPU_TOPO_LEVEL_THREAD and
-> >> > CPU_TOPO_LEVEL_SOCKET.
-> >> >
-> >> > Also, enumerate additional topology levels for non-i386 arches, and add
-> >> > a CPU_TOPO_LEVEL_DEFAULT to help future smp-cache object de-compatibilize
-> >> > arch-specific cache topology settings.
-> >> >
-> >> > Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
-> >> 
-> >> [...]
-> >> 
-> >> > diff --git a/qapi/machine-common.json b/qapi/machine-common.json
-> >> > index fa6bd71d1280..82413c668bdb 100644
-> >> > --- a/qapi/machine-common.json
-> >> > +++ b/qapi/machine-common.json
-> >> > @@ -5,7 +5,7 @@
-> >> >  # See the COPYING file in the top-level directory.
-> >> >  
-> >> >  ##
-> >> > -# = Machines S390 data types
-> >> > +# = Common machine types
-> >> >  ##
-> >> >  
-> >> >  ##
-> >> > @@ -19,3 +19,48 @@
-> >> >  { 'enum': 'CpuS390Entitlement',
-> >> >    'prefix': 'S390_CPU_ENTITLEMENT',
-> >> >    'data': [ 'auto', 'low', 'medium', 'high' ] }
-> >> > +
-> >> > +##
-> >> > +# @CpuTopologyLevel:
-> >> > +#
-> >> > +# An enumeration of CPU topology levels.
-> >> > +#
-> >> > +# @invalid: Invalid topology level.
-> >> > +#
-> >> > +# @thread: thread level, which would also be called SMT level or
-> >> > +#     logical processor level.  The @threads option in
-> >> > +#     SMPConfiguration is used to configure the topology of this
-> >> > +#     level.
-> >> > +#
-> >> > +# @core: core level.  The @cores option in SMPConfiguration is used
-> >> > +#     to configure the topology of this level.
-> >> > +#
-> >> > +# @module: module level.  The @modules option in SMPConfiguration is
-> >> > +#     used to configure the topology of this level.
-> >> > +#
-> >> > +# @cluster: cluster level.  The @clusters option in SMPConfiguration
-> >> > +#     is used to configure the topology of this level.
-> >> > +#
-> >> > +# @die: die level.  The @dies option in SMPConfiguration is used to
-> >> > +#     configure the topology of this level.
-> >> > +#
-> >> > +# @socket: socket level, which would also be called package level.
-> >> > +#     The @sockets option in SMPConfiguration is used to configure
-> >> > +#     the topology of this level.
-> >> > +#
-> >> > +# @book: book level.  The @books option in SMPConfiguration is used
-> >> > +#     to configure the topology of this level.
-> >> > +#
-> >> > +# @drawer: drawer level.  The @drawers option in SMPConfiguration is
-> >> > +#     used to configure the topology of this level.
-> >> > +#
-> >> > +# @default: default level.  Some architectures will have default
-> >> > +#     topology settings (e.g., cache topology), and this special
-> >> > +#     level means following the architecture-specific settings.
-> >> > +#
-> >> > +# Since: 9.1
-> >> > +##
-> >> > +{ 'enum': 'CpuTopologyLevel',
-> >> > +  'prefix': 'CPU_TOPO_LEVEL',
-> >> 
-> >> Why set a 'prefix'?
-> >> 
-> >
-> > Because my previous i386 commit 6ddeb0ec8c29 ("i386/cpu: Introduce bitmap
-> > to cache available CPU topology levels") introduced the level
-> > enumeration with such prefix. For naming consistency, and to shorten the
-> > length of the name, I've used the same prefix here as well.
-> >
-> > I've sensed that you don't like the TOPO abbreviation and I'll remove the
-> > prefix :-).
-> 
-> Consistency is good, but I'd rather achieve it by consistently using
-> "topology".
-> 
-> I never liked the 'prefix' feature much.  We have it because the mapping
-> from camel case to upper case with underscores is heuristical, and can
-> result in something undesirable.  See commit 351d36e454c (qapi: allow
-> override of default enum prefix naming).  Using it just to shorten
-> generated identifiers is a bad idea.
+Hi Daniel,
 
-Thanks for your clarification! I see, I will drop the prefix.
-
-Regards,
-Zhao
-
-
+On 2024/7/9 上午 01:34, Daniel Henrique Barboza wrote:
+> From: Andrew Jones <ajones@ventanamicro.com>
+>
+> And add mrif notification trace.
+>
+> Signed-off-by: Andrew Jones <ajones@ventanamicro.com>
+> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Reviewed-by: Frank Chang <frank.chang@sifive.com>
+> ---
+>   hw/riscv/riscv-iommu-pci.c | 2 +-
+>   hw/riscv/riscv-iommu.c     | 1 +
+>   hw/riscv/trace-events      | 1 +
+>   3 files changed, 3 insertions(+), 1 deletion(-)
+>
+> diff --git a/hw/riscv/riscv-iommu-pci.c b/hw/riscv/riscv-iommu-pci.c
+> index 7b82ce0645..d7e5f20885 100644
+> --- a/hw/riscv/riscv-iommu-pci.c
+> +++ b/hw/riscv/riscv-iommu-pci.c
+> @@ -81,7 +81,7 @@ static void riscv_iommu_pci_realize(PCIDevice *dev, Error **errp)
+>       pci_register_bar(dev, 0, PCI_BASE_ADDRESS_SPACE_MEMORY |
+>                        PCI_BASE_ADDRESS_MEM_TYPE_64, &s->bar0);
+>   
+> -    int ret = msix_init(dev, RISCV_IOMMU_INTR_COUNT,
+> +    int ret = msix_init(dev, RISCV_IOMMU_INTR_COUNT + 1,
+The new interrupt is not marked as used with msix_vector_use().
+>                           &s->bar0, 0, RISCV_IOMMU_REG_MSI_CONFIG,
+>                           &s->bar0, 0, RISCV_IOMMU_REG_MSI_CONFIG + 256, 0, &err);
+>   
+> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+> index 2985a49e53..c9ac3d348b 100644
+> --- a/hw/riscv/riscv-iommu.c
+> +++ b/hw/riscv/riscv-iommu.c
+> @@ -621,6 +621,7 @@ static MemTxResult riscv_iommu_msi_write(RISCVIOMMUState *s,
+>           cause = RISCV_IOMMU_FQ_CAUSE_MSI_WR_FAULT;
+>           goto err;
+>       }
+> +    trace_riscv_iommu_mrif_notification(s->parent_obj.id, n190, addr);
+>   
+>       return MEMTX_OK;
+>   
+> diff --git a/hw/riscv/trace-events b/hw/riscv/trace-events
+> index 4b486b6420..d69719a27a 100644
+> --- a/hw/riscv/trace-events
+> +++ b/hw/riscv/trace-events
+> @@ -6,6 +6,7 @@ riscv_iommu_flt(const char *id, unsigned b, unsigned d, unsigned f, uint64_t rea
+>   riscv_iommu_pri(const char *id, unsigned b, unsigned d, unsigned f, uint64_t iova) "%s: page request %04x:%02x.%u iova: 0x%"PRIx64
+>   riscv_iommu_dma(const char *id, unsigned b, unsigned d, unsigned f, unsigned pasid, const char *dir, uint64_t iova, uint64_t phys) "%s: translate %04x:%02x.%u #%u %s 0x%"PRIx64" -> 0x%"PRIx64
+>   riscv_iommu_msi(const char *id, unsigned b, unsigned d, unsigned f, uint64_t iova, uint64_t phys) "%s: translate %04x:%02x.%u MSI 0x%"PRIx64" -> 0x%"PRIx64
+> +riscv_iommu_mrif_notification(const char *id, uint32_t nid, uint64_t phys) "%s: sent MRIF notification 0x%x to 0x%"PRIx64
+>   riscv_iommu_cmd(const char *id, uint64_t l, uint64_t u) "%s: command 0x%"PRIx64" 0x%"PRIx64
+>   riscv_iommu_notifier_add(const char *id) "%s: dev-iotlb notifier added"
+>   riscv_iommu_notifier_del(const char *id) "%s: dev-iotlb notifier removed"
 
