@@ -4,75 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7440FC3DA63
-	for <qemu-riscv@archiver.kernel.org>; Tue, 23 Jul 2024 23:31:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D050C3DA63
+	for <qemu-riscv@archiver.kernel.org>; Tue, 23 Jul 2024 23:31:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sWOyS-0004pO-Qs; Tue, 23 Jul 2024 19:31:17 -0400
+	id 1sWOyn-0006wB-J4; Tue, 23 Jul 2024 19:31:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1sWOxz-0002TY-SK
- for qemu-riscv@nongnu.org; Tue, 23 Jul 2024 19:30:47 -0400
-Received: from mail-pj1-x1030.google.com ([2607:f8b0:4864:20::1030])
+ id 1sWOyh-0006iL-Om
+ for qemu-riscv@nongnu.org; Tue, 23 Jul 2024 19:31:31 -0400
+Received: from mail-lf1-x135.google.com ([2a00:1450:4864:20::135])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1sWOxr-0007zD-Pp
- for qemu-riscv@nongnu.org; Tue, 23 Jul 2024 19:30:43 -0400
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-2cb510cd097so3591896a91.1
- for <qemu-riscv@nongnu.org>; Tue, 23 Jul 2024 16:30:38 -0700 (PDT)
+ id 1sWOye-00085Q-36
+ for qemu-riscv@nongnu.org; Tue, 23 Jul 2024 19:31:31 -0400
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-52f01ec08d6so3958701e87.2
+ for <qemu-riscv@nongnu.org>; Tue, 23 Jul 2024 16:31:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1721777437; x=1722382237;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1721777486; x=1722382286;
  darn=nongnu.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=8g3egpPSQQCB4Jzut23yj1uXHYNkJTWfJCb9u6Ykb48=;
- b=BwXSjbXAXBx+ee0YqPviF7GoXGbJGZwnzlHtbjG3DgT3TT4w43AUfRwAa68OHx4rVD
- FoafECMyKihPatUBZQTPmJVok4O18rR/l8Wbzj8FQ0XvgNpjxqgnkTBPhQ9fJx0Lhi5t
- sl5/Qd4jsZxtbcdYgRCzXF8BW1B2ctHw0QbSEv5z04p1Bd3dW5+etgZ7jpdiR0r5wiX+
- /5jgOtLPksBkKw+2649h68z0P6/fRWYP7eBcUoiISILI7PyTE2OXYN5RRa3ZtOGf6gio
- xGAKo6iP7JxrSm/oS13O7bBswbcjNF4c4Z8Jg/zZc2yMlqJUGmU+PWY1ww3R131bICoj
- snwA==
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=cKrQYig+jGbMxG6M4I8fB3HEZJa8YxMj+QF3cxradAs=;
+ b=CdZ0PdK8SXO9LSKUpEOe52RojXKOKENkCP3rN1V5aRES4bnIkbuZ6k9HVyd02KejYX
+ a0K8/261OW3+xEvYkmKbh5Xe7cCbSdWWbtsTrn4lLnijBHRTCxmv+XjnzYzDY51x18s+
+ 5cqPuhjBuF/I9kscKSp9z3xbEN0INqJsh3qBPhp+wOcTy9Bn0SfjVjxjIn0KBFxqfIZm
+ uor5h9r3nMmioA/R8YWP70Q5ZCcOnshy/Ve9KEtpAxqnH/aCJ8aA/EEUC0jQCh0Y/5Ft
+ mNuC2LGkdDaxA4dfVnwKUUV+Z2voaYR5Y/xLcVu/jSnWjE7S6u5CnFr+9LrwHM3TKxy/
+ Oa7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721777437; x=1722382237;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1721777486; x=1722382286;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8g3egpPSQQCB4Jzut23yj1uXHYNkJTWfJCb9u6Ykb48=;
- b=Y88uO2TvULfBduKn1qOEuAjToQUXTpiaxqxO47EOGC05H9/t7HrI2UY5JX6N3tTtZg
- WHdMTNXkc0jupZN892C0O3LWF6RspdpEtdQDsM2ZxkwJ6rVa7ao29x4RgW/cIZKA7DH7
- 5d4ORSeY6oR6x9jYTb+De7LovqFhpSBUjSJpt6L8GqwG8uDFk22CEIZ9VbW63sei20jR
- EZTQkIs99bPja6SfxJCTpuAtJ1rz9mlS4PR9z/ligER5YsYo34t0H/jO2gOTin2mfLbB
- OS54NPH2swtCeBKRI2fBB9ptPriCNC+r5Y8FH6cAU6+eKwyyDc6zrdxgcRzosF7UzpB5
- 16cA==
-X-Gm-Message-State: AOJu0YxckGzF4di7Z2h2wOyKidqFeB6JhCwDGePsBzMKm2p7c8czkQV5
- RDuCPwjmynToJmghfay++4TNVHZltyxu7vLZ1uQeHtuMNUJMRuqjmMJYelAoHx8=
-X-Google-Smtp-Source: AGHT+IHpOiDxe5VD8grEVKf0ieVZookbXdlomlpuMXrUs3iJpeqcWgNUeQ2jb0KHLHpKiVed0Q3AGg==
-X-Received: by 2002:a17:90b:494:b0:2c9:6d07:18f4 with SMTP id
- 98e67ed59e1d1-2cdb51bc73fmr614420a91.35.1721777434217; 
- Tue, 23 Jul 2024 16:30:34 -0700 (PDT)
-Received: from atishp.ba.rivosinc.com ([64.71.180.162])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2cdb74e894csm179217a91.41.2024.07.23.16.30.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 23 Jul 2024 16:30:33 -0700 (PDT)
-From: Atish Patra <atishp@rivosinc.com>
-Date: Tue, 23 Jul 2024 16:30:09 -0700
-Subject: [PATCH v2 12/13] target/riscv: Add a preferred ISA extension rule
+ bh=cKrQYig+jGbMxG6M4I8fB3HEZJa8YxMj+QF3cxradAs=;
+ b=WstKGYtcm4bLDk4u9jd5x1kNywp80XJG6NYdn4645xgnYQ0E/eVaStw8b3k0me9bh0
+ mwcw46hgqCbNJROWmWnveASEKRxwDp+7sBV6PYbc7NR+7nj+FdRAe1KOeUhfi1RB16s7
+ Ct0jbu1k0oQRRfuhxYKXBjGn3ocaZSkxHumnthcogl+bY3xtEiVjWdGhhoNArzMeRGaz
+ Q6NUBH27otAlMQMxg63sE16EnJdWtc/PipCeT6BwtvNIw1KEz3V4dmcGM5Exe6ewE7TY
+ lN/aFv0aZZ8XUNqxzgZEYi7ZES0x3yMB0w7RBsjbvmBgvpVr9qXOuUBLWyd7AK5OxfMq
+ Kfig==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWasZnmtdsQmL9mTUXM533/NHjOCGZDynYIJukrZsEyxEEgO3PnWF7O9DP3pc2PbCnXCSDFccw33oHi9dxI4JoVTP/YFpo=
+X-Gm-Message-State: AOJu0YwLCTalbbD8Ojqr1UnIZoevZ4psuHoMRurO3UuRb2Ppw2Cv6zKH
+ mUJczP2fBKp3ljnJ9ZeIaAm9xJCV4lVGmef28avCmzZY2syr77MVzHGGWmYmNLAc5TlXtg+M7qU
+ 5wsNV5C7CiGnXBvKh6HMpF3FTNbVaTqbRe7kdBQ==
+X-Google-Smtp-Source: AGHT+IGvup6uiQE3JP0Wkb7FJ8DpT79FHQCBtHptSdgaAmlRdUTEqIQKkAHTu1qlobFLvY6QJa5BIIaMYIN6GZQPxqc=
+X-Received: by 2002:a05:6512:3a90:b0:52e:95dd:a8ef with SMTP id
+ 2adb3069b0e04-52fc404c6a8mr3286174e87.27.1721777485708; Tue, 23 Jul 2024
+ 16:31:25 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240723-counter_delegation-v2-12-c4170a5348ca@rivosinc.com>
-References: <20240723-counter_delegation-v2-0-c4170a5348ca@rivosinc.com>
-In-Reply-To: <20240723-counter_delegation-v2-0-c4170a5348ca@rivosinc.com>
-To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- bin.meng@windriver.com, dbarboza@ventanamicro.com, alistair.francis@wdc.com
-X-Mailer: b4 0.15-dev-13183
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1030;
- envelope-from=atishp@rivosinc.com; helo=mail-pj1-x1030.google.com
+References: <20240217000134.3634191-1-atishp@rivosinc.com>
+ <20240217000134.3634191-5-atishp@rivosinc.com>
+ <072c16a6-2f06-4b57-aac9-7651ddb578ce@sifive.com>
+In-Reply-To: <072c16a6-2f06-4b57-aac9-7651ddb578ce@sifive.com>
+From: Atish Kumar Patra <atishp@rivosinc.com>
+Date: Tue, 23 Jul 2024 16:31:14 -0700
+Message-ID: <CAHBxVyH5TFMf3ch5A3A0OexZSkuwEYUs7qDDOSDzptFbqWhr4Q@mail.gmail.com>
+Subject: Re: [PATCH RFC 4/8] target/riscv: Support generic CSR indirect access
+To: Jason Chien <jason.chien@sifive.com>
+Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
+ Weiwei Li <liwei1518@gmail.com>, kaiwenxue1@gmail.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::135;
+ envelope-from=atishp@rivosinc.com; helo=mail-lf1-x135.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -94,205 +98,416 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-In addition to the implied rule, a preferred rule will be useful
-where an ISA extension may require a list of ISA extension to be
-enabled to use all the features defined in that extension. All
-these extensions may not be implied in the ISA.
+On Wed, Jun 5, 2024 at 4:49=E2=80=AFAM Jason Chien <jason.chien@sifive.com>=
+ wrote:
+>
+> The predicate functions should contain the access control by the
+> state-enable CSRs, which is not presented in this patch. Do you mind
+> that I take over the indirect CSR access control part? The Signed-off-by
+> will be kept.
+>
+> Atish Patra =E6=96=BC 2024/2/17 =E4=B8=8A=E5=8D=88 08:01 =E5=AF=AB=E9=81=
+=93:
+> > From: Kaiwen Xue <kaiwenx@rivosinc.com>
+> >
+> > This adds the indirect access registers required by sscsrind/smcsrind
+> > and the operations on them. Note that xiselect and xireg are used for
+> > both AIA and sxcsrind, and the behavior of accessing them depends on
+> > whether each extension is enabled and the value stored in xiselect.
+> >
+> > Co-developed-by: Atish Patra <atishp@rivosinc.com>
+> > Signed-off-by: Atish Patra <atishp@rivosinc.com>
+> > Signed-off-by: Kaiwen Xue <kaiwenx@rivosinc.com>
+> > ---
+> >   target/riscv/cpu_bits.h |  28 +++++++-
+> >   target/riscv/csr.c      | 146 +++++++++++++++++++++++++++++++++++++++=
+-
+> >   2 files changed, 169 insertions(+), 5 deletions(-)
+> >
+> > diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> > index 0ee91e502e8f..3a66f83009b5 100644
+> > --- a/target/riscv/cpu_bits.h
+> > +++ b/target/riscv/cpu_bits.h
+> > @@ -176,6 +176,13 @@
+> >   #define CSR_MISELECT        0x350
+> >   #define CSR_MIREG           0x351
+> >
+> > +/* Machine Indirect Register Alias */
+> > +#define CSR_MIREG2          0x352
+> > +#define CSR_MIREG3          0x353
+> > +#define CSR_MIREG4          0x355
+> > +#define CSR_MIREG5          0x356
+> > +#define CSR_MIREG6          0x357
+> > +
+> >   /* Machine-Level Interrupts (AIA) */
+> >   #define CSR_MTOPEI          0x35c
+> >   #define CSR_MTOPI           0xfb0
+> > @@ -225,6 +232,13 @@
+> >   #define CSR_SISELECT        0x150
+> >   #define CSR_SIREG           0x151
+> >
+> > +/* Supervisor Indirect Register Alias */
+> > +#define CSR_SIREG2          0x152
+> > +#define CSR_SIREG3          0x153
+> > +#define CSR_SIREG4          0x155
+> > +#define CSR_SIREG5          0x156
+> > +#define CSR_SIREG6          0x157
+> > +
+> >   /* Supervisor-Level Interrupts (AIA) */
+> >   #define CSR_STOPEI          0x15c
+> >   #define CSR_STOPI           0xdb0
+> > @@ -291,6 +305,13 @@
+> >   #define CSR_VSISELECT       0x250
+> >   #define CSR_VSIREG          0x251
+> >
+> > +/* Virtual Supervisor Indirect Alias */
+> > +#define CSR_VSIREG2         0x252
+> > +#define CSR_VSIREG3         0x253
+> > +#define CSR_VSIREG4         0x255
+> > +#define CSR_VSIREG5         0x256
+> > +#define CSR_VSIREG6         0x257
+> > +
+> >   /* VS-Level Interrupts (H-extension with AIA) */
+> >   #define CSR_VSTOPEI         0x25c
+> >   #define CSR_VSTOPI          0xeb0
+> > @@ -847,10 +868,13 @@ typedef enum RISCVException {
+> >   #define ISELECT_IMSIC_EIE63                0xff
+> >   #define ISELECT_IMSIC_FIRST                ISELECT_IMSIC_EIDELIVERY
+> >   #define ISELECT_IMSIC_LAST                 ISELECT_IMSIC_EIE63
+> > -#define ISELECT_MASK                       0x1ff
+> > +#define ISELECT_MASK_AIA                   0x1ff
+> > +
+> > +/* MISELECT, SISELECT, and VSISELECT bits (AIA) */
+> > +#define ISELECT_MASK_SXCSRIND              0xfff
+> Could you rename ISELECT_MASK_SXCSRIND to ISELECT_MASK_CSRIND to keep
+> the naming consistency with ISELECT_MASK_AIA?
+> >
+> >   /* Dummy [M|S|VS]ISELECT value for emulating [M|S|VS]TOPEI CSRs */
+> > -#define ISELECT_IMSIC_TOPEI                (ISELECT_MASK + 1)
+> > +#define ISELECT_IMSIC_TOPEI                (ISELECT_MASK_AIA + 1)
+> >
+> >   /* IMSIC bits (AIA) */
+> >   #define IMSIC_TOPEI_IID_SHIFT              16
+> > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> > index 89a1325a02a5..a1c10f1d010a 100644
+> > --- a/target/riscv/csr.c
+> > +++ b/target/riscv/csr.c
+> > @@ -287,6 +287,17 @@ static int aia_any32(CPURISCVState *env, int csrno=
+)
+> >       return any32(env, csrno);
+> >   }
+> >
+> > +static RISCVException sxcsrind_any(CPURISCVState *env, int csrno)
+> Could you rename sxcsrind_any() to csrind_any() to keep naming
+> consistency with aia_any()?
+> > +{
+> > +    RISCVCPU *cpu =3D env_archcpu(env);
+> > +
+> > +    if (!cpu->cfg.ext_smcsrind) {
+> > +        return RISCV_EXCP_ILLEGAL_INST;
+> > +    }
+> > +
+> > +    return RISCV_EXCP_NONE;
+> > +}
+> > +
+> >   static int sxcsrind_or_aia_any(CPURISCVState *env, int csrno)
+> >   {
+> >       if (!riscv_cpu_cfg(env)->ext_smaia && !riscv_cpu_cfg(env)->ext_sm=
+csrind) {
+> > @@ -355,6 +366,17 @@ static int aia_smode32(CPURISCVState *env, int csr=
+no)
+> >       return smode32(env, csrno);
+> >   }
+> >
+> > +static RISCVException sxcsrind_smode(CPURISCVState *env, int csrno)
+> Could you rename sxcsrind_smode() to csrind_smode() to keep naming
+> consistency with aia_smode()?
+> > +{
+> > +    RISCVCPU *cpu =3D env_archcpu(env);
+> > +
+> > +    if (!cpu->cfg.ext_sscsrind) {
+> S-mode CSRs are defined in Smcsrind as well. If both Smcsrind and
+> Sscsrind are disabled, return RISCV_EXCP_ILLEGAL_INST.
+> > +        return RISCV_EXCP_ILLEGAL_INST;
+> > +    }
+> > +
+> A virtual instruction exception should be raised here for attempts from
+> VU-mode to access siselect or sireg*.
 
-This patch just introduces a new preferred rule which allows
-to enable multiple extensions together without burdening the qemu
-commandline user.
+That should be covered in riscv_csrrw_check.
 
-Signed-off-by: Atish Patra <atishp@rivosinc.com>
----
- target/riscv/cpu.c         |  4 ++++
- target/riscv/cpu.h         | 17 ++++++++++++++
- target/riscv/tcg/tcg-cpu.c | 57 ++++++++++++++++++++++++++++++++++++++++------
- 3 files changed, 71 insertions(+), 7 deletions(-)
+> > +    return smode(env, csrno);
+> > +}
+> > +
+> >   static int sxcsrind_or_aia_smode(CPURISCVState *env, int csrno)
+> >   {
+> >       if (!riscv_cpu_cfg(env)->ext_ssaia && !riscv_cpu_cfg(env)->ext_ss=
+csrind) {
+> > @@ -383,6 +405,17 @@ static RISCVException hmode32(CPURISCVState *env, =
+int csrno)
+> >
+> >   }
+> >
+> > +static RISCVException sxcsrind_hmode(CPURISCVState *env, int csrno)
+> Could you rename sxcsrind_hmode() to csrind_hmode() to keep naming
+> consistency with aia_hmode()?
+> > +{
+> > +    RISCVCPU *cpu =3D env_archcpu(env);
+> > +
+> > +    if (!cpu->cfg.ext_sscsrind) {
+> VS-mode CSRs are defined in Smcsrind as well. If both Smcsrind and
+> Sscsrind are disabled, return RISCV_EXCP_ILLEGAL_INST.
+> > +        return RISCV_EXCP_ILLEGAL_INST;
+> > +    }
+> > +
+> > +    return hmode(env, csrno);
+> > +}
+> > +
+> >   static int sxcsrind_or_aia_hmode(CPURISCVState *env, int csrno)
+> >   {
+> >       if (!riscv_cpu_cfg(env)->ext_ssaia && !riscv_cpu_cfg(env)->ext_ss=
+csrind) {
+> > @@ -1926,7 +1959,12 @@ static int rmw_xiselect(CPURISCVState *env, int =
+csrno, target_ulong *val,
+> >           *val =3D *iselect;
+> >       }
+> >
+> > -    wr_mask &=3D ISELECT_MASK;
+> > +    if (riscv_cpu_cfg(env)->ext_smcsrind || riscv_cpu_cfg(env)->ext_ss=
+csrind) {
+> > +        wr_mask &=3D ISELECT_MASK_SXCSRIND;
+> > +    } else {
+> > +        wr_mask &=3D ISELECT_MASK_AIA;
+> > +    }
+> > +
+> >       if (wr_mask) {
+> >           *iselect =3D (*iselect & ~wr_mask) | (new_val & wr_mask);
+> >       }
+> > @@ -2065,6 +2103,59 @@ done:
+> >       return RISCV_EXCP_NONE;
+> >   }
+> >
+> > +/*
+> > + * rmw_xireg_sxcsrind: Perform indirect access to xireg and xireg2-xir=
+eg6
+> > + *
+> > + * Perform indirect access to xireg and xireg2-xireg6.
+> > + * This is a generic interface for all xireg CSRs. Apart from AIA, all=
+ other
+> > + * extension using sxcsrind should be implemented here.
+> > + */
+> > +static int rmw_xireg_sxcsrind(CPURISCVState *env, int csrno,
+> > +                              target_ulong isel, target_ulong *val,
+> > +                              target_ulong new_val, target_ulong wr_ma=
+sk)
+> Could you rename rmw_xireg_sxcsrind() to rmw_xireg_csrind() to keep the
+> naming consistency with rmw_xireg_aia()?
+> > +{
+> > +    return -EINVAL;
+> > +}
+> > +
+> > +static int rmw_xiregi(CPURISCVState *env, int csrno, target_ulong *val=
+,
+> > +                      target_ulong new_val, target_ulong wr_mask)
+> > +{
+> > +    bool virt =3D false;
+> > +    int ret =3D -EINVAL;
+> > +    target_ulong isel;
+> > +
+> > +    ret =3D smstateen_acc_ok(env, 0, SMSTATEEN0_SVSLCT);
+> > +    if (ret !=3D RISCV_EXCP_NONE) {
+> > +        return ret;
+> > +    }
+> > +
+> > +    /* Translate CSR number for VS-mode */
+> > +    csrno =3D sxcsrind_xlate_vs_csrno(env, csrno);
+> > +
+> > +    if (CSR_MIREG <=3D csrno && csrno <=3D CSR_MIREG6 &&
+> > +        csrno !=3D CSR_MIREG4 - 1) {
+> > +        isel =3D env->miselect;
+> > +    } else if (CSR_SIREG <=3D csrno && csrno <=3D CSR_SIREG6 &&
+> > +               csrno !=3D CSR_SIREG4 - 1) {
+> > +        isel =3D env->siselect;
+> > +    } else if (CSR_VSIREG <=3D csrno && csrno <=3D CSR_VSIREG6 &&
+> > +               csrno !=3D CSR_VSIREG4 - 1) {
+> > +        isel =3D env->vsiselect;
+> > +        virt =3D true;
+> > +    } else {
+> > +        goto done;
+> > +    }
+> > +
+> > +    return rmw_xireg_sxcsrind(env, csrno, isel, val, new_val, wr_mask)=
+;
+> > +
+> > +done:
+> > +    if (ret) {
+> > +        return (env->virt_enabled && virt) ?
+> A virtual instruction exception is raised for attempts from VS-mode or
+> VU-mode to directly access vsiselect or vsireg* in riscv_csrrw_check(),
+> we don't need to check again here.
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 393d1d67120e..22ba43c7ff2a 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -2665,6 +2665,10 @@ RISCVCPUImpliedExtsRule *riscv_multi_ext_implied_rules[] = {
-     NULL
- };
- 
-+RISCVCPUPreferredExtsRule *riscv_multi_ext_preferred_rules[] = {
-+    NULL
-+};
-+
- static Property riscv_cpu_properties[] = {
-     DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
- 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index af25550a4a54..d775866344f5 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -142,10 +142,27 @@ typedef struct riscv_cpu_implied_exts_rule {
-     const uint32_t implied_multi_exts[];
- } RISCVCPUImpliedExtsRule;
- 
-+typedef struct riscv_cpu_preferred_exts_rule {
-+#ifndef CONFIG_USER_ONLY
-+    /*
-+     * Bitmask indicates the rule enabled status for the harts.
-+     * This enhancement is only available in system-mode QEMU,
-+     * as we don't have a good way (e.g. mhartid) to distinguish
-+     * the SMP cores in user-mode QEMU.
-+     */
-+    unsigned long *enabled;
-+#endif
-+    /* multi extension offset. */
-+    const uint32_t ext;
-+    const uint32_t preferred_multi_exts[];
-+} RISCVCPUPreferredExtsRule;
-+
- extern RISCVCPUImpliedExtsRule *riscv_misa_ext_implied_rules[];
- extern RISCVCPUImpliedExtsRule *riscv_multi_ext_implied_rules[];
-+extern RISCVCPUPreferredExtsRule *riscv_multi_ext_preferred_rules[];
- 
- #define RISCV_IMPLIED_EXTS_RULE_END -1
-+#define RISCV_PREFRRED_EXTS_RULE_END RISCV_IMPLIED_EXTS_RULE_END
- 
- #define MMU_USER_IDX 3
- 
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index 1c9a87029423..d8f74720815a 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -32,6 +32,7 @@
- #include "hw/core/accel-cpu.h"
- #include "hw/core/tcg-cpu-ops.h"
- #include "tcg/tcg.h"
-+#include <stdio.h>
- #ifndef CONFIG_USER_ONLY
- #include "hw/boards.h"
- #endif
-@@ -733,6 +734,7 @@ static void riscv_cpu_validate_profiles(RISCVCPU *cpu)
- static void riscv_cpu_init_ext_rules(void)
+The check is for invalid value while accessing siregi variants.
+
+Thanks for the review. Addressed all other suggestions in v2.
+
+> > +               RISCV_EXCP_VIRT_INSTRUCTION_FAULT : RISCV_EXCP_ILLEGAL_=
+INST;
+> > +    }
+> > +    return RISCV_EXCP_NONE;
+> > +}
+> > +
+> >   static int rmw_xireg(CPURISCVState *env, int csrno, target_ulong *val=
+,
+> >                        target_ulong new_val, target_ulong wr_mask)
+> >   {
+> > @@ -2096,8 +2187,21 @@ static int rmw_xireg(CPURISCVState *env, int csr=
+no, target_ulong *val,
+> >            goto done;
+> >       };
+> >
+> > +    /*
+> > +     * Use the xiselect range to determine actual op on xireg.
+> > +     *
+> > +     * Since we only checked the existence of AIA or Indirect Access i=
+n the
+> > +     * predicate, we should check the existence of the exact extension=
+ when
+> > +     * we get to a specific range and return illegal instruction excep=
+tion even
+> > +     * in VS-mode.
+> > +     */
+> >       if (xiselect_aia_range(isel)) {
+> >           return rmw_xireg_aia(env, csrno, isel, val, new_val, wr_mask)=
+;
+> > +    } else if (riscv_cpu_cfg(env)->ext_smcsrind ||
+> > +               riscv_cpu_cfg(env)->ext_sscsrind) {
+> > +        return rmw_xireg_sxcsrind(env, csrno, isel, val, new_val, wr_m=
+ask);
+> > +    } else {
+> > +        return RISCV_EXCP_ILLEGAL_INST;
+> >       }
+> >
+> >   done:
+> > @@ -2480,7 +2584,7 @@ static RISCVException write_mstateen0(CPURISCVSta=
+te *env, int csrno,
+> >        * TODO: Do we need to check ssaia as well ? Can we enable ssaia =
+without
+> >        * smaia ?
+> >        */
+> > -    if (riscv_cpu_cfg(env)->ext_smaia) {
+> > +    if (riscv_cpu_cfg(env)->ext_smaia || riscv_cpu_cfg(env)->ext_smcsr=
+ind) {
+> >           wr_mask |=3D SMSTATEEN0_SVSLCT;
+> >       }
+> >
+> > @@ -2569,7 +2673,7 @@ static RISCVException write_hstateen0(CPURISCVSta=
+te *env, int csrno,
+> >           wr_mask |=3D SMSTATEEN0_FCSR;
+> >       }
+> >
+> > -    if (riscv_cpu_cfg(env)->ext_ssaia) {
+> > +    if (riscv_cpu_cfg(env)->ext_ssaia || riscv_cpu_cfg(env)->ext_sscsr=
+ind) {
+> >           wr_mask |=3D SMSTATEEN0_SVSLCT;
+> >       }
+> >
+> > @@ -4866,6 +4970,18 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D=
  {
-     RISCVCPUImpliedExtsRule *rule;
-+    RISCVCPUPreferredExtsRule *prule;
- #ifndef CONFIG_USER_ONLY
-     MachineState *ms = MACHINE(qdev_get_machine());
- #endif
-@@ -760,22 +762,40 @@ static void riscv_cpu_init_ext_rules(void)
-                             GUINT_TO_POINTER(rule->ext), (gpointer)rule);
-     }
- 
-+    for (i = 0; (prule = riscv_multi_ext_preferred_rules[i]); i++) {
-+#ifndef CONFIG_USER_ONLY
-+        prule->enabled = bitmap_new(ms->smp.cpus);
-+#endif
-+        g_hash_table_insert(multi_ext_enabling_rules,
-+                            GUINT_TO_POINTER(prule->ext), (gpointer)prule);
-+    }
-+
-     initialized = true;
- }
- 
- static void cpu_enable_ext_rule(RISCVCPU *cpu,
--                                    RISCVCPUImpliedExtsRule *rule)
-+                                RISCVCPUImpliedExtsRule *rule,
-+                                RISCVCPUPreferredExtsRule *prule)
+> >       [CSR_MIREG]    =3D { "mireg",    sxcsrind_or_aia_any,   NULL, NUL=
+L,
+> >                          rmw_xireg                                     =
+  },
+> >
+> > +    /* Machine Indirect Register Alias */
+> > +    [CSR_MIREG2]   =3D { "mireg2", sxcsrind_any, NULL, NULL, rmw_xireg=
+i,
+> > +                       .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+},
+> > +    [CSR_MIREG3]   =3D { "mireg3", sxcsrind_any, NULL, NULL, rmw_xireg=
+i,
+> > +                       .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+},
+> > +    [CSR_MIREG4]   =3D { "mireg4", sxcsrind_any, NULL, NULL, rmw_xireg=
+i,
+> > +                       .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+},
+> > +    [CSR_MIREG5]   =3D { "mireg5", sxcsrind_any, NULL, NULL, rmw_xireg=
+i,
+> > +                       .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+},
+> > +    [CSR_MIREG6]   =3D { "mireg6", sxcsrind_any, NULL, NULL, rmw_xireg=
+i,
+> > +                       .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+},
+> > +
+> >       /* Machine-Level Interrupts (AIA) */
+> >       [CSR_MTOPEI]   =3D { "mtopei",   aia_any, NULL, NULL, rmw_xtopei =
+},
+> >       [CSR_MTOPI]    =3D { "mtopi",    aia_any, read_mtopi },
+> > @@ -4987,6 +5103,18 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D=
  {
-     CPURISCVState *env = &cpu->env;
-     RISCVCPUImpliedExtsRule *ir;
-+    RISCVCPUPreferredExtsRule *pr;
-     bool enabled = false;
-     int i;
- 
- #ifndef CONFIG_USER_ONLY
--    enabled = test_bit(cpu->env.mhartid, rule->enabled);
-+    if (rule) {
-+        enabled = test_bit(cpu->env.mhartid, rule->enabled);
-+    } else if (prule) {
-+        enabled = test_bit(cpu->env.mhartid, prule->enabled);
-+    } else {
-+        return;
-+    }
- #endif
-+    if (enabled)
-+        return;
- 
--    if (!enabled) {
-+    if (rule) {
-         /* Enable the implied MISAs. */
-         if (rule->implied_misa_exts) {
-             riscv_cpu_set_misa_ext(env,
-@@ -787,7 +807,7 @@ static void cpu_enable_ext_rule(RISCVCPU *cpu,
-                                              GUINT_TO_POINTER(misa_bits[i]));
- 
-                     if (ir) {
--                        cpu_enable_ext_rule(cpu, ir);
-+                        cpu_enable_ext_rule(cpu, ir, NULL);
-                     }
-                 }
-             }
-@@ -803,12 +823,27 @@ static void cpu_enable_ext_rule(RISCVCPU *cpu,
-                                             rule->implied_multi_exts[i]));
- 
-             if (ir) {
--                cpu_enable_ext_rule(cpu, ir);
-+                cpu_enable_ext_rule(cpu, ir, NULL);
-             }
-         }
- 
- #ifndef CONFIG_USER_ONLY
-         bitmap_set(rule->enabled, cpu->env.mhartid, 1);
-+#endif
-+    } else if (prule) {
-+        /* Enable the preferred extensions. */
-+        for (i = 0;
-+          prule->preferred_multi_exts[i] != RISCV_PREFRRED_EXTS_RULE_END; i++) {
-+            cpu_cfg_ext_auto_update(cpu, prule->preferred_multi_exts[i], true);
-+            pr = g_hash_table_lookup(multi_ext_enabling_rules,
-+                                     GUINT_TO_POINTER(
-+                                     prule->preferred_multi_exts[i]));
-+            if (pr) {
-+                cpu_enable_ext_rule(cpu, NULL, prule);
-+            }
-+        }
-+#ifndef CONFIG_USER_ONLY
-+        bitmap_set(prule->enabled, cpu->env.mhartid, 1);
- #endif
-     }
- }
-@@ -847,6 +882,7 @@ static void cpu_enable_zc_implied_rules(RISCVCPU *cpu)
- static void riscv_cpu_enable_ext_rules(RISCVCPU *cpu)
+> >       [CSR_SIREG]      =3D { "sireg",      sxcsrind_or_aia_smode, NULL,=
+ NULL,
+> >                            rmw_xireg                                   =
+       },
+> >
+> > +    /* Supervisor Indirect Register Alias */
+> > +    [CSR_SIREG2]      =3D { "sireg2", sxcsrind_smode, NULL, NULL, rmw_=
+xiregi,
+> > +                          .min_priv_ver =3D PRIV_VERSION_1_12_0       =
+         },
+> > +    [CSR_SIREG3]      =3D { "sireg3", sxcsrind_smode, NULL, NULL, rmw_=
+xiregi,
+> > +                          .min_priv_ver =3D PRIV_VERSION_1_12_0       =
+         },
+> > +    [CSR_SIREG4]      =3D { "sireg4", sxcsrind_smode, NULL, NULL, rmw_=
+xiregi,
+> > +                          .min_priv_ver =3D PRIV_VERSION_1_12_0       =
+         },
+> > +    [CSR_SIREG5]      =3D { "sireg5", sxcsrind_smode, NULL, NULL, rmw_=
+xiregi,
+> > +                          .min_priv_ver =3D PRIV_VERSION_1_12_0       =
+         },
+> > +    [CSR_SIREG6]      =3D { "sireg6", sxcsrind_smode, NULL, NULL, rmw_=
+xiregi,
+> > +                          .min_priv_ver =3D PRIV_VERSION_1_12_0       =
+         },
+> > +
+> >       /* Supervisor-Level Interrupts (AIA) */
+> >       [CSR_STOPEI]     =3D { "stopei",     aia_smode, NULL, NULL, rmw_x=
+topei },
+> >       [CSR_STOPI]      =3D { "stopi",      aia_smode, read_stopi },
+> > @@ -5069,6 +5197,18 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D=
  {
-     RISCVCPUImpliedExtsRule *rule;
-+    RISCVCPUPreferredExtsRule *prule;
-     int i;
- 
-     /* Enable the implied extensions for Zc. */
-@@ -855,14 +891,21 @@ static void riscv_cpu_enable_ext_rules(RISCVCPU *cpu)
-     /* Enable the implied MISAs. */
-     for (i = 0; (rule = riscv_misa_ext_implied_rules[i]); i++) {
-         if (riscv_has_ext(&cpu->env, rule->ext)) {
--            cpu_enable_ext_rule(cpu, rule);
-+            cpu_enable_ext_rule(cpu, rule, NULL);
-         }
-     }
- 
-     /* Enable the implied extensions. */
-     for (i = 0; (rule = riscv_multi_ext_implied_rules[i]); i++) {
-         if (isa_ext_is_enabled(cpu, rule->ext)) {
--            cpu_enable_ext_rule(cpu, rule);
-+            cpu_enable_ext_rule(cpu, rule, NULL);
-+        }
-+    }
-+
-+    /* Enable the preferred extensions. */
-+    for (i = 0; (prule = riscv_multi_ext_preferred_rules[i]); i++) {
-+        if (isa_ext_is_enabled(cpu, prule->ext)) {
-+            cpu_enable_ext_rule(cpu, NULL, prule);
-         }
-     }
- }
-
--- 
-2.34.1
-
+> >       [CSR_VSIREG]      =3D { "vsireg",      sxcsrind_or_aia_hmode, NUL=
+L, NULL,
+> >                             rmw_xireg                                  =
+       },
+> >
+> > +    /* Virtual Supervisor Indirect Alias */
+> > +    [CSR_VSIREG2]     =3D { "vsireg2", sxcsrind_hmode, NULL, NULL, rmw=
+_xiregi,
+> > +                          .min_priv_ver =3D PRIV_VERSION_1_12_0       =
+         },
+> > +    [CSR_VSIREG3]     =3D { "vsireg3", sxcsrind_hmode, NULL, NULL, rmw=
+_xiregi,
+> > +                          .min_priv_ver =3D PRIV_VERSION_1_12_0       =
+         },
+> > +    [CSR_VSIREG4]     =3D { "vsireg4", sxcsrind_hmode, NULL, NULL, rmw=
+_xiregi,
+> > +                          .min_priv_ver =3D PRIV_VERSION_1_12_0       =
+         },
+> > +    [CSR_VSIREG5]     =3D { "vsireg5", sxcsrind_hmode, NULL, NULL, rmw=
+_xiregi,
+> > +                          .min_priv_ver =3D PRIV_VERSION_1_12_0       =
+         },
+> > +    [CSR_VSIREG6]     =3D { "vsireg6", sxcsrind_hmode, NULL, NULL, rmw=
+_xiregi,
+> > +                          .min_priv_ver =3D PRIV_VERSION_1_12_0       =
+         },
+> > +
+> >       /* VS-Level Interrupts (H-extension with AIA) */
+> >       [CSR_VSTOPEI]     =3D { "vstopei",     aia_hmode, NULL, NULL, rmw=
+_xtopei },
+> >       [CSR_VSTOPI]      =3D { "vstopi",      aia_hmode, read_vstopi },
 
