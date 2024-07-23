@@ -4,98 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 216F6C3DA63
-	for <qemu-riscv@archiver.kernel.org>; Tue, 23 Jul 2024 11:06:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 374E6C3DA49
+	for <qemu-riscv@archiver.kernel.org>; Tue, 23 Jul 2024 14:25:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sWDGH-000843-DY; Tue, 23 Jul 2024 07:00:53 -0400
+	id 1sWGRy-0005MT-04; Tue, 23 Jul 2024 10:25:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1sWDFy-0006hs-5a
- for qemu-riscv@nongnu.org; Tue, 23 Jul 2024 07:00:35 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
+ id 1sWGRl-0004cW-1A; Tue, 23 Jul 2024 10:24:57 -0400
+Received: from mgamail.intel.com ([198.175.65.9])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1sWDFv-0002zo-Sp
- for qemu-riscv@nongnu.org; Tue, 23 Jul 2024 07:00:33 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1721732431;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=uKdtFU2bD5M7BU4ChiAF5yuLXt6KWMO049/Tq7aTIq8=;
- b=UbPzDVmzmAuyvBdvLmR72HMJNbkWbIJsyp18HTnqzPg/EAiM4891SQVWvvXAqqlwRTiBEu
- W08sn7vvJ2OFDvFLiLqhqgSwE0+AJMW1a7Y0FiZ5oQrUZ2Z5O0kja4JS8oAlnra4jFcMXu
- 9CMxOAc5BiHNNlN3VrPw/jaaH49XNnU=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-589-75KLks5KNCGJZSScYM-88A-1; Tue, 23 Jul 2024 07:00:29 -0400
-X-MC-Unique: 75KLks5KNCGJZSScYM-88A-1
-Received: by mail-wm1-f70.google.com with SMTP id
- 5b1f17b1804b1-42668796626so40276625e9.0
- for <qemu-riscv@nongnu.org>; Tue, 23 Jul 2024 04:00:29 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721732429; x=1722337229;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=uKdtFU2bD5M7BU4ChiAF5yuLXt6KWMO049/Tq7aTIq8=;
- b=Ovo9qAcQlvo/FIzzN/0CmZj1Y1CIKMGoiDWE6E/jZSE/a4NOJCTg3u+2MX0pGK65Zv
- +xl1Y9wSiWDAQKLtbq+LnYEhrtFjx6YnBMCu9HF+KBZgji29QiRXqD49POlZ6ljHatc2
- utYhg7DF4K2KsTcZZvdmH1VnLdH484cih2rEjgGkB6aIbuy//ewYllstqCJ0+YiTZwoL
- Lr/lbXKDuedyafp4XzNSiNNW2uS9M3FBgkTXAAuuCmE6pseipmZLYRaMRb1KqjFhfEYY
- N08YUIzWcf219336ccSWY40GsHfM8qXM04mEIvw/sLhCvNOjlb62WdpbnBXWSl5vamzF
- 4haA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUPUoiNXLbRXgQGKyHDSOaleoZ4cIONhqVuzYAy1KFUgOd4CGF9SbEFN/t/NqYaFgZ8Vv/EVfSIoA7lon0KFUj4nGDTGxU=
-X-Gm-Message-State: AOJu0Yzv0kOfCjX22S1LUW/DpRTDorIf+APD74/4q2mYj65xC9zQwcOF
- xYWZ5cGe0if7+eY5NdH4mUuT3SQCP8YBJEzcdKH7ciVh7/eSPCZ6epurK0gl9L3dSZNCpYHU1VZ
- GBEDjhdDaWo9rewYs5JjsseWYMzV54apEuKhzSe8h5sl+ugwEY43u
-X-Received: by 2002:a05:600c:4752:b0:426:6edb:7e14 with SMTP id
- 5b1f17b1804b1-427ed06197fmr16759015e9.35.1721732428824; 
- Tue, 23 Jul 2024 04:00:28 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IH+lVsF4SUdxXtBno6EpPUiUoCkONqPT2tvAJwb6e/syW+3H8UrZS+IHTebWDA0zCE28rZCPw==
-X-Received: by 2002:a05:600c:4752:b0:426:6edb:7e14 with SMTP id
- 5b1f17b1804b1-427ed06197fmr16758765e9.35.1721732428353; 
- Tue, 23 Jul 2024 04:00:28 -0700 (PDT)
-Received: from redhat.com ([2a0d:6fc7:440:9c9a:ffee:509d:1766:aa7f])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-427d2a947fasm195197935e9.43.2024.07.23.04.00.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 23 Jul 2024 04:00:27 -0700 (PDT)
-Date: Tue, 23 Jul 2024 07:00:24 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: qemu-devel@nongnu.org
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Sunil V L <sunilvl@ventanamicro.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Igor Mammedov <imammedo@redhat.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org
-Subject: [PULL v2 51/61] hw/riscv/virt-acpi-build.c: Update the HID of RISC-V
- UART
-Message-ID: <faacd2e6b6a85a5eee2472e5a7f50bf69c4ad44a.1721731723.git.mst@redhat.com>
-References: <cover.1721731723.git.mst@redhat.com>
+ (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
+ id 1sWGRd-0000OD-1n; Tue, 23 Jul 2024 10:24:51 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1721744690; x=1753280690;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=596BeOYL/C3YYG4gWapj0nT35ULqFklo7XcRsaU+a60=;
+ b=aTD2zwAwsIe509jYLMn73190qOa7EuXx6sNbkYEaMhrlo9goZ5JbsgVV
+ TQc5YckbFEB8j3EOfWBhS3tI76vWAmOr8DXCMg64sM7Arpe3S36/rjnTU
+ SrV+uK7X/g/9DzaakKZ88IM9cMZcX8vqb1n0AG3xfBHDmR+WbDJ30wres
+ RRGZ0jRQ1je/NHa9tnnlHVnt4joRQx9APX6D3cEJ4dVMEnOiRrkxQ9C9L
+ 8/XCNR8k3pz8/eCPO5b3qUSeJ4rcy0FCx+ylyS7G8NjSbPOPNbnomBew1
+ xUJD/KFdzwuAjygO9aO97wULtvz3Ku817Tblon2xX5rvvo4s9NZ93CN+5 Q==;
+X-CSE-ConnectionGUID: p+t/JGkPSrSZxFaG+r1WPA==
+X-CSE-MsgGUID: m9ifGGQnRtyIhmhM8fNmxg==
+X-IronPort-AV: E=McAfee;i="6700,10204,11142"; a="41900222"
+X-IronPort-AV: E=Sophos;i="6.09,230,1716274800"; d="scan'208";a="41900222"
+Received: from fmviesa009.fm.intel.com ([10.60.135.149])
+ by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 23 Jul 2024 07:24:47 -0700
+X-CSE-ConnectionGUID: hXBJ3rbPRQalpxStCGyFjw==
+X-CSE-MsgGUID: 4ge7qOlyTr2QSQ3s+KE7WA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.09,230,1716274800"; d="scan'208";a="52188455"
+Received: from liuzhao-optiplex-7080.sh.intel.com (HELO localhost)
+ ([10.239.160.36])
+ by fmviesa009.fm.intel.com with ESMTP; 23 Jul 2024 07:24:41 -0700
+Date: Tue, 23 Jul 2024 22:40:25 +0800
+From: Zhao Liu <zhao1.liu@intel.com>
+To: Markus Armbruster <armbru@redhat.com>
+Cc: Daniel P =?iso-8859-1?Q?=2E_Berrang=E9?= <berrange@redhat.com>,
+ Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>,
+ Yanan Wang <wangyanan55@huawei.com>,
+ "Michael S . Tsirkin" <mst@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Eric Blake <eblake@redhat.com>, Marcelo Tosatti <mtosatti@redhat.com>,
+ Alex =?iso-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+ Sia Jee Heng <jeeheng.sia@starfivetech.com>, qemu-devel@nongnu.org,
+ kvm@vger.kernel.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
+ Zhenyu Wang <zhenyu.z.wang@intel.com>,
+ Dapeng Mi <dapeng1.mi@linux.intel.com>, Yongwei Ma <yongwei.ma@intel.com>
+Subject: Re: [PATCH 1/8] hw/core: Make CPU topology enumeration arch-agnostic
+Message-ID: <Zp/A2W5A0BqjRjR2@intel.com>
+References: <20240704031603.1744546-1-zhao1.liu@intel.com>
+ <20240704031603.1744546-2-zhao1.liu@intel.com>
+ <875xsx4l13.fsf@pond.sub.org> <Zp5mRrjuZWnE+9gz@intel.com>
+ <87ed7kwh2x.fsf@pond.sub.org>
 MIME-Version: 1.0
-In-Reply-To: <cover.1721731723.git.mst@redhat.com>
-X-Mailer: git-send-email 2.27.0.106.g8ac3dc51b1
-X-Mutt-Fcc: =sent
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=mst@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
-X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.133,
+In-Reply-To: <87ed7kwh2x.fsf@pond.sub.org>
+Received-SPF: pass client-ip=198.175.65.9; envelope-from=zhao1.liu@intel.com;
+ helo=mgamail.intel.com
+X-Spam_score_int: -44
+X-Spam_score: -4.5
+X-Spam_bar: ----
+X-Spam_report: (-4.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.133,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -111,39 +97,127 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Sunil V L <sunilvl@ventanamicro.com>
+On Tue, Jul 23, 2024 at 12:14:30PM +0200, Markus Armbruster wrote:
+> Date: Tue, 23 Jul 2024 12:14:30 +0200
+> From: Markus Armbruster <armbru@redhat.com>
+> Subject: Re: [PATCH 1/8] hw/core: Make CPU topology enumeration
+>  arch-agnostic
+> 
+> Zhao Liu <zhao1.liu@intel.com> writes:
+> 
+> > Hi Markus,
+> >
+> > On Mon, Jul 22, 2024 at 03:24:24PM +0200, Markus Armbruster wrote:
+> >> Date: Mon, 22 Jul 2024 15:24:24 +0200
+> >> From: Markus Armbruster <armbru@redhat.com>
+> >> Subject: Re: [PATCH 1/8] hw/core: Make CPU topology enumeration
+> >>  arch-agnostic
+> >> 
+> >> One little thing...
+> >> 
+> >> Zhao Liu <zhao1.liu@intel.com> writes:
+> >> 
+> >> > Cache topology needs to be defined based on CPU topology levels. Thus,
+> >> > define CPU topology enumeration in qapi/machine.json to make it generic
+> >> > for all architectures.
+> >> >
+> >> > To match the general topology naming style, rename CPU_TOPO_LEVEL_SMT
+> >> > and CPU_TOPO_LEVEL_PACKAGE to CPU_TOPO_LEVEL_THREAD and
+> >> > CPU_TOPO_LEVEL_SOCKET.
+> >> >
+> >> > Also, enumerate additional topology levels for non-i386 arches, and add
+> >> > a CPU_TOPO_LEVEL_DEFAULT to help future smp-cache object de-compatibilize
+> >> > arch-specific cache topology settings.
+> >> >
+> >> > Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
+> >> 
+> >> [...]
+> >> 
+> >> > diff --git a/qapi/machine-common.json b/qapi/machine-common.json
+> >> > index fa6bd71d1280..82413c668bdb 100644
+> >> > --- a/qapi/machine-common.json
+> >> > +++ b/qapi/machine-common.json
+> >> > @@ -5,7 +5,7 @@
+> >> >  # See the COPYING file in the top-level directory.
+> >> >  
+> >> >  ##
+> >> > -# = Machines S390 data types
+> >> > +# = Common machine types
+> >> >  ##
+> >> >  
+> >> >  ##
+> >> > @@ -19,3 +19,48 @@
+> >> >  { 'enum': 'CpuS390Entitlement',
+> >> >    'prefix': 'S390_CPU_ENTITLEMENT',
+> >> >    'data': [ 'auto', 'low', 'medium', 'high' ] }
+> >> > +
+> >> > +##
+> >> > +# @CpuTopologyLevel:
+> >> > +#
+> >> > +# An enumeration of CPU topology levels.
+> >> > +#
+> >> > +# @invalid: Invalid topology level.
+> >> > +#
+> >> > +# @thread: thread level, which would also be called SMT level or
+> >> > +#     logical processor level.  The @threads option in
+> >> > +#     SMPConfiguration is used to configure the topology of this
+> >> > +#     level.
+> >> > +#
+> >> > +# @core: core level.  The @cores option in SMPConfiguration is used
+> >> > +#     to configure the topology of this level.
+> >> > +#
+> >> > +# @module: module level.  The @modules option in SMPConfiguration is
+> >> > +#     used to configure the topology of this level.
+> >> > +#
+> >> > +# @cluster: cluster level.  The @clusters option in SMPConfiguration
+> >> > +#     is used to configure the topology of this level.
+> >> > +#
+> >> > +# @die: die level.  The @dies option in SMPConfiguration is used to
+> >> > +#     configure the topology of this level.
+> >> > +#
+> >> > +# @socket: socket level, which would also be called package level.
+> >> > +#     The @sockets option in SMPConfiguration is used to configure
+> >> > +#     the topology of this level.
+> >> > +#
+> >> > +# @book: book level.  The @books option in SMPConfiguration is used
+> >> > +#     to configure the topology of this level.
+> >> > +#
+> >> > +# @drawer: drawer level.  The @drawers option in SMPConfiguration is
+> >> > +#     used to configure the topology of this level.
+> >> > +#
+> >> > +# @default: default level.  Some architectures will have default
+> >> > +#     topology settings (e.g., cache topology), and this special
+> >> > +#     level means following the architecture-specific settings.
+> >> > +#
+> >> > +# Since: 9.1
+> >> > +##
+> >> > +{ 'enum': 'CpuTopologyLevel',
+> >> > +  'prefix': 'CPU_TOPO_LEVEL',
+> >> 
+> >> Why set a 'prefix'?
+> >> 
+> >
+> > Because my previous i386 commit 6ddeb0ec8c29 ("i386/cpu: Introduce bitmap
+> > to cache available CPU topology levels") introduced the level
+> > enumeration with such prefix. For naming consistency, and to shorten the
+> > length of the name, I've used the same prefix here as well.
+> >
+> > I've sensed that you don't like the TOPO abbreviation and I'll remove the
+> > prefix :-).
+> 
+> Consistency is good, but I'd rather achieve it by consistently using
+> "topology".
+> 
+> I never liked the 'prefix' feature much.  We have it because the mapping
+> from camel case to upper case with underscores is heuristical, and can
+> result in something undesirable.  See commit 351d36e454c (qapi: allow
+> override of default enum prefix naming).  Using it just to shorten
+> generated identifiers is a bad idea.
 
-The requirement ACPI_060 in the RISC-V BRS specification [1], requires
-NS16550 compatible UART to have the HID RSCV0003. So, update the HID for
-the UART.
+Thanks for your clarification! I see, I will drop the prefix.
 
-[1] -  https://github.com/riscv-non-isa/riscv-brs/releases/download/v0.0.2/riscv-brs-spec.pdf
-       (Chapter 6)
+Regards,
+Zhao
 
-Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Igor Mammedov <imammedo@redhat.com>
-Message-Id: <20240716144306.2432257-3-sunilvl@ventanamicro.com>
-Reviewed-by: Michael S. Tsirkin <mst@redhat.com>
-Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
----
- hw/riscv/virt-acpi-build.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
-index 5f5082a35b..36d6a3a412 100644
---- a/hw/riscv/virt-acpi-build.c
-+++ b/hw/riscv/virt-acpi-build.c
-@@ -170,7 +170,7 @@ acpi_dsdt_add_uart(Aml *scope, const MemMapEntry *uart_memmap,
-                     uint32_t uart_irq)
- {
-     Aml *dev = aml_device("COM0");
--    aml_append(dev, aml_name_decl("_HID", aml_string("PNP0501")));
-+    aml_append(dev, aml_name_decl("_HID", aml_string("RSCV0003")));
-     aml_append(dev, aml_name_decl("_UID", aml_int(0)));
- 
-     Aml *crs = aml_resource_template();
--- 
-MST
 
 
