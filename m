@@ -4,86 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E87DC3DA63
-	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Jul 2024 12:48:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29B3BC3DA63
+	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Jul 2024 12:56:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sWbPA-0000l1-Sg; Wed, 24 Jul 2024 08:47:40 -0400
+	id 1sWbXf-0007hE-Gx; Wed, 24 Jul 2024 08:56:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1sWbP8-0000jO-Vo
- for qemu-riscv@nongnu.org; Wed, 24 Jul 2024 08:47:39 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1sWbP7-0008FC-13
- for qemu-riscv@nongnu.org; Wed, 24 Jul 2024 08:47:38 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1721825255;
- h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:in-reply-to:in-reply-to:  references:references;
- bh=mK4f87H4NY9/71BRSRerJJDAo9/63WdDPrXjfZ2Qy1M=;
- b=b+HzGWOO0hyypM4RiwFWrPXfkDtcySkaW2erJhqmGKfpIfyox4Ahh+xUkhEmYNn0lcm1FN
- Wqua5KdlRd9ixSrbtsGrIovKFdxdfmv85bKfLzPnKhadjhykTWUbE3YckLVpzC1p9VlHcn
- mRz+Dy6dAMXNGRUVQZqoE/zGrft1Sso=
-Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-382-tIJwzxVHPJu-ibIE437_Ow-1; Wed,
- 24 Jul 2024 08:47:32 -0400
-X-MC-Unique: tIJwzxVHPJu-ibIE437_Ow-1
-Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id A70071955F06; Wed, 24 Jul 2024 12:47:29 +0000 (UTC)
-Received: from redhat.com (unknown [10.42.28.141])
- by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 1737019560AE; Wed, 24 Jul 2024 12:47:19 +0000 (UTC)
-Date: Wed, 24 Jul 2024 13:47:16 +0100
-From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-To: Markus Armbruster <armbru@redhat.com>
-Cc: Zhao Liu <zhao1.liu@intel.com>, Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Yanan Wang <wangyanan55@huawei.com>,
- "Michael S . Tsirkin" <mst@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Eric Blake <eblake@redhat.com>, Marcelo Tosatti <mtosatti@redhat.com>,
- Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Peter Maydell <peter.maydell@linaro.org>,
- Jonathan Cameron <Jonathan.Cameron@huawei.com>,
- Sia Jee Heng <jeeheng.sia@starfivetech.com>, qemu-devel@nongnu.org,
- kvm@vger.kernel.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
- Zhenyu Wang <zhenyu.z.wang@intel.com>,
- Dapeng Mi <dapeng1.mi@linux.intel.com>, Yongwei Ma <yongwei.ma@intel.com>
-Subject: Re: [PATCH 2/8] qapi/qom: Introduce smp-cache object
-Message-ID: <ZqD31Oj5P0uDMs-I@redhat.com>
-References: <20240704031603.1744546-1-zhao1.liu@intel.com>
- <20240704031603.1744546-3-zhao1.liu@intel.com>
- <87wmld361y.fsf@pond.sub.org> <Zp5tBHBoeXZy44ys@intel.com>
- <87h6cfowei.fsf@pond.sub.org>
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1sWbXb-0007b9-OE
+ for qemu-riscv@nongnu.org; Wed, 24 Jul 2024 08:56:24 -0400
+Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1sWbXZ-000399-Ee
+ for qemu-riscv@nongnu.org; Wed, 24 Jul 2024 08:56:23 -0400
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-70d316f0060so616132b3a.1
+ for <qemu-riscv@nongnu.org>; Wed, 24 Jul 2024 05:56:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1721825779; x=1722430579; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=b55Bv/fMkliL5N9hJdd9Czd8pHs3GomAs0nqsc/QVek=;
+ b=MKOLhdODoCjZJAWOXr5g1V3GgQrvTU8I5PCsk9x7/DKMHS8P5fVn83VnOsh5ttUX8x
+ /469zn1zrftRFQNCnhrEfnso2I7OUAbx+3hpB+pWn2UWBycHT/XP6xEOpR8Y0NcFDsV4
+ vHwFsMBYO64u3hgO442Vw9Gu4XUqOUbG9cFmuvj11zg68tSs+ia9JfscIxe08g3MPofs
+ iuPo483IpNFuCDO/rpreJAiU82AqwZPbFG2VHLGegVUWhMcI1jI8TfWqMA9fa2cSPJq8
+ 28zjneDlT03KP0xQKcbQeJhYd11jQJ0zVwE/9u4Z8u1+r5oIc+JSaZgVVYNpNVUhw0De
+ RyMQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1721825779; x=1722430579;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=b55Bv/fMkliL5N9hJdd9Czd8pHs3GomAs0nqsc/QVek=;
+ b=jjH8TkrnTqw7OAP1v5GBetgO7AiY6XcchFuekOd/x8GMpG4FHKkCfCnOreXaSPXUDl
+ 26j4sK3TUg1I++POc2j64KmvFZd0/pCHwuSBQzO2LO2lQnJfKaFw7xebEVRwfdGCfGn+
+ eiURN5NZAsLEdqBO1iJe7d+BZdH8ENWLBf59ukMM6hLw+pu/snAUxYXi/P5cvcJLA0Gk
+ UJyI33dwmIITKzxfcqh7IC7m4GjQo3pZAozrM+TUr10yWnCkffbc+ed7pZWwg83vAEF6
+ CkOGO1mAa6cPNhHzjfaJhblwF/7PhPXmfG6lPUm7uOU3nLKTdOF7XtrbMl+9DgKa0hdD
+ LF7w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXm7jG90d5bkNN73dqBXxtXc4FjcIzouSNmuJj0oowW7y/CvkcuC7g9HaRM/IXSQTCnMRGR+VNCy/dVSSNGmo/b415bOSE=
+X-Gm-Message-State: AOJu0YyQKXAQd1teHeAP7h8Eo5MKY/Hz+ctsAgxHlVcudTA4rOlT7j6z
+ 3AjPanFfVI7sFWS2KoJmBCmTSWGbc9qPAN9VrWF8Blvesfg0LritheTJbeMhz70=
+X-Google-Smtp-Source: AGHT+IEDRUXWG4IW2DT8AWE0+DJFPSdT6N3NN0lqvMyFFKIVievYpd4wS/CXMyzFHHzAGP8ukh8dIw==
+X-Received: by 2002:a05:6a00:9296:b0:70d:2ab5:8677 with SMTP id
+ d2e1a72fcca58-70e9ee90bcemr2854324b3a.10.1721825779002; 
+ Wed, 24 Jul 2024 05:56:19 -0700 (PDT)
+Received: from [192.168.68.110] ([179.193.8.144])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-70cff4b2e31sm8503009b3a.78.2024.07.24.05.56.15
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 24 Jul 2024 05:56:18 -0700 (PDT)
+Message-ID: <ff35d3bb-b4d3-4a28-848c-1bd6668c35ec@ventanamicro.com>
+Date: Wed, 24 Jul 2024 09:56:14 -0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <87h6cfowei.fsf@pond.sub.org>
-User-Agent: Mutt/2.2.12 (2023-09-09)
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=berrange@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 13/13] docs/specs: add riscv-iommu
+To: Alistair Francis <alistair23@gmail.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
+ palmer@rivosinc.com, frank.chang@sifive.com, tjeznach@rivosinc.com,
+ jason.chien@sifive.com
+References: <20240708173501.426225-1-dbarboza@ventanamicro.com>
+ <20240708173501.426225-14-dbarboza@ventanamicro.com>
+ <CAKmqyKOA8VHg=BDBfhZcf0eU=3ts0=PoLEdzdd0rhNOz000=Xg@mail.gmail.com>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <CAKmqyKOA8VHg=BDBfhZcf0eU=3ts0=PoLEdzdd0rhNOz000=Xg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x42d.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.136,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,38 +99,141 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Jul 24, 2024 at 01:35:17PM +0200, Markus Armbruster wrote:
-> Zhao Liu <zhao1.liu@intel.com> writes:
+
+
+On 7/19/24 6:34 AM, Alistair Francis wrote:
+> On Tue, Jul 9, 2024 at 3:37 AM Daniel Henrique Barboza
+> <dbarboza@ventanamicro.com> wrote:
+>>
+>> Add a simple guideline to use the existing RISC-V IOMMU support we just
+>> added.
+>>
+>> This doc will be updated once we add the riscv-iommu-sys device.
+>>
+>> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>> ---
+>>   docs/specs/index.rst       |  1 +
+>>   docs/specs/riscv-iommu.rst | 55 ++++++++++++++++++++++++++++++++++++++
+>>   docs/system/riscv/virt.rst | 13 +++++++++
+>>   3 files changed, 69 insertions(+)
+>>   create mode 100644 docs/specs/riscv-iommu.rst
+>>
+>> diff --git a/docs/specs/index.rst b/docs/specs/index.rst
+>> index 1484e3e760..c68cd9ae6c 100644
+>> --- a/docs/specs/index.rst
+>> +++ b/docs/specs/index.rst
+>> @@ -33,3 +33,4 @@ guest hardware that is specific to QEMU.
+>>      virt-ctlr
+>>      vmcoreinfo
+>>      vmgenid
+>> +   riscv-iommu
+>> diff --git a/docs/specs/riscv-iommu.rst b/docs/specs/riscv-iommu.rst
+>> new file mode 100644
+>> index 0000000000..fa38ff7667
+>> --- /dev/null
+>> +++ b/docs/specs/riscv-iommu.rst
+>> @@ -0,0 +1,55 @@
+>> +.. _riscv-iommu:
+>> +
+>> +RISC-V IOMMU support for RISC-V machines
+>> +========================================
+>> +
+>> +QEMU implements a RISC-V IOMMU emulation based on the RISC-V IOMMU spec
+>> +version 1.0 [1].
+>> +
+>> +The emulation includes a PCI reference device, riscv-iommu-pci, that QEMU
+>> +RISC-V boards can use.  The 'virt' RISC-V machine is compatible with this
+>> +device.
+>> +
+>> +A platform device that implements the RISC-V IOMMU will be added in the
+>> +future.
+>> +
+>> +
+>> +riscv-iommu-pci reference device
+>> +--------------------------------
+>> +
+>> +This device implements the RISC-V IOMMU emulation as recommended by the section
+>> +"Integrating an IOMMU as a PCIe device" of [1]: a PCI device with base class 08h,
+>> +sub-class 06h and programming interface 00h.
+>> +
+>> +As a reference device it doesn't implement anything outside of the specification,
+>> +so it uses a generic default PCI ID given by QEMU: 1b36:0014.
+>> +
+>> +To include the device in the 'virt' machine:
+>> +
+>> +.. code-block:: bash
+>> +
+>> +  $ qemu-system-riscv64 -M virt -device riscv-iommu-pci (...)
 > 
-> > Hi Markus,
-> >> SmpCachesProperties and SmpCacheProperties would put the singular
-> >> vs. plural where it belongs.  Sounds a bit awkward to me, though.
-> >> Naming is hard.
-> >
-> > For SmpCachesProperties, it's easy to overlook the first "s".
-> >
-> >> Other ideas, anybody?
-> >
-> > Maybe SmpCacheOptions or SmpCachesPropertyWrapper?
-> 
-> I wonder why we have a single QOM object to configure all caches, and
-> not one QOM object per cache.
+> We should add a sentence saying what this does. As in what should a
+> user expect after they have done this
 
-Previous versions of this series were augmenting the existing
--smp command line. Now the design has switched to use -object,
-I agree that it'd be simplest to just have one -object flag
-added per cache level we want to defnie.
+I suppose we can add a boilerplate sentence about what an IOMMU does, but aside
+from that I'm not sure what to say about user expectation. If you're adding an
+IOMMU (or any device in QEMU) it's expected that the user has some idea of what
+the device is supposed to do in the board and so on hehe
 
 
-With regards,
+Thanks,
+
 Daniel
--- 
-|: https://berrange.com      -o-    https://www.flickr.com/photos/dberrange :|
-|: https://libvirt.org         -o-            https://fstop138.berrange.com :|
-|: https://entangle-photo.org    -o-    https://www.instagram.com/dberrange :|
 
+> 
+> Alistair
+> 
+>> +
+>> +As of this writing the existing Linux kernel support [2], not yet merged, is being
+>> +created as a Rivos device, i.e. it uses Rivos vendor ID.  To use the riscv-iommu-pci
+>> +device with the existing kernel support we need to emulate a Rivos PCI IOMMU by
+>> +setting 'vendor-id' and 'device-id':
+>> +
+>> +.. code-block:: bash
+>> +
+>> +  $ qemu-system-riscv64 -M virt        \
+>> +     -device riscv-iommu-pci,vendor-id=0x1efd,device-id=0xedf1 (...)
+>> +
+>> +Several options are available to control the capabilities of the device, namely:
+>> +
+>> +- "bus"
+>> +- "ioatc-limit"
+>> +- "intremap"
+>> +- "ats"
+>> +- "off" (Out-of-reset translation mode: 'on' for DMA disabled, 'off' for 'BARE' (passthrough))
+>> +- "s-stage"
+>> +- "g-stage"
+>> +
+>> +
+>> +[1] https://github.com/riscv-non-isa/riscv-iommu/releases/download/v1.0/riscv-iommu.pdf
+>> +[2] https://lore.kernel.org/linux-riscv/cover.1718388908.git.tjeznach@rivosinc.com/
+>> diff --git a/docs/system/riscv/virt.rst b/docs/system/riscv/virt.rst
+>> index 9a06f95a34..8e9a2e4dda 100644
+>> --- a/docs/system/riscv/virt.rst
+>> +++ b/docs/system/riscv/virt.rst
+>> @@ -84,6 +84,19 @@ none``, as in
+>>
+>>   Firmware images used for pflash must be exactly 32 MiB in size.
+>>
+>> +riscv-iommu support
+>> +-------------------
+>> +
+>> +The board has support for the riscv-iommu-pci device by using the following
+>> +command line:
+>> +
+>> +.. code-block:: bash
+>> +
+>> +  $ qemu-system-riscv64 -M virt -device riscv-iommu-pci (...)
+>> +
+>> +Refer to :ref:`riscv-iommu` for more information on how the RISC-V IOMMU support
+>> +works.
+>> +
+>>   Machine-specific options
+>>   ------------------------
+>>
+>> --
+>> 2.45.2
+>>
+>>
 
