@@ -4,79 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C8D9C3DA63
-	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Jul 2024 02:45:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3ED1C3DA61
+	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Jul 2024 06:34:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sWRzh-0006ef-Dc; Tue, 23 Jul 2024 22:44:45 -0400
+	id 1sWVZl-00010g-MT; Wed, 24 Jul 2024 02:34:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sWRzV-0006Yk-7t; Tue, 23 Jul 2024 22:44:34 -0400
-Received: from mail-vs1-xe2b.google.com ([2607:f8b0:4864:20::e2b])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sWRzS-0006Rl-5n; Tue, 23 Jul 2024 22:44:32 -0400
-Received: by mail-vs1-xe2b.google.com with SMTP id
- ada2fe7eead31-4928d2f45e2so1363741137.0; 
- Tue, 23 Jul 2024 19:44:27 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1sWVZg-0000xU-IW; Wed, 24 Jul 2024 02:34:08 -0400
+Received: from out30-110.freemail.mail.aliyun.com ([115.124.30.110])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1sWVZc-0003sI-NT; Wed, 24 Jul 2024 02:34:07 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1721789067; x=1722393867; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=OjE9bHM+7VMQ1ZrAw/PpnOKSkmeUm2Q6befBxSOhlSs=;
- b=JEn2l081JGRNQCn5lfm2mLUPqdLPFd+zKNb801mJv9uU9r26mxD+OETDK4XchFnq9F
- S4l2z8RHCFxi3Dlaeap5I71x1is0DciXYSmh6dpeMGZlsI8jFHQaOo6v5EwCiSSt/ka3
- E8OaRtsMLa2vEr5RFLd/8FJgPi+6CLEv7H8DdZl9VLaffSdVqgV67Ohmw7bg26Z4uNpc
- ibVqOeQcRhqQ+XqjvcK7vvNinY3ypujj3WK1+5QagTBIwOTuADGo3ZEmGZ0t0/ebwC94
- N9aNH7K9ACiYFIB6o5KPzZL+OQBvRT+KQTAesu6Gzp6nklywSwwXJv3m8l6BI5rFRwFA
- RLIg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721789067; x=1722393867;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=OjE9bHM+7VMQ1ZrAw/PpnOKSkmeUm2Q6befBxSOhlSs=;
- b=UuiZQuTMmNB+X1v64AF0YK7yKiSlAjCZverK3PVd9mOwsCAdoc0UZB/Adc1byx0Xeh
- GrvUaCupG/UlStFMxLLGlcNqeHxAoDbbc5WWKvMSHOG4HKaPyO+QuR3IS873Ja+lTo6v
- 2GQGU/VSPPQhCaBTPuiSeFMvOHaFAqapwj4+BHaIooH1lfY0T3xzKfL5n9rytljWbToZ
- 49aiwog800xNWXe944mFQ+i2dDGvumWYKet1Buu9k/M7UQuJq1ji/TjG+vSsq9m7TeES
- uY16UvwtSGSEuSN1YDUKZeHNfHS4ZIZGfChJBhyl7mX75ifCb5caxc/XTTnRRl2E7srY
- COmw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXlN6evAV4i5C5L7QpJY0hPOtV6EjpOm5sJlcdSLJ0Ub5nfhpUwrIYnIBnaq67iJ5F8Q0mCdLNQD9UnC0SXJKfSbbUO4Is=
-X-Gm-Message-State: AOJu0YwL4avelq1gVMa27Eo19fChJJkJ2XgwgaSdqYebP9lHxLd6gocN
- dHNjlelunZuTKak5p4iFws4Xn3+4OXuCJyetkHLsfYVCMU3I8tjapcXwJHHyqJ9xPSlEF3Bm3Yv
- DPvdE8yvhDr6Obc+kRA7Kr7zaeP0=
-X-Google-Smtp-Source: AGHT+IE7Y28RIaR5uPCQ1b69+Rm8t+h4LkW7MCnC9JOhEq9g/CZPBFicAYAvGCAIVU/MTLqEyv7Qw1NqHdZ62PcYZM0=
-X-Received: by 2002:a05:6102:1523:b0:492:94a5:fa1e with SMTP id
- ada2fe7eead31-493c19eb05dmr2033143137.22.1721789067158; Tue, 23 Jul 2024
- 19:44:27 -0700 (PDT)
+ d=linux.alibaba.com; s=default;
+ t=1721802832; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
+ bh=DG0bdKAAKodGYuJbTSlYkGjI4jr8LKx8HUsZyKv8omw=;
+ b=gK2YgOl4sphzCMAojzXzCQlrOsB0/aZfs1hNeevLiDQVpvfrmgsk0frSlWMRRUF7vmUxtp0Jono/r896SJpPNkEGBYpiH7Wb7/2JQpbGEBcVjcL9Z6H5Trg9IICAqR81PzUcgh1GDon3xQKbuB1rBMYvKpuoaIWW4JvqQbV3LLM=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R181e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037067110;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=8; SR=0;
+ TI=SMTPD_---0WBDHGlV_1721802830; 
+Received: from 30.15.255.241(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0WBDHGlV_1721802830) by smtp.aliyun-inc.com;
+ Wed, 24 Jul 2024 14:33:51 +0800
+Message-ID: <5c34fb1a-ce46-4039-b887-9ea56488239b@linux.alibaba.com>
+Date: Wed, 24 Jul 2024 14:32:14 +0800
 MIME-Version: 1.0
-References: <20240719231149.1364-1-zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20240719231149.1364-1-zhiwei_liu@linux.alibaba.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 24 Jul 2024 12:44:01 +1000
-Message-ID: <CAKmqyKN=S9o32K0G8k5NqyMs=Xm+gSNBgnbRi3AjbvOubXoDwA@mail.gmail.com>
-Subject: Re: [PATCH v6 0/8] target/riscv: Expose RV32 cpu to RV64 QEMU
-To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com, 
- alistair.francis@wdc.com, dbarboza@ventanamicro.com, liwei1518@gmail.com, 
- bmeng.cn@gmail.com, philmd@linaro.org, alex.bennee@linaro.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2b;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2b.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/1] target/riscv: Remove redundant insn length check for
+ zama16b
+Content-Language: en-US
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ dbarboza@ventanamicro.com, liwei1518@gmail.com, bmeng.cn@gmail.com
+References: <20240723013012.1443-1-zhiwei_liu@linux.alibaba.com>
+ <dea63117-cabd-4669-bffd-e8c0cb8d9147@linaro.org>
+ <df37fdc2-79c6-420c-bcf4-e7c3649fe446@linux.alibaba.com>
+ <8d12202f-7170-4127-a1a6-c23c03835cf6@linaro.org>
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <8d12202f-7170-4127-a1a6-c23c03835cf6@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=115.124.30.110;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-110.freemail.mail.aliyun.com
+X-Spam_score_int: -174
+X-Spam_score: -17.5
+X-Spam_bar: -----------------
+X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -92,71 +74,62 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sat, Jul 20, 2024 at 9:15=E2=80=AFAM LIU Zhiwei <zhiwei_liu@linux.alibab=
-a.com> wrote:
->
-> This patch set aims to expose 32-bit RISC-V cpu to RV64 QEMU. Thus
-> qemu-system-riscv64 can directly boot a RV32 Linux.
->
-> This patch set has been tested with 6.9.0 Linux Image.
-> And add an avocado tuxrun test in tests/avocado.
->
-> v6:
->   Use TUXRUN test case instead of boot_linux_console
->   Add any32 and max32 cpu for RV64 QEMU
->
-> v5:
->   Rebase to master and add tags
->
-> v4:
->   Drop UL completely in PATCH v3 2/7, 4/7, 5/7.
->   Avocado: Add "if=3Dnone" to "-drive" option in QEMU command line
->
-> v3:
->   Rebase to the master branch
->
-> v2:
->   Remove the line that was inadvertently left in PATCH v1 4/6.
->   Add an avocado test.
->
-> v1:
->   https://mail.gnu.org/archive/html/qemu-riscv/2024-06/msg00501.html
->
->
-> LIU Zhiwei (2):
->   target/riscv: Add any32 and max32 CPU for RV64 QEMU
->   tests/avocado: Boot Linux for RV32 cpu on RV64 QEMU
->
-> TANG Tiancheng (6):
->   target/riscv: Add fw_dynamic_info32 for booting RV32 OpenSBI
->   target/riscv: Adjust PMP size for no-MMU RV64 QEMU running RV32
->   target/riscv: Correct SXL return value for RV32 in RV64 QEMU
->   target/riscv: Detect sxl to set bit width for RV32 in RV64
->   target/riscv: Correct mcause/scause bit width for RV32 in RV64 QEMU
->   target/riscv: Enable RV32 CPU support in RV64 QEMU
 
-Thanks!
+On 2024/7/23 13:59, Richard Henderson wrote:
+> On 7/23/24 15:29, LIU Zhiwei wrote:
+>> The more detailed information about its meaning is in priviledged 
+>> 1.13 specification. More exactly, in 3.6.4. Misaligned Atomicity 
+>> Granule PMA.
+>>
+>> The specification said:
+>>
+>> "The misaligned atomicity granule PMA applies only to AMOs, loads and 
+>> stores defined in the base
+>> ISAs, and loads and stores of no more than MXLEN bits defined in the 
+>> F, D, and Q extensions. For an
+>> instruction in that set, if all accessed bytes lie within the same 
+>> misaligned atomicity granule, the
+>> instruction will not raise an exception for reasons of address 
+>> alignment, and the instruction will give
+>> rise to only one memory operation for the purposes of RVWMO—i.e., it 
+>> will execute atomically."
+>>
+>> That's the reason why I do not apply zama16b to compressed instructions.
+> Given the non-specificity of this paragraph, I think not specifically 
+> calling out compressed forms of the base ISA is simply a documentation 
+> error.  In general, the compressed ISA is supposed to be a smaller 
+> encoding of the exact same instruction as the standard ISA.
+I will confirm this with the RISC-V community. Thanks.
+>
+> However!  It does explicitly say "no more than MXLEN bits", which 
+> means that an RV32/RV64 check is appropriate for FLD/FSD, since MXLEN 
+> may be less than 64.
+Yes.  That's true. Although I don't know why MXLEN is needed as F, D or 
+Q don't depend on MXLEN. We can implement D extension on RV32 CPU.
+>
+> In addition, your change for AMOs is incomplete.  From the text:
+>
+>   If a misaligned AMO accesses a region that does not specify a 
+> misaligned
+>   atomicity granule PMA, or if not all accessed bytes lie within the same
+>   misaligned atomicity granule, then an exception is raised.
+>
+> The second clause corresponds exactly with the Arm FEAT_LSE2.
+> See check_lse2_align in target/arm/tcg/translate-a64.c.
+>
+>
+> r~
+>
+>
+> PS: The first clause is similar to Arm access to pages marked as 
+> Device memory, for which all misaligned accesses trap.  I didn't dig 
+> deep enough to see how PMAs are defined to suggest how that might be 
+> applied.
 
-Applied to riscv-to-apply.next
+It's more complex than I once thought. I will do more work before 
+sending next version.
 
-Alistair
+Thanks,
+Zhiwei
 
->
->  configs/targets/riscv64-softmmu.mak |  2 +-
->  hw/riscv/boot.c                     | 35 +++++++++++++++++++----------
->  hw/riscv/sifive_u.c                 |  3 ++-
->  include/hw/riscv/boot.h             |  4 +++-
->  include/hw/riscv/boot_opensbi.h     | 29 ++++++++++++++++++++++++
->  target/riscv/cpu-qom.h              |  2 ++
->  target/riscv/cpu.c                  | 30 +++++++++++++++++--------
->  target/riscv/cpu.h                  |  5 ++++-
->  target/riscv/cpu_helper.c           | 25 +++++++++++++++------
->  target/riscv/pmp.c                  |  2 +-
->  tests/avocado/tuxrun_baselines.py   | 16 +++++++++++++
->  11 files changed, 120 insertions(+), 33 deletions(-)
->
-> --
-> 2.25.1
->
->
 
