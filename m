@@ -4,83 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BB35C3DA61
-	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Jul 2024 08:32:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28C2AC3DA63
+	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Jul 2024 11:38:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sWXPX-0005Lj-6a; Wed, 24 Jul 2024 04:31:47 -0400
+	id 1sWaJw-0003hZ-TY; Wed, 24 Jul 2024 07:38:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1sWXPV-0005JR-66
- for qemu-riscv@nongnu.org; Wed, 24 Jul 2024 04:31:45 -0400
-Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1sWXPT-0004zn-B4
- for qemu-riscv@nongnu.org; Wed, 24 Jul 2024 04:31:44 -0400
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-1fd6ed7688cso15152425ad.3
- for <qemu-riscv@nongnu.org>; Wed, 24 Jul 2024 01:31:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1721809901; x=1722414701;
- darn=nongnu.org; 
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=6zBMcgZOuGC9Zq1HFFB8Kq14HtY83XxOhr2ghiK5Hz0=;
- b=03mhbXUAMbXiXH7VGYfcgDzGNR0atkWFA7mKgQ+4aKbO9fsyerCV2M1Wd4orUs6ida
- 5QT5IGPAXwlerbwSAt88pv5DV8zVmB1k/LswG8qlbNx0Uy1z0ZXfj8yRPIO99fasV0iR
- FII05mweF/HjsKuUt6rYermBs1QYE/kaD1NJOlUEY6IHWfVtZbcVQ9OYXw8l8N4qH1es
- rkbNOk9HwAL2fTQEdL0GpHJp7HUZXZXvif+hdWbZVGTGrBBFCflI9jIKNUGuu5FqxJib
- NK8nTrnUYG1BAuJ/9pyORXDUy5hCIVCE29zNYjI0rSm/c4qd3W4XeBg52W+Vui3AyBO7
- HZ9g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721809901; x=1722414701;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=6zBMcgZOuGC9Zq1HFFB8Kq14HtY83XxOhr2ghiK5Hz0=;
- b=rvEl+httmpLa7KW/8Gx6oX7wyajE6HetnlYL+RZdqIC5MUVoE80yab2MfUJLgmfuLn
- RNk8Cfh8JA0XbFxJhWQeyxrX9clBWJfldrIz9qWUNT2l4iZ9UW9/1TKFc1mHmXXchnDK
- skdshGAqWkWxpW1fLJUGnl91D39rqh7p1MH1eB3Yjol0TvWsceHrMcLv98A2fIumhMme
- 4daQr0LOEVVxsR2RKOaUrkn6KC+2eI1hCbNkESBDnMVdKPQd5O8sypblFp8jOd2hHkU+
- thF151g6QUngCp2V7yT69CG425XhTnMY0seTNPUZfsC8YKw0pMfn2pYEtYLaD7DMetBx
- nHnw==
-X-Gm-Message-State: AOJu0YxK2KL6CJzl0U2bR4u4/r0WwX5VCG76EyT+XOXIhaEuuNK8TAOG
- Kh1ILtdui8fynb9beOz2pOdEryaaM7bSzj0iipQlkKi20YUvlhSVHgIzqFJimWw=
-X-Google-Smtp-Source: AGHT+IFJvG5mp9zK5yIlMwW5DUiHSHhgxFOvaRZv+2wbdtiX45bYpRgA0fjkVWIpTuwh68jyjV6cNQ==
-X-Received: by 2002:a17:902:dacb:b0:1fd:d4c2:a2ef with SMTP id
- d9443c01a7336-1fdd5512f0emr10667275ad.21.1721809901200; 
- Wed, 24 Jul 2024 01:31:41 -0700 (PDT)
-Received: from atishp.ba.rivosinc.com ([64.71.180.162])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1fd6f3181bdsm88455845ad.133.2024.07.24.01.31.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Jul 2024 01:31:40 -0700 (PDT)
-From: Atish Patra <atishp@rivosinc.com>
-Date: Wed, 24 Jul 2024 01:31:36 -0700
-Subject: [PATCH] target/riscv: Add asserts for out-of-bound access
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1sWaJq-0003SW-Bx
+ for qemu-riscv@nongnu.org; Wed, 24 Jul 2024 07:38:07 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1sWaJn-0002hT-7T
+ for qemu-riscv@nongnu.org; Wed, 24 Jul 2024 07:38:05 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1721821080;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=gt7oiq2zOPx1WuxF9YFCkLZSWSfZxFkV5gZ9VyQnc1s=;
+ b=UW9bEXx1zZBewodJs+EMlo2czXJ+a4TLaCCGSxISCUS+w+fFmoOY3LAx6NUFgwFMLUzt0S
+ 6SRcQuEhx3uLJNnfGtFrikH/bUEnqKGMdyowEy+4ygxfI0GkctFPeeYBQ3XlRURKpK8tYC
+ 1ublXpEXN+neTx3FBEVUPIqOG3/7XwE=
+Received: from mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-516-hYveDVixMB6AwlyQEuIL6A-1; Wed,
+ 24 Jul 2024 07:35:25 -0400
+X-MC-Unique: hYveDVixMB6AwlyQEuIL6A-1
+Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id EEE841955D44; Wed, 24 Jul 2024 11:35:22 +0000 (UTC)
+Received: from blackfin.pond.sub.org (unknown [10.39.192.65])
+ by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 2B24519560AE; Wed, 24 Jul 2024 11:35:20 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id 53C4321E668A; Wed, 24 Jul 2024 13:35:17 +0200 (CEST)
+From: Markus Armbruster <armbru@redhat.com>
+To: Zhao Liu <zhao1.liu@intel.com>
+Cc: Daniel P . =?utf-8?Q?Berrang=C3=A9?= <berrange@redhat.com>,  Eduardo
+ Habkost
+ <eduardo@habkost.net>,  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,  Yanan Wang
+ <wangyanan55@huawei.com>,  "Michael S . Tsirkin" <mst@redhat.com>,  Paolo
+ Bonzini <pbonzini@redhat.com>,  Richard Henderson
+ <richard.henderson@linaro.org>,  Eric Blake <eblake@redhat.com>,  Marcelo
+ Tosatti <mtosatti@redhat.com>,  Alex =?utf-8?Q?Benn=C3=A9e?=
+ <alex.bennee@linaro.org>,
+ Peter Maydell <peter.maydell@linaro.org>,  Jonathan Cameron
+ <Jonathan.Cameron@huawei.com>,  Sia Jee Heng
+ <jeeheng.sia@starfivetech.com>,  qemu-devel@nongnu.org,
+ kvm@vger.kernel.org,  qemu-riscv@nongnu.org,  qemu-arm@nongnu.org,
+ Zhenyu Wang <zhenyu.z.wang@intel.com>,  Dapeng Mi
+ <dapeng1.mi@linux.intel.com>,  Yongwei Ma <yongwei.ma@intel.com>
+Subject: Re: [PATCH 2/8] qapi/qom: Introduce smp-cache object
+In-Reply-To: <Zp5tBHBoeXZy44ys@intel.com> (Zhao Liu's message of "Mon, 22 Jul
+ 2024 22:30:28 +0800")
+References: <20240704031603.1744546-1-zhao1.liu@intel.com>
+ <20240704031603.1744546-3-zhao1.liu@intel.com>
+ <87wmld361y.fsf@pond.sub.org> <Zp5tBHBoeXZy44ys@intel.com>
+Date: Wed, 24 Jul 2024 13:35:17 +0200
+Message-ID: <87h6cfowei.fsf@pond.sub.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240724-fixes-v1-1-4a64596b0d64@rivosinc.com>
-X-B4-Tracking: v=1; b=H4sIAOe7oGYC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIxMDcyNj3bTMitRiXRNjyyRLI8uktKRkCyWg2oKiVLAEUGl0bG0tAOMVHYN
- XAAAA
-To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- bin.meng@windriver.com, dbarboza@ventanamicro.com, alistair.francis@wdc.com, 
- Peter Maydell <peter.maydell@linaro.org>, Atish Patra <atishp@rivosinc.com>
-X-Mailer: b4 0.15-dev-13183
-Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
- envelope-from=atishp@rivosinc.com; helo=mail-pl1-x634.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Content-Type: text/plain
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=armbru@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -21
+X-Spam_score: -2.2
+X-Spam_bar: --
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.136,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,65 +98,261 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Coverity complained about the possible out-of-bounds access with
-counter_virt/counter_virt_prev because these two arrays are
-accessed with privilege mode. However, these two arrays are accessed
-only when virt is enabled. Thus, the privilege mode can't be M mode.
+Zhao Liu <zhao1.liu@intel.com> writes:
 
-Add the asserts anyways to detect any wrong usage of these arrays
-in the future.
+> Hi Markus,
+>
+> On Mon, Jul 22, 2024 at 03:33:13PM +0200, Markus Armbruster wrote:
+>> Date: Mon, 22 Jul 2024 15:33:13 +0200
+>> From: Markus Armbruster <armbru@redhat.com>
+>> Subject: Re: [PATCH 2/8] qapi/qom: Introduce smp-cache object
+>> 
+>> Zhao Liu <zhao1.liu@intel.com> writes:
+>> 
+>> > Introduce smp-cache object so that user could define cache properties.
+>> >
+>> > In smp-cache object, define cache topology based on CPU topology level
+>> > with two reasons:
+>> >
+>> > 1. In practice, a cache will always be bound to the CPU container
+>> >    (either private in the CPU container or shared among multiple
+>> >    containers), and CPU container is often expressed in terms of CPU
+>> >    topology level.
+>> > 2. The x86's cache-related CPUIDs encode cache topology based on APIC
+>> >    ID's CPU topology layout. And the ACPI PPTT table that ARM/RISCV
+>> >    relies on also requires CPU containers to help indicate the private
+>> >    shared hierarchy of the cache. Therefore, for SMP systems, it is
+>> >    natural to use the CPU topology hierarchy directly in QEMU to define
+>> >    the cache topology.
+>> >
+>> > Currently, separated L1 cache (L1 data cache and L1 instruction cache)
+>> > with unified higher-level cache (e.g., unified L2 and L3 caches), is the
+>> > most common cache architectures.
+>> >
+>> > Therefore, enumerate the L1 D-cache, L1 I-cache, L2 cache and L3 cache
+>> > with smp-cache object to add the basic cache topology support.
+>> >
+>> > Suggested-by: Daniel P. Berrange <berrange@redhat.com>
+>> > Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
+>> 
+>> [...]
+>> 
+>> > diff --git a/qapi/machine-common.json b/qapi/machine-common.json
+>> > index 82413c668bdb..8b8c0e9eeb86 100644
+>> > --- a/qapi/machine-common.json
+>> > +++ b/qapi/machine-common.json
+>> > @@ -64,3 +64,53 @@
+>> >    'prefix': 'CPU_TOPO_LEVEL',
+>> >    'data': [ 'invalid', 'thread', 'core', 'module', 'cluster',
+>> >              'die', 'socket', 'book', 'drawer', 'default' ] }
+>> > +
+>> > +##
+>> > +# @SMPCacheName:
+>> 
+>> Why the SMP in this name?  Because it's currently only used by SMP
+>> stuff?  Or is there another reason I'm missing?
+>
+> Yes, I suppose it can only be used in SMP case.
+>
+> Because Intel's heterogeneous CPUs have different topologies for cache,
+> for example, Alderlake's L2, for P core, L2 is per P-core, but for E
+> core, L2 is per module (4 E cores per module). Thus I would like to keep
+> the topology semantics of this object and -smp as consistent as possible.
+>
+> Do you agree?
 
-Suggested-by: Peter Maydell <peter.maydell@linaro.org>
-Signed-off-by: Atish Patra <atishp@rivosinc.com>
----
-The lore discussion can be found here
-https://lore.kernel.org/all/CAHBxVyGQHBobpf71o4Qp51iQGXKBh0Ajup=e_a95xdLF==V_WQ@mail.gmail.com/
----
- target/riscv/pmu.c | 4 ++++
- 1 file changed, 4 insertions(+)
+I don't know enough to meaningfully agree or disagree.  I know just
+enough to annoy you with questions :)
 
-diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
-index 3cc0b3648cad..e05ab067d2f2 100644
---- a/target/riscv/pmu.c
-+++ b/target/riscv/pmu.c
-@@ -204,6 +204,7 @@ static void riscv_pmu_icount_update_priv(CPURISCVState *env,
-     }
- 
-     if (env->virt_enabled) {
-+        g_assert(env->priv <= PRV_S);
-         counter_arr = env->pmu_fixed_ctrs[1].counter_virt;
-         snapshot_prev = env->pmu_fixed_ctrs[1].counter_virt_prev;
-     } else {
-@@ -212,6 +213,7 @@ static void riscv_pmu_icount_update_priv(CPURISCVState *env,
-     }
- 
-     if (new_virt) {
-+        g_assert(newpriv <= PRV_S);
-         snapshot_new = env->pmu_fixed_ctrs[1].counter_virt_prev;
-     } else {
-         snapshot_new = env->pmu_fixed_ctrs[1].counter_prev;
-@@ -242,6 +244,7 @@ static void riscv_pmu_cycle_update_priv(CPURISCVState *env,
-     }
- 
-     if (env->virt_enabled) {
-+        g_assert(env->priv <= PRV_S);
-         counter_arr = env->pmu_fixed_ctrs[0].counter_virt;
-         snapshot_prev = env->pmu_fixed_ctrs[0].counter_virt_prev;
-     } else {
-@@ -250,6 +253,7 @@ static void riscv_pmu_cycle_update_priv(CPURISCVState *env,
-     }
- 
-     if (new_virt) {
-+        g_assert(newpriv <= PRV_S);
-         snapshot_new = env->pmu_fixed_ctrs[0].counter_virt_prev;
-     } else {
-         snapshot_new = env->pmu_fixed_ctrs[0].counter_prev;
+This series adds a way to configure caches.
 
----
-base-commit: daff9f7f7a457f78ce455e6abf19c2a37dfe7630
-change-id: 20240723-fixes-439b929bfbc8
---
-Regards,
-Atish patra
+Structure of the configuration data: a list
+
+    [{"name": N, "topo": T}, ...]
+
+where N can be "l1d", "l1i", "l2", or "l3",
+  and T can be "invalid", "thread", "core", "module", "cluster",
+               "die", "socket", "book", "drawer", or "default".
+
+What's the use case?  The commit messages don't tell.
+
+Why does that use case make no sense without SMP?
+
+Can the same @name occur multiple times?  Documentation doesn't tell.
+If yes, what does that mean?
+
+Say we later add value "l1" for unified level 1 cache.  Would "l1" then
+conflict with "l1d" and "l1u"?
+
+May @topo be "invalid"?  Documentation doesn't tell.  If yes, what does
+that mean?
+
+>> The more idiomatic QAPI name would be SmpCacheName.  Likewise for the
+>> other type names below.
+>
+> I hesitated here as well, but considering that SMPConfiguration is "SMP"
+> and not "Smp", it has that name. I'll change to SmpCacheName for strict
+> initial capitalization.
+>
+>> > +#
+>> > +# An enumeration of cache for SMP systems.  The cache name here is
+>> > +# a combination of cache level and cache type.
+>> 
+>> The first sentence feels awkward.  Maybe
+>> 
+>>    # Caches an SMP system may have.
+>> 
+>> > +#
+>> > +# @l1d: L1 data cache.
+>> > +#
+>> > +# @l1i: L1 instruction cache.
+>> > +#
+>> > +# @l2: L2 (unified) cache.
+>> > +#
+>> > +# @l3: L3 (unified) cache
+>> > +#
+>> > +# Since: 9.1
+>> > +##
+>> 
+>> This assumes the L1 cache is split, and L2 and L3 are unified.
+>> 
+>> If we model a system with say a unified L1 cache, we'd simply extend
+>> this enum.  No real difference to extending it for additional levels.
+>> Correct?
+>
+> Yes. For unified L1, we just need add a "l1" which is opposed to l1i/l1d.
+>
+>> > +{ 'enum': 'SMPCacheName',
+>> > +  'prefix': 'SMP_CACHE',
+>> 
+>> Why not call it SmpCache, and ditch 'prefix'?
+>
+> Because the SMPCache structure in smp_cache.h uses the similar name:
+>
+> +#define TYPE_SMP_CACHE "smp-cache"
+> +OBJECT_DECLARE_SIMPLE_TYPE(SMPCache, SMP_CACHE)
+> +
+> +struct SMPCache {
+> +    Object parent_obj;
+> +
+> +    SMPCacheProperty props[SMP_CACHE__MAX];
+> +};
+>
+> Naming is always difficult,
+
+Oh yes.
+
+>                             so I would use Smpcache here if you feel that
+> SmpCache is sufficient to distinguish it from SMPCache, or I would also
+> rename the SMPCache structure to SMPCacheState in smp_cache.h.
+>
+> Which way do you prefer?
+
+Having both QAPI enum SmpCache and handwritten type SMPCache is clearly
+undesirable.
+
+I retract my suggestion to name the enum SmpCache.  The thing clearly is
+not a cache.  SmpCacheName is better.
+
+If you drop 'prefix', the generated C enum values look like
+SMP_CACHE_NAME_FOO.  Would that work for you?
+
+The "name" part bothers me a bit.  A name doesn't define what something
+is.  A type does.  SmpCacheType?
+
+>> > +  'data': [ 'l1d', 'l1i', 'l2', 'l3' ] }
+>> 
+>> > +
+>> > +##
+>> > +# @SMPCacheProperty:
+>> 
+>> Sure we want to call this "property" (singular) and not "properties"?
+>> What if we add members to this type?
+>> 
+>> > +#
+>> > +# Cache information for SMP systems.
+>> > +#
+>> > +# @name: Cache name.
+>> > +#
+>> > +# @topo: Cache topology level.  It accepts the CPU topology
+>> > +#     enumeration as the parameter, i.e., CPUs in the same
+>> > +#     topology container share the same cache.
+>> > +#
+>> > +# Since: 9.1
+>> > +##
+>> > +{ 'struct': 'SMPCacheProperty',
+>> > +  'data': {
+>> > +  'name': 'SMPCacheName',
+>> > +  'topo': 'CpuTopologyLevel' } }
+>> 
+>> We tend to avoid abbreviations in the QAPI schema.  Please consider
+>> naming this 'topology'.
+>
+> Sure!
+>
+>> > +
+>> > +##
+>> > +# @SMPCacheProperties:
+>> > +#
+>> > +# List wrapper of SMPCacheProperty.
+>> > +#
+>> > +# @caches: the SMPCacheProperty list.
+>> > +#
+>> > +# Since 9.1
+>> > +##
+>> > +{ 'struct': 'SMPCacheProperties',
+>> > +  'data': { 'caches': ['SMPCacheProperty'] } }
+>> 
+>> Ah, now I see why you used the singular above!
+>> 
+>> However, this type holds the properties of call caches.  It is a list
+
+"of all caches" (can't type).
+
+>> where each element holds the properties of a single cache.  Calling the
+>> former "cache property" and the latter "cache properties" is confusing.
+>
+> Yes...
+>
+>> SmpCachesProperties and SmpCacheProperties would put the singular
+>> vs. plural where it belongs.  Sounds a bit awkward to me, though.
+>> Naming is hard.
+>
+> For SmpCachesProperties, it's easy to overlook the first "s".
+>
+>> Other ideas, anybody?
+>
+> Maybe SmpCacheOptions or SmpCachesPropertyWrapper?
+
+I wonder why we have a single QOM object to configure all caches, and
+not one QOM object per cache.
+
+>> > diff --git a/qapi/qapi-schema.json b/qapi/qapi-schema.json
+>> > index b1581988e4eb..25394f2cda50 100644
+>> > --- a/qapi/qapi-schema.json
+>> > +++ b/qapi/qapi-schema.json
+>> > @@ -64,11 +64,11 @@
+>> >  { 'include': 'compat.json' }
+>> >  { 'include': 'control.json' }
+>> >  { 'include': 'introspect.json' }
+>> > -{ 'include': 'qom.json' }
+>> > -{ 'include': 'qdev.json' }
+>> >  { 'include': 'machine-common.json' }
+>> >  { 'include': 'machine.json' }
+>> >  { 'include': 'machine-target.json' }
+>> > +{ 'include': 'qom.json' }
+>> > +{ 'include': 'qdev.json' }
+>> >  { 'include': 'replay.json' }
+>> >  { 'include': 'yank.json' }
+>> >  { 'include': 'misc.json' }
+>> 
+>> Worth explaining in the commit message, I think.
+>
+> Because of the include relationship between the json files, I need to
+> change the order. I had a "crazy" proposal to clean up this:
+> https://lore.kernel.org/qemu-devel/20240517062748.782366-1-zhao1.liu@intel.com/
+>
+> Thanks,
+> Zhao
 
 
