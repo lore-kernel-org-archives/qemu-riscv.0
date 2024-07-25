@@ -4,68 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C17C7C3DA49
-	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Jul 2024 10:59:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EBA1C3DA49
+	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Jul 2024 11:41:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sWwBk-0002EE-AN; Thu, 25 Jul 2024 06:59:12 -0400
+	id 1sWwqf-0005pw-Es; Thu, 25 Jul 2024 07:41:29 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jonathan.cameron@huawei.com>)
- id 1sWwBi-0002A1-64; Thu, 25 Jul 2024 06:59:10 -0400
-Received: from frasgout.his.huawei.com ([185.176.79.56])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jonathan.cameron@huawei.com>)
- id 1sWwBf-0003tU-SG; Thu, 25 Jul 2024 06:59:09 -0400
-Received: from mail.maildlp.com (unknown [172.18.186.31])
- by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4WV79d5jBwz6K9Gq;
- Thu, 25 Jul 2024 18:56:37 +0800 (CST)
-Received: from lhrpeml500005.china.huawei.com (unknown [7.191.163.240])
- by mail.maildlp.com (Postfix) with ESMTPS id B2103140594;
- Thu, 25 Jul 2024 18:59:03 +0800 (CST)
-Received: from localhost (10.203.174.77) by lhrpeml500005.china.huawei.com
- (7.191.163.240) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.1.2507.39; Thu, 25 Jul
- 2024 11:59:03 +0100
-Date: Thu, 25 Jul 2024 11:59:02 +0100
-To: Markus Armbruster <armbru@redhat.com>
-CC: Zhao Liu <zhao1.liu@intel.com>, <berrange@redhat.com>, Eduardo Habkost
- <eduardo@habkost.net>, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Philippe =?ISO-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>, Yanan Wang
- <wangyanan55@huawei.com>, "Michael S.Tsirkin " <mst@redhat.com>, "Paolo
- Bonzini" <pbonzini@redhat.com>, Richard Henderson
- <richard.henderson@linaro.org>, Eric Blake <eblake@redhat.com>, "Marcelo
- Tosatti" <mtosatti@redhat.com>, Alex =?ISO-8859-1?Q?Benn=E9e?=
- <alex.bennee@linaro.org>, Peter Maydell <peter.maydell@linaro.org>, "Sia Jee
- Heng" <jeeheng.sia@starfivetech.com>, <qemu-devel@nongnu.org>,
- <kvm@vger.kernel.org>, <qemu-riscv@nongnu.org>, <qemu-arm@nongnu.org>,
- "Zhenyu Wang" <zhenyu.z.wang@intel.com>, Dapeng Mi
- <dapeng1.mi@linux.intel.com>, Yongwei Ma <yongwei.ma@intel.com>
-Subject: Re: [PATCH 2/8] qapi/qom: Introduce smp-cache object
-Message-ID: <20240725115902.000037e4@Huawei.com>
-In-Reply-To: <20240725115059.000016c5@Huawei.com>
-References: <20240704031603.1744546-1-zhao1.liu@intel.com>
- <20240704031603.1744546-3-zhao1.liu@intel.com>
- <87wmld361y.fsf@pond.sub.org> <Zp5tBHBoeXZy44ys@intel.com>
- <87h6cfowei.fsf@pond.sub.org> <ZqEV8uErCn+QkOw8@intel.com>
- <871q3hua56.fsf@pond.sub.org> <20240725115059.000016c5@Huawei.com>
-Organization: Huawei Technologies Research and Development (UK) Ltd.
-X-Mailer: Claws Mail 4.1.0 (GTK 3.24.33; x86_64-w64-mingw32)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1sWwqc-0005jI-9O
+ for qemu-riscv@nongnu.org; Thu, 25 Jul 2024 07:41:26 -0400
+Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1sWwqZ-0001ak-7n
+ for qemu-riscv@nongnu.org; Thu, 25 Jul 2024 07:41:25 -0400
+Received: by mail-pf1-x435.google.com with SMTP id
+ d2e1a72fcca58-70d2ae44790so621685b3a.2
+ for <qemu-riscv@nongnu.org>; Thu, 25 Jul 2024 04:41:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1721907681; x=1722512481; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=4BjiPeeHBWLhSj4uJU2ToVH3O0/femhQQB0EUVqahOo=;
+ b=SGswuBpF6BGf4ZnBxdDhQ1aEyy7+GUh023IGRbNhT/MoMXQHLbXjIlFxiiol+ckEKk
+ ltN619HsLaqIXR+LMNQy9NuxYlW5VB5mre+oStbllsm0oradY8HcTO+kReWWMJ5LstQ2
+ bVergTru58bhRiMbLvDHUdXo1h1JD1TgANY09jmhtTFRNQN5hB4JbN8bVGjF+0WSREq3
+ i/CdHONUNslf6fSyzlZglBVxki7u+9FbM8mI03O1PoOFmJwjd99qGGyNw/yNBzh28iPv
+ ZH4Ae0IhOE5LtXGUNaxuXxmQPdCZNN0smLRbeXYKnydVaBD2zLx76h32fZeCZ3Rpqjnl
+ GPvA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1721907681; x=1722512481;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=4BjiPeeHBWLhSj4uJU2ToVH3O0/femhQQB0EUVqahOo=;
+ b=Yve/wtEsDhgvZUaEzXqu9NAhkMr9IQz0iHEACBpqFUW6UlP28ZAJXUft21q7VA61YW
+ 92MkREcDadc8XgH9n8w/pe1gMvIusl+5zUE4SQQoaJoJvaDTDpdbzpCKQCGCwovUhD6K
+ LtP/fp8VfiPhXZk2MeEEoUJQCxq4AM87cI0veo36VxP3ZT+4jWeg5BdKEtEJ+bL8hpJp
+ a/iwwwY491dQCVNSVjkK0Gi4yHNZv4QEFzogXFJguMi7PVMe/48WWaVCJKMbN3uYOEc2
+ 7PMIsZ4bAL+6F9R79sn2KD2anUREwOrBVrAdTU/fgBLlV+FsrHGUuoUnykBPZ77wtD+L
+ Sz7w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXDNLKubFRYVaXGoOdbPIpwOxaFcdqBNGpOw69zWWXl1JEyYjpi+Clt3Ss7aloxy1G7ECdpltheLbum819lvObux/EvrQw=
+X-Gm-Message-State: AOJu0YxQwAWQfdyjCHTPuDVEQpXBK1r+KCTgwrYEeSTB5ATcyYaf3wSi
+ N+8/EtT2zhNuneqciagKgRN4kdU1XIvd+uYthj7VrxTCqK6jsyG3qygIicLTjSU=
+X-Google-Smtp-Source: AGHT+IFb5FsvM9EEWWw2n+gVgpg7QtSUNe0zmpOlNbHfhFgLdLEtJb0LC9/EbeNfi94XmCdBURdELw==
+X-Received: by 2002:a05:6a20:a11a:b0:1c2:905c:db0 with SMTP id
+ adf61e73a8af0-1c47b4aef68mr1670792637.33.1721907681468; 
+ Thu, 25 Jul 2024 04:41:21 -0700 (PDT)
+Received: from [192.168.68.110] ([179.193.8.144])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-1fed7c8c6f4sm12146155ad.24.2024.07.25.04.41.18
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 25 Jul 2024 04:41:21 -0700 (PDT)
+Message-ID: <565a0b5c-bf9b-4ae0-8332-14c2e986604d@ventanamicro.com>
+Date: Thu, 25 Jul 2024 08:41:17 -0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset="US-ASCII"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.203.174.77]
-X-ClientProxiedBy: lhrpeml100006.china.huawei.com (7.191.160.224) To
- lhrpeml500005.china.huawei.com (7.191.163.240)
-Received-SPF: pass client-ip=185.176.79.56;
- envelope-from=jonathan.cameron@huawei.com; helo=frasgout.his.huawei.com
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH-for-9.1] target/riscv: Remove the deprecated 'any' CPU type
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: Bin Meng <bmeng.cn@gmail.com>, devel@lists.libvirt.org,
+ Weiwei Li <liwei1518@gmail.com>, qemu-riscv@nongnu.org,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+References: <20240724130717.95629-1-philmd@linaro.org>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20240724130717.95629-1-philmd@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::435;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x435.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -78,99 +99,142 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-to:  Jonathan Cameron <Jonathan.Cameron@Huawei.com>
-From:  Jonathan Cameron via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, 25 Jul 2024 11:50:59 +0100
-Jonathan Cameron <Jonathan.Cameron@Huawei.com> wrote:
 
-Resending as this bounced due (I think) to an address typo.
 
-> Hi Markus, Zhao Liu
+On 7/24/24 10:07 AM, Philippe Mathieu-Daudé wrote:
+> The 'any' CPU is deprecated since commit f57d5f8004b
+> ("target/riscv: deprecate the 'any' CPU type"). Users
+> are better off using the default CPUs or the 'max' CPU.
 > 
-> From the ARM server side this is something I want to see as well.
-> So I can comment on why we care.
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> ---
+>   docs/about/deprecated.rst       | 13 -------------
+>   docs/about/removed-features.rst |  8 ++++++++
+>   target/riscv/cpu-qom.h          |  1 -
+>   target/riscv/cpu.c              | 28 ----------------------------
+>   4 files changed, 8 insertions(+), 42 deletions(-)
 > 
-> > >> This series adds a way to configure caches.
-> > >> 
-> > >> Structure of the configuration data: a list
-> > >> 
-> > >>     [{"name": N, "topo": T}, ...]
-> > >> 
-> > >> where N can be "l1d", "l1i", "l2", or "l3",
-> > >>   and T can be "invalid", "thread", "core", "module", "cluster",
-> > >>                "die", "socket", "book", "drawer", or "default".
-> > >> 
-> > >> What's the use case?  The commit messages don't tell.    
-> > >
-> > > i386 has the default cache topology model: l1 per core/l2 per core/l3
-> > > per die.
-> > >
-> > > Cache topology affects scheduler performance, e.g., kernel's cluster
-> > > scheduling.
-> > >
-> > > Of course I can hardcode some cache topology model in the specific cpu
-> > > model that corresponds to the actual hardware, but for -cpu host/max,
-> > > the default i386 cache topology model has no flexibility, and the
-> > > host-cpu-cache option doesn't have enough fine-grained control over the
-> > > cache topology.
-> > >
-> > > So I want to provide a way to allow user create more fleasible cache
-> > > topology. Just like cpu topology.    
-> > 
-> > 
-> > So the use case is exposing a configurable cache topology to the guest
-> > in order to increase performance.  Performance can increase when the
-> > configured virtual topology is closer to the physical topology than a
-> > default topology would be.  This can be the case with CPU host or max.
-> > 
-> > Correct?  
-> 
-> That is definitely why we want it on arm64 where this info fills in
-> the topology we can't get from the CPU registers.
-> (we should have patches on top of this to send out shortly).
-> 
-> As a side note we also need this for MPAM emulation for TCG
-> (any maybe eventually paravirtualized MPAM) as this is needed
-> to build the right PPTT to describe the caches which we then
-> query to figure out association of MPAM controls with particularly
-> caches.
-> 
-> Size configuration is something we'll need down the line (presenting
-> only part of an L3 may make sense if it's shared by multiple VMs
-> or partitioned with MPAM) but that's a future question.
-> 
-> 
-> >   
-> > >> Why does that use case make no sense without SMP?    
-> > >
-> > > As the example I mentioned, for Intel hyrbid architecture, P cores has
-> > > l2 per core and E cores has l2 per module. Then either setting the l2
-> > > topology level as core nor module, can emulate the real case.
-> > >
-> > > Even considering the more extreme case of Intel 14th MTL CPU, where
-> > > some E cores have L3 and some don't even have L3. As well as the last
-> > > time you and Daniel mentioned that in the future we could consider
-> > > covering more cache properties such as cache size. But the l3 size can
-> > > be different in the same system, like AMD's x3D technology. So
-> > > generally configuring properties for @name in a list can't take into
-> > > account the differences of heterogeneous caches with the same @name.
-> > >
-> > > Hope my poor english explains the problem well. :-)    
-> > 
-> > I think I understand why you want to configure caches.  My question was
-> > about the connection to SMP.
-> > 
-> > Say we run a guest with a single core, no SMP.  Could configuring caches
-> > still be useful then?  
-> 
-> Probably not useful to configure topology (sizes are a separate question)
-> - any sensible default should be fine.
-> 
-> Jonathan
-> 
-> 
+> diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
+> index 88f0f037865..0ac49b15b44 100644
+> --- a/docs/about/deprecated.rst
+> +++ b/docs/about/deprecated.rst
+> @@ -347,19 +347,6 @@ QEMU's ``vhost`` feature, which would eliminate the high latency costs under
+>   which the 9p ``proxy`` backend currently suffers. However as of to date nobody
+>   has indicated plans for such kind of reimplementation unfortunately.
+>   
+> -RISC-V 'any' CPU type ``-cpu any`` (since 8.2)
+> -^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> -
+> -The 'any' CPU type was introduced back in 2018 and has been around since the
+> -initial RISC-V QEMU port. Its usage has always been unclear: users don't know
+> -what to expect from a CPU called 'any', and in fact the CPU does not do anything
+> -special that isn't already done by the default CPUs rv32/rv64.
+> -
+> -After the introduction of the 'max' CPU type, RISC-V now has a good coverage
+> -of generic CPUs: rv32 and rv64 as default CPUs and 'max' as a feature complete
+> -CPU for both 32 and 64 bit builds. Users are then discouraged to use the 'any'
+> -CPU type starting in 8.2.
+> -
+>   RISC-V CPU properties which start with capital 'Z' (since 8.2)
+>   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>   
+> diff --git a/docs/about/removed-features.rst b/docs/about/removed-features.rst
+> index fc7b28e6373..f3e9474a73e 100644
+> --- a/docs/about/removed-features.rst
+> +++ b/docs/about/removed-features.rst
+> @@ -850,6 +850,14 @@ The RISC-V no MMU cpus have been removed. The two CPUs: ``rv32imacu-nommu`` and
+>   ``rv64imacu-nommu`` can no longer be used. Instead the MMU status can be specified
+>   via the CPU ``mmu`` option when using the ``rv32`` or ``rv64`` CPUs.
+>   
+> +RISC-V 'any' CPU type ``-cpu any`` (removed in 9.1)
+> +'''''''''''''''''''''''''''''''''''''''''''''''''''
 
+With the '9.1' changed to '9.2':
+
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+> +
+> +The 'any' CPU type was introduced back in 2018 and was around since the
+> +initial RISC-V QEMU port. Its usage was always been unclear: users don't know
+> +what to expect from a CPU called 'any', and in fact the CPU does not do anything
+> +special that isn't already done by the default CPUs rv32/rv64.
+> +
+>   ``compat`` property of server class POWER CPUs (removed in 6.0)
+>   '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+>   
+> diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
+> index 3670cfe6d9a..4464c0fd7a3 100644
+> --- a/target/riscv/cpu-qom.h
+> +++ b/target/riscv/cpu-qom.h
+> @@ -29,7 +29,6 @@
+>   #define RISCV_CPU_TYPE_SUFFIX "-" TYPE_RISCV_CPU
+>   #define RISCV_CPU_TYPE_NAME(name) (name RISCV_CPU_TYPE_SUFFIX)
+>   
+> -#define TYPE_RISCV_CPU_ANY              RISCV_CPU_TYPE_NAME("any")
+>   #define TYPE_RISCV_CPU_MAX              RISCV_CPU_TYPE_NAME("max")
+>   #define TYPE_RISCV_CPU_BASE32           RISCV_CPU_TYPE_NAME("rv32")
+>   #define TYPE_RISCV_CPU_BASE64           RISCV_CPU_TYPE_NAME("rv64")
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index a90808a3bac..4bda754b013 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -438,27 +438,6 @@ static void set_satp_mode_default_map(RISCVCPU *cpu)
+>   }
+>   #endif
+>   
+> -static void riscv_any_cpu_init(Object *obj)
+> -{
+> -    RISCVCPU *cpu = RISCV_CPU(obj);
+> -    CPURISCVState *env = &cpu->env;
+> -    riscv_cpu_set_misa_ext(env, RVI | RVM | RVA | RVF | RVD | RVC | RVU);
+> -
+> -#ifndef CONFIG_USER_ONLY
+> -    set_satp_mode_max_supported(RISCV_CPU(obj),
+> -        riscv_cpu_mxl(&RISCV_CPU(obj)->env) == MXL_RV32 ?
+> -        VM_1_10_SV32 : VM_1_10_SV57);
+> -#endif
+> -
+> -    env->priv_ver = PRIV_VERSION_LATEST;
+> -
+> -    /* inherited from parent obj via riscv_cpu_init() */
+> -    cpu->cfg.ext_zifencei = true;
+> -    cpu->cfg.ext_zicsr = true;
+> -    cpu->cfg.mmu = true;
+> -    cpu->cfg.pmp = true;
+> -}
+> -
+>   static void riscv_max_cpu_init(Object *obj)
+>   {
+>       RISCVCPU *cpu = RISCV_CPU(obj);
+> @@ -1161,11 +1140,6 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>       RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
+>       Error *local_err = NULL;
+>   
+> -    if (object_dynamic_cast(OBJECT(dev), TYPE_RISCV_CPU_ANY) != NULL) {
+> -        warn_report("The 'any' CPU is deprecated and will be "
+> -                    "removed in the future.");
+> -    }
+> -
+>       cpu_exec_realizefn(cs, &local_err);
+>       if (local_err != NULL) {
+>           error_propagate(errp, local_err);
+> @@ -2952,7 +2926,6 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+>           .abstract = true,
+>       },
+>   #if defined(TARGET_RISCV32)
+> -    DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_ANY,       MXL_RV32,  riscv_any_cpu_init),
+>       DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_MAX,       MXL_RV32,  riscv_max_cpu_init),
+>       DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_BASE32,    MXL_RV32,  rv32_base_cpu_init),
+>       DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_IBEX,       MXL_RV32,  rv32_ibex_cpu_init),
+> @@ -2962,7 +2935,6 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+>       DEFINE_BARE_CPU(TYPE_RISCV_CPU_RV32I,        MXL_RV32,  rv32i_bare_cpu_init),
+>       DEFINE_BARE_CPU(TYPE_RISCV_CPU_RV32E,        MXL_RV32,  rv32e_bare_cpu_init),
+>   #elif defined(TARGET_RISCV64)
+> -    DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_ANY,       MXL_RV64,  riscv_any_cpu_init),
+>       DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_MAX,       MXL_RV64,  riscv_max_cpu_init),
+>       DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_BASE64,    MXL_RV64,  rv64_base_cpu_init),
+>       DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SIFIVE_E51, MXL_RV64,  rv64_sifive_e_cpu_init),
 
