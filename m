@@ -4,79 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0807EC3DA49
-	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Jul 2024 23:46:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D920C3DA70
+	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Jul 2024 23:47:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sX8AR-00008N-T4; Thu, 25 Jul 2024 19:46:40 -0400
+	id 1sX8AJ-000868-1z; Thu, 25 Jul 2024 19:46:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sX8AJ-00088V-Ne
- for qemu-riscv@nongnu.org; Thu, 25 Jul 2024 19:46:32 -0400
-Received: from mail-pf1-x42c.google.com ([2607:f8b0:4864:20::42c])
+ id 1sX8AG-000839-0A
+ for qemu-riscv@nongnu.org; Thu, 25 Jul 2024 19:46:28 -0400
+Received: from mail-oi1-x22c.google.com ([2607:f8b0:4864:20::22c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sX8AH-0005JG-ET
- for qemu-riscv@nongnu.org; Thu, 25 Jul 2024 19:46:31 -0400
-Received: by mail-pf1-x42c.google.com with SMTP id
- d2e1a72fcca58-70d18112b60so270760b3a.1
- for <qemu-riscv@nongnu.org>; Thu, 25 Jul 2024 16:46:28 -0700 (PDT)
+ id 1sX8AD-0005IN-Ij
+ for qemu-riscv@nongnu.org; Thu, 25 Jul 2024 19:46:27 -0400
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-3db12a2f530so248361b6e.1
+ for <qemu-riscv@nongnu.org>; Thu, 25 Jul 2024 16:46:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1721951188; x=1722555988;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1721951184; x=1722555984;
  darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=N5/LzlqpvA6Qpq2davUTlla9GHONddj7cGNIIGXRrAY=;
- b=EGnfzez8FAtSF/LvNq0mN8nIta792KkZM6ygxMk1I7EZ4iYT3Er8lR4DK8IAC1IgM4
- s1U1GTpbP2Ro1gnL9v+xVIYR0QUsb1s7H9zl6Zm+N2oCTuU53m/aMpBxLmVwVBEUOBUn
- sHAJbKa3XzFdmpafeQzX/w/x51515xvOr9HDxw7begJN42A2Apf8pejviDQOT0FW6cFy
- nRaMyByZ1djGbEmV55vvtpWUW6p1CymOjp2l245Txg7CPPO8MrHqqAxMmJFc4/JUszNZ
- ZwZOXefQTd8tnPMhHneI2SY50DiFnjfOHf+KX+J6mojMsOUWSq3PFWC5281bDCMSkpmx
- KhNA==
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=SDZzuXELxmPUp8CRA1PEnvou4xImrqnLEUuFAGJuXPU=;
+ b=EFtobRxfOmM5zQS9+ySv4fv8VhQ413N8EyMoQ4etU+ymiKRyMGE3eadGR4z8PB2zIb
+ JLwQRR/LGIMsYymG5oe2QJWKr+iIR3xrRdH3G4uDoaWI3S3lRE4HWF54Weg+rD5xHh76
+ dZ/ST51Eskmx8bcnnnf4DOsmRIbbrdHGYBac3B//1X8hvSH8GKbTTvFhLhsMAKeKRnR0
+ 2+cX91jkMja2pRGarmyoXlUreaWK8tEyXfwXdLicjQ4f/E3d2iP5eRyvHwg4U6RMe7Dw
+ Il4EIIBAUWT6UjD7OL6JK/s79qEgKMSwVG7nJgO3/0LedznyfvRJHo3stVp2MY593pZS
+ XFTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721951188; x=1722555988;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=N5/LzlqpvA6Qpq2davUTlla9GHONddj7cGNIIGXRrAY=;
- b=b2cLWBhWyZ4FhLnVG64ktZvyjEie6NlxCdFYbsTEWC0pSBAudOVxAffi51npglwVhm
- +synXouMVgpVnhFiJy8jFb9GKolv28wKWUM0yDETXemJwgPDyvWatJo+HoGp6iCp3B0L
- kgDZqLl/kuDpxy6zfnIcR16jUQgNMwk7Ly1OKn2uJ7CjWoFfC55oJmXLyZySMZfH6Nxm
- 3wptMrTptaiQbSBUT61hx2NNxqgdbgUq8lIu7lJiOMwFtDvdEwXdaBkcZM1z9SybVyCl
- c9ddaP54DxFv3EWS0XUFARkLEPEoXggO69OszcTwAYuXl4b2K+1kHCcivKLkPEBnpPB2
- /nHw==
-X-Gm-Message-State: AOJu0Yy3DMDdlHNJyYq57J7072bUpLJzqVuAt3unvqVq+y66hQng3bfh
- GwfAVycEvh7d2beDbvMRNAO59bFtoVYsLrOQryESkx6/U8GZkpH+oIy7nsI+Ah32pb2H0+ATlBV
- w
-X-Google-Smtp-Source: AGHT+IFBqhysi68bLUQV086iTm3yE5nlNw7zltSHSJVZBu+v32rdNAuL3GnW3+EAxDzW3uoRIzh83A==
-X-Received: by 2002:aa7:88cd:0:b0:70e:aa44:39df with SMTP id
- d2e1a72fcca58-70eaa443bb0mr7472375b3a.1.1721951187577; 
- Thu, 25 Jul 2024 16:46:27 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1721951184; x=1722555984;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=SDZzuXELxmPUp8CRA1PEnvou4xImrqnLEUuFAGJuXPU=;
+ b=jDfZMO+q/5WcThuoJ0WpX9VSL03X5yeHSzeDasHU9+FcoVPgZILH2h/Au32h+qhABh
+ +AiGQ3hvMlRGme1LbNHjTEXsq1SvxusGznstZJvLcfBLcqxBoVrC+d8p9Db0hy1Qo3uV
+ gKMZTW0NHkiDRJ2+HrbUXEzuhpG0gyzat9/TgWecMRf8Iplet2OVsVdXfooW6T2aHlTB
+ UPZKbcKXg+g3aA8qBSg9ws03lLyEXn6lsJU/6CmeahOm0FG/kQXe0BeEHuc1pDVuwGQf
+ d7Us+08G5hg0gzHDZmoBj4iPx5YcfhhPTBcZWng9fkOtBt/0dIERoduh9bUDV7xqgAmr
+ suog==
+X-Gm-Message-State: AOJu0YzKTXD401gVqrundVwUYJ3MLj1RwXB9xPCoWPtWgTK4iJR30XSY
+ E7Iw1ZhJlV/3nqBpuRNO6CgyUeBPCvMh24Cin5Lz5mv/CWsxU+rdQmc/zSoDDLB/EsHo7Qpf//M
+ T
+X-Google-Smtp-Source: AGHT+IFLsp+54jujpfagFV6LTppRhI5N3siXys7sb0xTGO6OiBCSiK6lJe2a6x4B+rLrybgFNV5p3w==
+X-Received: by 2002:a05:6808:300f:b0:3da:bc74:e9d3 with SMTP id
+ 5614622812f47-3db10f5a0ebmr5391981b6e.17.1721951183691; 
+ Thu, 25 Jul 2024 16:46:23 -0700 (PDT)
 Received: from debug.ba.rivosinc.com ([64.71.180.162])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-70ead8128d0sm1647565b3a.118.2024.07.25.16.46.26
+ d2e1a72fcca58-70ead8128d0sm1647565b3a.118.2024.07.25.16.46.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Jul 2024 16:46:27 -0700 (PDT)
+ Thu, 25 Jul 2024 16:46:23 -0700 (PDT)
 From: Deepak Gupta <debug@rivosinc.com>
 To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, jim.shu@sifive.com,
  andy.chiu@sifive.com, jesse.huang@sifive.com, kito.cheng@sifive.com
 Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, laurent@vivier.eu,
  bmeng.cn@gmail.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
  zhiwei_liu@linux.alibaba.com, Deepak Gupta <debug@rivosinc.com>
-Subject: [PATCH 03/24] target/riscv: save and restore elp state on priv
- transitions
-Date: Thu, 25 Jul 2024 16:45:52 -0700
-Message-ID: <20240725234614.3850142-4-debug@rivosinc.com>
+Subject: [PATCH 00/24] riscv support for control flow integrity extensions
+Date: Thu, 25 Jul 2024 16:45:49 -0700
+Message-ID: <20240725234614.3850142-1-debug@rivosinc.com>
 X-Mailer: git-send-email 2.44.0
-In-Reply-To: <20240725234614.3850142-1-debug@rivosinc.com>
-References: <20240725234614.3850142-1-debug@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42c;
- envelope-from=debug@rivosinc.com; helo=mail-pf1-x42c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::22c;
+ envelope-from=debug@rivosinc.com; helo=mail-oi1-x22c.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -98,202 +94,129 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-elp state is recorded in *status on trap entry (less privilege to higher
-privilege) and restored in elp from *status on trap exit (higher to less
-privilege).
+Control flow integrity extensions (`zicfilp` and `zicfiss`) [1] for risc-v
+are ratified. `zicfilp` protects forward control flow i.e. indirect function
+call sites while `zicfiss` protects return control flow i.e. return from
+functions which have spilled return addresses on stack.
 
-Additionally this patch introduces a forward cfi helper function to
-determine if current privilege has forward cfi is enabled or not based on
-*envcfg (for U, VU, S, VU, HS) or mseccfg csr (for M). For qemu-user, a
-new field `ufcfien` is introduced which is by default set to false and
-helper function returns value deposited in `ufcfien` for qemu-user.
+This patchset is based on recent master with patch series from LIU (alibaba)
+[4] which enables `zimop` and `zcmop` support in qemu. `zicfiss` has a dependency
+on `zimop` and `zcmop`.
 
-Signed-off-by: Deepak Gupta <debug@rivosinc.com>
-Co-developed-by: Jim Shu <jim.shu@sifive.com>
-Co-developed-by: Andy Chiu <andy.chiu@sifive.com>
----
- target/riscv/cpu.c        |  5 ++++
- target/riscv/cpu.h        |  2 ++
- target/riscv/cpu_helper.c | 58 +++++++++++++++++++++++++++++++++++++++
- target/riscv/op_helper.c  | 18 ++++++++++++
- 4 files changed, 83 insertions(+)
+zicfilp
+-------
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 82fa85a8d6..e1526c7ab5 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1022,6 +1022,11 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
-     env->load_res = -1;
-     set_default_nan_mode(1, &env->fp_status);
- 
-+#ifdef CONFIG_USER_ONLY
-+    /* qemu-user for riscv, fcfi is off by default */
-+    env->ufcfien = false;
-+#endif
-+
- #ifndef CONFIG_USER_ONLY
-     if (cpu->cfg.debug) {
-         riscv_trigger_reset_hold(env);
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index ae436a3179..8c7841fc08 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -226,6 +226,7 @@ struct CPUArchState {
-     cfi_elp      elp;
- #ifdef CONFIG_USER_ONLY
-     uint32_t elf_flags;
-+    bool ufcfien;
- #endif
- 
- #ifndef CONFIG_USER_ONLY
-@@ -530,6 +531,7 @@ void riscv_cpu_set_geilen(CPURISCVState *env, target_ulong geilen);
- bool riscv_cpu_vector_enabled(CPURISCVState *env);
- void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable);
- int riscv_env_mmu_index(CPURISCVState *env, bool ifetch);
-+bool cpu_get_fcfien(CPURISCVState *env);
- G_NORETURN void  riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
-                                                MMUAccessType access_type,
-                                                int mmu_idx, uintptr_t retaddr);
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 6709622dd3..fb4b6066d3 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -33,6 +33,7 @@
- #include "cpu_bits.h"
- #include "debug.h"
- #include "tcg/oversized-guest.h"
-+#include "pmp.h"
- 
- int riscv_env_mmu_index(CPURISCVState *env, bool ifetch)
- {
-@@ -63,6 +64,35 @@ int riscv_env_mmu_index(CPURISCVState *env, bool ifetch)
- #endif
- }
- 
-+bool cpu_get_fcfien(CPURISCVState *env)
-+{
-+#ifdef CONFIG_USER_ONLY
-+    return env->ufcfien;
-+#else
-+    /* no cfi extension, return false */
-+    if (!env_archcpu(env)->cfg.ext_zicfilp) {
-+        return false;
-+    }
-+
-+    switch (env->priv) {
-+    case PRV_U:
-+        if (riscv_has_ext(env, RVS)) {
-+            return (env->senvcfg & MENVCFG_LPE) ? true : false;
-+        }
-+        return (env->menvcfg & MENVCFG_LPE) ? true : false;
-+    case PRV_S:
-+        if (env->virt_enabled) {
-+            return (env->henvcfg & HENVCFG_LPE) ? true : false;
-+        }
-+        return (env->menvcfg & MENVCFG_LPE) ? true : false;
-+    case PRV_M:
-+        return (env->mseccfg & MSECCFG_MLPE) ? true : false;
-+    default:
-+        g_assert_not_reached();
-+    }
-+#endif
-+}
-+
- void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
-                           uint64_t *cs_base, uint32_t *pflags)
- {
-@@ -546,6 +576,15 @@ void riscv_cpu_swap_hypervisor_regs(CPURISCVState *env)
-     }
-     bool current_virt = env->virt_enabled;
- 
-+    /*
-+     * If zicfilp extension available and henvcfg.LPE = 1,
-+     * then apply SPELP mask on mstatus
-+     */
-+    if (env_archcpu(env)->cfg.ext_zicfilp &&
-+        get_field(env->henvcfg, HENVCFG_LPE)) {
-+        mstatus_mask |= SSTATUS_SPELP;
-+    }
-+
-     g_assert(riscv_has_ext(env, RVH));
- 
-     if (current_virt) {
-@@ -1754,6 +1793,11 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-     if (env->priv <= PRV_S && cause < 64 &&
-         (((deleg >> cause) & 1) || s_injected || vs_injected)) {
-         /* handle the trap in S-mode */
-+        /* save elp status */
-+        if (cpu_get_fcfien(env)) {
-+            env->mstatus = set_field(env->mstatus, MSTATUS_SPELP, env->elp);
-+        }
-+
-         if (riscv_has_ext(env, RVH)) {
-             uint64_t hdeleg = async ? env->hideleg : env->hedeleg;
- 
-@@ -1802,6 +1846,11 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-         riscv_cpu_set_mode(env, PRV_S);
-     } else {
-         /* handle the trap in M-mode */
-+        /* save elp status */
-+        if (cpu_get_fcfien(env)) {
-+            env->mstatus = set_field(env->mstatus, MSTATUS_MPELP, env->elp);
-+        }
-+
-         if (riscv_has_ext(env, RVH)) {
-             if (env->virt_enabled) {
-                 riscv_cpu_swap_hypervisor_regs(env);
-@@ -1833,6 +1882,15 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-         riscv_cpu_set_mode(env, PRV_M);
-     }
- 
-+    /*
-+     * Interrupt/exception/trap delivery is asynchronous event and as per
-+     * Zisslpcfi spec CPU should clear up the ELP state. If cfi extension is
-+     * available, clear ELP state.
-+     */
-+
-+    if (cpu->cfg.ext_zicfilp) {
-+        env->elp = NO_LP_EXPECTED;
-+    }
-     /*
-      * NOTE: it is not necessary to yield load reservations here. It is only
-      * necessary for an SC from "another hart" to cause a load reservation
-diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-index 2baf5bc3ca..488116cc2e 100644
---- a/target/riscv/op_helper.c
-+++ b/target/riscv/op_helper.c
-@@ -313,6 +313,15 @@ target_ulong helper_sret(CPURISCVState *env)
- 
-     riscv_cpu_set_mode(env, prev_priv);
- 
-+    /*
-+     * If forward cfi enabled for new priv, restore elp status
-+     * and clear spelp in mstatus
-+     */
-+    if (cpu_get_fcfien(env)) {
-+        env->elp = get_field(env->mstatus, MSTATUS_SPELP);
-+        env->mstatus = set_field(env->mstatus, MSTATUS_SPELP, 0);
-+    }
-+
-     return retpc;
- }
- 
-@@ -357,6 +366,15 @@ target_ulong helper_mret(CPURISCVState *env)
-         riscv_cpu_set_virt_enabled(env, prev_virt);
-     }
- 
-+    /*
-+     * If forward cfi enabled for new priv, restore elp status
-+     * and clear mpelp in mstatus
-+     */
-+    if (cpu_get_fcfien(env)) {
-+        env->elp = get_field(env->mstatus, MSTATUS_MPELP);
-+        env->mstatus = set_field(env->mstatus, MSTATUS_MPELP, 0);
-+    }
-+
-     return retpc;
- }
- 
+On a very high level `zicfilp` extends risc-v architecture by introducing a
+landing pad instruction `lpad` which must be target for every indirect branch
+except when
+       - rs1 == x1 || x5 (a return from a function)
+       - rs1 == x7 (sw guarded branch)
+
+If `lpad` is not present, cpu will raise software check exception (cause=18)
+, introduced in privileged spec version 1.13. To track `expected landing pad`
+state on every indirect branch, a new state is introduced in cpu `elp` short
+for expected landing pad status and can be spilled into *status register if
+a trap occurs between indirect branch and target instruction. `lpad` instr
+is carved out of HINT space `auipc rd` with `rd==x0` and can have 20 bit
+immediate (label_20bit) encoded in it. After an indirect branch lands on
+`lpad` instruction, cpu performs following checks:
+
+  -- If label_20bit == 0, no further check are performed.
+  -- If label_20bit != 0, cpu evaluates (label_20bit == x7_upper_20bit)
+     If above expression is evaluated to be false, cpu raises sw check
+     exception.
+
+Software can implement more finer-grained control flow using label mechanism
+defined in `zicfilp` by ensuring x7 has appropriate label setup prior to
+indirect call and thus further restraining call sites target locations.
+
+zicfiss
+-------
+
+On a very high level `zicfiss` extends risc-v architecture by providing a
+separate stack (called shadow stack) to store return addresses. Shadow stack
+can be protected using a reserved PTE encoding (PTE.W=1, PTE.R=0, PTE.X=0).
+Only shadow stack instructions can perform stores on shadow stack memory while
+regular stores on such memory result in access faults. Shadow stack memory can
+be read by regular load instructions. A new unprivileged csr `CSR_SSP` is
+introduced which holds pointer to shadow stack for the execution environment.
+To store return addresses on shadow stack, `sspush x1/x5` instruction is added.
+`sspopchk x1/x5` instruction pops from top of shadow stack and compares it with
+`x1/x5` and if there is a mismatch, cpu raises a software check exception.
+
+riscv-gnu-toolchain changes [2] are required to test these changes on qemu-user
+or on full blown linux guest using qemu-system. In order to test under qemu-system,
+one will require relevant linux changes as well. I've tested linux (6.8) based on
+current patches [3] and booted a rootfs compiled with cfi enabled toolchain to shell.
+There're still some work going on to make it work with VDSO and multi-label scheme.
+But none of those work is gate for these patches.
+
+I would like to express my sincere thanks to all the community members in helping out.
+Special shout out and acknowledgement to kito cheng, andy chiu, jim shu and jesse huang
+from SiFive.
+
+[1] - https://github.com/riscv/riscv-cfi
+[2] - https://github.com/sifive/riscv-gnu-toolchain/tree/cfi-dev
+[3] - https://lore.kernel.org/all/20240403234054.2020347-1-debug@rivosinc.com/
+[4] - https://lore.kernel.org/all/20240709113652.1239-1-zhiwei_liu@linux.alibaba.com/#t
+
+
+Deepak Gupta (24):
+  target/riscv: Add zicfilp extension
+  target/riscv: Introduce elp state and enabling controls for zicfilp
+  target/riscv: save and restore elp state on priv transitions
+  target/riscv: additional code information for sw check
+  target/riscv: tracking indirect branches (fcfi) for zicfilp
+  target/riscv: zicfilp `lpad` impl and branch tracking
+  disas/riscv: enabled `lpad` disassembly
+  linux-user/syscall: introduce prctl for indirect branch tracking
+  linux-user/riscv: implement indirect branch tracking prctls
+  target/riscv: Add zicfiss extension
+  target/riscv: introduce ssp and enabling controls for zicfiss
+  target/riscv: tb flag for shadow stack  instructions
+  target/riscv: implement zicfiss instructions
+  target/riscv: compressed encodings for sspush and sspopchk
+  target/riscv: mmu changes for zicfiss shadow stack protection
+  target/riscv: shadow stack mmu index for shadow stack instructions
+  linux-user/syscall: introduce prctl for shadow stack enable/disable
+  linux-user/riscv: setup/teardown zicfiss shadow stack for qemu-user
+  disas/riscv: enable disassembly for zicfiss instructions
+  disas/riscv: enable disassembly for compressed sspush/sspopchk
+  target/riscv: add trace-hooks for each case of sw-check exception
+  linux-user: permit RISC-V CFI dynamic entry in VDSO
+  linux-user: Add RISC-V zicfilp support in VDSO
+  linux-user/riscv: Adding zicfiss/lp extension in hwprobe syscall
+
+ disas/riscv.c                           |  71 +++++++++-
+ disas/riscv.h                           |   4 +
+ linux-user/gen-vdso-elfn.c.inc          |   7 +
+ linux-user/riscv/cpu_loop.c             |  50 +++++++
+ linux-user/riscv/target_cpu.h           |   7 +
+ linux-user/riscv/target_prctl.h         |  70 ++++++++++
+ linux-user/riscv/vdso-64.so             | Bin 3944 -> 4128 bytes
+ linux-user/riscv/vdso.S                 |  50 +++++++
+ linux-user/syscall.c                    |  40 ++++++
+ target/riscv/cpu.c                      |  21 +++
+ target/riscv/cpu.h                      |  28 ++++
+ target/riscv/cpu_bits.h                 |  23 ++++
+ target/riscv/cpu_cfg.h                  |   2 +
+ target/riscv/cpu_helper.c               | 166 +++++++++++++++++++++++-
+ target/riscv/cpu_user.h                 |   1 +
+ target/riscv/csr.c                      | 106 +++++++++++++++
+ target/riscv/helper.h                   |   6 +
+ target/riscv/insn16.decode              |   4 +
+ target/riscv/insn32.decode              |  23 +++-
+ target/riscv/insn_trans/trans_rva.c.inc |  55 ++++++++
+ target/riscv/insn_trans/trans_rvi.c.inc |  52 ++++++++
+ target/riscv/internals.h                |   4 +
+ target/riscv/op_helper.c                |  63 +++++++++
+ target/riscv/pmp.c                      |   5 +
+ target/riscv/pmp.h                      |   3 +-
+ target/riscv/tcg/tcg-cpu.c              |  20 +++
+ target/riscv/trace-events               |   6 +
+ target/riscv/translate.c                |  80 ++++++++++++
+ 28 files changed, 959 insertions(+), 8 deletions(-)
+
 -- 
 2.44.0
 
