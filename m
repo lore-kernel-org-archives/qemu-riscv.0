@@ -4,87 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D87EC3DA63
-	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Jul 2024 21:39:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEF9FC3DA63
+	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Jul 2024 01:53:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sWjhw-0001Lx-DX; Wed, 24 Jul 2024 17:39:36 -0400
+	id 1sWneq-00067Z-9g; Wed, 24 Jul 2024 21:52:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1sWjht-0001Kr-39
- for qemu-riscv@nongnu.org; Wed, 24 Jul 2024 17:39:33 -0400
-Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1sWjhq-0005zm-Sx
- for qemu-riscv@nongnu.org; Wed, 24 Jul 2024 17:39:32 -0400
-Received: by mail-pf1-x42e.google.com with SMTP id
- d2e1a72fcca58-70d316f0060so964877b3a.1
- for <qemu-riscv@nongnu.org>; Wed, 24 Jul 2024 14:39:29 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1sWnem-00062Z-P1; Wed, 24 Jul 2024 21:52:36 -0400
+Received: from out30-124.freemail.mail.aliyun.com ([115.124.30.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1sWnej-0002L7-Ia; Wed, 24 Jul 2024 21:52:36 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1721857168; x=1722461968; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Pj7kFie4xOmAPZo2Wza2KDvAgDqwFHRavSWtmo/Nkk4=;
- b=Y9Mx4w7X17/Tpj3TTQGBgAftB7q2CJEvdgLcqUeIyADGZRCmkTDzcqa9uBPbtmZooz
- hJk/buGCE/Su/Q2wIRSoDTLCFHTPFHhBneUcZKONh3RTKpDItzRkQWbKSXPqhBCF0ihl
- eFbmqRb8E8pKIEg4OM/O6/pm1PM8R1pOkN2cxF3sJjbFEEslkv4/+a2h1kmsIXfZ8PSp
- czM8/ofCj2RTdOVYutxDwrU1MB5oj/1BSW3S3zNXREm0TTnjEcY9saCi28UmnUOpidp2
- IudlAf7vScbUpcV5lI0GyOqqYwE3Cu9Ns8OfFIyo9el1EHI+RQQFGzB/W7MT76qgRYvK
- hS8A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721857168; x=1722461968;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Pj7kFie4xOmAPZo2Wza2KDvAgDqwFHRavSWtmo/Nkk4=;
- b=ukKWUNcc5dS13UfTV1QvNL53nkmrUbb/Ht7coUZmjNONUzIYq+DKWu/2O6mMrQW4Kh
- tcO66a3eskseb2AuKRLayb9NHnFhoTuslHNdQfMc2QVJah4AYFm+IvIf+zy8f4NUc04y
- uDgcdfmHSFS61fEfi9q3HivZ7mRu0kFFqcxxevrXc+SG13dNbznukjfOlT3f17l17qCz
- +b3LoqSr8m/JTjsN5ggje9zoXRtvZV/yIuv4HjxbEOeM0g9LWIVGv3kWvHPggzgwMqoL
- KlJe6F1NfKLnIoyfvIm3D3Sm0/BLE540fAhxOYu6dKyziCiBb4bkNpL5xtN5q4w+sD3m
- q9vw==
-X-Gm-Message-State: AOJu0YzhIzq9MVAFNAc1A402UqcBX+sbg+d/tE1bHSZdX3y1GnAHPn0F
- glQ4PgPMHPyBolvrxbPPC21s2vdz8QUqC+DRjbXtDs8zsuO7TU90SxVuSynxRue1JJgDNQKvGa8
- Q
-X-Google-Smtp-Source: AGHT+IGyZ1XGVrG9jLWbq7ImcHmmZdyW9jovjIC2OGLQLZ4xL9D03RysZb7r3m4kOCgDjyhVv2OutQ==
-X-Received: by 2002:a05:6a20:6a24:b0:1c0:e2de:2ceb with SMTP id
- adf61e73a8af0-1c463693919mr5846981637.7.1721857168506; 
- Wed, 24 Jul 2024 14:39:28 -0700 (PDT)
-Received: from [192.168.68.110] ([179.193.8.144])
- by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-7a9f884c166sm75610a12.49.2024.07.24.14.39.25
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 24 Jul 2024 14:39:28 -0700 (PDT)
-Message-ID: <702529df-6e7c-4745-aa69-20c2be36b76a@ventanamicro.com>
-Date: Wed, 24 Jul 2024 18:39:23 -0300
+ d=linux.alibaba.com; s=default;
+ t=1721872344; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
+ bh=2X5tM3arX2FaqGeafZf05pc7XMS3xztGVn1X/kbQmz4=;
+ b=adAH9rvJ/kf/v3OElbPS0BoaOkM4pZaMdD0rW/P6F+GZtnLB9aZTeEbihXFHLi0CTCuzIdWl9bL+/vuGnFHmVEUsT3AulqolyA8efK30PoAlxNhZ3GDk8s9YLv2B627eUoLO9yMHnccHrXIPt3DtZ8zDkGI4IK5SeLT9/Mw+Fvs=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R181e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033032019045;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=8; SR=0;
+ TI=SMTPD_---0WBFnJYf_1721872342; 
+Received: from 30.166.64.206(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0WBFnJYf_1721872342) by smtp.aliyun-inc.com;
+ Thu, 25 Jul 2024 09:52:22 +0800
+Message-ID: <ca1b9449-f6e0-412c-829a-bc6258f461ff@linux.alibaba.com>
+Date: Thu, 25 Jul 2024 09:50:43 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 05/13] hw/riscv: add riscv-iommu-pci reference device
-To: Jason Chien <jason.chien@sifive.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- frank.chang@sifive.com, tjeznach@rivosinc.com
-References: <20240708173501.426225-1-dbarboza@ventanamicro.com>
- <20240708173501.426225-6-dbarboza@ventanamicro.com>
- <cc4f842c-e331-41a5-b9b5-8598c719ec2f@sifive.com>
+Subject: Re: [PATCH 1/1] target/riscv: Remove redundant insn length check for
+ zama16b
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ dbarboza@ventanamicro.com, liwei1518@gmail.com, bmeng.cn@gmail.com
+References: <20240723013012.1443-1-zhiwei_liu@linux.alibaba.com>
+ <dea63117-cabd-4669-bffd-e8c0cb8d9147@linaro.org>
+ <df37fdc2-79c6-420c-bcf4-e7c3649fe446@linux.alibaba.com>
+ <8d12202f-7170-4127-a1a6-c23c03835cf6@linaro.org>
 Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <cc4f842c-e331-41a5-b9b5-8598c719ec2f@sifive.com>
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <8d12202f-7170-4127-a1a6-c23c03835cf6@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42e;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x42e.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=115.124.30.124;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-124.freemail.mail.aliyun.com
+X-Spam_score_int: -174
+X-Spam_score: -17.5
+X-Spam_bar: -----------------
+X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,235 +75,58 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
-
-On 7/18/24 4:06 AM, Jason Chien wrote:
-> Hi Daniel,
-> 
-> On 2024/7/9 上午 01:34, Daniel Henrique Barboza wrote:
->> From: Tomasz Jeznach <tjeznach@rivosinc.com>
+On 2024/7/23 13:59, Richard Henderson wrote:
+> On 7/23/24 15:29, LIU Zhiwei wrote:
+>> The more detailed information about its meaning is in priviledged 
+>> 1.13 specification. More exactly, in 3.6.4. Misaligned Atomicity 
+>> Granule PMA.
 >>
->> The RISC-V IOMMU can be modelled as a PCIe device following the
->> guidelines of the RISC-V IOMMU spec, chapter 7.1, "Integrating an IOMMU
->> as a PCIe device".
+>> The specification said:
 >>
->> Signed-off-by: Tomasz Jeznach <tjeznach@rivosinc.com>
->> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->> Reviewed-by: Frank Chang <frank.chang@sifive.com>
->> ---
->>   hw/riscv/meson.build       |   2 +-
->>   hw/riscv/riscv-iommu-pci.c | 178 +++++++++++++++++++++++++++++++++++++
->>   2 files changed, 179 insertions(+), 1 deletion(-)
->>   create mode 100644 hw/riscv/riscv-iommu-pci.c
+>> "The misaligned atomicity granule PMA applies only to AMOs, loads and 
+>> stores defined in the base
+>> ISAs, and loads and stores of no more than MXLEN bits defined in the 
+>> F, D, and Q extensions. For an
+>> instruction in that set, if all accessed bytes lie within the same 
+>> misaligned atomicity granule, the
+>> instruction will not raise an exception for reasons of address 
+>> alignment, and the instruction will give
+>> rise to only one memory operation for the purposes of RVWMO—i.e., it 
+>> will execute atomically."
 >>
->> diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
->> index cbc99c6e8e..adbef8a9b2 100644
->> --- a/hw/riscv/meson.build
->> +++ b/hw/riscv/meson.build
->> @@ -10,6 +10,6 @@ riscv_ss.add(when: 'CONFIG_SIFIVE_U', if_true: files('sifive_u.c'))
->>   riscv_ss.add(when: 'CONFIG_SPIKE', if_true: files('spike.c'))
->>   riscv_ss.add(when: 'CONFIG_MICROCHIP_PFSOC', if_true: files('microchip_pfsoc.c'))
->>   riscv_ss.add(when: 'CONFIG_ACPI', if_true: files('virt-acpi-build.c'))
->> -riscv_ss.add(when: 'CONFIG_RISCV_IOMMU', if_true: files('riscv-iommu.c'))
->> +riscv_ss.add(when: 'CONFIG_RISCV_IOMMU', if_true: files('riscv-iommu.c', 'riscv-iommu-pci.c'))
->>   hw_arch += {'riscv': riscv_ss}
->> diff --git a/hw/riscv/riscv-iommu-pci.c b/hw/riscv/riscv-iommu-pci.c
->> new file mode 100644
->> index 0000000000..7b82ce0645
->> --- /dev/null
->> +++ b/hw/riscv/riscv-iommu-pci.c
->> @@ -0,0 +1,178 @@
->> +/*
->> + * QEMU emulation of an RISC-V IOMMU
->> + *
->> + * Copyright (C) 2022-2023 Rivos Inc.
->> + *
->> + * This program is free software; you can redistribute it and/or modify
->> + * it under the terms of the GNU General Public License as published by
->> + * the Free Software Foundation; either version 2 of the License.
->> + *
->> + * This program is distributed in the hope that it will be useful,
->> + * but WITHOUT ANY WARRANTY; without even the implied warranty of
->> + * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
->> + * GNU General Public License for more details.
->> + *
->> + * You should have received a copy of the GNU General Public License along
->> + * with this program; if not, see <http://www.gnu.org/licenses/>.
->> + */
->> +
->> +#include "qemu/osdep.h"
->> +#include "hw/pci/msi.h"
->> +#include "hw/pci/msix.h"
->> +#include "hw/pci/pci_bus.h"
->> +#include "hw/qdev-properties.h"
->> +#include "hw/riscv/riscv_hart.h"
->> +#include "migration/vmstate.h"
->> +#include "qapi/error.h"
->> +#include "qemu/error-report.h"
->> +#include "qemu/host-utils.h"
->> +#include "qom/object.h"
->> +
->> +#include "cpu_bits.h"
->> +#include "riscv-iommu.h"
->> +#include "riscv-iommu-bits.h"
->> +
->> +/* RISC-V IOMMU PCI Device Emulation */
->> +#define RISCV_PCI_CLASS_SYSTEM_IOMMU     0x0806
->> +
->> +typedef struct RISCVIOMMUStatePci {
->> +    PCIDevice        pci;     /* Parent PCIe device state */
->> +    uint16_t         vendor_id;
->> +    uint16_t         device_id;
->> +    uint8_t          revision;
->> +    MemoryRegion     bar0;    /* PCI BAR (including MSI-x config) */
->> +    RISCVIOMMUState  iommu;   /* common IOMMU state */
->> +} RISCVIOMMUStatePci;
->> +
->> +/* interrupt delivery callback */
->> +static void riscv_iommu_pci_notify(RISCVIOMMUState *iommu, unsigned vector)
->> +{
->> +    RISCVIOMMUStatePci *s = container_of(iommu, RISCVIOMMUStatePci, iommu);
->> +
->> +    if (msix_enabled(&(s->pci))) {
->> +        msix_notify(&(s->pci), vector);
->> +    }
->> +}
->> +
->> +static void riscv_iommu_pci_realize(PCIDevice *dev, Error **errp)
->> +{
->> +    RISCVIOMMUStatePci *s = DO_UPCAST(RISCVIOMMUStatePci, pci, dev);
->> +    RISCVIOMMUState *iommu = &s->iommu;
->> +    uint8_t *pci_conf = dev->config;
->> +    Error *err = NULL;
->> +
->> +    pci_set_word(pci_conf + PCI_VENDOR_ID, s->vendor_id);
->> +    pci_set_word(pci_conf + PCI_SUBSYSTEM_VENDOR_ID, s->vendor_id);
->> +    pci_set_word(pci_conf + PCI_DEVICE_ID, s->device_id);
->> +    pci_set_word(pci_conf + PCI_SUBSYSTEM_ID, s->device_id);
->> +    pci_set_byte(pci_conf + PCI_REVISION_ID, s->revision);
->> +
->> +    /* Set device id for trace / debug */
->> +    DEVICE(iommu)->id = g_strdup_printf("%02x:%02x.%01x",
->> +        pci_dev_bus_num(dev), PCI_SLOT(dev->devfn), PCI_FUNC(dev->devfn));
->> +    qdev_realize(DEVICE(iommu), NULL, errp);
->> +
->> +    memory_region_init(&s->bar0, OBJECT(s), "riscv-iommu-bar0",
->> +        QEMU_ALIGN_UP(memory_region_size(&iommu->regs_mr), TARGET_PAGE_SIZE));
->> +    memory_region_add_subregion(&s->bar0, 0, &iommu->regs_mr);
->> +
->> +    pcie_endpoint_cap_init(dev, 0);
->> +
->> +    pci_register_bar(dev, 0, PCI_BASE_ADDRESS_SPACE_MEMORY |
->> +                     PCI_BASE_ADDRESS_MEM_TYPE_64, &s->bar0);
->> +
->> +    int ret = msix_init(dev, RISCV_IOMMU_INTR_COUNT,
->> +                        &s->bar0, 0, RISCV_IOMMU_REG_MSI_CONFIG,
->> +                        &s->bar0, 0, RISCV_IOMMU_REG_MSI_CONFIG + 256, 0, &err);
->> +
->> +    if (ret == -ENOTSUP) {
->> +        /*
->> +         * MSI-x is not supported by the platform.
->> +         * Driver should use timer/polling based notification handlers.
->> +         */
->> +        warn_report_err(err);
->> +    } else if (ret < 0) {
->> +        error_propagate(errp, err);
->> +        return;
->> +    } else {
->> +        /* mark all allocated MSIx vectors as used. */
->> +        msix_vector_use(dev, RISCV_IOMMU_INTR_CQ);
->> +        msix_vector_use(dev, RISCV_IOMMU_INTR_FQ);
->> +        msix_vector_use(dev, RISCV_IOMMU_INTR_PM);
->> +        msix_vector_use(dev, RISCV_IOMMU_INTR_PQ);
-> In ICVEC register, each interrupt cause has a 4-bit field, which can be configured with values within 0 to 15. We only allow vector values being 0 to 3 here, but software may want to use other vector number.
+>> That's the reason why I do not apply zama16b to compressed instructions.
+> Given the non-specificity of this paragraph, I think not specifically 
+> calling out compressed forms of the base ISA is simply a documentation 
+> error.  In general, the compressed ISA is supposed to be a smaller 
+> encoding of the exact same instruction as the standard ISA.
 
-We need a new interface to notify IOMMU devices about icvec SW updates. I added the
-relevant code for it in patch 3, where a new "icvec_update" is used to inform the
-device (riscv-iommu-pci, and later riscv-iommu-sys) about the configuration update.
+Yes, it's a documentation error. We will fix in the specification.
 
-In this patch I'll keep these default vals during realize because I'm not sure about
-how SW will behave (will it always write ICVEC?). 'icvec_update' will de-register the
-existing vectors and use the newer ones based updates on ICVEC.
+https://github.com/riscv/riscv-isa-manual/pull/1557
 
+Zhiwei
 
-Thanks,
-
-
-Daniel
-
->> +        iommu->notify = riscv_iommu_pci_notify;
->> +    }
->> +
->> +    PCIBus *bus = pci_device_root_bus(dev);
->> +    if (!bus) {
->> +        error_setg(errp, "can't find PCIe root port for %02x:%02x.%x",
->> +            pci_bus_num(pci_get_bus(dev)), PCI_SLOT(dev->devfn),
->> +            PCI_FUNC(dev->devfn));
->> +        return;
->> +    }
->> +
->> +    riscv_iommu_pci_setup_iommu(iommu, bus, errp);
->> +}
->> +
->> +static void riscv_iommu_pci_exit(PCIDevice *pci_dev)
->> +{
->> +    pci_setup_iommu(pci_device_root_bus(pci_dev), NULL, NULL);
->> +}
->> +
->> +static const VMStateDescription riscv_iommu_vmstate = {
->> +    .name = "riscv-iommu",
->> +    .unmigratable = 1
->> +};
->> +
->> +static void riscv_iommu_pci_init(Object *obj)
->> +{
->> +    RISCVIOMMUStatePci *s = RISCV_IOMMU_PCI(obj);
->> +    RISCVIOMMUState *iommu = &s->iommu;
->> +
->> +    object_initialize_child(obj, "iommu", iommu, TYPE_RISCV_IOMMU);
->> +    qdev_alias_all_properties(DEVICE(iommu), obj);
->> +}
->> +
->> +static Property riscv_iommu_pci_properties[] = {
->> +    DEFINE_PROP_UINT16("vendor-id", RISCVIOMMUStatePci, vendor_id,
->> +                       PCI_VENDOR_ID_REDHAT),
->> +    DEFINE_PROP_UINT16("device-id", RISCVIOMMUStatePci, device_id,
->> +                       PCI_DEVICE_ID_REDHAT_RISCV_IOMMU),
->> +    DEFINE_PROP_UINT8("revision", RISCVIOMMUStatePci, revision, 0x01),
->> +    DEFINE_PROP_END_OF_LIST(),
->> +};
->> +
->> +static void riscv_iommu_pci_class_init(ObjectClass *klass, void *data)
->> +{
->> +    DeviceClass *dc = DEVICE_CLASS(klass);
->> +    PCIDeviceClass *k = PCI_DEVICE_CLASS(klass);
->> +
->> +    k->realize = riscv_iommu_pci_realize;
->> +    k->exit = riscv_iommu_pci_exit;
->> +    k->class_id = RISCV_PCI_CLASS_SYSTEM_IOMMU;
->> +    dc->desc = "RISCV-IOMMU DMA Remapping device";
->> +    dc->vmsd = &riscv_iommu_vmstate;
->> +    dc->hotpluggable = false;
->> +    dc->user_creatable = true;
->> +    set_bit(DEVICE_CATEGORY_MISC, dc->categories);
->> +    device_class_set_props(dc, riscv_iommu_pci_properties);
->> +}
->> +
->> +static const TypeInfo riscv_iommu_pci = {
->> +    .name = TYPE_RISCV_IOMMU_PCI,
->> +    .parent = TYPE_PCI_DEVICE,
->> +    .class_init = riscv_iommu_pci_class_init,
->> +    .instance_init = riscv_iommu_pci_init,
->> +    .instance_size = sizeof(RISCVIOMMUStatePci),
->> +    .interfaces = (InterfaceInfo[]) {
->> +        { INTERFACE_PCIE_DEVICE },
->> +        { },
->> +    },
->> +};
->> +
->> +static void riscv_iommu_register_pci_types(void)
->> +{
->> +    type_register_static(&riscv_iommu_pci);
->> +}
->> +
->> +type_init(riscv_iommu_register_pci_types);
+>
+> However!  It does explicitly say "no more than MXLEN bits", which 
+> means that an RV32/RV64 check is appropriate for FLD/FSD, since MXLEN 
+> may be less than 64.
+>
+> In addition, your change for AMOs is incomplete.  From the text:
+>
+>   If a misaligned AMO accesses a region that does not specify a 
+> misaligned
+>   atomicity granule PMA, or if not all accessed bytes lie within the same
+>   misaligned atomicity granule, then an exception is raised.
+>
+> The second clause corresponds exactly with the Arm FEAT_LSE2.
+> See check_lse2_align in target/arm/tcg/translate-a64.c.
+>
+>
+> r~
+>
+>
+> PS: The first clause is similar to Arm access to pages marked as 
+> Device memory, for which all misaligned accesses trap.  I didn't dig 
+> deep enough to see how PMAs are defined to suggest how that might be 
+> applied.
 
