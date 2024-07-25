@@ -4,86 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A358C3DA49
-	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Jul 2024 09:07:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A2A3C3DA5D
+	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Jul 2024 10:27:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sWuRe-0003mk-7v; Thu, 25 Jul 2024 05:07:30 -0400
+	id 1sWvgk-00072o-JP; Thu, 25 Jul 2024 06:27:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1sWuRc-0003dx-6Z
- for qemu-riscv@nongnu.org; Thu, 25 Jul 2024 05:07:28 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1sWuRa-00042F-J4
- for qemu-riscv@nongnu.org; Thu, 25 Jul 2024 05:07:27 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1721898446;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=Odg2VfpZQzItX8XVDoBrE1SWurkxPgm1LLiGA3X9lMQ=;
- b=aQi33YOC1Q+t2SecLAExulPCiA3TpGIe991VDCLDotBjNHrIAC8r2IqDvUOmMaxF/fBeOK
- Xl5RoP6guSeU/EP/uzpwc+xkmWYeHut1huVN6JcmDrXJe2GX2bTnLF+1u6GiwMhSWMYWuP
- UCkWfDVjDuco6jE9Tvb2zuovme+cIiA=
-Received: from mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-604-fqqc_YYzOjK9_6D4psav9Q-1; Thu,
- 25 Jul 2024 05:07:20 -0400
-X-MC-Unique: fqqc_YYzOjK9_6D4psav9Q-1
-Received: from mx-prod-int-04.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-04.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.40])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id B19FC1955D48; Thu, 25 Jul 2024 09:07:16 +0000 (UTC)
-Received: from blackfin.pond.sub.org (unknown [10.39.192.65])
- by mx-prod-int-04.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 37AD41955D42; Thu, 25 Jul 2024 09:07:15 +0000 (UTC)
-Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id DFD0C21F4B8B; Thu, 25 Jul 2024 11:07:12 +0200 (CEST)
-From: Markus Armbruster <armbru@redhat.com>
-To: Zhao Liu <zhao1.liu@intel.com>
-Cc: Daniel P . =?utf-8?Q?Berrang=C3=A9?= <berrange@redhat.com>,  Eduardo
- Habkost
- <eduardo@habkost.net>,  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,  Yanan Wang
- <wangyanan55@huawei.com>,  "Michael S . Tsirkin" <mst@redhat.com>,  Paolo
- Bonzini <pbonzini@redhat.com>,  Richard Henderson
- <richard.henderson@linaro.org>,  Eric Blake <eblake@redhat.com>,  Marcelo
- Tosatti <mtosatti@redhat.com>,  Alex =?utf-8?Q?Benn=C3=A9e?=
- <alex.bennee@linaro.org>,
- Peter Maydell <peter.maydell@linaro.org>,  Jonathan Cameron
- <Jonathan.Cameron@huawei.com>,  Sia Jee Heng
- <jeeheng.sia@starfivetech.com>,  qemu-devel@nongnu.org,
- kvm@vger.kernel.org,  qemu-riscv@nongnu.org,  qemu-arm@nongnu.org,
- Zhenyu Wang <zhenyu.z.wang@intel.com>,  Dapeng Mi
- <dapeng1.mi@linux.intel.com>,  Yongwei Ma <yongwei.ma@intel.com>
-Subject: Re: [PATCH 8/8] qemu-options: Add the description of smp-cache object
-In-Reply-To: <ZqEN1kZaQcuY4UPG@intel.com> (Zhao Liu's message of "Wed, 24 Jul
- 2024 22:21:10 +0800")
-References: <20240704031603.1744546-1-zhao1.liu@intel.com>
- <20240704031603.1744546-9-zhao1.liu@intel.com>
- <87r0bl35ug.fsf@pond.sub.org> <Zp5vxtXWDeHAdPok@intel.com>
- <87bk2nnev2.fsf@pond.sub.org> <ZqEN1kZaQcuY4UPG@intel.com>
-Date: Thu, 25 Jul 2024 11:07:12 +0200
-Message-ID: <87le1psuv3.fsf@pond.sub.org>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1sWvgj-0006rv-0A
+ for qemu-riscv@nongnu.org; Thu, 25 Jul 2024 06:27:09 -0400
+Received: from mail-lj1-x236.google.com ([2a00:1450:4864:20::236])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1sWvgh-0002RY-B9
+ for qemu-riscv@nongnu.org; Thu, 25 Jul 2024 06:27:08 -0400
+Received: by mail-lj1-x236.google.com with SMTP id
+ 38308e7fff4ca-2ef23d04541so8669321fa.2
+ for <qemu-riscv@nongnu.org>; Thu, 25 Jul 2024 03:27:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1721903225; x=1722508025; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=LaHUG83R4EKvp3VRXiyFJovg6FyQ1Kdt1xLhxwucOu8=;
+ b=TfCcJbee32lEOdRj6lGpPZySSrxLJlYWeTT+2bpQ8I/t97kQ/rUoGcZ1Zx8DpAT1qp
+ vORzHvMSW2bhXdgHWPYf7g/Io5+FLxEq3ARQxflz4XRQjb/nnosQva3Y/IEBhOH4JASX
+ IpgNckb8CKMYfUPa5d15ylMrBWO3nzfcj5gQzFzHbvewnQMh/4ubxmyvCWdqpqbesKl3
+ g5ntLtefxPrUFhlQR2Fw24SJb8Q1jjAxRHPEhLnlUAiopm3rG2d3YQJYmEzNRHFs3yrn
+ 12uymNdOdM1LyeXjMtHOE/uWi+0SCH7x9v2c6kHjW5o1FqE7upFHpU73V7MtXHwASJlK
+ hXzA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1721903225; x=1722508025;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=LaHUG83R4EKvp3VRXiyFJovg6FyQ1Kdt1xLhxwucOu8=;
+ b=PT04AlV1egSC7LEZEX9pcZy+0ZSxpUtJraRS9K3NlbzYttgThq6vATPVQCgNKLLuZ/
+ yVEgzr0rN/PcJl692fCN3g2/CXWN+OZl/1ueMk/PGJztWiIKnfDC3BQWGlYoLNBP56v3
+ jq2pWqlBewvWfZOjeirG364tX6CyyqgUY6K53f/tK7oBZrLwACXKO6DBVeHniXNeaWaq
+ +5TpBU2Pm6BdiprVSRoi+ud5NTedcPjfUx0EqS655DqfcZ4VSkmPVG0TjymvH5bs5yH7
+ /uAeUd31b8RiNEnznMCAtUVI+Yq1ggX6nL1yKbMxiXR2MINt5/0RASq1sW7sJdH+2WBW
+ m4JA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXIQvYMeLg3cDDiEVjkd3bpEskbAvEr3BYBmOvPqmMMoogisWcebsqXCDxCY5CW6/7zbxQo8f1fjpqlxT3wkIqBA93wv/8=
+X-Gm-Message-State: AOJu0YwgRiu7j6nc6A8vg6fhRQC5k6teZkaSM8Lk/Nnh5dINDA1q1vFa
+ kpsgAOVMnxuPGqWQa6xuuRhdL22aOzHAdmu3J5MNGkIWF34O+Q5xQKPWlaRzkto=
+X-Google-Smtp-Source: AGHT+IGUaJhhTqi+2Vz+GTYpzV0HB1iNrb+mZiDqWEekNvmRpAuF4hjoXGZS4OEFd9ZTBQ8SELY+dQ==
+X-Received: by 2002:a2e:730e:0:b0:2ef:1b93:d2b5 with SMTP id
+ 38308e7fff4ca-2f039d2d7a7mr16712181fa.35.1721903224680; 
+ Thu, 25 Jul 2024 03:27:04 -0700 (PDT)
+Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5ac65483859sm648445a12.82.2024.07.25.03.27.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 25 Jul 2024 03:27:03 -0700 (PDT)
+Received: from draig (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id 45BDC5F863;
+ Thu, 25 Jul 2024 11:27:02 +0100 (BST)
+From: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Cc: qemu-devel@nongnu.org,  qemu-riscv@nongnu.org,  palmer@dabbelt.com,
+ alistair.francis@wdc.com,  dbarboza@ventanamicro.com,
+ liwei1518@gmail.com,  bmeng.cn@gmail.com,  philmd@linaro.org
+Subject: Re: [PATCH v6 8/8] tests/avocado: Boot Linux for RV32 cpu on RV64 QEMU
+In-Reply-To: <20240719231149.1364-9-zhiwei_liu@linux.alibaba.com> (LIU
+ Zhiwei's message of "Sat, 20 Jul 2024 07:11:49 +0800")
+References: <20240719231149.1364-1-zhiwei_liu@linux.alibaba.com>
+ <20240719231149.1364-9-zhiwei_liu@linux.alibaba.com>
+Date: Thu, 25 Jul 2024 11:27:02 +0100
+Message-ID: <875xstojgp.fsf@draig.linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.40
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=armbru@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::236;
+ envelope-from=alex.bennee@linaro.org; helo=mail-lj1-x236.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.136,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,126 +100,17 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Zhao Liu <zhao1.liu@intel.com> writes:
+LIU Zhiwei <zhiwei_liu@linux.alibaba.com> writes:
 
-> Hi Markus and Daniel,
+> make check-avocado AVOCADO_TESTS=3Dtests/avocado/tuxrun_baselines.py: \
+> TuxRunBaselineTest:test_riscv64_rv32
 >
-> I have the questions about the -object per cache implementation:
->
-> On Wed, Jul 24, 2024 at 02:39:29PM +0200, Markus Armbruster wrote:
->> Date: Wed, 24 Jul 2024 14:39:29 +0200
->> From: Markus Armbruster <armbru@redhat.com>
->> Subject: Re: [PATCH 8/8] qemu-options: Add the description of smp-cache
->>  object
->> 
->> Zhao Liu <zhao1.liu@intel.com> writes:
->> 
->> > Hi Markus,
->> >
->> > On Mon, Jul 22, 2024 at 03:37:43PM +0200, Markus Armbruster wrote:
->> >> Date: Mon, 22 Jul 2024 15:37:43 +0200
->> >> From: Markus Armbruster <armbru@redhat.com>
->> >> Subject: Re: [PATCH 8/8] qemu-options: Add the description of smp-cache
->> >>  object
->> >> 
->> >> Zhao Liu <zhao1.liu@intel.com> writes:
->> >> 
->> >> > Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
->> >> 
->> >> This patch is just documentation.  The code got added in some previous
->> >> patch.  Would it make sense to squash this patch into that previous
->> >> patch?
->> >
->> > OK, I'll merge them.
->> >
->> >> > ---
->> >> > Changes since RFC v2:
->> >> >  * Rewrote the document of smp-cache object.
->> >> >
->> >> > Changes since RFC v1:
->> >> >  * Use "*_cache=topo_level" as -smp example as the original "level"
->> >> >    term for a cache has a totally different meaning. (Jonathan)
->> >> > ---
->> >> >  qemu-options.hx | 58 +++++++++++++++++++++++++++++++++++++++++++++++++
->> >> >  1 file changed, 58 insertions(+)
->> >> >
->> >> > diff --git a/qemu-options.hx b/qemu-options.hx
->> >> > index 8ca7f34ef0c8..4b84f4508a6e 100644
->> >> > --- a/qemu-options.hx
->> >> > +++ b/qemu-options.hx
->> >> > @@ -159,6 +159,15 @@ SRST
->> >> >          ::
->> >> >  
->> >> >              -machine cxl-fmw.0.targets.0=cxl.0,cxl-fmw.0.targets.1=cxl.1,cxl-fmw.0.size=128G,cxl-fmw.0.interleave-granularity=512
->> >> > +
->> >> > +    ``smp-cache='id'``
->> >> > +        Allows to configure cache property (now only the cache topology level).
->> >> > +
->> >> > +        For example:
->> >> > +        ::
->> >> > +
->> >> > +            -object '{"qom-type":"smp-cache","id":"cache","caches":[{"name":"l1d","topo":"core"},{"name":"l1i","topo":"core"},{"name":"l2","topo":"module"},{"name":"l3","topo":"die"}]}'
->> >> > +            -machine smp-cache=cache
->> >> >  ERST
->> >> >  
->> >> >  DEF("M", HAS_ARG, QEMU_OPTION_M,
->> >> > @@ -5871,6 +5880,55 @@ SRST
->> >> >          ::
->> >> >  
->> >> >              (qemu) qom-set /objects/iothread1 poll-max-ns 100000
->> >> > +
->> >> > +    ``-object '{"qom-type":"smp-cache","id":id,"caches":[{"name":cache_name,"topo":cache_topo}]}'``
->> >> > +        Create an smp-cache object that configures machine's cache
->> >> > +        property. Currently, cache property only include cache topology
->> >> > +        level.
->> >> > +
->> >> > +        This option must be written in JSON format to support JSON list.
->> >> 
->> >> Why?
->> >
->> > I'm not familiar with this, so I hope you could educate me if I'm wrong.
->> >
->> > All I know so far is for -object that defining a list can only be done in
->> > JSON format and not with a numeric index like a keyval based option, like:
->> >
->> > -object smp-cache,id=cache0,caches.0.name=l1i,caches.0.topo=core: Parameter 'caches' is missing
->> >
->> > the above doesn't work.
->> >
->> > Is there any other way to specify a list in command line?
->> 
->> The command line is a big, sprawling mess :)
->> 
->> -object supports either a JSON or a QemuOpts argument.  *Not* keyval!
->> 
->> Both QemuOpts and keyval parse something like KEY=VALUE,...  Keyval
->> supports arrays and objects via dotted keys.  QemuOpts doesn't natively
->> support arrays and objects, but its users can hack around that
->> limitation in various ways.  -object doesn't.  So you're right, it's
->> JSON or bust here.
->> 
->> However, if we used one object per cache instead, we could get something
->> like
->> 
->>     -object smp-cache,name=l1d,...
->>     -object smp-cache,name=l1u,...
->>     -object smp-cache,name=l2,...
->>     ...
->
-> Current, I use -object to create a smp_cache object, and link it to
-> MachineState by -machine,smp-cache=obj_id.
->
-> Then for the objects per cache, how could I link them to machine?
->
-> Is it possible that I create something static in smp_cache.c and expose
-> all the cache information to machine through some interface?
+> Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> Suggested-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-Good questions.  However, before we head deeper into the weeds here, I
-feel we should discuss the things below.  And before we do that, I need
-a clear understanding of the use case.  Elsewhere in this thread, I just
-described the use case as I understand it.  Please reply there.  I'll
-then come back to this message.
+Acked-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
 
-[...]
-
+--=20
+Alex Benn=C3=A9e
+Virtualisation Tech Lead @ Linaro
 
