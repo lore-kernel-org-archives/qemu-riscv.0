@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DC02C3DA49
-	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Jul 2024 07:02:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79982C3DA5D
+	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Jul 2024 07:04:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sWsUL-0002AF-Lj; Thu, 25 Jul 2024 03:02:09 -0400
+	id 1sWsWD-0006z6-AT; Thu, 25 Jul 2024 03:04:05 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1sWsTw-00025s-1O
- for qemu-riscv@nongnu.org; Thu, 25 Jul 2024 03:01:58 -0400
-Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1sWsW9-0006yM-RC
+ for qemu-riscv@nongnu.org; Thu, 25 Jul 2024 03:04:02 -0400
+Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1sWsTt-00027s-9o
- for qemu-riscv@nongnu.org; Thu, 25 Jul 2024 03:01:42 -0400
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-427b4c621b9so4357555e9.1
- for <qemu-riscv@nongnu.org>; Thu, 25 Jul 2024 00:01:39 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1sWsW7-0004UW-RT
+ for qemu-riscv@nongnu.org; Thu, 25 Jul 2024 03:04:01 -0400
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-36844375001so289252f8f.0
+ for <qemu-riscv@nongnu.org>; Thu, 25 Jul 2024 00:03:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721890898; x=1722495698; darn=nongnu.org;
+ d=linaro.org; s=google; t=1721891038; x=1722495838; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=OMG/ajioR5kVp5gUE/XSbPZbqWF3BPUaIvWKHTBzci8=;
- b=C3NK90Au7xzk59IY4khMnIZi3jucy/Z66Z/r0wsJcxhU8rXkMDC0Kq7LcnfpfTuYhR
- RCloUoTSAIJ6AXy2f4qJLOohPMX4D/z0XlJOIu+plqVawk5FWowqtKxw7DXIm8OyZMkM
- O5ddMxGPKky2RL7HDVJ53wtDEfrnU5pux/Io0FbYhH6IE0ueOQLV11QYxA1bZiVqZ8w0
- BOj3YFKjPwnBhIAkuavY70NoRPXJ8GH2XFXUIsEZFMFixVou3w9doOSR7g+hGTiREl9v
- ICZFqyQ/oLvDUi9PmN/p/vP19nghmLSPicB5X6ko2xpZ0x/WZHITLAVlDknFF29+4QuD
- uQbA==
+ bh=H4M93FJiPvKnadIFgy3DbklKDZpChkQ52QgIglbhsUg=;
+ b=V32Mvlce9QtPLE4L92pYfOhUf/mcUuOI+a+GBp4UtKLz8jQ7jDdllvzNPDubK0xSkN
+ 6GBcLMo6wx3o9V9r46n3nogxhCa2doh7RH7O4x0QC/6MZS443NDnMgBaRrhYIuQWtY6y
+ phPR3xFeGo/Na7HyxvZa0id9iO+qgT0F1x+Qd5Fbx7aZnO0qI5oAeoi+8siJUNzvQIJJ
+ 8NVkDt8YEE4aB+Bz0cUQzK1yda4llJ0lxlc0GQXXm2NAZ9mcBUYEgObIalUmuklAklDn
+ KNwY350Ll/THSqTYD0nbmjziBkZfc9N/LI2PF2IYKerrbMeBUUS/Yvzhzhua4R+phqZj
+ EvXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721890898; x=1722495698;
+ d=1e100.net; s=20230601; t=1721891038; x=1722495838;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=OMG/ajioR5kVp5gUE/XSbPZbqWF3BPUaIvWKHTBzci8=;
- b=IodvnF/gP6RjaTCb0JqIVDTUJNceAQAMeRAa3zbeoAR5FGquN4vR0NhrbWXONZ/ZKN
- i/1ha50QihYm9SJTzOpJ67XMCbVeohPFcuz7i79QmmitksI5IIK58wdufPM/1DFfTLAL
- F/pJQCPVyHXKiRuEQkOjLX4MfG31Oc1PlSOGnqW4BCiCpFLEkWW5gSjt08rm3YSjZjbh
- VmEeJUz5z8f6Qrwz+1c3c2MguLHtrTwi0zKiGv/HGbJlaHKI0F5XI/Qwqom5QHEljQfG
- lp7QZ3b7XxL68xAzwObZfg58hz9gSDAsoWhjAZtlxp03nnng7fYaZEAMs+jiLozHRtvb
- qVMQ==
+ bh=H4M93FJiPvKnadIFgy3DbklKDZpChkQ52QgIglbhsUg=;
+ b=ROzx4u1ae6gb2ePfaSDY1C0UTQDouBbVuBovYRpon4PX8FyUp6G+kY5nN1b5cpEvVY
+ jAW96FuYawXeNPZRuAZ2DPVf3KbhVh7mm3md4zMwLqUbW/kJcrdFTTa7zo4Pa9SPZ93w
+ SamafD9fUWTOvoEcdDo2K8RVWh2DuoAQol0olgvJEwvKCUsJAh0+4Oxj1eZCm3sSb1Lj
+ 4JbsCXl1GbnsImsbzTuaiY3WFSPXOJYFcnMQGSG58pF+3m3+D+IAA/2O3rimoMCsNkvE
+ tR8IoFl99QpMtlg2Wfg5rJpJiqN6ki/gqGR/ra4HSpbjl5rA1NFLJiqpUdFHnMVj+Y90
+ 4Oyw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUtceMrfiUImi2xssJm8cd3TLP7YZWVbUF4zALbsIhh27QDK9FS8799KMNhzf1D8EGMvGntkVFT0wYhjHIkKBw0YIxzYg8=
-X-Gm-Message-State: AOJu0YzHyzt9RO501q7E2I3xjhPU6ItA87qSDoP7UnWb2rtvL9sk+Urr
- SUrnwgJwfnbLU4vICA29hQm1YfaTwbZwArrGmO40jA5c7M3sYkAYmgNVzJLjdpxpQN0wAXGA063
- d
-X-Google-Smtp-Source: AGHT+IEDzli1lX56qcdBIAu5fVMARTN7rpYCVBUvGngvXsQj7/BkqXDvyrDQZjpu7QpRciq69UU/+w==
-X-Received: by 2002:a05:600c:4f51:b0:426:5b21:9801 with SMTP id
- 5b1f17b1804b1-4280574219amr8850295e9.27.1721890897761; 
- Thu, 25 Jul 2024 00:01:37 -0700 (PDT)
+ AJvYcCWfcXAEw5uuC67hvDOkbGEwUHQZbRTGmSnCyj/Brqtt+JdPIorQS4ZDl8UX1toD53iteqtJjXbrEi2xCQTkjGgXSMoOTf8=
+X-Gm-Message-State: AOJu0YxV5TPYskOj7TmLiO8C9WFIwC3GSsk4AANL4v89bw/1X0Eksv+L
+ 33lzJxH39Ng14mwIQNBtPa0PGuX7aYWS7jpP7tuZAETkAJxO2Kt7oYRZwwOjQUk=
+X-Google-Smtp-Source: AGHT+IEopzO2Gm+jJ76/WlHmCYKFTjAdKGS8dyVfRleKbOq+a+6AmfGE5eJsluWBcL3yPOBVHNUl/w==
+X-Received: by 2002:a5d:457a:0:b0:367:91d8:a1d2 with SMTP id
+ ffacd0b85a97d-36b319f27fdmr1237561f8f.30.1721891038058; 
+ Thu, 25 Jul 2024 00:03:58 -0700 (PDT)
 Received: from [192.168.114.175] (164.170.88.92.rev.sfr.net. [92.88.170.164])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4280573f447sm19542095e9.16.2024.07.25.00.01.35
+ ffacd0b85a97d-36b36800cdasm1091329f8f.64.2024.07.25.00.03.56
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 25 Jul 2024 00:01:37 -0700 (PDT)
-Message-ID: <0d864b83-be52-479f-bd4a-5019425e98b4@linaro.org>
-Date: Thu, 25 Jul 2024 09:01:34 +0200
+ Thu, 25 Jul 2024 00:03:57 -0700 (PDT)
+Message-ID: <2eb95ab8-a89f-47d5-8fdf-e6eabefb0781@linaro.org>
+Date: Thu, 25 Jul 2024 09:03:55 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 0/8] target/riscv: Expose RV32 cpu to RV64 QEMU
-To: Alistair Francis <alistair23@gmail.com>,
- LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com,
- alistair.francis@wdc.com, dbarboza@ventanamicro.com, liwei1518@gmail.com,
- bmeng.cn@gmail.com, alex.bennee@linaro.org
-References: <20240719231149.1364-1-zhiwei_liu@linux.alibaba.com>
- <CAKmqyKN=S9o32K0G8k5NqyMs=Xm+gSNBgnbRi3AjbvOubXoDwA@mail.gmail.com>
+Subject: Re: [PATCH-for-9.1] target/riscv: Remove the deprecated 'any' CPU type
+To: qemu-devel@nongnu.org
+Cc: Bin Meng <bmeng.cn@gmail.com>, devel@lists.libvirt.org,
+ Weiwei Li <liwei1518@gmail.com>, qemu-riscv@nongnu.org,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+References: <20240724130717.95629-1-philmd@linaro.org>
 Content-Language: en-US
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <CAKmqyKN=S9o32K0G8k5NqyMs=Xm+gSNBgnbRi3AjbvOubXoDwA@mail.gmail.com>
+In-Reply-To: <20240724130717.95629-1-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::332;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x332.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::435;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x435.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -100,55 +100,60 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Alistair,
-
-On 24/7/24 04:44, Alistair Francis wrote:
-> On Sat, Jul 20, 2024 at 9:15 AM LIU Zhiwei <zhiwei_liu@linux.alibaba.com> wrote:
->>
->> This patch set aims to expose 32-bit RISC-V cpu to RV64 QEMU. Thus
->> qemu-system-riscv64 can directly boot a RV32 Linux.
->>
->> This patch set has been tested with 6.9.0 Linux Image.
->> And add an avocado tuxrun test in tests/avocado.
->>
->> v6:
->>    Use TUXRUN test case instead of boot_linux_console
->>    Add any32 and max32 cpu for RV64 QEMU
->>
->> v5:
->>    Rebase to master and add tags
->>
->> v4:
->>    Drop UL completely in PATCH v3 2/7, 4/7, 5/7.
->>    Avocado: Add "if=none" to "-drive" option in QEMU command line
->>
->> v3:
->>    Rebase to the master branch
->>
->> v2:
->>    Remove the line that was inadvertently left in PATCH v1 4/6.
->>    Add an avocado test.
->>
->> v1:
->>    https://mail.gnu.org/archive/html/qemu-riscv/2024-06/msg00501.html
->>
->>
->> LIU Zhiwei (2):
->>    target/riscv: Add any32 and max32 CPU for RV64 QEMU
->>    tests/avocado: Boot Linux for RV32 cpu on RV64 QEMU
->>
->> TANG Tiancheng (6):
->>    target/riscv: Add fw_dynamic_info32 for booting RV32 OpenSBI
->>    target/riscv: Adjust PMP size for no-MMU RV64 QEMU running RV32
->>    target/riscv: Correct SXL return value for RV32 in RV64 QEMU
->>    target/riscv: Detect sxl to set bit width for RV32 in RV64
->>    target/riscv: Correct mcause/scause bit width for RV32 in RV64 QEMU
->>    target/riscv: Enable RV32 CPU support in RV64 QEMU
+On 24/7/24 15:07, Philippe Mathieu-Daudé wrote:
+> The 'any' CPU is deprecated since commit f57d5f8004b
+> ("target/riscv: deprecate the 'any' CPU type"). Users
+> are better off using the default CPUs or the 'max' CPU.
 > 
-> Thanks!
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> ---
+>   docs/about/deprecated.rst       | 13 -------------
+>   docs/about/removed-features.rst |  8 ++++++++
+>   target/riscv/cpu-qom.h          |  1 -
+>   target/riscv/cpu.c              | 28 ----------------------------
+>   4 files changed, 8 insertions(+), 42 deletions(-)
 > 
-> Applied to riscv-to-apply.next
+> diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
+> index 88f0f037865..0ac49b15b44 100644
+> --- a/docs/about/deprecated.rst
+> +++ b/docs/about/deprecated.rst
+> @@ -347,19 +347,6 @@ QEMU's ``vhost`` feature, which would eliminate the high latency costs under
+>   which the 9p ``proxy`` backend currently suffers. However as of to date nobody
+>   has indicated plans for such kind of reimplementation unfortunately.
+>   
+> -RISC-V 'any' CPU type ``-cpu any`` (since 8.2)
+> -^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> -
+> -The 'any' CPU type was introduced back in 2018 and has been around since the
+> -initial RISC-V QEMU port. Its usage has always been unclear: users don't know
+> -what to expect from a CPU called 'any', and in fact the CPU does not do anything
+> -special that isn't already done by the default CPUs rv32/rv64.
+> -
+> -After the introduction of the 'max' CPU type, RISC-V now has a good coverage
+> -of generic CPUs: rv32 and rv64 as default CPUs and 'max' as a feature complete
+> -CPU for both 32 and 64 bit builds. Users are then discouraged to use the 'any'
+> -CPU type starting in 8.2.
+> -
+>   RISC-V CPU properties which start with capital 'Z' (since 8.2)
+>   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>   
+> diff --git a/docs/about/removed-features.rst b/docs/about/removed-features.rst
+> index fc7b28e6373..f3e9474a73e 100644
+> --- a/docs/about/removed-features.rst
+> +++ b/docs/about/removed-features.rst
+> @@ -850,6 +850,14 @@ The RISC-V no MMU cpus have been removed. The two CPUs: ``rv32imacu-nommu`` and
+>   ``rv64imacu-nommu`` can no longer be used. Instead the MMU status can be specified
+>   via the CPU ``mmu`` option when using the ``rv32`` or ``rv64`` CPUs.
+>   
+> +RISC-V 'any' CPU type ``-cpu any`` (removed in 9.1)
+> +'''''''''''''''''''''''''''''''''''''''''''''''''''
 
-Please don't add the 'any32' CPU type, we are removing 'any':
-https://lore.kernel.org/qemu-devel/20240724130717.95629-1-philmd@linaro.org/
+My bad, this will be 9.2.
+
+> +
+> +The 'any' CPU type was introduced back in 2018 and was around since the
+> +initial RISC-V QEMU port. Its usage was always been unclear: users don't know
+> +what to expect from a CPU called 'any', and in fact the CPU does not do anything
+> +special that isn't already done by the default CPUs rv32/rv64.
+
 
