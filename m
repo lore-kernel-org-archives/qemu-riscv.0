@@ -4,85 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 426ECC3DA49
-	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Jul 2024 06:06:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DC02C3DA49
+	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Jul 2024 07:02:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sWrbl-0001ZC-OR; Thu, 25 Jul 2024 02:05:45 -0400
+	id 1sWsUL-0002AF-Lj; Thu, 25 Jul 2024 03:02:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sWrbj-0001PV-A9
- for qemu-riscv@nongnu.org; Thu, 25 Jul 2024 02:05:43 -0400
-Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1sWsTw-00025s-1O
+ for qemu-riscv@nongnu.org; Thu, 25 Jul 2024 03:01:58 -0400
+Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sWrbh-0001tl-DT
- for qemu-riscv@nongnu.org; Thu, 25 Jul 2024 02:05:43 -0400
-Received: by mail-pj1-x102a.google.com with SMTP id
- 98e67ed59e1d1-2cb09dc1dafso422891a91.2
- for <qemu-riscv@nongnu.org>; Wed, 24 Jul 2024 23:05:40 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1sWsTt-00027s-9o
+ for qemu-riscv@nongnu.org; Thu, 25 Jul 2024 03:01:42 -0400
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-427b4c621b9so4357555e9.1
+ for <qemu-riscv@nongnu.org>; Thu, 25 Jul 2024 00:01:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721887539; x=1722492339; darn=nongnu.org;
+ d=linaro.org; s=google; t=1721890898; x=1722495698; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=ykyzOXDf1aFweIz87FKCn4XcbntHBbCG3Yl+QmCq46s=;
- b=opBqB8jltk5cEFtfWNLutCZYUkLTWmnnB3i2ZAiqwNDQqm+T1Hfy4ibDXj6oA6kkSX
- ziSUfm/H1C/wVziqIvfDMd1JqiwSyWMU/jkp/+PMHkeqfSj2MQW556O9SVzzlGeKZcfk
- QEFKUdX9K9AeZ//+8qiF319SyBkjEqb2RZdtR47psQUhJsyWTxAaUc115/tWwBSOt8rg
- rHL5NtGRNvKqf0MvbnnN3hLTKnLaqnxl0uYvwmwgOTnv/EP6Eldxbaj8VVB33VQdEilp
- 8sKNa1HZEE7P59NnUdwFg32xps8iLISS4icCeB5vULYkkcippWZYOF5Z86osJ40ENXp2
- eqGQ==
+ bh=OMG/ajioR5kVp5gUE/XSbPZbqWF3BPUaIvWKHTBzci8=;
+ b=C3NK90Au7xzk59IY4khMnIZi3jucy/Z66Z/r0wsJcxhU8rXkMDC0Kq7LcnfpfTuYhR
+ RCloUoTSAIJ6AXy2f4qJLOohPMX4D/z0XlJOIu+plqVawk5FWowqtKxw7DXIm8OyZMkM
+ O5ddMxGPKky2RL7HDVJ53wtDEfrnU5pux/Io0FbYhH6IE0ueOQLV11QYxA1bZiVqZ8w0
+ BOj3YFKjPwnBhIAkuavY70NoRPXJ8GH2XFXUIsEZFMFixVou3w9doOSR7g+hGTiREl9v
+ ICZFqyQ/oLvDUi9PmN/p/vP19nghmLSPicB5X6ko2xpZ0x/WZHITLAVlDknFF29+4QuD
+ uQbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721887539; x=1722492339;
+ d=1e100.net; s=20230601; t=1721890898; x=1722495698;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ykyzOXDf1aFweIz87FKCn4XcbntHBbCG3Yl+QmCq46s=;
- b=VXsufZ7JWPp6iDR/fvnTz/Wrxf+pLtVDr3sXDHCAx/jhtEc3/efK0dD4A7BuuB1hyK
- bmguQyj0hxnbRrMB4hwsFYIPp10qBNHSFwFrbJHjmKeAnHJ/UutIW8ePmyP8JRKk4ihu
- yo9sFAubHOsWW/MS30P/CpK698RxYsU+J1JcnU6gZlX1kej7Zy5473Uh81eFgN6RhZ3G
- eekQaEmnzfFr3KN4Ll+zh7Zo7gMrFEC58/HNHajzhQB6sqAX/LKAkGPRU6gQEe2ZsOva
- OSQqKvX5ykgodsu/d4sYEdoXZVHJSdWsklBa12dNEpQ8UWcmpVAXF6hKZfJEnO48uvVN
- 9aHA==
+ bh=OMG/ajioR5kVp5gUE/XSbPZbqWF3BPUaIvWKHTBzci8=;
+ b=IodvnF/gP6RjaTCb0JqIVDTUJNceAQAMeRAa3zbeoAR5FGquN4vR0NhrbWXONZ/ZKN
+ i/1ha50QihYm9SJTzOpJ67XMCbVeohPFcuz7i79QmmitksI5IIK58wdufPM/1DFfTLAL
+ F/pJQCPVyHXKiRuEQkOjLX4MfG31Oc1PlSOGnqW4BCiCpFLEkWW5gSjt08rm3YSjZjbh
+ VmEeJUz5z8f6Qrwz+1c3c2MguLHtrTwi0zKiGv/HGbJlaHKI0F5XI/Qwqom5QHEljQfG
+ lp7QZ3b7XxL68xAzwObZfg58hz9gSDAsoWhjAZtlxp03nnng7fYaZEAMs+jiLozHRtvb
+ qVMQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXQp0kG/YoKoKTMTR6sk1/37mECqb0kOon8vxgatoHu03lGPUsjv6nb8xMpFRdhkL4eeQl8FSXFyOmNDS9hA0JvyZHWtqM=
-X-Gm-Message-State: AOJu0Yylv6dzTkJ51Ifp0cx5EnagIsS6qzPlgrNrjZW3M2WVvOqHQipd
- YPeutdb00Phg/9qWKQg+vJ6a5lFfy0U6dgG+K4hF8S1NInA4EiMtLcuphjuCZX/A1hxOmtYhZ5H
- uQjs=
-X-Google-Smtp-Source: AGHT+IGLg6B/TRPNqCdhViGi7/l7OX/kx3zf7HFwVYzHmEf2fYmeGRTdJuTN5yvTFvJRnmleD2NsQA==
-X-Received: by 2002:a17:90b:314d:b0:2cb:f9e:3bfb with SMTP id
- 98e67ed59e1d1-2cf238ec69dmr1970682a91.32.1721887539355; 
- Wed, 24 Jul 2024 23:05:39 -0700 (PDT)
-Received: from [192.168.1.113] ([203.56.128.103])
+ AJvYcCUtceMrfiUImi2xssJm8cd3TLP7YZWVbUF4zALbsIhh27QDK9FS8799KMNhzf1D8EGMvGntkVFT0wYhjHIkKBw0YIxzYg8=
+X-Gm-Message-State: AOJu0YzHyzt9RO501q7E2I3xjhPU6ItA87qSDoP7UnWb2rtvL9sk+Urr
+ SUrnwgJwfnbLU4vICA29hQm1YfaTwbZwArrGmO40jA5c7M3sYkAYmgNVzJLjdpxpQN0wAXGA063
+ d
+X-Google-Smtp-Source: AGHT+IEDzli1lX56qcdBIAu5fVMARTN7rpYCVBUvGngvXsQj7/BkqXDvyrDQZjpu7QpRciq69UU/+w==
+X-Received: by 2002:a05:600c:4f51:b0:426:5b21:9801 with SMTP id
+ 5b1f17b1804b1-4280574219amr8850295e9.27.1721890897761; 
+ Thu, 25 Jul 2024 00:01:37 -0700 (PDT)
+Received: from [192.168.114.175] (164.170.88.92.rev.sfr.net. [92.88.170.164])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2cf28c9c9a1sm667341a91.24.2024.07.24.23.05.35
+ 5b1f17b1804b1-4280573f447sm19542095e9.16.2024.07.25.00.01.35
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 24 Jul 2024 23:05:38 -0700 (PDT)
-Message-ID: <abdab05e-3001-4a6f-afdc-05fc997657ee@linaro.org>
-Date: Thu, 25 Jul 2024 16:05:32 +1000
+ Thu, 25 Jul 2024 00:01:37 -0700 (PDT)
+Message-ID: <0d864b83-be52-479f-bd4a-5019425e98b4@linaro.org>
+Date: Thu, 25 Jul 2024 09:01:34 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v5 5/5] target/riscv: Inline unit-stride ld/st and
- corresponding functions for performance
-To: Max Chou <max.chou@sifive.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-References: <20240717133936.713642-1-max.chou@sifive.com>
- <20240717133936.713642-6-max.chou@sifive.com>
+Subject: Re: [PATCH v6 0/8] target/riscv: Expose RV32 cpu to RV64 QEMU
+To: Alistair Francis <alistair23@gmail.com>,
+ LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com,
+ alistair.francis@wdc.com, dbarboza@ventanamicro.com, liwei1518@gmail.com,
+ bmeng.cn@gmail.com, alex.bennee@linaro.org
+References: <20240719231149.1364-1-zhiwei_liu@linux.alibaba.com>
+ <CAKmqyKN=S9o32K0G8k5NqyMs=Xm+gSNBgnbRi3AjbvOubXoDwA@mail.gmail.com>
 Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240717133936.713642-6-max.chou@sifive.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <CAKmqyKN=S9o32K0G8k5NqyMs=Xm+gSNBgnbRi3AjbvOubXoDwA@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102a.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::332;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x332.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -105,111 +100,55 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 7/17/24 23:39, Max Chou wrote:
-> In the vector unit-stride load/store helper functions. the vext_ldst_us
-> & vext_ldst_whole functions corresponding most of the execution time.
-> Inline the functions can avoid the function call overhead to improve the
-> helper function performance.
+Hi Alistair,
+
+On 24/7/24 04:44, Alistair Francis wrote:
+> On Sat, Jul 20, 2024 at 9:15 AM LIU Zhiwei <zhiwei_liu@linux.alibaba.com> wrote:
+>>
+>> This patch set aims to expose 32-bit RISC-V cpu to RV64 QEMU. Thus
+>> qemu-system-riscv64 can directly boot a RV32 Linux.
+>>
+>> This patch set has been tested with 6.9.0 Linux Image.
+>> And add an avocado tuxrun test in tests/avocado.
+>>
+>> v6:
+>>    Use TUXRUN test case instead of boot_linux_console
+>>    Add any32 and max32 cpu for RV64 QEMU
+>>
+>> v5:
+>>    Rebase to master and add tags
+>>
+>> v4:
+>>    Drop UL completely in PATCH v3 2/7, 4/7, 5/7.
+>>    Avocado: Add "if=none" to "-drive" option in QEMU command line
+>>
+>> v3:
+>>    Rebase to the master branch
+>>
+>> v2:
+>>    Remove the line that was inadvertently left in PATCH v1 4/6.
+>>    Add an avocado test.
+>>
+>> v1:
+>>    https://mail.gnu.org/archive/html/qemu-riscv/2024-06/msg00501.html
+>>
+>>
+>> LIU Zhiwei (2):
+>>    target/riscv: Add any32 and max32 CPU for RV64 QEMU
+>>    tests/avocado: Boot Linux for RV32 cpu on RV64 QEMU
+>>
+>> TANG Tiancheng (6):
+>>    target/riscv: Add fw_dynamic_info32 for booting RV32 OpenSBI
+>>    target/riscv: Adjust PMP size for no-MMU RV64 QEMU running RV32
+>>    target/riscv: Correct SXL return value for RV32 in RV64 QEMU
+>>    target/riscv: Detect sxl to set bit width for RV32 in RV64
+>>    target/riscv: Correct mcause/scause bit width for RV32 in RV64 QEMU
+>>    target/riscv: Enable RV32 CPU support in RV64 QEMU
 > 
-> Signed-off-by: Max Chou <max.chou@sifive.com>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-> ---
->   target/riscv/vector_helper.c | 56 +++++++++++++++++++-----------------
->   1 file changed, 30 insertions(+), 26 deletions(-)
-
-You'll want to mark vext_page_ldst_us similarly.
-
-
-r~
-
+> Thanks!
 > 
-> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index 2e675b4220c..95394c425ed 100644
-> --- a/target/riscv/vector_helper.c
-> +++ b/target/riscv/vector_helper.c
-> @@ -150,18 +150,20 @@ typedef void vext_ldst_elem_fn_tlb(CPURISCVState *env, abi_ptr addr,
->                                      uint32_t idx, void *vd, uintptr_t retaddr);
->   typedef void vext_ldst_elem_fn_host(void *vd, uint32_t idx, void *host);
->   
-> -#define GEN_VEXT_LD_ELEM(NAME, ETYPE, H, LDSUF)                         \
-> -static void NAME##_tlb(CPURISCVState *env, abi_ptr addr,                \
-> -                       uint32_t byte_off, void *vd, uintptr_t retaddr)  \
-> -{                                                                       \
-> -    ETYPE *cur = vd + byte_off;                                         \
-> -    *cur = cpu_##LDSUF##_data_ra(env, addr, retaddr);                   \
-> -}                                                                       \
-> -                                                                        \
-> -static void NAME##_host(void *vd, uint32_t byte_off, void *host)        \
-> -{                                                                       \
-> -    ETYPE val = LDSUF##_p(host);                                        \
-> -    *(ETYPE *)(vd + byte_off) = val;                                    \
-> +#define GEN_VEXT_LD_ELEM(NAME, ETYPE, H, LDSUF)                 \
-> +static inline QEMU_ALWAYS_INLINE                                \
-> +void NAME##_tlb(CPURISCVState *env, abi_ptr addr,               \
-> +                uint32_t byte_off, void *vd, uintptr_t retaddr) \
-> +{                                                               \
-> +    ETYPE *cur = vd + byte_off;                                 \
-> +    *cur = cpu_##LDSUF##_data_ra(env, addr, retaddr);           \
-> +}                                                               \
-> +                                                                \
-> +static inline QEMU_ALWAYS_INLINE                                \
-> +void NAME##_host(void *vd, uint32_t byte_off, void *host)       \
-> +{                                                               \
-> +    ETYPE val = LDSUF##_p(host);                                \
-> +    *(ETYPE *)(vd + byte_off) = val;                            \
->   }
->   
->   GEN_VEXT_LD_ELEM(lde_b, uint8_t,  H1, ldub)
-> @@ -169,18 +171,20 @@ GEN_VEXT_LD_ELEM(lde_h, uint16_t, H2, lduw)
->   GEN_VEXT_LD_ELEM(lde_w, uint32_t, H4, ldl)
->   GEN_VEXT_LD_ELEM(lde_d, uint64_t, H8, ldq)
->   
-> -#define GEN_VEXT_ST_ELEM(NAME, ETYPE, H, STSUF)                         \
-> -static void NAME##_tlb(CPURISCVState *env, abi_ptr addr,                \
-> -                       uint32_t byte_off, void *vd, uintptr_t retaddr)  \
-> -{                                                                       \
-> -    ETYPE data = *(ETYPE *)(vd + byte_off);                             \
-> -    cpu_##STSUF##_data_ra(env, addr, data, retaddr);                    \
-> -}                                                                       \
-> -                                                                        \
-> -static void NAME##_host(void *vd, uint32_t byte_off, void *host)        \
-> -{                                                                       \
-> -    ETYPE val = *(ETYPE *)(vd + byte_off);                              \
-> -    STSUF##_p(host, val);                                               \
-> +#define GEN_VEXT_ST_ELEM(NAME, ETYPE, H, STSUF)                 \
-> +static inline QEMU_ALWAYS_INLINE                                \
-> +void NAME##_tlb(CPURISCVState *env, abi_ptr addr,               \
-> +                uint32_t byte_off, void *vd, uintptr_t retaddr) \
-> +{                                                               \
-> +    ETYPE data = *(ETYPE *)(vd + byte_off);                     \
-> +    cpu_##STSUF##_data_ra(env, addr, data, retaddr);            \
-> +}                                                               \
-> +                                                                \
-> +static inline QEMU_ALWAYS_INLINE                                \
-> +void NAME##_host(void *vd, uint32_t byte_off, void *host)       \
-> +{                                                               \
-> +    ETYPE val = *(ETYPE *)(vd + byte_off);                      \
-> +    STSUF##_p(host, val);                                       \
->   }
->   
->   GEN_VEXT_ST_ELEM(ste_b, uint8_t,  H1, stb)
-> @@ -366,7 +370,7 @@ vext_page_ldst_us(CPURISCVState *env, void *vd, target_ulong addr,
->       }
->   }
->   
-> -static void
-> +static inline QEMU_ALWAYS_INLINE void
->   vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
->                vext_ldst_elem_fn_tlb *ldst_tlb,
->                vext_ldst_elem_fn_host *ldst_host, uint32_t log2_esz,
-> @@ -695,7 +699,7 @@ GEN_VEXT_LDFF(vle64ff_v, int64_t, lde_d_tlb)
->   /*
->    * load and store whole register instructions
->    */
-> -static void
-> +static inline QEMU_ALWAYS_INLINE void
->   vext_ldst_whole(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
->                   vext_ldst_elem_fn_tlb *ldst_tlb,
->                   vext_ldst_elem_fn_host *ldst_host, uint32_t log2_esz,
+> Applied to riscv-to-apply.next
 
+Please don't add the 'any32' CPU type, we are removing 'any':
+https://lore.kernel.org/qemu-devel/20240724130717.95629-1-philmd@linaro.org/
 
