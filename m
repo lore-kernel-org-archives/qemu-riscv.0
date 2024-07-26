@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96C14C3DA49
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jul 2024 12:27:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E84B6C3DA49
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jul 2024 12:32:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sXK2T-00034Y-5Y; Fri, 26 Jul 2024 08:27:13 -0400
+	id 1sXK7X-0007fg-7z; Fri, 26 Jul 2024 08:32:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1sXK2R-00031T-BW
- for qemu-riscv@nongnu.org; Fri, 26 Jul 2024 08:27:11 -0400
-Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436])
+ id 1sXK7D-00075u-Cw
+ for qemu-riscv@nongnu.org; Fri, 26 Jul 2024 08:32:10 -0400
+Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1sXK2P-000788-J3
- for qemu-riscv@nongnu.org; Fri, 26 Jul 2024 08:27:11 -0400
-Received: by mail-pf1-x436.google.com with SMTP id
- d2e1a72fcca58-70d19c525b5so678495b3a.2
- for <qemu-riscv@nongnu.org>; Fri, 26 Jul 2024 05:27:09 -0700 (PDT)
+ id 1sXK79-0003D6-Or
+ for qemu-riscv@nongnu.org; Fri, 26 Jul 2024 08:32:06 -0400
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-1fc66fc35f2so4296505ad.0
+ for <qemu-riscv@nongnu.org>; Fri, 26 Jul 2024 05:32:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1721996828; x=1722601628; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1721997122; x=1722601922; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=nFh+G7stIUPYlB2tBNcR+6jw95Oe3yxx4//NYKBPH9w=;
- b=NlADgO3ylgzYNigBr9W0EoXzgYUSX5/uc4BYFxCVoT9EirGtq4x5USgn5PoTOxBomN
- EtZTpBg1iGFfrcpkBK4NMIu3XAgbLKysknjplRwvHwlty6VBB3mVMxO1gZj4X3nAsmz2
- mPN8fY8cyQrJt2kzktAH+1zxMcYJAoQWO+S9X4NLyTTUuVyDFWzclle9gLh/lBgBPbcf
- Ca32gNkzSzKBGVw7W6pHiecsu1/cfJI8ialbN8+oBrfQLWGmTPc35iO6FDvjnKjsji8K
- vpgvAmJEyUjlGHxkSccwTxrC9Kya9oC8L2JtWlq72Xq2j7JPadk445bJeNaWj5gbrxFC
- pF+A==
+ bh=EtRK4zWhoiaMF0j+CVYjLlZPKRTkFC/ig+Ipn+BZYKg=;
+ b=aCef13bxeAzcXPfM49pWR3H09a9k+qm1HLlHopWP1cs6kPAPfFkfk0DfjpgeBwPuIL
+ tXugJeRjQfsFJ1Av2NyCKy34EEaLfISf98M6ib0XPljo/3lMFr90NXxGTSEilePBxPHV
+ IK4YVdgv1Dr93JpWBLWwNHGITwJ79+6uKKvx8VHEcC0EmiPvAImI/uLNA5vgX4bACXpR
+ 8iwEd0AJm1ajJ/OLEjJ+uDctJfL/3vVfzyzwV98MNrQMLICIK5n916T9EmjL9WvIs80T
+ c9fGz0s1SkECveW+3lGfBukvkL4YwJp2tvHiKls4VbpziuLOIU8auqTdaDz1R4hvWbwd
+ 8Jqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721996828; x=1722601628;
+ d=1e100.net; s=20230601; t=1721997122; x=1722601922;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=nFh+G7stIUPYlB2tBNcR+6jw95Oe3yxx4//NYKBPH9w=;
- b=uJOFkCk78H72ecsK6Df57dEuhg+mxr3bxX2OvRjcxdBF87yTTfkIrF+0B8gA0/vy00
- DrXaZbjmUoWqZadS4IOePp+9/46xWznviwetL5UEqlRU5iampAD0/uzpzImPVs1lwYz5
- SOn/EMeKncGgsXTrobN9q8nk8d3qCt4rfpyPm7xC74Dm8q4sI05m8vKIA8Ks6pIwodQy
- euCwNExem5M/iuwOggHYkozQxzZonFng/Cz2HeG1Ckxz3SpgaMIJX10YC5Us1WN/4q4E
- Nx3V+ho9R9bbTgCBJYAWsLKBAncBjQENjxezBPPJsxx2gawAWrOUuYcpgweXlMbdlm5A
- RX/A==
+ bh=EtRK4zWhoiaMF0j+CVYjLlZPKRTkFC/ig+Ipn+BZYKg=;
+ b=ulYY3XXAXf/aKCzY0LYIqhTBeDiyl8GDyYFG5x02SN24CH+IFUhnQtZB731a4tbmX8
+ 99Uu5TmHxhoZ4pa1KS6B8P4MCOCCo5QquQYMa9bqpNVbuBkjAG3g1Z3Uu40EuOBOwD5e
+ +hlUyRgjgIyGi/Lmi84p7vG7NZ6mEbM4BNJ1tgi6I7gQqi2HBeVb8JU5ideToIzpC5lI
+ AByVojrryJdOU0aotmAHPadt/hFyXrcWluwVDEgyiRysoXnbkhLWKK4NnkGV3Pih7+bX
+ W4lS7JsyBaUWfTKNs6sL05+LFbG1GfQhthyQ12CQH8d2359LERREbb/AFUuI2CpUH0on
+ vckQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXRwTlSRdH2vmzbDBbpSdLxDymgia0ZGtI8RnoYhnWrVqu55xrRA0LPtwf5HlEs6HXOYzlLQ17iRvvyTM2fjDSW3m9u9ro=
-X-Gm-Message-State: AOJu0YynmP2NQ3bG2gzcJNnweLsQKcpXN9iFB9k9lR6h4hN7PIVzKpU7
- zrga6LWCt9adQFxqxPGwnaJ5YQ8Lh6bvUZkGr0rZlNE2oOgXhBG7X0SVEqjiQBI=
-X-Google-Smtp-Source: AGHT+IGmCXVbJVSbYzeRVxK2s0WOn6Ih8V6z91YW4P12NWt5UQ+LDkBILTui/BL3qzgKaY6yWDWOWA==
-X-Received: by 2002:a05:6a00:9448:b0:705:9ddb:db6b with SMTP id
- d2e1a72fcca58-70eae8f0dd3mr5193129b3a.13.1721996827981; 
- Fri, 26 Jul 2024 05:27:07 -0700 (PDT)
+ AJvYcCUlOrkdvN4wN3HwNa0iEMFxLpfkokOGUZ38yPAnucV5nART6caQtX53fgvKdlBofHl9UVMAA1uPt7i9czHXFV1jzyvhy1g=
+X-Gm-Message-State: AOJu0Yzn0nXKU6ShWeksb8ccW7QYaPhOMUXVQYbbcQtT8TNMCC9I0xYo
+ fj9Nr4do4q5tfplYEVlFrtTBLFVPMbkRTr1bm9LSfBkb6sHTKf1TZr26lsq7yWP230upw41jbe6
+ 4
+X-Google-Smtp-Source: AGHT+IEgymvyGjOEhBuJXdL2Wi2DdocA3Ya4PRzqyhDbvku0sARpaof0y551Ua96Zr/2a9KYz+atcQ==
+X-Received: by 2002:a17:903:41cc:b0:1fd:b5fe:ee91 with SMTP id
+ d9443c01a7336-1fdd6e42911mr143186455ad.25.1721997121912; 
+ Fri, 26 Jul 2024 05:32:01 -0700 (PDT)
 Received: from ?IPV6:2804:7f0:bcc0:54b1:ce70:829:8c74:d7d4?
  ([2804:7f0:bcc0:54b1:ce70:829:8c74:d7d4])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-70ead8a105bsm2578926b3a.194.2024.07.26.05.27.04
+ d2e1a72fcca58-70ead874aeesm2577489b3a.163.2024.07.26.05.31.58
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 26 Jul 2024 05:27:07 -0700 (PDT)
-Message-ID: <5429e0ae-641e-4500-adde-e4bf8712587c@ventanamicro.com>
-Date: Fri, 26 Jul 2024 09:27:03 -0300
+ Fri, 26 Jul 2024 05:32:01 -0700 (PDT)
+Message-ID: <73a0b3bc-2742-432e-a1bc-061621634a46@ventanamicro.com>
+Date: Fri, 26 Jul 2024 09:31:57 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC 2/2] target/riscv: rvv: improve performance of RISC-V vector
- loads and stores on large amounts of data.
+Subject: Re: [RFC 0/2] Improve the performance of unit-stride RVV ld/st on
 To: Paolo Savini <paolo.savini@embecosm.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: Richard Handerson <richard.henderson@linaro.org>,
@@ -75,21 +75,20 @@ Cc: Richard Handerson <richard.henderson@linaro.org>,
  Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Helene Chelin <helene.chelin@embecosm.com>, Max Chou <max.chou@sifive.com>
 References: <20240717153040.11073-1-paolo.savini@embecosm.com>
- <20240717153040.11073-3-paolo.savini@embecosm.com>
 Content-Language: en-US
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240717153040.11073-3-paolo.savini@embecosm.com>
+In-Reply-To: <20240717153040.11073-1-paolo.savini@embecosm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::436;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x436.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,59 +104,76 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Hi Paolo,
 
 
-On 7/17/24 12:30 PM, Paolo Savini wrote:
-> This patch optimizes the emulation of unit-stride load/store RVV instructions
-> when the data being loaded/stored per iteration amounts to 64 bytes or more.
-> The optimization consists of calling __builtin_memcpy on chunks of data of 128
-> and 256 bytes between the memory address of the simulated vector register and
-> the destination memory address and vice versa.
-> This is done only if we have direct access to the RAM of the host machine.
-> 
-> Signed-off-by: Paolo Savini <paolo.savini@embecosm.com>
-> ---
->   target/riscv/vector_helper.c | 17 ++++++++++++++++-
->   1 file changed, 16 insertions(+), 1 deletion(-)
-> 
-> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index 4b444c6bc5..7674972784 100644
-> --- a/target/riscv/vector_helper.c
-> +++ b/target/riscv/vector_helper.c
-> @@ -486,7 +486,22 @@ vext_group_ldst_host(CPURISCVState *env, void *vd, uint32_t byte_end,
->       }
->   
->       fn = fns[is_load][group_size];
-> -    fn(vd, byte_offset, host + byte_offset);
-> +
-> +    if (byte_offset + 32 < byte_end) {
-> +      group_size = MO_256;
-> +      if (is_load)
-> +        __builtin_memcpy((uint8_t *)(vd + byte_offset), (uint8_t *)(host + byte_offset), 32);
-> +      else
-> +        __builtin_memcpy((uint8_t *)(host + byte_offset), (uint8_t *)(vd + byte_offset), 32);
-> +    } else if (byte_offset + 16 < byte_end) {
-> +      group_size = MO_128;
-> +      if (is_load)
-> +        __builtin_memcpy((uint8_t *)(vd + byte_offset), (uint8_t *)(host + byte_offset), 16);
-> +      else
-> +        __builtin_memcpy((uint8_t *)(host + byte_offset), (uint8_t *)(vd + byte_offset), 16);
-> +    } else {
-> +      fn(vd, byte_offset, host + byte_offset);
-> +    }
->  
+I suggest adding a "riscv:" at the start of the cover letter subject for the next
+version. This will make it easier for everyone else to quickly identify which arch
+the patches are changing.
 
-I see that we don't have any precedence with this particular built-in in the TCG code. We do have
-some instances in other parts of QEMU though (e.g. util/guest-random.c).
-
-If we're ok with adding these builtin calls in the execution helpers in TCG, and aside from the
-style warnings that ./scripts/checkpatch.pl will give, LGTM.
+Other than that, and checkpatch.pl style changes, looks good to me.
 
 
 Thanks,
 
+
 Daniel
 
->       return 1 << group_size;
->   }
+
+On 7/17/24 12:30 PM, Paolo Savini wrote:
+> This series of patches builds on top of Max Chou's patches:
+> 
+> https://lore.kernel.org/all/20240613175122.1299212-1-max.chou@sifive.com/
+> 
+> The aim of these patches is to improve the performance of QEMU emulation
+> of RVV unit-stride load and store instructions in the following cases
+> 
+> 1. when the data being loaded/stored per iteration amounts to 8 bytes or less.
+> 2. when the vector length is 16 bytes (VLEN=128) and there is no grouping of the
+>     vector registers (LMUL=1).
+> 3. when the data being loaded/stored per iteration is more than 64 bytes.
+> 
+> In the first two cases the optimization consists of avoiding the
+> overhead of probing the RAM of the host machine and perform a simple loop
+> load/store on the data grouped in chunks of as many bytes as possible (8,4,2 or 1).
+> 
+> The third case is optimized by calling the __builtin_memcpy function on
+> data chuncks of 128 bytes and 256 bytes per time.
+> 
+> These patches on top of Max Chou's patches have been tested with SPEC
+> CPU 2017 and achieve an average reduction of 13% of the time needed by
+> QEMU for running the benchmarks compared with the master branch of QEMU.
+> 
+> You can find the source code being developed here: https://github.com/embecosm/rise-rvv-tcg-qemu
+> and regular updates and more statistics about the patch here: https://github.com/embecosm/rise-rvv-tcg-qemu-reports
+> 
+> Changes:
+> - patch 1:
+>    - Modify vext_ldst_us to run the simple loop load/store if we
+>      are in one of the two cases above.
+> - patch 2:
+>    - Modify vext_group_ldst_host to use __builtin_memcpy for data sizes
+>      of 128 bits and above.
+> 
+> Cc: Richard Handerson <richard.henderson@linaro.org>
+> Cc: Palmer Dabbelt <palmer@dabbelt.com>
+> Cc: Alistair Francis <alistair.francis@wdc.com>
+> Cc: Bin Meng <bmeng.cn@gmail.com>
+> Cc: Weiwei Li <liwei1518@gmail.com>
+> Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+> Cc: Helene Chelin <helene.chelin@embecosm.com>
+> Cc: Max Chou <max.chou@sifive.com>
+> 
+> Helene CHELIN (1):
+>    target/riscv: rvv: reduce the overhead for simple RISC-V vector
+>      unit-stride loads and stores
+> 
+> Paolo Savini (1):
+>    target/riscv: rvv: improve performance of RISC-V vector loads and
+>      stores on large amounts of data.
+> 
+>   target/riscv/vector_helper.c | 63 +++++++++++++++++++++++++++++++++++-
+>   1 file changed, 62 insertions(+), 1 deletion(-)
+> 
 
