@@ -4,56 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BB75C3DA4A
-	for <qemu-riscv@archiver.kernel.org>; Sat, 27 Jul 2024 04:28:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72BE2C3DA61
+	for <qemu-riscv@archiver.kernel.org>; Sat, 27 Jul 2024 04:53:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sXZ2j-0000FV-En; Sat, 27 Jul 2024 00:28:29 -0400
+	id 1sXZQ9-0007L5-CS; Sat, 27 Jul 2024 00:52:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alvinga@andestech.com>)
- id 1sXZ2h-0000ER-Fh
- for qemu-riscv@nongnu.org; Sat, 27 Jul 2024 00:28:27 -0400
-Received: from 60-248-80-70.hinet-ip.hinet.net ([60.248.80.70]
- helo=Atcsqr.andestech.com)
+ (Exim 4.90_1) (envelope-from <yfliu2008@qq.com>) id 1sXZPs-0007IS-Py
+ for qemu-riscv@nongnu.org; Sat, 27 Jul 2024 00:52:26 -0400
+Received: from xmbghk7.mail.qq.com ([43.163.128.53])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alvinga@andestech.com>)
- id 1sXZ2d-0001ld-DO
- for qemu-riscv@nongnu.org; Sat, 27 Jul 2024 00:28:27 -0400
-Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 46R4SACl049966
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
- Sat, 27 Jul 2024 12:28:10 +0800 (+08)
- (envelope-from alvinga@andestech.com)
-Received: from atctrx.andestech.com (10.0.15.190) by ATCPCS34.andestech.com
- (10.0.1.134) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Sat, 27 Jul
- 2024 12:28:11 +0800
-To: <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>
-CC: <alistair.francis@wdc.com>, <bin.meng@windriver.com>,
- <liwei1518@gmail.com>, <dbarboza@ventanamicro.com>,
- <zhiwei_liu@linux.alibaba.com>, Alvin Chang <alvinga@andestech.com>
-Subject: [PATCH] RISC-V: Remove riscv_cpu_claim_interrupts()
-Date: Sat, 27 Jul 2024 12:27:58 +0800
-Message-ID: <20240727042758.2341031-1-alvinga@andestech.com>
-X-Mailer: git-send-email 2.34.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.0.15.190]
-X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
- ATCPCS34.andestech.com (10.0.1.134)
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 46R4SACl049966
-Received-SPF: pass client-ip=60.248.80.70; envelope-from=alvinga@andestech.com;
- helo=Atcsqr.andestech.com
-X-Spam_score_int: -8
-X-Spam_score: -0.9
-X-Spam_bar: /
-X-Spam_report: (-0.9 / 5.0 requ) BAYES_00=-1.9, RDNS_DYNAMIC=0.982,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- TVD_RCVD_IP=0.001 autolearn=no autolearn_force=no
+ (Exim 4.90_1) (envelope-from <yfliu2008@qq.com>) id 1sXZPm-0000VV-Ut
+ for qemu-riscv@nongnu.org; Sat, 27 Jul 2024 00:52:24 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
+ t=1722055919; bh=nVL7tHLLFUshgl0l6LYOLr1tG3OtMS5UqsmyRpCF1cI=;
+ h=From:To:Subject:Date;
+ b=bKQfocMkpXcijxeA7/oFQ0QRe21+4+0vGq2lzqU1bS+IwsgmMtdLGE708SIWIfozv
+ yua1t5q4vEOpasXLDQ+LQ1ygxf3reajdLk+D1exRSwMym0tR1TEaxvUBlaelYVDKVt
+ 9Tq9tZRr897IWn4uFqLZ/i1qnIK/k1KMpO54cg5g=
+X-QQ-XMRINFO: OWPUhxQsoeAVDbp3OJHYyFg=
+X-QQ-XMAILINFO: OY1xLn4i1DCCfBD/w0d5VXVPqfeWOccxGQSBDuMcrAF/W3HHRYvU2IR7VqlTIk
+ YeMMcoE74TuM3BzX4bJ3BxoWODefxj6rInov/wubaPLe3Qy71/YiPHPGLaMWDpVJ2L/7V1dO0pPBJ
+ EX9nwbRXxc6/Nbn+IzFGXY2dWdVEbWLV6cs7SxyCgiLn+qkqJAMXZC96qbq8inX3ycsGgOQ65/WJ0
+ 9bYJ3cz94iRj3q8UFoe6K/yHQKcRKjs7NF1FJspBGEOuVpcZ1mpWnS4Yd7ummsfuIX7rcHylWq8G/
+ /W34mWZPMKUhZbNT+rTqQDZEHLjE9AvL20fl1BtXr20JUMVt9ctuuRCn5//I19ypW9v7n0XZ7o5/z
+ ryGoGFTEpiMfUeMFLZaQyk0JiF8DNsossEgttymQa29mkVj41rN8v+4AAcjN+k4uzDfc3Uj5j/zQA
+ LQ4yB13wsiCBtZViCTHK0fUZ2SJCT7gsMCZNd3/8T8BwgduKS76nAz88ZtcVJrX2lPBnLDyTlgt3X
+ ObvCuqeGntjcm0Gr+4ltSYGnNskUal/I2nrcPz4KAQenb46pKfJ3mwFZyIQDcud/1izMVWk9L+f/G
+ 4QJBTizKcyanRso/6DyBkdbOAh/O2upYsQgIPzXX2yHQaE/ggGkNeTRvf94Z065T04auEh3r5m9KE
+ W1vY4l9Hx1yf5yuhlNMMxZcjOJKwC12vDNKFy3Uyq9aIzrFDGAi1aBpSszlSa4kGufAmYFcC/lLUR
+ aPgbQOENViT3oBpx2FyiTuv/tnJPqb+US/US9xAEnQ1siC5Q0aYCRsLElya1SO4bu5ImlV0zgX2lI
+ LYl9d6OuYscTzNPi32bIPFlU8Ske3y0FuUCr+XCco1jLbNV9PRoUzr2e/J8FJ9jZ4pWo/Ih3B+yCz
+ m5wwZ6PObro11jrfp4W02DrJpDvjHz/y0EV6aCi9kM4gs3e2JZ/oEEsUAmjPCVt5g72UteNSiJzK3
+ c+IEd5ehOB8WHizw3s3U50+L24I7mELwpHGbdK//D2jwLqJSiV
+From: "=?utf-8?B?eWZsaXUyMDA4?=" <yfliu2008@qq.com>
+To: "=?utf-8?B?cWVtdS1yaXNjdg==?=" <qemu-riscv@nongnu.org>
+Subject: how to start second NUMA node in machine virt
+Mime-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="----=_NextPart_66A47CEE_3DCF83F0_15880C60"
+Content-Transfer-Encoding: 8Bit
+Date: Sat, 27 Jul 2024 12:51:58 +0800
+X-Priority: 3
+Message-ID: <tencent_BF2BFB05936DB83F3F50495DAE1121ADCC0A@qq.com>
+X-QQ-MIME: TCMime 1.0 by Tencent
+X-Mailer: QQMail 2.x
+X-QQ-Mailer: QQMail 2.x
+X-QQ-mid: xmseszc7-0t1722055918tn2prx84s
+Received-SPF: pass client-ip=43.163.128.53; envelope-from=yfliu2008@qq.com;
+ helo=xmbghk7.mail.qq.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, FROM_EXCESS_BASE64=0.001,
+ HTML_MESSAGE=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -66,231 +75,126 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-to:  Alvin Chang <alvinga@andestech.com>
-From:  Alvin Chang via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The function of riscv_cpu_claim_interrupts() was introduced in commit
-e3e7039 ("RISC-V: Allow interrupt controllers to claim interrupts") to
-enforce hardware controlled of SEIP signal when there is an attached
-external interrupt controller.
+This is a multi-part message in MIME format.
 
-In later RISC-V privileged specification version 1.10, SEIP became
-software-writable, even if there is an attached external interrupt
-controller. Thus, the commit 33fe584 ("target/riscv: Allow software
-access to MIP SEIP") was introduced to remove that limitation, and it
-also removed the usage of "miclaim" mask.
+------=_NextPart_66A47CEE_3DCF83F0_15880C60
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: base64
 
-It seems the function of riscv_cpu_claim_interrupts() is no longer used.
-Therefore, we remove it in this commit.
+RGVhciBleHBlcnRzLA0KDQoNCg0KDQpJIGFtIHVzaW5nICJxZW11LXN5c3RlbS1yaXNjdjMy
+IiB2Ni4yIG9uIFVidW50dSAyMi4wNCB3aXRoICJ2aXJ0IiBtYWNoaW5lIHR5cGUgd2l0aCB0
+d28gTlVNQSBub2RlcywgZWFjaCBub2RlIGhhcyZuYnNwOyBvbmx5IG9uZSBDUFUsIEkgaGF2
+ZSBsb2FkZWQgdHdvIHByb2dyYW1zIGZvciB0aGUgdHdvIG5vZGVzIHJlc3BlY3RpdmVseS4m
+bmJzcDsNCg0KDQoNCg0KRnJvbSBkdGIgZHVtcCBJIGNhbiBzZWUgdHdvJm5ic3A7IENMSU5U
+IGFuZCB0d28gUExJQyBkZXZpY2VzLCBJIGFsc28gYWRkZWQgYSB2aXJ0aW8tc2VyaWFsIGRl
+dmljZSBmb3IgdGhlIG90aGVyIE5VTUEgbm9kZSB0byB1c2UgYXMgY29uc29sZS4NCg0KDQoN
+Cg0KDQpBZnRlciBsYXVuY2hpbmcgUUVNVSwgSSBjYW4gdXNlIGZpcnN0IG5vZGUncyBwcm9n
+cmFtIGNvcnJlY3RseSB2aWEgc2VyaWFsIGNvbnNvbGUuIFRoYXQgbWVhbnMgdGhlIGJvb3Qg
+Uk9NIGhhcyBraWNrZWQgb2ZmIHRoZSBmaXJzdCBub2RlIGNvcnJlY3RseS4gQnV0IHRoZSBw
+cm9ncmFtIGZvciB0aGUgb3RoZXIgbnVtYSBub2RlIGRvZXNuJ3QgcnVuIHlldC4mbmJzcDsg
+SXMgdGhpcyB0aGUgZGVmYXVsdCBiZWhhdmlvciBvZiBOVU1BIGJ5IGRlc2lnbj8NCg0KDQoN
+Cg0KDQpJIGd1ZXNzIGV4dHJhIG9wZXJhdGlvbnMgYXJlIG5lZWVkJm5ic3A7IHRvIGtpY2sg
+b2ZmIHRoZSBvdGhlciBOVU1BIG5vZGUgbm93LCZuYnNwO0kgd2lsbCBhbHNvJm5ic3A7IGhv
+dyB0byBhY2hpZXZlIGludGVyIHByb2Nlc3MgaW50ZXJydXB0aW9ucyBsYXRlci4mbmJzcDsN
+Cg0KDQoNCg0KQnV0IEkgY2FuJ3QgZmluZCBhbnkgbWF0ZXJpYWxzIHZpYSBJbnRlcm5ldCBz
+ZWFyY2hlcy4gQ291bGQgeW91IGdpdmUgbWUgc29tZSBoaW50cz8mbmJzcDsNCg0KDQoNCg0K
+UmVnYXJkcywNCg0KeWY=
 
-Signed-off-by: Alvin Chang <alvinga@andestech.com>
----
- hw/intc/riscv_aclint.c    | 20 --------------------
- hw/intc/riscv_aplic.c     | 11 -----------
- hw/intc/riscv_imsic.c     |  8 --------
- hw/intc/sifive_plic.c     | 15 ---------------
- target/riscv/cpu.c        |  1 -
- target/riscv/cpu.h        |  3 ---
- target/riscv/cpu_helper.c | 11 -----------
- target/riscv/machine.c    |  1 -
- 8 files changed, 70 deletions(-)
+------=_NextPart_66A47CEE_3DCF83F0_15880C60
+Content-Type: text/html;
+	charset="utf-8"
+Content-Transfer-Encoding: base64
 
-diff --git a/hw/intc/riscv_aclint.c b/hw/intc/riscv_aclint.c
-index e9f0536b1c..54cf69dada 100644
---- a/hw/intc/riscv_aclint.c
-+++ b/hw/intc/riscv_aclint.c
-@@ -280,7 +280,6 @@ static Property riscv_aclint_mtimer_properties[] = {
- static void riscv_aclint_mtimer_realize(DeviceState *dev, Error **errp)
- {
-     RISCVAclintMTimerState *s = RISCV_ACLINT_MTIMER(dev);
--    int i;
- 
-     memory_region_init_io(&s->mmio, OBJECT(dev), &riscv_aclint_mtimer_ops,
-                           s, TYPE_RISCV_ACLINT_MTIMER, s->aperture_size);
-@@ -291,14 +290,6 @@ static void riscv_aclint_mtimer_realize(DeviceState *dev, Error **errp)
- 
-     s->timers = g_new0(QEMUTimer *, s->num_harts);
-     s->timecmp = g_new0(uint64_t, s->num_harts);
--    /* Claim timer interrupt bits */
--    for (i = 0; i < s->num_harts; i++) {
--        RISCVCPU *cpu = RISCV_CPU(cpu_by_arch_id(s->hartid_base + i));
--        if (riscv_cpu_claim_interrupts(cpu, MIP_MTIP) < 0) {
--            error_report("MTIP already claimed");
--            exit(1);
--        }
--    }
- }
- 
- static void riscv_aclint_mtimer_reset_enter(Object *obj, ResetType type)
-@@ -472,7 +463,6 @@ static Property riscv_aclint_swi_properties[] = {
- static void riscv_aclint_swi_realize(DeviceState *dev, Error **errp)
- {
-     RISCVAclintSwiState *swi = RISCV_ACLINT_SWI(dev);
--    int i;
- 
-     memory_region_init_io(&swi->mmio, OBJECT(dev), &riscv_aclint_swi_ops, swi,
-                           TYPE_RISCV_ACLINT_SWI, RISCV_ACLINT_SWI_SIZE);
-@@ -480,16 +470,6 @@ static void riscv_aclint_swi_realize(DeviceState *dev, Error **errp)
- 
-     swi->soft_irqs = g_new(qemu_irq, swi->num_harts);
-     qdev_init_gpio_out(dev, swi->soft_irqs, swi->num_harts);
--
--    /* Claim software interrupt bits */
--    for (i = 0; i < swi->num_harts; i++) {
--        RISCVCPU *cpu = RISCV_CPU(qemu_get_cpu(swi->hartid_base + i));
--        /* We don't claim mip.SSIP because it is writable by software */
--        if (riscv_cpu_claim_interrupts(cpu, swi->sswi ? 0 : MIP_MSIP) < 0) {
--            error_report("MSIP already claimed");
--            exit(1);
--        }
--    }
- }
- 
- static void riscv_aclint_swi_reset_enter(Object *obj, ResetType type)
-diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
-index 32edd6d07b..cde8337542 100644
---- a/hw/intc/riscv_aplic.c
-+++ b/hw/intc/riscv_aplic.c
-@@ -873,17 +873,6 @@ static void riscv_aplic_realize(DeviceState *dev, Error **errp)
-     if (!aplic->msimode) {
-         aplic->external_irqs = g_malloc(sizeof(qemu_irq) * aplic->num_harts);
-         qdev_init_gpio_out(dev, aplic->external_irqs, aplic->num_harts);
--
--        /* Claim the CPU interrupt to be triggered by this APLIC */
--        for (i = 0; i < aplic->num_harts; i++) {
--            RISCVCPU *cpu = RISCV_CPU(cpu_by_arch_id(aplic->hartid_base + i));
--            if (riscv_cpu_claim_interrupts(cpu,
--                (aplic->mmode) ? MIP_MEIP : MIP_SEIP) < 0) {
--                error_report("%s already claimed",
--                             (aplic->mmode) ? "MEIP" : "SEIP");
--                exit(1);
--            }
--        }
-     }
- 
-     msi_nonbroken = true;
-diff --git a/hw/intc/riscv_imsic.c b/hw/intc/riscv_imsic.c
-index b90f0d731d..8c61a5f28b 100644
---- a/hw/intc/riscv_imsic.c
-+++ b/hw/intc/riscv_imsic.c
-@@ -347,14 +347,6 @@ static void riscv_imsic_realize(DeviceState *dev, Error **errp)
-                           IMSIC_MMIO_SIZE(imsic->num_pages));
-     sysbus_init_mmio(SYS_BUS_DEVICE(dev), &imsic->mmio);
- 
--    /* Claim the CPU interrupt to be triggered by this IMSIC */
--    if (riscv_cpu_claim_interrupts(rcpu,
--            (imsic->mmode) ? MIP_MEIP : MIP_SEIP) < 0) {
--        error_setg(errp, "%s already claimed",
--                   (imsic->mmode) ? "MEIP" : "SEIP");
--        return;
--    }
--
-     /* Create output IRQ lines */
-     imsic->external_irqs = g_malloc(sizeof(qemu_irq) * imsic->num_pages);
-     qdev_init_gpio_out(dev, imsic->external_irqs, imsic->num_pages);
-diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
-index e559f11805..f0f3dcce1f 100644
---- a/hw/intc/sifive_plic.c
-+++ b/hw/intc/sifive_plic.c
-@@ -356,7 +356,6 @@ static void sifive_plic_irq_request(void *opaque, int irq, int level)
- static void sifive_plic_realize(DeviceState *dev, Error **errp)
- {
-     SiFivePLICState *s = SIFIVE_PLIC(dev);
--    int i;
- 
-     memory_region_init_io(&s->mmio, OBJECT(dev), &sifive_plic_ops, s,
-                           TYPE_SIFIVE_PLIC, s->aperture_size);
-@@ -385,20 +384,6 @@ static void sifive_plic_realize(DeviceState *dev, Error **errp)
-     s->m_external_irqs = g_malloc(sizeof(qemu_irq) * s->num_harts);
-     qdev_init_gpio_out(dev, s->m_external_irqs, s->num_harts);
- 
--    /*
--     * We can't allow the supervisor to control SEIP as this would allow the
--     * supervisor to clear a pending external interrupt which will result in
--     * lost a interrupt in the case a PLIC is attached. The SEIP bit must be
--     * hardware controlled when a PLIC is attached.
--     */
--    for (i = 0; i < s->num_harts; i++) {
--        RISCVCPU *cpu = RISCV_CPU(qemu_get_cpu(s->hartid_base + i));
--        if (riscv_cpu_claim_interrupts(cpu, MIP_SEIP) < 0) {
--            error_setg(errp, "SEIP already claimed");
--            return;
--        }
--    }
--
-     msi_nonbroken = true;
- }
- 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index a90808a3ba..19feb032d6 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -967,7 +967,6 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
-         }
-     }
-     env->mcause = 0;
--    env->miclaim = MIP_SGEIP;
-     env->pc = env->resetvec;
-     env->bins = 0;
-     env->two_stage_lookup = false;
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 1619c3acb6..6277979afd 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -258,8 +258,6 @@ struct CPUArchState {
-     bool external_seip;
-     bool software_seip;
- 
--    uint64_t miclaim;
--
-     uint64_t mie;
-     uint64_t mideleg;
- 
-@@ -565,7 +563,6 @@ void riscv_cpu_do_transaction_failed(CPUState *cs, hwaddr physaddr,
- hwaddr riscv_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
- bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request);
- void riscv_cpu_swap_hypervisor_regs(CPURISCVState *env);
--int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint64_t interrupts);
- uint64_t riscv_cpu_update_mip(CPURISCVState *env, uint64_t mask,
-                               uint64_t value);
- void riscv_cpu_interrupt(CPURISCVState *env);
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 395a1d9140..bcafa55acd 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -619,17 +619,6 @@ void riscv_cpu_set_geilen(CPURISCVState *env, target_ulong geilen)
-     env->geilen = geilen;
- }
- 
--int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint64_t interrupts)
--{
--    CPURISCVState *env = &cpu->env;
--    if (env->miclaim & interrupts) {
--        return -1;
--    } else {
--        env->miclaim |= interrupts;
--        return 0;
--    }
--}
--
- void riscv_cpu_interrupt(CPURISCVState *env)
- {
-     uint64_t gein, vsgein = 0, vstip = 0, irqf = 0;
-diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index 492c2c6d9d..0eabb6c076 100644
---- a/target/riscv/machine.c
-+++ b/target/riscv/machine.c
-@@ -378,7 +378,6 @@ const VMStateDescription vmstate_riscv_cpu = {
-         VMSTATE_UINTTL(env.mhartid, RISCVCPU),
-         VMSTATE_UINT64(env.mstatus, RISCVCPU),
-         VMSTATE_UINT64(env.mip, RISCVCPU),
--        VMSTATE_UINT64(env.miclaim, RISCVCPU),
-         VMSTATE_UINT64(env.mie, RISCVCPU),
-         VMSTATE_UINT64(env.mvien, RISCVCPU),
-         VMSTATE_UINT64(env.mvip, RISCVCPU),
--- 
-2.34.1
+PGRpdiBjbGFzcz0icW1ib3giPjxwIHN0eWxlPSJmb250LWZhbWlseTogLWFwcGxlLXN5c3Rl
+bSwgQmxpbmtNYWNTeXN0ZW1Gb250LCAmcXVvdDtQaW5nRmFuZyBTQyZxdW90OywgJnF1b3Q7
+TWljcm9zb2Z0IFlhSGVpJnF1b3Q7LCBzYW5zLXNlcmlmOyBmb250LXNpemU6IDEwLjVwdDsg
+Y29sb3I6IHJnYig0NiwgNDgsIDUxKTsgLS1kYXJrcmVhZGVyLWlubGluZS1jb2xvcjogI2M5
+YzViZTsiIGRhdGEtZGFya3JlYWRlci1pbmxpbmUtY29sb3I9IiI+RGVhciBleHBlcnRzLDwv
+cD48cCBzdHlsZT0iZm9udC1mYW1pbHk6IC1hcHBsZS1zeXN0ZW0sIEJsaW5rTWFjU3lzdGVt
+Rm9udCwgJnF1b3Q7UGluZ0ZhbmcgU0MmcXVvdDssICZxdW90O01pY3Jvc29mdCBZYUhlaSZx
+dW90Oywgc2Fucy1zZXJpZjsgZm9udC1zaXplOiAxMC41cHQ7IGNvbG9yOiByZ2IoNDYsIDQ4
+LCA1MSk7IC0tZGFya3JlYWRlci1pbmxpbmUtY29sb3I6ICNjOWM1YmU7IiBkYXRhLWRhcmty
+ZWFkZXItaW5saW5lLWNvbG9yPSIiPjxiciAgLz48L3A+PHAgc3R5bGU9ImZvbnQtZmFtaWx5
+OiAtYXBwbGUtc3lzdGVtLCBCbGlua01hY1N5c3RlbUZvbnQsICZxdW90O1BpbmdGYW5nIFND
+JnF1b3Q7LCAmcXVvdDtNaWNyb3NvZnQgWWFIZWkmcXVvdDssIHNhbnMtc2VyaWY7IGZvbnQt
+c2l6ZTogMTAuNXB0OyBjb2xvcjogcmdiKDQ2LCA0OCwgNTEpOyAtLWRhcmtyZWFkZXItaW5s
+aW5lLWNvbG9yOiAjYzljNWJlOyIgZGF0YS1kYXJrcmVhZGVyLWlubGluZS1jb2xvcj0iIj5J
+IGFtIHVzaW5nICJxZW11LXN5c3RlbS1yaXNjdjMyIiB2Ni4yIG9uIFVidW50dSAyMi4wNCB3
+aXRoICJ2aXJ0IiBtYWNoaW5lIHR5cGUgd2l0aCB0d28gTlVNQSBub2RlcywgZWFjaCBub2Rl
+IGhhcyZuYnNwOyBvbmx5IG9uZSBDUFUsIEkgaGF2ZSBsb2FkZWQgdHdvIHByb2dyYW1zIGZv
+ciB0aGUgdHdvIG5vZGVzIHJlc3BlY3RpdmVseS4mbmJzcDs8L3A+PHAgc3R5bGU9ImZvbnQt
+ZmFtaWx5OiAtYXBwbGUtc3lzdGVtLCBCbGlua01hY1N5c3RlbUZvbnQsICZxdW90O1BpbmdG
+YW5nIFNDJnF1b3Q7LCAmcXVvdDtNaWNyb3NvZnQgWWFIZWkmcXVvdDssIHNhbnMtc2VyaWY7
+IGZvbnQtc2l6ZTogMTAuNXB0OyBjb2xvcjogcmdiKDQ2LCA0OCwgNTEpOyAtLWRhcmtyZWFk
+ZXItaW5saW5lLWNvbG9yOiAjYzljNWJlOyIgZGF0YS1kYXJrcmVhZGVyLWlubGluZS1jb2xv
+cj0iIj48YnIgIC8+PC9wPjxwIHN0eWxlPSJmb250LWZhbWlseTogLWFwcGxlLXN5c3RlbSwg
+QmxpbmtNYWNTeXN0ZW1Gb250LCAmcXVvdDtQaW5nRmFuZyBTQyZxdW90OywgJnF1b3Q7TWlj
+cm9zb2Z0IFlhSGVpJnF1b3Q7LCBzYW5zLXNlcmlmOyBmb250LXNpemU6IDEwLjVwdDsgY29s
+b3I6IHJnYig0NiwgNDgsIDUxKTsgLS1kYXJrcmVhZGVyLWlubGluZS1jb2xvcjogI2M5YzVi
+ZTsiIGRhdGEtZGFya3JlYWRlci1pbmxpbmUtY29sb3I9IiI+RnJvbSBkdGIgZHVtcCBJIGNh
+biBzZWUgdHdvJm5ic3A7IENMSU5UIGFuZCB0d28gUExJQyBkZXZpY2VzLCBJIGFsc28gYWRk
+ZWQgYSB2aXJ0aW8tc2VyaWFsIGRldmljZSBmb3IgdGhlIG90aGVyIE5VTUEgbm9kZSB0byB1
+c2UgYXMgY29uc29sZS48YnIgIC8+PC9wPjxwIHN0eWxlPSJmb250LWZhbWlseTogLWFwcGxl
+LXN5c3RlbSwgQmxpbmtNYWNTeXN0ZW1Gb250LCAmcXVvdDtQaW5nRmFuZyBTQyZxdW90Oywg
+JnF1b3Q7TWljcm9zb2Z0IFlhSGVpJnF1b3Q7LCBzYW5zLXNlcmlmOyBmb250LXNpemU6IDEw
+LjVwdDsgY29sb3I6IHJnYig0NiwgNDgsIDUxKTsgLS1kYXJrcmVhZGVyLWlubGluZS1jb2xv
+cjogI2M5YzViZTsiIGRhdGEtZGFya3JlYWRlci1pbmxpbmUtY29sb3I9IiI+PGJyICAvPjwv
+cD48cCBzdHlsZT0iZm9udC1mYW1pbHk6IC1hcHBsZS1zeXN0ZW0sIEJsaW5rTWFjU3lzdGVt
+Rm9udCwgJnF1b3Q7UGluZ0ZhbmcgU0MmcXVvdDssICZxdW90O01pY3Jvc29mdCBZYUhlaSZx
+dW90Oywgc2Fucy1zZXJpZjsgZm9udC1zaXplOiAxMC41cHQ7IGNvbG9yOiByZ2IoNDYsIDQ4
+LCA1MSk7IC0tZGFya3JlYWRlci1pbmxpbmUtY29sb3I6ICNjOWM1YmU7IiBkYXRhLWRhcmty
+ZWFkZXItaW5saW5lLWNvbG9yPSIiPkFmdGVyIGxhdW5jaGluZyBRRU1VLCBJIGNhbiB1c2Ug
+Zmlyc3Qgbm9kZSdzIHByb2dyYW0gY29ycmVjdGx5IHZpYSBzZXJpYWwgY29uc29sZS4gVGhh
+dCBtZWFucyB0aGUgYm9vdCBST00gaGFzIGtpY2tlZCBvZmYgdGhlIGZpcnN0IG5vZGUgY29y
+cmVjdGx5LiBCdXQgdGhlIHByb2dyYW0gZm9yIHRoZSBvdGhlciBudW1hIG5vZGUgZG9lc24n
+dCBydW4geWV0LiZuYnNwOyBJcyB0aGlzIHRoZSBkZWZhdWx0IGJlaGF2aW9yIG9mIE5VTUEg
+YnkgZGVzaWduPzxiciAgLz48L3A+PHAgc3R5bGU9ImZvbnQtZmFtaWx5OiAtYXBwbGUtc3lz
+dGVtLCBCbGlua01hY1N5c3RlbUZvbnQsICZxdW90O1BpbmdGYW5nIFNDJnF1b3Q7LCAmcXVv
+dDtNaWNyb3NvZnQgWWFIZWkmcXVvdDssIHNhbnMtc2VyaWY7IGZvbnQtc2l6ZTogMTAuNXB0
+OyBjb2xvcjogcmdiKDQ2LCA0OCwgNTEpOyAtLWRhcmtyZWFkZXItaW5saW5lLWNvbG9yOiAj
+YzljNWJlOyIgZGF0YS1kYXJrcmVhZGVyLWlubGluZS1jb2xvcj0iIj48YnIgIC8+PC9wPjxw
+IHN0eWxlPSJmb250LWZhbWlseTogLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNTeXN0ZW1Gb250
+LCAmcXVvdDtQaW5nRmFuZyBTQyZxdW90OywgJnF1b3Q7TWljcm9zb2Z0IFlhSGVpJnF1b3Q7
+LCBzYW5zLXNlcmlmOyBmb250LXNpemU6IDEwLjVwdDsgY29sb3I6IHJnYig0NiwgNDgsIDUx
+KTsgLS1kYXJrcmVhZGVyLWlubGluZS1jb2xvcjogI2M5YzViZTsiIGRhdGEtZGFya3JlYWRl
+ci1pbmxpbmUtY29sb3I9IiI+SSBndWVzcyBleHRyYSBvcGVyYXRpb25zIGFyZSBuZWVlZCZu
+YnNwOyB0byBraWNrIG9mZiB0aGUgb3RoZXIgTlVNQSBub2RlIG5vdywmbmJzcDtJIHdpbGwg
+YWxzbyZuYnNwOyBob3cgdG8gYWNoaWV2ZSBpbnRlciBwcm9jZXNzIGludGVycnVwdGlvbnMg
+bGF0ZXIuJm5ic3A7PC9wPjxwIHN0eWxlPSJmb250LWZhbWlseTogLWFwcGxlLXN5c3RlbSwg
+QmxpbmtNYWNTeXN0ZW1Gb250LCAmcXVvdDtQaW5nRmFuZyBTQyZxdW90OywgJnF1b3Q7TWlj
+cm9zb2Z0IFlhSGVpJnF1b3Q7LCBzYW5zLXNlcmlmOyBmb250LXNpemU6IDEwLjVwdDsgY29s
+b3I6IHJnYig0NiwgNDgsIDUxKTsgLS1kYXJrcmVhZGVyLWlubGluZS1jb2xvcjogI2M5YzVi
+ZTsiIGRhdGEtZGFya3JlYWRlci1pbmxpbmUtY29sb3I9IiI+PGJyICAvPjwvcD48cCBzdHls
+ZT0iZm9udC1mYW1pbHk6IC1hcHBsZS1zeXN0ZW0sIEJsaW5rTWFjU3lzdGVtRm9udCwgJnF1
+b3Q7UGluZ0ZhbmcgU0MmcXVvdDssICZxdW90O01pY3Jvc29mdCBZYUhlaSZxdW90Oywgc2Fu
+cy1zZXJpZjsgZm9udC1zaXplOiAxMC41cHQ7IGNvbG9yOiByZ2IoNDYsIDQ4LCA1MSk7IC0t
+ZGFya3JlYWRlci1pbmxpbmUtY29sb3I6ICNjOWM1YmU7IiBkYXRhLWRhcmtyZWFkZXItaW5s
+aW5lLWNvbG9yPSIiPkJ1dCBJIGNhbid0IGZpbmQgYW55IG1hdGVyaWFscyB2aWEgSW50ZXJu
+ZXQgc2VhcmNoZXMuIENvdWxkIHlvdSBnaXZlIG1lIHNvbWUgaGludHM/Jm5ic3A7PC9wPjxw
+IHN0eWxlPSJmb250LWZhbWlseTogLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNTeXN0ZW1Gb250
+LCAmcXVvdDtQaW5nRmFuZyBTQyZxdW90OywgJnF1b3Q7TWljcm9zb2Z0IFlhSGVpJnF1b3Q7
+LCBzYW5zLXNlcmlmOyBmb250LXNpemU6IDEwLjVwdDsgY29sb3I6IHJnYig0NiwgNDgsIDUx
+KTsgLS1kYXJrcmVhZGVyLWlubGluZS1jb2xvcjogI2M5YzViZTsiIGRhdGEtZGFya3JlYWRl
+ci1pbmxpbmUtY29sb3I9IiI+PGJyICAvPjwvcD48cCBzdHlsZT0iZm9udC1mYW1pbHk6IC1h
+cHBsZS1zeXN0ZW0sIEJsaW5rTWFjU3lzdGVtRm9udCwgJnF1b3Q7UGluZ0ZhbmcgU0MmcXVv
+dDssICZxdW90O01pY3Jvc29mdCBZYUhlaSZxdW90Oywgc2Fucy1zZXJpZjsgZm9udC1zaXpl
+OiAxMC41cHQ7IGNvbG9yOiByZ2IoNDYsIDQ4LCA1MSk7IC0tZGFya3JlYWRlci1pbmxpbmUt
+Y29sb3I6ICNjOWM1YmU7IiBkYXRhLWRhcmtyZWFkZXItaW5saW5lLWNvbG9yPSIiPlJlZ2Fy
+ZHMsPC9wPjxwIHN0eWxlPSJmb250LWZhbWlseTogLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNT
+eXN0ZW1Gb250LCAmcXVvdDtQaW5nRmFuZyBTQyZxdW90OywgJnF1b3Q7TWljcm9zb2Z0IFlh
+SGVpJnF1b3Q7LCBzYW5zLXNlcmlmOyBmb250LXNpemU6IDEwLjVwdDsgY29sb3I6IHJnYig0
+NiwgNDgsIDUxKTsgLS1kYXJrcmVhZGVyLWlubGluZS1jb2xvcjogI2M5YzViZTsiIGRhdGEt
+ZGFya3JlYWRlci1pbmxpbmUtY29sb3I9IiI+eWY8L3A+PHAgc3R5bGU9ImZvbnQtZmFtaWx5
+OiAtYXBwbGUtc3lzdGVtLCBCbGlua01hY1N5c3RlbUZvbnQsICZxdW90O1BpbmdGYW5nIFND
+JnF1b3Q7LCAmcXVvdDtNaWNyb3NvZnQgWWFIZWkmcXVvdDssIHNhbnMtc2VyaWY7IGZvbnQt
+c2l6ZTogMTAuNXB0OyBjb2xvcjogcmdiKDQ2LCA0OCwgNTEpOyAtLWRhcmtyZWFkZXItaW5s
+aW5lLWNvbG9yOiAjYzljNWJlOyIgZGF0YS1kYXJrcmVhZGVyLWlubGluZS1jb2xvcj0iIj48
+YnIgIC8+PC9wPjwvZGl2Pg==
+
+------=_NextPart_66A47CEE_3DCF83F0_15880C60--
 
 
