@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB7F3C3DA4A
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jul 2024 18:44:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE35CC3DA49
+	for <qemu-riscv@archiver.kernel.org>; Sat, 27 Jul 2024 01:26:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sXPuu-0004ED-0q; Fri, 26 Jul 2024 14:43:48 -0400
+	id 1sXWCP-0002AK-0L; Fri, 26 Jul 2024 21:26:17 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gregorhaas1997@gmail.com>)
- id 1sXPun-00049F-Ri; Fri, 26 Jul 2024 14:43:44 -0400
-Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c])
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1sXWCJ-000279-Ip
+ for qemu-riscv@nongnu.org; Fri, 26 Jul 2024 21:26:11 -0400
+Received: from mail-lj1-x230.google.com ([2a00:1450:4864:20::230])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <gregorhaas1997@gmail.com>)
- id 1sXPul-0005iZ-T4; Fri, 26 Jul 2024 14:43:41 -0400
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-1fc49c0aaffso8377315ad.3; 
- Fri, 26 Jul 2024 11:43:38 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1sXWCH-0004Py-5Q
+ for qemu-riscv@nongnu.org; Fri, 26 Jul 2024 21:26:11 -0400
+Received: by mail-lj1-x230.google.com with SMTP id
+ 38308e7fff4ca-2f032cb782dso19762291fa.3
+ for <qemu-riscv@nongnu.org>; Fri, 26 Jul 2024 18:26:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1722019417; x=1722624217; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=3f/5dqdjHzVB5Ks2A5QM+4rkcmI/TAPiTDSGI3yKC/0=;
- b=L5WnY8vw0E/U9lxoja3eM8B5kouLDzjA8vY5qZOifVrBFXg+kRFVbn4sh8ZFuZzeHS
- OYpLIGXn0vXDB1wOlWui4JwBCI1SsnKpf31HKrJ/jJ/OUkLIh8lnf+50fI04d9T7vXNj
- cJsFmF+XidIWrGvo0rIKa3ErohdFJ9+6zdS9hrV1L/g7EJbHSa6n4XbOMEK3VtU6LiqV
- PvbKlrNOO83+kpdtpyRy+oMJmKWGB1/yc08MhCT9TclZmJJmzQoyV/5g8A3TUwo2IRFD
- BiqpKbJcE0kJS73+bkiOPcni7VKr5wV/CkFsGOkmiStfyWAQCKSmQCQR23p26VdqTka6
- vSsQ==
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1722043567; x=1722648367;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3vf6SMqBGacUh3oyyzqoyXbaatTN5XcogvaaBcF39Vg=;
+ b=jEsFxkJxF67tck3yfJYTIA/MjnDDEwgriCERrVRNJ5hI8xZriuDwQMEh5/WgulTKgL
+ Y/L4trdN65F/YdDVJ/sYuh/bNLAmDzvDbN4LsgSvtf6JCw77G1t9cd8RFbA5VOJDIvXK
+ 9zyUxzfnoanqVlcfE3/Zrn2YxTYdN2KjFCeMxFh4Raz9Q4mw6fe8jBXKLn7Otkl/3D2S
+ ALtNNlgw7fUMgup7bEItn218qgciZZrZLsagjzZfzJ6UWXeVNmGaEdgJ2BIugMbX8cwd
+ dnM0TraEWjdnDEIHVma0bAuFPEP5rITBaWSp3CvGaoK58VeS0x+Dbe7MyMOV64PPIWbC
+ j7Xg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722019417; x=1722624217;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=3f/5dqdjHzVB5Ks2A5QM+4rkcmI/TAPiTDSGI3yKC/0=;
- b=lScdtW2F3QtFTLGHF2AJHo9RdXy6EhT5NvQaHj/gy7167GWSOwVracuIwjg7IMIKZD
- 6EhzPXen0R+YtivWF79VhKlGEU+y3sit2JeUVKi68S5O8zggai4YMYSuPiuavvxEqUxq
- +4EitK71TNiUj/xXuda/9FSj5khYy99/VXdkkIxYoWuMVdxTUyNsLkwStbtWxuCQcM29
- dQ55h4YdwdG73y1H3eQU+EdL6KEnaCUtClN6i7RTig6a5cF8ZwcVzbQgzP69VowZjMc0
- AVt+zclP/O9A5hQVzzbOQRDeMYBU6vNaYzjt0gzmoQgeYkxxR/Wo2zoBNaZ7xWEgyzgt
- mD7g==
-X-Gm-Message-State: AOJu0Yzs7yKCQHOE04SYNrm43NzAUee1QDVIOp2G8F4pp9n/D4pL3N6m
- 5Z/LvphiIrV/55v/VDWcVvg74++lLjPiWQzMJC3daUskYhN7pm8mxYfk3F4K
-X-Google-Smtp-Source: AGHT+IFEDb6b7jJEt68yxEfbQx2y5rMCuZc5saYZrEUJ2MxS8L4YqoYQv3benWRXUzX3RYizR0XjYQ==
-X-Received: by 2002:a17:902:dad0:b0:1fc:6339:2641 with SMTP id
- d9443c01a7336-1ff04950724mr5908205ad.62.1722019417433; 
- Fri, 26 Jul 2024 11:43:37 -0700 (PDT)
-Received: from localhost ([205.175.106.198])
- by smtp.gmail.com with UTF8SMTPSA id
- d9443c01a7336-1fed7ee2f21sm36173905ad.154.2024.07.26.11.43.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 26 Jul 2024 11:43:36 -0700 (PDT)
-From: Gregor Haas <gregorhaas1997@gmail.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, atishp@rivosinc.com, dbarboza@ventanamicro.com,
- alistair.francis@wdc.com, Gregor Haas <gregorhaas1997@gmail.com>
-Subject: [PATCH v2 0/1] Add support for generating OpenSBI domains in the
- device tree
-Date: Fri, 26 Jul 2024 11:43:23 -0700
-Message-ID: <20240726184324.597939-1-gregorhaas1997@gmail.com>
-X-Mailer: git-send-email 2.45.2
+ d=1e100.net; s=20230601; t=1722043567; x=1722648367;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=3vf6SMqBGacUh3oyyzqoyXbaatTN5XcogvaaBcF39Vg=;
+ b=isxAxImu48sUfQv4MBEfvn3dzxSufDN5UDhlKPEifkYBjM9aJ8glQy3yrV5KPwJqYA
+ bXMRWaAD3wY9Srrp9Tq0TuJGxMQ1U4HfuDQD/xz57bXG17n8lEpa71aOuZnVfcQKn9fl
+ w90oHIiTP+0osWnIhcDF48Wggw6eDy0c6rWz+ZI73Iev8OeH3GREG4vJMzMYulrO+3Qm
+ YPBcLl9zxs+DrvEJHPIXEBM5QnWQjN0nuQ51N7Rkvm/yQ+5HeWy/9q26KOJ2QwkH/B9V
+ O/6II7Biw2kRKYJJ//5R9/uB6+4WbHPVsDoKRm4u37aJWwsTPWgMTqjiYy7m4f2253GH
+ wRGg==
+X-Gm-Message-State: AOJu0YztrdRNa/lAOb49HA0FHN3qJgIbS6BORxZvZyFHdrSxFXvYcA8o
+ hXoD6cu2Iy90eZsdBbIx9+aX0qifI8jLP7JPHKNY+XJPO5GLT5ah4JQAb/aAOL2eCWhEawN9HL9
+ AvaaQDdbZUfIInLHUokuIHw1PRMrx/m3AofdE5g==
+X-Google-Smtp-Source: AGHT+IFQAAyyXQ7WEhCpaUjHRnF/J+QAYGL2pzVR15a5xPSm3GwdKc1eBSP74jOoG+m/FO7rS1q+QvkMnptJy6419bo=
+X-Received: by 2002:a2e:80cb:0:b0:2f0:1e0a:4671 with SMTP id
+ 38308e7fff4ca-2f12edf9e78mr7591721fa.4.1722043566498; Fri, 26 Jul 2024
+ 18:26:06 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
- envelope-from=gregorhaas1997@gmail.com; helo=mail-pl1-x62c.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
+References: <20240724-fixes-v1-1-4a64596b0d64@rivosinc.com>
+ <CAKmqyKPhCzrYxwpBF+NQi-5KgcKkhWeVNX6nwwx3ZjeE9rWEAg@mail.gmail.com>
+In-Reply-To: <CAKmqyKPhCzrYxwpBF+NQi-5KgcKkhWeVNX6nwwx3ZjeE9rWEAg@mail.gmail.com>
+From: Atish Kumar Patra <atishp@rivosinc.com>
+Date: Fri, 26 Jul 2024 18:25:55 -0700
+Message-ID: <CAHBxVyHe1gA39nF67ZL5KzHMOXwVCPK8dSLRDuu1BYy5OTGK=Q@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Add asserts for out-of-bound access
+To: Alistair Francis <alistair23@gmail.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, bin.meng@windriver.com, 
+ dbarboza@ventanamicro.com, alistair.francis@wdc.com, 
+ Peter Maydell <peter.maydell@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::230;
+ envelope-from=atishp@rivosinc.com; helo=mail-lj1-x230.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -91,27 +93,51 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-v2:
-- Addressed review comments from v1. Specifically, renamed domain.{c,h} ->
-  opensbi_domain.{c,h} to increase clarity of what these files do. Also, more
-  consistently use g_autofree for dynamically allocated variables
-- Added an "assign" flag to OpenSBIDomainState, which indicates whether to
-  assign the domain's boot hart to it at domain parsing time.
+On Thu, Jul 25, 2024 at 10:12=E2=80=AFPM Alistair Francis <alistair23@gmail=
+.com> wrote:
+>
+> On Wed, Jul 24, 2024 at 6:33=E2=80=AFPM Atish Patra <atishp@rivosinc.com>=
+ wrote:
+> >
+> > Coverity complained about the possible out-of-bounds access with
+> > counter_virt/counter_virt_prev because these two arrays are
+> > accessed with privilege mode. However, these two arrays are accessed
+> > only when virt is enabled. Thus, the privilege mode can't be M mode.
+> >
+> > Add the asserts anyways to detect any wrong usage of these arrays
+> > in the future.
+> >
+> > Suggested-by: Peter Maydell <peter.maydell@linaro.org>
+> > Signed-off-by: Atish Patra <atishp@rivosinc.com>
+>
+> Fixes: Coverity CID 1558459
+> Fixes: Coverity CID 1558462
+>
+> > ---
+> > The lore discussion can be found here
+> > https://lore.kernel.org/all/CAHBxVyGQHBobpf71o4Qp51iQGXKBh0Ajup=3De_a95=
+xdLF=3D=3DV_WQ@mail.gmail.com/
+> > ---
+> >  target/riscv/pmu.c | 4 ++++
+> >  1 file changed, 4 insertions(+)
+> >
+> > diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
+> > index 3cc0b3648cad..e05ab067d2f2 100644
+> > --- a/target/riscv/pmu.c
+> > +++ b/target/riscv/pmu.c
+> > @@ -204,6 +204,7 @@ static void riscv_pmu_icount_update_priv(CPURISCVSt=
+ate *env,
+> >      }
+> >
+> >      if (env->virt_enabled) {
+> > +        g_assert(env->priv <=3D PRV_S);
+>
+> Don't we need this assert for !env->virt_enabled as well?
+>
 
-Gregor Haas (1):
-  Add support for generating OpenSBI domains in the device tree
+For that case, it uses counter and counter_prev which is array size of 4.
+The assert was in the other case just to avoid wrong invocation in the
+future with PRV_M while the array size is 2.
 
- MAINTAINERS                       |   7 +
- hw/riscv/Kconfig                  |   4 +
- hw/riscv/meson.build              |   1 +
- hw/riscv/opensbi_domain.c         | 428 ++++++++++++++++++++++++++++++
- hw/riscv/virt.c                   |   3 +
- include/hw/riscv/opensbi_domain.h |  51 ++++
- 6 files changed, 494 insertions(+)
- create mode 100644 hw/riscv/opensbi_domain.c
- create mode 100644 include/hw/riscv/opensbi_domain.h
-
--- 
-2.45.2
-
+> Alistair
 
