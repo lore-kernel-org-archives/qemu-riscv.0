@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25E42C3DA4A
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jul 2024 15:15:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3834BC3DA4A
+	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jul 2024 15:17:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sYS6I-0008Gc-Lw; Mon, 29 Jul 2024 11:15:51 -0400
+	id 1sYS7P-0005L9-Ar; Mon, 29 Jul 2024 11:16:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1sYS5x-0006tU-3j
- for qemu-riscv@nongnu.org; Mon, 29 Jul 2024 11:15:29 -0400
-Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1sYS7O-0005Fu-9r
+ for qemu-riscv@nongnu.org; Mon, 29 Jul 2024 11:16:58 -0400
+Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1sYS5t-00067X-Fs
- for qemu-riscv@nongnu.org; Mon, 29 Jul 2024 11:15:28 -0400
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-4280bca3960so18077015e9.3
- for <qemu-riscv@nongnu.org>; Mon, 29 Jul 2024 08:15:24 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1sYS7H-0006Qb-VN
+ for qemu-riscv@nongnu.org; Mon, 29 Jul 2024 11:16:58 -0400
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-368712acb8dso1416452f8f.2
+ for <qemu-riscv@nongnu.org>; Mon, 29 Jul 2024 08:16:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1722266123; x=1722870923; darn=nongnu.org;
+ d=linaro.org; s=google; t=1722266210; x=1722871010; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=79xu6GwJt2tOSZjRUkS6x2bp/kSXLFMEOLWAaLfoTjo=;
- b=F8mA1Ri7bd4tcCJIvECqdnEJEwNa/JZ6Y40S6TE15PUnl0tHpVsS8YF+IptiyjecIo
- orxJlAvQgUXLtNji5oUEH8XvLbASwljJjy0LCSQ7Vt53qyor3rDJ1VVV/0XkyIcFwu3P
- rawbpAfVM3Pch+57seTREeTBa2XkWNvn8wIk7KQru+n33b0QaKzl7V08vabktgdCs8CS
- GIyPN4jLtdCDAyHl3eEIJ9qm7D1w/onrYKRcE//AwkeT63PO2OfRhlqzpkSYacNu6sbQ
- y9yCrYldCCDnChZE/CsEONkL5DEGGY5Dwjh2gtORuPy6lAfiKp8bu1n0ySbwAyPDfEn5
- 9DQQ==
+ bh=xvL3BQalaYHs4MQ6olvlQNu2RsDNFqFTsx9/slDdZE4=;
+ b=Bb74fsVcwaVXS2y+YHOJ8zvr/cVCAAVZITX8cLoX4KhQ6H+0bMNm9FMWQln9/t6qnZ
+ LRU6vncZmGCRNUt2R8ykIKTwnpWj7ec1Fp2GPlmmNuu1f7V6ERe9MbV/FF4fd/VZpHQ3
+ 9d6SGo5fVPzf1HtWGeWFhX/S9uNuo1l2lepw8G45qGKBqhBaJL7lcXhq+fimT8AACJ4A
+ XYhJPF0qWLlp4ALLmpV0s+JbvI1sc2yWGhv4w/rKDo3n0pH2aQ38OWUv7eS8jzo8nHp7
+ DPaByiY/W9e9CVf3VuSbxmGawtw5mVep5SWcT20QoAkM7aXJuPQlNSxKPyNSTj6I+CCr
+ J91g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722266123; x=1722870923;
+ d=1e100.net; s=20230601; t=1722266210; x=1722871010;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=79xu6GwJt2tOSZjRUkS6x2bp/kSXLFMEOLWAaLfoTjo=;
- b=qbI6bUidz69rasghwvjSB3/mEkiAW2Z6030VBOc8RdX/pq4txZb9ukUzDytPY4VRwX
- zkRPxuNaliTbj+o8esZ2vu/z2D0nq8iP4bn6YTl7hJr/azFFQ+20vyLzEKaCrHGTbLCy
- Nq3fm9Bo1TQ8nZFoKjYxppDcKc07I71+ihhhNfAxU3O9bSgjT2gO3Of1qMKNdobIklOD
- TUFWDGivDBE/nIpeRdpHApDhXQYbUAsVMRhukCQhgBkGcfE//arbyEszrx7FyKZEButo
- ZzMRDvEt6F69rv7GGO5vUaF961Tn7MC0dWzF409NPRVDQqYCP5SXvzBUyqktLTLOItD3
- ikJQ==
+ bh=xvL3BQalaYHs4MQ6olvlQNu2RsDNFqFTsx9/slDdZE4=;
+ b=SlGJlQZ5gzOPNPqc4v1ZLF/FMaLiWrlvBPDaSvN/YA30mr3G1ybu803r7SvYK8hklp
+ +EwM/tpTZZWz+ij9pzmPauou57yMbthKWPmwaikLEdlYY+GfSqmvalNnm2UZ7/Q7tyXr
+ Mfz9Oe/vBKoimSL+I4P/8t4eLALqo39o7Qgf5Gn3yRhNsnhuFK+vJNuutO//xgxFMrMd
+ rvJzX168mby/NQKGZZAYrB2qZbr51xhzpN1rOMB0cp3UlzAaEEL7+LWXrzSn6X8xCZq8
+ O1mPd/Y9+aOE1ERxSoutNdFHUO4HFAAUO+QlXth4fT2IsBjgQg9+R+TyG8u7kCw6gOx1
+ frCQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVQXEFYZ64oQx9XIWxZmgfTnmTSfWAxbYbUyGPWNr1HAwDWleKt3UrNHigN/t54aIHfVymCMlKMLmxd+ubFsQzUNXRK7OA=
-X-Gm-Message-State: AOJu0Yx3cfWtoLBgBeW/z8Bhb/SNJyPcafq++YfqOWrjtkxgr316oc9F
- wangxu4MLqkt8LoMehiqCBRBgkavGplEPUqqu1TjxLvkc+i9Mg4eAHleoLELuek=
-X-Google-Smtp-Source: AGHT+IF6nc5Y+e2eOcabdpkPzuygIXcrytI+wRNmlOTnBDBa1WK+EeAGe2UPQng2y/E8HyELyGQXTQ==
-X-Received: by 2002:a05:600c:2143:b0:426:5471:156a with SMTP id
- 5b1f17b1804b1-42811d86408mr53805875e9.13.1722266123436; 
- Mon, 29 Jul 2024 08:15:23 -0700 (PDT)
+ AJvYcCUlzL6f0NKtTrFuq51WCAffPEOXryZYww0tPGWDdLFmfBhFXZ13WnQChyk32gxyCwd1N5zHesWgVTcOGjKdv5Nah4CG0A8=
+X-Gm-Message-State: AOJu0YwvGjzwj0onHDWR57Mf52bgx3xdq/mWHuP7dgNJmKDjo9uKir4K
+ KzTpVuu2tYGQ4103QpqY4NM1GEFIwixqT+1xtMnJr7fEhbjrGOkNvJmes4R0tlE=
+X-Google-Smtp-Source: AGHT+IG6WKzTJHL+PolVkv8m8lc0rPpWUSEcyIp7ciOyFdIjfKhGp9MSOUfJ0ZsJA1lOLg5pvdmCkg==
+X-Received: by 2002:a5d:6a02:0:b0:367:40e6:46bd with SMTP id
+ ffacd0b85a97d-36b5d0cd807mr6028852f8f.61.1722266210106; 
+ Mon, 29 Jul 2024 08:16:50 -0700 (PDT)
 Received: from [192.168.69.100] ([176.176.173.10])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4280a867e7esm136621325e9.27.2024.07.29.08.15.19
+ ffacd0b85a97d-36b368622c3sm12483658f8f.100.2024.07.29.08.16.47
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 29 Jul 2024 08:15:22 -0700 (PDT)
-Message-ID: <15dd571f-e4c2-4eac-a0f2-a056f63843fa@linaro.org>
-Date: Mon, 29 Jul 2024 17:15:18 +0200
+ Mon, 29 Jul 2024 08:16:49 -0700 (PDT)
+Message-ID: <b6e1e3f6-53da-4771-9a09-a6a60da626c9@linaro.org>
+Date: Mon, 29 Jul 2024 17:16:46 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 09/14] tests/tcg: move test plugins into tcg subdir
+Subject: Re: [PATCH 13/14] contrib/plugins: add compat for g_memdup2
 To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
  qemu-devel@nongnu.org
 Cc: Eduardo Habkost <eduardo@habkost.net>, Thomas Huth <thuth@redhat.com>,
@@ -81,14 +81,14 @@ Cc: Eduardo Habkost <eduardo@habkost.net>, Thomas Huth <thuth@redhat.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Wainer dos Santos Moschetta <wainersm@redhat.com>
 References: <20240729144414.830369-1-alex.bennee@linaro.org>
- <20240729144414.830369-10-alex.bennee@linaro.org>
+ <20240729144414.830369-14-alex.bennee@linaro.org>
 Content-Language: en-US
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20240729144414.830369-10-alex.bennee@linaro.org>
+In-Reply-To: <20240729144414.830369-14-alex.bennee@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::336;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x336.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::431;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x431.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -112,33 +112,16 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 29/7/24 16:44, Alex Bennée wrote:
-> You cannot use plugins without TCG enabled so it doesn't make sense to
-> have them separated off in the test directory structure. While we are
-> at it rename the directory to plugins to reflect the plural nature of
-> the directory and match up with contrib/plugins.
+> We were premature if bumping this because some of our builds are still
+> on older glibs. Just copy the compat handler for now and we can remove
+> it later.
 > 
 > Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-> Suggested-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> Fixes: ee293103b0 (plugins: update lockstep to use g_memdup2)
+> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2161
 > ---
->   MAINTAINERS                               | 2 +-
->   tests/{plugin => tcg/plugins}/bb.c        | 0
->   tests/{plugin => tcg/plugins}/empty.c     | 0
->   tests/{plugin => tcg/plugins}/inline.c    | 0
->   tests/{plugin => tcg/plugins}/insn.c      | 0
->   tests/{plugin => tcg/plugins}/mem.c       | 0
->   tests/{plugin => tcg/plugins}/syscall.c   | 0
->   tests/avocado/tcg_plugins.py              | 4 ++--
->   tests/meson.build                         | 2 +-
->   tests/tcg/Makefile.target                 | 4 ++--
->   tests/{plugin => tcg/plugins}/meson.build | 6 +++---
->   11 files changed, 9 insertions(+), 9 deletions(-)
->   rename tests/{plugin => tcg/plugins}/bb.c (100%)
->   rename tests/{plugin => tcg/plugins}/empty.c (100%)
->   rename tests/{plugin => tcg/plugins}/inline.c (100%)
->   rename tests/{plugin => tcg/plugins}/insn.c (100%)
->   rename tests/{plugin => tcg/plugins}/mem.c (100%)
->   rename tests/{plugin => tcg/plugins}/syscall.c (100%)
->   rename tests/{plugin => tcg/plugins}/meson.build (70%)
+>   contrib/plugins/lockstep.c | 25 +++++++++++++++++++++++++
+>   1 file changed, 25 insertions(+)
 
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
