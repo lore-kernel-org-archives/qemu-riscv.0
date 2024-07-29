@@ -4,64 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DC7AC49EA1
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jul 2024 14:46:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61CADC3DA4A
+	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jul 2024 14:46:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sYRbx-0003zx-F8; Mon, 29 Jul 2024 10:44:29 -0400
+	id 1sYRc3-0004US-2y; Mon, 29 Jul 2024 10:44:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sYRbt-0003kf-1J
- for qemu-riscv@nongnu.org; Mon, 29 Jul 2024 10:44:25 -0400
-Received: from mail-ej1-x631.google.com ([2a00:1450:4864:20::631])
+ id 1sYRc0-0004Iw-ID
+ for qemu-riscv@nongnu.org; Mon, 29 Jul 2024 10:44:32 -0400
+Received: from mail-ej1-x62e.google.com ([2a00:1450:4864:20::62e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sYRbn-0008Mv-7a
- for qemu-riscv@nongnu.org; Mon, 29 Jul 2024 10:44:24 -0400
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-a7ac449a0e6so262261566b.1
- for <qemu-riscv@nongnu.org>; Mon, 29 Jul 2024 07:44:18 -0700 (PDT)
+ id 1sYRbt-0008Q6-3c
+ for qemu-riscv@nongnu.org; Mon, 29 Jul 2024 10:44:32 -0400
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-a7d2a9a23d9so357138166b.3
+ for <qemu-riscv@nongnu.org>; Mon, 29 Jul 2024 07:44:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1722264257; x=1722869057; darn=nongnu.org;
+ d=linaro.org; s=google; t=1722264264; x=1722869064; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8Nvj8Ss11XrIK8lq+iSCvax0w8uaS1gwduZupTcQVtM=;
- b=r2HNDz/hdizmZqTAt2Y0ucZYoYJdZTcxSfTmqH4rE1vp3jf07A//YUjjtHqVL49z+k
- cEh6mA3kP0gmROxvZONysTpEabZPC44l5bqGlc/6vwCJGG6lA069f057CXvWDY6Qw3TZ
- YPdb1Rnvl5eacSWaPuxUj8WOInIe2duH2KSXhDzB8JRhJTjXAzUKjDKP1KochvWKKh/X
- wNkzZd6gJ93UvApbZWOYHUA8fNQjMyngyE2pEa5T7657R6mKPXERqjSEj+6xTkVIInLD
- dVZ7dTs9h97RWR2E9xJ1OhRbibCJv8QYOtKvepHqyesQW0jISqnvUZF7/erut0q2ugjp
- 3djw==
+ bh=RIOayMEsJA1tkmepteKB9T0FXWTwbDeTnBtcVohO/HQ=;
+ b=vrz7AqpY0TeQ9/WAPxNm5oFSfMpOi4siqTB17ebTmwHEDG/t0vhuTJpW+G7JqxBK+f
+ RmJCEiIF70+kJe70TsWh+RqongjyO3z5NvWRRuh1mLYz4Y3oEWPRewT4JLBXMkTmooHj
+ pZsGUDWq8p5ewK1qy808Nr8uFr7B/huXBpIGCNKU+43o7KFNXa/CQZvNMgWFqS4CQv7G
+ 7k19hi1U3Y3UohipcWFzN5kWGk6XstRciq54GAbsvWDQGOnWPhuaHadHnEajt1hSb/0L
+ V2yKU91SUud4NGBBKPy2Mvlj80HpnoW8gnFzh7iZHIWZfhDPcE13WIt4fFznIghORmM+
+ pC2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722264257; x=1722869057;
+ d=1e100.net; s=20230601; t=1722264264; x=1722869064;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8Nvj8Ss11XrIK8lq+iSCvax0w8uaS1gwduZupTcQVtM=;
- b=oXe+4C+o/GHIlVC1zHf9oXDVvALIJWM+0UR/XKV7zo3uCJQJIRHiKvsBkc0jImKz3r
- yS/671r5qfVIBnkFZHMSDStj0k+urYSmsQjOWqq65ILmp79XMrJQrbZFntEVmnnVMfEQ
- tgRgLIetpB0Hdfa6Hj8LwbwqC2g+fGYEKqEmrNxuIqYNfCe40GdyVVgtFgSUPW+CnUsC
- 58mPvl8hdjXTToj3MXjBLc/rYgLpmBAZ8AwGpBJXBXyKgNQNKaLfEwq/+MEsHujJsSEH
- o9jy6H0FZ1ib+Ovo5ij1jfMw4SzRT4UVtPg1V4a1KWei6XDpFha3CwZmbBUYW9lDqIRP
- 4DtQ==
+ bh=RIOayMEsJA1tkmepteKB9T0FXWTwbDeTnBtcVohO/HQ=;
+ b=qvqS8vSV2heEruG87N9zGXJL/OOqaq8noledh24k2nmMX6LAOi2Pyru/pmfdFSyup2
+ Y40AHYrjRkWpf87AzFxw/vapx2KV2yUB6pdwhjpuWdT0uqrA8sQVfAInPdtqBMtxm+XW
+ LrQ/Bq4bM15DsDZoJjP21zmmq6FldSdJ5dJkQ1saAkXHH1MVnFBbCyqThgGBBXhdgtaf
+ nSdiXN1Y+DW1fWeCQgpjg4m2CEPMnBUYCwEToh8pVzm6W14cTWXFU/Bxqxum/62UOoJA
+ A+pV4pjmY52/ZeuTGNVDifqCDlSIKuRJxzQCWL6lFkH4OMeRaETvBn503RYWqaZKFCSe
+ lM4g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWE/uiFmE6kr1jbsZ/P7X40kpcxHu2WO0ZZL5Whl6rSVEGpr6NIdtEiofZNamTcE/Uu9b1jsbkzdjbuqkKG98cLfcG2Q6c=
-X-Gm-Message-State: AOJu0Yw9p/FfN+KwfK5GBwJqgtrXcrysXYuRRA4fJ4xjwLBH354Ndu+F
- qhRoom/z+EsBmOSR3stMhnQxwMKDh4laWSs2QBRWnE/WteoiMI+EKfPyfrpC5UI=
-X-Google-Smtp-Source: AGHT+IEkw3C7vjILME9oJ4bcjpE870ppouH4MvRz3UNcGd9Gj0Qn5TzKiqOSYxPCooHrCSd530LaOA==
-X-Received: by 2002:a17:907:988:b0:a7d:2bf7:5619 with SMTP id
- a640c23a62f3a-a7d4015fc9dmr501573666b.58.1722264257344; 
- Mon, 29 Jul 2024 07:44:17 -0700 (PDT)
+ AJvYcCVID+p9Rle5akf8wJE6ntIt4vFsQJfTjLx0n93lA4YVuEgTeuS4X4PJYGdjyDvYtHUFSx56713yCPyepRcxC4XnFdA40po=
+X-Gm-Message-State: AOJu0YyNiXRujHml9sJbv5F08JHjB0/vM46hkVz8dnNARtY8AcFYVo1E
+ D5I5afISQyoXlAwWJ3dSe0mOe3alONaOeB+TxBiw5OUK6FBJynDZym91ocXnknu68ZOVF84Ngfw
+ b
+X-Google-Smtp-Source: AGHT+IFBqzVWW8HN4yEEamLBDbG/voeZt/brB68Ctd58ksy7qlSURXpWYpi+y2eacnqXtSPvTiYy9A==
+X-Received: by 2002:a17:907:3d9e:b0:a77:ab40:6d7f with SMTP id
+ a640c23a62f3a-a7d401781femr483657566b.43.1722264263519; 
+ Mon, 29 Jul 2024 07:44:23 -0700 (PDT)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7acadb021asm515686066b.188.2024.07.29.07.44.15
+ a640c23a62f3a-a7acad91080sm518097066b.160.2024.07.29.07.44.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Jul 2024 07:44:16 -0700 (PDT)
+ Mon, 29 Jul 2024 07:44:19 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 54C8E5F93A;
- Mon, 29 Jul 2024 15:44:15 +0100 (BST)
+ by draig.lan (Postfix) with ESMTP id 43DE05FA11;
+ Mon, 29 Jul 2024 15:44:16 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Eduardo Habkost <eduardo@habkost.net>, Thomas Huth <thuth@redhat.com>,
@@ -81,24 +82,24 @@ Cc: Eduardo Habkost <eduardo@habkost.net>, Thomas Huth <thuth@redhat.com>,
  David Hildenbrand <david@redhat.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Wainer dos Santos Moschetta <wainersm@redhat.com>
-Subject: [PATCH 03/14] tests/tcg: Use --noexecstack with assembler files
-Date: Mon, 29 Jul 2024 15:44:03 +0100
-Message-Id: <20240729144414.830369-4-alex.bennee@linaro.org>
+Subject: [PATCH 12/14] contrib/plugins: be more vocal building
+Date: Mon, 29 Jul 2024 15:44:12 +0100
+Message-Id: <20240729144414.830369-13-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240729144414.830369-1-alex.bennee@linaro.org>
 References: <20240729144414.830369-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::631;
- envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x631.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62e;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x62e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -114,162 +115,73 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Richard Henderson <richard.henderson@linaro.org>
+With the conversion to meson and removing the old QEMU Makefile
+baggage we became very silent when building the plugins. Bring in a
+copy of the quiet-command logic (and some magic COMMAs) so we can at
+least assure developers we are building them.
 
-Add the --noexecstack assembler command-line option to avoid:
-
-  /usr/bin/ld: warning: boot.o: missing .note.GNU-stack section implies executable stack
-  /usr/bin/ld: NOTE: This behaviour is deprecated and will be removed in a future version of the linker
-
-which is enabled by default with current debian cross toolchains.
-
-Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Message-Id: <20240724010733.22129-2-richard.henderson@linaro.org>
+Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2457
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
----
- tests/tcg/Makefile.target                     | 2 +-
- tests/tcg/aarch64/Makefile.softmmu-target     | 2 +-
- tests/tcg/alpha/Makefile.softmmu-target       | 2 +-
- tests/tcg/arm/Makefile.softmmu-target         | 2 +-
- tests/tcg/arm/Makefile.target                 | 2 +-
- tests/tcg/i386/Makefile.softmmu-target        | 2 +-
- tests/tcg/loongarch64/Makefile.softmmu-target | 2 +-
- tests/tcg/riscv64/Makefile.softmmu-target     | 2 +-
- tests/tcg/s390x/Makefile.softmmu-target       | 2 +-
- tests/tcg/x86_64/Makefile.softmmu-target      | 2 +-
- 10 files changed, 10 insertions(+), 10 deletions(-)
 
-diff --git a/tests/tcg/Makefile.target b/tests/tcg/Makefile.target
-index cb8cfeb6da..1f8e5b3d30 100644
---- a/tests/tcg/Makefile.target
-+++ b/tests/tcg/Makefile.target
-@@ -115,7 +115,7 @@ endif
- %: %.c
- 	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) $< -o $@ $(LDFLAGS)
- %: %.S
--	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) $< -o $@ $(LDFLAGS)
-+	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) -Wa,--noexecstack $< -o $@ $(LDFLAGS)
- else
- # For system targets we include a different Makefile fragment as the
- # build options for bare programs are usually pretty different. They
-diff --git a/tests/tcg/aarch64/Makefile.softmmu-target b/tests/tcg/aarch64/Makefile.softmmu-target
-index dd6d595830..139e04d15f 100644
---- a/tests/tcg/aarch64/Makefile.softmmu-target
-+++ b/tests/tcg/aarch64/Makefile.softmmu-target
-@@ -28,7 +28,7 @@ config-cc.mak: Makefile
- .PRECIOUS: $(CRT_OBJS)
+---
+Maybe we should just move to a meson build as proposed here:
+
+https://gitlab.com/qemu-project/qemu/-/issues/1710
+---
+ contrib/plugins/Makefile | 25 ++++++++++++++++++++-----
+ 1 file changed, 20 insertions(+), 5 deletions(-)
+
+diff --git a/contrib/plugins/Makefile b/contrib/plugins/Makefile
+index 98a89d5c40..edf256cd9d 100644
+--- a/contrib/plugins/Makefile
++++ b/contrib/plugins/Makefile
+@@ -39,26 +39,41 @@ endif
  
- %.o: $(CRT_PATH)/%.S
--	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) -x assembler-with-cpp -c $< -o $@
-+	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) -x assembler-with-cpp -Wa,--noexecstack -c $< -o $@
+ SONAMES := $(addsuffix $(SO_SUFFIX),$(addprefix lib,$(NAMES)))
  
- # Build and link the tests
- %: %.c $(LINK_SCRIPT) $(CRT_OBJS) $(MINILIB_OBJS)
-diff --git a/tests/tcg/alpha/Makefile.softmmu-target b/tests/tcg/alpha/Makefile.softmmu-target
-index 09193a62d6..a0eca4d6ea 100644
---- a/tests/tcg/alpha/Makefile.softmmu-target
-+++ b/tests/tcg/alpha/Makefile.softmmu-target
-@@ -22,7 +22,7 @@ LDFLAGS+=-static -nostdlib $(CRT_OBJS) $(MINILIB_OBJS) -lgcc
- .PRECIOUS: $(CRT_OBJS)
+-# The main QEMU uses Glib extensively so it's perfectly fine to use it
++# The main QEMU uses Glib extensively so it is perfectly fine to use it
+ # in plugins (which many example do).
+ PLUGIN_CFLAGS := $(shell $(PKG_CONFIG) --cflags glib-2.0)
+ PLUGIN_CFLAGS += -fPIC -Wall
+ PLUGIN_CFLAGS += -I$(TOP_SRC_PATH)/include/qemu
  
- %.o: $(CRT_PATH)/%.S
--	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) -x assembler-with-cpp -c $< -o $@
-+	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) -x assembler-with-cpp -Wa,--noexecstack -c $< -o $@
- 
- # Build and link the tests
- %: %.c $(LINK_SCRIPT) $(CRT_OBJS) $(MINILIB_OBJS)
-diff --git a/tests/tcg/arm/Makefile.softmmu-target b/tests/tcg/arm/Makefile.softmmu-target
-index 547063c08c..b66074b0b4 100644
---- a/tests/tcg/arm/Makefile.softmmu-target
-+++ b/tests/tcg/arm/Makefile.softmmu-target
-@@ -36,7 +36,7 @@ LDFLAGS+=-static -nostdlib $(CRT_OBJS) $(MINILIB_OBJS) -lgcc
- .PRECIOUS: $(CRT_OBJS)
- 
- %.o: $(ARM_SRC)/%.S
--	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) -x assembler-with-cpp -c $< -o $@
-+	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) -x assembler-with-cpp -Wa,--noexecstack -c $< -o $@
- 
- # Build and link the tests
- %: %.c $(LINK_SCRIPT) $(CRT_OBJS) $(MINILIB_OBJS)
-diff --git a/tests/tcg/arm/Makefile.target b/tests/tcg/arm/Makefile.target
-index 8e287191af..06ddf3e04f 100644
---- a/tests/tcg/arm/Makefile.target
-+++ b/tests/tcg/arm/Makefile.target
-@@ -25,7 +25,7 @@ ARM_TESTS += test-arm-iwmmxt
- # Clang assembler does not support IWMXT, so use the external assembler.
- test-arm-iwmmxt: CFLAGS += -marm -march=iwmmxt -mabi=aapcs -mfpu=fpv4-sp-d16 $(CROSS_CC_HAS_FNIA)
- test-arm-iwmmxt: test-arm-iwmmxt.S
--	$(CC) $(CFLAGS) $< -o $@ $(LDFLAGS)
-+	$(CC) $(CFLAGS) -Wa,--noexecstack $< -o $@ $(LDFLAGS)
- 
- # Float-convert Tests
- ARM_TESTS += fcvt
-diff --git a/tests/tcg/i386/Makefile.softmmu-target b/tests/tcg/i386/Makefile.softmmu-target
-index 5266f2335a..4096a1cf31 100644
---- a/tests/tcg/i386/Makefile.softmmu-target
-+++ b/tests/tcg/i386/Makefile.softmmu-target
-@@ -25,7 +25,7 @@ EXTRA_RUNS+=$(MULTIARCH_RUNS)
- .PRECIOUS: $(CRT_OBJS)
- 
- %.o: $(CRT_PATH)/%.S
--	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) -c $< -o $@
-+	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) -Wa,--noexecstack -c $< -o $@
- 
- # Build and link the tests
- %: %.c $(LINK_SCRIPT) $(CRT_OBJS) $(MINILIB_OBJS)
-diff --git a/tests/tcg/loongarch64/Makefile.softmmu-target b/tests/tcg/loongarch64/Makefile.softmmu-target
-index 908f3a8c0f..d5d5c1a7f6 100644
---- a/tests/tcg/loongarch64/Makefile.softmmu-target
-+++ b/tests/tcg/loongarch64/Makefile.softmmu-target
-@@ -22,7 +22,7 @@ LDFLAGS+=-static -nostdlib $(CRT_OBJS) $(MINILIB_OBJS) -lgcc
- .PRECIOUS: $(CRT_OBJS)
- 
- %.o: $(CRT_PATH)/%.S
--	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) -x assembler-with-cpp -c $< -o $@
-+	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) -x assembler-with-cpp -Wa,--noexecstack -c $< -o $@
- 
- # Build and link the tests
- %: %.c $(LINK_SCRIPT) $(CRT_OBJS) $(MINILIB_OBJS)
-diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
-index d5b126e5f1..7c1d44d3f4 100644
---- a/tests/tcg/riscv64/Makefile.softmmu-target
-+++ b/tests/tcg/riscv64/Makefile.softmmu-target
-@@ -10,7 +10,7 @@ LDFLAGS = -T $(LINK_SCRIPT)
- CFLAGS += -g -Og
- 
- %.o: %.S
--	$(CC) $(CFLAGS) $< -c -o $@
-+	$(CC) $(CFLAGS) $< -Wa,--noexecstack -c -o $@
- %: %.o $(LINK_SCRIPT)
- 	$(LD) $(LDFLAGS) $< -o $@
- 
-diff --git a/tests/tcg/s390x/Makefile.softmmu-target b/tests/tcg/s390x/Makefile.softmmu-target
-index 4c8e15e625..f60f94b090 100644
---- a/tests/tcg/s390x/Makefile.softmmu-target
-+++ b/tests/tcg/s390x/Makefile.softmmu-target
-@@ -6,7 +6,7 @@ CFLAGS+=-ggdb -O0
- LDFLAGS=-nostdlib -static
- 
- %.o: %.S
--	$(CC) -march=z13 -m64 -c $< -o $@
-+	$(CC) -march=z13 -m64 -Wa,--noexecstack -c $< -o $@
++# Helper that honours V=1 so we get some output when compiling
++quiet-@ = $(if $(V),,@$(if $1,printf "  %-7s %s\n" "$(strip $1)" "$(strip $2)" && ))
++quiet-command = $(call quiet-@,$2,$3)$1
++
++# for including , in command strings
++COMMA := ,
++
+ all: $(SONAMES)
  
  %.o: %.c
- 	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) -march=z13 -m64 -c $< -o $@
-diff --git a/tests/tcg/x86_64/Makefile.softmmu-target b/tests/tcg/x86_64/Makefile.softmmu-target
-index 1bd763f2e6..ef6bcb4dc7 100644
---- a/tests/tcg/x86_64/Makefile.softmmu-target
-+++ b/tests/tcg/x86_64/Makefile.softmmu-target
-@@ -25,7 +25,7 @@ EXTRA_RUNS+=$(MULTIARCH_RUNS)
- .PRECIOUS: $(CRT_OBJS)
+-	$(CC) $(CFLAGS) $(PLUGIN_CFLAGS) -c -o $@ $<
++	$(call quiet-command, \
++		$(CC) $(CFLAGS) $(PLUGIN_CFLAGS) -c -o $@ $<, \
++	        BUILD, plugin $@)
  
- %.o: $(CRT_PATH)/%.S
--	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) -c $< -o $@
-+	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) -Wa,--noexecstack -c $< -o $@
+ ifeq ($(CONFIG_WIN32),y)
+ lib%$(SO_SUFFIX): %.o win32_linker.o ../../plugins/libqemu_plugin_api.a
+-	$(CC) -shared -o $@ $^ $(LDLIBS)
++	$(call quiet-command, \
++		$(CC) -shared -o $@ $^ $(LDLIBS), \
++		LINK, plugin $@)
+ else ifeq ($(CONFIG_DARWIN),y)
+ lib%$(SO_SUFFIX): %.o
+-	$(CC) -bundle -Wl,-undefined,dynamic_lookup -o $@ $^ $(LDLIBS)
++	$(call quiet-command, \
++		$(CC) -bundle -Wl$(COMMA)-undefined$(COMMA)dynamic_lookup -o $@ $^ $(LDLIBS), \
++		LINK, plugin $@)
+ else
+ lib%$(SO_SUFFIX): %.o
+-	$(CC) -shared -o $@ $^ $(LDLIBS)
++	$(call quiet-command, \
++		$(CC) -shared -o $@ $^ $(LDLIBS), \
++		LINK, plugin $@)
+ endif
  
- # Build and link the tests
- %: %.c $(LINK_SCRIPT) $(CRT_OBJS) $(MINILIB_OBJS)
+ 
 -- 
 2.39.2
 
