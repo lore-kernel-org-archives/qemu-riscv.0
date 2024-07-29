@@ -4,65 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61CADC3DA4A
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jul 2024 14:46:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A81C4C3DA61
+	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jul 2024 14:47:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sYRc3-0004US-2y; Mon, 29 Jul 2024 10:44:35 -0400
+	id 1sYRby-00045N-Io; Mon, 29 Jul 2024 10:44:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sYRc0-0004Iw-ID
- for qemu-riscv@nongnu.org; Mon, 29 Jul 2024 10:44:32 -0400
-Received: from mail-ej1-x62e.google.com ([2a00:1450:4864:20::62e])
+ id 1sYRbu-0003qj-CD
+ for qemu-riscv@nongnu.org; Mon, 29 Jul 2024 10:44:26 -0400
+Received: from mail-ed1-x52d.google.com ([2a00:1450:4864:20::52d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sYRbt-0008Q6-3c
- for qemu-riscv@nongnu.org; Mon, 29 Jul 2024 10:44:32 -0400
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a7d2a9a23d9so357138166b.3
- for <qemu-riscv@nongnu.org>; Mon, 29 Jul 2024 07:44:24 -0700 (PDT)
+ id 1sYRbp-0008Ns-6e
+ for qemu-riscv@nongnu.org; Mon, 29 Jul 2024 10:44:26 -0400
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-5a156556fb4so5753938a12.3
+ for <qemu-riscv@nongnu.org>; Mon, 29 Jul 2024 07:44:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1722264264; x=1722869064; darn=nongnu.org;
+ d=linaro.org; s=google; t=1722264260; x=1722869060; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RIOayMEsJA1tkmepteKB9T0FXWTwbDeTnBtcVohO/HQ=;
- b=vrz7AqpY0TeQ9/WAPxNm5oFSfMpOi4siqTB17ebTmwHEDG/t0vhuTJpW+G7JqxBK+f
- RmJCEiIF70+kJe70TsWh+RqongjyO3z5NvWRRuh1mLYz4Y3oEWPRewT4JLBXMkTmooHj
- pZsGUDWq8p5ewK1qy808Nr8uFr7B/huXBpIGCNKU+43o7KFNXa/CQZvNMgWFqS4CQv7G
- 7k19hi1U3Y3UohipcWFzN5kWGk6XstRciq54GAbsvWDQGOnWPhuaHadHnEajt1hSb/0L
- V2yKU91SUud4NGBBKPy2Mvlj80HpnoW8gnFzh7iZHIWZfhDPcE13WIt4fFznIghORmM+
- pC2g==
+ bh=TdNyQjx9vy1t8eoHD/QTCnhZHijRSE/LPFIBD5gVquQ=;
+ b=lpFmL4de2DiDohtCspV95InlqOV/tmh0lKc85jYntv+dVHAZLP4ewt7gNmKMh2Gnq5
+ +kD3IJFYqbZugQrwZBTmTcwZrTBYo88eMGjABqsr65/tntJKY3oxj7jxQmwaJqTRihlP
+ dZjrmOvRcyOmVPJry5PC61Z3eli9dL3mMPYo04dYPnHWW5l/LzdjJx+E2eNETZ05A3pt
+ cM0UPHUXduCVmpZtDow6EWD35an35Mo1/Okp931pTCg9+gIXz8yobrShPEEtHyZ/lhG6
+ 0k0/UeU7QQ5cCuJ5XwgKCtuDrhls87JJSd6qgq/9CuPMMjzofGwc8XoXFtDOWiuOdVrT
+ QM5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722264264; x=1722869064;
+ d=1e100.net; s=20230601; t=1722264260; x=1722869060;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RIOayMEsJA1tkmepteKB9T0FXWTwbDeTnBtcVohO/HQ=;
- b=qvqS8vSV2heEruG87N9zGXJL/OOqaq8noledh24k2nmMX6LAOi2Pyru/pmfdFSyup2
- Y40AHYrjRkWpf87AzFxw/vapx2KV2yUB6pdwhjpuWdT0uqrA8sQVfAInPdtqBMtxm+XW
- LrQ/Bq4bM15DsDZoJjP21zmmq6FldSdJ5dJkQ1saAkXHH1MVnFBbCyqThgGBBXhdgtaf
- nSdiXN1Y+DW1fWeCQgpjg4m2CEPMnBUYCwEToh8pVzm6W14cTWXFU/Bxqxum/62UOoJA
- A+pV4pjmY52/ZeuTGNVDifqCDlSIKuRJxzQCWL6lFkH4OMeRaETvBn503RYWqaZKFCSe
- lM4g==
+ bh=TdNyQjx9vy1t8eoHD/QTCnhZHijRSE/LPFIBD5gVquQ=;
+ b=WiggW9Qj6iGDMXekhKtQbVmoeQVVpYEpRA2rHiBQc443JscbYLIg2njOfY1Tun8VnU
+ t824W4vVGJBWRweg0ylX6xK06bCYnoHu45i7QZ+dfvJDXH9/ykvtAEbhmDFt5UP9jOgs
+ qoqFa4mgz6bmjHpWNFdcGpydEiTX0+mwqu0K1k38LxWNClo46x3lFHa2l2v6LKvyF9if
+ tJHOlOycZ7tzqKqLh4TPyUns6scPVis6SmniC2NQuYYSBjDswCQYEn7AALoNmf2tweGW
+ yChBN6zYzj8iSfcg35nKiRL1UDlGWC0aHkECLlVkjSo20a0cY3wD4bwVJyJwZshlp/Ye
+ V2ag==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVID+p9Rle5akf8wJE6ntIt4vFsQJfTjLx0n93lA4YVuEgTeuS4X4PJYGdjyDvYtHUFSx56713yCPyepRcxC4XnFdA40po=
-X-Gm-Message-State: AOJu0YyNiXRujHml9sJbv5F08JHjB0/vM46hkVz8dnNARtY8AcFYVo1E
- D5I5afISQyoXlAwWJ3dSe0mOe3alONaOeB+TxBiw5OUK6FBJynDZym91ocXnknu68ZOVF84Ngfw
- b
-X-Google-Smtp-Source: AGHT+IFBqzVWW8HN4yEEamLBDbG/voeZt/brB68Ctd58ksy7qlSURXpWYpi+y2eacnqXtSPvTiYy9A==
-X-Received: by 2002:a17:907:3d9e:b0:a77:ab40:6d7f with SMTP id
- a640c23a62f3a-a7d401781femr483657566b.43.1722264263519; 
- Mon, 29 Jul 2024 07:44:23 -0700 (PDT)
-Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7acad91080sm518097066b.160.2024.07.29.07.44.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ AJvYcCVKaN9xonjNtGGhYmpe17wRzleCH/VjBSf9LM3lxPAvpcf2gMxMQEeq2j6yPVAk11I28oF9r8umN74D7p3n9KeLT8y+elg=
+X-Gm-Message-State: AOJu0Yyp49BTltg2Gnsu/SBM2Ii+vjD/Gt2rEBEq4p7tTaHA9wDXbZBP
+ KxBU9o8cf2c+o5ia84FFhWYpIWHct/Wphl+uU4/mvsPu5c+oeQyY/1Ei/0083e0=
+X-Google-Smtp-Source: AGHT+IHHhSkKmpbbjVHqoyAkSBJA735SFd4BmTgn67DBvO4GcXVK7szvrETNIxZkj23mIXlWB4PcGQ==
+X-Received: by 2002:a05:6402:2681:b0:5af:758a:6929 with SMTP id
+ 4fb4d7f45d1cf-5b022003a1cmr6077793a12.23.1722264259275; 
  Mon, 29 Jul 2024 07:44:19 -0700 (PDT)
+Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5ac6377e06fsm5901911a12.28.2024.07.29.07.44.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 29 Jul 2024 07:44:17 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 43DE05FA11;
- Mon, 29 Jul 2024 15:44:16 +0100 (BST)
+ by draig.lan (Postfix) with ESMTP id 9DEE25F9F3;
+ Mon, 29 Jul 2024 15:44:15 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Eduardo Habkost <eduardo@habkost.net>, Thomas Huth <thuth@redhat.com>,
@@ -82,17 +81,17 @@ Cc: Eduardo Habkost <eduardo@habkost.net>, Thomas Huth <thuth@redhat.com>,
  David Hildenbrand <david@redhat.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Wainer dos Santos Moschetta <wainersm@redhat.com>
-Subject: [PATCH 12/14] contrib/plugins: be more vocal building
-Date: Mon, 29 Jul 2024 15:44:12 +0100
-Message-Id: <20240729144414.830369-13-alex.bennee@linaro.org>
+Subject: [PATCH 06/14] docs/devel: update the testing introduction
+Date: Mon, 29 Jul 2024 15:44:06 +0100
+Message-Id: <20240729144414.830369-7-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240729144414.830369-1-alex.bennee@linaro.org>
 References: <20240729144414.830369-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::62e;
- envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x62e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52d;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x52d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -115,72 +114,49 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-With the conversion to meson and removing the old QEMU Makefile
-baggage we became very silent when building the plugins. Bring in a
-copy of the quiet-command logic (and some magic COMMAs) so we can at
-least assure developers we are building them.
+Move the mention of "check-help" up to the intro text and also mention
+the meson test integration.
 
-Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2457
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-
 ---
-Maybe we should just move to a meson build as proposed here:
+ docs/devel/testing.rst | 21 ++++++++++++++++++---
+ 1 file changed, 18 insertions(+), 3 deletions(-)
 
-https://gitlab.com/qemu-project/qemu/-/issues/1710
----
- contrib/plugins/Makefile | 25 ++++++++++++++++++++-----
- 1 file changed, 20 insertions(+), 5 deletions(-)
-
-diff --git a/contrib/plugins/Makefile b/contrib/plugins/Makefile
-index 98a89d5c40..edf256cd9d 100644
---- a/contrib/plugins/Makefile
-+++ b/contrib/plugins/Makefile
-@@ -39,26 +39,41 @@ endif
+diff --git a/docs/devel/testing.rst b/docs/devel/testing.rst
+index 23d3f44f52..b984c5dd26 100644
+--- a/docs/devel/testing.rst
++++ b/docs/devel/testing.rst
+@@ -3,13 +3,28 @@
+ Testing in QEMU
+ ===============
  
- SONAMES := $(addsuffix $(SO_SUFFIX),$(addprefix lib,$(NAMES)))
- 
--# The main QEMU uses Glib extensively so it's perfectly fine to use it
-+# The main QEMU uses Glib extensively so it is perfectly fine to use it
- # in plugins (which many example do).
- PLUGIN_CFLAGS := $(shell $(PKG_CONFIG) --cflags glib-2.0)
- PLUGIN_CFLAGS += -fPIC -Wall
- PLUGIN_CFLAGS += -I$(TOP_SRC_PATH)/include/qemu
- 
-+# Helper that honours V=1 so we get some output when compiling
-+quiet-@ = $(if $(V),,@$(if $1,printf "  %-7s %s\n" "$(strip $1)" "$(strip $2)" && ))
-+quiet-command = $(call quiet-@,$2,$3)$1
+-This document describes the testing infrastructure in QEMU.
++QEMU's testing infrastructure is fairly complex as it covers
++everything from unit testing and exercising specific sub-systems all
++the way to full blown acceptance tests. To get an overview of the
++tests you can run ``make check-help`` from either the source or build
++tree.
 +
-+# for including , in command strings
-+COMMA := ,
++Most (but not all) tests are also integrated into the meson build
++system so can be run directly from the build tree, for example:
 +
- all: $(SONAMES)
++.. code::
++
++  [./pyvenv/bin/]meson test --suite qemu:softfloat
++
++will run just the softfloat tests.
++
++The rest of this document will cover the details for specific test
++groups.
  
- %.o: %.c
--	$(CC) $(CFLAGS) $(PLUGIN_CFLAGS) -c -o $@ $<
-+	$(call quiet-command, \
-+		$(CC) $(CFLAGS) $(PLUGIN_CFLAGS) -c -o $@ $<, \
-+	        BUILD, plugin $@)
+ Testing with "make check"
+ -------------------------
  
- ifeq ($(CONFIG_WIN32),y)
- lib%$(SO_SUFFIX): %.o win32_linker.o ../../plugins/libqemu_plugin_api.a
--	$(CC) -shared -o $@ $^ $(LDLIBS)
-+	$(call quiet-command, \
-+		$(CC) -shared -o $@ $^ $(LDLIBS), \
-+		LINK, plugin $@)
- else ifeq ($(CONFIG_DARWIN),y)
- lib%$(SO_SUFFIX): %.o
--	$(CC) -bundle -Wl,-undefined,dynamic_lookup -o $@ $^ $(LDLIBS)
-+	$(call quiet-command, \
-+		$(CC) -bundle -Wl$(COMMA)-undefined$(COMMA)dynamic_lookup -o $@ $^ $(LDLIBS), \
-+		LINK, plugin $@)
- else
- lib%$(SO_SUFFIX): %.o
--	$(CC) -shared -o $@ $^ $(LDLIBS)
-+	$(call quiet-command, \
-+		$(CC) -shared -o $@ $^ $(LDLIBS), \
-+		LINK, plugin $@)
- endif
+-The "make check" testing family includes most of the C based tests in QEMU. For
+-a quick help, run ``make check-help`` from the source tree.
++The "make check" testing family includes most of the C based tests in QEMU.
  
+ The usual way to run these tests is:
  
 -- 
 2.39.2
