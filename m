@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22344C3DA4A
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jul 2024 14:45:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC9E3C3DA61
+	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jul 2024 14:46:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sYRbz-0004CG-5q; Mon, 29 Jul 2024 10:44:31 -0400
+	id 1sYRc5-0004dB-0Y; Mon, 29 Jul 2024 10:44:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sYRbw-0003zJ-Aa
- for qemu-riscv@nongnu.org; Mon, 29 Jul 2024 10:44:28 -0400
-Received: from mail-ed1-x52c.google.com ([2a00:1450:4864:20::52c])
+ id 1sYRc2-0004Ti-T4
+ for qemu-riscv@nongnu.org; Mon, 29 Jul 2024 10:44:34 -0400
+Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sYRbq-0008Ni-4s
- for qemu-riscv@nongnu.org; Mon, 29 Jul 2024 10:44:27 -0400
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-5af6a1afa7bso3185378a12.1
- for <qemu-riscv@nongnu.org>; Mon, 29 Jul 2024 07:44:20 -0700 (PDT)
+ id 1sYRbt-0008Pm-Hf
+ for qemu-riscv@nongnu.org; Mon, 29 Jul 2024 10:44:34 -0400
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-5b391c8abd7so810393a12.2
+ for <qemu-riscv@nongnu.org>; Mon, 29 Jul 2024 07:44:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1722264260; x=1722869060; darn=nongnu.org;
+ d=linaro.org; s=google; t=1722264263; x=1722869063; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jkd6LFuw9dfVXklEdc2dhr9bRuw+JJYLw6zlp56juC8=;
- b=Y8lHAcKOhkw2IR09ZLukGLyKJaq2zb+CMI6JUjfGI/8xREJ7VYCmHQ2AZgE0rKj2Sk
- 1kckP0ySdEj4j/dTSg5Ijjg1OX0rX7G7rmn5oxsw2d2jwsgybDOdj4H81f27STp/By5s
- Muwsm6lxLuxxBrgG0xKofeCwIFGZzrqIJUXD6R8/0M0BaVvHewWtqwbskYFo0OBqELJn
- ymFFySVSgIAF4Zo7W/YRF5iYi4sahHSKpdQtLIbfYRPysHVOTQ5kqIrFnw4+82MiCWPI
- oZCPy7tFY5abZj/wVCTryxw6UHV1BBBlkuJvzxACkN1SwVPTbNPR1NeGCTzpOhA5H3X6
- tB0Q==
+ bh=k68dUaa5yNSOgGnmccLcS4zpOsOezQjGJywa7D7FDBg=;
+ b=BoV095cys7xqWDm8wqPwaBpdfNGen9D8k02VQOZjkxN/vb2dSOODpfQFF72ROMHJQL
+ 1KO0wZtX/DPNqXsaWigkSjzZm3F+T0m5RQ/UDJspmHZEctQLDynD6D0hLHXF3P9N+Zxz
+ 0Z4aaY2XHfG2oizP/NxMaEvw6xEB61cqlJaPGjgTDCAF1mBC3vCxtrPbFFP8yrhp7AUN
+ MZ0/dLaAIe5Cr/qi8xG6DNjK1ItgMLrxFSiFJWsP288srNXo+zhOrGVo33ihnCj39qK/
+ zl+sqFM/mY6aiO9G6/9OK8Aqy5NCtfjkmNZmZyBpIUxO5RJhY1oOmcZ/QSiJkm4LHONF
+ wdjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722264260; x=1722869060;
+ d=1e100.net; s=20230601; t=1722264263; x=1722869063;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jkd6LFuw9dfVXklEdc2dhr9bRuw+JJYLw6zlp56juC8=;
- b=esgaXGXV1AaY/Wux8UYkkfcVW5JhgTNyy7n+fCjlvYK0z6z5GRNoov8jbFstvUFrMW
- f1/cnGbQoihEorf516Fyiw3K8VbktityeZTOV0N6jIPvzVAFHKBldzcrMP3/Uory71IY
- J1wwjhE9wa0mv2N+xBCsd2TqCWQSYCtfsD97B5UPvY/k1QYqD5eLm3lcZxR+ERovNuL7
- uUKybTy5uQ9tl3xrqiUscWP0Z+zTKLb8v9dzZTEXliKoTy+FPBSeNXbzN3k5Z7BBoCNb
- 2rf4ZRiexqKsAIEfYiCuIYp2IcL6HZ+85PMnukvkw6xda4HY9YSE2CSlPccPZA7NAnlK
- UbPA==
+ bh=k68dUaa5yNSOgGnmccLcS4zpOsOezQjGJywa7D7FDBg=;
+ b=Lk7BkCb9cP7Qc3hIs7/XLU+M9pfZgRZrXDhKz0d6KtfCP+DN6XhDJY/iL5f6naHvAH
+ kw32q1hQKvQ7AqMglF4bUBovIWbNU/7GDIZhyDtCAkAN5e+ZZNBakvHHH3cM+L5wPz+x
+ 4Bg1tONwWTMjaPcSWZlbK+nERWDX4pWJhqMhpTyEmStMnP7gFP67voiX0nmttwlbmXWa
+ T2tWmT1xm1+lBuICKPH9tYElnBiezoK/PRb/9+nw9RPuUJYqYKHvrZROjtacyCwxO+zX
+ FD35HptJSrIkkjgtiuAEu5EG/fUmcrzDYcvgQLr4Tz1bfgxHZ5EA1H10GyVWIhLQYdVY
+ fzjA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU8EkDE2x0wWdbdrHPBBbEjd4qVU7XbrjtdJpQh6aXEyZY/UYGyuZxXc1rKAtFN+Ct4SoAU0kCJcClEv19DnyXEvQ7/Thg=
-X-Gm-Message-State: AOJu0Yy51fJC77ht+l/6Wto5DVGjMLhh76PVG9aWvFWRXqxhhJYZaXmA
- mjdHfgn+hvvCk2zX5YQyUpTJ7bagjSpo2RHXUcj2QV9Wi4Pcnkr+L+mX5CInWwA=
-X-Google-Smtp-Source: AGHT+IH91duaUyTno3iK0GWmplPV/TkFQqJitVs82wUjLe0nxKZ20fAvbTHzOnq1qhFihMSZq89dkw==
-X-Received: by 2002:a05:6402:1ece:b0:5a2:68a2:ae52 with SMTP id
- 4fb4d7f45d1cf-5b01d37c1fdmr6001624a12.0.1722264259585; 
- Mon, 29 Jul 2024 07:44:19 -0700 (PDT)
+ AJvYcCWqPGt1IcxzWtA0hWqzB67yW29FDCCdKCxJhSSKdsmNyfmA5uEFZlUvZTdSuSzgcj4JgAIsfSdjqLXzj+fVrPV/C2jflfA=
+X-Gm-Message-State: AOJu0Yz/OTspM+7EPtggeHXNC3cm1rM3dioXrA11YBihYhJVulJax1Wh
+ g9R2HP4dRwsraqSXAPNFnEmvqthIxlxsdkB9T2OUmHU20L2nmaoWzvaSgid3Yz4=
+X-Google-Smtp-Source: AGHT+IHisnIBoJDnsJGlOaz1G2ZgOZJJy3ylebaI2AyDcFA0RiUAwTnoNA5VQHG6BKW8J01ncI8GJw==
+X-Received: by 2002:a17:907:944b:b0:a7a:bae8:f29e with SMTP id
+ a640c23a62f3a-a7d400a0385mr487093366b.29.1722264262589; 
+ Mon, 29 Jul 2024 07:44:22 -0700 (PDT)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5af2f233be4sm4597887a12.41.2024.07.29.07.44.16
+ a640c23a62f3a-a7acad902e2sm520163766b.146.2024.07.29.07.44.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Jul 2024 07:44:17 -0700 (PDT)
+ Mon, 29 Jul 2024 07:44:19 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 850715F9CC;
+ by draig.lan (Postfix) with ESMTP id CC9615FA08;
  Mon, 29 Jul 2024 15:44:15 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -81,17 +81,17 @@ Cc: Eduardo Habkost <eduardo@habkost.net>, Thomas Huth <thuth@redhat.com>,
  David Hildenbrand <david@redhat.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Wainer dos Santos Moschetta <wainersm@redhat.com>
-Subject: [PATCH 05/14] tests/tcg: update README
-Date: Mon, 29 Jul 2024 15:44:05 +0100
-Message-Id: <20240729144414.830369-6-alex.bennee@linaro.org>
+Subject: [PATCH 08/14] tests/avocado: remove tcg_plugins virt_mem_icount test
+Date: Mon, 29 Jul 2024 15:44:08 +0100
+Message-Id: <20240729144414.830369-9-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240729144414.830369-1-alex.bennee@linaro.org>
 References: <20240729144414.830369-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::52c;
- envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x52c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x52e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -114,43 +114,63 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Update the document with details about the layout of tests. Remove the
-out of date cris comments. Refer to the developer guide for details
-about how to run the tests.
+Since 4f8d886085 (tests/plugin/mem: migrate to new per_vcpu API) this
+test was skipping due to not being able to run callback and inline
+memory instrumentation at the same time.
+
+However b480f7a621 (tests/plugin: add test plugin for inline
+operations) tests for all this matching up so we don't need the
+additional complexity in avocado.
+
+Remove the test.
 
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Fixes: 4f8d886085
 ---
- tests/tcg/README | 23 ++++++++++++++---------
- 1 file changed, 14 insertions(+), 9 deletions(-)
+ tests/avocado/tcg_plugins.py | 33 ---------------------------------
+ 1 file changed, 33 deletions(-)
 
-diff --git a/tests/tcg/README b/tests/tcg/README
-index 706bb185b4..6d08ca50dc 100644
---- a/tests/tcg/README
-+++ b/tests/tcg/README
-@@ -1,9 +1,14 @@
--This directory contains various interesting guest programs for
--regression testing. Tests are either multi-arch, meaning they can be
--built for all guest architectures that support linux-user executable,
--or they are architecture specific.
+diff --git a/tests/avocado/tcg_plugins.py b/tests/avocado/tcg_plugins.py
+index 15fd87b2c1..a930fca2c0 100644
+--- a/tests/avocado/tcg_plugins.py
++++ b/tests/avocado/tcg_plugins.py
+@@ -120,36 +120,3 @@ def test_aarch64_virt_insn_icount(self):
+             else:
+                 count = int(m.group("count"))
+                 self.log.info(f"Counted: {count} instructions")
 -
--CRIS
--====
--The testsuite for CRIS is in tests/tcg/cris.  You can run it
--with "make test-cris".
-+This directory contains various interesting guest binaries for
-+regression testing the Tiny Code Generator doing system and user-mode
-+emulation.
-+
-+The multiarch directory contains shared code for tests that can be
-+built for all guest architectures. Architecture specific code can be
-+found in their respective directories.
-+
-+System mode tests will be under the "system" subdirectories.
-+
-+GDB scripts for exercising the gdbstub on specific tests will be found
-+under the "gdbstb" subdirectories.
-+
-+See the developer guide for more instructions on "make check-tcg"
+-    def test_aarch64_virt_mem_icount(self):
+-        """
+-        :avocado: tags=accel:tcg
+-        :avocado: tags=arch:aarch64
+-        :avocado: tags=machine:virt
+-        :avocado: tags=cpu:cortex-a53
+-        """
+-        kernel_path = self._grab_aarch64_kernel()
+-        kernel_command_line = (self.KERNEL_COMMON_COMMAND_LINE +
+-                               'console=ttyAMA0')
+-        console_pattern = 'Kernel panic - not syncing: VFS:'
+-
+-        plugin_log = tempfile.NamedTemporaryFile(mode="r+t", prefix="plugin",
+-                                                 suffix=".log")
+-
+-        self.run_vm(kernel_path, kernel_command_line,
+-                    "tests/plugin/libmem.so,inline=true,callback=true", plugin_log.name,
+-                    console_pattern,
+-                    args=('-icount', 'shift=1'))
+-
+-        with plugin_log as lf, \
+-             mmap.mmap(lf.fileno(), 0, access=mmap.ACCESS_READ) as s:
+-            m = re.findall(br"mem accesses: (?P<count>\d+)", s)
+-            if m is None or len(m) != 2:
+-                self.fail("no memory access counts found")
+-            else:
+-                inline = int(m[0])
+-                callback = int(m[1])
+-                if inline != callback:
+-                    self.fail("mismatched access counts")
+-                else:
+-                    self.log.info(f"Counted {inline} memory accesses")
 -- 
 2.39.2
 
