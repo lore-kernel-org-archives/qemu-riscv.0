@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA174C3DA4A
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jul 2024 14:48:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25E42C3DA4A
+	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jul 2024 15:15:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sYRbs-0003ik-JN; Mon, 29 Jul 2024 10:44:24 -0400
+	id 1sYS6I-0008Gc-Lw; Mon, 29 Jul 2024 11:15:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sYRbq-0003b2-Ed
- for qemu-riscv@nongnu.org; Mon, 29 Jul 2024 10:44:22 -0400
-Received: from mail-ej1-x62d.google.com ([2a00:1450:4864:20::62d])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1sYS5x-0006tU-3j
+ for qemu-riscv@nongnu.org; Mon, 29 Jul 2024 11:15:29 -0400
+Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sYRbm-0008Mg-Of
- for qemu-riscv@nongnu.org; Mon, 29 Jul 2024 10:44:21 -0400
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a77ec5d3b0dso428489266b.0
- for <qemu-riscv@nongnu.org>; Mon, 29 Jul 2024 07:44:18 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1sYS5t-00067X-Fs
+ for qemu-riscv@nongnu.org; Mon, 29 Jul 2024 11:15:28 -0400
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-4280bca3960so18077015e9.3
+ for <qemu-riscv@nongnu.org>; Mon, 29 Jul 2024 08:15:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1722264257; x=1722869057; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=T3GszRkz8geRaMKEq8CHOzLhtMD92I0hXo79XzAv5so=;
- b=pEcO7j9I2xMgVr21v+Bp/m+53kOVGtrq3JgQQPNi7OVma39u+ZuECWWU2j5xSZcQb3
- QoLcy7y3vohvpv8JSyYMJUAkHu/ocKcqh5PbSR45uFp/mZa9u3ofw70KIHEScJtukEu3
- W3jkzdRmc4Y4jqpNpcgnpfmWIHOYyKExNfPVqyv5BeEa8ZemyOseGuQ0L9Js88s2oeGP
- AMIhPqGdvgsM8KR2ghD5y6btDCoJhT9Znac4dFVoEu8enCjTcSbayimbdr+rxLtjY7xK
- 3gvsHVGlLaTZqxtEtTF0rAI0/KarMOp5WP0IQPNpGdswAgcomL5W11et68kR6dkUxSyw
- 33TQ==
+ d=linaro.org; s=google; t=1722266123; x=1722870923; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=79xu6GwJt2tOSZjRUkS6x2bp/kSXLFMEOLWAaLfoTjo=;
+ b=F8mA1Ri7bd4tcCJIvECqdnEJEwNa/JZ6Y40S6TE15PUnl0tHpVsS8YF+IptiyjecIo
+ orxJlAvQgUXLtNji5oUEH8XvLbASwljJjy0LCSQ7Vt53qyor3rDJ1VVV/0XkyIcFwu3P
+ rawbpAfVM3Pch+57seTREeTBa2XkWNvn8wIk7KQru+n33b0QaKzl7V08vabktgdCs8CS
+ GIyPN4jLtdCDAyHl3eEIJ9qm7D1w/onrYKRcE//AwkeT63PO2OfRhlqzpkSYacNu6sbQ
+ y9yCrYldCCDnChZE/CsEONkL5DEGGY5Dwjh2gtORuPy6lAfiKp8bu1n0ySbwAyPDfEn5
+ 9DQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722264257; x=1722869057;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=T3GszRkz8geRaMKEq8CHOzLhtMD92I0hXo79XzAv5so=;
- b=ohWWXzHlsbTHyErmxHk0Y/fN5B2+6PdgfjUukiclSgdEwcwKjiR3Po0zfBxWkDgJvH
- o3f+KLELBiZl0IlE/pf09GzM7B3aa+Nxk0C7I4VCKVxlynmlUqgxH2J+P8SgeLVtg60s
- /YUR7gbUYXibmeBE5XPOKj5yvDN/sxVkMeDnxAYxXO8GgUvtNisy44wkDUhUlnqR2ULb
- EeWLVjhxptzANya18cA/TQMdwr+gmwpRzmOlDchzTZcH869dDWZozZMjHVoNdRGoGMjN
- 8pHgm9kanlbC15pn292y0nP0g3Uelyw+Lc2muLEDQzyNuduk0sMVf5J2uuGKmumTI0Q/
- v91Q==
+ d=1e100.net; s=20230601; t=1722266123; x=1722870923;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=79xu6GwJt2tOSZjRUkS6x2bp/kSXLFMEOLWAaLfoTjo=;
+ b=qbI6bUidz69rasghwvjSB3/mEkiAW2Z6030VBOc8RdX/pq4txZb9ukUzDytPY4VRwX
+ zkRPxuNaliTbj+o8esZ2vu/z2D0nq8iP4bn6YTl7hJr/azFFQ+20vyLzEKaCrHGTbLCy
+ Nq3fm9Bo1TQ8nZFoKjYxppDcKc07I71+ihhhNfAxU3O9bSgjT2gO3Of1qMKNdobIklOD
+ TUFWDGivDBE/nIpeRdpHApDhXQYbUAsVMRhukCQhgBkGcfE//arbyEszrx7FyKZEButo
+ ZzMRDvEt6F69rv7GGO5vUaF961Tn7MC0dWzF409NPRVDQqYCP5SXvzBUyqktLTLOItD3
+ ikJQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU8KrRDQNsNK/L+j3RvFaaas4QV8OIAQW45TVbrFg9zGsutjTeeGUzdCu12H++Ac0bxjw7YsiXv2Ujzxzp18QQG9FjfRqk=
-X-Gm-Message-State: AOJu0YwUbgh9kryFZSdJ3+ooJYkPRP8RWdF2OheOlfeVSr5s7BxRi77f
- ZQ9IEhzHziVdieYd++HBgLyUMQ3HaxsOSl15e8taQSvCb2ZHVo+cBKpUW8JBVSI=
-X-Google-Smtp-Source: AGHT+IHsL9GVI03IDp731rAG6GHIVAfI+LUj5scFzgtsovFBrefGaBwW73UfGf+Y9O+g5aIIe7Nscg==
-X-Received: by 2002:a17:907:c48e:b0:a77:da14:8409 with SMTP id
- a640c23a62f3a-a7d40135360mr437751466b.48.1722264257006; 
- Mon, 29 Jul 2024 07:44:17 -0700 (PDT)
-Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7acad41976sm518778766b.130.2024.07.29.07.44.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Jul 2024 07:44:15 -0700 (PDT)
-Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 3374A5F92D;
- Mon, 29 Jul 2024 15:44:15 +0100 (BST)
-From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: qemu-devel@nongnu.org
+ AJvYcCVQXEFYZ64oQx9XIWxZmgfTnmTSfWAxbYbUyGPWNr1HAwDWleKt3UrNHigN/t54aIHfVymCMlKMLmxd+ubFsQzUNXRK7OA=
+X-Gm-Message-State: AOJu0Yx3cfWtoLBgBeW/z8Bhb/SNJyPcafq++YfqOWrjtkxgr316oc9F
+ wangxu4MLqkt8LoMehiqCBRBgkavGplEPUqqu1TjxLvkc+i9Mg4eAHleoLELuek=
+X-Google-Smtp-Source: AGHT+IF6nc5Y+e2eOcabdpkPzuygIXcrytI+wRNmlOTnBDBa1WK+EeAGe2UPQng2y/E8HyELyGQXTQ==
+X-Received: by 2002:a05:600c:2143:b0:426:5471:156a with SMTP id
+ 5b1f17b1804b1-42811d86408mr53805875e9.13.1722266123436; 
+ Mon, 29 Jul 2024 08:15:23 -0700 (PDT)
+Received: from [192.168.69.100] ([176.176.173.10])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4280a867e7esm136621325e9.27.2024.07.29.08.15.19
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 29 Jul 2024 08:15:22 -0700 (PDT)
+Message-ID: <15dd571f-e4c2-4eac-a0f2-a056f63843fa@linaro.org>
+Date: Mon, 29 Jul 2024 17:15:18 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 09/14] tests/tcg: move test plugins into tcg subdir
+To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ qemu-devel@nongnu.org
 Cc: Eduardo Habkost <eduardo@habkost.net>, Thomas Huth <thuth@redhat.com>,
  Beraldo Leal <bleal@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Bin Meng <bmeng.cn@gmail.com>, Paolo Bonzini <pbonzini@redhat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  qemu-riscv@nongnu.org, Weiwei Li <liwei1518@gmail.com>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>,
  Peter Maydell <peter.maydell@linaro.org>,
@@ -80,26 +79,23 @@ Cc: Eduardo Habkost <eduardo@habkost.net>, Thomas Huth <thuth@redhat.com>,
  Alexandre Iooss <erdnaxe@crans.org>, Song Gao <gaosong@loongson.cn>,
  David Hildenbrand <david@redhat.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Wainer dos Santos Moschetta <wainersm@redhat.com>,
- =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH 02/14] gitlab: display /packages.txt in build jobs
-Date: Mon, 29 Jul 2024 15:44:02 +0100
-Message-Id: <20240729144414.830369-3-alex.bennee@linaro.org>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240729144414.830369-1-alex.bennee@linaro.org>
+ Wainer dos Santos Moschetta <wainersm@redhat.com>
 References: <20240729144414.830369-1-alex.bennee@linaro.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+ <20240729144414.830369-10-alex.bennee@linaro.org>
+Content-Language: en-US
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20240729144414.830369-10-alex.bennee@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::62d;
- envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x62d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::336;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x336.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -115,48 +111,35 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Daniel P. Berrangé <berrange@redhat.com>
+On 29/7/24 16:44, Alex Bennée wrote:
+> You cannot use plugins without TCG enabled so it doesn't make sense to
+> have them separated off in the test directory structure. While we are
+> at it rename the directory to plugins to reflect the plural nature of
+> the directory and match up with contrib/plugins.
+> 
+> Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+> Suggested-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> ---
+>   MAINTAINERS                               | 2 +-
+>   tests/{plugin => tcg/plugins}/bb.c        | 0
+>   tests/{plugin => tcg/plugins}/empty.c     | 0
+>   tests/{plugin => tcg/plugins}/inline.c    | 0
+>   tests/{plugin => tcg/plugins}/insn.c      | 0
+>   tests/{plugin => tcg/plugins}/mem.c       | 0
+>   tests/{plugin => tcg/plugins}/syscall.c   | 0
+>   tests/avocado/tcg_plugins.py              | 4 ++--
+>   tests/meson.build                         | 2 +-
+>   tests/tcg/Makefile.target                 | 4 ++--
+>   tests/{plugin => tcg/plugins}/meson.build | 6 +++---
+>   11 files changed, 9 insertions(+), 9 deletions(-)
+>   rename tests/{plugin => tcg/plugins}/bb.c (100%)
+>   rename tests/{plugin => tcg/plugins}/empty.c (100%)
+>   rename tests/{plugin => tcg/plugins}/inline.c (100%)
+>   rename tests/{plugin => tcg/plugins}/insn.c (100%)
+>   rename tests/{plugin => tcg/plugins}/mem.c (100%)
+>   rename tests/{plugin => tcg/plugins}/syscall.c (100%)
+>   rename tests/{plugin => tcg/plugins}/meson.build (70%)
 
-The lcitool created containers save the full distro package list
-details into /packages.txt. The idea is that build jobs will 'cat'
-this file, so that the build log has a record of what packages
-were used. This is important info, because when it comes to debug
-failures, the original container is often lost.
-
-Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
-Message-Id: <20240724095505.33544-3-berrange@redhat.com>
-Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
----
- .gitlab-ci.d/buildtest-template.yml  | 1 +
- .gitlab-ci.d/crossbuild-template.yml | 2 ++
- 2 files changed, 3 insertions(+)
-
-diff --git a/.gitlab-ci.d/buildtest-template.yml b/.gitlab-ci.d/buildtest-template.yml
-index 8f7ebfaed8..844c26623d 100644
---- a/.gitlab-ci.d/buildtest-template.yml
-+++ b/.gitlab-ci.d/buildtest-template.yml
-@@ -9,6 +9,7 @@
-     when: always
-   before_script:
-     - JOBS=$(expr $(nproc) + 1)
-+    - cat /packages.txt
-   script:
-     - export CCACHE_BASEDIR="$(pwd)"
-     - export CCACHE_DIR="$CCACHE_BASEDIR/ccache"
-diff --git a/.gitlab-ci.d/crossbuild-template.yml b/.gitlab-ci.d/crossbuild-template.yml
-index d9f81b7061..53051ec793 100644
---- a/.gitlab-ci.d/crossbuild-template.yml
-+++ b/.gitlab-ci.d/crossbuild-template.yml
-@@ -8,6 +8,8 @@
-     key: "$CI_JOB_NAME"
-     when: always
-   timeout: 80m
-+  before_script:
-+    - cat /packages.txt
-   script:
-     - export CCACHE_BASEDIR="$(pwd)"
-     - export CCACHE_DIR="$CCACHE_BASEDIR/ccache"
--- 
-2.39.2
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
 
