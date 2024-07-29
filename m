@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC9E3C3DA61
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jul 2024 14:46:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30C3DC3DA61
+	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jul 2024 14:46:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sYRc5-0004dB-0Y; Mon, 29 Jul 2024 10:44:37 -0400
+	id 1sYRc8-0004rV-2b; Mon, 29 Jul 2024 10:44:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sYRc2-0004Ti-T4
- for qemu-riscv@nongnu.org; Mon, 29 Jul 2024 10:44:34 -0400
-Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e])
+ id 1sYRc6-0004lQ-Q3
+ for qemu-riscv@nongnu.org; Mon, 29 Jul 2024 10:44:38 -0400
+Received: from mail-ed1-x536.google.com ([2a00:1450:4864:20::536])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sYRbt-0008Pm-Hf
- for qemu-riscv@nongnu.org; Mon, 29 Jul 2024 10:44:34 -0400
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-5b391c8abd7so810393a12.2
- for <qemu-riscv@nongnu.org>; Mon, 29 Jul 2024 07:44:24 -0700 (PDT)
+ id 1sYRbv-0008Rz-VU
+ for qemu-riscv@nongnu.org; Mon, 29 Jul 2024 10:44:38 -0400
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-59589a9be92so5517708a12.2
+ for <qemu-riscv@nongnu.org>; Mon, 29 Jul 2024 07:44:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1722264263; x=1722869063; darn=nongnu.org;
+ d=linaro.org; s=google; t=1722264266; x=1722869066; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=k68dUaa5yNSOgGnmccLcS4zpOsOezQjGJywa7D7FDBg=;
- b=BoV095cys7xqWDm8wqPwaBpdfNGen9D8k02VQOZjkxN/vb2dSOODpfQFF72ROMHJQL
- 1KO0wZtX/DPNqXsaWigkSjzZm3F+T0m5RQ/UDJspmHZEctQLDynD6D0hLHXF3P9N+Zxz
- 0Z4aaY2XHfG2oizP/NxMaEvw6xEB61cqlJaPGjgTDCAF1mBC3vCxtrPbFFP8yrhp7AUN
- MZ0/dLaAIe5Cr/qi8xG6DNjK1ItgMLrxFSiFJWsP288srNXo+zhOrGVo33ihnCj39qK/
- zl+sqFM/mY6aiO9G6/9OK8Aqy5NCtfjkmNZmZyBpIUxO5RJhY1oOmcZ/QSiJkm4LHONF
- wdjw==
+ bh=PtcZqFWHrEGoL41FTohMyKEPDwyICpuVF7RbypBJq3A=;
+ b=QaqrMGb3A82eoqzpBYuFVqSJk45CFX48XCphzCvrgkunueHPd8enJpsmB7y42XNQlS
+ 4vlVI+Jriv+km8WjMnGRe6QplxQi+IXu+xprRyqP306rCAg5f3ETM2NG1aCcD/ZrDSGz
+ PbS6cPCiWyDfmksMcGbgBHrWRICKoQIOYw7RadoCx2n7VfjVuQMBkRW9eeULv2/nVq3Z
+ ajofHPPRUog/LgeEvlHHj+HjVzgno7S47xVqca7tm5E69tGtYSYLp49KAiKspEUOkb1t
+ N+3ePgiyzgUjhjSRx/p7WUfsxryNNl6KxSi1chrV8LH86PKW6Vw16SpZVjd6Cr9PqLur
+ +Z1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722264263; x=1722869063;
+ d=1e100.net; s=20230601; t=1722264266; x=1722869066;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=k68dUaa5yNSOgGnmccLcS4zpOsOezQjGJywa7D7FDBg=;
- b=Lk7BkCb9cP7Qc3hIs7/XLU+M9pfZgRZrXDhKz0d6KtfCP+DN6XhDJY/iL5f6naHvAH
- kw32q1hQKvQ7AqMglF4bUBovIWbNU/7GDIZhyDtCAkAN5e+ZZNBakvHHH3cM+L5wPz+x
- 4Bg1tONwWTMjaPcSWZlbK+nERWDX4pWJhqMhpTyEmStMnP7gFP67voiX0nmttwlbmXWa
- T2tWmT1xm1+lBuICKPH9tYElnBiezoK/PRb/9+nw9RPuUJYqYKHvrZROjtacyCwxO+zX
- FD35HptJSrIkkjgtiuAEu5EG/fUmcrzDYcvgQLr4Tz1bfgxHZ5EA1H10GyVWIhLQYdVY
- fzjA==
+ bh=PtcZqFWHrEGoL41FTohMyKEPDwyICpuVF7RbypBJq3A=;
+ b=hA7uXIuFP/oJuw2syOjN7uGpko4z6QfUJmYX6Gca6qd8BL8BD/1Cusf0PH48V5fLBA
+ J2rEL6Dykx9KlKv1ssR9SiYEoiyjCAZQuIicr2HWmqZR35SUcDW/5iSYyGW+m6lldhlL
+ PdlMT8wNMRHSUeSAHK4VcyclU23KjXbIPkl7FpRHht34Q9zp+H/hSgnHqLgLNoontRku
+ FokXsDTojaQTymTtmBM5ilKX8ewL9uJy2AK2UXsqIkMVbo8zbi0TR71pEsjGfF1Das+N
+ 6uklyLnJQ0URUVcDsZb3XYu/BIsix8EDGaOuvjuTb8B9kGWcpAYIZuq6D4+ummL13/po
+ JvXA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWqPGt1IcxzWtA0hWqzB67yW29FDCCdKCxJhSSKdsmNyfmA5uEFZlUvZTdSuSzgcj4JgAIsfSdjqLXzj+fVrPV/C2jflfA=
-X-Gm-Message-State: AOJu0Yz/OTspM+7EPtggeHXNC3cm1rM3dioXrA11YBihYhJVulJax1Wh
- g9R2HP4dRwsraqSXAPNFnEmvqthIxlxsdkB9T2OUmHU20L2nmaoWzvaSgid3Yz4=
-X-Google-Smtp-Source: AGHT+IHisnIBoJDnsJGlOaz1G2ZgOZJJy3ylebaI2AyDcFA0RiUAwTnoNA5VQHG6BKW8J01ncI8GJw==
-X-Received: by 2002:a17:907:944b:b0:a7a:bae8:f29e with SMTP id
- a640c23a62f3a-a7d400a0385mr487093366b.29.1722264262589; 
- Mon, 29 Jul 2024 07:44:22 -0700 (PDT)
+ AJvYcCWqK3+i8bAqOL4lAMm4W6ENTtZG6U1J2rOtovRdTj4kNL42PNM6ChGdkol/AxUhsVRq66W536rre/tc6EimgqzX9Wbe3yM=
+X-Gm-Message-State: AOJu0Yw3s8WLz4fcHIkmVGBiN2axe8shQ9joVntSxj7JTnwEIGGaxRaP
+ eCyA8Ls/5nfeqFTF7gmymzxMvNbSBqxuVpI12xZG7WGaWWpvUo2MzO27J5edxyk=
+X-Google-Smtp-Source: AGHT+IEfRp6u/PEriMXjt4MOemKUcELeyZUUP1+B68QPt6BYX7+H57vsJn7bbn9HRz217tQp4Q2OCA==
+X-Received: by 2002:a05:6402:35d6:b0:5a2:2fa5:f146 with SMTP id
+ 4fb4d7f45d1cf-5b021f0dcfbmr5499561a12.28.1722264266053; 
+ Mon, 29 Jul 2024 07:44:26 -0700 (PDT)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7acad902e2sm520163766b.146.2024.07.29.07.44.17
+ 4fb4d7f45d1cf-5ac6359392bsm5837519a12.33.2024.07.29.07.44.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Jul 2024 07:44:19 -0700 (PDT)
+ Mon, 29 Jul 2024 07:44:21 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id CC9615FA08;
- Mon, 29 Jul 2024 15:44:15 +0100 (BST)
+ by draig.lan (Postfix) with ESMTP id 740E55FA14;
+ Mon, 29 Jul 2024 15:44:16 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Eduardo Habkost <eduardo@habkost.net>, Thomas Huth <thuth@redhat.com>,
@@ -81,17 +81,17 @@ Cc: Eduardo Habkost <eduardo@habkost.net>, Thomas Huth <thuth@redhat.com>,
  David Hildenbrand <david@redhat.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Wainer dos Santos Moschetta <wainersm@redhat.com>
-Subject: [PATCH 08/14] tests/avocado: remove tcg_plugins virt_mem_icount test
-Date: Mon, 29 Jul 2024 15:44:08 +0100
-Message-Id: <20240729144414.830369-9-alex.bennee@linaro.org>
+Subject: [PATCH 14/14] plugin/loader: handle basic help query
+Date: Mon, 29 Jul 2024 15:44:14 +0100
+Message-Id: <20240729144414.830369-15-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240729144414.830369-1-alex.bennee@linaro.org>
 References: <20240729144414.830369-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
- envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x52e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::536;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x536.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -114,63 +114,42 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Since 4f8d886085 (tests/plugin/mem: migrate to new per_vcpu API) this
-test was skipping due to not being able to run callback and inline
-memory instrumentation at the same time.
-
-However b480f7a621 (tests/plugin: add test plugin for inline
-operations) tests for all this matching up so we don't need the
-additional complexity in avocado.
-
-Remove the test.
+As the list of options isn't fixed we do all the parsing by hand.
+Without any named arguments we automatically fill the "file" option
+with the value give so check if it is requesting help and dump some
+basic usage text.
 
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Fixes: 4f8d886085
 ---
- tests/avocado/tcg_plugins.py | 33 ---------------------------------
- 1 file changed, 33 deletions(-)
+ plugins/loader.c | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
 
-diff --git a/tests/avocado/tcg_plugins.py b/tests/avocado/tcg_plugins.py
-index 15fd87b2c1..a930fca2c0 100644
---- a/tests/avocado/tcg_plugins.py
-+++ b/tests/avocado/tcg_plugins.py
-@@ -120,36 +120,3 @@ def test_aarch64_virt_insn_icount(self):
-             else:
-                 count = int(m.group("count"))
-                 self.log.info(f"Counted: {count} instructions")
--
--    def test_aarch64_virt_mem_icount(self):
--        """
--        :avocado: tags=accel:tcg
--        :avocado: tags=arch:aarch64
--        :avocado: tags=machine:virt
--        :avocado: tags=cpu:cortex-a53
--        """
--        kernel_path = self._grab_aarch64_kernel()
--        kernel_command_line = (self.KERNEL_COMMON_COMMAND_LINE +
--                               'console=ttyAMA0')
--        console_pattern = 'Kernel panic - not syncing: VFS:'
--
--        plugin_log = tempfile.NamedTemporaryFile(mode="r+t", prefix="plugin",
--                                                 suffix=".log")
--
--        self.run_vm(kernel_path, kernel_command_line,
--                    "tests/plugin/libmem.so,inline=true,callback=true", plugin_log.name,
--                    console_pattern,
--                    args=('-icount', 'shift=1'))
--
--        with plugin_log as lf, \
--             mmap.mmap(lf.fileno(), 0, access=mmap.ACCESS_READ) as s:
--            m = re.findall(br"mem accesses: (?P<count>\d+)", s)
--            if m is None or len(m) != 2:
--                self.fail("no memory access counts found")
--            else:
--                inline = int(m[0])
--                callback = int(m[1])
--                if inline != callback:
--                    self.fail("mismatched access counts")
--                else:
--                    self.log.info(f"Counted {inline} memory accesses")
+diff --git a/plugins/loader.c b/plugins/loader.c
+index 513a429c57..ebc01da9c6 100644
+--- a/plugins/loader.c
++++ b/plugins/loader.c
+@@ -18,6 +18,7 @@
+ #include "qemu/osdep.h"
+ #include "qemu/error-report.h"
+ #include "qemu/config-file.h"
++#include "qemu/help_option.h"
+ #include "qapi/error.h"
+ #include "qemu/lockable.h"
+ #include "qemu/option.h"
+@@ -98,7 +99,12 @@ static int plugin_add(void *opaque, const char *name, const char *value,
+     bool is_on;
+     char *fullarg;
+ 
+-    if (strcmp(name, "file") == 0) {
++    if (is_help_option(value)) {
++        printf("Plugin options\n");
++        printf("  file=<path/to/plugin.so>\n");
++        printf("  plugin specific arguments\n");
++        exit(0);
++    } else if (strcmp(name, "file") == 0) {
+         if (strcmp(value, "") == 0) {
+             error_setg(errp, "requires a non-empty argument");
+             return 1;
 -- 
 2.39.2
 
