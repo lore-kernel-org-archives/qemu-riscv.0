@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A81C4C3DA61
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jul 2024 14:47:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A6E1C3DA4A
+	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jul 2024 14:47:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sYRby-00045N-Io; Mon, 29 Jul 2024 10:44:30 -0400
+	id 1sYRc1-0004OT-Nx; Mon, 29 Jul 2024 10:44:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sYRbu-0003qj-CD
- for qemu-riscv@nongnu.org; Mon, 29 Jul 2024 10:44:26 -0400
-Received: from mail-ed1-x52d.google.com ([2a00:1450:4864:20::52d])
+ id 1sYRbz-0004C5-3x
+ for qemu-riscv@nongnu.org; Mon, 29 Jul 2024 10:44:31 -0400
+Received: from mail-ej1-x629.google.com ([2a00:1450:4864:20::629])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sYRbp-0008Ns-6e
- for qemu-riscv@nongnu.org; Mon, 29 Jul 2024 10:44:26 -0400
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-5a156556fb4so5753938a12.3
- for <qemu-riscv@nongnu.org>; Mon, 29 Jul 2024 07:44:20 -0700 (PDT)
+ id 1sYRbr-0008P8-M5
+ for qemu-riscv@nongnu.org; Mon, 29 Jul 2024 10:44:30 -0400
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-a7a94478a4eso731721566b.1
+ for <qemu-riscv@nongnu.org>; Mon, 29 Jul 2024 07:44:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1722264260; x=1722869060; darn=nongnu.org;
+ d=linaro.org; s=google; t=1722264262; x=1722869062; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TdNyQjx9vy1t8eoHD/QTCnhZHijRSE/LPFIBD5gVquQ=;
- b=lpFmL4de2DiDohtCspV95InlqOV/tmh0lKc85jYntv+dVHAZLP4ewt7gNmKMh2Gnq5
- +kD3IJFYqbZugQrwZBTmTcwZrTBYo88eMGjABqsr65/tntJKY3oxj7jxQmwaJqTRihlP
- dZjrmOvRcyOmVPJry5PC61Z3eli9dL3mMPYo04dYPnHWW5l/LzdjJx+E2eNETZ05A3pt
- cM0UPHUXduCVmpZtDow6EWD35an35Mo1/Okp931pTCg9+gIXz8yobrShPEEtHyZ/lhG6
- 0k0/UeU7QQ5cCuJ5XwgKCtuDrhls87JJSd6qgq/9CuPMMjzofGwc8XoXFtDOWiuOdVrT
- QM5w==
+ bh=GENiq4e8KZQrz58joiPbir+V04pOx1NyhbMnGqm72qs=;
+ b=TnCSR4Md/GxcZyni38dY5d2R1F1Y8UPR2aZp3JYXwZDsdNs1xu75Ulqi2/EWkOXYG8
+ RrX7cFplt30ozV/M7BBllGr1bErmZQ2f8Dbwhr7aPC3LggphUS+oIW0U9HmWy7gamASi
+ 4Gtylewpt/nyX2xLcuWSC7EAY/QtMOjKfins9Td5760Go5+lGwe+Kxpl2/a1B/5kWd7E
+ udNrf9zIVLYxsukE0sHd7r+vHJoGULnePrJjn6sBZICzi0urFN6JReaPa69ig9muVNc6
+ G4BA1ncwzpcXESjNY/G7K2dmT0FwV4lGRbVO14lhUrilZmRVz7d9lYxvx4plp+zLZIWQ
+ IPIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722264260; x=1722869060;
+ d=1e100.net; s=20230601; t=1722264262; x=1722869062;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=TdNyQjx9vy1t8eoHD/QTCnhZHijRSE/LPFIBD5gVquQ=;
- b=WiggW9Qj6iGDMXekhKtQbVmoeQVVpYEpRA2rHiBQc443JscbYLIg2njOfY1Tun8VnU
- t824W4vVGJBWRweg0ylX6xK06bCYnoHu45i7QZ+dfvJDXH9/ykvtAEbhmDFt5UP9jOgs
- qoqFa4mgz6bmjHpWNFdcGpydEiTX0+mwqu0K1k38LxWNClo46x3lFHa2l2v6LKvyF9if
- tJHOlOycZ7tzqKqLh4TPyUns6scPVis6SmniC2NQuYYSBjDswCQYEn7AALoNmf2tweGW
- yChBN6zYzj8iSfcg35nKiRL1UDlGWC0aHkECLlVkjSo20a0cY3wD4bwVJyJwZshlp/Ye
- V2ag==
+ bh=GENiq4e8KZQrz58joiPbir+V04pOx1NyhbMnGqm72qs=;
+ b=AvbpqlRO95wMjbUzB2gDHxVALO77l9f/74FZG0Uo35+2LH/EC6AN+1bK7RyV0KKHyR
+ gkOZ8TTt7IEgdvMeD5Ypexb6ekP7g8Rwq8lhEV8dNWxaKCxSwLhxKz5eSQB9bRtIvaBq
+ Fz0dw0YhZSR7aqSyN6XXWJ+lpuQRJxYyaIhAXAkIbzHrqji8uZu97OgS1sFIapNr4yw8
+ QB0WDx1mJaH9GMXRvTSyEcmN8cbxQyVq4p3ujqMx/NwYWIQsKYMQS90i2KlKyvdunwXE
+ 5X2+TJnT98FOO5Rvi0zCl61QuU6txl2El1x8ACBwkvWHgpXdrnExNwxm/Deqp7PyLj8u
+ uUhQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVKaN9xonjNtGGhYmpe17wRzleCH/VjBSf9LM3lxPAvpcf2gMxMQEeq2j6yPVAk11I28oF9r8umN74D7p3n9KeLT8y+elg=
-X-Gm-Message-State: AOJu0Yyp49BTltg2Gnsu/SBM2Ii+vjD/Gt2rEBEq4p7tTaHA9wDXbZBP
- KxBU9o8cf2c+o5ia84FFhWYpIWHct/Wphl+uU4/mvsPu5c+oeQyY/1Ei/0083e0=
-X-Google-Smtp-Source: AGHT+IHHhSkKmpbbjVHqoyAkSBJA735SFd4BmTgn67DBvO4GcXVK7szvrETNIxZkj23mIXlWB4PcGQ==
-X-Received: by 2002:a05:6402:2681:b0:5af:758a:6929 with SMTP id
- 4fb4d7f45d1cf-5b022003a1cmr6077793a12.23.1722264259275; 
- Mon, 29 Jul 2024 07:44:19 -0700 (PDT)
+ AJvYcCVQ1+OBExGjYJs6Qss8Dc9NUpKOcLae9AB9L/WJjeakUV6QanTmYI/uEwDlMGZZx9xKgyIlhk5poOUaXNIydp83Ke+K9M0=
+X-Gm-Message-State: AOJu0Yx+cxogxq71zSnNS9GZuIlHMBRDK+SpFMsx5mYoyccLlM6M4Qsr
+ LktsQPPX3QXK8kP/aTQqhEe2KUBgNZwgHs2Sk6eEyygMu34Ek3wKV5tf8TH37oI=
+X-Google-Smtp-Source: AGHT+IG0/8LbXJz3R5yJW31iuocEeDzsi0u8V4yfCpH41bAtspf5nJ+467kKd1hi8/985d+hriSNzQ==
+X-Received: by 2002:a17:907:7e9f:b0:a77:ce4c:8c9c with SMTP id
+ a640c23a62f3a-a7d3f85b7b6mr879809966b.8.1722264261746; 
+ Mon, 29 Jul 2024 07:44:21 -0700 (PDT)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5ac6377e06fsm5901911a12.28.2024.07.29.07.44.16
+ a640c23a62f3a-a7acab4de85sm515866566b.52.2024.07.29.07.44.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Jul 2024 07:44:17 -0700 (PDT)
+ Mon, 29 Jul 2024 07:44:18 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 9DEE25F9F3;
+ by draig.lan (Postfix) with ESMTP id B4C765FA06;
  Mon, 29 Jul 2024 15:44:15 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -81,24 +81,24 @@ Cc: Eduardo Habkost <eduardo@habkost.net>, Thomas Huth <thuth@redhat.com>,
  David Hildenbrand <david@redhat.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Wainer dos Santos Moschetta <wainersm@redhat.com>
-Subject: [PATCH 06/14] docs/devel: update the testing introduction
-Date: Mon, 29 Jul 2024 15:44:06 +0100
-Message-Id: <20240729144414.830369-7-alex.bennee@linaro.org>
+Subject: [PATCH 07/14] docs/devel: document how to run individual TCG tests
+Date: Mon, 29 Jul 2024 15:44:07 +0100
+Message-Id: <20240729144414.830369-8-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240729144414.830369-1-alex.bennee@linaro.org>
 References: <20240729144414.830369-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::52d;
- envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x52d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::629;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x629.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -114,49 +114,39 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Move the mention of "check-help" up to the intro text and also mention
-the meson test integration.
+Since 6f6ca067d2 (tests/tcg: add some help output for running
+individual tests) we made it easier to run individual tests for a
+given architecture. Lets reference that in the developer
+documentation.
 
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- docs/devel/testing.rst | 21 ++++++++++++++++++---
- 1 file changed, 18 insertions(+), 3 deletions(-)
+ docs/devel/testing.rst | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
 diff --git a/docs/devel/testing.rst b/docs/devel/testing.rst
-index 23d3f44f52..b984c5dd26 100644
+index b984c5dd26..af73d3d64f 100644
 --- a/docs/devel/testing.rst
 +++ b/docs/devel/testing.rst
-@@ -3,13 +3,28 @@
- Testing in QEMU
- ===============
+@@ -1490,6 +1490,19 @@ And run with::
+ Adding ``V=1`` to the invocation will show the details of how to
+ invoke QEMU for the test which is useful for debugging tests.
  
--This document describes the testing infrastructure in QEMU.
-+QEMU's testing infrastructure is fairly complex as it covers
-+everything from unit testing and exercising specific sub-systems all
-+the way to full blown acceptance tests. To get an overview of the
-+tests you can run ``make check-help`` from either the source or build
-+tree.
++Running individual tests
++~~~~~~~~~~~~~~~~~~~~~~~~
 +
-+Most (but not all) tests are also integrated into the meson build
-+system so can be run directly from the build tree, for example:
++Tests can also be run directly from the test build directory. If you
++run ``make help`` from the test build directory you will get a list of
++all the tests that can be run. Please note that same binaries are used
++in multiple tests, for example::
 +
-+.. code::
++  make run-plugin-test-mmap-with-libinline.so
 +
-+  [./pyvenv/bin/]meson test --suite qemu:softfloat
++will run the mmap test with the ``libinline.so`` TCG plugin. The
++gdbstub tests also re-use the test binaries but while exercising gdb.
 +
-+will run just the softfloat tests.
-+
-+The rest of this document will cover the details for specific test
-+groups.
- 
- Testing with "make check"
- -------------------------
- 
--The "make check" testing family includes most of the C based tests in QEMU. For
--a quick help, run ``make check-help`` from the source tree.
-+The "make check" testing family includes most of the C based tests in QEMU.
- 
- The usual way to run these tests is:
+ TCG test dependencies
+ ~~~~~~~~~~~~~~~~~~~~~
  
 -- 
 2.39.2
