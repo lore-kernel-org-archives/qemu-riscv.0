@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44FF6C3DA7E
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jul 2024 14:46:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14484C3DA4A
+	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jul 2024 14:46:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sYRc6-0004iE-1r; Mon, 29 Jul 2024 10:44:38 -0400
+	id 1sYRbu-0003p2-0D; Mon, 29 Jul 2024 10:44:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sYRc4-0004Zb-5u
- for qemu-riscv@nongnu.org; Mon, 29 Jul 2024 10:44:36 -0400
-Received: from mail-ej1-x631.google.com ([2a00:1450:4864:20::631])
+ id 1sYRbs-0003ju-Qd
+ for qemu-riscv@nongnu.org; Mon, 29 Jul 2024 10:44:24 -0400
+Received: from mail-ej1-x62b.google.com ([2a00:1450:4864:20::62b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sYRbu-0008Qs-2b
- for qemu-riscv@nongnu.org; Mon, 29 Jul 2024 10:44:35 -0400
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-a7d2a9a23d9so357139666b.3
- for <qemu-riscv@nongnu.org>; Mon, 29 Jul 2024 07:44:25 -0700 (PDT)
+ id 1sYRbn-0008Mb-6b
+ for qemu-riscv@nongnu.org; Mon, 29 Jul 2024 10:44:24 -0400
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-a77ec5d3b0dso428488766b.0
+ for <qemu-riscv@nongnu.org>; Mon, 29 Jul 2024 07:44:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1722264264; x=1722869064; darn=nongnu.org;
+ d=linaro.org; s=google; t=1722264257; x=1722869057; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Pge7513nKBshjtyBdFZgBKyCSQ2SDh37JkBFhtHAoCg=;
- b=Z2CEoM92tEPrgbCv3G50GCaNNquDrhaqb4Z0df7ZkDIsSxjJ0ETU21NAsdmg+nILnL
- gVxhZnsv3UI+F/J508GHpeIHpAb989zcwmX1YaWL3CiKt4+TiMvu9USOw9a0OgZMthrY
- 8mTAspm3gqmGpJ9s9OnUxAa7uw/3TNUZy9URbE7UgA6we/4K/snleCP1FGMqLpQf0iqm
- wKR2i6BvKfmNB1cIWULU/wV3GMMDuKd8GXgoaBeHSnQHLNR8ufHS1dxlH9Pwl8wNOoVW
- vCE8yQkTzabAwJr+1DHmHt/2hwi6UlugfNKHVf30pt/oFK6qKgtzIj1PV90gsOtCvqZY
- pO/g==
+ bh=j5fFJhx+vMgfG1V76vPOjIITII9gIRW1UvsbXoaqfhQ=;
+ b=Gp9o/a0FRpYF53rV+54dRNr8gvIGVLLmNgQUKjFo+INqZE4iO5A7f5YPXh4GLQpiCK
+ 9BZsLTYbjiQfGJmUidGRUHgbeLsrB/8NPyzsqi199odIDxD1HXvo4Y1z3KJg4RseDTlU
+ c+q38a+70YCYFFDnQYUXQ5h+nIxasRmwqppAs1pHG0KP0sb/Ora11i/AxaqbegTYw2ET
+ fRvHFtVsXFxWTDUV9KaBrSuLaNRsrUGO5Ks0OshjMGPLILMbcgNIgf6UwRDvAHIyG7ZU
+ u/me/56R3eIp+R0YPBInYTv+THKuYivSRsPz+yvXCrTSS6B/LCB9sCbIgrY71T6VaruC
+ vJBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722264264; x=1722869064;
+ d=1e100.net; s=20230601; t=1722264257; x=1722869057;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Pge7513nKBshjtyBdFZgBKyCSQ2SDh37JkBFhtHAoCg=;
- b=WbLahzU6UyNksXFIg9I4HM0apRqqH/Mv1Jmvwwc9eCqoIcB1kag0y9JaO1pbrxlIyf
- pRbPxkVHHlnrk28EmlH5tSO5AdZ0Eh71ZzUFMtsvGJ0lx5BwZwp1z4lL58B2AAdn7nAx
- dnkzLqptYLNGP3mOcz7tn7gd2bNVG+zBI/8iDVdVXa1kNaa6Te9BnObULG4a0OTou656
- n8kPxIJYyxBuldKF4w8pvK/QiHIPNNgsphcsv2ffpwmi227N0zt9eQq+5cuT72wDSzpI
- HCRxcS6nN+6tEjGDow0D5XxWCv5hCTPQZhs0aqX2lz9BeJS3pQNMkis03OZwt0yLH6hk
- WFbg==
+ bh=j5fFJhx+vMgfG1V76vPOjIITII9gIRW1UvsbXoaqfhQ=;
+ b=bbL456rHivGK22qZ03BG1D3ChpyZGmq1Y6h5nxSqcQigpFdXLHWjUXavJ3+la3to5N
+ fCSbI0VO3M9XbsfWvhS2jmrQVM+L6M64w+8pEeY/LMzGtRq3QHOMe/Pbu5WvCFtHLfqc
+ ucTA2T4uEdYqYCkzDZC/3oRyOs74Zp0R+8rBIpQaPaxOwz0fPQqh/7QWA6jV9eX1hvQP
+ mhlAw5b8zNaBSAvMd1X1Tq+XRrm65x7ys/JW31mrlGGHm1zkkv6Jr/b82EydqFwXtGAq
+ y9xkkF63akLPvaBWjg75tvkMTQKnf07TgCBQEJeD5ZhFSeRNW9O7X0CxZ7WmVTMiwE0v
+ j8vg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWGjViGPmSKMkMSNP3G1Tcdlagx6twnpHWkBnxPk1yYyMean3MEBnftVTEh1uyfOifEG79opkMs6bN2zGLbzdwEfrBIf0s=
-X-Gm-Message-State: AOJu0YxKybvgLjxpaMvWHPoLiMuKfpaRlarWxfkadenJJ6ukLwWirs2o
- rwQXr1E48MTAETdc+5pe2b6pj4Vv5cr7sAd6z4I4gXvDtBP3rdPDM65DwDUmNkA=
-X-Google-Smtp-Source: AGHT+IEsWFJLPqGVDsePmlOLfsx8ltOW1GIOJELld/RlChVzU5ZaLow5qjhWmwCesZntknV+adzZ2Q==
-X-Received: by 2002:a17:907:96a0:b0:a72:7da4:267c with SMTP id
- a640c23a62f3a-a7d3ffa612bmr624237466b.12.1722264264369; 
- Mon, 29 Jul 2024 07:44:24 -0700 (PDT)
+ AJvYcCVMQmwoxe2iouEWuzm4hzpXQI5gNe7mUjlTMwT+juPw6U0Zfx83XcNqa4yenN2Lge6Dg51OR9lR4bw9RB2PftGgxfyZ+Zs=
+X-Gm-Message-State: AOJu0Yyoa9+HT+k/Ihwoeqsygfvw3ymzy9iNoZb6OJy/5Y+02mLwYcS2
+ 7WwQCocPifxm/xe9aKTSYeL2qgIISO8uk284ba6HE49PYSfmX7CNipaf0djmg/I=
+X-Google-Smtp-Source: AGHT+IFxoNmmMsy1h/7fYoWEIEUAYxhhkKCm/iVRs9WvorySlcHEQ9jIDr2TPCGtWEZlVGMSwgJ/fw==
+X-Received: by 2002:a17:907:84e:b0:a7d:26ff:aeb0 with SMTP id
+ a640c23a62f3a-a7d4000b79bmr474456366b.30.1722264256673; 
+ Mon, 29 Jul 2024 07:44:16 -0700 (PDT)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7acab23f62sm521017766b.16.2024.07.29.07.44.17
+ a640c23a62f3a-a7acad411bcsm511230266b.109.2024.07.29.07.44.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Jul 2024 07:44:19 -0700 (PDT)
+ Mon, 29 Jul 2024 07:44:15 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 2B5B55FA0F;
- Mon, 29 Jul 2024 15:44:16 +0100 (BST)
+ by draig.lan (Postfix) with ESMTP id 1C0A65F8DA;
+ Mon, 29 Jul 2024 15:44:15 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Eduardo Habkost <eduardo@habkost.net>, Thomas Huth <thuth@redhat.com>,
@@ -80,19 +80,20 @@ Cc: Eduardo Habkost <eduardo@habkost.net>, Thomas Huth <thuth@redhat.com>,
  Alexandre Iooss <erdnaxe@crans.org>, Song Gao <gaosong@loongson.cn>,
  David Hildenbrand <david@redhat.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Wainer dos Santos Moschetta <wainersm@redhat.com>
-Subject: [PATCH 11/14] contrib/plugins/cache.c: Remove redundant check of
- l2_access
-Date: Mon, 29 Jul 2024 15:44:11 +0100
-Message-Id: <20240729144414.830369-12-alex.bennee@linaro.org>
+ Wainer dos Santos Moschetta <wainersm@redhat.com>,
+ =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
+Subject: [PATCH 01/14] gitlab: record installed packages in /packages.txt in
+ containers
+Date: Mon, 29 Jul 2024 15:44:01 +0100
+Message-Id: <20240729144414.830369-2-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240729144414.830369-1-alex.bennee@linaro.org>
 References: <20240729144414.830369-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::631;
- envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x631.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62b;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x62b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -115,37 +116,113 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Peter Maydell <peter.maydell@linaro.org>
+From: Daniel P. Berrangé <berrange@redhat.com>
 
-In append_stats_line(), we have an expression
-   l2_access ? l2_miss_rate : 0.0
-But this is inside an if (l2_access && l2_misses) { ... } block,
-so Coverity points out that the false part of the ?: is dead code.
+The lcitool created containers save the full distro package list
+details into /packages.txt. The idea is that build jobs will 'cat'
+this file, so that the build log has a record of what packages
+were used. This is important info, because when it comes to debug
+failures, the original container is often lost.
 
-Remove the unnecessary test.
+This extends the manually written dockerfiles to also create the
+/packages.txt file.
 
-Resolves: Coverity CID 1522458
-Signed-off-by: Peter Maydell <peter.maydell@linaro.org>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Message-Id: <20240725164851.1930964-1-peter.maydell@linaro.org>
+Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
+Message-Id: <20240724095505.33544-2-berrange@redhat.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- contrib/plugins/cache.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ tests/docker/dockerfiles/debian-all-test-cross.docker    | 3 ++-
+ tests/docker/dockerfiles/debian-hexagon-cross.docker     | 3 ++-
+ tests/docker/dockerfiles/debian-legacy-test-cross.docker | 3 ++-
+ tests/docker/dockerfiles/debian-loongarch-cross.docker   | 3 ++-
+ tests/docker/dockerfiles/debian-tricore-cross.docker     | 3 ++-
+ tests/docker/dockerfiles/debian-xtensa-cross.docker      | 3 ++-
+ 6 files changed, 12 insertions(+), 6 deletions(-)
 
-diff --git a/contrib/plugins/cache.c b/contrib/plugins/cache.c
-index c5c8ac75a9..512ef6776b 100644
---- a/contrib/plugins/cache.c
-+++ b/contrib/plugins/cache.c
-@@ -558,7 +558,7 @@ static void append_stats_line(GString *line,
-                                "  %-12" PRIu64 " %-11" PRIu64 " %10.4lf%%",
-                                l2_access,
-                                l2_misses,
--                               l2_access ? l2_miss_rate : 0.0);
-+                               l2_miss_rate);
-     }
+diff --git a/tests/docker/dockerfiles/debian-all-test-cross.docker b/tests/docker/dockerfiles/debian-all-test-cross.docker
+index 6cc38a3633..8ab244e018 100644
+--- a/tests/docker/dockerfiles/debian-all-test-cross.docker
++++ b/tests/docker/dockerfiles/debian-all-test-cross.docker
+@@ -62,7 +62,8 @@ RUN DEBIAN_FRONTEND=noninteractive eatmydata \
+         gcc-s390x-linux-gnu \
+         libc6-dev-s390x-cross \
+         gcc-sparc64-linux-gnu \
+-        libc6-dev-sparc64-cross
++        libc6-dev-sparc64-cross && \
++        dpkg-query --showformat '${Package}_${Version}_${Architecture}\n' --show > /packages.txt
  
-     g_string_append(line, "\n");
+ 
+ ENV QEMU_CONFIGURE_OPTS --disable-system --disable-docs --disable-tools
+diff --git a/tests/docker/dockerfiles/debian-hexagon-cross.docker b/tests/docker/dockerfiles/debian-hexagon-cross.docker
+index f2d40f2dee..23152b4918 100644
+--- a/tests/docker/dockerfiles/debian-hexagon-cross.docker
++++ b/tests/docker/dockerfiles/debian-hexagon-cross.docker
+@@ -33,7 +33,8 @@ RUN apt-get update && \
+     ln -s /usr/bin/ccache /usr/libexec/ccache-wrappers/c++ && \
+     ln -s /usr/bin/ccache /usr/libexec/ccache-wrappers/cc && \
+     ln -s /usr/bin/ccache /usr/libexec/ccache-wrappers/g++ && \
+-    ln -s /usr/bin/ccache /usr/libexec/ccache-wrappers/gcc
++    ln -s /usr/bin/ccache /usr/libexec/ccache-wrappers/gcc && \
++    dpkg-query --showformat '${Package}_${Version}_${Architecture}\n' --show > /packages.txt
+ 
+ RUN /usr/bin/pip3 install tomli
+ 
+diff --git a/tests/docker/dockerfiles/debian-legacy-test-cross.docker b/tests/docker/dockerfiles/debian-legacy-test-cross.docker
+index d75e0b85e2..5a6616b7d3 100644
+--- a/tests/docker/dockerfiles/debian-legacy-test-cross.docker
++++ b/tests/docker/dockerfiles/debian-legacy-test-cross.docker
+@@ -36,7 +36,8 @@ RUN DEBIAN_FRONTEND=noninteractive eatmydata \
+         python3-pip \
+         python3-setuptools \
+         python3-venv \
+-        python3-wheel
++        python3-wheel && \
++        dpkg-query --showformat '${Package}_${Version}_${Architecture}\n' --show > /packages.txt
+ 
+ RUN /usr/bin/pip3 install tomli
+ 
+diff --git a/tests/docker/dockerfiles/debian-loongarch-cross.docker b/tests/docker/dockerfiles/debian-loongarch-cross.docker
+index 6a9197528b..79eab5621e 100644
+--- a/tests/docker/dockerfiles/debian-loongarch-cross.docker
++++ b/tests/docker/dockerfiles/debian-loongarch-cross.docker
+@@ -32,7 +32,8 @@ RUN apt-get update && \
+         python3-pip \
+         python3-setuptools \
+         python3-venv \
+-        python3-wheel
++        python3-wheel && \
++        dpkg-query --showformat '${Package}_${Version}_${Architecture}\n' --show > /packages.txt
+ 
+ RUN /usr/bin/pip3 install tomli
+ 
+diff --git a/tests/docker/dockerfiles/debian-tricore-cross.docker b/tests/docker/dockerfiles/debian-tricore-cross.docker
+index 16276aa21d..479b4d6eba 100644
+--- a/tests/docker/dockerfiles/debian-tricore-cross.docker
++++ b/tests/docker/dockerfiles/debian-tricore-cross.docker
+@@ -34,7 +34,8 @@ RUN apt update && \
+        python3-pip \
+        python3-setuptools \
+        python3-wheel \
+-       python3-venv
++       python3-venv && \
++       dpkg-query --showformat '${Package}_${Version}_${Architecture}\n' --show > /packages.txt
+ 
+ RUN /usr/bin/pip3 install tomli
+ 
+diff --git a/tests/docker/dockerfiles/debian-xtensa-cross.docker b/tests/docker/dockerfiles/debian-xtensa-cross.docker
+index 413881899b..d011eee2ad 100644
+--- a/tests/docker/dockerfiles/debian-xtensa-cross.docker
++++ b/tests/docker/dockerfiles/debian-xtensa-cross.docker
+@@ -16,7 +16,8 @@ RUN apt-get update && \
+         curl \
+         gettext \
+         git \
+-        python3-minimal
++        python3-minimal && \
++    dpkg-query --showformat '${Package}_${Version}_${Architecture}\n' --show > /packages.txt
+ 
+ ENV CPU_LIST dc232b dc233c de233_fpu dsp3400
+ ENV TOOLCHAIN_RELEASE 2020.07
 -- 
 2.39.2
 
