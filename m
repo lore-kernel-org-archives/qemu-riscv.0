@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DB2FC3DA49
-	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Jul 2024 14:25:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F01BDC3DA70
+	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Jul 2024 15:17:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sYnmf-0004iA-PB; Tue, 30 Jul 2024 10:25:01 -0400
+	id 1sYoas-0001jM-0p; Tue, 30 Jul 2024 11:16:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1sYnmd-0004en-N2
- for qemu-riscv@nongnu.org; Tue, 30 Jul 2024 10:24:59 -0400
-Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
+ id 1sYoaq-0001ZL-EW
+ for qemu-riscv@nongnu.org; Tue, 30 Jul 2024 11:16:52 -0400
+Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1sYnmb-0006lu-FE
- for qemu-riscv@nongnu.org; Tue, 30 Jul 2024 10:24:59 -0400
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-1fc587361b6so30251435ad.2
- for <qemu-riscv@nongnu.org>; Tue, 30 Jul 2024 07:24:57 -0700 (PDT)
+ id 1sYoan-00068O-TZ
+ for qemu-riscv@nongnu.org; Tue, 30 Jul 2024 11:16:52 -0400
+Received: by mail-pf1-x435.google.com with SMTP id
+ d2e1a72fcca58-70d18112b60so3322784b3a.1
+ for <qemu-riscv@nongnu.org>; Tue, 30 Jul 2024 08:16:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1722349496; x=1722954296; darn=nongnu.org;
+ d=sifive.com; s=google; t=1722352608; x=1722957408; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=u1OVFnxKJQgUPMUUBzmRHrfwBY6t5p5CTgz0Jof1Y0E=;
- b=WiPY8Q0f1S2ezGTzN+vqNdk8wsVTJzYx65+DPaB+l7DHoogoKK3K70RDP0X5zxtqzq
- yofCOt89BnJb+phQPTUjI4AszOVepfDjNfV0zwtCYiavAgfDtcQ7vGKcX4P+ggpXGc3+
- 7y557gDA+k4+NJCQTCN41MNDZd6NbJNnClJAsRUOg8zOMvxsL/uYHRv9JDLDvk/GzPLz
- 5WWpYxfUNOQa/n3RV2M+TojncCjRy6iIH8ekuNu9jZ9Eegb54l4HhNX4LxscK3Fjz6Nk
- XmE2IKA+fGt1r7tEVo02FVoE4s9lmvfAxt8S3dKiCNM8Fe+KoE2NOtKsQ9gFJxtyXKgA
- PQxw==
+ bh=37Fb13BCjBRvvlkCYxRKMLZNMBM8CohbE2jyNZ9/PWI=;
+ b=TISaLY0ILyGSSUAnHdYWVdjcK93cugviIiQoEG0iBj63gQpx7yymDACIvokY2dtROO
+ 2rsnpt2UTaSSojU3tHBQv7DqkpAQxuNCs9zAsPYxtOURVwI284Q2GYwNgmviM0aZS/3c
+ eCQlqWrPW1iAU07mMSA2Q1FF3Pk29akF+GusSgN5dErQGdn07Cls6O5GWii31bueecTU
+ lj635uQrM0D2J5O6NQPqEKmTAJ2S8yXIVfdyNqR5PfyOgXCcn0dD/H2aLqW6B1TpEvgN
+ JYeb69PIvxNDUIHZhEcHyX8g59hh/z3V24VVkMgheeC2MIxCPzjRZE6dk6v6PI2kp5H+
+ nMNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722349496; x=1722954296;
+ d=1e100.net; s=20230601; t=1722352608; x=1722957408;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=u1OVFnxKJQgUPMUUBzmRHrfwBY6t5p5CTgz0Jof1Y0E=;
- b=dREWBCH9M1Us2j8nmzmlF9AayUSwtTiDoKX5vIrTE4fiIPsa4wznGoiYtMweBgdHHY
- SJKKb7qVG6z8gpzvlkTuO/Q4xiKSb1E+69f7YCjwNsxo25OyGvtGMFPOLKMPDU75v6Kv
- tpQEbChrUxOAsA5p0wOj21Brz1NIa2BY9LhKSMBaO6n1KpSUmXONvhBLMKc+AQICkejL
- ORdHsIOp/TRxVRbBwNIB4wI1X5ay9rUzy1Bwa9hKFdrWDqvTZPjtA7V7eeaZqV5dE+WA
- RcSkml7wb8uSsknZQ96SdRTv0tGkda053AEST/L6PPQhIE05bs9WolE7xgksO2yMYn5l
- LbOg==
+ bh=37Fb13BCjBRvvlkCYxRKMLZNMBM8CohbE2jyNZ9/PWI=;
+ b=n4NjQFUZtg/OE7F67QF0ogw3F3SL2NHlI0jLB0m4CNNhWnNfH/fn7l8sv/xkbLEk50
+ FhoSELd43abux70eJMKtPhob+lSAnz3G/TJiEolMjzUQP3mlVyqN/HHfNSFIfZdC1OjF
+ 8izNCOKt3mvKQkLzzC08nhmERu+H4hFok4mC/FU6whMEuXh4P0LnxzUisjaVsvJ/Sef7
+ BNRQbsua8Qu0Qll4FuM6VnnWOOLnfHuC+H45bGNo20dmJqkznuYvYpWuD5Dn9OkbC2ul
+ 4yiHIeOg9P0eVENiSxbCF/Uu7GYWNO7UZzzRL6xQYQqFAdkKQzkw9/FYxGyECIBM/jWx
+ 4JLg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWOBzTiHERvZoTHlZjJneSVWtBQ9U06gTbUFimB8DW0ILlljcNnVDNGlR7e0j7n9mGgk9bHd7wUtVWy/luVW6J7a7qOKYs=
-X-Gm-Message-State: AOJu0YyOTs7I1mzvc5afbJv5DRqMC3Uom+D9nDioVZSCfPFO+ZBgZz2F
- cRB/rxQm1sX/znPY3F0XPQDURdBNtN9XTv1NuKXxVUOTMTGikdeutw0k7pflvmE=
-X-Google-Smtp-Source: AGHT+IHT5dqWPZCur5FokalsFJBy7XEEMilT3rMhlGR1i/XPwN0+cU/azslSVT9AyfQEFJ7qjxtbOw==
-X-Received: by 2002:a17:903:608:b0:1fd:9d0c:998c with SMTP id
- d9443c01a7336-1ff04930fdcmr77679785ad.56.1722349495796; 
- Tue, 30 Jul 2024 07:24:55 -0700 (PDT)
+ AJvYcCX3phJ0lIS+Nhl48a+Brxj267J1B4SQvnzlULVbNOEC2T2BsB5yYpxX1oM0cQ+grl7iYTN6Wn36+vQl35lC1F2pwlWTTsw=
+X-Gm-Message-State: AOJu0YzfN4whFCbdDT5+aoIhpUwAWUY/OGPly6Ar4HX4Dai5f0Fui5MF
+ 4XHGKM97FZAh+FL0ghnQ0TNAEo7KIxmRycuEfAmYz9AejZ2/RyUerinxO/qtK+X56m9MlbkK1WZ
+ QNP4=
+X-Google-Smtp-Source: AGHT+IEq4gm/qiF9FbwngCVh8zsFQCMPMxat9DRUY1H7xqM0l8SsCCvMJJCIpCtZzQxs2n1PNBk/lQ==
+X-Received: by 2002:aa7:888a:0:b0:70e:cee8:264a with SMTP id
+ d2e1a72fcca58-70efe400da0mr4453608b3a.1.1722352608352; 
+ Tue, 30 Jul 2024 08:16:48 -0700 (PDT)
 Received: from [100.64.0.1] (114-35-142-126.hinet-ip.hinet.net.
  [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1fed7ce41c5sm102672625ad.85.2024.07.30.07.24.53
+ d2e1a72fcca58-70ead712f25sm8520670b3a.81.2024.07.30.08.16.46
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 30 Jul 2024 07:24:55 -0700 (PDT)
-Message-ID: <5a77744c-f0d1-4007-b2b1-edeccc4bca0c@sifive.com>
-Date: Tue, 30 Jul 2024 22:24:52 +0800
+ Tue, 30 Jul 2024 08:16:48 -0700 (PDT)
+Message-ID: <679899fa-af2a-4863-93cf-f17fffd57cac@sifive.com>
+Date: Tue, 30 Jul 2024 23:16:45 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v5 2/5] target/riscv: rvv: Provide a fast path using
- direct access to host ram for unmasked unit-stride load/store
+Subject: Re: [RFC PATCH v5 4/5] target/riscv: rvv: Provide group continuous
+ ld/st flow for unit-stride ld/st instructions
 To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
@@ -74,15 +75,15 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
 References: <20240717133936.713642-1-max.chou@sifive.com>
- <20240717133936.713642-3-max.chou@sifive.com>
- <a02bcaba-0712-44f2-924f-8972a4f98ce7@linaro.org>
+ <20240717133936.713642-5-max.chou@sifive.com>
+ <17b9f3cc-1ad7-4e79-8693-1f327f9bd5a6@linaro.org>
 Content-Language: en-US
 From: Max Chou <max.chou@sifive.com>
-In-Reply-To: <a02bcaba-0712-44f2-924f-8972a4f98ce7@linaro.org>
+In-Reply-To: <17b9f3cc-1ad7-4e79-8693-1f327f9bd5a6@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
- envelope-from=max.chou@sifive.com; helo=mail-pl1-x636.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::435;
+ envelope-from=max.chou@sifive.com; helo=mail-pf1-x435.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -105,166 +106,57 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2024/7/25 1:51 PM, Richard Henderson wrote:
+On 2024/7/25 2:04 PM, Richard Henderson wrote:
 > On 7/17/24 23:39, Max Chou wrote:
->> @@ -199,7 +212,7 @@ static void
->>   vext_ldst_stride(void *vd, void *v0, target_ulong base,
->>                    target_ulong stride, CPURISCVState *env,
->>                    uint32_t desc, uint32_t vm,
->> -                 vext_ldst_elem_fn *ldst_elem,
->> +                 vext_ldst_elem_fn_tlb * ldst_elem,
->
-> Extra space: "type *var"
-I will fix this part at v6.
-Thanks.
-
->
->>                    uint32_t log2_esz, uintptr_t ra)
->>   {
->>       uint32_t i, k;
->> @@ -221,7 +234,8 @@ vext_ldst_stride(void *vd, void *v0, target_ulong 
->> base,
->>                   continue;
->>               }
->>               target_ulong addr = base + stride * i + (k << log2_esz);
->> -            ldst_elem(env, adjust_addr(env, addr), i + k * 
->> max_elems, vd, ra);
->> +            ldst_elem(env, adjust_addr(env, addr),
->> +                      (i + k * max_elems) << log2_esz, vd, ra);
->
-> Is this some sort of bug fix?  It doesn't seem related...
-> If it is a bug fix, it should be a separate patch.
-This modification is caused by replacing the idx by byte offset for the 
-vector register accessing flow in the basic GEN_VEXT_LD/ST_ELEMENT macros.
-But I think that it's not a good idea now, it will get unexpected result 
-when the endian between host and guest are different.
-
-I'll fix this part at v6.
->
->>   /*
->>    * unit-stride: access elements stored contiguously in memory
->>    */
->>     /* unmasked unit-stride load and store operation */
->> +static void
->> +vext_page_ldst_us(CPURISCVState *env, void *vd, target_ulong addr,
->> +                  uint32_t elems, uint32_t nf, uint32_t max_elems,
->> +                  uint32_t log2_esz, bool is_load,
->> +                  vext_ldst_elem_fn_tlb *ldst_tlb,
->> +                  vext_ldst_elem_fn_host *ldst_host, uintptr_t ra)
+>> +static inline QEMU_ALWAYS_INLINE void
+>> +vext_continus_ldst_host(CPURISCVState *env, vext_ldst_elem_fn_host 
+>> *ldst_host,
+>> +                        void *vd, uint32_t evl, uint32_t reg_start, 
+>> void *host,
+>> +                        uint32_t esz, bool is_load)
 >> +{
->> +    void *host;
->> +    int i, k, flags;
->> +    uint32_t esz = 1 << log2_esz;
->> +    uint32_t size = (elems * nf) << log2_esz;
->> +    uint32_t evl = env->vstart + elems;
->> +    int mmu_index = riscv_env_mmu_index(env, false);
->> +    MMUAccessType access_type = is_load ? MMU_DATA_LOAD : 
->> MMU_DATA_STORE;
+>> +#if TARGET_BIG_ENDIAN != HOST_BIG_ENDIAN
+>> +    for (; reg_start < evl; reg_start++, host += esz) {
+>> +        uint32_t byte_off = reg_start * esz;
+>> +        ldst_host(vd, byte_off, host);
+>> +    }
+>> +#else
+>> +    uint32_t byte_offset = reg_start * esz;
+>> +    uint32_t size = (evl - reg_start) * esz;
+>> +
+>> +    if (is_load) {
+>> +        memcpy(vd + byte_offset, host, size);
+>> +    } else {
+>> +        memcpy(host, vd + byte_offset, size);
+>> +    }
+>> +#endif
 >
-> You may want to pass in mmu_index, so that it is computed once in the 
-> caller.
-Thanks for the suggestion.
-I'll try to pass in mmu_index at v6.
+> First, TARGET_BIG_ENDIAN is always false, so this reduces to 
+> HOST_BIG_ENDIAN.
+>
+> Second, even if TARGET_BIG_ENDIAN were true, this optimization would 
+> be wrong, because of the element ordering given in vector_internals.h 
+> (i.e. H1 etc).
+Thanks for the suggestions.
+I missed the element ordering here.
+I'll fix this at v6.
 
 >
->> +
->> +    /* Check page permission/pmp/watchpoint/etc. */
->> +    flags = probe_access_flags(env, adjust_addr(env, addr), size, 
->> access_type,
->> +                               mmu_index, true, &host, ra);
->> +
->> +    if (host && flags == 0) {
+> Third, this can be done with C if, instead of cpp ifdef, so that you 
+> always compile-test both sides.
 >
-> If flags == 0, host will always be non-null.
-> You only need flags == 0.
+> Fourth... what are the atomicity guarantees of RVV?  I didn't 
+> immediately see anything in the RVV manual, which suggests that the 
+> atomicity is the same as individual integer loads of the same size.  
+> Because there are no atomicity guarantees for memcpy, you can only use 
+> this for byte load/store.
+>
+> For big-endian bytes, you can optimize this to 64-bit little-endian 
+> operations.
+> Compare arm gen_sve_ldr.
 Thanks for the suggestion.
-I'll update this part at v6.
+I'll check arm gen_sve_ldr.
 
->
->>   static void
->>   vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, 
->> uint32_t desc,
->> -             vext_ldst_elem_fn *ldst_elem, uint32_t log2_esz, 
->> uint32_t evl,
->> -             uintptr_t ra)
->> +             vext_ldst_elem_fn_tlb *ldst_tlb,
->> +             vext_ldst_elem_fn_host *ldst_host, uint32_t log2_esz,
->> +             uint32_t evl, uintptr_t ra, bool is_load)
->>   {
->> -    uint32_t i, k;
->> +    uint32_t k;
->> +    target_ulong page_split, elems, addr;
->>       uint32_t nf = vext_nf(desc);
->>       uint32_t max_elems = vext_max_elems(desc, log2_esz);
->>       uint32_t esz = 1 << log2_esz;
->> +    uint32_t msize = nf * esz;
->>         VSTART_CHECK_EARLY_EXIT(env);
->>   -    /* load bytes from guest memory */
->> -    for (i = env->vstart; i < evl; env->vstart = ++i) {
->> -        k = 0;
->> -        while (k < nf) {
->> -            target_ulong addr = base + ((i * nf + k) << log2_esz);
->> -            ldst_elem(env, adjust_addr(env, addr), i + k * 
->> max_elems, vd, ra);
->> -            k++;
->> +    while (env->vstart < evl) {
->
-> VSTART_CHECK_EARLY_EXIT has taken care of this condition for the first 
-> page.
-> We know that one contiguous operation can only consume 1024 bytes, so 
-> cannot cross two pages.  Therefore this loop executes exactly once or 
-> twice.
->
-> I think it would be better to unroll this by hand:
->
->     calc page range
->     if (likely(elems)) {
->         vext_page_ldst_us(... elems ...);
->     }
->     if (unlikely(env->vstart < evl)) {
->         if (unlikely(page_split % msize)) {
->            ...
->         }
->         vext_page_ldst_us(... evl - vstart ...);
->     }
-Yes, one contiguous operation can only consume 1024 bytes in vector 
-unit-stride ld/st. It's a good idea to unroll it here.
-I'll unroll this part at v6.
-Thanks for the suggestion.
-
-I'll try to extend the original loop implementation to other vector 
-ld/st instructions that may cross multiple pages in the future.
->
->> +        /* Calculate page range */
->> +        addr = base + ((env->vstart * nf) << log2_esz);
->> +        page_split = -(addr | TARGET_PAGE_MASK);
->> +        /* Get number of elements */
->> +        elems = page_split / msize;
->> +        if (unlikely(env->vstart + elems >= evl)) {
->> +            elems = evl - env->vstart;
->> +        }
->> +
->> +        /* Load/store elements in page */
->> +        vext_page_ldst_us(env, vd, addr, elems, nf, max_elems, 
->> log2_esz,
->> +                          is_load, ldst_tlb, ldst_host, ra);
->> +
->> +        /* Cross page element */
->> +        if (unlikely((page_split % msize) != 0 && (env->vstart + 1) 
->> < evl)) {
->> +            for (k = 0; k < nf; k++) {
->> +                addr = base + ((env->vstart * nf + k) << log2_esz);
->> +                ldst_tlb(env, adjust_addr(env, addr),
->> +                         (k * max_elems + env->vstart) << log2_esz, 
->> vd, ra);
->> +            }
->> +            env->vstart++;
->>           }
->>       }
->> -    env->vstart = 0;
->>   +    env->vstart = 0;
->>       vext_set_tail_elems_1s(evl, vd, desc, nf, esz, max_elems);
->>   }
 >
 >
 > r~
