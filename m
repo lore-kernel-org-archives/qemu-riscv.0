@@ -4,93 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F01BDC3DA70
-	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Jul 2024 15:17:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAD0BC3DA49
+	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Jul 2024 16:25:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sYoas-0001jM-0p; Tue, 30 Jul 2024 11:16:54 -0400
+	id 1sYpcd-0008Hg-4Z; Tue, 30 Jul 2024 12:22:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1sYoaq-0001ZL-EW
- for qemu-riscv@nongnu.org; Tue, 30 Jul 2024 11:16:52 -0400
-Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435])
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1sYpcb-0008Bk-P6
+ for qemu-riscv@nongnu.org; Tue, 30 Jul 2024 12:22:45 -0400
+Received: from mail-ej1-x629.google.com ([2a00:1450:4864:20::629])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1sYoan-00068O-TZ
- for qemu-riscv@nongnu.org; Tue, 30 Jul 2024 11:16:52 -0400
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-70d18112b60so3322784b3a.1
- for <qemu-riscv@nongnu.org>; Tue, 30 Jul 2024 08:16:49 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1sYpcY-0003X2-NU
+ for qemu-riscv@nongnu.org; Tue, 30 Jul 2024 12:22:45 -0400
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-a7a9e25008aso619441866b.0
+ for <qemu-riscv@nongnu.org>; Tue, 30 Jul 2024 09:22:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1722352608; x=1722957408; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=37Fb13BCjBRvvlkCYxRKMLZNMBM8CohbE2jyNZ9/PWI=;
- b=TISaLY0ILyGSSUAnHdYWVdjcK93cugviIiQoEG0iBj63gQpx7yymDACIvokY2dtROO
- 2rsnpt2UTaSSojU3tHBQv7DqkpAQxuNCs9zAsPYxtOURVwI284Q2GYwNgmviM0aZS/3c
- eCQlqWrPW1iAU07mMSA2Q1FF3Pk29akF+GusSgN5dErQGdn07Cls6O5GWii31bueecTU
- lj635uQrM0D2J5O6NQPqEKmTAJ2S8yXIVfdyNqR5PfyOgXCcn0dD/H2aLqW6B1TpEvgN
- JYeb69PIvxNDUIHZhEcHyX8g59hh/z3V24VVkMgheeC2MIxCPzjRZE6dk6v6PI2kp5H+
- nMNw==
+ d=linaro.org; s=google; t=1722356561; x=1722961361; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=o53zhyLHN7aZhlmeir/x1yyb+LIZzMpKweMU3c5VOlw=;
+ b=Bumw/CXlJEbRZPa47vIYE7gVZlX6L2cTC2RBe3FS6AC56TlFzN3Wp8xEwFbUmP7WDa
+ pF5g1OkFEUd0Qfqv4ltRHlwrtOJli6RblWg3idyc8YSj4Dmgbo6o39zCsiP7VoC+liou
+ j+HogPK7q2stvNoOSCOO/mTSM3w79Jom84RZFul8Gs1HfIXdSFK6duClKDdYeablY3rj
+ fdAR70hZRexmxrQNRe44zzzulEZweY8nJUkxmlpX3fY+2sc8gVEcBelmtZ/UnP3ELYVt
+ ewfpvyC1bVi9XqwHwZP/Bl2sfJKVEvDYTbIrlx+M4Sm4z4WR6NfQ4nyf/qwW2T/grdb8
+ 0LmA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722352608; x=1722957408;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=37Fb13BCjBRvvlkCYxRKMLZNMBM8CohbE2jyNZ9/PWI=;
- b=n4NjQFUZtg/OE7F67QF0ogw3F3SL2NHlI0jLB0m4CNNhWnNfH/fn7l8sv/xkbLEk50
- FhoSELd43abux70eJMKtPhob+lSAnz3G/TJiEolMjzUQP3mlVyqN/HHfNSFIfZdC1OjF
- 8izNCOKt3mvKQkLzzC08nhmERu+H4hFok4mC/FU6whMEuXh4P0LnxzUisjaVsvJ/Sef7
- BNRQbsua8Qu0Qll4FuM6VnnWOOLnfHuC+H45bGNo20dmJqkznuYvYpWuD5Dn9OkbC2ul
- 4yiHIeOg9P0eVENiSxbCF/Uu7GYWNO7UZzzRL6xQYQqFAdkKQzkw9/FYxGyECIBM/jWx
- 4JLg==
+ d=1e100.net; s=20230601; t=1722356561; x=1722961361;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=o53zhyLHN7aZhlmeir/x1yyb+LIZzMpKweMU3c5VOlw=;
+ b=SHvv4gntiCyqIIWj13rAe3//iyVCkknQVMHkMj6IC6CR8KoBXiaBpxP1JfTK2SqTU8
+ Fhq1iBrbtFj93wk20JC1qjN8ZsYhAFEFSQCTST0XNkfDvqK/GjpV8iUwr8aGMde/Y77Q
+ u5uGj0925UZkdgBLJ5IANA4WyEdVmyAdxUmxpvq54lyrlPkci++Wa9TNfdgI0ovFkN81
+ 6Q42MJLWs7ZVFdjZWEVSAW52ukYMZp4bWMLKjkZLoXa50zW5Mpvo2/vRIVs4uFychBgO
+ qFgmakBjfRKAqF3OMEBchKiG4LmpRYhXNiz3Mf4LfG2NEH3o+xFSfYvvJ6SISbSmoOOO
+ Nhng==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX3phJ0lIS+Nhl48a+Brxj267J1B4SQvnzlULVbNOEC2T2BsB5yYpxX1oM0cQ+grl7iYTN6Wn36+vQl35lC1F2pwlWTTsw=
-X-Gm-Message-State: AOJu0YzfN4whFCbdDT5+aoIhpUwAWUY/OGPly6Ar4HX4Dai5f0Fui5MF
- 4XHGKM97FZAh+FL0ghnQ0TNAEo7KIxmRycuEfAmYz9AejZ2/RyUerinxO/qtK+X56m9MlbkK1WZ
- QNP4=
-X-Google-Smtp-Source: AGHT+IEq4gm/qiF9FbwngCVh8zsFQCMPMxat9DRUY1H7xqM0l8SsCCvMJJCIpCtZzQxs2n1PNBk/lQ==
-X-Received: by 2002:aa7:888a:0:b0:70e:cee8:264a with SMTP id
- d2e1a72fcca58-70efe400da0mr4453608b3a.1.1722352608352; 
- Tue, 30 Jul 2024 08:16:48 -0700 (PDT)
-Received: from [100.64.0.1] (114-35-142-126.hinet-ip.hinet.net.
- [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-70ead712f25sm8520670b3a.81.2024.07.30.08.16.46
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 30 Jul 2024 08:16:48 -0700 (PDT)
-Message-ID: <679899fa-af2a-4863-93cf-f17fffd57cac@sifive.com>
-Date: Tue, 30 Jul 2024 23:16:45 +0800
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v5 4/5] target/riscv: rvv: Provide group continuous
- ld/st flow for unit-stride ld/st instructions
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ AJvYcCUe42QueGDUToTFyv9gx41TWS82WlqdGdp6lEnk9WWQO6S7a5wK2Ira97AOXQ72tUAnYhbJ4pvNgyT+0OlBl+Hj7aVa+4U=
+X-Gm-Message-State: AOJu0YykUcEx6KKYUE7L5uOCN8fgZmAtGhI7GOC9dLpZ119gbnKIpIIJ
+ gCc+QGtthOPC6j0Jpvtc9vAEeDsGVyFhoOAUQWYnJUwnwcBJllEwSFWidRlfxIs=
+X-Google-Smtp-Source: AGHT+IFj0qEgnWwdWL5r7M2qhFzK8XTcqLWkgCc5gALWAuxDTdfcXcVuZ/cG1iSEgxseX1W90lJIVw==
+X-Received: by 2002:a17:907:9443:b0:a72:633d:5fd6 with SMTP id
+ a640c23a62f3a-a7d400adb62mr737614266b.32.1722356560275; 
+ Tue, 30 Jul 2024 09:22:40 -0700 (PDT)
+Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a7acad41621sm660753866b.113.2024.07.30.09.22.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 30 Jul 2024 09:22:38 -0700 (PDT)
+Received: from draig.lan (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id 27DC15F92D;
+ Tue, 30 Jul 2024 17:22:38 +0100 (BST)
+From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Richard Henderson <richard.henderson@linaro.org>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
+ Song Gao <gaosong@loongson.cn>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
  Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-References: <20240717133936.713642-1-max.chou@sifive.com>
- <20240717133936.713642-5-max.chou@sifive.com>
- <17b9f3cc-1ad7-4e79-8693-1f327f9bd5a6@linaro.org>
-Content-Language: en-US
-From: Max Chou <max.chou@sifive.com>
-In-Reply-To: <17b9f3cc-1ad7-4e79-8693-1f327f9bd5a6@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ David Hildenbrand <david@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
+ qemu-arm@nongnu.org (open list:ARM TCG CPUs),
+ qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs),
+ qemu-s390x@nongnu.org (open list:S390 TCG CPUs)
+Subject: [PULL 03/14] tests/tcg: Use --noexecstack with assembler files
+Date: Tue, 30 Jul 2024 17:22:26 +0100
+Message-Id: <20240730162237.1425515-4-alex.bennee@linaro.org>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240730162237.1425515-1-alex.bennee@linaro.org>
+References: <20240730162237.1425515-1-alex.bennee@linaro.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::435;
- envelope-from=max.chou@sifive.com; helo=mail-pf1-x435.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::629;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x629.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -106,59 +111,152 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2024/7/25 2:04 PM, Richard Henderson wrote:
-> On 7/17/24 23:39, Max Chou wrote:
->> +static inline QEMU_ALWAYS_INLINE void
->> +vext_continus_ldst_host(CPURISCVState *env, vext_ldst_elem_fn_host 
->> *ldst_host,
->> +                        void *vd, uint32_t evl, uint32_t reg_start, 
->> void *host,
->> +                        uint32_t esz, bool is_load)
->> +{
->> +#if TARGET_BIG_ENDIAN != HOST_BIG_ENDIAN
->> +    for (; reg_start < evl; reg_start++, host += esz) {
->> +        uint32_t byte_off = reg_start * esz;
->> +        ldst_host(vd, byte_off, host);
->> +    }
->> +#else
->> +    uint32_t byte_offset = reg_start * esz;
->> +    uint32_t size = (evl - reg_start) * esz;
->> +
->> +    if (is_load) {
->> +        memcpy(vd + byte_offset, host, size);
->> +    } else {
->> +        memcpy(host, vd + byte_offset, size);
->> +    }
->> +#endif
->
-> First, TARGET_BIG_ENDIAN is always false, so this reduces to 
-> HOST_BIG_ENDIAN.
->
-> Second, even if TARGET_BIG_ENDIAN were true, this optimization would 
-> be wrong, because of the element ordering given in vector_internals.h 
-> (i.e. H1 etc).
-Thanks for the suggestions.
-I missed the element ordering here.
-I'll fix this at v6.
+From: Richard Henderson <richard.henderson@linaro.org>
 
->
-> Third, this can be done with C if, instead of cpp ifdef, so that you 
-> always compile-test both sides.
->
-> Fourth... what are the atomicity guarantees of RVV?  I didn't 
-> immediately see anything in the RVV manual, which suggests that the 
-> atomicity is the same as individual integer loads of the same size.  
-> Because there are no atomicity guarantees for memcpy, you can only use 
-> this for byte load/store.
->
-> For big-endian bytes, you can optimize this to 64-bit little-endian 
-> operations.
-> Compare arm gen_sve_ldr.
-Thanks for the suggestion.
-I'll check arm gen_sve_ldr.
+Add the --noexecstack assembler command-line option to avoid:
 
->
->
-> r~
+  /usr/bin/ld: warning: boot.o: missing .note.GNU-stack section implies executable stack
+  /usr/bin/ld: NOTE: This behaviour is deprecated and will be removed in a future version of the linker
+
+which is enabled by default with current debian cross toolchains.
+
+Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Message-Id: <20240724010733.22129-2-richard.henderson@linaro.org>
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Message-Id: <20240729144414.830369-4-alex.bennee@linaro.org>
+
+diff --git a/tests/tcg/Makefile.target b/tests/tcg/Makefile.target
+index cb8cfeb6da..1f8e5b3d30 100644
+--- a/tests/tcg/Makefile.target
++++ b/tests/tcg/Makefile.target
+@@ -115,7 +115,7 @@ endif
+ %: %.c
+ 	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) $< -o $@ $(LDFLAGS)
+ %: %.S
+-	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) $< -o $@ $(LDFLAGS)
++	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) -Wa,--noexecstack $< -o $@ $(LDFLAGS)
+ else
+ # For system targets we include a different Makefile fragment as the
+ # build options for bare programs are usually pretty different. They
+diff --git a/tests/tcg/aarch64/Makefile.softmmu-target b/tests/tcg/aarch64/Makefile.softmmu-target
+index dd6d595830..139e04d15f 100644
+--- a/tests/tcg/aarch64/Makefile.softmmu-target
++++ b/tests/tcg/aarch64/Makefile.softmmu-target
+@@ -28,7 +28,7 @@ config-cc.mak: Makefile
+ .PRECIOUS: $(CRT_OBJS)
+ 
+ %.o: $(CRT_PATH)/%.S
+-	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) -x assembler-with-cpp -c $< -o $@
++	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) -x assembler-with-cpp -Wa,--noexecstack -c $< -o $@
+ 
+ # Build and link the tests
+ %: %.c $(LINK_SCRIPT) $(CRT_OBJS) $(MINILIB_OBJS)
+diff --git a/tests/tcg/alpha/Makefile.softmmu-target b/tests/tcg/alpha/Makefile.softmmu-target
+index 09193a62d6..a0eca4d6ea 100644
+--- a/tests/tcg/alpha/Makefile.softmmu-target
++++ b/tests/tcg/alpha/Makefile.softmmu-target
+@@ -22,7 +22,7 @@ LDFLAGS+=-static -nostdlib $(CRT_OBJS) $(MINILIB_OBJS) -lgcc
+ .PRECIOUS: $(CRT_OBJS)
+ 
+ %.o: $(CRT_PATH)/%.S
+-	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) -x assembler-with-cpp -c $< -o $@
++	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) -x assembler-with-cpp -Wa,--noexecstack -c $< -o $@
+ 
+ # Build and link the tests
+ %: %.c $(LINK_SCRIPT) $(CRT_OBJS) $(MINILIB_OBJS)
+diff --git a/tests/tcg/arm/Makefile.softmmu-target b/tests/tcg/arm/Makefile.softmmu-target
+index 547063c08c..b66074b0b4 100644
+--- a/tests/tcg/arm/Makefile.softmmu-target
++++ b/tests/tcg/arm/Makefile.softmmu-target
+@@ -36,7 +36,7 @@ LDFLAGS+=-static -nostdlib $(CRT_OBJS) $(MINILIB_OBJS) -lgcc
+ .PRECIOUS: $(CRT_OBJS)
+ 
+ %.o: $(ARM_SRC)/%.S
+-	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) -x assembler-with-cpp -c $< -o $@
++	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) -x assembler-with-cpp -Wa,--noexecstack -c $< -o $@
+ 
+ # Build and link the tests
+ %: %.c $(LINK_SCRIPT) $(CRT_OBJS) $(MINILIB_OBJS)
+diff --git a/tests/tcg/arm/Makefile.target b/tests/tcg/arm/Makefile.target
+index 8e287191af..06ddf3e04f 100644
+--- a/tests/tcg/arm/Makefile.target
++++ b/tests/tcg/arm/Makefile.target
+@@ -25,7 +25,7 @@ ARM_TESTS += test-arm-iwmmxt
+ # Clang assembler does not support IWMXT, so use the external assembler.
+ test-arm-iwmmxt: CFLAGS += -marm -march=iwmmxt -mabi=aapcs -mfpu=fpv4-sp-d16 $(CROSS_CC_HAS_FNIA)
+ test-arm-iwmmxt: test-arm-iwmmxt.S
+-	$(CC) $(CFLAGS) $< -o $@ $(LDFLAGS)
++	$(CC) $(CFLAGS) -Wa,--noexecstack $< -o $@ $(LDFLAGS)
+ 
+ # Float-convert Tests
+ ARM_TESTS += fcvt
+diff --git a/tests/tcg/i386/Makefile.softmmu-target b/tests/tcg/i386/Makefile.softmmu-target
+index 5266f2335a..4096a1cf31 100644
+--- a/tests/tcg/i386/Makefile.softmmu-target
++++ b/tests/tcg/i386/Makefile.softmmu-target
+@@ -25,7 +25,7 @@ EXTRA_RUNS+=$(MULTIARCH_RUNS)
+ .PRECIOUS: $(CRT_OBJS)
+ 
+ %.o: $(CRT_PATH)/%.S
+-	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) -c $< -o $@
++	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) -Wa,--noexecstack -c $< -o $@
+ 
+ # Build and link the tests
+ %: %.c $(LINK_SCRIPT) $(CRT_OBJS) $(MINILIB_OBJS)
+diff --git a/tests/tcg/loongarch64/Makefile.softmmu-target b/tests/tcg/loongarch64/Makefile.softmmu-target
+index 908f3a8c0f..d5d5c1a7f6 100644
+--- a/tests/tcg/loongarch64/Makefile.softmmu-target
++++ b/tests/tcg/loongarch64/Makefile.softmmu-target
+@@ -22,7 +22,7 @@ LDFLAGS+=-static -nostdlib $(CRT_OBJS) $(MINILIB_OBJS) -lgcc
+ .PRECIOUS: $(CRT_OBJS)
+ 
+ %.o: $(CRT_PATH)/%.S
+-	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) -x assembler-with-cpp -c $< -o $@
++	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) -x assembler-with-cpp -Wa,--noexecstack -c $< -o $@
+ 
+ # Build and link the tests
+ %: %.c $(LINK_SCRIPT) $(CRT_OBJS) $(MINILIB_OBJS)
+diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
+index d5b126e5f1..7c1d44d3f4 100644
+--- a/tests/tcg/riscv64/Makefile.softmmu-target
++++ b/tests/tcg/riscv64/Makefile.softmmu-target
+@@ -10,7 +10,7 @@ LDFLAGS = -T $(LINK_SCRIPT)
+ CFLAGS += -g -Og
+ 
+ %.o: %.S
+-	$(CC) $(CFLAGS) $< -c -o $@
++	$(CC) $(CFLAGS) $< -Wa,--noexecstack -c -o $@
+ %: %.o $(LINK_SCRIPT)
+ 	$(LD) $(LDFLAGS) $< -o $@
+ 
+diff --git a/tests/tcg/s390x/Makefile.softmmu-target b/tests/tcg/s390x/Makefile.softmmu-target
+index 4c8e15e625..f60f94b090 100644
+--- a/tests/tcg/s390x/Makefile.softmmu-target
++++ b/tests/tcg/s390x/Makefile.softmmu-target
+@@ -6,7 +6,7 @@ CFLAGS+=-ggdb -O0
+ LDFLAGS=-nostdlib -static
+ 
+ %.o: %.S
+-	$(CC) -march=z13 -m64 -c $< -o $@
++	$(CC) -march=z13 -m64 -Wa,--noexecstack -c $< -o $@
+ 
+ %.o: %.c
+ 	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) -march=z13 -m64 -c $< -o $@
+diff --git a/tests/tcg/x86_64/Makefile.softmmu-target b/tests/tcg/x86_64/Makefile.softmmu-target
+index 1bd763f2e6..ef6bcb4dc7 100644
+--- a/tests/tcg/x86_64/Makefile.softmmu-target
++++ b/tests/tcg/x86_64/Makefile.softmmu-target
+@@ -25,7 +25,7 @@ EXTRA_RUNS+=$(MULTIARCH_RUNS)
+ .PRECIOUS: $(CRT_OBJS)
+ 
+ %.o: $(CRT_PATH)/%.S
+-	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) -c $< -o $@
++	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) -Wa,--noexecstack -c $< -o $@
+ 
+ # Build and link the tests
+ %: %.c $(LINK_SCRIPT) $(CRT_OBJS) $(MINILIB_OBJS)
+-- 
+2.39.2
 
 
