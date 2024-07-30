@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0795CC3DA49
-	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Jul 2024 13:33:22 +0000 (UTC)
-Received: from [::1] (helo=lists1p.gnu.org)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DB2FC3DA49
+	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Jul 2024 14:25:27 +0000 (UTC)
+Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sYmws-00048s-Ge; Tue, 30 Jul 2024 09:31:36 -0400
+	id 1sYnmf-0004iA-PB; Tue, 30 Jul 2024 10:25:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1sYmwW-00046U-VN
- for qemu-riscv@nongnu.org; Tue, 30 Jul 2024 09:31:13 -0400
-Received: from mail-pg1-x52f.google.com ([2607:f8b0:4864:20::52f])
+ id 1sYnmd-0004en-N2
+ for qemu-riscv@nongnu.org; Tue, 30 Jul 2024 10:24:59 -0400
+Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1sYmvd-0005Ov-4j
- for qemu-riscv@nongnu.org; Tue, 30 Jul 2024 09:31:00 -0400
-Received: by mail-pg1-x52f.google.com with SMTP id
- 41be03b00d2f7-70b2421471aso2725158a12.0
- for <qemu-riscv@nongnu.org>; Tue, 30 Jul 2024 06:29:28 -0700 (PDT)
+ id 1sYnmb-0006lu-FE
+ for qemu-riscv@nongnu.org; Tue, 30 Jul 2024 10:24:59 -0400
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-1fc587361b6so30251435ad.2
+ for <qemu-riscv@nongnu.org>; Tue, 30 Jul 2024 07:24:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1722346150; x=1722950950; darn=nongnu.org;
+ d=sifive.com; s=google; t=1722349496; x=1722954296; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=rGba+10zNXuurM/lwFKrTYh3r5c9cCPnSmp5y0KbeF0=;
- b=OcxQJQbasRxXQFd4y2K4cdked8uGl1Pawem9FZIb00taXLB3FVOXHRwu26CMuRI9ET
- KtaxRqkzFcCeQQvQadYYIY2z9cEsJyIEGrfhDOV8P4AvZ6CsCDGOlTPQRdKJJPgZnMcw
- dzuSdrMdY96+nzahWPtrjhl+CBpViT9n6LG9k7UNKYENUxdszxGczu2oiJLfplzWROi6
- YuMitX4/0rjX58A9p7/dSKvF76WvbAw4NWHx6lT5VDwUGhM1bQSyPWKZ6QyejnI0tzMf
- k+CUi3VWpo6ElHBXgET1AKj8PgiM4c5S1aGRCcUK6zXNmp8dsCxV2FmMeOk4JjSGN1WN
- RPXw==
+ bh=u1OVFnxKJQgUPMUUBzmRHrfwBY6t5p5CTgz0Jof1Y0E=;
+ b=WiPY8Q0f1S2ezGTzN+vqNdk8wsVTJzYx65+DPaB+l7DHoogoKK3K70RDP0X5zxtqzq
+ yofCOt89BnJb+phQPTUjI4AszOVepfDjNfV0zwtCYiavAgfDtcQ7vGKcX4P+ggpXGc3+
+ 7y557gDA+k4+NJCQTCN41MNDZd6NbJNnClJAsRUOg8zOMvxsL/uYHRv9JDLDvk/GzPLz
+ 5WWpYxfUNOQa/n3RV2M+TojncCjRy6iIH8ekuNu9jZ9Eegb54l4HhNX4LxscK3Fjz6Nk
+ XmE2IKA+fGt1r7tEVo02FVoE4s9lmvfAxt8S3dKiCNM8Fe+KoE2NOtKsQ9gFJxtyXKgA
+ PQxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722346150; x=1722950950;
+ d=1e100.net; s=20230601; t=1722349496; x=1722954296;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=rGba+10zNXuurM/lwFKrTYh3r5c9cCPnSmp5y0KbeF0=;
- b=SEXcsZWcAajNmRC/WrVCnQaz0HjbGhWQgSqOvWA2dO763p3z2hp9q9BHogWf835O1J
- v5b0zLeEXOLBZPKQc/f6GB5HiN0goPo7HXs6+YNbLpvOYPUsNyH/Vr4puZo7FO2jfif3
- QoElk2PjA1PaD1lEwD1ZE16k3rhFA2DecUOV5YyOo5cpS/MGbgpS4W2ZDUA+0i7vmvGu
- YypnT79oaSE3LSNQu9/0te2WNxud6n/DFdKBicYga3wqZWhmKX8JcrvApMCQaGcapvDd
- AHzYy9BHU+x1OBjHv7ACvm0mHZEYt6X0et6EXwgtahppYqlrJkHw7/YjibvUb8w8YNur
- 3jng==
+ bh=u1OVFnxKJQgUPMUUBzmRHrfwBY6t5p5CTgz0Jof1Y0E=;
+ b=dREWBCH9M1Us2j8nmzmlF9AayUSwtTiDoKX5vIrTE4fiIPsa4wznGoiYtMweBgdHHY
+ SJKKb7qVG6z8gpzvlkTuO/Q4xiKSb1E+69f7YCjwNsxo25OyGvtGMFPOLKMPDU75v6Kv
+ tpQEbChrUxOAsA5p0wOj21Brz1NIa2BY9LhKSMBaO6n1KpSUmXONvhBLMKc+AQICkejL
+ ORdHsIOp/TRxVRbBwNIB4wI1X5ay9rUzy1Bwa9hKFdrWDqvTZPjtA7V7eeaZqV5dE+WA
+ RcSkml7wb8uSsknZQ96SdRTv0tGkda053AEST/L6PPQhIE05bs9WolE7xgksO2yMYn5l
+ LbOg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV/P3Vc5gopSsHmThf/LZp1zCN9CRK/GcxSwh/DaCYJvWLLrz2ESf6A58Kgbg2rPxMjzX2czw/1o5mdszDFzoW9ZSHrPGo=
-X-Gm-Message-State: AOJu0YxmSL1LjvKd58apJW2Z6oFYw1PvpJ5pi26ljsM2vPoiDsfQx2cZ
- TnSJ/LIKsGAfmNOqoQ9YMWkgt6eaAF0hhtyy2VQWutgw//8+N+V31UbuX3mbLL8=
-X-Google-Smtp-Source: AGHT+IH2r0rX+h58NGoqrHj47Usvq4GZ8Xplz2ngRvXteAg4Kq9DnbUIqpm+1jNlpMX9TzP7akrR4A==
-X-Received: by 2002:a05:6a20:7f94:b0:1c4:8da5:5825 with SMTP id
- adf61e73a8af0-1c4a0e05515mr10370529637.0.1722346149859; 
- Tue, 30 Jul 2024 06:29:09 -0700 (PDT)
+ AJvYcCWOBzTiHERvZoTHlZjJneSVWtBQ9U06gTbUFimB8DW0ILlljcNnVDNGlR7e0j7n9mGgk9bHd7wUtVWy/luVW6J7a7qOKYs=
+X-Gm-Message-State: AOJu0YyOTs7I1mzvc5afbJv5DRqMC3Uom+D9nDioVZSCfPFO+ZBgZz2F
+ cRB/rxQm1sX/znPY3F0XPQDURdBNtN9XTv1NuKXxVUOTMTGikdeutw0k7pflvmE=
+X-Google-Smtp-Source: AGHT+IHT5dqWPZCur5FokalsFJBy7XEEMilT3rMhlGR1i/XPwN0+cU/azslSVT9AyfQEFJ7qjxtbOw==
+X-Received: by 2002:a17:903:608:b0:1fd:9d0c:998c with SMTP id
+ d9443c01a7336-1ff04930fdcmr77679785ad.56.1722349495796; 
+ Tue, 30 Jul 2024 07:24:55 -0700 (PDT)
 Received: from [100.64.0.1] (114-35-142-126.hinet-ip.hinet.net.
  [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1fed7d39489sm101615415ad.119.2024.07.30.06.29.07
+ d9443c01a7336-1fed7ce41c5sm102672625ad.85.2024.07.30.07.24.53
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 30 Jul 2024 06:29:09 -0700 (PDT)
-Message-ID: <5b668c1b-24c9-4d54-80a5-cd92221b481c@sifive.com>
-Date: Tue, 30 Jul 2024 21:29:06 +0800
+ Tue, 30 Jul 2024 07:24:55 -0700 (PDT)
+Message-ID: <5a77744c-f0d1-4007-b2b1-edeccc4bca0c@sifive.com>
+Date: Tue, 30 Jul 2024 22:24:52 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v5 5/5] target/riscv: Inline unit-stride ld/st and
- corresponding functions for performance
+Subject: Re: [RFC PATCH v5 2/5] target/riscv: rvv: Provide a fast path using
+ direct access to host ram for unmasked unit-stride load/store
 To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
@@ -74,20 +74,22 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
 References: <20240717133936.713642-1-max.chou@sifive.com>
- <20240717133936.713642-6-max.chou@sifive.com>
- <abdab05e-3001-4a6f-afdc-05fc997657ee@linaro.org>
+ <20240717133936.713642-3-max.chou@sifive.com>
+ <a02bcaba-0712-44f2-924f-8972a4f98ce7@linaro.org>
 Content-Language: en-US
-In-Reply-To: <abdab05e-3001-4a6f-afdc-05fc997657ee@linaro.org>
+From: Max Chou <max.chou@sifive.com>
+In-Reply-To: <a02bcaba-0712-44f2-924f-8972a4f98ce7@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52f;
- envelope-from=max.chou@sifive.com; helo=mail-pg1-x52f.google.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, T_SPF_HELO_TEMPERROR=0.01,
- T_SPF_TEMPERROR=0.01 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
+ envelope-from=max.chou@sifive.com; helo=mail-pl1-x636.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,30 +102,171 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-to:  Max Chou <max.chou@sifive.com>
-From:  Max Chou via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2024/7/25 2:05 PM, Richard Henderson wrote:
+On 2024/7/25 1:51 PM, Richard Henderson wrote:
 > On 7/17/24 23:39, Max Chou wrote:
->> In the vector unit-stride load/store helper functions. the vext_ldst_us
->> & vext_ldst_whole functions corresponding most of the execution time.
->> Inline the functions can avoid the function call overhead to improve the
->> helper function performance.
->>
->> Signed-off-by: Max Chou <max.chou@sifive.com>
->> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
->> ---
->>   target/riscv/vector_helper.c | 56 +++++++++++++++++++-----------------
->>   1 file changed, 30 insertions(+), 26 deletions(-)
+>> @@ -199,7 +212,7 @@ static void
+>>   vext_ldst_stride(void *vd, void *v0, target_ulong base,
+>>                    target_ulong stride, CPURISCVState *env,
+>>                    uint32_t desc, uint32_t vm,
+>> -                 vext_ldst_elem_fn *ldst_elem,
+>> +                 vext_ldst_elem_fn_tlb * ldst_elem,
 >
-> You'll want to mark vext_page_ldst_us similarly.
+> Extra space: "type *var"
+I will fix this part at v6.
+Thanks.
+
+>
+>>                    uint32_t log2_esz, uintptr_t ra)
+>>   {
+>>       uint32_t i, k;
+>> @@ -221,7 +234,8 @@ vext_ldst_stride(void *vd, void *v0, target_ulong 
+>> base,
+>>                   continue;
+>>               }
+>>               target_ulong addr = base + stride * i + (k << log2_esz);
+>> -            ldst_elem(env, adjust_addr(env, addr), i + k * 
+>> max_elems, vd, ra);
+>> +            ldst_elem(env, adjust_addr(env, addr),
+>> +                      (i + k * max_elems) << log2_esz, vd, ra);
+>
+> Is this some sort of bug fix?  It doesn't seem related...
+> If it is a bug fix, it should be a separate patch.
+This modification is caused by replacing the idx by byte offset for the 
+vector register accessing flow in the basic GEN_VEXT_LD/ST_ELEMENT macros.
+But I think that it's not a good idea now, it will get unexpected result 
+when the endian between host and guest are different.
+
+I'll fix this part at v6.
+>
+>>   /*
+>>    * unit-stride: access elements stored contiguously in memory
+>>    */
+>>     /* unmasked unit-stride load and store operation */
+>> +static void
+>> +vext_page_ldst_us(CPURISCVState *env, void *vd, target_ulong addr,
+>> +                  uint32_t elems, uint32_t nf, uint32_t max_elems,
+>> +                  uint32_t log2_esz, bool is_load,
+>> +                  vext_ldst_elem_fn_tlb *ldst_tlb,
+>> +                  vext_ldst_elem_fn_host *ldst_host, uintptr_t ra)
+>> +{
+>> +    void *host;
+>> +    int i, k, flags;
+>> +    uint32_t esz = 1 << log2_esz;
+>> +    uint32_t size = (elems * nf) << log2_esz;
+>> +    uint32_t evl = env->vstart + elems;
+>> +    int mmu_index = riscv_env_mmu_index(env, false);
+>> +    MMUAccessType access_type = is_load ? MMU_DATA_LOAD : 
+>> MMU_DATA_STORE;
+>
+> You may want to pass in mmu_index, so that it is computed once in the 
+> caller.
+Thanks for the suggestion.
+I'll try to pass in mmu_index at v6.
+
+>
+>> +
+>> +    /* Check page permission/pmp/watchpoint/etc. */
+>> +    flags = probe_access_flags(env, adjust_addr(env, addr), size, 
+>> access_type,
+>> +                               mmu_index, true, &host, ra);
+>> +
+>> +    if (host && flags == 0) {
+>
+> If flags == 0, host will always be non-null.
+> You only need flags == 0.
+Thanks for the suggestion.
+I'll update this part at v6.
+
+>
+>>   static void
+>>   vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, 
+>> uint32_t desc,
+>> -             vext_ldst_elem_fn *ldst_elem, uint32_t log2_esz, 
+>> uint32_t evl,
+>> -             uintptr_t ra)
+>> +             vext_ldst_elem_fn_tlb *ldst_tlb,
+>> +             vext_ldst_elem_fn_host *ldst_host, uint32_t log2_esz,
+>> +             uint32_t evl, uintptr_t ra, bool is_load)
+>>   {
+>> -    uint32_t i, k;
+>> +    uint32_t k;
+>> +    target_ulong page_split, elems, addr;
+>>       uint32_t nf = vext_nf(desc);
+>>       uint32_t max_elems = vext_max_elems(desc, log2_esz);
+>>       uint32_t esz = 1 << log2_esz;
+>> +    uint32_t msize = nf * esz;
+>>         VSTART_CHECK_EARLY_EXIT(env);
+>>   -    /* load bytes from guest memory */
+>> -    for (i = env->vstart; i < evl; env->vstart = ++i) {
+>> -        k = 0;
+>> -        while (k < nf) {
+>> -            target_ulong addr = base + ((i * nf + k) << log2_esz);
+>> -            ldst_elem(env, adjust_addr(env, addr), i + k * 
+>> max_elems, vd, ra);
+>> -            k++;
+>> +    while (env->vstart < evl) {
+>
+> VSTART_CHECK_EARLY_EXIT has taken care of this condition for the first 
+> page.
+> We know that one contiguous operation can only consume 1024 bytes, so 
+> cannot cross two pages.  Therefore this loop executes exactly once or 
+> twice.
+>
+> I think it would be better to unroll this by hand:
+>
+>     calc page range
+>     if (likely(elems)) {
+>         vext_page_ldst_us(... elems ...);
+>     }
+>     if (unlikely(env->vstart < evl)) {
+>         if (unlikely(page_split % msize)) {
+>            ...
+>         }
+>         vext_page_ldst_us(... evl - vstart ...);
+>     }
+Yes, one contiguous operation can only consume 1024 bytes in vector 
+unit-stride ld/st. It's a good idea to unroll it here.
+I'll unroll this part at v6.
+Thanks for the suggestion.
+
+I'll try to extend the original loop implementation to other vector 
+ld/st instructions that may cross multiple pages in the future.
+>
+>> +        /* Calculate page range */
+>> +        addr = base + ((env->vstart * nf) << log2_esz);
+>> +        page_split = -(addr | TARGET_PAGE_MASK);
+>> +        /* Get number of elements */
+>> +        elems = page_split / msize;
+>> +        if (unlikely(env->vstart + elems >= evl)) {
+>> +            elems = evl - env->vstart;
+>> +        }
+>> +
+>> +        /* Load/store elements in page */
+>> +        vext_page_ldst_us(env, vd, addr, elems, nf, max_elems, 
+>> log2_esz,
+>> +                          is_load, ldst_tlb, ldst_host, ra);
+>> +
+>> +        /* Cross page element */
+>> +        if (unlikely((page_split % msize) != 0 && (env->vstart + 1) 
+>> < evl)) {
+>> +            for (k = 0; k < nf; k++) {
+>> +                addr = base + ((env->vstart * nf + k) << log2_esz);
+>> +                ldst_tlb(env, adjust_addr(env, addr),
+>> +                         (k * max_elems + env->vstart) << log2_esz, 
+>> vd, ra);
+>> +            }
+>> +            env->vstart++;
+>>           }
+>>       }
+>> -    env->vstart = 0;
+>>   +    env->vstart = 0;
+>>       vext_set_tail_elems_1s(evl, vd, desc, nf, esz, max_elems);
+>>   }
 >
 >
 > r~
-Yes, I'll mark vext_page_ldst_us at v6.
-Thanks.
 
-Max.
 
