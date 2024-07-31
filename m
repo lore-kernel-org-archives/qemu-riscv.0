@@ -4,85 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61230C3DA7F
-	for <qemu-riscv@archiver.kernel.org>; Wed, 31 Jul 2024 10:05:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47763C3DA7F
+	for <qemu-riscv@archiver.kernel.org>; Wed, 31 Jul 2024 11:21:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sZ6Cr-000210-Pg; Wed, 31 Jul 2024 06:05:17 -0400
+	id 1sZ7Os-00063d-Ry; Wed, 31 Jul 2024 07:21:46 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1sZ6Cq-0001zm-U7
- for qemu-riscv@nongnu.org; Wed, 31 Jul 2024 06:05:16 -0400
-Received: from mail-oa1-x36.google.com ([2001:4860:4864:20::36])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1sZ6Cn-0001zh-Ck
- for qemu-riscv@nongnu.org; Wed, 31 Jul 2024 06:05:15 -0400
-Received: by mail-oa1-x36.google.com with SMTP id
- 586e51a60fabf-260f1664fdfso3063451fac.1
- for <qemu-riscv@nongnu.org>; Wed, 31 Jul 2024 03:05:11 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1sZ7Or-0005zF-Fa; Wed, 31 Jul 2024 07:21:45 -0400
+Received: from out30-110.freemail.mail.aliyun.com ([115.124.30.110])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1sZ7Ok-0007VX-CB; Wed, 31 Jul 2024 07:21:40 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1722420310; x=1723025110; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=St2rf7QdPMn9EEI7qJv7t3MEGM0tEdgXwcCwjyJ3gvo=;
- b=nlJx4e9l0PmNuIHczHjGXU2UVPSy0bxK6yn+fFUI65txhBsa9bGtfp14AKvBPnHTxU
- uVYa8wW2lhYHMOQ01YkRG7L6KYlOSvAkPkO7Mwp+9cKOpUwl4K/3e0I1UGk8vmZptM+y
- /XsVWKWIhj4V74uAVW2wj+srrH/k8PvYlhjXvNVry5foPFbl886c61cvFiaYEx1h3/j/
- 167N92imf2AOC5/PnUzttve70vNkrA7peQvUj+uah5pDmdrwh1RUjeLlgwEAG3dfHJn6
- Zk0vWXSXLdSwaSOCDfsPEuY7OxKFF5XXoeJ43JF3ub+DrchmVlCKdd1rHtZMvAT+U1kv
- BsCA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722420310; x=1723025110;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=St2rf7QdPMn9EEI7qJv7t3MEGM0tEdgXwcCwjyJ3gvo=;
- b=cO1NkQJ3BZu57+TJSq4YO29l5ZyzurJBdYjY72Dx3fc1u/4vUUEA8MqMSgJ6q4jHVD
- FzhxpFqi8oPTTiYy36iECyjTG8vqzAiZlTB8XNub/SyKkWEMuuQPydpbOdEiJLbjgHJZ
- KSsig20sQ0zpEnWB7NN/5B7j0sLkcVgBKUFmZ/7HqU2Rb+zrohqpUkQe8bCZ00uMQ86F
- rZ62ZDWJIlcXl43vcYy98Y8wecKJuqFLF1/CxU2R+pvh6JoXXVTJRhQmSa5UFBGFzk8C
- eKsGROg+rsLSi4bSrn8JoTrHnr0KLTzVb5Yr7x0/Xf5mNPVnDJ4230AEaPjnripjKNDR
- eMjA==
-X-Gm-Message-State: AOJu0Yz8AdnyFtdkGEOn2IFfk0Eexg+95cVqvdF+Hzbyx8jl2z1ozFa2
- i40cPuFEP53T9be9DS6yXztE8q7g7iehrFMFrUI9x9Z2SZVtP9t+8am1VzYfdPE=
-X-Google-Smtp-Source: AGHT+IFHbSjAFF6B1k+SXdvQPEDbzHqZQZqw4pYJ6aIcZ+yTp2+EBPt+SCAw2m2AJPhY+AFwGXamVA==
-X-Received: by 2002:a05:6870:d24c:b0:261:1cd4:cd9b with SMTP id
- 586e51a60fabf-267d4d1c918mr14493723fac.17.1722420310150; 
- Wed, 31 Jul 2024 03:05:10 -0700 (PDT)
-Received: from [192.168.68.110] ([177.197.107.101])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-70ead874c56sm10036244b3a.172.2024.07.31.03.05.07
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 31 Jul 2024 03:05:09 -0700 (PDT)
-Message-ID: <65a9a35f-8f04-4342-aef3-0c6644af3143@ventanamicro.com>
-Date: Wed, 31 Jul 2024 07:05:05 -0300
+ d=linux.alibaba.com; s=default;
+ t=1722424888; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
+ bh=tC3Ku7djqienx5qdftiwGyt+xRIeB8SpBNvj0iOVh4E=;
+ b=wbhXXZTPAcNWG1Pogx560vMBQNgM36QUfv5ruO04GWZIKgQCZ1OJ9Nj/dmdA+gQOVRNcT4zNtJm4QdadDzXj7rp9cf3myDq2dj5zNsgUAnmn8yBi/4G6prL1IwjUaPcPfkBzuqPWfvrhH+PubpEaE/sdhnUJaAI4JCD1YkoFGWo=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R871e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033032014031;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
+ TI=SMTPD_---0WBjLE3E_1722424885; 
+Received: from 30.166.64.102(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0WBjLE3E_1722424885) by smtp.aliyun-inc.com;
+ Wed, 31 Jul 2024 19:21:26 +0800
+Message-ID: <9a05c6f9-fdef-484a-a836-1d3da9be0935@linux.alibaba.com>
+Date: Wed, 31 Jul 2024 19:21:18 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] roms/opensbi: Update to v1.5
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- qemu-devel@nongnu.org
-References: <20240715171521.179517-1-dbarboza@ventanamicro.com>
- <0a4172b9-aca0-45c4-962c-3c49327e2f5c@canonical.com>
+Subject: Re: [PATCH 1/1] target/riscv: Remove redundant insn length check for
+ zama16b
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ dbarboza@ventanamicro.com, liwei1518@gmail.com, bmeng.cn@gmail.com
+References: <20240723013012.1443-1-zhiwei_liu@linux.alibaba.com>
+ <dea63117-cabd-4669-bffd-e8c0cb8d9147@linaro.org>
+ <df37fdc2-79c6-420c-bcf4-e7c3649fe446@linux.alibaba.com>
+ <8d12202f-7170-4127-a1a6-c23c03835cf6@linaro.org>
+ <ca1b9449-f6e0-412c-829a-bc6258f461ff@linux.alibaba.com>
+ <CAKmqyKMftPJuLDc=8vR5R=j90CPYHxM1NscMB_fXk2SUgfM5pQ@mail.gmail.com>
 Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <0a4172b9-aca0-45c4-962c-3c49327e2f5c@canonical.com>
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <CAKmqyKMftPJuLDc=8vR5R=j90CPYHxM1NscMB_fXk2SUgfM5pQ@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::36;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x36.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=115.124.30.110;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-110.freemail.mail.aliyun.com
+X-Spam_score_int: -174
+X-Spam_score: -17.5
+X-Spam_bar: -----------------
+X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,46 +78,47 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
-
-On 7/29/24 7:31 PM, Heinrich Schuchardt wrote:
-> On 7/15/24 19:15, Daniel Henrique Barboza wrote:
->> Update OpenSBI and the pre-built opensbi32 and opensbi64 images to
->> v1.5.
+On 2024/7/31 17:38, Alistair Francis wrote:
+> On Thu, Jul 25, 2024 at 11:53 AM LIU Zhiwei
+> <zhiwei_liu@linux.alibaba.com> wrote:
 >>
->> The following commits were included in v1.5:
+>> On 2024/7/23 13:59, Richard Henderson wrote:
+>>> On 7/23/24 15:29, LIU Zhiwei wrote:
+>>>> The more detailed information about its meaning is in priviledged
+>>>> 1.13 specification. More exactly, in 3.6.4. Misaligned Atomicity
+>>>> Granule PMA.
+>>>>
+>>>> The specification said:
+>>>>
+>>>> "The misaligned atomicity granule PMA applies only to AMOs, loads and
+>>>> stores defined in the base
+>>>> ISAs, and loads and stores of no more than MXLEN bits defined in the
+>>>> F, D, and Q extensions. For an
+>>>> instruction in that set, if all accessed bytes lie within the same
+>>>> misaligned atomicity granule, the
+>>>> instruction will not raise an exception for reasons of address
+>>>> alignment, and the instruction will give
+>>>> rise to only one memory operation for the purposes of RVWMO—i.e., it
+>>>> will execute atomically."
+>>>>
+>>>> That's the reason why I do not apply zama16b to compressed instructions.
+>>> Given the non-specificity of this paragraph, I think not specifically
+>>> calling out compressed forms of the base ISA is simply a documentation
+>>> error.  In general, the compressed ISA is supposed to be a smaller
+>>> encoding of the exact same instruction as the standard ISA.
+>> Yes, it's a documentation error. We will fix in the specification.
 >>
->> 455de67 include: Bump-up version to 1.5
+>> https://github.com/riscv/riscv-isa-manual/pull/1557
+> Thanks for getting that clarified
+>
+> What's the status of a followup patch? We should fix this before the release
 
-(...)
-
->>
->> Signed-off-by: Daniel Henrique Barboza<dbarboza@ventanamicro.com>
->> ---
->>   .../opensbi-riscv32-generic-fw_dynamic.bin    | Bin 267416 -> 268312 bytes
->>   .../opensbi-riscv64-generic-fw_dynamic.bin    | Bin 270808 -> 272504 bytes
->>   roms/opensbi                                  |   2 +-
->>   3 files changed, 1 insertion(+), 1 deletion(-)
-> 
-> While OpenSBI v1.5 compiled from source allows to poweroff U-Boot qemu-riscv64_smode_defconfig, poweroff fails with the binary provided by this patch.
-> 
-> For details see
-> https://gitlab.com/qemu-project/qemu/-/issues/2467
-
-Replied in the bug, but to give some context here: the problem is reproducible when
-trying to do a 'poweroff' using the default machine 'Spike'. 'poweroff' works when
-using the 'virt' machine.
-
-And it has nothing to do with the binaries distributed in this patch. These are the
-same OpenSBI v1.5 binaries that you would compile from source, as I showed in the
-issue. They aren't 'patched'.
-
+I will send the follow patch  as soon as possible.  And resolve another 
+comment Richard gives later as it need some work on PBMT(I think).
 
 Thanks,
+Zhiwei
 
-Daniel
-
-> 
-> Best regards
-> 
-> Heinrich
+>
+> Alistair
 
