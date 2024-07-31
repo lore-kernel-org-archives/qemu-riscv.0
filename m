@@ -4,92 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74223C3DA7F
-	for <qemu-riscv@archiver.kernel.org>; Wed, 31 Jul 2024 16:51:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 208CBC3DA64
+	for <qemu-riscv@archiver.kernel.org>; Wed, 31 Jul 2024 17:22:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sZCXU-0006RX-KX; Wed, 31 Jul 2024 12:51:00 -0400
+	id 1sZD1L-0006d7-Uw; Wed, 31 Jul 2024 13:21:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1sZCXT-0006Qq-RJ
- for qemu-riscv@nongnu.org; Wed, 31 Jul 2024 12:50:59 -0400
-Received: from mail-lj1-x22b.google.com ([2a00:1450:4864:20::22b])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1sZD1I-0006bU-Ur
+ for qemu-riscv@nongnu.org; Wed, 31 Jul 2024 13:21:49 -0400
+Received: from mail-pf1-x42a.google.com ([2607:f8b0:4864:20::42a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1sZCXR-0003mK-Mt
- for qemu-riscv@nongnu.org; Wed, 31 Jul 2024 12:50:59 -0400
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-2eecd2c6432so91156761fa.3
- for <qemu-riscv@nongnu.org>; Wed, 31 Jul 2024 09:50:57 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1sZD1H-0005WX-89
+ for qemu-riscv@nongnu.org; Wed, 31 Jul 2024 13:21:48 -0400
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-70b703eda27so3797322b3a.3
+ for <qemu-riscv@nongnu.org>; Wed, 31 Jul 2024 10:21:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1722444656; x=1723049456; darn=nongnu.org;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=Oxj6cKW3l7RyCCn1nkATs5t6W7LBzcT0OUZC+QA/TY8=;
- b=ZNmIYXbpp3ovBYHxcWeMKE+xUMeHhPMqHP7daouwmijgeqM9ipOgHcjW8bTwhKNDWp
- ezz+xIzJ3YUc3lxzztROxPSZxx75UeYs0T3bivG8EBg/q/zBJlOWMXsRJixgIWa6q7XR
- eKD374FIwvF0MzsmFHqX0jeq55124xbWa5ml152UdxwBqXh/YlB6ScACsbct0FudiMzu
- BCjD1tmtjJw/Zauspfjbwro1ftW1X3ztRw+BCbvh/u8ZEOreYz6OG32NIfTf8Oz21HVA
- /NtYkQlN6H9klwP2H4+HHybrzoKFWw0U+LNUVSWwe6DBMEGz9G/LuQQPfqBrb/3MPMrV
- Q2fw==
+ d=ventanamicro.com; s=google; t=1722446504; x=1723051304; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=RCtWkp2h4+ZqzyNCHoeT7jWpnNpXfSOyTIR15sX5mrM=;
+ b=VpUSSEr6Q8n1iDRZ8YBJVYxfbdj4dQeo9C0b2XYgzUebZBrO9FDgcwgsBo4R8HT4T4
+ WmFghaEJ7huDyKabaNcHklHapwj9mHZ56PH8BNGIF6vHy980CufKFpLjvniU97gtXhdf
+ BroWgydsCx5XT2rlW7+b6r2+bF/QkY4dAknEWO/cUjkZ9HpCuc8Dlv9NdQ7S+6A11J6d
+ T73acI8jm6wMKuVEZnbryRqCXYid0CN9i0DSQbYqJq3g8x3j1iuHd33bbjOqli255p3K
+ Z9EEeXR4j/IQF78kcHR+0Y9PzKS0mFo4iP3l0gQ/+hJAOXJMwWe8FlS5ORKREoHingdV
+ 29BA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722444656; x=1723049456;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
+ d=1e100.net; s=20230601; t=1722446504; x=1723051304;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Oxj6cKW3l7RyCCn1nkATs5t6W7LBzcT0OUZC+QA/TY8=;
- b=wbDJtkqRudf03QSxMAictBkJ54em5+TsnJvk6XvD2WtQvOQ0c37E96fJp1M7X79KDC
- DvCzEqQ1fP89wO5qZV/MnCeAFCS2DEWau0fuKHev+FMSkqPqztZbp4HZab9qxR+C2VJy
- 8X6+HqfXLBNvN4t1Gw2vhFb7chM88ZOc10ULKOyb/9bQ7RU3QfuFSlTRDnsMic6eQbJF
- 8unnzlaKyjbO44v3dANBdIaJFw61MoNCXulWNnp2KulRkb0fl2Xrxrf7n9EklDNXiAJY
- 6KPz+gkSNHfVfpSuCFaVhpXhzUR9gokwdDtboUGZfRtExQNCANbAJEU7ne3x9ojkrFW6
- Ptpw==
+ bh=RCtWkp2h4+ZqzyNCHoeT7jWpnNpXfSOyTIR15sX5mrM=;
+ b=bHZuGSf2OOaHsOca2YrDRRPFz4MwlvBphcKC7HmIbFFgyLoPFlDk/pKMpB7Foelv0G
+ Tu/StmZODpJ1VeYFef3yqSiI0wNGq8LG34euv6KH9T7ovO4/dXnGKatpd6iotdhZmcCg
+ uPF33E5EXqXRzJYbwj/qga81G07vLykQeqdUUg1fuUC4tZ//N+JAivbd/ekFIrEEpD6r
+ nYuI2QbULsoPJHpae15jvoHkVnp3ferAXNdpgfFW976EoSe0TaMgqM2hNZiZvMLfWdnz
+ 658s2qzo+8bE7dxdr9BYYF0IDxa0sliytlclwvL0DBc851MUC+rp+I4kmSd7dSB3kxFD
+ MBuA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXucTAXFbr5zfVkl0HVj+Trts1UkCrlr1COno0ZYUxKo/rwHYS+x9vLlq2T5Q3i3ALQsIbR/ffSJt2xLiHukVWeb/CeufU=
-X-Gm-Message-State: AOJu0YyHplaNDZ0vfoMF6Cp4YJsdoz0ubRRMUGL3jnMZ4rTsutfqAdEC
- eBPedi7sZ9BpN1GK6vmmMz+JJPz5ZAcC9qPyxQxdk4y1bJE9TwbfExNJApOH+z4=
-X-Google-Smtp-Source: AGHT+IHXFu30NQDQ2tNyjfzL5YnsV7w9ElawzOfW0q6h+Xpi3y3ErPJQ0RokcZPgqP4iuPwxVCnmpA==
-X-Received: by 2002:a2e:3311:0:b0:2ef:2677:7b74 with SMTP id
- 38308e7fff4ca-2f12ee62638mr128342691fa.41.1722444655297; 
- Wed, 31 Jul 2024 09:50:55 -0700 (PDT)
-Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
- [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
+ AJvYcCXer6Dm+sy7P9pCEoeAobm9nbmjaMTSSnhytrEF1zSpIWRI8B6SYq053nV6kM+BCmCCXaWfmzySU9+8gJec9CoWtrznHhM=
+X-Gm-Message-State: AOJu0Yyvl2x+lAOzvAn1qiLsqSSDmAWl440Gb99GHofWdXKCgwLqwSV7
+ kDMlSjESO/xGUyDTTOqbyOg/bE9s2ZA4fwxW7B/UQFTRmxJk8YXiOQ2FM2w0JZ0=
+X-Google-Smtp-Source: AGHT+IGMhlTWOMok+0cc0b6AMeUzCTX9Wp4mPqO4drG+RVvGIS3uw0CJ+vneLSLAoqGoHuPUAFupsQ==
+X-Received: by 2002:a05:6a00:9a6:b0:70d:1b17:3c5e with SMTP id
+ d2e1a72fcca58-70ece9fadc5mr13539351b3a.6.1722446504381; 
+ Wed, 31 Jul 2024 10:21:44 -0700 (PDT)
+Received: from [192.168.68.110] ([177.197.107.101])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7acab4e161sm786153066b.65.2024.07.31.09.50.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 31 Jul 2024 09:50:54 -0700 (PDT)
-Date: Wed, 31 Jul 2024 18:50:53 +0200
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: Jason Chien <jason.chien@sifive.com>, qemu-devel@nongnu.org, 
- qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, 
- zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com, frank.chang@sifive.com, 
- tjeznach@rivosinc.com
+ d2e1a72fcca58-70ead712e1csm10220331b3a.78.2024.07.31.10.21.41
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 31 Jul 2024 10:21:43 -0700 (PDT)
+Message-ID: <5b2cc922-892f-4c51-92cf-d33e79d85829@ventanamicro.com>
+Date: Wed, 31 Jul 2024 14:21:39 -0300
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v5 11/13] hw/riscv/riscv-iommu: Add another irq for mrif
  notifications
-Message-ID: <20240731-30c03698cd1c889a4485e2b0@orel>
+To: Andrew Jones <ajones@ventanamicro.com>
+Cc: Jason Chien <jason.chien@sifive.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ frank.chang@sifive.com, tjeznach@rivosinc.com
 References: <20240708173501.426225-1-dbarboza@ventanamicro.com>
  <20240708173501.426225-12-dbarboza@ventanamicro.com>
  <8e54f48e-379b-42b8-8017-886ead154415@sifive.com>
  <49fe48d5-42d0-46fc-899e-50960941c3a2@ventanamicro.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+ <20240731-30c03698cd1c889a4485e2b0@orel>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20240731-30c03698cd1c889a4485e2b0@orel>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <49fe48d5-42d0-46fc-899e-50960941c3a2@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::22b;
- envelope-from=ajones@ventanamicro.com; helo=mail-lj1-x22b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42a;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x42a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,51 +105,61 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Jul 31, 2024 at 01:27:09PM GMT, Daniel Henrique Barboza wrote:
-> Hi Jason,
-> 
-> 
-> On 7/23/24 12:25 PM, Jason Chien wrote:
-> > Hi Daniel,
-> > 
-> > On 2024/7/9 上午 01:34, Daniel Henrique Barboza wrote:
-> > > From: Andrew Jones <ajones@ventanamicro.com>
-> > > 
-> > > And add mrif notification trace.
-> > > 
-> > > Signed-off-by: Andrew Jones <ajones@ventanamicro.com>
-> > > Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> > > Reviewed-by: Frank Chang <frank.chang@sifive.com>
-> > > ---
-> > >   hw/riscv/riscv-iommu-pci.c | 2 +-
-> > >   hw/riscv/riscv-iommu.c     | 1 +
-> > >   hw/riscv/trace-events      | 1 +
-> > >   3 files changed, 3 insertions(+), 1 deletion(-)
-> > > 
-> > > diff --git a/hw/riscv/riscv-iommu-pci.c b/hw/riscv/riscv-iommu-pci.c
-> > > index 7b82ce0645..d7e5f20885 100644
-> > > --- a/hw/riscv/riscv-iommu-pci.c
-> > > +++ b/hw/riscv/riscv-iommu-pci.c
-> > > @@ -81,7 +81,7 @@ static void riscv_iommu_pci_realize(PCIDevice *dev, Error **errp)
-> > >       pci_register_bar(dev, 0, PCI_BASE_ADDRESS_SPACE_MEMORY |
-> > >                        PCI_BASE_ADDRESS_MEM_TYPE_64, &s->bar0);
-> > > -    int ret = msix_init(dev, RISCV_IOMMU_INTR_COUNT,
-> > > +    int ret = msix_init(dev, RISCV_IOMMU_INTR_COUNT + 1,
-> > The new interrupt is not marked as used with msix_vector_use().
-> 
-> I took at look at what this patch is actually doing and, at least in the MRIF setup
-> I have, it's not doing much because we're not hitting the MRIF path inside the
-> emulation. So we're not hitting the trace and this extra MSI isn't being used.
-> 
-> Drew is taking a look into it in the kernel side. Until we get a better idea on what's
-> happening I'll remove this patch from the series. We can re-introduce it again later
-> in this series or in the follow-up.
 
-I recommend adding the trace to whatever patch introduces the MRIF path in
-this series since we'll want the trace for testing regardless. If we need
-another fix to this series for MRIFs then I'll post that separately on
-top.
 
-Thanks,
-drew
+On 7/31/24 1:50 PM, Andrew Jones wrote:
+> On Wed, Jul 31, 2024 at 01:27:09PM GMT, Daniel Henrique Barboza wrote:
+>> Hi Jason,
+>>
+>>
+>> On 7/23/24 12:25 PM, Jason Chien wrote:
+>>> Hi Daniel,
+>>>
+>>> On 2024/7/9 上午 01:34, Daniel Henrique Barboza wrote:
+>>>> From: Andrew Jones <ajones@ventanamicro.com>
+>>>>
+>>>> And add mrif notification trace.
+>>>>
+>>>> Signed-off-by: Andrew Jones <ajones@ventanamicro.com>
+>>>> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>>>> Reviewed-by: Frank Chang <frank.chang@sifive.com>
+>>>> ---
+>>>>    hw/riscv/riscv-iommu-pci.c | 2 +-
+>>>>    hw/riscv/riscv-iommu.c     | 1 +
+>>>>    hw/riscv/trace-events      | 1 +
+>>>>    3 files changed, 3 insertions(+), 1 deletion(-)
+>>>>
+>>>> diff --git a/hw/riscv/riscv-iommu-pci.c b/hw/riscv/riscv-iommu-pci.c
+>>>> index 7b82ce0645..d7e5f20885 100644
+>>>> --- a/hw/riscv/riscv-iommu-pci.c
+>>>> +++ b/hw/riscv/riscv-iommu-pci.c
+>>>> @@ -81,7 +81,7 @@ static void riscv_iommu_pci_realize(PCIDevice *dev, Error **errp)
+>>>>        pci_register_bar(dev, 0, PCI_BASE_ADDRESS_SPACE_MEMORY |
+>>>>                         PCI_BASE_ADDRESS_MEM_TYPE_64, &s->bar0);
+>>>> -    int ret = msix_init(dev, RISCV_IOMMU_INTR_COUNT,
+>>>> +    int ret = msix_init(dev, RISCV_IOMMU_INTR_COUNT + 1,
+>>> The new interrupt is not marked as used with msix_vector_use().
+>>
+>> I took at look at what this patch is actually doing and, at least in the MRIF setup
+>> I have, it's not doing much because we're not hitting the MRIF path inside the
+>> emulation. So we're not hitting the trace and this extra MSI isn't being used.
+>>
+>> Drew is taking a look into it in the kernel side. Until we get a better idea on what's
+>> happening I'll remove this patch from the series. We can re-introduce it again later
+>> in this series or in the follow-up.
+> 
+> I recommend adding the trace to whatever patch introduces the MRIF path in
+> this series since we'll want the trace for testing regardless. If we need
+> another fix to this series for MRIFs then I'll post that separately on
+> top.
+
+I'll add the trace in patch 3 (or 9).
+
+
+Daniel
+
+
+> 
+> Thanks,
+> drew
 
