@@ -4,70 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C42EC3DA64
-	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Aug 2024 14:07:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 849BCC3DA64
+	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Aug 2024 14:07:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sZWRj-00069K-2m; Thu, 01 Aug 2024 10:06:23 -0400
+	id 1sZWRj-0006AQ-8V; Thu, 01 Aug 2024 10:06:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1sZWRe-0005rv-Rz
- for qemu-riscv@nongnu.org; Thu, 01 Aug 2024 10:06:19 -0400
+ id 1sZWRg-0005xz-EC
+ for qemu-riscv@nongnu.org; Thu, 01 Aug 2024 10:06:20 -0400
 Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1sZWRd-0006qa-9T
- for qemu-riscv@nongnu.org; Thu, 01 Aug 2024 10:06:18 -0400
+ id 1sZWRe-0006qw-Pz
+ for qemu-riscv@nongnu.org; Thu, 01 Aug 2024 10:06:20 -0400
 Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-1fd65aaac27so15902385ad.1
- for <qemu-riscv@nongnu.org>; Thu, 01 Aug 2024 07:06:16 -0700 (PDT)
+ d9443c01a7336-1fc49c0aaffso52714335ad.3
+ for <qemu-riscv@nongnu.org>; Thu, 01 Aug 2024 07:06:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1722521175; x=1723125975; darn=nongnu.org;
- h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=bxeg5KXRrlKgteP3D/ZipXV3kyjL5x4E+NzJSexClU8=;
- b=KnWKNITAelWktRSBR0BVM82HKesRzvEI3F1fq0hAXaxaSB+NImsMBMiMAfIbFviyiM
- NiFh73ACdoTL3xzjlOTqfO7apLtc7qDJ0/l3pPpXKsXAcTv4nKM1czwHm6O8dZgMiEf4
- kjDD6gnCGboFxewgQPNGOwhY1LijGbaVK/CahQ2LM2Pm5S3YU5/RBMYSOD+aymsdVuvH
- 3/Cce19CumUzzjqmLsmB8e8CM3gD9FLMBt2Qc1qfegu8nYT3OiVdEaJpYIAwYKRJSUeG
- R9N5Jr6KFpmelRlD8zfmSOSaVGJ6r3q1sxUei7D2jUrq3zpCySyADotLUkk+wJiX3VFh
- 4Wig==
+ d=sifive.com; s=google; t=1722521177; x=1723125977; darn=nongnu.org;
+ h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=FLUVpm7q4t3wLyhn54TwgrrVNxCRL3GBe3+Zpe/mX4s=;
+ b=mcW5H7NxojplSaUBiyvEp7mmbPqPKP9MSpezz+blJVxH4iBcFLSOTJ1yqpASX7Frsn
+ 5TpfFQYu1OdO8a7q8vcwzLcIb85ck36sF1gMEyJH3vzU+x8Dw+8X02/tOlr37piRXXjd
+ NVCDkusavf5gRqmMNGwQjP0ZvJfSu+4ZmD+zVZZknEHOd7rDNd8UvILNcZ8eBmsAfz4d
+ WV3OwcB3WXySg8EjYHmIN5YHSMsL2N6kDzOt0mDJe8oo6o1E1MBcX+vxVtUR4wCrJOKg
+ dul4DF2drmAm45KZqxN3EScUkHP42TElLs+SZhATO9abETfIFAaukPEyJAkKkfSckQbF
+ 6E/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722521175; x=1723125975;
- h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=bxeg5KXRrlKgteP3D/ZipXV3kyjL5x4E+NzJSexClU8=;
- b=lKB5rqYs5zzdYUAfy0X7uxnrnX3Xdoh5G3jt2klzgYde/JU20IvIjvyxXbrUvSQKvt
- ls5jdrUB1vh831MYEqcPkCdFSCTpltW7VmiUhCXsMKBOazWTKl5PjjeAnmXmI2LRzLrU
- Q1qBgdQUKvL+Tozsy9H61lw386MxOScHKk5wQa71B8n3lz0sHVBKrBw1CrR75Dgnlx1a
- RrltMrSbqW4rK9sGNaMHz01u6cDa8GyiN8oJaRTehFtXSABevK0/bIcH0T/wdD2Kj9gO
- SujzED6wtv/VW1qS/hJ1jFN2ktHxok0V0k+DFX7NqA0SJkcSjKwWFAiGB+yOp4Q3J2RA
- 6z+Q==
+ d=1e100.net; s=20230601; t=1722521177; x=1723125977;
+ h=references:in-reply-to:message-id:date:subject:cc:to:from
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=FLUVpm7q4t3wLyhn54TwgrrVNxCRL3GBe3+Zpe/mX4s=;
+ b=mFZcNRmg/OMqhxJtf9BhWqzwxryOCK6j57wXHCl2v4lkkWHDEnfcn1T3HOAPCXVLbf
+ qwH1+P9+odIodzrruDgd7fMPaG3Sehn1EM0Bc515KNlGmJPrKW8TaPjSI+VlSGj32LP8
+ +MO1/XPlaZIxDPCrPhObK5JRR5ZVlQyv/t9u0WdINvew/UyhvOPaj8zoKbQfhxJcHYBk
+ gPqVCV445e2yFKso4OqgPkR5Vfy60C1fquH3Z49v4ivBC95xCWMPUzfV1XnRH+9T6g7C
+ 3kD7gAeBJ60eafrHn0NyK9/17wdw5qOZgPYFfP0DSTn0o3AY4d25A22urjdjBgCt9zfk
+ Klyw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUsmYCgiUYaG/OHSbjuCu5/HBoed8Dcame/MqtELpiugJoeADEBgnN2UbZ4sJsOR7rk9CjRCaBt8bnb7FsrksSvOcVhtqc=
-X-Gm-Message-State: AOJu0Yzgd4pD6WvKhgXBLWRIAEY5asLl3xeXhcpeVX+fkbpcYratHShB
- UIPAdx3SJ1Fhfcu6IkOkgh289snFYkPrBumDDzO8KGZH/Ov9jRG+ts+gXdNLN93VvoWv+JC6Ctd
- XJuE=
-X-Google-Smtp-Source: AGHT+IHRtWnk/YcpfiQatbyDq1rrOeIgO96EcGOIEfQRcDQtX/Sbzp8J/7XUU/nHS+4f9h66pqmRMg==
-X-Received: by 2002:a17:902:dac3:b0:1fa:2b11:657d with SMTP id
- d9443c01a7336-1ff57b827c9mr1048365ad.10.1722521174975; 
- Thu, 01 Aug 2024 07:06:14 -0700 (PDT)
+ AJvYcCVPXyB9Hmy2YRHfmnv1M+AiB6dC9pQmVUlr/yNEv5uqAA2szeJjAMCptXf74eGAI0H2AKzdNsulTpQib1lZwsOdxhil8kM=
+X-Gm-Message-State: AOJu0YxD2li4Kt4hhTnUY2S5mFyG5e+vgVr/jqXF6fZbRKzWqQa1LX/c
+ AqY7hisEZQIX7+5fCbytaIL2FjQKMH2FU887+NDl17oYxK0QvfD9tSOhlwdcBII=
+X-Google-Smtp-Source: AGHT+IFZXMf6uWKao/QznG8kHjC4gK5FTMlxjrncQVt6vsfVD0jr+3sOFI36WWIo5nqryY8Vwc6IQw==
+X-Received: by 2002:a17:902:c402:b0:1fd:8f14:a109 with SMTP id
+ d9443c01a7336-1ff5732be1fmr2920615ad.32.1722521177461; 
+ Thu, 01 Aug 2024 07:06:17 -0700 (PDT)
 Received: from hsinchu26.internal.sifive.com
  (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1fed7cc0213sm142631275ad.72.2024.08.01.07.06.13
+ d9443c01a7336-1fed7cc0213sm142631275ad.72.2024.08.01.07.06.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 Aug 2024 07:06:14 -0700 (PDT)
+ Thu, 01 Aug 2024 07:06:17 -0700 (PDT)
 From: Jim Shu <jim.shu@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: Jim Shu <jim.shu@sifive.com>
-Subject: [PATCH v2 0/3] Several fixes of AXI-ethernet/DMA
-Date: Thu,  1 Aug 2024 22:06:06 +0800
-Message-Id: <20240801140609.26922-1-jim.shu@sifive.com>
+Subject: [PATCH v2 1/3] hw/dma: xilinx_axidma: Correct the txlen value in the
+ descriptor
+Date: Thu,  1 Aug 2024 22:06:07 +0800
+Message-Id: <20240801140609.26922-2-jim.shu@sifive.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20240801140609.26922-1-jim.shu@sifive.com>
+References: <20240801140609.26922-1-jim.shu@sifive.com>
 Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
  envelope-from=jim.shu@sifive.com; helo=mail-pl1-x631.google.com
 X-Spam_score_int: -20
@@ -92,24 +94,47 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-v2:
-- Remove redundant RCW1_RX checking in enet_write()
-- Remove qemu_set_irq() in DeviceState::reset()
+Currently, txlen is always decremented to 0 before filling to the
+descriptor. Keep the origin txlen value to have the correct value of
+descriptor status field.
 
-Fix txlen value in the descriptor status field, DMA error handling,
-and ethernet/DMA reset flow.
+It will fix the 'tx_bytes' statistic value in linux axi-ethernet driver.
 
-Jim Shu (3):
-  hw/dma: xilinx_axidma: Correct the txlen value in the descriptor
-  hw/dma: xilinx_axidma: Send DMA error IRQ if any memory access is
-    failed
-  hw/net: xilinx_axienet: Fix DMA RX IRQ if ethernet disable RX
+Signed-off-by: Jim Shu <jim.shu@sifive.com>
+---
+ hw/dma/xilinx_axidma.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
- hw/dma/trace-events     |  1 +
- hw/dma/xilinx_axidma.c  | 74 +++++++++++++++++++++++++++++------------
- hw/net/xilinx_axienet.c | 71 +++++++++++++++++++++++----------------
- 3 files changed, 95 insertions(+), 51 deletions(-)
-
+diff --git a/hw/dma/xilinx_axidma.c b/hw/dma/xilinx_axidma.c
+index c9cfc3169b..6aa8c9272c 100644
+--- a/hw/dma/xilinx_axidma.c
++++ b/hw/dma/xilinx_axidma.c
+@@ -291,7 +291,7 @@ static void stream_process_mem2s(struct Stream *s, StreamSink *tx_data_dev,
+                                  StreamSink *tx_control_dev)
+ {
+     uint32_t prev_d;
+-    uint32_t txlen;
++    uint32_t txlen, origin_txlen;
+     uint64_t addr;
+     bool eop;
+ 
+@@ -314,6 +314,7 @@ static void stream_process_mem2s(struct Stream *s, StreamSink *tx_data_dev,
+         }
+ 
+         txlen = s->desc.control & SDESC_CTRL_LEN_MASK;
++        origin_txlen = txlen;
+ 
+         eop = stream_desc_eof(&s->desc);
+         addr = s->desc.buffer_address;
+@@ -334,7 +335,7 @@ static void stream_process_mem2s(struct Stream *s, StreamSink *tx_data_dev,
+         }
+ 
+         /* Update the descriptor.  */
+-        s->desc.status = txlen | SDESC_STATUS_COMPLETE;
++        s->desc.status = origin_txlen | SDESC_STATUS_COMPLETE;
+         stream_desc_store(s, s->regs[R_CURDESC]);
+ 
+         /* Advance.  */
 -- 
 2.17.1
 
