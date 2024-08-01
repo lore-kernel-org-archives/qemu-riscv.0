@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 849BCC3DA64
-	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Aug 2024 14:07:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D110C52D54
+	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Aug 2024 14:07:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sZWRj-0006AQ-8V; Thu, 01 Aug 2024 10:06:23 -0400
+	id 1sZWRr-0006iW-Iw; Thu, 01 Aug 2024 10:06:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1sZWRg-0005xz-EC
- for qemu-riscv@nongnu.org; Thu, 01 Aug 2024 10:06:20 -0400
-Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
+ id 1sZWRo-0006VS-Ff
+ for qemu-riscv@nongnu.org; Thu, 01 Aug 2024 10:06:28 -0400
+Received: from mail-pj1-x102f.google.com ([2607:f8b0:4864:20::102f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1sZWRe-0006qw-Pz
- for qemu-riscv@nongnu.org; Thu, 01 Aug 2024 10:06:20 -0400
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-1fc49c0aaffso52714335ad.3
- for <qemu-riscv@nongnu.org>; Thu, 01 Aug 2024 07:06:18 -0700 (PDT)
+ id 1sZWRk-0006rp-IN
+ for qemu-riscv@nongnu.org; Thu, 01 Aug 2024 10:06:27 -0400
+Received: by mail-pj1-x102f.google.com with SMTP id
+ 98e67ed59e1d1-2cb57e25387so5383749a91.3
+ for <qemu-riscv@nongnu.org>; Thu, 01 Aug 2024 07:06:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1722521177; x=1723125977; darn=nongnu.org;
+ d=sifive.com; s=google; t=1722521182; x=1723125982; darn=nongnu.org;
  h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
  :cc:subject:date:message-id:reply-to;
- bh=FLUVpm7q4t3wLyhn54TwgrrVNxCRL3GBe3+Zpe/mX4s=;
- b=mcW5H7NxojplSaUBiyvEp7mmbPqPKP9MSpezz+blJVxH4iBcFLSOTJ1yqpASX7Frsn
- 5TpfFQYu1OdO8a7q8vcwzLcIb85ck36sF1gMEyJH3vzU+x8Dw+8X02/tOlr37piRXXjd
- NVCDkusavf5gRqmMNGwQjP0ZvJfSu+4ZmD+zVZZknEHOd7rDNd8UvILNcZ8eBmsAfz4d
- WV3OwcB3WXySg8EjYHmIN5YHSMsL2N6kDzOt0mDJe8oo6o1E1MBcX+vxVtUR4wCrJOKg
- dul4DF2drmAm45KZqxN3EScUkHP42TElLs+SZhATO9abETfIFAaukPEyJAkKkfSckQbF
- 6E/w==
+ bh=CHB3owSw+cm0RxH1hCZLRPT/ElZgDxKRpTJY+BemXwg=;
+ b=NE2LQtfujViqrd2LRH6t1Hj+GYw/OL8/XJVGeXtuPhsYE0D+kvoLWjG1/GctC0QiCN
+ rkKOaLHsRK3WbBlVfAwI7YlyBHGWDvaADH9G3l2EWbORdpxJ6MweLQ4lmAtP1AusdPNL
+ QpfMLE91RsqXj9W0wVAtMpcfiY1ho1u7s5bDeX7C021F7QYDj4u5mWywYltBzWrcJcsx
+ fjzQDNRGXXi9amfBZcJ8KAhbz7gUMnBPlCUVbRJ/6GiG9ufhRRt0rOETbKhixSGXbJ8h
+ nluL1pvMfEjnpogQRazfygBGKqVICIuV0rbnepvzbAb2KaGdu8AmdeIKeb9Q8VNA9iRu
+ Tsvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722521177; x=1723125977;
+ d=1e100.net; s=20230601; t=1722521182; x=1723125982;
  h=references:in-reply-to:message-id:date:subject:cc:to:from
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=FLUVpm7q4t3wLyhn54TwgrrVNxCRL3GBe3+Zpe/mX4s=;
- b=mFZcNRmg/OMqhxJtf9BhWqzwxryOCK6j57wXHCl2v4lkkWHDEnfcn1T3HOAPCXVLbf
- qwH1+P9+odIodzrruDgd7fMPaG3Sehn1EM0Bc515KNlGmJPrKW8TaPjSI+VlSGj32LP8
- +MO1/XPlaZIxDPCrPhObK5JRR5ZVlQyv/t9u0WdINvew/UyhvOPaj8zoKbQfhxJcHYBk
- gPqVCV445e2yFKso4OqgPkR5Vfy60C1fquH3Z49v4ivBC95xCWMPUzfV1XnRH+9T6g7C
- 3kD7gAeBJ60eafrHn0NyK9/17wdw5qOZgPYFfP0DSTn0o3AY4d25A22urjdjBgCt9zfk
- Klyw==
+ bh=CHB3owSw+cm0RxH1hCZLRPT/ElZgDxKRpTJY+BemXwg=;
+ b=LbVK6i2MUiE7p3zyLbjmD1JEYNM1efgOEGGmvYU0UXwjv3KcFlKR8QZrImMflxBoIK
+ jJaqfovacznn3EkaGFhdvRu1tSEk1JKok+Yp7bct+ZbB0Pfk4iRFQPlkMYq+12DOytR/
+ +Dj/R6miMpEs9qcE28lE0aHKSlwpWcx6t1JXABOdmcEKy/TFUEUNyiX9na1L5gTiNlhw
+ 0xAGT2vl8wv0oOzfs51T5fOxhMiT05QOob3bHgXsE7Vt0W7fC2gM5kFGLqLN+vq5A9Ed
+ F+dtQAPuG7K4TcgtNrc8FvEQYeCzJMIBJa4gdYMsZe63hHkGh/ewZADltVy4FF6PXPq4
+ A1VQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVPXyB9Hmy2YRHfmnv1M+AiB6dC9pQmVUlr/yNEv5uqAA2szeJjAMCptXf74eGAI0H2AKzdNsulTpQib1lZwsOdxhil8kM=
-X-Gm-Message-State: AOJu0YxD2li4Kt4hhTnUY2S5mFyG5e+vgVr/jqXF6fZbRKzWqQa1LX/c
- AqY7hisEZQIX7+5fCbytaIL2FjQKMH2FU887+NDl17oYxK0QvfD9tSOhlwdcBII=
-X-Google-Smtp-Source: AGHT+IFZXMf6uWKao/QznG8kHjC4gK5FTMlxjrncQVt6vsfVD0jr+3sOFI36WWIo5nqryY8Vwc6IQw==
-X-Received: by 2002:a17:902:c402:b0:1fd:8f14:a109 with SMTP id
- d9443c01a7336-1ff5732be1fmr2920615ad.32.1722521177461; 
- Thu, 01 Aug 2024 07:06:17 -0700 (PDT)
+ AJvYcCUlyrMHCQOcJLRzyTqjYrl6ePjDdL5Okf5kXQZcu2E+T2AV4sTlimHAPgbCSyD/vY5Tz/GscHdKi8weFyv4JpehmP0DFoU=
+X-Gm-Message-State: AOJu0Yxd4kIBNdOwleOj9FMUea8X9Gcp8RadI6V2SfbGCm5xrvNjWN5i
+ NcYZvFWzoB2dbufCHeMqtTfZbNA1/9tK9/MSV81Yb4WDmneAtnJV9PR21yPhDkU=
+X-Google-Smtp-Source: AGHT+IFxWowPuHLotwvNULGYlHrMhyRdtnGhTAqBwNWaXoAfsWs+XLVdC8gi1UvESGr5ZNK/BNOE5Q==
+X-Received: by 2002:a17:90b:1e4c:b0:2c8:858:7035 with SMTP id
+ 98e67ed59e1d1-2cff948df14mr364635a91.25.1722521181901; 
+ Thu, 01 Aug 2024 07:06:21 -0700 (PDT)
 Received: from hsinchu26.internal.sifive.com
  (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1fed7cc0213sm142631275ad.72.2024.08.01.07.06.16
+ d9443c01a7336-1fed7cc0213sm142631275ad.72.2024.08.01.07.06.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 Aug 2024 07:06:17 -0700 (PDT)
+ Thu, 01 Aug 2024 07:06:21 -0700 (PDT)
 From: Jim Shu <jim.shu@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: Jim Shu <jim.shu@sifive.com>
-Subject: [PATCH v2 1/3] hw/dma: xilinx_axidma: Correct the txlen value in the
- descriptor
-Date: Thu,  1 Aug 2024 22:06:07 +0800
-Message-Id: <20240801140609.26922-2-jim.shu@sifive.com>
+Subject: [PATCH v2 3/3] hw/net: xilinx_axienet: Fix DMA RX IRQ if ethernet
+ disable RX
+Date: Thu,  1 Aug 2024 22:06:09 +0800
+Message-Id: <20240801140609.26922-4-jim.shu@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20240801140609.26922-1-jim.shu@sifive.com>
 References: <20240801140609.26922-1-jim.shu@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
- envelope-from=jim.shu@sifive.com; helo=mail-pl1-x631.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
+ envelope-from=jim.shu@sifive.com; helo=mail-pj1-x102f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -94,47 +94,114 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Currently, txlen is always decremented to 0 before filling to the
-descriptor. Keep the origin txlen value to have the correct value of
-descriptor status field.
+When AXI ethernet RX is disabled, it shouldn't send packets to AXI DMA,
+which may let AXI DMA to send RX full IRQs. It is aligned with real AXI
+DMA/ethernet IP behavior in the FPGA.
 
-It will fix the 'tx_bytes' statistic value in linux axi-ethernet driver.
+Also, now ethernet RX blocks the RX packets when it is disabled. It
+should send and clear the remaining RX packets when enabling it.
 
 Signed-off-by: Jim Shu <jim.shu@sifive.com>
 ---
- hw/dma/xilinx_axidma.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ hw/net/xilinx_axienet.c | 71 ++++++++++++++++++++++++-----------------
+ 1 file changed, 42 insertions(+), 29 deletions(-)
 
-diff --git a/hw/dma/xilinx_axidma.c b/hw/dma/xilinx_axidma.c
-index c9cfc3169b..6aa8c9272c 100644
---- a/hw/dma/xilinx_axidma.c
-+++ b/hw/dma/xilinx_axidma.c
-@@ -291,7 +291,7 @@ static void stream_process_mem2s(struct Stream *s, StreamSink *tx_data_dev,
-                                  StreamSink *tx_control_dev)
+diff --git a/hw/net/xilinx_axienet.c b/hw/net/xilinx_axienet.c
+index 05d41bd548..0ecdc30be6 100644
+--- a/hw/net/xilinx_axienet.c
++++ b/hw/net/xilinx_axienet.c
+@@ -530,6 +530,40 @@ static uint64_t enet_read(void *opaque, hwaddr addr, unsigned size)
+     return r;
+ }
+ 
++static void axienet_eth_rx_notify(void *opaque)
++{
++    XilinxAXIEnet *s = XILINX_AXI_ENET(opaque);
++
++    /* If RX is disabled, don't trigger DMA to update RX desc and send IRQ */
++    if (!axienet_rx_enabled(s)) {
++        return;
++    }
++
++    while (s->rxappsize && stream_can_push(s->tx_control_dev,
++                                           axienet_eth_rx_notify, s)) {
++        size_t ret = stream_push(s->tx_control_dev,
++                                 (void *)s->rxapp + CONTROL_PAYLOAD_SIZE
++                                 - s->rxappsize, s->rxappsize, true);
++        s->rxappsize -= ret;
++    }
++
++    while (s->rxsize && stream_can_push(s->tx_data_dev,
++                                        axienet_eth_rx_notify, s)) {
++        size_t ret = stream_push(s->tx_data_dev, (void *)s->rxmem + s->rxpos,
++                                 s->rxsize, true);
++        s->rxsize -= ret;
++        s->rxpos += ret;
++        if (!s->rxsize) {
++            s->regs[R_IS] |= IS_RX_COMPLETE;
++            if (s->need_flush) {
++                s->need_flush = false;
++                qemu_flush_queued_packets(qemu_get_queue(s->nic));
++            }
++        }
++    }
++    enet_update_irq(s);
++}
++
+ static void enet_write(void *opaque, hwaddr addr,
+                        uint64_t value, unsigned size)
  {
-     uint32_t prev_d;
--    uint32_t txlen;
-+    uint32_t txlen, origin_txlen;
-     uint64_t addr;
-     bool eop;
+@@ -546,6 +580,14 @@ static void enet_write(void *opaque, hwaddr addr,
+             } else {
+                 qemu_flush_queued_packets(qemu_get_queue(s->nic));
+             }
++
++            /*
++             * When RX is enabled, check if any remaining data in rxmem
++             * and send them.
++             */
++            if (addr & 1) {
++                axienet_eth_rx_notify(s);
++            }
+             break;
  
-@@ -314,6 +314,7 @@ static void stream_process_mem2s(struct Stream *s, StreamSink *tx_data_dev,
-         }
+         case R_TC:
+@@ -666,35 +708,6 @@ static int enet_match_addr(const uint8_t *buf, uint32_t f0, uint32_t f1)
+     return match;
+ }
  
-         txlen = s->desc.control & SDESC_CTRL_LEN_MASK;
-+        origin_txlen = txlen;
- 
-         eop = stream_desc_eof(&s->desc);
-         addr = s->desc.buffer_address;
-@@ -334,7 +335,7 @@ static void stream_process_mem2s(struct Stream *s, StreamSink *tx_data_dev,
-         }
- 
-         /* Update the descriptor.  */
--        s->desc.status = txlen | SDESC_STATUS_COMPLETE;
-+        s->desc.status = origin_txlen | SDESC_STATUS_COMPLETE;
-         stream_desc_store(s, s->regs[R_CURDESC]);
- 
-         /* Advance.  */
+-static void axienet_eth_rx_notify(void *opaque)
+-{
+-    XilinxAXIEnet *s = XILINX_AXI_ENET(opaque);
+-
+-    while (s->rxappsize && stream_can_push(s->tx_control_dev,
+-                                           axienet_eth_rx_notify, s)) {
+-        size_t ret = stream_push(s->tx_control_dev,
+-                                 (void *)s->rxapp + CONTROL_PAYLOAD_SIZE
+-                                 - s->rxappsize, s->rxappsize, true);
+-        s->rxappsize -= ret;
+-    }
+-
+-    while (s->rxsize && stream_can_push(s->tx_data_dev,
+-                                        axienet_eth_rx_notify, s)) {
+-        size_t ret = stream_push(s->tx_data_dev, (void *)s->rxmem + s->rxpos,
+-                                 s->rxsize, true);
+-        s->rxsize -= ret;
+-        s->rxpos += ret;
+-        if (!s->rxsize) {
+-            s->regs[R_IS] |= IS_RX_COMPLETE;
+-            if (s->need_flush) {
+-                s->need_flush = false;
+-                qemu_flush_queued_packets(qemu_get_queue(s->nic));
+-            }
+-        }
+-    }
+-    enet_update_irq(s);
+-}
+-
+ static ssize_t eth_rx(NetClientState *nc, const uint8_t *buf, size_t size)
+ {
+     XilinxAXIEnet *s = qemu_get_nic_opaque(nc);
 -- 
 2.17.1
 
