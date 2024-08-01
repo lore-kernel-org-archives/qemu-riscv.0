@@ -4,75 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67C7AC3DA4A
-	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Aug 2024 14:08:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6F35C3DA4A
+	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Aug 2024 15:43:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sZWRm-0006Ml-Bv; Thu, 01 Aug 2024 10:06:26 -0400
+	id 1sZXy1-0006Iv-Cj; Thu, 01 Aug 2024 11:43:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1sZWRk-0006Ga-OV
- for qemu-riscv@nongnu.org; Thu, 01 Aug 2024 10:06:25 -0400
-Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1sZXxx-0006Ht-Mq
+ for qemu-riscv@nongnu.org; Thu, 01 Aug 2024 11:43:47 -0400
+Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1sZWRg-0006rR-QL
- for qemu-riscv@nongnu.org; Thu, 01 Aug 2024 10:06:24 -0400
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-1ff1cd07f56so50019475ad.2
- for <qemu-riscv@nongnu.org>; Thu, 01 Aug 2024 07:06:20 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1sZXxv-0004un-AA
+ for qemu-riscv@nongnu.org; Thu, 01 Aug 2024 11:43:44 -0400
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-70d2b921cd1so6262529b3a.1
+ for <qemu-riscv@nongnu.org>; Thu, 01 Aug 2024 08:43:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1722521179; x=1723125979; darn=nongnu.org;
- h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
- :cc:subject:date:message-id:reply-to;
- bh=JXlEGPL9thPPk61Tbq7dliSQC6vKn0rJatKn3l6TSro=;
- b=GVLkH39dSmZXp0p2ayS5Qjjv44B6PHoxJWs0Pf5HA1ND70PPj/ZBrV+opPV8cq2CwP
- 3u+oelGtBjUgFdjNGPYZLlgJe90B3RhcWP+ddbgr6AfjLIJbecDdkPPDLmVFF3zb12yO
- F9sbI8G+tisbC76lUj1/IwoM3/FV2Qj+Q8eLzIeJmdOjhg/DXq03AzEQL4Nk1YVSZmOO
- 1uMUKl2/xDpnK5C0/NBtuQu7jDHLOMFgWHPijN8Ljh4oAfGsWqKG2FXzBcKmfWJssF1B
- zge9marWe90Ng0CtX18La0Sf68QritsO5hu5joRFNYeRpNL0LwXWYnJ8Peuk6Ctd0Bjt
- Js7w==
+ d=ventanamicro.com; s=google; t=1722527021; x=1723131821; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=z4eXq8oEdUXQrhLUHBWnxm31duZG6qEdQtX+afbt/hw=;
+ b=LaqLLB/0Osa7mTKRtRFaP0FyZiCYmNqnCirgbiioZkM8kx/DaxOvPcTri7gtXYhTZg
+ 90+QCgJnAeFAH1XleLJYRQY8XgICtDbbHKGXXhJiWZfijYMpEocQKpM1MEWjX4pDkO3H
+ OpMX+xQifvvioth4u9T7EuXgctOKccGI6b1y7+s8gDQM4qYNger/AvYZBHuvTK4ukqvt
+ KS1VbAB/zqmBZx4NBa/F7qCLITCRQliF663e+WMlV5ZZKo965JHWpVdMQ0DzdRRr7wqv
+ m8sqKauShTbZeRME+7nkIV3QhORYrUVfHkkg1KFsqjkdT4R890fGJxugnbyFeNfzF8cG
+ Uaag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722521179; x=1723125979;
- h=references:in-reply-to:message-id:date:subject:cc:to:from
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=JXlEGPL9thPPk61Tbq7dliSQC6vKn0rJatKn3l6TSro=;
- b=flekVicLZm2eOYOZq7ecoPAgI7gj39biOYoU9stRuSEdFEkCE4kNnVmZZBwE6+eyyU
- rGWKmQYpqIuQS4ZOWG4bSCaxMaA3mUvxw0GbTgYVq4dCExP1+z2i699zYs8lwfhawQLs
- PXMVlt9StkC8zIZEMYE3n5GWEav7/2v92IDv2swiobhQOQxZPnWV7ptCCYknsGGn24BW
- Z9MSpKzQ1fO9loIzB9RaAi63knZmIUykmBsTwmoYMq0zkLuoZtM1xhmtV9bWkDwGr5pT
- zQVKqAp0lUnghDUQT+esyGr4QzG1KeA94tWFOmWKs4BLNly2xCdMkT20l14S5V4Lpnek
- rTFQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVGQhZXPgaCtjQ0zqaOf3g4Wmk8LwRLw0G+42wqoKWsObYHVG8ZoZMmY5JiqeSM8ao70coJiutigh50qfgtO4aBpWLm/1A=
-X-Gm-Message-State: AOJu0YwaQRh/pIzgJB7ERRcMMjF5/KQYOZrEU/y1kzskRMM4/QnIZdSn
- hw5+rVOtLKO36rmoC19IXCMUprmYdIjLvMHw1rvfGnp2sQWEkkY9pADCZruAKP0QfD9t6sT4GiD
- gfQs=
-X-Google-Smtp-Source: AGHT+IGJm9tSjFlCrbFNJ6AfEEHUJq5BW5CjEtSZD7FzSaiO+W+pXpMsYLcTRs0zGnyhB63AoQ0HLw==
-X-Received: by 2002:a17:903:2345:b0:1fd:6d4c:24e9 with SMTP id
- d9443c01a7336-1ff5722df70mr3471695ad.10.1722521179531; 
- Thu, 01 Aug 2024 07:06:19 -0700 (PDT)
-Received: from hsinchu26.internal.sifive.com
- (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
+ d=1e100.net; s=20230601; t=1722527021; x=1723131821;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=z4eXq8oEdUXQrhLUHBWnxm31duZG6qEdQtX+afbt/hw=;
+ b=ouNa/yiRyr2ab7xX+YdX8A2Ojqzk6jRoYUpR4FfGIWbWYeAVvBCiQ6Gvrbb0xHV/bv
+ MAiechKn/optPC3xZkmA7773i7f0XsH6NsDh52yKc4niwRriuadusCZrldakYxlZPB7T
+ NeAJSvw89DMK8Oasl+uNq0o1qKQuHP6sqcPm01WsrAZ95DTGjbomGkVnBFl1TQjpf1E0
+ dtHL6OdJX1pNrUPV6uhI7Al6swC8J6hHO5NNSC1x8OvECP3CaMrc6/t0z0TiNssHrq0o
+ 2HxJjJ4cyPcKEaQM9Z02p/8bRteLsHukwME98jp7W/2DI9pNBN/gD9LUf6sqKQSKqI9b
+ BPAA==
+X-Gm-Message-State: AOJu0YxkgDQtpGi737Jp10k0ja84ywoi4Co0AVLvWmGNlHqJ86jBkVsc
+ hltSZkeubHpKEpVId5rMUNMLb96m5+zhIamb2/4rEnsGek25NR5CnXgZBTeRZu4=
+X-Google-Smtp-Source: AGHT+IGFntwRqLdom6EBVR6T/u+hqt8M7IKN7JdQEWm0A5GGoyGDCwwtuHSckDwYmlLEX8jGM8vOXw==
+X-Received: by 2002:a05:6a00:4b11:b0:70d:2b95:d9c0 with SMTP id
+ d2e1a72fcca58-7106cfd2249mr820269b3a.14.1722527021270; 
+ Thu, 01 Aug 2024 08:43:41 -0700 (PDT)
+Received: from grind.dc1.ventanamicro.com ([177.197.107.101])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1fed7cc0213sm142631275ad.72.2024.08.01.07.06.18
+ 41be03b00d2f7-7b762e9c650sm17183a12.16.2024.08.01.08.43.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 Aug 2024 07:06:19 -0700 (PDT)
-From: Jim Shu <jim.shu@sifive.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Jim Shu <jim.shu@sifive.com>
-Subject: [PATCH v2 2/3] hw/dma: xilinx_axidma: Send DMA error IRQ if any
- memory access is failed
-Date: Thu,  1 Aug 2024 22:06:08 +0800
-Message-Id: <20240801140609.26922-3-jim.shu@sifive.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20240801140609.26922-1-jim.shu@sifive.com>
-References: <20240801140609.26922-1-jim.shu@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
- envelope-from=jim.shu@sifive.com; helo=mail-pl1-x633.google.com
+ Thu, 01 Aug 2024 08:43:40 -0700 (PDT)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ jason.chien@sifive.com, frank.chang@sifive.com, ajones@ventanamicro.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH for-9.2 v6 00/12] riscv: QEMU RISC-V IOMMU Support
+Date: Thu,  1 Aug 2024 12:43:21 -0300
+Message-ID: <20240801154334.1009852-1-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.45.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42f;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x42f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -95,169 +93,97 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The memory transactions from DMA could have bus-error in some cases. If
-it is failed, DMA device should send error IRQs.
+Hi,
 
-Signed-off-by: Jim Shu <jim.shu@sifive.com>
----
- hw/dma/trace-events    |  1 +
- hw/dma/xilinx_axidma.c | 69 ++++++++++++++++++++++++++++++------------
- 2 files changed, 50 insertions(+), 20 deletions(-)
+In this new version the most notable change is how we're dealing with
+ICVEC updates. Instead of hardcoding the vectors being used in
+riscv-iommu-pci, a new interface was created to allow IOMMU devices to
+receive ICVEC updates and act accordingly.
 
-diff --git a/hw/dma/trace-events b/hw/dma/trace-events
-index 4c09790f9a..7db38e0e93 100644
---- a/hw/dma/trace-events
-+++ b/hw/dma/trace-events
-@@ -47,3 +47,4 @@ pl330_iomem_read(uint32_t addr, uint32_t data) "addr: 0x%08"PRIx32" data: 0x%08"
- 
- # xilinx_axidma.c
- xilinx_axidma_loading_desc_fail(uint32_t res) "error:%u"
-+xilinx_axidma_storing_desc_fail(uint32_t res) "error:%u"
-diff --git a/hw/dma/xilinx_axidma.c b/hw/dma/xilinx_axidma.c
-index 6aa8c9272c..728246f925 100644
---- a/hw/dma/xilinx_axidma.c
-+++ b/hw/dma/xilinx_axidma.c
-@@ -194,6 +194,20 @@ static inline int streamid_from_addr(hwaddr addr)
-     return sid;
- }
- 
-+/* When DMA is error, fill in the register of this Stream. */
-+static void stream_dma_error(struct Stream *s, MemTxResult result)
-+{
-+    if (result == MEMTX_DECODE_ERROR) {
-+        s->regs[R_DMASR] |= DMASR_DECERR;
-+    } else {
-+        s->regs[R_DMASR] |= DMASR_SLVERR;
-+    }
-+
-+    s->regs[R_DMACR] &= ~DMACR_RUNSTOP;
-+    s->regs[R_DMASR] |= DMASR_HALTED;
-+    s->regs[R_DMASR] |= DMASR_ERR_IRQ;
-+}
-+
- static MemTxResult stream_desc_load(struct Stream *s, hwaddr addr)
- {
-     struct SDesc *d = &s->desc;
-@@ -203,16 +217,7 @@ static MemTxResult stream_desc_load(struct Stream *s, hwaddr addr)
-                                             d, sizeof *d);
-     if (result != MEMTX_OK) {
-         trace_xilinx_axidma_loading_desc_fail(result);
--
--        if (result == MEMTX_DECODE_ERROR) {
--            s->regs[R_DMASR] |= DMASR_DECERR;
--        } else {
--            s->regs[R_DMASR] |= DMASR_SLVERR;
--        }
--
--        s->regs[R_DMACR] &= ~DMACR_RUNSTOP;
--        s->regs[R_DMASR] |= DMASR_HALTED;
--        s->regs[R_DMASR] |= DMASR_ERR_IRQ;
-+        stream_dma_error(s, result);
-         return result;
-     }
- 
-@@ -224,17 +229,24 @@ static MemTxResult stream_desc_load(struct Stream *s, hwaddr addr)
-     return result;
- }
- 
--static void stream_desc_store(struct Stream *s, hwaddr addr)
-+static MemTxResult stream_desc_store(struct Stream *s, hwaddr addr)
- {
-     struct SDesc *d = &s->desc;
-+    MemTxResult result;
- 
-     /* Convert from host endianness into LE.  */
-     d->buffer_address = cpu_to_le64(d->buffer_address);
-     d->nxtdesc = cpu_to_le64(d->nxtdesc);
-     d->control = cpu_to_le32(d->control);
-     d->status = cpu_to_le32(d->status);
--    address_space_write(&s->dma->as, addr, MEMTXATTRS_UNSPECIFIED,
--                        d, sizeof *d);
-+    result = address_space_write(&s->dma->as, addr, MEMTXATTRS_UNSPECIFIED,
-+                                 d, sizeof *d);
-+
-+    if (result != MEMTX_OK) {
-+        trace_xilinx_axidma_storing_desc_fail(result);
-+        stream_dma_error(s, result);
-+    }
-+    return result;
- }
- 
- static void stream_update_irq(struct Stream *s)
-@@ -294,6 +306,7 @@ static void stream_process_mem2s(struct Stream *s, StreamSink *tx_data_dev,
-     uint32_t txlen, origin_txlen;
-     uint64_t addr;
-     bool eop;
-+    MemTxResult result;
- 
-     if (!stream_running(s) || stream_idle(s) || stream_halted(s)) {
-         return;
-@@ -322,9 +335,14 @@ static void stream_process_mem2s(struct Stream *s, StreamSink *tx_data_dev,
-             unsigned int len;
- 
-             len = txlen > sizeof s->txbuf ? sizeof s->txbuf : txlen;
--            address_space_read(&s->dma->as, addr,
--                               MEMTXATTRS_UNSPECIFIED,
--                               s->txbuf, len);
-+            result = address_space_read(&s->dma->as, addr,
-+                                        MEMTXATTRS_UNSPECIFIED,
-+                                        s->txbuf, len);
-+            if (result != MEMTX_OK) {
-+                stream_dma_error(s, result);
-+                return;
-+            }
-+
-             stream_push(tx_data_dev, s->txbuf, len, eop && len == txlen);
-             txlen -= len;
-             addr += len;
-@@ -336,7 +354,9 @@ static void stream_process_mem2s(struct Stream *s, StreamSink *tx_data_dev,
- 
-         /* Update the descriptor.  */
-         s->desc.status = origin_txlen | SDESC_STATUS_COMPLETE;
--        stream_desc_store(s, s->regs[R_CURDESC]);
-+        if (stream_desc_store(s, s->regs[R_CURDESC]) != MEMTX_OK) {
-+            break;
-+        }
- 
-         /* Advance.  */
-         prev_d = s->regs[R_CURDESC];
-@@ -354,6 +374,7 @@ static size_t stream_process_s2mem(struct Stream *s, unsigned char *buf,
-     uint32_t prev_d;
-     unsigned int rxlen;
-     size_t pos = 0;
-+    MemTxResult result;
- 
-     if (!stream_running(s) || stream_idle(s) || stream_halted(s)) {
-         return 0;
-@@ -375,8 +396,13 @@ static size_t stream_process_s2mem(struct Stream *s, unsigned char *buf,
-             rxlen = len;
-         }
- 
--        address_space_write(&s->dma->as, s->desc.buffer_address,
--                            MEMTXATTRS_UNSPECIFIED, buf + pos, rxlen);
-+        result = address_space_write(&s->dma->as, s->desc.buffer_address,
-+                                     MEMTXATTRS_UNSPECIFIED, buf + pos, rxlen);
-+        if (result != MEMTX_OK) {
-+            stream_dma_error(s, result);
-+            break;
-+        }
-+
-         len -= rxlen;
-         pos += rxlen;
- 
-@@ -389,7 +415,10 @@ static size_t stream_process_s2mem(struct Stream *s, unsigned char *buf,
- 
-         s->desc.status |= s->sof << SDESC_STATUS_SOF_BIT;
-         s->desc.status |= SDESC_STATUS_COMPLETE;
--        stream_desc_store(s, s->regs[R_CURDESC]);
-+        result = stream_desc_store(s, s->regs[R_CURDESC]);
-+        if (result != MEMTX_OK) {
-+            break;
-+        }
-         s->sof = eop;
- 
-         /* Advance.  */
+riscv-iommu-pci will receive this notification, mark any existing MSIX
+vectors as 'unused' and use the new ones provided by ICVEC.
+
+Series based on master. 
+
+Patches missing acks/reviews: 3, 12
+
+Changes from v5:
+- patch 11: dropped
+- patch 2:
+  - align RISCV_IOMMU_REG_SIZE
+- patch 3:
+  - RISCV_IOMMU_REG_IVEC renamed to RISCV_IOMMU_REG_ICVEC to match the
+    reg name used in the specification
+  - created riscv_iommu_process_icvec_update() to process updates done
+    in ICVEC (via riscv_iommu_mmio_write())
+  - created a new 'icvec_update' interface to allow devices to receive
+    new ICVEC vectors
+  - added riscv_iommu_mrif_notification trace at the end of
+    riscv_iommu_msi_write()
+- patch 5:
+  - added a new icvec_vectors[] RISCVIOMMUStatePci property
+  - created a new riscv_iommu_pci_icvec_update() function that
+    implements the new 'icvec_update' IOMMU interface. This function
+    will update all MSIX vector usage based on the current CIV, FIV,
+    PMIV and PIV values
+- patch 12 (former 13):
+  - added more details on what to expect when adding a riscv-iommu-pci
+    device in the 'virt' machine
+- v5 link: https://lore.kernel.org/qemu-riscv/20240708173501.426225-1-dbarboza@ventanamicro.com/
+
+
+Daniel Henrique Barboza (4):
+  pci-ids.rst: add Red Hat pci-id for RISC-V IOMMU device
+  test/qtest: add riscv-iommu-pci tests
+  qtest/riscv-iommu-test: add init queues test
+  docs/specs: add riscv-iommu
+
+Tomasz Jeznach (8):
+  exec/memtxattr: add process identifier to the transaction attributes
+  hw/riscv: add riscv-iommu-bits.h
+  hw/riscv: add RISC-V IOMMU base emulation
+  hw/riscv: add riscv-iommu-pci reference device
+  hw/riscv/virt.c: support for RISC-V IOMMU PCIDevice hotplug
+  hw/riscv/riscv-iommu: add Address Translation Cache (IOATC)
+  hw/riscv/riscv-iommu: add ATS support
+  hw/riscv/riscv-iommu: add DBG support
+
+ docs/specs/index.rst             |    1 +
+ docs/specs/pci-ids.rst           |    2 +
+ docs/specs/riscv-iommu.rst       |   80 +
+ docs/system/riscv/virt.rst       |   13 +
+ hw/riscv/Kconfig                 |    4 +
+ hw/riscv/meson.build             |    1 +
+ hw/riscv/riscv-iommu-bits.h      |  417 ++++++
+ hw/riscv/riscv-iommu-pci.c       |  208 +++
+ hw/riscv/riscv-iommu.c           | 2392 ++++++++++++++++++++++++++++++
+ hw/riscv/riscv-iommu.h           |  152 ++
+ hw/riscv/trace-events            |   15 +
+ hw/riscv/trace.h                 |    1 +
+ hw/riscv/virt.c                  |   33 +-
+ include/exec/memattrs.h          |    5 +
+ include/hw/pci/pci.h             |    1 +
+ include/hw/riscv/iommu.h         |   36 +
+ meson.build                      |    1 +
+ tests/qtest/libqos/meson.build   |    4 +
+ tests/qtest/libqos/riscv-iommu.c |   76 +
+ tests/qtest/libqos/riscv-iommu.h |  100 ++
+ tests/qtest/meson.build          |    1 +
+ tests/qtest/riscv-iommu-test.c   |  234 +++
+ 22 files changed, 3776 insertions(+), 1 deletion(-)
+ create mode 100644 docs/specs/riscv-iommu.rst
+ create mode 100644 hw/riscv/riscv-iommu-bits.h
+ create mode 100644 hw/riscv/riscv-iommu-pci.c
+ create mode 100644 hw/riscv/riscv-iommu.c
+ create mode 100644 hw/riscv/riscv-iommu.h
+ create mode 100644 hw/riscv/trace-events
+ create mode 100644 hw/riscv/trace.h
+ create mode 100644 include/hw/riscv/iommu.h
+ create mode 100644 tests/qtest/libqos/riscv-iommu.c
+ create mode 100644 tests/qtest/libqos/riscv-iommu.h
+ create mode 100644 tests/qtest/riscv-iommu-test.c
+
 -- 
-2.17.1
+2.45.2
 
 
