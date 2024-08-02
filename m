@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 179C8C3DA4A
-	for <qemu-riscv@archiver.kernel.org>; Fri,  2 Aug 2024 06:47:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80577C52D70
+	for <qemu-riscv@archiver.kernel.org>; Fri,  2 Aug 2024 06:49:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sZm3i-0007Sa-8m; Fri, 02 Aug 2024 02:46:38 -0400
+	id 1sZm6C-0004VQ-8n; Fri, 02 Aug 2024 02:49:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sZm3g-0007L3-Cr
- for qemu-riscv@nongnu.org; Fri, 02 Aug 2024 02:46:36 -0400
-Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
+ id 1sZm6B-0004UF-LA
+ for qemu-riscv@nongnu.org; Fri, 02 Aug 2024 02:49:11 -0400
+Received: from mail-pg1-x530.google.com ([2607:f8b0:4864:20::530])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sZm3e-0005Eg-IM
- for qemu-riscv@nongnu.org; Fri, 02 Aug 2024 02:46:36 -0400
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-1fc5296e214so62110255ad.0
- for <qemu-riscv@nongnu.org>; Thu, 01 Aug 2024 23:46:34 -0700 (PDT)
+ id 1sZm69-0000Cx-UE
+ for qemu-riscv@nongnu.org; Fri, 02 Aug 2024 02:49:11 -0400
+Received: by mail-pg1-x530.google.com with SMTP id
+ 41be03b00d2f7-7a115c427f1so4949902a12.0
+ for <qemu-riscv@nongnu.org>; Thu, 01 Aug 2024 23:49:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1722581193; x=1723185993; darn=nongnu.org;
+ d=linaro.org; s=google; t=1722581348; x=1723186148; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=5tEoOLtfO6EowiYqIMtSauztx+dLNCR1F4Be6OplouY=;
- b=gyXfcVfVPS+TnNpwqz5Jk3QA3SwYWA7lo20xtUTxhRHsvPgmRPg5ZYcM/p9xx4ahzi
- EgAyBe9srcek4Vfs6vzErbaW/aGGFuYBAHKLUE22AA6YsxdrutzXlOEp17uB4Hjz2iho
- KwjrzvsZOzYVwM1HneIqdo9OWf510Ev78Evk7L1M57nx6NVt6pyuXeGJmgMtEPvHKMKx
- JHqalm/LRRqo5ZR5Gfnkw6SloenlPc+mSYdRhRJjmfLMUwGA6vi27+CgMdveWhHdCSxG
- PKR5FhWPrRgl0//DVsLxUyvzpqheeGrhTxPRBlbV4l+TatfZbWrtq/DB7Wb+0zzPhVP8
- Inrg==
+ bh=1XT25LlmPDhPO2b7/0lbnD/fY7z8TW6QtI0bYE+GIck=;
+ b=VvQsTpZHxBr6miBMSCEiM4USw7akp/whm2gcLSbVReX1/8193KOQV2ny9UrcFIK3cX
+ 6721qMYPEuztF29xFOQw1QfbTXGv4hf3/JmqTSIAmNrurJVbeYLUrxIBb/RhF08PJm/P
+ UfVYRNi/DBkAv3uMn9EsyTd/NVvKe5eD6czw+lTApYNAckDOZU/hNKzQR3am3y2o2AFc
+ 2Alq52lfWImDgeueH2yel+IXjSxdhPbjiyraUSeXzWzbk/8tWktYqWf64Xd0x1ihwzQU
+ BQN87DDfl2gGwP0iojOV/EdUTGa9yASY0Gx1c8BAuv4EYmdzxYw/2Rt5FA/UBk9u03/o
+ gaaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722581193; x=1723185993;
+ d=1e100.net; s=20230601; t=1722581348; x=1723186148;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=5tEoOLtfO6EowiYqIMtSauztx+dLNCR1F4Be6OplouY=;
- b=RnnmlrhPB4InjsT+JUNllXaezgBnwk58pjZPkADf3qzCo10tQmI32Lg8JUVZy+ahT7
- ikBDBFaDCdqG0b2w8e2E3CfTLPBnj5j9IWcDOPWYO3sK7ocq+EbZYXuBlNrroX9jF7Ea
- 5F4hGCr0tWWuIrHqv37+mnmuR+OYPoK4YxVdcJmZNVB8sxPZYCv5r9nf4K+FmRZfUBJh
- 4rp0odhEUp2cfgCop82kVUeEdbuE7fUDyr+1nsTdXbFdEamcZDw4llwBZhsA0a1mBPR/
- ZWnZXbjE623CqDiMC/t4Z00HvPCpzf5RKncvq1FGRZ9m3g411yJ2HcjOZYtO7dAgD9J1
- pcFg==
-X-Gm-Message-State: AOJu0Yyp6Q848ObAFN93HS47qzxBmsvzDMaoemVKMr3KC89s7KB3a2Bp
- czGhniKvQLIi1okc7Z+k9wfo58HZmElzF4FEcPy1p5Qccal8KI5KVVGkYXshsWA=
-X-Google-Smtp-Source: AGHT+IHUKPKvIXK/G7k4bbMqAZRSBqW+izjRjMkPXqaZi+z98f8NLKDMFU7RTblaqv9f6JNaA4ZWiw==
-X-Received: by 2002:a17:903:191:b0:1fb:9b91:d7be with SMTP id
- d9443c01a7336-1ff57250de0mr33106385ad.9.1722581192924; 
- Thu, 01 Aug 2024 23:46:32 -0700 (PDT)
+ bh=1XT25LlmPDhPO2b7/0lbnD/fY7z8TW6QtI0bYE+GIck=;
+ b=CzQ7hUppNj+Xghg6bDT4hqToCBg3AxWsvrdC6PTrDaH0EjojWTeSW65TPwk8YJ0UpP
+ HbTKZgcKcvlG5sjUiuek2VOBuMDxZSubGUXk212K59h0hsZEpq0JHdAFio/De5XEkNkW
+ 88nrp2L1JeEx0VtjYC45dPttfOzfgEDe2zNkP7LlSwNjto9eSRxIjvSE2vwEMYd2nt0e
+ Gant8ozPvEDn4CbSYkYzA0y8AE7BwJbW22vK9uSrX3mJntgrXhx8vPmhuDFZov7zL8vL
+ GUAPXkvN9kp/57530YhzXaLmVvxvCa27i7bPOP1ptsqSMONTkGSkH2+bagqnc5II3xRn
+ sO3w==
+X-Gm-Message-State: AOJu0Yxr0NT15iYziilprP/9r26j0OqltMdY8ururZzx+ISYaZ6G4Dwp
+ GgHgx1vS9sKI7XMlEpk9j2+F3NQJLnRAaZmOqFWq6+k2sD5qc/RlYvKyABUz2F0=
+X-Google-Smtp-Source: AGHT+IFy/ilY73Qlg0jeTTPW7kOWnWvsHUgAm5sC1gjPyRsStDpvWdFsZ9ittRnd/0aDlthqAb9FMA==
+X-Received: by 2002:a17:90b:194c:b0:2c9:6f03:6fd6 with SMTP id
+ 98e67ed59e1d1-2cff941b383mr3217398a91.17.1722581348348; 
+ Thu, 01 Aug 2024 23:49:08 -0700 (PDT)
 Received: from [192.168.1.113] ([203.56.128.103])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1ff58f53416sm9791385ad.101.2024.08.01.23.46.29
+ 98e67ed59e1d1-2cfca29fd5dsm4651093a91.0.2024.08.01.23.49.04
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 01 Aug 2024 23:46:32 -0700 (PDT)
-Message-ID: <e59ce92a-b8ef-4ddc-b385-14ae89db02e2@linaro.org>
-Date: Fri, 2 Aug 2024 16:46:26 +1000
+ Thu, 01 Aug 2024 23:49:07 -0700 (PDT)
+Message-ID: <9c090b8a-24d5-4bec-84e1-be59e4faa55a@linaro.org>
+Date: Fri, 2 Aug 2024 16:49:01 +1000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] target/riscv: Add MXLEN check for F/D/Q applies to
- zama16b
+Subject: Re: [PATCH v2 3/3] target/riscv: Relax fld alignment requirement
 To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  dbarboza@ventanamicro.com, liwei1518@gmail.com, bmeng.cn@gmail.com
 References: <20240802031612.604-1-zhiwei_liu@linux.alibaba.com>
- <20240802031612.604-3-zhiwei_liu@linux.alibaba.com>
- <e565894d-8378-4dbe-92ef-afd54d864810@linaro.org>
- <84313f06-fae5-471e-b218-2640554f6c46@linux.alibaba.com>
+ <20240802031612.604-4-zhiwei_liu@linux.alibaba.com>
+ <05d5a772-a7b9-4bfd-8ca0-f85dcf2d1505@linaro.org>
+ <eb6a4c26-dd25-4be6-aca7-e0ef1b133d7a@linux.alibaba.com>
 Content-Language: en-US
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <84313f06-fae5-471e-b218-2640554f6c46@linux.alibaba.com>
+In-Reply-To: <eb6a4c26-dd25-4be6-aca7-e0ef1b133d7a@linux.alibaba.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x632.google.com
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::530;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x530.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -100,47 +99,13 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 8/2/24 16:42, LIU Zhiwei wrote:
-> 
-> On 2024/8/2 13:47, Richard Henderson wrote:
->> On 8/2/24 13:16, LIU Zhiwei wrote:
->>> Zama16b loads and stores of no more than MXLEN bits defined in the F, D, and Q
->>> extensions.
->>>
->>> Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
->>> ---
->>>   target/riscv/insn_trans/trans_rvd.c.inc | 4 ++--
->>>   1 file changed, 2 insertions(+), 2 deletions(-)
->>>
->>> diff --git a/target/riscv/insn_trans/trans_rvd.c.inc b/target/riscv/insn_trans/ 
->>> trans_rvd.c.inc
->>> index 2be037930a..dbe508c7e0 100644
->>> --- a/target/riscv/insn_trans/trans_rvd.c.inc
->>> +++ b/target/riscv/insn_trans/trans_rvd.c.inc
->>> @@ -52,7 +52,7 @@ static bool trans_fld(DisasContext *ctx, arg_fld *a)
->>>        * in the F, D, and Q extensions. Otherwise, it falls through to default
->>>        * MO_ATOM_IFALIGN.
->>>        */
->>> -    if ((ctx->xl >= MXL_RV64) && (ctx->cfg_ptr->ext_zama16b)) {
->>> +    if ((ctx->misa_mxl_max >= MXL_RV64) && ctx->cfg_ptr->ext_zama16b) {
->>>           memop |= MO_ATOM_WITHIN16;
->>>       }
->>>   @@ -72,7 +72,7 @@ static bool trans_fsd(DisasContext *ctx, arg_fsd *a)
->>>       REQUIRE_FPU;
->>>       REQUIRE_EXT(ctx, RVD);
->>>   -    if (ctx->cfg_ptr->ext_zama16b) {
->>> +    if ((ctx->misa_mxl_max >= MXL_RV64) && ctx->cfg_ptr->ext_zama16b) {
->>>           memop |= MO_ATOM_WITHIN16;
->>>       }
->>
->> I guess this is ok, because MXL cannot currently be changed. But since that is a 
->> possible future enhancement, perhaps add a get_mxl(ctx) accessor anyway, for 
->> documentation purposes.
-> Can we use the existing get_xl_max(ctx) instead of adding a new get_mxl(ctx).
+On 8/2/24 16:27, LIU Zhiwei wrote:
+>> Does this really have byte atomicity, not atomic on two aligned 32-bit loads (which 
+>> would be MO_ATOM_IFALIGN_PAIR).
+> The specification doesn't rule it. I think we can choose either way. The byte atomicity 
+> may expose more problems on alignment.
 
-Yes, that looks fine.
-That could be renamed get_mxl.  :-)
-
+Ok.
 
 r~
 
