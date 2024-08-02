@@ -4,58 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15D3DC3DA4A
-	for <qemu-riscv@archiver.kernel.org>; Fri,  2 Aug 2024 03:18:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 974E7C52D71
+	for <qemu-riscv@archiver.kernel.org>; Fri,  2 Aug 2024 05:39:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sZio5-0004Sw-RL; Thu, 01 Aug 2024 23:18:17 -0400
+	id 1sZl0H-0003Ir-Qx; Fri, 02 Aug 2024 01:39:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1sZinv-0003kk-4b; Thu, 01 Aug 2024 23:18:08 -0400
-Received: from out30-131.freemail.mail.aliyun.com ([115.124.30.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1sZint-0007j3-3N; Thu, 01 Aug 2024 23:18:06 -0400
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1sZl0F-0003Ht-5q
+ for qemu-riscv@nongnu.org; Fri, 02 Aug 2024 01:38:59 -0400
+Received: from mail-pj1-x1030.google.com ([2607:f8b0:4864:20::1030])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1sZl0C-0004kq-Su
+ for qemu-riscv@nongnu.org; Fri, 02 Aug 2024 01:38:58 -0400
+Received: by mail-pj1-x1030.google.com with SMTP id
+ 98e67ed59e1d1-2cb7cd6f5f2so5927312a91.2
+ for <qemu-riscv@nongnu.org>; Thu, 01 Aug 2024 22:38:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux.alibaba.com; s=default;
- t=1722568679; h=From:To:Subject:Date:Message-Id:MIME-Version:Content-Type;
- bh=7Dlxi8J3j0quXVha72ma+Iktgh/4KEte5tmFCkiRao8=;
- b=ErWQ2pXi7gyNiVQ/XnosQnsN3kyKgbGNQGwR4rVRuylwIGuHn8rohAlxkXNqWqbtxOIlgWYvJliK2eLH7hqBt3uGuNnd0tlR4ySCi7IEmdiDEwCS6Se86wZQ2NKn8bJ90mLHpFglHEE2RwGBviQXl8k3Yq3g5Ne7KM7NYg5gk9w=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R961e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037067112;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=8; SR=0;
- TI=SMTPD_---0WBvmM9u_1722568677; 
-Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0WBvmM9u_1722568677) by smtp.aliyun-inc.com;
- Fri, 02 Aug 2024 11:17:58 +0800
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- dbarboza@ventanamicro.com, liwei1518@gmail.com, bmeng.cn@gmail.com,
- zhiwei_liu@linux.alibaba.com
-Subject: [PATCH v2 3/3] target/riscv: Relax fld alignment requirement
-Date: Fri,  2 Aug 2024 11:16:12 +0800
-Message-Id: <20240802031612.604-4-zhiwei_liu@linux.alibaba.com>
-X-Mailer: git-send-email 2.23.0
-In-Reply-To: <20240802031612.604-1-zhiwei_liu@linux.alibaba.com>
-References: <20240802031612.604-1-zhiwei_liu@linux.alibaba.com>
+ d=linaro.org; s=google; t=1722577135; x=1723181935; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=c+9sBtiZAjrr81TBDIdY/JfIv4KYPYV/s5wq5dTS7nU=;
+ b=dRulNQbLsBCUrx62un5I7YnqHmBcAsJPVYaRkmePEEz29mf3bYaxRTBNZB33bWMQyS
+ rjtU8M9EB3B/MUPE1GXctP5yZstmerN8woUxmvjYR1D9m2l8m07wJXZoZQUGmCIZ5o4H
+ m8Ouzfsi8lMyDE8MFhVMoupSMLXSxOgqv+8aPxzq99GSqBqzFk02d7QH5TM+AmAzvecw
+ R+0TyBxwhtT35iG5Akjd8X4q66QTytpqlaYGZo9B8b0aLIjTcaOGKeMepTkU6CWH9So8
+ JdniTKJbwmn8rw6lXLIb9q/MXWZPsy56fiSpOoH4mvQ7b1xvJy5ThvC6axHzT9mm401H
+ cGlg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1722577135; x=1723181935;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=c+9sBtiZAjrr81TBDIdY/JfIv4KYPYV/s5wq5dTS7nU=;
+ b=PtG1GauNs0L4DIqzYXJabAiOVTIrDSIkz36opnGJ5NEOOIorrMyXVxgHwvdBBvFEl2
+ GC3Ow9C/54rz0irVMOYZvRAVAowZan48OA7BVSD2ZVee5oDidHJvBpyxTfudKYemSwIE
+ DRL1wJojw4wf2p0VuE2oOat1AEI1/boxLkzzU1sS1qZEQqNBW2fUmHRyTPKasomuAHrS
+ vvyqxMmGW55w9dmO37t/RKEyz+cEbuYSIsJsnVslH/N7ANOXLi9lCNRz9U9Bjzg5zcv1
+ MQN8c17EaqaMHHBDXHwxkL1zQAk0YwKRyYMuS7w4mDDT2ShjNlGyo6AFKcAfcnfXOrvT
+ GPIw==
+X-Gm-Message-State: AOJu0YwX0s65l0MdzOCYROcEcC1GhzcpFcofAqGalzO8TYnYTDfj6C+1
+ wdxJHbeZ1JZjVRa+Wkt4zFPlKn7/nNJjxmSADpj1I6+nWEbbEfygqIdH1ELRcZb69QI/np9bzmH
+ L6x8KnQ==
+X-Google-Smtp-Source: AGHT+IHy2/HGYjpQ0tWMrYhDLbb9WYaXDGwfxw0o+VR2d0kxvcnIFRSBUw634bAu05ptgUsNGPcOwQ==
+X-Received: by 2002:a17:90a:e997:b0:2c8:6bfa:bbf1 with SMTP id
+ 98e67ed59e1d1-2cff94494bemr3125775a91.23.1722577135204; 
+ Thu, 01 Aug 2024 22:38:55 -0700 (PDT)
+Received: from [192.168.1.113] ([203.56.128.103])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-2cfdc4064c3sm4336749a91.10.2024.08.01.22.38.51
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 01 Aug 2024 22:38:54 -0700 (PDT)
+Message-ID: <6a533a62-ed00-49bf-8922-fe1d30ce0857@linaro.org>
+Date: Fri, 2 Aug 2024 15:38:47 +1000
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.131;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-131.freemail.mail.aliyun.com
-X-Spam_score_int: -174
-X-Spam_score: -17.5
-X-Spam_bar: -----------------
-X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/3] target/riscv: Remove redundant insn length check
+ for zama16b
+To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ dbarboza@ventanamicro.com, liwei1518@gmail.com, bmeng.cn@gmail.com
+References: <20240802031612.604-1-zhiwei_liu@linux.alibaba.com>
+ <20240802031612.604-2-zhiwei_liu@linux.alibaba.com>
+Content-Language: en-US
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20240802031612.604-2-zhiwei_liu@linux.alibaba.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1030;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1030.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -71,65 +99,22 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-According to the risc-v specification:
-"FLD and FSD are only guaranteed to execute atomically if the effective
-address is naturally aligned and XLEN≥64."
+On 8/2/24 13:16, LIU Zhiwei wrote:
+> @@ -47,7 +47,12 @@ static bool trans_fld(DisasContext *ctx, arg_fld *a)
+>       REQUIRE_FPU;
+>       REQUIRE_EXT(ctx, RVD);
+>   
+> -    if (ctx->cfg_ptr->ext_zama16b && (ctx->cur_insn_len != 2)) {
+> +    /*
+> +     * Zama16b applies to loads and stores of no more than MXLEN bits defined
+> +     * in the F, D, and Q extensions. Otherwise, it falls through to default
+> +     * MO_ATOM_IFALIGN.
+> +     */
+> +    if ((ctx->xl >= MXL_RV64) && (ctx->cfg_ptr->ext_zama16b)) {
 
-We currently implement fld as MO_ATOM_IFALIGN when XLEN < 64, which does
-not violate the rules. But it will hide some problems. So relax it to
-MO_ATOM_NONE.
+I think you meant to add the mxlen check in the next patch,
+because you modify this line again.
 
-Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
----
- target/riscv/insn_trans/trans_rvd.c.inc | 26 ++++++++++++++++++-------
- 1 file changed, 19 insertions(+), 7 deletions(-)
 
-diff --git a/target/riscv/insn_trans/trans_rvd.c.inc b/target/riscv/insn_trans/trans_rvd.c.inc
-index dbe508c7e0..458d7db745 100644
---- a/target/riscv/insn_trans/trans_rvd.c.inc
-+++ b/target/riscv/insn_trans/trans_rvd.c.inc
-@@ -48,12 +48,20 @@ static bool trans_fld(DisasContext *ctx, arg_fld *a)
-     REQUIRE_EXT(ctx, RVD);
- 
-     /*
--     * Zama16b applies to loads and stores of no more than MXLEN bits defined
--     * in the F, D, and Q extensions. Otherwise, it falls through to default
--     * MO_ATOM_IFALIGN.
-+     * FLD and FSD are only guaranteed to execute atomically if the effective
-+     * address is naturally aligned and XLEN≥64.
-      */
--    if ((ctx->misa_mxl_max >= MXL_RV64) && ctx->cfg_ptr->ext_zama16b) {
--        memop |= MO_ATOM_WITHIN16;
-+    if (ctx->misa_mxl_max >= MXL_RV64) {
-+        /*
-+         * Zama16b applies to loads and stores of no more than MXLEN bits
-+         * defined in the F, D, and Q extensions. Otherwise, it falls through
-+         * to default MO_ATOM_IFALIGN.
-+         */
-+        if (ctx->cfg_ptr->ext_zama16b) {
-+            memop |= MO_ATOM_WITHIN16;
-+        }
-+    } else {
-+        memop |= MO_ATOM_NONE;
-     }
- 
-     decode_save_opc(ctx);
-@@ -72,8 +80,12 @@ static bool trans_fsd(DisasContext *ctx, arg_fsd *a)
-     REQUIRE_FPU;
-     REQUIRE_EXT(ctx, RVD);
- 
--    if ((ctx->misa_mxl_max >= MXL_RV64) && ctx->cfg_ptr->ext_zama16b) {
--        memop |= MO_ATOM_WITHIN16;
-+    if (ctx->misa_mxl_max >= MXL_RV64) {
-+        if (ctx->cfg_ptr->ext_zama16b) {
-+            memop |= MO_ATOM_WITHIN16;
-+        }
-+    } else {
-+        memop |= MO_ATOM_NONE;
-     }
- 
-     decode_save_opc(ctx);
--- 
-2.25.1
-
+r~
 
