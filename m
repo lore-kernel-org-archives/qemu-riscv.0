@@ -4,84 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34DF8C3DA7F
-	for <qemu-riscv@archiver.kernel.org>; Sun,  4 Aug 2024 19:05:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0107C3DA7F
+	for <qemu-riscv@archiver.kernel.org>; Sun,  4 Aug 2024 23:05:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sagXQ-0004PR-NU; Sun, 04 Aug 2024 15:05:04 -0400
+	id 1sakHo-0007uH-VR; Sun, 04 Aug 2024 19:05:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1sagXK-0004IV-KN
- for qemu-riscv@nongnu.org; Sun, 04 Aug 2024 15:04:58 -0400
-Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1sakHm-0007q1-3P; Sun, 04 Aug 2024 19:05:10 -0400
+Received: from mail-vs1-xe34.google.com ([2607:f8b0:4864:20::e34])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1sagXD-0002C7-TT
- for qemu-riscv@nongnu.org; Sun, 04 Aug 2024 15:04:54 -0400
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-7107b16be12so1148238b3a.3
- for <qemu-riscv@nongnu.org>; Sun, 04 Aug 2024 12:04:50 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1sakHi-000288-4m; Sun, 04 Aug 2024 19:05:09 -0400
+Received: by mail-vs1-xe34.google.com with SMTP id
+ ada2fe7eead31-492a8333cb1so2653855137.3; 
+ Sun, 04 Aug 2024 16:05:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1722798289; x=1723403089; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=QBJuPELQj2FUDcB392fsqde0ED9BbHnytRA04EYYWwY=;
- b=Vkc3Rvlaf5ggDIkY6X+N0MiVndQIxL1eAyIqaaBeNgzNpRzxqGDgvinUt+aFrz6jj+
- O5dC3kf80LrQHGId3y4eJMmuz9HFQAO//5hIMyocZrvk+PGM0bUSKofQnUfVnX3HaWc0
- ED28+3lv3KFLQMQAru1YFW+KMZ3Qa727uh6mqMMZ0rwoG9aku7C4m1O/1IvUe+kiEo5H
- 1YQ0tXMXznn1r5Oynm+13y8AW0JNkDkwPYZLF2ICzDaD/KT76e16zyBnVNOdKmiMCKZZ
- 5qYY8NLkGaYqX5SZoQJ2Sx3VtpN97P2UoWpFQneTKKSTZM1SZY2kaZKHT1L84quoOZZS
- 4yrQ==
+ d=gmail.com; s=20230601; t=1722812703; x=1723417503; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=QEjo37Ge3RecP3iCmOAd8QbLTs7nYGJ07QQH4+fN2ck=;
+ b=W4rTVKrcLU0Gx2xlgfw9BFx3KY/dVqaFQD5pKbA1NHbn5TcPtV6YpTdqrZnPS8/IZb
+ fC84X1M5A6D4+iCxPZPS7Myk3QlWUVdHJD+Bsdisjz14D/VReAAnvw1altchH1J1v5ea
+ YOOrLIuZBY/gJqyIlX18+IGsA3EkYVeWmo44T0P0H16B36Fpw9xS3Ye4ExmUWo1sK4YO
+ uDVHh2xIQ6PRY86Xg9hJC6ncsCJ0URY4scZO3tfWRJvvRmgWlP4q4S8nLeTmt3/S6vCD
+ qL8FehivItJpgzx8b5VHyyNC951aCOCawKIsvavjJP3bmgk0MPQmdk1LjGd5T4oIQ29x
+ qhVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722798289; x=1723403089;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=QBJuPELQj2FUDcB392fsqde0ED9BbHnytRA04EYYWwY=;
- b=VUTTE1v6efvjz+C2E7b4DiM70w/qtaMmefeL8LOIthB7noZ+/8BkAWnistt9VnBA9S
- But9MDfHl3SBxGpYT7ncwp3zXOLMZlYpaK0zaficIovbaWPZmZpm8w70i8Azh4/Z3m+l
- 0mEYTm4hweVO9Ea/8Jg+AU4pW05qxTUMR0aHdY63Wc7smELE+5spRGrsI5z0E+p0y2LA
- zUUOE9bEb9+w9otRAeTmrTvqm2yghBx+/n68j0l7+7L6bJ1wHy8DicztMjYU72OMgxmQ
- oHtioM3V8yA3QPWzNarh3sOfROHZkaysfrk4IWvok7hqa+yPq4FKn2zB4StBD6Tlu7dx
- Cy2g==
-X-Gm-Message-State: AOJu0YxwLfgGLKQu4bRDbwYEicX3puEkJ1jtEW7aBQBTMLU0P1Rbsuss
- LZzooxcHoXPvdz5Z0iXbnzBay2MU4EkQs00KgDFBlJd8pK06NfjJH19S40j3+5Q=
-X-Google-Smtp-Source: AGHT+IF0IWzLxUylVdwagTptTzsJEsxO3nD6Tj2Ywz0IMiBg4Gq5PX5I/KJyz1HqgEqw9RmT4eEoag==
-X-Received: by 2002:a05:6a00:84b:b0:710:4d29:5d72 with SMTP id
- d2e1a72fcca58-7106cf8fdbfmr9167818b3a.2.1722798289419; 
- Sun, 04 Aug 2024 12:04:49 -0700 (PDT)
-Received: from [192.168.68.110] ([179.133.97.107])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7109d5e49dbsm61511b3a.31.2024.08.04.12.04.47
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 04 Aug 2024 12:04:48 -0700 (PDT)
-Message-ID: <14e06c43-ea79-4f2b-ab7b-a1b84f3eb7a0@ventanamicro.com>
-Date: Sun, 4 Aug 2024 16:04:45 -0300
+ d=1e100.net; s=20230601; t=1722812703; x=1723417503;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=QEjo37Ge3RecP3iCmOAd8QbLTs7nYGJ07QQH4+fN2ck=;
+ b=SHGYvmIJ5/Z1/k/XllUm9ss1crXi9zXVP0aEqkme/+10mRDB+K3C4tu7JqDMhoAWJ/
+ ONo4ohkeLUzSOylxStqvHytBy72qv/eibLDy1Kk65cfr6kMvXTiY4L4d1pn4ihmNnPhW
+ JY+sQJv7kVLGXAPXbO/NY2TZtHLTVE9N1bjLXnnIBRQmG5gm8YDqei0N09t0vV4NiBvZ
+ eB95/LI8NXqkYxvm2jweJ6Op7Gl45shpFF5D/Vg2gAWRv2s+Bo86FtJ9FVX7eyQk+ppG
+ Zhyog6GAIOm0XpfMHw9VY8zNy22P1DRWjcbof7CxnJmALpqD7uZYJWGoyb5FkLkTTJr5
+ lhMw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWSX+/uUzNJIoQGS1rgh1OWXarErpeC7yrhduGmtnG548xKKmPox4xeATCoEB96TYy4nLmyrQtMkJwN2Q2oq1K4kSqqrUg=
+X-Gm-Message-State: AOJu0Yw6J5HwK64YodI8MfftWRx3wROnZxCQuS3k9y9Svh4PBoJ3/aq/
+ 2rxMX5lzSMizwhuE6KpS42AZrmyXiVniGKXgk8/YFimNYd7ZHC69yZl+Z1VmDbRe1pP0NrG0dcq
+ hYEV5WBxpxIZJEYZR80PVjdrkQck=
+X-Google-Smtp-Source: AGHT+IHrzAaVGEZYkPDr2IsrhKORIzx7AjysPkJEBExdNp1C4tYU47KxYN1OVxJRu/gFCeoZ3D3ycwrGpx45FidoZiI=
+X-Received: by 2002:a05:6102:390f:b0:494:4fdd:4b7a with SMTP id
+ ada2fe7eead31-4945be0ac69mr10817867137.17.1722812702778; Sun, 04 Aug 2024
+ 16:05:02 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/1] Add support for generating OpenSBI domains in the
- device tree
-To: Gregor Haas <gregorhaas1997@gmail.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, atishp@rivosinc.com, alistair.francis@wdc.com
-References: <20240726184324.597939-1-gregorhaas1997@gmail.com>
- <20240726184324.597939-2-gregorhaas1997@gmail.com>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240726184324.597939-2-gregorhaas1997@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::435;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x435.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20240801154334.1009852-1-dbarboza@ventanamicro.com>
+ <20240801154334.1009852-3-dbarboza@ventanamicro.com>
+In-Reply-To: <20240801154334.1009852-3-dbarboza@ventanamicro.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 5 Aug 2024 09:04:36 +1000
+Message-ID: <CAKmqyKM527MOuZGhidn6PJNE7ZA+8yO4fouAG6Rw9MFY3E425g@mail.gmail.com>
+Subject: Re: [PATCH for-9.2 v6 02/12] hw/riscv: add riscv-iommu-bits.h
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com, jason.chien@sifive.com, frank.chang@sifive.com, 
+ ajones@ventanamicro.com, Tomasz Jeznach <tjeznach@rivosinc.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e34;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe34.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ UPPERCASE_50_75=0.008 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,642 +94,388 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
-
-On 7/26/24 3:43 PM, Gregor Haas wrote:
-> OpenSBI has support for domains, which are partitions of CPUs and memory into
-> isolated compartments. Domains can be specified in the device tree according to
-> a standardized format [1], which OpenSBI parses at boot time to initialize all
-> system domains. This patch enables simply specifying domains (and their
-> associated memory regions) on the QEMU command line, from which these are then
-> rendered into the machine's device tree. A simple example of what this looks
-> like is below:
-> 
-> qemu-system-riscv64 -machine virt -bios fw_jump.bin -cpu max -smp 2 -m 4G \
-> 	-device opensbi-memregion,id=mem,base=0x178000000,size=0x4000000,mmio=false \
-> 	-device opensbi-domain,possible-harts=0x2,boot-hart=0x1,next-addr=0x178000000,next-mode=1,region0=mem,perms0=0x3f
-> 
-
-When I tried this example the following error is shown:
-
-qemu-system-riscv64 -M virt (...)
-     -device opensbi-memregion,id=mem,base=0x178000000,size=0x4000000,mmio=false
-     -device opensbi-domain,possible-harts=0x2,boot-hart=0x1,next-addr=0x178000000,next-mode=1,region0=mem,perms0=0x3f
-qemu-system-riscv64: -device opensbi-memregion,id=mem,base=0x178000000,size=0x4000000,mmio=false: Property 'opensbi-memregion.size' not found
-
-And in fact we don't have a 'size' property declared in opensbi_memregion_instance_init().
-We also don't have a 'size' field in OpenSBIMemregionState. I guess that this might be
-a reminiscent of a previous prototype that had this field.
-
-If I remove this prop from the command line I have now this error:
-
-qemu-system-riscv64 -M virt (...)
-     -device opensbi-memregion,id=mem,base=0x178000000,mmio=false
-     -device opensbi-domain,possible-harts=0x2,boot-hart=0x1,next-addr=0x178000000,next-mode=1,region0=mem,perms0=0x3f
-qemu-system-riscv64: -device opensbi-memregion,id=mem,base=0x178000000,mmio=false: Order too small
-
-
-Checking how 'order' works, it must be 3 <= order <= __riscv_xlen. I didn't
-set 'order' and it said "Order too small" because there's no code to check
-if order' was user set.
-
-I suggest setting a sane default for the field and, in case the user set the
-wrong value, display an error message like "order must be between 3 and %d"
-where %d would be the xlen used at the time. By 'sane' default I mean a
-value that will be used in most common situations.
-
-In fact I suggest taking a second look at all the other properties to choose
-good defaults, especially for the opensbi-domain device since it has a lot of
-mandatory attributes. For example 'next-addr' can be set by default to the
-'base' of its associated opensbi-memregion, IIUC.
-
-
-Thanks,
-
-Daniel
-
-
-
-> At machine initialization time, a new create_fdt_opensbi_domains() function
-> walks the peripherals/peripherals-anon containers, identifies all domains and
-> memregions, and parses them into the relevant device tree structures.
-> 
-> [1] https://github.com/riscv-software-src/opensbi/blob/master/docs/domain_support.md
-> 
-> Signed-off-by: Gregor Haas <gregorhaas1997@gmail.com>
+On Fri, Aug 2, 2024 at 1:45=E2=80=AFAM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
+>
+> From: Tomasz Jeznach <tjeznach@rivosinc.com>
+>
+> This header will be used by the RISC-V IOMMU emulation to be added
+> in the next patch. Due to its size it's being sent in separate for
+> an easier review.
+>
+> One thing to notice is that this header can be replaced by the future
+> Linux RISC-V IOMMU driver header, which would become a linux-header we
+> would import instead of keeping our own. The Linux implementation isn't
+> upstream yet so for now we'll have to manage riscv-iommu-bits.h.
+>
+> Signed-off-by: Tomasz Jeznach <tjeznach@rivosinc.com>
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Reviewed-by: Frank Chang <frank.chang@sifive.com>
+> Reviewed-by: Jason Chien <jason.chien@sifive.com>
 > ---
->   MAINTAINERS                       |   7 +
->   hw/riscv/Kconfig                  |   4 +
->   hw/riscv/meson.build              |   1 +
->   hw/riscv/opensbi_domain.c         | 428 ++++++++++++++++++++++++++++++
->   hw/riscv/virt.c                   |   3 +
->   include/hw/riscv/opensbi_domain.h |  51 ++++
->   6 files changed, 494 insertions(+)
->   create mode 100644 hw/riscv/opensbi_domain.c
->   create mode 100644 include/hw/riscv/opensbi_domain.h
-> 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 98eddf7ae1..796c023a7b 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -355,6 +355,13 @@ F: target/riscv/XVentanaCondOps.decode
->   F: target/riscv/insn_trans/trans_xventanacondops.c.inc
->   F: disas/riscv-xventana*
->   
-> +RISC-V OpenSBI domain support
-> +M: Gregor Haas <gregorhaas1997@gmail.com>
-> +L: qemu-riscv@nongnu.org
-> +S: Maintained
-> +F: hw/riscv/opensbi_domain.c
-> +F: include/hw/riscv/opensbi_domain.h
-> +
->   RENESAS RX CPUs
->   R: Yoshinori Sato <ysato@users.sourceforge.jp>
->   S: Orphan
-> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-> index a2030e3a6f..db3a4d77ad 100644
-> --- a/hw/riscv/Kconfig
-> +++ b/hw/riscv/Kconfig
-> @@ -1,6 +1,9 @@
->   config RISCV_NUMA
->       bool
->   
-> +config RISCV_OPENSBI_DOMAIN
-> +    bool
-> +
->   config IBEX
->       bool
->   
-> @@ -40,6 +43,7 @@ config RISCV_VIRT
->       imply TPM_TIS_SYSBUS
->       select DEVICE_TREE
->       select RISCV_NUMA
-> +    select RISCV_OPENSBI_DOMAIN
->       select GOLDFISH_RTC
->       select PCI
->       select PCI_EXPRESS_GENERIC_BRIDGE
-> diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
-> index f872674093..f47626c164 100644
-> --- a/hw/riscv/meson.build
-> +++ b/hw/riscv/meson.build
-> @@ -1,6 +1,7 @@
->   riscv_ss = ss.source_set()
->   riscv_ss.add(files('boot.c'))
->   riscv_ss.add(when: 'CONFIG_RISCV_NUMA', if_true: files('numa.c'))
-> +riscv_ss.add(when: 'CONFIG_RISCV_OPENSBI_DOMAIN', if_true: files('opensbi_domain.c'))
->   riscv_ss.add(files('riscv_hart.c'))
->   riscv_ss.add(when: 'CONFIG_OPENTITAN', if_true: files('opentitan.c'))
->   riscv_ss.add(when: 'CONFIG_RISCV_VIRT', if_true: files('virt.c'))
-> diff --git a/hw/riscv/opensbi_domain.c b/hw/riscv/opensbi_domain.c
+>  hw/riscv/riscv-iommu-bits.h | 345 ++++++++++++++++++++++++++++++++++++
+>  1 file changed, 345 insertions(+)
+>  create mode 100644 hw/riscv/riscv-iommu-bits.h
+>
+> diff --git a/hw/riscv/riscv-iommu-bits.h b/hw/riscv/riscv-iommu-bits.h
 > new file mode 100644
-> index 0000000000..418ebe1e56
+> index 0000000000..9d9512ca71
 > --- /dev/null
-> +++ b/hw/riscv/opensbi_domain.c
-> @@ -0,0 +1,428 @@
-> +#include "qemu/osdep.h"
-> +#include "hw/riscv/opensbi_domain.h"
-> +#include "hw/boards.h"
-> +#include "sysemu/device_tree.h"
-> +#include "qapi/error.h"
+> +++ b/hw/riscv/riscv-iommu-bits.h
+> @@ -0,0 +1,345 @@
+> +/* SPDX-License-Identifier: GPL-2.0-only */
+> +/*
+> + * Copyright =C2=A9 2022-2023 Rivos Inc.
+> + * Copyright =C2=A9 2023 FORTH-ICS/CARV
+> + * Copyright =C2=A9 2023 RISC-V IOMMU Task Group
+> + *
+> + * RISC-V IOMMU - Register Layout and Data Structures.
+> + *
+> + * Based on the IOMMU spec version 1.0, 3/2023
+> + * https://github.com/riscv-non-isa/riscv-iommu
+> + */
 > +
-> +#include <libfdt.h>
+> +#ifndef HW_RISCV_IOMMU_BITS_H
+> +#define HW_RISCV_IOMMU_BITS_H
 > +
-> +static void create_fdt_domain_possible_harts(MachineState *ms,
-> +                                             OpenSBIDomainState *s,
-> +                                             char *path) {
-> +    unsigned long i, cpu;
-> +    int num_cpus;
+> +#define RISCV_IOMMU_SPEC_DOT_VER 0x010
 > +
-> +    num_cpus = ctpop64(s->possible_harts);
-> +    if (num_cpus) {
-> +        g_autofree uint32_t *phandles = g_malloc0_n(num_cpus, sizeof(uint32_t));
+> +#ifndef GENMASK_ULL
+> +#define GENMASK_ULL(h, l) (((~0ULL) >> (63 - (h) + (l))) << (l))
+> +#endif
+
+We should avoid adding any more RISC-V specific bit macros like this,
+you should be able to use the existing __GENMASK_ULL
+
+Alistair
+
 > +
-> +        for (i = 0, cpu = -1; i < num_cpus; i++) {
-> +            cpu = find_next_bit(&s->possible_harts, BITS_PER_LONG, cpu + 1);
-> +            g_autofree char *cpu_name = g_strdup_printf("/cpus/cpu@%li", cpu);
-> +            phandles[i] = cpu_to_fdt32(qemu_fdt_get_phandle(
-> +                    ms->fdt, cpu_name));
-> +        }
+> +/*
+> + * struct riscv_iommu_fq_record - Fault/Event Queue Record
+> + * See section 3.2 for more info.
+> + */
+> +struct riscv_iommu_fq_record {
+> +    uint64_t hdr;
+> +    uint64_t _reserved;
+> +    uint64_t iotval;
+> +    uint64_t iotval2;
+> +};
+> +/* Header fields */
+> +#define RISCV_IOMMU_FQ_HDR_CAUSE        GENMASK_ULL(11, 0)
+> +#define RISCV_IOMMU_FQ_HDR_PID          GENMASK_ULL(31, 12)
+> +#define RISCV_IOMMU_FQ_HDR_PV           BIT_ULL(32)
+> +#define RISCV_IOMMU_FQ_HDR_TTYPE        GENMASK_ULL(39, 34)
+> +#define RISCV_IOMMU_FQ_HDR_DID          GENMASK_ULL(63, 40)
 > +
-> +        qemu_fdt_setprop(ms->fdt, path, "possible-harts",
-> +                         phandles, num_cpus * 4);
-> +    }
-> +}
+> +/*
+> + * struct riscv_iommu_pq_record - PCIe Page Request record
+> + * For more infos on the PCIe Page Request queue see chapter 3.3.
+> + */
+> +struct riscv_iommu_pq_record {
+> +      uint64_t hdr;
+> +      uint64_t payload;
+> +};
+> +/* Header fields */
+> +#define RISCV_IOMMU_PREQ_HDR_PID        GENMASK_ULL(31, 12)
+> +#define RISCV_IOMMU_PREQ_HDR_PV         BIT_ULL(32)
+> +#define RISCV_IOMMU_PREQ_HDR_PRIV       BIT_ULL(33)
+> +#define RISCV_IOMMU_PREQ_HDR_EXEC       BIT_ULL(34)
+> +#define RISCV_IOMMU_PREQ_HDR_DID        GENMASK_ULL(63, 40)
+> +/* Payload fields */
+> +#define RISCV_IOMMU_PREQ_PAYLOAD_M      GENMASK_ULL(2, 0)
 > +
-> +static void create_fdt_domain_regions(MachineState *ms,
-> +                                      OpenSBIDomainState *s,
-> +                                      char *path) {
-> +    unsigned long i;
-> +    int num_regions = 0;
-> +    DeviceState *ds;
+> +/* Common field positions */
+> +#define RISCV_IOMMU_PPN_FIELD           GENMASK_ULL(53, 10)
+> +#define RISCV_IOMMU_QUEUE_LOGSZ_FIELD   GENMASK_ULL(4, 0)
+> +#define RISCV_IOMMU_QUEUE_INDEX_FIELD   GENMASK_ULL(31, 0)
+> +#define RISCV_IOMMU_QUEUE_ENABLE        BIT(0)
+> +#define RISCV_IOMMU_QUEUE_INTR_ENABLE   BIT(1)
+> +#define RISCV_IOMMU_QUEUE_MEM_FAULT     BIT(8)
+> +#define RISCV_IOMMU_QUEUE_OVERFLOW      BIT(9)
+> +#define RISCV_IOMMU_QUEUE_ACTIVE        BIT(16)
+> +#define RISCV_IOMMU_QUEUE_BUSY          BIT(17)
+> +#define RISCV_IOMMU_ATP_PPN_FIELD       GENMASK_ULL(43, 0)
+> +#define RISCV_IOMMU_ATP_MODE_FIELD      GENMASK_ULL(63, 60)
 > +
-> +    for (i = 0; i < OPENSBI_DOMAIN_MEMREGIONS_MAX; i++) {
-> +        if (s->regions[i]) {
-> +            num_regions++;
-> +        }
-> +    }
+> +/* 5.3 IOMMU Capabilities (64bits) */
+> +#define RISCV_IOMMU_REG_CAP             0x0000
+> +#define RISCV_IOMMU_CAP_VERSION         GENMASK_ULL(7, 0)
+> +#define RISCV_IOMMU_CAP_MSI_FLAT        BIT_ULL(22)
+> +#define RISCV_IOMMU_CAP_MSI_MRIF        BIT_ULL(23)
+> +#define RISCV_IOMMU_CAP_T2GPA           BIT_ULL(26)
+> +#define RISCV_IOMMU_CAP_IGS             GENMASK_ULL(29, 28)
+> +#define RISCV_IOMMU_CAP_PAS             GENMASK_ULL(37, 32)
+> +#define RISCV_IOMMU_CAP_PD8             BIT_ULL(38)
+> +#define RISCV_IOMMU_CAP_PD17            BIT_ULL(39)
+> +#define RISCV_IOMMU_CAP_PD20            BIT_ULL(40)
 > +
-> +    if (num_regions) {
-> +        g_autofree uint32_t *regions =
-> +                 g_malloc0_n(num_regions, 2 * sizeof(uint32_t));
-> +        for (i = 0; i < OPENSBI_DOMAIN_MEMREGIONS_MAX; i++) {
-> +            if (s->regions[i]) {
-> +                ds = DEVICE(s->regions[i]);
-> +                g_autofree char *region_name = g_strdup_printf(
-> +                       "/chosen/opensbi-domains/%s", ds->id);
-> +                regions[2 * i] = cpu_to_fdt32(qemu_fdt_get_phandle
-> +                        (ms->fdt, region_name));
-> +                regions[2 * i + 1] = cpu_to_fdt32(s->region_perms[i]);
-> +            }
-> +        }
+> +/* 5.4 Features control register (32bits) */
+> +#define RISCV_IOMMU_REG_FCTL            0x0008
+> +#define RISCV_IOMMU_FCTL_WSI            BIT(1)
 > +
-> +        qemu_fdt_setprop(ms->fdt, path, "regions",
-> +                         regions, num_regions * 8);
-> +    }
-> +}
+> +/* 5.5 Device-directory-table pointer (64bits) */
+> +#define RISCV_IOMMU_REG_DDTP            0x0010
+> +#define RISCV_IOMMU_DDTP_MODE           GENMASK_ULL(3, 0)
+> +#define RISCV_IOMMU_DDTP_BUSY           BIT_ULL(4)
+> +#define RISCV_IOMMU_DDTP_PPN            RISCV_IOMMU_PPN_FIELD
 > +
-> +struct DomainFDTState {
-> +    MachineState *ms;
-> +    bool regions;
+> +enum riscv_iommu_ddtp_modes {
+> +    RISCV_IOMMU_DDTP_MODE_OFF =3D 0,
+> +    RISCV_IOMMU_DDTP_MODE_BARE =3D 1,
+> +    RISCV_IOMMU_DDTP_MODE_1LVL =3D 2,
+> +    RISCV_IOMMU_DDTP_MODE_2LVL =3D 3,
+> +    RISCV_IOMMU_DDTP_MODE_3LVL =3D 4,
+> +    RISCV_IOMMU_DDTP_MODE_MAX =3D 4
 > +};
 > +
-> +static void create_fdt_one_domain(MachineState *ms, OpenSBIDomainState *s)
-> +{
-> +    DeviceState *ds = DEVICE(s);
-> +    g_autofree char *path, *cpu_name;
+> +/* 5.6 Command Queue Base (64bits) */
+> +#define RISCV_IOMMU_REG_CQB             0x0018
+> +#define RISCV_IOMMU_CQB_LOG2SZ          RISCV_IOMMU_QUEUE_LOGSZ_FIELD
+> +#define RISCV_IOMMU_CQB_PPN             RISCV_IOMMU_PPN_FIELD
 > +
-> +    if (ds->id) {
-> +        path = g_strdup_printf("/chosen/opensbi-domains/%s",
-> +                               ds->id);
-> +    } else {
-> +        path = g_strdup_printf("/chosen/opensbi-domains/domain@%lx",
-> +                               s->next_addr);
-> +    }
+> +/* 5.7 Command Queue head (32bits) */
+> +#define RISCV_IOMMU_REG_CQH             0x0020
 > +
-> +    qemu_fdt_add_subnode(ms->fdt, path);
-> +    qemu_fdt_setprop_string(ms->fdt, path, "compatible",
-> +                            "opensbi,domain,instance");
-> +    qemu_fdt_setprop_cells(ms->fdt, path, "phandle",
-> +                           qemu_fdt_alloc_phandle(ms->fdt));
+> +/* 5.8 Command Queue tail (32bits) */
+> +#define RISCV_IOMMU_REG_CQT             0x0024
 > +
-> +    create_fdt_domain_possible_harts(ms, s, path);
-> +    create_fdt_domain_regions(ms, s, path);
+> +/* 5.9 Fault Queue Base (64bits) */
+> +#define RISCV_IOMMU_REG_FQB             0x0028
+> +#define RISCV_IOMMU_FQB_LOG2SZ          RISCV_IOMMU_QUEUE_LOGSZ_FIELD
+> +#define RISCV_IOMMU_FQB_PPN             RISCV_IOMMU_PPN_FIELD
 > +
-> +    /* Assign boot hart to this domain */
-> +    cpu_name = g_strdup_printf("/cpus/cpu@%i", s->boot_hart);
-> +    qemu_fdt_setprop_cell(ms->fdt, path, "boot-hart",
-> +                          qemu_fdt_get_phandle(ms->fdt, cpu_name));
-> +    if (s->assign) {
-> +        qemu_fdt_setprop_cell(ms->fdt, cpu_name, "opensbi-domain",
-> +                              qemu_fdt_get_phandle(ms->fdt, path));
-> +    }
+> +/* 5.10 Fault Queue Head (32bits) */
+> +#define RISCV_IOMMU_REG_FQH             0x0030
 > +
-> +    qemu_fdt_setprop_cells(ms->fdt, path, "next-arg1",
-> +                           (uint64_t) s->next_arg1 >> 32, s->next_arg1);
-> +    qemu_fdt_setprop_cells(ms->fdt, path, "next-addr",
-> +                           (uint64_t) s->next_addr >> 32, s->next_addr);
-> +    qemu_fdt_setprop_cell(ms->fdt, path, "next-mode",
-> +                          s->next_mode);
+> +/* 5.11 Fault Queue tail (32bits) */
+> +#define RISCV_IOMMU_REG_FQT             0x0034
 > +
-> +    if (s->system_reset_allowed) {
-> +        qemu_fdt_setprop(ms->fdt, path, "system-reset-allowed", NULL, 0);
-> +    }
+> +/* 5.12 Page Request Queue base (64bits) */
+> +#define RISCV_IOMMU_REG_PQB             0x0038
+> +#define RISCV_IOMMU_PQB_LOG2SZ          RISCV_IOMMU_QUEUE_LOGSZ_FIELD
+> +#define RISCV_IOMMU_PQB_PPN             RISCV_IOMMU_PPN_FIELD
 > +
-> +    if (s->system_suspend_allowed) {
-> +        qemu_fdt_setprop(ms->fdt, path, "system-suspend-allowed", NULL, 0);
-> +    }
-> +}
+> +/* 5.13 Page Request Queue head (32bits) */
+> +#define RISCV_IOMMU_REG_PQH             0x0040
 > +
-> +static void create_fdt_one_memregion(MachineState *ms,
-> +                                     OpenSBIMemregionState *s)
-> +{
-> +    g_autofree char *path;
-> +    int i, dev, num_devices;
-> +    DeviceState *ds = DEVICE(s);
+> +/* 5.14 Page Request Queue tail (32bits) */
+> +#define RISCV_IOMMU_REG_PQT             0x0044
 > +
-> +    path = g_strdup_printf("/chosen/opensbi-domains/%s", ds->id);
-> +    qemu_fdt_add_subnode(ms->fdt, path);
-> +    qemu_fdt_setprop_string(ms->fdt, path, "compatible",
-> +                            "opensbi,domain,memregion");
-> +    qemu_fdt_setprop_cells(ms->fdt, path, "base",
-> +                           (uint64_t) s->base >> 32, s->base);
+> +/* 5.15 Command Queue CSR (32bits) */
+> +#define RISCV_IOMMU_REG_CQCSR           0x0048
+> +#define RISCV_IOMMU_CQCSR_CQEN          RISCV_IOMMU_QUEUE_ENABLE
+> +#define RISCV_IOMMU_CQCSR_CIE           RISCV_IOMMU_QUEUE_INTR_ENABLE
+> +#define RISCV_IOMMU_CQCSR_CQMF          RISCV_IOMMU_QUEUE_MEM_FAULT
+> +#define RISCV_IOMMU_CQCSR_CMD_TO        BIT(9)
+> +#define RISCV_IOMMU_CQCSR_CMD_ILL       BIT(10)
+> +#define RISCV_IOMMU_CQCSR_FENCE_W_IP    BIT(11)
+> +#define RISCV_IOMMU_CQCSR_CQON          RISCV_IOMMU_QUEUE_ACTIVE
+> +#define RISCV_IOMMU_CQCSR_BUSY          RISCV_IOMMU_QUEUE_BUSY
 > +
-> +    qemu_fdt_setprop_cell(ms->fdt, path, "order",
-> +                          (uint32_t) s->order);
+> +/* 5.16 Fault Queue CSR (32bits) */
+> +#define RISCV_IOMMU_REG_FQCSR           0x004C
+> +#define RISCV_IOMMU_FQCSR_FQEN          RISCV_IOMMU_QUEUE_ENABLE
+> +#define RISCV_IOMMU_FQCSR_FIE           RISCV_IOMMU_QUEUE_INTR_ENABLE
+> +#define RISCV_IOMMU_FQCSR_FQMF          RISCV_IOMMU_QUEUE_MEM_FAULT
+> +#define RISCV_IOMMU_FQCSR_FQOF          RISCV_IOMMU_QUEUE_OVERFLOW
+> +#define RISCV_IOMMU_FQCSR_FQON          RISCV_IOMMU_QUEUE_ACTIVE
+> +#define RISCV_IOMMU_FQCSR_BUSY          RISCV_IOMMU_QUEUE_BUSY
 > +
-> +    if (s->mmio) {
-> +        qemu_fdt_setprop(ms->fdt, path, "mmio", NULL, 0);
+> +/* 5.17 Page Request Queue CSR (32bits) */
+> +#define RISCV_IOMMU_REG_PQCSR           0x0050
+> +#define RISCV_IOMMU_PQCSR_PQEN          RISCV_IOMMU_QUEUE_ENABLE
+> +#define RISCV_IOMMU_PQCSR_PIE           RISCV_IOMMU_QUEUE_INTR_ENABLE
+> +#define RISCV_IOMMU_PQCSR_PQMF          RISCV_IOMMU_QUEUE_MEM_FAULT
+> +#define RISCV_IOMMU_PQCSR_PQOF          RISCV_IOMMU_QUEUE_OVERFLOW
+> +#define RISCV_IOMMU_PQCSR_PQON          RISCV_IOMMU_QUEUE_ACTIVE
+> +#define RISCV_IOMMU_PQCSR_BUSY          RISCV_IOMMU_QUEUE_BUSY
 > +
-> +        /* Get all phandles for related devices */
-> +        num_devices = 0;
-> +        for (i = 0; i < OPENSBI_MEMREGION_DEVICES_MAX; i++) {
-> +            if (s->devices[i]) {
-> +                num_devices++;
-> +            }
-> +        }
+> +/* 5.18 Interrupt Pending Status (32bits) */
+> +#define RISCV_IOMMU_REG_IPSR            0x0054
+> +#define RISCV_IOMMU_IPSR_CIP            BIT(0)
+> +#define RISCV_IOMMU_IPSR_FIP            BIT(1)
+> +#define RISCV_IOMMU_IPSR_PIP            BIT(3)
 > +
-> +        g_autofree uint32_t *devices =
-> +                g_malloc0_n(num_devices, sizeof(uint32_t));
-> +        for (i = 0, dev = 0; i < OPENSBI_MEMREGION_DEVICES_MAX; i++) {
-> +            if (s->devices[i]) {
-> +                devices[dev++] = cpu_to_fdt32(
-> +                        qemu_fdt_get_phandle(ms->fdt, s->devices[i]));
-> +            }
-> +        }
-> +
-> +        qemu_fdt_setprop(ms->fdt, path, "devices", devices, num_devices * 4);
-> +    }
-> +
-> +    qemu_fdt_setprop_cells(ms->fdt, path, "phandle",
-> +                           qemu_fdt_alloc_phandle(ms->fdt));
-> +}
-> +
-> +static int create_fdt_domains(Object *obj, void *opaque)
-> +{
-> +    struct DomainFDTState *dfs = opaque;
-> +    OpenSBIDomainState *osds;
-> +    OpenSBIMemregionState *osms;
-> +
-> +    osds = (OpenSBIDomainState *)
-> +            object_dynamic_cast(obj, TYPE_OPENSBI_DOMAIN);
-> +    osms = (OpenSBIMemregionState *)
-> +            object_dynamic_cast(obj, TYPE_OPENSBI_MEMREGION);
-> +
-> +    if (dfs->regions) {
-> +        if (osms) {
-> +            create_fdt_one_memregion(dfs->ms, osms);
-> +        }
-> +    } else {
-> +        if (osds) {
-> +            create_fdt_one_domain(dfs->ms, osds);
-> +        }
-> +    }
-> +
-> +    return 0;
-> +}
-> +
-> +static const char *containers[] = {
-> +        "/peripheral", "/peripheral-anon"
+> +enum {
+> +    RISCV_IOMMU_INTR_CQ,
+> +    RISCV_IOMMU_INTR_FQ,
+> +    RISCV_IOMMU_INTR_PM,
+> +    RISCV_IOMMU_INTR_PQ,
+> +    RISCV_IOMMU_INTR_COUNT
 > +};
 > +
-> +void create_fdt_opensbi_domains(MachineState *s)
-> +{
-> +    int i;
-> +    MachineState *ms = MACHINE(s);
-> +    Object *container;
+> +/* 5.27 Interrupt cause to vector (64bits) */
+> +#define RISCV_IOMMU_REG_ICVEC            0x02F8
 > +
-> +    struct DomainFDTState check = {
-> +            .ms = ms,
-> +            .regions = true
-> +    };
+> +/* 5.28 MSI Configuration table (32 * 64bits) */
+> +#define RISCV_IOMMU_REG_MSI_CONFIG      0x0300
 > +
-> +    /* Make sure that top-level node exists */
-> +    qemu_fdt_add_subnode(ms->fdt, "/chosen/opensbi-domains");
-> +    qemu_fdt_setprop_string(ms->fdt, "/chosen/opensbi-domains",
-> +                            "compatible", "opensbi,domain,config");
+> +#define RISCV_IOMMU_REG_SIZE            0x1000
 > +
-> +    /* Do a scan through regions first */
-> +    for (i = 0; i < ARRAY_SIZE(containers); i++) {
-> +        container = container_get(OBJECT(s), containers[i]);
-> +        object_child_foreach(container, create_fdt_domains, &check);
-> +    }
+> +#define RISCV_IOMMU_DDTE_VALID          BIT_ULL(0)
+> +#define RISCV_IOMMU_DDTE_PPN            RISCV_IOMMU_PPN_FIELD
 > +
-> +    /* Then scan through domains */
-> +    check.regions = false;
-> +    for (i = 0; i < ARRAY_SIZE(containers); i++) {
-> +        container = container_get(OBJECT(s), containers[i]);
-> +        object_child_foreach(container, create_fdt_domains, &check);
-> +    }
-> +}
-> +
-> +/* OpenSBI Memregions */
-> +
-> +static void set_mmio(Object *obj, bool val, Error **err)
-> +{
-> +    OpenSBIMemregionState *s = OPENSBI_MEMREGION(obj);
-> +    s->mmio = val;
-> +}
-> +
-> +static void set_device(Object *obj, const char *val, Error **err)
-> +{
-> +    int i;
-> +    OpenSBIMemregionState *s = OPENSBI_MEMREGION(obj);
-> +
-> +    for (i = 0; i < OPENSBI_DOMAIN_MEMREGIONS_MAX; i++) {
-> +        if (!s->devices[i]) {
-> +            s->devices[i] = g_strdup(val);
-> +            break;
-> +        }
-> +    }
-> +}
-> +
-> +static void opensbi_memregion_instance_init(Object *obj)
-> +{
-> +    int i;
-> +    OpenSBIMemregionState *s = OPENSBI_MEMREGION(obj);
-> +
-> +    object_property_add_uint64_ptr(obj, "base", &s->base,
-> +                                   OBJ_PROP_FLAG_WRITE);
-> +    object_property_set_description(obj, "base",
-> +                                    "The base address of the domain memory region. If \"order\" is also specified, "
-> +                                    "this property should be a 2 ^ order aligned 64 bit address");
-> +
-> +    object_property_add_uint32_ptr(obj, "order", &s->order,
-> +                                   OBJ_PROP_FLAG_WRITE);
-> +    object_property_set_description(obj, "order",
-> +                                    "The order of the domain memory region. This property should have a 32 bit value "
-> +                                    "(i.e. one DT cell) in the range 3 <= order <= __riscv_xlen.");
-> +
-> +    object_property_add_bool(obj, "mmio", NULL, set_mmio);
-> +    object_property_set_description(obj, "mmio",
-> +                                    "A boolean flag representing whether the domain memory region is a "
-> +                                    "memory-mapped I/O (MMIO) region.");
-> +
-> +    for (i = 0; i < OPENSBI_DOMAIN_MEMREGIONS_MAX; i++) {
-> +        g_autofree char *propname = g_strdup_printf("device%i", i);
-> +        object_property_add_str(obj, propname, NULL, set_device);
-> +
-> +        g_autofree char *description = g_strdup_printf(
-> +                "Device %i (out of %i) for this memregion. This property should be a device tree path to the device.",
-> +                i, OPENSBI_DOMAIN_MEMREGIONS_MAX);
-> +        object_property_set_description(obj, propname, description);
-> +    }
-> +}
-> +
-> +static void opensbi_memregion_realize(DeviceState *ds, Error **errp)
-> +{
-> +    #if defined(TARGET_RISCV32)
-> +    int xlen = 32;
-> +    #elif defined(TARGET_RISCV64)
-> +    int xlen = 64;
-> +    #endif
-> +
-> +    OpenSBIMemregionState *s = OPENSBI_MEMREGION(ds);
-> +
-> +    if (!s->base) {
-> +        error_setg(errp, "Must specify base");
-> +        return;
-> +    }
-> +
-> +    /* Check order bounds */
-> +    if (s->order < 3) {
-> +        error_setg(errp, "Order too small");
-> +        return;
-> +    }
-> +
-> +    if (s->order > xlen) {
-> +        error_setg(errp, "Order too big");
-> +        return;
-> +    }
-> +
-> +    /* Check base alignment */
-> +    if (s->order < xlen && (s->base & (BIT(s->order) - 1))) {
-> +        error_setg(errp, "Base not aligned to order");
-> +        return;
-> +    }
-> +}
-> +
-> +static void opensbi_memregion_class_init(ObjectClass *oc, void *opaque)
-> +{
-> +    DeviceClass *dc = DEVICE_CLASS(oc);
-> +    dc->realize = opensbi_memregion_realize;
-> +}
-> +
-> +static const TypeInfo opensbi_memregion_info = {
-> +        .name = TYPE_OPENSBI_MEMREGION,
-> +        .parent = TYPE_DEVICE,
-> +        .instance_init = opensbi_memregion_instance_init,
-> +        .instance_size = sizeof(OpenSBIDomainState),
-> +        .class_init = opensbi_memregion_class_init
+> +/* Struct riscv_iommu_dc - Device Context - section 2.1 */
+> +struct riscv_iommu_dc {
+> +      uint64_t tc;
+> +      uint64_t iohgatp;
+> +      uint64_t ta;
+> +      uint64_t fsc;
+> +      uint64_t msiptp;
+> +      uint64_t msi_addr_mask;
+> +      uint64_t msi_addr_pattern;
+> +      uint64_t _reserved;
 > +};
 > +
-> +/* OpenSBI Domains */
+> +/* Translation control fields */
+> +#define RISCV_IOMMU_DC_TC_V             BIT_ULL(0)
+> +#define RISCV_IOMMU_DC_TC_EN_PRI        BIT_ULL(2)
+> +#define RISCV_IOMMU_DC_TC_T2GPA         BIT_ULL(3)
+> +#define RISCV_IOMMU_DC_TC_DTF           BIT_ULL(4)
+> +#define RISCV_IOMMU_DC_TC_PDTV          BIT_ULL(5)
+> +#define RISCV_IOMMU_DC_TC_PRPR          BIT_ULL(6)
+> +#define RISCV_IOMMU_DC_TC_DPE           BIT_ULL(9)
+> +#define RISCV_IOMMU_DC_TC_SBE           BIT_ULL(10)
+> +#define RISCV_IOMMU_DC_TC_SXL           BIT_ULL(11)
 > +
-> +static void set_sysreset_allowed(Object *obj, bool val, Error **err)
-> +{
-> +    OpenSBIDomainState *s = OPENSBI_DOMAIN(obj);
-> +    s->system_reset_allowed = val;
-> +}
+> +/* Second-stage (aka G-stage) context fields */
+> +#define RISCV_IOMMU_DC_IOHGATP_PPN      RISCV_IOMMU_ATP_PPN_FIELD
+> +#define RISCV_IOMMU_DC_IOHGATP_GSCID    GENMASK_ULL(59, 44)
+> +#define RISCV_IOMMU_DC_IOHGATP_MODE     RISCV_IOMMU_ATP_MODE_FIELD
 > +
-> +static void set_suspend_allowed(Object *obj, bool val, Error **err)
-> +{
-> +    OpenSBIDomainState *s = OPENSBI_DOMAIN(obj);
-> +    s->system_suspend_allowed = val;
-> +}
-> +
-> +static void set_assign(Object *obj, bool val, Error **err)
-> +{
-> +    OpenSBIDomainState *s = OPENSBI_DOMAIN(obj);
-> +    s->assign = val;
-> +}
-> +
-> +static void opensbi_domain_instance_init(Object *obj)
-> +{
-> +    int i;
-> +    OpenSBIDomainState *s = OPENSBI_DOMAIN(obj);
-> +
-> +    object_property_add_uint32_ptr(obj, "boot-hart", &s->boot_hart,
-> +                                   OBJ_PROP_FLAG_WRITE);
-> +    object_property_set_description(obj, "boot-hart",
-> +                                    "The HART booting the domain instance.");
-> +
-> +    object_property_add_uint64_ptr(obj, "possible-harts", &s->possible_harts,
-> +                                   OBJ_PROP_FLAG_WRITE);
-> +    object_property_set_description(obj, "possible-harts",
-> +                                    "The list of CPUs for the domain instance, encoded as a bitmask");
-> +
-> +    object_property_add_uint64_ptr(obj, "next-arg1", &s->next_arg1,
-> +                                   OBJ_PROP_FLAG_WRITE);
-> +    object_property_set_description(obj, "next-arg1",
-> +                                    "The 64 bit next booting stage arg1 for the domain instance.");
-> +
-> +    object_property_add_uint64_ptr(obj, "next-addr", &s->next_addr,
-> +                                   OBJ_PROP_FLAG_WRITE);
-> +    object_property_set_description(obj, "next-addr",
-> +                                    "The 64 bit next booting stage address for the domain instance.");
-> +
-> +    object_property_add_uint32_ptr(obj, "next-mode", &s->next_mode,
-> +                                   OBJ_PROP_FLAG_WRITE);
-> +    object_property_set_description(obj, "next-mode",
-> +                                    "The 32 bit next booting stage mode for the domain instance.");
-> +
-> +    object_property_add_bool(obj, "system-reset-allowed", NULL,
-> +                             set_sysreset_allowed);
-> +    object_property_set_description(obj, "system-reset-allowed",
-> +                                    "Whether the domain instance is allowed to do system reset.");
-> +
-> +    object_property_add_bool(obj, "system-suspend-allowed", NULL,
-> +                             set_suspend_allowed);
-> +    object_property_set_description(obj, "system-suspend-allowed",
-> +                                    "Whether the domain instance is allowed to do system suspend.");
-> +
-> +    for (i = 0; i < OPENSBI_DOMAIN_MEMREGIONS_MAX; i++) {
-> +        g_autofree char *reg_propname = g_strdup_printf("region%i", i);
-> +        object_property_add_link(obj, reg_propname, TYPE_OPENSBI_MEMREGION,
-> +                                 (Object **) &s->regions[i],
-> +                                 qdev_prop_allow_set_link_before_realize, 0);
-> +
-> +        g_autofree char *reg_description = g_strdup_printf(
-> +                "Region %i (out of %i) for this domain.",
-> +                i, OPENSBI_DOMAIN_MEMREGIONS_MAX);
-> +        object_property_set_description(obj, reg_propname, reg_description);
-> +
-> +        g_autofree char *perm_propname = g_strdup_printf("perms%i", i);
-> +        object_property_add_uint32_ptr(obj, perm_propname, &s->region_perms[i],
-> +                                       OBJ_PROP_FLAG_WRITE);
-> +
-> +        g_autofree char *perm_description = g_strdup_printf(
-> +                "Permissions for region %i for this domain.", i);
-> +        object_property_set_description(obj, perm_propname, perm_description);
-> +    }
-> +
-> +    object_property_add_bool(obj, "assign", NULL, set_assign);
-> +    object_property_set_description(obj, "assign",
-> +                                    "Whether to assign this domain to its boot hart.");
-> +}
-> +
-> +static void opensbi_domain_realize(DeviceState *ds, Error **errp)
-> +{
-> +    /* Nothing to do */
-> +}
-> +
-> +static void opensbi_domain_class_init(ObjectClass *oc, void *opaque)
-> +{
-> +    DeviceClass *dc = DEVICE_CLASS(oc);
-> +    dc->realize = opensbi_domain_realize;
-> +}
-> +
-> +static const TypeInfo opensbi_domain_info = {
-> +        .name = TYPE_OPENSBI_DOMAIN,
-> +        .parent = TYPE_DEVICE,
-> +        .instance_init = opensbi_domain_instance_init,
-> +        .instance_size = sizeof(OpenSBIDomainState),
-> +        .class_init = opensbi_domain_class_init
+> +enum riscv_iommu_dc_iohgatp_modes {
+> +    RISCV_IOMMU_DC_IOHGATP_MODE_BARE =3D 0,
+> +    RISCV_IOMMU_DC_IOHGATP_MODE_SV32X4 =3D 8,
+> +    RISCV_IOMMU_DC_IOHGATP_MODE_SV39X4 =3D 8,
+> +    RISCV_IOMMU_DC_IOHGATP_MODE_SV48X4 =3D 9,
+> +    RISCV_IOMMU_DC_IOHGATP_MODE_SV57X4 =3D 10
 > +};
 > +
-> +static void opensbi_register_types(void)
-> +{
-> +    type_register_static(&opensbi_domain_info);
-> +    type_register_static(&opensbi_memregion_info);
-> +}
+> +/* Translation attributes fields */
+> +#define RISCV_IOMMU_DC_TA_PSCID         GENMASK_ULL(31, 12)
 > +
-> +type_init(opensbi_register_types)
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 9981e0f6c9..bb4bf3ce5b 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -55,6 +55,7 @@
->   #include "hw/acpi/aml-build.h"
->   #include "qapi/qapi-visit-common.h"
->   #include "hw/virtio/virtio-iommu.h"
-> +#include "hw/riscv/opensbi_domain.h"
->   
->   /* KVM AIA only supports APLIC MSI. APLIC Wired is always emulated by QEMU. */
->   static bool virt_use_kvm_aia(RISCVVirtState *s)
-> @@ -1051,6 +1052,8 @@ static void finalize_fdt(RISCVVirtState *s)
->       create_fdt_uart(s, virt_memmap, irq_mmio_phandle);
->   
->       create_fdt_rtc(s, virt_memmap, irq_mmio_phandle);
+> +/* First-stage context fields */
+> +#define RISCV_IOMMU_DC_FSC_PPN          RISCV_IOMMU_ATP_PPN_FIELD
+> +#define RISCV_IOMMU_DC_FSC_MODE         RISCV_IOMMU_ATP_MODE_FIELD
 > +
-> +    create_fdt_opensbi_domains(MACHINE(s));
->   }
->   
->   static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap)
-> diff --git a/include/hw/riscv/opensbi_domain.h b/include/hw/riscv/opensbi_domain.h
-> new file mode 100644
-> index 0000000000..61bcf1a296
-> --- /dev/null
-> +++ b/include/hw/riscv/opensbi_domain.h
-> @@ -0,0 +1,51 @@
-> +
-> +#ifndef RISCV_DOMAIN_H
-> +#define RISCV_DOMAIN_H
-> +
-> +#include "hw/sysbus.h"
-> +#include "qom/object.h"
-> +#include "cpu.h"
-> +
-> +#define TYPE_OPENSBI_MEMREGION "opensbi-memregion"
-> +OBJECT_DECLARE_SIMPLE_TYPE(OpenSBIMemregionState, OPENSBI_MEMREGION)
-> +
-> +#define OPENSBI_MEMREGION_DEVICES_MAX   16
-> +
-> +struct OpenSBIMemregionState {
-> +    /* public */
-> +    DeviceState parent_obj;
-> +
-> +    /* private */
-> +    uint64_t base;
-> +    uint32_t order;
-> +    bool mmio;
-> +    char *devices[OPENSBI_MEMREGION_DEVICES_MAX];
+> +/* Generic I/O MMU command structure - check section 3.1 */
+> +struct riscv_iommu_command {
+> +    uint64_t dword0;
+> +    uint64_t dword1;
 > +};
 > +
-> +#define TYPE_OPENSBI_DOMAIN "opensbi-domain"
-> +OBJECT_DECLARE_SIMPLE_TYPE(OpenSBIDomainState, OPENSBI_DOMAIN)
+> +#define RISCV_IOMMU_CMD_OPCODE          GENMASK_ULL(6, 0)
+> +#define RISCV_IOMMU_CMD_FUNC            GENMASK_ULL(9, 7)
 > +
-> +#define OPENSBI_DOMAIN_MEMREGIONS_MAX   16
+> +#define RISCV_IOMMU_CMD_IOTINVAL_OPCODE         1
+> +#define RISCV_IOMMU_CMD_IOTINVAL_FUNC_VMA       0
+> +#define RISCV_IOMMU_CMD_IOTINVAL_FUNC_GVMA      1
+> +#define RISCV_IOMMU_CMD_IOTINVAL_AV     BIT_ULL(10)
+> +#define RISCV_IOMMU_CMD_IOTINVAL_PSCID  GENMASK_ULL(31, 12)
+> +#define RISCV_IOMMU_CMD_IOTINVAL_PSCV   BIT_ULL(32)
+> +#define RISCV_IOMMU_CMD_IOTINVAL_GV     BIT_ULL(33)
+> +#define RISCV_IOMMU_CMD_IOTINVAL_GSCID  GENMASK_ULL(59, 44)
 > +
-> +struct OpenSBIDomainState {
-> +    /* public */
-> +    DeviceState parent_obj;
+> +#define RISCV_IOMMU_CMD_IOFENCE_OPCODE          2
+> +#define RISCV_IOMMU_CMD_IOFENCE_FUNC_C          0
+> +#define RISCV_IOMMU_CMD_IOFENCE_AV      BIT_ULL(10)
+> +#define RISCV_IOMMU_CMD_IOFENCE_DATA    GENMASK_ULL(63, 32)
 > +
-> +    /* private */
-> +    OpenSBIMemregionState *regions[OPENSBI_DOMAIN_MEMREGIONS_MAX];
-> +    unsigned int region_perms[OPENSBI_DOMAIN_MEMREGIONS_MAX];
+> +#define RISCV_IOMMU_CMD_IODIR_OPCODE            3
+> +#define RISCV_IOMMU_CMD_IODIR_FUNC_INVAL_DDT    0
+> +#define RISCV_IOMMU_CMD_IODIR_FUNC_INVAL_PDT    1
+> +#define RISCV_IOMMU_CMD_IODIR_PID       GENMASK_ULL(31, 12)
+> +#define RISCV_IOMMU_CMD_IODIR_DV        BIT_ULL(33)
+> +#define RISCV_IOMMU_CMD_IODIR_DID       GENMASK_ULL(63, 40)
 > +
-> +    unsigned long possible_harts;
-> +    unsigned int boot_hart;
-> +    uint64_t next_arg1;
-> +    uint64_t next_addr;
-> +    uint32_t next_mode;
-> +    bool system_reset_allowed;
-> +    bool system_suspend_allowed;
-> +
-> +    bool assign;
+> +enum riscv_iommu_dc_fsc_atp_modes {
+> +    RISCV_IOMMU_DC_FSC_MODE_BARE =3D 0,
+> +    RISCV_IOMMU_DC_FSC_IOSATP_MODE_SV32 =3D 8,
+> +    RISCV_IOMMU_DC_FSC_IOSATP_MODE_SV39 =3D 8,
+> +    RISCV_IOMMU_DC_FSC_IOSATP_MODE_SV48 =3D 9,
+> +    RISCV_IOMMU_DC_FSC_IOSATP_MODE_SV57 =3D 10,
+> +    RISCV_IOMMU_DC_FSC_PDTP_MODE_PD8 =3D 1,
+> +    RISCV_IOMMU_DC_FSC_PDTP_MODE_PD17 =3D 2,
+> +    RISCV_IOMMU_DC_FSC_PDTP_MODE_PD20 =3D 3
 > +};
 > +
-> +void create_fdt_opensbi_domains(MachineState *s);
+> +enum riscv_iommu_fq_causes {
+> +    RISCV_IOMMU_FQ_CAUSE_INST_FAULT           =3D 1,
+> +    RISCV_IOMMU_FQ_CAUSE_RD_ADDR_MISALIGNED   =3D 4,
+> +    RISCV_IOMMU_FQ_CAUSE_RD_FAULT             =3D 5,
+> +    RISCV_IOMMU_FQ_CAUSE_WR_ADDR_MISALIGNED   =3D 6,
+> +    RISCV_IOMMU_FQ_CAUSE_WR_FAULT             =3D 7,
+> +    RISCV_IOMMU_FQ_CAUSE_INST_FAULT_S         =3D 12,
+> +    RISCV_IOMMU_FQ_CAUSE_RD_FAULT_S           =3D 13,
+> +    RISCV_IOMMU_FQ_CAUSE_WR_FAULT_S           =3D 15,
+> +    RISCV_IOMMU_FQ_CAUSE_INST_FAULT_VS        =3D 20,
+> +    RISCV_IOMMU_FQ_CAUSE_RD_FAULT_VS          =3D 21,
+> +    RISCV_IOMMU_FQ_CAUSE_WR_FAULT_VS          =3D 23,
+> +    RISCV_IOMMU_FQ_CAUSE_DMA_DISABLED         =3D 256,
+> +    RISCV_IOMMU_FQ_CAUSE_DDT_LOAD_FAULT       =3D 257,
+> +    RISCV_IOMMU_FQ_CAUSE_DDT_INVALID          =3D 258,
+> +    RISCV_IOMMU_FQ_CAUSE_DDT_MISCONFIGURED    =3D 259,
+> +    RISCV_IOMMU_FQ_CAUSE_TTYPE_BLOCKED        =3D 260,
+> +    RISCV_IOMMU_FQ_CAUSE_MSI_LOAD_FAULT       =3D 261,
+> +    RISCV_IOMMU_FQ_CAUSE_MSI_INVALID          =3D 262,
+> +    RISCV_IOMMU_FQ_CAUSE_MSI_MISCONFIGURED    =3D 263,
+> +    RISCV_IOMMU_FQ_CAUSE_MRIF_FAULT           =3D 264,
+> +    RISCV_IOMMU_FQ_CAUSE_PDT_LOAD_FAULT       =3D 265,
+> +    RISCV_IOMMU_FQ_CAUSE_PDT_INVALID          =3D 266,
+> +    RISCV_IOMMU_FQ_CAUSE_PDT_MISCONFIGURED    =3D 267,
+> +    RISCV_IOMMU_FQ_CAUSE_DDT_CORRUPTED        =3D 268,
+> +    RISCV_IOMMU_FQ_CAUSE_PDT_CORRUPTED        =3D 269,
+> +    RISCV_IOMMU_FQ_CAUSE_MSI_PT_CORRUPTED     =3D 270,
+> +    RISCV_IOMMU_FQ_CAUSE_MRIF_CORRUIPTED      =3D 271,
+> +    RISCV_IOMMU_FQ_CAUSE_INTERNAL_DP_ERROR    =3D 272,
+> +    RISCV_IOMMU_FQ_CAUSE_MSI_WR_FAULT         =3D 273,
+> +    RISCV_IOMMU_FQ_CAUSE_PT_CORRUPTED         =3D 274
+> +};
 > +
-> +#endif /* RISCV_DOMAIN_H */
+> +/* MSI page table pointer */
+> +#define RISCV_IOMMU_DC_MSIPTP_PPN       RISCV_IOMMU_ATP_PPN_FIELD
+> +#define RISCV_IOMMU_DC_MSIPTP_MODE      RISCV_IOMMU_ATP_MODE_FIELD
+> +#define RISCV_IOMMU_DC_MSIPTP_MODE_OFF  0
+> +#define RISCV_IOMMU_DC_MSIPTP_MODE_FLAT 1
+> +
+> +/* Translation attributes fields */
+> +#define RISCV_IOMMU_PC_TA_V             BIT_ULL(0)
+> +
+> +/* First stage context fields */
+> +#define RISCV_IOMMU_PC_FSC_PPN          GENMASK_ULL(43, 0)
+> +
+> +enum riscv_iommu_fq_ttypes {
+> +    RISCV_IOMMU_FQ_TTYPE_NONE =3D 0,
+> +    RISCV_IOMMU_FQ_TTYPE_UADDR_INST_FETCH =3D 1,
+> +    RISCV_IOMMU_FQ_TTYPE_UADDR_RD =3D 2,
+> +    RISCV_IOMMU_FQ_TTYPE_UADDR_WR =3D 3,
+> +    RISCV_IOMMU_FQ_TTYPE_TADDR_INST_FETCH =3D 5,
+> +    RISCV_IOMMU_FQ_TTYPE_TADDR_RD =3D 6,
+> +    RISCV_IOMMU_FQ_TTYPE_TADDR_WR =3D 7,
+> +    RISCV_IOMMU_FW_TTYPE_PCIE_MSG_REQ =3D 8,
+> +};
+> +
+> +/* Fields on pte */
+> +#define RISCV_IOMMU_MSI_PTE_V           BIT_ULL(0)
+> +#define RISCV_IOMMU_MSI_PTE_M           GENMASK_ULL(2, 1)
+> +
+> +#define RISCV_IOMMU_MSI_PTE_M_MRIF      1
+> +#define RISCV_IOMMU_MSI_PTE_M_BASIC     3
+> +
+> +/* When M =3D=3D 1 (MRIF mode) */
+> +#define RISCV_IOMMU_MSI_PTE_MRIF_ADDR   GENMASK_ULL(53, 7)
+> +/* When M =3D=3D 3 (basic mode) */
+> +#define RISCV_IOMMU_MSI_PTE_PPN         RISCV_IOMMU_PPN_FIELD
+> +#define RISCV_IOMMU_MSI_PTE_C           BIT_ULL(63)
+> +
+> +/* Fields on mrif_info */
+> +#define RISCV_IOMMU_MSI_MRIF_NID        GENMASK_ULL(9, 0)
+> +#define RISCV_IOMMU_MSI_MRIF_NPPN       RISCV_IOMMU_PPN_FIELD
+> +#define RISCV_IOMMU_MSI_MRIF_NID_MSB    BIT_ULL(60)
+> +
+> +#endif /* _RISCV_IOMMU_BITS_H_ */
+> --
+> 2.45.2
+>
+>
 
