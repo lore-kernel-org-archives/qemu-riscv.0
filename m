@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD6A3C3DA7F
-	for <qemu-riscv@archiver.kernel.org>; Sun,  4 Aug 2024 23:57:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39FD6C3DA64
+	for <qemu-riscv@archiver.kernel.org>; Mon,  5 Aug 2024 01:52:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sal6P-0006bq-53; Sun, 04 Aug 2024 19:57:29 -0400
+	id 1samtO-000305-FN; Sun, 04 Aug 2024 21:52:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sal5z-0006Tr-6d; Sun, 04 Aug 2024 19:57:06 -0400
-Received: from mail-vs1-xe2f.google.com ([2607:f8b0:4864:20::e2f])
+ id 1samtM-0002wh-0r; Sun, 04 Aug 2024 21:52:08 -0400
+Received: from mail-vk1-xa31.google.com ([2607:f8b0:4864:20::a31])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sal5p-00038u-0F; Sun, 04 Aug 2024 19:57:01 -0400
-Received: by mail-vs1-xe2f.google.com with SMTP id
- ada2fe7eead31-4928fa870a9so2337038137.2; 
- Sun, 04 Aug 2024 16:56:47 -0700 (PDT)
+ id 1samtJ-0005A1-L3; Sun, 04 Aug 2024 21:52:07 -0400
+Received: by mail-vk1-xa31.google.com with SMTP id
+ 71dfb90a1353d-4f51981b1beso3650455e0c.2; 
+ Sun, 04 Aug 2024 18:52:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1722815807; x=1723420607; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1722822724; x=1723427524; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Sa7wf7pY054ym1tQ8MQTBXihxy/ZR255C4eRuf1Xe4I=;
- b=gS/9n3+OyuwUyCLVrYcwCPhbRP5waYBXR6trfCDtlBDrkuqbBsmA1hnBDQJIWTawqt
- 5uYDwbSE8BJmxaHp8cHToMbjVNclnj19IJI7cNbBPxn39e82wD+1bkpKVe4EfuLqdbWY
- vIMXKq4MDuP53cApr149S20hT+WQp+49Zc8Wmhys5iW+dgYticgAzvH2fecthWpvOFEc
- kTpcXRM6FU45CGD+MwYPY8IGR5syxE5iIZtGgJLPOmrm/lV0dAUeLTCATOneH9ZxIdL1
- UEonYeyYeAK18bKnf6qWHjljiyDT55yRWpm65EszRaff4X8mb+edWd6woU5HDi74AX31
- X9jQ==
+ bh=3Hxr5Mrhh6FpZja3ucnsJYc4mcK0pf1svcq8cdqm8M0=;
+ b=GdGUS3Dg5brwpjhOOcnsECzTTLmEA2aGcsVD6euRz6qrjq43F/5M4TYNcwf1WBzF/x
+ D0KM9xyalDa29ISaB/kjH7sDK6sglXafoMK/O8aAKhvFy8tFy6LlJQH7DVMTTn8Q88C1
+ KwTsAHSUe1DxWXDQGPCQk7mQILha4LQC8o2hnhWo1ReZryJrpZtk8+eGMRHWzbajNY1c
+ TMle0kz4/MvLxuXgPYLXQ4FVhtfwVso/4SguM0O/Co5CGbK/u+tZv4uO+f4Ag7UI8WpK
+ Zz0YcrcSgfJvaKkHyuwqXqacP4ExhP3q4YOphJEbMZ4cmrT89N/2KVQcUH8KW0/srX5t
+ HT4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722815807; x=1723420607;
+ d=1e100.net; s=20230601; t=1722822724; x=1723427524;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Sa7wf7pY054ym1tQ8MQTBXihxy/ZR255C4eRuf1Xe4I=;
- b=IeqAfksbC73uikeFWJF2o6SLdTC5ry38Nw3GKtpsy0AiGdpUartwv6+vSsXdjx/GwM
- mQo3HI2gyUSaq13bwo6EyamoHcKhE2GpLO4BI1WUAQ0236M+0m95FUJKprCH+oVY+4nK
- Bv1tiOBOgDbw8RtJVnZOzzYSqc85W6N8rlKbgMOvSkhpTOLPaq95fqpzGQJi3SA9U5WH
- A9Z/PafcmHUIZ4nBVlI0ju4dJiOPYyZTnQn3Um8HQSTYsH6Ng5EgnTYoW+dADaDUxcUT
- Lc4SnFXe7fbl7asDXwoIyra6AAZRt9tNxireDs0Um9hN2ah1fG5xNSaHSEmF9C6WbRw2
- FKlg==
+ bh=3Hxr5Mrhh6FpZja3ucnsJYc4mcK0pf1svcq8cdqm8M0=;
+ b=hOOEKqdZgbSPLkTSy5yzGdISMtc3whZQ3bsyudvacnwcOsFGDT130+a6hZvV6qOwn2
+ +itLRkQS5MEXpWiZiGSXXOwUb6CCX2DR5s/DEgj3LH9tDtZTX/9xKM2r2o5G2FoGJcPA
+ xJB9PjxLgCPSb2LKmNkZ1f81DYgtN5+9wtAuLn3FLukr6RqIWiC6NBIPYl9YhQI2NOn6
+ NJfDl7pD5q+EEhGDOK8V2xitTyPqiaJ+wRyoc4KMyK5yjX8PaBxZQoJgeRZ3SvxNOkpU
+ a5a1gx5cccsF3ahlRAp6j1LIQEVYWeMqIOtXaaFh0wF8cg+XpkStU79gnoJwXkTregRF
+ h/kw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVQYSRgSfjYE+P1uwA5mtu0a0khFLQ/nZ3PmER+5pzzwniW3ZEyE6dcI5A4pnCbFLn9XMA/eLsgaNi+@nongnu.org
-X-Gm-Message-State: AOJu0YwInq5Fwmqj4vS1bIwgQtNXn6Vf9hKSBssCkyFGmtGRYj1BETmZ
- +UzMtmapTlxsjDQF9aY4/5JTIdV82nSBwn09M/FR44MUkvIlMVsKqa83Tp0SGd1dI38Nsczk60f
- eQcMKJ0JcicendVfChwzcxn0XL3Y7//6f
-X-Google-Smtp-Source: AGHT+IFtaDB/9MnI/oGo78zrtYPl9ghPEjUkyPR1BpR5cvQnNCOwoo3bu4Oh/cfpic5Lli8Gb52QwwqL4EAECILNg+Q=
-X-Received: by 2002:a05:6102:2ac4:b0:48f:4bd5:23d9 with SMTP id
- ada2fe7eead31-4945bde6458mr8378246137.5.1722815806693; Sun, 04 Aug 2024
- 16:56:46 -0700 (PDT)
+ AJvYcCXStbmaIJkwF1fK94Bu7f7TOzjrSyQC3m9A84MJTR44TrpMqd8S/Dx+5WjcTEbeQMB8I89TrcQUaWKnRzCUglareqBu/l0=
+X-Gm-Message-State: AOJu0Yz+L4Njbn4vHmbU/K4wP8RVvhwa35z5do07w+1njL3L7lu5jGBF
+ NeW96QHLSdWQvF8WfMBqx2M+BGTgbf/grQJ30AKC6YWgGYLCOiwgnEKfj601HVuKtwkBKOfTBdj
+ jqD6AFNKuXgWSxtw4nTeregDx2x4=
+X-Google-Smtp-Source: AGHT+IHbwkU+zgs1NRKg+q2HQ4kIhU+MmFrQLa6n7axtmpNpyPY46YvO+WkA/IU4kydfTQg9dGQ6fVpj7Qenuu8dg5A=
+X-Received: by 2002:a05:6122:a11:b0:4f5:130c:bef3 with SMTP id
+ 71dfb90a1353d-4f89ff3aca6mr12541182e0c.1.1722822723858; Sun, 04 Aug 2024
+ 18:52:03 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240802072417.659-1-zhiwei_liu@linux.alibaba.com>
- <20240802072417.659-4-zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20240802072417.659-4-zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20240802072417.659-1-zhiwei_liu@linux.alibaba.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 5 Aug 2024 09:56:20 +1000
-Message-ID: <CAKmqyKPM0OLNrNMw+VFTqesammB0hfCeRZH9wSsUizTZZmLYGQ@mail.gmail.com>
-Subject: Re: [PATCH v3 3/3] target/riscv: Relax fld alignment requirement
+Date: Mon, 5 Aug 2024 11:51:37 +1000
+Message-ID: <CAKmqyKPwbkXRzMiBK2LwX0fRvCqe+pLAQ1ipT14662KK+zZHeg@mail.gmail.com>
+Subject: Re: [PATCH v3 0/3] target/riscv: Remove redundant insn length check
+ for zama16b
 To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com, 
  alistair.francis@wdc.com, dbarboza@ventanamicro.com, liwei1518@gmail.com, 
  bmeng.cn@gmail.com, richard.henderson@linaro.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2f;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a31;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa31.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -93,71 +93,50 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Aug 2, 2024 at 5:27=E2=80=AFPM LIU Zhiwei <zhiwei_liu@linux.alibaba=
+On Fri, Aug 2, 2024 at 5:25=E2=80=AFPM LIU Zhiwei <zhiwei_liu@linux.alibaba=
 .com> wrote:
 >
-> According to the risc-v specification:
-> "FLD and FSD are only guaranteed to execute atomically if the effective
-> address is naturally aligned and XLEN=E2=89=A564."
+> In this patch set, we remove the redundant insn length check for zama16b =
+as the
+> specification clarified that zama16b applies to compressed encodings[1].
 >
-> We currently implement fld as MO_ATOM_IFALIGN when XLEN < 64, which does
-> not violate the rules. But it will hide some problems. So relax it to
-> MO_ATOM_NONE.
+> Richard points out we should obey the MXLEN requirement for F/D/Q loads o=
+r stores,
+> so we add this constraint for trans_fld/fsd.
 >
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> I notice that we have a too strict aligment implementation for fld/fsd wh=
+en xlen < 64.
+> It will hide some problems. So relex it from MO_ATOM_IFALIGN to MO_ATOM_N=
+ONE.
+>
+> [1]: https://github.com/riscv/riscv-isa-manual/pull/1557
+>
+> v3<-v2:
+>   1. Using get_xl_max instead of ctx->misa_mxl_max as documentation.
+>   2. Fix not clean split in patch 1.
+>   3. Explicitly specified aligment for fld/fsd under all cases.
+>
+> v2<-v1:
+>   1. Add mxlen check for fld when applies zama16b.
+>   2. Relax fld/fsd alignment for MO_ATOM_IFALIGN to MO_ATOM_NONE.
+>
+> LIU Zhiwei (3):
+>   target/riscv: Remove redundant insn length check for zama16b
+>   target/riscv: Add MXLEN check for F/D/Q applies to zama16b
+>   target/riscv: Relax fld alignment requirement
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
-> ---
->  target/riscv/insn_trans/trans_rvd.c.inc | 18 ++++++++++++++----
->  1 file changed, 14 insertions(+), 4 deletions(-)
 >
-> diff --git a/target/riscv/insn_trans/trans_rvd.c.inc b/target/riscv/insn_=
-trans/trans_rvd.c.inc
-> index 49682292b8..8a46124f98 100644
-> --- a/target/riscv/insn_trans/trans_rvd.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvd.c.inc
-> @@ -48,11 +48,17 @@ static bool trans_fld(DisasContext *ctx, arg_fld *a)
->      REQUIRE_EXT(ctx, RVD);
+>  target/riscv/insn_trans/trans_rvd.c.inc | 18 ++++++++++++++++--
+>  target/riscv/insn_trans/trans_rvf.c.inc |  4 ++--
+>  target/riscv/insn_trans/trans_rvi.c.inc |  4 ++--
+>  3 files changed, 20 insertions(+), 6 deletions(-)
 >
->      /*
-> -     * Zama16b applies to loads and stores of no more than MXLEN bits de=
-fined
-> -     * in the F, D, and Q extensions.
-> +     * FLD and FSD are only guaranteed to execute atomically if the effe=
-ctive
-> +     * address is naturally aligned and XLEN=E2=89=A564. Also, zama16b a=
-pplies to
-> +     * loads and stores of no more than MXLEN bits defined in the F, D, =
-and
-> +     * Q extensions.
->       */
-> -    if ((get_xl_max(ctx) >=3D MXL_RV64) && ctx->cfg_ptr->ext_zama16b) {
-> +    if (get_xl_max(ctx) =3D=3D MXL_RV32) {
-> +        memop |=3D MO_ATOM_NONE;
-> +    } else if (ctx->cfg_ptr->ext_zama16b) {
->          memop |=3D MO_ATOM_WITHIN16;
-> +    } else {
-> +        memop |=3D MO_ATOM_IFALIGN;
->      }
->
->      decode_save_opc(ctx);
-> @@ -71,8 +77,12 @@ static bool trans_fsd(DisasContext *ctx, arg_fsd *a)
->      REQUIRE_FPU;
->      REQUIRE_EXT(ctx, RVD);
->
-> -    if ((get_xl_max(ctx) >=3D MXL_RV64) && ctx->cfg_ptr->ext_zama16b) {
-> +    if (get_xl_max(ctx) =3D=3D MXL_RV32) {
-> +        memop |=3D MO_ATOM_NONE;
-> +    } else if (ctx->cfg_ptr->ext_zama16b) {
->          memop |=3D MO_ATOM_WITHIN16;
-> +    } else {
-> +        memop |=3D MO_ATOM_IFALIGN;
->      }
->
->      decode_save_opc(ctx);
 > --
 > 2.25.1
 >
