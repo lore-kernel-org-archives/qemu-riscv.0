@@ -4,70 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCEB6C3DA7F
-	for <qemu-riscv@archiver.kernel.org>; Mon,  5 Aug 2024 21:05:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABED3C3DA7F
+	for <qemu-riscv@archiver.kernel.org>; Mon,  5 Aug 2024 23:35:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sb4st-0006pL-91; Mon, 05 Aug 2024 17:04:51 -0400
+	id 1sb7Dp-0000th-M2; Mon, 05 Aug 2024 19:34:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gregorhaas1997@gmail.com>)
- id 1sb4ss-0006oM-1R; Mon, 05 Aug 2024 17:04:50 -0400
-Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1sb7Dn-0000p2-Ht; Mon, 05 Aug 2024 19:34:35 -0400
+Received: from mail-vk1-xa2b.google.com ([2607:f8b0:4864:20::a2b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <gregorhaas1997@gmail.com>)
- id 1sb4sq-00081f-3E; Mon, 05 Aug 2024 17:04:49 -0400
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-1fd70ba6a15so83364055ad.0; 
- Mon, 05 Aug 2024 14:04:47 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1sb7Dm-0001xa-0i; Mon, 05 Aug 2024 19:34:35 -0400
+Received: by mail-vk1-xa2b.google.com with SMTP id
+ 71dfb90a1353d-4ef76f04977so37497e0c.2; 
+ Mon, 05 Aug 2024 16:34:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1722891886; x=1723496686; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=XySQWrEFO9nPy8SoTcGCQY7CmQyabF4H4g770XsoGWU=;
- b=aFeA/tV8WfH9KmdNDIEia7H/6rlyY0YwE4l68I2UnydfeZefUq85VzYd7ACfUMTMeG
- 2+jcsnNQITmc4eEXJ3c/lWLM2ygmgMH+8ViWtwxbWIgDWSo4laQslIaEa+FzOxNRciTH
- mzY3RUfHfaEXkh4LvfvlATZjVBSKkQxa3tMueHfDyRqdvDWnEPszTXg0UYXhhCzMHGxt
- qzWuiWCtoWUUTJ/66KSew/rK/1e2GisFKwOS6CY1aY66AY5m/pgbB5l8mJs2nT//o0kd
- vAo0OF8bK/SvCeaegFEjqztpjE96Bg6+eX+hcbZfqtVNLzv9vpZMPp0txplLSOWQVCBF
- 3EnA==
+ d=gmail.com; s=20230601; t=1722900872; x=1723505672; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+cb3dDnvI4ENJjMQ0jNRvNM9q+TfH0RxzcjqT34rBw4=;
+ b=AWnvDsLrgkxjY67rPYIQ8ooxUGbhhWGcMyruUBvwuvjNKHyXZXmA7yJ5nvwwoBc0Zs
+ uLgrNAi2xDzQlpiXN8TQobJYl26nJgcIhkKaAni8k0SDDcUNuLxCsyV2rIeq2l8bnSre
+ tc9blTez4144WeUeL0OyL6kZ5gRKeJ8KB/FVyIqVCMZHeS3Sr0UHcQdBjt/+VU2sArG1
+ oY2LD2WNG8h5UWJJNZZgZTWfxnlUQ8jHfRxXzGF5Cj/BY995s6vN2yq0u9zExZmlIbIv
+ ycj99l/F6zsmVta5he8Mx9iCCYYCTSo2beL22xsMYpCfxo/oaFHiFW26R0/9yfh3we1u
+ 0Jew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722891886; x=1723496686;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=XySQWrEFO9nPy8SoTcGCQY7CmQyabF4H4g770XsoGWU=;
- b=Ew+L+IZWskgCInrGwtov5DBlFq0+DFSFK17O+GgmC3aQq+OMwA/78nFpFHrC3R5UHv
- LBVIz6E25R7nV2LElI4XAd4wX+TSY4myZ0B3gEjXFF/ssu5eO2M7yVK//3Vg76ZlPuTJ
- 9CXKvJk2lwQI55IAdi2jUMLbY6Ojo2xw/0gVYrtXElKrfjRoiaiirnHBb+ll7lDL/KMR
- 0t4iFgyjvh+FXsOrEtTrU5DneyGIz3Lah/1WmpL0xmm2SapdC+M4oT+PwsCuGotpWMHS
- NSSElyeFQo6a2i4GFu2/s3cetbRbRCHw9tJDxjsoZkM8rKUh9DlpoGEDwnrdgpThwR2J
- TWQw==
-X-Gm-Message-State: AOJu0YzhAfgvZ/ACYh7/0vVEc9q/AcGauIiLsllIRxcXVh1FBzYKswRe
- 1dx+w+cYc1HbFSAX6wSxk6bGUmgWaSfIwguu6sESd3j0w+BotzkPOSBQ8i/z
-X-Google-Smtp-Source: AGHT+IHM9L+mQEaah81Nrb82lfOcmT5oG+oJhroIJJDQSPIUstzGVqgyvzOHNfg/4YlFC+3U4Ar3Ww==
-X-Received: by 2002:a17:903:11ce:b0:1fb:82f5:6641 with SMTP id
- d9443c01a7336-1ff57292c9dmr142214395ad.23.1722891885864; 
- Mon, 05 Aug 2024 14:04:45 -0700 (PDT)
-Received: from localhost ([205.175.106.198])
- by smtp.gmail.com with UTF8SMTPSA id
- d9443c01a7336-1ff59059f9asm72684995ad.131.2024.08.05.14.04.45
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 05 Aug 2024 14:04:45 -0700 (PDT)
-From: Gregor Haas <gregorhaas1997@gmail.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, atishp@rivosinc.com, dbarboza@ventanamicro.com,
- alistair.francis@wdc.com, Gregor Haas <gregorhaas1997@gmail.com>
-Subject: [PATCH v3 0/1] Add support for generating OpenSBI domains in the
- device tree
-Date: Mon,  5 Aug 2024 14:04:43 -0700
-Message-ID: <20240805210444.497723-1-gregorhaas1997@gmail.com>
-X-Mailer: git-send-email 2.45.2
+ d=1e100.net; s=20230601; t=1722900872; x=1723505672;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+cb3dDnvI4ENJjMQ0jNRvNM9q+TfH0RxzcjqT34rBw4=;
+ b=fl+AIIMkKwHebHQbZ0yo3se7JE09Q17sDZuLOLkVQ7OpG0UMPAYCt9vVPn7OYCB+jJ
+ JJL7jz2GOQr08MlhvTJCF9uWaHaw8c3Q9P2wAFwtAkhlTs51Oh+VR32gnLJ4OblIT7O6
+ 1JGsD/JIa5m9n0xN3ScM9bwjz4pJ2cHinUspPCKbVIZkpoXo1N9KrgaV761JSLt9NVmF
+ 4SK+toUQzNgHCsRDyG3liCJb4u1hd0xywMDM6TZrN3IFMoPtsei+poefaoGtuuiRh+gY
+ wfTkjYWPw9aKkWHQLpaxsfZq+L5T6I17VophbP+GMVJ5qpoga+oMr82P1OcNlJlArSjw
+ EepQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU+G97/kLO+hFCmR1di9ZFFz3W2OoCjfgY9J+Z3Cqf+bCvCAfbQza3aZnWH1YQPIfPBRO3Wa8YX6Gap9jBIHGTbPzyaAaM=
+X-Gm-Message-State: AOJu0Yw0Rxq11hOPp8J8Nrnjt9BMlHIhN99zs6cFr+up3hg6WVE1Dzp/
+ c/YE4BhHQ2bJtGGRtGSclsBGi1t7f83ddFj4owJVr/Iy0pt6Q1Da2m8QIY1GsZIixPHKsMbvx8r
+ xf4MUzRobVVzQwaltNQjXnMEdsx0=
+X-Google-Smtp-Source: AGHT+IHr+QnZDK7As6676AVokfTnm5ZZyercudkQEeBcxcSrdVEnOT8L3LF3jS7gGRNwGGLVU/WMp5rLahy8e8JoWck=
+X-Received: by 2002:a05:6122:1ad0:b0:4f5:12d3:799a with SMTP id
+ 71dfb90a1353d-4f89ff3c57fmr16232406e0c.2.1722900871728; Mon, 05 Aug 2024
+ 16:34:31 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
- envelope-from=gregorhaas1997@gmail.com; helo=mail-pl1-x633.google.com
+References: <20240805120259.1705016-1-dbarboza@ventanamicro.com>
+ <20240805120259.1705016-2-dbarboza@ventanamicro.com>
+In-Reply-To: <20240805120259.1705016-2-dbarboza@ventanamicro.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 6 Aug 2024 09:34:05 +1000
+Message-ID: <CAKmqyKNvYdvrOmoW4SdycSu1Bi9fwtx3SHF04L=bAM+i5WNhEA@mail.gmail.com>
+Subject: Re: [PATCH for-9.1 1/1] roms/opensbi: Update to v1.5.1
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2b;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2b.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -91,101 +93,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This patch series adds support for specifying OpenSBI domains on the QEMU
-command line. A simple example of what this looks like is below, including
-mapping the board's UART into the secondary domain:
+On Mon, Aug 5, 2024 at 10:05=E2=80=AFPM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
+>
+> A new minor version of OpenSBI was just released after our bump to
+> OpenSBI 1.5. It contains significant bug fixes that it's worth doing
+> a new update for QEMU 9.1.
+>
+> Submodule roms/opensbi 455de672dd..43cace6c36:
+>   > lib: sbi: check result of pmp_get() in is_pmp_entry_mapped()
+>   > lib: sbi: fwft: fix incorrect size passed to sbi_zalloc()
+>   > lib: sbi: dbtr: fix potential NULL pointer dereferences
+>   > include: Adjust Sscofpmf mhpmevent mask for upper 8 bits
+>   > lib: sbi_hsm: Save/restore menvcfg only when it exists
+>
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-qemu-system-riscv64 -machine virt -bios fw_jump.bin -cpu max -smp 2 -m 4G -nographic \
-        -device opensbi-memregion,id=mem,base=0xBC000000,order=26,mmio=false \
-        -device opensbi-memregion,id=uart,base=0x10000000,order=12,mmio=true,device0="/soc/serial@10000000" \
-        -device opensbi-domain,id=domain,possible-harts=0-1,boot-hart=0x0,next-addr=0xBC000000,next-mode=1,region0=mem,perms0=0x3f,region1=uart,perms1=0x3f
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-As a result of the above configuration, QEMU will add the following subnodes to
-the device tree:
+Alistair
 
-chosen {
-        opensbi-domains {
-                compatible = "opensbi,domain,config";
-
-                domain {
-                        next-mode = <0x01>;
-                        next-addr = <0x00 0xbc000000>;
-                        boot-hart = <0x03>;
-                        regions = <0x8000 0x3f 0x8002 0x3f>;
-                        possible-harts = <0x03 0x01>;
-                        phandle = <0x8003>;
-                        compatible = "opensbi,domain,instance";
-                };
-
-                uart {
-                        phandle = <0x8002>;
-                        devices = <0x1800000>;
-                        mmio;
-                        order = <0x0c>;
-                        base = <0x00 0x10000000>;
-                        compatible = "opensbi,domain,memregion";
-                };
-
-                mem {
-                        phandle = <0x8000>;
-                        order = <0x1a>;
-                        base = <0x00 0xbc000000>;
-                        compatible = "opensbi,domain,memregion";
-                };
-        };
-};
-
-This results in OpenSBI output as below, where regions 01-03 are inherited from
-the root domain and regions 00 and 04 correspond to the user specified ones:
-
-Domain1 Name              : domain
-Domain1 Boot HART         : 0
-Domain1 HARTs             : 0,1
-Domain1 Region00          : 0x0000000010000000-0x0000000010000fff M: (I,R,W,X) S/U: (R,W,X)
-Domain1 Region01          : 0x0000000002000000-0x000000000200ffff M: (I,R,W) S/U: ()
-Domain1 Region02          : 0x0000000080080000-0x000000008009ffff M: (R,W) S/U: ()
-Domain1 Region03          : 0x0000000080000000-0x000000008007ffff M: (R,X) S/U: ()
-Domain1 Region04          : 0x00000000bc000000-0x00000000bfffffff M: (R,W,X) S/U: (R,W,X)
-Domain1 Next Address      : 0x00000000bc000000
-Domain1 Next Arg1         : 0x0000000000000000
-Domain1 Next Mode         : S-mode
-Domain1 SysReset          : no
-Domain1 SysSuspend        : no
-
-v3:
-- Addressed review comments from v2 by adding default values to new properties.
-  This results in concrete errors at QEMU configuration time if a mandatory
-  property (as mandated by the OpenSBI spec) is not provided.
-- Changed command line encoding for the possible-harts field from a CPU bitmask
-  (e.g. where bit X is set if CPU X is a possible hart) to a range format (e.g.
-  the possible harts should be CPUs X-Y, where Y >= X). This does constrain the
-  hart assignment to consecutive ranges of harts, but this constraint is also
-  present for other QEMU subsystems (such as NUMA).
-- Added create_fdt_one_device(), which is invoked when scanning the device tree
-  for a memregion's devices. This function allocates a phandle for a region's
-  device if one does not yet exist.
-
-v2:
-- Addressed review comments from v1. Specifically, renamed domain.{c,h} ->
-  opensbi_domain.{c,h} to increase clarity of what these files do. Also, more
-  consistently use g_autofree for dynamically allocated variables
-- Added an "assign" flag to OpenSBIDomainState, which indicates whether to
-  assign the domain's boot hart to it at domain parsing time.
-
-Gregor Haas (1):
-  Add support for generating OpenSBI domains in the device tree
-
- MAINTAINERS                       |   7 +
- hw/riscv/Kconfig                  |   4 +
- hw/riscv/meson.build              |   1 +
- hw/riscv/opensbi_domain.c         | 542 ++++++++++++++++++++++++++++++
- hw/riscv/virt.c                   |   3 +
- include/hw/riscv/opensbi_domain.h |  50 +++
- 6 files changed, 607 insertions(+)
- create mode 100644 hw/riscv/opensbi_domain.c
- create mode 100644 include/hw/riscv/opensbi_domain.h
-
--- 
-2.45.2
-
+> ---
+>  .../opensbi-riscv32-generic-fw_dynamic.bin    | Bin 268312 -> 268312 byt=
+es
+>  .../opensbi-riscv64-generic-fw_dynamic.bin    | Bin 272504 -> 272504 byt=
+es
+>  roms/opensbi                                  |   2 +-
+>  3 files changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/pc-bios/opensbi-riscv32-generic-fw_dynamic.bin b/pc-bios/ope=
+nsbi-riscv32-generic-fw_dynamic.bin
+> index 7ec260ff40..b2e740010b 100644
+> Binary files a/pc-bios/opensbi-riscv32-generic-fw_dynamic.bin and b/pc-bi=
+os/opensbi-riscv32-generic-fw_dynamic.bin differ
+> diff --git a/pc-bios/opensbi-riscv64-generic-fw_dynamic.bin b/pc-bios/ope=
+nsbi-riscv64-generic-fw_dynamic.bin
+> index 090c0cf6ac..018b4731a7 100644
+> Binary files a/pc-bios/opensbi-riscv64-generic-fw_dynamic.bin and b/pc-bi=
+os/opensbi-riscv64-generic-fw_dynamic.bin differ
+> diff --git a/roms/opensbi b/roms/opensbi
+> index 455de672dd..43cace6c36 160000
+> --- a/roms/opensbi
+> +++ b/roms/opensbi
+> @@ -1 +1 @@
+> -Subproject commit 455de672dd7c2aa1992df54dfb08dc11abbc1b1a
+> +Subproject commit 43cace6c3671e5172d0df0a8963e552bb04b7b20
+> --
+> 2.45.2
+>
+>
 
