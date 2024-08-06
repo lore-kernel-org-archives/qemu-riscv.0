@@ -4,81 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0B14C3DA4A
-	for <qemu-riscv@archiver.kernel.org>; Tue,  6 Aug 2024 01:51:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F7BBC52D6D
+	for <qemu-riscv@archiver.kernel.org>; Tue,  6 Aug 2024 07:33:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sb9Mf-0007a0-V1; Mon, 05 Aug 2024 21:51:54 -0400
+	id 1sbEgW-0000UH-JT; Tue, 06 Aug 2024 03:32:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sb9Me-0007YW-CQ; Mon, 05 Aug 2024 21:51:52 -0400
-Received: from mail-vk1-xa31.google.com ([2607:f8b0:4864:20::a31])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1sbEgV-0000QG-KF
+ for qemu-riscv@nongnu.org; Tue, 06 Aug 2024 03:32:43 -0400
+Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sb9Mb-0002aD-Ce; Mon, 05 Aug 2024 21:51:51 -0400
-Received: by mail-vk1-xa31.google.com with SMTP id
- 71dfb90a1353d-4f511fddfcfso75859e0c.1; 
- Mon, 05 Aug 2024 18:51:47 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1sbEgT-0004BF-Hf
+ for qemu-riscv@nongnu.org; Tue, 06 Aug 2024 03:32:43 -0400
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-70d2b921c48so259354b3a.1
+ for <qemu-riscv@nongnu.org>; Tue, 06 Aug 2024 00:32:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1722909106; x=1723513906; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=99hNN65zoORcaaySPQmwpDhXeR0aMyowbweb/8MhFKc=;
- b=kMimcS4kEKYvjfTRO6ZvPWE7CgAzwz4SHmizVeBshwwHjfVdG+y49Q1WsEUI/xeAjL
- 6SuNqL+CabPKRcfmomuUVzs8acRruGwBxmgdLlYVAZE2Ub76iFoDiV76z/V/pmUFR1G8
- g7IIIOfJ+DfOqt2ZxyXQZ7gv7WVEP0LUKzC+j8Y0QPUS0rv+mb8Nvv2+nL/0RqSh1MnO
- FfnECwNtH3rH7ufYgbxABykNnC7bVqiL+/F96CGRYBuk9mDDnqE8HpMC6azOaIwxfjxj
- gi/RKKTsH09MmZ1QYLpHf1A2i4hclSFK3VC58GbQzGeflNfObSCbrbi08S5KEDupE7lC
- iNVw==
+ d=linaro.org; s=google; t=1722929559; x=1723534359; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=7+pB1ILbLQxz3WhUA3kvRMP32yn3VDwTFc5aFAi1MPM=;
+ b=BVHpOo0oIbrlRSU00n1ugbpPquCUMPYCXrC8cKS8rjZ9KnAxar1nhi46fWYJJXzLy9
+ 6eVxXqQxorslA5Y1opKjGSxnBUj+79MlhdsHU8YxKiIlZXXcOne1vDbU38KKJyhNQ3e8
+ QIh7hnK8qU+zrlsWRv5NdTShCQgW1puSPRY/HE7DlsY6jaRRyn2vriLNBZQPi8g2/UMi
+ KunlFCEdRLmAXopATukmTCKI+WdaTcvTpOndx3MfoE+bjezEIflRKxPFLlVX0dxt+JBV
+ foPr+dE4M/C0x7XO3Ejbe+M3O2jM+ip8UQy4WAh/Ar7wwuokagLl2SJn5xsKI/7rkcyL
+ FyJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722909106; x=1723513906;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=99hNN65zoORcaaySPQmwpDhXeR0aMyowbweb/8MhFKc=;
- b=HNeHy9XyZrdt6Eg0/Xk+qRrmPKVwPFvbFx/2q1QtweGRXbVZVP3+EArE4boqM/B1JU
- nMMcRcWLCNwp8aoZlf/VYDPLlqc87l9+1EW1bJhB4LMinq6agJckvi0qoYphFQbq05d+
- RGeR/j7Tj9U249adFpQ0jQP/sPMJOdhDNkNMFPJJg1RwyyfARtUDZ8Thy8v6Mrm2UJc5
- 5jHh+3PG2KmtuuMROTFWFAqTr7EGai74VRQ/1kW7KjeAWybUpQSUV++tZBpQXZX65lpn
- GAav3hn7KDCUsRyfeWkBjoMwF9tnU+W9rYnMj7RMKu0xS0H7UnZ2LXCtn3BritsyxZNe
- d9LQ==
+ d=1e100.net; s=20230601; t=1722929559; x=1723534359;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=7+pB1ILbLQxz3WhUA3kvRMP32yn3VDwTFc5aFAi1MPM=;
+ b=UZFf4zIC6anTKfTgx074QS1we63WOeUilbDJpXA45imdM+ol6drEh2HqG6phthsXNF
+ YU3qzzNsK1eAfZ9oVMTUb2gZmq9G0DxRI3yEPR28j8kZCemwlYg3zBbX6Z9N7umGFK7V
+ jjeR6obtFEFESYq1HrsIODf9yH6bOe38ESFg/1Tg161BsAIAfk/OVfWZA1qJTy2+m+Lr
+ P83RP/OgjrglDymskZ9xrZ9DRNWYSMr0CAFq9cch6beAwd1TRdEIzaWrN+u9liwkdChy
+ JLrpDViFH354QK6tYWWlJ4vGyXhLdf9we0NKeVyIciFhozXRYkpDlDP0xjWeGTtvdusi
+ r5Zg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVXO2ykXHKmY8Gl3OMa8suAxvE0hL3VJtYRwQtC2rwiSkRXqFBze++XSpwSjZpQD4YMIPq9dVPElOZ/74yRpMbveVIETzk=
-X-Gm-Message-State: AOJu0YxSs6zrFLmUTkPfPouJrN8kx8ctbCFQ/30VHtlkXKmgkXRKwUWB
- hGrCP7YbpE+qe7+E/ZnoaBkK625r+Bi+afLP3JbaRuxOwTQApZQISuCFd6fBKVDzx9SHeAhhwox
- pMZViGXvpNRdvrJBTuhKGVwnn5MM=
-X-Google-Smtp-Source: AGHT+IGSKto8RTM2CRZfVftLFBs4bBd6OxWJo62zLfb9wkpaYsllgYOZLIYUhQ18Vexxx5qaM9C6iffjp/nPgcfBMAU=
-X-Received: by 2002:a05:6122:3b04:b0:4ef:64a2:8e18 with SMTP id
- 71dfb90a1353d-4f8a0020c63mr14938244e0c.12.1722909106259; Mon, 05 Aug 2024
- 18:51:46 -0700 (PDT)
+ AJvYcCXinWp5fjQBYeiw1RfCV3FvjwsrOhMdcfb8/w1Oor1KGp3GIi3/Wabp2CvpAwPR7u+w/0ScpceTBV13fGnT6OHEykawv7I=
+X-Gm-Message-State: AOJu0YwvpNHNs0i04kvntCIyRLGoyE2Sn1e/XCWKLJTNwoxh9Uh0Yr7z
+ Y1XJe8H/+o+J3Dlcoe7WJctlBq0Q7PW3yZ/tpmLeKb/kcLMdVYAO/LtmDSARwuY=
+X-Google-Smtp-Source: AGHT+IG9LTD1TG9OvNZXRrlPD5OO9e47LAmpJ/EyjxB9WjjK0idowjVTtQWP5Fkj8rn7iEN8FmYeVA==
+X-Received: by 2002:a05:6a21:628:b0:1c6:ba9c:5d7b with SMTP id
+ adf61e73a8af0-1c6ba9c6e34mr5467476637.23.1722929558652; 
+ Tue, 06 Aug 2024 00:32:38 -0700 (PDT)
+Received: from [192.168.1.113] ([203.56.128.103])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-1ff58f53985sm80989285ad.76.2024.08.06.00.32.34
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 06 Aug 2024 00:32:38 -0700 (PDT)
+Message-ID: <9da48ab0-d88e-4d80-aca6-79dfa083bb9b@linaro.org>
+Date: Tue, 6 Aug 2024 17:29:21 +1000
 MIME-Version: 1.0
-References: <20240723-counter_delegation-v2-0-c4170a5348ca@rivosinc.com>
- <20240723-counter_delegation-v2-10-c4170a5348ca@rivosinc.com>
-In-Reply-To: <20240723-counter_delegation-v2-10-c4170a5348ca@rivosinc.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 6 Aug 2024 11:51:20 +1000
-Message-ID: <CAKmqyKPfVkiiiOTZnFfLEY527AmPqLRxAMG8SS2_X_rZ8RaBFg@mail.gmail.com>
-Subject: Re: [PATCH v2 10/13] target/riscv: Enable sscofpmf for bare cpu by
- default
-To: Atish Patra <atishp@rivosinc.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, bin.meng@windriver.com, 
- dbarboza@ventanamicro.com, alistair.francis@wdc.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a31;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa31.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] include: bitops: Add mask extract64/deposit64
+To: Alistair Francis <alistair23@gmail.com>, qemu-devel@nongnu.org,
+ peter.maydell@linaro.org
+Cc: dbarboza@ventanamicro.com, Palmer Dabbelt <palmer@dabbelt.com>,
+ Weiwei Li <liwei1518@gmail.com>, zhiwei_liu@linux.alibaba.com,
+ Alistair Francis <alistair.francis@wdc.com>, atishp@rivosinc.com,
+ bmeng.cn@gmail.com, qemu-riscv@nongnu.org
+References: <20240805043336.72548-1-alistair.francis@wdc.com>
+ <20240805043336.72548-2-alistair.francis@wdc.com>
+Content-Language: en-US
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20240805043336.72548-2-alistair.francis@wdc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x42d.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -94,39 +102,50 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Jul 24, 2024 at 9:33=E2=80=AFAM Atish Patra <atishp@rivosinc.com> w=
-rote:
->
-> Sscofpmf has been supported on virt machine for a long time. It is
-> required to enable profiling on virt machines. Let's enable it
-> by default for ease of usage.
->
-> Signed-off-by: Atish Patra <atishp@rivosinc.com>
+On 8/5/24 14:33, Alistair Francis wrote:
+> Based on the RISC-V get_field() and set_field() macros add
+> mask_extract64() and mask_deposit64() bitop functions. These can extrac
+> and deposit values into fields using a bit field mask directly instead
+> of a length and shift.
+> 
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  target/riscv/cpu.c | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 1731dc461376..393d1d67120e 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -494,6 +494,7 @@ static void rv64_base_cpu_init(Object *obj)
->      env->priv_ver =3D PRIV_VERSION_LATEST;
->  #ifndef CONFIG_USER_ONLY
->      set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV57);
-> +    cpu->cfg.ext_sscofpmf =3D true;
+>   include/qemu/bitops.h | 35 +++++++++++++++++++++++++++++++++++
+>   1 file changed, 35 insertions(+)
+> 
+> diff --git a/include/qemu/bitops.h b/include/qemu/bitops.h
+> index 2c0a2fe751..dd26f4a6b5 100644
+> --- a/include/qemu/bitops.h
+> +++ b/include/qemu/bitops.h
+> @@ -409,6 +409,22 @@ static inline uint64_t extract64(uint64_t value, int start, int length)
+>       return (value >> start) & (~0ULL >> (64 - length));
+>   }
+>   
+> +/**
+> + * mask_extract64:
+> + * @value: the value to extract the bit field from
+> + * @mask: the mask bit field to extract
+> + *
+> + * Extract from the 64 bit input @value the bit mask specified by the
+> + * @mask parameter, and return it. The value returned is shifted
+> + * so that only the bit field is returned.
+> + *
+> + * Returns: the value of the bit field extracted from the input value.
+> + */
+> +static inline uint64_t mask_extract64(uint64_t value, uint64_t mask)
+> +{
+> +    return (value & mask) / (mask & ~(mask << 1));
+> +}
 
-Unfortunately we don't want to do this, the base CPU should be bare
-bones and then users can enable extensions.
+Adding these miss the point of using "standard" qemu operations.
 
-Alistair
+But if we were going to add this, avoid the division.
 
->  #endif
->  }
->
->
-> --
-> 2.34.1
->
->
+  (value & mask) >> ctz64(mask)
+
+I presume the original formulation is so that the macro can be used in the context of a 
+compile-time constant.
+
+
+r~
 
