@@ -4,64 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE138C3DA7F
-	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Aug 2024 20:22:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6D40C3DA7F
+	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Aug 2024 20:35:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sbnAU-0001kw-SX; Wed, 07 Aug 2024 16:21:59 -0400
+	id 1sbnNb-0006hq-BG; Wed, 07 Aug 2024 16:35:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sbnAS-0001jJ-Qq
- for qemu-riscv@nongnu.org; Wed, 07 Aug 2024 16:21:56 -0400
-Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
+ id 1sbnNW-0006J4-7q
+ for qemu-riscv@nongnu.org; Wed, 07 Aug 2024 16:35:27 -0400
+Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sbnAR-00069f-AT
- for qemu-riscv@nongnu.org; Wed, 07 Aug 2024 16:21:56 -0400
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-1fc611a0f8cso2870875ad.2
- for <qemu-riscv@nongnu.org>; Wed, 07 Aug 2024 13:21:54 -0700 (PDT)
+ id 1sbnNS-00081z-77
+ for qemu-riscv@nongnu.org; Wed, 07 Aug 2024 16:35:24 -0400
+Received: by mail-pf1-x435.google.com with SMTP id
+ d2e1a72fcca58-710afd56c99so208733b3a.0
+ for <qemu-riscv@nongnu.org>; Wed, 07 Aug 2024 13:35:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1723062113; x=1723666913;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1723062919; x=1723667719;
  darn=nongnu.org; 
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=lWBaTJW8YUN9Vv2IVGuCHyEf8675XQT6DIsnuhv+O4k=;
- b=nTFsUh4OfqzrtTIm7rltuoo6Sxc4zoK9snj84gG7J0/Qj1sqSsBmQvlnN2WWtnKAB+
- Khv9RRrWKk7garmhwZCTEaxho41HZBjI4tRWxlaf67TmJp2ERw/5gFS3zZCB7VdZEO5u
- sCSqGNF4IuoJXeYi97gbFP4C1W9h0FlbKMaTQhO0E5s+iroDG22tUNVR6ERorKaHSK6n
- WDbt9sXSYdZLr4TSq4qWr6Ap5B7DA3tddVUySxtQ5vhkxIqOY7T3BW681MYHJHPXXlbD
- 7XbYQdKn0IdUD8FtX98EfvIw8AIZhP066AYxYTSI6y2xiku6WpZJunKN0h4B+TZ7zJUj
- /z2A==
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=DKr93pR1XK5BA1tKwYwaK+nfrLrIfwiMYTLLLKDiWho=;
+ b=bNfaLUOh6hvu3kA1O0FOIQ+wVF5UrmqKvJlk7V6gIMXbvrGC5UYN9xszVzgMGrAQ9x
+ fODI8MhvwaPRg4xn1H2R9nbsOcqWrpgFu/IzvPIuxQixM2giM08PiSvmabohtk8P4/MY
+ CDu/S98dmCpZMvPYpNs2Lhu3fVUDTmyzx7LhzJUZdMPbbNjLN1pOBklRbUx7lOfZzYm2
+ m3bxyx6Pxl9rHGApiWhCKad8FWEDv82L5pLA4ur0+cmrGYRvJiimd0jbVJVrrFzcJR9u
+ Uh7J1RNH/C6jfYHC5BfXNVJsmGPiCKOxtB7BmNfxAvFf026AwPl+TDTcmNwF6BAbDibc
+ bWyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723062113; x=1723666913;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=lWBaTJW8YUN9Vv2IVGuCHyEf8675XQT6DIsnuhv+O4k=;
- b=IbVbeptyecb58eU/ZLrv7cQkOysIyJa5Ae6krsUSXPIQLG8S59QS7khtO+ltFSs4Da
- rqukMo8hPn4+PGnc9toGSMy64CkJ9FLVZy+xWTFK07lou0ujL6A4cFUO3pHioRG4HQ+w
- Y4JXwPnCOpwKIwNFs85d4O1h187vlaGUZuK/yt4j7uTuuvF1SP9wFCWt5PDhxCZi2DyH
- grJ592oXgysGcWTCZi1w5QIADwwwh1A8rvfi1Ic8bcZZNQF6SqSs6rLnMEV7RLEU07/i
- Uv8Mjs02WWj18aRlLfzbzlcdxL318XnIU2j/sbZkEBo5wuD4zSaZ80ubl0Y9ZFlWTyfr
- PSmg==
+ d=1e100.net; s=20230601; t=1723062919; x=1723667719;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=DKr93pR1XK5BA1tKwYwaK+nfrLrIfwiMYTLLLKDiWho=;
+ b=st12+XRPoQ5DA8+ZhV+pFiz846BhWEKgalEgkxMKYMVHbKWZeHJunpoqOQkVjOw+yc
+ 6Pv0jUCBeWf/8E0MKC0YOknYFgQ70UsvJM7kgpAEPTsNxbH7URHWKpjUad/eoDedOYvG
+ 014MSvlrmwqmeS+/a8BJqQ2HoyBh1qkgtzgERbpllaWJx5Pobm8iG6evT3wQP1qTZ3Rk
+ RRyqE+E1JAJw6zVRujjxroi8D5G1BdoyGJhFcyYSefae7E6ooFl5VIehvdPAUK2oJBDi
+ n8xMrOv4VlSmNUxUy5IHVJJnz69hcgdYz1xc5PmrMBqfSraP1yGNjATT92iklG0haFMQ
+ X1Tg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXDwas4NIvCz3OBLAC4fssB3xVLfL8EC9N9XE+mumDUKNcegT/6dy3HHTL3/mxHQxqTo/oifYd6Rcc4vuUWFft6d8G8wtg=
-X-Gm-Message-State: AOJu0Yy1+Uj0Vze8zKgnEigUHDePRQM8uj061iQcbSUGiIdwWsHPhzZr
- cHtFnsBWm8n8k+vhBC/EZGsOpE/8pBPieMI0vSRi38lU4ZYu2xLv+D4MA+8qdIM=
-X-Google-Smtp-Source: AGHT+IGehvdY/LCmIzhzihA59V5sUEgpEiaAoksO39cuwv+c4kNT+f7TkKLDMZx/4Ni0xKpxqLknAw==
-X-Received: by 2002:a17:902:c405:b0:1fd:8f66:b078 with SMTP id
- d9443c01a7336-1ff573b55c9mr218868905ad.46.1723062112536; 
- Wed, 07 Aug 2024 13:21:52 -0700 (PDT)
+ AJvYcCUwwjC9oQZrg2R+BnghNm1XCx1KL70RlMsbPCOEUpAdVxW6HjN0nlQjlOicgve3dnz2Ocm9B1kfoTX/CscOJKwc1WsRH9E=
+X-Gm-Message-State: AOJu0Yw/3sSBkfaz8nXrD5c2o7MKHfKDyf6sxwy3n1N6UcGHfKIJ9XP3
+ cnssg4QXJZNHcCl/mSzAUVPeWM6HjOO6QXEB4zUW7qJnX0QCAojkf/wkVFPWA+0=
+X-Google-Smtp-Source: AGHT+IH0vumHwQ9ZcNmBFLyA1j7OFcc8tGbwjVenn22g/qHFRDxdUZMn0+kHnT2IdJj30+W3gwl5Fg==
+X-Received: by 2002:a05:6a00:91c5:b0:70e:cf2a:4503 with SMTP id
+ d2e1a72fcca58-710bc95738fmr5623486b3a.11.1723062919294; 
+ Wed, 07 Aug 2024 13:35:19 -0700 (PDT)
 Received: from debug.ba.rivosinc.com ([64.71.180.162])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1ff58f19af1sm110771295ad.47.2024.08.07.13.21.51
+ d2e1a72fcca58-7106ec73aedsm9055796b3a.90.2024.08.07.13.35.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Aug 2024 13:21:52 -0700 (PDT)
-Date: Wed, 7 Aug 2024 13:21:49 -0700
+ Wed, 07 Aug 2024 13:35:18 -0700 (PDT)
+Date: Wed, 7 Aug 2024 13:35:16 -0700
 From: Deepak Gupta <debug@rivosinc.com>
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com,
@@ -69,26 +68,23 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com,
  bmeng.cn@gmail.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
  zhiwei_liu@linux.alibaba.com, Jim Shu <jim.shu@sifive.com>,
  Andy Chiu <andy.chiu@sifive.com>
-Subject: Re: [PATCH v3 10/20] target/riscv: introduce ssp and enabling
- controls for zicfiss
-Message-ID: <ZrPXXdbwhwKtyBTW@debug.ba.rivosinc.com>
+Subject: Re: [PATCH v3 12/20] target/riscv: implement zicfiss instructions
+Message-ID: <ZrPahK85WquFOM51@debug.ba.rivosinc.com>
 References: <20240807000652.1417776-1-debug@rivosinc.com>
- <20240807000652.1417776-11-debug@rivosinc.com>
- <34411ccd-5fc8-46d8-bf5e-871949c755fb@linaro.org>
- <c530ae34-497b-4cd1-b3a6-d8b575c33fb2@linaro.org>
+ <20240807000652.1417776-13-debug@rivosinc.com>
+ <199f7ee2-411c-48ec-bf69-34fceab8f48a@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1; format=flowed
+Content-Type: text/plain; charset=us-ascii; format=flowed
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <c530ae34-497b-4cd1-b3a6-d8b575c33fb2@linaro.org>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
- envelope-from=debug@rivosinc.com; helo=mail-pl1-x632.google.com
+In-Reply-To: <199f7ee2-411c-48ec-bf69-34fceab8f48a@linaro.org>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::435;
+ envelope-from=debug@rivosinc.com; helo=mail-pf1-x435.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,32 +100,249 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Aug 07, 2024 at 12:12:52PM +1000, Richard Henderson wrote:
->On 8/7/24 12:11, Richard Henderson wrote:
->>On 8/7/24 10:06, Deepak Gupta wrote:
->>>diff --git a/target/riscv/csr.c b/target/riscv/csr.c
->>>index a5a969a377..d72d6289fb 100644
->>>--- a/target/riscv/csr.c
->>>+++ b/target/riscv/csr.c
->>>@@ -185,6 +185,47 @@ static RISCVException zcmt(CPURISCVState *env, int csrno)
->>>      return RISCV_EXCP_NONE;
->>>  }
->>>+static RISCVException cfi_ss(CPURISCVState *env, int csrno)
->>>+{
->>>+    /* no cfi extension, access to csr is illegal */
->>>+    if (!env_archcpu(env)->cfg.ext_zicfiss) {
->>>+        return RISCV_EXCP_ILLEGAL_INST;
->>>+    }
->>>+    /*
->>>+     * CONFIG_USER_MODE always allow access for now. Better for user mode only
->>>+     * functionality
->>>+     */
+On Wed, Aug 07, 2024 at 12:39:15PM +1000, Richard Henderson wrote:
+>On 8/7/24 10:06, Deepak Gupta wrote:
+>>zicfiss has following instructions
+>>  - sspopchk: pops a value from shadow stack and compares with x1/x5.
+>>    If they dont match, reports a sw check exception with tval = 3.
+>>  - sspush: pushes value in x1/x5 on shadow stack
+>>  - ssrdp: reads current shadow stack
+>>  - ssamoswap: swaps contents of shadow stack atomically
 >>
->>In the next patch you add ubcfien, which would apply here.
+>>sspopchk/sspush/ssrdp default to zimop if zimop implemented and SSE=0
+>>
+>>If SSE=0, ssamoswap is illegal instruction exception.
+>>
+>>This patch implements shadow stack operations for qemu-user and shadow
+>>stack is not protected.
+>>
+>>Signed-off-by: Deepak Gupta <debug@rivosinc.com>
+>>Co-developed-by: Jim Shu <jim.shu@sifive.com>
+>>Co-developed-by: Andy Chiu <andy.chiu@sifive.com>
+>>---
+>>  target/riscv/cpu_bits.h                       |   2 +
+>>  target/riscv/insn32.decode                    |  17 +-
+>>  target/riscv/insn_trans/trans_rva.c.inc       |  47 ++++++
+>>  target/riscv/insn_trans/trans_rvzicfiss.c.inc | 149 ++++++++++++++++++
+>>  target/riscv/translate.c                      |   1 +
+>>  5 files changed, 214 insertions(+), 2 deletions(-)
+>>  create mode 100644 target/riscv/insn_trans/trans_rvzicfiss.c.inc
+>>
+>>diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+>>index 226157896d..5ebc4dd5b3 100644
+>>--- a/target/riscv/cpu_bits.h
+>>+++ b/target/riscv/cpu_bits.h
+>>@@ -702,6 +702,8 @@ typedef enum RISCVException {
+>>  /* zicfilp defines lp violation results in sw check with tval = 2*/
+>>  #define RISCV_EXCP_SW_CHECK_FCFI_TVAL      2
+>>+/* zicfiss defines ss violation results in sw check with tval = 3*/
+>>+#define RISCV_EXCP_SW_CHECK_BCFI_TVAL      3
+>>  #define RISCV_EXCP_INT_FLAG                0x80000000
+>>  #define RISCV_EXCP_INT_MASK                0x7fffffff
+>>diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+>>index c963c59c8e..c59c992ce2 100644
+>>--- a/target/riscv/insn32.decode
+>>+++ b/target/riscv/insn32.decode
+>>@@ -65,8 +65,10 @@
+>>  # Formats 32:
+>>  @r       .......   ..... ..... ... ..... ....... &r                %rs2 %rs1 %rd
+>>  @i       ............    ..... ... ..... ....... &i      imm=%imm_i     %rs1 %rd
+>>+@ss_pop  ............    ..... ... ..... ....... &i      imm=0 %rs1 rd=0
+>>  @b       .......   ..... ..... ... ..... ....... &b      imm=%imm_b %rs2 %rs1
+>>  @s       .......   ..... ..... ... ..... ....... &s      imm=%imm_s %rs2 %rs1
+>>+@ss_push .......   ..... ..... ... ..... ....... &s      imm=0 %rs2 rs1=0
 >
->... anyway, surely cpu_get_bcfien() is the right check anyway?
+>No need for single-use formats, or even forcing them into specific argument sets.
+>
 
-Yeah you're right, `cpu_get_bcfien()` works and simplify it. will fix it.
+Noted.
+
+>>+{
+>>+  # zicfiss instructions carved out of mop.r
+>>+  ssrdp      1100110 11100     00000 100 ..... 1110011 %rd
+>>+  sspopchk   1100110 11100     ..... 100 00000 1110011 @ss_pop
+>
+>You can check x1/x5 here:
+>
+>{
+>  [
+>    ssrdp     1100110 111000 00000 100 rd:5  1110011
+>    sspopchk  1100110 111000 00001 100 00000 1110011  rs1=1
+>    sspopchk  1100110 111000 00101 100 00000 1110011  rs1=5
+>  ]
+>  mop_r_n ...
+>}
+>
+>which will make things easier for the next insn carved out of mop_r_n.
+>
+
+Will fix as you suggesting.
+
+>
+>>diff --git a/target/riscv/insn_trans/trans_rva.c.inc b/target/riscv/insn_trans/trans_rva.c.inc
+>>index 39bbf60f3c..db6c03f6a8 100644
+>>--- a/target/riscv/insn_trans/trans_rva.c.inc
+>>+++ b/target/riscv/insn_trans/trans_rva.c.inc
+>>@@ -18,6 +18,8 @@
+>>   * this program.  If not, see <http://www.gnu.org/licenses/>.
+>>   */
+>>+#include "exec/memop.h"
+>>+
+>>  #define REQUIRE_A_OR_ZAAMO(ctx) do {                      \
+>>      if (!ctx->cfg_ptr->ext_zaamo && !has_ext(ctx, RVA)) { \
+>>          return false;                                     \
+>>@@ -114,6 +116,28 @@ static bool trans_amoswap_w(DisasContext *ctx, arg_amoswap_w *a)
+>>      return gen_amo(ctx, a, &tcg_gen_atomic_xchg_tl, MO_TESL);
+>>  }
+>>+static bool trans_ssamoswap_w(DisasContext *ctx, arg_amoswap_w *a)
+>>+{
+>>+    REQUIRE_A_OR_ZAAMO(ctx);
+>>+    /* default for qemu-user, use regular RW memory and thus mmu_idx=0 */
+>>+    int ss_mmu_idx = 0;
+>>+
+>>+    /* back cfi was not enabled, return false */
+>>+    if (!ctx->bcfi_enabled) {
+>>+        return false;
+>>+    }
+>>+
+>>+    TCGv dest = dest_gpr(ctx, a->rd);
+>>+    TCGv src1, src2 = get_gpr(ctx, a->rs2, EXT_NONE);
+>>+
+>>+    decode_save_opc(ctx);
+>>+    src1 = get_address(ctx, a->rs1, 0);
+>>+
+>>+    tcg_gen_atomic_xchg_tl(dest, src1, src2, ss_mmu_idx, (MO_ALIGN | MO_TESL));
+>>+    gen_set_gpr(ctx, a->rd, dest);
+>>+    return true;
+>>+}
+>>+
+>>  static bool trans_amoadd_w(DisasContext *ctx, arg_amoadd_w *a)
+>>  {
+>>      REQUIRE_A_OR_ZAAMO(ctx);
+>>@@ -183,6 +207,29 @@ static bool trans_amoswap_d(DisasContext *ctx, arg_amoswap_d *a)
+>>      return gen_amo(ctx, a, &tcg_gen_atomic_xchg_tl, MO_TEUQ);
+>>  }
+>>+static bool trans_ssamoswap_d(DisasContext *ctx, arg_amoswap_w *a)
+>>+{
+>>+    REQUIRE_64BIT(ctx);
+>>+    REQUIRE_A_OR_ZAAMO(ctx);
+>>+    /* default for qemu-user, use regular RW memory and thus mmu_idx=0 */
+>>+    int ss_mmu_idx = 0;
+>>+
+>>+    /* back cfi was not enabled, return false */
+>>+    if (!ctx->bcfi_enabled) {
+>>+        return false;
+>>+    }
+>>+
+>>+    TCGv dest = dest_gpr(ctx, a->rd);
+>>+    TCGv src1, src2 = get_gpr(ctx, a->rs2, EXT_NONE);
+>>+
+>>+    decode_save_opc(ctx);
+>>+    src1 = get_address(ctx, a->rs1, 0);
+>>+
+>>+    tcg_gen_atomic_xchg_tl(dest, src1, src2, ss_mmu_idx, (MO_ALIGN | MO_TESQ));
+>>+    gen_set_gpr(ctx, a->rd, dest);
+>>+    return true;
+>>+}
+>
+>Why are these in trans_rva.c.inc instead of in trans_rvzicfiss.c.inc?
+
+encodings are coming out of existing unused atomics and this is why zicfiss is dependent on 
+'A' extension.
+
+Although if shadow stack are not enabled for the execution environment then it should be
+illegal instruction.
+
+I am fine placing it in trans_rvzicfiss.c.inc as well. Let me know.
+>
+>>+static MemOp mxl_memop(DisasContext *ctx)
+>>+{
+>>+    switch (get_xl(ctx)) {
+>>+    case MXL_RV32:
+>>+        return MO_TEUL;
+>>+
+>>+    case MXL_RV64:
+>>+        return MO_TEUQ;
+>>+
+>>+    case MXL_RV128:
+>>+        return MO_TEUO;
+>>+
+>>+    default:
+>>+        g_assert_not_reached();
+>>+    }
+>>+}
+>
+>This should be
+>
+>  return get_xl(ctx) + 1) | MO_TE;
+>
+>and probably placed next to get_xlen() et al.
+
+Noted.
+
+>
+>>+
+>>+static bool trans_sspopchk(DisasContext *ctx, arg_sspopchk *a)
+>>+{
+>>+    /* default for qemu-user, use regular RW memory and thus mmu_idx=0 */
+>>+    int ss_mmu_idx = 0;
+>
+>This can't be right, since 0 is M_MODE.
+
+This is 0 only when qemu-user.
+If not qemu-user, its obtained differently.
+
+>
+>>+
+>>+    /* sspopchk only supported on 32bit and 64bit */
+>>+    if (get_xl(ctx) != MXL_RV32 && get_xl(ctx) != MXL_RV64) {
+>>+        return false;
+>>+    }
+>
+>Again, where is this prohibited?  Even if your implementation doesn't 
+>allow RV128 (as certainly it would be a separate code path here) this 
+>should be checked at startup, not all over the implementation.
+>
+
+It's a left over from when I was starting out and didn't know a lot on qemu (still don't :-))
+and RISC-V.
+
+Will remove this and at other places as well.
+
+>>+    /*
+>>+     * get data in TCGv using get_gpr
+>>+     * get addr in TCGv using gen_helper_csrr on CSR_SSP
+>>+     * use some tcg subtract arithmetic (subtract by XLEN) on addr
+>>+     * perform ss store on computed address
+>>+     */
+>>+
+>>+    TCGv addr = tcg_temp_new();
+>>+    TCGLabel *skip = gen_new_label();
+>>+    uint32_t tmp = (get_xl(ctx) == MXL_RV64) ? 8 : 4;
+>>+    TCGv_i32 ssp_csr = tcg_constant_i32(CSR_SSP);
+>>+    TCGv data = tcg_temp_new();
+>>+    gen_helper_csrr(addr, tcg_env, ssp_csr);
+>
+>I think you can skip the helper.  You've just validated the extension is enabled:
+>
+>  tcg_gen_ld_tl(addr, tcg_env, offsetof(CPURISCVState, ssp));
+
+Yeah that's right, will do that.
+
+>
+>>+    TCGv rs1 = get_gpr(ctx, a->rs1, EXT_NONE);
+>>+    tcg_gen_brcond_tl(TCG_COND_EQ, data, rs1, skip);
+>>+    gen_helper_raise_sw_check_excep(tcg_env,
+>>+        tcg_constant_tl(RISCV_EXCP_SW_CHECK_BCFI_TVAL), data, rs1);
+>>+    gen_set_label(skip);
+>>+    tcg_gen_addi_tl(addr, addr, tmp);
+>>+    gen_helper_csrw(tcg_env, ssp_csr, addr);
+>
+>  tcg_gen_st_tl(addr, tcg_env, ...);
+>
+>>+static bool trans_sspush(DisasContext *ctx, arg_sspush *a)
+>
+>Same comments apply.
 >
 >
 >r~
