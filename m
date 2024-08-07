@@ -4,87 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C81FC52D70
-	for <qemu-riscv@archiver.kernel.org>; Tue,  6 Aug 2024 16:05:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B2D8C52D6F
+	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Aug 2024 00:07:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sbMgh-0001W9-Hx; Tue, 06 Aug 2024 12:05:27 -0400
+	id 1sbUCm-0002Wg-O7; Tue, 06 Aug 2024 20:07:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1sbMgT-0001Qv-2q
- for qemu-riscv@nongnu.org; Tue, 06 Aug 2024 12:05:14 -0400
-Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
+ (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
+ id 1sbUCj-0002TR-UZ
+ for qemu-riscv@nongnu.org; Tue, 06 Aug 2024 20:07:01 -0400
+Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1sbMgP-0002Vv-1s
- for qemu-riscv@nongnu.org; Tue, 06 Aug 2024 12:05:12 -0400
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-70ea2f25bfaso626142b3a.1
- for <qemu-riscv@nongnu.org>; Tue, 06 Aug 2024 09:05:06 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
+ id 1sbUCh-00017A-7l
+ for qemu-riscv@nongnu.org; Tue, 06 Aug 2024 20:07:01 -0400
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-1fc587361b6so10653095ad.2
+ for <qemu-riscv@nongnu.org>; Tue, 06 Aug 2024 17:06:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1722960305; x=1723565105; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=ItKM+Tlj7Co5dlhPJPwCdTNOBkVWDZ51q+EawMUpriE=;
- b=caogNpL8+VwAhCHntlv7vK04SY7Td4TZ5YC04zRJqgC5ylAMrZRn5Kovoh7twUJcNc
- krjLZgD+DEgv5el/XVO64ZUtmNerF13WU99R7iBAusMw10PDM0gIGEoQIMHh3dCtJPT0
- NpLivN3eC3rR3nQFnIHTZpNtUe9DzjcvGSORhRNPBuFdfrqOA1qJ9F0p5NDyjeuzwDrL
- jghbp8rVfgzd+8h37Jz2xTl4DjzOX8k8O6Jd8nro9pqli5BeKBGR6K28P61CFTWSTC0i
- WxFh1XrdXqIpEgc1zW+2bNdXRjO8Gnta1lEDfgaAnPZad8isSy9Nftbbfjd/aPDWGnKs
- GrkA==
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1722989217; x=1723594017;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=yVrfmqZuHnqczvhQ8mgDAmJCmYFAwaLihn73o8nyeTo=;
+ b=JhGu7Yj+NNfCTbcBitoRRPXAID+Tk4kzTAY1SBJl02ASRyA2TM0HafTpXx6nEg/ZXF
+ 7vt8SIPAmCEU6wloJzKImX4WJIjc6gIhQJND+altL/l4QqTibFXqmBboV6TpU6juHa+e
+ NzNPF9fZFZF9YPN+ALGlPSuatbQ3iuihy0qrj6BWOYHE/bZiRKLVKfVbQSeVxgmB5WmI
+ QvkFTWNUCL0kfJk8/yA55uwrdfbYC0K0sXqXMeddBsb/yHUUCFOMxMuU+8juUaqkXkjK
+ H2hOLWmKt4I+/cC6oVhAC2L3L073ptN3G+Y1cyHHMrVAS3VJSDFRbY/IqfMf0OcOST7p
+ 393g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722960305; x=1723565105;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ItKM+Tlj7Co5dlhPJPwCdTNOBkVWDZ51q+EawMUpriE=;
- b=fd1vC70y9WNp8tT23Ya4U9RBCgDQQBRTHOBLl5DvL39kHA5U+Ai54dv/WGVQ9EFiZl
- nGElKO1kV4mRQ6T6VZ9btmI4yuIx/sFNe+fPS0tpR5sXu6a/74BmuFwRM6ulvMVu/A4P
- oCgybnJiakk+hAaN7+rbk4mNJZ0uA3hh0uWsLN1zDfzb2ii+M3Bgvlz/JSIL2RdB1uqh
- RfjQtySJWNxvJYg0eh0wecG17vSTCbja+ojoP0RSsy2er/QMrJdoqFWeVmfWpidtmZlC
- hKre8rChHQfi3PDZJ1KRsjrU1o0XimruMwVNiaAn6JuA2nif0kMFlEaNrVC8tG+fnso9
- 4uFw==
-X-Gm-Message-State: AOJu0Yxg7Pu57VsGR+0q06/Pdf0qKQXlxQIyx/g8E+Tk17PgDekGxVo3
- pM3ySJPxkJRrI5T7RD4Z4Zfgf1kO6tm9iYre59kTLJauN9tAHtSnK15MRP/9S2bw9Vy7n63V6xE
- n
-X-Google-Smtp-Source: AGHT+IFGlzhgm55q8lFqMsnxYdqv3odlA6Ll957+FUMSiQkGBni+OlISgJFiQqzcpKo5u9wIAJU3bg==
-X-Received: by 2002:a05:6a00:918d:b0:70e:a4ef:e5c2 with SMTP id
- d2e1a72fcca58-7106cfce31fmr13929232b3a.13.1722960305019; 
- Tue, 06 Aug 2024 09:05:05 -0700 (PDT)
-Received: from [192.168.68.110] ([177.18.66.246])
+ d=1e100.net; s=20230601; t=1722989217; x=1723594017;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=yVrfmqZuHnqczvhQ8mgDAmJCmYFAwaLihn73o8nyeTo=;
+ b=LxAbZ48Gji6aDY96qp4B8TyvrFXSBED++AmM3o0O5dosso/lvYvTgbKNAND5hNApYt
+ YSSRTjN2EzVHt5Mg0Lj2Twco4g+96XR4awUiX1Qpj98kBQDaSvUZyjmeBPE+cNAcy5J0
+ ZmbcPHwQUUVT3RXOiumymxWQUZYb2JwIP/8m4zwRGDyV7BFJbfHN6G+8ojeofLqhUv+M
+ NrMCJzxLptO5ITYtdCm8AHjntFHp279UAhQx5TrVvz84arrWVkRrJNTHHy9uLKQG9TJI
+ v/IUTC4nwcrfyHWNcmaiTUv4b2sP4WpwU1M/3YOc6xqKDRHAvFWn4d6jhmiaFG3ePyRa
+ 0Z6g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV6lwjm9Ipiy7vlyo/6GkOlbKUetp9N/K12AR2ygn+rpMk7VvFbK6R3vHvNC3uvSzSMdHOwpc3abYaWn0xnjZqu2VYmz48=
+X-Gm-Message-State: AOJu0YywazfAqb7of8G64OsD3stdbDgOCD8qnqchSSrbOrMuSB2TsXu3
+ FyZieKtBhVEEHrXRk5AXejFF29CwBtkBBqB3QsvCBFc55/20CO5O7G/csJ7/6Lc=
+X-Google-Smtp-Source: AGHT+IGrWTuY4gLkAZ5811juyY9OLkLLKk3PVLl4ZL8WMt52tRAa1QsdM8FgtL25td0zNYzjWW/fRw==
+X-Received: by 2002:a17:902:f54b:b0:1ff:4618:36c2 with SMTP id
+ d9443c01a7336-1ff57257f12mr184178655ad.10.1722989216527; 
+ Tue, 06 Aug 2024 17:06:56 -0700 (PDT)
+Received: from debug.ba.rivosinc.com ([64.71.180.162])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7106ed15367sm7358000b3a.175.2024.08.06.09.05.02
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 06 Aug 2024 09:05:04 -0700 (PDT)
-Message-ID: <3c09bbbe-857b-4566-963a-790497232bbf@ventanamicro.com>
-Date: Tue, 6 Aug 2024 13:05:00 -0300
+ d9443c01a7336-1ff58f59cc2sm93381845ad.92.2024.08.06.17.06.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 06 Aug 2024 17:06:56 -0700 (PDT)
+From: Deepak Gupta <debug@rivosinc.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: richard.henderson@linaro.org, pbonzini@redhat.com, palmer@dabbelt.com,
+ Alistair.Francis@wdc.com, laurent@vivier.eu, bmeng.cn@gmail.com,
+ liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, Deepak Gupta <debug@rivosinc.com>
+Subject: [PATCH v3 00/20] riscv support for control flow integrity extensions
+Date: Tue,  6 Aug 2024 17:06:31 -0700
+Message-ID: <20240807000652.1417776-1-debug@rivosinc.com>
+X-Mailer: git-send-email 2.45.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 13/13] target/riscv: Enable PMU related extensions to
- preferred rule
-To: Andrew Jones <ajones@ventanamicro.com>, Atish Patra <atishp@rivosinc.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, bin.meng@windriver.com,
- alistair.francis@wdc.com
-References: <20240723-counter_delegation-v2-0-c4170a5348ca@rivosinc.com>
- <20240723-counter_delegation-v2-13-c4170a5348ca@rivosinc.com>
- <20240806-9fdad33468ec103d83a85e77@orel>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240806-9fdad33468ec103d83a85e77@orel>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x432.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
+ envelope-from=debug@rivosinc.com; helo=mail-pl1-x631.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -101,94 +96,79 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Sending out v3 for riscv zicfilp and zicfiss extensions support in qemu.
+I sent out v1 [1] and v2 [2] a while ago.
 
+[1] - https://lists.nongnu.org/archive/html/qemu-devel/2024-07/msg06017.html
+[2] - https://lore.kernel.org/all/ed23bcbc-fdc4-4492-803c-daa95880375a@linaro.org/T/
 
-On 8/6/24 5:46 AM, Andrew Jones wrote:
-> On Tue, Jul 23, 2024 at 04:30:10PM GMT, Atish Patra wrote:
->> Counter delegation/configuration extension requires the following
->> extensions to be enabled.
->>
->> 1. Smcdeleg - To enable counter delegation from M to S
->> 2. S[m|s]csrind - To enable indirect access CSRs
->> 3. Smstateen - Indirect CSR extensions depend on it.
->> 4. Sscofpmf - To enable counter overflow feature
->> 5. S[m|s]aia - To enable counter overflow feature in virtualization
->> 6. Smcntrpmf - To enable privilege mode filtering for cycle/instret
->>
->> While first 3 are mandatory to enable the counter delegation,
->> next 3 set of extension are preferred to enable all the PMU related
->> features.
-> 
-> Just my 2 cents, but I think for the first three we can apply the concept
-> of extension bundles, which we need for other extensions as well. In those
-> cases we just auto enable all the dependencies. For the three preferred
-> extensions I think we can just leave them off for 'base', but we should
-> enable them by default for 'max' along with Ssccfg.
+---
+v3:
+   - Removed prctl specific patches because they need to be upstream
+     in kernel first.
+   - As suggested by Richard, added TB flag if fcfi enabled
+   - Re-worked translation for landing pad and shadow stack instructions
+     to not require helper.
+   - tcg helpers only for cfi violation cases so that trace hooks can be
+     placed.
+   - Style changes.
+   - fixes assert condition in accel/tcg
 
-I like this idea. I would throw in all these 6 extensions in a 'pmu_advanced_ops'
-(or any other better fitting name for the bundle) flag and then 'pmu_advanced_ops=true'
-would enable all of those. 'pmu_advanced_ops=true,smcntrpmf=false' enables all but
-'smcntrpmf' and so on.
+v2:
+   - added missed file (in v1) for shadow stack instructions implementation.
 
-As long as we document what the flag is enabling I don't see any problems with it.
-This is how profiles are implemented after all.
+Deepak Gupta (20):
+  accel/tcg: restrict assert on icount_enabled to qemu-system
+  target/riscv: Add zicfilp extension
+  target/riscv: Introduce elp state and enabling controls for zicfilp
+  target/riscv: save and restore elp state on priv transitions
+  target/riscv: additional code information for sw check
+  target/riscv: tracking indirect branches (fcfi) for zicfilp
+  target/riscv: zicfilp `lpad` impl and branch tracking
+  disas/riscv: enabled `lpad` disassembly
+  target/riscv: Add zicfiss extension
+  target/riscv: introduce ssp and enabling controls for zicfiss
+  target/riscv: tb flag for shadow stack  instructions
+  target/riscv: implement zicfiss instructions
+  target/riscv: compressed encodings for sspush and sspopchk
+  target/riscv: mmu changes for zicfiss shadow stack protection
+  target/riscv: shadow stack mmu index for shadow stack instructions
+  disas/riscv: enable disassembly for zicfiss instructions
+  disas/riscv: enable disassembly for compressed sspush/sspopchk
+  target/riscv: add trace-hooks for each case of sw-check exception
+  linux-user: permit RISC-V CFI dynamic entry in VDSO
+  linux-user: Add RISC-V zicfilp support in VDSO
 
-With this bundle we can also use implied rule only if an extension really needs
-(i.e. it breaks without) a dependency being enabled, instead of overloading it
-with extensions that 'would be nice to have together' like it seems to be the
-case for the last 3 extensions in that list.
+ accel/tcg/cpu-exec.c                          |   2 +-
+ disas/riscv.c                                 |  71 +++++++-
+ disas/riscv.h                                 |   4 +
+ linux-user/gen-vdso-elfn.c.inc                |   7 +
+ linux-user/riscv/vdso-64.so                   | Bin 3944 -> 4128 bytes
+ linux-user/riscv/vdso.S                       |  50 ++++++
+ target/riscv/cpu.c                            |  17 ++
+ target/riscv/cpu.h                            |  28 +++
+ target/riscv/cpu_bits.h                       |  29 +++
+ target/riscv/cpu_cfg.h                        |   2 +
+ target/riscv/cpu_helper.c                     | 167 +++++++++++++++++-
+ target/riscv/cpu_user.h                       |   1 +
+ target/riscv/csr.c                            | 106 +++++++++++
+ target/riscv/helper.h                         |   3 +
+ target/riscv/insn16.decode                    |   4 +
+ target/riscv/insn32.decode                    |  23 ++-
+ target/riscv/insn_trans/trans_rva.c.inc       |  55 ++++++
+ target/riscv/insn_trans/trans_rvi.c.inc       |  68 +++++++
+ target/riscv/insn_trans/trans_rvzicfiss.c.inc | 155 ++++++++++++++++
+ target/riscv/internals.h                      |   4 +
+ target/riscv/op_helper.c                      |  49 +++++
+ target/riscv/pmp.c                            |   5 +
+ target/riscv/pmp.h                            |   3 +-
+ target/riscv/tcg/tcg-cpu.c                    |  20 +++
+ target/riscv/trace-events                     |   6 +
+ target/riscv/translate.c                      |  75 ++++++++
+ 26 files changed, 945 insertions(+), 9 deletions(-)
+ create mode 100644 target/riscv/insn_trans/trans_rvzicfiss.c.inc
 
-I believe users would benefit more from a single flag to enable everything and
-be done with it.
+-- 
+2.44.0
 
-
-Thanks,
-
-Daniel
-
-
-
-> 
-> Thanks,
-> drew
-> 
->> That's why, enable all of these if Ssccfg extension is
->> enabled from the commandline.
->>
->> Signed-off-by: Atish Patra <atishp@rivosinc.com>
->> ---
->>   target/riscv/cpu.c | 14 +++++++++++++-
->>   1 file changed, 13 insertions(+), 1 deletion(-)
->>
->> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->> index 22ba43c7ff2a..abebfcc46dea 100644
->> --- a/target/riscv/cpu.c
->> +++ b/target/riscv/cpu.c
->> @@ -2665,8 +2665,20 @@ RISCVCPUImpliedExtsRule *riscv_multi_ext_implied_rules[] = {
->>       NULL
->>   };
->>   
->> +static RISCVCPUPreferredExtsRule SSCCFG_PREFERRED = {
->> +    .ext = CPU_CFG_OFFSET(ext_ssccfg),
->> +    .preferred_multi_exts = {
->> +        CPU_CFG_OFFSET(ext_smcsrind), CPU_CFG_OFFSET(ext_sscsrind),
->> +        CPU_CFG_OFFSET(ext_ssaia), CPU_CFG_OFFSET(ext_smaia),
->> +        CPU_CFG_OFFSET(ext_smstateen), CPU_CFG_OFFSET(ext_sscofpmf),
->> +        CPU_CFG_OFFSET(ext_smcntrpmf), CPU_CFG_OFFSET(ext_smcdeleg),
->> +
->> +        RISCV_PREFRRED_EXTS_RULE_END
->> +    },
->> +};
->> +
->>   RISCVCPUPreferredExtsRule *riscv_multi_ext_preferred_rules[] = {
->> -    NULL
->> +    &SSCCFG_PREFERRED, NULL
->>   };
->>   
->>   static Property riscv_cpu_properties[] = {
->>
->> -- 
->> 2.34.1
->>
->>
 
