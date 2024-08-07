@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2238C49EA1
-	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Aug 2024 00:08:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94C00C49EA1
+	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Aug 2024 00:08:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sbUD9-00039P-FI; Tue, 06 Aug 2024 20:07:27 -0400
+	id 1sbUDf-0004ba-P8; Tue, 06 Aug 2024 20:08:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sbUCk-0002UN-Ru
- for qemu-riscv@nongnu.org; Tue, 06 Aug 2024 20:07:03 -0400
-Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a])
+ id 1sbUCp-0002a7-AR
+ for qemu-riscv@nongnu.org; Tue, 06 Aug 2024 20:07:08 -0400
+Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sbUCh-00017G-GL
- for qemu-riscv@nongnu.org; Tue, 06 Aug 2024 20:07:02 -0400
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-1fda7fa60a9so10535665ad.3
- for <qemu-riscv@nongnu.org>; Tue, 06 Aug 2024 17:06:59 -0700 (PDT)
+ id 1sbUCm-00018I-JF
+ for qemu-riscv@nongnu.org; Tue, 06 Aug 2024 20:07:06 -0400
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-1fd65aaac27so2548925ad.1
+ for <qemu-riscv@nongnu.org>; Tue, 06 Aug 2024 17:07:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1722989218; x=1723594018;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1722989222; x=1723594022;
  darn=nongnu.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VJOhnSghwUlcGLtcqpB8a6GrX3vCsWVBjHp5kS9dbdk=;
- b=hoyPcePyiQYvgEykv7/QetK15hlDY1icg1GkSNxQa8HxEkQRvbYwqGVQRdqnV+2+MO
- wkJc496VXG78VfGFp1ImsNOxRK4RgSExhVTO7MSI/h3bVJMVemS8TgN4OTCGD1nClweT
- qlujvCLoUS2evjA0Z9cJyGXX7VByfg8ZSM0MKXVhj+xWr7HitfVBX74A7c8pfRiQINPu
- EX0EJeLey+UHkWeFglrQUAcPn6TEmtCQWQejTBH0kdRSZHIOEZWaf3o8oOen1S7OH9fo
- ULbTJzCZQZbxnm40Fut/f5SsGXnIK6lw2e/sWZ083GZlriJM5ByutGO7Wutz6hbvcTLj
- rLog==
+ bh=316Sz2WI5Ks+hswcW2Zhyj1GbrmjYQrX/amYB/zWJFU=;
+ b=qCuJRTvRK6cjAyohTKpob5+BXSEGsp8tiqjb6a7aqM3txLqiD90NHAJRw1JsQjrwhR
+ L+7+yyr3sxN8t2l6HvHS6O6TLdaw67xkefnebK467161xGj3iEkMYv8X8FKId1u3fYuS
+ SBLEzQ4OgnTi8aUSrQWrPwvXwRBsBa9kIjlTn4NNxk2l9GICiDdS1VO6DJOVkFGILTDA
+ jYjW+g3oJHk8zoAv1qtYsjw8hLjdHLvuiJ/lyoF1tawzv0OTC80PKJRug7ziSEYBZ+8D
+ /9+4SYL1YfyxoOOpt2LK1LJ/T2fRNuFpn93McG3G7spJCA47h504pVNPgLe5oOTuYBSv
+ dI1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722989218; x=1723594018;
+ d=1e100.net; s=20230601; t=1722989222; x=1723594022;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=VJOhnSghwUlcGLtcqpB8a6GrX3vCsWVBjHp5kS9dbdk=;
- b=UG5ehIfBOnZRFhxOz8mOipDg7F8+O2caNqDYZQG0THLPg39jD8ajI0Hc0CmSD7mT++
- K687+PP7u5tWvqQm6JbqaCfv2l/5z54BiUvfccSMkZgWGL6R3JuxjDKeE+cqmuzVlGlW
- UqmDIGKg8e7wIeC+IGrey3jHc0L7NCCvl3wlPPCLQMSggVIqYLtnD9padM7wxme69meR
- Wu31EMiyA6pejj+NqWHX0MPCmn00mOaLWDU5uTHHI7uQyAUxHo1FAFqwhFXosCbLrSHG
- G1MVSY8Tk7xD3iORYMv0GcEyzvXORc/eEL1cH41EVEoCC2EO1kJrZCngnmNh3zEycqQD
- oCVQ==
+ bh=316Sz2WI5Ks+hswcW2Zhyj1GbrmjYQrX/amYB/zWJFU=;
+ b=IBkb7dfGA4uxspMPPylhBnTCQ4gyC4ma3UdkYkNmVc9IYO3BztoAcpA2QSWc/0XdkE
+ Uyf14/M+ONwrhRXTfb3ZYgQ7BhC7fL8bNECvRzaVzykni5X+pkLX4L5Vc5zKVsBroYBS
+ fZC48WValxg2SHhjrvp1mSS8PaH2vNJvUh3I7yFP8WWn2VaxvNVUuaoz73aZ404lHQZH
+ pAKm+fdOpHff07ivH78VVqt20lI28nrG9qzyIq5LoB/Luv62zb0Qhp7zCcKdbLVMqska
+ pKPKp7Y0eQhUeino3iiw6MpTIPWWoy32MIqX708nh4c/Aq7UMxTgwR78bd8lS5fbCqGQ
+ 9T9A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWHMAFyJpENcQWY6NFEyzkZq7CsIIwBb4UI9jSrE/Q/K0m4c098vJ/pIv0kKMGj9ekrz+yQ6lyTe0rNOmhQeAjj0zWv70M=
-X-Gm-Message-State: AOJu0YzJNDiUhKbGAMxrWnHQ4UieskL+hDVDo9H22M1HIfa6UfZhD6Gn
- gNjqhHxUpMWypzkZRlUhlTkZDXtXAJgvdiMrYPisSQ7TEd2ve2Es94p91D+Qlek=
-X-Google-Smtp-Source: AGHT+IHJlLbITAB4l/G2YSjELLMT8UcI2cKdNyRpE2Y6OwSM/+uuC2XMdFqdLfMhjCPrX9zstQqJSQ==
-X-Received: by 2002:a17:902:f9c4:b0:1fd:6c5b:afd4 with SMTP id
- d9443c01a7336-1ff574e222amr176216145ad.64.1722989217732; 
- Tue, 06 Aug 2024 17:06:57 -0700 (PDT)
+ AJvYcCWIIKurqbQnZfQiD7Oi9NBz5pBwEQB78gheljFgLe3vr4sZizXGquUGL0nOiqi/TCHGYSM5JXa7KEk99pep7YPrJkTM4Jk=
+X-Gm-Message-State: AOJu0Yzw9vkLshXYyUH8lnH9u7kCbW7cEp38cCul+ZDvqoWhoUoM3U5h
+ jCc9vQOkk4gpHwtXuUnzYHnJAEQarQn7h/nCztAXldhJXpHcvAZxgwSm9B9OLmk=
+X-Google-Smtp-Source: AGHT+IFwRFucBISDivapJGj0Xj9EJakD1Jb0QrLn11PsnwUhnSMsgPaWXwZPSMomdZbKL1Sp6QwtPg==
+X-Received: by 2002:a17:902:f690:b0:1ff:5135:131f with SMTP id
+ d9443c01a7336-20085543263mr8148325ad.25.1722989222463; 
+ Tue, 06 Aug 2024 17:07:02 -0700 (PDT)
 Received: from debug.ba.rivosinc.com ([64.71.180.162])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1ff58f59cc2sm93381845ad.92.2024.08.06.17.06.56
+ d9443c01a7336-1ff58f59cc2sm93381845ad.92.2024.08.06.17.07.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Aug 2024 17:06:57 -0700 (PDT)
+ Tue, 06 Aug 2024 17:07:02 -0700 (PDT)
 From: Deepak Gupta <debug@rivosinc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -68,17 +68,17 @@ Cc: richard.henderson@linaro.org, pbonzini@redhat.com, palmer@dabbelt.com,
  Alistair.Francis@wdc.com, laurent@vivier.eu, bmeng.cn@gmail.com,
  liwei1518@gmail.com, dbarboza@ventanamicro.com,
  zhiwei_liu@linux.alibaba.com, Deepak Gupta <debug@rivosinc.com>
-Subject: [PATCH v3 01/20] accel/tcg: restrict assert on icount_enabled to
- qemu-system
-Date: Tue,  6 Aug 2024 17:06:32 -0700
-Message-ID: <20240807000652.1417776-2-debug@rivosinc.com>
+Subject: [PATCH v3 05/20] target/riscv: additional code information for sw
+ check
+Date: Tue,  6 Aug 2024 17:06:36 -0700
+Message-ID: <20240807000652.1417776-6-debug@rivosinc.com>
 X-Mailer: git-send-email 2.45.0
 In-Reply-To: <20240807000652.1417776-1-debug@rivosinc.com>
 References: <20240807000652.1417776-1-debug@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
- envelope-from=debug@rivosinc.com; helo=mail-pl1-x62a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
+ envelope-from=debug@rivosinc.com; helo=mail-pl1-x62e.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -100,33 +100,57 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-commit 16ad9788 [1] restricted icount to qemu-system only. Although
-assert in `cpu_loop_exec_tb` is on `icount_enabled()` which is 0 when
-its qemu-user and debug build starts asserting.
-Move assert for qemu-system.
-
-[1] - https://lists.gnu.org/archive/html/qemu-riscv/2024-01/msg00608.html
+sw check exception support was recently added. This patch further augments
+sw check exception by providing support for additional code which is
+provided in *tval. Adds `sw_check_code` field in cpuarchstate. Whenever
+sw check exception is raised *tval gets the value deposited in
+`sw_check_code`.
 
 Signed-off-by: Deepak Gupta <debug@rivosinc.com>
 ---
- accel/tcg/cpu-exec.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ target/riscv/cpu.h        | 2 ++
+ target/riscv/cpu_helper.c | 2 ++
+ target/riscv/csr.c        | 1 +
+ 3 files changed, 5 insertions(+)
 
-diff --git a/accel/tcg/cpu-exec.c b/accel/tcg/cpu-exec.c
-index 245fd6327d..8cc2a6104f 100644
---- a/accel/tcg/cpu-exec.c
-+++ b/accel/tcg/cpu-exec.c
-@@ -927,9 +927,9 @@ static inline void cpu_loop_exec_tb(CPUState *cpu, TranslationBlock *tb,
-         return;
-     }
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 8c7841fc08..12334f9540 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -224,6 +224,8 @@ struct CPUArchState {
  
-+#ifndef CONFIG_USER_ONLY
-     /* Instruction counter expired.  */
-     assert(icount_enabled());
--#ifndef CONFIG_USER_ONLY
-     /* Ensure global icount has gone forward */
-     icount_update(cpu);
-     /* Refill decrementer and continue execution.  */
+     /* elp state for zicfilp extension */
+     cfi_elp      elp;
++    /* sw check code for sw check exception */
++    target_ulong sw_check_code;
+ #ifdef CONFIG_USER_ONLY
+     uint32_t elf_flags;
+     bool ufcfien;
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 8c69c55576..364f3ee212 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -1762,6 +1762,8 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+                 cs->watchpoint_hit = NULL;
+             }
+             break;
++        case RISCV_EXCP_SW_CHECK:
++            tval = env->sw_check_code;
+         default:
+             break;
+         }
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 5771a14848..a5a969a377 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -1179,6 +1179,7 @@ static const uint64_t all_ints = M_MODE_INTERRUPTS | S_MODE_INTERRUPTS |
+                          (1ULL << (RISCV_EXCP_INST_PAGE_FAULT)) | \
+                          (1ULL << (RISCV_EXCP_LOAD_PAGE_FAULT)) | \
+                          (1ULL << (RISCV_EXCP_STORE_PAGE_FAULT)) | \
++                         (1ULL << (RISCV_EXCP_SW_CHECK)) | \
+                          (1ULL << (RISCV_EXCP_INST_GUEST_PAGE_FAULT)) | \
+                          (1ULL << (RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT)) | \
+                          (1ULL << (RISCV_EXCP_VIRT_INSTRUCTION_FAULT)) | \
 -- 
 2.44.0
 
