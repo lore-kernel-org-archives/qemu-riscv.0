@@ -4,87 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D628C49EA1
-	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Aug 2024 00:11:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DE5FC49EA1
+	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Aug 2024 00:49:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sbUDu-0006I2-KC; Tue, 06 Aug 2024 20:08:14 -0400
+	id 1sbUrV-0003hZ-IB; Tue, 06 Aug 2024 20:49:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sbUCt-0002eD-Ax
- for qemu-riscv@nongnu.org; Tue, 06 Aug 2024 20:07:14 -0400
-Received: from mail-pg1-x52e.google.com ([2607:f8b0:4864:20::52e])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1sbUrT-0003dz-Gf
+ for qemu-riscv@nongnu.org; Tue, 06 Aug 2024 20:49:07 -0400
+Received: from mail-oa1-x32.google.com ([2001:4860:4864:20::32])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sbUCq-00019T-Fn
- for qemu-riscv@nongnu.org; Tue, 06 Aug 2024 20:07:10 -0400
-Received: by mail-pg1-x52e.google.com with SMTP id
- 41be03b00d2f7-7b80afeb099so765205a12.2
- for <qemu-riscv@nongnu.org>; Tue, 06 Aug 2024 17:07:07 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1sbUrR-00074g-KT
+ for qemu-riscv@nongnu.org; Tue, 06 Aug 2024 20:49:07 -0400
+Received: by mail-oa1-x32.google.com with SMTP id
+ 586e51a60fabf-260f057aa9bso777736fac.2
+ for <qemu-riscv@nongnu.org>; Tue, 06 Aug 2024 17:49:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1722989226; x=1723594026;
- darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/UP7ynvstNXIegRQLD30QchsVizfwdQm7R8eXCoJJ2Q=;
- b=Jw7ppIMXyFXzigZyugsozzuIz7McFrHV3+vme+uRdjOFoMTvB/uLuwjJyGm6cocDZT
- hSAzijDtI+7LY6zLC5ZshjB6LFxTPLbynO+QZsgavsV3GbwnKIvi5hqvV1iDeaNjVBfE
- 3/OzIp+YrepGAjFwgXjgNrxOxdYUeJh8iUdYonO7PnNa9eWY8lBCd3RQQSgY1t9/FtUZ
- RJWVF2GKXgS0rMEyoMmxdhBi2SXQK6uY7H2e30chDeOgoEXfiStMIJwZGCP0FahBADgQ
- f9MH1ymtKlvIFcEW8nFdSHw2/fYdc8epNhJMvx8UFuY0lYYCsLIaQPpo5R7+p+/iInn2
- 9EEg==
+ d=linaro.org; s=google; t=1722991744; x=1723596544; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=rzGAyB2zaFQfErI2z42+QKfudRuq534mir41QN6P2Rw=;
+ b=qrK662vsKA9D98ggssxYiqco9jCnSF1oKJCimqLGH0H9aVcyxDq4piklUZtQ42UCrv
+ kovwybukWyW9Tx3tfsHmtkH7fQQUGR96Frk9yi/iWfdxL/P3P7K0BoOmFsORdmBlftHl
+ ntG3SPJlHWxLLyof7rUZgFA90knJXNlrZmYHk7L+852qz/bSfGiQ5LlxB6Llyw+UIrn2
+ dJ3jncrgrAz+ZYST3PojYM8EYaawsjE7y43R5EFiyqBn8sgMg+BWLoxEyiVvODSKpmdK
+ 9jjXW0Z/B5GvR30qLOkTYJ6wIL4ANTI1sbbTYiXIIP+QOvOg/qpSCHHmWc0T2gfLz8YY
+ gfJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722989226; x=1723594026;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=/UP7ynvstNXIegRQLD30QchsVizfwdQm7R8eXCoJJ2Q=;
- b=xAlkJrS6143SFCd4ToqChLdJ34F7dewvb5GRRrqz90eWO/NllAaI+aIv+vrlz6p+Nq
- 1YAv1kNJ4YYdJBhropsOxYls9gLlrya5vgyniGZdps+ADdklHVBiaM9tUE+JKGkJo5R4
- T9lFx+rfgazFsYnQEO/EGcICXFmrogw2atAvj+tutMAGOP0lobxebjhXdvrX0hcuPn/o
- O0K5uEZAMfywK9krv6/US2rSBQtkHkG5ykculvd4q3n0V5J0yNcR3qn7WIFGeVUr5Ks8
- CrIpiLzUn3mOPhLynHAMO5J10jv5vG3kkEXc7OAxAsJjURT7hw56Z6iW+ieAqqwB2vue
- /1pQ==
+ d=1e100.net; s=20230601; t=1722991744; x=1723596544;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=rzGAyB2zaFQfErI2z42+QKfudRuq534mir41QN6P2Rw=;
+ b=JxBp2DK3cU7oylm0t8lKoc3sEGCgsVWpRMXXJfQ86VPvI+r0fYGgSRZLrWNBq0FU3p
+ 1f7YUd6PmKWRddmvZ37I+gNYOF3rRotms9RRt/j+iP4+ktcyH2gSGdyqhHVjopbrYGsH
+ Ix7QY7i1blNf/o5zxO0z+OcVB/5OyPf6G5lgm3pa42MCI0JoSIZarJLd2DBjIxdRdBYs
+ QO4UomVs9IB491OAsy6znFKI266zkhRNjojK0ADs3N1JnxVchNEGz8AT8QYqJLHxDY0d
+ XUcFEvyCKRFTVILOzBwLLa5IrjYFMrYBsvmL7bbP6ebI35bdoNJtFZqu5ok785XRZyx+
+ YthQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXwsNlWAaRYDDMgUF1W/saPQ4T70yR7cXHqqNp6S1apradjjQDx7fwlWGyUa8XrSIMGR+rC2gqThDSQAs/u6KLS3QhbrL4=
-X-Gm-Message-State: AOJu0Ywn5D+vBXDqJppkZ0Jaj7YCosEuAfxkM4M6yGYelAtK2MFZ6uqb
- dpgbuT4hD6AxuuKKwV43ARki23rjrZ+Lo9cnv67xVUvU449ArnJXVHTrz1r9GoQ=
-X-Google-Smtp-Source: AGHT+IFW9ev2wMDWkxxcIOt6dobPZthAtEZ77ICFeDnJ1/zPJs1cV01gX1BtMaOlNwp9fe9XC/80Jw==
-X-Received: by 2002:a05:6a21:1690:b0:1c4:dfa7:d3b9 with SMTP id
- adf61e73a8af0-1c6995634c4mr13105427637.28.1722989226086; 
- Tue, 06 Aug 2024 17:07:06 -0700 (PDT)
-Received: from debug.ba.rivosinc.com ([64.71.180.162])
+ AJvYcCXb00pU+o3hbOwYKjuKkU5VewDtdnTtPFCiJ859frKyqzIqrtbngsTXAAYGt/3R2zGsEvuNdqBovWSJYGiOzBHl/SyXirI=
+X-Gm-Message-State: AOJu0YyvMmPtbomzM4fIF8EBM1YUcwdlaPoA6+aaxGbyc2pKixWnJjwm
+ nhknvgcc7iBw+9oDi6alNZcajB6R7fA/t9WPUh0WOR3LMN5yo8RwXB9tWw8HYxU=
+X-Google-Smtp-Source: AGHT+IG4l+6QcI1kcoC0vuF1bQhMAPDZ3jSY545i/J9/mztHhYQBZVgLQwODJ9rF2D/I1TTjvVcv/g==
+X-Received: by 2002:a05:6870:519:b0:261:6c0:8a2a with SMTP id
+ 586e51a60fabf-26891d4ba75mr20554755fac.20.1722991744157; 
+ Tue, 06 Aug 2024 17:49:04 -0700 (PDT)
+Received: from ?IPV6:2403:580a:f89b:0:e01b:92e5:d779:1bc0?
+ (2403-580a-f89b-0-e01b-92e5-d779-1bc0.ip6.aussiebb.net.
+ [2403:580a:f89b:0:e01b:92e5:d779:1bc0])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1ff58f59cc2sm93381845ad.92.2024.08.06.17.07.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Aug 2024 17:07:05 -0700 (PDT)
-From: Deepak Gupta <debug@rivosinc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: richard.henderson@linaro.org, pbonzini@redhat.com, palmer@dabbelt.com,
- Alistair.Francis@wdc.com, laurent@vivier.eu, bmeng.cn@gmail.com,
- liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, Deepak Gupta <debug@rivosinc.com>,
- Jim Shu <jim.shu@sifive.com>, Andy Chiu <andy.chiu@sifive.com>
-Subject: [PATCH v3 08/20] disas/riscv: enabled `lpad` disassembly
-Date: Tue,  6 Aug 2024 17:06:39 -0700
-Message-ID: <20240807000652.1417776-9-debug@rivosinc.com>
-X-Mailer: git-send-email 2.45.0
-In-Reply-To: <20240807000652.1417776-1-debug@rivosinc.com>
-References: <20240807000652.1417776-1-debug@rivosinc.com>
+ d2e1a72fcca58-7106ec02a4asm7455247b3a.24.2024.08.06.17.48.59
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 06 Aug 2024 17:49:03 -0700 (PDT)
+Message-ID: <9c987cbf-f702-4e1f-88d8-82a149c98007@linaro.org>
+Date: Wed, 7 Aug 2024 10:48:56 +1000
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52e;
- envelope-from=debug@rivosinc.com; helo=mail-pg1-x52e.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 01/20] accel/tcg: restrict assert on icount_enabled to
+ qemu-system
+To: Deepak Gupta <debug@rivosinc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: pbonzini@redhat.com, palmer@dabbelt.com, Alistair.Francis@wdc.com,
+ laurent@vivier.eu, bmeng.cn@gmail.com, liwei1518@gmail.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com
+References: <20240807000652.1417776-1-debug@rivosinc.com>
+ <20240807000652.1417776-2-debug@rivosinc.com>
+Content-Language: en-US
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20240807000652.1417776-2-debug@rivosinc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2001:4860:4864:20::32;
+ envelope-from=richard.henderson@linaro.org; helo=mail-oa1-x32.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,92 +104,47 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Signed-off-by: Deepak Gupta <debug@rivosinc.com>
-Co-developed-by: Jim Shu <jim.shu@sifive.com>
-Co-developed-by: Andy Chiu <andy.chiu@sifive.com>
----
- disas/riscv.c | 18 +++++++++++++++++-
- disas/riscv.h |  2 ++
- 2 files changed, 19 insertions(+), 1 deletion(-)
+On 8/7/24 10:06, Deepak Gupta wrote:
+> commit 16ad9788 [1] restricted icount to qemu-system only. Although
+> assert in `cpu_loop_exec_tb` is on `icount_enabled()` which is 0 when
+> its qemu-user and debug build starts asserting.
+> Move assert for qemu-system.
+> 
+> [1] - https://lists.gnu.org/archive/html/qemu-riscv/2024-01/msg00608.html
+> 
+> Signed-off-by: Deepak Gupta <debug@rivosinc.com>
+> ---
+>   accel/tcg/cpu-exec.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/accel/tcg/cpu-exec.c b/accel/tcg/cpu-exec.c
+> index 245fd6327d..8cc2a6104f 100644
+> --- a/accel/tcg/cpu-exec.c
+> +++ b/accel/tcg/cpu-exec.c
+> @@ -927,9 +927,9 @@ static inline void cpu_loop_exec_tb(CPUState *cpu, TranslationBlock *tb,
+>           return;
+>       }
+>   
+> +#ifndef CONFIG_USER_ONLY
+>       /* Instruction counter expired.  */
+>       assert(icount_enabled());
+> -#ifndef CONFIG_USER_ONLY
+>       /* Ensure global icount has gone forward */
+>       icount_update(cpu);
+>       /* Refill decrementer and continue execution.  */
 
-diff --git a/disas/riscv.c b/disas/riscv.c
-index c8364c2b07..c7c92acef7 100644
---- a/disas/riscv.c
-+++ b/disas/riscv.c
-@@ -974,6 +974,7 @@ typedef enum {
-     rv_op_amomaxu_h = 943,
-     rv_op_amocas_b  = 944,
-     rv_op_amocas_h  = 945,
-+    rv_op_lpad = 946,
- } rv_op;
- 
- /* register names */
-@@ -2232,6 +2233,7 @@ const rv_opcode_data rvi_opcode_data[] = {
-     { "amomaxu.h", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-     { "amocas.b", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-     { "amocas.h", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-+    { "lpad", rv_codec_lp, rv_fmt_imm, NULL, 0, 0, 0 },
- };
- 
- /* CSR names */
-@@ -2925,7 +2927,13 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
-             case 7: op = rv_op_andi; break;
-             }
-             break;
--        case 5: op = rv_op_auipc; break;
-+        case 5:
-+            op = rv_op_auipc;
-+            if (dec->cfg->ext_zicfilp &&
-+                (((inst >> 7) & 0b11111) == 0b00000)) {
-+                op = rv_op_lpad;
-+            }
-+            break;
-         case 6:
-             switch ((inst >> 12) & 0b111) {
-             case 0: op = rv_op_addiw; break;
-@@ -4482,6 +4490,11 @@ static uint32_t operand_tbl_index(rv_inst inst)
-     return ((inst << 54) >> 56);
- }
- 
-+static uint32_t operand_lpl(rv_inst inst)
-+{
-+    return inst >> 12;
-+}
-+
- /* decode operands */
- 
- static void decode_inst_operands(rv_decode *dec, rv_isa isa)
-@@ -4869,6 +4882,9 @@ static void decode_inst_operands(rv_decode *dec, rv_isa isa)
-         dec->imm = sextract32(operand_rs2(inst), 0, 5);
-         dec->imm1 = operand_imm2(inst);
-         break;
-+    case rv_codec_lp:
-+        dec->imm = operand_lpl(inst);
-+        break;
-     };
- }
- 
-diff --git a/disas/riscv.h b/disas/riscv.h
-index 16a08e4895..1182457aff 100644
---- a/disas/riscv.h
-+++ b/disas/riscv.h
-@@ -166,6 +166,7 @@ typedef enum {
-     rv_codec_r2_immhl,
-     rv_codec_r2_imm2_imm5,
-     rv_codec_fli,
-+    rv_codec_lp,
- } rv_codec;
- 
- /* structures */
-@@ -228,6 +229,7 @@ enum {
- #define rv_fmt_rs1_rs2                "O\t1,2"
- #define rv_fmt_rd_imm                 "O\t0,i"
- #define rv_fmt_rd_uimm                "O\t0,Ui"
-+#define rv_fmt_imm                    "O\ti"
- #define rv_fmt_rd_offset              "O\t0,o"
- #define rv_fmt_rd_uoffset             "O\t0,Uo"
- #define rv_fmt_rd_rs1_rs2             "O\t0,1,2"
--- 
-2.44.0
+No, this is a real bug.
 
+Just above we handled
+
+   (1) exit for tcg (non-)chaining (!= TB_EXIT_REQUESTED),
+   (2) exit for exception/interrupt (cpu_loop_exit_requested).
+
+The only thing that is left is exit for icount expired.
+And for that we *must* have icount enabled.
+
+How did you encounter this?
+
+
+r~
 
