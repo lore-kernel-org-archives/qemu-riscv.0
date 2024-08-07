@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 997DEC52D6F
-	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Aug 2024 00:09:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71446C52D7B
+	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Aug 2024 00:09:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sbUDF-0003cC-3X; Tue, 06 Aug 2024 20:07:33 -0400
+	id 1sbUEk-0002qT-2n; Tue, 06 Aug 2024 20:09:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sbUD2-0002wM-Fw
- for qemu-riscv@nongnu.org; Tue, 06 Aug 2024 20:07:21 -0400
+ id 1sbUD5-00034f-1n
+ for qemu-riscv@nongnu.org; Tue, 06 Aug 2024 20:07:23 -0400
 Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sbUCx-0001Cl-CU
- for qemu-riscv@nongnu.org; Tue, 06 Aug 2024 20:07:19 -0400
+ id 1sbUD2-0001EG-Q5
+ for qemu-riscv@nongnu.org; Tue, 06 Aug 2024 20:07:22 -0400
 Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-1fc60c3ead4so9877865ad.0
- for <qemu-riscv@nongnu.org>; Tue, 06 Aug 2024 17:07:14 -0700 (PDT)
+ d9443c01a7336-1fc5296e214so11807345ad.0
+ for <qemu-riscv@nongnu.org>; Tue, 06 Aug 2024 17:07:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1722989233; x=1723594033;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1722989239; x=1723594039;
  darn=nongnu.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Fs75Z2Q/DQpJnICf6loT2R4eZwomAJ3I/UGPpjX3wUQ=;
- b=tPTYgWg2vQWdDuuU96z/+iwf64Yx5amrNZGgSLubYM3/vkDANZgLmv1LUXmcj6U5Q4
- +6gHHYiQWiRrYXkCDERUEOqnVrwgDIWjzsUl4Evyl5k4MfHaOi6GL3sfGCClUqKRDeNE
- Qyp4GaKwJ3rzu9Kxte0qoGLlGAkUEfZxcEtIzBCbimFKQBIpeyPLsJVR1iAJw2oz0Ej0
- ccspNAjcxxWxB1gnsZIw5tRdss7yT+0vYHIoK3McJP+1PQ+obgS/7W2cNqpgNvvHuLao
- UlS2LS9NCxwNQVIOTJPJN/Fe+kgJ09n+mk+MSvWV1JxVl8tkmJNsQ5XkP0VGOJYUVP14
- W8VA==
+ bh=Pr/AcYF8z8+IP/7vhXiuKTgBOUJ+TMutbX74doKlSC0=;
+ b=t8povXNxxyG6vQSKCoJtOFi3H6AjZOFSPfO7AG1zdSCdDDzfEgYd6OXcaxKCEQYCKx
+ XlSd1GGt+J35GvsiY9uPlOU1b6a2GcVqKxZ1bDH5WvzurPmgUws6CJSFxr3tooFLUDtQ
+ StAjJgaXxSGRJzNys8fVFQX3LlwPjFyopg5devztQbVw1iVsjtNeKNRSTz4gX+CwXJ+X
+ lzzVUAqK1edKeDunM2aG7Izt8oSAfoRZ2IbZGJ+3Cn2EWG4/xnxx/pojUYbZ/XjrHmcW
+ oKdVqeNgRkcuKumrbkb9ENaSobyKN5MS3yJcoS32+O9fz93qIayaSARCVjV/ri33GnLX
+ //+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722989233; x=1723594033;
+ d=1e100.net; s=20230601; t=1722989239; x=1723594039;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Fs75Z2Q/DQpJnICf6loT2R4eZwomAJ3I/UGPpjX3wUQ=;
- b=Eub5ypCrHhUlK7Th8RJXypg9qNa2yuwSpr7btWZlLTE7afTMvKP6+kN1nJ9cxPBPlO
- D3tRGIK6oBXTbMpIUkViPKpMdv5BGlFaF/F+YjrSN1cnui8ATzC5kYQAWLTAgk4gpcAn
- NufuSO+c2qieBa3FWGvpH+Upq5NTyGlmlvf03F/mAwDS27bBETEKHaK3RaqyE/Nt/uaz
- GF4WXnaldJUJFia6MN8Jfs39s2X9/ROUlQbp5ZzZJTxbJ2oF8EzMDw9J2vLoo5hk9s5n
- 2awb93tWPfnnE5MO2eUr4mlPpCZ/3A3gPcjYkKGq7gtBrzhRyJaX/EEjVu/0BriIv4ol
- yJxw==
+ bh=Pr/AcYF8z8+IP/7vhXiuKTgBOUJ+TMutbX74doKlSC0=;
+ b=R7yWkhWsMFIcoF7w4tjU2VSpyHnU+qNBUZ7EMVZo7HO9xN57dCAnaLrGgTtvBydlZR
+ Z+EwkfyjBg+Y72kLhAxBUYtypbJVwTSc3KDa2G9M0AF+1qqCg5dFK2VQIzcOSYh/+Zia
+ zQNfxvsCzE5bfCmhpJ5TW3KzLZWLvvLNkPYVeFKNTcFNVm5WpsjLDVv9xqsPCtoLHK5O
+ MASRBt+Gx+lfdMJLnQXF0/vQCzT2Y0639scFxq5fE95gEkgUiW7GZy38UdXiEB0hF1P9
+ SMNObgvtGe8mYaLCCCkoo3pd75WcQ3x5WK63omMZw8Ykdeurzc5Za/nUZXpB+tcfu/9q
+ xZpg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXbiYufT3vuCqCAmBRIdffWVKMVlNWun/AfnH8q+RQpHvOBzTR7FFk2Wjal1+dZOXNFgkvg+57slw4FXZc4zwxIEDRgpwE=
-X-Gm-Message-State: AOJu0Yxty5r237KAHDZB6lnefkkF+s2pZDJwMNebCoCKMfhVcX61PtOj
- 62n8G8E9VuOvkpSoDZQoQZu0zNOwAWIj5o2PbtjoSqWHdWT+MK06J/j9MVowD9s=
-X-Google-Smtp-Source: AGHT+IFYpZxBZF/jvC6ngqKFpKb331laK+RPGrSSb/4mzanekJAFlHmCqs50MybWyoOOqb6S4tSCfw==
-X-Received: by 2002:a17:902:f687:b0:1fb:3474:9500 with SMTP id
- d9443c01a7336-1ff57327173mr192799605ad.27.1722989233321; 
- Tue, 06 Aug 2024 17:07:13 -0700 (PDT)
+ AJvYcCUPu6HZ5voorF2E07JO7etopKiaD3IrwQk6yput2Mi5TfxdQRali3F4XH99TXGz5rLLerlOPIuoHxqDIPz89HlSPk7pgvA=
+X-Gm-Message-State: AOJu0YwiyfN47qEOag6ZywloISfvPuHrSU8pXIniszeShbWCe5U8y/JL
+ Hyr1Q3vKD3no2NlH/8gOLpOL0IdHA3EJ8dlGUiK08e1U/k+5eRVTlyINoQAtTCY=
+X-Google-Smtp-Source: AGHT+IES4JmpKsv7CeOiHWvTuaxsHYcYBmghN5pV14p1GedE4xwVJyXxHdpYjgalAn5YzxoVKD6PwA==
+X-Received: by 2002:a17:902:d4c3:b0:1fb:1497:c304 with SMTP id
+ d9443c01a7336-1ff5710bf56mr262446935ad.0.1722989239403; 
+ Tue, 06 Aug 2024 17:07:19 -0700 (PDT)
 Received: from debug.ba.rivosinc.com ([64.71.180.162])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1ff58f59cc2sm93381845ad.92.2024.08.06.17.07.12
+ d9443c01a7336-1ff58f59cc2sm93381845ad.92.2024.08.06.17.07.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Aug 2024 17:07:13 -0700 (PDT)
+ Tue, 06 Aug 2024 17:07:19 -0700 (PDT)
 From: Deepak Gupta <debug@rivosinc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: richard.henderson@linaro.org, pbonzini@redhat.com, palmer@dabbelt.com,
  Alistair.Francis@wdc.com, laurent@vivier.eu, bmeng.cn@gmail.com,
  liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, Deepak Gupta <debug@rivosinc.com>
-Subject: [PATCH v3 14/20] target/riscv: mmu changes for zicfiss shadow stack
- protection
-Date: Tue,  6 Aug 2024 17:06:45 -0700
-Message-ID: <20240807000652.1417776-15-debug@rivosinc.com>
+ zhiwei_liu@linux.alibaba.com, Deepak Gupta <debug@rivosinc.com>,
+ Jim Shu <jim.shu@sifive.com>
+Subject: [PATCH v3 19/20] linux-user: permit RISC-V CFI dynamic entry in VDSO
+Date: Tue,  6 Aug 2024 17:06:50 -0700
+Message-ID: <20240807000652.1417776-20-debug@rivosinc.com>
 X-Mailer: git-send-email 2.45.0
 In-Reply-To: <20240807000652.1417776-1-debug@rivosinc.com>
 References: <20240807000652.1417776-1-debug@rivosinc.com>
@@ -100,154 +100,33 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-zicfiss protects shadow stack using new page table encodings PTE.W=0,
-PTE.R=0 and PTE.X=0. This encoding is reserved if zicfiss is not
-implemented or if shadow stack are not enabled.
-Loads on shadow stack memory are allowed while stores to shadow stack
-memory leads to access faults. Shadow stack accesses to RO memory
-leads to store page fault.
+RISC-V CFI use new processor-specific dynamic entry in ELF. Permit it in
+VDSO post-processing script.
 
-To implement special nature of shadow stack memory where only selected
-stores (shadow stack stores from sspush) have to be allowed while rest
-of regular stores disallowed, new MMU TLB index is created for shadow
-stack.
-
+Signed-off-by: Jim Shu <jim.shu@sifive.com>
 Signed-off-by: Deepak Gupta <debug@rivosinc.com>
 ---
- target/riscv/cpu_helper.c | 61 +++++++++++++++++++++++++++++++++++++--
- target/riscv/internals.h  |  3 ++
- 2 files changed, 62 insertions(+), 2 deletions(-)
+ linux-user/gen-vdso-elfn.c.inc | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index fb6c0d4e1f..5d5da8dce1 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -820,6 +820,18 @@ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
-     env->load_res = -1;
- }
+diff --git a/linux-user/gen-vdso-elfn.c.inc b/linux-user/gen-vdso-elfn.c.inc
+index 95856eb839..59c818eb11 100644
+--- a/linux-user/gen-vdso-elfn.c.inc
++++ b/linux-user/gen-vdso-elfn.c.inc
+@@ -273,6 +273,13 @@ static void elfN(process)(FILE *outf, void *buf, bool need_bswap)
+                 errors++;
+                 break;
  
-+static bool legal_sstack_access(int access_type, bool sstack_inst,
-+                                bool sstack_attribute)
-+{
-+    /*
-+     * Read/write/execution permissions are checked as usual. Shadow
-+     * stack enforcement is just that (1) instruction type must match
-+     * the attribute unless (2) a non-SS load to an SS region.
-+     */
-+    return (sstack_inst == sstack_attribute) ||
-+        ((access_type == MMU_DATA_LOAD) && sstack_attribute);
-+}
++            case PT_LOPROC + 2:
++                /* RISCV_ZICFILP_PLT: for RISC-V zicfilp extension */
++                if (ehdr->e_machine == EM_RISCV) {
++                    break;
++                }
++                goto do_default;
 +
- /*
-  * get_physical_address_pmp - check PMP permission for this physical address
-  *
-@@ -897,6 +909,8 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
-     hwaddr ppn;
-     int napot_bits = 0;
-     target_ulong napot_mask;
-+    bool is_sstack_insn = ((mmu_idx & MMU_IDX_SS_ACCESS) == MMU_IDX_SS_ACCESS);
-+    bool sstack_page = false;
- 
-     /*
-      * Check if we should use the background registers for the two
-@@ -1105,15 +1119,45 @@ restart:
-         return TRANSLATE_FAIL;
-     }
- 
-+    /*
-+     * When backward CFI is enabled, the R=0, W=1, X=0 reserved encoding
-+     * is used to mark Shadow Stack (SS) pages. If back CFI enabled, allow
-+     * normal loads on SS pages, regular stores raise store access fault
-+     * and avoid hitting the reserved-encoding case. Only shadow stack
-+     * stores are allowed on SS pages. Shadow stack loads and stores on
-+     * regular memory (non-SS) raise load and store/AMO access fault.
-+     * Second stage translations don't participate in Shadow Stack.
-+     */
-+    sstack_page = (cpu_get_bcfien(env) && first_stage &&
-+                  ((pte & (PTE_R | PTE_W | PTE_X)) == PTE_W));
-+
-     /* Check for reserved combinations of RWX flags. */
-     switch (pte & (PTE_R | PTE_W | PTE_X)) {
--    case PTE_W:
-     case PTE_W | PTE_X:
-+    case PTE_W:
-+        if (sstack_page) { /* if shadow stack page, PTE_W is not reserved */
-+            break;
-+        }
-         return TRANSLATE_FAIL;
-     }
- 
-+    /* Illegal combo of instruction type and page attribute */
-+    if (!legal_sstack_access(access_type, is_sstack_insn,
-+                            sstack_page)) {
-+        /* shadow stack instruction and RO page then it's a page fault */
-+        if (is_sstack_insn && ((pte & (PTE_R | PTE_W | PTE_X)) == PTE_R)) {
-+                return TRANSLATE_FAIL;
-+        }
-+        /* In all other cases it's an access fault, so raise PMP_FAIL */
-+        return TRANSLATE_PMP_FAIL;
-+    }
-+
-     int prot = 0;
--    if (pte & PTE_R) {
-+    /*
-+     * If PTE has read bit in it or it's shadow stack page,
-+     * then reads allowed
-+     */
-+    if ((pte & PTE_R) || sstack_page) {
-         prot |= PAGE_READ;
-     }
-     if (pte & PTE_W) {
-@@ -1351,9 +1395,17 @@ void riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
-         break;
-     case MMU_DATA_LOAD:
-         cs->exception_index = RISCV_EXCP_LOAD_ADDR_MIS;
-+        /* shadow stack mis aligned accesses are access faults */
-+        if (mmu_idx & MMU_IDX_SS_ACCESS) {
-+            cs->exception_index = RISCV_EXCP_LOAD_ACCESS_FAULT;
-+        }
-         break;
-     case MMU_DATA_STORE:
-         cs->exception_index = RISCV_EXCP_STORE_AMO_ADDR_MIS;
-+        /* shadow stack mis aligned accesses are access faults */
-+        if (mmu_idx & MMU_IDX_SS_ACCESS) {
-+            cs->exception_index = RISCV_EXCP_STORE_AMO_ACCESS_FAULT;
-+        }
-         break;
-     default:
-         g_assert_not_reached();
-@@ -1409,6 +1461,11 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-     qemu_log_mask(CPU_LOG_MMU, "%s ad %" VADDR_PRIx " rw %d mmu_idx %d\n",
-                   __func__, address, access_type, mmu_idx);
- 
-+    /* If shadow stack instruction initiated this access, treat it as store */
-+    if (mmu_idx & MMU_IDX_SS_ACCESS) {
-+        access_type = MMU_DATA_STORE;
-+    }
-+
-     pmu_tlb_fill_incr_ctr(cpu, access_type);
-     if (two_stage_lookup) {
-         /* Two stage lookup */
-diff --git a/target/riscv/internals.h b/target/riscv/internals.h
-index 0ac17bc5ad..dad0657c80 100644
---- a/target/riscv/internals.h
-+++ b/target/riscv/internals.h
-@@ -30,12 +30,15 @@
-  *  - U+2STAGE          0b100
-  *  - S+2STAGE          0b101
-  *  - S+SUM+2STAGE      0b110
-+ *  - Shadow stack+U   0b1000
-+ *  - Shadow stack+S   0b1001
-  */
- #define MMUIdx_U            0
- #define MMUIdx_S            1
- #define MMUIdx_S_SUM        2
- #define MMUIdx_M            3
- #define MMU_2STAGE_BIT      (1 << 2)
-+#define MMU_IDX_SS_ACCESS   (1 << 3)
- 
- static inline int mmuidx_priv(int mmu_idx)
- {
+             case PT_LOPROC + 3:
+                 if (ehdr->e_machine == EM_PPC64) {
+                     break;  /* DT_PPC64_OPT: integer bitmask */
 -- 
 2.44.0
 
