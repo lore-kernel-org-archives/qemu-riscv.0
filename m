@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FE89C52D6F
-	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Aug 2024 02:07:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50E38C49EA1
+	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Aug 2024 02:11:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sbW4p-0000yr-91; Tue, 06 Aug 2024 22:06:59 -0400
+	id 1sbW9B-000308-Nc; Tue, 06 Aug 2024 22:11:29 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sbW4n-0000w4-Ay
- for qemu-riscv@nongnu.org; Tue, 06 Aug 2024 22:06:57 -0400
-Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
+ id 1sbW9A-0002wo-KJ
+ for qemu-riscv@nongnu.org; Tue, 06 Aug 2024 22:11:28 -0400
+Received: from mail-oo1-xc2f.google.com ([2607:f8b0:4864:20::c2f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sbW4l-0007yp-Is
- for qemu-riscv@nongnu.org; Tue, 06 Aug 2024 22:06:57 -0400
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-1fc66fc35f2so3315915ad.0
- for <qemu-riscv@nongnu.org>; Tue, 06 Aug 2024 19:06:54 -0700 (PDT)
+ id 1sbW96-0008Tl-7l
+ for qemu-riscv@nongnu.org; Tue, 06 Aug 2024 22:11:28 -0400
+Received: by mail-oo1-xc2f.google.com with SMTP id
+ 006d021491bc7-5d5cbe88f70so698427eaf.0
+ for <qemu-riscv@nongnu.org>; Tue, 06 Aug 2024 19:11:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1722996414; x=1723601214; darn=nongnu.org;
+ d=linaro.org; s=google; t=1722996682; x=1723601482; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=Q6AnjNQhYAgk5t3adXmD53s+4M3IePgjeJO4VTqb//k=;
- b=OaEtcardDk7ffxNZdY6fM48wVwUlnCKPFXzd+A0+V4qB/F8xGvLjAGp0fRuSkrXlo3
- satfJq0FV+rLLhLaHH/Bq5g1WqLoKmMUw8TZc5iCcKrJ4SqzBtIpCBp//VOPUUno/ksB
- n+trubxWe9wUUru/Qro4VYUuwKHmDWDuj1XX/uCiWdUnttx5oylPkc61++JMAs/ZiOwM
- qhKPdYdZIl7QJBNLx8/Vf3GF7wogL3w+wpbtliApDI4HZmnN24sfG0Am0M6e8j1/N9G7
- TZpJNFVrVx0aH54U8GK83+bYZidH4+gsXi0G0ZGkvyxdGh/DKXxgNr/uhGJ1bNsm5A4Q
- 6FGw==
+ bh=YQ0+RaQnf487FmqMm72N/Wt0muxuUWCQihqtHZxTsbA=;
+ b=jkcWV2xa2cxSQu+62o9/huzR/5Z3UF5jmRSVoifbbU1IwikpkzdmCiul0bAMSk25sF
+ DWhdznE9XCOJ20jlYw3uem79f/wcAYTPn84iYJx9F7cJc0CywymwHcKo9h1XBfBkm5EL
+ pM0lUBOg+l6NLspjLldJRHGafLI9alMTAdbFyTbrm7A4QOnrrWMP9YwMtuc7smmbIiGI
+ 3AIfuATLisu904xojnHRsk/Q+u8/q9Uu29sqDMkbrgnbMg120sE9SO5Np5v5z8AqWPMj
+ Nedi0mQXJh+KrYm0GWkMS8J8HjB/K5vFaCXZxshGyJ3PM7J6fYRBUbqoiUqgY9LSn9Wu
+ X9mA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722996414; x=1723601214;
+ d=1e100.net; s=20230601; t=1722996682; x=1723601482;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Q6AnjNQhYAgk5t3adXmD53s+4M3IePgjeJO4VTqb//k=;
- b=CsfMUiG3fBERxTWYWOF0v3r4rk9i2Fu/1BMWM5d7PvLJScCj4o8hegnahg2+18Yk18
- FnQtHXoXI7d6j/ATEpDFhKef/ATFUbujjreC7Tzwc+2OGCySqZTb94EuR2Z6S6FoeiRg
- 4JTdioSNLxF9U/5SCJHY5R7i4T+ZgA7G5yiilUQzOsCP+i+/+F1psThNh8oMES1GoZ14
- cSIqw0yS4JEhJjUZI0sDv2zvYSFOw5T7Kqb3yFZHMuy4+Bv7OZ5fFRpaaBvHAk6twyh9
- 6E2fmu8ONgnokqR5XR5kkq+Wew9unt7gT5VHIOZK0gkyQCYIsIWq9aO67JL7c5NPYQw6
- 0gLQ==
+ bh=YQ0+RaQnf487FmqMm72N/Wt0muxuUWCQihqtHZxTsbA=;
+ b=W1OV4934wRs4InMWU8U3my1G58XYa5b9ss4b5qbbpFNK7+2btYhJO3Dy0A5ufvf0Py
+ OvqcxztEhmdky7SwBWA+3aih5scgdiT6gC6/u/34PgY93mtACu9PbTvRaL26/D44B2Zn
+ MgufH7SUE5XjVhN73RPs3IXK9AOuMjtJJIi9eTGSfIm0GfScWw9E817JW1FdiMgopn6P
+ VchiCojH3jPVE0IBb5u6AXoFbQHqjDI5nZRMX6fxspOUB0NwugktFzovj2BwhHzS5/rT
+ zGHoDl15VOmW9WBrfyW8UU4b0bg37YDziEXMDe2dItl0cu9cjgdt8ItY39A0myNUwZi5
+ rPLw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXvyBIUWvls6/GvQ8tUhzCX9NUFfP2NFOHv1fV/VnjZ3YAIf1a1eTeHkYFQI2UrJzbhgI9aFCBPn0vvKYewtdfBfzBxxLU=
-X-Gm-Message-State: AOJu0YzY+JdRhCGt3iF94UjAjNS2jP6ewD+m/ZGdeICS1X9+5voZkivM
- kTgtpxxsofP/oqY66/sM+Nr6TlA8/6669mBlnq5swgyepDlhcCwy6WYqTYt05rI=
-X-Google-Smtp-Source: AGHT+IE5ZZaKXQ4seFG689+d+JYbDijgfS2d4OudBg80MBQTeCip6isu0m3ILzeCdr3Ea0Uc5iV/MQ==
-X-Received: by 2002:a17:902:bd03:b0:1ff:4a01:43f7 with SMTP id
- d9443c01a7336-200853eb6e2mr8898875ad.10.1722996413650; 
- Tue, 06 Aug 2024 19:06:53 -0700 (PDT)
+ AJvYcCVL9U9mdy1/1q9M2kW42KW2f1e/GV93kIf/JIiV9h5lj8nKUv8Sp6Emz/W1Hi3+A213YRAL6/DwJ1YEfgI4/NzPRcytCnY=
+X-Gm-Message-State: AOJu0YyX74i+0FnbT+yy+3t10g6pxlmbca5pAe1Kr3dVk6JMjeumBh1Y
+ ueAn62LSIlnJdXxOH59bulDFXyw/xWJPDVXr21GTxxx3dmx7cSpsABd7dvRoMfc=
+X-Google-Smtp-Source: AGHT+IGVZCrS6mQLdaLmnnblyYZivIjZcRjXJGPkmxM7RM3TCjLFGlbjs3z8EWFlA0lXOwl+9ccNHg==
+X-Received: by 2002:a05:6870:37cf:b0:261:113c:1507 with SMTP id
+ 586e51a60fabf-26891d208c1mr19262934fac.20.1722996682167; 
+ Tue, 06 Aug 2024 19:11:22 -0700 (PDT)
 Received: from ?IPV6:2403:580a:f89b:0:e01b:92e5:d779:1bc0?
  (2403-580a-f89b-0-e01b-92e5-d779-1bc0.ip6.aussiebb.net.
  [2403:580a:f89b:0:e01b:92e5:d779:1bc0])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1ff592b89bfsm96049305ad.308.2024.08.06.19.06.47
+ d2e1a72fcca58-7106ec269d2sm7802908b3a.17.2024.08.06.19.11.16
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 06 Aug 2024 19:06:53 -0700 (PDT)
-Message-ID: <bbe3681c-358e-418c-b172-ec3728ff63a5@linaro.org>
-Date: Wed, 7 Aug 2024 12:06:44 +1000
+ Tue, 06 Aug 2024 19:11:21 -0700 (PDT)
+Message-ID: <34411ccd-5fc8-46d8-bf5e-871949c755fb@linaro.org>
+Date: Wed, 7 Aug 2024 12:11:12 +1000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 08/20] disas/riscv: enabled `lpad` disassembly
+Subject: Re: [PATCH v3 10/20] target/riscv: introduce ssp and enabling
+ controls for zicfiss
 To: Deepak Gupta <debug@rivosinc.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: pbonzini@redhat.com, palmer@dabbelt.com, Alistair.Francis@wdc.com,
@@ -74,14 +75,14 @@ Cc: pbonzini@redhat.com, palmer@dabbelt.com, Alistair.Francis@wdc.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  Jim Shu <jim.shu@sifive.com>, Andy Chiu <andy.chiu@sifive.com>
 References: <20240807000652.1417776-1-debug@rivosinc.com>
- <20240807000652.1417776-9-debug@rivosinc.com>
+ <20240807000652.1417776-11-debug@rivosinc.com>
 Content-Language: en-US
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240807000652.1417776-9-debug@rivosinc.com>
+In-Reply-To: <20240807000652.1417776-11-debug@rivosinc.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c2f;
+ envelope-from=richard.henderson@linaro.org; helo=mail-oo1-xc2f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -105,15 +106,27 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 8/7/24 10:06, Deepak Gupta wrote:
-> Signed-off-by: Deepak Gupta<debug@rivosinc.com>
-> Co-developed-by: Jim Shu<jim.shu@sifive.com>
-> Co-developed-by: Andy Chiu<andy.chiu@sifive.com>
-> ---
->   disas/riscv.c | 18 +++++++++++++++++-
->   disas/riscv.h |  2 ++
->   2 files changed, 19 insertions(+), 1 deletion(-)
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index a5a969a377..d72d6289fb 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -185,6 +185,47 @@ static RISCVException zcmt(CPURISCVState *env, int csrno)
+>       return RISCV_EXCP_NONE;
+>   }
+>   
+> +static RISCVException cfi_ss(CPURISCVState *env, int csrno)
+> +{
+> +    /* no cfi extension, access to csr is illegal */
+> +    if (!env_archcpu(env)->cfg.ext_zicfiss) {
+> +        return RISCV_EXCP_ILLEGAL_INST;
+> +    }
+> +    /*
+> +     * CONFIG_USER_MODE always allow access for now. Better for user mode only
+> +     * functionality
+> +     */
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+In the next patch you add ubcfien, which would apply here.
+
 
 r~
 
