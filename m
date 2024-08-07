@@ -4,91 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4655BC52D6F
-	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Aug 2024 03:42:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA14DC52D6F
+	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Aug 2024 04:11:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sbXYd-0001j4-6k; Tue, 06 Aug 2024 23:41:51 -0400
+	id 1sbY0r-0003Fu-Db; Wed, 07 Aug 2024 00:11:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sbXYc-0001i7-96
- for qemu-riscv@nongnu.org; Tue, 06 Aug 2024 23:41:50 -0400
-Received: from mail-pg1-x531.google.com ([2607:f8b0:4864:20::531])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1sbY0n-0003Dy-C4; Wed, 07 Aug 2024 00:10:57 -0400
+Received: from mail-ua1-x92f.google.com ([2607:f8b0:4864:20::92f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sbXYa-0002uC-CM
- for qemu-riscv@nongnu.org; Tue, 06 Aug 2024 23:41:50 -0400
-Received: by mail-pg1-x531.google.com with SMTP id
- 41be03b00d2f7-6c5bcb8e8edso1017703a12.2
- for <qemu-riscv@nongnu.org>; Tue, 06 Aug 2024 20:41:47 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1sbY0l-0006Ut-Fo; Wed, 07 Aug 2024 00:10:56 -0400
+Received: by mail-ua1-x92f.google.com with SMTP id
+ a1e0cc1a2514c-821b8d887b8so441684241.2; 
+ Tue, 06 Aug 2024 21:10:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723002106; x=1723606906; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=ixn5VJ+kJLx+H4k8QwB1NoIOhTMwvrVH+7y5sWqgSDI=;
- b=Ogyix730LuBvv7XcOt00YR7ZnTpsgEM+cEJq0a+99ZSuV3/WdC3IuLFrGhcjLgmt0W
- TA7UoPMmxm1GZZS4mbh1dDXFc28Q/xk6vWeQp25ZtWOfaUaWOhyGqz07DRLIe5SNyge3
- vqGtWFZA9o+Lr6QqX803Cf/ws2uf0OoM+zxS2U711EDcVI4zLPfdOm29XB/LUkjQWPew
- dwUss+lbOozOBmjPiZLU4UKoapUE7pgfwIHMVt5P4HBTFgOGnLIMwDHxTtAPGyJT23VH
- d/x/7Cl+fFihEb1bc2Nrk3kEmjCsjzdrXS/CSHDAi0io8u9xeNQyOq+/EXv4XzVwAJps
- Dzkg==
+ d=gmail.com; s=20230601; t=1723003853; x=1723608653; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ox3w2uK/YJg2/dqXJs0LwfMVT9mLwv0GKWoRf10GeKc=;
+ b=JyF0pRct/WNAC5lxH7JUJWpICZUZEXViTamXEpksBq3VVJwEx9cvNu6WGfO55F2+LU
+ vPfh7YCHO7rI40zWITQ6j+PUMZZLLqIKOKIsjZKjW/gHjEF7/9RF0WntuyQ4r489liiO
+ ndvR8IoziWRrwt+510pIQorZzmdsmmRtnOF0ekYx2Rtr1hDFfNDdgeQZcEbgEOU+iaVj
+ aokkAonugNEOxG1bR/J744tFXP/0EwN74nP1rKyuS8f+nQ0jtrwiB65Y9fKj1mVGCoid
+ oGoO6tynNvOSFgdr4hCGSXB3RpBP860Jqxp3hd7JvSEbq+rCQSuw/3rXUWi4xJja6a6j
+ V8WA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723002106; x=1723606906;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ixn5VJ+kJLx+H4k8QwB1NoIOhTMwvrVH+7y5sWqgSDI=;
- b=bXdEDQnLpzu6qsI1p5fdtT2QWF7aAPWjuVqI7Ioph/i2jGx1o8UZM/FD44LyK3eqcS
- 7OQ8Ho5E1o3qGhhoJn+BwazEa/J1Ef4ACjIfxSBMQ+1jev7soIk8vGMRSftPyKI9Nyi/
- fQlY+DANP2qOtA++x6sY7h8PasnXic+JdNqIx/OPonom8pUNGGWj7utX0sSqZEvgzzaX
- NMCagyeeIhzm6vLKwSpBRCg56fGlWnorqqqqyKZUvICbyfYoE76q3TImlA9RRwVZqEBa
- Vfw1LS/YiUvIbT1AUNH0YH5xjgIgx0bcjemRaYAML7MMj90qYgIUMIEma30lsihewqwh
- 5tVA==
+ d=1e100.net; s=20230601; t=1723003853; x=1723608653;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ox3w2uK/YJg2/dqXJs0LwfMVT9mLwv0GKWoRf10GeKc=;
+ b=OytKOrNw1jpDAHb2nCe633PXdbtcxQpqvjQ9Rk4Mxr2XWSY/4hM1A04DM0virDDnUY
+ A+9N1HFh7vLnrpebj7mkOIQ+JyhXlF2u14l39tWRUf8RoruG4oZ9eKrlyFBISIGzfGgt
+ HsZXpaf3/6J+ej4xZBUh23h7ixNSYOZjyxvL2y04gKSJmPdMlhU9hiX0V1K3WBRqAoIj
+ arWPM4w/c2jo0sRZseAgI3McF523Vj/T0zUqXv6bamb1p73PFhyNPAh4AtQhFBPinmg2
+ p4ZnczlB+mbtkCrOhGrHYK6gjkPp98PLWfzk8+bvHg2AbzK8br8PFCWUkkbABWVFO4dH
+ mWEA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVogLWFXHQF3KRE1xa67tjljEwQSaSDIlqPDIDHWO2vEw7BNaPrIrvq32siVtmVvTR7qiI3JOhHyN3k2iMK6WXss056f1Y=
-X-Gm-Message-State: AOJu0Yymul+/LCH7W892mnKZ1hkYFN2BVHgShOVS98uvAEq4jsSGZ+Uf
- 5AsnLygHCgqn+hKFctcEpvOzKqgJVq/trZihPhZJ5Sei5e0/Wv7d00U0dLL2OsM=
-X-Google-Smtp-Source: AGHT+IFpp/h/OhIxozXEVO/bsGHBoymvUOVxoH8ytFnwfQX6n1nBWeYw6VNQfTIhao5ADQnKfTRhsg==
-X-Received: by 2002:a17:903:2306:b0:1ff:3c45:48dd with SMTP id
- d9443c01a7336-1ff57298462mr208354495ad.30.1723002106239; 
- Tue, 06 Aug 2024 20:41:46 -0700 (PDT)
-Received: from ?IPV6:2403:580a:f89b:0:e01b:92e5:d779:1bc0?
- (2403-580a-f89b-0-e01b-92e5-d779-1bc0.ip6.aussiebb.net.
- [2403:580a:f89b:0:e01b:92e5:d779:1bc0])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1ff591786b3sm95289775ad.214.2024.08.06.20.41.41
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 06 Aug 2024 20:41:45 -0700 (PDT)
-Message-ID: <e210c317-bad1-4d29-ab11-cd2e16246398@linaro.org>
-Date: Wed, 7 Aug 2024 13:41:37 +1000
+ AJvYcCXYuEcqJa0eyV4TN99Mp1/MbNwlsvVgtGnuuRNyvtdaaygi5yBgDzlYdcv6NKyvcLlekhPD0lzXjSwv7FWhKBlRN/DrzxI=
+X-Gm-Message-State: AOJu0Yx8JmCJWtFP5ueR3aFejusLp9Cn2DvPpULAUeGxxF0T5gesvCaq
+ Lkf2viR85Nm/ZmV0P3KxPpiWTENxfW1UY1r0VRtKyjsEp/Cw4lVIxRBrK81vVjBC3hiz3h54r/Q
+ h9Sw/yxz5RadyYwH5yIpzYuNnXWM=
+X-Google-Smtp-Source: AGHT+IF2uvm8JzlgVP+Qn2USVP4hxNYGnUANDjzeqvfRYDV7h8Gr0gjV3l3t92v1eY06J82SCtXIimVd1Gdi5KMTh8M=
+X-Received: by 2002:a05:6102:38ca:b0:492:9f6a:e980 with SMTP id
+ ada2fe7eead31-4945bf3276dmr16269498137.27.1723003853536; Tue, 06 Aug 2024
+ 21:10:53 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 20/20] linux-user: Add RISC-V zicfilp support in VDSO
-To: Deepak Gupta <debug@rivosinc.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: pbonzini@redhat.com, palmer@dabbelt.com, Alistair.Francis@wdc.com,
- laurent@vivier.eu, bmeng.cn@gmail.com, liwei1518@gmail.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- Jim Shu <jim.shu@sifive.com>
-References: <20240807000652.1417776-1-debug@rivosinc.com>
- <20240807000652.1417776-21-debug@rivosinc.com>
-Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240807000652.1417776-21-debug@rivosinc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::531;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x531.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20240805043336.72548-1-alistair.francis@wdc.com>
+ <20240805043336.72548-2-alistair.francis@wdc.com>
+ <9da48ab0-d88e-4d80-aca6-79dfa083bb9b@linaro.org>
+In-Reply-To: <9da48ab0-d88e-4d80-aca6-79dfa083bb9b@linaro.org>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 7 Aug 2024 14:10:27 +1000
+Message-ID: <CAKmqyKPpw9zVTAzQHNCcNeoV11yCaz9NMEJ+w2TitqK_vEtR0A@mail.gmail.com>
+Subject: Re: [PATCH 1/2] include: bitops: Add mask extract64/deposit64
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: qemu-devel@nongnu.org, peter.maydell@linaro.org, dbarboza@ventanamicro.com,
+ Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>,
+ zhiwei_liu@linux.alibaba.com, 
+ Alistair Francis <alistair.francis@wdc.com>, atishp@rivosinc.com,
+ bmeng.cn@gmail.com, qemu-riscv@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92f;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92f.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,54 +96,66 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 8/7/24 10:06, Deepak Gupta wrote:
-> Add zicfilp support in VDSO. VDSO functions need lpad instruction
-> so that userspace could call this function when landing pad extension is
-> enabled. This solution only works when toolchain always use landing pad
-> label 1.
+On Tue, Aug 6, 2024 at 5:32=E2=80=AFPM Richard Henderson
+<richard.henderson@linaro.org> wrote:
+>
+> On 8/5/24 14:33, Alistair Francis wrote:
+> > Based on the RISC-V get_field() and set_field() macros add
+> > mask_extract64() and mask_deposit64() bitop functions. These can extrac
+> > and deposit values into fields using a bit field mask directly instead
+> > of a length and shift.
+> >
+> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > ---
+> >   include/qemu/bitops.h | 35 +++++++++++++++++++++++++++++++++++
+> >   1 file changed, 35 insertions(+)
+> >
+> > diff --git a/include/qemu/bitops.h b/include/qemu/bitops.h
+> > index 2c0a2fe751..dd26f4a6b5 100644
+> > --- a/include/qemu/bitops.h
+> > +++ b/include/qemu/bitops.h
+> > @@ -409,6 +409,22 @@ static inline uint64_t extract64(uint64_t value, i=
+nt start, int length)
+> >       return (value >> start) & (~0ULL >> (64 - length));
+> >   }
+> >
+> > +/**
+> > + * mask_extract64:
+> > + * @value: the value to extract the bit field from
+> > + * @mask: the mask bit field to extract
+> > + *
+> > + * Extract from the 64 bit input @value the bit mask specified by the
+> > + * @mask parameter, and return it. The value returned is shifted
+> > + * so that only the bit field is returned.
+> > + *
+> > + * Returns: the value of the bit field extracted from the input value.
+> > + */
+> > +static inline uint64_t mask_extract64(uint64_t value, uint64_t mask)
+> > +{
+> > +    return (value & mask) / (mask & ~(mask << 1));
+> > +}
+>
+> Adding these miss the point of using "standard" qemu operations.
 
-Well, no, the lpad insns *could* use imm=0.
-Why would the toolchain always use label 1?
+My thinking is that if they are added then they become standard :)
 
-Much more explanation is required here.
+At least then they are included in core code and easier for people to
+understand.
 
-> +/* GNU_PROPERTY_RISCV64_* macros from elf.h for use in asm code.  */
-> +#define FEATURE_1_AND 0xc0000000
-> +
-> +#define GNU_PROPERTY(type, value)	\
-> +  .section .note.gnu.property, "a";	\
-> +  .p2align 3;                       \
-> +  .word 4;                          \
-> +  .word 16;                         \
-> +  .word 5;                          \
-> +  .asciz "GNU";                     \
-> +  .word type;                       \
-> +  .word 4;                          \
-> +  .word value;                      \
-> +  .word 0;                          \
-> +  .text
-> +
-> +/* Add GNU property note with the supported features to all asm code
-> +   where sysdep.h is included.  */
-> +#undef __VALUE_FOR_FEATURE_1_AND
-> +#if defined (__riscv_zicfilp) || defined (__riscv_zicfiss)
-> +#  if defined (__riscv_zicfilp)
-> +#    if defined (__riscv_zicfiss)
+>
+> But if we were going to add this, avoid the division.
+>
+>   (value & mask) >> ctz64(mask)
 
-Why are you checking __riscv_* symbols, for when the toolchain
-has these features enabled on the command-line?
+Good point
 
-This is the kind of feature you want enabled always.
+Alistair
 
-> +#ifdef __riscv_zicfilp
-> +# define LPAD       lpad 1
-> +#else
-> +# define LPAD
-> +#endif
-
-Here, especially, you should be using ".insn", not omitting the lpad insn.
-
-
-r~
-
+>
+> I presume the original formulation is so that the macro can be used in th=
+e context of a
+> compile-time constant.
+>
+>
+> r~
 
