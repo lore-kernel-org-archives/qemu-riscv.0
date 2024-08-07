@@ -4,73 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A63EC52D6F
-	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Aug 2024 07:30:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31B10C3DA7F
+	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Aug 2024 07:44:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sbb7B-00057Q-Ku; Wed, 07 Aug 2024 03:29:45 -0400
+	id 1sbbL4-0008HF-Eg; Wed, 07 Aug 2024 03:44:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
- id 1sbb78-0004v8-Pf
- for qemu-riscv@nongnu.org; Wed, 07 Aug 2024 03:29:43 -0400
-Received: from mail-lj1-x22b.google.com ([2a00:1450:4864:20::22b])
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1sbbL2-0008F3-Qe
+ for qemu-riscv@nongnu.org; Wed, 07 Aug 2024 03:44:04 -0400
+Received: from mail-lf1-x12b.google.com ([2a00:1450:4864:20::12b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
- id 1sbb76-0008Om-Kp
- for qemu-riscv@nongnu.org; Wed, 07 Aug 2024 03:29:42 -0400
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-2ef23d04541so16885821fa.2
- for <qemu-riscv@nongnu.org>; Wed, 07 Aug 2024 00:29:38 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1sbbL0-0001aK-FZ
+ for qemu-riscv@nongnu.org; Wed, 07 Aug 2024 03:44:04 -0400
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-52f04c29588so2010906e87.3
+ for <qemu-riscv@nongnu.org>; Wed, 07 Aug 2024 00:44:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1723015777; x=1723620577; darn=nongnu.org;
- h=to:subject:message-id:date:from:in-reply-to:references:mime-version
- :from:to:cc:subject:date:message-id:reply-to;
- bh=lFoHXjri5UUfmp4JVeCMLpKxnEp23sWozOlDq7FxaVo=;
- b=OrJJQUm2WBwGQMj/FvHuhGQsAex2SWqMGg3NswND/7a0SM+1+/RQ2jrneco82uj+Jp
- aLqMJRBIj2pBOZnG2jYSbW9nE4umh1m8r0uD5OjksBiNTHO3kW3gM7j38MVvLMxN8Klb
- mCLi0AV+iv//riQ8NQNOt+Fj+8NZ0lWL8IYyuZZL/hGCZ4K292GzfCUlA+rblkvGjHhU
- YRlLfdrLxAwq5pi3GbC1SoccrnM8fbnwbUlRJjYRQR990obsNyLk9KbYoD3SOnhfGV7h
- LjhAPPPyX10Whu1Y9eo4UpClWTMc6WMMB3jjwfClhrdAym37yjHCK/qNbGNZm/W1cCFp
- OQ5g==
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1723016640; x=1723621440;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=s6PZf4AmC0JVvgN57YArSD/aWPIgGOkn6zPh+i54Mkk=;
+ b=07zUf68fPb/wL6Q5+tsSb4ABHeHwc66LxbRVZiYMK2X8bhHFnf8mJvp/sD6itgp9k2
+ xV4Ni209nSXvmVV+1KtDOVM5lngwMTscIEhwagFjJJUjpeoTH6iNeMK8rCYi6uP4bkr8
+ 4SqSbPjB9tu64dOnh9ZvuGddBxvEXQlVnKN0qcaMf3P4yfU63kcEsG3JAdE7+ZxD1N8Y
+ 6kIDKoRGI73S8MauE2H6rYxbpESfztamtX4n4TZdsIo7DgSBCbjG8K6PYHxLtAiugO0F
+ EkloFHPFuIaJhrOLeTErpfr1+YPO5ijgOeE5DT0IQvNUiK47CQhO0h48+IT94Ag7bpYM
+ 9xEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723015777; x=1723620577;
- h=to:subject:message-id:date:from:in-reply-to:references:mime-version
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=lFoHXjri5UUfmp4JVeCMLpKxnEp23sWozOlDq7FxaVo=;
- b=jTgXloIWrFEl0NpGL0YfE3adcaGBORciXFuneiJHRgDguCwIc1LVtJysKQLlj3hteD
- UxPNQIpSlbzHUjFIeZlppTeaLVQ69kfLuRbPdxgXyrJFA5fn+qwlGJOC3ThWk/vyKNJ4
- 4cJ84GBNsG50m9D3T5Wo4ePFxdqJ+UzgaGTNQm5jHqTAeUxXm2GdVFhcb47jrncAsxPE
- 7IkbN2lD3U10XFM5/nkSmkqqO8lhqIB2llEwacPobhQ9Siqp549lGKhF+OdLeyZXmKCX
- 8Fo2FvgYJ7+a8yTsAswTzOz0pV6sFyOEdmeVdjdkIHLZoDwYaq+aOaKFHu/TXcxi6XZs
- tVxw==
+ d=1e100.net; s=20230601; t=1723016640; x=1723621440;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=s6PZf4AmC0JVvgN57YArSD/aWPIgGOkn6zPh+i54Mkk=;
+ b=ddhsbPwcdN0f1R0wO7fR40nEFInOwQVz+T+p7ai24+a2tb6ojFALdRxDSTHvuoCQsM
+ pSo+7bzoCoKIExjQPjgI7jR3PiBbfidW96JXrT+wOIosc96Q7kfJr/OsCCKtEcbMOHkT
+ tJBmbq8oUsSYKiOp/v37k9WtxBTicRhK0EyAOl++sTpO+hfrj8bFnS7CnGP+tYnMmXXa
+ mc5xVxsDqgeURak4tp4z54TsB0Je0PAxXKMtOF8d1U6t6u3ONSzkp0T1zMichiOu0E5a
+ NJaKgZcJyKcCwsaTYNQOW3sKgk+tR3IS6dqMXPfwjhqWw9wYQIrh8y4NpmxA7leatSqM
+ hQZQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVeHnWENuzpW+j04rDetv0RFBdhEoAU2DDsydkOxzTV94G1v9LWyRQIyeBm+zeLEqrSfvzVHctlCGieE58eppMxLcAl16Q=
-X-Gm-Message-State: AOJu0Yyowh9IUIovc+lIe6WQA3Keb3NKZ6aNYLevMOEOsUOB8XTQYlDI
- guhvo6JeJWpxiwxYkyKHI2lYVz/UCzSxXv52EOQHnk2uYxwH2jDnggT1OD4Nrwc9QXvDHToxrCd
- 8Oz5lE2Q6pj0MRPboQZ7MZGC1dkYTd9CEeFDTlV6kLTedn7Z1
-X-Google-Smtp-Source: AGHT+IEqYKO96JOAu84cTJCzyWnYBZb3jARnxE3t+kdIcs1R5bKGHNHV/jMt9jJ0NBk5V2EL75+IgzdAoTF5uo6c9L4=
-X-Received: by 2002:a05:651c:cc:b0:2f0:20cd:35fc with SMTP id
- 38308e7fff4ca-2f15aa86feemr112470391fa.7.1723015776421; Wed, 07 Aug 2024
- 00:29:36 -0700 (PDT)
+ AJvYcCWU/asrUkp/YP5BtHUvq3V2GJbmoKxeNBwriK8FJwKyIKO2XSMIElG1Mh8lCXwKA+iRcGVBQS2EwIS+Qgz4PLHip452eGE=
+X-Gm-Message-State: AOJu0Ywy8ZDVuv2BrZAtYWKgI+NtfDEq1x6+GVRkfNVXOysVOIQtVPLD
+ G1kxAD/BTRgsmpqg5Ijyfo0Vxe+s3VOJYAi25OzoffEgUzez5Z+XBZ4AwNr9iU4j6qjVsAtZ4Ty
+ 2Kou0hy0YMdI6koyylfQs5ZwjSKkLyiZNeRocAX5X5s02aBQyQIU=
+X-Google-Smtp-Source: AGHT+IGTACICxSgR+6mG2LfvXShvTQ0j0Qp86iu03xKuRgb+s+0rDyvkiHX8zKcSQrALrmMRX6WSPHhug0+Ll+eotcw=
+X-Received: by 2002:a05:6512:31c6:b0:52c:e402:4dc1 with SMTP id
+ 2adb3069b0e04-530bb6c7f9cmr12753838e87.55.1723016640070; Wed, 07 Aug 2024
+ 00:44:00 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240722175004.23666-1-jason.chien@sifive.com>
-In-Reply-To: <20240722175004.23666-1-jason.chien@sifive.com>
-From: Jason Chien <jason.chien@sifive.com>
-Date: Wed, 7 Aug 2024 15:29:24 +0800
-Message-ID: <CADr__8quCHZMsN3CK_mY8x8xBkmNK=8POwEK0eV0swKdwx8b1A@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Add a property to set vl to ceil(AVL/2)
-To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Content-Type: multipart/alternative; boundary="0000000000004be33a061f12df57"
-Received-SPF: pass client-ip=2a00:1450:4864:20::22b;
- envelope-from=jason.chien@sifive.com; helo=mail-lj1-x22b.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+References: <20240723-counter_delegation-v2-0-c4170a5348ca@rivosinc.com>
+ <20240723-counter_delegation-v2-13-c4170a5348ca@rivosinc.com>
+ <20240806-9fdad33468ec103d83a85e77@orel>
+ <3c09bbbe-857b-4566-963a-790497232bbf@ventanamicro.com>
+ <CAKmqyKNgJKBFw7OnwbgbqxA65PR4GSjdUEKdKVw-nYv+e0P58w@mail.gmail.com>
+In-Reply-To: <CAKmqyKNgJKBFw7OnwbgbqxA65PR4GSjdUEKdKVw-nYv+e0P58w@mail.gmail.com>
+From: Atish Kumar Patra <atishp@rivosinc.com>
+Date: Wed, 7 Aug 2024 00:43:49 -0700
+Message-ID: <CAHBxVyFFa7mQaS4jPkT=aK4gTF3AshpQZNeRhBiZOHX7bhQQsg@mail.gmail.com>
+Subject: Re: [PATCH v2 13/13] target/riscv: Enable PMU related extensions to
+ preferred rule
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Andrew Jones <ajones@ventanamicro.com>, 
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, bin.meng@windriver.com, 
+ alistair.francis@wdc.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::12b;
+ envelope-from=atishp@rivosinc.com; helo=mail-lf1-x12b.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -87,147 +100,158 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---0000000000004be33a061f12df57
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-ping
-
-Jason Chien <jason.chien@sifive.com> =E6=96=BC 2024=E5=B9=B47=E6=9C=8823=E6=
-=97=A5 =E9=80=B1=E4=BA=8C =E4=B8=8A=E5=8D=881:50=E5=AF=AB=E9=81=93=EF=BC=9A
-
-> RVV spec allows implementations to set vl with values within
-> [ceil(AVL/2),VLMAX] when VLMAX < AVL < 2*VLMAX. This commit adds a
-> property "rvv_vl_half_avl" to enable setting vl =3D ceil(AVL/2). This
-> behavior helps identify compiler issues and bugs.
+On Tue, Aug 6, 2024 at 7:01=E2=80=AFPM Alistair Francis <alistair23@gmail.c=
+om> wrote:
 >
-> Signed-off-by: Jason Chien <jason.chien@sifive.com>
-> ---
->  target/riscv/cpu.c           | 1 +
->  target/riscv/cpu_cfg.h       | 1 +
->  target/riscv/vector_helper.c | 2 ++
->  3 files changed, 4 insertions(+)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index a90808a3ba..8f21171ffa 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -2687,6 +2687,7 @@ static Property riscv_cpu_properties[] =3D {
->
->      DEFINE_PROP_BOOL("rvv_ta_all_1s", RISCVCPU, cfg.rvv_ta_all_1s, false=
-),
->      DEFINE_PROP_BOOL("rvv_ma_all_1s", RISCVCPU, cfg.rvv_ma_all_1s, false=
-),
-> +    DEFINE_PROP_BOOL("rvv_vl_half_avl", RISCVCPU, cfg.rvv_vl_half_avl,
-> false),
->
->      /*
->       * write_misa() is marked as experimental for now so mark
-> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-> index 8b272fb826..96fe26d4ea 100644
-> --- a/target/riscv/cpu_cfg.h
-> +++ b/target/riscv/cpu_cfg.h
-> @@ -127,6 +127,7 @@ struct RISCVCPUConfig {
->      bool ext_smepmp;
->      bool rvv_ta_all_1s;
->      bool rvv_ma_all_1s;
-> +    bool rvv_vl_half_avl;
->
->      uint32_t mvendorid;
->      uint64_t marchid;
-> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index 1b4d5a8e37..825312552b 100644
-> --- a/target/riscv/vector_helper.c
-> +++ b/target/riscv/vector_helper.c
-> @@ -75,6 +75,8 @@ target_ulong HELPER(vsetvl)(CPURISCVState *env,
-> target_ulong s1,
->      vlmax =3D vext_get_vlmax(cpu->cfg.vlenb, vsew, lmul);
->      if (s1 <=3D vlmax) {
->          vl =3D s1;
-> +    } else if (s1 < 2 * vlmax && cpu->cfg.rvv_vl_half_avl) {
-> +        vl =3D (s1 + 1) >> 1;
->      } else {
->          vl =3D vlmax;
->      }
-> --
-> 2.43.2
->
+> On Wed, Aug 7, 2024 at 2:06=E2=80=AFAM Daniel Henrique Barboza
+> <dbarboza@ventanamicro.com> wrote:
+> >
+> >
+> >
+> > On 8/6/24 5:46 AM, Andrew Jones wrote:
+> > > On Tue, Jul 23, 2024 at 04:30:10PM GMT, Atish Patra wrote:
+> > >> Counter delegation/configuration extension requires the following
+> > >> extensions to be enabled.
+> > >>
+> > >> 1. Smcdeleg - To enable counter delegation from M to S
+> > >> 2. S[m|s]csrind - To enable indirect access CSRs
+> > >> 3. Smstateen - Indirect CSR extensions depend on it.
+> > >> 4. Sscofpmf - To enable counter overflow feature
+> > >> 5. S[m|s]aia - To enable counter overflow feature in virtualization
+> > >> 6. Smcntrpmf - To enable privilege mode filtering for cycle/instret
+> > >>
+> > >> While first 3 are mandatory to enable the counter delegation,
+> > >> next 3 set of extension are preferred to enable all the PMU related
+> > >> features.
+> > >
+> > > Just my 2 cents, but I think for the first three we can apply the con=
+cept
+> > > of extension bundles, which we need for other extensions as well. In =
+those
+> > > cases we just auto enable all the dependencies. For the three preferr=
+ed
+> > > extensions I think we can just leave them off for 'base', but we shou=
+ld
+> > > enable them by default for 'max' along with Ssccfg.
 >
 
---0000000000004be33a061f12df57
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Max cpu will have everything enabled by default. The problem with max
+cpu is that you
+may not want to run all the available ISA extensions while testing perf.
 
-<div dir=3D"ltr">ping</div><br><div class=3D"gmail_quote"><div dir=3D"ltr" =
-class=3D"gmail_attr">Jason Chien &lt;<a href=3D"mailto:jason.chien@sifive.c=
-om">jason.chien@sifive.com</a>&gt; =E6=96=BC 2024=E5=B9=B47=E6=9C=8823=E6=
-=97=A5 =E9=80=B1=E4=BA=8C =E4=B8=8A=E5=8D=881:50=E5=AF=AB=E9=81=93=EF=BC=9A=
-<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8=
-ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">RVV spec allows=
- implementations to set vl with values within<br>
-[ceil(AVL/2),VLMAX] when VLMAX &lt; AVL &lt; 2*VLMAX. This commit adds a<br=
+> Agreed
 >
-property &quot;rvv_vl_half_avl&quot; to enable setting vl =3D ceil(AVL/2). =
-This<br>
-behavior helps identify compiler issues and bugs.<br>
-<br>
-Signed-off-by: Jason Chien &lt;<a href=3D"mailto:jason.chien@sifive.com" ta=
-rget=3D"_blank">jason.chien@sifive.com</a>&gt;<br>
----<br>
-=C2=A0target/riscv/cpu.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 1 +<br>
-=C2=A0target/riscv/cpu_cfg.h=C2=A0 =C2=A0 =C2=A0 =C2=A0| 1 +<br>
-=C2=A0target/riscv/vector_helper.c | 2 ++<br>
-=C2=A03 files changed, 4 insertions(+)<br>
-<br>
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c<br>
-index a90808a3ba..8f21171ffa 100644<br>
---- a/target/riscv/cpu.c<br>
-+++ b/target/riscv/cpu.c<br>
-@@ -2687,6 +2687,7 @@ static Property riscv_cpu_properties[] =3D {<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0DEFINE_PROP_BOOL(&quot;rvv_ta_all_1s&quot;, RISCVCPU, c=
-fg.rvv_ta_all_1s, false),<br>
-=C2=A0 =C2=A0 =C2=A0DEFINE_PROP_BOOL(&quot;rvv_ma_all_1s&quot;, RISCVCPU, c=
-fg.rvv_ma_all_1s, false),<br>
-+=C2=A0 =C2=A0 DEFINE_PROP_BOOL(&quot;rvv_vl_half_avl&quot;, RISCVCPU, cfg.=
-rvv_vl_half_avl, false),<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0/*<br>
-=C2=A0 =C2=A0 =C2=A0 * write_misa() is marked as experimental for now so ma=
-rk<br>
-diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h<br>
-index 8b272fb826..96fe26d4ea 100644<br>
---- a/target/riscv/cpu_cfg.h<br>
-+++ b/target/riscv/cpu_cfg.h<br>
-@@ -127,6 +127,7 @@ struct RISCVCPUConfig {<br>
-=C2=A0 =C2=A0 =C2=A0bool ext_smepmp;<br>
-=C2=A0 =C2=A0 =C2=A0bool rvv_ta_all_1s;<br>
-=C2=A0 =C2=A0 =C2=A0bool rvv_ma_all_1s;<br>
-+=C2=A0 =C2=A0 bool rvv_vl_half_avl;<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0uint32_t mvendorid;<br>
-=C2=A0 =C2=A0 =C2=A0uint64_t marchid;<br>
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c<br=
->
-index 1b4d5a8e37..825312552b 100644<br>
---- a/target/riscv/vector_helper.c<br>
-+++ b/target/riscv/vector_helper.c<br>
-@@ -75,6 +75,8 @@ target_ulong HELPER(vsetvl)(CPURISCVState *env, target_ul=
-ong s1,<br>
-=C2=A0 =C2=A0 =C2=A0vlmax =3D vext_get_vlmax(cpu-&gt;cfg.vlenb, vsew, lmul)=
-;<br>
-=C2=A0 =C2=A0 =C2=A0if (s1 &lt;=3D vlmax) {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0vl =3D s1;<br>
-+=C2=A0 =C2=A0 } else if (s1 &lt; 2 * vlmax &amp;&amp; cpu-&gt;cfg.rvv_vl_h=
-alf_avl) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 vl =3D (s1 + 1) &gt;&gt; 1;<br>
-=C2=A0 =C2=A0 =C2=A0} else {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0vl =3D vlmax;<br>
-=C2=A0 =C2=A0 =C2=A0}<br>
--- <br>
-2.43.2<br>
-<br>
-</blockquote></div>
+> >
+> > I like this idea. I would throw in all these 6 extensions in a 'pmu_adv=
+anced_ops'
+> > (or any other better fitting name for the bundle) flag and then 'pmu_ad=
+vanced_ops=3Dtrue'
+> > would enable all of those. 'pmu_advanced_ops=3Dtrue,smcntrpmf=3Dfalse' =
+enables all but
+> > 'smcntrpmf' and so on.
+> >
 
---0000000000004be33a061f12df57--
+I thought distinguishing preferred vs implied would be useful because
+it would allow the user
+to clearly understand which is mandated by ISA vs which would be good to ha=
+ve.
+
+The good to have extensions can be disabled similar to above but not
+the mandatory ones.
+
+> > As long as we document what the flag is enabling I don't see any proble=
+ms with it.
+> > This is how profiles are implemented after all.
+>
+> I only worry that we end up with a huge collection of flags that users
+> need to decipher.
+>
+
+My initial idea was a separate flag as well. But I was not sure if
+that was good for the
+above reason. This additional custom pmu related option would be lost
+in that huge collection.
+
+> I guess with some good documentation this wouldn't be too confusing thoug=
+h.
+>
+
+Sure. It won't be confusing but most users may not even know about it
+without digging.
+That's why I chose to use a standard extension which covers the basic
+PMU access directly in S-mode.
+
+The future extensions such as CTR or Sampling events would also
+benefit by just adding the Ssccfg in the preferred rule
+which in turn will enable other preferred/mandatory extensions.
+
+> Alistair
+>
+> >
+> > With this bundle we can also use implied rule only if an extension real=
+ly needs
+> > (i.e. it breaks without) a dependency being enabled, instead of overloa=
+ding it
+> > with extensions that 'would be nice to have together' like it seems to =
+be the
+> > case for the last 3 extensions in that list.
+> >
+> > I believe users would benefit more from a single flag to enable everyth=
+ing and
+> > be done with it.
+> >
+> >
+> > Thanks,
+> >
+> > Daniel
+> >
+> >
+> >
+> > >
+> > > Thanks,
+> > > drew
+> > >
+> > >> That's why, enable all of these if Ssccfg extension is
+> > >> enabled from the commandline.
+> > >>
+> > >> Signed-off-by: Atish Patra <atishp@rivosinc.com>
+> > >> ---
+> > >>   target/riscv/cpu.c | 14 +++++++++++++-
+> > >>   1 file changed, 13 insertions(+), 1 deletion(-)
+> > >>
+> > >> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> > >> index 22ba43c7ff2a..abebfcc46dea 100644
+> > >> --- a/target/riscv/cpu.c
+> > >> +++ b/target/riscv/cpu.c
+> > >> @@ -2665,8 +2665,20 @@ RISCVCPUImpliedExtsRule *riscv_multi_ext_impl=
+ied_rules[] =3D {
+> > >>       NULL
+> > >>   };
+> > >>
+> > >> +static RISCVCPUPreferredExtsRule SSCCFG_PREFERRED =3D {
+> > >> +    .ext =3D CPU_CFG_OFFSET(ext_ssccfg),
+> > >> +    .preferred_multi_exts =3D {
+> > >> +        CPU_CFG_OFFSET(ext_smcsrind), CPU_CFG_OFFSET(ext_sscsrind),
+> > >> +        CPU_CFG_OFFSET(ext_ssaia), CPU_CFG_OFFSET(ext_smaia),
+> > >> +        CPU_CFG_OFFSET(ext_smstateen), CPU_CFG_OFFSET(ext_sscofpmf)=
+,
+> > >> +        CPU_CFG_OFFSET(ext_smcntrpmf), CPU_CFG_OFFSET(ext_smcdeleg)=
+,
+> > >> +
+> > >> +        RISCV_PREFRRED_EXTS_RULE_END
+> > >> +    },
+> > >> +};
+> > >> +
+> > >>   RISCVCPUPreferredExtsRule *riscv_multi_ext_preferred_rules[] =3D {
+> > >> -    NULL
+> > >> +    &SSCCFG_PREFERRED, NULL
+> > >>   };
+> > >>
+> > >>   static Property riscv_cpu_properties[] =3D {
+> > >>
+> > >> --
+> > >> 2.34.1
+> > >>
+> > >>
+> >
 
