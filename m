@@ -4,72 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF0F5C52D6F
-	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Aug 2024 02:13:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1A5FC52D6F
+	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Aug 2024 02:14:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sbWAl-0007tw-Vo; Tue, 06 Aug 2024 22:13:08 -0400
+	id 1sbWBR-0001dF-QC; Tue, 06 Aug 2024 22:13:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sbWAi-0007no-Ef
- for qemu-riscv@nongnu.org; Tue, 06 Aug 2024 22:13:05 -0400
-Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c])
+ id 1sbWBQ-0001Vn-20
+ for qemu-riscv@nongnu.org; Tue, 06 Aug 2024 22:13:48 -0400
+Received: from mail-oi1-x22b.google.com ([2607:f8b0:4864:20::22b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sbWAg-0000OL-6F
- for qemu-riscv@nongnu.org; Tue, 06 Aug 2024 22:13:04 -0400
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-2cb55ff1007so945560a91.0
- for <qemu-riscv@nongnu.org>; Tue, 06 Aug 2024 19:13:01 -0700 (PDT)
+ id 1sbWBO-0000RS-I4
+ for qemu-riscv@nongnu.org; Tue, 06 Aug 2024 22:13:47 -0400
+Received: by mail-oi1-x22b.google.com with SMTP id
+ 5614622812f47-3db504ab5f3so849339b6e.0
+ for <qemu-riscv@nongnu.org>; Tue, 06 Aug 2024 19:13:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1722996780; x=1723601580; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:from:subject:user-agent:mime-version:date:message-id:from:to
- :cc:subject:date:message-id:reply-to;
- bh=e5HWZHMQfqC3/1v0O59SNkAG5CBfF1tu2kTGJ72IUbI=;
- b=cxyy9Kge/YEYViir3s9Wykdt1TSodncI86Z/m5wgbI7OIKIzU7k/ed2qwJ+lmAJtM/
- qqXZWPUlw1BTyT+6SenW9kI68v42+8xKFANQMoSq9VIDxoDBYsFeyAHwr+dcO8nUVksR
- ZUGzfFqph+OpO7QnQ89x141L8L894V3GHjjUcdsYQqZGEVCATl9kWFzjzdYEvOXhBCyA
- HO+jS6YGzcmMdqB4XgpUgbtNBzKllXYpYNYfe8HfWiCIfTbGPAf3SffsnRDtyer5p2sz
- HSGg9O31X/8tvSszKl+WwBMs+hXAYzHkFSDt8uNd1anWBtvk0ICxs1COWecmzBqhVodZ
- ER1A==
+ d=linaro.org; s=google; t=1722996825; x=1723601625; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=lyHZ8QyMRXYtATudGdNQyXw9EsOe/vp7iSFzfhAImlM=;
+ b=Z15GqNJ/U55CCMLUaML+bJQEHHJS2xabUFPCH3FDXudkXXuqVduUGVBJQCvE0q+N7y
+ eKXFlCgI1Z2mG/1v1iQQJCzPDac7pkUJVZlgww+OJVs80XYKnCGKxddzqaQfp+bUxL3m
+ ggxeC/yQt/q2r0ZtLipk1SoYKVAB3GC32DR73ZTDzccxFYUmuPngOa2A2qt7HauvpiQe
+ dkBYTCI45RUZbT16Pz5x6UTdeHDPq8tH1GyD3nNS8Mc040jKupckxrLRJ9yuxonbokgg
+ JWMb8QTdzbbDCvnIi7hXrFaaBwHHm+3SibB7OR5tvBEDa1vAMpjuNhQd+jbmGg8sa2xx
+ iIJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722996780; x=1723601580;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:from:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1722996825; x=1723601625;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=e5HWZHMQfqC3/1v0O59SNkAG5CBfF1tu2kTGJ72IUbI=;
- b=IeXvRik9GMksikhDX/nf+Y8BZnZZscRaVj8XSGqkKfmBW1CBAARwkZLNoTDmR9Tho+
- i4BrMUZ+QwJXK+WUcFxL53nPdxul4SOgcLb/yEdDWCUPhHoJ1Zwgt3UNP7oB6+SW/jGJ
- BY1dxLJ3zw7D+5PW40Whf+YSZaXlbjzh7gbqHWi9iZB/nRRHTqcdsXUotgVzYHKbZocH
- a/+HC3Y14Ff+o0I9XhuSdhHxwT0F+h8ORZgXfM0vDDzrpCn/ze9hnYUCTwvZBV3ZZIUY
- G62JYKgNObNUBQXjiU9IFHiEBbRwj9d3wsoZDBHrJ5Lb+EnfBPcENELtC4VeNDm5PKJU
- Z7Mw==
+ bh=lyHZ8QyMRXYtATudGdNQyXw9EsOe/vp7iSFzfhAImlM=;
+ b=v+H7+k54jXLl4EEijapHTbDW2Nqnv4VQdJidGrER7PeGiW6iiJ5WJDds2579+QpGw8
+ g9kAADfKMLehZxYXUi2hd1luWZrNSnq4LzuFpJV5WXQ8H5zbwy0ikaUthPct3jTRgumC
+ Om4LENdtUnVJSORFe/K8Ll/nn0EB9MLbm86GbHaIQGDItvlyq9rkTapEar52dgq64LhX
+ DWmXzVta7Ykq9/AmghmJOEfV1hKMrQeuQsvuAg0HR6euRlqhUO7+BBMygqp+henCN1QO
+ P2m3cI8CdMkRGwgCMUe9y1rEic2YRr0zwG26hOijMYX11oDnvvQm7a2winp18jX06I7R
+ noDw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVAdNI4rNwo9/hu0OVzYVVQZCWKjPUlT74/bGCFkjDEmwW6sOCL6E0MdwnpDJZlWsmgUnuc8T7grj9BOEktK02S6bLzx6A=
-X-Gm-Message-State: AOJu0Ywibk8IuLf9X2ezgNPfmwbWWDflCM/b8fSiOgvVJ5Z6rxKsCosX
- Bu0NdJgnkB+GQFRZU46Me3LNFz2J5TdEahHP0rXzypYScvlTGi+rOQgNWEKf2REt1tXx/5Ys76m
- M50o=
-X-Google-Smtp-Source: AGHT+IE05mCHWq2+ScTr1jYgkqkRmYeoG+ufajxtkwnTD80lJ4VtFldj3i+L/ONiMlvkbJmi345JDw==
-X-Received: by 2002:a17:90b:3ec1:b0:2c9:73ff:6a0c with SMTP id
- 98e67ed59e1d1-2cff94479a6mr16292381a91.20.1722996780246; 
- Tue, 06 Aug 2024 19:13:00 -0700 (PDT)
+ AJvYcCUyE+O5FBoFEhsDwfUSc3zsEdxqHm//A17cq/FSnLZhfwQYQGTviE1LEyP/C62dOPJyeyb2SVOY+Spn/39UZOsIqhxUZq4=
+X-Gm-Message-State: AOJu0Yxjj7i/ky1wUOeBeEMjeM1sKO/RT/iNLK9ai8mwKOH4mH/H6ZaD
+ Rkpe84hV1bKTR2kW69JerFttQzB4nUHSj2DcRPOVdpJ0LDlaGALwYInhsrtUyfI=
+X-Google-Smtp-Source: AGHT+IFYQ3eSsf5AV2g/LGzqXOsvXwXIDPNuIzJHWtl6XzL9lHzNZzYv0FrLUZPG5YPoZY/vDPMarg==
+X-Received: by 2002:a05:6830:3808:b0:709:33ee:f578 with SMTP id
+ 46e09a7af769-709b32177d7mr20502184a34.14.1722996825295; 
+ Tue, 06 Aug 2024 19:13:45 -0700 (PDT)
 Received: from ?IPV6:2403:580a:f89b:0:e01b:92e5:d779:1bc0?
  (2403-580a-f89b-0-e01b-92e5-d779-1bc0.ip6.aussiebb.net.
  [2403:580a:f89b:0:e01b:92e5:d779:1bc0])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2d1b36a72e0sm208418a91.9.2024.08.06.19.12.55
+ 41be03b00d2f7-7b76346a9absm6380299a12.29.2024.08.06.19.13.39
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 06 Aug 2024 19:12:59 -0700 (PDT)
-Message-ID: <c530ae34-497b-4cd1-b3a6-d8b575c33fb2@linaro.org>
-Date: Wed, 7 Aug 2024 12:12:52 +1000
+ Tue, 06 Aug 2024 19:13:44 -0700 (PDT)
+Message-ID: <d9764ed2-b898-445c-83c2-7b21fe3f4663@linaro.org>
+Date: Wed, 7 Aug 2024 12:13:36 +1000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 10/20] target/riscv: introduce ssp and enabling
- controls for zicfiss
-From: Richard Henderson <richard.henderson@linaro.org>
+Subject: Re: [PATCH v3 11/20] target/riscv: tb flag for shadow stack
+ instructions
 To: Deepak Gupta <debug@rivosinc.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: pbonzini@redhat.com, palmer@dabbelt.com, Alistair.Francis@wdc.com,
@@ -77,21 +75,21 @@ Cc: pbonzini@redhat.com, palmer@dabbelt.com, Alistair.Francis@wdc.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  Jim Shu <jim.shu@sifive.com>, Andy Chiu <andy.chiu@sifive.com>
 References: <20240807000652.1417776-1-debug@rivosinc.com>
- <20240807000652.1417776-11-debug@rivosinc.com>
- <34411ccd-5fc8-46d8-bf5e-871949c755fb@linaro.org>
+ <20240807000652.1417776-12-debug@rivosinc.com>
 Content-Language: en-US
-In-Reply-To: <34411ccd-5fc8-46d8-bf5e-871949c755fb@linaro.org>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20240807000652.1417776-12-debug@rivosinc.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102c.google.com
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::22b;
+ envelope-from=richard.henderson@linaro.org; helo=mail-oi1-x22b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,30 +105,28 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 8/7/24 12:11, Richard Henderson wrote:
-> On 8/7/24 10:06, Deepak Gupta wrote:
->> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
->> index a5a969a377..d72d6289fb 100644
->> --- a/target/riscv/csr.c
->> +++ b/target/riscv/csr.c
->> @@ -185,6 +185,47 @@ static RISCVException zcmt(CPURISCVState *env, int csrno)
->>       return RISCV_EXCP_NONE;
->>   }
->> +static RISCVException cfi_ss(CPURISCVState *env, int csrno)
->> +{
->> +    /* no cfi extension, access to csr is illegal */
->> +    if (!env_archcpu(env)->cfg.ext_zicfiss) {
->> +        return RISCV_EXCP_ILLEGAL_INST;
->> +    }
->> +    /*
->> +     * CONFIG_USER_MODE always allow access for now. Better for user mode only
->> +     * functionality
->> +     */
+On 8/7/24 10:06, Deepak Gupta wrote:
+> Shadow stack instructions can be decoded as zimop / zcmop or shadow stack
+> instructions depending on whether shadow stack are enabled at current
+> privilege. This requires a TB flag so that correct TB generation and correct
+> TB lookup happens. `DisasContext` gets a field indicating whether bcfi is
+> enabled or not.
 > 
-> In the next patch you add ubcfien, which would apply here.
+> This patch also implements helper bcfi function which determines if bcfi
+> is enabled at current privilege or not. qemu-user also gets field
+> `ubcfien` indicating whether qemu user has shadow stack enabled or not.
+> 
+> Signed-off-by: Deepak Gupta<debug@rivosinc.com>
+> Co-developed-by: Jim Shu<jim.shu@sifive.com>
+> Co-developed-by: Andy Chiu<andy.chiu@sifive.com>
+> ---
+>   target/riscv/cpu.c        |  2 ++
+>   target/riscv/cpu.h        |  4 ++++
+>   target/riscv/cpu_helper.c | 30 ++++++++++++++++++++++++++++++
+>   target/riscv/translate.c  |  4 ++++
+>   4 files changed, 40 insertions(+)
 
-... anyway, surely cpu_get_bcfien() is the right check anyway?
-
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 r~
 
