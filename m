@@ -4,88 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F563C3DA4A
-	for <qemu-riscv@archiver.kernel.org>; Thu,  8 Aug 2024 08:12:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAD22C3DA4A
+	for <qemu-riscv@archiver.kernel.org>; Thu,  8 Aug 2024 08:20:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sbyGG-0005Zw-UU; Thu, 08 Aug 2024 04:12:41 -0400
+	id 1sbyNL-0008Vw-CH; Thu, 08 Aug 2024 04:19:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1sbyGF-0005Ly-6K
- for qemu-riscv@nongnu.org; Thu, 08 Aug 2024 04:12:39 -0400
-Received: from mail-lj1-x230.google.com ([2a00:1450:4864:20::230])
+ (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
+ id 1sbyNJ-0008Uh-3y
+ for qemu-riscv@nongnu.org; Thu, 08 Aug 2024 04:19:57 -0400
+Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1sbyGC-00021Z-5S
- for qemu-riscv@nongnu.org; Thu, 08 Aug 2024 04:12:38 -0400
-Received: by mail-lj1-x230.google.com with SMTP id
- 38308e7fff4ca-2eeb1ba0468so8681841fa.0
- for <qemu-riscv@nongnu.org>; Thu, 08 Aug 2024 01:12:35 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
+ id 1sbyNH-00039y-4W
+ for qemu-riscv@nongnu.org; Thu, 08 Aug 2024 04:19:56 -0400
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-1fd6ed7688cso7537895ad.3
+ for <qemu-riscv@nongnu.org>; Thu, 08 Aug 2024 01:19:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1723104753; x=1723709553;
- darn=nongnu.org; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=sifive.com; s=google; t=1723105193; x=1723709993; darn=nongnu.org;
+ h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Bt4nxGBb55vV904sNvNT6wthx+qvXCFcjwq9x/M1oB0=;
- b=Ld9t8PlZfmXrs3/2T1nsjj7MGQXIUR5nJgx4baBokZ22dy2n3UA2EIV3butTX+L7iV
- hn8Z4b8tBbPuY0PrC0nfqENFgvL2xO44JXti2gZDWXJWh9VflDn0Mj9Siy/LRnsZZOrG
- OWc2A1dinCVczDj2EumG1N7PAh4qTBm5CPPkpteMb5s97FapUTBFqn3ucgVn0VMZfuf7
- qP6tBzim5+/GejgTZTt2WKWHv9suk2woT8Eg8br32RaA/UFBiisYZptkgfYdHhUOLg/o
- AAhTMvmejmCtjjQgm15X05czOwJzErGBMhlkzbpJ/TvrKBg9Rmpwkt/QnawojmNGi4Hn
- uirA==
+ bh=s4IVICnKBDGToZiRNkgCrHpEgHxCfbvAO2rD8MJGZ60=;
+ b=b6TiViIy2KNT1T6WR+rJhI3+JGFT/cDxmBlYgBeERt4oe76oTl51uKDt47eiAoA5vn
+ cskcvEsUyIqE6Qh0hKfBZfWNb5qxSgUOcWZXFyVlww1ApRDSDaE70J1U286al95nqvSz
+ Yywf0iYbLuyYb9VgRMKswjaqACgsf+Ga5wyP/fKu5ngnrRmdggKVrcJmUSIk2pYOlt93
+ Curt6Q6dhkkJCnR8zmEL/UhKi03o7JoBwq2C0BBfAjLxBlh1AuWw8Dm8pdHuTnOO/t8Y
+ 97VWcUlWjo5P4ei2mzcMQiFhfMBiD/U9Wc5gbTvZpM7CR9auXBqZ2ZCYVGfzbAmaNNRW
+ lX+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723104753; x=1723709553;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1723105193; x=1723709993;
+ h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Bt4nxGBb55vV904sNvNT6wthx+qvXCFcjwq9x/M1oB0=;
- b=Z1CZlgnulLOrP0UWIb1+axHa/1Y7NXRA1dHG6qCtDZ8j/47YASHGa+C3ztYL/tc3Y6
- WzXSzjiF5p0hFK17qXx21kiA7XBZ3vnDFteM71o3TTh15VLrbJW0Mr5eITvvp/hjyk2T
- vQmgKTC3Taq3fgpeKxitKhljpPano8rVuVOANlLhNFAmIMISLFu+pReJcEY6qnfu50xC
- lXBm5wjz2D284SsPxHwujMiHrtVPEh0h1ipqvrPnfh2pdOu4P8UN9Ma8k0N0QlbAUq0I
- aVtZrvw7adtHV9JWWl2axeTF32LKzaY8D3gbJB3lJ4sHeO0xZ3Uv4swb18p/kEPYF0NN
- PKbA==
+ bh=s4IVICnKBDGToZiRNkgCrHpEgHxCfbvAO2rD8MJGZ60=;
+ b=fK4HxlRVEZWznm1ojgsnqwwbm/tn9T+9uJZUZgPr6KZdQ9rZ3qeIhQhpgL73+M+8gR
+ bQV2W/TwJBtydSONWyYONkK26uRiB80eWo/naXYSWdVm/6uKXz2IN5JvXE2McnSCvvaM
+ zKB/fYt5jS9QBLkbx9ff5tQZ/ff7TyaAYtvjt+2ULSI1xYrzyzcs5CqfTCRg24PrA4M2
+ 173S0vcITYXf/BY16IbOAD4nNEW7Bpm8BCFtkw2VsfM388c8xQqv9aYL1busFnmAwC2z
+ 71t1V+MqQhB1XLxlPBa7vjUTsCA1tl7edyPdzFQh9u63XRIt04IYoIh6SLdDlq7Mh2Ga
+ g3xg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW0Epo7TpTFfoC5iJ96i8RPy+LdHqN252ooCHZC1EZrLkIZ+lT+2tf2WeKGRnHJ7gbwDHJ7pAtXvnHMGlfKOSwcgCZC2gs=
-X-Gm-Message-State: AOJu0YzGyZGS682zP67sF9+1+lt67rYHSCCdt0Gugf+4Q2KkiOF4LmHD
- VpIfmSQa3LL2gswFj0ExRAvZfk+k9rGM+vwO/lUfCoHeNyQG93xlv8qQMnEcbTO4G8FQgj+ydsC
- KWEyf8jn7YJ25ZsSBOMZJpGSmROB0BmDnuh6U6Q==
-X-Google-Smtp-Source: AGHT+IEuFFUB2eZl7L6E8WGYsRYU8wgfbvZzj9tuNS2eCTyPTkdHErw8OvX+9gWRiosFpoMKLb4mHwHPrPve2iM63Zk=
-X-Received: by 2002:a05:6512:1289:b0:52e:fa5f:b6b1 with SMTP id
- 2adb3069b0e04-530e58a33f9mr564746e87.60.1723104753241; Thu, 08 Aug 2024
- 01:12:33 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240723-counter_delegation-v2-0-c4170a5348ca@rivosinc.com>
- <20240723-counter_delegation-v2-13-c4170a5348ca@rivosinc.com>
- <20240806-9fdad33468ec103d83a85e77@orel>
- <3c09bbbe-857b-4566-963a-790497232bbf@ventanamicro.com>
- <CAKmqyKNgJKBFw7OnwbgbqxA65PR4GSjdUEKdKVw-nYv+e0P58w@mail.gmail.com>
- <CAHBxVyFFa7mQaS4jPkT=aK4gTF3AshpQZNeRhBiZOHX7bhQQsg@mail.gmail.com>
- <CAKmqyKOX883p+sgFs6s649pkH0BA9aKcrTr7=XOT=Xy8mNLzng@mail.gmail.com>
-In-Reply-To: <CAKmqyKOX883p+sgFs6s649pkH0BA9aKcrTr7=XOT=Xy8mNLzng@mail.gmail.com>
-From: Atish Kumar Patra <atishp@rivosinc.com>
-Date: Thu, 8 Aug 2024 01:12:22 -0700
-Message-ID: <CAHBxVyHvypXN0PtxtWwZPoB3i3JRRSqn218nnURy+sD8gmqyjQ@mail.gmail.com>
-Subject: Re: [PATCH v2 13/13] target/riscv: Enable PMU related extensions to
- preferred rule
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Andrew Jones <ajones@ventanamicro.com>, 
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, bin.meng@windriver.com, 
- alistair.francis@wdc.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::230;
- envelope-from=atishp@rivosinc.com; helo=mail-lj1-x230.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ AJvYcCVDxCQFyqr0tRMH8SlkAtx0tvJtRHW6pQ3c5/M4j+chdtaEJ27Cot62gegbVCCW83b6hLo8PCm2oVxYKIH5imb9Dwvi5aY=
+X-Gm-Message-State: AOJu0YzoCUcE2syQsmJQmCXQVxBTZOYj1l7xQdq8dJtvd8wOvccPLZaa
+ McGpRmKPiBb/CISsakP32+JdDVN6iH2Sgn7hgy+h3vDttiJTxMcpOgzxdWDsaTc=
+X-Google-Smtp-Source: AGHT+IGjTqID8R0BzWgp5kb/LmJIs986yOGx1DkSGBR+LogGpuwWuqk8MmnulaCOhc4ss0s//nul8Q==
+X-Received: by 2002:a17:903:22c5:b0:1fb:67e0:2e0a with SMTP id
+ d9443c01a7336-200952bf772mr13092795ad.48.1723105193066; 
+ Thu, 08 Aug 2024 01:19:53 -0700 (PDT)
+Received: from hsinchu26.internal.sifive.com
+ (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2007728d837sm47281655ad.84.2024.08.08.01.19.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 08 Aug 2024 01:19:52 -0700 (PDT)
+From: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: greentime.hu@sifive.com, vincent.chen@sifive.com, frank.chang@sifive.com,
+ jim.shu@sifive.com, Yong-Xuan Wang <yongxuan.wang@sifive.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Subject: [PATCH 1/1] hw/intc/riscv_aplic: Check and update pending when write
+ sourcecfg
+Date: Thu,  8 Aug 2024 16:19:47 +0800
+Message-Id: <20240808081948.25837-1-yongxuan.wang@sifive.com>
+X-Mailer: git-send-email 2.17.1
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
+ envelope-from=yongxuan.wang@sifive.com; helo=mail-pl1-x62b.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -102,164 +98,106 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Aug 7, 2024 at 5:27=E2=80=AFPM Alistair Francis <alistair23@gmail.c=
-om> wrote:
->
-> On Wed, Aug 7, 2024 at 5:44=E2=80=AFPM Atish Kumar Patra <atishp@rivosinc=
-.com> wrote:
-> >
-> > On Tue, Aug 6, 2024 at 7:01=E2=80=AFPM Alistair Francis <alistair23@gma=
-il.com> wrote:
-> > >
-> > > On Wed, Aug 7, 2024 at 2:06=E2=80=AFAM Daniel Henrique Barboza
-> > > <dbarboza@ventanamicro.com> wrote:
-> > > >
-> > > >
-> > > >
-> > > > On 8/6/24 5:46 AM, Andrew Jones wrote:
-> > > > > On Tue, Jul 23, 2024 at 04:30:10PM GMT, Atish Patra wrote:
-> > > > >> Counter delegation/configuration extension requires the followin=
-g
-> > > > >> extensions to be enabled.
-> > > > >>
-> > > > >> 1. Smcdeleg - To enable counter delegation from M to S
-> > > > >> 2. S[m|s]csrind - To enable indirect access CSRs
-> > > > >> 3. Smstateen - Indirect CSR extensions depend on it.
-> > > > >> 4. Sscofpmf - To enable counter overflow feature
-> > > > >> 5. S[m|s]aia - To enable counter overflow feature in virtualizat=
-ion
-> > > > >> 6. Smcntrpmf - To enable privilege mode filtering for cycle/inst=
-ret
-> > > > >>
-> > > > >> While first 3 are mandatory to enable the counter delegation,
-> > > > >> next 3 set of extension are preferred to enable all the PMU rela=
-ted
-> > > > >> features.
-> > > > >
-> > > > > Just my 2 cents, but I think for the first three we can apply the=
- concept
-> > > > > of extension bundles, which we need for other extensions as well.=
- In those
-> > > > > cases we just auto enable all the dependencies. For the three pre=
-ferred
-> > > > > extensions I think we can just leave them off for 'base', but we =
-should
-> > > > > enable them by default for 'max' along with Ssccfg.
-> > >
-> >
-> > Max cpu will have everything enabled by default. The problem with max
-> > cpu is that you
-> > may not want to run all the available ISA extensions while testing perf=
-.
-> >
-> > > Agreed
-> > >
-> > > >
-> > > > I like this idea. I would throw in all these 6 extensions in a 'pmu=
-_advanced_ops'
-> > > > (or any other better fitting name for the bundle) flag and then 'pm=
-u_advanced_ops=3Dtrue'
-> > > > would enable all of those. 'pmu_advanced_ops=3Dtrue,smcntrpmf=3Dfal=
-se' enables all but
-> > > > 'smcntrpmf' and so on.
-> > > >
-> >
-> > I thought distinguishing preferred vs implied would be useful because
-> > it would allow the user
-> > to clearly understand which is mandated by ISA vs which would be good t=
-o have.
->
-> It's not really clear though what extensions are good to have. Other
-> people might think differently about the extensions. It also then
-> means we end up with complex combinations of extensions to manage.
->
-> >
-> > The good to have extensions can be disabled similar to above but not
-> > the mandatory ones.
-> >
-> > > > As long as we document what the flag is enabling I don't see any pr=
-oblems with it.
-> > > > This is how profiles are implemented after all.
-> > >
-> > > I only worry that we end up with a huge collection of flags that user=
-s
-> > > need to decipher.
-> > >
-> >
-> > My initial idea was a separate flag as well. But I was not sure if
-> > that was good for the
-> > above reason. This additional custom pmu related option would be lost
-> > in that huge collection.
->
-> I do feel a separate flag is better than trying to guess what extra
-> extensions the user wants enabled.
->
+The section 4.5.2 of the RISC-V AIA specification says that any write
+to a sourcecfg register of an APLIC might (or might not) cause the
+corresponding interrupt-pending bit to be set to one if the rectified
+input value is high (= 1) under the new source mode.
 
-Sure. A separate pmu flag that enables all available pmu related
-extensions - Correct ?
-Do you prefer to have those enabled via a separate preferred rule or
-just reuse the implied
-rule ? I can drop the preferred rule patches for the later case.
+If an interrupt is asserted before the driver configs its interrupt
+type to APLIC, it's pending bit will not be set except a relevant
+write to a setip or setipnum register. When we write the interrupt
+type to sourcecfg register, if the APLIC device doesn't check
+rectified input value and update the pending bit, this interrupt
+might never becomes pending.
 
+For APLIC.m, we can manully set pending by setip or setipnum
+registers in driver. But for APLIC.w, the pending status totally
+depends on the rectified input value, we can't control the pending
+status via mmio registers. In this case, hw should check and update
+pending status for us when writing sourcecfg registers.
 
-> I don't love either though, isn't this what profiles is supposed to fix!
->
+Update QEMU emulation to handle "pre-existing" interrupts.
 
-Yeah. But given the optionality in profiles, I am sure if it will fix
-the ever growing
-extension dependency graph problem ;)
+Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+---
+ hw/intc/riscv_aplic.c | 49 +++++++++++++++++++++++++++----------------
+ 1 file changed, 31 insertions(+), 18 deletions(-)
 
-> >
-> > > I guess with some good documentation this wouldn't be too confusing t=
-hough.
-> > >
-> >
-> > Sure. It won't be confusing but most users may not even know about it
-> > without digging.
->
-> At that point they can use the max CPU or just manually enable the
-> extensions though.
->
+diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
+index 32edd6d07bb3..2a9ac76ce92e 100644
+--- a/hw/intc/riscv_aplic.c
++++ b/hw/intc/riscv_aplic.c
+@@ -159,31 +159,41 @@ static bool is_kvm_aia(bool msimode)
+     return kvm_irqchip_in_kernel() && msimode;
+ }
+ 
++static bool riscv_aplic_irq_rectified_val(RISCVAPLICState *aplic,
++                                          uint32_t irq)
++{
++    uint32_t sourcecfg, sm, raw_input, irq_inverted;
++
++    if (!irq || aplic->num_irqs <= irq) {
++        return false;
++    }
++
++    sourcecfg = aplic->sourcecfg[irq];
++    if (sourcecfg & APLIC_SOURCECFG_D) {
++        return false;
++    }
++
++    sm = sourcecfg & APLIC_SOURCECFG_SM_MASK;
++    if (sm == APLIC_SOURCECFG_SM_INACTIVE) {
++        return false;
++    }
++
++    raw_input = (aplic->state[irq] & APLIC_ISTATE_INPUT) ? 1 : 0;
++    irq_inverted = (sm == APLIC_SOURCECFG_SM_LEVEL_LOW ||
++                    sm == APLIC_SOURCECFG_SM_EDGE_FALL) ? 1 : 0;
++    return !!(raw_input ^ irq_inverted);
++}
++
+ static uint32_t riscv_aplic_read_input_word(RISCVAPLICState *aplic,
+                                             uint32_t word)
+ {
+-    uint32_t i, irq, sourcecfg, sm, raw_input, irq_inverted, ret = 0;
++    uint32_t i, irq, rectified_val, ret = 0;
+ 
+     for (i = 0; i < 32; i++) {
+         irq = word * 32 + i;
+-        if (!irq || aplic->num_irqs <= irq) {
+-            continue;
+-        }
+-
+-        sourcecfg = aplic->sourcecfg[irq];
+-        if (sourcecfg & APLIC_SOURCECFG_D) {
+-            continue;
+-        }
+-
+-        sm = sourcecfg & APLIC_SOURCECFG_SM_MASK;
+-        if (sm == APLIC_SOURCECFG_SM_INACTIVE) {
+-            continue;
+-        }
+ 
+-        raw_input = (aplic->state[irq] & APLIC_ISTATE_INPUT) ? 1 : 0;
+-        irq_inverted = (sm == APLIC_SOURCECFG_SM_LEVEL_LOW ||
+-                        sm == APLIC_SOURCECFG_SM_EDGE_FALL) ? 1 : 0;
+-        ret |= (raw_input ^ irq_inverted) << i;
++        rectified_val = riscv_aplic_irq_rectified_val(aplic, irq);
++        ret |= rectified_val << i;
+     }
+ 
+     return ret;
+@@ -702,6 +712,9 @@ static void riscv_aplic_write(void *opaque, hwaddr addr, uint64_t value,
+             (aplic->sourcecfg[irq] == 0)) {
+             riscv_aplic_set_pending_raw(aplic, irq, false);
+             riscv_aplic_set_enabled_raw(aplic, irq, false);
++        } else {
++            if (riscv_aplic_irq_rectified_val(aplic, irq))
++                riscv_aplic_set_pending_raw(aplic, irq, true);
+         }
+     } else if (aplic->mmode && aplic->msimode &&
+                (addr == APLIC_MMSICFGADDR)) {
+-- 
+2.17.1
 
-If everybody thinks max CPU is going to be used more frequently in the
-future, I am okay with
-that as well. Implied rule will only specify mandatory extensions
-defined by ISA.
-
-It's up to the user to figure out the extensions names and enable them
-individually if max CPU
-is not used.
-FYI: There are at least 6 more PMU related extensions that this series
-did not specify.
-~4 are being discussed in the RVI TG(precise event sampling, events)
-and 2 are frozen (Smctr/Ssctr)
-
-> Alistair
->
-> > That's why I chose to use a standard extension which covers the basic
-> > PMU access directly in S-mode.
-> >
-> > The future extensions such as CTR or Sampling events would also
-> > benefit by just adding the Ssccfg in the preferred rule
-> > which in turn will enable other preferred/mandatory extensions.
-> >
-> > > Alistair
-> > >
-> > > >
-> > > > With this bundle we can also use implied rule only if an extension =
-really needs
-> > > > (i.e. it breaks without) a dependency being enabled, instead of ove=
-rloading it
-> > > > with extensions that 'would be nice to have together' like it seems=
- to be the
-> > > > case for the last 3 extensions in that list.
-> > > >
-> > > > I believe users would benefit more from a single flag to enable eve=
-rything and
-> > > > be done with it.
-> > > >
-> > > >
-> > > > Thanks,
-> > > >
-> > > > Daniel
 
