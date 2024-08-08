@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAD22C3DA4A
-	for <qemu-riscv@archiver.kernel.org>; Thu,  8 Aug 2024 08:20:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9D9AC52D73
+	for <qemu-riscv@archiver.kernel.org>; Thu,  8 Aug 2024 08:20:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sbyNL-0008Vw-CH; Thu, 08 Aug 2024 04:19:59 -0400
+	id 1sbyOA-0000fG-By; Thu, 08 Aug 2024 04:20:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
- id 1sbyNJ-0008Uh-3y
- for qemu-riscv@nongnu.org; Thu, 08 Aug 2024 04:19:57 -0400
-Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
+ id 1sbyO1-0000Tx-0y
+ for qemu-riscv@nongnu.org; Thu, 08 Aug 2024 04:20:41 -0400
+Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
- id 1sbyNH-00039y-4W
- for qemu-riscv@nongnu.org; Thu, 08 Aug 2024 04:19:56 -0400
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-1fd6ed7688cso7537895ad.3
- for <qemu-riscv@nongnu.org>; Thu, 08 Aug 2024 01:19:54 -0700 (PDT)
+ id 1sbyNy-0003RN-Cp
+ for qemu-riscv@nongnu.org; Thu, 08 Aug 2024 04:20:40 -0400
+Received: by mail-pf1-x433.google.com with SMTP id
+ d2e1a72fcca58-70d2b921cdfso643944b3a.0
+ for <qemu-riscv@nongnu.org>; Thu, 08 Aug 2024 01:20:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1723105193; x=1723709993; darn=nongnu.org;
+ d=sifive.com; s=google; t=1723105235; x=1723710035; darn=nongnu.org;
  h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=s4IVICnKBDGToZiRNkgCrHpEgHxCfbvAO2rD8MJGZ60=;
- b=b6TiViIy2KNT1T6WR+rJhI3+JGFT/cDxmBlYgBeERt4oe76oTl51uKDt47eiAoA5vn
- cskcvEsUyIqE6Qh0hKfBZfWNb5qxSgUOcWZXFyVlww1ApRDSDaE70J1U286al95nqvSz
- Yywf0iYbLuyYb9VgRMKswjaqACgsf+Ga5wyP/fKu5ngnrRmdggKVrcJmUSIk2pYOlt93
- Curt6Q6dhkkJCnR8zmEL/UhKi03o7JoBwq2C0BBfAjLxBlh1AuWw8Dm8pdHuTnOO/t8Y
- 97VWcUlWjo5P4ei2mzcMQiFhfMBiD/U9Wc5gbTvZpM7CR9auXBqZ2ZCYVGfzbAmaNNRW
- lX+w==
+ bh=aDwrixA2VZsf0eAm49U3iTnA1xs631kK+Kr8s2nrlQk=;
+ b=UuiaBZKezt3w2Z7ByZSIaCN8vQl57ro9Nf5VWRalPcq83TiEh+pLGBzQ0l0yYs0g+O
+ FdhxeSa5VpY4Ofb7wgIl0INnJDOH+96rS6HI+0SQlJszTQ0VZF2GcVKGbaeNyvUFG7ci
+ DC/WBhzK75CZxfKrjzpVK7nLvIaPUp4ie7la+3lPvJyKcUqYHjy8tRQRRpqquD9wD6ms
+ xYx4cES5Gj4e87tQ/RS/IxHQFVgAG73WEZz4b3jJACDUXsD3pra4Kd8D2TN/fMqEGqjM
+ Et7dQ0DRCibF5/RDKbhrT7I8kvAcRxHRXw9+BEHF1pu1VvtUN25gscoMX56WbqU9aGWe
+ qgQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723105193; x=1723709993;
+ d=1e100.net; s=20230601; t=1723105235; x=1723710035;
  h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=s4IVICnKBDGToZiRNkgCrHpEgHxCfbvAO2rD8MJGZ60=;
- b=fK4HxlRVEZWznm1ojgsnqwwbm/tn9T+9uJZUZgPr6KZdQ9rZ3qeIhQhpgL73+M+8gR
- bQV2W/TwJBtydSONWyYONkK26uRiB80eWo/naXYSWdVm/6uKXz2IN5JvXE2McnSCvvaM
- zKB/fYt5jS9QBLkbx9ff5tQZ/ff7TyaAYtvjt+2ULSI1xYrzyzcs5CqfTCRg24PrA4M2
- 173S0vcITYXf/BY16IbOAD4nNEW7Bpm8BCFtkw2VsfM388c8xQqv9aYL1busFnmAwC2z
- 71t1V+MqQhB1XLxlPBa7vjUTsCA1tl7edyPdzFQh9u63XRIt04IYoIh6SLdDlq7Mh2Ga
- g3xg==
+ bh=aDwrixA2VZsf0eAm49U3iTnA1xs631kK+Kr8s2nrlQk=;
+ b=amTe+RnIlkuu6TKUMYPDqQBSiDzcLRWy6NuOHSElX50BskdXjmjNoeNkAdho8pr+jq
+ UfHpKG/U93z6vB8U9+zV6VCIBj2PckSN7X4ZYxde+uczbXILiKI7WHlyydBqo4D1BVsm
+ t43GpmCIkC/DALAtaSUJVlwf6Uura16i7TlwcoSx+0KHMU0qbiuNBtOpBL3JBEf83/Q6
+ xglhMhO3ehKnn3JB83F0/ZkeLSS4Nt1xLyGiIQQwiJhxCwjPUt59mH6h50yyEtD/jArG
+ LZuxUW2kMVHz9cqgpvSOMOGISkRO4tEQAnF+Jmh7tWNtSU7RbkxtK6koYuKNoviibVT5
+ hLCQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVDxCQFyqr0tRMH8SlkAtx0tvJtRHW6pQ3c5/M4j+chdtaEJ27Cot62gegbVCCW83b6hLo8PCm2oVxYKIH5imb9Dwvi5aY=
-X-Gm-Message-State: AOJu0YzoCUcE2syQsmJQmCXQVxBTZOYj1l7xQdq8dJtvd8wOvccPLZaa
- McGpRmKPiBb/CISsakP32+JdDVN6iH2Sgn7hgy+h3vDttiJTxMcpOgzxdWDsaTc=
-X-Google-Smtp-Source: AGHT+IGjTqID8R0BzWgp5kb/LmJIs986yOGx1DkSGBR+LogGpuwWuqk8MmnulaCOhc4ss0s//nul8Q==
-X-Received: by 2002:a17:903:22c5:b0:1fb:67e0:2e0a with SMTP id
- d9443c01a7336-200952bf772mr13092795ad.48.1723105193066; 
- Thu, 08 Aug 2024 01:19:53 -0700 (PDT)
+ AJvYcCWzuwz/2HfX2l0PkDSgS1rFMnDOZoMe5JzAFg9bBInQ6jgw2zr9Ww9OPPvSCXujBWRmdJzfiuEKWO4vjXZylEAmIhfmfL8=
+X-Gm-Message-State: AOJu0YzdVaGtUUJ4FhY3C0bpDEyt6cOOYZag2SqLic63kBstLGlr8lxx
+ 0/lOszKvQNF2XfAESHe8mOmV0C5k7FlV1btVVzD9Xy/F/0MeVr544Lss15lm0Mw=
+X-Google-Smtp-Source: AGHT+IFpf4nUBJEceX4L66/eE6lNdxjUXB2lYRo4dcHvZfHTuqcnt5vt+cPnXgxY5JrbYq5kG+PLeQ==
+X-Received: by 2002:a05:6a00:390c:b0:710:4d08:e094 with SMTP id
+ d2e1a72fcca58-710cad31263mr1572156b3a.2.1723105234605; 
+ Thu, 08 Aug 2024 01:20:34 -0700 (PDT)
 Received: from hsinchu26.internal.sifive.com
  (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2007728d837sm47281655ad.84.2024.08.08.01.19.50
+ d2e1a72fcca58-710cb084cd4sm680144b3a.0.2024.08.08.01.20.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 Aug 2024 01:19:52 -0700 (PDT)
+ Thu, 08 Aug 2024 01:20:34 -0700 (PDT)
 From: Yong-Xuan Wang <yongxuan.wang@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -69,13 +69,13 @@ Cc: greentime.hu@sifive.com, vincent.chen@sifive.com, frank.chang@sifive.com,
  Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH 1/1] hw/intc/riscv_aplic: Check and update pending when write
- sourcecfg
-Date: Thu,  8 Aug 2024 16:19:47 +0800
-Message-Id: <20240808081948.25837-1-yongxuan.wang@sifive.com>
+Subject: [PATCH 1/1] hw/intc/riscv_aplic: Fix APLIC in clrip and clripnum
+ write emulation
+Date: Thu,  8 Aug 2024 16:20:28 +0800
+Message-Id: <20240808082030.25940-1-yongxuan.wang@sifive.com>
 X-Mailer: git-send-email 2.17.1
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
- envelope-from=yongxuan.wang@sifive.com; helo=mail-pl1-x62b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
+ envelope-from=yongxuan.wang@sifive.com; helo=mail-pf1-x433.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -98,105 +98,35 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The section 4.5.2 of the RISC-V AIA specification says that any write
-to a sourcecfg register of an APLIC might (or might not) cause the
-corresponding interrupt-pending bit to be set to one if the rectified
-input value is high (= 1) under the new source mode.
+In the section "4.7 Precise effects on interrupt-pending bits"
+of the RISC-V AIA specification defines that:
 
-If an interrupt is asserted before the driver configs its interrupt
-type to APLIC, it's pending bit will not be set except a relevant
-write to a setip or setipnum register. When we write the interrupt
-type to sourcecfg register, if the APLIC device doesn't check
-rectified input value and update the pending bit, this interrupt
-might never becomes pending.
+If the source mode is Level1 or Level0 and the interrupt domain
+is configured in MSI delivery mode (domaincfg.DM = 1):
+The pending bit is cleared whenever the rectified input value is
+low, when the interrupt is forwarded by MSI, or by a relevant
+write to an in clrip register or to clripnum.
 
-For APLIC.m, we can manully set pending by setip or setipnum
-registers in driver. But for APLIC.w, the pending status totally
-depends on the rectified input value, we can't control the pending
-status via mmio registers. In this case, hw should check and update
-pending status for us when writing sourcecfg registers.
-
-Update QEMU emulation to handle "pre-existing" interrupts.
+Update the riscv_aplic_set_pending() to match the spec.
 
 Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
 ---
- hw/intc/riscv_aplic.c | 49 +++++++++++++++++++++++++++----------------
- 1 file changed, 31 insertions(+), 18 deletions(-)
+ hw/intc/riscv_aplic.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
-index 32edd6d07bb3..2a9ac76ce92e 100644
+index c1748c2d17d1..45d8b4089229 100644
 --- a/hw/intc/riscv_aplic.c
 +++ b/hw/intc/riscv_aplic.c
-@@ -159,31 +159,41 @@ static bool is_kvm_aia(bool msimode)
-     return kvm_irqchip_in_kernel() && msimode;
- }
+@@ -247,7 +247,7 @@ static void riscv_aplic_set_pending(RISCVAPLICState *aplic,
  
-+static bool riscv_aplic_irq_rectified_val(RISCVAPLICState *aplic,
-+                                          uint32_t irq)
-+{
-+    uint32_t sourcecfg, sm, raw_input, irq_inverted;
-+
-+    if (!irq || aplic->num_irqs <= irq) {
-+        return false;
-+    }
-+
-+    sourcecfg = aplic->sourcecfg[irq];
-+    if (sourcecfg & APLIC_SOURCECFG_D) {
-+        return false;
-+    }
-+
-+    sm = sourcecfg & APLIC_SOURCECFG_SM_MASK;
-+    if (sm == APLIC_SOURCECFG_SM_INACTIVE) {
-+        return false;
-+    }
-+
-+    raw_input = (aplic->state[irq] & APLIC_ISTATE_INPUT) ? 1 : 0;
-+    irq_inverted = (sm == APLIC_SOURCECFG_SM_LEVEL_LOW ||
-+                    sm == APLIC_SOURCECFG_SM_EDGE_FALL) ? 1 : 0;
-+    return !!(raw_input ^ irq_inverted);
-+}
-+
- static uint32_t riscv_aplic_read_input_word(RISCVAPLICState *aplic,
-                                             uint32_t word)
- {
--    uint32_t i, irq, sourcecfg, sm, raw_input, irq_inverted, ret = 0;
-+    uint32_t i, irq, rectified_val, ret = 0;
- 
-     for (i = 0; i < 32; i++) {
-         irq = word * 32 + i;
--        if (!irq || aplic->num_irqs <= irq) {
--            continue;
--        }
--
--        sourcecfg = aplic->sourcecfg[irq];
--        if (sourcecfg & APLIC_SOURCECFG_D) {
--            continue;
--        }
--
--        sm = sourcecfg & APLIC_SOURCECFG_SM_MASK;
--        if (sm == APLIC_SOURCECFG_SM_INACTIVE) {
--            continue;
--        }
- 
--        raw_input = (aplic->state[irq] & APLIC_ISTATE_INPUT) ? 1 : 0;
--        irq_inverted = (sm == APLIC_SOURCECFG_SM_LEVEL_LOW ||
--                        sm == APLIC_SOURCECFG_SM_EDGE_FALL) ? 1 : 0;
--        ret |= (raw_input ^ irq_inverted) << i;
-+        rectified_val = riscv_aplic_irq_rectified_val(aplic, irq);
-+        ret |= rectified_val << i;
-     }
- 
-     return ret;
-@@ -702,6 +712,9 @@ static void riscv_aplic_write(void *opaque, hwaddr addr, uint64_t value,
-             (aplic->sourcecfg[irq] == 0)) {
-             riscv_aplic_set_pending_raw(aplic, irq, false);
-             riscv_aplic_set_enabled_raw(aplic, irq, false);
-+        } else {
-+            if (riscv_aplic_irq_rectified_val(aplic, irq))
-+                riscv_aplic_set_pending_raw(aplic, irq, true);
+     if ((sm == APLIC_SOURCECFG_SM_LEVEL_HIGH) ||
+         (sm == APLIC_SOURCECFG_SM_LEVEL_LOW)) {
+-        if (!aplic->msimode || (aplic->msimode && !pending)) {
++        if (!aplic->msimode) {
+             return;
          }
-     } else if (aplic->mmode && aplic->msimode &&
-                (addr == APLIC_MMSICFGADDR)) {
+         if ((aplic->state[irq] & APLIC_ISTATE_INPUT) &&
 -- 
 2.17.1
 
