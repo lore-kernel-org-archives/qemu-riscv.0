@@ -4,90 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68404C3DA7F
-	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Aug 2024 23:13:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 997EAC3DA7F
+	for <qemu-riscv@archiver.kernel.org>; Thu,  8 Aug 2024 00:27:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sbpqc-00069g-A5; Wed, 07 Aug 2024 19:13:38 -0400
+	id 1sbr0E-0006Vi-Ep; Wed, 07 Aug 2024 20:27:38 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sbpqa-00068f-IN
- for qemu-riscv@nongnu.org; Wed, 07 Aug 2024 19:13:36 -0400
-Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1sbr0D-0006UZ-3D; Wed, 07 Aug 2024 20:27:37 -0400
+Received: from mail-vk1-xa2f.google.com ([2607:f8b0:4864:20::a2f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sbpqW-0003FD-UO
- for qemu-riscv@nongnu.org; Wed, 07 Aug 2024 19:13:36 -0400
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-1fc5296e214so4514825ad.0
- for <qemu-riscv@nongnu.org>; Wed, 07 Aug 2024 16:13:32 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1sbr0A-0006RD-AD; Wed, 07 Aug 2024 20:27:35 -0400
+Received: by mail-vk1-xa2f.google.com with SMTP id
+ 71dfb90a1353d-4f52cc4d3beso152185e0c.3; 
+ Wed, 07 Aug 2024 17:27:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1723072411; x=1723677211;
- darn=nongnu.org; 
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=NoPjbxgzGcsHYP/uvuUyXgL07AU8rDM/2SwmB3LhywY=;
- b=spgHoa2RL+63oIApfKD19v3vUv5LolykNMQXxS1H+TwuNYCQstXt8g6F3qIWQorlkJ
- UN1uSsQBpl+l9g33sKfF5PQJfJmbB+3TwMUYQlIBeC8MDzmK2g3MUJI/vG0RiQlz9CR6
- IhIM/UM27ac5HJw5CjxriXrGj6PCa8GtS7VkhPP/S0WApRyCj3jq3BATecIsA3CAQMlD
- ENv95DfCKj0+ePJH/Y1JwZTQ+7f9YTjKh9HYlKg+I2Xy1G2XyBnkadIfp7TXAWMbhYQ7
- UddSmdus06wBJfgAhvSMwGW7hMI1BQ9fLViitliP6kVp1OfYIH8MqItutUcHhaU+75Fd
- Glyg==
+ d=gmail.com; s=20230601; t=1723076852; x=1723681652; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=SFn6ZBvk+7iPhdLc5yE6mp5/vDSL/nn4LQe763p1BN4=;
+ b=MVlKK6EbBoboiwjxT6thZFjUUDGKo/E1hIgUo1yaaq+9Doam3tIjhyhRQsBWO20iyt
+ cXq9LO60Iq8hFHW2px4NX8W7TdMA2FMGsWCHuSsqtTEVNEJcoU6QHl3qjuTsRsWgD9lj
+ N525SOp0jv1X8ZL8/uEkKMhjCHENtXr9ZmtZYMs1lRXuXLQyFI+JWI0qOjOwr3dTNMeK
+ LTdsjzjkxcl8unmzOeIgwV83W/YjoKn1fac/KujfQYy+8xIXkQ2wq9RVLf3DNPJKmVej
+ DA5a8vbndXRPJ0EOaLGU5fo+qf9Q3YchsIVf3BklnNDenDFuLYKFnS+ColtdVOFYh6Fl
+ spcA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723072411; x=1723677211;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=NoPjbxgzGcsHYP/uvuUyXgL07AU8rDM/2SwmB3LhywY=;
- b=iPUqwOJJmDkpZR8JxgWFIf7w3oFd7tRBOujXAgVf91xHj4CutxLbrNdM7viWkuY5FZ
- k7ku9Bjlpub9t4gokcwbHOaBXlsZPgtwoEMTDf69EJCKF1GaTEZJho3NfEjXUZXsyIKH
- Xq94osP4quJjGu03Mano+tpXK3HqWF0dJZnMU/SAtg3bMvxTbwSoK24gNYkIFOxYHxaD
- Uy4/NYts8Fljgpd09PTKRRrP3sUNod0aQTYoZGEX1c+U+XtzSJfw0NeujHZNocwC1Eah
- Dhqa6A8AIlPGaJcpshkIbXe/yGkT0lT6qhviJH37BGXeDV7Q0yTeJG0NDAhrwr3Alqsx
- OL0A==
+ d=1e100.net; s=20230601; t=1723076852; x=1723681652;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=SFn6ZBvk+7iPhdLc5yE6mp5/vDSL/nn4LQe763p1BN4=;
+ b=fNgxeigxJaNWOI1Piw0scWhACKNAoPCZluBxZWo259WrFS9qKd0090P9ev+BtzKAJB
+ vMQtkTn1UwOSUZPF2zU6SluleMC10ZiH5OGta5vrh31vgNSa+m0RmEjrG6lXm7R4kjvw
+ t/0bba6v/5e2xWbnrjHK3DPKW/YdYueSGw6UQ8YN+x9m6dRtWz9W645fVMhdlr0AYj6v
+ /J29x/zmPV9w6l/Zqhn9bgw4Gzuoh2ZS56Y2LJvldaBP7AA0mi7pZQrANe38YysQs4/M
+ 3Q6aIvOk7PA2YNJ7kGaay6x8cpVdghzZR99xk7/JR7rbjVfAKztOGnDx9u1I9VGBjenm
+ O9ig==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW3n08uCQIe9lKgzAV7icN5UBy+WS0xJvilIMa/ZJJfHg4hLfzs5Jek5J1kb5UkRN3UYLtkfX2swCzABR1q6lvX7v0TOuk=
-X-Gm-Message-State: AOJu0YxwcBFrUaJCbPuxqlHXxtms5edz1sVGTYRAC979X2SLeY/zrqX+
- kz3jrtpW9w0qyz77cwXc5vc7mEusOYknHkmpZnqxsxTk5QM8GB96czYnLzK5jQc=
-X-Google-Smtp-Source: AGHT+IFUNchuCSLiUiboyPgJLrDnNFHiFa4VGNxkmfcH4tqcg3u6sL4C50jU6DZZDxCVVer552Ro/A==
-X-Received: by 2002:a17:902:d485:b0:1fb:8a0e:7730 with SMTP id
- d9443c01a7336-2009526336fmr2999375ad.26.1723072410740; 
- Wed, 07 Aug 2024 16:13:30 -0700 (PDT)
-Received: from debug.ba.rivosinc.com ([64.71.180.162])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1ff58f29fb0sm111884715ad.22.2024.08.07.16.13.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Aug 2024 16:13:30 -0700 (PDT)
-Date: Wed, 7 Aug 2024 16:13:28 -0700
-From: Deepak Gupta <debug@rivosinc.com>
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com,
- palmer@dabbelt.com, Alistair.Francis@wdc.com, laurent@vivier.eu,
- bmeng.cn@gmail.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com
-Subject: Re: [PATCH v3 15/20] target/riscv: shadow stack mmu index for shadow
- stack instructions
-Message-ID: <ZrP/mCyYiOXTG0wl@debug.ba.rivosinc.com>
-References: <20240807000652.1417776-1-debug@rivosinc.com>
- <20240807000652.1417776-16-debug@rivosinc.com>
- <26d37287-b4e3-42b8-818d-b96bcf128a75@linaro.org>
- <ZrPl4fFyLX5N2WUs@debug.ba.rivosinc.com>
- <eed6673a-0877-4e4e-8b86-7a7d7b770b7a@linaro.org>
+ AJvYcCURMHCBe9STM93Q0x8HdTRirFb1Yk8GVT7cHCxz5PIvX41Xg/SGwHANnlJ0YBmWfZIdsXYl8pp9CrGZC1Lt/87atKZueps1tlTb86fK7ZTytvqW7g0s4Sel2NWp4g==
+X-Gm-Message-State: AOJu0YxsEE1PL7YNAEnSpOL+xt6lFd/+mZbJr24nYriT8ikTyDtiUEEe
+ 7xFT49e3pQSQuqhy+VF/SmOL7eZcjBhaky5DjaAXB6uCsNEsQvsramSSeDru+/Tj6QUTiMuMpBR
+ i1vGYHemnw3Y/yr33U7mAPh9vqbM=
+X-Google-Smtp-Source: AGHT+IHOEcuFgc/LlvqAFTY5LKTuRg1U4xmhyiBi2SjkuRH3PYrQC768O7KJgFZ5Dru8jX++Fr6iWIz2KWrfDKwpEKA=
+X-Received: by 2002:a05:6102:3584:b0:494:829:835b with SMTP id
+ ada2fe7eead31-495c5b57439mr558935137.9.1723076852148; Wed, 07 Aug 2024
+ 17:27:32 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1; format=flowed
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <eed6673a-0877-4e4e-8b86-7a7d7b770b7a@linaro.org>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
- envelope-from=debug@rivosinc.com; helo=mail-pl1-x62e.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+References: <20240723-counter_delegation-v2-0-c4170a5348ca@rivosinc.com>
+ <20240723-counter_delegation-v2-13-c4170a5348ca@rivosinc.com>
+ <20240806-9fdad33468ec103d83a85e77@orel>
+ <3c09bbbe-857b-4566-963a-790497232bbf@ventanamicro.com>
+ <CAKmqyKNgJKBFw7OnwbgbqxA65PR4GSjdUEKdKVw-nYv+e0P58w@mail.gmail.com>
+ <CAHBxVyFFa7mQaS4jPkT=aK4gTF3AshpQZNeRhBiZOHX7bhQQsg@mail.gmail.com>
+In-Reply-To: <CAHBxVyFFa7mQaS4jPkT=aK4gTF3AshpQZNeRhBiZOHX7bhQQsg@mail.gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 8 Aug 2024 10:27:05 +1000
+Message-ID: <CAKmqyKOX883p+sgFs6s649pkH0BA9aKcrTr7=XOT=Xy8mNLzng@mail.gmail.com>
+Subject: Re: [PATCH v2 13/13] target/riscv: Enable PMU related extensions to
+ preferred rule
+To: Atish Kumar Patra <atishp@rivosinc.com>
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Andrew Jones <ajones@ventanamicro.com>, 
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, bin.meng@windriver.com, 
+ alistair.francis@wdc.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2f;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2f.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -104,130 +100,131 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Aug 08, 2024 at 08:57:47AM +1000, Richard Henderson wrote:
->On 8/8/24 07:23, Deepak Gupta wrote:
->>On Wed, Aug 07, 2024 at 12:43:31PM +1000, Richard Henderson wrote:
->>>On 8/7/24 10:06, Deepak Gupta wrote:
->>>>Shadow stack instructions shadow stack mmu index for load/stores.
->>>>`MMU_IDX_SS_ACCESS` at bit positon 3 is used as shadow stack index.
->>>>Shadow stack mmu index depend on privilege and SUM bit. If shadow stack
->>>>accesses happening in user mode, shadow stack mmu index = 0b1000. If
->>>>shaodw stack access happening in supervisor mode mmu index = 0b1001. If
->>>>shadow stack access happening in supervisor mode with SUM=1 then mmu
->>>>index = 0b1010
->>>>
->>>>Signed-off-by: Deepak Gupta <debug@rivosinc.com>
->>>>---
->>>> target/riscv/cpu.h                            | 13 ++++++++++
->>>> target/riscv/cpu_helper.c                     |  3 +++
->>>> target/riscv/insn_trans/trans_rva.c.inc       |  8 ++++++
->>>> target/riscv/insn_trans/trans_rvzicfiss.c.inc |  6 +++++
->>>> target/riscv/internals.h                      |  1 +
->>>> target/riscv/translate.c                      | 25 +++++++++++++++++++
->>>> 6 files changed, 56 insertions(+)
->>>>
->>>>diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
->>>>index 6da94c417c..3ad220a9fe 100644
->>>>--- a/target/riscv/cpu.h
->>>>+++ b/target/riscv/cpu.h
->>>>@@ -615,6 +615,19 @@ FIELD(TB_FLAGS, FCFI_ENABLED, 28, 1)
->>>> FIELD(TB_FLAGS, FCFI_LP_EXPECTED, 29, 1)
->>>> /* zicfiss needs a TB flag so that correct TB is located based on tb flags */
->>>> FIELD(TB_FLAGS, BCFI_ENABLED, 30, 1)
->>>>+/*
->>>>+ * zicfiss shadow stack is special memory on which regular stores aren't
->>>>+ * allowed but shadow stack stores are allowed. Shadow stack stores can
->>>>+ * happen as `sspush` or `ssamoswap` instructions. `sspush` implicitly
->>>>+ * takes shadow stack address from CSR_SSP. But `ssamoswap` takes address
->>>>+ * from encoded input register and it will be used by supervisor software
->>>>+ * to access (read/write) user shadow stack for setting up rt_frame during
->>>>+ * signal delivery. Supervisor software will do so by setting SUM=1. Thus
->>>>+ * a TB flag is needed if SUM was 1 during TB generation to correctly
->>>>+ * reflect memory permissions to access shadow stack user memory from
->>>>+ * supervisor mode.
->>>>+ */
->>>>+FIELD(TB_FLAGS, SUM, 31, 1)
->>>
->>>This is already encoded into the mmu_idx as MMUIdx_S_SUM.
->>
->>This is where I need some help / suggestion and clarifications.
->>
->>`riscv_env_mmu_index` is the which does mode --> mmu index translation and that's
->>where `MMUIdx_S_SUM` is set.
->>
->>Although above function assumes following things
->>    -- Only loads ands stores are supposed to do read and write.
->>    -- Translates env/priv --> mmu index
->>
->>In case of shadow stack, we need to hold following true:
->>Shadow stack are not writeable via regular stores but are allowed to be readable.
->>Shadow stack are writeable only via shadow stack instruction.
->>Shadow stack instructions can't operate on non-shadow stack memory.
->>
->>This let me to create a new mmu index (as you saw in patches). This mmu index is only
->>setup by shadow stack instruction and thus has to be known at translation time
+On Wed, Aug 7, 2024 at 5:44=E2=80=AFPM Atish Kumar Patra <atishp@rivosinc.c=
+om> wrote:
 >
->All good so far.
+> On Tue, Aug 6, 2024 at 7:01=E2=80=AFPM Alistair Francis <alistair23@gmail=
+.com> wrote:
+> >
+> > On Wed, Aug 7, 2024 at 2:06=E2=80=AFAM Daniel Henrique Barboza
+> > <dbarboza@ventanamicro.com> wrote:
+> > >
+> > >
+> > >
+> > > On 8/6/24 5:46 AM, Andrew Jones wrote:
+> > > > On Tue, Jul 23, 2024 at 04:30:10PM GMT, Atish Patra wrote:
+> > > >> Counter delegation/configuration extension requires the following
+> > > >> extensions to be enabled.
+> > > >>
+> > > >> 1. Smcdeleg - To enable counter delegation from M to S
+> > > >> 2. S[m|s]csrind - To enable indirect access CSRs
+> > > >> 3. Smstateen - Indirect CSR extensions depend on it.
+> > > >> 4. Sscofpmf - To enable counter overflow feature
+> > > >> 5. S[m|s]aia - To enable counter overflow feature in virtualizatio=
+n
+> > > >> 6. Smcntrpmf - To enable privilege mode filtering for cycle/instre=
+t
+> > > >>
+> > > >> While first 3 are mandatory to enable the counter delegation,
+> > > >> next 3 set of extension are preferred to enable all the PMU relate=
+d
+> > > >> features.
+> > > >
+> > > > Just my 2 cents, but I think for the first three we can apply the c=
+oncept
+> > > > of extension bundles, which we need for other extensions as well. I=
+n those
+> > > > cases we just auto enable all the dependencies. For the three prefe=
+rred
+> > > > extensions I think we can just leave them off for 'base', but we sh=
+ould
+> > > > enable them by default for 'max' along with Ssccfg.
+> >
 >
->>There is no way of telling in `riscv_env_mmu_index` about whether mmu index is requested
->>for regular load/store or some other instruction (in this case shadow stack instruction).
->>If that is available then I think I can use `riscv_env_mmu_index`.
+> Max cpu will have everything enabled by default. The problem with max
+> cpu is that you
+> may not want to run all the available ISA extensions while testing perf.
 >
->What you miss is that the result of riscv_env_mmu_index is stored
+> > Agreed
+> >
+> > >
+> > > I like this idea. I would throw in all these 6 extensions in a 'pmu_a=
+dvanced_ops'
+> > > (or any other better fitting name for the bundle) flag and then 'pmu_=
+advanced_ops=3Dtrue'
+> > > would enable all of those. 'pmu_advanced_ops=3Dtrue,smcntrpmf=3Dfalse=
+' enables all but
+> > > 'smcntrpmf' and so on.
+> > >
 >
->  ctx->mem_idx
+> I thought distinguishing preferred vs implied would be useful because
+> it would allow the user
+> to clearly understand which is mandated by ISA vs which would be good to =
+have.
 
-Yeah, that's right. thanks.
+It's not really clear though what extensions are good to have. Other
+people might think differently about the extensions. It also then
+means we end up with complex combinations of extensions to manage.
 
 >
->So that takes care of U, S, SUM, M, VS, VU, etc.  All you need at
->this point is to or in your shadow stack bit:
+> The good to have extensions can be disabled similar to above but not
+> the mandatory ones.
 >
->  ctx->mem_idx | MMU_IDX_SS_ACCESS
-
-
+> > > As long as we document what the flag is enabling I don't see any prob=
+lems with it.
+> > > This is how profiles are implemented after all.
+> >
+> > I only worry that we end up with a huge collection of flags that users
+> > need to decipher.
+> >
 >
->(Perhaps SS_WRITE is a better name, since read access is never prohibited?)
+> My initial idea was a separate flag as well. But I was not sure if
+> that was good for the
+> above reason. This additional custom pmu related option would be lost
+> in that huge collection.
 
-Yeah MMU_IDX_SS_WRITE is probably more self-explainatory.
+I do feel a separate flag is better than trying to guess what extra
+extensions the user wants enabled.
 
->
->Note that you can do this without ifdefs -- user-only will happily 
->accept and ignore the mmu index.  Also note that user-only will *not* 
->be able to restrict access to the shadow stack pages in the way the 
->spec describes.  We rely on the host mmu for read/write permission for 
->user-only.  For now -- changing that is a long term goal.
-
-Ok, didn't know user-only will ignore.
-I'll remove ifdef and simply do
-
-ctx->mem_idx =| MMU_IDX_SS_WRITE
+I don't love either though, isn't this what profiles is supposed to fix!
 
 >
+> > I guess with some good documentation this wouldn't be too confusing tho=
+ugh.
+> >
 >
->>Question:
->>I see that `riscv_env_mmu_index` could be called from a bunch of places in (like
->>`accel/tcg/ldst_common.c.inc` as well. Does it exclude loads, stores which calculate mmu
->>indexes during translation (like shadow stack load, stores) ?
->
->It means you cannot use the legacy interfaces for the shadow stack.
->The current interfaces:
->
-> *        cpu_ld{sign}{size}{end}_mmuidx_ra(env, ptr, mmu_idx, retaddr)
-> *        cpu_ld{sign}{size}{end}_mmu(env, ptr, oi, retaddr)
->...
-> *        cpu_st{size}{end}_mmuidx_ra(env, ptr, val, mmu_idx, retaddr)
-> *        cpu_st{size}{end}_mmu(env, ptr, val, oi, retaddr)
->
->take the mmu_idx as a parameter.
->
->But as it happens, the shadow stack instructions are simple enough to 
->implement all inline, so you won't need to call the out-of-line 
->load/store functions from cpu helpers.
+> Sure. It won't be confusing but most users may not even know about it
+> without digging.
 
-Thanks for explaining this.
+At that point they can use the max CPU or just manually enable the
+extensions though.
 
+Alistair
+
+> That's why I chose to use a standard extension which covers the basic
+> PMU access directly in S-mode.
 >
+> The future extensions such as CTR or Sampling events would also
+> benefit by just adding the Ssccfg in the preferred rule
+> which in turn will enable other preferred/mandatory extensions.
 >
->r~
+> > Alistair
+> >
+> > >
+> > > With this bundle we can also use implied rule only if an extension re=
+ally needs
+> > > (i.e. it breaks without) a dependency being enabled, instead of overl=
+oading it
+> > > with extensions that 'would be nice to have together' like it seems t=
+o be the
+> > > case for the last 3 extensions in that list.
+> > >
+> > > I believe users would benefit more from a single flag to enable every=
+thing and
+> > > be done with it.
+> > >
+> > >
+> > > Thanks,
+> > >
+> > > Daniel
 
