@@ -4,82 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26529C52D73
-	for <qemu-riscv@archiver.kernel.org>; Thu,  8 Aug 2024 04:25:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F563C3DA4A
+	for <qemu-riscv@archiver.kernel.org>; Thu,  8 Aug 2024 08:12:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sbuiV-0001bf-DO; Thu, 08 Aug 2024 00:25:35 -0400
+	id 1sbyGG-0005Zw-UU; Thu, 08 Aug 2024 04:12:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sbuiT-0001Pj-Mk; Thu, 08 Aug 2024 00:25:33 -0400
-Received: from mail-ua1-x935.google.com ([2607:f8b0:4864:20::935])
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1sbyGF-0005Ly-6K
+ for qemu-riscv@nongnu.org; Thu, 08 Aug 2024 04:12:39 -0400
+Received: from mail-lj1-x230.google.com ([2a00:1450:4864:20::230])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sbuiS-0004HV-79; Thu, 08 Aug 2024 00:25:33 -0400
-Received: by mail-ua1-x935.google.com with SMTP id
- a1e0cc1a2514c-825a23c5e4cso145189241.3; 
- Wed, 07 Aug 2024 21:25:31 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1sbyGC-00021Z-5S
+ for qemu-riscv@nongnu.org; Thu, 08 Aug 2024 04:12:38 -0400
+Received: by mail-lj1-x230.google.com with SMTP id
+ 38308e7fff4ca-2eeb1ba0468so8681841fa.0
+ for <qemu-riscv@nongnu.org>; Thu, 08 Aug 2024 01:12:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1723091130; x=1723695930; darn=nongnu.org;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1723104753; x=1723709553;
+ darn=nongnu.org; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fiA40MLsMtAnhRi+xNL2ixDz8ahQzn3oV+a9tx9IOb8=;
- b=QONIaiKpVHkLBao4gk9Q/n1DVxLwLBT0+UjtzvSpUzTw9vOJJuLdjLaWXziddpILcQ
- bHnXuwdMI2gYFL1Cpqm8YfDnZKuDAxFRcZlewxFtzFp6tSBOfKfeZhMUCVb5qSEFBWc8
- LLcqBnDW04YwyewRSjL1OPjzOLTm70rgsU9R4etJCQ0yX7EYjoI9NA/gKAd2sxpm6a1k
- tTTXkH2MwxT9EwHRZY58q/xc4tsRK5zajsCF/ZwDdYYl+AlbjGYy2Qxq+OawY33CrxRj
- /DpnqSCol3ycQCYXqQCQBfPD4l1ZYZxwyNTJx7LhrFdLn7A8RPlP4WYin0ei73mCaQNG
- 2beA==
+ bh=Bt4nxGBb55vV904sNvNT6wthx+qvXCFcjwq9x/M1oB0=;
+ b=Ld9t8PlZfmXrs3/2T1nsjj7MGQXIUR5nJgx4baBokZ22dy2n3UA2EIV3butTX+L7iV
+ hn8Z4b8tBbPuY0PrC0nfqENFgvL2xO44JXti2gZDWXJWh9VflDn0Mj9Siy/LRnsZZOrG
+ OWc2A1dinCVczDj2EumG1N7PAh4qTBm5CPPkpteMb5s97FapUTBFqn3ucgVn0VMZfuf7
+ qP6tBzim5+/GejgTZTt2WKWHv9suk2woT8Eg8br32RaA/UFBiisYZptkgfYdHhUOLg/o
+ AAhTMvmejmCtjjQgm15X05czOwJzErGBMhlkzbpJ/TvrKBg9Rmpwkt/QnawojmNGi4Hn
+ uirA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723091130; x=1723695930;
+ d=1e100.net; s=20230601; t=1723104753; x=1723709553;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=fiA40MLsMtAnhRi+xNL2ixDz8ahQzn3oV+a9tx9IOb8=;
- b=uc3IAWcngEYCaur3BsBu17ymsax9QvAlz21aPVDmVEZdpgCPhuuzCbXHAJoX/R9iDM
- u3y5MU5YklO9CnprC0lbOEuXKaM+kIAykiKtHCvE7jisGOoEeLpB1nnY1qKQurPfyVK6
- j1NsBuCGZAxiphYBtVGx3fuuy0tU9z3dnPX+klDFs0trAfduSgZiXjLjvFJhM9AT364a
- MPerlBE05lEvPOuBM5cWvChepQcpNjNVMWw73vMGJXYbp2wY4aSFNZ1lYlm5nHIxsd59
- ubgN0LSNXmzY+oDj1+yEQydN4zGZXpdZbbzpJmDjH6kQ1l+m7aQSFw/kL8xKdO9jlzrD
- IcfA==
+ bh=Bt4nxGBb55vV904sNvNT6wthx+qvXCFcjwq9x/M1oB0=;
+ b=Z1CZlgnulLOrP0UWIb1+axHa/1Y7NXRA1dHG6qCtDZ8j/47YASHGa+C3ztYL/tc3Y6
+ WzXSzjiF5p0hFK17qXx21kiA7XBZ3vnDFteM71o3TTh15VLrbJW0Mr5eITvvp/hjyk2T
+ vQmgKTC3Taq3fgpeKxitKhljpPano8rVuVOANlLhNFAmIMISLFu+pReJcEY6qnfu50xC
+ lXBm5wjz2D284SsPxHwujMiHrtVPEh0h1ipqvrPnfh2pdOu4P8UN9Ma8k0N0QlbAUq0I
+ aVtZrvw7adtHV9JWWl2axeTF32LKzaY8D3gbJB3lJ4sHeO0xZ3Uv4swb18p/kEPYF0NN
+ PKbA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVT+5a/lzYf7PbwhCEnRwJKlFWtoDCrr3oZEzD4ZkmfEsfD4n4AUbgDkt70e456v6QyUNYWzZ/QCwj9PbeSehpftHht2TA=
-X-Gm-Message-State: AOJu0YyzdJzrhOSqNBBD4VTHkhpVPWEZJC/MdXfYxFPzHhLpweQhEbxG
- 1ewM+8F7UufNP1Oj/QZ0mByU8pe+Vd4V4bddM62URHd3UvuC7wlXeINYOzhps6Dc5UQHuqjuG9w
- tpBC/B2AZgKtviwnDC9IdKog1+KE=
-X-Google-Smtp-Source: AGHT+IE7KgIPaQSIl/x5HhvV7tDRYvnoyny6Aif+8ppNEdBTfWM5ICQBTocchp8WQnVDsiubjtNK0mX6teMeXMP0OOM=
-X-Received: by 2002:a05:6102:e0a:b0:48f:e759:94bc with SMTP id
- ada2fe7eead31-495c5b4a2acmr815099137.16.1723091130386; Wed, 07 Aug 2024
- 21:25:30 -0700 (PDT)
+ AJvYcCW0Epo7TpTFfoC5iJ96i8RPy+LdHqN252ooCHZC1EZrLkIZ+lT+2tf2WeKGRnHJ7gbwDHJ7pAtXvnHMGlfKOSwcgCZC2gs=
+X-Gm-Message-State: AOJu0YzGyZGS682zP67sF9+1+lt67rYHSCCdt0Gugf+4Q2KkiOF4LmHD
+ VpIfmSQa3LL2gswFj0ExRAvZfk+k9rGM+vwO/lUfCoHeNyQG93xlv8qQMnEcbTO4G8FQgj+ydsC
+ KWEyf8jn7YJ25ZsSBOMZJpGSmROB0BmDnuh6U6Q==
+X-Google-Smtp-Source: AGHT+IEuFFUB2eZl7L6E8WGYsRYU8wgfbvZzj9tuNS2eCTyPTkdHErw8OvX+9gWRiosFpoMKLb4mHwHPrPve2iM63Zk=
+X-Received: by 2002:a05:6512:1289:b0:52e:fa5f:b6b1 with SMTP id
+ 2adb3069b0e04-530e58a33f9mr564746e87.60.1723104753241; Thu, 08 Aug 2024
+ 01:12:33 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240715095702.1222213-1-ethan84@andestech.com>
- <20240715101409.1249373-1-ethan84@andestech.com>
-In-Reply-To: <20240715101409.1249373-1-ethan84@andestech.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 8 Aug 2024 14:25:04 +1000
-Message-ID: <CAKmqyKOJOUvf-=qNQ90BQeFGNayH1mmtcYNd=iYVjNf53V-uMw@mail.gmail.com>
-Subject: Re: [PATCH v8 6/8] hw/misc/riscv_iopmp: Add API to configure RISCV
- CPU IOPMP support
-To: Ethan Chen <ethan84@andestech.com>
-Cc: qemu-devel@nongnu.org, richard.henderson@linaro.org, pbonzini@redhat.com, 
- peterx@redhat.com, david@redhat.com, philmd@linaro.org, palmer@dabbelt.com,
- alistair.francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com, 
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
- qemu-riscv@nongnu.org
+References: <20240723-counter_delegation-v2-0-c4170a5348ca@rivosinc.com>
+ <20240723-counter_delegation-v2-13-c4170a5348ca@rivosinc.com>
+ <20240806-9fdad33468ec103d83a85e77@orel>
+ <3c09bbbe-857b-4566-963a-790497232bbf@ventanamicro.com>
+ <CAKmqyKNgJKBFw7OnwbgbqxA65PR4GSjdUEKdKVw-nYv+e0P58w@mail.gmail.com>
+ <CAHBxVyFFa7mQaS4jPkT=aK4gTF3AshpQZNeRhBiZOHX7bhQQsg@mail.gmail.com>
+ <CAKmqyKOX883p+sgFs6s649pkH0BA9aKcrTr7=XOT=Xy8mNLzng@mail.gmail.com>
+In-Reply-To: <CAKmqyKOX883p+sgFs6s649pkH0BA9aKcrTr7=XOT=Xy8mNLzng@mail.gmail.com>
+From: Atish Kumar Patra <atishp@rivosinc.com>
+Date: Thu, 8 Aug 2024 01:12:22 -0700
+Message-ID: <CAHBxVyHvypXN0PtxtWwZPoB3i3JRRSqn218nnURy+sD8gmqyjQ@mail.gmail.com>
+Subject: Re: [PATCH v2 13/13] target/riscv: Enable PMU related extensions to
+ preferred rule
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Andrew Jones <ajones@ventanamicro.com>, 
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, bin.meng@windriver.com, 
+ alistair.francis@wdc.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::935;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x935.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
+Received-SPF: pass client-ip=2a00:1450:4864:20::230;
+ envelope-from=atishp@rivosinc.com; helo=mail-lj1-x230.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -96,57 +102,164 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Jul 15, 2024 at 8:15=E2=80=AFPM Ethan Chen via <qemu-devel@nongnu.o=
-rg> wrote:
+On Wed, Aug 7, 2024 at 5:27=E2=80=AFPM Alistair Francis <alistair23@gmail.c=
+om> wrote:
 >
-> The iopmp_setup_cpu() function configures the RISCV CPU to support IOPMP =
-and
-> specifies the CPU's RRID.
+> On Wed, Aug 7, 2024 at 5:44=E2=80=AFPM Atish Kumar Patra <atishp@rivosinc=
+.com> wrote:
+> >
+> > On Tue, Aug 6, 2024 at 7:01=E2=80=AFPM Alistair Francis <alistair23@gma=
+il.com> wrote:
+> > >
+> > > On Wed, Aug 7, 2024 at 2:06=E2=80=AFAM Daniel Henrique Barboza
+> > > <dbarboza@ventanamicro.com> wrote:
+> > > >
+> > > >
+> > > >
+> > > > On 8/6/24 5:46 AM, Andrew Jones wrote:
+> > > > > On Tue, Jul 23, 2024 at 04:30:10PM GMT, Atish Patra wrote:
+> > > > >> Counter delegation/configuration extension requires the followin=
+g
+> > > > >> extensions to be enabled.
+> > > > >>
+> > > > >> 1. Smcdeleg - To enable counter delegation from M to S
+> > > > >> 2. S[m|s]csrind - To enable indirect access CSRs
+> > > > >> 3. Smstateen - Indirect CSR extensions depend on it.
+> > > > >> 4. Sscofpmf - To enable counter overflow feature
+> > > > >> 5. S[m|s]aia - To enable counter overflow feature in virtualizat=
+ion
+> > > > >> 6. Smcntrpmf - To enable privilege mode filtering for cycle/inst=
+ret
+> > > > >>
+> > > > >> While first 3 are mandatory to enable the counter delegation,
+> > > > >> next 3 set of extension are preferred to enable all the PMU rela=
+ted
+> > > > >> features.
+> > > > >
+> > > > > Just my 2 cents, but I think for the first three we can apply the=
+ concept
+> > > > > of extension bundles, which we need for other extensions as well.=
+ In those
+> > > > > cases we just auto enable all the dependencies. For the three pre=
+ferred
+> > > > > extensions I think we can just leave them off for 'base', but we =
+should
+> > > > > enable them by default for 'max' along with Ssccfg.
+> > >
+> >
+> > Max cpu will have everything enabled by default. The problem with max
+> > cpu is that you
+> > may not want to run all the available ISA extensions while testing perf=
+.
+> >
+> > > Agreed
+> > >
+> > > >
+> > > > I like this idea. I would throw in all these 6 extensions in a 'pmu=
+_advanced_ops'
+> > > > (or any other better fitting name for the bundle) flag and then 'pm=
+u_advanced_ops=3Dtrue'
+> > > > would enable all of those. 'pmu_advanced_ops=3Dtrue,smcntrpmf=3Dfal=
+se' enables all but
+> > > > 'smcntrpmf' and so on.
+> > > >
+> >
+> > I thought distinguishing preferred vs implied would be useful because
+> > it would allow the user
+> > to clearly understand which is mandated by ISA vs which would be good t=
+o have.
 >
-> Signed-off-by: Ethan Chen <ethan84@andestech.com>
-> ---
->  hw/misc/riscv_iopmp.c         | 6 ++++++
->  include/hw/misc/riscv_iopmp.h | 1 +
->  2 files changed, 7 insertions(+)
+> It's not really clear though what extensions are good to have. Other
+> people might think differently about the extensions. It also then
+> means we end up with complex combinations of extensions to manage.
 >
-> diff --git a/hw/misc/riscv_iopmp.c b/hw/misc/riscv_iopmp.c
-> index e62ac57437..374bf5c610 100644
-> --- a/hw/misc/riscv_iopmp.c
-> +++ b/hw/misc/riscv_iopmp.c
-> @@ -1211,5 +1211,11 @@ void iopmp_setup_system_memory(DeviceState *dev, c=
-onst MemMapEntry *memmap,
->                         "iopmp-downstream-as");
->  }
+> >
+> > The good to have extensions can be disabled similar to above but not
+> > the mandatory ones.
+> >
+> > > > As long as we document what the flag is enabling I don't see any pr=
+oblems with it.
+> > > > This is how profiles are implemented after all.
+> > >
+> > > I only worry that we end up with a huge collection of flags that user=
+s
+> > > need to decipher.
+> > >
+> >
+> > My initial idea was a separate flag as well. But I was not sure if
+> > that was good for the
+> > above reason. This additional custom pmu related option would be lost
+> > in that huge collection.
 >
-> +void iopmp_setup_cpu(RISCVCPU *cpu, uint32_t rrid)
-> +{
-> +    cpu->cfg.iopmp =3D true;
-> +    cpu->cfg.iopmp_rrid =3D rrid;
-> +}
+> I do feel a separate flag is better than trying to guess what extra
+> extensions the user wants enabled.
+>
 
-This should just be a normal CPU property, which the machine can then
-set to true if required
+Sure. A separate pmu flag that enables all available pmu related
+extensions - Correct ?
+Do you prefer to have those enabled via a separate preferred rule or
+just reuse the implied
+rule ? I can drop the preferred rule patches for the later case.
 
-Alistair
 
-> +
+> I don't love either though, isn't this what profiles is supposed to fix!
 >
->  type_init(iopmp_register_types);
-> diff --git a/include/hw/misc/riscv_iopmp.h b/include/hw/misc/riscv_iopmp.=
-h
-> index ebe9c4bc4a..7e7da56d10 100644
-> --- a/include/hw/misc/riscv_iopmp.h
-> +++ b/include/hw/misc/riscv_iopmp.h
-> @@ -167,5 +167,6 @@ typedef struct IopmpState {
+
+Yeah. But given the optionality in profiles, I am sure if it will fix
+the ever growing
+extension dependency graph problem ;)
+
+> >
+> > > I guess with some good documentation this wouldn't be too confusing t=
+hough.
+> > >
+> >
+> > Sure. It won't be confusing but most users may not even know about it
+> > without digging.
 >
->  void iopmp_setup_system_memory(DeviceState *dev, const MemMapEntry *memm=
-ap,
->                                 uint32_t mapentry_num);
-> +void iopmp_setup_cpu(RISCVCPU *cpu, uint32_t rrid);
+> At that point they can use the max CPU or just manually enable the
+> extensions though.
 >
->  #endif
-> --
-> 2.34.1
+
+If everybody thinks max CPU is going to be used more frequently in the
+future, I am okay with
+that as well. Implied rule will only specify mandatory extensions
+defined by ISA.
+
+It's up to the user to figure out the extensions names and enable them
+individually if max CPU
+is not used.
+FYI: There are at least 6 more PMU related extensions that this series
+did not specify.
+~4 are being discussed in the RVI TG(precise event sampling, events)
+and 2 are frozen (Smctr/Ssctr)
+
+> Alistair
 >
->
+> > That's why I chose to use a standard extension which covers the basic
+> > PMU access directly in S-mode.
+> >
+> > The future extensions such as CTR or Sampling events would also
+> > benefit by just adding the Ssccfg in the preferred rule
+> > which in turn will enable other preferred/mandatory extensions.
+> >
+> > > Alistair
+> > >
+> > > >
+> > > > With this bundle we can also use implied rule only if an extension =
+really needs
+> > > > (i.e. it breaks without) a dependency being enabled, instead of ove=
+rloading it
+> > > > with extensions that 'would be nice to have together' like it seems=
+ to be the
+> > > > case for the last 3 extensions in that list.
+> > > >
+> > > > I believe users would benefit more from a single flag to enable eve=
+rything and
+> > > > be done with it.
+> > > >
+> > > >
+> > > > Thanks,
+> > > >
+> > > > Daniel
 
