@@ -4,78 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E27CEC3DA4A
-	for <qemu-riscv@archiver.kernel.org>; Fri,  9 Aug 2024 03:29:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEDFEC3DA4A
+	for <qemu-riscv@archiver.kernel.org>; Fri,  9 Aug 2024 05:32:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1scGJ0-0005TP-CD; Thu, 08 Aug 2024 23:28:42 -0400
+	id 1scIEe-0007fl-Q9; Fri, 09 Aug 2024 01:32:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
- id 1scGIx-0005SF-Aq
- for qemu-riscv@nongnu.org; Thu, 08 Aug 2024 23:28:39 -0400
-Received: from mail-oa1-x2c.google.com ([2001:4860:4864:20::2c])
+ (Exim 4.90_1) (envelope-from <tommy.wu@sifive.com>)
+ id 1scIEa-0007cR-0H
+ for qemu-riscv@nongnu.org; Fri, 09 Aug 2024 01:32:16 -0400
+Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
- id 1scGIv-0005S8-LX
- for qemu-riscv@nongnu.org; Thu, 08 Aug 2024 23:28:39 -0400
-Received: by mail-oa1-x2c.google.com with SMTP id
- 586e51a60fabf-260209df55dso865831fac.2
- for <qemu-riscv@nongnu.org>; Thu, 08 Aug 2024 20:28:37 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <tommy.wu@sifive.com>)
+ id 1scIEX-0005eK-HZ
+ for qemu-riscv@nongnu.org; Fri, 09 Aug 2024 01:32:15 -0400
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-3684407b2deso871279f8f.1
+ for <qemu-riscv@nongnu.org>; Thu, 08 Aug 2024 22:32:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1723174116; x=1723778916; darn=nongnu.org;
+ d=sifive.com; s=google; t=1723181529; x=1723786329; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=dF1Th3mxnkasppLjmRi/GC8aJHarOPFDvn5z8aJZCOg=;
- b=PloT4velnIcoLRmIdcbuSCOdHYDCUD9pz58qqN6zesU4o/Pt1G7cpwE64lMhbMlTto
- Oq2YvaGzJ7GmWLqmfJ7lggrSsQjXrvJN6EWzpFZtTL9yabG08M1bKjWOGAgQWnp8b0uJ
- HHGGEKk7jFrOx4XvzI4+prY67Z4B/77vLTnez0F2+N3hF7xeSowgYuUn46Z6LGXvuXoj
- jGx3h3y8ctO9/rBgQM1Pd9sSy1dRmYfbish3PECTU2Zkg4vQBUGic8N0MTbVBne1T2A6
- NaAmHkemy8pXCz5SsUzYZrzY/x8AWn9NegW6mlPxWVEYCxvXg08ABqlY6C1ZkMJlU8vG
- PlFg==
+ bh=HYn1aDvDHwwtCn/izfYMZZTlYnbLQ5RlvEDJNMY3rSg=;
+ b=lziVT/gZk533Klr/YZtpKZD2YFD3o963aALvKHyz34fDZ7bIVSxGf8Uka7vwhnlipk
+ DWGSU+XD7OxkYd6Aqxi2cBrzjY9c3rHPbZv1C1IoPuxc+Isw832LmFyW8WVxMyJIfHfP
+ pa/o7AdvqqdczJL+E/bPYHggdk4gYE/U4fJh1G5psb5ogvG4IlL1n1yquZcWzlbLFL2o
+ E5L+YUO2tNOIFoLgHzzHUTNb2N36vx2+HGwMmlEqO2lJz9QFMW3dvOckuHvkZP/W0miK
+ EPPTk+63Pp3pm+Uh0+xhQ9OYGg/PC+/T/ncphWac8TVa2C93LBiI7g8Fxi21SQEMS7Dg
+ B+8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723174116; x=1723778916;
+ d=1e100.net; s=20230601; t=1723181529; x=1723786329;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=dF1Th3mxnkasppLjmRi/GC8aJHarOPFDvn5z8aJZCOg=;
- b=ct/z3alNTSSlqg/JM6l9zKjfMgw5AilH5ayAFMDN7layV8Di/w1V/4hWXb4C+Qbrok
- 3M0cIawdpPnnzViBSUOyFbOOn9GtTmwD2JoXO/n7lFy16gX7fkHpld5lyza7VovUbqnY
- lnQG7QjF0CKd/JlfOPTLlnaLOxTKFOTAHqgg/3hijrBrd1g2p8DY0ENyQSgIfy6mtY4B
- Q9dYKr9B08L4Jc/39HfFgxAt5N57qqrvyr5s32tizTmF7VPDGQjEUbFsN6k3qOdRl3FS
- Nock1qPMYJCWWA3MyMioTE7gKXReI43igsMh3ZsNxA7ehcRMLHPb6txehBDUxv7kYHFF
- BOoA==
+ bh=HYn1aDvDHwwtCn/izfYMZZTlYnbLQ5RlvEDJNMY3rSg=;
+ b=OxN0/vOBkRaC7KJhRxDzLurPEQ2Uhj3qCWwIOFANikE9YhGQwoB5SCAdwbZJqOg4XV
+ BfOw9/cruT8Ni2zmetS7TV4x96aCQFYdSXKHfstD8R15trQBdzPkopZYMklXiop8TNkJ
+ ybad8XnGngmE7BCIxA6vHavfofy06c6YqzBJkKl4BcngJ5jxPZ0W0irXb4eYWBBqmY+m
+ SBJKaUlPHCxJcPAZbEegElg3ey7O0T08IQFuj+KjdLt1caZHQ+pYlvm0ARK2OXP9vOOR
+ k0T+ht1u3jlTdZ/dPxBdgzqkmHHeewAocan8RU/r/mBhC38rpYVOyqWuhbui7AiQw6/H
+ R6Kw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX41t8aGCWVSvzl6yby18w71j0YGDw30NM+amTG07qVVnkBZ0JSPxEwhGkxzxs/8ar/tEO0HhLziKfADZxrziPOn/Dz+14=
-X-Gm-Message-State: AOJu0YymZOb1hL68VWRNYTXhEtRhurTI0xtH74VLvSUnIj4u7zVjhPS+
- ElEiQ6XFNSDT1HYMfQ3hxcCTStTmlBoqdUJRE4KAaDjFGA/bMMEcn/O/ISHcJUy/0vXC1lyZyyQ
- yiU3sV+eaqDhL9+QuCBNBD5bQvXSTQkHS1tZp3g==
-X-Google-Smtp-Source: AGHT+IEusv3yAaHfX3hGBlzegdNIeWCp+xiKRlsZ89tsugccQEzW9rou7sH3aUFAIV43BFPtd0p1PtDvBouCTO6exz0=
-X-Received: by 2002:a05:6870:d8d2:b0:260:e678:b660 with SMTP id
- 586e51a60fabf-26c63043149mr283914fac.51.1723174116021; Thu, 08 Aug 2024
- 20:28:36 -0700 (PDT)
+ AJvYcCUUuUkfhx8atQ4nrupGZ9atJlXgoUmPvJC+FIikWLUdo7TB6uAwN52m//n5ozH0zHc7dckbjCmeVG5AFVdq4XMQE4EiDI4=
+X-Gm-Message-State: AOJu0YzWLtVUrjosab2sy4pmubE1JLeC5rbnVSFoGF3MoJwwyx0ZoBa5
+ Z/pkT0C+eUq1Nq8WZWDkEWSjHC6GfHx1KJnb7ZJZWuZGs/QBJiokCdx3so57rCCSX26uPaOVCMr
+ lSBXhT1kSAiYCh8dXP3rI0dP9vILcXhbBZ3cA9Q==
+X-Google-Smtp-Source: AGHT+IEx6Z8r0KlPUOK8jW8V4vODUJNKOJFfsLAwzlzZKn4ALauCtZgUANBoWoJKxhLyOsvEygv0i43dqLs0EUcx2zI=
+X-Received: by 2002:a5d:4206:0:b0:36b:8f94:e206 with SMTP id
+ ffacd0b85a97d-36d5de943ccmr280864f8f.5.1723181529100; Thu, 08 Aug 2024
+ 22:32:09 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240808082030.25940-1-yongxuan.wang@sifive.com>
- <aad11c6d-8c5d-40bd-8b0d-3dae10b80d4d@ventanamicro.com>
-In-Reply-To: <aad11c6d-8c5d-40bd-8b0d-3dae10b80d4d@ventanamicro.com>
-From: Yong-Xuan Wang <yongxuan.wang@sifive.com>
-Date: Fri, 9 Aug 2024 11:28:23 +0800
-Message-ID: <CAMWQL2h6=MO1YFW2tUONM_yDnmdtG-CfGyk+RCPZo3u2s6o4Uw@mail.gmail.com>
-Subject: Re: [PATCH 1/1] hw/intc/riscv_aplic: Fix APLIC in clrip and clripnum
- write emulation
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, greentime.hu@sifive.com, 
- vincent.chen@sifive.com, frank.chang@sifive.com, jim.shu@sifive.com, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Anup Patel <apatel@ventanamicro.com>
+References: <20230608072314.3561109-1-tommy.wu@sifive.com>
+ <20230608-01a21738d16a20808eceb795@orel>
+In-Reply-To: <20230608-01a21738d16a20808eceb795@orel>
+From: Tommy Wu <tommy.wu@sifive.com>
+Date: Fri, 9 Aug 2024 13:31:58 +0800
+Message-ID: <CANj3q_=M5Lgu78y6k36-jaYpAzLe_TX0tEF61YUtfi26+y1DUA@mail.gmail.com>
+Subject: Re: [PATCH v4 0/4] target/riscv: Add Smrnmi support.
+To: Andrew Jones <ajones@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, frank.chang@sifive.com, 
+ palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
+ liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
+ richard.henderson@linaro.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2001:4860:4864:20::2c;
- envelope-from=yongxuan.wang@sifive.com; helo=mail-oa1-x2c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
+ envelope-from=tommy.wu@sifive.com; helo=mail-wr1-x42a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -98,80 +95,94 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Daniel,
-
-On Fri, Aug 9, 2024 at 5:40=E2=80=AFAM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+On Thu, Jun 8, 2023 at 5:43=E2=80=AFPM Andrew Jones <ajones@ventanamicro.co=
+m> wrote:
 >
-> Ccing Anup
->
-> On 8/8/24 5:20 AM, Yong-Xuan Wang wrote:
-> > In the section "4.7 Precise effects on interrupt-pending bits"
-> > of the RISC-V AIA specification defines that:
+> On Thu, Jun 08, 2023 at 12:23:10AM -0700, Tommy Wu wrote:
+> > This patchset added support for Smrnmi Extension in RISC-V.
 > >
-> > If the source mode is Level1 or Level0 and the interrupt domain
-> > is configured in MSI delivery mode (domaincfg.DM =3D 1):
-> > The pending bit is cleared whenever the rectified input value is
-> > low, when the interrupt is forwarded by MSI, or by a relevant
-> > write to an in clrip register or to clripnum.
+> > There are four new CSRs and one new instruction added to allow NMI to b=
+e
+> > resumable in RISC-V, which are:
 > >
-> > Update the riscv_aplic_set_pending() to match the spec.
+> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >   * mnscratch (0x740)
+> >   * mnepc     (0x741)
+> >   * mncause   (0x742)
+> >   * mnstatus  (0x744)
+> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >   * mnret: To return from RNMI interrupt/exception handler.
+> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 > >
->
-> This would need a
->
-> Fixes: bf31cf06eb ("hw/intc/riscv_aplic: Fix setipnum_le write emulation =
-for APLIC MSI-mode")
->
-
-I will add it into next version. Thank you!
-
-> > Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
-> > ---
-> >   hw/intc/riscv_aplic.c | 2 +-
-> >   1 file changed, 1 insertion(+), 1 deletion(-)
+> > RNMI also has higher priority than any other interrupts or exceptions
+> > and cannot be disabled by software.
 > >
-> > diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
-> > index c1748c2d17d1..45d8b4089229 100644
-> > --- a/hw/intc/riscv_aplic.c
-> > +++ b/hw/intc/riscv_aplic.c
-> > @@ -247,7 +247,7 @@ static void riscv_aplic_set_pending(RISCVAPLICState=
- *aplic,
+> > RNMI may be used to route to other devices such as Bus Error Unit or
+> > Watchdog Timer in the future.
 > >
-> >       if ((sm =3D=3D APLIC_SOURCECFG_SM_LEVEL_HIGH) ||
-> >           (sm =3D=3D APLIC_SOURCECFG_SM_LEVEL_LOW)) {
-> > -        if (!aplic->msimode || (aplic->msimode && !pending)) {
-> > +        if (!aplic->msimode) {
+> > The interrupt/exception trap handler addresses of RNMI are
+> > implementation defined.
 >
-> The change you're doing here seems sensible to me but I'd rather have Anu=
-p take
-> a look to see if this somehow undo what was made here in commit bf31cf06.
->
-> In particular w.r.t this paragraph from section 4.9.2 of AIA:
->
-> "A second option is for the interrupt service routine to write the
-> APLIC=E2=80=99s source identity number for the interrupt to the domain=E2=
-=80=99s
-> setipnum register just before exiting. This will cause the interrupt=E2=
-=80=99s
-> pending bit to be set to one again if the source is still asserting
-> an interrupt, but not if the source is not asserting an interrupt."
->
-
-I think that this patch won't affect setipnum. For the setipnum case,
-the pending value would
-be true. And it is handled by the 2 if conditions below.
-
-Regards,
-Yong-Xuan
-
+> Is there an M-mode software PoC for this with implemented handlers?
 >
 > Thanks,
+> drew
 >
-> Daniel
->
->
-> >               return;
-> >           }
-> >           if ((aplic->state[irq] & APLIC_ISTATE_INPUT) &&
+
+Sorry for the late reply.
+We implement a simple RNMI trap handler in the customized OpenSBI [1], and
+use the work from Damien Hedde [2] to inject the RNMI interrupt. We can tes=
+t
+the RNMI functionality with the signal injection in the customized QEMU [3]=
+.
+
+I=E2=80=99ll include the test case in the latest upstream email.
+
+[1] https://github.com/TommyWu-fdgkhdkgh/opensbi/commits/dev/twu/master
+[2] https://lists.gnu.org/archive/html/qemu-devel/2019-06/msg06232.html
+[3] https://github.com/TommyWu-fdgkhdkgh/qemu/tree/dev/twu/master
+
+> >
+> > Changelog:
+> >
+> > v4
+> > * Fix some coding style issues.
+> > ( Thank Daniel for the suggestions. )
+> >
+> > v3
+> > * Update to the newest version of Smrnmi extension specification.
+> >
+> > v2
+> >   * split up the series into more commits for convenience of review.
+> >   * add missing rnmi_irqvec and rnmi_excpvec properties to riscv_harts.
+> >
+> > Tommy Wu (4):
+> >   target/riscv: Add Smrnmi cpu extension.
+> >   target/riscv: Add Smrnmi CSRs.
+> >   target/riscv: Handle Smrnmi interrupt and exception.
+> >   target/riscv: Add Smrnmi mnret instruction.
+> >
+> >  hw/riscv/riscv_hart.c                         | 21 +++++
+> >  include/hw/riscv/riscv_hart.h                 |  4 +
+> >  target/riscv/cpu.c                            | 18 ++++
+> >  target/riscv/cpu.h                            | 11 +++
+> >  target/riscv/cpu_bits.h                       | 23 ++++++
+> >  target/riscv/cpu_helper.c                     | 81 ++++++++++++++++--
+> >  target/riscv/csr.c                            | 82 +++++++++++++++++++
+> >  target/riscv/helper.h                         |  1 +
+> >  target/riscv/insn32.decode                    |  3 +
+> >  .../riscv/insn_trans/trans_privileged.c.inc   | 12 +++
+> >  target/riscv/op_helper.c                      | 49 +++++++++++
+> >  11 files changed, 300 insertions(+), 5 deletions(-)
+> >
+> > --
+> > 2.31.1
+> >
+> >
 
