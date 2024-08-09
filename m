@@ -4,83 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCCBAC52D73
-	for <qemu-riscv@archiver.kernel.org>; Thu,  8 Aug 2024 21:41:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E27CEC3DA4A
+	for <qemu-riscv@archiver.kernel.org>; Fri,  9 Aug 2024 03:29:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1scAsH-0002aN-3I; Thu, 08 Aug 2024 17:40:45 -0400
+	id 1scGJ0-0005TP-CD; Thu, 08 Aug 2024 23:28:42 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1scAsA-0002Yt-3A
- for qemu-riscv@nongnu.org; Thu, 08 Aug 2024 17:40:38 -0400
-Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
+ (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
+ id 1scGIx-0005SF-Aq
+ for qemu-riscv@nongnu.org; Thu, 08 Aug 2024 23:28:39 -0400
+Received: from mail-oa1-x2c.google.com ([2001:4860:4864:20::2c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1scAs5-0002pW-Lf
- for qemu-riscv@nongnu.org; Thu, 08 Aug 2024 17:40:37 -0400
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-1fc47abc040so11872305ad.0
- for <qemu-riscv@nongnu.org>; Thu, 08 Aug 2024 14:40:32 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
+ id 1scGIv-0005S8-LX
+ for qemu-riscv@nongnu.org; Thu, 08 Aug 2024 23:28:39 -0400
+Received: by mail-oa1-x2c.google.com with SMTP id
+ 586e51a60fabf-260209df55dso865831fac.2
+ for <qemu-riscv@nongnu.org>; Thu, 08 Aug 2024 20:28:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1723153231; x=1723758031; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=2DHArUNFGDWjSdzFvX0OcFBbySnBz20hOWaa8VBmMDs=;
- b=Y54y0NM1YpQdmG4eWX3AUnGddltfrEo4qkdKvCKZA7uxxeoXPL9HhynHwKRTuNoLMR
- At2kC7IYa6zVD82DnDO7Kt+Xb8mk957zWMGlVPLoV6cffANA46IBM0SklXIWf6XthDwH
- HNnVcgv9B0cnR9UoJ7nwLLUmtoGaGkpY4nkGtEQnZdQcEg/mnOOW0lrgBpDC+Kwcbxpn
- YizplcMhLJkmnm5oBkGhV8akEH6k7MNGhTEMQWuu+yX+22/KyJfirS2Ew+a47iZ+uGGn
- c04omEqQ+PTA+DxsbTHIcFft65wLSx1po2nACuTEivF+/223aW6W9+9eQ7jHaWv0jacO
- s84g==
+ d=sifive.com; s=google; t=1723174116; x=1723778916; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=dF1Th3mxnkasppLjmRi/GC8aJHarOPFDvn5z8aJZCOg=;
+ b=PloT4velnIcoLRmIdcbuSCOdHYDCUD9pz58qqN6zesU4o/Pt1G7cpwE64lMhbMlTto
+ Oq2YvaGzJ7GmWLqmfJ7lggrSsQjXrvJN6EWzpFZtTL9yabG08M1bKjWOGAgQWnp8b0uJ
+ HHGGEKk7jFrOx4XvzI4+prY67Z4B/77vLTnez0F2+N3hF7xeSowgYuUn46Z6LGXvuXoj
+ jGx3h3y8ctO9/rBgQM1Pd9sSy1dRmYfbish3PECTU2Zkg4vQBUGic8N0MTbVBne1T2A6
+ NaAmHkemy8pXCz5SsUzYZrzY/x8AWn9NegW6mlPxWVEYCxvXg08ABqlY6C1ZkMJlU8vG
+ PlFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723153231; x=1723758031;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=2DHArUNFGDWjSdzFvX0OcFBbySnBz20hOWaa8VBmMDs=;
- b=HFHpNseY5D8TBOZmpUOIRhxd/zlWkqBLBHrH2PCSliRgTF5h/9zlzlZyaXL7bAensJ
- RN4cLz+F7Tx0tE5zT7yv1TU20ViLWUWgnPxXogFO2tdl97IjJIDEPTmAnOugVIs6ef/l
- AArpZfJaF4Sfgha6u4vDBJr2OAQUu89EFr/eFe12s/r1gq1ZTA61Vs/BiX36r2HgPYHi
- xlBDIMwCdI5caApm8ysKtgfGAyyvyDcwiEupAYFCjeNCelyihH4xv/kwT4REjb+DUPgL
- RQ1xsJlD5gZLXJniK7fsy2eCgnCiXdDf1Zz3iDvhJB5ckOuS5tQf3yJ0M5MkKt3DQO47
- /I8w==
+ d=1e100.net; s=20230601; t=1723174116; x=1723778916;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=dF1Th3mxnkasppLjmRi/GC8aJHarOPFDvn5z8aJZCOg=;
+ b=ct/z3alNTSSlqg/JM6l9zKjfMgw5AilH5ayAFMDN7layV8Di/w1V/4hWXb4C+Qbrok
+ 3M0cIawdpPnnzViBSUOyFbOOn9GtTmwD2JoXO/n7lFy16gX7fkHpld5lyza7VovUbqnY
+ lnQG7QjF0CKd/JlfOPTLlnaLOxTKFOTAHqgg/3hijrBrd1g2p8DY0ENyQSgIfy6mtY4B
+ Q9dYKr9B08L4Jc/39HfFgxAt5N57qqrvyr5s32tizTmF7VPDGQjEUbFsN6k3qOdRl3FS
+ Nock1qPMYJCWWA3MyMioTE7gKXReI43igsMh3ZsNxA7ehcRMLHPb6txehBDUxv7kYHFF
+ BOoA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXLZS3Ot5py8jSy7ZvsPoAzfeuJ5MEvNoLFhV42Be8dW2BIVYLaJUfZ+pUtSHLJyg9dN2cgj71ruKjcesgOfOxLNeNvbrs=
-X-Gm-Message-State: AOJu0Yz/54Tkxe9K2H5xz7Ax/WGLcIXWwRGMbpHu/JpB9reQOJxxlAeC
- 32AwiE/nrcagyaTOJOIWJneyxBFv5ykcP6mR9w5NvSpWe+V4pWCOucwu1H5zAJk=
-X-Google-Smtp-Source: AGHT+IEQYhDdH1NW+E8f+7eSP3RFG1z4KUHCQ4BfbnNEBmgIPMfyalqHj43OukoQc50fBnkyaivg1Q==
-X-Received: by 2002:a17:903:2308:b0:1fb:59e6:b0e5 with SMTP id
- d9443c01a7336-200952b6dcamr38852055ad.19.1723153231551; 
- Thu, 08 Aug 2024 14:40:31 -0700 (PDT)
-Received: from [192.168.68.110] ([177.18.66.246])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1ff58f272f0sm129591345ad.4.2024.08.08.14.40.26
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 08 Aug 2024 14:40:31 -0700 (PDT)
-Message-ID: <aad11c6d-8c5d-40bd-8b0d-3dae10b80d4d@ventanamicro.com>
-Date: Thu, 8 Aug 2024 18:40:24 -0300
+ AJvYcCX41t8aGCWVSvzl6yby18w71j0YGDw30NM+amTG07qVVnkBZ0JSPxEwhGkxzxs/8ar/tEO0HhLziKfADZxrziPOn/Dz+14=
+X-Gm-Message-State: AOJu0YymZOb1hL68VWRNYTXhEtRhurTI0xtH74VLvSUnIj4u7zVjhPS+
+ ElEiQ6XFNSDT1HYMfQ3hxcCTStTmlBoqdUJRE4KAaDjFGA/bMMEcn/O/ISHcJUy/0vXC1lyZyyQ
+ yiU3sV+eaqDhL9+QuCBNBD5bQvXSTQkHS1tZp3g==
+X-Google-Smtp-Source: AGHT+IEusv3yAaHfX3hGBlzegdNIeWCp+xiKRlsZ89tsugccQEzW9rou7sH3aUFAIV43BFPtd0p1PtDvBouCTO6exz0=
+X-Received: by 2002:a05:6870:d8d2:b0:260:e678:b660 with SMTP id
+ 586e51a60fabf-26c63043149mr283914fac.51.1723174116021; Thu, 08 Aug 2024
+ 20:28:36 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+References: <20240808082030.25940-1-yongxuan.wang@sifive.com>
+ <aad11c6d-8c5d-40bd-8b0d-3dae10b80d4d@ventanamicro.com>
+In-Reply-To: <aad11c6d-8c5d-40bd-8b0d-3dae10b80d4d@ventanamicro.com>
+From: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+Date: Fri, 9 Aug 2024 11:28:23 +0800
+Message-ID: <CAMWQL2h6=MO1YFW2tUONM_yDnmdtG-CfGyk+RCPZo3u2s6o4Uw@mail.gmail.com>
 Subject: Re: [PATCH 1/1] hw/intc/riscv_aplic: Fix APLIC in clrip and clripnum
  write emulation
-To: Yong-Xuan Wang <yongxuan.wang@sifive.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: greentime.hu@sifive.com, vincent.chen@sifive.com, frank.chang@sifive.com, 
- jim.shu@sifive.com, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Anup Patel <apatel@ventanamicro.com>
-References: <20240808082030.25940-1-yongxuan.wang@sifive.com>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240808082030.25940-1-yongxuan.wang@sifive.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x633.google.com
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, greentime.hu@sifive.com, 
+ vincent.chen@sifive.com, frank.chang@sifive.com, jim.shu@sifive.com, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Anup Patel <apatel@ventanamicro.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2001:4860:4864:20::2c;
+ envelope-from=yongxuan.wang@sifive.com; helo=mail-oa1-x2c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -103,59 +98,80 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Ccing Anup
+Hi Daniel,
 
-On 8/8/24 5:20 AM, Yong-Xuan Wang wrote:
-> In the section "4.7 Precise effects on interrupt-pending bits"
-> of the RISC-V AIA specification defines that:
-> 
-> If the source mode is Level1 or Level0 and the interrupt domain
-> is configured in MSI delivery mode (domaincfg.DM = 1):
-> The pending bit is cleared whenever the rectified input value is
-> low, when the interrupt is forwarded by MSI, or by a relevant
-> write to an in clrip register or to clripnum.
-> 
-> Update the riscv_aplic_set_pending() to match the spec.
-> 
+On Fri, Aug 9, 2024 at 5:40=E2=80=AFAM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
+>
+> Ccing Anup
+>
+> On 8/8/24 5:20 AM, Yong-Xuan Wang wrote:
+> > In the section "4.7 Precise effects on interrupt-pending bits"
+> > of the RISC-V AIA specification defines that:
+> >
+> > If the source mode is Level1 or Level0 and the interrupt domain
+> > is configured in MSI delivery mode (domaincfg.DM =3D 1):
+> > The pending bit is cleared whenever the rectified input value is
+> > low, when the interrupt is forwarded by MSI, or by a relevant
+> > write to an in clrip register or to clripnum.
+> >
+> > Update the riscv_aplic_set_pending() to match the spec.
+> >
+>
+> This would need a
+>
+> Fixes: bf31cf06eb ("hw/intc/riscv_aplic: Fix setipnum_le write emulation =
+for APLIC MSI-mode")
+>
 
-This would need a
+I will add it into next version. Thank you!
 
-Fixes: bf31cf06eb ("hw/intc/riscv_aplic: Fix setipnum_le write emulation for APLIC MSI-mode")
+> > Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+> > ---
+> >   hw/intc/riscv_aplic.c | 2 +-
+> >   1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
+> > index c1748c2d17d1..45d8b4089229 100644
+> > --- a/hw/intc/riscv_aplic.c
+> > +++ b/hw/intc/riscv_aplic.c
+> > @@ -247,7 +247,7 @@ static void riscv_aplic_set_pending(RISCVAPLICState=
+ *aplic,
+> >
+> >       if ((sm =3D=3D APLIC_SOURCECFG_SM_LEVEL_HIGH) ||
+> >           (sm =3D=3D APLIC_SOURCECFG_SM_LEVEL_LOW)) {
+> > -        if (!aplic->msimode || (aplic->msimode && !pending)) {
+> > +        if (!aplic->msimode) {
+>
+> The change you're doing here seems sensible to me but I'd rather have Anu=
+p take
+> a look to see if this somehow undo what was made here in commit bf31cf06.
+>
+> In particular w.r.t this paragraph from section 4.9.2 of AIA:
+>
+> "A second option is for the interrupt service routine to write the
+> APLIC=E2=80=99s source identity number for the interrupt to the domain=E2=
+=80=99s
+> setipnum register just before exiting. This will cause the interrupt=E2=
+=80=99s
+> pending bit to be set to one again if the source is still asserting
+> an interrupt, but not if the source is not asserting an interrupt."
+>
 
-> Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
-> ---
->   hw/intc/riscv_aplic.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
-> index c1748c2d17d1..45d8b4089229 100644
-> --- a/hw/intc/riscv_aplic.c
-> +++ b/hw/intc/riscv_aplic.c
-> @@ -247,7 +247,7 @@ static void riscv_aplic_set_pending(RISCVAPLICState *aplic,
->   
->       if ((sm == APLIC_SOURCECFG_SM_LEVEL_HIGH) ||
->           (sm == APLIC_SOURCECFG_SM_LEVEL_LOW)) {
-> -        if (!aplic->msimode || (aplic->msimode && !pending)) {
-> +        if (!aplic->msimode) {
+I think that this patch won't affect setipnum. For the setipnum case,
+the pending value would
+be true. And it is handled by the 2 if conditions below.
 
-The change you're doing here seems sensible to me but I'd rather have Anup take
-a look to see if this somehow undo what was made here in commit bf31cf06.
+Regards,
+Yong-Xuan
 
-In particular w.r.t this paragraph from section 4.9.2 of AIA:
-
-"A second option is for the interrupt service routine to write the
-APLIC’s source identity number for the interrupt to the domain’s
-setipnum register just before exiting. This will cause the interrupt’s
-pending bit to be set to one again if the source is still asserting
-an interrupt, but not if the source is not asserting an interrupt."
-
-
-Thanks,
-
-Daniel
-
-
->               return;
->           }
->           if ((aplic->state[irq] & APLIC_ISTATE_INPUT) &&
+>
+> Thanks,
+>
+> Daniel
+>
+>
+> >               return;
+> >           }
+> >           if ((aplic->state[irq] & APLIC_ISTATE_INPUT) &&
 
