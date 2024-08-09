@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 863E9C3DA4A
-	for <qemu-riscv@archiver.kernel.org>; Fri,  9 Aug 2024 05:50:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE5F3C3DA4A
+	for <qemu-riscv@archiver.kernel.org>; Fri,  9 Aug 2024 05:51:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1scIVV-0005ic-RF; Fri, 09 Aug 2024 01:49:45 -0400
+	id 1scIWm-00088n-OC; Fri, 09 Aug 2024 01:51:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <tommy.wu@sifive.com>)
- id 1scIVU-0005hZ-DZ
- for qemu-riscv@nongnu.org; Fri, 09 Aug 2024 01:49:44 -0400
-Received: from mail-wr1-x433.google.com ([2a00:1450:4864:20::433])
+ id 1scIWl-00083z-4C
+ for qemu-riscv@nongnu.org; Fri, 09 Aug 2024 01:51:03 -0400
+Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <tommy.wu@sifive.com>)
- id 1scIVS-0007je-Ga
- for qemu-riscv@nongnu.org; Fri, 09 Aug 2024 01:49:44 -0400
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-3685a564bafso758164f8f.3
- for <qemu-riscv@nongnu.org>; Thu, 08 Aug 2024 22:49:41 -0700 (PDT)
+ id 1scIWi-0008Bj-82
+ for qemu-riscv@nongnu.org; Fri, 09 Aug 2024 01:51:02 -0400
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-368313809a4so1596222f8f.0
+ for <qemu-riscv@nongnu.org>; Thu, 08 Aug 2024 22:50:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1723182581; x=1723787381; darn=nongnu.org;
+ d=sifive.com; s=google; t=1723182658; x=1723787458; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=08Mevyt9VlIAkk+a+8MISScOtRMlRX6VMco+3MMFgic=;
- b=bfSAye0joMPBQikOCAOibXwQDyWhbaSgFkfyc5sacuZrN1ehesPoGUkgL2Rdye7kn/
- ztDwq2F2YwedhmXPB3RYnjqxVpngXGPQkI6ABPOgKM5pUyUmmRL51JhP+F9hHEtExh95
- lLNxQ+dhP1wQLT+cDhvZueg/MrcwMO/ECDNH8783dTrC7sfHUP2/VcRanvd8CfL8gkQ7
- eOEdNHRma36USaA/HChLzy/9W50aXuof9Vdwv0Lwjp35DQYTh5HG8dnXBC40spORVDIp
- asIYS1aS7R7MjRakvESgp9ZSd4MK1Ch6yi9YrnBW2Vy0UwfSq9dCeXBZfEMra51v45Bv
- T4Sg==
+ bh=BbLqQMOuAKd7aCW4So6xCA7s6M4zjTvsQ8hGgjzXuTw=;
+ b=Vp1xanU5iuOnsvtnXOjMOBCioNciliQqkiPjRdBbEhKjpeIik1yei6uinmekQl3V3P
+ JzEziP74hTjqgAVZ7IAqo9PfrXQ9bVaERFA8C9AMYLCUoQUcSV/YEpdQrg5s6Dn9lftW
+ HVB78SFFv2Boq+e5PE6rIeugVPcpoKixxesQxTooNy80DwTICTHULtgRiN/fkyWvAnaD
+ Mem98F9rT25F3LTCXUzDx7GTS28f29MeB9PdW5EnqA2/mUV8EcMt3o8ipiIiE/bEEuVB
+ okMdhAYeKqha9qKzMyzdsoMW/b/oRE+w3c4dMsPeBxwITVu8lp4s94C+dIHaWpgNs71v
+ EuXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723182581; x=1723787381;
+ d=1e100.net; s=20230601; t=1723182658; x=1723787458;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=08Mevyt9VlIAkk+a+8MISScOtRMlRX6VMco+3MMFgic=;
- b=KrJ3FK52lEyapxZKI3kP+DRMrHtPhb5JLQvmKRjnEMHKkNmT9j40QdyAS9T5pQrNPp
- MtYRQIwPSQBf2z5/e6K4IKBUmnkCl4fTqO6LX0axv1oyO2WOLdrSh3SW9TcRfMT/SzFA
- wkQGSW7MQbJgjJ0b9Au6sfjrGFA17WCxioR0YX0EGIEbj7u70Hfrp34UyZ8sGuRzg/cV
- ZYRY5y5Ni5ijw9N4KTNfT7OcwJvmBXrACFXjLhEPDRTZmAo8koMZgPV/RlJrL/J2YB4+
- kP+0GMQl9rg1pp/Vx1aTrBuEOlA95fjg4nd//N2Jf3KDQak0ye3/iG0Uk81acr9Jpl/h
- W04w==
+ bh=BbLqQMOuAKd7aCW4So6xCA7s6M4zjTvsQ8hGgjzXuTw=;
+ b=jeLh2tZm4+RVCuutc7j2UrxNpZQeB4R+63hPM83e22rWg53GiGJYmWF8v7w69EyIhH
+ VO1Mzpaj1kPOSax4Fz/TQMlDCWYHIwcDo4fFko2iJRZ3u8utwya2ekvHesoPCq1a79/F
+ KAryKvzjtMaZPWuSPMNBwJRjDUCk9Tv8I9n1f4MrkmFVENd5JyVbnRA56WgX3Qx57Sk3
+ PpLg6ovM5klB4CF3nbSl1ajqFJnUGQ4XALgOsjyyVfiZurf/EZXBxoDCM0GMuwThRg8u
+ wOmgZh6KjOaXs31sjv/yb3KN2TPZKZtOdLulyz+F4Vivjejxgsc3/TfWD/UfUYdViISn
+ QIKw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWBMmGu1R2P4B7mwG/LwTnPY+VZDXrNZGECDUP3xTAMZ4LWnqgfDGDSNKSafTH1vwOe7/J8rk2iWnftn4Q4Rbfz8ItNvaI=
-X-Gm-Message-State: AOJu0Yz2+ovyfLyIJQk/hdsrm7EtMvC/oGzYjhfnLWVljHuALExyLtDc
- LXxnAPToYLThmCSP0YKBPBAzSvZeWmtfvv2V4G1PSO5Hf1Al+/ASBUEEzJ5aMBNTX4sO/yEl9Sq
- OtfaOG3fi5mobC9D+YGzhNF6tAkpyALwukhBSsg==
-X-Google-Smtp-Source: AGHT+IEM5VMkqE2oSwaiHB+m8+KcUT4XUd3rJnjRkNvC2PLX8EL+n901jtS16mA4Ms83jyxAQNRbA6cc8MSstFADhvY=
-X-Received: by 2002:a05:6000:257:b0:368:460d:d942 with SMTP id
- ffacd0b85a97d-36d5efdc80dmr259753f8f.24.1723182580475; Thu, 08 Aug 2024
- 22:49:40 -0700 (PDT)
+ AJvYcCXOlRgiNzKT72N3ZPEJvV9GyNXApQ1WUFLeCLwR6vPFZX73GynqnlS5Sj5E2uQRLEvbtLRmQRCqDoo8l0fQk7dAu+zRahU=
+X-Gm-Message-State: AOJu0Yy4S5NqbFrq9CdYTs2Yy7RiENjVFL3Wbm05FTww4JeBmrxjxR+U
+ ImyHjtxsGyOt7NrGBcCNPNDUec5LjJtRPHY66tSSeDi7+ugyUcdpxwBbcWJbI37IqnRRgIyI15x
+ kEJKnwR4S63aVNUGtGE4MqDbrFtFUeKvYM92xFg==
+X-Google-Smtp-Source: AGHT+IEEWhhv2O6ygVb7YFQm4/1ROkEkJ8ylBmfWPFyDr8krE2MQrpWlV8kcTD10PQZ75tD+EZ7Fq68fbOTiRfpt/hs=
+X-Received: by 2002:adf:f9cb:0:b0:367:8fd9:db6b with SMTP id
+ ffacd0b85a97d-36d68891671mr316096f8f.9.1723182657907; Thu, 08 Aug 2024
+ 22:50:57 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230608072314.3561109-1-tommy.wu@sifive.com>
  <20230608072314.3561109-2-tommy.wu@sifive.com>
- <20230608-7ebd80b284771a7478d3c6a0@orel>
-In-Reply-To: <20230608-7ebd80b284771a7478d3c6a0@orel>
+ <CAKmqyKOve+ceaiVQbYWsLqLgtH6VCPHCuaZZJim3KHaQHcJyfQ@mail.gmail.com>
+In-Reply-To: <CAKmqyKOve+ceaiVQbYWsLqLgtH6VCPHCuaZZJim3KHaQHcJyfQ@mail.gmail.com>
 From: Tommy Wu <tommy.wu@sifive.com>
-Date: Fri, 9 Aug 2024 13:49:30 +0800
-Message-ID: <CANj3q_k=r5=-ym_skRKLXRYvX0Y0zjb1W_bTEixGwLLDL=FeJg@mail.gmail.com>
+Date: Fri, 9 Aug 2024 13:50:46 +0800
+Message-ID: <CANj3q_mZ9Zhc9eCXBA+eePsaNAMF_mX5kegfFbFyM_1JcuATFw@mail.gmail.com>
 Subject: Re: [PATCH v4 1/4] target/riscv: Add Smrnmi cpu extension.
-To: Andrew Jones <ajones@ventanamicro.com>
+To: Alistair Francis <alistair23@gmail.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, frank.chang@sifive.com, 
  palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
  liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
  richard.henderson@linaro.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::433;
- envelope-from=tommy.wu@sifive.com; helo=mail-wr1-x433.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::435;
+ envelope-from=tommy.wu@sifive.com; helo=mail-wr1-x435.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -96,19 +96,12 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Jun 8, 2023 at 5:52=E2=80=AFPM Andrew Jones <ajones@ventanamicro.co=
-m> wrote:
+On Mon, Jun 12, 2023 at 1:04=E2=80=AFPM Alistair Francis <alistair23@gmail.=
+com> wrote:
 >
->
-> Please add a commit message to all patches of the series.
->
-> Another comment below.
-
-Thanks for the suggestion, I'll add commit messages to all patches in
-the v5 patches.
-
->
-> On Thu, Jun 08, 2023 at 12:23:11AM -0700, Tommy Wu wrote:
+> On Thu, Jun 8, 2023 at 5:25=E2=80=AFPM Tommy Wu <tommy.wu@sifive.com> wro=
+te:
+> >
 > > Signed-off-by: Frank Chang <frank.chang@sifive.com>
 > > Signed-off-by: Tommy Wu <tommy.wu@sifive.com>
 > > ---
@@ -189,6 +182,15 @@ t.h
 > >      ISA_EXT_DATA_ENTRY(zhinxmin, PRIV_VERSION_1_12_0, ext_zhinxmin),
 > >      ISA_EXT_DATA_ENTRY(smaia, PRIV_VERSION_1_12_0, ext_smaia),
 > > +    ISA_EXT_DATA_ENTRY(smrnmi, PRIV_VERSION_1_12_0, ext_smrnmi),
+>
+> The extension should be added after the implementation, so this patch
+> should be the last patch.
+>
+> Alistair
+
+Thanks for the suggestion, I'll move this patch to the last patch.
+
+>
 > >      ISA_EXT_DATA_ENTRY(ssaia, PRIV_VERSION_1_12_0, ext_ssaia),
 > >      ISA_EXT_DATA_ENTRY(sscofpmf, PRIV_VERSION_1_12_0, ext_sscofpmf),
 > >      ISA_EXT_DATA_ENTRY(sstc, PRIV_VERSION_1_12_0, ext_sstc),
@@ -234,25 +236,120 @@ vec,
 > > +    DEFINE_PROP_UINT64("rnmi-exception-vector", RISCVCPU, env.rnmi_exc=
 pvec,
 > > +                       DEFAULT_RNMI_EXCPVEC),
->
-> Why are these addresses user configurable? Shouldn't each board set them
-> to whatever the real board uses and a generic board, like 'virt', set
-> them to whatever works for it, considering the rest of its memory map?
-> Also, looking ahead, I don't see where the addresses are described to the
-> M-mode software in the DT, which implies board-specific M-mode software
-> would hard code it, but generic M-mode software should get the addresses
-> from the DT. And, presumably, M-mode software should protect and reserve
-> these addresses from S-mode. It'd be nice to see an M-mode software PoC,
-> but I didn't see anything on the opensbi mailing list.
->
-> Thanks,
-> drew
-
-Because the RNMI interrupt trap handler address isn't software configurable=
-,
-it=E2=80=99s implementation-defined. Although the generic M-mode software g=
-et the
-addresses from the DT, the generic M-mode software cannot configure it like
-`mtvec`. I think making it configurable in the QEMU helps users to test the
-functionality of their own RNMI trap handler.
+> >
+> >      /*
+> >       * write_misa() is marked as experimental for now so mark
+> > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> > index de7e43126a..6c14b93cb5 100644
+> > --- a/target/riscv/cpu.h
+> > +++ b/target/riscv/cpu.h
+> > @@ -366,6 +366,11 @@ struct CPUArchState {
+> >      uint64_t kvm_timer_compare;
+> >      uint64_t kvm_timer_state;
+> >      uint64_t kvm_timer_frequency;
+> > +
+> > +    /* RNMI */
+> > +    target_ulong rnmip;
+> > +    uint64_t rnmi_irqvec;
+> > +    uint64_t rnmi_excpvec;
+> >  };
+> >
+> >  /*
+> > @@ -436,6 +441,7 @@ struct RISCVCPUConfig {
+> >      bool ext_smaia;
+> >      bool ext_ssaia;
+> >      bool ext_sscofpmf;
+> > +    bool ext_smrnmi;
+> >      bool rvv_ta_all_1s;
+> >      bool rvv_ma_all_1s;
+> >
+> > @@ -562,6 +568,7 @@ void riscv_cpu_swap_hypervisor_regs(CPURISCVState *=
+env);
+> >  int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint64_t interrupts);
+> >  uint64_t riscv_cpu_update_mip(CPURISCVState *env, uint64_t mask,
+> >                                uint64_t value);
+> > +void riscv_cpu_set_rnmi(RISCVCPU *cpu, uint32_t irq, bool level);
+> >  #define BOOL_TO_MASK(x) (-!!(x)) /* helper for riscv_cpu_update_mip va=
+lue */
+> >  void riscv_cpu_set_rdtime_fn(CPURISCVState *env, uint64_t (*fn)(void *=
+),
+> >                               void *arg);
+> > diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> > index 59f0ffd9e1..7cb43b88f3 100644
+> > --- a/target/riscv/cpu_bits.h
+> > +++ b/target/riscv/cpu_bits.h
+> > @@ -659,6 +659,12 @@ typedef enum {
+> >  /* Default Reset Vector adress */
+> >  #define DEFAULT_RSTVEC      0x1000
+> >
+> > +/* Default RNMI Interrupt Vector address */
+> > +#define DEFAULT_RNMI_IRQVEC     0x0
+> > +
+> > +/* Default RNMI Exception Vector address */
+> > +#define DEFAULT_RNMI_EXCPVEC    0x0
+> > +
+> >  /* Exception causes */
+> >  typedef enum RISCVException {
+> >      RISCV_EXCP_NONE =3D -1, /* sentinel value */
+> > @@ -705,6 +711,9 @@ typedef enum RISCVException {
+> >  #define IRQ_LOCAL_MAX                      16
+> >  #define IRQ_LOCAL_GUEST_MAX                (TARGET_LONG_BITS - 1)
+> >
+> > +/* RNMI causes */
+> > +#define RNMI_MAX                           16
+> > +
+> >  /* mip masks */
+> >  #define MIP_USIP                           (1 << IRQ_U_SOFT)
+> >  #define MIP_SSIP                           (1 << IRQ_S_SOFT)
+> > @@ -896,6 +905,9 @@ typedef enum RISCVException {
+> >  #define MHPMEVENT_IDX_MASK                 0xFFFFF
+> >  #define MHPMEVENT_SSCOF_RESVD              16
+> >
+> > +/* RISC-V-specific interrupt pending bits. */
+> > +#define CPU_INTERRUPT_RNMI                 CPU_INTERRUPT_TGT_EXT_0
+> > +
+> >  /* JVT CSR bits */
+> >  #define JVT_MODE                           0x3F
+> >  #define JVT_BASE                           (~0x3F)
+> > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> > index 56381aaf26..da477b6c99 100644
+> > --- a/target/riscv/cpu_helper.c
+> > +++ b/target/riscv/cpu_helper.c
+> > @@ -636,6 +636,30 @@ uint64_t riscv_cpu_update_mip(CPURISCVState *env, =
+uint64_t mask,
+> >      return old;
+> >  }
+> >
+> > +void riscv_cpu_set_rnmi(RISCVCPU *cpu, uint32_t irq, bool level)
+> > +{
+> > +    CPURISCVState *env =3D &cpu->env;
+> > +    CPUState *cs =3D CPU(cpu);
+> > +    bool release_lock =3D false;
+> > +
+> > +    if (!qemu_mutex_iothread_locked()) {
+> > +        release_lock =3D true;
+> > +        qemu_mutex_lock_iothread();
+> > +    }
+> > +
+> > +    if (level) {
+> > +        env->rnmip |=3D 1 << irq;
+> > +        cpu_interrupt(cs, CPU_INTERRUPT_RNMI);
+> > +    } else {
+> > +        env->rnmip &=3D ~(1 << irq);
+> > +        cpu_reset_interrupt(cs, CPU_INTERRUPT_RNMI);
+> > +    }
+> > +
+> > +    if (release_lock) {
+> > +        qemu_mutex_unlock_iothread();
+> > +    }
+> > +}
+> > +
+> >  void riscv_cpu_set_rdtime_fn(CPURISCVState *env, uint64_t (*fn)(void *=
+),
+> >                               void *arg)
+> >  {
+> > --
+> > 2.31.1
+> >
+> >
 
