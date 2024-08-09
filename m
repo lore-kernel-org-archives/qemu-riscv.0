@@ -4,89 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96963C52D7C
-	for <qemu-riscv@archiver.kernel.org>; Fri,  9 Aug 2024 12:25:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B305C3DA4A
+	for <qemu-riscv@archiver.kernel.org>; Fri,  9 Aug 2024 18:55:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1scOg8-00008u-B8; Fri, 09 Aug 2024 08:25:08 -0400
+	id 1scUlb-0001hE-Ex; Fri, 09 Aug 2024 14:55:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1scOg6-0008TP-9I
- for qemu-riscv@nongnu.org; Fri, 09 Aug 2024 08:25:06 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1scOg2-00013S-I7
- for qemu-riscv@nongnu.org; Fri, 09 Aug 2024 08:25:05 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1723206301;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=UOwA4QbVkDmvqf7etn9t7Ds166wZBQN7pf+VdSr6FkM=;
- b=fKhlzQJGKU3w8o7qW+m5edbN7zMTDSec4fbP17E8mlFCaICSqrnvU9zy4OEo7zK1bzGUzn
- /z1UbEPSRADqnY2sBlxOxJw8Srpo1PyKPq0OCS9HuDEXyqNKFYnsp0a+vK4qPE+zc5ia0Y
- 9YuGGuiBeKtI4sS+M61e9vdP6pL52ck=
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-33--7dfJdlSNg-Vn4YmIjJ4nw-1; Fri,
- 09 Aug 2024 08:24:56 -0400
-X-MC-Unique: -7dfJdlSNg-Vn4YmIjJ4nw-1
-Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 0AEC91956058; Fri,  9 Aug 2024 12:24:53 +0000 (UTC)
-Received: from blackfin.pond.sub.org (unknown [10.39.193.245])
- by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id DAA9019560AE; Fri,  9 Aug 2024 12:24:50 +0000 (UTC)
-Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id AFCA821E668B; Fri,  9 Aug 2024 14:24:48 +0200 (CEST)
-From: Markus Armbruster <armbru@redhat.com>
-To: Zhao Liu <zhao1.liu@intel.com>
-Cc: Daniel P . =?utf-8?Q?Berrang=C3=A9?= <berrange@redhat.com>,  Eduardo
- Habkost
- <eduardo@habkost.net>,  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,  Yanan Wang
- <wangyanan55@huawei.com>,  "Michael S . Tsirkin" <mst@redhat.com>,  Paolo
- Bonzini <pbonzini@redhat.com>,  Richard Henderson
- <richard.henderson@linaro.org>,  Eric Blake <eblake@redhat.com>,  Marcelo
- Tosatti <mtosatti@redhat.com>,  Alex =?utf-8?Q?Benn=C3=A9e?=
- <alex.bennee@linaro.org>,
- Peter Maydell <peter.maydell@linaro.org>,  Jonathan Cameron
- <Jonathan.Cameron@huawei.com>,  Sia Jee Heng
- <jeeheng.sia@starfivetech.com>,  qemu-devel@nongnu.org,
- kvm@vger.kernel.org,  qemu-riscv@nongnu.org,  qemu-arm@nongnu.org,
- Zhenyu Wang <zhenyu.z.wang@intel.com>,  Dapeng Mi
- <dapeng1.mi@linux.intel.com>,  Yongwei Ma <yongwei.ma@intel.com>
-Subject: Re: [PATCH 8/8] qemu-options: Add the description of smp-cache object
-In-Reply-To: <ZqyRik4UHHz3xaKl@intel.com> (Zhao Liu's message of "Fri, 2 Aug
- 2024 15:58:02 +0800")
-References: <20240704031603.1744546-1-zhao1.liu@intel.com>
- <20240704031603.1744546-9-zhao1.liu@intel.com>
- <87r0bl35ug.fsf@pond.sub.org> <Zp5vxtXWDeHAdPok@intel.com>
- <87bk2nnev2.fsf@pond.sub.org> <ZqEN1kZaQcuY4UPG@intel.com>
- <87le1psuv3.fsf@pond.sub.org> <ZqtXP9MViOlyhEsu@intel.com>
- <87mslweb38.fsf@pond.sub.org> <ZqyRik4UHHz3xaKl@intel.com>
-Date: Fri, 09 Aug 2024 14:24:48 +0200
-Message-ID: <8734ndj33j.fsf@pond.sub.org>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
+ id 1scUla-0001gk-Hd
+ for qemu-riscv@nongnu.org; Fri, 09 Aug 2024 14:55:10 -0400
+Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
+ id 1scUlY-0004bk-4c
+ for qemu-riscv@nongnu.org; Fri, 09 Aug 2024 14:55:10 -0400
+Received: by mail-pf1-x432.google.com with SMTP id
+ d2e1a72fcca58-70d1cbbeeaeso1969054b3a.0
+ for <qemu-riscv@nongnu.org>; Fri, 09 Aug 2024 11:55:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1723229706; x=1723834506;
+ darn=nongnu.org; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=qyhogcm77iWYx7iyxIh4apVEqvXjco/4P6thr2r5QdI=;
+ b=eB6N1mY6b8F78f2wbh5JOgm4GXxMEUI4wJfNeHKhpdn5xU3iXFBtFvFzUdK1nsbMaR
+ 8qfPV8ebs+uB/xeAToITJXrQPbgFz9VWdfUIw7nUXrGtJW+Nzi2hXl4V7WutXq8XkfYP
+ HTtPE7ant1dwz8QHnaNfBy+hrKr+YBs+3mupero6JP0wJrhv7b+2YmupxkOsfu1EV3hl
+ QJAiFLgJ4k3PKfb2GmzcGsbJoJ2+w8rpvf3yTvq65H3Fs5WY/3EFpTfdV5SVbsk82Yo9
+ hRXS+4KwBl1npeBvNEq9vC3Oy0NPgGspwm/pecQPPtU/EHw8HVbMiYqeBGTjxamIiFyx
+ hG8g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723229706; x=1723834506;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=qyhogcm77iWYx7iyxIh4apVEqvXjco/4P6thr2r5QdI=;
+ b=tbrW04x0Kxew0hV0Ml3E1hv6w43raeKOcS0tdwoHqZjxqfreoACLe923GWbh2IkiKJ
+ U9Ea2J0sjPyqT1hipLi7CAUiDUinTXGR/6EDzttxviV+0WpMvsyQYXlmGBtA4IWqEKzz
+ 6nya4naLZk/KmnvauYn9PFAczghr474t29gBXSniCCyXY3eNz8nPB91u4EeLqkihKy8Z
+ flqFj9oIEeoFnQtYXNq9B8ccZjUAnF1SXAAXcpYuy01E7GHINnJRUWpfkUpQ1pxvZ+dr
+ UJ54BZPBrLnnJXs+Q8+Olx2XlYBEl69HxZJjNFxNdu8wgkPMgcw6iPzYnNRevyI3o+Dp
+ OyIw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXiJdej997o7k+5pBEfGh5VK+YUUH5A+py59apdjmnLdVrND2Ye9I+lJvptq2fjDW8l7WmaKfADdu7Jyz+reORBt9rEUEg=
+X-Gm-Message-State: AOJu0Yzrrt7KDeMGNLoFFp93+nnREU9V+vBynccMwovwtwbqhi1ilX7B
+ E1x8TrXC9upzo2MKA2SyVL2RWxZ16uCC8JTTAv9vuKITMVC2ONyCSJQBP8JBbk8=
+X-Google-Smtp-Source: AGHT+IE/8t8nNXrqz6kvM0GMmtWiKgisC93AKqSzxFQYWJ1+CDkF6KsvPtCu2xorydmJTUCbljas6g==
+X-Received: by 2002:a05:6a00:391a:b0:70d:3337:7820 with SMTP id
+ d2e1a72fcca58-710dc695b69mr2519244b3a.8.1723229705191; 
+ Fri, 09 Aug 2024 11:55:05 -0700 (PDT)
+Received: from debug.ba.rivosinc.com ([64.71.180.162])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-710e5874e00sm93786b3a.12.2024.08.09.11.55.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 09 Aug 2024 11:55:04 -0700 (PDT)
+Date: Fri, 9 Aug 2024 11:55:02 -0700
+From: Deepak Gupta <debug@rivosinc.com>
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com,
+ palmer@dabbelt.com, Alistair.Francis@wdc.com, laurent@vivier.eu,
+ bmeng.cn@gmail.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com
+Subject: Re: [PATCH v3 14/20] target/riscv: mmu changes for zicfiss shadow
+ stack protection
+Message-ID: <ZrZmBhUnTQY1eaC3@debug.ba.rivosinc.com>
+References: <20240807000652.1417776-1-debug@rivosinc.com>
+ <20240807000652.1417776-15-debug@rivosinc.com>
+ <bea52a58-12a7-45d1-b610-d577a7540887@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
-X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.144,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <bea52a58-12a7-45d1-b610-d577a7540887@linaro.org>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
+ envelope-from=debug@rivosinc.com; helo=mail-pf1-x432.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,133 +100,39 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-I apologize for the delay.
-
-Zhao Liu <zhao1.liu@intel.com> writes:
-
-> On Thu, Aug 01, 2024 at 01:28:27PM +0200, Markus Armbruster wrote:
-
-[...]
-
->> Can you provide a brief summary of the design alternatives that have
->> been proposed so far?  Because I've lost track.
+On Wed, Aug 07, 2024 at 01:19:55PM +1000, Richard Henderson wrote:
+>On 8/7/24 10:06, Deepak Gupta wrote:
+>>      int prot = 0;
+>>-    if (pte & PTE_R) {
+>>+    /*
+>>+     * If PTE has read bit in it or it's shadow stack page,
+>>+     * then reads allowed
+>>+     */
+>>+    if ((pte & PTE_R) || sstack_page) {
+>>          prot |= PAGE_READ;
+>>      }
 >
-> No problem!
+>I feel like this logic could be simplified somehow.
+>I'll think about it.
+
+Ok let me know.
+
 >
-> Currently, we have the following options:
+>>@@ -1409,6 +1461,11 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>>      qemu_log_mask(CPU_LOG_MMU, "%s ad %" VADDR_PRIx " rw %d mmu_idx %d\n",
+>>                    __func__, address, access_type, mmu_idx);
+>>+    /* If shadow stack instruction initiated this access, treat it as store */
+>>+    if (mmu_idx & MMU_IDX_SS_ACCESS) {
+>>+        access_type = MMU_DATA_STORE;
+>>+    }
 >
-> * 1st: The first one is just to configure cache topology with several
->   options in -smp:
->
->   -smp l1i-cache-topo=core,l1d-cache-topo-core
->
->   This one lacks scalability to support the cache size that ARM will
->   need in the future.
+>I know you're trying to massage the fault type, but I think this is the wrong place.
 
--smp sets machine property "smp" of QAPI type SMPConfiguration.
+Is it okay if I add `mmu_idx` argument to `raise_mmu_exception` ?
+Inside `raise_mmu_exception`, then based on `mmu_idx == shadow stack index`, I can convert
+a fault due to access_type=MMU_DATA_LOAD into store page fault.
 
-So this one adds members l1i-cache-topo, l1d-cache-topo, ... to
-SMPConfiguration.
-
-> * 2nd: The cache list object in -smp.
->
->   The idea was to use JSON to configure the cache list. However, the
->   underlying implementation of -smp at the moment is keyval parsing,
->   which is not compatible with JSON.
-
-Keyval is a variation of the QEMU's traditional KEY=VALUE,... syntax
-that can serve as an alternative to JSON, with certain restrictions.
-Ideally, we provide both JSON and keyval syntax on the command line.
-
-Example: -blockdev supports both JSON and keyval.
-    JSON:   -blockdev '{"driver": "null-co", "node-name": "node0"}'
-    keyval: -blockdev null-co,node-name=node0
-
-Unfortunately, we have many old interfaces that still lack JSON support.
-
->   If we can not insist on JSON format, then cache lists can also be
->   implemented in the following way:
->   
->   -smp caches.0.name=l1i,caches.0.topo=core,\
->        caches.1.name=l1d,caches.1.topo=core
-
-This one adds a single member caches to SMPConfiguration.  It is an
-array of objects.
-
-> * 3rd: The cache list object linked in -machine.
->
->   Considering that -object is JSON-compatible so that defining lists via
->   JSON is more friendly, I implemented the caches list via -object and
->   linked it to MachineState:
->
->   -object '{"qom-type":"smp-cache","id":"obj","caches":[{"name":"l1d","topo":"core"},{"name":"l1i","topo":"core"}]}'
->   -machine smp-caches=obj
-
-This one wraps the same array of objects in a new user-creatable object,
-then sets machine property "smp-caches" to that object.
-
-We can set machine properties directly with -machine.  But -machine
-doesn't support JSON, yet.
-
-Wrapping in an object moves the configuration to -object, which does
-support JSON.
-
-Half way between 2nd and 3rd:
-
-  * Cache list object in machine
-
-    -machine caches.0.name=l1i,caches.0.topo=core,\
-             caches.1.name=l1d,caches.1.topo=core
-
-> * 4th: The per cache object without any list:
->
->   -object smp-cache,id=cache0,name=l1i,topo=core \
->   -object smp-cache,id=cache1,name=l1d,topo=core
->
->   This proposal is clearer, but there are a few opens:
->   - I plan to push qom-topo forward, which would abstract CPU related
->     topology levels and cache to "device" instead of object. Is there a
->     conflict here?
-
-Can't say, since I don't understand where you want to go.
-
-Looks like your trying to design an interface for what you want to do
-now, and are wondering whether it could evolve to accomodate what you
-want to do later.
-
-It's often better to design the interface for everything you already
-know you want to do, then take out the parts you want to do later.
-
->   - Multiple cache objects can't be linked to the machine on the command
->     line, so I maintain a static cache list in smp_cache.c and expose
->     the cache information to the machine through some interface. is this
->     way acceptable?
 >
 >
-> In summary, the 4th proposal was the most up in the air, as it looked to
-> be conflict with the hybrid topology I wanted to do (and while hybrid
-> topology may not be accepted by the community either, I thought it would
-> be best for the two work to be in the same direction).
->
-> The difference between 2nd and 3rd is about the JSON requirement, if JSON
-> is mandatory for now then it's 3rd, if it's not mandatory (or accept to
-> make -machine/-smp support JSON in the future), 2nd looks cleaner, which
-> puts the caches list in -smp.
-
-I'd rather not let syntactic limitations of our CLI dictate the
-structure of our configuration data.  Design the structure *first*.
-Only then start to think about CLI.  Our CLI is an unholy mess, and
-thinking about it too early risks getting lost in the weeds.  I fear
-this is what happened to you.
-
-If I forcibly ignore all the considerations related to concrete syntax
-in your message, a structure seems to emerge: there's a set of caches
-identified by name (l1i, l1d, ...), and for each cache, we have a number
-of configurable properties (topology level, ...).  Makes sense?
-
-What else will you need to configure in the future?
-
-By the way, extending -machine to support JSON looks feasible to me at a
-glance.
-
+>r~
 
