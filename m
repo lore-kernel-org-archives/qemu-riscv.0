@@ -4,81 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E021C3DA4A
-	for <qemu-riscv@archiver.kernel.org>; Sun, 11 Aug 2024 17:48:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEA29C3DA4A
+	for <qemu-riscv@archiver.kernel.org>; Sun, 11 Aug 2024 22:24:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sdCgQ-0001zW-CK; Sun, 11 Aug 2024 13:48:46 -0400
+	id 1sdGyj-00015y-IF; Sun, 11 Aug 2024 18:23:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1sdCgO-0001tf-6y; Sun, 11 Aug 2024 13:48:44 -0400
-Received: from isrv.corpit.ru ([86.62.121.231])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1sdCgM-0000xP-9a; Sun, 11 Aug 2024 13:48:43 -0400
-Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id 78EB083D1A;
- Sun, 11 Aug 2024 20:48:01 +0300 (MSK)
-Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id 42A441239A1;
- Sun, 11 Aug 2024 20:48:40 +0300 (MSK)
-Message-ID: <518c457b-1f02-4d19-a3cc-a1fc6ec81170@tls.msk.ru>
-Date: Sun, 11 Aug 2024 20:48:40 +0300
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1sdGyf-00012D-V9
+ for qemu-riscv@nongnu.org; Sun, 11 Aug 2024 18:23:53 -0400
+Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1sdGyc-00017i-2t
+ for qemu-riscv@nongnu.org; Sun, 11 Aug 2024 18:23:52 -0400
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-1ff1cd07f56so31519305ad.2
+ for <qemu-riscv@nongnu.org>; Sun, 11 Aug 2024 15:23:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1723415027; x=1724019827; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=200woV0Waq5KPyQXnG1armcVi5NgaKFdPO/3NpLgxp8=;
+ b=qKxXX/7RztlQllOwFGhkkaO4ds7kyXL+6Rg84P6I6CuMh1VNCOSPDupL8BSHB7CiT+
+ SgDy+HpPQbIneXa6w7E4PJNfrFF/KEw/G18kq5KySpQp6PqUlDh0zRECOZEk+RjzOfa0
+ iGef+w+gFCz7kOpSkqDhCUrC37Kw3G0DVP01uE6j2DpHOdldPi+TZqdtwvJxcs5ZP57u
+ 7fc92cu3f6o0wsPH58f+Po3M7jl47L+kMhV7q4w3fzV1IyKzI3SX85WlU+0dGwPE752V
+ HRhy1iCNkzu0y0Xql7/MiU8x+K0l0iBh+ZL+LzI3WCDtMfha7T0gehfNwFFL2ZCANYPC
+ M16A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723415027; x=1724019827;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=200woV0Waq5KPyQXnG1armcVi5NgaKFdPO/3NpLgxp8=;
+ b=lUSaPayn407egIPxoT/qDCNJPSDivAXVv8HV7Tg44pLmZOJKC57cAfWwDbElhDRZmh
+ LcoK9hBOVidnPJBWw2Wq4UnoqbYm2EHuGaFbRJqQTsGE2GX+YgnR7qDfNmGXsTQlQkjf
+ SKJZWxvv0y6TYy20Oz4LM0xTWMsyJeHLogNv9JOY6HAQxNmz6bFltXhZfc6oGYamrLln
+ ya2iiEXbtf8QXFoxmzaziN1A3mcb9h+/Bd7tp0UrsRCrVDn/GDj+KO/1fKVMrXlh9ZyP
+ K/Vt93hvzl3dnb32v3Sd/mbWCHHJ9dgAz/yP78bZbYkG6PBnivcwocNNiiWztW+JHDaS
+ NW0Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXTEHug+EY7xvFjrZSPl2J3kpEsA+gPGNINkFik3RTuQS1x9OUxAaDNfVD7B05aYI5bTDQ53k5wMgxR9ioZVBx/+CjhBsw=
+X-Gm-Message-State: AOJu0YwRaCzeCxkJc4kE60nH1YMzkKwaRIh1UfYax2C7s14C2ThGyPzY
+ 4X3nqKaSr9zMa/LXYqXJlO9AqK/0DNyj7k5oUzR3DkkiLA9NRP210OC6/ON//sk=
+X-Google-Smtp-Source: AGHT+IGaymqK8zVtfDLYM7UtR+kKdB9K+VbAIc4ifMF1m2D0zX6NOpj2+7mIGXVP/Fb7R/SPz917Fg==
+X-Received: by 2002:a17:902:ccc7:b0:1fd:9e44:e5e9 with SMTP id
+ d9443c01a7336-200ae5d3c99mr116261685ad.53.1723415027165; 
+ Sun, 11 Aug 2024 15:23:47 -0700 (PDT)
+Received: from [192.168.1.113] ([203.30.4.111])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-2d1c9dc8988sm6824183a91.48.2024.08.11.15.23.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 11 Aug 2024 15:23:46 -0700 (PDT)
+Message-ID: <cd70d975-2a72-4899-a16a-430b398d19ca@linaro.org>
+Date: Mon, 12 Aug 2024 08:23:38 +1000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] target/riscv: Use get_address() to get address with
- Zicbom extensions
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org, qemu-stable <qemu-stable@nongnu.org>
-Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Bin Meng <bin.meng@windriver.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Christoph Muellner <cmuellner@linux.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Weiwei Li <liwei1518@gmail.com>,
- Palmer Dabbelt <palmer@rivosinc.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Zhiwei Jiang <jiangzw@tecorigin.com>
-References: <20240419110514.69697-1-philmd@linaro.org>
- <e70bbb7d-7048-493e-b359-88472e73c199@linaro.org>
-Content-Language: en-US, ru-RU
-From: Michael Tokarev <mjt@tls.msk.ru>
-Autocrypt: addr=mjt@tls.msk.ru; keydata=
- xsBLBETIiwkBCADh3cFB56BQYPjtMZCfK6PSLR8lw8EB20rsrPeJtd91IoNZlnCjSoxd9Th1
- bLUR8YlpRJ2rjc6O1Bc04VghqUOHgS/tYt8vLjcGWixzdhSLJgPDK3QQZPAvBjMbCt1B6euC
- WuD87Pv5Udlpnzf4aMwxkgfTusx+ynae/o+T5r7tXD+isccbC3SiGhmAPxFyY3zGcFk4+Rxc
- 0tP8YY2FWE/baHu+lBDTUN79efWAkHhex1XzVZsV7ZD16rzDbXFK5m6ApvGJWlr5YDEEydTF
- WwmvwBfr4OINVxzEG/ujNiG4fpMf2NsnFGyB9aSbFjXZevB4qWkduYYW+xpK1EryszHtAAYp
- zSBNaWNoYWVsIFRva2FyZXYgPG1qdEB0bHMubXNrLnJ1PsLAlgQTAQoAQAIbAwYLCQgHAwIE
- FQIIAwQWAgMBAh4BAheAAhkBFiEEbuGV0Yhuj/uBDUMkRXzgoIBEZcUFAmBbcjwFCS5e6jMA
- CgkQRXzgoIBEZcUTIQgA1hPsOF82pXxbcJXBMc4zB9OQu4AlnZvERoGyw7I2222QzaN3RFuj
- Fia//mapXzpIQNF08l/AA6cx+CKPeGnXwyZfF9fLa4RfifmdNKME8C00XlqnoJDZBGzq8yMy
- LAKDxl9OQWFcDwDxV+irg5U3fbtNVhvV0kLbS2TyQ0aU5w60ERS2NcyDWplOo7AOzZWChcA4
- UFf78oVdZdCW8YDtU0uQFhA9moNnrePy1HSFqduxnlFHEI+fDj/TiOm2ci48b8SBBJOIJFjl
- SBgH8+SfT9ZqkzhN9vh3YJ49831NwASVm0x1rDHcIwWD32VFZViZ3NjehogRNH9br0PSUYOC
- 3s7ATQRX2BjLAQgAnak3m0imYOkv2tO/olULFa686tlwuvl5kL0NWCdGQeXv2uMxy36szcrh
- K1uYhpiQv4r2qNd8BJtYlnYIK16N8GBdkplaDIHcBMbU4t+6bQzEIJIaWoq1hzakmHHngE2a
- pNMnUf/01GFvCRPlv3imkujE/5ILbagjtdyJaHF0wGOSlTnNT4W8j+zPJ/XK0I5EVQwtbmoc
- GY62LKxxz2pID6sPZV4zQVY4JdUQaFvOz1emnBxakkt0cq3Qnnqso1tjiy7vyH9CAwPR/48W
- fpK6dew4Fk+STYtBeixOTfSUS8qRS/wfpUeNa5RnEdTtFQ9IcjpQ/nPrvJJsu9FqwlpjMwAR
- AQABwsBlBBgBCAAPBQJX2BjLAhsMBQkSzAMAAAoJEEV84KCARGXFUKcH/jqKETECkbyPktdP
- cWVqw2ZIsmGxMkIdnZTbPwhORseGXMHadQODayhU9GWfCDdSPkWDWzMamD+qStfl9MhlVT60
- HTbo6wu1W/ogUS70qQPTY9IfsvAj6f8TlSlK0eLMa3s2UxL2oe5FkNs2CnVeRlr4Yqvp/ZQV
- 6LXtew4GPRrmplUT/Cre9QIUqR4pxYCQaMoOXQQw3Y0csBwoDYUQujn3slbDJRIweHoppBzT
- rM6ZG5ldWQN3n3d71pVuv80guylX8+TSB8Mvkqwb5I36/NAFKl0CbGbTuQli7SmNiTAKilXc
- Y5Uh9PIrmixt0JrmGVRzke6+11mTjVlio/J5dCM=
-In-Reply-To: <e70bbb7d-7048-493e-b359-88472e73c199@linaro.org>
+Subject: Re: [PATCH v3 14/20] target/riscv: mmu changes for zicfiss shadow
+ stack protection
+To: Deepak Gupta <debug@rivosinc.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com,
+ palmer@dabbelt.com, Alistair.Francis@wdc.com, laurent@vivier.eu,
+ bmeng.cn@gmail.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com
+References: <20240807000652.1417776-1-debug@rivosinc.com>
+ <20240807000652.1417776-15-debug@rivosinc.com>
+ <bea52a58-12a7-45d1-b610-d577a7540887@linaro.org>
+ <ZrZmBhUnTQY1eaC3@debug.ba.rivosinc.com>
+Content-Language: en-US
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <ZrZmBhUnTQY1eaC3@debug.ba.rivosinc.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=86.62.121.231; envelope-from=mjt@tls.msk.ru;
- helo=isrv.corpit.ru
-X-Spam_score_int: -68
-X-Spam_score: -6.9
-X-Spam_bar: ------
-X-Spam_report: (-6.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_HI=-5,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62f.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -95,36 +104,47 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-19.04.2024 14:37, Philippe Mathieu-Daudé wrpte:
-> On 19/4/24 13:05, Philippe Mathieu-Daudé wrote:
->> We need to use get_address() to get an address from cpu_gpr[],
->> since $zero is "special" (NULL).
-
-Hi!
-
-Has this change been forgotten, or is it not needed anymore?
-It's been quite some time since Apr-19..
-
-Thanks,
-
-/mjt
-
+On 8/10/24 04:55, Deepak Gupta wrote:
+> On Wed, Aug 07, 2024 at 01:19:55PM +1000, Richard Henderson wrote:
+>> On 8/7/24 10:06, Deepak Gupta wrote:
+>>>      int prot = 0;
+>>> -    if (pte & PTE_R) {
+>>> +    /*
+>>> +     * If PTE has read bit in it or it's shadow stack page,
+>>> +     * then reads allowed
+>>> +     */
+>>> +    if ((pte & PTE_R) || sstack_page) {
+>>>          prot |= PAGE_READ;
+>>>      }
+>>
+>> I feel like this logic could be simplified somehow.
+>> I'll think about it.
 > 
-> Cc: qemu-stable@nongnu.org
+> Ok let me know.
 > 
->> Fixes: e05da09b7c ("target/riscv: implement Zicbom extension")
->> Reported-by: Zhiwei Jiang (姜智伟) <jiangzw@tecorigin.com>
->> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
->> ---
->>   target/riscv/insn_trans/trans_rvzicbo.c.inc | 8 ++++----
->>   1 file changed, 4 insertions(+), 4 deletions(-)
+>>
+>>> @@ -1409,6 +1461,11 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>>>      qemu_log_mask(CPU_LOG_MMU, "%s ad %" VADDR_PRIx " rw %d mmu_idx %d\n",
+>>>                    __func__, address, access_type, mmu_idx);
+>>> +    /* If shadow stack instruction initiated this access, treat it as store */
+>>> +    if (mmu_idx & MMU_IDX_SS_ACCESS) {
+>>> +        access_type = MMU_DATA_STORE;
+>>> +    }
+>>
+>> I know you're trying to massage the fault type, but I think this is the wrong place.
 > 
-> 
+> Is it okay if I add `mmu_idx` argument to `raise_mmu_exception` ?
+> Inside `raise_mmu_exception`, then based on `mmu_idx == shadow stack index`, I can convert
+> a fault due to access_type=MMU_DATA_LOAD into store page fault.
 
--- 
-GPG Key transition (from rsa2048 to rsa4096) since 2024-04-24.
-New key: rsa4096/61AD3D98ECDF2C8E  9D8B E14E 3F2A 9DD7 9199  28F1 61AD 3D98 ECDF 2C8E
-Old key: rsa2048/457CE0A0804465C5  6EE1 95D1 886E 8FFB 810D  4324 457C E0A0 8044 65C5
-Transition statement: http://www.corpit.ru/mjt/gpg-transition-2024.txt
+We have other places where we miss-categorize amo instructions and raise the wrong fault, 
+I think particularly without smp, when we implement amo without host atomic operations. 
+We should perhaps come up with a general purpose solution.
 
+For instance, set TARGET_INSN_START_EXTRA_WORDS to 2.  In the second extra unwind word, 
+set bit 0 to 1 if the instruction should raise STORE_AMO on a read fault.  Handle this in 
+raise_mmu_exception, which would then need to perform the restore and exit itself.
+
+
+r~
 
