@@ -4,84 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CCE0C531DA
-	for <qemu-riscv@archiver.kernel.org>; Mon, 12 Aug 2024 00:49:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 706E9C3DA4A
+	for <qemu-riscv@archiver.kernel.org>; Mon, 12 Aug 2024 02:45:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sdJFI-0006i7-40; Sun, 11 Aug 2024 20:49:12 -0400
+	id 1sdL33-00021A-95; Sun, 11 Aug 2024 22:44:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sdJFF-0006Xf-KJ; Sun, 11 Aug 2024 20:49:09 -0400
-Received: from mail-ua1-x92b.google.com ([2607:f8b0:4864:20::92b])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sdJFE-000274-1q; Sun, 11 Aug 2024 20:49:09 -0400
-Received: by mail-ua1-x92b.google.com with SMTP id
- a1e0cc1a2514c-84118fa2af4so1201318241.1; 
- Sun, 11 Aug 2024 17:49:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1723423746; x=1724028546; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xPNkrFJPCoRIIum9aNz21BUcZj0+lt1ejbtPX4ZRjGg=;
- b=CQ49tUwMP0nZ3Kxq15tg3yt6em10hmaUDMrkK1bHf65qwNWAodWLldx9Rhelh8Cuzi
- SOCEMhztIvrpCHfT9idktk5KcYtm2ibUvLbCd+A/96yD/ZWjMfwiiMrAvCA2Xykyi9Mb
- Ah1JZNHabf7XskNTBH6K9oG4RWXeuLTm2+Nc3iNZGRs8Ou3c/oR2Eh1/qbcdQSyFx2oC
- jZfhHRtQdYKN1QxjCoYuJYkey1JNoU7swk+taVAAP0Eo/wj4fmLG6A7bltfaM9boDM7c
- 0QXf1yyQ0G4c5Vw4pnEJ5EuRjsZRxzPdZmtRoiIZ3hx913TyeaGvfbLjLeaZYR68GHxe
- kYtA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723423746; x=1724028546;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=xPNkrFJPCoRIIum9aNz21BUcZj0+lt1ejbtPX4ZRjGg=;
- b=xHrdU7v3vluKTGeSLy8M8Z0J8wuK9S9fdaJzw179hoT5KmKLbQ55fYUCgN3bhsoWBe
- L506OwTvr+GwFLFxpz3qjmXyzKPY1QTFWo+BldzfbsYaipvOo7UTZdal6TfG+/wRvkQr
- Jts6EsMiuh/zpRmskHT5iGozIRZPYsfRnCwq6yIE+5RHq3WtJzkm40a1WcaNfUPNgB7N
- bzaq41Of0gsfnp75DF22BqNKTt57NLqQPh36ptdn6WV1ppgq4neJBpN5nKuxGKZ8JAt1
- loJwJ4yh8elI5PiHPcd1+MsGrFzQM1fcu3tuTOVKdz/GYxaS6XmjeNg1QtHuVqJeNcMu
- f90A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV4tj1x6l3xkdrsCBPV4ZXmQSw1FHOtLRmAw2sX1jhdQ1mVcQtLYMAdK1IwLN45ba9bL/I/cwFl4OtMsMOUGRmQVqk0Vl4=
-X-Gm-Message-State: AOJu0Yzi6kOSexj6YWk9iA41B/hDP5HjQ24y7mPlGGlD6yy22BtEja/N
- AFQj7bha7DqzyqcWuJPudglINC+fTz7tsHkRsj49h6Yj7K2140vEgnRj6L2CW9thnobJQtEBe6C
- M08wK3doGK4n+NJCVNKNWtNMRdFg=
-X-Google-Smtp-Source: AGHT+IENk+nLmV90bSQSpuLU6SUz5Wl26wC9iWg8GjSVgfgHrKWidEXY2X32Iqw+TnwHYPd9NNeh+t0RkJqoPECtPjw=
-X-Received: by 2002:a05:6102:32ce:b0:495:6aeb:a0ed with SMTP id
- ada2fe7eead31-495d83f39b9mr10026256137.3.1723423746531; Sun, 11 Aug 2024
- 17:49:06 -0700 (PDT)
-MIME-Version: 1.0
+ (Exim 4.90_1) (envelope-from <ethan84@andestech.com>)
+ id 1sdL32-000202-56; Sun, 11 Aug 2024 22:44:40 -0400
+Received: from 60-248-80-70.hinet-ip.hinet.net ([60.248.80.70]
+ helo=Atcsqr.andestech.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <ethan84@andestech.com>)
+ id 1sdL2z-00026T-CL; Sun, 11 Aug 2024 22:44:39 -0400
+Received: from mail.andestech.com (ATCPCS31.andestech.com [10.0.1.89])
+ by Atcsqr.andestech.com with ESMTPS id 47C2i94i080514
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Mon, 12 Aug 2024 10:44:09 +0800 (+08)
+ (envelope-from ethan84@andestech.com)
+Received: from ethan84-VirtualBox (10.0.12.12) by ATCPCS31.andestech.com
+ (10.0.1.89) with Microsoft SMTP Server (TLS) id 14.3.498.0; Mon, 12 Aug 2024
+ 10:44:10 +0800
+Date: Mon, 12 Aug 2024 10:44:03 +0800
+To: Alistair Francis <alistair23@gmail.com>
+CC: <qemu-devel@nongnu.org>, <richard.henderson@linaro.org>,
+ <pbonzini@redhat.com>, <peterx@redhat.com>, <david@redhat.com>,
+ <philmd@linaro.org>, <palmer@dabbelt.com>, <alistair.francis@wdc.com>,
+ <bmeng.cn@gmail.com>, <liwei1518@gmail.com>,
+ <dbarboza@ventanamicro.com>, <zhiwei_liu@linux.alibaba.com>,
+ <qemu-riscv@nongnu.org>
+Subject: Re: [PATCH v8 5/8] hw/misc/riscv_iopmp: Add API to set up IOPMP
+ protection for system memory
+Message-ID: <Zrl285mkcFd8BO75@ethan84-VirtualBox>
 References: <20240715095702.1222213-1-ethan84@andestech.com>
- <20240715101434.1249621-1-ethan84@andestech.com>
- <CAKmqyKPgqNaT1A0+pk6srrtPQqs6=SUX_etg55hU3rxPbuFVsA@mail.gmail.com>
- <ZrXsFaBndB0zTONi@ethan84-VirtualBox>
-In-Reply-To: <ZrXsFaBndB0zTONi@ethan84-VirtualBox>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 12 Aug 2024 10:48:40 +1000
-Message-ID: <CAKmqyKMAr9oXz99ndNkPFaXvCSaVcr0pskKW=HbrYoBh2qmezg@mail.gmail.com>
-Subject: Re: [PATCH v8 8/8] hw/riscv/virt: Add IOPMP support
-To: Ethan Chen <ethan84@andestech.com>
-Cc: qemu-devel@nongnu.org, richard.henderson@linaro.org, pbonzini@redhat.com, 
- peterx@redhat.com, david@redhat.com, philmd@linaro.org, palmer@dabbelt.com,
- alistair.francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com, 
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
- qemu-riscv@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92b;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92b.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ <20240715101228.1247759-1-ethan84@andestech.com>
+ <CAKmqyKN-YavB364d4wmwBBSi7TpsE1Y5CebvUCSi=CzfjWsJDQ@mail.gmail.com>
+ <ZrXrXhJWoCeVqwtu@ethan84-VirtualBox>
+ <CAKmqyKPPp2Dhti9KMPa=jgYyGJzgMsiGYMFSVTbMmpsrnaRsDQ@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAKmqyKPPp2Dhti9KMPa=jgYyGJzgMsiGYMFSVTbMmpsrnaRsDQ@mail.gmail.com>
+User-Agent: Mutt/2.1.4 (2021-12-11)
+X-Originating-IP: [10.0.12.12]
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 47C2i94i080514
+Received-SPF: pass client-ip=60.248.80.70; envelope-from=ethan84@andestech.com;
+ helo=Atcsqr.andestech.com
+X-Spam_score_int: -8
+X-Spam_score: -0.9
+X-Spam_bar: /
+X-Spam_report: (-0.9 / 5.0 requ) BAYES_00=-1.9, RDNS_DYNAMIC=0.982,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001, TVD_RCVD_IP=0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -94,64 +72,102 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-to:  Ethan Chen <ethan84@andestech.com>
+From:  Ethan Chen via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Aug 9, 2024 at 8:14=E2=80=AFPM Ethan Chen <ethan84@andestech.com> w=
-rote:
->
-> On Thu, Aug 08, 2024 at 02:01:13PM +1000, Alistair Francis wrote:
+On Mon, Aug 12, 2024 at 10:47:33AM +1000, Alistair Francis wrote:
+> [EXTERNAL MAIL]
+> 
+> On Fri, Aug 9, 2024 at 8:11 PM Ethan Chen <ethan84@andestech.com> wrote:
 > >
-> > On Mon, Jul 15, 2024 at 8:15=E2=80=AFPM Ethan Chen via <qemu-devel@nong=
-nu.org> wrote:
+> > On Thu, Aug 08, 2024 at 02:23:56PM +1000, Alistair Francis wrote:
 > > >
-> > > - Add 'iopmp=3Don' option to enable IOPMP. It adds an iopmp device vi=
-rt machine
-> > >   to protect all regions of system memory, and configures RRID of CPU=
-.
-> > >
-> > > Signed-off-by: Ethan Chen <ethan84@andestech.com>
-> > > ---
-> > >  docs/system/riscv/virt.rst |  5 +++
-> > >  hw/riscv/Kconfig           |  1 +
-> > >  hw/riscv/virt.c            | 63 ++++++++++++++++++++++++++++++++++++=
-++
-> > >  include/hw/riscv/virt.h    |  5 ++-
-> > >  4 files changed, 73 insertions(+), 1 deletion(-)
-> > >
-> > > diff --git a/docs/system/riscv/virt.rst b/docs/system/riscv/virt.rst
-> > > index 9a06f95a34..9fd006ccc2 100644
-> > > --- a/docs/system/riscv/virt.rst
-> > > +++ b/docs/system/riscv/virt.rst
-> > > @@ -116,6 +116,11 @@ The following machine-specific options are suppo=
-rted:
-> > >    having AIA IMSIC (i.e. "aia=3Daplic-imsic" selected). When not spe=
-cified,
-> > >    the default number of per-HART VS-level AIA IMSIC pages is 0.
-> > >
-> > > +- iopmp=3D[on|off]
-> > > +
-> > > +  When this option is "on", an IOPMP device is added to machine. IOP=
-MP checks
-> > > +  memory transcations in system memory. This option is assumed to be=
- "off".
-> >
-> > We probably should have a a little more here. You don't even mention
-> > that this is the rapid-k model.
->
-> I'll provide more details.
->
-> >
-> > It might be worth adding a `model` field, to make it easier to add
-> > other models in the future. Thoughts?
-> >
->
-> I think the IOPMP model should be a device property and not
-> configured here.
+> > > On Mon, Jul 15, 2024 at 8:13 PM Ethan Chen via <qemu-devel@nongnu.org> wrote:
+> > > >
+> > > > To enable system memory transactions through the IOPMP, memory regions must
+> > > > be moved to the IOPMP downstream and then replaced with IOMMUs for IOPMP
+> > > > translation.
+> > > >
+> > > > The iopmp_setup_system_memory() function copies subregions of system memory
+> > > > to create the IOPMP downstream and then replaces the specified memory
+> > > > regions in system memory with the IOMMU regions of the IOPMP. It also
+> > > > adds entries to a protection map that records the relationship between
+> > > > physical address regions and the IOPMP, which is used by the IOPMP DMA
+> > > > API to send transaction information.
+> > > >
+> > > > Signed-off-by: Ethan Chen <ethan84@andestech.com>
+> > > > ---
+> > > >  hw/misc/riscv_iopmp.c         | 61 +++++++++++++++++++++++++++++++++++
+> > > >  include/hw/misc/riscv_iopmp.h |  3 ++
+> > > >  2 files changed, 64 insertions(+)
+> > > >
+> > > > diff --git a/hw/misc/riscv_iopmp.c b/hw/misc/riscv_iopmp.c
+> > > > index db43e3c73f..e62ac57437 100644
+> > > > --- a/hw/misc/riscv_iopmp.c
+> > > > +++ b/hw/misc/riscv_iopmp.c
+> > > > @@ -1151,4 +1151,65 @@ iopmp_register_types(void)
+> > > >      type_register_static(&iopmp_iommu_memory_region_info);
+> > > >  }
+> > > >
+> > > > +/*
+> > > > + * Copies subregions from the source memory region to the destination memory
+> > > > + * region
+> > > > + */
+> > > > +static void copy_memory_subregions(MemoryRegion *src_mr, MemoryRegion *dst_mr)
+> 
+> Maybe `alias_memory_subregions()` or `link_memory_subregions()`
+> instead of `copy_memory_subregions()`.
 
-It should be a device property, but then how does a user configure
-that? I guess users can globally set device props, but it's a bit
-clunky
+Thanks for the suggestion. I will clarify it.
 
-Alistair
+> 
+> > > > +{
+> > > > +    int32_t priority;
+> > > > +    hwaddr addr;
+> > > > +    MemoryRegion *alias, *subregion;
+> > > > +    QTAILQ_FOREACH(subregion, &src_mr->subregions, subregions_link) {
+> > > > +        priority = subregion->priority;
+> > > > +        addr = subregion->addr;
+> > > > +        alias = g_malloc0(sizeof(MemoryRegion));
+> > > > +        memory_region_init_alias(alias, NULL, subregion->name, subregion, 0,
+> > > > +                                 memory_region_size(subregion));
+> > > > +        memory_region_add_subregion_overlap(dst_mr, addr, alias, priority);
+> > > > +    }
+> > > > +}
+> > >
+> > > This seems strange. Do we really need to do this?
+> > >
+> > > I haven't looked at the memory_region stuff for awhile, but this seems
+> > > clunky and prone to breakage.
+> > >
+> > > We already link s->iommu with the system memory
+> > >
+> >
+> > s->iommu occupies the address of the protected devices in system
+> > memory. Since IOPMP does not alter address, the target address space
+> > must differ from system memory to avoid infinite recursive iommu access.
+> >
+> > The transaction will be redirected to a downstream memory region, which
+> > is almost identical to system memory but without the iommu memory
+> > region of IOPMP.
+> >
+> > This function serves as a helper to create that downstream memory region.
+> 
+> What I don't understand is that we already have target_mr as a
+> subregion of downstream, is that not enough?
+>
+
+Did you mean the target_mr in iopmp_setup_system_memory? It specifies
+the container that IOPMP wants to protect. We don't create 
+separate iommus for each subregion. We create a single iommu for the
+entire container (system memory).
+
+The access to target_mr (system memory) which has iommu region of 
+IOPMP, will be translated to downstream which has protected device 
+regions.
+
+Thanks,
+Ethan Chen
 
