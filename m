@@ -4,90 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9126FC52D7B
-	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Aug 2024 10:24:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A295FC52D7C
+	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Aug 2024 11:35:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sdogx-000803-Sh; Tue, 13 Aug 2024 06:23:51 -0400
+	id 1sdpoE-0002W7-G0; Tue, 13 Aug 2024 07:35:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1sdogt-0007c5-Am
- for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 06:23:48 -0400
-Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1sdogr-0006UU-Ou
- for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 06:23:47 -0400
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-5ba43b433beso5637400a12.1
- for <qemu-riscv@nongnu.org>; Tue, 13 Aug 2024 03:23:45 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1sdpo9-0002Rz-VA; Tue, 13 Aug 2024 07:35:21 -0400
+Received: from out30-131.freemail.mail.aliyun.com ([115.124.30.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1sdpo4-0002RY-Q2; Tue, 13 Aug 2024 07:35:21 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1723544624; x=1724149424; darn=nongnu.org;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=KCTQopeDa50VboYWAaOeZFagQj228o0sJa12bfyGY44=;
- b=lXXNdUogdx3R7JXIv9Cie23ivpAFI2swfsS7ytBT5qE0F2quAGhf4GQFUlZ9s5FleV
- BQ7d0095lOfkyZ6EGJCdbhXmAq2c+em+BsgZDptxgjtVqkIeIgc7PFCWEFAaTRgdQz7q
- kmynKaSTf3XDoUp9mhQX9dvVGOmbUwZLdG4mBh1ZrKv9dV/aEOx0XuEmN2kJ0HO+Bzao
- wTi1kIvTYvT90fvRk7exg29ML4ewzopSEpDltmvOazFe7LrD8qwp+GhpqY6MtWQMDJrv
- Gvv2HfI5zjsttkmGv9m9Acs2i62YVAPa8z3LHQBMaYME2IQNEfGwf5+65b2DkHXzKvKD
- Zu4w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723544624; x=1724149424;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=KCTQopeDa50VboYWAaOeZFagQj228o0sJa12bfyGY44=;
- b=n4G711H0Y6nQsgN3bQE+FZ8X1wiWrZSLVA3PFkBJBqUv6i2j+GcEQgvunsB6su5LNT
- wVwzbZJ2oqxWOgzLCMeeIvt6njf6seqvbq2RoNDsuAfvyAZrhfzQE9/0EiS/GlyDvIpg
- ykrWNRPA1vU5kGvskftyV0GT8gYQ/cx4IdoGVCAYuMpFegVABomp0dFSixtJU9k9xUkM
- wWxPMSOm8qGC1RmKNpOvzT6+T7A6jHKbdw5YtGT/FqWsAbLaxroJJP4tiloQQN2YmN8W
- prEZOBUeZOaDqj2OJXOyJX7Wk8AkuPAwnlVgr8ULPcm7tmOhrJHrWYJYub+quQ4KiKOv
- KeTQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUJwfNTMIf40Hn/ofQSdc+Y0Ea9kZuykjMRjOAnh5X+lXKeceisWqgN42TrNtJJbGNjv/U+ufto3fOp58Gqi3GilHv/sBQ=
-X-Gm-Message-State: AOJu0YxVlpoLYX5LZ0Et7WHWxYZIK1AsPpB1fRXJxd6evfdnpkityC3j
- qsUGGWYeT7tz0UcVJKP5DS2GWs5T0hngs/QlLVrgRqornusvwF0eXK5CnE13Ar4=
-X-Google-Smtp-Source: AGHT+IHo1ntf3RmSyynlUUTq9OkWGRrP2kW+Sj4WGnG9YecAddNE6bEp+0pTF36o6zrCIVdzclVIpA==
-X-Received: by 2002:a05:6402:4150:b0:5a1:40d9:6a46 with SMTP id
- 4fb4d7f45d1cf-5bd44c79e76mr2397272a12.36.1723544623341; 
- Tue, 13 Aug 2024 03:23:43 -0700 (PDT)
-Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
- [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5bd196a7ae8sm2871494a12.54.2024.08.13.03.23.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 13 Aug 2024 03:23:42 -0700 (PDT)
-Date: Tue, 13 Aug 2024 12:23:41 +0200
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Cc: Richard Henderson <richard.henderson@linaro.org>, 
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
- alistair.francis@wdc.com, bmeng.cn@gmail.com, zong.li@sifive.com,
- liwei1518@gmail.com, cwshu@andestech.com, dbarboza@ventanamicro.com
-Subject: Re: [PATCH] target/riscv32: Fix masking of physical address
-Message-ID: <20240813-94c16c9efc943fe891ba7724@orel>
-References: <20240813071355.310710-2-ajones@ventanamicro.com>
- <aa7facef-acda-4846-98d5-2f7584515035@linaro.org>
- <20240813-e2c6dc0e68f76be576c72996@orel>
- <3f1accd0-33b8-4656-944f-f6637ee315b9@linaro.org>
+ d=linux.alibaba.com; s=default;
+ t=1723548906; h=From:To:Subject:Date:Message-Id:MIME-Version;
+ bh=y7XdrJfJqpNiKpkU6+BzxPgwYczxMgBIcHima2k6tZ4=;
+ b=GdwDkZN4PwLL5hhdr7utDjM0QiQKqunjTCixrQUNMneak0JGoO7zMUa353ev+OliH/pQXBocdYLWj5ZpXCqzwfAPJb3iqY4FvNQhmPRaf+tQvB7fSuWnsEsUXvKpL+qLn79uePbITMQ9pHR9EWotTNSxN9bDCLVNBzlZUCrbBG8=
+Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0WCoyZsd_1723548903) by smtp.aliyun-inc.com;
+ Tue, 13 Aug 2024 19:35:05 +0800
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ dbarboza@ventanamicro.com, liwei1518@gmail.com, bmeng.cn@gmail.com,
+ zhiwei_liu@linux.alibaba.com, richard.henderson@linaro.org,
+ TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
+Subject: [PATCH v1 00/15] tcg/riscv: Add support for vector
+Date: Tue, 13 Aug 2024 19:34:21 +0800
+Message-Id: <20240813113436.831-1-zhiwei_liu@linux.alibaba.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <3f1accd0-33b8-4656-944f-f6637ee315b9@linaro.org>
-Received-SPF: pass client-ip=2a00:1450:4864:20::534;
- envelope-from=ajones@ventanamicro.com; helo=mail-ed1-x534.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+Received-SPF: pass client-ip=115.124.30.131;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-131.freemail.mail.aliyun.com
+X-Spam_score_int: -174
+X-Spam_score: -17.5
+X-Spam_bar: -----------------
+X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,56 +64,208 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Aug 13, 2024 at 10:21:13AM GMT, Philippe Mathieu-Daudé wrote:
-> On 13/8/24 10:00, Andrew Jones wrote:
-> > On Tue, Aug 13, 2024 at 05:43:07PM GMT, Richard Henderson wrote:
-> > > On 8/13/24 17:13, Andrew Jones wrote:
-> > > > C doesn't extend the sign bit for unsigned types since there isn't a
-> > > > sign bit to extend. This means a promotion of a u32 to a u64 results
-> > > > in the upper 32 bits of the u64 being zero. If that result is then
-> > > > used as a mask on another u64 the upper 32 bits will be cleared. rv32
-> > > > physical addresses may be up to 34 bits wide, so we don't want to
-> > > > clear the high bits while page aligning the address. The fix is to
-> > > > revert to using target_long, since a signed type will get extended.
-> > > > 
-> > > > Fixes: af3fc195e3c8 ("target/riscv: Change the TLB page size depends on PMP entries.")
-> > > > Signed-off-by: Andrew Jones <ajones@ventanamicro.com>
-> > > > ---
-> > > >    target/riscv/cpu_helper.c | 2 +-
-> > > >    1 file changed, 1 insertion(+), 1 deletion(-)
-> > > > 
-> > > > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> > > > index 395a1d914061..dfef1b20d1e8 100644
-> > > > --- a/target/riscv/cpu_helper.c
-> > > > +++ b/target/riscv/cpu_helper.c
-> > > > @@ -1323,7 +1323,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-> > > >        int ret = TRANSLATE_FAIL;
-> > > >        int mode = mmuidx_priv(mmu_idx);
-> > > >        /* default TLB page size */
-> > > > -    target_ulong tlb_size = TARGET_PAGE_SIZE;
-> > > > +    target_long tlb_size = TARGET_PAGE_SIZE;
-> > > 
-> > > If rv32 physical addresses are 34 bits, then you probably didn't want target_*long at all.
-> > 
-> > Yes, just using hwaddr for everything that only touches physical addresses
-> > would probably be best, but, ifaict, it's pretty common to use target_long
-> > for masks used on both virtual and physical addresses (TARGET_PAGE_MASK,
-> > for example). This 'tlb_size' variable is used on both as well.
-> 
-> Then maybe you want vaddr ("exec/vaddr.h"):
-> 
-> /**
->  * vaddr:
->  * Type wide enough to contain any #target_ulong virtual address.
->  */
->
+From: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
 
-I think hwaddr would fit better in this case since riscv32 virtual
-addresses are 32-bit, but I see vaddr is a u64, so it would work too. I
-personally don't mind changing the type of tlb_size to hwaddr, but I went
-with target_long in this patch since that's what it was originally and
-masking with a signed long mask appears to be a common pattern in QEMU.
+This patch set introduces support for the RISC-V vector extension
+in TCG backend for RISC-V targets.
 
-Thanks,
-drew
+Key features of this patch series include:
+  1. Improved register allocation constraints for vector registers.
+  2. Implementation of vset{i}vli instructions for vector configuration
+     and support for variable-length vector registers and LMUL-based
+     register grouping.
+  3. Expanded cmp_vec to align TCG's cmp_vec behavior.
+
+We tested the correctness and the acceleration efficiency of vector
+instructions for this patch set. Conduct testing using the
+CanMV K230 V1.1 development board in an Ubuntu 23 environment.
+
+* Correctness:
+Using risu, we generated 200,000 vector instructions for aarch64 and
+tested them on the board K230, which supports RISC-V vector 1.0.
+The K230 board runs Ubuntu 23, operating a statically compiled user-mode
+qemu-aarch64. We ran risu's master mode with a vector backend qemu and
+apprentice mode with a non-vector backend qemu. 
+
+```
+apprentice:
+$ time qemu-aarch64-release --novec arm64_risu/risu --host=localhost arm64_risu/aarch64sve_20w
+
+master:
+$ script -c "time qemu-aarch64-release arm64_risu/risu --master arm64_risu/aarch64sve_20w" risu_test.log
+Script started, output log file is 'risu_test.log'.
+loading test image arm64_risu/aarch64sve_20w...
+master port 9191
+master: waiting for connection on port 9191...
+starting master image at 0x3fc6df1000
+starting image
+match status...
+match!
+scalar_cnt = 50447787
+vec_cnt = 786345
+All cnts = 51234132
+Percent vector: 1.53%
+
+RISC-V Vector backend stat:
+INDEX_op_mov_vec counts: 503
+INDEX_op_dup_vec counts: 9989
+INDEX_op_ld_vec counts: 27728
+INDEX_op_st_vec counts: 272810
+INDEX_op_dupm_vec counts: 263
+INDEX_op_add_vec counts: 4842
+INDEX_op_sub_vec counts: 2993
+INDEX_op_mul_vec counts: 677
+INDEX_op_neg_vec counts: 968
+INDEX_op_ssadd_vec counts: 223
+INDEX_op_usadd_vec counts: 229
+INDEX_op_sssub_vec counts: 226
+INDEX_op_ussub_vec counts: 265
+INDEX_op_smin_vec counts: 650
+INDEX_op_umin_vec counts: 1134
+INDEX_op_smax_vec counts: 908
+INDEX_op_umax_vec counts: 625
+INDEX_op_and_vec counts: 8053
+INDEX_op_or_vec counts: 4520
+INDEX_op_xor_vec counts: 2177
+INDEX_op_not_vec counts: 2639
+INDEX_op_shli_vec counts: 947
+INDEX_op_shri_vec counts: 3769
+INDEX_op_sari_vec counts: 2130
+INDEX_op_rotli_vec counts: 558
+INDEX_op_shls_vec counts: 211
+INDEX_op_shrs_vec counts: 779
+INDEX_op_sars_vec counts: 162
+INDEX_op_rotls_vec counts: 0
+INDEX_op_shlv_vec counts: 482
+INDEX_op_shrv_vec counts: 229
+INDEX_op_sarv_vec counts: 253
+INDEX_op_rotlv_vec counts: 0
+INDEX_op_rotrv_vec counts: 0
+INDEX_op_cmp_vec counts: 3211
+INDEX_op_rvv_cmpcond_vec counts: 3211
+INDEX_op_rvv_merge_vec counts: 3211
+INDEX_op_rvv_shli_vec counts: 736
+INDEX_op_rvv_shri_vec counts: 2990
+INDEX_op_rvv_sari_vec counts: 1968
+
+real    27m55.049s
+user    8m0.284s
+sys     1m28.278s
+Script done.
+```
+Note:
+The test results are as follows: the qemu frontend of aarch64 did not
+use rotls_vec, rotlv_vec, or rotrv_vec, so their generation count in
+the test results is 0.
+
+* Vector Acceleration Efficiency: 
+We used the opencv_perf_core test program, which has been vectorized and
+optimized with O3 compilation. The tests were conducted on the k230 board
+running opencv_perf_core via qemu-aarch64. 
+
+The result is below:
+```
+$ time ./qemu-aarch64 ./opencv_test/opencv_perf_core --gtest_filter="*UMatTest*" --perf_force_samples=50 --perf_min_samples=50
+Time compensation is 0
+TEST: Skip tests with tags: 'mem_6gb', 'verylong'
+CTEST_FULL_OUTPUT
+OpenCV version: 4.5.4-dev
+OpenCV VCS version: 6a00483e71-dirty
+Build type: Release
+Compiler: /mnt/rtos_nfs_new/xujf/arm-tools/gcc-arm-10.2-2020.11-x86_64-aarch64-none-linux-gnu/bin/aarch64-linux-gnu-g++  (ver 10.2.1)
+CPU features: NEON FP16
+Note: Google Test filter = *UMatTest*
+[==========] Running 12 tests from 1 test case.
+[----------] Global test environment set-up.
+[----------] 12 tests from OCL_UMatTest_CustomPtr
+...
+[----------] Global test environment tear-down
+[==========] 12 tests from 1 test case ran. (274624 ms total)
+[  PASSED  ] 12 tests.
+scalar_cnt = 1599444
+vec_cnt = 7544
+All cnts = 1606988
+
+RISC-V Vector backend stat:
+INDEX_op_ld_vec counts: 95
+INDEX_op_st_vec counts: 3679
+INDEX_op_dupm_vec counts: 2
+INDEX_op_add_vec counts: 10
+INDEX_op_ssadd_vec counts: 0
+INDEX_op_usadd_vec counts: 4
+INDEX_op_and_vec counts: 24
+INDEX_op_or_vec counts: 17
+INDEX_op_xor_vec counts: 4
+INDEX_op_cmp_vec counts: 28
+INDEX_op_rvv_cmpcond_vec counts: 28
+INDEX_op_rvv_merge_vec counts: 28
+real    5m37.402s
+user    5m36.656s
+sys     0m0.588s
+
+$ time ./qemu-aarch64 -novec ./opencv_test/opencv_perf_core --gtest_filter="*UMatTest*" --perf_force_samples=50 --perf_min_samples=50
+Time compensation is 0
+TEST: Skip tests with tags: 'mem_6gb', 'verylong'
+CTEST_FULL_OUTPUT
+OpenCV version: 4.5.4-dev
+OpenCV VCS version: 6a00483e71-dirty
+Build type: Release
+Compiler: /mnt/rtos_nfs_new/xujf/arm-tools/gcc-arm-10.2-2020.11-x86_64-aarch64-none-linux-gnu/bin/aarch64-linux-gnu-g++  (ver 10.2.1)
+CPU features: NEON FP16
+Note: Google Test filter = *UMatTest*
+[==========] Running 12 tests from 1 test case.
+[----------] Global test environment set-up.
+[----------] 12 tests from OCL_UMatTest_CustomPtr
+...
+[----------] Global test environment tear-down
+[==========] 12 tests from 1 test case ran. (539970 ms total)
+[  PASSED  ] 12 tests.
+scalar_cnt = 1598291
+vec_cnt = 0
+All cnts = 1598291
+
+real    10m4.760s
+user    10m3.690s
+sys     0m0.824s
+```
+
+Using qemu run times, the acceleration ratio is calculated as
+(10*60+3)/(5*60+36) = 1.79, indicating a speed improvement of 44%.
+
+And the argument "-novec" is not included in this set, as we only use it for local testing.
+
+Swung0x48 (1):
+  tcg/riscv: Add basic support for vector
+
+TANG Tiancheng (14):
+  util: Add RISC-V vector extension probe in cpuinfo
+  tcg/op-gvec: Fix iteration step in 32-bit operation
+  tcg: Fix register allocation constraints
+  tcg/riscv: Add riscv vset{i}vli support
+  tcg/riscv: Implement vector load/store
+  tcg/riscv: Implement vector mov/dup{m/i}
+  tcg/riscv: Add support for basic vector opcodes
+  tcg/riscv: Implement vector cmp ops
+  tcg/riscv: Implement vector not/neg ops
+  tcg/riscv: Implement vector sat/mul ops
+  tcg/riscv: Implement vector min/max ops
+  tcg/riscv: Implement vector shs/v ops
+  tcg/riscv: Implement vector roti/v/x shi ops
+  tcg/riscv: Enable vector TCG host-native
+
+ host/include/riscv/host/cpuinfo.h |   1 +
+ tcg/riscv/tcg-target-con-set.h    |   7 +
+ tcg/riscv/tcg-target-con-str.h    |   2 +
+ tcg/riscv/tcg-target.c.inc        | 839 ++++++++++++++++++++++++++++--
+ tcg/riscv/tcg-target.h            |  82 +--
+ tcg/riscv/tcg-target.opc.h        |  18 +
+ tcg/tcg-op-gvec.c                 |   2 +-
+ tcg/tcg.c                         |  20 +-
+ util/cpuinfo-riscv.c              |  20 +-
+ 9 files changed, 914 insertions(+), 77 deletions(-)
+ create mode 100644 tcg/riscv/tcg-target.opc.h
+
+-- 
+2.43.0
+
 
