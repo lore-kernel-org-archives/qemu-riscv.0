@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E20DC52D7C
-	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Aug 2024 20:26:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D547C52D7C
+	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Aug 2024 20:27:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sdy3h-0005AH-7t; Tue, 13 Aug 2024 16:23:57 -0400
+	id 1sdy42-0006ii-A1; Tue, 13 Aug 2024 16:24:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sdy3d-00052W-OM
- for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:23:54 -0400
-Received: from mail-lf1-x135.google.com ([2a00:1450:4864:20::135])
+ id 1sdy3s-00060o-Ng
+ for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:24:09 -0400
+Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sdy3N-0006BL-ES
- for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:23:53 -0400
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-52efd530a4eso8195939e87.0
- for <qemu-riscv@nongnu.org>; Tue, 13 Aug 2024 13:23:36 -0700 (PDT)
+ id 1sdy3S-0006Gj-Op
+ for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:24:07 -0400
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-368f92df172so2978839f8f.2
+ for <qemu-riscv@nongnu.org>; Tue, 13 Aug 2024 13:23:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723580615; x=1724185415; darn=nongnu.org;
+ d=linaro.org; s=google; t=1723580621; x=1724185421; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yKD7jTj6Nf0+e/1hZyzKkWpKuU283fm5mnyf6o/tDJg=;
- b=FIjgdpfIez5HdkW9Kg+ECabF4IWJ56stoQlCOLD7Gbch8BAjb8pwGw/W2shi0FvOw5
- j4kJW1EgUAR91p43/z83OmQncjeWdodnvGAEXPPM9j1gbnGGp4dgEqlwlHatkoyrY0yC
- mP0RQ7VsE3pFHXcdd8gs3iaFclLPJvqeZ0mds2Xq+jXx/nHUkOj1PFZugIH5e6l+ECy7
- dCa3eF70iduVf0IYeUuey4bBIYvRxe6K0MBoQDJV+1+pJzTVnvcdI9xM/2gcNlzEvqez
- Skt63o5zYw/r+iwJdqqrXu7wRKGl95UY3cqTa/7kibYfxAT79whJe4a+QNrZyvqkSKbI
- hXEw==
+ bh=LWXPvrAXN+b9vbW8f3D9TjDx5XdO3wBrf9b11Ogrln0=;
+ b=ejEKkYMBIvRcmoBbwB/OoxI1xhEXX28w6sTylrPxb23f0mPhocMewCvnKb+c0bpeqF
+ bSEeoPmmV/zeg/6cacsnFi1uyfxmUrhuM9olxFcRSpmH6FfFT79EukzNt4X1qg3vRUir
+ juNmwntJOVkXMSy4kC/MH0q8HOa90YqeS2bhkhFMr/dOc1lQcaTdK7nOqgy9mgxM9YIE
+ ++oa82OjY344zqtGov3nGOt2eouGucblHCiPkXz5Z//+IcBEKed0EdVAHsh58TXrLurj
+ LJvd9ITQt3hzyO0kDOQNYy4J9qprGBdeiRXIj3TLGe01N1u4w/i+DdzLkj1xXaStPyud
+ W0yw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723580615; x=1724185415;
+ d=1e100.net; s=20230601; t=1723580621; x=1724185421;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yKD7jTj6Nf0+e/1hZyzKkWpKuU283fm5mnyf6o/tDJg=;
- b=V29LYs4aW8tw2ZvxJV6nCvgLwkcKyfJ3AOgONKr1jc+PAUC11ectg6CW5PfH9DUJnm
- e6iEIrWaDaJfT3JoCKyDD0xK2DxLlivCF6XR9uWjUvrc9BQ2kLzhufMu1AdEY4NKbtOC
- K2J35wkPpjRM6CXuKDYKcQHKVa4lSgfM+Kci3DILdZ+dc3qwNwXGx0kw5Y+JBA51WfW2
- Kv3pxOln4XoanXKE2p4Qx4ENuS+krZP0JPTn6rwh4RKpg2FLxLseNgvGHWrZRZrHSeBd
- HH7lFhcmZu1SCsX5v2k9ykt5Ii1a9GOoneqv+c+DLRa3cmKRYByuYH3aI8/apD/9nBwb
- SUHA==
+ bh=LWXPvrAXN+b9vbW8f3D9TjDx5XdO3wBrf9b11Ogrln0=;
+ b=Iibzh3a4JXI0VEkvCHRVCsPZQ+N7QOHT6wSLwTaezqFu/2oWplFwUXfkuMArJuPQEk
+ ZmWM1V4eu/+f0xhe81QX3DBJXIMm1rd5e9vN1WlxGdt+kVtIszwDmdxvrhi0bWT97AWy
+ 6a7mvJ7a3/aHfTvPQgQgAp4nCaZvpUFnf/q/7nbg7cO6pbtfTWPXzJFfLXvkFc6Slz2y
+ qWadYrT1SeW9bf7JRFYZ8IUiZp9xFwJBE18OiCJ5HlKcwk+1dOlsDKsxDrT60FBzMdJm
+ whp7iAt8UBJ6ILt1Vl54WmBqZZMaf0nwmE8v30Q1m5BO1pZrgeihjqJOkXyLdHd/O5ng
+ qx4w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWGhfzplZzJkZBWE1dT5gNp1ZWCHGyPIlfw9W77RCEBly5ZOXEr3VAZJWrNd8BO6k9RXL9JgvwEHSY71XNrQkawe5pxo7U=
-X-Gm-Message-State: AOJu0YyjREBybJZZO6xSKHlt249RXhW6fcEqC9xCcEz2CHrz1AM5/IzZ
- MSxoJlVD75SxJAE2neYGRs7yKDeOY7erLLisbJdvGmNpHyHNB+2h62eI5M2XEoQ=
-X-Google-Smtp-Source: AGHT+IFYzyLoE270W+WofOCfgUcyOUdrs+aYXrTSO0xXscbAltL5AOxMO0ddGDb3dLKASsg0cgJSog==
-X-Received: by 2002:a05:6512:39cc:b0:52e:ff2a:217 with SMTP id
- 2adb3069b0e04-532edbbee55mr307421e87.50.1723580614179; 
- Tue, 13 Aug 2024 13:23:34 -0700 (PDT)
+ AJvYcCUSOj6TuK1UUT8lJh3vjMVtQ7X6oQCy0g8NQw3yFl3MlKQ7FVoqkSUZkHkEiLYlU3MORbgu7W7K/nwn@nongnu.org
+X-Gm-Message-State: AOJu0YzDGhMehNo2hz6K4XYOkKZ7mKtG1+tVT4HyhHKWzaBWvhIlJSZ8
+ izJNoUZ+UI1lG/1Y/bjvt2OJ2dQuqOvURY0yd9vDNo1dCswU8fVeo2G6a0rQXxs=
+X-Google-Smtp-Source: AGHT+IHIn4A5f69zdSgZtSwfK8+fGkY7fWUCnbaP/Qf2os8KqW9X4tR1aS/JBmZCAslm/18faf3Cyg==
+X-Received: by 2002:a5d:4001:0:b0:371:72a8:15e with SMTP id
+ ffacd0b85a97d-37177777850mr446555f8f.16.1723580620625; 
+ Tue, 13 Aug 2024 13:23:40 -0700 (PDT)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-36e4c9385d3sm11271592f8f.42.2024.08.13.13.23.30
+ ffacd0b85a97d-36e4cfeef61sm11263938f8f.57.2024.08.13.13.23.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 13 Aug 2024 13:23:30 -0700 (PDT)
+ Tue, 13 Aug 2024 13:23:38 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 8CE945F8C5;
- Tue, 13 Aug 2024 21:23:29 +0100 (BST)
+ by draig.lan (Postfix) with ESMTP id A48BE5FD6E;
+ Tue, 13 Aug 2024 21:23:30 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Alistair Francis <alistair.francis@wdc.com>,
@@ -91,18 +91,19 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Jason Wang <jasowang@redhat.com>, Bin Meng <bmeng.cn@gmail.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Wainer dos Santos Moschetta <wainersm@redhat.com>
-Subject: [PATCH v2 02/21] Makefile: trigger re-configure on updated pythondeps
-Date: Tue, 13 Aug 2024 21:23:10 +0100
-Message-Id: <20240813202329.1237572-3-alex.bennee@linaro.org>
+ Wainer dos Santos Moschetta <wainersm@redhat.com>,
+ Nicholas Piggin <npiggin@gmail.com>
+Subject: [PATCH v2 13/21] Revert "replay: stop us hanging in rr_wait_io_event"
+Date: Tue, 13 Aug 2024 21:23:21 +0100
+Message-Id: <20240813202329.1237572-14-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240813202329.1237572-1-alex.bennee@linaro.org>
 References: <20240813202329.1237572-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::135;
- envelope-from=alex.bennee@linaro.org; helo=mail-lf1-x135.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::430;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x430.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -125,32 +126,93 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-If we add additional deps for meson we need to ensure we trigger a
-reconfigure to make sure everything is set up.
+From: Nicholas Piggin <npiggin@gmail.com>
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Message-Id: <20240731140232.22193-1-alex.bennee@linaro.org>
+This reverts commit 1f881ea4a444ef36a8b6907b0b82be4b3af253a2.
+
+That commit causes reverse_debugging.py test failures, and does
+not seem to solve the root cause of the problem x86-64 still
+hangs in record/replay tests.
+
+The problem with short-cutting the iowait that was taken during
+record phase is that related events will not get consumed at the
+same points (e.g., reading the clock).
+
+A hang with zero icount always seems to be a symptom of an earlier
+problem that has caused the recording to become out of synch with
+the execution and consumption of events by replay.
+
+Acked-by: Alex Bennée <alex.bennee@linaro.org>
+Signed-off-by: Nicholas Piggin <npiggin@gmail.com>
+Message-Id: <20240813050638.446172-6-npiggin@gmail.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Message-Id: <20240807114059.2339021-3-alex.bennee@linaro.org>
 ---
- Makefile | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ include/sysemu/replay.h      |  5 -----
+ accel/tcg/tcg-accel-ops-rr.c |  2 +-
+ replay/replay.c              | 21 ---------------------
+ 3 files changed, 1 insertion(+), 27 deletions(-)
 
-diff --git a/Makefile b/Makefile
-index 02a257584b..917c9a34d1 100644
---- a/Makefile
-+++ b/Makefile
-@@ -78,7 +78,8 @@ x := $(shell rm -rf meson-private meson-info meson-logs)
- endif
+diff --git a/include/sysemu/replay.h b/include/sysemu/replay.h
+index f229b2109c..8102fa54f0 100644
+--- a/include/sysemu/replay.h
++++ b/include/sysemu/replay.h
+@@ -73,11 +73,6 @@ int replay_get_instructions(void);
+ /*! Updates instructions counter in replay mode. */
+ void replay_account_executed_instructions(void);
  
- # 1. ensure config-host.mak is up-to-date
--config-host.mak: $(SRC_PATH)/configure $(SRC_PATH)/scripts/meson-buildoptions.sh $(SRC_PATH)/VERSION
-+config-host.mak: $(SRC_PATH)/configure $(SRC_PATH)/scripts/meson-buildoptions.sh \
-+		$(SRC_PATH)/pythondeps.toml $(SRC_PATH)/VERSION
- 	@echo config-host.mak is out-of-date, running configure
- 	@if test -f meson-private/coredata.dat; then \
- 	  ./config.status --skip-meson; \
+-/**
+- * replay_can_wait: check if we should pause for wait-io
+- */
+-bool replay_can_wait(void);
+-
+ /* Processing clocks and other time sources */
+ 
+ /*! Save the specified clock */
+diff --git a/accel/tcg/tcg-accel-ops-rr.c b/accel/tcg/tcg-accel-ops-rr.c
+index 48c38714bd..c59c77da4b 100644
+--- a/accel/tcg/tcg-accel-ops-rr.c
++++ b/accel/tcg/tcg-accel-ops-rr.c
+@@ -109,7 +109,7 @@ static void rr_wait_io_event(void)
+ {
+     CPUState *cpu;
+ 
+-    while (all_cpu_threads_idle() && replay_can_wait()) {
++    while (all_cpu_threads_idle()) {
+         rr_stop_kick_timer();
+         qemu_cond_wait_bql(first_cpu->halt_cond);
+     }
+diff --git a/replay/replay.c b/replay/replay.c
+index b8564a4813..895fa6b67a 100644
+--- a/replay/replay.c
++++ b/replay/replay.c
+@@ -451,27 +451,6 @@ void replay_start(void)
+     replay_enable_events();
+ }
+ 
+-/*
+- * For none/record the answer is yes.
+- */
+-bool replay_can_wait(void)
+-{
+-    if (replay_mode == REPLAY_MODE_PLAY) {
+-        /*
+-         * For playback we shouldn't ever be at a point we wait. If
+-         * the instruction count has reached zero and we have an
+-         * unconsumed event we should go around again and consume it.
+-         */
+-        if (replay_state.instruction_count == 0 && replay_state.has_unread_data) {
+-            return false;
+-        } else {
+-            replay_sync_error("Playback shouldn't have to iowait");
+-        }
+-    }
+-    return true;
+-}
+-
+-
+ void replay_finish(void)
+ {
+     if (replay_mode == REPLAY_MODE_NONE) {
 -- 
 2.39.2
 
