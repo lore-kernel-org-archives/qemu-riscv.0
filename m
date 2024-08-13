@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2320EC52D7B
-	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Aug 2024 20:27:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F1A1C52D7B
+	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Aug 2024 20:27:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sdy42-0006iB-4U; Tue, 13 Aug 2024 16:24:18 -0400
+	id 1sdy40-0006bV-VH; Tue, 13 Aug 2024 16:24:17 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sdy3i-0005Gx-K3
- for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:23:58 -0400
-Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
+ id 1sdy3s-0005zL-Ct
+ for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:24:08 -0400
+Received: from mail-lj1-x22d.google.com ([2a00:1450:4864:20::22d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sdy3O-0006Bu-37
- for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:23:58 -0400
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-429c4a4c6a8so31260275e9.0
- for <qemu-riscv@nongnu.org>; Tue, 13 Aug 2024 13:23:37 -0700 (PDT)
+ id 1sdy3R-0006EP-Vt
+ for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:24:06 -0400
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-2eeb1ba0481so79078631fa.2
+ for <qemu-riscv@nongnu.org>; Tue, 13 Aug 2024 13:23:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723580616; x=1724185416; darn=nongnu.org;
+ d=linaro.org; s=google; t=1723580620; x=1724185420; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0y9bR77UvCt8TQIygcd82Fr7RaUqdwHl6O1d6ILZIVc=;
- b=x9q5OvIhDUo3yhlEZS6ytgPKeMZKNcpdTsZr7ueRF5xVnavnPCY1RU/n7FT3Lx8Xv9
- RPckbAuuxZtl0PNbLD4f6MRLRUgUjEy6qkJ5KbEzO9bTHTsBzvtPx0iWBZs0pveKOruX
- bylQIX6Tx/sVP1fb8YqcJTbsa+lqRJ9s3sVVGwANSrUuJzJnYU97u0z4oKLys2XMeXDl
- bQ/hIf1Vpf5odfLjBiDiNV5n1L9EnrumiWu1rntWo+PsvS/wj3dQTO324eGwanPJXJOs
- ZnN3CRQAb+wxudCBLTYn/RG4u+AbIp3UcEHsQLavfHhJt/Otck1Ldji4S2ANiOWLTZDy
- D8uA==
+ bh=gKnLVSpjxmewuCirNFwcFUTWuBBv0LU3PKhxtt5azvQ=;
+ b=AUVma06k0D8LMAdpY2jTxZD4+BGXaRJgh52JGrvItXso7Lp47bgkyyT7EYRSGDy7+h
+ hOfz/j//uHvnYMqrYnUy4GYCIe75u0vfXYmlSKlH/CXhBJTGr0oBUN0J/r/trrg5oTvL
+ StuM26nUzdGUNELGrVR4va3pzAJZcx4hIpPbH9vj4QPGmel/ksuzzH/eX6KMi/Jio8mB
+ 8jNxuswa6YlDQ2UQkeqcS/2aY+N2Aq8CI9zpcrXLDjwsEl3lwB0YbGeg7r+UpnMI166b
+ rzkwI86Wg7MopZZo1+2OVQK1FOZfuoDVdjJdt+1xlCtQNJ6NSWPFMLWdM7beOxxumh3/
+ H9pQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723580616; x=1724185416;
+ d=1e100.net; s=20230601; t=1723580620; x=1724185420;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0y9bR77UvCt8TQIygcd82Fr7RaUqdwHl6O1d6ILZIVc=;
- b=dhEz9wnNtxX5F3bPJjbK62JmP5d2v6Upgpt2mbD7XJYeF0mAyDrkxveQiDsBypNKdv
- frX6sgvivzcTKJcbWZI4z6yaIXmdC71gvxvHVYH1IBWL+OkiGFJQn4WaJLm4GDKQCjAN
- LJ3xVp9UrUYxc9IFiVVgixo3y9mTOakQosls2Fc0ZIG//P4bFweBvnr5Y/J8x/5oArTJ
- KhdASKM+hcpNtrDgXHmGg12zsZOISD32Rt6nWJQboIriovmfusqM3OzSKyDlDkB3ayZe
- GjmJH4ZOyoAQFQso7T8qjKJaMK959iv5AtkFnhI0lb56bjJUuAWMytCjQ72H96O7P2FA
- wRCw==
+ bh=gKnLVSpjxmewuCirNFwcFUTWuBBv0LU3PKhxtt5azvQ=;
+ b=B+csFd5PbaO7qeJVK9EMrHvKTrknJx4M247LefX01BvVfZbKCdYyx9OD8GsiZjn0UV
+ +nEZUsgCHVjGtgYzSGEM62fMR0gUcI80oWchzFgfCfK0iUz14Smw/Yvf0dPvEnuF1lzd
+ TMKF4V2KYKYYv9li8kZYE+iE4OnXEJA/4S8VlRW3mKkQwFDw4V4HAe9ZOQgssiS0lBcA
+ 9U48BAzCV/0lVzjDPvNPFlu/N7R3tF//0Zmrji17C/AsLroBJLmt8Mb/+CH1MyjxXN42
+ bKLObeC+qijvBdeyB7PwLCfK3PO9dC9ZWZnBgp9Gnk+r8W7EOwsg1IRWiKzSB8Sv5OU9
+ /SZA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW/Hg+U6gWSP9M8s+V6xptKj3ZzqiVALaGCh3t+ZzgpUKaoD8SwNEFufSbB+gZLdRjYsurETsIAS/DL@nongnu.org
-X-Gm-Message-State: AOJu0YxhOzJu4flfWspntuLatVZc0/Kwfz2NpgD6amPe5Bf/Q0auXQbd
- LOGdxAAz8PzEfjyaLw+ese7+iBej3nCZWSnsO7eXIvx0GIsqtp7F6RSUA0pMIEY=
-X-Google-Smtp-Source: AGHT+IFM1gkXM9ToYjXxX7j0j/MfHmTCqLYgDpYtQrLkDfO297zIxetFiBO5Uq30pO6Vp4TTwfObwQ==
-X-Received: by 2002:a05:600c:524b:b0:426:6320:7ddf with SMTP id
- 5b1f17b1804b1-429dd26c229mr3693735e9.35.1723580615541; 
- Tue, 13 Aug 2024 13:23:35 -0700 (PDT)
+ AJvYcCVxZbxswkLr7T2HfLezN33n2xbPBuVOwVj820hgFHB3GtNf0ZpvW1Zb/wcKqsgMRahdQMFDYS/R0FO6CB+bHJK9FNxzrZk=
+X-Gm-Message-State: AOJu0YwJJr5c6ApHj6/AMQXDdhroXrTUS2m+kIP7oojgENdhcWHEVnKd
+ G7tJ9QEi0YWd3gaHM0+s1VFnXgCMoVJAbk96aUjRb5w7F4NSHK0F3TAy63c0vs0=
+X-Google-Smtp-Source: AGHT+IEJM7GCjG6FXle0qtVKynHXGKsll+H0P8kU2TbGzKLAw57ANQNr6l0i2885LCsZ/JHq16ex3w==
+X-Received: by 2002:a05:651c:19ac:b0:2f0:25dc:1894 with SMTP id
+ 38308e7fff4ca-2f3aa1d9de7mr3336041fa.2.1723580619507; 
+ Tue, 13 Aug 2024 13:23:39 -0700 (PDT)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-429c750ec0bsm151656175e9.15.2024.08.13.13.23.31
+ 5b1f17b1804b1-429deb4a4aesm893215e9.14.2024.08.13.13.23.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 13 Aug 2024 13:23:34 -0700 (PDT)
+ Tue, 13 Aug 2024 13:23:38 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id D18D85F959;
- Tue, 13 Aug 2024 21:23:29 +0100 (BST)
+ by draig.lan (Postfix) with ESMTP id 8B99B5FCF1;
+ Tue, 13 Aug 2024 21:23:30 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Alistair Francis <alistair.francis@wdc.com>,
@@ -92,18 +92,20 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  Jason Wang <jasowang@redhat.com>, Bin Meng <bmeng.cn@gmail.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Gustavo Romero <gustavo.romero@linaro.org>
-Subject: [PATCH v2 05/21] configure: Fix GDB version detection for GDB_HAS_MTE
-Date: Tue, 13 Aug 2024 21:23:13 +0100
-Message-Id: <20240813202329.1237572-6-alex.bennee@linaro.org>
+ Nicholas Piggin <npiggin@gmail.com>,
+ Pavel Dovgalyuk <Pavel.Dovgalyuk@ispras.ru>
+Subject: [PATCH v2 12/21] replay: allow runstate shutdown->running when
+ replaying trace
+Date: Tue, 13 Aug 2024 21:23:20 +0100
+Message-Id: <20240813202329.1237572-13-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240813202329.1237572-1-alex.bennee@linaro.org>
 References: <20240813202329.1237572-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::332;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x332.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::22d;
+ envelope-from=alex.bennee@linaro.org; helo=mail-lj1-x22d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -126,37 +128,110 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Gustavo Romero <gustavo.romero@linaro.org>
+From: Nicholas Piggin <npiggin@gmail.com>
 
-The test gdbstub/test-mte.py requires a GDB version that supports the
-qIsAddressTagged packet. According to GDB NEWS [0], this packet was
-first made available in the GDB 15.1 release, not in 15.0, so this
-commit fixes it in configure.
+When replaying a trace, it is possible to go from shutdown to running
+with a reverse-debugging step. This can be useful if the problem being
+debugged triggers a reset or shutdown.
 
-[0] https://www.sourceware.org/gdb/news/
+This can be tested by making a recording of a machine that shuts down,
+then using -action shutdown=pause when replaying it. Continuing to the
+end of the trace then reverse-stepping in gdb crashes due to invalid
+runstate transition.
 
-Signed-off-by: Gustavo Romero <gustavo.romero@linaro.org>
-Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2477
-Message-Id: <20240804161850.2646299-4-gustavo.romero@linaro.org>
+Just permitting the transition seems to be all that's necessary for
+reverse-debugging to work well in such a state.
+
+Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
+Reviewed-by: Pavel Dovgalyuk <Pavel.Dovgalyuk@ispras.ru>
+Signed-off-by: Nicholas Piggin <npiggin@gmail.com>
+Message-Id: <20240813050638.446172-5-npiggin@gmail.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Message-Id: <20240807114059.2339021-6-alex.bennee@linaro.org>
 ---
- configure | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ include/sysemu/runstate.h |  1 +
+ replay/replay.c           |  2 ++
+ system/runstate.c         | 31 ++++++++++++++++++++++++++++---
+ 3 files changed, 31 insertions(+), 3 deletions(-)
 
-diff --git a/configure b/configure
-index 97de85d710..d08b71f14b 100755
---- a/configure
-+++ b/configure
-@@ -1675,7 +1675,7 @@ for target in $target_list; do
-           echo "GDB=$gdb_bin" >> $config_target_mak
-       fi
+diff --git a/include/sysemu/runstate.h b/include/sysemu/runstate.h
+index e210a37abf..11c7ff3ffb 100644
+--- a/include/sysemu/runstate.h
++++ b/include/sysemu/runstate.h
+@@ -9,6 +9,7 @@ void runstate_set(RunState new_state);
+ RunState runstate_get(void);
+ bool runstate_is_running(void);
+ bool runstate_needs_reset(void);
++void runstate_replay_enable(void);
  
--      if test "${gdb_arches#*aarch64}" != "$gdb_arches" && version_ge $gdb_version 15.0; then
-+      if test "${gdb_arches#*aarch64}" != "$gdb_arches" && version_ge $gdb_version 15.1; then
-           echo "GDB_HAS_MTE=y" >> $config_target_mak
-       fi
+ typedef void VMChangeStateHandler(void *opaque, bool running, RunState state);
  
+diff --git a/replay/replay.c b/replay/replay.c
+index a2c576c16e..b8564a4813 100644
+--- a/replay/replay.c
++++ b/replay/replay.c
+@@ -385,6 +385,8 @@ static void replay_enable(const char *fname, int mode)
+         replay_fetch_data_kind();
+     }
+ 
++    runstate_replay_enable();
++
+     replay_init_events();
+ }
+ 
+diff --git a/system/runstate.c b/system/runstate.c
+index c833316f6d..a0e2a5fd22 100644
+--- a/system/runstate.c
++++ b/system/runstate.c
+@@ -181,6 +181,12 @@ static const RunStateTransition runstate_transitions_def[] = {
+     { RUN_STATE__MAX, RUN_STATE__MAX },
+ };
+ 
++static const RunStateTransition replay_play_runstate_transitions_def[] = {
++    { RUN_STATE_SHUTDOWN, RUN_STATE_RUNNING},
++
++    { RUN_STATE__MAX, RUN_STATE__MAX },
++};
++
+ static bool runstate_valid_transitions[RUN_STATE__MAX][RUN_STATE__MAX];
+ 
+ bool runstate_check(RunState state)
+@@ -188,14 +194,33 @@ bool runstate_check(RunState state)
+     return current_run_state == state;
+ }
+ 
+-static void runstate_init(void)
++static void transitions_set_valid(const RunStateTransition *rst)
+ {
+     const RunStateTransition *p;
+ 
+-    memset(&runstate_valid_transitions, 0, sizeof(runstate_valid_transitions));
+-    for (p = &runstate_transitions_def[0]; p->from != RUN_STATE__MAX; p++) {
++    for (p = rst; p->from != RUN_STATE__MAX; p++) {
+         runstate_valid_transitions[p->from][p->to] = true;
+     }
++}
++
++void runstate_replay_enable(void)
++{
++    assert(replay_mode != REPLAY_MODE_NONE);
++
++    if (replay_mode == REPLAY_MODE_PLAY) {
++        /*
++         * When reverse-debugging, it is possible to move state from
++         * shutdown to running.
++         */
++        transitions_set_valid(&replay_play_runstate_transitions_def[0]);
++    }
++}
++
++static void runstate_init(void)
++{
++    memset(&runstate_valid_transitions, 0, sizeof(runstate_valid_transitions));
++
++    transitions_set_valid(&runstate_transitions_def[0]);
+ 
+     qemu_mutex_init(&vmstop_lock);
+ }
 -- 
 2.39.2
 
