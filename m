@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75CB2C52D7D
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA3ABC52D7F
 	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Aug 2024 20:25:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sdy41-0006gw-QQ; Tue, 13 Aug 2024 16:24:17 -0400
+	id 1sdy3u-00068u-I4; Tue, 13 Aug 2024 16:24:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sdy3q-0005rI-RH
- for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:24:07 -0400
-Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435])
+ id 1sdy3j-0005Mh-Ns
+ for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:23:59 -0400
+Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sdy3R-0006DS-FK
- for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:24:03 -0400
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-3686b285969so3301626f8f.0
- for <qemu-riscv@nongnu.org>; Tue, 13 Aug 2024 13:23:40 -0700 (PDT)
+ id 1sdy3Q-0006D0-Vi
+ for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:23:59 -0400
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-3687f91af40so3597300f8f.0
+ for <qemu-riscv@nongnu.org>; Tue, 13 Aug 2024 13:23:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723580619; x=1724185419; darn=nongnu.org;
+ d=linaro.org; s=google; t=1723580618; x=1724185418; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pP0Fo+KnSDTrFxCsw1YiRuncAlRjF4c9n6ZeDd0O4VU=;
- b=pXgLsNT/D4EXpwpfUrA0Uw2zS0di6wz3L2Id80E1ZKHlOD7eTDMO/PrSRGqe8TN7YR
- fF7qAwJ5MxB9Z7oI+7eh2sNXvdxSInyuUNC6QMfxGdRgDkXlhmSwZCJugeywxPV0vTfH
- J7/ll70aDm0C8559pnEbe9X8Bty8UYlJR0vx3mllf9Ep/iD8uj6z4jdj/4dS5lEX7WAU
- yLEgFrUzx8aDtbqHCm+RSQAaZPwoiGDS948e82pj0sb7SYFyZAJirsCph4tfsYAaN802
- 2jKlTgY/DG/dt0eHTM51VO1gTFF3QRc5UHxfwMEMu4HjcSkESvNw09I71flgqBHrmU2X
- yCRw==
+ bh=8K1C3X/MhQMRep+HimQDatYHRQUqPTx7ZX7Xy6/ZA3U=;
+ b=f4R3VzB41z0tyDSiA/kinJjA4wV2z5S8JhLV6lAENTw6X97Gj88Y3sv4ZTaO7Ol1DL
+ 1Rr8heyItrZmMjT0ZYbz3nWBxDBlnRcYabFzQNQaWgCQz/GZ8NDygLuvv+rfaD1gWCLh
+ Zrq0ApOwxtuJHRJq3uD8zBpQqOYfiFyx6HaWIEgEQcJUe/qBndhnzJRWPIFBH5h1HBJi
+ RyxyTwUuhoghg8qk0XwUJFTC9jeBjmS44FgiPd9ldfCPzMisZYOg72hC79FILnvUTFQG
+ L415foepNLdqWp3poBF1Y7QUxeg9v+bvScPeTdFlFpKTxKSotag+AV+GuKMGcl7lkCNf
+ Ql2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723580619; x=1724185419;
+ d=1e100.net; s=20230601; t=1723580618; x=1724185418;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pP0Fo+KnSDTrFxCsw1YiRuncAlRjF4c9n6ZeDd0O4VU=;
- b=wvWBtqt+aV3IjDkMP7zr8SgHPf7w9E2EtmMQk5slBSIK3clnkiqQjx9zsIonYlH7EL
- GGSrLF0wpWNu1myG9QNnkwETAEW4T0c+QYOkF/aisZRP0VqT2r1c793FKwKA07ZOm0II
- XNJ2CMt+KLv0U/q7ASQwc0aKIn1lDAOU4mql8MAfmgMb1aEwdKqyGYha431QHrWEr9fB
- aIatamFrZXRQTy16wOJUlmYDl+/gYRigl+hCNxP4puDh0OEO8Y7pDy+4WgX3BlLAtfYN
- gu84Ix0/QfiO7w/bZNWLdbWJiGnYWaQWamXUVSKwZMtqUeJ/YMDQupIPtBl5cAUXlh7D
- 4GFg==
+ bh=8K1C3X/MhQMRep+HimQDatYHRQUqPTx7ZX7Xy6/ZA3U=;
+ b=VSQQue6mE3GJC/MrI9yrX4JrqeP0Cj18aN1MdBpHNdwHwlM5LiIQJJjE/I5hjW+pbR
+ aWGgxhWUN/FbjIJ3zKsABcuGJAA0Vh2xiAO/D9hixHg39frAY8wtUR7rM7Z9eIGpvqDn
+ ZhUbxGPVi4g85dWd2Z6ypsO0hbAlWSHoc1XF6K1h7MUVno1KfS+NmWPT8hz4yftIrXG2
+ MsfILHI2VLofrV64lpPx9cMvX6FidO9vxCSNJ2xxm0q1I4ZJjQjiAqA56AnaRufp6VAV
+ kyZehPRSOMuzBPvuJrhkXtA6zRu+blJsshfnqk9l/S7bvSlU8Lpqv9lltH8YBXNtGFDO
+ 9o9w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUN9DGieu/7AAusPHCEVkgicHKlvTHi/zPVMM2/ZBJnwnkbsDFe00LjgtGSCIq+QqHDAHS4CAmkhO39N7yp3rwHQNkPTFE=
-X-Gm-Message-State: AOJu0YxEMfA8+hpQzey6oSmdSet65Sg9Pc03G8FJe64tmp2s3O43D5OI
- Tvt8SL1eZxhtl520Z9fnz2fRe8wTuPt3pZpYUAnxSeTVgR8ecZ7xUXTnKSFbi2M=
-X-Google-Smtp-Source: AGHT+IEjeN+yfY+rxMvEizfQNxPZLwKOV4SUh6vlc05jRoq2+k4GPdPO0K9pvBdrUZFGIm+wBb0R5Q==
-X-Received: by 2002:adf:ce89:0:b0:367:9237:611d with SMTP id
- ffacd0b85a97d-371778221d4mr570039f8f.60.1723580618620; 
- Tue, 13 Aug 2024 13:23:38 -0700 (PDT)
+ AJvYcCUPLjmDdde/AxWv8KQGMmjiFEkD+CQ9GLJlfn2dGraA+Ve8VHs4abIju8ZaFU9QS4tDtQ7OIFmPxPI6@nongnu.org
+X-Gm-Message-State: AOJu0Yym9lvxQPJFGE/PjsKpYIHMCl/TFd4qniI+iyTQvl8Aom7QFZGU
+ KqwqCwZgzA9RsgUNci3FKW1ldg3YoKQYgaNLLIOBGVaVhKdozv7t7PDaJ3oWpe4=
+X-Google-Smtp-Source: AGHT+IEU+aaBShj6NyVlR1MYI7wsafuWxTum9koxEZZyFw+THPkXCTfrrGOD44yAHcYOsLlxxnwvpw==
+X-Received: by 2002:a05:6000:1fa1:b0:368:31c7:19dd with SMTP id
+ ffacd0b85a97d-37177769777mr575507f8f.5.1723580617875; 
+ Tue, 13 Aug 2024 13:23:37 -0700 (PDT)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-36e4c937b6esm11248588f8f.32.2024.08.13.13.23.32
+ ffacd0b85a97d-36e4e51ebc2sm11228817f8f.83.2024.08.13.13.23.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Tue, 13 Aug 2024 13:23:34 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 57C3D5FA49;
+ by draig.lan (Postfix) with ESMTP id 25FD35F9E6;
  Tue, 13 Aug 2024 21:23:30 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -91,27 +91,25 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Jason Wang <jasowang@redhat.com>, Bin Meng <bmeng.cn@gmail.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Nicholas Piggin <npiggin@gmail.com>
-Subject: [PATCH v2 10/21] scripts/replay-dump.py: rejig decoders in event
- number order
-Date: Tue, 13 Aug 2024 21:23:18 +0100
-Message-Id: <20240813202329.1237572-11-alex.bennee@linaro.org>
+ Wainer dos Santos Moschetta <wainersm@redhat.com>
+Subject: [PATCH v2 08/21] buildsys: Fix building without plugins on Darwin
+Date: Tue, 13 Aug 2024 21:23:16 +0100
+Message-Id: <20240813202329.1237572-9-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240813202329.1237572-1-alex.bennee@linaro.org>
 References: <20240813202329.1237572-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::435;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x435.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::431;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x431.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -127,107 +125,95 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Nicholas Piggin <npiggin@gmail.com>
+From: Philippe Mathieu-Daudé <philmd@linaro.org>
 
-Sort decoder functions to be ascending in order of event number,
-same as the decoder tables.
+Since commit 0082475e26 the plugin symbol list is unconditionally
+added to the linker flags, leading to a build failure:
 
-Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
-Signed-off-by: Nicholas Piggin <npiggin@gmail.com>
-Message-Id: <20240813050638.446172-3-npiggin@gmail.com>
+  Undefined symbols for architecture arm64:
+    "_qemu_plugin_entry_code", referenced from:
+        <initial-undefines>
+  ...
+  ld: symbol(s) not found for architecture arm64
+  clang: error: linker command failed with exit code 1 (use -v to see invocation)
+  ninja: build stopped: subcommand failed.
+
+Fix by restricting the whole meson file to the --enable-plugins
+configure argument.
+
+Fixes: 0082475e26 ("meson: merge plugin_ldflags into emulator_link_args")
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Acked-by: Richard Henderson <richard.henderson@linaro.org>
+Message-Id: <20240813112457.92560-1-philmd@linaro.org>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- scripts/replay-dump.py | 56 +++++++++++++++++++++---------------------
- 1 file changed, 28 insertions(+), 28 deletions(-)
+ plugins/meson.build | 50 +++++++++++++++++++++++----------------------
+ 1 file changed, 26 insertions(+), 24 deletions(-)
 
-diff --git a/scripts/replay-dump.py b/scripts/replay-dump.py
-index 419ee3257b..b82659cfb6 100755
---- a/scripts/replay-dump.py
-+++ b/scripts/replay-dump.py
-@@ -139,6 +139,19 @@ def swallow_bytes(eid, name, dumpfile, nr):
-     """Swallow nr bytes of data without looking at it"""
-     dumpfile.seek(nr, os.SEEK_CUR)
- 
-+total_insns = 0
+diff --git a/plugins/meson.build b/plugins/meson.build
+index 18a0303bff..1cc039d29b 100644
+--- a/plugins/meson.build
++++ b/plugins/meson.build
+@@ -1,3 +1,7 @@
++if not get_option('plugins')
++  subdir_done()
++endif
 +
-+def decode_instruction(eid, name, dumpfile):
-+    global total_insns
-+    ins_diff = read_dword(dumpfile)
-+    total_insns += ins_diff
-+    print_event(eid, name, "+ %d -> %d" % (ins_diff, total_insns))
-+    return True
-+
-+def decode_interrupt(eid, name, dumpfile):
-+    print_event(eid, name)
-+    return True
-+
- def decode_exception(eid, name, dumpfile):
-     print_event(eid, name)
-     return True
-@@ -198,15 +211,6 @@ def decode_async_net(eid, name, dumpfile):
-     print_event(eid, name, "net:%x flags:%x bytes:%d" % (net_id, flags, size))
-     return True
+ # Modules need more symbols than just those in plugins/qemu-plugins.symbols
+ if not enable_modules
+   if host_os == 'darwin'
+@@ -12,29 +16,27 @@ if not enable_modules
+   endif
+ endif
  
--total_insns = 0
--
--def decode_instruction(eid, name, dumpfile):
--    global total_insns
--    ins_diff = read_dword(dumpfile)
--    total_insns += ins_diff
--    print_event(eid, name, "+ %d -> %d" % (ins_diff, total_insns))
--    return True
--
- def decode_shutdown(eid, name, dumpfile):
-     print_event(eid, name)
-     return True
-@@ -222,6 +226,21 @@ def decode_audio_out(eid, name, dumpfile):
-     print_event(eid, name, "%d" % (audio_data))
-     return True
+-if get_option('plugins')
+-  if host_os == 'windows'
+-    dlltool = find_program('dlltool', required: true)
++if host_os == 'windows'
++  dlltool = find_program('dlltool', required: true)
  
-+def decode_random(eid, name, dumpfile):
-+    ret = read_dword(dumpfile)
-+    size = read_dword(dumpfile)
-+    swallow_bytes(eid, name, dumpfile, size)
-+    if (ret):
-+        print_event(eid, name, "%d bytes (getrandom failed)" % (size))
-+    else:
-+        print_event(eid, name, "%d bytes" % (size))
-+    return True
-+
-+def decode_clock(eid, name, dumpfile):
-+    clock_data = read_qword(dumpfile)
-+    print_event(eid, name, "0x%x" % (clock_data))
-+    return True
-+
- def __decode_checkpoint(eid, name, dumpfile, old):
-     """Decode a checkpoint.
- 
-@@ -252,25 +271,6 @@ def decode_checkpoint_init(eid, name, dumpfile):
-     print_event(eid, name)
-     return True
- 
--def decode_interrupt(eid, name, dumpfile):
--    print_event(eid, name)
--    return True
--
--def decode_clock(eid, name, dumpfile):
--    clock_data = read_qword(dumpfile)
--    print_event(eid, name, "0x%x" % (clock_data))
--    return True
--
--def decode_random(eid, name, dumpfile):
--    ret = read_dword(dumpfile)
--    size = read_dword(dumpfile)
--    swallow_bytes(eid, name, dumpfile, size)
--    if (ret):
--        print_event(eid, name, "%d bytes (getrandom failed)" % (size))
--    else:
--        print_event(eid, name, "%d bytes" % (size))
--    return True
--
- def decode_end(eid, name, dumpfile):
-     print_event(eid, name)
-     return False
+-    # Generate a .lib file for plugins to link against.
+-    # First, create a .def file listing all the symbols a plugin should expect to have
+-    # available in qemu
+-    win32_plugin_def = configure_file(
+-      input: files('qemu-plugins.symbols'),
+-      output: 'qemu_plugin_api.def',
+-      capture: true,
+-      command: ['sed', '-e', '0,/^/s//EXPORTS/; s/[{};]//g', '@INPUT@'])
+-    # then use dlltool to assemble a delaylib.
+-    win32_qemu_plugin_api_lib = configure_file(
+-      input: win32_plugin_def,
+-      output: 'libqemu_plugin_api.a',
+-      command: [dlltool, '--input-def', '@INPUT@',
+-                '--output-delaylib', '@OUTPUT@', '--dllname', 'qemu.exe']
+-    )
+-  endif
+-  specific_ss.add(files(
+-    'loader.c',
+-    'core.c',
+-    'api.c',
+-  ))
++  # Generate a .lib file for plugins to link against.
++  # First, create a .def file listing all the symbols a plugin should expect to have
++  # available in qemu
++  win32_plugin_def = configure_file(
++    input: files('qemu-plugins.symbols'),
++    output: 'qemu_plugin_api.def',
++    capture: true,
++    command: ['sed', '-e', '0,/^/s//EXPORTS/; s/[{};]//g', '@INPUT@'])
++  # then use dlltool to assemble a delaylib.
++  win32_qemu_plugin_api_lib = configure_file(
++    input: win32_plugin_def,
++    output: 'libqemu_plugin_api.a',
++    command: [dlltool, '--input-def', '@INPUT@',
++              '--output-delaylib', '@OUTPUT@', '--dllname', 'qemu.exe']
++  )
+ endif
++specific_ss.add(files(
++  'loader.c',
++  'core.c',
++  'api.c',
++))
 -- 
 2.39.2
 
