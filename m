@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 090B6C52D7B
-	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Aug 2024 20:27:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6049C52D7C
+	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Aug 2024 20:28:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sdy40-0006bU-VZ; Tue, 13 Aug 2024 16:24:17 -0400
+	id 1sdy47-0007DV-Mb; Tue, 13 Aug 2024 16:24:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sdy3h-0005DH-UW
- for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:23:57 -0400
-Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
+ id 1sdy3y-0006SH-PD
+ for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:24:16 -0400
+Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sdy3N-0006Bb-Ow
- for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:23:57 -0400
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-4281ca54fd3so44492305e9.2
- for <qemu-riscv@nongnu.org>; Tue, 13 Aug 2024 13:23:37 -0700 (PDT)
+ id 1sdy3W-0006Iw-6w
+ for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:24:12 -0400
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-428101fa30aso44478945e9.3
+ for <qemu-riscv@nongnu.org>; Tue, 13 Aug 2024 13:23:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723580615; x=1724185415; darn=nongnu.org;
+ d=linaro.org; s=google; t=1723580623; x=1724185423; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1AVh2j6pk/5XaCd8FbE/7mpmYiPG8pggbKweEGs0KY8=;
- b=swYFf/2BZxSSNajIQqL04N5uSZn50Dyk1MS2o4kLoWDMT654RGTbVmJEV3WBaZExLp
- AgFBB+E5tcLSAs8oqOIMNI0xpX9a4Wm0bXOWStaJSgjwo8mzA8x6wS+0rOO+vaXIiuxm
- jqQaFejdK+I5lyrHtiiKVPLnUpq35D9Y0aUUqxY6t8E7Sx+GwNGpY7E2D41ELrqWAZWC
- dknDBtSgn0wXBcN2g/z75vbqj2/Ct4vESxy/zYO+siHaB8zRkQPYpiWu67jDvBE5FiG/
- SI6wZCmFGqn0I05ILZ1mlAbUijVccIOwCOZ/U9LAx2qCLmwR0zsPBGhRed5XJXdmzuxf
- IYNA==
+ bh=oJDrbDJn+uxZ4kSaJT1plgi1AkOLONkYxSD/HxvgNEI=;
+ b=Tzj9xooCI+SAJThGqk78gKzOaKBk6ejSSkJ3Jjim/helhmZx1EIneTGzEktQsgSIa2
+ GN0mnfMzCv8bN2kcRmwEz+M3UZinWuTuTT/24aXT+EuvheGVnRgodF+53nJ+YILdQ+1q
+ rYqzSe9Hi0x/uy+r/UOQaBKbYdcGScXonCyqEe3PJBrpuc33h74icKqQk6OSeUpvPTKg
+ aXGBcjOZJZ9zmw7qbIcavygNkN/g8IKzNHCxQrCqhSptVT3IwzZQJv94JlA+kiOp843R
+ QGZgsLuaQNO4gmf0kq9Xi00hkM6cxUrkMoED5olZhQkrLIbbc1jB7A+1Yfys6HA8vRGn
+ M5dw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723580615; x=1724185415;
+ d=1e100.net; s=20230601; t=1723580623; x=1724185423;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=1AVh2j6pk/5XaCd8FbE/7mpmYiPG8pggbKweEGs0KY8=;
- b=eW1udEj9H4mzrzT9Y4f/zQlZ5hBYhe9rJBxqDy8qhJ5e/vrTKnFKdtdWJ/iQy2wgc5
- kFZ7Hym7H737ds7cHb9jqO4fJUBIjerz1tf3c3WWbsZz8su00ZE+/OmUjrjXJ2Ukdu35
- vrrU+8HLpqJbJPN2FPGiya8EWPmO00ySGXezn69OYYV+KbbBRIM5tcLbqxecRgdOse8T
- qzCeStc8xWzTxjjBim8kc05GxeT4bm9zaLPCpUCK5fFQy2zntYSaZDsWlKlD6Xc/FkKq
- 1FuWDfzi5rz68XIptyF3TWm54xVjWl1L2AxbgPgC5PN0Crd1L5Zsiom3oNmJjphAlsTU
- IHpQ==
+ bh=oJDrbDJn+uxZ4kSaJT1plgi1AkOLONkYxSD/HxvgNEI=;
+ b=kS/Ypd8nSWtbUyFjliKGozcaYDoUyNlb+yobqQKvbROZ92hSWdbYrWcLrFlhL1ahLd
+ ofiNbdxcEzeFHmeLvl58nfTmoGEpQNEy1Vl7gYJcJF3b0byna25gRy2X8rvX4l//vPm2
+ c9HYALlp7XU/DnOzqxnCZvuXOcwVr9NhXkT2+5nD5Qjhns+MoYAuLPyf+ke9KTp6MdU4
+ W6w4GEV2dbdcm04o9C/xbdP5T6VEsWm6IO/IGH9wuvWJJw3wM1VMesfn1p1a/vSuYoqA
+ vI5PhsM6o4msV3Ncvy+wX5LW7+i37w2IhKUbZ/1aGasMR+aBd6jDra/Y++Jsyp2HG09M
+ Cw9Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW0ObSRvGdUFkDL/v8R4VeNzPjJdeWtaKfCEiHFMJwEmIEJ8rZOPfK7WLTmOilL13zJEKcUluv0J0hSxG35TvHvKktUmpo=
-X-Gm-Message-State: AOJu0YxbKOV9dpQElOHH+RQp2mXVair9NxaT9oQ+IyKRAfh9yi8WBvOh
- KzELivjYw5yeNhrdVREGOx25LfpXvO0mFZ5QPrcDHJqc426YFo0X8p0JIkIfH6M=
-X-Google-Smtp-Source: AGHT+IGdwxx3Yarp7KGAlSqIsgRmbEoqUx0ZN2t2rvjV2uSlSTWCBlXOqUAML9ogR29JYA305V8rYA==
-X-Received: by 2002:a5d:64c9:0:b0:367:9107:9e11 with SMTP id
- ffacd0b85a97d-37177830523mr605930f8f.62.1723580615118; 
- Tue, 13 Aug 2024 13:23:35 -0700 (PDT)
+ AJvYcCXGWZx6HMbsc7w2xLbstJxQZzUC0xAncYs4PiPelLBQlXY5UXo02GxyzCLqL99D6wUM4XPTr5uRbSF1cm2VezWid7fRcFw=
+X-Gm-Message-State: AOJu0YzhVDryi4YATeGv9D1frNSfs1xh40QMnRuEWpEaAhl7eo1JsizI
+ f9+bfsIMhGbWdGeBz4d45bWEwEFsR+17+T2o5aNiah+tWMR0njYGIBkuDlCzOoU=
+X-Google-Smtp-Source: AGHT+IE0bAJrXAP/wzng1w8EdVVKlq48zIYtPYjaaslmfUZhAig5koLW3DEbidmAvy1EQYRHwh1JNg==
+X-Received: by 2002:a05:600c:314e:b0:428:ec2a:8c94 with SMTP id
+ 5b1f17b1804b1-429dd2365f4mr4810425e9.10.1723580622829; 
+ Tue, 13 Aug 2024 13:23:42 -0700 (PDT)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-429d0642979sm98513095e9.20.2024.08.13.13.23.31
+ 5b1f17b1804b1-429c77372dbsm149098465e9.38.2024.08.13.13.23.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 13 Aug 2024 13:23:34 -0700 (PDT)
+ Tue, 13 Aug 2024 13:23:38 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id E95A25F9CF;
- Tue, 13 Aug 2024 21:23:29 +0100 (BST)
+ by draig.lan (Postfix) with ESMTP id D4BAF5FFC6;
+ Tue, 13 Aug 2024 21:23:30 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Alistair Francis <alistair.francis@wdc.com>,
@@ -92,21 +92,19 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  Jason Wang <jasowang@redhat.com>, Bin Meng <bmeng.cn@gmail.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Stefano Garzarella <sgarzare@redhat.com>,
- Cornelia Huck <cohuck@redhat.com>,
- =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH v2 06/21] scripts/checkpatch: more checks on files imported
- from Linux
-Date: Tue, 13 Aug 2024 21:23:14 +0100
-Message-Id: <20240813202329.1237572-7-alex.bennee@linaro.org>
+ Nicholas Piggin <npiggin@gmail.com>
+Subject: [PATCH v2 15/21] chardev: set record/replay on the base device of a
+ muxed device
+Date: Tue, 13 Aug 2024 21:23:23 +0100
+Message-Id: <20240813202329.1237572-16-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240813202329.1237572-1-alex.bennee@linaro.org>
 References: <20240813202329.1237572-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::336;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x336.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -129,66 +127,155 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Stefano Garzarella <sgarzare@redhat.com>
+From: Nicholas Piggin <npiggin@gmail.com>
 
-If a file imported from Linux is touched, emit a warning and suggest
-using scripts/update-linux-headers.sh.
+chardev events to a muxed device don't get recorded because e.g.,
+qemu_chr_be_write() checks whether the base device has the record flag
+set.
 
-Also check that updating imported files from Linux are not mixed with
-other changes, in which case emit an error.
+This can be seen when replaying a trace that has characters typed into
+the console, an examination of the log shows they are not recorded.
 
-Signed-off-by: Stefano Garzarella <sgarzare@redhat.com>
-Reviewed-by: Cornelia Huck <cohuck@redhat.com>
-Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
-Message-Id: <20240718072050.9503-1-sgarzare@redhat.com>
+Setting QEMU_CHAR_FEATURE_REPLAY on the base chardev fixes the problem.
+
+Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
+Signed-off-by: Nicholas Piggin <npiggin@gmail.com>
+Message-Id: <20240813050638.446172-8-npiggin@gmail.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Message-Id: <20240807114059.2339021-7-alex.bennee@linaro.org>
 ---
- scripts/checkpatch.pl | 24 ++++++++++++++++++++++++
- 1 file changed, 24 insertions(+)
+ chardev/char.c | 71 +++++++++++++++++++++++++++++++++++---------------
+ 1 file changed, 50 insertions(+), 21 deletions(-)
 
-diff --git a/scripts/checkpatch.pl b/scripts/checkpatch.pl
-index ff373a7083..65b6f46f90 100755
---- a/scripts/checkpatch.pl
-+++ b/scripts/checkpatch.pl
-@@ -1374,6 +1374,9 @@ sub process {
- 	my $in_header_lines = $file ? 0 : 1;
- 	my $in_commit_log = 0;		#Scanning lines before patch
- 	my $reported_maintainer_file = 0;
-+	my $reported_mixing_imported_file = 0;
-+	my $in_imported_file = 0;
-+	my $in_no_imported_file = 0;
- 	my $non_utf8_charset = 0;
+diff --git a/chardev/char.c b/chardev/char.c
+index 3c43fb1278..ba847b6e9e 100644
+--- a/chardev/char.c
++++ b/chardev/char.c
+@@ -615,11 +615,24 @@ ChardevBackend *qemu_chr_parse_opts(QemuOpts *opts, Error **errp)
+     return backend;
+ }
  
- 	our @report = ();
-@@ -1673,6 +1676,27 @@ sub process {
- # ignore non-hunk lines and lines being removed
- 		next if (!$hunk_line || $line =~ /^-/);
- 
-+# Check that updating imported files from Linux are not mixed with other changes
-+		if ($realfile =~ /^(linux-headers|include\/standard-headers)\//) {
-+			if (!$in_imported_file) {
-+				WARN("added, moved or deleted file(s) " .
-+				     "imported from Linux, are you using " .
-+				     "scripts/update-linux-headers.sh?\n" .
-+				     $herecurr);
-+			}
-+			$in_imported_file = 1;
-+		} else {
-+			$in_no_imported_file = 1;
-+		}
+-Chardev *qemu_chr_new_from_opts(QemuOpts *opts, GMainContext *context,
+-                                Error **errp)
++static void qemu_chardev_set_replay(Chardev *chr, Error **errp)
++{
++    if (replay_mode != REPLAY_MODE_NONE) {
++        if (CHARDEV_GET_CLASS(chr)->chr_ioctl) {
++            error_setg(errp, "Replay: ioctl is not supported "
++                             "for serial devices yet");
++            return;
++        }
++        qemu_chr_set_feature(chr, QEMU_CHAR_FEATURE_REPLAY);
++        replay_register_char_driver(chr);
++    }
++}
 +
-+		if (!$reported_mixing_imported_file &&
-+		    $in_imported_file && $in_no_imported_file) {
-+			ERROR("headers imported from Linux should be self-" .
-+			      "contained in a patch with no other changes\n" .
-+			      $herecurr);
-+			$reported_mixing_imported_file = 1;
-+		}
-+
- # ignore files that are being periodically imported from Linux
- 		next if ($realfile =~ /^(linux-headers|include\/standard-headers)\//);
++static Chardev *__qemu_chr_new_from_opts(QemuOpts *opts, GMainContext *context,
++                                         bool replay, Error **errp)
+ {
+     const ChardevClass *cc;
+-    Chardev *chr = NULL;
++    Chardev *base = NULL, *chr = NULL;
+     ChardevBackend *backend = NULL;
+     const char *name = qemu_opt_get(opts, "backend");
+     const char *id = qemu_opts_id(opts);
+@@ -657,11 +670,11 @@ Chardev *qemu_chr_new_from_opts(QemuOpts *opts, GMainContext *context,
+     chr = qemu_chardev_new(bid ? bid : id,
+                            object_class_get_name(OBJECT_CLASS(cc)),
+                            backend, context, errp);
+-
+     if (chr == NULL) {
+         goto out;
+     }
  
++    base = chr;
+     if (bid) {
+         Chardev *mux;
+         qapi_free_ChardevBackend(backend);
+@@ -681,11 +694,25 @@ Chardev *qemu_chr_new_from_opts(QemuOpts *opts, GMainContext *context,
+ out:
+     qapi_free_ChardevBackend(backend);
+     g_free(bid);
++
++    if (replay && base) {
++        /* RR should be set on the base device, not the mux */
++        qemu_chardev_set_replay(base, errp);
++    }
++
+     return chr;
+ }
+ 
+-Chardev *qemu_chr_new_noreplay(const char *label, const char *filename,
+-                               bool permit_mux_mon, GMainContext *context)
++Chardev *qemu_chr_new_from_opts(QemuOpts *opts, GMainContext *context,
++                                Error **errp)
++{
++    /* XXX: should this really not record/replay? */
++    return __qemu_chr_new_from_opts(opts, context, false, errp);
++}
++
++static Chardev *__qemu_chr_new(const char *label, const char *filename,
++                               bool permit_mux_mon, GMainContext *context,
++                               bool replay)
+ {
+     const char *p;
+     Chardev *chr;
+@@ -693,14 +720,22 @@ Chardev *qemu_chr_new_noreplay(const char *label, const char *filename,
+     Error *err = NULL;
+ 
+     if (strstart(filename, "chardev:", &p)) {
+-        return qemu_chr_find(p);
++        chr = qemu_chr_find(p);
++        if (replay) {
++            qemu_chardev_set_replay(chr, &err);
++            if (err) {
++                error_report_err(err);
++                return NULL;
++            }
++        }
++        return chr;
+     }
+ 
+     opts = qemu_chr_parse_compat(label, filename, permit_mux_mon);
+     if (!opts)
+         return NULL;
+ 
+-    chr = qemu_chr_new_from_opts(opts, context, &err);
++    chr = __qemu_chr_new_from_opts(opts, context, replay, &err);
+     if (!chr) {
+         error_report_err(err);
+         goto out;
+@@ -722,24 +757,18 @@ out:
+     return chr;
+ }
+ 
++Chardev *qemu_chr_new_noreplay(const char *label, const char *filename,
++                               bool permit_mux_mon, GMainContext *context)
++{
++    return __qemu_chr_new(label, filename, permit_mux_mon, context, false);
++}
++
+ static Chardev *qemu_chr_new_permit_mux_mon(const char *label,
+                                           const char *filename,
+                                           bool permit_mux_mon,
+                                           GMainContext *context)
+ {
+-    Chardev *chr;
+-    chr = qemu_chr_new_noreplay(label, filename, permit_mux_mon, context);
+-    if (chr) {
+-        if (replay_mode != REPLAY_MODE_NONE) {
+-            qemu_chr_set_feature(chr, QEMU_CHAR_FEATURE_REPLAY);
+-        }
+-        if (qemu_chr_replay(chr) && CHARDEV_GET_CLASS(chr)->chr_ioctl) {
+-            error_report("Replay: ioctl is not supported "
+-                         "for serial devices yet");
+-        }
+-        replay_register_char_driver(chr);
+-    }
+-    return chr;
++    return __qemu_chr_new(label, filename, permit_mux_mon, context, true);
+ }
+ 
+ Chardev *qemu_chr_new(const char *label, const char *filename,
 -- 
 2.39.2
 
