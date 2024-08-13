@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C55F1C52D7C
-	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Aug 2024 20:24:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8554C52D7C
+	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Aug 2024 20:24:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sdy3T-0004Tq-0Y; Tue, 13 Aug 2024 16:23:43 -0400
+	id 1sdy3a-0004mi-F2; Tue, 13 Aug 2024 16:23:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sdy3N-0004J5-Mj
- for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:23:37 -0400
-Received: from mail-lf1-x12e.google.com ([2a00:1450:4864:20::12e])
+ id 1sdy3W-0004en-SW
+ for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:23:46 -0400
+Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sdy3K-0006AS-Sf
- for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:23:37 -0400
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-530c2e5f4feso6051137e87.0
- for <qemu-riscv@nongnu.org>; Tue, 13 Aug 2024 13:23:34 -0700 (PDT)
+ id 1sdy3M-0006BE-M7
+ for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:23:45 -0400
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-42816ca782dso45267235e9.2
+ for <qemu-riscv@nongnu.org>; Tue, 13 Aug 2024 13:23:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723580612; x=1724185412; darn=nongnu.org;
+ d=linaro.org; s=google; t=1723580615; x=1724185415; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0GxFDxNA+tjm9dd3YyBkmqa3TunWqvDtTEUpcD5o2pA=;
- b=hwTr3WemTnyV45lich1ruVLj/Mk3k2/xVr5v7MoW+gf02fTgn6xi84bNCf+rtp3900
- WXa4iCsOponY6jVwHmyPkH75oPzYzbkVYLFKjT1PR5qWmIrK3kD3iNL1kVCtR2SQn1CF
- uM4jOk+LffYrtKBacXfimTRQXcFkdV0sD0DKsgugv+tfOWY6ia+X73Jry1D+cWsc9So3
- F26NyfLdhz87b7Ddxk+uWH85gTlD/0QEYD6PLWfLsds2UkpXOiuLw23micVEBq4RXIpT
- b5WnHIETZBNNc743KylVIVWRWlIBs0IsDuqp1U2dvQ7V9gHssBGUnoCw8RjcRx00sYP+
- E9bA==
+ bh=4KDdZuSuiVhnWoZHnKqWrh7zo/0jiKBE4EcFSl+sGnw=;
+ b=uz+LQiadjM+BmePIRXmF7F+6pDYcAAsc30SxzpmA7qNHYS6KfUN0wO3tPMhlg2ZtBO
+ 3lLjzB3UTlAnNqdx7OPBJaK3b5kmAvIWsUWp3ebExDOK75R0mlZthjLNj5aOkXdFp5cu
+ 22/YOb8rwZsh4WTITDU53smKE47TzwZ60Je2/E9o8+KPib3lkf230/47gw5O9hIl0MXH
+ q5/yGiqYNyhAjGKgiANErKn98y8CNEq8Z71Qp3rzgg5jxCGf7A1bWmHC/888PDZ7iYeK
+ Y/1Sy7wZAvb2CPof6/GJIWWNMlysmzACfw7ZALGSOvP2adL7w+efkBBpIbBJshAVEz1t
+ Yoxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723580612; x=1724185412;
+ d=1e100.net; s=20230601; t=1723580615; x=1724185415;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0GxFDxNA+tjm9dd3YyBkmqa3TunWqvDtTEUpcD5o2pA=;
- b=JUu354ztXw/Ns+vICW/56I6xj2fOc9PPy6CG8WqRCDairkIpqwWzDPJhloQeDUA0JR
- nhBYLUevkfAGYxTvIHjqVT/FPA0nc4v7/kjAMFTUdjpBKBLmJK7cOjTzZnHs2450Hdeh
- xG3WpxqkF7QX3iAcY8gq7htaoh0JGNWXd9e7CZHH9lMdCO+40DS7hQ1uC2Li40zSWJgc
- jUo4kq0PYgNQ5+B7TLUwyZdG0+nb1d/5hEsH166i7yvySQekk/VRMkANGO5/gkp7t2L3
- e2HRyWyXS74K+AuKDvcdrNGQvffP/suNp+5ugownk02hkUHpNUIHBIaWfFL694pJuYBo
- crtw==
+ bh=4KDdZuSuiVhnWoZHnKqWrh7zo/0jiKBE4EcFSl+sGnw=;
+ b=H/TL/02V+EoEqny8IHFj6LXjiHRFIFMPN3ftSPSM3qKRTei1AjO3sdFed3IVKIFtr0
+ F9TITRJg+5rzkR79EDShsHgJyGuy9OiGmmOes3xzaTCtOh08XZIS8PUyrDD/IpuuBhSL
+ EAYQM+2X8L+TN6dLPL+LwA0aFPQylhT82abCymYexndiOfhzsODdIO5cspjifvWjKpw4
+ BbQX0dqENH4iwoO6dkA6z3rfzpD03XXAG8WZu3K9aRa0GlSK1izCRKUbQ53y3cKn4Lkn
+ rYdARsUt3ueq2AezzrxUyy9oweGBL9IpPPvzhJtVUf+ylrVC/qZPX2wR9ZNv3ETqJ8/s
+ elWQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUMkbL/JVxKW3w6gP3XH4rlfdv0UyEGzpvbN1aL30/hDNCcbM17RyznXiTwHtZ4Rdvrri7+fEwz0qG4V6rjrx2DJBpE06k=
-X-Gm-Message-State: AOJu0Yx6o7rVjICm9MeCBKpLe5+YsUNTG4yHy+cxL7xh/o+/ghQyApJU
- Kw93NEISZvoocbvB8tse8ywuv969LdOphwPGgmYB1T8JZ7bGSXyaOFw96V1dJ40=
-X-Google-Smtp-Source: AGHT+IEUMCc3Ienyb2xKePCOpVC42gkxrBNTS2Cyv2ISCCU732EPWZCy5QObJF5tqt1Qzkezm1Dx/g==
-X-Received: by 2002:a05:6512:239b:b0:52c:8596:5976 with SMTP id
- 2adb3069b0e04-532edbcce45mr270967e87.55.1723580611264; 
- Tue, 13 Aug 2024 13:23:31 -0700 (PDT)
+ AJvYcCW7AJD6ZcjAujLeDXDnZhT/CDIG4dhlRviCaw8jL+hhc5xKmPJ7KA0bx3y/ZohQAnCcBcirU8d5q+uCbh2bvkL22wOVSqM=
+X-Gm-Message-State: AOJu0YwE2rlaGqMsnMUq/dA/Vs+XPiDPMm0l/3NBJIQn30ZuZBJC/t3D
+ BvrAG0Nl+bL92lhPSXvXfKmp7fCXqjvKHI28ie01YKh+xP0NtM3Ize7N/KACjL0=
+X-Google-Smtp-Source: AGHT+IGG4BwgTjQUccNi8P3sQj9A6II4AYnB4PGbLoGYZE4fKFdWnkZpoRV3PqMexpKds/kZ78uLjw==
+X-Received: by 2002:a05:600c:511e:b0:426:61ef:ec36 with SMTP id
+ 5b1f17b1804b1-429dd1e551amr4907685e9.0.1723580614570; 
+ Tue, 13 Aug 2024 13:23:34 -0700 (PDT)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-429d877e066sm32268685e9.1.2024.08.13.13.23.30
+ 5b1f17b1804b1-429deb810f5sm667535e9.44.2024.08.13.13.23.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Tue, 13 Aug 2024 13:23:30 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id BB7655F930;
+ by draig.lan (Postfix) with ESMTP id A52215F92C;
  Tue, 13 Aug 2024 21:23:29 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -93,25 +93,24 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Wainer dos Santos Moschetta <wainersm@redhat.com>,
  Gustavo Romero <gustavo.romero@linaro.org>
-Subject: [PATCH v2 04/21] configure: Avoid use of param. expansion when using
- gdb_version
-Date: Tue, 13 Aug 2024 21:23:12 +0100
-Message-Id: <20240813202329.1237572-5-alex.bennee@linaro.org>
+Subject: [PATCH v2 03/21] configure: Fix arch detection for GDB_HAS_MTE
+Date: Tue, 13 Aug 2024 21:23:11 +0100
+Message-Id: <20240813202329.1237572-4-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240813202329.1237572-1-alex.bennee@linaro.org>
 References: <20240813202329.1237572-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::12e;
- envelope-from=alex.bennee@linaro.org; helo=mail-lf1-x12e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -129,42 +128,28 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Gustavo Romero <gustavo.romero@linaro.org>
 
-$gdb_version is now used in more than one conditional case and its usage
-in such cases may increase in the future. Therefore, avoid using shell
-parameter expansion when using it by setting gdb_version to its final
-form.
+GDB_HAS_MTE must only be set if GDB supports the aarch64 arch, so the
+test if "aarch64" string is present must be against GDB-related
+'$gdb_arches' variable and not against '$arch' variable.
 
 Signed-off-by: Gustavo Romero <gustavo.romero@linaro.org>
-Message-Id: <20240804161850.2646299-3-gustavo.romero@linaro.org>
+Message-Id: <20240804161850.2646299-2-gustavo.romero@linaro.org>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Message-Id: <20240807114059.2339021-5-alex.bennee@linaro.org>
+Message-Id: <20240807114059.2339021-4-alex.bennee@linaro.org>
 ---
- configure | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+ configure | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/configure b/configure
-index a3aa257fd3..97de85d710 100755
+index 019fcbd0ef..a3aa257fd3 100755
 --- a/configure
 +++ b/configure
-@@ -1103,8 +1103,10 @@ fi
- # gdb test
- 
- if test -n "$gdb_bin"; then
--    gdb_version=$($gdb_bin --version | head -n 1)
--    if version_ge ${gdb_version##* } 9.1; then
-+    gdb_version_string=$($gdb_bin --version | head -n 1)
-+    # Extract last field in the version string
-+    gdb_version=${gdb_version_string##* }
-+    if version_ge $gdb_version 9.1; then
-         gdb_arches=$($python "$source_path/scripts/probe-gdb-support.py" $gdb_bin)
-     else
-         gdb_bin=""
-@@ -1673,7 +1675,7 @@ for target in $target_list; do
+@@ -1673,7 +1673,7 @@ for target in $target_list; do
            echo "GDB=$gdb_bin" >> $config_target_mak
        fi
  
--      if test "${gdb_arches#*aarch64}" != "$gdb_arches" && version_ge ${gdb_version##* } 15.0; then
-+      if test "${gdb_arches#*aarch64}" != "$gdb_arches" && version_ge $gdb_version 15.0; then
+-      if test "${arch}" = "aarch64" && version_ge ${gdb_version##* } 15.0; then
++      if test "${gdb_arches#*aarch64}" != "$gdb_arches" && version_ge ${gdb_version##* } 15.0; then
            echo "GDB_HAS_MTE=y" >> $config_target_mak
        fi
  
