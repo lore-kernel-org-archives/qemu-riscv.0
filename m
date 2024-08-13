@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2209CC52D7C
-	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Aug 2024 11:36:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83C98C52D7B
+	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Aug 2024 11:37:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sdpp8-0004Fe-UR; Tue, 13 Aug 2024 07:36:23 -0400
+	id 1sdppa-000752-Gu; Tue, 13 Aug 2024 07:36:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1sdpp2-0003mb-PK; Tue, 13 Aug 2024 07:36:18 -0400
-Received: from out30-113.freemail.mail.aliyun.com ([115.124.30.113])
+ id 1sdppW-0006iY-8F; Tue, 13 Aug 2024 07:36:47 -0400
+Received: from out30-124.freemail.mail.aliyun.com ([115.124.30.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1sdpoz-0002Y9-PE; Tue, 13 Aug 2024 07:36:16 -0400
+ id 1sdppU-0002ap-7C; Tue, 13 Aug 2024 07:36:45 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1723548968; h=From:To:Subject:Date:Message-Id:MIME-Version;
- bh=J188rtsxN1btCW6sOnP8JmuUuIz9mrrbBYD2xhNalQI=;
- b=orzFomUzBJhUUFPZptgXnd0ShMZGxcC+tfpJ9z7KS1uplVqkJdrDltJJw/oFUwcFXu9FwM2HCgSM7wuOZHDXqc2lbfO1hW+KSNfRyfMr+fYCZtXE2ME0q1PMpWEwMRBkh8hyRyauiA0USPgcCHRrLTQrMjIkBfYXT2iwYvUT1fc=
+ t=1723548999; h=From:To:Subject:Date:Message-Id:MIME-Version;
+ bh=7AK5MBa+OFFOyBHmGkLLwGS+2t3aszxPpZggK7yCWgs=;
+ b=LrRYmgrA5NFHmwbp8WXqe56zKaLgaa59cezDGAEvMS6GRIR/RaQ7HQBkcTR0jmQnYJfxyU6c6Z7yOLnpj2BK0j1BAxEl0VHeLao15/fDmJf93qXDrGijbBqmm9Yp8JA1Ja9+j6MiFs5DOMbFt/T+0kmlRzGdNmwlU8pMVmRCa1M=
 Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0WCoyyF4_1723548966) by smtp.aliyun-inc.com;
- Tue, 13 Aug 2024 19:36:07 +0800
+ fp:SMTPD_---0WCp.8Wm_1723548997) by smtp.aliyun-inc.com;
+ Tue, 13 Aug 2024 19:36:38 +0800
 From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  dbarboza@ventanamicro.com, liwei1518@gmail.com, bmeng.cn@gmail.com,
  zhiwei_liu@linux.alibaba.com, richard.henderson@linaro.org,
  TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
-Subject: [PATCH v1 02/15] tcg/op-gvec: Fix iteration step in 32-bit operation
-Date: Tue, 13 Aug 2024 19:34:23 +0800
-Message-Id: <20240813113436.831-3-zhiwei_liu@linux.alibaba.com>
+Subject: [PATCH v1 03/15] tcg: Fix register allocation constraints
+Date: Tue, 13 Aug 2024 19:34:24 +0800
+Message-Id: <20240813113436.831-4-zhiwei_liu@linux.alibaba.com>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <20240813113436.831-1-zhiwei_liu@linux.alibaba.com>
 References: <20240813113436.831-1-zhiwei_liu@linux.alibaba.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.113;
+Received-SPF: pass client-ip=115.124.30.124;
  envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-113.freemail.mail.aliyun.com
+ helo=out30-124.freemail.mail.aliyun.com
 X-Spam_score_int: -174
 X-Spam_score: -17.5
 X-Spam_bar: -----------------
@@ -68,31 +68,97 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
 
-The loop in the 32-bit case of the vector compare operation
-was incorrectly incrementing by 8 bytes per iteration instead
-of 4 bytes. This caused the function to process only half of
-the intended elements.
+When allocating registers for input and output, ensure they match
+the available registers to avoid allocating illeagal registers.
+
+We should respect RISC-V vector extension's variable-length registers
+and LMUL-based register grouping. Coordinate with tcg_target_available_regs
+initialization tcg_target_init (behind this commit) to ensure proper
+handling of vector register constraints.
+
+Note: While mov_vec doesn't have constraints, dup_vec and other IRs do.
+We need to strengthen constraints for all IRs except mov_vec, and this
+is sufficient.
 
 Signed-off-by: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
-Fixes: 9622c697d1 (tcg: Add gvec compare with immediate and scalar operand)
+Fixes: 29f5e92502 (tcg: Introduce paired register allocation)
 Reviewed-by: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
 ---
- tcg/tcg-op-gvec.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ tcg/tcg.c | 20 +++++++++++++-------
+ 1 file changed, 13 insertions(+), 7 deletions(-)
 
-diff --git a/tcg/tcg-op-gvec.c b/tcg/tcg-op-gvec.c
-index 0308732d9b..78ee1ced80 100644
---- a/tcg/tcg-op-gvec.c
-+++ b/tcg/tcg-op-gvec.c
-@@ -3939,7 +3939,7 @@ void tcg_gen_gvec_cmps(TCGCond cond, unsigned vece, uint32_t dofs,
-         uint32_t i;
+diff --git a/tcg/tcg.c b/tcg/tcg.c
+index 34e3056380..d26b42534d 100644
+--- a/tcg/tcg.c
++++ b/tcg/tcg.c
+@@ -4722,8 +4722,10 @@ static void tcg_reg_alloc_dup(TCGContext *s, const TCGOp *op)
+         return;
+     }
  
-         tcg_gen_extrl_i64_i32(t1, c);
--        for (i = 0; i < oprsz; i += 8) {
-+        for (i = 0; i < oprsz; i += 4) {
-             tcg_gen_ld_i32(t0, tcg_env, aofs + i);
-             tcg_gen_negsetcond_i32(cond, t0, t0, t1);
-             tcg_gen_st_i32(t0, tcg_env, dofs + i);
+-    dup_out_regs = tcg_op_defs[INDEX_op_dup_vec].args_ct[0].regs;
+-    dup_in_regs = tcg_op_defs[INDEX_op_dup_vec].args_ct[1].regs;
++    dup_out_regs = tcg_op_defs[INDEX_op_dup_vec].args_ct[0].regs &
++                                    tcg_target_available_regs[ots->type];
++    dup_in_regs = tcg_op_defs[INDEX_op_dup_vec].args_ct[1].regs &
++                                    tcg_target_available_regs[its->type];
+ 
+     /* Allocate the output register now.  */
+     if (ots->val_type != TEMP_VAL_REG) {
+@@ -4876,7 +4878,7 @@ static void tcg_reg_alloc_op(TCGContext *s, const TCGOp *op)
+ 
+         reg = ts->reg;
+         i_preferred_regs = 0;
+-        i_required_regs = arg_ct->regs;
++        i_required_regs = arg_ct->regs & tcg_target_available_regs[ts->type];
+         allocate_new_reg = false;
+         copyto_new_reg = false;
+ 
+@@ -5078,6 +5080,7 @@ static void tcg_reg_alloc_op(TCGContext *s, const TCGOp *op)
+ 
+         /* satisfy the output constraints */
+         for(k = 0; k < nb_oargs; k++) {
++            TCGRegSet o_required_regs;
+             i = def->args_ct[k].sort_index;
+             arg = op->args[i];
+             arg_ct = &def->args_ct[i];
+@@ -5085,17 +5088,19 @@ static void tcg_reg_alloc_op(TCGContext *s, const TCGOp *op)
+ 
+             /* ENV should not be modified.  */
+             tcg_debug_assert(!temp_readonly(ts));
++            o_required_regs = arg_ct->regs &
++                              tcg_target_available_regs[ts->type];
+ 
+             switch (arg_ct->pair) {
+             case 0: /* not paired */
+                 if (arg_ct->oalias && !const_args[arg_ct->alias_index]) {
+                     reg = new_args[arg_ct->alias_index];
+                 } else if (arg_ct->newreg) {
+-                    reg = tcg_reg_alloc(s, arg_ct->regs,
++                    reg = tcg_reg_alloc(s, o_required_regs,
+                                         i_allocated_regs | o_allocated_regs,
+                                         output_pref(op, k), ts->indirect_base);
+                 } else {
+-                    reg = tcg_reg_alloc(s, arg_ct->regs, o_allocated_regs,
++                    reg = tcg_reg_alloc(s, o_required_regs, o_allocated_regs,
+                                         output_pref(op, k), ts->indirect_base);
+                 }
+                 break;
+@@ -5104,12 +5109,13 @@ static void tcg_reg_alloc_op(TCGContext *s, const TCGOp *op)
+                 if (arg_ct->oalias) {
+                     reg = new_args[arg_ct->alias_index];
+                 } else if (arg_ct->newreg) {
+-                    reg = tcg_reg_alloc_pair(s, arg_ct->regs,
++                    reg = tcg_reg_alloc_pair(s, o_required_regs,
+                                              i_allocated_regs | o_allocated_regs,
+                                              output_pref(op, k),
+                                              ts->indirect_base);
+                 } else {
+-                    reg = tcg_reg_alloc_pair(s, arg_ct->regs, o_allocated_regs,
++                    reg = tcg_reg_alloc_pair(s, o_required_regs,
++                                             o_allocated_regs,
+                                              output_pref(op, k),
+                                              ts->indirect_base);
+                 }
 -- 
 2.43.0
 
