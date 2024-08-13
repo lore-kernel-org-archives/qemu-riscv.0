@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA3ABC52D7F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Aug 2024 20:25:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E20DC52D7C
+	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Aug 2024 20:26:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sdy3u-00068u-I4; Tue, 13 Aug 2024 16:24:10 -0400
+	id 1sdy3h-0005AH-7t; Tue, 13 Aug 2024 16:23:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sdy3j-0005Mh-Ns
- for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:23:59 -0400
-Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
+ id 1sdy3d-00052W-OM
+ for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:23:54 -0400
+Received: from mail-lf1-x135.google.com ([2a00:1450:4864:20::135])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sdy3Q-0006D0-Vi
- for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:23:59 -0400
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-3687f91af40so3597300f8f.0
- for <qemu-riscv@nongnu.org>; Tue, 13 Aug 2024 13:23:39 -0700 (PDT)
+ id 1sdy3N-0006BL-ES
+ for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:23:53 -0400
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-52efd530a4eso8195939e87.0
+ for <qemu-riscv@nongnu.org>; Tue, 13 Aug 2024 13:23:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723580618; x=1724185418; darn=nongnu.org;
+ d=linaro.org; s=google; t=1723580615; x=1724185415; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8K1C3X/MhQMRep+HimQDatYHRQUqPTx7ZX7Xy6/ZA3U=;
- b=f4R3VzB41z0tyDSiA/kinJjA4wV2z5S8JhLV6lAENTw6X97Gj88Y3sv4ZTaO7Ol1DL
- 1Rr8heyItrZmMjT0ZYbz3nWBxDBlnRcYabFzQNQaWgCQz/GZ8NDygLuvv+rfaD1gWCLh
- Zrq0ApOwxtuJHRJq3uD8zBpQqOYfiFyx6HaWIEgEQcJUe/qBndhnzJRWPIFBH5h1HBJi
- RyxyTwUuhoghg8qk0XwUJFTC9jeBjmS44FgiPd9ldfCPzMisZYOg72hC79FILnvUTFQG
- L415foepNLdqWp3poBF1Y7QUxeg9v+bvScPeTdFlFpKTxKSotag+AV+GuKMGcl7lkCNf
- Ql2w==
+ bh=yKD7jTj6Nf0+e/1hZyzKkWpKuU283fm5mnyf6o/tDJg=;
+ b=FIjgdpfIez5HdkW9Kg+ECabF4IWJ56stoQlCOLD7Gbch8BAjb8pwGw/W2shi0FvOw5
+ j4kJW1EgUAR91p43/z83OmQncjeWdodnvGAEXPPM9j1gbnGGp4dgEqlwlHatkoyrY0yC
+ mP0RQ7VsE3pFHXcdd8gs3iaFclLPJvqeZ0mds2Xq+jXx/nHUkOj1PFZugIH5e6l+ECy7
+ dCa3eF70iduVf0IYeUuey4bBIYvRxe6K0MBoQDJV+1+pJzTVnvcdI9xM/2gcNlzEvqez
+ Skt63o5zYw/r+iwJdqqrXu7wRKGl95UY3cqTa/7kibYfxAT79whJe4a+QNrZyvqkSKbI
+ hXEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723580618; x=1724185418;
+ d=1e100.net; s=20230601; t=1723580615; x=1724185415;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8K1C3X/MhQMRep+HimQDatYHRQUqPTx7ZX7Xy6/ZA3U=;
- b=VSQQue6mE3GJC/MrI9yrX4JrqeP0Cj18aN1MdBpHNdwHwlM5LiIQJJjE/I5hjW+pbR
- aWGgxhWUN/FbjIJ3zKsABcuGJAA0Vh2xiAO/D9hixHg39frAY8wtUR7rM7Z9eIGpvqDn
- ZhUbxGPVi4g85dWd2Z6ypsO0hbAlWSHoc1XF6K1h7MUVno1KfS+NmWPT8hz4yftIrXG2
- MsfILHI2VLofrV64lpPx9cMvX6FidO9vxCSNJ2xxm0q1I4ZJjQjiAqA56AnaRufp6VAV
- kyZehPRSOMuzBPvuJrhkXtA6zRu+blJsshfnqk9l/S7bvSlU8Lpqv9lltH8YBXNtGFDO
- 9o9w==
+ bh=yKD7jTj6Nf0+e/1hZyzKkWpKuU283fm5mnyf6o/tDJg=;
+ b=V29LYs4aW8tw2ZvxJV6nCvgLwkcKyfJ3AOgONKr1jc+PAUC11ectg6CW5PfH9DUJnm
+ e6iEIrWaDaJfT3JoCKyDD0xK2DxLlivCF6XR9uWjUvrc9BQ2kLzhufMu1AdEY4NKbtOC
+ K2J35wkPpjRM6CXuKDYKcQHKVa4lSgfM+Kci3DILdZ+dc3qwNwXGx0kw5Y+JBA51WfW2
+ Kv3pxOln4XoanXKE2p4Qx4ENuS+krZP0JPTn6rwh4RKpg2FLxLseNgvGHWrZRZrHSeBd
+ HH7lFhcmZu1SCsX5v2k9ykt5Ii1a9GOoneqv+c+DLRa3cmKRYByuYH3aI8/apD/9nBwb
+ SUHA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUPLjmDdde/AxWv8KQGMmjiFEkD+CQ9GLJlfn2dGraA+Ve8VHs4abIju8ZaFU9QS4tDtQ7OIFmPxPI6@nongnu.org
-X-Gm-Message-State: AOJu0Yym9lvxQPJFGE/PjsKpYIHMCl/TFd4qniI+iyTQvl8Aom7QFZGU
- KqwqCwZgzA9RsgUNci3FKW1ldg3YoKQYgaNLLIOBGVaVhKdozv7t7PDaJ3oWpe4=
-X-Google-Smtp-Source: AGHT+IEU+aaBShj6NyVlR1MYI7wsafuWxTum9koxEZZyFw+THPkXCTfrrGOD44yAHcYOsLlxxnwvpw==
-X-Received: by 2002:a05:6000:1fa1:b0:368:31c7:19dd with SMTP id
- ffacd0b85a97d-37177769777mr575507f8f.5.1723580617875; 
- Tue, 13 Aug 2024 13:23:37 -0700 (PDT)
-Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-36e4e51ebc2sm11228817f8f.83.2024.08.13.13.23.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ AJvYcCWGhfzplZzJkZBWE1dT5gNp1ZWCHGyPIlfw9W77RCEBly5ZOXEr3VAZJWrNd8BO6k9RXL9JgvwEHSY71XNrQkawe5pxo7U=
+X-Gm-Message-State: AOJu0YyjREBybJZZO6xSKHlt249RXhW6fcEqC9xCcEz2CHrz1AM5/IzZ
+ MSxoJlVD75SxJAE2neYGRs7yKDeOY7erLLisbJdvGmNpHyHNB+2h62eI5M2XEoQ=
+X-Google-Smtp-Source: AGHT+IFYzyLoE270W+WofOCfgUcyOUdrs+aYXrTSO0xXscbAltL5AOxMO0ddGDb3dLKASsg0cgJSog==
+X-Received: by 2002:a05:6512:39cc:b0:52e:ff2a:217 with SMTP id
+ 2adb3069b0e04-532edbbee55mr307421e87.50.1723580614179; 
  Tue, 13 Aug 2024 13:23:34 -0700 (PDT)
+Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-36e4c9385d3sm11271592f8f.42.2024.08.13.13.23.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 13 Aug 2024 13:23:30 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 25FD35F9E6;
- Tue, 13 Aug 2024 21:23:30 +0100 (BST)
+ by draig.lan (Postfix) with ESMTP id 8CE945F8C5;
+ Tue, 13 Aug 2024 21:23:29 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Alistair Francis <alistair.francis@wdc.com>,
@@ -92,24 +92,24 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  Jason Wang <jasowang@redhat.com>, Bin Meng <bmeng.cn@gmail.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Wainer dos Santos Moschetta <wainersm@redhat.com>
-Subject: [PATCH v2 08/21] buildsys: Fix building without plugins on Darwin
-Date: Tue, 13 Aug 2024 21:23:16 +0100
-Message-Id: <20240813202329.1237572-9-alex.bennee@linaro.org>
+Subject: [PATCH v2 02/21] Makefile: trigger re-configure on updated pythondeps
+Date: Tue, 13 Aug 2024 21:23:10 +0100
+Message-Id: <20240813202329.1237572-3-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240813202329.1237572-1-alex.bennee@linaro.org>
 References: <20240813202329.1237572-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::431;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x431.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::135;
+ envelope-from=alex.bennee@linaro.org; helo=mail-lf1-x135.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -125,95 +125,32 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Philippe Mathieu-Daudé <philmd@linaro.org>
+If we add additional deps for meson we need to ensure we trigger a
+reconfigure to make sure everything is set up.
 
-Since commit 0082475e26 the plugin symbol list is unconditionally
-added to the linker flags, leading to a build failure:
-
-  Undefined symbols for architecture arm64:
-    "_qemu_plugin_entry_code", referenced from:
-        <initial-undefines>
-  ...
-  ld: symbol(s) not found for architecture arm64
-  clang: error: linker command failed with exit code 1 (use -v to see invocation)
-  ninja: build stopped: subcommand failed.
-
-Fix by restricting the whole meson file to the --enable-plugins
-configure argument.
-
-Fixes: 0082475e26 ("meson: merge plugin_ldflags into emulator_link_args")
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Acked-by: Richard Henderson <richard.henderson@linaro.org>
-Message-Id: <20240813112457.92560-1-philmd@linaro.org>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Message-Id: <20240731140232.22193-1-alex.bennee@linaro.org>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Message-Id: <20240807114059.2339021-3-alex.bennee@linaro.org>
 ---
- plugins/meson.build | 50 +++++++++++++++++++++++----------------------
- 1 file changed, 26 insertions(+), 24 deletions(-)
+ Makefile | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/plugins/meson.build b/plugins/meson.build
-index 18a0303bff..1cc039d29b 100644
---- a/plugins/meson.build
-+++ b/plugins/meson.build
-@@ -1,3 +1,7 @@
-+if not get_option('plugins')
-+  subdir_done()
-+endif
-+
- # Modules need more symbols than just those in plugins/qemu-plugins.symbols
- if not enable_modules
-   if host_os == 'darwin'
-@@ -12,29 +16,27 @@ if not enable_modules
-   endif
+diff --git a/Makefile b/Makefile
+index 02a257584b..917c9a34d1 100644
+--- a/Makefile
++++ b/Makefile
+@@ -78,7 +78,8 @@ x := $(shell rm -rf meson-private meson-info meson-logs)
  endif
  
--if get_option('plugins')
--  if host_os == 'windows'
--    dlltool = find_program('dlltool', required: true)
-+if host_os == 'windows'
-+  dlltool = find_program('dlltool', required: true)
- 
--    # Generate a .lib file for plugins to link against.
--    # First, create a .def file listing all the symbols a plugin should expect to have
--    # available in qemu
--    win32_plugin_def = configure_file(
--      input: files('qemu-plugins.symbols'),
--      output: 'qemu_plugin_api.def',
--      capture: true,
--      command: ['sed', '-e', '0,/^/s//EXPORTS/; s/[{};]//g', '@INPUT@'])
--    # then use dlltool to assemble a delaylib.
--    win32_qemu_plugin_api_lib = configure_file(
--      input: win32_plugin_def,
--      output: 'libqemu_plugin_api.a',
--      command: [dlltool, '--input-def', '@INPUT@',
--                '--output-delaylib', '@OUTPUT@', '--dllname', 'qemu.exe']
--    )
--  endif
--  specific_ss.add(files(
--    'loader.c',
--    'core.c',
--    'api.c',
--  ))
-+  # Generate a .lib file for plugins to link against.
-+  # First, create a .def file listing all the symbols a plugin should expect to have
-+  # available in qemu
-+  win32_plugin_def = configure_file(
-+    input: files('qemu-plugins.symbols'),
-+    output: 'qemu_plugin_api.def',
-+    capture: true,
-+    command: ['sed', '-e', '0,/^/s//EXPORTS/; s/[{};]//g', '@INPUT@'])
-+  # then use dlltool to assemble a delaylib.
-+  win32_qemu_plugin_api_lib = configure_file(
-+    input: win32_plugin_def,
-+    output: 'libqemu_plugin_api.a',
-+    command: [dlltool, '--input-def', '@INPUT@',
-+              '--output-delaylib', '@OUTPUT@', '--dllname', 'qemu.exe']
-+  )
- endif
-+specific_ss.add(files(
-+  'loader.c',
-+  'core.c',
-+  'api.c',
-+))
+ # 1. ensure config-host.mak is up-to-date
+-config-host.mak: $(SRC_PATH)/configure $(SRC_PATH)/scripts/meson-buildoptions.sh $(SRC_PATH)/VERSION
++config-host.mak: $(SRC_PATH)/configure $(SRC_PATH)/scripts/meson-buildoptions.sh \
++		$(SRC_PATH)/pythondeps.toml $(SRC_PATH)/VERSION
+ 	@echo config-host.mak is out-of-date, running configure
+ 	@if test -f meson-private/coredata.dat; then \
+ 	  ./config.status --skip-meson; \
 -- 
 2.39.2
 
