@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F1A1C52D7B
-	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Aug 2024 20:27:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 090B6C52D7B
+	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Aug 2024 20:27:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sdy40-0006bV-VH; Tue, 13 Aug 2024 16:24:17 -0400
+	id 1sdy40-0006bU-VZ; Tue, 13 Aug 2024 16:24:17 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sdy3s-0005zL-Ct
- for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:24:08 -0400
-Received: from mail-lj1-x22d.google.com ([2a00:1450:4864:20::22d])
+ id 1sdy3h-0005DH-UW
+ for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:23:57 -0400
+Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sdy3R-0006EP-Vt
- for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:24:06 -0400
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-2eeb1ba0481so79078631fa.2
- for <qemu-riscv@nongnu.org>; Tue, 13 Aug 2024 13:23:41 -0700 (PDT)
+ id 1sdy3N-0006Bb-Ow
+ for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:23:57 -0400
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-4281ca54fd3so44492305e9.2
+ for <qemu-riscv@nongnu.org>; Tue, 13 Aug 2024 13:23:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723580620; x=1724185420; darn=nongnu.org;
+ d=linaro.org; s=google; t=1723580615; x=1724185415; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gKnLVSpjxmewuCirNFwcFUTWuBBv0LU3PKhxtt5azvQ=;
- b=AUVma06k0D8LMAdpY2jTxZD4+BGXaRJgh52JGrvItXso7Lp47bgkyyT7EYRSGDy7+h
- hOfz/j//uHvnYMqrYnUy4GYCIe75u0vfXYmlSKlH/CXhBJTGr0oBUN0J/r/trrg5oTvL
- StuM26nUzdGUNELGrVR4va3pzAJZcx4hIpPbH9vj4QPGmel/ksuzzH/eX6KMi/Jio8mB
- 8jNxuswa6YlDQ2UQkeqcS/2aY+N2Aq8CI9zpcrXLDjwsEl3lwB0YbGeg7r+UpnMI166b
- rzkwI86Wg7MopZZo1+2OVQK1FOZfuoDVdjJdt+1xlCtQNJ6NSWPFMLWdM7beOxxumh3/
- H9pQ==
+ bh=1AVh2j6pk/5XaCd8FbE/7mpmYiPG8pggbKweEGs0KY8=;
+ b=swYFf/2BZxSSNajIQqL04N5uSZn50Dyk1MS2o4kLoWDMT654RGTbVmJEV3WBaZExLp
+ AgFBB+E5tcLSAs8oqOIMNI0xpX9a4Wm0bXOWStaJSgjwo8mzA8x6wS+0rOO+vaXIiuxm
+ jqQaFejdK+I5lyrHtiiKVPLnUpq35D9Y0aUUqxY6t8E7Sx+GwNGpY7E2D41ELrqWAZWC
+ dknDBtSgn0wXBcN2g/z75vbqj2/Ct4vESxy/zYO+siHaB8zRkQPYpiWu67jDvBE5FiG/
+ SI6wZCmFGqn0I05ILZ1mlAbUijVccIOwCOZ/U9LAx2qCLmwR0zsPBGhRed5XJXdmzuxf
+ IYNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723580620; x=1724185420;
+ d=1e100.net; s=20230601; t=1723580615; x=1724185415;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=gKnLVSpjxmewuCirNFwcFUTWuBBv0LU3PKhxtt5azvQ=;
- b=B+csFd5PbaO7qeJVK9EMrHvKTrknJx4M247LefX01BvVfZbKCdYyx9OD8GsiZjn0UV
- +nEZUsgCHVjGtgYzSGEM62fMR0gUcI80oWchzFgfCfK0iUz14Smw/Yvf0dPvEnuF1lzd
- TMKF4V2KYKYYv9li8kZYE+iE4OnXEJA/4S8VlRW3mKkQwFDw4V4HAe9ZOQgssiS0lBcA
- 9U48BAzCV/0lVzjDPvNPFlu/N7R3tF//0Zmrji17C/AsLroBJLmt8Mb/+CH1MyjxXN42
- bKLObeC+qijvBdeyB7PwLCfK3PO9dC9ZWZnBgp9Gnk+r8W7EOwsg1IRWiKzSB8Sv5OU9
- /SZA==
+ bh=1AVh2j6pk/5XaCd8FbE/7mpmYiPG8pggbKweEGs0KY8=;
+ b=eW1udEj9H4mzrzT9Y4f/zQlZ5hBYhe9rJBxqDy8qhJ5e/vrTKnFKdtdWJ/iQy2wgc5
+ kFZ7Hym7H737ds7cHb9jqO4fJUBIjerz1tf3c3WWbsZz8su00ZE+/OmUjrjXJ2Ukdu35
+ vrrU+8HLpqJbJPN2FPGiya8EWPmO00ySGXezn69OYYV+KbbBRIM5tcLbqxecRgdOse8T
+ qzCeStc8xWzTxjjBim8kc05GxeT4bm9zaLPCpUCK5fFQy2zntYSaZDsWlKlD6Xc/FkKq
+ 1FuWDfzi5rz68XIptyF3TWm54xVjWl1L2AxbgPgC5PN0Crd1L5Zsiom3oNmJjphAlsTU
+ IHpQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVxZbxswkLr7T2HfLezN33n2xbPBuVOwVj820hgFHB3GtNf0ZpvW1Zb/wcKqsgMRahdQMFDYS/R0FO6CB+bHJK9FNxzrZk=
-X-Gm-Message-State: AOJu0YwJJr5c6ApHj6/AMQXDdhroXrTUS2m+kIP7oojgENdhcWHEVnKd
- G7tJ9QEi0YWd3gaHM0+s1VFnXgCMoVJAbk96aUjRb5w7F4NSHK0F3TAy63c0vs0=
-X-Google-Smtp-Source: AGHT+IEJM7GCjG6FXle0qtVKynHXGKsll+H0P8kU2TbGzKLAw57ANQNr6l0i2885LCsZ/JHq16ex3w==
-X-Received: by 2002:a05:651c:19ac:b0:2f0:25dc:1894 with SMTP id
- 38308e7fff4ca-2f3aa1d9de7mr3336041fa.2.1723580619507; 
- Tue, 13 Aug 2024 13:23:39 -0700 (PDT)
+ AJvYcCW0ObSRvGdUFkDL/v8R4VeNzPjJdeWtaKfCEiHFMJwEmIEJ8rZOPfK7WLTmOilL13zJEKcUluv0J0hSxG35TvHvKktUmpo=
+X-Gm-Message-State: AOJu0YxbKOV9dpQElOHH+RQp2mXVair9NxaT9oQ+IyKRAfh9yi8WBvOh
+ KzELivjYw5yeNhrdVREGOx25LfpXvO0mFZ5QPrcDHJqc426YFo0X8p0JIkIfH6M=
+X-Google-Smtp-Source: AGHT+IGdwxx3Yarp7KGAlSqIsgRmbEoqUx0ZN2t2rvjV2uSlSTWCBlXOqUAML9ogR29JYA305V8rYA==
+X-Received: by 2002:a5d:64c9:0:b0:367:9107:9e11 with SMTP id
+ ffacd0b85a97d-37177830523mr605930f8f.62.1723580615118; 
+ Tue, 13 Aug 2024 13:23:35 -0700 (PDT)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-429deb4a4aesm893215e9.14.2024.08.13.13.23.34
+ 5b1f17b1804b1-429d0642979sm98513095e9.20.2024.08.13.13.23.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 13 Aug 2024 13:23:38 -0700 (PDT)
+ Tue, 13 Aug 2024 13:23:34 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 8B99B5FCF1;
- Tue, 13 Aug 2024 21:23:30 +0100 (BST)
+ by draig.lan (Postfix) with ESMTP id E95A25F9CF;
+ Tue, 13 Aug 2024 21:23:29 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Alistair Francis <alistair.francis@wdc.com>,
@@ -92,20 +92,21 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  Jason Wang <jasowang@redhat.com>, Bin Meng <bmeng.cn@gmail.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Nicholas Piggin <npiggin@gmail.com>,
- Pavel Dovgalyuk <Pavel.Dovgalyuk@ispras.ru>
-Subject: [PATCH v2 12/21] replay: allow runstate shutdown->running when
- replaying trace
-Date: Tue, 13 Aug 2024 21:23:20 +0100
-Message-Id: <20240813202329.1237572-13-alex.bennee@linaro.org>
+ Stefano Garzarella <sgarzare@redhat.com>,
+ Cornelia Huck <cohuck@redhat.com>,
+ =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?= <berrange@redhat.com>
+Subject: [PATCH v2 06/21] scripts/checkpatch: more checks on files imported
+ from Linux
+Date: Tue, 13 Aug 2024 21:23:14 +0100
+Message-Id: <20240813202329.1237572-7-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240813202329.1237572-1-alex.bennee@linaro.org>
 References: <20240813202329.1237572-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::22d;
- envelope-from=alex.bennee@linaro.org; helo=mail-lj1-x22d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::336;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x336.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -128,110 +129,66 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Nicholas Piggin <npiggin@gmail.com>
+From: Stefano Garzarella <sgarzare@redhat.com>
 
-When replaying a trace, it is possible to go from shutdown to running
-with a reverse-debugging step. This can be useful if the problem being
-debugged triggers a reset or shutdown.
+If a file imported from Linux is touched, emit a warning and suggest
+using scripts/update-linux-headers.sh.
 
-This can be tested by making a recording of a machine that shuts down,
-then using -action shutdown=pause when replaying it. Continuing to the
-end of the trace then reverse-stepping in gdb crashes due to invalid
-runstate transition.
+Also check that updating imported files from Linux are not mixed with
+other changes, in which case emit an error.
 
-Just permitting the transition seems to be all that's necessary for
-reverse-debugging to work well in such a state.
-
-Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
-Reviewed-by: Pavel Dovgalyuk <Pavel.Dovgalyuk@ispras.ru>
-Signed-off-by: Nicholas Piggin <npiggin@gmail.com>
-Message-Id: <20240813050638.446172-5-npiggin@gmail.com>
+Signed-off-by: Stefano Garzarella <sgarzare@redhat.com>
+Reviewed-by: Cornelia Huck <cohuck@redhat.com>
+Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
+Message-Id: <20240718072050.9503-1-sgarzare@redhat.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Message-Id: <20240807114059.2339021-7-alex.bennee@linaro.org>
 ---
- include/sysemu/runstate.h |  1 +
- replay/replay.c           |  2 ++
- system/runstate.c         | 31 ++++++++++++++++++++++++++++---
- 3 files changed, 31 insertions(+), 3 deletions(-)
+ scripts/checkpatch.pl | 24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
 
-diff --git a/include/sysemu/runstate.h b/include/sysemu/runstate.h
-index e210a37abf..11c7ff3ffb 100644
---- a/include/sysemu/runstate.h
-+++ b/include/sysemu/runstate.h
-@@ -9,6 +9,7 @@ void runstate_set(RunState new_state);
- RunState runstate_get(void);
- bool runstate_is_running(void);
- bool runstate_needs_reset(void);
-+void runstate_replay_enable(void);
+diff --git a/scripts/checkpatch.pl b/scripts/checkpatch.pl
+index ff373a7083..65b6f46f90 100755
+--- a/scripts/checkpatch.pl
++++ b/scripts/checkpatch.pl
+@@ -1374,6 +1374,9 @@ sub process {
+ 	my $in_header_lines = $file ? 0 : 1;
+ 	my $in_commit_log = 0;		#Scanning lines before patch
+ 	my $reported_maintainer_file = 0;
++	my $reported_mixing_imported_file = 0;
++	my $in_imported_file = 0;
++	my $in_no_imported_file = 0;
+ 	my $non_utf8_charset = 0;
  
- typedef void VMChangeStateHandler(void *opaque, bool running, RunState state);
+ 	our @report = ();
+@@ -1673,6 +1676,27 @@ sub process {
+ # ignore non-hunk lines and lines being removed
+ 		next if (!$hunk_line || $line =~ /^-/);
  
-diff --git a/replay/replay.c b/replay/replay.c
-index a2c576c16e..b8564a4813 100644
---- a/replay/replay.c
-+++ b/replay/replay.c
-@@ -385,6 +385,8 @@ static void replay_enable(const char *fname, int mode)
-         replay_fetch_data_kind();
-     }
- 
-+    runstate_replay_enable();
++# Check that updating imported files from Linux are not mixed with other changes
++		if ($realfile =~ /^(linux-headers|include\/standard-headers)\//) {
++			if (!$in_imported_file) {
++				WARN("added, moved or deleted file(s) " .
++				     "imported from Linux, are you using " .
++				     "scripts/update-linux-headers.sh?\n" .
++				     $herecurr);
++			}
++			$in_imported_file = 1;
++		} else {
++			$in_no_imported_file = 1;
++		}
 +
-     replay_init_events();
- }
- 
-diff --git a/system/runstate.c b/system/runstate.c
-index c833316f6d..a0e2a5fd22 100644
---- a/system/runstate.c
-+++ b/system/runstate.c
-@@ -181,6 +181,12 @@ static const RunStateTransition runstate_transitions_def[] = {
-     { RUN_STATE__MAX, RUN_STATE__MAX },
- };
- 
-+static const RunStateTransition replay_play_runstate_transitions_def[] = {
-+    { RUN_STATE_SHUTDOWN, RUN_STATE_RUNNING},
++		if (!$reported_mixing_imported_file &&
++		    $in_imported_file && $in_no_imported_file) {
++			ERROR("headers imported from Linux should be self-" .
++			      "contained in a patch with no other changes\n" .
++			      $herecurr);
++			$reported_mixing_imported_file = 1;
++		}
 +
-+    { RUN_STATE__MAX, RUN_STATE__MAX },
-+};
-+
- static bool runstate_valid_transitions[RUN_STATE__MAX][RUN_STATE__MAX];
+ # ignore files that are being periodically imported from Linux
+ 		next if ($realfile =~ /^(linux-headers|include\/standard-headers)\//);
  
- bool runstate_check(RunState state)
-@@ -188,14 +194,33 @@ bool runstate_check(RunState state)
-     return current_run_state == state;
- }
- 
--static void runstate_init(void)
-+static void transitions_set_valid(const RunStateTransition *rst)
- {
-     const RunStateTransition *p;
- 
--    memset(&runstate_valid_transitions, 0, sizeof(runstate_valid_transitions));
--    for (p = &runstate_transitions_def[0]; p->from != RUN_STATE__MAX; p++) {
-+    for (p = rst; p->from != RUN_STATE__MAX; p++) {
-         runstate_valid_transitions[p->from][p->to] = true;
-     }
-+}
-+
-+void runstate_replay_enable(void)
-+{
-+    assert(replay_mode != REPLAY_MODE_NONE);
-+
-+    if (replay_mode == REPLAY_MODE_PLAY) {
-+        /*
-+         * When reverse-debugging, it is possible to move state from
-+         * shutdown to running.
-+         */
-+        transitions_set_valid(&replay_play_runstate_transitions_def[0]);
-+    }
-+}
-+
-+static void runstate_init(void)
-+{
-+    memset(&runstate_valid_transitions, 0, sizeof(runstate_valid_transitions));
-+
-+    transitions_set_valid(&runstate_transitions_def[0]);
- 
-     qemu_mutex_init(&vmstop_lock);
- }
 -- 
 2.39.2
 
