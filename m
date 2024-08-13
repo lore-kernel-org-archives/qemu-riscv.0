@@ -4,63 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37F4DC52D7C
-	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Aug 2024 20:24:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 272AEC52D7B
+	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Aug 2024 20:25:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sdy3O-0004L0-9T; Tue, 13 Aug 2024 16:23:38 -0400
+	id 1sdy4C-0007cY-C5; Tue, 13 Aug 2024 16:24:28 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sdy3M-0004IS-2e
- for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:23:36 -0400
-Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430])
+ id 1sdy40-0006al-RI
+ for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:24:16 -0400
+Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sdy3K-0006Am-6a
- for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:23:35 -0400
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-36dd8a35722so2216484f8f.1
- for <qemu-riscv@nongnu.org>; Tue, 13 Aug 2024 13:23:33 -0700 (PDT)
+ id 1sdy3W-0006JM-Kb
+ for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:24:14 -0400
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-429c4a4c6a8so31260725e9.0
+ for <qemu-riscv@nongnu.org>; Tue, 13 Aug 2024 13:23:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723580613; x=1724185413; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ri3Nj6KnAAwYce4sttu64DfuUubHB313LE/IKlWaOgg=;
- b=aeEU176dq4nhJKQTyjoAkDam/7Ylawm+ubG5pALrrGqOqvo7D+SfVes27PEJvSghsm
- /DdnJj0wITFC+TsRbSq293g3hCzg8qpTD8P+yhvbUyypiAIh6f9XGC2M6fP2+TewpUj8
- DGi6AGaPoMHbEIIc5S4XmNbXnDKtHFZSmRJpPrc8UjepXcnkEIyDQgvTux3P5gwO2inM
- avzlETjIQUok5CsFWY5u0/7eUwptxTn4rvLFdESMWsnZ/eXOE75Jr0H1c4SZKhxCl7Wp
- 09xHIvBuupvdodwOS72T2VtOPPygxK9FOeb6TZVc05T4jDTshk4m25SJ7vryjpTnPaVi
- mKMw==
+ d=linaro.org; s=google; t=1723580624; x=1724185424; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=adw5jgjlcSpxCkpQ0j60omHvD1nnW2G6iyfdsNi8jbw=;
+ b=MYkkzsH/E/Qb2UFxTysypbI9nFuNmx9kCmmoleBeS09BLk4xtYylR7RdOcxO6jhZrD
+ SuKU6ueXJMk1se/OHjjZMQJniwHVAedEYJwsiJKxMq2fAloJzvr8Br4ex9PzH0ZD6hTQ
+ I2DRfi1bI6MbIDJF7TrsAioJVGSqNr9W5JlLFuOSC3bujZZSvaOkB0t0R23q7c5kzUrg
+ cDiTtn6+0I2J4J4ZsmO9qtb+Dn1KHCUrR/YgBGXIbqquyeWeAYCRPrwDckPzrHLm8eTZ
+ Y4unkdv17TC05RcFJzoOht2V2LZWJD4EjU+z5vvPMf02sitHtr2zGqsIB1h8vkKRb/VL
+ p9jg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723580613; x=1724185413;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ri3Nj6KnAAwYce4sttu64DfuUubHB313LE/IKlWaOgg=;
- b=qUOtLtTP1cz3AQ10+L3NoaIOWk8b8nn+pxx3AbiRguQKAbRpzOMe2OJ3+LwtHeJlrl
- 02+/b1xGhS4cJva8xQN+LY0kzXMH1cUU0KHDsizHqiosrtyjI5HVOd/ngh6pA5+Py13h
- RS4EhR725AK6ShtBsIbWx7yZD6JTvWyrXOuLqT2PSFYgoWIvsgGWOAR4OuebTTAYUMN/
- QhY7VuYRjaO8S8ccPeULtcE0YCxd8seGEOMxwrEvv69sON6vmhem8ajgcCMaPzpEXfuX
- 2oAyKwdICJp/wQk/vx/nC7goTsoCYyxactRf/NbwHB+A3ez0HLvuuJw8TyLVuRNhSJFT
- 3DXw==
+ d=1e100.net; s=20230601; t=1723580624; x=1724185424;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=adw5jgjlcSpxCkpQ0j60omHvD1nnW2G6iyfdsNi8jbw=;
+ b=AQw55fVgo6MnA6kQNNpzP+78RfMmYkj92LrzgZejv56wTHKRaNNAj1BKSF9BQs5m3l
+ g01tXDEEPYfIiol2aKk+1ZJm4isnvX+W6obIIScfO5zyAVvQYsoxh4RK/xT5oYA43Fls
+ T/ZyGafpCi8d0SprJBD74p2nA7T2T/cZ17Xz99bHIM7T39K8oJKtQY0ahBQl3KL2Paf8
+ fn2hGv7gNCGeAcrU2EuD8+bgpoCB8cTB3Op5609NMu38Yt/HpxuI4Itdm1F570Lj7A4Y
+ TfzlXMWBqeTRvor3d0T+6U4q8LbFmcuVYCQRKo3MSnhSLkpPJQMrQuSoMU02fAEjy0Kb
+ LnJw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU0dOZNdTz5KfI/fe7LMlKJVEILs9BzfcTsqvxLVZLr+V0hxL5e7ojwQl9bOlkOSLG/Nhbnntyg+Cpt7/AbIb/xuF3PazI=
-X-Gm-Message-State: AOJu0YxvuVkv0C57v6GOtYfwu+TK9VbNSW4UtsdCJvFpL2Hx2xwyaL1b
- j5WOBHK9sXjItIjMFfjQyPGScQXfdP9VPbCZR07jjAgC6X+sG8hJz/9CQuWhy18=
-X-Google-Smtp-Source: AGHT+IFD8ANyBvg4OSR2ZhYQmfVP1TQ7DO4yNZiDq9xDn7AZHbSFs0ZxBh7mRmBN4sy1ikDi4bR0Aw==
-X-Received: by 2002:adf:a21a:0:b0:360:9cf4:58ce with SMTP id
- ffacd0b85a97d-371778095eamr386414f8f.46.1723580612100; 
- Tue, 13 Aug 2024 13:23:32 -0700 (PDT)
+ AJvYcCVciscDu+hdKuM815z4AZRaod89smWth8+cTeog4ayHlp21PMNmxRyrgBo+KhQd2tAvUNkh3l0XXC2nWtwXud81ZF/eXQ0=
+X-Gm-Message-State: AOJu0YwJeUIqzo1nguhVjSNX+ePEBV1rAYNeMdz3HGCp2YcFdPWFAnlm
+ VfBbNYuVPG1K76LCvDn5t8ouvFoirAkyjX+VdPqBt902FvnvPtNf0ffESnpIln0=
+X-Google-Smtp-Source: AGHT+IG7R5nUt3voA9dl50RQS5J1OR5JcDC2E5EFJj3IDJ1znrBpLKrB64HTTeltr6WwzmgpgEpd2Q==
+X-Received: by 2002:a05:600c:1f13:b0:427:fa39:b0db with SMTP id
+ 5b1f17b1804b1-429dd264962mr4344725e9.27.1723580624219; 
+ Tue, 13 Aug 2024 13:23:44 -0700 (PDT)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-36e4cfee676sm11229207f8f.49.2024.08.13.13.23.30
+ 5b1f17b1804b1-429c750e57fsm151122575e9.12.2024.08.13.13.23.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 13 Aug 2024 13:23:30 -0700 (PDT)
+ Tue, 13 Aug 2024 13:23:38 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 5F5195F7A3;
- Tue, 13 Aug 2024 21:23:29 +0100 (BST)
+ by draig.lan (Postfix) with ESMTP id BEC405FE27;
+ Tue, 13 Aug 2024 21:23:30 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Alistair Francis <alistair.francis@wdc.com>,
@@ -90,23 +91,27 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Jason Wang <jasowang@redhat.com>, Bin Meng <bmeng.cn@gmail.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Wainer dos Santos Moschetta <wainersm@redhat.com>
-Subject: [PATCH v2 00/21] Various fixes and tweaks for 9.1-rc2/3
-Date: Tue, 13 Aug 2024 21:23:08 +0100
-Message-Id: <20240813202329.1237572-1-alex.bennee@linaro.org>
+ Wainer dos Santos Moschetta <wainersm@redhat.com>,
+ Nicholas Piggin <npiggin@gmail.com>
+Subject: [PATCH v2 14/21] tests/avocado: replay_kernel.py add x86-64 q35
+ machine test
+Date: Tue, 13 Aug 2024 21:23:22 +0100
+Message-Id: <20240813202329.1237572-15-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240813202329.1237572-1-alex.bennee@linaro.org>
+References: <20240813202329.1237572-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::430;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x430.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -122,78 +127,56 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-As usual during soft freeze I switch to cleaning up the various
-niggles and bugs which have accumulated over the years.
+From: Nicholas Piggin <npiggin@gmail.com>
 
-New for this iteration are some late breaking plugin updates, fixes
-for record/replay and a few documentation updates. Everything is
-reviewed so I will roll a pull request later this week.
+The x86-64 pc machine is flaky with record/replay, but q35 is more
+stable. Add a q35 test to replay_kernel.py.
 
-Alex Bennée (2):
-  Makefile: trigger re-configure on updated pythondeps
-  target/i386: allow access_ptr to force slow path on failed probe
+Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
+Tested-by: Alex Bennée <alex.bennee@linaro.org>
+Signed-off-by: Nicholas Piggin <npiggin@gmail.com>
+Message-Id: <20240813050638.446172-7-npiggin@gmail.com>
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+---
+ tests/avocado/replay_kernel.py | 18 +++++++++++++++++-
+ 1 file changed, 17 insertions(+), 1 deletion(-)
 
-Gustavo Romero (3):
-  configure: Fix arch detection for GDB_HAS_MTE
-  configure: Avoid use of param. expansion when using gdb_version
-  configure: Fix GDB version detection for GDB_HAS_MTE
-
-Nicholas Piggin (10):
-  scripts/replay-dump.py: Update to current rr record format
-  scripts/replay-dump.py: rejig decoders in event number order
-  tests/avocado: excercise scripts/replay-dump.py in replay tests
-  replay: allow runstate shutdown->running when replaying trace
-  Revert "replay: stop us hanging in rr_wait_io_event"
-  tests/avocado: replay_kernel.py add x86-64 q35 machine test
-  chardev: set record/replay on the base device of a muxed device
-  virtio-net: Use replay_schedule_bh_event for bhs that affect machine
-    state
-  virtio-net: Use virtual time for RSC timers
-  savevm: Fix load_snapshot error path crash
-
-Philippe Mathieu-Daudé (2):
-  tests/avocado: Re-enable gdbsim-r5f562n8 testing U-Boot
-  buildsys: Fix building without plugins on Darwin
-
-Pierrick Bouvier (2):
-  docs/devel: update tcg-plugins page
-  plugins: fix race condition with scoreboards
-
-Stefan Weil (1):
-  docs: Fix some typos (found by typos) and grammar issues
-
-Stefano Garzarella (1):
-  scripts/checkpatch: more checks on files imported from Linux
-
- docs/about/emulation.rst                  |  49 ++++++-
- docs/devel/migration/uadk-compression.rst |   4 +-
- docs/devel/tcg-plugins.rst                |  13 +-
- docs/interop/qemu-ga.rst                  |   2 +-
- docs/tools/qemu-vmsr-helper.rst           |   4 +-
- configure                                 |   8 +-
- Makefile                                  |   3 +-
- qapi/rocker.json                          |   4 +-
- include/exec/memory.h                     |   2 +-
- include/sysemu/replay.h                   |   5 -
- include/sysemu/runstate.h                 |   1 +
- accel/tcg/tcg-accel-ops-rr.c              |   2 +-
- chardev/char.c                            |  71 ++++++---
- hw/arm/smmu-common.c                      |   2 +-
- hw/net/virtio-net.c                       |  17 +--
- migration/savevm.c                        |   1 +
- plugins/core.c                            |  43 ++++--
- qga/main.c                                |   2 +-
- replay/replay.c                           |  23 +--
- system/runstate.c                         |  31 +++-
- target/i386/tcg/access.c                  |  27 ++--
- plugins/meson.build                       |  50 +++----
- scripts/checkpatch.pl                     |  24 ++++
- scripts/replay-dump.py                    | 167 +++++++++++++++-------
- tests/avocado/machine_rx_gdbsim.py        |   2 -
- tests/avocado/replay_kernel.py            |  31 +++-
- tests/avocado/replay_linux.py             |  10 ++
- 27 files changed, 406 insertions(+), 192 deletions(-)
-
+diff --git a/tests/avocado/replay_kernel.py b/tests/avocado/replay_kernel.py
+index a668af9d36..e22c200a36 100644
+--- a/tests/avocado/replay_kernel.py
++++ b/tests/avocado/replay_kernel.py
+@@ -110,7 +110,7 @@ def test_i386_pc(self):
+         self.run_rr(kernel_path, kernel_command_line, console_pattern, shift=5)
+ 
+     # See https://gitlab.com/qemu-project/qemu/-/issues/2094
+-    @skipUnless(os.getenv('QEMU_TEST_FLAKY_TESTS'), 'Test sometimes gets stuck')
++    @skipUnless(os.getenv('QEMU_TEST_FLAKY_TESTS'), 'pc machine is unstable with replay')
+     def test_x86_64_pc(self):
+         """
+         :avocado: tags=arch:x86_64
+@@ -128,6 +128,22 @@ def test_x86_64_pc(self):
+ 
+         self.run_rr(kernel_path, kernel_command_line, console_pattern, shift=5)
+ 
++    def test_x86_64_q35(self):
++        """
++        :avocado: tags=arch:x86_64
++        :avocado: tags=machine:q35
++        """
++        kernel_url = ('https://archives.fedoraproject.org/pub/archive/fedora'
++                      '/linux/releases/29/Everything/x86_64/os/images/pxeboot'
++                      '/vmlinuz')
++        kernel_hash = '23bebd2680757891cf7adedb033532163a792495'
++        kernel_path = self.fetch_asset(kernel_url, asset_hash=kernel_hash)
++
++        kernel_command_line = self.KERNEL_COMMON_COMMAND_LINE + 'console=ttyS0'
++        console_pattern = 'VFS: Cannot open root device'
++
++        self.run_rr(kernel_path, kernel_command_line, console_pattern, shift=5)
++
+     def test_mips_malta(self):
+         """
+         :avocado: tags=arch:mips
 -- 
 2.39.2
 
