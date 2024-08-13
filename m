@@ -4,88 +4,123 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9523BC3DA7F
-	for <qemu-riscv@archiver.kernel.org>; Mon, 12 Aug 2024 17:42:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5E40C52D7C
+	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Aug 2024 05:24:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sdZ3O-0002tN-Cu; Mon, 12 Aug 2024 13:41:58 -0400
+	id 1sdk0y-0007Ai-3n; Tue, 13 Aug 2024 01:24:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sdZ3K-0002lq-Rk
- for qemu-riscv@nongnu.org; Mon, 12 Aug 2024 13:41:54 -0400
-Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sdZ3I-0006Qo-1k
- for qemu-riscv@nongnu.org; Mon, 12 Aug 2024 13:41:54 -0400
-Received: by mail-pj1-x1029.google.com with SMTP id
- 98e67ed59e1d1-2cb55ff1007so3306575a91.0
- for <qemu-riscv@nongnu.org>; Mon, 12 Aug 2024 10:41:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1723484510; x=1724089310;
- darn=nongnu.org; 
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=UyfrC6TVBoSvo347EZwXiALcTgGA11Jejacv8YIRml0=;
- b=nlsSJbvXp20l0Oi+wLdTDsPyNrlojdncSYK+0hElnJNHtKfDPV7RiKBPBO5l5GBY+c
- qxeAK7TSpHMQGtUDxxp0eSAQpsYaiVE/RzayY+b6rpOnaNzsZJavB2U9rXfWiIRlcoEO
- VrRnPU6e1I/CHiuKOinKGPkgZJo7hawKeuTV4tjZsSNXhmx7DzlW3biI4WoXVvuFyBCm
- 5+3PItkEhpE2YPB59PcE1BREikyhdXxzZTPdmsbTyG7QOrYVgJpWuAUVTmQjHmLE23r0
- CZIiGv0dT7SvXf5KFlvocGUfk0hgrjdpVVgBYcuJbZ2vxlmlmzGmjalDgmc9S4fQvalj
- Krwg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723484510; x=1724089310;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UyfrC6TVBoSvo347EZwXiALcTgGA11Jejacv8YIRml0=;
- b=AMoJI/yj8DnzPYpXcE/E/fgpfGMTh+fkMYw7XqI3xCK0iOXVn04JOR+K7qjIqzcG2N
- 8J6qWQoaJA+oEaOCVObNsV7a35HkX02eo3o8l8yrsh20yfH7Fok2VOw09BZqj+79NH8h
- etbnpsVViTOfqfd13xMioXrte92BxE6nIF1XI4TGUwgS/Cx1X1Jwm9NAXBgGqugUeArV
- vcEAV4W8QdYlwA5uGQhQ21bfye/GbA1HvmTxdnqS6dfgHI7Fi/t2BqzFsEWHdzE0TXR9
- kjSkMpHXyqj633qtflrsZHE8J0F0ub4t0q1A23je/JfvsARP15x0Us4oiuiuFm4Fg53s
- tZ8Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWDW3WW6OeTCFNKnnOueUSw6jFrvuTTbu6c9GaqMf6ichPr8bPxrPWsTf1e7eewOTU3cO1S/dcX0WL+KE+Nq9nGyNOxCmM=
-X-Gm-Message-State: AOJu0YzHtPg1VcGxRSzXkmEsCqLc7dH56eGfJfJ92v3PgZmMKs2l3wpC
- iO54Xg0wM2VEAYL//qk3SwDHFgFoDCrlqdlJ4HfDU7A0JL8C/C6DxTDW/wn8U+k=
-X-Google-Smtp-Source: AGHT+IEUUdMWhGsl/q/z/wSZoE9xn+uALzz2OUNVV+zxQmpzdlaMNFeAiGFg5N3/NFY2u0Cq6nVjDg==
-X-Received: by 2002:a17:90a:f18d:b0:2cf:cc13:471a with SMTP id
- 98e67ed59e1d1-2d3926b8937mr919719a91.43.1723484510003; 
- Mon, 12 Aug 2024 10:41:50 -0700 (PDT)
-Received: from debug.ba.rivosinc.com ([64.71.180.162])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2d1fcfe487esm5405683a91.42.2024.08.12.10.41.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Aug 2024 10:41:49 -0700 (PDT)
-Date: Mon, 12 Aug 2024 10:41:47 -0700
-From: Deepak Gupta <debug@rivosinc.com>
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com,
- palmer@dabbelt.com, Alistair.Francis@wdc.com, laurent@vivier.eu,
- bmeng.cn@gmail.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com
-Subject: Re: [PATCH v3 01/20] accel/tcg: restrict assert on icount_enabled to
- qemu-system
-Message-ID: <ZrpJW0ONiAy+lMCV@debug.ba.rivosinc.com>
-References: <20240807000652.1417776-1-debug@rivosinc.com>
- <20240807000652.1417776-2-debug@rivosinc.com>
- <9c987cbf-f702-4e1f-88d8-82a149c98007@linaro.org>
+ (Exim 4.90_1) (envelope-from <jeeheng.sia@starfivetech.com>)
+ id 1sdk0L-0006ju-Mw; Tue, 13 Aug 2024 01:23:34 -0400
+Received: from mail-sh0chn02on20701.outbound.protection.partner.outlook.cn
+ ([2406:e500:4420:2::701]
+ helo=CHN02-SH0-obe.outbound.protection.partner.outlook.cn)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <jeeheng.sia@starfivetech.com>)
+ id 1sdk0J-0001ZA-2V; Tue, 13 Aug 2024 01:23:33 -0400
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=bNyQlc6vWnaDyvfbmtzVvR2T02UfjRGcBdtWSHek0nqlgjhdGuX9tNxzuum/9Vb4NF1Y9D2HiLYUhlAqT1Sk2+hu1llGCtEamlu2bqyFASlO3cmmFvX4wUNM2tlRXKmKWWkFflimdum2gOwxqZJBXnqmSNHBlCnpLk5RyWiGsKyIO6W3yCday2y0WY7DvpWN11J+PT4kdJrQbWD3fYhsMAEZnGdsFqH5HF/PO6oyd7zFIcGF61YHV3c5LCrlatwSTn+NJVGr7co1TdJNdAj6anX1bPylnYyBoAgL9dVYGwcCkPf4AzTKVpueSRgSJnfD0slcjQ/XEkWkr5xWcLmebg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=kjpdt9HjVDmOgTSVEA7jOdueh23prjUfwBYu2bsM5vM=;
+ b=NM71UqpuPu61meejDhaRujaL0BNMcFl81R5y2JDXj+rwkn3G2sKEqi1ffyFdFE75gEdysrU0wm8mAmxSLpqpN84Y5j4M5CijVN7AFAAQ6mgLIvOQx51ZP9n/fqY5uBuApjCR+Lx/MCHzu8S9VJhLf6eRCyXiUp7ukZ7Av/Y9nvnkE3iuMYMoVWPNd21iDbLKsVn9gfIt6+/YJvOytEq/J7V35zyEXj2qMczkzj9JG8/zZP+aG/PO/wXQ5pasW9z4qehJEwAOKzosnPabTVCcBF6hKvJ1c5uB/iEQsGI3ce0OUmJ4ZKdhhLnW9bHu6SVgXQwBhe+fRw4+ENfjPRw26g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=starfivetech.com; dmarc=pass action=none
+ header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=starfivetech.com;
+Received: from NT0PR01MB1278.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c510:12::10) by NT0PR01MB0976.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c510:d::13) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7828.27; Tue, 13 Aug
+ 2024 05:22:50 +0000
+Received: from NT0PR01MB1278.CHNPR01.prod.partner.outlook.cn
+ ([fe80::f2b4:577:ed05:9abc]) by NT0PR01MB1278.CHNPR01.prod.partner.outlook.cn
+ ([fe80::f2b4:577:ed05:9abc%6]) with mapi id 15.20.7828.031; Tue, 13 Aug 2024
+ 05:22:50 +0000
+From: Sia Jee Heng <jeeheng.sia@starfivetech.com>
+To: qemu-arm@nongnu.org,
+	qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: mst@redhat.com, imammedo@redhat.com, anisinha@redhat.com,
+ peter.maydell@linaro.org, jeeheng.sia@starfivetech.com,
+ shannon.zhaosl@gmail.com, sunilvl@ventanamicro.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com
+Subject: [PATCH v3 1/3] qtest: allow SPCR acpi table changes
+Date: Mon, 12 Aug 2024 22:22:21 -0700
+Message-Id: <20240813052223.1033420-2-jeeheng.sia@starfivetech.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240813052223.1033420-1-jeeheng.sia@starfivetech.com>
+References: <20240813052223.1033420-1-jeeheng.sia@starfivetech.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: ZQ0PR01CA0022.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c550:2::23) To NT0PR01MB1278.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c510:12::10)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <9c987cbf-f702-4e1f-88d8-82a149c98007@linaro.org>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
- envelope-from=debug@rivosinc.com; helo=mail-pj1-x1029.google.com
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: NT0PR01MB1278:EE_|NT0PR01MB0976:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6ee2d85a-b40c-4710-56ea-08dcbb57f99c
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|41320700013|1800799024|52116014|7416014|38350700014; 
+X-Microsoft-Antispam-Message-Info: e8Bu2iX4AOPDq0uR56lJL74Dw27UR4lNMGpN7f/dDX8s4bCBbr2SZiw1ZUllzSDF/Q5xmrQ1kiQ0HLsJhoQVtnDo22oxIpBuDsXQ0kSazlQydn/f7iCmr1UTosUJhCSHpcQXWXdxtd1ryJ39HUPk/3Kw7IcY88Syse/1v8gEYSbxq8442ahpeh+R8dbfXYLMENfllExBkGySdgalPuW4F5+hLJK3OqL8piIwfVEFeTwL21PEM1v/FnyeCe7F9N2Pm8NmDpWpF/zuC5DIhF3zyIPn7/tolY+FHp1ewpp/LCtZ0SzmIhnALXvVZys3XHEHbStp5tOGnHq5nEJr4qkzIaP1R3+jeI9PP/jLJhxIjRRLyiFkkrPvEtYgOwc0jqVV1O0b7B541PgU3qYkjE6O2R0wFBvN460og75sYqqOOcb+T/ffc0y5UE1AjbHxmSO9eZ+QwcYR6k8mDQg7ExtPG99iFp/rNR1NIvcgr2IE3Vx0hPPzMzoAHdqWGVat81FiE2OH+UkKbCuHKWfKdNKf56ZuDs09UrkWMKazk3NO5hVt5Xpjz4xgFE6lihNg4oSV9w4HMkUybK3eG7NaaBsDSXsbRqcBrqksQbB0L6pincg/4Ecn3o42RooxbxnaCneR
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:NT0PR01MB1278.CHNPR01.prod.partner.outlook.cn; PTR:;
+ CAT:NONE;
+ SFS:(13230040)(366016)(41320700013)(1800799024)(52116014)(7416014)(38350700014);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?LZzTRztM49R+lhoLjJwPWAjmK6VaGjbsQ0HQsprcM5p8zNOQj+ffEySrvFRW?=
+ =?us-ascii?Q?/ay4W5KOl+Q/MMIyy1taSCOeUY2FFe/9qgIAlOuALYlCmNhFY+z1xKdekJDv?=
+ =?us-ascii?Q?FP5IQ0B1yqTh7iZ91Ngs7ZvY6HlfGZEupGOI1HQzVByGY4Ev/pNh0Tji8vVP?=
+ =?us-ascii?Q?lTQnNR4UJbH02a1JjOETfCIJhq52U7EUAVTCi5PZOTTmP42gZj/+Al0b4r0I?=
+ =?us-ascii?Q?2Qur1/xuyJ306v0WCyEyT3lB7HUIC+RLrCs5Ypfn0QC9caHGNiK6wwhIcTp5?=
+ =?us-ascii?Q?AVRhcw8HdYVFnzurx6Kp9uVECCSykos40lxsh9A5xmkUgR7WcMnEHXmWPR9B?=
+ =?us-ascii?Q?MKrs0aC97QQVuwdUo4J5tPT5mRSI4iaQcI3RZ/NKd3XAQ27OMCUQX9PCUH+X?=
+ =?us-ascii?Q?4s5EYzKdUSsi9XWEzLScIHNLi7kjljgNRbOs5KmKHo0btG4kVp2cC1bEcTSc?=
+ =?us-ascii?Q?AdvImLrLH6Z6uxBqa5H4eXWOawrcTOpoOHYYlWs/EqimR98iKMn8l+HVCwZZ?=
+ =?us-ascii?Q?LKZt3IBxvjYssgDA1e92pJEYtOcJJ0QlboM6TejXs3uRimw2xmTS7BgBlWMt?=
+ =?us-ascii?Q?emdAEInrnxEeQ2HkLyIEGmkqCx/9WiGVE3ffv4EViAcUEL0ZSh00bZFQmGW3?=
+ =?us-ascii?Q?0PTf4pkCkTdNeYSUwTBb7WtfuT/EAlzqLusyK9ZoJcm84ddcqm5Kdhgx9KhU?=
+ =?us-ascii?Q?MU7/WRXxcfx8IBqg4+0pzk12+P2XUEBurcV74U7PQMSys3zD5cUOVtIv8ee/?=
+ =?us-ascii?Q?S7PE62pIFeXmz6RFqYacbY7809XmotIFWesGFNE0BVS6bl9a4o2vfyzK8q9l?=
+ =?us-ascii?Q?7JEYjyqF0nwvRwGFJVuIXZVHU9lZohQuW6oxD8jXcgrpT/cJit7R0xH7dFU8?=
+ =?us-ascii?Q?Nd4ZCKYamzM0aefyeerHVFDqtGtygGxECgMi8yCMmEkseV1WfA62uS0kupEB?=
+ =?us-ascii?Q?xNO6pqFgLYEqNZklJf79Q5M+KX55Dspixq+EmwtTdTnlI4H/2JR+4sau3wI1?=
+ =?us-ascii?Q?LREQ54Q0bVeAsXUCL2/kR+Y0nWWSM0rgTb29Im0E9JYRrwsJ9nw8fhMOBC7D?=
+ =?us-ascii?Q?W90velSMYDFJMwnQv+lTcVZneEpXdLdWx/gxpCOlhuNiKwRa421qAdNcF4qF?=
+ =?us-ascii?Q?H/GsldBinfCe3dWXt+1egmGG9Oyb5pv4/fDGSw6x77bcS0TdjG12dpG9uj42?=
+ =?us-ascii?Q?T8gdZKTs+0JW1bWq+1esLjhUFMEk2ebQMQ9kXCIaWgUo4NOGnZ2ckNyEExx3?=
+ =?us-ascii?Q?eYUEfWASeLhBWleIz0izk7Bm5YnMs00CzyYx+y1KciuVhicvMvlGcDIKuPZO?=
+ =?us-ascii?Q?mnfmHkwM3w6Elqd2jJe1QnEOYSaQm7tv4TrEEjDX0TXs5iBJAImIyCDJv0yG?=
+ =?us-ascii?Q?wZFcmjYlZRG5wigHCY5td3mPK4LmG22f5DdS4CC08BLNQEq/bcH1J3X8F+GU?=
+ =?us-ascii?Q?95Hh1KneToAD7s1Rxv3fc8m2MLON6ZQp0qUFfCVPBDdMz6uTlNbEAXIuFK0K?=
+ =?us-ascii?Q?CfMBGumGIkK2Wikbr4b5YxQH8A81Sx3tvpZusPnGeZo61JYtG4SHmkt3E+kn?=
+ =?us-ascii?Q?H+WkzDo+gM7GwZTjOxma7TzJsMpQMjTA9LbQyGlopMp5s9RlfJ6+7GtQWE7S?=
+ =?us-ascii?Q?ZQ=3D=3D?=
+X-OriginatorOrg: starfivetech.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6ee2d85a-b40c-4710-56ea-08dcbb57f99c
+X-MS-Exchange-CrossTenant-AuthSource: NT0PR01MB1278.CHNPR01.prod.partner.outlook.cn
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Aug 2024 05:22:50.6241 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 0m8TWUg0d3SFt/td3uWUh4hSymFuwts4GBWBq16Oe8aj8Y15GnEFXviTf2wR/k8Otqh/ByfCPmCrM8E1DVaXVWnHM3MSS1sLqg3cldnPjJ8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: NT0PR01MB0976
+Received-SPF: pass client-ip=2406:e500:4420:2::701;
+ envelope-from=jeeheng.sia@starfivetech.com;
+ helo=CHN02-SH0-obe.outbound.protection.partner.outlook.cn
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,58 +136,20 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Aug 07, 2024 at 10:48:56AM +1000, Richard Henderson wrote:
->On 8/7/24 10:06, Deepak Gupta wrote:
->>commit 16ad9788 [1] restricted icount to qemu-system only. Although
->>assert in `cpu_loop_exec_tb` is on `icount_enabled()` which is 0 when
->>its qemu-user and debug build starts asserting.
->>Move assert for qemu-system.
->>
->>[1] - https://lists.gnu.org/archive/html/qemu-riscv/2024-01/msg00608.html
->>
->>Signed-off-by: Deepak Gupta <debug@rivosinc.com>
->>---
->>  accel/tcg/cpu-exec.c | 2 +-
->>  1 file changed, 1 insertion(+), 1 deletion(-)
->>
->>diff --git a/accel/tcg/cpu-exec.c b/accel/tcg/cpu-exec.c
->>index 245fd6327d..8cc2a6104f 100644
->>--- a/accel/tcg/cpu-exec.c
->>+++ b/accel/tcg/cpu-exec.c
->>@@ -927,9 +927,9 @@ static inline void cpu_loop_exec_tb(CPUState *cpu, TranslationBlock *tb,
->>          return;
->>      }
->>+#ifndef CONFIG_USER_ONLY
->>      /* Instruction counter expired.  */
->>      assert(icount_enabled());
->>-#ifndef CONFIG_USER_ONLY
->>      /* Ensure global icount has gone forward */
->>      icount_update(cpu);
->>      /* Refill decrementer and continue execution.  */
->
->No, this is a real bug.
->
->Just above we handled
->
->  (1) exit for tcg (non-)chaining (!= TB_EXIT_REQUESTED),
->  (2) exit for exception/interrupt (cpu_loop_exit_requested).
->
->The only thing that is left is exit for icount expired.
->And for that we *must* have icount enabled.
->
->How did you encounter this?
+Signed-off-by: Sia Jee Heng <jeeheng.sia@starfivetech.com>
+---
+ tests/qtest/bios-tables-test-allowed-diff.h | 2 ++
+ 1 file changed, 2 insertions(+)
 
-I spent last week incorporating your suggestions. And during the flux of it, I started
-seeing this issue again. As soon as I switch to branch from where I sent the patches out,
-this icount assert issue disappears. So something definitley is triggering the issue.
-It happens only when zicfilp and zicfiss are enabled.
+diff --git a/tests/qtest/bios-tables-test-allowed-diff.h b/tests/qtest/bios-tables-test-allowed-diff.h
+index dfb8523c8b..b2dfcd60dd 100644
+--- a/tests/qtest/bios-tables-test-allowed-diff.h
++++ b/tests/qtest/bios-tables-test-allowed-diff.h
+@@ -1 +1,3 @@
+ /* List of comma-separated changed AML files to ignore */
++"tests/data/acpi/riscv64/virt/SPCR",
++"tests/data/acpi/aarch64/virt/SPCR",
+-- 
+2.34.1
 
-I am still trying to root cause and in a fog right now. Although I am not very well versed
-with tcg internals. So any pointer here which could help me debug it faster would be well
-appreciated. Thanks.
-
-
->
->
->r~
 
