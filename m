@@ -4,48 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B89B6C52D7B
-	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Aug 2024 15:09:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AFD4C52D7C
+	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Aug 2024 15:09:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sdt8R-0004l8-C7; Tue, 13 Aug 2024 11:08:31 -0400
+	id 1sdt8Q-0004m1-IX; Tue, 13 Aug 2024 11:08:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=5955489c63=ian.brockbank@cirrus.com>)
- id 1sdsy5-0002o8-Dn
- for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 10:57:49 -0400
-Received: from mx0b-001ae601.pphosted.com ([67.231.152.168])
+ id 1sdsy3-0002mj-DM
+ for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 10:57:47 -0400
+Received: from mx0a-001ae601.pphosted.com ([67.231.149.25]
+ helo=mx0b-001ae601.pphosted.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=5955489c63=ian.brockbank@cirrus.com>)
- id 1sdsxy-0001HF-NM
- for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 10:57:49 -0400
-Received: from pps.filterd (m0077474.ppops.net [127.0.0.1])
- by mx0b-001ae601.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 47D3lot8032273;
- Tue, 13 Aug 2024 09:57:00 -0500
+ id 1sdsxz-0001HP-2O
+ for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 10:57:47 -0400
+Received: from pps.filterd (m0077473.ppops.net [127.0.0.1])
+ by mx0a-001ae601.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 47D3w1Mo009427;
+ Tue, 13 Aug 2024 09:57:07 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cirrus.com; h=cc
  :content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=
- PODMain02222019; bh=J0PADe7FQeO3Nyh9aV+HMynS+TbVOtkvemNHw7OdZkw=; b=
- BwWiGULGzdNYYLQhR2CKTGgPaH1EJsS8hVqfMCo91JF2RSl0wnooQWj2YdBVWtQ7
- 9rzcfVtzZVprLlqy5XVQ0kZnGZMKEFeyx8CmqT1aahWsJiwpNCiZKLSzHQeACYQu
- 9LOEVFQyeQO+OrFQz0Eyn95SqUBg6n8TiFqGHQpYkAFpt8y7ChcNaNeD3l0VzwiN
- 2bJf+ktyvkgAVZHszV1lPf0gbY+z8J0mY3qCsmMybUvnWJoDBwMooboLFYXpWRnl
- HRIkZaj+EqLRuYvaenr86qSEbSs2p2CWjwP+jXKaAJDgtNEinUuVW7KZPKZSBOQn
- UAWFooSe1FBH7S/RnbLPXA==
+ PODMain02222019; bh=dFX7zjM6/EQ0rdtiPDHHV2V4nGdTnBrPX9hsi0P6VBk=; b=
+ EsiNsvVg++G00FSnypLVS//oMXdAfIMc9mVwVOyYY7EtaA1lK2k9Ak3ye0zVCz97
+ iC24RC0L9BKNefOMesUSwpnf6Xqk+gWJb7bf0l5BBjqm4PpkRvTQks0wgl6p1bQI
+ HaSnAClZGWxlGsKfMWE8pacG4kYqBxMxRBRbStryMisZN9x/QfBYyGPDG06JSR+y
+ QzxZTMg+35kO/RsAeG0s0i6nH5numkQw9NYATyr/6HtjnVaV6Q2zS9kBed5FoSU5
+ PcpezMAB5Y7WMax4g8Dl4ZBO1VcuxVuBXn25eBJlbyezU6/G+8HCUQjRkvI1rtja
+ 4P6dfMZDOvuBXhGE19lCsQ==
 Received: from ausex01.ad.cirrus.com ([141.131.3.19])
- by mx0b-001ae601.pphosted.com (PPS) with ESMTPS id 40x4mhkc2b-1
+ by mx0a-001ae601.pphosted.com (PPS) with ESMTPS id 40x5kwkdet-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 13 Aug 2024 09:57:00 -0500 (CDT)
+ Tue, 13 Aug 2024 09:57:07 -0500 (CDT)
 Received: from ausex02.ad.cirrus.com (141.131.37.96) by ausex01.ad.cirrus.com
  (141.131.37.95) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.9; Tue, 13 Aug
- 2024 09:56:59 -0500
+ 2024 09:57:05 -0500
 Received: from EDIN7BQBTG3.ad.cirrus.com (141.131.38.212) by
  anon-ausex02.ad.cirrus.com (141.131.37.96) with Microsoft SMTP Server id
- 15.2.1544.9 via Frontend Transport; Tue, 13 Aug 2024 09:56:57 -0500
+ 15.2.1544.9 via Frontend Transport; Tue, 13 Aug 2024 09:57:04 -0500
 From: Ian Brockbank <Ian.Brockbank@cirrus.com>
 To: <qemu-riscv@nongnu.org>
 CC: Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis
@@ -53,19 +54,19 @@ CC: Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis
  <liwei1518@gmail.com>, Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Ian Brockbank
  <ian.brockbank@cirrus.com>, LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH] target/riscv: Add CLIC CSR mintstatus
-Date: Tue, 13 Aug 2024 15:54:04 +0100
-Message-ID: <20240813145636.12223-4-Ian.Brockbank@cirrus.com>
+Subject: [PATCH] target/riscv: Update CSR xnxti in CLIC mode
+Date: Tue, 13 Aug 2024 15:54:07 +0100
+Message-ID: <20240813145636.12223-7-Ian.Brockbank@cirrus.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240813145636.12223-1-Ian.Brockbank@cirrus.com>
 References: <20240813145636.12223-1-Ian.Brockbank@cirrus.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: Bg2Qz410NfI5kPyK6mULX93aAx2pc5e5
-X-Proofpoint-GUID: Bg2Qz410NfI5kPyK6mULX93aAx2pc5e5
+X-Proofpoint-ORIG-GUID: rcANxZFQnc957gOYZ0pY6U7D7ONDkQ2X
+X-Proofpoint-GUID: rcANxZFQnc957gOYZ0pY6U7D7ONDkQ2X
 X-Proofpoint-Spam-Reason: orgsafe
-Received-SPF: pass client-ip=67.231.152.168;
+Received-SPF: pass client-ip=67.231.149.25;
  envelope-from=prvs=5955489c63=ian.brockbank@cirrus.com;
  helo=mx0b-001ae601.pphosted.com
 X-Spam_score_int: -27
@@ -73,10 +74,10 @@ X-Spam_score: -2.8
 X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01,
- T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Tue, 13 Aug 2024 11:08:14 -0400
+X-Mailman-Approved-At: Tue, 13 Aug 2024 11:08:13 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -93,147 +94,243 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Ian Brockbank <ian.brockbank@cirrus.com>
 
-CSR mintstatus holds the active interrupt level for each supported
-privilege mode. sintstatus, and user, uintstatus, provide restricted
-views of mintstatus.
+The CSR can be used by software to service the next horizontal interrupt
+when it has greater level than the saved interrupt context
+(held in xcause`.pil`) and greater level than the interrupt threshold of
+the corresponding privilege mode,
 
-Signed-off-by: Ian Brockbank <ian.brockbank@cirrus.com>
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Signed-off-by: Ian Brockbank <ian.brockbank@cirrus.com>
 ---
- target/riscv/cpu.h      |  3 +++
- target/riscv/cpu_bits.h | 11 +++++++++++
- target/riscv/csr.c      | 31 +++++++++++++++++++++++++++++++
- 3 files changed, 45 insertions(+)
-
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 1619c3acb6..95303f50d3 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -259,6 +259,7 @@ struct CPUArchState {
-     bool software_seip;
-
-     uint64_t miclaim;
-+    uint64_t mintstatus; /* clic-spec */
-
-     uint64_t mie;
-     uint64_t mideleg;
-@@ -461,6 +462,8 @@ struct CPUArchState {
-     QEMUTimer *vstimer; /* Internal timer for VS-mode interrupt */
-     bool vstime_irq;
-
-+    void *clic;       /* clic interrupt controller */
-+
-     hwaddr kernel_addr;
-     hwaddr fdt_addr;
+ target/riscv/cpu_bits.h |  25 +++++++++
+ target/riscv/csr.c      | 111 ++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 136 insertions(+)
 
 diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 32b068f18a..2e65495b54 100644
+index 279a6f889b..3744b34504 100644
 --- a/target/riscv/cpu_bits.h
 +++ b/target/riscv/cpu_bits.h
-@@ -165,6 +165,7 @@
+@@ -166,6 +166,7 @@
  #define CSR_MCAUSE          0x342
  #define CSR_MTVAL           0x343
  #define CSR_MIP             0x344
-+#define CSR_MINTSTATUS      0xfb1 /* clic-spec-draft */
++#define CSR_MNXTI           0x345 /* clic-spec-draft */
+ #define CSR_MINTSTATUS      0xfb1 /* clic-spec-draft */
+ #define CSR_MINTTHRESH      0x347 /* clic-spec-draft */
 
- /* Machine-Level Window to Indirectly Accessed Registers (AIA) */
- #define CSR_MISELECT        0x350
-@@ -206,6 +207,7 @@
+@@ -210,6 +211,7 @@
  #define CSR_SCAUSE          0x142
  #define CSR_STVAL           0x143
  #define CSR_SIP             0x144
-+#define CSR_SINTSTATUS      0xdb1 /* clic-spec-draft */
++#define CSR_SNXTI           0x145 /* clic-spec-draft */
+ #define CSR_SINTSTATUS      0xdb1 /* clic-spec-draft */
+ #define CSR_SINTTHRESH      0x147 /* clic-spec-draft */
 
- /* Sstc supervisor CSRs */
- #define CSR_STIMECMP        0x14D
-@@ -733,6 +735,15 @@ typedef enum RISCVException {
- #define SIP_SEIP                           MIP_SEIP
- #define SIP_LCOFIP                         MIP_LCOFIP
+@@ -561,6 +563,8 @@
+ #define MSTATUS_GVA         0x4000000000ULL
+ #define MSTATUS_MPV         0x8000000000ULL
 
-+/* mintstatus */
-+#define MINTSTATUS_MIL                     0xff000000 /* mil[31:24] */
-+#define MINTSTATUS_SIL                     0x0000ff00 /* sil[15:8] */
-+#define MINTSTATUS_UIL                     0x000000ff /* uil[7:0] */
++#define MSTATUS_WRITE_MASK  0x0000001f
 +
-+/* sintstatus */
-+#define SINTSTATUS_SIL                     0x0000ff00 /* sil[15:8] */
-+#define SINTSTATUS_UIL                     0x000000ff /* uil[7:0] */
+ #define MSTATUS64_UXL       0x0000000300000000ULL
+ #define MSTATUS64_SXL       0x0000000C00000000ULL
+
+@@ -754,6 +758,27 @@ typedef enum RISCVException {
+ #define SINTSTATUS_SIL                     0x0000ff00 /* sil[15:8] */
+ #define SINTSTATUS_UIL                     0x000000ff /* uil[7:0] */
+
++/* mcause */
++#define MCAUSE_INT                         (1 << (TARGET_LONG_BITS - 1))
++#define MCAUSE_MINHV                       0x40000000 /* minhv */
++#define MCAUSE_MPP                         0x30000000 /* mpp[1:0] */
++#define MCAUSE_MPIE                        0x08000000 /* mpie */
++#define MCAUSE_MPIL                        0x00ff0000 /* mpil[7:0] */
++#define MCAUSE_EXCCODE                     0x00000fff /* exccode[11:0] */
 +
- /* MIE masks */
- #define MIE_SEIE                           (1 << IRQ_S_EXT)
- #define MIE_UEIE                           (1 << IRQ_U_EXT)
++/* scause */
++#define SCAUSE_INT                         (1 << (TARGET_LONG_BITS - 1))
++#define SCAUSE_SINHV                       0x40000000 /* sinhv */
++#define SCAUSE_SPP                         0x10000000 /* spp */
++#define SCAUSE_SPIE                        0x08000000 /* spie */
++#define SCAUSE_SPIL                        0x00ff0000 /* spil[7:0] */
++#define SCAUSE_EXCCODE                     0x00000fff /* exccode[11:0] */
++
++/* mcause & scause */
++#define XCAUSE_XPP_SHIFT                   28
++#define XCAUSE_XPIE_SHIFT                  27
++#define XCAUSE_XPIL_SHIFT                  16
++
+ /* mtvec & stvec */
+ #define XTVEC_MODE                         0x03
+ #define XTVEC_SUBMODE                      0x3c
 diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index ea3560342c..f9ed7b9079 100644
+index be0071fd25..813a5b927f 100644
 --- a/target/riscv/csr.c
 +++ b/target/riscv/csr.c
-@@ -578,6 +578,16 @@ static RISCVException debug(CPURISCVState *env, int cs=
-rno)
+@@ -19,6 +19,7 @@
 
-     return RISCV_EXCP_ILLEGAL_INST;
- }
-+
-+static int clic(CPURISCVState *env, int csrno)
-+{
-+    if (env->clic) {
-+        return RISCV_EXCP_NONE;
-+    }
-+
-+    return RISCV_EXCP_ILLEGAL_INST;
-+}
-+
- #endif
-
- static RISCVException seed(CPURISCVState *env, int csrno)
-@@ -2887,6 +2897,12 @@ static RISCVException rmw_mviph(CPURISCVState *env, =
+ #include "qemu/osdep.h"
+ #include "qemu/log.h"
++#include "qemu/main-loop.h"
+ #include "qemu/timer.h"
+ #include "cpu.h"
+ #include "tcg/tcg-cpu.h"
+@@ -2936,6 +2937,77 @@ static RISCVException rmw_mviph(CPURISCVState *env, =
 int csrno,
      return ret;
  }
 
-+static int read_mintstatus(CPURISCVState *env, int csrno, target_ulong *va=
-l)
++static bool get_xnxti_status(CPURISCVState *env)
 +{
-+    *val =3D env->mintstatus;
++    int clic_irq, clic_priv, clic_il, pil;
++
++    if (!env->exccode) { /* No interrupt */
++        return false;
++    }
++    /* The system is not in a CLIC mode */
++    if (!riscv_clic_is_clic_mode(env)) {
++        return false;
++    } else {
++        riscv_clic_decode_exccode(env->exccode, &clic_priv, &clic_il,
++                                  &clic_irq);
++
++        if (env->priv =3D=3D PRV_M) {
++            pil =3D MAX(get_field(env->mcause, MCAUSE_MPIL), env->mintthre=
+sh);
++        } else if (env->priv =3D=3D PRV_S) {
++            pil =3D MAX(get_field(env->scause, SCAUSE_SPIL), env->sintthre=
+sh);
++        } else {
++            qemu_log_mask(LOG_GUEST_ERROR,
++                          "CSR: rmw xnxti with unsupported mode\n");
++            exit(1);
++        }
++
++        if ((clic_priv !=3D env->priv) || /* No horizontal interrupt */
++            (clic_il <=3D pil) || /* No higher level interrupt */
++            (riscv_clic_shv_interrupt(env->clic, clic_irq))) {
++            /* CLIC vector mode */
++            return false;
++        } else {
++            return true;
++        }
++    }
++}
++
++static int rmw_mnxti(CPURISCVState *env, int csrno, target_ulong *ret_valu=
+e,
++                     target_ulong new_value, target_ulong write_mask)
++{
++    int clic_priv, clic_il, clic_irq;
++    bool ready;
++    if (write_mask) {
++        env->mstatus |=3D new_value & (write_mask & MSTATUS_WRITE_MASK);
++    }
++
++    BQL_LOCK_GUARD();
++
++    ready =3D get_xnxti_status(env);
++    if (ready) {
++        riscv_clic_decode_exccode(env->exccode, &clic_priv, &clic_il,
++                                  &clic_irq);
++        if (write_mask) {
++            bool edge =3D riscv_clic_edge_triggered(env->clic,  clic_irq);
++            if (edge) {
++                riscv_clic_clean_pending(env->clic, clic_irq);
++            }
++            env->mintstatus =3D set_field(env->mintstatus,
++                                        MINTSTATUS_MIL, clic_il);
++            env->mcause =3D set_field(env->mcause, MCAUSE_EXCCODE, clic_ir=
+q);
++        }
++        if (ret_value) {
++            *ret_value =3D (env->mtvt & ~0x3f) + sizeof(target_ulong) * cl=
+ic_irq;
++        }
++    } else {
++        if (ret_value) {
++            *ret_value =3D 0;
++        }
++    }
++
 +    return RISCV_EXCP_NONE;
 +}
 +
- /* Supervisor Trap Setup */
- static RISCVException read_sstatus_i128(CPURISCVState *env, int csrno,
-                                         Int128 *val)
-@@ -3298,6 +3314,14 @@ static RISCVException rmw_siph(CPURISCVState *env, i=
+ static int read_mintstatus(CPURISCVState *env, int csrno, target_ulong *va=
+l)
+ {
+     *val =3D env->mintstatus;
+@@ -3401,6 +3473,43 @@ static RISCVException rmw_siph(CPURISCVState *env, i=
 nt csrno,
      return ret;
  }
 
-+static int read_sintstatus(CPURISCVState *env, int csrno, target_ulong *va=
-l)
++static int rmw_snxti(CPURISCVState *env, int csrno, target_ulong *ret_valu=
+e,
++                     target_ulong new_value, target_ulong write_mask)
 +{
-+    /* sintstatus is a filtered view of mintstatus with the PRV_M removed =
-*/
-+    target_ulong mask =3D SINTSTATUS_SIL | SINTSTATUS_UIL;
-+    *val =3D env->mintstatus & mask;
++    int clic_priv, clic_il, clic_irq;
++    bool ready;
++    if (write_mask) {
++        env->mstatus |=3D new_value & (write_mask & MSTATUS_WRITE_MASK);
++    }
++
++    BQL_LOCK_GUARD();
++
++    ready =3D get_xnxti_status(env);
++    if (ready) {
++        riscv_clic_decode_exccode(env->exccode, &clic_priv, &clic_il,
++                                  &clic_irq);
++        if (write_mask) {
++            bool edge =3D riscv_clic_edge_triggered(env->clic, clic_irq);
++            if (edge) {
++                riscv_clic_clean_pending(env->clic, clic_irq);
++            }
++            /* update the PRV_S parts of mintstatus */
++            env->mintstatus =3D set_field(env->mintstatus,
++                                        MINTSTATUS_SIL, clic_il);
++            env->scause =3D set_field(env->scause, SCAUSE_EXCCODE, clic_ir=
+q);
++        }
++        if (ret_value) {
++            *ret_value =3D (env->stvt & ~0x3f) + sizeof(target_ulong) * cl=
+ic_irq;
++        }
++    } else {
++        if (ret_value) {
++            *ret_value =3D 0;
++        }
++    }
++
 +    return RISCV_EXCP_NONE;
 +}
 +
- /* Supervisor Protection and Translation */
- static RISCVException read_satp(CPURISCVState *env, int csrno,
-                                 target_ulong *val)
-@@ -5594,6 +5618,13 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D {
-                              write_mhpmcounterh                         },
-     [CSR_MHPMCOUNTER31H] =3D { "mhpmcounter31h", mctr32,  read_hpmcounterh=
-,
-                              write_mhpmcounterh                         },
-+
-+    /* Machine Mode Core Level Interrupt Controller */
-+    [CSR_MINTSTATUS]     =3D { "mintstatus", clic,  read_mintstatus       =
-},
-+
-+    /* Supervisor Mode Core Level Interrupt Controller */
-+    [CSR_SINTSTATUS]     =3D { "sintstatus", clic,  read_sintstatus       =
-},
-+
-     [CSR_SCOUNTOVF]      =3D { "scountovf", sscofpmf,  read_scountovf,
-                              .min_priv_ver =3D PRIV_VERSION_1_12_0 },
+ static int read_sintstatus(CPURISCVState *env, int csrno, target_ulong *va=
+l)
+ {
+     /* sintstatus is a filtered view of mintstatus with the PRV_M removed =
+*/
+@@ -5720,12 +5829,14 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D {
 
+     /* Machine Mode Core Level Interrupt Controller */
+     [CSR_MTVT]           =3D { "mtvt",       clic,  read_mtvt, write_mtvt =
+},
++    [CSR_MNXTI]          =3D { "mnxti",      clic,  NULL, NULL, rmw_mnxti =
+},
+     [CSR_MINTSTATUS]     =3D { "mintstatus", clic,  read_mintstatus       =
+},
+     [CSR_MINTTHRESH]     =3D { "mintthresh", clic,  read_mintthresh,
+                              write_mintthresh },
+
+     /* Supervisor Mode Core Level Interrupt Controller */
+     [CSR_STVT]           =3D { "stvt",       clic,  read_stvt, write_stvt =
+},
++    [CSR_SNXTI]          =3D { "snxti",      clic,  NULL, NULL, rmw_snxti =
+},
+     [CSR_SINTSTATUS]     =3D { "sintstatus", clic,  read_sintstatus       =
+},
+     [CSR_SINTTHRESH]     =3D { "sintthresh", clic,  read_sintthresh,
+                              write_sintthresh },
 --
 2.46.0.windows.1
 
