@@ -4,63 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8554C52D7C
-	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Aug 2024 20:24:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37F4DC52D7C
+	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Aug 2024 20:24:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sdy3a-0004mi-F2; Tue, 13 Aug 2024 16:23:51 -0400
+	id 1sdy3O-0004L0-9T; Tue, 13 Aug 2024 16:23:38 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sdy3W-0004en-SW
- for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:23:46 -0400
-Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
+ id 1sdy3M-0004IS-2e
+ for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:23:36 -0400
+Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sdy3M-0006BE-M7
- for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:23:45 -0400
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-42816ca782dso45267235e9.2
- for <qemu-riscv@nongnu.org>; Tue, 13 Aug 2024 13:23:36 -0700 (PDT)
+ id 1sdy3K-0006Am-6a
+ for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:23:35 -0400
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-36dd8a35722so2216484f8f.1
+ for <qemu-riscv@nongnu.org>; Tue, 13 Aug 2024 13:23:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723580615; x=1724185415; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=4KDdZuSuiVhnWoZHnKqWrh7zo/0jiKBE4EcFSl+sGnw=;
- b=uz+LQiadjM+BmePIRXmF7F+6pDYcAAsc30SxzpmA7qNHYS6KfUN0wO3tPMhlg2ZtBO
- 3lLjzB3UTlAnNqdx7OPBJaK3b5kmAvIWsUWp3ebExDOK75R0mlZthjLNj5aOkXdFp5cu
- 22/YOb8rwZsh4WTITDU53smKE47TzwZ60Je2/E9o8+KPib3lkf230/47gw5O9hIl0MXH
- q5/yGiqYNyhAjGKgiANErKn98y8CNEq8Z71Qp3rzgg5jxCGf7A1bWmHC/888PDZ7iYeK
- Y/1Sy7wZAvb2CPof6/GJIWWNMlysmzACfw7ZALGSOvP2adL7w+efkBBpIbBJshAVEz1t
- Yoxg==
+ d=linaro.org; s=google; t=1723580613; x=1724185413; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ri3Nj6KnAAwYce4sttu64DfuUubHB313LE/IKlWaOgg=;
+ b=aeEU176dq4nhJKQTyjoAkDam/7Ylawm+ubG5pALrrGqOqvo7D+SfVes27PEJvSghsm
+ /DdnJj0wITFC+TsRbSq293g3hCzg8qpTD8P+yhvbUyypiAIh6f9XGC2M6fP2+TewpUj8
+ DGi6AGaPoMHbEIIc5S4XmNbXnDKtHFZSmRJpPrc8UjepXcnkEIyDQgvTux3P5gwO2inM
+ avzlETjIQUok5CsFWY5u0/7eUwptxTn4rvLFdESMWsnZ/eXOE75Jr0H1c4SZKhxCl7Wp
+ 09xHIvBuupvdodwOS72T2VtOPPygxK9FOeb6TZVc05T4jDTshk4m25SJ7vryjpTnPaVi
+ mKMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723580615; x=1724185415;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=4KDdZuSuiVhnWoZHnKqWrh7zo/0jiKBE4EcFSl+sGnw=;
- b=H/TL/02V+EoEqny8IHFj6LXjiHRFIFMPN3ftSPSM3qKRTei1AjO3sdFed3IVKIFtr0
- F9TITRJg+5rzkR79EDShsHgJyGuy9OiGmmOes3xzaTCtOh08XZIS8PUyrDD/IpuuBhSL
- EAYQM+2X8L+TN6dLPL+LwA0aFPQylhT82abCymYexndiOfhzsODdIO5cspjifvWjKpw4
- BbQX0dqENH4iwoO6dkA6z3rfzpD03XXAG8WZu3K9aRa0GlSK1izCRKUbQ53y3cKn4Lkn
- rYdARsUt3ueq2AezzrxUyy9oweGBL9IpPPvzhJtVUf+ylrVC/qZPX2wR9ZNv3ETqJ8/s
- elWQ==
+ d=1e100.net; s=20230601; t=1723580613; x=1724185413;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ri3Nj6KnAAwYce4sttu64DfuUubHB313LE/IKlWaOgg=;
+ b=qUOtLtTP1cz3AQ10+L3NoaIOWk8b8nn+pxx3AbiRguQKAbRpzOMe2OJ3+LwtHeJlrl
+ 02+/b1xGhS4cJva8xQN+LY0kzXMH1cUU0KHDsizHqiosrtyjI5HVOd/ngh6pA5+Py13h
+ RS4EhR725AK6ShtBsIbWx7yZD6JTvWyrXOuLqT2PSFYgoWIvsgGWOAR4OuebTTAYUMN/
+ QhY7VuYRjaO8S8ccPeULtcE0YCxd8seGEOMxwrEvv69sON6vmhem8ajgcCMaPzpEXfuX
+ 2oAyKwdICJp/wQk/vx/nC7goTsoCYyxactRf/NbwHB+A3ez0HLvuuJw8TyLVuRNhSJFT
+ 3DXw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW7AJD6ZcjAujLeDXDnZhT/CDIG4dhlRviCaw8jL+hhc5xKmPJ7KA0bx3y/ZohQAnCcBcirU8d5q+uCbh2bvkL22wOVSqM=
-X-Gm-Message-State: AOJu0YwE2rlaGqMsnMUq/dA/Vs+XPiDPMm0l/3NBJIQn30ZuZBJC/t3D
- BvrAG0Nl+bL92lhPSXvXfKmp7fCXqjvKHI28ie01YKh+xP0NtM3Ize7N/KACjL0=
-X-Google-Smtp-Source: AGHT+IGG4BwgTjQUccNi8P3sQj9A6II4AYnB4PGbLoGYZE4fKFdWnkZpoRV3PqMexpKds/kZ78uLjw==
-X-Received: by 2002:a05:600c:511e:b0:426:61ef:ec36 with SMTP id
- 5b1f17b1804b1-429dd1e551amr4907685e9.0.1723580614570; 
- Tue, 13 Aug 2024 13:23:34 -0700 (PDT)
+ AJvYcCU0dOZNdTz5KfI/fe7LMlKJVEILs9BzfcTsqvxLVZLr+V0hxL5e7ojwQl9bOlkOSLG/Nhbnntyg+Cpt7/AbIb/xuF3PazI=
+X-Gm-Message-State: AOJu0YxvuVkv0C57v6GOtYfwu+TK9VbNSW4UtsdCJvFpL2Hx2xwyaL1b
+ j5WOBHK9sXjItIjMFfjQyPGScQXfdP9VPbCZR07jjAgC6X+sG8hJz/9CQuWhy18=
+X-Google-Smtp-Source: AGHT+IFD8ANyBvg4OSR2ZhYQmfVP1TQ7DO4yNZiDq9xDn7AZHbSFs0ZxBh7mRmBN4sy1ikDi4bR0Aw==
+X-Received: by 2002:adf:a21a:0:b0:360:9cf4:58ce with SMTP id
+ ffacd0b85a97d-371778095eamr386414f8f.46.1723580612100; 
+ Tue, 13 Aug 2024 13:23:32 -0700 (PDT)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-429deb810f5sm667535e9.44.2024.08.13.13.23.30
+ ffacd0b85a97d-36e4cfee676sm11229207f8f.49.2024.08.13.13.23.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Tue, 13 Aug 2024 13:23:30 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id A52215F92C;
+ by draig.lan (Postfix) with ESMTP id 5F5195F7A3;
  Tue, 13 Aug 2024 21:23:29 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -91,26 +90,23 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Jason Wang <jasowang@redhat.com>, Bin Meng <bmeng.cn@gmail.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Gustavo Romero <gustavo.romero@linaro.org>
-Subject: [PATCH v2 03/21] configure: Fix arch detection for GDB_HAS_MTE
-Date: Tue, 13 Aug 2024 21:23:11 +0100
-Message-Id: <20240813202329.1237572-4-alex.bennee@linaro.org>
+ Wainer dos Santos Moschetta <wainersm@redhat.com>
+Subject: [PATCH v2 00/21] Various fixes and tweaks for 9.1-rc2/3
+Date: Tue, 13 Aug 2024 21:23:08 +0100
+Message-Id: <20240813202329.1237572-1-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240813202329.1237572-1-alex.bennee@linaro.org>
-References: <20240813202329.1237572-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::430;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x430.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -126,33 +122,78 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Gustavo Romero <gustavo.romero@linaro.org>
+As usual during soft freeze I switch to cleaning up the various
+niggles and bugs which have accumulated over the years.
 
-GDB_HAS_MTE must only be set if GDB supports the aarch64 arch, so the
-test if "aarch64" string is present must be against GDB-related
-'$gdb_arches' variable and not against '$arch' variable.
+New for this iteration are some late breaking plugin updates, fixes
+for record/replay and a few documentation updates. Everything is
+reviewed so I will roll a pull request later this week.
 
-Signed-off-by: Gustavo Romero <gustavo.romero@linaro.org>
-Message-Id: <20240804161850.2646299-2-gustavo.romero@linaro.org>
-Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Message-Id: <20240807114059.2339021-4-alex.bennee@linaro.org>
----
- configure | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Alex Bennée (2):
+  Makefile: trigger re-configure on updated pythondeps
+  target/i386: allow access_ptr to force slow path on failed probe
 
-diff --git a/configure b/configure
-index 019fcbd0ef..a3aa257fd3 100755
---- a/configure
-+++ b/configure
-@@ -1673,7 +1673,7 @@ for target in $target_list; do
-           echo "GDB=$gdb_bin" >> $config_target_mak
-       fi
- 
--      if test "${arch}" = "aarch64" && version_ge ${gdb_version##* } 15.0; then
-+      if test "${gdb_arches#*aarch64}" != "$gdb_arches" && version_ge ${gdb_version##* } 15.0; then
-           echo "GDB_HAS_MTE=y" >> $config_target_mak
-       fi
- 
+Gustavo Romero (3):
+  configure: Fix arch detection for GDB_HAS_MTE
+  configure: Avoid use of param. expansion when using gdb_version
+  configure: Fix GDB version detection for GDB_HAS_MTE
+
+Nicholas Piggin (10):
+  scripts/replay-dump.py: Update to current rr record format
+  scripts/replay-dump.py: rejig decoders in event number order
+  tests/avocado: excercise scripts/replay-dump.py in replay tests
+  replay: allow runstate shutdown->running when replaying trace
+  Revert "replay: stop us hanging in rr_wait_io_event"
+  tests/avocado: replay_kernel.py add x86-64 q35 machine test
+  chardev: set record/replay on the base device of a muxed device
+  virtio-net: Use replay_schedule_bh_event for bhs that affect machine
+    state
+  virtio-net: Use virtual time for RSC timers
+  savevm: Fix load_snapshot error path crash
+
+Philippe Mathieu-Daudé (2):
+  tests/avocado: Re-enable gdbsim-r5f562n8 testing U-Boot
+  buildsys: Fix building without plugins on Darwin
+
+Pierrick Bouvier (2):
+  docs/devel: update tcg-plugins page
+  plugins: fix race condition with scoreboards
+
+Stefan Weil (1):
+  docs: Fix some typos (found by typos) and grammar issues
+
+Stefano Garzarella (1):
+  scripts/checkpatch: more checks on files imported from Linux
+
+ docs/about/emulation.rst                  |  49 ++++++-
+ docs/devel/migration/uadk-compression.rst |   4 +-
+ docs/devel/tcg-plugins.rst                |  13 +-
+ docs/interop/qemu-ga.rst                  |   2 +-
+ docs/tools/qemu-vmsr-helper.rst           |   4 +-
+ configure                                 |   8 +-
+ Makefile                                  |   3 +-
+ qapi/rocker.json                          |   4 +-
+ include/exec/memory.h                     |   2 +-
+ include/sysemu/replay.h                   |   5 -
+ include/sysemu/runstate.h                 |   1 +
+ accel/tcg/tcg-accel-ops-rr.c              |   2 +-
+ chardev/char.c                            |  71 ++++++---
+ hw/arm/smmu-common.c                      |   2 +-
+ hw/net/virtio-net.c                       |  17 +--
+ migration/savevm.c                        |   1 +
+ plugins/core.c                            |  43 ++++--
+ qga/main.c                                |   2 +-
+ replay/replay.c                           |  23 +--
+ system/runstate.c                         |  31 +++-
+ target/i386/tcg/access.c                  |  27 ++--
+ plugins/meson.build                       |  50 +++----
+ scripts/checkpatch.pl                     |  24 ++++
+ scripts/replay-dump.py                    | 167 +++++++++++++++-------
+ tests/avocado/machine_rx_gdbsim.py        |   2 -
+ tests/avocado/replay_kernel.py            |  31 +++-
+ tests/avocado/replay_linux.py             |  10 ++
+ 27 files changed, 406 insertions(+), 192 deletions(-)
+
 -- 
 2.39.2
 
