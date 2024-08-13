@@ -4,87 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB5BAC52D7B
-	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Aug 2024 07:43:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A2E5C52D7B
+	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Aug 2024 08:01:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sdmBf-0005cB-Oh; Tue, 13 Aug 2024 03:43:23 -0400
+	id 1sdmSZ-00017O-M7; Tue, 13 Aug 2024 04:00:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sdmBc-0005YL-PC
- for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 03:43:21 -0400
-Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1sdmSL-00014E-Af
+ for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 04:00:39 -0400
+Received: from mail-ed1-x52b.google.com ([2a00:1450:4864:20::52b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sdmBa-0007vd-TB
- for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 03:43:20 -0400
-Received: by mail-pf1-x430.google.com with SMTP id
- d2e1a72fcca58-70eb0ae23e4so3800015b3a.0
- for <qemu-riscv@nongnu.org>; Tue, 13 Aug 2024 00:43:18 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1sdmSJ-0001iL-0G
+ for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 04:00:37 -0400
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-5b8c2a6135eso1637192a12.0
+ for <qemu-riscv@nongnu.org>; Tue, 13 Aug 2024 01:00:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723534997; x=1724139797; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=KBSwiNqa049bJ062w81vEeg7cRT0njdTw2Mnb0cEUns=;
- b=bDVG3A5qnP+mRukh24WMnz7inA0stRmD2a/Zh4mePMoUmKOVijCtZkyZF5suVIWk/I
- OrTHmeHLL5b5vd/Wg3eaqjIGFzUqS9rNn5KjMyq/zC60s2YqO48rIyp4q8gtnsXzkaHX
- O9/GxYyqD3mgPfbxNvjnHKRWYagLwsHZFgjos6gmbUqAbZ0xylOaFqDJhmXwBjTm4Dh1
- wTRlGHvBnt1SuAh/dLwmnL1Xe8tT2lYP36gMVsn/rL5v5mNoqgDKhcEfpqjyfWG+PB65
- /m63lXQH6lPngwe0M3CQF59hfDBJi9Nag2/zjgfTELMXCA6EuVjQ3FHGdltEepqxEVpd
- DsAg==
+ d=ventanamicro.com; s=google; t=1723536033; x=1724140833; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=iyM7LiHcQRe8KaM/KoBlJTcbWRNr8/ceb7oLFAsUQxk=;
+ b=fMSMW5bVjlO62FQvFR92RC+nTrl8xRXgFDHr5BYZnv9jAcf+C8npH/Q30V44RVktjc
+ Js1cmhgi14KxqdZFzhZ52Zux5FrcCciil+RI9RpTny4QJTxvnQFNR1TmPRQvmlzii0ls
+ 0YBXXKc61dd/UECmomx5YDoO65M5ng4eM6rGoB8v8fpaJDjcOQF3YCXPv4XK/RwGzFMC
+ 4z0idWcz9lxdELBvDZD74i5lqmus4DcgxOCmPIGHXdAbW23eu4OtHfje3TKW/70Kh+8z
+ BPu2Vfd5f+PcpXFvAxD0K/pZReJOeJTq/oX6uoMs9PDJlF3K0P2+/Nu/duJww34k28bN
+ 0uUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723534997; x=1724139797;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=KBSwiNqa049bJ062w81vEeg7cRT0njdTw2Mnb0cEUns=;
- b=VLCiqeaVY/oXd1VzYpSbdFPSAOFb4wrJwosujCCJkJPZiZYBVxTRmoHrWVAJ9bqdn4
- CgmU7jtZaML28Pwy9kV/kXVA+0zlMiPGsK/n9nEA2ZAqgl7q2FunsJDw1mttKSt6Tj3b
- x9GafJxlPzA4S0Vp6TQbNOPfkw4PZoEwpnjPZ/KpFOd1KEJaUxeNNxCUWZ7DBh5i+YZ1
- EgmvkS7+69IjFiDJJK87Qj+jv7AsU+XVW+yBYX4nkogC4eXY/uTbrTBC8/DhEZofIFr1
- 4Frmajk1a6oDW9xBg3wnwJL/m48te4oZdql9xuylWgrssJSwrVZTIYRnIMrosSqxH5n/
- Pd4w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUEA4HKwvDRqfxmEBMwC3VPob3ECMujSg1Qy1zsW254hMYVH7DPShLkjI9FGS1RR42l6487IoLQFQGNhX3t13u8XXfJwDU=
-X-Gm-Message-State: AOJu0Yz0onm+m8s5AjuGwulsOzzX4bWenyVG1ZTEeS3oslqUXgLa8wrg
- 2YqdPR3FuJTrGO+JibGZwttZYVLX+5PRiff3pwYLzZbfX/mO5vLdrWUQ5pQOjng=
-X-Google-Smtp-Source: AGHT+IFYZ+r57K3J4+uxAIUAAphOygIurLmP5x4FhBADzZviVBu+DQepn+S6wJfVUrmMHkmmIcv/WQ==
-X-Received: by 2002:a05:6a00:1a8c:b0:70d:244b:cad9 with SMTP id
- d2e1a72fcca58-712552273camr3231565b3a.28.1723534997064; 
- Tue, 13 Aug 2024 00:43:17 -0700 (PDT)
-Received: from [192.168.1.113] ([203.30.4.111])
+ d=1e100.net; s=20230601; t=1723536033; x=1724140833;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=iyM7LiHcQRe8KaM/KoBlJTcbWRNr8/ceb7oLFAsUQxk=;
+ b=Dbv3sO22Vf44bL5pPV7ZowbA7kN53PAAKTo5WZu1WG5dT1zCl+LHcqPFVxjvUwmOW0
+ KYSUsHwfd6L7cmQR5mzYTs8dxBS1r6e58bw63PQLiO/9pGD59elkkvJGuvLCFJ6tSrfI
+ D2vxVJdm0rvjKJB0zpPo1HQWcW893iZT+vhVrp1NGxWNUArUMOrWbT8qPgzqntljtmCM
+ k1N9FzGw8NQWtPKdjr5H9iPaiP6E0pnalFNidS0NRpua/RUUSvd2LSkaBvK7qsUT8O68
+ MhZxwu2otjpz/yNTfKpFeSuEcuXSwF1579y/xr63O0dMIjWCi5asKzS4VilnVilvX+Wk
+ UrEg==
+X-Gm-Message-State: AOJu0YyYb9d7iqlFez6GWi/LUNpo5N/0HQl8FTClJlC0TZTceK/jZd5/
+ DN1bP2ksQLApwdxp4uEVbZ7zu/ZMvfHvcxw/1/Pxc/YSN65lavUisoydW9h2bLM=
+X-Google-Smtp-Source: AGHT+IGnRfqr83No38vTk7R1Je1hlkbirCWo8htCU4nwCpbn7xGAthh7VWAb1mjQ+Kcoqf+QN/P8BQ==
+X-Received: by 2002:a17:907:d17:b0:a7a:130e:fb6e with SMTP id
+ a640c23a62f3a-a80f0b16469mr161003066b.15.1723536032623; 
+ Tue, 13 Aug 2024 01:00:32 -0700 (PDT)
+Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
+ [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-710e5a43e48sm5247584b3a.98.2024.08.13.00.43.12
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 13 Aug 2024 00:43:16 -0700 (PDT)
-Message-ID: <aa7facef-acda-4846-98d5-2f7584515035@linaro.org>
-Date: Tue, 13 Aug 2024 17:43:07 +1000
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+ a640c23a62f3a-a80f3f4cfcesm46979166b.2.2024.08.13.01.00.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 13 Aug 2024 01:00:32 -0700 (PDT)
+Date: Tue, 13 Aug 2024 10:00:31 +0200
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
+ alistair.francis@wdc.com, bmeng.cn@gmail.com, zong.li@sifive.com,
+ liwei1518@gmail.com, cwshu@andestech.com, dbarboza@ventanamicro.com
 Subject: Re: [PATCH] target/riscv32: Fix masking of physical address
-To: Andrew Jones <ajones@ventanamicro.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bmeng.cn@gmail.com,
- zong.li@sifive.com, liwei1518@gmail.com, cwshu@andestech.com,
- dbarboza@ventanamicro.com
+Message-ID: <20240813-e2c6dc0e68f76be576c72996@orel>
 References: <20240813071355.310710-2-ajones@ventanamicro.com>
-Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240813071355.310710-2-ajones@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::430;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x430.google.com
+ <aa7facef-acda-4846-98d5-2f7584515035@linaro.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <aa7facef-acda-4846-98d5-2f7584515035@linaro.org>
+Received-SPF: pass client-ip=2a00:1450:4864:20::52b;
+ envelope-from=ajones@ventanamicro.com; helo=mail-ed1-x52b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,34 +96,40 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 8/13/24 17:13, Andrew Jones wrote:
-> C doesn't extend the sign bit for unsigned types since there isn't a
-> sign bit to extend. This means a promotion of a u32 to a u64 results
-> in the upper 32 bits of the u64 being zero. If that result is then
-> used as a mask on another u64 the upper 32 bits will be cleared. rv32
-> physical addresses may be up to 34 bits wide, so we don't want to
-> clear the high bits while page aligning the address. The fix is to
-> revert to using target_long, since a signed type will get extended.
+On Tue, Aug 13, 2024 at 05:43:07PM GMT, Richard Henderson wrote:
+> On 8/13/24 17:13, Andrew Jones wrote:
+> > C doesn't extend the sign bit for unsigned types since there isn't a
+> > sign bit to extend. This means a promotion of a u32 to a u64 results
+> > in the upper 32 bits of the u64 being zero. If that result is then
+> > used as a mask on another u64 the upper 32 bits will be cleared. rv32
+> > physical addresses may be up to 34 bits wide, so we don't want to
+> > clear the high bits while page aligning the address. The fix is to
+> > revert to using target_long, since a signed type will get extended.
+> > 
+> > Fixes: af3fc195e3c8 ("target/riscv: Change the TLB page size depends on PMP entries.")
+> > Signed-off-by: Andrew Jones <ajones@ventanamicro.com>
+> > ---
+> >   target/riscv/cpu_helper.c | 2 +-
+> >   1 file changed, 1 insertion(+), 1 deletion(-)
+> > 
+> > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> > index 395a1d914061..dfef1b20d1e8 100644
+> > --- a/target/riscv/cpu_helper.c
+> > +++ b/target/riscv/cpu_helper.c
+> > @@ -1323,7 +1323,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+> >       int ret = TRANSLATE_FAIL;
+> >       int mode = mmuidx_priv(mmu_idx);
+> >       /* default TLB page size */
+> > -    target_ulong tlb_size = TARGET_PAGE_SIZE;
+> > +    target_long tlb_size = TARGET_PAGE_SIZE;
 > 
-> Fixes: af3fc195e3c8 ("target/riscv: Change the TLB page size depends on PMP entries.")
-> Signed-off-by: Andrew Jones <ajones@ventanamicro.com>
-> ---
->   target/riscv/cpu_helper.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 395a1d914061..dfef1b20d1e8 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -1323,7 +1323,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->       int ret = TRANSLATE_FAIL;
->       int mode = mmuidx_priv(mmu_idx);
->       /* default TLB page size */
-> -    target_ulong tlb_size = TARGET_PAGE_SIZE;
-> +    target_long tlb_size = TARGET_PAGE_SIZE;
+> If rv32 physical addresses are 34 bits, then you probably didn't want target_*long at all.
 
-If rv32 physical addresses are 34 bits, then you probably didn't want target_*long at all.
+Yes, just using hwaddr for everything that only touches physical addresses
+would probably be best, but, ifaict, it's pretty common to use target_long
+for masks used on both virtual and physical addresses (TARGET_PAGE_MASK,
+for example). This 'tlb_size' variable is used on both as well.
 
-
-r~
+Thanks,
+drew
 
