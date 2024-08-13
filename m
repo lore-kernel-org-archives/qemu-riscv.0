@@ -4,80 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36738C52D7C
-	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Aug 2024 15:09:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C55F1C52D7C
+	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Aug 2024 20:24:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sdt8Q-0004nX-S5; Tue, 13 Aug 2024 11:08:30 -0400
+	id 1sdy3T-0004Tq-0Y; Tue, 13 Aug 2024 16:23:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=5955489c63=ian.brockbank@cirrus.com>)
- id 1sdsyG-0002xK-MJ
- for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 10:58:00 -0400
-Received: from mx0a-001ae601.pphosted.com ([67.231.149.25]
- helo=mx0b-001ae601.pphosted.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=5955489c63=ian.brockbank@cirrus.com>)
- id 1sdsyE-0001JG-Qe
- for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 10:58:00 -0400
-Received: from pps.filterd (m0077473.ppops.net [127.0.0.1])
- by mx0a-001ae601.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 47D5fsoL017305;
- Tue, 13 Aug 2024 09:56:58 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cirrus.com; h=cc
- :content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=
- PODMain02222019; bh=0ItKk/RDBDPmaPn6nG4cugDLFc3KF6OGqqEEfpnZtY8=; b=
- cyZnu8CwX2ItpCT5SWphL10ViaQTGC97P3UIIi9dKH0MVO5igbXCDN1II4UvmaJO
- P+DRIFZ53+VtUpDwKT9JrYH8DOkJp40vqJGrHmrHbn5iJfGpDpqsv7h1iQjOPA1C
- RySdSsR8/kR4OWf7zmXUKMqwZGuE17Ls2YMAMn63+z1MIziPhTrdrt6rUVp5yJ2J
- 2uvBtBGzabXH0gI+yHj47Usj6ONE6r3ejVoQ/DfwWKE9ZKe3tkgIcfVT4KD4+z4h
- +Oorgr1z7coBY8iGL6FN1PjsBiRQyCzilY683BVsRRzs1JtIbnql7PRS/17NRPce
- MwQhskVCuPZB3RlIO8ukfw==
-Received: from ausex02.ad.cirrus.com ([141.131.3.21])
- by mx0a-001ae601.pphosted.com (PPS) with ESMTPS id 40x5kwkdem-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 13 Aug 2024 09:56:58 -0500 (CDT)
-Received: from ausex02.ad.cirrus.com (141.131.37.96) by ausex02.ad.cirrus.com
- (141.131.37.96) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.9; Tue, 13 Aug
- 2024 09:56:56 -0500
-Received: from EDIN7BQBTG3.ad.cirrus.com (141.131.38.212) by
- anon-ausex02.ad.cirrus.com (141.131.37.96) with Microsoft SMTP Server id
- 15.2.1544.9 via Frontend Transport; Tue, 13 Aug 2024 09:56:55 -0500
-From: Ian Brockbank <Ian.Brockbank@cirrus.com>
-To: <qemu-riscv@nongnu.org>
-CC: Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis
- <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>, Weiwei Li
- <liwei1518@gmail.com>, Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Ian Brockbank
- <ian.brockbank@cirrus.com>, LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH] target/riscv: Update CSR xintthresh in CLIC mode
-Date: Tue, 13 Aug 2024 15:54:03 +0100
-Message-ID: <20240813145636.12223-3-Ian.Brockbank@cirrus.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240813145636.12223-1-Ian.Brockbank@cirrus.com>
-References: <20240813145636.12223-1-Ian.Brockbank@cirrus.com>
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1sdy3N-0004J5-Mj
+ for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:23:37 -0400
+Received: from mail-lf1-x12e.google.com ([2a00:1450:4864:20::12e])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1sdy3K-0006AS-Sf
+ for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:23:37 -0400
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-530c2e5f4feso6051137e87.0
+ for <qemu-riscv@nongnu.org>; Tue, 13 Aug 2024 13:23:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1723580612; x=1724185412; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0GxFDxNA+tjm9dd3YyBkmqa3TunWqvDtTEUpcD5o2pA=;
+ b=hwTr3WemTnyV45lich1ruVLj/Mk3k2/xVr5v7MoW+gf02fTgn6xi84bNCf+rtp3900
+ WXa4iCsOponY6jVwHmyPkH75oPzYzbkVYLFKjT1PR5qWmIrK3kD3iNL1kVCtR2SQn1CF
+ uM4jOk+LffYrtKBacXfimTRQXcFkdV0sD0DKsgugv+tfOWY6ia+X73Jry1D+cWsc9So3
+ F26NyfLdhz87b7Ddxk+uWH85gTlD/0QEYD6PLWfLsds2UkpXOiuLw23micVEBq4RXIpT
+ b5WnHIETZBNNc743KylVIVWRWlIBs0IsDuqp1U2dvQ7V9gHssBGUnoCw8RjcRx00sYP+
+ E9bA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723580612; x=1724185412;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=0GxFDxNA+tjm9dd3YyBkmqa3TunWqvDtTEUpcD5o2pA=;
+ b=JUu354ztXw/Ns+vICW/56I6xj2fOc9PPy6CG8WqRCDairkIpqwWzDPJhloQeDUA0JR
+ nhBYLUevkfAGYxTvIHjqVT/FPA0nc4v7/kjAMFTUdjpBKBLmJK7cOjTzZnHs2450Hdeh
+ xG3WpxqkF7QX3iAcY8gq7htaoh0JGNWXd9e7CZHH9lMdCO+40DS7hQ1uC2Li40zSWJgc
+ jUo4kq0PYgNQ5+B7TLUwyZdG0+nb1d/5hEsH166i7yvySQekk/VRMkANGO5/gkp7t2L3
+ e2HRyWyXS74K+AuKDvcdrNGQvffP/suNp+5ugownk02hkUHpNUIHBIaWfFL694pJuYBo
+ crtw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUMkbL/JVxKW3w6gP3XH4rlfdv0UyEGzpvbN1aL30/hDNCcbM17RyznXiTwHtZ4Rdvrri7+fEwz0qG4V6rjrx2DJBpE06k=
+X-Gm-Message-State: AOJu0Yx6o7rVjICm9MeCBKpLe5+YsUNTG4yHy+cxL7xh/o+/ghQyApJU
+ Kw93NEISZvoocbvB8tse8ywuv969LdOphwPGgmYB1T8JZ7bGSXyaOFw96V1dJ40=
+X-Google-Smtp-Source: AGHT+IEUMCc3Ienyb2xKePCOpVC42gkxrBNTS2Cyv2ISCCU732EPWZCy5QObJF5tqt1Qzkezm1Dx/g==
+X-Received: by 2002:a05:6512:239b:b0:52c:8596:5976 with SMTP id
+ 2adb3069b0e04-532edbcce45mr270967e87.55.1723580611264; 
+ Tue, 13 Aug 2024 13:23:31 -0700 (PDT)
+Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-429d877e066sm32268685e9.1.2024.08.13.13.23.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 13 Aug 2024 13:23:30 -0700 (PDT)
+Received: from draig.lan (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id BB7655F930;
+ Tue, 13 Aug 2024 21:23:29 +0100 (BST)
+From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Michael Roth <michael.roth@amd.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Mahmoud Mandour <ma.mandourr@gmail.com>,
+ Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Weiwei Li <liwei1518@gmail.com>, Eduardo Habkost <eduardo@habkost.net>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ Markus Armbruster <armbru@redhat.com>,
+ David Hildenbrand <david@redhat.com>, Beraldo Leal <bleal@redhat.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Eric Auger <eric.auger@redhat.com>, Song Gao <gaosong@loongson.cn>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ qemu-arm@nongnu.org, Peter Xu <peterx@redhat.com>,
+ Jiri Pirko <jiri@resnulli.us>, Eric Blake <eblake@redhat.com>,
+ Fabiano Rosas <farosas@suse.de>, qemu-s390x@nongnu.org,
+ Peter Maydell <peter.maydell@linaro.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ John Snow <jsnow@redhat.com>, Alexandre Iooss <erdnaxe@crans.org>,
+ Konstantin Kostiuk <kkostiuk@redhat.com>,
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>,
+ Cleber Rosa <crosa@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
+ qemu-riscv@nongnu.org, Thomas Huth <thuth@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Jason Wang <jasowang@redhat.com>, Bin Meng <bmeng.cn@gmail.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Wainer dos Santos Moschetta <wainersm@redhat.com>,
+ Gustavo Romero <gustavo.romero@linaro.org>
+Subject: [PATCH v2 04/21] configure: Avoid use of param. expansion when using
+ gdb_version
+Date: Tue, 13 Aug 2024 21:23:12 +0100
+Message-Id: <20240813202329.1237572-5-alex.bennee@linaro.org>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240813202329.1237572-1-alex.bennee@linaro.org>
+References: <20240813202329.1237572-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: gHmYszhGEUCkEk9DWc-WyeHiSmzZj0Hn
-X-Proofpoint-GUID: gHmYszhGEUCkEk9DWc-WyeHiSmzZj0Hn
-X-Proofpoint-Spam-Reason: safe
-Received-SPF: pass client-ip=67.231.149.25;
- envelope-from=prvs=5955489c63=ian.brockbank@cirrus.com;
- helo=mx0b-001ae601.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::12e;
+ envelope-from=alex.bennee@linaro.org; helo=mail-lf1-x12e.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Tue, 13 Aug 2024 11:08:15 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -92,139 +127,48 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Ian Brockbank <ian.brockbank@cirrus.com>
+From: Gustavo Romero <gustavo.romero@linaro.org>
 
-The interrupt-level threshold (xintthresh) CSR holds an 8-bit field
-for the threshold level of the associated privilege mode.
+$gdb_version is now used in more than one conditional case and its usage
+in such cases may increase in the future. Therefore, avoid using shell
+parameter expansion when using it by setting gdb_version to its final
+form.
 
-For horizontal interrupts, only the ones with higher interrupt levels
-than the threshold level are allowed to preempt.
-
-Signed-off-by: Ian Brockbank <ian.brockbank@cirrus.com>
-Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Signed-off-by: Gustavo Romero <gustavo.romero@linaro.org>
+Message-Id: <20240804161850.2646299-3-gustavo.romero@linaro.org>
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Message-Id: <20240807114059.2339021-5-alex.bennee@linaro.org>
 ---
- target/riscv/cpu.h      |  2 ++
- target/riscv/cpu_bits.h |  2 ++
- target/riscv/csr.c      | 28 ++++++++++++++++++++++++++++
- 3 files changed, 32 insertions(+)
+ configure | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 95303f50d3..9b5f36ad0a 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -260,6 +260,7 @@ struct CPUArchState {
+diff --git a/configure b/configure
+index a3aa257fd3..97de85d710 100755
+--- a/configure
++++ b/configure
+@@ -1103,8 +1103,10 @@ fi
+ # gdb test
+ 
+ if test -n "$gdb_bin"; then
+-    gdb_version=$($gdb_bin --version | head -n 1)
+-    if version_ge ${gdb_version##* } 9.1; then
++    gdb_version_string=$($gdb_bin --version | head -n 1)
++    # Extract last field in the version string
++    gdb_version=${gdb_version_string##* }
++    if version_ge $gdb_version 9.1; then
+         gdb_arches=$($python "$source_path/scripts/probe-gdb-support.py" $gdb_bin)
+     else
+         gdb_bin=""
+@@ -1673,7 +1675,7 @@ for target in $target_list; do
+           echo "GDB=$gdb_bin" >> $config_target_mak
+       fi
+ 
+-      if test "${gdb_arches#*aarch64}" != "$gdb_arches" && version_ge ${gdb_version##* } 15.0; then
++      if test "${gdb_arches#*aarch64}" != "$gdb_arches" && version_ge $gdb_version 15.0; then
+           echo "GDB_HAS_MTE=y" >> $config_target_mak
+       fi
+ 
+-- 
+2.39.2
 
-     uint64_t miclaim;
-     uint64_t mintstatus; /* clic-spec */
-+    target_ulong mintthresh; /* clic-spec */
-
-     uint64_t mie;
-     uint64_t mideleg;
-@@ -283,6 +284,7 @@ struct CPUArchState {
-     target_ulong stvec;
-     target_ulong sepc;
-     target_ulong scause;
-+    target_ulong sintthresh; /* clic-spec */
-
-     target_ulong mtvec;
-     target_ulong mepc;
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 2e65495b54..ad45402370 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -166,6 +166,7 @@
- #define CSR_MTVAL           0x343
- #define CSR_MIP             0x344
- #define CSR_MINTSTATUS      0xfb1 /* clic-spec-draft */
-+#define CSR_MINTTHRESH      0x347 /* clic-spec-draft */
-
- /* Machine-Level Window to Indirectly Accessed Registers (AIA) */
- #define CSR_MISELECT        0x350
-@@ -208,6 +209,7 @@
- #define CSR_STVAL           0x143
- #define CSR_SIP             0x144
- #define CSR_SINTSTATUS      0xdb1 /* clic-spec-draft */
-+#define CSR_SINTTHRESH      0x147 /* clic-spec-draft */
-
- /* Sstc supervisor CSRs */
- #define CSR_STIMECMP        0x14D
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index f9ed7b9079..9c824c0d8f 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -2903,6 +2903,18 @@ static int read_mintstatus(CPURISCVState *env, int c=
-srno, target_ulong *val)
-     return RISCV_EXCP_NONE;
- }
-
-+static int read_mintthresh(CPURISCVState *env, int csrno, target_ulong *va=
-l)
-+{
-+    *val =3D env->mintthresh;
-+    return 0;
-+}
-+
-+static int write_mintthresh(CPURISCVState *env, int csrno, target_ulong va=
-l)
-+{
-+    env->mintthresh =3D val;
-+    return 0;
-+}
-+
- /* Supervisor Trap Setup */
- static RISCVException read_sstatus_i128(CPURISCVState *env, int csrno,
-                                         Int128 *val)
-@@ -3322,6 +3334,18 @@ static int read_sintstatus(CPURISCVState *env, int c=
-srno, target_ulong *val)
-     return RISCV_EXCP_NONE;
- }
-
-+static int read_sintthresh(CPURISCVState *env, int csrno, target_ulong *va=
-l)
-+{
-+    *val =3D env->sintthresh;
-+    return 0;
-+}
-+
-+static int write_sintthresh(CPURISCVState *env, int csrno, target_ulong va=
-l)
-+{
-+    env->sintthresh =3D val;
-+    return 0;
-+}
-+
- /* Supervisor Protection and Translation */
- static RISCVException read_satp(CPURISCVState *env, int csrno,
-                                 target_ulong *val)
-@@ -5621,9 +5645,13 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D {
-
-     /* Machine Mode Core Level Interrupt Controller */
-     [CSR_MINTSTATUS]     =3D { "mintstatus", clic,  read_mintstatus       =
-},
-+    [CSR_MINTTHRESH]     =3D { "mintthresh", clic,  read_mintthresh,
-+                             write_mintthresh },
-
-     /* Supervisor Mode Core Level Interrupt Controller */
-     [CSR_SINTSTATUS]     =3D { "sintstatus", clic,  read_sintstatus       =
-},
-+    [CSR_SINTTHRESH]     =3D { "sintthresh", clic,  read_sintthresh,
-+                             write_sintthresh },
-
-     [CSR_SCOUNTOVF]      =3D { "scountovf", sscofpmf,  read_scountovf,
-                              .min_priv_ver =3D PRIV_VERSION_1_12_0 },
---
-2.46.0.windows.1
-
-This message and any attachments may contain privileged and confidential in=
-formation that is intended solely for the person(s) to whom it is addressed=
-. If you are not an intended recipient you must not: read; copy; distribute=
-; discuss; take any action in or make any reliance upon the contents of thi=
-s message; nor open or read any attachment. If you have received this messa=
-ge in error, please notify us as soon as possible on the following telephon=
-e number and destroy this message including any attachments. Thank you. Cir=
-rus Logic International (UK) Ltd and Cirrus Logic International Semiconduct=
-or Ltd are companies registered in Scotland, with registered numbers SC0898=
-39 and SC495735 respectively. Our registered office is at 7B Nightingale Wa=
-y, Quartermile, Edinburgh, EH3 9EG, UK. Tel: +44 (0)131 272 7000. www.cirru=
-s.com
 
