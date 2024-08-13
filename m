@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 272AEC52D7B
-	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Aug 2024 20:25:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8EE1C52D7B
+	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Aug 2024 20:25:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sdy4C-0007cY-C5; Tue, 13 Aug 2024 16:24:28 -0400
+	id 1sdy3j-0005LD-FK; Tue, 13 Aug 2024 16:23:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sdy40-0006al-RI
- for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:24:16 -0400
-Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
+ id 1sdy3h-0005DF-Td
+ for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:23:57 -0400
+Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sdy3W-0006JM-Kb
- for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:24:14 -0400
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-429c4a4c6a8so31260725e9.0
- for <qemu-riscv@nongnu.org>; Tue, 13 Aug 2024 13:23:45 -0700 (PDT)
+ id 1sdy3Q-0006Cn-MD
+ for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:23:57 -0400
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-3687ea0521cso4239840f8f.1
+ for <qemu-riscv@nongnu.org>; Tue, 13 Aug 2024 13:23:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723580624; x=1724185424; darn=nongnu.org;
+ d=linaro.org; s=google; t=1723580618; x=1724185418; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=adw5jgjlcSpxCkpQ0j60omHvD1nnW2G6iyfdsNi8jbw=;
- b=MYkkzsH/E/Qb2UFxTysypbI9nFuNmx9kCmmoleBeS09BLk4xtYylR7RdOcxO6jhZrD
- SuKU6ueXJMk1se/OHjjZMQJniwHVAedEYJwsiJKxMq2fAloJzvr8Br4ex9PzH0ZD6hTQ
- I2DRfi1bI6MbIDJF7TrsAioJVGSqNr9W5JlLFuOSC3bujZZSvaOkB0t0R23q7c5kzUrg
- cDiTtn6+0I2J4J4ZsmO9qtb+Dn1KHCUrR/YgBGXIbqquyeWeAYCRPrwDckPzrHLm8eTZ
- Y4unkdv17TC05RcFJzoOht2V2LZWJD4EjU+z5vvPMf02sitHtr2zGqsIB1h8vkKRb/VL
- p9jg==
+ bh=vQP4Lzk083fG8NuJjpSlR+Yr0hOmETRemBesxY0PRmM=;
+ b=CzjgfNnbYHCIOpoA/Ftz4i9TGBf1cfgKz54loszxSewxjiqPeRQucXty21leKYBVZK
+ lxWORObsi19p71RfcC0LW9vLeigigqQ4lajmQ+rTf8NlDe285Mkgro08DylaQgzbgeoI
+ hi64YuzxJorVj0njqh2BEyLf4aNDkpLjnaco4AwAzIO36gzKyib+7c59sbv2wxLr+PDs
+ F7gmjlGij6TBLSJ0bPvBd95hkfQ53Lk7tuJHmdyX5OB5x+KBp7ioW559dDaCoyDdWxOb
+ MCiEtSsYW+fNfDufeOZf+hPtEzuEi+7+GmWIEfoGCZEJmFUSh4zgw8v+xelTFJhAQXbt
+ z7tg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723580624; x=1724185424;
+ d=1e100.net; s=20230601; t=1723580618; x=1724185418;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=adw5jgjlcSpxCkpQ0j60omHvD1nnW2G6iyfdsNi8jbw=;
- b=AQw55fVgo6MnA6kQNNpzP+78RfMmYkj92LrzgZejv56wTHKRaNNAj1BKSF9BQs5m3l
- g01tXDEEPYfIiol2aKk+1ZJm4isnvX+W6obIIScfO5zyAVvQYsoxh4RK/xT5oYA43Fls
- T/ZyGafpCi8d0SprJBD74p2nA7T2T/cZ17Xz99bHIM7T39K8oJKtQY0ahBQl3KL2Paf8
- fn2hGv7gNCGeAcrU2EuD8+bgpoCB8cTB3Op5609NMu38Yt/HpxuI4Itdm1F570Lj7A4Y
- TfzlXMWBqeTRvor3d0T+6U4q8LbFmcuVYCQRKo3MSnhSLkpPJQMrQuSoMU02fAEjy0Kb
- LnJw==
+ bh=vQP4Lzk083fG8NuJjpSlR+Yr0hOmETRemBesxY0PRmM=;
+ b=DdTQJSb2yMMsaE68+QKW7Vk+/+cCFl7Y3NTIBDrHtPbBnnwuJu0Ba3rcIT9eX4X9Le
+ EeYaTSrpae7ZpTVnMobOqDgIBrROfUSQq1s1QB9/LDhkxDf9qDgSf1A/KokjiUt/2pxl
+ dIcrMg8AGERzWmrfQiBQIY9QNK82hDbzTZPZDOTlXgyZrGpc+i3LmXPYVsx4ibki+nSt
+ zcAg0M/UY2FxeYF+NteH8I1ZY5jIeNXE4xKy7zPafaHWyr2rpUJiAT7+j56m7/DMKqMu
+ wj7Gqkqkd9Lzm5at3WYT0hxtN/1HS3IkwtLFdegVcSkhKFHZVoJkebXK1LrJAQz5YYpO
+ atNA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVciscDu+hdKuM815z4AZRaod89smWth8+cTeog4ayHlp21PMNmxRyrgBo+KhQd2tAvUNkh3l0XXC2nWtwXud81ZF/eXQ0=
-X-Gm-Message-State: AOJu0YwJeUIqzo1nguhVjSNX+ePEBV1rAYNeMdz3HGCp2YcFdPWFAnlm
- VfBbNYuVPG1K76LCvDn5t8ouvFoirAkyjX+VdPqBt902FvnvPtNf0ffESnpIln0=
-X-Google-Smtp-Source: AGHT+IG7R5nUt3voA9dl50RQS5J1OR5JcDC2E5EFJj3IDJ1znrBpLKrB64HTTeltr6WwzmgpgEpd2Q==
-X-Received: by 2002:a05:600c:1f13:b0:427:fa39:b0db with SMTP id
- 5b1f17b1804b1-429dd264962mr4344725e9.27.1723580624219; 
- Tue, 13 Aug 2024 13:23:44 -0700 (PDT)
+ AJvYcCWlMrumm6CCe7Wgc9KsdiuGNAofGZkfwpiBmCqi7fB/iZbdPGNQVj3o8uFzwMya4gyFLfzFLQLRyZlPWmegYGNTdsTVIek=
+X-Gm-Message-State: AOJu0YyUVe7SmsEwepTlODb0YHk9EOrc8hQ7vVa2XSvkk6v5BVzTXzGy
+ IimHiT4/l3YmqUv9enDsv8sFd8/mjb3j1/EoxNnfXkWgBxd28Yhc4cjhR3iLtM4=
+X-Google-Smtp-Source: AGHT+IHzSVZu+eoV4IOl+Tvr1lbYuHvjj8m1fFN5cAonIC+bSJbWWIMBMcpgf+Pbo9r5SqehpOJ7BA==
+X-Received: by 2002:a05:6000:e04:b0:36b:3563:15f4 with SMTP id
+ ffacd0b85a97d-371777fefe0mr508243f8f.56.1723580617457; 
+ Tue, 13 Aug 2024 13:23:37 -0700 (PDT)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-429c750e57fsm151122575e9.12.2024.08.13.13.23.35
+ ffacd0b85a97d-36e4e51ed16sm11208371f8f.66.2024.08.13.13.23.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 13 Aug 2024 13:23:38 -0700 (PDT)
+ Tue, 13 Aug 2024 13:23:34 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id BEC405FE27;
+ by draig.lan (Postfix) with ESMTP id 0CFC95F9DA;
  Tue, 13 Aug 2024 21:23:30 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -91,27 +91,26 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Jason Wang <jasowang@redhat.com>, Bin Meng <bmeng.cn@gmail.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Nicholas Piggin <npiggin@gmail.com>
-Subject: [PATCH v2 14/21] tests/avocado: replay_kernel.py add x86-64 q35
- machine test
-Date: Tue, 13 Aug 2024 21:23:22 +0100
-Message-Id: <20240813202329.1237572-15-alex.bennee@linaro.org>
+ Wainer dos Santos Moschetta <wainersm@redhat.com>
+Subject: [PATCH v2 07/21] target/i386: allow access_ptr to force slow path on
+ failed probe
+Date: Tue, 13 Aug 2024 21:23:15 +0100
+Message-Id: <20240813202329.1237572-8-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240813202329.1237572-1-alex.bennee@linaro.org>
 References: <20240813202329.1237572-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32b.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::429;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x429.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -127,56 +126,128 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Nicholas Piggin <npiggin@gmail.com>
+When we are using TCG plugin memory callbacks probe_access_internal
+will return TLB_MMIO to force the slow path for memory access. This
+results in probe_access returning NULL but the x86 access_ptr function
+happily accepts an empty haddr resulting in segfault hilarity.
 
-The x86-64 pc machine is flaky with record/replay, but q35 is more
-stable. Add a q35 test to replay_kernel.py.
+Check for an empty haddr to prevent the segfault and enable plugins to
+track all the memory operations for the x86 save/restore helpers. As
+we also want to run the slow path when instrumenting *-user we should
+also not have the short cutting test_ptr macro.
 
-Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
-Tested-by: Alex Bennée <alex.bennee@linaro.org>
-Signed-off-by: Nicholas Piggin <npiggin@gmail.com>
-Message-Id: <20240813050638.446172-7-npiggin@gmail.com>
+Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2489
+Fixes: 6d03226b42 (plugins: force slow path when plugins instrument memory ops)
+Reviewed-by: Alexandre Iooss <erdnaxe@crans.org>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
----
- tests/avocado/replay_kernel.py | 18 +++++++++++++++++-
- 1 file changed, 17 insertions(+), 1 deletion(-)
+Message-Id: <20240807160236.2478459-1-alex.bennee@linaro.org>
 
-diff --git a/tests/avocado/replay_kernel.py b/tests/avocado/replay_kernel.py
-index a668af9d36..e22c200a36 100644
---- a/tests/avocado/replay_kernel.py
-+++ b/tests/avocado/replay_kernel.py
-@@ -110,7 +110,7 @@ def test_i386_pc(self):
-         self.run_rr(kernel_path, kernel_command_line, console_pattern, shift=5)
+---
+v2
+  - add comment around haddr1 test
+  - drop test_ptr macro
+---
+ target/i386/tcg/access.c | 27 +++++++++++++--------------
+ 1 file changed, 13 insertions(+), 14 deletions(-)
+
+diff --git a/target/i386/tcg/access.c b/target/i386/tcg/access.c
+index 56a1181ea5..e68b73a24b 100644
+--- a/target/i386/tcg/access.c
++++ b/target/i386/tcg/access.c
+@@ -58,6 +58,11 @@ static void *access_ptr(X86Access *ac, vaddr addr, unsigned len)
  
-     # See https://gitlab.com/qemu-project/qemu/-/issues/2094
--    @skipUnless(os.getenv('QEMU_TEST_FLAKY_TESTS'), 'Test sometimes gets stuck')
-+    @skipUnless(os.getenv('QEMU_TEST_FLAKY_TESTS'), 'pc machine is unstable with replay')
-     def test_x86_64_pc(self):
-         """
-         :avocado: tags=arch:x86_64
-@@ -128,6 +128,22 @@ def test_x86_64_pc(self):
+     assert(addr >= ac->vaddr);
  
-         self.run_rr(kernel_path, kernel_command_line, console_pattern, shift=5)
++    /* No haddr means probe_access wants to force slow path */
++    if (!ac->haddr1) {
++        return NULL;
++    }
++
+ #ifdef CONFIG_USER_ONLY
+     assert(offset <= ac->size1 - len);
+     return ac->haddr1 + offset;
+@@ -78,17 +83,11 @@ static void *access_ptr(X86Access *ac, vaddr addr, unsigned len)
+ #endif
+ }
  
-+    def test_x86_64_q35(self):
-+        """
-+        :avocado: tags=arch:x86_64
-+        :avocado: tags=machine:q35
-+        """
-+        kernel_url = ('https://archives.fedoraproject.org/pub/archive/fedora'
-+                      '/linux/releases/29/Everything/x86_64/os/images/pxeboot'
-+                      '/vmlinuz')
-+        kernel_hash = '23bebd2680757891cf7adedb033532163a792495'
-+        kernel_path = self.fetch_asset(kernel_url, asset_hash=kernel_hash)
-+
-+        kernel_command_line = self.KERNEL_COMMON_COMMAND_LINE + 'console=ttyS0'
-+        console_pattern = 'VFS: Cannot open root device'
-+
-+        self.run_rr(kernel_path, kernel_command_line, console_pattern, shift=5)
-+
-     def test_mips_malta(self):
-         """
-         :avocado: tags=arch:mips
+-#ifdef CONFIG_USER_ONLY
+-# define test_ptr(p)  true
+-#else
+-# define test_ptr(p)  likely(p)
+-#endif
+-
+ uint8_t access_ldb(X86Access *ac, vaddr addr)
+ {
+     void *p = access_ptr(ac, addr, sizeof(uint8_t));
+ 
+-    if (test_ptr(p)) {
++    if (likely(p)) {
+         return ldub_p(p);
+     }
+     return cpu_ldub_mmuidx_ra(ac->env, addr, ac->mmu_idx, ac->ra);
+@@ -98,7 +97,7 @@ uint16_t access_ldw(X86Access *ac, vaddr addr)
+ {
+     void *p = access_ptr(ac, addr, sizeof(uint16_t));
+ 
+-    if (test_ptr(p)) {
++    if (likely(p)) {
+         return lduw_le_p(p);
+     }
+     return cpu_lduw_le_mmuidx_ra(ac->env, addr, ac->mmu_idx, ac->ra);
+@@ -108,7 +107,7 @@ uint32_t access_ldl(X86Access *ac, vaddr addr)
+ {
+     void *p = access_ptr(ac, addr, sizeof(uint32_t));
+ 
+-    if (test_ptr(p)) {
++    if (likely(p)) {
+         return ldl_le_p(p);
+     }
+     return cpu_ldl_le_mmuidx_ra(ac->env, addr, ac->mmu_idx, ac->ra);
+@@ -118,7 +117,7 @@ uint64_t access_ldq(X86Access *ac, vaddr addr)
+ {
+     void *p = access_ptr(ac, addr, sizeof(uint64_t));
+ 
+-    if (test_ptr(p)) {
++    if (likely(p)) {
+         return ldq_le_p(p);
+     }
+     return cpu_ldq_le_mmuidx_ra(ac->env, addr, ac->mmu_idx, ac->ra);
+@@ -128,7 +127,7 @@ void access_stb(X86Access *ac, vaddr addr, uint8_t val)
+ {
+     void *p = access_ptr(ac, addr, sizeof(uint8_t));
+ 
+-    if (test_ptr(p)) {
++    if (likely(p)) {
+         stb_p(p, val);
+     } else {
+         cpu_stb_mmuidx_ra(ac->env, addr, val, ac->mmu_idx, ac->ra);
+@@ -139,7 +138,7 @@ void access_stw(X86Access *ac, vaddr addr, uint16_t val)
+ {
+     void *p = access_ptr(ac, addr, sizeof(uint16_t));
+ 
+-    if (test_ptr(p)) {
++    if (likely(p)) {
+         stw_le_p(p, val);
+     } else {
+         cpu_stw_le_mmuidx_ra(ac->env, addr, val, ac->mmu_idx, ac->ra);
+@@ -150,7 +149,7 @@ void access_stl(X86Access *ac, vaddr addr, uint32_t val)
+ {
+     void *p = access_ptr(ac, addr, sizeof(uint32_t));
+ 
+-    if (test_ptr(p)) {
++    if (likely(p)) {
+         stl_le_p(p, val);
+     } else {
+         cpu_stl_le_mmuidx_ra(ac->env, addr, val, ac->mmu_idx, ac->ra);
+@@ -161,7 +160,7 @@ void access_stq(X86Access *ac, vaddr addr, uint64_t val)
+ {
+     void *p = access_ptr(ac, addr, sizeof(uint64_t));
+ 
+-    if (test_ptr(p)) {
++    if (likely(p)) {
+         stq_le_p(p, val);
+     } else {
+         cpu_stq_le_mmuidx_ra(ac->env, addr, val, ac->mmu_idx, ac->ra);
 -- 
 2.39.2
 
