@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 647ACC3DA4A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Aug 2024 09:40:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51309C52D7F
+	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Aug 2024 09:46:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1seATv-0005us-Al; Wed, 14 Aug 2024 05:39:51 -0400
+	id 1seAa6-0002Yu-Mt; Wed, 14 Aug 2024 05:46:14 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1seATt-0005tj-IU
- for qemu-riscv@nongnu.org; Wed, 14 Aug 2024 05:39:49 -0400
-Received: from mail-yb1-xb31.google.com ([2607:f8b0:4864:20::b31])
+ id 1seAa2-0002XV-HA
+ for qemu-riscv@nongnu.org; Wed, 14 Aug 2024 05:46:10 -0400
+Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1seATr-00060C-5A
- for qemu-riscv@nongnu.org; Wed, 14 Aug 2024 05:39:49 -0400
-Received: by mail-yb1-xb31.google.com with SMTP id
- 3f1490d57ef6-e05f25fb96eso6103170276.1
- for <qemu-riscv@nongnu.org>; Wed, 14 Aug 2024 02:39:46 -0700 (PDT)
+ id 1seAa0-0006xW-Gb
+ for qemu-riscv@nongnu.org; Wed, 14 Aug 2024 05:46:10 -0400
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-1fd9e70b592so49989545ad.3
+ for <qemu-riscv@nongnu.org>; Wed, 14 Aug 2024 02:46:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723628386; x=1724233186; darn=nongnu.org;
+ d=linaro.org; s=google; t=1723628767; x=1724233567; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=jo/T00wKfJEE9pRxB2Af/oAoDThPpdv9tyrr/itzqv4=;
- b=dWmLlTz58YPIkqjGQ1aFQ4Fon0eggf3VPK5ZRaClcRon+OVnGTCoAelR19WqSPpchG
- dz7O8AhQcTuam+szywQkbvmOpV2UsvxbPGYba3hyvuNo8zxkLmRgpCMZn1losJ8nc5vp
- Drw/O3Dn2l5g0Q+7Ho7f2+xEfAep9zPH9kfXhGpVF9gD+UlLHM0GPRerTOT35zsTLpT3
- MeSmsN+Vzm/6MNPUEFuTlVmwHhEKcQC6UrbXCWHejWqIiFH/oYtQ0J9UXlB33T8TdnoK
- xXUNK52V+BZmU2NKKfcAMES398RCJTVHRz0yuovep9ngymABG+SuSIeHKxq97qUq38ML
- NNIw==
+ bh=6X71+HsB1YQYJJfxtHfZ1hgIKdng1QWhnmiWbAm7q+Q=;
+ b=gUEXz4TAyhVtYF3PuFpf1sHIkwButnXH4Go9Vpn1AvPs0Wu4v4uKji8PmGicySc6TT
+ CgxH0tTJiMW0uEQ5w3owhlUrX3YVmsQVEdQ39hRzj3IczTs4VGJmLJHhgFxjLMsrDx6d
+ ZojkwHO9ZmHXUNIU2Nmfbj6JfhqceEWNpD2bX08E3ojtOkzlFHo2ePBIhyWzucvHeJ8a
+ w9iltBt4AUiYXogWayI9c4PQq5bVNY6TaFcXEbDGbWjGjM7K2RZRZKAmF8mPZzuR25Sd
+ q9+u6ryypQ7Yw4uYdj0A1iMfu3P9Tm7JqlReDJkBNed6bzcxbTTrKX7ANVeiHmIhE01M
+ UDQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723628386; x=1724233186;
+ d=1e100.net; s=20230601; t=1723628767; x=1724233567;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=jo/T00wKfJEE9pRxB2Af/oAoDThPpdv9tyrr/itzqv4=;
- b=QsSRO26P3sjqhC5h6H0YBM8pbFe715S1aR3quN6eMax4/A7Xtfm/NEGnkRaY09IBth
- RdEpq3e+wr4S2GLF69KN3zXzi2e35XOqfFZ0LlROMIwZ0ahfZqyQhbH1sjqMgcLveLZh
- NSS2kgRH2W32Ul4Wxnyk5kPwq7TG2rKBfCVgVLqVhDTpXXGbzQiALgr05nHj/8HlhF0C
- 2upklfms2pfPQ5OXqYso/JNyJCx1Ci7yU2cLRvN4p9cj938CghDW1+H49lyrhQMRRnIo
- 7vud7zF7u1NrLqYre9yCPuX2Yqf5kzb9RMswzK2v1RT11eDxdGMg97fEkIcQOS82JgtU
- 1dkA==
-X-Gm-Message-State: AOJu0YzSrG4r0pxtyXy2+0fGCziawX+oX8k2lsFSrgsNmuxt4azk/hX5
- tX8jofuy8cBd8DlpIasvT7KunteLoNKw7O8W+H7DkOmnDIXImD/4XN+JG5koOVw=
-X-Google-Smtp-Source: AGHT+IGma+M9HMvCA7hko+0P16e2KFU+Pu02pXoqxM4UAnhZQtu8zU+LEUG2j3w9cvf8j1tW9rnp3w==
-X-Received: by 2002:a05:690c:f07:b0:61b:df5:7876 with SMTP id
- 00721157ae682-6ac9621acc1mr27102737b3.6.1723628385639; 
- Wed, 14 Aug 2024 02:39:45 -0700 (PDT)
+ bh=6X71+HsB1YQYJJfxtHfZ1hgIKdng1QWhnmiWbAm7q+Q=;
+ b=IJ52/YpCcaESmohXczETGTVj18r6CbTZgKF+QzN9eC9ETlFW0S3BvKn1XeCSIRPcYQ
+ d5HpTgUwbu6Ulm92CYh3CkUuBHVUBqHnpdz8gjFkGN6+CG2v3fn8AitK5oOrNX5lA57Y
+ MqTbwxE6VIIRj1LXN4COU7e8ROc5cSpw+XAYDcQUKtAKXy3XiZ6xOWnkTExQOZZ8f52m
+ AvrzRaszS25hWvLj8D8RXxyWd2ySWVadeGgtT9+zIRmYR9bEkW31PTAY1OhzeGrF/R1x
+ ENS0bqdV/eJ6vmausodVhHjQXVigWhf+jGO1CQkWsqJXpkoy1n0cAlWjHZ1swoWrASmS
+ ss8Q==
+X-Gm-Message-State: AOJu0Yyrm1yA2q0IumuZ6TyhHasxswhd7qKxUxA5p+HT3tDwSIs/sPwN
+ gJX7MLi30CHfNa/hYtlyz9KMMUKfCvuUScU1LrFxLhxon0SWjbIaFKSq71R76y8=
+X-Google-Smtp-Source: AGHT+IFY0utoZb7s4FcgNaNjz9qUUGXKi4jC6WDCb5K708vKLj14StiIJ+9DSA+G7o6qeqSRe3iA8Q==
+X-Received: by 2002:a17:902:cf07:b0:1fc:3600:5cd7 with SMTP id
+ d9443c01a7336-201d63bc101mr27351385ad.10.1723628766483; 
+ Wed, 14 Aug 2024 02:46:06 -0700 (PDT)
 Received: from [192.168.1.113] ([203.30.4.111])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-710e5ab3054sm6969171b3a.188.2024.08.14.02.39.41
+ d9443c01a7336-201cd1a912csm26251675ad.148.2024.08.14.02.46.02
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 14 Aug 2024 02:39:45 -0700 (PDT)
-Message-ID: <2153fef3-ebdb-41de-9908-89b4649c6999@linaro.org>
-Date: Wed, 14 Aug 2024 19:39:38 +1000
+ Wed, 14 Aug 2024 02:46:06 -0700 (PDT)
+Message-ID: <2c3fe80e-fe1c-49a3-aa4a-03749801e4ee@linaro.org>
+Date: Wed, 14 Aug 2024 19:45:59 +1000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 09/15] tcg/riscv: Implement vector cmp ops
+Subject: Re: [PATCH v1 10/15] tcg/riscv: Implement vector not/neg ops
 To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  dbarboza@ventanamicro.com, liwei1518@gmail.com, bmeng.cn@gmail.com,
  TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
 References: <20240813113436.831-1-zhiwei_liu@linux.alibaba.com>
- <20240813113436.831-10-zhiwei_liu@linux.alibaba.com>
+ <20240813113436.831-11-zhiwei_liu@linux.alibaba.com>
 Content-Language: en-US
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240813113436.831-10-zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20240813113436.831-11-zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b31;
- envelope-from=richard.henderson@linaro.org; helo=mail-yb1-xb31.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -99,198 +99,20 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 8/13/24 21:34, LIU Zhiwei wrote:
-> From: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
-> 
-> 1.Address immediate value constraints in RISC-V Vector Extension 1.0 for
-> comparison instructions.
-> 
-> 2.Extend comparison results from mask registers to SEW-width elements,
->    following recommendations in The RISC-V SPEC Volume I (Version 20240411).
-> 
-> This aligns with TCG's cmp_vec behavior by expanding compare results to
-> full element width: all 1s for true, all 0s for false.
-> 
-> Signed-off-by: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
-> Reviewed-by: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-> ---
->   tcg/riscv/tcg-target-con-set.h |   2 +
->   tcg/riscv/tcg-target-con-str.h |   1 +
->   tcg/riscv/tcg-target.c.inc     | 188 +++++++++++++++++++++++++++++++++
->   tcg/riscv/tcg-target.opc.h     |   3 +
->   4 files changed, 194 insertions(+)
-> 
-> diff --git a/tcg/riscv/tcg-target-con-set.h b/tcg/riscv/tcg-target-con-set.h
-> index 8a0de18257..23b391dd07 100644
-> --- a/tcg/riscv/tcg-target-con-set.h
-> +++ b/tcg/riscv/tcg-target-con-set.h
-> @@ -22,5 +22,7 @@ C_N1_I2(r, r, rM)
->   C_O1_I4(r, r, rI, rM, rM)
->   C_O2_I4(r, r, rZ, rZ, rM, rM)
->   C_O0_I2(v, r)
-> +C_O0_I2(v, vK)
->   C_O1_I1(v, r)
->   C_O1_I2(v, v, v)
-> +C_O1_I2(v, v, vK)
-> diff --git a/tcg/riscv/tcg-target-con-str.h b/tcg/riscv/tcg-target-con-str.h
-> index b2b3211bcb..0aaad7b753 100644
-> --- a/tcg/riscv/tcg-target-con-str.h
-> +++ b/tcg/riscv/tcg-target-con-str.h
-> @@ -17,6 +17,7 @@ REGS('v', ALL_VECTOR_REGS)
->    */
->   CONST('I', TCG_CT_CONST_S12)
->   CONST('J', TCG_CT_CONST_J12)
-> +CONST('K', TCG_CT_CONST_S5)
->   CONST('N', TCG_CT_CONST_N12)
->   CONST('M', TCG_CT_CONST_M12)
->   CONST('Z', TCG_CT_CONST_ZERO)
-> diff --git a/tcg/riscv/tcg-target.c.inc b/tcg/riscv/tcg-target.c.inc
-> index 650b5eff1a..3f1e215e90 100644
-> --- a/tcg/riscv/tcg-target.c.inc
-> +++ b/tcg/riscv/tcg-target.c.inc
-> @@ -113,6 +113,7 @@ static TCGReg tcg_target_call_oarg_reg(TCGCallReturnKind kind, int slot)
->   #define TCG_CT_CONST_N12   0x400
->   #define TCG_CT_CONST_M12   0x800
->   #define TCG_CT_CONST_J12  0x1000
-> +#define TCG_CT_CONST_S5   0x2000
->   
->   #define ALL_GENERAL_REGS   MAKE_64BIT_MASK(0, 32)
->   #define ALL_VECTOR_REGS    MAKE_64BIT_MASK(33, 31)
-> @@ -160,6 +161,13 @@ static bool tcg_target_const_match(int64_t val, int ct,
->       if ((ct & TCG_CT_CONST_J12) && ~val >= -0x800 && ~val <= 0x7ff) {
->           return 1;
->       }
-> +    /*
-> +     * Sign extended from 5 bits: [-0x10, 0x0f].
-> +     * Used for vector-immediate.
-> +     */
-> +    if ((ct & TCG_CT_CONST_S5) && val >= -0x10 && val <= 0x0f) {
-> +        return 1;
-> +    }
->       return 0;
->   }
->   
-> @@ -289,12 +297,39 @@ typedef enum {
->       OPC_VSE32_V = 0x6027 | V_SUMOP,
->       OPC_VSE64_V = 0x7027 | V_SUMOP,
->   
-> +    OPC_VMERGE_VIM = 0x5c000057 | V_OPIVI,
-> +    OPC_VMERGE_VVM = 0x5c000057 | V_OPIVV,
-> +    OPC_VMNAND_MM = 0x74000057 | V_OPMVV,
-> +
->       OPC_VADD_VV = 0x57 | V_OPIVV,
->       OPC_VSUB_VV = 0x8000057 | V_OPIVV,
->       OPC_VAND_VV = 0x24000057 | V_OPIVV,
->       OPC_VOR_VV = 0x28000057 | V_OPIVV,
->       OPC_VXOR_VV = 0x2c000057 | V_OPIVV,
->   
-> +    OPC_VMSEQ_VV = 0x60000057 | V_OPIVV,
-> +    OPC_VMSEQ_VI = 0x60000057 | V_OPIVI,
-> +    OPC_VMSEQ_VX = 0x60000057 | V_OPIVX,
-> +    OPC_VMSNE_VV = 0x64000057 | V_OPIVV,
-> +    OPC_VMSNE_VI = 0x64000057 | V_OPIVI,
-> +    OPC_VMSNE_VX = 0x64000057 | V_OPIVX,
-> +
-> +    OPC_VMSLTU_VV = 0x68000057 | V_OPIVV,
-> +    OPC_VMSLTU_VX = 0x68000057 | V_OPIVX,
-> +    OPC_VMSLT_VV = 0x6c000057 | V_OPIVV,
-> +    OPC_VMSLT_VX = 0x6c000057 | V_OPIVX,
-> +    OPC_VMSLEU_VV = 0x70000057 | V_OPIVV,
-> +    OPC_VMSLEU_VX = 0x70000057 | V_OPIVX,
-> +    OPC_VMSLE_VV = 0x74000057 | V_OPIVV,
-> +    OPC_VMSLE_VX = 0x74000057 | V_OPIVX,
-> +
-> +    OPC_VMSLEU_VI = 0x70000057 | V_OPIVI,
-> +    OPC_VMSLE_VI = 0x74000057 | V_OPIVI,
-> +    OPC_VMSGTU_VI = 0x78000057 | V_OPIVI,
-> +    OPC_VMSGTU_VX = 0x78000057 | V_OPIVX,
-> +    OPC_VMSGT_VI = 0x7c000057 | V_OPIVI,
-> +    OPC_VMSGT_VX = 0x7c000057 | V_OPIVX,
-> +
->       OPC_VMV_V_V = 0x5e000057 | V_OPIVV,
->       OPC_VMV_V_I = 0x5e000057 | V_OPIVI,
->       OPC_VMV_V_X = 0x5e000057 | V_OPIVX,
-> @@ -575,6 +610,15 @@ static void tcg_out_opc_vec_config(TCGContext *s, RISCVInsn opc,
->   #define tcg_out_opc_vi(s, opc, vd, vs2, imm, vm) \
->       tcg_out_opc_reg_vec_i(s, opc, vd, imm, vs2, vm);
->   
-> +#define tcg_out_opc_vim_mask(s, opc, vd, vs2, imm) \
-> +    tcg_out_opc_reg_vec_i(s, opc, vd, imm, vs2, false);
-> +
-> +#define tcg_out_opc_vvm_mask(s, opc, vd, vs2, vs1) \
-> +    tcg_out_opc_reg_vec(s, opc, vd, vs1, vs2, false);
-> +
-> +#define tcg_out_opc_mvv(s, opc, vd, vs2, vs1, vm) \
-> +    tcg_out_opc_reg_vec(s, opc, vd, vs1, vs2, vm);
-> +
->   #define tcg_out_opc_vconfig(s, opc, rd, avl, vtypei) \
->       tcg_out_opc_vec_config(s, opc, rd, avl, vtypei);
->   
-> @@ -1037,6 +1081,22 @@ static const struct {
->       [TCG_COND_GTU] = { OPC_BLTU, true  }
->   };
->   
-> +static const struct {
-> +    RISCVInsn opc;
-> +    bool swap;
-> +} tcg_cmpcond_to_rvv_vv[] = {
-> +    [TCG_COND_EQ] =  { OPC_VMSEQ_VV,  false },
-> +    [TCG_COND_NE] =  { OPC_VMSNE_VV,  false },
-> +    [TCG_COND_LT] =  { OPC_VMSLT_VV,  false },
-> +    [TCG_COND_GE] =  { OPC_VMSLE_VV,  true  },
-> +    [TCG_COND_GT] =  { OPC_VMSLT_VV,  true  },
-> +    [TCG_COND_LE] =  { OPC_VMSLE_VV,  false },
-> +    [TCG_COND_LTU] = { OPC_VMSLTU_VV, false },
-> +    [TCG_COND_GEU] = { OPC_VMSLEU_VV, true  },
-> +    [TCG_COND_GTU] = { OPC_VMSLTU_VV, true  },
-> +    [TCG_COND_LEU] = { OPC_VMSLEU_VV, false }
-> +};
-> +
->   static void tcg_out_brcond(TCGContext *s, TCGCond cond, TCGReg arg1,
->                              TCGReg arg2, TCGLabel *l)
->   {
-> @@ -1054,6 +1114,79 @@ static void tcg_out_brcond(TCGContext *s, TCGCond cond, TCGReg arg1,
->       tcg_out_opc_branch(s, op, arg1, arg2, 0);
->   }
->   
-> +static const struct {
-> +    RISCVInsn op;
-> +    bool expand;
+> @@ -2312,6 +2314,12 @@ static void tcg_out_vec_op(TCGContext *s, TCGOpcode opc,
+>       case INDEX_op_xor_vec:
+>           tcg_out_opc_vv(s, OPC_VXOR_VV, a0, a1, a2, true);
+>           break;
+> +    case INDEX_op_not_vec:
+> +        tcg_out_opc_vi(s, OPC_VXOR_VI, a0, a1, -1, true);
+> +        break;
+> +    case INDEX_op_neg_vec:
+> +        tcg_out_opc_vx(s, OPC_VRSUB_VX, a0, a1, TCG_REG_ZERO, true);
+> +        break;
 
-invert is probably a better name.
-Why are these tables so far apart?
+Any reason not to use vrsub.vi?  Not wrong, just surprising.
 
-> +static void tcg_out_cmp_vec_vx(TCGContext *s, TCGCond cond, TCGReg arg1,
-> +                               tcg_target_long arg2)
-> +{
-> +    RISCVInsn op;
-> +
-> +    tcg_debug_assert((unsigned)cond < ARRAY_SIZE(tcg_cmpcond_to_rvv_vx));
-> +    op = tcg_cmpcond_to_rvv_vx[cond].op;
-> +    tcg_debug_assert(op != 0);
-> +
-> +    tcg_out_opc_vx(s, op, TCG_REG_V0, arg1, arg2, true);
-> +    if (tcg_cmpcond_to_rvv_vx[cond].expand) {
-> +        tcg_out_opc_mvv(s, OPC_VMNAND_MM, TCG_REG_V0, TCG_REG_V0,
-> +                        TCG_REG_V0, false);
-> +    }
-> +}
-
-I think you'll be better served by handling the invert during expand, because you can 
-always swap the sense of the predicate in the user.
-
-Compare tcg/i386 expand_vec_cmp_noinv.
-
-> +            tcg_gen_mov_vec(v0, tcg_constant_vec_matching(v0, vece, 0));
-
-You don't need to copy to v0; just use the tcg_constant_vec directly as
-
-> +            vec_gen_3(INDEX_op_rvv_merge_vec, type, vece,
-> +                      tcgv_vec_arg(v0), tcgv_vec_arg(v0),
-> +                      tcgv_i64_arg(tcg_constant_i64(-1)));
-
-the first source operand.
-
-You can swap 0 and -1 if the comparison instruction requires the predicate to be inverted.
+Obviously, NOT does not require SEW change.
 
 r~
 
