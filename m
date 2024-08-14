@@ -4,85 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 284C1C52D7F
-	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Aug 2024 09:02:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72767C3DA4A
+	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Aug 2024 09:12:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1se9t4-0005qW-GZ; Wed, 14 Aug 2024 05:01:46 -0400
+	id 1seA3F-0003q9-2A; Wed, 14 Aug 2024 05:12:17 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1se9t1-0005pd-PW
- for qemu-riscv@nongnu.org; Wed, 14 Aug 2024 05:01:44 -0400
-Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
+ id 1seA3D-0003p0-61
+ for qemu-riscv@nongnu.org; Wed, 14 Aug 2024 05:12:15 -0400
+Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1se9t0-0008TO-5r
- for qemu-riscv@nongnu.org; Wed, 14 Aug 2024 05:01:43 -0400
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-201df0b2df4so1506105ad.0
- for <qemu-riscv@nongnu.org>; Wed, 14 Aug 2024 02:01:41 -0700 (PDT)
+ id 1seA31-0001lN-Ao
+ for qemu-riscv@nongnu.org; Wed, 14 Aug 2024 05:12:14 -0400
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-2cd5d6b2581so4261301a91.2
+ for <qemu-riscv@nongnu.org>; Wed, 14 Aug 2024 02:12:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723626100; x=1724230900; darn=nongnu.org;
+ d=linaro.org; s=google; t=1723626720; x=1724231520; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=RPy2JHM1tbG6p1gt/0qA1Cv/ek4s+eznM+OJu+Bdyzk=;
- b=TBWvzCDs+Z0UY7BwYUMkgowv6AA+b2nDXR/tmjg7qATQXIBwYx0WY2TcnFAAGkaobZ
- VqtTV8/etOw2NwXL1HoUt9PiNIkJlhRcWQyKCjqpqxAHjvD1LnSUjfx+pLhgwKD6euyh
- TzYYJeDCV27praVYK3x/gwoMFEaCjBqflyiB7NkPXSROgYP2WGnjJogSBYXr3wXhmSn4
- GPVIjBaSMR3UxvFS6zZ6qiX3wOZYPnEXEpTp6lUh9mkKfXXIBw6TWLdFIVfAPTXS9fDO
- XCoVmdYiwb2ay3OGfJ3Y36WtXpBV17Ev5vDwZe6G2ukxjwe0QKo7VM/WdMLAQ2sr4E7H
- XDAQ==
+ bh=vo+Q7nKaCEGxhm2sz+3gwndBpFPUEHdxfFB1pkFylYw=;
+ b=ocpWZvfeD5XH4fhgNZeFds7lER5jW8gXzyg9QHQWP29sMYn/3lOXAkGeKt/XbOCS+W
+ DDFmKGUhhort+GT6tdTweCqCWHFuBEQklO5c6us0B0yTB+d2+1vOxZ6Zd65+OIj5VB1k
+ J/jVHlpf3JUV5X4V5y8OvBzzj4ydDw8lRdsM8f9p8vhOfxm1gcwBP5ZzW3UeTAKkbRrl
+ 6BKzPbemin/aXJYY4h3mNH6WyoxKsdhZFSnOYv38f1QL0HEQMBCIvJpUl2pZQySJjLRM
+ Bsi+ncI58vmF3v0fExenDaOnLUp4UXa30YBcBAmQxgDwJk0NhvW5QMPRCPuZXA3C0D6w
+ DCuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723626100; x=1724230900;
+ d=1e100.net; s=20230601; t=1723626720; x=1724231520;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=RPy2JHM1tbG6p1gt/0qA1Cv/ek4s+eznM+OJu+Bdyzk=;
- b=eM4aYiUx6a63HRYZ0KJ8eiPvgKSRR3b03rYLHlehHS+/TJH3BaTUSshwqgMGbMaEp/
- D/y1gUUtkULm82NTpuPOe6C+nkJIdhA5lgJPNa6C4a74jogiaqlYwZzxzZwsEvLhpH8o
- PvxP0Ma6LJ+GZcKdlsjsOiSmvDC8Wiwj9n4BVcW2/Azeb+dtQPv9K9xqVMizmZAcn1O3
- zfVbodH+8jHyWEgbt+LuhocF48fAGlITpwCLcuarWG/kP4n7ZT0Dz7XlEooGCJNmEkYQ
- BAME3wQyc1wuY556dOhfnMq1UjVlKhjJBmIj1+E3u65H4/dbcthtjCL6IHtaehV6Fnvm
- chOA==
-X-Gm-Message-State: AOJu0Yy5sLds5g9YN5eC87IKIrASL0iqDJySYruOu7J1TTZa+5KoTvE0
- /VUbXj9iIk2LUu27cuPq4DxSXo5KyPu4AOc1RL4PQO+/mcA/dA15Eo8EJI4iZVk=
-X-Google-Smtp-Source: AGHT+IH+XFjX1rLMlMnJwG3ECMmLjtHIQViEquRc8j98h4NmIiLwUIWhIvLm4DNibdFszEos+b2eJw==
-X-Received: by 2002:a17:902:cf0b:b0:1fd:664b:224 with SMTP id
- d9443c01a7336-201d64d0260mr23480555ad.56.1723626100370; 
- Wed, 14 Aug 2024 02:01:40 -0700 (PDT)
+ bh=vo+Q7nKaCEGxhm2sz+3gwndBpFPUEHdxfFB1pkFylYw=;
+ b=eJnig0/pGJI6BcLvIz9srDi6BA85jrJaT4Tgzlx/D90dnK6O9yD6PJLCNMgDXdJduI
+ PSGatjMsOj5F+DZraN98yWjYWelFUcu2+RQ/pbTQKWi2OGC/pL/dX8pwB3xpTxjQdQZa
+ 6iEVb3dZGFZ0lg0yXJfhfMG2YiHuVTtxrTagRbz0v41XwbLZqxWQ+rE/Ay3ODaPyZida
+ 5eUZaGHCFNhZLCY+nPlo6yw7RBJm5vx+yk9DxuCiv4UkJOcU/SJVZ74ralq+J7dGOXox
+ KxLPt79knS73sJtjvHac3mwjMUQF2SKWBxgoOuzNq8KvpKEqdQ1PVVqJY+lTj5jdI5+1
+ QZRw==
+X-Gm-Message-State: AOJu0YxL947V38W5zmSPg7ag+VQXNZRs5XshQFu6SG1fIzrHvwMKFLB3
+ Yfe5CqzdZBUzy+NLpGXZA7+gGy/q+Ek5oi1dSoauvoHRC4IJfJcn2DmEAX422z0=
+X-Google-Smtp-Source: AGHT+IHPl600IyqepDyveRozTqQnRwhp7nkCRFSm9E2N1XgXm15zg9a6uJhA+J5IO3q+jFt38xdang==
+X-Received: by 2002:a17:90a:510d:b0:2cc:ff56:5be1 with SMTP id
+ 98e67ed59e1d1-2d3aaa7cea2mr2247483a91.7.1723626720222; 
+ Wed, 14 Aug 2024 02:12:00 -0700 (PDT)
 Received: from [192.168.1.113] ([203.30.4.111])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-201e64ffb2dsm16915ad.29.2024.08.14.02.01.36
+ 98e67ed59e1d1-2d3ac7e8af3sm1142475a91.18.2024.08.14.02.11.56
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 14 Aug 2024 02:01:39 -0700 (PDT)
-Message-ID: <2ecd1ccc-ce2b-4432-a2a1-9af2dc70f037@linaro.org>
-Date: Wed, 14 Aug 2024 19:01:30 +1000
+ Wed, 14 Aug 2024 02:11:59 -0700 (PDT)
+Message-ID: <21210e0f-457e-4858-befc-f869984d3315@linaro.org>
+Date: Wed, 14 Aug 2024 19:11:51 +1000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 06/15] tcg/riscv: Implement vector load/store
+Subject: Re: [PATCH v1 07/15] tcg/riscv: Implement vector mov/dup{m/i}
 To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  dbarboza@ventanamicro.com, liwei1518@gmail.com, bmeng.cn@gmail.com,
  TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
 References: <20240813113436.831-1-zhiwei_liu@linux.alibaba.com>
- <20240813113436.831-7-zhiwei_liu@linux.alibaba.com>
+ <20240813113436.831-8-zhiwei_liu@linux.alibaba.com>
 Content-Language: en-US
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240813113436.831-7-zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20240813113436.831-8-zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x632.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,49 +98,34 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 8/13/24 21:34, LIU Zhiwei wrote:
-> @@ -827,14 +850,59 @@ static void tcg_out_ldst(TCGContext *s, RISCVInsn opc, TCGReg data,
->   static void tcg_out_ld(TCGContext *s, TCGType type, TCGReg arg,
->                          TCGReg arg1, intptr_t arg2)
->   {
-> -    RISCVInsn insn = type == TCG_TYPE_I32 ? OPC_LW : OPC_LD;
-> +    RISCVInsn insn;
-> +
-> +    if (type < TCG_TYPE_V64) {
-> +        insn = type == TCG_TYPE_I32 ? OPC_LW : OPC_LD;
-> +    } else {
-> +        tcg_debug_assert(arg >= TCG_REG_V1);
-> +        switch (prev_vece) {
-> +        case MO_8:
-> +            insn = OPC_VLE8_V;
-> +            break;
-> +        case MO_16:
-> +            insn = OPC_VLE16_V;
-> +            break;
-> +        case MO_32:
-> +            insn = OPC_VLE32_V;
-> +            break;
-> +        case MO_64:
-> +            insn = OPC_VLE64_V;
-> +            break;
-> +        default:
-> +            g_assert_not_reached();
-> +        }
-> +    }
->       tcg_out_ldst(s, insn, arg, arg1, arg2);
+> @@ -641,6 +645,13 @@ static bool tcg_out_mov(TCGContext *s, TCGType type, TCGReg ret, TCGReg arg)
+>       case TCG_TYPE_I64:
+>           tcg_out_opc_imm(s, OPC_ADDI, ret, arg, 0);
+>           break;
+> +    case TCG_TYPE_V64:
+> +    case TCG_TYPE_V128:
+> +    case TCG_TYPE_V256:
+> +        tcg_debug_assert(ret > TCG_REG_V0 && arg > TCG_REG_V0);
+> +        tcg_target_set_vec_config(s, type, prev_vece);
+> +        tcg_out_opc_vv(s, OPC_VMV_V_V, ret, TCG_REG_V0, arg, true);
 
-tcg_out_ld/st are called directly from register allocation spill/fill.
-You'll need to set vtype here, and cannot rely on this having been done in tcg_out_vec_op.
+I suggest these asserts be in tcg_out_opc_*
+That way you don't need to replicate to all uses.
 
-That said, with a little-endian host, the selected element size doesn't matter *too* much. 
-  A write of 8 uint16_t or a write of 2 uint64_t produces the same bits in memory.
+> +static inline bool tcg_out_dup_vec(TCGContext *s, TCGType type, unsigned vece,
+> +                                   TCGReg dst, TCGReg src)
 
-Therefore you can examine prev_vtype and adjust only if the vector length changes.  But we 
-do that -- e.g. load V256, store V256, store V128 to perform a 384-bit store for AArch64 
-SVE when VQ=3.
+Oh, please drop all of the inline markup, from all patches.
+Let the compiler decide.
 
-Is there an advantage to using the vector load/store whole register insns, if the 
-requested length is not too small?  IIRC the NF field can be used to store multiples, but 
-we can't store half of a register with these.
+> +static inline bool tcg_out_dupm_vec(TCGContext *s, TCGType type, unsigned vece,
+> +                                    TCGReg dst, TCGReg base, intptr_t offset)
+> +{
+> +    tcg_out_ld(s, TCG_TYPE_REG, TCG_REG_TMP0, base, offset);
+> +    return tcg_out_dup_vec(s, type, vece, dst, TCG_REG_TMP0);
+> +}
+
+Is this really better than using strided load with rs2 = r0?
 
 
 r~
