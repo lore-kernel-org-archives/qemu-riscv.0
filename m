@@ -4,75 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8506C531DC
-	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Aug 2024 08:43:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 284C1C52D7F
+	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Aug 2024 09:02:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1se9bj-0000Xs-FS; Wed, 14 Aug 2024 04:43:51 -0400
+	id 1se9t4-0005qW-GZ; Wed, 14 Aug 2024 05:01:46 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=5956f96c7e=ian.brockbank@cirrus.com>)
- id 1se9bh-0000NT-6v; Wed, 14 Aug 2024 04:43:49 -0400
-Received: from mx0b-001ae601.pphosted.com ([67.231.152.168])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=5956f96c7e=ian.brockbank@cirrus.com>)
- id 1se9bf-0005zY-8F; Wed, 14 Aug 2024 04:43:48 -0400
-Received: from pps.filterd (m0077474.ppops.net [127.0.0.1])
- by mx0b-001ae601.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 47E4gOKg023234;
- Wed, 14 Aug 2024 03:43:39 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cirrus.com; h=cc
- :content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=
- PODMain02222019; bh=BpG6B539a4OdKFkJyo/rvorQIsMi6L/7XRdL6Y07Hh4=; b=
- KfGsboNnHwMBUlW2RBcDnbk+3M3rzVnrRe5zbJ60W+Vsbp5HLtbyoxwFU7MXJKc9
- uPTxOkuCvW9O7s26vW4l8+hTloXV8r4IFdEr/lG+9DZBpsnMNnDHbn7q3XldRaR7
- 3TLT8fZerF2Vxl7a+Gft3R3Fk0hkwf/lh/yHAzFxNXUiABR0c5CuoRqx7JR6pVZU
- g9azXzRV/vGx85oWYNcfHcVCVWVP1jQAIq7zKlgysA7F8yKDO2tClUxIwWJf2dRX
- T4dm3R/4sqeATI7U7/o3CTOSdAynC0m8pJDmn0SaE+k2aoUfu71lGe0catFECT28
- mZjCADTDGNal75l0CxQHZQ==
-Received: from ausex02.ad.cirrus.com ([141.131.3.21])
- by mx0b-001ae601.pphosted.com (PPS) with ESMTPS id 40x4mhmb8r-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 14 Aug 2024 03:43:39 -0500 (CDT)
-Received: from ausex01.ad.cirrus.com (141.131.37.95) by ausex02.ad.cirrus.com
- (141.131.37.96) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.9; Wed, 14 Aug
- 2024 03:43:38 -0500
-Received: from EDIN7BQBTG3.ad.cirrus.com (141.131.38.212) by
- anon-ausex01.ad.cirrus.com (141.131.37.95) with Microsoft SMTP Server id
- 15.2.1544.9 via Frontend Transport; Wed, 14 Aug 2024 03:43:36 -0500
-From: Ian Brockbank <Ian.Brockbank@cirrus.com>
-To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
-CC: Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis
- <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>, Weiwei Li
- <liwei1518@gmail.com>, Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Ian Brockbank
- <ian.brockbank@cirrus.com>, LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH 06/11] target/riscv: Update CSR xtvec in CLIC mode
-Date: Wed, 14 Aug 2024 09:27:39 +0100
-Message-ID: <20240814083836.12256-16-Ian.Brockbank@cirrus.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240814083836.12256-1-Ian.Brockbank@cirrus.com>
-References: <https://lists.gnu.org/archive/html/qemu-riscv/2024-08/msg00234.html>
- <20240814083836.12256-1-Ian.Brockbank@cirrus.com>
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1se9t1-0005pd-PW
+ for qemu-riscv@nongnu.org; Wed, 14 Aug 2024 05:01:44 -0400
+Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1se9t0-0008TO-5r
+ for qemu-riscv@nongnu.org; Wed, 14 Aug 2024 05:01:43 -0400
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-201df0b2df4so1506105ad.0
+ for <qemu-riscv@nongnu.org>; Wed, 14 Aug 2024 02:01:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1723626100; x=1724230900; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=RPy2JHM1tbG6p1gt/0qA1Cv/ek4s+eznM+OJu+Bdyzk=;
+ b=TBWvzCDs+Z0UY7BwYUMkgowv6AA+b2nDXR/tmjg7qATQXIBwYx0WY2TcnFAAGkaobZ
+ VqtTV8/etOw2NwXL1HoUt9PiNIkJlhRcWQyKCjqpqxAHjvD1LnSUjfx+pLhgwKD6euyh
+ TzYYJeDCV27praVYK3x/gwoMFEaCjBqflyiB7NkPXSROgYP2WGnjJogSBYXr3wXhmSn4
+ GPVIjBaSMR3UxvFS6zZ6qiX3wOZYPnEXEpTp6lUh9mkKfXXIBw6TWLdFIVfAPTXS9fDO
+ XCoVmdYiwb2ay3OGfJ3Y36WtXpBV17Ev5vDwZe6G2ukxjwe0QKo7VM/WdMLAQ2sr4E7H
+ XDAQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723626100; x=1724230900;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=RPy2JHM1tbG6p1gt/0qA1Cv/ek4s+eznM+OJu+Bdyzk=;
+ b=eM4aYiUx6a63HRYZ0KJ8eiPvgKSRR3b03rYLHlehHS+/TJH3BaTUSshwqgMGbMaEp/
+ D/y1gUUtkULm82NTpuPOe6C+nkJIdhA5lgJPNa6C4a74jogiaqlYwZzxzZwsEvLhpH8o
+ PvxP0Ma6LJ+GZcKdlsjsOiSmvDC8Wiwj9n4BVcW2/Azeb+dtQPv9K9xqVMizmZAcn1O3
+ zfVbodH+8jHyWEgbt+LuhocF48fAGlITpwCLcuarWG/kP4n7ZT0Dz7XlEooGCJNmEkYQ
+ BAME3wQyc1wuY556dOhfnMq1UjVlKhjJBmIj1+E3u65H4/dbcthtjCL6IHtaehV6Fnvm
+ chOA==
+X-Gm-Message-State: AOJu0Yy5sLds5g9YN5eC87IKIrASL0iqDJySYruOu7J1TTZa+5KoTvE0
+ /VUbXj9iIk2LUu27cuPq4DxSXo5KyPu4AOc1RL4PQO+/mcA/dA15Eo8EJI4iZVk=
+X-Google-Smtp-Source: AGHT+IH+XFjX1rLMlMnJwG3ECMmLjtHIQViEquRc8j98h4NmIiLwUIWhIvLm4DNibdFszEos+b2eJw==
+X-Received: by 2002:a17:902:cf0b:b0:1fd:664b:224 with SMTP id
+ d9443c01a7336-201d64d0260mr23480555ad.56.1723626100370; 
+ Wed, 14 Aug 2024 02:01:40 -0700 (PDT)
+Received: from [192.168.1.113] ([203.30.4.111])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-201e64ffb2dsm16915ad.29.2024.08.14.02.01.36
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 14 Aug 2024 02:01:39 -0700 (PDT)
+Message-ID: <2ecd1ccc-ce2b-4432-a2a1-9af2dc70f037@linaro.org>
+Date: Wed, 14 Aug 2024 19:01:30 +1000
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: mc0j2OrmnRKsZRZFDUxxX5E83bhixuvI
-X-Proofpoint-GUID: mc0j2OrmnRKsZRZFDUxxX5E83bhixuvI
-X-Proofpoint-Spam-Reason: safe
-Received-SPF: pass client-ip=67.231.152.168;
- envelope-from=prvs=5956f96c7e=ian.brockbank@cirrus.com;
- helo=mx0b-001ae601.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 06/15] tcg/riscv: Implement vector load/store
+To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ dbarboza@ventanamicro.com, liwei1518@gmail.com, bmeng.cn@gmail.com,
+ TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
+References: <20240813113436.831-1-zhiwei_liu@linux.alibaba.com>
+ <20240813113436.831-7-zhiwei_liu@linux.alibaba.com>
+Content-Language: en-US
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20240813113436.831-7-zhiwei_liu@linux.alibaba.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x632.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -89,192 +98,51 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Ian Brockbank <ian.brockbank@cirrus.com>
+On 8/13/24 21:34, LIU Zhiwei wrote:
+> @@ -827,14 +850,59 @@ static void tcg_out_ldst(TCGContext *s, RISCVInsn opc, TCGReg data,
+>   static void tcg_out_ld(TCGContext *s, TCGType type, TCGReg arg,
+>                          TCGReg arg1, intptr_t arg2)
+>   {
+> -    RISCVInsn insn = type == TCG_TYPE_I32 ? OPC_LW : OPC_LD;
+> +    RISCVInsn insn;
+> +
+> +    if (type < TCG_TYPE_V64) {
+> +        insn = type == TCG_TYPE_I32 ? OPC_LW : OPC_LD;
+> +    } else {
+> +        tcg_debug_assert(arg >= TCG_REG_V1);
+> +        switch (prev_vece) {
+> +        case MO_8:
+> +            insn = OPC_VLE8_V;
+> +            break;
+> +        case MO_16:
+> +            insn = OPC_VLE16_V;
+> +            break;
+> +        case MO_32:
+> +            insn = OPC_VLE32_V;
+> +            break;
+> +        case MO_64:
+> +            insn = OPC_VLE64_V;
+> +            break;
+> +        default:
+> +            g_assert_not_reached();
+> +        }
+> +    }
+>       tcg_out_ldst(s, insn, arg, arg1, arg2);
 
-The new CLIC interrupt-handling mode is encoded as a new state in the
-existing WARL xtvec register, where the low two bits of are 11.
+tcg_out_ld/st are called directly from register allocation spill/fill.
+You'll need to set vtype here, and cannot rely on this having been done in tcg_out_vec_op.
 
-Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Signed-off-by: Ian Brockbank <ian.brockbank@cirrus.com>
----
- target/riscv/cpu.h      |  2 ++
- target/riscv/cpu_bits.h |  2 ++
- target/riscv/csr.c      | 63 ++++++++++++++++++++++++++++++++++++++---
- 3 files changed, 63 insertions(+), 4 deletions(-)
+That said, with a little-endian host, the selected element size doesn't matter *too* much. 
+  A write of 8 uint16_t or a write of 2 uint64_t produces the same bits in memory.
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 12aa8cf6b1..05a014db03 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -283,11 +283,13 @@ struct CPUArchState {
-     target_ulong medeleg;
+Therefore you can examine prev_vtype and adjust only if the vector length changes.  But we 
+do that -- e.g. load V256, store V256, store V128 to perform a 384-bit store for AArch64 
+SVE when VQ=3.
 
-     target_ulong stvec;
-+    target_ulong stvt; /* clic-spec */
-     target_ulong sepc;
-     target_ulong scause;
-     target_ulong sintthresh; /* clic-spec */
+Is there an advantage to using the vector load/store whole register insns, if the 
+requested length is not too small?  IIRC the NF field can be used to store multiples, but 
+we can't store half of a register with these.
 
-     target_ulong mtvec;
-+    target_ulong mtvt; /* clic-spec */
-     target_ulong mepc;
-     target_ulong mcause;
-     target_ulong mtval;  /* since: priv-1.10.0 */
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 0ed44ec0a8..279a6f889b 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -153,6 +153,7 @@
- #define CSR_MIE             0x304
- #define CSR_MTVEC           0x305
- #define CSR_MCOUNTEREN      0x306
-+#define CSR_MTVT            0x307 /* clic-spec-draft */
 
- /* 32-bit only */
- #define CSR_MSTATUSH        0x310
-@@ -192,6 +193,7 @@
- #define CSR_SIE             0x104
- #define CSR_STVEC           0x105
- #define CSR_SCOUNTEREN      0x106
-+#define CSR_STVT            0x107 /* clic-spec-draft */
-
- /* Supervisor Configuration CSRs */
- #define CSR_SENVCFG         0x10A
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 276ef7856e..be0071fd25 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -2170,9 +2170,23 @@ static RISCVException read_mtvec(CPURISCVState *env,=
- int csrno,
- static RISCVException write_mtvec(CPURISCVState *env, int csrno,
-                                   target_ulong val)
- {
--    /* bits [1:0] encode mode; 0 =3D direct, 1 =3D vectored, 2 >=3D reserv=
-ed */
--    if ((val & 3) < 2) {
-+    /*
-+     * bits [1:0] encode mode; 0 =3D direct, 1 =3D vectored, 3 =3D CLIC,
-+     * others reserved
-+     */
-+    target_ulong mode =3D get_field(val, XTVEC_MODE);
-+    target_ulong fullmode =3D val & XTVEC_FULL_MODE;
-+    if (mode <=3D XTVEC_CLINT_VECTORED) {
-         env->mtvec =3D val;
-+    } else if (XTVEC_CLIC =3D=3D fullmode && env->clic) {
-+        /*
-+         * CLIC mode hardwires xtvec bits 2-5 to zero.
-+         * Layout:
-+         *   XLEN-1:6   base (WARL)
-+         *   5:2        submode (WARL)  - 0000 for CLIC
-+         *   1:0        mode (WARL)     - 11 for CLIC
-+         */
-+        env->mtvec =3D (val & XTVEC_NBASE) | XTVEC_CLIC;
-     } else {
-         qemu_log_mask(LOG_UNIMP, "CSR_MTVEC: reserved mode not supported\n=
-");
-     }
-@@ -2271,6 +2285,18 @@ static RISCVException write_mcounteren(CPURISCVState=
- *env, int csrno,
-     return RISCV_EXCP_NONE;
- }
-
-+static int read_mtvt(CPURISCVState *env, int csrno, target_ulong *val)
-+{
-+    *val =3D env->mtvt;
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static int write_mtvt(CPURISCVState *env, int csrno, target_ulong val)
-+{
-+    env->mtvt =3D val & XTVEC_NBASE;
-+    return RISCV_EXCP_NONE;
-+}
-+
- /* Machine Trap Handling */
- static RISCVException read_mscratch_i128(CPURISCVState *env, int csrno,
-                                          Int128 *val)
-@@ -3122,9 +3148,24 @@ static RISCVException read_stvec(CPURISCVState *env,=
- int csrno,
- static RISCVException write_stvec(CPURISCVState *env, int csrno,
-                                   target_ulong val)
- {
--    /* bits [1:0] encode mode; 0 =3D direct, 1 =3D vectored, 2 >=3D reserv=
-ed */
--    if ((val & 3) < 2) {
-+    /*
-+     * bits [1:0] encode mode; 0 =3D direct, 1 =3D vectored, 3 =3D CLIC,
-+     * others reserved
-+     */
-+    target_ulong mode =3D val & XTVEC_MODE;
-+    target_ulong fullmode =3D val & XTVEC_FULL_MODE;
-+    if (mode <=3D XTVEC_CLINT_VECTORED) {
-         env->stvec =3D val;
-+    } else if (XTVEC_CLIC =3D=3D fullmode && env->clic) {
-+        /*
-+         * If only CLIC mode is supported, writes to bit 1 are also ignore=
-d and
-+         * it is always set to one. CLIC mode hardwires xtvec bits 2-5 to =
-zero.
-+         * Layout:
-+         *   XLEN-1:6   base (WARL)
-+         *   5:2        submode (WARL)  - 0000 for CLIC
-+         *   1:0        mode (WARL)     - 11 for CLIC
-+         */
-+        env->stvec =3D (val & XTVEC_NBASE) | XTVEC_CLIC;
-     } else {
-         qemu_log_mask(LOG_UNIMP, "CSR_STVEC: reserved mode not supported\n=
-");
-     }
-@@ -3149,6 +3190,18 @@ static RISCVException write_scounteren(CPURISCVState=
- *env, int csrno,
-     return RISCV_EXCP_NONE;
- }
-
-+static int read_stvt(CPURISCVState *env, int csrno, target_ulong *val)
-+{
-+    *val =3D env->stvt;
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static int write_stvt(CPURISCVState *env, int csrno, target_ulong val)
-+{
-+    env->stvt =3D val & XTVEC_NBASE;
-+    return RISCV_EXCP_NONE;
-+}
-+
- /* Supervisor Trap Handling */
- static RISCVException read_sscratch_i128(CPURISCVState *env, int csrno,
-                                          Int128 *val)
-@@ -5666,11 +5719,13 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D {
-                              write_mhpmcounterh                         },
-
-     /* Machine Mode Core Level Interrupt Controller */
-+    [CSR_MTVT]           =3D { "mtvt",       clic,  read_mtvt, write_mtvt =
-},
-     [CSR_MINTSTATUS]     =3D { "mintstatus", clic,  read_mintstatus       =
-},
-     [CSR_MINTTHRESH]     =3D { "mintthresh", clic,  read_mintthresh,
-                              write_mintthresh },
-
-     /* Supervisor Mode Core Level Interrupt Controller */
-+    [CSR_STVT]           =3D { "stvt",       clic,  read_stvt, write_stvt =
-},
-     [CSR_SINTSTATUS]     =3D { "sintstatus", clic,  read_sintstatus       =
-},
-     [CSR_SINTTHRESH]     =3D { "sintthresh", clic,  read_sintthresh,
-                              write_sintthresh },
---
-2.46.0.windows.1
-This message and any attachments may contain privileged and confidential in=
-formation that is intended solely for the person(s) to whom it is addressed=
-. If you are not an intended recipient you must not: read; copy; distribute=
-; discuss; take any action in or make any reliance upon the contents of thi=
-s message; nor open or read any attachment. If you have received this messa=
-ge in error, please notify us as soon as possible on the following telephon=
-e number and destroy this message including any attachments. Thank you. Cir=
-rus Logic International (UK) Ltd and Cirrus Logic International Semiconduct=
-or Ltd are companies registered in Scotland, with registered numbers SC0898=
-39 and SC495735 respectively. Our registered office is at 7B Nightingale Wa=
-y, Quartermile, Edinburgh, EH3 9EG, UK. Tel: +44 (0)131 272 7000. www.cirru=
-s.com
+r~
 
