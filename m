@@ -4,118 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5577FC52D7C
-	for <qemu-riscv@archiver.kernel.org>; Tue, 13 Aug 2024 20:49:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F987C52D7C
+	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Aug 2024 00:59:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sdySe-0000vt-0y; Tue, 13 Aug 2024 16:49:44 -0400
+	id 1se2MB-0008OL-VU; Tue, 13 Aug 2024 20:59:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1sdySb-0000lw-MS
- for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:49:41 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1se2MA-0008NO-0L; Tue, 13 Aug 2024 20:59:18 -0400
+Received: from out30-118.freemail.mail.aliyun.com ([115.124.30.118])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1sdySZ-0001fu-QY
- for qemu-riscv@nongnu.org; Tue, 13 Aug 2024 16:49:41 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1723582179;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=2jyXx+wKOQOxU2ecyqA2iwoYFri7dVNuVaZYwSPMvZE=;
- b=iV92+xvQsGNULc0/FCrXMgSLbaxiUD06JlE4nVVVjphQTPNZpq5jrTq+CyUL8qFiReiBcQ
- uGLdAC8AvJ9CI4UQdURtleq+cYUFp2BgS4RtodHAlylGOWJ5T2+Y/Xb9wDAQsOeesAtoOB
- GUCsIBBiaJdkCaNCtAc7NBo0KHFi4po=
-Received: from mail-ed1-f70.google.com (mail-ed1-f70.google.com
- [209.85.208.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-142-9fv5dSJfMv2ZCakHjk_-dg-1; Tue, 13 Aug 2024 16:49:36 -0400
-X-MC-Unique: 9fv5dSJfMv2ZCakHjk_-dg-1
-Received: by mail-ed1-f70.google.com with SMTP id
- 4fb4d7f45d1cf-5b122f40f64so4594979a12.3
- for <qemu-riscv@nongnu.org>; Tue, 13 Aug 2024 13:49:36 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723582175; x=1724186975;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=2jyXx+wKOQOxU2ecyqA2iwoYFri7dVNuVaZYwSPMvZE=;
- b=dFPmRbDv26gIv+h2wZHAFLLTyj6wyI4CKV0ocNcIhVKGbVEsR/BaWLDeu2UdUTZYKE
- mQmwaXgCsDys3vbp64/tzL3ldOCHE/LMjEVaUkBdFJ21n14GV8/LxI1qqIHLJHTC4NvG
- vsQHdehmtYIX1dDBx0LBtj3Qp7p+DsYn1Oxno6yY9V6sgP0hSpzBOV5r+Pc23Ox2DqvN
- XCn3TB40Fpyd7auXbAtppmKDi4sY4mbugLUI5blAGLzuJmlS2jRp3G9LuXisX9oGpkra
- 4tCj3kwDr4ViXgEVhjgVkk2yqaoMyGg3XqF5H1NjdTOeW2SaHwv36t7C2Xwxv0m0e4nU
- 1dzw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWoGD0C4x7F3mIrfs0j/009ZecfotkEbTW7cRl8xIhBZOojJy2rqkhZik+xb9MpzMTveIdjnz0gZ+Ex@nongnu.org
-X-Gm-Message-State: AOJu0YzGDcAqbt4gS/OQoFBjdR1lY9yeyFnIsBGeq+Uxnk8YJdX6x0vU
- 5MaQC2znYVaUwcj2ZXILZzZ6xdAbWORvCATkSte1oWxJ5wIBvugNOzIaYYEUeU1QTCxO0b1spwx
- OjlljcVLJaQrV0+RQShHoKoEjFbvjLbLr7KM8XfXFemONlwwMmus3
-X-Received: by 2002:a05:6402:354d:b0:5a2:eeeb:9470 with SMTP id
- 4fb4d7f45d1cf-5bea1c7d55cmr495886a12.18.1723582175640; 
- Tue, 13 Aug 2024 13:49:35 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFOThsCAJZvMWhFXkmvc33CnN7/gHIhcFcd6plNLIQ7t1uElLb+9qnrCat3ar5DTPcCAzlaCA==
-X-Received: by 2002:a05:6402:354d:b0:5a2:eeeb:9470 with SMTP id
- 4fb4d7f45d1cf-5bea1c7d55cmr495846a12.18.1723582174803; 
- Tue, 13 Aug 2024 13:49:34 -0700 (PDT)
-Received: from redhat.com ([2a0d:6fc7:346:dcde:9c09:aa95:551d:d374])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5bd1a602115sm3148299a12.96.2024.08.13.13.49.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 13 Aug 2024 13:49:34 -0700 (PDT)
-Date: Tue, 13 Aug 2024 16:49:24 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Alex =?iso-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>
-Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
- Michael Roth <michael.roth@amd.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Mahmoud Mandour <ma.mandourr@gmail.com>,
- Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Weiwei Li <liwei1518@gmail.com>, Eduardo Habkost <eduardo@habkost.net>,
- =?iso-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>,
- Markus Armbruster <armbru@redhat.com>,
- David Hildenbrand <david@redhat.com>, Beraldo Leal <bleal@redhat.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Eric Auger <eric.auger@redhat.com>, Song Gao <gaosong@loongson.cn>,
- qemu-arm@nongnu.org, Peter Xu <peterx@redhat.com>,
- Jiri Pirko <jiri@resnulli.us>, Eric Blake <eblake@redhat.com>,
- Fabiano Rosas <farosas@suse.de>, qemu-s390x@nongnu.org,
- Peter Maydell <peter.maydell@linaro.org>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- John Snow <jsnow@redhat.com>, Alexandre Iooss <erdnaxe@crans.org>,
- Konstantin Kostiuk <kkostiuk@redhat.com>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>,
- Cleber Rosa <crosa@redhat.com>,
- Ilya Leoshkevich <iii@linux.ibm.com>, qemu-riscv@nongnu.org,
- Thomas Huth <thuth@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Jason Wang <jasowang@redhat.com>, Bin Meng <bmeng.cn@gmail.com>,
- Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>,
- Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Nicholas Piggin <npiggin@gmail.com>
-Subject: Re: [PATCH v2 17/21] virtio-net: Use virtual time for RSC timers
-Message-ID: <20240813164916-mutt-send-email-mst@kernel.org>
-References: <20240813202329.1237572-1-alex.bennee@linaro.org>
- <20240813202329.1237572-18-alex.bennee@linaro.org>
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1se2M7-0004QV-DF; Tue, 13 Aug 2024 20:59:17 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linux.alibaba.com; s=default;
+ t=1723597145; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
+ bh=qc9zSGnAkRo6xuD6J8t5C+U/jljFRApyqoH6+UZTs9U=;
+ b=tw4vZrybfXWBP9gBfqWRuICfQ6tInqWxlTRRv05WApthzgLBFMXLTrUE9+E+ENkkskLECkyVzF6IDzznb8WCh2yZAweOS7audTHQffdgPMg20yqwrwxyzHVf141fpFlht/gkX6VmAenXjFyobE4p2BNfEcw5nJMEg+flv3QGXXE=
+Received: from 30.166.64.117(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0WCqL5u3_1723597142) by smtp.aliyun-inc.com;
+ Wed, 14 Aug 2024 08:59:02 +0800
+Message-ID: <1e61235e-1cb8-4bc1-9983-6e8dc0c3b406@linux.alibaba.com>
+Date: Wed, 14 Aug 2024 08:58:42 +0800
 MIME-Version: 1.0
-In-Reply-To: <20240813202329.1237572-18-alex.bennee@linaro.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 03/15] tcg: Fix register allocation constraints
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ dbarboza@ventanamicro.com, liwei1518@gmail.com, bmeng.cn@gmail.com,
+ TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
+References: <20240813113436.831-1-zhiwei_liu@linux.alibaba.com>
+ <20240813113436.831-4-zhiwei_liu@linux.alibaba.com>
+ <2efe353a-4700-4632-b919-e43cb039c2c0@linaro.org>
+Content-Language: en-US
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <2efe353a-4700-4632-b919-e43cb039c2c0@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=mst@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
-X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.125,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+Received-SPF: pass client-ip=115.124.30.118;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-118.freemail.mail.aliyun.com
+X-Spam_score_int: -174
+X-Spam_score: -17.5
+X-Spam_bar: -----------------
+X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -131,55 +69,77 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Aug 13, 2024 at 09:23:25PM +0100, Alex Benn�e wrote:
-> From: Nicholas Piggin <npiggin@gmail.com>
-> 
-> Receive coalescing is visible to the target machine, so its timers
-> should use virtual time like other timers in virtio-net, to be
-> compatible with record-replay.
-> 
-> Signed-off-by: Nicholas Piggin <npiggin@gmail.com>
-> Message-Id: <20240813050638.446172-10-npiggin@gmail.com>
-> Signed-off-by: Alex Benn�e <alex.bennee@linaro.org>
 
-Acked-by: Michael S. Tsirkin <mst@redhat.com>
+On 2024/8/13 19:52, Richard Henderson wrote:
+> On 8/13/24 21:34, LIU Zhiwei wrote:
+>> From: TANG Tiancheng<tangtiancheng.ttc@alibaba-inc.com>
+>>
+>> When allocating registers for input and output, ensure they match
+>> the available registers to avoid allocating illeagal registers.
+>>
+>> We should respect RISC-V vector extension's variable-length registers
+>> and LMUL-based register grouping. Coordinate with 
+>> tcg_target_available_regs
+>> initialization tcg_target_init (behind this commit) to ensure proper
+>> handling of vector register constraints.
+>>
+>> Note: While mov_vec doesn't have constraints, dup_vec and other IRs do.
+>> We need to strengthen constraints for all IRs except mov_vec, and this
+>> is sufficient.
+>>
+>> Signed-off-by: TANG Tiancheng<tangtiancheng.ttc@alibaba-inc.com>
+>> Fixes: 29f5e92502 (tcg: Introduce paired register allocation)
+>> Reviewed-by: Liu Zhiwei<zhiwei_liu@linux.alibaba.com>
+>> ---
+>>   tcg/tcg.c | 20 +++++++++++++-------
+>>   1 file changed, 13 insertions(+), 7 deletions(-)
+>>
+>> diff --git a/tcg/tcg.c b/tcg/tcg.c
+>> index 34e3056380..d26b42534d 100644
+>> --- a/tcg/tcg.c
+>> +++ b/tcg/tcg.c
+>> @@ -4722,8 +4722,10 @@ static void tcg_reg_alloc_dup(TCGContext *s, 
+>> const TCGOp *op)
+>>           return;
+>>       }
+>>   -    dup_out_regs = tcg_op_defs[INDEX_op_dup_vec].args_ct[0].regs;
+>> -    dup_in_regs = tcg_op_defs[INDEX_op_dup_vec].args_ct[1].regs;
+>> +    dup_out_regs = tcg_op_defs[INDEX_op_dup_vec].args_ct[0].regs &
+>> + tcg_target_available_regs[ots->type];
+>> +    dup_in_regs = tcg_op_defs[INDEX_op_dup_vec].args_ct[1].regs &
+>> + tcg_target_available_regs[its->type];
+>
+> Why would you ever have constraints that resolve to unavailable 
+> registers?
+>
+> If you don't want to fix this in the backend, then the next best place 
+> is in process_op_defs(), so that we take care of this once at startup, 
+> and never have to think about it again.
 
-> ---
->  hw/net/virtio-net.c | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
-> 
-> diff --git a/hw/net/virtio-net.c b/hw/net/virtio-net.c
-> index 10ebaae5e2..ed33a32877 100644
-> --- a/hw/net/virtio-net.c
-> +++ b/hw/net/virtio-net.c
-> @@ -2124,7 +2124,7 @@ static void virtio_net_rsc_purge(void *opq)
->      chain->stat.timer++;
->      if (!QTAILQ_EMPTY(&chain->buffers)) {
->          timer_mod(chain->drain_timer,
-> -              qemu_clock_get_ns(QEMU_CLOCK_HOST) + chain->n->rsc_timeout);
-> +              qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) + chain->n->rsc_timeout);
->      }
->  }
->  
-> @@ -2360,7 +2360,7 @@ static size_t virtio_net_rsc_do_coalesce(VirtioNetRscChain *chain,
->          chain->stat.empty_cache++;
->          virtio_net_rsc_cache_buf(chain, nc, buf, size);
->          timer_mod(chain->drain_timer,
-> -              qemu_clock_get_ns(QEMU_CLOCK_HOST) + chain->n->rsc_timeout);
-> +              qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) + chain->n->rsc_timeout);
->          return size;
->      }
->  
-> @@ -2598,7 +2598,7 @@ static VirtioNetRscChain *virtio_net_rsc_lookup_chain(VirtIONet *n,
->          chain->max_payload = VIRTIO_NET_MAX_IP6_PAYLOAD;
->          chain->gso_type = VIRTIO_NET_HDR_GSO_TCPV6;
->      }
-> -    chain->drain_timer = timer_new_ns(QEMU_CLOCK_HOST,
-> +    chain->drain_timer = timer_new_ns(QEMU_CLOCK_VIRTUAL,
->                                        virtio_net_rsc_purge, chain);
->      memset(&chain->stat, 0, sizeof(chain->stat));
->  
-> -- 
-> 2.39.2
+Hi Richard,
 
+The constraints provided in process_op_defs() are static and tied to the 
+IR operations. For example, if we create constraints for add_vec, the 
+same constraints will apply to all types of add_vec operations 
+(TCG_TYPE_V64, TCG_TYPE_V128, TCG_TYPE_V256). This means the constraints 
+don't change based on the specific type of operation being performed.
+In contrast, RISC-V's LMUL (Length Multiplier) can change at runtime 
+depending on the type of IR operation. Different LMUL values affect 
+which vector registers are available for use in RISC-V. Let's consider 
+an example where the host's vector register width is 128 bits:
+
+For an add_vec operation on v256 (256-bit vectors), only even-numbered 
+vector registers like 0, 2, 4 can be used.
+However, for an add_vec operation on v128 (128-bit vectors), all vector 
+registers (0, 1, 2, etc.) are available.
+
+Thus if we want to use all registers of vectors, we have to add a 
+dynamic constraint on register allocation based on IR types.
+
+Thanks,
+Zhiwei
+
+>
+>
+> r~
 
