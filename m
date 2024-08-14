@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C099DC3DA4A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Aug 2024 09:56:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 180F2C3DA4A
+	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Aug 2024 10:16:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1seAjO-0000O6-2p; Wed, 14 Aug 2024 05:55:50 -0400
+	id 1seB36-000298-IY; Wed, 14 Aug 2024 06:16:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1seAjM-0000J5-6z
- for qemu-riscv@nongnu.org; Wed, 14 Aug 2024 05:55:48 -0400
-Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
+ id 1seB34-00026Q-Ie
+ for qemu-riscv@nongnu.org; Wed, 14 Aug 2024 06:16:10 -0400
+Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1seAjK-0008Tv-0g
- for qemu-riscv@nongnu.org; Wed, 14 Aug 2024 05:55:47 -0400
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-1ff4fa918afso37725595ad.1
- for <qemu-riscv@nongnu.org>; Wed, 14 Aug 2024 02:55:45 -0700 (PDT)
+ id 1seB31-0003Hk-9o
+ for qemu-riscv@nongnu.org; Wed, 14 Aug 2024 06:16:10 -0400
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-1ff4fa918afso37831045ad.1
+ for <qemu-riscv@nongnu.org>; Wed, 14 Aug 2024 03:16:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723629344; x=1724234144; darn=nongnu.org;
+ d=linaro.org; s=google; t=1723630565; x=1724235365; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=iHg4T+pbxh5EjB2vtOo2uWBFIU5uizPJDJw17upuzhk=;
- b=pXkIbk7aOJFFtnERmFBZhIM1SDSsyCQxxJS5HPJ5g/TtB/4JrZJYs2EjJ5lWVA2lQK
- yMgDPBbeOs/sM7DT6j23q4+ROxTWMvZbRt+OA2MpSdlqQJCNNTxBIqja6WMQ7zMgBoX5
- PVArvZAXV9UOfdV/wS4fnhwuDBGUrrM7xOALp2Jenp0crwT68SC+3GNDSCU1N6616n75
- bfAc6RjvY/UkQInS1c2PQjtxYwMyVeqibk4itdwMcX/jHCgsGSlAkcHZgq9lrhoOrdhy
- 1Mtc+pmqOU6vMi6SfQksDho7+wox3KRDStqQl4gEX5DG/OCP6myOmiCldbHhfecrBy/j
- 53TA==
+ bh=YxWePeY049wtJy3phOWVYIBuofiYQ77fWQBu+Xk7HPw=;
+ b=ITFyxT0kV950AIgmEoEAdIlbZ03QxiReKTfdrvz2d8IxT/xS1Vd5dRCSkBHTBe2Gdv
+ melYc8awP+AgeS7Xma/H9bzYJfiBpnGbnXNzNduY1BY1eDgK876EMczYRFR4Ld7NmQW/
+ /uWtV1TPzH/EeOurpSucdxdTekfk1s/1Spac44STzhsYna9v9diGjsfZfD/94EZZaoaY
+ BMbuA/qVrdYFtUc9wAHGZXinvMCW2R0iM2tQ7u/N6xDumD/3uIoA1R1/1Gz7e26MmmsG
+ DM6BAHvHzWcCTsa5C17eBvQqIzgwXTX6H1iYnQrjKqrycU8exyL6r7irczSKrhPhxMCb
+ HJQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723629344; x=1724234144;
+ d=1e100.net; s=20230601; t=1723630565; x=1724235365;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=iHg4T+pbxh5EjB2vtOo2uWBFIU5uizPJDJw17upuzhk=;
- b=ED7+YTc2eiLX33jNbCT2YuSkVS1FNmP3baL5LIhz1M/yZcEoB/h7HLa66NDs9ttetD
- LXUNgFmcempwebZtHyoNpyk1OmKsCWip8n0yfWPd9wxhPplw7pXpXZwo3Ghiofy8h74L
- tWFFNBWDu+6btZZZQh/4KNAnil38OlAGWd9rPEWf3BdJuw0b2lMXbHxSNV1fyeRRcy5h
- nAgytjY5nw1EIAsg4iv+M7ANrI1Ez3ZZMWVFXXqUzJRre+vWC0yDj3/f/6TDnX3GuNcK
- Q9DeH0wT5otG4wzrMnX5wYEe4KIkY+OrnZG11ccLoS/PbHCTrMt5qz6g0icauX2tN9k3
- 9dsg==
-X-Gm-Message-State: AOJu0YwE6P9ArL2KsIE9FGhTDWmIDQ9sSgETj5a7C0TcJ3uLSUXA4Hnb
- 6lclf++nNc6m0RvdemAJWqCG5ZPt792N/w4ZrVho/xNvoVWg+1o1FKC2BI84LHc=
-X-Google-Smtp-Source: AGHT+IE3bE5lUoTUHE98v6sqXHZQbFCbnk6exN9O6IBDDcegx0wY4LLnnKd4CHTIp+Ur0o1A2RHmTg==
-X-Received: by 2002:a17:902:f542:b0:1fc:5eac:9873 with SMTP id
- d9443c01a7336-201d63dc1bemr27860605ad.30.1723629343919; 
- Wed, 14 Aug 2024 02:55:43 -0700 (PDT)
+ bh=YxWePeY049wtJy3phOWVYIBuofiYQ77fWQBu+Xk7HPw=;
+ b=wU36YyVGn5uV7lw1DAvf5tDmroivsN+p3t8boLojJXfqO4R9WgvxfK3omw6MsNpBwq
+ a+l4+M3MOcFIb07fQM1ZsncgUNB1VAN9diX3nZ+X8DU1RkFOAIQn0dYn8MaGNUDzcZyU
+ FYRxsR3pB3T0jtN29p6fSQcPnyE9vNVy8nw8c89FadcBgjaaWAs2jk6KT7AtCBlfRJw2
+ aoMpo/h67t60wCY0bRmMkC01acqE9EQ9DPtXugQbUjmfKKHYcFMg0lkrlil5MRyMlZum
+ Tei72AfX0WudGREX1ujvmG59eu4N2wQz/45XFCtdN8o8OT/bCV7fftYCvco8b+q/YgS7
+ Xl3g==
+X-Gm-Message-State: AOJu0YzP1nykwk5fz8A2CYXxbJwpmBC/tyhw8Q3AE+irDud8zdcCnC8g
+ 80fO8EL4tgFngzv9/lswz2WAjdyw8gkK/noos1sV/Gow3+Ac8/kooQbWUcXNCH0=
+X-Google-Smtp-Source: AGHT+IEG1RgQ4nGkeR1t8xUVdiu1nfEgVxHMlR9iSORqTXpKEU9TK6pjGAHaCpTRdSvVxw/oiT2f9Q==
+X-Received: by 2002:a17:903:5ce:b0:1fd:6529:7436 with SMTP id
+ d9443c01a7336-201d6397f3bmr19504955ad.8.1723630564991; 
+ Wed, 14 Aug 2024 03:16:04 -0700 (PDT)
 Received: from [192.168.1.113] ([203.30.4.111])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-201cd1b4497sm26280605ad.191.2024.08.14.02.55.39
+ d9443c01a7336-201cd132895sm26691355ad.9.2024.08.14.03.16.00
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 14 Aug 2024 02:55:43 -0700 (PDT)
-Message-ID: <d9a6dcfc-7ab0-4be7-b22d-21bb54710004@linaro.org>
-Date: Wed, 14 Aug 2024 19:55:37 +1000
+ Wed, 14 Aug 2024 03:16:04 -0700 (PDT)
+Message-ID: <7eabd980-ec6c-4748-8ada-f9d6228ee2ef@linaro.org>
+Date: Wed, 14 Aug 2024 20:15:58 +1000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 14/15] tcg/riscv: Implement vector roti/v/x shi ops
+Subject: Re: [PATCH v1 15/15] tcg/riscv: Enable vector TCG host-native
 To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  dbarboza@ventanamicro.com, liwei1518@gmail.com, bmeng.cn@gmail.com,
  TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
 References: <20240813113436.831-1-zhiwei_liu@linux.alibaba.com>
- <20240813113436.831-15-zhiwei_liu@linux.alibaba.com>
+ <20240813113436.831-16-zhiwei_liu@linux.alibaba.com>
 Content-Language: en-US
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240813113436.831-15-zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20240813113436.831-16-zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x633.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -99,38 +99,52 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 8/13/24 21:34, LIU Zhiwei wrote:
-> +    case INDEX_op_shli_vec:
-> +        if (a2 > 31) {
-> +            t2 = tcg_temp_new_i32();
-> +            tcg_gen_movi_i32(t2, (int32_t)a2);
-> +            tcg_gen_shls_vec(vece, v0, v1, t2);
+> From: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
+> 
+> Signed-off-by: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
+> Reviewed-by: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+> ---
+>   tcg/riscv/tcg-target.h | 10 +++++++---
+>   1 file changed, 7 insertions(+), 3 deletions(-)
+> 
+> diff --git a/tcg/riscv/tcg-target.h b/tcg/riscv/tcg-target.h
+> index eb5129a976..fe6c50e49e 100644
+> --- a/tcg/riscv/tcg-target.h
+> +++ b/tcg/riscv/tcg-target.h
+> @@ -143,9 +143,13 @@ typedef enum {
+>   #define TCG_TARGET_HAS_tst              0
+>   
+>   /* vector instructions */
+> -#define TCG_TARGET_HAS_v64              0
+> -#define TCG_TARGET_HAS_v128             0
+> -#define TCG_TARGET_HAS_v256             0
+> +extern int riscv_vlen;
+> +#define have_rvv    ((cpuinfo & CPUINFO_ZVE64X) && \
+> +                     (riscv_vlen >= 64))
+> +
+> +#define TCG_TARGET_HAS_v64              have_rvv
+> +#define TCG_TARGET_HAS_v128             have_rvv
+> +#define TCG_TARGET_HAS_v256             have_rvv
 
-Drop the movi, just pass tcg_constant_i32(a2) as the second source.
+Can ELEN ever be less than 64 for riscv64?
+I thought ELEN had to be at least XLEN.
+Anyway, if ELEN >= 64, then VLEN must also be >= 64.
 
-> +    case INDEX_op_rotls_vec:
-> +        t1 = tcg_temp_new_vec(type);
-> +        t2 = tcg_temp_new_i32();
-> +        tcg_gen_sub_i32(t2, tcg_constant_i32(8 << vece),
-> +                        temp_tcgv_i32(arg_temp(a2)));
-> +        tcg_gen_shrs_vec(vece, v0, v1, t2);
+In any case, I think we should not set CPUINFO_ZVE64X if the vlen is too small.  We can 
+initialize both values in util/cpuinfo-riscv.c, rather than initializing vlen in tcg.
 
-Only the low lg2(SEW) bits are used; you can just tcg_gen_neg_i32.
+> +static void riscv_get_vlenb(void){
+> +    /* Get vlenb for Vector: csrrs %0, vlenb, zero. */
+> +    asm volatile("csrrs %0, 0xc22, x0" : "=r"(riscv_vlen));
+> +    riscv_vlen *= 8;
+> +}
 
-> +    case INDEX_op_rotlv_vec:
-> +        v2 = temp_tcgv_vec(arg_temp(a2));
-> +        t1 = tcg_temp_new_vec(type);
-> +        c1 = tcg_constant_vec(type, vece, 8 << vece);
-> +        tcg_gen_sub_vec(vece, t1, c1, v2);
+While this is an interesting and required datum, if ELEN < XLEN is possible, then perhaps
 
-Likewise tcg_gen_neg_vec.
+     asm("vsetvli %0, r0, e64" : "=r"(vl));
 
-> +    case INDEX_op_rotrv_vec:
-> +        v2 = temp_tcgv_vec(arg_temp(a2));
-> +        t1 = tcg_temp_new_vec(type);
-> +        c1 = tcg_constant_vec(type, vece, 8 << vece);
-> +        tcg_gen_sub_vec(vece, t1, c1, v2);
-
-Likewise.
+is a better probe, verifying that vl != 0, i.e. e64 is supported, and recording vlen as vl 
+* 64, i.e. VLMAX.
 
 
 r~
