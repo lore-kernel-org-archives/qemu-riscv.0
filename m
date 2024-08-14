@@ -4,122 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 265A4C3DA4A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Aug 2024 07:07:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09AFEC3DA4A
+	for <qemu-riscv@archiver.kernel.org>; Wed, 14 Aug 2024 07:48:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1se86E-0007zV-JC; Wed, 14 Aug 2024 03:07:14 -0400
+	id 1se8jQ-0002TB-Jh; Wed, 14 Aug 2024 03:47:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1se86E-0007xc-01
- for qemu-riscv@nongnu.org; Wed, 14 Aug 2024 03:07:14 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1se8jO-0002Rv-85; Wed, 14 Aug 2024 03:47:42 -0400
+Received: from out30-101.freemail.mail.aliyun.com ([115.124.30.101])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1se86C-0007yD-GK
- for qemu-riscv@nongnu.org; Wed, 14 Aug 2024 03:07:13 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1723619231;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=aixfq3msU3vKLm2ITSkUT14V/Ja+F+Io6bU04msq8Z8=;
- b=TOUZgq4M8wj1tZsQBsrV42fGJ6tAvyCJlynyDPgdzO0W2XwfvWFMlPtyHB4/GUqULRSYYV
- kr3x96tiD1IzQabVAfBwrzRJNaWemNtsf3/SDh+/NaOC+9bxNXu+dWZKnT/MQB4TKRXDra
- dgRoXmGyt5Th5vFBFUQp3pyD1hp+tIg=
-Received: from mail-ej1-f69.google.com (mail-ej1-f69.google.com
- [209.85.218.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-471-aR4uGhl2PbqQW71DCVBjkQ-1; Wed, 14 Aug 2024 03:07:07 -0400
-X-MC-Unique: aR4uGhl2PbqQW71DCVBjkQ-1
-Received: by mail-ej1-f69.google.com with SMTP id
- a640c23a62f3a-a7a822ee907so505146166b.1
- for <qemu-riscv@nongnu.org>; Wed, 14 Aug 2024 00:07:07 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723619227; x=1724224027;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=aixfq3msU3vKLm2ITSkUT14V/Ja+F+Io6bU04msq8Z8=;
- b=ABJRcu3legP5je6Ps7EW8YGWCIUdcFVF3zcD7/ybICa3k0eWKNMCiwUSTyu84J6Al9
- Vpp6tydTdrCwxOLqLag8zwUz15pf+Qxcsje9Gs4omByBQxMsKUYhhYLnoU/4RddwrTej
- PyK8cu+kYNQILFUH5tiJfag3Ecs/Qi+lWtXPoDyimZ4Pr72Rfpp2li7L+ihVwXy8D43K
- AEkAXr+fUqCRBYRU2HTQPfc9KAncN8vImDYXa9m69BYIEpW3WT5umhpIZmS/irVSxaOd
- NpDwfKmg9NDOr9yJNGpQVlzUzlkiiDqO3Uw1IhhrRqA0Bs361ZTZuyc97ZGjWOQ+7rVC
- WBKg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWWEoLkj9anh28LJ0N0ao3CSKVUddXcXp0TXsNw0nUsgY547A/VKtlIF1wEhELx9kuxW2DyL9MSHq32prFn+X0c9s2bQj4=
-X-Gm-Message-State: AOJu0YycnEY16aU0O2sinSlTd7QLd9RINebXmaytJocRJNgklX2p4sXe
- 9ciwPh4Pcjfce6EQbIG2NA0rJosMv9aTgRA7nm8P+K2IwI30Rjti78m6dcp2mSMRVzNDXuIIBTS
- iNwa3rQ2pW14tt9UoLlbQ2K342eqgDGcajYlyqNc2iEybVx4gJIdS
-X-Received: by 2002:a17:907:f707:b0:a7a:cc10:667c with SMTP id
- a640c23a62f3a-a8366c30da9mr117169766b.16.1723619226613; 
- Wed, 14 Aug 2024 00:07:06 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHbBds23XHAUUkZQGp3vLwvFgu0MNt0KE3bGcRJ+z/5Zinju3k+5DQCGKMvpV+FzNUmdpzXcQ==
-X-Received: by 2002:a17:907:f707:b0:a7a:cc10:667c with SMTP id
- a640c23a62f3a-a8366c30da9mr117165466b.16.1723619225708; 
- Wed, 14 Aug 2024 00:07:05 -0700 (PDT)
-Received: from redhat.com ([2a0d:6fc7:346:dcde:9c09:aa95:551d:d374])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a80f411bbfcsm136904866b.135.2024.08.14.00.06.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Aug 2024 00:07:04 -0700 (PDT)
-Date: Wed, 14 Aug 2024 03:06:54 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Nicholas Piggin <npiggin@gmail.com>
-Cc: Alex =?iso-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>,
- qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
- Michael Roth <michael.roth@amd.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Mahmoud Mandour <ma.mandourr@gmail.com>,
- Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Weiwei Li <liwei1518@gmail.com>, Eduardo Habkost <eduardo@habkost.net>,
- =?iso-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>,
- Markus Armbruster <armbru@redhat.com>,
- David Hildenbrand <david@redhat.com>, Beraldo Leal <bleal@redhat.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Eric Auger <eric.auger@redhat.com>, Song Gao <gaosong@loongson.cn>,
- qemu-arm@nongnu.org, Peter Xu <peterx@redhat.com>,
- Jiri Pirko <jiri@resnulli.us>, Eric Blake <eblake@redhat.com>,
- Fabiano Rosas <farosas@suse.de>, qemu-s390x@nongnu.org,
- Peter Maydell <peter.maydell@linaro.org>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- John Snow <jsnow@redhat.com>, Alexandre Iooss <erdnaxe@crans.org>,
- Konstantin Kostiuk <kkostiuk@redhat.com>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>,
- Cleber Rosa <crosa@redhat.com>,
- Ilya Leoshkevich <iii@linux.ibm.com>, qemu-riscv@nongnu.org,
- Thomas Huth <thuth@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Jason Wang <jasowang@redhat.com>, Bin Meng <bmeng.cn@gmail.com>,
- Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>,
- Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Pavel Dovgalyuk <Pavel.Dovgalyuk@ispras.ru>
-Subject: Re: [PATCH v2 16/21] virtio-net: Use replay_schedule_bh_event for
- bhs that affect machine state
-Message-ID: <20240814030308-mutt-send-email-mst@kernel.org>
-References: <20240813202329.1237572-1-alex.bennee@linaro.org>
- <20240813202329.1237572-17-alex.bennee@linaro.org>
- <20240813164631-mutt-send-email-mst@kernel.org>
- <D3FEPPLH78YW.3BYA9B4HYGN1U@gmail.com>
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1se8jK-0005Il-EL; Wed, 14 Aug 2024 03:47:41 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linux.alibaba.com; s=default;
+ t=1723621648; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
+ bh=dvw3yj1jP3UPqnxBKlOoCmb/77qDYRvxvxCn7aFqC2k=;
+ b=jtCULcUurYWsYsAdxIu/YXkOGRo+x7E6wJQ81R0MHAWDcyeAVvn1Puf5CnbJoqAlwEUu7fZJU9eTTFcUYeGUWdP5P2p5RjJOAnSUtYcPTw3PHMrnI4wZVBkK2HMKYZKEOh1rFcrPRUjAAiu1Qmzaj6JEwUJ7wxd6VTyEcWSt+U0=
+Received: from 30.166.64.117(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0WCra.ld_1723621646) by smtp.aliyun-inc.com;
+ Wed, 14 Aug 2024 15:47:27 +0800
+Message-ID: <acdede99-bfb0-499f-9544-6d2fc163ebbf@linux.alibaba.com>
+Date: Wed, 14 Aug 2024 15:47:07 +0800
 MIME-Version: 1.0
-In-Reply-To: <D3FEPPLH78YW.3BYA9B4HYGN1U@gmail.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 03/15] tcg: Fix register allocation constraints
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ dbarboza@ventanamicro.com, liwei1518@gmail.com, bmeng.cn@gmail.com,
+ TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
+References: <20240813113436.831-1-zhiwei_liu@linux.alibaba.com>
+ <20240813113436.831-4-zhiwei_liu@linux.alibaba.com>
+ <2efe353a-4700-4632-b919-e43cb039c2c0@linaro.org>
+ <1e61235e-1cb8-4bc1-9983-6e8dc0c3b406@linux.alibaba.com>
+ <149df4e8-f51c-4925-8c65-e8e10fed85a3@linaro.org>
+ <5f1f74de-3403-4371-97eb-f376e65b7ae5@linux.alibaba.com>
+ <e4fe4bc8-6e00-4311-ba0d-14029b78f5e4@linaro.org>
+ <05df4315-b212-4d57-ac45-37a3034f73d2@linux.alibaba.com>
+ <447a4be7-ffb7-4409-8703-a29e14bb7352@linaro.org>
+Content-Language: en-US
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <447a4be7-ffb7-4409-8703-a29e14bb7352@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=mst@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
-X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.125,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+Received-SPF: pass client-ip=115.124.30.101;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-101.freemail.mail.aliyun.com
+X-Spam_score_int: -174
+X-Spam_score: -17.5
+X-Spam_bar: -----------------
+X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -135,107 +75,72 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Aug 14, 2024 at 04:05:34PM +1000, Nicholas Piggin wrote:
-> On Wed Aug 14, 2024 at 6:48 AM AEST, Michael S. Tsirkin wrote:
-> > On Tue, Aug 13, 2024 at 09:23:24PM +0100, Alex Bennée wrote:
-> > > From: Nicholas Piggin <npiggin@gmail.com>
-> > > 
-> > > The regular qemu_bh_schedule() calls result in non-deterministic
-> > > execution of the bh in record-replay mode, which causes replay failure.
-> > > 
-> > > Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
-> > > Reviewed-by: Pavel Dovgalyuk <Pavel.Dovgalyuk@ispras.ru>
-> > > Signed-off-by: Nicholas Piggin <npiggin@gmail.com>
-> > > Message-Id: <20240813050638.446172-9-npiggin@gmail.com>
-> > > Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-> > > ---
-> > >  hw/net/virtio-net.c | 11 ++++++-----
-> > >  1 file changed, 6 insertions(+), 5 deletions(-)
-> > > 
-> > > diff --git a/hw/net/virtio-net.c b/hw/net/virtio-net.c
-> > > index 08aa0b65e3..10ebaae5e2 100644
-> > > --- a/hw/net/virtio-net.c
-> > > +++ b/hw/net/virtio-net.c
-> > > @@ -40,6 +40,7 @@
-> > >  #include "migration/misc.h"
-> > >  #include "standard-headers/linux/ethtool.h"
-> > >  #include "sysemu/sysemu.h"
-> > > +#include "sysemu/replay.h"
-> > >  #include "trace.h"
-> > >  #include "monitor/qdev.h"
-> > >  #include "monitor/monitor.h"
-> > > @@ -417,7 +418,7 @@ static void virtio_net_set_status(struct VirtIODevice *vdev, uint8_t status)
-> > >                  timer_mod(q->tx_timer,
-> > >                                 qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) + n->tx_timeout);
-> > >              } else {
-> > > -                qemu_bh_schedule(q->tx_bh);
-> > > +                replay_bh_schedule_event(q->tx_bh);
-> > >              }
-> > >          } else {
-> > >              if (q->tx_timer) {
-> > > @@ -2672,7 +2673,7 @@ static void virtio_net_tx_complete(NetClientState *nc, ssize_t len)
-> > >           */
-> > >          virtio_queue_set_notification(q->tx_vq, 0);
-> > >          if (q->tx_bh) {
-> > > -            qemu_bh_schedule(q->tx_bh);
-> > > +            replay_bh_schedule_event(q->tx_bh);
-> > >          } else {
-> > >              timer_mod(q->tx_timer,
-> > >                        qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) + n->tx_timeout);
-> > > @@ -2838,7 +2839,7 @@ static void virtio_net_handle_tx_bh(VirtIODevice *vdev, VirtQueue *vq)
-> > >          return;
-> > >      }
-> > >      virtio_queue_set_notification(vq, 0);
-> > > -    qemu_bh_schedule(q->tx_bh);
-> > > +    replay_bh_schedule_event(q->tx_bh);
-> > >  }
-> > >  
-> > >  static void virtio_net_tx_timer(void *opaque)
-> > > @@ -2921,7 +2922,7 @@ static void virtio_net_tx_bh(void *opaque)
-> > >      /* If we flush a full burst of packets, assume there are
-> > >       * more coming and immediately reschedule */
-> > >      if (ret >= n->tx_burst) {
-> > > -        qemu_bh_schedule(q->tx_bh);
-> > > +        replay_bh_schedule_event(q->tx_bh);
-> > >          q->tx_waiting = 1;
-> > >          return;
-> > >      }
-> > > @@ -2935,7 +2936,7 @@ static void virtio_net_tx_bh(void *opaque)
-> > >          return;
-> > >      } else if (ret > 0) {
-> > >          virtio_queue_set_notification(q->tx_vq, 0);
-> > > -        qemu_bh_schedule(q->tx_bh);
-> > > +        replay_bh_schedule_event(q->tx_bh);
-> > >          q->tx_waiting = 1;
-> > >      }
-> > >  }
-> > > -- 
-> > > 2.39.2
-> >
-> >
-> > Is this really the only way to fix this? I do not think
-> > virtio has any business knowing about replay.
-> > What does this API do, even? BH but not broken with replay?
-> > Do we ever want replay broken? Why not fix qemu_bh_schedule?
-> > And when we add another feature which we do not want to break
-> > will we do foo_bar_replay_bh_schedule_event or what?
-> 
-> I agree with you. We need to do this (a couple of other hw
-> subsystems already do and likely some are still broken vs
-> replay and would need to be converted), but I think it's
-> mostly a case of bad naming. You're right the caller should
-> not know about replay at all, what it should be is whether
-> the event is for the target machine or the host harness,
-> same as timers are VIRTUAL / HOST.
-> So I think we just need to make a qemu_bh_schedule_<type>,
-> or qemu_bh_scheudle_event(... QEMU_EVENT_VIRTUAL/HOST/etc).
 
-Or just pass QEMUClockType?
+On 2024/8/14 12:18, Richard Henderson wrote:
+> On 8/14/24 13:30, LIU Zhiwei wrote:
+>>
+>> On 2024/8/14 11:08, Richard Henderson wrote:
+>>> On 8/14/24 12:27, LIU Zhiwei wrote:
+>>>>
+>>>> On 2024/8/14 10:04, Richard Henderson wrote:
+>>>>> On 8/14/24 10:58, LIU Zhiwei wrote:
+>>>>>> Thus if we want to use all registers of vectors, we have to add a 
+>>>>>> dynamic constraint on register allocation based on IR types.
+>>>>>
+>>>>> My comment vs patch 4 is that you can't do that, at least not 
+>>>>> without large changes to TCG.
+>>>>>
+>>>>> In addition, I said that the register pressure on vector regs is 
+>>>>> not high enough to justify such changes.Â  There is, so far, little 
+>>>>> benefit in having more than 4 or 5 vector registers, much less 32. 
+>>>>> Thus 7 (lmul 4, omitting v0) is sufficient.
+>>>>
+>>>> At least on QEMU, SVE can support 2048 bit vector length with 
+>>>> 'sve-default-vector- length=256'.Â  Software optimized with SVE, 
+>>>> such as X264 can benefit with long SVE length in less dynamic A64 
+>>>> instructions.
+>>>>
+>>>> We want to expose all host vector ability. Thus the largest 
+>>>> TCG_TYPE_V256 is not enough, as 128-bit RVV can give 8*128=1024 
+>>>> width operation. We have expand TCG_TYPE_V512/1024/2048 types(not 
+>>>> in this patch set, but intend to upstream later).
+>>>> With large TCG_TYPE_V1024/2048, we get better performance on RISC-V 
+>>>> board with much less translated RISC-V vector instructions. We can 
+>>>> give a more detailed experiment result if needed.
+>>>>
+>>>> However, we will only have 3 vector register when support 
+>>>> TCG_TYPE_V1024.Â  And even less for TCG_TYPE_V2048.Â  Current 
+>>>> approach will give more vectors TCG_TYPE_V128 even with support 
+>>>> TCG_TYPE_V1024, which will relax some guest NEON register pressure.
+>>>
+>>> Then you will have to teach TCG about one operand consuming and 
+>>> clobbering N hard registers, so that you get the spills and fills 
+>>> done correctly.
+>> I think we have done this in patch 6.
+>
+> No, you have not.
+>
+> There are no modifications to tcg_reg_alloc, and there are no 
+> additional calls to tcg_reg_free, which is where spills are generated. 
+> There would also need to be changes on the fill side, temp_load.
+Thanks. I choose the simple design as you suggest for this patch set. 
+And We will fix this problem when send the longer vector operations 
+implementation.
+>
+>
+>>> I think you should make longer vector operations a longer term project, 
+>>
+>> Does longer vector operations implementation deserves to upstream? We 
+>> can contribute it sooner as it is ready.
+>
+> Sure.
 
-> I had started on a conversion once but not completed it.
-> I could resurrect if there is agreement on the API?
-> 
-> Thanks,
-> Nick
+Good news!
 
+Thanks,
+Zhiwei
+
+>
+>
+> r~
 
