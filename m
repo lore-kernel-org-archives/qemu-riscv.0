@@ -4,56 +4,123 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FA2AC3DA7F
-	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Aug 2024 10:50:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F8E2C3DA7F
+	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Aug 2024 14:29:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1seY3X-0000k8-Iv; Thu, 15 Aug 2024 06:50:11 -0400
+	id 1sebTQ-00027h-Hq; Thu, 15 Aug 2024 10:29:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1seY3P-0000gf-2v; Thu, 15 Aug 2024 06:50:05 -0400
-Received: from out30-118.freemail.mail.aliyun.com ([115.124.30.118])
+ (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1sebTO-00022K-Sr
+ for qemu-riscv@nongnu.org; Thu, 15 Aug 2024 10:29:06 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1seY3M-00014M-Bx; Thu, 15 Aug 2024 06:50:02 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux.alibaba.com; s=default;
- t=1723718988; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
- bh=AV3AYu+DH86HNGKe/JSeSW5at/TVVSSufIlvyzQQA24=;
- b=mNJHiYJpPuxZiTXxPQSY8C7YniCLef+i8x5v5qsXsIxGRAKZRsNZecAE3JR1UnG1rDRrpbCb/ioa5Yqt0i3vknlYhaf+Tfxh0BxAgo4dicSo3hZrM2CyjPM1MzNRHsBDy3Pt/eN3q/lkt0l+ex46pfmc3S6BZL+QDAVdJDPw2jQ=
-Received: from 30.166.64.117(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0WCwdTc0_1723718984) by smtp.aliyun-inc.com;
- Thu, 15 Aug 2024 18:49:45 +0800
-Message-ID: <70a2e212-e2c5-4221-87cc-6ff371b5f509@linux.alibaba.com>
-Date: Thu, 15 Aug 2024 18:49:22 +0800
+ (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1sebTM-0005Pd-IL
+ for qemu-riscv@nongnu.org; Thu, 15 Aug 2024 10:29:06 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1723732143;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=pLW8VxYvBfkl9d6XaUqzmKjRXnbivJG5S8ggECncIC4=;
+ b=LzZOv0UvkabYpp/pVR1YMajM5YIXHAlyMlJ4DLmh1HIqOup2++8EZa6gUoU7eb7tOM1KPv
+ 1fg07Ag8K5TKJLrSKiYHEInbA+/DzQHuaDwrgt99vIKCQJAsJtQruWBCKeo/cNPDFqQFmP
+ vkdRuaFpcbcZs5gcB5SpCCvSqnMCvFs=
+Received: from mail-ed1-f71.google.com (mail-ed1-f71.google.com
+ [209.85.208.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-2-DHEQjR_DPuuVAkBxVtFA_g-1; Thu, 15 Aug 2024 10:29:00 -0400
+X-MC-Unique: DHEQjR_DPuuVAkBxVtFA_g-1
+Received: by mail-ed1-f71.google.com with SMTP id
+ 4fb4d7f45d1cf-5bec23ba156so310322a12.1
+ for <qemu-riscv@nongnu.org>; Thu, 15 Aug 2024 07:29:00 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723732139; x=1724336939;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=pLW8VxYvBfkl9d6XaUqzmKjRXnbivJG5S8ggECncIC4=;
+ b=o92WJ1ZbNteFbfh4FBoq5vAUWIPVtPB85jU9Qtihsj3+tgv5Dfp4w/uVwSlHaMqifv
+ qfdTYVg1eOqLLojgYH87ehMtb2nZfQNsCjxyYAxQjQq7CtzfljrnYxasNcKO8aZLb57x
+ zrBG9q/0QgBiqy8mrlwTKmqsY76yTKXnu2IKP6N6uHwlgMtPMzQ5Ao1wL4CB5brX+wz6
+ ulZ0PSLyPH+CQLkZ9ky0QNYLbrQqwkeCnyr0vkPhTq8ib8VjYGXqKsgUO3npbT4Ctg8R
+ N3R3PP+ZSLo9W7qW3o922r0dJbc3b5XFNZep8NyfqDLwpaqCWlxr9SYCFTLA+Xl1HHwq
+ MR7A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUhN8GDqUM7A723du0RW41tXG7hi3n9m1SzJIxvxV/HAu6b1MKvWqag0rHIi1wa9Fc7vP18ofTmGIZsNQWW0ft6bphID5I=
+X-Gm-Message-State: AOJu0YwTMhIr9bhAMkcQL6lDiLwNcn3LNVFvKu5XHoC74Yh72nh4HR8D
+ DIFTvZDWgXuGYVxQ1JV9nGVkY7hmBYN1IaEU25fCL71Jcd0Ihk+eGl8rGGBIg5RwBL0ZTVjjGvS
+ G2wezLsGgZ58heFB/kJg/dhqiO80Xbwhqj62wMXlGJLURMFwEoPfM
+X-Received: by 2002:a05:6402:e83:b0:5be:b6ae:dc68 with SMTP id
+ 4fb4d7f45d1cf-5beb6aee07amr1903220a12.10.1723732139469; 
+ Thu, 15 Aug 2024 07:28:59 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGxUvAIrtGJlhS2+cKFnc3kpN1cB4UpecvdGY8jlQAP3RH/LlQE/BcOYPhfJrk3tkUlBALFgg==
+X-Received: by 2002:a05:6402:e83:b0:5be:b6ae:dc68 with SMTP id
+ 4fb4d7f45d1cf-5beb6aee07amr1903190a12.10.1723732138674; 
+ Thu, 15 Aug 2024 07:28:58 -0700 (PDT)
+Received: from redhat.com ([2a02:14f:178:8f0f:2cfe:cb96:98c4:3fd0])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5bebc081a24sm938598a12.95.2024.08.15.07.28.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 15 Aug 2024 07:28:58 -0700 (PDT)
+Date: Thu, 15 Aug 2024 10:28:51 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Nicholas Piggin <npiggin@gmail.com>
+Cc: Alex =?iso-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>,
+ qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
+ Michael Roth <michael.roth@amd.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Mahmoud Mandour <ma.mandourr@gmail.com>,
+ Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Weiwei Li <liwei1518@gmail.com>, Eduardo Habkost <eduardo@habkost.net>,
+ =?iso-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>,
+ Markus Armbruster <armbru@redhat.com>,
+ David Hildenbrand <david@redhat.com>, Beraldo Leal <bleal@redhat.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Eric Auger <eric.auger@redhat.com>, Song Gao <gaosong@loongson.cn>,
+ qemu-arm@nongnu.org, Peter Xu <peterx@redhat.com>,
+ Jiri Pirko <jiri@resnulli.us>, Eric Blake <eblake@redhat.com>,
+ Fabiano Rosas <farosas@suse.de>, qemu-s390x@nongnu.org,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ John Snow <jsnow@redhat.com>, Alexandre Iooss <erdnaxe@crans.org>,
+ Konstantin Kostiuk <kkostiuk@redhat.com>,
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>,
+ Cleber Rosa <crosa@redhat.com>,
+ Ilya Leoshkevich <iii@linux.ibm.com>, qemu-riscv@nongnu.org,
+ Thomas Huth <thuth@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Jason Wang <jasowang@redhat.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>,
+ Wainer dos Santos Moschetta <wainersm@redhat.com>,
+ Pavel Dovgalyuk <Pavel.Dovgalyuk@ispras.ru>
+Subject: Re: [PATCH v2 16/21] virtio-net: Use replay_schedule_bh_event for
+ bhs that affect machine state
+Message-ID: <20240815102754-mutt-send-email-mst@kernel.org>
+References: <20240813202329.1237572-1-alex.bennee@linaro.org>
+ <20240813202329.1237572-17-alex.bennee@linaro.org>
+ <20240813164631-mutt-send-email-mst@kernel.org>
+ <D3FEPPLH78YW.3BYA9B4HYGN1U@gmail.com>
+ <20240814030308-mutt-send-email-mst@kernel.org>
+ <87y14z81ak.fsf@draig.linaro.org>
+ <D3GARIYVC16C.20SXVKSIMLED4@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 07/15] tcg/riscv: Implement vector mov/dup{m/i}
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- dbarboza@ventanamicro.com, liwei1518@gmail.com, bmeng.cn@gmail.com,
- TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
-References: <20240813113436.831-1-zhiwei_liu@linux.alibaba.com>
- <20240813113436.831-8-zhiwei_liu@linux.alibaba.com>
- <21210e0f-457e-4858-befc-f869984d3315@linaro.org>
-Content-Language: en-US
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <21210e0f-457e-4858-befc-f869984d3315@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.118;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-118.freemail.mail.aliyun.com
-X-Spam_score_int: -174
-X-Spam_score: -17.5
-X-Spam_bar: -----------------
-X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+In-Reply-To: <D3GARIYVC16C.20SXVKSIMLED4@gmail.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=mst@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -21
+X-Spam_score: -2.2
+X-Spam_bar: --
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.131,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -69,50 +136,32 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On Thu, Aug 15, 2024 at 05:12:32PM +1000, Nicholas Piggin wrote:
+> Could be a good idea. Although I'm not sure what to do with
+> all types, maybe we can restrict what is supported.
+> 
+> > Is this wider re-factoring something that can wait for the next
+> > developer cycle?
+> 
+> I would say so. It's not quite trivial to do nicely since
+> things are a bit tangled between util/async and replay.
+> 
+> > >> I had started on a conversion once but not completed it.
+> > >> I could resurrect if there is agreement on the API?
+> >
+> > I would certainly welcome it being cleaned up. The supported replay
+> > devices are very piecemeal at the moment.
+> 
+> I'll tidy up and post an RFC for how the new API might look.
+> 
+> Thanks,
+> Nick
 
-On 2024/8/14 17:11, Richard Henderson wrote:
-> On 8/13/24 21:34, LIU Zhiwei wrote:
->> @@ -641,6 +645,13 @@ static bool tcg_out_mov(TCGContext *s, TCGType 
->> type, TCGReg ret, TCGReg arg)
->>       case TCG_TYPE_I64:
->>           tcg_out_opc_imm(s, OPC_ADDI, ret, arg, 0);
->>           break;
->> +    case TCG_TYPE_V64:
->> +    case TCG_TYPE_V128:
->> +    case TCG_TYPE_V256:
->> +        tcg_debug_assert(ret > TCG_REG_V0 && arg > TCG_REG_V0);
->> +        tcg_target_set_vec_config(s, type, prev_vece);
->> +        tcg_out_opc_vv(s, OPC_VMV_V_V, ret, TCG_REG_V0, arg, true);
->
-> I suggest these asserts be in tcg_out_opc_*
-> That way you don't need to replicate to all uses.
-OK.
->
->> +static inline bool tcg_out_dup_vec(TCGContext *s, TCGType type, 
->> unsigned vece,
->> +                                   TCGReg dst, TCGReg src)
->
-> Oh, please drop all of the inline markup, from all patches.
-> Let the compiler decide.
->
-OK.
->> +static inline bool tcg_out_dupm_vec(TCGContext *s, TCGType type, 
->> unsigned vece,
->> +                                    TCGReg dst, TCGReg base, 
->> intptr_t offset)
->> +{
->> +    tcg_out_ld(s, TCG_TYPE_REG, TCG_REG_TMP0, base, offset);
->> +    return tcg_out_dup_vec(s, type, vece, dst, TCG_REG_TMP0);
->> +}
->
-> Is this really better than using strided load with rs2 = r0?
+Fundamentally it's virtio net, up to Jason. I don't like messy
+APIs and people tend to get distracted and not fix them up
+if one does not make this a blocker.
 
-It depends.  For our test board, it is.
+-- 
+MST
 
-Thanks,
-Zhiwei
-
->
->
-> r~
 
