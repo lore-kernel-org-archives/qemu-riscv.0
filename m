@@ -4,116 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86FF4C52D7D
-	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Aug 2024 12:59:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C5A5C531DF
+	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Aug 2024 16:08:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sewXz-0001Fz-Nn; Fri, 16 Aug 2024 08:59:15 -0400
+	id 1sezUg-0007Fk-UY; Fri, 16 Aug 2024 12:08:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sewXn-0000wr-05
- for qemu-riscv@nongnu.org; Fri, 16 Aug 2024 08:59:04 -0400
-Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1sezUf-0007FE-Ee
+ for qemu-riscv@nongnu.org; Fri, 16 Aug 2024 12:08:01 -0400
+Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1sewXf-0004HQ-4y
- for qemu-riscv@nongnu.org; Fri, 16 Aug 2024 08:58:58 -0400
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-3718c176ed7so664531f8f.2
- for <qemu-riscv@nongnu.org>; Fri, 16 Aug 2024 05:58:52 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1sezUT-0006db-DR
+ for qemu-riscv@nongnu.org; Fri, 16 Aug 2024 12:08:01 -0400
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-5becfd14353so785588a12.1
+ for <qemu-riscv@nongnu.org>; Fri, 16 Aug 2024 09:07:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723813131; x=1724417931; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=HdkEt5KhcqJAhdoywwE/9Y0vywYrNHR07p7OQF8KZ1k=;
- b=UyWJ6ck1ymbre0CR0j3WgyRqYeY9a/mvv+V++PRK9mH8fHF8E8QBIcq16UrJZnoUYw
- H0ALy10pPVzIpE2UyzuwNNSp4w+S3ZwPdRp+1wz3RIMqUGwfTQl0Mcf5xXn4IYlD8WBz
- YHa4cAACdISjgcSaeva0vo5VJzi4NrITBzJrxitmXU5vKB78/l61tdoHKAgtc4WMezl9
- N2cfHjQaGmWQX7W62kvRJyZ1U64wVYPQ+23rXwKnPQOoBEv/mJ5dF4SLsU2smxzSycAb
- mGYs7RPEnY1bJbNKmKeRoGdsYVRin+8yluyAd3uxlQXWDw2ogDJloo+VnebnXUq9idj6
- TMnQ==
+ d=ventanamicro.com; s=google; t=1723824468; x=1724429268; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=GxovKyc8hSR1GEckXAnxRaRBhpyLQnXSUFgpG27gYb0=;
+ b=XRe6Sb9hV1MO3Pqlw5UPVi6e0f7kUCX8G0N0S/GAqFeNOhjfWtLwSwRByiOceskU71
+ tu8nncXX3a+oa1NjYw9vg1ibr1yd+LsZwHbjmY05thdbm02BJw1fQkP6yQlszqGxKVaH
+ L8eW0ARBletXhZCvIajM5zrAPSREz+BV190Z4xgKX18Sx5i98xTfcPVnkqKx4IatFwZ0
+ 1hq7+8QpX//F43M6L2K8zuLEWVsZwKUuJKilqDLr0M94AKWQx9LcmdKuiB8iEHOSCc2L
+ 5k/LLbY2XjTrlphVihccGXwsbywZ8GjTSv5jEhc9mJdA6tOpVKUQT26EL/PT3954yb3G
+ cDqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723813131; x=1724417931;
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1723824468; x=1724429268;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HdkEt5KhcqJAhdoywwE/9Y0vywYrNHR07p7OQF8KZ1k=;
- b=CK1TzbwSVb5WBNbYXnDr67qr+DYfjVAzv8hzL/0qYvafKX0gk6zRVc9OjA/oCANvep
- fsPvf04ubURr0ZTpfTiEElKssZOvrji11MsyCFxOBTmHXfOSKU1OnvMNQBImkVk8SV/d
- 2Pljaq7/GKXClTAO34YXgIhy6I/ZZv/XFAR5k7WbjcPLHcyHSN363FqwnUsqQK75JIk6
- wkM882A3F4XO4Nz5+0SSabCC73KgeXBMRK8Mpinqx3M3d7pVJWgH3zs10pnP9T9CQyQj
- zXX7okoyXfSyYxB3RmvfxuexYu8wzSETIk+AhBgiVEPjIendXOJ2v/DYslEkAIjCBGsi
- Rmug==
+ bh=GxovKyc8hSR1GEckXAnxRaRBhpyLQnXSUFgpG27gYb0=;
+ b=VapT0KcVxmu2YeXTJxrevzVv7MTguClDDLCPlfhcI2TkoxebYSyZ2L+TCQpCaGzG9I
+ vnWUHiwUveiwTVnnl2AXZpKJneW/nQFrVvqwQ6h/VJgZZPRNtdRDC5OJp5+QOlmtNkTd
+ OJaif5m++U0FX42J0UV++mKQI0UTSnW2fSGcc6kxmpw2KyhcGKAnkh6L761sjNRyOxiX
+ sswcvE7DL30dY0ccwwh8POucoIc8aw/yqu3J/xYUqU7TWbhhBtdgu31itmlgCWgumZom
+ 14BpXacplA8yKc4SfVNgn4Fer5kObTcYiAaRL1L4CtctAzdNevCIdqR9JVFo0Ie/ZEz3
+ XHMg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXwLO1ztf5b+f+TUZ6qBRgVLTye0NCjq7BY9+bNKw2xio5nWEQAyCb5ANFCVIPf6f1AfW4Xr+jaL9I7Woc84HI9BTySkp8=
-X-Gm-Message-State: AOJu0Ywb4dyiHV1WuK4rAkz6MqFds4L9HR9wG1geNKFldxVgCYLOzShw
- f1CA4HYmQ+G+Evy83HEXtzf2aBScmeQBn4aNo8dh7PWMs4vjExhCQINk08C/x4z7/iRP5E/rWkT
- C
-X-Google-Smtp-Source: AGHT+IFr+XggQYNedKk0JyyU6hL2lLUl54qD7nk+4Z5Gpyax4tg8bAFUgbHj/GMkAC0T/ueLXjhjNA==
-X-Received: by 2002:adf:ed01:0:b0:368:68d3:32b3 with SMTP id
- ffacd0b85a97d-37194649a85mr1981369f8f.26.1723813130363; 
- Fri, 16 Aug 2024 05:58:50 -0700 (PDT)
-Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3718983a0eesm3645536f8f.1.2024.08.16.05.58.49
+ AJvYcCWjBcW26LFGUSaWn/fOXh5cre/6DFPMIc6QRwYgMHzilqr9D6ookLlbiVf7CwH3Pu57pdbM6PokepgIAQqwF21S5mB/xYs=
+X-Gm-Message-State: AOJu0YzuVK6F4SljYpvmUcIvRgsiLSxY6XQM6Qfdl+R4c8at4634rc5G
+ 1pYde9udQWUp/vy4B38glydEeJdmJWbAIMmJkqOYLFyvUrSSPjssIYxZhGrmK1M=
+X-Google-Smtp-Source: AGHT+IGQ9CXXgk4hQTnMfvSjmNwFM8UZMT20jPrwzyKKVc/ZJF7VhB8Qc/nrRpXhn0v97pp7wgPM4g==
+X-Received: by 2002:a17:907:6d05:b0:a7a:aa35:408c with SMTP id
+ a640c23a62f3a-a8392886ac8mr253294766b.8.1723824467317; 
+ Fri, 16 Aug 2024 09:07:47 -0700 (PDT)
+Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
+ [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a838393571bsm276095266b.98.2024.08.16.09.07.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Aug 2024 05:58:49 -0700 (PDT)
-Received: from draig (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id CBF135F867;
- Fri, 16 Aug 2024 13:58:48 +0100 (BST)
-From: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: Jason Wang <jasowang@redhat.com>
-Cc: "Michael S. Tsirkin" <mst@redhat.com>,  Nicholas Piggin
- <npiggin@gmail.com>,  qemu-devel@nongnu.org,  Alistair Francis
- <alistair.francis@wdc.com>,  Michael Roth <michael.roth@amd.com>,  Palmer
- Dabbelt <palmer@dabbelt.com>,  Mahmoud Mandour <ma.mandourr@gmail.com>,
- Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>,  Yoshinori Sato
- <ysato@users.sourceforge.jp>,  Weiwei Li <liwei1518@gmail.com>,  Eduardo
- Habkost <eduardo@habkost.net>,  =?utf-8?Q?Marc-Andr=C3=A9?= Lureau
- <marcandre.lureau@redhat.com>,  Markus Armbruster <armbru@redhat.com>,
- David Hildenbrand <david@redhat.com>,  Beraldo Leal <bleal@redhat.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,  Eric Auger
- <eric.auger@redhat.com>,  Song Gao <gaosong@loongson.cn>,
- qemu-arm@nongnu.org,  Peter Xu <peterx@redhat.com>,  Jiri Pirko
- <jiri@resnulli.us>,  Eric Blake <eblake@redhat.com>,  Fabiano Rosas
- <farosas@suse.de>,  qemu-s390x@nongnu.org,  Peter Maydell
- <peter.maydell@linaro.org>,  Daniel Henrique Barboza
- <dbarboza@ventanamicro.com>,  John Snow <jsnow@redhat.com>,  Alexandre
- Iooss <erdnaxe@crans.org>,  Konstantin Kostiuk <kkostiuk@redhat.com>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>,  Cleber Rosa
- <crosa@redhat.com>,  Ilya Leoshkevich <iii@linux.ibm.com>,
- qemu-riscv@nongnu.org,  Thomas Huth <thuth@redhat.com>,  Paolo Bonzini
- <pbonzini@redhat.com>,  Richard Henderson <richard.henderson@linaro.org>,
- Bin Meng <bmeng.cn@gmail.com>,  Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?=
- <philmd@linaro.org>,  Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Pavel Dovgalyuk <Pavel.Dovgalyuk@ispras.ru>
-Subject: Re: [PATCH v2 16/21] virtio-net: Use replay_schedule_bh_event for
- bhs that affect machine state
-In-Reply-To: <CACGkMEtS6kges+_hOum2QnpTWotT_ohkJv8PaFHsycjR10QY5w@mail.gmail.com>
- (Jason Wang's message of "Fri, 16 Aug 2024 10:31:41 +0800")
-References: <20240813202329.1237572-1-alex.bennee@linaro.org>
- <20240813202329.1237572-17-alex.bennee@linaro.org>
- <20240813164631-mutt-send-email-mst@kernel.org>
- <D3FEPPLH78YW.3BYA9B4HYGN1U@gmail.com>
- <20240814030308-mutt-send-email-mst@kernel.org>
- <87y14z81ak.fsf@draig.linaro.org>
- <D3GARIYVC16C.20SXVKSIMLED4@gmail.com>
- <20240815102754-mutt-send-email-mst@kernel.org>
- <CACGkMEtS6kges+_hOum2QnpTWotT_ohkJv8PaFHsycjR10QY5w@mail.gmail.com>
-Date: Fri, 16 Aug 2024 13:58:48 +0100
-Message-ID: <874j7k39pz.fsf@draig.linaro.org>
+ Fri, 16 Aug 2024 09:07:46 -0700 (PDT)
+From: Andrew Jones <ajones@ventanamicro.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bmeng.cn@gmail.com,
+ dbarboza@ventanamicro.com, Anup Patel <apatel@ventanamicro.com>
+Subject: [PATCH 2/2] hw/riscv/virt: Introduce strict-dt
+Date: Fri, 16 Aug 2024 18:07:46 +0200
+Message-ID: <20240816160743.220374-6-ajones@ventanamicro.com>
+X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20240816160743.220374-4-ajones@ventanamicro.com>
+References: <20240816160743.220374-4-ajones@ventanamicro.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::42d;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42d.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::529;
+ envelope-from=ajones@ventanamicro.com; helo=mail-ed1-x529.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -130,59 +98,140 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Jason Wang <jasowang@redhat.com> writes:
+Older firmwares and OS kernels which use deprecated device tree
+properties or are missing support for new properties may not be
+tolerant of fully compliant device trees. When divergence to the
+bindings specifications is harmless for new firmwares and OS kernels
+which are compliant, then it's probably better to also continue
+supporting the old firmwares and OS kernels by generating
+non-compliant device trees. The '#msi-cells=<0>' property of the
+imsic is one such property. Generating that property doesn't provide
+anything necessary (no '#msi-cells' property or an '#msi-cells'
+property with a value of zero mean the same thing) but it does
+cause PCI devices to fail to find the MSI controller on Linux and,
+for that reason, riscv virt doesn't currently generate it despite
+that putting the DT out of compliance. For users that want a
+compliant DT and know their software supports it, introduce a machine
+property 'strict-dt' to do so. We also drop the one redundant
+property that uses a deprecated name when strict-dt is enabled.
 
-> On Thu, Aug 15, 2024 at 10:29=E2=80=AFPM Michael S. Tsirkin <mst@redhat.c=
-om> wrote:
->>
->> On Thu, Aug 15, 2024 at 05:12:32PM +1000, Nicholas Piggin wrote:
->> > Could be a good idea. Although I'm not sure what to do with
->> > all types, maybe we can restrict what is supported.
->> >
->> > > Is this wider re-factoring something that can wait for the next
->> > > developer cycle?
->> >
->> > I would say so. It's not quite trivial to do nicely since
->> > things are a bit tangled between util/async and replay.
->> >
->> > > >> I had started on a conversion once but not completed it.
->> > > >> I could resurrect if there is agreement on the API?
->> > >
->> > > I would certainly welcome it being cleaned up. The supported replay
->> > > devices are very piecemeal at the moment.
->> >
->> > I'll tidy up and post an RFC for how the new API might look.
->> >
->> > Thanks,
->> > Nick
->>
->> Fundamentally it's virtio net, up to Jason.
->
-> It seems it has been in the pull request from Alex Benn=C3=A9e.
+Signed-off-by: Andrew Jones <ajones@ventanamicro.com>
+---
+ docs/system/riscv/virt.rst | 11 ++++++++++
+ hw/riscv/virt.c            | 43 ++++++++++++++++++++++++++++++--------
+ include/hw/riscv/virt.h    |  1 +
+ 3 files changed, 46 insertions(+), 9 deletions(-)
 
-Sorry I'd suibmitted the PR before I saw mst's update.
+diff --git a/docs/system/riscv/virt.rst b/docs/system/riscv/virt.rst
+index 9a06f95a3444..f08d0a053051 100644
+--- a/docs/system/riscv/virt.rst
++++ b/docs/system/riscv/virt.rst
+@@ -116,6 +116,17 @@ The following machine-specific options are supported:
+   having AIA IMSIC (i.e. "aia=aplic-imsic" selected). When not specified,
+   the default number of per-HART VS-level AIA IMSIC pages is 0.
+ 
++- strict-dt=[on|off]
++
++  Older firmwares and OS kernels which use deprecated device tree properties
++  or are missing support for new properties may not be tolerant of fully
++  compliant device trees. When divergence to the bindings specifications is
++  harmless for new firmwares and OS kernels which are compliant, then it's
++  considered better to also continue supporting the old firmwares and OS
++  kernels by generating non-compliant device trees, and doing so is the default
++  behavior. This option may be enabled in order to force QEMU to only generate
++  compliant device trees.
++
+ Running Linux kernel
+ --------------------
+ 
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index cef41c150aaf..6a6e73b96362 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -552,6 +552,9 @@ static void create_fdt_one_imsic(RISCVVirtState *s, hwaddr base_addr,
+                           FDT_IMSIC_INT_CELLS);
+     qemu_fdt_setprop(ms->fdt, imsic_name, "interrupt-controller", NULL, 0);
+     qemu_fdt_setprop(ms->fdt, imsic_name, "msi-controller", NULL, 0);
++    if (s->strict_dt) {
++        qemu_fdt_setprop_cell(ms->fdt, imsic_name, "#msi-cells", 0);
++    }
+     qemu_fdt_setprop(ms->fdt, imsic_name, "interrupts-extended",
+                      imsic_cells, ms->smp.cpus * sizeof(uint32_t) * 2);
+     qemu_fdt_setprop(ms->fdt, imsic_name, "reg", imsic_regs,
+@@ -650,15 +653,18 @@ static void create_fdt_one_aplic(RISCVVirtState *s, int socket,
+         qemu_fdt_setprop_cells(ms->fdt, aplic_name, "riscv,delegation",
+                                aplic_child_phandle, 0x1,
+                                VIRT_IRQCHIP_NUM_SOURCES);
+-        /*
+-         * DEPRECATED_9.1: Compat property kept temporarily
+-         * to allow old firmwares to work with AIA. Do *not*
+-         * use 'riscv,delegate' in new code: use
+-         * 'riscv,delegation' instead.
+-         */
+-        qemu_fdt_setprop_cells(ms->fdt, aplic_name, "riscv,delegate",
+-                               aplic_child_phandle, 0x1,
+-                               VIRT_IRQCHIP_NUM_SOURCES);
++
++        if (!s->strict_dt) {
++            /*
++             * DEPRECATED_9.1: Compat property kept temporarily
++             * to allow old firmwares to work with AIA. Do *not*
++             * use 'riscv,delegate' in new code: use
++             * 'riscv,delegation' instead.
++             */
++            qemu_fdt_setprop_cells(ms->fdt, aplic_name, "riscv,delegate",
++                                   aplic_child_phandle, 0x1,
++                                   VIRT_IRQCHIP_NUM_SOURCES);
++        }
+     }
+ 
+     riscv_socket_fdt_write_id(ms, aplic_name, socket);
+@@ -1732,6 +1738,20 @@ static void virt_set_acpi(Object *obj, Visitor *v, const char *name,
+     visit_type_OnOffAuto(v, name, &s->acpi, errp);
+ }
+ 
++static bool virt_get_strict_dt(Object *obj, Error **errp)
++{
++    RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
++
++    return s->strict_dt;
++}
++
++static void virt_set_strict_dt(Object *obj, bool value, Error **errp)
++{
++    RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
++
++    s->strict_dt = value;
++}
++
+ static HotplugHandler *virt_machine_get_hotplug_handler(MachineState *machine,
+                                                         DeviceState *dev)
+ {
+@@ -1822,6 +1842,11 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
+                               NULL, NULL);
+     object_class_property_set_description(oc, "acpi",
+                                           "Enable ACPI");
++
++    object_class_property_add_bool(oc, "strict-dt",
++                                   virt_get_strict_dt, virt_set_strict_dt);
++    object_class_property_set_description(oc, "strict-dt",
++        "Set to 'on' to generate a fully-compliant DT without deprecated properties");
+ }
+ 
+ static const TypeInfo virt_machine_typeinfo = {
+diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+index c0dc41ff9a1a..c3b4c000b80a 100644
+--- a/include/hw/riscv/virt.h
++++ b/include/hw/riscv/virt.h
+@@ -62,6 +62,7 @@ struct RISCVVirtState {
+     OnOffAuto acpi;
+     const MemMapEntry *memmap;
+     struct GPEXHost *gpex_host;
++    bool strict_dt;
+ };
+ 
+ enum {
+-- 
+2.45.2
 
->
->> I don't like messy
->> APIs and people tend to get distracted and not fix them up
->> if one does not make this a blocker.
->
-> +1
-
-do you want me to drop the series for 9.1 and leave it in its current
-(broken) state? Nick has already posted a suggestion for the API update
-but it seems a bit late in the cycle to include it in the release.
-
->
->>
->> --
->> MST
->
-> Thanks
->
->>
-
---=20
-Alex Benn=C3=A9e
-Virtualisation Tech Lead @ Linaro
 
