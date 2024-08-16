@@ -4,116 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A129EC3DA7F
-	for <qemu-riscv@archiver.kernel.org>; Thu, 15 Aug 2024 18:01:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F721C5320D
+	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Aug 2024 01:08:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1seemR-00060l-C2; Thu, 15 Aug 2024 14:00:59 -0400
+	id 1selRK-0001Cb-JO; Thu, 15 Aug 2024 21:07:38 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <shentey@gmail.com>)
- id 1seemO-0005uR-HJ; Thu, 15 Aug 2024 14:00:56 -0400
-Received: from mail-ej1-x629.google.com ([2a00:1450:4864:20::629])
+ (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
+ id 1selRG-0000v4-G3
+ for qemu-riscv@nongnu.org; Thu, 15 Aug 2024 21:07:34 -0400
+Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <shentey@gmail.com>)
- id 1seemM-000572-PM; Thu, 15 Aug 2024 14:00:56 -0400
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-a7d89bb07e7so145119866b.3; 
- Thu, 15 Aug 2024 11:00:53 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
+ id 1selRC-0002LI-Kw
+ for qemu-riscv@nongnu.org; Thu, 15 Aug 2024 21:07:33 -0400
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-710dc3015bfso1048518b3a.0
+ for <qemu-riscv@nongnu.org>; Thu, 15 Aug 2024 18:07:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1723744852; x=1724349652; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:references
- :in-reply-to:subject:cc:to:from:date:from:to:cc:subject:date
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1723770449; x=1724375249;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NOQc+5zO7CSq/GtXLID48S0mhlJ2bEPY+p0uacqItBQ=;
- b=aqKPW/tPoJ8UsllFmtjlpC/uFj02/tP1qhp9imelK6Y2lWvHWTehbuvF76RnsYdLkM
- NRemKGtYf8Y6RMeWT7kYHTSa9JbrTbyc+lu0M7lIpYrjqyCIaQcJRkMH6wJ/ACn37ram
- W6MhUyZghxtMiRGzLnSewwfXzEweZzveArU/mVeRa1M8IL02jtOv+xByaGwMJkWQmmpG
- Qu4JaJlpjKeW/h+ERo7oU2JsXLrdt6RGI37U6sRrtTB4KK5hv9HMS7/113IiLDIGESGC
- G2IQ8V3xuuFisKwcEOPuepaHKFYVZj5LN1X8wVGLPfgFWCIoDTF4jIKHCRCd8uaWDNOX
- 6DSw==
+ bh=lKb9Jz70toaKOOuMQxcHbp4pO9J/t6pOWc577kuJQCg=;
+ b=y6ODsevV9TX5nohWcD5iXUgdmSAkdX73wXIZF8AFscv9MafwCz56IFQdBDyf8gFIsN
+ TEhHvqAc56QfO9Ym6O2JgzNm16/qeUOksO5be/NZz8vr3WZBTdtzcKskf7imPtz61iZY
+ 1snoCxuuO92DgQUnloOhupiNf53fOzMeT5amGNT2Id6DQNGYCsgApKHLmM3EARcJnQ2E
+ rhhRAnlDN3df2x9FWKMhCD46Gc6FEQMFyL/wWg92Rsrmw67ObG9hhpaDncFq4MyVWexC
+ Vpktg3HmThW8R7SqhJzjCGaK34+LlQf+Zc7QDEAgndhfQwkdw01pHXuuWyTXRpHoWWeD
+ ImIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723744852; x=1724349652;
- h=content-transfer-encoding:mime-version:message-id:references
- :in-reply-to:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1723770449; x=1724375249;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NOQc+5zO7CSq/GtXLID48S0mhlJ2bEPY+p0uacqItBQ=;
- b=U4k6XPTy/MKF/tGzZBjkHCUITjhiiWmqJJhORJK4l9OXPqFHCvHf78mE6AkZ3Q/ypO
- SpCdwgCkXKPsN1CEfY/9p8PdoP8WS4szTF8egrLpl/Q+MB3Mqi/P14m07ksGku/qqlbu
- NvGD356qqAsUJHXZk+SKVyA/vPYfozQVQwXYyVDeNuzXw2d3nhE/BS6bS1Lj35cbSPWn
- +02+hLSs5hoVKzFQUeRnur5LrJQ0ycz5pJwkbdM2u1OxpFv3Q3HFZKtPM5hOkH2W7w4z
- hlZJoxROtF4TwIq8t91GBGntevp7JlPeQM+bCzF9W/bjE4Ufo2KRvd1G7tpnSrFjqmVt
- weLQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUvTr8tB5+5ifuigLH1ffkRtV1h5ngN9VPRapgwC+GIH3+aFD04fYLumcepZFR+Jb5+UJFa9xfJ36HuPS4rrgr/uuc/aR2whvpZawJ+M2mK4CoTA9kzyKBy5Bcg9qpZtdQXs6ZAtWIEVGZJOKnlf0s=
-X-Gm-Message-State: AOJu0Yx+XxqzlX2mEJHyMECuFskND53BJJitWhRYJ9OmY9RYoWee6rmM
- ++e+O2DyudqW5g6pBlER85eEpDC3+vJWVB2gBNqgYImkacy3PigU
-X-Google-Smtp-Source: AGHT+IGRxu2jk6UyhfB3zEJOB3mlBAbEn0uq8BpMCp4DgXW8pPOcNFPTqaJqqkF76SZjfoWA3pMOVg==
-X-Received: by 2002:a17:907:f7a4:b0:a7a:8e98:890d with SMTP id
- a640c23a62f3a-a83929300d4mr30503966b.16.1723744851636; 
- Thu, 15 Aug 2024 11:00:51 -0700 (PDT)
-Received: from [127.0.0.1] (dynamic-077-188-051-121.77.188.pool.telefonica.de.
- [77.188.51.121]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a83838c6639sm132090266b.7.2024.08.15.11.00.51
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 15 Aug 2024 11:00:51 -0700 (PDT)
-Date: Thu, 15 Aug 2024 18:00:47 +0000
-From: Bernhard Beschow <shentey@gmail.com>
-To: =?ISO-8859-1?Q?Philippe_Mathieu-Daud=E9?= <philmd@linaro.org>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- BALATON Zoltan <balaton@eik.bme.hu>
-CC: qemu-devel@nongnu.org, Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Niek Linnenbank <nieklinnenbank@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
- Paul Burton <paulburton@kernel.org>, Stafford Horne <shorne@gmail.com>,
- qemu-ppc@nongnu.org, Tyrone Ting <kfting@nuvoton.com>,
- Joel Stanley <joel@jms.id.au>, Eduardo Habkost <eduardo@habkost.net>,
- Sergio Lopez <slp@redhat.com>, Andrew Jeffery <andrew@codeconstruct.com.au>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Hao Wu <wuhaotsh@google.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, Jan Kiszka <jan.kiszka@web.de>,
- Beniamino Galvani <b.galvani@gmail.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- "Michael S. Tsirkin" <mst@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Artyom Tarasenko <atar4qemu@gmail.com>,
- Jia Liu <proljc@gmail.com>, Helge Deller <deller@gmx.de>,
- Max Filippov <jcmvbkbc@gmail.com>,
- Subbaraya Sundeep <sundeep.lkml@gmail.com>, Weiwei Li <liwei1518@gmail.com>,
- =?ISO-8859-1?Q?Marc-Andr=E9_Lureau?= <marcandre.lureau@redhat.com>,
- Nicholas Piggin <npiggin@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Steven Lee <steven_lee@aspeedtech.com>, Huacai Chen <chenhuacai@kernel.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- Strahinja Jankovic <strahinja.p.jankovic@gmail.com>, qemu-arm@nongnu.org,
- Aleksandar Rikalo <arikalo@gmail.com>, Troy Lee <leetroy@gmail.com>,
- Jamin Lin <jamin_lin@aspeedtech.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- =?ISO-8859-1?Q?Fr=E9d=E9ric_Barrat?= <fbarrat@linux.ibm.com>,
- =?ISO-8859-1?Q?C=E9dric_Le_Goater?= <clg@kaod.org>,
- =?ISO-8859-1?Q?Herv=E9_Poussineau?= <hpoussin@reactos.org>,
- qemu-riscv@nongnu.org, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Song Gao <gaosong@loongson.cn>
-Subject: Re: [PATCH 2/5] hw/char/serial: Remove unused funtion
-In-Reply-To: <d8ffe38c-756d-4187-875e-e6697631b7fa@linaro.org>
-References: <20240814181534.218964-1-shentey@gmail.com>
- <20240814181534.218964-3-shentey@gmail.com>
- <22fa9014-2923-b501-e38d-f5dd1e53d15a@eik.bme.hu>
- <11aeac5f-1985-494e-941a-5115d5e679bc@ilande.co.uk>
- <d8ffe38c-756d-4187-875e-e6697631b7fa@linaro.org>
-Message-ID: <907C7F7F-924E-4051-895D-7D61B2485CC0@gmail.com>
+ bh=lKb9Jz70toaKOOuMQxcHbp4pO9J/t6pOWc577kuJQCg=;
+ b=Pij6WRH02X+wzopvRT5sM5MgrpSdkqQnmjqf7P3XmamjiYVQw6uhs+PWLqznOOhtyT
+ czcnk+PyHQnldVjfvQyP0sUfZUUhxY+AKGByehceV4RT4MfxFpe53btNekOgSiora3Hx
+ tDSAYSV9gARX/zfq+k3b9b8FhOsvtts4bqZ1ZhD9UkW6HHABFs3dGp15G7JSp71k5wz3
+ DTc1APqcrukvqWZdpyDSXGd70xK0WbMsKsJWvGsd4MUxpDqauNV9ZAP8/yHCowbm8UU2
+ BJNMwQ0Cu6WxJ+FVV5Vq0glhaEN6GNo77XNgkrpf4ms278I2dd6nifJQA+0fgwDygoTB
+ 5RSg==
+X-Gm-Message-State: AOJu0YzQ4Q/JupfRU0rMkfYXMs/XsLec0ZBPyp4Djt7OXBC/CGfojmlX
+ p6tjTNEbzjC3XbGz0URmYVN4GmWeLfg9IUHh6sQBpJoCCdLLPLFTUGguSFYriBRphzr7DF9JoFO
+ j
+X-Google-Smtp-Source: AGHT+IEiuGWuSYISNw8rIDPz5T5UIc3OoIr09nfGu/zjT+968OlqqhnCo9rumo8uxk67/SbS17iaOg==
+X-Received: by 2002:a05:6a00:6f14:b0:70d:2e89:de2b with SMTP id
+ d2e1a72fcca58-71276efcab5mr8706637b3a.4.1723770448911; 
+ Thu, 15 Aug 2024 18:07:28 -0700 (PDT)
+Received: from debug.ba.rivosinc.com ([64.71.180.162])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-7127ae120cdsm1604806b3a.77.2024.08.15.18.07.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 15 Aug 2024 18:07:28 -0700 (PDT)
+From: Deepak Gupta <debug@rivosinc.com>
+To: qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, richard.henderson@linaro.org,
+ bmeng.cn@gmail.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, pbonzini@redhat.com, jim.shu@sifive.com,
+ andy.chiu@sifive.com, kito.cheng@sifive.com,
+ Deepak Gupta <debug@rivosinc.com>
+Subject: [PATCH v4 09/16] target/riscv: introduce ssp and enabling controls
+ for zicfiss
+Date: Thu, 15 Aug 2024 18:07:03 -0700
+Message-ID: <20240816010711.3055425-10-debug@rivosinc.com>
+X-Mailer: git-send-email 2.45.0
+In-Reply-To: <20240816010711.3055425-1-debug@rivosinc.com>
+References: <20240816010711.3055425-1-debug@rivosinc.com>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::629;
- envelope-from=shentey@gmail.com; helo=mail-ej1-x629.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
+ envelope-from=debug@rivosinc.com; helo=mail-pf1-x42d.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -129,36 +101,252 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+zicfiss introduces a new state ssp ("shadow stack register") in cpu.
+ssp is expressed as a new unprivileged csr (CSR_SSP=0x11) and holds
+virtual address for shadow stack as programmed by software.
 
+Shadow stack (for each mode) is enabled via bit3 in *envcfg CSRs.
+Shadow stack can be enabled for a mode only if it's higher privileged
+mode had it enabled for itself. M mode doesn't need enabling control,
+it's always available if extension is available on cpu.
 
-Am 15=2E August 2024 09:26:38 UTC schrieb "Philippe Mathieu-Daud=C3=A9" <p=
-hilmd@linaro=2Eorg>:
->On 15/8/24 10:24, Mark Cave-Ayland wrote:
->> On 14/08/2024 22:38, BALATON Zoltan wrote:
->>=20
->>> On Wed, 14 Aug 2024, Bernhard Beschow wrote:
->>>> The serial port's frequency is set via the "baudbase" property nowada=
-ys=2E
->>>=20
->>> Please keep it as some devices might have registers that set this freq=
- and this function will be needed for emulating that even if it's not emula=
-ted currently=2E
->>=20
->> Why not remove the function if it isn't being used? In general having u=
-nused code lying around is bad as it tends to bitrot=2E
->>=20
->> If someone did want to re-add this functionality then you would likely =
-want to do it with clock API rather than using a separate function=2E
->
->I also ended using it in a branch including this old series:
->https://lore=2Ekernel=2Eorg/qemu-devel/20200806130340=2E17316-1-f4bug@ams=
-at=2Eorg/
->
->Not my priority anymore, so I don't mind re-adding it=2E
->
+This patch also implements helper bcfi function which determines if bcfi
+is enabled at current privilege or not. qemu-user also gets field
+`ubcfien` indicating whether qemu user has shadow stack enabled or not.
 
-This removal seems debatable=2E I'd err on the safe side and drop the patc=
-h in v2=2E
+Signed-off-by: Deepak Gupta <debug@rivosinc.com>
+Co-developed-by: Jim Shu <jim.shu@sifive.com>
+Co-developed-by: Andy Chiu <andy.chiu@sifive.com>
+---
+ target/riscv/cpu.c        |  5 ++++
+ target/riscv/cpu.h        |  4 +++
+ target/riscv/cpu_bits.h   |  6 +++++
+ target/riscv/cpu_helper.c | 25 +++++++++++++++++++
+ target/riscv/csr.c        | 52 +++++++++++++++++++++++++++++++++++++++
+ 5 files changed, 92 insertions(+)
 
-Any further comments?
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 10a2a32345..76f1edd15a 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -998,6 +998,9 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
+     /* on reset elp is clear */
+     env->elp = false;
+ 
++    /* on reset ssp is set to 0 */
++    env->ssp = 0;
++
+     /*
+      * Bits 10, 6, 2 and 12 of mideleg are read only 1 when the Hypervisor
+      * extension is enabled.
+@@ -1026,6 +1029,8 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
+ #ifdef CONFIG_USER_ONLY
+     /* qemu-user for riscv, fcfi is off by default */
+     env->ufcfien = false;
++    /* qemu-user for riscv, bcfi is off by default */
++    env->ubcfien = false;
+ #endif
+ 
+ #ifndef CONFIG_USER_ONLY
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index edf540339a..5a57099d59 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -224,11 +224,14 @@ struct CPUArchState {
+ 
+     /* elp state for zicfilp extension */
+     bool      elp;
++    /* shadow stack register for zicfiss extension */
++    target_ulong ssp;
+     /* sw check code for sw check exception */
+     target_ulong sw_check_code;
+ #ifdef CONFIG_USER_ONLY
+     uint32_t elf_flags;
+     bool ufcfien;
++    bool ubcfien;
+ #endif
+ 
+ #ifndef CONFIG_USER_ONLY
+@@ -534,6 +537,7 @@ bool riscv_cpu_vector_enabled(CPURISCVState *env);
+ void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable);
+ int riscv_env_mmu_index(CPURISCVState *env, bool ifetch);
+ bool cpu_get_fcfien(CPURISCVState *env);
++bool cpu_get_bcfien(CPURISCVState *env);
+ G_NORETURN void  riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
+                                                MMUAccessType access_type,
+                                                int mmu_idx, uintptr_t retaddr);
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index 900769ce60..48ce24dc32 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -34,6 +34,9 @@
+ 
+ /* Control and Status Registers */
+ 
++/* zicfiss user ssp csr */
++#define CSR_SSP             0x011
++
+ /* User Trap Setup */
+ #define CSR_USTATUS         0x000
+ #define CSR_UIE             0x004
+@@ -754,6 +757,7 @@ typedef enum RISCVException {
+ /* Execution environment configuration bits */
+ #define MENVCFG_FIOM                       BIT(0)
+ #define MENVCFG_LPE                        BIT(2) /* zicfilp */
++#define MENVCFG_SSE                        BIT(3) /* zicfiss */
+ #define MENVCFG_CBIE                       (3UL << 4)
+ #define MENVCFG_CBCFE                      BIT(6)
+ #define MENVCFG_CBZE                       BIT(7)
+@@ -768,12 +772,14 @@ typedef enum RISCVException {
+ 
+ #define SENVCFG_FIOM                       MENVCFG_FIOM
+ #define SENVCFG_LPE                        MENVCFG_LPE
++#define SENVCFG_SSE                        MENVCFG_SSE
+ #define SENVCFG_CBIE                       MENVCFG_CBIE
+ #define SENVCFG_CBCFE                      MENVCFG_CBCFE
+ #define SENVCFG_CBZE                       MENVCFG_CBZE
+ 
+ #define HENVCFG_FIOM                       MENVCFG_FIOM
+ #define HENVCFG_LPE                        MENVCFG_LPE
++#define HENVCFG_SSE                        MENVCFG_SSE
+ #define HENVCFG_CBIE                       MENVCFG_CBIE
+ #define HENVCFG_CBCFE                      MENVCFG_CBCFE
+ #define HENVCFG_CBZE                       MENVCFG_CBZE
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 3a56bea8b9..96571177ef 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -92,6 +92,31 @@ bool cpu_get_fcfien(CPURISCVState *env)
+ #endif
+ }
+ 
++bool cpu_get_bcfien(CPURISCVState *env)
++{
++    /* no cfi extension, return false */
++    if (!env_archcpu(env)->cfg.ext_zicfiss) {
++        return false;
++    }
++#ifdef CONFIG_USER_ONLY
++    return env->ubcfien;
++#else
++    switch (env->priv) {
++    case PRV_U:
++        return env->senvcfg & SENVCFG_SSE;
++    case PRV_S:
++        if (env->virt_enabled) {
++            return env->henvcfg & HENVCFG_SSE;
++        }
++        return env->menvcfg & MENVCFG_SSE;
++    case PRV_M: /* M-mode shadow stack is always on if hart implements */
++        return true;
++    default:
++        g_assert_not_reached();
++    }
++#endif
++}
++
+ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
+                           uint64_t *cs_base, uint32_t *pflags)
+ {
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index a5a969a377..ec04b2b32b 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -185,6 +185,25 @@ static RISCVException zcmt(CPURISCVState *env, int csrno)
+     return RISCV_EXCP_NONE;
+ }
+ 
++static RISCVException cfi_ss(CPURISCVState *env, int csrno)
++{
++    if (!env_archcpu(env)->cfg.ext_zicfiss) {
++        return RISCV_EXCP_ILLEGAL_INST;
++    }
++
++    /* if bcfi not active for current env, access to csr is illegal */
++    if (!cpu_get_bcfien(env)) {
++#if !defined(CONFIG_USER_ONLY)
++        if (env->debugger) {
++            return RISCV_EXCP_NONE;
++        }
++#endif
++        return RISCV_EXCP_ILLEGAL_INST;
++    }
++
++    return RISCV_EXCP_NONE;
++}
++
+ #if !defined(CONFIG_USER_ONLY)
+ static RISCVException mctr(CPURISCVState *env, int csrno)
+ {
+@@ -596,6 +615,19 @@ static RISCVException seed(CPURISCVState *env, int csrno)
+ #endif
+ }
+ 
++/* zicfiss CSR_SSP read and write */
++static int read_ssp(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val = env->ssp;
++    return RISCV_EXCP_NONE;
++}
++
++static int write_ssp(CPURISCVState *env, int csrno, target_ulong val)
++{
++    env->ssp = val;
++    return RISCV_EXCP_NONE;
++}
++
+ /* User Floating-Point CSRs */
+ static RISCVException read_fflags(CPURISCVState *env, int csrno,
+                                   target_ulong *val)
+@@ -2111,6 +2143,10 @@ static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
+         if (env_archcpu(env)->cfg.ext_zicfilp) {
+             mask |= MENVCFG_LPE;
+         }
++
++        if (env_archcpu(env)->cfg.ext_zicfiss) {
++            mask |= MENVCFG_SSE;
++        }
+     }
+     env->menvcfg = (env->menvcfg & ~mask) | (val & mask);
+ 
+@@ -2167,6 +2203,13 @@ static RISCVException write_senvcfg(CPURISCVState *env, int csrno,
+         mask |= SENVCFG_LPE;
+     }
+ 
++    /* Higher mode SSE must be ON for next-less mode SSE to be ON */
++    if (env_archcpu(env)->cfg.ext_zicfiss &&
++        get_field(env->menvcfg, MENVCFG_SSE) &&
++        (env->virt_enabled ? get_field(env->henvcfg, HENVCFG_SSE) : true)) {
++        mask |= SENVCFG_SSE;
++    }
++
+     env->senvcfg = (env->senvcfg & ~mask) | (val & mask);
+     return RISCV_EXCP_NONE;
+ }
+@@ -2208,6 +2251,12 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
+         if (env_archcpu(env)->cfg.ext_zicfilp) {
+             mask |= HENVCFG_LPE;
+         }
++
++        /* H can light up SSE for VS only if HS had it from menvcfg */
++        if (env_archcpu(env)->cfg.ext_zicfiss &&
++            get_field(env->menvcfg, MENVCFG_SSE)) {
++            mask |= HENVCFG_SSE;
++        }
+     }
+ 
+     env->henvcfg = (env->henvcfg & ~mask) | (val & mask);
+@@ -4663,6 +4712,9 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     /* Zcmt Extension */
+     [CSR_JVT] = {"jvt", zcmt, read_jvt, write_jvt},
+ 
++    /* zicfiss Extension, shadow stack register */
++    [CSR_SSP]  = { "ssp", cfi_ss, read_ssp, write_ssp },
++
+ #if !defined(CONFIG_USER_ONLY)
+     /* Machine Timers and Counters */
+     [CSR_MCYCLE]    = { "mcycle",    any,   read_hpmcounter,
+-- 
+2.44.0
+
 
