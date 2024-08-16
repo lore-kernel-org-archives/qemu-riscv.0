@@ -4,92 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AFB4C3DA4A
-	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Aug 2024 05:53:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F301C3DA4A
+	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Aug 2024 06:45:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1septR-0000mx-RJ; Fri, 16 Aug 2024 01:52:57 -0400
+	id 1seqi0-000177-8s; Fri, 16 Aug 2024 02:45:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1septM-0000eV-FT
- for qemu-riscv@nongnu.org; Fri, 16 Aug 2024 01:52:53 -0400
-Received: from mail-pf1-x42c.google.com ([2607:f8b0:4864:20::42c])
+ (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
+ id 1seqhz-00016R-FR
+ for qemu-riscv@nongnu.org; Fri, 16 Aug 2024 02:45:11 -0400
+Received: from mail-pf1-x434.google.com ([2607:f8b0:4864:20::434])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1septK-0000dx-PZ
- for qemu-riscv@nongnu.org; Fri, 16 Aug 2024 01:52:52 -0400
-Received: by mail-pf1-x42c.google.com with SMTP id
- d2e1a72fcca58-710d1de6e79so1235217b3a.0
- for <qemu-riscv@nongnu.org>; Thu, 15 Aug 2024 22:52:49 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
+ id 1seqhw-0007RY-Ts
+ for qemu-riscv@nongnu.org; Fri, 16 Aug 2024 02:45:11 -0400
+Received: by mail-pf1-x434.google.com with SMTP id
+ d2e1a72fcca58-70f5ef740b7so1525026b3a.2
+ for <qemu-riscv@nongnu.org>; Thu, 15 Aug 2024 23:45:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723787568; x=1724392368; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=+MJYb0BHKbI5OTy07NhKpPLkqDGKZ9jPE3JMfyRl1LQ=;
- b=WBk0CQGGDWznhHQHscOaVvrlxy2L6eE9+8Nrd4u01QLHgWLwRCs9xg8EWH2vSd9zS9
- I1yO1WuHxnU0nsul7k3cTWqh8erCin1p6b9BfBP5FMmSJKWSdR8g5Rb7NJ6wW+WXqtmA
- rfFUBNez6u0U0lDziw27I5/Is1j1lO3xmGvm2McN74XXKQE7CQ8J6qyLoBk+BY3z2DEI
- tbaA7rW03jX4lD11RcQTqFdYfr4Tl6o5rFl+CyLRXBjtkZUrsl11/FiGYK3cuozOpw5Y
- D07cbHIW339qLmb2Wo9KvLtFhs4i0q9g30VfYnQ2E8kjb0S6VR6+6tT2FosoNI1G9hEf
- YT6Q==
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1723790707; x=1724395507;
+ darn=nongnu.org; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=b8gzFgTVIAQH27qbQUKzyjCNxudgMwVzpsm/5gkSJBw=;
+ b=p34wFRo0rp2Y0Gu9zqLy9J2k5aT+TAr+JphN2ptfe5660T6gyuWAwvK1lkTzlsUKxc
+ S2T1jrn4XEY+7j8Pb8AzoU4RvqKoYybVsv/AHisnNo7RiTos6Z3YRgMHvWdKW9BPVCTc
+ AJQgi01DEQbRJ5SE9/h51oHsBFOLnEi7g6WUI53BuRKvCny3uGki6ktjioWRi1c6zi/h
+ fbFpYlofdnRn1a/YAQO6AsqCOpRoWU58s90Dn97xAk90RwMVZwDAUN9ZsE0PHuVDKz1g
+ B/ch4vxIhShccPOhPV8UIOALGuzoNN2nym+8IBellnvftvCNB79BG5vAmYCh6eAoL04+
+ JPow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723787568; x=1724392368;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=+MJYb0BHKbI5OTy07NhKpPLkqDGKZ9jPE3JMfyRl1LQ=;
- b=R47D8SV23MFPEaqn5ZzfhsoAJ0h5Kuhq9v794npBRgE0THhNt1J0ZHHTU7UdJvteLc
- fZKfvyy5qal7AupsCITz99w9PWPmicjE4eHfaSHXqjSWRkpMswm17TsxrHowSRzsoT5J
- 67aUPCR+8tddsU6ckxERdomLfXztS7+si2QSpYWN/IeiQhVqXLucUMR0NKfqWtXR1ZcJ
- qWl0vQbfA1+stI4qa4fZAH8ih5iN8VycWEYUmrnpdjuHCOQeqAA5mg0n0rWGnxCTE4SN
- fR2LVTvGE31BnGo45cDXXbENpbKhqaHy2Guy1K/8tuxPKCU/ZcAbAW4T0dhC9L0h39X7
- 9ksA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV6WSyGu2f1k+kValmMz81dO4u903o6ZIO+Hkeyw64kRBtB8lGEr+qJFtVuyiykhywRFBmQFtoPwFAaaf7ef0B4zO2ZJaQ=
-X-Gm-Message-State: AOJu0YxnIbcME5UhHE+zmy+/HlWrFFTfB6aSGyHxaX9rfo/pzkTpnaNl
- h+GrH3TsTZ+HlhNaFp05UFGOQ/5cWjI3EKP5wHezd2BMk8F9MxvKVbHOA/7rkQ0=
-X-Google-Smtp-Source: AGHT+IEyC8v7ZjaMcFLtWbPxvrIhXxV2bcSaW2GRrTPtIDbddyLot+njBx/nrbhRuJONUKpztSlvug==
-X-Received: by 2002:a05:6a20:438e:b0:1c0:e9dd:1197 with SMTP id
- adf61e73a8af0-1c904faa25bmr2539832637.22.1723787568251; 
- Thu, 15 Aug 2024 22:52:48 -0700 (PDT)
-Received: from ?IPV6:2403:580a:f89b:0:1b6b:8c7b:90f9:144f?
- (2403-580a-f89b-0-1b6b-8c7b-90f9-144f.ip6.aussiebb.net.
- [2403:580a:f89b:0:1b6b:8c7b:90f9:144f])
+ d=1e100.net; s=20230601; t=1723790707; x=1724395507;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=b8gzFgTVIAQH27qbQUKzyjCNxudgMwVzpsm/5gkSJBw=;
+ b=OmM3GvdIQmWycRbXDa+29RW02GE0SH8+1tQIhQ0ctPZ1qZZwwqxIi0ppWcNBBoT3FW
+ vILtVILErQ1ZTcepkMni8VNR4X5gg/rb4bGAQ3nKMbps7dfocueExO3IQrJrg5tYGbRO
+ EGqB5KlzSvVimLK1gt+0Sm340S36hakuK8ZIDfGPIHQqhDsi5LDFTS5yEEjnMmYcTx1A
+ q8F1xHJyAkh3a3PUbu4GTUIRyujAZtbN82gGKbNCy2d7htsTH9AqMfvXylsBBcmf9tpW
+ hadkgno4t36xbFn2292uiUJ8hqcXdFIGfA3tihdeb91OOA7v4yiKRAbY9/JbMj4oj0Db
+ E+1Q==
+X-Gm-Message-State: AOJu0YxLFcqxvd4J1nt4fnKNnkUgtFfOdInqMnBF5NRp4Yh2fkcO8Pd3
+ ps1/rW7v2nUBevURfUQYK1nFVRd8V/tMll3qWrUyRBlaU5Px2oZmAtHl2tFR2duCYbLj/YxBUIa
+ E
+X-Google-Smtp-Source: AGHT+IGxd4WawryhEfw/0jY/+4YuNJqoJwKDGVL+rZ3Kjm20pb791btHBmesd/LIhXgsy+QlgpqIgQ==
+X-Received: by 2002:a05:6a21:3416:b0:1c4:b8a1:6d54 with SMTP id
+ adf61e73a8af0-1c905026d34mr2169270637.36.1723790706690; 
+ Thu, 15 Aug 2024 23:45:06 -0700 (PDT)
+Received: from debug.ba.rivosinc.com ([64.71.180.162])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7127ae07562sm1916026b3a.56.2024.08.15.22.52.42
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 15 Aug 2024 22:52:47 -0700 (PDT)
-Message-ID: <70e86ba9-1764-4a2d-bee5-89a0b16ba385@linaro.org>
-Date: Fri, 16 Aug 2024 15:52:34 +1000
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 16/16] target/riscv: add trace-hooks for each case of
- sw-check exception
-To: Deepak Gupta <debug@rivosinc.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, bmeng.cn@gmail.com,
- liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, pbonzini@redhat.com, jim.shu@sifive.com,
- andy.chiu@sifive.com, kito.cheng@sifive.com
+ d2e1a72fcca58-7127ae08027sm2003069b3a.66.2024.08.15.23.45.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 15 Aug 2024 23:45:06 -0700 (PDT)
+Date: Thu, 15 Aug 2024 23:45:04 -0700
+From: Deepak Gupta <debug@rivosinc.com>
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com,
+ Alistair.Francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ pbonzini@redhat.com, jim.shu@sifive.com, andy.chiu@sifive.com,
+ kito.cheng@sifive.com
+Subject: Re: [PATCH v4 03/16] target/riscv: save and restore elp state on
+ priv transitions
+Message-ID: <Zr71cBn6z/5Jnn7R@debug.ba.rivosinc.com>
 References: <20240816010711.3055425-1-debug@rivosinc.com>
- <20240816010711.3055425-17-debug@rivosinc.com>
-Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240816010711.3055425-17-debug@rivosinc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42c;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x42c.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ <20240816010711.3055425-4-debug@rivosinc.com>
+ <b56dc234-10da-4f65-9dc9-a205948ffff5@linaro.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <b56dc234-10da-4f65-9dc9-a205948ffff5@linaro.org>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::434;
+ envelope-from=debug@rivosinc.com; helo=mail-pf1-x434.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,73 +100,30 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 8/16/24 11:07, Deepak Gupta wrote:
-> Violations to control flow rules setup by zicfilp and zicfiss lead to
-> software check exceptions. To debug and fix such sw check issues in guest
-> , add trace-hooks for each case.
-> 
-> Signed-off-by: Jim Shu <jim.shu@sifive.com>
-> Signed-off-by: Deepak Gupta <debug@rivosinc.com>
-> ---
->   target/riscv/helper.h                         |  3 +++
->   target/riscv/insn_trans/trans_rvi.c.inc       |  3 +++
->   target/riscv/insn_trans/trans_rvzicfiss.c.inc |  1 +
->   target/riscv/op_helper.c                      | 13 +++++++++++++
->   target/riscv/trace-events                     |  6 ++++++
->   target/riscv/translate.c                      |  2 ++
->   6 files changed, 28 insertions(+)
-> 
-> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-> index e946ba61fd..6e90fbd225 100644
-> --- a/target/riscv/helper.h
-> +++ b/target/riscv/helper.h
-> @@ -123,6 +123,9 @@ DEF_HELPER_2(cbo_zero, void, env, tl)
->   
->   /* helper to raise sw check exception */
->   DEF_HELPER_2(raise_sw_check_excep, void, env, tl)
-> +/* helper functions to trace riscv cfi violations */
-> +DEF_HELPER_3(zicfilp_label_mismatch, void, env, tl, tl)
-> +DEF_HELPER_3(zicfiss_ra_mismatch, void, env, tl, tl)
->   
->   /* Special functions */
->   DEF_HELPER_2(csrr, tl, env, int)
-> diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-> index 936b430282..7021f8d3da 100644
-> --- a/target/riscv/insn_trans/trans_rvi.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvi.c.inc
-> @@ -54,6 +54,7 @@ static bool trans_lpad(DisasContext *ctx, arg_lpad *a)
->               /*
->                * misaligned, according to spec we should raise sw check exception
->                */
-> +            trace_zicfilp_unaligned_lpad_instr(ctx->base.pc_first);
->               gen_helper_raise_sw_check_excep(tcg_env,
->                   tcg_constant_tl(RISCV_EXCP_SW_CHECK_FCFI_TVAL));
+On Fri, Aug 16, 2024 at 12:59:43PM +1000, Richard Henderson wrote:
+>On 8/16/24 11:06, Deepak Gupta wrote:
+>>@@ -546,6 +575,15 @@ void riscv_cpu_swap_hypervisor_regs(CPURISCVState *env)
+>>      }
+>>      bool current_virt = env->virt_enabled;
+>>+    /*
+>>+     * If zicfilp extension available and henvcfg.LPE = 1,
+>>+     * then apply SPELP mask on mstatus
+>>+     */
+>>+    if (env_archcpu(env)->cfg.ext_zicfilp &&
+>>+        get_field(env->henvcfg, HENVCFG_LPE)) {
+>>+        mstatus_mask |= SSTATUS_SPELP;
+>>+    }
+>>+
+>
+>I think this hunk belongs with the previous patch.
+>
 
-Ah, no.
+I kept it here because this save/restore of vsstatus with effective sstatus during
+VS/VU <--> HS transition. ELP also needs to get saved/restored during these transitions.
 
-This performs the trace at translation time.
-You want the trace at execution time.
-
-     gen_update_pc(ctx, 0);
-     gen_helper_zicfilp_unaligned_lpad(tcg_env);
-     ctx->base.is_jmp = DISAS_NORETURN;
-
-
-void HELPER(zicfilp_unaligned_lpad)(CPURISCVState *env)
-{
-     trace_zicfilp_unaligned_lpad(env->pc);
-     env->sw_check_code = RISCV_EXCP_SW_CHECK_FCFI_TVAL;
-     riscv_raise_exception(RISCV_EXCP_SW_CHECK, 0);
-}
-
-etc.
-
-Nevermind the previous advice vs patch 5 saying you could inline everything; I had 
-forgotten the desire for tracepoints.
-
-You should probably add these helpers and tracepoints as you add the code.  Anything else 
-is going to be a bit confusing.
-
-
-r~
+>Otherwise.
+>Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+>
+>r~
+>
 
