@@ -4,85 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC2ACC531DC
-	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Aug 2024 07:29:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FBB1C3DA4A
+	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Aug 2024 09:19:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1serOF-0001BW-U4; Fri, 16 Aug 2024 03:28:53 -0400
+	id 1set77-0004gI-0o; Fri, 16 Aug 2024 05:19:17 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1serO5-0000f3-R6
- for qemu-riscv@nongnu.org; Fri, 16 Aug 2024 03:28:42 -0400
-Received: from mail-ot1-x336.google.com ([2607:f8b0:4864:20::336])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1set73-0004eI-0d
+ for qemu-riscv@nongnu.org; Fri, 16 Aug 2024 05:19:13 -0400
+Received: from mail-lj1-x22f.google.com ([2a00:1450:4864:20::22f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1serO3-0004uv-6x
- for qemu-riscv@nongnu.org; Fri, 16 Aug 2024 03:28:40 -0400
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-70945a007f0so1042526a34.2
- for <qemu-riscv@nongnu.org>; Fri, 16 Aug 2024 00:28:38 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1set6w-0003RD-H7
+ for qemu-riscv@nongnu.org; Fri, 16 Aug 2024 05:19:09 -0400
+Received: by mail-lj1-x22f.google.com with SMTP id
+ 38308e7fff4ca-2f3b7aba3dbso19942721fa.3
+ for <qemu-riscv@nongnu.org>; Fri, 16 Aug 2024 02:18:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723793317; x=1724398117; darn=nongnu.org;
+ d=linaro.org; s=google; t=1723799938; x=1724404738; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=YGZmjbI1TKAFBmHm9mAvv+PwdWnWaHfgix/3VwWYDYU=;
- b=ufXP1Bqr9wGH+96sxmzIWRMowYiPRuWkM3fqQSJB/zbTkrY4dBV62KWGP9GpKviLHC
- Bqlna1nlkP8PRrzONjtQQtkT140zpmd1CHTXXxlpthtcrNitu/qMQiGJVMv9gkgqadcC
- Sn0prjG46G3yKtEXxRCK6C043FJjp/kslHgnbzmMELouDJvQPqalRhR/amqPe2Vz/lob
- cLhEBrXnKu0qKgIEYZ4qRl6WzwAH0m43Ycp++O+8XVX8Bw23Kso0Id7IP6E0zRa20G+U
- 32ya283muGDZmc6W3pTnMwJcLM82nQwyyOoklkhGYlY+6uHc4bhwP0bdyomzq0J4Hajr
- Qllw==
+ bh=R+6q90f+Bxv9eyWqMeEAynySV6PRqJeAyEpIbAk5224=;
+ b=j67Ipw/+CPxJ8FvdhPr8dNm0f9kt72TYfEEtVp3RQYIWUWNjL8YjoKSyWPB4vp/P21
+ qf8xvtr8GkAPr7VuAgWCjNk9HVIdkhAFeJ2r3B/Kd6608blZUKl/Qn5IxmeaVaZafTAI
+ KsdMXSTPOf8EU/vRvzvX9zcoZs3FbL0m7kG37EvEgibCkluwQ9z20M2PbQQ/phov5Xoi
+ MzzGOzdwIZu4YkYuyGlpMfpB6Ln0d443IykR02cjQzcqggNT8EuDjX5N+wSIoPL7u9jD
+ hRAixYzWMpbtnvWdUiT7LRNeg4bXCUB/Ne3RUM7eoDx5zrfp414Tjm2JWW++WjJbMB9X
+ zDxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723793317; x=1724398117;
+ d=1e100.net; s=20230601; t=1723799938; x=1724404738;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=YGZmjbI1TKAFBmHm9mAvv+PwdWnWaHfgix/3VwWYDYU=;
- b=Pr9VjfUmVuoiFNJp4gFaM+M19vJnGwEET1nSRp6H5Ta6vmtshXj6BOyOIKq+DSZJIk
- Cur0YwiD6PagKiljv+9/1kBbEEnNB8WJ5Ffm1FbIeecjHla/+HME2xlVWCE0aMadrGEI
- ForxH3cOQc15zRLimULsPer/9lsYi1BAdn6+SrK93jaabRCakg8puM5iKeKwkvXaUes4
- fynzqPeHl7YQkgA8bGPC9jvoxab22c8b9BZBtnje7wwPFh0IelnZ9W+bUEpAjlyEK7dx
- ajBmB8P3gHSd1Cpe4m7RqpcApbawESwUjSrTIqEFKzZVF866m2NIkA2kRQfuzi42FJT8
- GyJQ==
-X-Gm-Message-State: AOJu0Yz3TRnBuvyzZfPUFx+A/O5GyTQdoOdXMkS+l25gdsSJC9I5/y+x
- GQNx1uLisZssHewFXObkchdEE8rSBG0J8C9l0M/rPqjskcYwHGpJndIYhu47kJs=
-X-Google-Smtp-Source: AGHT+IH6GhqzBDPZvkYZQuwUhK0OlANBfbqxd3KQyfZe0gJn8tQbmOEHi8sRe5T2oRG3bDY+CSzGLQ==
-X-Received: by 2002:a05:6830:25d5:b0:703:6076:a47 with SMTP id
- 46e09a7af769-70cac8a3b99mr2020383a34.23.1723793317498; 
- Fri, 16 Aug 2024 00:28:37 -0700 (PDT)
-Received: from ?IPV6:2403:580a:f89b:0:1b6b:8c7b:90f9:144f?
- (2403-580a-f89b-0-1b6b-8c7b-90f9-144f.ip6.aussiebb.net.
- [2403:580a:f89b:0:1b6b:8c7b:90f9:144f])
- by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-7c6b61c60ebsm2047882a12.30.2024.08.16.00.28.32
+ bh=R+6q90f+Bxv9eyWqMeEAynySV6PRqJeAyEpIbAk5224=;
+ b=j54Idn6iaxfFJlmOLjsT4HIONXf7YkJUODIx2akg4EEDlr+HIfGfN8D8mrBdxrYYTN
+ 83fcHIy0zsOBtmF26nUBnkljQFnEJWCijuh7Kp5QFcQoqHSasqBK8NXtvNdxriKKcs4c
+ kgXanKx3cAdKu/QOCkME4KvVgjFcot0oS308majD3RrWIYH9qzy/zguFP3J39UWGmskw
+ LnXqrKE5P3RpPpJzjjMxtlU/SXgCOBj6jfNkZahiWIC1LrKKs7Y/t7g/PRGZYqOsk9B+
+ AflgPjWTTayX5KD/GVywn8ZrrK5K/MNPbRD2r4OC71hOK3sWqDAWRJ+Z4wcIqGvN+A6W
+ WAtg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWXGtRKvLrKJcOukLo6xmTpcOQ/Tqre/1eLIM5K09nW34yjej0gHJP+i8foujtolP4us/ml28el4yPx0ZZ+9Mux0aNRgC8=
+X-Gm-Message-State: AOJu0YzP+c9ieN9B4+6tTARvOc90M6eWrjhwiTdS+8GASN4hdPR6/G3P
+ AVVDO6QjmmotWEtOONyDAJBXSP+s9N/H7VhDBPs3UlphcFqaQq89n/wPbM+dg/U=
+X-Google-Smtp-Source: AGHT+IH9gpSQ2G8/ktzuWrcYaojw7YuloBrQrznBu/0wsO00hhXzlh+4QjJ20OBp9+LvUl+U1Lz0aA==
+X-Received: by 2002:a05:651c:198e:b0:2ef:2525:be90 with SMTP id
+ 38308e7fff4ca-2f3be5f7818mr18181421fa.31.1723799937707; 
+ Fri, 16 Aug 2024 02:18:57 -0700 (PDT)
+Received: from [192.168.220.175] (143.red-88-28-5.dynamicip.rima-tde.net.
+ [88.28.5.143]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-371898aabdesm3190305f8f.99.2024.08.16.02.18.50
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 16 Aug 2024 00:28:37 -0700 (PDT)
-Message-ID: <6e236767-a1a1-41ca-8f7f-10d6247656b9@linaro.org>
-Date: Fri, 16 Aug 2024 17:28:29 +1000
+ Fri, 16 Aug 2024 02:18:56 -0700 (PDT)
+Message-ID: <2455bf3b-aa93-4505-aa5d-eab42d4620e4@linaro.org>
+Date: Fri, 16 Aug 2024 11:18:48 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 13/16] target/riscv: compressed encodings for sspush
- and sspopchk
-To: Deepak Gupta <debug@rivosinc.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com,
- Alistair.Francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- pbonzini@redhat.com, jim.shu@sifive.com, andy.chiu@sifive.com,
- kito.cheng@sifive.com
-References: <20240816010711.3055425-1-debug@rivosinc.com>
- <20240816010711.3055425-14-debug@rivosinc.com>
- <794021c3-02f2-4b64-8d1c-a56125e09462@linaro.org>
- <Zr74Axtj/871L5Nj@debug.ba.rivosinc.com>
+Subject: Re: [PATCH 3/5] hw/ppc/Kconfig: Add missing SERIAL_ISA dependency to
+ POWERNV machine
+To: Bernhard Beschow <shentey@gmail.com>, qemu-devel@nongnu.org
+Cc: Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Niek Linnenbank <nieklinnenbank@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Paul Burton <paulburton@kernel.org>, Stafford Horne <shorne@gmail.com>,
+ qemu-ppc@nongnu.org, Tyrone Ting <kfting@nuvoton.com>,
+ Joel Stanley <joel@jms.id.au>, Eduardo Habkost <eduardo@habkost.net>,
+ Sergio Lopez <slp@redhat.com>, Andrew Jeffery <andrew@codeconstruct.com.au>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Hao Wu <wuhaotsh@google.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ BALATON Zoltan <balaton@eik.bme.hu>, Jan Kiszka <jan.kiszka@web.de>,
+ Beniamino Galvani <b.galvani@gmail.com>,
+ Peter Maydell <peter.maydell@linaro.org>, "Michael S. Tsirkin"
+ <mst@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Artyom Tarasenko <atar4qemu@gmail.com>,
+ Jia Liu <proljc@gmail.com>, Helge Deller <deller@gmx.de>,
+ Max Filippov <jcmvbkbc@gmail.com>, Subbaraya Sundeep
+ <sundeep.lkml@gmail.com>, Weiwei Li <liwei1518@gmail.com>,
+ =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
+ Nicholas Piggin <npiggin@gmail.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Steven Lee <steven_lee@aspeedtech.com>, Huacai Chen <chenhuacai@kernel.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Strahinja Jankovic <strahinja.p.jankovic@gmail.com>, qemu-arm@nongnu.org,
+ Aleksandar Rikalo <arikalo@gmail.com>, Troy Lee <leetroy@gmail.com>,
+ Jamin Lin <jamin_lin@aspeedtech.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ =?UTF-8?B?RnLDqWTDqXJpYyBCYXJyYXQ=?= <fbarrat@linux.ibm.com>,
+ =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
+ =?UTF-8?Q?Herv=C3=A9_Poussineau?= <hpoussin@reactos.org>,
+ qemu-riscv@nongnu.org, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Song Gao <gaosong@loongson.cn>
+References: <20240814181534.218964-1-shentey@gmail.com>
+ <20240814181534.218964-4-shentey@gmail.com>
 Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <Zr74Axtj/871L5Nj@debug.ba.rivosinc.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20240814181534.218964-4-shentey@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::336;
- envelope-from=richard.henderson@linaro.org; helo=mail-ot1-x336.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::22f;
+ envelope-from=philmd@linaro.org; helo=mail-lj1-x22f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -105,26 +128,15 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 8/16/24 16:56, Deepak Gupta wrote:
->>> +  c_sspush        011 0  00001  00000 01 rs2=1 rs1=0 # c.sspush x1 carving out of zcmops
->>> +  c_sspopchk      011 0  00101  00000 01 rs1=5 rd=0 # c.sspopchk x5 carving out of zcmops
-...
->> This indirection is pointless.  Have the decoder invoke the proper insn in the first 
->> place.  Identically with how we're treating 'addi', for instance.
->>
+On 14/8/24 20:15, Bernhard Beschow wrote:
+> The machine calls serial_hds_isa_init() which is provided by serial-isa.c,
+> guarded by SERIAL_ISA.
 > 
-> I was getting compilation error. How to reconcile with arugment sets between
-> insn32.decode and insn16.decode. Earlier I was doing that and didn't need it.
-> But after removing indirection in arguments and using single use format, type for
-> structs instruction arguments ends up conflicting and compiler complains.
+> Signed-off-by: Bernhard Beschow <shentey@gmail.com>
+> ---
+>   hw/ppc/Kconfig | 1 +
+>   1 file changed, 1 insertion(+)
 
-Ah, for that you need to use named argument sets.  In this case,
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
-sspush     .... &r2_s rs2=1 rs1=0
-sspopchk   .... &r2   rs2=5 rd=0
-
-in both insn32.decode and insn16.decode
-
-
-r~
 
