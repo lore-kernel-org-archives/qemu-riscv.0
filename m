@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25FDFC3DA4A
-	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Aug 2024 06:49:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49D4AC531DC
+	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Aug 2024 06:56:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1seqmG-0006TB-CU; Fri, 16 Aug 2024 02:49:36 -0400
+	id 1seqsh-0007Lq-TN; Fri, 16 Aug 2024 02:56:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1seqmD-0006QG-S9
- for qemu-riscv@nongnu.org; Fri, 16 Aug 2024 02:49:33 -0400
-Received: from mail-oo1-xc33.google.com ([2607:f8b0:4864:20::c33])
+ id 1seqsd-0007FZ-IT
+ for qemu-riscv@nongnu.org; Fri, 16 Aug 2024 02:56:12 -0400
+Received: from mail-pg1-x536.google.com ([2607:f8b0:4864:20::536])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1seqmC-0007jR-9q
- for qemu-riscv@nongnu.org; Fri, 16 Aug 2024 02:49:33 -0400
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-5d5cbe88f70so982019eaf.0
- for <qemu-riscv@nongnu.org>; Thu, 15 Aug 2024 23:49:31 -0700 (PDT)
+ id 1seqsb-0000Tj-8t
+ for qemu-riscv@nongnu.org; Fri, 16 Aug 2024 02:56:11 -0400
+Received: by mail-pg1-x536.google.com with SMTP id
+ 41be03b00d2f7-7b594936e9bso1168022a12.1
+ for <qemu-riscv@nongnu.org>; Thu, 15 Aug 2024 23:56:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1723790970; x=1724395770;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1723791367; x=1724396167;
  darn=nongnu.org; 
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=hmFfu+cUu/9dHh8EMC3F6fmgPUHpZhKIjwcloRRaRWM=;
- b=DOQWI4EHdACJMddpM6j2zd5WiXEEgTTE5or42sdkaqZmHZeThfaHbL3a05x1W487Bo
- z3457ahzS02FXFnEGU4Vg8+x9Ck9qdwcwYfaowLstjK1fry7m6zAUK26KVx3tXSkyHPv
- I5szUB8lSGtjfWmckGzOkK6j9QOoMJb91q5mbiQYSwdSUTS85Wfbp38h/9086HMZcuqp
- 1T31l4zAZaH1wX9vu4tC7P6ty+X5+u0l3iVTDiCIxnSpIqkclTWUF0LL1sFEUBAzBgTg
- eztgBUItwuEI/BeWFli43vG5PHiEC2l+6GDdCyJ3BuuXfvFk2j8lZFu16cq8P4kk748E
- itxQ==
+ bh=6f/+3JFYzcy3cXgc3BcD+q5ndWVqr+qoQDmW1MWj1OA=;
+ b=gz6Q5y/Uq+QFZCW337hbEc7+z/YobNhxJOn4UKGjvuw071G55T38cr048dp8a/13e5
+ tydWUMLhMCSPKdxcY9PK4ACvwZAARFqnIbUX/aArCg1eJJbNlnge7jCQ+N2FaCRZ0vII
+ QLwcM/i9Cu4aKcdHpeeYHee54GiEBWAlFQNt0yF2WBZdu0fwnjYMrEMOiEnQ5WvGlf67
+ t5selWbmEIOT4yqidpvs5gAT+X4xkuI719873bqcelOFrYhE+Ls0GsVqCPNge9tVETc+
+ CkAG7sqY06L0141516mu8oMCZ2i99Ll5Tl86bTCFUvqDeW/VY/Q2sOtKeZLXk5az1pP3
+ 8wYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723790970; x=1724395770;
+ d=1e100.net; s=20230601; t=1723791367; x=1724396167;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hmFfu+cUu/9dHh8EMC3F6fmgPUHpZhKIjwcloRRaRWM=;
- b=I4HFgRUJb0T9o7Ti2fAeYcs/bQyGbMTtRw85Su57ZvnIy6umNAKdHZyAIjnqZzXHFF
- tjIhKfqqpzkytCSpWNFE9cvkFhS/iHR5agvA+aUycxQ41j8/y4FOneB1Jj/eYjv4fBnQ
- ZN7ZOI6sUeoaAYvfsZMIOqxMEcyvRj08UtYLEX803WIiRCdxw4J565wIQMF9EIsdDnku
- JU6O+J9QQioBcrTLLi/9Vuw4Kl8eUCZl/Fv++B7xkN0Wo8FFpKKZGkHTNqvjNa8QUJQ0
- m5nhI7ldiy+1zqST06zyrqa1zCNmajBRU+isuJ5vWeCQdfSN6zySZRNl99FFJmIgVquL
- 9ufA==
-X-Gm-Message-State: AOJu0Yz7sjHgJ0NPr5OK2ShoPvJd2qPldtSCG+NifEDnD70eEmCUFqvR
- rOZFoQt8hQqB7U10AajnT/pKFznp94SUKxGXaVFIJlAK08gDH+L2kbLZdLxqvPM=
-X-Google-Smtp-Source: AGHT+IHQ1xAhgW8Xg4rnQNkd1T0y7iRegWWWoQMUC4iwv/pij67rDUczyuoz5N3TLa6lpTeJ6uyYOg==
-X-Received: by 2002:a05:6358:7f13:b0:1ad:14ec:a002 with SMTP id
- e5c5f4694b2df-1b39331deb6mr262565755d.26.1723790969941; 
- Thu, 15 Aug 2024 23:49:29 -0700 (PDT)
+ bh=6f/+3JFYzcy3cXgc3BcD+q5ndWVqr+qoQDmW1MWj1OA=;
+ b=ZLId/5QIMBStY3hpyCWlU1CJbH+SS8V9K8hJ7M3s37Gd3kQtuHX5RpHfk4cFFGuzkR
+ 8yO9Y5di+yXbw7IW2yResaSZDhrybESlojKCsAbBwc/JMzERjLvmyWs+WotB3U5M14oD
+ 2iUcs6/1O6SlO960ZIbJjwQKh2IOHm5vge1KV5bfnkOdTp5H3VG7p22pz0XIc3a5Z710
+ eStB7rNVBmsc+EMF4ltQXFH4aHlNgS/UNisKstdZiGHUDetWAEQbAvFGTG+mSczwEk4V
+ WHhYOIu+a9YJPdbB33iKmTaiE8+Q/tf+8iCvxpe2TDyS/fCxrhsGp6OqtB7fPcSMaN45
+ hTeg==
+X-Gm-Message-State: AOJu0Yy/ANiafaRtJ7Sc/xEuPmJv+WX1XDcTutg4dZZaQ17RuhReztzr
+ vJzeM1Bulhgkj1p/R4egTk5G2J+r4/56iLiY1xzjS+hMVOGEDSkQY8K7H27nE5w=
+X-Google-Smtp-Source: AGHT+IHAv9AXl+UhDln7WsF2EVIw2VopKa7wU4OoqWuL3DaPus5nNZqAO35RtfW+w4kJg31T0KIyPw==
+X-Received: by 2002:a05:6a21:2d86:b0:1c4:9100:6a1b with SMTP id
+ adf61e73a8af0-1c904fca42bmr2205135637.30.1723791367159; 
+ Thu, 15 Aug 2024 23:56:07 -0700 (PDT)
 Received: from debug.ba.rivosinc.com ([64.71.180.162])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-7c6b61dd9c9sm2293975a12.41.2024.08.15.23.49.28
+ d9443c01a7336-201f03032b1sm19747595ad.61.2024.08.15.23.56.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Aug 2024 23:49:29 -0700 (PDT)
-Date: Thu, 15 Aug 2024 23:49:27 -0700
+ Thu, 15 Aug 2024 23:56:06 -0700 (PDT)
+Date: Thu, 15 Aug 2024 23:56:03 -0700
 From: Deepak Gupta <debug@rivosinc.com>
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com,
@@ -66,25 +66,24 @@ Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  pbonzini@redhat.com, jim.shu@sifive.com, andy.chiu@sifive.com,
  kito.cheng@sifive.com
-Subject: Re: [PATCH v4 05/16] target/riscv: tracking indirect branches (fcfi)
- for zicfilp
-Message-ID: <Zr72d+EYU6V/yvWQ@debug.ba.rivosinc.com>
+Subject: Re: [PATCH v4 13/16] target/riscv: compressed encodings for sspush
+ and sspopchk
+Message-ID: <Zr74Axtj/871L5Nj@debug.ba.rivosinc.com>
 References: <20240816010711.3055425-1-debug@rivosinc.com>
- <20240816010711.3055425-6-debug@rivosinc.com>
- <2c1039b4-a865-458a-831c-7e66b6287a98@linaro.org>
+ <20240816010711.3055425-14-debug@rivosinc.com>
+ <794021c3-02f2-4b64-8d1c-a56125e09462@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii; format=flowed
 Content-Disposition: inline
-In-Reply-To: <2c1039b4-a865-458a-831c-7e66b6287a98@linaro.org>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c33;
- envelope-from=debug@rivosinc.com; helo=mail-oo1-xc33.google.com
+In-Reply-To: <794021c3-02f2-4b64-8d1c-a56125e09462@linaro.org>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::536;
+ envelope-from=debug@rivosinc.com; helo=mail-pg1-x536.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,75 +99,69 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Aug 16, 2024 at 01:41:51PM +1000, Richard Henderson wrote:
->On 8/16/24 11:06, Deepak Gupta wrote:
->>@@ -1245,6 +1250,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
->>  static void riscv_tr_tb_start(DisasContextBase *db, CPUState *cpu)
+On Fri, Aug 16, 2024 at 03:09:10PM +1000, Richard Henderson wrote:
+>On 8/16/24 11:07, Deepak Gupta wrote:
+>>sspush/sspopchk have compressed encodings carved out of zcmops.
+>>compressed sspush is designated as c.mop.1 while compressed sspopchk
+>>is designated as c.mop.5.
+>>
+>>Note that c.sspush x1 exists while c.sspush x5 doesn't. Similarly
+>>c.sspopchk x5 exists while c.sspopchk x1 doesn't.
+>>
+>>Signed-off-by: Deepak Gupta <debug@rivosinc.com>
+>>Co-developed-by: Jim Shu <jim.shu@sifive.com>
+>>Co-developed-by: Andy Chiu <andy.chiu@sifive.com>
+>>---
+>>  target/riscv/insn16.decode                    |  2 ++
+>>  target/riscv/insn_trans/trans_rvzicfiss.c.inc | 12 ++++++++++++
+>>  2 files changed, 14 insertions(+)
+>>
+>>diff --git a/target/riscv/insn16.decode b/target/riscv/insn16.decode
+>>index 3953bcf82d..3b84a36233 100644
+>>--- a/target/riscv/insn16.decode
+>>+++ b/target/riscv/insn16.decode
+>>@@ -140,6 +140,8 @@ sw                110  ... ... .. ... 00 @cs_w
+>>  addi              000 .  .....  ..... 01 @ci
+>>  addi              010 .  .....  ..... 01 @c_li
 >>  {
->>+
+>>+  c_sspush        011 0  00001  00000 01 rs2=1 rs1=0 # c.sspush x1 carving out of zcmops
+>>+  c_sspopchk      011 0  00101  00000 01 rs1=5 rd=0 # c.sspopchk x5 carving out of zcmops
+>>    c_mop_n         011 0 0 n:3 1 00000 01
+>>    illegal         011 0  -----  00000 01 # c.addi16sp and c.lui, RES nzimm=0
+>>    addi            011 .  00010  ..... 01 @c_addi16sp
+>>diff --git a/target/riscv/insn_trans/trans_rvzicfiss.c.inc b/target/riscv/insn_trans/trans_rvzicfiss.c.inc
+>>index 05d439c1f6..67f5c7804a 100644
+>>--- a/target/riscv/insn_trans/trans_rvzicfiss.c.inc
+>>+++ b/target/riscv/insn_trans/trans_rvzicfiss.c.inc
+>>@@ -109,3 +109,15 @@ static bool trans_sspush(DisasContext *ctx, arg_sspush *a)
+>>  {
+>>      return gen_sspush(ctx, a->rs2);
 >>  }
->
->Watch the unrelated changes.
->
->>@@ -1266,6 +1272,28 @@ static void riscv_tr_translate_insn(DisasContextBase *dcbase, CPUState *cpu)
->>      CPURISCVState *env = cpu_env(cpu);
->>      uint16_t opcode16 = translator_lduw(env, &ctx->base, ctx->base.pc_next);
->>+    if (ctx->fcfi_lp_expected) {
->>+        /*
->>+         * Since we can't look ahead to confirm that the first
->>+         * instruction is a legal landing pad instruction, emit
->>+         * compare-and-branch sequence that will be fixed-up in
->>+         * riscv_tr_tb_stop() to either statically hit or skip an
->>+         * illegal instruction exception depending on whether the
->>+         * flag was lowered by translation of a CJLP or JLP as
->>+         * the first instruction in the block.
->>+         */
->>+        TCGv_i32 immediate;
->>+        TCGLabel *l;
->>+        l = gen_new_label();
->>+        immediate = tcg_temp_new_i32();
->>+        tcg_gen_movi_i32(immediate, 0);
->>+        tcg_ctx->cfi_lp_check = tcg_last_op();
->>+        tcg_gen_brcondi_i32(TCG_COND_EQ, immediate, 0, l);
->>+        gen_helper_raise_sw_check_excep(tcg_env,
->>+                tcg_constant_tl(RISCV_EXCP_SW_CHECK_FCFI_TVAL));
->>+        gen_set_label(l);
->>+    }
 >>+
+>>+static bool trans_c_sspopchk(DisasContext *ctx, arg_c_sspopchk *a)
+>>+{
+>>+    assert(a->rs1 == 5);
+>>+    return gen_sspopchk(ctx, a->rs1);
+>>+}
+>>+
+>>+static bool trans_c_sspush(DisasContext *ctx, arg_c_sspush *a)
+>>+{
+>>+    assert(a->rs2 == 1);
+>>+    return gen_sspush(ctx, a->rs2);
+>>+}
 >
->I think this is over-complicated.
->
->>      ctx->ol = ctx->xl;
->>      decode_opc(env, ctx, opcode16);
->>      ctx->base.pc_next += ctx->cur_insn_len;
->
->If we delay the check until here, then
->
->(1) we've decoded the opcode, and processed lpad or not.
->(2) we can know that lpad will have cleared ctx->fcfi_lp_expected,
->    so that if it is still set here, then we didn't see an lpad.
->
->We can go back an insert the exception like so:
->
->    if (ctx->fcfi_lp_expected) {
->        /* Emit after insn_start, i.e. before the op following insn_start. */
->        tcg_ctx->emit_before_op = QTAILQ_NEXT(ctx->base.insn_start, link);
->
->        tcg_gen_st_tl(tcg_constant_tl(RISCV_EXCP_SW_CHECK_FCFI_TVAL),
->                      tcg_env, offsetof(CPURISCVState, sw_check_code));
->        gen_helper_raise_exception(tcg_env, tcg_constant_i32(RISCV_EXCP_SW_CHECK));
->
->        tcg_ctx->emit_before_op = NULL;
->        ctx->base.is_jmp = DISAS_NORETURN;
->    }
+>This indirection is pointless.  Have the decoder invoke the proper 
+>insn in the first place.  Identically with how we're treating 'addi', 
+>for instance.
 >
 
-Hmm. Yes this reduces complication of check. Let me do that.
+I was getting compilation error. How to reconcile with arugment sets between
+insn32.decode and insn16.decode. Earlier I was doing that and didn't need it.
+But after removing indirection in arguments and using single use format, type for
+structs instruction arguments ends up conflicting and compiler complains.
 
->Emit the store to sw_check_code directly; no need for an extra helper. 
->Using gen_helper_raise_exception instead of generate_exception means 
->we don't get a spurious pc update.
 
 >
 >r~
+>
 
