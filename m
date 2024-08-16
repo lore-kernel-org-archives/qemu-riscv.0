@@ -4,87 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 981FDC3DA4A
-	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Aug 2024 07:06:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC2ACC531DC
+	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Aug 2024 07:29:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ser2t-0000eh-Jp; Fri, 16 Aug 2024 03:06:49 -0400
+	id 1serOF-0001BW-U4; Fri, 16 Aug 2024 03:28:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1ser2m-0000Sw-9W
- for qemu-riscv@nongnu.org; Fri, 16 Aug 2024 03:06:40 -0400
-Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1serO5-0000f3-R6
+ for qemu-riscv@nongnu.org; Fri, 16 Aug 2024 03:28:42 -0400
+Received: from mail-ot1-x336.google.com ([2607:f8b0:4864:20::336])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1ser2j-00022c-EI
- for qemu-riscv@nongnu.org; Fri, 16 Aug 2024 03:06:39 -0400
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-201fae21398so8110205ad.1
- for <qemu-riscv@nongnu.org>; Fri, 16 Aug 2024 00:06:36 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1serO3-0004uv-6x
+ for qemu-riscv@nongnu.org; Fri, 16 Aug 2024 03:28:40 -0400
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-70945a007f0so1042526a34.2
+ for <qemu-riscv@nongnu.org>; Fri, 16 Aug 2024 00:28:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1723791995; x=1724396795;
- darn=nongnu.org; 
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=xRU+5Nf9Pu4LJArUVSD6RBlibUDf6dTZ4t+zd9+TE6I=;
- b=InhzHso49vwutlknz9h7/ghxQ5eegsPs02PfVmC3k+2BCoM7JZUtklUGXZKzhPA8Fb
- dkBGLsFgHF49HZ1yxnbL7R0su3gzHh3CLoDlWvhCgAVc86dgehay7R2FEwNGSRVxmYW7
- R2DOYuFxv004hBDdjhrqENyuyeAJP9zB5WLJvJXnm0t5wO/Lasp0yI5w679icdkLCKd9
- UT5M1SCe+6P81RBQbS5bmTS6ftodin7rS92r01O8cogkviQ4DgxMM9LetLFaIoRXithd
- d9HQKRspsIxXkAQogOhqDu6Glyf3nzGo7Fsj+G5UtCGJcXhf2+bsd865ZO8wLaJ7GKxD
- Ai0A==
+ d=linaro.org; s=google; t=1723793317; x=1724398117; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=YGZmjbI1TKAFBmHm9mAvv+PwdWnWaHfgix/3VwWYDYU=;
+ b=ufXP1Bqr9wGH+96sxmzIWRMowYiPRuWkM3fqQSJB/zbTkrY4dBV62KWGP9GpKviLHC
+ Bqlna1nlkP8PRrzONjtQQtkT140zpmd1CHTXXxlpthtcrNitu/qMQiGJVMv9gkgqadcC
+ Sn0prjG46G3yKtEXxRCK6C043FJjp/kslHgnbzmMELouDJvQPqalRhR/amqPe2Vz/lob
+ cLhEBrXnKu0qKgIEYZ4qRl6WzwAH0m43Ycp++O+8XVX8Bw23Kso0Id7IP6E0zRa20G+U
+ 32ya283muGDZmc6W3pTnMwJcLM82nQwyyOoklkhGYlY+6uHc4bhwP0bdyomzq0J4Hajr
+ Qllw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723791995; x=1724396795;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xRU+5Nf9Pu4LJArUVSD6RBlibUDf6dTZ4t+zd9+TE6I=;
- b=SGeYt7vRLSaux+oYnFtTk3jkVVFb98EmDnYDOpewpPR4jPwThuFSwVebhosz7p0sBt
- 9ctrfIUra/Mef47fZep90xw+YkvHdJCnbPtPhE31BfJK6R0+fQS1igsZkbYHkOSpDIyy
- J/4JVkuGD2s4xHU4E9I1OlqzQcWv6MI8+sn6D1awW/znMlZzecUpewACncoHG3akv01b
- WFL/RWXyLZuQxTwoI9Zl1a4pqn/Zrp79MldufvPFM7TMgdHhlPkgJpvt3T7TqyFRKfUc
- USz/foP/8i1rDle/j5+0YNf/t4aVyT61GvOXaS7FjyCjVT/i6dzY9h409PvqUFoG20x0
- r5CA==
-X-Gm-Message-State: AOJu0Yz9tYAG3fvsvzlV87z4laRxVtmatWu+0wDYp5+GVBg1B4/uYKKK
- ELUgKwkm72C1npF0GjsZ7GxPOnRpYyT3HyxzmdtuKj0GUZqRFakaDrL+3EjI22Y=
-X-Google-Smtp-Source: AGHT+IG2/j9sEh16l66MuZVe+bS6ByutthICRsPOZ+dO6D1onL+d/LyTr5APKFYa4ggr9u8qP852RA==
-X-Received: by 2002:a17:903:247:b0:1fd:92a7:6ccc with SMTP id
- d9443c01a7336-20203ec1b8cmr26825795ad.30.1723791995186; 
- Fri, 16 Aug 2024 00:06:35 -0700 (PDT)
-Received: from debug.ba.rivosinc.com ([64.71.180.162])
+ d=1e100.net; s=20230601; t=1723793317; x=1724398117;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=YGZmjbI1TKAFBmHm9mAvv+PwdWnWaHfgix/3VwWYDYU=;
+ b=Pr9VjfUmVuoiFNJp4gFaM+M19vJnGwEET1nSRp6H5Ta6vmtshXj6BOyOIKq+DSZJIk
+ Cur0YwiD6PagKiljv+9/1kBbEEnNB8WJ5Ffm1FbIeecjHla/+HME2xlVWCE0aMadrGEI
+ ForxH3cOQc15zRLimULsPer/9lsYi1BAdn6+SrK93jaabRCakg8puM5iKeKwkvXaUes4
+ fynzqPeHl7YQkgA8bGPC9jvoxab22c8b9BZBtnje7wwPFh0IelnZ9W+bUEpAjlyEK7dx
+ ajBmB8P3gHSd1Cpe4m7RqpcApbawESwUjSrTIqEFKzZVF866m2NIkA2kRQfuzi42FJT8
+ GyJQ==
+X-Gm-Message-State: AOJu0Yz3TRnBuvyzZfPUFx+A/O5GyTQdoOdXMkS+l25gdsSJC9I5/y+x
+ GQNx1uLisZssHewFXObkchdEE8rSBG0J8C9l0M/rPqjskcYwHGpJndIYhu47kJs=
+X-Google-Smtp-Source: AGHT+IH6GhqzBDPZvkYZQuwUhK0OlANBfbqxd3KQyfZe0gJn8tQbmOEHi8sRe5T2oRG3bDY+CSzGLQ==
+X-Received: by 2002:a05:6830:25d5:b0:703:6076:a47 with SMTP id
+ 46e09a7af769-70cac8a3b99mr2020383a34.23.1723793317498; 
+ Fri, 16 Aug 2024 00:28:37 -0700 (PDT)
+Received: from ?IPV6:2403:580a:f89b:0:1b6b:8c7b:90f9:144f?
+ (2403-580a-f89b-0-1b6b-8c7b-90f9-144f.ip6.aussiebb.net.
+ [2403:580a:f89b:0:1b6b:8c7b:90f9:144f])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-201f0319755sm19860105ad.65.2024.08.16.00.06.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Aug 2024 00:06:34 -0700 (PDT)
-Date: Fri, 16 Aug 2024 00:06:32 -0700
-From: Deepak Gupta <debug@rivosinc.com>
-To: Richard Henderson <richard.henderson@linaro.org>
+ 41be03b00d2f7-7c6b61c60ebsm2047882a12.30.2024.08.16.00.28.32
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 16 Aug 2024 00:28:37 -0700 (PDT)
+Message-ID: <6e236767-a1a1-41ca-8f7f-10d6247656b9@linaro.org>
+Date: Fri, 16 Aug 2024 17:28:29 +1000
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 13/16] target/riscv: compressed encodings for sspush
+ and sspopchk
+To: Deepak Gupta <debug@rivosinc.com>
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com,
  Alistair.Francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  pbonzini@redhat.com, jim.shu@sifive.com, andy.chiu@sifive.com,
  kito.cheng@sifive.com
-Subject: Re: [PATCH v4 16/16] target/riscv: add trace-hooks for each case of
- sw-check exception
-Message-ID: <Zr76eGu0ELFGx8Pi@debug.ba.rivosinc.com>
 References: <20240816010711.3055425-1-debug@rivosinc.com>
- <20240816010711.3055425-17-debug@rivosinc.com>
- <70e86ba9-1764-4a2d-bee5-89a0b16ba385@linaro.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <70e86ba9-1764-4a2d-bee5-89a0b16ba385@linaro.org>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
- envelope-from=debug@rivosinc.com; helo=mail-pl1-x633.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ <20240816010711.3055425-14-debug@rivosinc.com>
+ <794021c3-02f2-4b64-8d1c-a56125e09462@linaro.org>
+ <Zr74Axtj/871L5Nj@debug.ba.rivosinc.com>
+Content-Language: en-US
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <Zr74Axtj/871L5Nj@debug.ba.rivosinc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::336;
+ envelope-from=richard.henderson@linaro.org; helo=mail-ot1-x336.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,83 +105,26 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Aug 16, 2024 at 03:52:34PM +1000, Richard Henderson wrote:
->On 8/16/24 11:07, Deepak Gupta wrote:
->>Violations to control flow rules setup by zicfilp and zicfiss lead to
->>software check exceptions. To debug and fix such sw check issues in guest
->>, add trace-hooks for each case.
+On 8/16/24 16:56, Deepak Gupta wrote:
+>>> +  c_sspush        011 0  00001  00000 01 rs2=1 rs1=0 # c.sspush x1 carving out of zcmops
+>>> +  c_sspopchk      011 0  00101  00000 01 rs1=5 rd=0 # c.sspopchk x5 carving out of zcmops
+...
+>> This indirection is pointless.  Have the decoder invoke the proper insn in the first 
+>> place.  Identically with how we're treating 'addi', for instance.
 >>
->>Signed-off-by: Jim Shu <jim.shu@sifive.com>
->>Signed-off-by: Deepak Gupta <debug@rivosinc.com>
->>---
->>  target/riscv/helper.h                         |  3 +++
->>  target/riscv/insn_trans/trans_rvi.c.inc       |  3 +++
->>  target/riscv/insn_trans/trans_rvzicfiss.c.inc |  1 +
->>  target/riscv/op_helper.c                      | 13 +++++++++++++
->>  target/riscv/trace-events                     |  6 ++++++
->>  target/riscv/translate.c                      |  2 ++
->>  6 files changed, 28 insertions(+)
->>
->>diff --git a/target/riscv/helper.h b/target/riscv/helper.h
->>index e946ba61fd..6e90fbd225 100644
->>--- a/target/riscv/helper.h
->>+++ b/target/riscv/helper.h
->>@@ -123,6 +123,9 @@ DEF_HELPER_2(cbo_zero, void, env, tl)
->>  /* helper to raise sw check exception */
->>  DEF_HELPER_2(raise_sw_check_excep, void, env, tl)
->>+/* helper functions to trace riscv cfi violations */
->>+DEF_HELPER_3(zicfilp_label_mismatch, void, env, tl, tl)
->>+DEF_HELPER_3(zicfiss_ra_mismatch, void, env, tl, tl)
->>  /* Special functions */
->>  DEF_HELPER_2(csrr, tl, env, int)
->>diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
->>index 936b430282..7021f8d3da 100644
->>--- a/target/riscv/insn_trans/trans_rvi.c.inc
->>+++ b/target/riscv/insn_trans/trans_rvi.c.inc
->>@@ -54,6 +54,7 @@ static bool trans_lpad(DisasContext *ctx, arg_lpad *a)
->>              /*
->>               * misaligned, according to spec we should raise sw check exception
->>               */
->>+            trace_zicfilp_unaligned_lpad_instr(ctx->base.pc_first);
->>              gen_helper_raise_sw_check_excep(tcg_env,
->>                  tcg_constant_tl(RISCV_EXCP_SW_CHECK_FCFI_TVAL));
->
->Ah, no.
->
->This performs the trace at translation time.
->You want the trace at execution time.
->
->    gen_update_pc(ctx, 0);
->    gen_helper_zicfilp_unaligned_lpad(tcg_env);
->    ctx->base.is_jmp = DISAS_NORETURN;
->
->
->void HELPER(zicfilp_unaligned_lpad)(CPURISCVState *env)
->{
->    trace_zicfilp_unaligned_lpad(env->pc);
->    env->sw_check_code = RISCV_EXCP_SW_CHECK_FCFI_TVAL;
->    riscv_raise_exception(RISCV_EXCP_SW_CHECK, 0);
->}
->
+> 
+> I was getting compilation error. How to reconcile with arugment sets between
+> insn32.decode and insn16.decode. Earlier I was doing that and didn't need it.
+> But after removing indirection in arguments and using single use format, type for
+> structs instruction arguments ends up conflicting and compiler complains.
 
-facepalm on me. sorry.
+Ah, for that you need to use named argument sets.  In this case,
 
->etc.
->
->Nevermind the previous advice vs patch 5 saying you could inline 
->everything; I had forgotten the desire for tracepoints.
+sspush     .... &r2_s rs2=1 rs1=0
+sspopchk   .... &r2   rs2=5 rd=0
 
-It helps locate finding control flow violations faster and fix such
-issues in libc, libraries, and other pieces of software faster.
+in both insn32.decode and insn16.decode
 
-So desire is basically fixing guest software faster.
 
->
->You should probably add these helpers and tracepoints as you add the 
->code.  Anything else is going to be a bit confusing.
-
-Or I can just drop this for now for upstreaming purpose. I'll think about it.
->
->
->r~
+r~
 
