@@ -4,111 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6A85C52D7C
-	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Aug 2024 02:27:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 324BCC52D7C
+	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Aug 2024 02:56:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1semfr-0007Pg-8D; Thu, 15 Aug 2024 22:26:43 -0400
+	id 1sen8i-0007yz-LM; Thu, 15 Aug 2024 22:56:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <npiggin@gmail.com>)
- id 1semfo-0007I6-Bd; Thu, 15 Aug 2024 22:26:40 -0400
-Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1sen8h-0007xy-OE
+ for qemu-riscv@nongnu.org; Thu, 15 Aug 2024 22:56:31 -0400
+Received: from mail-oo1-xc31.google.com ([2607:f8b0:4864:20::c31])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <npiggin@gmail.com>)
- id 1semfm-0005O0-ND; Thu, 15 Aug 2024 22:26:40 -0400
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-1fc60c3ead4so14632005ad.0; 
- Thu, 15 Aug 2024 19:26:37 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1sen8f-0001oz-F0
+ for qemu-riscv@nongnu.org; Thu, 15 Aug 2024 22:56:31 -0400
+Received: by mail-oo1-xc31.google.com with SMTP id
+ 006d021491bc7-5d5c7f23f22so955772eaf.0
+ for <qemu-riscv@nongnu.org>; Thu, 15 Aug 2024 19:56:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1723775196; x=1724379996; darn=nongnu.org;
- h=in-reply-to:references:from:subject:cc:to:message-id:date
- :content-transfer-encoding:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=XiJ95sFlW8mgrdmS+FGQG1YkX3zQYhm3/ChV9srynF0=;
- b=ac1Umut91DNJge8EsBSHt2m1HDPEsdEpm8bf6inM6wvhWaJp4uwB/TrRYmnCnRCXQu
- zVpGelbiYca7iEfbMU7ne49GXRk3hlJA0hy2UzDP7GKdlkjxL3hADbFFCWz8CWPR8c+p
- ehRMcik9wbe0YDeHMzKxulNnmII9uQGOeZcqpL9yiDBPSEfJRgaTMorLDXQBrALhhFxW
- vHbdBpElt+ph6ce/sv8ZA/rG79ldKjSv1s0BxI9EAPx+zmatRrc+okpTYj5wxhyvfRLW
- YbHifGICZUG8PBsxnn7GMA46Wo3gJfcX2Q2gUPXigfOh9mksSQHadEjbvS6AAfX27L1/
- Zjig==
+ d=linaro.org; s=google; t=1723776984; x=1724381784; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=04pOJ2UsJisADRa7BQqXQkAlTitSXJvGuEX6eX5vFYg=;
+ b=tEzVRCWhK470SzOTXYy3ylgMvNmPJFPpz69wMTWnAOSPINe+XJXNK9Htxg/OaZwX/i
+ BdcdZBLEAQUAjkQnOTnccN+E+yBjhOZJ84IwiQzrsCoNSRZnHIcbRVA9G3vp/6ohqoeK
+ WhJR6Jlvn0nGAhWLG3yPV0xK/BEkT7rROnUyBuYH6vP5NAqC6Db72tZlsWO7zNGmQOaG
+ wTJ09pIFrt9nDIymvCS3O6o01JxtGPUuc7PPeu220wXKeNOU9wzSXfXDJep7CxJuQ2jV
+ mXq1NVQ0GBF4U7axYRp2iAEXesH1S3iEmhyiD/DSNNKxAciiHWFj+eTZNDjuGqgqb9U6
+ vewA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723775196; x=1724379996;
- h=in-reply-to:references:from:subject:cc:to:message-id:date
- :content-transfer-encoding:mime-version:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=XiJ95sFlW8mgrdmS+FGQG1YkX3zQYhm3/ChV9srynF0=;
- b=oiIzORVx/sl7E904RnnfZf9ff1BP8l/X8TeV9Run820+/t+dUjtAjvQ6HN+2RkiQJi
- xBCmrX/ix4Tzw5Tfl7IXL7zpNhb+REOnUQ6f0gy6mpRS1pSXtYKrn6O/5EvUSV2T1k5m
- XSKLxeeA2zg0gwYZZlh0MAu7i0Fvnj4lD7DrGAC8UvI2HguwftWyy1JeZsA6lXFUiYuX
- NSm3ZJQelqGhEE1Sm3LxuByHk9R2M2WgHjvT0dVFJBHNXhO3M8841opwO5SPnR9wfF3/
- 9VA3xPfyvfLKs6gFRrO0Plvzcal+y2KnxhjBshgZ2KU3gx/IbAnOtze70sxK5mGgUFrh
- 0RFA==
+ d=1e100.net; s=20230601; t=1723776984; x=1724381784;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=04pOJ2UsJisADRa7BQqXQkAlTitSXJvGuEX6eX5vFYg=;
+ b=ZCjQbZuxqAgJGWCsqlUIAB+o7Bli4+HBrCPt1l+aRIV3GlT/OOOYrh6HChBYWo7VPg
+ 36wHZfqEvHIbvroFXq8V8U1AN5D5gq2ytspofJxgJ292iXa9hTKwAt6DoElxQUb8TEXw
+ PL1+DL9UIxCe76ylbOsx3CUaoHZDeoSmHW305N2KZOQO1BUGfa/q2DFX7Bu1JhM5tQg3
+ EkwIO8oX1Wh0Aa8IufonxbtNHFtplUDao8drTN9dtKi8GBPU9EpCsF4PN56gsYUmIvr1
+ /vyY9st2XRc1RptQgz0oODC4OgHI1rw7pWiII43JkmsCAL08kkWczDRAQRF0yz795sIy
+ +3Yw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXAPlrd8qH5oHMSzGcaIYHNu6QEBSUW/VGEUsmDXF3ebeiWPGTkPD6f0iIFAaCNQzmbYVYYvRqBBLjZ6aobjH0EKvClNfi/D/+RRQzMcSutFe8TMh4qXT4dTAlJhpbEc4M0X1UnIQGPhOr4oGUOFqaZYTpi0Fxfz1k/KATtS4Id0xF9yCCEbKFV
-X-Gm-Message-State: AOJu0Yw7zSzf+PEurfzb2/geg9ciwLhMKxhO43ZiX8EoxBzP3w719w7t
- PXldUK5xKBwuxP8T+6UI8Qnm5Eh+EbDlR44yaIQXvkgErLwMBMKK
-X-Google-Smtp-Source: AGHT+IE5W/byoNs9Ba1LE24xkIbzXaBp1C2IGuE0Ma0+CTpXzATv1ZUn5JGzVmJ5HIIEGa+An/R42g==
-X-Received: by 2002:a17:903:247:b0:201:ed48:f11c with SMTP id
- d9443c01a7336-20203c08902mr20493245ad.0.1723775195953; 
- Thu, 15 Aug 2024 19:26:35 -0700 (PDT)
-Received: from localhost ([1.145.119.203]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-201f039e09csm16366065ad.244.2024.08.15.19.26.20
+ AJvYcCV5FZL+POxiWybad0iG8HG5mOElK+WLVWfT7kVqOsjTGwIv5beQ2AYEMlCEbwEBGJhXttb0/ZS7YFAPz+2t6oSmWcktQAg=
+X-Gm-Message-State: AOJu0Yw01IrhUNPgzyQir/u7xOoxy5YjLuSdF4rEIKKmos1+kp6pnKt0
+ pSQ6KzB0awc1qREh6DRXQ0SVNGmnwXj3upjfcNW8ZU6VFRyl+Ere6wyHtIzg4z8=
+X-Google-Smtp-Source: AGHT+IHAX3150+RfprYIVtyKre7zZUFYCI4hTfEJqrdjQfkRARowd68/2+tnqsn+hBkpwnz0lGTUdw==
+X-Received: by 2002:a05:6870:7f05:b0:25e:24d5:4d54 with SMTP id
+ 586e51a60fabf-2701c5a1974mr1731745fac.35.1723776983779; 
+ Thu, 15 Aug 2024 19:56:23 -0700 (PDT)
+Received: from ?IPV6:2403:580a:f89b:0:d09c:46ba:97a2:4a99?
+ (2403-580a-f89b-0-d09c-46ba-97a2-4a99.ip6.aussiebb.net.
+ [2403:580a:f89b:0:d09c:46ba:97a2:4a99])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-7127af1999fsm1688425b3a.169.2024.08.15.19.56.18
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 15 Aug 2024 19:26:35 -0700 (PDT)
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Fri, 16 Aug 2024 12:26:18 +1000
-Message-Id: <D3GZAWNK3B01.36WGYVZO23DPO@gmail.com>
-To: "Michael S. Tsirkin" <mst@redhat.com>
-Cc: =?utf-8?q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
- <qemu-devel@nongnu.org>, "Alistair Francis" <alistair.francis@wdc.com>,
- "Michael Roth" <michael.roth@amd.com>, "Palmer Dabbelt"
- <palmer@dabbelt.com>, "Mahmoud Mandour" <ma.mandourr@gmail.com>, "Pavel
- Dovgalyuk" <pavel.dovgaluk@ispras.ru>, "Yoshinori Sato"
- <ysato@users.sourceforge.jp>, "Weiwei Li" <liwei1518@gmail.com>, "Eduardo
- Habkost" <eduardo@habkost.net>, =?utf-8?q?Marc-Andr=C3=A9_Lureau?=
- <marcandre.lureau@redhat.com>, "Markus Armbruster" <armbru@redhat.com>,
- "David Hildenbrand" <david@redhat.com>, "Beraldo Leal" <bleal@redhat.com>,
- "Liu Zhiwei" <zhiwei_liu@linux.alibaba.com>, "Eric Auger"
- <eric.auger@redhat.com>, "Song Gao" <gaosong@loongson.cn>,
- <qemu-arm@nongnu.org>, "Peter Xu" <peterx@redhat.com>, "Jiri Pirko"
- <jiri@resnulli.us>, "Eric Blake" <eblake@redhat.com>, "Fabiano Rosas"
- <farosas@suse.de>, <qemu-s390x@nongnu.org>, "Peter Maydell"
- <peter.maydell@linaro.org>, "Daniel Henrique Barboza"
- <dbarboza@ventanamicro.com>, "John Snow" <jsnow@redhat.com>, "Alexandre
- Iooss" <erdnaxe@crans.org>, "Konstantin Kostiuk" <kkostiuk@redhat.com>,
- "Pierrick Bouvier" <pierrick.bouvier@linaro.org>, "Cleber Rosa"
- <crosa@redhat.com>, "Ilya Leoshkevich" <iii@linux.ibm.com>,
- <qemu-riscv@nongnu.org>, "Thomas Huth" <thuth@redhat.com>, "Paolo Bonzini"
- <pbonzini@redhat.com>, "Richard Henderson" <richard.henderson@linaro.org>,
- "Jason Wang" <jasowang@redhat.com>, "Bin Meng" <bmeng.cn@gmail.com>,
- =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>, "Wainer dos
- Santos Moschetta" <wainersm@redhat.com>, "Pavel Dovgalyuk"
- <Pavel.Dovgalyuk@ispras.ru>
-Subject: Re: [PATCH v2 16/21] virtio-net: Use replay_schedule_bh_event for
- bhs that affect machine state
-From: "Nicholas Piggin" <npiggin@gmail.com>
-X-Mailer: aerc 0.18.2
-References: <20240813202329.1237572-1-alex.bennee@linaro.org>
- <20240813202329.1237572-17-alex.bennee@linaro.org>
- <20240813164631-mutt-send-email-mst@kernel.org>
- <D3FEPPLH78YW.3BYA9B4HYGN1U@gmail.com>
- <20240814030308-mutt-send-email-mst@kernel.org>
- <87y14z81ak.fsf@draig.linaro.org> <D3GARIYVC16C.20SXVKSIMLED4@gmail.com>
- <20240815102754-mutt-send-email-mst@kernel.org>
-In-Reply-To: <20240815102754-mutt-send-email-mst@kernel.org>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
- envelope-from=npiggin@gmail.com; helo=mail-pl1-x62d.google.com
+ Thu, 15 Aug 2024 19:56:23 -0700 (PDT)
+Message-ID: <3e23b4a1-d05a-4189-aaf2-3ee75b154945@linaro.org>
+Date: Fri, 16 Aug 2024 12:56:13 +1000
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 02/16] target/riscv: Introduce elp state and enabling
+ controls for zicfilp
+To: Deepak Gupta <debug@rivosinc.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, bmeng.cn@gmail.com,
+ liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, pbonzini@redhat.com, jim.shu@sifive.com,
+ andy.chiu@sifive.com, kito.cheng@sifive.com
+References: <20240816010711.3055425-1-debug@rivosinc.com>
+ <20240816010711.3055425-3-debug@rivosinc.com>
+Content-Language: en-US
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20240816010711.3055425-3-debug@rivosinc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c31;
+ envelope-from=richard.henderson@linaro.org; helo=mail-oo1-xc31.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -124,36 +105,31 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri Aug 16, 2024 at 12:28 AM AEST, Michael S. Tsirkin wrote:
-> On Thu, Aug 15, 2024 at 05:12:32PM +1000, Nicholas Piggin wrote:
-> > Could be a good idea. Although I'm not sure what to do with
-> > all types, maybe we can restrict what is supported.
-> >=20
-> > > Is this wider re-factoring something that can wait for the next
-> > > developer cycle?
-> >=20
-> > I would say so. It's not quite trivial to do nicely since
-> > things are a bit tangled between util/async and replay.
-> >=20
-> > > >> I had started on a conversion once but not completed it.
-> > > >> I could resurrect if there is agreement on the API?
-> > >
-> > > I would certainly welcome it being cleaned up. The supported replay
-> > > devices are very piecemeal at the moment.
-> >=20
-> > I'll tidy up and post an RFC for how the new API might look.
-> >=20
-> > Thanks,
-> > Nick
->
-> Fundamentally it's virtio net, up to Jason. I don't like messy
-> APIs and people tend to get distracted and not fix them up
-> if one does not make this a blocker.
+On 8/16/24 11:06, Deepak Gupta wrote:
+> zicfilp introduces a new state elp ("expected landing pad") in cpu.
+> During normal execution, elp is idle (NO_LP_EXPECTED) i.e not expecting
+> landing pad. On an indirect call, elp moves LP_EXPECTED. When elp is
+> LP_EXPECTED, only a subsquent landing pad instruction can set state back
+> to NO_LP_EXPECTED. On reset, elp is set to NO_LP_EXPECTED.
+> 
+> zicfilp is enabled via bit2 in *envcfg CSRs. Enabling control for M-mode
+> is in mseccfg CSR at bit position 10.
+> 
+> On trap, elp state is saved away in *status.
+> 
+> Signed-off-by: Deepak Gupta<debug@rivosinc.com>
+> Co-developed-by: Jim Shu<jim.shu@sifive.com>
+> Co-developed-by: Andy Chiu<andy.chiu@sifive.com>
+> ---
+>   target/riscv/cpu.c      |  3 +++
+>   target/riscv/cpu.h      |  2 ++
+>   target/riscv/cpu_bits.h |  6 ++++++
+>   target/riscv/csr.c      | 31 +++++++++++++++++++++++++++++++
+>   target/riscv/pmp.c      |  5 +++++
+>   target/riscv/pmp.h      |  3 ++-
+>   6 files changed, 49 insertions(+), 1 deletion(-)
 
-Happy for objections, but FYI Michael did find the proposed API
-tweak nicer, so shall we get these minimal fixes in for 9.1 then
-switch them for next release?
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-Thanks,
-Nick
+r~
 
