@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FA18C52D7C
-	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Aug 2024 01:08:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 083F5C52D7C
+	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Aug 2024 01:08:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1selRH-0000xp-6J; Thu, 15 Aug 2024 21:07:35 -0400
+	id 1selRM-0001Is-92; Thu, 15 Aug 2024 21:07:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1selR6-0000m2-2e
- for qemu-riscv@nongnu.org; Thu, 15 Aug 2024 21:07:24 -0400
-Received: from mail-oa1-x2e.google.com ([2001:4860:4864:20::2e])
+ id 1selR8-0000na-MZ
+ for qemu-riscv@nongnu.org; Thu, 15 Aug 2024 21:07:28 -0400
+Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1selR2-0002Ih-KY
- for qemu-riscv@nongnu.org; Thu, 15 Aug 2024 21:07:23 -0400
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-27010ae9815so633634fac.2
- for <qemu-riscv@nongnu.org>; Thu, 15 Aug 2024 18:07:20 -0700 (PDT)
+ id 1selR6-0002JH-Cw
+ for qemu-riscv@nongnu.org; Thu, 15 Aug 2024 21:07:26 -0400
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-70d2ae44790so1198693b3a.2
+ for <qemu-riscv@nongnu.org>; Thu, 15 Aug 2024 18:07:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1723770439; x=1724375239;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1723770443; x=1724375243;
  darn=nongnu.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/xTvsa+ViAqHINj5oJb/iz6qO9j2BBr+FG4wAjwt7ac=;
- b=MttkHC8VYzfLHYTI6aJw9Y4bV12w8Fu0Ke6mYqt4+OPgZDaRZDORsU5d0lkXMFlFWT
- BZhN3soiQv3Mno/d6gZ5l4VN1BHdmjPo2hyc4LpE0ztXcuOdRDTCrsMDAtBK3+VJAEXX
- cN4HJyQowk74atS222B4w2ZOxyaLwxLfKbOToDd+OwK0rzRxx+TD8n1zzHuaFbCobX++
- FRnFaqeuU8daZY8gqGzzRpZU4A71kJyRpxlKAunrepsFHsXquMH6DzLyfWCZDh1a4s5k
- 8lCspvpqt/4P9tRmG46ilEwqy18ItbDxQxy0DeZHWuqoGiWkGG4ytZYjXGKpHaNIWseL
- Snfw==
+ bh=NjZJpddrUYMLka+s3BuiKelWfoIA0sOQqw+ndLoWex0=;
+ b=NcwYGdqx71qc5Srb+DNFU/OaAXykh7w/gDOYXNcOOAGNJYiAW/tyZHP5sdXH/GiSYx
+ 18HA1FCae5SFIQTYR033T66ok30j1IPIUzN16yHIN+XGhM40GUBLjkZkY5+1bBFXYyQ2
+ jNBY8VW1WORNQ8AdkwuA1sJrDAuwcoJubpvyGe0Ek/N2D1KujV6wG9yTJ2LKzCWFUDj9
+ 3ydkKcGjXo/TYLSe5Hl3DemqGVpD104jSHNgZmD6bM+bhzYVEk+9IxAYD0ALl3IURIWA
+ RlKcASNyN+FgpHm05jhp+aQMsP0liWu/1JIYJHhO9lWLiH8EgxHOA2+/wn42/VCu4uzh
+ mNmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723770439; x=1724375239;
+ d=1e100.net; s=20230601; t=1723770443; x=1724375243;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/xTvsa+ViAqHINj5oJb/iz6qO9j2BBr+FG4wAjwt7ac=;
- b=kyHuIcFA36tkzx9Amwy0yirAVABVGsxrlj9grx74WIWS2pICyI6+e6YScb+I0eA9ct
- 0xwD/k8s6wpEKAEi1USagZI3q7ew4AFnUFyK32r9Xog+BJY0cF7MHXyVSdeY51CGzHWz
- oj60BDEu0eYxIaYblbTWfuweYtY4z19oWVdKSq3cL+eh75yRdI7bk7MvKScT6uoWPA6o
- 42uRk9/doUN5R6aSuiQZ3jMp4GpBnT7OApGloqM8SBqLqZu0AwZI7uAN8vgjhQo3dZKY
- /BhBGefvcbU1lP73WLFzFZ9Mgpxdh5bPHWne0L44j93Xn0WoAVxasBAZed/AFDImAY55
- hAFQ==
-X-Gm-Message-State: AOJu0YwcoWYAqL1W9byejCu+aTjzLVraVMLiVqkASeZmyLuQ5usfBwLh
- 9e16HurAi4D291GIgnSIvlG4SwxjGJ4vBzhI7UiFe5MJL7cnrojPaJDGSxU9kC+M4/GV6fZAOBR
- n
-X-Google-Smtp-Source: AGHT+IEJSOVz8C98YCMXJ/uT8Q6KzRedu8l4G45zvGrU7s2x0po32tgvZpn4vJaYlyOzfSwtK5UhGg==
-X-Received: by 2002:a05:6870:c1d0:b0:260:fbf0:d65c with SMTP id
- 586e51a60fabf-2701c35484amr1667205fac.9.1723770439104; 
- Thu, 15 Aug 2024 18:07:19 -0700 (PDT)
+ bh=NjZJpddrUYMLka+s3BuiKelWfoIA0sOQqw+ndLoWex0=;
+ b=QwTy6v7Z3lGca25I1qCPulVcPJDMcuPWoEdZnP+UOMRSTi6wr7scPmE3KOdpP0JMX5
+ nAUPeqOBMq3IMOjyhzUbXEjaXeet1wnbDgG3757KEJ+hq935uAfQQ0F7jED2GFgpUa6L
+ RF26XK538uWEuvGrSecUs9I2TpRjV2v2CGg+0hQ8as94w+gZW1KCzCV+aJyaXHB8Nfd/
+ XW6ojK3uIGAdstYEwpP9CkN22WD36TksCXohXBG05W2hcdI1eQbECt4Z/u2Dk3e15jYp
+ ImkX1JYwkBPb7HyDNoFNY/U4EvBMr28KHoRP3MXbd+uax5Cz6Of3SHbIZ2IOU9sfmxeZ
+ n/jA==
+X-Gm-Message-State: AOJu0YxQUSsxorL/hhvJm5IzdKJlXBMQ44LMVWpbm99KHWQuySAHBbcJ
+ GtMcN8R5nVrsvnmRyDQnePgQxsFsf8mOZIfyyesT16zxqMiLBQ7Snk8fmoOvN9Ux29I15LfcYMe
+ 4
+X-Google-Smtp-Source: AGHT+IFNMznghKfFGVhp7MzQqqjft87zVndkKXvy7aPJ+8C2GdmhupMmQoVu0JfrVydcNLRAhrXvzg==
+X-Received: by 2002:a05:6a00:1813:b0:70d:244b:cad9 with SMTP id
+ d2e1a72fcca58-713c4f1a1d4mr2012516b3a.28.1723770442745; 
+ Thu, 15 Aug 2024 18:07:22 -0700 (PDT)
 Received: from debug.ba.rivosinc.com ([64.71.180.162])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7127ae120cdsm1604806b3a.77.2024.08.15.18.07.18
+ d2e1a72fcca58-7127ae120cdsm1604806b3a.77.2024.08.15.18.07.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Aug 2024 18:07:18 -0700 (PDT)
+ Thu, 15 Aug 2024 18:07:22 -0700 (PDT)
 From: Deepak Gupta <debug@rivosinc.com>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -68,16 +68,17 @@ Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, richard.henderson@linaro.org,
  zhiwei_liu@linux.alibaba.com, pbonzini@redhat.com, jim.shu@sifive.com,
  andy.chiu@sifive.com, kito.cheng@sifive.com,
  Deepak Gupta <debug@rivosinc.com>
-Subject: [PATCH v4 01/16] target/riscv: Add zicfilp extension
-Date: Thu, 15 Aug 2024 18:06:55 -0700
-Message-ID: <20240816010711.3055425-2-debug@rivosinc.com>
+Subject: [PATCH v4 04/16] target/riscv: additional code information for sw
+ check
+Date: Thu, 15 Aug 2024 18:06:58 -0700
+Message-ID: <20240816010711.3055425-5-debug@rivosinc.com>
 X-Mailer: git-send-email 2.45.0
 In-Reply-To: <20240816010711.3055425-1-debug@rivosinc.com>
 References: <20240816010711.3055425-1-debug@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::2e;
- envelope-from=debug@rivosinc.com; helo=mail-oa1-x2e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
+ envelope-from=debug@rivosinc.com; helo=mail-pf1-x42d.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -99,71 +100,58 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-zicfilp [1] riscv cpu extension enables forward control flow integrity.
-If enabled, all indirect calls must land on a landing pad instruction.
-
-This patch sets up space for zicfilp extension in cpuconfig. zicfilp
-is dependend on zicsr.
-
-[1] - https://github.com/riscv/riscv-cfi
+sw check exception support was recently added. This patch further augments
+sw check exception by providing support for additional code which is
+provided in *tval. Adds `sw_check_code` field in cpuarchstate. Whenever
+sw check exception is raised *tval gets the value deposited in
+`sw_check_code`.
 
 Signed-off-by: Deepak Gupta <debug@rivosinc.com>
-Co-developed-by: Jim Shu <jim.shu@sifive.com>
-Co-developed-by: Andy Chiu <andy.chiu@sifive.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/cpu.c         | 2 ++
- target/riscv/cpu_cfg.h     | 1 +
- target/riscv/tcg/tcg-cpu.c | 5 +++++
- 3 files changed, 8 insertions(+)
+ target/riscv/cpu.h        | 2 ++
+ target/riscv/cpu_helper.c | 2 ++
+ target/riscv/csr.c        | 1 +
+ 3 files changed, 5 insertions(+)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 33ef4eb795..5dfb3f39ab 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -106,6 +106,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(ziccif, PRIV_VERSION_1_11_0, has_priv_1_11),
-     ISA_EXT_DATA_ENTRY(zicclsm, PRIV_VERSION_1_11_0, has_priv_1_11),
-     ISA_EXT_DATA_ENTRY(ziccrse, PRIV_VERSION_1_11_0, has_priv_1_11),
-+    ISA_EXT_DATA_ENTRY(zicfilp, PRIV_VERSION_1_12_0, ext_zicfilp),
-     ISA_EXT_DATA_ENTRY(zicond, PRIV_VERSION_1_12_0, ext_zicond),
-     ISA_EXT_DATA_ENTRY(zicntr, PRIV_VERSION_1_12_0, ext_zicntr),
-     ISA_EXT_DATA_ENTRY(zicsr, PRIV_VERSION_1_10_0, ext_zicsr),
-@@ -1472,6 +1473,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
-     /* Defaults for standard extensions */
-     MULTI_EXT_CFG_BOOL("sscofpmf", ext_sscofpmf, false),
-     MULTI_EXT_CFG_BOOL("zifencei", ext_zifencei, true),
-+    MULTI_EXT_CFG_BOOL("zicfilp", ext_zicfilp, false),
-     MULTI_EXT_CFG_BOOL("zicsr", ext_zicsr, true),
-     MULTI_EXT_CFG_BOOL("zihintntl", ext_zihintntl, true),
-     MULTI_EXT_CFG_BOOL("zihintpause", ext_zihintpause, true),
-diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-index 120905a254..88d5defbb5 100644
---- a/target/riscv/cpu_cfg.h
-+++ b/target/riscv/cpu_cfg.h
-@@ -67,6 +67,7 @@ struct RISCVCPUConfig {
-     bool ext_zicbom;
-     bool ext_zicbop;
-     bool ext_zicboz;
-+    bool ext_zicfilp;
-     bool ext_zicond;
-     bool ext_zihintntl;
-     bool ext_zihintpause;
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index b8814ab753..ed19586c9d 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -623,6 +623,11 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
-         cpu->pmu_avail_ctrs = 0;
-     }
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 7be0fa30f7..11c6513a90 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -224,6 +224,8 @@ struct CPUArchState {
  
-+    if (cpu->cfg.ext_zicfilp && !cpu->cfg.ext_zicsr) {
-+        error_setg(errp, "zicfilp extension requires zicsr extension");
-+        return;
-+    }
-+
-     /*
-      * Disable isa extensions based on priv spec after we
-      * validated and set everything we need.
+     /* elp state for zicfilp extension */
+     bool      elp;
++    /* sw check code for sw check exception */
++    target_ulong sw_check_code;
+ #ifdef CONFIG_USER_ONLY
+     uint32_t elf_flags;
+     bool ufcfien;
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 12484ca7d2..9f08a67a9e 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -1761,6 +1761,8 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+                 cs->watchpoint_hit = NULL;
+             }
+             break;
++        case RISCV_EXCP_SW_CHECK:
++            tval = env->sw_check_code;
+         default:
+             break;
+         }
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 5771a14848..a5a969a377 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -1179,6 +1179,7 @@ static const uint64_t all_ints = M_MODE_INTERRUPTS | S_MODE_INTERRUPTS |
+                          (1ULL << (RISCV_EXCP_INST_PAGE_FAULT)) | \
+                          (1ULL << (RISCV_EXCP_LOAD_PAGE_FAULT)) | \
+                          (1ULL << (RISCV_EXCP_STORE_PAGE_FAULT)) | \
++                         (1ULL << (RISCV_EXCP_SW_CHECK)) | \
+                          (1ULL << (RISCV_EXCP_INST_GUEST_PAGE_FAULT)) | \
+                          (1ULL << (RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT)) | \
+                          (1ULL << (RISCV_EXCP_VIRT_INSTRUCTION_FAULT)) | \
 -- 
 2.44.0
 
