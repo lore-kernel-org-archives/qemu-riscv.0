@@ -4,87 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51CB2C52D7C
-	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Aug 2024 01:10:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6A85C52D7C
+	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Aug 2024 02:27:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1selRL-0001EZ-4p; Thu, 15 Aug 2024 21:07:39 -0400
+	id 1semfr-0007Pg-8D; Thu, 15 Aug 2024 22:26:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1selRH-0000xv-4f
- for qemu-riscv@nongnu.org; Thu, 15 Aug 2024 21:07:35 -0400
-Received: from mail-pf1-x42c.google.com ([2607:f8b0:4864:20::42c])
+ (Exim 4.90_1) (envelope-from <npiggin@gmail.com>)
+ id 1semfo-0007I6-Bd; Thu, 15 Aug 2024 22:26:40 -0400
+Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1selRD-0002Lk-O3
- for qemu-riscv@nongnu.org; Thu, 15 Aug 2024 21:07:34 -0400
-Received: by mail-pf1-x42c.google.com with SMTP id
- d2e1a72fcca58-70d1c655141so1046569b3a.1
- for <qemu-riscv@nongnu.org>; Thu, 15 Aug 2024 18:07:31 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <npiggin@gmail.com>)
+ id 1semfm-0005O0-ND; Thu, 15 Aug 2024 22:26:40 -0400
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-1fc60c3ead4so14632005ad.0; 
+ Thu, 15 Aug 2024 19:26:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1723770450; x=1724375250;
- darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1723775196; x=1724379996; darn=nongnu.org;
+ h=in-reply-to:references:from:subject:cc:to:message-id:date
+ :content-transfer-encoding:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Zwwcop53hXtYL8GHkUUj7OHfyXWtcMSv/IjCclE+Sy4=;
- b=vbTBGelaWoezmh+5F+IKz8wouPolj+xG1U2JVRELuNPI0qd3x9TCq6l8KugNdjtj2X
- 7WbhmCiP0fx6OyX8u+i7gcDig1rn6U+untw+BEAziZtTPoop40TSdZmsp8iq0PAd1RRW
- NsXcs2okqpwEbYkYUc93IvOkhtVpwUDW6+a8SU7qGJqFZdJ5HkGnM01gICYlbdw3wisX
- aV3pkmEXmBiwYQLjCYvKCmJHA7zvPKg6XvefICzm7ah4WPxfFeCDD2S2fnKBhLoTpQiH
- nqowOXsciiaQU1+zCANX966ARQzflIGZKA1u3KHsSlVGEgapcQiqopQ/ll+tb7IgtVKd
- L41w==
+ bh=XiJ95sFlW8mgrdmS+FGQG1YkX3zQYhm3/ChV9srynF0=;
+ b=ac1Umut91DNJge8EsBSHt2m1HDPEsdEpm8bf6inM6wvhWaJp4uwB/TrRYmnCnRCXQu
+ zVpGelbiYca7iEfbMU7ne49GXRk3hlJA0hy2UzDP7GKdlkjxL3hADbFFCWz8CWPR8c+p
+ ehRMcik9wbe0YDeHMzKxulNnmII9uQGOeZcqpL9yiDBPSEfJRgaTMorLDXQBrALhhFxW
+ vHbdBpElt+ph6ce/sv8ZA/rG79ldKjSv1s0BxI9EAPx+zmatRrc+okpTYj5wxhyvfRLW
+ YbHifGICZUG8PBsxnn7GMA46Wo3gJfcX2Q2gUPXigfOh9mksSQHadEjbvS6AAfX27L1/
+ Zjig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723770450; x=1724375250;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Zwwcop53hXtYL8GHkUUj7OHfyXWtcMSv/IjCclE+Sy4=;
- b=uWYA8qHI31ltgtg3p+CsBxxErzxcdUEjh+1bnaF7RIj8bWVe6X2YIrvCDZ/MwCtQzS
- LTyDd9mWScvEnBguSNIGLEOSaPiv+OMaLZRf4ZA0NpSGUXEcZaS/l0/A/iJxyCMbaHXL
- loRlzlUdAOL3gC7dzHR/AMjyK36S0o2+GrZ+XhqsgmlIeMv8MT3B6Zp0JNPWKVd5kDb7
- FoUY5TxqbnFuO6gs/0MINqYfagY59BjH/Org/PVfFLKayV19fevauoZ41B13cg/eN4g9
- NCrJsy7fladedNtixTqR6KyfDWAL474JDQPBa1u5tHHGRkMDP9GVnzDaWBX67ANJX7nD
- pYTA==
-X-Gm-Message-State: AOJu0Yzzy+NLstZ8IQiXLcQYdA2eWFDlrXE7Cu1hTmykO55Wv+q4z9zl
- Ot/L4QlMK+Re+CBeFu+VwUbTS9ay8aIZQdCyblBqGO6nrKKHY1GRW/eLM3fVDQh6jFOijish0u1
- e
-X-Google-Smtp-Source: AGHT+IF/m70F5QcrPLcgGbRHhfT3hs05ke40ld+CViHdqKngen+RsBMYnqTnGUh+CC9BjAFfK3uuaA==
-X-Received: by 2002:a05:6a21:9207:b0:1c2:5fa8:2dee with SMTP id
- adf61e73a8af0-1c904f88d85mr1964955637.12.1723770450185; 
- Thu, 15 Aug 2024 18:07:30 -0700 (PDT)
-Received: from debug.ba.rivosinc.com ([64.71.180.162])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7127ae120cdsm1604806b3a.77.2024.08.15.18.07.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Aug 2024 18:07:29 -0700 (PDT)
-From: Deepak Gupta <debug@rivosinc.com>
-To: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, richard.henderson@linaro.org,
- bmeng.cn@gmail.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, pbonzini@redhat.com, jim.shu@sifive.com,
- andy.chiu@sifive.com, kito.cheng@sifive.com,
- Deepak Gupta <debug@rivosinc.com>
-Subject: [PATCH v4 10/16] target/riscv: tb flag for shadow stack instructions
-Date: Thu, 15 Aug 2024 18:07:04 -0700
-Message-ID: <20240816010711.3055425-11-debug@rivosinc.com>
-X-Mailer: git-send-email 2.45.0
-In-Reply-To: <20240816010711.3055425-1-debug@rivosinc.com>
-References: <20240816010711.3055425-1-debug@rivosinc.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42c;
- envelope-from=debug@rivosinc.com; helo=mail-pf1-x42c.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ d=1e100.net; s=20230601; t=1723775196; x=1724379996;
+ h=in-reply-to:references:from:subject:cc:to:message-id:date
+ :content-transfer-encoding:mime-version:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=XiJ95sFlW8mgrdmS+FGQG1YkX3zQYhm3/ChV9srynF0=;
+ b=oiIzORVx/sl7E904RnnfZf9ff1BP8l/X8TeV9Run820+/t+dUjtAjvQ6HN+2RkiQJi
+ xBCmrX/ix4Tzw5Tfl7IXL7zpNhb+REOnUQ6f0gy6mpRS1pSXtYKrn6O/5EvUSV2T1k5m
+ XSKLxeeA2zg0gwYZZlh0MAu7i0Fvnj4lD7DrGAC8UvI2HguwftWyy1JeZsA6lXFUiYuX
+ NSm3ZJQelqGhEE1Sm3LxuByHk9R2M2WgHjvT0dVFJBHNXhO3M8841opwO5SPnR9wfF3/
+ 9VA3xPfyvfLKs6gFRrO0Plvzcal+y2KnxhjBshgZ2KU3gx/IbAnOtze70sxK5mGgUFrh
+ 0RFA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXAPlrd8qH5oHMSzGcaIYHNu6QEBSUW/VGEUsmDXF3ebeiWPGTkPD6f0iIFAaCNQzmbYVYYvRqBBLjZ6aobjH0EKvClNfi/D/+RRQzMcSutFe8TMh4qXT4dTAlJhpbEc4M0X1UnIQGPhOr4oGUOFqaZYTpi0Fxfz1k/KATtS4Id0xF9yCCEbKFV
+X-Gm-Message-State: AOJu0Yw7zSzf+PEurfzb2/geg9ciwLhMKxhO43ZiX8EoxBzP3w719w7t
+ PXldUK5xKBwuxP8T+6UI8Qnm5Eh+EbDlR44yaIQXvkgErLwMBMKK
+X-Google-Smtp-Source: AGHT+IE5W/byoNs9Ba1LE24xkIbzXaBp1C2IGuE0Ma0+CTpXzATv1ZUn5JGzVmJ5HIIEGa+An/R42g==
+X-Received: by 2002:a17:903:247:b0:201:ed48:f11c with SMTP id
+ d9443c01a7336-20203c08902mr20493245ad.0.1723775195953; 
+ Thu, 15 Aug 2024 19:26:35 -0700 (PDT)
+Received: from localhost ([1.145.119.203]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-201f039e09csm16366065ad.244.2024.08.15.19.26.20
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 15 Aug 2024 19:26:35 -0700 (PDT)
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Fri, 16 Aug 2024 12:26:18 +1000
+Message-Id: <D3GZAWNK3B01.36WGYVZO23DPO@gmail.com>
+To: "Michael S. Tsirkin" <mst@redhat.com>
+Cc: =?utf-8?q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ <qemu-devel@nongnu.org>, "Alistair Francis" <alistair.francis@wdc.com>,
+ "Michael Roth" <michael.roth@amd.com>, "Palmer Dabbelt"
+ <palmer@dabbelt.com>, "Mahmoud Mandour" <ma.mandourr@gmail.com>, "Pavel
+ Dovgalyuk" <pavel.dovgaluk@ispras.ru>, "Yoshinori Sato"
+ <ysato@users.sourceforge.jp>, "Weiwei Li" <liwei1518@gmail.com>, "Eduardo
+ Habkost" <eduardo@habkost.net>, =?utf-8?q?Marc-Andr=C3=A9_Lureau?=
+ <marcandre.lureau@redhat.com>, "Markus Armbruster" <armbru@redhat.com>,
+ "David Hildenbrand" <david@redhat.com>, "Beraldo Leal" <bleal@redhat.com>,
+ "Liu Zhiwei" <zhiwei_liu@linux.alibaba.com>, "Eric Auger"
+ <eric.auger@redhat.com>, "Song Gao" <gaosong@loongson.cn>,
+ <qemu-arm@nongnu.org>, "Peter Xu" <peterx@redhat.com>, "Jiri Pirko"
+ <jiri@resnulli.us>, "Eric Blake" <eblake@redhat.com>, "Fabiano Rosas"
+ <farosas@suse.de>, <qemu-s390x@nongnu.org>, "Peter Maydell"
+ <peter.maydell@linaro.org>, "Daniel Henrique Barboza"
+ <dbarboza@ventanamicro.com>, "John Snow" <jsnow@redhat.com>, "Alexandre
+ Iooss" <erdnaxe@crans.org>, "Konstantin Kostiuk" <kkostiuk@redhat.com>,
+ "Pierrick Bouvier" <pierrick.bouvier@linaro.org>, "Cleber Rosa"
+ <crosa@redhat.com>, "Ilya Leoshkevich" <iii@linux.ibm.com>,
+ <qemu-riscv@nongnu.org>, "Thomas Huth" <thuth@redhat.com>, "Paolo Bonzini"
+ <pbonzini@redhat.com>, "Richard Henderson" <richard.henderson@linaro.org>,
+ "Jason Wang" <jasowang@redhat.com>, "Bin Meng" <bmeng.cn@gmail.com>,
+ =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>, "Wainer dos
+ Santos Moschetta" <wainersm@redhat.com>, "Pavel Dovgalyuk"
+ <Pavel.Dovgalyuk@ispras.ru>
+Subject: Re: [PATCH v2 16/21] virtio-net: Use replay_schedule_bh_event for
+ bhs that affect machine state
+From: "Nicholas Piggin" <npiggin@gmail.com>
+X-Mailer: aerc 0.18.2
+References: <20240813202329.1237572-1-alex.bennee@linaro.org>
+ <20240813202329.1237572-17-alex.bennee@linaro.org>
+ <20240813164631-mutt-send-email-mst@kernel.org>
+ <D3FEPPLH78YW.3BYA9B4HYGN1U@gmail.com>
+ <20240814030308-mutt-send-email-mst@kernel.org>
+ <87y14z81ak.fsf@draig.linaro.org> <D3GARIYVC16C.20SXVKSIMLED4@gmail.com>
+ <20240815102754-mutt-send-email-mst@kernel.org>
+In-Reply-To: <20240815102754-mutt-send-email-mst@kernel.org>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
+ envelope-from=npiggin@gmail.com; helo=mail-pl1-x62d.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,73 +124,36 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Shadow stack instructions can be decoded as zimop / zcmop or shadow stack
-instructions depending on whether shadow stack are enabled at current
-privilege. This requires a TB flag so that correct TB generation and correct
-TB lookup happens. `DisasContext` gets a field indicating whether bcfi is
-enabled or not.
+On Fri Aug 16, 2024 at 12:28 AM AEST, Michael S. Tsirkin wrote:
+> On Thu, Aug 15, 2024 at 05:12:32PM +1000, Nicholas Piggin wrote:
+> > Could be a good idea. Although I'm not sure what to do with
+> > all types, maybe we can restrict what is supported.
+> >=20
+> > > Is this wider re-factoring something that can wait for the next
+> > > developer cycle?
+> >=20
+> > I would say so. It's not quite trivial to do nicely since
+> > things are a bit tangled between util/async and replay.
+> >=20
+> > > >> I had started on a conversion once but not completed it.
+> > > >> I could resurrect if there is agreement on the API?
+> > >
+> > > I would certainly welcome it being cleaned up. The supported replay
+> > > devices are very piecemeal at the moment.
+> >=20
+> > I'll tidy up and post an RFC for how the new API might look.
+> >=20
+> > Thanks,
+> > Nick
+>
+> Fundamentally it's virtio net, up to Jason. I don't like messy
+> APIs and people tend to get distracted and not fix them up
+> if one does not make this a blocker.
 
-Signed-off-by: Deepak Gupta <debug@rivosinc.com>
-Co-developed-by: Jim Shu <jim.shu@sifive.com>
-Co-developed-by: Andy Chiu <andy.chiu@sifive.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
----
- target/riscv/cpu.h        | 2 ++
- target/riscv/cpu_helper.c | 4 ++++
- target/riscv/translate.c  | 4 ++++
- 3 files changed, 10 insertions(+)
+Happy for objections, but FYI Michael did find the proposed API
+tweak nicer, so shall we get these minimal fixes in for 9.1 then
+switch them for next release?
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 5a57099d59..dcc3bc9d93 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -613,6 +613,8 @@ FIELD(TB_FLAGS, AXL, 26, 2)
- /* zicfilp needs a TB flag to track indirect branches */
- FIELD(TB_FLAGS, FCFI_ENABLED, 28, 1)
- FIELD(TB_FLAGS, FCFI_LP_EXPECTED, 29, 1)
-+/* zicfiss needs a TB flag so that correct TB is located based on tb flags */
-+FIELD(TB_FLAGS, BCFI_ENABLED, 30, 1)
- 
- #ifdef TARGET_RISCV32
- #define riscv_cpu_mxl(env)  ((void)(env), MXL_RV32)
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 96571177ef..d3115da28d 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -170,6 +170,10 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
-         flags = FIELD_DP32(flags, TB_FLAGS, FCFI_ENABLED, 1);
-     }
- 
-+    if (cpu_get_bcfien(env)) {
-+        flags = FIELD_DP32(flags, TB_FLAGS, BCFI_ENABLED, 1);
-+    }
-+
- #ifdef CONFIG_USER_ONLY
-     fs = EXT_STATUS_DIRTY;
-     vs = EXT_STATUS_DIRTY;
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index f1522e8b96..4ba42597c4 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -119,6 +119,8 @@ typedef struct DisasContext {
-     /* zicfilp extension. fcfi_enabled, lp expected or not */
-     bool fcfi_enabled;
-     bool fcfi_lp_expected;
-+    /* zicfiss extension, if shadow stack was enabled during TB gen */
-+    bool bcfi_enabled;
- } DisasContext;
- 
- static inline bool has_ext(DisasContext *ctx, uint32_t ext)
-@@ -1241,6 +1243,8 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
-     ctx->pm_base_enabled = FIELD_EX32(tb_flags, TB_FLAGS, PM_BASE_ENABLED);
-     ctx->ztso = cpu->cfg.ext_ztso;
-     ctx->itrigger = FIELD_EX32(tb_flags, TB_FLAGS, ITRIGGER);
-+    ctx->bcfi_enabled = cpu_get_bcfien(env) &&
-+                        FIELD_EX32(tb_flags, TB_FLAGS, BCFI_ENABLED);
-     ctx->fcfi_lp_expected = FIELD_EX32(tb_flags, TB_FLAGS, FCFI_LP_EXPECTED);
-     ctx->fcfi_enabled = FIELD_EX32(tb_flags, TB_FLAGS, FCFI_ENABLED);
-     ctx->zero = tcg_constant_tl(0);
--- 
-2.44.0
-
+Thanks,
+Nick
 
