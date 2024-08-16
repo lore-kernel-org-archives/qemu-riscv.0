@@ -4,124 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1964C52D7F
-	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Aug 2024 03:15:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61DEDC3DA4A
+	for <qemu-riscv@archiver.kernel.org>; Fri, 16 Aug 2024 03:42:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1senQH-00076n-8d; Thu, 15 Aug 2024 23:14:41 -0400
+	id 1senqu-0002Do-6U; Thu, 15 Aug 2024 23:42:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jasowang@redhat.com>)
- id 1seml3-0004y2-AS
- for qemu-riscv@nongnu.org; Thu, 15 Aug 2024 22:32:05 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jasowang@redhat.com>)
- id 1seml0-0005yr-S4
- for qemu-riscv@nongnu.org; Thu, 15 Aug 2024 22:32:05 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1723775520;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=grOFC+auwbhT88GAd3WGdq0vMd4igSM6zH1Gih7uRac=;
- b=Zs4fJMQNuzPfPDhkjbN9AlCvzDAPS0+Ty4E+CfER9DxZbCLUUI3f6BejPXrNAfIUQBeXZQ
- aSJQ3HMueD27jTsg0DHrbwdwnDzIfhAEwvmoQ/ncpJiapx0vfUWDM2spuuBcYDzNh7TPAm
- YqtrUl0ZbUx0ap0UI1vPG1znxGhJDVI=
-Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com
- [209.85.210.197]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-377-Yd9wF41rODK8EpyuC_h9bw-1; Thu, 15 Aug 2024 22:31:58 -0400
-X-MC-Unique: Yd9wF41rODK8EpyuC_h9bw-1
-Received: by mail-pf1-f197.google.com with SMTP id
- d2e1a72fcca58-70d1a9bad5dso1498797b3a.0
- for <qemu-riscv@nongnu.org>; Thu, 15 Aug 2024 19:31:58 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1senqr-0002Bv-SU
+ for qemu-riscv@nongnu.org; Thu, 15 Aug 2024 23:42:09 -0400
+Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1senqq-0007uO-0J
+ for qemu-riscv@nongnu.org; Thu, 15 Aug 2024 23:42:09 -0400
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-1fc587361b6so15998155ad.2
+ for <qemu-riscv@nongnu.org>; Thu, 15 Aug 2024 20:42:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1723779726; x=1724384526; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=kbnaXv0iGc/Nio7+hi+eXPRuS8fR6gs42uJMkQONDDE=;
+ b=HzJJs4Sm/gWHNy930qCOqlVVXY5VwN+tv3eahLtQtJhKT0iTPlmli7L3W5hrGe6fUk
+ NOLi6A6h3Z2+7+JeRRXdlclP4GSWFB+9ARXf1GfY12fEmErUsxo74/6UOl1cC2Nv857J
+ Jorwp/YqdiAJz9AXhPvP5qjaZNkKzzkgYwv9PceoAoeqklh1yiGKM6e6kac6zwkp7bRR
+ YOpiunIAMZTPiwXndzxx2HI694FS+givjkq4gakd/Xs+coNFnuU5CksNZvvYghjyZEZa
+ B2YH+6mNsIGo0ZAhN93du3wQN8Z8K5xfuB8ZCYH0242aiAeMWzQFJFeERrhNBtpArnpM
+ Tr2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723775517; x=1724380317;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=grOFC+auwbhT88GAd3WGdq0vMd4igSM6zH1Gih7uRac=;
- b=UX8bUDWTGwip7nnO4VTBm2e6ihfI+jq639YjkPaTUWsJOSyqXnKHdMeZCTbOGqOkf4
- YgociBvDHByxHGT9aX87gVZflyjuAFt5gvAOQXWdw90qZh/UJvBbWyxxRIKZQty8evAY
- 7rfPRSsKW7P+UosL38LjVDIEQXBtiwFKRz9RXF7YrGwZQXWfEz46JjcPidPTZ2CLMLA+
- nO8+x1tK7QZ9hqP2hfXMWb0gI4j8oZC3OTq61MlmWpJNDMi/1/MqsytnJvLRPvbMIZpo
- ToRiTcYQA2Uef4IAZ6IWtAcfTz5fJ3abAwVwHztwrrDQm3EqEpCyxNXegD6U4C42Cw4N
- NkKg==
+ d=1e100.net; s=20230601; t=1723779726; x=1724384526;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=kbnaXv0iGc/Nio7+hi+eXPRuS8fR6gs42uJMkQONDDE=;
+ b=aFN0qOHkqzvHlCEBAm5U7oEdiaszQcrlejWC+r4HCy28ygKBmJTrKk9sBo04CyHHow
+ gHCh1N8XMIo4VvZMqt32D+ex90TqdYRud2Wjjxp4CuEKxTt6hF3c1ZLPt4Av1EKD/SSk
+ kAO02Jxt7GPOV4GCzQb9CeFoLc7hfW73jAJVP1zfWooKDBPjpwqXYijeciQ5q0uQ7t0F
+ ZcfoiogBccXgP7nNxsmily/SNKZWOAe+DdKzR8qYwWK1hwskvw4WPbpwVa3jQxBGH50a
+ 6U7vNomtS/Rftpd9+D47gzm9t7CI1POkd1Nk/LDa5RRrotZth28rfdTn8rLLGC8Krr+e
+ d46A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWxci3J5BuVxF+uPsExwQ5MdjBLuBvZztXb01n0jzGGq825nKpNUt4ggwoWLfwr0SfqZ9FSHvQxhK09pOPLGSAjhAwKd8M=
-X-Gm-Message-State: AOJu0YxuPV25OISB6IubZaaxkCWikgCZ61QNSrUxXfDjFunrLEmYEPhN
- VziWfTBgleKMadblGfQR41Aapb/qPRqvtLNl+ZXJyTKMPXM2TYwoCEEGRR8ct/2UMRox2Mq4+R8
- 3AJg9GXTgdQn+97yzeZ7rg1RRpYHSEA85p97aulsZL0dr8nzspsU5y3zz+OXS0h7HSTOcSHF+Tw
- Vmu94hpmZZcUxmyuzA5HvJnIJBJ6M=
-X-Received: by 2002:a05:6a20:d502:b0:1c4:919f:3677 with SMTP id
- adf61e73a8af0-1c90501f4a4mr1993057637.42.1723775517676; 
- Thu, 15 Aug 2024 19:31:57 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGJuWwjjqx3oWnuAuWBvb8YFwXGmPYPuMHkmgWZqQ76n5ls9Tl6MHiymgcfpxlfg65GqZFgffAzp59iUwWh6RY=
-X-Received: by 2002:a05:6a20:d502:b0:1c4:919f:3677 with SMTP id
- adf61e73a8af0-1c90501f4a4mr1993001637.42.1723775516991; Thu, 15 Aug 2024
- 19:31:56 -0700 (PDT)
+ AJvYcCXP3eD2HMhs0WdAxzUPo2uGzJN6NxqPrOC5WlcdFBewYnBApxEJpcUNwEB+MoGpHv+ylIk6qUY8Qebi/02Yj3FqS1txcSo=
+X-Gm-Message-State: AOJu0YwsdeZhYAXuKm/K4azV0QClvkCcpLS6IFw6wjtMI/F1a+iVcxHp
+ vDtyXkVU+JXE0SO3fMwkYo5IsE3QwMf5YQd2K2OnnDyJ8mDiITK5J42t6xFL97w=
+X-Google-Smtp-Source: AGHT+IG2DYtVJg68EHAqyfxngRDM/0mIoowBrKQpj30/evElx8H1S2tJZvko8z/O7mAZDyGtDO/obw==
+X-Received: by 2002:a17:902:ced2:b0:201:eed3:80dd with SMTP id
+ d9443c01a7336-20204062fc9mr23563135ad.65.1723779725496; 
+ Thu, 15 Aug 2024 20:42:05 -0700 (PDT)
+Received: from ?IPV6:2403:580a:f89b:0:d09c:46ba:97a2:4a99?
+ (2403-580a-f89b-0-d09c-46ba-97a2-4a99.ip6.aussiebb.net.
+ [2403:580a:f89b:0:d09c:46ba:97a2:4a99])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-201f02fb44dsm17045125ad.52.2024.08.15.20.41.59
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 15 Aug 2024 20:42:05 -0700 (PDT)
+Message-ID: <2c1039b4-a865-458a-831c-7e66b6287a98@linaro.org>
+Date: Fri, 16 Aug 2024 13:41:51 +1000
 MIME-Version: 1.0
-References: <20240813202329.1237572-1-alex.bennee@linaro.org>
- <20240813202329.1237572-17-alex.bennee@linaro.org>
- <20240813164631-mutt-send-email-mst@kernel.org>
- <D3FEPPLH78YW.3BYA9B4HYGN1U@gmail.com>
- <20240814030308-mutt-send-email-mst@kernel.org>
- <87y14z81ak.fsf@draig.linaro.org> <D3GARIYVC16C.20SXVKSIMLED4@gmail.com>
- <20240815102754-mutt-send-email-mst@kernel.org>
-In-Reply-To: <20240815102754-mutt-send-email-mst@kernel.org>
-From: Jason Wang <jasowang@redhat.com>
-Date: Fri, 16 Aug 2024 10:31:41 +0800
-Message-ID: <CACGkMEtS6kges+_hOum2QnpTWotT_ohkJv8PaFHsycjR10QY5w@mail.gmail.com>
-Subject: Re: [PATCH v2 16/21] virtio-net: Use replay_schedule_bh_event for bhs
- that affect machine state
-To: "Michael S. Tsirkin" <mst@redhat.com>
-Cc: Nicholas Piggin <npiggin@gmail.com>,
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>, 
- Michael Roth <michael.roth@amd.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Mahmoud Mandour <ma.mandourr@gmail.com>,
- Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>, 
- Yoshinori Sato <ysato@users.sourceforge.jp>, Weiwei Li <liwei1518@gmail.com>, 
- Eduardo Habkost <eduardo@habkost.net>,
- =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
- Markus Armbruster <armbru@redhat.com>, David Hildenbrand <david@redhat.com>,
- Beraldo Leal <bleal@redhat.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Eric Auger <eric.auger@redhat.com>, 
- Song Gao <gaosong@loongson.cn>, qemu-arm@nongnu.org,
- Peter Xu <peterx@redhat.com>, 
- Jiri Pirko <jiri@resnulli.us>, Eric Blake <eblake@redhat.com>,
- Fabiano Rosas <farosas@suse.de>, 
- qemu-s390x@nongnu.org, Peter Maydell <peter.maydell@linaro.org>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- John Snow <jsnow@redhat.com>, 
- Alexandre Iooss <erdnaxe@crans.org>, Konstantin Kostiuk <kkostiuk@redhat.com>, 
- Pierrick Bouvier <pierrick.bouvier@linaro.org>, Cleber Rosa <crosa@redhat.com>,
- Ilya Leoshkevich <iii@linux.ibm.com>, qemu-riscv@nongnu.org,
- Thomas Huth <thuth@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>, 
- Bin Meng <bmeng.cn@gmail.com>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Pavel Dovgalyuk <Pavel.Dovgalyuk@ispras.ru>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=jasowang@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 05/16] target/riscv: tracking indirect branches (fcfi)
+ for zicfilp
+To: Deepak Gupta <debug@rivosinc.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, bmeng.cn@gmail.com,
+ liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, pbonzini@redhat.com, jim.shu@sifive.com,
+ andy.chiu@sifive.com, kito.cheng@sifive.com
+References: <20240816010711.3055425-1-debug@rivosinc.com>
+ <20240816010711.3055425-6-debug@rivosinc.com>
+Content-Language: en-US
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20240816010711.3055425-6-debug@rivosinc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62f.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.131,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Thu, 15 Aug 2024 23:14:39 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -136,46 +105,73 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Aug 15, 2024 at 10:29=E2=80=AFPM Michael S. Tsirkin <mst@redhat.com=
-> wrote:
->
-> On Thu, Aug 15, 2024 at 05:12:32PM +1000, Nicholas Piggin wrote:
-> > Could be a good idea. Although I'm not sure what to do with
-> > all types, maybe we can restrict what is supported.
-> >
-> > > Is this wider re-factoring something that can wait for the next
-> > > developer cycle?
-> >
-> > I would say so. It's not quite trivial to do nicely since
-> > things are a bit tangled between util/async and replay.
-> >
-> > > >> I had started on a conversion once but not completed it.
-> > > >> I could resurrect if there is agreement on the API?
-> > >
-> > > I would certainly welcome it being cleaned up. The supported replay
-> > > devices are very piecemeal at the moment.
-> >
-> > I'll tidy up and post an RFC for how the new API might look.
-> >
-> > Thanks,
-> > Nick
->
-> Fundamentally it's virtio net, up to Jason.
+On 8/16/24 11:06, Deepak Gupta wrote:
+> @@ -1245,6 +1250,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+>   
+>   static void riscv_tr_tb_start(DisasContextBase *db, CPUState *cpu)
+>   {
+> +
+>   }
 
-It seems it has been in the pull request from Alex Benn=C3=A9e.
+Watch the unrelated changes.
 
-> I don't like messy
-> APIs and people tend to get distracted and not fix them up
-> if one does not make this a blocker.
+> @@ -1266,6 +1272,28 @@ static void riscv_tr_translate_insn(DisasContextBase *dcbase, CPUState *cpu)
+>       CPURISCVState *env = cpu_env(cpu);
+>       uint16_t opcode16 = translator_lduw(env, &ctx->base, ctx->base.pc_next);
+>   
+> +    if (ctx->fcfi_lp_expected) {
+> +        /*
+> +         * Since we can't look ahead to confirm that the first
+> +         * instruction is a legal landing pad instruction, emit
+> +         * compare-and-branch sequence that will be fixed-up in
+> +         * riscv_tr_tb_stop() to either statically hit or skip an
+> +         * illegal instruction exception depending on whether the
+> +         * flag was lowered by translation of a CJLP or JLP as
+> +         * the first instruction in the block.
+> +         */
+> +        TCGv_i32 immediate;
+> +        TCGLabel *l;
+> +        l = gen_new_label();
+> +        immediate = tcg_temp_new_i32();
+> +        tcg_gen_movi_i32(immediate, 0);
+> +        tcg_ctx->cfi_lp_check = tcg_last_op();
+> +        tcg_gen_brcondi_i32(TCG_COND_EQ, immediate, 0, l);
+> +        gen_helper_raise_sw_check_excep(tcg_env,
+> +                tcg_constant_tl(RISCV_EXCP_SW_CHECK_FCFI_TVAL));
+> +        gen_set_label(l);
+> +    }
+> +
 
-+1
+I think this is over-complicated.
 
->
-> --
-> MST
+>       ctx->ol = ctx->xl;
+>       decode_opc(env, ctx, opcode16);
+>       ctx->base.pc_next += ctx->cur_insn_len;
 
-Thanks
+If we delay the check until here, then
 
->
+(1) we've decoded the opcode, and processed lpad or not.
+(2) we can know that lpad will have cleared ctx->fcfi_lp_expected,
+     so that if it is still set here, then we didn't see an lpad.
 
+We can go back an insert the exception like so:
+
+     if (ctx->fcfi_lp_expected) {
+         /* Emit after insn_start, i.e. before the op following insn_start. */
+         tcg_ctx->emit_before_op = QTAILQ_NEXT(ctx->base.insn_start, link);
+
+         tcg_gen_st_tl(tcg_constant_tl(RISCV_EXCP_SW_CHECK_FCFI_TVAL),
+                       tcg_env, offsetof(CPURISCVState, sw_check_code));
+         gen_helper_raise_exception(tcg_env, tcg_constant_i32(RISCV_EXCP_SW_CHECK));
+
+         tcg_ctx->emit_before_op = NULL;
+         ctx->base.is_jmp = DISAS_NORETURN;
+     }
+
+Emit the store to sw_check_code directly; no need for an extra helper. Using 
+gen_helper_raise_exception instead of generate_exception means we don't get a spurious pc 
+update.
+
+
+r~
 
