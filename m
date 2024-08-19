@@ -4,86 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43C79C52D7C
-	for <qemu-riscv@archiver.kernel.org>; Mon, 19 Aug 2024 07:50:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2E78C5320E
+	for <qemu-riscv@archiver.kernel.org>; Mon, 19 Aug 2024 11:32:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sfx9s-00048c-2i; Mon, 19 Aug 2024 03:50:32 -0400
+	id 1sg0cF-0004XL-ER; Mon, 19 Aug 2024 07:32:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1sfx9q-000486-N8
- for qemu-riscv@nongnu.org; Mon, 19 Aug 2024 03:50:30 -0400
-Received: from mail-lj1-x234.google.com ([2a00:1450:4864:20::234])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1sg0cD-0004Vr-Lp; Mon, 19 Aug 2024 07:32:01 -0400
+Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1sfx9o-0005M5-UL
- for qemu-riscv@nongnu.org; Mon, 19 Aug 2024 03:50:30 -0400
-Received: by mail-lj1-x234.google.com with SMTP id
- 38308e7fff4ca-2f0271b0ae9so50785931fa.1
- for <qemu-riscv@nongnu.org>; Mon, 19 Aug 2024 00:50:27 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1sg0cB-0007so-RY; Mon, 19 Aug 2024 07:32:01 -0400
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-202376301e6so5809865ad.0; 
+ Mon, 19 Aug 2024 04:31:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1724053826; x=1724658626; darn=nongnu.org;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=nECs+7LwfoTa4p0TWabtRthPV/S5+LZtDbyRSLrkM7k=;
- b=Xx5bj2VFpqOydamsZ39kAc0Cjk+DIfQ2ns2Ww2NfouHJ/9bnrk6qG9/ZJzZMFyRZup
- rYaWEKVJxvRYpQWoFEKUARejYJwiLuimxcjsZYmZAI7RqjIL9wmCnrRmHng6xmcTl0U+
- ydKxc9Ym5YeuSXZt6s5yDtcmk/7ZbfQGA0fusTGwIeQnag69HRW/ZLKbnM3nehpPoHCO
- Al2m3U3PyCpp5W3n1teCYT8Hqj4SQnols5kFZXgSewKcw0prEKGz15XCLoGXB8wgpcw7
- 4KHs/ucgI+MU/YSncuNRAyqdr3NTiGy9nx78YZnzsVx6BGrH+1H0sKjpqj9r78kECQQ/
- fhsQ==
+ d=gmail.com; s=20230601; t=1724067118; x=1724671918; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=0Q0WRL3MjlfD2sGyNmGan0k6158IInmLjELt4dS2Xec=;
+ b=M1swBtJXZLHReNFMPBcYXtTv7bw3JlVuIfDNW4bGiHGsRNn53V58XCyDrmXVqY9ubR
+ ejWCvpCjXPEbeemXA0TfWkaNaZmn1QJs36tzvUJYzPLY4LzwkUtwveZQ/9DzpwfN/OQ6
+ +7jSSZWVLgbby/bc5C52zFt9eRFwHIBYyRzvyhRrp559tMJlQ4QNjQMcaHBbx9oLsZX4
+ 2Cir7jJnx6azQEk1eE7IYQpjZP5ox8agy71WCMLuU9S/Z7lIu3yWC5XTYR5rgVqup+Zg
+ Kh/5da/0SKGcQq2r390dv0Q46Pw/W86vO6fqT0q/oBkfWjnPs8VJ6KDLmdExIT0yGK9D
+ 2jrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724053826; x=1724658626;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=nECs+7LwfoTa4p0TWabtRthPV/S5+LZtDbyRSLrkM7k=;
- b=tKMSwmTAsEsKH+5Cl7EH/dAGFKjs+jgfqz3NWnlqvb79reSWa4GfonInJOGI8i87OR
- y1yzEM2CDFa7Pad4fxvcZn28O9v0B06w8M0eUBccGPyzfRG5fMub1zi52QBdntlD/wZ/
- XuuQTPl+P+mk/4S2P0YhzGlUyBbtLGIVeuxvdyrj+riGo0Evb3aRKEi37/cpL6ajIyaN
- +1O44/mMCLexjSJNMcTSTKAxm/EKUJMIbieLTGjAjYDSoybBPPU53JFwWhEqQKy9rOZQ
- wukQJ6ipnD7dVLkCpJvKvOzNKrIFWIKPkf0s0KmRYSj7+WxdRuZYDX2SA8d+Q1jAUeU4
- yF1Q==
+ d=1e100.net; s=20230601; t=1724067118; x=1724671918;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=0Q0WRL3MjlfD2sGyNmGan0k6158IInmLjELt4dS2Xec=;
+ b=hxFcgW63Jz/m+Uounl21e3nQG1f22/wknH9HbfUQZiqVx5j3n5JAJeqN8AKw45MJq1
+ ENhvUkZKNyXrjdO6/l1z/h1xbD+SZOR+bkIdonKbBe3U1VW0OwA0sg+lbfi7hT+akeqK
+ 1M4wRAkU6ivkjqq3AVam7QMUN2mOOa0kAXKRtbdG9KKqnbTZ9UAaL/YZfNL5+h+i2LEk
+ Qav9J31QD0dkrNPbBkj7BnK9H9VmxbtpIpB/SsPcAiQmgepvmwEX7pzWOSdiLA6uzg7P
+ zhCuvLU5MJDdSTIKbRtS4Xuvwu+ehfUZOZxYHzaDmBRmvhhNCi7EXdloUx8r7rn7nuqy
+ QLlQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVeERXwH1n+Hu5i9w1pQmH2F+mVCJn8KkwN0Bo8XIwtEQxPnR39UggI46yqRNeIqGLsr/z57Rj7irUW+RkwgIwbFKoNGaA=
-X-Gm-Message-State: AOJu0YyE2cQ2Uq/dFnQZbD6NSUnpxc4SPCmxQhXWz0w5XQRVCmvyeaWu
- jG6zB3BQ1p7sO3M0KfbdhGlrkeswPN4+ctyMvSMk/gIzrqLW6+J91QnaGUC4/M0=
-X-Google-Smtp-Source: AGHT+IFnBZuOrw8K1GawLWOJjeFZoWHyJc5kWrgqeG7CrLQygKlDUg08+mb0ksOTvjhDzuzGrvo5iQ==
-X-Received: by 2002:a2e:a990:0:b0:2ee:7a3a:9969 with SMTP id
- 38308e7fff4ca-2f3be57219cmr73570981fa.5.1724053825371; 
- Mon, 19 Aug 2024 00:50:25 -0700 (PDT)
-Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
- [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
+ AJvYcCV9YiyVC3G+Cib+3Snz7261Jc4+rGzCYk9xXigyhjpcycG5yr2l/rfUeJVXrZQA4LTQzfzy9eJiy6Fq7PcXGlw2L7b3lCo1gdr3aeIvyXZkUagoDXVstx/iFeQXMg==
+X-Gm-Message-State: AOJu0Ywf1slOwgVEU74cvVs4PSaNAd37bwQ2ijph5TLRmXeK04WxZMBp
+ 1vMDKoxyuiiuj72UaqZgrJftGzyAHQ7biEJsvUAKuJpN1UX/5VyZ
+X-Google-Smtp-Source: AGHT+IHudqouSK8axqyXAbWo9yJcVOZfykgiJLAK21/SamjcKI7/IIWUgk1Slnm3ekvUu6Peme09Vw==
+X-Received: by 2002:a17:902:e847:b0:202:435b:2112 with SMTP id
+ d9443c01a7336-202435b22d3mr30189895ad.34.1724067117753; 
+ Mon, 19 Aug 2024 04:31:57 -0700 (PDT)
+Received: from toolbox.alistair23.me
+ (2403-580b-97e8-0-82ce-f179-8a79-69f4.ip6.aussiebb.net.
+ [2403:580b:97e8:0:82ce:f179:8a79:69f4])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5bebbe12eccsm5507855a12.58.2024.08.19.00.50.24
+ d9443c01a7336-201f038a84esm61263445ad.189.2024.08.19.04.31.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 Aug 2024 00:50:24 -0700 (PDT)
-Date: Mon, 19 Aug 2024 09:50:24 +0200
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Alistair Francis <alistair23@gmail.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com, 
- alistair.francis@wdc.com, bmeng.cn@gmail.com, dbarboza@ventanamicro.com, 
- Anup Patel <apatel@ventanamicro.com>
-Subject: Re: [PATCH 2/2] hw/riscv/virt: Introduce strict-dt
-Message-ID: <20240819-2773526929f81da7a462d10a@orel>
-References: <20240816160743.220374-4-ajones@ventanamicro.com>
- <20240816160743.220374-6-ajones@ventanamicro.com>
- <CAKmqyKOXS+Fmb1Jxzwh3fAkeKi5eXQZ+JKkc3H77XjKrrKXe-Q@mail.gmail.com>
+ Mon, 19 Aug 2024 04:31:57 -0700 (PDT)
+From: Alistair Francis <alistair23@gmail.com>
+X-Google-Original-From: Alistair Francis <alistair.francis@wdc.com>
+To: peter.maydell@linaro.org,
+	qemu-devel@nongnu.org,
+	alex.bennee@linaro.org
+Cc: liwei1518@gmail.com, atishp@rivosinc.com, palmer@dabbelt.com,
+ Bin Meng <bmeng.cn@gmail.com>, zhiwei_liu@linux.alibaba.com,
+ Paolo Bonzini <pbonzini@redhat.com>, dbarboza@ventanamicro.com,
+ alistair23@gmail.com, qemu-riscv@nongnu.org,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH v2 0/2] riscv: char: Avoid dropped charecters
+Date: Mon, 19 Aug 2024 21:31:46 +1000
+Message-ID: <20240819113148.3007047-1-alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.46.0
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAKmqyKOXS+Fmb1Jxzwh3fAkeKi5eXQZ+JKkc3H77XjKrrKXe-Q@mail.gmail.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::234;
- envelope-from=ajones@ventanamicro.com; helo=mail-lj1-x234.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
+ envelope-from=alistair23@gmail.com; helo=mail-pl1-x629.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -101,65 +103,25 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Aug 19, 2024 at 11:19:18AM GMT, Alistair Francis wrote:
-> On Sat, Aug 17, 2024 at 2:08 AM Andrew Jones <ajones@ventanamicro.com> wrote:
-> >
-> > Older firmwares and OS kernels which use deprecated device tree
-> > properties or are missing support for new properties may not be
-> > tolerant of fully compliant device trees. When divergence to the
-> > bindings specifications is harmless for new firmwares and OS kernels
-> > which are compliant, then it's probably better to also continue
-> > supporting the old firmwares and OS kernels by generating
-> > non-compliant device trees. The '#msi-cells=<0>' property of the
-> > imsic is one such property. Generating that property doesn't provide
-> > anything necessary (no '#msi-cells' property or an '#msi-cells'
-> > property with a value of zero mean the same thing) but it does
-> > cause PCI devices to fail to find the MSI controller on Linux and,
-> > for that reason, riscv virt doesn't currently generate it despite
-> > that putting the DT out of compliance. For users that want a
-> > compliant DT and know their software supports it, introduce a machine
-> > property 'strict-dt' to do so. We also drop the one redundant
-> > property that uses a deprecated name when strict-dt is enabled.
-> >
-> > Signed-off-by: Andrew Jones <ajones@ventanamicro.com>
-> > ---
-> >  docs/system/riscv/virt.rst | 11 ++++++++++
-> >  hw/riscv/virt.c            | 43 ++++++++++++++++++++++++++++++--------
-> >  include/hw/riscv/virt.h    |  1 +
-> >  3 files changed, 46 insertions(+), 9 deletions(-)
-> >
-> > diff --git a/docs/system/riscv/virt.rst b/docs/system/riscv/virt.rst
-> > index 9a06f95a3444..f08d0a053051 100644
-> > --- a/docs/system/riscv/virt.rst
-> > +++ b/docs/system/riscv/virt.rst
-> > @@ -116,6 +116,17 @@ The following machine-specific options are supported:
-> >    having AIA IMSIC (i.e. "aia=aplic-imsic" selected). When not specified,
-> >    the default number of per-HART VS-level AIA IMSIC pages is 0.
-> >
-> > +- strict-dt=[on|off]
-> 
-> Hmm... I don't love the idea of having yet another command line option.
-> 
-> Does this really buy us a lot? Eventually we should deprecate the
-> invalid DT bindings anyway
+This series fixes: https://gitlab.com/qemu-project/qemu/-/issues/2114
 
-I agree we should deprecate the invalid DT usage, with the goal of only
-generating DTs that make the validator happy. I'm not sure how long that
-deprecation period should be, though. It may need to be a while since
-we'll need to decide when we've waited long enough to no longer care
-about older kernels. In the meantime, we won't be making the validator
-happy and may get bug reports due to that. With strct-dt we can just
-direct people in that direction. Also, I wouldn't be surprised if
-something else like this comes along some day, which is why I tried to
-make the option as generic as possible. Finally, the 'if (strict_dt)'
-self-documents to some extent. Otherwise we'll need to add comments
-around explaining why we're diverging from the specs. Although we should
-probably do that anyway, i.e. I should have put a comment on the
-'if (strict-dt) then #msi-cells' explaining why it's under strict-dt.
-If we want strict-dt, then I'll send a v2 doing that. If we don't want
-strict-dt then I'll send a v2 with just a comment explaining why
-#msi-cells was left out.
+This converts the RISC-V charecter device callers of qemu_chr_fe_write()
+to either use qemu_chr_fe_write_all() or to call qemu_chr_fe_write() async
+and act on the return value.
 
-Thanks,
-drew
+v2:
+ - Use Fifo8 for the Sifive UART instead of a custom FIFO
+
+Alistair Francis (2):
+  hw/char: riscv_htif: Use blocking qemu_chr_fe_write_all
+  hw/char: sifive_uart: Print uart charecters async
+
+ include/hw/char/sifive_uart.h | 17 ++++++-
+ hw/char/riscv_htif.c          | 12 ++++-
+ hw/char/sifive_uart.c         | 88 +++++++++++++++++++++++++++++++++--
+ 3 files changed, 109 insertions(+), 8 deletions(-)
+
+-- 
+2.46.0
+
 
