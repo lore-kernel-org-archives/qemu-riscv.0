@@ -4,56 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67E3CC531DF
-	for <qemu-riscv@archiver.kernel.org>; Mon, 19 Aug 2024 01:42:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9E55C52D7C
+	for <qemu-riscv@archiver.kernel.org>; Mon, 19 Aug 2024 02:36:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sfrPN-00054v-RE; Sun, 18 Aug 2024 21:42:09 -0400
+	id 1sfsFQ-0000GB-NG; Sun, 18 Aug 2024 22:35:56 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1sfrPL-00052K-8n; Sun, 18 Aug 2024 21:42:07 -0400
-Received: from out30-118.freemail.mail.aliyun.com ([115.124.30.118])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1sfrPI-00080y-Je; Sun, 18 Aug 2024 21:42:06 -0400
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1sfsFP-0000FC-FM
+ for qemu-riscv@nongnu.org; Sun, 18 Aug 2024 22:35:55 -0400
+Received: from mail-pg1-x534.google.com ([2607:f8b0:4864:20::534])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1sfsFN-0000OO-VJ
+ for qemu-riscv@nongnu.org; Sun, 18 Aug 2024 22:35:55 -0400
+Received: by mail-pg1-x534.google.com with SMTP id
+ 41be03b00d2f7-7c9a2b339a6so872229a12.2
+ for <qemu-riscv@nongnu.org>; Sun, 18 Aug 2024 19:35:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux.alibaba.com; s=default;
- t=1724031716; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
- bh=+YScLDAgCoW//l1ToCsCYfTB8rsY8yMnozs/0lvJZeI=;
- b=Dov4J3nh434KiHNp78q9ocSnqeTi4Ju4vvWyDoKpQBs/XBA7ROqAPg4Fl64DJLSsUG4G8wnw1AOKU7jSBp258GdWs8kmeAx2EOspO01URTiSovAAgGv6B59QNN1HtiK3AKIWDcrLrryXIk+9jCBXWGrYTAIkxmRXhPdaVK7JEv8=
-Received: from 30.166.64.89(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0WD4tuR6_1724031713) by smtp.aliyun-inc.com;
- Mon, 19 Aug 2024 09:41:54 +0800
-Message-ID: <d65c866d-2a04-4f8f-9867-3d3be4eec593@linux.alibaba.com>
-Date: Mon, 19 Aug 2024 09:41:25 +0800
+ d=linaro.org; s=google; t=1724034951; x=1724639751; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=4F0V9Ka06cM7KtdTbhi8S9OMMbAV7WqQqt6ASHLqV38=;
+ b=LEmhMC2fVMfgaJmZSgmH2SdrVGbeKgcsGw9W4d4fumsAbw22O+Hk+SXbH6crb10Aqk
+ 8IHX9aQv18sg2BxamrK6QVIK1Cfy/oupVEfaPl8LdiGXYBY9EvXXsBNktEjXx5Ee7Kq6
+ GEcLgFMcpbuzvnmnLXdkQIhfqF6knKc/NpW2dW95kEoFu9aWJGtaz2z83Sf+3zEip2oY
+ b+sZNKZCR5BB4ebdnB+EKA6DzMRAu6E6Pw18o4lkWBIKm8O9z0usiOwBOoSUam8pR0nL
+ 2zoEGR2Nfa1fPbClFnSWn1cV3NTOEFYU38nbd7ptx5aE7lCHzuP0pOqtamdQZ4qQl3Il
+ R9KA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1724034951; x=1724639751;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=4F0V9Ka06cM7KtdTbhi8S9OMMbAV7WqQqt6ASHLqV38=;
+ b=IGC/l5fujgPndNphUJklTIZqEFc1FSq3h3rrJ1C8ipmtKAp5xvFj+bjm7g2EkzoOuH
+ TJIlpgV6lytVQxwcwUkuNfrszIhJZl9ndKc9ouQ1rvZrzDe22iEF0M0xH/FVJjoS5kAW
+ U5udwSYwWqs6yB3fKnipLfhqGE5TFo3/J4yvZ7VLmxrA93SCPqVMfNP//yHJjUD7DG+h
+ lSrbQTfyUTnIGYu+eaJZa9SDD0sLGYiM0HNXX0Faiw75hj/d7Ec+udfPKQfBvHLnB8t+
+ y01hy/ZeF0Pdi+KqAtl0WsJQ3MWm1UuWodrxq331yi+4GWuv4F+EBPBOPKRbkuSL/1DL
+ RLQQ==
+X-Gm-Message-State: AOJu0YzrmSWIZaCYv/5PIipwYzuFZ2iEpiXh0vMApbfrx5ROQlgNhx7G
+ ynNDlaM/C97Td4KrTvpKs4jEHKQKXYrEiyt8z1r1qQe1Cf/vl54i41bS7kgVyCw=
+X-Google-Smtp-Source: AGHT+IEDkOdXAdADFXe4y4EWO8qBZDP2vyKR8WLHPEFOjIcoSWy31mpdJxojP8QkVnxBUGzeKIjFIQ==
+X-Received: by 2002:a05:6a20:d708:b0:1c4:b8a1:6db1 with SMTP id
+ adf61e73a8af0-1c9050281ffmr9557670637.38.1724034951147; 
+ Sun, 18 Aug 2024 19:35:51 -0700 (PDT)
+Received: from [192.168.1.113] ([203.30.4.109])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-7c6b61e10b8sm6624085a12.47.2024.08.18.19.35.47
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 18 Aug 2024 19:35:50 -0700 (PDT)
+Message-ID: <6a0f46a5-02f7-47e8-a5f5-5666c2fc9fe2@linaro.org>
+Date: Mon, 19 Aug 2024 12:35:41 +1000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 06/15] tcg/riscv: Implement vector load/store
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Subject: Re: [PATCH v1 05/15] tcg/riscv: Add riscv vset{i}vli support
+To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  dbarboza@ventanamicro.com, liwei1518@gmail.com, bmeng.cn@gmail.com,
  TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
 References: <20240813113436.831-1-zhiwei_liu@linux.alibaba.com>
- <20240813113436.831-7-zhiwei_liu@linux.alibaba.com>
- <2ecd1ccc-ce2b-4432-a2a1-9af2dc70f037@linaro.org>
+ <20240813113436.831-6-zhiwei_liu@linux.alibaba.com>
+ <37e67a28-dd86-435d-a072-95f6a85cc2a7@linaro.org>
+ <ac327ea2-2b22-40e2-8246-57e4be77d8d1@linux.alibaba.com>
 Content-Language: en-US
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <2ecd1ccc-ce2b-4432-a2a1-9af2dc70f037@linaro.org>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <ac327ea2-2b22-40e2-8246-57e4be77d8d1@linux.alibaba.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.118;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-118.freemail.mail.aliyun.com
-X-Spam_score_int: -174
-X-Spam_score: -17.5
-X-Spam_bar: -----------------
-X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::534;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x534.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -69,68 +100,41 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On 8/19/24 11:34, LIU Zhiwei wrote:
+>>> @@ -1914,6 +2029,11 @@ static void tcg_out_vec_op(TCGContext *s, TCGOpcode opc,
+>>>                              const TCGArg args[TCG_MAX_OP_ARGS],
+>>>                              const int const_args[TCG_MAX_OP_ARGS])
+>>>   {
+>>> +    TCGType type = vecl + TCG_TYPE_V64;
+>>> +
+>>> +    if (vec_vtpye_init) {
+>>> +        tcg_target_set_vec_config(s, type, vece);
+>>> +    }
+>>
+>> Here is perhaps too early... see patch 8 re logicals.
+> 
+> I guess you mean we don't have implemented any vector op, so there is no need to set 
+> vsetvl in this patch. We will postpone it do really ops need it.
 
-On 2024/8/14 17:01, Richard Henderson wrote:
-> On 8/13/24 21:34, LIU Zhiwei wrote:
->> @@ -827,14 +850,59 @@ static void tcg_out_ldst(TCGContext *s, 
->> RISCVInsn opc, TCGReg data,
->>   static void tcg_out_ld(TCGContext *s, TCGType type, TCGReg arg,
->>                          TCGReg arg1, intptr_t arg2)
->>   {
->> -    RISCVInsn insn = type == TCG_TYPE_I32 ? OPC_LW : OPC_LD;
->> +    RISCVInsn insn;
->> +
->> +    if (type < TCG_TYPE_V64) {
->> +        insn = type == TCG_TYPE_I32 ? OPC_LW : OPC_LD;
->> +    } else {
->> +        tcg_debug_assert(arg >= TCG_REG_V1);
->> +        switch (prev_vece) {
->> +        case MO_8:
->> +            insn = OPC_VLE8_V;
->> +            break;
->> +        case MO_16:
->> +            insn = OPC_VLE16_V;
->> +            break;
->> +        case MO_32:
->> +            insn = OPC_VLE32_V;
->> +            break;
->> +        case MO_64:
->> +            insn = OPC_VLE64_V;
->> +            break;
->> +        default:
->> +            g_assert_not_reached();
->> +        }
->> +    }
->>       tcg_out_ldst(s, insn, arg, arg1, arg2);
->
-> tcg_out_ld/st are called directly from register allocation spill/fill.
-> You'll need to set vtype here, and cannot rely on this having been 
-> done in tcg_out_vec_op.
-OK.
->
-> That said, with a little-endian host, the selected element size 
-> doesn't matter *too* much.  A write of 8 uint16_t or a write of 2 
-> uint64_t produces the same bits in memory.
->
-> Therefore you can examine prev_vtype and adjust only if the vector 
-> length changes.
-OK.
->   But we do that -- e.g. load V256, store V256, store V128 to perform 
-> a 384-bit store for AArch64 SVE when VQ=3.
->
-> Is there an advantage to using the vector load/store whole register 
-> insns, if the requested length is not too small?
-For vector type equal or bigger than vlen in host, we will use the whole 
-register instructions.
->   IIRC the NF field can be used to store multiples, but we can't store 
-> half of a register with these.
+What I meant is "too early in the function", i.e. before the switch.
 
-I think we can still use the unit-stride instructions for them.
+Per my comment in patch 8, there are some vector ops that are agnostic to type and only 
+care about length.  Thus perhaps
 
-Thanks,
-Zhiwei
+   switch (op) {
+   case xxx:
+     set_vec_config_len(s, type);
+     something;
 
->
->
-> r~
+   case yyy:
+     set_vec_config_len_elt(s, type, vece);
+     something_else;
+
+   ...
+   }
+
+Or some other structure that makes sense.
+
+
+r~
 
