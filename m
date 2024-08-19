@@ -4,91 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F02AC5320E
-	for <qemu-riscv@archiver.kernel.org>; Mon, 19 Aug 2024 11:32:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51A0DC3DA4A
+	for <qemu-riscv@archiver.kernel.org>; Mon, 19 Aug 2024 16:08:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sg0cO-0004ov-Jg; Mon, 19 Aug 2024 07:32:12 -0400
+	id 1sg4vZ-0005w2-RB; Mon, 19 Aug 2024 12:08:17 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sg0cJ-0004in-Sn; Mon, 19 Aug 2024 07:32:08 -0400
-Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sg0cH-0007tE-Sg; Mon, 19 Aug 2024 07:32:07 -0400
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-201fbd0d7c2so24158335ad.0; 
- Mon, 19 Aug 2024 04:32:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1724067124; x=1724671924; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=021PAq7IpXYIvnIVv8yykD2C9A93y9EXWvxSgWQNcyk=;
- b=ByB9CW46n/C9Z1E0eppec16imzZPmsXiXWfRxHGDyMOnNLRh4q0nT4ykmBRlbWncPx
- Qcg4GqcCXlE8gj8ZlvoH53QrrV3D4X1kDNpqIc3Cy3DaTi3gt6gp3GYQkn6hrwEljaPb
- VCxQlP8s8Sm2yASYfyP0VC8kwr36nzECdaif23/li4ODXvBZspRrwwnzwa0j7hcvMUz/
- +RXNJRkFm2xc2XGVMVGh4ggy+BKNzNOdh+dhiIgDETUIKdkhB0Ev9RLmRR4FqTmTExPw
- rVHfONRDs9qu2JLqgrbUgm6QUIiBForJFrEgTZZOrYDGy1BUCVmxxhOVI/8qpeFjlMcy
- 4EgA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724067124; x=1724671924;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=021PAq7IpXYIvnIVv8yykD2C9A93y9EXWvxSgWQNcyk=;
- b=XUmIVVy1FyVuBTLOgWs/XYsUZRLNnEHg5U3tnAzgNrfyJzTCFWgOV40m+hKlHGAUBf
- 3HWxtHB3/BbP2WLV3KaaHtobLMfVG02+6HpIrCKDrm+XR5kcngW5D/krKbWzkW7rzUq5
- arNf58exc36uc9XtflqnsyylUaNS3y3w3czrQxygY0/RkXcNb/wYwJiuhGO+/J++Q//R
- c0VDwiEwniNK99O7Oo2ydF8t9bE0tjo0c9N7n4Y6F6p/zqwLIzvhS5TfoX0/loH0feUC
- T4WuyoVTwnz/vavkJkBUbDMyTrpTVtgJobmY/5UkNq4QuzEslobdUtXdERMu/lmu3U4s
- tpww==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWtmCwAZ/+FNILVCIMp8p60b9jYaHdkWxbZHUeEkMyH3UEcSuVUDPQwBYnOZBfzGrJZ/+jlZ0Xc+V1vHP2q1a2NNtCnC+CwyXMffSa7FVLj//Q2wcGswJszMrTG3g==
-X-Gm-Message-State: AOJu0YzItAAsplxd8GfpHzLxIgKMXYljxV+z5kcRQ4PN0LcU0T0guW+Q
- WKiy/5lmB9wy6IfV+HBjK4RSrf6+mnvL7cKPfwroKvWJUqs+AP6P
-X-Google-Smtp-Source: AGHT+IE3dYfue1VGocS7gztoDn7V5ccsnhmGclrjfY6RCgAHj4ZxfR81GQhL4p+wMK33lTJ64Q5r5w==
-X-Received: by 2002:a17:902:da8a:b0:1fd:8c25:415d with SMTP id
- d9443c01a7336-20203ed3a00mr83580015ad.36.1724067123559; 
- Mon, 19 Aug 2024 04:32:03 -0700 (PDT)
-Received: from toolbox.alistair23.me
- (2403-580b-97e8-0-82ce-f179-8a79-69f4.ip6.aussiebb.net.
- [2403:580b:97e8:0:82ce:f179:8a79:69f4])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-201f038a84esm61263445ad.189.2024.08.19.04.31.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 Aug 2024 04:32:03 -0700 (PDT)
-From: Alistair Francis <alistair23@gmail.com>
-X-Google-Original-From: Alistair Francis <alistair.francis@wdc.com>
-To: peter.maydell@linaro.org,
-	qemu-devel@nongnu.org,
-	alex.bennee@linaro.org
-Cc: liwei1518@gmail.com, atishp@rivosinc.com, palmer@dabbelt.com,
- Bin Meng <bmeng.cn@gmail.com>, zhiwei_liu@linux.alibaba.com,
- Paolo Bonzini <pbonzini@redhat.com>, dbarboza@ventanamicro.com,
- alistair23@gmail.com, qemu-riscv@nongnu.org,
- Alistair Francis <Alistair.Francis@wdc.com>,
- =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v2 1/2] hw/char: riscv_htif: Use blocking qemu_chr_fe_write_all
-Date: Mon, 19 Aug 2024 21:31:47 +1000
-Message-ID: <20240819113148.3007047-2-alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.46.0
-In-Reply-To: <20240819113148.3007047-1-alistair.francis@wdc.com>
-References: <20240819113148.3007047-1-alistair.francis@wdc.com>
+ (Exim 4.90_1)
+ (envelope-from <prvs=5961d01319=ian.brockbank@cirrus.com>)
+ id 1sg4vX-0005sx-Sg; Mon, 19 Aug 2024 12:08:15 -0400
+Received: from mx0a-001ae601.pphosted.com ([67.231.149.25]
+ helo=mx0b-001ae601.pphosted.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <prvs=5961d01319=ian.brockbank@cirrus.com>)
+ id 1sg4vV-0006x1-QQ; Mon, 19 Aug 2024 12:08:15 -0400
+Received: from pps.filterd (m0077473.ppops.net [127.0.0.1])
+ by mx0a-001ae601.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 47JF6kfa004018;
+ Mon, 19 Aug 2024 11:07:57 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cirrus.com; h=cc
+ :content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=
+ PODMain02222019; bh=CTBn2WQgxjV9HstSP0zkV4cvwhWuzTA6WEBVfacCLU8=; b=
+ AXB7KgE2t3pNjS8SWBsUN0r2VMkSmRu0sTU2NDtOLeW4SYcDrl58efiakn0Lkp8Q
+ V3ukLux7+4F7G/Rl/PyhWf6jgZX1Nr/E4ohPROV8FK3XD69x379YiutpyMc/cvXp
+ jf6LR8YR/o2+RqCTAwI+M01va8/NPAxcFEWlQTETmmrxyAK6eYZ4wABVyrj+Gx60
+ aaiFY7vvg11l53dU5ar1r/2eyddK4r+XxQo5GdYWsUI2xpukdaXrmKj2vqyFuB6B
+ y4jDxc2Hrq+esNNTPqWgC2ap43dTOxLgi3AU46KKBOLhX0WiTdN0Z8dmfIA2Yj2s
+ I8f2yKQgsZ3tjyLZKa95/A==
+Received: from ausex02.ad.cirrus.com ([141.131.3.21])
+ by mx0a-001ae601.pphosted.com (PPS) with ESMTPS id 412s8x1x57-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 19 Aug 2024 11:07:56 -0500 (CDT)
+Received: from ausex01.ad.cirrus.com (141.131.37.95) by ausex02.ad.cirrus.com
+ (141.131.37.96) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.9; Mon, 19 Aug
+ 2024 11:07:55 -0500
+Received: from EDIN7BQBTG3.ad.cirrus.com (141.131.38.212) by
+ anon-ausex01.ad.cirrus.com (141.131.37.95) with Microsoft SMTP Server id
+ 15.2.1544.9 via Frontend Transport; Mon, 19 Aug 2024 11:07:53 -0500
+From: Ian Brockbank <Ian.Brockbank@cirrus.com>
+To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
+CC: Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis
+ <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>, Weiwei Li
+ <liwei1518@gmail.com>, Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Ian Brockbank
+ <ian.brockbank@cirrus.com>
+Subject: [PATCH 00/11 v2] RISC-V: support CLIC v0.9 specification
+Date: Mon, 19 Aug 2024 17:02:08 +0100
+Message-ID: <20240819160742.27586-1-Ian.Brockbank@cirrus.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <https://lists.gnu.org/archive/html/qemu-riscv/2024-08/msg00234.html>
+References: <https://lists.gnu.org/archive/html/qemu-riscv/2024-08/msg00234.html>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
- envelope-from=alistair23@gmail.com; helo=mail-pl1-x633.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: 1hR6MrH6FeYr0AP99NSuhHpCrCRY_fji
+X-Proofpoint-GUID: 1hR6MrH6FeYr0AP99NSuhHpCrCRY_fji
+X-Proofpoint-Spam-Reason: safe
+Received-SPF: pass client-ip=67.231.149.25;
+ envelope-from=prvs=5961d01319=ian.brockbank@cirrus.com;
+ helo=mx0b-001ae601.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -105,53 +89,80 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The current approach of using qemu_chr_fe_write() and ignoring the
-return values results in dropped charecters [1]. Ideally we want to
-report FIFO status to the guest, but the HTIF isn't a real UART, so we
-don't really have a way to do that.
+[Resubmission now the merge is correct]
 
-Instead let's just use qemu_chr_fe_write_all() so at least we don't drop
-charecters.
+This patch set gives an implementation of "RISC-V Core-Local Interrupt
+Controller(CLIC) Version 0.9-draft-20210217". It comes from [1], where
+you can find the pdf format or the source code.
 
-1: https://gitlab.com/qemu-project/qemu/-/issues/2114
+This is based on the implementation from 2021 by Liu Zhiwei [3], who took
+over the job from Michael Clark, who gave the first implementation of
+clic-v0.7 specification [2]. I believe this implementation addresses all
+the comments in Liu Zhiwei's RFC patch thread.
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- hw/char/riscv_htif.c | 12 ++++++++++--
- 1 file changed, 10 insertions(+), 2 deletions(-)
+This implementation follows the CLIC 0.9-stable draft at 14 March 2024,
+with the following exceptions and implementation details:
+ - the CLIC control registers are memory-mapped as per earlier drafts (in
+   particular version 0.9-draft, 20 June 2023)
+ - the indirect CSR control in 0.9-stable is not implemented
+ - the vector table can be either handler addresses (as per the spec)
+   or a jump table where each entry is processed as an instruction,
+   selectable with version number v0.9-jmp
+ - each hart is assigned its own CLIC block
+ - if PRV_S and/or PRV_M are supported, they are currently assumed to follo=
+w
+   the PRV_M registers; a subsequent update will address this
+ - support for PRV_S and PRV_M is selectable at CLIC instantiation
+ - PRV_S and PRV_U registers are currently separate from PRV_M; a subsequen=
+t
+   update will turn them into filtered views onto the PRV_M registers
+ - each hart is assigned its own CLIC block
+ - support for PRV_S and PRV_M is selectable at CLIC instantiation by
+   passing in a base address for the given modes; a base address of 0 is
+   treated as not supported
+ - PRV_S and PRV_U registers are mapped  onto the PRV_M controls with
+   appropriate filtering for the access mode
+ - the RISCV virt machine has been updated to allow CLIC emulation by
+   passing "machine=3Dvirt,clic=3Don" on the command line; various other
+   parameters have been added to allow finer control of the CLIC behavior
 
-diff --git a/hw/char/riscv_htif.c b/hw/char/riscv_htif.c
-index 9bef60def1..d40b542948 100644
---- a/hw/char/riscv_htif.c
-+++ b/hw/char/riscv_htif.c
-@@ -218,7 +218,11 @@ static void htif_handle_tohost_write(HTIFState *s, uint64_t val_written)
-                     tswap64(syscall[3]) == HTIF_CONSOLE_CMD_PUTC) {
-                     uint8_t ch;
-                     cpu_physical_memory_read(tswap64(syscall[2]), &ch, 1);
--                    qemu_chr_fe_write(&s->chr, &ch, 1);
-+                    /*
-+                     * XXX this blocks entire thread. Rewrite to use
-+                     * qemu_chr_fe_write and background I/O callbacks
-+                     */
-+                    qemu_chr_fe_write_all(&s->chr, &ch, 1);
-                     resp = 0x100 | (uint8_t)payload;
-                 } else {
-                     qemu_log_mask(LOG_UNIMP,
-@@ -237,7 +241,11 @@ static void htif_handle_tohost_write(HTIFState *s, uint64_t val_written)
-             return;
-         } else if (cmd == HTIF_CONSOLE_CMD_PUTC) {
-             uint8_t ch = (uint8_t)payload;
--            qemu_chr_fe_write(&s->chr, &ch, 1);
-+            /*
-+             * XXX this blocks entire thread. Rewrite to use
-+             * qemu_chr_fe_write and background I/O callbacks
-+             */
-+            qemu_chr_fe_write_all(&s->chr, &ch, 1);
-             resp = 0x100 | (uint8_t)payload;
-         } else {
-             qemu_log("HTIF device %d: unknown command\n", device);
--- 
-2.46.0
+The implementation (in jump-table mode) has been verified to match the
+Cirrus Logic silicon (PRV_M only), which is based upon the Pulp
+implementation [4] as of June 2023.
 
+The implementation also includes a selection of qtests designed to verify
+operation in all possible combinations of PRV_M, PRV_S and PRV_U.
+
+[1] specification website: https://github.com/riscv/riscv-fast-interrupt.
+[2] Michael Clark origin work:
+https://github.com/sifive/riscv-qemu/tree/sifive-clic.
+[3] RFC Patch submission by Liu Zhiwei:
+https://lists.gnu.org/archive/html/qemu-devel/2021-04/msg01417.html
+[4] Pulp implementation of CLIC: https://github.com/pulp-platform/clic
+
+Ian Brockbank (11):
+    target/riscv: Add CLIC CSR mintstatus
+    target/riscv: Update CSR xintthresh in CLIC mode
+    hw/intc: Add CLIC device
+    target/riscv: Update CSR xie in CLIC mode
+    target/riscv: Update CSR xip in CLIC mode
+    target/riscv: Update CSR xtvec in CLIC mode
+    target/riscv: Update CSR xnxti in CLIC mode
+    target/riscv: Update interrupt handling in CLIC mode
+    target/riscv: Update interrupt return in CLIC mode
+    hw/riscv: add CLIC into virt machine
+    tests: add riscv clic qtest case and a function in qtest
+
+This message and any attachments may contain privileged and confidential in=
+formation that is intended solely for the person(s) to whom it is addressed=
+. If you are not an intended recipient you must not: read; copy; distribute=
+; discuss; take any action in or make any reliance upon the contents of thi=
+s message; nor open or read any attachment. If you have received this messa=
+ge in error, please notify us as soon as possible on the following telephon=
+e number and destroy this message including any attachments. Thank you. Cir=
+rus Logic International (UK) Ltd and Cirrus Logic International Semiconduct=
+or Ltd are companies registered in Scotland, with registered numbers SC0898=
+39 and SC495735 respectively. Our registered office is at 7B Nightingale Wa=
+y, Quartermile, Edinburgh, EH3 9EG, UK. Tel: +44 (0)131 272 7000. www.cirru=
+s.com
 
