@@ -4,85 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 743C2C3DA4A
-	for <qemu-riscv@archiver.kernel.org>; Mon, 19 Aug 2024 04:18:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2481FC3DA4A
+	for <qemu-riscv@archiver.kernel.org>; Mon, 19 Aug 2024 05:33:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sftq5-0003kQ-TB; Mon, 19 Aug 2024 00:17:54 -0400
+	id 1sfv0N-00057o-61; Mon, 19 Aug 2024 01:32:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1sftiZ-0004zt-JD
- for qemu-riscv@nongnu.org; Mon, 19 Aug 2024 00:10:08 -0400
-Received: from mail-oi1-x242.google.com ([2607:f8b0:4864:20::242])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1sfv0L-0004zj-DK; Mon, 19 Aug 2024 01:32:33 -0400
+Received: from mail-vs1-xe31.google.com ([2607:f8b0:4864:20::e31])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1sftiX-0002qt-GS
- for qemu-riscv@nongnu.org; Mon, 19 Aug 2024 00:10:07 -0400
-Received: by mail-oi1-x242.google.com with SMTP id
- 5614622812f47-3db1e4219f8so2163185b6e.3
- for <qemu-riscv@nongnu.org>; Sun, 18 Aug 2024 21:10:04 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1sfv0J-00058J-CT; Mon, 19 Aug 2024 01:32:33 -0400
+Received: by mail-vs1-xe31.google.com with SMTP id
+ ada2fe7eead31-493e8ef36b4so1495996137.2; 
+ Sun, 18 Aug 2024 22:32:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1724040603; x=1724645403; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=v2qdX8mWUNXZJiWfJcpgF+TJTRmV7VWVMGYVoqqgQAw=;
- b=jF5AGaKpa7UUwxV9nUhDigztzUJay2boAm40nHIxUxgc3Jcjyy5EHAaAJplmZJEl/m
- j0yp91cQOdX2KoK4lvzRDqF1vYpdLeMjLowZODyQ8dT1R9yyuXSmnGxhb9IYv2wQzXv+
- Wyr7Vwq+Utn6BnEai3RArusOL1HLd06jjvyG7436kOIq+u+xSJGhX7F4+NPs/k6+Zids
- vakpX5RaufBWc0BjcWVyKmbyShSIrzqwS3iiutIj8x1qi3bMJr1q0NEs6xnfXDNFl2kd
- T092EaIye1K0DwALVE+JPsDQOIGZJxw+1OCCIhRT6R1Itz5yw0S2xJXwU6HEaB38Dpin
- aqEQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724040603; x=1724645403;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1724045550; x=1724650350; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=v2qdX8mWUNXZJiWfJcpgF+TJTRmV7VWVMGYVoqqgQAw=;
- b=pl2RD3NjovsnAyxXsrydnuxuBAHcUBsG5zodR0t2Vc2e1APXWjt0C+0oIp4vCDdBpT
- k2n1aHx1LABd7o2AaimC/BUfyu1FZ8gNqxEql0vB3h7GFSW5H1Ess+f395hsgTebvOL9
- A6OpC8TY6g+hGvtN0mR1IspMnTSPTRkha9ggnR4JAiU05qzlvLdb+8akrFViHiKq1g0C
- UnM9YyrVhmxFaswqQdC1TY0+jC6ohjnzQmas30jT0HV/q3nBRM5KslFKrQcGAuy0K30I
- zAiSXsx6++QEa/2Ab/PD0pbVPjVgHg9VPz5wehm+hgEX58hcI8isgijVVZz4SjkofKaf
- 9wSw==
+ bh=6J/8YeXFN7bzIgFX2O2QItwvTyckBanYu33C2tky+1U=;
+ b=Kqq2e9vcnzpEYqy8plm79qUiS6Plpnngt4juQJP8pellvMls9vL8retim7N9VeDNRi
+ d7i7mxowzIjqWZw2JIrzNoWutkj/lgv1ZYMirE1iHLVWVE37PXirPzpixWOjgmMJ5SB9
+ DTJNEL63XBV1c9S8dUOGwWY7cyh5IywEl1X0JkhkSac6BTboYuEYNu3JlPPXEFAAvkym
+ 81LgZZqk10PKEIVS5IkOsdUq2H8rwQ0osA8ZZrpCItXWmBAmkwGaMiYTRtSDuJYexv1D
+ mg1OvBZ/z8Pru9cT0HHrwKrcNg3S9XqHc8hKz9AJVPA1ECPFz9v9AA77P/t5EIJI2Zqc
+ qsMg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1724045550; x=1724650350;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=6J/8YeXFN7bzIgFX2O2QItwvTyckBanYu33C2tky+1U=;
+ b=Np/YAEOF4kyzOUYfxY94KYOCbdPtRjPe1Ve9vFOt+oZXo3fGjjp4yD8ghXlmyJFh9C
+ mKIHLNP4UjcNjU3ddOlhjIN8t4YqaFzYLlT1O+qmErOImi0zs6wQ49Dz7MwdEmSRVVb7
+ rIJKvAuC+elCeryxfn8cO1mX5eugwPu2p0szZFDsQDtzYzOxS6+BToV9/UEJeX4JbOSa
+ gJImqZfdKsv+k7pAAkTPiVFCaTczK9XfojrRy2mc7uwb6VMDg3fGdx3PnQNbjbbG3VuH
+ moEBAtpARjImfV9aXEAA8Xzdc2B9ha971DaVA1YzUMH4HBaMKHMhnVz1yf2HaFBCTewn
+ yeMg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUZzFEeSpOLYVY5Bbtn+gSj1eE5irZSuhYOPkT5M5it++HOvaOuGQr1pzvmqAxjLGufFCxjwk7o4v5866kXj87MCeceJus=
-X-Gm-Message-State: AOJu0Yye1AxEKLKROTH/q6gi8rHQagbspWVCavQVa0a9Nr9R3vRhU88+
- mu+11lT+mZjPnjpbbiKVNwX4+Dpyp2TJe0yoxw+65ae2emDcbJGBsY+BXrsXcMo=
-X-Google-Smtp-Source: AGHT+IH1e4ioJGamfR1n8VYf4nzhXvwFmaOh8Ck/TURLRcNCp7KDx4h0B3DkjZ0fo8cHjlXdtNQ/Ww==
-X-Received: by 2002:a05:6808:3187:b0:3dd:37ab:34bc with SMTP id
- 5614622812f47-3dd3ad37097mr11487728b6e.21.1724040603507; 
- Sun, 18 Aug 2024 21:10:03 -0700 (PDT)
-Received: from sunil-laptop ([106.51.198.16]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3dd33d3fea9sm2072923b6e.1.2024.08.18.21.09.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 18 Aug 2024 21:10:03 -0700 (PDT)
-Date: Mon, 19 Aug 2024 09:39:53 +0530
-From: Sunil V L <sunilvl@ventanamicro.com>
-To: Sia Jee Heng <jeeheng.sia@starfivetech.com>
-Cc: qemu-arm@nongnu.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- mst@redhat.com, imammedo@redhat.com, anisinha@redhat.com,
- peter.maydell@linaro.org, shannon.zhaosl@gmail.com,
- palmer@dabbelt.com, alistair.francis@wdc.com,
- bin.meng@windriver.com, liwei1518@gmail.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com
-Subject: Re: [PATCH v3 2/3] hw/acpi: Upgrade ACPI SPCR table to support SPCR
- table version 4 format
-Message-ID: <ZsLFkbZxvOLpf8bZ@sunil-laptop>
-References: <20240813052223.1033420-1-jeeheng.sia@starfivetech.com>
- <20240813052223.1033420-3-jeeheng.sia@starfivetech.com>
+ AJvYcCUOZHQ/D+3KECBdiQP5l9NbHjDsqFgF6aLlUhh+SkCAmJQkoN2xYvNsRFQ9b0s6I2Ydb7eJSO7ECfrej4hxAkc2yPyd+7q+suFOxGGdemXRsR7Fy2QZ4ZoCNbaZIA==
+X-Gm-Message-State: AOJu0YwOMYkWNd95lfwwoQAkzU6GkPDSd8xq/ro4wo2achAYLd0RElGv
+ I1673cSXCt6kZxRe4FhBmCLglBhkNLf7DEyOMc+jnZlSkvVQDzkEtI6RVzZBMUwnJwEf9KJbxgg
+ dmtzDxupNv8gNZYQK5vPD1cWJ/Pg=
+X-Google-Smtp-Source: AGHT+IFE22RyGTWkMr2qzAybHouLq77ocfSEp5rCkN0NkOZLHfzC9zBnvM7MQPooPdmPqkFxm5DMcbWZ2PXmX6za9JE=
+X-Received: by 2002:a05:6102:304a:b0:492:9e3a:9f48 with SMTP id
+ ada2fe7eead31-49779892fb2mr12213168137.2.1724045549553; Sun, 18 Aug 2024
+ 22:32:29 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240813052223.1033420-3-jeeheng.sia@starfivetech.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::242;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-oi1-x242.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20240815015410.369925-1-alistair.francis@wdc.com>
+ <20240815015410.369925-3-alistair.francis@wdc.com>
+ <c9b7b9aa-9c2e-4275-a7fb-ff994d74d3f4@ilande.co.uk>
+In-Reply-To: <c9b7b9aa-9c2e-4275-a7fb-ff994d74d3f4@ilande.co.uk>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 19 Aug 2024 15:32:03 +1000
+Message-ID: <CAKmqyKMr_riTX+2TdiWqkeYC_YMMZaaj55XiDgBfTx5yJ7eQsw@mail.gmail.com>
+Subject: Re: [PATCH 2/2] hw/char: sifive_uart: Print uart charecters async
+To: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
+Cc: alex.bennee@linaro.org, qemu-devel@nongnu.org, peter.maydell@linaro.org, 
+ dbarboza@ventanamicro.com, palmer@dabbelt.com, qemu-riscv@nongnu.org, 
+ =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
+ zhiwei_liu@linux.alibaba.com, atishp@rivosinc.com, 
+ Bin Meng <bmeng.cn@gmail.com>, liwei1518@gmail.com, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Paolo Bonzini <pbonzini@redhat.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e31;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe31.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -100,93 +98,234 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Jee Heng,
+On Thu, Aug 15, 2024 at 6:27=E2=80=AFPM Mark Cave-Ayland
+<mark.cave-ayland@ilande.co.uk> wrote:
+>
+> On 15/08/2024 02:54, Alistair Francis wrote:
+>
+> > The current approach of using qemu_chr_fe_write() and ignoring the
+> > return values results in dropped charecters [1].
+> >
+> > Let's update the SiFive UART to use a async sifive_uart_xmit() function
+> > to transmit the charecters and apply back preassure to the guest with
+> > the SIFIVE_UART_TXFIFO_FULL status.
+> >
+> > This should avoid dropped charecters and more realisiticly model the
+> > hardware.
+> >
+> > 1: https://gitlab.com/qemu-project/qemu/-/issues/2114
+> >
+> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > ---
+> >   include/hw/char/sifive_uart.h | 17 +++++++-
+> >   hw/char/sifive_uart.c         | 81 +++++++++++++++++++++++++++++++++-=
+-
+> >   2 files changed, 92 insertions(+), 6 deletions(-)
+> >
+> > diff --git a/include/hw/char/sifive_uart.h b/include/hw/char/sifive_uar=
+t.h
+> > index 7f6c79f8bd..73379457a0 100644
+> > --- a/include/hw/char/sifive_uart.h
+> > +++ b/include/hw/char/sifive_uart.h
+> > @@ -48,9 +48,13 @@ enum {
+> >       SIFIVE_UART_IP_RXWM       =3D 2  /* Receive watermark interrupt p=
+ending */
+> >   };
+> >
+> > +#define SIFIVE_UART_TXFIFO_FULL    0x80000000
+> > +
+> >   #define SIFIVE_UART_GET_TXCNT(txctrl)   ((txctrl >> 16) & 0x7)
+> >   #define SIFIVE_UART_GET_RXCNT(rxctrl)   ((rxctrl >> 16) & 0x7)
+> > +
+> >   #define SIFIVE_UART_RX_FIFO_SIZE 8
+> > +#define SIFIVE_UART_TX_FIFO_SIZE 8
+> >
+> >   #define TYPE_SIFIVE_UART "riscv.sifive.uart"
+> >   OBJECT_DECLARE_SIMPLE_TYPE(SiFiveUARTState, SIFIVE_UART)
+> > @@ -63,13 +67,22 @@ struct SiFiveUARTState {
+> >       qemu_irq irq;
+> >       MemoryRegion mmio;
+> >       CharBackend chr;
+> > -    uint8_t rx_fifo[SIFIVE_UART_RX_FIFO_SIZE];
+> > -    uint8_t rx_fifo_len;
+> > +
+> > +    uint32_t txfifo;
+> >       uint32_t ie;
+> >       uint32_t ip;
+> >       uint32_t txctrl;
+> >       uint32_t rxctrl;
+> >       uint32_t div;
+> > +
+> > +    uint8_t rx_fifo[SIFIVE_UART_RX_FIFO_SIZE];
+> > +    uint8_t rx_fifo_len;
+> > +
+> > +    uint8_t tx_fifo[SIFIVE_UART_TX_FIFO_SIZE];
+> > +    uint32_t tx_level;
+> > +
+> > +    QEMUTimer *fifo_trigger_handle;
+> > +    uint64_t char_tx_time;
+> >   };
+> >
+> >   SiFiveUARTState *sifive_uart_create(MemoryRegion *address_space, hwad=
+dr base,
+> > diff --git a/hw/char/sifive_uart.c b/hw/char/sifive_uart.c
+> > index 7fc6787f69..f517500df4 100644
+> > --- a/hw/char/sifive_uart.c
+> > +++ b/hw/char/sifive_uart.c
+> > @@ -64,6 +64,64 @@ static void sifive_uart_update_irq(SiFiveUARTState *=
+s)
+> >       }
+> >   }
+> >
+> > +static gboolean sifive_uart_xmit(void *do_not_use, GIOCondition cond,
+> > +                                 void *opaque)
+> > +{
+> > +    SiFiveUARTState *s =3D opaque;
+> > +    int ret;
+> > +
+> > +    /* instant drain the fifo when there's no back-end */
+> > +    if (!qemu_chr_fe_backend_connected(&s->chr)) {
+> > +        s->tx_level =3D 0;
+> > +        return G_SOURCE_REMOVE;
+> > +    }
+> > +
+> > +    ret =3D qemu_chr_fe_write(&s->chr, s->tx_fifo, s->tx_level);
+> > +
+> > +    if (ret >=3D 0) {
+> > +        s->tx_level -=3D ret;
+> > +        memmove(s->tx_fifo, s->tx_fifo + ret, s->tx_level);
+> > +    }
+> > +
+> > +    if (s->tx_level) {
+> > +        guint r =3D qemu_chr_fe_add_watch(&s->chr, G_IO_OUT | G_IO_HUP=
+,
+> > +                                        sifive_uart_xmit, s);
+> > +        if (!r) {
+> > +            s->tx_level =3D 0;
+> > +            return G_SOURCE_REMOVE;
+> > +        }
+> > +    }
+> > +
+> > +    /* Clear the TX Full bit */
+> > +    if (s->tx_level !=3D SIFIVE_UART_TX_FIFO_SIZE) {
+> > +        s->txfifo &=3D ~SIFIVE_UART_TXFIFO_FULL;
+> > +    }
+> > +
+> > +    sifive_uart_update_irq(s);
+> > +    return G_SOURCE_REMOVE;
+> > +}
+> > +
+> > +static void sifive_uart_write_tx_fifo(SiFiveUARTState *s, const uint8_=
+t *buf,
+> > +                                      int size)
+> > +{
+> > +    uint64_t current_time =3D qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
+> > +
+> > +    if (size > SIFIVE_UART_TX_FIFO_SIZE - s->tx_level) {
+> > +        size =3D SIFIVE_UART_TX_FIFO_SIZE - s->tx_level;
+> > +        qemu_log_mask(LOG_GUEST_ERROR, "sifive_uart: TX FIFO overflow"=
+);
+> > +    }
+> > +
+> > +    memcpy(s->tx_fifo + s->tx_level, buf, 1);
+> > +    s->tx_level +=3D 1;
+> > +
+> > +    if (s->tx_level =3D=3D SIFIVE_UART_TX_FIFO_SIZE) {
+> > +        s->txfifo |=3D SIFIVE_UART_TXFIFO_FULL;
+> > +    }
+> > +
+> > +    timer_mod(s->fifo_trigger_handle, current_time +
+> > +              (s->char_tx_time * 4));
+> > +}
+> > +
+> >   static uint64_t
+> >   sifive_uart_read(void *opaque, hwaddr addr, unsigned int size)
+> >   {
+> > @@ -82,7 +140,7 @@ sifive_uart_read(void *opaque, hwaddr addr, unsigned=
+ int size)
+> >           return 0x80000000;
+> >
+> >       case SIFIVE_UART_TXFIFO:
+> > -        return 0; /* Should check tx fifo */
+> > +        return s->txfifo;
+> >       case SIFIVE_UART_IE:
+> >           return s->ie;
+> >       case SIFIVE_UART_IP:
+> > @@ -106,12 +164,10 @@ sifive_uart_write(void *opaque, hwaddr addr,
+> >   {
+> >       SiFiveUARTState *s =3D opaque;
+> >       uint32_t value =3D val64;
+> > -    unsigned char ch =3D value;
+> >
+> >       switch (addr) {
+> >       case SIFIVE_UART_TXFIFO:
+> > -        qemu_chr_fe_write(&s->chr, &ch, 1);
+> > -        sifive_uart_update_irq(s);
+> > +        sifive_uart_write_tx_fifo(s, (uint8_t *) &value, 1);
+> >           return;
+> >       case SIFIVE_UART_IE:
+> >           s->ie =3D val64;
+> > @@ -131,6 +187,13 @@ sifive_uart_write(void *opaque, hwaddr addr,
+> >                     __func__, (int)addr, (int)value);
+> >   }
+> >
+> > +static void fifo_trigger_update(void *opaque)
+> > +{
+> > +    SiFiveUARTState *s =3D opaque;
+> > +
+> > +    sifive_uart_xmit(NULL, G_IO_OUT, s);
+> > +}
+> > +
+> >   static const MemoryRegionOps sifive_uart_ops =3D {
+> >       .read =3D sifive_uart_read,
+> >       .write =3D sifive_uart_write,
+> > @@ -197,6 +260,9 @@ static void sifive_uart_realize(DeviceState *dev, E=
+rror **errp)
+> >   {
+> >       SiFiveUARTState *s =3D SIFIVE_UART(dev);
+> >
+> > +    s->fifo_trigger_handle =3D timer_new_ns(QEMU_CLOCK_VIRTUAL,
+> > +                                          fifo_trigger_update, s);
+> > +
+> >       qemu_chr_fe_set_handlers(&s->chr, sifive_uart_can_rx, sifive_uart=
+_rx,
+> >                                sifive_uart_event, sifive_uart_be_change=
+, s,
+> >                                NULL, true);
+> > @@ -206,12 +272,19 @@ static void sifive_uart_realize(DeviceState *dev,=
+ Error **errp)
+> >   static void sifive_uart_reset_enter(Object *obj, ResetType type)
+> >   {
+> >       SiFiveUARTState *s =3D SIFIVE_UART(obj);
+> > +
+> > +    s->txfifo =3D 0;
+> >       s->ie =3D 0;
+> >       s->ip =3D 0;
+> >       s->txctrl =3D 0;
+> >       s->rxctrl =3D 0;
+> >       s->div =3D 0;
+> > +
+> > +    s->tx_level =3D 0;
+> >       s->rx_fifo_len =3D 0;
+> > +
+> > +    memset(s->rx_fifo, 0, SIFIVE_UART_RX_FIFO_SIZE);
+> > +    memset(s->tx_fifo, 0, SIFIVE_UART_TX_FIFO_SIZE);
+> >   }
+> >
+> >   static void sifive_uart_reset_hold(Object *obj, ResetType type)
+>
+> Have you considered using a Fifo8 here? This avoids having to manually ro=
+ll your own
+> FIFO implementation.
 
-On Mon, Aug 12, 2024 at 10:22:22PM -0700, Sia Jee Heng wrote:
-> Update the SPCR table to accommodate the SPCR Table version 4 [1].
-> The SPCR table has been modified to adhere to the version 4 format [2].
-> 
-> [1]: https://learn.microsoft.com/en-us/windows-hardware/drivers/serports/serial-port-console-redirection-table
-> [2]: https://github.com/acpica/acpica/pull/931
-> 
-> Signed-off-by: Sia Jee Heng <jeeheng.sia@starfivetech.com>
-> Acked-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  hw/acpi/aml-build.c         | 14 +++++++++++---
->  hw/arm/virt-acpi-build.c    | 10 ++++++++--
->  hw/riscv/virt-acpi-build.c  | 12 +++++++++---
->  include/hw/acpi/acpi-defs.h |  7 +++++--
->  include/hw/acpi/aml-build.h |  2 +-
->  5 files changed, 34 insertions(+), 11 deletions(-)
-> 
-> diff --git a/hw/acpi/aml-build.c b/hw/acpi/aml-build.c
-> index 6d4517cfbe..7c43573eef 100644
-> --- a/hw/acpi/aml-build.c
-> +++ b/hw/acpi/aml-build.c
-> @@ -1996,7 +1996,7 @@ static void build_processor_hierarchy_node(GArray *tbl, uint32_t flags,
->  
->  void build_spcr(GArray *table_data, BIOSLinker *linker,
->                  const AcpiSpcrData *f, const uint8_t rev,
-> -                const char *oem_id, const char *oem_table_id)
-> +                const char *oem_id, const char *oem_table_id, const char *name)
->  {
->      AcpiTable table = { .sig = "SPCR", .rev = rev, .oem_id = oem_id,
->                          .oem_table_id = oem_table_id };
-> @@ -2042,8 +2042,16 @@ void build_spcr(GArray *table_data, BIOSLinker *linker,
->      build_append_int_noprefix(table_data, f->pci_flags, 4);
->      /* PCI Segment */
->      build_append_int_noprefix(table_data, f->pci_segment, 1);
-> -    /* Reserved */
-> -    build_append_int_noprefix(table_data, 0, 4);
-> +    /* UartClkFreq */
-> +    build_append_int_noprefix(table_data, f->uart_clk_freq, 4);
-> +    /* PreciseBaudrate */
-> +    build_append_int_noprefix(table_data, f->precise_baudrate, 4);
-> +    /* NameSpaceStringLength */
-> +    build_append_int_noprefix(table_data, f->namespace_string_length, 2);
-> +    /* NameSpaceStringOffset */
-> +    build_append_int_noprefix(table_data, f->namespace_string_offset, 2);
-> +    /* NamespaceString[] */
-> +    g_array_append_vals(table_data, name, f->namespace_string_length);
->  
->      acpi_table_end(linker, &table);
->  }
-> diff --git a/hw/arm/virt-acpi-build.c b/hw/arm/virt-acpi-build.c
-> index e10cad86dd..ae075dc9fd 100644
-> --- a/hw/arm/virt-acpi-build.c
-> +++ b/hw/arm/virt-acpi-build.c
-> @@ -435,11 +435,12 @@ build_iort(GArray *table_data, BIOSLinker *linker, VirtMachineState *vms)
->  
->  /*
->   * Serial Port Console Redirection Table (SPCR)
-> - * Rev: 1.07
-> + * Rev: 1.10
->   */
->  static void
->  spcr_setup(GArray *table_data, BIOSLinker *linker, VirtMachineState *vms)
->  {
-> +    const char name[] = ".";
->      AcpiSpcrData serial = {
->          .interface_type = 3,       /* ARM PL011 UART */
->          .base_addr.id = AML_AS_SYSTEM_MEMORY,
-> @@ -463,9 +464,14 @@ spcr_setup(GArray *table_data, BIOSLinker *linker, VirtMachineState *vms)
->          .pci_function = 0,
->          .pci_flags = 0,
->          .pci_segment = 0,
-> +        .uart_clk_freq = 0,
-> +        .precise_baudrate = 0,
-> +        .namespace_string_length = sizeof(name),
-> +        .namespace_string_offset = 88,
->      };
->  
-> -    build_spcr(table_data, linker, &serial, 2, vms->oem_id, vms->oem_table_id);
-> +    build_spcr(table_data, linker, &serial, 4, vms->oem_id, vms->oem_table_id,
-> +               name);
-I request the same which I had asked earlier. Please keep SPCR for other
-architectures like ARM intact. The latest revision is primarily required
-for RISC-V. So, restrict the series only for RISC-V. The common
-build_spcr() should create SPCR based on the revision parameter.
+Yeah, I will convert it to a Fifo8.
 
-Thanks,
-Sunil
+Alistair
+
+>
+>
+> ATB,
+>
+> Mark.
+>
 
