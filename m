@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5114C52D7C
-	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Aug 2024 21:53:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0388EC5320E
+	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Aug 2024 21:53:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sgtDx-0005mp-NP; Wed, 21 Aug 2024 17:50:37 -0400
+	id 1sgtDs-0005QL-I5; Wed, 21 Aug 2024 17:50:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sgtDv-0005e9-L6
- for qemu-riscv@nongnu.org; Wed, 21 Aug 2024 17:50:35 -0400
-Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c])
+ id 1sgtDq-0005Jo-UC
+ for qemu-riscv@nongnu.org; Wed, 21 Aug 2024 17:50:30 -0400
+Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sgtDt-00087z-PO
- for qemu-riscv@nongnu.org; Wed, 21 Aug 2024 17:50:35 -0400
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-2025031eb60so1236315ad.3
- for <qemu-riscv@nongnu.org>; Wed, 21 Aug 2024 14:50:33 -0700 (PDT)
+ id 1sgtDo-00086C-Nx
+ for qemu-riscv@nongnu.org; Wed, 21 Aug 2024 17:50:30 -0400
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-20227ba378eso1554395ad.0
+ for <qemu-riscv@nongnu.org>; Wed, 21 Aug 2024 14:50:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1724277032; x=1724881832;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1724277027; x=1724881827;
  darn=nongnu.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wSH9HM75b4DGKTJr34tfiIMxVu3edNYSdRUy2fLB+q8=;
- b=n101ZyQTbeE3e9aFtGWE4nUq8xP0BQN0TpLi+M9CujhMpV0d+2Mxxbr4+7hIN7iqs3
- k9kT7jMtw5nCEx9BdjK28CE/V9HZYPNLyfQ0wPCDEVzWmlPf2ctwJIJHXxMUj616AzCU
- bJunROUMbhKFP6UXgJCMaZx/YmMZiNUJqkql7KUwshi1GN4E6UFuf+W+8kBUnz9NCHRE
- cKBpg5Lzd1L/tMTMAVDjbEw8oNnr0l1PMd7WbaoZsDnW6PfFaC8jsn6WAHzwzBYWl6Fr
- /726SByUiSEMEyEAgBtuv4HtjqT5p70e0gGceRvMZ47TAN8H4RV1C3Lpe688V0GROJP0
- Lj2Q==
+ bh=nxyYMlb3x6bp85BnzPPZWZ8Bp+UukqIv0ly48+tdD3U=;
+ b=DWyumv9bWjFfPuZcleN0SbYYgTDXld/T8uO8lCpg87DoqPIr7KIslfiOoRHCHo3k1s
+ kyhpMuIP01yOJ8StPfNNUsHimcf2EQ5Myh1OEKye+vbpYxcTSTyVM4jD1NqJs2F+G6ud
+ d0RIOp7aRaEqPtj9BSeLn6iy6qx9IeCRqVo6dskYjqLIWyEF4j6Bt+gxU5h3Vx8J1sA3
+ bBSZn4aNh5wiZ3YVW500zUbXgRIr91RrR9f1PPFQJ0V5fskQqZwfBUXmALuC902fbK0i
+ qF+ETwqKohPbjuqoQF+ieI4WVeaMIQuRQvUpJ9lahYP8NoI1GbrRkiZJSyFO1v0FobB1
+ s4QQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724277032; x=1724881832;
+ d=1e100.net; s=20230601; t=1724277027; x=1724881827;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=wSH9HM75b4DGKTJr34tfiIMxVu3edNYSdRUy2fLB+q8=;
- b=FCyBZfVN7sbUTMcs8gufhdxZ0Cwzjj5PWUFPyd0gc7Yn4584MKCoAHqT4XsQfLMnlA
- 6GmtVIb9rh5a3qEjfErf+9BDKUqR2nIyRpgQ98ca3cDk5c+an9nSDvvgJuFOqtMmrirS
- WrJ0X6SqBV4YgOFjbi+1S6YzDqeUDk1cxyzQtmCGYO/q/35Rtzw3LNjPE4oLz28wfMtK
- aVjbcAZ1oAX2z6KJ8oQtCdPYbTG0f1M4ob+N7KOlFd6Nm4rgiqlCNXrSwdRYGArXUyST
- i2oAJnKAV3Ya9jlmgXkdf13/MUFyvDLLDw4oxW9CEBoNgN6aAWSn15BT6P7fA7B4slNe
- +0wA==
-X-Gm-Message-State: AOJu0YzDWorz1rMKAk9alUaGGKVD5y13ZNtuwHtiq1xoCc5NXpiAcsw2
- QgfIUh4+G1t/N9J7G5wuBpeAO9iYTd+gr3AW5H2B73HqSown3lYg4i/cm/DyN7BLHbMgNjEZFcL
- D
-X-Google-Smtp-Source: AGHT+IGouMkvSTMxJsLuKkwPezrjRiyiWMj+8KVwsZRMggm8jB+C8IoT3r9PyRRVBJhG39tbtm8NMQ==
-X-Received: by 2002:a17:903:2348:b0:1fd:9e88:e4d1 with SMTP id
- d9443c01a7336-20368095e34mr43572915ad.51.1724277031968; 
- Wed, 21 Aug 2024 14:50:31 -0700 (PDT)
+ bh=nxyYMlb3x6bp85BnzPPZWZ8Bp+UukqIv0ly48+tdD3U=;
+ b=nUqVmbh4HtdLeAYOrRhg+XYgJflPWpvGGTJOAyr5NXQxl1IyXZIZypoJY/iPVGDE4f
+ SdspAX8d7JgFUTxxC5/VznTaVZik+1KC53LL5TOMv7m42IhpnPdIaggQpSS39kw90DvB
+ lCbE7Ki8CBn482UUogM3nt9a3kIiLoNgw7592/B3wnOUWVIkYyX5H5UnGR8fFSVyL5zB
+ vs+6gkc3ait6e9YMz7hb21gtjOe++TaxpgWv0hzMufM09gKgBLAZnEagBHu2nMPZDtK1
+ OWCMcOsPG3+Dl9EN1WYUtA4cfAWRBLtdUYiWLoogj+hBMO7P6O2w5UlTKO6J7qlxX7mn
+ 1usA==
+X-Gm-Message-State: AOJu0Yxx2h8y8YMCz1SPT+SfCW95pM3AsRePQB7LpTFUxatuF4P7LeAB
+ FsOQ30AbQST/A8Iw+9ntdVFhOxX6FtrlQwZtdOPyuCYK7G7h/V4bFnI2p+B/HkdPrxl6Tyx+t+a
+ 2
+X-Google-Smtp-Source: AGHT+IHt7ikhWsmi0X6+UGblaAJjD4KuW+BeEGAyDY1C/rYuJOAprIjwHCSwMKvOG8RMOeAUx0k6Eg==
+X-Received: by 2002:a17:902:f70a:b0:201:e65b:500b with SMTP id
+ d9443c01a7336-203681d8d41mr44858535ad.63.1724277027114; 
+ Wed, 21 Aug 2024 14:50:27 -0700 (PDT)
 Received: from debug.ba.rivosinc.com ([64.71.180.162])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-203859ef0fdsm586345ad.248.2024.08.21.14.50.30
+ d9443c01a7336-203859ef0fdsm586345ad.248.2024.08.21.14.50.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 Aug 2024 14:50:31 -0700 (PDT)
+ Wed, 21 Aug 2024 14:50:26 -0700 (PDT)
 From: Deepak Gupta <debug@rivosinc.com>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -68,23 +68,22 @@ Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, bmeng.cn@gmail.com,
  zhiwei_liu@linux.alibaba.com, jim.shu@sifive.com, andy.chiu@sifive.com,
  kito.cheng@sifive.com, Deepak Gupta <debug@rivosinc.com>,
  Richard Henderson <richard.henderson@linaro.org>
-Subject: [PATCH v6 10/16] target/riscv: tb flag for shadow stack instructions
-Date: Wed, 21 Aug 2024 14:50:08 -0700
-Message-ID: <20240821215014.3859190-11-debug@rivosinc.com>
+Subject: [PATCH v6 06/16] target/riscv: zicfilp `lpad` impl and branch tracking
+Date: Wed, 21 Aug 2024 14:50:04 -0700
+Message-ID: <20240821215014.3859190-7-debug@rivosinc.com>
 X-Mailer: git-send-email 2.45.0
 In-Reply-To: <20240821215014.3859190-1-debug@rivosinc.com>
 References: <20240821215014.3859190-1-debug@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
- envelope-from=debug@rivosinc.com; helo=mail-pl1-x62c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
+ envelope-from=debug@rivosinc.com; helo=mail-pl1-x62b.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,72 +99,123 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Shadow stack instructions can be decoded as zimop / zcmop or shadow stack
-instructions depending on whether shadow stack are enabled at current
-privilege. This requires a TB flag so that correct TB generation and correct
-TB lookup happens. `DisasContext` gets a field indicating whether bcfi is
-enabled or not.
+Implements setting lp expected when `jalr` is encountered and implements
+`lpad` instruction of zicfilp. `lpad` instruction is taken out of
+auipc x0, <imm_20>. This is an existing HINTNOP space. If `lpad` is
+target of an indirect branch, cpu checks for 20 bit value in x7 upper
+with 20 bit value embedded in `lpad`. If they don't match, cpu raises a
+sw check exception with tval = 2.
 
 Signed-off-by: Deepak Gupta <debug@rivosinc.com>
 Co-developed-by: Jim Shu <jim.shu@sifive.com>
 Co-developed-by: Andy Chiu <andy.chiu@sifive.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/cpu.h        | 2 ++
- target/riscv/cpu_helper.c | 4 ++++
- target/riscv/translate.c  | 4 ++++
- 3 files changed, 10 insertions(+)
+ target/riscv/cpu_user.h                 |  1 +
+ target/riscv/insn32.decode              |  5 ++-
+ target/riscv/insn_trans/trans_rvi.c.inc | 55 +++++++++++++++++++++++++
+ 3 files changed, 60 insertions(+), 1 deletion(-)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 5a57099d59..dcc3bc9d93 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -613,6 +613,8 @@ FIELD(TB_FLAGS, AXL, 26, 2)
- /* zicfilp needs a TB flag to track indirect branches */
- FIELD(TB_FLAGS, FCFI_ENABLED, 28, 1)
- FIELD(TB_FLAGS, FCFI_LP_EXPECTED, 29, 1)
-+/* zicfiss needs a TB flag so that correct TB is located based on tb flags */
-+FIELD(TB_FLAGS, BCFI_ENABLED, 30, 1)
+diff --git a/target/riscv/cpu_user.h b/target/riscv/cpu_user.h
+index 02afad608b..e6927ff847 100644
+--- a/target/riscv/cpu_user.h
++++ b/target/riscv/cpu_user.h
+@@ -15,5 +15,6 @@
+ #define xA6 16
+ #define xA7 17  /* syscall number for RVI ABI */
+ #define xT0 5   /* syscall number for RVE ABI */
++#define xT2 7
  
- #ifdef TARGET_RISCV32
- #define riscv_cpu_mxl(env)  ((void)(env), MXL_RV32)
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 96571177ef..d3115da28d 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -170,6 +170,10 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
-         flags = FIELD_DP32(flags, TB_FLAGS, FCFI_ENABLED, 1);
-     }
+ #endif
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index c45b8fa1d8..27108b992b 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -123,7 +123,10 @@ sfence_vm   0001000    00100 ..... 000 00000 1110011 @sfence_vm
  
-+    if (cpu_get_bcfien(env)) {
-+        flags = FIELD_DP32(flags, TB_FLAGS, BCFI_ENABLED, 1);
+ # *** RV32I Base Instruction Set ***
+ lui      ....................       ..... 0110111 @u
+-auipc    ....................       ..... 0010111 @u
++{
++  lpad   label:20                   00000 0010111
++  auipc  ....................       ..... 0010111 @u
++}
+ jal      ....................       ..... 1101111 @j
+ jalr     ............     ..... 000 ..... 1100111 @i
+ beq      ....... .....    ..... 000 ..... 1100011 @b
+diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
+index 98e3806d5e..b427f3a939 100644
+--- a/target/riscv/insn_trans/trans_rvi.c.inc
++++ b/target/riscv/insn_trans/trans_rvi.c.inc
+@@ -36,6 +36,49 @@ static bool trans_lui(DisasContext *ctx, arg_lui *a)
+     return true;
+ }
+ 
++static bool trans_lpad(DisasContext *ctx, arg_lpad *a)
++{
++    /*
++     * fcfi_lp_expected can set only if fcfi was eanbled.
++     * translate further only if fcfi_lp_expected set.
++     * lpad comes from NOP space anyways, so return true if
++     * fcfi_lp_expected is false.
++     */
++    if (!ctx->fcfi_lp_expected) {
++        return true;
 +    }
 +
- #ifdef CONFIG_USER_ONLY
-     fs = EXT_STATUS_DIRTY;
-     vs = EXT_STATUS_DIRTY;
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index f364a54af6..d44103a273 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -119,6 +119,8 @@ typedef struct DisasContext {
-     /* zicfilp extension. fcfi_enabled, lp expected or not */
-     bool fcfi_enabled;
-     bool fcfi_lp_expected;
-+    /* zicfiss extension, if shadow stack was enabled during TB gen */
-+    bool bcfi_enabled;
- } DisasContext;
++    ctx->fcfi_lp_expected = false;
++    if ((ctx->base.pc_next) & 0x3) {
++        /*
++         * misaligned, according to spec we should raise sw check exception
++         */
++        tcg_gen_st_tl(tcg_constant_tl(RISCV_EXCP_SW_CHECK_FCFI_TVAL),
++                      tcg_env, offsetof(CPURISCVState, sw_check_code));
++        gen_helper_raise_exception(tcg_env,
++                      tcg_constant_i32(RISCV_EXCP_SW_CHECK));
++        return true;
++    }
++
++    /* per spec, label check performed only when embedded label non-zero */
++    if (a->label != 0) {
++        TCGLabel *skip = gen_new_label();
++        TCGv tmp = tcg_temp_new();
++        tcg_gen_extract_tl(tmp, get_gpr(ctx, xT2, EXT_NONE), 12, 20);
++        tcg_gen_brcondi_tl(TCG_COND_EQ, tmp, a->label, skip);
++        tcg_gen_st_tl(tcg_constant_tl(RISCV_EXCP_SW_CHECK_FCFI_TVAL),
++                      tcg_env, offsetof(CPURISCVState, sw_check_code));
++        gen_helper_raise_exception(tcg_env,
++                      tcg_constant_i32(RISCV_EXCP_SW_CHECK));
++        gen_set_label(skip);
++    }
++
++    tcg_gen_st8_tl(tcg_constant_tl(0), tcg_env,
++                  offsetof(CPURISCVState, elp));
++
++    return true;
++}
++
+ static bool trans_auipc(DisasContext *ctx, arg_auipc *a)
+ {
+     TCGv target_pc = dest_gpr(ctx, a->rd);
+@@ -75,6 +118,18 @@ static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
+     gen_set_gpr(ctx, a->rd, succ_pc);
  
- static inline bool has_ext(DisasContext *ctx, uint32_t ext)
-@@ -1241,6 +1243,8 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
-     ctx->pm_base_enabled = FIELD_EX32(tb_flags, TB_FLAGS, PM_BASE_ENABLED);
-     ctx->ztso = cpu->cfg.ext_ztso;
-     ctx->itrigger = FIELD_EX32(tb_flags, TB_FLAGS, ITRIGGER);
-+    ctx->bcfi_enabled = cpu_get_bcfien(env) &&
-+                        FIELD_EX32(tb_flags, TB_FLAGS, BCFI_ENABLED);
-     ctx->fcfi_lp_expected = FIELD_EX32(tb_flags, TB_FLAGS, FCFI_LP_EXPECTED);
-     ctx->fcfi_enabled = FIELD_EX32(tb_flags, TB_FLAGS, FCFI_ENABLED);
-     ctx->zero = tcg_constant_tl(0);
+     tcg_gen_mov_tl(cpu_pc, target_pc);
++    if (ctx->fcfi_enabled) {
++        /*
++         * return from functions (i.e. rs1 == xRA || rs1 == xT0) are not
++         * tracked. zicfilp introduces sw guarded branch as well. sw guarded
++         * branch are not tracked. rs1 == xT2 is a sw guarded branch.
++         */
++        if (a->rs1 != xRA && a->rs1 != xT0 && a->rs1 != xT2) {
++            tcg_gen_st8_tl(tcg_constant_tl(1),
++                          tcg_env, offsetof(CPURISCVState, elp));
++        }
++    }
++
+     lookup_and_goto_ptr(ctx);
+ 
+     if (misaligned) {
 -- 
 2.44.0
 
