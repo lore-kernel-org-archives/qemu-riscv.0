@@ -4,91 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E61BC5320E
-	for <qemu-riscv@archiver.kernel.org>; Tue, 20 Aug 2024 22:34:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44719C52D6F
+	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Aug 2024 07:51:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sgXQM-0006Zq-QB; Tue, 20 Aug 2024 18:33:58 -0400
+	id 1sgg7F-0002tk-5j; Wed, 21 Aug 2024 03:50:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sgXQF-0006UJ-9l
- for qemu-riscv@nongnu.org; Tue, 20 Aug 2024 18:33:53 -0400
-Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1sgg7C-0002nl-QA
+ for qemu-riscv@nongnu.org; Wed, 21 Aug 2024 03:50:47 -0400
+Received: from mail-ej1-x633.google.com ([2a00:1450:4864:20::633])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sgXQ5-0007Tq-Pn
- for qemu-riscv@nongnu.org; Tue, 20 Aug 2024 18:33:47 -0400
-Received: by mail-pf1-x429.google.com with SMTP id
- d2e1a72fcca58-7141feed424so483188b3a.2
- for <qemu-riscv@nongnu.org>; Tue, 20 Aug 2024 15:33:40 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1sgg7A-0007Ri-I9
+ for qemu-riscv@nongnu.org; Wed, 21 Aug 2024 03:50:46 -0400
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-a7de4364ca8so702601266b.2
+ for <qemu-riscv@nongnu.org>; Wed, 21 Aug 2024 00:50:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724193219; x=1724798019; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=v0GvZX6BPCZYoUBN0LIhyJf0EJ18ewbTqRXITRJVhO4=;
- b=lO+ug/V0Q7LkA0B5Kv2q5AcIwteE0eQLvBIkf8sGEjoN4hvjzr6GT3cId80IaQCe/9
- TRaUOJbWK8KLeCFRhZxA+pNl4G2DtP8+xdW60vnbKDbAsas8c9ih+X8XwrYGsu/V37Ir
- PDVpzngLgctxLmq60JZJx4AyZuHDnqdEeY4HzX/aEAe+AVJ7rMii8/MqH7Y3N2S2xkip
- Zo/uZsHVxJ5zCdGKXIjBwDM/7bZSG2f/NDQFCgnFanjNz6gqRJXLLYHiWQKppzsexzhp
- ulSy9WRnjPja5dfvPIqtVlCdExkHOGMFvGWuOsm0r2wF8zLASYFFfyGtB/Q4YIF0vUUH
- cucQ==
+ d=ventanamicro.com; s=google; t=1724226642; x=1724831442; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=RHGsgtOtT2umrQLR6AFcY9ClQMq9gzTua8dd6k91t7Y=;
+ b=gt7xXTduZs1K+r+Zo4rc4wMTRxfpC9z5QtOGwIGVLo67+VrSEKC2UF2GPuifLF/JIn
+ YLcsMwLlgMeCqCK1KeISSWzaKr5GKGtwpP/MJo23j/eR9OgpaEz/lfytaZ65gDyO/mzn
+ Vh/0uWG+e5PwOo4l0PlST2nCDY4FpW9qgijr2XfFA4HBCWOHYH+jVEQHAgeY/oIR5WYm
+ z+lbg+7dZxLlK798Ofnw6A1/m3Y3jBkuf5va66GN327EL2/ShJjpJUqGbMDu2klDadqv
+ g9aPhpunjV0HmQ/KGcw+ILafGDXjym0yYIiaYUn2QSbByz+qLzgoq3EDUj9AcOActXRj
+ gHHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724193219; x=1724798019;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=v0GvZX6BPCZYoUBN0LIhyJf0EJ18ewbTqRXITRJVhO4=;
- b=MgDc03/63RVmvHRxIw7d/YJ0LT5aOJK9lskKTGTjoUt8umwoo2Ryhl/eNzvTu+mXJf
- LdOsrRQs5o6ddc9eaKrCIWZxgMZ1i14F2dHvD8CiRMFtcmIwbkDisZSpcBYaPwVxIDwh
- qmSoLQlQ+FLQdIF3qHVBbrKUr3fFEhfrkfir2PWhxule+yEoJ6L7SyD6ciXj4M33N83G
- XAq119OSXZLLhBMVA5/vHt2Hf2PSuHIs67QLrFwyTLeMoTN8S0WQyMHy4HtzQCy3CrUB
- 75nBOr9bgpVJ6jat6xjyRg90MB26/36XcDw0LYQIho2pajmSjzPFpfAlSt5tOdDnqui7
- UDLQ==
-X-Gm-Message-State: AOJu0Yz+y0EdygNrCsBmWVDGGcwjkcnO/CduCdx+Kty9XoCTuDkyEGW5
- W/X4maQ/nSMaa2G61HeDz8j3e0TRrucuXPs+oMsa99x1sNP5WR5b+TqD07UStXA=
-X-Google-Smtp-Source: AGHT+IGOxl2NHjnbffxcEdvSdB6KhxB5t7Xi8KY9XOo78ST976TNva01CUCa2pvUWlXT6w/vDBsorw==
-X-Received: by 2002:a05:6a21:3983:b0:1c0:e1a5:9583 with SMTP id
- adf61e73a8af0-1cad810c8b2mr944495637.17.1724193218672; 
- Tue, 20 Aug 2024 15:33:38 -0700 (PDT)
-Received: from [192.168.1.113] ([203.30.3.188])
+ d=1e100.net; s=20230601; t=1724226642; x=1724831442;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=RHGsgtOtT2umrQLR6AFcY9ClQMq9gzTua8dd6k91t7Y=;
+ b=AKYZGB1HAoQ3eesYjk3P0QmI0pvbpeE8+Q7FsqGQQUzueYNQiNKJwXhmBCwYMX1CJC
+ A1k5KlAqpvXgXzGBxUwcrZ5EsYWx13b+GmlH2CdVKCJZJ4vqWkOmDWv+lLWkEzlhZIP8
+ Pgk7xttThw9P3Ktwvbh9+jKDBuWs0VzT/J36pJBdMUe18AXDgpaRacmCKsunFbiy1+hT
+ Fcok/jLAsacoFhS1ZBAYnskWQawTAqBQc7fJQCLWxcCMBW837t/4PCLs8uo1Zhsowdc8
+ hX39iG/evP2hQ61EGsLzwfAAcI5Wt+IAGdOVt2Un2QVe/vg3keyIhqqUdZvSlFiMd1vL
+ 3/kw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVFOz0bzR1hsHPfkLZvYWEvRli0abZnTZRkh3K2MZ3WVJPbTTvE/DqwZ4O51VZFBsH0aPlohy5aqDVY@nongnu.org
+X-Gm-Message-State: AOJu0YzWR7cA0pN2Wri/68xsKdcqLgkUmhD5auugAG2/HxDcs2o5wy5C
+ jik/OUqsS2nbIM7oroF4GUkrajSXBZnY615BzNwBsYIhMJGXOHe0JXkjozYgzlA=
+X-Google-Smtp-Source: AGHT+IHOB0z0CBNl1t2RYjlBOwWxzkRYXKkmTnE4K4pEI1YecPdPRAJFwmiJQvg1qAcF7mQ8tpC7Lw==
+X-Received: by 2002:a17:907:1b08:b0:a79:fbf0:8106 with SMTP id
+ a640c23a62f3a-a866f1268bemr104527966b.6.1724226641727; 
+ Wed, 21 Aug 2024 00:50:41 -0700 (PDT)
+Received: from localhost (cst2-173-13.cust.vodafone.cz. [31.30.173.13])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2d5ebbd9d72sm130257a91.49.2024.08.20.15.33.33
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 20 Aug 2024 15:33:38 -0700 (PDT)
-Message-ID: <9376bb6b-0d07-4f00-8004-6df1b0a8ef84@linaro.org>
-Date: Wed, 21 Aug 2024 08:33:31 +1000
+ a640c23a62f3a-a83838cfb69sm861323366b.88.2024.08.21.00.50.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 21 Aug 2024 00:50:41 -0700 (PDT)
+From: Andrew Jones <ajones@ventanamicro.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bmeng.cn@gmail.com,
+ yongxuan.wang@sifive.com, dbarboza@ventanamicro.com
+Subject: [PATCH] target/riscv/kvm: Fix the group bit setting of AIA
+Date: Wed, 21 Aug 2024 09:50:41 +0200
+Message-ID: <20240821075040.498945-2-ajones@ventanamicro.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 11/15] target/riscv: mmu changes for zicfiss shadow
- stack protection
-To: Deepak Gupta <debug@rivosinc.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com,
- Alistair.Francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, jim.shu@sifive.com,
- andy.chiu@sifive.com, kito.cheng@sifive.com
-References: <20240820000129.3522346-1-debug@rivosinc.com>
- <20240820000129.3522346-12-debug@rivosinc.com>
- <ZsRHPDG/GkyhdrQi@debug.ba.rivosinc.com>
- <c0afdd87-71c1-4b02-a2fb-5c9349205d8f@linaro.org>
- <ZsTmibCvaZJpEAPO@debug.ba.rivosinc.com>
-Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <ZsTmibCvaZJpEAPO@debug.ba.rivosinc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::429;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x429.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::633;
+ envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x633.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01,
- WEIRD_QUOTING=0.001 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,79 +94,40 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 8/21/24 04:55, Deepak Gupta wrote:
-> Something on the below lines? I've one question as well for you in comment.
-> 
-> """"
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index fee31b8037..b4e04fe849 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -46,8 +46,14 @@ typedef struct CPUArchState CPURISCVState;
->   /*
->    * RISC-V-specific extra insn start words:
->    * 1: Original instruction opcode
-> + * 2: more information about instruction
->    */
-> -#define TARGET_INSN_START_EXTRA_WORDS 1
-> +#define TARGET_INSN_START_EXTRA_WORDS 2
-> +
-> +/*
-> + * b0: Whether a shadow stack operation/instruction or not.
-> + */
-> +#define RISCV_INSN_START_WORD2_SS_OP 1
+Just as the hart bit setting of the AIA should be calculated as
+ceil(log2(max_hart_id + 1)) the group bit setting should be
+calculated as ceil(log2(max_group_id + 1)). The hart bits are
+implemented by passing max_hart_id to find_last_bit() and adding
+one to the result. Do the same for the group bit setting.
 
-Ah, here: not shadow-stack specific.  Set for any insn which should always generate 
-STORE_AMO, including the actual AMO instructions.  It's a current emulation error, IIRC.
+Signed-off-by: Andrew Jones <ajones@ventanamicro.com>
+---
+ target/riscv/kvm/kvm-cpu.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-> @@ -226,6 +232,7 @@ struct CPUArchState {
->       bool      elp;
->       /* shadow stack register for zicfiss extension */
->       target_ulong ssp;
-> +    bool      ss_op;
+diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+index f6e3156b8d2f..341af901c5b0 100644
+--- a/target/riscv/kvm/kvm-cpu.c
++++ b/target/riscv/kvm/kvm-cpu.c
+@@ -1695,6 +1695,7 @@ void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
+     uint64_t max_hart_per_socket = 0;
+     uint64_t socket, base_hart, hart_count, socket_imsic_base, imsic_addr;
+     uint64_t socket_bits, hart_bits, guest_bits;
++    uint64_t max_group_id;
+ 
+     aia_fd = kvm_create_device(kvm_state, KVM_DEV_TYPE_RISCV_AIA, false);
+ 
+@@ -1742,7 +1743,8 @@ void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
+ 
+ 
+     if (socket_count > 1) {
+-        socket_bits = find_last_bit(&socket_count, BITS_PER_LONG) + 1;
++        max_group_id = socket_count - 1;
++        socket_bits = find_last_bit(&max_group_id, BITS_PER_LONG) + 1;
+         ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
+                                 KVM_DEV_RISCV_AIA_CONFIG_GROUP_BITS,
+                                 &socket_bits, true, NULL);
+-- 
+2.45.2
 
-For generality, maybe just store the whole word as excp_uw2?
-
->       if (!async) {
-> +        /* shadow stack op, promote load page fault to store page fault */
-> +        if (env->ss_op && cause == RISCV_EXCP_LOAD_PAGE_FAULT) {
-> +            cause = RISCV_EXCP_STORE_PAGE_FAULT;
-> +        }
->           /* set tval to badaddr for traps with address information */
->           switch (cause) {
->           case RISCV_EXCP_SEMIHOST:
-
-     case RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT:
-         if (env->excp_uw2 & RISCV_UW2_ALWAYS_STORE_AMO) {
-             cause = RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT;
-         }
-         goto load_store_fault;
-     case RISCV_EXCP_LOAD_ACCESS_FAULT:
-         ...
-     case RISCV_EXCP_LOAD_PAGE_FAULT:
-         ...
-     case RISCV_EXCP_STORE_PAGE_FAULT:
-     load_store_fault:
-
-> @@ -1301,6 +1301,14 @@ static void riscv_tr_translate_insn(DisasContextBase *dcbase, 
-> CPUState *cpu)
->           ctx->base.is_jmp = DISAS_NORETURN;
->       }
-> 
-> +    /* shadow stack index means shadow stack instruction is translated */
-> +    if (ctx->mem_idx & MMU_IDX_SS_WRITE) {
-> +        /* Is this needed to set true? */
-> +        ctx->insn_start_updated = true;
-> +        tcg_set_insn_start_param(ctx->base.insn_start, 2,
-> +                                 RISCV_INSN_START_WORD2_SS_OP);
-> +    }
-
-No, SS_WRITE is never part of mem_idx, and setting insn_start_updated here would break things.
-
-You'll want to change decode_save_opcode() to take the second parameter (or introduce a 
-new helper for the second parameter, leaving decode_save_opcode alone).  But you do have 
-to handle the update on a per-insn basis.
-
-
-r~
 
