@@ -4,81 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44719C52D6F
-	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Aug 2024 07:51:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C11BC52D7C
+	for <qemu-riscv@archiver.kernel.org>; Wed, 21 Aug 2024 11:36:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sgg7F-0002tk-5j; Wed, 21 Aug 2024 03:50:49 -0400
+	id 1sgjdF-00007t-1r; Wed, 21 Aug 2024 07:36:05 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1sgg7C-0002nl-QA
- for qemu-riscv@nongnu.org; Wed, 21 Aug 2024 03:50:47 -0400
-Received: from mail-ej1-x633.google.com ([2a00:1450:4864:20::633])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1sgg7A-0007Ri-I9
- for qemu-riscv@nongnu.org; Wed, 21 Aug 2024 03:50:46 -0400
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a7de4364ca8so702601266b.2
- for <qemu-riscv@nongnu.org>; Wed, 21 Aug 2024 00:50:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1724226642; x=1724831442; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=RHGsgtOtT2umrQLR6AFcY9ClQMq9gzTua8dd6k91t7Y=;
- b=gt7xXTduZs1K+r+Zo4rc4wMTRxfpC9z5QtOGwIGVLo67+VrSEKC2UF2GPuifLF/JIn
- YLcsMwLlgMeCqCK1KeISSWzaKr5GKGtwpP/MJo23j/eR9OgpaEz/lfytaZ65gDyO/mzn
- Vh/0uWG+e5PwOo4l0PlST2nCDY4FpW9qgijr2XfFA4HBCWOHYH+jVEQHAgeY/oIR5WYm
- z+lbg+7dZxLlK798Ofnw6A1/m3Y3jBkuf5va66GN327EL2/ShJjpJUqGbMDu2klDadqv
- g9aPhpunjV0HmQ/KGcw+ILafGDXjym0yYIiaYUn2QSbByz+qLzgoq3EDUj9AcOActXRj
- gHHA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724226642; x=1724831442;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=RHGsgtOtT2umrQLR6AFcY9ClQMq9gzTua8dd6k91t7Y=;
- b=AKYZGB1HAoQ3eesYjk3P0QmI0pvbpeE8+Q7FsqGQQUzueYNQiNKJwXhmBCwYMX1CJC
- A1k5KlAqpvXgXzGBxUwcrZ5EsYWx13b+GmlH2CdVKCJZJ4vqWkOmDWv+lLWkEzlhZIP8
- Pgk7xttThw9P3Ktwvbh9+jKDBuWs0VzT/J36pJBdMUe18AXDgpaRacmCKsunFbiy1+hT
- Fcok/jLAsacoFhS1ZBAYnskWQawTAqBQc7fJQCLWxcCMBW837t/4PCLs8uo1Zhsowdc8
- hX39iG/evP2hQ61EGsLzwfAAcI5Wt+IAGdOVt2Un2QVe/vg3keyIhqqUdZvSlFiMd1vL
- 3/kw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVFOz0bzR1hsHPfkLZvYWEvRli0abZnTZRkh3K2MZ3WVJPbTTvE/DqwZ4O51VZFBsH0aPlohy5aqDVY@nongnu.org
-X-Gm-Message-State: AOJu0YzWR7cA0pN2Wri/68xsKdcqLgkUmhD5auugAG2/HxDcs2o5wy5C
- jik/OUqsS2nbIM7oroF4GUkrajSXBZnY615BzNwBsYIhMJGXOHe0JXkjozYgzlA=
-X-Google-Smtp-Source: AGHT+IHOB0z0CBNl1t2RYjlBOwWxzkRYXKkmTnE4K4pEI1YecPdPRAJFwmiJQvg1qAcF7mQ8tpC7Lw==
-X-Received: by 2002:a17:907:1b08:b0:a79:fbf0:8106 with SMTP id
- a640c23a62f3a-a866f1268bemr104527966b.6.1724226641727; 
- Wed, 21 Aug 2024 00:50:41 -0700 (PDT)
-Received: from localhost (cst2-173-13.cust.vodafone.cz. [31.30.173.13])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a83838cfb69sm861323366b.88.2024.08.21.00.50.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 Aug 2024 00:50:41 -0700 (PDT)
-From: Andrew Jones <ajones@ventanamicro.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bmeng.cn@gmail.com,
- yongxuan.wang@sifive.com, dbarboza@ventanamicro.com
-Subject: [PATCH] target/riscv/kvm: Fix the group bit setting of AIA
-Date: Wed, 21 Aug 2024 09:50:41 +0200
-Message-ID: <20240821075040.498945-2-ajones@ventanamicro.com>
-X-Mailer: git-send-email 2.45.2
+ (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1sgjdD-0008UQ-Qw
+ for qemu-riscv@nongnu.org; Wed, 21 Aug 2024 07:36:04 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1sgjdB-0000S4-Hz
+ for qemu-riscv@nongnu.org; Wed, 21 Aug 2024 07:36:02 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1724240160;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=jCLIHRuyWWYsLZrb4lpZV22sutMGxNh+NMlxu1xhu8Y=;
+ b=TaHNhRUuB+ewMZa/d2UrQGV6lfYNvGXu+NK2FU/dMYQfOfEIr+9YT3xkCZagtSL1HBSjeK
+ ln4qkviIF9zZw/0yoJZnVa6nBZM2OGLTf/oCMWknDz0guyDjrCu3ZJkBgUmCy4wtJvZe1P
+ UAM8dQmJ8HccJLyB8esXUYrx/TLZoWI=
+Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-147-1_WHwuZXOGGxBLfX3wmcZQ-1; Wed,
+ 21 Aug 2024 07:34:19 -0400
+X-MC-Unique: 1_WHwuZXOGGxBLfX3wmcZQ-1
+Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id D1AE11955F43; Wed, 21 Aug 2024 11:34:13 +0000 (UTC)
+Received: from sirius.home.kraxel.org (unknown [10.39.194.20])
+ by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 873CE300019C; Wed, 21 Aug 2024 11:34:12 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+ id 691EA18011E8; Wed, 21 Aug 2024 13:34:10 +0200 (CEST)
+Date: Wed, 21 Aug 2024 13:34:10 +0200
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com, jason.chien@sifive.com, frank.chang@sifive.com, 
+ ajones@ventanamicro.com
+Subject: Re: [PATCH for-9.2 v6 04/12] pci-ids.rst: add Red Hat pci-id for
+ RISC-V IOMMU device
+Message-ID: <p5vzcg5upugvchrkryji66u52olcpoajaldu5pcv2hbh5s3b7k@lveutpsuoqdw>
+References: <20240801154334.1009852-1-dbarboza@ventanamicro.com>
+ <20240801154334.1009852-5-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::633;
- envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x633.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240801154334.1009852-5-dbarboza@ventanamicro.com>
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=kraxel@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: 11
+X-Spam_score: 1.1
+X-Spam_bar: +
+X-Spam_report: (1.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.138,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_SBL_CSS=3.335, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -94,40 +88,29 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Just as the hart bit setting of the AIA should be calculated as
-ceil(log2(max_hart_id + 1)) the group bit setting should be
-calculated as ceil(log2(max_group_id + 1)). The hart bits are
-implemented by passing max_hart_id to find_last_bit() and adding
-one to the result. Do the same for the group bit setting.
+On Thu, Aug 01, 2024 at 12:43:25PM GMT, Daniel Henrique Barboza wrote:
+> The RISC-V IOMMU PCI device we're going to add next is a reference
+> implementation of the riscv-iommu spec [1], which predicts that the
+> IOMMU can be implemented as a PCIe device.
+> 
+> However, RISC-V International (RVI), the entity that ratified the
+> riscv-iommu spec, didn't bother assigning a PCI ID for this IOMMU PCIe
+> implementation that the spec predicts. This puts us in an uncommon
+> situation because we want to add the reference IOMMU PCIe implementation
+> but we don't have a PCI ID for it.
+> 
+> Given that RVI doesn't provide a PCI ID for it we reached out to Red Hat
+> and Gerd Hoffman, and they were kind enough to give us a PCI ID for the
+> RISC-V IOMMU PCI reference device.
+> 
+> Thanks Red Hat and Gerd for this RISC-V IOMMU PCIe device ID.
+> 
+> [1] https://github.com/riscv-non-isa/riscv-iommu/releases/tag/v1.0.0
+> 
+> Cc: Gerd Hoffmann <kraxel@redhat.com>
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Reviewed-by: Frank Chang <frank.chang@sifive.com>
 
-Signed-off-by: Andrew Jones <ajones@ventanamicro.com>
----
- target/riscv/kvm/kvm-cpu.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
-
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index f6e3156b8d2f..341af901c5b0 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -1695,6 +1695,7 @@ void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
-     uint64_t max_hart_per_socket = 0;
-     uint64_t socket, base_hart, hart_count, socket_imsic_base, imsic_addr;
-     uint64_t socket_bits, hart_bits, guest_bits;
-+    uint64_t max_group_id;
- 
-     aia_fd = kvm_create_device(kvm_state, KVM_DEV_TYPE_RISCV_AIA, false);
- 
-@@ -1742,7 +1743,8 @@ void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
- 
- 
-     if (socket_count > 1) {
--        socket_bits = find_last_bit(&socket_count, BITS_PER_LONG) + 1;
-+        max_group_id = socket_count - 1;
-+        socket_bits = find_last_bit(&max_group_id, BITS_PER_LONG) + 1;
-         ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
-                                 KVM_DEV_RISCV_AIA_CONFIG_GROUP_BITS,
-                                 &socket_bits, true, NULL);
--- 
-2.45.2
+Reviewed-by: Gerd Hoffmann <kraxel@redhat.com>
 
 
