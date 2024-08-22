@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEAD4C52D7C
-	for <qemu-riscv@archiver.kernel.org>; Thu, 22 Aug 2024 00:28:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59814C52D6F
+	for <qemu-riscv@archiver.kernel.org>; Thu, 22 Aug 2024 00:30:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sgvgG-0006wd-8O; Wed, 21 Aug 2024 20:28:00 -0400
+	id 1sgvib-0003FF-9m; Wed, 21 Aug 2024 20:30:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sgvgB-0006sM-Iv
- for qemu-riscv@nongnu.org; Wed, 21 Aug 2024 20:27:55 -0400
-Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
+ id 1sgviW-0003Dc-MG
+ for qemu-riscv@nongnu.org; Wed, 21 Aug 2024 20:30:23 -0400
+Received: from mail-pf1-x42a.google.com ([2607:f8b0:4864:20::42a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sgvg9-0002cb-P4
- for qemu-riscv@nongnu.org; Wed, 21 Aug 2024 20:27:55 -0400
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-20223b5c1c0so2017725ad.2
- for <qemu-riscv@nongnu.org>; Wed, 21 Aug 2024 17:27:53 -0700 (PDT)
+ id 1sgviT-0003D8-HI
+ for qemu-riscv@nongnu.org; Wed, 21 Aug 2024 20:30:18 -0400
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-712603f7ba5so216398b3a.3
+ for <qemu-riscv@nongnu.org>; Wed, 21 Aug 2024 17:30:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724286472; x=1724891272; darn=nongnu.org;
+ d=linaro.org; s=google; t=1724286614; x=1724891414; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=p5zPl3Sc6tg5qSbtJfAKfqHzO0d6LB3RfQCwrW0ZnUM=;
- b=UHPaMgCUDBLNiNPNup4kuNTygNmp09i8vIeserG7oVkr2I/A4Y1hEbAZA7YLlsU42B
- Y/PLmdOMFr8fIVvtpI9zgcVJUJ5zKswO6PmdeqL/qUaIqEypfqO9OoMkvBoqd5U7D+zN
- 0WK37k7wi4gyKh0foQ5JQ+v8B8ApfuNEwTlETHpUAbY92sszP9yQpvmoW/9F8xrt2rnA
- PsPuBxWxbD68WniIjJCGksn+1BZankl1tj0udwIeaszgr6KpAePZF6NQrhZayzBWlqeE
- bWu7bzrjbXW6wGmFcrHqsuzBRRgwfQ4EXQFZqkgRXKDCbqzYBHGIBZECDxRln9Ch4Oqu
- nU7A==
+ bh=AbhfdJ+vXkqcGL576u9oPp4leWyybB0oNlaZRZO+asU=;
+ b=nAb48WFtkE4+6maVuVnMQ73iFiqSH1fq3yfaEAr+1iELkEAK7G1LU1eI85I5z0t5Vf
+ XHZHuS0k/tjQE3cd4Co/kO11MgSPtKW+xk1juFUNW1XHgWkI6P+BIj54YIqdJ6VjST38
+ lRzL8APdQJJDRB1slRMxJ54vMA1X48WINKlq+gbjb1egyNPE90/UuqZUXvhmAJpse/V4
+ 08yKWYxCrS/K9r666NudTLzB3NyEfftTaZ801XKdjqhbRtdP16PTycg/UwvSfCcadTuz
+ gQnuYw7lUcVuX2vGQKdV9F/9edsMy+6VCxJYA3t/9ahbDI3WFYoiH6/CIxXraZjwJCGP
+ fggg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724286472; x=1724891272;
+ d=1e100.net; s=20230601; t=1724286614; x=1724891414;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=p5zPl3Sc6tg5qSbtJfAKfqHzO0d6LB3RfQCwrW0ZnUM=;
- b=hMirEcm7iM2NXbSFgAf7N3u0Y+IPbFuAgvWhHna9SJKTT8IQ3Z6Y/Cq4dAM9oJMYk3
- u4Bd1wgc/KNV1/PaBHRkZDw1ybpQkl+yX3WK0CXliTFTqrl4eyllCzkRIclviztSvsuH
- 4a6Dp0skDGTlhAPaKvNicoXSv/5RCPCCHV6VwpgjnFEeTKGDXPnuMH9js9llU6G0879F
- lrpMX2uknZUDw3zd7QG1YCkxkw+BZhX/x2lykKBnU3VXWvUEbivrPudcYDMzMyya+Cpc
- yXVAavJkd3ndh6FlcnA/pZoiDbGJ9QOAT7oE5XxfudxOSMWeuYkdiGzSTIokohox6Y6Q
- gsNQ==
+ bh=AbhfdJ+vXkqcGL576u9oPp4leWyybB0oNlaZRZO+asU=;
+ b=L5ztJzWWxSW6yz2Ei24Z9QTmOoikF6guiQFAFUGpjGdywdiczaZLZ6f2qxGCFLpZkg
+ ChVBjl7Dh5YHbXUysxcZkbn8wInah/EsM+bnX7DSGvC/wMdcfmf/3yNZYpqe6RpULPAR
+ R0Rk3MjKhnxzmVBRGLke0JpsTVBFYHma258L7ZeV0rOOfMPRiZPQmj1dvuxTFP6oW8oE
+ i98MAXu/2tcEnGISo8NHdPoql/LmWv3/NAHCsYRbHtDcVLOU62HQqutPDX0vMcZ6YUvj
+ 8hP1rC+dVMbjBSL7ihIM6kf7S2Eh9xnOd4QSxpxIJyweoYxrw71uPCUq0YZ8gvPsem4d
+ IkvQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVEZFvlxRJEUanbs0SlBq8Izc22zc6FnE9uWv5Sx4ndQ/ACpIREhBtB7n81Dpj5Cos0y/IG0QHrdwZd@nongnu.org
-X-Gm-Message-State: AOJu0YzUrSZbUya4lJHOYi66TbqcW38/mGFyGG5443XM0mi89dOZdjBk
- N1d+WpxjCXQ2FpH38pzrW/3O6no4rzV3o8PysWdVbEdIrbLaWCZ3zUd3KUL8GHk=
-X-Google-Smtp-Source: AGHT+IFY5dC6s6Ij78DyP2HoDqOQEgpytCqF7SPZaQT6Qn9KR898Nmp0YgpsKpWgi8SQlnH9KgkvtA==
-X-Received: by 2002:a17:902:f54f:b0:202:18e9:f302 with SMTP id
- d9443c01a7336-20367af4d61mr35279685ad.6.1724286471788; 
- Wed, 21 Aug 2024 17:27:51 -0700 (PDT)
+ AJvYcCVOkJVHeEIXoARUoCN77hUJqV/lj0x01XD4u/HqTDc4Xtzyvm/FYaIyEaPbfD8uFLp9exO2+KTVahNu@nongnu.org
+X-Gm-Message-State: AOJu0YxdDDGUF+bRlYYMyuQn7afcFYTFjIbq5GaHk2yG1L3VQb8r1gVq
+ i+prba4DxngT1RHQB7Bpp0k7eeGk3CD3YEIfvhpEu2xPSW+ySLQnCJrPTeS2SOc=
+X-Google-Smtp-Source: AGHT+IFJsZuaC9nw6KmyNbPKal8Ac3zJ+K6y5FXhFL6o+8tvTXItSAhwb6OXEia0QZGLj+qPJjacOA==
+X-Received: by 2002:a05:6a20:d486:b0:1c8:a0c4:2349 with SMTP id
+ adf61e73a8af0-1cad81814a1mr5283715637.45.1724286613513; 
+ Wed, 21 Aug 2024 17:30:13 -0700 (PDT)
 Received: from [192.168.98.227] (60-242-98-186.static.tpgi.com.au.
  [60.242.98.186]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2038557f04asm1730385ad.85.2024.08.21.17.27.46
+ d2e1a72fcca58-71434250f5asm239836b3a.69.2024.08.21.17.30.08
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 21 Aug 2024 17:27:51 -0700 (PDT)
-Message-ID: <e0c0a34e-372b-48cd-93ba-4a2c8630f6f2@linaro.org>
-Date: Thu, 22 Aug 2024 10:27:43 +1000
+ Wed, 21 Aug 2024 17:30:13 -0700 (PDT)
+Message-ID: <1cb8d332-4092-4a2d-be24-01280f91cb8c@linaro.org>
+Date: Thu, 22 Aug 2024 10:30:05 +1000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 09/16] target/riscv: introduce ssp and enabling
- controls for zicfiss
+Subject: Re: [PATCH v6 11/16] target/riscv: mmu changes for zicfiss shadow
+ stack protection
 To: Deepak Gupta <debug@rivosinc.com>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
 Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, bmeng.cn@gmail.com,
@@ -73,21 +73,21 @@ Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, bmeng.cn@gmail.com,
  zhiwei_liu@linux.alibaba.com, jim.shu@sifive.com, andy.chiu@sifive.com,
  kito.cheng@sifive.com
 References: <20240821215014.3859190-1-debug@rivosinc.com>
- <20240821215014.3859190-10-debug@rivosinc.com>
+ <20240821215014.3859190-12-debug@rivosinc.com>
 Content-Language: en-US
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240821215014.3859190-10-debug@rivosinc.com>
+In-Reply-To: <20240821215014.3859190-12-debug@rivosinc.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x631.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42a;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x42a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,32 +104,24 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 8/22/24 07:50, Deepak Gupta wrote:
-> zicfiss introduces a new state ssp ("shadow stack register") in cpu.
-> ssp is expressed as a new unprivileged csr (CSR_SSP=0x11) and holds
-> virtual address for shadow stack as programmed by software.
+> zicfiss protects shadow stack using new page table encodings PTE.W=0,
+> PTE.R=0 and PTE.X=0. This encoding is reserved if zicfiss is not
+> implemented or if shadow stack are not enabled.
+> Loads on shadow stack memory are allowed while stores to shadow stack
+> memory leads to access faults. Shadow stack accesses to RO memory
+> leads to store page fault.
 > 
-> Shadow stack (for each mode) is enabled via bit3 in *envcfg CSRs.
-> Shadow stack can be enabled for a mode only if it's higher privileged
-> mode had it enabled for itself. M mode doesn't need enabling control,
-> it's always available if extension is available on cpu.
-> 
-> This patch also implements helper bcfi function which determines if bcfi
-> is enabled at current privilege or not. qemu-user also gets field
-> `ubcfien` indicating whether qemu user has shadow stack enabled or not.
-> 
-> Adds ssp to migration state as well.
+> To implement special nature of shadow stack memory where only selected
+> stores (shadow stack stores from sspush) have to be allowed while rest
+> of regular stores disallowed, new MMU TLB index is created for shadow
+> stack.
 > 
 > Signed-off-by: Deepak Gupta<debug@rivosinc.com>
-> Co-developed-by: Jim Shu<jim.shu@sifive.com>
-> Co-developed-by: Andy Chiu<andy.chiu@sifive.com>
+> Suggested-by: Richard Henderson<richard.henderson@linaro.org>
 > ---
->   target/riscv/cpu.c        |  5 ++++
->   target/riscv/cpu.h        |  4 +++
->   target/riscv/cpu_bits.h   |  6 +++++
->   target/riscv/cpu_helper.c | 25 +++++++++++++++++++
->   target/riscv/csr.c        | 52 +++++++++++++++++++++++++++++++++++++++
->   target/riscv/machine.c    | 19 ++++++++++++++
->   6 files changed, 111 insertions(+)
+>   target/riscv/cpu_helper.c | 37 +++++++++++++++++++++++++++++++------
+>   target/riscv/internals.h  |  3 +++
+>   2 files changed, 34 insertions(+), 6 deletions(-)
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
