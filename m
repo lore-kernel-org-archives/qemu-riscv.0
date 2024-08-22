@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56F06C5320E
-	for <qemu-riscv@archiver.kernel.org>; Thu, 22 Aug 2024 08:26:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20B1DC5321D
+	for <qemu-riscv@archiver.kernel.org>; Thu, 22 Aug 2024 08:26:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sh38O-0005hn-EG; Thu, 22 Aug 2024 04:25:32 -0400
+	id 1sh38M-0005Wy-4j; Thu, 22 Aug 2024 04:25:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sh38K-0005Qo-IM
- for qemu-riscv@nongnu.org; Thu, 22 Aug 2024 04:25:28 -0400
-Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c])
+ id 1sh38H-0005Ej-Lu
+ for qemu-riscv@nongnu.org; Thu, 22 Aug 2024 04:25:25 -0400
+Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sh38F-0005zz-0G
- for qemu-riscv@nongnu.org; Thu, 22 Aug 2024 04:25:28 -0400
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-202146e93f6so5183705ad.3
- for <qemu-riscv@nongnu.org>; Thu, 22 Aug 2024 01:25:22 -0700 (PDT)
+ id 1sh388-0005yH-V8
+ for qemu-riscv@nongnu.org; Thu, 22 Aug 2024 04:25:23 -0400
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-20203988f37so4826665ad.1
+ for <qemu-riscv@nongnu.org>; Thu, 22 Aug 2024 01:25:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1724315121; x=1724919921;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1724315115; x=1724919915;
  darn=nongnu.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XfpDUlicfMa/w7Dap5Ged0zMOz5gW8WXfevhHdhAvZk=;
- b=RnnYyr2zA+D+ZF5NtFI8hRgySPQJsMmakx4en8hQexljNzZLB6DctEA2C264q86SWO
- TSDaOKznyXUWYJv0FoVY2n46ZoRwB15mROEXzkmtrAfdOOpUtIjyjGxcMDrpifGtuIkw
- nVaHxZfKWHO31y5qFqGlJIEsk8lqu19uLRcuPIGwH74ciA0+/Gy6cDMJd48/IH+Vmmjz
- pfkLpvso/mAHO/8kOho7gz1THPhn34i8M3sAOWvTn6/oU4ZTnnZbtGs6irLIq4Jr/j+I
- yMmcEdZlAdFg7DXNYTiUeVMqDMnDx7HBzLbe9h6CeiHFCGoMrnWULkqIRmtPexB5ENpf
- J2EQ==
+ bh=bOp3QknnppYKc6NqQXS9ioOC0GJa+R1wT3E/uYEWjyw=;
+ b=C90qkQc09wiw01x2f1sMlTEBpykNNQ4x5JRWVhH8PA8cB4hzP49aQ3/bBqsXHBaqHQ
+ S/NPYhCF9oqc0+JwTb9X2xX19weAijyaFzGyf8X8boRBjL357gDDIt0rAhu51Mu0ByrK
+ m9mjs81bbUtZQPsUQjtKnHyF3+ZnIc2XfEUkutL49cSIrBnKB/wkpYaLOnq//lJeAZ3u
+ HC5ZXVipG8oBUfI/T6hE7N++THxhydyWDuhBp38v3H3o7ipxGHBTya/rIojeAtATT3Fl
+ Jvx7mXlA6/h9Iope/E+i3yHQ9UJ2Exw0/DP1OGlJn0C3UOIuC2kg5Oom82Oi1sy5ES3j
+ iS5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724315121; x=1724919921;
+ d=1e100.net; s=20230601; t=1724315115; x=1724919915;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=XfpDUlicfMa/w7Dap5Ged0zMOz5gW8WXfevhHdhAvZk=;
- b=HoqHyS7rKnEqKu2W9O1eNmHb/DoubnVm7vhBn1fnpAgEPYYoC1xkM+75oyF6/LVHUB
- T5oRn1Uxq4jj9uxm7M6940JF9Yx/JrzzHgGWsWZOGpuJcdOMv1O6YlrxIorbiCNztco7
- FDqWUNweC/XNeglPpqATbloYBBy30hA0g+07ksghcPFOo2JCxws3K+IOyou7KHpYDx08
- AdptV5qdCOZk1oIUv1TgEAExAUXTAEmHgIuynFkI8tiOhh973o0uHvezDevd8DaIlGYl
- 9tYYdkEXSktS6qWzKh5HpDyFCgKZfmAdp5kN21izrUn5SyozjDr+3p7J+9dNtnufXjaY
- 0Tyw==
-X-Gm-Message-State: AOJu0Yyi7hF1GrZ+ffOgjyltGsl6xa6mcuun9oZEW9Mw5U71nvFGaJES
- NkCsAxedLfnmT0d70f4WoJAxFxmCdWj5d7z/5saY+JObZoE2TzYDmWjeI9pUpk/ZeRB1xBavrHX
- v
-X-Google-Smtp-Source: AGHT+IFjnHJRqZyWQN5wk2HH1FUkvYIweTGDa60xQlV2Yl7WUn1dG5aLflf6yDv0BgK0snHgU1blfg==
-X-Received: by 2002:a17:903:2349:b0:1fb:57a6:2ae7 with SMTP id
- d9443c01a7336-2036820c22cmr65813665ad.59.1724315120610; 
- Thu, 22 Aug 2024 01:25:20 -0700 (PDT)
+ bh=bOp3QknnppYKc6NqQXS9ioOC0GJa+R1wT3E/uYEWjyw=;
+ b=W1kcC4k8KgZQyphGiOuFpoaCwHTQTD6J/Xlm9JPkpI7Oh70+1q52H0tCnLjP/ur7Lv
+ ptw5GejlVtZsSv3ljyYdZIF5PZXkF5rXrHXVdUxubLWKiEl0pS4ifot5uCTIIbhY252i
+ qCr9OrSql+c3MyBGntfttF6kpZ2HXfTrApx3Ql498gKiZLOwe5M2alPrIFtbooj2E+4M
+ 84UNKK1Tmg07MZoI74DiLz1T4rMpOrW3aTn69AwEKYfn12EQEgq3NV5EoPUtmvY9+Ax9
+ gqewaeTvLxEEtOyJmRFQeWhd/LXkPysJklA1tEdaHYcvfgQ00CAfCGqjcaPz0GuNsgMU
+ VWYw==
+X-Gm-Message-State: AOJu0Yw1X4SGHLAwEgmWJ4rg4MAieGmspVnBviMle7QO/tByM3QmRmWP
+ xbt1Lfyu5rkKBivu+GY/W18lapo8osXx2wKFH7BshjXS4JkhhZSlAEPHUHghHUlAH1/naPjulyh
+ g
+X-Google-Smtp-Source: AGHT+IFGnKzk1OKQWN7FjdtOrskRTrDf56xKVjqfOl15+OlOMerLh4BC6HXCoUyWVcHwCSdG9bbqxA==
+X-Received: by 2002:a17:902:d50d:b0:202:18af:2fa3 with SMTP id
+ d9443c01a7336-20368191bffmr65486115ad.39.1724315115141; 
+ Thu, 22 Aug 2024 01:25:15 -0700 (PDT)
 Received: from debug.ba.rivosinc.com ([64.71.180.162])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-20385589225sm7641295ad.115.2024.08.22.01.25.19
+ d9443c01a7336-20385589225sm7641295ad.115.2024.08.22.01.25.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 Aug 2024 01:25:20 -0700 (PDT)
+ Thu, 22 Aug 2024 01:25:14 -0700 (PDT)
 From: Deepak Gupta <debug@rivosinc.com>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -68,17 +68,16 @@ Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, bmeng.cn@gmail.com,
  zhiwei_liu@linux.alibaba.com, jim.shu@sifive.com, andy.chiu@sifive.com,
  kito.cheng@sifive.com, Deepak Gupta <debug@rivosinc.com>,
  Richard Henderson <richard.henderson@linaro.org>
-Subject: [PATCH v7 12/17] target/riscv: AMO operations always raise store/AMO
- fault
-Date: Thu, 22 Aug 2024 01:24:58 -0700
-Message-ID: <20240822082504.3979610-13-debug@rivosinc.com>
+Subject: [PATCH v7 07/17] disas/riscv: enable `lpad` disassembly
+Date: Thu, 22 Aug 2024 01:24:53 -0700
+Message-ID: <20240822082504.3979610-8-debug@rivosinc.com>
 X-Mailer: git-send-email 2.45.0
 In-Reply-To: <20240822082504.3979610-1-debug@rivosinc.com>
 References: <20240822082504.3979610-1-debug@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
- envelope-from=debug@rivosinc.com; helo=mail-pl1-x62c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
+ envelope-from=debug@rivosinc.com; helo=mail-pl1-x62e.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -101,117 +100,92 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This patch adds one more word for tcg compile which can be obtained during
-unwind time to determine fault type for original operation (example AMO).
-Depending on that, fault can be promoted to store/AMO fault.
-
 Signed-off-by: Deepak Gupta <debug@rivosinc.com>
-Suggested-by: Richard Henderson <richard.henderson@linaro.org>
+Co-developed-by: Jim Shu <jim.shu@sifive.com>
+Co-developed-by: Andy Chiu <andy.chiu@sifive.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/cpu.h         |  9 ++++++++-
- target/riscv/cpu_helper.c  | 20 ++++++++++++++++++++
- target/riscv/tcg/tcg-cpu.c |  1 +
- target/riscv/translate.c   |  2 +-
- 4 files changed, 30 insertions(+), 2 deletions(-)
+ disas/riscv.c | 18 +++++++++++++++++-
+ disas/riscv.h |  2 ++
+ 2 files changed, 19 insertions(+), 1 deletion(-)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index dcc3bc9d93..3143141863 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -46,8 +46,13 @@ typedef struct CPUArchState CPURISCVState;
- /*
-  * RISC-V-specific extra insn start words:
-  * 1: Original instruction opcode
-+ * 2: more information about instruction
-  */
--#define TARGET_INSN_START_EXTRA_WORDS 1
-+#define TARGET_INSN_START_EXTRA_WORDS 2
-+/*
-+ * b0: Whether a instruction always raise a store AMO or not.
-+ */
-+#define RISCV_UW2_ALWAYS_STORE_AMO 1
+diff --git a/disas/riscv.c b/disas/riscv.c
+index c8364c2b07..c7c92acef7 100644
+--- a/disas/riscv.c
++++ b/disas/riscv.c
+@@ -974,6 +974,7 @@ typedef enum {
+     rv_op_amomaxu_h = 943,
+     rv_op_amocas_b  = 944,
+     rv_op_amocas_h  = 945,
++    rv_op_lpad = 946,
+ } rv_op;
  
- #define RV(x) ((target_ulong)1 << (x - 'A'))
+ /* register names */
+@@ -2232,6 +2233,7 @@ const rv_opcode_data rvi_opcode_data[] = {
+     { "amomaxu.h", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
+     { "amocas.b", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
+     { "amocas.h", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
++    { "lpad", rv_codec_lp, rv_fmt_imm, NULL, 0, 0, 0 },
+ };
  
-@@ -226,6 +231,8 @@ struct CPUArchState {
-     bool      elp;
-     /* shadow stack register for zicfiss extension */
-     target_ulong ssp;
-+    /* env place holder for extra word 2 during unwind */
-+    target_ulong excp_uw2;
-     /* sw check code for sw check exception */
-     target_ulong sw_check_code;
- #ifdef CONFIG_USER_ONLY
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 95ef7b0bd1..0f32bede39 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -1740,6 +1740,22 @@ static target_ulong riscv_transformed_insn(CPURISCVState *env,
-     return xinsn;
- }
- 
-+static target_ulong promote_load_fault(target_ulong orig_cause)
-+{
-+    switch (orig_cause) {
-+    case RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT:
-+        return RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT;
-+
-+    case RISCV_EXCP_LOAD_ACCESS_FAULT:
-+        return RISCV_EXCP_STORE_AMO_ACCESS_FAULT;
-+
-+    case RISCV_EXCP_LOAD_PAGE_FAULT:
-+        return RISCV_EXCP_STORE_PAGE_FAULT;
-+    }
-+
-+    /* if no promotion, return original cause */
-+    return orig_cause;
-+}
- /*
-  * Handle Traps
-  *
-@@ -1751,6 +1767,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-     RISCVCPU *cpu = RISCV_CPU(cs);
-     CPURISCVState *env = &cpu->env;
-     bool write_gva = false;
-+    bool always_storeamo = (env->excp_uw2 & RISCV_UW2_ALWAYS_STORE_AMO);
-     uint64_t s;
- 
-     /*
-@@ -1784,6 +1801,9 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-         case RISCV_EXCP_STORE_AMO_ACCESS_FAULT:
-         case RISCV_EXCP_LOAD_PAGE_FAULT:
-         case RISCV_EXCP_STORE_PAGE_FAULT:
-+            if (always_storeamo) {
-+                cause = promote_load_fault(cause);
+ /* CSR names */
+@@ -2925,7 +2927,13 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
+             case 7: op = rv_op_andi; break;
+             }
+             break;
+-        case 5: op = rv_op_auipc; break;
++        case 5:
++            op = rv_op_auipc;
++            if (dec->cfg->ext_zicfilp &&
++                (((inst >> 7) & 0b11111) == 0b00000)) {
++                op = rv_op_lpad;
 +            }
-             write_gva = env->two_stage_lookup;
-             tval = env->badaddr;
-             if (env->two_stage_indirect_lookup) {
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index 4da26cb926..83771303a8 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -129,6 +129,7 @@ static void riscv_restore_state_to_opc(CPUState *cs,
-         env->pc = pc;
-     }
-     env->bins = data[1];
-+    env->excp_uw2 = data[2];
++            break;
+         case 6:
+             switch ((inst >> 12) & 0b111) {
+             case 0: op = rv_op_addiw; break;
+@@ -4482,6 +4490,11 @@ static uint32_t operand_tbl_index(rv_inst inst)
+     return ((inst << 54) >> 56);
  }
  
- static const TCGCPUOps riscv_tcg_ops = {
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index b1d251e893..16fff70dac 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -1265,7 +1265,7 @@ static void riscv_tr_insn_start(DisasContextBase *dcbase, CPUState *cpu)
-         pc_next &= ~TARGET_PAGE_MASK;
-     }
++static uint32_t operand_lpl(rv_inst inst)
++{
++    return inst >> 12;
++}
++
+ /* decode operands */
  
--    tcg_gen_insn_start(pc_next, 0);
-+    tcg_gen_insn_start(pc_next, 0, 0);
-     ctx->insn_start_updated = false;
+ static void decode_inst_operands(rv_decode *dec, rv_isa isa)
+@@ -4869,6 +4882,9 @@ static void decode_inst_operands(rv_decode *dec, rv_isa isa)
+         dec->imm = sextract32(operand_rs2(inst), 0, 5);
+         dec->imm1 = operand_imm2(inst);
+         break;
++    case rv_codec_lp:
++        dec->imm = operand_lpl(inst);
++        break;
+     };
  }
  
+diff --git a/disas/riscv.h b/disas/riscv.h
+index 16a08e4895..1182457aff 100644
+--- a/disas/riscv.h
++++ b/disas/riscv.h
+@@ -166,6 +166,7 @@ typedef enum {
+     rv_codec_r2_immhl,
+     rv_codec_r2_imm2_imm5,
+     rv_codec_fli,
++    rv_codec_lp,
+ } rv_codec;
+ 
+ /* structures */
+@@ -228,6 +229,7 @@ enum {
+ #define rv_fmt_rs1_rs2                "O\t1,2"
+ #define rv_fmt_rd_imm                 "O\t0,i"
+ #define rv_fmt_rd_uimm                "O\t0,Ui"
++#define rv_fmt_imm                    "O\ti"
+ #define rv_fmt_rd_offset              "O\t0,o"
+ #define rv_fmt_rd_uoffset             "O\t0,Uo"
+ #define rv_fmt_rd_rs1_rs2             "O\t0,1,2"
 -- 
 2.44.0
 
