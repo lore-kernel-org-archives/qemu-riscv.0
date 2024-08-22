@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20B1DC5321D
-	for <qemu-riscv@archiver.kernel.org>; Thu, 22 Aug 2024 08:26:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75E77C3DA4A
+	for <qemu-riscv@archiver.kernel.org>; Thu, 22 Aug 2024 08:27:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sh38M-0005Wy-4j; Thu, 22 Aug 2024 04:25:30 -0400
+	id 1sh38M-0005Wg-2t; Thu, 22 Aug 2024 04:25:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sh38H-0005Ej-Lu
- for qemu-riscv@nongnu.org; Thu, 22 Aug 2024 04:25:25 -0400
-Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
+ id 1sh38J-0005LF-6z
+ for qemu-riscv@nongnu.org; Thu, 22 Aug 2024 04:25:27 -0400
+Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sh388-0005yH-V8
- for qemu-riscv@nongnu.org; Thu, 22 Aug 2024 04:25:23 -0400
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-20203988f37so4826665ad.1
- for <qemu-riscv@nongnu.org>; Thu, 22 Aug 2024 01:25:16 -0700 (PDT)
+ id 1sh38C-0005z1-6j
+ for qemu-riscv@nongnu.org; Thu, 22 Aug 2024 04:25:26 -0400
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-20203988f37so4827125ad.1
+ for <qemu-riscv@nongnu.org>; Thu, 22 Aug 2024 01:25:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1724315115; x=1724919915;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1724315118; x=1724919918;
  darn=nongnu.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bOp3QknnppYKc6NqQXS9ioOC0GJa+R1wT3E/uYEWjyw=;
- b=C90qkQc09wiw01x2f1sMlTEBpykNNQ4x5JRWVhH8PA8cB4hzP49aQ3/bBqsXHBaqHQ
- S/NPYhCF9oqc0+JwTb9X2xX19weAijyaFzGyf8X8boRBjL357gDDIt0rAhu51Mu0ByrK
- m9mjs81bbUtZQPsUQjtKnHyF3+ZnIc2XfEUkutL49cSIrBnKB/wkpYaLOnq//lJeAZ3u
- HC5ZXVipG8oBUfI/T6hE7N++THxhydyWDuhBp38v3H3o7ipxGHBTya/rIojeAtATT3Fl
- Jvx7mXlA6/h9Iope/E+i3yHQ9UJ2Exw0/DP1OGlJn0C3UOIuC2kg5Oom82Oi1sy5ES3j
- iS5Q==
+ bh=c5tfC+MDN3TnBGYhxJZGJZZgeipWGqlm7/G60wMgMsI=;
+ b=xuB8+T6nXj58djWZyMNUfQ0YNut85T16gAXCEHPKL6t2vEFeK6Gbk/7i60OuGs0X80
+ iybmx6Cu1uqUWQYznvrzOl9hTPiKx6ZOuWlFNwiChtSDKJArAlJOLGTNxEbEfXxLCrY+
+ oAuLntGjrpeL7Y6LGRnvYJ0iyHf25tt3bEhVwmmGtJmLa7UiEvT5Sz8W1nPtVgCcd/T7
+ JOLqLw9FQvJUpbCckGJtpDquUV757dtnjcibpnkc+quUggF1WWlCQC3iDPopzLrUaCZy
+ 6dcNLowfYmjKG96eCfBF/7C7qq1CpiRmutkc2r6iSikikLBWkg/3vyEl2NXsuxVdDuCm
+ WdGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724315115; x=1724919915;
+ d=1e100.net; s=20230601; t=1724315118; x=1724919918;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bOp3QknnppYKc6NqQXS9ioOC0GJa+R1wT3E/uYEWjyw=;
- b=W1kcC4k8KgZQyphGiOuFpoaCwHTQTD6J/Xlm9JPkpI7Oh70+1q52H0tCnLjP/ur7Lv
- ptw5GejlVtZsSv3ljyYdZIF5PZXkF5rXrHXVdUxubLWKiEl0pS4ifot5uCTIIbhY252i
- qCr9OrSql+c3MyBGntfttF6kpZ2HXfTrApx3Ql498gKiZLOwe5M2alPrIFtbooj2E+4M
- 84UNKK1Tmg07MZoI74DiLz1T4rMpOrW3aTn69AwEKYfn12EQEgq3NV5EoPUtmvY9+Ax9
- gqewaeTvLxEEtOyJmRFQeWhd/LXkPysJklA1tEdaHYcvfgQ00CAfCGqjcaPz0GuNsgMU
- VWYw==
-X-Gm-Message-State: AOJu0Yw1X4SGHLAwEgmWJ4rg4MAieGmspVnBviMle7QO/tByM3QmRmWP
- xbt1Lfyu5rkKBivu+GY/W18lapo8osXx2wKFH7BshjXS4JkhhZSlAEPHUHghHUlAH1/naPjulyh
- g
-X-Google-Smtp-Source: AGHT+IFGnKzk1OKQWN7FjdtOrskRTrDf56xKVjqfOl15+OlOMerLh4BC6HXCoUyWVcHwCSdG9bbqxA==
-X-Received: by 2002:a17:902:d50d:b0:202:18af:2fa3 with SMTP id
- d9443c01a7336-20368191bffmr65486115ad.39.1724315115141; 
- Thu, 22 Aug 2024 01:25:15 -0700 (PDT)
+ bh=c5tfC+MDN3TnBGYhxJZGJZZgeipWGqlm7/G60wMgMsI=;
+ b=AMB7VMRKIlo+j1gM42AkolDQWiPzG33ErPsBmXvzbdi+m666w0OGyl6B1XPfW5TGdV
+ ccT+YQHCGq4kzo8odeEoELOrZl2AAADmEmbihmCFs61jdQXSv2LRMHHwCUcxgx0QIDRO
+ R5c8hLSgMJXdetBrUfzw2eWXMHiyfR+Wmt2SuIAchEScGtWucN5aKJrmwIW4DbzeSDvc
+ tstSNbldY650PDJQUyGK0V+apDIoDkheEBnoNI5lgWNnpj4NvTkuNW+DQ68kzwRC0K90
+ 3XHCMwXm5gb5jlrRoZpTjAw+rNvvD63x+xASOsB2pX5mzb6M5T3c+TEBkM77zo+bUH43
+ s7nw==
+X-Gm-Message-State: AOJu0YyOy0m2e7L7LCYJW3n6GCe0zrbfBL0jcDqgdnHH65e+83kpUCAH
+ ub7qpGhmkz1kbV9X5pb0gM9bi2vbnm+GAhrv9ByqYasyzXz837FSXKU/j1OmGyA/mYdtifMZeto
+ F
+X-Google-Smtp-Source: AGHT+IFJrvClOw1v8V87IR6MkU9SAclTTkcCCNLOwpJfWK/nZOc2xnMba4VT9S0l8A6LFOeLDPXlWA==
+X-Received: by 2002:a17:902:db05:b0:202:43fa:52f9 with SMTP id
+ d9443c01a7336-2036806f2cemr53744995ad.29.1724315118386; 
+ Thu, 22 Aug 2024 01:25:18 -0700 (PDT)
 Received: from debug.ba.rivosinc.com ([64.71.180.162])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-20385589225sm7641295ad.115.2024.08.22.01.25.14
+ d9443c01a7336-20385589225sm7641295ad.115.2024.08.22.01.25.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 Aug 2024 01:25:14 -0700 (PDT)
+ Thu, 22 Aug 2024 01:25:18 -0700 (PDT)
 From: Deepak Gupta <debug@rivosinc.com>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -68,16 +68,16 @@ Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, bmeng.cn@gmail.com,
  zhiwei_liu@linux.alibaba.com, jim.shu@sifive.com, andy.chiu@sifive.com,
  kito.cheng@sifive.com, Deepak Gupta <debug@rivosinc.com>,
  Richard Henderson <richard.henderson@linaro.org>
-Subject: [PATCH v7 07/17] disas/riscv: enable `lpad` disassembly
-Date: Thu, 22 Aug 2024 01:24:53 -0700
-Message-ID: <20240822082504.3979610-8-debug@rivosinc.com>
+Subject: [PATCH v7 10/17] target/riscv: tb flag for shadow stack instructions
+Date: Thu, 22 Aug 2024 01:24:56 -0700
+Message-ID: <20240822082504.3979610-11-debug@rivosinc.com>
 X-Mailer: git-send-email 2.45.0
 In-Reply-To: <20240822082504.3979610-1-debug@rivosinc.com>
 References: <20240822082504.3979610-1-debug@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
- envelope-from=debug@rivosinc.com; helo=mail-pl1-x62e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
+ envelope-from=debug@rivosinc.com; helo=mail-pl1-x630.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -100,92 +100,72 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Shadow stack instructions can be decoded as zimop / zcmop or shadow stack
+instructions depending on whether shadow stack are enabled at current
+privilege. This requires a TB flag so that correct TB generation and correct
+TB lookup happens. `DisasContext` gets a field indicating whether bcfi is
+enabled or not.
+
 Signed-off-by: Deepak Gupta <debug@rivosinc.com>
 Co-developed-by: Jim Shu <jim.shu@sifive.com>
 Co-developed-by: Andy Chiu <andy.chiu@sifive.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- disas/riscv.c | 18 +++++++++++++++++-
- disas/riscv.h |  2 ++
- 2 files changed, 19 insertions(+), 1 deletion(-)
+ target/riscv/cpu.h        | 2 ++
+ target/riscv/cpu_helper.c | 4 ++++
+ target/riscv/translate.c  | 4 ++++
+ 3 files changed, 10 insertions(+)
 
-diff --git a/disas/riscv.c b/disas/riscv.c
-index c8364c2b07..c7c92acef7 100644
---- a/disas/riscv.c
-+++ b/disas/riscv.c
-@@ -974,6 +974,7 @@ typedef enum {
-     rv_op_amomaxu_h = 943,
-     rv_op_amocas_b  = 944,
-     rv_op_amocas_h  = 945,
-+    rv_op_lpad = 946,
- } rv_op;
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 5a57099d59..dcc3bc9d93 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -613,6 +613,8 @@ FIELD(TB_FLAGS, AXL, 26, 2)
+ /* zicfilp needs a TB flag to track indirect branches */
+ FIELD(TB_FLAGS, FCFI_ENABLED, 28, 1)
+ FIELD(TB_FLAGS, FCFI_LP_EXPECTED, 29, 1)
++/* zicfiss needs a TB flag so that correct TB is located based on tb flags */
++FIELD(TB_FLAGS, BCFI_ENABLED, 30, 1)
  
- /* register names */
-@@ -2232,6 +2233,7 @@ const rv_opcode_data rvi_opcode_data[] = {
-     { "amomaxu.h", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-     { "amocas.b", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-     { "amocas.h", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-+    { "lpad", rv_codec_lp, rv_fmt_imm, NULL, 0, 0, 0 },
- };
+ #ifdef TARGET_RISCV32
+ #define riscv_cpu_mxl(env)  ((void)(env), MXL_RV32)
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 92bc9e94eb..ca336f46db 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -168,6 +168,10 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
+         flags = FIELD_DP32(flags, TB_FLAGS, FCFI_ENABLED, 1);
+     }
  
- /* CSR names */
-@@ -2925,7 +2927,13 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
-             case 7: op = rv_op_andi; break;
-             }
-             break;
--        case 5: op = rv_op_auipc; break;
-+        case 5:
-+            op = rv_op_auipc;
-+            if (dec->cfg->ext_zicfilp &&
-+                (((inst >> 7) & 0b11111) == 0b00000)) {
-+                op = rv_op_lpad;
-+            }
-+            break;
-         case 6:
-             switch ((inst >> 12) & 0b111) {
-             case 0: op = rv_op_addiw; break;
-@@ -4482,6 +4490,11 @@ static uint32_t operand_tbl_index(rv_inst inst)
-     return ((inst << 54) >> 56);
- }
- 
-+static uint32_t operand_lpl(rv_inst inst)
-+{
-+    return inst >> 12;
-+}
++    if (cpu_get_bcfien(env)) {
++        flags = FIELD_DP32(flags, TB_FLAGS, BCFI_ENABLED, 1);
++    }
 +
- /* decode operands */
+ #ifdef CONFIG_USER_ONLY
+     fs = EXT_STATUS_DIRTY;
+     vs = EXT_STATUS_DIRTY;
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index b5c0511b4b..b1d251e893 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -119,6 +119,8 @@ typedef struct DisasContext {
+     /* zicfilp extension. fcfi_enabled, lp expected or not */
+     bool fcfi_enabled;
+     bool fcfi_lp_expected;
++    /* zicfiss extension, if shadow stack was enabled during TB gen */
++    bool bcfi_enabled;
+ } DisasContext;
  
- static void decode_inst_operands(rv_decode *dec, rv_isa isa)
-@@ -4869,6 +4882,9 @@ static void decode_inst_operands(rv_decode *dec, rv_isa isa)
-         dec->imm = sextract32(operand_rs2(inst), 0, 5);
-         dec->imm1 = operand_imm2(inst);
-         break;
-+    case rv_codec_lp:
-+        dec->imm = operand_lpl(inst);
-+        break;
-     };
- }
- 
-diff --git a/disas/riscv.h b/disas/riscv.h
-index 16a08e4895..1182457aff 100644
---- a/disas/riscv.h
-+++ b/disas/riscv.h
-@@ -166,6 +166,7 @@ typedef enum {
-     rv_codec_r2_immhl,
-     rv_codec_r2_imm2_imm5,
-     rv_codec_fli,
-+    rv_codec_lp,
- } rv_codec;
- 
- /* structures */
-@@ -228,6 +229,7 @@ enum {
- #define rv_fmt_rs1_rs2                "O\t1,2"
- #define rv_fmt_rd_imm                 "O\t0,i"
- #define rv_fmt_rd_uimm                "O\t0,Ui"
-+#define rv_fmt_imm                    "O\ti"
- #define rv_fmt_rd_offset              "O\t0,o"
- #define rv_fmt_rd_uoffset             "O\t0,Uo"
- #define rv_fmt_rd_rs1_rs2             "O\t0,1,2"
+ static inline bool has_ext(DisasContext *ctx, uint32_t ext)
+@@ -1241,6 +1243,8 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+     ctx->pm_base_enabled = FIELD_EX32(tb_flags, TB_FLAGS, PM_BASE_ENABLED);
+     ctx->ztso = cpu->cfg.ext_ztso;
+     ctx->itrigger = FIELD_EX32(tb_flags, TB_FLAGS, ITRIGGER);
++    ctx->bcfi_enabled = cpu_get_bcfien(env) &&
++                        FIELD_EX32(tb_flags, TB_FLAGS, BCFI_ENABLED);
+     ctx->fcfi_lp_expected = FIELD_EX32(tb_flags, TB_FLAGS, FCFI_LP_EXPECTED);
+     ctx->fcfi_enabled = FIELD_EX32(tb_flags, TB_FLAGS, FCFI_ENABLED);
+     ctx->zero = tcg_constant_tl(0);
 -- 
 2.44.0
 
