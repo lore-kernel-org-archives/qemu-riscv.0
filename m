@@ -4,61 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B0E6C5320E
-	for <qemu-riscv@archiver.kernel.org>; Thu, 22 Aug 2024 08:25:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80DA5C5320E
+	for <qemu-riscv@archiver.kernel.org>; Thu, 22 Aug 2024 08:26:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sh38B-000514-D8; Thu, 22 Aug 2024 04:25:19 -0400
+	id 1sh38S-00061Q-RN; Thu, 22 Aug 2024 04:25:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sh38A-00050b-42
- for qemu-riscv@nongnu.org; Thu, 22 Aug 2024 04:25:18 -0400
-Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c])
+ id 1sh38M-0005ZA-I6
+ for qemu-riscv@nongnu.org; Thu, 22 Aug 2024 04:25:30 -0400
+Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sh381-0005vU-Px
- for qemu-riscv@nongnu.org; Thu, 22 Aug 2024 04:25:17 -0400
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-202376301e6so3957385ad.0
- for <qemu-riscv@nongnu.org>; Thu, 22 Aug 2024 01:25:08 -0700 (PDT)
+ id 1sh38H-00060c-D0
+ for qemu-riscv@nongnu.org; Thu, 22 Aug 2024 04:25:30 -0400
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-201df0b2df4so4083605ad.0
+ for <qemu-riscv@nongnu.org>; Thu, 22 Aug 2024 01:25:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1724315107; x=1724919907;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1724315123; x=1724919923;
  darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=RUzJWHSZ6VZj5szyNKj7biChyxJm3oLfyQpa8ekQNUo=;
- b=nOgKBAbzIDOhuWeBgGMVkt7YiMUTTKhZwDY4hxeDaIrAjtGtXsRIkVcxa6WGpBIfek
- Q0TosX6xmDkvvPR77DNUDHIndjDmFmzd2/WgtvVvQmKvcvBPkakEPOFfrNsWAHj22E0Q
- dVSMBWT/cX9NohZwhmSRiIoSrrb2olKY3exhXYz3FsF7zJa10FG1a+4IuzlioXINKXB1
- PBBOOR2nmHX0N2oZiWjHuz89NHClO1ppg7KhUpZ9NodHa3ScGN5a3/Rdw8HlZOXXJ0/4
- agWZBh3lYh2OQXxed0nygMB/zonEgGj8e41M7btdSExtZ+GRMZ/OMd3Y+pa29bjEELxI
- 1E4w==
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=LAjT36+wj32KqoDF9t70mRiYw/3QJ0l4GAtKFAK5De8=;
+ b=sKeVw6zZy7WD8Bh/ZmmJXQUl/ZpbKrF0yQzlu5Yc0vS3+HYTV9l0NpVaJPPG9ZHIHO
+ Im/ytmmtRZjnPERaG/62hk/gO7VizdPLWhMvKu9T8S43p1SnirIOBqyb9z/9rRFnRM+Q
+ pY6log199r0A15c4qi9J25mFg/R9BTTsDYLnEfggW01dGgVm5O9F5YNxSXS/g0vT2ZaE
+ KKrWIDDA4oMZdUaLGuQwOR9+sjR0B4OTr54GYDgoFpcbGWufC5HTtrr8Zko/y2SiG0Fn
+ PrqtBfxKiTxGF55+svQK5DaUWNO8HgFNDe+0HeWj0BNRP3oolI0Cu4vko6G/98hOkAwk
+ 5gsQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724315107; x=1724919907;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=RUzJWHSZ6VZj5szyNKj7biChyxJm3oLfyQpa8ekQNUo=;
- b=QADYNqCk7tNtweGERGq0+ZcO8lznoQhHyAtNxTzYXfJJy6UzIKwLWm0hidyd7QMifr
- U4lqh29WxflvS1UOzMrbcDIymo6DQkQJOmDcDNIzgv5wyAljcBPi8lIdu+BpbFlAFiTO
- TUMZWLRNtuOkoW4ohLZKkVlAGgH/8YEVsj4C4mV6Jac9rBquK8fuw3trKy3xMvQpcWq8
- Gg+z4tCuw+tt0ZCmVrYdkKOK/y4OR4vsAFN3H8aQwmk0AxymXmsSMKa847tpb/17LAyi
- G6a9zAMsGrrauJSOorskirIN7E5iTuFXQwVrkIJ1JVlA7dVbWObWGCPCBR0iyBN87kEK
- E1Cw==
-X-Gm-Message-State: AOJu0YwVtkWJeXB1bpfHL7p6ixQHL9WycWec3xeBgGxzjaEXeHzrhA/O
- +alYMTtK941bTJwmJJtjxOEiE/+KJWBrYDZX1PgJJxfvm3KAtqry45ImxQR+GNAG79WAe6jh+zJ
- j
-X-Google-Smtp-Source: AGHT+IEwYESzoehvnQFipW21qXnYAR2Vp8Uozg0Jimb3b4ojt6bCjj6TpoLY9gvg0KNnzVeJR00tpA==
-X-Received: by 2002:a17:902:d502:b0:1fa:fc74:4c04 with SMTP id
- d9443c01a7336-20388250196mr14510455ad.35.1724315107138; 
- Thu, 22 Aug 2024 01:25:07 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1724315123; x=1724919923;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=LAjT36+wj32KqoDF9t70mRiYw/3QJ0l4GAtKFAK5De8=;
+ b=UD/veD1WmDTVo3JHZ+MAcxT8W32sGTS8vHyoqtHVPakLFCFL7DMTcmFCd4Pg59T/o+
+ mVmOf9hoN79vmJbtKiFyNJyT9ML7IO7cEV4pBsjy2+GqwGkjCmM9rVPXOg1CO4bkqgbN
+ NmAaHI42iNLxThEQPpJYLs4q6TNA1g2pMTOUPpO/FetbLExfCBpyA2HV0BChU43Y6+dI
+ X7iqsSw+YbMDAhUObktVlc8wqfka/7jvNRAA8+ACj06YJ8YJWmeX8AxFw+QJP//4rBe9
+ aL/TFmH0E3DD4aZ8FVnI/2Pqs8wU22TTOYyexDySsrJZLYLkFzrxS4RmgCRcEGbudyLP
+ NwHw==
+X-Gm-Message-State: AOJu0YzqhDAg6GPggaUtwBai9PffUUB35aJlVT2d0UViK1r11hFvx3b0
+ GOwf7folif+hCgHHispmcwWLVIE/6qlfEbFkvaQF6nB1lACPCg/Nqk7Blk9iPiaMLK/Edw5VSrx
+ k
+X-Google-Smtp-Source: AGHT+IGu5NkHWySZqlSrvIroXiYhUYM1PQ2Qqo+ZXCA1cd99et7OLcS/TjhZJEm7O69v72uQoyk5+g==
+X-Received: by 2002:a17:903:bd1:b0:202:2a38:f9f1 with SMTP id
+ d9443c01a7336-203682093e8mr44286495ad.58.1724315122884; 
+ Thu, 22 Aug 2024 01:25:22 -0700 (PDT)
 Received: from debug.ba.rivosinc.com ([64.71.180.162])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-20385589225sm7641295ad.115.2024.08.22.01.25.06
+ d9443c01a7336-20385589225sm7641295ad.115.2024.08.22.01.25.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 Aug 2024 01:25:06 -0700 (PDT)
+ Thu, 22 Aug 2024 01:25:22 -0700 (PDT)
 From: Deepak Gupta <debug@rivosinc.com>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -66,20 +67,23 @@ Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, bmeng.cn@gmail.com,
  liwei1518@gmail.com, dbarboza@ventanamicro.com,
  zhiwei_liu@linux.alibaba.com, jim.shu@sifive.com, andy.chiu@sifive.com,
  kito.cheng@sifive.com, Deepak Gupta <debug@rivosinc.com>
-Subject: [PATCH v7 00/17] riscv support for control flow integrity extensions
-Date: Thu, 22 Aug 2024 01:24:46 -0700
-Message-ID: <20240822082504.3979610-1-debug@rivosinc.com>
+Subject: [PATCH v7 14/17] target/riscv: implement zicfiss instructions
+Date: Thu, 22 Aug 2024 01:25:00 -0700
+Message-ID: <20240822082504.3979610-15-debug@rivosinc.com>
 X-Mailer: git-send-email 2.45.0
+In-Reply-To: <20240822082504.3979610-1-debug@rivosinc.com>
+References: <20240822082504.3979610-1-debug@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
- envelope-from=debug@rivosinc.com; helo=mail-pl1-x62c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
+ envelope-from=debug@rivosinc.com; helo=mail-pl1-x631.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -95,110 +99,259 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-v7 for riscv zicfilp and zicfiss extensions support in qemu.
+zicfiss has following instructions
+ - sspopchk: pops a value from shadow stack and compares with x1/x5.
+   If they dont match, reports a sw check exception with tval = 3.
+ - sspush: pushes value in x1/x5 on shadow stack
+ - ssrdp: reads current shadow stack
+ - ssamoswap: swaps contents of shadow stack atomically
 
-Links for previous versions
-[1] - v1 https://lists.nongnu.org/archive/html/qemu-devel/2024-07/msg06017.html
-[2] - v2 https://lore.kernel.org/all/ed23bcbc-fdc4-4492-803c-daa95880375a@linaro.org/T/
-[3] - v3 https://lists.nongnu.org/archive/html/qemu-devel/2024-08/msg01005.html
-[4] - v4 https://lore.kernel.org/all/20240816010711.3055425-6-debug@rivosinc.com/T/
-[5] - v5 https://lore.kernel.org/all/20240820000129.3522346-1-debug@rivosinc.com/T/#m7b9cc847e739ec86f9569a3ca9f3d9377b01e21
-[6] - v6 https://mail.gnu.org/archive/html/qemu-riscv/2024-08/msg00418.html
+sspopchk/sspush/ssrdp default to zimop if zimop implemented and SSE=0
 
+If SSE=0, ssamoswap is illegal instruction exception.
+
+This patch implements shadow stack operations for qemu-user and shadow
+stack is not protected.
+
+Signed-off-by: Deepak Gupta <debug@rivosinc.com>
+Co-developed-by: Jim Shu <jim.shu@sifive.com>
+Co-developed-by: Andy Chiu <andy.chiu@sifive.com>
 ---
-v7:
-   - Updated decode_save_opc to take extra argument of excp_uw2 and
-     updated callsites
-   - added a helper for promoting load faults to store faults
-   - Removed stale comments and edited existed comments
-v6:
-   - Added support extra store word 2 for tcg compile and extraction during unwind
-   - Using extra word, AMO instructions and shadow stack instructions can raise store fault
-   - some alignment and cosmetic changes
-   - added vmstate migration support for elp and ssp cpu state
-v5:
-   - Simplified elp tracking and lpad implementation as per suggestion by richard
-   - Simplified shadow stack mmu checks as per suggestion by richard
-   - Converged zicfiss compressed and non-comressed instructions to same translation
-   - Removed trace hooks. Don't need for upstream.
-
-v4:
-   - elp state in cpu is true/false instead of enum and elp cleared
-     unconditionally on trap entry. elp in *status cleared unconditionally on
-     trap return.
-   - Moved logic for branch tracking in instruction translation from tb_start.
-   - fixed zicfiss dependency on 'A'
-   - `cpu_get_fcfien/bcfien` helpers checks fixed to check for extension first.
-   - removed trace hook enums. Instead added dedicated trace helpers wherever needed.
-   - fixed/simplified instruction format in decoder for lpad, sspush, sspopchk
-   - simplified tlb index logic for shadow stack instructions. Removed SUM TB_FLAG
-   - access to ssp CSR is gated on `cpu_get_bcfien` instead of duplicated logic
-   - removed vDSO related changes for now.
-v3:
-   - Removed prctl specific patches because they need to be upstream
-     in kernel first.
-   - As suggested by Richard, added TB flag if fcfi enabled
-   - Re-worked translation for landing pad and shadow stack instructions
-     to not require helper.
-   - tcg helpers only for cfi violation cases so that trace hooks can be
-     placed.
-   - Style changes.
-   - fixes assert condition in accel/tcg
-
-v2:
-   - added missed file (in v1) for shadow stack instructions implementation.
-
-Deepak Gupta (17):
-  target/riscv: Add zicfilp extension
-  target/riscv: Introduce elp state and enabling controls for zicfilp
-  target/riscv: save and restore elp state on priv transitions
-  target/riscv: additional code information for sw check
-  target/riscv: tracking indirect branches (fcfi) for zicfilp
-  target/riscv: zicfilp `lpad` impl and branch tracking
-  disas/riscv: enable `lpad` disassembly
-  target/riscv: Add zicfiss extension
-  target/riscv: introduce ssp and enabling controls for zicfiss
-  target/riscv: tb flag for shadow stack  instructions
-  target/riscv: mmu changes for zicfiss shadow stack protection
-  target/riscv: AMO operations always raise store/AMO fault
-  target/riscv: update `decode_save_opc` to store extra word2
-  target/riscv: implement zicfiss instructions
-  target/riscv: compressed encodings for sspush and sspopchk
-  disas/riscv: enable disassembly for zicfiss instructions
-  disas/riscv: enable disassembly for compressed sspush/sspopchk
-
- disas/riscv.c                                 |  77 ++++++++-
- disas/riscv.h                                 |   4 +
- target/riscv/cpu.c                            |  17 ++
- target/riscv/cpu.h                            |  24 ++-
- target/riscv/cpu_bits.h                       |  17 ++
- target/riscv/cpu_cfg.h                        |   2 +
- target/riscv/cpu_helper.c                     | 153 +++++++++++++++++-
- target/riscv/cpu_user.h                       |   1 +
- target/riscv/csr.c                            |  84 ++++++++++
- target/riscv/insn16.decode                    |   4 +
- target/riscv/insn32.decode                    |  26 ++-
- .../riscv/insn_trans/trans_privileged.c.inc   |   8 +-
- target/riscv/insn_trans/trans_rva.c.inc       |  43 ++++-
- target/riscv/insn_trans/trans_rvd.c.inc       |   4 +-
- target/riscv/insn_trans/trans_rvf.c.inc       |   4 +-
- target/riscv/insn_trans/trans_rvh.c.inc       |   8 +-
- target/riscv/insn_trans/trans_rvi.c.inc       |  61 ++++++-
- target/riscv/insn_trans/trans_rvvk.c.inc      |  10 +-
- target/riscv/insn_trans/trans_rvzacas.c.inc   |   4 +-
- target/riscv/insn_trans/trans_rvzfh.c.inc     |   4 +-
- target/riscv/insn_trans/trans_rvzicfiss.c.inc |  75 +++++++++
- target/riscv/insn_trans/trans_svinval.c.inc   |   6 +-
- target/riscv/internals.h                      |   3 +
- target/riscv/machine.c                        |  38 +++++
- target/riscv/op_helper.c                      |  18 +++
- target/riscv/pmp.c                            |   5 +
- target/riscv/pmp.h                            |   3 +-
- target/riscv/tcg/tcg-cpu.c                    |  25 +++
- target/riscv/translate.c                      |  45 +++++-
- 29 files changed, 724 insertions(+), 49 deletions(-)
+ target/riscv/cpu_bits.h                       |  2 +
+ target/riscv/insn32.decode                    | 21 +++++-
+ target/riscv/insn_trans/trans_rva.c.inc       | 39 ++++++++++
+ target/riscv/insn_trans/trans_rvzicfiss.c.inc | 75 +++++++++++++++++++
+ target/riscv/translate.c                      |  5 ++
+ 5 files changed, 140 insertions(+), 2 deletions(-)
  create mode 100644 target/riscv/insn_trans/trans_rvzicfiss.c.inc
 
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index 48ce24dc32..bb62fbe9ec 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -690,6 +690,8 @@ typedef enum RISCVException {
+ 
+ /* zicfilp defines lp violation results in sw check with tval = 2*/
+ #define RISCV_EXCP_SW_CHECK_FCFI_TVAL      2
++/* zicfiss defines ss violation results in sw check with tval = 3*/
++#define RISCV_EXCP_SW_CHECK_BCFI_TVAL      3
+ 
+ #define RISCV_EXCP_INT_FLAG                0x80000000
+ #define RISCV_EXCP_INT_MASK                0x7fffffff
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index 27108b992b..e9139ec1b9 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -246,6 +246,7 @@ remud    0000001 .....  ..... 111 ..... 1111011 @r
+ lr_w       00010 . . 00000 ..... 010 ..... 0101111 @atom_ld
+ sc_w       00011 . . ..... ..... 010 ..... 0101111 @atom_st
+ amoswap_w  00001 . . ..... ..... 010 ..... 0101111 @atom_st
++ssamoswap_w 01001 . . ..... ..... 010 ..... 0101111 @atom_st
+ amoadd_w   00000 . . ..... ..... 010 ..... 0101111 @atom_st
+ amoxor_w   00100 . . ..... ..... 010 ..... 0101111 @atom_st
+ amoand_w   01100 . . ..... ..... 010 ..... 0101111 @atom_st
+@@ -259,6 +260,7 @@ amomaxu_w  11100 . . ..... ..... 010 ..... 0101111 @atom_st
+ lr_d       00010 . . 00000 ..... 011 ..... 0101111 @atom_ld
+ sc_d       00011 . . ..... ..... 011 ..... 0101111 @atom_st
+ amoswap_d  00001 . . ..... ..... 011 ..... 0101111 @atom_st
++ssamoswap_d 01001 . . ..... ..... 011 ..... 0101111 @atom_st
+ amoadd_d   00000 . . ..... ..... 011 ..... 0101111 @atom_st
+ amoxor_d   00100 . . ..... ..... 011 ..... 0101111 @atom_st
+ amoand_d   01100 . . ..... ..... 011 ..... 0101111 @atom_st
+@@ -1022,8 +1024,23 @@ amocas_d    00101 . . ..... ..... 011 ..... 0101111 @atom_st
+ amocas_q    00101 . . ..... ..... 100 ..... 0101111 @atom_st
+ 
+ # *** Zimop may-be-operation extension ***
+-mop_r_n     1 . 00 .. 0111 .. ..... 100 ..... 1110011 @mop5
+-mop_rr_n    1 . 00 .. 1 ..... ..... 100 ..... 1110011 @mop3
++{
++  # zicfiss instructions carved out of mop.r
++  [
++    ssrdp     1100110 11100 00000 100 rd:5  1110011
++    sspopchk  1100110 11100 00001 100 00000 1110011 &r2 rs1=1 rd=0
++    sspopchk  1100110 11100 00101 100 00000 1110011 &r2 rs1=5 rd=0
++  ]
++  mop_r_n    1 . 00 .. 0111 .. ..... 100 ..... 1110011 @mop5
++}
++{
++  # zicfiss instruction carved out of mop.rr
++  [
++    sspush    1100111 00001  00000 100 00000 1110011 &r2_s rs2=1 rs1=0
++    sspush    1100111 00101  00000 100 00000 1110011 &r2_s rs2=5 rs1=0
++  ]
++  mop_rr_n   1 . 00 .. 1 ..... ..... 100 ..... 1110011 @mop3
++}
+ 
+ # *** Zabhb Standard Extension ***
+ amoswap_b  00001 . . ..... ..... 000 ..... 0101111 @atom_st
+diff --git a/target/riscv/insn_trans/trans_rva.c.inc b/target/riscv/insn_trans/trans_rva.c.inc
+index 9cf3ae8019..a2119393a6 100644
+--- a/target/riscv/insn_trans/trans_rva.c.inc
++++ b/target/riscv/insn_trans/trans_rva.c.inc
+@@ -114,6 +114,25 @@ static bool trans_amoswap_w(DisasContext *ctx, arg_amoswap_w *a)
+     return gen_amo(ctx, a, &tcg_gen_atomic_xchg_tl, MO_TESL);
+ }
+ 
++static bool trans_ssamoswap_w(DisasContext *ctx, arg_amoswap_w *a)
++{
++    REQUIRE_A_OR_ZAAMO(ctx);
++    if (!ctx->bcfi_enabled) {
++        return false;
++    }
++
++    TCGv dest = dest_gpr(ctx, a->rd);
++    TCGv src1, src2 = get_gpr(ctx, a->rs2, EXT_NONE);
++
++    decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);
++    src1 = get_address(ctx, a->rs1, 0);
++
++    tcg_gen_atomic_xchg_tl(dest, src1, src2, SS_MMU_INDEX(ctx),
++                           (MO_ALIGN | MO_TESL));
++    gen_set_gpr(ctx, a->rd, dest);
++    return true;
++}
++
+ static bool trans_amoadd_w(DisasContext *ctx, arg_amoadd_w *a)
+ {
+     REQUIRE_A_OR_ZAAMO(ctx);
+@@ -183,6 +202,26 @@ static bool trans_amoswap_d(DisasContext *ctx, arg_amoswap_d *a)
+     return gen_amo(ctx, a, &tcg_gen_atomic_xchg_tl, MO_TEUQ);
+ }
+ 
++static bool trans_ssamoswap_d(DisasContext *ctx, arg_amoswap_w *a)
++{
++    REQUIRE_64BIT(ctx);
++    REQUIRE_A_OR_ZAAMO(ctx);
++    if (!ctx->bcfi_enabled) {
++        return false;
++    }
++
++    TCGv dest = dest_gpr(ctx, a->rd);
++    TCGv src1, src2 = get_gpr(ctx, a->rs2, EXT_NONE);
++
++    decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);
++    src1 = get_address(ctx, a->rs1, 0);
++
++    tcg_gen_atomic_xchg_tl(dest, src1, src2, SS_MMU_INDEX(ctx),
++                           (MO_ALIGN | MO_TESQ));
++    gen_set_gpr(ctx, a->rd, dest);
++    return true;
++}
++
+ static bool trans_amoadd_d(DisasContext *ctx, arg_amoadd_d *a)
+ {
+     REQUIRE_64BIT(ctx);
+diff --git a/target/riscv/insn_trans/trans_rvzicfiss.c.inc b/target/riscv/insn_trans/trans_rvzicfiss.c.inc
+new file mode 100644
+index 0000000000..741459003d
+--- /dev/null
++++ b/target/riscv/insn_trans/trans_rvzicfiss.c.inc
+@@ -0,0 +1,75 @@
++/*
++ * RISC-V translation routines for the Control-Flow Integrity Extension
++ *
++ * Copyright (c) 2024 Rivos Inc.
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++static bool trans_sspopchk(DisasContext *ctx, arg_sspopchk *a)
++{
++    if (!ctx->bcfi_enabled) {
++        return false;
++    }
++
++    TCGv addr = tcg_temp_new();
++    TCGLabel *skip = gen_new_label();
++    uint32_t tmp = (get_xl(ctx) == MXL_RV64) ? 8 : 4;
++    TCGv data = tcg_temp_new();
++    tcg_gen_ld_tl(addr, tcg_env, offsetof(CPURISCVState, ssp));
++    decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);
++    tcg_gen_qemu_ld_tl(data, addr, SS_MMU_INDEX(ctx),
++                       mxl_memop(ctx) | MO_ALIGN);
++    TCGv rs1 = get_gpr(ctx, a->rs1, EXT_NONE);
++    tcg_gen_brcond_tl(TCG_COND_EQ, data, rs1, skip);
++    tcg_gen_st_tl(tcg_constant_tl(RISCV_EXCP_SW_CHECK_BCFI_TVAL),
++                  tcg_env, offsetof(CPURISCVState, sw_check_code));
++    gen_helper_raise_exception(tcg_env,
++                  tcg_constant_i32(RISCV_EXCP_SW_CHECK));
++    gen_set_label(skip);
++    tcg_gen_addi_tl(addr, addr, tmp);
++    tcg_gen_st_tl(addr, tcg_env, offsetof(CPURISCVState, ssp));
++
++    return true;
++}
++
++static bool trans_sspush(DisasContext *ctx, arg_sspush *a)
++{
++    if (!ctx->bcfi_enabled) {
++        return false;
++    }
++
++    TCGv addr = tcg_temp_new();
++    int tmp = (get_xl(ctx) == MXL_RV64) ? -8 : -4;
++    TCGv data = get_gpr(ctx, a->rs2, EXT_NONE);
++    decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);
++    tcg_gen_ld_tl(addr, tcg_env, offsetof(CPURISCVState, ssp));
++    tcg_gen_addi_tl(addr, addr, tmp);
++    tcg_gen_qemu_st_tl(data, addr, SS_MMU_INDEX(ctx),
++                       mxl_memop(ctx) | MO_ALIGN);
++    tcg_gen_st_tl(addr, tcg_env, offsetof(CPURISCVState, ssp));
++
++    return true;
++}
++
++static bool trans_ssrdp(DisasContext *ctx, arg_ssrdp *a)
++{
++    if (!ctx->bcfi_enabled || a->rd == 0) {
++        return false;
++    }
++
++    TCGv dest = dest_gpr(ctx, a->rd);
++    tcg_gen_ld_tl(dest, tcg_env, offsetof(CPURISCVState, ssp));
++    gen_set_gpr(ctx, a->rd, dest);
++
++    return true;
++}
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 9609916807..53ae85b1db 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -144,6 +144,8 @@ static inline bool has_ext(DisasContext *ctx, uint32_t ext)
+ #define get_address_xl(ctx)    ((ctx)->address_xl)
+ #endif
+ 
++#define mxl_memop(ctx) ((get_xl(ctx) + 1) | MO_TE)
++
+ /* The word size for this machine mode. */
+ static inline int __attribute__((unused)) get_xlen(DisasContext *ctx)
+ {
+@@ -1127,6 +1129,8 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
+     return translator_ldl(env, &ctx->base, pc);
+ }
+ 
++#define SS_MMU_INDEX(ctx) (ctx->mem_idx | MMU_IDX_SS_WRITE)
++
+ /* Include insn module translation function */
+ #include "insn_trans/trans_rvi.c.inc"
+ #include "insn_trans/trans_rvm.c.inc"
+@@ -1157,6 +1161,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
+ #include "decode-insn16.c.inc"
+ #include "insn_trans/trans_rvzce.c.inc"
+ #include "insn_trans/trans_rvzcmop.c.inc"
++#include "insn_trans/trans_rvzicfiss.c.inc"
+ 
+ /* Include decoders for factored-out extensions */
+ #include "decode-XVentanaCondOps.c.inc"
 -- 
 2.44.0
 
