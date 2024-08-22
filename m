@@ -4,88 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF35CC52D7C
-	for <qemu-riscv@archiver.kernel.org>; Thu, 22 Aug 2024 00:57:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05243C52D6F
+	for <qemu-riscv@archiver.kernel.org>; Thu, 22 Aug 2024 00:59:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sgw8k-0000kf-Dm; Wed, 21 Aug 2024 20:57:26 -0400
+	id 1sgwAA-0003eF-GY; Wed, 21 Aug 2024 20:58:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sgw8j-0000iy-3y
- for qemu-riscv@nongnu.org; Wed, 21 Aug 2024 20:57:25 -0400
-Received: from mail-pg1-x529.google.com ([2607:f8b0:4864:20::529])
+ (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
+ id 1sgwA4-0003EC-IC
+ for qemu-riscv@nongnu.org; Wed, 21 Aug 2024 20:58:49 -0400
+Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sgw8h-0006Uo-BV
- for qemu-riscv@nongnu.org; Wed, 21 Aug 2024 20:57:24 -0400
-Received: by mail-pg1-x529.google.com with SMTP id
- 41be03b00d2f7-7a1c7857a49so206341a12.1
- for <qemu-riscv@nongnu.org>; Wed, 21 Aug 2024 17:57:21 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
+ id 1sgwA2-0006cT-39
+ for qemu-riscv@nongnu.org; Wed, 21 Aug 2024 20:58:48 -0400
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-20219a0fe4dso2668895ad.2
+ for <qemu-riscv@nongnu.org>; Wed, 21 Aug 2024 17:58:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724288240; x=1724893040; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=1263F4mV4Km5S8FWF7EIKOjU44U7JCrIs1gfANxD3mU=;
- b=KN3BDT8grI/Vqlnmk5/gnyjINs9fp+zc7Jd176AUT5343ZK3CdBYtbyX6pjh2f6iOW
- q0GYP/NGrzocv6AsvicIOdVnNLV+BOygZudBTnyeR6XyrdpFe5yHRcLHh/HbIjZOgniz
- X856hWh615DwbCBgnn09SeRj8RqgZIqZO7WQlP57Cq1M9j2SC7f7ue56PugMj7qjsaGO
- Z5HAxoi2aMdgGZ8bJ2+gUqrgOHakRT7WtEbz3qkzOOSNxDIFdEDLD49rOlchpRIX/p2F
- XFARmMl1aIDFvRq2jDGgtFC2UwUMN08kYw8TSQI9rXqdqYQ1ZYETTfXKNgP/JhkVigTF
- l+uA==
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1724288324; x=1724893124;
+ darn=nongnu.org; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=FZ9mNzRXXo3H0Kel66ss5wgv4zjyYOwEZC5qpxYmQv4=;
+ b=uaUmZHMIkz8npz8Ti1WWzdljry6fV7aZmvmpgCuau6bp6b4Qjb417m/kHcvkhzI8On
+ 44pxyrZg/3j5Ec6QFJi3dfxw5bD7jwcPsqXL2ekDZjRb4erEwrKHPBiKk/bHVLSfyJFM
+ 4vx/b5+l8DBM2Lfx3rMI6+yaEe+FG31U6ICoxWm8NFHwlxC4JKygPgGaMs56hcHfO25p
+ jrKhzrKfo3ePevxsLwlHUUjt9Y6bPJE29XgsPNEzqgVud0Peau4pkbj8Kr9hKGSWakJ5
+ yOhmYosy4QWP5C1QHaAwtfkWdezUvj1o2WqcZaQOR4DgaiQ8ELCxwJjjb64jrG8iGjmk
+ 5hxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724288240; x=1724893040;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=1263F4mV4Km5S8FWF7EIKOjU44U7JCrIs1gfANxD3mU=;
- b=QVDzMBmh0FNYuq78wT1zsVBzkfZ2WHwDVMicigudGzO7Em7kGkIaicfoSHIFC3i9UI
- ot3JmSbrutSou+R9ZYZgP9SfakPtVgx77z+QRp2yOx9IOqhusY4GRsuHQTD2+7Up5hYd
- IZpMWBIF3S+UZW2Svez9K7jK1iN5K/eBzc4zQuaTCh8rPWCB8pAnTYqNK3sB/FbRDeUV
- 4Rzk0jUQn2mrrHstNVYj960VTfNK3Dnvj0FsjZx3Y/ngUIguTYio0VldXDYCOxil2VkD
- 9Mh25I6NOTnYcvs+b5Amd73AV9CO5OLfh6XV0VRqHwqnsY5R+2+7A50Nil1u89cOHGdV
- kt2w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXa3QBzt4eQm2jO7oa8i0xZq3Rx86qNf/2mVxgFMxi2eEDSDaCeECjfn6OhvnJ26PKk0qim65llTdaU@nongnu.org
-X-Gm-Message-State: AOJu0YzW7ONbofCOmzVGBRQLA3k4IuS3PHy+kpxDCfuzpg0ZVLs1JkmH
- cUunOW5vPrA3ShNEjWgRfvdeFUj7fnCtKa0wRfY+IMiUeZ15TgX5f8tt/ZNAPzE=
-X-Google-Smtp-Source: AGHT+IG6PBMktc7XjaT2glIiA03QR0ojwwl77ZJkXaiuGk4NvMXH0wX7yf9Lda6WElPWl1nXCLGWbQ==
-X-Received: by 2002:a17:90b:4a04:b0:2d3:ce99:44b6 with SMTP id
- 98e67ed59e1d1-2d5e9ec96d8mr4277160a91.29.1724288240078; 
- Wed, 21 Aug 2024 17:57:20 -0700 (PDT)
-Received: from [192.168.98.227] (60-242-98-186.static.tpgi.com.au.
- [60.242.98.186]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2d5ebbb009bsm2583228a91.41.2024.08.21.17.57.14
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 21 Aug 2024 17:57:19 -0700 (PDT)
-Message-ID: <85deb108-cac1-492e-89be-0997510fde0b@linaro.org>
-Date: Thu, 22 Aug 2024 10:57:10 +1000
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 13/16] target/riscv: implement zicfiss instructions
-To: Deepak Gupta <debug@rivosinc.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, bmeng.cn@gmail.com,
- liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, jim.shu@sifive.com, andy.chiu@sifive.com,
- kito.cheng@sifive.com
+ d=1e100.net; s=20230601; t=1724288324; x=1724893124;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=FZ9mNzRXXo3H0Kel66ss5wgv4zjyYOwEZC5qpxYmQv4=;
+ b=vdDv1KRIShOEiDwfpRFThWOqClTvfkTsdhFxSEo86QRSVqDtxWKeMfDtyIFQNA2jP+
+ EFjy9hUQ+DG2B1+L/S6COV9uHDEXmqb8SEng41Ou/PDl5yuqTJ2yQziX91Cknkmkq4Nl
+ WBwmA/lsVaJ6TuFwRcRa9MsK0oE5GSl+zBrJ3hsjemiXYOveWku3Tj+ezJRlUQ4eb1ih
+ nlcBuAcSUsGGf1O+DaHdLFIIZACnJtKOnA9g/8Hka45mna2DG35fG3/VAJBlity4A8D2
+ Fy3mUvTLu9wgh/1OrRoIf1Ol23EnGZtDnhEIcQQ4AXIsWjmVuOPxq9Ebo34pZbl3RHCp
+ YqsQ==
+X-Gm-Message-State: AOJu0Yy5xj92W5UaageMeS0JPCrm6EKdnr1DZsqQpIu0d2//N7KeLik8
+ sRjXLzQTnCr+bqIKLOOR4cOQ5BNFxcSz8Wt9eRlvnUV12TktLjaN8pYF5BINnxc=
+X-Google-Smtp-Source: AGHT+IFbdjFTIWaGURgm1m+PY9G11gjeCca3kPG+rHtvOs5Npr7yZFN6k6hlPIetgMWZAYLWzwlvww==
+X-Received: by 2002:a17:902:d4c6:b0:202:4079:1c19 with SMTP id
+ d9443c01a7336-20367c07defmr40878535ad.14.1724288323363; 
+ Wed, 21 Aug 2024 17:58:43 -0700 (PDT)
+Received: from debug.ba.rivosinc.com ([64.71.180.162])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-20385fcff06sm1859455ad.308.2024.08.21.17.58.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 21 Aug 2024 17:58:43 -0700 (PDT)
+Date: Wed, 21 Aug 2024 17:58:41 -0700
+From: Deepak Gupta <debug@rivosinc.com>
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com,
+ Alistair.Francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ jim.shu@sifive.com, andy.chiu@sifive.com, kito.cheng@sifive.com
+Subject: Re: [PATCH v6 12/16] target/riscv: AMO operations always raise
+ store/AMO fault
+Message-ID: <ZsaNQcdSJM9lSVoX@debug.ba.rivosinc.com>
 References: <20240821215014.3859190-1-debug@rivosinc.com>
- <20240821215014.3859190-14-debug@rivosinc.com>
-Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240821215014.3859190-14-debug@rivosinc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::529;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x529.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ <20240821215014.3859190-13-debug@rivosinc.com>
+ <fbe42e3d-0622-46b4-93eb-ddb13bd4814f@linaro.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <fbe42e3d-0622-46b4-93eb-ddb13bd4814f@linaro.org>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
+ envelope-from=debug@rivosinc.com; helo=mail-pl1-x634.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -102,30 +99,108 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 8/22/24 07:50, Deepak Gupta wrote:
-> --- a/target/riscv/insn_trans/trans_rva.c.inc
-> +++ b/target/riscv/insn_trans/trans_rva.c.inc
-> @@ -18,6 +18,8 @@
->    * this program.  If not, see <http://www.gnu.org/licenses/>.
->    */
->   
-> +#include "exec/memop.h"
-> +
+On Thu, Aug 22, 2024 at 10:43:05AM +1000, Richard Henderson wrote:
+>On 8/22/24 07:50, Deepak Gupta wrote:
+>>@@ -1779,13 +1780,25 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>>              env->pc += 4;
+>>              return;
+>>          case RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT:
+>>+            if (always_storeamo) {
+>>+                cause = RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT;
+>>+            }
+>>+            goto load_store_fault;
+>>          case RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT:
+>>          case RISCV_EXCP_LOAD_ADDR_MIS:
+>>          case RISCV_EXCP_STORE_AMO_ADDR_MIS:
+>>          case RISCV_EXCP_LOAD_ACCESS_FAULT:
+>>+            if (always_storeamo) {
+>>+                cause = RISCV_EXCP_STORE_AMO_ACCESS_FAULT;
+>>+            }
+>>+            goto load_store_fault;
+>>          case RISCV_EXCP_STORE_AMO_ACCESS_FAULT:
+>>          case RISCV_EXCP_LOAD_PAGE_FAULT:
+>>          case RISCV_EXCP_STORE_PAGE_FAULT:
+>>+            if (always_storeamo) {
+>>+                cause = RISCV_EXCP_STORE_PAGE_FAULT;
+>>+            }
+>>+        load_store_fault:
+>
+>These case labels need to be re-sorted;
 
-Why?  This will have been done long ago, within the includes of translate.c, the parent of 
-this file.
+Yeah it looks ugly but I didn't know what's expected. I'll sort cases.
 
-> +static bool trans_ssrdp(DisasContext *ctx, arg_ssrdp *a)
-> +{
-> +    if (!ctx->bcfi_enabled || a->rd == 0) {
-> +        return false;
-> +    }
-> +
-> +    TCGv dest = tcg_temp_new();
+>you're mising load/store when you're intending to check for load alone.  
 
-dest = dest_gpr(ctx, a->rd);
+I didn't get this.
 
+>I expect LOAD_ADDR_MIS  needs adjustment as well?
 
+Hmm atleast for shadow stack, spec says never raise misaligned and raise
+access fault. Not sure what's the behavior for Atomic memory operations.
 
-r~
+>
+>>diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+>>index d44103a273..8961dda244 100644
+>>--- a/target/riscv/translate.c
+>>+++ b/target/riscv/translate.c
+>>@@ -121,6 +121,7 @@ typedef struct DisasContext {
+>>      bool fcfi_lp_expected;
+>>      /* zicfiss extension, if shadow stack was enabled during TB gen */
+>>      bool bcfi_enabled;
+>>+    target_ulong excp_uw2;
+>>  } DisasContext;
+>>  static inline bool has_ext(DisasContext *ctx, uint32_t ext)
+>>@@ -144,6 +145,9 @@ static inline bool has_ext(DisasContext *ctx, uint32_t ext)
+>>  #define get_address_xl(ctx)    ((ctx)->address_xl)
+>>  #endif
+>>+#define SET_INSTR_ALWAYS_STORE_AMO(ctx) \
+>>+    (ctx->excp_uw2 |= RISCV_UW2_ALWAYS_STORE_AMO)
+>>+
+>>  /* The word size for this machine mode. */
+>>  static inline int __attribute__((unused)) get_xlen(DisasContext *ctx)
+>>  {
+>>@@ -214,6 +218,12 @@ static void decode_save_opc(DisasContext *ctx)
+>>      assert(!ctx->insn_start_updated);
+>>      ctx->insn_start_updated = true;
+>>      tcg_set_insn_start_param(ctx->base.insn_start, 1, ctx->opcode);
+>>+
+>>+    if (ctx->excp_uw2) {
+>>+        tcg_set_insn_start_param(ctx->base.insn_start, 2,
+>>+                                 ctx->excp_uw2);
+>>+        ctx->excp_uw2 = 0;
+>>+    }
+>
+>I really don't think having data on the side like this...
+
+Ok.
+
+>
+>>  }
+>>  static void gen_pc_plus_diff(TCGv target, DisasContext *ctx,
+>>@@ -1096,6 +1106,7 @@ static bool gen_amo(DisasContext *ctx, arg_atomic *a,
+>>          mop |= MO_ALIGN;
+>>      }
+>>+    SET_INSTR_ALWAYS_STORE_AMO(ctx);
+>>      decode_save_opc(ctx);
+>
+>... or the requirement for ordering of two function calls is a good interface.
+>
+>I did say perhaps add another helper, but what I expected was
+>
+>    decode_save_opc_set_amo_store(ctx);
+>
+>where decode_save_opc and decode_save_opc_set_amo_store call into a common helper.
+>But perhaps in the end maybe just decode_save_opc(ctx, uw2) is better.
+>
+>I expect gen_cmpxchg also needs updating, though I don't have Zacas to hand.
+
+I prefer decode_save_opc(ctx, uw2) but then
+
+$git grep decode_save_opc | wc -l       
+38
+
+I can update all these locations but it'll be handful.
+>
+>
+>r~
 
