@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD0BCC5320E
-	for <qemu-riscv@archiver.kernel.org>; Thu, 22 Aug 2024 08:28:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1601CC5321D
+	for <qemu-riscv@archiver.kernel.org>; Thu, 22 Aug 2024 08:28:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sh38K-0005Rv-TE; Thu, 22 Aug 2024 04:25:29 -0400
+	id 1sh38P-0005on-T9; Thu, 22 Aug 2024 04:25:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sh38F-00058q-6G
- for qemu-riscv@nongnu.org; Thu, 22 Aug 2024 04:25:23 -0400
-Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
+ id 1sh38M-0005Yt-Fk
+ for qemu-riscv@nongnu.org; Thu, 22 Aug 2024 04:25:30 -0400
+Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sh386-0005xy-II
- for qemu-riscv@nongnu.org; Thu, 22 Aug 2024 04:25:22 -0400
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-1fee6435a34so3689615ad.0
- for <qemu-riscv@nongnu.org>; Thu, 22 Aug 2024 01:25:14 -0700 (PDT)
+ id 1sh38H-00060J-9V
+ for qemu-riscv@nongnu.org; Thu, 22 Aug 2024 04:25:30 -0400
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-201cd78c6a3so3827785ad.1
+ for <qemu-riscv@nongnu.org>; Thu, 22 Aug 2024 01:25:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1724315113; x=1724919913;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1724315122; x=1724919922;
  darn=nongnu.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=50q5Siv/hibhU5AFD1C36qpbeF2JrxEIUbKXBjqk5Tw=;
- b=zdVuO3m0OB7Eh7kESRmANAhmfV1tt07UOiFiMBYKNnN58x4GUz9+s3t18ChR1Rmoma
- akVIWQ/ficxd9HJMJFKWWbbBHbAAZ8g6ypb7w45D9B1IgeFw4QYViC1XeJ3+rHxpHRCG
- vyBMYP8mKZqnxvrJRNAqkVA1fUYyPVspT7h+fs3sEvl0vUUgOYkwEdEgRLBoUipIJXsh
- 9ymztDO0L/8qhyTV8y1rruD5C3ASubFy3uE9RzxFx1SzZHf9wSGFkgMPKTmxrKh1J0mW
- vLwsMelLq8ObMtTcTWN2bpOzRWA3rZmAxMUv1dQMFnsGRfMNGT73JkumJMbBhdUwPFLA
- nH8w==
+ bh=auYMRi5RXVmv3XPaM8GhsTsD+G7qydjW5DfJQQwPXGs=;
+ b=suDm3ghCeBD6M6qLblvRLf77ra+KiSGAUbfsbXZ2S0Qk2eW1dwmRoN3dUAijTjLTff
+ knLukwFb7U0V46yLuYFr2zoqZn5DtZTh81y9T3I0Ybxd3QubUzrgdHC8kBbaQZkPq6vo
+ fvcI8ImGjUQfzlzJZQPfsACsYFqL+1nsJgPOWhBX0umYnZSqDgZ60Im0+6SuFKrkYG7z
+ IfV+Yf2B6oA+JaY9NdW4rLFMHNZG48saUxpFbQqqxMi04wHDtmde+x6+4FnIr3D3XGgX
+ Rb1hZsurnODuZ9tQ4W8dOM7+FxVksl0U/hZKO/eE/KtAc2ixPwmJHrIkO4Qm5pUmNRcz
+ PZaA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724315113; x=1724919913;
+ d=1e100.net; s=20230601; t=1724315122; x=1724919922;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=50q5Siv/hibhU5AFD1C36qpbeF2JrxEIUbKXBjqk5Tw=;
- b=mfjYmJMEVXwj7MuMctPp62laLdFqndGORUH1UAzr18zrF0Md3uhhfHNFJ/vNnjlW2a
- DrdUeBZYf3Ac323scT9Q117F6ZTWLEzWj2uttE5Qb5ngGsblA4D1Q7/ajljfJRWNJXUL
- rcIgp3XgyIL+0kj3z/MKM4U6tobHVNqdJlZ2ze50bgvL3DgoZ2SBtIjBXxwFwOQIEjfW
- l+C2PyFjKN4CoEtzk6g8p93ZZWNPKzLPF3+vUyuecwx+YWa4tgqVw3EQNJ3ug/R+3LDo
- /HHc+9um4dqEd+2OozVuPxRVioVw2K8+xrWq3soZlqg2aJhG54ojBUFxPcd2stiOU65/
- oj4g==
-X-Gm-Message-State: AOJu0YzLXrNQzXV5XDKxYATO4/UGSUJDq/M+juOd/HkrCsQyn1dwxlCf
- mdgHVvFqUeMUoVrZt7okbiS36zHCTanySwnGRxIVFxupyjsrxHx2DP3ScO+6azQuDXf09uObsLC
- 1
-X-Google-Smtp-Source: AGHT+IGb0+o3ObNFIoBvM8J1yuVQ00zjw6dH7tmaI/Fq7LJG3B39E7Gyk+iqhPYxQzjxB3Aa7GoYOg==
-X-Received: by 2002:a17:903:32c8:b0:1fb:37fa:fedb with SMTP id
- d9443c01a7336-20367d3f85dmr60433755ad.10.1724315112915; 
- Thu, 22 Aug 2024 01:25:12 -0700 (PDT)
+ bh=auYMRi5RXVmv3XPaM8GhsTsD+G7qydjW5DfJQQwPXGs=;
+ b=bFjOGyXb11M9wAzcEe9pIpLbRV4PpwO6fS3PrvldiTU8C3+GPq9epn2P17mOkJMRfb
+ ogo5R/le8t5jDT6kSFaZ7qSgE18UI/8B4gOg4fj6GP/zxQiRlV4xq+yNFOvtPJk+U2QW
+ gNSf7c987YHeaKW0DZmQZnxWSAUlMKcD8hPMaWtgQ/CQzSLMOQHnpw5bZocgy8w86iza
+ 3W1PwQfiCk7LCkuM687jaKWl7m2s8qPnAEfYGzVl+zklc6L0oqt9uQKHFwirUtmUQQvX
+ iDirFm5SrKUAIuB0e4ZlBhNMKjfd3WDtTSYNPZCFPSn19L+uo0l4h3xBpopYDQtluJoz
+ xOug==
+X-Gm-Message-State: AOJu0Yx4AqezvXO1afvl96nFP2WWAOk5L6m5C6dUFRxT7vAomK27OA4l
+ mb2g5UocsMKc1FI2+8cDBS2mi6cw8htCMZqnTp8vWBzRLImDIZz+uUqJMcGgBFtLr0N52k8A/cX
+ a
+X-Google-Smtp-Source: AGHT+IGk7tqmri0c5klYffnL7DDFH1uxnnwiULfHFyfjTyU/bAxmed3VfQrwcS1bafPG/VxVm1sTnw==
+X-Received: by 2002:a17:903:2301:b0:201:f70a:7492 with SMTP id
+ d9443c01a7336-20368198b3cmr57571175ad.53.1724315121725; 
+ Thu, 22 Aug 2024 01:25:21 -0700 (PDT)
 Received: from debug.ba.rivosinc.com ([64.71.180.162])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-20385589225sm7641295ad.115.2024.08.22.01.25.11
+ d9443c01a7336-20385589225sm7641295ad.115.2024.08.22.01.25.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 Aug 2024 01:25:12 -0700 (PDT)
+ Thu, 22 Aug 2024 01:25:21 -0700 (PDT)
 From: Deepak Gupta <debug@rivosinc.com>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
 Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, bmeng.cn@gmail.com,
  liwei1518@gmail.com, dbarboza@ventanamicro.com,
  zhiwei_liu@linux.alibaba.com, jim.shu@sifive.com, andy.chiu@sifive.com,
- kito.cheng@sifive.com, Deepak Gupta <debug@rivosinc.com>,
- Richard Henderson <richard.henderson@linaro.org>
-Subject: [PATCH v7 05/17] target/riscv: tracking indirect branches (fcfi) for
- zicfilp
-Date: Thu, 22 Aug 2024 01:24:51 -0700
-Message-ID: <20240822082504.3979610-6-debug@rivosinc.com>
+ kito.cheng@sifive.com, Deepak Gupta <debug@rivosinc.com>
+Subject: [PATCH v7 13/17] target/riscv: update `decode_save_opc` to store
+ extra word2
+Date: Thu, 22 Aug 2024 01:24:59 -0700
+Message-ID: <20240822082504.3979610-14-debug@rivosinc.com>
 X-Mailer: git-send-email 2.45.0
 In-Reply-To: <20240822082504.3979610-1-debug@rivosinc.com>
 References: <20240822082504.3979610-1-debug@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
- envelope-from=debug@rivosinc.com; helo=mail-pl1-x631.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
+ envelope-from=debug@rivosinc.com; helo=mail-pl1-x62a.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -101,128 +100,381 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-zicfilp protects forward control flow (if enabled) by enforcing all
-indirect call and jmp must land on a landing pad instruction `lpad`. If
-target of an indirect call or jmp is not `lpad` then cpu/hart must raise
-a sw check exception with tval = 2.
-
-This patch implements the mechanism using TCG. Target architecture branch
-instruction must define the end of a TB. Using this property, during
-translation of branch instruction, TB flag = FCFI_LP_EXPECTED can be set.
-Translation of target TB can check if FCFI_LP_EXPECTED flag is set and a
-flag (fcfi_lp_expected) can be set in DisasContext. If `lpad` gets
-translated, fcfi_lp_expected flag in DisasContext can be cleared. Else
-it'll fault.
+Extra word 2 is stored during tcg compile and `decode_save_opc` needs
+additional argument in order to pass the value. This will be used during
+unwind to get extra information about instruction like how to massage
+exceptions. Updated all callsites as well.
 
 Signed-off-by: Deepak Gupta <debug@rivosinc.com>
-Co-developed-by: Jim Shu <jim.shu@sifive.com>
-Co-developed-by: Andy Chiu <andy.chiu@sifive.com>
-Suggested-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/cpu.h        |  3 +++
- target/riscv/cpu_bits.h   |  3 +++
- target/riscv/cpu_helper.c | 10 ++++++++++
- target/riscv/translate.c  | 23 +++++++++++++++++++++++
- 4 files changed, 39 insertions(+)
+ target/riscv/insn_trans/trans_privileged.c.inc |  8 ++++----
+ target/riscv/insn_trans/trans_rva.c.inc        |  4 ++--
+ target/riscv/insn_trans/trans_rvd.c.inc        |  4 ++--
+ target/riscv/insn_trans/trans_rvf.c.inc        |  4 ++--
+ target/riscv/insn_trans/trans_rvh.c.inc        |  8 ++++----
+ target/riscv/insn_trans/trans_rvi.c.inc        |  6 +++---
+ target/riscv/insn_trans/trans_rvvk.c.inc       | 10 +++++-----
+ target/riscv/insn_trans/trans_rvzacas.c.inc    |  4 ++--
+ target/riscv/insn_trans/trans_rvzfh.c.inc      |  4 ++--
+ target/riscv/insn_trans/trans_svinval.c.inc    |  6 +++---
+ target/riscv/translate.c                       | 11 ++++++-----
+ 11 files changed, 35 insertions(+), 34 deletions(-)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 11c6513a90..edf540339a 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -606,6 +606,9 @@ FIELD(TB_FLAGS, ITRIGGER, 22, 1)
- FIELD(TB_FLAGS, VIRT_ENABLED, 23, 1)
- FIELD(TB_FLAGS, PRIV, 24, 2)
- FIELD(TB_FLAGS, AXL, 26, 2)
-+/* zicfilp needs a TB flag to track indirect branches */
-+FIELD(TB_FLAGS, FCFI_ENABLED, 28, 1)
-+FIELD(TB_FLAGS, FCFI_LP_EXPECTED, 29, 1)
+diff --git a/target/riscv/insn_trans/trans_privileged.c.inc b/target/riscv/insn_trans/trans_privileged.c.inc
+index bc5263a4e0..ecd3b8b2c9 100644
+--- a/target/riscv/insn_trans/trans_privileged.c.inc
++++ b/target/riscv/insn_trans/trans_privileged.c.inc
+@@ -78,7 +78,7 @@ static bool trans_sret(DisasContext *ctx, arg_sret *a)
+ {
+ #ifndef CONFIG_USER_ONLY
+     if (has_ext(ctx, RVS)) {
+-        decode_save_opc(ctx);
++        decode_save_opc(ctx, 0);
+         translator_io_start(&ctx->base);
+         gen_helper_sret(cpu_pc, tcg_env);
+         exit_tb(ctx); /* no chaining */
+@@ -95,7 +95,7 @@ static bool trans_sret(DisasContext *ctx, arg_sret *a)
+ static bool trans_mret(DisasContext *ctx, arg_mret *a)
+ {
+ #ifndef CONFIG_USER_ONLY
+-    decode_save_opc(ctx);
++    decode_save_opc(ctx, 0);
+     translator_io_start(&ctx->base);
+     gen_helper_mret(cpu_pc, tcg_env);
+     exit_tb(ctx); /* no chaining */
+@@ -109,7 +109,7 @@ static bool trans_mret(DisasContext *ctx, arg_mret *a)
+ static bool trans_wfi(DisasContext *ctx, arg_wfi *a)
+ {
+ #ifndef CONFIG_USER_ONLY
+-    decode_save_opc(ctx);
++    decode_save_opc(ctx, 0);
+     gen_update_pc(ctx, ctx->cur_insn_len);
+     gen_helper_wfi(tcg_env);
+     return true;
+@@ -121,7 +121,7 @@ static bool trans_wfi(DisasContext *ctx, arg_wfi *a)
+ static bool trans_sfence_vma(DisasContext *ctx, arg_sfence_vma *a)
+ {
+ #ifndef CONFIG_USER_ONLY
+-    decode_save_opc(ctx);
++    decode_save_opc(ctx, 0);
+     gen_helper_tlb_flush(tcg_env);
+     return true;
+ #endif
+diff --git a/target/riscv/insn_trans/trans_rva.c.inc b/target/riscv/insn_trans/trans_rva.c.inc
+index 39bbf60f3c..9cf3ae8019 100644
+--- a/target/riscv/insn_trans/trans_rva.c.inc
++++ b/target/riscv/insn_trans/trans_rva.c.inc
+@@ -34,7 +34,7 @@ static bool gen_lr(DisasContext *ctx, arg_atomic *a, MemOp mop)
+ {
+     TCGv src1;
  
- #ifdef TARGET_RISCV32
- #define riscv_cpu_mxl(env)  ((void)(env), MXL_RV32)
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index b05ebe6f29..900769ce60 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -685,6 +685,9 @@ typedef enum RISCVException {
-     RISCV_EXCP_SEMIHOST = 0x3f,
- } RISCVException;
+-    decode_save_opc(ctx);
++    decode_save_opc(ctx, 0);
+     src1 = get_address(ctx, a->rs1, 0);
+     if (a->rl) {
+         tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL);
+@@ -61,7 +61,7 @@ static bool gen_sc(DisasContext *ctx, arg_atomic *a, MemOp mop)
+     TCGLabel *l1 = gen_new_label();
+     TCGLabel *l2 = gen_new_label();
  
-+/* zicfilp defines lp violation results in sw check with tval = 2*/
-+#define RISCV_EXCP_SW_CHECK_FCFI_TVAL      2
-+
- #define RISCV_EXCP_INT_FLAG                0x80000000
- #define RISCV_EXCP_INT_MASK                0x7fffffff
+-    decode_save_opc(ctx);
++    decode_save_opc(ctx, 0);
+     src1 = get_address(ctx, a->rs1, 0);
+     tcg_gen_brcond_tl(TCG_COND_NE, load_res, src1, l1);
  
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 9f08a67a9e..6271b86942 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -133,6 +133,16 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
-         flags = FIELD_DP32(flags, TB_FLAGS, VILL, 1);
+diff --git a/target/riscv/insn_trans/trans_rvd.c.inc b/target/riscv/insn_trans/trans_rvd.c.inc
+index 1f5fac65a2..d779ec75c7 100644
+--- a/target/riscv/insn_trans/trans_rvd.c.inc
++++ b/target/riscv/insn_trans/trans_rvd.c.inc
+@@ -51,7 +51,7 @@ static bool trans_fld(DisasContext *ctx, arg_fld *a)
+         memop |= MO_ATOM_WITHIN16;
      }
  
-+    if (cpu_get_fcfien(env)) {
-+        /*
-+         * For Forward CFI, only the expectation of a lpad at
-+         * the start of the block is tracked via env->elp. env->elp
-+         * is turned on during jalr translation.
-+         */
-+        flags = FIELD_DP32(flags, TB_FLAGS, FCFI_LP_EXPECTED, env->elp);
-+        flags = FIELD_DP32(flags, TB_FLAGS, FCFI_ENABLED, 1);
-+    }
-+
- #ifdef CONFIG_USER_ONLY
-     fs = EXT_STATUS_DIRTY;
-     vs = EXT_STATUS_DIRTY;
+-    decode_save_opc(ctx);
++    decode_save_opc(ctx, 0);
+     addr = get_address(ctx, a->rs1, a->imm);
+     tcg_gen_qemu_ld_i64(cpu_fpr[a->rd], addr, ctx->mem_idx, memop);
+ 
+@@ -71,7 +71,7 @@ static bool trans_fsd(DisasContext *ctx, arg_fsd *a)
+         memop |= MO_ATOM_WITHIN16;
+     }
+ 
+-    decode_save_opc(ctx);
++    decode_save_opc(ctx, 0);
+     addr = get_address(ctx, a->rs1, a->imm);
+     tcg_gen_qemu_st_i64(cpu_fpr[a->rs2], addr, ctx->mem_idx, memop);
+     return true;
+diff --git a/target/riscv/insn_trans/trans_rvf.c.inc b/target/riscv/insn_trans/trans_rvf.c.inc
+index f771aa1939..084c184e65 100644
+--- a/target/riscv/insn_trans/trans_rvf.c.inc
++++ b/target/riscv/insn_trans/trans_rvf.c.inc
+@@ -52,7 +52,7 @@ static bool trans_flw(DisasContext *ctx, arg_flw *a)
+         memop |= MO_ATOM_WITHIN16;
+     }
+ 
+-    decode_save_opc(ctx);
++    decode_save_opc(ctx, 0);
+     addr = get_address(ctx, a->rs1, a->imm);
+     dest = cpu_fpr[a->rd];
+     tcg_gen_qemu_ld_i64(dest, addr, ctx->mem_idx, memop);
+@@ -74,7 +74,7 @@ static bool trans_fsw(DisasContext *ctx, arg_fsw *a)
+         memop |= MO_ATOM_WITHIN16;
+     }
+ 
+-    decode_save_opc(ctx);
++    decode_save_opc(ctx, 0);
+     addr = get_address(ctx, a->rs1, a->imm);
+     tcg_gen_qemu_st_i64(cpu_fpr[a->rs2], addr, ctx->mem_idx, memop);
+     return true;
+diff --git a/target/riscv/insn_trans/trans_rvh.c.inc b/target/riscv/insn_trans/trans_rvh.c.inc
+index aa9d41c18c..03c6694430 100644
+--- a/target/riscv/insn_trans/trans_rvh.c.inc
++++ b/target/riscv/insn_trans/trans_rvh.c.inc
+@@ -44,7 +44,7 @@ static bool do_hlv(DisasContext *ctx, arg_r2 *a,
+     TCGv dest = dest_gpr(ctx, a->rd);
+     TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
+ 
+-    decode_save_opc(ctx);
++    decode_save_opc(ctx, 0);
+     func(dest, tcg_env, addr);
+     gen_set_gpr(ctx, a->rd, dest);
+     return true;
+@@ -56,7 +56,7 @@ static bool do_hsv(DisasContext *ctx, arg_r2_s *a,
+     TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
+     TCGv data = get_gpr(ctx, a->rs2, EXT_NONE);
+ 
+-    decode_save_opc(ctx);
++    decode_save_opc(ctx, 0);
+     func(tcg_env, addr, data);
+     return true;
+ }
+@@ -147,7 +147,7 @@ static bool trans_hfence_gvma(DisasContext *ctx, arg_sfence_vma *a)
+ {
+     REQUIRE_EXT(ctx, RVH);
+ #ifndef CONFIG_USER_ONLY
+-    decode_save_opc(ctx);
++    decode_save_opc(ctx, 0);
+     gen_helper_hyp_gvma_tlb_flush(tcg_env);
+     return true;
+ #endif
+@@ -158,7 +158,7 @@ static bool trans_hfence_vvma(DisasContext *ctx, arg_sfence_vma *a)
+ {
+     REQUIRE_EXT(ctx, RVH);
+ #ifndef CONFIG_USER_ONLY
+-    decode_save_opc(ctx);
++    decode_save_opc(ctx, 0);
+     gen_helper_hyp_tlb_flush(tcg_env);
+     return true;
+ #endif
+diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
+index b427f3a939..a619ea7c0e 100644
+--- a/target/riscv/insn_trans/trans_rvi.c.inc
++++ b/target/riscv/insn_trans/trans_rvi.c.inc
+@@ -326,7 +326,7 @@ static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
+     if (ctx->cfg_ptr->ext_zama16b && (ctx->cur_insn_len != 2)) {
+         memop |= MO_ATOM_WITHIN16;
+     }
+-    decode_save_opc(ctx);
++    decode_save_opc(ctx, 0);
+     if (get_xl(ctx) == MXL_RV128) {
+         out = gen_load_i128(ctx, a, memop);
+     } else {
+@@ -427,7 +427,7 @@ static bool gen_store(DisasContext *ctx, arg_sb *a, MemOp memop)
+     if (ctx->cfg_ptr->ext_zama16b && (ctx->cur_insn_len != 2)) {
+         memop |= MO_ATOM_WITHIN16;
+     }
+-    decode_save_opc(ctx);
++    decode_save_opc(ctx, 0);
+     if (get_xl(ctx) == MXL_RV128) {
+         return gen_store_i128(ctx, a, memop);
+     } else {
+@@ -889,7 +889,7 @@ static bool trans_fence_i(DisasContext *ctx, arg_fence_i *a)
+ static bool do_csr_post(DisasContext *ctx)
+ {
+     /* The helper may raise ILLEGAL_INSN -- record binv for unwind. */
+-    decode_save_opc(ctx);
++    decode_save_opc(ctx, 0);
+     /* We may have changed important cpu state -- exit to main loop. */
+     gen_update_pc(ctx, ctx->cur_insn_len);
+     exit_tb(ctx);
+diff --git a/target/riscv/insn_trans/trans_rvvk.c.inc b/target/riscv/insn_trans/trans_rvvk.c.inc
+index ae1f40174a..27bf3f0b68 100644
+--- a/target/riscv/insn_trans/trans_rvvk.c.inc
++++ b/target/riscv/insn_trans/trans_rvvk.c.inc
+@@ -249,7 +249,7 @@ GEN_OPIVI_WIDEN_TRANS(vwsll_vi, IMM_ZX, vwsll_vx, vwsll_vx_check)
+                                                                               \
+             if (!s->vstart_eq_zero || !s->vl_eq_vlmax) {                      \
+                 /* save opcode for unwinding in case we throw an exception */ \
+-                decode_save_opc(s);                                           \
++                decode_save_opc(s, 0);                                        \
+                 egs = tcg_constant_i32(EGS);                                  \
+                 gen_helper_egs_check(egs, tcg_env);                           \
+             }                                                                 \
+@@ -322,7 +322,7 @@ GEN_V_UNMASKED_TRANS(vaesem_vs, vaes_check_vs, ZVKNED_EGS)
+                                                                               \
+             if (!s->vstart_eq_zero || !s->vl_eq_vlmax) {                      \
+                 /* save opcode for unwinding in case we throw an exception */ \
+-                decode_save_opc(s);                                           \
++                decode_save_opc(s, 0);                                        \
+                 egs = tcg_constant_i32(EGS);                                  \
+                 gen_helper_egs_check(egs, tcg_env);                           \
+             }                                                                 \
+@@ -389,7 +389,7 @@ GEN_VI_UNMASKED_TRANS(vaeskf2_vi, vaeskf2_check, ZVKNED_EGS)
+                                                                               \
+             if (!s->vstart_eq_zero || !s->vl_eq_vlmax) {                      \
+                 /* save opcode for unwinding in case we throw an exception */ \
+-                decode_save_opc(s);                                           \
++                decode_save_opc(s, 0);                                        \
+                 egs = tcg_constant_i32(EGS);                                  \
+                 gen_helper_egs_check(egs, tcg_env);                           \
+             }                                                                 \
+@@ -440,7 +440,7 @@ static bool trans_vsha2cl_vv(DisasContext *s, arg_rmrr *a)
+ 
+         if (!s->vstart_eq_zero || !s->vl_eq_vlmax) {
+             /* save opcode for unwinding in case we throw an exception */
+-            decode_save_opc(s);
++            decode_save_opc(s, 0);
+             egs = tcg_constant_i32(ZVKNH_EGS);
+             gen_helper_egs_check(egs, tcg_env);
+         }
+@@ -471,7 +471,7 @@ static bool trans_vsha2ch_vv(DisasContext *s, arg_rmrr *a)
+ 
+         if (!s->vstart_eq_zero || !s->vl_eq_vlmax) {
+             /* save opcode for unwinding in case we throw an exception */
+-            decode_save_opc(s);
++            decode_save_opc(s, 0);
+             egs = tcg_constant_i32(ZVKNH_EGS);
+             gen_helper_egs_check(egs, tcg_env);
+         }
+diff --git a/target/riscv/insn_trans/trans_rvzacas.c.inc b/target/riscv/insn_trans/trans_rvzacas.c.inc
+index fcced99fc7..15e688a033 100644
+--- a/target/riscv/insn_trans/trans_rvzacas.c.inc
++++ b/target/riscv/insn_trans/trans_rvzacas.c.inc
+@@ -76,7 +76,7 @@ static bool gen_cmpxchg64(DisasContext *ctx, arg_atomic *a, MemOp mop)
+     TCGv src1 = get_address(ctx, a->rs1, 0);
+     TCGv_i64 src2 = get_gpr_pair(ctx, a->rs2);
+ 
+-    decode_save_opc(ctx);
++    decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);
+     tcg_gen_atomic_cmpxchg_i64(dest, src1, dest, src2, ctx->mem_idx, mop);
+ 
+     gen_set_gpr_pair(ctx, a->rd, dest);
+@@ -121,7 +121,7 @@ static bool trans_amocas_q(DisasContext *ctx, arg_amocas_q *a)
+ 
+     tcg_gen_concat_i64_i128(src2, src2l, src2h);
+     tcg_gen_concat_i64_i128(dest, destl, desth);
+-    decode_save_opc(ctx);
++    decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);
+     tcg_gen_atomic_cmpxchg_i128(dest, src1, dest, src2, ctx->mem_idx,
+                                 (MO_ALIGN | MO_TEUO));
+ 
+diff --git a/target/riscv/insn_trans/trans_rvzfh.c.inc b/target/riscv/insn_trans/trans_rvzfh.c.inc
+index 1eb458b491..bece48e600 100644
+--- a/target/riscv/insn_trans/trans_rvzfh.c.inc
++++ b/target/riscv/insn_trans/trans_rvzfh.c.inc
+@@ -48,7 +48,7 @@ static bool trans_flh(DisasContext *ctx, arg_flh *a)
+     REQUIRE_FPU;
+     REQUIRE_ZFHMIN_OR_ZFBFMIN(ctx);
+ 
+-    decode_save_opc(ctx);
++    decode_save_opc(ctx, 0);
+     t0 = get_gpr(ctx, a->rs1, EXT_NONE);
+     if (a->imm) {
+         TCGv temp = tcg_temp_new();
+@@ -71,7 +71,7 @@ static bool trans_fsh(DisasContext *ctx, arg_fsh *a)
+     REQUIRE_FPU;
+     REQUIRE_ZFHMIN_OR_ZFBFMIN(ctx);
+ 
+-    decode_save_opc(ctx);
++    decode_save_opc(ctx, 0);
+     t0 = get_gpr(ctx, a->rs1, EXT_NONE);
+     if (a->imm) {
+         TCGv temp = tcg_temp_new();
+diff --git a/target/riscv/insn_trans/trans_svinval.c.inc b/target/riscv/insn_trans/trans_svinval.c.inc
+index 0f692a1088..a06c3b214f 100644
+--- a/target/riscv/insn_trans/trans_svinval.c.inc
++++ b/target/riscv/insn_trans/trans_svinval.c.inc
+@@ -28,7 +28,7 @@ static bool trans_sinval_vma(DisasContext *ctx, arg_sinval_vma *a)
+     /* Do the same as sfence.vma currently */
+     REQUIRE_EXT(ctx, RVS);
+ #ifndef CONFIG_USER_ONLY
+-    decode_save_opc(ctx);
++    decode_save_opc(ctx, 0);
+     gen_helper_tlb_flush(tcg_env);
+     return true;
+ #endif
+@@ -57,7 +57,7 @@ static bool trans_hinval_vvma(DisasContext *ctx, arg_hinval_vvma *a)
+     /* Do the same as hfence.vvma currently */
+     REQUIRE_EXT(ctx, RVH);
+ #ifndef CONFIG_USER_ONLY
+-    decode_save_opc(ctx);
++    decode_save_opc(ctx, 0);
+     gen_helper_hyp_tlb_flush(tcg_env);
+     return true;
+ #endif
+@@ -70,7 +70,7 @@ static bool trans_hinval_gvma(DisasContext *ctx, arg_hinval_gvma *a)
+     /* Do the same as hfence.gvma currently */
+     REQUIRE_EXT(ctx, RVH);
+ #ifndef CONFIG_USER_ONLY
+-    decode_save_opc(ctx);
++    decode_save_opc(ctx, 0);
+     gen_helper_hyp_gvma_tlb_flush(tcg_env);
+     return true;
+ #endif
 diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index acba90f170..b5c0511b4b 100644
+index 16fff70dac..9609916807 100644
 --- a/target/riscv/translate.c
 +++ b/target/riscv/translate.c
-@@ -116,6 +116,9 @@ typedef struct DisasContext {
-     bool frm_valid;
-     bool insn_start_updated;
-     const GPtrArray *decoders;
-+    /* zicfilp extension. fcfi_enabled, lp expected or not */
-+    bool fcfi_enabled;
-+    bool fcfi_lp_expected;
- } DisasContext;
+@@ -209,11 +209,12 @@ static void gen_check_nanbox_s(TCGv_i64 out, TCGv_i64 in)
+     tcg_gen_movcond_i64(TCG_COND_GEU, out, in, t_max, in, t_nan);
+ }
  
- static inline bool has_ext(DisasContext *ctx, uint32_t ext)
-@@ -1238,6 +1241,8 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
-     ctx->pm_base_enabled = FIELD_EX32(tb_flags, TB_FLAGS, PM_BASE_ENABLED);
-     ctx->ztso = cpu->cfg.ext_ztso;
-     ctx->itrigger = FIELD_EX32(tb_flags, TB_FLAGS, ITRIGGER);
-+    ctx->fcfi_lp_expected = FIELD_EX32(tb_flags, TB_FLAGS, FCFI_LP_EXPECTED);
-+    ctx->fcfi_enabled = FIELD_EX32(tb_flags, TB_FLAGS, FCFI_ENABLED);
-     ctx->zero = tcg_constant_tl(0);
-     ctx->virt_inst_excp = false;
-     ctx->decoders = cpu->decoders;
-@@ -1270,6 +1275,24 @@ static void riscv_tr_translate_insn(DisasContextBase *dcbase, CPUState *cpu)
-     decode_opc(env, ctx, opcode16);
-     ctx->base.pc_next += ctx->cur_insn_len;
+-static void decode_save_opc(DisasContext *ctx)
++static void decode_save_opc(DisasContext *ctx, target_ulong excp_uw2)
+ {
+     assert(!ctx->insn_start_updated);
+     ctx->insn_start_updated = true;
+     tcg_set_insn_start_param(ctx->base.insn_start, 1, ctx->opcode);
++    tcg_set_insn_start_param(ctx->base.insn_start, 2, excp_uw2);
+ }
  
-+    /*
-+     * If 'fcfi_lp_expected' is still true after processing the instruction,
-+     * then we did not see an 'lpad' instruction, and must raise an exception.
-+     * Insert code to raise the exception at the start of the insn; any other
-+     * code the insn may have emitted will be deleted as dead code following
-+     * the noreturn exception
-+     */
-+    if (ctx->fcfi_lp_expected) {
-+        /* Emit after insn_start, i.e. before the op following insn_start. */
-+        tcg_ctx->emit_before_op = QTAILQ_NEXT(ctx->base.insn_start, link);
-+        tcg_gen_st_tl(tcg_constant_tl(RISCV_EXCP_SW_CHECK_FCFI_TVAL),
-+                      tcg_env, offsetof(CPURISCVState, sw_check_code));
-+        gen_helper_raise_exception(tcg_env,
-+                      tcg_constant_i32(RISCV_EXCP_SW_CHECK));
-+        tcg_ctx->emit_before_op = NULL;
-+        ctx->base.is_jmp = DISAS_NORETURN;
-+    }
-+
-     /* Only the first insn within a TB is allowed to cross a page boundary. */
-     if (ctx->base.is_jmp == DISAS_NEXT) {
-         if (ctx->itrigger || !is_same_page(&ctx->base, ctx->base.pc_next)) {
+ static void gen_pc_plus_diff(TCGv target, DisasContext *ctx,
+@@ -699,7 +700,7 @@ static void gen_set_rm(DisasContext *ctx, int rm)
+     }
+ 
+     /* The helper may raise ILLEGAL_INSN -- record binv for unwind. */
+-    decode_save_opc(ctx);
++    decode_save_opc(ctx, 0);
+     gen_helper_set_rounding_mode(tcg_env, tcg_constant_i32(rm));
+ }
+ 
+@@ -712,7 +713,7 @@ static void gen_set_rm_chkfrm(DisasContext *ctx, int rm)
+     ctx->frm_valid = true;
+ 
+     /* The helper may raise ILLEGAL_INSN -- record binv for unwind. */
+-    decode_save_opc(ctx);
++    decode_save_opc(ctx, 0);
+     gen_helper_set_rounding_mode_chkfrm(tcg_env, tcg_constant_i32(rm));
+ }
+ 
+@@ -1096,7 +1097,7 @@ static bool gen_amo(DisasContext *ctx, arg_atomic *a,
+         mop |= MO_ALIGN;
+     }
+ 
+-    decode_save_opc(ctx);
++    decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);
+     src1 = get_address(ctx, a->rs1, 0);
+     func(dest, src1, src2, ctx->mem_idx, mop);
+ 
+@@ -1110,7 +1111,7 @@ static bool gen_cmpxchg(DisasContext *ctx, arg_atomic *a, MemOp mop)
+     TCGv src1 = get_address(ctx, a->rs1, 0);
+     TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
+ 
+-    decode_save_opc(ctx);
++    decode_save_opc(ctx, 0);
+     tcg_gen_atomic_cmpxchg_tl(dest, src1, dest, src2, ctx->mem_idx, mop);
+ 
+     gen_set_gpr(ctx, a->rd, dest);
 -- 
 2.44.0
 
