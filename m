@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7724FC52D7C
-	for <qemu-riscv@archiver.kernel.org>; Fri, 23 Aug 2024 13:20:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79F29C52D7C
+	for <qemu-riscv@archiver.kernel.org>; Fri, 23 Aug 2024 14:29:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1shUDH-0005hG-1F; Fri, 23 Aug 2024 09:20:23 -0400
+	id 1shVIB-0006vs-48; Fri, 23 Aug 2024 10:29:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1shUCy-0004eU-64
- for qemu-riscv@nongnu.org; Fri, 23 Aug 2024 09:20:07 -0400
-Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
+ id 1shVI9-0006u6-2g
+ for qemu-riscv@nongnu.org; Fri, 23 Aug 2024 10:29:29 -0400
+Received: from mail-wr1-x42f.google.com ([2a00:1450:4864:20::42f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1shUCn-000191-Ii
- for qemu-riscv@nongnu.org; Fri, 23 Aug 2024 09:20:03 -0400
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-429d2d7be1eso10202535e9.1
- for <qemu-riscv@nongnu.org>; Fri, 23 Aug 2024 06:19:52 -0700 (PDT)
+ id 1shVI7-0006W2-CF
+ for qemu-riscv@nongnu.org; Fri, 23 Aug 2024 10:29:28 -0400
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-3718acbc87fso1030465f8f.3
+ for <qemu-riscv@nongnu.org>; Fri, 23 Aug 2024 07:29:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1724419191; x=1725023991; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1724423366; x=1725028166; darn=nongnu.org;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=c3Iy+EmEFhSfRcw35yG/DpcncueMVCKcsXZFQjjA4OU=;
- b=Z1idFMXi52JkfwfmHZ2aWWwHWPppBboCDkpaeJMb1dT4sow+/R+4idoaQk8metE/ew
- RyISKPd+1a43tt1Qrj2acCz8x2bxm6jv1T6Jx7ix1r9GzjK57kBi0uYuJw2mIw4+rMXS
- PcCfglAouRDbJMmPNM5obKKyghFd1YublKAgGDOu5NbTLTXa8bqDl1d3DOdX9sFuC1kq
- iWpRSoSILpVWxWp8LOEyNAe1aOy3D+t6c6vtUKICtamATxyVdF9jqh1CgH+dscjpK3AB
- MbhvhvYNQI4cImbjSOI12WUTjgopDptkm9Wc4chlmWVXYvFugrr0hxYjbqbnA790aawG
- s97Q==
+ bh=BPbbLF0GHdd+ri1cnfKNyoAt6KlPi+CZPhgJOEB10iM=;
+ b=AHRhr2fHckZNt2khPKfMXAzzNNBXG/JSWYs83YBo3oClKGRdnjDUB0zD+DBcWnRAqQ
+ vBf4PZZ/rGPRWfpLo8m5lADcDV+sh6Gzun2QvAjCIiXzpytWm3ZeSnBjvki+YICGvA/T
+ J5Vnoqw3qzNFOTMl1xFiyCdEK+tSrl577ZNAFO6gwPvAKXK1cih/yANJ6JL3lH+pXOKz
+ hcanBgW61EPTdmLBfrrjX5EJAhurniQhiAPOASFgQauTVFBbF0VXLzeEpSozeSRNnc+/
+ z9g6QCbD4H+TpV8JMlwMkzCJFyeUGb+1pDBpu9rHcxL7eWoawS+i8s8xjK6laXbYb+bI
+ CSIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724419191; x=1725023991;
+ d=1e100.net; s=20230601; t=1724423366; x=1725028166;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=c3Iy+EmEFhSfRcw35yG/DpcncueMVCKcsXZFQjjA4OU=;
- b=BmauLzGbkNPjoyMkfwn2Gfa58j87UNEYBqE8simkrnHeO/VacEdWwYJA+qzQcw+BIp
- DKPMRJVDjH8H8ANQQ/S8nO+GECPU1SRSy8I2sm5CdZ6j5zc6AOGSn+sRdhYgIGHQ114M
- nSz/tdNl4zd1XCGGBaWS/vPfGc/oznp339a9S4EJ3o1lQaxXrJ6ctlqJZ3YRjCQgHqfz
- rXcIPdVb6fYTopdwtENPNbv4BEcdjCcf9I7IgcdjKK3U0f7c0K1hdGHVyRQ8wcYaMQOh
- QUQ1/Tdf7iEx+7P6n40uBbJsWI/CGfTxKXEOMuLrSdr+7AVUFFmUKm+gQD4au8TGqaUP
- bieA==
+ bh=BPbbLF0GHdd+ri1cnfKNyoAt6KlPi+CZPhgJOEB10iM=;
+ b=cvGv4Gs0c+hD6KJYpI0feFSwhpjGzk1nKliTtoQL67h/kRIqSsIQ2OStmg5zazqCbZ
+ rm9bCIy4+9ea9o9KmHFPcKd0oQLr5YxE4ZzovnDPer0v32d9QdNBFs4rmqIypiQPQ6bT
+ bslrR30tiwm+AFWx0YA9GmM0/1a+gixiLP3j/dmsJx+89+jsdBWbCulorVRMtw0Tgn1z
+ 2XPL8B1RbgHCjy/XM4AiICsa0j+3WIaeBikNQzZs69LfXUZM6sc1jVelWAJrEjKet2HG
+ 8GhNxmGK8aEPV37FwHU2s5LPEUH7gGL+Oq6Nok5Rmol/SZEUxjVmeJ6rP0kr9p/8YDwx
+ PN4Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVJChFAY9/USv1nrDcUDoO6XTef8+8M3Kjru0Hl/444BMs2WL1rwtZrOGbsOcp2lCrV9erfSsQcjib+@nongnu.org
-X-Gm-Message-State: AOJu0Yxw3hg4LvnvfUxRx+c6QCoNPPw7HPKMOg0Z7a2QWLsyk6JODJJE
- dDf15oai19huy0tSJasqHe1p7QzxT3B7OYpDzatZ+4MI3BYLLK4zHoavDsx5g0U=
-X-Google-Smtp-Source: AGHT+IFAXohcgwGwhM1MODuxLvLf18VebjSVYufdGt++90DbHCQ+e0XPEW+suSUUVopv8lEmJtfWWA==
-X-Received: by 2002:a05:600c:a04:b0:426:526f:4a1f with SMTP id
- 5b1f17b1804b1-42acca01a23mr13272315e9.16.1724419191013; 
- Fri, 23 Aug 2024 06:19:51 -0700 (PDT)
+ AJvYcCUwNp1tUgtUsHgRc7ciyr+3QhFDhIabxfSFRC0h7N39R9UFauRzziNKOySDgUrF1Asl3lMS/ZAXCc4e@nongnu.org
+X-Gm-Message-State: AOJu0YyU63BK+dt9OjYhHGqSlwjlTj/61Bo53XJ+6o/SpZ9+5MTm+7g0
+ aE4HZvoX+P1d7MmnRA9HtHgiTuFyJwh3CO4T4lOoWZychgKWrNW04cS2+dvV870=
+X-Google-Smtp-Source: AGHT+IHhy0MPvUljam6DaNcTP8kGCEGZh78USoZJvSAbNjQ3BzzSExHvOnLrQE5np8+31XHeC0FyWQ==
+X-Received: by 2002:a5d:64ef:0:b0:367:9522:5e6b with SMTP id
+ ffacd0b85a97d-373118c7ce8mr2137032f8f.45.1724423365528; 
+ Fri, 23 Aug 2024 07:29:25 -0700 (PDT)
 Received: from sunil-laptop ([106.51.198.16]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-373081ff654sm4137939f8f.75.2024.08.23.06.19.43
+ ffacd0b85a97d-373081ffb34sm4295403f8f.71.2024.08.23.07.29.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 Aug 2024 06:19:50 -0700 (PDT)
-Date: Fri, 23 Aug 2024 18:49:38 +0530
+ Fri, 23 Aug 2024 07:29:25 -0700 (PDT)
+Date: Fri, 23 Aug 2024 19:59:13 +0530
 From: Sunil V L <sunilvl@ventanamicro.com>
 To: Sia Jee Heng <jeeheng.sia@starfivetech.com>
 Cc: qemu-arm@nongnu.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
@@ -67,24 +67,23 @@ Cc: qemu-arm@nongnu.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
  palmer@dabbelt.com, alistair.francis@wdc.com,
  bin.meng@windriver.com, liwei1518@gmail.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com
-Subject: Re: [PATCH RESEND v4 3/3] tests/qtest/bios-tables-test: Update virt
- SPCR golden reference for RISC-V
-Message-ID: <ZsiMah7pBYLOqHXA@sunil-laptop>
+Subject: Re: [PATCH RESEND v4 0/3] Upgrade ACPI SPCR table to support SPCR
+ table revision 4 format
+Message-ID: <ZsicubCBw2YAjq9c@sunil-laptop>
 References: <20240823113142.161727-1-jeeheng.sia@starfivetech.com>
- <20240823113142.161727-4-jeeheng.sia@starfivetech.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20240823113142.161727-4-jeeheng.sia@starfivetech.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::331;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-wm1-x331.google.com
+In-Reply-To: <20240823113142.161727-1-jeeheng.sia@starfivetech.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::42f;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-wr1-x42f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,110 +99,20 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Aug 23, 2024 at 04:31:42AM -0700, Sia Jee Heng wrote:
-> Update the virt SPCR golden reference file for RISC-V to accommodate the
-> SPCR Table revision 4 [1], utilizing the iasl binary compiled from the
-> latest ACPICA repository. The SPCR table has been modified to
-> adhere to the revision 4 format [2].
+Hi Jee Heng,
+On Fri, Aug 23, 2024 at 04:31:39AM -0700, Sia Jee Heng wrote:
+> Update the SPCR table to accommodate the SPCR Table revision 4 [1].
+> The SPCR table has been modified to adhere to the revision 4 format [2].
+> 
+> Meanwhile, the virt SPCR golden reference file for RISC-V have been updated to
+> accommodate the SPCR Table revision 4.
 > 
 > [1]: https://learn.microsoft.com/en-us/windows-hardware/drivers/serports/serial-port-console-redirection-table
 > [2]: https://github.com/acpica/acpica/pull/931
 > 
-> Diffs from iasl:
-> /*
->   * Intel ACPI Component Architecture
->   * AML/ASL+ Disassembler version 20200925 (64-bit version)
->   * Copyright (c) 2000 - 2020 Intel Corporation
->   *
-> - * Disassembly of tests/data/acpi/riscv64/virt/SPCR, Fri Aug 23 02:07:47 2024
-> + * Disassembly of /tmp/aml-Y8JPS2, Fri Aug 23 02:07:47 2024
->   *
->   * ACPI Data Table [SPCR]
->   *
->   * Format: [HexOffset DecimalOffset ByteLength]  FieldName : FieldValue
->   */
-> 
->  [000h 0000   4]                    Signature : "SPCR"    [Serial Port Console Redirection table]
-> -[004h 0004   4]                 Table Length : 00000050
-> -[008h 0008   1]                     Revision : 02
-> -[009h 0009   1]                     Checksum : B9
-> +[004h 0004   4]                 Table Length : 0000005A
-> +[008h 0008   1]                     Revision : 04
-> +[009h 0009   1]                     Checksum : 13
->  [00Ah 0010   6]                       Oem ID : "BOCHS "
->  [010h 0016   8]                 Oem Table ID : "BXPC    "
->  [018h 0024   4]                 Oem Revision : 00000001
->  [01Ch 0028   4]              Asl Compiler ID : "BXPC"
->  [020h 0032   4]        Asl Compiler Revision : 00000001
-> 
-> -[024h 0036   1]               Interface Type : 00
-> +[024h 0036   1]               Interface Type : 12
->  [025h 0037   3]                     Reserved : 000000
-> 
->  [028h 0040  12]         Serial Port Register : [Generic Address Structure]
->  [028h 0040   1]                     Space ID : 00 [SystemMemory]
->  [029h 0041   1]                    Bit Width : 20
->  [02Ah 0042   1]                   Bit Offset : 00
->  [02Bh 0043   1]         Encoded Access Width : 01 [Byte Access:8]
->  [02Ch 0044   8]                      Address : 0000000010000000
-> 
->  [034h 0052   1]               Interrupt Type : 10
->  [035h 0053   1]          PCAT-compatible IRQ : 00
->  [036h 0054   4]                    Interrupt : 0000000A
->  [03Ah 0058   1]                    Baud Rate : 07
->  [03Bh 0059   1]                       Parity : 00
->  [03Ch 0060   1]                    Stop Bits : 01
->  [03Dh 0061   1]                 Flow Control : 00
->  [03Eh 0062   1]                Terminal Type : 00
->  [04Ch 0076   1]                     Reserved : 00
->  [040h 0064   2]                PCI Device ID : FFFF
->  [042h 0066   2]                PCI Vendor ID : FFFF
->  [044h 0068   1]                      PCI Bus : 00
->  [045h 0069   1]                   PCI Device : 00
->  [046h 0070   1]                 PCI Function : 00
->  [047h 0071   4]                    PCI Flags : 00000000
->  [04Bh 0075   1]                  PCI Segment : 00
->  [04Ch 0076   4]                     Reserved : 00000000
-> 
-Shouldn't iasl print additional fields added in version 4?
+Just curious - whether this needs changes in linux side as well? Does
+current linux code work fine with version 4 of SPCR table on RISC-V?
 
 Thanks,
 Sunil
-> -Raw Table Data: Length 80 (0x50)
-> +Raw Table Data: Length 90 (0x5A)
-> 
-> -    0000: 53 50 43 52 50 00 00 00 02 B9 42 4F 43 48 53 20  // SPCRP.....BOCHS
-> +    0000: 53 50 43 52 5A 00 00 00 04 13 42 4F 43 48 53 20  // SPCRZ.....BOCHS
->      0010: 42 58 50 43 20 20 20 20 01 00 00 00 42 58 50 43  // BXPC    ....BXPC
-> -    0020: 01 00 00 00 00 00 00 00 00 20 00 01 00 00 00 10  // ......... ......
-> +    0020: 01 00 00 00 12 00 00 00 00 20 00 01 00 00 00 10  // ......... ......
->      0030: 00 00 00 00 10 00 0A 00 00 00 07 00 01 00 00 03  // ................
->      0040: FF FF FF FF 00 00 00 00 00 00 00 00 00 00 00 00  // ................
-> +    0050: 00 00 00 00 02 00 58 00 2E 00                    // ......X...
-> 
-> Signed-off-by: Sia Jee Heng <jeeheng.sia@starfivetech.com>
-> ---
->  tests/data/acpi/riscv64/virt/SPCR           | Bin 80 -> 90 bytes
->  tests/qtest/bios-tables-test-allowed-diff.h |   1 -
->  2 files changed, 1 deletion(-)
-> 
-> diff --git a/tests/data/acpi/riscv64/virt/SPCR b/tests/data/acpi/riscv64/virt/SPCR
-> index 4da9daf65f71a13ac2b488d4e9728f194b569a43..09617f8793a6f7b1f08172f735b58aa748671540 100644
-> GIT binary patch
-> delta 32
-> mcmWHD;tCFM4vJ!6U|<oR$R))nG*MNX3&>+&Vu)bSV*mhNumqU^
-> 
-> delta 21
-> ccmazF;0g|K4hmpkU|`xgkxPn^VWO%w05v59j{pDw
-> 
-> diff --git a/tests/qtest/bios-tables-test-allowed-diff.h b/tests/qtest/bios-tables-test-allowed-diff.h
-> index aae973048a..dfb8523c8b 100644
-> --- a/tests/qtest/bios-tables-test-allowed-diff.h
-> +++ b/tests/qtest/bios-tables-test-allowed-diff.h
-> @@ -1,2 +1 @@
->  /* List of comma-separated changed AML files to ignore */
-> -"tests/data/acpi/riscv64/virt/SPCR",
-> -- 
-> 2.34.1
-> 
 
