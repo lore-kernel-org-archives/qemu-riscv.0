@@ -4,74 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0ED8C5472D
-	for <qemu-riscv@archiver.kernel.org>; Sat, 24 Aug 2024 17:33:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA9DDC5320E
+	for <qemu-riscv@archiver.kernel.org>; Mon, 26 Aug 2024 00:00:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1shue4-0007B5-TY; Sat, 24 Aug 2024 13:33:48 -0400
+	id 1siN9l-0003e6-5U; Sun, 25 Aug 2024 20:00:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1shue3-00076j-Qm
- for qemu-riscv@nongnu.org; Sat, 24 Aug 2024 13:33:47 -0400
-Received: from mail-ot1-x32c.google.com ([2607:f8b0:4864:20::32c])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1siN9c-0003cm-T6
+ for qemu-riscv@nongnu.org; Sun, 25 Aug 2024 20:00:17 -0400
+Received: from mail-pj1-x102f.google.com ([2607:f8b0:4864:20::102f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1shue1-0002IE-VO
- for qemu-riscv@nongnu.org; Sat, 24 Aug 2024 13:33:47 -0400
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-709346604a7so2455318a34.1
- for <qemu-riscv@nongnu.org>; Sat, 24 Aug 2024 10:33:45 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1siN9Y-0000E4-SB
+ for qemu-riscv@nongnu.org; Sun, 25 Aug 2024 20:00:16 -0400
+Received: by mail-pj1-x102f.google.com with SMTP id
+ 98e67ed59e1d1-2d3ec4bacc5so3360019a91.1
+ for <qemu-riscv@nongnu.org>; Sun, 25 Aug 2024 17:00:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1724520824; x=1725125624; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=LZhaJMQ6PkwdKPVl/65Ojkpw76G0zD1CDyA0x7yQobg=;
- b=REQL++YpecTQffeED/jnP5WNBGSkb6gvygCQe5kz/x37rEoIDod+ww1hUxlNi6gXZ/
- qxpdzG1mz1q482tpgimyTssel6AaKdYAZ5sBz811R9v/Ib+T/3FpgsiSQTDAHqkpaYTU
- RZX/74Y7n929QdZcUzE8AvATQ9sRHBUEwBIyKH9SVj2qY5vCW3n9svg8Xa2Q2De/lBo8
- VzzokQMDddDiywwQfNnimQ6yOYvmyGgg1kMqY7ywPqo5egnaVipj2Qf72SfxgaNpkOcJ
- BiKClONidEIQISWa0dvYFpL8m4urqJe57EmvZHoej348G7vKtiFxjbuNn+7utkJ4iK/7
- KtFg==
+ d=linaro.org; s=google; t=1724630406; x=1725235206; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=FDr9gSVjVQU1bimm6GY+JLZZEUF+PQ7rjmE1idPWavw=;
+ b=clNj3hVi/6vQtRwnlhL88dstVdC+6Cohlj9wqlRKHNc5OsEbwHBXNtHUIrCWB8TtRE
+ FBKlX9OBE5cOWZbxPayBgF5sOaQABKkf9PuSBtlP6QX5WlMsHds/sIRdxxdZ1AYfj1fk
+ CSWK1I/9p52Jb3NWlfIhJwfYoxLkCro6W0oi9Z+ooAXoNZwwza/1OenYLA6xbUuGneXw
+ cyFzCZvi1oviZM+aasoZj/XRZt1OD7U3YGGhXsp8wgBHtCWMftlVFdGhRyjvxCZ+aN7+
+ H8EhIepHBPSu4pY1Nrz7HQ2XjLQOD/w4+IjVWMZSkW7Yk5ZXsL5F93inx3oHfvVUvU/V
+ iMvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724520824; x=1725125624;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=LZhaJMQ6PkwdKPVl/65Ojkpw76G0zD1CDyA0x7yQobg=;
- b=LVByYpsL97FaDYiwZlsfC8NbvqnL5fqYUdhIL0cAjtlnkrcBkU8bvbH2FHKU7VgqGj
- k78BID4Y7ijjR5YF0dNwqAdntpeX9KOVewuGapA2yx3kHQlpKvkPLENykTAGae8GCdSr
- MQfmj680n3SZpj+u+mDuKve1kya8XWi0QKFWcmfBh7ZXEnso3AtpyqBRfYTy7TVcfSEm
- ixWbjfFKGej7bQYV+31oL8q0THi9RMYOUbbaGOz1Nx1ImmWPCdOQ1F8f9A6eNJ0AjbJY
- uOVh6MB3lNNKGpmmKV3l8OSw6SZ91uI8k+3dP22UjF2qH6xjuhp5WeJFlJlZSAidbmjG
- FOlw==
-X-Gm-Message-State: AOJu0YzWXM+pkqIqtwAu1qrioDzwnVe8fiieVIGskEa8kmC9/26PNmkS
- 3WprOFTDa62kszJ04BMy6qIbo/Wlrx/hhIl4lLkjBUU8LfxsVbfE35XmiiafnM0=
-X-Google-Smtp-Source: AGHT+IEZNZgy9Fp0Q3mSH+xfS87GBXUxYkFXMONBV654VuaVa6Q7qXcwdCIgt2CNLRBozifHkslOgw==
-X-Received: by 2002:a05:6808:211f:b0:3da:a48b:d1ec with SMTP id
- 5614622812f47-3de2a89b188mr7278549b6e.29.1724520824195; 
- Sat, 24 Aug 2024 10:33:44 -0700 (PDT)
-Received: from grind.dc1.ventanamicro.com ([179.133.97.250])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7143433ac53sm4724904b3a.212.2024.08.24.10.33.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 24 Aug 2024 10:33:43 -0700 (PDT)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Frank Chang <frank.chang@sifive.com>
-Subject: [PATCH] target/riscv/tcg/tcg-cpu.c: consider MISA bit choice in
- implied rule
-Date: Sat, 24 Aug 2024 14:33:38 -0300
-Message-ID: <20240824173338.316666-1-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.45.2
+ d=1e100.net; s=20230601; t=1724630406; x=1725235206;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=FDr9gSVjVQU1bimm6GY+JLZZEUF+PQ7rjmE1idPWavw=;
+ b=PsF7ihjMTzg7NSMv+MlyuP3llYv+ufdgHtBNQzp83s2yCBYv4KWTq+uKfuNF+cCgir
+ N4EE3hGe5XMQMtgR6w/kOEgi/oVQzn4Dp4afb8nCHLQUMJZadCPSBWFLpxm7pAmPA0sv
+ JJqTHcpxpXmK8urNM/l5krpqfuy+c75cI8WfXd6g6IAcDJitNDlpykH5kKH3po1iKV7m
+ hCsUp61tVSqGGxXCYV9ucDoYWWtQjSze5XnklR8D5M0HQiMxNqOKU76CJBK23S4YqiYt
+ pPucakknyMFWJYA5Nb65xk54n9KnXbaXBlqBIa9V6Gu5qgvQ899zc2O/BiRcXqycS/Wc
+ T2Vw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVObiwtJcAB5qo5odPCHd9PcGElLgzKNrXx04Vjb8oIlfcqsD91inhS1/nDsUTEakKDNsttkOvhWiOd@nongnu.org
+X-Gm-Message-State: AOJu0YyLZ2sbgCo6vW/yfGkrb+sK8zPzY764tR9JDb26JQiYdYQw5PQZ
+ t1ckDqIdfQdW6ah2vstJfZuKkin0NOwWHlabGgEXGHowpCVNTv7zve/P/vYPH/Y=
+X-Google-Smtp-Source: AGHT+IEjhjaY+puL0bFy+rQGub475+DH0n/JGbDEqi4Y9TvdLaG/RzLNzTW4q4dwR9rpSUCvNWTX4g==
+X-Received: by 2002:a17:90b:4ac5:b0:2c2:4109:9466 with SMTP id
+ 98e67ed59e1d1-2d60a90006amr19158272a91.8.1724630405913; 
+ Sun, 25 Aug 2024 17:00:05 -0700 (PDT)
+Received: from [172.16.0.208] (180-150-104-113.b49668.bne.static.aussiebb.net.
+ [180.150.104.113]) by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-2d5ebbd9d72sm10675958a91.49.2024.08.25.17.00.00
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 25 Aug 2024 17:00:05 -0700 (PDT)
+Message-ID: <10bf932c-ec07-4f2d-ae11-93fdd2bf84ee@linaro.org>
+Date: Mon, 26 Aug 2024 09:59:55 +1000
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::32c;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x32c.google.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v8 04/17] target/riscv: additional code information for sw
+ check
+To: Deepak Gupta <debug@rivosinc.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, bmeng.cn@gmail.com,
+ liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, jim.shu@sifive.com, andy.chiu@sifive.com,
+ kito.cheng@sifive.com
+References: <20240823190140.4156920-1-debug@rivosinc.com>
+ <20240823190140.4156920-5-debug@rivosinc.com>
+Content-Language: en-US
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20240823190140.4156920-5-debug@rivosinc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -94,75 +103,23 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Gitlab issue [1] reports a misleading error when trying to run a 'rv64'
-cpu with 'zfinx' and without 'f':
+On 8/24/24 05:01, Deepak Gupta wrote:
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 12484ca7d2..9f08a67a9e 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -1761,6 +1761,8 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>                   cs->watchpoint_hit = NULL;
+>               }
+>               break;
+> +        case RISCV_EXCP_SW_CHECK:
+> +            tval = env->sw_check_code;
+>           default:
 
-$ ./build/qemu-system-riscv64 -nographic -M virt -cpu rv64,zfinx=true,f=false
-qemu-system-riscv64: Zfinx cannot be supported together with F extension
+Missing break.
+This should have warned about fall through...
 
-The user explicitly disabled F and the error message mentions a conflict
-with Zfinx and F.
 
-The problem isn't the error reporting, but the logic used when applying
-the implied ZFA rule that enables RVF unconditionally, without honoring
-user choice (i.e. keep F disabled).
 
-Change cpu_enable_implied_rule() to check if the user deliberately
-disabled a MISA bit. In this case we shouldn't either re-enable the bit
-nor apply any implied rules related to it.
-
-After this change the error message now shows:
-
-$ ./build/qemu-system-riscv64 -nographic -M virt -cpu rv64,zfinx=true,f=false
-qemu-system-riscv64: Zfa extension requires F extension
-
-Disabling 'zfa':
-
-$ ./build/qemu-system-riscv64 -nographic -M virt -cpu rv64,zfinx=true,f=false,zfa=false
-qemu-system-riscv64: D extension requires F extension
-
-And finally after disabling 'd':
-
-$ ./build/qemu-system-riscv64 -nographic -M virt -cpu rv64,zfinx=true,f=false,zfa=false,d=false
-(OpenSBI boots ...)
-
-[1] https://gitlab.com/qemu-project/qemu/-/issues/2486
-
-Cc: Frank Chang <frank.chang@sifive.com>
-Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2486
-Fixes: 047da861f9 ("target/riscv: Introduce extension implied rule helpers")
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- target/riscv/tcg/tcg-cpu.c | 13 ++++++++++---
- 1 file changed, 10 insertions(+), 3 deletions(-)
-
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index b8814ab753..dea8ab7a43 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -778,11 +778,18 @@ static void cpu_enable_implied_rule(RISCVCPU *cpu,
-     if (!enabled) {
-         /* Enable the implied MISAs. */
-         if (rule->implied_misa_exts) {
--            riscv_cpu_set_misa_ext(env,
--                                   env->misa_ext | rule->implied_misa_exts);
--
-             for (i = 0; misa_bits[i] != 0; i++) {
-                 if (rule->implied_misa_exts & misa_bits[i]) {
-+                    /*
-+                     * If the user disabled the misa_bit do not re-enable it
-+                     * and do not apply any implied rules related to it.
-+                     */
-+                    if (cpu_misa_ext_is_user_set(misa_bits[i]) &&
-+                        !(env->misa_ext & misa_bits[i])) {
-+                        continue;
-+                    }
-+
-+                    riscv_cpu_set_misa_ext(env, env->misa_ext | misa_bits[i]);
-                     ir = g_hash_table_lookup(misa_ext_implied_rules,
-                                              GUINT_TO_POINTER(misa_bits[i]));
- 
--- 
-2.45.2
-
+r~
 
