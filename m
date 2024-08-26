@@ -4,133 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BB85C5321D
-	for <qemu-riscv@archiver.kernel.org>; Mon, 26 Aug 2024 07:20:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1765C5321D
+	for <qemu-riscv@archiver.kernel.org>; Mon, 26 Aug 2024 15:18:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1siU17-0004Ye-HM; Mon, 26 Aug 2024 03:19:57 -0400
+	id 1sibTc-0000Tf-8d; Mon, 26 Aug 2024 11:17:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jeeheng.sia@starfivetech.com>)
- id 1siU14-0004Vn-UZ; Mon, 26 Aug 2024 03:19:54 -0400
-Received: from mail-sh0chn02on20703.outbound.protection.partner.outlook.cn
- ([2406:e500:4420:2::703]
- helo=CHN02-SH0-obe.outbound.protection.partner.outlook.cn)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jeeheng.sia@starfivetech.com>)
- id 1siU10-0005WX-Sh; Mon, 26 Aug 2024 03:19:53 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=kHLYwJPr7N3o9LPuW/G25TOKHijf2jBD6I4ONU+Bsv+gqkzz5i1H3BBLdlGyGVL3F/sUkd1ZTDVOGB+1fFNLiadpBhKTVomFujHIck7Ju+aSUPe4MoWU6FiqGZO3zGGNj+OMcZswLqGrtUeZ0H62MsJThQ+mMR+GeJmJ013j26vkOTgmToqZdULgk7q7ynrbRzzq0KLxyFD0OygvZlsCWXGhkyFIUB8K4ZUCzNscqoKJxYYKhFNppeywCV3WminYsMBzpn5cAVznK4To7f9k1PEx5/j5X4XIbdp+UyRpa+PNVNw26cR2I/J19ZWgromDETwlzK7w4wdcCwmAR/tB4w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=mf9eADy4NdR2zYq61AJuS32BOiO6yEBenndQ8hae4f0=;
- b=DvFflj36q4VFSnv9OmlbjkfZe1FLJBimFZpQHJ9lOfWRYuG5shWAisydix7s3baHr1QUgodzbaTtNROJvXzn8fVZwkoofAetPYtfUbvdlBxkHC/9s22jWlnTPlf6qZ1mLQtpH1JdtEuFSJsXRDcE40b4hljbMsNgeBatoD3hWnUTJZSAVwSzStII5T47duA75SaryZ6X4ec/wiDSLhI3zX71bcivaGf75GvJaRMplXaMpKEIracINdWDUZFdbblU2zckIEVlvV5YF/Z1l5QHzNRAK2p+YDwL2+ztRAqgXCVE8LJDEpxeSr49oTTGGMU6uduIyfRjQ26ygcoSP6fRtQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=starfivetech.com; dmarc=pass action=none
- header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
-Received: from NT0PR01MB1278.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c510:12::10) by NT0PR01MB0990.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c510:7::9) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7897.18; Mon, 26 Aug
- 2024 07:19:31 +0000
-Received: from NT0PR01MB1278.CHNPR01.prod.partner.outlook.cn
- ([fe80::affa:7fe4:57c8:11ce]) by
- NT0PR01MB1278.CHNPR01.prod.partner.outlook.cn ([fe80::affa:7fe4:57c8:11ce%5])
- with mapi id 15.20.7897.021; Mon, 26 Aug 2024 07:19:31 +0000
-From: JeeHeng Sia <jeeheng.sia@starfivetech.com>
-To: Sunil V L <sunilvl@ventanamicro.com>
-CC: "qemu-arm@nongnu.org" <qemu-arm@nongnu.org>, "qemu-devel@nongnu.org"
- <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
- "mst@redhat.com" <mst@redhat.com>, "imammedo@redhat.com"
- <imammedo@redhat.com>, "anisinha@redhat.com" <anisinha@redhat.com>,
- "peter.maydell@linaro.org" <peter.maydell@linaro.org>,
- "shannon.zhaosl@gmail.com" <shannon.zhaosl@gmail.com>, "palmer@dabbelt.com"
- <palmer@dabbelt.com>, "alistair.francis@wdc.com" <alistair.francis@wdc.com>,
- "bin.meng@windriver.com" <bin.meng@windriver.com>, "liwei1518@gmail.com"
- <liwei1518@gmail.com>, "dbarboza@ventanamicro.com"
- <dbarboza@ventanamicro.com>, "zhiwei_liu@linux.alibaba.com"
- <zhiwei_liu@linux.alibaba.com>
-Subject: RE: [PATCH RESEND v4 0/3] Upgrade ACPI SPCR table to support SPCR
- table revision 4 format
-Thread-Topic: [PATCH RESEND v4 0/3] Upgrade ACPI SPCR table to support SPCR
- table revision 4 format
-Thread-Index: AQHa9VATullMknu1c0mBI+U6CpILCLI05waAgAQ50qCAAAOFAIAAAU2g
-Date: Mon, 26 Aug 2024 07:19:31 +0000
-Message-ID: <NT0PR01MB12783CEA8A87CE93C5A211919C8B2@NT0PR01MB1278.CHNPR01.prod.partner.outlook.cn>
-References: <20240823113142.161727-1-jeeheng.sia@starfivetech.com>
- <ZsicubCBw2YAjq9c@sunil-laptop>
- <NT0PR01MB1278D6E5A7CD617D9783C7259C8B2@NT0PR01MB1278.CHNPR01.prod.partner.outlook.cn>
- <ZswrLDbIFpPpZDAW@sunil-laptop>
-In-Reply-To: <ZswrLDbIFpPpZDAW@sunil-laptop>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=starfivetech.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: NT0PR01MB1278:EE_|NT0PR01MB0990:EE_
-x-ms-office365-filtering-correlation-id: 0bb7dfca-64bd-4418-b2a6-08dcc59f6ded
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
- ARA:13230040|366016|7416014|1800799024|41320700013|38070700018; 
-x-microsoft-antispam-message-info: tqyi5PLFjEIChuX0OqprkpQycaWedmVByjyP8ia5Lbbo7uUXKD2nTS5ioJhXpn8Z5ubH7R8iiV3gdvuuvcdsGWspM7f+oM+vUDAZ1y+QG60Rb1WbBPb2L3AHuuBjt9goE76vKAC8t34TKv8Vp6t4AfIQKR/5dpqhEJNrgFJTRqHxo/T3q1iDuMAMz33OPHrTj2j8wOon683OgTJdPgRYc/PmenifjYhNHmuyDaDwJgfdWRz10haOChFrbtiT4PiPdaT5mW9fT0cLlVrdJE3B2pwFEre2bH5At9lBRXQDR8M0i847ru3xzCZBp8GOSJ11Tuyztd10gYP4ZsRTASrhIhS9mk04UxH3MuIbbm2VJutqWPb8lCNi+RiNUzn+uYIecUc+Z3VQV2buY351oPPrVLCZwq9vmlsW+yGr8o8sDaefbA5MDgZctNeELxBVZ5lDlhTE+X8OYDDXWSc7AFz8YJ//WuZNsYWZxqQHB6zVcZ86wUbqofkcxMdvN0Y9t8FA8K5OZI21eCqVTjw4gQResPxRWFrZAtssExJP7rbeUSUl3byaKv2Tdqs2Ddl/k8lziCHaAtnbU9/aIXm9f5QTWCIwcALwM71VXGHCY2NbEeAcf3U5C37fJ8Ut8Y3X/43G
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:NT0PR01MB1278.CHNPR01.prod.partner.outlook.cn; PTR:;
- CAT:NONE;
- SFS:(13230040)(366016)(7416014)(1800799024)(41320700013)(38070700018); DIR:OUT;
- SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?4osLL+DkHdIs8+ep+NIPJyqSctsbNsV7Dwlq4ZRbzTyEGx+iIl4Bwxo+XZX6?=
- =?us-ascii?Q?zwA7/JzQWDvx3wB3TqXlrOh8CJXAOFU2fzFnUDHb8AnqbvIaFqs9FuXiz/7F?=
- =?us-ascii?Q?GamlSmbI0KNEgg5kJzJ8ja9gQR1FaoKmP1t+bk3VzFK3akYp0vKtsAzI4abo?=
- =?us-ascii?Q?X1rem+tuokdk8nxraQYa0LJ0ZHaObuBhYq2mLNXVL+kkyf1Io1VUAbgnmvL7?=
- =?us-ascii?Q?yV0TWqO7dABcOnTdeD6TvXLPbUPa0H4RqxrGJaqCHoslbvaCBeFMcYdc6PRK?=
- =?us-ascii?Q?2ZC7jZhVVnR8rbwgxvaFCzIz8yL0hZK1mg6OCoupcUCq3dSsXrwNHisTwHDJ?=
- =?us-ascii?Q?9zaL2n1Ey5Pfl/utXL2z3zC+eHxMvvUS1Q8lmvqmgbnVhatVkbkabqHt7Kw2?=
- =?us-ascii?Q?qHaqBDrWT9l8t4RaPDpNRnhyaCwX8xOMoZ12lexp8RJH3Ks8yvUoNAzRAKvO?=
- =?us-ascii?Q?AVpEmR/NSs6KFcdRGxCYRjX7r4sgfRFDhKt/Y123Ok4r49KxP5FrmsHV6rv7?=
- =?us-ascii?Q?lKFyOKms2L+hwRpwXI1Ol+K8/mriRfKLPJbtdWPKtp8cRCNYzWeeCyc90HVq?=
- =?us-ascii?Q?921ZDUtRRC+ibfQdQlGFSmfc3qzUkgWI+KPkUWXSvJNF4i0Xc5Vowa3TJyoS?=
- =?us-ascii?Q?tr+K/re2WIuvQRsUm9ZGKZmxXngzyAwbqpfBHz3xFR74g2AxVyaMUt7NuykC?=
- =?us-ascii?Q?vpJjeiEUYWUsNWRlCXORF80tB/Hwkd8NHaIKZ40HLi9QQg6G4Ob4JYtafSi9?=
- =?us-ascii?Q?cVETxmpuL3G5MPRR6HWNly+VN9M7aA9xieA8psbB3KBXT6kbRm+3XqyvSm6o?=
- =?us-ascii?Q?XjxeMLVkvEPEo3fg7MwH8RrAk7aZQO5xkgMeYTATtR4nhtjSwuYZD6AUjlJD?=
- =?us-ascii?Q?A0Un96Y8NuG6SLxTG1l+XFtVagaTCbFzZS+zKuB1FLs00+bGBD4S0T1Z5ThX?=
- =?us-ascii?Q?w7aa91fhhLaNugeCtra/keM2/G3EnrZEmVNV/xUqIVJivf6Zi+nYD2q9ziq1?=
- =?us-ascii?Q?i8zL6qRp2WLgY1SNT9mxYw7FmglmC87jMFodiXokAVTQOy6/6qermW4zT4BU?=
- =?us-ascii?Q?jcOFtVvDUDfCQVVLi0thMcYcClCTNywW9ZjAt/25+McTrnyVJ9rlWNcJRXDL?=
- =?us-ascii?Q?v+AAgVTXhoEoqnTEUn0E6ji0TqjUz9S3nUXYf1qjyrqsmfZWxsHzAgIlftmD?=
- =?us-ascii?Q?c6weJJroR+Zo5DW26g7xebkW3saZ73uir5NUibx/3snZ/dtMlYvzX+XP1/vd?=
- =?us-ascii?Q?gs0ElFnAcklJjPBAZ0wyqTaoJxrVb06CowVuEO28zZzIqvPnSxaLg0NUe0eP?=
- =?us-ascii?Q?SdYpgObUUnexb5YPG+LCW2x6qE5gBHJ8fZkDDKJGBj+W/3ku2lIpBSDWHtWF?=
- =?us-ascii?Q?PvCMs095eUlROQh52mEOJEKN3x0m/E4ClMIct1aQrSJsKsXmKYCWF1bIZfWi?=
- =?us-ascii?Q?zzdko+nO7Zo4e5+hr/CeJ9ShzD4a+5Sqag8auOw2vEW1ysp9jPofcIOP8DN0?=
- =?us-ascii?Q?SK+iJvgWNMMMXz5gDXn8dMTWX+v0bMyxPaqsktzrW8GekV/6z2oFhmtGQtk3?=
- =?us-ascii?Q?PPnHcNjA8L45J0DPJEJJeo2OtKh6Ga8rUwy1jKCezq+nQ2DU76YE3pw6jB+r?=
- =?us-ascii?Q?Lg=3D=3D?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
+ id 1sibTa-0000T7-MH
+ for qemu-riscv@nongnu.org; Mon, 26 Aug 2024 11:17:50 -0400
+Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
+ id 1sibTS-0001yR-FB
+ for qemu-riscv@nongnu.org; Mon, 26 Aug 2024 11:17:50 -0400
+Received: by mail-pf1-x432.google.com with SMTP id
+ d2e1a72fcca58-71434174201so3689660b3a.0
+ for <qemu-riscv@nongnu.org>; Mon, 26 Aug 2024 08:17:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1724685460; x=1725290260;
+ darn=nongnu.org; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=dqQoKcoDOKFgPgGpX4HF8XWoErRV8UXUlh5gWYPgXpQ=;
+ b=o3WQASzobA9n0qNr/ANu42pXwfL8+D5LkEVKqlQflhu8LlW2Yl4jBsrqb32an3wMfz
+ vc17GzFTAMVHLIC4RR/LWDABJWtGMvllJhcSRPgel7ix64rNd1SmOTCuL89C5cXAujMR
+ plNB5cccSu2TGMqi4loYFul+AXjRbVHjpboXSscd/pkulCw1zAOfautUlk23AG1k4O5U
+ jC2QDCMSNyWNOrVYAtShBhbSLS0Bv34lGisZio6TabshY8VX5ioQmhee8ZswCI0fOEEx
+ zG2M644CMgHIEEE4R7ZejEGpGZDvZioPfovSlqNksp8JDyrGN6h+xugg8d1OcGlXJGpR
+ +LVQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1724685460; x=1725290260;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=dqQoKcoDOKFgPgGpX4HF8XWoErRV8UXUlh5gWYPgXpQ=;
+ b=dpHF3nvWc6exeAGCAm4qWLK2NePTOUvhDtV95KzX7pIK6okE7LUDfvDqN2+g9YWGMZ
+ TLKOUVTK+Bqz5+WUiEZGhqE9AlEgINpAlWBDfgcRCJ9HXDCxoVCJUr8UX2UfTG4/Oi8K
+ XkZasW68O5NhrAwmZUHCFMOC4nONhoW1o4cmqHBaKuxbKAEq9hBc+4fcEMlKjNxByXhy
+ TSmnLuh7eR11+AoZUVhryDw045fzbHeC1pMi87AeWfWjOTWHzJeAUOqbnfwgoaELUwpy
+ W7Ok8tM9Y/+3yc9ZF+ow5e39vBzRCfwMt3zT3hj3pGu1Kow5yIOOtYqMlT1AxjA/DUIH
+ C06g==
+X-Gm-Message-State: AOJu0YwR/C4EHsPRZSIesmeIsIqrGmXFM2kkCMvPJe0ti+X2TK2sINtP
+ PFYE/nVfxdmnB7xzEkk2bx5VCedK7+yi8HlWXtzTDl4j2LzxeHyWZLi4EnuWbqU=
+X-Google-Smtp-Source: AGHT+IEtFCe1+E2I9V2byF21ANK4flfMPebSk/baJsFZ/GfHOdnc7XYLgsOAqc8qnBOz064CIaMEfA==
+X-Received: by 2002:a05:6a21:170f:b0:1c3:a760:9757 with SMTP id
+ adf61e73a8af0-1cc8a084893mr12302760637.49.1724685459735; 
+ Mon, 26 Aug 2024 08:17:39 -0700 (PDT)
+Received: from debug.ba.rivosinc.com ([64.71.180.162])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-71434235f77sm7384062b3a.13.2024.08.26.08.17.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 26 Aug 2024 08:17:39 -0700 (PDT)
+Date: Mon, 26 Aug 2024 08:17:37 -0700
+From: Deepak Gupta <debug@rivosinc.com>
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com,
+ Alistair.Francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ jim.shu@sifive.com, andy.chiu@sifive.com, kito.cheng@sifive.com
+Subject: Re: [PATCH v8 04/17] target/riscv: additional code information for
+ sw check
+Message-ID: <ZsyckV8gkxTW1+9K@debug.ba.rivosinc.com>
+References: <20240823190140.4156920-1-debug@rivosinc.com>
+ <20240823190140.4156920-5-debug@rivosinc.com>
+ <10bf932c-ec07-4f2d-ae11-93fdd2bf84ee@linaro.org>
 MIME-Version: 1.0
-X-OriginatorOrg: starfivetech.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: NT0PR01MB1278.CHNPR01.prod.partner.outlook.cn
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0bb7dfca-64bd-4418-b2a6-08dcc59f6ded
-X-MS-Exchange-CrossTenant-originalarrivaltime: 26 Aug 2024 07:19:31.4341 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: Ku6Ay2H2+Bolo8j/H42FjMlf7EnpPrcNyia8Dwuq4cM5VMLQNsQnvrXJF6PzR8i+5Ulsy0hCNwLEHjyTgBa6RfqkQUOyOnaAJl+7H6y2h58=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: NT0PR01MB0990
-Received-SPF: pass client-ip=2406:e500:4420:2::703;
- envelope-from=jeeheng.sia@starfivetech.com;
- helo=CHN02-SH0-obe.outbound.protection.partner.outlook.cn
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <10bf932c-ec07-4f2d-ae11-93fdd2bf84ee@linaro.org>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
+ envelope-from=debug@rivosinc.com; helo=mail-pf1-x432.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -147,70 +98,28 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On Mon, Aug 26, 2024 at 09:59:55AM +1000, Richard Henderson wrote:
+>On 8/24/24 05:01, Deepak Gupta wrote:
+>>diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+>>index 12484ca7d2..9f08a67a9e 100644
+>>--- a/target/riscv/cpu_helper.c
+>>+++ b/target/riscv/cpu_helper.c
+>>@@ -1761,6 +1761,8 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>>                  cs->watchpoint_hit = NULL;
+>>              }
+>>              break;
+>>+        case RISCV_EXCP_SW_CHECK:
+>>+            tval = env->sw_check_code;
+>>          default:
+>
+>Missing break.
+>This should have warned about fall through...
 
+Strange, I didn't get warning on it.
+But will fix it.
 
-> -----Original Message-----
-> From: Sunil V L <sunilvl@ventanamicro.com>
-> Sent: Monday, August 26, 2024 3:14 PM
-> To: JeeHeng Sia <jeeheng.sia@starfivetech.com>
-> Cc: qemu-arm@nongnu.org; qemu-devel@nongnu.org; qemu-riscv@nongnu.org; ms=
-t@redhat.com; imammedo@redhat.com;
-> anisinha@redhat.com; peter.maydell@linaro.org; shannon.zhaosl@gmail.com; =
-palmer@dabbelt.com; alistair.francis@wdc.com;
-> bin.meng@windriver.com; liwei1518@gmail.com; dbarboza@ventanamicro.com; z=
-hiwei_liu@linux.alibaba.com
-> Subject: Re: [PATCH RESEND v4 0/3] Upgrade ACPI SPCR table to support SPC=
-R table revision 4 format
->=20
-> Hi Jee Heng,
->=20
-> On Mon, Aug 26, 2024 at 07:04:11AM +0000, JeeHeng Sia wrote:
-> >
-> >
-> > > -----Original Message-----
-> > > From: Sunil V L <sunilvl@ventanamicro.com>
-> > > Sent: Friday, August 23, 2024 10:29 PM
-> > > To: JeeHeng Sia <jeeheng.sia@starfivetech.com>
-> > > Cc: qemu-arm@nongnu.org; qemu-devel@nongnu.org; qemu-riscv@nongnu.org=
-; mst@redhat.com; imammedo@redhat.com;
-> > > anisinha@redhat.com; peter.maydell@linaro.org; shannon.zhaosl@gmail.c=
-om; palmer@dabbelt.com; alistair.francis@wdc.com;
-> > > bin.meng@windriver.com; liwei1518@gmail.com; dbarboza@ventanamicro.co=
-m; zhiwei_liu@linux.alibaba.com
-> > > Subject: Re: [PATCH RESEND v4 0/3] Upgrade ACPI SPCR table to support=
- SPCR table revision 4 format
-> > >
-> > > Hi Jee Heng,
-> > > On Fri, Aug 23, 2024 at 04:31:39AM -0700, Sia Jee Heng wrote:
-> > > > Update the SPCR table to accommodate the SPCR Table revision 4 [1].
-> > > > The SPCR table has been modified to adhere to the revision 4 format=
- [2].
-> > > >
-> > > > Meanwhile, the virt SPCR golden reference file for RISC-V have been=
- updated to
-> > > > accommodate the SPCR Table revision 4.
-> > > >
-> > > > [1]: https://learn.microsoft.com/en-us/windows-hardware/drivers/ser=
-ports/serial-port-console-redirection-table
-> > > > [2]: https://github.com/acpica/acpica/pull/931
-> > > >
-> > > Just curious - whether this needs changes in linux side as well? Does
-> > > current linux code work fine with version 4 of SPCR table on RISC-V?
-> > The current Linux ACPI Table has not yet been updated to support SPCR v=
-4.
-> > However, Linux RISC-V will be able to use the information in the QEMU's
-> > SPCR table to boot with behaviour similar to ARM.
-> > >
-> So, it means even if qemu risc-v SPCR is upgraded to version 4,
-> current linux continues to work. It may be just able to decode SPCR v2
-> fields only until enhanced to understand v4 but but doesn't break
-> anything or crash. Is that correct?
-Yes, correct.
->=20
-> Just wanted to confirm qemu changes can get merged without any
-> dependency.
->=20
-> Thanks!
-> Sunil
-
+>
+>
+>
+>r~
 
