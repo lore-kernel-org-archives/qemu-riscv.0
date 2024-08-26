@@ -4,79 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B985C5320E
-	for <qemu-riscv@archiver.kernel.org>; Mon, 26 Aug 2024 00:29:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF2ABC5321E
+	for <qemu-riscv@archiver.kernel.org>; Mon, 26 Aug 2024 02:47:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1siNbV-0000Cn-Ls; Sun, 25 Aug 2024 20:29:05 -0400
+	id 1siPlG-00075z-9f; Sun, 25 Aug 2024 22:47:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1siNbT-0008VR-MW; Sun, 25 Aug 2024 20:29:03 -0400
-Received: from mail-ej1-x630.google.com ([2a00:1450:4864:20::630])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1siNbS-0003Nx-3x; Sun, 25 Aug 2024 20:29:03 -0400
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-a869332c2c2so550458166b.0; 
- Sun, 25 Aug 2024 17:29:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1724632140; x=1725236940; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=1MX4Lr0OEKs9MXTNGgEzVKP1paPH1geOSzlrntY7HGY=;
- b=PzGVoAyhG5upHq7jJy0WqUzsrLeDxFHcky6zjdK8uuwVBsW1KoEYMpSpeC9Xl0RHn6
- f2XsgjaYECw1eZQxzRmNYCLloIGsw5Q88LhEjJ9d5ziBt1X8K8FFlE8vEFr9QZLKzmtD
- +o6wkZR9aIVOK5w0Rv9vpeedZP17yjzvukCAx579lI85ZDsHZIlB8ZyRPQCK2f2dxZ5c
- 6j1LDxKhNbzItG6OXO5RTtLixnTb3gmWw3j4F6D/7y2K7YgBMrwh69pGCs6t+hli5eXB
- xvUj1h0Tz6bM6eOyozknV/oD3Wu4avCQSr4MeydLG8jycB9rnEHqd1IgeWsilSeoLRQf
- E43w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724632140; x=1725236940;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=1MX4Lr0OEKs9MXTNGgEzVKP1paPH1geOSzlrntY7HGY=;
- b=F2sD7IzZaOwq2i9T3QpzW4tuokQMvt4I+l+3pTCN3ztynUbq3RHWNbtebXvFhX15jb
- 4MtFT9Feg73EUIN2mJ/FuL98yQfu3Z3XEUsXllOIlCzAXVV1CSCN+C8BA4KfXtIMecCD
- duXEtXfTC26EqCMOlO0zSu6Mz1OnSKJeshLycV+16FODjuD5SBNU3fjgHJyWfhjF4eVx
- QK2Yv2tJFZ088pUYyCRONo4rVrR3/jqZq248T3KYFzDpvjgFcGd2AycHRVEhgb8af7LN
- GuBJOm8YCcNt45Lz1rqV8Qm3nOSUdosDzP+zDVocYQTgcx07pz5L/RyIWCC6J5x2p1dV
- 19tQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVtEZu5pimWBQ16IFfhdslDxHJNBxzb1H9hf+L6v2I+n05NHK2pZhGevDZDCDagF0043m0YBl0s7TmN@nongnu.org
-X-Gm-Message-State: AOJu0Yz1hH9WVQjxh3vTLyNw73mcr4RFq+a13ZqMdy+vlwprwom8o/zm
- 1MBOZK7YE8rzcKcjrvtNzlKJuJEAV8vfgSRV76FuawZqaVwxHFWnIuN/niVvSCdpaOPXcJT49bW
- IaL14BSei5gpOlfZGEDsoR8Dfq7c=
-X-Google-Smtp-Source: AGHT+IFVHi+fISY8iDHwjIlfLz/nKiUCwegoZb7OXaEckTeRKX6/Wsk7TzkjSVPQpTEpkBKyJ6q629vDE6Dbdv7AN5w=
-X-Received: by 2002:a17:907:2dac:b0:a7a:8dcd:ffb4 with SMTP id
- a640c23a62f3a-a868a69568cmr1164795166b.17.1724632139453; Sun, 25 Aug 2024
- 17:28:59 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alvinga@andestech.com>)
+ id 1siPlF-00075P-2B
+ for qemu-riscv@nongnu.org; Sun, 25 Aug 2024 22:47:17 -0400
+Received: from 60-248-80-70.hinet-ip.hinet.net ([60.248.80.70]
+ helo=Atcsqr.andestech.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <alvinga@andestech.com>)
+ id 1siPlC-0000Bu-8E
+ for qemu-riscv@nongnu.org; Sun, 25 Aug 2024 22:47:16 -0400
+Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
+ by Atcsqr.andestech.com with ESMTPS id 47Q2l0Al051668
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
+ Mon, 26 Aug 2024 10:47:00 +0800 (+08)
+ (envelope-from alvinga@andestech.com)
+Received: from atctrx.andestech.com (10.0.15.190) by ATCPCS34.andestech.com
+ (10.0.1.134) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 26 Aug
+ 2024 10:47:01 +0800
+To: <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>
+CC: <alistair.francis@wdc.com>, <bin.meng@windriver.com>,
+ <liwei1518@gmail.com>, <dbarboza@ventanamicro.com>,
+ <zhiwei_liu@linux.alibaba.com>, Alvin Chang <alvinga@andestech.com>
+Subject: [PATCH v4 1/2] target/riscv: Preliminary textra trigger CSR writting
+ support
+Date: Mon, 26 Aug 2024 10:46:56 +0800
+Message-ID: <20240826024657.262553-2-alvinga@andestech.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240826024657.262553-1-alvinga@andestech.com>
+References: <20240826024657.262553-1-alvinga@andestech.com>
 MIME-Version: 1.0
-References: <20240821075040.498945-2-ajones@ventanamicro.com>
-In-Reply-To: <20240821075040.498945-2-ajones@ventanamicro.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 26 Aug 2024 10:28:32 +1000
-Message-ID: <CAKmqyKNM7_ux4o+=yVkW9xzfzwZRbu_YYy9aO3bQD6ZMuOe0nQ@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv/kvm: Fix the group bit setting of AIA
-To: Andrew Jones <ajones@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com, 
- alistair.francis@wdc.com, bmeng.cn@gmail.com, yongxuan.wang@sifive.com, 
- dbarboza@ventanamicro.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::630;
- envelope-from=alistair23@gmail.com; helo=mail-ej1-x630.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.0.15.190]
+X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
+ ATCPCS34.andestech.com (10.0.1.134)
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 47Q2l0Al051668
+Received-SPF: pass client-ip=60.248.80.70; envelope-from=alvinga@andestech.com;
+ helo=Atcsqr.andestech.com
+X-Spam_score_int: -8
+X-Spam_score: -0.9
+X-Spam_bar: /
+X-Spam_report: (-0.9 / 5.0 requ) BAYES_00=-1.9, RDNS_DYNAMIC=0.982,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001, TVD_RCVD_IP=0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -89,58 +69,152 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-to:  Alvin Chang <alvinga@andestech.com>
+From:  Alvin Chang via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Aug 21, 2024 at 5:51=E2=80=AFPM Andrew Jones <ajones@ventanamicro.c=
-om> wrote:
->
-> Just as the hart bit setting of the AIA should be calculated as
-> ceil(log2(max_hart_id + 1)) the group bit setting should be
-> calculated as ceil(log2(max_group_id + 1)). The hart bits are
-> implemented by passing max_hart_id to find_last_bit() and adding
-> one to the result. Do the same for the group bit setting.
->
-> Signed-off-by: Andrew Jones <ajones@ventanamicro.com>
+This commit allows program to write textra trigger CSR for type 2, 3, 6
+triggers. In this preliminary patch, the textra.MHVALUE and the
+textra.MHSELECT fields are allowed to be configured. Other fields, such
+as textra.SBYTEMASK, textra.SVALUE, and textra.SSELECT, are hardwired to
+zero for now.
 
-Thanks!
+For textra.MHSELECT field, the only legal values are 0 (ignore) and 4
+(mcontext). Writing 1~3 into textra.MHSELECT will be changed to 0, and
+writing 5~7 into textra.MHSELECT will be changed to 4. This behavior is
+aligned to RISC-V SPIKE simulator.
 
-Applied to riscv-to-apply.next
+Signed-off-by: Alvin Chang <alvinga@andestech.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/cpu_bits.h | 10 ++++++
+ target/riscv/debug.c    | 69 +++++++++++++++++++++++++++++++++++++----
+ 2 files changed, 73 insertions(+), 6 deletions(-)
 
-Alistair
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index 32b068f18a..7e3f629356 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -947,6 +947,16 @@ typedef enum RISCVException {
+ #define JVT_BASE                           (~0x3F)
+ 
+ /* Debug Sdtrig CSR masks */
++#define TEXTRA32_MHVALUE                   0xFC000000
++#define TEXTRA32_MHSELECT                  0x03800000
++#define TEXTRA32_SBYTEMASK                 0x000C0000
++#define TEXTRA32_SVALUE                    0x0003FFFC
++#define TEXTRA32_SSELECT                   0x00000003
++#define TEXTRA64_MHVALUE                   0xFFF8000000000000ULL
++#define TEXTRA64_MHSELECT                  0x0007000000000000ULL
++#define TEXTRA64_SBYTEMASK                 0x000000F000000000ULL
++#define TEXTRA64_SVALUE                    0x00000003FFFFFFFCULL
++#define TEXTRA64_SSELECT                   0x0000000000000003ULL
+ #define MCONTEXT32                         0x0000003F
+ #define MCONTEXT64                         0x0000000000001FFFULL
+ #define MCONTEXT32_HCONTEXT                0x0000007F
+diff --git a/target/riscv/debug.c b/target/riscv/debug.c
+index 0b5099ff9a..d6b4a06144 100644
+--- a/target/riscv/debug.c
++++ b/target/riscv/debug.c
+@@ -217,6 +217,66 @@ static inline void warn_always_zero_bit(target_ulong val, target_ulong mask,
+     }
+ }
+ 
++static target_ulong textra_validate(CPURISCVState *env, target_ulong tdata3)
++{
++    target_ulong mhvalue, mhselect;
++    target_ulong mhselect_new;
++    target_ulong textra;
++    const uint32_t mhselect_no_rvh[8] = { 0, 0, 0, 0, 4, 4, 4, 4 };
++
++    switch (riscv_cpu_mxl(env)) {
++    case MXL_RV32:
++        mhvalue  = get_field(tdata3, TEXTRA32_MHVALUE);
++        mhselect = get_field(tdata3, TEXTRA32_MHSELECT);
++        /* Validate unimplemented (always zero) bits */
++        warn_always_zero_bit(tdata3, (target_ulong)TEXTRA32_SBYTEMASK,
++                             "sbytemask");
++        warn_always_zero_bit(tdata3, (target_ulong)TEXTRA32_SVALUE,
++                             "svalue");
++        warn_always_zero_bit(tdata3, (target_ulong)TEXTRA32_SSELECT,
++                             "sselect");
++        break;
++    case MXL_RV64:
++    case MXL_RV128:
++        mhvalue  = get_field(tdata3, TEXTRA64_MHVALUE);
++        mhselect = get_field(tdata3, TEXTRA64_MHSELECT);
++        /* Validate unimplemented (always zero) bits */
++        warn_always_zero_bit(tdata3, (target_ulong)TEXTRA64_SBYTEMASK,
++                             "sbytemask");
++        warn_always_zero_bit(tdata3, (target_ulong)TEXTRA64_SVALUE,
++                             "svalue");
++        warn_always_zero_bit(tdata3, (target_ulong)TEXTRA64_SSELECT,
++                             "sselect");
++        break;
++    default:
++        g_assert_not_reached();
++    }
++
++    /* Validate mhselect. */
++    mhselect_new = mhselect_no_rvh[mhselect];
++    if (mhselect != mhselect_new) {
++        qemu_log_mask(LOG_UNIMP, "mhselect only supports 0 or 4 for now\n");
++    }
++
++    /* Write legal values into textra */
++    textra = 0;
++    switch (riscv_cpu_mxl(env)) {
++    case MXL_RV32:
++        textra = set_field(textra, TEXTRA32_MHVALUE,  mhvalue);
++        textra = set_field(textra, TEXTRA32_MHSELECT, mhselect_new);
++        break;
++    case MXL_RV64:
++    case MXL_RV128:
++        textra = set_field(textra, TEXTRA64_MHVALUE,  mhvalue);
++        textra = set_field(textra, TEXTRA64_MHSELECT, mhselect_new);
++        break;
++    default:
++        g_assert_not_reached();
++    }
++
++    return textra;
++}
++
+ static void do_trigger_action(CPURISCVState *env, target_ulong trigger_index)
+ {
+     trigger_action_t action = get_trigger_action(env, trigger_index);
+@@ -441,8 +501,7 @@ static void type2_reg_write(CPURISCVState *env, target_ulong index,
+         }
+         break;
+     case TDATA3:
+-        qemu_log_mask(LOG_UNIMP,
+-                      "tdata3 is not supported for type 2 trigger\n");
++        env->tdata3[index] = textra_validate(env, val);
+         break;
+     default:
+         g_assert_not_reached();
+@@ -558,8 +617,7 @@ static void type6_reg_write(CPURISCVState *env, target_ulong index,
+         }
+         break;
+     case TDATA3:
+-        qemu_log_mask(LOG_UNIMP,
+-                      "tdata3 is not supported for type 6 trigger\n");
++        env->tdata3[index] = textra_validate(env, val);
+         break;
+     default:
+         g_assert_not_reached();
+@@ -741,8 +799,7 @@ static void itrigger_reg_write(CPURISCVState *env, target_ulong index,
+                       "tdata2 is not supported for icount trigger\n");
+         break;
+     case TDATA3:
+-        qemu_log_mask(LOG_UNIMP,
+-                      "tdata3 is not supported for icount trigger\n");
++        env->tdata3[index] = textra_validate(env, val);
+         break;
+     default:
+         g_assert_not_reached();
+-- 
+2.34.1
 
-> ---
->  target/riscv/kvm/kvm-cpu.c | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
->
-> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-> index f6e3156b8d2f..341af901c5b0 100644
-> --- a/target/riscv/kvm/kvm-cpu.c
-> +++ b/target/riscv/kvm/kvm-cpu.c
-> @@ -1695,6 +1695,7 @@ void kvm_riscv_aia_create(MachineState *machine, ui=
-nt64_t group_shift,
->      uint64_t max_hart_per_socket =3D 0;
->      uint64_t socket, base_hart, hart_count, socket_imsic_base, imsic_add=
-r;
->      uint64_t socket_bits, hart_bits, guest_bits;
-> +    uint64_t max_group_id;
->
->      aia_fd =3D kvm_create_device(kvm_state, KVM_DEV_TYPE_RISCV_AIA, fals=
-e);
->
-> @@ -1742,7 +1743,8 @@ void kvm_riscv_aia_create(MachineState *machine, ui=
-nt64_t group_shift,
->
->
->      if (socket_count > 1) {
-> -        socket_bits =3D find_last_bit(&socket_count, BITS_PER_LONG) + 1;
-> +        max_group_id =3D socket_count - 1;
-> +        socket_bits =3D find_last_bit(&max_group_id, BITS_PER_LONG) + 1;
->          ret =3D kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
->                                  KVM_DEV_RISCV_AIA_CONFIG_GROUP_BITS,
->                                  &socket_bits, true, NULL);
-> --
-> 2.45.2
->
->
 
