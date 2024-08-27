@@ -4,80 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D35B0C52D6F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Aug 2024 03:56:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A53B6C52D6F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Aug 2024 03:58:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sinJ3-0002W1-IU; Mon, 26 Aug 2024 23:55:45 -0400
+	id 1sinLm-0005c8-JG; Mon, 26 Aug 2024 23:58:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sinJ1-0002OX-Jz; Mon, 26 Aug 2024 23:55:43 -0400
-Received: from mail-ua1-x930.google.com ([2607:f8b0:4864:20::930])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1sinLj-0005V9-Uu
+ for qemu-riscv@nongnu.org; Mon, 26 Aug 2024 23:58:31 -0400
+Received: from mail-oo1-xc33.google.com ([2607:f8b0:4864:20::c33])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sinJ0-0004gV-2z; Mon, 26 Aug 2024 23:55:43 -0400
-Received: by mail-ua1-x930.google.com with SMTP id
- a1e0cc1a2514c-84686812614so493314241.0; 
- Mon, 26 Aug 2024 20:55:40 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1sinLi-0005Tv-Ey
+ for qemu-riscv@nongnu.org; Mon, 26 Aug 2024 23:58:31 -0400
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-5d5c7f24372so3963601eaf.0
+ for <qemu-riscv@nongnu.org>; Mon, 26 Aug 2024 20:58:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1724730940; x=1725335740; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=D1SNd4nsyWr8Pv/32CN6ndditvNTTWpjTjkiuXkAwAk=;
- b=bjFXVxO00hUlXZiFCURFrQh5ZFjF9DAt6Wne7/zfEW4QyXAKsrxM5PsF7VRLsKp/Ec
- 7DzAKNh51f6GPgMbcpFpoz8269tMR99GMIBhIlJ9mY/5U0Vp8j1m5iZLEZjI63hDFoSd
- oKy5oXYvlE2C6jWqYMqY1W5Jr7T0wj1AVh+EWJTy4Dx+d2dl8YwwHdizG/jf7tVPH9uW
- XH5gX7+xb8N8uENexK3acrP0yAqFvde0OwFjWS3uKFSFrNNwNwOmNdR0OD0bIcdsanzd
- MhwIf+GqWzDUxdCpytThGUMzMufnAQyL83X8tS9taE54uTSF8ewveN/EnEDMwaAIdR1d
- BXvw==
+ d=linaro.org; s=google; t=1724731109; x=1725335909; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=CCe5eZH+NKORsMo71xV9TPirYrLWMjvgWdaTAlepePA=;
+ b=IETVbHjQjCmfaiUMoSTTEGOKOfHClVUFkzz5eRQ7LTK8VmPzHEwd8D1xadFdCGKGNe
+ WMxX6EH8/AnuTFpQ6lqYtx5Pz+31lt+HCTC/oKf9OTSYm0aAUdz0OPCrCF09PO8LE2PU
+ 7mv7alDyzl0NOLRPijpS8siFOamOWjSDvxAAGga4o42H1o15GRrn4vHtbo36PtSDznz6
+ DeLrr4POe42k/JSBOmmo6KiRKdLCPjyr49feo11YMeqhFlLm5vMaWeFBUj3Nif4KZ0wB
+ YyyjsuRzk8E1A1efJH61Aiz9yBmqxVobEk0rLFED6pXeS9lXKLKor04SV9yf6vxY6CdI
+ wdag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724730940; x=1725335740;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=D1SNd4nsyWr8Pv/32CN6ndditvNTTWpjTjkiuXkAwAk=;
- b=lAEstosqXwHZU2aJsPX65Ej1bdBsznL6m4rnKM8cIiaJr9byPe/89Vh8sisO1nKeGJ
- ofIDGtDmNXZbEI56jHahIjXBauF5uF/dhPY6eH5QpMvE44KAQYpF1QDGvKEsaXTYRdfI
- 135ZWUX4gVybPXR3GIdSWqk7Z48+JB6RNnmtA67qXpvbOiw4d+JQSdEhUKdU8B/VlfPg
- SBHWGbmKe5V/bxVE2lMpOlG2aPWd5SsS2MyucN1yMrlHbqlMSguZ8aTkxtLzIsfWF7lw
- IppEHozwuCe2PaQi0FQNpFCTvvj5ThMAWda+ry0qZXvotgEeFbNjbT3znCp06qgYZ7xD
- kQNA==
+ d=1e100.net; s=20230601; t=1724731109; x=1725335909;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=CCe5eZH+NKORsMo71xV9TPirYrLWMjvgWdaTAlepePA=;
+ b=iwMAkLQQtrQQMSqyq4EvpkOh6Wa3Rru/P1kCxnwRYnRBkbZJtYcvnBPmN6APeKUf14
+ d0IZc2RYz6Eg56s3skp0PczUHNluu5viNl/cSQ8jtqglS9kT0b9vM6LTzCdO/Jd+E8dX
+ r7IV8RXUjg954hwxwEyUTz0Sa04kTu2n52AY2XDViiAz+hWnufv2WouBPWQuPCp5rLY0
+ 7czUyP+1DZgMGs0mIqW1/iXNYiPe/T+ib90ApCcEO8yUBzg8TSvpg4bWCNFtFwr7NR5x
+ 48Pt5h2Yw5WjXE+AxvgWPds5TYdGx7uB8TIsn1TH4u9lrdT5+fWYsA0rS3wHkLglBo0e
+ elqQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWqyuMERdFc9/uiRW6QxcqmByDn1f50VQ/8jyFxNQ3geJUFxmR3uNqd0dxKRtXlORaqPcyNYM1+pD0s@nongnu.org
-X-Gm-Message-State: AOJu0YxsyRCAEjZBmaAXEkkJyJNTJcrQ6fM1xGO5jba3M6b0iyRUUPBy
- DbRpaGjO6PaE75Xv0DgL0cxcBt/Rz3zvZWIAp/OSAWHpR38fWahBh/TurQhsAFdAAR0uYtvTHHO
- yh2abmJWU2QFH1dLiPICcvEimK6o=
-X-Google-Smtp-Source: AGHT+IHIMqhHLqg6ASQVi5Giee2b2sxGTYWe+vZvml9XR9gfu8IJHLR3QY+Xe5zkgNFQqUMpCk0uJ8J9Ie8HERg0Ae8=
-X-Received: by 2002:a05:6102:358a:b0:492:98bf:75ef with SMTP id
- ada2fe7eead31-49a3bc4b4c9mr1471193137.8.1724730939860; Mon, 26 Aug 2024
- 20:55:39 -0700 (PDT)
+ AJvYcCVOfAwGnMC997D+zVsELKcYzwOGw7RRRzO0j2v+5yaUysknJ22XNJ7sU0BATnojepwG1q25ZxDctPf0@nongnu.org
+X-Gm-Message-State: AOJu0YwWif6lzFqQWUiTtW3zk4a9MroTcFSnKZGFX+KzBgLhsuyzRKQA
+ pf/o6Rjx6XEfAe94JjpnizVTI5qrh5uG2nzs+3u7TkXs+Z8heQfaeIS/A9PDFs8=
+X-Google-Smtp-Source: AGHT+IF4czzlgMJJI47soeFIUKhiye2JG8VhHryaeV2X8fB7QiHdE8TQsx6DJkEhWnDLY26XssSgTA==
+X-Received: by 2002:a05:6358:393:b0:1b5:ec65:7fee with SMTP id
+ e5c5f4694b2df-1b5ec6587c9mr191657055d.16.1724731108727; 
+ Mon, 26 Aug 2024 20:58:28 -0700 (PDT)
+Received: from ?IPV6:2001:8004:5110:2082:f68a:6871:1edc:69fe?
+ ([2001:8004:5110:2082:f68a:6871:1edc:69fe])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-7cd9acabbfesm7220763a12.33.2024.08.26.20.58.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 26 Aug 2024 20:58:28 -0700 (PDT)
+Message-ID: <db8fa0c7-5c8b-45ca-a0e2-e660ffe7cd42@linaro.org>
+Date: Tue, 27 Aug 2024 13:58:19 +1000
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v9 03/17] target/riscv: save and restore elp state on priv
+ transitions
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Deepak Gupta <debug@rivosinc.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, palmer@dabbelt.com, Alistair.Francis@wdc.com,
+ bmeng.cn@gmail.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, jim.shu@sifive.com, andy.chiu@sifive.com,
+ kito.cheng@sifive.com
 References: <20240826152949.294506-1-debug@rivosinc.com>
- <20240826152949.294506-5-debug@rivosinc.com>
-In-Reply-To: <20240826152949.294506-5-debug@rivosinc.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 27 Aug 2024 13:55:13 +1000
-Message-ID: <CAKmqyKOCJRm1YSpXQ9pthF4Vom--UnXyMxe=4ZbBu4hT0fB-UQ@mail.gmail.com>
-Subject: Re: [PATCH v9 04/17] target/riscv: additional code information for sw
- check
-To: Deepak Gupta <debug@rivosinc.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
- Alistair.Francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com, 
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, jim.shu@sifive.com, 
- andy.chiu@sifive.com, richard.henderson@linaro.org, kito.cheng@sifive.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::930;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x930.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ <20240826152949.294506-4-debug@rivosinc.com>
+ <da021104-6836-4e5b-a8a4-991f975c553c@linaro.org>
+ <Zs0jURx7jbgd64jV@debug.ba.rivosinc.com>
+ <056740af-1b61-426a-940d-3ca118ebd081@linaro.org>
+ <CAKmqyKOni_x8bw_3TfdV=xGg0MX-NPnPgo84dsKojdRqO_j36g@mail.gmail.com>
+Content-Language: en-US
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <CAKmqyKOni_x8bw_3TfdV=xGg0MX-NPnPgo84dsKojdRqO_j36g@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c33;
+ envelope-from=richard.henderson@linaro.org; helo=mail-oo1-xc33.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -95,74 +108,13 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Aug 27, 2024 at 1:32=E2=80=AFAM Deepak Gupta <debug@rivosinc.com> w=
-rote:
->
-> sw check exception support was recently added. This patch further augment=
-s
-> sw check exception by providing support for additional code which is
-> provided in *tval. Adds `sw_check_code` field in cpuarchstate. Whenever
-> sw check exception is raised *tval gets the value deposited in
-> `sw_check_code`.
->
-> Signed-off-by: Deepak Gupta <debug@rivosinc.com>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+On 8/27/24 13:53, Alistair Francis wrote:
+> Exposing the *envcfg CSRs to userspace seems tricky as everything is
+> currently built with the S/M CSRs removed from user builds.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+It is as simple as moving them out of ifdefs, then initializing them as needed in reset 
+for CONFIG_USER_ONLY.  That's what we do for Arm.
 
-Alistair
 
-> ---
->  target/riscv/cpu.h        | 2 ++
->  target/riscv/cpu_helper.c | 3 +++
->  target/riscv/csr.c        | 1 +
->  3 files changed, 6 insertions(+)
->
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 7be0fa30f7..11c6513a90 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -224,6 +224,8 @@ struct CPUArchState {
->
->      /* elp state for zicfilp extension */
->      bool      elp;
-> +    /* sw check code for sw check exception */
-> +    target_ulong sw_check_code;
->  #ifdef CONFIG_USER_ONLY
->      uint32_t elf_flags;
->      bool ufcfien;
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 12484ca7d2..121fef1be6 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -1761,6 +1761,9 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->                  cs->watchpoint_hit =3D NULL;
->              }
->              break;
-> +        case RISCV_EXCP_SW_CHECK:
-> +            tval =3D env->sw_check_code;
-> +            break;
->          default:
->              break;
->          }
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 5771a14848..a5a969a377 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -1179,6 +1179,7 @@ static const uint64_t all_ints =3D M_MODE_INTERRUPT=
-S | S_MODE_INTERRUPTS |
->                           (1ULL << (RISCV_EXCP_INST_PAGE_FAULT)) | \
->                           (1ULL << (RISCV_EXCP_LOAD_PAGE_FAULT)) | \
->                           (1ULL << (RISCV_EXCP_STORE_PAGE_FAULT)) | \
-> +                         (1ULL << (RISCV_EXCP_SW_CHECK)) | \
->                           (1ULL << (RISCV_EXCP_INST_GUEST_PAGE_FAULT)) | =
-\
->                           (1ULL << (RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT)) =
-| \
->                           (1ULL << (RISCV_EXCP_VIRT_INSTRUCTION_FAULT)) |=
- \
-> --
-> 2.44.0
->
->
+r~
 
