@@ -4,89 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65450C5473F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Aug 2024 23:07:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 111E3C5473F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Aug 2024 23:19:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sj5Gd-0005XC-EP; Tue, 27 Aug 2024 19:06:27 -0400
+	id 1sj5T7-0002k8-8Z; Tue, 27 Aug 2024 19:19:21 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sj5Gb-0005TD-UU
- for qemu-riscv@nongnu.org; Tue, 27 Aug 2024 19:06:25 -0400
-Received: from mail-pf1-x431.google.com ([2607:f8b0:4864:20::431])
+ id 1sj5T3-0002Xy-0R
+ for qemu-riscv@nongnu.org; Tue, 27 Aug 2024 19:19:17 -0400
+Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sj5Ga-00080W-Bd
- for qemu-riscv@nongnu.org; Tue, 27 Aug 2024 19:06:25 -0400
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-71423704ef3so4892500b3a.3
- for <qemu-riscv@nongnu.org>; Tue, 27 Aug 2024 16:06:22 -0700 (PDT)
+ id 1sj5Sz-0000pS-Oh
+ for qemu-riscv@nongnu.org; Tue, 27 Aug 2024 19:19:16 -0400
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-2020ac89cabso55926385ad.1
+ for <qemu-riscv@nongnu.org>; Tue, 27 Aug 2024 16:19:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1724799981; x=1725404781;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1724800752; x=1725405552;
  darn=nongnu.org; 
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=KNvkt4n/+2yRALA7QxJ9ImAlFQ5JbuehZ8EoLiYSyLQ=;
- b=l+9zYAIQm1lo4/2zWIeHdT5B0eHoYPFV+A5AR64yLym5i47hhhoVTMlpnQ4bH6AzdN
- ZN27aHNTqhk45wzdmpYZO2g5L/O3UrcXrPt0T/8mg3vsB7uWiek7m/By8AVUwwKbJM/c
- AyRz+vwjM8KvxRLyzN+1KA6XK1mP+VxsR56APDa1Y5VTimgdMhYelhrlT4lMiO/EkIlL
- RvQ6mPDLiYT9CGgXOuYguUpKhhn26YEvUaipt75Xz/JzqZpCSEJsR6AvVgqROL7UeyKV
- RxpY5t04wMJh1CZo0nKc3cb3ETnL2U6lEEiQdujsshZ+HOS55zKFq8VjqGU0MfU9v6X4
- bLuA==
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=wKicxsSUoIM+Q8CHwfOLtvkXELhMGHcyX8ahibvlzBY=;
+ b=jHTh+ilkAqpg7OCZ9Uf3C5Z2fdHnjwYPlS1gWVbI4hpFjJDB8x7PeqVnTOtOWck6G0
+ BdAV8CyPtu6JTVp89g+oP7FALly56PnvTJZ7SiCYJ1EQYYmj6oQeot419NNpE+Ij1MX/
+ ZoU246oNU45mUKbmpcCZJXwpY69rJKUCPcDETxXYoJwq59QRyv9cytW87w28CDHqsNWX
+ trCqjdBFZDDc8c8vaMu2mDnaxq+UuVMQLc+gJsmyTIYWY4SqiAH1LiRtJQgNP8MQufK4
+ SJRhj02+EZ2zLjpY0SGPvAAXksZseSIB0tkoQdyFERBUEVEe7iEM0RDU3AlcKSHGgZZf
+ AADw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724799981; x=1725404781;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=KNvkt4n/+2yRALA7QxJ9ImAlFQ5JbuehZ8EoLiYSyLQ=;
- b=vPnKDJ4tmoD/JU5hvQ70Gyf+8kuHGk/FN5SrDMOA9rVw+bpSxkJhooN1+lk2r3uDAK
- PgZ01rKV5ZgD2q+Vo8GfFXeBRNHSZgJFSPBPn5IDFko0GtkNPxaRAK1gZdwUeMwfgrk1
- ckdtmEOTvpRZj5lkILCPglxoOl6guV+X2qiQb8pXKXUkKc7+rWkThY72bPvwznsfq6Yq
- IQ2UIPFIPncUl2bcnvTtJqJrvp31xE7KCfwaTmzsPEAZ7zA84kCAMFvMKrBj18klvPHe
- s1z+2gnfosbbWfK8Tp7vt5dpmmvlw1izSMclS2PnbYU0cJXfry1nb8QSyEI5VTVhqeB6
- zHLQ==
-X-Gm-Message-State: AOJu0YwqJsMVUiQXyzwL6LiI5L1NXMbED0OHaR9Bx/pGAC0uXldYGfRn
- XNIGTxJQt/PI0bzTRMK8Vcfg0jgYmyKe+kQHSUoKnOnIBbim8KAGpDORfZ1RdPE=
-X-Google-Smtp-Source: AGHT+IHwdnJKpPt8O1usG25Lg/pEcjqPSMTrzrZ9MIpIsrAdksIyC8Q1kd+vqN+2r5ZpVpuK65fhsQ==
-X-Received: by 2002:a05:6a00:1953:b0:705:951e:ed84 with SMTP id
- d2e1a72fcca58-71445d4d2e8mr17435241b3a.15.1724799981130; 
- Tue, 27 Aug 2024 16:06:21 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1724800752; x=1725405552;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=wKicxsSUoIM+Q8CHwfOLtvkXELhMGHcyX8ahibvlzBY=;
+ b=shBa6f3foGrpiAzflFVyE28Zr4JSpnuGXlQZjtnmcgFeENLNGRTePwa/+ZO4wXZyOw
+ Po4z6sIJj0U5y4ycy/sQ2P0GJ6dyaHmd9KHjlLdr4FFd6mf9q+th0uyf2m5dPhdgSFtW
+ DU7zsJj6GNSdjQM018SpnJAtlf1SQupZZPtbgW0hoLh1vp8Iwxs++Bc4fB6mXiCEXHwd
+ Gb5EZwWYXn0g7HFlFXbX4cMoAp7Kz8ScWU72DY+x/FK3Es+o1/2VVldZNPxZfqkoLlbs
+ U19upJsLvOjc9sXRoRjM+8YfOdWcy3Ew3M3N7gALJCMkIOaTXpV9x63rDN8OE5bFgHcc
+ 1YZA==
+X-Gm-Message-State: AOJu0YxI6Cq44q0J6iIM41ZPAc+obELTLvfSJW1fMfHNmMNeax8e87GT
+ yOc3D619W9JTlbVpWMUDMkpcA3F0Dc99km7eaZ3P8w4BNyL/LNrJVy2TR6ERwJv4UqLAh4B+8TX
+ G
+X-Google-Smtp-Source: AGHT+IGoSmGtqr0bomgMNgtLvy1Ru6xPoeXR3NDWuR5yaozgIOyu7/y1XFZ2wQ7HtXFitcLL8xPsLA==
+X-Received: by 2002:a17:903:230b:b0:200:aa31:dc8d with SMTP id
+ d9443c01a7336-2039e52cb0fmr163637595ad.63.1724800752148; 
+ Tue, 27 Aug 2024 16:19:12 -0700 (PDT)
 Received: from debug.ba.rivosinc.com ([64.71.180.162])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7143422ec2esm9051766b3a.27.2024.08.27.16.06.20
+ d9443c01a7336-203b0ee6179sm57785155ad.92.2024.08.27.16.19.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 Aug 2024 16:06:20 -0700 (PDT)
-Date: Tue, 27 Aug 2024 16:06:18 -0700
+ Tue, 27 Aug 2024 16:19:11 -0700 (PDT)
 From: Deepak Gupta <debug@rivosinc.com>
-To: Alistair Francis <alistair23@gmail.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com,
- Alistair.Francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- jim.shu@sifive.com, andy.chiu@sifive.com,
- richard.henderson@linaro.org, kito.cheng@sifive.com
-Subject: Re: [PATCH v9 11/17] target/riscv: mmu changes for zicfiss shadow
- stack protection
-Message-ID: <Zs5b6mXdYLMzoW0f@debug.ba.rivosinc.com>
-References: <20240826152949.294506-1-debug@rivosinc.com>
- <20240826152949.294506-12-debug@rivosinc.com>
- <CAKmqyKOQcUBjz0PsaYFWnir=FCNA_+7CkrN=5PLH+ayxU+zLkg@mail.gmail.com>
+To: qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, laurent@vivier.eu,
+ bmeng.cn@gmail.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, jim.shu@sifive.com, andy.chiu@sifive.com,
+ kito.cheng@sifive.com, Deepak Gupta <debug@rivosinc.com>,
+ Richard Henderson <richard.henderson@linaro.org>
+Subject: [PATCH v10 01/21] target/riscv: expose *envcfg csr and priv to
+ qemu-user as well
+Date: Tue, 27 Aug 2024 16:18:45 -0700
+Message-ID: <20240827231906.553327-2-debug@rivosinc.com>
+X-Mailer: git-send-email 2.45.0
+In-Reply-To: <20240827231906.553327-1-debug@rivosinc.com>
+References: <20240827231906.553327-1-debug@rivosinc.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAKmqyKOQcUBjz0PsaYFWnir=FCNA_+7CkrN=5PLH+ayxU+zLkg@mail.gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::431;
- envelope-from=debug@rivosinc.com; helo=mail-pf1-x431.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
+ envelope-from=debug@rivosinc.com; helo=mail-pl1-x636.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,19 +100,62 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Aug 27, 2024 at 03:59:08PM +1000, Alistair Francis wrote:
->On Tue, Aug 27, 2024 at 1:31 AM Deepak Gupta <debug@rivosinc.com> wrote:
->>
->> zicfiss protects shadow stack using new page table encodings PTE.W=0,
->> PTE.R=0 and PTE.X=0. This encoding is reserved if zicfiss is not
->
->Shouldn't this be R=0, W=1, and X=0 ?
+Execution environment config CSR controlling user env and current
+privilege state shouldn't be limited to qemu-system only. *envcfg
+CSRs control enabling of features in next lesser mode. In some cases
+bits *envcfg CSR can be lit up by kernel as part of kernel policy or
+software (user app) can choose to opt-in by issuing a system call
+(e.g. prctl). In case of qemu-user, it should be no different because
+qemu is providing underlying execution environment facility and thus
+either should provide some default value in *envcfg CSRs or react to
+system calls (prctls) initiated from application.
 
-Yes. A typo. Will fix.
+`henvcfg` has been left for qemu-system only because it is not expected
+that someone will use qemu-user where application is expected to have
+hypervisor underneath which is controlling its execution environment. If
+such a need arises then `henvcfg` could be exposed as well.
 
->
->Alistair
->
->> implemented or if shadow stack are not enabled.
->> Loads on shadow stack memory are allowed while stores to shadow stack
+Relevant discussion:
+https://lore.kernel.org/all/CAKmqyKOTVWPFep2msTQVdUmJErkH+bqCcKEQ4hAnyDFPdWKe0Q@mail.gmail.com/
+
+Signed-off-by: Deepak Gupta <debug@rivosinc.com>
+Suggested-by: Richard Henderson <richard.henderson@linaro.org>
+---
+ target/riscv/cpu.h | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
+
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 87742047ce..270a2a031c 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -226,8 +226,12 @@ struct CPUArchState {
+     uint32_t elf_flags;
+ #endif
+ 
+-#ifndef CONFIG_USER_ONLY
+     target_ulong priv;
++    /* CSRs for execution environment configuration */
++    uint64_t menvcfg;
++    target_ulong senvcfg;
++
++#ifndef CONFIG_USER_ONLY
+     /* This contains QEMU specific information about the virt state. */
+     bool virt_enabled;
+     target_ulong geilen;
+@@ -429,12 +433,9 @@ struct CPUArchState {
+     target_ulong upmmask;
+     target_ulong upmbase;
+ 
+-    /* CSRs for execution environment configuration */
+-    uint64_t menvcfg;
+     uint64_t mstateen[SMSTATEEN_MAX_COUNT];
+     uint64_t hstateen[SMSTATEEN_MAX_COUNT];
+     uint64_t sstateen[SMSTATEEN_MAX_COUNT];
+-    target_ulong senvcfg;
+     uint64_t henvcfg;
+ #endif
+     target_ulong cur_pmmask;
+-- 
+2.44.0
+
 
