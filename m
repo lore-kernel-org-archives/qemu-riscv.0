@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4A52C54743
-	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Aug 2024 23:20:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27E95C5473F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 27 Aug 2024 23:20:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sj5T7-0002kb-AH; Tue, 27 Aug 2024 19:19:21 -0400
+	id 1sj5TO-0003pU-8X; Tue, 27 Aug 2024 19:19:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sj5T4-0002Zq-KK
+ id 1sj5T4-0002Zl-KI
  for qemu-riscv@nongnu.org; Tue, 27 Aug 2024 19:19:18 -0400
-Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629])
+Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sj5T2-0000pt-8T
- for qemu-riscv@nongnu.org; Tue, 27 Aug 2024 19:19:18 -0400
-Received: by mail-pl1-x629.google.com with SMTP id
- d9443c01a7336-2021537a8e6so55222795ad.2
- for <qemu-riscv@nongnu.org>; Tue, 27 Aug 2024 16:19:15 -0700 (PDT)
+ id 1sj5T1-0000pZ-1E
+ for qemu-riscv@nongnu.org; Tue, 27 Aug 2024 19:19:17 -0400
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-201ee6b084bso52253235ad.2
+ for <qemu-riscv@nongnu.org>; Tue, 27 Aug 2024 16:19:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1724800755; x=1725405555;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1724800753; x=1725405553;
  darn=nongnu.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=X3yfBKYZ/gUZE6VcdiduLzbILXUVJYc5iBQsuzG29WA=;
- b=zAKBDz/4rH3HVGAMvUKMyl+bcIzZ6eZeSWjUVvFLwYgTM4HtY+CLY3ZKfGZxKCkkRK
- 2pEb5G8zYWz/EnfGZTXGOnK5b0T+B6vZVH7cMfn092zG+fW8HMu+ZS0bQMja1Gp5/alD
- pbJyw8GcmVaXX59DoDQ4eamjjv1W0w7aqd0840eKFMH+1crl+3d6rHa4dXd/YVNmYUA1
- GtZrIvR6wu5AtCQxN5U5nRo8suLki/eeC+ScyZF7ZQYT203diKRm+9fyQEeUBwwCEo7O
- 73iyUObMLWkx+6rj+p4DABFV4SYZrOE0uo0+qCZSohZxawNaOe6RkA8TxfRAd0qSlJZj
- YLHw==
+ bh=aoOLJ1vSDf5p0Vfqc4dUxk3Eqww8q10OxxejFUrpUPs=;
+ b=g02zzFLx8gobhKqyCSiJCa/Ics2Mmrgrrknk1YTPScxC9ZL9RTFj7n3SNoWQaYjpHf
+ Mh7RwIniAWG0yku071ms0MYbPrA/YIdK6M3Pz8C0YSb2+PEnwEQ9wzJRPLsxYyujK0cz
+ JB0zY2rYLQkrWVLoMqDX9WK6+sp99HyOx+NQvjk/Z2L9DCW8BVNQmn7m20Ycy1ZPxQRe
+ 1KHc6JNQ6Q0ftH3IJvzU7vaRjnLiXyYJ6+nSmhBaT7FKhIGyWGbCqrWgP7E17fqAfcHQ
+ YMD8RfIDZkxwBrSBk3Lhj6Hj5IyRcbfCb5d+3wydD+uAI7I0x7X1hKkWK599MzwnriWV
+ Az2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724800755; x=1725405555;
+ d=1e100.net; s=20230601; t=1724800753; x=1725405553;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=X3yfBKYZ/gUZE6VcdiduLzbILXUVJYc5iBQsuzG29WA=;
- b=wFmfcvXoIUAbec1M07vInEvht0qwAaGuFM+14iTYi1NND2/nDezJBE4QC67kaKVXNy
- +ioeIxW3NClo3XEzusiLku/oMUpeEVFlvKZLkLYdwwt3uGdtiTYi7J4rWoT4JdTAwTBz
- dyL4f0nY6yy7S5HfREFKiRbml888zRfy/Iy2kcg+gFIbSsaPwMOweZjSEXy2xasdx26R
- MymGFGhF+gbZljrC2F8rooROmwoGsiOL31vkh114bztBqzy3s/3FIpPBY6WoLPeomIel
- vIyw1QbP6+FjVQjwctwLOv+sNCO/ZGIKsI6D5uyVxMiZKYMK8S+VItLwjXxyRa+fBt0s
- lbnA==
-X-Gm-Message-State: AOJu0YyrhXJmSPLjnNtk2+pEnm2RUSv+dKJFJbQOJr6VtdhGTFwlVfLb
- 9NGqMJTo+RK6jQg5ZzgPmof/sG2aDy5a/tzhBkc7RjScg4OsxEuFhk4FamJRoV3YBfi63V8l0Ie
- E
-X-Google-Smtp-Source: AGHT+IFqi1k8fzudJ+wJLFva2WaXpTcmaWyaxiOnZwv66fCh3gemhdqEYSLShLaBH1AziHfEtQlnrg==
-X-Received: by 2002:a17:902:dacc:b0:202:cbf:2d4e with SMTP id
- d9443c01a7336-2039e554fe8mr166193425ad.64.1724800754525; 
- Tue, 27 Aug 2024 16:19:14 -0700 (PDT)
+ bh=aoOLJ1vSDf5p0Vfqc4dUxk3Eqww8q10OxxejFUrpUPs=;
+ b=c2RxYvI/M47r3O01NFs1719wVXvLIw/RtMZd/2AER9LgTpnmz892D4ShyFP4FYtKCC
+ b/KA1rmGvcFTwnlAd9UqQ3XRH0eVjgY3tD2JuN6IQilO5/oRzWa3UL9Sg7UqY+quv452
+ O0/YBsJZh5zKDf/VT0K9aM+YlkSo1hy6Cmeh1F32mSPgr+RIpsUwDKb0BheXTTlETLEk
+ kuvaKD6W9MUAPujj3Yp+DeZePJtcen9iGvionqT+QOnD3+Sz56fPjCZC7mJ86ShjrION
+ MIwNwHMu08JP4VNN3zd5PkaXepa9fV6iLZZgnNX48IpsrpIa7wMJZg/HYDsXfSAz0iOI
+ oQYw==
+X-Gm-Message-State: AOJu0Ywu06lsJ1FZSB51iy8sbha1oyFlL+BkLn5M9plpPw3Iw40UPBUS
+ yvS4QEzvvIGOqIUIjdPB0SVmk1DfM6jdLtydOhS7F3ODi6DvXO7FoXiz25AkZ7JGiEg+X4Qq192
+ 4
+X-Google-Smtp-Source: AGHT+IHYn6KHMObEsNpk0qA0CvpN+9r3ZY99LW+rC3IeZwuu6QTa8zcxOY2GH8u/15ySi+pEiABONQ==
+X-Received: by 2002:a17:902:c40c:b0:203:a12e:faa7 with SMTP id
+ d9443c01a7336-204f9b9ccbfmr5322005ad.27.1724800753332; 
+ Tue, 27 Aug 2024 16:19:13 -0700 (PDT)
 Received: from debug.ba.rivosinc.com ([64.71.180.162])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-203b0ee6179sm57785155ad.92.2024.08.27.16.19.13
+ d9443c01a7336-203b0ee6179sm57785155ad.92.2024.08.27.16.19.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 Aug 2024 16:19:14 -0700 (PDT)
+ Tue, 27 Aug 2024 16:19:13 -0700 (PDT)
 From: Deepak Gupta <debug@rivosinc.com>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -67,23 +67,23 @@ Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, laurent@vivier.eu,
  bmeng.cn@gmail.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
  zhiwei_liu@linux.alibaba.com, jim.shu@sifive.com, andy.chiu@sifive.com,
  kito.cheng@sifive.com, Deepak Gupta <debug@rivosinc.com>
-Subject: [PATCH v10 03/21] target/riscv: Add zicfilp extension
-Date: Tue, 27 Aug 2024 16:18:47 -0700
-Message-ID: <20240827231906.553327-4-debug@rivosinc.com>
+Subject: [PATCH v10 02/21] linux-user/riscv: set priv for qemu-user and
+ defaults for *envcfg
+Date: Tue, 27 Aug 2024 16:18:46 -0700
+Message-ID: <20240827231906.553327-3-debug@rivosinc.com>
 X-Mailer: git-send-email 2.45.0
 In-Reply-To: <20240827231906.553327-1-debug@rivosinc.com>
 References: <20240827231906.553327-1-debug@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
- envelope-from=debug@rivosinc.com; helo=mail-pl1-x629.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
+ envelope-from=debug@rivosinc.com; helo=mail-pl1-x62c.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,63 +99,29 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-zicfilp [1] riscv cpu extension enables forward control flow integrity.
-If enabled, all indirect calls must land on a landing pad instruction.
-
-This patch sets up space for zicfilp extension in cpuconfig. zicfilp
-is dependend on zicsr.
-
-[1] - https://github.com/riscv/riscv-cfi
+set priv to be PRV_U for qemu-user on riscv. And set default value for
+*envcfg CSR.
 
 Signed-off-by: Deepak Gupta <debug@rivosinc.com>
-Co-developed-by: Jim Shu <jim.shu@sifive.com>
-Co-developed-by: Andy Chiu <andy.chiu@sifive.com>
 ---
- target/riscv/cpu.c         | 1 +
- target/riscv/cpu_cfg.h     | 1 +
- target/riscv/tcg/tcg-cpu.c | 5 +++++
- 3 files changed, 7 insertions(+)
+ linux-user/riscv/cpu_loop.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 33ef4eb795..43156ebb92 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -106,6 +106,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(ziccif, PRIV_VERSION_1_11_0, has_priv_1_11),
-     ISA_EXT_DATA_ENTRY(zicclsm, PRIV_VERSION_1_11_0, has_priv_1_11),
-     ISA_EXT_DATA_ENTRY(ziccrse, PRIV_VERSION_1_11_0, has_priv_1_11),
-+    ISA_EXT_DATA_ENTRY(zicfilp, PRIV_VERSION_1_12_0, ext_zicfilp),
-     ISA_EXT_DATA_ENTRY(zicond, PRIV_VERSION_1_12_0, ext_zicond),
-     ISA_EXT_DATA_ENTRY(zicntr, PRIV_VERSION_1_12_0, ext_zicntr),
-     ISA_EXT_DATA_ENTRY(zicsr, PRIV_VERSION_1_10_0, ext_zicsr),
-diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-index 120905a254..88d5defbb5 100644
---- a/target/riscv/cpu_cfg.h
-+++ b/target/riscv/cpu_cfg.h
-@@ -67,6 +67,7 @@ struct RISCVCPUConfig {
-     bool ext_zicbom;
-     bool ext_zicbop;
-     bool ext_zicboz;
-+    bool ext_zicfilp;
-     bool ext_zicond;
-     bool ext_zihintntl;
-     bool ext_zihintpause;
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index b8814ab753..ed19586c9d 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -623,6 +623,11 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
-         cpu->pmu_avail_ctrs = 0;
-     }
+diff --git a/linux-user/riscv/cpu_loop.c b/linux-user/riscv/cpu_loop.c
+index 52c49c2e42..7a68e8717b 100644
+--- a/linux-user/riscv/cpu_loop.c
++++ b/linux-user/riscv/cpu_loop.c
+@@ -32,6 +32,10 @@ void cpu_loop(CPURISCVState *env)
+     int trapnr;
+     target_ulong ret;
  
-+    if (cpu->cfg.ext_zicfilp && !cpu->cfg.ext_zicsr) {
-+        error_setg(errp, "zicfilp extension requires zicsr extension");
-+        return;
-+    }
++    env->priv = PRV_U;
++    env->senvcfg = 0;
++    env->menvcfg = 0;
 +
-     /*
-      * Disable isa extensions based on priv spec after we
-      * validated and set everything we need.
+     for (;;) {
+         cpu_exec_start(cs);
+         trapnr = cpu_exec(cs);
 -- 
 2.44.0
 
