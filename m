@@ -4,87 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E811C636ED
-	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Aug 2024 17:49:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A44C7C636EE
+	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Aug 2024 17:50:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sjMmF-0007oK-CF; Wed, 28 Aug 2024 13:48:15 -0400
+	id 1sjMmF-0007nL-9R; Wed, 28 Aug 2024 13:48:15 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sjMm5-0007Aa-UW
- for qemu-riscv@nongnu.org; Wed, 28 Aug 2024 13:48:05 -0400
-Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b])
+ id 1sjMmC-0007dx-Vn
+ for qemu-riscv@nongnu.org; Wed, 28 Aug 2024 13:48:13 -0400
+Received: from mail-il1-x132.google.com ([2607:f8b0:4864:20::132])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sjMm1-0004Rx-Ic
- for qemu-riscv@nongnu.org; Wed, 28 Aug 2024 13:48:05 -0400
-Received: by mail-pf1-x42b.google.com with SMTP id
- d2e1a72fcca58-7106cf5771bso5933520b3a.2
- for <qemu-riscv@nongnu.org>; Wed, 28 Aug 2024 10:47:57 -0700 (PDT)
+ id 1sjMm9-0004Vj-4J
+ for qemu-riscv@nongnu.org; Wed, 28 Aug 2024 13:48:12 -0400
+Received: by mail-il1-x132.google.com with SMTP id
+ e9e14a558f8ab-39d2256ee11so27106835ab.1
+ for <qemu-riscv@nongnu.org>; Wed, 28 Aug 2024 10:48:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1724867276; x=1725472076;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1724867287; x=1725472087;
  darn=nongnu.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gJJt5Z8SJGSqiOcjU4U+2C4uQqhkjvrrqsHIDsZi2XU=;
- b=lcg9fyh0O31uUXd9lHJOkCBKAaNP63KTi2ifIF/AZBEC04+SkxkduVIhLI2s7ZrjAI
- T5Ewtk80/p8aBbs67S4ramjsvddHygxAe84LRMkHwcM5m1idnyjqbDE9Lrn+JIggqouY
- nLNZ6jXvfYCWs/FTvAa8gDmBWLP29HlGy/mRsqdMWbSkLbMI9iS0pl+cZwIaA9mYFnLk
- CR4rEpcIKnbBrZqntnBmnqylYZH0keEYUCdxGxcZ7tsguViiIWV5R21SmDDfTpTxbHZ6
- zqmk3BGNAqoYshfSky9PFI4ZWLxKbgPKP8/ciMwAHwaKgKTYohMyrdnLpIWf1a+DX/be
- tF2w==
+ bh=Y69mKXxyPX8y1KNCgiTZCjHNjCyFk/Zv9Q4fHwap7hc=;
+ b=JUbOqY/HlG++woOlt9V0GT5gbZGCVh044el79igRA0006LDoiZ445hWi9PGZsqQRP8
+ jkbKv6vE6M0ivA/Zhw48hvvUojbL4/3o7MYXORLa7lupg0s7Z35qR3gV/p+VxLY7mZyb
+ HDGTpdTx7tM7b0o0ZfIeZc4ewM8+ZkJVSJvAdY5395tzsLW1MYJeASlgta36IFVA9LcE
+ yEvjrA/gnzknM11fGBxnEun1gH6pr3tRUkFjDaDR+qoN7adZbHZBaetDI6hkmEXRE7B3
+ Rb+Ddt+qRkQNWytDpd29vMdb75Qlrf9Ir/y8WFVqJ5vsP4F3j9Wiz7x1Z4o1kslQHvmP
+ KLrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724867276; x=1725472076;
+ d=1e100.net; s=20230601; t=1724867287; x=1725472087;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=gJJt5Z8SJGSqiOcjU4U+2C4uQqhkjvrrqsHIDsZi2XU=;
- b=W/tbd1y7TGrfZo0IK8tUDC5NqDYkqS1IasG69s3H+OvF9ko0afb7LeNcy4AA6mi3Av
- le8jYQUm5/rcY4t6RUHvieIY6iIswOIdQ5hLlTPHi791iSzjq/VDM8M1dQ1Ch9lou5Q2
- 14SzNyqhDhhuE87Z1CIK9IRuJUbUfQbD/kZUaLqcT0rImsje6ls7c/bO9W74+v4rFgc9
- dSj0jkjh3iccUU0cB3z/YWrJzndmXwstfS0lJeRJfeG+r9lMWOoNHaRbKUnkVkAwXl5/
- 4XbMimKOft///jBLNN1Url8gzvb7823DD3r5Vj+kofSsE6cR0Owm0PO531BfCLpM2cI4
- BpGA==
-X-Gm-Message-State: AOJu0YxMzfmDvhI4HWJHRxD0tNLI5MC+AkM4coBsvJSVDKWpj6Sl7cV1
- ECG14JVHVbsg5TtSbzv+PsFILAPXu/VP1HZblelIW4mPVIVoKTNIdPg2GL/vFTp9wru25N17ahp
- 3
-X-Google-Smtp-Source: AGHT+IGkzwZOI9klN1RxjUf2fhucg9rqWEn0LrA6QH/gGclg/5AsiaXUBcPw2gzD+bObMyeHkwO2NA==
-X-Received: by 2002:a05:6a00:3d4c:b0:714:25ee:df68 with SMTP id
- d2e1a72fcca58-715dfaf2ed4mr295300b3a.8.1724867276101; 
- Wed, 28 Aug 2024 10:47:56 -0700 (PDT)
+ bh=Y69mKXxyPX8y1KNCgiTZCjHNjCyFk/Zv9Q4fHwap7hc=;
+ b=aWQ4yLZstn7GZML8dbL5g6i+CPuJbK1BSCXaoKRLlDy2YJblLIhdF2XivJq0SxVjCE
+ hxMocVHpKG0qdIgYWRNNz68x1pdh/5HFUvvAGvz5J4XJl2zQvCs8hOqSSMG7jJd7kYl8
+ XDApNQFy3DFEV5WJrgCdwf+llJ3r7ICkA2ksURmUrv/9Jkl6Zp5LvkaychoLAkf1m9Z8
+ ffh4vhl00WPa1ssQhHxqdhHB3JxBkORu1g3eE59tMVEh6DFknvgBiBtA/bzOj/qcb0Yq
+ H5py2L+sRuYb+b002IIGdrxufQZfbHYds5ZDYFzjwl5RaDpjsCse44HM9Iq3NLQYjdTV
+ +4OQ==
+X-Gm-Message-State: AOJu0YyLgyDIVtuteoVwv5UDChGh/HN7+ZkUSyCszgnCD9O2sG+QS+z4
+ Tordy+yiXhGCPkUqBQi9I/7eCezuXQqCNMbbhJuIEEPdCkcqZmO7/McTlh2KDrlgKQXV7fEtfFr
+ F
+X-Google-Smtp-Source: AGHT+IEUaKeuGxCOzhEjB+Nt6y3Wtshk5dfxW6PlZYTNDkX6IG52C0T+2g9JbsKGDD/SPJgtiJaW+g==
+X-Received: by 2002:a05:6e02:12c7:b0:39d:637f:97cd with SMTP id
+ e9e14a558f8ab-39f3771119fmr7029355ab.0.1724867286391; 
+ Wed, 28 Aug 2024 10:48:06 -0700 (PDT)
 Received: from debug.ba.rivosinc.com ([64.71.180.162])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-7cd9acdcf7dsm9778316a12.50.2024.08.28.10.47.54
+ 41be03b00d2f7-7cd9acdcf7dsm9778316a12.50.2024.08.28.10.48.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Aug 2024 10:47:55 -0700 (PDT)
+ Wed, 28 Aug 2024 10:48:06 -0700 (PDT)
 From: Deepak Gupta <debug@rivosinc.com>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
 Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, laurent@vivier.eu,
  bmeng.cn@gmail.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
  zhiwei_liu@linux.alibaba.com, jim.shu@sifive.com, andy.chiu@sifive.com,
- kito.cheng@sifive.com, Deepak Gupta <debug@rivosinc.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v11 08/20] disas/riscv: enable `lpad` disassembly
-Date: Wed, 28 Aug 2024 10:47:26 -0700
-Message-ID: <20240828174739.714313-9-debug@rivosinc.com>
+ kito.cheng@sifive.com, Deepak Gupta <debug@rivosinc.com>
+Subject: [PATCH v11 16/20] target/riscv: implement zicfiss instructions
+Date: Wed, 28 Aug 2024 10:47:34 -0700
+Message-ID: <20240828174739.714313-17-debug@rivosinc.com>
 X-Mailer: git-send-email 2.45.0
 In-Reply-To: <20240828174739.714313-1-debug@rivosinc.com>
 References: <20240828174739.714313-1-debug@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42b;
- envelope-from=debug@rivosinc.com; helo=mail-pf1-x42b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::132;
+ envelope-from=debug@rivosinc.com; helo=mail-il1-x132.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,93 +99,259 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+zicfiss has following instructions
+ - sspopchk: pops a value from shadow stack and compares with x1/x5.
+   If they dont match, reports a sw check exception with tval = 3.
+ - sspush: pushes value in x1/x5 on shadow stack
+ - ssrdp: reads current shadow stack
+ - ssamoswap: swaps contents of shadow stack atomically
+
+sspopchk/sspush/ssrdp default to zimop if zimop implemented and SSE=0
+
+If SSE=0, ssamoswap is illegal instruction exception.
+
+This patch implements shadow stack operations for qemu-user and shadow
+stack is not protected.
+
 Signed-off-by: Deepak Gupta <debug@rivosinc.com>
 Co-developed-by: Jim Shu <jim.shu@sifive.com>
 Co-developed-by: Andy Chiu <andy.chiu@sifive.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- disas/riscv.c | 18 +++++++++++++++++-
- disas/riscv.h |  2 ++
- 2 files changed, 19 insertions(+), 1 deletion(-)
+ target/riscv/cpu_bits.h                       |  2 +
+ target/riscv/insn32.decode                    | 21 +++++-
+ target/riscv/insn_trans/trans_rva.c.inc       | 39 ++++++++++
+ target/riscv/insn_trans/trans_rvzicfiss.c.inc | 75 +++++++++++++++++++
+ target/riscv/translate.c                      |  5 ++
+ 5 files changed, 140 insertions(+), 2 deletions(-)
+ create mode 100644 target/riscv/insn_trans/trans_rvzicfiss.c.inc
 
-diff --git a/disas/riscv.c b/disas/riscv.c
-index c8364c2b07..c7c92acef7 100644
---- a/disas/riscv.c
-+++ b/disas/riscv.c
-@@ -974,6 +974,7 @@ typedef enum {
-     rv_op_amomaxu_h = 943,
-     rv_op_amocas_b  = 944,
-     rv_op_amocas_h  = 945,
-+    rv_op_lpad = 946,
- } rv_op;
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index 48ce24dc32..bb62fbe9ec 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -690,6 +690,8 @@ typedef enum RISCVException {
  
- /* register names */
-@@ -2232,6 +2233,7 @@ const rv_opcode_data rvi_opcode_data[] = {
-     { "amomaxu.h", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-     { "amocas.b", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-     { "amocas.h", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-+    { "lpad", rv_codec_lp, rv_fmt_imm, NULL, 0, 0, 0 },
- };
+ /* zicfilp defines lp violation results in sw check with tval = 2*/
+ #define RISCV_EXCP_SW_CHECK_FCFI_TVAL      2
++/* zicfiss defines ss violation results in sw check with tval = 3*/
++#define RISCV_EXCP_SW_CHECK_BCFI_TVAL      3
  
- /* CSR names */
-@@ -2925,7 +2927,13 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
-             case 7: op = rv_op_andi; break;
-             }
-             break;
--        case 5: op = rv_op_auipc; break;
-+        case 5:
-+            op = rv_op_auipc;
-+            if (dec->cfg->ext_zicfilp &&
-+                (((inst >> 7) & 0b11111) == 0b00000)) {
-+                op = rv_op_lpad;
-+            }
-+            break;
-         case 6:
-             switch ((inst >> 12) & 0b111) {
-             case 0: op = rv_op_addiw; break;
-@@ -4482,6 +4490,11 @@ static uint32_t operand_tbl_index(rv_inst inst)
-     return ((inst << 54) >> 56);
+ #define RISCV_EXCP_INT_FLAG                0x80000000
+ #define RISCV_EXCP_INT_MASK                0x7fffffff
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index 27108b992b..e9139ec1b9 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -246,6 +246,7 @@ remud    0000001 .....  ..... 111 ..... 1111011 @r
+ lr_w       00010 . . 00000 ..... 010 ..... 0101111 @atom_ld
+ sc_w       00011 . . ..... ..... 010 ..... 0101111 @atom_st
+ amoswap_w  00001 . . ..... ..... 010 ..... 0101111 @atom_st
++ssamoswap_w 01001 . . ..... ..... 010 ..... 0101111 @atom_st
+ amoadd_w   00000 . . ..... ..... 010 ..... 0101111 @atom_st
+ amoxor_w   00100 . . ..... ..... 010 ..... 0101111 @atom_st
+ amoand_w   01100 . . ..... ..... 010 ..... 0101111 @atom_st
+@@ -259,6 +260,7 @@ amomaxu_w  11100 . . ..... ..... 010 ..... 0101111 @atom_st
+ lr_d       00010 . . 00000 ..... 011 ..... 0101111 @atom_ld
+ sc_d       00011 . . ..... ..... 011 ..... 0101111 @atom_st
+ amoswap_d  00001 . . ..... ..... 011 ..... 0101111 @atom_st
++ssamoswap_d 01001 . . ..... ..... 011 ..... 0101111 @atom_st
+ amoadd_d   00000 . . ..... ..... 011 ..... 0101111 @atom_st
+ amoxor_d   00100 . . ..... ..... 011 ..... 0101111 @atom_st
+ amoand_d   01100 . . ..... ..... 011 ..... 0101111 @atom_st
+@@ -1022,8 +1024,23 @@ amocas_d    00101 . . ..... ..... 011 ..... 0101111 @atom_st
+ amocas_q    00101 . . ..... ..... 100 ..... 0101111 @atom_st
+ 
+ # *** Zimop may-be-operation extension ***
+-mop_r_n     1 . 00 .. 0111 .. ..... 100 ..... 1110011 @mop5
+-mop_rr_n    1 . 00 .. 1 ..... ..... 100 ..... 1110011 @mop3
++{
++  # zicfiss instructions carved out of mop.r
++  [
++    ssrdp     1100110 11100 00000 100 rd:5  1110011
++    sspopchk  1100110 11100 00001 100 00000 1110011 &r2 rs1=1 rd=0
++    sspopchk  1100110 11100 00101 100 00000 1110011 &r2 rs1=5 rd=0
++  ]
++  mop_r_n    1 . 00 .. 0111 .. ..... 100 ..... 1110011 @mop5
++}
++{
++  # zicfiss instruction carved out of mop.rr
++  [
++    sspush    1100111 00001  00000 100 00000 1110011 &r2_s rs2=1 rs1=0
++    sspush    1100111 00101  00000 100 00000 1110011 &r2_s rs2=5 rs1=0
++  ]
++  mop_rr_n   1 . 00 .. 1 ..... ..... 100 ..... 1110011 @mop3
++}
+ 
+ # *** Zabhb Standard Extension ***
+ amoswap_b  00001 . . ..... ..... 000 ..... 0101111 @atom_st
+diff --git a/target/riscv/insn_trans/trans_rva.c.inc b/target/riscv/insn_trans/trans_rva.c.inc
+index 9cf3ae8019..a2119393a6 100644
+--- a/target/riscv/insn_trans/trans_rva.c.inc
++++ b/target/riscv/insn_trans/trans_rva.c.inc
+@@ -114,6 +114,25 @@ static bool trans_amoswap_w(DisasContext *ctx, arg_amoswap_w *a)
+     return gen_amo(ctx, a, &tcg_gen_atomic_xchg_tl, MO_TESL);
  }
  
-+static uint32_t operand_lpl(rv_inst inst)
++static bool trans_ssamoswap_w(DisasContext *ctx, arg_amoswap_w *a)
 +{
-+    return inst >> 12;
++    REQUIRE_A_OR_ZAAMO(ctx);
++    if (!ctx->bcfi_enabled) {
++        return false;
++    }
++
++    TCGv dest = dest_gpr(ctx, a->rd);
++    TCGv src1, src2 = get_gpr(ctx, a->rs2, EXT_NONE);
++
++    decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);
++    src1 = get_address(ctx, a->rs1, 0);
++
++    tcg_gen_atomic_xchg_tl(dest, src1, src2, SS_MMU_INDEX(ctx),
++                           (MO_ALIGN | MO_TESL));
++    gen_set_gpr(ctx, a->rd, dest);
++    return true;
 +}
 +
- /* decode operands */
- 
- static void decode_inst_operands(rv_decode *dec, rv_isa isa)
-@@ -4869,6 +4882,9 @@ static void decode_inst_operands(rv_decode *dec, rv_isa isa)
-         dec->imm = sextract32(operand_rs2(inst), 0, 5);
-         dec->imm1 = operand_imm2(inst);
-         break;
-+    case rv_codec_lp:
-+        dec->imm = operand_lpl(inst);
-+        break;
-     };
+ static bool trans_amoadd_w(DisasContext *ctx, arg_amoadd_w *a)
+ {
+     REQUIRE_A_OR_ZAAMO(ctx);
+@@ -183,6 +202,26 @@ static bool trans_amoswap_d(DisasContext *ctx, arg_amoswap_d *a)
+     return gen_amo(ctx, a, &tcg_gen_atomic_xchg_tl, MO_TEUQ);
  }
  
-diff --git a/disas/riscv.h b/disas/riscv.h
-index 16a08e4895..1182457aff 100644
---- a/disas/riscv.h
-+++ b/disas/riscv.h
-@@ -166,6 +166,7 @@ typedef enum {
-     rv_codec_r2_immhl,
-     rv_codec_r2_imm2_imm5,
-     rv_codec_fli,
-+    rv_codec_lp,
- } rv_codec;
++static bool trans_ssamoswap_d(DisasContext *ctx, arg_amoswap_w *a)
++{
++    REQUIRE_64BIT(ctx);
++    REQUIRE_A_OR_ZAAMO(ctx);
++    if (!ctx->bcfi_enabled) {
++        return false;
++    }
++
++    TCGv dest = dest_gpr(ctx, a->rd);
++    TCGv src1, src2 = get_gpr(ctx, a->rs2, EXT_NONE);
++
++    decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);
++    src1 = get_address(ctx, a->rs1, 0);
++
++    tcg_gen_atomic_xchg_tl(dest, src1, src2, SS_MMU_INDEX(ctx),
++                           (MO_ALIGN | MO_TESQ));
++    gen_set_gpr(ctx, a->rd, dest);
++    return true;
++}
++
+ static bool trans_amoadd_d(DisasContext *ctx, arg_amoadd_d *a)
+ {
+     REQUIRE_64BIT(ctx);
+diff --git a/target/riscv/insn_trans/trans_rvzicfiss.c.inc b/target/riscv/insn_trans/trans_rvzicfiss.c.inc
+new file mode 100644
+index 0000000000..741459003d
+--- /dev/null
++++ b/target/riscv/insn_trans/trans_rvzicfiss.c.inc
+@@ -0,0 +1,75 @@
++/*
++ * RISC-V translation routines for the Control-Flow Integrity Extension
++ *
++ * Copyright (c) 2024 Rivos Inc.
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++static bool trans_sspopchk(DisasContext *ctx, arg_sspopchk *a)
++{
++    if (!ctx->bcfi_enabled) {
++        return false;
++    }
++
++    TCGv addr = tcg_temp_new();
++    TCGLabel *skip = gen_new_label();
++    uint32_t tmp = (get_xl(ctx) == MXL_RV64) ? 8 : 4;
++    TCGv data = tcg_temp_new();
++    tcg_gen_ld_tl(addr, tcg_env, offsetof(CPURISCVState, ssp));
++    decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);
++    tcg_gen_qemu_ld_tl(data, addr, SS_MMU_INDEX(ctx),
++                       mxl_memop(ctx) | MO_ALIGN);
++    TCGv rs1 = get_gpr(ctx, a->rs1, EXT_NONE);
++    tcg_gen_brcond_tl(TCG_COND_EQ, data, rs1, skip);
++    tcg_gen_st_tl(tcg_constant_tl(RISCV_EXCP_SW_CHECK_BCFI_TVAL),
++                  tcg_env, offsetof(CPURISCVState, sw_check_code));
++    gen_helper_raise_exception(tcg_env,
++                  tcg_constant_i32(RISCV_EXCP_SW_CHECK));
++    gen_set_label(skip);
++    tcg_gen_addi_tl(addr, addr, tmp);
++    tcg_gen_st_tl(addr, tcg_env, offsetof(CPURISCVState, ssp));
++
++    return true;
++}
++
++static bool trans_sspush(DisasContext *ctx, arg_sspush *a)
++{
++    if (!ctx->bcfi_enabled) {
++        return false;
++    }
++
++    TCGv addr = tcg_temp_new();
++    int tmp = (get_xl(ctx) == MXL_RV64) ? -8 : -4;
++    TCGv data = get_gpr(ctx, a->rs2, EXT_NONE);
++    decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);
++    tcg_gen_ld_tl(addr, tcg_env, offsetof(CPURISCVState, ssp));
++    tcg_gen_addi_tl(addr, addr, tmp);
++    tcg_gen_qemu_st_tl(data, addr, SS_MMU_INDEX(ctx),
++                       mxl_memop(ctx) | MO_ALIGN);
++    tcg_gen_st_tl(addr, tcg_env, offsetof(CPURISCVState, ssp));
++
++    return true;
++}
++
++static bool trans_ssrdp(DisasContext *ctx, arg_ssrdp *a)
++{
++    if (!ctx->bcfi_enabled || a->rd == 0) {
++        return false;
++    }
++
++    TCGv dest = dest_gpr(ctx, a->rd);
++    tcg_gen_ld_tl(dest, tcg_env, offsetof(CPURISCVState, ssp));
++    gen_set_gpr(ctx, a->rd, dest);
++
++    return true;
++}
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index e677062a10..2753c154ba 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -144,6 +144,8 @@ static inline bool has_ext(DisasContext *ctx, uint32_t ext)
+ #define get_address_xl(ctx)    ((ctx)->address_xl)
+ #endif
  
- /* structures */
-@@ -228,6 +229,7 @@ enum {
- #define rv_fmt_rs1_rs2                "O\t1,2"
- #define rv_fmt_rd_imm                 "O\t0,i"
- #define rv_fmt_rd_uimm                "O\t0,Ui"
-+#define rv_fmt_imm                    "O\ti"
- #define rv_fmt_rd_offset              "O\t0,o"
- #define rv_fmt_rd_uoffset             "O\t0,Uo"
- #define rv_fmt_rd_rs1_rs2             "O\t0,1,2"
++#define mxl_memop(ctx) ((get_xl(ctx) + 1) | MO_TE)
++
+ /* The word size for this machine mode. */
+ static inline int __attribute__((unused)) get_xlen(DisasContext *ctx)
+ {
+@@ -1127,6 +1129,8 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
+     return translator_ldl(env, &ctx->base, pc);
+ }
+ 
++#define SS_MMU_INDEX(ctx) (ctx->mem_idx | MMU_IDX_SS_WRITE)
++
+ /* Include insn module translation function */
+ #include "insn_trans/trans_rvi.c.inc"
+ #include "insn_trans/trans_rvm.c.inc"
+@@ -1157,6 +1161,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
+ #include "decode-insn16.c.inc"
+ #include "insn_trans/trans_rvzce.c.inc"
+ #include "insn_trans/trans_rvzcmop.c.inc"
++#include "insn_trans/trans_rvzicfiss.c.inc"
+ 
+ /* Include decoders for factored-out extensions */
+ #include "decode-XVentanaCondOps.c.inc"
 -- 
 2.44.0
 
