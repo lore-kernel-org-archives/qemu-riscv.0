@@ -4,85 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CC6AC54751
-	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Aug 2024 08:37:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B40E7C54ED1
+	for <qemu-riscv@archiver.kernel.org>; Wed, 28 Aug 2024 11:37:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sjEAu-0007Un-C6; Wed, 28 Aug 2024 04:37:08 -0400
+	id 1sjGz6-0003ck-AZ; Wed, 28 Aug 2024 07:37:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
- id 1sjEAk-0007Mm-T4
- for qemu-riscv@nongnu.org; Wed, 28 Aug 2024 04:36:58 -0400
-Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1sjGz4-0003YD-NT
+ for qemu-riscv@nongnu.org; Wed, 28 Aug 2024 07:37:06 -0400
+Received: from mail-oi1-x235.google.com ([2607:f8b0:4864:20::235])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
- id 1sjEAi-0001nD-M6
- for qemu-riscv@nongnu.org; Wed, 28 Aug 2024 04:36:58 -0400
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-371c5187198so3645388f8f.3
- for <qemu-riscv@nongnu.org>; Wed, 28 Aug 2024 01:36:55 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1sjGz1-00049S-CF
+ for qemu-riscv@nongnu.org; Wed, 28 Aug 2024 07:37:05 -0400
+Received: by mail-oi1-x235.google.com with SMTP id
+ 5614622812f47-3db51b8ec15so250033b6e.1
+ for <qemu-riscv@nongnu.org>; Wed, 28 Aug 2024 04:37:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1724834215; x=1725439015;
- darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=0rvoMEVosXIPnN0S2N3s9u+CdKtkhPKuGueCmYXiVU0=;
- b=xvLs839X8FB92DgJ3QFPjD0yUEUpSBGoiV3BMZKlzhxM0+6jSPQOdTaJwSVAmgqvhV
- bfb7hbrSq1bJ8BeZmywc/8EGX5LMCj/s7KGa9fwfyYOiXo2FqLnL6wp0Gelpcv2clYHg
- VKdFY/t0/mf1a2F1rJHoJXvxxcbIOd2oO3ychH96CZ8u/zb0XVn+0ZkRfxYBCPhvCo6A
- 7ps4zMn3X2Bg8XIVuskWIFWK1EjKYt6RXZTXSLEly7Svsq4rXSEU5Sdqk3Qg99BTebLd
- vx56ODyWd/1wIFu8n7Z53KX9o8THhlQt/uBkTb678lB37a3pqG8iXP/CTjHZgrr0uZHf
- 4o2w==
+ d=linaro.org; s=google; t=1724845020; x=1725449820; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=9fmPpDP8OWtQl6IAijiDcovfaipJncig+XTtKXTxvLE=;
+ b=bjKm05yEENdthpXa4tx9rvninPB2OFrld2xQvLPhhslZdrSZO9JZsICiPsCFkWzY4G
+ fuxDbFIJ9+1vKOA84+w6FjtPWMOa3x2YCbRJDR6ZcQiE6TN8qeNr7iJIYI1kDxvUQWrA
+ rbNt7SJE7bqtIiUA9EGaRW7cCIx6r80OCk2oTS5Z32cZsLg1dRYjKXVTVPB9WktDXaNw
+ s5Zr3OVleFRtnIQXhmh6H5wY54pjAyfAN6qh825oUc0b6aOdAqBMPwh6BpUVRduVLLAC
+ SQRYNOd3gDuj3RWJ8M/pnkmqR5hWFxC26v9Kv8CUwQ8YRCrArY5/uFobKibs4VoSkyKR
+ B3fA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724834215; x=1725439015;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=0rvoMEVosXIPnN0S2N3s9u+CdKtkhPKuGueCmYXiVU0=;
- b=I78uGXBh7nBvQzaUUL89VJYiRtSgHhhNHUabZZ27k0yXqsVhi1c1eK1529zhcSTdUm
- Cpd6xj/Ei7F07uGPAMV0+AJ9fy6sXpqqyG63TjsQUyMLtOFrl7+RcdKCy8dCW6SsFFqO
- GzYSU11dE8qkm5KEcJOJFmKFBf+XgyP4q9Pu6/RJ4sESNBCZBejE8Bg/+upZZ/IvHY8v
- pSmEhoc+ymBGU3zipJLU44ro6PDIjYxWF250gTIGfAsJb3KY8GaYFkflamQkf9zg14GQ
- NhA16eg+UQEMMHc/nmcl/fmltUMnwYj25BLji0AZUp98mvSjgs96yzuYd/tsikGMczG6
- nPXw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUugGbGMbSjazLRGMvLnakyzonjI2tckkY1Qw2dJrH4Z8JpnBmTmglxSRKFWhJ9F0/cN6qXOOg3ofJo@nongnu.org
-X-Gm-Message-State: AOJu0YzWnoL1xt5APHp/84qMSmn4blk05I4DfdvCpBTS+Q+7LUiw5C+E
- clhzdlSXyQHwHBclnlwv+HZQxY37l5MIWU9rMWrPOQPhxUbFoSBqqD7O5rYHbfw=
-X-Google-Smtp-Source: AGHT+IErlDKsOh7F8KGrA/J7dIHCm/7wHsgvFN1dD3E1kxmgM1Ph0rVav39xl2LB4o4mocSbmmJ+9Q==
-X-Received: by 2002:a5d:614a:0:b0:371:8dcc:7f9f with SMTP id
- ffacd0b85a97d-3749680af0bmr773691f8f.5.1724834214270; 
- Wed, 28 Aug 2024 01:36:54 -0700 (PDT)
-Received: from alex-rivos.ba.rivosinc.com
- (amontpellier-656-1-456-62.w92-145.abo.wanadoo.fr. [92.145.124.62])
+ d=1e100.net; s=20230601; t=1724845020; x=1725449820;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=9fmPpDP8OWtQl6IAijiDcovfaipJncig+XTtKXTxvLE=;
+ b=BWvUGkCMY3SsMSg6Ox6B3UroalK41PSyL5OZ4wbFmvt2VB8iQZVXpHmN94O9mgeCSA
+ 3NyUIczlL6Nmd4b9tT3KqXM0UGSUxKm1E45lTYK4QjmE+VA5KZrYBdVMItxRlt7F8Z/f
+ 0ZCBPDp0gjKSo9IHZbMP9nX3+e53QWTAWofPKDeOoQ9yF2oy8abaSHS3FOJb5fvwkAig
+ 70l5jcnfrpHJJlwTNrjF91nM2WkbtbkIPMQzEdfHblA/iJ0Z0tQDxQsMoIZOzeIhsN/R
+ N0TZGsJ5dlyLfyLMm2egrcHl+UEcZdXUL6rkTBoBMV/in1EPdHPUv5mT+1Vq1AnIMAaw
+ BhvA==
+X-Gm-Message-State: AOJu0YwdDt551y1VW5INz6ebVGzkk88twhEJYitBjhvdbYWtSSrz1536
+ qwJFWVCBLrIcBLGiZ8xYeDYDr8QYGVPe52QIv0aX3Lj/BEtZqzwoeaD1MtLGqZk=
+X-Google-Smtp-Source: AGHT+IFoCPBG93lcSRbTzREFz80UspVwu6xBCPl31a19d2Ho7NLp4qF5p24Lnt9bsVz+/GL0cpuqYA==
+X-Received: by 2002:a05:6808:30a8:b0:3d9:dbe9:7cee with SMTP id
+ 5614622812f47-3deff9e7809mr567005b6e.14.1724845020476; 
+ Wed, 28 Aug 2024 04:37:00 -0700 (PDT)
+Received: from [192.168.98.227] ([172.58.111.246])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42ba639d512sm13517745e9.18.2024.08.28.01.36.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Aug 2024 01:36:53 -0700 (PDT)
-From: Alexandre Ghiti <alexghiti@rivosinc.com>
-To: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: Alexandre Ghiti <alexghiti@rivosinc.com>
-Subject: [PATCH v3] target: riscv: Add Svvptc extension support
-Date: Wed, 28 Aug 2024 10:36:51 +0200
-Message-Id: <20240828083651.203861-1-alexghiti@rivosinc.com>
-X-Mailer: git-send-email 2.39.2
+ 5614622812f47-3de2258173fsm3075572b6e.33.2024.08.28.04.36.52
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 28 Aug 2024 04:36:59 -0700 (PDT)
+Message-ID: <207fe6f1-e7cb-49c1-9b98-169af456c941@linaro.org>
+Date: Wed, 28 Aug 2024 21:36:48 +1000
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::436;
- envelope-from=alexghiti@rivosinc.com; helo=mail-wr1-x436.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v10 02/21] linux-user/riscv: set priv for qemu-user and
+ defaults for *envcfg
+To: Deepak Gupta <debug@rivosinc.com>, Alistair Francis <alistair23@gmail.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com,
+ Alistair.Francis@wdc.com, laurent@vivier.eu, bmeng.cn@gmail.com,
+ liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, jim.shu@sifive.com, andy.chiu@sifive.com,
+ kito.cheng@sifive.com
+References: <20240827231906.553327-1-debug@rivosinc.com>
+ <20240827231906.553327-3-debug@rivosinc.com>
+ <CAKmqyKO2gaVNsSCuvSjTSOjKBOEBJOQC91BK0VDRscJbM-hx7A@mail.gmail.com>
+ <Zs5sQ1FYN1JwfolP@debug.ba.rivosinc.com>
+Content-Language: en-US
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <Zs5sQ1FYN1JwfolP@debug.ba.rivosinc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::235;
+ envelope-from=richard.henderson@linaro.org; helo=mail-oi1-x235.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,62 +103,36 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The Svvptc extension describes a uarch that does not cache invalid TLB
-entries: that's the case for qemu so there is nothing particular to
-implement other than the introduction of this extension.
+On 8/28/24 10:16, Deepak Gupta wrote:
+>> This should be handled by a CPU reset, which is still called for linux
+>> user mode.
+> 
+> It is the right place for setting priv to PRV_U?
+> or you want me to place it elsewhere ?
+> 
+> 
+> Sure
+> for reset values of *envcfg, I can rely on `riscv_cpu_reset_hold`
 
-Since qemu already exposes Svvptc behaviour, let's enable it by default
-since it allows to drastically reduce the number of sfence.vma emitted
-by S-mode.
+Doing this in reset_hold seems correct to me.
 
-Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
----
+Compare target/arm/cpu.c, arm_cpu_reset_hold:
 
-Changes in v3:
-- Rebase on top of master
-- Change 1.12 to 1.13 spec version (drew)
+>     if (arm_feature(env, ARM_FEATURE_AARCH64)) {
+>         /* 64 bit CPUs always start in 64 bit mode */
+>         env->aarch64 = true;
+> #if defined(CONFIG_USER_ONLY)
+>         env->pstate = PSTATE_MODE_EL0t;
+>         /* Userspace expects access to DC ZVA, CTL_EL0 and the cache ops */
+>         env->cp15.sctlr_el[1] |= SCTLR_UCT | SCTLR_UCI | SCTLR_DZE;
+>         /* Enable all PAC keys.  */
+>         env->cp15.sctlr_el[1] |= (SCTLR_EnIA | SCTLR_EnIB |
+>                                   SCTLR_EnDA | SCTLR_EnDB);
+...
 
-Changes in v2:
-- Rebase on top of master
-- Enable Svvptc by default
+That assignment to pstate is equivalent to "priv = PRV_U", and sctlr_el[] fills roughly 
+the same role as [ms]envcfg.
 
- target/riscv/cpu.c     | 2 ++
- target/riscv/cpu_cfg.h | 1 +
- 2 files changed, 3 insertions(+)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index a90808a3ba..cabe698f2f 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -197,6 +197,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(svinval, PRIV_VERSION_1_12_0, ext_svinval),
-     ISA_EXT_DATA_ENTRY(svnapot, PRIV_VERSION_1_12_0, ext_svnapot),
-     ISA_EXT_DATA_ENTRY(svpbmt, PRIV_VERSION_1_12_0, ext_svpbmt),
-+    ISA_EXT_DATA_ENTRY(svvptc, PRIV_VERSION_1_13_0, ext_svvptc),
-     ISA_EXT_DATA_ENTRY(xtheadba, PRIV_VERSION_1_11_0, ext_xtheadba),
-     ISA_EXT_DATA_ENTRY(xtheadbb, PRIV_VERSION_1_11_0, ext_xtheadbb),
-     ISA_EXT_DATA_ENTRY(xtheadbs, PRIV_VERSION_1_11_0, ext_xtheadbs),
-@@ -1509,6 +1510,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
-     MULTI_EXT_CFG_BOOL("svinval", ext_svinval, false),
-     MULTI_EXT_CFG_BOOL("svnapot", ext_svnapot, false),
-     MULTI_EXT_CFG_BOOL("svpbmt", ext_svpbmt, false),
-+    MULTI_EXT_CFG_BOOL("svvptc", ext_svvptc, true),
- 
-     MULTI_EXT_CFG_BOOL("zicntr", ext_zicntr, true),
-     MULTI_EXT_CFG_BOOL("zihpm", ext_zihpm, true),
-diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-index 8b272fb826..7d16048a76 100644
---- a/target/riscv/cpu_cfg.h
-+++ b/target/riscv/cpu_cfg.h
-@@ -81,6 +81,7 @@ struct RISCVCPUConfig {
-     bool ext_svinval;
-     bool ext_svnapot;
-     bool ext_svpbmt;
-+    bool ext_svvptc;
-     bool ext_zdinx;
-     bool ext_zaamo;
-     bool ext_zacas;
--- 
-2.39.2
-
+r~
 
