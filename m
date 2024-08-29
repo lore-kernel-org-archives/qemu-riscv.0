@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66092CA0EC8
-	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Aug 2024 23:37:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E07DC87FCB
+	for <qemu-riscv@archiver.kernel.org>; Thu, 29 Aug 2024 23:37:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sjofL-00049w-IN; Thu, 29 Aug 2024 19:34:59 -0400
+	id 1sjof2-00036A-PX; Thu, 29 Aug 2024 19:34:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sjofH-0003v7-EQ
- for qemu-riscv@nongnu.org; Thu, 29 Aug 2024 19:34:55 -0400
-Received: from mail-pg1-x52a.google.com ([2607:f8b0:4864:20::52a])
+ id 1sjof1-00030y-BJ
+ for qemu-riscv@nongnu.org; Thu, 29 Aug 2024 19:34:39 -0400
+Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sjof9-0003B0-Ac
- for qemu-riscv@nongnu.org; Thu, 29 Aug 2024 19:34:55 -0400
-Received: by mail-pg1-x52a.google.com with SMTP id
- 41be03b00d2f7-7cd9e4f550dso413891a12.0
- for <qemu-riscv@nongnu.org>; Thu, 29 Aug 2024 16:34:46 -0700 (PDT)
+ id 1sjoew-00038S-2x
+ for qemu-riscv@nongnu.org; Thu, 29 Aug 2024 19:34:38 -0400
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-7143165f23fso995962b3a.1
+ for <qemu-riscv@nongnu.org>; Thu, 29 Aug 2024 16:34:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1724974485; x=1725579285;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1724974472; x=1725579272;
  darn=nongnu.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=p1JkZkb4XyBKvgGCOavcZvESZvEBcV0RjqVon5JxlI0=;
- b=JeROT4zMrGioGJcJqhEFViKIFEO7FV5UuTbOLuAURigSpD4zo6PeloC4Ug5KiXwuIe
- MQMlscxHak7I0sqCDVTs+4+HiPJu6wpPalkEQu5vqub6PcjyKlAR2UZfWE+L0+6Od6al
- JghyKc1mtIxSiKdSk7f0KgM8fbfcXJguC8jxvkqVWSywIQCr2dkMK+7phRJprAN+dUjL
- hfFEPwgK7rDXkmujUj11qhk5+35CBsr+eJNJKF9t3tZJkh27C/nrcZTZfIqSn4ZLJjg+
- JpjJ6HcT9zssb/Lu6hlYFO0WTEyn03jsz5IeY0J5DKjgyG/BfAUTaFCs5/f5BOpYveMh
- h3+w==
+ bh=PQlN6mRQYQMm3WaHae2L8fMCjTsHQwJwE4wK5R8vZWg=;
+ b=esQ5McqLiuPOSDZzcsSvhHg2CVvK93+xXV8jrrV+bkgCE8CpAFSb/LEarYSL2abp1K
+ GJSd2jAGFtjj7D1ru9PY8MTK+l7B/L1eHDJGDZQrJYy3DMjMoqGzZIqBZPg48EYgAq67
+ 8bgLtsePPS4YXzZED/puAI58K82KS2GLV4h442/6HAMynXjLFy0UW+OFqAlzWu5DMhtR
+ rDRtTSgYTYaI/xXTfZOcGMd9wbjxsZ3zW/t1R9s28EOffVlfP4G9nP89Zn5e3a+zOtT3
+ rQn9VC93GR7cUoZIcNUIGoEinhmOFNUR9q4v7UmBuEI3L8GMPXd4KyS6XNiUlM44mIYc
+ WNJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724974485; x=1725579285;
+ d=1e100.net; s=20230601; t=1724974472; x=1725579272;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=p1JkZkb4XyBKvgGCOavcZvESZvEBcV0RjqVon5JxlI0=;
- b=ZIRU7a1ppHD4crzAeo9GW5+EamIrtBiLgf5EkXh3EeEBZYf+8WCe9MYY1FBCCW3hxM
- YfkJuUxFeTX1SX3gkg2g+BCCb4yORdppaRj6kUe2uVbpAdXAhF8GTphM7ZFcjTl+mEOb
- eeGmnN24MAIkwmp0J09G+5/1Ym+JwMWXP9FXGmZFiaK6qRLnrjsWXQDVxD9jt8kF81Xm
- miNn94RNaFom2co51PQWd0k9qRnEbD48sPnJ3R32pnuiq3xb3JKWQ6AYJXg8hENEiA21
- D6Nd1BLVgX6OgzPAi320E91ckaOv9trwYT2qRpjM21RvmPLiLs35/5pDr00X0dHj++Nj
- /6sg==
-X-Gm-Message-State: AOJu0YwF6FRwUs3JMuZB1E+y3WTbxspAFKNVnP3RFwkEPJ2GPxeMBlSB
- vJSWMpqikI6OCwS7G+vlKfmINm50SYOBF4g0oTTtbglf7zz95/Fx3ZktShi32EwaJJ+pz8TB65u
- H
-X-Google-Smtp-Source: AGHT+IGrZ9hrru+fguW2BSAU60HC2cgGeJw9HW8SBmpfSgFaA1NJSaPS9n40usCpQrvVp+gbKgjoyQ==
-X-Received: by 2002:a17:90b:17d2:b0:2d6:197e:5c46 with SMTP id
- 98e67ed59e1d1-2d8561c63admr4550878a91.20.1724974485263; 
- Thu, 29 Aug 2024 16:34:45 -0700 (PDT)
+ bh=PQlN6mRQYQMm3WaHae2L8fMCjTsHQwJwE4wK5R8vZWg=;
+ b=Fi+3oPwApSaLO8CO16+5LNkIWfqs4qZydn572Ti1n5GV7leKh1f1+yM+AWe6DihPHG
+ eLirZTlViOzc3orieYZ9IVFdU9UV/yjr0/u5gGho0LJzkNbv2L8VFDYH+ImgRjIKRKod
+ YSg/UnYiIwbMQcJlRPZ7SFGaYsvMMlLF75PbJBuS4MOohl8b5SGxVve7vwfVKgUYPGcl
+ WEePJ3+GZD8bFa5pfDsA+kVtNmo5m2O1vsMe86VBKYEYIj7WkAKB7sU/LgCQB28xPdCy
+ Py00xDnsU664yoLboRbSegkvqwo1cxffllnDENXYcFh7wdjXHjQYvV0f4vXmAGdb4CvU
+ 5Cig==
+X-Gm-Message-State: AOJu0Ywsk2Qag4rESxWioce0o5W0unntIynNoR2DJEHdEmYBCSxvnBSK
+ P3J9rVkhYWJ1UYcAX2rPlHYaenCTH2fYS6HOcDlr4Djfy4Ejg5OFE2w7wExnrFP7Oqm6BcP4XTe
+ c
+X-Google-Smtp-Source: AGHT+IHc9YuBthDrY9vJ5omdFuOkRhsSwYvBm8BocqJ0k3tp/awKCnsREMdoJN+8bDoZ1MDoryRF0Q==
+X-Received: by 2002:a05:6a20:e607:b0:1cc:be05:ffe2 with SMTP id
+ adf61e73a8af0-1cce100ec67mr4074769637.18.1724974472244; 
+ Thu, 29 Aug 2024 16:34:32 -0700 (PDT)
 Received: from debug.ba.rivosinc.com ([64.71.180.162])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2d85b13df55sm2331074a91.27.2024.08.29.16.34.44
+ 98e67ed59e1d1-2d85b13df55sm2331074a91.27.2024.08.29.16.34.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 29 Aug 2024 16:34:44 -0700 (PDT)
+ Thu, 29 Aug 2024 16:34:31 -0700 (PDT)
 From: Deepak Gupta <debug@rivosinc.com>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -67,25 +67,23 @@ Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, bmeng.cn@gmail.com,
  liwei1518@gmail.com, dbarboza@ventanamicro.com,
  zhiwei_liu@linux.alibaba.com, jim.shu@sifive.com, andy.chiu@sifive.com,
  kito.cheng@sifive.com, Deepak Gupta <debug@rivosinc.com>,
- Richard Henderson <richard.henderson@linaro.org>,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v12 12/20] target/riscv: tb flag for shadow stack instructions
-Date: Thu, 29 Aug 2024 16:34:16 -0700
-Message-ID: <20240829233425.1005029-13-debug@rivosinc.com>
+Subject: [PATCH v12 02/20] target/riscv: Add zicfilp extension
+Date: Thu, 29 Aug 2024 16:34:06 -0700
+Message-ID: <20240829233425.1005029-3-debug@rivosinc.com>
 X-Mailer: git-send-email 2.45.0
 In-Reply-To: <20240829233425.1005029-1-debug@rivosinc.com>
 References: <20240829233425.1005029-1-debug@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52a;
- envelope-from=debug@rivosinc.com; helo=mail-pg1-x52a.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42f;
+ envelope-from=debug@rivosinc.com; helo=mail-pf1-x42f.google.com
+X-Spam_score_int: -16
+X-Spam_score: -1.7
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
+ DKIM_SIGNED=0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,72 +99,64 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Shadow stack instructions can be decoded as zimop / zcmop or shadow stack
-instructions depending on whether shadow stack are enabled at current
-privilege. This requires a TB flag so that correct TB generation and correct
-TB lookup happens. `DisasContext` gets a field indicating whether bcfi is
-enabled or not.
+zicfilp [1] riscv cpu extension enables forward control flow integrity.
+If enabled, all indirect calls must land on a landing pad instruction.
+
+This patch sets up space for zicfilp extension in cpuconfig. zicfilp
+is dependend on zicsr.
+
+[1] - https://github.com/riscv/riscv-cfi
 
 Signed-off-by: Deepak Gupta <debug@rivosinc.com>
 Co-developed-by: Jim Shu <jim.shu@sifive.com>
 Co-developed-by: Andy Chiu <andy.chiu@sifive.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.h        | 2 ++
- target/riscv/cpu_helper.c | 4 ++++
- target/riscv/translate.c  | 3 +++
- 3 files changed, 9 insertions(+)
+ target/riscv/cpu.c         | 1 +
+ target/riscv/cpu_cfg.h     | 1 +
+ target/riscv/tcg/tcg-cpu.c | 5 +++++
+ 3 files changed, 7 insertions(+)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 4ace54a2eb..e758f4497e 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -612,6 +612,8 @@ FIELD(TB_FLAGS, AXL, 26, 2)
- /* zicfilp needs a TB flag to track indirect branches */
- FIELD(TB_FLAGS, FCFI_ENABLED, 28, 1)
- FIELD(TB_FLAGS, FCFI_LP_EXPECTED, 29, 1)
-+/* zicfiss needs a TB flag so that correct TB is located based on tb flags */
-+FIELD(TB_FLAGS, BCFI_ENABLED, 30, 1)
- 
- #ifdef TARGET_RISCV32
- #define riscv_cpu_mxl(env)  ((void)(env), MXL_RV32)
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index f7e97eabfa..be4ac3d54e 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -169,6 +169,10 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
-         flags = FIELD_DP32(flags, TB_FLAGS, FCFI_ENABLED, 1);
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index c4ea1d4038..e3f0bd9242 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -106,6 +106,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(ziccif, PRIV_VERSION_1_11_0, has_priv_1_11),
+     ISA_EXT_DATA_ENTRY(zicclsm, PRIV_VERSION_1_11_0, has_priv_1_11),
+     ISA_EXT_DATA_ENTRY(ziccrse, PRIV_VERSION_1_11_0, has_priv_1_11),
++    ISA_EXT_DATA_ENTRY(zicfilp, PRIV_VERSION_1_12_0, ext_zicfilp),
+     ISA_EXT_DATA_ENTRY(zicond, PRIV_VERSION_1_12_0, ext_zicond),
+     ISA_EXT_DATA_ENTRY(zicntr, PRIV_VERSION_1_12_0, ext_zicntr),
+     ISA_EXT_DATA_ENTRY(zicsr, PRIV_VERSION_1_10_0, ext_zicsr),
+diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+index 120905a254..88d5defbb5 100644
+--- a/target/riscv/cpu_cfg.h
++++ b/target/riscv/cpu_cfg.h
+@@ -67,6 +67,7 @@ struct RISCVCPUConfig {
+     bool ext_zicbom;
+     bool ext_zicbop;
+     bool ext_zicboz;
++    bool ext_zicfilp;
+     bool ext_zicond;
+     bool ext_zihintntl;
+     bool ext_zihintpause;
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index b8814ab753..ed19586c9d 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -623,6 +623,11 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+         cpu->pmu_avail_ctrs = 0;
      }
  
-+    if (cpu_get_bcfien(env)) {
-+        flags = FIELD_DP32(flags, TB_FLAGS, BCFI_ENABLED, 1);
++    if (cpu->cfg.ext_zicfilp && !cpu->cfg.ext_zicsr) {
++        error_setg(errp, "zicfilp extension requires zicsr extension");
++        return;
 +    }
 +
- #ifdef CONFIG_USER_ONLY
-     fs = EXT_STATUS_DIRTY;
-     vs = EXT_STATUS_DIRTY;
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index b5c0511b4b..afa2ed4e3a 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -119,6 +119,8 @@ typedef struct DisasContext {
-     /* zicfilp extension. fcfi_enabled, lp expected or not */
-     bool fcfi_enabled;
-     bool fcfi_lp_expected;
-+    /* zicfiss extension, if shadow stack was enabled during TB gen */
-+    bool bcfi_enabled;
- } DisasContext;
- 
- static inline bool has_ext(DisasContext *ctx, uint32_t ext)
-@@ -1241,6 +1243,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
-     ctx->pm_base_enabled = FIELD_EX32(tb_flags, TB_FLAGS, PM_BASE_ENABLED);
-     ctx->ztso = cpu->cfg.ext_ztso;
-     ctx->itrigger = FIELD_EX32(tb_flags, TB_FLAGS, ITRIGGER);
-+    ctx->bcfi_enabled = FIELD_EX32(tb_flags, TB_FLAGS, BCFI_ENABLED);
-     ctx->fcfi_lp_expected = FIELD_EX32(tb_flags, TB_FLAGS, FCFI_LP_EXPECTED);
-     ctx->fcfi_enabled = FIELD_EX32(tb_flags, TB_FLAGS, FCFI_ENABLED);
-     ctx->zero = tcg_constant_tl(0);
+     /*
+      * Disable isa extensions based on priv spec after we
+      * validated and set everything we need.
 -- 
 2.44.0
 
