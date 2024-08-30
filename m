@@ -4,133 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E795CA1005
-	for <qemu-riscv@archiver.kernel.org>; Fri, 30 Aug 2024 15:34:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53549CA100A
+	for <qemu-riscv@archiver.kernel.org>; Fri, 30 Aug 2024 16:31:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sk3du-0001iG-6r; Fri, 30 Aug 2024 11:34:30 -0400
+	id 1sk4WR-0005hc-Sn; Fri, 30 Aug 2024 12:30:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1sk3ds-0001hN-VM
- for qemu-riscv@nongnu.org; Fri, 30 Aug 2024 11:34:28 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1sk3dq-0008Um-T2
- for qemu-riscv@nongnu.org; Fri, 30 Aug 2024 11:34:28 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1725032065;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:autocrypt:autocrypt;
- bh=celgQTF4PY6uut4xBsKKnizuI3RMUI0DLuWoPXq+MXA=;
- b=HSjPYttKjyUprCMPRPpAsA0NR0pAssuQykBuCVmLp56xko0jif+tRsZwAyUweA0UTAPMHY
- zzRDMjXqvfAC+V6lJ/vIOwKu3Hu/b0Rbo1PkSjWyqgWGa9rTYZUrUwsJ+y/fj9GRm3hbg4
- +t4UnbWHnqA+sn6IEvY4ERDw0ED6Fr4=
-Received: from mail-oa1-f72.google.com (mail-oa1-f72.google.com
- [209.85.160.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-294-Rqzs6-zOMMyjmUPA_1qYvw-1; Fri, 30 Aug 2024 11:34:23 -0400
-X-MC-Unique: Rqzs6-zOMMyjmUPA_1qYvw-1
-Received: by mail-oa1-f72.google.com with SMTP id
- 586e51a60fabf-2700203caa2so1758431fac.1
- for <qemu-riscv@nongnu.org>; Fri, 30 Aug 2024 08:34:23 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
+ id 1sk4WQ-0005dA-3I
+ for qemu-riscv@nongnu.org; Fri, 30 Aug 2024 12:30:50 -0400
+Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
+ id 1sk4WN-0005UN-QI
+ for qemu-riscv@nongnu.org; Fri, 30 Aug 2024 12:30:49 -0400
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-7142448aaf9so1445596b3a.1
+ for <qemu-riscv@nongnu.org>; Fri, 30 Aug 2024 09:30:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1725035446; x=1725640246;
+ darn=nongnu.org; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=irIRIMibZFJgz5jFRj1jah4+4BIJ9nqhnIXQObmlA2o=;
+ b=heONaPFk1+4L0SBgPU0BYCjbiW1xp8FstX97eHvWEvgLOyvdlhWJSk+k/dKpmdnpQF
+ IcUW80SDdLkZTVKwUaPuLeKgNU97/QQRvoLc/VP2ab+YBivFEA/DGHBSuUSVNmgPYeqH
+ hLmQxg+6M6BUHpSBLayo/IRr3YVWpHgAEsrT0lccbrMwsx3h1KOhm4ah3+4ZD0pwUkrC
+ N4In+X+DMIre0ym2cZBJBxoIRMrPFTGlLvcj+8KCsoGzZbYShXbDIgAtqbFDIXe/2uJf
+ 6q9wEkV+WwuJZDsRJEW0Q7yTfbOxKyQ22nC+WpSiNykZfoI3DgsJa100PFYENJAdEfB+
+ DFSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725032063; x=1725636863;
- h=content-transfer-encoding:autocrypt:subject:cc:to:content-language
- :from:user-agent:mime-version:date:message-id:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=celgQTF4PY6uut4xBsKKnizuI3RMUI0DLuWoPXq+MXA=;
- b=Pn2Q0+QmFHN1AU++n+FpMS2We/MV8O/Xm7uEtqq1uuYT9aIOZHf8YD8OZ7nj1SyyZ5
- csYpuh0qBFOTvf1vVINXmGcYd8oBm+dsZmdH70r/r5Z54GV+i+uF1IjMAwbJbwxcHtk6
- 3JZaz/1si5p93xtk+XU/ce5FLvMt5WzVrlF9rFYmIx+lTsVlBkDdNC/7W9xqC/WyhS3r
- WqS3NTkBiaUKQit3NvOGWTNGn5Y1Iez4wMEXK65zVgXciGp8+RPeRC9NKmIZ+wrm0Gbx
- OXSxBrmbSbKHysX5CUrrEda27ei3WDny1C74Mp+lRPRyklzOKQ2WApbxXStkUbNAOdmQ
- uJAg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXAomW44pwCAR9ymKTvxgAJtaQ1R1Ue4DDLv0SA9qxhtneYXk6c8m8XIRckx5ByA6xnw68UoZ0N/KYG@nongnu.org
-X-Gm-Message-State: AOJu0YwMVZo/0aT2jrSInwzTOmcdNdFm7dOVHFti1wlkh7y2/6xWyx09
- WgDgriprqtyoMe5kE/HPskAkcr1pU0CdMoSYPXl/6O+3HtRGcj871qGQGcfgivgwlfZ/1rcsBUP
- WVeXAL/p5bPpMXHBatX3HwnUrTeX0iiUJAjO3oIjuErbC7zZvOPYc
-X-Received: by 2002:a05:6870:2104:b0:260:f883:95f9 with SMTP id
- 586e51a60fabf-2779035c400mr7584778fac.42.1725032062952; 
- Fri, 30 Aug 2024 08:34:22 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFYeaig2bKnau5g5wf4AcvFuwvR6B1HsLqPWr0opqSx2ZoJegr4jx6ZPeXM0J5wm9dxWtCtVA==
-X-Received: by 2002:a05:6870:2104:b0:260:f883:95f9 with SMTP id
- 586e51a60fabf-2779035c400mr7584768fac.42.1725032062710; 
- Fri, 30 Aug 2024 08:34:22 -0700 (PDT)
-Received: from [192.168.0.6] (ip-109-43-179-35.web.vodafone.de.
- [109.43.179.35]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7a806bf71aesm153023885a.20.2024.08.30.08.34.20
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 30 Aug 2024 08:34:22 -0700 (PDT)
-Message-ID: <747e3626-e4f4-47e2-bdfa-ca047f9f8443@redhat.com>
-Date: Fri, 30 Aug 2024 17:34:17 +0200
+ d=1e100.net; s=20230601; t=1725035446; x=1725640246;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=irIRIMibZFJgz5jFRj1jah4+4BIJ9nqhnIXQObmlA2o=;
+ b=Ni6zouTvwgZsczhvLsN2wcfj/WmuOcKY5ppRJHZliroigDDDGZLBcEz31V1GkIpVAb
+ fWpOznk/dEr2kv5g19YGVQcQprg9tVpmUC97ODenXGdNGv8XqqRzcp8zM4TjgchG0bsB
+ X2Oird5GefuqU7aU4hSD11fhFOsMr+csC/4x3SLeIVfJuPTp9xVS21mxhIiUM9uIpE0v
+ aLJqHe0Io2qsp4Aw951NQCN32HL0OkGdrx/A6gSZ3GTaHUb2axjOBZgDiasz2o7wHIoT
+ fZQ3XOa4NhEIJDh/IDPm1UAq/DX/pJPdJJwagfr6/T6w8Tvr9ZMVBWVuthSHwIOTjzME
+ KeeQ==
+X-Gm-Message-State: AOJu0YxzMbcEPvYQ0yruOWjNErlzpK/LYE6fYeM7yzyEOKqwbZFqw/Wo
+ vviLnlMXafo2eH7yZ7fMzVeXCjpwi2d6jWY0CDZOjiAeRfXbEpg3PV3hitHFBIA=
+X-Google-Smtp-Source: AGHT+IEfqnvnRURV+722FqXtpQe7pinhg+iyvTuKcHzTIqWV9jKyQK/inBGNtOGD0OepRvxRt00hgw==
+X-Received: by 2002:a05:6a00:1798:b0:70d:32bf:aa45 with SMTP id
+ d2e1a72fcca58-7170a85b988mr4058144b3a.14.1725035445549; 
+ Fri, 30 Aug 2024 09:30:45 -0700 (PDT)
+Received: from debug.ba.rivosinc.com ([64.71.180.162])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-715e56d72d1sm3054975b3a.170.2024.08.30.09.30.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 30 Aug 2024 09:30:45 -0700 (PDT)
+Date: Fri, 30 Aug 2024 09:30:43 -0700
+From: Deepak Gupta <debug@rivosinc.com>
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com,
+ Alistair.Francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ jim.shu@sifive.com, andy.chiu@sifive.com, kito.cheng@sifive.com
+Subject: Re: [PATCH v12 11/20] target/riscv: introduce ssp and enabling
+ controls for zicfiss
+Message-ID: <ZtHzs6HbcKTC9z/9@debug.ba.rivosinc.com>
+References: <20240829233425.1005029-1-debug@rivosinc.com>
+ <20240829233425.1005029-12-debug@rivosinc.com>
+ <abc033ff-7638-4d2d-b2d7-65b3c88311e8@linaro.org>
+ <ZtFfGR94f5EwIl90@debug.ba.rivosinc.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Thomas Huth <thuth@redhat.com>
-To: QEMU Developers <qemu-devel@nongnu.org>, qemu-riscv@nongnu.org,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: Bin Meng <bmeng@tinylab.org>, Alistair Francis <alistair.francis@wdc.com>
-Subject: tests/avocado/riscv_opensbi.py does not work reliable
-Autocrypt: addr=thuth@redhat.com; keydata=
- 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
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <ZtFfGR94f5EwIl90@debug.ba.rivosinc.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
+ envelope-from=debug@rivosinc.com; helo=mail-pf1-x42d.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -146,27 +99,45 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On Thu, Aug 29, 2024 at 10:56:41PM -0700, Deepak Gupta wrote:
+>On Fri, Aug 30, 2024 at 03:20:04PM +1000, Richard Henderson wrote:
+>>On 8/30/24 09:34, Deepak Gupta wrote:
+>>>+bool cpu_get_bcfien(CPURISCVState *env)
+>>
+>>It occurs to me that a better name would be "cpu_get_sspen".
+>>The backward cfi is merely a consequence of the shadow stack.
 
-  Hi!
+On a second thought, I would like to keep to keep `cpu_get_bcfien`
+We use this helper in `cpu_get_tb_cpu_state`, `get_physical_address`
+and `cfi_ss`. In 2 out of 3 functions, intent is to check whether backcfi
+is enabled or not and based on set TB state or perform appropriate page
+table walk. Only in case of whether access to ssp is allowed or not
+(i.e. `cfi_ss`), intent is sspen or not.
 
-While running a lot of tests (i.e. with a very loaded machine), I noticed 
-that tests/avocado/riscv_opensbi.py is very flaky when the host machine is 
-slow. I can easily reproduce the problem when running a big compilation job 
-on all CPUs in the background and then run the riscv_opensbi.py avocado 
-test. One of test_riscv32_spike, test_riscv64_spike, test_riscv32_sifive_u 
-or test_riscv64_sifive_u is failing most of the time (but not the virt 
-machine tests).
+Let me know if you feel strongly against it.
 
-Looking at the logs, it seems like the output sometimes stops somewhere at a 
-random place before the boot process reaches the spot that the test is 
-looking for. Looking at riscv_htif.c, there does not seem to be any flow 
-control implemented here, so I guess at least the spike test is currently 
-doomed to fail occasionally. Is there anything that can be done about this 
-(e.g. is flow control somehow possible here or does the interface not allow 
-this?)? Otherwise, I think it might be best to mark the spike and sifive_u 
-tests with QEMU_TEST_FLAKY_TESTS here to make it clear that these tests are 
-not reliable by default...?
-
-  Thomas
-
+>
+>Want me to change cpu_get_fcfien as well to cpu_get_lpen ?
+>
+>>
+>>>+{
+>>>+    /* no cfi extension, return false */
+>>>+    if (!env_archcpu(env)->cfg.ext_zicfiss) {
+>>>+        return false;
+>>>+    }
+>>>+
+>>>+    switch (env->priv) {
+>>>+    case PRV_U:
+>>>+        if (riscv_has_ext(env, RVS)) {
+>>>+            return env->senvcfg & SENVCFG_SSE;
+>>>+        }
+>>>+        return env->menvcfg & MENVCFG_SSE;
+>>>+#ifndef CONFIG_USER_ONLY
+>>>+    case PRV_S:
+>>>+        if (env->virt_enabled) {
+>>>+            return env->henvcfg & HENVCFG_SSE;
+>>>+        }
+>>>+        return env->menvcfg & MENVCFG_SSE;
+>>>+    case PRV_M: /* M-mode shadow stack is always on if hart implements */
+>>>+        return true;
 
