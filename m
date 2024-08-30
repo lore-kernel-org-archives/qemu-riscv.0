@@ -4,88 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0846CCA0EDC
-	for <qemu-riscv@archiver.kernel.org>; Fri, 30 Aug 2024 16:53:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38E2ACA0EFD
+	for <qemu-riscv@archiver.kernel.org>; Fri, 30 Aug 2024 17:48:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sk4nM-0000s6-AF; Fri, 30 Aug 2024 12:48:20 -0400
+	id 1sk5j6-0006ao-OA; Fri, 30 Aug 2024 13:48:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sk4nL-0000ov-H1
- for qemu-riscv@nongnu.org; Fri, 30 Aug 2024 12:48:19 -0400
-Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1sk4nJ-0006yM-Rh
- for qemu-riscv@nongnu.org; Fri, 30 Aug 2024 12:48:19 -0400
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-2d3d662631aso1506300a91.1
- for <qemu-riscv@nongnu.org>; Fri, 30 Aug 2024 09:48:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1725036496; x=1725641296;
- darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=gJJt5Z8SJGSqiOcjU4U+2C4uQqhkjvrrqsHIDsZi2XU=;
- b=nD3g8cX55hoc1VNLtiRV0VJ2g7Iml9LbaNfz+n1ndga0rwrg5qAfWicvfD7pM84JAQ
- TcvloUHR0lPHNWYu8pqJv7gIstglhQ8EbVR16jG3b+JlHW689k5MJmjvp3k583A4hFww
- 3hsa13QYNqD3iWJaTCddn3AqCezXggSa+5qG4+gseJSfRpyTW05Z+/tuF0c5KZB2/XL9
- iYTJpLuiztyEH6c5vwu4KDFXFmKcD5PaOipX1lIwvx2ccYyN5KiBE4fJtv0k8S6Q9xs1
- mIbhpGv1i5T3kZ+q0YCGhnMWzALA9Cw+L/rU8n65IO+l40F91pS6iG/vx9Jf6WN7/OLw
- QoLw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725036496; x=1725641296;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=gJJt5Z8SJGSqiOcjU4U+2C4uQqhkjvrrqsHIDsZi2XU=;
- b=wBtd6fSYt9g0EZZGb3E1aUM6pcE/d81OnvToeK0u0BZjhrg20iC8s/KlRebPkfthr2
- wdq0BcXZWaB2GAqdzV4qEFOTlw+oV63D56Ht1c/O2Jle5mKHP0prd7/PBKkmrBvRv1kN
- q7LMPWBEOgUOmHN5X4A3FQW4hj6SIL4IRn2Hwi/ckY1EjlFbdx1l4TSbWRXUWzgL/sGq
- lZK1LJMTQ7w53yhE3UlrBX1tPRu9G3zpfo3M6cK79iWdA/tDL5UCMIwLj4ath+9Lo31i
- TSyrW2itzfdMH1AwKhayzFnMzs7dYrPj6rn1LR6SDXxKPdtCr5kFFyp43V/tU4oxRC/8
- vDWw==
-X-Gm-Message-State: AOJu0YyoAoKE1DxugIlw4HiRiGJ8SKKqDog1lSQOT9cbEGKrkoSQqI5b
- AIgVbS2uF/uxrElnrIY+G7G3Dk7gE4GPa0CtRNVBuIUq9r/vQHhO6i3l9l5OPS0Ij6G+tRpHg9u
- e
-X-Google-Smtp-Source: AGHT+IEmFBOJ1hEEjHgq1Ht8xea0riG7z9fgHG5emgXract1Txv0+8m5H2CdIL+mnDmFUQ2flhsxJw==
-X-Received: by 2002:a17:90b:524a:b0:2d3:90e1:41c7 with SMTP id
- 98e67ed59e1d1-2d85638414emr6934635a91.31.1725036496271; 
- Fri, 30 Aug 2024 09:48:16 -0700 (PDT)
-Received: from debug.ba.rivosinc.com ([64.71.180.162])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2d8445e813dsm6591257a91.17.2024.08.30.09.48.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 Aug 2024 09:48:16 -0700 (PDT)
-From: Deepak Gupta <debug@rivosinc.com>
-To: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, bmeng.cn@gmail.com,
- liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, jim.shu@sifive.com, andy.chiu@sifive.com,
- kito.cheng@sifive.com, Deepak Gupta <debug@rivosinc.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v13 08/20] disas/riscv: enable `lpad` disassembly
-Date: Fri, 30 Aug 2024 09:47:44 -0700
-Message-ID: <20240830164756.1154517-9-debug@rivosinc.com>
-X-Mailer: git-send-email 2.45.0
-In-Reply-To: <20240830164756.1154517-1-debug@rivosinc.com>
-References: <20240830164756.1154517-1-debug@rivosinc.com>
+ (Exim 4.90_1) (envelope-from <vladimir.isaev@syntacore.com>)
+ id 1sk5iz-0006Uk-IS; Fri, 30 Aug 2024 13:47:55 -0400
+Received: from mta-04.yadro.com ([89.207.88.248])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <vladimir.isaev@syntacore.com>)
+ id 1sk5ix-0004hi-DM; Fri, 30 Aug 2024 13:47:53 -0400
+DKIM-Filter: OpenDKIM Filter v2.11.0 mta-04.yadro.com 3E220C0003
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
+ s=mta-04; t=1725040065;
+ bh=8+sN9E4YHy9w0jcJOPwRC3fIN153meNkMETDm6Cm5SQ=;
+ h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type:From;
+ b=dZi0SWGKZWaVfIuR4+vcegAwhiZx3zgdkcFvOOqzn2TyAheFxVxn71/nyWUEfKXBl
+ bx01DWIbKtLZzgo4E0HroVomVZFnPo7cPOIhQ9k3UgNza5qzheLOzffTXew+ti/O+y
+ VuHbZbXvpf9xB2EdfPhWrdxuyauaYUPCkHzCjIb0LzvqGbC8C0Afpvora0A7Kh3piF
+ Hx4KK4PG5Eodbz1kYhl7xhNoZ6rXnHAFi2IBTkLw0ZV9WFodh6nYZF1/nwXueEu7wQ
+ 3Jpdw/AzPnhnECVSuc0lr8FJMyIl9PPWEoU3ZNQCxrjLyo7trrTfr1bQthUGLNGoM0
+ rYg0Ym7TkDIVw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
+ s=mta-03; t=1725040065;
+ bh=8+sN9E4YHy9w0jcJOPwRC3fIN153meNkMETDm6Cm5SQ=;
+ h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type:From;
+ b=acyYjkJ1JT7oLt2GuCLX1uZG6a+6eG5/F+O0fLYhz9anLMEPW+CxUEWJXFMeM4eXo
+ tiIDgV44dBSUjPWYJJRnSG7cDMhlX0bZeogJq0SHzEuEHhkCQXuNeSpXOpCQcWQFwK
+ H2j3tA8J66Q6ufhiahOcwCkIka8/zYmz4IA2YcuO9IETf4kLfr0QcJaHYDwk5nhSKT
+ CmSDR2z+J0DA4ps2+ZCI6dz3ZhNCYyKf9BJ8DuKcbzH73nmxycmfbkwGQKYAr6zmtD
+ NIjs0AMNG1vHcKT1PP7nWVwbY+STLm1DP4ROy/j6rqOlOgTgD2jKRlUblQOP5P7ud9
+ QmGjLXoQ+7I/g==
+Message-ID: <f26253a4-8b34-4cd7-8375-e49b8d1842a4@syntacore.com>
+Date: Fri, 30 Aug 2024 20:47:37 +0300
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] target/riscv: Stop timer with infinite timecmp
+To: Andrew Jones <ajones@ventanamicro.com>
+CC: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>, Anup Patel
+ <apatel@ventanamicro.com>, <palmer@dabbelt.com>, <alistair.francis@wdc.com>,
+ <bmeng.cn@gmail.com>, <liwei1518@gmail.com>, <zhiwei_liu@linux.alibaba.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, <atishp@rivosinc.com>
+References: <20240829084002.1805006-2-ajones@ventanamicro.com>
+ <5f547cd8-2068-4499-af7e-04f3f27ea617@syntacore.com>
+ <20240830-f7e2039c7d1cc5e33bd1f5b2@orel>
+Content-Language: en-US, ru-RU
+From: Vladimir Isaev <vladimir.isaev@syntacore.com>
+In-Reply-To: <20240830-f7e2039c7d1cc5e33bd1f5b2@orel>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
- envelope-from=debug@rivosinc.com; helo=mail-pj1-x1033.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+X-ClientProxiedBy: T-EXCH-06.corp.yadro.com (172.17.10.110) To
+ S-Exch-01.corp.yadro.com (10.78.5.241)
+Received-SPF: permerror client-ip=89.207.88.248;
+ envelope-from=vladimir.isaev@syntacore.com; helo=mta-04.yadro.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01,
+ T_SPF_PERMERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,94 +84,76 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Signed-off-by: Deepak Gupta <debug@rivosinc.com>
-Co-developed-by: Jim Shu <jim.shu@sifive.com>
-Co-developed-by: Andy Chiu <andy.chiu@sifive.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- disas/riscv.c | 18 +++++++++++++++++-
- disas/riscv.h |  2 ++
- 2 files changed, 19 insertions(+), 1 deletion(-)
 
-diff --git a/disas/riscv.c b/disas/riscv.c
-index c8364c2b07..c7c92acef7 100644
---- a/disas/riscv.c
-+++ b/disas/riscv.c
-@@ -974,6 +974,7 @@ typedef enum {
-     rv_op_amomaxu_h = 943,
-     rv_op_amocas_b  = 944,
-     rv_op_amocas_h  = 945,
-+    rv_op_lpad = 946,
- } rv_op;
- 
- /* register names */
-@@ -2232,6 +2233,7 @@ const rv_opcode_data rvi_opcode_data[] = {
-     { "amomaxu.h", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-     { "amocas.b", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-     { "amocas.h", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-+    { "lpad", rv_codec_lp, rv_fmt_imm, NULL, 0, 0, 0 },
- };
- 
- /* CSR names */
-@@ -2925,7 +2927,13 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
-             case 7: op = rv_op_andi; break;
-             }
-             break;
--        case 5: op = rv_op_auipc; break;
-+        case 5:
-+            op = rv_op_auipc;
-+            if (dec->cfg->ext_zicfilp &&
-+                (((inst >> 7) & 0b11111) == 0b00000)) {
-+                op = rv_op_lpad;
-+            }
-+            break;
-         case 6:
-             switch ((inst >> 12) & 0b111) {
-             case 0: op = rv_op_addiw; break;
-@@ -4482,6 +4490,11 @@ static uint32_t operand_tbl_index(rv_inst inst)
-     return ((inst << 54) >> 56);
- }
- 
-+static uint32_t operand_lpl(rv_inst inst)
-+{
-+    return inst >> 12;
-+}
-+
- /* decode operands */
- 
- static void decode_inst_operands(rv_decode *dec, rv_isa isa)
-@@ -4869,6 +4882,9 @@ static void decode_inst_operands(rv_decode *dec, rv_isa isa)
-         dec->imm = sextract32(operand_rs2(inst), 0, 5);
-         dec->imm1 = operand_imm2(inst);
-         break;
-+    case rv_codec_lp:
-+        dec->imm = operand_lpl(inst);
-+        break;
-     };
- }
- 
-diff --git a/disas/riscv.h b/disas/riscv.h
-index 16a08e4895..1182457aff 100644
---- a/disas/riscv.h
-+++ b/disas/riscv.h
-@@ -166,6 +166,7 @@ typedef enum {
-     rv_codec_r2_immhl,
-     rv_codec_r2_imm2_imm5,
-     rv_codec_fli,
-+    rv_codec_lp,
- } rv_codec;
- 
- /* structures */
-@@ -228,6 +229,7 @@ enum {
- #define rv_fmt_rs1_rs2                "O\t1,2"
- #define rv_fmt_rd_imm                 "O\t0,i"
- #define rv_fmt_rd_uimm                "O\t0,Ui"
-+#define rv_fmt_imm                    "O\ti"
- #define rv_fmt_rd_offset              "O\t0,o"
- #define rv_fmt_rd_uoffset             "O\t0,Uo"
- #define rv_fmt_rd_rs1_rs2             "O\t0,1,2"
--- 
-2.44.0
+
+30.08.2024 17:50, Andrew Jones пишет:
+> On Fri, Aug 30, 2024 at 02:05:05PM GMT, Vladimir Isaev wrote:
+>> Hi Andrew,
+>>
+>> 29.08.2024 11:40, Andrew Jones wrote:
+>>> While the spec doesn't state it, setting timecmp to UINT64_MAX is
+>>> another way to stop a timer, as it's considered setting the next
+>>> timer event to occur at infinity. 
+>>
+>> I think this should be explicitly stated in the spec, since some software
+>> may initially set time and timecmp to big values just to check how overflow
+>> is handled. And without it no chance that all HW implementations will interpret
+>> UINT64_MAX as 'stop timer'.
+>>
+>> Do we need github issue on SSTC/privileged?
+> 
+> Hi Vladimir,
+> 
+> I don't think we need to update the spec, so hardware is free to make the
+> interrupt pending if time ever reaches UINT64_MAX. However, the hardware
+> will then need to clear the pending interrupt on the very next increment
+> of time. This means even if the interrupt is raised it will most likely
+> look spurious to the handler. I think we can leave this to software. If
+> the software wants to use UINT64_MAX to stop timers, then it may also want
+> to add a check in its timer handlers for timecmp == UINT64_MAX, and, under
+> that condition, just ignore the interrupt.
+> 
+
+oh, I got it, thank you for explanation!
+
+> Thanks,
+> drew
+> 
+>>
+>> Thank you,
+>> Vladimir Isaev
+>>
+>>> And, even if the time CSR does
+>>> eventually reach UINT64_MAX, the very next tick will bring it back to
+>>> zero, once again less than timecmp. For this reason
+>>> riscv_timer_write_timecmp() special cases UINT64_MAX. However, if a
+>>> previously set timecmp has not yet expired, then setting timecmp to
+>>> UINT64_MAX to disable / stop it would not work, as the special case
+>>> left the previous QEMU timer active, which would then still deliver
+>>> an interrupt at that previous timecmp time. Ensure the stopped timer
+>>> will not still deliver an interrupt by also deleting the QEMU timer
+>>> in the UINT64_MAX special case.
+>>>
+>>> Fixes: ae0edf2188b3 ("target/riscv: No need to re-start QEMU timer when timecmp == UINT64_MAX")
+>>> Signed-off-by: Andrew Jones <ajones@ventanamicro.com>
+>>> ---
+>>>  target/riscv/time_helper.c | 1 +
+>>>  1 file changed, 1 insertion(+)
+>>>
+>>> diff --git a/target/riscv/time_helper.c b/target/riscv/time_helper.c
+>>> index 8d245bed3ae3..bc0d9a0c4c35 100644
+>>> --- a/target/riscv/time_helper.c
+>>> +++ b/target/riscv/time_helper.c
+>>> @@ -92,6 +92,7 @@ void riscv_timer_write_timecmp(CPURISCVState *env, QEMUTimer *timer,
+>>>       * equals UINT64_MAX.
+>>>       */
+>>>      if (timecmp == UINT64_MAX) {
+>>> +        timer_del(timer);
+>>>          return;
+>>>      }
+>>>  
+>>
+>>
+>>
 
 
