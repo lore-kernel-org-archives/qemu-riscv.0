@@ -4,91 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 167B6CA0EE1
-	for <qemu-riscv@archiver.kernel.org>; Fri, 30 Aug 2024 05:20:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7366CA0EE0
+	for <qemu-riscv@archiver.kernel.org>; Fri, 30 Aug 2024 05:57:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sju3Z-0000gX-0p; Fri, 30 Aug 2024 01:20:21 -0400
+	id 1sjucr-0003AL-SE; Fri, 30 Aug 2024 01:56:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sju3W-0000fW-M3
- for qemu-riscv@nongnu.org; Fri, 30 Aug 2024 01:20:18 -0400
-Received: from mail-pg1-x534.google.com ([2607:f8b0:4864:20::534])
+ (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
+ id 1sjucp-00039A-VA
+ for qemu-riscv@nongnu.org; Fri, 30 Aug 2024 01:56:47 -0400
+Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sju3U-0002ek-7E
- for qemu-riscv@nongnu.org; Fri, 30 Aug 2024 01:20:18 -0400
-Received: by mail-pg1-x534.google.com with SMTP id
- 41be03b00d2f7-7cd895682fcso579197a12.0
- for <qemu-riscv@nongnu.org>; Thu, 29 Aug 2024 22:20:15 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
+ id 1sjucn-0000zX-SW
+ for qemu-riscv@nongnu.org; Fri, 30 Aug 2024 01:56:47 -0400
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-2d3b36f5366so1102081a91.0
+ for <qemu-riscv@nongnu.org>; Thu, 29 Aug 2024 22:56:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724995215; x=1725600015; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Dvj+Jkf9UOIs1rtRDSsJ2H7qrxcydtnGfDt2mhRQays=;
- b=mkGdWCoaA5wt47wEAtjivMSaXO+CDqd+w3EFLySY/sfw+6Ssn60I9qlJlPYovIXxRj
- cA90nLy8oZmFc6Lz9r7jrQwIx6HJrHGEV8U+LSU90BpjMjwCohSy+MUHYWLpz4kUTBNR
- o8RTqrp8U+vSXViqKDwGSBL4SOCepC/KJz+oSfog4EOn+tpBpzrJmMCBXon6wOLNitjb
- 69ui/DX31Wz46MCuHtmaVNgxF01Z78GGxC2AdCKs8CnGf4gYZvF7nOr4SDYl0BFYPBlj
- Bl+9bJG5MUhZTUC4r1XOKnOa4VQmWUxh+eb6fT4TF+ip7KXjQj3Zw0fePz2sdmdOieTl
- rPOQ==
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1724997404; x=1725602204;
+ darn=nongnu.org; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=XqcyJD5DyxBXbyRLYX5PCWo1ecqcyiHZra8ghQOL9gg=;
+ b=hNBAuR4UjpBY9Anni7JW0h+LQxh+x0KyH8nQNlXxQ9FeeGVm+CYFzXLKVbeb85qwJy
+ hCAVCvydfmXgWnujHAqTxR+18JQoKf3MbZwSUZkswrPXTVlerYZTYhjCckERdTXAne7G
+ sP7ANWOSVa/yBOM/MWS9iVOFqolNmgZq98jLZp8E3gHDhucpts0niGXNA32ay164zVnq
+ EFVnbKT+s5XyR2Il7OgRGykN1k2D9kWlyrQNshH3rqPxEnDAZdVkzAJC7YeDFyqJ46up
+ NT9OthFBiyxMBm6i+o8sErUMsoDHYxWcF25PHBsmHjwrEuOV/yT+puG58Hyw03vpuXPJ
+ aeng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724995215; x=1725600015;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Dvj+Jkf9UOIs1rtRDSsJ2H7qrxcydtnGfDt2mhRQays=;
- b=TyuQqKOdP8eMvXTIBu1DoxkivdKEFJwsplgBa25S8ff+ABBOyGru/OVWBO6xV5ii+w
- O59vjii3NQL3y87WZpm4ocYxa6FX2v6yjoeMgZOOEdL2nwz5ATXOUCnmMD66yUKi/hRL
- NXCwc+qa/PAu+uIARxo9SD12JuQzFR4pU+6LeQq+tkFStFraQmcWFyEDlgHG2pzWY9Cj
- cPD17w8fJeDGS/UyJbqzHrixnv6phtOSK4rngzrvqMUsrNZKl4HTk/Xr1BvA83u9VyQo
- bMbqNSYMmgthAkJHSYuENk29K+9h4zZxNUil1oJLfN1aw1f6N+ksHDCEzMlRcisqj9Dh
- b1dA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVpb2Ogg1jxVMAVvYndfZfVANVm8ZsKVyIOaX6WWFw1nYYdfOzQWrFPBkmf4jsIySTgw6OvGLNZGaf4@nongnu.org
-X-Gm-Message-State: AOJu0YxLUe6uXNt8rd070Oby7MrKdVqh6DNy2XmmkQZJhQCQDwfxuMdw
- +2PZlABr++u/pzSTxg3qinzJ2cE9ZEpEnYOpGzUuBY3TB9bL2qOrQbrV0B6pZ6M=
-X-Google-Smtp-Source: AGHT+IGXbkhjwVhxmWlZ68NL6Cf5rdiHMnnpGnfd5onrCvLYMC6+5k1+n9Tp9OOzKVFbIma7yifFSw==
-X-Received: by 2002:a05:6a20:e196:b0:1cc:cdb6:c11a with SMTP id
- adf61e73a8af0-1cce1015a21mr5335893637.24.1724995214538; 
- Thu, 29 Aug 2024 22:20:14 -0700 (PDT)
-Received: from ?IPV6:2001:8004:5100:1c02:35b7:18d3:3fc5:9f02?
- ([2001:8004:5100:1c02:35b7:18d3:3fc5:9f02])
+ d=1e100.net; s=20230601; t=1724997404; x=1725602204;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=XqcyJD5DyxBXbyRLYX5PCWo1ecqcyiHZra8ghQOL9gg=;
+ b=GZ1dTNSPUee3Df/nk/xSC+1Z5vG/X9nJxs/+jNKY9BkvH0pUodvfay3EIuhJNSAJed
+ jd9zrBA4SlATo55C4dTjqoAnNIaincgDlNs6ZdMvhcJ+9hT3INdSqHjYBS0iScnkVAp2
+ A3f7RqbNjigiMKkBATzBl6PeEPFGWeFk7r2DaK6ihS8eudtkldnvjh72zHSb3/t0eWAE
+ GbYrLfni5bGHzlRk+d29zZW4HLfK36SNahz3VDbPQFYNIiZOr+xz5N33Fbth5p06nTgB
+ ayjN0E5DeIuzrV6RkIR+jRoAWkh5+SK1el8rsC8ffllBcSoaQYttGq1nOvUXEgZVpU2Z
+ xT9g==
+X-Gm-Message-State: AOJu0Yypctgar5Bj5DYaCsWFlUdUc/zw0R37u5aa3mHPIfV5oopU6fuv
+ PkmVfIZAL9lc+ONaI/IaHGRPeWR3ihwCyUj0oI0FDNhu/hJT+eN+ltPdf2qjo+U=
+X-Google-Smtp-Source: AGHT+IHEgiEKx2DuVgu3if1os90uQ4eqjODKvqmTGEmBS9VBl38IsG15cbk6E/uyy9DNQIKIegA2Cw==
+X-Received: by 2002:a17:90a:d196:b0:2d3:c5f1:d0d9 with SMTP id
+ 98e67ed59e1d1-2d8561db9ffmr5637201a91.25.1724997403542; 
+ Thu, 29 Aug 2024 22:56:43 -0700 (PDT)
+Received: from debug.ba.rivosinc.com ([64.71.180.162])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2d8446f3bd4sm5229210a91.53.2024.08.29.22.20.08
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 29 Aug 2024 22:20:14 -0700 (PDT)
-Message-ID: <abc033ff-7638-4d2d-b2d7-65b3c88311e8@linaro.org>
-Date: Fri, 30 Aug 2024 15:20:04 +1000
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+ 98e67ed59e1d1-2d844624dc7sm5321530a91.30.2024.08.29.22.56.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 29 Aug 2024 22:56:43 -0700 (PDT)
+Date: Thu, 29 Aug 2024 22:56:41 -0700
+From: Deepak Gupta <debug@rivosinc.com>
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com,
+ Alistair.Francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ jim.shu@sifive.com, andy.chiu@sifive.com, kito.cheng@sifive.com
 Subject: Re: [PATCH v12 11/20] target/riscv: introduce ssp and enabling
  controls for zicfiss
-To: Deepak Gupta <debug@rivosinc.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, bmeng.cn@gmail.com,
- liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, jim.shu@sifive.com, andy.chiu@sifive.com,
- kito.cheng@sifive.com
+Message-ID: <ZtFfGR94f5EwIl90@debug.ba.rivosinc.com>
 References: <20240829233425.1005029-1-debug@rivosinc.com>
  <20240829233425.1005029-12-debug@rivosinc.com>
-Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240829233425.1005029-12-debug@rivosinc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::534;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x534.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ <abc033ff-7638-4d2d-b2d7-65b3c88311e8@linaro.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <abc033ff-7638-4d2d-b2d7-65b3c88311e8@linaro.org>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
+ envelope-from=debug@rivosinc.com; helo=mail-pj1-x1029.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,40 +99,69 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 8/30/24 09:34, Deepak Gupta wrote:
-> +bool cpu_get_bcfien(CPURISCVState *env)
+On Fri, Aug 30, 2024 at 03:20:04PM +1000, Richard Henderson wrote:
+>On 8/30/24 09:34, Deepak Gupta wrote:
+>>+bool cpu_get_bcfien(CPURISCVState *env)
+>
+>It occurs to me that a better name would be "cpu_get_sspen".
+>The backward cfi is merely a consequence of the shadow stack.
 
-It occurs to me that a better name would be "cpu_get_sspen".
-The backward cfi is merely a consequence of the shadow stack.
+Want me to change cpu_get_fcfien as well to cpu_get_lpen ?
 
-> +{
-> +    /* no cfi extension, return false */
-> +    if (!env_archcpu(env)->cfg.ext_zicfiss) {
-> +        return false;
-> +    }
-> +
-> +    switch (env->priv) {
-> +    case PRV_U:
-> +        if (riscv_has_ext(env, RVS)) {
-> +            return env->senvcfg & SENVCFG_SSE;
-> +        }
-> +        return env->menvcfg & MENVCFG_SSE;
-> +#ifndef CONFIG_USER_ONLY
-> +    case PRV_S:
-> +        if (env->virt_enabled) {
-> +            return env->henvcfg & HENVCFG_SSE;
-> +        }
-> +        return env->menvcfg & MENVCFG_SSE;
-> +    case PRV_M: /* M-mode shadow stack is always on if hart implements */
-> +        return true;
+>
+>>+{
+>>+    /* no cfi extension, return false */
+>>+    if (!env_archcpu(env)->cfg.ext_zicfiss) {
+>>+        return false;
+>>+    }
+>>+
+>>+    switch (env->priv) {
+>>+    case PRV_U:
+>>+        if (riscv_has_ext(env, RVS)) {
+>>+            return env->senvcfg & SENVCFG_SSE;
+>>+        }
+>>+        return env->menvcfg & MENVCFG_SSE;
+>>+#ifndef CONFIG_USER_ONLY
+>>+    case PRV_S:
+>>+        if (env->virt_enabled) {
+>>+            return env->henvcfg & HENVCFG_SSE;
+>>+        }
+>>+        return env->menvcfg & MENVCFG_SSE;
+>>+    case PRV_M: /* M-mode shadow stack is always on if hart implements */
+>>+        return true;
+>
+>From the manual:
+>
+>Activating Zicfiss in M-mode is currently not supported. Additionally, when S-mode is not
+>implemented, activation in U-mode is also not supported.
 
- From the manual:
+Hmm. This is a good catch.
+It seems I was using an earlier spec and missed this. Or atleast
+I didn't bother to check assuming that spec didn't change.
+Thanks for catching it and pointing it out.
 
-Activating Zicfiss in M-mode is currently not supported. Additionally, when S-mode is not
-implemented, activation in U-mode is also not supported.
+I'll fix the M-mode case by return false.
 
-So two of the cases above are wrong.
+For case of,
+If S-mode is not implemented then activation in U-mode is also not supported. I am thinking of
+making this check during extensions validation (in case user turned zicfiss=true).
+Below options:
 
+Option 1
+In `riscv_cpu_validate_set_extensions`, check for S and if S is not implemented then error out
+saying that zicfiss can't be turned on.
 
-r~
+OR
+
+Option 2
+In `riscv_cpu_validate_set_extensions`, check for S and if S is not implemented then silently
+clear `ext_zicfiss` in cpu config.
+
+I think option 1 is better.
+
+>
+>So two of the cases above are wrong.
+>
+>
+>r~
 
