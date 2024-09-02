@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA913CA101E
-	for <qemu-riscv@archiver.kernel.org>; Mon,  2 Sep 2024 01:32:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80CABC54FC6
+	for <qemu-riscv@archiver.kernel.org>; Mon,  2 Sep 2024 01:37:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1skvuy-0000E5-B4; Sun, 01 Sep 2024 21:31:44 -0400
+	id 1skw03-0005Jk-4p; Sun, 01 Sep 2024 21:36:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1skvuw-0000Aw-W1
- for qemu-riscv@nongnu.org; Sun, 01 Sep 2024 21:31:43 -0400
-Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035])
+ id 1skw01-0005Gt-3a
+ for qemu-riscv@nongnu.org; Sun, 01 Sep 2024 21:36:57 -0400
+Received: from mail-pg1-x52b.google.com ([2607:f8b0:4864:20::52b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1skvuu-0003GF-3j
- for qemu-riscv@nongnu.org; Sun, 01 Sep 2024 21:31:42 -0400
-Received: by mail-pj1-x1035.google.com with SMTP id
- 98e67ed59e1d1-2d873dc644dso1639635a91.3
- for <qemu-riscv@nongnu.org>; Sun, 01 Sep 2024 18:31:39 -0700 (PDT)
+ id 1skvzz-0003gJ-MG
+ for qemu-riscv@nongnu.org; Sun, 01 Sep 2024 21:36:56 -0400
+Received: by mail-pg1-x52b.google.com with SMTP id
+ 41be03b00d2f7-7cf5e179b68so2318357a12.1
+ for <qemu-riscv@nongnu.org>; Sun, 01 Sep 2024 18:36:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725240698; x=1725845498; darn=nongnu.org;
+ d=linaro.org; s=google; t=1725241013; x=1725845813; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=fW61XfU2gh3b9mbhHv4UeKbJI3uysAe1zB+XJEsGzjI=;
- b=mKlK6JET5F2ehdtZTQFCqzCwozIjhM3Y+dhAs5Wb+b34HYPTFNUKbhZXuhmDmEsh7i
- 9jwkCzz8EnTmbHUNGb/tSjvAcJum60q+fSPLBuGl8GCvB+Iu7msCmZ7vULip4/1LF/TP
- ky7THu3/ZzHe+05XqhaBiYNLN6kxmQgDf6w1Tw6finJLYqxHahqYGnSdm5cbFi+dib3H
- Ho7lz4MmUAyCQnFtg6sKQTZSeiigxjFxVjcxa10JLouL0Jf6ujpoytqEDXd89/DuYmvR
- tIHUborms08fDz7hJl3s9HPrlQl5PNJzduy8zSgIZHkDL2OO5oGsEnAq6Y11fnbdb0oK
- Aa7A==
+ bh=ef3Pk/lFxIuWixJzToifaC31rWhfFAF4rJdzGm9ThcA=;
+ b=OYENIaBRVURE1kXrGel2jdGJD7gvJUdxRM/eC3Xke0pRYaWr2gioLn6qQy7gtzMwWi
+ VySNq2oaGZIvcB0fVswe9LbiMDS0TBiQQJZc4BLQ5oYBrv/AoZosn0T2Vf/8CmMZle5R
+ wKFub4OITNzCNJnPs7+NwMjK6kmzMKatp10jnFQ9fmC/kQ4H1uJvqAR4bApdYYIQMKI8
+ 8gfGh3KvwDl3mhA8DMh9NqG9v+k+3rpXO2zdSnYuqCqpsn5EcjS68dFgqRltVb1M/vWT
+ SaeUWuOgV7o49x/kP6ceZ0iomU7L1kcDmHKNqKg3dUbqcsnHxAbftba7s6wQNJYjZWNu
+ ga2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725240698; x=1725845498;
+ d=1e100.net; s=20230601; t=1725241013; x=1725845813;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=fW61XfU2gh3b9mbhHv4UeKbJI3uysAe1zB+XJEsGzjI=;
- b=eeWAlACzO9r/sA1FI7VsNRKj6FxiFpvKXtRfje9MP6jAdeLLYGuMhlGSSuuyflsYZR
- hUst8+SfWEZVAAC5yfF6J8euEryiDm3T1krpwfESan6m6wQ26GU1GNFwYljq8toxGXLD
- VNOXneLzBGs0B40uEUz1l+bhNB6tJAMjkDIvEXmrxBJjxJ92MQa6ijuvpfHnAGwAUlCW
- cl2dTFc/e9t1MqCa7bh+6Jc4nK/lL3uKjnyAvzr0gI27/Y0Ibjkf9HfUMrSRmelFLWTQ
- C4AFgIfXpYTPGtVmi/qzytt0sbRAjhKandBsueSdh7YQudYKnd1lfX0Ki1ZV0i0oNf0T
- 3ZJQ==
-X-Gm-Message-State: AOJu0Yz/Ji1wcStSbQ4D8EvDhcCNj1U0lb/zgN0rOwGdgVCMSVPTONbM
- q98EbZgmNCZ4cLL/BWxbrkk4WzTT9SiIsHd+BwHF+o2e4qCMgKGwumnxu4nrR1Y=
-X-Google-Smtp-Source: AGHT+IEXYNOccEOKNRdlFUCHrd2OUINqyGkz+Wg+lVWmZoEU5Zuis1QDkdwmC/qDSxqxL++YVLvaFQ==
-X-Received: by 2002:a17:90b:390c:b0:2ca:5ec8:576c with SMTP id
- 98e67ed59e1d1-2d85616ebeamr12924888a91.5.1725240697917; 
- Sun, 01 Sep 2024 18:31:37 -0700 (PDT)
+ bh=ef3Pk/lFxIuWixJzToifaC31rWhfFAF4rJdzGm9ThcA=;
+ b=cFxFZwSY2x6wPejmZ7QLV4R+Pr/04rh40wJIgbiZh5BoEeTbKxUa6jlPswL0jjAVe/
+ yqAXAP3ds9wF9Cxd0Jx/IT80DvrVvLB/LusnRErEkEA3hJ+2o4zsxq+N0jzZoGXjG5mS
+ StgiO+4W6+PY7nnZ3R6KUaPA+1NODh2arLfgPL/YXcXEYX2RKwczs3zNBtRzbUUNcW6s
+ Dla5wOKP3FqREXrLXr8OXJZ9kCxplXqdcPlPCVZwl69ujoMDqqLJTqKcIQdnH+R1mYN4
+ gL+0o0c6Y/e1ZyjwomlJo64qpjJFP0Lk2tPX8UZKVcs0VYk5fJA5B+iKAdywYj0Xxkiq
+ mS/A==
+X-Gm-Message-State: AOJu0YxwOj1sljNmAX3Y+ConRToDnmvxlyZOY0s6mVEybchGtGOvdpiY
+ wH81T3xeX4pJ4cxjTR2JNP3K9mstz93kRdbcwOIMnuPPshzyLiaDwkrveR5GEE8=
+X-Google-Smtp-Source: AGHT+IGgm+6gNarQbanACYPzaSC6+pwL0JrSwsockfZTJGztT+4HZbCA1g5vsg8TL/UEcWkt0rCpGA==
+X-Received: by 2002:a17:903:32d1:b0:205:7998:3deb with SMTP id
+ d9443c01a7336-20579984038mr25033805ad.19.1725241012833; 
+ Sun, 01 Sep 2024 18:36:52 -0700 (PDT)
 Received: from ?IPV6:2001:8004:5170:1fd8:ef9d:e346:b99e:7072?
  ([2001:8004:5170:1fd8:ef9d:e346:b99e:7072])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2d8445d5a9fsm10429780a91.3.2024.09.01.18.31.33
+ d9443c01a7336-205345089aesm38875295ad.149.2024.09.01.18.36.48
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 01 Sep 2024 18:31:37 -0700 (PDT)
-Message-ID: <b5032add-5955-4cf2-baaf-1b5afc000cb3@linaro.org>
-Date: Mon, 2 Sep 2024 11:31:30 +1000
+ Sun, 01 Sep 2024 18:36:52 -0700 (PDT)
+Message-ID: <5330a89e-9036-4c27-b85b-4bdda4f3fdbf@linaro.org>
+Date: Mon, 2 Sep 2024 11:36:44 +1000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 05/14] tcg/riscv: Implement vector load/store
+Subject: Re: [PATCH v2 06/14] tcg/riscv: Implement vector mov/dup{m/i}
 To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  dbarboza@ventanamicro.com, liwei1518@gmail.com, bmeng.cn@gmail.com,
  TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
 References: <20240830061607.1940-1-zhiwei_liu@linux.alibaba.com>
- <20240830061607.1940-6-zhiwei_liu@linux.alibaba.com>
+ <20240830061607.1940-7-zhiwei_liu@linux.alibaba.com>
 Content-Language: en-US
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240830061607.1940-6-zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20240830061607.1940-7-zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1035.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52b;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x52b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -100,39 +100,15 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 8/30/24 16:15, LIU Zhiwei wrote:
-> @@ -799,6 +834,17 @@ static void tcg_out_ldst(TCGContext *s, RISCVInsn opc, TCGReg data,
->       case OPC_SD:
->           tcg_out_opc_store(s, opc, addr, data, imm12);
->           break;
-> +    case OPC_VSE8_V:
-> +    case OPC_VSE16_V:
-> +    case OPC_VSE32_V:
-> +    case OPC_VSE64_V:
-> +    case OPC_VS1R_V:
-> +    case OPC_VS2R_V:
-> +    case OPC_VS4R_V:
-> +    case OPC_VS8R_V:
-> +        tcg_out_opc_imm(s, OPC_ADDI, TCG_REG_TMP0, addr, imm12);
-> +        tcg_out_opc_ldst_vec(s, opc, data, TCG_REG_TMP0, true);
-> +        break;
->       case OPC_LB:
->       case OPC_LBU:
->       case OPC_LH:
+> From: TANG Tiancheng<tangtiancheng.ttc@alibaba-inc.com>
+> 
+> Signed-off-by: TANG Tiancheng<tangtiancheng.ttc@alibaba-inc.com>
+> Reviewed-by: Liu Zhiwei<zhiwei_liu@linux.alibaba.com>
+> ---
+>   tcg/riscv/tcg-target.c.inc | 54 ++++++++++++++++++++++++++++++++++++++
+>   1 file changed, 54 insertions(+)
 
-I think you shouldn't try to handle vector load/store in this same function.
-You'll want something like
-
-     if (offset != 0) {
-         if (offset == sextreg(offset, 12)) {
-             tcg_out_opc_imm(s, OPC_ADDI, TCG_REG_TMP0, addr, offset);
-         } else {
-             tcg_out_movi(s, TCG_REG_TMP0, offset);
-             tcg_out_opc_reg(s, TCG_REG_TMP0, TCG_REG_TMP0, addr);
-         }
-         addr = TCG_REG_TMP0;
-     }
-
-at the top, instead of the imm12 split currently at the top of tcg_out_ldst.
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 
 r~
