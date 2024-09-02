@@ -4,67 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A503CD13CF
-	for <qemu-riscv@archiver.kernel.org>; Mon,  2 Sep 2024 13:38:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B4A1CA0ED3
+	for <qemu-riscv@archiver.kernel.org>; Mon,  2 Sep 2024 23:56:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sl7Fu-0008Js-9l; Mon, 02 Sep 2024 09:38:06 -0400
+	id 1slGtG-0000S2-Mj; Mon, 02 Sep 2024 19:55:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <m.klauchek@yadro.com>)
- id 1sl4P0-000119-Nk; Mon, 02 Sep 2024 06:35:19 -0400
-Received: from mta-04.yadro.com ([89.207.88.248])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <m.klauchek@yadro.com>)
- id 1sl4Oy-0000nx-Ay; Mon, 02 Sep 2024 06:35:18 -0400
-DKIM-Filter: OpenDKIM Filter v2.11.0 mta-04.yadro.com A50DCC0006
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
- s=mta-04; t=1725273298;
- bh=ezc+JC4ivNUFgixILBC+L5c+Mb1oZU6F8f5WPwh3r6I=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=WgR0gUrZ2gdwhNPTT6HebB8Jor5MjIEOC1qGsN/5uXQ5+Cs8u2Msb3loCIMBz9Du1
- 4SgtbGpw49ggPaft1OCoo5CaRRvQYxV8GT7527vZSZjzvAb1wVxejanRZEdSzgZgyv
- hhyhIbYlG+nOkakQwpJg1vBkXIjo1t+7X/FujUzdlo664uT3TSDTxVlyej/rJHs+/I
- 8ZsPLpWaeRXja3WMoaSlzkLv0gkuRGOAV3eJW1W+xp8BQjV115TmSvZ2ca1Mq6cV3H
- iMGx5LFaBIbC/qCZgJvGBPn4GeOVZw8V9sy2A0mKJ1tRG0apocqwto6HlkbZhcLbBX
- wBodB9jzTFD1A==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
- s=mta-03; t=1725273298;
- bh=ezc+JC4ivNUFgixILBC+L5c+Mb1oZU6F8f5WPwh3r6I=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=vsWi4FkKJBlmyl+raBiyBs01kC2/khSBTCNtzILmjVbrptzwaGo8kgXHHB3uUCfoM
- O1cMiJlzPDdc8mAso+dfg+Bh82HqJEarzAVT51HKzj4M6gfiyWm5a6Ox9U2W+YDjwE
- 3vKAdTKbM7/A5WRTHLpJWyMTcsWFEXuwsfIYH1thua4/Z3ceILfDTW5pr1my4PXSCc
- 70yj1SzY1dlh59pgIy6oIsIqInP0lxzXWnjiOaY0cUJpZf18uVElyBWEyO7p519dQb
- rZLqzT5WAvn2rWl3JWJO9o5GD/BsCy/CVk70mBNp0PzDYeOytyHZPVwlq16skIoZjR
- B8voXJjdZ3WCQ==
-From: Maria Klauchek <m.klauchek@syntacore.com>
-To: <qemu-devel@nongnu.org>
-CC: <qemu-riscv@nongnu.org>, <palmer@dabbelt.com>, <alistair.francis@wdc.com>, 
- <bmeng.cn@gmail.com>, <liwei1518@gmail.com>, <dbarboza@ventanamicro.com>, 
- <zhiwei_liu@linux.alibaba.com>, Maria Klauchek <m.klauchek@syntacore.com>
-Subject: [PATCH 1/1] target/riscv/cpu.c: Add 'fcsr' register to QEMU log as a
- part of F extension
-Date: Mon, 2 Sep 2024 13:34:33 +0300
-Message-ID: <20240902103433.18424-1-m.klauchek@syntacore.com>
-X-Mailer: git-send-email 2.25.1
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1slGtE-0000PY-BY; Mon, 02 Sep 2024 19:55:20 -0400
+Received: from mail-ua1-x931.google.com ([2607:f8b0:4864:20::931])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1slGtB-0005TP-7c; Mon, 02 Sep 2024 19:55:19 -0400
+Received: by mail-ua1-x931.google.com with SMTP id
+ a1e0cc1a2514c-846c0a741cbso776357241.2; 
+ Mon, 02 Sep 2024 16:55:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1725321315; x=1725926115; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lWhPeY5N6+COPLNfbVBRldGQiErYp7LSBYN1sBE/NC4=;
+ b=VhpYBYBh/Fnx4QX6j5msYvnHZ5t9A/gPgQyYRylKfwsBBG/CyRXh+5eaK+RG9jA6OH
+ Tizx9Ux6iIbwd5aAhuniqZClo5dDMgoTB25duDiQFC7LPItTz5Bi/yfqwt+njgiW8g4W
+ O5Aje+VLQf3GpCohz4EDVEYmGVaGRxlxbxYYkofxzg82vf9w4wjYlorM4+Jx1mAtli2y
+ RZzxFW7Up6+9evVFPt91i4e7frSPb6e6AOfYAJwZNlu1ZkRvmrVE9gM20vU8JVYalbqS
+ irD8qFuQ/hKC0qlyR2GAdsUEJg6wwL5W0xepk6HvsYGpA3tittxBpANOl+gJga/+E/0G
+ dcZQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1725321315; x=1725926115;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=lWhPeY5N6+COPLNfbVBRldGQiErYp7LSBYN1sBE/NC4=;
+ b=mXOc+LwyDEWQqk4S83cbIfFGPXPt0DW9ecmHuBLsAlfk5APi2DqL2KKhTRNSYM7xBz
+ xivkCyyfHGRfZGCK//bORdlCUaeM3ZGLz1lPpIurd3Fhp1qSpkneJEFuWQjWSRXKcx3m
+ XRKrxUSujOUZ99SCl30blVYbqisU0yPE3wYEUTYLzgNol7A81eqIegzNjpcRyEp8mC3D
+ Wq0OL8KvoZDOV+lM2Cdl1Wd8k4uWrMZ8HsGOua4Ii/VdbHHfe5dfJyPblk/xK/ws6LAS
+ 7Z78LDD5PhIjbv5vfUMDg21jk5a96130Il2mBzREKiwqtz5ajsR+6yG01bEb9begwnZj
+ Oplg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWJ2iK6NQlKobsghYpTPIC24VWzMlIinjBonLSIRGmucmNJt5Rd7MV637HegG+LmTyhnEd7n0/wr2Fl@nongnu.org
+X-Gm-Message-State: AOJu0YyuJDlJMVQIFcJSD+7u4XHPP5T/EnJdsSTYWOfsWrNjfMkWzBj7
+ iKg32VpiGE+Iv3eW62qAfH/+7Yj5AA/X49NNtHxDGrXJeukuK5RxFhJWxtWd8OGnpgPgXzIO3x7
+ mmQsn5ZQyoQ5XA10ozX6ek7mp87U=
+X-Google-Smtp-Source: AGHT+IFCHBUeupg4WwYo1gRPQOBMxaIUtwlnYST2nWfZ6ojxAuzhtZOhs1HTVqt8UmUzUFfWtVi5kg/NOX/7gOX8IS8=
+X-Received: by 2002:a05:6102:370e:b0:493:c3b2:b5ba with SMTP id
+ ada2fe7eead31-49a7773522cmr10340458137.6.1725321315194; Mon, 02 Sep 2024
+ 16:55:15 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: T-EXCH-08.corp.yadro.com (172.17.11.58) To
- T-EXCH-12.corp.yadro.com (172.17.11.143)
-Received-SPF: pass client-ip=89.207.88.248; envelope-from=m.klauchek@yadro.com;
- helo=mta-04.yadro.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
+References: <747e3626-e4f4-47e2-bdfa-ca047f9f8443@redhat.com>
+In-Reply-To: <747e3626-e4f4-47e2-bdfa-ca047f9f8443@redhat.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 3 Sep 2024 09:54:49 +1000
+Message-ID: <CAKmqyKNk2u0ApN2PV40EX_tsY8cFD56XcSKhyepQbqzEdP4_zQ@mail.gmail.com>
+Subject: Re: tests/avocado/riscv_opensbi.py does not work reliable
+To: Thomas Huth <thuth@redhat.com>
+Cc: QEMU Developers <qemu-devel@nongnu.org>, qemu-riscv@nongnu.org, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Bin Meng <bmeng@tinylab.org>, Alistair Francis <alistair.francis@wdc.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::931;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x931.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, HEADER_FROM_DIFFERENT_DOMAINS=0.249,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Mon, 02 Sep 2024 09:38:05 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,31 +92,51 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-FCSR is a part of F extension. Print it to log if FPU option is enabled.
+On Sat, Aug 31, 2024 at 1:35=E2=80=AFAM Thomas Huth <thuth@redhat.com> wrot=
+e:
+>
+>
+>   Hi!
+>
+> While running a lot of tests (i.e. with a very loaded machine), I noticed
+> that tests/avocado/riscv_opensbi.py is very flaky when the host machine i=
+s
+> slow. I can easily reproduce the problem when running a big compilation j=
+ob
+> on all CPUs in the background and then run the riscv_opensbi.py avocado
+> test. One of test_riscv32_spike, test_riscv64_spike, test_riscv32_sifive_=
+u
+> or test_riscv64_sifive_u is failing most of the time (but not the virt
+> machine tests).
+>
+> Looking at the logs, it seems like the output sometimes stops somewhere a=
+t a
+> random place before the boot process reaches the spot that the test is
+> looking for. Looking at riscv_htif.c, there does not seem to be any flow
 
-Signed-off-by: Maria Klauchek <m.klauchek@syntacore.com>
----
- target/riscv/cpu.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+I suspect this is: https://gitlab.com/qemu-project/qemu/-/issues/2114
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index a90808a3ba..6ff6096777 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -839,6 +839,12 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
-         }
-     }
-     if (flags & CPU_DUMP_FPU) {
-+        target_ulong val = 0;
-+        RISCVException res = riscv_csrrw_debug(env, CSR_FCSR, &val, 0, 0);
-+        if (res == RISCV_EXCP_NONE) {
-+            qemu_fprintf(f, " %-8s " TARGET_FMT_lx "\n",
-+                    csr_ops[CSR_FCSR].name, val);
-+        }
-         for (i = 0; i < 32; i++) {
-             qemu_fprintf(f, " %-8s %016" PRIx64,
-                          riscv_fpr_regnames[i], env->fpr[i]);
--- 
-2.25.1
+> control implemented here, so I guess at least the spike test is currently
+> doomed to fail occasionally. Is there anything that can be done about thi=
+s
+> (e.g. is flow control somehow possible here or does the interface not all=
+ow
+> this?)? Otherwise, I think it might be best to mark the spike and sifive_=
+u
 
+Patches have been sent to the list to hopefully fix this:
+
+https://mail.gnu.org/archive/html/qemu-devel/2024-08/msg02743.html
+
+Just waiting on reviews and then the merge window to open up again
+
+Alistair
+
+> tests with QEMU_TEST_FLAKY_TESTS here to make it clear that these tests a=
+re
+> not reliable by default...?
+>
+>   Thomas
+>
+>
 
