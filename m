@@ -4,82 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A9D8CA101E
-	for <qemu-riscv@archiver.kernel.org>; Tue,  3 Sep 2024 05:54:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1294ECD342C
+	for <qemu-riscv@archiver.kernel.org>; Tue,  3 Sep 2024 05:55:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1slMUi-0001x4-Jk; Tue, 03 Sep 2024 01:54:24 -0400
+	id 1slMVS-00037r-Ca; Tue, 03 Sep 2024 01:55:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1slMUV-0001r0-Ic
- for qemu-riscv@nongnu.org; Tue, 03 Sep 2024 01:54:13 -0400
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1slMVQ-000323-Tx
+ for qemu-riscv@nongnu.org; Tue, 03 Sep 2024 01:55:08 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1slMUR-0000Z7-P7
- for qemu-riscv@nongnu.org; Tue, 03 Sep 2024 01:54:10 -0400
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1slMVO-0000m2-Se
+ for qemu-riscv@nongnu.org; Tue, 03 Sep 2024 01:55:08 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1725342844;
+ s=mimecast20190719; t=1725342906;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=r6EdwJFLh1keIRXsEu/QV5G0LcTKANMAmxgApPFiLTg=;
- b=WX+y6draM/PZr5+ea/C3iQz1R5Anv1M5CeFoRkiml2Tjuvab2zRsdWxSCWU5hF5Ooq54LX
- bXlchNSte1cOhlTInUP/QjWqa9uTVy0Yv+HgaJlTj+VOeH6yMDLyifBV1qi622bMxx+xEd
- CddJkTmv9OvgrIK6p2flH7k1gxjhSPk=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=pmWcOq76t83G2a5B7WGFnkGE2Kgikiv5y9ne8G87ktE=;
+ b=a258ObtAhpkmugGC4iYLATLnXfPe7DwaCwaybuH1Uu7+tM5I2xbFmSO9n+9qs/2pUV95/n
+ qMZwCvMyiLF7k1vEdD7UuEy/gtQMAxwLMyBWODvioflPXk3RSlD7MwDPSY2FBRlc5GNss7
+ GFeJ5ocCY8mJYqJQw8DaXVJ4r9vgz5Y=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-630-bzULADv0MH6SE4yKFsqnlg-1; Tue, 03 Sep 2024 01:54:03 -0400
-X-MC-Unique: bzULADv0MH6SE4yKFsqnlg-1
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-42c82d3c7e5so16968375e9.2
- for <qemu-riscv@nongnu.org>; Mon, 02 Sep 2024 22:54:03 -0700 (PDT)
+ us-mta-610-U9MB1H2BNpmTYndsgOsfYw-1; Tue, 03 Sep 2024 01:55:05 -0400
+X-MC-Unique: U9MB1H2BNpmTYndsgOsfYw-1
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-428040f49f9so45820735e9.0
+ for <qemu-riscv@nongnu.org>; Mon, 02 Sep 2024 22:55:04 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725342842; x=1725947642;
- h=content-transfer-encoding:in-reply-to:autocrypt:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=r6EdwJFLh1keIRXsEu/QV5G0LcTKANMAmxgApPFiLTg=;
- b=R8m79L1HprHfLOkAxeh0Rba9Z4W52jPlx/brX0w6ywvtU053v9aMwEcV6P285rZOdh
- 7jsT3e3aLNZpx2LXdp+TN93KK4Ac5p+fXIyOt3Ddzoyl4PqMwW+YHukhD3b8Z/8FdXrL
- TgYUelPVDCDro+9eKA2TKYp2QS9Tfgfc3OL2qK0ZzyPM1ffSHcfhQSP5SKXXlGfFGT6P
- wnqyatWr0BcT6o8rUunYDuWq0NrWHtC4vqbDmg8aUUX4afCew57ibD0HJUvB7wxG1kt/
- KOOoEWnvw4ruibTo3xcEhxFZRV6wiWJe6LKbCrC54fZ80hfxSV/n59kkyk2xUtSXT0bc
- jAHA==
+ d=1e100.net; s=20230601; t=1725342904; x=1725947704;
+ h=content-transfer-encoding:in-reply-to:autocrypt:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=pmWcOq76t83G2a5B7WGFnkGE2Kgikiv5y9ne8G87ktE=;
+ b=aPbRJ+pUremdJidFnqxZjiqJqA/0DWpgHWIw+99KGZyLYodclRX3KW/2VO8xUBanyP
+ 3R4yuhItUg5VYLiBLiZibK2iQXlI/5DhWvAThesZpA6AT/ybaEyIkpTl0Hrxwnlgu7jx
+ AvmKlnCCm41OUFXXkAASEABAPwuA+Gjf4AL/OF6SnqM31RKPJo4hsYDB8QCF3fa8N5oN
+ pwFMjao0RWLrFXPLhqPdQRdPrnoKVM38hPzpCUo3OQnQdQzBDnqTr5Bpu3wJpyM+Wvg1
+ BcIN9BFhbyFL85yvCky+vHrRfF1sDnQmh2Hu13ScyBjuym8D2wdHjDJ3n15OiRCvBu29
+ Rimg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXsRdVoVR265jVUdFO6J0k5sz0hAiOuKXUU11uhk3Q16jtKsRefuhYWhGQNdzKbUw4p0WHcCc7TzQwf@nongnu.org
-X-Gm-Message-State: AOJu0Yxy9qGvGudED7sENJbLMxABG2ZZql9LS0R9VaXDN7tT+4qMhH0A
- jE9s9AJCEbPiPrwt5BgKfjKxjyOjbsU9YDpX1cZia1ZXorsSOT/ZCOcoEAa1ywHosIh7e2vNtbK
- uIzktLpJDgGfcoQ7zbqhy5RJ4l2xBt1bDOX5pyTzG07VkcVR0lYbL
-X-Received: by 2002:adf:b350:0:b0:368:3751:de3 with SMTP id
- ffacd0b85a97d-374bf16c0d7mr5490619f8f.31.1725342842243; 
- Mon, 02 Sep 2024 22:54:02 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHXA/dwiqTzWXQvcyReKsH+hkCI94EwfJuomPhWo9EJ/9/6s7LP7TG3b5SxIZBIe9NkwYdK1g==
-X-Received: by 2002:adf:b350:0:b0:368:3751:de3 with SMTP id
- ffacd0b85a97d-374bf16c0d7mr5490608f8f.31.1725342841650; 
- Mon, 02 Sep 2024 22:54:01 -0700 (PDT)
+ AJvYcCVCA1FhboIdOYhutgXrFRSkAf38WhkJoC6W0u5x1MylNcCQIntQo+TpAGQqyWNYxvygc+IZgiFsJgUX@nongnu.org
+X-Gm-Message-State: AOJu0Yw/WV2dY36xuKazPk+4CieGy68oxwEPtAWatU8Ny29yQGySw1K4
+ L0euH5zhCSRosDgNAgvU1F9/2t3Qy3aU2K8CLksG4JC1E7Xy2QhVnlNSCmkEovKv8fZnbZrly+9
+ 0AWKpEcRojGJsAh5Wnu1dv8ELU+i4GZMYBzo6kR0pB5szTycKDR1P
+X-Received: by 2002:a05:600c:699b:b0:426:5269:9824 with SMTP id
+ 5b1f17b1804b1-42bb0229f05mr130033125e9.0.1725342903938; 
+ Mon, 02 Sep 2024 22:55:03 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IH1E8ZTm6P3HsBZxJ5u9MvjeU3dq8GWJDLy2IEF5ePJ0e8vWJsxXxVvAvs9WaSXzn4uyN+WeA==
+X-Received: by 2002:a05:600c:699b:b0:426:5269:9824 with SMTP id
+ 5b1f17b1804b1-42bb0229f05mr130033005e9.0.1725342903362; 
+ Mon, 02 Sep 2024 22:55:03 -0700 (PDT)
 Received: from [192.168.0.6] (ip-109-43-176-181.web.vodafone.de.
  [109.43.176.181]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-374c4059811sm7068783f8f.4.2024.09.02.22.54.00
+ 5b1f17b1804b1-42bba3f2875sm138277225e9.41.2024.09.02.22.55.02
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 02 Sep 2024 22:54:01 -0700 (PDT)
-Message-ID: <585e9a05-2ef8-4abf-be7d-a64948e28851@redhat.com>
-Date: Tue, 3 Sep 2024 07:53:59 +0200
+ Mon, 02 Sep 2024 22:55:03 -0700 (PDT)
+Message-ID: <367c2564-4920-4eb4-88e2-7ffa68f1c7ac@redhat.com>
+Date: Tue, 3 Sep 2024 07:55:01 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] hw/char: sifive_uart: Print uart charecters async
-To: Alistair Francis <alistair23@gmail.com>, peter.maydell@linaro.org,
- qemu-devel@nongnu.org, alex.bennee@linaro.org
-Cc: liwei1518@gmail.com, atishp@rivosinc.com, palmer@dabbelt.com,
- Bin Meng <bmeng.cn@gmail.com>, zhiwei_liu@linux.alibaba.com,
- Paolo Bonzini <pbonzini@redhat.com>, dbarboza@ventanamicro.com,
- qemu-riscv@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>,
- =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-References: <20240819113148.3007047-1-alistair.francis@wdc.com>
- <20240819113148.3007047-3-alistair.francis@wdc.com>
+Subject: Re: tests/avocado/riscv_opensbi.py does not work reliable
+To: Alistair Francis <alistair23@gmail.com>
+Cc: QEMU Developers <qemu-devel@nongnu.org>, qemu-riscv@nongnu.org,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Bin Meng <bmeng@tinylab.org>, Alistair Francis <alistair.francis@wdc.com>
+References: <747e3626-e4f4-47e2-bdfa-ca047f9f8443@redhat.com>
+ <CAKmqyKNk2u0ApN2PV40EX_tsY8cFD56XcSKhyepQbqzEdP4_zQ@mail.gmail.com>
 From: Thomas Huth <thuth@redhat.com>
 Autocrypt: addr=thuth@redhat.com; keydata=
  xsFNBFH7eUwBEACzyOXKU+5Pcs6wNpKzrlJwzRl3VGZt95VCdb+FgoU9g11m7FWcOafrVRwU
@@ -123,12 +120,12 @@ Autocrypt: addr=thuth@redhat.com; keydata=
  oiT+z+/E59qj/EKfyce3sbC9XLjXv3mHMrq1tKX4G7IJGnS989E/fg6crv6NHae9Ckm7+lSs
  IQu4bBP2GxiRQ+NV3iV/KU3ebMRzqIC//DCOxzQNFNJAKldPe/bKZMCxEqtVoRkuJtNdp/5a
  yXFZ6TfE1hGKrDBYAm4vrnZ4CXFSBDllL59cFFOJCkn4Xboj/aVxxJxF30bn
-In-Reply-To: <20240819113148.3007047-3-alistair.francis@wdc.com>
+In-Reply-To: <CAKmqyKNk2u0ApN2PV40EX_tsY8cFD56XcSKhyepQbqzEdP4_zQ@mail.gmail.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -21
@@ -155,129 +152,42 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 19/08/2024 13.31, Alistair Francis wrote:
-> The current approach of using qemu_chr_fe_write() and ignoring the
-> return values results in dropped charecters [1].
-
-s/charecters/characters/g
-
-(also in the subject of the patch)
-
-> Let's update the SiFive UART to use a async sifive_uart_xmit() function
-> to transmit the charecters and apply back preassure to the guest with
-
-s/preassure/pressure/
-
-> the SIFIVE_UART_TXFIFO_FULL status.
+On 03/09/2024 01.54, Alistair Francis wrote:
+> On Sat, Aug 31, 2024 at 1:35 AM Thomas Huth <thuth@redhat.com> wrote:
+>>
+>>
+>>    Hi!
+>>
+>> While running a lot of tests (i.e. with a very loaded machine), I noticed
+>> that tests/avocado/riscv_opensbi.py is very flaky when the host machine is
+>> slow. I can easily reproduce the problem when running a big compilation job
+>> on all CPUs in the background and then run the riscv_opensbi.py avocado
+>> test. One of test_riscv32_spike, test_riscv64_spike, test_riscv32_sifive_u
+>> or test_riscv64_sifive_u is failing most of the time (but not the virt
+>> machine tests).
+>>
+>> Looking at the logs, it seems like the output sometimes stops somewhere at a
+>> random place before the boot process reaches the spot that the test is
+>> looking for. Looking at riscv_htif.c, there does not seem to be any flow
 > 
-> This should avoid dropped charecters and more realisiticly model the
+> I suspect this is: https://gitlab.com/qemu-project/qemu/-/issues/2114
 
-s/realisiticly/realisticly/
+Indeed, that looks like the same issue - I should have had a look at the bug 
+tracker first!
 
-> hardware.
+>> control implemented here, so I guess at least the spike test is currently
+>> doomed to fail occasionally. Is there anything that can be done about this
+>> (e.g. is flow control somehow possible here or does the interface not allow
+>> this?)? Otherwise, I think it might be best to mark the spike and sifive_u
 > 
-> 1: https://gitlab.com/qemu-project/qemu/-/issues/2114
+> Patches have been sent to the list to hopefully fix this:
 > 
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->   include/hw/char/sifive_uart.h | 17 ++++++-
->   hw/char/sifive_uart.c         | 88 +++++++++++++++++++++++++++++++++--
->   2 files changed, 99 insertions(+), 6 deletions(-)
+> https://mail.gnu.org/archive/html/qemu-devel/2024-08/msg02743.html
 > 
-> diff --git a/include/hw/char/sifive_uart.h b/include/hw/char/sifive_uart.h
-> index 7f6c79f8bd..b43109bb8b 100644
-> --- a/include/hw/char/sifive_uart.h
-> +++ b/include/hw/char/sifive_uart.h
-> @@ -24,6 +24,7 @@
->   #include "hw/qdev-properties.h"
->   #include "hw/sysbus.h"
->   #include "qom/object.h"
-> +#include "qemu/fifo8.h"
->   
->   enum {
->       SIFIVE_UART_TXFIFO        = 0,
-> @@ -48,9 +49,13 @@ enum {
->       SIFIVE_UART_IP_RXWM       = 2  /* Receive watermark interrupt pending */
->   };
->   
-> +#define SIFIVE_UART_TXFIFO_FULL    0x80000000
-> +
->   #define SIFIVE_UART_GET_TXCNT(txctrl)   ((txctrl >> 16) & 0x7)
->   #define SIFIVE_UART_GET_RXCNT(rxctrl)   ((rxctrl >> 16) & 0x7)
-> +
->   #define SIFIVE_UART_RX_FIFO_SIZE 8
-> +#define SIFIVE_UART_TX_FIFO_SIZE 8
->   
->   #define TYPE_SIFIVE_UART "riscv.sifive.uart"
->   OBJECT_DECLARE_SIMPLE_TYPE(SiFiveUARTState, SIFIVE_UART)
-> @@ -63,13 +68,21 @@ struct SiFiveUARTState {
->       qemu_irq irq;
->       MemoryRegion mmio;
->       CharBackend chr;
-> -    uint8_t rx_fifo[SIFIVE_UART_RX_FIFO_SIZE];
-> -    uint8_t rx_fifo_len;
-> +
-> +    uint32_t txfifo;
->       uint32_t ie;
->       uint32_t ip;
->       uint32_t txctrl;
->       uint32_t rxctrl;
->       uint32_t div;
-> +
-> +    uint8_t rx_fifo[SIFIVE_UART_RX_FIFO_SIZE];
-> +    uint8_t rx_fifo_len;
-> +
-> +    Fifo8 tx_fifo;
-> +
-> +    QEMUTimer *fifo_trigger_handle;
-> +    uint64_t char_tx_time;
->   };
->   
->   SiFiveUARTState *sifive_uart_create(MemoryRegion *address_space, hwaddr base,
-> diff --git a/hw/char/sifive_uart.c b/hw/char/sifive_uart.c
-> index 7fc6787f69..07730e241c 100644
-> --- a/hw/char/sifive_uart.c
-> +++ b/hw/char/sifive_uart.c
-> @@ -64,6 +64,72 @@ static void sifive_uart_update_irq(SiFiveUARTState *s)
->       }
->   }
->   
-> +static gboolean sifive_uart_xmit(void *do_not_use, GIOCondition cond,
-> +                                 void *opaque)
-> +{
-> +    SiFiveUARTState *s = opaque;
-> +    int ret;
-> +    const uint8_t *charecters;
-> +    uint32_t numptr = 0;
-> +
-> +    /* instant drain the fifo when there's no back-end */
-> +    if (!qemu_chr_fe_backend_connected(&s->chr)) {
-> +        fifo8_reset(&s->tx_fifo);
-> +        return G_SOURCE_REMOVE;
-> +    }
-> +
-> +    if (fifo8_is_empty(&s->tx_fifo)) {
-> +        return G_SOURCE_REMOVE;
-> +    }
-> +
-> +    /* Don't pop the FIFO incase the write fails */
+> Just waiting on reviews and then the merge window to open up again
 
-s/incase/in case/
+Thanks a lot, these patches are fixing the issues for me!
 
-> +    charecters = fifo8_peek_bufptr(&s->tx_fifo,
-> +                                   fifo8_num_used(&s->tx_fifo), &numptr);
-> +    ret = qemu_chr_fe_write(&s->chr, charecters, numptr);
-> +
-> +    if (ret >= 0) {
-> +        /* We wrote the data, actuallly pop the fifo */
-
-s/actuallly/actually/
-
-I recommend running checkpatch.pl with the --codespell flag ;-)
-
-Anyway, this indeed seems to fix the problem with the avocado test, thank 
-you very much for tackling this!
-
-Tested-by: Thomas Huth <thuth@redhat.com>
+  Thomas
 
 
