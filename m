@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83728CD343E
-	for <qemu-riscv@archiver.kernel.org>; Tue,  3 Sep 2024 14:54:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96799CD343D
+	for <qemu-riscv@archiver.kernel.org>; Tue,  3 Sep 2024 15:03:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1slUvL-0005UE-JJ; Tue, 03 Sep 2024 10:54:27 -0400
+	id 1slV3Q-00076O-9Q; Tue, 03 Sep 2024 11:02:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1slUvG-0005B1-So
- for qemu-riscv@nongnu.org; Tue, 03 Sep 2024 10:54:23 -0400
-Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429])
+ id 1slV3G-0006XO-VC
+ for qemu-riscv@nongnu.org; Tue, 03 Sep 2024 11:02:42 -0400
+Received: from mail-pg1-x534.google.com ([2607:f8b0:4864:20::534])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1slUvD-0006QP-Bv
- for qemu-riscv@nongnu.org; Tue, 03 Sep 2024 10:54:21 -0400
-Received: by mail-pf1-x429.google.com with SMTP id
- d2e1a72fcca58-71423704ef3so4057417b3a.3
- for <qemu-riscv@nongnu.org>; Tue, 03 Sep 2024 07:54:18 -0700 (PDT)
+ id 1slV3C-0008M6-OP
+ for qemu-riscv@nongnu.org; Tue, 03 Sep 2024 11:02:36 -0400
+Received: by mail-pg1-x534.google.com with SMTP id
+ 41be03b00d2f7-656d8b346d2so3232355a12.2
+ for <qemu-riscv@nongnu.org>; Tue, 03 Sep 2024 08:02:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725375258; x=1725980058; darn=nongnu.org;
+ d=linaro.org; s=google; t=1725375752; x=1725980552; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=9k5/HOvNk/2TbU1XSW1ya0E8gidJE236U4uoiUI92lM=;
- b=P5IN7Xqu0LXbcVC8nS4YmhGzic56CPlhMD5wiy/rFo0fGbkRs3uRd1UJe3OS9dLMgc
- 205ylqJ0NgvyFUG+uKrtetj49p151ueqWLeAtHbbtu4L6AT+3CMnVFp9jalz5GXGHWL3
- UyDZGKlL9m14AQClPMRM1pgdzrx7kg/zBUjvSxcbjLXWb+FLJ2PHAa4ztEt+kLtxu9YO
- VeqPEHgsCMIlCrts8gkYM/HOdrMlHQ6tBPbHyQNAO3mwkQKkv8BOSGyIuYz0Jde+PpVd
- 2vjpZcSandhxek3EeYUmQ2ZoZirR+hgcOTGRYhD5EQJhs1xd5NFm3y5KzBQjaYsg/IwY
- 8z/w==
+ bh=CrvRkeWjaYkDZSVPda8844TkzOU8UzyPCCGFck7ar+w=;
+ b=J2pHreOSQNY2U/YAOisoY0p1eB5Bi2J44oUzcBknNG6LRfdWX6m5rZu9xCfBMd+HQg
+ W5+fqA8RnQtDelufn8s8UVoQRtFQF8wIRNzEcZGx11e3rt7y7z/XSRVGm+F3+a0ZsfC1
+ EDH0lQ9egdT435Y8WiW8l3gIVhAqlZSPetXzTzHPxrvPumpaynPnLhJkHVdiyKm9P8Lo
+ 7OOi6ebAl491mguPCvl0bUvOZnnkzmMiMgOn8lk8UEzJZFHLPKQDk7lb5vlXfvw7PSHi
+ 1//f7wlEiK2rD6xMl2/gbKmx2PajuWB1GUj4MnUnc5W4hjcBNqtu67l6aCYFEM/0wSa1
+ 0tmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725375258; x=1725980058;
+ d=1e100.net; s=20230601; t=1725375752; x=1725980552;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=9k5/HOvNk/2TbU1XSW1ya0E8gidJE236U4uoiUI92lM=;
- b=DEYW6PZP7Dp3TXQL+encLUJ1XvMROqjGM4+DmxL6FB8ZIel2iNjb82E0Qg0Q7IEsFA
- MGIMRvjMo+fvAPV8au3hncC2mQd7NiB2wFJfxzXCgg3SLDM/pb06yOfhiQWez1h0+Fxy
- Cbj2JZVN4rRzzhrTpOG1BzLXuS2GsrHk5IE0yh6PTMnh46D1OA1NOPiR2ihN/JqUtHDx
- Nt4bMhHfm1U/Hap6SebGQoTghjoqA/GC6Ar/n1KdHQ9x4hiczZCpQ03AcM3uMG9UKc+M
- TxRqwv7gdZgCuN1lWWTC3nBmyCqK/mT2JxvOQ/jTf8Ra3ablodUZM6axvTsN99QW40lb
- FOhA==
-X-Gm-Message-State: AOJu0Yw+pjhHzgcvDnuUfooZepl2h5DLKuDYf5DS93nVgm8I457RoJUl
- CqHr0bp3jJMdWH/gdkdHI0Y+YnMaJtmdux0oKQlaWC3ZIw6EqMTEQ2iOyhDms18=
-X-Google-Smtp-Source: AGHT+IHOpNmFPXUhIo7Eam8HYpE01pEFtzCKfC3BcQvDtzfVyFz1aHjtI8bJB3/pa2WVEIsslekICA==
-X-Received: by 2002:a05:6a00:3a1f:b0:70d:2796:bce8 with SMTP id
- d2e1a72fcca58-7173b69111cmr15400940b3a.20.1725375257444; 
- Tue, 03 Sep 2024 07:54:17 -0700 (PDT)
+ bh=CrvRkeWjaYkDZSVPda8844TkzOU8UzyPCCGFck7ar+w=;
+ b=azV7WSaOEArwc7+6546Gpacn+REfmryAW9eq43IGWlx/YPJfE4s4wFJZFseU11/Il3
+ XY/sxx8BlkbW3XsK+q6VBJlJOgPIl/rXGN2TrTOxsHQZl6afJEu3UJ9DQfQ647YRv+H9
+ G8ub3+i3EqqSpj64OuVjDIRbYVr585/uNZy/3Eu1484TG+HRdDvCMvCSQ6YA7m8SXj3F
+ 0B0Je5k1+h68kOovj6KsLroIsfsZoKk9MKlr2LUw9ego/aZBA4oncd/vuT1T9K9qfDLa
+ 1aKMTppl3bpNTFb54qYHJI3KGfi3HUO0Os9VzzlBhZmDYtk7Lne9r5g7dhkqAjiKBXIy
+ Z4Lw==
+X-Gm-Message-State: AOJu0YwRdElDdmAo8ilE6Rl/+tFg9kF5k2SwnGp/qmzkicZpfleZtRkB
+ kJyvLckXIiMRllE1LeeXId7T9Khkr0/om49JWy0e5SFBItp6K9LAsvjUtX1YxLk=
+X-Google-Smtp-Source: AGHT+IG/K1lGNsay/ftX97sNQ0My+HPQukF6ID/7jO16CNg8T3FSI9v8E8zboTUkEu1PCACj4qLJng==
+X-Received: by 2002:a17:90a:1109:b0:2cf:eaec:d74c with SMTP id
+ 98e67ed59e1d1-2d89728e55amr8979114a91.16.1725375751693; 
+ Tue, 03 Sep 2024 08:02:31 -0700 (PDT)
 Received: from [192.168.0.4] (174-21-81-121.tukw.qwest.net. [174.21.81.121])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-715e55a3b61sm8587921b3a.48.2024.09.03.07.54.16
+ 98e67ed59e1d1-2d85b119b3dsm11562568a91.13.2024.09.03.08.02.30
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 03 Sep 2024 07:54:17 -0700 (PDT)
-Message-ID: <d268543f-3453-48ae-befa-c415b1de4a29@linaro.org>
-Date: Tue, 3 Sep 2024 07:54:14 -0700
+ Tue, 03 Sep 2024 08:02:31 -0700 (PDT)
+Message-ID: <66bd5e96-aac9-47ae-a1de-28808e4cc109@linaro.org>
+Date: Tue, 3 Sep 2024 08:02:29 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 12/14] tcg/riscv: Implement vector shs/v ops
+Subject: Re: [PATCH v2 14/14] tcg/riscv: Enable native vector support for TCG
+ host
 To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  dbarboza@ventanamicro.com, liwei1518@gmail.com, bmeng.cn@gmail.com,
  TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
 References: <20240830061607.1940-1-zhiwei_liu@linux.alibaba.com>
- <20240830061607.1940-13-zhiwei_liu@linux.alibaba.com>
+ <20240830061607.1940-15-zhiwei_liu@linux.alibaba.com>
 Content-Language: en-US
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240830061607.1940-13-zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20240830061607.1940-15-zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::429;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x429.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::534;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x534.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -104,10 +105,8 @@ On 8/29/24 23:16, LIU Zhiwei wrote:
 > Signed-off-by: TANG Tiancheng<tangtiancheng.ttc@alibaba-inc.com>
 > Reviewed-by: Liu Zhiwei<zhiwei_liu@linux.alibaba.com>
 > ---
->   tcg/riscv/tcg-target-con-set.h |  1 +
->   tcg/riscv/tcg-target.c.inc     | 44 ++++++++++++++++++++++++++++++++++
->   tcg/riscv/tcg-target.h         |  4 ++--
->   3 files changed, 47 insertions(+), 2 deletions(-)
+>   tcg/riscv/tcg-target.h | 8 +++++---
+>   1 file changed, 5 insertions(+), 3 deletions(-)
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
