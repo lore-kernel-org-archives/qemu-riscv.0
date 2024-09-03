@@ -4,78 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61EFECD342A
-	for <qemu-riscv@archiver.kernel.org>; Tue,  3 Sep 2024 15:16:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45B99CD37AC
+	for <qemu-riscv@archiver.kernel.org>; Tue,  3 Sep 2024 20:17:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1slVGK-0007zP-Ja; Tue, 03 Sep 2024 11:16:11 -0400
+	id 1slZxF-00040O-8W; Tue, 03 Sep 2024 16:16:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1slVGA-0007y0-Mb
- for qemu-riscv@nongnu.org; Tue, 03 Sep 2024 11:15:58 -0400
-Received: from mail-pf1-x434.google.com ([2607:f8b0:4864:20::434])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1slZxD-0003zo-T0
+ for qemu-riscv@nongnu.org; Tue, 03 Sep 2024 16:16:43 -0400
+Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1slVG7-0002Dv-Qn
- for qemu-riscv@nongnu.org; Tue, 03 Sep 2024 11:15:58 -0400
-Received: by mail-pf1-x434.google.com with SMTP id
- d2e1a72fcca58-71431524f33so4430127b3a.1
- for <qemu-riscv@nongnu.org>; Tue, 03 Sep 2024 08:15:54 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1slZxB-0004OZ-Us
+ for qemu-riscv@nongnu.org; Tue, 03 Sep 2024 16:16:43 -0400
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-205722ba00cso18946385ad.0
+ for <qemu-riscv@nongnu.org>; Tue, 03 Sep 2024 13:16:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725376551; x=1725981351; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=dCSwEr56B/IZH5hqdte0NmJ82E6p5nvadjeSBP7X3+I=;
- b=voCvQUJD8B8QMgs0lxJNcSwZN9LA9JdKFpWptFmApsmAHktQnVyrHj03zvgDwgjm7B
- fY/Tf+jyZkr1m0uk3me1AACQ7vn0gBHCIYuJGvMsvDZtJ0HIUf+NPnMvoAPnlJCfssgi
- 2AEpHm/G1Wn6qX7m9CRBqiNuPk1ZRm9dLPKex1lf0jwuTnCdd90BydoG8/zbQsOzQFHK
- l+pCOkIoPjN8PeZ8BtoK+r0v+yvq8PTFdHvYZRk9865P5gElXGHE5+JOshCL33Ohvxjd
- 2dLAT9Xp6ih+iliJ6qi1RO98/13f0V9O3/YBfha0gZampDzRlPbkdOUamyPoxs6QGLvV
- 4AmA==
+ d=ventanamicro.com; s=google; t=1725394600; x=1725999400; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=P0qwpmi2We/KeOgu3I8ChwK/WN0aHTMzGUyH4y3uCP0=;
+ b=l3r0eKiNuHHqB3MTeEJvIx8tBCjtAFJbGnAJTszoN5cU7F7dEw/Vvdi7Y0CrL9pZpO
+ 1omzyTmaQutoJB/96vGNjDoYKfXoEehYqytazLY9x226vuJu1jZa6C1Bw18lk/RrlmuG
+ dxFq1rx2yR/+h6+lEODdnbS7lNyPcu0c+TbBTQVV7JL0hwnXHMPpbjV9/HvcufJkKGwK
+ ZxjXnz3hpUe1piLYWypSr6WPKxr5DPGDaki4MUOh4DwyokEWH9udpZ1i61d8Tt1LrO22
+ 8HRepTuUqDjkuCXYBCs563HwTHS9TyNoPSr1tA6NdaJWFhTp/m9hxmt7/Fd/K4gGB7Pv
+ z8bA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725376551; x=1725981351;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=dCSwEr56B/IZH5hqdte0NmJ82E6p5nvadjeSBP7X3+I=;
- b=JjRAPU7QCcZIo1MfGO39A3NAL7EbyzwOSLJv0NrvYfQX29VOT4FrWY3hgQrTau/O87
- n/RsorPMRYcu7QN5ji55kNnsWhk74FxU3SQMEyLtc3/+AGCzsWcY4HO4ioKCElEKof0e
- e54v0kIskQVBDqCqulvQvC9hr26PpOkW4gLFJyghCAG8PmDflyHHdwWTiwnizNXrib9E
- vfrYJKH+3qI2HTWTFnsTuXZ6m43nP9df1aXcpdaTw4Wb1h7Meqi5dlC0sYjYPWTAaMfN
- gCxhs/+0DML4NuhH+oOUY8Hs1CYK5qnV5Q11tvbIHyTW02gs66aBRm6/D2OC34UpfD4n
- JTLQ==
-X-Gm-Message-State: AOJu0YyNW8hGE/sz8GiFUf4i9V6kJQwC95EPE3jprO8cniy/XihjH7cV
- fIqInBr5hxCQcyOi2ZemTIr2mbfuEIy2Z8ygqVmGlDdrcOaAbsXk6lZOgU9Xjg0=
-X-Google-Smtp-Source: AGHT+IFcCGvrhp1Sq9SrRlwCRmR6LHwLBRu0GxkWxMJoAylxoZtK1mlxawXU6MDFajoLE+7Z/8+L7g==
-X-Received: by 2002:a05:6a21:6b0c:b0:1cc:d4a0:2675 with SMTP id
- adf61e73a8af0-1cecf49aeedmr12877607637.3.1725376551288; 
- Tue, 03 Sep 2024 08:15:51 -0700 (PDT)
-Received: from [192.168.0.4] (174-21-81-121.tukw.qwest.net. [174.21.81.121])
+ d=1e100.net; s=20230601; t=1725394600; x=1725999400;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=P0qwpmi2We/KeOgu3I8ChwK/WN0aHTMzGUyH4y3uCP0=;
+ b=qtO4IvCOkY7+f3pH0JUa5WBkvKiejWprTNXN0nQ4n64qIzDm1sQis/MuX6vcWLAe3D
+ 5jwmI2O8FridEw7IOw4K5siKC2gCUE7IOmEwnU/67c0pblHh9CAc896llYN8+Jl1FTsu
+ Ija1G7ntyLAm828Ea39c0DDIkWYdXY9rPs4lekkD554ZmI0bk8ddaQdif2cVw7yrE3Hg
+ DacVLJqroy/7Op0EF4bGLvmeq+SxqXwSpWMB8vLzAp4v9rtkgTqsTTazzAigujLL1mXB
+ PDHBX3MkZYQ3eiDBNFGjySp2rqekWipk3pRKKVVPbm4RCLk5eBpr0plb5IraBNT5Qj6G
+ XX9Q==
+X-Gm-Message-State: AOJu0Yw5hwpc7bL3iNTomT7EVF3xhLVnyfRnmV6/cF0DSn3d9Vek1CVt
+ xWF6hrZ/WzCC6L7Ar3Mv3V5udtiDYqXvLWnh+IQkH3/mTFlNGKYeCFS84I3PBUE=
+X-Google-Smtp-Source: AGHT+IHrDXBUtAf75DwJC7E4itQo2urgfU96ngD2OfT++orDLztq4qWTrzKQhHdRamAmsKjBJnFyEQ==
+X-Received: by 2002:a17:902:f690:b0:205:8a1a:53eb with SMTP id
+ d9443c01a7336-2058a1a5c86mr54011025ad.18.1725394599944; 
+ Tue, 03 Sep 2024 13:16:39 -0700 (PDT)
+Received: from grind.dc1.ventanamicro.com ([177.170.227.130])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-715edc66743sm7633024b3a.152.2024.09.03.08.15.50
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 03 Sep 2024 08:15:50 -0700 (PDT)
-Message-ID: <97873524-9e47-44c4-b34a-a27e9833b0e1@linaro.org>
-Date: Tue, 3 Sep 2024 08:15:49 -0700
+ d9443c01a7336-206aea531b3sm2189745ad.216.2024.09.03.13.16.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 03 Sep 2024 13:16:39 -0700 (PDT)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ ajones@ventanamicro.com, tjeznach@rivosinc.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH v7 00/12] riscv: QEMU RISC-V IOMMU Support
+Date: Tue,  3 Sep 2024 17:16:19 -0300
+Message-ID: <20240903201633.93182-1-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 13/14] tcg/riscv: Implement vector roti/v/x shi ops
-To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- dbarboza@ventanamicro.com, liwei1518@gmail.com, bmeng.cn@gmail.com,
- TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
-References: <20240830061607.1940-1-zhiwei_liu@linux.alibaba.com>
- <20240830061607.1940-14-zhiwei_liu@linux.alibaba.com>
-Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240830061607.1940-14-zhiwei_liu@linux.alibaba.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::434;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x434.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x630.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -98,86 +93,96 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 8/29/24 23:16, LIU Zhiwei wrote:
-> @@ -2589,6 +2605,69 @@ void tcg_expand_vec_op(TCGOpcode opc, TCGType type, unsigned vece,
->               }
->           }
->           break;
-> +    case INDEX_op_shli_vec:
-> +        if (a2 > 31) {
-> +            tcg_gen_shls_vec(vece, v0, v1, tcg_constant_i32(a2));
-> +        } else {
-> +            vec_gen_3(INDEX_op_rvv_shli_vec, type, vece, tcgv_vec_arg(v0),
-> +                      tcgv_vec_arg(v1), a2);
-> +        }
-> +        break;
-> +    case INDEX_op_shri_vec:
-> +        if (a2 > 31) {
-> +            tcg_gen_shrs_vec(vece, v0, v1, tcg_constant_i32(a2));
-> +        } else {
-> +            vec_gen_3(INDEX_op_rvv_shri_vec, type, vece, tcgv_vec_arg(v0),
-> +                      tcgv_vec_arg(v1), a2);
-> +        }
-> +        break;
-> +    case INDEX_op_sari_vec:
-> +        if (a2 > 31) {
-> +            tcg_gen_sars_vec(vece, v0, v1, tcg_constant_i32(a2));
-> +        } else {
-> +            vec_gen_3(INDEX_op_rvv_sari_vec, type, vece, tcgv_vec_arg(v0),
-> +                      tcgv_vec_arg(v1), a2);
-> +        }
-> +        break;
-> +    case INDEX_op_rotli_vec:
-> +        t1 = tcg_temp_new_vec(type);
-> +        tcg_gen_shli_vec(vece, t1, v1, a2);
-> +        tcg_gen_shri_vec(vece, v0, v1, (8 << vece) - a2);
-> +        tcg_gen_or_vec(vece, v0, v0, t1);
-> +        tcg_temp_free_vec(t1);
-> +        break;
-> +    case INDEX_op_rotls_vec:
-> +        t1 = tcg_temp_new_vec(type);
-> +        t2 = tcg_temp_new_i32();
-> +        tcg_gen_neg_i32(t2, temp_tcgv_i32(arg_temp(a2)));
-> +        tcg_gen_shrs_vec(vece, v0, v1, t2);
-> +        tcg_gen_shls_vec(vece, t1, v1, temp_tcgv_i32(arg_temp(a2)));
-> +        tcg_gen_or_vec(vece, v0, v0, t1);
-> +        tcg_temp_free_vec(t1);
-> +        tcg_temp_free_i32(t2);
-> +        break;
+Hi,
 
-I'm trying to work out how much benefit there is here of expanding these early, as opposed 
-to simply using TCG_REG_TMP0 when the immediate doesn't fit, or for rotls_vec negation.
+In this new version the only significant code change was made in patch
+3, where we're no longer modifying the host address with the translated
+address. The remaining of the changes consist in adding more in-code
+docs (a.k.a comments) on the design choices made in the emulation.
 
-> +    case INDEX_op_rotlv_vec:
-> +        v2 = temp_tcgv_vec(arg_temp(a2));
-> +        t1 = tcg_temp_new_vec(type);
-> +        tcg_gen_neg_vec(vece, t1, v2);
-> +        vec_gen_3(INDEX_op_shrv_vec, type, vece, tcgv_vec_arg(t1),
-> +                  tcgv_vec_arg(v1), tcgv_vec_arg(t1));
-> +        vec_gen_3(INDEX_op_shlv_vec, type, vece, tcgv_vec_arg(v0),
-> +                  tcgv_vec_arg(v1), tcgv_vec_arg(v2));
-> +        tcg_gen_or_vec(vece, v0, v0, t1);
-> +        tcg_temp_free_vec(t1);
-> +        break;
-> +    case INDEX_op_rotrv_vec:
-> +        v2 = temp_tcgv_vec(arg_temp(a2));
-> +        t1 = tcg_temp_new_vec(type);
-> +        tcg_gen_neg_vec(vece, t1, v2);
-> +        vec_gen_3(INDEX_op_shlv_vec, type, vece, tcgv_vec_arg(t1),
-> +                  tcgv_vec_arg(v1), tcgv_vec_arg(t1));
-> +        vec_gen_3(INDEX_op_shrv_vec, type, vece, tcgv_vec_arg(v0),
-> +                  tcgv_vec_arg(v1), tcgv_vec_arg(v2));
-> +        tcg_gen_or_vec(vece, v0, v0, t1);
-> +        tcg_temp_free_vec(t1);
-> +        break;
+The docs were also changed to mention that, to test this emulation,
+we're using the following kernel:
 
-And here we can use TCG_REG_V0 as the temporary, both for negation and shift intermediate.
+https://github.com/ventanamicro/linux/tree/dev-upstream
 
-     vrsub_vi  V0, a2, 0
-     vshlv_vv  V0, a1, V0
-     vshrv_vv  a0, a1, a2
-     vor_vv    a0, a0, V0
+it is based on the latest kernel support posted by Tomasz with
+additional features like VFIO passthrough and irqbypass. Users can use
+this kernel for testing, if they want, until the kernel upstream support
+is more feature completed. At that point we'll remove this Ventana Micro
+github repo from the docs and point to the upstream kernel.
+
+Patches based on alistair/riscv-to-apply.next. 
+
+All patches reviewed/acked. 
+
+Changes from v6:
+- patch 2:
+  - align RISCV_IOMMU_REG_ICVEC macro value 0x02F8
+- patch 3:
+  - do not modify the host address with the translated (guest) address in
+    riscv_iommu_msi_write(), RISCV_IOMMU_MSI_PTE_M_BASIC case
+  - added a comment explaining the need for the IOVA == GPA check
+- patch 8:
+  - added a comment explaining the design decision to not cache identity-mapped
+    translations in riscv_iommu_translate()
+- patch 12:
+  - added extra info about how the IOMMU emulation is being tested and
+    which kernel branch users can try it out
+- v6 link: https://lore.kernel.org/qemu-riscv/20240801154334.1009852-1-dbarboza@ventanamicro.com/
 
 
-r~
+Daniel Henrique Barboza (4):
+  pci-ids.rst: add Red Hat pci-id for RISC-V IOMMU device
+  test/qtest: add riscv-iommu-pci tests
+  qtest/riscv-iommu-test: add init queues test
+  docs/specs: add riscv-iommu
+
+Tomasz Jeznach (8):
+  exec/memtxattr: add process identifier to the transaction attributes
+  hw/riscv: add riscv-iommu-bits.h
+  hw/riscv: add RISC-V IOMMU base emulation
+  hw/riscv: add riscv-iommu-pci reference device
+  hw/riscv/virt.c: support for RISC-V IOMMU PCIDevice hotplug
+  hw/riscv/riscv-iommu: add Address Translation Cache (IOATC)
+  hw/riscv/riscv-iommu: add ATS support
+  hw/riscv/riscv-iommu: add DBG support
+
+ docs/specs/index.rst             |    1 +
+ docs/specs/pci-ids.rst           |    2 +
+ docs/specs/riscv-iommu.rst       |   90 ++
+ docs/system/riscv/virt.rst       |   13 +
+ hw/riscv/Kconfig                 |    4 +
+ hw/riscv/meson.build             |    1 +
+ hw/riscv/riscv-iommu-bits.h      |  421 ++++++
+ hw/riscv/riscv-iommu-pci.c       |  202 +++
+ hw/riscv/riscv-iommu.c           | 2431 ++++++++++++++++++++++++++++++
+ hw/riscv/riscv-iommu.h           |  149 ++
+ hw/riscv/trace-events            |   17 +
+ hw/riscv/trace.h                 |    1 +
+ hw/riscv/virt.c                  |   33 +-
+ include/exec/memattrs.h          |    5 +
+ include/hw/pci/pci.h             |    1 +
+ include/hw/riscv/iommu.h         |   36 +
+ meson.build                      |    1 +
+ tests/qtest/libqos/meson.build   |    4 +
+ tests/qtest/libqos/riscv-iommu.c |   76 +
+ tests/qtest/libqos/riscv-iommu.h |  101 ++
+ tests/qtest/meson.build          |    1 +
+ tests/qtest/riscv-iommu-test.c   |  220 +++
+ 22 files changed, 3809 insertions(+), 1 deletion(-)
+ create mode 100644 docs/specs/riscv-iommu.rst
+ create mode 100644 hw/riscv/riscv-iommu-bits.h
+ create mode 100644 hw/riscv/riscv-iommu-pci.c
+ create mode 100644 hw/riscv/riscv-iommu.c
+ create mode 100644 hw/riscv/riscv-iommu.h
+ create mode 100644 hw/riscv/trace-events
+ create mode 100644 hw/riscv/trace.h
+ create mode 100644 include/hw/riscv/iommu.h
+ create mode 100644 tests/qtest/libqos/riscv-iommu.c
+ create mode 100644 tests/qtest/libqos/riscv-iommu.h
+ create mode 100644 tests/qtest/riscv-iommu-test.c
+
+-- 
+2.45.2
+
 
