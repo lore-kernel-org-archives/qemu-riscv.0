@@ -4,81 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 093E0CD37AE
-	for <qemu-riscv@archiver.kernel.org>; Tue,  3 Sep 2024 21:00:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1083FCD37B5
+	for <qemu-riscv@archiver.kernel.org>; Tue,  3 Sep 2024 21:54:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1slacp-0006dw-CS; Tue, 03 Sep 2024 16:59:43 -0400
+	id 1slbTu-0000LE-5A; Tue, 03 Sep 2024 17:54:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1slacn-0006aQ-MW
- for qemu-riscv@nongnu.org; Tue, 03 Sep 2024 16:59:41 -0400
-Received: from mail-ot1-x333.google.com ([2607:f8b0:4864:20::333])
+ id 1slbTp-00005s-OM
+ for qemu-riscv@nongnu.org; Tue, 03 Sep 2024 17:54:30 -0400
+Received: from mail-pg1-x52a.google.com ([2607:f8b0:4864:20::52a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1slacm-0001rB-1v
- for qemu-riscv@nongnu.org; Tue, 03 Sep 2024 16:59:41 -0400
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-70f79f75da6so1500564a34.0
- for <qemu-riscv@nongnu.org>; Tue, 03 Sep 2024 13:59:39 -0700 (PDT)
+ id 1slbTn-0003op-M7
+ for qemu-riscv@nongnu.org; Tue, 03 Sep 2024 17:54:29 -0400
+Received: by mail-pg1-x52a.google.com with SMTP id
+ 41be03b00d2f7-7cb3db0932cso4408413a12.1
+ for <qemu-riscv@nongnu.org>; Tue, 03 Sep 2024 14:54:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1725397178; x=1726001978; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1725400466; x=1726005266; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=n5RS5xk514+fpa+L9VXO7OpFpPeI7jVE2v6ARmBFuo0=;
- b=XWvtv4k+MYgth0xDNZuk0deynFZ3+b5YTy1t2Vne0ceOaBxNbjuZD+AF40PFCqTxMT
- pqLKuA7X1VfSIAIW8HyOZPc6c0aLYgCFgNZK7xCLZw6Wux/bs4PifMDFH4xERkgVxdB3
- PKR0NTA/9tOGC2R2l8QtPKA3Gv4IgJv792pIE1xf/2vpJH9cs3CHL+uviAaXxOpPBvwf
- HMp6WLHLXwiFTARqnf1l5+nBR/+91H0jO/GlsxKNnALdLAH0DReWv/4/VrhdpdlXXclH
- dl3XNE3jK18+YlaF0BxneKR/OPTZpe7AUyYkw0yWLRMsvXiAIlvFJK5S8p3KrFN7TX/t
- BRNw==
+ bh=SdxZlz7ZAQuTVMCU2qJ2a96m6YfRWZ1ltkufI0TwbHs=;
+ b=JqLHiKnbmrV7p8LRrPbtBAF2+YNiem+CsmUvyEuofZXMEUkUU4b2p+hVjPlCnmkS3V
+ gqMiQYlHx4MYdUa1EKKPHc2+trEQ0dxx0JdXoxqnKZoTZ1/b72JRqvdkwNb3Ldz9sx29
+ AYUe2UBf3AquGcvk1cQ8cIp3PcOYT3aj0KpwIfDjJM2S6kEi1sKkG6oKFy2QdajS0OEf
+ wqvjZniwmuyDJr+1mVeyGZFsPob1AB6KLPoRrQUJofSkt9tXnjE0ikoaT0pZp91A/X2I
+ HBA/d/0/7vprSSip35SY6zssNPvU3L1NofsYwluYLH48eWR4PsWaYm5HDTqHqH4CLqcN
+ VTNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725397178; x=1726001978;
+ d=1e100.net; s=20230601; t=1725400466; x=1726005266;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=n5RS5xk514+fpa+L9VXO7OpFpPeI7jVE2v6ARmBFuo0=;
- b=OOwJzDkyTNDroatxsf9MIj/4Vt/OX+tVw266qMa9Kdf0wNCl6S20izeFfUOomP8IQY
- 4jbDmVpvt2Br7ocy54DUWjddbmdkQBXXAGP3IzhimaceL34dBpmgV5WXkkKf2XJugSp7
- SYYCe3zDFJbwlVR2R9TpXKB5ol1GKGyiuDtWlhkivs5mRyiA9bitRqnJLglfHa13j727
- JfiXYNhW78CY9DGquHaIi5b5+hbOnQV6dP/FjZdJiZkClqSNYbZLpJdSG+vwF0uCxr/l
- GesugrNwJjhCknuEgFXGK4BE8vvRlfDBeMyF+0jBH4TMixsK9/vZrn07a/bHFI6S2DKb
- Xi7w==
-X-Gm-Message-State: AOJu0YybPIwoYODZ+LVpGrwzbwo5D3CPJdP2RbUWUN3hOqjd88LRaS8i
- i7PJkEhxvlV/kVa+/MJlNSK/bQ63kuGx3eY4mQkwgqtor0FyAOVe/4Z5aFX1YXM=
-X-Google-Smtp-Source: AGHT+IHnVgqf9SWCCQb3/Ytw/XXeX7jvpqHfdhiRg+sqE3aPRSnlrOiCJFMiN+tKLhsx+naj15S+9w==
-X-Received: by 2002:a05:6358:560c:b0:1aa:c8b7:4224 with SMTP id
- e5c5f4694b2df-1b8124122bbmr455777855d.17.1725397177798; 
- Tue, 03 Sep 2024 13:59:37 -0700 (PDT)
+ bh=SdxZlz7ZAQuTVMCU2qJ2a96m6YfRWZ1ltkufI0TwbHs=;
+ b=qLv69fhCWXxR9nPdnOnAPxhezgdeUzQjB8gKmWDVBQba8Vw57Ba5RUZdU+0bDMCqSa
+ 5vmMLzAd7nwaip9qHxe7BHPw6rPEs0ggDcUMGVnodNFYBaDfbcyJJiGniBab5oPqDJF6
+ qhHd1wsw9k7Jv4LGDuloEDb11dQZ7f1BvEEn9wp700pZ6Bb0VCcYuD5uxKqg+z60QGj6
+ M6Y1la85ttQavWFZ1ubE61p+zaJMUrkPwvqCiqzeYn0m1Kq8ZKIIFsIVPAs2/Sc6qxBP
+ 27OgBk7TPtDklXCjzzas1Z+YC8Seutp5K2gLtQHbiqGRRmMTbkV5NcKBX00+XIRgCNUz
+ DB2g==
+X-Gm-Message-State: AOJu0YxWKu1gq55uvwF7ry4jjHQQJqKuKjj9uVdvkZZL98OJ3ePQHlcR
+ D9yT4UXOUHj8cuVtfmLTcUgZ/Sq6mEDy1O4LafIJz6JCpyhLr2VyK0JIs3JahdM=
+X-Google-Smtp-Source: AGHT+IHmGkmffKbySUO+AIOnN0PnscejLQeyuVowXqcKHi8IsbrIYaFPRLuADMHdOPvZviFA77s4/g==
+X-Received: by 2002:a05:6a21:3941:b0:1c0:f5fa:cbe6 with SMTP id
+ adf61e73a8af0-1cce1010186mr21370738637.22.1725400465932; 
+ Tue, 03 Sep 2024 14:54:25 -0700 (PDT)
 Received: from [192.168.68.110] ([177.170.227.130])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-7d4fbd92ea6sm314697a12.51.2024.09.03.13.59.34
+ 41be03b00d2f7-7d4fbd8c1d2sm363439a12.21.2024.09.03.14.54.23
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 03 Sep 2024 13:59:37 -0700 (PDT)
-Message-ID: <15847782-3e37-43cd-9248-8cb35e1164bd@ventanamicro.com>
-Date: Tue, 3 Sep 2024 17:59:32 -0300
+ Tue, 03 Sep 2024 14:54:25 -0700 (PDT)
+Message-ID: <967f8332-60c8-458b-a07e-d4393add05f0@ventanamicro.com>
+Date: Tue, 3 Sep 2024 18:54:21 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 01/12] exec/memtxattr: add process identifier to the
- transaction attributes
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- ajones@ventanamicro.com, tjeznach@rivosinc.com,
- Frank Chang <frank.chang@sifive.com>, Jason Chien <jason.chien@sifive.com>
-References: <20240903201633.93182-1-dbarboza@ventanamicro.com>
- <20240903201633.93182-2-dbarboza@ventanamicro.com>
- <f091410b-5ffb-482f-bafd-4f608755baa6@linaro.org>
+Subject: Re: [PATCH 1/1] target/riscv/cpu.c: Add 'fcsr' register to QEMU log
+ as a part of F extension
+To: Maria Klauchek <m.klauchek@syntacore.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ bmeng.cn@gmail.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com
+References: <20240902103433.18424-1-m.klauchek@syntacore.com>
 Content-Language: en-US
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <f091410b-5ffb-482f-bafd-4f608755baa6@linaro.org>
+In-Reply-To: <20240902103433.18424-1-m.klauchek@syntacore.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::333;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x333.google.com
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52a;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x52a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -103,54 +99,32 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 9/3/24 5:31 PM, Richard Henderson wrote:
-> On 9/3/24 13:16, Daniel Henrique Barboza wrote:
->> From: Tomasz Jeznach <tjeznach@rivosinc.com>
->>
->> Extend memory transaction attributes with process identifier to allow
->> per-request address translation logic to use requester_id / process_id
->> to identify memory mapping (e.g. enabling IOMMU w/ PASID translations).
->>
->> Signed-off-by: Tomasz Jeznach <tjeznach@rivosinc.com>
->> Reviewed-by: Frank Chang <frank.chang@sifive.com>
->> Reviewed-by: Jason Chien <jason.chien@sifive.com>
->> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
->> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->> ---
->>   include/exec/memattrs.h | 5 +++++
->>   1 file changed, 5 insertions(+)
+On 9/2/24 7:34 AM, Maria Klauchek wrote:
+> FCSR is a part of F extension. Print it to log if FPU option is enabled.
 > 
-> What is this for?  What is different about it than requester_id?
+> Signed-off-by: Maria Klauchek <m.klauchek@syntacore.com>
+> ---
 
-The IOMMU memory region uses both the requester_id (internally called device_id) and
-the process id (the PASID for PCI devices) to identify a context because the IOMMU
-allows the same PID to be used by multiple requester_ids. Using only the requester_id
-is not enough to identify the IOMMU context.
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-
-Thanks,
-
-Daniel
-
+>   target/riscv/cpu.c | 6 ++++++
+>   1 file changed, 6 insertions(+)
 > 
-> 
-> r~
-> 
->>
->> diff --git a/include/exec/memattrs.h b/include/exec/memattrs.h
->> index 14cdd8d582..e27c18f3dc 100644
->> --- a/include/exec/memattrs.h
->> +++ b/include/exec/memattrs.h
->> @@ -52,6 +52,11 @@ typedef struct MemTxAttrs {
->>       unsigned int memory:1;
->>       /* Requester ID (for MSI for example) */
->>       unsigned int requester_id:16;
->> +
->> +    /*
->> +     * PID (PCI PASID) support: Limited to 8 bits process identifier.
->> +     */
->> +    unsigned int pid:8;
->>   } MemTxAttrs;
->>   /* Bus masters which don't specify any attributes will get this,
-> 
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index a90808a3ba..6ff6096777 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -839,6 +839,12 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+>           }
+>       }
+>       if (flags & CPU_DUMP_FPU) {
+> +        target_ulong val = 0;
+> +        RISCVException res = riscv_csrrw_debug(env, CSR_FCSR, &val, 0, 0);
+> +        if (res == RISCV_EXCP_NONE) {
+> +            qemu_fprintf(f, " %-8s " TARGET_FMT_lx "\n",
+> +                    csr_ops[CSR_FCSR].name, val);
+> +        }
+>           for (i = 0; i < 32; i++) {
+>               qemu_fprintf(f, " %-8s %016" PRIx64,
+>                            riscv_fpr_regnames[i], env->fpr[i]);
 
