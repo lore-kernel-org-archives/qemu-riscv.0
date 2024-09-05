@@ -4,79 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 080BDCD4F5E
-	for <qemu-riscv@archiver.kernel.org>; Thu,  5 Sep 2024 07:40:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E3FECD4F5E
+	for <qemu-riscv@archiver.kernel.org>; Thu,  5 Sep 2024 07:57:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sm74v-000642-9P; Thu, 05 Sep 2024 03:38:53 -0400
+	id 1sm7MW-0006qM-ED; Thu, 05 Sep 2024 03:57:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <shentey@gmail.com>)
- id 1sm74s-0005yA-Ja; Thu, 05 Sep 2024 03:38:50 -0400
-Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <shentey@gmail.com>)
- id 1sm74q-0001dD-Ut; Thu, 05 Sep 2024 03:38:50 -0400
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-5c245c62362so614837a12.0; 
- Thu, 05 Sep 2024 00:38:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1725521926; x=1726126726; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=yqq2+yKTgR47E2vybbP031KgJCA7S1tzDqwG9g6AEdw=;
- b=C/K0/TVsRSefv324SyjkaXVtPtG/7madbzi7vKcceeH8SQEE+Nh4qSpTAmMmZmt8VS
- CcKHV2eladhC9EcKuVarj7ib4yq5mzIMccdDtE4v/AyuGHHlaUS59Dh57JK8tfpARpNN
- 8OyjvuY3HAYMPTCpOmNcbrQVf36dhHPhjOPJxWj04ThtvxwbxkCi7pgNRO9tp5eeHA5a
- HZw/X44dCNXb/7R4vPa9MtsAE7VBIxfM0N6NOleNN0zGz2cuVyMRlRGDm6qM1gJI36tF
- sja2LO4ADzpMI41g3n1rnKqVfDV0L4ZyfaY2gll+kO7aa4XmeQ0MsWmKEfzbOeKs+AiN
- xVDw==
+ (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
+ id 1sm7MT-0006nh-Mo
+ for qemu-riscv@nongnu.org; Thu, 05 Sep 2024 03:57:02 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
+ id 1sm7MS-0005Oe-AU
+ for qemu-riscv@nongnu.org; Thu, 05 Sep 2024 03:57:01 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1725523019;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=cyh9GNwkSeiWX8VVWJet6cmrStrv1Y1BhHYKMAKCy08=;
+ b=fPg27KzbyQPAWBPxwpUA5iqGb7YLGxLROJ6oveKNBUBwAW57nRptH3nffnSQzuFy1mLRHE
+ R50aoMkFU49RLOhdCWtoIpzw+04c1cWALPDo8zCr7E4BBwjrCW/cEhuJ76fgSe+aE6OmbE
+ lM2hN9cZwKG7hEjAwzOH0qrqANtktOc=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-680-usb6MP29PdGtCbHWSZE_4A-1; Thu, 05 Sep 2024 03:56:54 -0400
+X-MC-Unique: usb6MP29PdGtCbHWSZE_4A-1
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-42bb6f0f35cso3785585e9.0
+ for <qemu-riscv@nongnu.org>; Thu, 05 Sep 2024 00:56:54 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725521926; x=1726126726;
+ d=1e100.net; s=20230601; t=1725523013; x=1726127813;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yqq2+yKTgR47E2vybbP031KgJCA7S1tzDqwG9g6AEdw=;
- b=pv9hgBz6wQHHfvvmAWt6ik6FTbqcOxrc3+OUxjRhHUdnhSpaCUd4Jgt/Lb6T7U+DPr
- 8O9lbxxbaEzPq4mgmr+timktk95LJaars//XnQ47gx2u/dSyeKUqCKLrNxnIpYIYxewI
- uLm3DrslABMoxemCezwlVTeosrMY3+qoLnu60Re69jrYyfCko6nS92e2WIDFLjmQ/hx6
- Sc2bDy9nO90Mv+nC7LnDVttv8tuKOwzfIvVoAu4aOPQSh6UhSouvbdTl0rafknUzFm7l
- 0/lTStZ27PeIuXtJ5z7yf91aXt9f2OvD6YLenBvjxIeC1ZzLyU87cUENZGPo/dfRkO0a
- ctiA==
+ bh=cyh9GNwkSeiWX8VVWJet6cmrStrv1Y1BhHYKMAKCy08=;
+ b=rf0S613vDYfhojlTVCHxaF9kMdbBkN+oYFVYmbAfDy1wGknSNqYuwpUjlgw81hz5Wk
+ Pmom/aWsouJCm2pfHXjko+SjEcnkTk1YgHvdfSqyDEzMBJ77l1dJaMmau4/30fuAhF08
+ aWbER8FULrblZpBFTG10Owm/HVWajh4G8yFwwxy0Y6hfNEM1ub14oHkimzJfoREfSKd9
+ BQZunOkFVd7niILZThYmBiPfmXOdTHmjAmaZNYJcBmPSGMu8PKnA73ZZP+JCYqQ59DZ2
+ PTkvIIrT4taDTDEFTT0oZmEPctVbFUDaKpN0CwCXIe6N7GmqU552/k7FYCDTjH9JP1eg
+ tTEA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUMMAzbqipcSX9DWGj7Kxv1l/iNmgnuqeCqhjULs53q65kpgblyhFBuxmKDjaSQh1H9zx8/QFfAjQ==@nongnu.org,
- AJvYcCWNXt5zkqpLE30Q8R+vK4Q4cGK8CXQtNbjyCxlQpmdjMILbh06Fxtr2qOhFWqWrk/ZNulz8xCaQC+F60Q==@nongnu.org,
- AJvYcCWR+Apfa32LNXJxlkO3xbCLDW+n9aNqSNEXtJoufZC+mZu05i8wBD8wY+8UsXIO1++XI/+gwNBw8xY=@nongnu.org
-X-Gm-Message-State: AOJu0Yw49CBPmGuQfzZLXxFGIE/1yKH4stGVhmAnSGHkUXDXR7UhZ6+G
- gODznTkAEEx82tRmuv98N00nZV4bHkLXXhFPrhJD3bP95LQtWEQtRBaYXg==
-X-Google-Smtp-Source: AGHT+IGT5d6gd/YfLzTes1ORJwZO7X3RLzyDLESDRFf6RFDXzNE4MDUJIMJknj/KsCHjLK80WGZ3RQ==
-X-Received: by 2002:a05:6402:50ca:b0:5c2:6e61:fa74 with SMTP id
- 4fb4d7f45d1cf-5c2757ce907mr4739436a12.4.1725521925341; 
- Thu, 05 Sep 2024 00:38:45 -0700 (PDT)
-Received: from Provence.localdomain
- (dynamic-092-224-047-179.92.224.pool.telefonica.de. [92.224.47.179])
+ AJvYcCUvPNrD+aRiBbdYsiz8w64Nl+gloDH/3Y9aWMk3bhOWzF2mnyeiaBDKVrZg1MyE8uupJw1za9pHorrL@nongnu.org
+X-Gm-Message-State: AOJu0YweXqpM7o3xZCNmHiHVEXp6A0YDi+542lSFDpG81ChLM5smb7BL
+ fyLWHsRfrdBf3R35LotwmmUUk14Nnc6hSwotnrGhgH3bVDptyqb6XwNYWkgnceuvWMjBgN+8lIY
+ fNV1rovcf7s+pkEO6NA8u0d4wqFlk3QPBRCBPxZ9GFgZsQKsOJpnl
+X-Received: by 2002:a05:600c:5494:b0:426:5dd0:a1e4 with SMTP id
+ 5b1f17b1804b1-42bbb20568fmr138180205e9.8.1725523013319; 
+ Thu, 05 Sep 2024 00:56:53 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IELGBKJM1/R9ulzra6QghihjDQerm/gNbTsa1rhsy4kWWgB5n0N+EpiDoC0Wf0QpmsbOmOheg==
+X-Received: by 2002:a05:600c:5494:b0:426:5dd0:a1e4 with SMTP id
+ 5b1f17b1804b1-42bbb20568fmr138179765e9.8.1725523012771; 
+ Thu, 05 Sep 2024 00:56:52 -0700 (PDT)
+Received: from avogadro.local ([151.95.101.29])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c3cc5689d9sm848755a12.43.2024.09.05.00.38.43
+ 5b1f17b1804b1-42bb6df7c5bsm225133905e9.23.2024.09.05.00.56.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Sep 2024 00:38:44 -0700 (PDT)
-From: Bernhard Beschow <shentey@gmail.com>
-To: qemu-devel@nongnu.org
-Cc: Jamin Lin <jamin_lin@aspeedtech.com>, Helge Deller <deller@gmx.de>,
- Song Gao <gaosong@loongson.cn>, Stafford Horne <shorne@gmail.com>,
+ Thu, 05 Sep 2024 00:56:52 -0700 (PDT)
+From: Paolo Bonzini <pbonzini@redhat.com>
+To: Bernhard Beschow <shentey@gmail.com>
+Cc: qemu-devel@nongnu.org, Jamin Lin <jamin_lin@aspeedtech.com>,
+ Helge Deller <deller@gmx.de>, Song Gao <gaosong@loongson.cn>,
+ Stafford Horne <shorne@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Joel Stanley <joel@jms.id.au>, Troy Lee <leetroy@gmail.com>,
  Nicholas Piggin <npiggin@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Max Filippov <jcmvbkbc@gmail.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Max Filippov <jcmvbkbc@gmail.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Artyom Tarasenko <atar4qemu@gmail.com>,
  Aurelien Jarno <aurelien@aurel32.net>, qemu-riscv@nongnu.org,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ "Edgar E . Iglesias" <edgar.iglesias@gmail.com>,
  Weiwei Li <liwei1518@gmail.com>,
  =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
- "Michael S. Tsirkin" <mst@redhat.com>, Hao Wu <wuhaotsh@google.com>,
+ "Michael S . Tsirkin" <mst@redhat.com>, Hao Wu <wuhaotsh@google.com>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  Steven Lee <steven_lee@aspeedtech.com>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
@@ -98,24 +104,28 @@ Cc: Jamin Lin <jamin_lin@aspeedtech.com>, Helge Deller <deller@gmx.de>,
  Paul Burton <paulburton@kernel.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Bernhard Beschow <shentey@gmail.com>
-Subject: [PATCH v2 1/3] hw: Remove unused inclusion of hw/char/serial.h
-Date: Thu,  5 Sep 2024 09:38:30 +0200
-Message-ID: <20240905073832.16222-2-shentey@gmail.com>
+ Palmer Dabbelt <palmer@dabbelt.com>
+Subject: Re: [PATCH v2 0/3] Serial device cleanup
+Date: Thu,  5 Sep 2024 09:56:44 +0200
+Message-ID: <20240905075644.350538-1-pbonzini@redhat.com>
 X-Mailer: git-send-email 2.46.0
 In-Reply-To: <20240905073832.16222-1-shentey@gmail.com>
-References: <20240905073832.16222-1-shentey@gmail.com>
+References: 
 MIME-Version: 1.0
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::529;
- envelope-from=shentey@gmail.com; helo=mail-ed1-x529.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+Content-Type: text/plain; charset="US-ASCII"; x-default=true
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=pbonzini@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -21
+X-Spam_score: -2.2
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.142,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -131,64 +141,8 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Reviewed-by: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
-Signed-off-by: Bernhard Beschow <shentey@gmail.com>
----
- hw/char/riscv_htif.c | 1 -
- hw/ppc/prep.c        | 1 -
- hw/riscv/sifive_e.c  | 1 -
- hw/riscv/sifive_u.c  | 1 -
- 4 files changed, 4 deletions(-)
+Queued, thanks.
 
-diff --git a/hw/char/riscv_htif.c b/hw/char/riscv_htif.c
-index 9bef60def1..54fd55c3e6 100644
---- a/hw/char/riscv_htif.c
-+++ b/hw/char/riscv_htif.c
-@@ -24,7 +24,6 @@
- #include "qapi/error.h"
- #include "qemu/log.h"
- #include "hw/char/riscv_htif.h"
--#include "hw/char/serial.h"
- #include "chardev/char.h"
- #include "chardev/char-fe.h"
- #include "qemu/timer.h"
-diff --git a/hw/ppc/prep.c b/hw/ppc/prep.c
-index 4eb5477069..fb58c312ac 100644
---- a/hw/ppc/prep.c
-+++ b/hw/ppc/prep.c
-@@ -25,7 +25,6 @@
- 
- #include "qemu/osdep.h"
- #include "hw/rtc/m48t59.h"
--#include "hw/char/serial.h"
- #include "hw/block/fdc.h"
- #include "net/net.h"
- #include "hw/isa/isa.h"
-diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-index 87d9602383..5a1959f2a9 100644
---- a/hw/riscv/sifive_e.c
-+++ b/hw/riscv/sifive_e.c
-@@ -35,7 +35,6 @@
- #include "hw/boards.h"
- #include "hw/loader.h"
- #include "hw/sysbus.h"
--#include "hw/char/serial.h"
- #include "hw/misc/unimp.h"
- #include "target/riscv/cpu.h"
- #include "hw/riscv/riscv_hart.h"
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index af5f923f54..efc8443c84 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -43,7 +43,6 @@
- #include "hw/irq.h"
- #include "hw/loader.h"
- #include "hw/sysbus.h"
--#include "hw/char/serial.h"
- #include "hw/cpu/cluster.h"
- #include "hw/misc/unimp.h"
- #include "hw/sd/sd.h"
--- 
-2.46.0
+Paolo
 
 
