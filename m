@@ -4,54 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3814CD5BB8
-	for <qemu-riscv@archiver.kernel.org>; Thu,  5 Sep 2024 19:15:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C874CE7A81
+	for <qemu-riscv@archiver.kernel.org>; Thu,  5 Sep 2024 19:16:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1smHxB-0002gW-OA; Thu, 05 Sep 2024 15:15:37 -0400
+	id 1smHwe-0001xL-Qk; Thu, 05 Sep 2024 15:15:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1smHwg-00024w-K6
- for qemu-riscv@nongnu.org; Thu, 05 Sep 2024 15:15:06 -0400
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1smHwd-0001sg-B3
+ for qemu-riscv@nongnu.org; Thu, 05 Sep 2024 15:15:03 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1smHwe-0000Uf-9i
- for qemu-riscv@nongnu.org; Thu, 05 Sep 2024 15:15:05 -0400
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1smHwa-0000Ob-Ee
+ for qemu-riscv@nongnu.org; Thu, 05 Sep 2024 15:15:02 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1725563703;
+ s=mimecast20190719; t=1725563699;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=alUAEDr3D8kX1ExQZOYYr6lYY+YVKOMO3eYCTi3IEFU=;
- b=QgiDfxghgU1oekKSAjeErnT8OiC/+eXAz5uiaMhX5xdPEgq8Qk3BOIJ/0rkXAoCbItWM/Q
- z2fINbJ/fz7oiFleGTw1yZU331YJK/pxZYqx/ieVgI+UlBB5jsU1mf+AQE6nnXFYOijZ0G
- kT3GcYlxk4iFz0nqyz9T309oPt2m1u4=
-Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
+ bh=zamPwXnxtXDR+NbX47G5vJXhtZTCrxR5KOwbgyU0bYo=;
+ b=hxBROBaOSo347WaCCMR8OHQC3Zsu6Iw1jN2CZgD3o/e4y6AfwkN0XvFf8OgFglp1J6QApd
+ gyjDT7n4jNT1psnXs6fIXd+O6ua4UH409f8BD+IXYMV6pphGba8E4Al8UJRnsURh1wQ8Di
+ EgklHtrHJMS60mWvERya0Nx+uTTIXjg=
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-459-LhFqtFulMJOMH_Emw00psw-1; Thu,
- 05 Sep 2024 15:14:59 -0400
-X-MC-Unique: LhFqtFulMJOMH_Emw00psw-1
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-487-fGN1K0Z0NsWRA3sDuFLCCQ-1; Thu,
+ 05 Sep 2024 15:14:56 -0400
+X-MC-Unique: fGN1K0Z0NsWRA3sDuFLCCQ-1
 Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 4FF441955F79; Thu,  5 Sep 2024 19:14:58 +0000 (UTC)
+ by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 951A91955D4E; Thu,  5 Sep 2024 19:14:55 +0000 (UTC)
 Received: from thuth-p1g4.redhat.com (unknown [10.39.192.6])
  by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 166BD1956056; Thu,  5 Sep 2024 19:14:55 +0000 (UTC)
+ id C33821956048; Thu,  5 Sep 2024 19:14:53 +0000 (UTC)
 From: Thomas Huth <thuth@redhat.com>
 To: qemu-devel@nongnu.org,
 	Paolo Bonzini <pbonzini@redhat.com>
 Cc: qemu-riscv@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 7/8] Revert "target/riscv: Restrict semihosting to TCG"
-Date: Thu,  5 Sep 2024 21:14:33 +0200
-Message-ID: <20240905191434.694440-8-thuth@redhat.com>
+Subject: [PATCH 6/8] tests/qtest: Disable numa-test if the default machine is
+ not available
+Date: Thu,  5 Sep 2024 21:14:32 +0200
+Message-ID: <20240905191434.694440-7-thuth@redhat.com>
 In-Reply-To: <20240905191434.694440-1-thuth@redhat.com>
 References: <20240905191434.694440-1-thuth@redhat.com>
 MIME-Version: 1.0
@@ -82,36 +83,44 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This reverts commit 10425887ba54241be1ce97f8935fc320332b531c.
-
-Using "imply" instead of "select" is causing a build failure:
-
- /usr/bin/ld: libqemu-riscv32-softmmu.a.p/target_riscv_cpu_helper.c.o: in function `riscv_cpu_do_interrupt':
- .../qemu/target/riscv/cpu_helper.c:1678:(.text+0x2214): undefined reference to `do_common_semihosting'
-
-Thus revert to fix the build.
+The numa-test needs a default machine in the target binary to work
+successfully, so don't try to run this test if the corresponding
+machine has not been enabled, e.g. when QEMU has been configured with
+"--without-default-devices".
 
 Signed-off-by: Thomas Huth <thuth@redhat.com>
 ---
- target/riscv/Kconfig | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ tests/qtest/meson.build | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/target/riscv/Kconfig b/target/riscv/Kconfig
-index c332616d36..5f30df22f2 100644
---- a/target/riscv/Kconfig
-+++ b/target/riscv/Kconfig
-@@ -1,9 +1,9 @@
- config RISCV32
-     bool
--    imply ARM_COMPATIBLE_SEMIHOSTING if TCG
-+    select ARM_COMPATIBLE_SEMIHOSTING # for do_common_semihosting()
-     select DEVICE_TREE # needed by boot.c
+diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
+index 587e1dc47e..70f240e8b1 100644
+--- a/tests/qtest/meson.build
++++ b/tests/qtest/meson.build
+@@ -141,7 +141,8 @@ qtests_hppa = ['boot-serial-test'] + \
+   (config_all_devices.has_key('CONFIG_VGA') ? ['display-vga-test'] : [])
  
- config RISCV64
-     bool
--    imply ARM_COMPATIBLE_SEMIHOSTING if TCG
-+    select ARM_COMPATIBLE_SEMIHOSTING # for do_common_semihosting()
-     select DEVICE_TREE # needed by boot.c
+ qtests_loongarch64 = qtests_filter + \
+-  ['boot-serial-test', 'numa-test']
++  (config_all_devices.has_key('CONFIG_LOONGARCH_VIRT') ? ['numa-test'] : []) + \
++  ['boot-serial-test']
+ 
+ qtests_m68k = ['boot-serial-test'] + \
+   qtests_filter
+@@ -174,11 +175,12 @@ qtests_ppc64 = \
+   (config_all_devices.has_key('CONFIG_POWERNV') ? ['pnv-xscom-test'] : []) +                 \
+   (config_all_devices.has_key('CONFIG_POWERNV') ? ['pnv-spi-seeprom-test'] : []) +           \
+   (config_all_devices.has_key('CONFIG_POWERNV') ? ['pnv-host-i2c-test'] : []) +              \
++  (config_all_devices.has_key('CONFIG_PSERIES') ? ['numa-test'] : []) +                      \
+   (config_all_devices.has_key('CONFIG_PSERIES') ? ['rtas-test'] : []) +                      \
+   (slirp.found() ? ['pxe-test'] : []) +              \
+   (config_all_devices.has_key('CONFIG_USB_UHCI') ? ['usb-hcd-uhci-test'] : []) +             \
+   (config_all_devices.has_key('CONFIG_USB_XHCI_NEC') ? ['usb-hcd-xhci-test'] : []) +         \
+-  qtests_pci + ['migration-test', 'numa-test', 'cpu-plug-test', 'drive_del-test']
++  qtests_pci + ['migration-test', 'cpu-plug-test', 'drive_del-test']
+ 
+ qtests_sh4 = (config_all_devices.has_key('CONFIG_ISA_TESTDEV') ? ['endianness-test'] : [])
+ qtests_sh4eb = (config_all_devices.has_key('CONFIG_ISA_TESTDEV') ? ['endianness-test'] : [])
 -- 
 2.46.0
 
