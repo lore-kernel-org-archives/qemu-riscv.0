@@ -4,78 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41211CD5BDD
-	for <qemu-riscv@archiver.kernel.org>; Fri,  6 Sep 2024 05:26:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79CBCCE7AB8
+	for <qemu-riscv@archiver.kernel.org>; Fri,  6 Sep 2024 07:50:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1smRPX-0001ww-5Y; Fri, 06 Sep 2024 01:21:31 -0400
+	id 1smTjy-0004lP-IP; Fri, 06 Sep 2024 03:50:46 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1smRPI-0000XP-L0; Fri, 06 Sep 2024 01:21:19 -0400
-Received: from mail-vk1-xa2f.google.com ([2607:f8b0:4864:20::a2f])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1smTjq-0004Wn-GA
+ for qemu-riscv@nongnu.org; Fri, 06 Sep 2024 03:50:38 -0400
+Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1smRPF-0000IQ-W4; Fri, 06 Sep 2024 01:21:16 -0400
-Received: by mail-vk1-xa2f.google.com with SMTP id
- 71dfb90a1353d-4fd142a798eso440301e0c.3; 
- Thu, 05 Sep 2024 22:21:13 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1smTjo-00022c-NF
+ for qemu-riscv@nongnu.org; Fri, 06 Sep 2024 03:50:38 -0400
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-371941bbfb0so1066236f8f.0
+ for <qemu-riscv@nongnu.org>; Fri, 06 Sep 2024 00:50:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1725600072; x=1726204872; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=F1BC3Ksc0AHRCzjCKQmIMGvREjxMf310PwjluIaLY8Y=;
- b=YMYQ1S/MF2v11FCrTv0aMzpycuHco+jWmnyxShQNVzMus6yxlV45mT6Z/VqcQJNyQr
- V5hpK02jl0PzhDvO4S3qnRxFkUQ0luc0tTtkKr1OVireRarMxYUMV7eYP1j1VHqKFGji
- nMTKAXoHI4H916AmolVEyF27mwagYcmSkczkoUla1JOwEovMG51c/q5CYlea+7s8RGnR
- RRl+UZQbVS2FPMdaG8BijWxiqXXGzsPyNL9x14mb9X0vEwtVtkiMud7Fi9571jU+ZSTZ
- huoSN1WO7fCCXHt2cZn+/YJ7z5VBxzz1F3fMkqos8nYw+v8GvORg76kUVwjm/p2GX1b1
- bung==
+ d=linaro.org; s=google; t=1725609034; x=1726213834; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=KWXJlQODoW3Dlva+TLJt4h05G4FApj1jlcq9YVK/h5s=;
+ b=WLKk3VUNOoC4xX8pUvqwvjWSKvAUF/Z5wwnygLiO64qMP0D1FOmki/Q/umxCH036mQ
+ 7x53zgC0bFv+j3C/3jXsIk51gjQvZ8phctgA3rlPFYyMxhOWWBc5kv7lsNAaVHPxe9j5
+ PwaryybP9wznVNT3zmG+vWf38kDfL5RqfyGSn98mzIyWdCb4LVEb7RBqxjuRlgnw+v9+
+ uDQpCb8ZUwkPsKPDXs67g4kSUvJZU0r9pI9MK/DB/VCvRNdn0HvCpD95fzhx4bhfBxc1
+ K4zxQznMp/47lfPu/MYD183lUlQ3l/229r26KIT+mokYjxMHPsLTlg3ArR2sglP/4cWU
+ kR3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725600072; x=1726204872;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=F1BC3Ksc0AHRCzjCKQmIMGvREjxMf310PwjluIaLY8Y=;
- b=AgKr+KMTxoAOrFN1pjTvTd8foHJ57k4ifT9rpF2clvlIk4FaZBOXmw0Naksa2e4PFG
- tsiU9T9yITTb2kfv7/++bw6vVl5f4TrCuFwP1s2FMpQG4howCMi98kVKlOpLMMOSSwxq
- 61/GYElRzyOiYPlHbJxTrtfM00+moCpcHWPRXmYowjwesqc9HFrb3WqBrmGE5gLmv4et
- N72DUO4kzK/p+v6f++z7bkpAM6P2M8lpVnLWxFws7GtFpfgqD7aZac1q6hJxoKVYndcO
- rx+kl4LKRTfYvKKgM9N/e0vrSQHEq+vB3ZboqMuVZZSpcX/7hSt9Ds1iCWRNyJAY3aLs
- 97Zg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWbIMYQC0MhclvuMpA7aXaj1F9Q3olv9ZdVEe1S/cExHfkymP4OaJtUi/Tp3U458eTmBC/NhOM6/pfL@nongnu.org
-X-Gm-Message-State: AOJu0YwGujG6eHdFN2tm138TDk8E9uZmn+NXS8CdszY8uYsTr7etiBCd
- /B8vdnax5lpdennLGy1kWHHMbcrziwhLvKUWSI6csoQncXbg4S6npSntwt0T1U5L8pRs6+3jKSJ
- 00EkvMXJnYQfAx9E+Rb0J9dm6MrM=
-X-Google-Smtp-Source: AGHT+IEJw5Ltdm7hwJZkVNY96N2J/sXl+NgEmLJ/88EH0EVyzmgDQF8eswFq8Uji07WG8pKGVzKrIinmumuZgXdtJmI=
-X-Received: by 2002:a05:6122:36a6:b0:4f2:a974:29e5 with SMTP id
- 71dfb90a1353d-50207ebec76mr1873996e0c.1.1725600072456; Thu, 05 Sep 2024
- 22:21:12 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1725609034; x=1726213834;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=KWXJlQODoW3Dlva+TLJt4h05G4FApj1jlcq9YVK/h5s=;
+ b=HP9omfn3x+6QDBVmVvuxGbe3ZQiJ/zxQeScWmbC+/437qD3+lPkGyLubEqeBAkX2TF
+ 5ksTzlAV0gQ+OEka6up45ZTvoqXpPXNknGk9zYEBcWEyk1CXpn1URPu9QBSU9hmsf/d3
+ /21ibtMmaLZtdEY7V4Z8fwl4bBoHpyeBtRWEAkS47IGP90+0RBUwxnru4sNMpXL0jtuR
+ BC79a/MlnIv9cZFTMMoJykEvaCr4ySDltIiORQeHP1N50dN1nFgzMbiaAj2Y5CgnjkXq
+ W3wGDV6UJ+drPhnNFFeZqkd7YzWPPkn9vlZ8060rlfDeTzkEyZfwDLRhoVoeYiBX5XuF
+ j96A==
+X-Gm-Message-State: AOJu0Yx5S0BKB9O1rTC9LRFCtoiIGrbHesOho1YoYx1eCQZMSGe2Vrff
+ qLa6peDLMaT4HhCy7LClZY9gVMPC4f02x1FGPCnkcdB1OosfdzX2WOWATZ4TIUzZWi7llIScdIU
+ S
+X-Google-Smtp-Source: AGHT+IFRFsIklq/If21wqV9usrIs1D0HzpBAYCFw8hscrW2shi3NGLDOz2b/j6Pi2nY5aAo+hNWQDA==
+X-Received: by 2002:adf:8b5a:0:b0:374:be8e:7325 with SMTP id
+ ffacd0b85a97d-374be8e742fmr12541801f8f.51.1725609033595; 
+ Fri, 06 Sep 2024 00:50:33 -0700 (PDT)
+Received: from [192.168.1.67] ([78.196.4.158])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3749ee4a5edsm21208313f8f.1.2024.09.06.00.50.32
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 06 Sep 2024 00:50:33 -0700 (PDT)
+Message-ID: <9abc2f6e-6352-4083-b396-250e1ac23fb0@linaro.org>
+Date: Fri, 6 Sep 2024 09:50:32 +0200
 MIME-Version: 1.0
-References: <20240826024657.262553-1-alvinga@andestech.com>
-In-Reply-To: <20240826024657.262553-1-alvinga@andestech.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 6 Sep 2024 15:20:46 +1000
-Message-ID: <CAKmqyKOBqfk1y631dL0jVHtyfmKO1Pwfmg9U5eoGwaCUuAit5g@mail.gmail.com>
-Subject: Re: [PATCH v4 0/2] RISC-V: Add preliminary textra trigger CSR
- functions
-To: Alvin Chang <alvinga@andestech.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, alistair.francis@wdc.com, 
- bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com, 
- zhiwei_liu@linux.alibaba.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2f;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2f.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/8] tests/qtest/hd-geo-test: Check for availability of
+ "pc" machine before using it
+To: Thomas Huth <thuth@redhat.com>, qemu-devel@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>
+Cc: qemu-riscv@nongnu.org
+References: <20240905191434.694440-1-thuth@redhat.com>
+ <20240905191434.694440-5-thuth@redhat.com>
+Content-Language: en-US
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20240905191434.694440-5-thuth@redhat.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::430;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x430.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -93,48 +97,47 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Aug 26, 2024 at 12:48=E2=80=AFPM Alvin Chang via <qemu-devel@nongnu=
-.org> wrote:
->
-> According to RISC-V Debug specification, the optional textra32 and textra=
-64
-> trigger CSRs can be used to configure additional matching conditions for =
-the
-> triggers.
->
-> This series support to write MHVALUE and MHSELECT fields into textra32 an=
-d
-> textra64 trigger CSRs. Besides, the additional matching condition between
-> textra.MHVALUE and mcontext CSR is also implemented.
->
-> Changes from v3:
-> - Simplify the comparison between mcontext and textra.MHVALUE
->
-> Changes from v2:
-> - Remove redundant log
->
-> Changes from v1:
-> - Log that mhselect only supports 0 or 4 for now
-> - Simplify writing of tdata3
->
-> Alvin Chang (2):
->   target/riscv: Preliminary textra trigger CSR writting support
->   target/riscv: Add textra matching condition for the triggers
+On 5/9/24 21:14, Thomas Huth wrote:
+> In case QEMU has been configured with "--without-default-devices", the
+> "pc" machine type might be missing in the binary. We should check for
+> its availability before using it.
+> 
+> Signed-off-by: Thomas Huth <thuth@redhat.com>
+> ---
+>   tests/qtest/hd-geo-test.c | 71 +++++++++++++++++++++------------------
+>   1 file changed, 38 insertions(+), 33 deletions(-)
+> 
+> diff --git a/tests/qtest/hd-geo-test.c b/tests/qtest/hd-geo-test.c
+> index d08bffad91..85eb8d7668 100644
+> --- a/tests/qtest/hd-geo-test.c
+> +++ b/tests/qtest/hd-geo-test.c
+> @@ -1074,17 +1074,26 @@ int main(int argc, char **argv)
+>           }
+>       }
+>   
+> -    qtest_add_func("hd-geo/ide/none", test_ide_none);
+> -    qtest_add_func("hd-geo/ide/drive/mbr/blank", test_ide_drive_mbr_blank);
+> -    qtest_add_func("hd-geo/ide/drive/mbr/lba", test_ide_drive_mbr_lba);
+> -    qtest_add_func("hd-geo/ide/drive/mbr/chs", test_ide_drive_mbr_chs);
+> -    qtest_add_func("hd-geo/ide/drive/cd_0", test_ide_drive_cd_0);
+> -    qtest_add_func("hd-geo/ide/device/mbr/blank", test_ide_device_mbr_blank);
+> -    qtest_add_func("hd-geo/ide/device/mbr/lba", test_ide_device_mbr_lba);
+> -    qtest_add_func("hd-geo/ide/device/mbr/chs", test_ide_device_mbr_chs);
+> -    qtest_add_func("hd-geo/ide/device/user/chs", test_ide_device_user_chs);
+> -    qtest_add_func("hd-geo/ide/device/user/chst", test_ide_device_user_chst);
+> -    if (have_qemu_img()) {
+> +    if (qtest_has_machine("pc")) {
+> +        qtest_add_func("hd-geo/ide/none", test_ide_none);
+> +        qtest_add_func("hd-geo/ide/drive/mbr/blank", test_ide_drive_mbr_blank);
+> +        qtest_add_func("hd-geo/ide/drive/mbr/lba", test_ide_drive_mbr_lba);
+> +        qtest_add_func("hd-geo/ide/drive/mbr/chs", test_ide_drive_mbr_chs);
+> +        qtest_add_func("hd-geo/ide/drive/cd_0", test_ide_drive_cd_0);
+> +        qtest_add_func("hd-geo/ide/device/mbr/blank", test_ide_device_mbr_blank);
+> +        qtest_add_func("hd-geo/ide/device/mbr/lba", test_ide_device_mbr_lba);
+> +        qtest_add_func("hd-geo/ide/device/mbr/chs", test_ide_device_mbr_chs);
+> +        qtest_add_func("hd-geo/ide/device/user/chs", test_ide_device_user_chs);
+> +        qtest_add_func("hd-geo/ide/device/user/chst", test_ide_device_user_chst);
 
-Thanks!
-
-Applied to riscv-to-apply.next
-
-Alistair
-
->
->  target/riscv/cpu_bits.h |  10 ++++
->  target/riscv/debug.c    | 114 +++++++++++++++++++++++++++++++++++++---
->  target/riscv/debug.h    |   3 ++
->  3 files changed, 120 insertions(+), 7 deletions(-)
->
-> --
-> 2.34.1
->
->
+Just wondering, could a qtest_add_machine_func() method be helpful?
+Maybe not if we want to check for multiple machines?
 
