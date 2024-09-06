@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20B3BCD5BDD
-	for <qemu-riscv@archiver.kernel.org>; Fri,  6 Sep 2024 05:25:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41211CD5BDD
+	for <qemu-riscv@archiver.kernel.org>; Fri,  6 Sep 2024 05:26:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1smRQi-0000us-Os; Fri, 06 Sep 2024 01:22:44 -0400
+	id 1smRPX-0001ww-5Y; Fri, 06 Sep 2024 01:21:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1smRQN-0007dc-9A; Fri, 06 Sep 2024 01:22:24 -0400
-Received: from mail-vs1-xe2b.google.com ([2607:f8b0:4864:20::e2b])
+ id 1smRPI-0000XP-L0; Fri, 06 Sep 2024 01:21:19 -0400
+Received: from mail-vk1-xa2f.google.com ([2607:f8b0:4864:20::a2f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1smRQL-0000SJ-HJ; Fri, 06 Sep 2024 01:22:23 -0400
-Received: by mail-vs1-xe2b.google.com with SMTP id
- ada2fe7eead31-49bcfbc732eso537103137.3; 
- Thu, 05 Sep 2024 22:22:20 -0700 (PDT)
+ id 1smRPF-0000IQ-W4; Fri, 06 Sep 2024 01:21:16 -0400
+Received: by mail-vk1-xa2f.google.com with SMTP id
+ 71dfb90a1353d-4fd142a798eso440301e0c.3; 
+ Thu, 05 Sep 2024 22:21:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1725600140; x=1726204940; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1725600072; x=1726204872; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Lb9CyT2Mz/f/J9Y1XlwA6FFJMUqTNefZ6WHuzpE919c=;
- b=Zag6cGifePbveW40s61pux+2VEF+ioWWoGHOd/fa+xxzDcq7LnHOEDB/bo7N5VevbX
- hlTjS/kmDQ9yctiWndfKs5QiI4hW1FmJ1DJnlOBovgIG2lC+nn8lNBHRjnZxshVNiI2S
- c0x5+s86VMT56uV+0PQaYpYJvh2edZ5OSy0g5potRaY3VSz7JaTlHHU0T5cIwwUE7DVN
- 9C3gf86R6BtI4q1Cw9QiBbMpimPPI1bsHHKFa3+LsEqkGOf4kbKSFVdrrxhSp/oIX9KD
- CigeZu+/C5gfWfE4oStKIfbLQ4boBigSAbDeGhFd1fPSxAGYewK7ELppCA0C3YmY3pcz
- 2sUQ==
+ bh=F1BC3Ksc0AHRCzjCKQmIMGvREjxMf310PwjluIaLY8Y=;
+ b=YMYQ1S/MF2v11FCrTv0aMzpycuHco+jWmnyxShQNVzMus6yxlV45mT6Z/VqcQJNyQr
+ V5hpK02jl0PzhDvO4S3qnRxFkUQ0luc0tTtkKr1OVireRarMxYUMV7eYP1j1VHqKFGji
+ nMTKAXoHI4H916AmolVEyF27mwagYcmSkczkoUla1JOwEovMG51c/q5CYlea+7s8RGnR
+ RRl+UZQbVS2FPMdaG8BijWxiqXXGzsPyNL9x14mb9X0vEwtVtkiMud7Fi9571jU+ZSTZ
+ huoSN1WO7fCCXHt2cZn+/YJ7z5VBxzz1F3fMkqos8nYw+v8GvORg76kUVwjm/p2GX1b1
+ bung==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725600140; x=1726204940;
+ d=1e100.net; s=20230601; t=1725600072; x=1726204872;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Lb9CyT2Mz/f/J9Y1XlwA6FFJMUqTNefZ6WHuzpE919c=;
- b=mm1Z28Zv0i/+YkoxrqBoooZ+UQa/juayjBUQgnhzbg678P5JGth2OujnDfRvOd4JbO
- vZbqBz5RFM52KjpQbR/kbUmf3zZBO/0SA4CYv2qLrmRmWYYKoSrGrblaL9azNA5u5/rJ
- 3l5yG99eu6Ymz2N1T+qIramH8bwqT5l25OdcLczKnRojGJCqMerkCd9453H8ihF95xNo
- 03dR8mFvgym9/QzPM9wddJNEj62jQR/E/owdFZUd4LNEC9VWXPqMEU46G2NcCsOiI3Ir
- /boWJpv8A9NVStfIUhcizuJqfxeOgllUgtOHw3uP+0oDSUsAwiiQpv6EF/HrPGjjl9V4
- fqZQ==
+ bh=F1BC3Ksc0AHRCzjCKQmIMGvREjxMf310PwjluIaLY8Y=;
+ b=AgKr+KMTxoAOrFN1pjTvTd8foHJ57k4ifT9rpF2clvlIk4FaZBOXmw0Naksa2e4PFG
+ tsiU9T9yITTb2kfv7/++bw6vVl5f4TrCuFwP1s2FMpQG4howCMi98kVKlOpLMMOSSwxq
+ 61/GYElRzyOiYPlHbJxTrtfM00+moCpcHWPRXmYowjwesqc9HFrb3WqBrmGE5gLmv4et
+ N72DUO4kzK/p+v6f++z7bkpAM6P2M8lpVnLWxFws7GtFpfgqD7aZac1q6hJxoKVYndcO
+ rx+kl4LKRTfYvKKgM9N/e0vrSQHEq+vB3ZboqMuVZZSpcX/7hSt9Ds1iCWRNyJAY3aLs
+ 97Zg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXaSBKsSGZPkCJNG/DWGvDT1vjLSWJGwKI5zJ9cLIK2buiJy1FzpJX1ato31jkdhp1++1X+0rdNn/+n@nongnu.org
-X-Gm-Message-State: AOJu0Yz3gZTFJL+SfT+a93kKbYnJSY1s5i+b0VZpkegXP6eR76K/i55T
- 0E1JhwTdrhnt8jDJmYBhjdYrqHaNeP5hqa2HBwBNmguBMmjxTmzvcF6hqeebrw988eAw8DNGeMT
- UhfmSaggmG0S3pIQtx2SQ7WjhCRE=
-X-Google-Smtp-Source: AGHT+IGK4te7aGaVonw84FO7O/F3aH8alWcJ86rOgHcUYmuj6zaXVrowSpLrqySHMDCat1t7Se+cgXeU+Dtz7UlWiE0=
-X-Received: by 2002:a05:6102:2ad5:b0:498:e517:70dd with SMTP id
- ada2fe7eead31-49bde1a0100mr1583951137.12.1725600140047; Thu, 05 Sep 2024
- 22:22:20 -0700 (PDT)
+ AJvYcCWbIMYQC0MhclvuMpA7aXaj1F9Q3olv9ZdVEe1S/cExHfkymP4OaJtUi/Tp3U458eTmBC/NhOM6/pfL@nongnu.org
+X-Gm-Message-State: AOJu0YwGujG6eHdFN2tm138TDk8E9uZmn+NXS8CdszY8uYsTr7etiBCd
+ /B8vdnax5lpdennLGy1kWHHMbcrziwhLvKUWSI6csoQncXbg4S6npSntwt0T1U5L8pRs6+3jKSJ
+ 00EkvMXJnYQfAx9E+Rb0J9dm6MrM=
+X-Google-Smtp-Source: AGHT+IEJw5Ltdm7hwJZkVNY96N2J/sXl+NgEmLJ/88EH0EVyzmgDQF8eswFq8Uji07WG8pKGVzKrIinmumuZgXdtJmI=
+X-Received: by 2002:a05:6122:36a6:b0:4f2:a974:29e5 with SMTP id
+ 71dfb90a1353d-50207ebec76mr1873996e0c.1.1725600072456; Thu, 05 Sep 2024
+ 22:21:12 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240903201633.93182-1-dbarboza@ventanamicro.com>
-In-Reply-To: <20240903201633.93182-1-dbarboza@ventanamicro.com>
+References: <20240826024657.262553-1-alvinga@andestech.com>
+In-Reply-To: <20240826024657.262553-1-alvinga@andestech.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 6 Sep 2024 15:21:54 +1000
-Message-ID: <CAKmqyKNeFdp0ruZ7GZK-+T9RZD=zY67HDzsC=x-FrLRaiYwycA@mail.gmail.com>
-Subject: Re: [PATCH v7 00/12] riscv: QEMU RISC-V IOMMU Support
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com, ajones@ventanamicro.com, tjeznach@rivosinc.com
+Date: Fri, 6 Sep 2024 15:20:46 +1000
+Message-ID: <CAKmqyKOBqfk1y631dL0jVHtyfmKO1Pwfmg9U5eoGwaCUuAit5g@mail.gmail.com>
+Subject: Re: [PATCH v4 0/2] RISC-V: Add preliminary textra trigger CSR
+ functions
+To: Alvin Chang <alvinga@andestech.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, alistair.francis@wdc.com, 
+ bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com, 
+ zhiwei_liu@linux.alibaba.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2b;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2f;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2f.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -92,64 +93,33 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Sep 4, 2024 at 6:17=E2=80=AFAM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+On Mon, Aug 26, 2024 at 12:48=E2=80=AFPM Alvin Chang via <qemu-devel@nongnu=
+.org> wrote:
 >
-> Hi,
+> According to RISC-V Debug specification, the optional textra32 and textra=
+64
+> trigger CSRs can be used to configure additional matching conditions for =
+the
+> triggers.
 >
-> In this new version the only significant code change was made in patch
-> 3, where we're no longer modifying the host address with the translated
-> address. The remaining of the changes consist in adding more in-code
-> docs (a.k.a comments) on the design choices made in the emulation.
+> This series support to write MHVALUE and MHSELECT fields into textra32 an=
+d
+> textra64 trigger CSRs. Besides, the additional matching condition between
+> textra.MHVALUE and mcontext CSR is also implemented.
 >
-> The docs were also changed to mention that, to test this emulation,
-> we're using the following kernel:
+> Changes from v3:
+> - Simplify the comparison between mcontext and textra.MHVALUE
 >
-> https://github.com/ventanamicro/linux/tree/dev-upstream
+> Changes from v2:
+> - Remove redundant log
 >
-> it is based on the latest kernel support posted by Tomasz with
-> additional features like VFIO passthrough and irqbypass. Users can use
-> this kernel for testing, if they want, until the kernel upstream support
-> is more feature completed. At that point we'll remove this Ventana Micro
-> github repo from the docs and point to the upstream kernel.
+> Changes from v1:
+> - Log that mhselect only supports 0 or 4 for now
+> - Simplify writing of tdata3
 >
-> Patches based on alistair/riscv-to-apply.next.
->
-> All patches reviewed/acked.
->
-> Changes from v6:
-> - patch 2:
->   - align RISCV_IOMMU_REG_ICVEC macro value 0x02F8
-> - patch 3:
->   - do not modify the host address with the translated (guest) address in
->     riscv_iommu_msi_write(), RISCV_IOMMU_MSI_PTE_M_BASIC case
->   - added a comment explaining the need for the IOVA =3D=3D GPA check
-> - patch 8:
->   - added a comment explaining the design decision to not cache identity-=
-mapped
->     translations in riscv_iommu_translate()
-> - patch 12:
->   - added extra info about how the IOMMU emulation is being tested and
->     which kernel branch users can try it out
-> - v6 link: https://lore.kernel.org/qemu-riscv/20240801154334.1009852-1-db=
-arboza@ventanamicro.com/
->
->
-> Daniel Henrique Barboza (4):
->   pci-ids.rst: add Red Hat pci-id for RISC-V IOMMU device
->   test/qtest: add riscv-iommu-pci tests
->   qtest/riscv-iommu-test: add init queues test
->   docs/specs: add riscv-iommu
->
-> Tomasz Jeznach (8):
->   exec/memtxattr: add process identifier to the transaction attributes
->   hw/riscv: add riscv-iommu-bits.h
->   hw/riscv: add RISC-V IOMMU base emulation
->   hw/riscv: add riscv-iommu-pci reference device
->   hw/riscv/virt.c: support for RISC-V IOMMU PCIDevice hotplug
->   hw/riscv/riscv-iommu: add Address Translation Cache (IOATC)
->   hw/riscv/riscv-iommu: add ATS support
->   hw/riscv/riscv-iommu: add DBG support
+> Alvin Chang (2):
+>   target/riscv: Preliminary textra trigger CSR writting support
+>   target/riscv: Add textra matching condition for the triggers
 
 Thanks!
 
@@ -158,43 +128,13 @@ Applied to riscv-to-apply.next
 Alistair
 
 >
->  docs/specs/index.rst             |    1 +
->  docs/specs/pci-ids.rst           |    2 +
->  docs/specs/riscv-iommu.rst       |   90 ++
->  docs/system/riscv/virt.rst       |   13 +
->  hw/riscv/Kconfig                 |    4 +
->  hw/riscv/meson.build             |    1 +
->  hw/riscv/riscv-iommu-bits.h      |  421 ++++++
->  hw/riscv/riscv-iommu-pci.c       |  202 +++
->  hw/riscv/riscv-iommu.c           | 2431 ++++++++++++++++++++++++++++++
->  hw/riscv/riscv-iommu.h           |  149 ++
->  hw/riscv/trace-events            |   17 +
->  hw/riscv/trace.h                 |    1 +
->  hw/riscv/virt.c                  |   33 +-
->  include/exec/memattrs.h          |    5 +
->  include/hw/pci/pci.h             |    1 +
->  include/hw/riscv/iommu.h         |   36 +
->  meson.build                      |    1 +
->  tests/qtest/libqos/meson.build   |    4 +
->  tests/qtest/libqos/riscv-iommu.c |   76 +
->  tests/qtest/libqos/riscv-iommu.h |  101 ++
->  tests/qtest/meson.build          |    1 +
->  tests/qtest/riscv-iommu-test.c   |  220 +++
->  22 files changed, 3809 insertions(+), 1 deletion(-)
->  create mode 100644 docs/specs/riscv-iommu.rst
->  create mode 100644 hw/riscv/riscv-iommu-bits.h
->  create mode 100644 hw/riscv/riscv-iommu-pci.c
->  create mode 100644 hw/riscv/riscv-iommu.c
->  create mode 100644 hw/riscv/riscv-iommu.h
->  create mode 100644 hw/riscv/trace-events
->  create mode 100644 hw/riscv/trace.h
->  create mode 100644 include/hw/riscv/iommu.h
->  create mode 100644 tests/qtest/libqos/riscv-iommu.c
->  create mode 100644 tests/qtest/libqos/riscv-iommu.h
->  create mode 100644 tests/qtest/riscv-iommu-test.c
+>  target/riscv/cpu_bits.h |  10 ++++
+>  target/riscv/debug.c    | 114 +++++++++++++++++++++++++++++++++++++---
+>  target/riscv/debug.h    |   3 ++
+>  3 files changed, 120 insertions(+), 7 deletions(-)
 >
 > --
-> 2.45.2
+> 2.34.1
 >
 >
 
