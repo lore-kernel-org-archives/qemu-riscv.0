@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67B4DE6FE49
-	for <qemu-riscv@archiver.kernel.org>; Sun,  8 Sep 2024 12:45:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40EFEE6FE49
+	for <qemu-riscv@archiver.kernel.org>; Sun,  8 Sep 2024 12:46:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1snHGh-0007xP-AE; Sun, 08 Sep 2024 08:43:51 -0400
+	id 1snHGt-0000Lz-Vp; Sun, 08 Sep 2024 08:44:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1snHGZ-0007cD-41; Sun, 08 Sep 2024 08:43:43 -0400
+ id 1snHGs-0000Gb-Rq; Sun, 08 Sep 2024 08:44:02 -0400
 Received: from mgamail.intel.com ([198.175.65.15])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1snHGW-0006B4-L8; Sun, 08 Sep 2024 08:43:42 -0400
+ id 1snHGr-0006B4-4O; Sun, 08 Sep 2024 08:44:02 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1725799421; x=1757335421;
+ t=1725799441; x=1757335441;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=TSPfc9jnTH+S6KC1J5SxKbz8GdCtnNY8LQlYPm781xo=;
- b=g78Yi4LtZW5V2/OaW8hMuXxpj8o+ujYWZKf7V38IcYdiialvOn1KTCwU
- AntHse79grJuGV+OVH/an4N4+hKML89oUj9vKSTdXf84tfmZ5MIaUlzmS
- FzbGpp6s4/VeglwXmempVoKQ5tcaKyDb6tDa5gPCmjqKO3PCLHTsORkOW
- igwHXOGLgxHbZs29QdADB83PFYJZ4VxT4EUuUjmUuJVtO2mYBoQYf1wKB
- Q59rPyIUu6+otcb/dQrepTI8gJh7NryJK9DRwTjsgnm1Ktn+4fV04cL0n
- sGq86LIXbu+6i2fOAm12NWzFedIsYaCP0clvIL7kyb9XTenFoAYJTowYI A==;
-X-CSE-ConnectionGUID: QIiNjsqCTGuJanLVQiRIgw==
-X-CSE-MsgGUID: nrgHHq3vQtKo3b7JsZcH7A==
-X-IronPort-AV: E=McAfee;i="6700,10204,11189"; a="28238133"
-X-IronPort-AV: E=Sophos;i="6.10,212,1719903600"; d="scan'208";a="28238133"
+ bh=BrZawMnp3PVtM7q2OTGYiNtV3fjACaeKSFuVHbGDiaQ=;
+ b=TeCg9CpNgWLo44odzhm4UWWHuXnuELC5PhQOrvelQaDYZQ9v83lLDlKW
+ aNpWpr8XOukicrDF+9kmJTLfbIEL/dr1xZRNRKgikOIa8JRJqpAxv4R08
+ T4WsgaA2H7/zQ1yJTbZ7olj+C2pUvMvKT5dCNmusJNea6P/iZq618OW6C
+ gMoQ82g36YnAdq5aNndahr88+g3R6nxYrez7KdUAQZJI9/RqEvVD7bNeC
+ xi2vjBJPQr1cczgOeck7fQUzLndEDTiZupTTMUmYTI9ydk87hUUciUmqo
+ ColyVMv34nLgdXgYWfXXD83C4WMa7ZNf5V7h9qCxcLBK2ruvTlhylq3Tn g==;
+X-CSE-ConnectionGUID: 1GggMyD0RUSFattXqNOjmQ==
+X-CSE-MsgGUID: HXEKE0KvRvmrQF+VgApmfw==
+X-IronPort-AV: E=McAfee;i="6700,10204,11189"; a="28238241"
+X-IronPort-AV: E=Sophos;i="6.10,212,1719903600"; d="scan'208";a="28238241"
 Received: from fmviesa001.fm.intel.com ([10.60.135.141])
  by orvoesa107.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 08 Sep 2024 05:43:38 -0700
-X-CSE-ConnectionGUID: AjKzOl2aREyuLMigLk23Mg==
-X-CSE-MsgGUID: AsWhvwaES2qXYgNnMwSxEA==
+ 08 Sep 2024 05:44:00 -0700
+X-CSE-ConnectionGUID: WDHpijXHQzaJkHt2SmF1yQ==
+X-CSE-MsgGUID: e9ixptPWRbKmrxsLHzpRhA==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.10,212,1719903600"; d="scan'208";a="97196521"
+X-IronPort-AV: E=Sophos;i="6.10,212,1719903600"; d="scan'208";a="97196648"
 Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
- by fmviesa001.fm.intel.com with ESMTP; 08 Sep 2024 05:43:32 -0700
+ by fmviesa001.fm.intel.com with ESMTP; 08 Sep 2024 05:43:54 -0700
 From: Zhao Liu <zhao1.liu@intel.com>
 To: =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
  Igor Mammedov <imammedo@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
@@ -63,9 +63,10 @@ Cc: qemu-devel@nongnu.org, kvm@vger.kernel.org, qemu-riscv@nongnu.org,
  qemu-arm@nongnu.org, Zhenyu Wang <zhenyu.z.wang@intel.com>,
  Dapeng Mi <dapeng1.mi@linux.intel.com>, Yongwei Ma <yongwei.ma@intel.com>,
  Zhao Liu <zhao1.liu@intel.com>
-Subject: [PATCH v2 2/7] qapi/qom: Define cache enumeration and properties
-Date: Sun,  8 Sep 2024 20:59:15 +0800
-Message-Id: <20240908125920.1160236-3-zhao1.liu@intel.com>
+Subject: [PATCH v2 6/7] i386/cpu: Update cache topology with machine's
+ configuration
+Date: Sun,  8 Sep 2024 20:59:19 +0800
+Message-Id: <20240908125920.1160236-7-zhao1.liu@intel.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240908125920.1160236-1-zhao1.liu@intel.com>
 References: <20240908125920.1160236-1-zhao1.liu@intel.com>
@@ -95,141 +96,78 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The x86 and ARM need to allow user to configure cache properties
-(current only topology):
- * For x86, the default cache topology model (of max/host CPU) does not
-   always match the Host's real physical cache topology. Performance can
-   increase when the configured virtual topology is closer to the
-   physical topology than a default topology would be.
- * For ARM, QEMU can't get the cache topology information from the CPU
-   registers, then user configuration is necessary. Additionally, the
-   cache information is also needed for MPAM emulation (for TCG) to
-   build the right PPTT.
+User will configure smp cache topology via -machine smp-cache.
 
-Define smp-cache related enumeration and properties in QAPI, so that
-user could configure cache properties for SMP system through -machine in
-the subsequent patch.
+For this case, update the x86 CPUs' cache topology with user's
+configuration in MachineState.
 
-Cache enumeration (CacheLevelAndType) is implemented as the combination
-of cache level (level 1/2/3) and cache type (data/instruction/unified).
-
-Currently, separated L1 cache (L1 data cache and L1 instruction cache)
-with unified higher-level cache (e.g., unified L2 and L3 caches), is the
-most common cache architectures.
-
-Therefore, enumerate the L1 D-cache, L1 I-cache, L2 cache and L3 cache
-with smp-cache object to add the basic cache topology support. Other
-kinds of caches (e.g., L1 unified or L2/L3 separated caches) can be
-added directly into CacheLevelAndType if necessary.
-
-Cache properties (SmpCacheProperties) currently only contains cache
-topology information, and other cache properties can be added in it
-if necessary.
-
-Note, define cache topology based on CPU topology level with two
-reasons:
-
- 1. In practice, a cache will always be bound to the CPU container
-    (either private in the CPU container or shared among multiple
-    containers), and CPU container is often expressed in terms of CPU
-    topology level.
- 2. The x86's cache-related CPUIDs encode cache topology based on APIC
-    ID's CPU topology layout. And the ACPI PPTT table that ARM/RISCV
-    relies on also requires CPU containers to help indicate the private
-    shared hierarchy of the cache. Therefore, for SMP systems, it is
-    natural to use the CPU topology hierarchy directly in QEMU to define
-    the cache topology.
-
-Suggested-by: Daniel P. Berrange <berrange@redhat.com>
 Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
 Tested-by: Yongwei Ma <yongwei.ma@intel.com>
 ---
-Suggested by credit:
- * Referred to Daniel's suggestion to introduce cache object list.
----
-Changes since Patch v1:
- * Renamed SMPCacheProperty/SMPCacheProperties (QAPI structures) to
-   SmpCacheProperties/SmpCachePropertiesWrapper. (Markus)
- * Renamed SMPCacheName (QAPI structure) to SmpCacheLevelAndType and
-   dropped prefix. (Markus)
- * Renamed 'name' field in SmpCacheProperties to 'cache', since the
-   type and level of the cache in SMP system could be able to specify
-   all of these kinds of cache explicitly enough.
- * Renamed 'topo' field in SmpCacheProperties to 'topology'. (Markus)
- * Returned error information when user repeats setting cache
-   properties. (Markus)
- * Renamed SmpCacheLevelAndType to CacheLevelAndType, since this
-   representation is general across SMP or hybrid system.
- * Dropped handwriten smp-cache object and integrated cache pproperties
-   list into MachineState (in next patch). (Markus)
- * Added the reason why x86 and ARM need to configure cache
-   information. (Markus and Jonathan)
-
 Changes since RFC v2:
- * New commit to implement cache list with JSON format instead of
-   multiple sub-options in -smp.
+ * Used smp_cache array to override cache topology.
+ * Wrapped the updating into a function.
 ---
- qapi/machine-common.json | 50 ++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 50 insertions(+)
+ target/i386/cpu.c | 39 +++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 39 insertions(+)
 
-diff --git a/qapi/machine-common.json b/qapi/machine-common.json
-index 148a2c8dccca..f6fe1a208214 100644
---- a/qapi/machine-common.json
-+++ b/qapi/machine-common.json
-@@ -63,3 +63,53 @@
- { 'enum': 'CpuTopologyLevel',
-   'data': [ 'invalid', 'thread', 'core', 'module', 'cluster',
-             'die', 'socket', 'book', 'drawer', 'default' ] }
+diff --git a/target/i386/cpu.c b/target/i386/cpu.c
+index e9f755000356..6d9f7dc0872a 100644
+--- a/target/i386/cpu.c
++++ b/target/i386/cpu.c
+@@ -7597,6 +7597,38 @@ static void x86_cpu_hyperv_realize(X86CPU *cpu)
+     cpu->hyperv_limits[2] = 0;
+ }
+ 
++#ifndef CONFIG_USER_ONLY
++static void x86_cpu_update_smp_cache_topo(MachineState *ms, X86CPU *cpu)
++{
++    CPUX86State *env = &cpu->env;
++    CpuTopologyLevel level;
 +
-+##
-+# @CacheLevelAndType:
-+#
-+# Caches a system may have.  The enumeration value here is the
-+# combination of cache level and cache type.
-+#
-+# @l1d: L1 data cache.
-+#
-+# @l1i: L1 instruction cache.
-+#
-+# @l2: L2 (unified) cache.
-+#
-+# @l3: L3 (unified) cache
-+#
-+# Since: 9.1
-+##
-+{ 'enum': 'CacheLevelAndType',
-+  'data': [ 'l1d', 'l1i', 'l2', 'l3' ] }
++    level = machine_get_cache_topo_level(ms, CACHE_LEVEL_AND_TYPE_L1D);
++    if (level != CPU_TOPOLOGY_LEVEL_DEFAULT) {
++        env->cache_info_cpuid4.l1d_cache->share_level = level;
++        env->cache_info_amd.l1d_cache->share_level = level;
++    }
 +
-+##
-+# @SmpCacheProperties:
-+#
-+# Cache information for SMP system.
-+#
-+# @cache: Cache name, which is the combination of cache level
-+#     and cache type.
-+#
-+# @topology: Cache topology level.  It accepts the CPU topology
-+#     enumeration as the parameter, i.e., CPUs in the same
-+#     topology container share the same cache.
-+#
-+# Since: 9.1
-+##
-+{ 'struct': 'SmpCacheProperties',
-+  'data': {
-+  'cache': 'CacheLevelAndType',
-+  'topology': 'CpuTopologyLevel' } }
++    level = machine_get_cache_topo_level(ms, CACHE_LEVEL_AND_TYPE_L1I);
++    if (level != CPU_TOPOLOGY_LEVEL_DEFAULT) {
++        env->cache_info_cpuid4.l1i_cache->share_level = level;
++        env->cache_info_amd.l1i_cache->share_level = level;
++    }
 +
-+##
-+# @SmpCachePropertiesWrapper:
-+#
-+# List wrapper of SmpCacheProperties.
-+#
-+# @caches: the list of SmpCacheProperties.
-+#
-+# Since 9.1
-+##
-+{ 'struct': 'SmpCachePropertiesWrapper',
-+  'data': { 'caches': ['SmpCacheProperties'] } }
++    level = machine_get_cache_topo_level(ms, CACHE_LEVEL_AND_TYPE_L2);
++    if (level != CPU_TOPOLOGY_LEVEL_DEFAULT) {
++        env->cache_info_cpuid4.l2_cache->share_level = level;
++        env->cache_info_amd.l2_cache->share_level = level;
++    }
++
++    level = machine_get_cache_topo_level(ms, CACHE_LEVEL_AND_TYPE_L3);
++    if (level != CPU_TOPOLOGY_LEVEL_DEFAULT) {
++        env->cache_info_cpuid4.l3_cache->share_level = level;
++        env->cache_info_amd.l3_cache->share_level = level;
++    }
++}
++#endif
++
+ static void x86_cpu_realizefn(DeviceState *dev, Error **errp)
+ {
+     CPUState *cs = CPU(dev);
+@@ -7821,6 +7853,13 @@ static void x86_cpu_realizefn(DeviceState *dev, Error **errp)
+ 
+ #ifndef CONFIG_USER_ONLY
+     MachineState *ms = MACHINE(qdev_get_machine());
++
++    /*
++     * TODO: Add a SMPCompatProps.has_caches flag to avoid useless Updates
++     * if user didn't set smp_cache.
++     */
++    x86_cpu_update_smp_cache_topo(ms, cpu);
++
+     qemu_register_reset(x86_cpu_machine_reset_cb, cpu);
+ 
+     if (cpu->env.features[FEAT_1_EDX] & CPUID_APIC || ms->smp.cpus > 1) {
 -- 
 2.34.1
 
