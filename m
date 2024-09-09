@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B56ECCD4F4C
-	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Sep 2024 02:33:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64335EB64DE
+	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Sep 2024 02:39:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1snUCh-0007uA-ND; Sun, 08 Sep 2024 22:32:35 -0400
+	id 1snUIy-0008VH-2a; Sun, 08 Sep 2024 22:39:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1snUCg-0007ri-3G; Sun, 08 Sep 2024 22:32:34 -0400
-Received: from mail-vk1-xa2f.google.com ([2607:f8b0:4864:20::a2f])
+ id 1snUIq-0008UM-R8; Sun, 08 Sep 2024 22:38:59 -0400
+Received: from mail-ua1-x92d.google.com ([2607:f8b0:4864:20::92d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1snUCe-0003CP-D3; Sun, 08 Sep 2024 22:32:33 -0400
-Received: by mail-vk1-xa2f.google.com with SMTP id
- 71dfb90a1353d-5012778824eso871930e0c.2; 
- Sun, 08 Sep 2024 19:32:31 -0700 (PDT)
+ id 1snUIp-0003iB-7d; Sun, 08 Sep 2024 22:38:56 -0400
+Received: by mail-ua1-x92d.google.com with SMTP id
+ a1e0cc1a2514c-846bdc20098so794072241.3; 
+ Sun, 08 Sep 2024 19:38:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1725849150; x=1726453950; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1725849534; x=1726454334; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YxDo2NbMl5xVS+RlRP3XB1wj/izTn7qjmhfx+s6CTJo=;
- b=NXkDhgXxSEjS1kLNJXrESmyWyd45m/j8RY4F3vN+0gHd43d3cwxrctaTa1n2aCFIkx
- 2Lt0vvcWFmqKFnVIAnt7S9BFfNyff85Dtyc3U2HcZj2o3NxgnPm8ETrWaD6LUmVOxXI0
- XBKRVZB3jD/Dgwcy8QFClobr1ejbeQwzc3Hcj4wF2SyMC3ilXzMngHULbTnIouMT8Cuc
- aNniD1uPmVe7jt2esXU6uFvStfO9NmGS+e/VtysrqzbyumFDVZ9zSFCgG96vil4bjO9M
- RuHmFvmdAuTIYYI1x/prQH1lJRD/3XlTxhuK0JBmnjSorXdf/UfjazjT8c0aBvNSLuj6
- IPyA==
+ bh=q9sHyq1Tc0mqXugtuU1NXOCaNYDGK9Wxh3+vNCk8aIY=;
+ b=fkG3/F6H3RgBVFpYPRUBymJbida9/SVBFqk5rNWLGoygCCK7FAoSvVx1AD+0GJ1gXm
+ oLnYzAdKLNI+f0JxXID4FYevrepcbhsBVfYATAA6GhIgo0/AuIDFIFw+vh6VKWdL/dM3
+ iOMvZWdghe1mFKee0eILl8fqxCEPif0wgrmRLx//sgvHdK+8CHFOyKLGyMY0RUr9E5km
+ FJtJL+o3zPQ3srS6BewCnQDSihC7NP/UJOsciCjjaxl5DaxiIibvVyRzTh39G0rHq3ZG
+ F2r2fi/QXG5Vz9eyv5avuHB7YitvMxmk3MC4Jhv3oMvgWWdt1PZJNk0Q/+XBaU2gNMf3
+ 9W4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725849150; x=1726453950;
+ d=1e100.net; s=20230601; t=1725849534; x=1726454334;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YxDo2NbMl5xVS+RlRP3XB1wj/izTn7qjmhfx+s6CTJo=;
- b=nALGr7RgQ2eAms2bwFRsacllSSax2zYqMVDuOKotbM+Aa6FC3Qcdf9RcyqYJsH5hFQ
- dEkmVaoYiescJAJRTsOhz5Bn0ZfLqylX/J1P6qRVO1kMG2wVvmAXNOf6sMOXMl0vW03I
- M5PLeWZn065sZo17STh6yNLRyJ0eMWoW8I+YYhXZpUzF7ytNBdlDq9lzUXBHQU1EtiuG
- ovF+D6HC8zN445qoutBcYXnRAxrqYHZovIChKS5c7nSfkj33xtM+mvcpPWNKBxZ4ktiP
- hTWZWf6dL7GEgybxgBTcG0VntmBCcv/IDjOL9eub+WtK7YqR9Q0BHN1zQ6w68DInsD5p
- y7eA==
+ bh=q9sHyq1Tc0mqXugtuU1NXOCaNYDGK9Wxh3+vNCk8aIY=;
+ b=Z1ow65VVUZ3di1QtiIvfN9EQdsSstNF/VupzesbE34atnH7HFSa4uQ/4vDB1GKHxE/
+ gCqR68dZoF2+aaJMY3YIoSeAYZvSPi+qU2GXcSUDOjj26dI6DaTHLlyJUFOJSOIAFxex
+ 5jKam2QCy9yaaq8QaJ16olQSNeH/n2ced9V2AV6CPxjW+iqCexJbxEaVK69rPVJ/zpgK
+ WlqhWTnqchzefjZ7NccNvfnRYuMwTb3dd/4EKTyBxiO/ySQRq1IjGCw8nTwYlEJGLyYu
+ CGPljziUSrqudO0jC7oVanhS5L3MYOZaA6nMI4iaIvpndJZNVlR9yd3+rN+rfJkh/M5K
+ klLQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVEo2mgN77116K+VZES4YOsaz0g/vsG6Q83zJw6F/XWbzQ4SVg55Tjuiv+4RJmwaECX9rvzCeI1bB3d@nongnu.org
-X-Gm-Message-State: AOJu0Yy6iEHm0jpdN0HgOqB7uykdL5iy1pkrf0Gb496cOZ0ckcy934Dv
- YpUFQMfJr7D5Dh80a3/ocAzeIzFK4jo3u1ga6F1lCS7BnDY3s0acg99RYYz4r9Owq+uCOFx+30W
- rznjlzvAqSPnYyOmQELov+hPRCeM=
-X-Google-Smtp-Source: AGHT+IE++334V6F6KORjl4SiPBdT+/S6jI54eRESD5i1VHosSSpqpwZ9km9EYLiYXXgtSgUV4163bXjZ0hMxgktFp2w=
-X-Received: by 2002:a05:6122:2a12:b0:4eb:499a:2453 with SMTP id
- 71dfb90a1353d-502143ca0bamr7280593e0c.8.1725849150058; Sun, 08 Sep 2024
- 19:32:30 -0700 (PDT)
+ AJvYcCWQ4AquOfkCbyRYknMd7bk4DKTUAZ1BK8BmQaYzSKQlr/ioTO+HGqF8mwbodZIINAsyKl4cwVD6me4G+A==@nongnu.org,
+ AJvYcCX3KJwb678E2DSTa3AtITBL20ykm0E0icjhxxCKlwFMa6ZEgEM6znZNNvBSIdij2TlYgyJXxo4pwaVt@nongnu.org
+X-Gm-Message-State: AOJu0YwqEYOD2/3pFKarYXuxZm/z4n2g0MHHU/P4huyw39GMlEOKdBSV
+ bsRP89d2MVe0j2361TyvvpkEX7RNsS94bAvIckDki5yk+KBKjit6MxRV8fki9d/7R1PkPnLU9Fd
+ ZtXJgPAfVQsSDzrCPNuXGsR9NTs0=
+X-Google-Smtp-Source: AGHT+IHexhQDuX0/lT8f0qdwBngy4JFMlMVqZvIeZKEahyi8vextoBQ+W9FS1UiNC9QaFZNqXH4dptDliZkykF8mE0I=
+X-Received: by 2002:a67:f9d6:0:b0:49b:d061:d6f with SMTP id
+ ada2fe7eead31-49bde268077mr9147307137.18.1725849533574; Sun, 08 Sep 2024
+ 19:38:53 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240808081948.25837-1-yongxuan.wang@sifive.com>
-In-Reply-To: <20240808081948.25837-1-yongxuan.wang@sifive.com>
+References: <20240813071355.310710-2-ajones@ventanamicro.com>
+ <aa7facef-acda-4846-98d5-2f7584515035@linaro.org>
+ <20240813-e2c6dc0e68f76be576c72996@orel>
+ <3f1accd0-33b8-4656-944f-f6637ee315b9@linaro.org>
+ <20240813-94c16c9efc943fe891ba7724@orel>
+In-Reply-To: <20240813-94c16c9efc943fe891ba7724@orel>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 9 Sep 2024 12:32:04 +1000
-Message-ID: <CAKmqyKOh9dwx8+oESM5gMmuX8UY7M5-Q5oS=+EuKMR=mk3M-3Q@mail.gmail.com>
-Subject: Re: [PATCH 1/1] hw/intc/riscv_aplic: Check and update pending when
- write sourcecfg
-To: Yong-Xuan Wang <yongxuan.wang@sifive.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, greentime.hu@sifive.com, 
- vincent.chen@sifive.com, frank.chang@sifive.com, jim.shu@sifive.com, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Date: Mon, 9 Sep 2024 12:38:27 +1000
+Message-ID: <CAKmqyKNsxFTyjQM=F5b9VfeZ3GQyLB2UaD36v=2nmtYbu5DdjA@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv32: Fix masking of physical address
+To: Andrew Jones <ajones@ventanamicro.com>
+Cc: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
+ Richard Henderson <richard.henderson@linaro.org>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, 
+ palmer@dabbelt.com, alistair.francis@wdc.com, bmeng.cn@gmail.com, 
+ zong.li@sifive.com, liwei1518@gmail.com, cwshu@andestech.com, 
+ dbarboza@ventanamicro.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2f;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92d;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92d.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -97,120 +100,79 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Aug 8, 2024 at 6:21=E2=80=AFPM Yong-Xuan Wang <yongxuan.wang@sifive=
-.com> wrote:
+On Tue, Aug 13, 2024 at 8:24=E2=80=AFPM Andrew Jones <ajones@ventanamicro.c=
+om> wrote:
 >
-> The section 4.5.2 of the RISC-V AIA specification says that any write
-> to a sourcecfg register of an APLIC might (or might not) cause the
-> corresponding interrupt-pending bit to be set to one if the rectified
-> input value is high (=3D 1) under the new source mode.
+> On Tue, Aug 13, 2024 at 10:21:13AM GMT, Philippe Mathieu-Daud=C3=A9 wrote=
+:
+> > On 13/8/24 10:00, Andrew Jones wrote:
+> > > On Tue, Aug 13, 2024 at 05:43:07PM GMT, Richard Henderson wrote:
+> > > > On 8/13/24 17:13, Andrew Jones wrote:
+> > > > > C doesn't extend the sign bit for unsigned types since there isn'=
+t a
+> > > > > sign bit to extend. This means a promotion of a u32 to a u64 resu=
+lts
+> > > > > in the upper 32 bits of the u64 being zero. If that result is the=
+n
+> > > > > used as a mask on another u64 the upper 32 bits will be cleared. =
+rv32
+> > > > > physical addresses may be up to 34 bits wide, so we don't want to
+> > > > > clear the high bits while page aligning the address. The fix is t=
+o
+> > > > > revert to using target_long, since a signed type will get extende=
+d.
+> > > > >
+> > > > > Fixes: af3fc195e3c8 ("target/riscv: Change the TLB page size depe=
+nds on PMP entries.")
+> > > > > Signed-off-by: Andrew Jones <ajones@ventanamicro.com>
+> > > > > ---
+> > > > >    target/riscv/cpu_helper.c | 2 +-
+> > > > >    1 file changed, 1 insertion(+), 1 deletion(-)
+> > > > >
+> > > > > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.=
+c
+> > > > > index 395a1d914061..dfef1b20d1e8 100644
+> > > > > --- a/target/riscv/cpu_helper.c
+> > > > > +++ b/target/riscv/cpu_helper.c
+> > > > > @@ -1323,7 +1323,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr=
+ address, int size,
+> > > > >        int ret =3D TRANSLATE_FAIL;
+> > > > >        int mode =3D mmuidx_priv(mmu_idx);
+> > > > >        /* default TLB page size */
+> > > > > -    target_ulong tlb_size =3D TARGET_PAGE_SIZE;
+> > > > > +    target_long tlb_size =3D TARGET_PAGE_SIZE;
+> > > >
+> > > > If rv32 physical addresses are 34 bits, then you probably didn't wa=
+nt target_*long at all.
+> > >
+> > > Yes, just using hwaddr for everything that only touches physical addr=
+esses
+> > > would probably be best, but, ifaict, it's pretty common to use target=
+_long
+> > > for masks used on both virtual and physical addresses (TARGET_PAGE_MA=
+SK,
+> > > for example). This 'tlb_size' variable is used on both as well.
+> >
+> > Then maybe you want vaddr ("exec/vaddr.h"):
+> >
+> > /**
+> >  * vaddr:
+> >  * Type wide enough to contain any #target_ulong virtual address.
+> >  */
+> >
 >
-> If an interrupt is asserted before the driver configs its interrupt
-> type to APLIC, it's pending bit will not be set except a relevant
-> write to a setip or setipnum register. When we write the interrupt
-> type to sourcecfg register, if the APLIC device doesn't check
-> rectified input value and update the pending bit, this interrupt
-> might never becomes pending.
->
-> For APLIC.m, we can manully set pending by setip or setipnum
-> registers in driver. But for APLIC.w, the pending status totally
-> depends on the rectified input value, we can't control the pending
-> status via mmio registers. In this case, hw should check and update
-> pending status for us when writing sourcecfg registers.
->
-> Update QEMU emulation to handle "pre-existing" interrupts.
->
-> Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+> I think hwaddr would fit better in this case since riscv32 virtual
+> addresses are 32-bit, but I see vaddr is a u64, so it would work too. I
+> personally don't mind changing the type of tlb_size to hwaddr, but I went
+> with target_long in this patch since that's what it was originally and
+> masking with a signed long mask appears to be a common pattern in QEMU.
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
-
-> ---
->  hw/intc/riscv_aplic.c | 49 +++++++++++++++++++++++++++----------------
->  1 file changed, 31 insertions(+), 18 deletions(-)
->
-> diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
-> index 32edd6d07bb3..2a9ac76ce92e 100644
-> --- a/hw/intc/riscv_aplic.c
-> +++ b/hw/intc/riscv_aplic.c
-> @@ -159,31 +159,41 @@ static bool is_kvm_aia(bool msimode)
->      return kvm_irqchip_in_kernel() && msimode;
->  }
->
-> +static bool riscv_aplic_irq_rectified_val(RISCVAPLICState *aplic,
-> +                                          uint32_t irq)
-> +{
-> +    uint32_t sourcecfg, sm, raw_input, irq_inverted;
-> +
-> +    if (!irq || aplic->num_irqs <=3D irq) {
-> +        return false;
-> +    }
-> +
-> +    sourcecfg =3D aplic->sourcecfg[irq];
-> +    if (sourcecfg & APLIC_SOURCECFG_D) {
-> +        return false;
-> +    }
-> +
-> +    sm =3D sourcecfg & APLIC_SOURCECFG_SM_MASK;
-> +    if (sm =3D=3D APLIC_SOURCECFG_SM_INACTIVE) {
-> +        return false;
-> +    }
-> +
-> +    raw_input =3D (aplic->state[irq] & APLIC_ISTATE_INPUT) ? 1 : 0;
-> +    irq_inverted =3D (sm =3D=3D APLIC_SOURCECFG_SM_LEVEL_LOW ||
-> +                    sm =3D=3D APLIC_SOURCECFG_SM_EDGE_FALL) ? 1 : 0;
-> +    return !!(raw_input ^ irq_inverted);
-> +}
-> +
->  static uint32_t riscv_aplic_read_input_word(RISCVAPLICState *aplic,
->                                              uint32_t word)
->  {
-> -    uint32_t i, irq, sourcecfg, sm, raw_input, irq_inverted, ret =3D 0;
-> +    uint32_t i, irq, rectified_val, ret =3D 0;
->
->      for (i =3D 0; i < 32; i++) {
->          irq =3D word * 32 + i;
-> -        if (!irq || aplic->num_irqs <=3D irq) {
-> -            continue;
-> -        }
-> -
-> -        sourcecfg =3D aplic->sourcecfg[irq];
-> -        if (sourcecfg & APLIC_SOURCECFG_D) {
-> -            continue;
-> -        }
-> -
-> -        sm =3D sourcecfg & APLIC_SOURCECFG_SM_MASK;
-> -        if (sm =3D=3D APLIC_SOURCECFG_SM_INACTIVE) {
-> -            continue;
-> -        }
->
-> -        raw_input =3D (aplic->state[irq] & APLIC_ISTATE_INPUT) ? 1 : 0;
-> -        irq_inverted =3D (sm =3D=3D APLIC_SOURCECFG_SM_LEVEL_LOW ||
-> -                        sm =3D=3D APLIC_SOURCECFG_SM_EDGE_FALL) ? 1 : 0;
-> -        ret |=3D (raw_input ^ irq_inverted) << i;
-> +        rectified_val =3D riscv_aplic_irq_rectified_val(aplic, irq);
-> +        ret |=3D rectified_val << i;
->      }
->
->      return ret;
-> @@ -702,6 +712,9 @@ static void riscv_aplic_write(void *opaque, hwaddr ad=
-dr, uint64_t value,
->              (aplic->sourcecfg[irq] =3D=3D 0)) {
->              riscv_aplic_set_pending_raw(aplic, irq, false);
->              riscv_aplic_set_enabled_raw(aplic, irq, false);
-> +        } else {
-> +            if (riscv_aplic_irq_rectified_val(aplic, irq))
-> +                riscv_aplic_set_pending_raw(aplic, irq, true);
-
-You need curly braces for the if statement. You can run checkpatch.pl
-to catch issues like this
+hwaddr seems like the right approach here
 
 Alistair
 
->          }
->      } else if (aplic->mmode && aplic->msimode &&
->                 (addr =3D=3D APLIC_MMSICFGADDR)) {
-> --
-> 2.17.1
 >
+> Thanks,
+> drew
 >
 
