@@ -4,74 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C93BCD4F4C
-	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Sep 2024 02:42:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9284CD4F4C
+	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Sep 2024 03:27:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1snULl-0004vD-I8; Sun, 08 Sep 2024 22:41:57 -0400
+	id 1snV40-0005z2-IM; Sun, 08 Sep 2024 23:27:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1snULh-0004mL-MP; Sun, 08 Sep 2024 22:41:53 -0400
-Received: from mail-vs1-xe2a.google.com ([2607:f8b0:4864:20::e2a])
+ id 1snV3v-0005vQ-Oy; Sun, 08 Sep 2024 23:27:35 -0400
+Received: from mail-ua1-x933.google.com ([2607:f8b0:4864:20::933])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1snULg-000487-1z; Sun, 08 Sep 2024 22:41:53 -0400
-Received: by mail-vs1-xe2a.google.com with SMTP id
- ada2fe7eead31-49bd2b37fe9so1051125137.1; 
- Sun, 08 Sep 2024 19:41:50 -0700 (PDT)
+ id 1snV3u-0000QZ-1w; Sun, 08 Sep 2024 23:27:35 -0400
+Received: by mail-ua1-x933.google.com with SMTP id
+ a1e0cc1a2514c-846bc2104c8so2177153241.0; 
+ Sun, 08 Sep 2024 20:27:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1725849710; x=1726454510; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1725852452; x=1726457252; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=dekAywsmz0QxDkv5aiMdCboXNfTP72iK79Nqk365/+4=;
- b=VFzidogIOpwSmJbgpQjgi1k0jDKWOiaAkRDF3rjSp7R1FssZk/n4YVsSuXxKUFGVHJ
- NfiR1AM/U9XZgGhjkfyqn7fmhKSuasQYOCKEoomQHhfiNFPPkrChmra9S3Yy9wys2t+G
- y8hjstGFXadxtMBWP3IjgBEKPpjSVIr+Tb7y8EKrEiKc/ogrY7HKRLeC9HN9id6uEguX
- 2A08MINMDl4jGu0PY08E9CVMchHLTwbw24ow2Xqmi2il2MNt9bdUhndUGqfZl36R8SIe
- aToUz2I51fYehsp0zQHjk5UAHyfWpFehgiJTEWhOtC8CmA1tqP5pTNtHleAAjmBH6VQy
- LI8w==
+ bh=Md+SQm6eBgCK12ZzlaLuemUh2OotIkHtPxxbNnHsKns=;
+ b=l4LQOy44K+HfLMAtS2Wns4vJ7MfuNs39IUx+id4a2xDkTBpqwdEaL3OFl83L+i0Euz
+ ffZFbx/wcNwkoHzOdOT0uyGhWgjyRYWDC1tB14sZBSAB/akwLXzOMhLLP+A9fA8n25wG
+ Gqjvfi/nOOG379Jf/69bIhzz0i9vWSwYTrQ0EnRE6J+Pahou/oPjiuX5oLSaHc93WFeR
+ RX93fW7gj+zoOVptaaVHGVskAG9WgmDXnlIDDeMtQoZaABlmQLHOQ3PQuggkZa2a4fKN
+ NiTb5lhzQFHCclFYrVp3WFBOCtHOxus+cuFDRtjPlj7GjUtAWM3Xngev33catIZEEpIo
+ I5TQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725849710; x=1726454510;
+ d=1e100.net; s=20230601; t=1725852452; x=1726457252;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=dekAywsmz0QxDkv5aiMdCboXNfTP72iK79Nqk365/+4=;
- b=GUOEdYDGbXwNp9tL6GpTHEF/96oxjBiKbgKuhjWHqmqrewx+U6lmZUvD2Rz/uju9o1
- gNr3FdJd7h3inPHIZoZn8QkI6jFzMooa1ltItknWCZixU/pqqjHXEr2MNWR0Rg8iycTN
- paSAbs3SUrI8rHbct/DYCNleiClM5K3OPZU6uv17FeiWXH0kBjQeKdk5X+UP2WdYd2Em
- gJWQHvaeL079H3DMOAYZ0IRNyv6kR326WvgtoccBk8ynkCGMetOYVpKTgIeXlPhzICoc
- jjG5Dol7dtKTrZ+ayRNoyM+kscbdl9e16apAbNpk54oxVzauCGqPSg6c1VlCvO5hdMQH
- Pb8w==
+ bh=Md+SQm6eBgCK12ZzlaLuemUh2OotIkHtPxxbNnHsKns=;
+ b=GvSBSkePEWshtfwvbqHU3Lr2UCX9FchOpFsxN/uYhVd5/bHV80f1A1gccFDjwxO157
+ gdV33mP6yrnDmz+TLIcQzPRNDbpQ+3Dqrmc7z9OfmtQfU/+Cdu06c7qctEXJC5g8cj/f
+ C/M2cymMeL9XkA/MrAXwklFSpy45YSJsMXH/Z7xWIwh+jE7QYRA7HJt2TDxxcSDHEs2d
+ 5B+7EC7i4h0AhDFX5FzEUx4fkCc9B2D1EL4Rx4c/NnST4TAgB4GYj+hTUSamBEDIlzHX
+ xh9BO6dKDumg+z5mhQolZVh/PupdaJlGebBXr6SQeRe87fplEZj3erDbEvslppeBUgt4
+ b38Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW/t8Z7Lh7ZOcP3O0Jb2O3sHikyRojBkTIramNbK6PPyEcTNhtkZJXQMwrU0DcJ0fyJY6HSOTKcIE50@nongnu.org
-X-Gm-Message-State: AOJu0YyVqJbji5sNAGgBnYtfNLiC/maD6ATIwFEfKEiYso0KEZkye4sr
- wELVelMSu12PrylMwkCgM8T4bZMWheNDJPedMqSEcjaeKRzxhd+5KrCfL2KJWgtwW1G95W2IkTq
- KiArzbJ51a6SrqXVoVeQNK+llTVw=
-X-Google-Smtp-Source: AGHT+IFb+FYP4QjelpeJ9KfjgD+ph+AxtolbxntZ6VFIYrtJ/s2swiIX7GI2wFe6jhS3CXDgJFE2Kv6RzGPdfV9ZB0w=
-X-Received: by 2002:a05:6102:c8d:b0:498:cbd8:288 with SMTP id
- ada2fe7eead31-49bde25dbbbmr7760829137.20.1725849709981; Sun, 08 Sep 2024
- 19:41:49 -0700 (PDT)
+ AJvYcCVwG13K0fb8LQeUrtZm6bMaqQ53eS/rGNbRnoSAulznadeulZPKfdbuzTMK4dC3a2zYvrVDuOg99q57@nongnu.org
+X-Gm-Message-State: AOJu0YxNFHh8+n3vzlkKCR5v1XGq/eJvbnhKBfHM+TEvGjRsbxr4P2a/
+ mdxlMKh4cwe55hMKViKAyAF9iGFLNzzYN5MGWxwkBAWn17XR1lh/UrNbqkTocS6+8Gs+eDJlUkf
+ JR/16eabAylrFcJk/yYOYxiW3DAg=
+X-Google-Smtp-Source: AGHT+IEFbU83ldc4nU1BKbU6FAITdiOeHYupEqd6E1g67Oyq3niDWeQgXsl6HEyBOuuKVHhT1uSqZUBkIRMAEDQoRgw=
+X-Received: by 2002:a05:6102:4429:b0:49b:d6db:bec0 with SMTP id
+ ada2fe7eead31-49bdd68ec63mr7075223137.4.1725852452252; Sun, 08 Sep 2024
+ 20:27:32 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240816160743.220374-4-ajones@ventanamicro.com>
- <20240816160743.220374-6-ajones@ventanamicro.com>
- <CAKmqyKOXS+Fmb1Jxzwh3fAkeKi5eXQZ+JKkc3H77XjKrrKXe-Q@mail.gmail.com>
- <20240819-2773526929f81da7a462d10a@orel>
-In-Reply-To: <20240819-2773526929f81da7a462d10a@orel>
+References: <20240805210444.497723-1-gregorhaas1997@gmail.com>
+In-Reply-To: <20240805210444.497723-1-gregorhaas1997@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 9 Sep 2024 12:41:24 +1000
-Message-ID: <CAKmqyKNKY3VmnQfwLcshFpDnnaw+1VwwWBSkpUWKiwDsaUM43w@mail.gmail.com>
-Subject: Re: [PATCH 2/2] hw/riscv/virt: Introduce strict-dt
-To: Andrew Jones <ajones@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com, 
- alistair.francis@wdc.com, bmeng.cn@gmail.com, dbarboza@ventanamicro.com, 
- Anup Patel <apatel@ventanamicro.com>
+Date: Mon, 9 Sep 2024 13:27:05 +1000
+Message-ID: <CAKmqyKM_qgc+wwrDRzZM1yda=dZziM=1rGU2_SDeJU9PTnacVg@mail.gmail.com>
+Subject: Re: [PATCH v3 0/1] Add support for generating OpenSBI domains in the
+ device tree
+To: Gregor Haas <gregorhaas1997@gmail.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, atishp@rivosinc.com, 
+ dbarboza@ventanamicro.com, alistair.francis@wdc.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2a;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::933;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x933.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -95,81 +92,153 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Aug 19, 2024 at 5:50=E2=80=AFPM Andrew Jones <ajones@ventanamicro.c=
-om> wrote:
+On Tue, Aug 6, 2024 at 7:05=E2=80=AFAM Gregor Haas <gregorhaas1997@gmail.co=
+m> wrote:
 >
-> On Mon, Aug 19, 2024 at 11:19:18AM GMT, Alistair Francis wrote:
-> > On Sat, Aug 17, 2024 at 2:08=E2=80=AFAM Andrew Jones <ajones@ventanamic=
-ro.com> wrote:
-> > >
-> > > Older firmwares and OS kernels which use deprecated device tree
-> > > properties or are missing support for new properties may not be
-> > > tolerant of fully compliant device trees. When divergence to the
-> > > bindings specifications is harmless for new firmwares and OS kernels
-> > > which are compliant, then it's probably better to also continue
-> > > supporting the old firmwares and OS kernels by generating
-> > > non-compliant device trees. The '#msi-cells=3D<0>' property of the
-> > > imsic is one such property. Generating that property doesn't provide
-> > > anything necessary (no '#msi-cells' property or an '#msi-cells'
-> > > property with a value of zero mean the same thing) but it does
-> > > cause PCI devices to fail to find the MSI controller on Linux and,
-> > > for that reason, riscv virt doesn't currently generate it despite
-> > > that putting the DT out of compliance. For users that want a
-> > > compliant DT and know their software supports it, introduce a machine
-> > > property 'strict-dt' to do so. We also drop the one redundant
-> > > property that uses a deprecated name when strict-dt is enabled.
-> > >
-> > > Signed-off-by: Andrew Jones <ajones@ventanamicro.com>
-> > > ---
-> > >  docs/system/riscv/virt.rst | 11 ++++++++++
-> > >  hw/riscv/virt.c            | 43 ++++++++++++++++++++++++++++++------=
---
-> > >  include/hw/riscv/virt.h    |  1 +
-> > >  3 files changed, 46 insertions(+), 9 deletions(-)
-> > >
-> > > diff --git a/docs/system/riscv/virt.rst b/docs/system/riscv/virt.rst
-> > > index 9a06f95a3444..f08d0a053051 100644
-> > > --- a/docs/system/riscv/virt.rst
-> > > +++ b/docs/system/riscv/virt.rst
-> > > @@ -116,6 +116,17 @@ The following machine-specific options are suppo=
-rted:
-> > >    having AIA IMSIC (i.e. "aia=3Daplic-imsic" selected). When not spe=
-cified,
-> > >    the default number of per-HART VS-level AIA IMSIC pages is 0.
-> > >
-> > > +- strict-dt=3D[on|off]
-> >
-> > Hmm... I don't love the idea of having yet another command line option.
-> >
-> > Does this really buy us a lot? Eventually we should deprecate the
-> > invalid DT bindings anyway
+> This patch series adds support for specifying OpenSBI domains on the QEMU
+> command line. A simple example of what this looks like is below, includin=
+g
+> mapping the board's UART into the secondary domain:
+
+Thanks for the patch, sorry it took me so long to look into this
+
 >
-> I agree we should deprecate the invalid DT usage, with the goal of only
-> generating DTs that make the validator happy. I'm not sure how long that
-> deprecation period should be, though. It may need to be a while since
-> we'll need to decide when we've waited long enough to no longer care
-> about older kernels. In the meantime, we won't be making the validator
-> happy and may get bug reports due to that. With strct-dt we can just
-> direct people in that direction. Also, I wouldn't be surprised if
-> something else like this comes along some day, which is why I tried to
-> make the option as generic as possible. Finally, the 'if (strict_dt)'
-> self-documents to some extent. Otherwise we'll need to add comments
-> around explaining why we're diverging from the specs. Although we should
-> probably do that anyway, i.e. I should have put a comment on the
-> 'if (strict-dt) then #msi-cells' explaining why it's under strict-dt.
-> If we want strict-dt, then I'll send a v2 doing that. If we don't want
-> strict-dt then I'll send a v2 with just a comment explaining why
-> #msi-cells was left out.
+> qemu-system-riscv64 -machine virt -bios fw_jump.bin -cpu max -smp 2 -m 4G=
+ -nographic \
+>         -device opensbi-memregion,id=3Dmem,base=3D0xBC000000,order=3D26,m=
+mio=3Dfalse \
+>         -device opensbi-memregion,id=3Duart,base=3D0x10000000,order=3D12,=
+mmio=3Dtrue,device0=3D"/soc/serial@10000000" \
+>         -device opensbi-domain,id=3Ddomain,possible-harts=3D0-1,boot-hart=
+=3D0x0,next-addr=3D0xBC000000,next-mode=3D1,region0=3Dmem,perms0=3D0x3f,reg=
+ion1=3Duart,perms1=3D0x3f
 
-I think go without strict-dt and add a comment.
+This will need documentation added under docs (probably under
+docs/system/riscv) of how this should be used.
 
-In the future if we decide we really want to keep the validator happy
-then we can version the virt machine and use the older machine for
-backwards compatible kernels
+I'm not convinced this is something we want though. A user can dump
+the QEMU DTB and edit it to support OpenSBI domains if they want.
+
+My worry is that the command line method is complex for users to get
+right and will be fragile and prone to breakage as parts of QEMU's DTB
+changes.
+
+Also, how are users supposed to know what options to use? Maybe some
+documentation will help clear up how this should be used by users
+
+>
+> As a result of the above configuration, QEMU will add the following subno=
+des to
+> the device tree:
+>
+> chosen {
+>         opensbi-domains {
+>                 compatible =3D "opensbi,domain,config";
+>
+>                 domain {
+>                         next-mode =3D <0x01>;
+>                         next-addr =3D <0x00 0xbc000000>;
+>                         boot-hart =3D <0x03>;
+>                         regions =3D <0x8000 0x3f 0x8002 0x3f>;
+>                         possible-harts =3D <0x03 0x01>;
+>                         phandle =3D <0x8003>;
+>                         compatible =3D "opensbi,domain,instance";
+>                 };
+>
+>                 uart {
+>                         phandle =3D <0x8002>;
+>                         devices =3D <0x1800000>;
+>                         mmio;
+>                         order =3D <0x0c>;
+>                         base =3D <0x00 0x10000000>;
+>                         compatible =3D "opensbi,domain,memregion";
+>                 };
+>
+>                 mem {
+>                         phandle =3D <0x8000>;
+>                         order =3D <0x1a>;
+>                         base =3D <0x00 0xbc000000>;
+>                         compatible =3D "opensbi,domain,memregion";
+>                 };
+>         };
+> };
+>
+> This results in OpenSBI output as below, where regions 01-03 are inherite=
+d from
+> the root domain and regions 00 and 04 correspond to the user specified on=
+es:
+>
+> Domain1 Name              : domain
+> Domain1 Boot HART         : 0
+> Domain1 HARTs             : 0,1
+> Domain1 Region00          : 0x0000000010000000-0x0000000010000fff M: (I,R=
+,W,X) S/U: (R,W,X)
+> Domain1 Region01          : 0x0000000002000000-0x000000000200ffff M: (I,R=
+,W) S/U: ()
+> Domain1 Region02          : 0x0000000080080000-0x000000008009ffff M: (R,W=
+) S/U: ()
+> Domain1 Region03          : 0x0000000080000000-0x000000008007ffff M: (R,X=
+) S/U: ()
+> Domain1 Region04          : 0x00000000bc000000-0x00000000bfffffff M: (R,W=
+,X) S/U: (R,W,X)
+> Domain1 Next Address      : 0x00000000bc000000
+> Domain1 Next Arg1         : 0x0000000000000000
+> Domain1 Next Mode         : S-mode
+> Domain1 SysReset          : no
+> Domain1 SysSuspend        : no
+>
+> v3:
+> - Addressed review comments from v2 by adding default values to new prope=
+rties.
+>   This results in concrete errors at QEMU configuration time if a mandato=
+ry
+>   property (as mandated by the OpenSBI spec) is not provided.
+> - Changed command line encoding for the possible-harts field from a CPU b=
+itmask
+>   (e.g. where bit X is set if CPU X is a possible hart) to a range format=
+ (e.g.
+>   the possible harts should be CPUs X-Y, where Y >=3D X). This does const=
+rain the
+>   hart assignment to consecutive ranges of harts, but this constraint is =
+also
+>   present for other QEMU subsystems (such as NUMA).
+> - Added create_fdt_one_device(), which is invoked when scanning the devic=
+e tree
+>   for a memregion's devices. This function allocates a phandle for a regi=
+on's
+>   device if one does not yet exist.
+>
+> v2:
+> - Addressed review comments from v1. Specifically, renamed domain.{c,h} -=
+>
+>   opensbi_domain.{c,h} to increase clarity of what these files do. Also, =
+more
+>   consistently use g_autofree for dynamically allocated variables
+> - Added an "assign" flag to OpenSBIDomainState, which indicates whether t=
+o
+>   assign the domain's boot hart to it at domain parsing time.
+>
+> Gregor Haas (1):
+>   Add support for generating OpenSBI domains in the device tree
+>
+>  MAINTAINERS                       |   7 +
+>  hw/riscv/Kconfig                  |   4 +
+>  hw/riscv/meson.build              |   1 +
+>  hw/riscv/opensbi_domain.c         | 542 ++++++++++++++++++++++++++++++
+
+There should be a license comment at the start of new files. Have a
+look at other QEMU files for examples
 
 Alistair
 
+>  hw/riscv/virt.c                   |   3 +
+>  include/hw/riscv/opensbi_domain.h |  50 +++
+>  6 files changed, 607 insertions(+)
+>  create mode 100644 hw/riscv/opensbi_domain.c
+>  create mode 100644 include/hw/riscv/opensbi_domain.h
 >
-> Thanks,
-> drew
+> --
+> 2.45.2
+>
+>
 
