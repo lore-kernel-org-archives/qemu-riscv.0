@@ -4,90 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 871E5ECE57B
-	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Sep 2024 08:45:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 621C5ECE57B
+	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Sep 2024 09:12:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sna0k-0002J1-LT; Mon, 09 Sep 2024 04:44:38 -0400
+	id 1snaQb-0001Zm-DV; Mon, 09 Sep 2024 05:11:21 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1sna0i-0002DR-58
- for qemu-riscv@nongnu.org; Mon, 09 Sep 2024 04:44:36 -0400
-Received: from mail-ej1-x62f.google.com ([2a00:1450:4864:20::62f])
+ (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
+ id 1snaQZ-0001XG-MQ
+ for qemu-riscv@nongnu.org; Mon, 09 Sep 2024 05:11:19 -0400
+Received: from mail-oo1-xc2c.google.com ([2607:f8b0:4864:20::c2c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1sna0f-000115-CT
- for qemu-riscv@nongnu.org; Mon, 09 Sep 2024 04:44:35 -0400
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-a8d3cde1103so217253266b.2
- for <qemu-riscv@nongnu.org>; Mon, 09 Sep 2024 01:44:32 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
+ id 1snaQX-0003Zz-Ie
+ for qemu-riscv@nongnu.org; Mon, 09 Sep 2024 05:11:19 -0400
+Received: by mail-oo1-xc2c.google.com with SMTP id
+ 006d021491bc7-5e1b55346c0so1515404eaf.3
+ for <qemu-riscv@nongnu.org>; Mon, 09 Sep 2024 02:11:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1725871471; x=1726476271; darn=nongnu.org;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=jdnT95hf29ZLJ3Xi01T0ew1eGfqTVPDY0JBoqAuLLIk=;
- b=mAq+yQe9MMbPheFh+TeJR/C6CxATnesioRXAR5gZrJyR4ZlnNWyYqXDgI5gbSm6LgB
- gF6T7/2jlL+lrfnUbz16mCgZ7lwsAlrh1ccUni7D905uwIl+QtJsXDNCSKb3evHi3Kjw
- x4WbBtXTJfCA2DenggUvAv5Y4dB8i+wlnM/pGuJtR+RVQLi3SdalULUt6RKtYxHGu3+9
- a9wylkOi3iEDELokX3c/r34rGyw35TZIYLvnZ3yMFIe0hFCxgTJDIo7084C7XYH4chOj
- xndGw4K/ofiVFqzwJ2OjQLWsOOGiOv4erSpY3d7UcUU/n531XfE4zLs1FR3ze3rj+v5e
- H2hQ==
+ d=sifive.com; s=google; t=1725873075; x=1726477875; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8arYn/fZEea4nn7zsB6nz7hWA1dILLIkk6ch34Ywbc8=;
+ b=HfvRK1tlJsIhvi2S6O3AMChAbNVTFhlQPFdhxX9nJ4nl94UFuQw7ZWkqxDDWvCOuHK
+ rb4xccdx3YJLMFlyIKwqgUAnwgciCZQyrNOnmP7YpBslRDB34PVxZXYPH8Hl33+oe90b
+ 4tCOisZE/KLJ7eGT5Uq3LBDCX1DGl861N+3OK/mfQ/UzWLhUHpWJueGeLM6bFymaOi+4
+ lDKS7KAq5W4A1z6wMOh4BsNWXo3nXYM/Id47CeQPRlmzDuvBiyifvIXMc5zXxZzpHf5q
+ 5UnaiSTVco+tkClQqyEtfPcpr21QJiYpebRKpDXPqRjHvmGLKb6RrPTKEJKpHhRFtyub
+ 4dCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725871471; x=1726476271;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=jdnT95hf29ZLJ3Xi01T0ew1eGfqTVPDY0JBoqAuLLIk=;
- b=FJFXVceWPGt7lsVOe+P9gXHzkkmmJhwJtUEUMAvQ2RdKf4OsX30RpZul0o8olUHg3Z
- 0eNlUlcwg1zWAncn9JBqxvVbzhGqfEADd+tLP3bzpujRNitvKzN85fkTQQXONEJwwD1L
- Q24SIl439clc3tKu7TghKAfBHVSSvG6H+njo89AbG5tBo2pDWb1CcK0e1Rad+8SW4S0U
- rzTgZ08VBrz5z2zSQ5BWdOp2l7ml/tXKWgIWo2v7ws5bZDSwoDxnXpVR22Vp6POrx0uj
- x6qEgksyOb//vOVHKP5Bb6eY/k51KfZONCYtTPJWVMgUubqzjHdh9Nl1SYYVJSciOkvs
- FZXQ==
+ d=1e100.net; s=20230601; t=1725873075; x=1726477875;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=8arYn/fZEea4nn7zsB6nz7hWA1dILLIkk6ch34Ywbc8=;
+ b=Lqr4eL+PRujWoAnqvZyhkfqImbCEDghdQaMo92CVTkSjd3ZuFxtNTfOoXGtN6gjfyR
+ U8422V9lG1RIOfRJMfonxtIsNhRT8iur4ccaLJjoFfEOO+D3HuHeN3TBHJlFxGF/t5dT
+ ndQ0x/V4eCY+tU9e2x0UixnhJOKywNSlK3NuAHj00+ZPlaTk8RLwMrvNJU/VBPp5r18u
+ yEJFHO7u4OC+AahnP8zX/mvF1ZAbY/KYGEXDXFkUBmvott2JUn+t89+X4nCOIWDetOb4
+ BX2Frab4IosH9dOlcPa+VQT4nCyjbgZ4GPHqcNbgUrRzYuA6bhg+PksVDZIOCeX89DGA
+ wGzQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUFLaRo60wYHFfxRhc/OGb9LSEYFtQJpnORd1HI9uQ69boI/Z9RcupKd1FJPfIu6kzBBBEsvZ9OT3J9@nongnu.org
-X-Gm-Message-State: AOJu0Yw7HEmPClfFTNwMNkIqST9FfX7zJlO93xw9b9HSt8X/TZD1dzVN
- KG8yjuwVnwhMzyuIDMuaIIFNm1BAjY09caGB0f9aZjNxCmeKXgFTsMxICRul/us=
-X-Google-Smtp-Source: AGHT+IEZINGOISGOwE+YOHaPJ075wIuDVvTRFaLPFL4ts20i9fZGf4fmLgVQC1LAYU9od5lbuNhCLQ==
-X-Received: by 2002:a17:907:9484:b0:a8a:78bb:1e2 with SMTP id
- a640c23a62f3a-a8d1bf76023mr901029266b.6.1725871471123; 
- Mon, 09 Sep 2024 01:44:31 -0700 (PDT)
-Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
- [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a8d258339dasm311036266b.38.2024.09.09.01.44.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Sep 2024 01:44:30 -0700 (PDT)
-Date: Mon, 9 Sep 2024 10:44:29 +0200
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Alistair Francis <alistair23@gmail.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com, 
- alistair.francis@wdc.com, bmeng.cn@gmail.com, dbarboza@ventanamicro.com, 
- Anup Patel <apatel@ventanamicro.com>
-Subject: Re: [PATCH 2/2] hw/riscv/virt: Introduce strict-dt
-Message-ID: <20240909-6f10c3eaac4f8e1494dbdebf@orel>
-References: <20240816160743.220374-4-ajones@ventanamicro.com>
- <20240816160743.220374-6-ajones@ventanamicro.com>
- <CAKmqyKOXS+Fmb1Jxzwh3fAkeKi5eXQZ+JKkc3H77XjKrrKXe-Q@mail.gmail.com>
- <20240819-2773526929f81da7a462d10a@orel>
- <CAKmqyKNKY3VmnQfwLcshFpDnnaw+1VwwWBSkpUWKiwDsaUM43w@mail.gmail.com>
+ AJvYcCV40KTptHxfpT6rJ9nq1AQtzO07LICwBEE9TKMLv6VZigMQvGyfFbA3yImMaAL1KMTZTLfnf94u51gk@nongnu.org
+X-Gm-Message-State: AOJu0Yx1Uq77cyZii7Cw71pMt6DVWLmbwktfBqMoinKN8bhgDz+BjkKn
+ SEl4a6jxgLFCMmD2EjQ586Mamj2k1jXQnH+3lf/gj8xoB3wpoHX0Zu21wlkKS0fKmE4JjLVm+pW
+ AOArrJsPaP71smC5D3uRWQLsBhjsPE8eVfgHzGQ==
+X-Google-Smtp-Source: AGHT+IEi32Q6T8gYMh+9N0hZ/KOdLWNThmgcUGAdfd0qlZ811t7uiqcTYbO1tRWaa98yIuYZb6cjJXu7eb6Wp/yEAGU=
+X-Received: by 2002:a05:6871:82a:b0:277:e039:7aef with SMTP id
+ 586e51a60fabf-27b82dd1d37mr11919531fac.8.1725873075610; Mon, 09 Sep 2024
+ 02:11:15 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAKmqyKNKY3VmnQfwLcshFpDnnaw+1VwwWBSkpUWKiwDsaUM43w@mail.gmail.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::62f;
- envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x62f.google.com
+References: <20240808081948.25837-1-yongxuan.wang@sifive.com>
+ <CAKmqyKOh9dwx8+oESM5gMmuX8UY7M5-Q5oS=+EuKMR=mk3M-3Q@mail.gmail.com>
+In-Reply-To: <CAKmqyKOh9dwx8+oESM5gMmuX8UY7M5-Q5oS=+EuKMR=mk3M-3Q@mail.gmail.com>
+From: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+Date: Mon, 9 Sep 2024 17:11:06 +0800
+Message-ID: <CAMWQL2j_EDDnC4jm4C9wcXTw164diEbKitf-LbSx_0U6iTUaKw@mail.gmail.com>
+Subject: Re: [PATCH 1/1] hw/intc/riscv_aplic: Check and update pending when
+ write sourcecfg
+To: Alistair Francis <alistair23@gmail.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, greentime.hu@sifive.com, 
+ vincent.chen@sifive.com, frank.chang@sifive.com, jim.shu@sifive.com, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c2c;
+ envelope-from=yongxuan.wang@sifive.com; helo=mail-oo1-xc2c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,78 +99,134 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Sep 09, 2024 at 12:41:24PM GMT, Alistair Francis wrote:
-> On Mon, Aug 19, 2024 at 5:50 PM Andrew Jones <ajones@ventanamicro.com> wrote:
-> >
-> > On Mon, Aug 19, 2024 at 11:19:18AM GMT, Alistair Francis wrote:
-> > > On Sat, Aug 17, 2024 at 2:08 AM Andrew Jones <ajones@ventanamicro.com> wrote:
-> > > >
-> > > > Older firmwares and OS kernels which use deprecated device tree
-> > > > properties or are missing support for new properties may not be
-> > > > tolerant of fully compliant device trees. When divergence to the
-> > > > bindings specifications is harmless for new firmwares and OS kernels
-> > > > which are compliant, then it's probably better to also continue
-> > > > supporting the old firmwares and OS kernels by generating
-> > > > non-compliant device trees. The '#msi-cells=<0>' property of the
-> > > > imsic is one such property. Generating that property doesn't provide
-> > > > anything necessary (no '#msi-cells' property or an '#msi-cells'
-> > > > property with a value of zero mean the same thing) but it does
-> > > > cause PCI devices to fail to find the MSI controller on Linux and,
-> > > > for that reason, riscv virt doesn't currently generate it despite
-> > > > that putting the DT out of compliance. For users that want a
-> > > > compliant DT and know their software supports it, introduce a machine
-> > > > property 'strict-dt' to do so. We also drop the one redundant
-> > > > property that uses a deprecated name when strict-dt is enabled.
-> > > >
-> > > > Signed-off-by: Andrew Jones <ajones@ventanamicro.com>
-> > > > ---
-> > > >  docs/system/riscv/virt.rst | 11 ++++++++++
-> > > >  hw/riscv/virt.c            | 43 ++++++++++++++++++++++++++++++--------
-> > > >  include/hw/riscv/virt.h    |  1 +
-> > > >  3 files changed, 46 insertions(+), 9 deletions(-)
-> > > >
-> > > > diff --git a/docs/system/riscv/virt.rst b/docs/system/riscv/virt.rst
-> > > > index 9a06f95a3444..f08d0a053051 100644
-> > > > --- a/docs/system/riscv/virt.rst
-> > > > +++ b/docs/system/riscv/virt.rst
-> > > > @@ -116,6 +116,17 @@ The following machine-specific options are supported:
-> > > >    having AIA IMSIC (i.e. "aia=aplic-imsic" selected). When not specified,
-> > > >    the default number of per-HART VS-level AIA IMSIC pages is 0.
-> > > >
-> > > > +- strict-dt=[on|off]
-> > >
-> > > Hmm... I don't love the idea of having yet another command line option.
-> > >
-> > > Does this really buy us a lot? Eventually we should deprecate the
-> > > invalid DT bindings anyway
-> >
-> > I agree we should deprecate the invalid DT usage, with the goal of only
-> > generating DTs that make the validator happy. I'm not sure how long that
-> > deprecation period should be, though. It may need to be a while since
-> > we'll need to decide when we've waited long enough to no longer care
-> > about older kernels. In the meantime, we won't be making the validator
-> > happy and may get bug reports due to that. With strct-dt we can just
-> > direct people in that direction. Also, I wouldn't be surprised if
-> > something else like this comes along some day, which is why I tried to
-> > make the option as generic as possible. Finally, the 'if (strict_dt)'
-> > self-documents to some extent. Otherwise we'll need to add comments
-> > around explaining why we're diverging from the specs. Although we should
-> > probably do that anyway, i.e. I should have put a comment on the
-> > 'if (strict-dt) then #msi-cells' explaining why it's under strict-dt.
-> > If we want strict-dt, then I'll send a v2 doing that. If we don't want
-> > strict-dt then I'll send a v2 with just a comment explaining why
-> > #msi-cells was left out.
-> 
-> I think go without strict-dt and add a comment.
-> 
-> In the future if we decide we really want to keep the validator happy
-> then we can version the virt machine and use the older machine for
-> backwards compatible kernels
+Hi Alistair,
 
-OK, I'll post a patch with a comment as soon as I have an upstream
-Linux commit to reference for the fix. So far the fix is only in
-linux-next.
+On Mon, Sep 9, 2024 at 10:32=E2=80=AFAM Alistair Francis <alistair23@gmail.=
+com> wrote:
+>
+> On Thu, Aug 8, 2024 at 6:21=E2=80=AFPM Yong-Xuan Wang <yongxuan.wang@sifi=
+ve.com> wrote:
+> >
+> > The section 4.5.2 of the RISC-V AIA specification says that any write
+> > to a sourcecfg register of an APLIC might (or might not) cause the
+> > corresponding interrupt-pending bit to be set to one if the rectified
+> > input value is high (=3D 1) under the new source mode.
+> >
+> > If an interrupt is asserted before the driver configs its interrupt
+> > type to APLIC, it's pending bit will not be set except a relevant
+> > write to a setip or setipnum register. When we write the interrupt
+> > type to sourcecfg register, if the APLIC device doesn't check
+> > rectified input value and update the pending bit, this interrupt
+> > might never becomes pending.
+> >
+> > For APLIC.m, we can manully set pending by setip or setipnum
+> > registers in driver. But for APLIC.w, the pending status totally
+> > depends on the rectified input value, we can't control the pending
+> > status via mmio registers. In this case, hw should check and update
+> > pending status for us when writing sourcecfg registers.
+> >
+> > Update QEMU emulation to handle "pre-existing" interrupts.
+> >
+> > Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+>
+> Acked-by: Alistair Francis <alistair.francis@wdc.com>
+>
+> > ---
+> >  hw/intc/riscv_aplic.c | 49 +++++++++++++++++++++++++++----------------
+> >  1 file changed, 31 insertions(+), 18 deletions(-)
+> >
+> > diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
+> > index 32edd6d07bb3..2a9ac76ce92e 100644
+> > --- a/hw/intc/riscv_aplic.c
+> > +++ b/hw/intc/riscv_aplic.c
+> > @@ -159,31 +159,41 @@ static bool is_kvm_aia(bool msimode)
+> >      return kvm_irqchip_in_kernel() && msimode;
+> >  }
+> >
+> > +static bool riscv_aplic_irq_rectified_val(RISCVAPLICState *aplic,
+> > +                                          uint32_t irq)
+> > +{
+> > +    uint32_t sourcecfg, sm, raw_input, irq_inverted;
+> > +
+> > +    if (!irq || aplic->num_irqs <=3D irq) {
+> > +        return false;
+> > +    }
+> > +
+> > +    sourcecfg =3D aplic->sourcecfg[irq];
+> > +    if (sourcecfg & APLIC_SOURCECFG_D) {
+> > +        return false;
+> > +    }
+> > +
+> > +    sm =3D sourcecfg & APLIC_SOURCECFG_SM_MASK;
+> > +    if (sm =3D=3D APLIC_SOURCECFG_SM_INACTIVE) {
+> > +        return false;
+> > +    }
+> > +
+> > +    raw_input =3D (aplic->state[irq] & APLIC_ISTATE_INPUT) ? 1 : 0;
+> > +    irq_inverted =3D (sm =3D=3D APLIC_SOURCECFG_SM_LEVEL_LOW ||
+> > +                    sm =3D=3D APLIC_SOURCECFG_SM_EDGE_FALL) ? 1 : 0;
+> > +    return !!(raw_input ^ irq_inverted);
+> > +}
+> > +
+> >  static uint32_t riscv_aplic_read_input_word(RISCVAPLICState *aplic,
+> >                                              uint32_t word)
+> >  {
+> > -    uint32_t i, irq, sourcecfg, sm, raw_input, irq_inverted, ret =3D 0=
+;
+> > +    uint32_t i, irq, rectified_val, ret =3D 0;
+> >
+> >      for (i =3D 0; i < 32; i++) {
+> >          irq =3D word * 32 + i;
+> > -        if (!irq || aplic->num_irqs <=3D irq) {
+> > -            continue;
+> > -        }
+> > -
+> > -        sourcecfg =3D aplic->sourcecfg[irq];
+> > -        if (sourcecfg & APLIC_SOURCECFG_D) {
+> > -            continue;
+> > -        }
+> > -
+> > -        sm =3D sourcecfg & APLIC_SOURCECFG_SM_MASK;
+> > -        if (sm =3D=3D APLIC_SOURCECFG_SM_INACTIVE) {
+> > -            continue;
+> > -        }
+> >
+> > -        raw_input =3D (aplic->state[irq] & APLIC_ISTATE_INPUT) ? 1 : 0=
+;
+> > -        irq_inverted =3D (sm =3D=3D APLIC_SOURCECFG_SM_LEVEL_LOW ||
+> > -                        sm =3D=3D APLIC_SOURCECFG_SM_EDGE_FALL) ? 1 : =
+0;
+> > -        ret |=3D (raw_input ^ irq_inverted) << i;
+> > +        rectified_val =3D riscv_aplic_irq_rectified_val(aplic, irq);
+> > +        ret |=3D rectified_val << i;
+> >      }
+> >
+> >      return ret;
+> > @@ -702,6 +712,9 @@ static void riscv_aplic_write(void *opaque, hwaddr =
+addr, uint64_t value,
+> >              (aplic->sourcecfg[irq] =3D=3D 0)) {
+> >              riscv_aplic_set_pending_raw(aplic, irq, false);
+> >              riscv_aplic_set_enabled_raw(aplic, irq, false);
+> > +        } else {
+> > +            if (riscv_aplic_irq_rectified_val(aplic, irq))
+> > +                riscv_aplic_set_pending_raw(aplic, irq, true);
+>
+> You need curly braces for the if statement. You can run checkpatch.pl
+> to catch issues like this
+>
 
-Thanks,
-drew
+Thank you! I will fix it.
+
+Regards,
+Yong-Xuan
+
+> Alistair
+>
+> >          }
+> >      } else if (aplic->mmode && aplic->msimode &&
+> >                 (addr =3D=3D APLIC_MMSICFGADDR)) {
+> > --
+> > 2.17.1
+> >
+> >
 
