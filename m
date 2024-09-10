@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74FEAEE01ED
-	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Sep 2024 22:18:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23A92EE01EB
+	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Sep 2024 22:18:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1so9Az-0004kk-4D; Tue, 10 Sep 2024 18:17:33 -0400
+	id 1so9BK-0007Xx-Le; Tue, 10 Sep 2024 18:17:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1so9AP-0000hY-0w
- for qemu-riscv@nongnu.org; Tue, 10 Sep 2024 18:16:57 -0400
-Received: from mail-pf1-x431.google.com ([2607:f8b0:4864:20::431])
+ id 1so9Aj-0002p8-TP
+ for qemu-riscv@nongnu.org; Tue, 10 Sep 2024 18:17:17 -0400
+Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1so9AK-0006jH-Vk
- for qemu-riscv@nongnu.org; Tue, 10 Sep 2024 18:16:56 -0400
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-71798a15ce5so221060b3a.0
- for <qemu-riscv@nongnu.org>; Tue, 10 Sep 2024 15:16:52 -0700 (PDT)
+ id 1so9Ag-0006tH-Rj
+ for qemu-riscv@nongnu.org; Tue, 10 Sep 2024 18:17:17 -0400
+Received: by mail-pf1-x433.google.com with SMTP id
+ d2e1a72fcca58-718e56d7469so2386699b3a.0
+ for <qemu-riscv@nongnu.org>; Tue, 10 Sep 2024 15:17:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726006611; x=1726611411; darn=nongnu.org;
+ d=linaro.org; s=google; t=1726006632; x=1726611432; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=agjxPNPZhkjhF3pYgx+4YrvSC0QezaRTWh5rzAMbA6c=;
- b=RCV0pqjJ+U4ZIXTFvmMcrWo5aW6tKHImpSEK/0JeSJt1TJMKRKgZe84vfN5+jlBuUH
- XDFmobsyOZOm2L2c/bS7cos392vOEVo0gL/7fV6zJ3lA+OGChFQhG+/Q7a1HDcFOwp3z
- jfh7QFJehIt+5xNVMF19hxWN3kL3AgEE2YzG13F6Xpp2q4JoK//3uhH7gyHcc4EFkztP
- Y8YsRRHfOvckOJxn04o/4dP7aEF6dLsCRdH8Tm97GXk0IhaqIX8/vYWMO0yr4jbonzOS
- qQ5jO/9yu1dwwBcWUcCKZR9hrNC0Yctj7V9XDUTVo5Ld8CPbyeubFFPg2Yui+tWWR6Ig
- iAKg==
+ bh=FxBBj8XHDZxd3pwPDQhaFTyzR1JvVS6yl60rcPuU8DE=;
+ b=a0WfztixjUb2tgipuxXU/m7hVMH/ZWJLtYr/AjNJsjbMc6kihdo5SROlvHVQ6NvZmr
+ W+LruOHKAX1Qb3ewo9EZ8KtC7mEFJ7LKM2GkxD8n3+eoCVF/TFad5q1wFAEkJt4+qR0O
+ kvyXsZVVLqRuA9ORhcfJNkxRIsvLJf0CddUEydQDEZtTlGyTB9Gh8WP3NEMlrCA3yRMa
+ Au7LilWj+wZh1HiTYc+NVIck7elT6NHRO4B0AiwufODwUa4xlI56bfc7bV9YUfFpYSCF
+ oBZU3Ef2lATmr+2K+0bFcJcmSNwMdiHQDiSWgymQlU/nMt3e66DlxYJ/EjRPyhGm8qzr
+ QsSA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726006611; x=1726611411;
+ d=1e100.net; s=20230601; t=1726006632; x=1726611432;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=agjxPNPZhkjhF3pYgx+4YrvSC0QezaRTWh5rzAMbA6c=;
- b=i0TWtIiuj19fuaIdLj5mtkEJBohACu4av3+6iRddvHytKaa9bxQsRHi02F+tnDejxs
- or25oNmMIlpE1VE7R1SMJBHmJBQan2aropsRoQ9XcvG0KRoaW0ftQfzfxH56/SnJFRjG
- Qdd6f7onE83p+uGmxV5LYtes47wk2o97tGMN+6yqANh8flYcN5HSzmG1CZku2esQx570
- TZBmgy0PaZKLFa6XtiiG2nWiIhF2sTNNgCYpcuPTpAYw/YEVVAK5v/Q2qPxeMBS1o9b+
- DzUB8daBi7H3zMgI6C4ZFKHGq8ThGzizffgzCpvn2NDNFrYnpTmWpVnJMjaPAhFP/sOS
- VhEA==
+ bh=FxBBj8XHDZxd3pwPDQhaFTyzR1JvVS6yl60rcPuU8DE=;
+ b=oNEhMc5BAP+m/BDnTKv+oT6/Y+oRmF3kQZHfdGY5FJ1TNuivEhtbBi5toTc/p/s6zL
+ GZzWK1Wh8kyvdqQKb8yYNllC/Br7GRyVDHUdBJMPI5yLhzB3PnUJkU986wrh8+a341PH
+ Le55WWPmTt+b1n90OlDeTCVKBmRairmslEdZABZnGOiB0bAMBD7mUSIhqHmYPa/tevE4
+ pyn3tlJX1JFEkCQBwf9ZS9h/hZ+a5J7t6LZFUYA3AxOMB6feZQRTz69nYELEdgeK7zC0
+ V67vf3ZFa+qPRt4lxsFOQtCMhlPyoqLdhDWvPjjPlSBbXlUBiCUdXVjX8RoSqEE/VBTZ
+ xPMw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWwi45Wbw82PRuODWpGXpJcPN8bgMP3RYyJSIPAESOBLMAE0tzJPKQVR/GHLSQ/dNPwgVpXPXHQ+1qw@nongnu.org
-X-Gm-Message-State: AOJu0YwqVdQJs5GvaCiQtcx2PsD773hHxctJLhmX9E6X9G6nh3tbWB2e
- 58d3r2li+4obivX/mZfpQBq9lA7c2+9iYPvP3Mni5mGPsLJ/yHdF7lAhSYxSCBo=
-X-Google-Smtp-Source: AGHT+IE1NeVPxPuTLt1hWZFnlbeldnxIM0Z4VwcI8eWqQlrC+NfwnNfuoOxOt9dZvUfA9IM8krjmMw==
-X-Received: by 2002:a05:6a00:6f4d:b0:718:eeab:97ca with SMTP id
- d2e1a72fcca58-71907d98483mr7997533b3a.2.1726006611406; 
- Tue, 10 Sep 2024 15:16:51 -0700 (PDT)
+ AJvYcCUOgc49lr4UqSpw5Iusix0KMiWrZTBv2FHJrCapmaKc8YDXJsNDjDB7vG5YZ20CvPFntguog1w+3xbU@nongnu.org
+X-Gm-Message-State: AOJu0YwVUxU6STl2nCkoakd9upZisTVjdka6gOJndNFKlTUqjstUmx9o
+ XXBBAAg04FXDWfKY1EHN3nd5uZHDUp0UEnA57jxJ1MI3avsplPhd/9nOXf4hI0w=
+X-Google-Smtp-Source: AGHT+IEXiP34uTnzQwoBvPtoZRfRUyfMSCqJ2GA6SrTzN26OOJqSvbL/tMxUKioN4UZqgJtB4WHk9Q==
+X-Received: by 2002:aa7:88c8:0:b0:714:2fd0:357a with SMTP id
+ d2e1a72fcca58-718d5e20a52mr15181026b3a.11.1726006631633; 
+ Tue, 10 Sep 2024 15:17:11 -0700 (PDT)
 Received: from linaro.vn.shawcable.net ([2604:3d08:9384:1d00::9633])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-71909003d0esm1884055b3a.93.2024.09.10.15.16.49
+ d2e1a72fcca58-71909003d0esm1884055b3a.93.2024.09.10.15.17.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Sep 2024 15:16:50 -0700 (PDT)
+ Tue, 10 Sep 2024 15:17:11 -0700 (PDT)
 From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Zhao Liu <zhao1.liu@intel.com>, "Richard W.M. Jones" <rjones@redhat.com>,
@@ -106,17 +106,16 @@ Cc: Zhao Liu <zhao1.liu@intel.com>, "Richard W.M. Jones" <rjones@redhat.com>,
  Jean-Christophe Dubois <jcd@tribudubois.net>,
  Jason Wang <jasowang@redhat.com>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH 17/39] hw/net: replace assert(false) with
- g_assert_not_reached()
-Date: Tue, 10 Sep 2024 15:15:44 -0700
-Message-Id: <20240910221606.1817478-18-pierrick.bouvier@linaro.org>
+Subject: [PATCH 26/39] hw/acpi: remove break after g_assert_not_reached()
+Date: Tue, 10 Sep 2024 15:15:53 -0700
+Message-Id: <20240910221606.1817478-27-pierrick.bouvier@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240910221606.1817478-1-pierrick.bouvier@linaro.org>
 References: <20240910221606.1817478-1-pierrick.bouvier@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::431;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-pf1-x431.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
+ envelope-from=pierrick.bouvier@linaro.org; helo=mail-pf1-x433.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -141,50 +140,21 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 ---
- hw/net/e1000e_core.c | 2 +-
- hw/net/igb_core.c    | 2 +-
- hw/net/net_rx_pkt.c  | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ hw/acpi/aml-build.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/hw/net/e1000e_core.c b/hw/net/e1000e_core.c
-index 3ae2a184d5d..248381f9766 100644
---- a/hw/net/e1000e_core.c
-+++ b/hw/net/e1000e_core.c
-@@ -561,7 +561,7 @@ e1000e_rss_calc_hash(E1000ECore *core,
-         type = NetPktRssIpV6Ex;
+diff --git a/hw/acpi/aml-build.c b/hw/acpi/aml-build.c
+index 006c506a375..34e0ddbde87 100644
+--- a/hw/acpi/aml-build.c
++++ b/hw/acpi/aml-build.c
+@@ -535,7 +535,6 @@ void aml_append(Aml *parent_ctx, Aml *child)
          break;
      default:
--        assert(false);
-+        g_assert_not_reached();
-         return 0;
+         g_assert_not_reached();
+-        break;
      }
- 
-diff --git a/hw/net/igb_core.c b/hw/net/igb_core.c
-index bcd5f6cd9cd..6be61407715 100644
---- a/hw/net/igb_core.c
-+++ b/hw/net/igb_core.c
-@@ -397,7 +397,7 @@ igb_rss_calc_hash(IGBCore *core, struct NetRxPkt *pkt, E1000E_RSSInfo *info)
-         type = NetPktRssIpV6Udp;
-         break;
-     default:
--        assert(false);
-+        g_assert_not_reached();
-         return 0;
-     }
- 
-diff --git a/hw/net/net_rx_pkt.c b/hw/net/net_rx_pkt.c
-index 32e5f3f9cf7..6b9c4c9559d 100644
---- a/hw/net/net_rx_pkt.c
-+++ b/hw/net/net_rx_pkt.c
-@@ -375,7 +375,7 @@ net_rx_pkt_calc_rss_hash(struct NetRxPkt *pkt,
-         _net_rx_rss_prepare_udp(&rss_input[0], pkt, &rss_length);
-         break;
-     default:
--        assert(false);
-+        g_assert_not_reached();
-         break;
-     }
- 
+     build_append_array(parent_ctx->buf, buf);
+     build_free_array(buf);
 -- 
 2.39.2
 
