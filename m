@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44932EE01EB
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20F44EE01ED
 	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Sep 2024 22:23:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1so9AT-0001Fc-N0; Tue, 10 Sep 2024 18:17:01 -0400
+	id 1so9AW-0001ZD-3N; Tue, 10 Sep 2024 18:17:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1so9A1-0007Pu-GJ
- for qemu-riscv@nongnu.org; Tue, 10 Sep 2024 18:16:34 -0400
-Received: from mail-pg1-x532.google.com ([2607:f8b0:4864:20::532])
+ id 1so99x-000786-5b
+ for qemu-riscv@nongnu.org; Tue, 10 Sep 2024 18:16:30 -0400
+Received: from mail-pf1-x42c.google.com ([2607:f8b0:4864:20::42c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1so99y-0006Zs-WD
- for qemu-riscv@nongnu.org; Tue, 10 Sep 2024 18:16:33 -0400
-Received: by mail-pg1-x532.google.com with SMTP id
- 41be03b00d2f7-7dafd9df795so1101987a12.1
- for <qemu-riscv@nongnu.org>; Tue, 10 Sep 2024 15:16:30 -0700 (PDT)
+ id 1so99u-0006XK-6f
+ for qemu-riscv@nongnu.org; Tue, 10 Sep 2024 18:16:28 -0400
+Received: by mail-pf1-x42c.google.com with SMTP id
+ d2e1a72fcca58-718e11e4186so1244155b3a.2
+ for <qemu-riscv@nongnu.org>; Tue, 10 Sep 2024 15:16:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726006589; x=1726611389; darn=nongnu.org;
+ d=linaro.org; s=google; t=1726006585; x=1726611385; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gSYhajPs2VsIZSUZF9nxgEDV+zkDqTYhjuMBxS8/VrA=;
- b=T5DrU0QbHttzqM+QYPxAuuVUkakCPqhSPQJ/u2L/vHMZeZmpKLXQ0IY0d7lHvjHVDQ
- j6FpHdZsqe8deaXtHx15Hcx2CqYC/H6aXFEdevV/foJvQL4qSD0ipeZ7+8THNaVFZcv0
- ZBMNg2f3T4c4X5wi5DQDNEhU7/JwvRyRCzU8/CLnYlUtbQjr+SHCyoIrmebJinX7JQbe
- 7PHml71ogv5pFgikir50cVcQS2KXHLhlAXJRUaSteQz9/FkXLKLgFgjA8AJ26KzhTnnB
- L3VXsWtcNts7KjMMTsWSDuWdcnfa2b0CqJx5cE95xrzlw3n5cs3pmBqgF8e89JE1yiGu
- owtg==
+ bh=puqvVpFKVlVCK3CqflCQnP9TK7q5f0hM5PCb/iix3yg=;
+ b=pVI7ok+ZZOuD7uaGL9RbmRLuB/lXoCFO74nvc7lhmkJsZLSQ7YZZQkbAN0ntw9ht/b
+ D28nudFNaFUpozuh5VppuZaji9n9/NQxAvCqQVE5vYn9HxuFrtn7JgegiFULwk3/ZS7d
+ 6AvUQL+O+6xNx3rTbTWrufhncpT0dukVV8vlB7aYTivuCvPSEmLJFy4syExqwdtpaOoC
+ J8zwkbmDRPrk/PHnMkkYDRa3e6elufALqy/8Y6OZeKeFfmTPOq3c1DS0wNNwX4I+xI62
+ mcSbec3iSph3idva1JbQ5LNtvHBkfRNDMDuFWkpnw5CmR7SOlXArHb+a1rIl4gtegF59
+ oukw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726006589; x=1726611389;
+ d=1e100.net; s=20230601; t=1726006585; x=1726611385;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=gSYhajPs2VsIZSUZF9nxgEDV+zkDqTYhjuMBxS8/VrA=;
- b=e3UWQlBdVBrCLfUqTymlHoQvLLBSTcaAFF+vQYYLPV5gz68rg0dyjO1nzdP08cfYHe
- jAacim0tFhomeuMVecNL+7vmPhR4yv+Cejf9CjmUYdrLiWaKUwxQ07P3wbUYlZk/BVlE
- F7Kr3+v9801LZTLZdyHE28kA/vIuEoxgty4xXMGETa4xhyQswK1lNngxvFgsNINyNO8y
- Aq/FKDvGrW6yYJCtW/Bm0zQwP7ywBqAWxEcurnFZxMUMrWjzffNhaAijNyBLc/T0Y+t8
- bNpBi3fPIj/YH3EzYdqiXVPiFCsy/ZRYZupJy2BPihAgcj9OmxIgct/Lt6I6HTTl08tb
- BJ0Q==
+ bh=puqvVpFKVlVCK3CqflCQnP9TK7q5f0hM5PCb/iix3yg=;
+ b=DryqMjItYE5Ee5gbeiKiyZJ0vRlQjcR+UBQN9Lj90FmrB149Kbwl/j4jK+y6inz+R8
+ GStttMv5mSVcMCiqUa+6wCAWoct7mY5STSUyQWs66NcT9C+EQV7qhkyex+OiaNRnkl3t
+ rVVS5SQ/+M3t1xXtmvtsSX4nTyz63Jl9pwZU1BZvP3NRHDB0XC+AFpfi32/Hl+yBUGg2
+ UjEyWk6+W2CGfwvTZ8+vGBrj3Gjt0wgakkcCbfRvbIyB53NjOQnNXUcI4dbAuNA0GSnY
+ r5AAHXXTZC1Qt5pNH+DdY8Xhax///xVA2PFQq8sYMFAZ5TFVvsoc/3VilCA77qSvvBP0
+ AjGQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX/2SHSEWV1aqAubgMRrZ+SQ+dT7oszLrrpi/gkVTYEGo+doC97SLBxtbUN0ASwcSv7PKUn34G81Nzd@nongnu.org
-X-Gm-Message-State: AOJu0Yxu7Ffp0UN/pHGKNUhVd+AipryW5MAd1MxR49wAW7s2AN3eYoeh
- VH3BqBiNqcLs4mHQpOh3OZGnUGilc/TO0bhL6IlnQxk/dtUaR/E2tgBiWzEMtgs=
-X-Google-Smtp-Source: AGHT+IGxt2HyeKoY0zj4rIpopJhEdomsqdPT1qYCGNgIZHRgnvsI9GfeO84x5fyCboG/E3PILzkmEw==
-X-Received: by 2002:a05:6a20:c703:b0:1cf:2357:df1a with SMTP id
- adf61e73a8af0-1cf62c8d808mr1658573637.10.1726006589396; 
- Tue, 10 Sep 2024 15:16:29 -0700 (PDT)
+ AJvYcCUyuyIh9aqTmK3dniWXDAGI7FMwJTDhk7rwi+1dG2EqaBjzpEJyRTLdwTSfFCyOw4KvUhD5gMI/gg9E@nongnu.org
+X-Gm-Message-State: AOJu0YzKtRc5O/KDJKt8xqn4m6Oc/j1U+sXKHM+puLBF7/p+Ea8qVVqW
+ IUeL83PFkjY6REwQC3Sd74gi9QpjcwGOyTVCFJGJ6hBhzWvkOGEhU/cOxi7y8w4=
+X-Google-Smtp-Source: AGHT+IHIvrzvH/+9jVryyqHImeYb4fOhg81YBUc0CfmQo7SIWh/8KSDCX9LvH03UUnVz/fF8OPBLeg==
+X-Received: by 2002:a05:6a00:8586:b0:717:8aaf:43be with SMTP id
+ d2e1a72fcca58-71916baea16mr1226278b3a.0.1726006584757; 
+ Tue, 10 Sep 2024 15:16:24 -0700 (PDT)
 Received: from linaro.vn.shawcable.net ([2604:3d08:9384:1d00::9633])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-71909003d0esm1884055b3a.93.2024.09.10.15.16.27
+ d2e1a72fcca58-71909003d0esm1884055b3a.93.2024.09.10.15.16.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Sep 2024 15:16:28 -0700 (PDT)
+ Tue, 10 Sep 2024 15:16:24 -0700 (PDT)
 From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Zhao Liu <zhao1.liu@intel.com>, "Richard W.M. Jones" <rjones@redhat.com>,
@@ -106,23 +106,23 @@ Cc: Zhao Liu <zhao1.liu@intel.com>, "Richard W.M. Jones" <rjones@redhat.com>,
  Jean-Christophe Dubois <jcd@tribudubois.net>,
  Jason Wang <jasowang@redhat.com>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH 08/39] migration: replace assert(0) with g_assert_not_reached()
-Date: Tue, 10 Sep 2024 15:15:35 -0700
-Message-Id: <20240910221606.1817478-9-pierrick.bouvier@linaro.org>
+Subject: [PATCH 06/39] hw/net: replace assert(0) with g_assert_not_reached()
+Date: Tue, 10 Sep 2024 15:15:33 -0700
+Message-Id: <20240910221606.1817478-7-pierrick.bouvier@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240910221606.1817478-1-pierrick.bouvier@linaro.org>
 References: <20240910221606.1817478-1-pierrick.bouvier@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::532;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-pg1-x532.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42c;
+ envelope-from=pierrick.bouvier@linaro.org; helo=mail-pf1-x42c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -140,111 +140,22 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 ---
- migration/migration-hmp-cmds.c |  2 +-
- migration/postcopy-ram.c       | 14 +++++++-------
- migration/ram.c                |  6 +++---
- 3 files changed, 11 insertions(+), 11 deletions(-)
+ hw/net/i82596.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/migration/migration-hmp-cmds.c b/migration/migration-hmp-cmds.c
-index 7d608d26e19..e6e96aa6288 100644
---- a/migration/migration-hmp-cmds.c
-+++ b/migration/migration-hmp-cmds.c
-@@ -636,7 +636,7 @@ void hmp_migrate_set_parameter(Monitor *mon, const QDict *qdict)
-         visit_type_bool(v, param, &p->direct_io, &err);
-         break;
-     default:
--        assert(0);
-+        g_assert_not_reached();
-     }
+diff --git a/hw/net/i82596.c b/hw/net/i82596.c
+index 6cc8292a65a..cd416a00ffa 100644
+--- a/hw/net/i82596.c
++++ b/hw/net/i82596.c
+@@ -282,7 +282,7 @@ static void command_loop(I82596State *s)
+         case CmdDump:
+         case CmdDiagnose:
+             printf("FIXME Command %d !!\n", cmd & 7);
+-            assert(0);
++            g_assert_not_reached();
+         }
  
-     if (err) {
-diff --git a/migration/postcopy-ram.c b/migration/postcopy-ram.c
-index 1c374b7ea1e..f431bbc0d4f 100644
---- a/migration/postcopy-ram.c
-+++ b/migration/postcopy-ram.c
-@@ -1411,40 +1411,40 @@ int postcopy_ram_incoming_init(MigrationIncomingState *mis)
- 
- int postcopy_ram_incoming_cleanup(MigrationIncomingState *mis)
- {
--    assert(0);
-+    g_assert_not_reached();
-     return -1;
- }
- 
- int postcopy_ram_prepare_discard(MigrationIncomingState *mis)
- {
--    assert(0);
-+    g_assert_not_reached();
-     return -1;
- }
- 
- int postcopy_request_shared_page(struct PostCopyFD *pcfd, RAMBlock *rb,
-                                  uint64_t client_addr, uint64_t rb_offset)
- {
--    assert(0);
-+    g_assert_not_reached();
-     return -1;
- }
- 
- int postcopy_ram_incoming_setup(MigrationIncomingState *mis)
- {
--    assert(0);
-+    g_assert_not_reached();
-     return -1;
- }
- 
- int postcopy_place_page(MigrationIncomingState *mis, void *host, void *from,
-                         RAMBlock *rb)
- {
--    assert(0);
-+    g_assert_not_reached();
-     return -1;
- }
- 
- int postcopy_place_page_zero(MigrationIncomingState *mis, void *host,
-                         RAMBlock *rb)
- {
--    assert(0);
-+    g_assert_not_reached();
-     return -1;
- }
- 
-@@ -1452,7 +1452,7 @@ int postcopy_wake_shared(struct PostCopyFD *pcfd,
-                          uint64_t client_addr,
-                          RAMBlock *rb)
- {
--    assert(0);
-+    g_assert_not_reached();
-     return -1;
- }
- #endif
-diff --git a/migration/ram.c b/migration/ram.c
-index 67ca3d5d51a..0aa5d347439 100644
---- a/migration/ram.c
-+++ b/migration/ram.c
-@@ -1765,19 +1765,19 @@ bool ram_write_tracking_available(void)
- 
- bool ram_write_tracking_compatible(void)
- {
--    assert(0);
-+    g_assert_not_reached();
-     return false;
- }
- 
- int ram_write_tracking_start(void)
- {
--    assert(0);
-+    g_assert_not_reached();
-     return -1;
- }
- 
- void ram_write_tracking_stop(void)
- {
--    assert(0);
-+    g_assert_not_reached();
- }
- #endif /* defined(__linux__) */
- 
+         /* update status */
 -- 
 2.39.2
 
