@@ -4,87 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78BB6ECE57A
-	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Sep 2024 15:47:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EABDAEDE987
+	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Sep 2024 01:15:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sngbH-0000wM-9m; Mon, 09 Sep 2024 11:46:47 -0400
+	id 1snpTJ-0007E0-2n; Mon, 09 Sep 2024 21:15:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sngbF-0000pc-Kt
- for qemu-riscv@nongnu.org; Mon, 09 Sep 2024 11:46:45 -0400
-Received: from mail-pg1-x532.google.com ([2607:f8b0:4864:20::532])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1sngbE-0004Po-2I
- for qemu-riscv@nongnu.org; Mon, 09 Sep 2024 11:46:45 -0400
-Received: by mail-pg1-x532.google.com with SMTP id
- 41be03b00d2f7-7d50e7a3652so2430899a12.3
- for <qemu-riscv@nongnu.org>; Mon, 09 Sep 2024 08:46:43 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1snpTF-0007A2-Q1; Mon, 09 Sep 2024 21:15:06 -0400
+Received: from out30-98.freemail.mail.aliyun.com ([115.124.30.98])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1snpTC-00079q-Bk; Mon, 09 Sep 2024 21:15:05 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725896802; x=1726501602; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=quVd7PvWgaRhlBSJNDXFPD4W++YWwtHNUiT+1RsmpJI=;
- b=ue3nuu4/F4i8pk4OIvyXCHAD5iYd/PkqKNrQ3bMlCigckQ4jbhSbg2uZIBFAbKGO3x
- fJs5qWPwBqciwdPXxyEa0dHlj1ymxCYJbUFEq9qwWCImb7TiwLHqmTGkXrsTXHZ/Nzyr
- 760dGljqqGOZPrIY0nS6jQ50rtIKJcpCWsc7UBxTpINI+/zInKv3KA8+a4YROVG3TzRn
- dxnnN0d8llybPgaUqGfKUVuVFNxYXaqOyoPSY4eYfcllqJZrh6Ki+rnA2BN4kC+4wJPv
- j20LKvG/vauR8JHCGgQc/lUF/RhHOJ33hdbGot1/FifjXvAjjO4Z65ybDn/qBogeqMOj
- +jZA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725896802; x=1726501602;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=quVd7PvWgaRhlBSJNDXFPD4W++YWwtHNUiT+1RsmpJI=;
- b=E2XOG5pvExfmF51bfEOuF1Iji1o24+xn1m5D03ZqhIOK6pFbuIAHyYlQJGBv/In3Yy
- yy454rqAuyfG03+/qM/AaVitH7YeWDFiUJpzlUU9vJ4YM3lHDr/W6QmzPX9iJFc1uezL
- WHx6u1IxzgTEAabKKFZFcz0MqK1amE9kStTMXnTEH5ykbduxneWcw4ez5BxjELvJgzgI
- elkDgprKzjnx70UUqyzD24KivORm1o24cTS2c0OaBsDFQfdNsb2FmjifjhLN8HHQwFwA
- wYuFQAqnysKs9aodQUrsOQX/GAzz7nX7hO8rnxXTFlGNS+xWFyJhuIx9yfq7JyPZmjfh
- 9Hpw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVFSSBgUnJViptAxCQx3goWahbHsNoPudhKdyo/2f7BpETvzLPEuIot/fcWgDFSbZ3eZ/UlUaPUH5aC@nongnu.org
-X-Gm-Message-State: AOJu0YxRyV/hrkwlDaCls5AvLFYNw+AIBrA5a/LZygA4T4/e7XGS0hd7
- c62w3rS0vtr1EU1YSjLBUDCsYcwwbBLODe9LVkCsEG/UdWwhnyBGGzBSn+GB4vc=
-X-Google-Smtp-Source: AGHT+IEQjKFQVTiYcNR3XMZRvI9PXzA48uGY07R8mCSQ1FGBbHG6nqM/5uPIfmJmVFMTuHpA08GJvQ==
-X-Received: by 2002:a05:6a20:d80c:b0:1cf:2843:f798 with SMTP id
- adf61e73a8af0-1cf2843f932mr8706977637.47.1725896802303; 
- Mon, 09 Sep 2024 08:46:42 -0700 (PDT)
-Received: from [192.168.0.4] (174-21-81-121.tukw.qwest.net. [174.21.81.121])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-718e5990bf2sm3676380b3a.195.2024.09.09.08.46.41
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 09 Sep 2024 08:46:41 -0700 (PDT)
-Message-ID: <80b90332-58dd-4ba6-95b6-171790239d80@linaro.org>
-Date: Mon, 9 Sep 2024 08:46:39 -0700
+ d=linux.alibaba.com; s=default;
+ t=1725930891; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
+ bh=rZZ8GHhSwokTHHhAHnWxpnMzj032GOMBvFtfhHtLitc=;
+ b=GctDTxMla4EzbXEuoSqJzv8Cmn/It5FF8DhJ/MWN5lyum/LBZ4fzTD5jQCNLzjuLVODMbdZ4POP5ir2Aex/ctBleuBQhuv+6uBUFJa6L5hagAEVfy77wJuaS5HaGCCPyFaIf+wm1dy2ZBqdPi5FdBd8ZW6a8tyESbZ90xyhGr64=
+Received: from 30.251.160.182(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0WEhvXpM_1725930889) by smtp.aliyun-inc.com;
+ Tue, 10 Sep 2024 09:14:50 +0800
+Message-ID: <3d2f459a-8d73-48fa-9da1-c8aa7e5989f7@linux.alibaba.com>
+Date: Tue, 10 Sep 2024 09:13:52 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] target/riscv32: Fix masking of physical address
-To: Andrew Jones <ajones@ventanamicro.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bmeng.cn@gmail.com,
- zong.li@sifive.com, liwei1518@gmail.com, cwshu@andestech.com,
- dbarboza@ventanamicro.com, philmd@linaro.org
-References: <20240909083241.43836-2-ajones@ventanamicro.com>
+Subject: Re: [PATCH v3 06/14] tcg/riscv: Implement vector mov/dup{m/i}
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ dbarboza@ventanamicro.com, liwei1518@gmail.com, bmeng.cn@gmail.com,
+ TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
+References: <20240904142739.854-1-zhiwei_liu@linux.alibaba.com>
+ <20240904142739.854-7-zhiwei_liu@linux.alibaba.com>
+ <e8091bd4-95f3-4a7c-966e-521d75a33c79@linaro.org>
 Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240909083241.43836-2-ajones@ventanamicro.com>
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <e8091bd4-95f3-4a7c-966e-521d75a33c79@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::532;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x532.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=115.124.30.98;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-98.freemail.mail.aliyun.com
+X-Spam_score_int: -174
+X-Spam_score: -17.5
+X-Spam_bar: -----------------
+X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,24 +69,73 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 9/9/24 01:32, Andrew Jones wrote:
-> C doesn't extend the sign bit for unsigned types since there isn't a
-> sign bit to extend. This means a promotion of a u32 to a u64 results
-> in the upper 32 bits of the u64 being zero. If that result is then
-> used as a mask on another u64 the upper 32 bits will be cleared. rv32
-> physical addresses may be up to 34 bits wide, so we don't want to
-> clear the high bits while page aligning the address. The fix is to
-> use hwaddr for the mask, which, even on rv32, is 64-bits wide.
-> 
-> Fixes: af3fc195e3c8 ("target/riscv: Change the TLB page size depends on PMP entries.")
-> Signed-off-by: Andrew Jones<ajones@ventanamicro.com>
-> ---
-> -v2: Switch from signed long to hwaddr
-> 
->   target/riscv/cpu_helper.c | 6 +++---
->   1 file changed, 3 insertions(+), 3 deletions(-)
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+On 2024/9/5 14:56, Richard Henderson wrote:
+> On 9/4/24 07:27, LIU Zhiwei wrote:
+>> @@ -698,6 +704,21 @@ static bool tcg_out_mov(TCGContext *s, TCGType 
+>> type, TCGReg ret, TCGReg arg)
+>>       case TCG_TYPE_I64:
+>>           tcg_out_opc_imm(s, OPC_ADDI, ret, arg, 0);
+>>           break;
+>> +    case TCG_TYPE_V64:
+>> +    case TCG_TYPE_V128:
+>> +    case TCG_TYPE_V256:
+>> +        {
+>> +            int nf = get_vec_type_bytes(type) / riscv_vlenb;
+>> +
+>> +            if (nf != 0) {
+>> +                tcg_debug_assert(is_power_of_2(nf) && nf <= 8);
+>> +                tcg_out_opc_vi(s, OPC_VMVNR_V, ret, arg, nf - 1, true);
+>> +            } else {
+>> +                riscv_set_vec_config_vl(s, type);
+>> +                tcg_out_opc_vv(s, OPC_VMV_V_V, ret, TCG_REG_V0, arg, 
+>> true);
+>> +            }
+>> +        }
+>> +        break;
+>
+> Perhaps
+>
+>         int lmul = type - riscv_lg2_vlenb;
+>         int nf = 1 << MIN(lmul, 0);
+>         tcg_out_opc_vi(s, OPC_VMVNR_V, ret, arg, nf - 1);
+>
+> Is there a reason to prefer vmv.v.v over vmvnr.v?
 
-r~
+I think it's a trade-off. For some CPUs,  instruction will be split 
+internally. Thus the less the fraction lmul is, the less micro ops for 
+execution.
+That's the benefit of using vmv.v.v. But here we also need a vsetivli. 
+On some cpus, it can be fusion-ed to the next instruction.
+
+> Seems like we can always move one vector reg...
+OK. I will take this way.
+>
+>> +static void tcg_out_dupi_vec(TCGContext *s, TCGType type, unsigned 
+>> vece,
+>> +                                    TCGReg dst, int64_t arg)
+>> +{
+>> +    if (arg < 16 && arg >= -16) {
+>> +        riscv_set_vec_config_vl_vece(s, type, vece);
+>> +        tcg_out_opc_vi(s, OPC_VMV_V_I, dst, TCG_REG_V0, arg, true);
+>> +        return;
+>> +    }
+>> +    tcg_out_movi(s, TCG_TYPE_I64, TCG_REG_TMP0, arg);
+>> +    tcg_out_dup_vec(s, type, vece, dst, TCG_REG_TMP0);
+>> +}
+>
+> I'll note that 0 and -1 do not require SEW change. I don't know how 
+> often that will come up
+
+On our test on OpenCV, we get a rate of 99.7%. Thus we will optimize 
+this next version.
+
+Thanks,
+Zhiwei
+
+> , since in my testing with aarch64, we usually needed to swap to 
+> TCG_TYPE_V256 anyway.
+>
+>
+> r~
 
