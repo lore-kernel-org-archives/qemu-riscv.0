@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B0C0EE01EB
-	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Sep 2024 22:19:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5137BEE01ED
+	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Sep 2024 22:19:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1so9Ap-0003Sp-1I; Tue, 10 Sep 2024 18:17:23 -0400
+	id 1so9AU-0001QR-UY; Tue, 10 Sep 2024 18:17:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1so9AC-0008Gl-RL
- for qemu-riscv@nongnu.org; Tue, 10 Sep 2024 18:16:45 -0400
-Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
+ id 1so99t-0006s0-8I
+ for qemu-riscv@nongnu.org; Tue, 10 Sep 2024 18:16:26 -0400
+Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1so9AA-0006fB-SW
- for qemu-riscv@nongnu.org; Tue, 10 Sep 2024 18:16:44 -0400
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-718e9c8bd83so186482b3a.1
- for <qemu-riscv@nongnu.org>; Tue, 10 Sep 2024 15:16:41 -0700 (PDT)
+ id 1so99p-0006V4-Oh
+ for qemu-riscv@nongnu.org; Tue, 10 Sep 2024 18:16:24 -0400
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-718d704704aso1182907b3a.3
+ for <qemu-riscv@nongnu.org>; Tue, 10 Sep 2024 15:16:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726006601; x=1726611401; darn=nongnu.org;
+ d=linaro.org; s=google; t=1726006580; x=1726611380; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tK8yXM1iDeE54P3xeT7FLI43fZ41GyYVDWl++WFS7uI=;
- b=xAzgPbLwpvZ1TgUHpbTy7EMLuLWC4YFIcppj8mrOQWuqnk6dfbfBnAMI/k9umRh8bC
- HZ1uneuxRpDiYHBHJrJEdLuEcNDCp2DIf29SgkdlIZHBIeDahzUNytPODbYv5bmkK4vk
- R0sXP25wtQDEKlv3SBb90jQHAhg/6cHbpYssPS+A02rX3nfVuyHVFsPQdsK4v44tna1w
- cukXhghStvwQUaqvcvnl9Jn3sjkrRi/8MKF92JuXjGw53KndJEF3ojgmsDgWsgYN/2bz
- E7PLZcl/z9MbnDBX3x5M++Mig20X2wdWJ2q+uLqbOmgMqPJTcAOpICQtnmIeytJvee3j
- aHGQ==
+ bh=4bb0fjpC/uXLETkc56Hcik4SHlsgHHXUYkY/bpvbVpc=;
+ b=SwaEz81RYv2cXtVkGDJznPNd6qw46cg34lflgjmh8U5v8HrE12TtTr7txtWpt1Ze9x
+ 2PQrnocj80qzzAV1pMRuQIZEK1SeMV/gEp3UtegP6C1VYA4ZqQGcLBiSLD+htVHC2/f2
+ Lg4d02KFozjLDLp5JJ1Dv9wwQnL3cC0UbdNRDL8RBhQqZE47vEtJPTfj6XcBk6sT7vbw
+ lZ6f6RlPiON1hbpeLgtZt4RBJZIAnOSWClx9qhYvEh4PqXGRg6377I/T4IkmGZIlWBAn
+ u+xT7892GwlCIIFV3VLVPyWtGVd0x+1lMrVr66r8q0jVVAd5LoFfUvlFqQciLqj02bJ2
+ YTXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726006601; x=1726611401;
+ d=1e100.net; s=20230601; t=1726006580; x=1726611380;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=tK8yXM1iDeE54P3xeT7FLI43fZ41GyYVDWl++WFS7uI=;
- b=l6QB0DU8ODndY82sp69Y/4s54SgdcLXFmaw94PcDDVaKtpamQzlkscYc5ax0bhvsJg
- Z9ETSc2GnBavvEH3p+wyUZREHKsqwBrLaMffRcy1aKHc7PzwiG4BxTrLNNN3i6vNoZRa
- w5KfjXKclaDxs/9GCCCEMEOf0GpsdoKLPj8GWpwqpk74Cur12JryJs/FBdVQswmpp/rq
- fns2tMCpSWzoCbqG62yc43ul6OK2SbQQGcffd/9GMsXOOmc81cR1ofYxdmgFB1fDCyyb
- Iz0H6Vs1aBUxpimsQCMGKr2J/yXxznzdG1eBbbKQOQgm/88FE0Dd7RFdOklKQAZnUgEo
- QhTA==
+ bh=4bb0fjpC/uXLETkc56Hcik4SHlsgHHXUYkY/bpvbVpc=;
+ b=V/UFJI6Z6wHszN3JHEp/y7N92JOeJVpfkhSex1Gtve0p5TPlpu66gfHH+cjZfZMCR+
+ RkTgClh37niSwvdvDrO5EpyzJ/hfoG2DiZyao+0cbgpt1L7Vs2+RvM//NbVBW4r5YuCI
+ Bt6FvEc/CnLFhB2OpOygbZ/n3EofRrFBcsLdv9iaOBG/JJ0Pk2TZtmOFZSj3q8jVdyJ4
+ xCZLbDh9mNbRU8Yr/hlzESWJXOzE42JYB4eqegQ6KxV2CiYj0j60gQFNMqtSFxGpdgeQ
+ /JUe3txzWEPN0dN4hNMBx+NZOvuWtKJ9GRcKJh10sVUGu9mKEInh7QzX7upH08xwldKZ
+ Z4xw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVmrPm5RKUPiscbb4ZoFIgVliB+wiom0WXXG0bp03nRRFzj+Va+h+d/is3TKkScsl/X+MC8BFxpuvGS@nongnu.org
-X-Gm-Message-State: AOJu0Yw1e4t0YVZMXX4r0dQyrlqonF6nsHOcW40l4r5RoO+iN5xoup0a
- fUsag8bLRJFAJENecDwkEqx6C0fnJ4SHSIbcSEv0TCW7xMJqskkEthn++5WdPZo=
-X-Google-Smtp-Source: AGHT+IHBeJSCPLVgyC868IAgFwwRmLEKo/giNhof2aXBBMvErXgNAwTCgjauJtLdTsaN9WD8c9bHhg==
-X-Received: by 2002:a05:6a21:398d:b0:1cf:3816:d104 with SMTP id
- adf61e73a8af0-1cf5e3cf5d6mr4003930637.3.1726006600863; 
- Tue, 10 Sep 2024 15:16:40 -0700 (PDT)
+ AJvYcCU6Z42QmBsfj87i9Y4DoW9pwrPfRd8LTI4SFx/tLMgxjWiUmTNWhyrUHN7Vvfb37oo09MHptQjj0Dkf@nongnu.org
+X-Gm-Message-State: AOJu0YzNHrgEQVD+HeCDYfCar+l24N9UTay+SO3LjNIkICuB+HGjjsrJ
+ gvXZfMofT8pw56FQlM5a74LSS6hPgZsqZqJm8N85O+LaVtXDnCpBP9AOI1nm2EM=
+X-Google-Smtp-Source: AGHT+IFM7yoNH8xDo/vMJeUSRp0S9a/uDDcAvMhTSJpgsleZma8JtumByGI1crPqNwfnaO/FhIWNLQ==
+X-Received: by 2002:a05:6a00:928c:b0:714:28c7:2455 with SMTP id
+ d2e1a72fcca58-71916d950a2mr1273190b3a.6.1726006580270; 
+ Tue, 10 Sep 2024 15:16:20 -0700 (PDT)
 Received: from linaro.vn.shawcable.net ([2604:3d08:9384:1d00::9633])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-71909003d0esm1884055b3a.93.2024.09.10.15.16.38
+ d2e1a72fcca58-71909003d0esm1884055b3a.93.2024.09.10.15.16.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Sep 2024 15:16:40 -0700 (PDT)
+ Tue, 10 Sep 2024 15:16:19 -0700 (PDT)
 From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Zhao Liu <zhao1.liu@intel.com>, "Richard W.M. Jones" <rjones@redhat.com>,
@@ -106,24 +106,23 @@ Cc: Zhao Liu <zhao1.liu@intel.com>, "Richard W.M. Jones" <rjones@redhat.com>,
  Jean-Christophe Dubois <jcd@tribudubois.net>,
  Jason Wang <jasowang@redhat.com>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH 13/39] tests/unit: replace assert(0) with
- g_assert_not_reached()
-Date: Tue, 10 Sep 2024 15:15:40 -0700
-Message-Id: <20240910221606.1817478-14-pierrick.bouvier@linaro.org>
+Subject: [PATCH 04/39] hw/char: replace assert(0) with g_assert_not_reached()
+Date: Tue, 10 Sep 2024 15:15:31 -0700
+Message-Id: <20240910221606.1817478-5-pierrick.bouvier@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240910221606.1817478-1-pierrick.bouvier@linaro.org>
 References: <20240910221606.1817478-1-pierrick.bouvier@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-pf1-x432.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
+ envelope-from=pierrick.bouvier@linaro.org; helo=mail-pf1-x42d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -141,31 +140,22 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 ---
- tests/unit/test-xs-node.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ hw/char/avr_usart.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/tests/unit/test-xs-node.c b/tests/unit/test-xs-node.c
-index ac94e7ed6c2..2f447a73fb8 100644
---- a/tests/unit/test-xs-node.c
-+++ b/tests/unit/test-xs-node.c
-@@ -212,7 +212,7 @@ static void compare_tx(gpointer key, gpointer val, gpointer opaque)
-         printf("Comparison failure in TX %u after serdes:\n", tx_id);
-         dump_ref("Original", t1->root, 0);
-         dump_ref("Deserialised", t2->root, 0);
--        g_assert(0);
+diff --git a/hw/char/avr_usart.c b/hw/char/avr_usart.c
+index 5bcf9db0b78..e738a2ca97e 100644
+--- a/hw/char/avr_usart.c
++++ b/hw/char/avr_usart.c
+@@ -86,7 +86,7 @@ static void update_char_mask(AVRUsartState *usart)
+         usart->char_mask = 0b11111111;
+         break;
+     default:
+-        assert(0);
 +        g_assert_not_reached();
      }
-     g_assert(t1->nr_nodes == t2->nr_nodes);
  }
-@@ -257,7 +257,7 @@ static void check_serdes(XenstoreImplState *s)
-         printf("Comparison failure in main tree after serdes:\n");
-         dump_ref("Original", s->root, 0);
-         dump_ref("Deserialised", s2->root, 0);
--        g_assert(0);
-+        g_assert_not_reached();
-     }
  
-     nr_transactions1 = g_hash_table_size(s->transactions);
 -- 
 2.39.2
 
