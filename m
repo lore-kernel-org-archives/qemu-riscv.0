@@ -4,102 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAA97EDE9AD
-	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Sep 2024 18:24:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43A52EDE9B4
+	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Sep 2024 20:35:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1so5Wn-0003M4-44; Tue, 10 Sep 2024 14:23:49 -0400
+	id 1so7a1-0002Tf-7k; Tue, 10 Sep 2024 16:35:17 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1so5Wl-0003L1-HZ
- for qemu-riscv@nongnu.org; Tue, 10 Sep 2024 14:23:47 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ (Exim 4.90_1) (envelope-from <mark.cave-ayland@ilande.co.uk>)
+ id 1so7Zw-0002PQ-Ds; Tue, 10 Sep 2024 16:35:12 -0400
+Received: from mail.ilande.co.uk ([2001:41c9:1:41f::167])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1so5Wj-0000jn-Dv
- for qemu-riscv@nongnu.org; Tue, 10 Sep 2024 14:23:47 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1725992624;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=UhS48drDph1UOjmPA2XZWUSFbGzf9avVWp6dtm6ZeWI=;
- b=Wf/YRi3ZSf1qN423JkQaP514polPwUpCm29968jz9c8SomtiQaiqhkAk7WdyYxnZI4hZlq
- NVu+gtZDQuZ7I0BMOt0uwce88EaLjkrpcII7x9kAVFEmLW02W1l2XX29WjvF3jFe4l7K+6
- buUxBEhXQmREyrowvzt4R4D7YPbcWbM=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-335-MxKlTRD8OjKGVZLFUXZ4FA-1; Tue, 10 Sep 2024 14:23:43 -0400
-X-MC-Unique: MxKlTRD8OjKGVZLFUXZ4FA-1
-Received: by mail-wr1-f70.google.com with SMTP id
- ffacd0b85a97d-374bb2f100fso2593744f8f.0
- for <qemu-riscv@nongnu.org>; Tue, 10 Sep 2024 11:23:42 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725992622; x=1726597422;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UhS48drDph1UOjmPA2XZWUSFbGzf9avVWp6dtm6ZeWI=;
- b=XCILLbLJTjEEjGtkjTvDo7NULUGfFv7LP+ampJOHE9G5VYALYeDswV0LLYc4FYeyIU
- fc9LcfgJ1UQBUBGhYP0KTEcyv2a5Ir3AFz3ZDxinNsJhpv7Ye0vOq4INo0rZpxNULXRM
- eENICD2ZO01ruR67qmSpMGTzPFv3mG4aLvA8OcQsgpwHQyrFMJH/ov0u+svNcP6c8zxh
- JJ/CAOCaJIePyEqWMOeQdzh2WeQQFhG1XsdEwxTuncqiJQAjEOUCYHNpvOEbDdFcb2lb
- uFJzDDgARA6tBkVmOb/miLkLF9prllkasq1F78/sm6LVbf6sfoHaBd3A40lPEJSimCMp
- MIrw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWXSam+TL85+3PfJRBwYwtm8WQ++YU4ZuoFbpYzKoWwOBvKrwE3WBATIg4/nC7YOFGi95ql0HMV2Tbg@nongnu.org
-X-Gm-Message-State: AOJu0YzfAQ9jhDhZpmUeNxPRpjMN9xgatiidP6Cj1Yyb1LfTPP5nY3O4
- a00bEK94JE8K1Bk876ChhBgrFYwlpLEqIcn6IVAccaQlL6rVT692ucw+9QphnfhzFKZ5QnSWJny
- xxQ+GRPc8zFd40CeXsRiL0lo9VT2uXhpkRfXRJIWV4JN51ULP/IJ0
-X-Received: by 2002:a5d:634c:0:b0:374:c40d:d437 with SMTP id
- ffacd0b85a97d-378895c9f9fmr9516040f8f.15.1725992621846; 
- Tue, 10 Sep 2024 11:23:41 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFOqVy8YXJ9cVhq0/8MuX060ILCP3Y52f0rmiEWHgfDIGd7mikldaQfqmmacvMEctXPhSeAsg==
-X-Received: by 2002:a5d:634c:0:b0:374:c40d:d437 with SMTP id
- ffacd0b85a97d-378895c9f9fmr9516016f8f.15.1725992620457; 
- Tue, 10 Sep 2024 11:23:40 -0700 (PDT)
-Received: from redhat.com ([31.187.78.63]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-378956654e8sm9570992f8f.41.2024.09.10.11.23.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Sep 2024 11:23:39 -0700 (PDT)
-Date: Tue, 10 Sep 2024 14:23:31 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Zhao Liu <zhao1.liu@intel.com>
-Cc: Daniel P =?iso-8859-1?Q?=2E_Berrang=E9?= <berrange@redhat.com>,
- Igor Mammedov <imammedo@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>,
- Yanan Wang <wangyanan55@huawei.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Eric Blake <eblake@redhat.com>, Markus Armbruster <armbru@redhat.com>,
- Marcelo Tosatti <mtosatti@redhat.com>,
- Alex =?iso-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>,
- Peter Maydell <peter.maydell@linaro.org>,
- Jonathan Cameron <Jonathan.Cameron@huawei.com>,
- Sia Jee Heng <jeeheng.sia@starfivetech.com>,
- Alireza Sanaee <alireza.sanaee@huawei.com>, qemu-devel@nongnu.org,
- kvm@vger.kernel.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
- Zhenyu Wang <zhenyu.z.wang@intel.com>,
- Dapeng Mi <dapeng1.mi@linux.intel.com>, Yongwei Ma <yongwei.ma@intel.com>
-Subject: Re: [PATCH v2 0/7] Introduce SMP Cache Topology
-Message-ID: <20240910142311-mutt-send-email-mst@kernel.org>
-References: <20240908125920.1160236-1-zhao1.liu@intel.com>
+ (Exim 4.90_1) (envelope-from <mark.cave-ayland@ilande.co.uk>)
+ id 1so7Zu-0005uq-6z; Tue, 10 Sep 2024 16:35:12 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=ilande.co.uk; s=20220518; h=Subject:Content-Transfer-Encoding:Content-Type:
+ In-Reply-To:From:References:Cc:To:MIME-Version:Date:Message-ID:Sender:
+ Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+ :Resent-To:Resent-Cc:Resent-Message-ID;
+ bh=zHnOqHVEQJmkInTlASwxCPY5g9ucz3r3LlAQPP57ncc=; b=hYD9MOKnjK+t75WzTYHlmPj3Bo
+ NTikCEg+jWRuNHXMuG+fnLgWUBpVTl5TPtOUoMbgHGWdVtuGJMgXxMdJMcx3CNCbgJxnm85OQfkJJ
+ et0Xsi0pQmlEqbjorAlcaMsIUxbU9iT+V0Ym/A6RKf+sns1tr/VASRgqVuUKo+JMcY+yto367oVuv
+ QDQlX9U6YowAgmRfRmsCeVR8jTdajJLuXT8czawKB7QWIt7TgbvG8VGbPBabWEJeyw2o2sQrVoG9l
+ leLXBwR7sZ5pRF6kiXdU+0DR+f1VfUxEgEW7ynJnrkOJs6YWWj5/Il8jv4GygY6zDm9rPunpWPjFi
+ S0UEL21zSW4ZjSr4uQqt2j+E1JVAkrUIryR10IvgMqqPZ+iOZVLHVg8CDAUQRoVNp4vCCHjsdM47Z
+ y9b9ecvyDEIlJE9n8b4p+tuhND0hVVcmqQn44B9LKm70gjPvJ7Y0O7a0fUXWvjZ2TW3u3q11WTSLJ
+ 2u2p3yLAbkTvVLIHlmZFKP8Ju5EkXUQygMXbV5ZKkGcjm2m274IOsMDPQDw7ZU2TW08Zp4qZlDpJd
+ W4r2pkRMzlnLxD9/klCWebtoHJftwVX+RxHYwnxxRqJ1aV3zIWtSVOjiuFlDM4WMEOodVoXAWEGlD
+ 6uB5rTxVN+9qqBZDEaDZt7Ib45FMgFLNkWpBhJsec=;
+Received: from [2a00:23c4:8bb8:1400:b001:a616:651c:c1d5]
+ by mail.ilande.co.uk with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.92) (envelope-from <mark.cave-ayland@ilande.co.uk>)
+ id 1so7Zk-0000r1-RT; Tue, 10 Sep 2024 21:35:04 +0100
+Message-ID: <1eadf79e-ffe3-4d46-93a8-bebebf38e03c@ilande.co.uk>
+Date: Tue, 10 Sep 2024 21:34:59 +0100
 MIME-Version: 1.0
-In-Reply-To: <20240908125920.1160236-1-zhao1.liu@intel.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=mst@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
+User-Agent: Mozilla Thunderbird
+To: Alistair Francis <alistair23@gmail.com>, qemu-devel@nongnu.org,
+ alex.bennee@linaro.org, peter.maydell@linaro.org
+Cc: Bin Meng <bmeng.cn@gmail.com>, palmer@dabbelt.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
+ atishp@rivosinc.com, dbarboza@ventanamicro.com,
+ Thomas Huth <thuth@redhat.com>
+References: <20240910045419.1252277-1-alistair.francis@wdc.com>
+ <20240910045419.1252277-3-alistair.francis@wdc.com>
+Content-Language: en-US
+From: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
+Autocrypt: addr=mark.cave-ayland@ilande.co.uk; keydata=
+ xsBNBFQJuzwBCADAYvxrwUh1p/PvUlNFwKosVtVHHplgWi5p29t58QlOUkceZG0DBYSNqk93
+ 3JzBTbtd4JfFcSupo6MNNOrCzdCbCjZ64ik8ycaUOSzK2tKbeQLEXzXoaDL1Y7vuVO7nL9bG
+ E5Ru3wkhCFc7SkoypIoAUqz8EtiB6T89/D9TDEyjdXUacc53R5gu8wEWiMg5MQQuGwzbQy9n
+ PFI+mXC7AaEUqBVc2lBQVpAYXkN0EyqNNT12UfDLdxaxaFpUAE2pCa2LTyo5vn5hEW+i3VdN
+ PkmjyPvL6DdY03fvC01PyY8zaw+UI94QqjlrDisHpUH40IUPpC/NB0LwzL2aQOMkzT2NABEB
+ AAHNME1hcmsgQ2F2ZS1BeWxhbmQgPG1hcmsuY2F2ZS1heWxhbmRAaWxhbmRlLmNvLnVrPsLA
+ eAQTAQIAIgUCVAm7PAIbAwYLCQgHAwIGFQgCCQoLBBYCAwECHgECF4AACgkQW8LFb64PMh9f
+ NAgAuc3ObOEY8NbZko72AGrg2tWKdybcMVITxmcor4hb9155o/OWcA4IDbeATR6cfiDL/oxU
+ mcmtXVgPqOwtW3NYAKr5g/FrZZ3uluQ2mtNYAyTFeALy8YF7N3yhs7LOcpbFP7tEbkSzoXNG
+ z8iYMiYtKwttt40WaheWuRs0ZOLbs6yoczZBDhna3Nj0LA3GpeJKlaV03O4umjKJgACP1c/q
+ T2Pkg+FCBHHFP454+waqojHp4OCBo6HyK+8I4wJRa9Z0EFqXIu8lTDYoggeX0Xd6bWeCFHK3
+ DhD0/Xi/kegSW33unsp8oVcM4kcFxTkpBgj39dB4KwAUznhTJR0zUHf63M7ATQRUCbs8AQgA
+ y7kyevA4bpetM/EjtuqQX4U05MBhEz/2SFkX6IaGtTG2NNw5wbcAfhOIuNNBYbw6ExuaJ3um
+ 2uLseHnudmvN4VSJ5Hfbd8rhqoMmmO71szgT/ZD9MEe2KHzBdmhmhxJdp+zQNivy215j6H27
+ 14mbC2dia7ktwP1rxPIX1OOfQwPuqlkmYPuVwZP19S4EYnCELOrnJ0m56tZLn5Zj+1jZX9Co
+ YbNLMa28qsktYJ4oU4jtn6V79H+/zpERZAHmH40IRXdR3hA+Ye7iC/ZpWzT2VSDlPbGY9Yja
+ Sp7w2347L5G+LLbAfaVoejHlfy/msPeehUcuKjAdBLoEhSPYzzdvEQARAQABwsBfBBgBAgAJ
+ BQJUCbs8AhsMAAoJEFvCxW+uDzIfabYIAJXmBepHJpvCPiMNEQJNJ2ZSzSjhic84LTMWMbJ+
+ opQgr5cb8SPQyyb508fc8b4uD8ejlF/cdbbBNktp3BXsHlO5BrmcABgxSP8HYYNsX0n9kERv
+ NMToU0oiBuAaX7O/0K9+BW+3+PGMwiu5ml0cwDqljxfVN0dUBZnQ8kZpLsY+WDrIHmQWjtH+
+ Ir6VauZs5Gp25XLrL6bh/SL8aK0BX6y79m5nhfKI1/6qtzHAjtMAjqy8ChPvOqVVVqmGUzFg
+ KPsrrIoklWcYHXPyMLj9afispPVR8e0tMKvxzFBWzrWX1mzljbBlnV2n8BIwVXWNbgwpHSsj
+ imgcU9TTGC5qd9g=
+In-Reply-To: <20240910045419.1252277-3-alistair.francis@wdc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-SA-Exim-Connect-IP: 2a00:23c4:8bb8:1400:b001:a616:651c:c1d5
+X-SA-Exim-Mail-From: mark.cave-ayland@ilande.co.uk
+Subject: Re: [PATCH v4 2/2] hw/char: sifive_uart: Print uart characters async
+X-SA-Exim-Version: 4.2.1 (built Wed, 08 May 2019 21:11:16 +0000)
+X-SA-Exim-Scanned: Yes (on mail.ilande.co.uk)
+Received-SPF: pass client-ip=2001:41c9:1:41f::167;
+ envelope-from=mark.cave-ayland@ilande.co.uk; helo=mail.ilande.co.uk
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.145,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -115,153 +109,250 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sun, Sep 08, 2024 at 08:59:13PM +0800, Zhao Liu wrote:
-> Hi all,
-> 
-> Compared with previous Patch v1 [1], I've put the cache properties list
-> into -machine, this is to meet current needs and also remain compatible
-> with my future topology support (more discussion details, pls refer [2]).
-> 
-> This series is based on the commit 1581a0bc928d ("Merge tag 'pull-ufs-
-> 20240906' of https://gitlab.com/jeuk20.kim/qemu into staging ufs
-> queue").
+On 10/09/2024 05:54, Alistair Francis wrote:
 
+> The current approach of using qemu_chr_fe_write() and ignoring the
+> return values results in dropped characters [1].
+> 
+> Let's update the SiFive UART to use a async sifive_uart_xmit() function
+> to transmit the characters and apply back pressure to the guest with
+> the SIFIVE_UART_TXFIFO_FULL status.
+> 
+> This should avoid dropped characters and more realisticly model the
+> hardware.
 
-Needs review from QOM maintainers.
+Does the UART work reliably using the fifo8_*_bufptr() functions? One of the 
+motivations for my recent Fifo8 series is that these functions don't handle the 
+wraparound correctly, unlike the fifo8_*_buf() functions in my recent Fifo8 series 
+which do. This was the cause of Phil's async issue in 
+https://mail.gnu.org/archive/html/qemu-devel/2024-07/msg05028.html.
 
-> Background
-> ==========
+> 1: https://gitlab.com/qemu-project/qemu/-/issues/2114
 > 
-> The x86 and ARM (RISCV) need to allow user to configure cache properties
-> (current only topology):
->  * For x86, the default cache topology model (of max/host CPU) does not
->    always match the Host's real physical cache topology. Performance can
->    increase when the configured virtual topology is closer to the
->    physical topology than a default topology would be.
->  * For ARM, QEMU can't get the cache topology information from the CPU
->    registers, then user configuration is necessary. Additionally, the
->    cache information is also needed for MPAM emulation (for TCG) to
->    build the right PPTT. (Originally from Jonathan)
-> 
-> 
-> About smp-cache
-> ===============
-> 
-> In this version, smp-cache is implemented as a array integrated in
-> -machine. Though -machine currently can't support JSON format, this is
-> the one of the directions of future.
-> 
-> An example is as follows:
-> 
-> smp_cache=smp-cache.0.cache=l1i,smp-cache.0.topology=core,smp-cache.1.cache=l1d,smp-cache.1.topology=core,smp-cache.2.cache=l2,smp-cache.2.topology=module,smp-cache.3.cache=l3,smp-cache.3.topology=die
-> 
-> "cache" specifies the cache that the properties will be applied on. This
-> field is the combination of cache level and cache type. Now it supports
-> "l1d" (L1 data cache), "l1i" (L1 instruction cache), "l2" (L2 unified
-> cache) and "l3" (L3 unified cache).
-> 
-> "topology" field accepts CPU topology levels including "thread", "core",
-> "module", "cluster", "die", "socket", "book", "drawer" and a special
-> value "default".
-> 
-> The "default" is introduced to make it easier for libvirt to set a
-> default parameter value without having to care about the specific
-> machine (because currently there is no proper way for machine to
-> expose supported topology levels and caches).
-> 
-> If "default" is set, then the cache topology will follow the
-> architecture's default cache topology model. If other CPU topology level
-> is set, the cache will be shared at corresponding CPU topology level.
-> 
-> 
-> Welcome your comment!
-> 
-> 
-> [1]: Patch v1: https://lore.kernel.org/qemu-devel/20240704031603.1744546-1-zhao1.liu@intel.com/
-> [2]: API disscussion: https://lore.kernel.org/qemu-devel/8734ndj33j.fsf@pond.sub.org/
-> 
-> Thanks and Best Regards,
-> Zhao
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Tested-by: Thomas Huth <thuth@redhat.com>
 > ---
-> Changelog:
+>   include/hw/char/sifive_uart.h | 16 +++++-
+>   hw/char/sifive_uart.c         | 94 ++++++++++++++++++++++++++++++++---
+>   2 files changed, 102 insertions(+), 8 deletions(-)
 > 
-> Main changes since Patch v1:
->  * Dropped handwriten smp-cache object and integrated cache properties
->    list into MachineState and used -machine to configure SMP cache
->    properties. (Markus)
->  * Dropped prefix of CpuTopologyLevel enumeration. (Markus)
->  * Rename CPU_TOPO_LEVEL_* to CPU_TOPOLOGY_LEVEL_* to match the QAPI's
->    generated code. (Markus)
->  * Renamed SMPCacheProperty/SMPCacheProperties (QAPI structures) to
->    SmpCacheProperties/SmpCachePropertiesWrapper. (Markus)
->  * Renamed SMPCacheName (QAPI structure) to SmpCacheLevelAndType and
->    dropped prefix. (Markus)
->  * Renamed 'name' field in SmpCacheProperties to 'cache', since the
->    type and level of the cache in SMP system could be able to specify
->    all of these kinds of cache explicitly enough.
->  * Renamed 'topo' field in SmpCacheProperties to 'topology'. (Markus)
->  * Returned error information when user repeats setting cache
->    properties. (Markus)
->  * Renamed SmpCacheLevelAndType to CacheLevelAndType, since this
->    representation is general across SMP or hybrid system.
->  * Dropped machine_check_smp_cache_support() and did the check when
->    -machine parses smp-cache in machine_parse_smp_cache().
-> 
-> Main changes since RFC v2:
->  * Dropped cpu-topology.h and cpu-topology.c since QAPI has the helper
->    (CpuTopologyLevel_str) to convert enum to string. (Markus)
->  * Fixed text format in machine.json (CpuTopologyLevel naming, 2 spaces
->    between sentences). (Markus)
->  * Added a new level "default" to de-compatibilize some arch-specific
->    topo settings. (Daniel)
->  * Moved CpuTopologyLevel to qapi/machine-common.json, at where the
->    cache enumeration and smp-cache object would be added.
->    - If smp-cache object is defined in qapi/machine.json, storage-daemon
->      will complain about the qmp cmds in qapi/machine.json during
->      compiling.
->  * Referred to Daniel's suggestion to introduce cache JSON list, though
->    as a standalone object since -smp/-machine can't support JSON.
->  * Linked machine's smp_cache to smp-cache object instead of a builtin
->    structure. This is to get around the fact that the keyval format of
->    -machine can't support JSON.
->  * Wrapped the cache topology level access into a helper.
->  * Split as a separate commit to just include compatibility checking and
->    topology checking.
->  * Allow setting "default" topology level even though the cache
->    isn't supported by machine. (Daniel)
->  * Rewrote the document of smp-cache object.
-> 
-> Main changes since RFC v1:
->  * Split CpuTopology renaimg out of this RFC.
->  * Use QAPI to enumerate CPU topology levels.
->  * Drop string_to_cpu_topo() since QAPI will help to parse the topo
->    levels.
->  * Set has_*_cache field in machine_get_smp(). (JeeHeng)
->  * Use "*_cache=topo_level" as -smp example as the original "level"
->    term for a cache has a totally different meaning. (Jonathan)
-> ---
-> Zhao Liu (7):
->   hw/core: Make CPU topology enumeration arch-agnostic
->   qapi/qom: Define cache enumeration and properties
->   hw/core: Add smp cache topology for machine
->   hw/core: Check smp cache topology support for machine
->   i386/cpu: Support thread and module level cache topology
->   i386/cpu: Update cache topology with machine's configuration
->   i386/pc: Support cache topology in -machine for PC machine
-> 
->  hw/core/machine-smp.c      | 119 +++++++++++++++++++++++
->  hw/core/machine.c          |  44 +++++++++
->  hw/i386/pc.c               |   4 +
->  hw/i386/x86-common.c       |   4 +-
->  include/hw/boards.h        |  13 +++
->  include/hw/i386/topology.h |  22 +----
->  qapi/machine-common.json   |  96 ++++++++++++++++++-
->  qemu-options.hx            |  28 +++++-
->  target/i386/cpu.c          | 191 ++++++++++++++++++++++---------------
->  target/i386/cpu.h          |   4 +-
->  10 files changed, 425 insertions(+), 100 deletions(-)
-> 
-> -- 
-> 2.34.1
+> diff --git a/include/hw/char/sifive_uart.h b/include/hw/char/sifive_uart.h
+> index 7f6c79f8bd..0846cf6218 100644
+> --- a/include/hw/char/sifive_uart.h
+> +++ b/include/hw/char/sifive_uart.h
+> @@ -24,6 +24,7 @@
+>   #include "hw/qdev-properties.h"
+>   #include "hw/sysbus.h"
+>   #include "qom/object.h"
+> +#include "qemu/fifo8.h"
+>   
+>   enum {
+>       SIFIVE_UART_TXFIFO        = 0,
+> @@ -48,9 +49,13 @@ enum {
+>       SIFIVE_UART_IP_RXWM       = 2  /* Receive watermark interrupt pending */
+>   };
+>   
+> +#define SIFIVE_UART_TXFIFO_FULL    0x80000000
+> +
+>   #define SIFIVE_UART_GET_TXCNT(txctrl)   ((txctrl >> 16) & 0x7)
+>   #define SIFIVE_UART_GET_RXCNT(rxctrl)   ((rxctrl >> 16) & 0x7)
+> +
+>   #define SIFIVE_UART_RX_FIFO_SIZE 8
+> +#define SIFIVE_UART_TX_FIFO_SIZE 8
+>   
+>   #define TYPE_SIFIVE_UART "riscv.sifive.uart"
+>   OBJECT_DECLARE_SIMPLE_TYPE(SiFiveUARTState, SIFIVE_UART)
+> @@ -63,13 +68,20 @@ struct SiFiveUARTState {
+>       qemu_irq irq;
+>       MemoryRegion mmio;
+>       CharBackend chr;
+> -    uint8_t rx_fifo[SIFIVE_UART_RX_FIFO_SIZE];
+> -    uint8_t rx_fifo_len;
+> +
+> +    uint32_t txfifo;
+>       uint32_t ie;
+>       uint32_t ip;
+>       uint32_t txctrl;
+>       uint32_t rxctrl;
+>       uint32_t div;
+> +
+> +    uint8_t rx_fifo[SIFIVE_UART_RX_FIFO_SIZE];
+> +    uint8_t rx_fifo_len;
+> +
+> +    Fifo8 tx_fifo;
+> +
+> +    QEMUTimer *fifo_trigger_handle;
+>   };
+>   
+>   SiFiveUARTState *sifive_uart_create(MemoryRegion *address_space, hwaddr base,
+> diff --git a/hw/char/sifive_uart.c b/hw/char/sifive_uart.c
+> index 7fc6787f69..16a70c7ad7 100644
+> --- a/hw/char/sifive_uart.c
+> +++ b/hw/char/sifive_uart.c
+> @@ -64,6 +64,71 @@ static void sifive_uart_update_irq(SiFiveUARTState *s)
+>       }
+>   }
+>   
+> +static gboolean sifive_uart_xmit(void *do_not_use, GIOCondition cond,
+> +                                 void *opaque)
+> +{
+> +    SiFiveUARTState *s = opaque;
+> +    int ret;
+> +    const uint8_t *characters;
+> +    uint32_t numptr = 0;
+> +
+> +    /* instant drain the fifo when there's no back-end */
+> +    if (!qemu_chr_fe_backend_connected(&s->chr)) {
+> +        fifo8_reset(&s->tx_fifo);
+> +        return G_SOURCE_REMOVE;
+> +    }
+> +
+> +    if (fifo8_is_empty(&s->tx_fifo)) {
+> +        return G_SOURCE_REMOVE;
+> +    }
+> +
+> +    /* Don't pop the FIFO in case the write fails */
+> +    characters = fifo8_peek_bufptr(&s->tx_fifo,
+> +                                   fifo8_num_used(&s->tx_fifo), &numptr);
+> +    ret = qemu_chr_fe_write(&s->chr, characters, numptr);
+> +
+> +    if (ret >= 0) {
+> +        /* We wrote the data, actually pop the fifo */
+> +        fifo8_pop_bufptr(&s->tx_fifo, ret, NULL);
+> +    }
+> +
+> +    if (!fifo8_is_empty(&s->tx_fifo)) {
+> +        guint r = qemu_chr_fe_add_watch(&s->chr, G_IO_OUT | G_IO_HUP,
+> +                                        sifive_uart_xmit, s);
+> +        if (!r) {
+> +            fifo8_reset(&s->tx_fifo);
+> +            return G_SOURCE_REMOVE;
+> +        }
+> +    }
+> +
+> +    /* Clear the TX Full bit */
+> +    if (!fifo8_is_full(&s->tx_fifo)) {
+> +        s->txfifo &= ~SIFIVE_UART_TXFIFO_FULL;
+> +    }
+> +
+> +    sifive_uart_update_irq(s);
+> +    return G_SOURCE_REMOVE;
+> +}
+> +
+> +static void sifive_uart_write_tx_fifo(SiFiveUARTState *s, const uint8_t *buf,
+> +                                      int size)
+> +{
+> +    uint64_t current_time = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
+> +
+> +    if (size > fifo8_num_free(&s->tx_fifo)) {
+> +        size = fifo8_num_free(&s->tx_fifo);
+> +        qemu_log_mask(LOG_GUEST_ERROR, "sifive_uart: TX FIFO overflow");
+> +    }
+> +
+> +    fifo8_push_all(&s->tx_fifo, buf, size);
+> +
+> +    if (fifo8_is_full(&s->tx_fifo)) {
+> +        s->txfifo |= SIFIVE_UART_TXFIFO_FULL;
+> +    }
+> +
+> +    timer_mod(s->fifo_trigger_handle, current_time + 100);
+> +}
+> +
+>   static uint64_t
+>   sifive_uart_read(void *opaque, hwaddr addr, unsigned int size)
+>   {
+> @@ -82,7 +147,7 @@ sifive_uart_read(void *opaque, hwaddr addr, unsigned int size)
+>           return 0x80000000;
+>   
+>       case SIFIVE_UART_TXFIFO:
+> -        return 0; /* Should check tx fifo */
+> +        return s->txfifo;
+>       case SIFIVE_UART_IE:
+>           return s->ie;
+>       case SIFIVE_UART_IP:
+> @@ -106,12 +171,10 @@ sifive_uart_write(void *opaque, hwaddr addr,
+>   {
+>       SiFiveUARTState *s = opaque;
+>       uint32_t value = val64;
+> -    unsigned char ch = value;
+>   
+>       switch (addr) {
+>       case SIFIVE_UART_TXFIFO:
+> -        qemu_chr_fe_write(&s->chr, &ch, 1);
+> -        sifive_uart_update_irq(s);
+> +        sifive_uart_write_tx_fifo(s, (uint8_t *) &value, 1);
+>           return;
+>       case SIFIVE_UART_IE:
+>           s->ie = val64;
+> @@ -131,6 +194,13 @@ sifive_uart_write(void *opaque, hwaddr addr,
+>                     __func__, (int)addr, (int)value);
+>   }
+>   
+> +static void fifo_trigger_update(void *opaque)
+> +{
+> +    SiFiveUARTState *s = opaque;
+> +
+> +    sifive_uart_xmit(NULL, G_IO_OUT, s);
+> +}
+> +
+>   static const MemoryRegionOps sifive_uart_ops = {
+>       .read = sifive_uart_read,
+>       .write = sifive_uart_write,
+> @@ -197,6 +267,9 @@ static void sifive_uart_realize(DeviceState *dev, Error **errp)
+>   {
+>       SiFiveUARTState *s = SIFIVE_UART(dev);
+>   
+> +    s->fifo_trigger_handle = timer_new_ns(QEMU_CLOCK_VIRTUAL,
+> +                                          fifo_trigger_update, s);
+> +
+>       qemu_chr_fe_set_handlers(&s->chr, sifive_uart_can_rx, sifive_uart_rx,
+>                                sifive_uart_event, sifive_uart_be_change, s,
+>                                NULL, true);
+> @@ -206,12 +279,18 @@ static void sifive_uart_realize(DeviceState *dev, Error **errp)
+>   static void sifive_uart_reset_enter(Object *obj, ResetType type)
+>   {
+>       SiFiveUARTState *s = SIFIVE_UART(obj);
+> +
+> +    s->txfifo = 0;
+>       s->ie = 0;
+>       s->ip = 0;
+>       s->txctrl = 0;
+>       s->rxctrl = 0;
+>       s->div = 0;
+> +
+>       s->rx_fifo_len = 0;
+> +
+> +    memset(s->rx_fifo, 0, SIFIVE_UART_RX_FIFO_SIZE);
+> +    fifo8_create(&s->tx_fifo, SIFIVE_UART_TX_FIFO_SIZE);
+>   }
+>   
+>   static void sifive_uart_reset_hold(Object *obj, ResetType type)
+> @@ -222,8 +301,8 @@ static void sifive_uart_reset_hold(Object *obj, ResetType type)
+>   
+>   static const VMStateDescription vmstate_sifive_uart = {
+>       .name = TYPE_SIFIVE_UART,
+> -    .version_id = 1,
+> -    .minimum_version_id = 1,
+> +    .version_id = 2,
+> +    .minimum_version_id = 2,
+>       .fields = (const VMStateField[]) {
+>           VMSTATE_UINT8_ARRAY(rx_fifo, SiFiveUARTState,
+>                               SIFIVE_UART_RX_FIFO_SIZE),
+> @@ -233,6 +312,9 @@ static const VMStateDescription vmstate_sifive_uart = {
+>           VMSTATE_UINT32(txctrl, SiFiveUARTState),
+>           VMSTATE_UINT32(rxctrl, SiFiveUARTState),
+>           VMSTATE_UINT32(div, SiFiveUARTState),
+> +        VMSTATE_UINT32(txfifo, SiFiveUARTState),
+> +        VMSTATE_FIFO8(tx_fifo, SiFiveUARTState),
+> +        VMSTATE_TIMER_PTR(fifo_trigger_handle, SiFiveUARTState),
+>           VMSTATE_END_OF_LIST()
+>       },
+>   };
+
+
+ATB,
+
+Mark.
 
 
