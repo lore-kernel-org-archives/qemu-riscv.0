@@ -4,78 +4,123 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1345EEE01E9
-	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Sep 2024 21:29:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0EB2EE01ED
+	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Sep 2024 22:16:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1so8PK-0006ZR-SY; Tue, 10 Sep 2024 17:28:18 -0400
+	id 1so99n-0006X7-Cy; Tue, 10 Sep 2024 18:16:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gregorhaas1997@gmail.com>)
- id 1so8PJ-0006Qu-12; Tue, 10 Sep 2024 17:28:17 -0400
-Received: from mail-yb1-xb33.google.com ([2607:f8b0:4864:20::b33])
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
+ id 1so99j-0006Rj-Ku
+ for qemu-riscv@nongnu.org; Tue, 10 Sep 2024 18:16:15 -0400
+Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <gregorhaas1997@gmail.com>)
- id 1so8PH-0002OG-Bp; Tue, 10 Sep 2024 17:28:16 -0400
-Received: by mail-yb1-xb33.google.com with SMTP id
- 3f1490d57ef6-e1a9dc3f0a3so6482020276.0; 
- Tue, 10 Sep 2024 14:28:14 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
+ id 1so99g-0006RZ-Qv
+ for qemu-riscv@nongnu.org; Tue, 10 Sep 2024 18:16:15 -0400
+Received: by mail-pf1-x436.google.com with SMTP id
+ d2e1a72fcca58-718d91eef2eso192798b3a.1
+ for <qemu-riscv@nongnu.org>; Tue, 10 Sep 2024 15:16:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1726003693; x=1726608493; darn=nongnu.org;
+ d=linaro.org; s=google; t=1726006570; x=1726611370; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=22XBIU3pc0P+VXjFfMQTf9BHKfxrdihaJYixQ+/HslQ=;
- b=gtj8a67EKzYrJfddUei6P64tndT7cwZSENBs/lx6DwQ66O3V6esJWKSlQrpAOSBWG8
- DHwqc08WBfDahwrdcewJdT1yrbW0WXe3u+VNA8CU7uO3OYvuLFl3XBDuqjTN7fj0Xe4V
- KhVWxKgkAoEc/+k30NnpNX5F9U123p7fk5tI+YR9Vh/NOx3nvAoNgZRadjS7pl/FsrJR
- dUxqMYZhisKnyHbZq4Ll4n1PhjNmb37nB8bdhnHEAcNJwp0p/Zc9udSjC0693oqteDeQ
- wdmH7x2wKlk3l2PNJHSU8hc+Gbg9vXeoNx9YJlGiVT09LkyM2ByFvydvjVl5ThiEUcm8
- s6Xg==
+ bh=YSyqJppZZS4UpzgxKNiY6ieJzLYfceDr8xhPE0xjFbI=;
+ b=DgM3TYdqDLAoXO1ahL5m0BMH82qpbxJ7ZnqH48YL2TxDqwtWjAXoldG0wEyAentiB3
+ 2dK7hUwlqBbwPpUhDQhPOQwedIrc22os38nCwC68W5tbOuTd1rbT13Bhnh0izYx89JLk
+ EgikWt4GwduDAo2BEx8a3D3W3AA1S8aqYwaHVED5E6kJt4OgmmRF4aCSMac9F8PVfsCW
+ 9sMvGsb8rqU+u47TA3XJwwvJa1WtkzGWPxwOtgs1ZfT6hm3TmbMzNgVDpZAqr68SF7sG
+ gpy5EwJB8QC7TqXjyiKRNc44oAqhUrgfUMo7IKH36WgMGiU6wRJkW6s1G5eiJxzfi8DV
+ h5AA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726003693; x=1726608493;
+ d=1e100.net; s=20230601; t=1726006571; x=1726611371;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=22XBIU3pc0P+VXjFfMQTf9BHKfxrdihaJYixQ+/HslQ=;
- b=torRh/J3JlEWEbajXE4VrGxlpITnJHP6gU05xP6c1rMQKImMK0jtqFhdjgyidGkbUc
- Wy9JAwCrxNtCqyl6GjPyZ9JB9QrIqV4y4ZymPVV7feO+hbUt93dFwKBdVU457F/sc+3k
- MKOgxFq2vmBupuD0+3N+10oleH0aBEnAzaZfL0wulEih/6hYH0dikRKEoBM+7+Q8/nA1
- F0kn4oGFTRGVbKW5YUuavF1PQQyhK+Lbgy2wxhsnlIpZTyaEXS1tN3gA193n6JPFB3Iz
- TpgZ6+V82XG/CRreJMQBQXob0N2QZ103wne+TrFZSfJjvmGPdH4s992E1ZMS5efeXdMn
- bgCg==
-X-Gm-Message-State: AOJu0YzI8fid5smO8NZuDh70wFUcxxR2B/UfpwRDy1XkafFDo1mncTy9
- O/s1pQqpGCPpB0zXN7FLq9bKSPU7I6gEa6oBKOQhq67eDdNjyDihOgeaWY8e
-X-Google-Smtp-Source: AGHT+IFMQXFjG2JvvW+Imws4sLBxgjmly7Akyjvs2ghVhCgOynAHpCdfu/Jijq8zj6UKN0ubQwjTfg==
-X-Received: by 2002:a05:6902:2293:b0:e11:6348:5d95 with SMTP id
- 3f1490d57ef6-e1d348a1b9cmr17072624276.7.1726003693670; 
- Tue, 10 Sep 2024 14:28:13 -0700 (PDT)
-Received: from localhost ([2600:1700:830:3db0::14])
- by smtp.gmail.com with UTF8SMTPSA id
- 3f1490d57ef6-e1d7ba163b5sm438904276.26.2024.09.10.14.28.12
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 10 Sep 2024 14:28:13 -0700 (PDT)
-From: Gregor Haas <gregorhaas1997@gmail.com>
+ bh=YSyqJppZZS4UpzgxKNiY6ieJzLYfceDr8xhPE0xjFbI=;
+ b=i+kKJlWfMgBLAlveP+76yuzm1bDg07GSciCO9BzPv3KuU1eqKGeSd8Mxop9H7kJoCH
+ 90QCT1pPq7tkF37MLmQf7wM4E7t+s0YPcR+A/rhkllhzEOZtz8178GcVz/HknwZqZnCU
+ BJooFWmvHvTuYrQVG0zjsBMG6JVPlUw+Jwhg6HyU/8rTfvdQllp9N7uc4+KES62XoEZu
+ RePvfr4Oejf95RYz8p/+cppOkdp3LaR/FkArb9PEmpFnBIy5o+9+9yy4+wBIEU5Cg801
+ X/swL6+O6gwbcnIShtgAdgO0N5DLhiXxoGR/fr9sea08Nulvo3vr5FfzvT3vD0+v0k9K
+ rIWA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVvrA/3GDa+mF/++9wFaOjBcZXpejT+qKEyrk2M22B4a6OGOvx3BB7Fmks0rVdtrikOf0N7Wbu82PC4@nongnu.org
+X-Gm-Message-State: AOJu0YwEnfVWrbkqxByCMrpeOB2fxdMIgNrjm5dRimnO/GnON1TeIMTp
+ rkrWVqPZQWFRjR8eGdca/Ng6GSc1CABk9dqhG5VlkjfpvKt/821L0+ck0uT0zuQ=
+X-Google-Smtp-Source: AGHT+IFq8D12w3lrLR9iZPp9dBLWaCbloOusYWBwljwNqw7WFauubajh8SDyD921iLBgiiedqovYTQ==
+X-Received: by 2002:a05:6a00:9484:b0:712:7512:add9 with SMTP id
+ d2e1a72fcca58-71907f2dc50mr6196737b3a.13.1726006570484; 
+ Tue, 10 Sep 2024 15:16:10 -0700 (PDT)
+Received: from linaro.vn.shawcable.net ([2604:3d08:9384:1d00::9633])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-71909003d0esm1884055b3a.93.2024.09.10.15.16.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 10 Sep 2024 15:16:10 -0700 (PDT)
+From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, atishp@rivosinc.com, dbarboza@ventanamicro.com,
- alistair.francis@wdc.com, Gregor Haas <gregorhaas1997@gmail.com>
-Subject: [PATCH v5 0/2] Add support for generating OpenSBI domains in the
- device tree
-Date: Tue, 10 Sep 2024 14:28:09 -0700
-Message-ID: <20240910212811.996184-1-gregorhaas1997@gmail.com>
-X-Mailer: git-send-email 2.46.0
+Cc: Zhao Liu <zhao1.liu@intel.com>, "Richard W.M. Jones" <rjones@redhat.com>,
+ Joel Stanley <joel@jms.id.au>, Kevin Wolf <kwolf@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, qemu-arm@nongnu.org,
+ Corey Minyard <minyard@acm.org>, Eric Farman <farman@linux.ibm.com>,
+ Thomas Huth <thuth@redhat.com>, Keith Busch <kbusch@kernel.org>,
+ WANG Xuerui <git@xen0n.name>, Hyman Huang <yong.huang@smartx.com>,
+ Stefan Berger <stefanb@linux.vnet.ibm.com>,
+ Michael Rolnik <mrolnik@gmail.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ Markus Armbruster <armbru@redhat.com>,
+ Sriram Yagnaraman <sriram.yagnaraman@ericsson.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
+ Ani Sinha <anisinha@redhat.com>, Halil Pasic <pasic@linux.ibm.com>,
+ Jesper Devantier <foss@defmacro.it>, Laurent Vivier <laurent@vivier.eu>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Igor Mammedov <imammedo@redhat.com>, kvm@vger.kernel.org,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Fam Zheng <fam@euphon.net>, qemu-s390x@nongnu.org,
+ Hanna Reitz <hreitz@redhat.com>, Nicholas Piggin <npiggin@gmail.com>,
+ Eduardo Habkost <eduardo@habkost.net>, Laurent Vivier <lvivier@redhat.com>,
+ Rob Herring <robh@kernel.org>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, qemu-block@nongnu.org,
+ "Maciej S. Szmigiero" <maciej.szmigiero@oracle.com>, qemu-ppc@nongnu.org,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Fabiano Rosas <farosas@suse.de>,
+ Helge Deller <deller@gmx.de>, Dmitry Fleytman <dmitry.fleytman@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Akihiko Odaki <akihiko.odaki@daynix.com>,
+ Marcelo Tosatti <mtosatti@redhat.com>,
+ David Gibson <david@gibson.dropbear.id.au>,
+ Aurelien Jarno <aurelien@aurel32.net>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Yanan Wang <wangyanan55@huawei.com>, Peter Xu <peterx@redhat.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>,
+ Klaus Jensen <its@irrelevant.dk>,
+ Jean-Christophe Dubois <jcd@tribudubois.net>,
+ Jason Wang <jasowang@redhat.com>,
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>
+Subject: [PATCH 00/39] Use g_assert_not_reached instead of (g_)assert(0, false)
+Date: Tue, 10 Sep 2024 15:15:27 -0700
+Message-Id: <20240910221606.1817478-1-pierrick.bouvier@linaro.org>
+X-Mailer: git-send-email 2.39.2
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b33;
- envelope-from=gregorhaas1997@gmail.com; helo=mail-yb1-xb33.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::436;
+ envelope-from=pierrick.bouvier@linaro.org; helo=mail-pf1-x436.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -91,60 +136,109 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Apologies for the double-email, forgot to run checkpatch ...
+This series cleans up all usages of assert/g_assert who are supposed to stop
+execution of QEMU. We replace those by g_assert_not_reached().
+It was suggested recently when cleaning codebase to build QEMU with gcc
+and tsan: https://lore.kernel.org/qemu-devel/54bb02a6-1b12-460a-97f6-3f478ef766c6@linaro.org/.
 
-This patch series adds support for specifying OpenSBI domains on the QEMU
-command line. A simple example of what this looks like is included in the
-documentation changes included in this series, along with detailed information
-on each option to each of the new flags.
+In more, cleanup useless break after g_assert_not_reached();
 
-v5:
-- Add missing Signed-off-by line in the documentation commit
+And finally, ensure with scripts/checkpatch.pl that we don't reintroduce
+(g_)assert(false) in the future.
 
-v4:
-- Added license comments to the top of each new file
-- Made id mandatory for OpenSBI domains
-- Added documentation
+Pierrick Bouvier (39):
+  docs/spin: replace assert(0) with g_assert_not_reached()
+  hw/acpi: replace assert(0) with g_assert_not_reached()
+  hw/arm: replace assert(0) with g_assert_not_reached()
+  hw/char: replace assert(0) with g_assert_not_reached()
+  hw/core: replace assert(0) with g_assert_not_reached()
+  hw/net: replace assert(0) with g_assert_not_reached()
+  hw/watchdog: replace assert(0) with g_assert_not_reached()
+  migration: replace assert(0) with g_assert_not_reached()
+  qobject: replace assert(0) with g_assert_not_reached()
+  system: replace assert(0) with g_assert_not_reached()
+  target/ppc: replace assert(0) with g_assert_not_reached()
+  tests/qtest: replace assert(0) with g_assert_not_reached()
+  tests/unit: replace assert(0) with g_assert_not_reached()
+  include/hw/s390x: replace assert(false) with g_assert_not_reached()
+  block: replace assert(false) with g_assert_not_reached()
+  hw/hyperv: replace assert(false) with g_assert_not_reached()
+  hw/net: replace assert(false) with g_assert_not_reached()
+  hw/nvme: replace assert(false) with g_assert_not_reached()
+  hw/pci: replace assert(false) with g_assert_not_reached()
+  hw/ppc: replace assert(false) with g_assert_not_reached()
+  migration: replace assert(false) with g_assert_not_reached()
+  target/i386/kvm: replace assert(false) with g_assert_not_reached()
+  tests/qtest: replace assert(false) with g_assert_not_reached()
+  accel/tcg: remove break after g_assert_not_reached()
+  block: remove break after g_assert_not_reached()
+  hw/acpi: remove break after g_assert_not_reached()
+  hw/gpio: remove break after g_assert_not_reached()
+  hw/misc: remove break after g_assert_not_reached()
+  hw/net: remove break after g_assert_not_reached()
+  hw/pci-host: remove break after g_assert_not_reached()
+  hw/scsi: remove break after g_assert_not_reached()
+  hw/tpm: remove break after g_assert_not_reached()
+  target/arm: remove break after g_assert_not_reached()
+  target/riscv: remove break after g_assert_not_reached()
+  tests/qtest: remove break after g_assert_not_reached()
+  ui: remove break after g_assert_not_reached()
+  fpu: remove break after g_assert_not_reached()
+  tcg/loongarch64: remove break after g_assert_not_reached()
+  scripts/checkpatch.pl: emit error when using assert(false)
 
-v3:
-- Addressed review comments from v2 by adding default values to new properties.
-  This results in concrete errors at QEMU configuration time if a mandatory
-  property (as mandated by the OpenSBI spec) is not provided.
-- Changed command line encoding for the possible-harts field from a CPU bitmask
-  (e.g. where bit X is set if CPU X is a possible hart) to a range format (e.g.
-  the possible harts should be CPUs X-Y, where Y >= X). This does constrain the
-  hart assignment to consecutive ranges of harts, but this constraint is also
-  present for other QEMU subsystems (such as NUMA).
-- Added create_fdt_one_device(), which is invoked when scanning the device tree
-  for a memregion's devices. This function allocates a phandle for a region's
-  device if one does not yet exist.
-
-v2:
-- Addressed review comments from v1. Specifically, renamed domain.{c,h} ->
-  opensbi_domain.{c,h} to increase clarity of what these files do. Also, more
-  consistently use g_autofree for dynamically allocated variables
-- Added an "assign" flag to OpenSBIDomainState, which indicates whether to
-  assign the domain's boot hart to it at domain parsing time.
-
-Gregor Haas (2):
-  hw/riscv: Add support for generating OpenSBI domains in the device
-    tree
-  docs/system/riscv: Add documentation for command-line OpenSBI domains
-
- MAINTAINERS                           |   8 +
- docs/system/riscv/opensbi_domains.rst | 156 +++++++
- docs/system/target-riscv.rst          |  10 +
- hw/riscv/Kconfig                      |   4 +
- hw/riscv/meson.build                  |   1 +
- hw/riscv/opensbi_domain.c             | 558 ++++++++++++++++++++++++++
- hw/riscv/virt.c                       |   3 +
- include/hw/riscv/opensbi_domain.h     |  69 ++++
- 8 files changed, 809 insertions(+)
- create mode 100644 docs/system/riscv/opensbi_domains.rst
- create mode 100644 hw/riscv/opensbi_domain.c
- create mode 100644 include/hw/riscv/opensbi_domain.h
+ docs/spin/aio_notify_accept.promela     |  6 +++---
+ docs/spin/aio_notify_bug.promela        |  6 +++---
+ include/hw/s390x/cpu-topology.h         |  2 +-
+ accel/tcg/plugin-gen.c                  |  1 -
+ block/qcow2.c                           |  2 +-
+ block/ssh.c                             |  1 -
+ hw/acpi/aml-build.c                     |  3 +--
+ hw/arm/highbank.c                       |  2 +-
+ hw/char/avr_usart.c                     |  2 +-
+ hw/core/numa.c                          |  2 +-
+ hw/gpio/nrf51_gpio.c                    |  1 -
+ hw/hyperv/hyperv_testdev.c              |  6 +++---
+ hw/hyperv/vmbus.c                       | 12 ++++++------
+ hw/misc/imx6_ccm.c                      |  1 -
+ hw/misc/mac_via.c                       |  2 --
+ hw/net/e1000e_core.c                    |  2 +-
+ hw/net/i82596.c                         |  2 +-
+ hw/net/igb_core.c                       |  2 +-
+ hw/net/net_rx_pkt.c                     |  3 +--
+ hw/nvme/ctrl.c                          |  8 ++++----
+ hw/pci-host/gt64120.c                   |  2 --
+ hw/pci/pci-stub.c                       |  4 ++--
+ hw/ppc/spapr_events.c                   |  2 +-
+ hw/scsi/virtio-scsi.c                   |  1 -
+ hw/tpm/tpm_spapr.c                      |  1 -
+ hw/watchdog/watchdog.c                  |  2 +-
+ migration/dirtyrate.c                   |  2 +-
+ migration/migration-hmp-cmds.c          |  2 +-
+ migration/postcopy-ram.c                | 14 +++++++-------
+ migration/ram.c                         |  6 +++---
+ qobject/qlit.c                          |  2 +-
+ qobject/qnum.c                          |  8 ++++----
+ system/rtc.c                            |  2 +-
+ target/arm/hyp_gdbstub.c                |  1 -
+ target/i386/kvm/kvm.c                   |  4 ++--
+ target/ppc/dfp_helper.c                 |  8 ++++----
+ target/ppc/mmu_helper.c                 |  2 +-
+ target/riscv/monitor.c                  |  1 -
+ tests/qtest/ipmi-bt-test.c              |  2 +-
+ tests/qtest/ipmi-kcs-test.c             |  4 ++--
+ tests/qtest/migration-helpers.c         |  1 -
+ tests/qtest/numa-test.c                 | 10 +++++-----
+ tests/qtest/rtl8139-test.c              |  2 +-
+ tests/unit/test-xs-node.c               |  4 ++--
+ ui/qemu-pixman.c                        |  1 -
+ fpu/softfloat-parts.c.inc               |  2 --
+ target/riscv/insn_trans/trans_rvv.c.inc |  2 --
+ tcg/loongarch64/tcg-target.c.inc        |  1 -
+ scripts/checkpatch.pl                   |  3 +++
+ 49 files changed, 72 insertions(+), 90 deletions(-)
 
 -- 
-2.46.0
+2.39.2
 
 
