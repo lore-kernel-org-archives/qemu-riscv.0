@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBEDBEE01E9
-	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Sep 2024 21:08:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B64B8EDE9BF
+	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Sep 2024 21:26:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1so86R-0003sn-GH; Tue, 10 Sep 2024 17:08:47 -0400
+	id 1so8Mq-00029F-Ml; Tue, 10 Sep 2024 17:25:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <gregorhaas1997@gmail.com>)
- id 1so86O-0003oO-Sz; Tue, 10 Sep 2024 17:08:44 -0400
-Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a])
+ id 1so8Mo-0001zY-8j; Tue, 10 Sep 2024 17:25:42 -0400
+Received: from mail-yw1-x112b.google.com ([2607:f8b0:4864:20::112b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <gregorhaas1997@gmail.com>)
- id 1so86M-0000W0-Du; Tue, 10 Sep 2024 17:08:44 -0400
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-205909afad3so14660505ad.2; 
- Tue, 10 Sep 2024 14:08:41 -0700 (PDT)
+ id 1so8Ml-0002IT-2j; Tue, 10 Sep 2024 17:25:41 -0400
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-6cdae28014dso1947847b3.1; 
+ Tue, 10 Sep 2024 14:25:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1726002520; x=1726607320; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=EyvdhTD6EW6YNBj4N2vepxcFc1zzLWSo7Ny83hNOZeU=;
- b=AqTKILs+Gv0ouUC40e/iYoxLvh2W4+Tvg4SX9o05YUR7cFsrltuIP7PiiduleWVFPZ
- Hls1ZypGpy1Lo5zdqGjuNnPcA4WQaxn9URccbG33Z6SAipEEQ4ksYozph3jE4XeckLfM
- 7dR+MhLFHLna+8BdjslrMYzFZN7/VcLfn8zF9WBw8xBjV6aaTAWB4gOHljY1f7OI8HCR
- 6DsthKFZ7yZbBRDovE1Bu2ZoU3V4gIruv+ayQfTLYxlC9k3OTjmbXEZ5q4wVFaDf5wd2
- 4Ys6gCkMbc4LmyphdI1M+rz6d3RT02cYqp/PPQ8Jks1vVx37PPO34ItFRSjYX4osGyHv
- W4kw==
+ d=gmail.com; s=20230601; t=1726003537; x=1726608337; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=RtLCCYi/8lZclH6EGbiQfc3dGIl0M7+pchzl78qCIMM=;
+ b=YzAMzT/UJQ+snZKjTX/fc/B1ugRUZb4e1XapJOPKZQY6zMAtc4ttB4jQGlyI1TdE4q
+ 9BnKmxsUbf+Ss2AUXI4jX0OBAarejW80yqUYz4lWnvjDCeISILZTDqxookVepsDgyaBo
+ ghoWHuiQ+XumUrh3BwrHg3JI1HBvMMwRgTCb5CTWsPSlpb/awEOJHJOoYn1zs6QXQ10/
+ m9gZhxhkox53XqsML75KhzshnIG21H6JqJmJTmLoYFDwmXDlRoRRFOO9CK7RcyrpyUmt
+ Vnw00KhoRkLwsxgrngexWzMxLxItEUH6Kly5Dn8iMKMir91Ot6IrxlsC1/IWQZsQ4EPB
+ 1j4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726002520; x=1726607320;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=EyvdhTD6EW6YNBj4N2vepxcFc1zzLWSo7Ny83hNOZeU=;
- b=Z5t5TBVOq+LwCTnggzorPkMqlDnnlYl4gU3ZR9WlI1d/rP1A8VY7W09W9FqKIRBi2w
- efEuy0y78DmdwiBMmP4xniFfqO87+6eIgvzHYFJYT714Ymep/MtwoGfj0BosnerLOHu1
- gCwXMdgxzsDB8QjX969or8VpkaVq1mlGHooKVj7QzsiRdLbTIcFnoM3LNBhEEvSI6fL8
- p9RprR+V2CYw7SrVUd/YmMohvWnABK3legEWouz3lQKjym8GopG8YSscp/TUwNSZ8Dia
- /PcueyJb6nQs7iop6tzmpJ+ai1gmbWc4cS8jARslbZlSgsWxhcpRUD8iJ/9DEHNGRsVh
- 6USg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXCF0jezqbFROKS4p9qA6AyB9IIlBP6QZIkJt+IceRwbKmkl40idMK/2lMQ6li3OAW0q6XiSdADKToL@nongnu.org
-X-Gm-Message-State: AOJu0YwtEN+AZEVDsAcPBBMUzKJQxkdtVRgdP9bNN6ZX9VegFvv5SiHA
- pgMBG+jqdX3Hkj0HvaPcG7EgabQPLUG+4CF95opuVoK7TgiU2pMW258vFTEUmHIefc3odlrFJHg
- qWtRbh62rbNffXavzvFMJtbnf1cM=
-X-Google-Smtp-Source: AGHT+IHjQ1YdHBYAHvoNhs5V6EFGIo79NAf+uIrAJ7ZN0kDfL2bqzkwicxkfsEoPqAJjGq5Ak9DTnNvY0If8BXQUhEE=
-X-Received: by 2002:a17:902:f60b:b0:206:cfb3:8c81 with SMTP id
- d9443c01a7336-207521f679bmr10427235ad.55.1726002520447; Tue, 10 Sep 2024
- 14:08:40 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240805210444.497723-1-gregorhaas1997@gmail.com>
- <CAKmqyKM_qgc+wwrDRzZM1yda=dZziM=1rGU2_SDeJU9PTnacVg@mail.gmail.com>
-In-Reply-To: <CAKmqyKM_qgc+wwrDRzZM1yda=dZziM=1rGU2_SDeJU9PTnacVg@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1726003537; x=1726608337;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=RtLCCYi/8lZclH6EGbiQfc3dGIl0M7+pchzl78qCIMM=;
+ b=HtOS36ibv/quhBTW/sgvOaOr4jYAP+4dGFyZDScFZq3LSlGLLOwpF4J1kwXZ2wRqRS
+ PRdWWZUgyitKisI4V3nuTJpCg1PEdzynoErrraKv5ByF+HDpYdi67MYhmzTTv6H0aqfB
+ npzWRLrrV8ntBrCWoWG5hWDP9dK0bzJn2wdh0h0bmnFPZEfeAvjNFA/CByXycZ+H9KCD
+ WvWDhGFLiUpg9GnndB5523EKLUpIhOQ/y6un12QQoiMI6lb3S6S2mXvPG0kRvDpc1AYh
+ o3vvyFWekPMQbctyGA+ZYZWwqxuYMn08534fl3xzuNdWVm7JwPpz0WQ9nhcYAud9peS8
+ SnGw==
+X-Gm-Message-State: AOJu0Yz4c2YvtOFjpqCS8em1pWD/zlVt0ujaSai15PURMkVy+mTNtgQA
+ aID+tydHCh5m5vYm5hESQWqx3FkWQsc2Bd1N2PkFdgemtt178+i+ar2ieNKQ
+X-Google-Smtp-Source: AGHT+IFwEg5lLB7Aa6pEZccj5P36ZV3I8VnoGAtDCAikpYRNcPXc65PepuX1pTYNwPrDrIyVlUDooA==
+X-Received: by 2002:a05:690c:83:b0:6d5:7617:950e with SMTP id
+ 00721157ae682-6db953e8b87mr33961937b3.18.1726003537427; 
+ Tue, 10 Sep 2024 14:25:37 -0700 (PDT)
+Received: from localhost ([2600:1700:830:3db0::14])
+ by smtp.gmail.com with UTF8SMTPSA id
+ 00721157ae682-6db9651d74fsm4410317b3.104.2024.09.10.14.25.36
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 10 Sep 2024 14:25:36 -0700 (PDT)
 From: Gregor Haas <gregorhaas1997@gmail.com>
-Date: Tue, 10 Sep 2024 14:08:04 -0700
-Message-ID: <CAMqWt3oWGLaXBsM7inQkird0+VQcdbaQoZ-uF2Okmg4B2Q8uqg@mail.gmail.com>
-Subject: Re: [PATCH v3 0/1] Add support for generating OpenSBI domains in the
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, atishp@rivosinc.com, dbarboza@ventanamicro.com,
+ alistair.francis@wdc.com, Gregor Haas <gregorhaas1997@gmail.com>
+Subject: [PATCH v5 1/2] Add support for generating OpenSBI domains in the
  device tree
-To: Alistair Francis <alistair23@gmail.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, atishp@rivosinc.com, 
- dbarboza@ventanamicro.com, alistair.francis@wdc.com
-Content-Type: multipart/alternative; boundary="0000000000001ce2af0621ca4752"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
- envelope-from=gregorhaas1997@gmail.com; helo=mail-pl1-x62a.google.com
+Date: Tue, 10 Sep 2024 14:25:30 -0700
+Message-ID: <20240910212533.986734-2-gregorhaas1997@gmail.com>
+X-Mailer: git-send-email 2.46.0
+In-Reply-To: <20240910212533.986734-1-gregorhaas1997@gmail.com>
+References: <20240910212533.986734-1-gregorhaas1997@gmail.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::112b;
+ envelope-from=gregorhaas1997@gmail.com; helo=mail-yw1-x112b.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
 X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, HTML_MESSAGE=0.001,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -91,429 +94,745 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---0000000000001ce2af0621ca4752
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+OpenSBI has support for domains, which are partitions of CPUs and memory into
+isolated compartments. Domains can be specified in the device tree according to
+a standardized format [1], which OpenSBI parses at boot time to initialize all
+system domains. This patch enables simply specifying domains (and their
+associated memory regions) on the QEMU command line, from which these are then
+rendered into the machine's device tree.
 
-Hi Alistair!
+At machine initialization time, a new create_fdt_opensbi_domains() function
+walks the peripherals/peripherals-anon containers, identifies all domains and
+memregions, and parses them into the relevant device tree structures.
 
-On Sun, Sep 8, 2024 at 8:27=E2=80=AFPM Alistair Francis <alistair23@gmail.c=
-om>
-wrote:
+[1] https://github.com/riscv-software-src/opensbi/blob/master/docs/domain_support.md
 
-> On Tue, Aug 6, 2024 at 7:05=E2=80=AFAM Gregor Haas <gregorhaas1997@gmail.=
-com>
-> wrote:
-> >
-> > This patch series adds support for specifying OpenSBI domains on the QE=
-MU
-> > command line. A simple example of what this looks like is below,
-> including
-> > mapping the board's UART into the secondary domain:
->
-> Thanks for the patch, sorry it took me so long to look into this
->
+Signed-off-by: Gregor Haas <gregorhaas1997@gmail.com>
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+---
+ MAINTAINERS                       |   7 +
+ hw/riscv/Kconfig                  |   4 +
+ hw/riscv/meson.build              |   1 +
+ hw/riscv/opensbi_domain.c         | 558 ++++++++++++++++++++++++++++++
+ hw/riscv/virt.c                   |   3 +
+ include/hw/riscv/opensbi_domain.h |  69 ++++
+ 6 files changed, 642 insertions(+)
+ create mode 100644 hw/riscv/opensbi_domain.c
+ create mode 100644 include/hw/riscv/opensbi_domain.h
 
-No worries -- thanks for your review!
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 0c1bc69828..3b9f5b7432 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -357,6 +357,13 @@ F: target/riscv/XVentanaCondOps.decode
+ F: target/riscv/insn_trans/trans_xventanacondops.c.inc
+ F: disas/riscv-xventana*
+ 
++RISC-V OpenSBI domain support
++M: Gregor Haas <gregorhaas1997@gmail.com>
++L: qemu-riscv@nongnu.org
++S: Maintained
++F: hw/riscv/opensbi_domain.c
++F: include/hw/riscv/opensbi_domain.h
++
+ RENESAS RX CPUs
+ R: Yoshinori Sato <ysato@users.sourceforge.jp>
+ S: Orphan
+diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+index a2030e3a6f..db3a4d77ad 100644
+--- a/hw/riscv/Kconfig
++++ b/hw/riscv/Kconfig
+@@ -1,6 +1,9 @@
+ config RISCV_NUMA
+     bool
+ 
++config RISCV_OPENSBI_DOMAIN
++    bool
++
+ config IBEX
+     bool
+ 
+@@ -40,6 +43,7 @@ config RISCV_VIRT
+     imply TPM_TIS_SYSBUS
+     select DEVICE_TREE
+     select RISCV_NUMA
++    select RISCV_OPENSBI_DOMAIN
+     select GOLDFISH_RTC
+     select PCI
+     select PCI_EXPRESS_GENERIC_BRIDGE
+diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
+index f872674093..f47626c164 100644
+--- a/hw/riscv/meson.build
++++ b/hw/riscv/meson.build
+@@ -1,6 +1,7 @@
+ riscv_ss = ss.source_set()
+ riscv_ss.add(files('boot.c'))
+ riscv_ss.add(when: 'CONFIG_RISCV_NUMA', if_true: files('numa.c'))
++riscv_ss.add(when: 'CONFIG_RISCV_OPENSBI_DOMAIN', if_true: files('opensbi_domain.c'))
+ riscv_ss.add(files('riscv_hart.c'))
+ riscv_ss.add(when: 'CONFIG_OPENTITAN', if_true: files('opentitan.c'))
+ riscv_ss.add(when: 'CONFIG_RISCV_VIRT', if_true: files('virt.c'))
+diff --git a/hw/riscv/opensbi_domain.c b/hw/riscv/opensbi_domain.c
+new file mode 100644
+index 0000000000..da315e59b2
+--- /dev/null
++++ b/hw/riscv/opensbi_domain.c
+@@ -0,0 +1,558 @@
++/*
++ * OpenSBI Domains
++ *
++ * Copyright (c) 2024 Gregor Haas
++ *
++ * Generates OpenSBI domain nodes in the machine's device tree
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#include "qemu/osdep.h"
++#include "hw/riscv/opensbi_domain.h"
++#include "hw/boards.h"
++#include "hw/riscv/virt.h"
++#include "qapi/error.h"
++#include "qemu/cutils.h"
++#include "qemu/error-report.h"
++#include "sysemu/device_tree.h"
++
++#include <libfdt.h>
++
++static void create_fdt_domain_possible_harts(MachineState *ms,
++                                             OpenSBIDomainState *s,
++                                             char *path) {
++    unsigned long i, cpu;
++    unsigned long num_cpus;
++
++    num_cpus = s->last_possible_hart - s->first_possible_hart + 1;
++    if (num_cpus) {
++        g_autofree uint32_t *phandles = g_malloc0_n(num_cpus, sizeof(uint32_t));
++
++        for (i = 0, cpu = s->first_possible_hart; i < num_cpus; i++, cpu++) {
++            g_autofree char *cpu_name = g_strdup_printf("/cpus/cpu@%li", cpu);
++            phandles[i] = cpu_to_fdt32(qemu_fdt_get_phandle(
++                    ms->fdt, cpu_name));
++        }
++
++        qemu_fdt_setprop(ms->fdt, path, "possible-harts",
++                         phandles, num_cpus * 4);
++    }
++}
++
++static void create_fdt_domain_regions(MachineState *ms,
++                                      OpenSBIDomainState *s,
++                                      char *path) {
++    unsigned long i;
++    int num_regions = 0;
++    DeviceState *ds;
++
++    for (i = 0; i < OPENSBI_DOMAIN_MEMREGIONS_MAX; i++) {
++        if (s->regions[i]) {
++            num_regions++;
++        }
++    }
++
++    if (num_regions) {
++        g_autofree uint32_t *regions =
++                 g_malloc0_n(num_regions, 2 * sizeof(uint32_t));
++        for (i = 0; i < OPENSBI_DOMAIN_MEMREGIONS_MAX; i++) {
++            if (s->regions[i]) {
++                ds = DEVICE(s->regions[i]);
++                g_autofree char *region_name = g_strdup_printf(
++                       "/chosen/opensbi-domains/%s", ds->id);
++                regions[2 * i] = cpu_to_fdt32(qemu_fdt_get_phandle
++                        (ms->fdt, region_name));
++                regions[2 * i + 1] = cpu_to_fdt32(s->region_perms[i]);
++            }
++        }
++
++        qemu_fdt_setprop(ms->fdt, path, "regions",
++                         regions, num_regions * 8);
++    }
++}
++
++struct DomainFDTState {
++    MachineState *ms;
++    bool regions;
++};
++
++static void create_fdt_one_domain(MachineState *ms, OpenSBIDomainState *s)
++{
++    DeviceState *ds = DEVICE(s);
++    g_autofree char *path = g_strdup_printf("/chosen/opensbi-domains/%s", ds->id);
++
++    qemu_fdt_add_subnode(ms->fdt, path);
++    qemu_fdt_setprop_string(ms->fdt, path, "compatible",
++                            "opensbi,domain,instance");
++    qemu_fdt_setprop_cells(ms->fdt, path, "phandle",
++                           qemu_fdt_alloc_phandle(ms->fdt));
++
++    create_fdt_domain_possible_harts(ms, s, path);
++    create_fdt_domain_regions(ms, s, path);
++
++    if (s->boot_hart != -1) {
++        g_autofree char *cpu_name = g_strdup_printf("/cpus/cpu@%i", s->boot_hart);
++        qemu_fdt_setprop_cell(ms->fdt, path, "boot-hart",
++                              qemu_fdt_get_phandle(ms->fdt, cpu_name));
++        if (s->assign) {
++            qemu_fdt_setprop_cell(ms->fdt, cpu_name, "opensbi-domain",
++                                    qemu_fdt_get_phandle(ms->fdt, path));
++        }
++    }
++
++    if (s->next_arg1 != -1) {
++        qemu_fdt_setprop_cells(ms->fdt, path, "next-arg1",
++                             (uint64_t) s->next_arg1 >> 32, s->next_arg1);
++    }
++
++    if (s->next_addr != -1) {
++        qemu_fdt_setprop_cells(ms->fdt, path, "next-addr",
++                             (uint64_t) s->next_addr >> 32, s->next_addr);
++    }
++
++    if (s->next_mode != -1) {
++        qemu_fdt_setprop_cell(ms->fdt, path, "next-mode",
++                            s->next_mode);
++    }
++
++    if (s->system_reset_allowed) {
++        qemu_fdt_setprop(ms->fdt, path, "system-reset-allowed", NULL, 0);
++    }
++
++    if (s->system_suspend_allowed) {
++        qemu_fdt_setprop(ms->fdt, path, "system-suspend-allowed", NULL, 0);
++    }
++}
++
++static uint32_t create_fdt_one_device(MachineState *ms, char *device)
++{
++    uint32_t phandle;
++    int offs = fdt_path_offset(ms->fdt, device);
++
++    if (offs < 0) {
++        error_report("%s: Could not find device %s: %s", __func__,
++                     device, fdt_strerror(offs));
++        exit(1);
++    }
++
++    phandle = fdt_get_phandle(ms->fdt, offs);
++    if (!phandle) {
++        phandle = qemu_fdt_alloc_phandle(ms->fdt);
++        qemu_fdt_setprop_cell(ms->fdt, device, "phandle", phandle);
++    }
++
++    return phandle;
++}
++
++static void create_fdt_one_memregion(MachineState *ms,
++                                     OpenSBIMemregionState *s)
++{
++    g_autofree char *path;
++    int i, dev, num_devices;
++    DeviceState *ds = DEVICE(s);
++
++    path = g_strdup_printf("/chosen/opensbi-domains/%s", ds->id);
++    qemu_fdt_add_subnode(ms->fdt, path);
++    qemu_fdt_setprop_string(ms->fdt, path, "compatible",
++                            "opensbi,domain,memregion");
++    qemu_fdt_setprop_cells(ms->fdt, path, "base",
++                           (uint64_t) s->base >> 32, s->base);
++
++    qemu_fdt_setprop_cell(ms->fdt, path, "order",
++                          (uint32_t) s->order);
++
++    if (s->mmio) {
++        qemu_fdt_setprop(ms->fdt, path, "mmio", NULL, 0);
++
++        /* Get all phandles for related devices */
++        num_devices = 0;
++        for (i = 0; i < OPENSBI_MEMREGION_DEVICES_MAX; i++) {
++            if (s->devices[i]) {
++                num_devices++;
++            }
++        }
++
++        if (num_devices) {
++            g_autofree uint32_t *devices =
++                g_malloc0_n(num_devices, sizeof(uint32_t));
++            for (i = 0, dev = 0; i < OPENSBI_MEMREGION_DEVICES_MAX &&
++                                 dev < num_devices; i++) {
++                if (s->devices[i]) {
++                    devices[dev++] = create_fdt_one_device(ms,
++                                                         s->devices[i]);
++                }
++            }
++
++            qemu_fdt_setprop(ms->fdt, path, "devices", devices,
++                             num_devices * 4);
++        }
++    }
++
++    qemu_fdt_setprop_cells(ms->fdt, path, "phandle",
++                           qemu_fdt_alloc_phandle(ms->fdt));
++}
++
++static int create_fdt_domains(Object *obj, void *opaque)
++{
++    struct DomainFDTState *dfs = opaque;
++    OpenSBIDomainState *osds;
++    OpenSBIMemregionState *osms;
++
++    osds = (OpenSBIDomainState *)
++            object_dynamic_cast(obj, TYPE_OPENSBI_DOMAIN);
++    osms = (OpenSBIMemregionState *)
++            object_dynamic_cast(obj, TYPE_OPENSBI_MEMREGION);
++
++    if (dfs->regions) {
++        if (osms) {
++            create_fdt_one_memregion(dfs->ms, osms);
++        }
++    } else {
++        if (osds) {
++            create_fdt_one_domain(dfs->ms, osds);
++        }
++    }
++
++    return 0;
++}
++
++static const char *containers[] = {
++        "/peripheral", "/peripheral-anon"
++};
++
++void create_fdt_opensbi_domains(MachineState *s)
++{
++    int i;
++    MachineState *ms = MACHINE(s);
++    Object *container;
++
++    struct DomainFDTState check = {
++            .ms = ms,
++            .regions = true
++    };
++
++    /* Make sure that top-level node exists */
++    qemu_fdt_add_subnode(ms->fdt, "/chosen/opensbi-domains");
++    qemu_fdt_setprop_string(ms->fdt, "/chosen/opensbi-domains",
++                            "compatible", "opensbi,domain,config");
++
++    /* Do a scan through regions first */
++    for (i = 0; i < ARRAY_SIZE(containers); i++) {
++        container = container_get(OBJECT(s), containers[i]);
++        object_child_foreach(container, create_fdt_domains, &check);
++    }
++
++    /* Then scan through domains */
++    check.regions = false;
++    for (i = 0; i < ARRAY_SIZE(containers); i++) {
++        container = container_get(OBJECT(s), containers[i]);
++        object_child_foreach(container, create_fdt_domains, &check);
++    }
++}
++
++/* OpenSBI Memregions */
++
++static void set_mmio(Object *obj, bool val, Error **err)
++{
++    OpenSBIMemregionState *s = OPENSBI_MEMREGION(obj);
++    s->mmio = val;
++}
++
++static void set_device(Object *obj, const char *val, Error **err)
++{
++    int i;
++    OpenSBIMemregionState *s = OPENSBI_MEMREGION(obj);
++
++    for (i = 0; i < OPENSBI_DOMAIN_MEMREGIONS_MAX; i++) {
++        if (!s->devices[i]) {
++            s->devices[i] = g_strdup(val);
++            break;
++        }
++    }
++}
++
++static void opensbi_memregion_instance_init(Object *obj)
++{
++    int i;
++    OpenSBIMemregionState *s = OPENSBI_MEMREGION(obj);
++
++    s->base = -1;
++    object_property_add_uint64_ptr(obj, "base", &s->base,
++                                   OBJ_PROP_FLAG_WRITE);
++    object_property_set_description(obj, "base",
++                                    "The base address of the domain memory region. If \"order\" is also specified, "
++                                    "this property should be a 2 ^ order aligned 64 bit address");
++
++    s->order = -1;
++    object_property_add_uint32_ptr(obj, "order", &s->order,
++                                   OBJ_PROP_FLAG_WRITE);
++    object_property_set_description(obj, "order",
++                                    "The order of the domain memory region. This property should have a 32 bit value "
++                                    "(i.e. one DT cell) in the range 3 <= order <= __riscv_xlen.");
++
++    s->mmio = false;
++    object_property_add_bool(obj, "mmio", NULL, set_mmio);
++    object_property_set_description(obj, "mmio",
++                                    "A boolean flag representing whether the domain memory region is a "
++                                    "memory-mapped I/O (MMIO) region.");
++
++    for (i = 0; i < OPENSBI_DOMAIN_MEMREGIONS_MAX; i++) {
++        g_autofree char *propname = g_strdup_printf("device%i", i);
++        object_property_add_str(obj, propname, NULL, set_device);
++
++        g_autofree char *description = g_strdup_printf(
++                "Device %i (out of %i) for this memregion. This property should be a device tree path to the device.",
++                i, OPENSBI_DOMAIN_MEMREGIONS_MAX);
++        object_property_set_description(obj, propname, description);
++    }
++}
++
++static void opensbi_memregion_realize(DeviceState *ds, Error **errp)
++{
++    #if defined(TARGET_RISCV32)
++    int xlen = 32;
++    #elif defined(TARGET_RISCV64)
++    int xlen = 64;
++    #endif
++
++    OpenSBIMemregionState *s = OPENSBI_MEMREGION(ds);
++
++    if (s->base == -1) {
++        error_setg(errp, "must specify base");
++        return;
++    }
++
++    if (s->order == -1) {
++        error_setg(errp, "must specify order");
++        return;
++    }
++
++    /* Check order bounds */
++    if (s->order < 3 || s->order > xlen) {
++        error_setg(errp, "order must be between 3 and %d", xlen);
++        return;
++    }
++
++    /* Check base alignment */
++    if (s->order < xlen && (s->base & (BIT(s->order) - 1))) {
++        error_setg(errp, "base not aligned to order");
++        return;
++    }
++}
++
++static void opensbi_memregion_class_init(ObjectClass *oc, void *opaque)
++{
++    DeviceClass *dc = DEVICE_CLASS(oc);
++    dc->realize = opensbi_memregion_realize;
++}
++
++static const TypeInfo opensbi_memregion_info = {
++        .name = TYPE_OPENSBI_MEMREGION,
++        .parent = TYPE_DEVICE,
++        .instance_init = opensbi_memregion_instance_init,
++        .instance_size = sizeof(OpenSBIDomainState),
++        .class_init = opensbi_memregion_class_init
++};
++
++/* OpenSBI Domains */
++
++static void set_sysreset_allowed(Object *obj, bool val, Error **err)
++{
++    OpenSBIDomainState *s = OPENSBI_DOMAIN(obj);
++    s->system_reset_allowed = val;
++}
++
++static void set_suspend_allowed(Object *obj, bool val, Error **err)
++{
++    OpenSBIDomainState *s = OPENSBI_DOMAIN(obj);
++    s->system_suspend_allowed = val;
++}
++
++static void set_assign(Object *obj, bool val, Error **err)
++{
++    OpenSBIDomainState *s = OPENSBI_DOMAIN(obj);
++    s->assign = val;
++}
++
++static void set_possible_harts(Object *obj, const char *str, Error **err)
++{
++    OpenSBIDomainState *s = OPENSBI_DOMAIN(obj);
++    const char *firstcpu,  *firstcpu_end, *lastcpu;
++
++    firstcpu = str;
++    if (qemu_strtoul(firstcpu, &firstcpu_end, 0,
++                     &s->first_possible_hart) < 0) {
++        error_setg(err, "could not convert firstcpu");
++        return;
++    }
++
++    lastcpu = qemu_strchrnul(str, '-');
++    if (*lastcpu) {
++        if (lastcpu != firstcpu_end) {
++            error_setg(err, "could not separate firstcpu and lastcpu");
++            return;
++        }
++
++        lastcpu++;
++        if (qemu_strtoul(lastcpu, NULL, 0,
++                         &s->last_possible_hart) < 0) {
++            error_setg(err, "could not convert lastcpu");
++            return;
++        }
++    } else {
++        s->last_possible_hart = s->first_possible_hart;
++    }
++}
++
++static void opensbi_domain_instance_init(Object *obj)
++{
++    int i;
++    OpenSBIDomainState *s = OPENSBI_DOMAIN(obj);
++
++    s->boot_hart = VIRT_CPUS_MAX;
++    object_property_add_uint32_ptr(obj, "boot-hart", &s->boot_hart,
++                                   OBJ_PROP_FLAG_WRITE);
++    object_property_set_description(obj, "boot-hart",
++                                    "The HART booting the domain instance.");
++
++    s->first_possible_hart = -1;
++    s->last_possible_hart = -1;
++    object_property_add_str(obj, "possible-harts", NULL, set_possible_harts);
++    object_property_set_description(obj, "possible-harts",
++                                    "The contiguous list of CPUs for the domain instance, specified as firstcpu[-lastcpu]");
++
++    s->next_arg1 = -1;
++    object_property_add_uint64_ptr(obj, "next-arg1", &s->next_arg1,
++                                   OBJ_PROP_FLAG_WRITE);
++    object_property_set_description(obj, "next-arg1",
++                                    "The 64 bit next booting stage arg1 for the domain instance.");
++
++    s->next_addr = -1;
++    object_property_add_uint64_ptr(obj, "next-addr", &s->next_addr,
++                                   OBJ_PROP_FLAG_WRITE);
++    object_property_set_description(obj, "next-addr",
++                                    "The 64 bit next booting stage address for the domain instance.");
++
++    s->next_mode = -1;
++    object_property_add_uint32_ptr(obj, "next-mode", &s->next_mode,
++                                   OBJ_PROP_FLAG_WRITE);
++    object_property_set_description(obj, "next-mode",
++                                    "The 32 bit next booting stage mode for the domain instance.");
++
++    s->system_reset_allowed = false;
++    object_property_add_bool(obj, "system-reset-allowed", NULL,
++                             set_sysreset_allowed);
++    object_property_set_description(obj, "system-reset-allowed",
++                                    "Whether the domain instance is allowed to do system reset.");
++
++    s->system_suspend_allowed = false;
++    object_property_add_bool(obj, "system-suspend-allowed", NULL,
++                             set_suspend_allowed);
++    object_property_set_description(obj, "system-suspend-allowed",
++                                    "Whether the domain instance is allowed to do system suspend.");
++
++    for (i = 0; i < OPENSBI_DOMAIN_MEMREGIONS_MAX; i++) {
++        s->regions[i] = NULL;
++        g_autofree char *reg_propname = g_strdup_printf("region%i", i);
++        object_property_add_link(obj, reg_propname, TYPE_OPENSBI_MEMREGION,
++                                 (Object **) &s->regions[i],
++                                 qdev_prop_allow_set_link_before_realize, 0);
++
++        g_autofree char *reg_description = g_strdup_printf(
++                "Region %i (out of %i) for this domain.",
++                i, OPENSBI_DOMAIN_MEMREGIONS_MAX);
++        object_property_set_description(obj, reg_propname, reg_description);
++
++        s->region_perms[i] = 0;
++        g_autofree char *perm_propname = g_strdup_printf("perms%i", i);
++        object_property_add_uint32_ptr(obj, perm_propname, &s->region_perms[i],
++                                       OBJ_PROP_FLAG_WRITE);
++
++        g_autofree char *perm_description = g_strdup_printf(
++                "Permissions for region %i for this domain.", i);
++        object_property_set_description(obj, perm_propname, perm_description);
++    }
++
++    object_property_add_bool(obj, "assign", NULL, set_assign);
++    object_property_set_description(obj, "assign",
++                                    "Whether to assign this domain to its boot hart.");
++}
++
++static void opensbi_domain_realize(DeviceState *ds, Error **errp)
++{
++    OpenSBIDomainState *s = OPENSBI_DOMAIN(ds);
++
++    if (!ds->id) {
++        error_setg(errp, "must specify an id");
++        return;
++    }
++
++    if (s->boot_hart >= VIRT_CPUS_MAX) {
++        error_setg(errp, "boot hart larger than maximum number of CPUs (%d)",
++                 VIRT_CPUS_MAX);
++        return;
++    }
++
++    if (s->first_possible_hart == -1) {
++        if (s->last_possible_hart != -1) {
++            error_setg(errp,
++                     "last possible hart set when first possible hart unset");
++            return;
++        }
++    } else {
++        if (s->first_possible_hart >= VIRT_CPUS_MAX) {
++            error_setg(errp,
++                     "first possible hart larger than maximum number of CPUs (%d)",
++                     VIRT_CPUS_MAX);
++            return;
++        }
++
++        if (s->last_possible_hart != -1) {
++            if (s->last_possible_hart < s->first_possible_hart) {
++                error_setg(errp,
++                         "last possible hart larger than first possible hart");
++                return;
++            }
++
++            if (s->last_possible_hart >= VIRT_CPUS_MAX) {
++                error_setg(errp,
++                         "last possible hart larger than maximum number of CPUS (%d)",
++                         VIRT_CPUS_MAX);
++                return;
++            }
++        }
++    }
++}
++
++static void opensbi_domain_class_init(ObjectClass *oc, void *opaque)
++{
++    DeviceClass *dc = DEVICE_CLASS(oc);
++    dc->realize = opensbi_domain_realize;
++}
++
++static const TypeInfo opensbi_domain_info = {
++        .name = TYPE_OPENSBI_DOMAIN,
++        .parent = TYPE_DEVICE,
++        .instance_init = opensbi_domain_instance_init,
++        .instance_size = sizeof(OpenSBIDomainState),
++        .class_init = opensbi_domain_class_init
++};
++
++static void opensbi_register_types(void)
++{
++    type_register_static(&opensbi_domain_info);
++    type_register_static(&opensbi_memregion_info);
++}
++
++type_init(opensbi_register_types)
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index cef41c150a..760d8ce4d4 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -55,6 +55,7 @@
+ #include "hw/acpi/aml-build.h"
+ #include "qapi/qapi-visit-common.h"
+ #include "hw/virtio/virtio-iommu.h"
++#include "hw/riscv/opensbi_domain.h"
+ 
+ /* KVM AIA only supports APLIC MSI. APLIC Wired is always emulated by QEMU. */
+ static bool virt_use_kvm_aia(RISCVVirtState *s)
+@@ -1050,6 +1051,8 @@ static void finalize_fdt(RISCVVirtState *s)
+     create_fdt_uart(s, virt_memmap, irq_mmio_phandle);
+ 
+     create_fdt_rtc(s, virt_memmap, irq_mmio_phandle);
++
++    create_fdt_opensbi_domains(MACHINE(s));
+ }
+ 
+ static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap)
+diff --git a/include/hw/riscv/opensbi_domain.h b/include/hw/riscv/opensbi_domain.h
+new file mode 100644
+index 0000000000..1ec8ed8288
+--- /dev/null
++++ b/include/hw/riscv/opensbi_domain.h
+@@ -0,0 +1,69 @@
++/*
++ * OpenSBI Domains
++ *
++ * Copyright (c) 2024 Gregor Haas
++ *
++ * Generates OpenSBI domain nodes in the machine's device tree
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#ifndef RISCV_DOMAIN_H
++#define RISCV_DOMAIN_H
++
++#include "hw/sysbus.h"
++#include "qom/object.h"
++#include "cpu.h"
++
++#define TYPE_OPENSBI_MEMREGION "opensbi-memregion"
++OBJECT_DECLARE_SIMPLE_TYPE(OpenSBIMemregionState, OPENSBI_MEMREGION)
++
++#define OPENSBI_MEMREGION_DEVICES_MAX   16
++
++struct OpenSBIMemregionState {
++    /* public */
++    DeviceState parent_obj;
++
++    /* private */
++    uint64_t base;
++    uint32_t order;
++    bool mmio;
++    char *devices[OPENSBI_MEMREGION_DEVICES_MAX];
++};
++
++#define TYPE_OPENSBI_DOMAIN "opensbi-domain"
++OBJECT_DECLARE_SIMPLE_TYPE(OpenSBIDomainState, OPENSBI_DOMAIN)
++
++#define OPENSBI_DOMAIN_MEMREGIONS_MAX   16
++
++struct OpenSBIDomainState {
++    /* public */
++    DeviceState parent_obj;
++
++    /* private */
++    OpenSBIMemregionState *regions[OPENSBI_DOMAIN_MEMREGIONS_MAX];
++    unsigned int region_perms[OPENSBI_DOMAIN_MEMREGIONS_MAX];
++    unsigned long first_possible_hart, last_possible_hart;
++    unsigned int boot_hart;
++    uint64_t next_arg1;
++    uint64_t next_addr;
++    uint32_t next_mode;
++    bool system_reset_allowed;
++    bool system_suspend_allowed;
++
++    bool assign;
++};
++
++void create_fdt_opensbi_domains(MachineState *s);
++
++#endif /* RISCV_DOMAIN_H */
+-- 
+2.46.0
 
-
->
-> >
-> > qemu-system-riscv64 -machine virt -bios fw_jump.bin -cpu max -smp 2 -m
-> 4G -nographic \
-> >         -device
-> opensbi-memregion,id=3Dmem,base=3D0xBC000000,order=3D26,mmio=3Dfalse \
-> >         -device
-> opensbi-memregion,id=3Duart,base=3D0x10000000,order=3D12,mmio=3Dtrue,devi=
-ce0=3D"/soc/serial@10000000"
-> \
-> >         -device
-> opensbi-domain,id=3Ddomain,possible-harts=3D0-1,boot-hart=3D0x0,next-addr=
-=3D0xBC000000,next-mode=3D1,region0=3Dmem,perms0=3D0x3f,region1=3Duart,perm=
-s1=3D0x3f
->
-> This will need documentation added under docs (probably under
-> docs/system/riscv) of how this should be used.
->
-
-I've just sent a v4 patch series which includes documentation! Please let
-me know what you think.
-
-
-> I'm not convinced this is something we want though. A user can dump
-> the QEMU DTB and edit it to support OpenSBI domains if they want.
->
-> My worry is that the command line method is complex for users to get
-> right and will be fragile and prone to breakage as parts of QEMU's DTB
-> changes.
->
-
-I've found this patch series really useful for programmatically generating
-test
-fixtures in an isolation system I'm working on, which is built on top of
-OpenSBI
-domains. In that sense, I've found generating the correct flags is easier
-rather
-than manually editing or generating several dozen device tree files for eac=
-h
-test configuration.
-
-I take your point that these flags are hard to get right, and there may be
-more
-user-friendly ways to do this. FWIW, I that this will only rarely break if
-QEMU's
-DTB changes -- the only part that really depends on QEMU's DTB (rather than
-just adding new information to it) is the device-linking part for
-memregions, and
-it gives a loud, direct error if it cannot find the user-specified device.
-
-
-> Also, how are users supposed to know what options to use? Maybe some
-> documentation will help clear up how this should be used by users
->
-> >
-> > As a result of the above configuration, QEMU will add the following
-> subnodes to
-> > the device tree:
-> >
-> > chosen {
-> >         opensbi-domains {
-> >                 compatible =3D "opensbi,domain,config";
-> >
-> >                 domain {
-> >                         next-mode =3D <0x01>;
-> >                         next-addr =3D <0x00 0xbc000000>;
-> >                         boot-hart =3D <0x03>;
-> >                         regions =3D <0x8000 0x3f 0x8002 0x3f>;
-> >                         possible-harts =3D <0x03 0x01>;
-> >                         phandle =3D <0x8003>;
-> >                         compatible =3D "opensbi,domain,instance";
-> >                 };
-> >
-> >                 uart {
-> >                         phandle =3D <0x8002>;
-> >                         devices =3D <0x1800000>;
-> >                         mmio;
-> >                         order =3D <0x0c>;
-> >                         base =3D <0x00 0x10000000>;
-> >                         compatible =3D "opensbi,domain,memregion";
-> >                 };
-> >
-> >                 mem {
-> >                         phandle =3D <0x8000>;
-> >                         order =3D <0x1a>;
-> >                         base =3D <0x00 0xbc000000>;
-> >                         compatible =3D "opensbi,domain,memregion";
-> >                 };
-> >         };
-> > };
-> >
-> > This results in OpenSBI output as below, where regions 01-03 are
-> inherited from
-> > the root domain and regions 00 and 04 correspond to the user specified
-> ones:
-> >
-> > Domain1 Name              : domain
-> > Domain1 Boot HART         : 0
-> > Domain1 HARTs             : 0,1
-> > Domain1 Region00          : 0x0000000010000000-0x0000000010000fff M:
-> (I,R,W,X) S/U: (R,W,X)
-> > Domain1 Region01          : 0x0000000002000000-0x000000000200ffff M:
-> (I,R,W) S/U: ()
-> > Domain1 Region02          : 0x0000000080080000-0x000000008009ffff M:
-> (R,W) S/U: ()
-> > Domain1 Region03          : 0x0000000080000000-0x000000008007ffff M:
-> (R,X) S/U: ()
-> > Domain1 Region04          : 0x00000000bc000000-0x00000000bfffffff M:
-> (R,W,X) S/U: (R,W,X)
-> > Domain1 Next Address      : 0x00000000bc000000
-> > Domain1 Next Arg1         : 0x0000000000000000
-> > Domain1 Next Mode         : S-mode
-> > Domain1 SysReset          : no
-> > Domain1 SysSuspend        : no
-> >
-> > v3:
-> > - Addressed review comments from v2 by adding default values to new
-> properties.
-> >   This results in concrete errors at QEMU configuration time if a
-> mandatory
-> >   property (as mandated by the OpenSBI spec) is not provided.
-> > - Changed command line encoding for the possible-harts field from a CPU
-> bitmask
-> >   (e.g. where bit X is set if CPU X is a possible hart) to a range
-> format (e.g.
-> >   the possible harts should be CPUs X-Y, where Y >=3D X). This does
-> constrain the
-> >   hart assignment to consecutive ranges of harts, but this constraint i=
-s
-> also
-> >   present for other QEMU subsystems (such as NUMA).
-> > - Added create_fdt_one_device(), which is invoked when scanning the
-> device tree
-> >   for a memregion's devices. This function allocates a phandle for a
-> region's
-> >   device if one does not yet exist.
-> >
-> > v2:
-> > - Addressed review comments from v1. Specifically, renamed domain.{c,h}
-> ->
-> >   opensbi_domain.{c,h} to increase clarity of what these files do. Also=
-,
-> more
-> >   consistently use g_autofree for dynamically allocated variables
-> > - Added an "assign" flag to OpenSBIDomainState, which indicates whether
-> to
-> >   assign the domain's boot hart to it at domain parsing time.
-> >
-> > Gregor Haas (1):
-> >   Add support for generating OpenSBI domains in the device tree
-> >
-> >  MAINTAINERS                       |   7 +
-> >  hw/riscv/Kconfig                  |   4 +
-> >  hw/riscv/meson.build              |   1 +
-> >  hw/riscv/opensbi_domain.c         | 542 ++++++++++++++++++++++++++++++
->
-> There should be a license comment at the start of new files. Have a
-> look at other QEMU files for examples
->
-
-I've included this in my v4 patch series as well!
-
-
-> Alistair
->
-> >  hw/riscv/virt.c                   |   3 +
-> >  include/hw/riscv/opensbi_domain.h |  50 +++
-> >  6 files changed, 607 insertions(+)
-> >  create mode 100644 hw/riscv/opensbi_domain.c
-> >  create mode 100644 include/hw/riscv/opensbi_domain.h
-> >
-> > --
-> > 2.45.2
-> >
-> >
->
-
-Thanks,
-Gregor
-
---0000000000001ce2af0621ca4752
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Hi Alistair!<br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Sun, Sep 8, 2024 at 8:27=E2=80=AFP=
-M Alistair Francis &lt;<a href=3D"mailto:alistair23@gmail.com">alistair23@g=
-mail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D=
-"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-le=
-ft:1ex">On Tue, Aug 6, 2024 at 7:05=E2=80=AFAM Gregor Haas &lt;<a href=3D"m=
-ailto:gregorhaas1997@gmail.com" target=3D"_blank">gregorhaas1997@gmail.com<=
-/a>&gt; wrote:<br>
-&gt;<br>
-&gt; This patch series adds support for specifying OpenSBI domains on the Q=
-EMU<br>
-&gt; command line. A simple example of what this looks like is below, inclu=
-ding<br>
-&gt; mapping the board&#39;s UART into the secondary domain:<br>
-<br>
-Thanks for the patch, sorry it took me so long to look into this<br></block=
-quote><div><br></div><div>No worries -- thanks for your review!<br></div><d=
-iv>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0p=
-x 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-<br>
-&gt;<br>
-&gt; qemu-system-riscv64 -machine virt -bios fw_jump.bin -cpu max -smp 2 -m=
- 4G -nographic \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0-device opensbi-memregion,id=3Dmem,ba=
-se=3D0xBC000000,order=3D26,mmio=3Dfalse \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0-device opensbi-memregion,id=3Duart,b=
-ase=3D0x10000000,order=3D12,mmio=3Dtrue,device0=3D&quot;/soc/serial@1000000=
-0&quot; \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0-device opensbi-domain,id=3Ddomain,po=
-ssible-harts=3D0-1,boot-hart=3D0x0,next-addr=3D0xBC000000,next-mode=3D1,reg=
-ion0=3Dmem,perms0=3D0x3f,region1=3Duart,perms1=3D0x3f<br>
-<br>
-This will need documentation added under docs (probably under<br>
-docs/system/riscv) of how this should be used.<br></blockquote><div><br></d=
-iv><div>I&#39;ve just sent a v4 patch series which includes documentation! =
-Please let</div><div>me know what you think.<br></div><div>=C2=A0<br></div>=
-<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
-left:1px solid rgb(204,204,204);padding-left:1ex">
-I&#39;m not convinced this is something we want though. A user can dump<br>
-the QEMU DTB and edit it to support OpenSBI domains if they want.<br>
-<br>
-My worry is that the command line method is complex for users to get<br>
-right and will be fragile and prone to breakage as parts of QEMU&#39;s DTB<=
-br>
-changes.<br></blockquote><div><br></div><div>I&#39;ve found this patch seri=
-es really useful for programmatically generating test=C2=A0</div><div>fixtu=
-res in an isolation system I&#39;m working on, which is built on top of Ope=
-nSBI</div><div>domains. In that sense, I&#39;ve found generating the correc=
-t flags is easier rather</div><div>than manually editing or generating seve=
-ral dozen device tree files for each</div><div>test configuration.</div><di=
-v><br></div><div>I take your point that these flags are hard to get right, =
-and there may be more</div><div>user-friendly ways to do this. FWIW, I that=
- this will only rarely break if QEMU&#39;s</div><div>DTB changes -- the onl=
-y part that really depends on QEMU&#39;s DTB (rather than</div><div>just ad=
-ding new information to it) is the device-linking part for memregions, and<=
-/div><div>it gives a loud, direct error if it cannot find the user-specifie=
-d device.<br></div><div>=C2=A0<br></div><blockquote class=3D"gmail_quote" s=
-tyle=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);pad=
-ding-left:1ex">
-Also, how are users supposed to know what options to use? Maybe some<br>
-documentation will help clear up how this should be used by users<br>
-<br>
-&gt;<br>
-&gt; As a result of the above configuration, QEMU will add the following su=
-bnodes to<br>
-&gt; the device tree:<br>
-&gt;<br>
-&gt; chosen {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0opensbi-domains {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0compatibl=
-e =3D &quot;opensbi,domain,config&quot;;<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0domain {<=
-br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0next-mode =3D &lt;0x01&gt;;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0next-addr =3D &lt;0x00 0xbc000000&gt;;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0boot-hart =3D &lt;0x03&gt;;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0regions =3D &lt;0x8000 0x3f 0x8002 0x3f&gt;;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0possible-harts =3D &lt;0x03 0x01&gt;;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0phandle =3D &lt;0x8003&gt;;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0compatible =3D &quot;opensbi,domain,instance&quot;;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0};<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0uart {<br=
->
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0phandle =3D &lt;0x8002&gt;;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0devices =3D &lt;0x1800000&gt;;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0mmio;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0order =3D &lt;0x0c&gt;;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0base =3D &lt;0x00 0x10000000&gt;;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0compatible =3D &quot;opensbi,domain,memregion&quot;;<br=
->
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0};<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0mem {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0phandle =3D &lt;0x8000&gt;;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0order =3D &lt;0x1a&gt;;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0base =3D &lt;0x00 0xbc000000&gt;;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0compatible =3D &quot;opensbi,domain,memregion&quot;;<br=
->
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0};<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0};<br>
-&gt; };<br>
-&gt;<br>
-&gt; This results in OpenSBI output as below, where regions 01-03 are inher=
-ited from<br>
-&gt; the root domain and regions 00 and 04 correspond to the user specified=
- ones:<br>
-&gt;<br>
-&gt; Domain1 Name=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 : domain<=
-br>
-&gt; Domain1 Boot HART=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0: 0<br>
-&gt; Domain1 HARTs=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0: 0,1<br>
-&gt; Domain1 Region00=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 : 0x000000001000000=
-0-0x0000000010000fff M: (I,R,W,X) S/U: (R,W,X)<br>
-&gt; Domain1 Region01=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 : 0x000000000200000=
-0-0x000000000200ffff M: (I,R,W) S/U: ()<br>
-&gt; Domain1 Region02=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 : 0x000000008008000=
-0-0x000000008009ffff M: (R,W) S/U: ()<br>
-&gt; Domain1 Region03=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 : 0x000000008000000=
-0-0x000000008007ffff M: (R,X) S/U: ()<br>
-&gt; Domain1 Region04=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 : 0x00000000bc00000=
-0-0x00000000bfffffff M: (R,W,X) S/U: (R,W,X)<br>
-&gt; Domain1 Next Address=C2=A0 =C2=A0 =C2=A0 : 0x00000000bc000000<br>
-&gt; Domain1 Next Arg1=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0: 0x000000000000000=
-0<br>
-&gt; Domain1 Next Mode=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0: S-mode<br>
-&gt; Domain1 SysReset=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 : no<br>
-&gt; Domain1 SysSuspend=C2=A0 =C2=A0 =C2=A0 =C2=A0 : no<br>
-&gt;<br>
-&gt; v3:<br>
-&gt; - Addressed review comments from v2 by adding default values to new pr=
-operties.<br>
-&gt;=C2=A0 =C2=A0This results in concrete errors at QEMU configuration time=
- if a mandatory<br>
-&gt;=C2=A0 =C2=A0property (as mandated by the OpenSBI spec) is not provided=
-.<br>
-&gt; - Changed command line encoding for the possible-harts field from a CP=
-U bitmask<br>
-&gt;=C2=A0 =C2=A0(e.g. where bit X is set if CPU X is a possible hart) to a=
- range format (e.g.<br>
-&gt;=C2=A0 =C2=A0the possible harts should be CPUs X-Y, where Y &gt;=3D X).=
- This does constrain the<br>
-&gt;=C2=A0 =C2=A0hart assignment to consecutive ranges of harts, but this c=
-onstraint is also<br>
-&gt;=C2=A0 =C2=A0present for other QEMU subsystems (such as NUMA).<br>
-&gt; - Added create_fdt_one_device(), which is invoked when scanning the de=
-vice tree<br>
-&gt;=C2=A0 =C2=A0for a memregion&#39;s devices. This function allocates a p=
-handle for a region&#39;s<br>
-&gt;=C2=A0 =C2=A0device if one does not yet exist.<br>
-&gt;<br>
-&gt; v2:<br>
-&gt; - Addressed review comments from v1. Specifically, renamed domain.{c,h=
-} -&gt;<br>
-&gt;=C2=A0 =C2=A0opensbi_domain.{c,h} to increase clarity of what these fil=
-es do. Also, more<br>
-&gt;=C2=A0 =C2=A0consistently use g_autofree for dynamically allocated vari=
-ables<br>
-&gt; - Added an &quot;assign&quot; flag to OpenSBIDomainState, which indica=
-tes whether to<br>
-&gt;=C2=A0 =C2=A0assign the domain&#39;s boot hart to it at domain parsing =
-time.<br>
-&gt;<br>
-&gt; Gregor Haas (1):<br>
-&gt;=C2=A0 =C2=A0Add support for generating OpenSBI domains in the device t=
-ree<br>
-&gt;<br>
-&gt;=C2=A0 MAINTAINERS=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A07 +<br>
-&gt;=C2=A0 hw/riscv/Kconfig=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 |=C2=A0 =C2=A04 +<br>
-&gt;=C2=A0 hw/riscv/meson.build=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 |=C2=A0 =C2=A01 +<br>
-&gt;=C2=A0 hw/riscv/opensbi_domain.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 542=
- ++++++++++++++++++++++++++++++<br>
-<br>
-There should be a license comment at the start of new files. Have a<br>
-look at other QEMU files for examples<br></blockquote><div><br></div><div>I=
-&#39;ve included this in my v4 patch series as well!<br></div><div>=C2=A0<b=
-r></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex=
-;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-Alistair<br>
-<br>
-&gt;=C2=A0 hw/riscv/virt.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A03 +<br>
-&gt;=C2=A0 include/hw/riscv/opensbi_domain.h |=C2=A0 50 +++<br>
-&gt;=C2=A0 6 files changed, 607 insertions(+)<br>
-&gt;=C2=A0 create mode 100644 hw/riscv/opensbi_domain.c<br>
-&gt;=C2=A0 create mode 100644 include/hw/riscv/opensbi_domain.h<br>
-&gt;<br>
-&gt; --<br>
-&gt; 2.45.2<br>
-&gt;<br>
-&gt;<br></blockquote><div><br></div><div>Thanks,</div><div>Gregor <br></div=
-></div></div>
-
---0000000000001ce2af0621ca4752--
 
