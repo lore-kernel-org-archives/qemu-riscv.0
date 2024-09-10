@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB33FEE01EF
-	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Sep 2024 22:21:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED091EE01EB
+	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Sep 2024 22:21:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1so9B2-0005NH-CN; Tue, 10 Sep 2024 18:17:36 -0400
+	id 1so9Av-0004Do-QV; Tue, 10 Sep 2024 18:17:29 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1so9AR-0000ur-1g
- for qemu-riscv@nongnu.org; Tue, 10 Sep 2024 18:16:59 -0400
-Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b])
+ id 1so9AI-0000FZ-J2
+ for qemu-riscv@nongnu.org; Tue, 10 Sep 2024 18:16:53 -0400
+Received: from mail-pf1-x42c.google.com ([2607:f8b0:4864:20::42c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1so9AN-0006jw-G7
- for qemu-riscv@nongnu.org; Tue, 10 Sep 2024 18:16:58 -0400
-Received: by mail-pf1-x42b.google.com with SMTP id
- d2e1a72fcca58-71911585911so821550b3a.3
- for <qemu-riscv@nongnu.org>; Tue, 10 Sep 2024 15:16:54 -0700 (PDT)
+ id 1so9AE-0006hA-Ra
+ for qemu-riscv@nongnu.org; Tue, 10 Sep 2024 18:16:48 -0400
+Received: by mail-pf1-x42c.google.com with SMTP id
+ d2e1a72fcca58-71781f42f75so4834659b3a.1
+ for <qemu-riscv@nongnu.org>; Tue, 10 Sep 2024 15:16:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726006614; x=1726611414; darn=nongnu.org;
+ d=linaro.org; s=google; t=1726006605; x=1726611405; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=g94oM2AdOrkhIM0zmQXs6BZslT0T+3A9bvoVuc5szJw=;
- b=fDrV4zsRV0uSk+JCTQCxe3uW4IgMKnKqaEbhy4000JmdVRoqAY/irZHE/zADpMes1W
- akjAHtnfZjThTP/XmMrjAQqm92VQ/JSqofrAv6qntW2DW5pAoFopFnspEkW0LmxRBGTl
- +L+iLRrCi/qRSQj+Gj2X7mUPUkymrKDRKH+aubXYeSWzuvvJbd8jzunjhc5jKCx6vjLw
- 9zjr8WAE8o2w3xGIzy87aZ+54MPMV9n8RSptFPcQEmvDX6nCEkDy0rt8Vo4VhV3HM4bk
- OIHyp6pS5AcoNF44isoOWahrgg5hlRtZfIZZbzcS8Ahe3H4kDLjamhNTr2Bqx7dN7qtD
- 0y6A==
+ bh=zaOeMd8XzZwIKO+BVAeDQHacTyR7MUVICUu2Groumoc=;
+ b=YoII4GwF+1pNYlfKQgENBZdC8OSmOmDGJjwAa+vo+cfmm9CEdwrXjKcsYDMorVPCoj
+ Vu2WyAr/bc0N9GMfc95gwP7poeUMtyfNpXDQaWGkp+kTRtUSXkLHdfJ629I0DIU7DGBA
+ ujzyOMtu6cPEbnANqrA2qY3Cui3bFDaCcv2JYPWJiNQoMJuJAxt4HsPWFrPq1/ec98ll
+ cKKYSjFmqXdF59t0qnsS94piFkntXtj1RtBnTdYPYIDKxAkrf2BwEvZnffdDDHSls/5s
+ 7afWfxiXtwklUvUR4pVyNLOdh0S83YEvMpgC+o4s3ebSVu2Z8RUcBsn1cShHey2A+XlD
+ DwAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726006614; x=1726611414;
+ d=1e100.net; s=20230601; t=1726006605; x=1726611405;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=g94oM2AdOrkhIM0zmQXs6BZslT0T+3A9bvoVuc5szJw=;
- b=g0ALO7fyUPnVgy+N5pVxnd3wlDeiW6OulZKj4NYy+a/UTWhvP1tRQDv3TOlxbqd5Wt
- Ugi+l4Su633ascGjk+yz7ybCvFBD4riwE9P9WLv6Jvd7nJzUu1dT1NuxEXWK70yOJ3CU
- CB17BPhrYNHAKgELOaw78ORzoe87gv53OHlN1E15HMKfqvi329TCgSvyrORKp4z8+cHs
- N8APHazVAvOTeYXHP6oeJ0pxwPYW43pQxYtuZZj0ncg1eO9Am41WIVG6lBcvXgd1NAvT
- QnNzfXhHFsVChogIvTlkJfJoaWIs2YfU3dpRAYnHYTnzwhrJVCO4NITm5JhLuWT0/cvu
- 73/A==
+ bh=zaOeMd8XzZwIKO+BVAeDQHacTyR7MUVICUu2Groumoc=;
+ b=CNqB4r5Q/RR8jb9WQEIjEBzn1LeV3MKPd+sXWfX7TR41LF2uNssw1PTxiGQbcsMVVF
+ +2gubzsPaRAG/Rl29m8to2meKZq4X4IBGQTuBPvm6OPkJiQwhgXUWcLsYLGAwVO04eEm
+ 308hlBib7aZitOQLCGXXEqsRRT9Ag/AbaRWmiHhgZa79yv/Pk0BI6d62HKfk32HvQtN7
+ JzjqAVWlJ39/e2YLhcEzbmFjQQhasbPI+aUIZA9vT7okuzM7qx1ecFj0lT9A3+Dxil38
+ Z0SX4vULfLZARsjXCeV5V2ot6QqDjOgryMO/WQ9QF7QtWtId7YePiLSvjWoh78l7ErRx
+ nGDQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUWQ8VVCwOuD8F583yqiG4icigXurKRIf+xrU81lrJ1IFXWqR9xsA4S7EfxpoxCxJgM29sGCyYO1VpH@nongnu.org
-X-Gm-Message-State: AOJu0Yx73gTvoaoxyz7kc5GHLFRIpR9WCMQSPhtWUAQMfE2CpqkPRDUb
- erlLV+IcqS8XjUbVe9C4DdNuztSae/2aeOdSbKpsKKXeR9h6kCICrWLIkaMc41g=
-X-Google-Smtp-Source: AGHT+IHL2ZH6nUBIcX/D81YvSHijd2PVp9cRI7IyORN5V83dLkzGAu93AwGsK5Tkm+BoWZtfm/pR4A==
-X-Received: by 2002:a05:6a00:1803:b0:714:2cea:1473 with SMTP id
- d2e1a72fcca58-7191723a295mr1055728b3a.23.1726006613650; 
- Tue, 10 Sep 2024 15:16:53 -0700 (PDT)
+ AJvYcCVk4pE3B1U5F0BvgbKzECa2ATdatxN4lNg0fmFfgaDRNprIT9pnyyV1i98HdWpIc0r/UJdLdsKwSOeS@nongnu.org
+X-Gm-Message-State: AOJu0YxeG8Iz5WeZR4Z6tCHkJO9DB0QAuHPiD0KTJZRJxt5+DnH48VVN
+ GLMfcxU0whVUCHd3QXFFC8lwljHgMC4e8KMoVgEswsR/MkFRJNx5hkjr3N4jcb8=
+X-Google-Smtp-Source: AGHT+IGXdkrxhCzNyeQ+oPHQ9x0IFNSkeXfls9xHWi0Sicojf8vp5qG1xhcR8cFIxRHQi1oprvgqcw==
+X-Received: by 2002:a05:6a00:390e:b0:714:1ca1:7134 with SMTP id
+ d2e1a72fcca58-718d5ee3ed9mr21940217b3a.18.1726006605401; 
+ Tue, 10 Sep 2024 15:16:45 -0700 (PDT)
 Received: from linaro.vn.shawcable.net ([2604:3d08:9384:1d00::9633])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-71909003d0esm1884055b3a.93.2024.09.10.15.16.51
+ d2e1a72fcca58-71909003d0esm1884055b3a.93.2024.09.10.15.16.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Sep 2024 15:16:53 -0700 (PDT)
+ Tue, 10 Sep 2024 15:16:44 -0700 (PDT)
 From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Zhao Liu <zhao1.liu@intel.com>, "Richard W.M. Jones" <rjones@redhat.com>,
@@ -106,24 +106,23 @@ Cc: Zhao Liu <zhao1.liu@intel.com>, "Richard W.M. Jones" <rjones@redhat.com>,
  Jean-Christophe Dubois <jcd@tribudubois.net>,
  Jason Wang <jasowang@redhat.com>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH 18/39] hw/nvme: replace assert(false) with
- g_assert_not_reached()
-Date: Tue, 10 Sep 2024 15:15:45 -0700
-Message-Id: <20240910221606.1817478-19-pierrick.bouvier@linaro.org>
+Subject: [PATCH 15/39] block: replace assert(false) with g_assert_not_reached()
+Date: Tue, 10 Sep 2024 15:15:42 -0700
+Message-Id: <20240910221606.1817478-16-pierrick.bouvier@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240910221606.1817478-1-pierrick.bouvier@linaro.org>
 References: <20240910221606.1817478-1-pierrick.bouvier@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42b;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-pf1-x42b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42c;
+ envelope-from=pierrick.bouvier@linaro.org; helo=mail-pf1-x42c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -141,49 +140,22 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 ---
- hw/nvme/ctrl.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ block/qcow2.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/hw/nvme/ctrl.c b/hw/nvme/ctrl.c
-index 9f277b81d83..fc3b27c031e 100644
---- a/hw/nvme/ctrl.c
-+++ b/hw/nvme/ctrl.c
-@@ -1816,7 +1816,7 @@ static uint16_t nvme_check_zone_state_for_write(NvmeZone *zone)
-         trace_pci_nvme_err_zone_is_read_only(zslba);
-         return NVME_ZONE_READ_ONLY;
-     default:
+diff --git a/block/qcow2.c b/block/qcow2.c
+index 70b19730a39..bdc6337826f 100644
+--- a/block/qcow2.c
++++ b/block/qcow2.c
+@@ -5299,7 +5299,7 @@ qcow2_get_specific_info(BlockDriverState *bs, Error **errp)
+     } else {
+         /* if this assertion fails, this probably means a new version was
+          * added without having it covered here */
 -        assert(false);
 +        g_assert_not_reached();
      }
  
-     return NVME_INTERNAL_DEV_ERROR;
-@@ -1870,7 +1870,7 @@ static uint16_t nvme_check_zone_state_for_read(NvmeZone *zone)
-         trace_pci_nvme_err_zone_is_offline(zone->d.zslba);
-         return NVME_ZONE_OFFLINE;
-     default:
--        assert(false);
-+        g_assert_not_reached();
-     }
- 
-     return NVME_INTERNAL_DEV_ERROR;
-@@ -4654,7 +4654,7 @@ static uint16_t nvme_io_cmd(NvmeCtrl *n, NvmeRequest *req)
-     case NVME_CMD_IO_MGMT_SEND:
-         return nvme_io_mgmt_send(n, req);
-     default:
--        assert(false);
-+        g_assert_not_reached();
-     }
- 
-     return NVME_INVALID_OPCODE | NVME_DNR;
-@@ -7205,7 +7205,7 @@ static uint16_t nvme_admin_cmd(NvmeCtrl *n, NvmeRequest *req)
-     case NVME_ADM_CMD_DIRECTIVE_RECV:
-         return nvme_directive_receive(n, req);
-     default:
--        assert(false);
-+        g_assert_not_reached();
-     }
- 
-     return NVME_INVALID_OPCODE | NVME_DNR;
+     if (encrypt_info) {
 -- 
 2.39.2
 
