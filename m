@@ -4,112 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6F4EEE0213
-	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Sep 2024 15:58:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AAC2EE57C1
+	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Sep 2024 16:09:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1soPiZ-0005lC-3y; Wed, 11 Sep 2024 11:57:19 -0400
+	id 1soPu3-0003My-OR; Wed, 11 Sep 2024 12:09:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <kwolf@redhat.com>) id 1soPiX-0005fW-K6
- for qemu-riscv@nongnu.org; Wed, 11 Sep 2024 11:57:17 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
+ id 1soPu0-0003F3-T3; Wed, 11 Sep 2024 12:09:08 -0400
+Received: from zero.eik.bme.hu ([152.66.115.2])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <kwolf@redhat.com>) id 1soPiV-000660-AX
- for qemu-riscv@nongnu.org; Wed, 11 Sep 2024 11:57:17 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1726070234;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=FDcn3NduRBzJ1p1GnYweZ1g7LcQAP4wJdN/8+ZG8KQo=;
- b=GCcdNwpqfe/Jf8uTZCajTMaLKZxYR4TXG0J4OF8VqERKu9BfhTul+Q+g1KKFykeuFwSJWX
- 51STpWDyl8cyrqymk1GkYf7fY/en+m2yrUcCfM8wdEiPdp2n902pk86Qf2FYDlsZFny7rR
- V09CuUSPv5HsH4tUgUn6PnkFFoXbPrg=
-Received: from mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-298-O2P3ggfTNa2ZO35Ibkhlxg-1; Wed,
- 11 Sep 2024 11:57:10 -0400
-X-MC-Unique: O2P3ggfTNa2ZO35Ibkhlxg-1
-Received: from mx-prod-int-04.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-04.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.40])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 0AAE019560AD; Wed, 11 Sep 2024 15:56:54 +0000 (UTC)
-Received: from redhat.com (unknown [10.39.193.224])
- by mx-prod-int-04.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id A8DDD19560AD; Wed, 11 Sep 2024 15:56:31 +0000 (UTC)
-Date: Wed, 11 Sep 2024 17:56:29 +0200
-From: Kevin Wolf <kwolf@redhat.com>
+ (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
+ id 1soPty-0007ay-1u; Wed, 11 Sep 2024 12:09:08 -0400
+Received: from zero.eik.bme.hu (localhost [127.0.0.1])
+ by zero.eik.bme.hu (Postfix) with ESMTP id 2B05C4E601D;
+ Wed, 11 Sep 2024 18:09:02 +0200 (CEST)
+X-Virus-Scanned: amavisd-new at eik.bme.hu
+Received: from zero.eik.bme.hu ([127.0.0.1])
+ by zero.eik.bme.hu (zero.eik.bme.hu [127.0.0.1]) (amavisd-new, port 10028)
+ with ESMTP id 2AWBOJKeRs3H; Wed, 11 Sep 2024 18:08:59 +0200 (CEST)
+Received: by zero.eik.bme.hu (Postfix, from userid 432)
+ id B61AD4E6004; Wed, 11 Sep 2024 18:08:59 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+ by zero.eik.bme.hu (Postfix) with ESMTP id B2618746F60;
+ Wed, 11 Sep 2024 18:08:59 +0200 (CEST)
+Date: Wed, 11 Sep 2024 18:08:59 +0200 (CEST)
+From: BALATON Zoltan <balaton@eik.bme.hu>
 To: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Cc: qemu-devel@nongnu.org, Zhao Liu <zhao1.liu@intel.com>,
- "Richard W.M. Jones" <rjones@redhat.com>,
- Joel Stanley <joel@jms.id.au>, Paolo Bonzini <pbonzini@redhat.com>,
- qemu-arm@nongnu.org, Corey Minyard <minyard@acm.org>,
- Eric Farman <farman@linux.ibm.com>, Thomas Huth <thuth@redhat.com>,
- Keith Busch <kbusch@kernel.org>, WANG Xuerui <git@xen0n.name>,
- Hyman Huang <yong.huang@smartx.com>,
- Stefan Berger <stefanb@linux.vnet.ibm.com>,
- Michael Rolnik <mrolnik@gmail.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- =?iso-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>,
- Markus Armbruster <armbru@redhat.com>,
- Sriram Yagnaraman <sriram.yagnaraman@ericsson.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
- Ani Sinha <anisinha@redhat.com>, Halil Pasic <pasic@linux.ibm.com>,
- Jesper Devantier <foss@defmacro.it>, Laurent Vivier <laurent@vivier.eu>,
- Peter Maydell <peter.maydell@linaro.org>,
- Igor Mammedov <imammedo@redhat.com>, kvm@vger.kernel.org,
- Alex =?iso-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- Fam Zheng <fam@euphon.net>, qemu-s390x@nongnu.org,
- Hanna Reitz <hreitz@redhat.com>, Nicholas Piggin <npiggin@gmail.com>,
- Eduardo Habkost <eduardo@habkost.net>,
- Laurent Vivier <lvivier@redhat.com>, Rob Herring <robh@kernel.org>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, qemu-block@nongnu.org,
- "Maciej S. Szmigiero" <maciej.szmigiero@oracle.com>, qemu-ppc@nongnu.org,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>,
- Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Fabiano Rosas <farosas@suse.de>, Helge Deller <deller@gmx.de>,
- Dmitry Fleytman <dmitry.fleytman@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Akihiko Odaki <akihiko.odaki@daynix.com>,
- Marcelo Tosatti <mtosatti@redhat.com>,
- David Gibson <david@gibson.dropbear.id.au>,
- Aurelien Jarno <aurelien@aurel32.net>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Yanan Wang <wangyanan55@huawei.com>, Peter Xu <peterx@redhat.com>,
- Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>,
- Klaus Jensen <its@irrelevant.dk>,
- Jean-Christophe Dubois <jcd@tribudubois.net>,
+cc: qemu-devel@nongnu.org, Zhao Liu <zhao1.liu@intel.com>, 
+ "Richard W.M. Jones" <rjones@redhat.com>, Joel Stanley <joel@jms.id.au>, 
+ Kevin Wolf <kwolf@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, 
+ qemu-arm@nongnu.org, Corey Minyard <minyard@acm.org>, 
+ Eric Farman <farman@linux.ibm.com>, Thomas Huth <thuth@redhat.com>, 
+ Keith Busch <kbusch@kernel.org>, WANG Xuerui <git@xen0n.name>, 
+ Hyman Huang <yong.huang@smartx.com>, 
+ Stefan Berger <stefanb@linux.vnet.ibm.com>, 
+ Michael Rolnik <mrolnik@gmail.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ =?ISO-8859-15?Q?Marc-Andr=E9_Lureau?= <marcandre.lureau@redhat.com>, 
+ Markus Armbruster <armbru@redhat.com>, 
+ Sriram Yagnaraman <sriram.yagnaraman@ericsson.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org, 
+ Ani Sinha <anisinha@redhat.com>, Halil Pasic <pasic@linux.ibm.com>, 
+ Jesper Devantier <foss@defmacro.it>, Laurent Vivier <laurent@vivier.eu>, 
+ Peter Maydell <peter.maydell@linaro.org>, 
+ Igor Mammedov <imammedo@redhat.com>, kvm@vger.kernel.org, 
+ =?ISO-8859-15?Q?Alex_Benn=E9e?= <alex.bennee@linaro.org>, 
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Fam Zheng <fam@euphon.net>, qemu-s390x@nongnu.org, 
+ Hanna Reitz <hreitz@redhat.com>, Nicholas Piggin <npiggin@gmail.com>, 
+ Eduardo Habkost <eduardo@habkost.net>, Laurent Vivier <lvivier@redhat.com>, 
+ Rob Herring <robh@kernel.org>, 
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, qemu-block@nongnu.org, 
+ "Maciej S. Szmigiero" <maciej.szmigiero@oracle.com>, qemu-ppc@nongnu.org, 
+ Daniel Henrique Barboza <danielhb413@gmail.com>, 
+ Christian Borntraeger <borntraeger@linux.ibm.com>, 
+ Harsh Prateek Bora <harshpb@linux.ibm.com>, 
+ =?ISO-8859-15?Q?Philippe_Mathieu-Daud=E9?= <philmd@linaro.org>, 
+ Nina Schoetterl-Glausch <nsg@linux.ibm.com>, 
+ "Michael S. Tsirkin" <mst@redhat.com>, Fabiano Rosas <farosas@suse.de>, 
+ Helge Deller <deller@gmx.de>, Dmitry Fleytman <dmitry.fleytman@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Akihiko Odaki <akihiko.odaki@daynix.com>, 
+ Marcelo Tosatti <mtosatti@redhat.com>, 
+ David Gibson <david@gibson.dropbear.id.au>, 
+ Aurelien Jarno <aurelien@aurel32.net>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Yanan Wang <wangyanan55@huawei.com>, Peter Xu <peterx@redhat.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Klaus Jensen <its@irrelevant.dk>, 
+ Jean-Christophe Dubois <jcd@tribudubois.net>, 
  Jason Wang <jasowang@redhat.com>
-Subject: Re: [PATCH 31/39] hw/scsi: remove break after g_assert_not_reached()
-Message-ID: <ZuG9rRKgRMMYHe5Y@redhat.com>
+Subject: Re: [PATCH 20/39] hw/ppc: replace assert(false) with
+ g_assert_not_reached()
+In-Reply-To: <45c6a39b-9c16-4580-ad6b-99973b5e6b0f@linaro.org>
+Message-ID: <cb4298a0-eb1f-be02-18d5-b9ce87a4c550@eik.bme.hu>
 References: <20240910221606.1817478-1-pierrick.bouvier@linaro.org>
- <20240910221606.1817478-32-pierrick.bouvier@linaro.org>
+ <20240910221606.1817478-21-pierrick.bouvier@linaro.org>
+ <232858c7-6270-f763-adfc-b6c8259bf021@eik.bme.hu>
+ <45c6a39b-9c16-4580-ad6b-99973b5e6b0f@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240910221606.1817478-32-pierrick.bouvier@linaro.org>
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.40
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=kwolf@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
-X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.144,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+Content-Type: text/plain; charset=US-ASCII; format=flowed
+Received-SPF: pass client-ip=152.66.115.2; envelope-from=balaton@eik.bme.hu;
+ helo=zero.eik.bme.hu
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9,
  RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -125,9 +110,49 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Am 11.09.2024 um 00:15 hat Pierrick Bouvier geschrieben:
-> Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+On Wed, 11 Sep 2024, Pierrick Bouvier wrote:
+> On 9/11/24 07:10, BALATON Zoltan wrote:
+>> 
+>> 
+>> On Tue, 10 Sep 2024, Pierrick Bouvier wrote:
+>> 
+>>> Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+>>> ---
+>>> hw/ppc/spapr_events.c | 2 +-
+>>> 1 file changed, 1 insertion(+), 1 deletion(-)
+>>> 
+>>> diff --git a/hw/ppc/spapr_events.c b/hw/ppc/spapr_events.c
+>>> index cb0eeee5874..38ac1cb7866 100644
+>>> --- a/hw/ppc/spapr_events.c
+>>> +++ b/hw/ppc/spapr_events.c
+>>> @@ -645,7 +645,7 @@ static void spapr_hotplug_req_event(uint8_t hp_id, 
+>>> uint8_t hp_action,
+>>>          /* we shouldn't be signaling hotplug events for resources
+>>>           * that don't support them
+>>>           */
+>>> -        g_assert(false);
+>>> +        g_assert_not_reached();
+>>>          return;
+>>>      }
+>> 
+>> If break does not make sense after g_assert_not_reached() and removed then
+>> return is the same here.
+>> 
+>> It may make the series shorter and easier to check that none of these are
+>> missed if this is done in the same patch where the assert is changed
+>> instead of separate patches. It's unlikely that the assert change and
+>> removal of the following break or return would need to be reverted
+>> separately so it's a simple enough change to put in one patch in my
+>> opinion but I don't mink if it's kept separate either.
+>> 
+>> Regards,
+>> BALATON Zoltan
+>
+> Mostly done this way because it's easy for creating many commits.
 
-Reviewed-by: Kevin Wolf <kwolf@redhat.com>
+As I said I don't mind either way. Now that part of this series is queued 
+it's easier to add another patch to remove the return.
 
+Regards,
+BALATON Zoltan
 
