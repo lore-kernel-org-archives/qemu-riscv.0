@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5079FEE49BC
-	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Sep 2024 15:30:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCB6FEE0213
+	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Sep 2024 15:32:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1soPI8-0003W4-Gg; Wed, 11 Sep 2024 11:30:00 -0400
+	id 1soPKO-0004td-IA; Wed, 11 Sep 2024 11:32:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1soPI0-000349-OV
- for qemu-riscv@nongnu.org; Wed, 11 Sep 2024 11:29:52 -0400
-Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435])
+ id 1soPKN-0004ob-49
+ for qemu-riscv@nongnu.org; Wed, 11 Sep 2024 11:32:19 -0400
+Received: from mail-pg1-x529.google.com ([2607:f8b0:4864:20::529])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1soPHz-0003J2-1J
- for qemu-riscv@nongnu.org; Wed, 11 Sep 2024 11:29:52 -0400
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-7191f58054aso561861b3a.0
- for <qemu-riscv@nongnu.org>; Wed, 11 Sep 2024 08:29:50 -0700 (PDT)
+ id 1soPKK-0003aX-5s
+ for qemu-riscv@nongnu.org; Wed, 11 Sep 2024 11:32:18 -0400
+Received: by mail-pg1-x529.google.com with SMTP id
+ 41be03b00d2f7-7db12af2f31so669589a12.1
+ for <qemu-riscv@nongnu.org>; Wed, 11 Sep 2024 08:32:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726068589; x=1726673389; darn=nongnu.org;
+ d=linaro.org; s=google; t=1726068734; x=1726673534; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=V6m6vNQT7mJMu+b2f7V4GrIIRmDUGYZa9xv/2BTcLJk=;
- b=M3IggeYeaVABOb8LOGAQsCfP5jRM63+fYdZ7pclMv743VK96cEEeTGE7Y9tyTJExNg
- Weoz1B50o7tKhu2/V4rn0vi/MJhaBBg0mB8RKeYi09d8gF3fXhIKsHZoXL+AKK4Y8po8
- WMIY/RI3m3qbTrbk7voAonD4ZfdYphB4YYdgrTaI5+z4voqGXSk0eRWRuzt3UO5TZ8lR
- yZvvBiqvv9bQDyY7JDn04/hi/wFACWDGNIi/HhPs4v3Sc0r89yX01FsJSy6BDccpgP7d
- 9cjn8jz3DFdL0GMKJlf6ZwEMTuE1CGoRnf+JB0b+efLcDrKpypcYMtoxYT+LUFPP1GlP
- VH0A==
+ bh=Y9xV2TZChxQ5XF8GRBSAuhQm9XxO95EtIVwV6Hqv3wQ=;
+ b=W0UVsH/UvONyUUzfvy4X/+cl4tm5/CwkFt+iXVQxEd71OcKSKWX2LYGont52E0Xua0
+ I0uafh6VMpTsb2u7CRegIekB4bMs6tCtkE4V4rvxMirqlGwpOJ1PkHJjBnOF0IXMlbe5
+ 10j6K8FLkqXrbC9HBM5hjxBw1ydpnaJ9DQRy8HpK7awwR5E1ovrJAixIx/wf0YGYmqlo
+ k/fH1r/oJHv2MKiKqZhSV3SJteJEqnb0eY9YyyQ2Q+WtTsRgRkhnFjSy6woZ6aKed9Ju
+ EnwHv7iQuVEwnSM/30ZeYnREuKvcmDg1KiZT1aCkDEZVI1i0KLOFuz1HFDoNfDnVU1WD
+ Ok5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726068589; x=1726673389;
+ d=1e100.net; s=20230601; t=1726068734; x=1726673534;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=V6m6vNQT7mJMu+b2f7V4GrIIRmDUGYZa9xv/2BTcLJk=;
- b=n4kbgbJd4QVGQSLce+uKhm0t6/8BWbJ6I9eM/LRPAT+xrZPyEJ0/YLUt+pxakqjE3v
- oUjjvteRHoGzwXqzWtl+lB9DkbwZVduo78Rk2C1yT7Cb08A+3EjCLzSQQXCNoIS7dpIT
- ACZnT1SO9EDvPUtQgc/1/PoxqjIbTZGrKGk9ckBwuMUsWJcc8WLiz2yhMjZuDhO+CWIf
- N8zVXqHjn/qXKe2ERx+5TEKR266AJliL3JRMBNjnpNDYesE161etbLC0uJXpq/x/30TN
- KyO/elKSz/hz4NiRMqC7vWBuhMsKUk4BiAU3JnhxRS36Psoo9uQk1IkbNJjwKOguzkUe
- qOmw==
+ bh=Y9xV2TZChxQ5XF8GRBSAuhQm9XxO95EtIVwV6Hqv3wQ=;
+ b=meWRbLYlEyrQcf6QVIByUj3xI8VVlYxcIPO2Gh9xf6n9akTpy6TBD/ZYkBpSjyWfWC
+ iUi1QAb34XXwma2cGCv9ualRJ/ykMr6r275hb6mnNldYDPlPAR+lqd9Qer3jtDCkksdU
+ S0Kk+AFYDm9uRKJdjDCrf1woGm7amITA8iAEj1lDBqAPWHYWactV4C9G17QNHZp/LTc8
+ NE8lXEggYXk8jLIwn4Ue1HJJ+KBs36k/COBiDvNuBJMt3SIYGQ1h+gxWF4p4MPToNYv/
+ 1QjBpaij0Tmx1OOLfIOEkqnBHtx9WCeZfvYrnNJ7Yv33FUjfU3EXrX1wp2RKtqD/sIrV
+ cl1Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW4UaZkfOo3lqRM5dIDyW06vH35OGj+QoAE9aEj4f0yljGkfNal+SYW1SRIMD33Ma/Fid0PbQNVrou+@nongnu.org
-X-Gm-Message-State: AOJu0YzEDcRRsgnbRk1UAGisDz4bYGmXCimw7hhF1nqD8VWMa3j5kcHv
- rC+u243qLRITekzrQS3IztSKrR1nSOhSz3EOcD6sw2jXqzhHTLquTDdudQsWaLo=
-X-Google-Smtp-Source: AGHT+IFOkNi5En1U6atzM/outL/IcTJ5jnm+OY7uZvi8WoE+fRnOsRoNmau22JwZlSN5pOufV3D+eQ==
-X-Received: by 2002:a05:6a00:8584:b0:717:9296:b45f with SMTP id
- d2e1a72fcca58-71916e47608mr4240873b3a.8.1726068589407; 
- Wed, 11 Sep 2024 08:29:49 -0700 (PDT)
+ AJvYcCVDAhkA/vhcfLd7AzhbU7L26IpWRcy9iONJdBfGyh5/nzIQfPrRL58bA6baI+uR4XVET3FC8XFU70hX@nongnu.org
+X-Gm-Message-State: AOJu0YwykpibdJf3GL5nsiTR02Yh2S6HJFoKu1RZqvzreo8ZJnS1U24K
+ oBIm2KpPck7feX3Us6JpuZGMvbYzV/sOriNnmImYFXIlimpjplyan4ZvUyEv09g=
+X-Google-Smtp-Source: AGHT+IHsW5uOP/RaOllDCB0TLXsQjlnlosQgvXVaTG84PqVow4h1ijgneVn5RfrzY4pP4UlM86UxFQ==
+X-Received: by 2002:a05:6a21:2d84:b0:1cf:2ad4:3083 with SMTP id
+ adf61e73a8af0-1cf62ce253cmr6250911637.23.1726068734436; 
+ Wed, 11 Sep 2024 08:32:14 -0700 (PDT)
 Received: from ?IPV6:2604:3d08:9384:1d00::9633? ([2604:3d08:9384:1d00::9633])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-71908fc8253sm3115128b3a.37.2024.09.11.08.29.46
+ d2e1a72fcca58-71908fc8205sm3131563b3a.21.2024.09.11.08.32.08
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Sep 2024 08:29:48 -0700 (PDT)
-Message-ID: <4a965b71-0c58-4e55-a78b-7df8195f495c@linaro.org>
-Date: Wed, 11 Sep 2024 08:29:46 -0700
+ Wed, 11 Sep 2024 08:32:13 -0700 (PDT)
+Message-ID: <45c6a39b-9c16-4580-ad6b-99973b5e6b0f@linaro.org>
+Date: Wed, 11 Sep 2024 08:32:08 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 19/39] hw/pci: replace assert(false) with
+Subject: Re: [PATCH 20/39] hw/ppc: replace assert(false) with
  g_assert_not_reached()
 Content-Language: en-US
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org
-Cc: Zhao Liu <zhao1.liu@intel.com>, "Richard W.M. Jones" <rjones@redhat.com>, 
- Joel Stanley <joel@jms.id.au>, Kevin Wolf <kwolf@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>, qemu-arm@nongnu.org,
- Corey Minyard <minyard@acm.org>, Eric Farman <farman@linux.ibm.com>,
- Thomas Huth <thuth@redhat.com>, Keith Busch <kbusch@kernel.org>,
- WANG Xuerui <git@xen0n.name>, Hyman Huang <yong.huang@smartx.com>,
+To: BALATON Zoltan <balaton@eik.bme.hu>
+Cc: qemu-devel@nongnu.org, Zhao Liu <zhao1.liu@intel.com>,
+ "Richard W.M. Jones" <rjones@redhat.com>, Joel Stanley <joel@jms.id.au>,
+ Kevin Wolf <kwolf@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ qemu-arm@nongnu.org, Corey Minyard <minyard@acm.org>,
+ Eric Farman <farman@linux.ibm.com>, Thomas Huth <thuth@redhat.com>,
+ Keith Busch <kbusch@kernel.org>, WANG Xuerui <git@xen0n.name>,
+ Hyman Huang <yong.huang@smartx.com>,
  Stefan Berger <stefanb@linux.vnet.ibm.com>,
  Michael Rolnik <mrolnik@gmail.com>,
  Alistair Francis <alistair.francis@wdc.com>,
@@ -96,6 +96,7 @@ Cc: Zhao Liu <zhao1.liu@intel.com>, "Richard W.M. Jones" <rjones@redhat.com>,
  Daniel Henrique Barboza <danielhb413@gmail.com>,
  Christian Borntraeger <borntraeger@linux.ibm.com>,
  Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
  "Michael S. Tsirkin" <mst@redhat.com>, Fabiano Rosas <farosas@suse.de>,
  Helge Deller <deller@gmx.de>, Dmitry Fleytman <dmitry.fleytman@gmail.com>,
@@ -111,14 +112,14 @@ Cc: Zhao Liu <zhao1.liu@intel.com>, "Richard W.M. Jones" <rjones@redhat.com>,
  Jean-Christophe Dubois <jcd@tribudubois.net>,
  Jason Wang <jasowang@redhat.com>
 References: <20240910221606.1817478-1-pierrick.bouvier@linaro.org>
- <20240910221606.1817478-20-pierrick.bouvier@linaro.org>
- <3a7fc1f2-1468-46a8-9075-7b1bf1bd6149@linaro.org>
+ <20240910221606.1817478-21-pierrick.bouvier@linaro.org>
+ <232858c7-6270-f763-adfc-b6c8259bf021@eik.bme.hu>
 From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-In-Reply-To: <3a7fc1f2-1468-46a8-9075-7b1bf1bd6149@linaro.org>
+In-Reply-To: <232858c7-6270-f763-adfc-b6c8259bf021@eik.bme.hu>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
-Received-SPF: pass client-ip=2607:f8b0:4864:20::435;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-pf1-x435.google.com
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::529;
+ envelope-from=pierrick.bouvier@linaro.org; helo=mail-pg1-x529.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -141,29 +142,41 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-T24gOS8xMC8yNCAyMjo1MCwgUGhpbGlwcGUgTWF0aGlldS1EYXVkw6kgd3JvdGU6DQo+IEhp
-IFBpZXJyaWNrLA0KPiANCj4gT24gMTEvOS8yNCAwMDoxNSwgUGllcnJpY2sgQm91dmllciB3
-cm90ZToNCj4+IFNpZ25lZC1vZmYtYnk6IFBpZXJyaWNrIEJvdXZpZXIgPHBpZXJyaWNrLmJv
-dXZpZXJAbGluYXJvLm9yZz4NCj4+IC0tLQ0KPj4gICAgaHcvcGNpL3BjaS1zdHViLmMgfCA0
-ICsrLS0NCj4+ICAgIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKyksIDIgZGVsZXRp
-b25zKC0pDQo+Pg0KPj4gZGlmZiAtLWdpdCBhL2h3L3BjaS9wY2ktc3R1Yi5jIGIvaHcvcGNp
-L3BjaS1zdHViLmMNCj4+IGluZGV4IGYwNTA4NjgyZDJiLi5jNjk1MGUyMWJkNCAxMDA2NDQN
-Cj4+IC0tLSBhL2h3L3BjaS9wY2ktc3R1Yi5jDQo+PiArKysgYi9ody9wY2kvcGNpLXN0dWIu
-Yw0KPj4gQEAgLTQ2LDEzICs0NiwxMyBAQCB2b2lkIGhtcF9wY2llX2Flcl9pbmplY3RfZXJy
-b3IoTW9uaXRvciAqbW9uLCBjb25zdCBRRGljdCAqcWRpY3QpDQo+PiAgICAvKiBrdm0tYWxs
-IHdhbnRzIHRoaXMgKi8NCj4+ICAgIE1TSU1lc3NhZ2UgcGNpX2dldF9tc2lfbWVzc2FnZShQ
-Q0lEZXZpY2UgKmRldiwgaW50IHZlY3RvcikNCj4+ICAgIHsNCj4+IC0gICAgZ19hc3NlcnQo
-ZmFsc2UpOw0KPj4gKyAgICBnX2Fzc2VydF9ub3RfcmVhY2hlZCgpOw0KPj4gICAgICAgIHJl
-dHVybiAoTVNJTWVzc2FnZSl7fTsNCj4gDQo+IFRoZSB0YWlsIG9mIHRoaXMgc2VyaWVzIHJl
-bW92ZSB0aGUgdW5yZWFjaGFibGUgJ2JyZWFrJyBsaW5lcy4NCj4gV2h5ICdyZXR1cm4nIGxp
-bmVzIGFyZW4ndCBwcm9ibGVtYXRpYz8gSXMgdGhhdCBhIEdDQyBUU2FuIGJ1Zz8NCj4gDQoN
-Ckl0J3MgcmVsYXRlZCB0byBob3cgY29udHJvbCBmbG93IGFuYWx5c2lzIHdvcmtzLCBidXQg
-SSBkb24ndCBoYXZlIGEgDQpkZWVwZXIgYW5zd2VyLiBJIHJlcG9ydGVkIHRoZSBpc3N1ZSB3
-aXRoICdicmVhaycgZm9yIGdjYyBhbmQgdGhlIHNhbWUgDQpidWcgd2FzIGNyZWF0ZWQgc2V2
-ZXJhbCB5ZWFycyBhZ28sIHNvIGl0IHdhcyBqdXN0IG1hcmtlZCBhcyBkdXBsaWNhdGUuDQoN
-CkknbGwgY2xlYW4gdGhlIGV4dHJhIHJldHVybiB3aXRoIGhhdmUgdGhvdWdoLCBhcyBwYXJ0
-IG9mIHYyLg0KDQo+PiAgICB9DQo+PiAgICANCj4+ICAgIHVpbnQxNl90IHBjaV9yZXF1ZXN0
-ZXJfaWQoUENJRGV2aWNlICpkZXYpDQo+PiAgICB7DQo+PiAtICAgIGdfYXNzZXJ0KGZhbHNl
-KTsNCj4+ICsgICAgZ19hc3NlcnRfbm90X3JlYWNoZWQoKTsNCj4+ICAgICAgICByZXR1cm4g
-MDsNCj4+ICAgIH0NCj4+ICAgIA0KPiANCg==
+On 9/11/24 07:10, BALATON Zoltan wrote:
+> 
+> 
+> On Tue, 10 Sep 2024, Pierrick Bouvier wrote:
+> 
+>> Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+>> ---
+>> hw/ppc/spapr_events.c | 2 +-
+>> 1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/hw/ppc/spapr_events.c b/hw/ppc/spapr_events.c
+>> index cb0eeee5874..38ac1cb7866 100644
+>> --- a/hw/ppc/spapr_events.c
+>> +++ b/hw/ppc/spapr_events.c
+>> @@ -645,7 +645,7 @@ static void spapr_hotplug_req_event(uint8_t hp_id, uint8_t hp_action,
+>>          /* we shouldn't be signaling hotplug events for resources
+>>           * that don't support them
+>>           */
+>> -        g_assert(false);
+>> +        g_assert_not_reached();
+>>          return;
+>>      }
+> 
+> If break does not make sense after g_assert_not_reached() and removed then
+> return is the same here.
+> 
+> It may make the series shorter and easier to check that none of these are
+> missed if this is done in the same patch where the assert is changed
+> instead of separate patches. It's unlikely that the assert change and
+> removal of the following break or return would need to be reverted
+> separately so it's a simple enough change to put in one patch in my
+> opinion but I don't mink if it's kept separate either.
+> 
+> Regards,
+> BALATON Zoltan
+
+Mostly done this way because it's easy for creating many commits.
 
