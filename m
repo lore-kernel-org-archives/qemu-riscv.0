@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CD83EE0209
-	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Sep 2024 05:51:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0B66EE01F3
+	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Sep 2024 06:12:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1soGFc-0001Xs-Ci; Wed, 11 Sep 2024 01:50:51 -0400
+	id 1soGaD-0000rg-Af; Wed, 11 Sep 2024 02:12:05 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1soGFN-0001VB-Mj
- for qemu-riscv@nongnu.org; Wed, 11 Sep 2024 01:50:33 -0400
-Received: from mail-ed1-x533.google.com ([2a00:1450:4864:20::533])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1soGaC-0000qT-E2
+ for qemu-riscv@nongnu.org; Wed, 11 Sep 2024 02:12:04 -0400
+Received: from mail-ej1-x629.google.com ([2a00:1450:4864:20::629])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1soGFL-0006KK-Bs
- for qemu-riscv@nongnu.org; Wed, 11 Sep 2024 01:50:33 -0400
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-5bef295a45bso2904792a12.0
- for <qemu-riscv@nongnu.org>; Tue, 10 Sep 2024 22:50:30 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1soGaA-0008GY-Kz
+ for qemu-riscv@nongnu.org; Wed, 11 Sep 2024 02:12:04 -0400
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-a8a7b1c2f2bso253908366b.0
+ for <qemu-riscv@nongnu.org>; Tue, 10 Sep 2024 23:12:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726033829; x=1726638629; darn=nongnu.org;
+ d=linaro.org; s=google; t=1726035121; x=1726639921; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=JRpJ0yC+pw08bpum2VqRCaGzVKgHygWh66dJBO5C4+I=;
- b=EJbvcjWsaPi7ahzwJ1q3JwErIFxLGtrFW7BrkXnlwXc6orFdtAu8bnWXhRXeRW4jgu
- 2eTCzJx+0gG80wYd8CeDfSIFcducqb2y+OQDSaSnQDP3Tz6kq0k64c/ld0lXyrbOj+/q
- DO5I1vbVrX4zN7YQmQfHX9yPRUUfkbqN/LNomeEmEP+uOBykVTBlJt0eLpMmJ/0lqx2A
- DqSGNfx/WbP0dBDiO1+8AWBCH3bXMKIeqPB1lADC4JX8LhjvZ6jkPlOdaN8sncaqu1aZ
- 5kCyo3oLYSDqHx8Q8foCcw2LoRaeWXINplQuaZdJG8A5T6Z+GlHlQxYIOBO3fhO/BX1o
- ZfWw==
+ bh=+34vrWrHaGMzGum0dUZAL9TUKidQHtpHEuGMkrYa2DA=;
+ b=mDMTLaQCUKm2rzd0SegVuy0EpgRrbSBWhHIaC7wm/aNICuwWdVerWkw0iEjG9fI8RY
+ aSkK0qq09P7TZmVdx9FJuAo26SLtCGqLcjVQpcKr+MyaWMcLgnCM5aT9lpQor6ddHxy0
+ 68vqJ1sDysLka7h/n+0M/cV7B52u9lZmP+3yUhoOhkVBM33kxsFeDflFkLG9NNFiChdE
+ nJBWwbbgwJ2PV59ZottzEJjfQa3PNF6t/5eD7VFtO6ukEanY49MPjbDbP3o1LwM776og
+ rW6U1CReYkGBwFo+iFPnqMZuKwISUpnZJ2zJKAUIoDt7FevPFjP7FkxlgfkDYlR4lPZv
+ YkBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726033829; x=1726638629;
+ d=1e100.net; s=20230601; t=1726035121; x=1726639921;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=JRpJ0yC+pw08bpum2VqRCaGzVKgHygWh66dJBO5C4+I=;
- b=cG/Tjvek0LZ81GIpLE3tWbg/ZVuXjjh2fX2W/jmwOMLgbY/uEEyCRVfhCmYsmXugSE
- k/GVrBBcF4jeU+Unwk9R0UqADpoKbVrYt0lNQk4oWAuYAhCtalYd8XNKExMsK4sB5FYh
- A7IzqRo6m39zmji9aVWhWxdrOBsuJh5I602bYs8n73nVD3T3EeEBlN8gMgMxMd78IkVx
- VDdJ1Ui/C3y0nRR+xG2ecEn+Uhurd/DURwqtlRE63JS5UclNFtVkP26poFGkeY93CeDc
- vVrA7p4TzHv3LEGlMiZtf6Ofl/ntxAxK52OCY03p36njHUJKRaTYXqVDpVH7AJ4bxsNg
- rPLA==
+ bh=+34vrWrHaGMzGum0dUZAL9TUKidQHtpHEuGMkrYa2DA=;
+ b=xHv9xevuCg37bt0zD6AKOKwIMFqgx81frqwec470rnD2o1NbppPb7SGk5C1WCHf8XV
+ KRsm2gmohptN5VVe517t7WbAow7gPh3bvgzZHl5S4NRknsRgZTaxLjqyLQEUnGXYy1EX
+ DgYxMi2iQnsexWYyTNZULfyAJ4Hi+1viuBsEeZckdX/BSjHAOuwgABD1twUzuVrrjVmu
+ MUc7YaD1+sbvu0np+wa2TpBHX1sSUJs0tYHjhLTieoNAsCqxzitb8lC5Tm6SLXL9rreQ
+ kk4ZUSr/a3jEkeRMfhb7QxX1R0GcIc+z8Y6jE4n3QoLRC3vNmiPhFFWqnc3DwPsxTNKn
+ 39/g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVd1bghKEnTIO7gTUM2UZpv7gYSH+9e6ivHnJqeyX+QWhvvTO/rI2y3BND4m5t9p4XUlntHU+mnGkyK@nongnu.org
-X-Gm-Message-State: AOJu0Ywi2ra7VLnMxLRNhkQAroOEZS1NreVsLOPrNnGeCw+J+fF2ggd2
- zPCNCM9T9klgeHCiyinvgl7G/xZpHoaxieV3d30Lvy7wWkHKnYSVw+M0mTncZTU=
-X-Google-Smtp-Source: AGHT+IHtNdz3JGktS1H6wUw6Ej9fupOVxu56YnjbGwav8RYfVLrdhTufWQK43MuqJkz8VsNhlc+DKQ==
-X-Received: by 2002:a05:6402:35d5:b0:5c2:70a2:9418 with SMTP id
- 4fb4d7f45d1cf-5c3dc77adc4mr16028699a12.6.1726033829158; 
- Tue, 10 Sep 2024 22:50:29 -0700 (PDT)
+ AJvYcCW95X134G7hdfOifNGHz8J3NqiBogAhg2QwJH5bbaOs+41LaEwi2k1U0Si8yzD2S7P45pMqHQ2x7vpr@nongnu.org
+X-Gm-Message-State: AOJu0Yz27pxxjNs8oLC+lGq/TlqmJYBIc4MO8MDgmAi1SCfPnRzH5WWj
+ 2+29i7gX45CVv6xGqMfSwEIphpnAcX7uJAmMlGe0b1O7JL7yxgviB6Lh+MMM3Tk=
+X-Google-Smtp-Source: AGHT+IH4ooGDdGMRExue4kMMs1ung0TKQVFYie4NWRoJANGnBSzGpgLK0lpNkpt9jkOB2KoDESp7sg==
+X-Received: by 2002:a17:907:efcb:b0:a8a:85af:7ae8 with SMTP id
+ a640c23a62f3a-a9004798aa7mr202327666b.11.1726035120608; 
+ Tue, 10 Sep 2024 23:12:00 -0700 (PDT)
 Received: from [192.168.69.100] ([176.187.196.107])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c3ebd8cc1dsm5033853a12.94.2024.09.10.22.50.22
+ a640c23a62f3a-a8d25a25897sm571142466b.87.2024.09.10.23.11.53
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 10 Sep 2024 22:50:28 -0700 (PDT)
-Message-ID: <3a7fc1f2-1468-46a8-9075-7b1bf1bd6149@linaro.org>
-Date: Wed, 11 Sep 2024 07:50:20 +0200
+ Tue, 10 Sep 2024 23:12:00 -0700 (PDT)
+Message-ID: <cca80b37-2640-4269-af72-aebccfa47245@linaro.org>
+Date: Wed, 11 Sep 2024 08:11:51 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 19/39] hw/pci: replace assert(false) with
+Subject: Re: [PATCH 04/39] hw/char: replace assert(0) with
  g_assert_not_reached()
 To: Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-devel@nongnu.org
 Cc: Zhao Liu <zhao1.liu@intel.com>, "Richard W.M. Jones" <rjones@redhat.com>, 
@@ -107,21 +107,21 @@ Cc: Zhao Liu <zhao1.liu@intel.com>, "Richard W.M. Jones" <rjones@redhat.com>,
  Jean-Christophe Dubois <jcd@tribudubois.net>,
  Jason Wang <jasowang@redhat.com>
 References: <20240910221606.1817478-1-pierrick.bouvier@linaro.org>
- <20240910221606.1817478-20-pierrick.bouvier@linaro.org>
+ <20240910221606.1817478-5-pierrick.bouvier@linaro.org>
 Content-Language: en-US
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20240910221606.1817478-20-pierrick.bouvier@linaro.org>
+In-Reply-To: <20240910221606.1817478-5-pierrick.bouvier@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::533;
- envelope-from=philmd@linaro.org; helo=mail-ed1-x533.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::629;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x629.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -137,37 +137,12 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Pierrick,
-
 On 11/9/24 00:15, Pierrick Bouvier wrote:
 > Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 > ---
->   hw/pci/pci-stub.c | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/hw/pci/pci-stub.c b/hw/pci/pci-stub.c
-> index f0508682d2b..c6950e21bd4 100644
-> --- a/hw/pci/pci-stub.c
-> +++ b/hw/pci/pci-stub.c
-> @@ -46,13 +46,13 @@ void hmp_pcie_aer_inject_error(Monitor *mon, const QDict *qdict)
->   /* kvm-all wants this */
->   MSIMessage pci_get_msi_message(PCIDevice *dev, int vector)
->   {
-> -    g_assert(false);
-> +    g_assert_not_reached();
->       return (MSIMessage){};
+>   hw/char/avr_usart.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 
-The tail of this series remove the unreachable 'break' lines.
-Why 'return' lines aren't problematic? Is that a GCC TSan bug?
-
->   }
->   
->   uint16_t pci_requester_id(PCIDevice *dev)
->   {
-> -    g_assert(false);
-> +    g_assert_not_reached();
->       return 0;
->   }
->   
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
 
