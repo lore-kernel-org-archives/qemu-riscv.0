@@ -4,134 +4,130 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26951EE49BD
-	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Sep 2024 14:54:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61EA9EE57C0
+	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Sep 2024 15:25:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1soOdZ-0006e7-Ai; Wed, 11 Sep 2024 10:48:12 -0400
+	id 1soPCq-0003AQ-5K; Wed, 11 Sep 2024 11:24:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peterx@redhat.com>) id 1soOb7-0005wx-SL
- for qemu-riscv@nongnu.org; Wed, 11 Sep 2024 10:45:34 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peterx@redhat.com>) id 1soOb4-0006Lz-W6
- for qemu-riscv@nongnu.org; Wed, 11 Sep 2024 10:45:33 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1726065915;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=A4cGYuzEcsU+H11W5DX5/hXv+/XV9V+6iflAKbWezCQ=;
- b=dyWzeGOlmPTpnVUUPEKjKVCtETJoJJnWmfQs3Khp3Hm4rXH8+5BCdymLxZ86qrH4r2FyAj
- RwUztOtwFsHcWAbrq9FDhrCBFVqZlSIfI+ceEttq/umYuZGbqDA1z6Yj9UcA9IcbINr37l
- 4nNIvceVNO205VMeUrSue9C10C4mJUk=
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
- [209.85.160.198]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-615-Wdg0JXGSOma6NshdNy4m7w-1; Wed, 11 Sep 2024 09:40:52 -0400
-X-MC-Unique: Wdg0JXGSOma6NshdNy4m7w-1
-Received: by mail-qt1-f198.google.com with SMTP id
- d75a77b69052e-4581efb73d3so90910471cf.1
- for <qemu-riscv@nongnu.org>; Wed, 11 Sep 2024 06:40:51 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
+ id 1soPBv-0007hm-Nm
+ for qemu-riscv@nongnu.org; Wed, 11 Sep 2024 11:23:39 -0400
+Received: from mail-pg1-x52f.google.com ([2607:f8b0:4864:20::52f])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
+ id 1soPBs-0002Po-FX
+ for qemu-riscv@nongnu.org; Wed, 11 Sep 2024 11:23:35 -0400
+Received: by mail-pg1-x52f.google.com with SMTP id
+ 41be03b00d2f7-7cd8803fe0aso4906257a12.0
+ for <qemu-riscv@nongnu.org>; Wed, 11 Sep 2024 08:23:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1726068211; x=1726673011; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=OuvMeDUVp0mbaD2Ccta77meu7WyU6zTm7qPRf/MNjOo=;
+ b=jT3yPNP8ZJX8SjAHuqKLQp6r8HSxurfxnAVWGZ5v7TiofYiMi6fpSKr7rLFqaEyAX4
+ y8WhfeolMVDPsFW1PYJ2J/qSd1FctyMprDnTlpKh61hh9XS2MErclk5+97oEzsf+XTTM
+ rZ0A6QhD0yX6jYbWLdsR13rs8RfAQu54GUwBlTI6DnSwSyZnfCnAb1t5yOwY8kiDfXR2
+ DJZ+q334ipbLvg7uf4gjTM/dDJwiFNoVwSda+tVIvhLkFgoNv51frZTu18VkYbtq4YZN
+ veh4KOOWNxjmTfQVgA6qftMmwBjFse03R3MxRV+OR06gUM/2/NM/SwwTxAOY8vM/G9Rz
+ /jhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726062051; x=1726666851;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=A4cGYuzEcsU+H11W5DX5/hXv+/XV9V+6iflAKbWezCQ=;
- b=txFuTq0wfEzkjmUjTGcGFgrO1YfdBpgzBl/i5MvGUeG9aFRNSyW5wGogiOiIwZCLWG
- RLx8B+Fi+R76yK7RExGWGVVglhGrBm9YXFhSeeCypcKfu2/L67OYbjHj1fWjFB+XujT2
- 0Z/iMuOmA6omsQmcNgsHQa4cLFui9uQPaqqhC0DFz8Nk/HtDcc1p3K0frQyK8M4gO5qS
- Hvvl10pG1LTmJayqvf/q69hMITBTn+b8jX0CIL9JFpWpRruzCbcRjmBXTB67V6xFhX/R
- DxThbQGwActW+lKEEkQbo5hhQKO52EmeTztwJ7MEmXJngF3v5kirvkcgWQQ6duvvK5c6
- UrUQ==
+ d=1e100.net; s=20230601; t=1726068211; x=1726673011;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=OuvMeDUVp0mbaD2Ccta77meu7WyU6zTm7qPRf/MNjOo=;
+ b=ms4mJQ7psMoYqh7+ezmp81LL9QsPhC9l5sT3q5ls5DUESD8uw20863EhZzQjSS0kDi
+ cgNCJDHPfP9d2xFhmYHskGD0GHTzRP9ebyBvrEzrp3/aII1uw6STJSSLPY4LHucP8SXL
+ RoHXlcKFR5Ad4XfV8yevYJV3+cHqXR5/Ya+YAhCyTONkyraHbWfpS3gQCV3VGZDfyw6X
+ bGZ7Fe9ArhS1s4jjo+qRlH2lcGlj3gF/A6PqCJqoyaNcSUlidNGwZiaNlIpGqy3t+PQE
+ LE11ZfCVZY9/Ean/cVO3UlP9e+1qvWeKenbv9ty7S6lsa7H8mcat09w+NDFlA+coOk7m
+ Gt/A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXDu83yjuYRlF1RPONXrDgjHsVTtbI3nDcsS1rYv48fj0/lW4vSqfg4il0cEN08KIeOzFbdCtrVFhYZ@nongnu.org
-X-Gm-Message-State: AOJu0YzhOWhXyhjRC4hHqosQ3c2GbbIJKfqF152Q03EYaMDRA0iTRTZQ
- Ak/MMKOfXznTYIRGGaEvNE/nFwZc7tFw8tlWIop207HPTa2sty2zZL/6nB4RfKhK+1mxthsVlGC
- x8ILA6mm7pkrq9OfOrJJu5l2RcyDlqmynA/1Xuq98PpxN6CKXV3cT
-X-Received: by 2002:ac8:57c4:0:b0:458:59e3:2b52 with SMTP id
- d75a77b69052e-45859e332abmr16949791cf.55.1726062051262; 
- Wed, 11 Sep 2024 06:40:51 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IH9OJUDpC/dDLPTaAj7vE1LX91DjdMwKKxOTbejPT9DFiRR1lsGsySzd/YLuGZUG3kBLFK7Vw==
-X-Received: by 2002:ac8:57c4:0:b0:458:59e3:2b52 with SMTP id
- d75a77b69052e-45859e332abmr16948861cf.55.1726062049492; 
- Wed, 11 Sep 2024 06:40:49 -0700 (PDT)
-Received: from x1n (pool-99-254-121-117.cpe.net.cable.rogers.com.
- [99.254.121.117]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-45822e60974sm41358491cf.8.2024.09.11.06.40.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Sep 2024 06:40:48 -0700 (PDT)
-Date: Wed, 11 Sep 2024 09:40:45 -0400
-From: Peter Xu <peterx@redhat.com>
-To: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+ AJvYcCXBWPRcmvK+5CcDXZ/Wb5zqN7lOOLBk8evd/d86u3LLVw22gE6+Lgtb+ZrMV0zOgzZrgazdlh5FucAl@nongnu.org
+X-Gm-Message-State: AOJu0YwJnClAd36fQ1pCrfeFxri5+m5G2qgKNGspHceRxen070ZJKgAT
+ bZ/Yr+5lfkSNbTPORIPsVCxwv/Wx+4WnOzhClakLOOzJyBNxcSOYBJ0n3nH+auc=
+X-Google-Smtp-Source: AGHT+IFVEaQbbNIN6u4ycMxcdISjFC11x2LnDF31jXta/zBjlVjuD+C9lapW5FnwVoc/RuMXV2R+aQ==
+X-Received: by 2002:a05:6a20:d809:b0:1c6:fb07:381e with SMTP id
+ adf61e73a8af0-1cf5e1aba0fmr5779831637.44.1726068210675; 
+ Wed, 11 Sep 2024 08:23:30 -0700 (PDT)
+Received: from ?IPV6:2604:3d08:9384:1d00::9633? ([2604:3d08:9384:1d00::9633])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-71908fe4e7esm3102009b3a.80.2024.09.11.08.23.28
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 11 Sep 2024 08:23:30 -0700 (PDT)
+Message-ID: <510bda9d-031a-4235-aee3-119c5f8865ea@linaro.org>
+Date: Wed, 11 Sep 2024 08:23:23 -0700
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 01/39] docs/spin: replace assert(0) with
+ g_assert_not_reached()
+Content-Language: en-US
+To: Eric Blake <eblake@redhat.com>
 Cc: qemu-devel@nongnu.org, Zhao Liu <zhao1.liu@intel.com>,
- "Richard W.M. Jones" <rjones@redhat.com>,
- Joel Stanley <joel@jms.id.au>, Kevin Wolf <kwolf@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>, qemu-arm@nongnu.org,
- Corey Minyard <minyard@acm.org>, Eric Farman <farman@linux.ibm.com>,
- Thomas Huth <thuth@redhat.com>, Keith Busch <kbusch@kernel.org>,
- WANG Xuerui <git@xen0n.name>, Hyman Huang <yong.huang@smartx.com>,
+ "Richard W.M. Jones" <rjones@redhat.com>, Joel Stanley <joel@jms.id.au>,
+ Kevin Wolf <kwolf@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ qemu-arm@nongnu.org, Corey Minyard <minyard@acm.org>,
+ Eric Farman <farman@linux.ibm.com>, Thomas Huth <thuth@redhat.com>,
+ Keith Busch <kbusch@kernel.org>, WANG Xuerui <git@xen0n.name>,
+ Hyman Huang <yong.huang@smartx.com>,
  Stefan Berger <stefanb@linux.vnet.ibm.com>,
  Michael Rolnik <mrolnik@gmail.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>,
+ =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
  Markus Armbruster <armbru@redhat.com>,
  Sriram Yagnaraman <sriram.yagnaraman@ericsson.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
  Ani Sinha <anisinha@redhat.com>, Halil Pasic <pasic@linux.ibm.com>,
  Jesper Devantier <foss@defmacro.it>, Laurent Vivier <laurent@vivier.eu>,
- Peter Maydell <peter.maydell@linaro.org>,
- Igor Mammedov <imammedo@redhat.com>, kvm@vger.kernel.org,
- Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- Fam Zheng <fam@euphon.net>, qemu-s390x@nongnu.org,
- Hanna Reitz <hreitz@redhat.com>, Nicholas Piggin <npiggin@gmail.com>,
- Eduardo Habkost <eduardo@habkost.net>,
+ Peter Maydell <peter.maydell@linaro.org>, Igor Mammedov
+ <imammedo@redhat.com>, kvm@vger.kernel.org,
+ =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Richard Henderson <richard.henderson@linaro.org>, Fam Zheng
+ <fam@euphon.net>, qemu-s390x@nongnu.org, Hanna Reitz <hreitz@redhat.com>,
+ Nicholas Piggin <npiggin@gmail.com>, Eduardo Habkost <eduardo@habkost.net>,
  Laurent Vivier <lvivier@redhat.com>, Rob Herring <robh@kernel.org>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, qemu-block@nongnu.org,
  "Maciej S. Szmigiero" <maciej.szmigiero@oracle.com>, qemu-ppc@nongnu.org,
  Daniel Henrique Barboza <danielhb413@gmail.com>,
  Christian Borntraeger <borntraeger@linux.ibm.com>,
  Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Fabiano Rosas <farosas@suse.de>, Helge Deller <deller@gmx.de>,
- Dmitry Fleytman <dmitry.fleytman@gmail.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Fabiano Rosas <farosas@suse.de>,
+ Helge Deller <deller@gmx.de>, Dmitry Fleytman <dmitry.fleytman@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Akihiko Odaki <akihiko.odaki@daynix.com>,
  Marcelo Tosatti <mtosatti@redhat.com>,
  David Gibson <david@gibson.dropbear.id.au>,
  Aurelien Jarno <aurelien@aurel32.net>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Yanan Wang <wangyanan55@huawei.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>, Klaus Jensen <its@irrelevant.dk>,
+ Yanan Wang <wangyanan55@huawei.com>, Peter Xu <peterx@redhat.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>,
+ Klaus Jensen <its@irrelevant.dk>,
  Jean-Christophe Dubois <jcd@tribudubois.net>,
  Jason Wang <jasowang@redhat.com>
-Subject: Re: [PATCH 21/39] migration: replace assert(false) with
- g_assert_not_reached()
-Message-ID: <ZuGd3bcawih4bN9Z@x1n>
 References: <20240910221606.1817478-1-pierrick.bouvier@linaro.org>
- <20240910221606.1817478-22-pierrick.bouvier@linaro.org>
-MIME-Version: 1.0
-In-Reply-To: <20240910221606.1817478-22-pierrick.bouvier@linaro.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=peterx@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
+ <20240910221606.1817478-2-pierrick.bouvier@linaro.org>
+ <zkyoryho5alnyirnl7ulvh5y6tkty6koccgeygmve42uml7glu@37rkdodtlx4f>
+ <bwo43ms2wi6vbeqhlc7qjwmw5jyt2btxvpph3lqn7tfol4srjf@77yusngzs6wh>
+From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+In-Reply-To: <bwo43ms2wi6vbeqhlc7qjwmw5jyt2btxvpph3lqn7tfol4srjf@77yusngzs6wh>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52f;
+ envelope-from=pierrick.bouvier@linaro.org; helo=mail-pg1-x52f.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.144,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -147,12 +143,30 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Sep 10, 2024 at 03:15:48PM -0700, Pierrick Bouvier wrote:
-> Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+On 9/11/24 05:37, Eric Blake wrote:
+> On Wed, Sep 11, 2024 at 07:33:59AM GMT, Eric Blake wrote:
+>> On Tue, Sep 10, 2024 at 03:15:28PM GMT, Pierrick Bouvier wrote:
+>>> Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+>>> ---
+>>
+>> A general suggestion for the entire series: please use a commit
+>> message that explains why this is a good idea.  Even something as
+>> boiler-plate as "refer to commit XXX for rationale" that can be
+>> copy-pasted into all the other commits is better than nothing,
+>> although a self-contained message is best.  Maybe:
+>>
+>> This patch is part of a series that moves towards a consistent use of
+>> g_assert_not_reached() rather than an ad hoc mix of different
+>> assertion mechanisms.
+> 
+> Or summarize your cover letter:
+> 
+> Use of assert(false) can trip spurious control flow warnings from some
+> versions of gcc:
+> https://lore.kernel.org/qemu-devel/54bb02a6-1b12-460a-97f6-3f478ef766c6@linaro.org/
+> Solve that by unifying the code base on g_assert_not_reached()
+> instead.
+> 
 
-Reviewed-by: Peter Xu <peterx@redhat.com>
-
--- 
-Peter Xu
-
+I'll add this to messages. Thanks.
 
