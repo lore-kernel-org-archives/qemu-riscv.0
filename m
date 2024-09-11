@@ -4,39 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40317EE499F
-	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Sep 2024 13:04:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 283B4EE499D
+	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Sep 2024 13:04:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1soN0s-00078Q-UU; Wed, 11 Sep 2024 09:04:02 -0400
+	id 1soN0s-00076o-UR; Wed, 11 Sep 2024 09:04:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <mail@maciej.szmigiero.name>)
- id 1soMkI-0006JW-Ij; Wed, 11 Sep 2024 08:46:54 -0400
+ id 1soKQq-0007Hb-D1; Wed, 11 Sep 2024 06:18:40 -0400
 Received: from vps-vb.mhejs.net ([37.28.154.113])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <mail@maciej.szmigiero.name>)
- id 1soMkG-0002eX-4S; Wed, 11 Sep 2024 08:46:54 -0400
+ id 1soKQo-0001dR-Nd; Wed, 11 Sep 2024 06:18:40 -0400
 Received: from MUA by vps-vb.mhejs.net with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.94.2)
  (envelope-from <mail@maciej.szmigiero.name>)
- id 1soMjp-0003vT-2Y; Wed, 11 Sep 2024 14:46:25 +0200
-Message-ID: <10d6d67a-32f6-40fc-aba9-c62a74d9d98d@maciej.szmigiero.name>
-Date: Wed, 11 Sep 2024 14:46:18 +0200
+ id 1soKPy-0002uV-KL; Wed, 11 Sep 2024 12:17:46 +0200
+Message-ID: <7ccdeb84-ddca-4d87-86b1-ab7db8ee41d2@maciej.szmigiero.name>
+Date: Wed, 11 Sep 2024 12:17:38 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 01/39] docs/spin: replace assert(0) with
+Subject: Re: [PATCH 16/39] hw/hyperv: replace assert(false) with
  g_assert_not_reached()
-To: Eric Blake <eblake@redhat.com>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Cc: qemu-devel@nongnu.org, Zhao Liu <zhao1.liu@intel.com>,
- "Richard W.M. Jones" <rjones@redhat.com>, Joel Stanley <joel@jms.id.au>,
- Kevin Wolf <kwolf@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- qemu-arm@nongnu.org, Corey Minyard <minyard@acm.org>,
- Eric Farman <farman@linux.ibm.com>, Thomas Huth <thuth@redhat.com>,
- Keith Busch <kbusch@kernel.org>, WANG Xuerui <git@xen0n.name>,
- Hyman Huang <yong.huang@smartx.com>,
+To: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+Cc: Zhao Liu <zhao1.liu@intel.com>, "Richard W.M. Jones" <rjones@redhat.com>, 
+ Joel Stanley <joel@jms.id.au>, Kevin Wolf <kwolf@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, qemu-arm@nongnu.org,
+ Corey Minyard <minyard@acm.org>, Eric Farman <farman@linux.ibm.com>,
+ Thomas Huth <thuth@redhat.com>, Keith Busch <kbusch@kernel.org>,
+ WANG Xuerui <git@xen0n.name>, Hyman Huang <yong.huang@smartx.com>,
  Stefan Berger <stefanb@linux.vnet.ibm.com>,
  Michael Rolnik <mrolnik@gmail.com>,
  Alistair Francis <alistair.francis@wdc.com>,
@@ -62,7 +60,7 @@ Cc: qemu-devel@nongnu.org, Zhao Liu <zhao1.liu@intel.com>,
  "Michael S. Tsirkin" <mst@redhat.com>, Fabiano Rosas <farosas@suse.de>,
  Helge Deller <deller@gmx.de>, Dmitry Fleytman <dmitry.fleytman@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Akihiko Odaki <akihiko.odaki@daynix.com>,
+ Akihiko Odaki <akihiko.odaki@daynix.com>, qemu-devel@nongnu.org,
  Marcelo Tosatti <mtosatti@redhat.com>,
  David Gibson <david@gibson.dropbear.id.au>,
  Aurelien Jarno <aurelien@aurel32.net>,
@@ -73,9 +71,7 @@ Cc: qemu-devel@nongnu.org, Zhao Liu <zhao1.liu@intel.com>,
  Jean-Christophe Dubois <jcd@tribudubois.net>,
  Jason Wang <jasowang@redhat.com>
 References: <20240910221606.1817478-1-pierrick.bouvier@linaro.org>
- <20240910221606.1817478-2-pierrick.bouvier@linaro.org>
- <zkyoryho5alnyirnl7ulvh5y6tkty6koccgeygmve42uml7glu@37rkdodtlx4f>
- <bwo43ms2wi6vbeqhlc7qjwmw5jyt2btxvpph3lqn7tfol4srjf@77yusngzs6wh>
+ <20240910221606.1817478-17-pierrick.bouvier@linaro.org>
 Content-Language: en-US, pl-PL
 From: "Maciej S. Szmigiero" <mail@maciej.szmigiero.name>
 Autocrypt: addr=mail@maciej.szmigiero.name; keydata=
@@ -119,7 +115,7 @@ Autocrypt: addr=mail@maciej.szmigiero.name; keydata=
  xNT833IQSNqyuEnxG9/M82yYa+9ClBiRKM2JyvgnBEbiWA15rAQkOqZGJfFJ3bmTFePx4R/I
  ZVehUxCRY5IS1FLe16tymf9lCASrPXnkO2+hkHpBCwt75wnccS3DwtIGqwagVVmciCxAFg9E
  WZ4dI5B0IUziKtBxgwJG4xY5rp7WbzywjCeaaKubtcLQ9bSBkkK4U8Fu58g6Hg==
-In-Reply-To: <bwo43ms2wi6vbeqhlc7qjwmw5jyt2btxvpph3lqn7tfol4srjf@77yusngzs6wh>
+In-Reply-To: <20240910221606.1817478-17-pierrick.bouvier@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 Received-SPF: pass client-ip=37.28.154.113;
@@ -127,9 +123,8 @@ Received-SPF: pass client-ip=37.28.154.113;
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-Mailman-Approved-At: Wed, 11 Sep 2024 09:04:00 -0400
 X-BeenThere: qemu-riscv@nongnu.org
@@ -146,35 +141,17 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 11.09.2024 14:37, Eric Blake wrote:
-> On Wed, Sep 11, 2024 at 07:33:59AM GMT, Eric Blake wrote:
->> On Tue, Sep 10, 2024 at 03:15:28PM GMT, Pierrick Bouvier wrote:
->>> Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
->>> ---
->>
->> A general suggestion for the entire series: please use a commit
->> message that explains why this is a good idea.  Even something as
->> boiler-plate as "refer to commit XXX for rationale" that can be
->> copy-pasted into all the other commits is better than nothing,
->> although a self-contained message is best.  Maybe:
->>
->> This patch is part of a series that moves towards a consistent use of
->> g_assert_not_reached() rather than an ad hoc mix of different
->> assertion mechanisms.
+On 11.09.2024 00:15, Pierrick Bouvier wrote:
+> Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+> ---
+>   hw/hyperv/hyperv_testdev.c |  6 +++---
+>   hw/hyperv/vmbus.c          | 12 ++++++------
+>   2 files changed, 9 insertions(+), 9 deletions(-)
 > 
-> Or summarize your cover letter:
-> 
-> Use of assert(false) can trip spurious control flow warnings from some
-> versions of gcc:
-> https://lore.kernel.org/qemu-devel/54bb02a6-1b12-460a-97f6-3f478ef766c6@linaro.org/
-> Solve that by unifying the code base on g_assert_not_reached()
-> instead.
-> 
+> diff --git a/hw/hyperv/hyperv_testdev.c b/hw/hyperv/hyperv_testdev.c
+> index 9a56ddf83fe..ef50e490c4e 100644
 
-If using g_assert_not_reached() instead of assert(false) silences
-the warning about missing return value in such impossible to reach
-locations should we also be deleting the now-unnecessary "return"
-statements after g_assert_not_reached()?
+Reviewed-by: Maciej S. Szmigiero <maciej.szmigiero@oracle.com>
 
 Thanks,
 Maciej
