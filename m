@@ -4,123 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D078FEE021A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Sep 2024 08:40:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 672A1EE021C
+	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Sep 2024 08:50:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1soItT-0005RL-8r; Wed, 11 Sep 2024 04:40:07 -0400
+	id 1soJ3H-0007oq-ST; Wed, 11 Sep 2024 04:50:15 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1soItQ-0005Hh-Tk
- for qemu-riscv@nongnu.org; Wed, 11 Sep 2024 04:40:04 -0400
-Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1soItN-0000KD-Iy
- for qemu-riscv@nongnu.org; Wed, 11 Sep 2024 04:40:04 -0400
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-5c260b19f71so6552665a12.1
- for <qemu-riscv@nongnu.org>; Wed, 11 Sep 2024 01:40:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726044000; x=1726648800; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=+JyV9LJm2Vf4wGO7Hd4ArlaMIqvRcHyLUasi+8n7+pY=;
- b=mSTH4EcqqL9CEdHbn1hx+IY7dMd07p6SQ67XzkuRTb3wOEIOU7/DYtGFA1hd/NnvTl
- V24LUH400XtCu5qlONQyrgZgEDI0uB+LftmxjZTOSFewzMRt7UbJUhEARB3jK0+Hlup2
- zVwwet5JtaXHdrHpIIuVnGaCul92+2Y8uM7yNwB3I52HmvX1ec5FIh8l77hdAkVhaSL4
- cQLsKf49LLotEwUHtcT6tJ6xFAof+9iL5n939G8EjGWaFqAzMWWBzmYBPs2r6+L7qrYb
- RIGQTIsxB79VWw7DyjckZauinSAhSCrrhGjIUUrSwdVYXSCLLZTR5RvcPQpgWgAvxWMa
- Lx/A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726044000; x=1726648800;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=+JyV9LJm2Vf4wGO7Hd4ArlaMIqvRcHyLUasi+8n7+pY=;
- b=H+Gap5fXa6WEbmmOH30zjdAEFAF6Zp4Whgb6kY00J81i9qEOx7VQOuggdht17Ube6z
- tQ+kzkQYJyshx9BpfCVBK/G8vNFlZEZzg4z1gR7wXQVVAIg7MKj3PyKNJzy3S7XB1FXA
- xL08FIueuWzeM68Ss3yzaUaZBF1PoJi0vS6/dZno+VsdZNz9TGrUOW0vXcpdHCew1PFq
- S4XbnKhhyDGMt8GAKBNhaOMY65r/6v3YD5fTpCjPUAgo1QVJ7wAUofa9WuotUT2UdwQp
- hgOO/gUjUShsOT9pep33WWx88C1US9TDoA0xAEN7/pHZG1d6L7xV4jLGSHNS1XGB/Uf/
- P9ew==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUdvtIjN78up2GlJ8VvJ2FmR5iefUQXWzReNrBmW1A0v1Zz/RHQlaxoCUcYSRcH2vy/tiAemyNS2T4m@nongnu.org
-X-Gm-Message-State: AOJu0YzRVUWYpzjx5dHbbPUKI1+zd4YgELrE5HnDWD3vwn7ZP0izrNHE
- vYDDymboo051JMCfPaXN8Ug8+KI1h7xhKWmZERmymRaL4JEKMrQkgRRJxETNyCg=
-X-Google-Smtp-Source: AGHT+IEuEoUthM2OYCPbsPo/4/wEMjrSZwhG3gfLOvWlGcTJuhGUXemtOiCS/nVKmGgtKqBxFEkheQ==
-X-Received: by 2002:a05:6402:26c9:b0:5c2:439d:2042 with SMTP id
- 4fb4d7f45d1cf-5c3dc78034amr12338656a12.5.1726043999447; 
- Wed, 11 Sep 2024 01:39:59 -0700 (PDT)
-Received: from [192.168.69.100] ([176.187.196.107])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c3ebd52099sm5139643a12.48.2024.09.11.01.39.52
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Sep 2024 01:39:58 -0700 (PDT)
-Message-ID: <cd6c5970-9a1c-4d58-b8af-483909c3c0ca@linaro.org>
-Date: Wed, 11 Sep 2024 10:39:51 +0200
+ (Exim 4.90_1) (envelope-from <alexei.filippov@syntacore.com>)
+ id 1soJ3E-0007jb-Dy; Wed, 11 Sep 2024 04:50:12 -0400
+Received: from mta-04.yadro.com ([89.207.88.248])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <alexei.filippov@syntacore.com>)
+ id 1soJ3B-0001SK-9H; Wed, 11 Sep 2024 04:50:11 -0400
+DKIM-Filter: OpenDKIM Filter v2.11.0 mta-04.yadro.com 25CABC000E
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
+ s=mta-04; t=1726044604;
+ bh=xeg32jJTXFc1Tee+Qagg1QF69CLyznNP0E20+PK6lDs=;
+ h=Message-ID:Date:MIME-Version:From:Subject:To:Content-Type:From;
+ b=GeTsR5J/EvzuGn5ohQ3AYWAUXfahoOBVJ4V7mpELndayBVO1+fB+J+iF/qhVUjvll
+ d6t63BpjqM04C0yE/RehH9OGLaN8xCGU8w6gniPvIyfJ0bMO4txNw98YHnPkdoZv+L
+ ymM0DCch8IuB37Ei5XvBoOkEqKSNVxv6SNj+CTRWO41cA4Ob9JB9Q6ZQUX9bKCkV/c
+ KQW/FVpuvM8wBInn4l47c+ov+94Jb28GHWMR9nX9xS14qDYqusXaqSVEpE+U97QK89
+ pRwTl8p/Q8Xt8iZdEXhO5jPv6qqIokv23LJY6QD04yLy39cjiImO/7E+7CdZ/kTF/v
+ bKmsWSlrMRc7g==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
+ s=mta-03; t=1726044604;
+ bh=xeg32jJTXFc1Tee+Qagg1QF69CLyznNP0E20+PK6lDs=;
+ h=Message-ID:Date:MIME-Version:From:Subject:To:Content-Type:From;
+ b=X0rzESeHcmk6JWoYrt7rT3DtTzUkCR9nmDWJhxEy8EcsSLgsjQGFSLuH6XDE/IMof
+ B4qN8C6pMejfekfuCZQUHJQldka9ugiPog+xKTVBnb4i1RL1uJ3zXnKyZ9KLHGgpaD
+ GATSpF9l7Nn4kzYCw7wntkUlRdELifJ3ew28v+4JIG6/nynESdhOt20qpCgr1okTA9
+ 15RX3MTDxaGroQjk8xtYe2pKWQjoo8s2/Te5H5B/0a6Y6M995gEeRomPM6aPzxkxK0
+ dwyFV3pNEHRs4pPT90th26jbJgbTaUnsO3bnyBqtQ9W833lFYBIya/X4ip26lGHeqI
+ liVi44lSttO7Q==
+Message-ID: <f968f7db-2b2c-4cb7-ac1c-504121745ab7@syntacore.com>
+Date: Wed, 11 Sep 2024 11:50:02 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 00/39] Use g_assert_not_reached instead of
- (g_)assert(0,false)
-To: Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-devel@nongnu.org
-Cc: Zhao Liu <zhao1.liu@intel.com>, "Richard W.M. Jones" <rjones@redhat.com>, 
- Joel Stanley <joel@jms.id.au>, Kevin Wolf <kwolf@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>, qemu-arm@nongnu.org,
- Corey Minyard <minyard@acm.org>, Eric Farman <farman@linux.ibm.com>,
- Thomas Huth <thuth@redhat.com>, Keith Busch <kbusch@kernel.org>,
- WANG Xuerui <git@xen0n.name>, Hyman Huang <yong.huang@smartx.com>,
- Stefan Berger <stefanb@linux.vnet.ibm.com>,
- Michael Rolnik <mrolnik@gmail.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
- Markus Armbruster <armbru@redhat.com>,
- Sriram Yagnaraman <sriram.yagnaraman@ericsson.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
- Ani Sinha <anisinha@redhat.com>, Halil Pasic <pasic@linux.ibm.com>,
- Jesper Devantier <foss@defmacro.it>, Laurent Vivier <laurent@vivier.eu>,
- Peter Maydell <peter.maydell@linaro.org>, Igor Mammedov
- <imammedo@redhat.com>, kvm@vger.kernel.org,
- =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>, Fam Zheng
- <fam@euphon.net>, qemu-s390x@nongnu.org, Hanna Reitz <hreitz@redhat.com>,
- Nicholas Piggin <npiggin@gmail.com>, Eduardo Habkost <eduardo@habkost.net>,
- Laurent Vivier <lvivier@redhat.com>, Rob Herring <robh@kernel.org>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, qemu-block@nongnu.org,
- "Maciej S. Szmigiero" <maciej.szmigiero@oracle.com>, qemu-ppc@nongnu.org,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
- "Michael S. Tsirkin" <mst@redhat.com>, Fabiano Rosas <farosas@suse.de>,
- Helge Deller <deller@gmx.de>, Dmitry Fleytman <dmitry.fleytman@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Akihiko Odaki <akihiko.odaki@daynix.com>,
- Marcelo Tosatti <mtosatti@redhat.com>,
- David Gibson <david@gibson.dropbear.id.au>,
- Aurelien Jarno <aurelien@aurel32.net>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Yanan Wang <wangyanan55@huawei.com>, Peter Xu <peterx@redhat.com>,
- Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>,
- Klaus Jensen <its@irrelevant.dk>,
- Jean-Christophe Dubois <jcd@tribudubois.net>,
- Jason Wang <jasowang@redhat.com>
-References: <20240910221606.1817478-1-pierrick.bouvier@linaro.org>
+From: Aleksei Filippov <alexei.filippov@syntacore.com>
+Subject: Re: [PATCH v2] target/riscv: Add support for machine specific pmu's
+ events
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>, "Richard
+ Henderson" <richard.henderson@linaro.org>, <palmer@dabbelt.com>
+CC: <alistair.francis@wdc.com>, <bmeng.cn@gmail.com>,
+ <dbarboza@ventanamicro.com>, <zhiwei_liu@linux.alibaba.com>,
+ <liwei1518@gmail.com>, <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
+References: <20240625144643.34733-1-alexei.filippov@syntacore.com>
+ <2cb94b34-1a5f-4dc9-bec4-78c7008cd79d@linaro.org>
+ <a019a09d-9549-4fa9-8b30-befb4df96fc0@syntacore.com>
+ <b94c987e-835a-490f-a4d4-72f87db7f7b1@linaro.org>
 Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20240910221606.1817478-1-pierrick.bouvier@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
- envelope-from=philmd@linaro.org; helo=mail-ed1-x52e.google.com
+Organization: Syntacore
+In-Reply-To: <b94c987e-835a-490f-a4d4-72f87db7f7b1@linaro.org>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: T-EXCH-10.corp.yadro.com (172.17.11.60) To
+ T-EXCH-12.corp.yadro.com (172.17.11.143)
+Received-SPF: permerror client-ip=89.207.88.248;
+ envelope-from=alexei.filippov@syntacore.com; helo=mta-04.yadro.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ T_SPF_PERMERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -136,53 +85,71 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 11/9/24 00:15, Pierrick Bouvier wrote:
 
-> Pierrick Bouvier (39):
->    docs/spin: replace assert(0) with g_assert_not_reached()
->    hw/acpi: replace assert(0) with g_assert_not_reached()
->    hw/arm: replace assert(0) with g_assert_not_reached()
->    hw/char: replace assert(0) with g_assert_not_reached()
->    hw/core: replace assert(0) with g_assert_not_reached()
->    hw/net: replace assert(0) with g_assert_not_reached()
->    hw/watchdog: replace assert(0) with g_assert_not_reached()
->    migration: replace assert(0) with g_assert_not_reached()
->    qobject: replace assert(0) with g_assert_not_reached()
->    system: replace assert(0) with g_assert_not_reached()
->    target/ppc: replace assert(0) with g_assert_not_reached()
->    tests/qtest: replace assert(0) with g_assert_not_reached()
->    tests/unit: replace assert(0) with g_assert_not_reached()
->    include/hw/s390x: replace assert(false) with g_assert_not_reached()
->    block: replace assert(false) with g_assert_not_reached()
->    hw/hyperv: replace assert(false) with g_assert_not_reached()
->    hw/net: replace assert(false) with g_assert_not_reached()
->    hw/nvme: replace assert(false) with g_assert_not_reached()
->    hw/pci: replace assert(false) with g_assert_not_reached()
->    hw/ppc: replace assert(false) with g_assert_not_reached()
->    migration: replace assert(false) with g_assert_not_reached()
->    target/i386/kvm: replace assert(false) with g_assert_not_reached()
->    tests/qtest: replace assert(false) with g_assert_not_reached()
->    accel/tcg: remove break after g_assert_not_reached()
->    block: remove break after g_assert_not_reached()
->    hw/acpi: remove break after g_assert_not_reached()
->    hw/gpio: remove break after g_assert_not_reached()
->    hw/misc: remove break after g_assert_not_reached()
->    hw/net: remove break after g_assert_not_reached()
->    hw/pci-host: remove break after g_assert_not_reached()
->    hw/scsi: remove break after g_assert_not_reached()
->    hw/tpm: remove break after g_assert_not_reached()
->    target/arm: remove break after g_assert_not_reached()
->    target/riscv: remove break after g_assert_not_reached()
->    tests/qtest: remove break after g_assert_not_reached()
->    ui: remove break after g_assert_not_reached()
->    fpu: remove break after g_assert_not_reached()
->    tcg/loongarch64: remove break after g_assert_not_reached()
->    scripts/checkpatch.pl: emit error when using assert(false)
 
-I'm queuing reviewed patches 4,5,7,10,27,28,30,36 so you don't
-have to carry them in v2.
+On 08.07.2024 16:42, Philippe Mathieu-Daudé wrote:
+> Hi Aleksei,
+> 
+> On 8/7/24 11:46, Aleksei Filippov wrote:
+>> On 25.06.2024 21:18, Richard Henderson wrote:
+>>> On 6/25/24 07:46, Alexei Filippov wrote:
+>>>> Was added call backs for machine specific pmu events.
+>>>> Simplify monitor functions by adding new hash table, which going to map
+>>>> counter number and event index.
+>>>> Was added read/write callbacks which going to simplify support for events,
+>>>> which expected to have different behavior.
+>>>>
+>>>> Signed-off-by: Alexei Filippov <alexei.filippov@syntacore.com>
+>>>> ---
+>>>> Changes since v2:
+>>>>         -rebased to latest master
+>>>>   target/riscv/cpu.h |   9 +++
+>>>>   target/riscv/csr.c |  43 +++++++++-----
+>>>>   target/riscv/pmu.c | 139 ++++++++++++++++++++++-----------------------
+>>>>   target/riscv/pmu.h |  11 ++--
+>>>>   4 files changed, 115 insertions(+), 87 deletions(-)
+>>>>
+>>>> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+>>>> index 6fe0d712b4..fbf82b050b 100644
+>>>> --- a/target/riscv/cpu.h
+>>>> +++ b/target/riscv/cpu.h
+>>>> @@ -374,6 +374,13 @@ struct CPUArchState {
+>>>>       uint64_t (*rdtime_fn)(void *);
+>>>>       void *rdtime_fn_arg;
+>>>> +    /*machine specific pmu callback */
+>>>> +    void (*pmu_ctr_write)(PMUCTRState *counter, uint32_t event_idx,
+>>>> +                          target_ulong val, bool high_half);
+>>>> +    target_ulong (*pmu_ctr_read)(PMUCTRState *counter, uint32_t event_idx,
+>>>> +                                 bool high_half);
+>>>> +    bool (*pmu_vendor_support)(uint32_t event_idx);
+>>>
+>>> Do these really belong in CPUArchState, rather than RISCVCPUClass?
+>>>
+>>> Surely there's more to this series, since these fields are never set...
+>>>
+>>>
+>>> r~
+>>
+>> Initially this callbacks was added to CPUArchState just to be along with 
+>> similar implementation with rdtime_fn*.
+>>
+>> Yes, you're right, there are more series to this, but, it can't be separated 
+>> from syntacore specific parts, which is unfortunately not ready yet to be 
+>> published. So, I can prepare second patch to implement PMU subsystem for virt 
+>> device. What do you think about it? (I'll send it in the few days).
+> 
+> How can we test your patch meanwhile?
+Sorry for such late response, but anyway, I created an RFC with PoC and 
+description on how I tested this and resend patch with PoC all together. 
+https://lore.kernel.org/all/20240910174747.148141-1-alexei.filippov@syntacore.com/
 
-Regards,
+> 
+> Thanks,
+> 
+> Phil.
+> 
 
-Phil.
+-- 
+Sincerely,
+Aleksei Filippov
 
