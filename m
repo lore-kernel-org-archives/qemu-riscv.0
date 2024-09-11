@@ -4,129 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 283B4EE499D
-	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Sep 2024 13:04:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A46BCEE49B3
+	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Sep 2024 14:25:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1soN0s-00076o-UR; Wed, 11 Sep 2024 09:04:02 -0400
+	id 1soOHy-0004WP-Eq; Wed, 11 Sep 2024 10:25:46 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mail@maciej.szmigiero.name>)
- id 1soKQq-0007Hb-D1; Wed, 11 Sep 2024 06:18:40 -0400
-Received: from vps-vb.mhejs.net ([37.28.154.113])
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1soOHC-0003zk-Ij; Wed, 11 Sep 2024 10:24:59 -0400
+Received: from out199-12.us.a.mail.aliyun.com ([47.90.199.12])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mail@maciej.szmigiero.name>)
- id 1soKQo-0001dR-Nd; Wed, 11 Sep 2024 06:18:40 -0400
-Received: from MUA by vps-vb.mhejs.net with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.94.2)
- (envelope-from <mail@maciej.szmigiero.name>)
- id 1soKPy-0002uV-KL; Wed, 11 Sep 2024 12:17:46 +0200
-Message-ID: <7ccdeb84-ddca-4d87-86b1-ab7db8ee41d2@maciej.szmigiero.name>
-Date: Wed, 11 Sep 2024 12:17:38 +0200
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1soO8y-0007Wt-SY; Wed, 11 Sep 2024 10:24:58 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linux.alibaba.com; s=default;
+ t=1726063275; h=From:To:Subject:Date:Message-Id:MIME-Version;
+ bh=l+tQcftmOiiwp/bKBRR1B2zypmkOi29DnqebuhUGzbE=;
+ b=kOJHfWmD7YO0wUZRl1jJd6jSzquj6lRWkNdR/GUXUdx4EnFIVhInhFwBPR/OxIJLTLmATov6Fd0tlBkjLp2MYTf0N9pBCyW1G9K0acjvwJ6072XOm3TuTW8LsTSJVmYOfGdOBJNcm8LgxDsfimXjdE6sgpl+r2v7a6pIVfS4Ad4=
+Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0WEoD-Fl_1726061470) by smtp.aliyun-inc.com;
+ Wed, 11 Sep 2024 21:31:11 +0800
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ dbarboza@ventanamicro.com, liwei1518@gmail.com, bmeng.cn@gmail.com,
+ zhiwei_liu@linux.alibaba.com, richard.henderson@linaro.org,
+ TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
+Subject: [PATCH v4 07/12] tcg/riscv: Implement vector neg ops
+Date: Wed, 11 Sep 2024 21:26:25 +0800
+Message-Id: <20240911132630.461-8-zhiwei_liu@linux.alibaba.com>
+X-Mailer: git-send-email 2.23.0
+In-Reply-To: <20240911132630.461-1-zhiwei_liu@linux.alibaba.com>
+References: <20240911132630.461-1-zhiwei_liu@linux.alibaba.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 16/39] hw/hyperv: replace assert(false) with
- g_assert_not_reached()
-To: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Cc: Zhao Liu <zhao1.liu@intel.com>, "Richard W.M. Jones" <rjones@redhat.com>, 
- Joel Stanley <joel@jms.id.au>, Kevin Wolf <kwolf@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>, qemu-arm@nongnu.org,
- Corey Minyard <minyard@acm.org>, Eric Farman <farman@linux.ibm.com>,
- Thomas Huth <thuth@redhat.com>, Keith Busch <kbusch@kernel.org>,
- WANG Xuerui <git@xen0n.name>, Hyman Huang <yong.huang@smartx.com>,
- Stefan Berger <stefanb@linux.vnet.ibm.com>,
- Michael Rolnik <mrolnik@gmail.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
- Markus Armbruster <armbru@redhat.com>,
- Sriram Yagnaraman <sriram.yagnaraman@ericsson.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
- Ani Sinha <anisinha@redhat.com>, Halil Pasic <pasic@linux.ibm.com>,
- Jesper Devantier <foss@defmacro.it>, Laurent Vivier <laurent@vivier.eu>,
- Peter Maydell <peter.maydell@linaro.org>, Igor Mammedov
- <imammedo@redhat.com>, kvm@vger.kernel.org,
- =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>, Fam Zheng
- <fam@euphon.net>, qemu-s390x@nongnu.org, Hanna Reitz <hreitz@redhat.com>,
- Nicholas Piggin <npiggin@gmail.com>, Eduardo Habkost <eduardo@habkost.net>,
- Laurent Vivier <lvivier@redhat.com>, Rob Herring <robh@kernel.org>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, qemu-block@nongnu.org,
- qemu-ppc@nongnu.org, Daniel Henrique Barboza <danielhb413@gmail.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
- "Michael S. Tsirkin" <mst@redhat.com>, Fabiano Rosas <farosas@suse.de>,
- Helge Deller <deller@gmx.de>, Dmitry Fleytman <dmitry.fleytman@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Akihiko Odaki <akihiko.odaki@daynix.com>, qemu-devel@nongnu.org,
- Marcelo Tosatti <mtosatti@redhat.com>,
- David Gibson <david@gibson.dropbear.id.au>,
- Aurelien Jarno <aurelien@aurel32.net>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Yanan Wang <wangyanan55@huawei.com>, Peter Xu <peterx@redhat.com>,
- Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>,
- Klaus Jensen <its@irrelevant.dk>,
- Jean-Christophe Dubois <jcd@tribudubois.net>,
- Jason Wang <jasowang@redhat.com>
-References: <20240910221606.1817478-1-pierrick.bouvier@linaro.org>
- <20240910221606.1817478-17-pierrick.bouvier@linaro.org>
-Content-Language: en-US, pl-PL
-From: "Maciej S. Szmigiero" <mail@maciej.szmigiero.name>
-Autocrypt: addr=mail@maciej.szmigiero.name; keydata=
- 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
-In-Reply-To: <20240910221606.1817478-17-pierrick.bouvier@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=37.28.154.113;
- envelope-from=mail@maciej.szmigiero.name; helo=vps-vb.mhejs.net
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=47.90.199.12;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out199-12.us.a.mail.aliyun.com
+X-Spam_score_int: -174
+X-Spam_score: -17.5
+X-Spam_bar: -----------------
+X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Wed, 11 Sep 2024 09:04:00 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -141,19 +67,69 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 11.09.2024 00:15, Pierrick Bouvier wrote:
-> Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-> ---
->   hw/hyperv/hyperv_testdev.c |  6 +++---
->   hw/hyperv/vmbus.c          | 12 ++++++------
->   2 files changed, 9 insertions(+), 9 deletions(-)
-> 
-> diff --git a/hw/hyperv/hyperv_testdev.c b/hw/hyperv/hyperv_testdev.c
-> index 9a56ddf83fe..ef50e490c4e 100644
+From: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
 
-Reviewed-by: Maciej S. Szmigiero <maciej.szmigiero@oracle.com>
+Signed-off-by: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
+Reviewed-by: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+---
+ tcg/riscv/tcg-target.c.inc | 7 +++++++
+ tcg/riscv/tcg-target.h     | 2 +-
+ 2 files changed, 8 insertions(+), 1 deletion(-)
 
-Thanks,
-Maciej
+diff --git a/tcg/riscv/tcg-target.c.inc b/tcg/riscv/tcg-target.c.inc
+index 2ddfb3738a..cf86f3729c 100644
+--- a/tcg/riscv/tcg-target.c.inc
++++ b/tcg/riscv/tcg-target.c.inc
+@@ -280,6 +280,7 @@ typedef enum {
+     OPC_VXOR_VV = 0x2c000057 | V_OPIVV,
+     OPC_VXOR_VI = 0x2c000057 | V_OPIVI,
+ 
++    OPC_VRSUB_VI = 0xc000057 | V_OPIVI,
+     OPC_VMSEQ_VV = 0x60000057 | V_OPIVV,
+     OPC_VMSEQ_VI = 0x60000057 | V_OPIVI,
+     OPC_VMSEQ_VX = 0x60000057 | V_OPIVX,
+@@ -2385,6 +2386,10 @@ static void tcg_out_vec_op(TCGContext *s, TCGOpcode opc,
+         set_vtype_len(s, type);
+         tcg_out_opc_vi(s, OPC_VXOR_VI, a0, a1, -1, true);
+         break;
++    case INDEX_op_neg_vec:
++        set_vtype_len_sew(s, type, vece);
++        tcg_out_opc_vi(s, OPC_VRSUB_VI, a0, a1, 0, true);
++        break;
+     case INDEX_op_cmpsel_vec:
+         tcg_out_cmpsel(s, type, vece, args[5], a0, a1, a2, const_args[2],
+                        args[3], const_args[3], args[4], const_args[4]);
+@@ -2428,6 +2433,7 @@ int tcg_can_emit_vec_op(TCGOpcode opc, TCGType type, unsigned vece)
+     case INDEX_op_or_vec:
+     case INDEX_op_xor_vec:
+     case INDEX_op_not_vec:
++    case INDEX_op_neg_vec:
+     case INDEX_op_cmpsel_vec:
+         return 1;
+     case INDEX_op_cmp_vec:
+@@ -2582,6 +2588,7 @@ static TCGConstraintSetIndex tcg_target_op_def(TCGOpcode op)
+     case INDEX_op_dupm_vec:
+     case INDEX_op_ld_vec:
+         return C_O1_I1(v, r);
++    case INDEX_op_neg_vec:
+     case INDEX_op_not_vec:
+         return C_O1_I1(v, v);
+     case INDEX_op_add_vec:
+diff --git a/tcg/riscv/tcg-target.h b/tcg/riscv/tcg-target.h
+index 94034504b2..ae10381e02 100644
+--- a/tcg/riscv/tcg-target.h
++++ b/tcg/riscv/tcg-target.h
+@@ -152,7 +152,7 @@ typedef enum {
+ #define TCG_TARGET_HAS_nor_vec          0
+ #define TCG_TARGET_HAS_eqv_vec          0
+ #define TCG_TARGET_HAS_not_vec          1
+-#define TCG_TARGET_HAS_neg_vec          0
++#define TCG_TARGET_HAS_neg_vec          1
+ #define TCG_TARGET_HAS_abs_vec          0
+ #define TCG_TARGET_HAS_roti_vec         0
+ #define TCG_TARGET_HAS_rots_vec         0
+-- 
+2.43.0
 
 
