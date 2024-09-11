@@ -4,49 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09804EE0219
-	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Sep 2024 08:36:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D078FEE021A
+	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Sep 2024 08:40:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1soIpf-0004Ng-Ed; Wed, 11 Sep 2024 04:36:11 -0400
+	id 1soItT-0005RL-8r; Wed, 11 Sep 2024 04:40:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <rjones@redhat.com>) id 1soIpc-0004LB-Gu
- for qemu-riscv@nongnu.org; Wed, 11 Sep 2024 04:36:08 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <rjones@redhat.com>) id 1soIpZ-0008Qz-E6
- for qemu-riscv@nongnu.org; Wed, 11 Sep 2024 04:36:08 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1726043763;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=/XNGw8Se064Ya4KciD5cw1pBjcoikCLo2yQ3fCVI8Z4=;
- b=CV7oxiqEaUX9mAMMlLBkTAf9c6PVGpWzAuItTiPDZlYQ9dQ7h9JBzWPf/N05m6nBEojI8E
- 7ii3qwmYlKTRM5xL5z/BPM+WCrD61cUm/YMRPYY5KXVcb5a4qcHKUN/ljwjaozElKeM2td
- +FMq0F+hUrPhkOCxcKh7cGgKtNae2BU=
-Received: from mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-490--aAmEBQ_PUqRpI0skSRBqw-1; Wed,
- 11 Sep 2024 04:35:59 -0400
-X-MC-Unique: -aAmEBQ_PUqRpI0skSRBqw-1
-Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 2A039195394E; Wed, 11 Sep 2024 08:35:51 +0000 (UTC)
-Received: from localhost (unknown [10.42.28.10])
- by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 88B4830001A1; Wed, 11 Sep 2024 08:35:47 +0000 (UTC)
-Date: Wed, 11 Sep 2024 09:35:46 +0100
-From: "Richard W.M. Jones" <rjones@redhat.com>
-To: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Cc: qemu-devel@nongnu.org, Zhao Liu <zhao1.liu@intel.com>,
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1soItQ-0005Hh-Tk
+ for qemu-riscv@nongnu.org; Wed, 11 Sep 2024 04:40:04 -0400
+Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1soItN-0000KD-Iy
+ for qemu-riscv@nongnu.org; Wed, 11 Sep 2024 04:40:04 -0400
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-5c260b19f71so6552665a12.1
+ for <qemu-riscv@nongnu.org>; Wed, 11 Sep 2024 01:40:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1726044000; x=1726648800; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=+JyV9LJm2Vf4wGO7Hd4ArlaMIqvRcHyLUasi+8n7+pY=;
+ b=mSTH4EcqqL9CEdHbn1hx+IY7dMd07p6SQ67XzkuRTb3wOEIOU7/DYtGFA1hd/NnvTl
+ V24LUH400XtCu5qlONQyrgZgEDI0uB+LftmxjZTOSFewzMRt7UbJUhEARB3jK0+Hlup2
+ zVwwet5JtaXHdrHpIIuVnGaCul92+2Y8uM7yNwB3I52HmvX1ec5FIh8l77hdAkVhaSL4
+ cQLsKf49LLotEwUHtcT6tJ6xFAof+9iL5n939G8EjGWaFqAzMWWBzmYBPs2r6+L7qrYb
+ RIGQTIsxB79VWw7DyjckZauinSAhSCrrhGjIUUrSwdVYXSCLLZTR5RvcPQpgWgAvxWMa
+ Lx/A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1726044000; x=1726648800;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=+JyV9LJm2Vf4wGO7Hd4ArlaMIqvRcHyLUasi+8n7+pY=;
+ b=H+Gap5fXa6WEbmmOH30zjdAEFAF6Zp4Whgb6kY00J81i9qEOx7VQOuggdht17Ube6z
+ tQ+kzkQYJyshx9BpfCVBK/G8vNFlZEZzg4z1gR7wXQVVAIg7MKj3PyKNJzy3S7XB1FXA
+ xL08FIueuWzeM68Ss3yzaUaZBF1PoJi0vS6/dZno+VsdZNz9TGrUOW0vXcpdHCew1PFq
+ S4XbnKhhyDGMt8GAKBNhaOMY65r/6v3YD5fTpCjPUAgo1QVJ7wAUofa9WuotUT2UdwQp
+ hgOO/gUjUShsOT9pep33WWx88C1US9TDoA0xAEN7/pHZG1d6L7xV4jLGSHNS1XGB/Uf/
+ P9ew==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUdvtIjN78up2GlJ8VvJ2FmR5iefUQXWzReNrBmW1A0v1Zz/RHQlaxoCUcYSRcH2vy/tiAemyNS2T4m@nongnu.org
+X-Gm-Message-State: AOJu0YzRVUWYpzjx5dHbbPUKI1+zd4YgELrE5HnDWD3vwn7ZP0izrNHE
+ vYDDymboo051JMCfPaXN8Ug8+KI1h7xhKWmZERmymRaL4JEKMrQkgRRJxETNyCg=
+X-Google-Smtp-Source: AGHT+IEuEoUthM2OYCPbsPo/4/wEMjrSZwhG3gfLOvWlGcTJuhGUXemtOiCS/nVKmGgtKqBxFEkheQ==
+X-Received: by 2002:a05:6402:26c9:b0:5c2:439d:2042 with SMTP id
+ 4fb4d7f45d1cf-5c3dc78034amr12338656a12.5.1726043999447; 
+ Wed, 11 Sep 2024 01:39:59 -0700 (PDT)
+Received: from [192.168.69.100] ([176.187.196.107])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5c3ebd52099sm5139643a12.48.2024.09.11.01.39.52
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 11 Sep 2024 01:39:58 -0700 (PDT)
+Message-ID: <cd6c5970-9a1c-4d58-b8af-483909c3c0ca@linaro.org>
+Date: Wed, 11 Sep 2024 10:39:51 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 00/39] Use g_assert_not_reached instead of
+ (g_)assert(0,false)
+To: Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-devel@nongnu.org
+Cc: Zhao Liu <zhao1.liu@intel.com>, "Richard W.M. Jones" <rjones@redhat.com>, 
  Joel Stanley <joel@jms.id.au>, Kevin Wolf <kwolf@redhat.com>,
  Paolo Bonzini <pbonzini@redhat.com>, qemu-arm@nongnu.org,
  Corey Minyard <minyard@acm.org>, Eric Farman <farman@linux.ibm.com>,
@@ -55,30 +74,27 @@ Cc: qemu-devel@nongnu.org, Zhao Liu <zhao1.liu@intel.com>,
  Stefan Berger <stefanb@linux.vnet.ibm.com>,
  Michael Rolnik <mrolnik@gmail.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- =?iso-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>,
+ =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
  Markus Armbruster <armbru@redhat.com>,
  Sriram Yagnaraman <sriram.yagnaraman@ericsson.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
  Ani Sinha <anisinha@redhat.com>, Halil Pasic <pasic@linux.ibm.com>,
  Jesper Devantier <foss@defmacro.it>, Laurent Vivier <laurent@vivier.eu>,
- Peter Maydell <peter.maydell@linaro.org>,
- Igor Mammedov <imammedo@redhat.com>, kvm@vger.kernel.org,
- Alex =?iso-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- Fam Zheng <fam@euphon.net>, qemu-s390x@nongnu.org,
- Hanna Reitz <hreitz@redhat.com>, Nicholas Piggin <npiggin@gmail.com>,
- Eduardo Habkost <eduardo@habkost.net>,
+ Peter Maydell <peter.maydell@linaro.org>, Igor Mammedov
+ <imammedo@redhat.com>, kvm@vger.kernel.org,
+ =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Richard Henderson <richard.henderson@linaro.org>, Fam Zheng
+ <fam@euphon.net>, qemu-s390x@nongnu.org, Hanna Reitz <hreitz@redhat.com>,
+ Nicholas Piggin <npiggin@gmail.com>, Eduardo Habkost <eduardo@habkost.net>,
  Laurent Vivier <lvivier@redhat.com>, Rob Herring <robh@kernel.org>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, qemu-block@nongnu.org,
  "Maciej S. Szmigiero" <maciej.szmigiero@oracle.com>, qemu-ppc@nongnu.org,
  Daniel Henrique Barboza <danielhb413@gmail.com>,
  Christian Borntraeger <borntraeger@linux.ibm.com>,
  Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>,
  Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Fabiano Rosas <farosas@suse.de>, Helge Deller <deller@gmx.de>,
- Dmitry Fleytman <dmitry.fleytman@gmail.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Fabiano Rosas <farosas@suse.de>,
+ Helge Deller <deller@gmx.de>, Dmitry Fleytman <dmitry.fleytman@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Akihiko Odaki <akihiko.odaki@daynix.com>,
  Marcelo Tosatti <mtosatti@redhat.com>,
@@ -90,25 +106,21 @@ Cc: qemu-devel@nongnu.org, Zhao Liu <zhao1.liu@intel.com>,
  Klaus Jensen <its@irrelevant.dk>,
  Jean-Christophe Dubois <jcd@tribudubois.net>,
  Jason Wang <jasowang@redhat.com>
-Subject: Re: [PATCH 25/39] block: remove break after g_assert_not_reached()
-Message-ID: <20240911083546.GP1450@redhat.com>
 References: <20240910221606.1817478-1-pierrick.bouvier@linaro.org>
- <20240910221606.1817478-26-pierrick.bouvier@linaro.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240910221606.1817478-26-pierrick.bouvier@linaro.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=rjones@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
+Content-Language: en-US
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20240910221606.1817478-1-pierrick.bouvier@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
+ envelope-from=philmd@linaro.org; helo=mail-ed1-x52e.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.145,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -124,34 +136,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Sep 10, 2024 at 03:15:52PM -0700, Pierrick Bouvier wrote:
-> Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-> ---
->  block/ssh.c | 1 -
->  1 file changed, 1 deletion(-)
-> 
-> diff --git a/block/ssh.c b/block/ssh.c
-> index 27d582e0e3d..871e1d47534 100644
-> --- a/block/ssh.c
-> +++ b/block/ssh.c
-> @@ -474,7 +474,6 @@ static int check_host_key(BDRVSSHState *s, SshHostKeyCheck *hkc, Error **errp)
->                                         errp);
->          }
->          g_assert_not_reached();
-> -        break;
->      case SSH_HOST_KEY_CHECK_MODE_KNOWN_HOSTS:
->          return check_host_key_knownhosts(s, errp);
->      default:
-> -- 
-> 2.39.2
+On 11/9/24 00:15, Pierrick Bouvier wrote:
 
-Reviewed-by: Richard W.M. Jones <rjones@redhat.com>
+> Pierrick Bouvier (39):
+>    docs/spin: replace assert(0) with g_assert_not_reached()
+>    hw/acpi: replace assert(0) with g_assert_not_reached()
+>    hw/arm: replace assert(0) with g_assert_not_reached()
+>    hw/char: replace assert(0) with g_assert_not_reached()
+>    hw/core: replace assert(0) with g_assert_not_reached()
+>    hw/net: replace assert(0) with g_assert_not_reached()
+>    hw/watchdog: replace assert(0) with g_assert_not_reached()
+>    migration: replace assert(0) with g_assert_not_reached()
+>    qobject: replace assert(0) with g_assert_not_reached()
+>    system: replace assert(0) with g_assert_not_reached()
+>    target/ppc: replace assert(0) with g_assert_not_reached()
+>    tests/qtest: replace assert(0) with g_assert_not_reached()
+>    tests/unit: replace assert(0) with g_assert_not_reached()
+>    include/hw/s390x: replace assert(false) with g_assert_not_reached()
+>    block: replace assert(false) with g_assert_not_reached()
+>    hw/hyperv: replace assert(false) with g_assert_not_reached()
+>    hw/net: replace assert(false) with g_assert_not_reached()
+>    hw/nvme: replace assert(false) with g_assert_not_reached()
+>    hw/pci: replace assert(false) with g_assert_not_reached()
+>    hw/ppc: replace assert(false) with g_assert_not_reached()
+>    migration: replace assert(false) with g_assert_not_reached()
+>    target/i386/kvm: replace assert(false) with g_assert_not_reached()
+>    tests/qtest: replace assert(false) with g_assert_not_reached()
+>    accel/tcg: remove break after g_assert_not_reached()
+>    block: remove break after g_assert_not_reached()
+>    hw/acpi: remove break after g_assert_not_reached()
+>    hw/gpio: remove break after g_assert_not_reached()
+>    hw/misc: remove break after g_assert_not_reached()
+>    hw/net: remove break after g_assert_not_reached()
+>    hw/pci-host: remove break after g_assert_not_reached()
+>    hw/scsi: remove break after g_assert_not_reached()
+>    hw/tpm: remove break after g_assert_not_reached()
+>    target/arm: remove break after g_assert_not_reached()
+>    target/riscv: remove break after g_assert_not_reached()
+>    tests/qtest: remove break after g_assert_not_reached()
+>    ui: remove break after g_assert_not_reached()
+>    fpu: remove break after g_assert_not_reached()
+>    tcg/loongarch64: remove break after g_assert_not_reached()
+>    scripts/checkpatch.pl: emit error when using assert(false)
 
--- 
-Richard Jones, Virtualization Group, Red Hat http://people.redhat.com/~rjones
-Read my programming and virtualization blog: http://rwmj.wordpress.com
-Fedora Windows cross-compiler. Compile Windows programs, test, and
-build Windows installers. Over 100 libraries supported.
-http://fedoraproject.org/wiki/MinGW
+I'm queuing reviewed patches 4,5,7,10,27,28,30,36 so you don't
+have to carry them in v2.
 
+Regards,
+
+Phil.
 
