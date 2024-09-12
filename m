@@ -4,95 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32051EED607
-	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Sep 2024 13:35:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30501EED616
+	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Sep 2024 15:38:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sojyM-0004yq-8r; Thu, 12 Sep 2024 09:34:58 -0400
+	id 1soltq-00016u-Lt; Thu, 12 Sep 2024 11:38:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peterx@redhat.com>) id 1sojyI-0004xJ-UM
- for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 09:34:54 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ (Exim 4.90_1) (envelope-from <farman@linux.ibm.com>)
+ id 1solto-0000wI-10; Thu, 12 Sep 2024 11:38:24 -0400
+Received: from mx0b-001b2d01.pphosted.com ([148.163.158.5])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peterx@redhat.com>) id 1sojyH-0007tP-GL
- for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 09:34:54 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1726148091;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=M5rcG9lzD4F05sYwu5eA1U+Vp3lpTYiZKcFNxAMkStY=;
- b=KbNOsMmSYCqiSSQBVkGStb/jxQZoFYhldtRu2VmsZBcuWg/6fvgF9elpE+fWXT0QGME43w
- NKO7QzumnBEJYa3Z4Hfh2rzSZT4MCrDUvxB44Q6LaS/2+1DAEcASVZ4L2zcMNYMsPqbUcD
- oA9BZwCiIBpFntX8HpSn/KJBPhG8E+I=
-Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
- [209.85.160.200]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-586-YDaAyGmrNxSEkrfItwDm9w-1; Thu, 12 Sep 2024 09:34:50 -0400
-X-MC-Unique: YDaAyGmrNxSEkrfItwDm9w-1
-Received: by mail-qt1-f200.google.com with SMTP id
- d75a77b69052e-4583282de71so20013411cf.1
- for <qemu-riscv@nongnu.org>; Thu, 12 Sep 2024 06:34:50 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726148090; x=1726752890;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=M5rcG9lzD4F05sYwu5eA1U+Vp3lpTYiZKcFNxAMkStY=;
- b=bph83vziIuEM9WUlus24X/Jwlb59lGBKPxLn+qr1GFcdFUTrRD/RSwn+9U4eU8oqjv
- OkzoYxUH/xIcP0HICy+I3zB4yhLl5usYPx5TeJv3QKMVxLuKF5dTFFMwDd19/prD+zbC
- SCwd36VsdCSX0v6fEOeVXepTSYzLgrgXxJE5OGlJBIbYMjiyFO87i1Vm6bMBaHxXoP6S
- /NzX30BbIdL7wmTMKEJsfDmGqg4Y9Joqc2eDa+U0KA3irMVxhjWRGuPSLCFLom2Zk467
- 0hK0jmB9cshpW4TzvJiGhk0s9Fq0FiZfArzLmY+3PvMsZNckBhiqhxN3iiMpp3UlBug6
- UyxQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXmnviM0hdm6ztgjorunzTe2F84e1kmoxIlrUb6EErRL0VpI4MGlAKjMBKNd+UxudObt+wX/yFkVYa0@nongnu.org
-X-Gm-Message-State: AOJu0YyPG1L3AIlqU3GmdAJxzwaYCRLFleVlBEdk2ENMHT78QVk8BnDO
- Kcd6BIFrFg89Xutnz7Go7NdoOGPiKYf8zO4e9VKCgEpfUEYnWxg9p2FjeDk5VrYbja0+laHGdlX
- UjH+aK5hawaOf0XoBRU+i5ZsUM8aG02Au3u/Nyj2X+S+Rl2nHF4pe
-X-Received: by 2002:ac8:5d94:0:b0:458:156f:965c with SMTP id
- d75a77b69052e-458602de102mr45427401cf.22.1726148089984; 
- Thu, 12 Sep 2024 06:34:49 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFLmm/DxJ65yRHOiD4VWdc/MylUpsQX+KMLJTCpwrDneBOgcnrBMqj+57SrU2QpuXZYBzdjWw==
-X-Received: by 2002:ac8:5d94:0:b0:458:156f:965c with SMTP id
- d75a77b69052e-458602de102mr45427011cf.22.1726148089600; 
- Thu, 12 Sep 2024 06:34:49 -0700 (PDT)
-Received: from x1n (pool-99-254-121-117.cpe.net.cable.rogers.com.
- [99.254.121.117]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-45822e9b207sm53312581cf.49.2024.09.12.06.34.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Sep 2024 06:34:47 -0700 (PDT)
-Date: Thu, 12 Sep 2024 09:34:45 -0400
-From: Peter Xu <peterx@redhat.com>
-To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Cc: "Fea.Wang" <fea.wang@sifive.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
- David Hildenbrand <david@redhat.com>
-Subject: Re: [PATCH 1/1] softmmu/physmem.c: Keep transaction attribute in
- address_space_map()
-Message-ID: <ZuLt9fDgA9C_nNZ6@x1n>
-References: <20240912070404.2993976-1-fea.wang@sifive.com>
- <20240912070404.2993976-2-fea.wang@sifive.com>
- <444dbb46-bee5-4983-aa90-4d88f005c5eb@linaro.org>
+ (Exim 4.90_1) (envelope-from <farman@linux.ibm.com>)
+ id 1soltm-0007o7-5G; Thu, 12 Sep 2024 11:38:23 -0400
+Received: from pps.filterd (m0353725.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 48CCfff7014165;
+ Thu, 12 Sep 2024 15:36:02 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=
+ message-id:subject:from:to:cc:date:in-reply-to:references
+ :content-type:content-transfer-encoding:mime-version; s=pp1; bh=
+ yG3RwRKYVV8o+TWmN0BvykfATMUgxIORVXcyp78ULHU=; b=boSi4JFV1d47E4xh
+ xRPzoW7LqT9Wk2q+KSaAjBau67C9tUf8fWWa6Oa57/hXkY2dgj0e0KnXzU/Ni/ox
+ aGMYqXX3ZE1B9d2nxq2jh8CLo982z4ha+lcCja5E4FvMG1n9ZQyLCxuxyIgAMQ3z
+ aa2Rg5bSFhUA2UMwP7LhwWq5YKlK1q9bWqp+h71jnOuO37vuVLKjMq/2u7+oKmoq
+ ZsGwuzdPlTvl8GMmjAnCgZIBWtQ1MSS9AuDwW0jNXyF/Impd9iuKxHAEQcNkMfqo
+ YjV2sRLPiARVxUntZLQ9wpEXkoj4Ts8kI/c6jXhBuJai0o24IGIkSrzgPdgXwcVt
+ ajd+Ww==
+Received: from pps.reinject (localhost [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 41gd8kvcb0-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 12 Sep 2024 15:36:01 +0000 (GMT)
+Received: from m0353725.ppops.net (m0353725.ppops.net [127.0.0.1])
+ by pps.reinject (8.18.0.8/8.18.0.8) with ESMTP id 48CFa0EV030118;
+ Thu, 12 Sep 2024 15:36:00 GMT
+Received: from ppma22.wdc07v.mail.ibm.com
+ (5c.69.3da9.ip4.static.sl-reverse.com [169.61.105.92])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 41gd8kvcas-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 12 Sep 2024 15:36:00 +0000 (GMT)
+Received: from pps.filterd (ppma22.wdc07v.mail.ibm.com [127.0.0.1])
+ by ppma22.wdc07v.mail.ibm.com (8.18.1.2/8.18.1.2) with ESMTP id 48CFWH2d010757;
+ Thu, 12 Sep 2024 15:35:59 GMT
+Received: from smtprelay06.dal12v.mail.ibm.com ([172.16.1.8])
+ by ppma22.wdc07v.mail.ibm.com (PPS) with ESMTPS id 41kmb6vdym-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 12 Sep 2024 15:35:59 +0000
+Received: from smtpav06.dal12v.mail.ibm.com (smtpav06.dal12v.mail.ibm.com
+ [10.241.53.105])
+ by smtprelay06.dal12v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 48CFZwdH55509414
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 12 Sep 2024 15:35:58 GMT
+Received: from smtpav06.dal12v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 0545258043;
+ Thu, 12 Sep 2024 15:35:58 +0000 (GMT)
+Received: from smtpav06.dal12v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 6447858055;
+ Thu, 12 Sep 2024 15:35:54 +0000 (GMT)
+Received: from li-479af74c-31f9-11b2-a85c-e4ddee11713b.ibm.com (unknown
+ [9.61.112.103]) by smtpav06.dal12v.mail.ibm.com (Postfix) with ESMTP;
+ Thu, 12 Sep 2024 15:35:54 +0000 (GMT)
+Message-ID: <8d93598ebe29a8216e89c54b6a438d9fda67a118.camel@linux.ibm.com>
+Subject: Re: [PATCH v2 14/48] include/hw/s390x: replace assert(false) with
+ g_assert_not_reached()
+From: Eric Farman <farman@linux.ibm.com>
+To: Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-devel@nongnu.org
+Cc: Jason Wang <jasowang@redhat.com>, Alex =?ISO-8859-1?Q?Benn=E9e?=
+ <alex.bennee@linaro.org>, Laurent Vivier <lvivier@redhat.com>, Marcelo
+ Tosatti <mtosatti@redhat.com>, Nicholas Piggin <npiggin@gmail.com>, Klaus
+ Jensen <its@irrelevant.dk>, WANG Xuerui <git@xen0n.name>, Halil Pasic
+ <pasic@linux.ibm.com>, Rob Herring <robh@kernel.org>, Michael Rolnik
+ <mrolnik@gmail.com>, Zhao Liu <zhao1.liu@intel.com>, Peter Maydell
+ <peter.maydell@linaro.org>, Richard Henderson
+ <richard.henderson@linaro.org>, Fabiano Rosas <farosas@suse.de>, Corey
+ Minyard <minyard@acm.org>, Keith Busch <kbusch@kernel.org>, Thomas Huth
+ <thuth@redhat.com>, "Maciej S. Szmigiero" <maciej.szmigiero@oracle.com>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Kevin Wolf <kwolf@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Jesper Devantier <foss@defmacro.it>, Hyman Huang <yong.huang@smartx.com>,
+ Philippe =?ISO-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-s390x@nongnu.org, Laurent Vivier
+ <laurent@vivier.eu>, qemu-riscv@nongnu.org, "Richard W.M. Jones"
+ <rjones@redhat.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Aurelien
+ Jarno <aurelien@aurel32.net>, "Daniel P." =?ISO-8859-1?Q?Berrang=E9?=
+ <berrange@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, kvm@vger.kernel.org,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Akihiko Odaki <akihiko.odaki@daynix.com>, Daniel Henrique Barboza
+ <dbarboza@ventanamicro.com>, Hanna Reitz <hreitz@redhat.com>, Ani Sinha
+ <anisinha@redhat.com>, qemu-ppc@nongnu.org, =?ISO-8859-1?Q?Marc-Andr=E9?=
+ Lureau <marcandre.lureau@redhat.com>, Alistair Francis
+ <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>, "Michael S.
+ Tsirkin" <mst@redhat.com>, Helge Deller <deller@gmx.de>, Peter Xu
+ <peterx@redhat.com>, Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Dmitry Fleytman <dmitry.fleytman@gmail.com>, Nina Schoetterl-Glausch
+ <nsg@linux.ibm.com>,
+ Yanan Wang <wangyanan55@huawei.com>, qemu-arm@nongnu.org,
+ Igor Mammedov <imammedo@redhat.com>, Jean-Christophe
+ Dubois <jcd@tribudubois.net>, Sriram Yagnaraman
+ <sriram.yagnaraman@ericsson.com>, qemu-block@nongnu.org, Stefan Berger
+ <stefanb@linux.vnet.ibm.com>, Joel Stanley <joel@jms.id.au>, Eduardo
+ Habkost <eduardo@habkost.net>,
+ David Gibson <david@gibson.dropbear.id.au>, Fam Zheng <fam@euphon.net>,
+ Weiwei Li <liwei1518@gmail.com>, Markus Armbruster <armbru@redhat.com>
+Date: Thu, 12 Sep 2024 11:35:53 -0400
+In-Reply-To: <20240912073921.453203-15-pierrick.bouvier@linaro.org>
+References: <20240912073921.453203-1-pierrick.bouvier@linaro.org>
+ <20240912073921.453203-15-pierrick.bouvier@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.52.4 (3.52.4-1.fc40) 
 MIME-Version: 1.0
-In-Reply-To: <444dbb46-bee5-4983-aa90-4d88f005c5eb@linaro.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=peterx@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
+X-TM-AS-GCONF: 00
+X-Proofpoint-GUID: r9TPNGqGpx0_YhQSRS1-lT9seE_YIGR7
+X-Proofpoint-ORIG-GUID: Gz5qt6Tm2MiyWvmu-JygOZPXVBetGDaf
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
+ definitions=2024-09-12_05,2024-09-12_01,2024-09-02_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501
+ impostorscore=0 suspectscore=0 clxscore=1011 phishscore=0 spamscore=0
+ lowpriorityscore=0 adultscore=0 mlxscore=0 mlxlogscore=727 bulkscore=0
+ malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2408220000 definitions=main-2409120114
+Received-SPF: pass client-ip=148.163.158.5; envelope-from=farman@linux.ibm.com;
+ helo=mx0b-001b2d01.pphosted.com
+X-Spam_score_int: -19
+X-Spam_score: -2.0
 X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.143,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -108,22 +152,17 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Sep 12, 2024 at 09:13:40AM +0200, Philippe Mathieu-Daudé wrote:
-> On 12/9/24 09:04, Fea.Wang wrote:
-> > The follow-up transactions may use the data in the attribution, so keep
-> > the value of attribution from the function parameter just as
-> > flatview_translate() above.
-> > 
-> 
-> Doh, long standing bug...
-> 
-> Cc: qemu-stable@nongnu.org
-> Fixes: f26404fbee ("Make address_space_map() take a MemTxAttrs argument")
-> Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+On Thu, 2024-09-12 at 00:38 -0700, Pierrick Bouvier wrote:
+> This patch is part of a series that moves towards a consistent use of
+> g_assert_not_reached() rather than an ad hoc mix of different
+> assertion mechanisms.
+>=20
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+> Reviewed-by: Thomas Huth <thuth@redhat.com>
+> Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+> ---
+>  include/hw/s390x/cpu-topology.h | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-Thanks, queued with these attached.
-
--- 
-Peter Xu
-
+Reviewed-by: Eric Farman <farman@linux.ibm.com>
 
