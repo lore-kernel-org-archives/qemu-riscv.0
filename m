@@ -4,76 +4,141 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30033EE645B
-	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Sep 2024 08:15:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4ADC5EEB562
+	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Sep 2024 08:28:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1soezL-0000f8-3s; Thu, 12 Sep 2024 04:15:39 -0400
+	id 1sofBE-0005Hr-MP; Thu, 12 Sep 2024 04:27:56 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1soez3-0007w4-9O
- for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 04:15:24 -0400
-Received: from mail-ed1-x535.google.com ([2a00:1450:4864:20::535])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1soeyz-0005Pn-9P
- for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 04:15:20 -0400
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5c3c30e6649so673293a12.2
- for <qemu-riscv@nongnu.org>; Thu, 12 Sep 2024 01:15:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726128913; x=1726733713; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xkRilJv4e/a1Ti2tuyYvCRNcUjVu4CEYZbKytwNv5Kk=;
- b=mUGobJ/wLMy1uhShg1GFPVowkD40ivgReV3zw9I1I0Cz8C/oXL8g724NlcSAnSk0SB
- 8c/4iQnacOblDTsdQJbv6wPuIOuoLY2dRz2rdUO1HUpZKzq2fiEIsxeJTWu/sqsikKqm
- Jx6BD1BsEV6R+s4joiGk7mX1FmVNI4WiGyl9WMCiWqRz80Y6OPKubP5P6+2iR0rXA3ga
- h+ouqgXKD7xDeIMxbfQWSisFKsWa17tpfQeki1VcPm2SQ2R/jyI9VSbtLJoJ+cb3vfBh
- 2gPOXs6rxnw+ZoeHpw1/QR9P+G6AEmaJhZKG48OIaUVDRnocvWybbF2HPD7+TX28+ado
- EZVA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726128913; x=1726733713;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=xkRilJv4e/a1Ti2tuyYvCRNcUjVu4CEYZbKytwNv5Kk=;
- b=J5iy6+BAq7bH9o8QSgGm6IYakjr60ZNvp6DXeH6pu9H38Adm9FTdmZ0kk41nQwUBU5
- Saq5sRUa6yCIzMlmBwgDDmOtTTWPMEMmTEgapit+GI6jY9FUvRTvl4YeNUaQQgd88mDv
- Tzdq69z0Qb/Nn7DTvduQ5yMPWFYznLZgQUo+OcPPA65JIwxwYTNEfv3sH3Hz7dODTbgn
- v8xDbWQG5ZI/DTgOwWYYWNgJu+mNlcUG6rS2WH5lddmH7/sIGWKzQd4epidd8rome8uA
- HwiUhewBe2I4PRep17Sgy1U1NKUyxMLrgu/vnu2egYqO33/c5pDK9CC9zIZV5oPClmal
- l21A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVvgqaz/JcSAn1Oqfm2ulhjt/GqOus9D+dk767ixnyaJgkW4yEfReLHaRsx0zCb+dEMvSx0e5LuXY/y@nongnu.org
-X-Gm-Message-State: AOJu0YyXsyxM4iT9mljp/jSt7OdbxugtbUQM5sqLne9KYhmA9n9uMDSH
- leTb4chRfPKCFfoE8axYl8muBibJ26Eam9K83GP+7jKR4DwYN7e8+3FMukKbwgKGHEg2HJs9Atp
- xmKR0GMfAI2dztydxej4tBEpmvq1ZkVfWaXw5nQ==
-X-Google-Smtp-Source: AGHT+IFO3NV0LLaYtcciD71+ZunIO8XL6pgHJuYTqnYNVAC5lyMjqn/g2JpUHpOLEaMhXQwg7g9ULHXFD83SPIJskBM=
-X-Received: by 2002:a05:6402:3553:b0:5be:fdc0:e704 with SMTP id
- 4fb4d7f45d1cf-5c413e1222fmr1299604a12.10.1726128913150; Thu, 12 Sep 2024
- 01:15:13 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <its@irrelevant.dk>)
+ id 1sofBB-00053F-Ep; Thu, 12 Sep 2024 04:27:53 -0400
+Received: from flow5-smtp.messagingengine.com ([103.168.172.140])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <its@irrelevant.dk>)
+ id 1sofB8-0006kh-U2; Thu, 12 Sep 2024 04:27:53 -0400
+Received: from phl-compute-05.internal (phl-compute-05.phl.internal
+ [10.202.2.45])
+ by mailflow.phl.internal (Postfix) with ESMTP id 38F432001AC;
+ Thu, 12 Sep 2024 04:27:46 -0400 (EDT)
+Received: from phl-mailfrontend-02 ([10.202.2.163])
+ by phl-compute-05.internal (MEProxy); Thu, 12 Sep 2024 04:27:46 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=irrelevant.dk;
+ h=cc:cc:content-type:content-type:date:date:from:from
+ :in-reply-to:in-reply-to:message-id:mime-version:references
+ :reply-to:subject:subject:to:to; s=fm3; t=1726129666; x=
+ 1726136866; bh=Xsf9ae63fQV1tLsIn2cFPWGsIOLkkinD3TZg82l4IaU=; b=v
+ te8cmle/zMi5ovvDxUYfo6aV1sThzymxGhlvDMlHhXH2Vxvr3nw3rtMWIBw6Y+vX
+ d+XdcM2M7+RoH4/vgSYx2Fm8rK7Tmf0Rh6n6+VNlth2u8W3IfeHRiA6NHPcZgsxo
+ juDO2XLKZ2ybbz0aUtrmJLJvVqvNLyc/+JyfsACZxDrlfICTStJietYJK9PM7z8z
+ /PasONfwU9eceGwH0d7oJqLNoZNn5AD6d+4PQ8hO096QeWfAIznxnJoYu4QqNqTn
+ EF+5EqbT8dhfBRt2RZjeHIeEHBURT/WFpo9Q3VkZcqno9WpyXk0u4EZNdjvSNcJX
+ QnzTVTKwrB21x098t6Y0A==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-type:content-type:date:date
+ :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+ :message-id:mime-version:references:reply-to:subject:subject:to
+ :to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+ fm1; t=1726129666; x=1726136866; bh=Xsf9ae63fQV1tLsIn2cFPWGsIOLk
+ kinD3TZg82l4IaU=; b=kxzadh44Ag7Sg+wWD5sgxEE7VKM0hAH0n1vkUXwBO/R3
+ R0rxP2xCTXkC2hMGlUgofpHu++z8KJR3KvUpSWEplHU94xQojvQbE2kuiUQwPi5F
+ GmfKh91skz4cYaNk06regQ767449fD5YbmCGZBb+3hSEdxQj4QcKkNDCszG9+PXB
+ u7kF6wUMcyUdx00566GnM2JO+jDpL2purxWNlzH/dJ5iJ/YL8DHUAHygEk2ikVxI
+ jmRe4T1YX4NdAElwxv/ym+Yusv5JR4S927yLsLI0sRDxDfK9PzvDdsr5+XXSXiew
+ MXzGZlju/sihZ3wm87eyfcHxVM5SA88HYu0tNw3tmw==
+X-ME-Sender: <xms:_KXiZgG6H0I3zOZWTojHw1H_OHbn3t0236rww4TTf-_9s5rlQPG12g>
+ <xme:_KXiZpU0gUc5Hmb8lfylhX8rHXEg0I_CeOymtK2BHlJBJchionaewikUqERn_Y2o0
+ p_laacxOzQMcvfLWlA>
+X-ME-Received: <xmr:_KXiZqKZ_S2s_Bkb5lS2zhDUXrPkhVko1wiO9bFScvyOlaUNaF88Vjr4-5RIOA>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeftddrudejfedgtdegucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggvpdfu
+ rfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnh
+ htshculddquddttddmnecujfgurhepfffhvfevuffkfhggtggujgesthdtredttddtjeen
+ ucfhrhhomhepmfhlrghushculfgvnhhsvghnuceoihhtshesihhrrhgvlhgvvhgrnhhtrd
+ gukheqnecuggftrfgrthhtvghrnhepveejtdejteevfefhffehiedvffdvudelvdeigfek
+ feevledtieetffehgeeggfdunecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpe
+ hmrghilhhfrhhomhepihhtshesihhrrhgvlhgvvhgrnhhtrdgukhdpnhgspghrtghpthht
+ ohepieehpdhmohguvgepshhmthhpohhuthdprhgtphhtthhopehpihgvrhhrihgtkhdrsg
+ houhhvihgvrheslhhinhgrrhhordhorhhgpdhrtghpthhtohepqhgvmhhuqdguvghvvghl
+ sehnohhnghhnuhdrohhrghdprhgtphhtthhopehjrghsohifrghnghesrhgvughhrghtrd
+ gtohhmpdhrtghpthhtoheprghlvgigrdgsvghnnhgvvgeslhhinhgrrhhordhorhhgpdhr
+ tghpthhtoheplhhvihhvihgvrhesrhgvughhrghtrdgtohhmpdhrtghpthhtohepmhhtoh
+ hsrghtthhisehrvgguhhgrthdrtghomhdprhgtphhtthhopehnphhighhgihhnsehgmhgr
+ ihhlrdgtohhmpdhrtghpthhtohepghhithesgigvnhdtnhdrnhgrmhgvpdhrtghpthhtoh
+ epphgrshhitgeslhhinhhugidrihgsmhdrtghomh
+X-ME-Proxy: <xmx:_KXiZiFiPc8R1rYhcfi8lBa8w9onIaCYENkAzORPkX-mhtnnk_N1pw>
+ <xmx:_KXiZmUy_LNrz3YrYxScEUQ6j3JBmCaRwtXADraQScbRsIUPPHwoRA>
+ <xmx:_KXiZlPPqsP_QOKnb8J5PKDziMCewAWhVZP-Ve9DEhjBd72f8_joag>
+ <xmx:_KXiZt1pIFNJBbrQ_ZsiOUqX1-5wuIrUc86SpQRRmm5eP_O7bgvt5A>
+ <xmx:AqbiZve8YRRpE8YPHhV39Vayh3sF8c3gzhOWNAmYPtBtsl3f9tK91htv>
+Feedback-ID: idc91472f:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
+ 12 Sep 2024 04:27:39 -0400 (EDT)
+Date: Thu, 12 Sep 2024 10:27:38 +0200
+From: Klaus Jensen <its@irrelevant.dk>
+To: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+Cc: qemu-devel@nongnu.org, Jason Wang <jasowang@redhat.com>,
+ Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Laurent Vivier <lvivier@redhat.com>, Marcelo Tosatti <mtosatti@redhat.com>,
+ Nicholas Piggin <npiggin@gmail.com>, WANG Xuerui <git@xen0n.name>,
+ Halil Pasic <pasic@linux.ibm.com>, Rob Herring <robh@kernel.org>,
+ Michael Rolnik <mrolnik@gmail.com>, Zhao Liu <zhao1.liu@intel.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Fabiano Rosas <farosas@suse.de>, Corey Minyard <minyard@acm.org>,
+ Keith Busch <kbusch@kernel.org>, Thomas Huth <thuth@redhat.com>,
+ "Maciej S. Szmigiero" <maciej.szmigiero@oracle.com>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Kevin Wolf <kwolf@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Jesper Devantier <foss@defmacro.it>,	Hyman Huang <yong.huang@smartx.com>,
+ Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-s390x@nongnu.org,
+ Laurent Vivier <laurent@vivier.eu>, qemu-riscv@nongnu.org,
+ "Richard W.M. Jones" <rjones@redhat.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Aurelien Jarno <aurelien@aurel32.net>,
+ Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, kvm@vger.kernel.org,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Akihiko Odaki <akihiko.odaki@daynix.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Hanna Reitz <hreitz@redhat.com>, Ani Sinha <anisinha@redhat.com>,
+ qemu-ppc@nongnu.org,
+ =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bmeng.cn@gmail.com>,	"Michael S. Tsirkin" <mst@redhat.com>,
+ Helge Deller <deller@gmx.de>,	Peter Xu <peterx@redhat.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Dmitry Fleytman <dmitry.fleytman@gmail.com>,
+ Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
+ Yanan Wang <wangyanan55@huawei.com>, qemu-arm@nongnu.org,
+ Igor Mammedov <imammedo@redhat.com>,
+ Jean-Christophe Dubois <jcd@tribudubois.net>,
+ Eric Farman <farman@linux.ibm.com>,
+ Sriram Yagnaraman <sriram.yagnaraman@ericsson.com>,
+ qemu-block@nongnu.org, Stefan Berger <stefanb@linux.vnet.ibm.com>,
+ Joel Stanley <joel@jms.id.au>,	Eduardo Habkost <eduardo@habkost.net>,
+ David Gibson <david@gibson.dropbear.id.au>,	Fam Zheng <fam@euphon.net>,
+ Weiwei Li <liwei1518@gmail.com>,	Markus Armbruster <armbru@redhat.com>
+Subject: Re: [PATCH v2 18/48] hw/nvme: replace assert(false) with
+ g_assert_not_reached()
+Message-ID: <ZuKl-vucvRaV1hU3@AALNPWKJENSEN.aal.scsc.local>
+References: <20240912073921.453203-1-pierrick.bouvier@linaro.org>
+ <20240912073921.453203-19-pierrick.bouvier@linaro.org>
 MIME-Version: 1.0
-References: <20240911131900.179648-1-s.makarov@syntacore.com>
-In-Reply-To: <20240911131900.179648-1-s.makarov@syntacore.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Thu, 12 Sep 2024 09:15:02 +0100
-Message-ID: <CAFEAcA_RsAeh-9bAkAX0heMb1PcqqbVe4m0FPDhq8KqiKE9YDA@mail.gmail.com>
-Subject: Re: [PATCH 0/2] Fixes for standard conformance
-To: Sergey Makarov <s.makarov@syntacore.com>
-Cc: Alistar.Francis@wdc.com, bmeng@gmail.com, palmer@dabbelt.com, 
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::535;
- envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x535.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20240912073921.453203-19-pierrick.bouvier@linaro.org>
+Received-SPF: pass client-ip=103.168.172.140; envelope-from=its@irrelevant.dk;
+ helo=flow5-smtp.messagingengine.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -90,43 +155,17 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, 11 Sept 2024 at 23:30, Sergey Makarov <s.makarov@syntacore.com> wrote:
->
-> *** Patchset goal ***
->
-> This patchset aims to improve standard conformance for SiFive PLIC
-> implementation.
->
-> *** Testing cases ***
->
-> Currently there are no automated tests for these changes, but there
-> are several test cases, with which these changes may be checked:
-> 1. Zeroth priority register can be checked by reading it after
->    writing to it. Without patch its value would be the same which
->    is written there, but with it it would be zero;
-> 2. Trigger call of `sifive_plic_irq_request` with level 0.
->    Without second patch it will clear pending bit, but with it
->    pending bit won't be cleared.
-> If anyone knows how this can be turned into automated test, help
-> would be appreciated.
->
-> Sergey Makarov (2):
->   hw/intc: Make zeroth priority register read-only
->   hw/intc: Don't clear pending bits on IRQ lowering
->
->  hw/intc/sifive_plic.c | 15 +++++++++++----
->  1 file changed, 11 insertions(+), 4 deletions(-)
+On Sep 12 00:38, Pierrick Bouvier wrote:
+> This patch is part of a series that moves towards a consistent use of
+> g_assert_not_reached() rather than an ad hoc mix of different
+> assertion mechanisms.
+> 
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+> Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+> ---
+>  hw/nvme/ctrl.c | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
+> 
 
-When you're writing cover letter and patch subject lines,
-please can you make them say what part of the codebase
-they're touching? This cover letter doesn't say anything in
-the subject line that would tell the reader it's about riscv,
-for instance, and nor do the patch line subjects.
-
-This is helpful because people scan subject lines to see
-whether the patchset is something they're interested in
-or not.
-
-thanks
--- PMM
+Reviewed-by: Klaus Jensen <k.jensen@samsung.com>
 
