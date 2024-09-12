@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D92E4EE645B
-	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Sep 2024 07:47:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38E70EE645B
+	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Sep 2024 07:47:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1soeTo-0005Qj-Bx; Thu, 12 Sep 2024 03:43:04 -0400
+	id 1soeRy-0008BK-CP; Thu, 12 Sep 2024 03:41:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1soeRl-0006uW-4e
- for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 03:40:57 -0400
-Received: from mail-pg1-x52b.google.com ([2607:f8b0:4864:20::52b])
+ id 1soeR3-0003Ss-Dm
+ for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 03:40:18 -0400
+Received: from mail-pg1-x52d.google.com ([2607:f8b0:4864:20::52d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1soeRj-0000uz-2b
- for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 03:40:56 -0400
-Received: by mail-pg1-x52b.google.com with SMTP id
- 41be03b00d2f7-7c3e1081804so359138a12.3
- for <qemu-riscv@nongnu.org>; Thu, 12 Sep 2024 00:40:54 -0700 (PDT)
+ id 1soeQx-0000Y3-1Z
+ for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 03:40:11 -0400
+Received: by mail-pg1-x52d.google.com with SMTP id
+ 41be03b00d2f7-7db1f13b14aso632724a12.1
+ for <qemu-riscv@nongnu.org>; Thu, 12 Sep 2024 00:40:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726126853; x=1726731653; darn=nongnu.org;
+ d=linaro.org; s=google; t=1726126805; x=1726731605; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZcvwE9FJNxmdIVPlBQdfypY65+b/8lDno7KQ7aDgr+A=;
- b=y8W2RpLQDQuTPqABbGYUFVu576+Vp7YaslEmws26ErYUOUyxbIaMvg0mfSETdvVIo8
- 5sN73k13mFu0froCMncmsvlzZp03U19JtEpqRH7ej7iXMRtOGpLFhQRVWZrSM4EI10Rd
- 8OqHvz9w0xp3d9ZTSoPqglMuy+pdPNdryw/s0KKda2Vssrya6qE0j48ZC4hHrCcawNkT
- fNP5NwrqTUgM73DX2YBwD5Bc0mrS2q627Nbzfkoe8qT9+9BQqi8qlm8NI9eq3GLD+9ac
- MNuTSaGzBvNdwB2toSp51IiXnSt3um2cltveMhX9qp37wfqjYNpruRruyknBdTbZwANz
- CdOw==
+ bh=5zF+jA5qLmLbmnQj5+SFXwtuz0TNrysgMomjB+iiCqE=;
+ b=lAPwLKhCFI7MeXlYC42iRrBahMLxvkIIfIG4TyQpcML9dohSIMycdBNAPVyas4drZb
+ oNUjn6cUbt6CVbGbiHCNxWTrHBtGfVIsTTmVCEnEKcJJ7tmyx1bQxED9ys34aLLJKavv
+ 9WChBHdDDQaqWLDlXJJ4PjGHcwI0B/XvExkWHYV81fS/PIeKe5rySwlcsDGEeb50SKVo
+ LwTR08jP9Alb4OjvlOWhtv/+1obwEKy7yp1K4U0EjVHHfpb9Xnxw4ghOBcFdhUqtjzRU
+ +g466v7+2U4jbvdinU0y7EyVPp9LCqOWjLDyrHJTGK2btBBwAdbWCj0hBLErMuZH3NUG
+ D+HQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726126853; x=1726731653;
+ d=1e100.net; s=20230601; t=1726126805; x=1726731605;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ZcvwE9FJNxmdIVPlBQdfypY65+b/8lDno7KQ7aDgr+A=;
- b=H4d6qYjlJmDLcNfDmGEOAHdNtXlaaIB0Gu93VcvhxP7BHuoQAYTLkOpwIxTmxSByp3
- l3OZVteeU34igLndMD44WEOQADFtaqxOkCMumcCdCVADCgaZ5UG1sAinx3mD6Zwt8FVi
- Oj/g/MJIz1sj38IpHR6/y7Jwu4FkW/vpxbnRzDfOMLEDY6TeadT0WIGYUhjSyoGgq6jp
- NyYSXTqMriza0vxHXon8ybL/Jqp1Q78u1J/CM1fQXi+HtZKzuzsd5xZTKIj+dQRT0Oly
- cojwqmb0nFKOvDG8X+naQbdpC4tKejsVFXwR2Z4gBXWZsjBjUuVBgd9XyFkxxNtgEh0r
- HASg==
+ bh=5zF+jA5qLmLbmnQj5+SFXwtuz0TNrysgMomjB+iiCqE=;
+ b=Ka7oLBni5H9RHzvvZ9fXiSav6C/7tJP3wXolbEsujbFzjHKVyJv1xvdAGSnFJWII2m
+ EsevHg2qk3kpLeLCfUMKofHZdXbYd+lT2bqOb1VOwWXbkvfmmNdnMgIJ94tFpJGuKc8O
+ 4NmJXMCOK8U+JkHLoW9KnUSPbfqiFAhKFIzM9ZN0oQ53weNLCDG3VKkpCduK5ZgEyiFt
+ VzrAlFca45pzDp9EGi9xa1AJixXbmJIo0tmmguWi55hOrZJpeKG/9g8iVFkKSwfjGd0C
+ Czg8NN2U9uezT1o/jO1/6mveYUtgIsn3c0NkRFt+A+PuHqwUnpFS6pVflW8ymRscCGFl
+ 78qg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWJehTLZVwLE0dfLKKyXaTEC23oARrZuimbs09i4ZCsau3edQJ7TZueIBLV+tZBvLL6h+6gxS1my8HB@nongnu.org
-X-Gm-Message-State: AOJu0Yxl/Jh12pBddu2SexAiz1ksKRYR5R2L1TvN8yOfrTOXX1Nlc5ZU
- JOgWIqJow57MajqLypmzir9lYgP6rvE0UfAtsquzUIJ02NZZ1aUCmY3kBq+KeU8=
-X-Google-Smtp-Source: AGHT+IF+BwpPE4A3M7aIxv++xh3a9Ty8RvQxhzK9f6I85GUgpXeWj/nLy6PCJ/dYfr1LgiyAJ779DA==
-X-Received: by 2002:a05:6a21:a34b:b0:1cf:6b93:5622 with SMTP id
- adf61e73a8af0-1cf75ee4d05mr2672158637.14.1726126853641; 
- Thu, 12 Sep 2024 00:40:53 -0700 (PDT)
+ AJvYcCWZxsq+w2auEMAZjTdj/rU/0fQXi/OD8lXEmiZ73UOpw78GNNlisz80/XJgReIBF/uWlFTKpL8qMDrQ@nongnu.org
+X-Gm-Message-State: AOJu0YzC54UOmPA8LdW2duYAOyDbVaw8HPcfMx5UzWwCqglTRbo+nUgV
+ 07RY2/Z5sfumpD61NyYvRzoxUkQC7TDceoQR4DnhmGhTEP3iCSxjy54rOGfcOI0=
+X-Google-Smtp-Source: AGHT+IHDXrX+NbUP9NtxGqG8dJEo0gfcy7xOv/m7ynMdOyBHgNq9WtYD8rjvMD0vL3Bh2gbeHd5Gyw==
+X-Received: by 2002:a05:6a20:1056:b0:1cf:9a86:73e4 with SMTP id
+ adf61e73a8af0-1cf9a86a035mr1164601637.14.1726126805353; 
+ Thu, 12 Sep 2024 00:40:05 -0700 (PDT)
 Received: from linaro.vn.shawcable.net ([2604:3d08:9384:1d00::9633])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-7db1fb9ad87sm983458a12.6.2024.09.12.00.40.50
+ 41be03b00d2f7-7db1fb9ad87sm983458a12.6.2024.09.12.00.40.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Sep 2024 00:40:52 -0700 (PDT)
+ Thu, 12 Sep 2024 00:40:04 -0700 (PDT)
 From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Jason Wang <jasowang@redhat.com>,
@@ -106,16 +106,17 @@ Cc: Jason Wang <jasowang@redhat.com>,
  David Gibson <david@gibson.dropbear.id.au>, Fam Zheng <fam@euphon.net>,
  Weiwei Li <liwei1518@gmail.com>, Markus Armbruster <armbru@redhat.com>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH v2 33/48] target/arm: remove break after g_assert_not_reached()
-Date: Thu, 12 Sep 2024 00:39:06 -0700
-Message-Id: <20240912073921.453203-34-pierrick.bouvier@linaro.org>
+Subject: [PATCH v2 15/48] block: replace assert(false) with
+ g_assert_not_reached()
+Date: Thu, 12 Sep 2024 00:38:48 -0700
+Message-Id: <20240912073921.453203-16-pierrick.bouvier@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240912073921.453203-1-pierrick.bouvier@linaro.org>
 References: <20240912073921.453203-1-pierrick.bouvier@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52b;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-pg1-x52b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52d;
+ envelope-from=pierrick.bouvier@linaro.org; helo=mail-pg1-x52d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -143,23 +144,25 @@ g_assert_not_reached() rather than an ad hoc mix of different
 assertion mechanisms.
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Kevin Wolf <kwolf@redhat.com>
 Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 ---
- target/arm/hyp_gdbstub.c | 1 -
- 1 file changed, 1 deletion(-)
+ block/qcow2.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/target/arm/hyp_gdbstub.c b/target/arm/hyp_gdbstub.c
-index f120d55caab..1e861263b3d 100644
---- a/target/arm/hyp_gdbstub.c
-+++ b/target/arm/hyp_gdbstub.c
-@@ -158,7 +158,6 @@ int insert_hw_watchpoint(target_ulong addr, target_ulong len, int type)
-         break;
-     default:
-         g_assert_not_reached();
--        break;
+diff --git a/block/qcow2.c b/block/qcow2.c
+index dd359d241b7..803ca73a2ff 100644
+--- a/block/qcow2.c
++++ b/block/qcow2.c
+@@ -5299,7 +5299,7 @@ qcow2_get_specific_info(BlockDriverState *bs, Error **errp)
+     } else {
+         /* if this assertion fails, this probably means a new version was
+          * added without having it covered here */
+-        assert(false);
++        g_assert_not_reached();
      }
-     if (len <= 8) {
-         /* we align the address and set the bits in BAS */
+ 
+     if (encrypt_info) {
 -- 
 2.39.2
 
