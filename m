@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B03AEEB569
-	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Sep 2024 08:50:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5781EEB569
+	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Sep 2024 08:50:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sofVZ-00022I-FD; Thu, 12 Sep 2024 04:48:59 -0400
+	id 1sofVf-00026E-0d; Thu, 12 Sep 2024 04:49:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
- id 1sofVP-0001ST-O0
- for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 04:48:47 -0400
-Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
+ id 1sofVR-0001bl-UA
+ for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 04:48:50 -0400
+Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
- id 1sofVN-0000Jr-8k
- for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 04:48:47 -0400
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-42cacabd2e0so5577915e9.3
- for <qemu-riscv@nongnu.org>; Thu, 12 Sep 2024 01:48:44 -0700 (PDT)
+ id 1sofVO-0000KK-VU
+ for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 04:48:48 -0400
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-42cae102702so5474835e9.0
+ for <qemu-riscv@nongnu.org>; Thu, 12 Sep 2024 01:48:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1726130922; x=1726735722;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1726130924; x=1726735724;
  darn=nongnu.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=X3BYYtY0BUs2UMS0JDRthW597KCoJ873cB2cLz4S29w=;
- b=IT5TZp3N2Urgv8uJDQvfBkHbdR5unsZ557SkTzktbwNFndyQHeYvtI+QxMOR6k8O7a
- IPrD/AL/ZLTu5wmYlDyFVHJZDdS920zcJZdMPUCnGKb90r8UmNPy4ijWGw9GIUkxUAkN
- kvScG0FtToA2sk78lzLfPrQJ4ibYGbyLTiYc5Vk81zxvXtxAFR76JuoRTdjwaOkECeau
- zCvENRmvsA/4oDNKKZcpiH+v3FlAGK3t3SSbfzhFYXt7oYEJAuy6mLGwiMN1JE6tpdc+
- /wgogJuXzP6cyL2z7YkxvFjoxXta5Ob6b0QAPjWq7ECS/w6+3Vpct95JP+6uuEvOqHhi
- UTZQ==
+ bh=Ij9UQ3ueFFesPCuwkY7Z0yakwufuTyK9/Ck/bkvrpOQ=;
+ b=1fo1GihGUPb38z94sfDvd8GfQnuxpmR1UUZlPrmG6OYtHtMIdyQ8qxPteBVlLM3i48
+ HkA8Y2R9fI2z+4qsda3wnbVBN1/l5b8Xef72iIEKoBlp9z9JlCmxiCItGhTQUqIAd9+1
+ mV+tcp8kPOPT7Gv4B7iHcCBtCI/O09VaAYLiS4R7wWt1qF4NEM1dqTOHTFIREoJFy0np
+ FmHTkmG9QbFkwNfa3rGuzVT1Sx3UE2FsjOOkSuKR1bsahgp68HQkqJLTK9RAk8vE3zpS
+ 9mqhNDeRSnxP4Mo+dRS4qB+qXE6SlSwZs5puwp6kMzBD+OXiLbGwcuSZq601cvRdIU0j
+ LN3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726130922; x=1726735722;
+ d=1e100.net; s=20230601; t=1726130924; x=1726735724;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=X3BYYtY0BUs2UMS0JDRthW597KCoJ873cB2cLz4S29w=;
- b=gZsH6/jWpQNravU6yDH7zBTOz7JKvbzAebLlTtc47p2zyFUx7Tbq8qv0OZhNdIbiab
- xNNT+/7i85sMnr92rH/2uC/onpPrVemvKnCecquuaBkNIy2xGOSjIhvVkXTVqSlkOwsD
- oMD/XafqX3m7E7srSlvv00qlLw/LvaGASE5WQIxoJZBk+r2YT//GrSAlRt3Qz428k8EX
- LiDJB/eMezA5U5dGrcSd7I2axVo1CQD/Gl4yKmHArgQdKbRYM2POpydFyFO8qpguQJ/f
- 93ns+t1A5/m7GliqZY7c6f3jWKG287/QVtqWlkKoqC5wU2ip5xbeLhUv3rgIXhVp1fYS
- OIFA==
-X-Gm-Message-State: AOJu0YzD3Z0URAluKgKBb1cSt5y7puCaYFa8dWifra4IqPfaKu6oGGs0
- 9c7GcTlGM/RLGL64Fa9YJ3XTJfPj6pWgb1/xbvVZoSAmmsAyyJme31brfzZj3YQp9Sf/3oVLknq
- Qtz4=
-X-Google-Smtp-Source: AGHT+IEP0FNcDix5TxlaJ/ervI2foMS791gTtYEqrH/baaKyoPUWwDTMAVX9cb7OnAgeBj2Y8eux9A==
-X-Received: by 2002:a05:600c:4fc3:b0:42c:bcc8:5877 with SMTP id
- 5b1f17b1804b1-42cdb522f2cmr15449165e9.13.1726130922252; 
- Thu, 12 Sep 2024 01:48:42 -0700 (PDT)
+ bh=Ij9UQ3ueFFesPCuwkY7Z0yakwufuTyK9/Ck/bkvrpOQ=;
+ b=Z93lg4pZFi43Nz77pm/IqeD03o/ulBsQ8F0OxxYsdKedghROcxQJiBx8SxXmmQMzB5
+ rhW4kpb2bWDVpBqwY2IejsZ7+bQFV8HHrxgJLRcdHJHgScBzAurD8Rx/jD6O8LlAGxKH
+ J0KaKUvHCTSlcoYUZhwSr3eLx+8TESJYORQxWHn4TohnjgE30tUYsW3azEeuQXKGITYA
+ fU+dUZwoReCi4Xl0yWil9fQcarWTRlzyVyN2KWNf0Ji37zWyzVL2tFMMAIHScLbH1WjJ
+ SJ+/pOc57lCyP6AodxncFBsb4knIojpH3WGowLVjz3idq8PdxgLEMU6c6EJ5JgxRHQmh
+ vh7g==
+X-Gm-Message-State: AOJu0YzlBXrx8PJ7vpvDcTi3JmcfxRpQgYPe22XuKyCr6PhZpx+7OKCo
+ uQ1kqLd8zzV3D32MmVjVFDd7pQHLz40shS5Fwqc+b39gYUXdQhbEZajj4K1VcdSy1tjLrO1U2H6
+ aTzs=
+X-Google-Smtp-Source: AGHT+IGdkbi8fsTe4KKZ+e+XMK6RPQ7XQDobuWyGnRI8uyhu+4PSzz3TOv3heyJrF8LKuaa5+24FUA==
+X-Received: by 2002:a05:600c:468a:b0:428:1b0d:8657 with SMTP id
+ 5b1f17b1804b1-42cdfac9565mr6359765e9.22.1726130924000; 
+ Thu, 12 Sep 2024 01:48:44 -0700 (PDT)
 Received: from carbon-x1.. ([2a01:e0a:e17:9700:16d2:7456:6634:9626])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42caeb33a92sm165637475e9.20.2024.09.12.01.48.41
+ 5b1f17b1804b1-42caeb33a92sm165637475e9.20.2024.09.12.01.48.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Sep 2024 01:48:41 -0700 (PDT)
+ Thu, 12 Sep 2024 01:48:42 -0700 (PDT)
 From: =?UTF-8?q?Cl=C3=A9ment=20L=C3=A9ger?= <cleger@rivosinc.com>
 To: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
@@ -70,17 +70,17 @@ Cc: =?UTF-8?q?Cl=C3=A9ment=20L=C3=A9ger?= <cleger@rivosinc.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Ved Shanbhogue <ved@rivosinc.com>, Atish Patra <atishp@rivosinc.com>,
  qemu-devel@nongnu.org
-Subject: [PATCH 04/10] target/riscv: Implement Ssdbltrp exception handling
-Date: Thu, 12 Sep 2024 10:48:23 +0200
-Message-ID: <20240912084832.2906991-5-cleger@rivosinc.com>
+Subject: [PATCH 05/10] target/riscv: Add Ssdbltrp ISA extension enable switch
+Date: Thu, 12 Sep 2024 10:48:24 +0200
+Message-ID: <20240912084832.2906991-6-cleger@rivosinc.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20240912084832.2906991-1-cleger@rivosinc.com>
 References: <20240912084832.2906991-1-cleger@rivosinc.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
- envelope-from=cleger@rivosinc.com; helo=mail-wm1-x32e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::330;
+ envelope-from=cleger@rivosinc.com; helo=mail-wm1-x330.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -102,140 +102,33 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-When the Ssdbltrp ISA extension is enabled, if a trap happens in S-mode
-while SSTATUS.SDT isn't cleared, generate a double trap exception to
-M-mode.
+Add the switch to enable the Ssdbltrp ISA extension.
 
 Signed-off-by: Clément Léger <cleger@rivosinc.com>
 ---
- target/riscv/cpu.c        |  2 +-
- target/riscv/cpu_bits.h   |  1 +
- target/riscv/cpu_helper.c | 47 ++++++++++++++++++++++++++++++++++-----
- 3 files changed, 43 insertions(+), 7 deletions(-)
+ target/riscv/cpu.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 7ee7b9c4ee..206736182a 100644
+index 206736182a..75433a4359 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -284,7 +284,7 @@ static const char * const riscv_excp_names[] = {
-     "load_page_fault",
-     "reserved",
-     "store_page_fault",
--    "reserved",
-+    "double_trap",
-     "reserved",
-     "reserved",
-     "reserved",
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 3a5588d4df..5557a86348 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -699,6 +699,7 @@ typedef enum RISCVException {
-     RISCV_EXCP_INST_PAGE_FAULT = 0xc, /* since: priv-1.10.0 */
-     RISCV_EXCP_LOAD_PAGE_FAULT = 0xd, /* since: priv-1.10.0 */
-     RISCV_EXCP_STORE_PAGE_FAULT = 0xf, /* since: priv-1.10.0 */
-+    RISCV_EXCP_DOUBLE_TRAP = 0x10,
-     RISCV_EXCP_SW_CHECK = 0x12, /* since: priv-1.13.0 */
-     RISCV_EXCP_HW_ERR = 0x13, /* since: priv-1.13.0 */
-     RISCV_EXCP_INST_GUEST_PAGE_FAULT = 0x14,
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 395d8235ce..69da3c3384 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -575,7 +575,9 @@ void riscv_cpu_swap_hypervisor_regs(CPURISCVState *env)
-         mstatus_mask |= MSTATUS_FS;
-     }
-     bool current_virt = env->virt_enabled;
--
-+    if (riscv_env_smode_dbltrp_enabled(env, current_virt)) {
-+        mstatus_mask |= MSTATUS_SDT;
-+    }
-     g_assert(riscv_has_ext(env, RVH));
- 
-     if (current_virt) {
-@@ -1707,6 +1709,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-     CPURISCVState *env = &cpu->env;
-     bool virt = env->virt_enabled;
-     bool write_gva = false;
-+    bool vsmode_exc;
-     uint64_t s;
-     int mode;
- 
-@@ -1721,6 +1724,8 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-         !(env->mip & (1 << cause));
-     bool vs_injected = env->hvip & (1 << cause) & env->hvien &&
-         !(env->mip & (1 << cause));
-+    bool smode_double_trap = false;
-+    uint64_t hdeleg = async ? env->hideleg : env->hedeleg;
-     target_ulong tval = 0;
-     target_ulong tinst = 0;
-     target_ulong htval = 0;
-@@ -1837,13 +1842,35 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-                 !async &&
-                 mode == PRV_M;
- 
-+    vsmode_exc = env->virt_enabled && (((hdeleg >> cause) & 1) || vs_injected);
-+    /*
-+     * Check double trap condition only if already in S-mode and targeting
-+     * S-mode
-+     */
-+    if (cpu->cfg.ext_ssdbltrp && env->priv == PRV_S && mode == PRV_S) {
-+        bool dte = (env->menvcfg & MENVCFG_DTE) != 0;
-+        bool sdt = (env->mstatus & MSTATUS_SDT) != 0;
-+        /* In VS or HS */
-+        if (riscv_has_ext(env, RVH)) {
-+            if (vsmode_exc) {
-+                /* VS -> VS */
-+                /* Stay in VS mode, use henvcfg instead of menvcfg*/
-+                dte = (env->henvcfg & HENVCFG_DTE) != 0;
-+            } else if (env->virt_enabled) {
-+                /* VS -> HS */
-+                dte = false;
-+            }
-+        }
-+        smode_double_trap = dte && sdt;
-+        if (smode_double_trap) {
-+            mode = PRV_M;
-+        }
-+    }
-+
-     if (mode == PRV_S) {
-         /* handle the trap in S-mode */
-         if (riscv_has_ext(env, RVH)) {
--            uint64_t hdeleg = async ? env->hideleg : env->hedeleg;
--
--            if (env->virt_enabled &&
--                (((hdeleg >> cause) & 1) || vs_injected)) {
-+            if (vsmode_exc) {
-                 /* Trap to VS mode */
-                 /*
-                  * See if we need to adjust cause. Yes if its VS mode interrupt
-@@ -1876,6 +1903,9 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-         s = set_field(s, MSTATUS_SPIE, get_field(s, MSTATUS_SIE));
-         s = set_field(s, MSTATUS_SPP, env->priv);
-         s = set_field(s, MSTATUS_SIE, 0);
-+        if (riscv_env_smode_dbltrp_enabled(env, virt)) {
-+            s = set_field(s, MSTATUS_SDT, 1);
-+        }
-         env->mstatus = s;
-         env->scause = cause | ((target_ulong)async << (TARGET_LONG_BITS - 1));
-         env->sepc = env->pc;
-@@ -1909,9 +1939,14 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-         s = set_field(s, MSTATUS_MIE, 0);
-         env->mstatus = s;
-         env->mcause = cause | ~(((target_ulong)-1) >> async);
-+        if (smode_double_trap) {
-+            env->mtval2 = env->mcause;
-+            env->mcause = RISCV_EXCP_DOUBLE_TRAP;
-+        } else {
-+            env->mtval2 = mtval2;
-+        }
-         env->mepc = env->pc;
-         env->mtval = tval;
--        env->mtval2 = mtval2;
-         env->mtinst = tinst;
- 
-         if (cpu->cfg.ext_smrnmi && nmi_execp) {
+@@ -190,6 +190,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(ssccptr, PRIV_VERSION_1_11_0, has_priv_1_11),
+     ISA_EXT_DATA_ENTRY(sscofpmf, PRIV_VERSION_1_12_0, ext_sscofpmf),
+     ISA_EXT_DATA_ENTRY(sscounterenw, PRIV_VERSION_1_12_0, has_priv_1_12),
++    ISA_EXT_DATA_ENTRY(ssdbltrp, PRIV_VERSION_1_12_0, ext_ssdbltrp),
+     ISA_EXT_DATA_ENTRY(sstc, PRIV_VERSION_1_12_0, ext_sstc),
+     ISA_EXT_DATA_ENTRY(sstvala, PRIV_VERSION_1_12_0, has_priv_1_12),
+     ISA_EXT_DATA_ENTRY(sstvecd, PRIV_VERSION_1_12_0, has_priv_1_12),
+@@ -1518,6 +1519,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
+     MULTI_EXT_CFG_BOOL("smrnmi", ext_smrnmi, false),
+     MULTI_EXT_CFG_BOOL("smstateen", ext_smstateen, false),
+     MULTI_EXT_CFG_BOOL("ssaia", ext_ssaia, false),
++    MULTI_EXT_CFG_BOOL("ssdbltrp", ext_ssdbltrp, false),
+     MULTI_EXT_CFG_BOOL("svade", ext_svade, false),
+     MULTI_EXT_CFG_BOOL("svadu", ext_svadu, true),
+     MULTI_EXT_CFG_BOOL("svinval", ext_svinval, false),
 -- 
 2.45.2
 
