@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D53FEE6457
-	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Sep 2024 07:42:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77546EE6457
+	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Sep 2024 07:43:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1soeSg-0004gc-AP; Thu, 12 Sep 2024 03:41:54 -0400
+	id 1soeS7-0000Xv-Ep; Thu, 12 Sep 2024 03:41:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1soeRR-0004rB-2T
- for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 03:40:37 -0400
-Received: from mail-pg1-x52b.google.com ([2607:f8b0:4864:20::52b])
+ id 1soeRU-0005CC-Bw
+ for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 03:40:40 -0400
+Received: from mail-il1-x129.google.com ([2607:f8b0:4864:20::129])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1soeRL-0000ex-Je
- for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 03:40:35 -0400
-Received: by mail-pg1-x52b.google.com with SMTP id
- 41be03b00d2f7-70b2421471aso496362a12.0
- for <qemu-riscv@nongnu.org>; Thu, 12 Sep 2024 00:40:25 -0700 (PDT)
+ id 1soeRQ-0000hY-MK
+ for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 03:40:40 -0400
+Received: by mail-il1-x129.google.com with SMTP id
+ e9e14a558f8ab-39d3872e542so2538175ab.2
+ for <qemu-riscv@nongnu.org>; Thu, 12 Sep 2024 00:40:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726126825; x=1726731625; darn=nongnu.org;
+ d=linaro.org; s=google; t=1726126830; x=1726731630; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RMRZaTd/BH/1FKFl6y3cyJgui1+s3Png+hpoiCgGZ2o=;
- b=tCF2DuAK41L8eQ7j8iQVd333t+0/ImnRTp9RVb5918Wa91Si+wWOwb6APK+4ZdGxtS
- siDH5R+E0V4QDrixHRvlz5dh8V5DK2SRjsGL7F/8jk32mq5K/V1lV1xewZN2v7EgWrnK
- 0hEGl9EuSQtZFGklG8kA88vvHtv/6UTmtIUKBFh6UTTb5KupPDoOHrnMMTnc1f5/aXwh
- jeSo84p9l1sTpANztSCewcAs4ed/5HRTzcyFJZB1Hw5oqnEuDx39VEChGOlM+UnEZKb0
- iIsoAOpTIvfGpZHUudt3Prr2SVfMgKfP6zfUZ/ah13f3S6rAUitoyeej0RIGCEftAb1X
- /X8A==
+ bh=sAFROPRNfnjqKGInm+avpv2FlUZT8Lrw7bfqM3cunwQ=;
+ b=KLihJqzmOme/yEqvDyX2sF+lto69PPZbK3/qDhJcXvZ+v3tuO7ccAbbblj54WtXOJ9
+ pCEJ/W7+vlJIXbYtxNyGvEupDbcQYctVWp82ZoDo6rbwjH/DnG70ITRv/dXYWL5p7ev4
+ E8oHM90Gdhr6aecH84O3mfy2hBOdPhgncvhvlmI9OKSWWCW6PYfFzAq5l9Ko6SU/z9am
+ wqn3Eo7kZoTMmkMqRwGjzuhPlzPCNOyxzg+9nMyo2uPVTQUH1SDJphZE/GGvd+TW00Dz
+ +OSbi3RjKPiVFcaAfDyaVW07R7fIfBPwqiKtWtHMrBQCyt86aYCWTMpKmSPeutipIkO5
+ RXdg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726126825; x=1726731625;
+ d=1e100.net; s=20230601; t=1726126830; x=1726731630;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RMRZaTd/BH/1FKFl6y3cyJgui1+s3Png+hpoiCgGZ2o=;
- b=LW/VnIeOgb4wdE1fOVWovsjv3+zvzVbjHz9y6niAezb3sut95yeceoKn7dAHRK/qtJ
- Q4f+KCuTyxZclQdA4e6zsdzoBbq/+VtTCqhVUeLIJf/MIBLvbyUw9BOej6DEXOuDev0p
- TQnprzH8otzCF2ee7Y/7ks93+/cbTNcIsb4wLlo+ZQFaVfa+YmlFLMPrwP1QtsQQr5B6
- u/mJGsGRXy25U7iXBoccM5vngxfqMjYW8BQtSaQBStgyWcMEKT55b6Tq4XUD8XVBCLbp
- et3BRKl3FXDkpZJ/8EGpLOGh60SET/4lPMcmGOEiZgVEfgFYMM3RpDsGH/mGP8z6ceKb
- FdyQ==
+ bh=sAFROPRNfnjqKGInm+avpv2FlUZT8Lrw7bfqM3cunwQ=;
+ b=UBNaaiwNa2wvSdi6Ozlb9wn6Ju1egMQYjOv61r+K312nm35ZE5JgN3NcYRjo30Klw6
+ yM25yTf5u6WRiHnubEfJRjWxgyAkhef4CHcdd2+JVol4m/3BtcbSz0ABHjBn9NQPqJl2
+ Lui9ioskYtelBwOwwg2WOGdyCLlqiJkGxEZugqZ1pV4aLBajO+rboFoV78fg6Thiemc2
+ 13ejnZJ2DyhLOCYpcrKxcpxCAm2uGrO/uhRKzK/SE5Av1ZAKPuBheI74Njbcsv1G+z9L
+ 2eNesM932qW9nNEbiVbKIPBGizYgGlELQDvGv+jBWgJN8UFaSEqdmn0dvMQF+oPaCSxo
+ YOmQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWFXspDU1Z0Pg/adMTgsnNzU0W3+1WD1mLwTkpMAcG8m5xZ+qJVbu259+LJg+F32pwqaomF84QebFUQ@nongnu.org
-X-Gm-Message-State: AOJu0YzLM25GM3/L4fit8S51FQJpwDCx01Mid0Ulpm7i5madSe0ogWdN
- I28EUiLJ/r7M+wqq9fti9MNcvK2VtPfJjZJtnhRlk4+MysY3WUkVts+fQ1tFPD4=
-X-Google-Smtp-Source: AGHT+IEh7gXd2tJ0hOhx7ECr2lFSn+He2Xm0+RoHd0qt3Za4kg2n+HCrillfNzzhgQolscqSmg6E/Q==
-X-Received: by 2002:a05:6a21:1813:b0:1cf:6c87:89e5 with SMTP id
- adf61e73a8af0-1cf764c2b90mr2176703637.48.1726126824706; 
- Thu, 12 Sep 2024 00:40:24 -0700 (PDT)
+ AJvYcCUFjSUbI0NxoGnPZoqvB1cGj397Zrjyuq98PXNQgIYy0G+XSGLPRoK92D3DDJY1OQ214Tvw7NjUu8mT@nongnu.org
+X-Gm-Message-State: AOJu0YxNotytUUd6vTLiMkUBt93DypgqFXnvWOKKdMUoo1pzIBfQTaOf
+ EyPPaVj9ilAg67vnLCZca8vfw1AMFa/i0T0Y9am/krakkHA3e5KFiUlGAiOgP8k=
+X-Google-Smtp-Source: AGHT+IEH81pDNJI3FqeUIYeBUH1XaZ7gixSvfp0/bKQHU2ae/DBaz8G+MQhE29wWc5KRqiqKpbOJOw==
+X-Received: by 2002:a05:6e02:152e:b0:3a0:7687:8c2d with SMTP id
+ e9e14a558f8ab-3a08495a790mr13830495ab.26.1726126829641; 
+ Thu, 12 Sep 2024 00:40:29 -0700 (PDT)
 Received: from linaro.vn.shawcable.net ([2604:3d08:9384:1d00::9633])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-7db1fb9ad87sm983458a12.6.2024.09.12.00.40.22
+ 41be03b00d2f7-7db1fb9ad87sm983458a12.6.2024.09.12.00.40.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Sep 2024 00:40:24 -0700 (PDT)
+ Thu, 12 Sep 2024 00:40:29 -0700 (PDT)
 From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Jason Wang <jasowang@redhat.com>,
@@ -106,18 +106,16 @@ Cc: Jason Wang <jasowang@redhat.com>,
  David Gibson <david@gibson.dropbear.id.au>, Fam Zheng <fam@euphon.net>,
  Weiwei Li <liwei1518@gmail.com>, Markus Armbruster <armbru@redhat.com>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH v2 22/48] target/i386/kvm: replace assert(false) with
- g_assert_not_reached()
-Date: Thu, 12 Sep 2024 00:38:55 -0700
-Message-Id: <20240912073921.453203-23-pierrick.bouvier@linaro.org>
+Subject: [PATCH v2 24/48] accel/tcg: remove break after g_assert_not_reached()
+Date: Thu, 12 Sep 2024 00:38:57 -0700
+Message-Id: <20240912073921.453203-25-pierrick.bouvier@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240912073921.453203-1-pierrick.bouvier@linaro.org>
 References: <20240912073921.453203-1-pierrick.bouvier@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52b;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-pg1-x52b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::129;
+ envelope-from=pierrick.bouvier@linaro.org; helo=mail-il1-x129.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -144,35 +142,24 @@ This patch is part of a series that moves towards a consistent use of
 g_assert_not_reached() rather than an ad hoc mix of different
 assertion mechanisms.
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 ---
- target/i386/kvm/kvm.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ accel/tcg/plugin-gen.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/target/i386/kvm/kvm.c b/target/i386/kvm/kvm.c
-index 2fa88ef1e37..308b0e1cb37 100644
---- a/target/i386/kvm/kvm.c
-+++ b/target/i386/kvm/kvm.c
-@@ -5770,7 +5770,7 @@ static int kvm_handle_rdmsr(X86CPU *cpu, struct kvm_run *run)
-         }
+diff --git a/accel/tcg/plugin-gen.c b/accel/tcg/plugin-gen.c
+index ec89a085b43..2ee4c22befd 100644
+--- a/accel/tcg/plugin-gen.c
++++ b/accel/tcg/plugin-gen.c
+@@ -251,7 +251,6 @@ static void inject_mem_cb(struct qemu_plugin_dyn_cb *cb,
+         break;
+     default:
+         g_assert_not_reached();
+-        break;
      }
- 
--    assert(false);
-+    g_assert_not_reached();
  }
  
- static int kvm_handle_wrmsr(X86CPU *cpu, struct kvm_run *run)
-@@ -5789,7 +5789,7 @@ static int kvm_handle_wrmsr(X86CPU *cpu, struct kvm_run *run)
-         }
-     }
- 
--    assert(false);
-+    g_assert_not_reached();
- }
- 
- static bool has_sgx_provisioning;
 -- 
 2.39.2
 
