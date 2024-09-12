@@ -4,132 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0223EE57F6
-	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Sep 2024 00:29:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08517EE6454
+	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Sep 2024 07:01:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1soXhN-0005m7-ID; Wed, 11 Sep 2024 20:28:37 -0400
+	id 1sodoo-0001fk-Hg; Thu, 12 Sep 2024 03:00:42 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1soXhL-0005hC-1T
- for qemu-riscv@nongnu.org; Wed, 11 Sep 2024 20:28:35 -0400
-Received: from mail-pg1-x529.google.com ([2607:f8b0:4864:20::529])
+ (Exim 4.90_1) (envelope-from <fea.wang@sifive.com>)
+ id 1sodon-0001cc-O1
+ for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 03:00:41 -0400
+Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1soXhI-00004u-LA
- for qemu-riscv@nongnu.org; Wed, 11 Sep 2024 20:28:34 -0400
-Received: by mail-pg1-x529.google.com with SMTP id
- 41be03b00d2f7-7db1f13b14aso380142a12.1
- for <qemu-riscv@nongnu.org>; Wed, 11 Sep 2024 17:28:31 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <fea.wang@sifive.com>)
+ id 1sodom-0004LC-36
+ for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 03:00:41 -0400
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-718e11e4186so545192b3a.2
+ for <qemu-riscv@nongnu.org>; Thu, 12 Sep 2024 00:00:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726100910; x=1726705710; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=c9o7/Cb/II9t2dUk/lFV7V5FBEJVmX+kPV3LL4olG50=;
- b=znjPXYUfrXae5YZSAkTQLgp5O1wEpkKfGRwsM0yT2UrG/8JQK2WkcGAzSEuPwm03Na
- +F+S9h9vzMWuWoFoxy7g0NB/B6611+ACzoHTpR8RAPzh0eIyp3TmST404r8vz3R0VTZi
- ywdaGbcZG9VfqG11A0Bg8pHcOaAYsQgteLLY7NBcUZG6Wakr+NjkRAhqRVl4pNb9mNQm
- 3o8AweN2YppTu8O69NCoK0x/aqsMKZn7d9/+pZf+xcC13hE5kQVISSWfdhLSXl+chBQA
- 4ddSIJFuGB37YINBa+sBueCTcaVrZUoVna/C28S5RR8edNG10n/tVSJE253ZjmCsmC+m
- l57g==
+ d=sifive.com; s=google; t=1726124438; x=1726729238; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lkmTzubpfXWhOndmnlWoFaXYzXRHYYUSg1UDMNDwHU0=;
+ b=nt7tWcBwTylEo6reXiyf32iBvDd9+JLhXG7ndTxfYGr6cPc7q3Ybfhaeld/FUuHZ3j
+ OVZbJxZPTZ4lJWbvHMpB8Xi/U2uhsVCHpSi0Ni9PlNIhJiWgagUSNegvIHk4XAmpRiE9
+ 5CINU7QYQdCT7H7jBDbOh7oFwbCbrh56XzH5MWbfwHlDUyKmWhA4x5AjGdfNxdH0Vah9
+ 0RP4PtSorkDE4K5dJwa1f5FMbxGpJJa6uKxTPQF4IEvO0QTT3FpZgKrgCShmvm9rDxex
+ 348nZxJ+pSBlHhKoZ+gh9a0nRkvWTTFlOKsW39c1sVK7TKOigAfdmX87yZhk4d1JL/Qs
+ gGhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726100910; x=1726705710;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=c9o7/Cb/II9t2dUk/lFV7V5FBEJVmX+kPV3LL4olG50=;
- b=n2PbvDu8H0uWaVEBp9EvsJt/WHcihMDlIqShKrkT4IKtTEpLiHZQX7mjDw9KcWgjJK
- AymnpQpzautn16TRjsjaO6MGXl+Uovw6AFpZ9Gy5Alm9kMFiEHrhjydgLyFejtCqjKLg
- AEORIuK8ea13g89+qfBjT16ro8BoRz42CN62VzBWqPflqkea+uZOnaBn6b9ACTLrU/hd
- 4IRGC2aXgLUq3P736efxWndof89QXgN4RAoOK4kiYCj804rak/oAMmEu0kvHC4jtYN1e
- 0ptELLgRAr352Ikl/cBQ0Rw+VbVRfg8JW+PDhmU27BQwbIaTPMoqZH5LrZIYNpvh9DP7
- 7Eiw==
+ d=1e100.net; s=20230601; t=1726124438; x=1726729238;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=lkmTzubpfXWhOndmnlWoFaXYzXRHYYUSg1UDMNDwHU0=;
+ b=lrZXxZW4qyQ2Vc+edWWz77LMW4awX2wm7WVAoF+6FVgk8iwQmNflr1U8Rpbryq2FaL
+ 9X+DGmoQiJ0xt9h/cyMPQblzhL7MoucZhvLQG7wQk839KzkROraolPGRDpFKKA9Xkf0v
+ lA0m8Fo8flbc+D66zFY3OcwLs/IfqGyjLroK8oV9K53uSTwPEJ6S2NdDzm0+ch0DxmX4
+ /oFSufpmZjHM0NuKxL7cHVegVWuZFilrkYJktS2SV91RSf0jJ10xSaHAnlBbEgDA1Hu4
+ GmO9/mnkmIQLUG/HbiHdeMp3LRzQF1nhKNIVKuwRmQQ2qbnECyOl5vcvdF75RhM08KLa
+ N+9A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUH2m2/nOvTnvEfp9Ocdr192osYtLhtNfbvVYsblVRN8l+k6IR4Dd07NACsX+sR2Q8+wFKvZ0fmcnfp@nongnu.org
-X-Gm-Message-State: AOJu0YwDSTiFEffK4SnQjJTHGAbXS2J/VbCrzZk/09PGpQLKE7x2wUXS
- Z8r9gZGDsnw1iH2rd8wDUuCkvQt61PIU4xZDdt+ZBOhiI33AG4/DJ+x6bR3sXcc=
-X-Google-Smtp-Source: AGHT+IG/+agFR+owCifK6LN7nBFHTLHqk0umycTEk4Q5c9uh7VrVH7bVyDXkjOez5N5fvomBj8Vk0w==
-X-Received: by 2002:a05:6a21:4581:b0:1cf:4458:8b27 with SMTP id
- adf61e73a8af0-1cf764afde6mr1438134637.46.1726100909723; 
- Wed, 11 Sep 2024 17:28:29 -0700 (PDT)
-Received: from ?IPV6:2604:3d08:9384:1d00::9633? ([2604:3d08:9384:1d00::9633])
+ AJvYcCVeWKSKFsFqYomflRgJJ7OICjksP9CMZL5sFwSFppyW0bBwktFEKc3wV3b+JR30zd6L/EKKQzAmqJO9@nongnu.org
+X-Gm-Message-State: AOJu0Yyzrcb+MlpiPm50uAGhCohssGPU2siX2vDMH0KfWt3WUpl0rZYa
+ 71bELWboMTh1d/rtxX3dnEqwZE/V+8F0cw+AuNDZUTUF98PIYMlBCPr0zfpDKZE=
+X-Google-Smtp-Source: AGHT+IE7YwfdSbwkgECmNrglp+39irURHKgvc0yTYl89/G5bju5A8IfA7CFEkuvDDpndZQZ4caOL9w==
+X-Received: by 2002:a05:6a00:1790:b0:706:a931:20da with SMTP id
+ d2e1a72fcca58-719260654f6mr3520676b3a.3.1726124438332; 
+ Thu, 12 Sep 2024 00:00:38 -0700 (PDT)
+Received: from hsinchu36-syssw02.internal.sifive.com
+ (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-719090c37efsm3523445b3a.187.2024.09.11.17.28.27
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Sep 2024 17:28:29 -0700 (PDT)
-Message-ID: <7328179f-dbc8-46da-8b87-1077a706acc7@linaro.org>
-Date: Wed, 11 Sep 2024 17:28:26 -0700
+ d2e1a72fcca58-71908fe5309sm4001479b3a.84.2024.09.12.00.00.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 12 Sep 2024 00:00:37 -0700 (PDT)
+From: "Fea.Wang" <fea.wang@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Paolo Bonzini <pbonzini@redhat.com>, Peter Xu <peterx@redhat.com>,
+ David Hildenbrand <david@redhat.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ "Fea.Wang" <fea.wang@sifive.com>
+Subject: [PATCH 1/1] softmmu/physmem.c: Keep transaction attribute in
+ address_space_map()
+Date: Thu, 12 Sep 2024 15:04:04 +0800
+Message-Id: <20240912070404.2993976-2-fea.wang@sifive.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240912070404.2993976-1-fea.wang@sifive.com>
+References: <20240912070404.2993976-1-fea.wang@sifive.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 01/39] docs/spin: replace assert(0) with
- g_assert_not_reached()
-Content-Language: en-US
-To: Thomas Huth <thuth@redhat.com>, "Richard W.M. Jones" <rjones@redhat.com>, 
- "Maciej S. Szmigiero" <mail@maciej.szmigiero.name>
-Cc: Eric Blake <eblake@redhat.com>, qemu-devel@nongnu.org,
- Zhao Liu <zhao1.liu@intel.com>, Joel Stanley <joel@jms.id.au>,
- Kevin Wolf <kwolf@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- qemu-arm@nongnu.org, Corey Minyard <minyard@acm.org>,
- Eric Farman <farman@linux.ibm.com>, Keith Busch <kbusch@kernel.org>,
- WANG Xuerui <git@xen0n.name>, Hyman Huang <yong.huang@smartx.com>,
- Stefan Berger <stefanb@linux.vnet.ibm.com>,
- Michael Rolnik <mrolnik@gmail.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
- Markus Armbruster <armbru@redhat.com>,
- Sriram Yagnaraman <sriram.yagnaraman@ericsson.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
- Ani Sinha <anisinha@redhat.com>, Halil Pasic <pasic@linux.ibm.com>,
- Jesper Devantier <foss@defmacro.it>, Laurent Vivier <laurent@vivier.eu>,
- Peter Maydell <peter.maydell@linaro.org>, Igor Mammedov
- <imammedo@redhat.com>, kvm@vger.kernel.org,
- =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>, Fam Zheng
- <fam@euphon.net>, qemu-s390x@nongnu.org, Hanna Reitz <hreitz@redhat.com>,
- Nicholas Piggin <npiggin@gmail.com>, Eduardo Habkost <eduardo@habkost.net>,
- Laurent Vivier <lvivier@redhat.com>, Rob Herring <robh@kernel.org>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, qemu-block@nongnu.org,
- qemu-ppc@nongnu.org, Daniel Henrique Barboza <danielhb413@gmail.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
- "Michael S. Tsirkin" <mst@redhat.com>, Fabiano Rosas <farosas@suse.de>,
- Helge Deller <deller@gmx.de>, Dmitry Fleytman <dmitry.fleytman@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Akihiko Odaki <akihiko.odaki@daynix.com>,
- Marcelo Tosatti <mtosatti@redhat.com>,
- David Gibson <david@gibson.dropbear.id.au>,
- Aurelien Jarno <aurelien@aurel32.net>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Yanan Wang <wangyanan55@huawei.com>, Peter Xu <peterx@redhat.com>,
- Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>,
- Klaus Jensen <its@irrelevant.dk>,
- Jean-Christophe Dubois <jcd@tribudubois.net>,
- Jason Wang <jasowang@redhat.com>
-References: <20240910221606.1817478-1-pierrick.bouvier@linaro.org>
- <20240910221606.1817478-2-pierrick.bouvier@linaro.org>
- <zkyoryho5alnyirnl7ulvh5y6tkty6koccgeygmve42uml7glu@37rkdodtlx4f>
- <bwo43ms2wi6vbeqhlc7qjwmw5jyt2btxvpph3lqn7tfol4srjf@77yusngzs6wh>
- <10d6d67a-32f6-40fc-aba9-c62a74d9d98d@maciej.szmigiero.name>
- <20240911125126.GS1450@redhat.com>
- <c62bed1a-a13d-49eb-aec2-54bfe78dd1e5@redhat.com>
-From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-In-Reply-To: <c62bed1a-a13d-49eb-aec2-54bfe78dd1e5@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::529;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-pg1-x529.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
+ envelope-from=fea.wang@sifive.com; helo=mail-pf1-x42d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -145,67 +101,29 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 9/11/24 09:13, Thomas Huth wrote:
-> On 11/09/2024 14.51, Richard W.M. Jones wrote:
->> On Wed, Sep 11, 2024 at 02:46:18PM +0200, Maciej S. Szmigiero wrote:
->>> On 11.09.2024 14:37, Eric Blake wrote:
->>>> On Wed, Sep 11, 2024 at 07:33:59AM GMT, Eric Blake wrote:
->>>>> On Tue, Sep 10, 2024 at 03:15:28PM GMT, Pierrick Bouvier wrote:
->>>>>> Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
->>>>>> ---
->>>>>
->>>>> A general suggestion for the entire series: please use a commit
->>>>> message that explains why this is a good idea.  Even something as
->>>>> boiler-plate as "refer to commit XXX for rationale" that can be
->>>>> copy-pasted into all the other commits is better than nothing,
->>>>> although a self-contained message is best.  Maybe:
->>>>>
->>>>> This patch is part of a series that moves towards a consistent use of
->>>>> g_assert_not_reached() rather than an ad hoc mix of different
->>>>> assertion mechanisms.
->>>>
->>>> Or summarize your cover letter:
->>>>
->>>> Use of assert(false) can trip spurious control flow warnings from some
->>>> versions of gcc:
->>>> https://lore.kernel.org/qemu-devel/54bb02a6-1b12-460a-97f6-3f478ef766c6@linaro.org/
->>>> Solve that by unifying the code base on g_assert_not_reached()
->>>> instead.
->>>>
->>>
->>> If using g_assert_not_reached() instead of assert(false) silences
->>> the warning about missing return value in such impossible to reach
->>> locations should we also be deleting the now-unnecessary "return"
->>> statements after g_assert_not_reached()?
->>
->> Although it's unlikely to be used on any compiler that can also
->> compile qemu, there is a third implementation of g_assert_not_reached
->> that does nothing, see:
->>
->> https://gitlab.gnome.org/GNOME/glib/-/blob/927683ebd94eb66c0d7868b77863f57ce9c5bc76/glib/gtestutils.h#L269
-> 
-> That's only in the #ifdef G_DISABLE_ASSERT case ... and we forbid that in
-> QEMU, see osdep.h:
-> 
-> #ifdef G_DISABLE_ASSERT
-> #error building with G_DISABLE_ASSERT is not supported
-> #endif
-> 
-> So in QEMU, g_assert_not_reached() should always abort.
-> 
->    Thomas
-> 
+The follow-up transactions may use the data in the attribution, so keep
+the value of attribution from the function parameter just as
+flatview_translate() above.
 
-Yes indeed.
+Signed-off-by: Fea.Wang <fea.wang@sifive.com>
+---
+ system/physmem.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-For further information:
+diff --git a/system/physmem.c b/system/physmem.c
+index d71a2b1bbd..dc1db3a384 100644
+--- a/system/physmem.c
++++ b/system/physmem.c
+@@ -3274,7 +3274,7 @@ void *address_space_map(AddressSpace *as,
+         bounce->len = l;
+ 
+         if (!is_write) {
+-            flatview_read(fv, addr, MEMTXATTRS_UNSPECIFIED,
++            flatview_read(fv, addr, attrs,
+                           bounce->buffer, l);
+         }
+ 
+-- 
+2.34.1
 
-g_assert_not_reached() expand to g_assertion_message_expr(), [1]
-which is a function marked noreturn [2][3], so indeed, it always abort.
-
-[1] 
-https://gitlab.gnome.org/GNOME/glib/-/blob/927683ebd94eb66c0d7868b77863f57ce9c5bc76/glib/gtestutils.h#L274
-[2] 
-https://gitlab.gnome.org/GNOME/glib/-/blob/927683ebd94eb66c0d7868b77863f57ce9c5bc76/glib/gtestutils.h#L592
-[3] https://docs.gtk.org/glib/macros.html#compiler
 
