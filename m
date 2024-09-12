@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80ECCEE645B
-	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Sep 2024 07:47:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7602EE645B
+	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Sep 2024 07:47:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1soeRW-0005O9-Tm; Thu, 12 Sep 2024 03:40:42 -0400
+	id 1soeVB-0004k4-8j; Thu, 12 Sep 2024 03:44:29 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1soeQf-0001jf-1J
- for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 03:39:49 -0400
-Received: from mail-pg1-x52f.google.com ([2607:f8b0:4864:20::52f])
+ id 1soeRc-0005x0-I7
+ for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 03:40:48 -0400
+Received: from mail-oi1-x22c.google.com ([2607:f8b0:4864:20::22c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1soeQc-0000DZ-0Y
- for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 03:39:48 -0400
-Received: by mail-pg1-x52f.google.com with SMTP id
- 41be03b00d2f7-7db238d07b3so384532a12.2
- for <qemu-riscv@nongnu.org>; Thu, 12 Sep 2024 00:39:45 -0700 (PDT)
+ id 1soeRa-0000r9-MM
+ for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 03:40:48 -0400
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-3e034fac53bso246569b6e.3
+ for <qemu-riscv@nongnu.org>; Thu, 12 Sep 2024 00:40:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726126784; x=1726731584; darn=nongnu.org;
+ d=linaro.org; s=google; t=1726126845; x=1726731645; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JPBETK2XAIe21YqE62iAjxbH8O1+L7jgUq9LFf3cER8=;
- b=bZwc2hn9D6Qh1MmP0MXCoeeXRB+MtHSURnez3ynG0kvlqSfeOOjdyHOLkPcUJzaHIS
- uFa9TdvSEDRq/nh3Rv0vJ4KhJnbCEr7mg4cHz3H2TWh5ypyuCtSOfwf2nJgF7w85mWp8
- NeCYOo5u6q5JZatGtzuFkBMe31hh3WGmM+tC4uOrSx0nc11gDGqvvudzhd11ibdMVJaT
- aE6YFEIZc+aWgzOw+Pk8komueSG1s5u7PpuwOLHb2wiHn5/tZncWKwD/3zd6ntu6/qUA
- xUySvwJPJLMAhNnY+01r8pL5jv3Z1hii7P6j2moJFzlCHQ4UVdnMpu2n/dKUdr+VrRHx
- IARA==
+ bh=G15/cfLWuhy58D3S6VTY2yyYFPoVOBpPVm7OgoLv/9Y=;
+ b=zp+iAnBs+pJfkWWX51N10LVn3547RjHyHj3Y72jwh0FDAtqC4FFZfYM2hDNY0fMvJS
+ 7wZqzaFxOQGoHLDLtc8gZRUR8qzqk+m9AF2vs19OSFEHlv0jOIyLRO0OzNznCLl/EiYE
+ 2rSTIevA7j7j3c1+pDApIHOHsCI93RW/pKY11X//h04nM7OUtPb76rg/+5+xXC7rPcqG
+ R5r5fixSICRoVcofLnd+LqHsnCGXEUg+r7PQeUKkZnHdbbXuia6ZDBrLLf3HVnOFfD+C
+ Gaai9Y1K0hbb2dvRxXWKuxrJYvpKS3+WlstOYdLv/rNW9g2bCsdU7syrNE+SPNKw4pTM
+ TVBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726126784; x=1726731584;
+ d=1e100.net; s=20230601; t=1726126845; x=1726731645;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=JPBETK2XAIe21YqE62iAjxbH8O1+L7jgUq9LFf3cER8=;
- b=qGHNhYaIGbs+dlcYwdIYddYz+DaQQUeVvmu8hqs6EeIJhyWu+sf1RWhhy2wwpz/iBq
- 3LfSvvcmeUdpY8EuxqdEtSXjbnsxO7RZpdykr3ze+oBxEixN/K9XPwwDalaKUyh5dUZT
- C24j+kF6En+YCxnwG83SJDPxkaFOboscfpmEy+itATIAiDk6Df+g2Fo7+8H9doZSCnS5
- 9p8huVm/WFXojibL8yEQcf9R4jeSio+nksHgJipL2pSPJbxG97lCB5qflWXNMmJYkJ94
- 4OihU0PCOMpHs/0xNzAfWuR7fuOOx1ROxywOEF2Pcmo7StvytXatFh8nS6XBCgcpTB0W
- ntrg==
+ bh=G15/cfLWuhy58D3S6VTY2yyYFPoVOBpPVm7OgoLv/9Y=;
+ b=W/Vh3WUfGzaNfcEETKPh9K5FJwxigJv+8PFxxHBe4l9qS7dBjs+uLuVhtMJto6rP7j
+ fROmjZIqZgbNH3OJNhzZbWMkGvH5NhjNoe4IZswjFgt1OgiVJbU+Ij0XclL6kFkxBhuG
+ SGEwx1S9vwOpo1aHPxoPYyARYXgnbhjjLRueSgbQ+haC6XpXYeXsj3v1cJ/hX5JNdaMb
+ DFhs9y3/bkeaAiX32yR64/vwmKj+Gbiods0E2LFdm561m3E+CsYDHgBph37OoHSgnL/Q
+ OWemAbdgiQG3whXXNM/OjXs6I2WAFhsTg3X0fz2lwg3tb7TcjFZ6SEMGCSZ+a4Yctdyb
+ FTbw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUgL+k5JNEpsLudgCbKhkc5TRwTi2MmTkaO+gQ+PkcfEzDomvzjuo/D+OEydpreW0owcxcH8kNDkACK@nongnu.org
-X-Gm-Message-State: AOJu0YyROz2XDYTq5SHu7prl5cZ51bXFw5o3SkPwjRg6OydQnlOJHZd8
- 9ov3sKZoiH5pcTNwfICOQtXdUcI0EvbItLM2nYwZRBt1yD3R9Jnk89d1KjfNEdw=
-X-Google-Smtp-Source: AGHT+IE8nod63m/5RXrta+YpJQqaG3YPkY5+/q44EiQGD+6nDtI41YYUwLPx+yvQ/t0TsoamRCJlww==
-X-Received: by 2002:a05:6a21:648c:b0:1cf:354e:93df with SMTP id
- adf61e73a8af0-1cf75ec5406mr2741834637.4.1726126784600; 
- Thu, 12 Sep 2024 00:39:44 -0700 (PDT)
+ AJvYcCXo8Cjsz8DqYJnWJyL07FZbED7eOPgGCsD7DLlwIK86zUOHVfjui1C4f71+7+RE5HJVh520oNBz8YZ9@nongnu.org
+X-Gm-Message-State: AOJu0YyIlROQVstbV3e6iH5u9Nm55kg4L57u5UWQgCMdLzdbrLuzoa28
+ wqF+ancVQOJaAGep1SB8sJiGLyUMf3zmCpYfyYLsUuY0rZ0GBCxfaDRt5GLBU+k=
+X-Google-Smtp-Source: AGHT+IETN6rcEOkN5n0lmGk313YArCk9WXbSbiIwWQ/b2J6sYsWxK5jf+hG5cA2W/PAz8ROKcimuCw==
+X-Received: by 2002:a05:6808:448a:b0:3d6:3450:7fe0 with SMTP id
+ 5614622812f47-3e071a835ffmr1063495b6e.9.1726126845522; 
+ Thu, 12 Sep 2024 00:40:45 -0700 (PDT)
 Received: from linaro.vn.shawcable.net ([2604:3d08:9384:1d00::9633])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-7db1fb9ad87sm983458a12.6.2024.09.12.00.39.42
+ 41be03b00d2f7-7db1fb9ad87sm983458a12.6.2024.09.12.00.40.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Sep 2024 00:39:44 -0700 (PDT)
+ Thu, 12 Sep 2024 00:40:44 -0700 (PDT)
 From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Jason Wang <jasowang@redhat.com>,
@@ -106,18 +106,18 @@ Cc: Jason Wang <jasowang@redhat.com>,
  David Gibson <david@gibson.dropbear.id.au>, Fam Zheng <fam@euphon.net>,
  Weiwei Li <liwei1518@gmail.com>, Markus Armbruster <armbru@redhat.com>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH v2 07/48] hw/watchdog: replace assert(0) with
+Subject: [PATCH v2 30/48] hw/pci-host: remove break after
  g_assert_not_reached()
-Date: Thu, 12 Sep 2024 00:38:40 -0700
-Message-Id: <20240912073921.453203-8-pierrick.bouvier@linaro.org>
+Date: Thu, 12 Sep 2024 00:39:03 -0700
+Message-Id: <20240912073921.453203-31-pierrick.bouvier@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240912073921.453203-1-pierrick.bouvier@linaro.org>
 References: <20240912073921.453203-1-pierrick.bouvier@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52f;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-pg1-x52f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::22c;
+ envelope-from=pierrick.bouvier@linaro.org; helo=mail-oi1-x22c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -146,25 +146,31 @@ assertion mechanisms.
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Richard W.M. Jones <rjones@redhat.com>
 Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 ---
- hw/watchdog/watchdog.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ hw/pci-host/gt64120.c | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/hw/watchdog/watchdog.c b/hw/watchdog/watchdog.c
-index 955046161bf..d0ce3c4ac55 100644
---- a/hw/watchdog/watchdog.c
-+++ b/hw/watchdog/watchdog.c
-@@ -85,7 +85,7 @@ void watchdog_perform_action(void)
-         break;
+diff --git a/hw/pci-host/gt64120.c b/hw/pci-host/gt64120.c
+index 33607dfbec4..58557416629 100644
+--- a/hw/pci-host/gt64120.c
++++ b/hw/pci-host/gt64120.c
+@@ -689,7 +689,6 @@ static void gt64120_writel(void *opaque, hwaddr addr,
+     case GT_PCI0_CFGDATA:
+         /* Mapped via in gt64120_pci_mapping() */
+         g_assert_not_reached();
+-        break;
  
-     default:
--        assert(0);
-+        g_assert_not_reached();
-     }
- }
+     /* Interrupts */
+     case GT_INTRCAUSE:
+@@ -933,7 +932,6 @@ static uint64_t gt64120_readl(void *opaque,
+     case GT_PCI0_CFGDATA:
+         /* Mapped via in gt64120_pci_mapping() */
+         g_assert_not_reached();
+-        break;
  
+     case GT_PCI0_CMD:
+     case GT_PCI0_TOR:
 -- 
 2.39.2
 
