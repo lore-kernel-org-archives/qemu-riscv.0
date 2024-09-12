@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F865EE645D
-	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Sep 2024 07:52:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CF02EE645B
+	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Sep 2024 07:52:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1soeWX-0004s6-4B; Thu, 12 Sep 2024 03:45:53 -0400
+	id 1soeVX-0007DT-Jk; Thu, 12 Sep 2024 03:44:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1soeRz-0008KX-0i
- for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 03:41:11 -0400
-Received: from mail-ot1-x32a.google.com ([2607:f8b0:4864:20::32a])
+ id 1soeS3-0000NE-Sc
+ for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 03:41:16 -0400
+Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1soeRw-00010d-BV
- for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 03:41:10 -0400
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-710d9b33303so374721a34.3
- for <qemu-riscv@nongnu.org>; Thu, 12 Sep 2024 00:41:07 -0700 (PDT)
+ id 1soeS1-000134-3U
+ for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 03:41:15 -0400
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-7193010d386so93211b3a.1
+ for <qemu-riscv@nongnu.org>; Thu, 12 Sep 2024 00:41:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726126866; x=1726731666; darn=nongnu.org;
+ d=linaro.org; s=google; t=1726126872; x=1726731672; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=e2xm8XElPGDNfZprtVH37Ayr0VHkHPtJKuU1ivlIVl4=;
- b=tDc7jrQ91xfnqBZoBsVqFP3F6i0ks3dc9guHxNxCjoZq0ZIwzfuUm/iwhmlJXCC9vN
- pijPnFltG5o3NutM2uqN4LruRQ9tUuOauizg3hvsEWXxMxkzyvlClujghSf+yKzuGCbq
- Gr0vX/l2g5g9O/dygnKSDHkEhpnvwqsNHUBmePR7H5JHCXJ/MmHsXz3ZuBZIWiWx2blF
- L493EuaCCJCr991Q4FGW1UMhSxn0Y9/RyzaFc4bxllYIhixZfnCd7eCYBl4cUZc8qCde
- RWhEJWNkrfxt9qJsuFFuCNHv4KS17tUwcLX3CTw670CAetn9a5ap0G79wLTBQDLP26i3
- l4BA==
+ bh=0Q1mMHu0qY1Mg7YdLUybGWIueKQg5CpgXLD+/9rtI1o=;
+ b=nivWtVvWkGoVDdKsVO31t6fGY4NRzhW4EqlT9kbOuYSb4YWVaG+4E72wPB/tV1fKxI
+ 0RkYLDgbl6lrwsAbf+bEnlXkl2QGAdPWSKOiPGnBPFY0xdn+Ee2bIHMg/uoyaB7T1524
+ d9MjKKtHkwuzDnaKUKFs1kRRn2DujPwESIdIv8ZLSaavlN5MUVk7ZP2GmSSjY9Vn3n3T
+ p54niT3JStdQvOCFuY1eESk1Di814q7Z8lz71JNQpZ5sciEneMKc0biXT1X4ZYir6z4o
+ h8YF6uFlJAdrERwe7ErJSE3RwCrRhL7RHjKUvNxiFVCPosMUwYoFKh1C7wkxC+KEErXh
+ GHpg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726126866; x=1726731666;
+ d=1e100.net; s=20230601; t=1726126872; x=1726731672;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=e2xm8XElPGDNfZprtVH37Ayr0VHkHPtJKuU1ivlIVl4=;
- b=iBI3E+dL7snsYvLLWtPVo8k7CL9R4FGvaJxQchOUWZWvhAaiZZ8VB08uyZekEh11B7
- dTgSCcaGhsHqf6y3hooVESuz8EcLZ3pV/QrAWGmAz3/QVv1a9e43FurceXMJgvdDcmsH
- w22k7+MbRQ0mJrKeA/ZXtEssZomTHalu2gHH8UhPQbUWNRXPVrSz+KhydpjebHFEC7zY
- l2r+CCSqJ4ETEfTi5yTMlpQGV32m8oLJJKoeQr6+kuOnkukqTBjwGNz+m6ijnMCriR1i
- DlsvsvzPtd65KcGASZNHV0BR+zuGq07wXmDCBcvXBSiwMQF8NPVMQybtxPsHutqsYx4r
- jp/w==
+ bh=0Q1mMHu0qY1Mg7YdLUybGWIueKQg5CpgXLD+/9rtI1o=;
+ b=sNr2OzkUrP0dDZoHYyORBKpQHXhEcsehGzKWWcpgrOq5yMQecYeb4RucAhAQEk80Yy
+ By/AoxciDRiEi/MA5ErfxeYvDpEfSJ2zy9Nt/MCV6t79B5k1Oro5rElKSLef7kdKMQm1
+ KqRU7Hz2R9mH9LMC3GqisoGMnB2OR6865/JHlz4tIVgFnJZFY7JpBFqXROB2Bmm6+34G
+ +YWq14MGRuCw7qAgpGxmkuldxQEQkhnkm9otmYl248ZmB4p+yVZw0i0+U5/U9pLXdyfB
+ FS++JIYxmdSqlfGOGBdOTrz+PTOHOa5KUXbafQ/UJXvIPzasg4c0Lg9PxmPxGpgQIVOJ
+ Xg8A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUIDK5vBJKaxkykSS8QFpE2EofUyT2QW/bzNSUaQl2+nnbxkjszhCooYkP5hDa5FTRVpNXwguWZqfej@nongnu.org
-X-Gm-Message-State: AOJu0YxmPv1vThObigKqDX2gi1egn29P3YIsfgxFBn98YlxB0qyP6i8Z
- mfSmM6i4KcsTg10Xa7ICDvEY5+G6NM2Llra4pPGMLPCgUbBdw72577nMEzu9T8c=
-X-Google-Smtp-Source: AGHT+IG2bps8N5RHQbEXbK5LIaAzGTJ/B29Jpl6a6SJzD8g0CGD/dFT1EoXlmzuLP4NSZ0I+DvMqHw==
-X-Received: by 2002:a05:6830:6e89:b0:710:f926:708a with SMTP id
- 46e09a7af769-711094be6dcmr1645437a34.31.1726126866494; 
- Thu, 12 Sep 2024 00:41:06 -0700 (PDT)
+ AJvYcCVCPXuvg6AwNEJEB4I8NpK36pYONtRcaiBtoN2fxINNG4mgZ0Y9SSLKj47p8kSEymjNzo8tyn3R86UG@nongnu.org
+X-Gm-Message-State: AOJu0YygjLbSmZYalEkQlyKTCG9/ktwW5CyJedo98LfDjVC/bcbJ4lC9
+ ZEe5JuZjJNC7DayYh2XfFj8/rrwsXysZZ/UAO41muosa+cfE+jA58OkX2cFvM7M=
+X-Google-Smtp-Source: AGHT+IE7t7Xs2KH5JUIaVOe68OuWPwNTouEEYSj6TZqCiSQvTjYgxD2YaXeBSDQ2jSGG5jMqgQ5hKg==
+X-Received: by 2002:a05:6a00:1906:b0:718:532f:5a3 with SMTP id
+ d2e1a72fcca58-7192607ec83mr3028275b3a.7.1726126871623; 
+ Thu, 12 Sep 2024 00:41:11 -0700 (PDT)
 Received: from linaro.vn.shawcable.net ([2604:3d08:9384:1d00::9633])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-7db1fb9ad87sm983458a12.6.2024.09.12.00.41.04
+ 41be03b00d2f7-7db1fb9ad87sm983458a12.6.2024.09.12.00.41.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Sep 2024 00:41:05 -0700 (PDT)
+ Thu, 12 Sep 2024 00:41:11 -0700 (PDT)
 From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Jason Wang <jasowang@redhat.com>,
@@ -106,17 +106,16 @@ Cc: Jason Wang <jasowang@redhat.com>,
  David Gibson <david@gibson.dropbear.id.au>, Fam Zheng <fam@euphon.net>,
  Weiwei Li <liwei1518@gmail.com>, Markus Armbruster <armbru@redhat.com>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH v2 38/48] tcg/loongarch64: remove break after
- g_assert_not_reached()
-Date: Thu, 12 Sep 2024 00:39:11 -0700
-Message-Id: <20240912073921.453203-39-pierrick.bouvier@linaro.org>
+Subject: [PATCH v2 40/48] hw/hyperv: remove return after g_assert_not_reached()
+Date: Thu, 12 Sep 2024 00:39:13 -0700
+Message-Id: <20240912073921.453203-41-pierrick.bouvier@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240912073921.453203-1-pierrick.bouvier@linaro.org>
 References: <20240912073921.453203-1-pierrick.bouvier@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::32a;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-ot1-x32a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::429;
+ envelope-from=pierrick.bouvier@linaro.org; helo=mail-pf1-x429.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -143,24 +142,52 @@ This patch is part of a series that moves towards a consistent use of
 g_assert_not_reached() rather than an ad hoc mix of different
 assertion mechanisms.
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 ---
- tcg/loongarch64/tcg-target.c.inc | 1 -
- 1 file changed, 1 deletion(-)
+ hw/hyperv/hyperv_testdev.c | 1 -
+ hw/hyperv/vmbus.c          | 3 ---
+ 2 files changed, 4 deletions(-)
 
-diff --git a/tcg/loongarch64/tcg-target.c.inc b/tcg/loongarch64/tcg-target.c.inc
-index 5b7ed5c176b..973601aec36 100644
---- a/tcg/loongarch64/tcg-target.c.inc
-+++ b/tcg/loongarch64/tcg-target.c.inc
-@@ -650,7 +650,6 @@ static int tcg_out_setcond_int(TCGContext *s, TCGCond cond, TCGReg ret,
+diff --git a/hw/hyperv/hyperv_testdev.c b/hw/hyperv/hyperv_testdev.c
+index ef50e490c4e..a630ca70476 100644
+--- a/hw/hyperv/hyperv_testdev.c
++++ b/hw/hyperv/hyperv_testdev.c
+@@ -89,7 +89,6 @@ static TestSintRoute *sint_route_find(HypervTestDev *dev,
+         }
+     }
+     g_assert_not_reached();
+-    return NULL;
+ }
  
-     default:
-         g_assert_not_reached();
--        break;
+ static void sint_route_destroy(HypervTestDev *dev,
+diff --git a/hw/hyperv/vmbus.c b/hw/hyperv/vmbus.c
+index df47aae72b8..be7d3172c4f 100644
+--- a/hw/hyperv/vmbus.c
++++ b/hw/hyperv/vmbus.c
+@@ -1890,7 +1890,6 @@ static bool complete_create_gpadl(VMBus *vmbus)
      }
  
-     return ret | flags;
+     g_assert_not_reached();
+-    return false;
+ }
+ 
+ static void handle_gpadl_teardown(VMBus *vmbus,
+@@ -1947,7 +1946,6 @@ static bool complete_teardown_gpadl(VMBus *vmbus)
+     }
+ 
+     g_assert_not_reached();
+-    return false;
+ }
+ 
+ static void handle_open_channel(VMBus *vmbus, vmbus_message_open_channel *msg,
+@@ -2021,7 +2019,6 @@ static bool complete_open_channel(VMBus *vmbus)
+     }
+ 
+     g_assert_not_reached();
+-    return false;
+ }
+ 
+ static void vdev_reset_on_close(VMBusDevice *vdev)
 -- 
 2.39.2
 
