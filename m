@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6D43EE645A
-	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Sep 2024 07:44:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A48CEE6457
+	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Sep 2024 07:44:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1soeSH-0001z1-9p; Thu, 12 Sep 2024 03:41:29 -0400
+	id 1soeSQ-0003BK-55; Thu, 12 Sep 2024 03:41:38 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1soeRR-0004vQ-Ma
- for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 03:40:37 -0400
-Received: from mail-pf1-x434.google.com ([2607:f8b0:4864:20::434])
+ id 1soeRW-0005OX-Uk
+ for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 03:40:42 -0400
+Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1soeRO-0000iY-4H
- for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 03:40:37 -0400
-Received: by mail-pf1-x434.google.com with SMTP id
- d2e1a72fcca58-7191f58054aso539742b3a.0
- for <qemu-riscv@nongnu.org>; Thu, 12 Sep 2024 00:40:33 -0700 (PDT)
+ id 1soeRS-0000mR-RJ
+ for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 03:40:42 -0400
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-71788bfe60eso454762b3a.1
+ for <qemu-riscv@nongnu.org>; Thu, 12 Sep 2024 00:40:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726126832; x=1726731632; darn=nongnu.org;
+ d=linaro.org; s=google; t=1726126837; x=1726731637; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IfzxXhYdexHV2ki07pmnRNhBL9e3UdCDUhFFW4Nxwh4=;
- b=ZDF3qBj0Pph5Uh2v2h3d95xTtF1770hS6+EcEwy5DRlTjnPdrr23wYreNgk6+Nc+SE
- Y/qAM79ixw0tpQAh1RTExdZ7OphGE5pwhBOMxip0E75Qelegp96yihztA1MUxipK4M2i
- k1C8d+pEs5wk88oAaEnZHuxPFQYUhv1WCMSDGH2OLJJpatYcNpajU2+FqrhpBC+4YoMP
- BySoyvJhsIuhyZ5dt6lxlasyrvtexPI42POQBYxFVQqSMeU8Opgf+q6cju1BP6DGllIR
- Y5UKYryVPdRuS2SCzHAs/xdHIUXPi2bu+PFMTMwxXUd84n+THqSu7a+Rgy8XcyTFa7td
- ADZA==
+ bh=T4cUmRJxiWI+4P3xFKTX4Sejqig+SO3wUE6UW4QGJvI=;
+ b=fcgkpVZGxKI02oZUtYH+iFDXCDs1Vac3Tui7n5qX/7FFq34O6oD8QG8aoyF/qJ4PEg
+ 5RCApaNytQWOPKt05sgT0NLYfVW/RSBxnxNHMeF8eSbVO4OH93GH77P7uEq0InUhC0pe
+ ZzNHfI9sp1pEUf9A3Gac7PJb47EOQ3MrlW8KHO9TtuwAVSnybzGp3cHvK6a3FsfcwFzn
+ uEIBhvg6pJXeAKDjjPvmJWL3dRBdHzWuoZnjUytLqd79TDTHzyxEwQ/ydEoBMzCy9FTr
+ hxUHySymJeJ5MpR7yWwxNtKI30OMPnQfB5QJqn7q8S+EAJOF6bZi5gJZDV0C9l5g8nRK
+ Eyew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726126832; x=1726731632;
+ d=1e100.net; s=20230601; t=1726126837; x=1726731637;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=IfzxXhYdexHV2ki07pmnRNhBL9e3UdCDUhFFW4Nxwh4=;
- b=sOJDMfpNWMwgn1qxSfLSNhhO69tzM26Z5MuxFCU5r4SCcw2E+2fkGRPPHtEE+LOE83
- lqfvZjKkdO4224wZJkArapbJ9/JxHvLQD+1TMQlKh882m9syNQc9969Mcfk3YfkFyZ7X
- x988cqtHSVj2f2PcZGL77eBkv7JyfaKr/EjIgPsx9E1bxTMmb7b05JgGmesvVTSNQGhv
- tz6a60Wt2b32zKDImRIQrjuSnLvjjutx06YiTVf0A1mv4XFHiTSZurAMRVpcvpxcsoQX
- jrOi00MoB4FRDrkw4ZRg5TLWBpQbYRwGcEJZDOQCRdk8ekd5+CSq6PGG9Pcd3DwFSyQN
- yocA==
+ bh=T4cUmRJxiWI+4P3xFKTX4Sejqig+SO3wUE6UW4QGJvI=;
+ b=g4n6HDrGNhXFACyc9twV5FgdFsIeMtiR18/v5N9MAA7C7npZhAp4CU7Ovq+RTgV1F8
+ Efshgwus3hMsb2x1OKzZpmO2jhU1s9quDFIT1bYpEb+k8R/UBkwXRPZS+a/oaSRUllRF
+ I9IsegLRNeV6pAIUDEjkOnYZySR93lnfBC7N66p1sVMekUzThaIAXWD1WmkTU2nZmVX3
+ TRsaqvoaMq04sAbQTMtf4EsNrrqaIegkxnSrdk7qUHvlrZQ2vb3d6hr3VG0HRzcHjiKR
+ lsTuNSXveJ6FDoOZQAUxROsdKq4sq+U1HHtV1sy1/D4kzCxEIsdpU/Msio3a/CJeZNAX
+ PjAw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXSaez+TWwLLE92xOiYzJUOPRSZl2wdtMooM3RhAJebDy7EmJt1MHTBoeMb07iKY241EtKZrjI1Nnsv@nongnu.org
-X-Gm-Message-State: AOJu0Yyq6ObADdbun0LlavYfVuTsTw1w0BUbvzmcwm3BDcAmAtSl2W07
- hW6NhGHkqhto75aXxJOaL1NjueT+XG2AIdAPZhzmVnBuFZN1gsqB4oOALMcyN+U=
-X-Google-Smtp-Source: AGHT+IG+6sarLCJnrBKoRA745sjlTCC47Zh2hr0Oj5OjLFhFesKWWQAzOCLBOFG+diDbRtfIiv9TYQ==
-X-Received: by 2002:a05:6a20:cd0e:b0:1cf:6c65:b736 with SMTP id
- adf61e73a8af0-1cf76358fa6mr2638356637.40.1726126832155; 
- Thu, 12 Sep 2024 00:40:32 -0700 (PDT)
+ AJvYcCUokVPUH3fIDMSyZcRPcakcuX7XVFsO0KXVcVNxyeMfRrNTIcG4CzcZ9NZ1UuW08aDi/sf+f+CUIun9@nongnu.org
+X-Gm-Message-State: AOJu0YwhE36ucmd2wRL4IWVd9gyeo17nA9Q05Iw01dZZ69AOtQOokt5Q
+ hIGOehvYGc+z7XP8lVq9/gJjT8m5ikFunvajOipcZ6TIV6xnpnnuo+Z1SjhwABk=
+X-Google-Smtp-Source: AGHT+IHas1oukAOaDNvjAJwoGhr1NcYPZnCTY9G18MbXXKsVaftCFarfJ0eM/UXI1bph8rnTKBJZdQ==
+X-Received: by 2002:a05:6a20:c6c6:b0:1c4:9f31:ac9e with SMTP id
+ adf61e73a8af0-1cf764c2648mr2589519637.42.1726126837349; 
+ Thu, 12 Sep 2024 00:40:37 -0700 (PDT)
 Received: from linaro.vn.shawcable.net ([2604:3d08:9384:1d00::9633])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-7db1fb9ad87sm983458a12.6.2024.09.12.00.40.29
+ 41be03b00d2f7-7db1fb9ad87sm983458a12.6.2024.09.12.00.40.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Sep 2024 00:40:31 -0700 (PDT)
+ Thu, 12 Sep 2024 00:40:36 -0700 (PDT)
 From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Jason Wang <jasowang@redhat.com>,
@@ -106,23 +106,24 @@ Cc: Jason Wang <jasowang@redhat.com>,
  David Gibson <david@gibson.dropbear.id.au>, Fam Zheng <fam@euphon.net>,
  Weiwei Li <liwei1518@gmail.com>, Markus Armbruster <armbru@redhat.com>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH v2 25/48] block: remove break after g_assert_not_reached()
-Date: Thu, 12 Sep 2024 00:38:58 -0700
-Message-Id: <20240912073921.453203-26-pierrick.bouvier@linaro.org>
+Subject: [PATCH v2 27/48] hw/gpio: remove break after g_assert_not_reached()
+Date: Thu, 12 Sep 2024 00:39:00 -0700
+Message-Id: <20240912073921.453203-28-pierrick.bouvier@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240912073921.453203-1-pierrick.bouvier@linaro.org>
 References: <20240912073921.453203-1-pierrick.bouvier@linaro.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::434;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-pf1-x434.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42e;
+ envelope-from=pierrick.bouvier@linaro.org; helo=mail-pf1-x42e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -143,25 +144,24 @@ g_assert_not_reached() rather than an ad hoc mix of different
 assertion mechanisms.
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Richard W.M. Jones <rjones@redhat.com>
-Reviewed-by: Kevin Wolf <kwolf@redhat.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 ---
- block/ssh.c | 1 -
+ hw/gpio/nrf51_gpio.c | 1 -
  1 file changed, 1 deletion(-)
 
-diff --git a/block/ssh.c b/block/ssh.c
-index 27d582e0e3d..871e1d47534 100644
---- a/block/ssh.c
-+++ b/block/ssh.c
-@@ -474,7 +474,6 @@ static int check_host_key(BDRVSSHState *s, SshHostKeyCheck *hkc, Error **errp)
-                                        errp);
-         }
+diff --git a/hw/gpio/nrf51_gpio.c b/hw/gpio/nrf51_gpio.c
+index ffc7dff7964..f259be651e1 100644
+--- a/hw/gpio/nrf51_gpio.c
++++ b/hw/gpio/nrf51_gpio.c
+@@ -40,7 +40,6 @@ static bool is_connected(uint32_t config, uint32_t level)
+         break;
+     default:
          g_assert_not_reached();
 -        break;
-     case SSH_HOST_KEY_CHECK_MODE_KNOWN_HOSTS:
-         return check_host_key_knownhosts(s, errp);
-     default:
+     }
+ 
+     return state;
 -- 
 2.39.2
 
