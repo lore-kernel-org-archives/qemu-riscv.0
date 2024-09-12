@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE57AEE6457
-	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Sep 2024 07:47:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A170AEE645B
+	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Sep 2024 07:49:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1soeXO-0001Nu-Rq; Thu, 12 Sep 2024 03:46:46 -0400
+	id 1soeXT-0002FC-0y; Thu, 12 Sep 2024 03:46:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1soeS9-00012a-Si
- for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 03:41:21 -0400
-Received: from mail-il1-x12c.google.com ([2607:f8b0:4864:20::12c])
+ id 1soeSC-0001Nk-8A
+ for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 03:41:24 -0400
+Received: from mail-oi1-x231.google.com ([2607:f8b0:4864:20::231])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1soeS6-00015w-Vf
- for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 03:41:21 -0400
-Received: by mail-il1-x12c.google.com with SMTP id
- e9e14a558f8ab-3a043390030so2662495ab.1
- for <qemu-riscv@nongnu.org>; Thu, 12 Sep 2024 00:41:18 -0700 (PDT)
+ id 1soeSA-000177-CB
+ for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 03:41:23 -0400
+Received: by mail-oi1-x231.google.com with SMTP id
+ 5614622812f47-3e042f4636dso346609b6e.1
+ for <qemu-riscv@nongnu.org>; Thu, 12 Sep 2024 00:41:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726126877; x=1726731677; darn=nongnu.org;
+ d=linaro.org; s=google; t=1726126880; x=1726731680; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pMUYyvkrsw4WRnt3KKvMbrVUL0nLRii9ZhUC+JLdWEA=;
- b=YFJm3xSBHl1ilRBWS9N+e8FIGOt/BcMsDnC0kFQQ3fyQ1lTyRusLEGGmPWB3X9Gk8G
- KTZDvdAZv1BM2nXSh5065k/dGaH5DwcQdb4chVYay+/ZxbF5WqRTtFJiPHvHNklejyNe
- 3DbmBeBJ3t4OMfmruBrFIeEFEN1XQuhWcXgKvjZTskEq4fUs+QgEV3jXrSsTW92bxZBm
- 5UNk/f7M4wW+xr2FBdVVdR3ojW+tHPxmpCd0eF3ZzEhdAhjLGkBaEyjZ75lvHOoFBg25
- rMSpDBRNv8GP/Rthp5/rHWw2DaHdfaM7hwDRiFwPkew/RNkIq7w+wEVT1zD+NeWyHNnP
- EuCA==
+ bh=ufez9dB+YBOc+7iflBPh4kX/ooB3/U9U7kq4P7lOFRo=;
+ b=W9T+xQefqZW2iJPzY7Yi866VhWXeH2R0CKurj7+FYdhREkUF3VMXpGcsmghFuhFa1l
+ T3mexpIEiR5+hf1ns3KLYT+w9RgO/DgzBvbOqgkK5uSXhi0//MovGtwwUQCWftxxzloo
+ 2vpIQ34H+5I96p70j4JDj/aMlqwAvMkUAAXgvLkcW2WXB5RIPzshMVvSOM+9tNscETQQ
+ +8PF3dyavH23HL0ueSbOYwR8J9jWxaiQ1htxSnzGYqM7bzzkJ8CfVH9TfnaLarG+QEvJ
+ mJoxayoMRipyqhf/f0dWa229+rXOPYgfhg3J9DOI5UxmO2tWGUNkqcyxCV6MxZfsxDZk
+ m4ww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726126877; x=1726731677;
+ d=1e100.net; s=20230601; t=1726126880; x=1726731680;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pMUYyvkrsw4WRnt3KKvMbrVUL0nLRii9ZhUC+JLdWEA=;
- b=bF9rNpyIJ4Sek6fQPni4ZS2mPz4y+iV1/gQdcyq6zx5ylmN+qVbmhWTJ5ukMHSOzAa
- XJJfW6jzEXXLVWcoCM8MyYVfWAFx3zQ4N5uDN2XLr4i+C1lg//vnFDuxoHAr3Y1Uvms3
- xHk/C3tz2iBy5TZ611jgGT/eQqVuS0z1C5FCY954DPMEEI7Fqb/icQKtSkkI6Hbho0J7
- ONfeUs/mtVYnn+Cwq9M0sn7W106x/DU7BW2WDLhpbzGpmBYF6WOJEnI0uUWE4nrYUbWn
- FvF4/pZBeJUwEuGAtBX8XzWBKMf3svN3lZrGx5IvLfa16GpgghtHpJmwYySpHMtyyHHO
- Dckg==
+ bh=ufez9dB+YBOc+7iflBPh4kX/ooB3/U9U7kq4P7lOFRo=;
+ b=I2WBm8DMFJ2m9d5D3b6X34rkcVop//yDM6FYabXjRqEU4HCaznaQcbTivoAdSCO2UW
+ VcHwdondfW3UvvVQ3B2JT/CYiPtASOGKi8ZAWRxVfGazNZhq0srBtIs2Jp6LX0eN0lDg
+ kPbvRQiLYSKG2bFHoNpBAXl6ru+yZzstHH5wOHPdFhWh5/y0/6+fG0Rn62a1GisTV6ko
+ FFWgVt6eX97Zt9j4XOeCvvAKUxCb6xQOGGEBcux2syNvdD65Nc6hZ4iV8SNPGyPLPBi5
+ CMXvMHRGpMIbNjqU2hFUr0z8ipanGGK3nSMZEKjrDPooma/y3K4RbDAlrKYifVHiNsV4
+ FXgw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWhTbxgYeIfj4jtcNZ81Q3M+XRuaqKx7Fj7AqmOUGwjQpGc2E7F7v0THRG8bvV30T8rpShw7VVNla8f@nongnu.org
-X-Gm-Message-State: AOJu0YyG1JuzANl0Xz7A1oFRIG19t7t9k66a3dxdUdv8orv1bDIiDXaf
- zssaKcBO5LHs36Dzyq2mPptObQo8tNRb8yeTo4diNvwa6B/378qanExE7XgH75Y=
-X-Google-Smtp-Source: AGHT+IHzePrHc9NvGdqaAhT6SIBTHUep9YZZsqe6VCOInwH/5gPcwLaBPPH2x/wVY/X1vhjYzcDUGg==
-X-Received: by 2002:a05:6e02:12e2:b0:39b:20d8:601e with SMTP id
- e9e14a558f8ab-3a0848afb8dmr18701325ab.3.1726126877432; 
- Thu, 12 Sep 2024 00:41:17 -0700 (PDT)
+ AJvYcCWSXIAd28MuZ9dl1SoUfkY5YVnaezD6rMSkdz46uYC4zEHhxan9TR79PTTeCXFuTUdPlUgnFRIZ4fDk@nongnu.org
+X-Gm-Message-State: AOJu0Yyreh8WYPMd5QtyI/u6U0VI/LqdKcesDFbqayCAZxjIBeNqzRIW
+ 2ocGJtnkd6YR323B5BqtH+4+pCCnybmhxD9FU0QKkzJOSBHgvaIOYhWOJOv4S1c=
+X-Google-Smtp-Source: AGHT+IEahP6jvi2FuHplutVqQN81TXossfZA34JXn70LhsQgJakrG7hFdv/bnJa3CeA2ta6y/uKqJg==
+X-Received: by 2002:a05:6808:159f:b0:3e0:4faf:242 with SMTP id
+ 5614622812f47-3e071a9a5fdmr1180584b6e.19.1726126880116; 
+ Thu, 12 Sep 2024 00:41:20 -0700 (PDT)
 Received: from linaro.vn.shawcable.net ([2604:3d08:9384:1d00::9633])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-7db1fb9ad87sm983458a12.6.2024.09.12.00.41.14
+ 41be03b00d2f7-7db1fb9ad87sm983458a12.6.2024.09.12.00.41.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Sep 2024 00:41:17 -0700 (PDT)
+ Thu, 12 Sep 2024 00:41:19 -0700 (PDT)
 From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Jason Wang <jasowang@redhat.com>,
@@ -106,16 +106,16 @@ Cc: Jason Wang <jasowang@redhat.com>,
  David Gibson <david@gibson.dropbear.id.au>, Fam Zheng <fam@euphon.net>,
  Weiwei Li <liwei1518@gmail.com>, Markus Armbruster <armbru@redhat.com>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH v2 42/48] hw/pci: remove return after g_assert_not_reached()
-Date: Thu, 12 Sep 2024 00:39:15 -0700
-Message-Id: <20240912073921.453203-43-pierrick.bouvier@linaro.org>
+Subject: [PATCH v2 43/48] hw/ppc: remove return after g_assert_not_reached()
+Date: Thu, 12 Sep 2024 00:39:16 -0700
+Message-Id: <20240912073921.453203-44-pierrick.bouvier@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240912073921.453203-1-pierrick.bouvier@linaro.org>
 References: <20240912073921.453203-1-pierrick.bouvier@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12c;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-il1-x12c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::231;
+ envelope-from=pierrick.bouvier@linaro.org; helo=mail-oi1-x231.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -144,27 +144,34 @@ assertion mechanisms.
 
 Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 ---
- hw/pci/pci-stub.c | 2 --
- 1 file changed, 2 deletions(-)
+ hw/ppc/ppc.c          | 1 -
+ hw/ppc/spapr_events.c | 1 -
+ 2 files changed, 2 deletions(-)
 
-diff --git a/hw/pci/pci-stub.c b/hw/pci/pci-stub.c
-index c6950e21bd4..3397d0c82ea 100644
---- a/hw/pci/pci-stub.c
-+++ b/hw/pci/pci-stub.c
-@@ -47,13 +47,11 @@ void hmp_pcie_aer_inject_error(Monitor *mon, const QDict *qdict)
- MSIMessage pci_get_msi_message(PCIDevice *dev, int vector)
- {
-     g_assert_not_reached();
--    return (MSIMessage){};
+diff --git a/hw/ppc/ppc.c b/hw/ppc/ppc.c
+index e6fa5580c01..fde46194122 100644
+--- a/hw/ppc/ppc.c
++++ b/hw/ppc/ppc.c
+@@ -267,7 +267,6 @@ static void power9_set_irq(void *opaque, int pin, int level)
+         break;
+     default:
+         g_assert_not_reached();
+-        return;
+     }
  }
  
- uint16_t pci_requester_id(PCIDevice *dev)
- {
-     g_assert_not_reached();
--    return 0;
- }
+diff --git a/hw/ppc/spapr_events.c b/hw/ppc/spapr_events.c
+index 38ac1cb7866..4dbf8e2e2ef 100644
+--- a/hw/ppc/spapr_events.c
++++ b/hw/ppc/spapr_events.c
+@@ -646,7 +646,6 @@ static void spapr_hotplug_req_event(uint8_t hp_id, uint8_t hp_action,
+          * that don't support them
+          */
+         g_assert_not_reached();
+-        return;
+     }
  
- /* Required by ahci.c */
+     if (hp_id == RTAS_LOG_V6_HP_ID_DRC_COUNT) {
 -- 
 2.39.2
 
