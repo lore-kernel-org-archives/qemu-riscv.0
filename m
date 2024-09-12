@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95BEEEE645A
-	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Sep 2024 07:42:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF317EE645A
+	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Sep 2024 07:42:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1soeSO-0002tA-BY; Thu, 12 Sep 2024 03:41:36 -0400
+	id 1soeRl-0006to-Mj; Thu, 12 Sep 2024 03:40:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1soeRL-0004b4-3S
- for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 03:40:34 -0400
-Received: from mail-oi1-x229.google.com ([2607:f8b0:4864:20::229])
+ id 1soeQw-0002xT-HR
+ for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 03:40:10 -0400
+Received: from mail-pg1-x52b.google.com ([2607:f8b0:4864:20::52b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1soeRG-0000bg-KH
- for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 03:40:29 -0400
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-3e042f4636dso346331b6e.1
- for <qemu-riscv@nongnu.org>; Thu, 12 Sep 2024 00:40:17 -0700 (PDT)
+ id 1soeQu-0000Mh-Pn
+ for qemu-riscv@nongnu.org; Thu, 12 Sep 2024 03:40:06 -0400
+Received: by mail-pg1-x52b.google.com with SMTP id
+ 41be03b00d2f7-7d4f85766f0so628147a12.2
+ for <qemu-riscv@nongnu.org>; Thu, 12 Sep 2024 00:40:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726126817; x=1726731617; darn=nongnu.org;
+ d=linaro.org; s=google; t=1726126803; x=1726731603; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=THAU92UrM0dCOcON0qgAWJPM/1rIMc3WLepZV6d4U4w=;
- b=kro1XKv/1q1SZurjp8JX/217lkWYC3UsiqKWG7TIHrM2jIaqofPMYaa45IFn07XX3b
- 34sa5UwVHf6dxJqoxa4blHip/lmXS+ZUwJWJy2/9HA0kLmVsmLkBLjn8CVKLc2yg0a2Q
- Z9vGQ/D8uTbWvCv3JWlK3ixPFKb96ZUM33K8mSIVPS0fUsfyFdOIxgUPgk58xSjqzGHh
- OB5t7UxfoRSk+OSdqWA4uB7JCrl+FSOq4I6h+HtU6KefpjY+EOG8loDuLSUBg33cRtE5
- LdvbebSzFn2Xk3vs2+Rq7uiA/c+X6iHtWx06jtHXnzKG7attIVt9DpAno1z1F28FyS6D
- qU4g==
+ bh=cfrMTIgk5Q+XEJO7A3FTmtoXD8cfHvhd3vsooDA9mV4=;
+ b=k8gum+kPjYFNFvAPXiTFCJbbe1Ts5hb1HKo4X0roduQmWzGLVHZ5zTAEXX6S02PkRc
+ w7AfbmhrkJJqSQPmWy8NcJcBgTitnyfFe8FWetdJxDq48SEeybXgYeFl/r7J9sGU0kOn
+ j7E9YhyWzTCf/SwrWLLm3d1cZk61b+qYt5e236iX/TPpKlyCmyhIsvhCQcZ+UGH0gHpT
+ GllMhDSFjWVAeiumStbicxZ9a75yfI/D/Nnv50qm8OGmT6Hdl49mf3D3Sbn2psiozM4z
+ /2m5j+aGjJQFODuajWbrzcfCKVfRYM3BsLySck2iGkenvg4FAJChVZ7k/H3bieAM2EWL
+ eFnA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726126817; x=1726731617;
+ d=1e100.net; s=20230601; t=1726126803; x=1726731603;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=THAU92UrM0dCOcON0qgAWJPM/1rIMc3WLepZV6d4U4w=;
- b=v+7INflwcRwJm3fUnDZhlXJF6lcyozVUcdLbZiD7xurXiyObg3ZG4Gx2vNAdQEl+gV
- pj9gycwDWG88L0jo9Vw3zsqgj/nPwvZk5TOeM8wRqWSx34obrDM4It0kqL9BZ1JFZvTL
- i7zpZtb713ik/ypb/qopkngHkikili3h/yDNi0rTZ4ujjt3MFHbz5IidDaD5IVN6ez6x
- eleoUVFU9W0uUbADN9VLOW9XBa7pAB+cRJJnTIkyyMiJGHehibAfk0eK5BAl4ONcifWi
- C7TmvDUO9NTEIBIlNPfptuEyChfL5ZSjyRcUe11JzVKZrO7zzkduVo8/SzqO4NIRkECI
- De3Q==
+ bh=cfrMTIgk5Q+XEJO7A3FTmtoXD8cfHvhd3vsooDA9mV4=;
+ b=nJ8omAfQ0v/LGebsCfP8z2w8eojrb4mIabhIy0C7yome/vdpmFeJEAhyTLsrndIDLq
+ 7JLe7Uul6mm5IpTgDZPjlEEBYxaWciNDyUvaHPXRhKHbnssw252xNqRjK7Qn7EaQEz4g
+ 12jFSTNcwPp7lDv1E1nv4fVwl/BhpLWHJqPWKd3GCkmFzFNv+soz1+PI/mfBZ3oYzlo3
+ P3So8Klvxiu2fEfuejsY6JFAzcR4s4uGRIl+E4XP/cYjM44OubWbk29pbQRMqDfJ2Oka
+ 4kzXjxDKHiZiT1wjRkemDLUcv6QXkb9SfhYpc3lh51xFW6KFY/AO1aLFQa3maLiuYnQr
+ GQrA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUP79uyEDrQHMI+2OyOpMXM/Gf90yyQ8nn3JqBptZxCB9QxqrfaRrmcmlvVrpZMp79NxcUTX8wSQyJ4@nongnu.org
-X-Gm-Message-State: AOJu0YyG3/fisrCLD+qC5XzDm3+Bwwew5k/RaJW0h0ENkznTU71U1Tx+
- GhxgCKcRhEuGfkWJKav0oCaAj3BObuA6pJSk2OWynzzkK12TvpYds32W4+Y+GmY=
-X-Google-Smtp-Source: AGHT+IE18OQNSYCTciWDcZ2tARjoD9KTkXd4QIX1a/2fI71lIh2I9Gute7KgIxVtwws+/7Dh8z96lg==
-X-Received: by 2002:a05:6808:23d5:b0:3e0:45ea:7fbe with SMTP id
- 5614622812f47-3e071a97f6emr1220176b6e.13.1726126817031; 
- Thu, 12 Sep 2024 00:40:17 -0700 (PDT)
+ AJvYcCVfTqVkqqbeeSvepG4krOSGSH3PWI3WSlcMNO7/Q4Yz9YCVvQB9MVd6SA53Z8reuphe/L3lHmYH4nje@nongnu.org
+X-Gm-Message-State: AOJu0YyZKC22jorOUkQ5akx75DccGXkHZfBxoId70L9fJEaEuoDze/Wt
+ YXNMGeO+LN495GND7yI0sw1JtEHoru/Doe2UXOgXKuY1HhXevKEG++F68XbdN5s=
+X-Google-Smtp-Source: AGHT+IHWOaE7dY6tBiE9Ghckw7hSP0fZD+0ZwcWT4soLCd5pY4NREymaum+9biUNdbtqFJkCdDcI4A==
+X-Received: by 2002:a05:6a20:8420:b0:1cf:d745:d641 with SMTP id
+ adf61e73a8af0-1cfd745d677mr1281589637.18.1726126802834; 
+ Thu, 12 Sep 2024 00:40:02 -0700 (PDT)
 Received: from linaro.vn.shawcable.net ([2604:3d08:9384:1d00::9633])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-7db1fb9ad87sm983458a12.6.2024.09.12.00.40.14
+ 41be03b00d2f7-7db1fb9ad87sm983458a12.6.2024.09.12.00.40.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Sep 2024 00:40:16 -0700 (PDT)
+ Thu, 12 Sep 2024 00:40:02 -0700 (PDT)
 From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Jason Wang <jasowang@redhat.com>,
@@ -106,24 +106,24 @@ Cc: Jason Wang <jasowang@redhat.com>,
  David Gibson <david@gibson.dropbear.id.au>, Fam Zheng <fam@euphon.net>,
  Weiwei Li <liwei1518@gmail.com>, Markus Armbruster <armbru@redhat.com>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH v2 19/48] hw/pci: replace assert(false) with
+Subject: [PATCH v2 14/48] include/hw/s390x: replace assert(false) with
  g_assert_not_reached()
-Date: Thu, 12 Sep 2024 00:38:52 -0700
-Message-Id: <20240912073921.453203-20-pierrick.bouvier@linaro.org>
+Date: Thu, 12 Sep 2024 00:38:47 -0700
+Message-Id: <20240912073921.453203-15-pierrick.bouvier@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240912073921.453203-1-pierrick.bouvier@linaro.org>
 References: <20240912073921.453203-1-pierrick.bouvier@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::229;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-oi1-x229.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52b;
+ envelope-from=pierrick.bouvier@linaro.org; helo=mail-pg1-x52b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -144,30 +144,24 @@ g_assert_not_reached() rather than an ad hoc mix of different
 assertion mechanisms.
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Thomas Huth <thuth@redhat.com>
 Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 ---
- hw/pci/pci-stub.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ include/hw/s390x/cpu-topology.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/hw/pci/pci-stub.c b/hw/pci/pci-stub.c
-index f0508682d2b..c6950e21bd4 100644
---- a/hw/pci/pci-stub.c
-+++ b/hw/pci/pci-stub.c
-@@ -46,13 +46,13 @@ void hmp_pcie_aer_inject_error(Monitor *mon, const QDict *qdict)
- /* kvm-all wants this */
- MSIMessage pci_get_msi_message(PCIDevice *dev, int vector)
+diff --git a/include/hw/s390x/cpu-topology.h b/include/hw/s390x/cpu-topology.h
+index a11b1baa77b..9283c948e3a 100644
+--- a/include/hw/s390x/cpu-topology.h
++++ b/include/hw/s390x/cpu-topology.h
+@@ -57,7 +57,7 @@ static inline void s390_topology_setup_cpu(MachineState *ms,
+ static inline void s390_topology_reset(void)
  {
--    g_assert(false);
+     /* Unreachable, CPU topology not implemented for TCG */
+-    assert(false);
 +    g_assert_not_reached();
-     return (MSIMessage){};
  }
- 
- uint16_t pci_requester_id(PCIDevice *dev)
- {
--    g_assert(false);
-+    g_assert_not_reached();
-     return 0;
- }
+ #endif
  
 -- 
 2.39.2
