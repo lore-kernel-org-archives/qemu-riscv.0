@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C3BBC3ABA2
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E564C3ABB2
 	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Sep 2024 16:50:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sqEud-0004Lx-UJ; Mon, 16 Sep 2024 12:49:20 -0400
+	id 1sqEuR-0003bT-VE; Mon, 16 Sep 2024 12:49:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <itachis6234@gmail.com>)
- id 1sqE1F-0007qK-LE; Mon, 16 Sep 2024 11:52:05 -0400
-Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a])
+ id 1sqE1O-00087G-Or; Mon, 16 Sep 2024 11:52:16 -0400
+Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <itachis6234@gmail.com>)
- id 1sqE1D-0000Vm-WE; Mon, 16 Sep 2024 11:52:05 -0400
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-20696938f86so37566775ad.3; 
- Mon, 16 Sep 2024 08:52:03 -0700 (PDT)
+ id 1sqE1M-0000WB-2i; Mon, 16 Sep 2024 11:52:13 -0400
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-1fee6435a34so39972135ad.0; 
+ Mon, 16 Sep 2024 08:52:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1726501922; x=1727106722; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1726501930; x=1727106730; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lfzjBG7+9yzLMDJFHDoCCaXekwfn4Gr8dayPzH/NfvM=;
- b=l3fMrb1Zi5RwagbUbFuB4W5tHFO22ej0GafXuNJTQCN6cu/+wW4Mtr5/6KjPoYhjEL
- kXq/x13FzAwpid1KmTfLIih7QkOyW9cwdJexD32D2OxuaM9G2G9BJ7yWv60WqhRI1LMs
- 0oVtW15oXaQcV4Urw/xx9124XwQ1J4c3cHAmxeBt6VCZMNLvJ5gfla+ww751Ox5Xhv7k
- L8ielXxYUutqNkXj5Ol3KRu0QJABPDJANY1s0+q4OAc1m75rQi0+0j50QBLjRYUDe8C2
- VBL9bxTUmCSQqYOoBFIYmnrhxbFofTXmpEECwh8JwDQuZ+auCMkEdme+FiNLd9m13NSM
- f2Ew==
+ bh=BISuETtEj/uI6CddQsRG+h5xaQo8IxKpbRWv0bTNq7U=;
+ b=f1NRe5DEhoFtBmMfPM7sl9jhA/0wPmqRWkvFdiexOzcCksJbSwz6ToIydTrbiHy/1e
+ KlCkZ37pp0FbgoFD516qtbSodYG4s+DF8P/rt4tuzna6Dsf9Bfm6e2nz3U3G/c5bLBLW
+ 73U0DSspM6eQUSwC0cSIn8+jOKOmAEFyPgzV8eWnU9pVEmnwTVWd4kay2wjkG8zx+gzH
+ Krz95CuK2Vk+2D4LXjNE8TPgwMh0wdEcbjKFHAmZ+FOKNnhIQ1evOB3VU+DG4zNVNljT
+ X/j1aJTUfK/IG+3yU1MD5bTP4PGeMsU4cErN7pSACxOShcoH9PgtTWJDaGFggK/xees0
+ t7Cw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726501922; x=1727106722;
+ d=1e100.net; s=20230601; t=1726501930; x=1727106730;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lfzjBG7+9yzLMDJFHDoCCaXekwfn4Gr8dayPzH/NfvM=;
- b=QnqRDmjqDjsP7DcFxU849L49qu6m4QG384xqUmRkhcnZyvsViVyUEMCtZMi4uNz4Zn
- JIAOlteU9dUHDZ+oquEHwtyy37SY56ozyIwSRvK8aGV4AD/j0aT+jx9Zrfw1URV3uC+z
- xfsgTPvT1vhnFkEq08YNmCpShqF1iQUIW1J5dkUtKgIVYPTYzpzTSgSiWlBAFr2qtUsp
- v1kWQgzm4tjzD5qhK9qwAD/TX5MkT+s4geFkQPngIBf1itjfUuQVtILIAJxVGkOg7tcK
- t9kB2OFvfL9FJvPThbhY/d49roEQo7AFyIxVUmuBxapFaoph45iDpSi8nyEh0z4gJusi
- Ak+Q==
+ bh=BISuETtEj/uI6CddQsRG+h5xaQo8IxKpbRWv0bTNq7U=;
+ b=gedDD8dEcCrldEK9r0GvRqsQznxu75DsTgMhMZ40FY5xiqbYYJ7mALN6ogtDL1aU5L
+ sgwbJaZ+HzHdz081gJaBtWR8d8aOuQYzrxUMEwqjmU64j0n5285ea/6mcPx63VG80cVL
+ cIkGgOMDzp7yCGHCPgRvlmF9u4UHezBYvlxvMsiXixFB8KBAyx4X3lz0etkj4wsSMwPG
+ tp6q6WXGGXc6JRziXosUil/xSO2kWvJIzH8ya8oMPSvEg7kqsU1CNZdXDwJuY3wf1R0C
+ vuwZjwaYB9gmb4gNLKG/2KWjd9st5SFecd9ikEJ5coYKMOGx8hIONnN9cspTmyLOBhkL
+ 4BYQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWfiEH0lxIG2hQN+Z1QjLQx9Rm8HvIWuqiTFPZzaRUcfCMahD2btlXKGAFCBhifyCQoDLjBbKIKfWBN@nongnu.org
-X-Gm-Message-State: AOJu0YxnduK5ChshQnlPfh+wMkvfqVn+DjV4f8wEJ0rZxDnSMbRgkAGO
- OP4V262PXWotvVHU8oT7g3K1WEX1bap8dxMfmZzgNM6t+qJrbx0pPNAG6Y7G
-X-Google-Smtp-Source: AGHT+IGdwUy/oWgWIz5LErbp80hpPvkHbV9jsRdwJZzdto2/X0bPXJK3VchsiBanrX5Di6X6LkPvXg==
-X-Received: by 2002:a17:902:e842:b0:205:5f35:80a0 with SMTP id
- d9443c01a7336-2076e460c8bmr263278285ad.57.1726501921500; 
- Mon, 16 Sep 2024 08:52:01 -0700 (PDT)
+ AJvYcCXhNvUjYi46VaOd8yGXjXBBFQtam7LmzuKTj71HuIwrOk52Q4trCEbj5J4HWE/wIC+C8Jqwt7Uh5eUo@nongnu.org
+X-Gm-Message-State: AOJu0YwqOhzhQ8ObsNhvOY78LYKH7+yxTxbN/W+plXzQVMWCKj/BlO+x
+ zyEEqiihQQjMaOshRM6BIGqaxLxDnlzd4BnkYGHZKiGFqdk9YUTFi92gbszS
+X-Google-Smtp-Source: AGHT+IGI/6gvL6AvMc8xaonBXHcuEBGVE3NrKy0i1joHywFWLITRWyVhcPnMmbj/OT8a2Ux7q+exwQ==
+X-Received: by 2002:a17:902:e809:b0:203:a13a:c49e with SMTP id
+ d9443c01a7336-2076e315920mr251737445ad.1.1726501929764; 
+ Mon, 16 Sep 2024 08:52:09 -0700 (PDT)
 Received: from localhost.localdomain (27-32-110-191.tpgi.com.au.
  [27.32.110.191]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-207946046cbsm37482545ad.105.2024.09.16.08.51.58
+ d9443c01a7336-207946046cbsm37482545ad.105.2024.09.16.08.52.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Sep 2024 08:52:01 -0700 (PDT)
+ Mon, 16 Sep 2024 08:52:09 -0700 (PDT)
 From: Ajeet Singh <itachis6234@gmail.com>
 X-Google-Original-From: Ajeet Singh <itachis@FreeBSD.org>
 To: qemu-devel@nongnu.org
@@ -67,17 +67,17 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Ajeet Singh <itachis@FreeBSD.org>,
  Richard Henderson <richard.henderson@linaro.org>
-Subject: [PATCH v7 08/17] bsd-user: Implement RISC-V sysarch system call
- emulation
-Date: Tue, 17 Sep 2024 01:51:10 +1000
-Message-Id: <20240916155119.14610-9-itachis@FreeBSD.org>
+Subject: [PATCH v7 10/17] bsd-user: Define RISC-V VM parameters and helper
+ functions
+Date: Tue, 17 Sep 2024 01:51:12 +1000
+Message-Id: <20240916155119.14610-11-itachis@FreeBSD.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240916155119.14610-1-itachis@FreeBSD.org>
 References: <20240916155119.14610-1-itachis@FreeBSD.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
- envelope-from=itachis6234@gmail.com; helo=mail-pl1-x62a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
+ envelope-from=itachis6234@gmail.com; helo=mail-pl1-x636.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -104,27 +104,28 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Mark Corbin <mark@dibsco.co.uk>
 
-Added the 'do_freebsd_arch_sysarch' function to emulate the 'sysarch'
-system call for the RISC-V architecture.
-Currently, this function returns '-TARGET_EOPNOTSUPP' to indicate that
-the operation is not supported.
+Added definitions for RISC-V VM parameters, including maximum and
+default sizes for text, data, and stack, as well as address space
+limits.
+Implemented helper functions for retrieving and setting specific
+values in the CPU state, such as stack pointer and return values.
 
 Signed-off-by: Mark Corbin <mark@dibsco.co.uk>
 Signed-off-by: Ajeet Singh <itachis@FreeBSD.org>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- bsd-user/riscv/target_arch_sysarch.h | 41 ++++++++++++++++++++++++++++
- 1 file changed, 41 insertions(+)
- create mode 100644 bsd-user/riscv/target_arch_sysarch.h
+ bsd-user/riscv/target_arch_vmparam.h | 53 ++++++++++++++++++++++++++++
+ 1 file changed, 53 insertions(+)
+ create mode 100644 bsd-user/riscv/target_arch_vmparam.h
 
-diff --git a/bsd-user/riscv/target_arch_sysarch.h b/bsd-user/riscv/target_arch_sysarch.h
+diff --git a/bsd-user/riscv/target_arch_vmparam.h b/bsd-user/riscv/target_arch_vmparam.h
 new file mode 100644
-index 0000000000..9af42331b4
+index 0000000000..0f2486def1
 --- /dev/null
-+++ b/bsd-user/riscv/target_arch_sysarch.h
-@@ -0,0 +1,41 @@
++++ b/bsd-user/riscv/target_arch_vmparam.h
+@@ -0,0 +1,53 @@
 +/*
-+ *  RISC-V sysarch() system call emulation
++ *  RISC-V VM parameters definitions
 + *
 + *  Copyright (c) 2019 Mark Corbin
 + *
@@ -142,28 +143,40 @@ index 0000000000..9af42331b4
 + *  along with this program; if not, see <http://www.gnu.org/licenses/>.
 + */
 +
-+#ifndef TARGET_ARCH_SYSARCH_H
-+#define TARGET_ARCH_SYSARCH_H
++#ifndef TARGET_ARCH_VMPARAM_H
++#define TARGET_ARCH_VMPARAM_H
 +
-+#include "target_syscall.h"
-+#include "target_arch.h"
++#include "cpu.h"
 +
-+static inline abi_long do_freebsd_arch_sysarch(CPURISCVState *env, int op,
-+        abi_ulong parms)
++/* Compare with riscv/include/vmparam.h */
++#define TARGET_MAXTSIZ      (1 * GiB)           /* max text size */
++#define TARGET_DFLDSIZ      (128 * MiB)         /* initial data size limit */
++#define TARGET_MAXDSIZ      (1 * GiB)           /* max data size */
++#define TARGET_DFLSSIZ      (128 * MiB)         /* initial stack size limit */
++#define TARGET_MAXSSIZ      (1 * GiB)           /* max stack size */
++#define TARGET_SGROWSIZ     (128 * KiB)         /* amount to grow stack */
++
++#define TARGET_VM_MINUSER_ADDRESS   (0x0000000000000000UL)
++#define TARGET_VM_MAXUSER_ADDRESS   (0x0000004000000000UL)
++
++#define TARGET_USRSTACK (TARGET_VM_MAXUSER_ADDRESS - TARGET_PAGE_SIZE)
++
++static inline abi_ulong get_sp_from_cpustate(CPURISCVState *state)
 +{
-+
-+    return -TARGET_EOPNOTSUPP;
++    return state->gpr[xSP];
 +}
 +
-+static inline void do_freebsd_arch_print_sysarch(
-+        const struct syscallname *name, abi_long arg1, abi_long arg2,
-+        abi_long arg3, abi_long arg4, abi_long arg5, abi_long arg6)
++static inline void set_second_rval(CPURISCVState *state, abi_ulong retval2)
 +{
-+
-+    gemu_log("UNKNOWN OP: %d, " TARGET_ABI_FMT_lx ")", (int)arg1, arg2);
++    state->gpr[xA1] = retval2;
 +}
 +
-+#endif /* TARGET_ARCH_SYSARCH_H */
++static inline abi_ulong get_second_rval(CPURISCVState *state)
++{
++    return state->gpr[xA1];
++}
++
++#endif /* TARGET_ARCH_VMPARAM_H */
 -- 
 2.34.1
 
