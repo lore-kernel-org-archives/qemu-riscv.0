@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54C83C3ABA2
-	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Sep 2024 16:49:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBF17C3ABA2
+	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Sep 2024 16:49:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sqEuU-0003kD-T2; Mon, 16 Sep 2024 12:49:10 -0400
+	id 1sqEuX-0003vi-KA; Mon, 16 Sep 2024 12:49:14 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <itachis6234@gmail.com>)
- id 1sqE1e-0008PX-17; Mon, 16 Sep 2024 11:52:31 -0400
-Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
+ id 1sqE1o-0000w1-Jh; Mon, 16 Sep 2024 11:52:40 -0400
+Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <itachis6234@gmail.com>)
- id 1sqE1b-0000XI-Js; Mon, 16 Sep 2024 11:52:29 -0400
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-2068acc8b98so41073755ad.3; 
- Mon, 16 Sep 2024 08:52:26 -0700 (PDT)
+ id 1sqE1n-0000Y7-0Y; Mon, 16 Sep 2024 11:52:40 -0400
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-205909afad3so47653695ad.2; 
+ Mon, 16 Sep 2024 08:52:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1726501945; x=1727106745; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1726501957; x=1727106757; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7+bsO6A/4UIjh+UAI8JcbcWlILl99UyeWUeQ1BHs21E=;
- b=nlKjiSdP+4HJwblDeNkYylJVNc3t7CPxKRcW+NWhbwcl9mLEHjtqNQGOwfvIptRW+r
- pqEeZst1LE6tloYcnD2ZewSqHvqmrW72q2iA3n0XRbjoDzoAyu0utLMvf0sqzYWLzJHe
- ixqsuxuDa8bzYY378PI0ICVbNFar98nXuUK170jbY/iAHB8kMxebyeZB14xEERCAXyqM
- dZY7rYshbeMrqF3fhQW97YQtJBs7+DHh8XaYXmmUF9evGz2hGfkmAw8G7zkv4AFDLmPs
- k/vFjSaNN9Zf3GspziM5P2YHAjvsLznE+9CXgNcK1B8Fkprs6I90btMPiXse9wQSvgrf
- bGgQ==
+ bh=yaqkhcr8XXVjz3AUT5s3kLltD+ErMtVDTb6FVMqoohs=;
+ b=SniowYEu2Ls+XDjIQZeeBDMXttEtXx+RhU6YQBfFb5/AWTi7JlIiDKnb7woBztiM+B
+ hQa/s+Ifz7x5K34Rc57/CIBszIGiW/598nUnKrVEJUcRa6W3lahA8ZY2c72a2LyMBt5W
+ pKYWAV6B90LXXIxe2O4YGPKW4FWvuTbh3L4G6aLgBKWRGYalE7sPzsKtFsLFoCGItzv1
+ p3f/hV9Ot1/0LhY6a8xsXYWJhlqG1BWHPJQVziWX3S1obT84+X9H8JrQFkG7qLX0GEDv
+ GPJUomXLMM/Ht1TAXzwoPIi76a99VJcAesFtVyIJenbbbw2eJJnL7yHI8OHWC1hSzJd4
+ d2Bw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726501945; x=1727106745;
+ d=1e100.net; s=20230601; t=1726501957; x=1727106757;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7+bsO6A/4UIjh+UAI8JcbcWlILl99UyeWUeQ1BHs21E=;
- b=RE/DRJI+pJhoJNqY4P71ly6aLQczCNvnDNqjhsp3wqE3OKBtwpKovCksyvnsUXQaeJ
- +w5TE+d6078ksJUGYwHaJsWwqtlcDNYJCTf4zV6foK1EaO7+uKTU+N63nBks9XoLuCZs
- tIKJyKBHsfyM0fNq3Utr6tk5x1bf1FUP22z7W+MQR+7nmtKWpv7Lnj1fzBrRETNdU4U7
- fH64TJi+Kbxy8a03gh9+3QSzmyCcNqhV3qBtVig7O+FjBZDfR1M5N8g/xAOizxQrPXa9
- QrvEnBkgLF2Ag2uk9N/vTmPYfzHZZk3lEoCodyDi8VKaIinUfQdJldHW8HUoRWymX4Ls
- C+SA==
+ bh=yaqkhcr8XXVjz3AUT5s3kLltD+ErMtVDTb6FVMqoohs=;
+ b=k0gPnuCYhMFYd18d9lsULvs8k4aSAJoP3nXhkCRQFozoCK2uEqeTI/ZU2P1Yu7E4XJ
+ /WSTLvSwjg3FgP+HgJpgl2rTEQ0JpZ3Uth6z0sYc3/5WV+JuQnOHbF/A3hW+4sESKj4i
+ wGuXttZZyEKCnCbh1G6FoD7FYxtAc7VWwEB0Mi+4XVXoLKbds0ygJlI1QFaqqFSSxM1b
+ 8VCqHEJNxsuNrHF3IDtnWXhRd6X8DGk8PzUEWcT+FWT+qW16ilVxFQicYI+Y9sNRZ5RJ
+ zLhQ6/scugZ/6VWel32U6Ohw3HDpqKc7lvqRpBMxHPqWCux356LisRUzYZLi6nu0hAgg
+ BheA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXmoh3SNxeTjIg8ExsAWAXBwvt55EMT8aAs2s1MkJMe5jwosAwefwgk83a2qQkO9YbfKbVvP5hhw2Qq@nongnu.org
-X-Gm-Message-State: AOJu0Yw7MEvnNPm58RH7eZJ4+3UuzL/3575EsLmFc+3XqILNjKYJo4np
- g3xA//yXTQfzgG/PJ0sfHkDCndyLxnrpaxHAfF0vnjv3RWdN8+obEH4+K0xq
-X-Google-Smtp-Source: AGHT+IE+lLUO/w4LSP+HO92NTOEzp4eSgI9EbsewCkTijnq722+MSZfHXVfs0xn0/PvDHLXpnECwWw==
-X-Received: by 2002:a17:902:da92:b0:207:1696:6ee1 with SMTP id
- d9443c01a7336-2076e31f057mr243423705ad.10.1726501945236; 
- Mon, 16 Sep 2024 08:52:25 -0700 (PDT)
+ AJvYcCUpfmesb/cL0etB6BzlDLnFjVJwOBP/IGkqOHljRO9i6pQAfNM8ygZbHhit5NsbhMX4TibTpxnz2ikF@nongnu.org
+X-Gm-Message-State: AOJu0Yzl9DD2nNnZbBD+dRJ2PDcZ8UgJ8CakXpHH+ltmRyUeXUGiJkvJ
+ In/7esL5uG8CSB+0NMI7EF/XZkYD1dTLdARsop1gqd8o/1mMX0MCmDQyBQCr
+X-Google-Smtp-Source: AGHT+IH5p/iRr7iIS/Ny3bBbsGfR12QgknIk5rUaknXx+oSjoKlfkMkwxShX7afkWPvgJ5+Y8Tkpig==
+X-Received: by 2002:a17:902:f550:b0:205:4e4a:72d9 with SMTP id
+ d9443c01a7336-2076e30651fmr265652415ad.7.1726501956810; 
+ Mon, 16 Sep 2024 08:52:36 -0700 (PDT)
 Received: from localhost.localdomain (27-32-110-191.tpgi.com.au.
  [27.32.110.191]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-207946046cbsm37482545ad.105.2024.09.16.08.52.21
+ d9443c01a7336-207946046cbsm37482545ad.105.2024.09.16.08.52.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Sep 2024 08:52:24 -0700 (PDT)
+ Mon, 16 Sep 2024 08:52:36 -0700 (PDT)
 From: Ajeet Singh <itachis6234@gmail.com>
 X-Google-Original-From: Ajeet Singh <itachis@FreeBSD.org>
 To: qemu-devel@nongnu.org
@@ -67,17 +67,17 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Ajeet Singh <itachis@FreeBSD.org>,
  Richard Henderson <richard.henderson@linaro.org>
-Subject: [PATCH v7 14/17] bsd-user: Implement RISC-V signal trampoline setup
- functions
-Date: Tue, 17 Sep 2024 01:51:16 +1000
-Message-Id: <20240916155119.14610-15-itachis@FreeBSD.org>
+Subject: [PATCH v7 17/17] bsd-user: Add RISC-V 64-bit Target Configuration and
+ Debug XML Files
+Date: Tue, 17 Sep 2024 01:51:19 +1000
+Message-Id: <20240916155119.14610-18-itachis@FreeBSD.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240916155119.14610-1-itachis@FreeBSD.org>
 References: <20240916155119.14610-1-itachis@FreeBSD.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
- envelope-from=itachis6234@gmail.com; helo=mail-pl1-x635.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
+ envelope-from=itachis6234@gmail.com; helo=mail-pl1-x636.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -102,99 +102,28 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Mark Corbin <mark@dibsco.co.uk>
+From: Warner Losh <imp@bsdimp.com>
 
-Added functions for setting up the RISC-V signal trampoline and signal
-frame:
+Added configuration for RISC-V 64-bit target to the build system.
 
-'set_sigtramp_args()': Configures the RISC-V CPU state with arguments
-for the signal handler. It sets up the registers with the signal
-number,pointers to the signal info and user context, the signal handler
-address, and the signal frame pointer.
-
-'setup_sigframe_arch()': Initializes the signal frame with the current
-machine context.This function copies the context from the CPU state to
-the signal frame, preparing it for the signal handler.
-
-Signed-off-by: Mark Corbin <mark@dibsco.co.uk>
-Signed-off-by: Ajeet Singh <itachis@FreeBSD.org>
 Signed-off-by: Warner Losh <imp@bsdimp.com>
-Co-authored-by: Warner Losh <imp@bsdimp.com>
+Signed-off-by: Ajeet Singh <itachis@FreeBSD.org>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- bsd-user/riscv/signal.c | 63 +++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 63 insertions(+)
- create mode 100644 bsd-user/riscv/signal.c
+ configs/targets/riscv64-bsd-user.mak | 4 ++++
+ 1 file changed, 4 insertions(+)
+ create mode 100644 configs/targets/riscv64-bsd-user.mak
 
-diff --git a/bsd-user/riscv/signal.c b/bsd-user/riscv/signal.c
+diff --git a/configs/targets/riscv64-bsd-user.mak b/configs/targets/riscv64-bsd-user.mak
 new file mode 100644
-index 0000000000..2597fec2fd
+index 0000000000..191c2c483f
 --- /dev/null
-+++ b/bsd-user/riscv/signal.c
-@@ -0,0 +1,63 @@
-+/*
-+ *  RISC-V signal definitions
-+ *
-+ *  Copyright (c) 2019 Mark Corbin
-+ *
-+ *  This program is free software; you can redistribute it and/or modify
-+ *  it under the terms of the GNU General Public License as published by
-+ *  the Free Software Foundation; either version 2 of the License, or
-+ *  (at your option) any later version.
-+ *
-+ *  This program is distributed in the hope that it will be useful,
-+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ *  GNU General Public License for more details.
-+ *
-+ *  You should have received a copy of the GNU General Public License
-+ *  along with this program; if not, see <http://www.gnu.org/licenses/>.
-+ */
-+#include "qemu/osdep.h"
-+
-+#include "qemu.h"
-+
-+/*
-+ * Compare with sendsig() in riscv/riscv/exec_machdep.c
-+ * Assumes that target stack frame memory is locked.
-+ */
-+abi_long
-+set_sigtramp_args(CPURISCVState *regs, int sig, struct target_sigframe *frame,
-+    abi_ulong frame_addr, struct target_sigaction *ka)
-+{
-+    /*
-+     * Arguments to signal handler:
-+     *  a0 (10) = signal number
-+     *  a1 (11) = siginfo pointer
-+     *  a2 (12) = ucontext pointer
-+     *  pc      = signal pointer handler
-+     *  sp (2)  = sigframe pointer
-+     *  ra (1)  = sigtramp at base of user stack
-+     */
-+
-+     regs->gpr[xA0] = sig;
-+     regs->gpr[xA1] = frame_addr +
-+         offsetof(struct target_sigframe, sf_si);
-+     regs->gpr[xA2] = frame_addr +
-+         offsetof(struct target_sigframe, sf_uc);
-+     regs->pc = ka->_sa_handler;
-+     regs->gpr[xSP] = frame_addr;
-+     regs->gpr[xRA] = TARGET_PS_STRINGS - TARGET_SZSIGCODE;
-+     return 0;
-+}
-+
-+/*
-+ * Compare to riscv/riscv/exec_machdep.c sendsig()
-+ * Assumes that the memory is locked if frame points to user memory.
-+ */
-+abi_long setup_sigframe_arch(CPURISCVState *env, abi_ulong frame_addr,
-+                             struct target_sigframe *frame, int flags)
-+{
-+    target_mcontext_t *mcp = &frame->sf_uc.uc_mcontext;
-+
-+    get_mcontext(env, mcp, flags);
-+    return 0;
-+}
++++ b/configs/targets/riscv64-bsd-user.mak
+@@ -0,0 +1,4 @@
++TARGET_ARCH=riscv64
++TARGET_BASE_ARCH=riscv
++TARGET_ABI_DIR=riscv
++TARGET_XML_FILES= gdb-xml/riscv-64bit-cpu.xml gdb-xml/riscv-32bit-fpu.xml gdb-xml/riscv-64bit-fpu.xml gdb-xml/riscv-64bit-virtual.xml
 -- 
 2.34.1
 
