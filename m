@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E564C3ABB2
-	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Sep 2024 16:50:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A492FC3ABCE
+	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Sep 2024 16:50:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sqEuR-0003bT-VE; Mon, 16 Sep 2024 12:49:08 -0400
+	id 1sqEuW-0003q9-5O; Mon, 16 Sep 2024 12:49:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <itachis6234@gmail.com>)
- id 1sqE1O-00087G-Or; Mon, 16 Sep 2024 11:52:16 -0400
-Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
+ id 1sqE1b-0008Lr-3Z; Mon, 16 Sep 2024 11:52:31 -0400
+Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <itachis6234@gmail.com>)
- id 1sqE1M-0000WB-2i; Mon, 16 Sep 2024 11:52:13 -0400
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-1fee6435a34so39972135ad.0; 
- Mon, 16 Sep 2024 08:52:11 -0700 (PDT)
+ id 1sqE1Z-0000X5-7x; Mon, 16 Sep 2024 11:52:26 -0400
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-1fee6435a34so39974485ad.0; 
+ Mon, 16 Sep 2024 08:52:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1726501930; x=1727106730; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1726501941; x=1727106741; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BISuETtEj/uI6CddQsRG+h5xaQo8IxKpbRWv0bTNq7U=;
- b=f1NRe5DEhoFtBmMfPM7sl9jhA/0wPmqRWkvFdiexOzcCksJbSwz6ToIydTrbiHy/1e
- KlCkZ37pp0FbgoFD516qtbSodYG4s+DF8P/rt4tuzna6Dsf9Bfm6e2nz3U3G/c5bLBLW
- 73U0DSspM6eQUSwC0cSIn8+jOKOmAEFyPgzV8eWnU9pVEmnwTVWd4kay2wjkG8zx+gzH
- Krz95CuK2Vk+2D4LXjNE8TPgwMh0wdEcbjKFHAmZ+FOKNnhIQ1evOB3VU+DG4zNVNljT
- X/j1aJTUfK/IG+3yU1MD5bTP4PGeMsU4cErN7pSACxOShcoH9PgtTWJDaGFggK/xees0
- t7Cw==
+ bh=voYN43OZ7lwbwneNl7z2eHNOhROV9NjNWmAvKPq1wXw=;
+ b=LP3Fu7mBSHL54RqDFBe+MOZLc/3HLeG9E1hRPFWnDwlslKWpUcCEVlk4+XhSs3tZoe
+ CSYWbEmGdpbotGPI/JtvJ4FeUjHmYCdcvOLsO4zmCDWuX18SiJddAKfvVj2o2e2wCND7
+ pWjzplBtrbrmk4yAh/52pcJXyeDwRlJzHSw8M46ND++LuFbBh/uJ66zW+p/ndM8I3bxF
+ 3cdb5m/5bqfu756FfTis0agrqXQIaX97zXL5Wwit4dbkAAE1pRt1tr05EL5OtsNYFxPD
+ PRkItD84HSrDLUdJmjXDN2WoFbE6lPG53zSIxl3ZbhA7QOzi8HHzj5pXBFJjTFC8LXJ6
+ g79A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726501930; x=1727106730;
+ d=1e100.net; s=20230601; t=1726501941; x=1727106741;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BISuETtEj/uI6CddQsRG+h5xaQo8IxKpbRWv0bTNq7U=;
- b=gedDD8dEcCrldEK9r0GvRqsQznxu75DsTgMhMZ40FY5xiqbYYJ7mALN6ogtDL1aU5L
- sgwbJaZ+HzHdz081gJaBtWR8d8aOuQYzrxUMEwqjmU64j0n5285ea/6mcPx63VG80cVL
- cIkGgOMDzp7yCGHCPgRvlmF9u4UHezBYvlxvMsiXixFB8KBAyx4X3lz0etkj4wsSMwPG
- tp6q6WXGGXc6JRziXosUil/xSO2kWvJIzH8ya8oMPSvEg7kqsU1CNZdXDwJuY3wf1R0C
- vuwZjwaYB9gmb4gNLKG/2KWjd9st5SFecd9ikEJ5coYKMOGx8hIONnN9cspTmyLOBhkL
- 4BYQ==
+ bh=voYN43OZ7lwbwneNl7z2eHNOhROV9NjNWmAvKPq1wXw=;
+ b=tUSU02WYfMoq2Br5vVlXD3NQNxfvvePfSTs4RTDosMs4eBiNAjmDeeNFJcehw7hDPy
+ za6a5205DYhTU99keMUcPX8fADlydN4/QH13Mzj2GFMD8hnLaBaaO1YHjg/l2pYt4muK
+ EWBc2PryqQ23b8gRKUrwX9NGirQqTOVx2wkbGgEnOSQcs+eHLpJmS0rcmC8tRDiguqEW
+ 5mxtMksKmwkDsbgfIZLbORfpdyfAlpyGjrRz/FfbcZq+9ULSAA22eZ0ao+xjDywmYPWE
+ BdonvbGB/n9PAbEfat/qZdogFSfKPzBCxR7HYinSKoTSqmSEzlQiu6Ue4fxb4TNTdwHG
+ uGlQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXhNvUjYi46VaOd8yGXjXBBFQtam7LmzuKTj71HuIwrOk52Q4trCEbj5J4HWE/wIC+C8Jqwt7Uh5eUo@nongnu.org
-X-Gm-Message-State: AOJu0YwqOhzhQ8ObsNhvOY78LYKH7+yxTxbN/W+plXzQVMWCKj/BlO+x
- zyEEqiihQQjMaOshRM6BIGqaxLxDnlzd4BnkYGHZKiGFqdk9YUTFi92gbszS
-X-Google-Smtp-Source: AGHT+IGI/6gvL6AvMc8xaonBXHcuEBGVE3NrKy0i1joHywFWLITRWyVhcPnMmbj/OT8a2Ux7q+exwQ==
-X-Received: by 2002:a17:902:e809:b0:203:a13a:c49e with SMTP id
- d9443c01a7336-2076e315920mr251737445ad.1.1726501929764; 
- Mon, 16 Sep 2024 08:52:09 -0700 (PDT)
+ AJvYcCWzg75/dQJ4kNAuScLpU+Jq11mbSziaCqCnV/+HrgxEMYwQKB28MtNJsI90JBhQHPX07ZORNvrClN8B@nongnu.org
+X-Gm-Message-State: AOJu0YwSrBiMHSv9ae74RT/XeH8m73KHsOhkC7xXNbdx72luD9Iuc2t1
+ ah4ImWzAUrZexzS1HiTvL6X6V8ePUNA+hiT4OMls1UfhklmWq15QM6SdMa6X
+X-Google-Smtp-Source: AGHT+IFz9LAWYvIZ716tCUa0YLHvfPU8zdanNYfeyDHJ2w9J1P6DYEpVtSn54g93WgcfjQyml5dwSA==
+X-Received: by 2002:a17:902:e5c8:b0:1fc:2e38:d3de with SMTP id
+ d9443c01a7336-2076e315577mr251668655ad.7.1726501941458; 
+ Mon, 16 Sep 2024 08:52:21 -0700 (PDT)
 Received: from localhost.localdomain (27-32-110-191.tpgi.com.au.
  [27.32.110.191]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-207946046cbsm37482545ad.105.2024.09.16.08.52.06
+ d9443c01a7336-207946046cbsm37482545ad.105.2024.09.16.08.52.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Sep 2024 08:52:09 -0700 (PDT)
+ Mon, 16 Sep 2024 08:52:20 -0700 (PDT)
 From: Ajeet Singh <itachis6234@gmail.com>
 X-Google-Original-From: Ajeet Singh <itachis@FreeBSD.org>
 To: qemu-devel@nongnu.org
@@ -67,17 +67,17 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Ajeet Singh <itachis@FreeBSD.org>,
  Richard Henderson <richard.henderson@linaro.org>
-Subject: [PATCH v7 10/17] bsd-user: Define RISC-V VM parameters and helper
- functions
-Date: Tue, 17 Sep 2024 01:51:12 +1000
-Message-Id: <20240916155119.14610-11-itachis@FreeBSD.org>
+Subject: [PATCH v7 13/17] bsd-user: Define RISC-V signal handling structures
+ and constants
+Date: Tue, 17 Sep 2024 01:51:15 +1000
+Message-Id: <20240916155119.14610-14-itachis@FreeBSD.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240916155119.14610-1-itachis@FreeBSD.org>
 References: <20240916155119.14610-1-itachis@FreeBSD.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
- envelope-from=itachis6234@gmail.com; helo=mail-pl1-x636.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
+ envelope-from=itachis6234@gmail.com; helo=mail-pl1-x62d.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -104,28 +104,26 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Mark Corbin <mark@dibsco.co.uk>
 
-Added definitions for RISC-V VM parameters, including maximum and
-default sizes for text, data, and stack, as well as address space
-limits.
-Implemented helper functions for retrieving and setting specific
-values in the CPU state, such as stack pointer and return values.
+Added definitions for RISC-V signal handling, including structures
+and constants for managing signal frames and context
 
 Signed-off-by: Mark Corbin <mark@dibsco.co.uk>
 Signed-off-by: Ajeet Singh <itachis@FreeBSD.org>
+Co-authored-by: Warner Losh <imp@bsdimp.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- bsd-user/riscv/target_arch_vmparam.h | 53 ++++++++++++++++++++++++++++
- 1 file changed, 53 insertions(+)
- create mode 100644 bsd-user/riscv/target_arch_vmparam.h
+ bsd-user/riscv/target_arch_signal.h | 75 +++++++++++++++++++++++++++++
+ 1 file changed, 75 insertions(+)
+ create mode 100644 bsd-user/riscv/target_arch_signal.h
 
-diff --git a/bsd-user/riscv/target_arch_vmparam.h b/bsd-user/riscv/target_arch_vmparam.h
+diff --git a/bsd-user/riscv/target_arch_signal.h b/bsd-user/riscv/target_arch_signal.h
 new file mode 100644
-index 0000000000..0f2486def1
+index 0000000000..1a634b865b
 --- /dev/null
-+++ b/bsd-user/riscv/target_arch_vmparam.h
-@@ -0,0 +1,53 @@
++++ b/bsd-user/riscv/target_arch_signal.h
+@@ -0,0 +1,75 @@
 +/*
-+ *  RISC-V VM parameters definitions
++ *  RISC-V signal definitions
 + *
 + *  Copyright (c) 2019 Mark Corbin
 + *
@@ -143,40 +141,62 @@ index 0000000000..0f2486def1
 + *  along with this program; if not, see <http://www.gnu.org/licenses/>.
 + */
 +
-+#ifndef TARGET_ARCH_VMPARAM_H
-+#define TARGET_ARCH_VMPARAM_H
++#ifndef TARGET_ARCH_SIGNAL_H
++#define TARGET_ARCH_SIGNAL_H
 +
 +#include "cpu.h"
 +
-+/* Compare with riscv/include/vmparam.h */
-+#define TARGET_MAXTSIZ      (1 * GiB)           /* max text size */
-+#define TARGET_DFLDSIZ      (128 * MiB)         /* initial data size limit */
-+#define TARGET_MAXDSIZ      (1 * GiB)           /* max data size */
-+#define TARGET_DFLSSIZ      (128 * MiB)         /* initial stack size limit */
-+#define TARGET_MAXSSIZ      (1 * GiB)           /* max stack size */
-+#define TARGET_SGROWSIZ     (128 * KiB)         /* amount to grow stack */
 +
-+#define TARGET_VM_MINUSER_ADDRESS   (0x0000000000000000UL)
-+#define TARGET_VM_MAXUSER_ADDRESS   (0x0000004000000000UL)
++#define TARGET_INSN_SIZE     4  /* riscv instruction size */
 +
-+#define TARGET_USRSTACK (TARGET_VM_MAXUSER_ADDRESS - TARGET_PAGE_SIZE)
++/* Size of the signal trampoline code placed on the stack. */
++#define TARGET_SZSIGCODE    ((abi_ulong)(7 * TARGET_INSN_SIZE))
 +
-+static inline abi_ulong get_sp_from_cpustate(CPURISCVState *state)
-+{
-+    return state->gpr[xSP];
-+}
++/* Compare with riscv/include/_limits.h */
++#define TARGET_MINSIGSTKSZ  (1024 * 4)
++#define TARGET_SIGSTKSZ     (TARGET_MINSIGSTKSZ + 32768)
 +
-+static inline void set_second_rval(CPURISCVState *state, abi_ulong retval2)
-+{
-+    state->gpr[xA1] = retval2;
-+}
++struct target_gpregs {
++    uint64_t    gp_ra;
++    uint64_t    gp_sp;
++    uint64_t    gp_gp;
++    uint64_t    gp_tp;
++    uint64_t    gp_t[7];
++    uint64_t    gp_s[12];
++    uint64_t    gp_a[8];
++    uint64_t    gp_sepc;
++    uint64_t    gp_sstatus;
++};
 +
-+static inline abi_ulong get_second_rval(CPURISCVState *state)
-+{
-+    return state->gpr[xA1];
-+}
++struct target_fpregs {
++    uint64_t        fp_x[32][2];
++    uint64_t        fp_fcsr;
++    uint32_t        fp_flags;
++    uint32_t        pad;
++};
 +
-+#endif /* TARGET_ARCH_VMPARAM_H */
++typedef struct target_mcontext {
++    struct target_gpregs   mc_gpregs;
++    struct target_fpregs   mc_fpregs;
++    uint32_t               mc_flags;
++#define TARGET_MC_FP_VALID 0x01
++    uint32_t               mc_pad;
++    uint64_t               mc_spare[8];
++} target_mcontext_t;
++
++#define TARGET_MCONTEXT_SIZE 864
++#define TARGET_UCONTEXT_SIZE 936
++
++#include "target_os_ucontext.h"
++
++struct target_sigframe {
++    target_ucontext_t   sf_uc; /* = *sf_uncontext */
++    target_siginfo_t    sf_si; /* = *sf_siginfo (SA_SIGINFO case)*/
++};
++
++#define TARGET_SIGSTACK_ALIGN 16
++
++#endif /* TARGET_ARCH_SIGNAL_H */
 -- 
 2.34.1
 
