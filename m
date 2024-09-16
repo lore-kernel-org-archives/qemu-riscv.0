@@ -4,85 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66CA3C3ABA2
-	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Sep 2024 17:58:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50726C3ABB2
+	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Sep 2024 18:17:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sqFzW-000475-6W; Mon, 16 Sep 2024 13:58:26 -0400
+	id 1sqGHM-0001uQ-A4; Mon, 16 Sep 2024 14:16:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1sqFzO-0003x9-UZ
- for qemu-riscv@nongnu.org; Mon, 16 Sep 2024 13:58:20 -0400
-Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1sqFzM-0005iq-7K
- for qemu-riscv@nongnu.org; Mon, 16 Sep 2024 13:58:18 -0400
-Received: by mail-pf1-x42e.google.com with SMTP id
- d2e1a72fcca58-718e56d7469so2699378b3a.0
- for <qemu-riscv@nongnu.org>; Mon, 16 Sep 2024 10:58:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1726509494; x=1727114294; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=U+ZPDeUbgcig5LmOL9oFi6iQlTYoCgou2pgDu6Rm/tY=;
- b=ZEo1fl5VH0i4MR6LArBByCyzx98DwvGS+dPNH0sxYOf4xhoVCXMotYwSTE3tti4Kt0
- CHold5yjSTcybBAzcTgUkAEU/0tBDiCUhlUxsr4y/UZ71j6PHE0fbGCZVAYOZNeLmOWZ
- ZgbBatmHFyeXzdI8DIoY4cOlvDPuyJU8OsnfHvbVmJmlLf0X9B4fH32U+l3tYpXhk8VA
- w2FZfYBUvVmRWj9wJmTJwS+N/FVrrfMZtFzUVkVNxVoWCz175SHMamGooAvQ3lVSRW/5
- 3nWotgLBovziq9JIVHZJkoSQy2wFqIAo3my0x/+h7lQ5rVasmjyDAu99ljUmm0PhjKge
- 213g==
+ (Exim 4.90_1) (envelope-from <heinrich.schuchardt@canonical.com>)
+ id 1sqGHI-0001sb-13
+ for qemu-riscv@nongnu.org; Mon, 16 Sep 2024 14:16:48 -0400
+Received: from smtp-relay-internal-1.canonical.com ([185.125.188.123])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <heinrich.schuchardt@canonical.com>)
+ id 1sqGHG-0007iZ-4c
+ for qemu-riscv@nongnu.org; Mon, 16 Sep 2024 14:16:47 -0400
+Received: from mail-lj1-f200.google.com (mail-lj1-f200.google.com
+ [209.85.208.200])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 436013F27D
+ for <qemu-riscv@nongnu.org>; Mon, 16 Sep 2024 18:16:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1726510603;
+ bh=l/tH5XtPcjqPv4Qv1V6eM9yCK2jhM/o/GSXWzMCOxWM=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=S89paI1/2Q65xZQ9SllywlnL72H2jnoVHdOGn/Tky3SVa4A5PERg5FDGrqq5A7JzU
+ CuX9TnngCEngR+ZdsXuH+AYTwFXVkH8jRF/oV/frXHmz8JyLnWEJtTpV5aIYkijQgU
+ r3npWp4NZXIXCJWw5XLBvGDJpVp7wPJj7vP5v47IzEZR1K5HxV+RA9UA7bToHD2b2U
+ UY7AUHaGY7nhwuGMFR9p6NUQif72pfMm46U61bB83m+M2gw9HXTIe7VtxPAMIzNXGM
+ RndMu7966hB8WshKCDAfruQyhHicaDsYqmTabulmz0at07XQ633n7JHDlnxoHLj9fF
+ jRlpqVo+FCyRQ==
+Received: by mail-lj1-f200.google.com with SMTP id
+ 38308e7fff4ca-2f77ca80fe1so35858471fa.0
+ for <qemu-riscv@nongnu.org>; Mon, 16 Sep 2024 11:16:43 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726509494; x=1727114294;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=U+ZPDeUbgcig5LmOL9oFi6iQlTYoCgou2pgDu6Rm/tY=;
- b=dyBcDhPASL6Qw+HftbHXl1wi/5gZGR/VO6NMTz1j8LYHyYdZQucmo+dNtpMKuILxnj
- v/ly0WSwqK/6prpZO7StwSwm6bhDRf9dEAOPDQhSTzR2RvbBC8gv4US9JWz8j86IvKEZ
- YcE1ISip33R/egV10LU14jPDZjnldc8zaSjPHgE9Tl1DqTSEFf8Xx75jxl9eXv7MNPtX
- fdfeS4LA9lmYSEbO2imh7vfzOyNf8dRsoY+rSTSWrky43tjuYQ/AON4bYHt5bInbtau5
- IImNFhgiC8Ia65EoFkO1bN7KGpmucbzdN15rjJZ2XJLWy5Bgppt/gPIkFbMwTVwYPOAp
- vJLA==
+ d=1e100.net; s=20230601; t=1726510602; x=1727115402;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=l/tH5XtPcjqPv4Qv1V6eM9yCK2jhM/o/GSXWzMCOxWM=;
+ b=P+RAn9ZsGycZN1uBmGy1l/BgfyyQCJ9ws0+eutOAqDeNhja1hVfTWM5vpccpFazL+m
+ R+WvZ8LxbQ6n17HsN2frC7TjrZqegKu+Xi7HnXVqbSizOhQf+mbNgny8ca6wXxi2BgxG
+ xiQViGZagDD0Oa7S7W785Q9gsQsfeV8xRLNOdHW9Gwk1T8rEGTkZ1B0CnZEJW7GWQYF3
+ aQ6vCptpmvtUHtHdnE3Rbq3K8NLOCO98ylUY3SC2T7xObUoXF06IpZeMxdkI71eteE8X
+ sPXjGyg/FJyVbhzqiiaFP6icMF8uUbazGA+/QakIXjumO7FCMDvrHUa+jFGbT/39Q9S6
+ Rx+A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUDwNovjHBU/2C3B6CVgELEmQQYnypXfLhs2Ox6/VCh4EIVf7HuERzIM96gN8N0x7ZF2ZXu8v/BzvAn@nongnu.org
-X-Gm-Message-State: AOJu0YyzC7vxltX87qokkzBpIb+3htGFDtF1AMQhiePVvlZFvWDsPOAh
- C9MgxvsSsJa83oT+SWw40eougyDEhVttlGkRGL1KQ9+T5l9GsY6pBXrRq9+awZA=
-X-Google-Smtp-Source: AGHT+IHI/Goph/kaHS7IP6EaeLjUPthuru89bRXln8dPJ+/h3jmozRl+k+HuJJ1WxJDK90UUnD3Z/w==
-X-Received: by 2002:a05:6a00:3e15:b0:717:88eb:824d with SMTP id
- d2e1a72fcca58-71936a49609mr20641832b3a.7.1726509494278; 
- Mon, 16 Sep 2024 10:58:14 -0700 (PDT)
-Received: from [192.168.68.110] (201-68-240-33.dsl.telesp.net.br.
- [201.68.240.33]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-71944a973edsm3964807b3a.2.2024.09.16.10.58.12
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 16 Sep 2024 10:58:13 -0700 (PDT)
-Message-ID: <bb3bbe72-91e3-47dc-a793-4a2196a58d31@ventanamicro.com>
-Date: Mon, 16 Sep 2024 14:58:10 -0300
+ AJvYcCWg/+ETnW19u3lMimzR3s2mcHCJvifwx46slgmaNSOFhuzKsW/AFMs1S2Md6I18ADqbg9DbB673OaV8@nongnu.org
+X-Gm-Message-State: AOJu0YxW+q/Y3jBPJpm2zCGZA7I7sMXBvIGf8vpWp0jl9J52TFcYx26+
+ iSs5ZHYUV1Ajqdc8K/dacGpyoMaB9m4s7//W+zYlJ8G/QRYyrTdxag8UOS/84maoQQhUjNTIiEY
+ 3sJ9ip/W9+fuz4Fpvvhpez9uEXySibZ50M7PH2FU3dTS6liOJzI1Y2kVrj4E6+q4dEgAh
+X-Received: by 2002:a05:651c:1507:b0:2f7:62f9:b9a2 with SMTP id
+ 38308e7fff4ca-2f78c95dc3cmr65435821fa.4.1726510602332; 
+ Mon, 16 Sep 2024 11:16:42 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGWKpBrlaMOUrkb337X80V/IciJe0UI8oaP0O9nBytnkXI7M/7avFo9tl9Ip43SOe6L550miw==
+X-Received: by 2002:a05:651c:1507:b0:2f7:62f9:b9a2 with SMTP id
+ 38308e7fff4ca-2f78c95dc3cmr65435461fa.4.1726510601232; 
+ Mon, 16 Sep 2024 11:16:41 -0700 (PDT)
+Received: from localhost.localdomain
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5c42bb56f39sm2900815a12.39.2024.09.16.11.16.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 16 Sep 2024 11:16:40 -0700 (PDT)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>
+Cc: Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] target/riscv: enable floating point unit
+Date: Mon, 16 Sep 2024 20:16:33 +0200
+Message-ID: <20240916181633.366449-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 00/17] bsd-user: Comprehensive RISCV Support
-To: Ajeet Singh <itachis6234@gmail.com>, qemu-devel@nongnu.org
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Mark Corbin <mark@dibsco.co.uk>, qemu-riscv@nongnu.org,
- Warner Losh <imp@bsdimp.com>, Ajeet Singh <itachis@FreeBSD.org>
-References: <20240916155119.14610-1-itachis@FreeBSD.org>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240916155119.14610-1-itachis@FreeBSD.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42e;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x42e.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=185.125.188.123;
+ envelope-from=heinrich.schuchardt@canonical.com;
+ helo=smtp-relay-internal-1.canonical.com
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -99,67 +109,40 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+OpenSBI enables the floating point in mstatus. For consistency QEMU/KVM
+should do the same.
 
+Without this patch EDK II with TLS enabled crashes when hitting the first
+floating point instruction while running QEMU with --accel kvm and runs
+fine with --accel tcg.
 
-On 9/16/24 12:51 PM, Ajeet Singh wrote:
-> Key Changes Compared to Version 6:
-> Included "signal-common.h" in target_arch_cpu.h
+Additionally to this patch EDK II should be changed to make no assumptions
+about the state of the floating point unit.
 
-Thanks. This version is successfully compiling in a FreeBSD x86 host.
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ target/riscv/cpu.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 4bda754b01..c32e2721d4 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -923,6 +923,13 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
+     if (mcc->parent_phases.hold) {
+         mcc->parent_phases.hold(obj, type);
+     }
++    if (riscv_has_ext(env, RVF) || riscv_has_ext(env, RVD)) {
++        env->mstatus = set_field(env->mstatus, MSTATUS_FS, env->misa_mxl);
++        for (int regnr = 0; regnr < 32; ++regnr) {
++            env->fpr[regnr] = 0;
++        }
++        riscv_csrrw(env, CSR_FCSR, NULL, 0, -1);
++    }
+ #ifndef CONFIG_USER_ONLY
+     env->misa_mxl = mcc->misa_mxl_max;
+     env->priv = PRV_M;
+-- 
+2.45.2
 
-Daniel
-
-> 
-> Mark Corbin (15):
->    bsd-user: Implement RISC-V CPU initialization and main loop
->    bsd-user: Add RISC-V CPU execution loop and syscall handling
->    bsd-user: Implement RISC-V CPU register cloning and reset functions
->    bsd-user: Implement RISC-V TLS register setup
->    bsd-user: Add RISC-V ELF definitions and hardware capability detection
->    bsd-user: Define RISC-V register structures and register copying
->    bsd-user: Add RISC-V signal trampoline setup function
->    bsd-user: Implement RISC-V sysarch system call emulation
->    bsd-user: Add RISC-V thread setup and initialization support
->    bsd-user: Define RISC-V VM parameters and helper functions
->    bsd-user: Define RISC-V system call structures and constants
->    bsd-user: Define RISC-V signal handling structures and constants
->    bsd-user: Implement RISC-V signal trampoline setup functions
->    bsd-user: Implement 'get_mcontext' for RISC-V
->    bsd-user: Implement set_mcontext and get_ucontext_sigreturn for RISCV
-> 
-> Warner Losh (2):
->    bsd-user: Add generic RISC-V64 target definitions
->    bsd-user: Add RISC-V 64-bit Target Configuration and Debug XML Files
-> 
->   bsd-user/riscv/signal.c               | 170 ++++++++++++++++++++++++++
->   bsd-user/riscv/target.h               |  20 +++
->   bsd-user/riscv/target_arch.h          |  27 ++++
->   bsd-user/riscv/target_arch_cpu.c      |  29 +++++
->   bsd-user/riscv/target_arch_cpu.h      | 148 ++++++++++++++++++++++
->   bsd-user/riscv/target_arch_elf.h      |  42 +++++++
->   bsd-user/riscv/target_arch_reg.h      |  88 +++++++++++++
->   bsd-user/riscv/target_arch_signal.h   |  75 ++++++++++++
->   bsd-user/riscv/target_arch_sigtramp.h |  41 +++++++
->   bsd-user/riscv/target_arch_sysarch.h  |  41 +++++++
->   bsd-user/riscv/target_arch_thread.h   |  47 +++++++
->   bsd-user/riscv/target_arch_vmparam.h  |  53 ++++++++
->   bsd-user/riscv/target_syscall.h       |  38 ++++++
->   configs/targets/riscv64-bsd-user.mak  |   4 +
->   14 files changed, 823 insertions(+)
->   create mode 100644 bsd-user/riscv/signal.c
->   create mode 100644 bsd-user/riscv/target.h
->   create mode 100644 bsd-user/riscv/target_arch.h
->   create mode 100644 bsd-user/riscv/target_arch_cpu.c
->   create mode 100644 bsd-user/riscv/target_arch_cpu.h
->   create mode 100644 bsd-user/riscv/target_arch_elf.h
->   create mode 100644 bsd-user/riscv/target_arch_reg.h
->   create mode 100644 bsd-user/riscv/target_arch_signal.h
->   create mode 100644 bsd-user/riscv/target_arch_sigtramp.h
->   create mode 100644 bsd-user/riscv/target_arch_sysarch.h
->   create mode 100644 bsd-user/riscv/target_arch_thread.h
->   create mode 100644 bsd-user/riscv/target_arch_vmparam.h
->   create mode 100644 bsd-user/riscv/target_syscall.h
->   create mode 100644 configs/targets/riscv64-bsd-user.mak
-> 
 
