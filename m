@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A91C8C3ABB2
-	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Sep 2024 16:50:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AA1FC3ABA2
+	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Sep 2024 16:50:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sqEuW-0003qY-75; Mon, 16 Sep 2024 12:49:12 -0400
+	id 1sqEuR-0003bV-Va; Mon, 16 Sep 2024 12:49:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <itachis6234@gmail.com>)
- id 1sqE14-0007Dh-7x; Mon, 16 Sep 2024 11:51:54 -0400
-Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
+ id 1sqE0w-0006ib-9i; Mon, 16 Sep 2024 11:51:46 -0400
+Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <itachis6234@gmail.com>)
- id 1sqE12-0000Uf-Hj; Mon, 16 Sep 2024 11:51:53 -0400
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-205909afad3so47642075ad.2; 
- Mon, 16 Sep 2024 08:51:51 -0700 (PDT)
+ id 1sqE0u-0000Tw-Ro; Mon, 16 Sep 2024 11:51:46 -0400
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-20688fbaeafso38581975ad.0; 
+ Mon, 16 Sep 2024 08:51:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1726501910; x=1727106710; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1726501903; x=1727106703; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=g4MfaAoEg0D4PG1s02DK0HI+nWn0NbjMokYUO+miRKs=;
- b=UMTtIHWtK1dsKpHWDYMxdmQYPZUm9ssP6Q25Fci5QG5DLg1Fovbg99mQWdZQ0uWbrr
- HgvCyB/hdxQ/ppkNyiFvHPO3GRJptPiAEF588ZwVyTunRH8IQGvkypMQ9Dl1ogjfQIfR
- 8La/jnz+23QxnMRLHj/Q0+uEi48abOzBNYnfnYFiPPWzECKQSmpPPtNXxmXneCzPPd6C
- m+Tgpjk5B+84SNixsQbKiKjiTxgNhpwx0cky3uJ+cYPPI+ZNIAu+BlINL70djuoF64a5
- OwPQWHOSOkJYJaRulNrEvlTVjTDeMmgR29fba2QfqCEMjxLXL3YemRFB/2ssOt8UMQZf
- nzng==
+ bh=YzTEKW6pHdxoRGI49+9LGYc/ShJcZ5J3INnhKg7mgr4=;
+ b=SIFAFtxiZE7FPtfx1A4KDmv0cuk2RH6n2JCmtuZ5fwWNhdRsSTCsHI92fm3kDxUwlw
+ zLnv+oX8FVEq1kia5c+SmivQHE/71sr/jpbXhVpM3fHQEHxB+nv1ndSUiM+QRtGbO+Dn
+ 5F0Zm4I+pX3LEBGNnFcCz/NYwNfUYaeoCeEGQdCimeLYg3OEnMMg7UqW1cfwnvkChPKo
+ zq/XzcfLXxt5Ninc5JKBrezqJ4iKbG2+35JbxqOTQngUmMbVepNu2EppEnZp+/Pv+M2x
+ /zS8Zv6uITDNoHkCl+gDAdvNzCbafSH86fGLWFiWZO/FMNNhwHwNuKEmbjBkuX+8wBZc
+ 8UyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726501910; x=1727106710;
+ d=1e100.net; s=20230601; t=1726501903; x=1727106703;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=g4MfaAoEg0D4PG1s02DK0HI+nWn0NbjMokYUO+miRKs=;
- b=l9aCIWGvsiCDLe/QxM06t1sPBqlUA4RoXIqsyO/ZNnZiCwNyMCoD7BYKLRQr0HdDjy
- I2uKXcao1tByjE5511+c0JADTIEhDqZVQe4tehyF/iUAE9gvu5GPLyhR7iDoLzAyV/oQ
- dkFCB9H7QcqApNU3/0adGvkw25vtCU3GRUZKT4hodgme0DHAiNP75rdtZ78tMi3lnHRH
- VaFqLPbtdPZSOATzXG9D/W/7EKvqk1+ruFBMKPDgj71hciwwJUAlt8OSErz00zwqKMEy
- bjZEPJYqk3aB1FyeDgby93/XMxZP4NB7So/azPL1vY11joHK0i+8wo2G8aEqzI4RoWlr
- VPFQ==
+ bh=YzTEKW6pHdxoRGI49+9LGYc/ShJcZ5J3INnhKg7mgr4=;
+ b=NsLZ9YVu3IaLDxts0wq4FFgpxQQMvm6sB1pC9epW8l8xUO+LsCRCNd26OAhg/IBqxz
+ A6VMDcvmQZssfzrW/P2whZSxkAE+C43EmpO2n/XaOFUFTlFLvBspOoTl8J0ZP34pw1r+
+ DzRF0iEcV8PFE1BzImEewlrLpi3dhoTY/Uc+/dGupKW0wJsG3jGj5MiAy0Ag59pkFwOO
+ J2hQWYAhneMQmZViP0SmEDHRfpeP8i1pRaYZKgc5rJ/ZLU94W33J9Mz+RJftW8tuXkkj
+ OQqAnOKI7ctwl0z5m0zw+K8CpAkEspFJsEqhtSphUhTgiy2usSBYu4FBbXMNKcFyjv8o
+ bqoQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUWkUHi+hqkyAgMR4C/w7lL+OjJlAeNhaHJUzawLueeE8IwIIC1LNvhZjUutHb3dmqrcZZ8M1SI3isl@nongnu.org
-X-Gm-Message-State: AOJu0Yw6pLZUplo9Ij5lxUVLC2ub5cqvSMOgHZlacQC6iMTUwf5IkF9I
- XHR7SgY0GmBKu5v5n1n82AsNF4qe+acVTv3Gn1gU+MzcH9sdZ4zfEX4NcjqT
-X-Google-Smtp-Source: AGHT+IEVXHvOwF2bRlk50iIDHG4QDwiJtFvyuoa2VzV94BHzd2G6KvXm1mKbo17dcDMocBVIVFE1pw==
-X-Received: by 2002:a17:902:c40e:b0:206:add9:624 with SMTP id
- d9443c01a7336-2076e39fc33mr272727285ad.36.1726501910270; 
- Mon, 16 Sep 2024 08:51:50 -0700 (PDT)
+ AJvYcCUK4WgBz3Pv+GHmgU8oNPkZoSM0t4/cjAm4HYoOcK3cGlcJo11PTS1dfGQg2EUyfpqrX9O/nJ3dIB8t@nongnu.org
+X-Gm-Message-State: AOJu0YwLkNwbcv+u+fxCW5O8ibaWYJQ7SBLVWHxziadBm9B0SX18DdTC
+ 0k6DHnJCTCj9+oZCBq3R0gRhrhMXdglevbioullkEbT6Hvd/WGg4InCNBvwJ
+X-Google-Smtp-Source: AGHT+IEzLVh4y6h4BPx8ubX+yoEwt3/ui7DPbs0P69uyDSkcvJOu4hZ19A2QXfs+e25q1xtZdWUbsQ==
+X-Received: by 2002:a17:903:18b:b0:205:6c5f:e3ca with SMTP id
+ d9443c01a7336-20782b7f000mr165276525ad.53.1726501902537; 
+ Mon, 16 Sep 2024 08:51:42 -0700 (PDT)
 Received: from localhost.localdomain (27-32-110-191.tpgi.com.au.
  [27.32.110.191]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-207946046cbsm37482545ad.105.2024.09.16.08.51.46
+ d9443c01a7336-207946046cbsm37482545ad.105.2024.09.16.08.51.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Sep 2024 08:51:49 -0700 (PDT)
+ Mon, 16 Sep 2024 08:51:42 -0700 (PDT)
 From: Ajeet Singh <itachis6234@gmail.com>
 X-Google-Original-From: Ajeet Singh <itachis@FreeBSD.org>
 To: qemu-devel@nongnu.org
@@ -65,19 +65,19 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  Mark Corbin <mark@dibsco.co.uk>, qemu-riscv@nongnu.org,
  Warner Losh <imp@bsdimp.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Ajeet Singh <itachis@FreeBSD.org>, Kyle Evans <kevans@FreeBSD.org>,
+ Ajeet Singh <itachis@FreeBSD.org>,
  Richard Henderson <richard.henderson@linaro.org>
-Subject: [PATCH v7 05/17] bsd-user: Add RISC-V ELF definitions and hardware
- capability detection
-Date: Tue, 17 Sep 2024 01:51:07 +1000
-Message-Id: <20240916155119.14610-6-itachis@FreeBSD.org>
+Subject: [PATCH v7 03/17] bsd-user: Implement RISC-V CPU register cloning and
+ reset functions
+Date: Tue, 17 Sep 2024 01:51:05 +1000
+Message-Id: <20240916155119.14610-4-itachis@FreeBSD.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240916155119.14610-1-itachis@FreeBSD.org>
 References: <20240916155119.14610-1-itachis@FreeBSD.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
- envelope-from=itachis6234@gmail.com; helo=mail-pl1-x630.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
+ envelope-from=itachis6234@gmail.com; helo=mail-pl1-x631.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -87,7 +87,7 @@ X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Mon, 16 Sep 2024 12:49:01 -0400
+X-Mailman-Approved-At: Mon, 16 Sep 2024 12:49:00 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -104,69 +104,39 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Mark Corbin <mark@dibsco.co.uk>
 
-Introduced RISC-V specific ELF definitions and hardware capability
-detection.
-Additionally, a function to retrieve hardware capabilities
-('get_elf_hwcap') is implemented, which returns the common bits set in
-each CPU's ISA strings.
+Added functions for cloning CPU registers and resetting the CPU state
+for RISC-V architecture.
 
 Signed-off-by: Mark Corbin <mark@dibsco.co.uk>
 Signed-off-by: Ajeet Singh <itachis@FreeBSD.org>
-Co-authored-by: Kyle Evans <kevans@FreeBSD.org>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- bsd-user/riscv/target_arch_elf.h | 42 ++++++++++++++++++++++++++++++++
- 1 file changed, 42 insertions(+)
- create mode 100644 bsd-user/riscv/target_arch_elf.h
+ bsd-user/riscv/target_arch_cpu.h | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
-diff --git a/bsd-user/riscv/target_arch_elf.h b/bsd-user/riscv/target_arch_elf.h
-new file mode 100644
-index 0000000000..4eb915e61e
---- /dev/null
-+++ b/bsd-user/riscv/target_arch_elf.h
-@@ -0,0 +1,42 @@
-+/*
-+ *  RISC-V ELF definitions
-+ *
-+ *  Copyright (c) 2019 Mark Corbin
-+ *
-+ *  This program is free software; you can redistribute it and/or modify
-+ *  it under the terms of the GNU General Public License as published by
-+ *  the Free Software Foundation; either version 2 of the License, or
-+ *  (at your option) any later version.
-+ *
-+ *  This program is distributed in the hope that it will be useful,
-+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ *  GNU General Public License for more details.
-+ *
-+ *  You should have received a copy of the GNU General Public License
-+ *  along with this program; if not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#ifndef TARGET_ARCH_ELF_H
-+#define TARGET_ARCH_ELF_H
-+
-+#define elf_check_arch(x) ((x) == EM_RISCV)
-+#define ELF_START_MMAP 0x80000000
-+#define ELF_ET_DYN_LOAD_ADDR    0x100000
-+#define ELF_CLASS   ELFCLASS64
-+
-+#define ELF_DATA    ELFDATA2LSB
-+#define ELF_ARCH    EM_RISCV
-+
-+#define ELF_HWCAP get_elf_hwcap()
-+static uint32_t get_elf_hwcap(void)
+diff --git a/bsd-user/riscv/target_arch_cpu.h b/bsd-user/riscv/target_arch_cpu.h
+index 9c31d9dc4c..a93ea3915a 100644
+--- a/bsd-user/riscv/target_arch_cpu.h
++++ b/bsd-user/riscv/target_arch_cpu.h
+@@ -131,4 +131,18 @@ static inline void target_cpu_loop(CPURISCVState *env)
+     }
+ }
+ 
++static inline void target_cpu_clone_regs(CPURISCVState *env, target_ulong newsp)
 +{
-+    RISCVCPU *cpu = RISCV_CPU(thread_cpu);
++    if (newsp) {
++        env->gpr[xSP] = newsp;
++    }
 +
-+    return cpu->env.misa_ext_mask;
++    env->gpr[xA0] = 0;
++    env->gpr[xT0] = 0;
 +}
 +
-+#define USE_ELF_CORE_DUMP
-+#define ELF_EXEC_PAGESIZE        4096
++static inline void target_cpu_reset(CPUArchState *env)
++{
++}
 +
-+#endif /* TARGET_ARCH_ELF_H */
+ #endif /* TARGET_ARCH_CPU_H */
 -- 
 2.34.1
 
