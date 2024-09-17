@@ -4,90 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11EC5CAC581
-	for <qemu-riscv@archiver.kernel.org>; Tue, 17 Sep 2024 14:50:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05105CAC590
+	for <qemu-riscv@archiver.kernel.org>; Tue, 17 Sep 2024 16:46:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sqZWy-0001m9-Uj; Tue, 17 Sep 2024 10:50:17 -0400
+	id 1sqbKa-0007TR-1p; Tue, 17 Sep 2024 12:45:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1sqZWk-0000vK-Hc
- for qemu-riscv@nongnu.org; Tue, 17 Sep 2024 10:50:03 -0400
-Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1sqZWi-0003Id-HT
- for qemu-riscv@nongnu.org; Tue, 17 Sep 2024 10:50:02 -0400
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-374c3eef39eso3517312f8f.0
- for <qemu-riscv@nongnu.org>; Tue, 17 Sep 2024 07:49:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1726584598; x=1727189398; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=wJogFBELuzvb1PRQUyy0Dd9nwBPVV9ZQawuJiGzMtxg=;
- b=egGgFuwUB1XRlZclbR/m5e27jiPiaruPFFflA2RAjiRXEJcsfIqdzn5uvANRnxJOKK
- EvLOlFQxfosor3IP5V61TeAE4mP5c7A2ghBhGLR3AyQ5fvOuUyWM0x3LNphoI5FwVUkT
- DPZljAw3BUiZtQanK95PinemXDSurtWZK/8k84AviLH+tAHBR2TyRR/sev30aa9PrlsQ
- r/crIYZRNU/vFjjPfiGL32ph7IGeKA+Bn/qKTHcPdGnKY5qeTPYUTlE1LgR8bx9v7jQy
- nbdt7dBMJ2fFUcVdLop+OOdpwkuepUkYDqQbzbBwS7TNJLZd4bfKpsvG1IQWe2H3GAQF
- JPfg==
+ (Exim 4.90_1) (envelope-from <heinrich.schuchardt@canonical.com>)
+ id 1sqbKV-0007BP-7E
+ for qemu-riscv@nongnu.org; Tue, 17 Sep 2024 12:45:32 -0400
+Received: from smtp-relay-internal-1.canonical.com ([185.125.188.123])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <heinrich.schuchardt@canonical.com>)
+ id 1sqbKS-0000wh-6c
+ for qemu-riscv@nongnu.org; Tue, 17 Sep 2024 12:45:30 -0400
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 099113F1E0
+ for <qemu-riscv@nongnu.org>; Tue, 17 Sep 2024 16:45:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1726591525;
+ bh=NT1MFgf5d1eFKJ8lvG5GHflLOH9+PDppupkTwcUm1iE=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=KrgX+1HPwpu+sic132D3V6KRMUT7oK0Xl9ih7LjFrSzcqnbvTKjRbuRSj4edqynUw
+ AZlUp6R2xsHlDs/xk0OB1uXI6UUI9yyfHtUfJ4nrKhxQIjRRozRyUwmC2m5Blx+Xt9
+ ESfB8YhNYP+dNeWB+9vUpLyK/LT+3466Xfi+x1TL4KLKEewymmn6ajGxDAOFj4k39f
+ cgTV3/SoVs2UL9MdBZaIraJ0XR0N235FYHHyCLrVbFHKXcypJFSMylhKXRq+600dkr
+ 6M7zuukJmuXhmmf2zFd2SYwLJ4r7UEqfCSMu55SdN6KPAQcymcXHlc+VO+7dWORdfj
+ sOqQlAaa1yqxA==
+Received: by mail-wr1-f72.google.com with SMTP id
+ ffacd0b85a97d-374c581ce35so3046713f8f.3
+ for <qemu-riscv@nongnu.org>; Tue, 17 Sep 2024 09:45:25 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726584598; x=1727189398;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wJogFBELuzvb1PRQUyy0Dd9nwBPVV9ZQawuJiGzMtxg=;
- b=TQSOOSdTuN806N6Zrxzq0gqDmdak/eW+GpKODJcvu3qpa9eDKoFAKopHJdYDE+AUb0
- z98NAlWspoir44JfCLzyH34FrwzE/yfCLc6wTZTtvg/S0ku+TA2K9pi69+3GV2lKzL6/
- InM5S75rE3OOunEWD/kUv0OaVPYnIsepymwMgtqx5Zvhlp9PgqWRKRrLubI+iaYgcOhn
- YXDIC9pZyQfURBW2DclS8qoFWVZs44tpnwDT3hF25DOLnRSrFrGj+3fvBJJfOksWLyNI
- MgpnAmT01BhCP2irnh9Cnwa2Udj4Bxu3QWXGWr0YXTCSZ/aFShQKr2q21iNjCuBHrpf8
- 3ikQ==
+ d=1e100.net; s=20230601; t=1726591524; x=1727196324;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=NT1MFgf5d1eFKJ8lvG5GHflLOH9+PDppupkTwcUm1iE=;
+ b=huGG0MuqOmUlRKjL7EB6FzS8DEF/7NHWa6YNtSVsAglCLodJM9tMhaBJbW263qQsIP
+ 7QiGchN/D2ui4jUiy0JTCdXU4c5zAX4tTt2tu8HNxSNyjvnmxvBRz0DrKDasGTesxAdW
+ kccNf7meJZqVBWWS+BU2yr/7+eHevzSIagpEMWmthM5jR8/Vvqh2xX0LNiCkE6fdOhGh
+ J6X6V5eX6gPuzcD0pjTzGy9Iegp+ys1A5nYOnf22NPMDEjhrO1cKA3v/fa7oXjj08ZFO
+ 652Xe6dzHiyc1XgEtF/m6gQptAJZSAPkfNS/tEADjzJ15n31Z80DDEyZGJ2ut9PHjygn
+ x+HQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXfeXefMtl3NQdP8DuwuTcUPDkAvlL1c25mwR0dbm2Wu93TQiVtzQiQ5KGfiUmlzQRfsKzeElubIFL+@nongnu.org
-X-Gm-Message-State: AOJu0YyjGNohyXHiaL3ukh01Dia83vLFYAIXt9yHXnjNFTRiczhH2Jkz
- L2aqyqXYjVPD7SJoyomRiETPaTkhmg6fsaZtuyMWWEG1RQmfuzcWGewj6w43JYJZcUviIkRmKsi
- T
-X-Google-Smtp-Source: AGHT+IHsw1n4nFb8AM4GbZs6I8V/ahBphNJG6B7WQ2rGtkN39D/GSKuBolFB4D2jdW/4IfYwN8xEtQ==
-X-Received: by 2002:adf:fcd2:0:b0:374:c8cc:1bb1 with SMTP id
- ffacd0b85a97d-378c2d51632mr11335192f8f.39.1726584597793; 
- Tue, 17 Sep 2024 07:49:57 -0700 (PDT)
-Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
- [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
+ AJvYcCV9+aXbPKuwC5CAoRqQa47HM/1PSJFvDE0/TGbKKCrJRjGtUz3yx5tYtIwjDszL7NZOk3wglkcNEO1g@nongnu.org
+X-Gm-Message-State: AOJu0YwTz+aoz0+2Uq3P+Wxbp9oXTvJYcpkqWdj6F5jBq6J4uKULS/+q
+ anxVovY5+bCMlXQYhw5k2j+1nEf0Da1poHJm0OvLt3uLsQ43PXWIrlqL5OnIjNMAaVEB5WTy4BP
+ 4rz3CWhog99nZ+Hd7t652fASYuX6k9YIyenrxdoxbu41/T+A7ldMVoqmLF9D497AqhD4p
+X-Received: by 2002:a5d:5e0b:0:b0:378:fd4a:b9c7 with SMTP id
+ ffacd0b85a97d-378fd4abdd0mr1676603f8f.58.1726591524371; 
+ Tue, 17 Sep 2024 09:45:24 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFs0Cj+RwanvZfc+Zpgq+IL/nl24ARC+SCQIgbK1A19jHR2OTbPlljOxY0Nabw1aG0vB0qF6g==
+X-Received: by 2002:a5d:5e0b:0:b0:378:fd4a:b9c7 with SMTP id
+ ffacd0b85a97d-378fd4abdd0mr1676576f8f.58.1726591523830; 
+ Tue, 17 Sep 2024 09:45:23 -0700 (PDT)
+Received: from [192.168.103.101]
+ (dynamic-046-114-111-082.46.114.pool.telefonica.de. [46.114.111.82])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-378e73f9b10sm9770906f8f.59.2024.09.17.07.49.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Sep 2024 07:49:57 -0700 (PDT)
-Date: Tue, 17 Sep 2024 16:49:56 +0200
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org, 
- qemu-devel@nongnu.org
+ ffacd0b85a97d-378e73e8340sm9976172f8f.46.2024.09.17.09.45.22
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 17 Sep 2024 09:45:23 -0700 (PDT)
+Message-ID: <8b24728f-8b6e-4c79-91f6-7cbb79494550@canonical.com>
+Date: Tue, 17 Sep 2024 18:45:21 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 1/1] target/riscv: enable floating point unit
-Message-ID: <20240917-b13c51d41030029c70aab785@orel>
+To: Andrew Jones <ajones@ventanamicro.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, Anup Patel <anup@brainfault.org>,
+ Atish Patra <atishp@atishpatra.org>, Paul Walmsley
+ <paul.walmsley@sifive.com>, Albert Ou <aou@eecs.berkeley.edu>,
+ kvm@vger.kernel.org, kvm-riscv@lists.infradead.org,
+ linux-riscv@lists.infradead.org, linux-kernel@vger.kernel.org
 References: <20240916181633.366449-1-heinrich.schuchardt@canonical.com>
  <20240917-f45624310204491aede04703@orel>
  <15c359a4-b3c1-4cb0-be2e-d5ca5537bc5b@canonical.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <15c359a4-b3c1-4cb0-be2e-d5ca5537bc5b@canonical.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::430;
- envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x430.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ <20240917-b13c51d41030029c70aab785@orel>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240917-b13c51d41030029c70aab785@orel>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=185.125.188.123;
+ envelope-from=heinrich.schuchardt@canonical.com;
+ helo=smtp-relay-internal-1.canonical.com
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,102 +121,260 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Sep 17, 2024 at 03:28:42PM GMT, Heinrich Schuchardt wrote:
-> On 17.09.24 14:13, Andrew Jones wrote:
-> > On Mon, Sep 16, 2024 at 08:16:33PM GMT, Heinrich Schuchardt wrote:
-> > > OpenSBI enables the floating point in mstatus. For consistency QEMU/KVM
-> > > should do the same.
-> > > 
-> > > Without this patch EDK II with TLS enabled crashes when hitting the first
-> > > floating point instruction while running QEMU with --accel kvm and runs
-> > > fine with --accel tcg.
-> > > 
-> > > Additionally to this patch EDK II should be changed to make no assumptions
-> > > about the state of the floating point unit.
-> > > 
-> > > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> > > ---
-> > >   target/riscv/cpu.c | 7 +++++++
-> > >   1 file changed, 7 insertions(+)
-> > > 
-> > > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> > > index 4bda754b01..c32e2721d4 100644
-> > > --- a/target/riscv/cpu.c
-> > > +++ b/target/riscv/cpu.c
-> > > @@ -923,6 +923,13 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
-> > >       if (mcc->parent_phases.hold) {
-> > >           mcc->parent_phases.hold(obj, type);
-> > >       }
-> > > +    if (riscv_has_ext(env, RVF) || riscv_has_ext(env, RVD)) {
-> > > +        env->mstatus = set_field(env->mstatus, MSTATUS_FS, env->misa_mxl);
-> > > +        for (int regnr = 0; regnr < 32; ++regnr) {
-> > > +            env->fpr[regnr] = 0;
-> > > +        }
-> > > +        riscv_csrrw(env, CSR_FCSR, NULL, 0, -1);
-> > > +    }
-> > 
-> > If this is only fixing KVM, then I think it belongs in
-> > kvm_riscv_reset_vcpu(). But, I feel like we're working around an issue
-> > with KVM synchronization with this, as well as with the "clear CSR values"
-> > part of commit 8633951530cc ("target/riscv: Clear CSR values at reset and
-> > sync MPSTATE with host"). KVM knows how to reset VCPUs. It does so on
-> > VCPU creation and for any secondaries started with SBI HSM start. KVM's
-> > reset would set sstatus.FS to 1 ("Initial") and zero out all the fp
-> > registers and fcsr. So it seems like we're either synchronizing prior to
-> > KVM resetting the boot VCPU, not synchronizing at all, or KVM isn't doing
-> > the reset of the boot VCPU.
-> > 
-> > Thanks,
-> > drew
+On 17.09.24 16:49, Andrew Jones wrote:
+> On Tue, Sep 17, 2024 at 03:28:42PM GMT, Heinrich Schuchardt wrote:
+>> On 17.09.24 14:13, Andrew Jones wrote:
+>>> On Mon, Sep 16, 2024 at 08:16:33PM GMT, Heinrich Schuchardt wrote:
+>>>> OpenSBI enables the floating point in mstatus. For consistency QEMU/KVM
+>>>> should do the same.
+>>>>
+>>>> Without this patch EDK II with TLS enabled crashes when hitting the first
+>>>> floating point instruction while running QEMU with --accel kvm and runs
+>>>> fine with --accel tcg.
+>>>>
+>>>> Additionally to this patch EDK II should be changed to make no assumptions
+>>>> about the state of the floating point unit.
+>>>>
+>>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>>>> ---
+>>>>    target/riscv/cpu.c | 7 +++++++
+>>>>    1 file changed, 7 insertions(+)
+>>>>
+>>>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+>>>> index 4bda754b01..c32e2721d4 100644
+>>>> --- a/target/riscv/cpu.c
+>>>> +++ b/target/riscv/cpu.c
+>>>> @@ -923,6 +923,13 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
+>>>>        if (mcc->parent_phases.hold) {
+>>>>            mcc->parent_phases.hold(obj, type);
+>>>>        }
+>>>> +    if (riscv_has_ext(env, RVF) || riscv_has_ext(env, RVD)) {
+>>>> +        env->mstatus = set_field(env->mstatus, MSTATUS_FS, env->misa_mxl);
+>>>> +        for (int regnr = 0; regnr < 32; ++regnr) {
+>>>> +            env->fpr[regnr] = 0;
+>>>> +        }
+>>>> +        riscv_csrrw(env, CSR_FCSR, NULL, 0, -1);
+>>>> +    }
+>>>
+>>> If this is only fixing KVM, then I think it belongs in
+>>> kvm_riscv_reset_vcpu(). But, I feel like we're working around an issue
+>>> with KVM synchronization with this, as well as with the "clear CSR values"
+>>> part of commit 8633951530cc ("target/riscv: Clear CSR values at reset and
+>>> sync MPSTATE with host"). KVM knows how to reset VCPUs. It does so on
+>>> VCPU creation and for any secondaries started with SBI HSM start. KVM's
+>>> reset would set sstatus.FS to 1 ("Initial") and zero out all the fp
+>>> registers and fcsr. So it seems like we're either synchronizing prior to
+>>> KVM resetting the boot VCPU, not synchronizing at all, or KVM isn't doing
+>>> the reset of the boot VCPU.
+>>>
+>>> Thanks,
+>>> drew
+>>
+>> Hello Drew,
+>>
+>> Thanks for reviewing.
+>>
+>> Concerning the question whether kvm_riscv_reset_vcpu() would be a better
+>> place for the change:
+>>
+>> Is there any specification prescribing what the state of the FS bits should
+>> be when entering M-mode and when entering S-mode?
 > 
-> Hello Drew,
+> I didn't see anything in the spec, so I think 0 (or 1 when all fp
+> registers are also reset) is reasonable for an implementation to
+> choose.
 > 
-> Thanks for reviewing.
+>>
+>> Patch 8633951530cc seems not to touch the status register in QEMU's
+>> kvm_riscv_reset_vcpu(). So it is not obvious that this patch could have
+>> caused the problem.
 > 
-> Concerning the question whether kvm_riscv_reset_vcpu() would be a better
-> place for the change:
+> I don't think 8633951530cc caused this problem. It was solving its own
+> problem in the same way, which is to add some more reset for the VCPU.
+> I think both it and this patch are working around a problem with KVM or
+> with a problem synchronizing with KVM. If that's the case, and we fix
+> KVM or the synchronization with KVM, then I would revert the reset parts
+> of 8633951530cc too.
 > 
-> Is there any specification prescribing what the state of the FS bits should
-> be when entering M-mode and when entering S-mode?
+>>
+>> Looking at the call sequences in Linux gives some ideas where to debug:
+>>
+>> kvm_arch_vcpu_create calls kvm_riscv_reset_vcpu which calls
+>> kvm_riscv_vcpu_fp_reset.
+>>
+>> riscv_vcpu_set_isa_ext_single and kvm_riscv_vcpu_set_reg_config
+>> only call kvm_riscv_vcpu_fp_reset if !vcpu->arch.ran_atleast_once.
+>>
+>> kvm_riscv_vcpu_fp_reset sets FS bits to "initial"
+>> if CONFIG_FPU=y and extension F or D is available.
+>>
+>> It seems that in KVM only the creation of a vcpu will set the FS bits but
+>> rebooting will not.
+> 
+> If KVM never resets the boot VCPU on reboot, then maybe it should or needs
+> QEMU to inform it to do so. I'd rather just one of the two (KVM or QEMU)
+> decide what needs to be reset and to which values, rather than both having
+> their own ideas. For example, with this patch, the boot hart will have its
+> sstatus.FS set to 3, but, iiuc, all secondaries will be brought up
+> with their sstatus.FS set to 1.
+> 
+> Thanks,
+> drew
 
-I didn't see anything in the spec, so I think 0 (or 1 when all fp
-registers are also reset) is reasonable for an implementation to
-choose.
+Hello Drew,
 
-> 
-> Patch 8633951530cc seems not to touch the status register in QEMU's
-> kvm_riscv_reset_vcpu(). So it is not obvious that this patch could have
-> caused the problem.
+I added some debug messages.
 
-I don't think 8633951530cc caused this problem. It was solving its own
-problem in the same way, which is to add some more reset for the VCPU.
-I think both it and this patch are working around a problem with KVM or
-with a problem synchronizing with KVM. If that's the case, and we fix
-KVM or the synchronization with KVM, then I would revert the reset parts
-of 8633951530cc too.
+Without smp: Linux' kvm_riscv_vcpu_fp_reset() is called before QEMU's 
+kvm_riscv_reset_vcpu() and is never called on reboot.
 
-> 
-> Looking at the call sequences in Linux gives some ideas where to debug:
-> 
-> kvm_arch_vcpu_create calls kvm_riscv_reset_vcpu which calls
-> kvm_riscv_vcpu_fp_reset.
-> 
-> riscv_vcpu_set_isa_ext_single and kvm_riscv_vcpu_set_reg_config
-> only call kvm_riscv_vcpu_fp_reset if !vcpu->arch.ran_atleast_once.
-> 
-> kvm_riscv_vcpu_fp_reset sets FS bits to "initial"
-> if CONFIG_FPU=y and extension F or D is available.
-> 
-> It seems that in KVM only the creation of a vcpu will set the FS bits but
-> rebooting will not.
+qemu-system-riscv64 -M virt -accel kvm -nographic -kernel 
+payload_workaround.bin
+[  920.805102] kvm_arch_vcpu_create: Entry
+[  920.805608] kvm_riscv_vcpu_fp_reset: At entry FS=0
+[  920.805961] kvm_riscv_vcpu_fp_reset: At exit FS=8192
+[  920.806289] kvm_arch_vcpu_create: Exit
+[  920.810554] kvm_arch_vcpu_create: Entry
+[  920.810959] kvm_riscv_vcpu_fp_reset: At entry FS=0
+[  920.811334] kvm_riscv_vcpu_fp_reset: At exit FS=8192
+[  920.811696] kvm_arch_vcpu_create: Exit
+[  920.816772] kvm_arch_vcpu_create: Entry
+[  920.817095] kvm_riscv_vcpu_fp_reset: At entry FS=0
+[  920.817411] kvm_riscv_vcpu_fp_reset: At exit FS=8192
+[  920.817975] kvm_arch_vcpu_create: Exit
+[  920.818395] kvm_riscv_vcpu_set_reg_config:
+[  920.818696] kvm_riscv_vcpu_set_reg_config:
+[  920.818975] kvm_riscv_vcpu_set_reg_config:
+QEMU riscv_cpu_reset_hold: Entry
+QEMU kvm_riscv_reset_vcpu: Entry
+QEMU kvm_riscv_reset_vcpu: Exit
+QEMU riscv_cpu_reset_hold: Exit
+QEMU riscv_cpu_reset_hold: Entry
+QEMU kvm_riscv_reset_vcpu: Entry
+QEMU kvm_riscv_reset_vcpu: Exit
+QEMU riscv_cpu_reset_hold: Exit
+[  920.946333] kvm_arch_vcpu_ioctl_run: run->ext_reason 0
+[  920.947031] kvm_arch_vcpu_ioctl_run: run->ext_reason 0
+[  920.947700] kvm_riscv_check_vcpu_requests: Entry
+[  920.948482] kvm_riscv_check_vcpu_requests: Entry
 
-If KVM never resets the boot VCPU on reboot, then maybe it should or needs
-QEMU to inform it to do so. I'd rather just one of the two (KVM or QEMU)
-decide what needs to be reset and to which values, rather than both having
-their own ideas. For example, with this patch, the boot hart will have its
-sstatus.FS set to 3, but, iiuc, all secondaries will be brought up
-with their sstatus.FS set to 1.
+Test payload
+============
 
-Thanks,
-drew
+[  920.950012] kvm_arch_vcpu_ioctl_run: run->ext_reason 35
+
+[  920.950666] kvm_riscv_check_vcpu_requests: Entry
+Rebooting
+
+[  920.951478] kvm_arch_vcpu_ioctl_run: run->ext_reason 35
+[  920.952051] kvm_riscv_check_vcpu_requests: Entry
+QEMU riscv_cpu_reset_hold: Entry
+QEMU kvm_riscv_reset_vcpu: Entry
+QEMU kvm_riscv_reset_vcpu: Exit
+QEMU riscv_cpu_reset_hold: Exit
+[  920.962404] kvm_arch_vcpu_ioctl_run: run->ext_reason 24
+[  920.962969] kvm_arch_vcpu_ioctl_run: run->ext_reason 24
+[  920.963496] kvm_riscv_check_vcpu_requests: Entry
+
+Test payload
+============
+
+
+With -smp 2 this seems to hold true per CPU. So essentially the effect 
+of vm_riscv_vcpu_fp_reset() is always ignored both on the primary and 
+the secondary harts.
+
+$ qemu-system-riscv64 -M virt -accel kvm -smp 2 -nographic -kernel 
+payload_workaround.bin
+[  202.573659] kvm_arch_vcpu_create: Entry
+[  202.574024] kvm_riscv_vcpu_fp_reset: At entry FS=0
+[  202.574328] kvm_riscv_vcpu_fp_reset: At exit FS=8192
+[  202.574626] kvm_arch_vcpu_create: Exit
+[  202.580626] kvm_arch_vcpu_create: Entry
+[  202.581070] kvm_riscv_vcpu_fp_reset: At entry FS=0
+[  202.581599] kvm_riscv_vcpu_fp_reset: At exit FS=8192
+[  202.582040] kvm_arch_vcpu_create: Exit
+[  202.587356] kvm_arch_vcpu_create: Entry
+[  202.587894] kvm_riscv_vcpu_fp_reset: At entry FS=0
+[  202.588376] kvm_riscv_vcpu_fp_reset: At exit FS=8192
+[  202.589188] kvm_arch_vcpu_create: Exit
+[  202.589650] kvm_riscv_vcpu_set_reg_config:
+[  202.590014] kvm_riscv_vcpu_set_reg_config:
+[  202.590340] kvm_riscv_vcpu_set_reg_config:
+[  202.595220] kvm_arch_vcpu_create: Entry
+[  202.595604] kvm_riscv_vcpu_fp_reset: At entry FS=0
+[  202.595939] kvm_riscv_vcpu_fp_reset: At exit FS=8192
+[  202.596278] kvm_arch_vcpu_create: Exit
+QEMU riscv_cpu_reset_hold: Entry
+QEMU kvm_riscv_reset_vcpu: Entry
+QEMU kvm_riscv_reset_vcpu: Exit
+QEMU riscv_cpu_reset_hold: Exit
+[  202.602093] kvm_arch_vcpu_create: Entry
+[  202.602426] kvm_riscv_vcpu_fp_reset: At entry FS=0
+[  202.602777] kvm_riscv_vcpu_fp_reset: At exit FS=8192
+[  202.603110] kvm_arch_vcpu_create: Exit
+[  202.607898] kvm_arch_vcpu_create: Entry
+[  202.608306] kvm_riscv_vcpu_fp_reset: At entry FS=0
+[  202.608989] kvm_riscv_vcpu_fp_reset: At exit FS=8192
+[  202.609416] kvm_arch_vcpu_create: Exit
+[  202.609939] kvm_riscv_vcpu_set_reg_config:
+[  202.610312] kvm_riscv_vcpu_set_reg_config:
+[  202.610666] kvm_riscv_vcpu_set_reg_config:
+QEMU riscv_cpu_reset_hold: Entry
+QEMU kvm_riscv_reset_vcpu: Entry
+QEMU kvm_riscv_reset_vcpu: Exit
+QEMU riscv_cpu_reset_hold: Exit
+QEMU riscv_cpu_reset_hold: Entry
+QEMU kvm_riscv_reset_vcpu: Entry
+QEMU kvm_riscv_reset_vcpu: Exit
+QEMU riscv_cpu_reset_hold: Exit
+QEMU riscv_cpu_reset_hold: Entry
+QEMU kvm_riscv_reset_vcpu: Entry
+QEMU kvm_riscv_reset_vcpu: Exit
+QEMU riscv_cpu_reset_hold: Exit
+[  202.749911] kvm_arch_vcpu_ioctl_run: run->ext_reason 0
+[  202.750370] kvm_arch_vcpu_ioctl_run: run->ext_reason 0
+[  202.750799] kvm_arch_vcpu_ioctl_run: run->ext_reason 0
+[  202.750819] kvm_arch_vcpu_ioctl_run: run->ext_reason 0
+[  202.751574] kvm_riscv_check_vcpu_requests: Entry
+[  202.751617] kvm_riscv_check_vcpu_requests: Entry
+[  202.752737] kvm_riscv_check_vcpu_requests: Entry
+
+Test payload
+============
+
+[  202.753678] kvm_arch_vcpu_ioctl_run: run->ext_reason 35
+fcvt.d.w fa5,a5
+[  202.754145] kvm_riscv_check_vcpu_requests: Entry
+Rebooting
+
+[  202.754655] kvm_arch_vcpu_ioctl_run: run->ext_reason 35
+[  202.755030] kvm_riscv_check_vcpu_requests: Entry
+QEMU riscv_cpu_reset_hold: Entry
+QEMU kvm_riscv_reset_vcpu: Entry
+QEMU kvm_riscv_reset_vcpu: Exit
+QEMU riscv_cpu_reset_hold: Exit
+QEMU riscv_cpu_reset_hold: Entry
+QEMU kvm_riscv_reset_vcpu: Entry
+QEMU kvm_riscv_reset_vcpu: Exit
+QEMU riscv_cpu_reset_hold: Exit
+[  202.770352] kvm_arch_vcpu_ioctl_run: run->ext_reason 24
+[  202.770915] kvm_arch_vcpu_ioctl_run: run->ext_reason 10
+[  202.770951] kvm_arch_vcpu_ioctl_run: run->ext_reason 24
+[  202.771802] kvm_arch_vcpu_ioctl_run: run->ext_reason 10
+[  202.772272] kvm_riscv_check_vcpu_requests: Entry
+[  202.772888] kvm_riscv_check_vcpu_requests: Entry
+
+Test payload
+============
+
+
+When thinking about the migration of virtual machines shouldn't QEMU be 
+in control of the initial state of vcpus instead of KVM?
+
+CCing the RISC-V KVM maintainers.
+
+Best regards
+
+Heinrich
 
