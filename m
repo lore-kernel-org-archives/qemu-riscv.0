@@ -4,87 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F1DEC36018
-	for <qemu-riscv@archiver.kernel.org>; Tue, 17 Sep 2024 12:14:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CC64C35FFF
+	for <qemu-riscv@archiver.kernel.org>; Tue, 17 Sep 2024 12:30:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sqX5q-0000IM-DJ; Tue, 17 Sep 2024 08:14:06 -0400
+	id 1sqXL8-0003wr-19; Tue, 17 Sep 2024 08:29:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1sqX5i-0000Cp-Qx
- for qemu-riscv@nongnu.org; Tue, 17 Sep 2024 08:14:00 -0400
-Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
+ id 1sqXL4-0003u1-4B
+ for qemu-riscv@nongnu.org; Tue, 17 Sep 2024 08:29:50 -0400
+Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1sqX5h-0006rI-3G
- for qemu-riscv@nongnu.org; Tue, 17 Sep 2024 08:13:58 -0400
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-378f600e090so1274510f8f.3
- for <qemu-riscv@nongnu.org>; Tue, 17 Sep 2024 05:13:56 -0700 (PDT)
+ id 1sqXKy-0000iX-Fp
+ for qemu-riscv@nongnu.org; Tue, 17 Sep 2024 08:29:48 -0400
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-374c1120a32so3789495f8f.1
+ for <qemu-riscv@nongnu.org>; Tue, 17 Sep 2024 05:29:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1726575235; x=1727180035; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1726576183; x=1727180983; darn=nongnu.org;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=MC7n5cuZfeSytA1WhfmxSyFOkG4NsKzOjqRAv+n83No=;
- b=g1wEqOq3t6L0JWoJ+rZFUl0YfxwPOjeAAm0aMn0PSDRVkFGAXuOqeSonY9lpl8GU6h
- 9q45ZavtxHBxI9iUEkNZJX73T847YCTV7iK4WpxkUZBq7CJmI0XJUuqOLsDcMCBx7m3p
- 1+HV+XIZxEHI/rZowubS9oMHn0bFaHM6QEf4nB57v3uSIw955ebQI+MHaAB2uL0fcpn+
- YUkOXvhp0tI/EquFatHmDhHGigtjKsEUPzA1Zrsd3IXNnfw6UbeYaVtJjn3Yc+wsEfU2
- grFyLd+V0wQmFz90NhrTr1cZC2qXsEMexfzedMB3HaMrr22FHusPewhhkrXz1d/1t+JF
- /nWw==
+ bh=cDwJqjT39P7l+wmzkodQCGVmKW8RyhC5f8lT0NFE48I=;
+ b=AIUYU1OdoDRxxRglFOrbdTc9Hq5MRnRfXNANXPBc85qlUVc6/GXqeyoUEv4Q68bDvl
+ Ch5SER+QTtDCyvcQHgXj1pLuiKTrdKqYNO3rqArk3Z7+XH2bJj0xJFy8yuJMg/OVWQuK
+ 0WxFMOC5b7EkSLoV+Ojz4ZxSiepHpyqa8UWZVAdV6o67C1m4VVKpqjW6ST6u4qJe/S9E
+ IOM9SbprW8s8Bds7sPw7+VzTXZmgqeYw8cqc43xUGEK3ZdQu47pTMtEU/PjS9eCRNGPi
+ K/0RoBC5a2aSkn0Cru5PkLiqY0C9SYzqzxGpTjqGW65Wj2GHw8b0Pbb8sYH/a99Xohe/
+ aSmA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726575235; x=1727180035;
+ d=1e100.net; s=20230601; t=1726576183; x=1727180983;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MC7n5cuZfeSytA1WhfmxSyFOkG4NsKzOjqRAv+n83No=;
- b=smP6+36CmeAaYfRtilrcA8CU1paAulFHkZTqO6phM7AOrRJANzmbPVzuNxGChp5S8f
- WTIwXjUUWRP1U9+nmPrVa4TXHdnkCWJ9VLOsZ6dQLMy/BumofQXApJSkSQcb3dJpNnMO
- 8r6QHoIDQzoj7FTe65rBQSfhvLfqgx6Q0VGO+O68NcyUIqsFye1ZL35xdwUk0L7FCkas
- JrxdTf8KlM2d4g4twLETOA4xVHhsYn1yrh0hzWGI34Cx6efbf5EVwdNkEcuZg1mvbhvE
- Y2FP5H6evO8If6EXamhvCe4XEVmlLzlTW94L9rHeiBCIYPbQXobpEr8bZOTEUJbGFTNa
- usHA==
+ bh=cDwJqjT39P7l+wmzkodQCGVmKW8RyhC5f8lT0NFE48I=;
+ b=cUKc3q7KqCK+FPd2j8ezqW8Ejg2/H+nB/m6nZkz8mg3Q2RE1Twc+0m7WoK+I8oPHLl
+ xREEbQolcSn3n6LiQpdtWUJihKKf38XxJgXNQdDdrcJcseUxt6xHhMhZN5offprWnsRa
+ g1buvInnUK1kT1WlDrcK8GEJB5XY4Be4zXeCkneKVts6LMfLGEXK0RGN2r4yts48gFba
+ demnzCN9O2Q2FWJugym6y+DAt+kFFIoGEhTisR1eT1xwPsiMQngmgHeB/ZAesuJj6ssq
+ fbt7eC74e12GR7hE5XGQZMKvsfksIdEMiXQiBOicbSAh860PvsgW+BXpD9LEIYHXpAdw
+ ojRg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWN7hU556Exk3388lyjwzjDdeYTOf3sT0VEkIS15zKnUYjgf1YqAkOJpwIwpDQmWbmbCC7Uqgfiq0ES@nongnu.org
-X-Gm-Message-State: AOJu0Yy5TaIasBMqdxekB6ozuqoq+4f/Zu5WBJMov99/SSreiyx+PCxP
- I6rEApFrgDKRgtQAFj+huyQHtH/oF4qu6PZn1w3U382VVYYbTURxAMXm9PdCFCU=
-X-Google-Smtp-Source: AGHT+IE5pOk6khKzpywNQbacL3gukULELrLhmknBhWl5mLFjzgvroDkQg/8ig4VVqGPm5QgSfLtP2Q==
-X-Received: by 2002:a5d:5f52:0:b0:374:c949:836d with SMTP id
- ffacd0b85a97d-378c2d4d80fmr11539368f8f.37.1726575234136; 
- Tue, 17 Sep 2024 05:13:54 -0700 (PDT)
+ AJvYcCVD11ai4h40rTk5TIQjFRNsn3GdzkTM5YOD5CWu3OCMKKh21CLpN+X1VIyaMKuoA8qq6J7xew4lFR2b@nongnu.org
+X-Gm-Message-State: AOJu0Yx3NrYNtrfxk5e5VWlwFgse615rmkd09ULg02oqu3WBXaCQqXei
+ zoKe9Maws1deBLYuObs8RP009wxc9azq2ozzdIT2nb8JVpGAPRMHZ2u/oClcDJ0=
+X-Google-Smtp-Source: AGHT+IGoGLCoJThzqQAu/NfFkIZ2VYBcdN+6Phs4T7Bx8M0Yjpd+25ONDLaZRkwAh/sK9knOvdFSpA==
+X-Received: by 2002:a05:6000:11c7:b0:368:633d:f111 with SMTP id
+ ffacd0b85a97d-378c2d4c92dmr10453302f8f.40.1726576182374; 
+ Tue, 17 Sep 2024 05:29:42 -0700 (PDT)
 Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
  [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-378e72e4abfsm9452724f8f.16.2024.09.17.05.13.53
+ ffacd0b85a97d-378e780e14fsm9425127f8f.117.2024.09.17.05.29.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Sep 2024 05:13:53 -0700 (PDT)
-Date: Tue, 17 Sep 2024 14:13:52 +0200
+ Tue, 17 Sep 2024 05:29:41 -0700 (PDT)
+Date: Tue, 17 Sep 2024 14:29:41 +0200
 From: Andrew Jones <ajones@ventanamicro.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org, 
- qemu-devel@nongnu.org
-Subject: Re: [PATCH 1/1] target/riscv: enable floating point unit
-Message-ID: <20240917-f45624310204491aede04703@orel>
-References: <20240916181633.366449-1-heinrich.schuchardt@canonical.com>
+To: Alexei Filippov <alexei.filippov@syntacore.com>
+Cc: alistair.francis@wdc.com, alistair23@gmail.com, 
+ apatel@ventanamicro.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
+ liwei1518@gmail.com, palmer@dabbelt.com, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, zhiwei_liu@linux.alibaba.com
+Subject: Re: [PATCH v9] target/riscv/kvm/kvm-cpu.c: kvm_riscv_handle_sbi()
+ fail with vendor-specific SBI
+Message-ID: <20240917-4c642a7fb52b49f470c9f29a@orel>
+References: <20240626-1420003b7d88d892be22a719@orel>
+ <20240917115433.38503-1-alexei.filippov@syntacore.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20240916181633.366449-1-heinrich.schuchardt@canonical.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::434;
- envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x434.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+In-Reply-To: <20240917115433.38503-1-alexei.filippov@syntacore.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::436;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x436.google.com
+X-Spam_score_int: 4
+X-Spam_score: 0.4
+X-Spam_bar: /
+X-Spam_report: (0.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
+ SORTED_RECIPS=2.499, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,49 +100,97 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Sep 16, 2024 at 08:16:33PM GMT, Heinrich Schuchardt wrote:
-> OpenSBI enables the floating point in mstatus. For consistency QEMU/KVM
-> should do the same.
+On Tue, Sep 17, 2024 at 02:54:33PM GMT, Alexei Filippov wrote:
+> kvm_riscv_handle_sbi() may return not supported return code to not
+> trigger qemu abort with vendor-specific sbi.
 > 
-> Without this patch EDK II with TLS enabled crashes when hitting the first
-> floating point instruction while running QEMU with --accel kvm and runs
-> fine with --accel tcg.
+> Add new error path to provide proper error in case of
+> qemu_chr_fe_read_all() may not return sizeof(ch), because exactly zero
+> just means we failed to read input, which can happen, so
+> telling the SBI caller we failed to read, but telling the caller of this
+> function that we successfully emulated the SBI call, is correct. However,
+> anything else, other than sizeof(ch), means something unexpected happened,
+> so we should return an error.
 > 
-> Additionally to this patch EDK II should be changed to make no assumptions
-> about the state of the floating point unit.
+> Added SBI related return code's defines.
 > 
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  target/riscv/cpu.c | 7 +++++++
->  1 file changed, 7 insertions(+)
-> 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 4bda754b01..c32e2721d4 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -923,6 +923,13 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
->      if (mcc->parent_phases.hold) {
->          mcc->parent_phases.hold(obj, type);
->      }
-> +    if (riscv_has_ext(env, RVF) || riscv_has_ext(env, RVD)) {
-> +        env->mstatus = set_field(env->mstatus, MSTATUS_FS, env->misa_mxl);
-> +        for (int regnr = 0; regnr < 32; ++regnr) {
-> +            env->fpr[regnr] = 0;
-> +        }
-> +        riscv_csrrw(env, CSR_FCSR, NULL, 0, -1);
-> +    }
+> Signed-off-by: Alexei Filippov <alexei.filippov@syntacore.com>
+> Fixes: 4eb47125 ("target/riscv: Handle KVM_EXIT_RISCV_SBI exit")
 
-If this is only fixing KVM, then I think it belongs in
-kvm_riscv_reset_vcpu(). But, I feel like we're working around an issue
-with KVM synchronization with this, as well as with the "clear CSR values"
-part of commit 8633951530cc ("target/riscv: Clear CSR values at reset and
-sync MPSTATE with host"). KVM knows how to reset VCPUs. It does so on
-VCPU creation and for any secondaries started with SBI HSM start. KVM's
-reset would set sstatus.FS to 1 ("Initial") and zero out all the fp
-registers and fcsr. So it seems like we're either synchronizing prior to
-KVM resetting the boot VCPU, not synchronizing at all, or KVM isn't doing
-the reset of the boot VCPU.
+Fixes tag goes above s-o-b and 8 hex digits is a bit small. Most
+commit references in QEMU are using 10 or 12 digits.
+
+> ---
+>  target/riscv/kvm/kvm-cpu.c         | 10 ++++++----
+>  target/riscv/sbi_ecall_interface.h | 12 ++++++++++++
+>  2 files changed, 18 insertions(+), 4 deletions(-)
+> 
+> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+> index f6e3156b8d..9f2ca67c9f 100644
+> --- a/target/riscv/kvm/kvm-cpu.c
+> +++ b/target/riscv/kvm/kvm-cpu.c
+> @@ -1517,19 +1517,21 @@ static int kvm_riscv_handle_sbi(CPUState *cs, struct kvm_run *run)
+>          ret = qemu_chr_fe_read_all(serial_hd(0)->be, &ch, sizeof(ch));
+>          if (ret == sizeof(ch)) {
+>              run->riscv_sbi.ret[0] = ch;
+> -        } else {
+> +            ret = 0;
+> +        } else if (ret == 0) {
+>              run->riscv_sbi.ret[0] = -1;
+> +        } else {
+> +            ret = -1;
+>          }
+> -        ret = 0;
+
+Looks good!
+
+>          break;
+>      case SBI_EXT_DBCN:
+>          kvm_riscv_handle_sbi_dbcn(cs, run);
+>          break;
+>      default:
+>          qemu_log_mask(LOG_UNIMP,
+> -                      "%s: un-handled SBI EXIT, specific reasons is %lu\n",
+> +                      "%s: Unhandled SBI exit with extension-id %lu\n",
+>                        __func__, run->riscv_sbi.extension_id);
+> -        ret = -1;
+> +        run->riscv_sbi.ret[0] = SBI_ERR_NOT_SUPPORTED;
+
+This, along with the addition of the SBI_* defines below, should be a
+separate patch. If we were just naming the -1, then I wouldn't mind it
+slipping in with the same patch, but this is changing behavior since
+SBI_ERR_NOT_SUPPORTED is -2. I agree with the change, though, it just
+needs to be a separate patch. And the separate patch should have the
+same Fixes tag.
 
 Thanks,
 drew
+
+>          break;
+>      }
+>      return ret;
+> diff --git a/target/riscv/sbi_ecall_interface.h b/target/riscv/sbi_ecall_interface.h
+> index 7dfe5f72c6..4df0accd78 100644
+> --- a/target/riscv/sbi_ecall_interface.h
+> +++ b/target/riscv/sbi_ecall_interface.h
+> @@ -86,4 +86,16 @@
+>  #define SBI_EXT_VENDOR_END              0x09FFFFFF
+>  /* clang-format on */
+>  
+> +/* SBI return error codes */
+> +#define SBI_SUCCESS                  0
+> +#define SBI_ERR_FAILURE             -1
+> +#define SBI_ERR_NOT_SUPPORTED       -2
+> +#define SBI_ERR_INVALID_PARAM       -3
+> +#define SBI_ERR_DENIED              -4
+> +#define SBI_ERR_INVALID_ADDRESS     -5
+> +#define SBI_ERR_ALREADY_AVAILABLE   -6
+> +#define SBI_ERR_ALREADY_STARTED     -7
+> +#define SBI_ERR_ALREADY_STOPPED     -8
+> +#define SBI_ERR_NO_SHMEM            -9
+> +
+>  #endif
+> -- 
+> 2.34.1
+> 
 
