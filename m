@@ -4,68 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9EFAC36019
-	for <qemu-riscv@archiver.kernel.org>; Tue, 17 Sep 2024 11:55:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F1DEC36018
+	for <qemu-riscv@archiver.kernel.org>; Tue, 17 Sep 2024 12:14:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sqWnI-0007BQ-Jo; Tue, 17 Sep 2024 07:54:56 -0400
+	id 1sqX5q-0000IM-DJ; Tue, 17 Sep 2024 08:14:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alexei.filippov@syntacore.com>)
- id 1sqWnG-00077J-Jn; Tue, 17 Sep 2024 07:54:54 -0400
-Received: from mta-04.yadro.com ([89.207.88.248])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alexei.filippov@syntacore.com>)
- id 1sqWnD-0003BS-At; Tue, 17 Sep 2024 07:54:54 -0400
-DKIM-Filter: OpenDKIM Filter v2.11.0 mta-04.yadro.com D07C5C0002
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
- s=mta-04; t=1726574080;
- bh=0b+6vJn1T0D5RZfp8GAXyY+hCJJIU3UK4EfWpiPrbFA=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=jBL8iHH6VstOOej18g7r+F/v44Qv9gfcmvv7ld2O5RzwqqNiXe9FWAZJv2S9j1/l/
- OD9nzBxtSY+Gqyqj17s2gfqJpL/jcuGUlI+7eW0BTznX6JerVL3Zp9TvkF4+MqwBlW
- 5vR/j4XjfpR21QezxwoqX/gzpwcALc181+4f1+QASJVecQ0obpvgd39qeamzNCoEkA
- cjQNJ4S/vThUOhjhK6BG7cNyyBndTr/cn7dk6MwsG5KOVMEHnioXxCbT3ZOFclirst
- Ab5DhBMjwjM+ZFuO3Royjo+X3NoxGEXjdcB48VS57V6VJDUsHhXEnlTX2gWknjLQdm
- WVgQJStuAj4Rg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
- s=mta-03; t=1726574080;
- bh=0b+6vJn1T0D5RZfp8GAXyY+hCJJIU3UK4EfWpiPrbFA=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=t2uJsMR0G1AgTUOTuc0ZCjh4cTlOUWONyrGLUyLMnv1fMDYdc52FqstUV4s2DfULa
- uootGu9j+KmF06DUG5mmShzwfBpZgNh6hIyOt/z/ley9Is/a2fW0cyXxTzgIv4sxJv
- ThbBMNyz82/PTCmQmOFTQmBuU3Cp44YFhnFvMxhOA5ItCeqT2407FhfRfeAYl40W4a
- TICzjApiOHu2jeSITtfnD8+VaorBwLL0QnSJJMHXEW+oigBetd0dISJjsW9stembCV
- S5y+MWA+Msw1tFvdFZdAE+TcDmWvpfpQBZ/b+CUbUFpm4W/8xuhZvUX+H/1hJGPDMU
- /D4pLUGO5/aAA==
-From: Alexei Filippov <alexei.filippov@syntacore.com>
-To: <ajones@ventanamicro.com>
-CC: <alexei.filippov@syntacore.com>, <alistair.francis@wdc.com>,
- <alistair23@gmail.com>, <apatel@ventanamicro.com>, <bin.meng@windriver.com>,
- <dbarboza@ventanamicro.com>, <liwei1518@gmail.com>, <palmer@dabbelt.com>,
- <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>,
- <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH v9] target/riscv/kvm/kvm-cpu.c: kvm_riscv_handle_sbi() fail
- with vendor-specific SBI
-Date: Tue, 17 Sep 2024 14:54:33 +0300
-Message-ID: <20240917115433.38503-1-alexei.filippov@syntacore.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240626-1420003b7d88d892be22a719@orel>
-References: <20240626-1420003b7d88d892be22a719@orel>
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1sqX5i-0000Cp-Qx
+ for qemu-riscv@nongnu.org; Tue, 17 Sep 2024 08:14:00 -0400
+Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1sqX5h-0006rI-3G
+ for qemu-riscv@nongnu.org; Tue, 17 Sep 2024 08:13:58 -0400
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-378f600e090so1274510f8f.3
+ for <qemu-riscv@nongnu.org>; Tue, 17 Sep 2024 05:13:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1726575235; x=1727180035; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=MC7n5cuZfeSytA1WhfmxSyFOkG4NsKzOjqRAv+n83No=;
+ b=g1wEqOq3t6L0JWoJ+rZFUl0YfxwPOjeAAm0aMn0PSDRVkFGAXuOqeSonY9lpl8GU6h
+ 9q45ZavtxHBxI9iUEkNZJX73T847YCTV7iK4WpxkUZBq7CJmI0XJUuqOLsDcMCBx7m3p
+ 1+HV+XIZxEHI/rZowubS9oMHn0bFaHM6QEf4nB57v3uSIw955ebQI+MHaAB2uL0fcpn+
+ YUkOXvhp0tI/EquFatHmDhHGigtjKsEUPzA1Zrsd3IXNnfw6UbeYaVtJjn3Yc+wsEfU2
+ grFyLd+V0wQmFz90NhrTr1cZC2qXsEMexfzedMB3HaMrr22FHusPewhhkrXz1d/1t+JF
+ /nWw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1726575235; x=1727180035;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=MC7n5cuZfeSytA1WhfmxSyFOkG4NsKzOjqRAv+n83No=;
+ b=smP6+36CmeAaYfRtilrcA8CU1paAulFHkZTqO6phM7AOrRJANzmbPVzuNxGChp5S8f
+ WTIwXjUUWRP1U9+nmPrVa4TXHdnkCWJ9VLOsZ6dQLMy/BumofQXApJSkSQcb3dJpNnMO
+ 8r6QHoIDQzoj7FTe65rBQSfhvLfqgx6Q0VGO+O68NcyUIqsFye1ZL35xdwUk0L7FCkas
+ JrxdTf8KlM2d4g4twLETOA4xVHhsYn1yrh0hzWGI34Cx6efbf5EVwdNkEcuZg1mvbhvE
+ Y2FP5H6evO8If6EXamhvCe4XEVmlLzlTW94L9rHeiBCIYPbQXobpEr8bZOTEUJbGFTNa
+ usHA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWN7hU556Exk3388lyjwzjDdeYTOf3sT0VEkIS15zKnUYjgf1YqAkOJpwIwpDQmWbmbCC7Uqgfiq0ES@nongnu.org
+X-Gm-Message-State: AOJu0Yy5TaIasBMqdxekB6ozuqoq+4f/Zu5WBJMov99/SSreiyx+PCxP
+ I6rEApFrgDKRgtQAFj+huyQHtH/oF4qu6PZn1w3U382VVYYbTURxAMXm9PdCFCU=
+X-Google-Smtp-Source: AGHT+IE5pOk6khKzpywNQbacL3gukULELrLhmknBhWl5mLFjzgvroDkQg/8ig4VVqGPm5QgSfLtP2Q==
+X-Received: by 2002:a5d:5f52:0:b0:374:c949:836d with SMTP id
+ ffacd0b85a97d-378c2d4d80fmr11539368f8f.37.1726575234136; 
+ Tue, 17 Sep 2024 05:13:54 -0700 (PDT)
+Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
+ [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-378e72e4abfsm9452724f8f.16.2024.09.17.05.13.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 17 Sep 2024 05:13:53 -0700 (PDT)
+Date: Tue, 17 Sep 2024 14:13:52 +0200
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org, 
+ qemu-devel@nongnu.org
+Subject: Re: [PATCH 1/1] target/riscv: enable floating point unit
+Message-ID: <20240917-f45624310204491aede04703@orel>
+References: <20240916181633.366449-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: T-EXCH-07.corp.yadro.com (172.17.11.57) To
- T-EXCH-12.corp.yadro.com (172.17.11.143)
-Received-SPF: permerror client-ip=89.207.88.248;
- envelope-from=alexei.filippov@syntacore.com; helo=mta-04.yadro.com
-X-Spam_score_int: 4
-X-Spam_score: 0.4
-X-Spam_bar: /
-X-Spam_report: (0.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SORTED_RECIPS=2.499,
- SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01 autolearn=no autolearn_force=no
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240916181633.366449-1-heinrich.schuchardt@canonical.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::434;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x434.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -81,78 +100,49 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-kvm_riscv_handle_sbi() may return not supported return code to not
-trigger qemu abort with vendor-specific sbi.
+On Mon, Sep 16, 2024 at 08:16:33PM GMT, Heinrich Schuchardt wrote:
+> OpenSBI enables the floating point in mstatus. For consistency QEMU/KVM
+> should do the same.
+> 
+> Without this patch EDK II with TLS enabled crashes when hitting the first
+> floating point instruction while running QEMU with --accel kvm and runs
+> fine with --accel tcg.
+> 
+> Additionally to this patch EDK II should be changed to make no assumptions
+> about the state of the floating point unit.
+> 
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  target/riscv/cpu.c | 7 +++++++
+>  1 file changed, 7 insertions(+)
+> 
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 4bda754b01..c32e2721d4 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -923,6 +923,13 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
+>      if (mcc->parent_phases.hold) {
+>          mcc->parent_phases.hold(obj, type);
+>      }
+> +    if (riscv_has_ext(env, RVF) || riscv_has_ext(env, RVD)) {
+> +        env->mstatus = set_field(env->mstatus, MSTATUS_FS, env->misa_mxl);
+> +        for (int regnr = 0; regnr < 32; ++regnr) {
+> +            env->fpr[regnr] = 0;
+> +        }
+> +        riscv_csrrw(env, CSR_FCSR, NULL, 0, -1);
+> +    }
 
-Add new error path to provide proper error in case of
-qemu_chr_fe_read_all() may not return sizeof(ch), because exactly zero
-just means we failed to read input, which can happen, so
-telling the SBI caller we failed to read, but telling the caller of this
-function that we successfully emulated the SBI call, is correct. However,
-anything else, other than sizeof(ch), means something unexpected happened,
-so we should return an error.
+If this is only fixing KVM, then I think it belongs in
+kvm_riscv_reset_vcpu(). But, I feel like we're working around an issue
+with KVM synchronization with this, as well as with the "clear CSR values"
+part of commit 8633951530cc ("target/riscv: Clear CSR values at reset and
+sync MPSTATE with host"). KVM knows how to reset VCPUs. It does so on
+VCPU creation and for any secondaries started with SBI HSM start. KVM's
+reset would set sstatus.FS to 1 ("Initial") and zero out all the fp
+registers and fcsr. So it seems like we're either synchronizing prior to
+KVM resetting the boot VCPU, not synchronizing at all, or KVM isn't doing
+the reset of the boot VCPU.
 
-Added SBI related return code's defines.
-
-Signed-off-by: Alexei Filippov <alexei.filippov@syntacore.com>
-Fixes: 4eb47125 ("target/riscv: Handle KVM_EXIT_RISCV_SBI exit")
----
- target/riscv/kvm/kvm-cpu.c         | 10 ++++++----
- target/riscv/sbi_ecall_interface.h | 12 ++++++++++++
- 2 files changed, 18 insertions(+), 4 deletions(-)
-
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index f6e3156b8d..9f2ca67c9f 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -1517,19 +1517,21 @@ static int kvm_riscv_handle_sbi(CPUState *cs, struct kvm_run *run)
-         ret = qemu_chr_fe_read_all(serial_hd(0)->be, &ch, sizeof(ch));
-         if (ret == sizeof(ch)) {
-             run->riscv_sbi.ret[0] = ch;
--        } else {
-+            ret = 0;
-+        } else if (ret == 0) {
-             run->riscv_sbi.ret[0] = -1;
-+        } else {
-+            ret = -1;
-         }
--        ret = 0;
-         break;
-     case SBI_EXT_DBCN:
-         kvm_riscv_handle_sbi_dbcn(cs, run);
-         break;
-     default:
-         qemu_log_mask(LOG_UNIMP,
--                      "%s: un-handled SBI EXIT, specific reasons is %lu\n",
-+                      "%s: Unhandled SBI exit with extension-id %lu\n",
-                       __func__, run->riscv_sbi.extension_id);
--        ret = -1;
-+        run->riscv_sbi.ret[0] = SBI_ERR_NOT_SUPPORTED;
-         break;
-     }
-     return ret;
-diff --git a/target/riscv/sbi_ecall_interface.h b/target/riscv/sbi_ecall_interface.h
-index 7dfe5f72c6..4df0accd78 100644
---- a/target/riscv/sbi_ecall_interface.h
-+++ b/target/riscv/sbi_ecall_interface.h
-@@ -86,4 +86,16 @@
- #define SBI_EXT_VENDOR_END              0x09FFFFFF
- /* clang-format on */
- 
-+/* SBI return error codes */
-+#define SBI_SUCCESS                  0
-+#define SBI_ERR_FAILURE             -1
-+#define SBI_ERR_NOT_SUPPORTED       -2
-+#define SBI_ERR_INVALID_PARAM       -3
-+#define SBI_ERR_DENIED              -4
-+#define SBI_ERR_INVALID_ADDRESS     -5
-+#define SBI_ERR_ALREADY_AVAILABLE   -6
-+#define SBI_ERR_ALREADY_STARTED     -7
-+#define SBI_ERR_ALREADY_STOPPED     -8
-+#define SBI_ERR_NO_SHMEM            -9
-+
- #endif
--- 
-2.34.1
-
+Thanks,
+drew
 
