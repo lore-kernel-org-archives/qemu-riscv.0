@@ -4,87 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CC64C35FFF
-	for <qemu-riscv@archiver.kernel.org>; Tue, 17 Sep 2024 12:30:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55EACC35FFF
+	for <qemu-riscv@archiver.kernel.org>; Tue, 17 Sep 2024 12:45:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sqXL8-0003wr-19; Tue, 17 Sep 2024 08:29:54 -0400
+	id 1sqXa2-0004Gd-0D; Tue, 17 Sep 2024 08:45:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1sqXL4-0003u1-4B
- for qemu-riscv@nongnu.org; Tue, 17 Sep 2024 08:29:50 -0400
-Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436])
+ id 1sqXZz-0004EM-5f
+ for qemu-riscv@nongnu.org; Tue, 17 Sep 2024 08:45:15 -0400
+Received: from mail-wr1-x433.google.com ([2a00:1450:4864:20::433])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1sqXKy-0000iX-Fp
- for qemu-riscv@nongnu.org; Tue, 17 Sep 2024 08:29:48 -0400
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-374c1120a32so3789495f8f.1
- for <qemu-riscv@nongnu.org>; Tue, 17 Sep 2024 05:29:44 -0700 (PDT)
+ id 1sqXZw-000311-Az
+ for qemu-riscv@nongnu.org; Tue, 17 Sep 2024 08:45:14 -0400
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-374bb08d011so3180835f8f.3
+ for <qemu-riscv@nongnu.org>; Tue, 17 Sep 2024 05:45:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1726576183; x=1727180983; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=cDwJqjT39P7l+wmzkodQCGVmKW8RyhC5f8lT0NFE48I=;
- b=AIUYU1OdoDRxxRglFOrbdTc9Hq5MRnRfXNANXPBc85qlUVc6/GXqeyoUEv4Q68bDvl
- Ch5SER+QTtDCyvcQHgXj1pLuiKTrdKqYNO3rqArk3Z7+XH2bJj0xJFy8yuJMg/OVWQuK
- 0WxFMOC5b7EkSLoV+Ojz4ZxSiepHpyqa8UWZVAdV6o67C1m4VVKpqjW6ST6u4qJe/S9E
- IOM9SbprW8s8Bds7sPw7+VzTXZmgqeYw8cqc43xUGEK3ZdQu47pTMtEU/PjS9eCRNGPi
- K/0RoBC5a2aSkn0Cru5PkLiqY0C9SYzqzxGpTjqGW65Wj2GHw8b0Pbb8sYH/a99Xohe/
- aSmA==
+ d=ventanamicro.com; s=google; t=1726577110; x=1727181910; darn=nongnu.org;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=R2D8omB6AIs3LPmVIk9BObkgDL6uOtgEhSvvMBO53Ms=;
+ b=DWNomanKdiO0KP6DC8ybSWmqdZbcWOSxL33UiDJyF1IAlL7aRGqhMP0G+3B1oIYfAk
+ 7xd5S7FomkITjy/m0kxAapXFsYKOXWUvIg8+DnsOk0FpPbm9fKAyDupf3+anDv5XSVVw
+ XRc9ETBmquEIt0eoCce4kzP+kga1y3M7v/3eFokDXs8i4cwDQQ1DqQIc/iFxNde11p23
+ CRxIZb12MotxYTvbBpBt7lixBQ765VOkJYxz5QUwKIhyjOzYeH0WyH4ROAnhdX9NiLMk
+ 4kEEgT9L2cCrAhREBL/z35EXeI4gU/wQyI7dpR7k7iv5rLxbsMZfAM/0QHDmvYyFMOaa
+ dFPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726576183; x=1727180983;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=cDwJqjT39P7l+wmzkodQCGVmKW8RyhC5f8lT0NFE48I=;
- b=cUKc3q7KqCK+FPd2j8ezqW8Ejg2/H+nB/m6nZkz8mg3Q2RE1Twc+0m7WoK+I8oPHLl
- xREEbQolcSn3n6LiQpdtWUJihKKf38XxJgXNQdDdrcJcseUxt6xHhMhZN5offprWnsRa
- g1buvInnUK1kT1WlDrcK8GEJB5XY4Be4zXeCkneKVts6LMfLGEXK0RGN2r4yts48gFba
- demnzCN9O2Q2FWJugym6y+DAt+kFFIoGEhTisR1eT1xwPsiMQngmgHeB/ZAesuJj6ssq
- fbt7eC74e12GR7hE5XGQZMKvsfksIdEMiXQiBOicbSAh860PvsgW+BXpD9LEIYHXpAdw
- ojRg==
+ d=1e100.net; s=20230601; t=1726577110; x=1727181910;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=R2D8omB6AIs3LPmVIk9BObkgDL6uOtgEhSvvMBO53Ms=;
+ b=NOvH8hp/Wu4wPjTOZgKmSxMoQWZBYqG9nal0Mwfs2Kg/RoaMOP8F5hd8drkZ+mSnuW
+ Q93LVQoDQyOx4Dw9V3RQ80hFS25T3KWTNrHPs1ZYT3gXnhyd5xL/6IhYk51t5/ok92T5
+ 7/4MEmrjdSS0IPXzXmi1VyCZsdPRE+VdSmo5yPfAyTOz1drtXbWhybG7WdOotkWb2dS9
+ PEMYoyxcm7DIVd5tIUfnD0FPCr5MgG6745U0IgTWUwmITfLaodQcxHWM9gmHaAZPg/S6
+ qJNdmy2PYGjjbu4pG0dN62RzjoZjKPFYi4romevRD9lvYiYW98TXbPVoBDpREy841buM
+ UiDA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVD11ai4h40rTk5TIQjFRNsn3GdzkTM5YOD5CWu3OCMKKh21CLpN+X1VIyaMKuoA8qq6J7xew4lFR2b@nongnu.org
-X-Gm-Message-State: AOJu0Yx3NrYNtrfxk5e5VWlwFgse615rmkd09ULg02oqu3WBXaCQqXei
- zoKe9Maws1deBLYuObs8RP009wxc9azq2ozzdIT2nb8JVpGAPRMHZ2u/oClcDJ0=
-X-Google-Smtp-Source: AGHT+IGoGLCoJThzqQAu/NfFkIZ2VYBcdN+6Phs4T7Bx8M0Yjpd+25ONDLaZRkwAh/sK9knOvdFSpA==
-X-Received: by 2002:a05:6000:11c7:b0:368:633d:f111 with SMTP id
- ffacd0b85a97d-378c2d4c92dmr10453302f8f.40.1726576182374; 
- Tue, 17 Sep 2024 05:29:42 -0700 (PDT)
+ AJvYcCXRM3G16kuMGJ0qXKDyuI5yc+LfoQ7yY0FY4PCAJkMUe8C9HWsPfw8DX1F/VWMP0GRFpX7QJiVnEkOQ@nongnu.org
+X-Gm-Message-State: AOJu0Ywy0TqUnSXaFTizT99FVydxtC+V0dDMjzcTg2BG1nVSWZs/OYnt
+ 3xS9joWS/ZKHUQhfSn4u65HB7wrRRNtfdZwgvj1Ch19h5InsRqtVaKkoERrpELw=
+X-Google-Smtp-Source: AGHT+IHL0gNK0X/v97KdZxKStrAktOesKMobua4sN8iN9MxPJ2nkMymPIjGDYd5+Pc9JCeRh1aH3lA==
+X-Received: by 2002:adf:e552:0:b0:374:b6f3:728d with SMTP id
+ ffacd0b85a97d-378c2d516c4mr10153515f8f.46.1726577110079; 
+ Tue, 17 Sep 2024 05:45:10 -0700 (PDT)
 Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
  [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-378e780e14fsm9425127f8f.117.2024.09.17.05.29.41
+ ffacd0b85a97d-378e780519esm9436905f8f.103.2024.09.17.05.45.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Sep 2024 05:29:41 -0700 (PDT)
-Date: Tue, 17 Sep 2024 14:29:41 +0200
+ Tue, 17 Sep 2024 05:45:09 -0700 (PDT)
+Date: Tue, 17 Sep 2024 14:45:08 +0200
 From: Andrew Jones <ajones@ventanamicro.com>
-To: Alexei Filippov <alexei.filippov@syntacore.com>
-Cc: alistair.francis@wdc.com, alistair23@gmail.com, 
- apatel@ventanamicro.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
- liwei1518@gmail.com, palmer@dabbelt.com, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, zhiwei_liu@linux.alibaba.com
-Subject: Re: [PATCH v9] target/riscv/kvm/kvm-cpu.c: kvm_riscv_handle_sbi()
- fail with vendor-specific SBI
-Message-ID: <20240917-4c642a7fb52b49f470c9f29a@orel>
-References: <20240626-1420003b7d88d892be22a719@orel>
- <20240917115433.38503-1-alexei.filippov@syntacore.com>
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Gregor Haas <gregorhaas1997@gmail.com>, qemu-devel@nongnu.org, 
+ qemu-riscv@nongnu.org, atishp@rivosinc.com, dbarboza@ventanamicro.com, 
+ alistair.francis@wdc.com
+Subject: Re: [PATCH v3 0/1] Add support for generating OpenSBI domains in the
+ device tree
+Message-ID: <20240917-2683603a6ea10148772d365e@orel>
+References: <20240805210444.497723-1-gregorhaas1997@gmail.com>
+ <CAKmqyKM_qgc+wwrDRzZM1yda=dZziM=1rGU2_SDeJU9PTnacVg@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20240917115433.38503-1-alexei.filippov@syntacore.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::436;
- envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x436.google.com
-X-Spam_score_int: 4
-X-Spam_score: 0.4
-X-Spam_bar: /
-X-Spam_report: (0.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
- SORTED_RECIPS=2.499, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAKmqyKM_qgc+wwrDRzZM1yda=dZziM=1rGU2_SDeJU9PTnacVg@mail.gmail.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::433;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x433.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,97 +101,38 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Sep 17, 2024 at 02:54:33PM GMT, Alexei Filippov wrote:
-> kvm_riscv_handle_sbi() may return not supported return code to not
-> trigger qemu abort with vendor-specific sbi.
+On Mon, Sep 09, 2024 at 01:27:05PM GMT, Alistair Francis wrote:
+> On Tue, Aug 6, 2024 at 7:05 AM Gregor Haas <gregorhaas1997@gmail.com> wrote:
+> >
+> > This patch series adds support for specifying OpenSBI domains on the QEMU
+> > command line. A simple example of what this looks like is below, including
+> > mapping the board's UART into the secondary domain:
 > 
-> Add new error path to provide proper error in case of
-> qemu_chr_fe_read_all() may not return sizeof(ch), because exactly zero
-> just means we failed to read input, which can happen, so
-> telling the SBI caller we failed to read, but telling the caller of this
-> function that we successfully emulated the SBI call, is correct. However,
-> anything else, other than sizeof(ch), means something unexpected happened,
-> so we should return an error.
+> Thanks for the patch, sorry it took me so long to look into this
 > 
-> Added SBI related return code's defines.
+> >
+> > qemu-system-riscv64 -machine virt -bios fw_jump.bin -cpu max -smp 2 -m 4G -nographic \
+> >         -device opensbi-memregion,id=mem,base=0xBC000000,order=26,mmio=false \
+> >         -device opensbi-memregion,id=uart,base=0x10000000,order=12,mmio=true,device0="/soc/serial@10000000" \
+> >         -device opensbi-domain,id=domain,possible-harts=0-1,boot-hart=0x0,next-addr=0xBC000000,next-mode=1,region0=mem,perms0=0x3f,region1=uart,perms1=0x3f
 > 
-> Signed-off-by: Alexei Filippov <alexei.filippov@syntacore.com>
-> Fixes: 4eb47125 ("target/riscv: Handle KVM_EXIT_RISCV_SBI exit")
-
-Fixes tag goes above s-o-b and 8 hex digits is a bit small. Most
-commit references in QEMU are using 10 or 12 digits.
-
-> ---
->  target/riscv/kvm/kvm-cpu.c         | 10 ++++++----
->  target/riscv/sbi_ecall_interface.h | 12 ++++++++++++
->  2 files changed, 18 insertions(+), 4 deletions(-)
+> This will need documentation added under docs (probably under
+> docs/system/riscv) of how this should be used.
 > 
-> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-> index f6e3156b8d..9f2ca67c9f 100644
-> --- a/target/riscv/kvm/kvm-cpu.c
-> +++ b/target/riscv/kvm/kvm-cpu.c
-> @@ -1517,19 +1517,21 @@ static int kvm_riscv_handle_sbi(CPUState *cs, struct kvm_run *run)
->          ret = qemu_chr_fe_read_all(serial_hd(0)->be, &ch, sizeof(ch));
->          if (ret == sizeof(ch)) {
->              run->riscv_sbi.ret[0] = ch;
-> -        } else {
-> +            ret = 0;
-> +        } else if (ret == 0) {
->              run->riscv_sbi.ret[0] = -1;
-> +        } else {
-> +            ret = -1;
->          }
-> -        ret = 0;
+> I'm not convinced this is something we want though. A user can dump
+> the QEMU DTB and edit it to support OpenSBI domains if they want.
+>
 
-Looks good!
+I also feel like this is just pushing the population of device tree
+nodes from an editor of a .dts file to the QEMU command line. If some
+generation is needed, then maybe we need a script, possibly one which
+has the same command line inputs as proposed here. afaik, we haven't
+typically taken patches which help overlay the generated devicetree
+with additional nodes. For example, see [1] for one such proposal
+and rejection.
 
->          break;
->      case SBI_EXT_DBCN:
->          kvm_riscv_handle_sbi_dbcn(cs, run);
->          break;
->      default:
->          qemu_log_mask(LOG_UNIMP,
-> -                      "%s: un-handled SBI EXIT, specific reasons is %lu\n",
-> +                      "%s: Unhandled SBI exit with extension-id %lu\n",
->                        __func__, run->riscv_sbi.extension_id);
-> -        ret = -1;
-> +        run->riscv_sbi.ret[0] = SBI_ERR_NOT_SUPPORTED;
-
-This, along with the addition of the SBI_* defines below, should be a
-separate patch. If we were just naming the -1, then I wouldn't mind it
-slipping in with the same patch, but this is changing behavior since
-SBI_ERR_NOT_SUPPORTED is -2. I agree with the change, though, it just
-needs to be a separate patch. And the separate patch should have the
-same Fixes tag.
+[1] https://lore.kernel.org/all/20210926183410.256484-1-sjg@chromium.org/
 
 Thanks,
 drew
-
->          break;
->      }
->      return ret;
-> diff --git a/target/riscv/sbi_ecall_interface.h b/target/riscv/sbi_ecall_interface.h
-> index 7dfe5f72c6..4df0accd78 100644
-> --- a/target/riscv/sbi_ecall_interface.h
-> +++ b/target/riscv/sbi_ecall_interface.h
-> @@ -86,4 +86,16 @@
->  #define SBI_EXT_VENDOR_END              0x09FFFFFF
->  /* clang-format on */
->  
-> +/* SBI return error codes */
-> +#define SBI_SUCCESS                  0
-> +#define SBI_ERR_FAILURE             -1
-> +#define SBI_ERR_NOT_SUPPORTED       -2
-> +#define SBI_ERR_INVALID_PARAM       -3
-> +#define SBI_ERR_DENIED              -4
-> +#define SBI_ERR_INVALID_ADDRESS     -5
-> +#define SBI_ERR_ALREADY_AVAILABLE   -6
-> +#define SBI_ERR_ALREADY_STARTED     -7
-> +#define SBI_ERR_ALREADY_STOPPED     -8
-> +#define SBI_ERR_NO_SHMEM            -9
-> +
->  #endif
-> -- 
-> 2.34.1
-> 
 
