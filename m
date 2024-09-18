@@ -4,51 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C270CCD181
-	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Sep 2024 14:03:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96149CCD1A7
+	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Sep 2024 14:04:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sqvGp-00032z-Ov; Wed, 18 Sep 2024 10:03:03 -0400
+	id 1sqvGt-000363-Sc; Wed, 18 Sep 2024 10:03:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <s.makarov@syntacore.com>)
- id 1sqvGm-0002yP-0l; Wed, 18 Sep 2024 10:03:00 -0400
+ id 1sqvGl-0002xs-2r; Wed, 18 Sep 2024 10:02:59 -0400
 Received: from mta-04.yadro.com ([89.207.88.248])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <s.makarov@syntacore.com>)
- id 1sqvGk-0002b5-2B; Wed, 18 Sep 2024 10:02:59 -0400
-DKIM-Filter: OpenDKIM Filter v2.11.0 mta-04.yadro.com 93970C0002
+ id 1sqvGi-0002b0-JZ; Wed, 18 Sep 2024 10:02:58 -0400
+DKIM-Filter: OpenDKIM Filter v2.11.0 mta-04.yadro.com A4EFDC0002
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
- s=mta-04; t=1726668175;
- bh=5W/qhfnBCdxvMNbbU8sTMOE6s1XNy+wv4Jmtt9p3OhQ=;
+ s=mta-04; t=1726668169;
+ bh=oxsZbL2ehpkUOthxSsGCY2jo8At/i/UgF1cy29T+VRo=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=o2I9OWGlRPvWFrwoJ3l2U4shDBdhHvKfOBH6RJ6wCrYHR/qh4daX12QVEroJvZGg7
- Rs/jL2Elhc79PKq+Du5E4u+DE3TrpYJZwLPUcJgAkIUb/tPGrbGpP1nNc3AcnJgm7S
- fh9DIdv0FUMXR36hu18aKrppq1zlQAHz/Mdc2kXNgkNbavrhcxNMeIE8Rpej+eZ6P1
- bMjdbS6Teu1H6J64mAuVe1hMQS+pT6PeUXWreuyJyuhQd6Fl3at7rmNgoqYlGevdAb
- 23pyX3NJqcqw5nqQCuCLM8k/sVfYYCozos7H2hlr87G/g1lD2/+bSSp6D2zljTlQYZ
- EftoiFzZE71ww==
+ b=UK1Eq/TUKnbquvrzN0PGc9yrm8jj1OEYRWL3NgidYHiqudqNOyLhOQR8QIlizq6z0
+ KY4D4nhGUpK12IXjX9FgWpA2SIeX36vUotEXW5jYixqwgoO5fXqB2hDB2nQnI+WBeV
+ NoK1owqtIgmjrgPNsVFL9UbvzHfd6CeOuWW7Zc6uFxg9gRa0o8nP2mRg0djg8RUqrR
+ +qqbGNQcESZeSLjcV+gnHEdOykyQp/Cpv3OZ3qUqpzdehvC3VURmZTViN47xTgaI2X
+ zs1pMmXxxE6+KHdcq9hSj68tGm8g/5jM6f4YzqRTmMwjlvv5xgUHCxofl8lEMyS6nn
+ 5x1H/5bhzLPCg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
- s=mta-03; t=1726668175;
- bh=5W/qhfnBCdxvMNbbU8sTMOE6s1XNy+wv4Jmtt9p3OhQ=;
+ s=mta-03; t=1726668169;
+ bh=oxsZbL2ehpkUOthxSsGCY2jo8At/i/UgF1cy29T+VRo=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=iApSwrVc5Ue/6Wrw3SgaZFcsxNGeLBeRjNRUXoiwChujX90C1qPBpPCgJLedq5sd8
- eFzMdO4nSi5ek94g6WUtHjWtcTSDnR9tueocZeq81OEEsQ+YG2j++OZ3CiwRnhV7JF
- ahFhS75A2OoCXtamZDD5ke3mI+mKqTo/jhy2WJEDlPq9ZSXc63FmszBVLNhr/BC7aC
- ob1FXcwi6DrzzO88RR+4hTu5BEljagMaOgNm5aFlLL2Q/k+yC25JxBVCYfHxJVcqk8
- lQ2FRRPpDo4tBXhkj8Ux119gYyZfBWzlwhwPZ1rC8bzAPZ9X57/H+QWd7vhoNCKljN
- AZ5Dc2NuH6Sgg==
+ b=n0S4AA43NmZFKSnk38FJNTHtGUhh5ih9UwWKa1ELZah8iJp7s3o9HJ3LORiydzDgY
+ Jlu55KXA1Z9zKdottKVH1juAn7Mwh8TaENj4FQFpc3D2ZbaukVNrQQNrC0i8ct6flf
+ FB+c773eeroPRQg7M+xtrE9kvwu8aqvd/X9VslM7LVlHz3HP+TFhAiOO7O0He9EtxG
+ UZZkTJMy+MWlVrqA0Q1OcbUfP+72gVV/2AMdOK0rGLEdXtFKXx1PVQ3cku49T/bJmP
+ M1W42+3JgCKEjaEWldHE8dYf76HdM0dIeWOyi5Tt6wiORQcsSqqOGeomEIct+OFcFu
+ 0reHEjZ4/l4oA==
 From: Sergey Makarov <s.makarov@syntacore.com>
 To: <Alistar.Francis@wdc.com>
 CC: <s.makarov@syntacore.com>, <bmeng.cn@gmail.com>, <palmer@dabbelt.com>,
  <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>
-Subject: [PATCH 1/2] hw/intc: Make zeroth priority register read-only
-Date: Wed, 18 Sep 2024 17:02:28 +0300
-Message-ID: <20240918140229.124329-2-s.makarov@syntacore.com>
+Subject: [PATCH 0/2] riscv: hw/intc: Fixes for standard conformance
+Date: Wed, 18 Sep 2024 17:02:27 +0300
+Message-ID: <20240918140229.124329-1-s.makarov@syntacore.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240918140229.124329-1-s.makarov@syntacore.com>
-References: <20240918140229.124329-1-s.makarov@syntacore.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -78,35 +76,31 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-According to PLIC specification chapter 4, zeroth
-priority register is reserved. Discard writes to
-this register.
+*** Patchset goal ***
 
-Signed-off-by: Sergey Makarov <s.makarov@syntacore.com>
----
- hw/intc/sifive_plic.c | 9 +++++++--
- 1 file changed, 7 insertions(+), 2 deletions(-)
+This patchset aims to improve standard conformance for SiFive PLIC
+implementation.
 
-diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
-index e559f11805..3f3ee96ebc 100644
---- a/hw/intc/sifive_plic.c
-+++ b/hw/intc/sifive_plic.c
-@@ -189,8 +189,13 @@ static void sifive_plic_write(void *opaque, hwaddr addr, uint64_t value,
- 
-     if (addr_between(addr, plic->priority_base, plic->num_sources << 2)) {
-         uint32_t irq = (addr - plic->priority_base) >> 2;
--
--        if (((plic->num_priorities + 1) & plic->num_priorities) == 0) {
-+        if (irq == 0) {
-+            /* IRQ 0 source prioority is reserved */
-+            qemu_log_mask(LOG_GUEST_ERROR,
-+                          "%s: Invalid source priority write 0x%"
-+                          HWADDR_PRIx "\n", __func__, addr);
-+            return;
-+        } else if (((plic->num_priorities + 1) & plic->num_priorities) == 0) {
-             /*
-              * if "num_priorities + 1" is power-of-2, make each register bit of
-              * interrupt priority WARL (Write-Any-Read-Legal). Just filter
+*** Testing cases ***
+
+Currently there are no automated tests for these changes, but there
+are several test cases, with which these changes may be checked:
+1. Zeroth priority register can be checked by reading it after
+   writing to it. Without patch its value would be the same which
+   is written there, but with it it would be zero;
+2. Trigger call of `sifive_plic_irq_request` with level 0.
+   Without second patch it will clear pending bit, but with it
+   pending bit won't be cleared.
+If anyone knows how this can be turned into automated test, help
+would be appreciated.
+
+Sergey Makarov (2):
+  hw/intc: Make zeroth priority register read-only
+  hw/intc: Don't clear pending bits on IRQ lowering
+
+ hw/intc/sifive_plic.c | 15 +++++++++++----
+ 1 file changed, 11 insertions(+), 4 deletions(-)
+
 -- 
 2.34.1
 
