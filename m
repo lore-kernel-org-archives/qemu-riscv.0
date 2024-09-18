@@ -4,61 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B432CDD54D
-	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Sep 2024 17:14:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4274CCDD54D
+	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Sep 2024 17:15:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sqyG7-0006Vz-7p; Wed, 18 Sep 2024 13:14:31 -0400
+	id 1sqyGJ-0006oh-DE; Wed, 18 Sep 2024 13:14:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1sqyG5-0006Um-IE
- for qemu-riscv@nongnu.org; Wed, 18 Sep 2024 13:14:29 -0400
-Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
+ id 1sqyGC-0006mG-Fe
+ for qemu-riscv@nongnu.org; Wed, 18 Sep 2024 13:14:37 -0400
+Received: from mail-pj1-x102e.google.com ([2607:f8b0:4864:20::102e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1sqyG3-0001qa-Qu
- for qemu-riscv@nongnu.org; Wed, 18 Sep 2024 13:14:29 -0400
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-206f9b872b2so64300755ad.3
- for <qemu-riscv@nongnu.org>; Wed, 18 Sep 2024 10:14:26 -0700 (PDT)
+ id 1sqyGA-0001rF-7I
+ for qemu-riscv@nongnu.org; Wed, 18 Sep 2024 13:14:36 -0400
+Received: by mail-pj1-x102e.google.com with SMTP id
+ 98e67ed59e1d1-2d8b68bddeaso889a91.1
+ for <qemu-riscv@nongnu.org>; Wed, 18 Sep 2024 10:14:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1726679665; x=1727284465; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=yctDsWLUV1YXkBVBqtdd55CZU+0Ssgap5cnUJoATZJI=;
- b=inGwfKadAlA3XLYcMG7o8BX0Y3br2hHKBeLP5M/jMLDuYcQW6AlyfAOfJwjtkPNYNe
- IhypwGFlEVEF/yZEXcsZ8iawKpLw5OkKQi/A0pB6hSkUJYhSH8E22tpCCZA0MOxZYDkX
- We/wCEfBahGDj7q0Wscw7EqSQA+ua8m8GeLUSXCpLR0GzTYvzepgt3U8UprpNofQXYPn
- ZpB7mQzfHoOE2UrIuglDuQn5kvBGRUAEBF7xN9hQJ6UG1md2uPaoVwgtZTzVWAgLAfgD
- ZDmBAkJQfXC6MaU9/hvMrSd2Inb3B+31NAL9U3n5bgMBEZKOY9pzped5B4PxeI4tozGm
- PpbA==
+ d=sifive.com; s=google; t=1726679672; x=1727284472; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Nfs9IDqgQpVVigMZU11K8UdOmxP2QGM7nTxJBjJv74w=;
+ b=nVjHBfRRHrSQaOhtW3UG2/JaqTM7Z7u6GNj/30UxNRmPySWwJo15aYIu8ZprACuiix
+ etjmlT6dl4BV/UuSsW00PXB9wxaLdySZ9p9cQEBWwOc3MXjrOvqNkh9V/PiBMRQnGOSI
+ o6lU45e1bm9SB58RDzSBESWfodYnZgl/nSSTHZeOTXzOM1ck/njwmmlIGxgSECRmFaRu
+ 3Yt1Ayd4WLJdzgh0uVPLlxh3mFkLA8XKb4MqeJ/WuS3dS/pN+XaIgzTQJOgWoR5nOHHk
+ EpcI7MjUdtUi0wcJgG+hbHJnJjQLC7AYbfot7EODpYynJF1b+F6pKXlncYZPzKZhyHWo
+ onyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726679665; x=1727284465;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=yctDsWLUV1YXkBVBqtdd55CZU+0Ssgap5cnUJoATZJI=;
- b=IuTZm3VwNOSpOt3Z/Wd9wDHyyshHQL3YMsZgfHovUgSYsMtvSsiaEGHtQKV6NrdkyO
- 0thftb/YM8r7Xlbh702M3D9YAxJPLXhFxC6hmsCIAu/7GAnWNzdT7QCxD2stcADr7CVc
- T4++/e8me65lujwvAoyN6KfwTlou8N9dfJsuhXrV5WmvaZ1YAVeT6v9ECkuN3yQN5U93
- VYFJthX5Dib5ou0egn9iNqH/MPY3IVyD5PijpYbnPP7s5nzl/77Ok7dvp4JUXsEdCL3E
- 6WVCsoHU/Fa7OBLOpvCV2P5Am6GuLDd3qv6/8+qIe3M50BJKJaTW+N5VNErSG4ueBx9H
- iveA==
+ d=1e100.net; s=20230601; t=1726679672; x=1727284472;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Nfs9IDqgQpVVigMZU11K8UdOmxP2QGM7nTxJBjJv74w=;
+ b=ACRT2Y5n79TbTyAsmxWx54bRLIEOsNesH1ujnhBCiMny9Soi5/Uaj/RrF0i2rsM+Ux
+ tZyRwGSkO+5mpZEbQdD5Wc6cMYTRqfMnrbn+4oNOo9D9oPUWBXZJO8XhVH6j13fOGmqj
+ Tc7wMFfYOeCzo1NeYBOVaxQAtuuZUM6rHnPk440YbvZcZkUmLORLuHe8fmQqDV+FT4Wx
+ 6/Ic28My0lXgvqHknYWB2sInuDxeiSOYGlD9uPiVYAcYFpGib5N8SKhpV62UArD7AyTi
+ TpqJa2B+0GniUikEuGo0dMiW7MX2qP0YptphLakfrtdMZWnZfb6OUpzpDrTJur+BFRTZ
+ u4Mw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUY8z/63//0/i3PjRgaQMbUfF2zEs+4LNb1fb2mYpN5A049BtsQn/0phrAn3MTM9qOy4E+q9AxokoW1@nongnu.org
-X-Gm-Message-State: AOJu0YzxBUBsWjiTg5M7tQ3jNBrLsnCWkwedH2leSRjLIqj3LfiAZCcC
- dGCcHWEiOPEnINl4CA/Q7eiHzaHvnQmw+dkgVwuoVHCpTtsIhV0gQM1+LebEtcI=
-X-Google-Smtp-Source: AGHT+IGcMebEHXcRaWD1XZN9BXTFDll2xzt8N6DFE2QJ+2eKAbb7jD/IaMChlwpnVVteR1bNUbJJoQ==
-X-Received: by 2002:a17:90a:2dc5:b0:2c9:5a85:f8dd with SMTP id
- 98e67ed59e1d1-2db9ffee6c4mr26433515a91.18.1726679665017; 
- Wed, 18 Sep 2024 10:14:25 -0700 (PDT)
+ AJvYcCXRTyhe7RZyHAo2m677KBzH+o48i6QNyC9WxoLncjByj6XJvzyQOaJFabHHYMbqJfjvZOGfZLz1Uo8y@nongnu.org
+X-Gm-Message-State: AOJu0YytZAZruOfD17+QtqZC97bF+RsHExJZResaE8vodA7qxVOWHA4O
+ SsqQeYo8vC2h0seX8yXNe69GJbjTDzb1hLDzE9X8DVPDYe8SRtPf+3KInCJmZY8=
+X-Google-Smtp-Source: AGHT+IGHoIu1KvtWHmKYThUD2uvco8vZFJarhXDHqX59sBe2QqGRkhQkFvNkNPLMJ2YsGEH+VsX7ww==
+X-Received: by 2002:a17:90a:d489:b0:2d3:cd57:bd3 with SMTP id
+ 98e67ed59e1d1-2dbb9f3a7cemr28312007a91.29.1726679672383; 
+ Wed, 18 Sep 2024 10:14:32 -0700 (PDT)
 Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
  [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2dd608e2318sm1914577a91.32.2024.09.18.10.14.22
+ 98e67ed59e1d1-2dd608e2318sm1914577a91.32.2024.09.18.10.14.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Sep 2024 10:14:24 -0700 (PDT)
+ Wed, 18 Sep 2024 10:14:32 -0700 (PDT)
 From: Max Chou <max.chou@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -68,22 +69,24 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, richard.henderson@linaro.org,
  negge@google.com, Max Chou <max.chou@sifive.com>
-Subject: [PATCH v6 0/7] Improve the performance of RISC-V vector
- unit-stride/whole register ld/st instructions
-Date: Thu, 19 Sep 2024 01:14:05 +0800
-Message-Id: <20240918171412.150107-1-max.chou@sifive.com>
+Subject: [PATCH v6 1/7] target/riscv: Set vdata.vm field for vector load/store
+ whole register instructions
+Date: Thu, 19 Sep 2024 01:14:06 +0800
+Message-Id: <20240918171412.150107-2-max.chou@sifive.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240918171412.150107-1-max.chou@sifive.com>
+References: <20240918171412.150107-1-max.chou@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
- envelope-from=max.chou@sifive.com; helo=mail-pl1-x632.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102e;
+ envelope-from=max.chou@sifive.com; helo=mail-pj1-x102e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,92 +102,44 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
+The vm field of the vector load/store whole register instruction's
+encoding is 1.
+The helper function of the vector load/store whole register instructions
+may need the vdata.vm field to do some optimizations.
 
-This version fixes several issues in v5
-- The cross page bound checking issue
-- The mismatch vl comparison in the early exit checking of vext_ldst_us
-- The endian issue when host is big endian
+Signed-off-by: Max Chou <max.chou@sifive.com>
+---
+ target/riscv/insn_trans/trans_rvv.c.inc | 3 +++
+ 1 file changed, 3 insertions(+)
 
-Thank for Richard Henderson's suggestions that this version unrolled the
-loop in helper functions of unmasked vector unit-stride load/store
-instructions, etc.
-
-And this version also extends the optimizations to the unmasked vector
-fault-only-first load instruction.
-
-Some performance result of this version 
-1. Test case provided in 
-    https://gitlab.com/qemu-project/qemu/-/issues/2137#note_1757501369
-    - QEMU user mode (vlen=128):
-        - Original:   ~11.8 sec
-        - v5:          ~1.3 sec
-        - v6:          ~1.2 sec
-    - QEMU system mode (vlen=128):
-        - Original:   ~29.4 sec
-        - v5:          ~1.6 sec
-        - v6:          ~1.6 sec
-2. SPEC CPU2006 INT (test input)
-    - QEMU user mode (vlen=128)
-        - Original:  ~459.1 sec
-        - v5:        ~300.0 sec
-        - v6:        ~280.6 sec
-3. SPEC CPU2017 intspeed (test input)
-    - QEMU user mode (vlen=128)
-        - Original: ~2475.9 sec
-        - v5:       ~1702.6 sec
-        - v6:       ~1663.4 sec
-
-
-This version is based on the riscv-to-apply.next branch(commit 90d5d3c).
-
-Changes from v5:
-- patch 2
-    - Replace the VSTART_CHECK_EARLY_EXIT function by checking the
-      correct evl in vext_ldst_us.
-- patch 3
-    - Unroll the memory load/store loop
-    - Fix the bound checking issue in cross page elements
-    - Fix the endian issue in GEN_VEXT_LD_ELEM/GEN_VEXT_ST_ELEM
-    - Pass in mmu_index for vext_page_ldst_us
-    - Reduce the flag & host checking
-- patch 4
-    - Unroll the memory load/store loop
-    - Fix the bound checking issue in cross page elements
-- patch 5
-    - Extend optimizations to unmasked vector fault-only-first load
-      instruction
-- patch 6
-    - Switch to memcpy only when doing byte load/store
-- patch 7
-    - Inline the vext_page_ldst_us function
-
-Previous versions:
-- v1: https://lore.kernel.org/all/20240215192823.729209-1-max.chou@sifive.com/
-- v2: https://lore.kernel.org/all/20240531174504.281461-1-max.chou@sifive.com/
-- v3: https://lore.kernel.org/all/20240613141906.1276105-1-max.chou@sifive.com/
-- v4: https://lore.kernel.org/all/20240613175122.1299212-1-max.chou@sifive.com/
-- v5: https://lore.kernel.org/all/20240717133936.713642-1-max.chou@sifive.com/
-
-Max Chou (7):
-  target/riscv: Set vdata.vm field for vector load/store whole register
-    instructions
-  target/riscv: rvv: Replace VSTART_CHECK_EARLY_EXIT in vext_ldst_us
-  target/riscv: rvv: Provide a fast path using direct access to host ram
-    for unmasked unit-stride load/store
-  target/riscv: rvv: Provide a fast path using direct access to host ram
-    for unit-stride whole register load/store
-  target/riscv: rvv: Provide a fast path using direct access to host ram
-    for unit-stride load-only-first load instructions
-  target/riscv: rvv: Provide group continuous ld/st flow for unit-stride
-    ld/st instructions
-  target/riscv: Inline unit-stride ld/st and corresponding functions for
-    performance
-
- target/riscv/insn_trans/trans_rvv.c.inc |   3 +
- target/riscv/vector_helper.c            | 598 ++++++++++++++++--------
- 2 files changed, 400 insertions(+), 201 deletions(-)
-
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+index 3a3896ba06c..14e10568bd7 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -770,6 +770,7 @@ static bool ld_us_mask_op(DisasContext *s, arg_vlm_v *a, uint8_t eew)
+     /* Mask destination register are always tail-agnostic */
+     data = FIELD_DP32(data, VDATA, VTA, s->cfg_vta_all_1s);
+     data = FIELD_DP32(data, VDATA, VMA, s->vma);
++    data = FIELD_DP32(data, VDATA, VM, 1);
+     return ldst_us_trans(a->rd, a->rs1, data, fn, s, false);
+ }
+ 
+@@ -787,6 +788,7 @@ static bool st_us_mask_op(DisasContext *s, arg_vsm_v *a, uint8_t eew)
+     /* EMUL = 1, NFIELDS = 1 */
+     data = FIELD_DP32(data, VDATA, LMUL, 0);
+     data = FIELD_DP32(data, VDATA, NF, 1);
++    data = FIELD_DP32(data, VDATA, VM, 1);
+     return ldst_us_trans(a->rd, a->rs1, data, fn, s, true);
+ }
+ 
+@@ -1106,6 +1108,7 @@ static bool ldst_whole_trans(uint32_t vd, uint32_t rs1, uint32_t nf,
+     TCGv_i32 desc;
+ 
+     uint32_t data = FIELD_DP32(0, VDATA, NF, nf);
++    data = FIELD_DP32(data, VDATA, VM, 1);
+     dest = tcg_temp_new_ptr();
+     desc = tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb,
+                                       s->cfg_ptr->vlenb, data));
 -- 
 2.34.1
 
