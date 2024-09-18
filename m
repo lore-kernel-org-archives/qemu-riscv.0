@@ -4,117 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD07ECDD543
-	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Sep 2024 16:27:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B432CDD54D
+	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Sep 2024 17:14:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sqxWU-00044J-OK; Wed, 18 Sep 2024 12:27:22 -0400
+	id 1sqyG7-0006Vz-7p; Wed, 18 Sep 2024 13:14:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <heinrich.schuchardt@canonical.com>)
- id 1sqxWT-00042n-6I
- for qemu-riscv@nongnu.org; Wed, 18 Sep 2024 12:27:21 -0400
-Received: from smtp-relay-internal-1.canonical.com ([185.125.188.123])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <heinrich.schuchardt@canonical.com>)
- id 1sqxWR-0005Hb-7g
- for qemu-riscv@nongnu.org; Wed, 18 Sep 2024 12:27:20 -0400
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 90B2C3F758
- for <qemu-riscv@nongnu.org>; Wed, 18 Sep 2024 16:27:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1726676837;
- bh=iEkJdohtSWik4fNSGLkaPeBerSCz1v1hA1g/Oi9GQoQ=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=UYyx+gTQCLAkdDMwi+P+AG5lftwMLxLjZe9/ZyxzRxzoRH0V84EMx9KEzmo1t0D4Z
- 2AMEEZ2lL5eaz+M2uncEPXQt5gZo7FX2zWWHUMTQWVqjOHvrR7JGrLB1XhIuupldaW
- u3y19hsfjHRQx18uj8zLfaXL1i95sMhxalk7TTRCFclm2/LYSe1J+bcK/+GI2KUUg3
- W0v3n/s9buzg8q5Upd5w9yRM/KxRNtbiJhb44OZWgXH3foGSFAGGxuex6VfcqKkW2q
- 9YXWW9SBw2Cly091i5fzL1d/M0YL+Oqvqn+GNLRC9DFuQr6duM2WauREjPFnvLz8/d
- lVEMxuic3gh4w==
-Received: by mail-wr1-f70.google.com with SMTP id
- ffacd0b85a97d-3787ea79dceso2345060f8f.2
- for <qemu-riscv@nongnu.org>; Wed, 18 Sep 2024 09:27:17 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1sqyG5-0006Um-IE
+ for qemu-riscv@nongnu.org; Wed, 18 Sep 2024 13:14:29 -0400
+Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1sqyG3-0001qa-Qu
+ for qemu-riscv@nongnu.org; Wed, 18 Sep 2024 13:14:29 -0400
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-206f9b872b2so64300755ad.3
+ for <qemu-riscv@nongnu.org>; Wed, 18 Sep 2024 10:14:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sifive.com; s=google; t=1726679665; x=1727284465; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=yctDsWLUV1YXkBVBqtdd55CZU+0Ssgap5cnUJoATZJI=;
+ b=inGwfKadAlA3XLYcMG7o8BX0Y3br2hHKBeLP5M/jMLDuYcQW6AlyfAOfJwjtkPNYNe
+ IhypwGFlEVEF/yZEXcsZ8iawKpLw5OkKQi/A0pB6hSkUJYhSH8E22tpCCZA0MOxZYDkX
+ We/wCEfBahGDj7q0Wscw7EqSQA+ua8m8GeLUSXCpLR0GzTYvzepgt3U8UprpNofQXYPn
+ ZpB7mQzfHoOE2UrIuglDuQn5kvBGRUAEBF7xN9hQJ6UG1md2uPaoVwgtZTzVWAgLAfgD
+ ZDmBAkJQfXC6MaU9/hvMrSd2Inb3B+31NAL9U3n5bgMBEZKOY9pzped5B4PxeI4tozGm
+ PpbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726676836; x=1727281636;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=iEkJdohtSWik4fNSGLkaPeBerSCz1v1hA1g/Oi9GQoQ=;
- b=NX8MtKAF/3eMwTRngntZiBZpw+yKTAj7mSTg3W1B5jTG48k0Z+0OUY/MuLdnaz8jzA
- odkqTPyLadtyvSXUH8sqtj5d3IxeLeQuN/t1SyE8ecZEE3RmZJ/nBL4VfncTPtTe5p56
- uvexdWgqI3zl7bVRZFcg/aVKxeCJMwgSKjFluojJin/iHJ/5uvLL/A/ZB8hHsj/qzGeT
- GLG06P+g6HBdSVRtFU57XECioOTans3banOdd8gp8fgvK1+zcDAWNIDsZ1Z9YMG162SU
- lxwdlJpuP58ULJYDYh4SQ/57sYZryYW5X6Lzret9EculIaG0nOOdKMPColzRX/5Ea9eD
- 7eUg==
+ d=1e100.net; s=20230601; t=1726679665; x=1727284465;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=yctDsWLUV1YXkBVBqtdd55CZU+0Ssgap5cnUJoATZJI=;
+ b=IuTZm3VwNOSpOt3Z/Wd9wDHyyshHQL3YMsZgfHovUgSYsMtvSsiaEGHtQKV6NrdkyO
+ 0thftb/YM8r7Xlbh702M3D9YAxJPLXhFxC6hmsCIAu/7GAnWNzdT7QCxD2stcADr7CVc
+ T4++/e8me65lujwvAoyN6KfwTlou8N9dfJsuhXrV5WmvaZ1YAVeT6v9ECkuN3yQN5U93
+ VYFJthX5Dib5ou0egn9iNqH/MPY3IVyD5PijpYbnPP7s5nzl/77Ok7dvp4JUXsEdCL3E
+ 6WVCsoHU/Fa7OBLOpvCV2P5Am6GuLDd3qv6/8+qIe3M50BJKJaTW+N5VNErSG4ueBx9H
+ iveA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXMSzL0vOxx4rCJTBYpYoYRCIwilqd2dXtVrEmKurK8ZsyxPd27v/XjCbwsTmK7QS9ta4p25Y+Pw/Xe@nongnu.org
-X-Gm-Message-State: AOJu0YyPGLS2TzcHRcACpo47WBjn3lxvTv8HATTyZO8pVKTP5yGzkHkg
- FAFw+qfFYtBuos+SbW44T4iCD7WPM+6ouIYpL+2UhF38hwcbc/CHPGgop7W5PxrzNSwyHqcnTR3
- wSyXiyK1mbdSk1beVkHHSzqjQP4wQE/xVc7x+BG7IP+P+/6U/laOgKJ7HQbIMLaI7ilcy
-X-Received: by 2002:a5d:66c4:0:b0:371:8845:a3af with SMTP id
- ffacd0b85a97d-378d623b7d4mr11461420f8f.39.1726676836342; 
- Wed, 18 Sep 2024 09:27:16 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFq7GTsYYXDPhTkQjL35nwxJT/xKz4RyECHixjHF7LH26VDJ/F0Ct2Etb+lGYO2yRNM4mRfMA==
-X-Received: by 2002:a5d:66c4:0:b0:371:8845:a3af with SMTP id
- ffacd0b85a97d-378d623b7d4mr11461375f8f.39.1726676835857; 
- Wed, 18 Sep 2024 09:27:15 -0700 (PDT)
-Received: from [192.168.103.101]
- (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-378e780519esm12698302f8f.103.2024.09.18.09.27.14
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 18 Sep 2024 09:27:15 -0700 (PDT)
-Message-ID: <ca16bb60-9745-478d-afba-1330b385027e@canonical.com>
-Date: Wed, 18 Sep 2024 18:27:14 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] target/riscv: enable floating point unit
-To: Peter Maydell <peter.maydell@linaro.org>
+ AJvYcCUY8z/63//0/i3PjRgaQMbUfF2zEs+4LNb1fb2mYpN5A049BtsQn/0phrAn3MTM9qOy4E+q9AxokoW1@nongnu.org
+X-Gm-Message-State: AOJu0YzxBUBsWjiTg5M7tQ3jNBrLsnCWkwedH2leSRjLIqj3LfiAZCcC
+ dGCcHWEiOPEnINl4CA/Q7eiHzaHvnQmw+dkgVwuoVHCpTtsIhV0gQM1+LebEtcI=
+X-Google-Smtp-Source: AGHT+IGcMebEHXcRaWD1XZN9BXTFDll2xzt8N6DFE2QJ+2eKAbb7jD/IaMChlwpnVVteR1bNUbJJoQ==
+X-Received: by 2002:a17:90a:2dc5:b0:2c9:5a85:f8dd with SMTP id
+ 98e67ed59e1d1-2db9ffee6c4mr26433515a91.18.1726679665017; 
+ Wed, 18 Sep 2024 10:14:25 -0700 (PDT)
+Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
+ [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-2dd608e2318sm1914577a91.32.2024.09.18.10.14.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 18 Sep 2024 10:14:24 -0700 (PDT)
+From: Max Chou <max.chou@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
  Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Anup Patel <anup@brainfault.org>,
- Atish Patra <atishp@atishpatra.org>, Paul Walmsley
- <paul.walmsley@sifive.com>, Albert Ou <aou@eecs.berkeley.edu>,
- kvm@vger.kernel.org, kvm-riscv@lists.infradead.org,
- linux-riscv@lists.infradead.org, linux-kernel@vger.kernel.org,
- Andrew Jones <ajones@ventanamicro.com>
-References: <20240916181633.366449-1-heinrich.schuchardt@canonical.com>
- <20240917-f45624310204491aede04703@orel>
- <15c359a4-b3c1-4cb0-be2e-d5ca5537bc5b@canonical.com>
- <20240917-b13c51d41030029c70aab785@orel>
- <8b24728f-8b6e-4c79-91f6-7cbb79494550@canonical.com>
- <20240918-039d1e3bebf2231bd452a5ad@orel>
- <CAFEAcA-Yg9=5naRVVCwma0Ug0vFZfikqc6_YiRQTrfBpoz9Bjw@mail.gmail.com>
- <bab7a5ce-74b6-49ae-b610-9a0f624addc0@canonical.com>
- <CAFEAcA-L7sQfK6MNt1ZbZqUMk+TJor=uD3Jj-Pc6Vy9j9JHhYQ@mail.gmail.com>
- <f1e41b95-c499-4e06-91cb-006dcd9d29e6@canonical.com>
- <CAFEAcA_ePVwnpVVWJSx8=-8v2h_z2imfSdyAZd62RhXaZUTojA@mail.gmail.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <CAFEAcA_ePVwnpVVWJSx8=-8v2h_z2imfSdyAZd62RhXaZUTojA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=185.125.188.123;
- envelope-from=heinrich.schuchardt@canonical.com;
- helo=smtp-relay-internal-1.canonical.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, richard.henderson@linaro.org,
+ negge@google.com, Max Chou <max.chou@sifive.com>
+Subject: [PATCH v6 0/7] Improve the performance of RISC-V vector
+ unit-stride/whole register ld/st instructions
+Date: Thu, 19 Sep 2024 01:14:05 +0800
+Message-Id: <20240918171412.150107-1-max.chou@sifive.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
+ envelope-from=max.chou@sifive.com; helo=mail-pl1-x632.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -130,72 +99,93 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 18.09.24 17:32, Peter Maydell wrote:
-> On Wed, 18 Sept 2024 at 14:49, Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
->>
->> On 18.09.24 15:12, Peter Maydell wrote:
->>> On Wed, 18 Sept 2024 at 14:06, Heinrich Schuchardt
->>> <heinrich.schuchardt@canonical.com> wrote:
->>>> Thanks Peter for looking into this.
->>>>
->>>> QEMU's cpu_synchronize_all_post_init() and
->>>> do_kvm_cpu_synchronize_post_reset() both end up in
->>>> kvm_arch_put_registers() and that is long after Linux
->>>> kvm_arch_vcpu_create() has been setting some FPU state. See the output
->>>> below.
->>>>
->>>> kvm_arch_put_registers() copies the CSRs by calling
->>>> kvm_riscv_put_regs_csr(). Here we can find:
->>>>
->>>>        KVM_RISCV_SET_CSR(cs, env, sstatus, env->mstatus);
->>>>
->>>> This call enables or disables the FPU according to the value of
->>>> env->mstatus.
->>>>
->>>> So we need to set the desired state of the floating point unit in QEMU.
->>>> And this is what the current patch does both for TCG and KVM.
->>>
->>> If it does this for both TCG and KVM then I don't understand
->>> this bit from the commit message:
->>>
->>> # Without this patch EDK II with TLS enabled crashes when hitting the first
->>> # floating point instruction while running QEMU with --accel kvm and runs
->>> # fine with --accel tcg.
->>>
->>> Shouldn't this guest crash the same way with both KVM and TCG without
->>> this patch, because the FPU state is the same for both?
-> 
->> By default `qemu-system-riscv64 --accel tcg` runs OpenSBI as firmware
->> which enables the FPU.
->>
->> If you would choose a different SBI implementation which does not enable
->> the FPU you could experience the same crash.
-> 
-> Ah, so KVM vs TCG is a red herring and it's actually "some guest
-> firmware doesn't enable the FPU itself, and if you run that then it will
-> fall over, whether you do it in KVM or TCG" ? That makes more sense.
-> 
-> I don't have an opinion on whether you want to do that or not,
-> not knowing what the riscv architecture mandates. (On Arm this
-> would be fairly clearly "the guest software is broken and
-> should be fixed", but that's because the Arm architecture
-> says you can't assume the FPU is enabled from reset.)
-> 
-> I do think the commit message could use clarification to
-> explain this.
-> 
-> thanks
-> -- PMM
+Hi,
 
-I have not found a specification defining what the status of the FPU 
-should be when M-Mode is stared and when moving from M-Mode to S-Mode.
+This version fixes several issues in v5
+- The cross page bound checking issue
+- The mismatch vl comparison in the early exit checking of vext_ldst_us
+- The endian issue when host is big endian
 
-OpenSBI (which is the dominating M-Mode firmware and invoked by default 
-in TCG mode) enables the FPU before jumping to S-Mode. KVM should to the 
-same for consistency.
+Thank for Richard Henderson's suggestions that this version unrolled the
+loop in helper functions of unmasked vector unit-stride load/store
+instructions, etc.
 
-Best regards
+And this version also extends the optimizations to the unmasked vector
+fault-only-first load instruction.
 
-Heinrich
+Some performance result of this version 
+1. Test case provided in 
+    https://gitlab.com/qemu-project/qemu/-/issues/2137#note_1757501369
+    - QEMU user mode (vlen=128):
+        - Original:   ~11.8 sec
+        - v5:          ~1.3 sec
+        - v6:          ~1.2 sec
+    - QEMU system mode (vlen=128):
+        - Original:   ~29.4 sec
+        - v5:          ~1.6 sec
+        - v6:          ~1.6 sec
+2. SPEC CPU2006 INT (test input)
+    - QEMU user mode (vlen=128)
+        - Original:  ~459.1 sec
+        - v5:        ~300.0 sec
+        - v6:        ~280.6 sec
+3. SPEC CPU2017 intspeed (test input)
+    - QEMU user mode (vlen=128)
+        - Original: ~2475.9 sec
+        - v5:       ~1702.6 sec
+        - v6:       ~1663.4 sec
+
+
+This version is based on the riscv-to-apply.next branch(commit 90d5d3c).
+
+Changes from v5:
+- patch 2
+    - Replace the VSTART_CHECK_EARLY_EXIT function by checking the
+      correct evl in vext_ldst_us.
+- patch 3
+    - Unroll the memory load/store loop
+    - Fix the bound checking issue in cross page elements
+    - Fix the endian issue in GEN_VEXT_LD_ELEM/GEN_VEXT_ST_ELEM
+    - Pass in mmu_index for vext_page_ldst_us
+    - Reduce the flag & host checking
+- patch 4
+    - Unroll the memory load/store loop
+    - Fix the bound checking issue in cross page elements
+- patch 5
+    - Extend optimizations to unmasked vector fault-only-first load
+      instruction
+- patch 6
+    - Switch to memcpy only when doing byte load/store
+- patch 7
+    - Inline the vext_page_ldst_us function
+
+Previous versions:
+- v1: https://lore.kernel.org/all/20240215192823.729209-1-max.chou@sifive.com/
+- v2: https://lore.kernel.org/all/20240531174504.281461-1-max.chou@sifive.com/
+- v3: https://lore.kernel.org/all/20240613141906.1276105-1-max.chou@sifive.com/
+- v4: https://lore.kernel.org/all/20240613175122.1299212-1-max.chou@sifive.com/
+- v5: https://lore.kernel.org/all/20240717133936.713642-1-max.chou@sifive.com/
+
+Max Chou (7):
+  target/riscv: Set vdata.vm field for vector load/store whole register
+    instructions
+  target/riscv: rvv: Replace VSTART_CHECK_EARLY_EXIT in vext_ldst_us
+  target/riscv: rvv: Provide a fast path using direct access to host ram
+    for unmasked unit-stride load/store
+  target/riscv: rvv: Provide a fast path using direct access to host ram
+    for unit-stride whole register load/store
+  target/riscv: rvv: Provide a fast path using direct access to host ram
+    for unit-stride load-only-first load instructions
+  target/riscv: rvv: Provide group continuous ld/st flow for unit-stride
+    ld/st instructions
+  target/riscv: Inline unit-stride ld/st and corresponding functions for
+    performance
+
+ target/riscv/insn_trans/trans_rvv.c.inc |   3 +
+ target/riscv/vector_helper.c            | 598 ++++++++++++++++--------
+ 2 files changed, 400 insertions(+), 201 deletions(-)
+
+-- 
+2.34.1
+
 
