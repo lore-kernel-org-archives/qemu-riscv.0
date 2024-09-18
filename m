@@ -4,99 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A9E4CCD1A0
-	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Sep 2024 13:57:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C270CCD181
+	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Sep 2024 14:03:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sqvB8-000622-85; Wed, 18 Sep 2024 09:57:11 -0400
+	id 1sqvGp-00032z-Ov; Wed, 18 Sep 2024 10:03:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1sqvB3-0005zM-Et
- for qemu-riscv@nongnu.org; Wed, 18 Sep 2024 09:57:05 -0400
-Received: from mail-ej1-x62b.google.com ([2a00:1450:4864:20::62b])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1sqvB0-0001sn-4P
- for qemu-riscv@nongnu.org; Wed, 18 Sep 2024 09:57:04 -0400
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-a8a7cdfdd80so830073766b.0
- for <qemu-riscv@nongnu.org>; Wed, 18 Sep 2024 06:57:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1726667820; x=1727272620; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=jw9R7zHcU6wAlHrH9jZChqK3i5AsMOvAHMYccAaAi1I=;
- b=kFJebzrS9808ph+BOh4rDcBqZb3BhwrYQEFxVuLM3U3/xW+4XfpZlUj1XJGx9RkNmy
- HLZQ4lwN58pmVR/7/XMoaRyWR0N9OldUAdlNObF66tEp0bDLxTKnbM779Y/EkHh/Skix
- +KoNiQBfhjsA9lHbx6CN0r3yiXuVXK320im2cz8DKruAAX08HYw2iqdzSupjfosVce8z
- lpGFKnlpzakWo4ra7aPBrro7IXQvURAmIBQ88qGR3DfOp+R4vORH6wjRA5j7fa1jbqkv
- EcbhtRTjjZkwgznCSR8PeA+EQpH47eT4v3gjfuOp/Oxdxlp2mrphdWPDWrr6YisJUygk
- L5fA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726667820; x=1727272620;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=jw9R7zHcU6wAlHrH9jZChqK3i5AsMOvAHMYccAaAi1I=;
- b=GlauuPvsduMzR8372L8fSAw8kkqDx8X/Swlipiznp2RBaoxjc8jBFy49VW0o9EFApi
- vD9a4QWimqmSDe+sWBeJNXAxmMsYVl2YftIOrHDEX6tTPTNmKrR0cNq/c966G1YEz7wO
- x+9+kQYPBnV0sJ1tmDQYtC8ghprLdzOoZZyJtgCbOvo0dyc4IZuY7nM9jgmlRo8cgZLE
- /29sQDyiTfROg29etFqt8nfJcwio9D/lCmt/3IATFKKiNt0BAH83oQf8yGfgud3x5Xpr
- grh7jsXBZX9hGLV/V2ct792E5VkhRR0Rlufpq4uQFFx2n9V0eftp9rhQ1Yd3To02oLsr
- TdGw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWaaxMzovXB7mB+W8PNZNw4c6VLd25Ek4nBIQac/hSLUMjnvtxZ/+cnQI8ICfLS89qTHYd6pmPw5KkA@nongnu.org
-X-Gm-Message-State: AOJu0YyKoQT5n6LfxQ00wACvaNQkwKFTBqXXXcC7CBEcYdnV2nd5r0X1
- cIANCcrXPwAB3pVOgkNu3i7DPeuqhSLp58cnF/yL80L7akcUsnM02GM6pzIilpI=
-X-Google-Smtp-Source: AGHT+IEnUf2BBLrMw6AF9knDQNnY2Bh71rIsr9GcMfumfal10/pMPKRiwjmEtak/OEyud7HuRes7Yg==
-X-Received: by 2002:a17:907:971b:b0:a89:ffd0:352f with SMTP id
- a640c23a62f3a-a90481045d7mr2005808166b.48.1726667820268; 
- Wed, 18 Sep 2024 06:57:00 -0700 (PDT)
-Received: from localhost ([83.68.141.146]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a906109662fsm594583266b.38.2024.09.18.06.56.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Sep 2024 06:56:59 -0700 (PDT)
-Date: Wed, 18 Sep 2024 15:56:58 +0200
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org, 
- qemu-devel@nongnu.org, Anup Patel <anup@brainfault.org>, 
- Atish Patra <atishp@atishpatra.org>, Paul Walmsley <paul.walmsley@sifive.com>, 
- Albert Ou <aou@eecs.berkeley.edu>, kvm@vger.kernel.org,
- kvm-riscv@lists.infradead.org, 
- linux-riscv@lists.infradead.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 1/1] target/riscv: enable floating point unit
-Message-ID: <20240918-4e2df3f0cabdb8002d7315d9@orel>
-References: <20240916181633.366449-1-heinrich.schuchardt@canonical.com>
- <20240917-f45624310204491aede04703@orel>
- <15c359a4-b3c1-4cb0-be2e-d5ca5537bc5b@canonical.com>
- <20240917-b13c51d41030029c70aab785@orel>
- <8b24728f-8b6e-4c79-91f6-7cbb79494550@canonical.com>
- <20240918-039d1e3bebf2231bd452a5ad@orel>
- <CAFEAcA-Yg9=5naRVVCwma0Ug0vFZfikqc6_YiRQTrfBpoz9Bjw@mail.gmail.com>
- <bab7a5ce-74b6-49ae-b610-9a0f624addc0@canonical.com>
- <CAFEAcA-L7sQfK6MNt1ZbZqUMk+TJor=uD3Jj-Pc6Vy9j9JHhYQ@mail.gmail.com>
- <f1e41b95-c499-4e06-91cb-006dcd9d29e6@canonical.com>
+ (Exim 4.90_1) (envelope-from <s.makarov@syntacore.com>)
+ id 1sqvGm-0002yP-0l; Wed, 18 Sep 2024 10:03:00 -0400
+Received: from mta-04.yadro.com ([89.207.88.248])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <s.makarov@syntacore.com>)
+ id 1sqvGk-0002b5-2B; Wed, 18 Sep 2024 10:02:59 -0400
+DKIM-Filter: OpenDKIM Filter v2.11.0 mta-04.yadro.com 93970C0002
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
+ s=mta-04; t=1726668175;
+ bh=5W/qhfnBCdxvMNbbU8sTMOE6s1XNy+wv4Jmtt9p3OhQ=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=o2I9OWGlRPvWFrwoJ3l2U4shDBdhHvKfOBH6RJ6wCrYHR/qh4daX12QVEroJvZGg7
+ Rs/jL2Elhc79PKq+Du5E4u+DE3TrpYJZwLPUcJgAkIUb/tPGrbGpP1nNc3AcnJgm7S
+ fh9DIdv0FUMXR36hu18aKrppq1zlQAHz/Mdc2kXNgkNbavrhcxNMeIE8Rpej+eZ6P1
+ bMjdbS6Teu1H6J64mAuVe1hMQS+pT6PeUXWreuyJyuhQd6Fl3at7rmNgoqYlGevdAb
+ 23pyX3NJqcqw5nqQCuCLM8k/sVfYYCozos7H2hlr87G/g1lD2/+bSSp6D2zljTlQYZ
+ EftoiFzZE71ww==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
+ s=mta-03; t=1726668175;
+ bh=5W/qhfnBCdxvMNbbU8sTMOE6s1XNy+wv4Jmtt9p3OhQ=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=iApSwrVc5Ue/6Wrw3SgaZFcsxNGeLBeRjNRUXoiwChujX90C1qPBpPCgJLedq5sd8
+ eFzMdO4nSi5ek94g6WUtHjWtcTSDnR9tueocZeq81OEEsQ+YG2j++OZ3CiwRnhV7JF
+ ahFhS75A2OoCXtamZDD5ke3mI+mKqTo/jhy2WJEDlPq9ZSXc63FmszBVLNhr/BC7aC
+ ob1FXcwi6DrzzO88RR+4hTu5BEljagMaOgNm5aFlLL2Q/k+yC25JxBVCYfHxJVcqk8
+ lQ2FRRPpDo4tBXhkj8Ux119gYyZfBWzlwhwPZ1rC8bzAPZ9X57/H+QWd7vhoNCKljN
+ AZ5Dc2NuH6Sgg==
+From: Sergey Makarov <s.makarov@syntacore.com>
+To: <Alistar.Francis@wdc.com>
+CC: <s.makarov@syntacore.com>, <bmeng.cn@gmail.com>, <palmer@dabbelt.com>,
+ <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>
+Subject: [PATCH 1/2] hw/intc: Make zeroth priority register read-only
+Date: Wed, 18 Sep 2024 17:02:28 +0300
+Message-ID: <20240918140229.124329-2-s.makarov@syntacore.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240918140229.124329-1-s.makarov@syntacore.com>
+References: <20240918140229.124329-1-s.makarov@syntacore.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <f1e41b95-c499-4e06-91cb-006dcd9d29e6@canonical.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::62b;
- envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x62b.google.com
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: T-Exch-05.corp.yadro.com (172.17.10.109) To
+ T-EXCH-12.corp.yadro.com (172.17.11.143)
+Received-SPF: permerror client-ip=89.207.88.248;
+ envelope-from=s.makarov@syntacore.com; helo=mta-04.yadro.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -112,52 +78,36 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Sep 18, 2024 at 03:49:39PM GMT, Heinrich Schuchardt wrote:
-> On 18.09.24 15:12, Peter Maydell wrote:
-> > On Wed, 18 Sept 2024 at 14:06, Heinrich Schuchardt
-> > <heinrich.schuchardt@canonical.com> wrote:
-> > > Thanks Peter for looking into this.
-> > > 
-> > > QEMU's cpu_synchronize_all_post_init() and
-> > > do_kvm_cpu_synchronize_post_reset() both end up in
-> > > kvm_arch_put_registers() and that is long after Linux
-> > > kvm_arch_vcpu_create() has been setting some FPU state. See the output
-> > > below.
-> > > 
-> > > kvm_arch_put_registers() copies the CSRs by calling
-> > > kvm_riscv_put_regs_csr(). Here we can find:
-> > > 
-> > >       KVM_RISCV_SET_CSR(cs, env, sstatus, env->mstatus);
-> > > 
-> > > This call enables or disables the FPU according to the value of
-> > > env->mstatus.
-> > > 
-> > > So we need to set the desired state of the floating point unit in QEMU.
-> > > And this is what the current patch does both for TCG and KVM.
-> > 
-> > If it does this for both TCG and KVM then I don't understand
-> > this bit from the commit message:
-> > 
-> > # Without this patch EDK II with TLS enabled crashes when hitting the first
-> > # floating point instruction while running QEMU with --accel kvm and runs
-> > # fine with --accel tcg.
-> > 
-> > Shouldn't this guest crash the same way with both KVM and TCG without
-> > this patch, because the FPU state is the same for both?
-> > 
-> > -- PMM
-> 
-> By default `qemu-system-riscv64 --accel tcg` runs OpenSBI as firmware which
-> enables the FPU.
-> 
-> If you would choose a different SBI implementation which does not enable the
-> FPU you could experience the same crash.
-> 
+According to PLIC specification chapter 4, zeroth
+priority register is reserved. Discard writes to
+this register.
 
-Thanks Heinrich, I had also forgotten that distinction. So the last
-question is whether or not we want to reset mstatus.FS to 1 instead of 3,
-as is done in this patch.
+Signed-off-by: Sergey Makarov <s.makarov@syntacore.com>
+---
+ hw/intc/sifive_plic.c | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
-Thanks,
-drew
+diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
+index e559f11805..3f3ee96ebc 100644
+--- a/hw/intc/sifive_plic.c
++++ b/hw/intc/sifive_plic.c
+@@ -189,8 +189,13 @@ static void sifive_plic_write(void *opaque, hwaddr addr, uint64_t value,
+ 
+     if (addr_between(addr, plic->priority_base, plic->num_sources << 2)) {
+         uint32_t irq = (addr - plic->priority_base) >> 2;
+-
+-        if (((plic->num_priorities + 1) & plic->num_priorities) == 0) {
++        if (irq == 0) {
++            /* IRQ 0 source prioority is reserved */
++            qemu_log_mask(LOG_GUEST_ERROR,
++                          "%s: Invalid source priority write 0x%"
++                          HWADDR_PRIx "\n", __func__, addr);
++            return;
++        } else if (((plic->num_priorities + 1) & plic->num_priorities) == 0) {
+             /*
+              * if "num_priorities + 1" is power-of-2, make each register bit of
+              * interrupt priority WARL (Write-Any-Read-Legal). Just filter
+-- 
+2.34.1
+
 
