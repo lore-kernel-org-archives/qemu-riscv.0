@@ -4,126 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0971FCE8D4C
-	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Sep 2024 04:56:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AF12CE8D4C
+	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Sep 2024 05:52:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sr94T-00009E-7X; Thu, 19 Sep 2024 00:47:13 -0400
+	id 1srA5W-0006et-P5; Thu, 19 Sep 2024 01:52:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1sr94Q-0008PP-ST
- for qemu-riscv@nongnu.org; Thu, 19 Sep 2024 00:47:11 -0400
-Received: from mail-pg1-x52b.google.com ([2607:f8b0:4864:20::52b])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1sr94J-0007AV-T8
- for qemu-riscv@nongnu.org; Thu, 19 Sep 2024 00:47:10 -0400
-Received: by mail-pg1-x52b.google.com with SMTP id
- 41be03b00d2f7-656d8b346d2so243144a12.2
- for <qemu-riscv@nongnu.org>; Wed, 18 Sep 2024 21:47:03 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1srA5S-0006ap-Un; Thu, 19 Sep 2024 01:52:18 -0400
+Received: from out30-118.freemail.mail.aliyun.com ([115.124.30.118])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1srA5N-0006rY-Lb; Thu, 19 Sep 2024 01:52:18 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726721222; x=1727326022; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=De4sKLPybVhT2+Pc9xtI+CTmpF8ivUBlmtwhnsMRIOQ=;
- b=H8Q65y5Ao5sBkRZk9kHAZB4bWbl1BNRmzMwZCNSwh7ZMBMbaH92/bYXa27w7uSVNbv
- Jmow8uSLPK3B9tUQLscDD5uXizmsIO39xEbNBcAysEqaJD9W1uSB8OprkqN/JWP/T10M
- Gdd6MMEH0JXirEa7h+HzjVCDN6h6K9KwNTvwQpqEHQb1vKJYoZRhRmyEgCBGGJ1mvecm
- QzBl8i9MGJu7aMcDtIyRBYvEMX5a7mbVszuc4MmDYOpI3yXOE5ARQBWzttkDbo04+JRS
- XNUDLppI/VQq8m4UZQz+Jx/j+Ik6UGXUOzJbwkd0kSdrJrXr09k5AvryvhMG4M/r+gGN
- JMNg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726721222; x=1727326022;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=De4sKLPybVhT2+Pc9xtI+CTmpF8ivUBlmtwhnsMRIOQ=;
- b=dbjt9s21zfXnqN1/o2rerxst/pN+2/0AiaQSY0HkNntPchzG+UEWJjNM8eIL50fmH0
- IJkcAVkrub7uR208F07m/36pQVAq6tZYdD+758YMCoxAEtWI9vQhRCh8LxYzQH4J5l1l
- Zd6CoSSPsg2jAaMNAYs8pRgHyNmj3eqde0mrsf1DhPFpeoGB79/USix5LnTZEYrYqr11
- s0l45qBRc25LqJamqUAQdSp1FZYV8CO6r1oFrbRqctRh7TsH/iBqdusF5z2I9B8ZtMvC
- 9k5DbXqbAJRklYuB3FJXhyKScqGEQ5rZI+ckw8ZKuTD0lDGXYAh2pl3fwkmglXRDKtYt
- obkg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW6FgjhNDd2j8Ss3jTbdJ1xMzpOByk1vRQ+zfEemVnyT80Oc2OUXmWmUg9sUfhNwQOEW4TH2nq4uzNa@nongnu.org
-X-Gm-Message-State: AOJu0YytDlI07uDLz38sUL41mgX0KwKgmHIPQ4FNEpAYxYM29Fw8MAmF
- Lv1LetN5jaXV2sVVu+H4lSZTR2q8K9QxWsUVvEuBPnSM2O4bIIq9zg4bUCNq/bM=
-X-Google-Smtp-Source: AGHT+IE2Y81B/LKedghyO/XIB5KqiZokca4F2Biq0KEcZsGPJCLDi0vE6MjHgWLkzwtVTNzR2l7/8A==
-X-Received: by 2002:a05:6a21:3a87:b0:1cf:4326:5602 with SMTP id
- adf61e73a8af0-1d112e8bf15mr31788153637.36.1726721222472; 
- Wed, 18 Sep 2024 21:47:02 -0700 (PDT)
-Received: from linaro.. (216-180-64-156.dyn.novuscom.net. [216.180.64.156])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-71944bc279csm7478601b3a.188.2024.09.18.21.47.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Sep 2024 21:47:01 -0700 (PDT)
-From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+ d=linux.alibaba.com; s=default;
+ t=1726725117; h=From:To:Subject:Date:Message-Id:MIME-Version;
+ bh=FV1GYYaExWjDqEwzyIk9D5YEF3hBCh2MV8bD/mCD9/c=;
+ b=DWa6zEekvs7lyTGcHqXY+whT2K4GR3vyOkfMYHCI2EzfZVLNfHAXKsxrAW96JWms3Qtm7xYuitbCtvCjV6x3S7N2Ubi2QBbhWeFGgoHh5vRphduCFmj2bVButf5azDRNh0KJrZpvjWJlFTCOonj/NXop8X2MoLibWfx20CZcDrg=
+Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0WFGWR1z_1726725115) by smtp.aliyun-inc.com;
+ Thu, 19 Sep 2024 13:51:56 +0800
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 To: qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Hyman Huang <yong.huang@smartx.com>, Halil Pasic <pasic@linux.ibm.com>,
- kvm@vger.kernel.org, Bin Meng <bmeng.cn@gmail.com>,
- Peter Xu <peterx@redhat.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- David Gibson <david@gibson.dropbear.id.au>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-s390x@nongnu.org,
- Dmitry Fleytman <dmitry.fleytman@gmail.com>,
- Hanna Reitz <hreitz@redhat.com>, Klaus Jensen <its@irrelevant.dk>,
- Corey Minyard <minyard@acm.org>, Laurent Vivier <laurent@vivier.eu>,
- WANG Xuerui <git@xen0n.name>, Thomas Huth <thuth@redhat.com>,
- Rob Herring <robh@kernel.org>, Eduardo Habkost <eduardo@habkost.net>,
- Nicholas Piggin <npiggin@gmail.com>, "Michael S. Tsirkin" <mst@redhat.com>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- "Maciej S. Szmigiero" <maciej.szmigiero@oracle.com>,
- Ani Sinha <anisinha@redhat.com>,
- Stefan Berger <stefanb@linux.vnet.ibm.com>, Fam Zheng <fam@euphon.net>,
- Laurent Vivier <lvivier@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Keith Busch <kbusch@kernel.org>,
- Jean-Christophe Dubois <jcd@tribudubois.net>, qemu-riscv@nongnu.org,
- Igor Mammedov <imammedo@redhat.com>,
- Akihiko Odaki <akihiko.odaki@daynix.com>,
- Sriram Yagnaraman <sriram.yagnaraman@ericsson.com>,
- Jason Wang <jasowang@redhat.com>, Eric Farman <farman@linux.ibm.com>,
- "Richard W.M. Jones" <rjones@redhat.com>,
- =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
- Aurelien Jarno <aurelien@aurel32.net>,
- Markus Armbruster <armbru@redhat.com>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Fabiano Rosas <farosas@suse.de>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, qemu-arm@nongnu.org,
- Christian Borntraeger <borntraeger@linux.ibm.com>, qemu-ppc@nongnu.org,
- Zhao Liu <zhao1.liu@intel.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>, qemu-block@nongnu.org,
- Joel Stanley <joel@jms.id.au>, Weiwei Li <liwei1518@gmail.com>,
- Kevin Wolf <kwolf@redhat.com>, Helge Deller <deller@gmx.de>,
- Yanan Wang <wangyanan55@huawei.com>, Michael Rolnik <mrolnik@gmail.com>,
- Jesper Devantier <foss@defmacro.it>, Marcelo Tosatti <mtosatti@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH v3 08/34] hw/hyperv: replace assert(false) with
- g_assert_not_reached()
-Date: Wed, 18 Sep 2024 21:46:15 -0700
-Message-Id: <20240919044641.386068-9-pierrick.bouvier@linaro.org>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20240919044641.386068-1-pierrick.bouvier@linaro.org>
-References: <20240919044641.386068-1-pierrick.bouvier@linaro.org>
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ dbarboza@ventanamicro.com, liwei1518@gmail.com, bmeng.cn@gmail.com,
+ zhiwei_liu@linux.alibaba.com,
+ TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
+Subject: [PATCH v7 0/8] target/riscv: Expose RV32 cpu to RV64 QEMU
+Date: Thu, 19 Sep 2024 13:50:40 +0800
+Message-Id: <20240919055048.562-1-zhiwei_liu@linux.alibaba.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52b;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-pg1-x52b.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Received-SPF: pass client-ip=115.124.30.118;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-118.freemail.mail.aliyun.com
+X-Spam_score_int: -174
+X-Spam_score: -17.5
+X-Spam_bar: -----------------
+X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -139,108 +65,64 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This patch is part of a series that moves towards a consistent use of
-g_assert_not_reached() rather than an ad hoc mix of different
-assertion mechanisms.
+From: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Maciej S. Szmigiero <maciej.szmigiero@oracle.com>
-Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
----
- hw/hyperv/hyperv_testdev.c |  6 +++---
- hw/hyperv/vmbus.c          | 12 ++++++------
- 2 files changed, 9 insertions(+), 9 deletions(-)
+This patch set aims to expose 32-bit RISC-V cpu to RV64 QEMU. Thus
+qemu-system-riscv64 can directly boot a RV32 Linux.
 
-diff --git a/hw/hyperv/hyperv_testdev.c b/hw/hyperv/hyperv_testdev.c
-index 9a56ddf83fe..ef50e490c4e 100644
---- a/hw/hyperv/hyperv_testdev.c
-+++ b/hw/hyperv/hyperv_testdev.c
-@@ -88,7 +88,7 @@ static TestSintRoute *sint_route_find(HypervTestDev *dev,
-             return sint_route;
-         }
-     }
--    assert(false);
-+    g_assert_not_reached();
-     return NULL;
- }
- 
-@@ -187,7 +187,7 @@ static void msg_conn_destroy(HypervTestDev *dev, uint8_t conn_id)
-             return;
-         }
-     }
--    assert(false);
-+    g_assert_not_reached();
- }
- 
- static void evt_conn_handler(EventNotifier *notifier)
-@@ -237,7 +237,7 @@ static void evt_conn_destroy(HypervTestDev *dev, uint8_t conn_id)
-             return;
-         }
-     }
--    assert(false);
-+    g_assert_not_reached();
- }
- 
- static uint64_t hv_test_dev_read(void *opaque, hwaddr addr, unsigned size)
-diff --git a/hw/hyperv/vmbus.c b/hw/hyperv/vmbus.c
-index 15e0d600c7f..03f415bf226 100644
---- a/hw/hyperv/vmbus.c
-+++ b/hw/hyperv/vmbus.c
-@@ -1874,7 +1874,7 @@ static void send_create_gpadl(VMBus *vmbus)
-         }
-     }
- 
--    assert(false);
-+    g_assert_not_reached();
- }
- 
- static bool complete_create_gpadl(VMBus *vmbus)
-@@ -1889,7 +1889,7 @@ static bool complete_create_gpadl(VMBus *vmbus)
-         }
-     }
- 
--    assert(false);
-+    g_assert_not_reached();
-     return false;
- }
- 
-@@ -1931,7 +1931,7 @@ static void send_teardown_gpadl(VMBus *vmbus)
-         }
-     }
- 
--    assert(false);
-+    g_assert_not_reached();
- }
- 
- static bool complete_teardown_gpadl(VMBus *vmbus)
-@@ -1946,7 +1946,7 @@ static bool complete_teardown_gpadl(VMBus *vmbus)
-         }
-     }
- 
--    assert(false);
-+    g_assert_not_reached();
-     return false;
- }
- 
-@@ -1996,7 +1996,7 @@ static void send_open_channel(VMBus *vmbus)
-         }
-     }
- 
--    assert(false);
-+    g_assert_not_reached();
- }
- 
- static bool complete_open_channel(VMBus *vmbus)
-@@ -2020,7 +2020,7 @@ static bool complete_open_channel(VMBus *vmbus)
-         }
-     }
- 
--    assert(false);
-+    g_assert_not_reached();
-     return false;
- }
- 
+This patch set has been tested with 6.9.0 Linux Image.
+And add an avocado tuxrun test in tests/avocado.
+
+v7:
+  Remove cpu of "any".
+
+v6:
+  Use TUXRUN test case instead of boot_linux_console
+  Add any32 and max32 cpu for RV64 QEMU 
+
+v5:
+  Rebase to master and add tags  
+
+v4:
+  Drop UL completely in PATCH v3 2/7, 4/7, 5/7.
+  Avocado: Add "if=none" to "-drive" option in QEMU command line
+
+v3:
+  Rebase to the master branch
+
+v2:
+  Remove the line that was inadvertently left in PATCH v1 4/6.
+  Add an avocado test.
+
+v1:
+  https://mail.gnu.org/archive/html/qemu-riscv/2024-06/msg00501.html
+
+LIU Zhiwei (2):
+  target/riscv: Add max32 CPU for RV64 QEMU
+  tests/avocado: Boot Linux for RV32 cpu on RV64 QEMU
+
+TANG Tiancheng (6):
+  target/riscv: Add fw_dynamic_info32 for booting RV32 OpenSBI
+  target/riscv: Adjust PMP size for no-MMU RV64 QEMU running RV32
+  target/riscv: Correct SXL return value for RV32 in RV64 QEMU
+  target/riscv: Detect sxl to set bit width for RV32 in RV64
+  target/riscv: Correct mcause/scause bit width for RV32 in RV64 QEMU
+  target/riscv: Enable RV32 CPU support in RV64 QEMU
+
+ configs/targets/riscv64-softmmu.mak |  2 +-
+ hw/riscv/boot.c                     | 35 +++++++++++++++++++----------
+ hw/riscv/sifive_u.c                 |  3 ++-
+ include/hw/riscv/boot.h             |  4 +++-
+ include/hw/riscv/boot_opensbi.h     | 29 ++++++++++++++++++++++++
+ target/riscv/cpu-qom.h              |  1 +
+ target/riscv/cpu.c                  | 28 ++++++++++++++++-------
+ target/riscv/cpu.h                  |  5 ++++-
+ target/riscv/cpu_helper.c           | 25 +++++++++++++++------
+ target/riscv/pmp.c                  |  2 +-
+ tests/avocado/tuxrun_baselines.py   | 16 +++++++++++++
+ 11 files changed, 118 insertions(+), 32 deletions(-)
+
 -- 
-2.39.5
+2.43.0
 
 
