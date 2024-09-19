@@ -4,45 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A377CE8D49
-	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Sep 2024 05:55:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EF4BCE8D4C
+	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Sep 2024 05:56:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1srA8Q-0002cV-EX; Thu, 19 Sep 2024 01:55:22 -0400
+	id 1srA8s-0004xg-4k; Thu, 19 Sep 2024 01:55:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1srA8G-00023g-Lf; Thu, 19 Sep 2024 01:55:12 -0400
-Received: from out30-101.freemail.mail.aliyun.com ([115.124.30.101])
+ id 1srA8p-0004jh-Lt; Thu, 19 Sep 2024 01:55:47 -0400
+Received: from out30-119.freemail.mail.aliyun.com ([115.124.30.119])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1srA8D-0007HL-KM; Thu, 19 Sep 2024 01:55:11 -0400
+ id 1srA8l-0007KL-Pr; Thu, 19 Sep 2024 01:55:46 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1726725305; h=From:To:Subject:Date:Message-Id:MIME-Version;
- bh=q1hRx6CQdBfUQ7r0bb6ynC5utYOjeB/Q6mOffdaJi/E=;
- b=I55JLpJ16CM6gbon9FJefAoEESVCa4I9+W5qiHGnWI+SDe00gN/BWeRvva7SLxStZ2feKw29DlIjeVica/lQ4jBsTosb3VL7l+KGlW1jwmVWbUnrgVaYssj8dcaGCqzOAl026mS8y/CN3pKBBjSadgfFaY5feFAG9GCv8wiOQuY=
+ t=1726725337; h=From:To:Subject:Date:Message-Id:MIME-Version;
+ bh=OYoWwuTCjnhZKVW1fPb6oXyFhZWVqQr9eyJZjOgXeqU=;
+ b=NlDipZ36wqsNimCsSzAuYGusrowk9fgKcjCtRYBjS10Nq2ecEeNNhWNbJ6jf40zLPAjkGBLqdqjVDj82nT8mehghnIeZxSLmF7Yffn4Nt2RrBkJe7f593xDmH9iMAGJgwHK+bQ76+NMNupwaz8zVsi0mfEH0Uj0X/APL/eilAUw=
 Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0WFGWSAP_1726725303) by smtp.aliyun-inc.com;
- Thu, 19 Sep 2024 13:55:04 +0800
+ fp:SMTPD_---0WFGZSGM_1726725335) by smtp.aliyun-inc.com;
+ Thu, 19 Sep 2024 13:55:36 +0800
 From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  dbarboza@ventanamicro.com, liwei1518@gmail.com, bmeng.cn@gmail.com,
- zhiwei_liu@linux.alibaba.com,
- TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
-Subject: [PATCH v7 6/8] target/riscv: Enable RV32 CPU support in RV64 QEMU
-Date: Thu, 19 Sep 2024 13:50:46 +0800
-Message-Id: <20240919055048.562-7-zhiwei_liu@linux.alibaba.com>
+ zhiwei_liu@linux.alibaba.com
+Subject: [PATCH v7 7/8] target/riscv: Add max32 CPU for RV64 QEMU
+Date: Thu, 19 Sep 2024 13:50:47 +0800
+Message-Id: <20240919055048.562-8-zhiwei_liu@linux.alibaba.com>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <20240919055048.562-1-zhiwei_liu@linux.alibaba.com>
 References: <20240919055048.562-1-zhiwei_liu@linux.alibaba.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.101;
+Received-SPF: pass client-ip=115.124.30.119;
  envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-101.freemail.mail.aliyun.com
+ helo=out30-119.freemail.mail.aliyun.com
 X-Spam_score_int: -174
 X-Spam_score: -17.5
 X-Spam_bar: -----------------
@@ -67,72 +66,63 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
+We may need 32-bit max for RV64 QEMU. Thus we add these two CPUs
+for RV64 QEMU.
 
-Add gdb XML files and adjust CPU initialization to allow running RV32 CPUs
-in RV64 QEMU.
+The reason we don't expose them to RV32 QEMU is that we already have
+max cpu with the same configuration. Another reason is that we want
+to follow the RISC-V custom where addw instruction doesn't exist in
+RV32 CPU.
 
-Signed-off-by: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
-Reviewed-by: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Suggested-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- configs/targets/riscv64-softmmu.mak |  2 +-
- target/riscv/cpu.c                  | 16 +++++++++++++---
- 2 files changed, 14 insertions(+), 4 deletions(-)
+ target/riscv/cpu-qom.h |  1 +
+ target/riscv/cpu.c     | 12 +++++++-----
+ 2 files changed, 8 insertions(+), 5 deletions(-)
 
-diff --git a/configs/targets/riscv64-softmmu.mak b/configs/targets/riscv64-softmmu.mak
-index 917980e63e..6c5de72e03 100644
---- a/configs/targets/riscv64-softmmu.mak
-+++ b/configs/targets/riscv64-softmmu.mak
-@@ -2,6 +2,6 @@ TARGET_ARCH=riscv64
- TARGET_BASE_ARCH=riscv
- TARGET_SUPPORTS_MTTCG=y
- TARGET_KVM_HAVE_GUEST_DEBUG=y
--TARGET_XML_FILES= gdb-xml/riscv-64bit-cpu.xml gdb-xml/riscv-32bit-fpu.xml gdb-xml/riscv-64bit-fpu.xml gdb-xml/riscv-64bit-virtual.xml
-+TARGET_XML_FILES= gdb-xml/riscv-64bit-cpu.xml gdb-xml/riscv-32bit-fpu.xml gdb-xml/riscv-64bit-fpu.xml gdb-xml/riscv-64bit-virtual.xml gdb-xml/riscv-32bit-cpu.xml gdb-xml/riscv-32bit-virtual.xml
- # needed by boot.c
- TARGET_NEED_FDT=y
+diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
+index 4464c0fd7a..62115375cd 100644
+--- a/target/riscv/cpu-qom.h
++++ b/target/riscv/cpu-qom.h
+@@ -30,6 +30,7 @@
+ #define RISCV_CPU_TYPE_NAME(name) (name RISCV_CPU_TYPE_SUFFIX)
+ 
+ #define TYPE_RISCV_CPU_MAX              RISCV_CPU_TYPE_NAME("max")
++#define TYPE_RISCV_CPU_MAX32            RISCV_CPU_TYPE_NAME("max32")
+ #define TYPE_RISCV_CPU_BASE32           RISCV_CPU_TYPE_NAME("rv32")
+ #define TYPE_RISCV_CPU_BASE64           RISCV_CPU_TYPE_NAME("rv64")
+ #define TYPE_RISCV_CPU_BASE128          RISCV_CPU_TYPE_NAME("x-rv128")
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 4bda754b01..86ce15252a 100644
+index 86ce15252a..baf8fba467 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -614,7 +614,10 @@ static void rv64e_bare_cpu_init(Object *obj)
-     riscv_cpu_set_misa_ext(env, RVE);
+@@ -448,11 +448,9 @@ static void riscv_max_cpu_init(Object *obj)
+ 
+     env->priv_ver = PRIV_VERSION_LATEST;
+ #ifndef CONFIG_USER_ONLY
+-#ifdef TARGET_RISCV32
+-    set_satp_mode_max_supported(cpu, VM_1_10_SV32);
+-#else
+-    set_satp_mode_max_supported(cpu, VM_1_10_SV57);
+-#endif
++    set_satp_mode_max_supported(RISCV_CPU(obj),
++        riscv_cpu_mxl(&RISCV_CPU(obj)->env) == MXL_RV32 ?
++        VM_1_10_SV32 : VM_1_10_SV57);
+ #endif
  }
  
--#else /* !TARGET_RISCV64 */
-+#endif /* !TARGET_RISCV64 */
-+
-+#if defined(TARGET_RISCV32) || \
-+    (defined(TARGET_RISCV64) && !defined(CONFIG_USER_ONLY))
- 
- static void rv32_base_cpu_init(Object *obj)
- {
-@@ -2927,6 +2930,12 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-     },
- #if defined(TARGET_RISCV32)
-     DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_MAX,       MXL_RV32,  riscv_max_cpu_init),
-+#elif defined(TARGET_RISCV64)
-+    DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_MAX,       MXL_RV64,  riscv_max_cpu_init),
-+#endif
-+
-+#if defined(TARGET_RISCV32) || \
-+    (defined(TARGET_RISCV64) && !defined(CONFIG_USER_ONLY))
-     DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_BASE32,    MXL_RV32,  rv32_base_cpu_init),
-     DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_IBEX,       MXL_RV32,  rv32_ibex_cpu_init),
-     DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SIFIVE_E31, MXL_RV32,  rv32_sifive_e_cpu_init),
-@@ -2934,8 +2943,9 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-     DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SIFIVE_U34, MXL_RV32,  rv32_sifive_u_cpu_init),
-     DEFINE_BARE_CPU(TYPE_RISCV_CPU_RV32I,        MXL_RV32,  rv32i_bare_cpu_init),
+@@ -2945,6 +2943,10 @@ static const TypeInfo riscv_cpu_type_infos[] = {
      DEFINE_BARE_CPU(TYPE_RISCV_CPU_RV32E,        MXL_RV32,  rv32e_bare_cpu_init),
--#elif defined(TARGET_RISCV64)
--    DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_MAX,       MXL_RV64,  riscv_max_cpu_init),
+ #endif
+ 
++#if (defined(TARGET_RISCV64) && !defined(CONFIG_USER_ONLY))
++    DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_MAX32,     MXL_RV32,  riscv_max_cpu_init),
 +#endif
 +
-+#if defined(TARGET_RISCV64)
+ #if defined(TARGET_RISCV64)
      DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_BASE64,    MXL_RV64,  rv64_base_cpu_init),
      DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SIFIVE_E51, MXL_RV64,  rv64_sifive_e_cpu_init),
-     DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SIFIVE_U54, MXL_RV64,  rv64_sifive_u_cpu_init),
 -- 
 2.43.0
 
