@@ -4,90 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29405CE8D6F
-	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Sep 2024 10:07:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4E1CCF3973
+	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Sep 2024 21:17:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1srE1n-0005LU-KF; Thu, 19 Sep 2024 06:04:47 -0400
+	id 1srOWk-0004NI-9W; Thu, 19 Sep 2024 17:17:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1srE1i-00055g-F8
- for qemu-riscv@nongnu.org; Thu, 19 Sep 2024 06:04:42 -0400
-Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529])
+ (Exim 4.90_1) (envelope-from <gregorhaas1997@gmail.com>)
+ id 1srOWh-0004JZ-VT; Thu, 19 Sep 2024 17:17:23 -0400
+Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1srE1g-0002Gw-Ct
- for qemu-riscv@nongnu.org; Thu, 19 Sep 2024 06:04:41 -0400
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-5c42bcf35fbso897196a12.1
- for <qemu-riscv@nongnu.org>; Thu, 19 Sep 2024 03:04:39 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <gregorhaas1997@gmail.com>)
+ id 1srOWf-0000gH-RN; Thu, 19 Sep 2024 17:17:23 -0400
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-2054e22ce3fso14506085ad.2; 
+ Thu, 19 Sep 2024 14:17:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726740279; x=1727345079; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=81ACQ82gDj72T87fy7/My8kXXhxYI09wt3YtDri9Pls=;
- b=M6Dyj09H+11MBxr7CMiaNRcJJrgsheNKIYRWdRAevKtlA5bLTVvK1gtvt+aZcK9ovt
- Xj9e9F/i73Nb/SdRAZmo3r3UeWFK9070KaMTYKHmC4QJn3mhb6bUrY7d5SMFIb8XKUkG
- E5JBcLjykqkjVhyycKHK85hxyBOyo7yGiXsT8KGPHSaVzahqPvEdE58U72PGHWw+1c7c
- 1aogejzh7w3D9AGZo+wjABfUnSB5D+smN25zHiD+Y2wKB8V7xv21G9SwGEveiwggxhQC
- oX67BNjQ261gWL38JFosizzz3TfKjYzcDHEZvNpClOajuTa6q2uxMMNHHVdUjfy1zNSb
- PPFA==
+ d=gmail.com; s=20230601; t=1726780639; x=1727385439; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=EoSjHxGhf0A2MNCQwDDUg4rIGiQy/h0AKZYL30BhkPs=;
+ b=Ez744S5PTHBsbh8mWDkUqO3om/zja+oAHw1q5uzOdXoSBABQZOUpkn9Up9VGDGsn8j
+ D6Ujl0tKhko+WDDFU9GUgC+cBkp0nPX4mjVH9LkiV9MWVe8Aayi4QX+Qb74roVGtOkz+
+ 9JrUjW+w9T0G4PoPopNoaQAnspL3MXF3319Zu9GLRfCaRSjryPdq1zKw1VM2KNBl4YSX
+ xTM3kfDVsxqiGlkNNgMnQOS+74CEl0vUgc0q1EVWFcqASRbLtwcyVUwZ89G4YUYmKLKE
+ lpAXE4o4vuJoPtZlYw4k1hAlBNxhFiTIpyKly8VKyEqLNbmSD89ItBH9o77kwUgrONE3
+ QrgQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726740279; x=1727345079;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=81ACQ82gDj72T87fy7/My8kXXhxYI09wt3YtDri9Pls=;
- b=oMdSdi7inLT/GYClCa2fjYxIMLcLP6PcVyA2iLFa8re++91qqLGP+CTwLtH2HnpUh9
- y6WzfWZDAXfmH5l08JWG3y7iNxfo6yZ0A2/WrjzEEci0th6w3CQJH8sU0B5A8eyKE2HE
- da3IQA1sxgX+XRGK4WJN+h+XVvmZFah4f/MJG4TbYL9WOOD2R+wdLe1MTBzR5LU+rkHq
- 4usZue4xxHegRe9IzTw2+JxZ/+cWijLJOd14osM1ELtb7F/+lFdIn34Vj46rk4HmG+l6
- XLz/kaufk5t7bz1lExpZkLh1i/jR3U8PDt04UzFLmz/DlH5XGw4IwjFM7L6TGO+AV0h/
- W4Ow==
-X-Gm-Message-State: AOJu0YyUXoOvxSJihdut3lQbNnTT9T/zt/BmWiRofcC/eo3wN+NzSd7H
- zUWDRp69a8NOCT/SVJL738pJnvAxO7wzNx9TRVfcH9rXslfYJ8eeJELhO0CTgPU=
-X-Google-Smtp-Source: AGHT+IE+Yatp9E73lkXWZgN6JDVIz6cIW61Qna3MKjZXdj3GufiJylKkykMDQkuD494+LUPA/H02Qw==
-X-Received: by 2002:a17:907:980e:b0:a77:cca9:b212 with SMTP id
- a640c23a62f3a-a9048048388mr2008383566b.45.1726740278668; 
- Thu, 19 Sep 2024 03:04:38 -0700 (PDT)
-Received: from [10.133.7.245] ([83.68.141.146])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a90610f3aaesm701574766b.53.2024.09.19.03.04.37
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 19 Sep 2024 03:04:38 -0700 (PDT)
-Message-ID: <20e20fde-830f-4314-a944-e7973bda5d8c@linaro.org>
-Date: Wed, 18 Sep 2024 16:27:16 +0200
+ d=1e100.net; s=20230601; t=1726780639; x=1727385439;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=EoSjHxGhf0A2MNCQwDDUg4rIGiQy/h0AKZYL30BhkPs=;
+ b=OyZDXexKFfiM25D00XM/ikhsiTKsbnZbhCjsDfWZr8031H5e0evEt81P2VPjCAw6BV
+ vCPmMxz1w7/HfPCKxhueTjE9u84nrv7HS9ZZZep1ZZb+qGLHuJEiLbCN7IX8oBPuk9ir
+ HII+GpHp+bcRcyJTsl/3peA4l5D8TIFnByy18xAawj5weCtCDiU18E3Js4yB1ze4/kFa
+ c8qbH9nbbxpkpzLcX56CjKIHTJIooiViSwKV6RM7324oI1cUHLJxwXtKL9RiUP6XEVDC
+ PvTpp1733PJRnpg2Sz4bdQrcTZxr+aonJ+VgjQdFa9gYzJ9gxtrIWztTp0P0RQ8yhXCe
+ F6XQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWQky7WNVY5ayWMqzqwLw8cyiDL17SRXMWb5zHruCB+k/K/750Dcq7HkTX3RgZDPcshzGQj93DL/tAf@nongnu.org,
+ AJvYcCXiSu7zO4FcmMD7h93GxaTs7kanT+mgeo90S1VIffPKTh4kSxcwx/gqK3VH/w8KnjRZF+1ubdC+cAEOJw==@nongnu.org
+X-Gm-Message-State: AOJu0YwAO3LXCNxMGjSLBNimDL9IBAoJUhC/eh7IcLQ3Ww5qlZkbgEZ1
+ J+NfaoPgzxm8yjAKUy8CgwplSIs/Ps9IAQIzzi70vewqwdqFGPX6ohqKERonmex3BE5Fb0C2lgi
+ tWJAk4hnBM550X29gxJp7zPRgZso=
+X-Google-Smtp-Source: AGHT+IHAvGMT4xeFtLIjE6EjMcJl2/vC+wLjcFSVbyA8+lR9ePxEbtdjGl5qTFACGv5YpvFSqsQYDFi4sgPo32XRcpQ=
+X-Received: by 2002:a17:902:f7c5:b0:207:45f1:d1fe with SMTP id
+ d9443c01a7336-208d843e28dmr4947685ad.61.1726780639256; Thu, 19 Sep 2024
+ 14:17:19 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 02/12] tcg/riscv: Add basic support for vector
-To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- dbarboza@ventanamicro.com, liwei1518@gmail.com, bmeng.cn@gmail.com,
- Swung0x48 <swung0x48@outlook.com>,
- TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
-References: <20240911132630.461-1-zhiwei_liu@linux.alibaba.com>
- <20240911132630.461-3-zhiwei_liu@linux.alibaba.com>
- <0d591570-02c6-48c9-9e3f-ef47ac20ce7d@linaro.org>
- <b87e7a7e-41fd-4b26-bde3-9adca9babb24@linux.alibaba.com>
- <33101e38-080d-4444-a8c3-9d01827e243f@linaro.org>
- <b88244bc-aaf7-42f9-a90f-e4027ac72ebf@linux.alibaba.com>
-Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <b88244bc-aaf7-42f9-a90f-e4027ac72ebf@linux.alibaba.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::529;
- envelope-from=richard.henderson@linaro.org; helo=mail-ed1-x529.google.com
-X-Spam_score_int: -10
-X-Spam_score: -1.1
+References: <20240805210444.497723-1-gregorhaas1997@gmail.com>
+ <CAKmqyKM_qgc+wwrDRzZM1yda=dZziM=1rGU2_SDeJU9PTnacVg@mail.gmail.com>
+ <20240917-2683603a6ea10148772d365e@orel>
+In-Reply-To: <20240917-2683603a6ea10148772d365e@orel>
+From: Gregor Haas <gregorhaas1997@gmail.com>
+Date: Thu, 19 Sep 2024 14:16:42 -0700
+Message-ID: <CAMqWt3ofKAZVMjDcpA=xYcwaRw9ZJ51o1g+pp2vobVoyT2ODkQ@mail.gmail.com>
+Subject: Re: [PATCH v3 0/1] Add support for generating OpenSBI domains in the
+ device tree
+To: Andrew Jones <ajones@ventanamicro.com>
+Cc: Alistair Francis <alistair23@gmail.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, 
+ atishp@rivosinc.com, dbarboza@ventanamicro.com, alistair.francis@wdc.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
+ envelope-from=gregorhaas1997@gmail.com; helo=mail-pl1-x62f.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DATE_IN_PAST_12_24=1.049,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,65 +96,63 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 9/18/24 12:43, LIU Zhiwei wrote:
-> 
-> On 2024/9/18 18:11, Richard Henderson wrote:
->> On 9/18/24 07:17, LIU Zhiwei wrote:
->>>
->>> On 2024/9/12 2:41, Richard Henderson wrote:
->>>> On 9/11/24 06:26, LIU Zhiwei wrote:
->>>>> From: Swung0x48<swung0x48@outlook.com>
->>>>>
->>>>> The RISC-V vector instruction set utilizes the LMUL field to group
->>>>> multiple registers, enabling variable-length vector registers. This
->>>>> implementation uses only the first register number of each group while
->>>>> reserving the other register numbers within the group.
->>>>>
->>>>> In TCG, each VEC_IR can have 3 types (TCG_TYPE_V64/128/256), and the
->>>>> host runtime needs to adjust LMUL based on the type to use different
->>>>> register groups.
->>>>>
->>>>> This presents challenges for TCG's register allocation. Currently, we
->>>>> avoid modifying the register allocation part of TCG and only expose the
->>>>> minimum number of vector registers.
->>>>>
->>>>> For example, when the host vlen is 64 bits and type is TCG_TYPE_V256, with
->>>>> LMUL equal to 4, we use 4 vector registers as one register group. We can
->>>>> use a maximum of 8 register groups, but the V0 register number is reserved
->>>>> as a mask register, so we can effectively use at most 7 register groups.
->>>>> Moreover, when type is smaller than TCG_TYPE_V256, only 7 registers are
->>>>> forced to be used. This is because TCG cannot yet dynamically constrain
->>>>> registers with type; likewise, when the host vlen is 128 bits and
->>>>> TCG_TYPE_V256, we can use at most 15 registers.
->>>>>
->>>>> There is not much pressure on vector register allocation in TCG now, so
->>>>> using 7 registers is feasible and will not have a major impact on code
->>>>> generation.
->>>>>
->>>>> This patch:
->>>>> 1. Reserves vector register 0 for use as a mask register.
->>>>> 2. When using register groups, reserves the additional registers within
->>>>>     each group.
->>>>>
->>>>> Signed-off-by: TANG Tiancheng<tangtiancheng.ttc@alibaba-inc.com>
->>>>> Co-authored-by: TANG Tiancheng<tangtiancheng.ttc@alibaba-inc.com>
->>>>
->>>> If there is a co-author, there should be another Signed-off-by.
->>>
->>> This patch has added a tag:
->>>
->>> Signed-off-by: TANG Tiancheng<tangtiancheng.ttc@alibaba-inc.com>
->>>
->>>
->>> Do you mean we should add the same tag twice?
->>
->> The from line is "Swung0x48 <swung0x48@outlook.com>".
->> If this is an alternate email for TANG Tiancheng,
-> 
-> No, Swung0x48 is another author.
+Hi Drew,
 
-Then we need a proper Signed-off-by line from that author.
+On Tue, Sep 17, 2024 at 5:45=E2=80=AFAM Andrew Jones <ajones@ventanamicro.c=
+om> wrote:
+>
+> On Mon, Sep 09, 2024 at 01:27:05PM GMT, Alistair Francis wrote:
+> > On Tue, Aug 6, 2024 at 7:05=E2=80=AFAM Gregor Haas <gregorhaas1997@gmai=
+l.com> wrote:
+> > >
+> > > This patch series adds support for specifying OpenSBI domains on the =
+QEMU
+> > > command line. A simple example of what this looks like is below, incl=
+uding
+> > > mapping the board's UART into the secondary domain:
+> >
+> > Thanks for the patch, sorry it took me so long to look into this
+> >
+> > >
+> > > qemu-system-riscv64 -machine virt -bios fw_jump.bin -cpu max -smp 2 -=
+m 4G -nographic \
+> > >         -device opensbi-memregion,id=3Dmem,base=3D0xBC000000,order=3D=
+26,mmio=3Dfalse \
+> > >         -device opensbi-memregion,id=3Duart,base=3D0x10000000,order=
+=3D12,mmio=3Dtrue,device0=3D"/soc/serial@10000000" \
+> > >         -device opensbi-domain,id=3Ddomain,possible-harts=3D0-1,boot-=
+hart=3D0x0,next-addr=3D0xBC000000,next-mode=3D1,region0=3Dmem,perms0=3D0x3f=
+,region1=3Duart,perms1=3D0x3f
+> >
+> > This will need documentation added under docs (probably under
+> > docs/system/riscv) of how this should be used.
+> >
+> > I'm not convinced this is something we want though. A user can dump
+> > the QEMU DTB and edit it to support OpenSBI domains if they want.
+> >
+>
+> I also feel like this is just pushing the population of device tree
+> nodes from an editor of a .dts file to the QEMU command line. If some
+> generation is needed, then maybe we need a script, possibly one which
+> has the same command line inputs as proposed here. afaik, we haven't
+> typically taken patches which help overlay the generated devicetree
+> with additional nodes. For example, see [1] for one such proposal
+> and rejection.
+>
+> [1] https://lore.kernel.org/all/20210926183410.256484-1-sjg@chromium.org/
+> Thanks,
+> drew
 
+Thanks for the link! After reading through that chain, I can see that there=
+ is
+typically high resistance to guest-specific device tree patches. As such, I=
+'ll
+probably abandon this patch series rather than doing more work to clean it =
+up.
+I do wonder why there is so much resistance to these types of changes when =
+the
+need for them arises so often in various boot firmwares.
 
-r~
+Thanks,
+Gregor
 
