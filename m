@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45745CE8D49
-	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Sep 2024 04:55:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55FE2CE8D4C
+	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Sep 2024 04:55:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sr952-0002qS-Af; Thu, 19 Sep 2024 00:47:48 -0400
+	id 1sr95A-0003Zf-BQ; Thu, 19 Sep 2024 00:47:56 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1sr94q-0001xJ-Rl
- for qemu-riscv@nongnu.org; Thu, 19 Sep 2024 00:47:37 -0400
-Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435])
+ id 1sr956-000393-2g
+ for qemu-riscv@nongnu.org; Thu, 19 Sep 2024 00:47:52 -0400
+Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1sr94j-0007Oh-F5
- for qemu-riscv@nongnu.org; Thu, 19 Sep 2024 00:47:36 -0400
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-7198cb6bb02so269538b3a.3
- for <qemu-riscv@nongnu.org>; Wed, 18 Sep 2024 21:47:28 -0700 (PDT)
+ id 1sr94z-0007X4-Ha
+ for qemu-riscv@nongnu.org; Thu, 19 Sep 2024 00:47:51 -0400
+Received: by mail-pf1-x42b.google.com with SMTP id
+ d2e1a72fcca58-718d91eef2eso279071b3a.1
+ for <qemu-riscv@nongnu.org>; Wed, 18 Sep 2024 21:47:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726721248; x=1727326048; darn=nongnu.org;
+ d=linaro.org; s=google; t=1726721264; x=1727326064; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fOTDlymCoYoChOB3X8FuVGmcdRWIYVQOru1+/fCCr8A=;
- b=ZaC+YqWmznBoMCMkfDLMaw7G5TyLwN2c6Szpv2AClIQUQv0CP6NOz7YoRRv3g+GFas
- Bzh84/ilO1Wcx6OUa6jtI4iTtWJKPW/mKlZOHKaaB0ktTA0/iZfWbFvNCjPrssr1o9aM
- thVrG2+PM+wGCuF3uECxKRliVuT3vRz6gOlEVaqqitNu73z6h7VYD4Rf9tAbjupmp76n
- aeZLF1wiVirhIpqJsHUP9cUlFJmgwx44ZyqiqtgjfwRJ6PctFxMQYcFSCIl7J3UAvSSD
- CmgroWqe6i2S3MM/mIJAKJAjbLZMr6sQGm9G53tqDlZDl8/dSrVNKMxAVUNF7d/FE9Cc
- vh5A==
+ bh=ZHfEx5g5BzL1PX1RgAlJ8l3kVoVW/oh/s4YLt1Je16g=;
+ b=HHb826SwhZH+oEYl5D6yU4uRjwLwPoes64wjS5uAApZ+b31zTbnJ78V1hG9Xhn00BU
+ f/i3EpPFZ1OA/7D88t6E6YZBbzIbWBax0nKdu9aX8zTxEnmGEdlg5224Yotft2hcegh+
+ +4vuW4H6Zj0oy/31/jAF/v3KkLrtnH5pUjtHMD+gjSqoTv6CK6ozQMZv3IduvttVHPAD
+ n9nMOI9kFDigrsEK672o6u3UYTbzEf3iLbEZEvflTU1emg+BRrvRWjTH3FEFQYHsISOP
+ e5IOUyhPR/2gJRuu/4m8vuvhOSyWI5d2peIxR2AvWwwz1bcyWKzVY1kAq0HjmAPvk4On
+ udHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726721248; x=1727326048;
+ d=1e100.net; s=20230601; t=1726721264; x=1727326064;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=fOTDlymCoYoChOB3X8FuVGmcdRWIYVQOru1+/fCCr8A=;
- b=qZ45GCPPhH4K6fOJx696o9xKVpiWQQEF9Os5GwfvL6ZxcDFcyIIw5zFhZuaHmTjRiH
- MLQva1wsLmsB/MTe+9EKEjZYvVwrh4xIAlpFSILcB8nLRAUMwJmRRHijI77S5T9XrtzT
- NCI8EBWVTgNuO0a+OtivDpO7If+b8AptU6k6AYZxHMVDtuBHC+5yOwy5BeJfFX9WmE6e
- 7bheBmst2+vvKg1/wBIaUpAa4hrgJV3XfGo2tyvBRhMzccCr43lw0RG1m4JMvtGTLMVG
- DDY9INt3LlTXYKSMonGEu/2vQa6NO0druffT2LxgHHttwKGa0iLRtcPJa6fTHp0CUUoB
- wzfQ==
+ bh=ZHfEx5g5BzL1PX1RgAlJ8l3kVoVW/oh/s4YLt1Je16g=;
+ b=deZ+pUtLztZg0SF5589QeYPv6GvCxSuSMkcCgy5MlEMlpCfvJtEdCVTpXhUzyJj+Ym
+ PqZXER7C7a7Y46/vmGcyKFQewIV7KA5WKcXjLHeCzoeLZepv+ycly3JXVnRrvZPBNUHT
+ WP0+rQ7xRerHC/JW4qOjzk4AJzQDCmNHyDnZ9luPlj4mbKAqFSS6Vt4LiLlwRhbFBbok
+ 7q1Dv2BXhCNnY/k+GuLIR9na41WhIbZi2ynpZUrKkgsQ0lolAAoxP4rDV3iqpZXfsf6U
+ DSS0zC6Se2ZRxnGfvY3VD9akbyTYQCkFAX0iLFvFZoB44TsL5p5R+uZgGUTkWGY8oqb2
+ qSDA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVUhacxWSIJvtnWgofWsf+dPolHm78sfoSA92qMhETyxZPxkhYnidkp38Oa/+M46iMoy5JTYg5ZI4hJ@nongnu.org
-X-Gm-Message-State: AOJu0YzLR+mX2v6UHjRuWfYVrmk7kmma5Y+tHnDmiFEx9u/kv+Cx+oHJ
- bektMOn17n40djMWKr+oHmwygyGT808YsQNV/Pvu4JA8JRA1SmiIxE/PbopKPNU=
-X-Google-Smtp-Source: AGHT+IF4VdR408ElGh9vDAVjdbcMP3qqXEsAp/0wcOEvsQ0+y71/UwITZuPKa7pIAYx77zAYCo1WvA==
-X-Received: by 2002:a05:6a21:2d86:b0:1cf:5437:e768 with SMTP id
- adf61e73a8af0-1cf75d7fe57mr34834771637.7.1726721247872; 
- Wed, 18 Sep 2024 21:47:27 -0700 (PDT)
+ AJvYcCUj4JHklw3J67iBBjbW9swQIU+8w3syx2f8QLwnCqbt1oH4+cA5YNnu9nPe+EGZ9Fyd4D1u0CvdGH+b@nongnu.org
+X-Gm-Message-State: AOJu0YwjiM2hHnR+zRezHLXZEBvlRSVDi/1JtVwjtBvrkUVucfK4exy9
+ zNmyCJtAxqqPCy4+/7IqHsfrZPiSO99obhaEGUDaIb8YSL+SBKciMH43tbUyIL0=
+X-Google-Smtp-Source: AGHT+IGn0zKE4NWTBii40hBHgJl3lvYHO2m3pyUcQ8D1+09Ub75s0ooGndgxJcjdbl40KxBP6dN9PQ==
+X-Received: by 2002:a05:6a00:1746:b0:70d:2a1b:422c with SMTP id
+ d2e1a72fcca58-7198e2a8f1dmr3107578b3a.7.1726721264030; 
+ Wed, 18 Sep 2024 21:47:44 -0700 (PDT)
 Received: from linaro.. (216-180-64-156.dyn.novuscom.net. [216.180.64.156])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-71944bc279csm7478601b3a.188.2024.09.18.21.47.26
+ d2e1a72fcca58-71944bc279csm7478601b3a.188.2024.09.18.21.47.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Sep 2024 21:47:27 -0700 (PDT)
+ Wed, 18 Sep 2024 21:47:43 -0700 (PDT)
 From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
@@ -105,17 +105,19 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Yanan Wang <wangyanan55@huawei.com>, Michael Rolnik <mrolnik@gmail.com>,
  Jesper Devantier <foss@defmacro.it>, Marcelo Tosatti <mtosatti@redhat.com>,
  Peter Maydell <peter.maydell@linaro.org>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH v3 21/34] target/arm: remove break after g_assert_not_reached()
-Date: Wed, 18 Sep 2024 21:46:28 -0700
-Message-Id: <20240919044641.386068-22-pierrick.bouvier@linaro.org>
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>,
+ =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@redhat.com>
+Subject: [PATCH v3 29/34] hw/ppc: remove return after g_assert_not_reached()
+Date: Wed, 18 Sep 2024 21:46:36 -0700
+Message-Id: <20240919044641.386068-30-pierrick.bouvier@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20240919044641.386068-1-pierrick.bouvier@linaro.org>
 References: <20240919044641.386068-1-pierrick.bouvier@linaro.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::435;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-pf1-x435.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42b;
+ envelope-from=pierrick.bouvier@linaro.org; helo=mail-pf1-x42b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -142,24 +144,38 @@ This patch is part of a series that moves towards a consistent use of
 g_assert_not_reached() rather than an ad hoc mix of different
 assertion mechanisms.
 
+Reviewed-by: Cédric Le Goater <clg@redhat.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 ---
- target/arm/hyp_gdbstub.c | 1 -
- 1 file changed, 1 deletion(-)
+ hw/ppc/ppc.c          | 1 -
+ hw/ppc/spapr_events.c | 1 -
+ 2 files changed, 2 deletions(-)
 
-diff --git a/target/arm/hyp_gdbstub.c b/target/arm/hyp_gdbstub.c
-index f120d55caab..1e861263b3d 100644
---- a/target/arm/hyp_gdbstub.c
-+++ b/target/arm/hyp_gdbstub.c
-@@ -158,7 +158,6 @@ int insert_hw_watchpoint(target_ulong addr, target_ulong len, int type)
+diff --git a/hw/ppc/ppc.c b/hw/ppc/ppc.c
+index e6fa5580c01..fde46194122 100644
+--- a/hw/ppc/ppc.c
++++ b/hw/ppc/ppc.c
+@@ -267,7 +267,6 @@ static void power9_set_irq(void *opaque, int pin, int level)
          break;
      default:
          g_assert_not_reached();
--        break;
+-        return;
      }
-     if (len <= 8) {
-         /* we align the address and set the bits in BAS */
+ }
+ 
+diff --git a/hw/ppc/spapr_events.c b/hw/ppc/spapr_events.c
+index 38ac1cb7866..4dbf8e2e2ef 100644
+--- a/hw/ppc/spapr_events.c
++++ b/hw/ppc/spapr_events.c
+@@ -646,7 +646,6 @@ static void spapr_hotplug_req_event(uint8_t hp_id, uint8_t hp_action,
+          * that don't support them
+          */
+         g_assert_not_reached();
+-        return;
+     }
+ 
+     if (hp_id == RTAS_LOG_V6_HP_ID_DRC_COUNT) {
 -- 
 2.39.5
 
