@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C97E3CE8D4C
-	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Sep 2024 04:54:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6453FCE8D49
+	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Sep 2024 04:55:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sr94p-0001pa-0d; Thu, 19 Sep 2024 00:47:35 -0400
+	id 1sr95T-0005hE-7z; Thu, 19 Sep 2024 00:48:15 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1sr94f-000171-Qk
- for qemu-riscv@nongnu.org; Thu, 19 Sep 2024 00:47:26 -0400
-Received: from mail-pf1-x42c.google.com ([2607:f8b0:4864:20::42c])
+ id 1sr95I-0004Tf-Sd
+ for qemu-riscv@nongnu.org; Thu, 19 Sep 2024 00:48:04 -0400
+Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1sr94b-0007K8-7F
- for qemu-riscv@nongnu.org; Thu, 19 Sep 2024 00:47:25 -0400
-Received: by mail-pf1-x42c.google.com with SMTP id
- d2e1a72fcca58-7179802b8fcso280424b3a.1
- for <qemu-riscv@nongnu.org>; Wed, 18 Sep 2024 21:47:20 -0700 (PDT)
+ id 1sr959-0007cw-No
+ for qemu-riscv@nongnu.org; Thu, 19 Sep 2024 00:48:04 -0400
+Received: by mail-pf1-x42b.google.com with SMTP id
+ d2e1a72fcca58-718e3c98b5aso280701b3a.0
+ for <qemu-riscv@nongnu.org>; Wed, 18 Sep 2024 21:47:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726721240; x=1727326040; darn=nongnu.org;
+ d=linaro.org; s=google; t=1726721274; x=1727326074; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=P31I3C44WXD62nQdqJ/4LHYU5tGPmQzloTc3BsmhhAw=;
- b=PCQRUVBWRoTL9Aw6shuvnOUOJ/oVrDv1LJWIj7KFAzxw2x4dBTaeuOPJ9in5XFMnIg
- kZ+lqMXxSH0YG/YFxgYBri6JI5AoyVFko8jK017KXq5NXg84kRS52c1e/awgeLH/SpNJ
- jmeS5u7Hxukr/BVkq9HnHj5PhFs1T0Y9zsFwMEGkPFr74gqXes4U3464ZaG6e0Ua9ZYd
- 8HJpTyJbRMzLGXncadyXDKm946xB1CDGvY9SwRYynaSOfXttLJNcmlo5sDQqYGiIOyCl
- 04WhCAK7yOzIYwJd6QyhwLaug43/rgbNY+19balMW8TB0IX/nHGmF8bZ1WAmmADBhKDW
- bCpw==
+ bh=tx1S3zr1/95ZbSlSEpzuV5Mw8JtyoYuXcwzt94aV9gc=;
+ b=ijMa0qxjLOc4wZGyL5BJhjeWgydP8FmQJ7JMbVCgiVct3SiW9cZHzl7cAHYKWgXmMB
+ zJj9IFzhknOjAk4Vg1g5agrkdlTyS9NDvvmfzwcXOYBgGMRTbzOh+cy7f4iKi7KEtwbZ
+ W8Sa38byNtjvyubL4sWvDUNNcBOdyhxzImsTH1KVVrIWeRPUt1n8o7pLrf0GaME/xFue
+ HAMqyB8gmzevSunGST39yfVaWSRfdNV1R20h3vLhdwtoVArJWCkW+QMDS/UGxqs4eqXl
+ YD1aTA9wsnrlhhrWrrI9EbN9C/HFwfhzoe14ZYj5KITXedKKOrmX5Rd7ud56ygY8CVdF
+ N8oQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726721240; x=1727326040;
+ d=1e100.net; s=20230601; t=1726721274; x=1727326074;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=P31I3C44WXD62nQdqJ/4LHYU5tGPmQzloTc3BsmhhAw=;
- b=CTHqIcSDfibKl8+G/nsznusLhD2FgZiNA6ud1IDHblCqjSSzGNgvFIgK+qJa2OtI9N
- V1pjswcmb5vbgDr3Yt3hDYRHpdqopKatEBM+SZspxieM1MM83IBs/EFy1e43/p0TXmzW
- 4Itp9wCv74q8+DSFDHL4DNSJBGKV6vXsWyHVTt3u+5kYo1rPxFbGNk1hPYWo6ZA+iW4g
- 6JpHk9FIk26Edk0+yKmlGYOdei/h1tItgQSn+eGAoXNcAkStU6xjsAvom10P1EMIW4oT
- 1PHLuAaS04M0qc2ejsfNx0RZ2jbzKPsAOdnJ0T01VeQKWkfnIZGMp4PBzZgVuGFZH1gC
- 3Mrg==
+ bh=tx1S3zr1/95ZbSlSEpzuV5Mw8JtyoYuXcwzt94aV9gc=;
+ b=w0pATaimeJqUZsuM0mzSNA79D8e2aGVk4BsOYD8TaAcztr0dbC7zz/5FKH7ltR+3/L
+ 7MzU6o3k19IrXnHPwkQUpu5zNZebsHZTWWqSILE4vEW2tyo+TdP6Gr1gLAZVbaEFzajq
+ zbrXpbnRGNz4whpIfqphH4hc0gYI246Y0raOE61aUBc6zojcvV1sAfQd8NLAFLF7GMWV
+ /8Oei2MKzTGMsQi54SZTNNMmYHQ5KZB9s6kZOs94Pj8fnVQs9K54B8zUCe7QkxtVHEDD
+ cd43ZxzzP9ThGZS+lw/raiftRDmkGpT3qv+vYNJmoQCXacUn06CyslKPqM7fugJc2sPR
+ bMjA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUdgNVDRy56xX7Gpelw4QQJXOzMaqfkWzWIi4h4m2mAn876qt41WNhPifHRSX00CeyFM9mBrgJW4EWF@nongnu.org
-X-Gm-Message-State: AOJu0Yxt/uVYiqH/hd5FN8XSwNDBywM9UPEfspjeuZ6fd0WuwHBx4/ok
- aukrfF2hzCLmdgJABlgGpUpOeUafZJTU/IWWGjH9pFCYbRPvYxJQvMfVjuAIwVc=
-X-Google-Smtp-Source: AGHT+IE2vIINUcW+zK0eGbTcjS/rKf9+2RXdS9WcQeduP1VsjHVzuUVVefnTsjBWDqx5B00zhv9fSQ==
-X-Received: by 2002:a05:6a20:304a:b0:1d1:1795:4b43 with SMTP id
- adf61e73a8af0-1d117954cb8mr21768562637.26.1726721239845; 
- Wed, 18 Sep 2024 21:47:19 -0700 (PDT)
+ AJvYcCW8owS2CMytaeonnWR/lceL51xXYNeNsw0NgTrw/5ZW5/oA0Rh7cQeW6XWLTuS6N0hFAZCqftfVCH3N@nongnu.org
+X-Gm-Message-State: AOJu0YxsRal7T+nWfdMiXCdWZdjmsH4xMDiVPzFGBqz1efYmIyXEVRru
+ s8fhOCaMAEwA7gFd8wl4U0m/+uPF5wW3tHUywg/2dLo7R+r5SkZkiIqaP/0pl1A=
+X-Google-Smtp-Source: AGHT+IGxUDLX/EdmxHd8lBwEQSgvpOMo5EV+rxbHrbQJ6oH4Ek//dhdYk+b8MbHM5eBQ51CMojJGfw==
+X-Received: by 2002:a05:6a00:190d:b0:714:1e36:3bcb with SMTP id
+ d2e1a72fcca58-7192606bcb9mr34659991b3a.9.1726721273726; 
+ Wed, 18 Sep 2024 21:47:53 -0700 (PDT)
 Received: from linaro.. (216-180-64-156.dyn.novuscom.net. [216.180.64.156])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-71944bc279csm7478601b3a.188.2024.09.18.21.47.18
+ d2e1a72fcca58-71944bc279csm7478601b3a.188.2024.09.18.21.47.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Sep 2024 21:47:19 -0700 (PDT)
+ Wed, 18 Sep 2024 21:47:53 -0700 (PDT)
 From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
@@ -106,23 +106,24 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Jesper Devantier <foss@defmacro.it>, Marcelo Tosatti <mtosatti@redhat.com>,
  Peter Maydell <peter.maydell@linaro.org>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH v3 17/34] hw/acpi: remove break after g_assert_not_reached()
-Date: Wed, 18 Sep 2024 21:46:24 -0700
-Message-Id: <20240919044641.386068-18-pierrick.bouvier@linaro.org>
+Subject: [PATCH v3 34/34] scripts/checkpatch.pl: emit error when using
+ assert(false)
+Date: Wed, 18 Sep 2024 21:46:41 -0700
+Message-Id: <20240919044641.386068-35-pierrick.bouvier@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20240919044641.386068-1-pierrick.bouvier@linaro.org>
 References: <20240919044641.386068-1-pierrick.bouvier@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42c;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-pf1-x42c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42b;
+ envelope-from=pierrick.bouvier@linaro.org; helo=mail-pf1-x42b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -145,21 +146,23 @@ assertion mechanisms.
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 ---
- hw/acpi/aml-build.c | 1 -
- 1 file changed, 1 deletion(-)
+ scripts/checkpatch.pl | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/hw/acpi/aml-build.c b/hw/acpi/aml-build.c
-index 006c506a375..34e0ddbde87 100644
---- a/hw/acpi/aml-build.c
-+++ b/hw/acpi/aml-build.c
-@@ -535,7 +535,6 @@ void aml_append(Aml *parent_ctx, Aml *child)
-         break;
-     default:
-         g_assert_not_reached();
--        break;
-     }
-     build_append_array(parent_ctx->buf, buf);
-     build_free_array(buf);
+diff --git a/scripts/checkpatch.pl b/scripts/checkpatch.pl
+index 65b6f46f905..fa9c12230eb 100755
+--- a/scripts/checkpatch.pl
++++ b/scripts/checkpatch.pl
+@@ -3102,6 +3102,9 @@ sub process {
+ 		if ($line =~ /\b(g_)?assert\(0\)/) {
+ 			ERROR("use g_assert_not_reached() instead of assert(0)\n" . $herecurr);
+ 		}
++		if ($line =~ /\b(g_)?assert\(false\)/) {
++			ERROR("use g_assert_not_reached() instead of assert(false)\n" . $herecurr);
++		}
+ 		if ($line =~ /\bstrerrorname_np\(/) {
+ 			ERROR("use strerror() instead of strerrorname_np()\n" . $herecurr);
+ 		}
 -- 
 2.39.5
 
